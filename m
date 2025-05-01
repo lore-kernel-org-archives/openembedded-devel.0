@@ -2,105 +2,233 @@ Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2514C3ABAC
-	for <webhook@archiver.kernel.org>; Thu,  1 May 2025 20:47:32 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web10.4804.1746132448894881577
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DFEF2C3ABA3
+	for <webhook@archiver.kernel.org>; Thu,  1 May 2025 20:55:22 +0000 (UTC)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.web11.5070.1746132913135814736
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 May 2025 13:47:29 -0700
+ Thu, 01 May 2025 13:55:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=pvvnx7ra;
- spf=pass (domain: smile.fr, ip: 209.85.128.42, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-43ea40a6e98so10692035e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 May 2025 13:47:28 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=q0qhTvBv;
+ spf=pass (domain: smile.fr, ip: 209.85.128.41, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-43cf628cb14so17239175e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 May 2025 13:55:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1746132447; x=1746737247; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0fe4usAySq0sshyz2rdIJQwtdwu0BnmoGY2gtix6XYY=;
-        b=pvvnx7raBVBVAWKYjdoRb+foxkMBzOmx8MlfdKge41BAWZpdEjLpgHkYxj7aIXcXl8
-         SSANPn1RGBwNAl5ndwyexe77HDKPz75FTdGZc1PpTp8i5gdiUvr9RY6DAeKdf7zCHfxo
-         m56D3bjEaI9ODh9F0wuy2DIjJhUgo5dm7Ysxs=
+        d=smile.fr; s=google; t=1746132911; x=1746737711; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=nb5aKhE5ExTR0Ixl/cmXFc8mT8JuEhPTAO7pz0XHsBE=;
+        b=q0qhTvBvuY4Qsv5jntsmjZ/dDkbZS1QYSXlXPx+BcDG9H6aB0NibQkJtWPgBa6FpDY
+         tb5XQd8r7zMp7OzO01QTUTSsIGiVUsCtO9d77yitQqzoXSSyMKNG8JGD33kmSRVfocej
+         bPCtvFa2riFZOQzICOcS073xf33od/4pruN7c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746132447; x=1746737247;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0fe4usAySq0sshyz2rdIJQwtdwu0BnmoGY2gtix6XYY=;
-        b=kPoMEwV8rpPOCjddn0iISl8BbKqNI3i1J3zElTPVHDVinycScaJbm2BRncAYXmKvzz
-         +dZFmXh0laKocufatXCssZVXcw6Y5Muw6Qh/Cs+Qxaf8cpolrqUO7B3FeltKZfCFlsZY
-         xSf5K7oLmhTTeOILVmkbeuMuA4B2C6dejzhifAMXOpUFd3vB/HDEJ35t9Q7DaE05hvvK
-         BSiCiTrobZWGQHSs9pZTT8hnFu00SmUPH7RDpaECPdVEa/4T/4rOHAxyml4o5DcpVnna
-         K+Gppj8uG/3GFg/2wfX+3oXqq79pP8+9r/1b1oZ+mautch6sy0AeybFPSEnUhXfxzH0f
-         0RxA==
-X-Gm-Message-State: AOJu0Yy2V37G9iNoXHD+94ntNtwBq/uLv0ZS9wnSmojx/Ge+xvG3CMPq
-	manxGJwjxPm1PcgLDJR/3czSyRETovAec4gH3xoz0gD3ePh84vlqvY53bN5lO7KHx8+KZh583rN
-	P
-X-Gm-Gg: ASbGncu6dRFPfZNv58ahLnQRsoHyK0f1pp8I+Aq3H/0xeY1+Y+MfHVQl720ppiY7e52
-	L7yQt/rQroQ6u6posOim+te0uDpdNP8XWDE9XxUgukGQ+938Qz9otWKuJHXN+UADgeJoEiMeqWx
-	Xgi0fnsvDzGFj5PKpxHs3otO+FthrBW5nHNVxrBKUoq0bnXv8AQtZVr4H+UTJNHJ6Mb2wYRe9Wr
-	CLlsKNLVSMqNJD6PsdIsiYDXUs/p6jHy9BNbLVoCfE153HbHoNH/QxBIa3LTsm1Kv98EcBw0IB6
-	QcwS76K9eVBqvuZCO+lqlUA8ovRXciJv2EDyfjIJZvj+YcEb1Ch8FzRzO4mU17tVPxvOn6iBMTm
-	9KWaVosqWswAWmGSlxB3hnTVqOGUXDM3QLduIee+TSl1kmaYc
-X-Google-Smtp-Source: AGHT+IHze5TT5JJOsFaxpwVbROcGSAHcFIqeMJwJGhN2WDtU/oZ+94XaN2E2GWXc75EB4GUnoZyjYw==
-X-Received: by 2002:a05:600c:3504:b0:43c:ed61:2c26 with SMTP id 5b1f17b1804b1-441bbedb9c2mr2089495e9.17.1746132446867;
-        Thu, 01 May 2025 13:47:26 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.home (2a01cb001331aa0017b58d8bf04048c3.ipv6.abo.wanadoo.fr. [2a01:cb00:1331:aa00:17b5:8d8b:f040:48c3])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-441b89ed4f5sm22990385e9.18.2025.05.01.13.47.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 May 2025 13:47:26 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH v2 2/4] reproducibility: mark libsource-highlight as known non-reproducible
-Date: Thu,  1 May 2025 22:47:06 +0200
-Message-Id: <20250501204708.10398-2-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250501204708.10398-1-yoann.congal@smile.fr>
-References: <20250501204708.10398-1-yoann.congal@smile.fr>
+        d=1e100.net; s=20230601; t=1746132911; x=1746737711;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=nb5aKhE5ExTR0Ixl/cmXFc8mT8JuEhPTAO7pz0XHsBE=;
+        b=CrEYrhRBGPGa4OgEVFrm8FpLpGnSy9kocAwEZ5WoidjfnMfzkJyGia9MVXlf2ebb/q
+         ljliwfyGqMpFPCQNvaXj3bA1dj+ICvY4obmr378YXJcawCwq44iiTqz8N4pk+ImF3SmA
+         8dxfxfuikL4GD4zxsqaJYVdclSKveIwQptL6X3YtMug5BC+Z1T/YByrnZwHi5LXzEe8s
+         WsELKpbgZkmPyxz9x2K5c7hGZ5U2FVeLF1UjypM8bKjZhY/ap57dlczBbCYzzQqjmt5y
+         Y1n7kXxlfPoPLn1SPkLP8SI8CKgdaijUuWp19vb9PERnboKiyGqgdZv5OPw4v6zMx8ov
+         ZcEA==
+X-Gm-Message-State: AOJu0Yz7K8iS5ZKRhNs5EJtXy/V0ECKi4buKfIMGGOBkkkgfh0VkKqVS
+	A45Bj/ltL9D5EynJK898PHRCu2DsHeDT9pmSi4BLw1m5G8eyPG2M0yenXS3nvECpjbKbtqlbH5B
+	qZwRIpHzqjJ1VZZVhxt/uHVsIk8nc2RyxHJf2/g==
+X-Gm-Gg: ASbGncvkXRKrg2EMU9g9cXE4S07EiNB5/g7lG88Dd1Xal5CiX1hUysjmmaqbmb/1X1N
+	be5JT88sMWEjimUS92i01aAEWOW6qX87JikgEGO23FaJFyHVrlD8QI7vMpBQfQzKojyS35lpXRL
+	TI/NLu1h91TZMqX2val6Swy9ZufTklyRcoJY7LjLtPVVldMwuBruYRwJSi
+X-Google-Smtp-Source: AGHT+IHy6vbMX+vqgk4fDjUDf7ypwFJdybDaOEYMhSf82i7QFGJ+Nr+EZVmmXXWESCU1gUwY9ESBFMTk7UCVD98UwH4=
+X-Received: by 2002:a05:600c:1986:b0:43b:4829:8067 with SMTP id
+ 5b1f17b1804b1-441b72b9595mr28346595e9.6.1746132911403; Thu, 01 May 2025
+ 13:55:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20250430220401.4149372-1-yoann.congal@smile.fr> <CAMKF1sp1ExCvH_vOMkSNKwFa-gVCk4WqWUXDkDFqOyV19NU_qw@mail.gmail.com>
+In-Reply-To: <CAMKF1sp1ExCvH_vOMkSNKwFa-gVCk4WqWUXDkDFqOyV19NU_qw@mail.gmail.com>
+From: Yoann Congal <yoann.congal@smile.fr>
+Date: Thu, 1 May 2025 22:54:44 +0200
+X-Gm-Features: ATxdqUE7IpFHvouW-eOt8k-Pdw34u8zZPRpKgg0JJ55gr2k34Cvv3HZmwFEO0zg
+Message-ID: <CAMSfU+5oN3WdHvVt25tThtzbgjU1faPJ0_T3hZ0dVvnvgQRNDA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/4] reproducibility: mark ipmiutil as known non-reproducible
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000ea47310634193f3a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 May 2025 20:47:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117272
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 May 2025 20:55:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117274
 
-From: Yoann Congal <yoann.congal@smile.fr>
+--000000000000ea47310634193f3a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-libsource-highlight packages are not reproducible.
+Le jeu. 1 mai 2025 =C3=A0 02:46, Khem Raj <raj.khem@gmail.com> a =C3=A9crit=
+ :
 
-Quick analysis: A path in a generated file changes:
-/usr/include/srchilite/langdefparser.h:
--#line·95·"../../../git/lib/srchilite/langdefparser.yy"
-+#line·95·"../../../lib/srchilite/langdefparser.yy"
+> On Wed, Apr 30, 2025 at 3:04=E2=80=AFPM Yoann Congal via
+> lists.openembedded.org <yoann.congal=3Dsmile.fr@lists.openembedded.org>
+> wrote:
+> >
+> > From: Yoann Congal <yoann.congal@smile.fr>
+> >
+> > ipmiutil packages are not reproducilble.
+> >
+> > Relevant logs:
+> > -
+> https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/42/ste=
+ps/32/logs/stdio
+> > -
+> https://valkyrie.yocto.io/pub/repro-fail-openembedded/meta-oe/oe-reproduc=
+ible-20250426-pazz3nt5/packages/diff-html/#reproducibleA-tmp---reproducible=
+A-tmp-deploy---reproducibleA-tmp-deploy-deb---reproducibleA-tmp-deploy-deb-=
+core-------reproducibleA-tmp-deploy-deb-core-----ipmiutil-dbg_-.-.--r-_amd-=
+-.deb
+> >
+>
+> these links are temporary and they might disappear in some time. I am
+> not sure about the Yocto AB build retention policy. It will be good to
+> add relevant info in the commit itself along with links.
+>
 
-Relevant logs:
-- https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/41/steps/32/logs/stdio
-- https://valkyrie.yocto.io/pub/repro-fail-openembedded/meta-oe/oe-reproducible-20250419-ye3feamr/packages/diff-html/
+I sent a v2 with a quick analysis section with relevant diffs.
 
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
----
-v1->v2: Added quick analysis
----
- meta-oe/conf/include/non-repro-meta-oe.inc | 4 ++++
- 1 file changed, 4 insertions(+)
+As for the retention policy: As far as I know there is none.
+But, also, no log/diffoscope has been removed since I started doing this
+(1.5y). So, I've decided the links were "safe enough" to put here.
 
-diff --git a/meta-oe/conf/include/non-repro-meta-oe.inc b/meta-oe/conf/include/non-repro-meta-oe.inc
-index b926b45b0a..5c8fc30052 100755
---- a/meta-oe/conf/include/non-repro-meta-oe.inc
-+++ b/meta-oe/conf/include/non-repro-meta-oe.inc
-@@ -71,6 +71,10 @@ KNOWN_NON_REPRO_META_OE = " \
-     librelp-ptest \
-     libsdl2-compat \
-     libsdl2-compat-dbg \
-+    libsource-highlight5 \
-+    libsource-highlight-dbg \
-+    libsource-highlight-dev \
-+    libsource-highlight-src \
-     libthrift-c-glib-zlib-src \
-     libvncserver-dev \
-     libwebsockets-testapps \
+
+> > Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+> > ---
+> >  meta-oe/conf/include/non-repro-meta-oe.inc | 3 +++
+> >  1 file changed, 3 insertions(+)
+> >
+> > diff --git a/meta-oe/conf/include/non-repro-meta-oe.inc
+> b/meta-oe/conf/include/non-repro-meta-oe.inc
+> > index ba08749412..b926b45b0a 100755
+> > --- a/meta-oe/conf/include/non-repro-meta-oe.inc
+> > +++ b/meta-oe/conf/include/non-repro-meta-oe.inc
+> > @@ -46,6 +46,9 @@ KNOWN_NON_REPRO_META_OE =3D " \
+> >      hplip-src \
+> >      iotop \
+> >      iotop-dbg \
+> > +    ipmiutil \
+> > +    ipmiutil-dbg \
+> > +    ipmiutil-dev \
+> >      jpnevulator-doc \
+> >      jsonrpc-dev \
+> >      kpatch-build \
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#117262):
+> https://lists.openembedded.org/g/openembedded-devel/message/117262
+> > Mute This Topic: https://lists.openembedded.org/mt/112550095/1997914
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[
+> raj.khem@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
+
+
+--=20
+Yoann Congal
+Smile ECS
+
+--000000000000ea47310634193f3a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">Le=C2=A0jeu. 1 =
+mai 2025 =C3=A0=C2=A002:46, Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.c=
+om">raj.khem@gmail.com</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote cla=
+ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
+rgb(204,204,204);padding-left:1ex">On Wed, Apr 30, 2025 at 3:04=E2=80=AFPM =
+Yoann Congal via<br>
+<a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D"_bla=
+nk">lists.openembedded.org</a> &lt;yoann.congal=3D<a href=3D"mailto:smile.f=
+r@lists.openembedded.org" target=3D"_blank">smile.fr@lists.openembedded.org=
+</a>&gt;<br>
+wrote:<br>
+&gt;<br>
+&gt; From: Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.fr" target=
+=3D"_blank">yoann.congal@smile.fr</a>&gt;<br>
+&gt;<br>
+&gt; ipmiutil packages are not reproducilble.<br>
+&gt;<br>
+&gt; Relevant logs:<br>
+&gt; - <a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/=
+87/builds/42/steps/32/logs/stdio" rel=3D"noreferrer" target=3D"_blank">http=
+s://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/42/steps/32/=
+logs/stdio</a><br>
+&gt; - <a href=3D"https://valkyrie.yocto.io/pub/repro-fail-openembedded/met=
+a-oe/oe-reproducible-20250426-pazz3nt5/packages/diff-html/#reproducibleA-tm=
+p---reproducibleA-tmp-deploy---reproducibleA-tmp-deploy-deb---reproducibleA=
+-tmp-deploy-deb-core-------reproducibleA-tmp-deploy-deb-core-----ipmiutil-d=
+bg_-.-.--r-_amd--.deb" rel=3D"noreferrer" target=3D"_blank">https://valkyri=
+e.yocto.io/pub/repro-fail-openembedded/meta-oe/oe-reproducible-20250426-paz=
+z3nt5/packages/diff-html/#reproducibleA-tmp---reproducibleA-tmp-deploy---re=
+producibleA-tmp-deploy-deb---reproducibleA-tmp-deploy-deb-core-------reprod=
+ucibleA-tmp-deploy-deb-core-----ipmiutil-dbg_-.-.--r-_amd--.deb</a><br>
+&gt;<br>
+<br>
+these links are temporary and they might disappear in some time. I am<br>
+not sure about the Yocto AB build retention policy. It will be good to<br>
+add relevant info in the commit itself along with links.<br></blockquote><d=
+iv><br></div><div>I sent a v2 with a quick analysis section with relevant d=
+iffs.</div><div><br></div><div>As for the retention policy: As far as I kno=
+w there is none.</div><div>But, also, no log/diffoscope has been removed si=
+nce I started doing this (1.5y). So, I&#39;ve decided the links were &quot;=
+safe enough&quot; to put here.</div><div>=C2=A0</div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">
+&gt; Signed-off-by: Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.f=
+r" target=3D"_blank">yoann.congal@smile.fr</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 meta-oe/conf/include/non-repro-meta-oe.inc | 3 +++<br>
+&gt;=C2=A0 1 file changed, 3 insertions(+)<br>
+&gt;<br>
+&gt; diff --git a/meta-oe/conf/include/non-repro-meta-oe.inc b/meta-oe/conf=
+/include/non-repro-meta-oe.inc<br>
+&gt; index ba08749412..b926b45b0a 100755<br>
+&gt; --- a/meta-oe/conf/include/non-repro-meta-oe.inc<br>
+&gt; +++ b/meta-oe/conf/include/non-repro-meta-oe.inc<br>
+&gt; @@ -46,6 +46,9 @@ KNOWN_NON_REPRO_META_OE =3D &quot; \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 hplip-src \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 iotop \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 iotop-dbg \<br>
+&gt; +=C2=A0 =C2=A0 ipmiutil \<br>
+&gt; +=C2=A0 =C2=A0 ipmiutil-dbg \<br>
+&gt; +=C2=A0 =C2=A0 ipmiutil-dev \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 jpnevulator-doc \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 jsonrpc-dev \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 kpatch-build \<br>
+&gt;<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; Links: You receive all messages sent to this group.<br>
+&gt; View/Reply Online (#117262): <a href=3D"https://lists.openembedded.org=
+/g/openembedded-devel/message/117262" rel=3D"noreferrer" target=3D"_blank">=
+https://lists.openembedded.org/g/openembedded-devel/message/117262</a><br>
+&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/11255009=
+5/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
+org/mt/112550095/1997914</a><br>
+&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
+bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
+rg</a><br>
+&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
+devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
+d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
+ target=3D"_blank">raj.khem@gmail.com</a>]<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt;<br>
+</blockquote></div><div><br clear=3D"all"></div><br><span class=3D"gmail_si=
+gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
+iv dir=3D"ltr"><font face=3D"Raleway, regular">Yoann Congal</font><div><fon=
+t face=3D"Raleway, regular">Smile ECS</font></div></div></div></div>
+
+--000000000000ea47310634193f3a--
 
