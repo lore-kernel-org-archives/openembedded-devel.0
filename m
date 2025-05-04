@@ -2,88 +2,83 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 096C9C3ABB9
-	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 12:21:27 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web10.46024.1746436449339991739
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7E46C3ABB0
+	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 12:21:26 +0000 (UTC)
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web11.23742.1746331469891352165
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 May 2025 02:14:09 -0700
+ Sat, 03 May 2025 21:04:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=R3lmsB5f;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: emailaddress.ashish@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-879d2e419b9so3952327a12.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 02:14:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=O9JafXO5;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: nguyenthaithuanalg@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-7394945d37eso2825817b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 03 May 2025 21:04:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1746436448; x=1747041248; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3/EkaZoqweWApJSgy4y1hE4cEDUiDlLwmBU9HWXKOUE=;
-        b=R3lmsB5fesS6XPMrYUSA4+4CuPl+H/yO38KDAEM9XlMRqWuEgv7M89PzaKa3/37Oam
-         y0677NDrEOPHeLhZfQios44ZxClk3ST4QhEP9A8BRlgbwJYE+l1xXVlPwJs16KoYtjRy
-         OsOqTwICMNLIqJgW8mSBWDSCOEbSd/X95KwwIt6Td5kEBr7wLo8yYbgYGESdV+iSE/Dx
-         mJ4F8pUlYJE4CX+Ev9xJS6jeGDtqHuubQ8J2ynmmb6Hs5Uxhpakl+vFfaHwC3v9Q+SIG
-         SuBYaMZDoMzDVqetOvNnP3LEKEPnG/sS9bla3UGSs+S0RjsPBbJ3Z6uf7CXYzkyVeLzx
-         bMVQ==
+        d=gmail.com; s=20230601; t=1746331469; x=1746936269; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=PW/D2jzQwegeFkao0XaTw8GmtfZ8m4MiIxvycJaiorE=;
+        b=O9JafXO5Hy4QpVhmFL1Guaeg2yDqDBezUNDAgoJl+hA+w78bKESfQl3PP+/v/SzDq0
+         uC7X6prceQnVIj2eYpo1MIceGrp8ikfBPOgZRYZAoZoLBS/lr3Bdtn8o7dwYX4a3cHJA
+         dPVOhPgGbNQxBZyPqHou8ntUD7XW6Q5qWJJtbo+XGnAiDNS4dtY0sTxhh9VoyBoPnkAD
+         v8miUP8JNgSlzGJ5YrX7Ax3GkJZx3RD/wRzav8wSOnOHv8zfAnY5q8A2Mb0k4zS5tMUU
+         XTqZkeXzd/n7SbkUNiqJRYvqdJS/AS+H9vL4hwfjpWj6ooz7iBv+blWQaFx75hzIBUNT
+         JiKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746436448; x=1747041248;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3/EkaZoqweWApJSgy4y1hE4cEDUiDlLwmBU9HWXKOUE=;
-        b=gEth4pOBkeXyOzPNhO9cDarW4PI2LW33sMMAS1vVixTcazeUlceOPzD3/ZoGQdxl2D
-         nn5YX9Cb7MG3v/IvdjdMyXDO6JWNnX2dJ/YqdjMllcCSWo1UiUoDiqKmw7CzbL9CSw17
-         zvPID17hXg81xnGKQtgvPt8hGQd+/5Fx4GqHJ6x7m7Jo+UxZlohumhnTY9Xcpg9cxbT7
-         ZDgiyZcbxqIBziLxYEnKxiR38651yJ7HYAZYsw0/Nqgm0RxmHeytnsvd2B5BRJsplBE3
-         Oj0H/Jwf70eMhBX+lDLb2mqmOOAuWsEBm6nAyZR53PGVjJLYfEzYuNMn9yEjAf31Z0qQ
-         nCzA==
-X-Gm-Message-State: AOJu0YxuXd7VxrIY6bn8BrbGK6CO4gCie9YLySPqr8hoQWiVqtuOMMu+
-	wFnycMP7CTfpfXUMWXbby4XLYKDO9Rm3emYH8Qiq0sDRNUVfmRgLI/v6wQ==
-X-Gm-Gg: ASbGnctz3SwijpDU/Csn637UHQSf6pl2eMw0Fefsv7A8txwDRX3Q8AcrBHlr803Ij+I
-	KEcOPuyBWnLUVjE+yllSK2Niqmve1UzXcKpmaQ88cngzjyihuMM0M+biVrR/ZJ1TsZVqh15swqR
-	XAvQR5NjfZe86wGD/RC199HoSW1NcuEQ32rPChMiliysoeVV3BK0pm+fa5ANQvopcjKMfS9Ql+e
-	GoIULUgPGUz3g9Gmgwiei9kavFi4RQmfNfgvrlgnWzvjE0/hztk9l6bjyZI8MTOKLq34njSDDEy
-	vMrfvzO5K2LBF2qQ8i2Avn50NUpZfBRVYneMjPLiBecuTOKwb9Vd
-X-Google-Smtp-Source: AGHT+IHQpCEBBzsHNfq+Mdof7b0oMdAe3faakW1a8Xaj0l9V/FEIL1Qz6J9eCntivtXU1dzjFj301Q==
-X-Received: by 2002:a17:90b:51c2:b0:2fe:994d:613b with SMTP id 98e67ed59e1d1-30a5aedd058mr12590672a91.35.1746436448562;
-        Mon, 05 May 2025 02:14:08 -0700 (PDT)
-Received: from MVIN00210.. ([182.74.28.237])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22e151e9eb3sm49863955ad.91.2025.05.05.02.14.07
+        d=1e100.net; s=20230601; t=1746331469; x=1746936269;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=PW/D2jzQwegeFkao0XaTw8GmtfZ8m4MiIxvycJaiorE=;
+        b=vVoVcpT0GxDcGYrH14OwsjdMmOTODi8Ph8aPeMQVlcqvjStEvHGgkP8A1KjUR0lCQm
+         PQPY0xF6NBjduCnCyPjLHr0sDekF23gBhe8SDCJDyU2WYu4Te9GALXS5n0eD5CZ/vSPN
+         XuXTahp9qkEDa/C2HjbwrSF8PmbQ8B6IJOmuj/sORu4uAvogefbxZRx7w0oT17n6ilOm
+         21aA4braOB5Cxh/UmjdZjC44/aFVhOk/JZhKtuJP0+/sfjmHsScTuKkBtnpSVeNAwq7G
+         KgDHvSQUCjPoZoBVpVszzeuAhDX7sdEGIfH5sF4GhxMrjV+8ivS9dhAVQsjIPni+00yz
+         KcZg==
+X-Gm-Message-State: AOJu0YwmE8xIFDigky9Y7m0sMYZ3BgNPHqzfFwFKT8e+gUG9+1cQrtMF
+	++bkTcJcWovlmFTP2NEvnFpeE9oKldtGwQa/F+wbjBtZmXpHxlVntZkr6g==
+X-Gm-Gg: ASbGncsKJ5LJbbxANWVhmTBgec2Hhr7kx2JnRYzyxOxRJk+TbYyU+aBe/tYZe85CwbX
+	qKe+K4nV8tCQqooDhFCkoDgDYhLZPIUudl6FQ1bOreItg0s8cDrawyFu2PRPABr3QRb8hO7h8Vp
+	QNd9qRJFrtcB8dyoUX6AQZFOMeI1219gMpFmhS8e8Fp1ZxYsKIUcTK6pnonm1lNNZeNMDhVJfyY
+	PEkPfxINOCRgPIXIlaMtBJ6ez2ulky60Vj9hc3S02iYeBWotAxy8Y4CLmO8TP9XdCP5MJmnBapX
+	oQ6/wj9G4CpMVVtAnHFUPCimWFpUigmIM7gn26vcQrkTZx7M4m8botjnX9hnqlTwuJUtIEDZOkZ
+	YdZ2H
+X-Google-Smtp-Source: AGHT+IEJF/LiCTWdVDwgsu6pmdH7Kha7CzYq6sEIcTXoLLb8HjJTrkQhO+fZk1EKBTk/XQkfS1JKuQ==
+X-Received: by 2002:a05:6a00:44c6:b0:740:6630:633f with SMTP id d2e1a72fcca58-7406f0adc51mr4452044b3a.8.1746331468662;
+        Sat, 03 May 2025 21:04:28 -0700 (PDT)
+Received: from localhost.localdomain ([2405:4802:90fa:f3a0:76d4:35ff:fe85:dd7a])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-74058dbc12fsm4272257b3a.64.2025.05.03.21.04.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 May 2025 02:14:08 -0700 (PDT)
-From: "Ashish Mishra" <emailaddress.ashish@gmail.com>
+        Sat, 03 May 2025 21:04:28 -0700 (PDT)
+From: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ashish Mishra <emailaddress.ashish@gmail.com>
-Subject: [meta-java][PATCH 4/4] Updates the SRC_URI for fastjar recipe
-Date: Mon,  5 May 2025 14:43:04 +0530
-Message-ID: <20250505091304.819905-5-emailaddress.ashish@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250505091304.819905-1-emailaddress.ashish@gmail.com>
-References: <20250505091304.819905-1-emailaddress.ashish@gmail.com>
+Cc: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
+Subject: [meta-oe][PATCH] libsimplelog: Add a versatile C/C++ logger.
+Date: Sun,  4 May 2025 11:04:17 +0700
+Message-ID: <20250504040417.5733-1-nguyenthaithuanalg@gmail.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 12:21:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117313
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 12:21:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117303
 
-Signed-off-by: Ashish Mishra <emailaddress.ashish@gmail.com>
+- Move "libsimplelog" to "recipes-support".
+
+Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
 ---
- recipes-core/fastjar/fastjar.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../libsimplelog/libsimplelog_1.0.6.bb                            | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/{recipes-libsimplelog => recipes-support}/libsimplelog/libsimplelog_1.0.6.bb (100%)
 
-diff --git a/recipes-core/fastjar/fastjar.inc b/recipes-core/fastjar/fastjar.inc
-index 8412236..97e79bb 100644
---- a/recipes-core/fastjar/fastjar.inc
-+++ b/recipes-core/fastjar/fastjar.inc
-@@ -7,7 +7,7 @@ PR = "r1"
- 
- DEPENDS = "zlib"
- 
--SRC_URI = "http://download.savannah.nongnu.org/releases/fastjar/fastjar-${PV}.tar.gz"
-+SRC_URI = "http://download-mirror.savannah.nongnu.org/releases/fastjar/fastjar-${PV}.tar.gz"
- 
- inherit autotools update-alternatives
- 
+diff --git a/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_1.0.6.bb b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.6.bb
+similarity index 100%
+rename from meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_1.0.6.bb
+rename to meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.6.bb
+-- 
+2.47.1
+
 
