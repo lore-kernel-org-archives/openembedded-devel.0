@@ -2,90 +2,105 @@ Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53A6BC3ABBC
-	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 17:51:19 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.web10.56843.1746467475575875257
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B6B8C3ABBC
+	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 18:10:19 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.web11.57716.1746468618932670210
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 May 2025 10:51:15 -0700
+ Mon, 05 May 2025 11:10:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kQiWpK4H;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-708b9b5299eso32234257b3.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 10:51:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gp1jJRyg;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-6ff1e375a47so43859047b3.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 11:10:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1746467474; x=1747072274; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1746468618; x=1747073418; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=u0nj30hHbzZim1BCaX8UQodpzh3AILYzEDoT7AwzM6E=;
-        b=kQiWpK4HOUEE42ELDkA+s12H05F5WxRq3qG5p/upr3egh9ab1QqFuyBGuYcxn/oA4Y
-         d8o4QDsJ9hzaND3EmoKkZEbs1xNL5EQgTlxP6GNYFNtoZxjmG6uvKmapLrLnbe4eKd0H
-         gtDKec86Md4ntA3L6vJVrsDEoUJZBYGJ8WNO58V08WFyhqhznKYYGljBp1fujOk4eA8l
-         lDJN+a4eAH3SVfQ9Wsb2sjBS4g2zejxTTUm5lX0FTWzDt0Is5r3gh4wGzz9D/c1lPCxc
-         JCGveWGv/DrMFCGavTmG5QbCuVAfPzRQJMrNk26vXuBAyoqngJQGB7LbgVdVRGSJGh9w
-         n/dQ==
+        bh=qSa5EVPCyn20FEEo/Koi3IbpiCGyfkgeOrM7mixmKxo=;
+        b=gp1jJRygKrYYZLZxIfLRtLXfE5ahyEuMhnq7MTuRug013dNqkSNyaCHyqAEBrUNaOn
+         Sjtl4JjFSZbTU7og71Trli8I46C5OEVHnqYKPbbOMZ1ib7lVpWg8xexJoyOp8LQ/0K3b
+         Hj9PoJNtPGOdXPu8KyvY14iJKgNvBaeU3DJafbyX/womZ5Ls7fDsb2ZjgRIKgvosR4Ng
+         DK1seMBsoNg2mmogu7i2WOzTZe950zcA+9h/pIbM16waMQF/4tMOJgkIFPv7pfKA+2Ev
+         aU69wSAp3tNcZbxIVs3pBge3nyB1RDnHMGJkFRtGbVTtbBV1/uhAVAqp+waxtOyD3IEK
+         cRGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746467474; x=1747072274;
+        d=1e100.net; s=20230601; t=1746468618; x=1747073418;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=u0nj30hHbzZim1BCaX8UQodpzh3AILYzEDoT7AwzM6E=;
-        b=A4UJ9y6uepZDzyRcesiD/B6P5bZxWhzEuxzwMI5BQmI2CUJZnKLK42Y/Mla997rg65
-         TpBzowvuoAVG7ZF4oR6WMkf7vs5ihOQxGk60tsHs7+vQdJBtlU9UGEoLZaEi45Uo7D5m
-         8apU0M+ul2LPJJlG31860nCXk58yWFsgFfscvRwryi2282Mgaru26WSbrI/gGfHdU8MQ
-         P+25TzMuoNmlbaluoduSPfNw5pMYp3Sa5mQNsY8BdiPsS5osdKI7xt3e4eqSk79xYnw9
-         f6AgffvMG9OdKn7sDdpn9puXrQGWiSjHOAIyB7orZxFdWrgXl9xmNKPnTgQbmIZ7d8Tc
-         vfmA==
-X-Gm-Message-State: AOJu0Ywsq+ksJ66tXupm+s//KSM8rV4T9apxcAERMycRvu2cGIGaZ6lY
-	6HuQHs1bOz5dVww0Y+kXu2gY4yQKTpv7/fpTxZ8aRB4T5RdYK1SgAENGThyv
-X-Gm-Gg: ASbGncsyMj07vOLXtqKQYbZbgdAZCrywEMVFNSBsfa02Uv8JJc9KcHBIAJw+NcrQfWI
-	ciTG1RHtBeFVM/YtPMemaGDRWEfP7w2fy4KNDvdX46GnDC+IqNhV0kB/7q6PBdUl+zPVzGDQM1p
-	Jv4SNc/RnoY+r+jSebdpWoZYle9wIDYFqo/Wfu/1Ki+xOyeNJJD6b4cAKv8A09iR97QupXwc7ml
-	wSIqH7xDWTk/EGhX3v0ry7/Wu4nzpQf/ptQJND/BrrqdPrR2WuqXBnt/EMY1xVHuk1kA4qMEuij
-	p78JAax4a2fo9j0PMwBvs1WcrcB0ds2F80cmDlnxFsgzhw==
-X-Google-Smtp-Source: AGHT+IF8dMO2BuZvTmSR1GWwLzn5YGkeSbLOkdmNy1DmSPdixspHDF2ExSyK2lzftKn/aYYHbd7S5g==
-X-Received: by 2002:a05:690c:c0f:b0:703:c3b4:45d7 with SMTP id 00721157ae682-70919868a52mr1777217b3.28.1746467474126;
-        Mon, 05 May 2025 10:51:14 -0700 (PDT)
+        bh=qSa5EVPCyn20FEEo/Koi3IbpiCGyfkgeOrM7mixmKxo=;
+        b=IaynxvsTFvRKMduwxakHEQt1sQ2ACP5LvB44P67kpIkTjHczbpWMh1277a7SskMpoY
+         ydmL5e/xJQjzBOssyv6PapMre5v+5+23/XCon7uxfatygkl60CIS8dE27/LHrjo7RcvB
+         gGJXqil67CR7nDSl8Q3oCX7k8e0y4SlagayASSGxZDmJyCnjbOCuHekT1/mOKBJT/E0s
+         Bb84A91NQC2PIS3zhSn7nMMymHOva+fGMqx/nGLDPbRSxI6/a2WPigrOas4P4NzFya82
+         1oqUgVkFSMUpK5gQPSCzSwcQ3YOraGFnwSfBRGzZVst1lzhEz+LXxke7pxdI9t85wRuu
+         3KZA==
+X-Gm-Message-State: AOJu0YyC7Re8Z7uE17yngiaf743u7eEw7kcTxiBiqq58C1QECB1wPYmp
+	UBmww3EXsnPVe5y0XlqFdg6CB+MRuSUsqB6HUJsSus5Nams3C0EO+zFZ/07u
+X-Gm-Gg: ASbGncumTXgv6rEqOG5uFP18joiYPd0Zosn7Oc0Wkh02otaKXlbkdnT+QTy1gIaogx+
+	9oKcqd0LM44lj9lXG8l4C7oeL8Lg4IwS/qRqai/QTyBzewK0yr+kEnFRcAMSZjXv3yOmvvdFqOW
+	OQf43xOj0JIKH8IAP126gfH8Cz8YaOQxATzWTSRMO9vj/APkQYnOCAIE+dRXhZ95Ahq9DRZJwak
+	tkreW4nBxVrEak/Ww11ctD84BMATWfCqGwNiiYIu5Y+6qu6zrPDu9WBsrhqoBlfEsIxyxazhs3R
+	r0uysZYkaXuhIHphnFGUr7HmFo4k2Hqz+fQ5TbyflctvrQ==
+X-Google-Smtp-Source: AGHT+IFruTd1Y/Fky0hSm45bH3AHXI7JME8HpkcwZps+F/dwvYtC+nuLkQ1AxaSTPCkJOWDNHjyHYA==
+X-Received: by 2002:a05:690c:7012:b0:703:b930:97c7 with SMTP id 00721157ae682-709197c5011mr2946707b3.9.1746468617495;
+        Mon, 05 May 2025 11:10:17 -0700 (PDT)
 Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-708c3f08273sm22956007b3.12.2025.05.05.10.51.13
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-70913abd32esm2029677b3.31.2025.05.05.11.10.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 May 2025 10:51:13 -0700 (PDT)
+        Mon, 05 May 2025 11:10:17 -0700 (PDT)
 From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] libjson-perl: upgrade 4.03000 -> 4.04000
-Date: Mon,  5 May 2025 13:51:02 -0400
-Message-ID: <20250505175102.200088-1-schonm@gmail.com>
+Subject: [meta-oe][PATCH] libdbi-perl: upgrade 1.646 -> 1.647
+Date: Mon,  5 May 2025 14:10:10 -0400
+Message-ID: <20250505181010.206077-1-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 17:51:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117328
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 18:10:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117329
+
+Changelog:
+===========
+ * Spellcheck
+ * Fix Makefile rules for Changes (Windows case issue)
+ * Another example to bind columns (issue#159)
+ * Fix fetchall_arrayref for undefined NAME (issue#156)
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../perl/{libjson-perl_4.03000.bb => libjson-perl_4.04000.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/perl/{libjson-perl_4.03000.bb => libjson-perl_4.04000.bb} (91%)
+ .../perl/{libdbi-perl_1.646.bb => libdbi-perl_1.647.bb}     | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/perl/{libdbi-perl_1.646.bb => libdbi-perl_1.647.bb} (88%)
 
-diff --git a/meta-oe/recipes-devtools/perl/libjson-perl_4.03000.bb b/meta-oe/recipes-devtools/perl/libjson-perl_4.04000.bb
-similarity index 91%
-rename from meta-oe/recipes-devtools/perl/libjson-perl_4.03000.bb
-rename to meta-oe/recipes-devtools/perl/libjson-perl_4.04000.bb
-index 88d0d26d03..f0e296118e 100644
---- a/meta-oe/recipes-devtools/perl/libjson-perl_4.03000.bb
-+++ b/meta-oe/recipes-devtools/perl/libjson-perl_4.04000.bb
-@@ -11,7 +11,7 @@ DEPENDS += "perl"
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.646.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
+similarity index 88%
+rename from meta-oe/recipes-devtools/perl/libdbi-perl_1.646.bb
+rename to meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
+index 947353c17c..f70f737ba2 100644
+--- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.646.bb
++++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
+@@ -4,13 +4,13 @@ DESCRIPTION = "DBI is a database access Application Programming Interface \
+ of functions, variables and conventions that provide a consistent \
+ database interface independent of the actual database being used. \
+ "
+-HOMEPAGE = "http://search.cpan.org/dist/DBI/"
++HOMEPAGE = "https://metacpan.org/dist/DBI"
+ SECTION = "libs"
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=65f65488c774efe1da488e36ad6c4a36"
  
- SRC_URI = "git://github.com/makamaka/JSON.git;protocol=https;branch=master"
+-SRC_URI = "https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/DBI-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "53ab32ac8c30295a776dde658df22be760936cdca5a3c003a23bda6d829fa184"
++SRC_URI = "${CPAN_MIRROR}/authors/id/H/HM/HMBRAND/DBI-${PV}.tgz"
++SRC_URI[sha256sum] = "0df16af8e5b3225a68b7b592ab531004ddb35a9682b50300ce50174ad867d9aa"
  
--SRCREV = "ebbae181c5e311fa80ee4c6379b598c7a6400570"
-+SRCREV = "396a57d11aae4015e56f72924f80ac023a26f050"
- 
- S = "${WORKDIR}/git"
+ S = "${WORKDIR}/DBI-${PV}"
  
 -- 
 2.43.0
