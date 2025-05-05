@@ -1,93 +1,81 @@
-Return-Path: <f.pflug@pengutronix.de>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B90C0C3ABAA
-	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 15:42:08 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.web10.53590.1746459726680451854
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD70EC3ABBB
+	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 16:18:28 +0000 (UTC)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web10.52652.1746457793671681818
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 May 2025 08:42:07 -0700
+ Mon, 05 May 2025 08:09:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: f.pflug@pengutronix.de)
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[IPv6:::1])
-	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
-	(envelope-from <f.pflug@pengutronix.de>)
-	id 1uBxxE-0000VE-1I; Mon, 05 May 2025 17:42:04 +0200
-Message-ID: <a3a06f7205cb4aebbee8c045ed9a28fa57286052.camel@pengutronix.de>
-Subject: Re: [oe] [meta-python2][PATCH] layer.conf: update
- LAYERSERIES_COMPAT to scarthgap
-From: Fabian Pflug <f.pflug@pengutronix.de>
-To: Trevor Gamblin <tgamblin@baylibre.com>, 
-	openembedded-devel@lists.openembedded.org
-Date: Mon, 05 May 2025 17:42:03 +0200
-In-Reply-To: <f79a78f5-0b9a-4f17-9ce8-9e48945db579@baylibre.com>
-References: <20250505150451.2675990-1-f.pflug@pengutronix.de>
-	 <f79a78f5-0b9a-4f17-9ce8-9e48945db579@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.4-2 
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VvCucH2h;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: nguyenthaithuanalg@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-22e09f57ed4so41654475ad.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 08:09:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1746457793; x=1747062593; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=TN8mPRdrXMM+OI9BCVMgMDpWvC60Jm5+ziEvl4CFlTM=;
+        b=VvCucH2hFiSTLfcWuZJN8Y5HmhcMJAQb/kiDPQE7NDB5CnDGA1vhMehBRX3pmhqStr
+         32+4AaVJgN4RDfbsUNzpBNSVd8NQFxJR2PMy4Uzw78mU2kXe3BmZikqZl2plIfmmmeH5
+         4MnXTTm05eIrgvPvxshXmOIIn9SgfehNkxk+vZOhSvelLgbH1/BfP3RKnF0mCwgBm6DO
+         YcrmHJbtwI0y2YtFzpjZ4KyClqq8ejhkKChLP8Vg7wKYWl1vOJ4UvbAL2+Xs8e1uoP2H
+         AfKPyM2TKmhJmBcjSN6aRXtGpqouBMjbPY8x3le35eXij55hb48NATtFO6Ca1n3DxMf/
+         HAjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746457793; x=1747062593;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=TN8mPRdrXMM+OI9BCVMgMDpWvC60Jm5+ziEvl4CFlTM=;
+        b=uKrAxJ/3cUjFK/9bFX4u3YeNZTF1uGKDvUXSZ4PVeLEfLgtofmBP+dqOT635mcKgqS
+         WaTDnEgDhC6wsowINwY69diLMTa96IAHILfEa/Xn6n4koZE59I/Ah9UANITcw2kgpGIJ
+         2K3E1aPSzzwhO8ok4CJ69WmMkS3t7wS72l9l5LO7IfR6aIze53Q3hOOnG+RNcTnzC1Pl
+         Wh+K6QOBYLxKlnPBZvHcpk8hODUm/8WfJJEGGxKQ0Dgxf5BkQa6JDYmjtcT5y/nfhA+7
+         8NAPK2XGBFUzhSzxwr+rZdwDBNkwHu16akstl6uM/4Sgvs6X8X2AzG0ulk5AQzyFqA0F
+         Zvfg==
+X-Gm-Message-State: AOJu0Yxr1dS6xPZkbZkxMDdUnAIkFT/MCDYCkotvC1WOYATOAiLr6KB9
+	GTt5Pra4yZAneEcx7ErpWDR+uk9H3XiEabPHBTPSpFvJRZtgZtz73kYuAQ==
+X-Gm-Gg: ASbGncstdFuEQi3/81K/O1gvzCu1Xv4GxEgmAOWJjFBN0Hwoveqwta3ui+TyDHi6c/T
+	WJ4MOWlcRGY04H28YKTFXv5lmeIycs22rhD2p/gTGBxkFhpSnWUXovDqgmAtdVei8ta5wi5rRB9
+	5evyHY1rL4r8xn0qSbMs7hHqK1IVXwxfW0U5qrtLH0ivo1mKaaPQTAtB6G3WNV5XqvvWPmvdqpu
+	XhdYCScKfF/KarLoNATZggAFP6TJSsSZO535wvBprN/xGQay5GnIsD1xlNyXJj3oAeefEKmj2RF
+	qWvodrjVATKp5R/y+Mq2Mjyezj941VJBcuh+af9htBFJTfjJUd7WfzgS0Z08zrJua6kNYw==
+X-Google-Smtp-Source: AGHT+IFkFSpt8VzVaznSyZ0d7P//LBaxEftrivNYq3+/3c7YeNX/c2cADSzCbtfO7+neVLAfwndt0g==
+X-Received: by 2002:a17:903:98d:b0:226:3392:3704 with SMTP id d9443c01a7336-22e1007aa81mr212602605ad.12.1746457792330;
+        Mon, 05 May 2025 08:09:52 -0700 (PDT)
+Received: from localhost.localdomain ([2405:4802:90fa:f3a0:76d4:35ff:fe85:dd7a])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22e194aa296sm44314285ad.112.2025.05.05.08.09.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 05 May 2025 08:09:51 -0700 (PDT)
+From: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
+Subject: [meta-oe][PATCH] libsimplelog: Move to recipes-support
+Date: Mon,  5 May 2025 22:09:35 +0700
+Message-ID: <20250505150935.6976-1-nguyenthaithuanalg@gmail.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: f.pflug@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 15:42:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117324
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 16:18:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117325
 
-On Mon, 2025-05-05 at 11:13 -0400, Trevor Gamblin wrote:
->=20
-> On 2025-05-05 11:04, Fabian Pflug via lists.openembedded.org wrote:
-> > Layer is compatible with all version up till scarthgap.
->=20
-> Do we really want to be making Python 2 recipes compatible with
-> Scarthgap?
-they already are. It is just not declared that way. My current problem
-is that meta-qt5 in scarthgap requires python2 for some of its
-packages, so there is a need here for me to have it compatible.
+Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
+---
+ .../libsimplelog/libsimplelog_1.0.6.bb                            | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/{recipes-libsimplelog => recipes-support}/libsimplelog/libsimplelog_1.0.6.bb (100%)
 
->=20
-> It's been EOL since 2020.
-that is why there is the meta-python2 repository and not part of oe-
-core
-
-
-> >=20
-> > Signed-off-by: Fabian Pflug <f.pflug@pengutronix.de>
-> > ---
-> > =C2=A0 conf/layer.conf | 2 +-
-> > =C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/conf/layer.conf b/conf/layer.conf
-> > index 38ef579..b1d9820 100644
-> > --- a/conf/layer.conf
-> > +++ b/conf/layer.conf
-> > @@ -14,7 +14,7 @@ LAYERVERSION_meta-python2 =3D "1"
-> > =C2=A0=20
-> > =C2=A0 LAYERDEPENDS_meta-python2 =3D "core openembedded-layer"
-> > =C2=A0=20
-> > -LAYERSERIES_COMPAT_meta-python2 =3D "kirkstone"
-> > +LAYERSERIES_COMPAT_meta-python2 =3D "kirkstone langdale mickledore
-> > nanbield scarthgap"
-> > =C2=A0=20
-> > =C2=A0 LICENSE_PATH +=3D "${LAYERDIR}/licenses"
-> > =C2=A0=20
-> >=20
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#117319):
-> > https://lists.openembedded.org/g/openembedded-devel/message/117319
-> > Mute This Topic:
-> > https://lists.openembedded.org/mt/112631225/7611679
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe:
-> > https://lists.openembedded.org/g/openembedded-devel/unsub=C2=A0[
-> > tgamblin@baylibre.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >=20
->=20
+diff --git a/meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_1.0.6.bb b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.6.bb
+similarity index 100%
+rename from meta-oe/recipes-libsimplelog/libsimplelog/libsimplelog_1.0.6.bb
+rename to meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.6.bb
+-- 
+2.47.1
 
 
