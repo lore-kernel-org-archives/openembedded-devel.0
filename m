@@ -2,91 +2,85 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E702C3ABC3
-	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 12:21:27 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web10.45394.1746433909267449674
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C206C3ABAA
+	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 14:22:28 +0000 (UTC)
+Received: from out-174.mta1.migadu.com (out-174.mta1.migadu.com [95.215.58.174])
+ by mx.groups.io with SMTP id smtpd.web11.50716.1746452688264979622
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 May 2025 01:31:49 -0700
+ Mon, 05 May 2025 06:44:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gE4xGTZd;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: emailaddress.ashish@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2255003f4c6so40431925ad.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 01:31:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1746433908; x=1747038708; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JV//MsubayP8a2k4/bbRdSNjAVXtZ2pXGF7m5/BjpNI=;
-        b=gE4xGTZdGB9pevhPtqTnHgEv6+chXQxxRON9NubJ7HhLCuPRmM78P2xwo21Cmu8rAS
-         3Z/VAqJvlufIta1FdmjOBN8FOLB2qlT//RP+nm/ciTsHw4iYtw2DYIbNJ1bSINMVg1Rf
-         YS+gBNVcSOMDbmx6t7Lyc3eaIzshZWw09g7WKmjUVOfUNUrc7dGHFn1dHz4QIcStyJGq
-         nFzEBrpoThUKVoC9DUHEomKBtv782d/OX/Q5CvPHqs0F1osKMW6GlVw3a9WXrNXReanD
-         wmElbCdHsHPySDgvuU3rFo2PVlWovL0/HxIMYYY+mZbzVcuRLKNKlVT3kSfi4ipXSBrs
-         9pFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746433908; x=1747038708;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JV//MsubayP8a2k4/bbRdSNjAVXtZ2pXGF7m5/BjpNI=;
-        b=fjQel1k3dxhrT5ys2r3+yRvgt12ZSua5RrbFM976zN2NaInh1sL4tlZphGvb/mfgnf
-         LJPZiW9/PEG+YQJzuArYkZxt2ycydGPD8iN8CEzRcsJuHbH2j3urhqoJ5LQKd6HMMGk8
-         PCHcF/KRFcZplK8cHzE4KaDqGLEt8M78W+TwFzMvWa05WXnaEMKzkte2m8c5sP6zH3/e
-         zZT6rNf03m4Ll2pUmSr+8kEwPP7uv1CiY6xyFz57UF3LbDLB38vL5XjhbmHAWo78eToJ
-         //a5GWvjSzXkc70XXN3T45EteJCBQjAV5orWLu3fxNIvxmxyMZattl8hm0Lz1M9ss/3z
-         hI1w==
-X-Gm-Message-State: AOJu0YyVPuf6ehoE4Buiyv1Iq3N+fhW1sEoGxtM5S13wUfUnFCbhTP7s
-	6+C2171E1NjktSo1cIBlGTwJJ533yS6IIzpD1wCzloo1M5aj+1mLoKXhoQ==
-X-Gm-Gg: ASbGncs5SfaN7KgxhySl0LDvKZlop5mhH9sVW1AZ7SIt2iRmc7EyTwvN1340r+wX9/i
-	OfyvCYRoHvBh91YxuuheM6qZ8syz5JCVFQlRvU9jkbwMkKeOxoQ+FD+PKc6FQKxQs4hnRYUceXT
-	mZvzgevqZF8s7Dxfb2p8zx8WUksZwz0Kcl2VV1MeTI1Y1QpQVozGihowwcVqCnNObjO57BlbjQQ
-	2JfnA/sKf2S7Lv/0v41FfraVmlct/32efAxzGAXs7tFbD0HD5wVBBui+Kov5xX73ccLbnH7Aky7
-	/C85OCmVaIteSEol5sZQRwGzshvznmgftmrPFc8Qn62sbb/GNZ2s
-X-Google-Smtp-Source: AGHT+IGJYmCvnQMykYbekIBGmJO862zd53MLdGykY4wozFMls3xtPgvKN8T1r6+SlW1/1Fklhqsbyw==
-X-Received: by 2002:a17:902:ef43:b0:221:7eae:163b with SMTP id d9443c01a7336-22e1037ecb5mr183189175ad.46.1746433908401;
-        Mon, 05 May 2025 01:31:48 -0700 (PDT)
-Received: from MVIN00210.. ([182.74.28.237])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-74059020f4esm6153977b3a.112.2025.05.05.01.31.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 May 2025 01:31:48 -0700 (PDT)
-From: "Ashish Mishra" <emailaddress.ashish@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: henning@itconsulting-heinold.de,
-	otavio@ossystems.com.br,
-	richard.leitner@skidata.com,
-	Ashish Mishra <emailaddress.ashish@gmail.com>
-Subject: [meta-java][PATCH 2/4] Updates the SRC_URI for xml-commons-resolver recipe
-Date: Mon,  5 May 2025 14:01:11 +0530
-Message-ID: <20250505083113.815950-3-emailaddress.ashish@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250505083113.815950-1-emailaddress.ashish@gmail.com>
-References: <20250505083113.815950-1-emailaddress.ashish@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@linux.dev header.s=key1 header.b=XJpZGkm6;
+ spf=pass (domain: linux.dev, ip: 95.215.58.174, mailfrom: wen.yang@linux.dev)
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1746452685;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=qpOlxsigjyawIAcH8212kP5DDGOQUZmdeyLjTKSZp3Y=;
+	b=XJpZGkm6TT/nOURmLu3MOJhPzYJ6kDwaO6vA/4O+wFnoKdwy8qrc7368p+n0Z+Idfia3mz
+	ka+R7PAE0pADtzP9ToBL31WumhkO1g6q1x6cTJq5pJQ+rtCoIWwq0Sl+E0P2oP68XIrTpj
+	Z3WN0qqSQSmkl1tdBD+o3JWI0Sjmk3c=
+From: Wen Yang <wen.yang@linux.dev>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Cc: Wen Yang <wen.yang@linux.dev>
+Subject: [meta-oe][PATCH v4] testdisk: add recipe
+Date: Mon,  5 May 2025 21:44:20 +0800
+Message-Id: <20250505134420.1066169-1-wen.yang@linux.dev>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 12:21:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117306
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 14:22:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117315
 
-Signed-off-by: Ashish Mishra <emailaddress.ashish@gmail.com>
+testdisk is a free data recovery software primarily designed to help
+recover lost partitions and/or make non-booting disks bootable again
+when these symptoms are caused by faulty software.
+
+Signed-off-by: Wen Yang <wen.yang@linux.dev>
 ---
- recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-support/testdisk/testdisk_7.2.bb    | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-support/testdisk/testdisk_7.2.bb
 
-diff --git a/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb b/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb
-index 0fafcea..790b2e7 100644
---- a/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb
-+++ b/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb
-@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
- PR = "r1"
- LIC_FILES_CHKSUM = "file://LICENSE.resolver.txt;md5=d229da563da18fe5d58cd95a6467d584"
- 
--SRC_URI = "http://archive.apache.org/dist/xml/commons/xml-commons-resolver-${PV}.tar.gz"
-+SRC_URI = "https://archive.apache.org/dist/xml/commons/binaries/xml-commons-resolver-${PV}.tar.gz"
- 
- inherit java-library
- 
+diff --git a/meta-oe/recipes-support/testdisk/testdisk_7.2.bb b/meta-oe/r=
+ecipes-support/testdisk/testdisk_7.2.bb
+new file mode 100644
+index 0000000000..66d0cd4d0d
+--- /dev/null
++++ b/meta-oe/recipes-support/testdisk/testdisk_7.2.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION =3D "TestDisk is a free data recovery software primarily des=
+igned to help recover lost partitions and/or make non-booting disks boota=
+ble again when these symptoms are caused by faulty software, certain type=
+s of viruses or human error (such as accidentally deleting your Partition=
+ Table)."
++LICENSE =3D "GPL-2.0-or-later"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
+bbe"
++
++DEPENDS =3D "jpeg ncurses e2fsprogs"
++
++SRC_URI =3D "https://www.cgsecurity.org/${BP}.tar.bz2"
++SRC_URI[sha256sum] =3D "f8343be20cb4001c5d91a2e3bcd918398f00ae6d8310894a=
+5a9f2feb813c283f"
++
++inherit autotools pkgconfig
++COMPATIBLE_HOST:libc-musl =3D "null"
++
++PACKAGES =3D+ "${PN}-photorec"
++
++DESCRIPTION:${PN}-photorec =3D "Photorec is file data recovery software =
+designed to recover lost files including video, documents and archives fr=
+om Hard Disks and CDRom and lost pictures (Photo Recovery) from digital c=
+amera memory."
++FILES:${PN}-photorec =3D "${sbindir}/photorec"
++
+--=20
+2.25.1
+
 
