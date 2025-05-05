@@ -1,112 +1,137 @@
-Return-Path: <tgamblin@baylibre.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67C38C3ABAA
-	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 15:13:48 +0000 (UTC)
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
- by mx.groups.io with SMTP id smtpd.web10.52762.1746458026726141878
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D597C3ABB0
+	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 15:16:28 +0000 (UTC)
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.web11.53181.1746458187728529041
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 May 2025 08:13:47 -0700
+ Mon, 05 May 2025 08:16:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20230601.gappssmtp.com header.s=20230601 header.b=OuUF2ejG;
- spf=pass (domain: baylibre.com, ip: 209.85.219.51, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-6ecfbf8fa76so63423796d6.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 08:13:46 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=itTLbtdd;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.43, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-ac34257295dso58067166b.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 08:16:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1746458025; x=1747062825; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=AWljfPhtMYrkd89xaYtnEyCoQqmK0M89aA+XrWKYOCU=;
-        b=OuUF2ejGF92jwm+fnKN2EiFTXzZHCd0WklJYrNPkNVW5tR7ORL1TJrF/dU0VH8tWpT
-         3nbDB+r9WIRYg/DJeAFXoNGCw9v5YOJn6DFy81q9rMhv26/gbIykZVo4BVgI5CDU/He1
-         Dw9WPvYyOsbhGLf/v727OI28CCBvwkRtsRm1KZQjNR4DLspVpXXlcG8Kt2SMhARh75sx
-         JGo81h43tUERIxgGT/Dj+FDUnRT4WoKa+B1RmhiUCPPc/G/g0bjqREJ2xXRCkBTBa6/N
-         ipf8D1B3eWAACI8NsY8RW5seymyrW5wxJgW0pUKVuTVpNc404gLz+5rQxRrW1aEsNuVg
-         1YpA==
+        d=konsulko.com; s=google; t=1746458186; x=1747062986; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=f5/C53KmcPXNEj+nxgjZudfCQAw5yLUqGhYD7rNdB7A=;
+        b=itTLbtddWWHSoa5RH3hFyXOs7Iv1ZB8MFPzK1laXxmopSzuo9PL/mfzylvf2Pg0vPs
+         VWWlSPt7AapWkP4JLC/vswGzio4UAzHeksZGRLK5NSx9rGO8qWoIL+5JoVB4UtKfEwEW
+         q+IDtLukg0KgqyWjhxMHOzTqncz948W2XxJXA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746458025; x=1747062825;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=AWljfPhtMYrkd89xaYtnEyCoQqmK0M89aA+XrWKYOCU=;
-        b=GWxm134quNxEpvOIcsj2y51XfyaFkgkjIUfAXUVKAOuvfSE5P7V8W9+cGZut57118C
-         IINujYdn/bPSWc1gguR2SMZxjDvDzJoHO+oITIehWeHxPh3TfPNIWmLvPaKezjwH180Y
-         Z4YZRma44cwyAXkVZgHOOiztHHfA0RzvNEeLW+UmMPV3vtWIiwAweJIzvmRWTslO6OFP
-         Q9dymmRZ0tlCJ6+ZTDb6TgmJaTzVSqXBPTAOvW7s8XnZhNvPWPEmMn59JQfMzj4KGYGa
-         vtLRvEr9kRdiAnYKdz4FiVKaI2TCSri8lQCRZc5136sLaHZ5rAiuMJDTMdHjTojFw1vs
-         j+pg==
-X-Forwarded-Encrypted: i=1; AJvYcCXp05C370kVbLsYYyewSK6QN7w6GHARZPfTst9cVNbDmx0qLGO3HUtlyavgSKJ8nqWrb/ThOsQzKMiM2JpKQDvthvU=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwzV4b98Xm/IZAyjnYnBifBo4pQZYeCeJQrAdGFSMlqM17DE9nO
-	lPcQwuks0I7SBH8rPrOoCoLZxoUhb73sxCBpGkrwpa060tJPjj9l349qvQNYHxE3GFZ4c9coKjY
-	InxI=
-X-Gm-Gg: ASbGnctA6rqmTO+iOgIqtRZJPr7Fgb5F6PS7JCITe17fC52q/X/CywzvPPHnnvKwi94
-	sBQokxB1miD1c8s2asOfWIxyacqQ3aRkcNgLTmS7/Fz4SogZe7Jszz3cOr5ASXbdYp2RnJMKF+b
-	Qhrmx8GIn0nLY3eHUwvPl+eUUC8/NlKsXYXG/xdkCFWGH5ruddk+/YI7ex8XbeaaSdRwJE2oWq+
-	dIiiS1IQNvezVCx/7wpsVUHeqrE0Ic9qPgM15g9JKE+qbt8Mz4UianDuBW3rdDR3426lMmuwb0v
-	BPU8KsEGfneAXwCbAezGKyn42CYLjp7XOlnM+OA8X0KScE99cKEJnSHn2VYGlPKj5UsCXFVVRHm
-	N/EGL7qUx
-X-Google-Smtp-Source: AGHT+IE9Dgh7zXmIfTPSlG1y0Tcfx08dRP7U4ZpVAhSU1Sd4HadxL/7CTTYQFVnVqG4K7PH6cest5Q==
-X-Received: by 2002:ad4:5c41:0:b0:6e8:8d76:f38c with SMTP id 6a1803df08f44-6f528d2708fmr114631486d6.40.1746458025352;
-        Mon, 05 May 2025 08:13:45 -0700 (PDT)
-Received: from [192.168.40.12] (d24-150-219-207.home.cgocable.net. [24.150.219.207])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-6f50f44f42fsm56983646d6.76.2025.05.05.08.13.44
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 05 May 2025 08:13:44 -0700 (PDT)
-Message-ID: <f79a78f5-0b9a-4f17-9ce8-9e48945db579@baylibre.com>
-Date: Mon, 5 May 2025 11:13:43 -0400
+        d=1e100.net; s=20230601; t=1746458186; x=1747062986;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=f5/C53KmcPXNEj+nxgjZudfCQAw5yLUqGhYD7rNdB7A=;
+        b=QmEgkoe1mxXqTRrtnD/XOLQBi78XlNmdUTAuKBqaFnnQrktjG2hTq3Vi9zMVzi+m0W
+         CRwqyU02tevGpbHHnfurYQakcSeHTn6ozgBlIVholcMVFoce1GtDi5PmYBriBdGcMkjI
+         Q3ZGe7Pk6SHEan4KPKo96fNLdqoroF7EP9pH1DSX3hkY/15DQF/LPD+YZeweaH6au3ET
+         SRCOfCT+TJlcwuRHkfeTVsSR+2hPlaC+14Ua5K2+uByRMCclUwSu+Zmw6vST5j5tqQjx
+         FZlcCCmbAzKXmRczqKhzbE1u+P/h2npVIQ4nDV/gX70KHibWAz++Ev/1Tkv7yYgZBdCZ
+         Pg/Q==
+X-Gm-Message-State: AOJu0Yy38z+SGXVTkyLcwbVcDZdNnRc/K0kv80MvcSDiHBxdS9OB+7aL
+	DsU3DnPk6w7fcdzhauvLzmCpEIAAOG9RKGjBVYhsUw0Or0Gb+jNUrw+jKwAptErVHiSmEzQZmWU
+	S
+X-Gm-Gg: ASbGncvhV7hPD75oE91LeMv5iR1xaJaI3rPRqvSUhGrc53/efd9faZ73j+kq40wpr0a
+	1klWV3w5TKH0rwcQvf4wuI2t9kCZioFofa/c9nXkJaCQSKUs8jZrt1jiKnX05joOv3Yan/H3sQn
+	gqdrr9Wq5WZWuVBzi/cKxpaKLen2jPHUkpoe5KwMb+W4Ti3QBlRDSYrKgBpljGQOmRfpygFjA72
+	osHfAQlh80Gm4JgEIlH+uOwtdFFfg65kjHvR3VUIWEQeEfX50pBLS9pth20AHFuU3WjjtbBbl1X
+	iSqXzT8cN4IWHzaijxIuVzITkadY7q4I61ZJVHaoIscwc8sHZe0iWVw=
+X-Google-Smtp-Source: AGHT+IEQ1OhWlmvnFP6wXG9TMS992UTbhaoZ6m1ncsJCraHI+rv6zOikboQksJf5r1RDZix9zN09rQ==
+X-Received: by 2002:a17:907:7248:b0:aca:a204:5df2 with SMTP id a640c23a62f3a-ad1a4b0c174mr707885366b.49.1746458185585;
+        Mon, 05 May 2025 08:16:25 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ad189540478sm507412966b.169.2025.05.05.08.16.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 05 May 2025 08:16:25 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-multimedia][PATCHv2] x265: Fix error: 'uint8_t'
+Date: Mon,  5 May 2025 18:16:23 +0300
+Message-Id: <20250505151623.2353326-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python2][PATCH] layer.conf: update LAYERSERIES_COMPAT
- to scarthgap
-To: f.pflug@pengutronix.de, openembedded-devel@lists.openembedded.org
-References: <20250505150451.2675990-1-f.pflug@pengutronix.de>
-Content-Language: en-US
-From: Trevor Gamblin <tgamblin@baylibre.com>
-In-Reply-To: <20250505150451.2675990-1-f.pflug@pengutronix.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 15:13:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117321
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 15:16:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117322
 
+Include cstdint in json11.cpp Fixes:
 
-On 2025-05-05 11:04, Fabian Pflug via lists.openembedded.org wrote:
-> Layer is compatible with all version up till scarthgap.
+json11.cpp:101:32: error: 'uint8_t' does not name a type
 
-Do we really want to be making Python 2 recipes compatible with Scarthgap?
+This work was sponsored by GOVCERT.LU.
 
-It's been EOL since 2020.
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../0001-json11.cpp-Include-cstdint.patch     | 33 +++++++++++++++++++
+ .../recipes-multimedia/x265/x265_4.1.bb       |  5 ++-
+ 2 files changed, 37 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cstdint.patch
 
->
-> Signed-off-by: Fabian Pflug <f.pflug@pengutronix.de>
-> ---
->   conf/layer.conf | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/conf/layer.conf b/conf/layer.conf
-> index 38ef579..b1d9820 100644
-> --- a/conf/layer.conf
-> +++ b/conf/layer.conf
-> @@ -14,7 +14,7 @@ LAYERVERSION_meta-python2 = "1"
->   
->   LAYERDEPENDS_meta-python2 = "core openembedded-layer"
->   
-> -LAYERSERIES_COMPAT_meta-python2 = "kirkstone"
-> +LAYERSERIES_COMPAT_meta-python2 = "kirkstone langdale mickledore nanbield scarthgap"
->   
->   LICENSE_PATH += "${LAYERDIR}/licenses"
->   
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117319): https://lists.openembedded.org/g/openembedded-devel/message/117319
-> Mute This Topic: https://lists.openembedded.org/mt/112631225/7611679
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [tgamblin@baylibre.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cstdint.patch b/meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cstdint.patch
+new file mode 100644
+index 0000000000..f32316009f
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cstdint.patch
+@@ -0,0 +1,33 @@
++From 6cbd417be3f6bcbda77464db6a4d83cef3df8904 Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Mon, 5 May 2025 14:08:36 +0000
++Subject: [PATCH] json11.cpp: Include cstdint
++
++Fixes:
++
++json11.cpp:101:32: error: 'uint8_t' does not name a type
++
++This work was sponsored by GOVCERT.LU.
++
++Upstream-Status: Pending [https://bitbucket.org/multicoreware/x265_git/pull-requests/33]
++
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ dynamicHDR10/json11/json11.cpp | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/dynamicHDR10/json11/json11.cpp b/dynamicHDR10/json11/json11.cpp
++index 7625777..74f990a 100644
++--- a/dynamicHDR10/json11/json11.cpp
+++++ b/dynamicHDR10/json11/json11.cpp
++@@ -25,6 +25,7 @@
++ #include <cstdlib>
++ #include <cstdio>
++ #include <limits>
+++#include <cstdint>
++ 
++ #if _MSC_VER
++ #pragma warning(disable: 4510) //const member cannot be default initialized
++-- 
++2.39.5
++
+diff --git a/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb b/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
+index 23d6342d26..ae0f7758c1 100644
+--- a/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
++++ b/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
+@@ -8,7 +8,10 @@ LIC_FILES_CHKSUM = "file://../COPYING;md5=c9e0427bc58f129f99728c62d4ad4091"
+ 
+ DEPENDS = "nasm-native gnutls zlib libpcre numactl"
+ 
+-SRC_URI = "https://bitbucket.org/multicoreware/x265_git/downloads/x265_${PV}.tar.gz"
++SRC_URI = " \
++    https://bitbucket.org/multicoreware/x265_git/downloads/x265_${PV}.tar.gz \
++    file://0001-json11.cpp-Include-cstdint.patch \
++"
+ SRC_URI[sha256sum] = "a31699c6a89806b74b0151e5e6a7df65de4b49050482fe5ebf8a4379d7af8f29"
+ S = "${WORKDIR}/x265_${PV}/source"
+ 
+-- 
+2.39.5
+
 
