@@ -1,86 +1,137 @@
-Return-Path: <philip@balister.org>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C206C3ABAA
-	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 14:22:28 +0000 (UTC)
-Received: from out-174.mta1.migadu.com (out-174.mta1.migadu.com [95.215.58.174])
- by mx.groups.io with SMTP id smtpd.web11.50716.1746452688264979622
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38620C3ABAA
+	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 14:33:08 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web10.51578.1746455581468920125
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 May 2025 06:44:48 -0700
+ Mon, 05 May 2025 07:33:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@linux.dev header.s=key1 header.b=XJpZGkm6;
- spf=pass (domain: linux.dev, ip: 95.215.58.174, mailfrom: wen.yang@linux.dev)
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1746452685;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=qpOlxsigjyawIAcH8212kP5DDGOQUZmdeyLjTKSZp3Y=;
-	b=XJpZGkm6TT/nOURmLu3MOJhPzYJ6kDwaO6vA/4O+wFnoKdwy8qrc7368p+n0Z+Idfia3mz
-	ka+R7PAE0pADtzP9ToBL31WumhkO1g6q1x6cTJq5pJQ+rtCoIWwq0Sl+E0P2oP68XIrTpj
-	Z3WN0qqSQSmkl1tdBD+o3JWI0Sjmk3c=
-From: Wen Yang <wen.yang@linux.dev>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Cc: Wen Yang <wen.yang@linux.dev>
-Subject: [meta-oe][PATCH v4] testdisk: add recipe
-Date: Mon,  5 May 2025 21:44:20 +0800
-Message-Id: <20250505134420.1066169-1-wen.yang@linux.dev>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=T3NEVftV;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.47, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-ac2af2f15d1so612773566b.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 07:33:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1746455579; x=1747060379; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=QT/tmAS1xbyBLHXgeekXIE5YAEJKNlqHOQFl5p4MYQI=;
+        b=T3NEVftVFXLXYUqBvSfW49OSgnEbsFxyfzskhXQC9rpuXIkMA82nSFtAENKFltpJRu
+         kPjSx8JquQQlPwwtmY5XenssxpJd0dJugRxGEJlQzbVbFrWsROGu15Og1VXAQa090s20
+         ZHyNHpB+FCcLIxyWiSP9REwM73BQwE/8So5z4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746455579; x=1747060379;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=QT/tmAS1xbyBLHXgeekXIE5YAEJKNlqHOQFl5p4MYQI=;
+        b=vp4HyvmqozUwD9Mn0asZi2HZUW0eMI1Dbc1OgQJIHOxb3SkHkxdHUeQKVeMHHaOxfn
+         P4/fBjW/OvRXlufCvzIoD4Rw06AKLCQcUMBjCIJK7lDI7WjsJYXe9O5Pe9ndR+MRltET
+         7+TfoLojNukXL8a/wlruxJuLr7tFMkzhtQvICO9susfY8MMmLxs/9e9lhvDiw4W4G6Av
+         YfbplYA/zyFDAZypQhSzmpEfYRZv771pPCJytPuGju/UVKWxupHpwez2HvVpuv7ZNYlP
+         7wEllVlgq4OOYx+toAoXHE+04mGLHOf7ISGCKMn7cuKGt3F/0ejuOm6iz5KXHZBNjEGM
+         b5qw==
+X-Gm-Message-State: AOJu0Yy+5qW99JGSXbdMNaS7yNJ1hxXy/otppq+/vQfLOVsI4LKQLRrR
+	0AvCSclNEcNqgKIiXdpHoXqbgwYHFc8dkjiLgg/G3E/bXaKGhv6ASVAH2kUmiCZEfGctDJDwDoK
+	y
+X-Gm-Gg: ASbGncuD4nZbJW+xrNcAQlLqiMHgP94TjzIHQh1jUy7GOQmMYsRtUyfgHU0J7gNfpsu
+	7nUygNf4gp1kT3Q+g/vuJYp2zJY6xqBt2PLBCPXbKeej4ZGUNp8/Yl0kCW/+MmSWm4EDP1ZaYzy
+	EdxiPL6s+gHr3v61KZbeUUP061E3BmBB35Yc+y5DY/T3cU7UyHRh5CmiVqFjdPuQN83zxbitARy
+	A+foQ5KnMD1KDmToF1R76pEx02csnWppAV7Bf7Q+mj4pIInYxJmK+ouGiDNFUe+iKmtBq8i8jOe
+	7KfgCJbK6MroRBMPFjblSXaidChMjft9DLsdx55tlqTNUDsillMPRrI=
+X-Google-Smtp-Source: AGHT+IHD5Ax2IZ83OXaiU6cV55ag29h9MMN7kwyn4ILGTa4k7VZVehTD0cL0iC1Bbjw1/zakZfdg8w==
+X-Received: by 2002:a17:907:2d20:b0:ace:37d6:a5ce with SMTP id a640c23a62f3a-ad19065651amr719306966b.19.1746455578022;
+        Mon, 05 May 2025 07:32:58 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ad1895400fesm495312966b.167.2025.05.05.07.32.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 05 May 2025 07:32:57 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-multimedia][PATCH] x265: Fix error: 'uint8_t'
+Date: Mon,  5 May 2025 17:32:55 +0300
+Message-Id: <20250505143255.1548816-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-X-Migadu-Flow: FLOW_OUT
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 14:22:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117315
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 14:33:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117316
 
-testdisk is a free data recovery software primarily designed to help
-recover lost partitions and/or make non-booting disks bootable again
-when these symptoms are caused by faulty software.
+Include cstdint in json11.cpp Fixes:
 
-Signed-off-by: Wen Yang <wen.yang@linux.dev>
+json11.cpp:101:32: error: 'uint8_t' does not name a type
+
+This work was sponsored by GOVCERT.LU.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-support/testdisk/testdisk_7.2.bb    | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-support/testdisk/testdisk_7.2.bb
+ .../0001-json11.cpp-Include-cstdint.patch     | 33 +++++++++++++++++++
+ .../recipes-multimedia/x265/x265_4.1.bb       |  5 ++-
+ 2 files changed, 37 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cstdint.patch
 
-diff --git a/meta-oe/recipes-support/testdisk/testdisk_7.2.bb b/meta-oe/r=
-ecipes-support/testdisk/testdisk_7.2.bb
+diff --git a/meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cstdint.patch b/meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cstdint.patch
 new file mode 100644
-index 0000000000..66d0cd4d0d
+index 0000000000..38a5a319c7
 --- /dev/null
-+++ b/meta-oe/recipes-support/testdisk/testdisk_7.2.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION =3D "TestDisk is a free data recovery software primarily des=
-igned to help recover lost partitions and/or make non-booting disks boota=
-ble again when these symptoms are caused by faulty software, certain type=
-s of viruses or human error (such as accidentally deleting your Partition=
- Table)."
-+LICENSE =3D "GPL-2.0-or-later"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
++++ b/meta-multimedia/recipes-multimedia/x265/x265/0001-json11.cpp-Include-cstdint.patch
+@@ -0,0 +1,33 @@
++From 6cbd417be3f6bcbda77464db6a4d83cef3df8904 Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Mon, 5 May 2025 14:08:36 +0000
++Subject: [PATCH] json11.cpp: Include cstdint
 +
-+DEPENDS =3D "jpeg ncurses e2fsprogs"
++Fixes:
 +
-+SRC_URI =3D "https://www.cgsecurity.org/${BP}.tar.bz2"
-+SRC_URI[sha256sum] =3D "f8343be20cb4001c5d91a2e3bcd918398f00ae6d8310894a=
-5a9f2feb813c283f"
++json11.cpp:101:32: error: 'uint8_t' does not name a type
 +
-+inherit autotools pkgconfig
-+COMPATIBLE_HOST:libc-musl =3D "null"
++This work was sponsored by GOVCERT.LU.
 +
-+PACKAGES =3D+ "${PN}-photorec"
++Upstream-Status: Inappropriate
 +
-+DESCRIPTION:${PN}-photorec =3D "Photorec is file data recovery software =
-designed to recover lost files including video, documents and archives fr=
-om Hard Disks and CDRom and lost pictures (Photo Recovery) from digital c=
-amera memory."
-+FILES:${PN}-photorec =3D "${sbindir}/photorec"
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ dynamicHDR10/json11/json11.cpp | 1 +
++ 1 file changed, 1 insertion(+)
 +
---=20
-2.25.1
++diff --git a/dynamicHDR10/json11/json11.cpp b/dynamicHDR10/json11/json11.cpp
++index 7625777..74f990a 100644
++--- a/dynamicHDR10/json11/json11.cpp
+++++ b/dynamicHDR10/json11/json11.cpp
++@@ -25,6 +25,7 @@
++ #include <cstdlib>
++ #include <cstdio>
++ #include <limits>
+++#include <cstdint>
++ 
++ #if _MSC_VER
++ #pragma warning(disable: 4510) //const member cannot be default initialized
++-- 
++2.39.5
++
+diff --git a/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb b/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
+index 23d6342d26..ae0f7758c1 100644
+--- a/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
++++ b/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
+@@ -8,7 +8,10 @@ LIC_FILES_CHKSUM = "file://../COPYING;md5=c9e0427bc58f129f99728c62d4ad4091"
+ 
+ DEPENDS = "nasm-native gnutls zlib libpcre numactl"
+ 
+-SRC_URI = "https://bitbucket.org/multicoreware/x265_git/downloads/x265_${PV}.tar.gz"
++SRC_URI = " \
++    https://bitbucket.org/multicoreware/x265_git/downloads/x265_${PV}.tar.gz \
++    file://0001-json11.cpp-Include-cstdint.patch \
++"
+ SRC_URI[sha256sum] = "a31699c6a89806b74b0151e5e6a7df65de4b49050482fe5ebf8a4379d7af8f29"
+ S = "${WORKDIR}/x265_${PV}/source"
+ 
+-- 
+2.39.5
 
 
