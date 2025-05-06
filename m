@@ -1,114 +1,157 @@
-Return-Path: <jonas.gorski@bisdn.de>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60A26C3ABBE
-	for <webhook@archiver.kernel.org>; Tue,  6 May 2025 08:06:53 +0000 (UTC)
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com [209.85.222.176])
- by mx.groups.io with SMTP id smtpd.web11.71561.1746518806698956749
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4D6DC3ABBF
+	for <webhook@archiver.kernel.org>; Tue,  6 May 2025 09:32:03 +0000 (UTC)
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
+ by mx.groups.io with SMTP id smtpd.web10.72014.1746523916316959734
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 May 2025 01:06:47 -0700
+ Tue, 06 May 2025 02:31:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bisdn-de.20230601.gappssmtp.com header.s=20230601 header.b=pDRrrZOO;
- spf=none, err=SPF record not found (domain: bisdn.de, ip: 209.85.222.176, mailfrom: jonas.gorski@bisdn.de)
-Received: by mail-qk1-f176.google.com with SMTP id af79cd13be357-7c5445cb72dso51118485a.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 May 2025 01:06:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dmAJEu2F;
+ spf=pass (domain: gmail.com, ip: 209.85.167.54, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-549b159c84cso5993914e87.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 May 2025 02:31:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bisdn-de.20230601.gappssmtp.com; s=20230601; t=1746518805; x=1747123605; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1746523914; x=1747128714; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Di1UlUY0eDg37gOX9nMHOWdz5gQqdCCWvpBrGmp4UyE=;
-        b=pDRrrZOO0leppgzTpWPMswH8cTf22MDgF60YDOew+rTLRsaXv1RjwiCEpT9YTBblEj
-         KnFTS8oFMV9bH7nBR0yR04yA6J2zXyJY3141la/wM7J/jzcKSBfDZGPPl8sRat1ayVcy
-         FfF6LEdaTVD564CS9nEu8aet7FAOxz7UeLEItRs9eDF7r91BJ1NqokWJcgOC2Qd6FAdg
-         F3dzx4a55YktqFxTs4fWMBU/FFUWkT3nrTFz5wOqCyhe5KSXDEIeRDgKrOFmch1iqFdy
-         rzG+cdRfAkWIs72IGhbdQRVA+Hyf9xTorX0gBs1Vkd5NTHPsKHhX7t8uRC16JohGdMEG
-         1hig==
+        bh=6GwB5JGXSWXlJQV9ezhhhIJF8PLeA1rTpx+zf8ut4Cc=;
+        b=dmAJEu2F4jtE/2Txc0SQ4dM7XrkgLm9+9tZwDgdMDDI/1rOojcvgal35dpDYPfUyVH
+         n06kLqM+6aj5Y55LkDI/wRNqIYBnd+fOO3e1+SPFeKWwxK9DnxxfjZQtgEJ15DqwpX9a
+         clHPSf/uYkIKSN9nelFhvZhdqg2LhBpLrinzqP0KM9NQP/OrU9BQMGsZD8AMAMOo+YmB
+         4rJWn9uv8XTkL3NbbrXz77exC6SFwo4RohqR70xgJ/915xIk1IDQ7vM8Mo7tSJNscNRa
+         uGpWqgPpPaVMCUV10h6YTpWmado9IG1+H2sUeb+Eg3s5POuk4ah2df+rpr81CNWyjCM6
+         Fiew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746518805; x=1747123605;
+        d=1e100.net; s=20230601; t=1746523914; x=1747128714;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Di1UlUY0eDg37gOX9nMHOWdz5gQqdCCWvpBrGmp4UyE=;
-        b=bypP5Jhiy29y0f4PZI1205crf3+xR/CTua2OIqr3IwQ8IXtDrRX1VWlJpCEdkoC3jp
-         ks5EinnSDqq8Poe8SmetYM7FHznAp8WaF0XVd+TVS+zWwc0UYCXA0ErNX9vQhgzmQAxc
-         julBzWf8CSbFny/E2Adp0se5gV3JWn+oMsuei+n5E3CZWngHjQAHTh57mCRuWGjfnEmZ
-         KPZ7n1cQYL6K9zNDIt50BslPemEks68TsFijkLwTu+eftVwmjSb1iNxZ472LRYZi05CS
-         fsrAtC8D0FD40Ama0KHm9Dbn+E1ytfzhxUQbvyPiSX8g5ZxV8eBaW2a41Gr8z+L0ZwQy
-         KPCQ==
-X-Gm-Message-State: AOJu0YxJ+oT9LCaPQSw1tW8fVyaHhH8fzScrCOnfPWE6nNP2W8Jw7KbX
-	I/axZ3XxuHwLURXbP5yRYriaLhAekYSs95OESMnRflihy7pVucVV2D4kxGkQkB+G6vEHtDEpLHX
-	xea1OI9pB/TBb6LXDsPU2Af2wXwowoX8EkhFBpkevBbTgjzxTgnB+qPaKGd1W16R1b9EiUb3h8b
-	7BbsyOVRmSuY+EQ0hChQYfQmTHGE0kOnh/L7uylPthUwqxNbwQ9SJBYr4MRQ==
-X-Gm-Gg: ASbGncvoLLUgM952S3/sITgvuRZ+q50Tqt0sCk5/xMd8KQ6ujklIR0DXhkqHrfuhZkY
-	dWqH6FLj/oTJlp/P9Fdl2n+vJjJPRsN/b8ItQgC2maw5KxTd9gHAHRcAZ1pLd1LI9LM5iH044b/
-	zeeC6/4I58nih7SiAZODO4
-X-Google-Smtp-Source: AGHT+IFcD32O1EwnaIuOZeCbJmGA6Vn6AoCz6NGkPgQURMLEeH+FjHNHk4MApOd5ntM+1uTv4MYJAgxIv079Rs+w+7s=
-X-Received: by 2002:a05:620a:2894:b0:7c0:af16:b4a8 with SMTP id
- af79cd13be357-7cad5b235dbmr862780585a.3.1746518805453; Tue, 06 May 2025
- 01:06:45 -0700 (PDT)
+        bh=6GwB5JGXSWXlJQV9ezhhhIJF8PLeA1rTpx+zf8ut4Cc=;
+        b=qTLG/laXa4uq37802UbDgv+o1kD8ZP/9Gs1PV9ZihlRGOiqRTnRQW1TlQx0mJnSdX3
+         SnkdpQoa6wgJ/QUpjaGHzVRK48u47yiYE2YEArsyB942QnhsF1b1C2kS82oiIup/MxBg
+         i9ZOZbtJCVKuiNDcWxrQjeNbGyn0ozLCHH3tL+ZHJdNqicZuOshVv7rmT5SJur1B4Wsr
+         GUcFprOyKzI5pL23LUaB6mlGjhFsjBhKVcEl28L2acPUgL4W3NdttlIByPlyYawZ3U/g
+         WikL355y7dB4RGMsUlLXbQd9mB56E/Ffd2duBdjErKHuzCaJGcuzmDe0bvlqztha6hJK
+         UbVA==
+X-Gm-Message-State: AOJu0YxX7qY73ppu00K3lvu6E3KrbytiCRJAoqQY/2maPI06B6nQCRP5
+	yj7vtavlASCokDig0wfHkEm3KK1kGn4V3K2ClJ58hKCgGh7JK3+Loey7ZZzGlbiH91B/D2ytTct
+	c8cxyIDWFsuehDG1AOXaObyzamm8=
+X-Gm-Gg: ASbGncscMKCM0wevoKkD/HwCBU5U8xGwvaOYX5g8VmV0ojTkuvgk6kBW1Tc0/nDz9Fj
+	oyKRyCC0cbkRilZgb+E0tG+LoaO1l1RZpmskkkApTlsvQL+MhwOtQM81wVyXbNO/QiDzBOUwx16
+	ai00i5RUPyKgV0ilZBWcagNk/1
+X-Google-Smtp-Source: AGHT+IF14YPgwUlKqkUemSmKEb1GsTHdYU2SHNQUDBErhYLF8WR6yDmTrZIiIn/MsDD1BapuhNC5x/LevjpzHN7mmZU=
+X-Received: by 2002:a05:6512:696:b0:549:8d67:c48e with SMTP id
+ 2adb3069b0e04-54fb4a1451dmr649989e87.29.1746523913845; Tue, 06 May 2025
+ 02:31:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250505095815.15137-1-l.anderweit@phytec.de>
-In-Reply-To: <20250505095815.15137-1-l.anderweit@phytec.de>
-From: Jonas Gorski <jonas.gorski@bisdn.de>
-Date: Tue, 6 May 2025 10:06:29 +0200
-X-Gm-Features: ATxdqUFodWVzlLmx-WWqzw3Or3AtNYNxZn9ATvMiduQbzAx7lCR0Yt0OZdmEl_g
-Message-ID: <CAJpXRYQyv5Qvr=ogU+YrCLYQBkbhy+9LpQf2g1W87V8R-gJNPg@mail.gmail.com>
-Subject: Re: [meta-oe][kirkstone][PATCH] lmsensors: Fix build without sensord
-To: Leonard Anderweit <l.anderweit@phytec.de>
-Cc: openembedded-devel@lists.openembedded.org, upstream@lists.phytec.de
+References: <20250505062142.3478500-1-raj.khem@gmail.com> <20250505062142.3478500-6-raj.khem@gmail.com>
+In-Reply-To: <20250505062142.3478500-6-raj.khem@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 6 May 2025 11:31:42 +0200
+X-Gm-Features: ATxdqUHphMVF5NdTPbL_zjfD4GRhd9q-cxnYshWNGYJMCwv1p9TSF0OCcI8T3Mg
+Message-ID: <CA+chaQcmQLw=3AH0sjj3U_MLLSYQaR_XOR4A25uKKpEJNT-Vwg@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 6/7] python3-icu: Fix build with GCC-15
+To: raj.khem@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 May 2025 08:06:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117341
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 May 2025 09:32:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117342
 
-Am Mo., 5. Mai 2025 um 11:58 Uhr schrieb Leonard Anderweit
-<l.anderweit@phytec.de>:
+FYI: In next release we should be able to drop this .patch as it
+should be resolved by:
+https://gitlab.pyicu.org/main/pyicu/-/commit/82fa082b149db81c894e0d887c0fff=
+67c3d2826f
+
+On Mon, May 5, 2025 at 8:21=E2=80=AFAM Khem Raj via lists.openembedded.org
+<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
 >
-> When building with sensord disabled (PACKAGECONFIG =3D ""), do_install
-> would fail because it tried to build sensord which was skiped in
-> do_compile.
-> Error log:
-> make: *** No rule to make target 'rrd.h', needed by 'prog/sensord/rrd.rd'=
-. Stop.
+> drop is_trivial check
+> Fixes
+> | In file included from bases.cpp:32:
+> | arg.h:856:37: error: static assertion failed
+> |   856 |   static_assert(std::is_trivial<T>::value);             \
+> |       |                 ~~~~~~~~~~~~~~~~~~~~^~~~~
+> | arg.h:859:1: note: in expansion of macro '_IS_POD'
+> |   859 | _IS_POD(AnyPythonObject);
+> |       | ^~~~~~~
 >
-> Avoid building sensord in do_install by explicitly setting PROG_EXTRA.
->
-> (master rev: fc88c96c4e40d9dbc6097c4679ac79ed55356730)
->
-> Fixes: 86b20b84ec27 (lmsensors: Clean stale files for sensord to avoid
-> incorrect GCC header dependencies)
->
-> Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
-Works for me. So
-
-Tested-By: Jonas Gorski <jonas.gorski@bisdn.de>
-
---=20
-BISDN GmbH
-K=C3=B6rnerstra=C3=9Fe 7-10
-10785 Berlin
-Germany
-
-
-Phone:=20
-+49-30-6108-1-6100
-
-
-Managing Directors:=C2=A0
-Dr.-Ing. Hagen Woesner, Andreas=20
-K=C3=B6psel
-
-
-Commercial register:=C2=A0
-Amtsgericht Berlin-Charlottenburg HRB 141569=20
-B
-VAT ID No:=C2=A0DE283257294
-
+> ---
+>  ...ove-assert-checking-for-trivial-type.patch | 26 +++++++++++++++++++
+>  .../python/python3-icu_2.15.2.bb              |  3 ++-
+>  2 files changed, 28 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-icu/0001-=
+Remove-assert-checking-for-trivial-type.patch
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-icu/0001-Remove-=
+assert-checking-for-trivial-type.patch b/meta-python/recipes-devtools/pytho=
+n/python3-icu/0001-Remove-assert-checking-for-trivial-type.patch
+> new file mode 100644
+> index 0000000000..4c75eb5f7b
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-icu/0001-Remove-assert-=
+checking-for-trivial-type.patch
+> @@ -0,0 +1,26 @@
+> +From 3d58fb48bb1cef2177aab8e291167638993495f4 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Sat, 3 May 2025 21:27:34 -0700
+> +Subject: [PATCH] Remove assert checking for trivial type
+> +
+> +This fails with GCC-15, is_trivial is deprecated in C++26
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + arg.h | 1 -
+> + 1 file changed, 1 deletion(-)
+> +
+> +diff --git a/arg.h b/arg.h
+> +index a493d11..6cb232d 100644
+> +--- a/arg.h
+> ++++ b/arg.h
+> +@@ -853,7 +853,6 @@ public:
+> + };
+> +
+> + #define _IS_POD(T)                                      \
+> +-  static_assert(std::is_trivial<T>::value);             \
+> +   static_assert(std::is_standard_layout<T>::value)
+> +
+> + _IS_POD(AnyPythonObject);
+> diff --git a/meta-python/recipes-devtools/python/python3-icu_2.15.2.bb b/=
+meta-python/recipes-devtools/python/python3-icu_2.15.2.bb
+> index 77013330d8..d265a20975 100644
+> --- a/meta-python/recipes-devtools/python/python3-icu_2.15.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-icu_2.15.2.bb
+> @@ -12,7 +12,8 @@ UPSTREAM_CHECK_PYPI_PACKAGE =3D "${PYPI_PACKAGE}"
+>
+>  SRC_URI[sha256sum] =3D "561e77eedff17cec6839f26211f7a5ce3c071b776e8a0ec9=
+d1207f46cbce598f"
+>
+> -SRC_URI +=3D "file://0001-Fix-host-contamination-of-include-files.patch"
+> +SRC_URI +=3D "file://0001-Fix-host-contamination-of-include-files.patch =
+\
+> +            file://0001-Remove-assert-checking-for-trivial-type.patch"
+>
+>  inherit pkgconfig pypi python_setuptools_build_meta
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#117295): https://lists.openembedded.org/g/openembedde=
+d-devel/message/117295
+> Mute This Topic: https://lists.openembedded.org/mt/112625197/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
+artin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
