@@ -1,243 +1,207 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0376EC3ABBF
-	for <webhook@archiver.kernel.org>; Mon,  5 May 2025 23:26:21 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.web10.64032.1746487572182396967
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1D58C3ABBE
+	for <webhook@archiver.kernel.org>; Tue,  6 May 2025 05:38:52 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web10.69653.1746509924552282189
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 May 2025 16:26:12 -0700
+ Mon, 05 May 2025 22:38:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=OEun5FuB;
- spf=pass (domain: smile.fr, ip: 209.85.221.45, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-39c0dfba946so3986909f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 16:26:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lbndsG3F;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-2ff6e91cff5so4987329a91.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 22:38:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1746487570; x=1747092370; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zVmpUDMv6y3spgzXUu3CUK2QokdsSW+CehJ9PCLrAzE=;
-        b=OEun5FuBcm75Yn5xS1uU3Fvu8t8Ib+gjU9lh0u3mVuI1MI0+NmF43y9U/wCQcaiHgm
-         BhNJUY6ZtKodd2lSrR80hX03vdDD4AirsIADfn+cTKIodOIPBj8dbePKn2jM71zAq7Sl
-         +o+qJXCWF0Xk4oZC2zz4rlG8Br00GPDhCyiB4=
+        d=gmail.com; s=20230601; t=1746509924; x=1747114724; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=bMk/uNu5Yja05HO4UIzImhUi0yKtPJH1osxE2eCCAdc=;
+        b=lbndsG3FV3+2Y5fQDkHqujqFVEnS88WriJRJh4xUxdygMdEuQso/KAg6uE1Pn4HO7l
+         JTsky6LVWubKyoYirFeg8aCWaynaD28BEdjis+1TTr9mH2ZdBViWNw3iSvvFQRxZYR4M
+         yxViERl6EXKzsKcJABy9KfDcc4jYxToha/As15M0n3lN+0GXLznNMyM7TCZgsboPM7g2
+         PZmPebDmsDdeunO/VUt2WDlz+741qe2BfgGGN8foOvCewtSFyP/UWLWxpWJYkUDcK/S3
+         PrZm5Ikz3CZbIv8NC/SRSfMnoH3wir7L40dJ6DLX9VUPalviwRAA6CCX72lIYAPaf7Ga
+         uHwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746487570; x=1747092370;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=zVmpUDMv6y3spgzXUu3CUK2QokdsSW+CehJ9PCLrAzE=;
-        b=uRPJl1QZdYsfEllVylt5H0D3moRTb7BcBkF4G1tUY+UnbPlvPxH9MfJT4hF+IkYKEA
-         VCttm99uDFXUQv90BeUzBYsf+xCT3HEUB0+DT5ZaqwqTZJQn+2iNPInYwvCv8o8VhAOr
-         VqV7ehihNg6CL8innNkP3MbgbjOlz+ATw1uSKYalm7t7w23eODair9vgKZohRq7EIeLw
-         rPGMb+Hk6S8eNrBrm7lerjBnuE9oaHXGzII81OCdX+U4YyzEVkQL6vL5NtaBS+mRlOtJ
-         iDC67GLobtaS784B/o/MdZLtwBQcU7Drx3F+zMRryPtipQGSiH3HvIszP52v/LqAr82Q
-         94AA==
-X-Gm-Message-State: AOJu0YxQoERMIO+YiUZ6r9K3LIsiyOAJnrA0zn9hx2f71dnHUgVQFmJq
-	N7I+XnWBpCpJDn/yGQ9c2nJuVhTl2e/+o+aIMlRQwhhQlKQ9IHx/6BreLrtYfDctyPYrf7PrP+S
-	q
-X-Gm-Gg: ASbGncudxHESFsq8DuBMaTbuNMnGXTytkQya7IrSyoVnmU8cEq4F2mX8qMdXrFsToy/
-	uu1w1wHNj7iwnk6hYDc7sS5DnpBXCdozNHaccWKWN5qHba8dq7p9nF5thJMyEgEhxM/aCqEKScq
-	QaBTph6VQd50Cxkkb2AXVgenB9qViIX1/8jXe4c2NmSA5B7ElWNBZteA650PS1weKzBwWwDC6+6
-	D2gVLMoOO4O52BINVno7GrSZccV1lg5WnYuZVdBMryRsugsbgsp8DTBt7JczAeJmBncOCDtLPI7
-	PdlNclyvz5zfXtW14i9F0D3oQmWMdxPYO1A3JcN7VPPNuOazMtdstQF0X3/Sfmiz0TXlTs5K/XD
-	s1IAcOgCvr+pBry4ze7+mjpZw2+QedzjUFl9P48cm0mxbfYys
-X-Google-Smtp-Source: AGHT+IFKKB6bVF4GBG1pm+WPqGi4wJQERTy4LzqSL0ffcXb+V1bRJHX//L+Lq8q+V1l1YIcOLpj0Sg==
-X-Received: by 2002:a05:6000:4006:b0:399:71d4:a2 with SMTP id ffacd0b85a97d-3a0ac0d91ccmr567410f8f.14.1746487569679;
-        Mon, 05 May 2025 16:26:09 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.home (2a01cb001331aa00b6621c32eca023c1.ipv6.abo.wanadoo.fr. [2a01:cb00:1331:aa00:b662:1c32:eca0:23c1])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a099ae7b09sm11557066f8f.48.2025.05.05.16.26.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 May 2025 16:26:09 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-gnome][PATCH] cogl-1.0: fix incompatible-pointer-types build error
-Date: Tue,  6 May 2025 01:25:57 +0200
-Message-Id: <20250505232557.2768595-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.5
+        d=1e100.net; s=20230601; t=1746509924; x=1747114724;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=bMk/uNu5Yja05HO4UIzImhUi0yKtPJH1osxE2eCCAdc=;
+        b=gMcBAplY+lT5L7SSIX1OyqLWUE6I2wNMcK45tK0Xh1BeUVPFeUSFgW6oYH/GbKBvk3
+         Iqo7Ejdr6sFVbr4PhLjT9Uqp9W8sRz6TJOyf5QPVwgZuv/+dteKWmE7UBshHp7g7z8oF
+         jmO0cpJVW0ZPy1+dha9UkHIlvrEn3hqN/bif2R3weaT+s3WbXqZIIH2IITGGjKhmfcku
+         kV+6Uxhgr2rvsRDP3IVwwp8VlxwKNki4q3Rol1cgv8wrrAZOKVcfD4O2LCEYcyP/XhY4
+         cARtnUAVk6YnFgNEoiDU+C71Y+fsDkXcXUpVOZkK95bgfxzKAR18Ff7Ee6Ou4F0YWzVz
+         aifA==
+X-Gm-Message-State: AOJu0YyOs57dfXOPF5AYoTqxuA4bR6P7qsL+AAeZXsyMgtE5xQ2xHtmu
+	CUeeHJRVDkgrsNIF7HCF452FX7wWPL26VdF9Wx1xenam9sJspfOmyUzS8hKJgipLrvtxptvIzJw
+	hg3VL4+4SfyR24r0vpMKjMZYF56FLbRTq
+X-Gm-Gg: ASbGncu1PzhQiO4EmpXaMwVtLzbQivIu/TMdXddC0ejke2vhIjeanZ/g16iqwuy5fCd
+	frb7jKxxNNowysCLbq2D+7O85pIhY/SmRXh/fcwe3gqHEZsVBVf9WgSdFT6VDYI8ntN7Z5BzzYF
+	ju2n+oora0yqQ7CRopfOeyS3UGvUJhPymr9we1k0JhmbbUWa09Q/0dloE=
+X-Google-Smtp-Source: AGHT+IGxNmMFFcVSyinJujYD1LMnklMSIz6tB+VnkyVcTobN5CrQxDDmqPO7p2cZ3jRtxyYdN5moDp/gBJPT03tXEsQ=
+X-Received: by 2002:a17:90b:2711:b0:2ff:5357:1c7f with SMTP id
+ 98e67ed59e1d1-30a61a44ef7mr15487758a91.30.1746509923564; Mon, 05 May 2025
+ 22:38:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Mon, 5 May 2025 22:38:33 -0700
+X-Gm-Features: ATxdqUGQuuh7HfvpKmHwNuRtqQQ3KGuUEYRhMkAFRuOgnLyd4Lt5CqrNOhumVT0
+Message-ID: <CAK5yBb8fOcB2e_sa3ZAYMG+_Y5DtjYUd+q8S8paSD-WyDxkamQ@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="0000000000009740cf0634710755"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 23:26:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117334
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 May 2025 05:38:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117335
 
-From: Yoann Congal <yoann.congal@smile.fr>
+--0000000000009740cf0634710755
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Use an intermediary (void *) cast to workaround the
-incompatible-pointer-types error.
+All,
 
-This corrects these 4 errors:
-|../../cogl-1.22.8/cogl-path/cogl-path.c: In function '_cogl_path_build_fill_attribute_buffer':
-|../../cogl-1.22.8/cogl-path/cogl-path.c:1361:20: error: passing argument 3 of 'gluTessCallback' from incompatible pointer type [-Wincompatible-pointer-types]
-| 1361 |                    _cogl_path_tesselator_begin);
-|      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-|      |                    |
-|      |                    void (*)(GLenum,  CoglPathTesselator *) {aka void (*)(unsigned int,  struct _CoglPathTesselator *)}
-|In file included from ../../cogl-1.22.8/cogl-path/cogl-path.c:49:
-|../../cogl-1.22.8/cogl-path/tesselator/tesselator.h:57:70: note: expected 'void (*)(void)' but argument is of type 'void (*)(GLenum,  CoglPathTesselator *)' {aka 'void (*)(unsigned int,  struct _CoglPathTesselator *)'}
-|   57 | void gluTessCallback (GLUtesselator* tess, GLenum which, _GLUfuncptr CallBackFunc);
-|      |                                                          ~~~~~~~~~~~~^~~~~~~~~~~~
-|../../cogl-1.22.8/cogl-path/cogl-path.c:1094:1: note: '_cogl_path_tesselator_begin' declared here
-| 1094 | _cogl_path_tesselator_begin (GLenum type,
-|      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-|../../cogl-1.22.8/cogl-path/cogl-path.c:1363:20: error: passing argument 3 of 'gluTessCallback' from incompatible pointer type [-Wincompatible-pointer-types]
-| 1363 |                    _cogl_path_tesselator_vertex);
-|      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|      |                    |
-|      |                    void (*)(void *, CoglPathTesselator *) {aka void (*)(void *, struct _CoglPathTesselator *)}
-|../../cogl-1.22.8/cogl-path/tesselator/tesselator.h:57:70: note: expected 'void (*)(void)' but argument is of type 'void (*)(void *, CoglPathTesselator *)' {aka 'void (*)(void *, struct _CoglPathTesselator *)'}
-|   57 | void gluTessCallback (GLUtesselator* tess, GLenum which, _GLUfuncptr CallBackFunc);
-|      |                                                          ~~~~~~~~~~~~^~~~~~~~~~~~
-|../../cogl-1.22.8/cogl-path/cogl-path.c:1164:1: note: '_cogl_path_tesselator_vertex' declared here
-| 1164 | _cogl_path_tesselator_vertex (void *vertex_data,
-|      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|../../cogl-1.22.8/cogl-path/cogl-path.c:1365:20: error: passing argument 3 of 'gluTessCallback' from incompatible pointer type [-Wincompatible-pointer-types]
-| 1365 |                    _cogl_path_tesselator_end);
-|      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~
-|      |                    |
-|      |                    void (*)(CoglPathTesselator *) {aka void (*)(struct _CoglPathTesselator *)}
-|../../cogl-1.22.8/cogl-path/tesselator/tesselator.h:57:70: note: expected 'void (*)(void)' but argument is of type 'void (*)(CoglPathTesselator *)' {aka 'void (*)(struct _CoglPathTesselator *)'}
-|   57 | void gluTessCallback (GLUtesselator* tess, GLenum which, _GLUfuncptr CallBackFunc);
-|      |                                                          ~~~~~~~~~~~~^~~~~~~~~~~~
-|../../cogl-1.22.8/cogl-path/cogl-path.c:1223:1: note: '_cogl_path_tesselator_end' declared here
-| 1223 | _cogl_path_tesselator_end (CoglPathTesselator *tess)
-|      | ^~~~~~~~~~~~~~~~~~~~~~~~~
-|../../cogl-1.22.8/cogl-path/cogl-path.c:1367:20: error: passing argument 3 of 'gluTessCallback' from incompatible pointer type [-Wincompatible-pointer-types]
-| 1367 |                    _cogl_path_tesselator_combine);
-|      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|      |                    |
-|      |                    void (*)(double *, void **, float *, void **, CoglPathTesselator *) {aka void (*)(double *, void **, float *, void **, struct _CoglPathTesselator *)}
-|../../cogl-1.22.8/cogl-path/tesselator/tesselator.h:57:70: note: expected 'void (*)(void)' but argument is of type 'void (*)(double *, void **, float *, void **, CoglPathTesselator *)' {aka 'void (*)(double *, void **, float *, void **, struct _CoglPathTesselator *)'}
-|   57 | void gluTessCallback (GLUtesselator* tess, GLenum which, _GLUfuncptr CallBackFunc);
-|      |                                                          ~~~~~~~~~~~~^~~~~~~~~~~~
-|../../cogl-1.22.8/cogl-path/cogl-path.c:1229:1: note: '_cogl_path_tesselator_combine' declared here
-| 1229 | _cogl_path_tesselator_combine (double coords[3],
-|      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|make[3]: *** [Makefile:905: libcogl_path_la-cogl-path.lo] Error 1
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
----
- ...plicit-cast-to-avoid-an-incompatible.patch | 94 +++++++++++++++++++
- .../recipes-graphics/cogl/cogl-1.0_1.22.8.bb  |  5 +-
- 2 files changed, 98 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-graphics/cogl/cogl-1.0/0001-cogl-path-add-explicit-cast-to-avoid-an-incompatible.patch
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
 
-diff --git a/meta-gnome/recipes-graphics/cogl/cogl-1.0/0001-cogl-path-add-explicit-cast-to-avoid-an-incompatible.patch b/meta-gnome/recipes-graphics/cogl/cogl-1.0/0001-cogl-path-add-explicit-cast-to-avoid-an-incompatible.patch
-new file mode 100644
-index 0000000000..a9f2d654d1
---- /dev/null
-+++ b/meta-gnome/recipes-graphics/cogl/cogl-1.0/0001-cogl-path-add-explicit-cast-to-avoid-an-incompatible.patch
-@@ -0,0 +1,94 @@
-+From 69690b0fdff43cdf6ab1718cd86396de3b27081f Mon Sep 17 00:00:00 2001
-+From: Yoann Congal <yoann.congal@smile.fr>
-+Date: Tue, 6 May 2025 00:00:38 +0200
-+Subject: [PATCH] cogl-path: add explicit cast to avoid an
-+ incompatible-pointer-types error
-+
-+Callbacks declarations are not compatible with gluTessCallback(...,
-+_GLUfuncptr CallBackFunc) under gcc15. Use an intermediary (void *) cast
-+to workaround the incompatible-pointer-types error.
-+
-+This is safe to do because inside gluTessCallback(), function pointers
-+are cast back to their proper prototypes.
-+
-+This corrects these 4 errors:
-+|../../cogl-1.22.8/cogl-path/cogl-path.c: In function '_cogl_path_build_fill_attribute_buffer':
-+|../../cogl-1.22.8/cogl-path/cogl-path.c:1361:20: error: passing argument 3 of 'gluTessCallback' from incompatible pointer type [-Wincompatible-pointer-types]
-+| 1361 |                    _cogl_path_tesselator_begin);
-+|      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-+|      |                    |
-+|      |                    void (*)(GLenum,  CoglPathTesselator *) {aka void (*)(unsigned int,  struct _CoglPathTesselator *)}
-+|In file included from ../../cogl-1.22.8/cogl-path/cogl-path.c:49:
-+|../../cogl-1.22.8/cogl-path/tesselator/tesselator.h:57:70: note: expected 'void (*)(void)' but argument is of type 'void (*)(GLenum,  CoglPathTesselator *)' {aka 'void (*)(unsigned int,  struct _CoglPathTesselator *)'}
-+|   57 | void gluTessCallback (GLUtesselator* tess, GLenum which, _GLUfuncptr CallBackFunc);
-+|      |                                                          ~~~~~~~~~~~~^~~~~~~~~~~~
-+|../../cogl-1.22.8/cogl-path/cogl-path.c:1094:1: note: '_cogl_path_tesselator_begin' declared here
-+| 1094 | _cogl_path_tesselator_begin (GLenum type,
-+|      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-+|../../cogl-1.22.8/cogl-path/cogl-path.c:1363:20: error: passing argument 3 of 'gluTessCallback' from incompatible pointer type [-Wincompatible-pointer-types]
-+| 1363 |                    _cogl_path_tesselator_vertex);
-+|      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+|      |                    |
-+|      |                    void (*)(void *, CoglPathTesselator *) {aka void (*)(void *, struct _CoglPathTesselator *)}
-+|../../cogl-1.22.8/cogl-path/tesselator/tesselator.h:57:70: note: expected 'void (*)(void)' but argument is of type 'void (*)(void *, CoglPathTesselator *)' {aka 'void (*)(void *, struct _CoglPathTesselator *)'}
-+|   57 | void gluTessCallback (GLUtesselator* tess, GLenum which, _GLUfuncptr CallBackFunc);
-+|      |                                                          ~~~~~~~~~~~~^~~~~~~~~~~~
-+|../../cogl-1.22.8/cogl-path/cogl-path.c:1164:1: note: '_cogl_path_tesselator_vertex' declared here
-+| 1164 | _cogl_path_tesselator_vertex (void *vertex_data,
-+|      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+|../../cogl-1.22.8/cogl-path/cogl-path.c:1365:20: error: passing argument 3 of 'gluTessCallback' from incompatible pointer type [-Wincompatible-pointer-types]
-+| 1365 |                    _cogl_path_tesselator_end);
-+|      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~
-+|      |                    |
-+|      |                    void (*)(CoglPathTesselator *) {aka void (*)(struct _CoglPathTesselator *)}
-+|../../cogl-1.22.8/cogl-path/tesselator/tesselator.h:57:70: note: expected 'void (*)(void)' but argument is of type 'void (*)(CoglPathTesselator *)' {aka 'void (*)(struct _CoglPathTesselator *)'}
-+|   57 | void gluTessCallback (GLUtesselator* tess, GLenum which, _GLUfuncptr CallBackFunc);
-+|      |                                                          ~~~~~~~~~~~~^~~~~~~~~~~~
-+|../../cogl-1.22.8/cogl-path/cogl-path.c:1223:1: note: '_cogl_path_tesselator_end' declared here
-+| 1223 | _cogl_path_tesselator_end (CoglPathTesselator *tess)
-+|      | ^~~~~~~~~~~~~~~~~~~~~~~~~
-+|../../cogl-1.22.8/cogl-path/cogl-path.c:1367:20: error: passing argument 3 of 'gluTessCallback' from incompatible pointer type [-Wincompatible-pointer-types]
-+| 1367 |                    _cogl_path_tesselator_combine);
-+|      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+|      |                    |
-+|      |                    void (*)(double *, void **, float *, void **, CoglPathTesselator *) {aka void (*)(double *, void **, float *, void **, struct _CoglPathTesselator *)}
-+|../../cogl-1.22.8/cogl-path/tesselator/tesselator.h:57:70: note: expected 'void (*)(void)' but argument is of type 'void (*)(double *, void **, float *, void **, CoglPathTesselator *)' {aka 'void (*)(double *, void **, float *, void **, struct _CoglPathTesselator *)'}
-+|   57 | void gluTessCallback (GLUtesselator* tess, GLenum which, _GLUfuncptr CallBackFunc);
-+|      |                                                          ~~~~~~~~~~~~^~~~~~~~~~~~
-+|../../cogl-1.22.8/cogl-path/cogl-path.c:1229:1: note: '_cogl_path_tesselator_combine' declared here
-+| 1229 | _cogl_path_tesselator_combine (double coords[3],
-+|      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+|make[3]: *** [Makefile:905: libcogl_path_la-cogl-path.lo] Error 1
-+
-+Upstream-Status: Inactive-Upstream [lastcommit: 2021-05-02]
-+Gitlab instance is redirected to https://gitlab.gnome.org/Archive/cogl
-+with a notice: "This is an archived project. Repository and other
-+project resources are read-only."
-+
-+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-+---
-+ cogl-path/cogl-path.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/cogl-path/cogl-path.c b/cogl-path/cogl-path.c
-+index 2b4b3c6..f87ea4a 100644
-+--- a/cogl-path/cogl-path.c
-++++ b/cogl-path/cogl-path.c
-+@@ -1358,13 +1358,13 @@ _cogl_path_build_fill_attribute_buffer (CoglPath *path)
-+   gluTessNormal (tess.glu_tess, 0.0, 0.0, 1.0);
-+ 
-+   gluTessCallback (tess.glu_tess, GLU_TESS_BEGIN_DATA,
-+-                   _cogl_path_tesselator_begin);
-++                   (void *) _cogl_path_tesselator_begin);
-+   gluTessCallback (tess.glu_tess, GLU_TESS_VERTEX_DATA,
-+-                   _cogl_path_tesselator_vertex);
-++                   (void *) _cogl_path_tesselator_vertex);
-+   gluTessCallback (tess.glu_tess, GLU_TESS_END_DATA,
-+-                   _cogl_path_tesselator_end);
-++                   (void *) _cogl_path_tesselator_end);
-+   gluTessCallback (tess.glu_tess, GLU_TESS_COMBINE_DATA,
-+-                   _cogl_path_tesselator_combine);
-++                   (void *) _cogl_path_tesselator_combine);
-+ 
-+   gluTessBeginPolygon (tess.glu_tess, &tess);
-+ 
-diff --git a/meta-gnome/recipes-graphics/cogl/cogl-1.0_1.22.8.bb b/meta-gnome/recipes-graphics/cogl/cogl-1.0_1.22.8.bb
-index b9446fab38..8e9a74d20d 100644
---- a/meta-gnome/recipes-graphics/cogl/cogl-1.0_1.22.8.bb
-+++ b/meta-gnome/recipes-graphics/cogl/cogl-1.0_1.22.8.bb
-@@ -1,6 +1,9 @@
- require cogl-1.0.inc
- 
--SRC_URI += "file://0001-configure.ac-don-t-require-eglmesaext.h.patch"
-+SRC_URI += " \
-+	file://0001-configure.ac-don-t-require-eglmesaext.h.patch \
-+	file://0001-cogl-path-add-explicit-cast-to-avoid-an-incompatible.patch \
-+"
- SRC_URI[archive.sha256sum] = "a805b2b019184710ff53d0496f9f0ce6dcca420c141a0f4f6fcc02131581d759"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=1b1a508d91d25ca607c83f92f3e31c84"
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 441
+unassigned or newcomer bugs.
+
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.2=E2=80=9D, =E2=80=9C5.3", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.2" and then =E2=80=9C5.3=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--0000000000009740cf0634710755
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
+al">All,<br><br>The triage team is starting to try and collect up and class=
+ify bugs which a newcomer to the project would be able to work on in a way =
+which means people can find them. They&#39;re being listed on the triage pa=
+ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
+wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
+e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
+d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
+org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
+illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
+.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
+ea is these bugs should be straight forward for a person to help work on wh=
+o doesn&#39;t have deep experience with the project.  If anyone can help, p=
+lease take ownership of the bug and send patches!  If anyone needs help/adv=
+ice there are people on irc who can likely do so, or some of the more exper=
+ienced contributors will likely be happy to help too.<br><br>Also, the tria=
+ge team meets weekly and does its best to handle the bugs reported into the=
+ Bugzilla. The number of people attending that meeting has fallen, as have =
+the number of people available to help fix bugs. One of the things we hear =
+users report is they don&#39;t know how to help. We (the triage team) are t=
+herefore going to start reporting out the currently 441 unassigned or newco=
+mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
+ and again to help out with these.  Bugs are split into two types, &quot;tr=
+ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
+ents&quot; which are features we&#39;d want to add to the system.  There ar=
+e also roughly four different &quot;priority&quot; classes right now, =E2=
+=80=9C5.2=E2=80=9D, =E2=80=9C5.3&quot;, &quot;5.99&quot; and &quot;Future&q=
+uot;, the more pressing/urgent issues being in &quot;5.2&quot; and then =E2=
+=80=9C5.3=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
+g you would be able to help with either take ownership of the bug, or send =
+me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
+ an e-mail with the bug number you would like and I will assign it to you (=
+please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
+_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
+ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
+s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
+al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
+al,sans-serif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--0000000000009740cf0634710755--
 
