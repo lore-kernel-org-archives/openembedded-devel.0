@@ -1,207 +1,161 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <alistair23@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B1D58C3ABBE
-	for <webhook@archiver.kernel.org>; Tue,  6 May 2025 05:38:52 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web10.69653.1746509924552282189
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD403C3ABBC
+	for <webhook@archiver.kernel.org>; Tue,  6 May 2025 06:04:12 +0000 (UTC)
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web11.70451.1746511445938178084
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 May 2025 22:38:44 -0700
+ Mon, 05 May 2025 23:04:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lbndsG3F;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-2ff6e91cff5so4987329a91.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 22:38:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MolsOUF9;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: alistair23@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-736a72220edso5886303b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 May 2025 23:04:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1746509924; x=1747114724; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=bMk/uNu5Yja05HO4UIzImhUi0yKtPJH1osxE2eCCAdc=;
-        b=lbndsG3FV3+2Y5fQDkHqujqFVEnS88WriJRJh4xUxdygMdEuQso/KAg6uE1Pn4HO7l
-         JTsky6LVWubKyoYirFeg8aCWaynaD28BEdjis+1TTr9mH2ZdBViWNw3iSvvFQRxZYR4M
-         yxViERl6EXKzsKcJABy9KfDcc4jYxToha/As15M0n3lN+0GXLznNMyM7TCZgsboPM7g2
-         PZmPebDmsDdeunO/VUt2WDlz+741qe2BfgGGN8foOvCewtSFyP/UWLWxpWJYkUDcK/S3
-         PrZm5Ikz3CZbIv8NC/SRSfMnoH3wir7L40dJ6DLX9VUPalviwRAA6CCX72lIYAPaf7Ga
-         uHwg==
+        d=gmail.com; s=20230601; t=1746511445; x=1747116245; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=fm5QC0XJBvt3vRLhuBMT2srjgKP4zJSi5wESkxDulKQ=;
+        b=MolsOUF9iRnf21bcIyq2q+M+qKMx7nlpMciF58PZlYmYlTAj91ZpDyqLu5Az1dHWrz
+         6G7Z8z7hzW3BunsaOGT2SGdru7+ZzOZ12LSeG4pXeMlViO/Yx0md3ax+DM3Ai/ZlJyxU
+         SfBAlViSK+D9W/4CRuX2ujv41dWQJPBbNzyb2fyRoXKRF1TQa/ujCFPTM32/QZ/52veK
+         iECDbKfH+aMDoEveqvvqncyh8fHuvqHVMMF7NA5NrxLVMCvUUHdqqhyMwXLNuB1jwL+y
+         BzAWvYIFyaYMNJHLHbS3oPzNLbGyfkw2d8KaMNlsi1FQxDER3HIRr1oMEyLqlRoIDkMS
+         E9lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746509924; x=1747114724;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=bMk/uNu5Yja05HO4UIzImhUi0yKtPJH1osxE2eCCAdc=;
-        b=gMcBAplY+lT5L7SSIX1OyqLWUE6I2wNMcK45tK0Xh1BeUVPFeUSFgW6oYH/GbKBvk3
-         Iqo7Ejdr6sFVbr4PhLjT9Uqp9W8sRz6TJOyf5QPVwgZuv/+dteKWmE7UBshHp7g7z8oF
-         jmO0cpJVW0ZPy1+dha9UkHIlvrEn3hqN/bif2R3weaT+s3WbXqZIIH2IITGGjKhmfcku
-         kV+6Uxhgr2rvsRDP3IVwwp8VlxwKNki4q3Rol1cgv8wrrAZOKVcfD4O2LCEYcyP/XhY4
-         cARtnUAVk6YnFgNEoiDU+C71Y+fsDkXcXUpVOZkK95bgfxzKAR18Ff7Ee6Ou4F0YWzVz
-         aifA==
-X-Gm-Message-State: AOJu0YyOs57dfXOPF5AYoTqxuA4bR6P7qsL+AAeZXsyMgtE5xQ2xHtmu
-	CUeeHJRVDkgrsNIF7HCF452FX7wWPL26VdF9Wx1xenam9sJspfOmyUzS8hKJgipLrvtxptvIzJw
-	hg3VL4+4SfyR24r0vpMKjMZYF56FLbRTq
-X-Gm-Gg: ASbGncu1PzhQiO4EmpXaMwVtLzbQivIu/TMdXddC0ejke2vhIjeanZ/g16iqwuy5fCd
-	frb7jKxxNNowysCLbq2D+7O85pIhY/SmRXh/fcwe3gqHEZsVBVf9WgSdFT6VDYI8ntN7Z5BzzYF
-	ju2n+oora0yqQ7CRopfOeyS3UGvUJhPymr9we1k0JhmbbUWa09Q/0dloE=
-X-Google-Smtp-Source: AGHT+IGxNmMFFcVSyinJujYD1LMnklMSIz6tB+VnkyVcTobN5CrQxDDmqPO7p2cZ3jRtxyYdN5moDp/gBJPT03tXEsQ=
-X-Received: by 2002:a17:90b:2711:b0:2ff:5357:1c7f with SMTP id
- 98e67ed59e1d1-30a61a44ef7mr15487758a91.30.1746509923564; Mon, 05 May 2025
- 22:38:43 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1746511445; x=1747116245;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=fm5QC0XJBvt3vRLhuBMT2srjgKP4zJSi5wESkxDulKQ=;
+        b=Dgsq2LjWGPCWrlmopUV1uYmlu75QPv7Gp48t9tuPAEBNieFhBifY+4qrpW7DA6wrRL
+         9E0EAiw87Olku2BJabAkB+WxRKRmovNEMpgqWgKPk/N5aLE9SoLuuXOoaMcWMtv9GnkX
+         e9UvnwdKrXlX/5rnmLARYHWaYff3ozQZvpo+uxIajnoM0QhKK2KkDPbM/tIE5TEscdmp
+         sYvKRMwmINUzbDpnZQ2ZmnSeFEvvuPJbgTRMHKg5VT7SIlU01syMw7W5UbvgqxmsbWX5
+         9nwOYDXbdbiWxbcM6GhTIvvmJDjc7hF4w4qvFNcraT6TIMBAezrLfKQkRpNY0qASBrRo
+         Gehg==
+X-Gm-Message-State: AOJu0Yz5PvhqbHb31u6Z0aWz8I8kE3moJer9/VYQjogSBAQhWbwm+uMs
+	GgKDXmMP0S89omafWgjmGT3sMNTv1z+4oIZSEhgjkWtJA9E/sfqJq/FeiA==
+X-Gm-Gg: ASbGnctNyYqQmMaqQwLdE5Erm9780BU+YrcgAmJB/05gBziItTqUn++muDfs4gIadAU
+	0YFSQEgLPXJnYkNCaq+XZ4xbj+hIeIBdRFBe1o48zAH5GXInK4YyhIDTajbfJrdqh8MrmA/0UzE
+	TNCxSKN4NEUslSkByErfOts0m7xKWDIQVVaRhiacPr1kTvMBkHrM7AW6alFPaCaXjSO05m+0oVg
+	7wHyFcwj4/NsQlbR8CiFOzJzAag3lp97dV6eU+NlKj1mo+fhp7TIdajzk7jdTRqHQDE8zHvtImG
+	GGbO8cRXteDzOssbisBhhglPSequPciSMqzISCTp7XZEcxNjPp7ixf2aM4Y/QqGmlep6WTAVrfS
+	1zzS2XtGfwUIpJ7SJgHCiPe7YKjJYa0r6T8240ZqElZtMmA==
+X-Google-Smtp-Source: AGHT+IG/+N/yjgRsjvs5lpyq4N4GcuiWn9etp6Bkg0VAD9qD/LbAViqiw2wyTlx82ri6Am8KF7Bmyg==
+X-Received: by 2002:a05:6a00:e12:b0:73c:c11:b42e with SMTP id d2e1a72fcca58-74091afceacmr2720520b3a.20.1746511444956;
+        Mon, 05 May 2025 23:04:04 -0700 (PDT)
+Received: from toolbx.alistair23.me (2403-580b-97e8-0-82ce-f179-8a79-69f4.ip6.aussiebb.net. [2403:580b:97e8:0:82ce:f179:8a79:69f4])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-74058d7c155sm8352025b3a.14.2025.05.05.23.04.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 05 May 2025 23:04:04 -0700 (PDT)
+From: alistair23@gmail.com
+X-Google-Original-From: alistair.francis@wdc.com
+To: openembedded-devel@lists.openembedded.org
+Cc: alistair23@gmail.com,
+	Alistair Francis <alistair.francis@wdc.com>
+Subject: [meta-oe][PATCH] ktls-utils: Update to version 1.0
+Date: Tue,  6 May 2025 16:03:51 +1000
+Message-ID: <20250506060351.1270544-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 5 May 2025 22:38:33 -0700
-X-Gm-Features: ATxdqUGQuuh7HfvpKmHwNuRtqQQ3KGuUEYRhMkAFRuOgnLyd4Lt5CqrNOhumVT0
-Message-ID: <CAK5yBb8fOcB2e_sa3ZAYMG+_Y5DtjYUd+q8S8paSD-WyDxkamQ@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="0000000000009740cf0634710755"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 May 2025 05:38:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117335
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 May 2025 06:04:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117336
 
---0000000000009740cf0634710755
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Alistair Francis <alistair.francis@wdc.com>
 
-All,
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ ...PERMS-if-it-doesn-t-exist-to-fix-mus.patch |  3 +-
+ ...ac-Use-AC_CHECK_HEADER-instead-of-AC.patch | 36 +++++++++++++++++++
+ ...ktls-utils_0.11.bb => ktls-utils_1.0.0.bb} |  3 +-
+ 3 files changed, 39 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-kernel/ktls-utils/ktls-utils/0002-tlshd-configure.ac-Use-AC_CHECK_HEADER-instead-of-AC.patch
+ rename meta-oe/recipes-kernel/ktls-utils/{ktls-utils_0.11.bb => ktls-utils_1.0.0.bb} (87%)
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+diff --git a/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch b/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch
+index d27e2aa741..954b1393db 100644
+--- a/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch
++++ b/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch
+@@ -7,8 +7,7 @@ ALLPERMS exists in glibc, but not on musl, so we manually define
+ it if it doesn't exist. This fixes building on musl systems.
+ 
+ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+-Upstream-Status: Submitted
+-[https://github.com/oracle/ktls-utils/pull/88]
++Upstream-Status: Submitted [https://github.com/oracle/ktls-utils/pull/88]
+ ---
+  src/tlshd/config.c | 8 ++++++++
+  1 file changed, 8 insertions(+)
+diff --git a/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0002-tlshd-configure.ac-Use-AC_CHECK_HEADER-instead-of-AC.patch b/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0002-tlshd-configure.ac-Use-AC_CHECK_HEADER-instead-of-AC.patch
+new file mode 100644
+index 0000000000..6aabb77ee8
+--- /dev/null
++++ b/meta-oe/recipes-kernel/ktls-utils/ktls-utils/0002-tlshd-configure.ac-Use-AC_CHECK_HEADER-instead-of-AC.patch
+@@ -0,0 +1,36 @@
++From d170b04dcb8b2b28e370d8b18ffa1f593e8eec11 Mon Sep 17 00:00:00 2001
++From: Alistair Francis <alistair.francis@wdc.com>
++Date: Thu, 10 Apr 2025 13:15:16 +1000
++Subject: [PATCH] tlshd: configure.ac: Use AC_CHECK_HEADER instead of
++ AC_CHECK_FILE
++
++AC_CHECK_FILE doesn't work when cross-compiling [1], which breaks a lot of
++use cases (like OpenEmbedded for one). Autoconf supports AC_CHECK_HEADER
++which can be used instead and is more robust [2] so let's use that
++instead.
++
++1: https://www.gnu.org/software/autoconf/manual/autoconf-2.68/html_node/Files.html
++2: https://www.gnu.org/software/autoconf/manual/autoconf-2.69/html_node/Generic-Headers.html
++
++Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
++Upstream-Status: Submitted [https://github.com/oracle/ktls-utils/pull/90]
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 2c77fb1..c790d71 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -63,7 +63,7 @@ PKG_CHECK_MODULES([LIBNL_GENL3], libnl-genl-3.0 >= 3.1)
++ AC_SUBST([LIBNL_GENL3_CFLAGS])
++ AC_SUBST([LIBNL_GENL3_LIBS])
++ 
++-AC_CHECK_FILE([/usr/include/linux/quic.h],
+++AC_CHECK_HEADER([linux/quic.h],
++               [AC_CHECK_LIB([gnutls], [gnutls_handshake_set_secret_function],
++                             [AC_DEFINE([HAVE_GNUTLS_QUIC], [1], [Define to 1 if QUIC is found.])])])
++ 
++-- 
++2.49.0
++
+diff --git a/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.0.0.bb
+similarity index 87%
+rename from meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
+rename to meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.0.0.bb
+index 650b69fcd1..ff54d72bca 100644
+--- a/meta-oe/recipes-kernel/ktls-utils/ktls-utils_0.11.bb
++++ b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.0.0.bb
+@@ -7,10 +7,11 @@ RDEPENDS:${PN} += " gnutls"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d568123389d9a12625cca2b089b1728b"
+ 
+-SRCREV = "5c3314b5728b272cbaf0d98f4d521cca9610b6bf"
++SRCREV = "c787cd26330af457e1ca9cf43232db2c71c03154"
+ SRC_URI = " \
+ 	git://github.com/oracle/ktls-utils.git;nobranch=1;protocol=https \
+ 	file://0001-tlshd-Define-ALLPERMS-if-it-doesn-t-exist-to-fix-mus.patch \
++	file://0002-tlshd-configure.ac-Use-AC_CHECK_HEADER-instead-of-AC.patch \
+ 	"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.49.0
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
-
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 441
-unassigned or newcomer bugs.
-
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.2=E2=80=9D, =E2=80=9C5.3", "5.99" and "Future=
-", the more
-pressing/urgent issues being in "5.2" and then =E2=80=9C5.3=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---0000000000009740cf0634710755
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
-al">All,<br><br>The triage team is starting to try and collect up and class=
-ify bugs which a newcomer to the project would be able to work on in a way =
-which means people can find them. They&#39;re being listed on the triage pa=
-ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
-wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
-e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
-d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
-org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
-illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
-.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
-ea is these bugs should be straight forward for a person to help work on wh=
-o doesn&#39;t have deep experience with the project.  If anyone can help, p=
-lease take ownership of the bug and send patches!  If anyone needs help/adv=
-ice there are people on irc who can likely do so, or some of the more exper=
-ienced contributors will likely be happy to help too.<br><br>Also, the tria=
-ge team meets weekly and does its best to handle the bugs reported into the=
- Bugzilla. The number of people attending that meeting has fallen, as have =
-the number of people available to help fix bugs. One of the things we hear =
-users report is they don&#39;t know how to help. We (the triage team) are t=
-herefore going to start reporting out the currently 441 unassigned or newco=
-mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
- and again to help out with these.  Bugs are split into two types, &quot;tr=
-ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
-ents&quot; which are features we&#39;d want to add to the system.  There ar=
-e also roughly four different &quot;priority&quot; classes right now, =E2=
-=80=9C5.2=E2=80=9D, =E2=80=9C5.3&quot;, &quot;5.99&quot; and &quot;Future&q=
-uot;, the more pressing/urgent issues being in &quot;5.2&quot; and then =E2=
-=80=9C5.3=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
-g you would be able to help with either take ownership of the bug, or send =
-me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
- an e-mail with the bug number you would like and I will assign it to you (=
-please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
-_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
-ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
-s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
-al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
-al,sans-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---0000000000009740cf0634710755--
 
