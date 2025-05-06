@@ -2,187 +2,138 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 252DEC3ABAC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 260F0C3ABBF
 	for <webhook@archiver.kernel.org>; Tue,  6 May 2025 12:57:45 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.web10.70321.1746514434418387726
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+ by mx.groups.io with SMTP id smtpd.web10.69865.1746511270229408768
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 May 2025 23:53:54 -0700
+ Mon, 05 May 2025 23:01:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=pn0atTRM;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.180.131, mailfrom: ptak@qualcomm.com)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 545M6NGS014062
-	for <openembedded-devel@lists.openembedded.org>; Tue, 6 May 2025 06:53:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=DvVdVL803N32WdyE0ax4jePuBvXTtXUb6l1
-	Q0N9S6xQ=; b=pn0atTRMgoSYit+pKrfdxc29DoMHk1OrK6DavTrn31zs6XAofjh
-	PgMJH2+Ii0yuJcer3FTaNknOlF1N/L62ejoVamSjsiZjGSUDJXIZ+4zDnorUfKI9
-	deP3Ly4vB9WITbr5wsVdT0OBetwkG3QTDZtr7a+fOfD1uboyn7civ49ErYhWQ+b0
-	UJXr71Tgb9P17NNK/YEaCfVx9ELIuEwS2GqmX8yBm51vkmNtUOcnG7mLHAWMEad6
-	Cwq+5h0yMBF/ElqsJm75VrEiBWBTGcTQNBDziv/CmqIbwxF0lKwTavZfVV1j5knZ
-	iup4u1s7OOwpdDj3VpWlIRcmQml/8rm6w8A==
-Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46f5u4187m-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 06 May 2025 06:53:53 +0000 (GMT)
-Received: from pps.filterd (APBLRPPMTA01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTP id 5466rnkF022976
-	for <openembedded-devel@lists.openembedded.org>; Tue, 6 May 2025 06:53:49 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 46dc7kuj1q-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 06 May 2025 06:53:49 +0000
-Received: from APBLRPPMTA01.qualcomm.com (APBLRPPMTA01.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 5466rnnx022971
-	for <openembedded-devel@lists.openembedded.org>; Tue, 6 May 2025 06:53:49 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-ptak-hyd.qualcomm.com [10.213.96.58])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 5466rnsi022968
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 06 May 2025 06:53:49 +0000
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 2387883)
-	id F284711A9; Tue,  6 May 2025 12:23:48 +0530 (+0530)
-From: Pulkit Singh Tak <ptak@qti.qualcomm.com>
+ dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: lgo@pengutronix.de)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <lgo@pengutronix.de>)
+	id 1uCBMa-0001PA-B0; Tue, 06 May 2025 08:01:08 +0200
+Received: from dude03.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::39])
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <lgo@pengutronix.de>)
+	id 1uCBMa-001LRU-0T;
+	Tue, 06 May 2025 08:01:08 +0200
+Received: from lgo by dude03.red.stw.pengutronix.de with local (Exim 4.96)
+	(envelope-from <lgo@pengutronix.de>)
+	id 1uCBMa-0053cx-0F;
+	Tue, 06 May 2025 08:01:08 +0200
+From: =?UTF-8?B?TGVvbmFyZCBHw7ZocnM=?= <l.goehrs@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: quic_ptak@quicinc.com, quic_sssanjee@quicinc.com, vkaruchu@quicinc.com
-Subject: [meta-filesystems][PATCH] opencv: Added fix for Cluster Euclidean and Box Filter
-Date: Tue,  6 May 2025 12:23:44 +0530
-Message-Id: <20250506065344.146577-1-ptak@qti.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+Cc: =?UTF-8?q?Leonard=20G=C3=B6hrs?= <l.goehrs@pengutronix.de>
+Subject: [meta-oe][PATCH] bcu: upgrade 1.1.100 -> 1.1.115
+Date: Tue,  6 May 2025 08:00:57 +0200
+Message-Id: <20250506060057.1205551-1-l.goehrs@pengutronix.de>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Authority-Analysis: v=2.4 cv=KcfSsRYD c=1 sm=1 tr=0 ts=6819b201 cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=dt9VzEwgFbYA:10 a=NEAV23lmAAAA:8 a=COk6AnOGAAAA:8 a=LxRQ0vB3orv3utY-us0A:9
- a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-GUID: HLWdjk0wiMx5Cu106Pz8vkbGZwQAvr03
-X-Proofpoint-ORIG-GUID: HLWdjk0wiMx5Cu106Pz8vkbGZwQAvr03
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTA2MDA2NCBTYWx0ZWRfX+GkaaO/b/VZ9
- a2jirCSql8cwxOKmwQHXeMKGWqmkgKaPb4/Q6vsF3ghOG28zO1JWC+ETZgFLH4rceoxhmRpLO4q
- pK13HEHCzrTATZhE3pKlpzoL972OiUGas86CaSPJ88AL3jCh+PLM6dm0l1PvaodvFF1g1PkbGpg
- qyTC8PCmWXA29HUMX+aPgxEdoVpPtxs/p8wQX9UKr4NmVCaCyTzLrW/vRzjo42QFI4XKTHXn60N
- J9KrlTcTCi6vKeWOcLT2ywsw2dxDZqgtIB6gKITqBwHhnnHsmJTm54dKTYa2yqOMPWa7jzC6Hjm
- VaeNI112blZPyPZrZ8nDG4JHoA9J9Lx41hGXpAt6lnPAoUx/SZEQVIqysqeGptG7cGpleFl+uo+
- 6fH8td2t+tMXFMq1Y24bfkLGTvnySfCdsP99CxElgqVPviiKC19omBeaPEPOu9txZIJ7EyQu
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-06_03,2025-05-05_01,2025-02-21_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 suspectscore=0 bulkscore=0 mlxlogscore=999
- phishscore=0 impostorscore=0 priorityscore=1501 malwarescore=0 adultscore=0
- clxscore=1011 mlxscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2504070000
- definitions=main-2505060064
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: lgo@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 06 May 2025 12:57:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117350
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117349
 
-From: Pulkit Singh Tak <quic_ptak@quicinc.com>
+Version 1.1.115 is the first non-prerelease since 1.1.100.
 
-Updated FastCV libs hash to include fix for Cluster Euclidean and Box Filter
-and support for FastCV SVD API
+Changes between 1.1.100 and 1.1.115 include:
 
-Signed-off-by: Pulkit Singh Tak <quic_ptak@quicinc.com>
+  - All BCU settings will now be cleared by default after using the
+    `reset` command unless `-keep` is used.
+  - `remote_en` will be deasserted after using `onoff` command unless
+    `-keep` is used.
+  - Add i.MX6ULL support
+  - Add i.MX943 19x19 A0 and B1 EVK support
+
+Signed-off-by: Leonard Göhrs <l.goehrs@pengutronix.de>
 ---
- ...MLIST-FastCV-latest-libs-hash-update.patch | 50 +++++++++++++++++++
- .../recipes-support/opencv/opencv_4.11.0.bb   |  5 +-
- 2 files changed, 53 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-FROMLIST-FastCV-latest-libs-hash-update.patch
+ ...akeLists-do-not-use-vendored-libcurl.patch | 29 ++++++++++++-------
+ .../bcu/{bcu_1.1.100.bb => bcu_1.1.115.bb}    |  2 +-
+ 2 files changed, 19 insertions(+), 12 deletions(-)
+ rename meta-oe/recipes-support/bcu/{bcu_1.1.100.bb => bcu_1.1.115.bb} (94%)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv/0001-FROMLIST-FastCV-latest-libs-hash-update.patch b/meta-oe/recipes-support/opencv/opencv/0001-FROMLIST-FastCV-latest-libs-hash-update.patch
-new file mode 100644
-index 0000000000..2f969e1ede
---- /dev/null
-+++ b/meta-oe/recipes-support/opencv/opencv/0001-FROMLIST-FastCV-latest-libs-hash-update.patch
-@@ -0,0 +1,50 @@
-+From ba6eb8d95292f4631a3b8de09bfaa59e43c17226 Mon Sep 17 00:00:00 2001
-+From: adsha-quic <quic_adsha@quicinc.com>
-+Date: Wed, 16 Apr 2025 18:54:40 +0530
-+Subject: [PATCH] FROMLIST: Merge pull request #27214 from CodeLinaro:fastcv_lib_hash_update
-+
-+Signed-off-by: Alexander Smorkalov <alexander.smorkalov@opencv.ai>
-+Upstream-Status: Submitted [https://github.com/opencv/opencv_3rdparty/pull/94]
-+
-+---
-+ 3rdparty/fastcv/fastcv.cmake | 14 +++++++-------
-+ 1 file changed, 7 insertions(+), 7 deletions(-)
-+
-+diff --git a/3rdparty/fastcv/fastcv.cmake b/3rdparty/fastcv/fastcv.cmake
-+index 5c81c11300..6fee4ce4ce 100644
-+--- a/3rdparty/fastcv/fastcv.cmake
-++++ b/3rdparty/fastcv/fastcv.cmake
-+@@ -1,23 +1,23 @@
-+ function(download_fastcv root_dir)
-+ 
-+   # Commit SHA in the opencv_3rdparty repo
-+-  set(FASTCV_COMMIT "f4413cc2ab7233fdfc383a4cded402c072677fb0")
-++  set(FASTCV_COMMIT "8d86e68dad8b80b8575a8d3cf401d3ee96c24148")
-+ 
-+   # Define actual FastCV versions
-+   if(ANDROID)
-+     if(AARCH64)
-+       message(STATUS "Download FastCV for Android aarch64")
-+-      set(FCV_PACKAGE_NAME  "fastcv_android_aarch64_2024_12_11.tgz")
-+-      set(FCV_PACKAGE_HASH  "9dac41e86597305f846212dae31a4a88")
-++      set(FCV_PACKAGE_NAME  "fastcv_android_aarch64_2025_04_08.tgz")
-++      set(FCV_PACKAGE_HASH  "e028966a1d1b2f3f0bc5967d316e8b64")
-+     else()
-+       message(STATUS "Download FastCV for Android armv7")
-+-      set(FCV_PACKAGE_NAME  "fastcv_android_arm32_2024_12_11.tgz")
-+-      set(FCV_PACKAGE_HASH  "fe2d30334180b17e3031eee92aac43b6")
-++      set(FCV_PACKAGE_NAME  "fastcv_android_arm32_2025_04_08.tgz")
-++      set(FCV_PACKAGE_HASH  "6fc1e812a4b3ef392469d2283e037ffe")
-+     endif()
-+   elseif(UNIX AND NOT APPLE AND NOT IOS AND NOT XROS)
-+     if(AARCH64)
-+-      set(FCV_PACKAGE_NAME  "fastcv_linux_aarch64_2025_02_12.tgz")
-+-      set(FCV_PACKAGE_HASH  "33ac2a59cf3e7d6402eee2e010de1202")
-++      set(FCV_PACKAGE_NAME  "fastcv_linux_aarch64_2025_04_08.tgz")
-++      set(FCV_PACKAGE_HASH  "062a26639cd2788beee2e0dd8743d680")
-+     else()
-+       message("FastCV: fastcv lib for 32-bit Linux is not supported for now!")
-+     endif()
+diff --git a/meta-oe/recipes-support/bcu/bcu/0001-CMakeLists-do-not-use-vendored-libcurl.patch b/meta-oe/recipes-support/bcu/bcu/0001-CMakeLists-do-not-use-vendored-libcurl.patch
+index f4c0be19b6..bab1d1f301 100644
+--- a/meta-oe/recipes-support/bcu/bcu/0001-CMakeLists-do-not-use-vendored-libcurl.patch
++++ b/meta-oe/recipes-support/bcu/bcu/0001-CMakeLists-do-not-use-vendored-libcurl.patch
+@@ -1,6 +1,6 @@
+-From ef1aaeee984ab13dab5d46c73e9b207cbdf62c55 Mon Sep 17 00:00:00 2001
++From 678c32f867931fd9f410b6e46ea8d101714c7ed5 Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Leonard=20G=C3=B6hrs?= <l.goehrs@pengutronix.de>
+-Date: Wed, 20 Dec 2023 14:37:20 +0100
++Date: Tue, 6 May 2025 07:45:36 +0200
+ Subject: [PATCH] CMakeLists: do not use vendored libcurl
+ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+@@ -10,14 +10,14 @@ Upstream-Status: Inappropriate [upstream ticket https://github.com/nxp-imx/bcu/i
+ 
+ Signed-off-by: Leonard Göhrs <l.goehrs@pengutronix.de>
+ ---
+- CMakeLists.txt | 5 +++--
+- 1 file changed, 3 insertions(+), 2 deletions(-)
++ CMakeLists.txt | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
+ 
+ diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 3475179..bfecdb0 100644
++index 42158a2..ac840fc 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -17,15 +17,16 @@ pkg_check_modules(LIBFTDI REQUIRED libftdi1)
++@@ -17,17 +17,17 @@ pkg_check_modules(LIBFTDI REQUIRED libftdi1)
+  pkg_check_modules(LIBYAML REQUIRED yaml-0.1)
+  pkg_check_modules(LIBOPENSSL REQUIRED openssl)
+  pkg_check_modules(LIBUSB REQUIRED libusb-1.0)
+@@ -30,9 +30,16 @@ index 3475179..bfecdb0 100644
+  message("operation system is ${CMAKE_SYSTEM}")
+  if (LINUX)
+          add_executable(bcu bcu.c port.c chip.c board.c bcu_parser.c bcu_yaml.c bcu_https.c bcu_ftdi_eeprom.c)
+-         link_directories(${LIBUSB_LIBRARY_DIRS} ${LIBFTDI_LIBRARY_DIRS} ${LIBYAML_LIBRARY_DIRS})
+--        target_link_libraries (bcu ${LIBUSB_LIBRARIES} ${LIBFTDI_LIBRARIES} ${LIBYAML_LIBRARIES} ${PROJECT_SOURCE_DIR}/libcurl/build.bcu/lib/libcurl.a -lpthread -lssl -lcrypto -lm)
+-+        target_link_libraries (bcu ${LIBUSB_LIBRARIES} ${LIBFTDI_LIBRARIES} ${LIBYAML_LIBRARIES} -lcurl -lpthread -lssl -lcrypto -lm)
+-         execute_process( COMMAND ${PROJECT_SOURCE_DIR}/create_version_h.sh ${PROJECT_SOURCE_DIR}
+-                          COMMAND ${PROJECT_SOURCE_DIR}/build_libs.sh ${PROJECT_SOURCE_DIR})
++-        link_directories(${LIBUSB_LIBRARY_DIRS} ${LIBFTDI_LIBRARY_DIRS} ${LIBYAML_LIBRARY_DIRS})
++-        target_link_libraries (bcu ${LIBUSB_LIBRARIES} ${LIBFTDI_LIBRARIES} ${LIBYAML_LIBRARIES} ${PROJECT_SOURCE_DIR}/libcurl/build.bcu/lib/libcurl.a -lpthread -lssl -lcrypto -lm -ldl)
++-        execute_process( COMMAND ${PROJECT_SOURCE_DIR}/create_version_h.sh ${PROJECT_SOURCE_DIR}
++-                         COMMAND ${PROJECT_SOURCE_DIR}/build_libs.sh ${PROJECT_SOURCE_DIR})
+++        link_directories(${LIBUSB_LIBRARY_DIRS} ${LIBFTDI_LIBRARY_DIRS} ${LIBYAML_LIBRARY_DIRS} ${LIBCURL_LIBRARY_DIRS})
+++        target_link_libraries (bcu ${LIBUSB_LIBRARIES} ${LIBFTDI_LIBRARIES} ${LIBYAML_LIBRARIES} ${LIBCURL_LIBRARIES} -lpthread -lssl -lcrypto -lm -ldl)
+++        execute_process( COMMAND ${PROJECT_SOURCE_DIR}/create_version_h.sh ${PROJECT_SOURCE_DIR})
+          install(TARGETS bcu DESTINATION bin)
++ elseif (MACOS)
++         add_executable(bcu_mac bcu.c port.c chip.c board.c bcu_parser.c bcu_yaml.c bcu_https.c bcu_ftdi_eeprom.c)
 +-- 
-+2.34.1
++2.39.5
 +
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.11.0.bb b/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
-index 61dc681a39..8a5821e2f1 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
-@@ -16,7 +16,7 @@ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
- SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
- SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
- SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
--SRCREV_fastcv = "f4413cc2ab7233fdfc383a4cded402c072677fb0"
-+SRCREV_fastcv = "8d86e68dad8b80b8575a8d3cf401d3ee96c24148"
- 
- 
- SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv"
-@@ -26,7 +26,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=ht
-            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=git/vgg;name=vgg;protocol=https \
-            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=git/face;name=face;protocol=https \
-            git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=git/wechat_qrcode;name=wechat-qrcode;protocol=https \
--           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250212;destsuffix=git/fastcv;name=fastcv;protocol=https \
-+           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250410;destsuffix=git/fastcv;name=fastcv;protocol=https  \
-            file://0003-To-fix-errors-as-following.patch \
-            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
-            file://0001-Dont-use-isystem.patch \
-@@ -35,6 +35,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=ht
-            file://0008-Do-not-embed-build-directory-in-binaries.patch \
-            file://0001-core-fixed-VSX-intrinsics-implementation.patch \
-            file://0001-FROMLIST-Switch-to-static-instance-of-FastCV-on-Linux.patch \
-+           file://0001-FROMLIST-FastCV-latest-libs-hash-update.patch \ \
+diff --git a/meta-oe/recipes-support/bcu/bcu_1.1.100.bb b/meta-oe/recipes-support/bcu/bcu_1.1.115.bb
+similarity index 94%
+rename from meta-oe/recipes-support/bcu/bcu_1.1.100.bb
+rename to meta-oe/recipes-support/bcu/bcu_1.1.115.bb
+index bf6e4f4b69..897e7031ca 100644
+--- a/meta-oe/recipes-support/bcu/bcu_1.1.100.bb
++++ b/meta-oe/recipes-support/bcu/bcu_1.1.115.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=884d48c2aa7b82e1ad4a33909fab24b6"
+ SRC_URI = "git://github.com/nxp-imx/bcu;protocol=https;branch=master \
+            file://0001-CMakeLists-do-not-use-vendored-libcurl.patch \
             "
- SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
+-SRCREV = "c34d89b29f3d0d12793cd78b194d2f1d11728baf"
++SRCREV = "f081c69c26e330cf03ec790051c415c4716509d9"
+ 
+ S = "${WORKDIR}/git"
  
 -- 
-2.34.1
+2.39.5
 
 
