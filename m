@@ -1,257 +1,120 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2C1AC3ABBC
-	for <webhook@archiver.kernel.org>; Tue,  6 May 2025 20:47:08 +0000 (UTC)
-Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
- by mx.groups.io with SMTP id smtpd.web10.624.1746564423961539884
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00104C3ABC5
+	for <webhook@archiver.kernel.org>; Wed,  7 May 2025 08:50:01 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.web10.3965.1746607796987197307
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 May 2025 13:47:05 -0700
+ Wed, 07 May 2025 01:49:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=MwmsSOSS;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-256628-20250506204659bc6e976c46627671c3-imfgek@rts-flowmailer.siemens.com)
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 20250506204659bc6e976c46627671c3
-        for <openembedded-devel@lists.openembedded.org>;
-        Tue, 06 May 2025 22:46:59 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=HsmR3PpscvqJT300TI0eKNqpL4MTm1cao5J+c40H0vM=;
- b=MwmsSOSS16ddkp0+m1qGiChvd7VymXVcd4rS3JHq6QXytGfx3pQK3mdx7QmNlk/kFKKnog
- xifEMMBAh+ImImponmWbKx/eJgJVEVKXLHR+bx29t5pKoouue5Y7Fp+/m95xCDBzSIicE9zL
- t7t3aUKEryBBkzmm3I7edepT2LvNau43ButHZHyjKOkzUMRgCHTp7AJuCHigvgDNzky0hd+C
- lwolf0AKNZ8ikt/F1DoLlTWSdnVssQNkvglbELwgO21PZPCB9a9V5yjC1T7XsRgPPDmlXtEf
- 1XyMkWijEh5kEBt4OaF7PT7jf/x+QSGfnZvKDYQ2pZ3POHjXlm/+nENA==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@smile.fr header.s=google header.b=f4agVlGw;
+ spf=pass (domain: smile.fr, ip: 209.85.128.44, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-43cf680d351so3517845e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 May 2025 01:49:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1746607795; x=1747212595; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=6nCcSFd/XIMqRfLDKIjoSKG+l0/xbK0ien3R+Bo5PDo=;
+        b=f4agVlGwzNFFx4gFqx8TES5OP0zDBV9Hlnn1X0FwNVY9Mx12c+CrKzstcjseg1KOn0
+         bXRN6LgN62gPzYKj5UeSP7MOtkQai4jdu3Mv/+NSvMvQcrMMwPvTXaYM/rEAmCChNSiD
+         LEUY4S9PaSnbmJG4PXgcK7wzWgamZwCx7Y5cQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746607795; x=1747212595;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=6nCcSFd/XIMqRfLDKIjoSKG+l0/xbK0ien3R+Bo5PDo=;
+        b=RQUZZEjz3Tf0cwQao6FYS4jbaYaztIp8YqxX6LBSLyZFykUzcc3OoqGXeYQnMwhei6
+         KUSn6XTtNis85Ign0gs8RO75BZJJD/9/qicfoX8B/5UH/6ICmrN9xt7Ctu8qWjZR2Xo1
+         423bauoEOqe/oQKCb3fKrjcxEpKf7j72t0o11Io69YHU+8Lc5CO8QVG9b3BBAbt/nJ3l
+         pqvL5adLlgB6ms2F8XVMniM8ZlMmGeCQT8t2zqV96i4kBvfC+6AKb6zCaIaHT4fHb+it
+         Su04uAi1mzfI3z840N30WWQy8okQuUexzvbyf6Dt+eshUmvraM1XqFWF9tll6PA70y2f
+         BslA==
+X-Gm-Message-State: AOJu0Yybp4BV/ytCKdO2GrEkZh6tYuYs/ML6VhNDnSoyN1LUG8mK2QjU
+	J5PIwc2J2yPssntQ2BlR2vI029twiFUIo8N76wDFU03rfoJ31WEsIwsNjuunHOZxtGRMbEhOEHE
+	H
+X-Gm-Gg: ASbGncsuBrVO+SlGMlEQZ8qa9x3XENf99sP/wZQ8cm80NGp92VZiYBhr7BqHfOMHN0y
+	JMnH9uDJLizy7Rx+5nqkCNlQk0CNQ1japVY2rIHy0coMS5lKu10GXAloikYPWeoTfxD96ZynQVi
+	g2U09mJ4o+eXRPMN7AaqbIbc9lmUkvevqfihPAgxgr/xxqwPp5U+HcJlG1l/r4EJSfeRYsYpQKC
+	YV1AbdK5gnkVdNJeIlgkGi8G6dqDYbqQDyxHjWRGv4FJdsjqKkkTOApWF+s64SBmz4oQRlY2pnK
+	5EhrKhwokKtJV7WCKGh1PNbG/tcBZmZe/00r0QNHo0CbWmiPavbAA3ZCkaSt9SBjZ+6DMrGjtxZ
+	YEvStqiewCSXLv/wsYWcNy1RiYRSEOIor0CTo3jjkYa1vxNDF
+X-Google-Smtp-Source: AGHT+IFlD3A7kpaaACHzlVBFWI2iA6FC9O4u95qEMS6TJFqdnBoyLLz46Sig2mI4Ps5PnI/fAK2g9g==
+X-Received: by 2002:a05:600c:378c:b0:43c:f3e1:a729 with SMTP id 5b1f17b1804b1-441d3a6e198mr20501445e9.12.1746607794969;
+        Wed, 07 May 2025 01:49:54 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.home (2a01cb001331aa001f337aee3c499519.ipv6.abo.wanadoo.fr. [2a01:cb00:1331:aa00:1f33:7aee:3c49:9519])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-441d434644asm24008615e9.9.2025.05.07.01.49.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 07 May 2025 01:49:54 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [PATCH] fontforge: patch CVE-2024-25081 and CVE-2024-25082
-Date: Tue,  6 May 2025 22:46:08 +0200
-Message-Id: <20250506204608.1793419-1-peter.marko@siemens.com>
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-oe][PATCH] sblim-sfcb: use -std=gnu17 for compilation
+Date: Wed,  7 May 2025 10:49:38 +0200
+Message-Id: <20250507084938.714258-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 May 2025 20:47:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117356
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 May 2025 08:50:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117357
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Yoann Congal <yoann.congal@smile.fr>
 
-Pick commit from PR [1] linked from [2] and [3] which mlso entions both
-these CVEs.
+sblim-sfcb does not build under -std=gnu23 which is the default of
+gcc15. Forcing -std=gnu17 fixes these build errors:
+|../sblim-sfcb-1.4.9/providerMgr.c: In function 'lookupProviders':
+|../sblim-sfcb-1.4.9/providerMgr.c:374:11: error: too many arguments to function 'UtilFactory->newList'; expected 0, have 2
+|  374 |     lst = UtilFactory->newList(NULL, NULL);
+|      |           ^~~~~~~~~~~          ~~~~
+|In file included from ../sblim-sfcb-1.4.9/providerRegister.h:31,
+|                 from ../sblim-sfcb-1.4.9/providerMgr.c:29:
+|.../tmp/work/core2-64-poky-linux/sblim-sfcb/1.4.9/recipe-sysroot/usr/include/sfcCommon/utilft.h:202:23: note: declared here
+|  202 |     UtilList       *(*newList) ();
+|      |                       ^~~~~~~
+|../sblim-sfcb-1.4.9/providerMgr.c: In function 'getAssocProviders':
+|../sblim-sfcb-1.4.9/providerMgr.c:661:11: error: too many arguments to function 'UtilFactory->newList'; expected 0, have 2
+|  661 |     lst = UtilFactory->newList(NULL, NULL);
+|      |           ^~~~~~~~~~~          ~~~~
+| [...]
+|../sblim-sfcb-1.4.9/providerMgr.c: In function '_getConstClassChildren':
+|../sblim-sfcb-1.4.9/providerMgr.c:1896:12: error: too many arguments to function 'UtilFactory->newList'; expected 0, have 2
+| 1896 |       ul = UtilFactory->newList(NULL, NULL);
+|      |            ^~~~~~~~~~~          ~~~~
+| [...]
+|../sblim-sfcb-1.4.9/providerMgr.c: In function '_getAssocClassNames':
+|../sblim-sfcb-1.4.9/providerMgr.c:1945:12: error: too many arguments to function 'UtilFactory->newList'; expected 0, have 2
+| 1945 |       ul = UtilFactory->newList(NULL, NULL);
+|      |            ^~~~~~~~~~~          ~~~~
+| [...]
+|make[2]: Leaving directory '.../tmp/work/core2-64-poky-linux/sblim-sfcb/1.4.9/build'
+|make[2]: *** [Makefile:1853: libsfcBrokerCore_la-providerMgr.lo] Error 1
+|make[1]: Leaving directory '.../tmp/work/core2-64-poky-linux/sblim-sfcb/1.4.9/build'
+|make[1]: *** [Makefile:2060: all-recursive] Error 1
+|make: *** [Makefile:1112: all] Error 2
+|ERROR: oe_runmake failed
 
-[1] https://github.com/fontforge/fontforge/pull/5367
-[2] https://nvd.nist.gov/vuln/detail/CVE-2024-25081
-[3] https://nvd.nist.gov/vuln/detail/CVE-2024-25082
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../CVE-2024-25081_CVE-2024-25082.patch       | 181 ++++++++++++++++++
- .../fontforge/fontforge_20230101.bb           |   1 +
- 2 files changed, 182 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2024-25081_CVE-2024-25082.patch
+ meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2024-25081_CVE-2024-25082.patch b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2024-25081_CVE-2024-25082.patch
-new file mode 100644
-index 0000000000..40f85e9f33
---- /dev/null
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2024-25081_CVE-2024-25082.patch
-@@ -0,0 +1,181 @@
-+From 216eb14b558df344b206bf82e2bdaf03a1f2f429 Mon Sep 17 00:00:00 2001
-+From: Peter Kydas <pk@canva.com>
-+Date: Tue, 6 Feb 2024 20:03:04 +1100
-+Subject: [PATCH] fix splinefont shell command injection (#5367)
-+
-+CVE: CVE-2024-25081
-+CVE: CVE-2024-25082
-+Upstream-Status: Backport [https://github.com/fontforge/fontforge/commit/216eb14b558df344b206bf82e2bdaf03a1f2f429]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ fontforge/splinefont.c | 123 +++++++++++++++++++++++++++++------------
-+ 1 file changed, 89 insertions(+), 34 deletions(-)
-+
-+diff --git a/fontforge/splinefont.c b/fontforge/splinefont.c
-+index 239fdc035..647daee10 100644
-+--- a/fontforge/splinefont.c
-++++ b/fontforge/splinefont.c
-+@@ -788,11 +788,14 @@ return( name );
-+ 
-+ char *Unarchive(char *name, char **_archivedir) {
-+     char *dir = getenv("TMPDIR");
-+-    char *pt, *archivedir, *listfile, *listcommand, *unarchivecmd, *desiredfile;
-++    char *pt, *archivedir, *listfile, *desiredfile;
-+     char *finalfile;
-+     int i;
-+     int doall=false;
-+     static int cnt=0;
-++    gchar *command[5];
-++    gchar *stdoutresponse = NULL;
-++    gchar *stderrresponse = NULL;
-+ 
-+     *_archivedir = NULL;
-+ 
-+@@ -827,18 +830,30 @@ return( NULL );
-+     listfile = malloc(strlen(archivedir)+strlen("/" TOC_NAME)+1);
-+     sprintf( listfile, "%s/" TOC_NAME, archivedir );
-+ 
-+-    listcommand = malloc( strlen(archivers[i].unarchive) + 1 +
-+-			strlen( archivers[i].listargs) + 1 +
-+-			strlen( name ) + 3 +
-+-			strlen( listfile ) +4 );
-+-    sprintf( listcommand, "%s %s %s > %s", archivers[i].unarchive,
-+-	    archivers[i].listargs, name, listfile );
-+-    if ( system(listcommand)!=0 ) {
-+-	free(listcommand); free(listfile);
-+-	ArchiveCleanup(archivedir);
-+-return( NULL );
-++    command[0] = archivers[i].unarchive;
-++    command[1] = archivers[i].listargs;
-++    command[2] = name;
-++    command[3] = NULL; // command args need to be NULL-terminated
-++
-++    if ( g_spawn_sync(
-++                      NULL,
-++                      command,
-++                      NULL,
-++                      G_SPAWN_SEARCH_PATH, 
-++                      NULL, 
-++                      NULL, 
-++                      &stdoutresponse, 
-++                      &stderrresponse, 
-++                      NULL, 
-++                      NULL
-++                      ) == FALSE) { // did not successfully execute
-++      ArchiveCleanup(archivedir);
-++      return( NULL );
-+     }
-+-    free(listcommand);
-++    // Write out the listfile to be read in later
-++    FILE *fp = fopen(listfile, "wb");
-++    fwrite(stdoutresponse, strlen(stdoutresponse), 1, fp);
-++    fclose(fp);
-+ 
-+     desiredfile = ArchiveParseTOC(listfile, archivers[i].ars, &doall);
-+     free(listfile);
-+@@ -847,22 +862,28 @@ return( NULL );
-+ return( NULL );
-+     }
-+ 
-+-    /* I tried sending everything to stdout, but that doesn't work if the */
-+-    /*  output is a directory file (ufo, sfdir) */
-+-    unarchivecmd = malloc( strlen(archivers[i].unarchive) + 1 +
-+-			strlen( archivers[i].listargs) + 1 +
-+-			strlen( name ) + 1 +
-+-			strlen( desiredfile ) + 3 +
-+-			strlen( archivedir ) + 30 );
-+-    sprintf( unarchivecmd, "( cd %s ; %s %s %s %s ) > /dev/null", archivedir,
-+-	    archivers[i].unarchive,
-+-	    archivers[i].extractargs, name, doall ? "" : desiredfile );
-+-    if ( system(unarchivecmd)!=0 ) {
-+-	free(unarchivecmd); free(desiredfile);
-+-	ArchiveCleanup(archivedir);
-+-return( NULL );
-++    command[0] = archivers[i].unarchive;
-++    command[1] = archivers[i].extractargs;
-++    command[2] = name;
-++    command[3] = doall ? "" : desiredfile;
-++    command[4] = NULL;
-++
-++    if ( g_spawn_sync(
-++                      (gchar*)archivedir,
-++                      command,
-++                      NULL,
-++                      G_SPAWN_SEARCH_PATH, 
-++                      NULL, 
-++                      NULL, 
-++                      &stdoutresponse, 
-++                      &stderrresponse, 
-++                      NULL, 
-++                      NULL
-++                      ) == FALSE) { // did not successfully execute
-++      free(desiredfile);
-++      ArchiveCleanup(archivedir);
-++      return( NULL );
-+     }
-+-    free(unarchivecmd);
-+ 
-+     finalfile = malloc( strlen(archivedir) + 1 + strlen(desiredfile) + 1);
-+     sprintf( finalfile, "%s/%s", archivedir, desiredfile );
-+@@ -885,20 +906,54 @@ struct compressors compressors[] = {
-+ 
-+ char *Decompress(char *name, int compression) {
-+     char *dir = getenv("TMPDIR");
-+-    char buf[1500];
-+     char *tmpfn;
-+-
-++    gchar *command[4];
-++    gint stdout_pipe;
-++    gchar buffer[4096];
-++    gssize bytes_read;
-++    GByteArray *binary_data = g_byte_array_new();
-++    
-+     if ( dir==NULL ) dir = P_tmpdir;
-+     tmpfn = malloc(strlen(dir)+strlen(GFileNameTail(name))+2);
-+     strcpy(tmpfn,dir);
-+     strcat(tmpfn,"/");
-+     strcat(tmpfn,GFileNameTail(name));
-+     *strrchr(tmpfn,'.') = '\0';
-+-    snprintf( buf, sizeof(buf), "%s < %s > %s", compressors[compression].decomp, name, tmpfn );
-+-    if ( system(buf)==0 )
-+-return( tmpfn );
-+-    free(tmpfn);
-+-return( NULL );
-++
-++    command[0] = compressors[compression].decomp;
-++    command[1] = "-c";
-++    command[2] = name;
-++    command[3] = NULL;
-++
-++    // Have to use async because g_spawn_sync doesn't handle nul-bytes in the output (which happens with binary data)
-++    if (g_spawn_async_with_pipes(
-++      NULL, 
-++      command, 
-++      NULL, 
-++      G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH,
-++      NULL, 
-++      NULL,  
-++      NULL,
-++      NULL, 
-++      &stdout_pipe, 
-++      NULL, 
-++      NULL) == FALSE) {
-++      //command has failed
-++      return( NULL );
-++    }
-++
-++    // Read binary data from pipe and output to file
-++    while ((bytes_read = read(stdout_pipe, buffer, sizeof(buffer))) > 0) {
-++        g_byte_array_append(binary_data, (guint8 *)buffer, bytes_read);
-++    }
-++    close(stdout_pipe);
-++
-++    FILE *fp = fopen(tmpfn, "wb");
-++    fwrite(binary_data->data, sizeof(gchar), binary_data->len, fp);
-++    fclose(fp);
-++    g_byte_array_free(binary_data, TRUE);
-++
-++		return(tmpfn);
-+ }
-+ 
-+ static char *ForceFileToHaveName(FILE *file, char *exten) {
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
-index 31dd495fd7..d470ff12d4 100644
---- a/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
-@@ -20,6 +20,7 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
-            file://0001-fontforgeexe-Use-env-to-find-fontforge.patch \
-            file://0001-cmake-Use-alternate-way-to-detect-libm.patch \
-            file://0001-Fix-Translations-containing-invalid-directives-hs.patch \
-+           file://CVE-2024-25081_CVE-2024-25082.patch \
- "
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
+index 622c5ce07c..591321b7e9 100644
+--- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
++++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
+@@ -44,6 +44,8 @@ SYSTEMD_AUTO_ENABLE = "enable"
  
+ LDFLAGS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' -Wl,--allow-shlib-undefined ', '', d)}"
+ 
++CFLAGS += "-std=gnu17"
++
+ EXTRA_OECONF = '--enable-debug \
+                 --enable-ssl \
+                 --enable-pam \
 
