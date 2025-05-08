@@ -1,93 +1,89 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D90C3C3ABC6
-	for <webhook@archiver.kernel.org>; Thu,  8 May 2025 19:52:16 +0000 (UTC)
-Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
- by mx.groups.io with SMTP id smtpd.web10.5220.1746733929133410806
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 923F0C3ABC9
+	for <webhook@archiver.kernel.org>; Thu,  8 May 2025 22:35:39 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.web10.1589.1746743731449772387
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 May 2025 12:52:09 -0700
+ Thu, 08 May 2025 15:35:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
-Received: from fwd73.aul.t-online.de (fwd73.aul.t-online.de [10.223.144.99])
-	by mailout12.t-online.de (Postfix) with SMTP id D82EC113F
-	for <openembedded-devel@lists.openembedded.org>; Thu,  8 May 2025 21:52:06 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([79.219.236.121]) by fwd73.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1uD7Hp-2S7LQP0; Thu, 8 May 2025 21:52:05 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@smile.fr header.s=google header.b=DJ1LLCh2;
+ spf=pass (domain: smile.fr, ip: 209.85.128.46, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-43d0618746bso11434895e9.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 15:35:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1746743729; x=1747348529; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=s8XH1vbakpzXSPCczOY5MH7Ky3Y/6+qEkVgoiGp9Piw=;
+        b=DJ1LLCh2LIqnPKn7PetVYa3VknsxbDhxkxhab8QI/58sZj1tu7ZgW0j0fJLn9ik225
+         6ti5K2dbvLr2tN5Ux9xzNIdbrDIyzHfWb+qbeT+UnRStdJFfxnueaoLre+ZzU3JJxrvM
+         hZLzzpN2Dhs7CknRwFU7m/ZaKOaPvnRel+Orc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746743729; x=1747348529;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=s8XH1vbakpzXSPCczOY5MH7Ky3Y/6+qEkVgoiGp9Piw=;
+        b=uua1yQO/9vUiQXJ3yHrC+kFZes3XgXrwkWC3pHnvvCYiPz5v7w8nCjWiiNISPNPutA
+         x31Oo/BbIB+abyjN/UfGyD5YxvwGNTn4Vm900CzfiSrIPF9shVVXjDa9rILPOed2CGav
+         0yhedSuWI/XlIRBBoXya9x5N90W4rv8atDf0t9EGxs2ZK8IULuPH+6eBLRDB/A2hOmBj
+         eAUD1R5pMI1dHpSCYR7c6Q9OuYSKd5s7Ty93aVYSz01OP7Et07hPbNhb1zdEx1mAcnBV
+         MbX6bD+V/v4pnBzn+6E/MbTZn9+0QiR/+2xFIqBSwFy+v8YGlGLpN6Z2ah5U8Rc5Jji5
+         YH2A==
+X-Gm-Message-State: AOJu0Ywa95FkP+TaXsjyzDy3bmF25dY5YrtufJeU8/wZw6sclTwd27NX
+	WI22kAvIXy38m3VKc/LRkRTja0G0CHo4ZqVk4wMe9Q+Z8S4TMqqxxlDDWAMdGJoFbRkzOImURNv
+	L
+X-Gm-Gg: ASbGncuE+GnLXxaBfGrWUoOUsYGgOoUdixIiy34zfv7BCuM7ngWjDMpmo8fjcm5ozDZ
+	cx1DQzkSWCufmuzGVzr3B2z4lXGRCvvS3fqx4ySt7NNHbdOsSVbj8d4ctaq+NDW4NjbTa/FN3fw
+	we4uJKAWQ3i4qYBzCLFaXaAB/NkR/KOTzKvbQU3X2X6CbM+jeSSmJL/oWpSZwcxS+b90BTkN4jz
+	6x8ZyH5esImvJaysbqJy9SEEvPjdHf9DscSp7HfaQC7dYdrKr21tiWxo5ZNYzIlPDROLwYMbOek
+	Ha5DVyND0jIQ7d0ns6EzTvoFtAS8i40u5K6P7dNQ7zjqQG1ThqxfunUQmg+OMM7OuWwK9kZ6SeP
+	OALlgUxM24tLMEiPaf1wAsu/e6lC0kdsTwCBlhuFV0TlTxikv
+X-Google-Smtp-Source: AGHT+IFooMwDdCMIoHF2WTEdSpGnG1auay88wriEXKZzNRkLq8PObb+OXhrkPfWRZRjLjWzBbuM44A==
+X-Received: by 2002:a05:600c:628c:b0:43c:f689:dd with SMTP id 5b1f17b1804b1-442d6d71df0mr7428315e9.19.1746743729042;
+        Thu, 08 May 2025 15:35:29 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.home (2a01cb001331aa0087b736f9b546e683.ipv6.abo.wanadoo.fr. [2a01:cb00:1331:aa00:87b7:36f9:b546:e683])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-442cd34bd79sm50511715e9.23.2025.05.08.15.35.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 08 May 2025 15:35:28 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] pipewire: update 1.4.1 -> 1.4.2
-Date: Thu,  8 May 2025 21:52:00 +0200
-Message-ID: <20250508195200.928090-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.49.0
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-webserver]][PATCH 1/2] hiawatha: update HOMEPAGE
+Date: Fri,  9 May 2025 00:35:13 +0200
+Message-Id: <20250508223514.999569-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1746733925-EB7FC49F-8C8D5395/0/0 CLEAN NORMAL
-X-TOI-MSGID: ed53240b-c766-4fe8-bb7b-5d5ba680b8e3
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 19:52:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117368
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 22:35:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117370
 
-PipeWire 1.4.2 (2025-04-14)
+From: Yoann Congal <yoann.congal@smile.fr>
 
-This is a bugfix release that is API and ABI compatible with
-previous 1.x releases.
+As noted in 11.7 changelog: https://hiawatha.leisink.net/changelog
+> All references to http://www.hiawatha-webserver.org/ changed to
+> https://hiawatha.leisink.net/.
 
-Highlights
-  - Do extra checks for MIDI to avoid 100% CPU usage on older kernels.
-  - Fix some potential crashes in POD builder.
-  - pw-cat streaming improvements on stdout/stdin.
-  - Small fixes and improvements.
-
-PipeWire
-  - Make the service files depend on DBus to avoid startup races.
-
-SPA
-  - Do extra checks for MIDI to avoid 100% CPU usage on older kernels.
-  - Use Header metadata by default in videoadapter.
-  - Handle set_format result from v4l2 better.
-  - Handle crash when POD builder overflows in the filter.
-  - Work around a libebur128 bug. (#4646)
-
-Tools
-  - pw-cat prefers AU format when streaming on stdout/stdin. (#4629)
-  - Improve pw-cat verbose sndfile format debug.
-  - Add the missing --channel-map long option to pw-loopback.
-
-GStreamer
-  - Fix a leak in the deviceprovider. (#4616)
-  - Fix negotiation and make renegotiation better.
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../pipewire/{pipewire_1.4.1.bb =3D> pipewire_1.4.2.bb}           | 2 +-
+ meta-webserver/recipes-httpd/hiawatha/hiawatha_11.2.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.4.1.bb =3D=
-> pipewire_1.4.2.bb} (99%)
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.b=
-b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.2.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.2.bb
-index e1cf2a55ba..2af16aad3e 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.2.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "2eb8cf5dc780ca22b94545f1254497a428c412f5"
-+SRCREV =3D "d20a1523b6770dfa93a270bdda5d7c800d7ec191"
- BRANCH =3D "${@oe.utils.trim_version('${PV}', 2)}"
- SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-${BRANCH};protocol=3Dhttps"
-=20
---=20
-2.49.0
-
+diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.2.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.2.bb
+index 243017d593..169e385da6 100644
+--- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.2.bb
++++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.2.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Lightweight secure web server"
+-HOMEPAGE = "http://www.hiawatha-webserver.org"
++HOMEPAGE = "https://hiawatha.leisink.net/"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+ DEPENDS = "libxml2 libxslt virtual/crypt"
 
