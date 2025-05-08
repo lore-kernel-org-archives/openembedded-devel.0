@@ -1,111 +1,93 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1161C3ABC0
-	for <webhook@archiver.kernel.org>; Thu,  8 May 2025 16:14:25 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web10.108.1746720858451156772
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D90C3C3ABC6
+	for <webhook@archiver.kernel.org>; Thu,  8 May 2025 19:52:16 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web10.5220.1746733929133410806
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 May 2025 09:14:18 -0700
+ Thu, 08 May 2025 12:52:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=FXD1BjGM;
- spf=pass (domain: smile.fr, ip: 209.85.128.46, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-43edecbfb94so12273295e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 09:14:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1746720855; x=1747325655; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=rQWaRCk4nv56pFPLbbPlmmZNIO5elOi2w+Hjfzx8rdc=;
-        b=FXD1BjGMwD7o1EcOwAXXKsKqE5XHKBk9LADN7/hVEw5CPwAnrQ7NbDPuXdyw0rbWni
-         MwJAUs5If7F3osXeW4dBC+76Ib6thAlQmkET4T4SM23wH5QhBzJmH4Pn27y1eALoMQrT
-         /dhioJD45YtD8SuNfWN24hcY6BwRSI7L8Ei4o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746720855; x=1747325655;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=rQWaRCk4nv56pFPLbbPlmmZNIO5elOi2w+Hjfzx8rdc=;
-        b=BZKnzQo4y6WR41bhwaVNlgCmIProDBZG3TyAm1EdM3yHlKadYdeNaMBf1lypqpH53e
-         EHpM38dc8kE8mSvt2m5oMsZglFkr7ZAbwVuaDRiMoCxFMD6WzPrzra1VI2jUa9jMT0kQ
-         MBpugnif8eYFLVsUbwTSnLsbOJHsNrRyIxv8JnJqXZSD3uvMnN123HQX2s8PRw18QTkZ
-         VDshSJCGRgGB4idnAhpPMSz2vEU0PL4xIs0On1yLc/kt8KE07m1Qj2gnU2lMw8EFayZI
-         dcoPVOMnxG9vN0MqBLlKnTB7J8N4cXbJJKPSgC4cPm4sE0IIVHnmRDSsN+aYAbtDFvzl
-         +eaw==
-X-Gm-Message-State: AOJu0YwFWuo4rWXvQxsvSZiDxrP+eJZT1PJ8gxF14Xy14xo4PHwZV/u4
-	N4qybvI1ZP1u6UNKEt8cTCLv0fLalP6IUtFcmsTLXZ7YEL0d5kyvh9FAoi3pXU5MxS25sfdV8FT
-	o
-X-Gm-Gg: ASbGncs2RYXtuIi6C6wzkV9ZvTq+fjmDUQcnMBfl7lly3Oo6oPeGO/5UV0xshWyvpXg
-	Sl22CuKP2z3c4iIkbGysS5QNFyMDvKx7gYGj+cfmhgTfkq7PHxXPG9OsWOYY9FAsEohBLcdNjgL
-	Ms7eaELmpKXOShVGbc1M//wTpuLa77Lqk+MPws3or0Ig1wWhJQ8OfZhnU9X7tDSAzzyTpxr3ydu
-	KIu/7WX17S+WLTnnWGoRo4noEzvAArDLFjcS6qssKQKNcm3LUOm9xZXzibI/oF3VKw4TFxV9g/T
-	t/piTlxc7E+2/eYeum7U264QLyVzwE2tWrK7qNz7TlscnebvWq7GkRYSTRAA0CPeTtBjfXgVJww
-	BJGmeLXWI6sc6E89YjIlNvFZL1E1330/6dx1nwZ2ywje2/Qxe
-X-Google-Smtp-Source: AGHT+IG/nEXmLJWQZ5RsREa2Ynm9r4dCnElSHTdAYWXXiaWnhfXBP2YuPgQJvsFM9pbkMe8NJ07H9g==
-X-Received: by 2002:a05:6000:1acb:b0:391:13d6:c9f0 with SMTP id ffacd0b85a97d-3a1f64978f0mr89744f8f.47.1746720855600;
-        Thu, 08 May 2025 09:14:15 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.home (2a01cb001331aa0087b736f9b546e683.ipv6.abo.wanadoo.fr. [2a01:cb00:1331:aa00:87b7:36f9:b546:e683])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a1f57ddff6sm405371f8f.12.2025.05.08.09.14.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 May 2025 09:14:15 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
+Received: from fwd73.aul.t-online.de (fwd73.aul.t-online.de [10.223.144.99])
+	by mailout12.t-online.de (Postfix) with SMTP id D82EC113F
+	for <openembedded-devel@lists.openembedded.org>; Thu,  8 May 2025 21:52:06 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([79.219.236.121]) by fwd73.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1uD7Hp-2S7LQP0; Thu, 8 May 2025 21:52:05 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH] mozjs-128: inherit cargo to fix build on rustup systems
-Date: Thu,  8 May 2025 18:13:53 +0200
-Message-Id: <20250508161353.903041-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.5
+Subject: [meta-multimedia][PATCH] pipewire: update 1.4.1 -> 1.4.2
+Date: Thu,  8 May 2025 21:52:00 +0200
+Message-ID: <20250508195200.928090-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1746733925-EB7FC49F-8C8D5395/0/0 CLEAN NORMAL
+X-TOI-MSGID: ed53240b-c766-4fe8-bb7b-5d5ba680b8e3
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 16:14:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117366
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 19:52:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117368
 
-From: Yoann Congal <yoann.congal@smile.fr>
+PipeWire 1.4.2 (2025-04-14)
 
-mozjs build uses cargo deep in the build tree. The configure step tries
-to find the cargo home and forcibly start with the home rustup directory
-(~/.cargo) when not found. This leads to the build partially using
-rustup cargo and to a build error when this cargo version is not
-compatible with the OE-Core one.
+This is a bugfix release that is API and ABI compatible with
+previous 1.x releases.
 
-To fix this, inherit cargo to inherit a working cargo environment (e.g.
-CARGO_HOME). But, override do_compile to keep the previous
-(base/Makefile) task.
+Highlights
+  - Do extra checks for MIDI to avoid 100% CPU usage on older kernels.
+  - Fix some potential crashes in POD builder.
+  - pw-cat streaming improvements on stdout/stdin.
+  - Small fixes and improvements.
 
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+PipeWire
+  - Make the service files depend on DBus to avoid startup races.
+
+SPA
+  - Do extra checks for MIDI to avoid 100% CPU usage on older kernels.
+  - Use Header metadata by default in videoadapter.
+  - Handle set_format result from v4l2 better.
+  - Handle crash when POD builder overflows in the filter.
+  - Work around a libebur128 bug. (#4646)
+
+Tools
+  - pw-cat prefers AU format when streaming on stdout/stdin. (#4629)
+  - Improve pw-cat verbose sndfile format debug.
+  - Add the missing --channel-map long option to pw-loopback.
+
+GStreamer
+  - Fix a leak in the deviceprovider. (#4616)
+  - Fix negotiation and make renegotiation better.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ .../pipewire/{pipewire_1.4.1.bb =3D> pipewire_1.4.2.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.4.1.bb =3D=
+> pipewire_1.4.2.bb} (99%)
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb b/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
-index 6bcbb13501..c3804ec64d 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
-@@ -24,7 +24,7 @@ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
- 
- S = "${WORKDIR}/firefox-${PV}"
- 
--inherit pkgconfig perlnative python3native rust
-+inherit pkgconfig perlnative python3native rust cargo
- 
- DEPENDS += "zlib cbindgen-native python3 icu"
- DEPENDS:remove:mipsarch = "icu"
-@@ -83,6 +83,13 @@ do_configure() {
- }
- do_configure[cleandirs] += "${B}"
- 
-+# The main build system is a Makefile that call cargo downstream.
-+# We inherit cargo to get the environnement but need to switch back to
-+# base_do_compile to do the Makefile base compilation.
-+do_compile() {
-+    base_do_compile
-+}
-+
- do_install() {
-     oe_runmake 'DESTDIR=${D}' install
- }
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.b=
+b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.2.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.2.bb
+index e1cf2a55ba..2af16aad3e 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.1.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.2.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "2eb8cf5dc780ca22b94545f1254497a428c412f5"
++SRCREV =3D "d20a1523b6770dfa93a270bdda5d7c800d7ec191"
+ BRANCH =3D "${@oe.utils.trim_version('${PV}', 2)}"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+${BRANCH};protocol=3Dhttps"
+=20
+--=20
+2.49.0
+
 
