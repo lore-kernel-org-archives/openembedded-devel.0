@@ -2,54 +2,54 @@ Return-Path: <quic_ptak@quicinc.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1FF4C3ABC0
-	for <webhook@archiver.kernel.org>; Thu,  8 May 2025 08:52:31 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.web10.10876.1746694341573005407
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3AB4C3ABBE
+	for <webhook@archiver.kernel.org>; Thu,  8 May 2025 08:54:21 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.web10.10897.1746694460700385669
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 May 2025 01:52:21 -0700
+ Thu, 08 May 2025 01:54:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@quicinc.com header.s=qcppdkim1 header.b=TyPASX2W;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.180.131, mailfrom: ptak@qualcomm.com)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5484XjvA031131
-	for <openembedded-devel@lists.openembedded.org>; Thu, 8 May 2025 08:52:20 GMT
+ dkim=pass header.i=@quicinc.com header.s=qcppdkim1 header.b=b5TMXHuM;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.168.131, mailfrom: ptak@qualcomm.com)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5484Wi83022778
+	for <openembedded-devel@lists.openembedded.org>; Thu, 8 May 2025 08:54:20 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
 	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=ZiLoHu0dgsKNpnbxdzzl2hIr8F2uonohA5Y
-	KltV48zQ=; b=TyPASX2Wa0DWcvM4qEom19B3I0hGKImiH2iyTYvRjP3Y2pTxEn9
-	CTqwT4pjM2VwcscYT1Wy21CtmGVHuj1odXuW2OElQnp+OWWK2e7tO517p8AmRfFP
-	XK32xvV2EtAHYbfABs9IXEHQ/vK5qbWze6C7pua5vWbpm+0dPhpCeuR/rKpJVsXT
-	Q6nNMLldQPpnQVEnJM3FQ3H5ZiH76lwHKnP77n4asc4tn2WddlrdHa3UUnWbmbxF
-	k/FHwQSuHGdIRWXRawKkU/sIa7qjjIZ7FACdm5Vo4XiNn6NZGQUBxrHEF4M+sYTz
-	lEwvV96j8icLOf2jBlCYzzn+KNKg4dX6EqA==
+	:subject:to; s=qcppdkim1; bh=VMFikZhqicXaKT+nN83wbO0yscKNC4un55Z
+	6JPp7uFQ=; b=b5TMXHuM7JVEgy+VBMTPSKXRfAy7+4UCQ0zG4wLYlLsLQhQHP5b
+	DOgX738hc8jDLUP3WlV4O65p9/eOxVg29HicDv+TY37EgcvtVXdoD7iHVz8ruWqC
+	96P2F33cggUtHxykG7HvKGLvsaPubDg6KfjJihZap+8SDrTMnymcFVD18sajV4ha
+	+JhJ0pqKNTZg3dEliJaa5hD3CvBTz13Iz1t4W6TSMLqOWOOTjsAA86TVvMCDvA6I
+	gjxkT5L3FFqDG8C1LUr67CTAoXG6yd124YPFN0BVfZixsGl7A1FgtyLFH8ROPHC9
+	8DTLHUu7CWUSXm5nGtIcxOnz1rZSZuqup3g==
 Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46gnpggn3d-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46gnp80nvg-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 08:52:20 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 08:54:19 +0000 (GMT)
 Received: from pps.filterd (APBLRPPMTA01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTP id 5488qGFi004924
-	for <openembedded-devel@lists.openembedded.org>; Thu, 8 May 2025 08:52:16 GMT
+	by APBLRPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTP id 5488qH6M004927
+	for <openembedded-devel@lists.openembedded.org>; Thu, 8 May 2025 08:54:16 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 46dc7m8s31-1
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 46dc7m8s91-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 08:52:16 +0000
+	for <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 08:54:16 +0000
 Received: from APBLRPPMTA01.qualcomm.com (APBLRPPMTA01.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 5488qFXT004919
-	for <openembedded-devel@lists.openembedded.org>; Thu, 8 May 2025 08:52:15 GMT
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 5488sGqL006432
+	for <openembedded-devel@lists.openembedded.org>; Thu, 8 May 2025 08:54:16 GMT
 Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-ptak-hyd.qualcomm.com [10.213.96.58])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 5488qFkT004918
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 5488sGZi006431
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 08 May 2025 08:52:15 +0000
+	Thu, 08 May 2025 08:54:16 +0000
 Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 2387883)
-	id C49281092; Thu,  8 May 2025 14:22:14 +0530 (+0530)
+	id 49C831092; Thu,  8 May 2025 14:24:15 +0530 (+0530)
 From: Pulkit Singh Tak <quic_ptak@quicinc.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: quic_ptak@quicinc.com, quic_sssanjee@quicinc.com,
         quic_vkaruchu@quicinc.com
 Subject: [meta-oe][PATCH v3] opencv: Added fix for Cluster Euclidean and Box Filter
-Date: Thu,  8 May 2025 14:21:43 +0530
-Message-Id: <20250508085143.1343128-1-quic_ptak@quicinc.com>
+Date: Thu,  8 May 2025 14:24:13 +0530
+Message-Id: <20250508085413.1344603-1-quic_ptak@quicinc.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -57,33 +57,33 @@ X-QCInternal: smtphost
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Authority-Analysis: v=2.4 cv=Ao/u3P9P c=1 sm=1 tr=0 ts=681c70c4 cx=c_pps
+X-Authority-Analysis: v=2.4 cv=M7xNKzws c=1 sm=1 tr=0 ts=681c713c cx=c_pps
  a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=dt9VzEwgFbYA:10 a=NEAV23lmAAAA:8 a=COk6AnOGAAAA:8 a=LxRQ0vB3orv3utY-us0A:9
  a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTA4MDA3OSBTYWx0ZWRfX/3h+SNBWcf9u
- hXxC/8C+M0kDrtM4zDnfoov4oC2PU57PsXSGWZGF/8VjSVo/ouOgKTowWEB1sQpBQ3f0dqF87h8
- p3vIlgDkjTN7bA0V+xIrQvs9vaoGciTW33+rveWLyYVGbsgcQFM8CaizXyxx7kn42YhH4FB7Usm
- A8Kg43VPtQn3S5O91EzWubPMdrfHf0eFUTjFKnCzScC09Ja226Cv3gqyvJlBdSwXSxrY0b+fGoK
- yI4OZ4vpvdA0XUZEbyaLC6GGK1fMj9YQKhIfalYBvCF87VU8MVWAHuGujUIUMkI/oqJJlnjyHww
- L0aRPnFUAmx+73DgcrsB9yMExomVdPr58Cecv1k9XRXZX1k8p8pFqXYKHakexYPyG2mTeJfwo+W
- Tbp22jDnvIx9q2nxRpFHjgAw0YJ36K0nUVES20doVuBRFeWd4P4axJxVOUP99GLmdLyx+25O
-X-Proofpoint-GUID: avsi7cI6i4mxmcOWvyD70LfRea9rHOk8
-X-Proofpoint-ORIG-GUID: avsi7cI6i4mxmcOWvyD70LfRea9rHOk8
+X-Proofpoint-ORIG-GUID: EQkioYz44MCsMwn06zE-5q9x04f0YMjI
+X-Proofpoint-GUID: EQkioYz44MCsMwn06zE-5q9x04f0YMjI
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTA4MDA3OSBTYWx0ZWRfX/9i83K/F8h0y
+ xcI0xpoIGc6/lfRzxlSE1PmPasuYLDfoksXnRnJfcXA9akt9D973BF52JgNVd5GqbxC0Q0dmp14
+ p+ngsm5Ww6/78G5S2NHCd+iqAkQtkhl1DIeN1cP4e+TCIgL4DvBh3b/u9PPAWiFpwVP96n1A8Si
+ ISIERSu7SHS2TPTilMk4qgV3aNH/3YsQmLI2vmYjzMmyuaZzNDsEjmdmavp0yzGsSxVz7NOyY1Z
+ Ggyd1gUo9iUcovyTqqheZMpx8lvgtVQKkxgfJ+HyTw0/PT+T8FsqSs2da81ZQTNBeN8WVOxgfSR
+ B1RkJVOAwzessIzRFRqKKBK9GMwyNwTMnS066WJS85fasKTE9zv8QTrUs0ysWdp2QJoxb7zEb2o
+ WNjQIJyEMIlcEk9mSdReVRiww7VmP4o+OyAIhCDpWj2lqlF3jc98pSUVs/kWNHa+EP94/FS9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-08_03,2025-05-07_02,2025-02-21_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 mlxscore=0 mlxlogscore=999 bulkscore=0 priorityscore=1501
- spamscore=0 impostorscore=0 phishscore=0 malwarescore=0 lowpriorityscore=0
- clxscore=1015 adultscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ phishscore=0 lowpriorityscore=0 malwarescore=0 mlxscore=0 priorityscore=1501
+ spamscore=0 mlxlogscore=999 bulkscore=0 impostorscore=0 clxscore=1015
+ suspectscore=0 adultscore=0 classifier=spam authscore=0 authtc=n/a authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2504070000
  definitions=main-2505080079
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 08:52:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117363
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 08:54:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117364
 
 Updated FastCV libs hash to include fix for Cluster Euclidean and Box Filter
 and support for FastCV SVD API
@@ -152,7 +152,7 @@ index 0000000000..b35335c35e
 +2.34.1
 +
 diff --git a/meta-oe/recipes-support/opencv/opencv_4.11.0.bb b/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
-index 61dc681a39..8a5821e2f1 100644
+index 61dc681a39..3f90500784 100644
 --- a/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
 +++ b/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
 @@ -16,7 +16,7 @@ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
@@ -177,7 +177,7 @@ index 61dc681a39..8a5821e2f1 100644
             file://0008-Do-not-embed-build-directory-in-binaries.patch \
             file://0001-core-fixed-VSX-intrinsics-implementation.patch \
             file://0001-FROMLIST-Switch-to-static-instance-of-FastCV-on-Linux.patch \
-+           file://0001-FROMLIST-FastCV-latest-libs-hash-update.patch \ \
++           file://0001-FROMLIST-FastCV-latest-libs-hash-update.patch \
             "
  SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
  
