@@ -1,200 +1,127 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CD1CC3ABBC
-	for <webhook@archiver.kernel.org>; Fri,  9 May 2025 12:27:16 +0000 (UTC)
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.web11.13451.1746793627155844152
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71056C3ABBC
+	for <webhook@archiver.kernel.org>; Fri,  9 May 2025 23:23:03 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web10.215.1746832973228389170
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 May 2025 05:27:07 -0700
+ Fri, 09 May 2025 16:22:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
-Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
-	by mailout02.t-online.de (Postfix) with SMTP id 20EAA570
-	for <openembedded-devel@lists.openembedded.org>; Fri,  9 May 2025 14:27:05 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.162.44]) by fwd71.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1uDMoh-4UJ8wD0; Fri, 9 May 2025 14:27:03 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=K9PXVahW;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-22e4db05fe8so27383325ad.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 May 2025 16:22:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1746832972; x=1747437772; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mJK1FJsB9pJDshGkuRkCKh3/TD3tZccqDjMKyUXS6kg=;
+        b=K9PXVahW55d+eVv7IQKbhY/36jNmTZ8rHmc/4AnQ6u+bVO26vXKXHLHjL17dKmwpXG
+         dF2WyEYYkb/ydEvajh/X/28PLdm4EAIB2EYvlpnqMTYgztjjNGoQKqy4cPmdqhzgmeBo
+         zYJtPOEguNtAmVZZXf52m46mlyMrK8mxGY5f0tVvSAlxspwhK1rIUfxSjXCeyYLyCXf0
+         K9c4arKJ9kVNu1pT8RWHDcY8EOmlnfRFIXtJDGreCPQIu+7RFOmqAU1w/3A0i3NZKD76
+         UQL/tRd3014o+gduSNKsUin7Bo64qO3sm9sQxl41Xw/lHTQDz7ernwWe4WWvkE4ogtPL
+         F1Yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746832972; x=1747437772;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mJK1FJsB9pJDshGkuRkCKh3/TD3tZccqDjMKyUXS6kg=;
+        b=n2JpIfB5mJFFqM4oYoMInTAeXscLeYXoAkSFrXLhYXN88xXHArH/WIChBYZVvKQgn5
+         RzH0gQFEFf7QOFzoI5qD9E1vArNXL8Iq7uyyihmt+o1RoiI32d52bDxrZ8EXNZFPkb8o
+         pXYZsS7L6QUx/HfTzwmH/TBi/N3uTRgjHNvKSct9hJBBGdRvVX4LrXTITP5LHmXM3RiB
+         Vb3LPS/obW6vMe3ax6Bp4HYH0uSgILIGla8c6lWg0WnbCRTE18b5ZoGWZxAV8W5WNvns
+         k/H/U9kmCKDpbJKrVAY/6zPBX9CF5JsHOEZ3RK+4J/uBnXLhYZSGT0w7lDmXjIAaHLKn
+         V67w==
+X-Gm-Message-State: AOJu0Yymtdl8hqiPrBduodPEGuN2ck0IvskSVz6enuUMFOs0HjOqtXS9
+	pqp4/say898fA3WWx/xpK5xSA6T7att/c/mFNNex+p+i8ExjGsDUkSe7KdKK
+X-Gm-Gg: ASbGncsv0F5vzPr36WbtL7Bs6bUvJhZQWqELweIBnuRKEdaZb4pQVaUiU+TNOrYVcv9
+	i/DTDbKcrzdG9g//mBf1pfH7h0gIe2/Zv46oD+XpvKjIA76OMz41mOueGAZIJ2WM7Vk/BGDryC+
+	96kezGneyOga24SjdEldLcpccdqD62iZHFww5HH0Jb/Ds/nAHQb6qg5spb+W+dk2XNeycjHKYt4
+	2+wF4PmxO0F3PX4vZ8sNG+DIpPv6YUJu9Lrtv0inGF1zDlOJG+vXcY9gtECAWHGIGsDYVRixgkX
+	DclO0aquvhxxArtj2U5z5WqdSoi7rI8UYPikeAUdWyU=
+X-Google-Smtp-Source: AGHT+IHEWipQCfbHirE61v0tY4qRP2PsXTBEhcDuip8TW/otoxGRdi2VeRM9TW55qXLrILpYV0YCZg==
+X-Received: by 2002:a17:902:ec90:b0:224:1eab:97b2 with SMTP id d9443c01a7336-22fc91ab45fmr82629985ad.53.1746832972315;
+        Fri, 09 May 2025 16:22:52 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::efc5])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22fc8271d98sm22535945ad.154.2025.05.09.16.22.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 May 2025 16:22:51 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] gimp: fix build with gcc-15
-Date: Fri,  9 May 2025 14:26:54 +0200
-Message-ID: <20250509122654.1304949-1-f_l_k@t-online.de>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-webserver][PATCH] cockpit: Fix a build race generating fail-html.c
+Date: Fri,  9 May 2025 16:22:49 -0700
+Message-ID: <20250509232249.616767-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1746793623-8D92855F-B513CBF4/0/0 CLEAN NORMAL
-X-TOI-MSGID: f363b57b-f0ce-49bc-b196-3331f2f25b3b
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 May 2025 12:27:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117376
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 May 2025 23:23:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117377
 
-Add a backport patch to fix:
-| ../gimp-3.0.2/libgimpconfig/gimpconfig-serialize.c: In function 'gimp_c=
-onfig_serialize_value':
-| ../gimp-3.0.2/libgimpconfig/gimpconfig-serialize.c:526:29: error: expec=
-ted expression before 'bool'
-|   526 |       g_string_append (str, bool ? "yes" : "no");
-|       |                             ^~~~
-| ../recipe-sysroot/usr/include/glib-2.0/glib/gstring.h:269:26: note: in =
-definition of macro 'g_string_append'
-|   269 |   (__builtin_constant_p (val) ?                     \
-|       |                          ^~~
-| ../gimp-3.0.2/libgimpconfig/gimpconfig-serialize.c:526:34: error: expec=
-ted ')' before '?' token
-|   526 |       g_string_append (str, bool ? "yes" : "no");
-|       |                                  ^
-| ../recipe-sysroot/usr/include/glib-2.0/glib/gstring.h:271:35: note: in =
-definition of macro 'g_string_append'
-|   271 |       const char * const __val =3D (val);             \
-|       |                                   ^~~
-| ../recipe-sysroot/usr/include/glib-2.0/glib/gstring.h:271:34: note: to =
-match this '('
-|   271 |       const char * const __val =3D (val);             \
-|       |                                  ^
-| ../gimp-3.0.2/libgimpconfig/gimpconfig-serialize.c:526:7: note: in expa=
-nsion of macro 'g_string_append'
-|   526 |       g_string_append (str, bool ? "yes" : "no");
-|       |       ^~~~~~~~~~~~~~~
-| ../recipe-sysroot/usr/include/glib-2.0/glib/gstring.h:271:39: error: ex=
-pected expression before ';' token
-|   271 |       const char * const __val =3D (val);             \
-|       |                                       ^
-| ../gimp-3.0.2/libgimpconfig/gimpconfig-serialize.c:526:7: note: in expa=
-nsion of macro 'g_string_append'
-|   526 |       g_string_append (str, bool ? "yes" : "no");
-|       |       ^~~~~~~~~~~~~~~
-| ../gimp-3.0.2/libgimpconfig/gimpconfig-serialize.c:526:29: error: expec=
-ted expression before 'bool'
-|   526 |       g_string_append (str, bool ? "yes" : "no");
-|       |                             ^~~~
-| ../recipe-sysroot/usr/include/glib-2.0/glib/gstring.h:251:37: note: in =
-definition of macro 'g_string_append_len'
-|   251 |   g_string_append_len_inline (gstr, val, len)
-|       |                                     ^~~
-| ../gimp-3.0.2/libgimpconfig/gimpconfig-serialize.c:526:7: note: in expa=
-nsion of macro 'g_string_append'
-|   526 |       g_string_append (str, bool ? "yes" : "no");
-|       |       ^~~~~~~~~~~~~~~
-| ../recipe-sysroot/usr/include/glib-2.0/glib/gstring.h:251:3: error: too=
- few arguments to function 'g_string_append_len_inline'; expected 3, have=
- 2
-|   251 |   g_string_append_len_inline (gstr, val, len)
-|       |   ^~~~~~~~~~~~~~~~~~~~~~~~~~
-| ../recipe-sysroot/usr/include/glib-2.0/glib/gstring.h:278:5: note: in e=
-xpansion of macro 'g_string_append_len'
-|   278 |     g_string_append_len (gstr, val, (gssize) -1))
-|       |     ^~~~~~~~~~~~~~~~~~~
-| ../gimp-3.0.2/libgimpconfig/gimpconfig-serialize.c:526:7: note: in expa=
-nsion of macro 'g_string_append'
-|   526 |       g_string_append (str, bool ? "yes" : "no");
-|       |       ^~~~~~~~~~~~~~~
-| ../recipe-sysroot/usr/include/glib-2.0/glib/gstring.h:218:1: note: decl=
-ared here
-|   218 | g_string_append_len_inline (GString    *gstring,
-|       | ^~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ad2b2ca7ba36a01bef945b1c4b193a2fa9d0.patch | 62 +++++++++++++++++++
- meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb    |  1 +
- 2 files changed, 63 insertions(+)
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/85bdad2b2ca7ba36a01=
-bef945b1c4b193a2fa9d0.patch
+ .../recipes-webadmin/cockpit/cockpit_337.bb   |  1 +
+ ...am-Create-src-common-directory-befor.patch | 34 +++++++++++++++++++
+ 2 files changed, 35 insertions(+)
+ create mode 100644 meta-webserver/recipes-webadmin/cockpit/files/0001-Makefile-common.am-Create-src-common-directory-befor.patch
 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/85bdad2b2ca7ba36a01bef945b=
-1c4b193a2fa9d0.patch b/meta-gnome/recipes-gimp/gimp/gimp/85bdad2b2ca7ba36=
-a01bef945b1c4b193a2fa9d0.patch
+diff --git a/meta-webserver/recipes-webadmin/cockpit/cockpit_337.bb b/meta-webserver/recipes-webadmin/cockpit/cockpit_337.bb
+index b456fe1951..986a924fb5 100644
+--- a/meta-webserver/recipes-webadmin/cockpit/cockpit_337.bb
++++ b/meta-webserver/recipes-webadmin/cockpit/cockpit_337.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ SRC_URI += " \
+     https://github.com/cockpit-project/cockpit/releases/download/${PV}/cockpit-${PV}.tar.xz \
+     file://0001-Warn-not-error-if-xsltproc-is-not-found.patch \
++    file://0001-Makefile-common.am-Create-src-common-directory-befor.patch \
+     file://cockpit.pam \
+     "
+ SRC_URI[sha256sum] = "df51ef5920fae69e1b435f657376aa93772c0c1720b954a3bac10ebba26bfedf"
+diff --git a/meta-webserver/recipes-webadmin/cockpit/files/0001-Makefile-common.am-Create-src-common-directory-befor.patch b/meta-webserver/recipes-webadmin/cockpit/files/0001-Makefile-common.am-Create-src-common-directory-befor.patch
 new file mode 100644
-index 0000000000..3a2bf27616
+index 0000000000..36cb6c09c7
 --- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/85bdad2b2ca7ba36a01bef945b1c4b193=
-a2fa9d0.patch
-@@ -0,0 +1,62 @@
-+From 85bdad2b2ca7ba36a01bef945b1c4b193a2fa9d0 Mon Sep 17 00:00:00 2001
-+From: Nils Philippsen <nils@tiptoe.de>
-+Date: Wed, 29 Jan 2025 12:51:53 +0100
-+Subject: [PATCH] Avoid type names and keywords
++++ b/meta-webserver/recipes-webadmin/cockpit/files/0001-Makefile-common.am-Create-src-common-directory-befor.patch
+@@ -0,0 +1,34 @@
++From fb3b427bcbc17257ac8c38438a82435b2bd36e38 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 9 May 2025 16:17:05 -0700
++Subject: [PATCH] Makefile-common.am: Create src/common directory before
++ generating fail-html.c
 +
-+This fixes various errors when compiling with current toolchains and/or
-+-std=3Dc23.
++During parallel builds, its possible that <build>/src/common directory is
++not yet created and this codepath to generate fail-html.c is executed and
++it will end in build failures
 +
-+Signed-off-by: Nils Philippsen <nils@tiptoe.de>
++Fixes
++ make[1]: Entering directory 'build/tmp/work/riscv64-yoe-linux/cockpit/337/build'
++   ../cockpit-337/tools/escape-to-c cockpit_webresponse_fail_html_text < ../cockpit-337/src/common/fail.html > src/common/fail-html.c.tmp && mv src/common/fail-html.c.tmp src/common/fail-html.c
++ /bin/bash: src/common/fail-html.c.tmp: No such file or directory
++ make[1]: *** [Makefile:6044: src/common/fail-html.c] Error 1
 +
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/=
-85bdad2b2ca7ba36a01bef945b1c4b193a2fa9d0.patch]
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ libgimpconfig/gimpconfig-serialize.c |  6 +++---
-+ plug-ins/selection-to-path/types.h   | 13 ++++---------
-+ 2 files changed, 7 insertions(+), 12 deletions(-)
++ src/common/Makefile-common.am | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/libgimpconfig/gimpconfig-serialize.c b/libgimpconfig/gimpco=
-nfig-serialize.c
-+index 377b2371630..b3abca229d1 100644
-+--- a/libgimpconfig/gimpconfig-serialize.c
-++++ b/libgimpconfig/gimpconfig-serialize.c
-+@@ -522,10 +522,10 @@ gimp_config_serialize_value (const GValue *value,
-+=20
-+   if (G_VALUE_HOLDS_BOOLEAN (value))
-+     {
-+-      gboolean bool;
-++      gboolean boolean;
-+=20
-+-      bool =3D g_value_get_boolean (value);
-+-      g_string_append (str, bool ? "yes" : "no");
-++      boolean =3D g_value_get_boolean (value);
-++      g_string_append (str, boolean ? "yes" : "no");
-+       return TRUE;
-+     }
-+=20
-+diff --git a/plug-ins/selection-to-path/types.h b/plug-ins/selection-to-=
-path/types.h
-+index 9b040fa3a19..1521937b15e 100644
-+--- a/plug-ins/selection-to-path/types.h
-++++ b/plug-ins/selection-to-path/types.h
-+@@ -19,15 +19,10 @@
-+ #ifndef TYPES_H
-+ #define TYPES_H
-+=20
-+-/* Booleans.  */
-+-typedef enum { false =3D 0, true =3D 1 } boolean;
-+-
-+-/* The X11 library defines `FALSE' and `TRUE', and so we only want to
-+-   define them if necessary.  */
-+-#ifndef FALSE
-+-#define FALSE false
-+-#define TRUE true
-+-#endif /* FALSE */
-++/* Cope with C23 */
-++typedef int boolean;
-++#define false FALSE
-++#define true TRUE
-+=20
-+ /* The usual null-terminated string.  */
-+ typedef char *string;
-+--=20
-+GitLab
-+
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb b/meta-gnome/reci=
-pes-gimp/gimp/gimp_3.0.2.bb
-index b1e61bf4ec..25a91ed1a5 100644
---- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-+++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb
-@@ -61,6 +61,7 @@ SRC_URI +=3D "file://0001-gimp-cross-compile-fix-for-bz=
-2.patch"
- SRC_URI +=3D "file://0002-meson.build-reproducibility-fix.patch"
- SRC_URI +=3D "file://0001-meson.build-dont-check-for-lgi.patch"
- SRC_URI +=3D "file://0001-meson.build-require-iso-codes-native.patch"
-+SRC_URI +=3D "file://85bdad2b2ca7ba36a01bef945b1c4b193a2fa9d0.patch"
- SRC_URI[sha256sum] =3D "546ddc30cb2d0e79123c7fcb4d78211e1ee7a6aace91a6a0=
-ad8cbcbf6ea571a2"
-=20
- PACKAGECONFIG[aa] =3D "-Daa=3Denabled,-Daa=3Ddisabled,aalib"
---=20
-2.49.0
-
++diff --git a/src/common/Makefile-common.am b/src/common/Makefile-common.am
++index ec4b30d..1d55576 100644
++--- a/src/common/Makefile-common.am
+++++ b/src/common/Makefile-common.am
++@@ -94,6 +94,7 @@ libcockpit_common_a_SOURCES = \
++ # libcockpit-common.a static-links an HTML template to use on failures
++ nodist_libcockpit_common_a_SOURCES = src/common/fail-html.c
++ src/common/fail-html.c: src/common/fail.html
+++	$(MKDIR_P) $(dir $@)
++ 	$(AM_V_GEN) $(top_srcdir)/tools/escape-to-c cockpit_webresponse_fail_html_text < $< > $@.tmp && mv $@.tmp $@
++ CLEANFILES += src/common/fail-html.c
++ EXTRA_DIST += src/common/fail.html
 
