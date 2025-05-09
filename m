@@ -1,94 +1,193 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96BEBC3ABC5
-	for <webhook@archiver.kernel.org>; Thu,  8 May 2025 22:46:29 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web11.1810.1746744388672928852
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF589C3ABBC
+	for <webhook@archiver.kernel.org>; Fri,  9 May 2025 06:06:41 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web11.8062.1746770792472137924
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 May 2025 15:46:28 -0700
+ Thu, 08 May 2025 23:06:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=bV+Ffla1;
- spf=pass (domain: smile.fr, ip: 209.85.128.42, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-43cebe06e9eso11304025e9.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 15:46:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Kw62N5D3;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-22fac0694aaso11860175ad.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 23:06:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1746744386; x=1747349186; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1746770792; x=1747375592; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=N87T7A4BBUoKdDRJBAaBct4sPdjCF3EXSwkmPE8WHOo=;
-        b=bV+Ffla1GMuzatyZbOBwf2TUiymWbBQeakbW6fx9TKA1jmhwaqXfqMlUGp2Sq3nrqd
-         uOnULEHYkl0GvIVyX6YQhnFZSR9JTSImC1rNF2S+tbDGJT17euBNevouNtY2PHVbChxv
-         gQYfhzzEG30d0/RdcIodFu9XCgqphuIFA82KE=
+        bh=ZzXEerqPqFaenR4XAJn5Yda5pvuDoct3Eg31Uwhx30Q=;
+        b=Kw62N5D3ny9o25SVTXPKGuH/vf8yiJ+UjWgz+sfrjVjg/jicOQXvk5bDj1SPQNckON
+         TSlaz0oFC394oaGW5Al3LE5vqm9K2y+ZUdiux4nYTGleHmGqsTEw4Fy2siahyq+AJJwA
+         vEe5XzqMuOe8vd9r4F4Dj/vkZASavzMxuPEwdfRklli/1zq1o/wChR8wFxWBnurougaC
+         qlF6d0KWKB1x9gTOXTllncJ3GHw5M1SuLjYfdByrO7gSvwMljjwmvPB19HtkyqGgwLCk
+         XjapS9uCAZ1l0VPMzymMX5vgh005CZFfKvSdIndyYayNkBySGC/tO1GaSccy2evuuUcs
+         vdPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746744386; x=1747349186;
+        d=1e100.net; s=20230601; t=1746770792; x=1747375592;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=N87T7A4BBUoKdDRJBAaBct4sPdjCF3EXSwkmPE8WHOo=;
-        b=l7ijCd3fSLVcZCVGA1DYe0ANyEVLUumQGeiPlaKnvRBPK0wPHkbx9ln5RLHtTrjmm6
-         X0p7iANO2eVWiEHQ0RjWN7EPIFp1EGFOUOvnSGjHcbKbF2QuiBss6usuZw2EhywtGUpB
-         C1Iv3byGETyOKh1cMePj9X6DbFn1ktdMTv6UtUSFbelA9+BBfoPIvKgDeocs1wYCwe9N
-         aZvUjpU1YrGnv9dG93ClyGHoFU0ZmBBo8DJYXzyPn8K62MdTnakki9gA0SDlqZKjlfIZ
-         w0bxaVsoDB9oqNULNV3pxR31o0LOdHgXasbHOE9rIyqc2Bq0DG1g2xclJTu91si7wHWs
-         1T9Q==
-X-Gm-Message-State: AOJu0Yya2ThYqVasRhk/H2yLNhUrWTu+L5NJub1CpbbluogYVkY+oMX9
-	qxL2g/3XEnIO1ur1ZGQ5uchXalp7XgqgrmfFRyzykY8TtNKiLVaUoDSThAwBFEOHA2RvymdYk5O
-	I
-X-Gm-Gg: ASbGnctzvIouMtMbg30WjHEB1dK8ffGfBFNbBKG2+hzhMxo9odGvpNCJdn4pomXsFiE
-	jH3GZ8q+8BoX0zc2E/FXXDqrb+1OLCyPkRVYk5Zj1enOG0N0+irITpftQxzxABHXn4DzloxfdNy
-	M2reeX7+Q/tEc8bGgFvsF/Wqqf5L0OwM7B5BNbR+UXWHrBQ5fKXiNzK4KIHTZJUz8kuElB53GGM
-	CTwtAUfyYmYEhrMYa0nqNj5WH8QEhorfMzx22wCWVhxUKkDG+LLlfKf6T/ZaZMI5Z1m6H4QHGr/
-	Ll2fC315qkuQvRzIAnX1Uk65qruftxzYM5FM77259RTnHDCPF4FNrqDZ+uyNldhAsN2P/SuMyRX
-	fCqqjLOtpAiMSseFN60+Odq2K7Zivw6Jwt4yB5mg/tU3u/II6
-X-Google-Smtp-Source: AGHT+IE0PUl4J1+/CETF56VYob8AQmF1hBCAmfATlCN6Dk1sxLVhC1bAu5+fViyvdUqV6pjhSGyVUw==
-X-Received: by 2002:a05:6000:4007:b0:3a0:b733:f264 with SMTP id ffacd0b85a97d-3a1f64200f7mr885705f8f.11.1746744386267;
-        Thu, 08 May 2025 15:46:26 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.home (2a01cb001331aa0087b736f9b546e683.ipv6.abo.wanadoo.fr. [2a01:cb00:1331:aa00:87b7:36f9:b546:e683])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a1f5a4c804sm1260756f8f.95.2025.05.08.15.46.25
+        bh=ZzXEerqPqFaenR4XAJn5Yda5pvuDoct3Eg31Uwhx30Q=;
+        b=pnIoNZXTDMq91uzi5ZBkQcbIbQd9qlzgO6r5oioUCASJ0GtY6KeTX/mxW8kkUHnzWI
+         7OowvMtfXdSrPt09zW1KDVHGq7nIgAGyo7v5BmyDKnNZw8oejnGFjLs+LwVwxiMwvyz6
+         e/Q7Tkfsy8ei38BMy49FlK/hZGTC7scqfcoAcjggqyHvHWYcYhn5qtNPl9EcUZqBR41K
+         B438yrF9B2pSLkl7J3O1Ul/HvY6UU1cwNg4GxMtUUNzSPUuTx4c33lkFMzo3XXwsgg3s
+         zYBs0EEBk1v6BWugqjuKRmvogEfjy/cV9XD0H1uVUNe/sMl1FnilU+GJwy2r9GvvP+yD
+         8IlQ==
+X-Gm-Message-State: AOJu0Ywf6dx6yYfleQ1nOufVEzDjwL6GIdVbut+g1sFHK7HzYUv1n8tb
+	sQIMS9OgjJRBwNWNnGbQh4EI2TiJ8Vn4PTMTqYANCEjIq28ICTc4J6a8RB+T
+X-Gm-Gg: ASbGncvwbVTHo1k74sNUFjt22ZQvcUIoXSjcfeQ5DvJlkRQjnklAJ1kDhHHYAMqXyz7
+	JK06OQZdImjz52U7EqlstrScTyGJ7UG/VyGE/GYv6S8/PwUcIvoDRsqJYq8OCm+MFkOMIX4PHvS
+	z2cjppgGPyKri9hZ4Svzj/fa3ujibt1xY12L/hUnn0khVK0wgOsRC/+isGUaUtiawU5PxfEc9cy
+	GhV96wGhYwNcXUzI/H8xMNYUaeRX8sPYkJgfCc2H2rtOlakZ1C6uZGwW2aKd8iSqz2G9CQ1cxXe
+	7KQp3DjX8ZuRyHh4HVT2RfQkCplam/mL
+X-Google-Smtp-Source: AGHT+IFe7miAGz6L+WceQ3NcPLRNmq61D030jEg7z2ls3zUTUattQvE9RjHZDzWQjJguBQIOcn+lcg==
+X-Received: by 2002:a17:902:f78e:b0:22e:8354:dc8a with SMTP id d9443c01a7336-22fc8e99da3mr32776195ad.37.1746770791438;
+        Thu, 08 May 2025 23:06:31 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::5209])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22fc82bfc20sm9509955ad.256.2025.05.08.23.06.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 May 2025 15:46:25 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
+        Thu, 08 May 2025 23:06:30 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-webserver][PATCH] meta-webserver/README: add example git send-email line
-Date: Fri,  9 May 2025 00:46:18 +0200
-Message-Id: <20250508224618.1002727-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.5
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-webserver][PATCH] cockpit: Upgrade to 337
+Date: Thu,  8 May 2025 23:06:28 -0700
+Message-ID: <20250509060628.1082632-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 May 2025 22:46:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117372
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 May 2025 06:06:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117373
 
-From: Yoann Congal <yoann.congal@smile.fr>
+Get rid of remoeved configure options
 
-As the other layers of meta-openembedded, this line makes it easy to
-send a patch by copy-pasting and reduce slightly the probability of
-error.
+ERROR: QA Issue: cockpit: configure was passed unrecognised options: --disable-pcp --enable-old-bridge --with-cockpit-ws-instance-user --disable-ssh --disable-polkit --with-cockpit-ws-instance-group --with-cockpit-group --with-cockpit-user [unknown-configure-option]
 
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-webserver/README.md | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../{cockpit_304.bb => cockpit_337.bb}        | 40 ++++++++++---------
+ 1 file changed, 22 insertions(+), 18 deletions(-)
+ rename meta-webserver/recipes-webadmin/cockpit/{cockpit_304.bb => cockpit_337.bb} (82%)
 
-diff --git a/meta-webserver/README.md b/meta-webserver/README.md
-index d1b743887c..17c7c76d94 100644
---- a/meta-webserver/README.md
-+++ b/meta-webserver/README.md
-@@ -52,6 +52,11 @@ Maintenance
- Send patches / pull requests to openembedded-devel@lists.openembedded.org
- with '[meta-webserver]' in the subject.
+diff --git a/meta-webserver/recipes-webadmin/cockpit/cockpit_304.bb b/meta-webserver/recipes-webadmin/cockpit/cockpit_337.bb
+similarity index 82%
+rename from meta-webserver/recipes-webadmin/cockpit/cockpit_304.bb
+rename to meta-webserver/recipes-webadmin/cockpit/cockpit_337.bb
+index edd51bc671..29bb771cd2 100644
+--- a/meta-webserver/recipes-webadmin/cockpit/cockpit_304.bb
++++ b/meta-webserver/recipes-webadmin/cockpit/cockpit_337.bb
+@@ -9,7 +9,7 @@ SRC_URI += " \
+     file://0001-Warn-not-error-if-xsltproc-is-not-found.patch \
+     file://cockpit.pam \
+     "
+-SRC_URI[sha256sum] = "a87d090c930e2058bb3e970ca7f2bafe678687966b5c0b8b42a802977e391ce9"
++SRC_URI[sha256sum] = "df51ef5920fae69e1b435f657376aa93772c0c1720b954a3bac10ebba26bfedf"
  
-+When sending single patches, please use something like:
-+```
-+git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix="meta-webserver][PATCH"
-+```
-+
- Layer maintainer: Derek Straka <derek@asterius.io>
+ inherit gettext pkgconfig autotools systemd features_check
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'old-bridge', '', 'python3targetconfig', d)}
+@@ -28,11 +28,7 @@ COCKPIT_WS_USER_GROUP ?= "${COCKPIT_USER_GROUP}"
  
+ EXTRA_AUTORECONF = "-I tools"
+ EXTRA_OECONF = " \
+-    --with-cockpit-user=${COCKPIT_USER_GROUP} \
+-    --with-cockpit-group=${COCKPIT_USER_GROUP} \
+     --with-admin-group=${COCKPIT_USER_GROUP} \
+-    --with-cockpit-ws-instance-user=${COCKPIT_WS_USER_GROUP} \
+-    --with-cockpit-ws-instance-group=${COCKPIT_WS_USER_GROUP} \
+     --disable-doc \
+     --with-systemdunitdir=${systemd_system_unitdir} \
+     --with-pamdir=${base_libdir}/security \
+@@ -40,14 +36,12 @@ EXTRA_OECONF = " \
  
+ PACKAGECONFIG ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)} \
+-    old-bridge \
+ "
+ 
+-PACKAGECONFIG[pcp] = "--enable-pcp,--disable-pcp,pcp"
+-PACKAGECONFIG[dashboard] = "--enable-ssh,--disable-ssh,libssh"
+-PACKAGECONFIG[storaged] = ",,,udisks2"
+-PACKAGECONFIG[polkit] = "--enable-polkit,--disable-polkit,polkit"
+-PACKAGECONFIG[old-bridge] = "--enable-old-bridge"
++PACKAGECONFIG[pcp] = ",,pcp"
++PACKAGECONFIG[dashboard] = ",,libssh"
++PACKAGECONFIG[storaged] = ",,udisks2"
++PACKAGECONFIG[polkit] = ",,polkit"
+ 
+ PACKAGES =+ " \
+     ${PN}-pcp \
+@@ -83,27 +77,28 @@ FILES:${PN}-systemd = "${datadir}/cockpit/systemd"
+ FILES:${PN}-users = "${datadir}/cockpit/users"
+ FILES:${PN}-kdump = " \
+     ${datadir}/cockpit/kdump \
+-    ${datadir}/metainfo/org.cockpit-project.cockpit-kdump.metainfo.xml \
++    ${datadir}/metainfo/org.cockpit_project.cockpit_kdump.metainfo.xml \
+ "
+ FILES:${PN}-sosreport = " \
+     ${datadir}/cockpit/sosreport \
+-    ${datadir}/metainfo/org.cockpit-project.cockpit-sosreport.metainfo.xml \
++    ${datadir}/metainfo/org.cockpit_project.cockpit_sosreport.metainfo.xml \
+     ${datadir}/pixmaps/cockpit-sosreport.png \
++    ${datadir}/icons/hicolor/64x64/apps/cockpit-sosreport.png \
+ "
+ FILES:${PN}-storaged = " \
+     ${datadir}/cockpit/storaged \
+-    ${datadir}/metainfo/org.cockpit-project.cockpit-storaged.metainfo.xml \
++    ${datadir}/metainfo/org.cockpit_project.cockpit_storaged.metainfo.xml \
+ "
+ 
+ FILES:${PN}-networkmanager = " \
+     ${datadir}/cockpit/networkmanager \
+-    ${datadir}/metainfo/org.cockpit-project.cockpit-networkmanager.metainfo.xml \
++    ${datadir}/metainfo/org.cockpit_project.cockpit_networkmanager.metainfo.xml \
+ "
+ RDEPENDS:${PN}-networkmanager = "networkmanager"
+ 
+ FILES:${PN}-selinux = " \
+     ${datadir}/cockpit/selinux \
+-    ${datadir}/metainfo/org.cockpit-project.cockpit-selinux.metainfo.xml \
++    ${datadir}/metainfo/org.cockpit_project.cockpit_selinux.metainfo.xml \
+ "
+ FILES:${PN}-playground = "${datadir}/cockpit/playground"
+ FILES:${PN}-dashboard = "${datadir}/cockpit/dashboard"
+@@ -143,6 +138,9 @@ FILES:${PN}-ws = " \
+     ${systemd_system_unitdir}/cockpit-wsinstance-https@.socket \
+     ${systemd_system_unitdir}/cockpit-wsinstance-https@.service \
+     ${systemd_system_unitdir}/system-cockpithttps.slice \
++    ${systemd_system_unitdir}/cockpit-session-socket-user.service \
++    ${systemd_system_unitdir}/cockpit-wsinstance-socket-user.service \
++    ${systemd_system_unitdir}/cockpit-issue.service \
+     ${libdir}/tmpfiles.d/cockpit-tempfiles.conf \
+     ${sbindir}/remotectl \
+     ${base_libdir}/security/pam_ssh_add.so \
+@@ -169,7 +167,8 @@ FILES:${PN} += " \
+     ${datadir}/cockpit/ssh \
+     ${libexecdir}/cockpit-ssh \
+     ${datadir}/cockpit \
+-    ${datadir}/metainfo/cockpit.appdata.xml \
++    ${datadir}/icons/hicolor/128x128/apps/cockpit.png \
++    ${datadir}/metainfo/org.cockpit_project.cockpit.appdata.xml \
+     ${datadir}/pixmaps/cockpit.png \
+     ${nonarch_libdir}/tmpfiles.d \
+     ${nonarch_libdir}/firewalld \
+@@ -187,7 +186,12 @@ do_install:append() {
+     install -p -m 0644 ${UNPACKDIR}/cockpit.pam ${D}${sysconfdir}/pam.d/cockpit
+ 
+     # provided by firewalld
+-    rm -rf ${D}${libdir}/firewalld
++    rm -rf ${D}${libdir}/firewalld \
++    ${D}${PYTHON_SITEPACKAGES_DIR}/*/__pycache__ \
++    ${D}${PYTHON_SITEPACKAGES_DIR}/*/*/__pycache__ \
++    ${D}${PYTHON_SITEPACKAGES_DIR}/*/*/*/__pycache__ \
++    ${D}${PYTHON_SITEPACKAGES_DIR}/*/*/*/*/__pycache__ \
++    ${D}${PYTHON_SITEPACKAGES_DIR}/${BP}.dist-info/direct_url.json
+ 
+     if ! ${@bb.utils.contains('PACKAGECONFIG', 'storaged', 'true', 'false', d)}; then
+         for filename in ${FILES:${PN}-storaged}
 
