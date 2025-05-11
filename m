@@ -1,111 +1,88 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0301C3ABC5
-	for <webhook@archiver.kernel.org>; Sun, 11 May 2025 05:07:03 +0000 (UTC)
-Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
- by mx.groups.io with SMTP id smtpd.web11.24198.1746940021128122068
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DC63C3ABCB
+	for <webhook@archiver.kernel.org>; Sun, 11 May 2025 14:36:56 +0000 (UTC)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.web11.30212.1746974211088868815
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 10 May 2025 22:07:01 -0700
+ Sun, 11 May 2025 07:36:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Vhpap4Y9;
- spf=pass (domain: gmail.com, ip: 209.85.219.177, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f177.google.com with SMTP id 3f1490d57ef6-e78f528aa8eso2706480276.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 10 May 2025 22:07:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VfoWEotf;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-7425bd5a83aso348465b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 11 May 2025 07:36:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1746940020; x=1747544820; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1746974210; x=1747579010; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=i/xr1Aq3/vVOsPdTbk+5px1p274XmZ/niuICcpn+w7o=;
-        b=Vhpap4Y96I4BBeO7QYnkG9wHPtWxpy3iQQPZGgoL/qEVpJWHFsxdZ770ogyqs/SU/h
-         svOhCJV/0MQ7vEziI7dn9ud3KIzdIQZ/4hzADg1vdTVqh3pP8oRvQk41yMecXSqGGuDP
-         8y3K5Xs7nqjvf1DyN2AK4ve0HzR+B7PnlRzl0uv3AEZMhobFMT0ZSfG3ucs/VAjAyu2X
-         ezxCIbKQR2DSrrJS+UNWlvxPcEep4yUx1T8Ccyd/cRpT1p3AIscuFmp+nAaN93DhMB/W
-         2UhLHWvbgBqXY4z7aV8mB4szY3LiVw51qgT/qqfn1ChNfxOIPBsWR9/GSPMoDhmVv6S7
-         0oUw==
+        bh=RKyODUpEXWr2+UztFqdGcI5iVABU0JQ5SsjX3Pt6WPI=;
+        b=VfoWEotfuwUv36F8teubVP7ww3TShfT+Dc7x7Q6ZAodeT2U1rdlJZM5WhJVGREqLFM
+         puwEd4vt9K1p7oJyQMW02+oPbu4Q17tM5eiQmc5s5plOZPa0ck6aCpJtq0AEG/vinve8
+         7EXsAqFDYakT9vDwmHodZjdgL+wp2W7UkCUbD+I7bE7EB/QUWlaTFLeD/pCWB8nSpso2
+         tcFbUPjkvZefKG3znw/hqtRyKCNQmLX3o7En1DQRnjXgUweMLCa0IZAoSAB507osnviE
+         a08LC3zSyp1lqv1ssayOGT2erwMvD98DQ2NPT85JAnT+kOIL8tehbYmB6ABjUhPY7xAW
+         KWIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746940020; x=1747544820;
+        d=1e100.net; s=20230601; t=1746974210; x=1747579010;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=i/xr1Aq3/vVOsPdTbk+5px1p274XmZ/niuICcpn+w7o=;
-        b=dg67XvwabsyV1LL5jfmw0btEy9xh/Cnyq4XQIz/9jMXXuzoDquSJKqR4ama2EhQor4
-         yePaEQ55mtuQSQGYJhkQrwLOGFsK2MjblmYhr8U0MCWfbu/v5D4SV9Zb9ABICE5vwJ8L
-         Bq97kN6aCLnqiUjSf4GcrS9iRpxOBHMZVpXCSJPg74aCJHW9YNtsUBhKrH8np1lfWEvO
-         nhxx1zoEx12oAfeyN3lZ945Oj1zo5czi11ZVuR1VIDiA5tKoHgRHzuVAtZTUZ/vxwKOU
-         +VpEKiu8PBQVF0N+ewu8ewVqiupAOn8uCpNilhLZRT6zROL3cd5UsBsssylt2mHfJopH
-         EmGA==
-X-Gm-Message-State: AOJu0Yw9CQttgjFEYu2UBOsWxnW6Ui3Wqlx0/5RcUTKF4zIUF9EGWHwb
-	tMYxhrJidc62jocHV6vvY2icL8aimMgSWvUGSx61qFHl18Gl086JXLrZnCP8
-X-Gm-Gg: ASbGncuaey7ehTumr6CyFpoeQasZSS5clO9b5OmUtfoqm6RnWIhWHVZeJcrqdNHnpu2
-	ilX5j8kP39x/6UT1TGHfu24bRN92wl9h+h4ilwiy4A0h2DMOXVrKrDCAv+TTaXf4+uJGle6Lp+V
-	3tm7X/aFM2Ekcblm3gM/+6kBH/CyCGeS+N6DVKyuy0mywYJiIvzNuO/pjHjy1jgm0DSt8iAi5Gl
-	ZKJYxYdg6HZDUxll4/uKmsjMlIpETaskkGXa2wadP3yHlwB2ZN1II/WEThoFPgM5udy5Yqb3IB7
-	q333GIM7vF0NBJuoncBED/ROL5xZYI92my6SKQYQIPiiI7F+cbeskl4h
-X-Google-Smtp-Source: AGHT+IFh1glczqbnCnci0gqzecng+tp8Ek12zg5MzSiMhhX9ydR6IvJvLEpFS18De6IL0/DtYgt75Q==
-X-Received: by 2002:a05:6902:2482:b0:e7a:b37b:7265 with SMTP id 3f1490d57ef6-e7ab37b7764mr2166477276.20.1746940019673;
-        Sat, 10 May 2025 22:06:59 -0700 (PDT)
-Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e79965aa4bcsm564590276.2.2025.05.10.22.06.58
+        bh=RKyODUpEXWr2+UztFqdGcI5iVABU0JQ5SsjX3Pt6WPI=;
+        b=rfglhveFN1ywXJVcC78r+EgjgoiPFt52D6WUBmqIC0mMqY7gBLpmTIbz9H/n231fsx
+         aVF1Cju81Q1cFjXja0S4YVDdI/FBaNXzSK4vI+eBibiIMPw1z+KU6ZtRH3YZql7tqQMx
+         92U09i4ytNXfOc2BZpB1/45rP9AFllOSegktH53ma076oIzrHfRs6nZJY5Cdonq3G8Jn
+         NNt4qzMGwG0fIW5UZ9D+yd1OndO30ygxPrtD29O26TuWQqWm50LPeyv1sJ8GeDgadNJ/
+         Yspqo5MBRMsVZ0ZRJzSM+ObIleN3rOky5E+i9odNpdJZpxFQXgLn0jtCxGtJ3jv57izk
+         0OdQ==
+X-Gm-Message-State: AOJu0Yz4Wt7ayaXOWQQPnr6e4U+3uSatOQfEZ//OqKkaFgVk2+iZhEKb
+	Fbqm0hJQDRt74cn88zylGeCxPEFXZtu0muUNr1HWdjjB5eiFleB5+JrJNu0S
+X-Gm-Gg: ASbGnctxIeg+4E1JgsYh94qQE1lIndZfLehOktQixDcajOLWIeMw0/TGMILehxaoFTa
+	xTBz2CpHsFD060RUGNk6OKb+QeRhai/UNYgOU6jlr09rEAde8blFzGGBTOOEg8lWpXeic0w6qKk
+	9bbKrw/6QVDZQrowTdIe1TNUvlBpe11ATGEytdx2hu14/Bzp0kvpEXyJ5n7etj19gQhU+qbovpq
+	UzXcXp1WhmdlMfVLQMC4DxwO8tfLBrk9dutXYr29I54ojE++tgHmvDoKaq42bbOmYCAHIsFcGOZ
+	iVz4HlrL162DxtbzQHmBKReDTp2SMu6tLPH1CQO8ulE=
+X-Google-Smtp-Source: AGHT+IFPo6ZYS2hyVTjqtlUqpYiWVc0S1PsDlG13mJICniFTlvEY7eMmEfeG2N+naBb8MFAlNYanAw==
+X-Received: by 2002:a05:6a21:998e:b0:206:a9bd:ad7b with SMTP id adf61e73a8af0-215ababd859mr15646552637.7.1746974210038;
+        Sun, 11 May 2025 07:36:50 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::efc5])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b234ad3fae9sm4174945a12.38.2025.05.11.07.36.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 10 May 2025 22:06:59 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Sun, 11 May 2025 07:36:49 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH v2] xfce4-settings: upgrade 4.20.0 -> 4.20.1
-Date: Sun, 11 May 2025 01:06:49 -0400
-Message-ID: <20250511050650.2630805-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] gphoto2: Move the sed op on config.h to do_compile
+Date: Sun, 11 May 2025 07:36:47 -0700
+Message-ID: <20250511143647.3154068-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 11 May 2025 05:07:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117383
+ <openembedded-devel@lists.openembedded.org>; Sun, 11 May 2025 14:36:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117384
 
-Drop unnecessary CFLAGS.  They were introduced with xfce4-settings version
-4.18.3 to address two errors seen at the time - deprecated declarations and
-implicit declarations.  The error was documented here :
+Current code still fails on some AB nodes.
 
-https://patchwork.yoctoproject.org/project/oe/patch/20241127005545.86128-1-schonm@gmail.com/
-
-Both of these errors have been addressed.
-
-This change to the code base fixed the deprecated declarations:
-https://gitlab.xfce.org/xfce/xfce4-settings/-/commit/def01fc82caac1cb41d3b7c242efa7f98d48e9a6
-
-This change to the code base fixed the implicit declaration :
-https://gitlab.xfce.org/xfce/xfce4-settings/-/commit/10e40cdf13f1440d207a50a3f19fc4903da0d80a
-
-Changelog: https://gitlab.xfce.org/xfce/xfce4-settings/-/tags/xfce4-settings-4.20.1
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{xfce4-settings_4.20.0.bb => xfce4-settings_4.20.1.bb}     | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfce4-settings/{xfce4-settings_4.20.0.bb => xfce4-settings_4.20.1.bb} (89%)
+ meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.20.0.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.20.1.bb
-similarity index 89%
-rename from meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.20.0.bb
-rename to meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.20.1.bb
-index 76ce27cc96..353ea9ed81 100644
---- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.20.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.20.1.bb
-@@ -8,9 +8,8 @@ inherit xfce features_check mime-xdg
+diff --git a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb
+index 7b0f0df2e5..63993bfbeb 100644
+--- a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb
++++ b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.28.bb
+@@ -19,6 +19,6 @@ EXTRA_OECONF += "--with-jpeg-prefix=${STAGING_INCDIR} \
+                  --without-cdk \
+ "
  
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[sha256sum] = "23548da3429a296501fbfdbc98a861ee241b9fdd47e8d5de1781f57c6bbce5a9"
-+SRC_URI[sha256sum] = "fd0d602853ea75d94024e5baae2d2bf5ca8f8aa4dad7bfd5d08f9ff8afee77b2"
- 
--CFLAGS += " -Wno-deprecated-declarations -Wno-implicit-function-declaration"
- EXTRA_OECONF += " \
-     GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen \
-     --enable-maintainer-mode --disable-debug \
--- 
-2.43.0
-
+-do_configure:append() {
+-	sed -i -E "s/--sysroot=[^'\" ]+//g" ${B}/config.h
++do_compile:prepend() {
++	sed -i -e 's/--sysroot=[^ "]*//g' ${B}/config.h
+ }
 
