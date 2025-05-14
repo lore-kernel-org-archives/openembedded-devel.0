@@ -1,150 +1,253 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63705C3ABC9
-	for <webhook@archiver.kernel.org>; Tue, 13 May 2025 21:33:25 +0000 (UTC)
-Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
- by mx.groups.io with SMTP id smtpd.web11.88373.1747171997905382033
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C7FAC3ABCB
+	for <webhook@archiver.kernel.org>; Wed, 14 May 2025 05:10:58 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.94978.1747199447669508604
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 May 2025 14:33:18 -0700
+ Tue, 13 May 2025 22:10:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=czuphtgZ;
- spf=pass (domain: gmail.com, ip: 209.85.210.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f46.google.com with SMTP id 46e09a7af769-72c173211feso1650004a34.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 May 2025 14:33:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747171997; x=1747776797; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2gnDb9Fhal2xcWkttylDFPWmQZqJm4tFaWPg3OKYME4=;
-        b=czuphtgZxffb+S2Cgq82vFXdyGVzJbJYINceT7fdrPBInkXsjTCXv6+mVIGoBGsyIT
-         bDUgSBjLjM13aa2iacAseRfCohRzQzbu0HjB+gkm+K/d3FULqwaZi9Zek91SycbNbSlO
-         ClKcT0CpAKHTLAlwVCMCkdNfup9v9AYg8lISb6C/lFfxCuZpnDCiV9s2d7/cWI4A3cxL
-         Vy0+HNP8XzvIklci9OV7dOtaTJ5TMji1KfX8x5uYz91OAwC1iDiyZgKdzxWl895kjjNa
-         oWl8sCEtSBezSe22pAQ0TgkZhRc2F1zBPdw70N9JFI4rozb+Shrc+UFITvf5sbXMbOLi
-         E5og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747171997; x=1747776797;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=2gnDb9Fhal2xcWkttylDFPWmQZqJm4tFaWPg3OKYME4=;
-        b=Ro0YM8mYGmX9bizTYCM3arfKktNL6WmQqE1ZiZaMkQK8LUbCRQL/CylLLiAj8+UyW1
-         pMetUxGadgXsYgO9ifglQZuMbB3uJ5dWxtyGNeiCW4tyfd+oUBzcAgfckllpEEjortVK
-         fkPr8NIpqgOcqTl7cHomF4UOnp/ef9D+GAJ4c1548Nag8hUzGn3GWsTwGfH56nAJSjrv
-         /32k0STiil1LIkgNMvBZhOIscRvRFrlqzrcXUAQc82x5EexhGLQzIPUfPVnQL+3EueSm
-         dsdY7xYOiFc8IxwdWXbAJFPBHLZGt08jURGmbxt7+dOx6tQ1XxINh10wmCjrg7ghLfDq
-         c/TA==
-X-Gm-Message-State: AOJu0YytaB+InNyC8+5XRpKLl8QnD/o2Nm4Nt7XzPSS+40DKiA1mANLd
-	BAm+/sdovblb0tcyGTDVc3pSJF2JRIvsLOMbMd8WTCcJYvtQMUIYiERXRDs4tk2oAvC3wLI2PCa
-	GU8CYeZP4+8fJeMaIXmhdzYVtZTodTo9g
-X-Gm-Gg: ASbGnctITEGwHIUVEb9v9/8PpNEukxcT8ZR+RRRnvcMmMyEttQbjYY863BAnqi2Uk4z
-	0C8P4EzBDBvu2sxb32NtTEcEZcCdVIudyYY2C11K/Zo6kwD9FFbfxCcNnU7nx26ISF+2loBzb+B
-	gW1ewDKsp+2+a+uDsJalv+7TfDzWiecLU=
-X-Google-Smtp-Source: AGHT+IFO3ujRyGiLA1LIh+wYa/yijSEGgZgVagm7GSN4QF5RvHi95pRVH63hYozlvnfThqLyXTj70njsTQHaeM8lKF0=
-X-Received: by 2002:a05:6830:6615:b0:72b:9724:6a82 with SMTP id
- 46e09a7af769-734e156fca8mr519509a34.17.1747171997035; Tue, 13 May 2025
- 14:33:17 -0700 (PDT)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7229e4073d=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54E57jwx007601
+	for <openembedded-devel@lists.openembedded.org>; Wed, 14 May 2025 05:10:47 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 46mbc8rjre-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 14 May 2025 05:10:46 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Tue, 13 May 2025 22:10:42 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][master][walnascar][PATCH 1/1] mariadb: upgrade 11.4.5 -> 11.4.6
+Date: Wed, 14 May 2025 10:40:23 +0530
+Message-ID: <20250514051023.1869580-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-References: <20250513060149.3971753-1-dmukhin@ford.com> <CAMKF1srPZJ7=AmVVyp6Y7b3AsJAy4jjqeV+iaOgApF0phXmOxA@mail.gmail.com>
- <aCO3yr77yzsKCylq@kraken>
-In-Reply-To: <aCO3yr77yzsKCylq@kraken>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 13 May 2025 14:32:50 -0700
-X-Gm-Features: AX0GCFubGjTpt-RDMKRKlWXp5LBHp74hhQlVH4hoPVSbFC42_L-Mxd8bqU5CiKA
-Message-ID: <CAMKF1sqUkLq6MJgx-E2n5UZRhQ6E0yaD5aXx=51KXcMPU27FJQ@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v1] dediprog-flasher: enable native builds
-To: dmkhn@proton.me
-Cc: openembedded-devel@lists.openembedded.org, tymoteusz.burak@3mdeb.com, 
-	Denis Mukhin <dmukhin@ford.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: 3u1EI7uRlUdBILtFZD2BpCC0TQhAHBBA
+X-Proofpoint-ORIG-GUID: 3u1EI7uRlUdBILtFZD2BpCC0TQhAHBBA
+X-Authority-Analysis: v=2.4 cv=IIACChvG c=1 sm=1 tr=0 ts=682425d6 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=BUH1krOO9SQA:10 a=HCiNrPZc1L8A:10 a=dt9VzEwgFbYA:10 a=jpp-Wi3FAAAA:8 a=hkEv4HZQAAAA:8 a=NEAV23lmAAAA:8
+ a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=x4Tn9eRuAAAA:8 a=N5DeKDZ82g0qJfPC0goA:9 a=3HWhRrkoiJongTt84g_J:22 a=NA03pvyaApPJG5valX87:22 a=FdTzh2GWekK77mhwV6Dw:22 a=NBNoG_gAMsMl4eXmfJ8P:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTE0MDA0MyBTYWx0ZWRfXyS3PBhYawYdY TyA9eJwSG7pBWN8IDDvrdJq0jbTwuW4WNpsHH+f+kex9p5jLYMFlGR4LB18VpKvCYtWvE7le0Rx au6mAzf3PsVJW7WNeoQnTT2DT8rUBZozxQkLekuPxb2PihV3rlNebFNwJHmy3l7RSYOJnleVzrw
+ 5F98JU2brIdvWmYOqZmZuEwP+i+HASm/b3IJY6tvu6f90Km6gYDGxqJa/gsngNyrHOfzl3bHUC9 xJIpgz70y2Q3bYJVA1IvQEg0mT1GJ6nl/27+a3+aFgq+iRVUnzL6A2N1HWMjY7WZ5kRDxVVaxFY eCvQ3BdjnWE5NEvbrO291s6jocM1av3eJFQSz4PLB5t3FgRcuAGSnHXy9jrROl9G3wViZJK7E7H
+ /QB/bHu6mHpsC/dGn3ksvsOYIq7a6D1cGbDgnsuhUdiGaVM6DZKcaQPhJkBOE/hYeHap0kNS
+X-Sensitive_Customer_Information: Yes
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-14_01,2025-05-09_01,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ spamscore=0 mlxscore=0 suspectscore=0 malwarescore=0 phishscore=0
+ bulkscore=0 impostorscore=0 mlxlogscore=999 priorityscore=1501
+ clxscore=1015 adultscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505070000
+ definitions=main-2505140043
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 May 2025 21:33:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117408
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 May 2025 05:10:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117409
 
-On Tue, May 13, 2025 at 2:21=E2=80=AFPM <dmkhn@proton.me> wrote:
->
-> On Mon, May 12, 2025 at 11:40:18PM -0700, Khem Raj wrote:
-> > On Mon, May 12, 2025 at 11:04=E2=80=AFPM <dmkhn@proton.me> wrote:
-> > >
-> > > From: Denis Mukhin <dmukhin@ford.com>
-> > >
-> > > Update dediprog-flasher recipe to support native class variants.
-> > >
-> > > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-> > > ---
-> > >  .../dediprog-flasher/dediprog-flasher_1.14.20.bb      | 11 ++++++++-=
---
-> > >  1 file changed, 8 insertions(+), 3 deletions(-)
-> > >
-> > > diff --git a/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher_1.=
-14.20.bb b/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher_1.14.20.bb
-> > > index 83a88ab75f..4c6d6bf6f1 100644
-> > > --- a/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher_1.14.20.b=
-b
-> > > +++ b/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher_1.14.20.b=
-b
-> > > @@ -12,18 +12,23 @@ SRC_URI =3D " \
-> > >      file://0002-Makefile-add-conditional-stripping.patch \
-> > >      "
-> > >
-> > > -EXTRA_OEMAKE =3D "NOSTRIP=3D1"
-> > > +EXTRA_OEMAKE =3D "NOSTRIP=3D1 DESTDIR=3D${D} PREFIX=3D${prefix}"
-> > >
-> > >  PV =3D "1.0+${SRCPV}"
-> > >
-> > >  S =3D "${WORKDIR}/git"
-> > >
-> > > -do_install () {
-> > > -    oe_runmake DESTDIR=3D${D} PREFIX=3D/usr install
-> > > +do_install() {
-> > > +    oe_runmake install
-> > >  }
-> > >
-> > > +# NB: /etc/udev/rules.d is packaged outside of ${prefix}
-> > >  FILES:${PN} +=3D " \
-> > > +    /etc/udev \
-> >
-> > Please use ${sysconfdir} here instead of hardcoding /etc
->
-> nativesdk variant of sysconfdir expands to something like:
->     sysconfdir=3D"/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-m=
-ysdk-linux/etc"
-> where
->     prefix=3D"/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-mysdk=
--linux"
->
-> dediprog build installs USB udev rules into the host's environment
->     /etc/udev/rules.d
+From: Yogita Urade <yogita.urade@windriver.com>
 
-i think its not a good idea to inject things into the host
-environment. This can alter
-the behaviour of SDK host which is not desired. Is there any other way for =
-it
-to register with udev ?
+This upgrade includes fix for CVE-2023-52971
 
-> i.e. packages udev rules outside of ${prefix}.
-> So in this case /etc/udev should be open-coded, which is not ideal.
->
-> I can expand the comment before FILES:${PN} to explain that better.
-> Will that work?
->
-> >
-> > > +    ${bindir} \
-> > >      ${datadir}/DediProg \
-> > >  "
-> > >
-> > >  inherit pkgconfig
-> > > +
-> > > +BBCLASSEXTEND =3D "native nativesdk"
-> > > --
-> > > 2.34.1
-> > >
-> > >
->
+Changelog:
+https://mariadb.com/kb/en/mariadb-11-4-6-changelog/
+
+refresh 0001-Add-missing-includes-cstdint-and-cstdio.patch
+
+Droped 3871.patch and mm_malloc.patch as these are available in 11.4.6
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+---
+ ...ive_11.4.5.bb => mariadb-native_11.4.6.bb} |  0
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |  4 +-
+ ...-missing-includes-cstdint-and-cstdio.patch | 40 +++++++------------
+ meta-oe/recipes-dbs/mysql/mariadb/3871.patch  | 29 --------------
+ .../recipes-dbs/mysql/mariadb/mm_malloc.patch | 23 -----------
+ .../{mariadb_11.4.5.bb => mariadb_11.4.6.bb}  |  0
+ 6 files changed, 16 insertions(+), 80 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_11.4.5.bb => mariadb-native_11.4.6.bb} (100%)
+ delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/3871.patch
+ delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch
+ rename meta-oe/recipes-dbs/mysql/{mariadb_11.4.5.bb => mariadb_11.4.6.bb} (100%)
+
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_11.4.5.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_11.4.6.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_11.4.5.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_11.4.6.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 3a39d036f7..13e55ebacd 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -17,17 +17,15 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+            file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
+            file://0001-aio_linux-Check-if-syscall-exists-before-using-it.patch \
+            file://ssize_t.patch \
+-           file://mm_malloc.patch \
+            file://sys_futex.patch \
+            file://cross-compiling.patch \
+            file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
+            file://lfs64.patch \
+            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+            file://0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch \
+-           file://3871.patch \
+            file://riscv32.patch \
+           "
+-SRC_URI[sha256sum] = "ff6595f8c482f9921e39b97fa1122377a69f0dcbd92553c6b9032cbf0e9b5354"
++SRC_URI[sha256sum] = "1b26c0bb2d025dbfac3b9852d2b7eafda56a171b67ac2e27831ec0414fb7df07"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/tags"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
+index 08e73424d1..bc1b992919 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
++++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
+@@ -11,27 +11,14 @@ Upstream-Status: Pending
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+ ---
+- .../rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h   | 1 +
+- storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h   | 1 +
+- .../rocksdb/rocksdb/table/block_based/data_block_hash_index.h    | 1 +
+- storage/rocksdb/rocksdb/util/slice.cc                            | 1 +
+- storage/rocksdb/rocksdb/util/string_util.h                       | 1 +
+- 5 files changed, 5 insertions(+)
++ storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h  | 1 +
++ .../rocksdb/rocksdb/table/block_based/data_block_hash_index.h   | 1 +
++ storage/rocksdb/rocksdb/util/slice.cc                           | 2 +-
++ storage/rocksdb/rocksdb/util/string_util.h                      | 1 +
++ 4 files changed, 4 insertions(+), 1 deletion(-)
+ 
+-diff --git a/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h b/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
+-index 963c1d8e..73487edd 100644
+---- a/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
+-+++ b/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
+-@@ -5,6 +5,7 @@
+- 
+- #pragma once
+- 
+-+#include <cstdint>
+- #include "rocksdb/rocksdb_namespace.h"
+- 
+- struct CompactionIterationStats {
+ diff --git a/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h b/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
+-index c7f93b4c..3c2ab805 100644
++index 7fb9d489..f7b4e6f0 100644
+ --- a/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
+ +++ b/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
+ @@ -8,6 +8,7 @@
+@@ -55,19 +42,20 @@ index f356395f..32152217 100644
+  #include <vector>
+  
+ diff --git a/storage/rocksdb/rocksdb/util/slice.cc b/storage/rocksdb/rocksdb/util/slice.cc
+-index 6db11cc9..c26b6a21 100644
++index 3c3656de..b18d7f5d 100644
+ --- a/storage/rocksdb/rocksdb/util/slice.cc
+ +++ b/storage/rocksdb/rocksdb/util/slice.cc
+-@@ -8,6 +8,7 @@
+- // found in the LICENSE file. See the AUTHORS file for names of contributors.
++@@ -12,7 +12,7 @@
++ #include <stdio.h>
+  
+  #include <algorithm>
++-
+ +#include <cstdint>
++ #include "rocksdb/convenience.h"
+  #include "rocksdb/slice_transform.h"
+- #include "rocksdb/slice.h"
+- #include "util/string_util.h"
++ #include "rocksdb/utilities/object_registry.h"
+ diff --git a/storage/rocksdb/rocksdb/util/string_util.h b/storage/rocksdb/rocksdb/util/string_util.h
+-index a761be66..064d059f 100644
++index 7794dbb0..b480177e 100644
+ --- a/storage/rocksdb/rocksdb/util/string_util.h
+ +++ b/storage/rocksdb/rocksdb/util/string_util.h
+ @@ -6,6 +6,7 @@
+@@ -78,3 +66,5 @@ index a761be66..064d059f 100644
+  #include <sstream>
+  #include <string>
+  #include <unordered_map>
++--
++2.40.0
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/3871.patch b/meta-oe/recipes-dbs/mysql/mariadb/3871.patch
+deleted file mode 100644
+index 4bbca2d706..0000000000
+--- a/meta-oe/recipes-dbs/mysql/mariadb/3871.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From d6923ac0adc11a0364acd421316116190eedb508 Mon Sep 17 00:00:00 2001
+-From: Brad Smith <brad@comstyle.com>
+-Date: Fri, 7 Mar 2025 02:04:01 -0500
+-Subject: [PATCH] Fix building with Clang and GCC on RISC-V
+-
+-Clang does not have the builtin __builtin_riscv_pause().
+-
+-Upstream-Status: Backport [https://github.com/MariaDB/server/pull/3871]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- include/my_cpu.h | 7 ++++++-
+- 1 file changed, 6 insertions(+), 1 deletion(-)
+-
+---- a/include/my_cpu.h
+-+++ b/include/my_cpu.h
+-@@ -97,7 +97,12 @@ static inline void MY_RELAX_CPU(void)
+-   /* Changed from __ppc_get_timebase for musl and clang compatibility */
+-   __builtin_ppc_get_timebase();
+- #elif defined __GNUC__ && defined __riscv
+--  __builtin_riscv_pause();
+-+  /* The GCC-only __builtin_riscv_pause() or the pause instruction is
+-+  encoded like a fence instruction with special parameters. On RISC-V
+-+  implementations that do not support arch=+zihintpause this
+-+  instruction could be interpreted as a more expensive memory fence;
+-+  it should not be an illegal instruction. */
+-+  __asm__ volatile(".long 0x0100000f" ::: "memory");
+- #elif defined __GNUC__
+-   /* Mainly, prevent the compiler from optimizing away delay loops */
+-   __asm__ __volatile__ ("":::"memory");
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch b/meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch
+deleted file mode 100644
+index a590a3fa36..0000000000
+--- a/meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch
++++ /dev/null
+@@ -1,23 +0,0 @@
+-From 76e4c3e8d001eaaabd0fb34c136b81b82830c420 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 15 Jun 2021 22:48:07 -0700
+-Subject: [PATCH] mariadb: Fix build with clang/musl
+-
+-Upstream-Status: Pending
+----
+- storage/rocksdb/rocksdb/port/jemalloc_helper.h | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/storage/rocksdb/rocksdb/port/jemalloc_helper.h b/storage/rocksdb/rocksdb/port/jemalloc_helper.h
+-index f6f72f8c..b9657cf3 100644
+---- a/storage/rocksdb/rocksdb/port/jemalloc_helper.h
+-+++ b/storage/rocksdb/rocksdb/port/jemalloc_helper.h
+-@@ -5,7 +5,7 @@
+- 
+- #pragma once
+- 
+--#if defined(__clang__)
+-+#if defined(__clang__) && defined(__GLIBC__)
+- // glibc's `posix_memalign()` declaration specifies `throw()` while clang's
+- // declaration does not. There is a hack in clang to make its re-declaration
+- // compatible with glibc's if they are declared consecutively. That hack breaks
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_11.4.5.bb b/meta-oe/recipes-dbs/mysql/mariadb_11.4.6.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_11.4.5.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_11.4.6.bb
+-- 
+2.40.0
+
 
