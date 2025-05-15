@@ -1,134 +1,171 @@
-Return-Path: <alexander.stein@ew.tq-group.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C8A7C2D0CD
-	for <webhook@archiver.kernel.org>; Thu, 15 May 2025 14:52:45 +0000 (UTC)
-Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
- by mx.groups.io with SMTP id smtpd.web11.14642.1747320759537603840
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 956D5C2D0CD
+	for <webhook@archiver.kernel.org>; Thu, 15 May 2025 20:37:46 +0000 (UTC)
+Received: from outbound9.mail.transip.nl (outbound9.mail.transip.nl [136.144.136.11])
+ by mx.groups.io with SMTP id smtpd.web10.1528.1747341302989114085
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 May 2025 07:52:40 -0700
+ Thu, 15 May 2025 13:35:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@tq-group.com header.s=key1 header.b=WdRWiGn7;
- dkim=fail reason="dkim: no key for signature: lookup dkim._domainkey.ew.tq-group.com on 100.100.100.100:53: no such host" header.i=@ew.tq-group.com header.s=dkim header.b=tsH3jmKI;
- spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81, mailfrom: alexander.stein@ew.tq-group.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
-  t=1747320759; x=1778856759;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=Lu3XuV0RpKO3RQrSoUyNvnSyZmcRcICY3Gnkm5K5QHU=;
-  b=WdRWiGn7a9Nz4TscBxrL5MVQcEfQdUNm9va7C36GOCf7r5jLAol2jNA2
-   W6CzJDvTXJfrBOPCDKXiNPslM6CfMPN/XXit20PpTO0lXAkY5xaPDqSCe
-   3kD8PkRaNNVW/CK46PMLJwkn4QbegBeaQyk/maBQNlWXbA5Rhep/0QgPl
-   wIEFQ2WMeq3SlYr/m8U4/E+iK6M1sZGyLxUfMEcgUhAbxw30lcL2kzzjb
-   ikqxZJOFLcdgTJycNMgRPviTdlB05BNPPAwi5pz7Q+munxMKru3Q1enF4
-   l7KFY3o23qOYCkukHccteYbGWMErlSTZ64ZYgkzDyL84ZDTltdvaETSTt
-   w==;
-X-CSE-ConnectionGUID: cn+Lx/VgT+qB5EtKH2eNpw==
-X-CSE-MsgGUID: QIoll4RwRnacEGiLK4KSGg==
-X-IronPort-AV: E=Sophos;i="6.15,291,1739833200"; 
-   d="scan'208";a="44102710"
-Received: from vmailcow01.tq-net.de ([10.150.86.48])
-  by mx1.tq-group.com with ESMTP; 15 May 2025 16:52:37 +0200
-X-CheckPoint: {6825FFB5-4-68AAF6F9-E177A1A4}
-X-MAIL-CPID: EA02A107B2459EB848C3E7DF0C8ED143_2
-X-Control-Analysis: str=0001.0A00639A.6825FFBA.0041,ss=1,re=0.000,recu=0.000,reip=0.000,cl=1,cld=1,fgs=0
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 98E2A168729;
-	Thu, 15 May 2025 16:52:32 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ew.tq-group.com;
-	s=dkim; t=1747320752;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Lu3XuV0RpKO3RQrSoUyNvnSyZmcRcICY3Gnkm5K5QHU=;
-	b=tsH3jmKIGoR6Wl6XXJb2TVgRzv844nVCCL+MTk1Hpv5GuY3PJ+Khz1J0zeCQSzOeS99Add
-	pSUn54F628qmp3TPDaB3++7ek6D6uxEJ4EXbUVcfCMs2pHsS00TeBhjydvaikd39krLvC/
-	AcwxC5Aqfg511qIaEqAQK30Zer2DhA+FSQQg9/R+ND2nslaOyjhUUgkf+eOLpP8UKOzsvJ
-	a/z71eOTNp+LKCAPb6tStjyAr9hDQqKd/5Yg6qDsBH/oS/NiQAMlN1JnSQjmmmwebH2oDN
-	01pReKXu0k1D6uDY3gUcuvYP3RSlMh0Z4yEjkqRFnI5bFs3ISEOcWZ2r5CExFA==
-From: Alexander Stein <alexander.stein@ew.tq-group.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@myspectrum.nl header.s=transip-a header.b=ThO3kAgi;
+ spf=pass (domain: myspectrum.nl, ip: 136.144.136.11, mailfrom: jeroen@myspectrum.nl)
+Received: from submission9.mail.transip.nl (unknown [10.103.8.160])
+	by outbound9.mail.transip.nl (Postfix) with ESMTP id 4Zz25J3fwPzTPPPx;
+	Thu, 15 May 2025 22:35:00 +0200 (CEST)
+Received: from yellow.myspectrum.nl (yellow.myspectrum.nl [136.144.146.76])
+	by submission9.mail.transip.nl (Postfix) with ESMTPSA id 4Zz25H2q9Bz2npd8f;
+	Thu, 15 May 2025 22:34:59 +0200 (CEST)
+Received: from yellow.myspectrum.nl (84-27-20-154.cable.dynamic.v4.ziggo.nl [84.27.20.154])
+	(Authenticated sender: sendmail@myspectrum.nl)
+	by yellow.myspectrum.nl (Postfix) with ESMTPSA id 3934720071;
+	Thu, 15 May 2025 20:34:56 +0000 (UTC)
+Authentication-Results: yellow.myspectrum.nl;
+	auth=pass smtp.auth=sendmail@myspectrum.nl smtp.mailfrom=jeroen@myspectrum.nl
+Received: by yellow.myspectrum.nl (sSMTP sendmail emulation); Thu, 15 May 2025 22:34:55 +0200
+From: jeroen@myspectrum.nl
 To: openembedded-devel@lists.openembedded.org
-Cc: upstream@lists.phytec.de, L.Anderweit@phytec.de
-Subject: 
- Re: [oe] [meta-oe][scarthgap][PATCH] lmsensors: Fix build without sensord
-Date: Thu, 15 May 2025 16:52:32 +0200
-Message-ID: <5004930.GXAFRqVoOG@steina-w>
-Organization: TQ-Systems GmbH
-In-Reply-To: <20250505095620.14907-1-l.anderweit@phytec.de>
-References: <20250505095620.14907-1-l.anderweit@phytec.de>
+Cc: Jeroen Hofstee <jhofstee@victronenergy.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][walnascar][PATCH] nodejs: backport a patch to prevent brotli crashing nodejs
+Date: Thu, 15 May 2025 22:34:32 +0200
+Message-ID: <20250515203437.3975843-1-jeroen@myspectrum.nl>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+X-Scanned-By: ClueGetter at submission9.mail.transip.nl
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=transip-a; d=myspectrum.nl; t=1747341299; h=from:subject:to:cc:date:
+ mime-version:content-type;
+ bh=Zg3rSVqeVLs/LGKUFTXypSi/Ln1uVPLppMNZRPefgJ4=;
+ b=ThO3kAgi/kwiwkxiWRBZ0D6lfPZ6Kz2K6faSxMiyty4YxU8Ey/qjdVfGkUXpuAZRMbd0fb
+ O7LqyUqVyKbrw56bPSu5lVirg9X5xLtYacIuNbcgHc8oqg73uFidutez1rZ0fISTe2n6Dn
+ 7BmVhRa1Lx5mzyIh5ZA75p3H1P2pOk7hrc8tf8uGgBzIT7F9Xk2Y3OPF3MRkTcJ62DNrOr
+ N9zn8HKOyly0kA6ZF5AkIsvY0DjMQYSNyO1B7Xwxx0TjZ4OA7y6uky0TZ0bbiGTddeu9Do
+ vHJ1NMHjx2FZxu0Y05jttrWu6r51cXiORsi7fHvs1XR6wmdL1KHrch7LqehQUw==
+X-Report-Abuse-To: abuse@transip.nl
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
-X-Last-TLS-Session-Version: TLSv1.3
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 May 2025 14:52:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117423
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 May 2025 20:37:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117424
 
-Am Montag, 5. Mai 2025, 11:56:20 CEST schrieb Leonard Anderweit via lists.o=
-penembedded.org:
-> When building with sensord disabled (PACKAGECONFIG =3D ""), do_install
-> would fail because it tried to build sensord which was skiped in
+From: Jeroen Hofstee <jhofstee@victronenergy.com>
 
-small typo: skiped -> skipped
+Brotli can crash nodejs (on ARM), because the memory allocated for
+brotli wasn't properly aligned.
 
-> do_compile.
-> Error log:
-> make: *** No rule to make target 'rrd.h', needed by 'prog/sensord/rrd.rd'=
-=2E Stop.
->=20
-> Avoid building sensord in do_install by explicitly setting PROG_EXTRA.
->=20
-> (master rev: fc88c96c4e40d9dbc6097c4679ac79ed55356730)
->=20
-> Fixes: 86b20b84ec27 (lmsensors: Clean stale files for sensord to avoid
-> incorrect GCC header dependencies)
->=20
-> Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+https://github.com/google/brotli/issues/1159
+https://github.com/nodejs/node/commit/dc035bbc9b310ff8067bc0dad2223097848=
+9c061
 
-Otherwise this fixes the build issue
-Reviewed-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+Signed-off-by: Jeroen Hofstee <jhofstee@victronenergy.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 64760af3c38c00d40ba2782b9c4a4ec544e232f4)
+---
+ .../nodejs/zlib-fix-pointer-alignment.patch   | 64 +++++++++++++++++++
+ .../recipes-devtools/nodejs/nodejs_22.14.0.bb |  1 +
+ 2 files changed, 65 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-point=
+er-alignment.patch
 
-> ---
->  meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb b/meta-oe/=
-recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
-> index e3186132c76c..6e4cf29f479f 100644
-> --- a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
-> +++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
-> @@ -48,7 +48,8 @@ S =3D "${WORKDIR}/git"
->  EXTRA_OEMAKE =3D 'EXLDFLAGS=3D"${LDFLAGS}" \
->          MACHINE=3D${TARGET_ARCH} PREFIX=3D${prefix} MANDIR=3D${mandir} \
->          LIBDIR=3D${libdir} \
-> -        CC=3D"${CC}" AR=3D"${AR}"'
-> +        CC=3D"${CC}" AR=3D"${AR}" \
-> +        PROG_EXTRA=3D"sensors ${PACKAGECONFIG_CONFARGS}"'
-> =20
->  do_configure:prepend() {
->      sed -i -e 's:^#\(PROG_EXTRA\):\1:' ${S}/Makefile
-> @@ -59,7 +60,7 @@ do_compile() {
->      sed -i -e 's/\$(LIBDIR)$/\$(LIBDIR) \$(LDFLAGS)/g' ${S}/Makefile
->      sed -i -e 's/\$(LIBSHSONAME) -o/$(LIBSHSONAME) \$(LDFLAGS) -o/g' \
->                  ${S}/lib/Module.mk
-> -    oe_runmake user PROG_EXTRA=3D"sensors ${PACKAGECONFIG_CONFARGS}"
-> +    oe_runmake user
->  }
-> =20
->  do_install() {
->=20
-
-
-=2D-=20
-TQ-Systems GmbH | M=FChlstra=DFe 2, Gut Delling | 82229 Seefeld, Germany
-Amtsgericht M=FCnchen, HRB 105018
-Gesch=E4ftsf=FChrer: Detlef Schneider, R=FCdiger Stahl, Stefan Schneider
-http://www.tq-group.com/
-
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-pointer-alig=
+nment.patch b/meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-pointer-ali=
+gnment.patch
+new file mode 100644
+index 0000000000..e372911193
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-pointer-alignment.p=
+atch
+@@ -0,0 +1,64 @@
++From dc035bbc9b310ff8067bc0dad22230978489c061 Mon Sep 17 00:00:00 2001
++From: jhofstee <jeroen@myspectrum.nl>
++Date: Wed, 9 Apr 2025 12:24:13 +0200
++Subject: [PATCH] zlib: fix pointer alignment
++MIME-Version: 1.0
++Content-Type: text/plain; charset=3DUTF-8
++Content-Transfer-Encoding: 8bit
++
++The function AllocForBrotli prefixes the allocated memory with its
++size, and returns a pointer to the region after it. This pointer can
++however no longer be suitably aligned. Correct this by allocating
++the maximum of the the size of the size_t and the max alignment.
++
++On Arm 32bits the size_t is 4 bytes long, but the alignment is 8 for
++some NEON instructions. When Brotli is compiled with optimizations
++enabled newer GCC versions will use the NEON instructions and trigger
++a bus error killing node.
++
++see https://github.com/google/brotli/issues/1159
++
++PR-URL: https://github.com/nodejs/node/pull/57727
++Reviewed-By: Shelley Vohr <shelley.vohr@gmail.com>
++Reviewed-By: Tobias Nie=C3=9Fen <tniessen@tnie.de>
++Reviewed-By: Daniel Lemire <daniel@lemire.me>
++Reviewed-By: Gerhard St=C3=B6bich <deb2001-github@yahoo.de>
++
++Upstream-Status: Backport [https://github.com/nodejs/node/commit/dc035bb=
+c9b310ff8067bc0dad22230978489c061]
++---
++ src/node_zlib.cc | 8 +++++---
++ 1 file changed, 5 insertions(+), 3 deletions(-)
++
++diff --git a/src/node_zlib.cc b/src/node_zlib.cc
++index 0b7c47b326c7c5..7e6b38ecd1aa36 100644
++--- a/src/node_zlib.cc
+++++ b/src/node_zlib.cc
++@@ -608,7 +608,8 @@ class CompressionStream : public AsyncWrap, public T=
+hreadPoolWork {
++   }
++=20
++   static void* AllocForBrotli(void* data, size_t size) {
++-    size +=3D sizeof(size_t);
+++    constexpr size_t offset =3D std::max(sizeof(size_t), alignof(max_al=
+ign_t));
+++    size +=3D offset;
++     CompressionStream* ctx =3D static_cast<CompressionStream*>(data);
++     char* memory =3D UncheckedMalloc(size);
++     if (memory =3D=3D nullptr) [[unlikely]] {
++@@ -617,7 +618,7 @@ class CompressionStream : public AsyncWrap, public T=
+hreadPoolWork {
++     *reinterpret_cast<size_t*>(memory) =3D size;
++     ctx->unreported_allocations_.fetch_add(size,
++                                            std::memory_order_relaxed);
++-    return memory + sizeof(size_t);
+++    return memory + offset;
++   }
++=20
++   static void FreeForZlib(void* data, void* pointer) {
++@@ -625,7 +626,8 @@ class CompressionStream : public AsyncWrap, public T=
+hreadPoolWork {
++       return;
++     }
++     CompressionStream* ctx =3D static_cast<CompressionStream*>(data);
++-    char* real_pointer =3D static_cast<char*>(pointer) - sizeof(size_t)=
+;
+++    constexpr size_t offset =3D std::max(sizeof(size_t), alignof(max_al=
+ign_t));
+++    char* real_pointer =3D static_cast<char*>(pointer) - offset;
++     size_t real_size =3D *reinterpret_cast<size_t*>(real_pointer);
++     ctx->unreported_allocations_.fetch_sub(real_size,
++                                            std::memory_order_relaxed);
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb b/meta-oe/=
+recipes-devtools/nodejs/nodejs_22.14.0.bb
+index dee4c9df4f..627fd7ad24 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.14.0.bb
+@@ -29,6 +29,7 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.=
+tar.xz \
+            file://0001-deps-disable-io_uring-support-in-libuv.patch \
+            file://0001-positional-args.patch \
+            file://0001-custom-env.patch \
++           file://zlib-fix-pointer-alignment.patch \
+            file://run-ptest \
+            "
+ SRC_URI:append:class-target =3D " \
+--=20
+2.43.0
 
 
