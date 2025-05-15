@@ -1,102 +1,134 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <alexander.stein@ew.tq-group.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79B36C3ABC9
-	for <webhook@archiver.kernel.org>; Thu, 15 May 2025 11:12:48 +0000 (UTC)
-Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
- by mx.groups.io with SMTP id smtpd.web10.10069.1747307561025383514
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C8A7C2D0CD
+	for <webhook@archiver.kernel.org>; Thu, 15 May 2025 14:52:45 +0000 (UTC)
+Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
+ by mx.groups.io with SMTP id smtpd.web11.14642.1747320759537603840
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 May 2025 04:12:41 -0700
+ Thu, 15 May 2025 07:52:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Z/ZAmjGj;
- spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-e7b5f81594fso263099276.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 May 2025 04:12:40 -0700 (PDT)
+ dkim=pass header.i=@tq-group.com header.s=key1 header.b=WdRWiGn7;
+ dkim=fail reason="dkim: no key for signature: lookup dkim._domainkey.ew.tq-group.com on 100.100.100.100:53: no such host" header.i=@ew.tq-group.com header.s=dkim header.b=tsH3jmKI;
+ spf=pass (domain: ew.tq-group.com, ip: 93.104.207.81, mailfrom: alexander.stein@ew.tq-group.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747307560; x=1747912360; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=UePLTMW+5VGNJ6/2GgidArz13C+jx9ZWbuagLcRqn1o=;
-        b=Z/ZAmjGjDWy58YrW5zjrDHzYJg/voUBOsAR14Ys9IKBt3gpT9Tm7QQS7fCltYytvmE
-         UMj0EdVptb/Q0gar8G4/PDqywEG9hAZd+CoxVY+hhScrHkRiMu44HrW9AkU41bDSXUpB
-         sKY1RMoCnSLHRC2nc5+Rkh4Cy+5yDHJdQ97E6I0l3vP6HGH7AEeYyqt/6tQJLEsDJdE0
-         muC1hSWwxQwFulhxns0fRJUa3qFsf5G0LwKcix/TXpIRbtUnl0kyNxoj7eicbKYo9KL+
-         YZj/0CAqQt7MovXAr9mJN7EZWUtxlXITxp9G3FSATE4lu7u8bIyIsJCpF7pCCwsA8ubp
-         mETg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747307560; x=1747912360;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=UePLTMW+5VGNJ6/2GgidArz13C+jx9ZWbuagLcRqn1o=;
-        b=BeEQRCmP3sKglhHUtee6Vobk925fs2ak+eurSXZY1nd/HILC7RKjOpe2nAwXNHB2o0
-         eN2WBrbOSd2dT5c7bs5jnaaAeUEUJTKtNpPzkTOlLq35WoG1NOeAqjtpBiHCMxV4kyRH
-         ud9yU+884Fv4BdVJM/a/t0MkVc22TYwVAuJy9F2r1Ey+xEh9rnMnFQUkov+N27hr6k0O
-         H1pd0ymcqb0/huQqE/xZzo7zZYdL8Q0mGVmILRqygxHO0Y2PAJifQg/SBLiUINHfZiBN
-         BAC6uvl2F6qn+4pu+wpQSxbZEWcLPdcnUwTw6ZsKzccMD4gEn4RlceQ8c+Yx28EjCETy
-         nRJg==
-X-Gm-Message-State: AOJu0YzQOBqCwxtarrQ2hbGolC8pDXeB6jPDK7Gsx3WpDhDAs4EVnzcb
-	yzQxjmWSM1pqq93S/mrSCxc9TxJgIBHAQOPZZ1sPl1G2keiB03A/hBUkeqW2
-X-Gm-Gg: ASbGncvfUxuPZPc0EHopRv8SahJ6zjg94W1Ko3iZ96RVTbAyggP7fmhn74x61aOICZV
-	eTc/hhrXOa+MsneAiMBNE+rkTHEKzKz19aAn3+YAdh5Te4I3fydbgzMt2FOvtR6NJCOcM7BFsL8
-	npJhJ26Ns9hsrqehyeEPkKfwFFUnwu9B1Vn69wca1Jao4Qs9Poz7wHPEJzRjatjng0RMc1HUiSU
-	8suHgBBi0pGf+USTGFJviouMA0x1gH5KlA/R/n8wLb0WVXeMkKMo7vqUanOcIc/cyLct7hGRGjS
-	vk1opzBOpaX4VgzkgBE6fps0Ne0A2YYIKHMpyLMbwQTsR2znh8x5TXOQ
-X-Google-Smtp-Source: AGHT+IHsuzjMpvgvu1vXCJ8AP+CjJKnw+9IrVnfV3iA187NMo3H7VAqSAQ00pwBz7o6pBLkx0gR04w==
-X-Received: by 2002:a05:6902:2e0f:b0:e79:1281:c4e7 with SMTP id 3f1490d57ef6-e7b3d613ac2mr8192821276.48.1747307559432;
-        Thu, 15 May 2025 04:12:39 -0700 (PDT)
-Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e78fd4a72f0sm3619816276.20.2025.05.15.04.12.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 May 2025 04:12:38 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1747320759; x=1778856759;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=Lu3XuV0RpKO3RQrSoUyNvnSyZmcRcICY3Gnkm5K5QHU=;
+  b=WdRWiGn7a9Nz4TscBxrL5MVQcEfQdUNm9va7C36GOCf7r5jLAol2jNA2
+   W6CzJDvTXJfrBOPCDKXiNPslM6CfMPN/XXit20PpTO0lXAkY5xaPDqSCe
+   3kD8PkRaNNVW/CK46PMLJwkn4QbegBeaQyk/maBQNlWXbA5Rhep/0QgPl
+   wIEFQ2WMeq3SlYr/m8U4/E+iK6M1sZGyLxUfMEcgUhAbxw30lcL2kzzjb
+   ikqxZJOFLcdgTJycNMgRPviTdlB05BNPPAwi5pz7Q+munxMKru3Q1enF4
+   l7KFY3o23qOYCkukHccteYbGWMErlSTZ64ZYgkzDyL84ZDTltdvaETSTt
+   w==;
+X-CSE-ConnectionGUID: cn+Lx/VgT+qB5EtKH2eNpw==
+X-CSE-MsgGUID: QIoll4RwRnacEGiLK4KSGg==
+X-IronPort-AV: E=Sophos;i="6.15,291,1739833200"; 
+   d="scan'208";a="44102710"
+Received: from vmailcow01.tq-net.de ([10.150.86.48])
+  by mx1.tq-group.com with ESMTP; 15 May 2025 16:52:37 +0200
+X-CheckPoint: {6825FFB5-4-68AAF6F9-E177A1A4}
+X-MAIL-CPID: EA02A107B2459EB848C3E7DF0C8ED143_2
+X-Control-Analysis: str=0001.0A00639A.6825FFBA.0041,ss=1,re=0.000,recu=0.000,reip=0.000,cl=1,cld=1,fgs=0
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 98E2A168729;
+	Thu, 15 May 2025 16:52:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ew.tq-group.com;
+	s=dkim; t=1747320752;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Lu3XuV0RpKO3RQrSoUyNvnSyZmcRcICY3Gnkm5K5QHU=;
+	b=tsH3jmKIGoR6Wl6XXJb2TVgRzv844nVCCL+MTk1Hpv5GuY3PJ+Khz1J0zeCQSzOeS99Add
+	pSUn54F628qmp3TPDaB3++7ek6D6uxEJ4EXbUVcfCMs2pHsS00TeBhjydvaikd39krLvC/
+	AcwxC5Aqfg511qIaEqAQK30Zer2DhA+FSQQg9/R+ND2nslaOyjhUUgkf+eOLpP8UKOzsvJ
+	a/z71eOTNp+LKCAPb6tStjyAr9hDQqKd/5Yg6qDsBH/oS/NiQAMlN1JnSQjmmmwebH2oDN
+	01pReKXu0k1D6uDY3gUcuvYP3RSlMh0Z4yEjkqRFnI5bFs3ISEOcWZ2r5CExFA==
+From: Alexander Stein <alexander.stein@ew.tq-group.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] nodejs: upgrade 22.15.0 -> 22.15.1
-Date: Thu, 15 May 2025 07:12:19 -0400
-Message-ID: <20250515111220.4395-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: upstream@lists.phytec.de, L.Anderweit@phytec.de
+Subject: 
+ Re: [oe] [meta-oe][scarthgap][PATCH] lmsensors: Fix build without sensord
+Date: Thu, 15 May 2025 16:52:32 +0200
+Message-ID: <5004930.GXAFRqVoOG@steina-w>
+Organization: TQ-Systems GmbH
+In-Reply-To: <20250505095620.14907-1-l.anderweit@phytec.de>
+References: <20250505095620.14907-1-l.anderweit@phytec.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
+X-Last-TLS-Session-Version: TLSv1.3
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 May 2025 11:12:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117422
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 May 2025 14:52:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117423
 
-This is a security update.
+Am Montag, 5. Mai 2025, 11:56:20 CEST schrieb Leonard Anderweit via lists.o=
+penembedded.org:
+> When building with sensord disabled (PACKAGECONFIG =3D ""), do_install
+> would fail because it tried to build sensord which was skiped in
 
-    (CVE-2025-23166) fix error handling on async crypto operation
-    (CVE-2025-23165) add missing call to uv_fs_req_cleanup
+small typo: skiped -> skipped
 
-https://nodejs.org/en/blog/vulnerability/may-2025-security-releases
+> do_compile.
+> Error log:
+> make: *** No rule to make target 'rrd.h', needed by 'prog/sensord/rrd.rd'=
+=2E Stop.
+>=20
+> Avoid building sensord in do_install by explicitly setting PROG_EXTRA.
+>=20
+> (master rev: fc88c96c4e40d9dbc6097c4679ac79ed55356730)
+>=20
+> Fixes: 86b20b84ec27 (lmsensors: Clean stale files for sensord to avoid
+> incorrect GCC header dependencies)
+>=20
+> Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-Changelog: https://github.com/nodejs/node/releases/tag/v22.15.1
+Otherwise this fixes the build issue
+Reviewed-by: Alexander Stein <alexander.stein@ew.tq-group.com>
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- .../nodejs/{nodejs_22.15.0.bb => nodejs_22.15.1.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_22.15.0.bb => nodejs_22.15.1.bb} (98%)
+> ---
+>  meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb b/meta-oe/=
+recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+> index e3186132c76c..6e4cf29f479f 100644
+> --- a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+> +++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+> @@ -48,7 +48,8 @@ S =3D "${WORKDIR}/git"
+>  EXTRA_OEMAKE =3D 'EXLDFLAGS=3D"${LDFLAGS}" \
+>          MACHINE=3D${TARGET_ARCH} PREFIX=3D${prefix} MANDIR=3D${mandir} \
+>          LIBDIR=3D${libdir} \
+> -        CC=3D"${CC}" AR=3D"${AR}"'
+> +        CC=3D"${CC}" AR=3D"${AR}" \
+> +        PROG_EXTRA=3D"sensors ${PACKAGECONFIG_CONFARGS}"'
+> =20
+>  do_configure:prepend() {
+>      sed -i -e 's:^#\(PROG_EXTRA\):\1:' ${S}/Makefile
+> @@ -59,7 +60,7 @@ do_compile() {
+>      sed -i -e 's/\$(LIBDIR)$/\$(LIBDIR) \$(LDFLAGS)/g' ${S}/Makefile
+>      sed -i -e 's/\$(LIBSHSONAME) -o/$(LIBSHSONAME) \$(LDFLAGS) -o/g' \
+>                  ${S}/lib/Module.mk
+> -    oe_runmake user PROG_EXTRA=3D"sensors ${PACKAGECONFIG_CONFARGS}"
+> +    oe_runmake user
+>  }
+> =20
+>  do_install() {
+>=20
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.15.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.15.1.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_22.15.0.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_22.15.1.bb
-index a255749711..9798635ba2 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_22.15.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.15.1.bb
-@@ -38,7 +38,7 @@ SRC_URI:append:class-target = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "e7c4226d1d92f33ad854d6da4f7e519e77690b8e73f93496881f8c539174d9df"
-+SRC_URI[sha256sum] = "c19f0177d21c621746625e5f37590bd0d79a72043b77b53784cba5f145e7263e"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
--- 
-2.43.0
+
+=2D-=20
+TQ-Systems GmbH | M=FChlstra=DFe 2, Gut Delling | 82229 Seefeld, Germany
+Amtsgericht M=FCnchen, HRB 105018
+Gesch=E4ftsf=FChrer: Detlef Schneider, R=FCdiger Stahl, Stefan Schneider
+http://www.tq-group.com/
+
 
 
