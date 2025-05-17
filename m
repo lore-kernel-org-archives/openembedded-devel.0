@@ -1,74 +1,73 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14741C2D0CD
-	for <webhook@archiver.kernel.org>; Sat, 17 May 2025 19:05:20 +0000 (UTC)
-Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com [209.85.208.173])
- by mx.groups.io with SMTP id smtpd.web10.17456.1747508709556564406
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3829BC3ABDD
+	for <webhook@archiver.kernel.org>; Sat, 17 May 2025 20:22:50 +0000 (UTC)
+Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
+ by mx.groups.io with SMTP id smtpd.web11.18654.1747513362657019609
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 May 2025 12:05:09 -0700
+ Sat, 17 May 2025 13:22:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gP2aSicL;
- spf=pass (domain: gmail.com, ip: 209.85.208.173, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-32909637624so6233251fa.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 May 2025 12:05:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YIXwAnmN;
+ spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-2db9e29d3bcso468755fac.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 May 2025 13:22:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747508707; x=1748113507; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1747513362; x=1748118162; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NFQTSy9+0fYzY8XnMy36914ZYn5xv/Gwiqz7kqiT8Ik=;
-        b=gP2aSicL/XedX9b6a31wet3j82k0kxrOJJn9xYI35UtfS/zeZmsYQlfwRQourlaI8q
-         +2EP6Xer78hppIid3aqKnZPfV0nREohrGOSho6sO5tJMQzCjNmtWXHUeQj2QcvOf00i/
-         T5IqnLLQ1uOjaHPl9NaSh3/1oqBOHA1uH+ZizlCCP2bpIyXLLIYWTZR1GYndBhnl6hkD
-         DyQSnUGp1nschCfMj6YUkFtm/yfY2ydgpBAbhpgFzq8oPpaqeT0DTRLeaKVXthhHqd5F
-         0+HIOy9KP+TCO5P5DwI515n4uT/KkiFL3+2qabFrImbRHdOdD7ULOmV2iAD8ByTyNuKy
-         T5iw==
+        bh=0CBB618Ngraz4sOiDf3fNlYH1MRqTASkA6196ML18S4=;
+        b=YIXwAnmN2SLRVVFaUr6AYIfgCoXsOEvCT8XksBFpjk6Wpyg2QTgDh+ZJTmKh+fkAXt
+         b2V4XHPM9VVl4jBQsqW000iarnKgB+uiJuSvzZ1nNOo0PNy7+i6g0NZRw3lU6XeKmHt2
+         18awVl9ZoaCItkSACxSSnM0J/qtKoFtP2BvxED4uQlxrm+uMFGjDLrYtlYMXGKMi+4/w
+         F0cL3tk7+9SwN5gqyLeNV0Uf+PZVsGKYDruE+ZqOouuZYgRiHpkEGGPS1MzcBwZz2MEL
+         FavjrHTHMLl3s6qNBSf++7QOfrpSnISB6LIn3kyzJu1+dET/aVzbidF2iQAPyL3gFpIw
+         kEGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747508707; x=1748113507;
+        d=1e100.net; s=20230601; t=1747513362; x=1748118162;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=NFQTSy9+0fYzY8XnMy36914ZYn5xv/Gwiqz7kqiT8Ik=;
-        b=iOp5vHmmyKW8+608WDr4/SKbOU7UkhWPJBylzewjxZkJsgQymuykWK0W7J2IefTKQQ
-         98HaBB/cuNccGN/JSQH0l8ZW2oKX2cV2X3ARIi0YY1jg421ljtz2H9Hhv71UeSN4zCoa
-         S2WbagTpKYaagprDpOKm0sf6Iwk9rvYVAUIApsUiqAg9PevofqXCTfbBR7wYXqdzF0Gi
-         b65F8TZ0unaMSkjWH/N0Hew3GBnIULHZu7Uhw6b0AoLl8izD140yXKxIq/9k6yPZghcR
-         lEY6p0vr57qrgysOWMkOCWIy+KtFbCTusZGGTTo6NceP55IptS+8UD5s8+7HhZvk1O46
-         mmUA==
-X-Forwarded-Encrypted: i=1; AJvYcCVVonzK0cv9bWUoth9x2zjoGW0qmaySeBLb65uSWT9UDTz/94g6J79xYelrcYQuK7QAHLkiAA+2sKjxehDlfKx1dho=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwBr3NvTrC38WyJrpy9z/ZCZO9W6guGrrSELq4amBf68BmKRp31
-	V6UFVHcfwFvPBTQCzvR/2j3bqEqwVfGEgdgfMhIB27MPn9nfKHYLRfJqlOEs8OFJ1VL36aV4MUh
-	ro2yYHAOXR6PtKi6+pdbyWN3+KIaKVRA=
-X-Gm-Gg: ASbGnctjX7Qs1z95yzEsOR8wSZJA1TKRDo7VSfXjozQXkN0aVYEhjUiuHZffk18MFIx
-	eZfKtNP220Esp9JUeEPsC4RcfiQEBBo9P/8JxocG4OOmC/3FrXp37Nv1KR3y0piBxzW5wABGPL1
-	O/pSKNoh3QiHCgW8WOtUYsrJSue5ZXelfQoVA=
-X-Google-Smtp-Source: AGHT+IHaeWJmjNII3Z27insrhhz7R+YwT8lGDH1QMMddcY/E3WYjLFY1jjwyt01J309JcLS5YymfyXdPXeTpNV91oxE=
-X-Received: by 2002:a05:651c:54b:b0:307:deea:f576 with SMTP id
- 38308e7fff4ca-328077c37efmr26247811fa.34.1747508707225; Sat, 17 May 2025
- 12:05:07 -0700 (PDT)
+        bh=0CBB618Ngraz4sOiDf3fNlYH1MRqTASkA6196ML18S4=;
+        b=Af/SstlRhUCtFVpL5olGNnNquNDx+YittObIxXegUVYigIucKrGGVK3fcDXG9C01KJ
+         q+MwcMHtaduNpLZ5ofI4hGq9ZzmKPIkbbOpQ3j7kZaUVXkqqb3YDKo1OfQnQdfbpLrb2
+         4lUNfgfRtGie/ViUzjV2KmYjMu+r7M6uzkFivHNHLsld5Q88GLUpdTfjDISZec3v0cFr
+         WlM8P/YsY+2xUZpyVZem5Aj+0ZSKCYX3RggA+FgoUKofgrL9uPxwbFAY3jqdPauYUx63
+         77lKTFKoptsFuf9tdImO79OdAHpq0SQlO4RwIuF3SnNVO0xCeTJAIWS9TuzUxrYI7Tve
+         N8SA==
+X-Gm-Message-State: AOJu0Ywyj5kv2RANF12EhPRG6Da6AZ2YXbieQmenXg5BI9saLAe8WuCV
+	9nvF0g+Vkl447EzocKEBoIFr2V1r6N7X04tOVms2+yi6evtOUWN+3QHFYlbykTJwWqrv94UP1NP
+	+iD1vxUdvpKLgVFafyUNyfE0gMMgAOuk=
+X-Gm-Gg: ASbGncsjoGFiC/I/DkK2x5bRUYFjTTI0G5VjZjM+nXtvQg6Oys+uKY3VhRKdyB6MpoN
+	o64BSGAqhs8+lb2HG/HR3Syw/CgFAr0eoIP0baWU5qnE2SR+82nBw3rlKvdeFgWCqdCkONe/+Ee
+	oYk5Tjtv0umMa4B3oTZo8NDfhiAUUcpLU=
+X-Google-Smtp-Source: AGHT+IGNfQiJyLLh3Z0Cjw59JlVSxCuMppCT6Wc1PozjPixTAc6T9qutI6e8Z0sKfqvKr1L3uql3ElwYO6WCIyTuFyE=
+X-Received: by 2002:a05:6808:338c:b0:3f9:2fdc:ee93 with SMTP id
+ 5614622812f47-404d87b897dmr5153186b6e.30.1747513361584; Sat, 17 May 2025
+ 13:22:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <b890ddb1-a925-4b80-997c-15d7486d12b2@gmail.com>
 In-Reply-To: <b890ddb1-a925-4b80-997c-15d7486d12b2@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 17 May 2025 21:04:55 +0200
-X-Gm-Features: AX0GCFsQvDUQ9OBMYRTH1npelJ9-BClX75SMfKgLTmgcRPA7bNCkFN_PcYYOXdM
-Message-ID: <CA+chaQfCK=W0sNv0=imkoNCatJb0ykF+2GOrJhhqxDUOPajm=Q@mail.gmail.com>
-Subject: Re: [oe] walnascar merge request: May 17th
-To: akuster808@gmail.com
-Cc: Khem Raj <raj.khem@gmail.com>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 17 May 2025 13:22:15 -0700
+X-Gm-Features: AX0GCFtqefGzfBMXgMDk0OyWZFO7UiNwCMzoxTIIctanw1lcPHM6Zqs-hD4w3_w
+Message-ID: <CAMKF1soOrS0OgDLbLSKLRHq5QMuiV2ScAaWRjgjky9Xdj7h=jQ@mail.gmail.com>
+Subject: Re: walnascar merge request: May 17th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 17 May 2025 19:05:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117445
+ <openembedded-devel@lists.openembedded.org>; Sat, 17 May 2025 20:22:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117446
 
-On Sat, May 17, 2025 at 7:59=E2=80=AFPM Armin Kuster via
-lists.openembedded.org <akuster808=3Dgmail.com@lists.openembedded.org>
+merged thanks Armin.
+
+On Sat, May 17, 2025 at 10:59=E2=80=AFAM akuster808 <akuster808@gmail.com> =
 wrote:
 >
 > The following changes since commit 0d2d2d193a1619b6dbebaf335f1ef785478049=
@@ -110,11 +109,7 @@ e3:
 > Wang Mingyu (2):
 >        php: upgrade 8.4.5 -> 8.4.6
 >        python3-posix-ipc: upgrade 1.1.1 -> 1.2.0
-
-This upgrade needs additional fix from:
-https://git.openembedded.org/meta-openembedded/commit/?id=3D14fa41b559b1d4e=
-4185094ab38494c0f2010f297
-
+>
 > Yi Zhao (1):
 >        catch2: upgrade 3.8.0 -> 3.8.1
 >
@@ -164,15 +159,4 @@ on-to-0.64.patch
 -from-environment-variable.patch
 >   rename meta-python/recipes-devtools/python/{python3-posix-ipc_1.1.1.bb
 > =3D> python3-posix-ipc_1.2.0.bb} (51%)
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117444): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117444
-> Mute This Topic: https://lists.openembedded.org/mt/113165095/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
