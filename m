@@ -1,111 +1,249 @@
-Return-Path: <dimitris@siganos.org>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BB08C3ABD8
-	for <webhook@archiver.kernel.org>; Sun, 18 May 2025 19:29:47 +0000 (UTC)
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com [209.85.128.65])
- by mx.groups.io with SMTP id smtpd.web10.36126.1747596581638027521
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F205FC3ABD8
+	for <webhook@archiver.kernel.org>; Sun, 18 May 2025 20:36:27 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.web11.37165.1747600577711754531
  for <Openembedded-devel@lists.openembedded.org>;
- Sun, 18 May 2025 12:29:41 -0700
+ Sun, 18 May 2025 13:36:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siganos-org.20230601.gappssmtp.com header.s=20230601 header.b=OJFIKGrT;
- spf=none, err=permanent DNS error (domain: siganos.org, ip: 209.85.128.65, mailfrom: dimitris@siganos.org)
-Received: by mail-wm1-f65.google.com with SMTP id 5b1f17b1804b1-43cf257158fso26364175e9.2
-        for <Openembedded-devel@lists.openembedded.org>; Sun, 18 May 2025 12:29:41 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=LCvve4dT;
+ spf=pass (domain: smile.fr, ip: 209.85.128.44, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-442d146a1aaso34490955e9.1
+        for <Openembedded-devel@lists.openembedded.org>; Sun, 18 May 2025 13:36:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=siganos-org.20230601.gappssmtp.com; s=20230601; t=1747596580; x=1748201380; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nXg9sO2J2PpGD19LKIPbzaC5YUlFKRIC0jceUukRosE=;
-        b=OJFIKGrTDi9aZfqueifZAqTVx8jqQ5ZX98Atacyxyp04O7WGt/G5VvNbvJtgTD1qUM
-         MkFTp/58Hh6CL+uMU1KFZkmAM7qMP3NGGEImbYjTaG+1FpEc+9oWOrmK+SK/UDmdczXZ
-         49NUk697embQUPApGIRkjiPDlIH9hQBjiPOGhAvRaaVp2zYcyysyQK56LPFvVq1JAdlG
-         h94HwQzQMgaY/b1jSHYIL2FO8duRfZowNzGxQQmvKJ/IJyyaOJzYFHlXRj6cecij0wXM
-         79xJe/2Pe8j7c6ORnSlV/9A0v7jM17Za1RqK4XudnA4trWuLJnSR83FeWeWrppj2RZWY
-         SeDA==
+        d=smile.fr; s=google; t=1747600576; x=1748205376; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=cQE0xCzBNWF7mC4a+sMScQCZdA/0hfx1yb2NpnlXGBE=;
+        b=LCvve4dTallhduAOAo7uKdcmSyRWqrym4/10WVy6j0SIwmNpR0ydJxoSjt0ANm3MXJ
+         yRqYWGk89kXyUBvWrVDIevztFON3L5DoKFEY2rTntIR43XPekZMWr35xCVWBXHbXlsYl
+         12/4aDCMvqcLMfoxzvWseG+FbAGdCfI5JlEsg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747596580; x=1748201380;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nXg9sO2J2PpGD19LKIPbzaC5YUlFKRIC0jceUukRosE=;
-        b=CdCUt81FjnKyGUMDajpDXRWL3V/msYolTpocMvs7pEWfDeonRdnsFA2Kd+QRHDVHZL
-         ZC2YUqzbkXX6QXfoyCeztGCIxpp9i/sBNw0Hz6DJnR3yYLpi8om+RAgr3aOxT89a310R
-         H9BejCJNZo9FdHUr/qmkLP6MfDXk9JRbSxZZQrwyfhXIGGrW0gCAIiYNrUoCueyZYBu0
-         YXR57T84bJH2zCdMTQlYiTIjF6HCV5I1j0i0KS9JkoX66ty7B/W8RnQGwda3cXNOw2t2
-         OwxwC8IQ5xQGL0JE8LP1YJyzOtUu0iX1GoLSUx48d/XXa6X1tytE5qvAeHHtbd+V5SLs
-         EHlQ==
-X-Gm-Message-State: AOJu0YxwkMV9bkpuEN/hfxo2r+qUujyQK+OWnz8nhcm7trGltN5SpVqY
-	ToQwY/P6ULZ0oCjX8c1psFeyESIXPHvB5zU2b1dqd7ehtMXjT6aq+/Jshv8dyabFE37R7DVhCO3
-	2JEzJWt8HzQ6r
-X-Gm-Gg: ASbGncsdandsh1i73+D1CEO8hDXvEpyEOBPVo8Cg8GhVd5gqP7nQg61fcF3T6AYDdNh
-	e/IlJ2cLVQLv0L+YC0FNf+1idfFnlhdwJO++EUmYreKewt5ZeXUoZAbeZbsA2pwiQq1Q/MIQnwh
-	sPPXi/GYwtkLgXSB6pgeDlQ8O5xqGr3SAmg7awMEnOLNxoIMaAV8jzbSSAJ4sxyrQmu65Ohqeef
-	s/kls/KXJMZb+aK3WD98mNg6YXHp4LRUjx9E8FsjdmRhRcuHFBONxQOZfVmvUboSKHvZlVnNkX7
-	zdg01jE5qE3aG8bQRJnWzPbtghpzt02FAdvQdkjJNZA/ZtGo5YlmWPS0LETwmEwEBrBrDRv+RzK
-	uAVcotddiCH/ut08xBEJT
-X-Google-Smtp-Source: AGHT+IGQOpFgK7QDP4G5qT/HDZZ+CD4f4nxmypjMPZXih4IMq3bEjOL58GK3PJRcI2OVfkGiDad+rg==
-X-Received: by 2002:a05:600c:3ba1:b0:43d:b3:f95 with SMTP id 5b1f17b1804b1-442ff03c1f7mr72037475e9.28.1747596579745;
-        Sun, 18 May 2025 12:29:39 -0700 (PDT)
-Received: from tux.. (cpc79031-cbly7-2-0-cust13.6-2.cable.virginm.net. [82.14.108.14])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-442f338050csm182596135e9.10.2025.05.18.12.29.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 May 2025 12:29:39 -0700 (PDT)
-From: Dimitrios Siganos <dimitris@siganos.org>
-To: Openembedded-devel@lists.openembedded.org
-Cc: Dimitrios Siganos <dimitris@siganos.org>
-Subject: [meta-oe][PATCH] bvi: add new package
-Date: Sun, 18 May 2025 20:28:35 +0100
-Message-Id: <20250518192835.229015-2-dimitris@siganos.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250518192835.229015-1-dimitris@siganos.org>
-References: <20250518192835.229015-1-dimitris@siganos.org>
+        d=1e100.net; s=20230601; t=1747600576; x=1748205376;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=cQE0xCzBNWF7mC4a+sMScQCZdA/0hfx1yb2NpnlXGBE=;
+        b=iC9jFypnrl8gAyrUlzifaZ8NMF/kYk981a5+bYvlAbo9OTq99xcnDEiA71e/PDWBIC
+         riSDzR5C4Wzz4qiUq5rPEzkc6wtOxCun0zJl6P3oAp5LNKyvOOzKkwp5+vaNWu4VZSlK
+         DzvyOZbQMIQWhmB3+7af7G1hM4zxj3NNC4ljfwka6FAX9Nj40R4o6EqiBjdcsiBiyoMA
+         5NKTxUQjQXSnoyKIKsLA8JvNMLDHax7/u/xghlfDO3pYZdH7xfftl0sgbn8JQs0qk4Bq
+         h/4m3B9rK3Ro3LCYKEWnAvhfif5fNcT2NnbSKTS02pgMx2aKMZdtRUqT1iQWbbc4MJr1
+         JnGg==
+X-Gm-Message-State: AOJu0YzNfCCTtCPgx8EJw7Xc/t05PjoqWNnTwjQlo1bsNRaevtelq8MU
+	I22tvMwjSwl9ACay+nv3aAy8lCCYnOgf7mBdEk/8xtHoOdXBBnQ3I0K/Omw1YjjYgWZA8vyB0LL
+	FjeLeJ+EZgDsx5HrLSEcvpKNW+raCjPltp4Pt87SqYA==
+X-Gm-Gg: ASbGnctJecrEAkUOBpDPDEzZI5eWblXaIu3uVBdK4viWk6Ip9616Xg5JqqzzyPq1xe4
+	HYTiwFkz4vvg8QCb7n1HyPpxpez/OmJ+e2jyhMtT5WM/2x1YFUHbMAbsvpzEhZ4ZF1xHKEfcnNN
+	jzDRAmLg1sXHm+Dla1jxkIhodkG9mDXc6TfWySUI/aB7z06d51xtEgGRkVNLxg6Cg8Hnmc22JbE
+	U5VRw==
+X-Google-Smtp-Source: AGHT+IFnO4tS9oHTS7+4cb9wWm50pWZXS8fYZCIJBG1sIwtKkD/zqc/JWrmYRtqU9rUjcAZPk/LAHtsiCcnT5FMgHq4=
+X-Received: by 2002:a05:600c:4753:b0:43d:683:8cb2 with SMTP id
+ 5b1f17b1804b1-442fefef18amr77587335e9.14.1747600575920; Sun, 18 May 2025
+ 13:36:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250518192835.229015-1-dimitris@siganos.org> <20250518192835.229015-2-dimitris@siganos.org>
+In-Reply-To: <20250518192835.229015-2-dimitris@siganos.org>
+From: Yoann Congal <yoann.congal@smile.fr>
+Date: Sun, 18 May 2025 22:35:49 +0200
+X-Gm-Features: AX0GCFsnljdtuAlNOPl3q2NsnK5L8HUBS7LLnlBWu3SuxAVfIpj0m-uaqakLgS8
+Message-ID: <CAMSfU+5gCDDrw0ksTueG6DrQDqhWMMhwYZda1rRjev+J=tbqog@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] bvi: add new package
+To: dimitris@siganos.org
+Cc: Openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000089913906356ef71a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 18 May 2025 19:29:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117462
+ <openembedded-devel@lists.openembedded.org>; Sun, 18 May 2025 20:36:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117463
 
-bvi is a visual editor for binary files
+--00000000000089913906356ef71a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Dimitrios Siganos <dimitris@siganos.org>
----
- meta-oe/recipes-support/bvi/bvi_1.4.2.bb | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+Hello,
 
-diff --git a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
-new file mode 100644
-index 0000000000..e6da1efd41
---- /dev/null
-+++ b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Binary VI editor"
-+DESCRIPTION = "bvi is a visual editor for binary files."
-+HOMEPAGE = "https://sourceforge.net/projects/bvi"
-+SECTION = "console/utils"
-+LICENSE = "GPL-3.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a36207309d382da27cd66fdaae922e3c"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/bvi/bvi-${PV}.src.tar.gz"
-+SRC_URI[sha256sum] = "4bba16c2b496963a9b939336c0abcc8d488664492080ae43a86da18cf4ce94f2"
-+
-+DEPENDS += "ncurses"
-+
-+inherit pkgconfig autotools
-+
-+# build inside the source tree, bvi does not support out of tree building
-+B = "${S}"
-+
-+EXTRA_OECONF += "\
-+    --build=${BUILD_SYS} \
-+    --host=${TARGET_SYS} \
-+"
--- 
-2.34.1
+Le dim. 18 mai 2025 =C3=A0 21:29, Dimitrios Siganos via lists.openembedded.=
+org
+<dimitris=3Dsiganos.org@lists.openembedded.org> a =C3=A9crit :
 
+> bvi is a visual editor for binary files
+>
+> Signed-off-by: Dimitrios Siganos <dimitris@siganos.org>
+> ---
+>  meta-oe/recipes-support/bvi/bvi_1.4.2.bb | 21 +++++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+>
+> diff --git a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+> b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+> new file mode 100644
+> index 0000000000..e6da1efd41
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+> @@ -0,0 +1,21 @@
+> +SUMMARY =3D "Binary VI editor"
+> +DESCRIPTION =3D "bvi is a visual editor for binary files."
+> +HOMEPAGE =3D "https://sourceforge.net/projects/bvi"
+> +SECTION =3D "console/utils"
+> +LICENSE =3D "GPL-3.0-only"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da36207309d382da27cd66fdaae922=
+e3c"
+> +
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/bvi/bvi-${PV}.src.tar.gz"
+> +SRC_URI[sha256sum] =3D
+> "4bba16c2b496963a9b939336c0abcc8d488664492080ae43a86da18cf4ce94f2"
+> +
+> +DEPENDS +=3D "ncurses"
+> +
+> +inherit pkgconfig autotools
+> +
+> +# build inside the source tree, bvi does not support out of tree buildin=
+g
+> +B =3D "${S}"
+
+
+FYI, there is the autotools-brokensep class just for that.
+
+Also, that does not build on my system on master. Looks related to the
+gcc-15 incompatibilities mentioned here:
+https://sourceforge.net/p/bvi/bugs/16/
+My logs: https://pastebin.com/SH6uNHDi
+
+Finally, the last activity of the author was 2 years ago :
+https://sourceforge.net/p/bvi/activity/?page=3D0&limit=3D100#67ba1727be8108=
+c555c9b214
+It does not look maintained anymore :( (gcc15 ticket was 3 months ago, no
+activity)
+
+Regards,
+
+
+> +
+> +EXTRA_OECONF +=3D "\
+> +    --build=3D${BUILD_SYS} \
+> +    --host=3D${TARGET_SYS} \
+> +"
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#117462):
+> https://lists.openembedded.org/g/openembedded-devel/message/117462
+> Mute This Topic: https://lists.openembedded.org/mt/113180865/4316185
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> yoann.congal@smile.fr]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--=20
+Yoann Congal
+Smile ECS
+
+--00000000000089913906356ef71a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div>Hello,</div><br></div><div class=3D"=
+gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">Le=
+=C2=A0dim. 18 mai 2025 =C3=A0=C2=A021:29, Dimitrios Siganos via <a href=3D"=
+http://lists.openembedded.org">lists.openembedded.org</a> &lt;dimitris=3D<a=
+ href=3D"mailto:siganos.org@lists.openembedded.org">siganos.org@lists.opene=
+mbedded.org</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote class=3D"gmail=
+_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
+,204);padding-left:1ex">bvi is a visual editor for binary files<br>
+<br>
+Signed-off-by: Dimitrios Siganos &lt;<a href=3D"mailto:dimitris@siganos.org=
+" target=3D"_blank">dimitris@siganos.org</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-support/bvi/<a href=3D"http://bvi_1.4.2.bb" rel=3D"no=
+referrer" target=3D"_blank">bvi_1.4.2.bb</a> | 21 +++++++++++++++++++++<br>
+=C2=A01 file changed, 21 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/bvi/<a href=3D"http://bvi_=
+1.4.2.bb" rel=3D"noreferrer" target=3D"_blank">bvi_1.4.2.bb</a><br>
+<br>
+diff --git a/meta-oe/recipes-support/bvi/<a href=3D"http://bvi_1.4.2.bb" re=
+l=3D"noreferrer" target=3D"_blank">bvi_1.4.2.bb</a> b/meta-oe/recipes-suppo=
+rt/bvi/<a href=3D"http://bvi_1.4.2.bb" rel=3D"noreferrer" target=3D"_blank"=
+>bvi_1.4.2.bb</a><br>
+new file mode 100644<br>
+index 0000000000..e6da1efd41<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-support/bvi/<a href=3D"http://bvi_1.4.2.bb" rel=3D"no=
+referrer" target=3D"_blank">bvi_1.4.2.bb</a><br>
+@@ -0,0 +1,21 @@<br>
++SUMMARY =3D &quot;Binary VI editor&quot;<br>
++DESCRIPTION =3D &quot;bvi is a visual editor for binary files.&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://sourceforge.net/projects/bvi" rel=3D=
+"noreferrer" target=3D"_blank">https://sourceforge.net/projects/bvi</a>&quo=
+t;<br>
++SECTION =3D &quot;console/utils&quot;<br>
++LICENSE =3D &quot;GPL-3.0-only&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3Da36207309d382da27cd66fdaae=
+922e3c&quot;<br>
++<br>
++SRC_URI =3D &quot;${SOURCEFORGE_MIRROR}/bvi/bvi-${PV}.src.tar.gz&quot;<br>
++SRC_URI[sha256sum] =3D &quot;4bba16c2b496963a9b939336c0abcc8d488664492080a=
+e43a86da18cf4ce94f2&quot;<br>
++<br>
++DEPENDS +=3D &quot;ncurses&quot;<br>
++<br>
++inherit pkgconfig autotools<br>
++<br>
++# build inside the source tree, bvi does not support out of tree building<=
+br>
++B =3D &quot;${S}&quot;</blockquote><div><br></div><div>FYI, there is the a=
+utotools-brokensep class just for that.</div><div><br></div><div>Also, that=
+ does not build on my system on master. Looks related to the gcc-15 incompa=
+tibilities mentioned here: <a href=3D"https://sourceforge.net/p/bvi/bugs/16=
+/">https://sourceforge.net/p/bvi/bugs/16/</a></div><div>My logs: <a href=3D=
+"https://pastebin.com/SH6uNHDi">https://pastebin.com/SH6uNHDi</a></div><div=
+><br></div><div>Finally, the last activity of the author was 2 years ago : =
+<a href=3D"https://sourceforge.net/p/bvi/activity/?page=3D0&amp;limit=3D100=
+#67ba1727be8108c555c9b214">https://sourceforge.net/p/bvi/activity/?page=3D0=
+&amp;limit=3D100#67ba1727be8108c555c9b214</a></div><div>It does not look ma=
+intained anymore :( (gcc15 ticket was 3 months ago, no activity)</div><div>=
+<br></div><div>Regards,</div><div>=C2=A0</div><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
+4);padding-left:1ex">
++<br>
++EXTRA_OECONF +=3D &quot;\<br>
++=C2=A0 =C2=A0 --build=3D${BUILD_SYS} \<br>
++=C2=A0 =C2=A0 --host=3D${TARGET_SYS} \<br>
++&quot;<br>
+-- <br>
+2.34.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#117462): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/117462" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/117462</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/113180865/431=
+6185" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/113180865/4316185</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:yoann.congal@smile.fr" t=
+arget=3D"_blank">yoann.congal@smile.fr</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div><div><br clear=3D"all"></div><br><span class=3D"gmail_si=
+gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
+iv dir=3D"ltr"><font face=3D"Raleway, regular">Yoann Congal</font><div><fon=
+t face=3D"Raleway, regular">Smile ECS</font></div></div></div></div>
+
+--00000000000089913906356ef71a--
 
