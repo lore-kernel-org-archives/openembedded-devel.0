@@ -1,237 +1,290 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <dimitris@siganos.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DA6DC3ABC9
-	for <webhook@archiver.kernel.org>; Sun, 18 May 2025 21:56:09 +0000 (UTC)
-Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
- by mx.groups.io with SMTP id smtpd.web11.38330.1747605368512309564
- for <openembedded-devel@lists.openembedded.org>;
- Sun, 18 May 2025 14:56:08 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2DB4C3ABC9
+	for <webhook@archiver.kernel.org>; Mon, 19 May 2025 00:59:59 +0000 (UTC)
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.web10.41188.1747616396173247233
+ for <Openembedded-devel@lists.openembedded.org>;
+ Sun, 18 May 2025 17:59:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aerT0Dxh;
- spf=pass (domain: gmail.com, ip: 209.85.160.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-2c2ada8264aso1625538fac.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 18 May 2025 14:56:08 -0700 (PDT)
+ dkim=pass header.i=@siganos-org.20230601.gappssmtp.com header.s=20230601 header.b=zUVj0b9k;
+ spf=none, err=permanent DNS error (domain: siganos.org, ip: 209.85.216.47, mailfrom: dimitris@siganos.org)
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-30ea8b7c5c2so1172342a91.3
+        for <Openembedded-devel@lists.openembedded.org>; Sun, 18 May 2025 17:59:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747605368; x=1748210168; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JbvlsHkf6BrEnc/z/xR16uq7TvfIo7JZwg90zDDvND0=;
-        b=aerT0DxheI5nwhxvOzb+ZUgVvV+KdO53rcBtzHQL/B6eTB6UT4M/Z1qR+EnHhoOojb
-         TwUljHtPI2smJe1/hLRp3ABtVgmpye9WC4UtyJweV/PXPvrqDEAkHQDZpXsQNT9xGLO/
-         1jjMHlVriYhwAVfIcC5/rZJvwfwqHrxub592jU1Ll4GuJZ+ErDm7O1R2x45uiAnN8AMF
-         iD+Ek49gfOPoS2A2jBw7aQvsVgEgRgj/nYnc0AKBYHwaKl+jW4qpBfFAzW5YDaFX+X1c
-         j7kA5G81Da7dtM6AXFFwcwDW0jgvZDVP2bbNpsfhQEF/WIKM0u6lnYoMROxBeluB9Ld5
-         emEg==
+        d=siganos-org.20230601.gappssmtp.com; s=20230601; t=1747616395; x=1748221195; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=tbgXManak2pRuTe0y83H/dovGqVbG9Vbv6Yz35GvieE=;
+        b=zUVj0b9kI26TKRyDHqEk5tzY7Kuh3PUIOqLk1/WJjV4x2dth/uL7lHADhX+WZfS2wX
+         sIWW1kz1u02NijP4gRmTPQxdUsntdkFCqsdjFdpMvz8aNrSldyAGk2y0Hy8oVbzBtZoZ
+         2vBhIkCFQc8+gV55FmehLRLe+D8wwouu/kXY5oLh3DGA2cGAocAzDRyUUg9DFGP0pJUJ
+         TKZyiNoZ2YBlS27HzwYqFi4rOZAeUJ8Nrt0I8N5HamABeNgjS7mhSMoB1J5sVSgpDwML
+         +9SfmCtfF+f7iYII+f3ZsqAtCNioPGA2WszEGs7DZpiI3DM1Ah/xU3JAAtar2Yivaxh5
+         tWkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747605368; x=1748210168;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JbvlsHkf6BrEnc/z/xR16uq7TvfIo7JZwg90zDDvND0=;
-        b=JLvDL/4XfDOpxVVgIJZhhpZiD6cmF/E6x9bE0dvhkKCpV9YydoFbVO2xZTg8TxJ6X7
-         vWkHk8dcVz/ZBj/StslaGry05V2l9BH+MnXDPgOKN3loM890RNxkTDylFf/WNdfXb+VM
-         E/NiRVYN0qV3DZgEGwIFEE1SNGy/xASa58jWKS9zgQ5I3xhZqziaQTtjJQIYKH/Bc/hh
-         mZguh5cKLX1rnWPPHYUk2aT8MIlPMYseAFwJckH4dyRUyO/Q/tpGRo4haW+r+FTAfJRR
-         r7QmNEOBB6Ll5YNEhwIKByc5wZz21ZOhogcghNdOOy5YfvaWyl7YAEdeYA6CiWFPilo1
-         WCxQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXtTmBgiHbNK2kekkxLOYP2FyfgwgsrhZ3OOBbbaK8OjmpEhwENrkK2EuksxRtz0nropsrodtOJE8FWBXvNZ4Ftz60=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxzdlPN2nFDIR8R5Jood/rNrc30Z/OpiBoYx9qer8W+/W8etxnX
-	elTusfn2Krxqfg2TdWneu0ALZbLYakJUISvPxUZrJjsiYBJL9vBEriUIML/zLVVaFwMNp5iIa/f
-	aGGFTayA1R1+XuhBHRGuSgyCBbdjsMhI=
-X-Gm-Gg: ASbGncsGpuoUcqRxvzVZse6ik30WLabL24l9zsHx5oEOyt3ieDTV6LCTFQQZ8ATITvU
-	8sCAbt/khY+LMLiYDRAL7YS5+Nyer7JDBJOIcMpDOu2rY6fhngUmY5YqyRW4Y2zrsnVisM+4GY7
-	APqQWS/4TWAJRt4SedhtNE7eKiO5fW1gGk
-X-Google-Smtp-Source: AGHT+IGv5W6HbPaCQLNPY2cH3xpu2D5NKwVWaTZt2oxp7rkOirUlQ2p5ZclipTmVDU2Ndqa/ZXnT/ZrNh0a6L7hW82Q=
-X-Received: by 2002:a05:6870:8989:b0:2d6:667c:511f with SMTP id
- 586e51a60fabf-2e3c1c2e2e7mr6491393fac.9.1747605367569; Sun, 18 May 2025
- 14:56:07 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1747616395; x=1748221195;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=tbgXManak2pRuTe0y83H/dovGqVbG9Vbv6Yz35GvieE=;
+        b=SYpikLDlF1KwEyhR+Ft9ZshHhuGrgEZeRq7lwndhI8SmvoIs7+e/tKUvLwBKnnD7IV
+         /q8SR9/4XEADa0dAHiaRnBL+eE+FKjbpMClWTV81RW+8QqrtGVrgLcpbYULDBL+i4tim
+         NXNxDlp54SEn/EwYBmwMIPQ8QzxH5jeLn25tlzMgAMEw7Yc2NXAgwRZCVQdsEiUg5APd
+         ynaj0d4nPk4cMewkKrEmzI+pPX015aNZO+hIA1zIMBPC2YZpGXN0SUF7LoRYBjCNcBwX
+         WLkTUEllgoX9OpjBvVY3goE36JI0yo17VaHEKBk+JVeZrJYkGgNpGn5yhwfCuDG/PfnF
+         EAgA==
+X-Gm-Message-State: AOJu0Yykn2x5kBQ2GlSLm2TvTQxbnFBLChnGdOnXXj+6QP2sl+XNeCR+
+	8+DIUdhNuqw2RpXlVUtUdyHJxlMx0MwaMqmYTUakExW31PAHiyHevI4zueEc1usNBU1q6bt/tTa
+	0EY85ZvjlK/clyXaqtv3DN0eHSuN25LWYg5Hwo4Rsqw==
+X-Gm-Gg: ASbGncumxZSgMRuLxAte/TObaM23j5LPM3ESqEJowlBTAIK0A4pVFGsN4XTJt0eYhKr
+	Ty4BTGEqW5N+iNFi0xvyBGMIUwqD7VliPV4aIAeQjhASJdcgY55zAQavceKSVWMVeN/9P7lBLr1
+	s4OOix40Ow5pStSiamFaffNRsCdsMa0Z8=
+X-Google-Smtp-Source: AGHT+IEPWE21VGvJD5GD7sUrDDwY61Pu4sr8ABVBqMEpOHfInQeOkVq5ZJMjzLnYT1Y1q0J4TsdOS018O5XxBrD8bW8=
+X-Received: by 2002:a17:90b:3846:b0:2ff:6788:cc67 with SMTP id
+ 98e67ed59e1d1-30e7d5ceeb4mr14013865a91.34.1747616395241; Sun, 18 May 2025
+ 17:59:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250508063335.1498917-1-leon.anavi@konsulko.com> <CAMSfU+66CD4OPMjf4ofm1UEDY4TqSsrdppaeOg-qCYBCPVf2yw@mail.gmail.com>
-In-Reply-To: <CAMSfU+66CD4OPMjf4ofm1UEDY4TqSsrdppaeOg-qCYBCPVf2yw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 18 May 2025 14:55:41 -0700
-X-Gm-Features: AX0GCFv2ZwI-7xSIGnKxVtTWKiFMdfcBpklPk_DLCw3I-Qn1TwWX97OlSYr71N8
-Message-ID: <CAMKF1sqs3n66kb-qbM+22PLPNGf6qFNEjgbX6m7YVnnVGKTLnw@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCHv2] python3-pillow-heif: Add recipe
-To: yoann.congal@smile.fr
-Cc: leon.anavi@konsulko.com, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20250518192835.229015-1-dimitris@siganos.org> <20250518192835.229015-2-dimitris@siganos.org>
+ <CAMSfU+5gCDDrw0ksTueG6DrQDqhWMMhwYZda1rRjev+J=tbqog@mail.gmail.com>
+In-Reply-To: <CAMSfU+5gCDDrw0ksTueG6DrQDqhWMMhwYZda1rRjev+J=tbqog@mail.gmail.com>
+From: Dimitrios Siganos <dimitris@siganos.org>
+Date: Mon, 19 May 2025 01:59:44 +0100
+X-Gm-Features: AX0GCFsHOXoiEBCnA-HHgTl1B8-hSxghvAm11me6Au0fMf2q69BobxZiqKpOifU
+Message-ID: <CADGVJSJi8AxahjPcv=yO5n+Ocr-QO-e28N6ho4Fz_hKR1LWy=A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] bvi: add new package
+To: Yoann Congal <yoann.congal@smile.fr>
+Cc: Openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000713f81063572a67f"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 18 May 2025 21:56:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117465
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 00:59:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117466
 
-On Sun, May 18, 2025 at 2:03=E2=80=AFPM Yoann Congal via
-lists.openembedded.org <yoann.congal=3Dsmile.fr@lists.openembedded.org>
-wrote:
->
->
->
-> Le jeu. 8 mai 2025 =C3=A0 08:33, Leon Anavi via lists.openembedded.org <l=
-eon.anavi=3Dkonsulko.com@lists.openembedded.org> a =C3=A9crit :
->>
->> Add recipe for release 0.22.0:
->>
->> - Boolean pillow_heif.options.DISABLE_SECURITY_LIMITS to bypass
->>   security limit of libheif for the image size.
->> - libx265 library was updated to the latest 4.1 version.
->> - libheif was updated from the 1.19.5 to 1.19.7 version.
->> - AVIF format marked as deprecated and pending for the removal.
->>
->> This work was sponsored by GOVCERT.LU.
->>
->> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
->
->
+--000000000000713f81063572a67f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Yoann,
+
+Thank you for the feedback. Thank you for suggesting autotools-brokensep. I
+did not know about that. I will use it in the next iteration.
+
+The project uses pre-ANSI C function prototypes that seem to be
+incompatible with C23. I plan to specify compilation with C17, which seems
+to work.
+
+I will try to get in touch with Gerhard Buergmann and see what the status
+of the project is. The project started in 1996, approx 30 years ago, and he
+still released a version 2 years ago and it is only 3 months since his last
+post, so it is not clear to me if it is a completely unmaintained project.
+I will try to find out.
+
+Regards,
+Dimitris
+
+On Sun, 18 May 2025 at 21:36, Yoann Congal <yoann.congal@smile.fr> wrote:
+
 > Hello,
 >
-> This recipe triggers build failures when doing a meta-python world build =
-: libheif is in meta-multimedia but meta-python does not depend on meta-mul=
-timedia.
-> https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/46/ste=
-ps/41/logs/stdio (line 74)
+> Le dim. 18 mai 2025 =C3=A0 21:29, Dimitrios Siganos via lists.openembedde=
+d.org
+> <dimitris=3Dsiganos.org@lists.openembedded.org> a =C3=A9crit :
 >
-> Maybe this recipe should be moved to meta-multimedia?
->
-> NB: meta-multimedia does depends on meta-python
->
-
-Seems good to me. Please send a patch
-
-> Regards,
+>> bvi is a visual editor for binary files
 >>
+>> Signed-off-by: Dimitrios Siganos <dimitris@siganos.org>
 >> ---
->>  ...001-setup.py-support-cross-compiling.patch | 56 +++++++++++++++++++
->>  .../python/python3-pillow-heif_0.22.0.bb      | 20 +++++++
->>  2 files changed, 76 insertions(+)
->>  create mode 100644 meta-python/recipes-devtools/python/python3-pillow-h=
-eif/0001-setup.py-support-cross-compiling.patch
->>  create mode 100644 meta-python/recipes-devtools/python/python3-pillow-h=
-eif_0.22.0.bb
+>>  meta-oe/recipes-support/bvi/bvi_1.4.2.bb | 21 +++++++++++++++++++++
+>>  1 file changed, 21 insertions(+)
+>>  create mode 100644 meta-oe/recipes-support/bvi/bvi_1.4.2.bb
 >>
->> diff --git a/meta-python/recipes-devtools/python/python3-pillow-heif/000=
-1-setup.py-support-cross-compiling.patch b/meta-python/recipes-devtools/pyt=
-hon/python3-pillow-heif/0001-setup.py-support-cross-compiling.patch
+>> diff --git a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+>> b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
 >> new file mode 100644
->> index 0000000000..66cf7a9244
+>> index 0000000000..e6da1efd41
 >> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python3-pillow-heif/0001-setup=
-.py-support-cross-compiling.patch
->> @@ -0,0 +1,56 @@
->> +From 98e6831754712221ce030ce8b27e100a3926c543 Mon Sep 17 00:00:00 2001
->> +From: Leon Anavi <leon.anavi@konsulko.com>
->> +Date: Mon, 5 May 2025 16:08:37 +0000
->> +Subject: [PATCH] setup.py: support cross compiling
+>> +++ b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+>> @@ -0,0 +1,21 @@
+>> +SUMMARY =3D "Binary VI editor"
+>> +DESCRIPTION =3D "bvi is a visual editor for binary files."
+>> +HOMEPAGE =3D "https://sourceforge.net/projects/bvi"
+>> +SECTION =3D "console/utils"
+>> +LICENSE =3D "GPL-3.0-only"
+>> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da36207309d382da27cd66fdaae92=
+2e3c"
 >> +
->> +Upstream-Status: Inappropriate [oe specific]
+>> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/bvi/bvi-${PV}.src.tar.gz"
+>> +SRC_URI[sha256sum] =3D
+>> "4bba16c2b496963a9b939336c0abcc8d488664492080ae43a86da18cf4ce94f2"
 >> +
->> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
->> +---
->> + setup.py | 19 +++++++++++--------
->> + 1 file changed, 11 insertions(+), 8 deletions(-)
+>> +DEPENDS +=3D "ncurses"
 >> +
->> +diff --git a/setup.py b/setup.py
->> +index 68945e4..67566e8 100644
->> +--- a/setup.py
->> ++++ b/setup.py
->> +@@ -125,12 +125,12 @@ class PillowHeifBuildExt(build_ext):
->> +                     self._add_directory(library_dirs, match.group(1))
+>> +inherit pkgconfig autotools
 >> +
->> +         # include, rpath, if set as environment variables
->> +-        for k in ("C_INCLUDE_PATH", "CPATH", "INCLUDE"):
->> ++        for k in ("C_INCLUDE_PATH", "CPATH", "INCLUDE", "STAGING_INCDI=
-R"):
->> +             if k in os.environ:
->> +                 for d in os.environ[k].split(os.path.pathsep):
->> +                     self._add_directory(include_dirs, d)
->> +
->> +-        for k in ("LD_RUN_PATH", "LIBRARY_PATH", "LIB"):
->> ++        for k in ("LD_RUN_PATH", "LIBRARY_PATH", "LIB", "STAGING_LIBDI=
-R"):
->> +             if k in os.environ:
->> +                 for d in os.environ[k].split(os.path.pathsep):
->> +                     self._add_directory(library_dirs, d)
->> +@@ -199,12 +199,15 @@ class PillowHeifBuildExt(build_ext):
->> +             self._update_extension("_pillow_heif", ["heif"], extra_com=
-pile_args=3D["-O3", "-Werror"])
->> +         else:  # let's assume it's some kind of linux
->> +             # this old code waiting for refactoring, when time comes.
->> +-            self._add_directory(include_dirs, "/usr/local/include")
->> +-            self._add_directory(include_dirs, "/usr/include")
->> +-            self._add_directory(library_dirs, "/usr/local/lib")
->> +-            self._add_directory(library_dirs, "/usr/lib64")
->> +-            self._add_directory(library_dirs, "/usr/lib")
->> +-            self._add_directory(library_dirs, "/lib")
->> ++            include_os_path =3D os.environ.get("STAGING_INCDIR")
->> ++            if include_os_path:
->> ++                for path in include_os_path.split(os.pathsep):
->> ++                    self._add_directory(include_dirs, path)
->> ++
->> ++            lib_os_path =3D os.environ.get("STAGING_LIBDIR")
->> ++            if lib_os_path:
->> ++                for path in lib_os_path.split(os.pathsep):
->> ++                    self._add_directory(library_dirs, path)
->> +
->> +             self._update_extension("_pillow_heif", ["heif"], extra_com=
-pile_args=3D["-O3", "-Werror"])
->> +
->> +--
->> +2.39.5
->> +
->> diff --git a/meta-python/recipes-devtools/python/python3-pillow-heif_0.2=
-2.0.bb b/meta-python/recipes-devtools/python/python3-pillow-heif_0.22.0.bb
->> new file mode 100644
->> index 0000000000..7f5dfac702
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python3-pillow-heif_0.22.0.bb
->> @@ -0,0 +1,20 @@
->> +DESCRIPTION =3D "Python interface for libheif library"
->> +HOMEPAGE =3D "https://github.com/bigcat88/pillow_heif"
->> +LICENSE =3D "BSD-3-Clause"
->> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Db6c07a92aed67c33bc346748=
-d7c7e991"
->> +
->> +# While this item does not require it, it depends on libheif which does
->> +LICENSE_FLAGS =3D "commercial"
->> +
->> +PYPI_PACKAGE =3D "pillow_heif"
->> +
->> +inherit pypi python_setuptools_build_meta
->> +
->> +SRC_URI +=3D "file://0001-setup.py-support-cross-compiling.patch"
->> +SRC_URI[sha256sum] =3D "61d473929340d3073722f6316b7fbbdb11132faa6bac024=
-2328e8436cc55b39a"
->> +
->> +DEPENDS +=3D "libheif"
->> +
->> +RDEPENDS:${PN} +=3D "python3-pillow"
->> +
->> +BBCLASSEXTEND =3D "native nativesdk"
->> --
->> 2.39.5
->>
->>
->>
->>
+>> +# build inside the source tree, bvi does not support out of tree buildi=
+ng
+>> +B =3D "${S}"
 >
+>
+> FYI, there is the autotools-brokensep class just for that.
+>
+> Also, that does not build on my system on master. Looks related to the
+> gcc-15 incompatibilities mentioned here:
+> https://sourceforge.net/p/bvi/bugs/16/
+> My logs: https://pastebin.com/SH6uNHDi
+>
+> Finally, the last activity of the author was 2 years ago :
+> https://sourceforge.net/p/bvi/activity/?page=3D0&limit=3D100#67ba1727be81=
+08c555c9b214
+> It does not look maintained anymore :( (gcc15 ticket was 3 months ago, no
+> activity)
+>
+> Regards,
+>
+>
+>> +
+>> +EXTRA_OECONF +=3D "\
+>> +    --build=3D${BUILD_SYS} \
+>> +    --host=3D${TARGET_SYS} \
+>> +"
+>> --
+>> 2.34.1
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#117462):
+>> https://lists.openembedded.org/g/openembedded-devel/message/117462
+>> Mute This Topic: https://lists.openembedded.org/mt/113180865/4316185
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+>> yoann.congal@smile.fr]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
+>>
 >
 > --
 > Yoann Congal
 > Smile ECS
 >
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117464): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117464
-> Mute This Topic: https://lists.openembedded.org/mt/112783025/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+
+--000000000000713f81063572a67f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi Yoann,</div><div><br></div><div>Thank you for the =
+feedback. Thank you for suggesting autotools-brokensep. I did not know abou=
+t that. I will use it in the next iteration.</div><div><br></div><div>The p=
+roject uses pre-ANSI C function prototypes that seem to be incompatible wit=
+h C23. I plan to specify compilation with C17, which seems to work.</div><b=
+r><div>I will try to get in touch with Gerhard Buergmann and see what the s=
+tatus of the project is. The project started in 1996, approx 30 years ago, =
+and he still released a version 2 years ago and it is only 3 months since h=
+is last post, so it is not clear to me if it is a completely unmaintained p=
+roject. I will try to find out.</div><div><br></div><div>Regards,</div><div=
+>Dimitris</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Sun, 18 May 2025 at 21:36, Yoann Congal &lt;<a href=3D"m=
+ailto:yoann.congal@smile.fr" target=3D"_blank">yoann.congal@smile.fr</a>&gt=
+; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
+ 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div di=
+r=3D"ltr"><div dir=3D"ltr"><div>Hello,</div><br></div><div class=3D"gmail_q=
+uote"><div dir=3D"ltr" class=3D"gmail_attr">Le=C2=A0dim. 18 mai 2025 =C3=A0=
+=C2=A021:29, Dimitrios Siganos via <a href=3D"http://lists.openembedded.org=
+" target=3D"_blank">lists.openembedded.org</a> &lt;dimitris=3D<a href=3D"ma=
+ilto:siganos.org@lists.openembedded.org" target=3D"_blank">siganos.org@list=
+s.openembedded.org</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">bvi is a visual editor for binary files<br=
 >
+<br>
+Signed-off-by: Dimitrios Siganos &lt;<a href=3D"mailto:dimitris@siganos.org=
+" target=3D"_blank">dimitris@siganos.org</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-support/bvi/<a href=3D"http://bvi_1.4.2.bb" rel=3D"no=
+referrer" target=3D"_blank">bvi_1.4.2.bb</a> | 21 +++++++++++++++++++++<br>
+=C2=A01 file changed, 21 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/bvi/<a href=3D"http://bvi_=
+1.4.2.bb" rel=3D"noreferrer" target=3D"_blank">bvi_1.4.2.bb</a><br>
+<br>
+diff --git a/meta-oe/recipes-support/bvi/<a href=3D"http://bvi_1.4.2.bb" re=
+l=3D"noreferrer" target=3D"_blank">bvi_1.4.2.bb</a> b/meta-oe/recipes-suppo=
+rt/bvi/<a href=3D"http://bvi_1.4.2.bb" rel=3D"noreferrer" target=3D"_blank"=
+>bvi_1.4.2.bb</a><br>
+new file mode 100644<br>
+index 0000000000..e6da1efd41<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-support/bvi/<a href=3D"http://bvi_1.4.2.bb" rel=3D"no=
+referrer" target=3D"_blank">bvi_1.4.2.bb</a><br>
+@@ -0,0 +1,21 @@<br>
++SUMMARY =3D &quot;Binary VI editor&quot;<br>
++DESCRIPTION =3D &quot;bvi is a visual editor for binary files.&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://sourceforge.net/projects/bvi" rel=3D=
+"noreferrer" target=3D"_blank">https://sourceforge.net/projects/bvi</a>&quo=
+t;<br>
++SECTION =3D &quot;console/utils&quot;<br>
++LICENSE =3D &quot;GPL-3.0-only&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3Da36207309d382da27cd66fdaae=
+922e3c&quot;<br>
++<br>
++SRC_URI =3D &quot;${SOURCEFORGE_MIRROR}/bvi/bvi-${PV}.src.tar.gz&quot;<br>
++SRC_URI[sha256sum] =3D &quot;4bba16c2b496963a9b939336c0abcc8d488664492080a=
+e43a86da18cf4ce94f2&quot;<br>
++<br>
++DEPENDS +=3D &quot;ncurses&quot;<br>
++<br>
++inherit pkgconfig autotools<br>
++<br>
++# build inside the source tree, bvi does not support out of tree building<=
+br>
++B =3D &quot;${S}&quot;</blockquote><div><br></div><div>FYI, there is the a=
+utotools-brokensep class just for that.</div><div><br></div><div>Also, that=
+ does not build on my system on master. Looks related to the gcc-15 incompa=
+tibilities mentioned here: <a href=3D"https://sourceforge.net/p/bvi/bugs/16=
+/" target=3D"_blank">https://sourceforge.net/p/bvi/bugs/16/</a></div><div>M=
+y logs: <a href=3D"https://pastebin.com/SH6uNHDi" target=3D"_blank">https:/=
+/pastebin.com/SH6uNHDi</a></div><div><br></div><div>Finally, the last activ=
+ity of the author was 2 years ago : <a href=3D"https://sourceforge.net/p/bv=
+i/activity/?page=3D0&amp;limit=3D100#67ba1727be8108c555c9b214" target=3D"_b=
+lank">https://sourceforge.net/p/bvi/activity/?page=3D0&amp;limit=3D100#67ba=
+1727be8108c555c9b214</a></div><div>It does not look maintained anymore :( (=
+gcc15 ticket was 3 months ago, no activity)</div><div><br></div><div>Regard=
+s,</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:=
+0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++<br>
++EXTRA_OECONF +=3D &quot;\<br>
++=C2=A0 =C2=A0 --build=3D${BUILD_SYS} \<br>
++=C2=A0 =C2=A0 --host=3D${TARGET_SYS} \<br>
++&quot;<br>
+-- <br>
+2.34.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#117462): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/117462" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/117462</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/113180865/431=
+6185" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/113180865/4316185</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:yoann.congal@smile.fr" t=
+arget=3D"_blank">yoann.congal@smile.fr</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div><div><br clear=3D"all"></div><br><span class=3D"gmail_si=
+gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
+iv dir=3D"ltr"><font face=3D"Raleway, regular">Yoann Congal</font><div><fon=
+t face=3D"Raleway, regular">Smile ECS</font></div></div></div></div>
+</blockquote></div>
+
+--000000000000713f81063572a67f--
 
