@@ -2,63 +2,63 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 283F5C2D0CD
-	for <webhook@archiver.kernel.org>; Mon, 19 May 2025 08:16:52 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web11.46195.1747642603426515829
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B246C3DA6D
+	for <webhook@archiver.kernel.org>; Mon, 19 May 2025 08:18:12 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.web10.46274.1747642687719661139
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 May 2025 01:16:43 -0700
+ Mon, 19 May 2025 01:18:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JJ2CKTpX;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-3a0b9af89f2so2836115f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 01:16:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ivBUUuF6;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-441c99459e9so24518415e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 01:18:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747642602; x=1748247402; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1747642686; x=1748247486; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=sp5JSOKO/AB9IsFtUvtOkaGCBix3Zu3QIxxgtU9lW44=;
-        b=JJ2CKTpXYsJEXdDUFoCIXQpN4UMaSDKLiQDtM9IZ/R70a5JJaHRNWwiY2X50gZf1pB
-         3bf0XoGDHpjuccXm0gEBm5I2QZHxcLmWtUPwkCTDWhdWTWVahJnZ7PP29oEXYrV47HL/
-         t2Q5KrlOlOX38YVwiGN67YtolJUd0h+GsKh/XlrWjZ/9vG9nL03w3sPEZ8WjVOnTq+wv
-         X6A/Q+bSGN2fv8FHBXN5H62Qtft9LNMnCI9lzRFtfSTw7FG/H4Sl9kZXhn19EDA+8YSB
-         YrexeSlJq/davKixc8P36Eu/KHQdLri2IGwx5pfMDchPvDoKbY+vA7PIW4tBbSy+yFOs
-         tWAA==
+        bh=DKcS9Xel5rDawbkP4z6e8eOfoE7wKqKRP17e2blLoPQ=;
+        b=ivBUUuF6aHlrxexUpQzrij3nUYdjq4VEEfLfDCaQvU4Z4tM0WFmiUpjJHKbC6jgL2+
+         NReY+lW5nr0Mnk5Bf8fBGNqtHVwvGi6uCTlb6KoTch1FJGgV+3gsTqK09Gj4OVwp4qN7
+         z9xGEL9g980gNtYMK8injgxoETxNkLDtZmdgjP5/yJf5sEWTxBKJ8y33mwFNKwMnbq72
+         1nNaaIngUQUmLdZ3v+51nO2dz+RlC0CtgMrOY2eh3DkmIDiexIS2W+RuJynW1tc7Ijcw
+         Y5sxMz4IDO0PLEidOZQWqGwKO8NLDuKhV8bZGjRyshv/YV0ER6HPS+Z0jTFJNLFsqyLW
+         eD6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747642602; x=1748247402;
+        d=1e100.net; s=20230601; t=1747642686; x=1748247486;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=sp5JSOKO/AB9IsFtUvtOkaGCBix3Zu3QIxxgtU9lW44=;
-        b=i8V1OGlBa8gNSRpMQcBRVOVejekXzIveWWEehO8tY4Qrl8MNDqs0aDth2usPJgWP1p
-         cNf0rdNdDq6gCUn8sYKcuK25B1PwqEf1+fdaX3wTZR7NlSxBqI2CvoAurK+Ml7FeSMO1
-         4QntdTkdPHpZjjCdTfMgAmiQSA/qU8HkyuO+IENlbLJqJN01GyYaeJt9JF59/SQw5+b/
-         IV0mxGQlqDqcrpJHM8u0gwsaR/cmXvZguUSXXpaGmxhcR13wu3M48HXHu7GXrqPWV7BU
-         K7KdrMMipd1c+2Sd8PAKJrak41vy//094gS8EyxWubriv9Rh++Pf0Swt1aQNQ32unP9A
-         fWNA==
-X-Gm-Message-State: AOJu0Ywp1x+uJ3rRYlMApANlyMM5FVido6pqSvfL1EaGhayObt+zdbHB
-	HP/VEojqQMlGkvzqIi8WmqRKmY05JGLxGSKFKI8bsS0oc4wWk6HzdihbRg//Pg==
-X-Gm-Gg: ASbGncuULzphwvw+93io4um6Ba+syAW1VH/JOmKiZMQzg1TPTbXENQuejnXW01Tcps0
-	Fam4uMO8FoKyDicrnpxZQdY1S9vpkoegCwjE7R87c67v+NM0SVk/GyDokOP7ZBu18kCfQbqg0i8
-	85fYa6ObyxQi08zpUDQF57hjkLFNa1NmFWSCLHX4SAOfvI0KEKZStxo0aDqQlK+JTMypVaJCU+/
-	k81h6K5+wnpCvHnZcJNJqkqxLQcTgkdaw/hA01SkH3WwqjvqOmUFGi98Wp6ypqiYBwtmn3ZMCjO
-	pHGUqHNz1u/Urbu+TKAHLoc4yKcW1v1jE9AgMsKUUobF9IGWzQ24vMPLd6gWPIdbn0Pyb+JJsJT
-	R0ExOZf6r
-X-Google-Smtp-Source: AGHT+IFFfWnIIuruDE0q1nx2T5NJROjFM9Ejy/2ovY/iMeoSaZDcMnwA0/fMF6ko3n/T9r7MBoLyaA==
-X-Received: by 2002:a05:6000:40e0:b0:3a1:f635:1133 with SMTP id ffacd0b85a97d-3a35fe5bb6cmr10788000f8f.7.1747642601513;
-        Mon, 19 May 2025 01:16:41 -0700 (PDT)
+        bh=DKcS9Xel5rDawbkP4z6e8eOfoE7wKqKRP17e2blLoPQ=;
+        b=PT39el02sX+BmLeQoqnrX12DTBDqr2dnJhDHkurgH88Ho1Z1nqW4VMartoriK46fDl
+         uILvyizdaUMeN6BgdC83G80kpQeG9V1+glEnS/9SizOR7punbkUklVQj36WxRoOEmOty
+         pvucilc6fS1L3wOwCqowaxLz32B/wCSUcZMU6q8Q8SWzMtqyNiOF+D8sj3Qby/EC6O4+
+         DD/NPXIF5xYSw/StMRk+UOjef7UacSMpvtfQollgipzgV5xDaxiC4rCyyw0YYrIvV0vM
+         bZJSUtbm9LzJR9yXpUmiO10RIQ52NRzPuOmZaKerzq9oZ9hgvFaZEiHAqwFEtwueVBEY
+         qJ6w==
+X-Gm-Message-State: AOJu0Yw3ZaVVWt/WwNPPZd4HEp7zgoSZkSPWggFdSBlmr6Skda8UFYJA
+	MwpvlqYpGQ0V7KSmrJgVfkaT5/JWqKpv5/EfJ9xlyu93qh6vC2WYhGTLxzJaiw==
+X-Gm-Gg: ASbGncv97724T/DxLfYfyEVWAOaUi49F0oNY0QrkkyUCa2AXUkU823RTDJIBvRfPC/j
+	kqAD8ytcUAZnu4OKuT/jBbx7J+7duz1xFqcaaY2mBTDH2nBDMH6LEjF7PAnPATymX67Q46L7gLb
+	M1NwhXPnDtTUJlj7VZmZe17T13TUHe/niXHA1cUgGSxkm1kjG+l81BHuUy5kcWSW5O869tymgSU
+	wITumUukbqyejha21AUfmgwHdmGuagHnJzTfz7m+fjNRANPB/jB/YH2//Pbmkv2gAZgFPXQ/K0s
+	Jfwr+BJWaNEX7D6+sLhaL7yB7/JOKtnyvJ7jZXpBWjyNQBLVw/ISmI3eeqHM60iDKq8pcS07lEL
+	SuFr7n5J7
+X-Google-Smtp-Source: AGHT+IHGOjNDSvFSxdRUEfdlD/SLq8oErZlMXKa9zRMCFktUy2oJ+NrjKkoTRMAPnQbzcOdHl1fTZQ==
+X-Received: by 2002:a05:600c:5247:b0:442:f4a3:b5f2 with SMTP id 5b1f17b1804b1-442fd60b4e8mr90896795e9.6.1747642685763;
+        Mon, 19 May 2025 01:18:05 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-3a35ca8caf0sm11714950f8f.82.2025.05.19.01.16.40
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-3a35ca8cf66sm11691022f8f.87.2025.05.19.01.18.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 May 2025 01:16:40 -0700 (PDT)
+        Mon, 19 May 2025 01:18:05 -0700 (PDT)
 From: martin.jansa@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Armin Kuster <akuster808@gmail.com>,
 	Martin Jansa <martin.jansa@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][walnascar][PATCH] python3-posix-ipc: improve build_support
-Date: Mon, 19 May 2025 10:16:37 +0200
-Message-ID: <20250519081638.684159-1-martin.jansa@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH] python3-posix-ipc: improve build_support
+Date: Mon, 19 May 2025 10:18:02 +0200
+Message-ID: <20250519081804.685926-1-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -66,8 +66,8 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 08:16:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117472
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 08:18:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117473
 
 From: Martin Jansa <martin.jansa@gmail.com>
 
@@ -314,10 +314,10 @@ index 0000000000..b36d1cdb3a
 +     if max_priority:
 +         try:
 diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb b/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
-index b3da09c35b..05a73f2896 100644
+index e314bb8e3b..8147e4108b 100644
 --- a/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
 +++ b/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
-@@ -9,4 +9,9 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+@@ -8,4 +8,9 @@ PYPI_PACKAGE = "posix_ipc"
  
  SRC_URI[sha256sum] = "b7444e2703c156b3cb9fcb568e85d716232f3e78f04529ebc881cfb2aedb3838"
  
