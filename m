@@ -2,125 +2,160 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E75AC3ABC9
-	for <webhook@archiver.kernel.org>; Mon, 19 May 2025 01:58:20 +0000 (UTC)
-Received: from mail-oa1-f54.google.com (mail-oa1-f54.google.com [209.85.160.54])
- by mx.groups.io with SMTP id smtpd.web11.41943.1747619894321423624
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 286AEC3ABC9
+	for <webhook@archiver.kernel.org>; Mon, 19 May 2025 02:01:00 +0000 (UTC)
+Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
+ by mx.groups.io with SMTP id smtpd.web10.42047.1747620050119646113
  for <Openembedded-devel@lists.openembedded.org>;
- Sun, 18 May 2025 18:58:14 -0700
+ Sun, 18 May 2025 19:00:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XiaQsvEZ;
- spf=pass (domain: gmail.com, ip: 209.85.160.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f54.google.com with SMTP id 586e51a60fabf-2c2ada8264aso1715052fac.2
-        for <Openembedded-devel@lists.openembedded.org>; Sun, 18 May 2025 18:58:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UT81ZLGW;
+ spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-2dfb991cb45so1151295fac.0
+        for <Openembedded-devel@lists.openembedded.org>; Sun, 18 May 2025 19:00:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747619893; x=1748224693; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1747620049; x=1748224849; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=UwB4IJKZlWgeBr5m2f6XgUaTbk8WYN1BflowDqaZnMg=;
-        b=XiaQsvEZREBB3PuAs71JCz5C79HaSfdF0PgfbbWeAHtIkeJKZr7lHoVuGTPZ8ufXAu
-         lAenK1ggsRurDKFLRhSId+Fqx+vKiN+c54xQJ+Q7snQoAPGQwZ2x9AE6VGAGxmBsAH9K
-         0rymPfvbcA8Zs3X2rDbV3u0KtspUQIeiM7mOQZULP0L7yWfiiXtdJlO+Hqf1evCPVg+s
-         1n6Uwom7acx1ip1XFPABNd3rLouFebL0sRNQIzOKApqlpjKc8RLOMdlzWyA+q0o2Bm12
-         EzIYdLJzTc0uJewwSDZHGvQah5QW1ugTwIga9KBbzffh3nL3quFdIXvM0WvsrpAGM6mT
-         oN8Q==
+        bh=X+ab0JRP+H2E8JF10q1eTCNl1WGrhfyJU4N1OLTfjMc=;
+        b=UT81ZLGWNtYHv943XswOKNO0jRjFOwdcBMTgY/81JEe1SDeLvqJGRFkD9/uRlNDr6R
+         3jiWcidYY/lan86xStgR0qnOdZehKpG2l81trKu8YbYceNTD02gBjqTn4KMlbtPR5fMh
+         7wLtebm9+C6dXc1ZPjWdJoIF4+JepEZsV4XCmfVAuFwWcZgrWjtj+vSLqRY7j84jwOf3
+         /obeWcczyLGiRkiSovt8Gz1zWKkz3Rkfvhwdtz3UpVSfUQmgQ6/18G910vqhdU/uAteq
+         hbrv22xA2ZJJcUy4ymtk9EyEWYWTbZLd82Th/XSWFof+v0l92U7PaN7OvZ8AICu0vuHH
+         C5zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747619893; x=1748224693;
+        d=1e100.net; s=20230601; t=1747620049; x=1748224849;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=UwB4IJKZlWgeBr5m2f6XgUaTbk8WYN1BflowDqaZnMg=;
-        b=caH2RoW2JA0lRiNbB/3szRHWj50TEYppvny8ai5fIwY74FLqzZbgBSpzW9kbi/Ytgd
-         WYI2tjiWw5xo/neozvS/28nx3NZ4O1BrSqpsPkADE9fQJ1WbgAvuLUgVm6BH30/RntTU
-         hzoIqv5A2gr5D533gmMLv43W9KK+GC+5iBg8gR5SGPYfiz7Ouc1R+grZxwPzsO/Pmcr0
-         NHFzNNOoH4kwCtImbGwK0T6cuu67AZLlUNQJoUYsPALx15JnK1yej/lbzjSDSJLnJqei
-         dc+A7i0+3Dj1p1/EEQ9WeAlJogfGZbjlpWP8x7FIiBD2zmBJUC9+F7AB+HXTMyBOqUWU
-         vRBA==
-X-Gm-Message-State: AOJu0YxUnRGnHIQdSLBIPunD7q5SfyCKOxs+NHqjD3PQfQI/vQ6OqSrH
-	t3uRhe0QUKjqdDNELK9ijrXlbSFb7uxNTUVClmIBVhnrU87d7+rPHiaR8tciRcwhqJsvb4pTPjK
-	A6rHLCi21cTdiVNx9kDpYur7VRyLvL7Ji/OUt2eE=
-X-Gm-Gg: ASbGncsmhDGTC9kGX9E5gh7G00cV8t2sVdtyZ5t6OulXYYyTQuDad2j/sVbMa7bRoi2
-	2SZITeDD8wUoBQ6tsNDeMXxULIg4Rz/Kz2hdeScCWHC7ZifT2jEQTQA/OOKmpfUsZw75sn3CIDu
-	QbU2XwUS9juUicZtRvsV6mtcOtXkP6EIk=
-X-Google-Smtp-Source: AGHT+IHqv88LVh7tKNZhWShR8c65KXKje1bvQBeGLaRWJ8S5hOrt/0leTUpjZA9rPA/PvGG3B0MOGqmFqB5rvGgY/Wk=
-X-Received: by 2002:a05:6870:179a:b0:2c2:588a:70a3 with SMTP id
- 586e51a60fabf-2e3c1ea2c0dmr5447953fac.24.1747619893359; Sun, 18 May 2025
- 18:58:13 -0700 (PDT)
+        bh=X+ab0JRP+H2E8JF10q1eTCNl1WGrhfyJU4N1OLTfjMc=;
+        b=aMOQPSiuzMkHof7rHNbEVGwvVRoV6+DNvZWWm3OhPGIT/m9xuprBVHjlZsGbUrLKPW
+         j/Za2rJjYwofjgXaDYC9ek3kcv6OnwTS8rl2zyJbSGy+HWqyX+tUnbNlKZrrTJ5xcwOc
+         +NrXxAT5zJdT/8+C40dYOW86h73kdiVrs9Or19kxAsfoQ1rmXSkXZckP9Utw4uUUxSjU
+         hEFPxQQ3ykUUPLkca8MljWAlbK8JWVFi/EH/R5RxOt4xCxkW299hSBRjVKHUzu+ImEfX
+         e+db9J9npdIDNaO0LAqBbHI1KgxN0RlV5l3oNwCTI74vhnrCg6d2i6fdgOc4WKS1uHxL
+         OCeA==
+X-Forwarded-Encrypted: i=1; AJvYcCVgaX3nWk3MOZZrzD5k07W7+sC0XpC+WC/GovlhlYwLMPRVzY6krTQoOYzEMZtuW0VsuZiPl6iyQJ+V4xzaa9QBsTU=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yy5fEPSTXrpAWtv1+vXbzupXBECw+G8ki2s6ujho1trRcgZ8d5F
+	dk3AlfSTvjotbTVrHZ6khU6qvq3M0j1M9TCVMQY9V4OKs4U7XBes0eFsFvsm+VZK5FxcffBRYDc
+	Md4vM5LuPIpjWe1HD2uloFlSi1xekvqiqXOp2
+X-Gm-Gg: ASbGncsMdTT13m5qo10oi84Lak0yP0wnhOWQPZTpdTAPoOsuHhhdgFzl/WMs67c/08o
+	KxnJdkQl0jlouhY7kZaD6SIWLHFguBZyc094YaS6yA/3+XgHlawWdhD6wvIN1qSvyBXY+EXJKhJ
+	794HbfH7vsiC+ekn+QpYqMsrQlqKcSZZo=
+X-Google-Smtp-Source: AGHT+IFB1HaboINPD1AJh3j5BCUWRgFBJv7zL7hJJZr/X8PnkQ87FSTn6ZGBRwAHaDidoky7n2M304x7sGWB1SULZiE=
+X-Received: by 2002:a05:6870:9e0d:b0:2c2:5b08:8e42 with SMTP id
+ 586e51a60fabf-2e3c1ed9f7emr6920072fac.27.1747620049246; Sun, 18 May 2025
+ 19:00:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250519010221.282882-1-dimitris@siganos.org>
-In-Reply-To: <20250519010221.282882-1-dimitris@siganos.org>
+References: <20250518192835.229015-1-dimitris@siganos.org> <20250518192835.229015-2-dimitris@siganos.org>
+ <CAMSfU+5gCDDrw0ksTueG6DrQDqhWMMhwYZda1rRjev+J=tbqog@mail.gmail.com>
+In-Reply-To: <CAMSfU+5gCDDrw0ksTueG6DrQDqhWMMhwYZda1rRjev+J=tbqog@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 18 May 2025 18:57:47 -0700
-X-Gm-Features: AX0GCFvEl4rYXXOsqiRHa1xjZTS6AbsAAgzTS4ABOypMXQJtDHZHLFyBzToxIFg
-Message-ID: <CAMKF1spvtZ8z-2m7LgZQkEs7KJjQSFeki9VbPJa=VmKfpk7reQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] bvi: add new package
-To: dimitris@siganos.org
-Cc: Openembedded-devel@lists.openembedded.org
+Date: Sun, 18 May 2025 19:00:23 -0700
+X-Gm-Features: AX0GCFsjzY1abIhLZtXdTVgcMpxaJgpFOOs0FlM0xCBo8oMoFYgyNDV3wwMK4BM
+Message-ID: <CAMKF1spGOCiwtNDz8oCyu=qrEXa8vhTH7LquxUK0dmPNx=avJw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] bvi: add new package
+To: yoann.congal@smile.fr
+Cc: dimitris@siganos.org, Openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 01:58:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117469
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 02:01:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117470
 
-On Sun, May 18, 2025 at 6:02=E2=80=AFPM Dimitrios Siganos via
-lists.openembedded.org <dimitris=3Dsiganos.org@lists.openembedded.org>
+On Sun, May 18, 2025 at 1:36=E2=80=AFPM Yoann Congal via
+lists.openembedded.org <yoann.congal=3Dsmile.fr@lists.openembedded.org>
 wrote:
 >
-> bvi is a visual editor for binary files
+> Hello,
 >
-> Signed-off-by: Dimitrios Siganos <dimitris@siganos.org>
-> ---
->  meta-oe/recipes-support/bvi/bvi_1.4.2.bb | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+> Le dim. 18 mai 2025 =C3=A0 21:29, Dimitrios Siganos via lists.openembedde=
+d.org <dimitris=3Dsiganos.org@lists.openembedded.org> a =C3=A9crit :
+>>
+>> bvi is a visual editor for binary files
+>>
+>> Signed-off-by: Dimitrios Siganos <dimitris@siganos.org>
+>> ---
+>>  meta-oe/recipes-support/bvi/bvi_1.4.2.bb | 21 +++++++++++++++++++++
+>>  1 file changed, 21 insertions(+)
+>>  create mode 100644 meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+>>
+>> diff --git a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb b/meta-oe/recipes-=
+support/bvi/bvi_1.4.2.bb
+>> new file mode 100644
+>> index 0000000000..e6da1efd41
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+>> @@ -0,0 +1,21 @@
+>> +SUMMARY =3D "Binary VI editor"
+>> +DESCRIPTION =3D "bvi is a visual editor for binary files."
+>> +HOMEPAGE =3D "https://sourceforge.net/projects/bvi"
+>> +SECTION =3D "console/utils"
+>> +LICENSE =3D "GPL-3.0-only"
+>> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da36207309d382da27cd66fdaae92=
+2e3c"
+>> +
+>> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/bvi/bvi-${PV}.src.tar.gz"
+>> +SRC_URI[sha256sum] =3D "4bba16c2b496963a9b939336c0abcc8d488664492080ae4=
+3a86da18cf4ce94f2"
+>> +
+>> +DEPENDS +=3D "ncurses"
+>> +
+>> +inherit pkgconfig autotools
+>> +
+>> +# build inside the source tree, bvi does not support out of tree buildi=
+ng
+>> +B =3D "${S}"
 >
-> diff --git a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb b/meta-oe/recipes-s=
-upport/bvi/bvi_1.4.2.bb
-> new file mode 100644
-> index 0000000000..b0081794d0
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
-> @@ -0,0 +1,17 @@
-> +SUMMARY =3D "Binary VI editor"
-> +DESCRIPTION =3D "bvi is a visual editor for binary files."
-> +HOMEPAGE =3D "https://sourceforge.net/projects/bvi"
-> +SECTION =3D "console/utils"
-> +LICENSE =3D "GPL-3.0-only"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da36207309d382da27cd66fdaae922=
-e3c"
-> +
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/bvi/bvi-${PV}.src.tar.gz"
+>
+> FYI, there is the autotools-brokensep class just for that.
+>
+> Also, that does not build on my system on master. Looks related to the gc=
+c-15 incompatibilities mentioned here: https://sourceforge.net/p/bvi/bugs/1=
+6/
+> My logs: https://pastebin.com/SH6uNHDi
+>
+> Finally, the last activity of the author was 2 years ago : https://source=
+forge.net/p/bvi/activity/?page=3D0&limit=3D100#67ba1727be8108c555c9b214
+> It does not look maintained anymore :( (gcc15 ticket was 3 months ago, no=
+ activity)
 
-Maybe use
-${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz
+This is quite important that packages are active, it does seem there
+is some activity but not a whole lot. while other distros are
+packaging
+it as well, so some other communities will also carry the burden of
+maintaining it downstream.
 
-> +SRC_URI[sha256sum] =3D "4bba16c2b496963a9b939336c0abcc8d488664492080ae43=
-a86da18cf4ce94f2"
-> +
-> +DEPENDS +=3D "ncurses"
-> +
-> +# The project uses old style C interfaces and it is not compatible with =
-C23
-> +# it builds fine with C17, specifying gnu17 as the C dialect to use
-> +CFLAGS:append =3D " -std=3Dgnu17 -Wno-old-style-definition"
-
-There is a patch attached to https://sourceforge.net/p/bvi/bugs/16/
-perhaps this can be used and above flags avoided.
-
-> +
-> +inherit pkgconfig autotools-brokensep
+>
+> Regards,
+>
+>>
+>> +
+>> +EXTRA_OECONF +=3D "\
+>> +    --build=3D${BUILD_SYS} \
+>> +    --host=3D${TARGET_SYS} \
+>> +"
+>> --
+>> 2.34.1
+>>
+>>
+>>
+>>
+>
+>
 > --
-> 2.34.1
->
+> Yoann Congal
+> Smile ECS
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#117467): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117467
-> Mute This Topic: https://lists.openembedded.org/mt/113185078/1997914
+> View/Reply Online (#117463): https://lists.openembedded.org/g/openembedde=
+d-devel/message/117463
+> Mute This Topic: https://lists.openembedded.org/mt/113180865/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
