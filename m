@@ -1,104 +1,108 @@
-Return-Path: <dimitris@siganos.org>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DAC26C3ABC9
-	for <webhook@archiver.kernel.org>; Mon, 19 May 2025 01:02:49 +0000 (UTC)
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
- by mx.groups.io with SMTP id smtpd.web11.41188.1747616562402787878
- for <Openembedded-devel@lists.openembedded.org>;
- Sun, 18 May 2025 18:02:42 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 338A8C3ABC9
+	for <webhook@archiver.kernel.org>; Mon, 19 May 2025 01:31:10 +0000 (UTC)
+Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
+ by mx.groups.io with SMTP id smtpd.web11.41602.1747618260214926332
+ for <openembedded-devel@lists.openembedded.org>;
+ Sun, 18 May 2025 18:31:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siganos-org.20230601.gappssmtp.com header.s=20230601 header.b=wwEX6gAV;
- spf=none, err=permanent DNS error (domain: siganos.org, ip: 209.85.221.67, mailfrom: dimitris@siganos.org)
-Received: by mail-wr1-f67.google.com with SMTP id ffacd0b85a97d-3a0b9c371d8so3471511f8f.0
-        for <Openembedded-devel@lists.openembedded.org>; Sun, 18 May 2025 18:02:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MvENbEzY;
+ spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-e7b8673ff36so1386505276.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 18 May 2025 18:31:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=siganos-org.20230601.gappssmtp.com; s=20230601; t=1747616560; x=1748221360; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1747618259; x=1748223059; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XcCJuLwAiwuqJs30jWs2F2GBoSATLGBwebKNzisu1JE=;
-        b=wwEX6gAV7QS8D1ShHPt2aqFdZOjz5F98o9tbLAdCqILxB3U/ThxVBJHDRtkUsYep+o
-         ElhVp895NLX1CmVzZd/E4eEuwbpZCu70C09RxUfyaV41E9k3i8guPOUU0x8OK71wcjTI
-         6w93l5oSE/p9E/Wr5EMD9hzsgG33ipvy5M20VRU1NAKH+MGAWxHhF6tuQlXSPEVHi1hw
-         4huaV8fHNcjiqMLTHnEh05KYzKlvRnUBdF5P5Di6HleS6mffkkFRZU2ZPgwAmZ+rg+x1
-         0e1BhpMljyKjajf65nPfg+aBAH5t8Z6kAxV6uXCKWpX/gsdX3xH4N5Li329fjI8WxeHx
-         12ZQ==
+        bh=m6X14RdDW8xmGYFze+Lzmhh7C/t8t/Xg9wx6u0oIBc0=;
+        b=MvENbEzYU9RkpoMjjMMV4yDscdSnujCd+s6eseugd9vRiLWNmGOTOW2jRoDT2W1hl5
+         dOPBYolvP5NxzGJ8FE8zimwpCDEx1G7hlvG9YOUuox80xFgUtkBI7qxHgzIMXqWzFEQu
+         m48piD2Iim/Swkdmdjs3pT2QLYfzEGevQFvxoDk9j48eSiVSR9oT7uR/25/HXrKaDOQ9
+         WjagJwVBicKVnvR1iA5/LsdTJ6LM5DShcAUAfBROlEIOugEpH6gvucVlXuSIJbzlgNi9
+         QE6SApHhxspBeKoVPh//WjgB/+6b7emQb1tLsjyuzymZppAqv8DIEmWRwTGTRKrPfPwV
+         wpUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747616560; x=1748221360;
+        d=1e100.net; s=20230601; t=1747618259; x=1748223059;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=XcCJuLwAiwuqJs30jWs2F2GBoSATLGBwebKNzisu1JE=;
-        b=JGOlFrOkCLHArr7yetE7ME99rVrYruoDeqJ6fEZMO4RLYkAUhUtx7EbECY7icKm3Lr
-         NJnbeP5/z33oAawE9I3xFwT40R+UDH18VAiDzd2u7FNcs6nhkW//pkAYfK4ZvY7hb2br
-         QkVkXVRys/G/yhAEDcdbCCITkULfmnN1bl5ziHaTPPhNW5F3PYABx0ZI9G4QxjlJsxPQ
-         0dsA5t00Ymr1LpEBtE8zwiQc9ISK6gEqA9CDOYUwn2pW2Zn/2LQ22rekTcEk3M6g/wOR
-         TWTEtNkYYk/QKFSjMRLlHW1yiRlXLPafm9W6YvINzUb3voVzjCumciTFjcg+f0LJXDkU
-         CJYg==
-X-Gm-Message-State: AOJu0Yxpi185XnOP7qkkrw+1m9XjSrPo0uoQRMyXJ0QiBv7WqFpjW/yu
-	0v//b0R4/S/1XyW9B9gKZJIWpoetqC+7vUqawtXovPAOswDUZpwZz2zIWGMjzt5UiGUEBMRtzL+
-	Z39NYM68C2l5v
-X-Gm-Gg: ASbGnctmjMAKTFkhH/ZMxC2FCJNVAEMdYHY9jjQHE+j+pOHunF56QQLCPuUzWC8EBsu
-	58KDw+Xf54jpDNCQuZy5+oPgbDMx3F56d6drhO3NdLMAnblLPPSF+G8OoFKyny3le56rc1pao88
-	2tlE49r1grMqWLZq2kRqhZBZOv1nmWlvvEk4OPpXzad3pZDnJVWDDOS8jTCCNXXIycEAPXAZsYh
-	0BzdTSiOzh94ugN07S0URaHw4JkGFfsKsqwaS1tI5KDlDDK9RAX4KyPBZfR7m+EIA6kjhzESC09
-	pPVzsVHVEok2xuO1CcOf8dSVpXrKZOdgGniQcmL7HhEA7ns7U2JHBnOArA/dcpqvhZARicbjHJl
-	Gyr48DKG4UX3mGn9tp97O
-X-Google-Smtp-Source: AGHT+IEvQZmACKllhPn5g+r8ZSV9Qle9WhH/L/+ItvrfTlRGaAPSvVnNlbLQRwlWnPkTeGRNAl5yTw==
-X-Received: by 2002:a05:6000:2dc4:b0:3a3:6a58:6f8b with SMTP id ffacd0b85a97d-3a36a587038mr3504719f8f.19.1747616559767;
-        Sun, 18 May 2025 18:02:39 -0700 (PDT)
-Received: from tux.. (cpc79031-cbly7-2-0-cust13.6-2.cable.virginm.net. [82.14.108.14])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-442fd4fdbfcsm119641305e9.3.2025.05.18.18.02.38
+        bh=m6X14RdDW8xmGYFze+Lzmhh7C/t8t/Xg9wx6u0oIBc0=;
+        b=VH4sZyiP5V6ACg57oinRtSKp3ujjg+1/vP/gvZBP2voBGttmYZ2oBB3iIP2HPTEjCv
+         OJufwI7TmTrmj2XPJz29dWD9h8Tc6UVyXO6Ze0CjvQq5QUl8Ihm8HRSVYrdxurq3E8J8
+         JnRedJN86DoD/xwMsnAF0ep8YuNw8oaZXlcNU7BnaGGzbLSRsKy8xcZoOh21Mq9JoZ6J
+         ZtTT6MEbYawZsMZKf85ymMIRTthyv9/3/hJ+1maScQPcVaKCyWEijM1iOgjpMtySJJeT
+         onhsWFKGq2ZdntOstnhvhzqda2j0aN63RRbhdaPfBYsJ+S5JXlw2vlIQuM+mvzcMYaoj
+         XGOg==
+X-Gm-Message-State: AOJu0YzJru4xF2y3YQWYrI5OX22Wygz4yKFb+8ZN7IMfIjfnMOSBBZVF
+	pZZhBytI+oSNC0lK8rSPkjVZYrLDXd7JU5ado8kzHIKfQCg0E+kQ0U3GUPQyuRqJ
+X-Gm-Gg: ASbGncv9zKoIwKB1qND/44rcQontveip6WkXi+VO/K29Jw+IkNJpIFxRvWg9gu+5Qng
+	JAgjvRcK1t7ij2wdRGjCSuAiEu1EhB1I4uN2VLEOldGxsRI1PMu4o4MefSwNIUx3AuhWM8NUoUv
+	s61q9ksMqe+f38s/R7ax2ioz1dz1MJOm00sKDbMFIHnhv6+knpN3cDHKtrKDbYBQb84lTqRKbgD
+	KfSu458Dxsx8ghnSe85v+I+GKqBXO4VmRibWl+n0e4t+HgTIxlvBIKCWGS2RJRygxXJd9lvzdJQ
+	I5um6CQC+cLs4hHR3Cnb/sh8dzOkexfL2bwdEJjNIFJtK80dUtdWwFGh
+X-Google-Smtp-Source: AGHT+IHq7azWYgUR+WY8HVGrBVXUUfRdLgXojQaCxw8Vxk0bVcRVPU4EZFbm7WSmQYDxGJqjVbOEvA==
+X-Received: by 2002:a05:6902:138f:b0:e7b:3ebf:f836 with SMTP id 3f1490d57ef6-e7b6a0c1eeamr16762365276.15.1747618258740;
+        Sun, 18 May 2025 18:30:58 -0700 (PDT)
+Received: from localhost.localdomain ([71.215.9.36])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e7b6acadf3dsm2368446276.26.2025.05.18.18.30.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 May 2025 18:02:39 -0700 (PDT)
-From: Dimitrios Siganos <dimitris@siganos.org>
-To: Openembedded-devel@lists.openembedded.org
-Cc: Dimitrios Siganos <dimitris@siganos.org>
-Subject: [meta-oe][PATCH v2] bvi: add new package
-Date: Mon, 19 May 2025 02:02:21 +0100
-Message-Id: <20250519010221.282882-1-dimitris@siganos.org>
-X-Mailer: git-send-email 2.34.1
+        Sun, 18 May 2025 18:30:58 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] dbd-mariadb: upgrade 1.23 -> 1.24
+Date: Sun, 18 May 2025 21:30:49 -0400
+Message-ID: <20250519013049.392560-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 01:02:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117467
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 01:31:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117468
 
-bvi is a visual editor for binary files
+ Changes for version 1.24
 
-Signed-off-by: Dimitrios Siganos <dimitris@siganos.org>
+    * Add a test for large BLOB with parameter
+    * Fix Dave Labley's broken e-mail address
+    * Stop parsing a column named "limits" as the LIMIT keyword (https://github.com/perl5-dbi/DBD-MariaDB/issues/208)
+    * Various test fixes (e.g. no dead loop in t/87async.t, remembering the value of --testauthplugin for repeated Makefile.PL runs, support for the Embedded server, explicit disconnect after testing the connection)
+    * Better handling of the Embedded server (e.g. fix mariadb_hostinfo and SQL_SERVER_NAME, no support for async queries and mariadb_max_allowed_packets, extended documentation of mariadb_embedded_options)
+    * Add new Makefile.PL option --requireembsup (and a corresponding env variable DBD_MARIADB_REQUIREEMBSUP) to ensure the client library's support for the Embedded server
+    * More support and fixes for new MySQL 8 features (mariadb_auto_reconnect for 8.0.24+, SSL options for MySQL 8.3.0+, bind params for 8.3.0+)
+    * Documentation of empty versus undefined password
+    * Stop calling mariadb_db_reconnect when changing $dbh attributes unless it's really needed
+    * On MSWin32, non-socket connections do not use WINAPI HANDLE
+    * Fix type (MEDIMUMBLOB -> MEDIUMBLOB)
+    * Handle new SSL error messages in tests (https://github.com/perl5-dbi/DBD-MariaDB/issues/209)
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-support/bvi/bvi_1.4.2.bb | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+ .../perl/{dbd-mariadb_1.23.bb => dbd-mariadb_1.24.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/perl/{dbd-mariadb_1.23.bb => dbd-mariadb_1.24.bb} (86%)
 
-diff --git a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
-new file mode 100644
-index 0000000000..b0081794d0
---- /dev/null
-+++ b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "Binary VI editor"
-+DESCRIPTION = "bvi is a visual editor for binary files."
-+HOMEPAGE = "https://sourceforge.net/projects/bvi"
-+SECTION = "console/utils"
-+LICENSE = "GPL-3.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a36207309d382da27cd66fdaae922e3c"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/bvi/bvi-${PV}.src.tar.gz"
-+SRC_URI[sha256sum] = "4bba16c2b496963a9b939336c0abcc8d488664492080ae43a86da18cf4ce94f2"
-+
-+DEPENDS += "ncurses"
-+
-+# The project uses old style C interfaces and it is not compatible with C23
-+# it builds fine with C17, specifying gnu17 as the C dialect to use
-+CFLAGS:append = " -std=gnu17 -Wno-old-style-definition"
-+
-+inherit pkgconfig autotools-brokensep
+diff --git a/meta-oe/recipes-devtools/perl/dbd-mariadb_1.23.bb b/meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb
+similarity index 86%
+rename from meta-oe/recipes-devtools/perl/dbd-mariadb_1.23.bb
+rename to meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb
+index 0eaf2137b6..3b686f7fdc 100644
+--- a/meta-oe/recipes-devtools/perl/dbd-mariadb_1.23.bb
++++ b/meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d0a06964340e5c0cde88b7af611f755c"
+ DEPENDS = "libdbi-perl-native libdev-checklib-perl-native libmysqlclient"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/P/PA/PALI/DBD-MariaDB-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "0d0c76c660ddd55570e48f3e2fdea8f621a69ac0ed48190e8cfcafcb5e9b859d"
++SRC_URI[sha256sum] = "f977a25b4116a0a95a7c8a894fd37097abe19af9a6a9ed4d800604ec17873fe4"
+ 
+ RDEPENDS:${PN} = "libdbi-perl"
+ 
 -- 
-2.34.1
+2.43.0
 
 
