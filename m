@@ -1,317 +1,330 @@
-Return-Path: <chris.paterson2@renesas.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B96FC3DA6D
-	for <webhook@archiver.kernel.org>; Mon, 19 May 2025 07:53:12 +0000 (UTC)
-Received: from OS0P286CU010.outbound.protection.outlook.com (OS0P286CU010.outbound.protection.outlook.com [40.107.74.46])
- by mx.groups.io with SMTP id smtpd.web11.45920.1747641189660721932
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 283F5C2D0CD
+	for <webhook@archiver.kernel.org>; Mon, 19 May 2025 08:16:52 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web11.46195.1747642603426515829
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 May 2025 00:53:10 -0700
+ Mon, 19 May 2025 01:16:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@renesas.com header.s=selector1 header.b=gN7bqKd9;
- spf=pass (domain: renesas.com, ip: 40.107.74.46, mailfrom: chris.paterson2@renesas.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RfBas/hDAZjipQ/+O8mbXW9CuoRjeoOrIGltFLyENqiS3ifChVEgRNxd4c5GGBSJ5DErn5TT4AWbpeXqLNSehIllQDXltAuZmcGXiRe+AKCzv1wa4ckzNpyDXlqX6ppQWFDM9odKTSxlIEqOm0tXHb6KE1uyKiwz59CHshD7TosY0xHZY2B10jvnt2Rhj2rFYwxv55CAJY034+rbB7VwlYtZ0TByib4wsqnQfATGtDhMJokG9Qr7MUXWahW4FSLHYobOEkDE/pHNi7eWweGko2SxZ/acB2UejDsL8kbEK8yvXnjRTxg+xwwmLWZ7ieuk8ccFZnTQOEQfobI35Jl1BA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e406OaAgxrUBBdc/z7zkRJP7JCExJn0iIB9p6ne8Drg=;
- b=B1/oxcJIW36RfHlVXDaFNdVDlrfhUhWsgbUBZ5a/uJ0Uyrf1tszNR6FyW4HIzK0y66VnidNd3McZIDmcFObecfB0Nr7+DtjWaNx3jzCru3RT8nYNbOCriyAkErT0I2vqfOUye+5ywzl6sPQP65wq9ub4/ER06PiTMBAn0vpft/OFnzCKO3CduvxqxqMQXrHxj73ipIHefsb7DLQ+7YcsLbrTPFjSN05W9ax/WDZmfvHJtddyibj6qdcX3BKFhNlUOEmSwX7XAjGbYNonAJXefPln3bJ0Gz+ZSVB9rLYWBD+UwnQkdu72VBcwYcEsCuVpozZY6qBpU8gdZnlHHAsOGw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=renesas.com; dmarc=pass action=none header.from=renesas.com;
- dkim=pass header.d=renesas.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=renesas.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e406OaAgxrUBBdc/z7zkRJP7JCExJn0iIB9p6ne8Drg=;
- b=gN7bqKd9Oq3TmCzFJNeV4xSSqAAnwU/kZQXEcTBejr3PP2m/2ZS7au+O9Qz/88KRkyZcRzFqNBbT82DnHJ0iHoJnlkH0cMUU6qJZDTQuzoy/6zUeQgXTbSIjthdHgTN2O5Yv6WEGXRftcDzmI8SlHFniqEixMkKUVzxzqq01A9Y=
-Received: from OS3PR01MB5896.jpnprd01.prod.outlook.com (2603:1096:604:c6::8)
- by TY3PR01MB11446.jpnprd01.prod.outlook.com (2603:1096:400:374::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8746.30; Mon, 19 May
- 2025 07:53:04 +0000
-Received: from OS3PR01MB5896.jpnprd01.prod.outlook.com
- ([fe80::1b62:57c6:c2cf:641b]) by OS3PR01MB5896.jpnprd01.prod.outlook.com
- ([fe80::1b62:57c6:c2cf:641b%7]) with mapi id 15.20.8746.030; Mon, 19 May 2025
- 07:53:04 +0000
-From: Chris Paterson <Chris.Paterson2@renesas.com>
-To: Gyorgy Sarvari <skandigraun@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [issue][meta-oe][walnascar] yocto-layer-check not passing
- for BSP layer when meta-oe is a dependency
-Thread-Topic: [oe] [issue][meta-oe][walnascar] yocto-layer-check not passing
- for BSP layer when meta-oe is a dependency
-Thread-Index: AdvHdSEI4cqzGwtvRK2R3/3yqcMGlQAcmv2wACqCNiA=
-Date: Mon, 19 May 2025 07:53:04 +0000
-Message-ID: 
- <OS3PR01MB589608A17F0DDA7847BCB439B79CA@OS3PR01MB5896.jpnprd01.prod.outlook.com>
-References: 
- <OS3PR01MB5896AC2C723041187F4A5BE9B792A@OS3PR01MB5896.jpnprd01.prod.outlook.com>
- <18409A3613E810CF.2693@lists.openembedded.org>
- <b1ccf20b-e0f4-4129-a7b8-b2d82d060c11@gmail.com>
-In-Reply-To: <b1ccf20b-e0f4-4129-a7b8-b2d82d060c11@gmail.com>
-Accept-Language: en-US, en-GB
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=renesas.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: OS3PR01MB5896:EE_|TY3PR01MB11446:EE_
-x-ms-office365-filtering-correlation-id: 23bb50ae-5c05-44f0-115c-08dd96aa2fde
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: 
- BCL:0;ARA:13230040|4022899009|376014|366016|1800799024|38070700018;
-x-microsoft-antispam-message-info: 
- =?utf-8?B?VGh2UjNnL3hrSWpqam95N1hleDJabW1EK2lPZkJqYXZiSE5vbFBjaDMveUdp?=
- =?utf-8?B?MHhBbTFDZmVJMVJKamtpZGFteEw2OWU5dUVHZHZDYWxmaXlNL0tiR1RhTUtt?=
- =?utf-8?B?cm1NcDcxb0RDTDQrWE94S1JyazdKMndwajBPNU5nbFk2TmpsUzZmbEV2M0hq?=
- =?utf-8?B?dHdFS1ZkL1BGZ0hiTXJnTERsbjlub3I2QWFZS0gwL0QxYkxTOGFnaThpZWNC?=
- =?utf-8?B?UU9nQkwwUEtPSHRGOXVhU0k4c0kyRjNVMHIwVVQ0YjBLY2poazZyYjE4UHlB?=
- =?utf-8?B?U2lrbERTUzE4ZVA1Y1JYdEZiUFUrTEFCUjRLeFl4VnRkdWYwOTg3YVJDcWF5?=
- =?utf-8?B?VzhJR24yZ1RQOWRLa2pIMnJoYlE1SEp5dmo1emEzVEtjQnNsY2lBYTJlMmdJ?=
- =?utf-8?B?b1pQOVJVbXg2eGNjUnNFYnJ1MVJzZWV5M0xKb3ppZnQzY2dFeHJXdDBkVlB0?=
- =?utf-8?B?bi9HNVlLZGoybDh5OFExN0t5S1c0VVMzVno1MmRsM0VpN3ZCbXBJZlhNQ0xa?=
- =?utf-8?B?bnl4cU9xOGxYN2IvbXZpOVVaTWNKb2RGRE5kUmt2VVlwM1o5Z1V5THdZdjJr?=
- =?utf-8?B?NU1BVGpEenZxblExOWVsOUdwRnJrSEtZY3N0em9LVmVnWWk1TWw4MTU4TDlu?=
- =?utf-8?B?MExrcW9yWVhDekIrdEplTFpoZ08zbUxKRU5KenljbGpKMGVnK2FCd0dnTUJj?=
- =?utf-8?B?eCtTcGpQK2FQd2FNS1pXRzc2M3ZNUDI3QWYyOS9Dc3JMUHlIWDdDLzFMVmFz?=
- =?utf-8?B?V0htMkVNV1RSNlRoRlN1REdNbWo4bVVRdW5aWTV6VTZzQXF2RGdjNHBkRWVB?=
- =?utf-8?B?SEh3d0l3V1V4T0VaUzRvcWZCcmQxV0ZIb0RXNldZODFMTC9LdldhN3dMSFV4?=
- =?utf-8?B?dDN6S2t5WUlXOTIyN1o2UTBUODBpcVhscUpnZVdFajN6SEFFbTluQWd2V0Qv?=
- =?utf-8?B?RlM0UEhwTmF2SU5rdEltVDNZQUhiZVhmNGYwUko5YlBESmRmRW9WU0psaWZD?=
- =?utf-8?B?WTFVRTU1aldRSW1adS9SSDBOWmJUbDBHZzlhTW1CNDVRMHVqM0R4cG1QclQx?=
- =?utf-8?B?SVQzeURHZVltckpnYlg2OC9JdEhJL0VNVXBZck5GMXI2UmZzWlZpbW9RMXdJ?=
- =?utf-8?B?M3VDVC9FQ2wzYUVOckN1TVcwWmFSL2dhaHdFdXI0SWo1STN4SEtveFYzV2Fu?=
- =?utf-8?B?cG1jSzE2TWZ0VHJJb2RQVnE4M05IMWhLM3ZxelpIclh0QWdHVDJDZWs0YTlp?=
- =?utf-8?B?V29BL0ZTMUVlMHd5T3g0M2sxN1hnVnloTHZiWndOREhkbjFhQWY4S3NnYWI0?=
- =?utf-8?B?ME95QU0yVUl0OXdmUTRpYnBaYXJ0Y1EyQ2J0QUQ5YVJCYXgxcmFhV2sxRVl2?=
- =?utf-8?B?WWhmKzNOTE9RQzNuakx6ejU3SktBb2FZWS9vQkVTT04rWUxPdWs5bExXUjc1?=
- =?utf-8?B?VUhvS0F6RVRtRW5PYWpHRzlxWmR6ZVE0ZXdKM1hFdjlhMzIxVFFaZHNuZlNt?=
- =?utf-8?B?ZmszSlJCZmdpSlUxSm1QUVlIRXJiNXRLaDNyOUpqOGI1b3hmRmhpT1JlUUFB?=
- =?utf-8?B?Z2tXZ0NCZFlqYVAybWg3TnJtcXVyS256UWIvVGNiUlJTU0pla2gramtxZEdj?=
- =?utf-8?B?OHd5WVp4d0l3Nml2RTRwQ0RPTlBjZGs5YVdTSSsxVmJEZ1BUNDcrcmJnak9H?=
- =?utf-8?B?SmpIS0dDYXhOZ2R2T2ptUVlyRFRlcjhIaVAyUDdaWlJPSjRNenp4RnZkaUJa?=
- =?utf-8?B?WncxUEVKZ3l0enIxSWJ5MUFubnpvcnBQdGl2NGduZURwNmZab0IwQkZEWGc1?=
- =?utf-8?B?TE9za2dmWjgzdk5YcnpEZjJMYktmN1FmZ2MwM2doS3A2LzFESTd5WlJvQklD?=
- =?utf-8?B?emJnaTdpRU5lRkN1UUI5OExoOExpSzJ0NkRpbGtYSk5GVitscHZYbmFqWDdM?=
- =?utf-8?Q?707own8XZNk=3D?=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS3PR01MB5896.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(4022899009)(376014)(366016)(1800799024)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?MDhudmVicytBT09DVnJsdVBPZnlsMUdlaWJsSjlLWlAxU3dCd1Z2cHJhRmpn?=
- =?utf-8?B?Q0tYTlVCcTVDaDJJRkYxRkUwMEd5SFdzbDN5Q3VxS0VLTkwwb0JpM0tBb0pl?=
- =?utf-8?B?Zm5BbUF6THdJbmE3SnZYNUMyRzZxMHNldXRTM24vZThOcWxDOE9UdzRvUkZw?=
- =?utf-8?B?SVNhalVMcGdDNTBRVjhPRFNmR3hmSytDcnQ5ZVNSeHh0aGhhTGdBMWZuQTdK?=
- =?utf-8?B?RHpMS2Q5ZHNRaFlDZUtEekdkSTZSVEdEUHJHZWVJdHBLNFNjemFZUW10eFNM?=
- =?utf-8?B?QWprVjZTWUIwZWt0TkZ4R0pSeTZVNWRtT2FTYUNyN1EySERjbkRoY1ZWMDlm?=
- =?utf-8?B?c3d5T3RObTFUYmtpSklPOStSRWpVSlFYNnZOaHRrUXQwM1F1L05EN3dsN0RF?=
- =?utf-8?B?UndIanE1S290RXBONy9VS0pyeENTLzlpZkhUMnBFTFc0TkUyVGpVYnF4OXBR?=
- =?utf-8?B?R3EyY3NUZURud1g2OEdrZFAzNU1SOVRJZUtNY0hkbDNUcDVJek15YmhmVHdn?=
- =?utf-8?B?SU5ObEFBbWcwSDJFRGkzdEdobzZrajZlWTlqc0FoeSs2c09mU01pZGNSaC9m?=
- =?utf-8?B?Z1VLVitPWExFeUw5akdaTnBJL1NEUkI2djBSNDRSTnN3TWh6N3g3b2tweFVZ?=
- =?utf-8?B?MnJtWFpZVjZzd21qenQ2akM3b1lnNU5HSDY1ZlB2WTU5SWtIc2kvODN0UVY4?=
- =?utf-8?B?NmFJU2VUQlRiTDlLeHd4MHBwSXpPMkpzd2tPQ0dvSjFKZFpOOUJWVnVXcmZl?=
- =?utf-8?B?alF0bEd6VjltV2J4ZVVzVDREY09TaHEzR0ZsaDJyeFg1QllVZU1INUN4akkr?=
- =?utf-8?B?NTJIcTBwc0tkZjlyU2dTa0R3SWpVNWxNMThxQjFCUVZraGNDSlkvSXFabVFu?=
- =?utf-8?B?KzRLZEtIUkN6bFR4RWtkT3o5akMxSXp5bFBlSXNWVlo2NjgxVkpkTmxtSTBs?=
- =?utf-8?B?bEtkS0JFK2hhVG8reFlQQWl6N0piNy85NWZnVzk0THZZd1RuZjJxVnpKMUl5?=
- =?utf-8?B?Y1JEeW1raHVNbkFBczhyM1hnZWN1SUV6ekJZZEtKb1N1V00wdER0NENmbFJF?=
- =?utf-8?B?RWJYbEJna3dzOEtPaWhkUkkzTE1ualp5VU9neENlZFd0RUVqN1djSXVUbXdR?=
- =?utf-8?B?MUpWQWo4bVpvdnVxVEVDUHMvc3dMMTYvaENhcEhTcFphaDVZUlM1TDFFRDJQ?=
- =?utf-8?B?bEM4RWFldHYzNmNZbzBER2dLMnRwUklBNDlMUkRNYW9vWVFYdEw1eEFoM1kx?=
- =?utf-8?B?a2pic2cvNm1aTmpDaU9wM0xidmkwQm05anFWMWxpY3lISUR3VTViK0l4NlAw?=
- =?utf-8?B?RzgxRWN4QjlPSFlRUUNNdG8vY2hWbTRPaVdUZkJMRlkvRzdjanVPckJIN1hK?=
- =?utf-8?B?L29NM092bVJ1enBQaDIweXh3YXVtdXhReVIzYWNMSVZnTlMvL0NLb2lVS2tH?=
- =?utf-8?B?Q2NXanl1TzBoc1BnWVkzbkErMG96cjNVcFRNc1JadE1yNDhtbUtESUZHcjM0?=
- =?utf-8?B?YUZTN0QvZkZaQllNeTRpZkNaakZ4WmFiWU5mZGVKbk1HOG1aVjE2NHhlNVJY?=
- =?utf-8?B?OU8zQzJrZzk3aTd1VlFCYnhzZU9Pd1I4UW5HVXlwcXZ1bXFhUWhHLzRpeCtn?=
- =?utf-8?B?V1hLWURvVWg0R3FRMnpJazYySFdJYWtZMDNwRFZETFkwUWdEanNNNXFUNnB6?=
- =?utf-8?B?dTcvNHI4OEd3eU5EYXhOamhVSUY5MG0vL1lrZERYeWtBK2VFU3hrOFN1RUty?=
- =?utf-8?B?VW1KTjU5YXRIcEo1RjNIMVhsTUg5OGNnS0JIWVY5K2NRVlVpVVlTNWFXQXFZ?=
- =?utf-8?B?OVJtaW9LZFhsUk1HVDNqcE1VS1N1UlFZYS9yQ0tBc1FIY1diT2ZBbzNaNHJF?=
- =?utf-8?B?YktvaTg1UjdIMjRYQzNJRnlJeEZnWlBDQmt2ZkN3VkNjZG12ZkJKU01oOVdB?=
- =?utf-8?B?RC9Zc3ZiODIvbm00eFJqRkRudU9zVmZUNlhNRXEvU3JPaWRHSU9SdElzcWN1?=
- =?utf-8?B?bEtlNjNGVHRNZjJ2Q3VXR1NNTlhvYlh5b2RDaHFjcVlqODhHMkUrQzhSTm10?=
- =?utf-8?B?UUZBb2I4Qm5WLzNsL2FTNVNqR2J3eGd2V2tiVVJyeDQ5ajB1RmNVVTlqakZM?=
- =?utf-8?B?QkJDanp1K0NETklobitFQXNJZDBYK2FGK2YrYlRBUHplUmxNWFVzcnVCV1Fj?=
- =?utf-8?B?WVE9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JJ2CKTpX;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-3a0b9af89f2so2836115f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 01:16:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1747642602; x=1748247402; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=sp5JSOKO/AB9IsFtUvtOkaGCBix3Zu3QIxxgtU9lW44=;
+        b=JJ2CKTpXYsJEXdDUFoCIXQpN4UMaSDKLiQDtM9IZ/R70a5JJaHRNWwiY2X50gZf1pB
+         3bf0XoGDHpjuccXm0gEBm5I2QZHxcLmWtUPwkCTDWhdWTWVahJnZ7PP29oEXYrV47HL/
+         t2Q5KrlOlOX38YVwiGN67YtolJUd0h+GsKh/XlrWjZ/9vG9nL03w3sPEZ8WjVOnTq+wv
+         X6A/Q+bSGN2fv8FHBXN5H62Qtft9LNMnCI9lzRFtfSTw7FG/H4Sl9kZXhn19EDA+8YSB
+         YrexeSlJq/davKixc8P36Eu/KHQdLri2IGwx5pfMDchPvDoKbY+vA7PIW4tBbSy+yFOs
+         tWAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747642602; x=1748247402;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=sp5JSOKO/AB9IsFtUvtOkaGCBix3Zu3QIxxgtU9lW44=;
+        b=i8V1OGlBa8gNSRpMQcBRVOVejekXzIveWWEehO8tY4Qrl8MNDqs0aDth2usPJgWP1p
+         cNf0rdNdDq6gCUn8sYKcuK25B1PwqEf1+fdaX3wTZR7NlSxBqI2CvoAurK+Ml7FeSMO1
+         4QntdTkdPHpZjjCdTfMgAmiQSA/qU8HkyuO+IENlbLJqJN01GyYaeJt9JF59/SQw5+b/
+         IV0mxGQlqDqcrpJHM8u0gwsaR/cmXvZguUSXXpaGmxhcR13wu3M48HXHu7GXrqPWV7BU
+         K7KdrMMipd1c+2Sd8PAKJrak41vy//094gS8EyxWubriv9Rh++Pf0Swt1aQNQ32unP9A
+         fWNA==
+X-Gm-Message-State: AOJu0Ywp1x+uJ3rRYlMApANlyMM5FVido6pqSvfL1EaGhayObt+zdbHB
+	HP/VEojqQMlGkvzqIi8WmqRKmY05JGLxGSKFKI8bsS0oc4wWk6HzdihbRg//Pg==
+X-Gm-Gg: ASbGncuULzphwvw+93io4um6Ba+syAW1VH/JOmKiZMQzg1TPTbXENQuejnXW01Tcps0
+	Fam4uMO8FoKyDicrnpxZQdY1S9vpkoegCwjE7R87c67v+NM0SVk/GyDokOP7ZBu18kCfQbqg0i8
+	85fYa6ObyxQi08zpUDQF57hjkLFNa1NmFWSCLHX4SAOfvI0KEKZStxo0aDqQlK+JTMypVaJCU+/
+	k81h6K5+wnpCvHnZcJNJqkqxLQcTgkdaw/hA01SkH3WwqjvqOmUFGi98Wp6ypqiYBwtmn3ZMCjO
+	pHGUqHNz1u/Urbu+TKAHLoc4yKcW1v1jE9AgMsKUUobF9IGWzQ24vMPLd6gWPIdbn0Pyb+JJsJT
+	R0ExOZf6r
+X-Google-Smtp-Source: AGHT+IFFfWnIIuruDE0q1nx2T5NJROjFM9Ejy/2ovY/iMeoSaZDcMnwA0/fMF6ko3n/T9r7MBoLyaA==
+X-Received: by 2002:a05:6000:40e0:b0:3a1:f635:1133 with SMTP id ffacd0b85a97d-3a35fe5bb6cmr10788000f8f.7.1747642601513;
+        Mon, 19 May 2025 01:16:41 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-3a35ca8caf0sm11714950f8f.82.2025.05.19.01.16.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 May 2025 01:16:40 -0700 (PDT)
+From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Armin Kuster <akuster808@gmail.com>,
+	Martin Jansa <martin.jansa@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][walnascar][PATCH] python3-posix-ipc: improve build_support
+Date: Mon, 19 May 2025 10:16:37 +0200
+Message-ID: <20250519081638.684159-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-OriginatorOrg: renesas.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: OS3PR01MB5896.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 23bb50ae-5c05-44f0-115c-08dd96aa2fde
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 May 2025 07:53:04.7903
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 53d82571-da19-47e4-9cb4-625a166a4a2a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 0taSPvnUN2WlVHyNMqBgko4/HOLtxvOh8e95AWYATLZ9+aYoVLgsBq30mtWnVCiesD3Y4dR3Y31gsUbs/oXKaZ2gkZiD5DI7EgpVLgs6PEM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY3PR01MB11446
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 07:53:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117471
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 May 2025 08:16:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117472
 
-SGVsbG8gR3lvcmd5LA0KDQpUaGFuayB5b3UgZm9yIHlvdXIgc3VwcG9ydC4NCg0KPiBGcm9tOiBH
-eW9yZ3kgU2FydmFyaSA8c2thbmRpZ3JhdW5AZ21haWwuY29tPg0KPiBTZW50OiAxOCBNYXkgMjAy
-NSAxMjoyNQ0KPiANCj4gT24gNS8xOC8yNSAxMzowMywgR3lvcmd5IFNhcnZhcmkgdmlhIGxpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmcgd3JvdGU6DQo+ID4gT24gNS8xOC8yNSAwMDozMSwgQ2hyaXMgUGF0
-ZXJzb24gdmlhIGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcgd3JvdGU6DQo+ID4+IEhlbGxvLA0KPiA+
-Pg0KPiA+PiBUaGlzIGlzIG15IGZpcnN0IHRpbWUgc3VibWl0dGluZyBhbiBpc3N1ZSB0byBtZXRh
-LW9wZW5lbWJlZGRlZCwNCj4gYXBvbG9naWVzIGlmIGl0J3Mgbm90IHRoZSBwcmVmZXJyZWQgZm9y
-bWF0Lg0KPiA+Pg0KPiA+PiAjIElzc3VlIHN1bW1hcnkNCj4gPj4gSSdtIHRyeWluZyB0byBnZXQg
-eW9jdG8tbGF5ZXItY2hlY2sgdG8gcGFzcyBmb3IgYSBCU1AgbWV0YS1sYXllciB0aGF0DQo+IGRl
-cGVuZHMgb24gbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1vZS4NCj4gPj4gSG93ZXZlci4gaXQgZmFp
-bHMgZm9yIHRoZSB0ZXN0X21hY2hpbmVfc2lnbmF0dXJlcyBjaGVjayBmb3IgdGhlDQo+IFdhbG5h
-c2NhciBicmFuY2guDQo+ID4+DQo+ID4+IE5vdGUgdGhhdCB0aGUgdGVzdCBwYXNzZXMgd2l0aCBT
-Y2FydGhnYXAuDQo+ID4+DQo+ID4+IFRocmVlIGRpZmZlcmVudCBwYWNrYWdlcyBzZWVtIHRvIHRy
-aWdnZXIgdGhlIGlzc3VlICh3b3JrZWQgb3V0IGJlY2F1c2UNCj4gaWYgZWFjaCBpcyBkZWxldGVk
-IHRoZSB0ZXN0IHBhc3Nlcyk6DQo+ID4+ICogbWV0YS1vZS9yZWNpcGVzLXNlY3VyaXR5L2tlcm5l
-bC1oYXJkZW5pbmctY2hlY2tlci9rZXJuZWwtaGFyZGVuaW5nLQ0KPiBjaGVja2VyXzAuNi4xMC5i
-Yg0KPiA+PiAqIG1ldGEtb2UvcmVjaXBlcy1zZWN1cml0eS9zcGVjdHJlLW1lbHRkb3duLWNoZWNr
-ZXIvc3BlY3RyZS1tZWx0ZG93bi0NCj4gY2hlY2tlcl8wLjQ2LmJiDQo+ID4+ICogbWV0YS1vZS9y
-ZWNpcGVzLXN1cHBvcnQvc21hcnR5L3NtYXJ0eV81LjQuMy5iYg0KPiA+Pg0KPiA+Pg0KPiA+PiAj
-IFN0ZXBzIHRvIHJlcHJvZHVjZQ0KPiA+PiBJJ3ZlIHJlcHJvZHVjZWQgdGhlIGlzc3VlIHVzaW5n
-IG1hY2hpbmVzIGZyb20gdGhlIG1ldGEtbGF5ZXIgSSdtDQo+IHdvcmtpbmcgd2l0aCBbMF0gYXMg
-d2VsbCBhcyBxZW11YXJtICYgcWVtdWFybTY0Lg0KPiA+Pg0KPiA+PiBDaGVjayBvdXQgZGVwZW5k
-ZW5jeSBsYXllcnMgKHBva3ksIG1ldGEtb3BlbmVtYmVkZGVkLCBtZXRhLWFybSkNCj4gPj4gc291
-cmNlIHBva3kvb2UtaW5pdC1idWlsZC1lbnYNCj4gPj4geW9jdG8tY2hlY2stbGF5ZXItd3JhcHBl
-ciAuLi9tZXRhLXJ6LWJzcCAtLWRlcGVuZGVuY3kgLi4vbWV0YS0NCj4gb3BlbmVtYmVkZGVkL21l
-dGEtb2UgLi4vcG9reS9tZXRhIC4uL3Bva3kvbWV0YS1wb2t5IC4uL21ldGEtYXJtL21ldGEtYXJt
-DQo+IC4uL21ldGEtYXJtL21ldGEtYXJtLXRvb2xjaGFpbi8gLS1uby1hdXRvLWRlcGVuZGVuY3kg
-IC0tbWFjaGluZXMgcWVtdWFybQ0KPiBxZW11YXJtNjQNCj4gPj4NCj4gPj4gWzBdIGh0dHBzOi8v
-Z2l0aHViLmNvbS9yZW5lc2FzLXJ6L3J6LWNvbW11bml0eS1ic3AgKFdhbG5hc2NhciBicmFuY2gN
-Cj4gbm90IHB1c2hlZCB5ZXQpDQo+ID4+DQo+ID4+DQo+ID4+ICMgRXhhbXBsZSBsb2cNCj4gPj4g
-SU5GTzogRkFJTDogdGVzdF9tYWNoaW5lX3NpZ25hdHVyZXMNCj4gKGJzcC5CU1BDaGVja0xheWVy
-LnRlc3RfbWFjaGluZV9zaWduYXR1cmVzKQ0KPiA+PiBJTkZPOiAtLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiAtLS0tLQ0K
-PiA+PiBJTkZPOiBUcmFjZWJhY2sgKG1vc3QgcmVjZW50IGNhbGwgbGFzdCk6DQo+ID4+ICAgRmls
-ZSAiL2hvbWUvcGF0ZXJzb25jL3dvcmsvcnotY29tbXVuaXR5LQ0KPiBic3AvcG9reS9zY3JpcHRz
-L2xpYi9jaGVja2xheWVyL2Nhc2VzL2JzcC5weSIsIGxpbmUgMjA2LCBpbg0KPiB0ZXN0X21hY2hp
-bmVfc2lnbmF0dXJlcw0KPiA+PiAgICAgc2VsZi5mYWlsKCdcbicuam9pbihtc2cpKQ0KPiA+PiBB
-c3NlcnRpb25FcnJvcjogVGhlIG1hY2hpbmVzIGhhdmUgY29uZmxpY3Rpbmcgc2lnbmF0dXJlcyBm
-b3Igc29tZQ0KPiBzaGFyZWQgdGFza3M6DQo+ID4+ICAgIGFsbGFyY2ggc21hcnR5OmRvX3BhY2th
-Z2VfcWE6DQo+IDQxNjc4NzA0N2NhNzZkNDNiMDk0ODYwY2Y2MTcyMzRmOTU3ZDExODk1ZTdiN2Jl
-MjBjYmU5MjAzMjg5ZjI3ZTEgKGhpaG9wZS0NCj4gcnpnMmgpICE9IDFlNDgyZmZjMWVhZDI2YmNk
-MWY4OWQ0ZGNmOTJlNDk3ZGQ2MjIzOTMzOTQxYjNlYzZlNDgzY2IwMDcyYzlmNWQNCj4gKGhpaG9w
-ZS1yemcybikNCj4gPj4gICAgYWxsYXJjaCBzcGVjdHJlLW1lbHRkb3duLWNoZWNrZXI6ZG9fcGFj
-a2FnZV9xYToNCj4gYzZhNjY3ZmEwYjk0Yzk4YWIwYTIyODgyY2NiMTM1MDYzY2Y5MWU1NmQ5NTIw
-MGRjMDlkOGQzZTczNmQzOTQ3OCAoaGlob3BlLQ0KPiByemcyaCkgIT0gODBhYWMzODBlNDcyZTcx
-N2JmNTkzOTIyMjIwOTNlMzNlZTdkZmFiMTY4MzYwMWM4OGExZTNlNzg1ODM1YjhkYw0KPiAoaGlo
-b3BlLXJ6ZzJuKQ0KPiA+Pg0KPiA+PiA0IHRhc2tzIHdoZXJlIG5vdCBsaXN0ZWQgYmVjYXVzZSBz
-b21lIG90aGVyIHRhc2sgb2YgdGhlIHJlY2lwZSBhbHJlYWR5DQo+IGRpZmZlcmVkLg0KPiA+PiBJ
-dCBpcyBsaWtlbHkgdGhhdCBkaWZmZXJlbmNlcyBmcm9tIGRpZmZlcmVudCByZWNpcGVzIGFsc28g
-aGF2ZSB0aGUgc2FtZQ0KPiByb290IGNhdXNlLg0KPiA+Pg0KPiA+PiBUbyBpbnZlc3RpZ2F0ZSwg
-cnVuIGJpdGJha2UtZGlmZnNpZ3MgLXQgcmVjaXBlbmFtZSB0YXNrbmFtZSAtcyBmcm9tc2lnDQo+
-IHRvc2lnLg0KPiA+PiBFeGFtcGxlOiAoaGlob3BlLXJ6ZzJoKSAhPSAoaGlob3BlLXJ6ZzJuKSBp
-biB0aGUgbGFzdCBsaW5lDQo+ID4+IENvbW1hbmQ6IGJpdGJha2UtZGlmZnNpZ3MgLXQgc3BlY3Ry
-ZS1tZWx0ZG93bi1jaGVja2VyIGRvX3BhY2thZ2VfcWEgLXMNCj4gYzZhNjY3ZmEwYjk0Yzk4YWIw
-YTIyODgyY2NiMTM1MDYzY2Y5MWU1NmQ5NTIwMGRjMDlkOGQzZTczNmQzOTQ3OA0KPiA4MGFhYzM4
-MGU0NzJlNzE3YmY1OTM5MjIyMjA5M2UzM2VlN2RmYWIxNjgzNjAxYzg4YTFlM2U3ODU4MzViOGRj
-DQo+ID4+ICAgIE5PVEU6IFJlY29ubmVjdGluZyB0byBiaXRiYWtlIHNlcnZlci4uLg0KPiA+PiAg
-ICBIYXNoIGZvciB0YXNrIGRlcGVuZGVuY3kgYmludXRpbHM6ZG9fcGFja2FnZWRhdGEgY2hhbmdl
-ZCBmcm9tDQo+IGE4ZThhYTUwMGQ1ZDk5YzI0ZWU2ODg5ZTExZDJmMmQ4NmQxZWIwZmFhNDJiNzc3
-YmZiYzQwYzI3OGFjYzE0ZDMgdG8NCj4gYTNmNDQ2MDY2Y2ZjYTE3OTllYmM5NmQ4ZjljMjliOWMz
-YzU3NGJiZDhkMGE4NjRjMzVhYjYyNmZlOWJjZGYzMA0KPiA+PiAgICAgICAgSGFzaCBmb3IgdGFz
-ayBkZXBlbmRlbmN5IGJpbnV0aWxzOmRvX3BhY2thZ2UgY2hhbmdlZCBmcm9tDQo+IDYyYTBkZjYw
-YzMxNjMxMGMxMTFhZTAyOTBkZjU1Y2JkMWIwMDNmNzNhOGU5YjRiZmQ2YjJjMTRmYmJiMGJlMmEg
-dG8NCj4gMTdjOTJjM2FiMmYzYTFlMTdhNTM5M2FmNDhjMjQ4OTZkOGMxNmM2MWYyNTRlNTFlODJj
-MmE1MDk3MTM1ZDI5Mg0KPiA+PiAgICAgICAgICAgIEhhc2ggZm9yIHRhc2sgZGVwZW5kZW5jeSBi
-aW51dGlsczpkb19pbnN0YWxsIGNoYW5nZWQgZnJvbQ0KPiAyYzE2ZDI5NzMzMWEyNzliZDY2NWNi
-NzEzYzdjNTI2NzQ5MzkxN2MxOWQ2MTY2ZTc0YzM5N2IxYjc1MDJlNDBkIHRvDQo+IDgzY2FmNTlm
-YWJiMjZjM2FjZjZlOWExY2E1ZmE2ZjQ4N2U2MjU4NzY1YmQ4ODg2Yjc0ZjkwMjZhOTg5YTExY2QN
-Cj4gPj4gICAgICAgICAgICAgICAgSGFzaCBmb3IgdGFzayBkZXBlbmRlbmN5IGJpbnV0aWxzOmRv
-X2NvbXBpbGUgY2hhbmdlZA0KPiBmcm9tIDNjNzIzNzdlYzU2YTc1ZTUxNGY2MzEyYjcyOWYzYzg2
-NWYwYTM3NTFmMTAzNjNlZGViMzJhOTVmMTdhMjY5N2QgdG8NCj4gYjNiNmRiMWI3M2Y1YjUyYTI4
-YTNhYzE0MWU2YjgxOWJkMDdiZGM1ZTY1OGIxOGM3NjI3NmRiNzNmOTExZTc5OQ0KPiA+PiAgICAg
-ICAgICAgICAgICAgICAgSGFzaCBmb3IgdGFzayBkZXBlbmRlbmN5IGJpbnV0aWxzOmRvX2NvbmZp
-Z3VyZQ0KPiBjaGFuZ2VkIGZyb20NCj4gY2Q1M2M4MWUxZDQ2MzYyYzU5ZWNlNmU0ODJiZmE1MGE5
-MTIxNWY5MjQwZGZlMWJmYzlmYWQ1MDNiNWI4ZGVjZSB0bw0KPiBkYmFiZGRiMDFiY2M2MjBlOTYz
-NjVhM2ZlNjMxZDVhZGI0ZTEwYjllNDdlNjQ2MGQyOWY5NzE1NTljYjUzYjYzDQo+ID4+ICAgICAg
-ICAgICAgICAgICAgICAgICAgSGFzaCBmb3IgdGFzayBkZXBlbmRlbmN5DQo+IGJpbnV0aWxzOmRv
-X2RlcGxveV9zb3VyY2VfZGF0ZV9lcG9jaCBjaGFuZ2VkIGZyb20NCj4gYTJiZDFhMjA0Mzk3ODUz
-MmNhZjQwYzU4OWE4ZDcwM2ZiNGQ2OWRmZTRmYWU1MjUxYWIwYzEzYWMzOGYzZjNhNiB0bw0KPiAy
-MTE0OGVhMmFiMDI3ODhjOTRhYTNhMTlmOTVmZmZiMjZmYmQ1YThkMWE0MGYwMTVhMzExMTEyMmQ3
-N2VmM2ViDQo+ID4+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJhc2VoYXNoIGNoYW5nZWQg
-ZnJvbQ0KPiA2ODNjNzQ5MmZkN2I0NTc4ZGVmYWNjMGVjZDA2NjYxY2RmMzQ1ZTQ2N2M5ZmExODc5
-ZWQ3OGNkMTNhZDQ5YTNjIHRvDQo+IGRhNjc4OTAzMzllZjA3MTVlZWVlZDRlYmVjYTJhNWZkMGM3
-YTU5N2I2MzU2ZTlmOGEwY2EyNTMyNTYxOTQwZWUNCj4gPj4gICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgVmFyaWFibGUgVFVORV9DQ0FSR1MgdmFsdWUgY2hhbmdlZDoNCj4gPj4gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIiBbLS1tY3B1PWNvcnRleC1hNTcuY29ydGV4LWE1MytjcmMtXSB7
-Ky0NCj4gbWNwdT1jb3J0ZXgtYTU3K2NyYyt9IC1tYnJhbmNoLXByb3RlY3Rpb249c3RhbmRhcmQi
-DQo+ID4+DQo+ID4gQXMgdGhlIG5leHQgc3RlcCBJIHdvdWxkIGNvbXBhcmUgdGhlIGRldmVsb3Bt
-ZW50L2hpc3Rvcnkgb2YgVFVORV9DQ0FSR1MNCj4gPiBmb3IgdGhlIHR3byBtYWNoaW5lcyAod2hp
-bGUgaGF2aW5nIG1ldGEtb2UgYWxzbyBpbiBiYmxheWVycy5jb25mKToNCj4gPiBNQUNISU5FPWhp
-aG9wZS1yemcyaCBiaXRiYWtlIC1lIGJpbnV0aWxzID4gbWFjaGluZTENCj4gPiBNQUNISU5FPWhp
-aG9wZS1yemcybiBiaXRiYWtlIC1lIGJpbnV0aWxzID4gbWFjaGluZTINCj4gDQo+IFNvcnJ5IGZv
-ciB0aGUgc3BhbSAtIHJlLXJlYWRpbmcgaXQsIGxldCBtZSBtb2RpZnkgbXkgbWFpbCBhIGJpdDoN
-Cj4gSW5zdGVhZCBvZiBydW5uaW5nIHRoZXNlIGZvciBkaWZmZXJlbnQgbWFjaGluZXMsIHJ1biB0
-aGVtIHdpdGggdGhlIHNhbWUNCj4gbWFjaGluZSwgYnV0IHdpdGgtIGFuZCB3aXRob3V0IGhhdmlu
-ZyB5b3VyIGN1c3RvbSBsYXllciBpbiBiYmxheWVyLmNvbmYsDQo+IGFuZCBjb21wYXJlIHRob3Nl
-IFRVTkVfQ0NBUkdTIHZhbHVlcy4NCg0KQW5ub3lpbmdseSBJIGdldCBhbiBlcnJvciB3aGVuIHRy
-eWluZyB0byBnZXQgdGhlIGVudiBmb3IgYmludXRpbHMgd2hlbiBteSBsYXllciBpcyBub3QgaW5j
-bHVkZWQgaW4gYmJsYXllcnM6DQoNCmJ1aWxkZXJAZWEzNGNlMGY3ODM4Oi9idWlsZCQgTUFDSElO
-RT1xZW11YXJtNjQgYml0YmFrZSAtZSBiaW51dGlscyA+IG5vLWJzcC1sYXllcg0KRVJST1I6IE5v
-dGhpbmcgUlBST1ZJREVTICdrZXJuZWwtbW9kdWxlLXgtdGFibGVzJyAoYnV0IC9idWlsZC8uLi93
-b3JrL3Bva3kvbWV0YS9yZWNpcGVzLWV4dGVuZGVkL2lwdGFibGVzL2lwdGFibGVzXzEuOC4xMS5i
-YiBSREVQRU5EUyBvbiBvciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQpFUlJPUjogUmVxdWlyZWQg
-YnVpbGQgdGFyZ2V0ICdiaW51dGlscycgaGFzIG5vIGJ1aWxkYWJsZSBwcm92aWRlcnMuDQpNaXNz
-aW5nIG9yIHVuYnVpbGRhYmxlIGRlcGVuZGVuY3kgY2hhaW4gd2FzOiBbJ2JpbnV0aWxzJywgJ2Vs
-ZnV0aWxzJywgJ2lwcm91dGUyLXNzJywgJ2lwdGFibGVzJywgJ2tlcm5lbC1tb2R1bGUteC10YWJs
-ZXMnXQ0KDQpJJ20gZ3Vlc3NpbmcgaXQncyBiZWNhdXNlIG15IGxvY2FsLmNvbmYgaXMgdGVsbGlu
-ZyBZb2N0byB0byBidWlsZCB3aXRoIG15IG93biBrZXJuZWwgcmVjaXBlLCBidXQgSSd2ZSB0b2xk
-IGJibGF5ZXJzIG5vdCB0byB1c2UgbXkgbGF5ZXIgdGhhdCBjb250YWlucyBpdC4NCklmIEkgcmVt
-b3ZlIHRoZSBQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC9rZXJuZWwgZGVmaW5pdGlvbiBhbmQg
-cmUtcnVuIGFzIHlvdSBzdWdnZXN0IHRoZW4gSSBnZXQgdGhlIGJlbG93IHNldHRpbmdzIGZvciBU
-VU5FX0NDQVJHUzoNCg0KYnVpbGRlckA5NDRhNmVjNTE1ZGE6L2J1aWxkJCBncmVwIC1ybnN3IFRV
-TkVfQ0NBUkdTICpic3AtbGF5ZXINCm5vLWJzcC1sYXllcjoxNjM4MDojICAgICAiJHtUVU5FX0ND
-QVJHU30iDQpuby1ic3AtbGF5ZXI6MTY0MDI6IyAgICIke1RVTkVfQ0NBUkdTfSAke1NFQ1VSSVRZ
-X0NGTEFHU30gJHtTRUxFQ1RFRF9PUFRJTUlaQVRJT059Ig0Kbm8tYnNwLWxheWVyOjE2Nzc0OiMg
-JFRVTkVfQ0NBUkdTIFs4IG9wZXJhdGlvbnNdDQpuby1ic3AtbGF5ZXI6MTY3Nzg6IyAgICAgW3Zh
-cmRlcHZhbHVlXSAiJHtUVU5FX0NDQVJHU30iDQpuby1ic3AtbGF5ZXI6MTY3OTM6VFVORV9DQ0FS
-R1M9IiAtbWNwdT1jb3J0ZXgtYTU3K2NyYyAtbWJyYW5jaC1wcm90ZWN0aW9uPXN0YW5kYXJkIg0K
-d2l0aC1ic3AtbGF5ZXI6MTY0NDE6IyAgICAgIiR7VFVORV9DQ0FSR1N9Ig0Kd2l0aC1ic3AtbGF5
-ZXI6MTY0NjM6IyAgICIke1RVTkVfQ0NBUkdTfSAke1NFQ1VSSVRZX0NGTEFHU30gJHtTRUxFQ1RF
-RF9PUFRJTUlaQVRJT059Ig0Kd2l0aC1ic3AtbGF5ZXI6MTY4MzU6IyAkVFVORV9DQ0FSR1MgWzgg
-b3BlcmF0aW9uc10NCndpdGgtYnNwLWxheWVyOjE2ODM5OiMgICAgIFt2YXJkZXB2YWx1ZV0gIiR7
-VFVORV9DQ0FSR1N9Ig0Kd2l0aC1ic3AtbGF5ZXI6MTY4NTQ6VFVORV9DQ0FSR1M9IiAtbWNwdT1j
-b3J0ZXgtYTU3K2NyYyAtbWJyYW5jaC1wcm90ZWN0aW9uPXN0YW5kYXJkIg0KDQoNCktpbmQgcmVn
-YXJkcywgQ2hyaXMNCg0KPiANCj4gPg0KPiA+IFRoZSBvdXRwdXQgc2hvdWxkIGRpc3BsYXkgYWxs
-IHRoZSB2YXJpYWJsZXMsIGFuZCB0aGVpciB2YWx1ZXMsIGFsb25nDQo+ID4gd2l0aCB0aGUgcmVh
-c29uL3NvdXJjZSBvZiB0aGUgdmFsdWUuIEknZCBleHBlY3QgdGhpcyB0byBzaG93IHdoeSB0aGUN
-Cj4gPiB2YWx1ZSBpcyBkaWZmZXJlbnQuIChCZXNpZGUgYmludXRpbHMgeW91IGNvdWxkIGFsc28g
-Y2hlY2sNCj4gPiBzcGVjdHJlLW1lbHRkb3duLWNoZWNrZXIuIEkgdGhpbmsgb25lIG9mIHRoZW0g
-c2hvdWxkIHNob3cgdGhlIHJvb3QgY2F1c2UNCj4gPiBvZiB0aGUgZmFpbHVyZSAtIGlmIHRoZSBw
-cm9ibGVtIHN0ZW1zIGZyb20gbWV0YS1vZSwgdGhpcyBzaG91bGQNCj4gPiBob3BlZnVsbHkgYWxz
-byBoZWxwIHVzIHdpdGggc2hvd2luZyB0aGUgc291cmNlIG9mIGlzc3VlKQ0KPiA+DQo+ID4+ICMg
-VGhlb3JpZXMNCj4gPj4gV2h5IGRvIEkgdGhpbmsgdGhlIGlzc3VlIGlzIG1ldGEtb2UgYW5kIG5v
-dCBtZXRhLXJ6LWJzcD8NCj4gPj4gKiBOb3QgYSBsb3QgaGFzIGNoYW5nZWQgaW4gdGhlIGJzcCBs
-YXllciBmb3IgdGhlIFdhbG5hc2NhciB1cGdyYWRlIGFuZA0KPiBpdCB3YXMgYWxsIGZpbmUgZm9y
-IEtpcmtzdG9uZS9TY2FydGhnYXAuDQo+ID4+ICogQ3JlYXRpbmcgYSBkdW1teSBic3AgbWV0YS1s
-YXllciAob25seSBjb250YWluaW5nIGEgbGF5ZXJzLmNvbmYgYW5kIGENCj4gbWFjaGluZSBkZWZp
-bml0aW9uKSBzdGlsbCBwcm9kdWNlcyB0aGUgc2FtZSBlcnJvci4NCj4gPj4NCj4gPj4gSSdtIGd1
-ZXNzaW5nIHRoYXQgdGhlIEJTUCB0ZXN0IGNhc2VzIGZyb20geW9jdG8tY2hlY2stbGF5ZXIgYXJl
-IG5vdA0KPiBub3JtYWxseSBydW4gb3ZlciBtZXRhLW9lIGFzIGl0J3Mgbm90IGEgQlNQIGxheWVy
-LiBBbmQgcHJlc3VtYWJseSBmZXcNCj4gb3RoZXIgQlNQIGxheWVycyBoYXZlIHRyaWVkIHJ1bm5p
-bmcgdGhlIHRlc3RzIHlldD8NCj4gPj4gQm90aCBrZXJuZWwtaGFyZGVuaW5nLWNoZWNrZXIgYW5k
-IHNwZWN0cmUtbWVsdGRvd24tY2hlY2tlciBhcmUgbmV3IHRvDQo+IFdhbG5hc2NhciBzbyBtYXli
-ZSB0aGF0IHdoeSB0aGUgaXNzdWUgaGFzbid0IGJlZW4gc2VlbiBiZWZvcmUuDQo+ID4+DQo+ID4+
-DQo+ID4+IEtpbmQgcmVnYXJkcywgQ2hyaXMNCj4gPj4NCj4gPj4NCj4gPj4NCj4gPj4NCj4gPg0K
-PiA+IC09LT0tPS09LT0tPS09LT0tPS09LT0tDQo+ID4gTGlua3M6IFlvdSByZWNlaXZlIGFsbCBt
-ZXNzYWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuDQo+ID4gVmlldy9SZXBseSBPbmxpbmUgKCMxMTc0
-NTIpOg0KPiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2
-ZWwvbWVzc2FnZS8xMTc0NTINCj4gPiBNdXRlIFRoaXMgVG9waWM6IGh0dHBzOi8vbGlzdHMub3Bl
-bmVtYmVkZGVkLm9yZy9tdC8xMTMxNjg5MjgvNjA4NDQ0NQ0KPiA+IEdyb3VwIE93bmVyOiBvcGVu
-ZW1iZWRkZWQtZGV2ZWwrb3duZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IFVuc3Vic2Ny
-aWJlOiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwv
-dW5zdWINCj4gW3NrYW5kaWdyYXVuQGdtYWlsLmNvbV0NCj4gPiAtPS09LT0tPS09LT0tPS09LT0t
-PS09LQ0KPiA+DQoNCg==
+From: Martin Jansa <martin.jansa@gmail.com>
+
+* fixes:
+  https://lists.openembedded.org/g/openembedded-devel/message/117255
+
+DEBUG: Executing shell function do_compile
+* Getting build dependencies for wheel...
+/usr/lib/ld-linux-aarch64.so.1: No such file or directory
+Traceback (most recent call last):
+  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/pyproject_hooks/_in_process/_in_process.py",
+line 389, in <module>
+    main()
+    ~~~~^^
+  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/pyproject_hooks/_in_process/_in_process.py",
+line 373, in main
+    json_out["return_val"] = hook(**hook_input["kwargs"])
+                             ~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/pyproject_hooks/_in_process/_in_process.py",
+line 143, in get_requires_for_build_wheel
+    return hook(config_settings)
+  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/setuptools/build_meta.py",
+line 334, in get_requires_for_build_wheel
+    return self._get_build_requires(config_settings, requirements=[])
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/setuptools/build_meta.py",
+line 304, in _get_build_requires
+    self.run_setup()
+    ~~~~~~~~~~~~~~^^
+  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/recipe-sysroot-native/usr/lib/python3.13/site-packages/setuptools/build_meta.py",
+line 320, in run_setup
+    exec(code, locals())
+    ~~~~^^^^^^^^^^^^^^^^
+  File "<string>", line 23, in <module>
+  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/posix_ipc-1.2.0/build_support/discover_system_info.py",
+line 409, in discover
+    d["QUEUE_PRIORITY_MAX"] = sniff_mq_prio_max()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/posix_ipc-1.2.0/build_support/discover_system_info.py",
+line 238, in sniff_mq_prio_max
+    if max_priority < 0:
+       ^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'str' and 'int'
+
+ERROR Backend subprocess exited when trying to invoke
+get_requires_for_build_wheel
+WARNING: TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/temp/run.do_compile.2736023:168
+exit 1 from 'nativepython3 -m build --no-isolation --wheel --outdir
+TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/dist
+TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/python3-posix-ipc/1.2.0/posix_ipc-1.2.0'
+WARNING: Backtrace (BB generated script):
+
+On some hosts.
+
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...e-source-filename-instead-of-foo-for.patch | 50 +++++++++++++++
+ ...ndle-empty-max_priority-value-as-Non.patch | 49 +++++++++++++++
+ ...e-does_build_succeed-in-compile_and_.patch | 62 +++++++++++++++++++
+ .../python/python3-posix-ipc_1.2.0.bb         |  5 ++
+ 4 files changed, 166 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-use-source-filename-instead-of-foo-for.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-posix-ipc/0002-build_support-handle-empty-max_priority-value-as-Non.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-posix-ipc/0003-build_support-use-does_build_succeed-in-compile_and_.patch
+
+diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-use-source-filename-instead-of-foo-for.patch b/meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-use-source-filename-instead-of-foo-for.patch
+new file mode 100644
+index 0000000000..8bb7267086
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-posix-ipc/0001-build_support-use-source-filename-instead-of-foo-for.patch
+@@ -0,0 +1,50 @@
++From 09cfcf7de2aab873a13949d5a128ccfb9e54732d Mon Sep 17 00:00:00 2001
++From: Martin Jansa <martin.jansa@gmail.com>
++Date: Mon, 5 May 2025 08:15:37 +0200
++Subject: [PATCH] build_support: use source filename instead of 'foo' for
++ discover tests
++
++* helps when debugging the issues
++* use the same order of CC arguments in compile_and_run and
++  does_build_succeed just for consistency
++* use pthread in both compile_and_run and does_build_succeed functions
++  it was added only to does_build_succeed in 5ec39f7af8cfd8525d225b1302fa93f7133b3849
++  not sure if it was intentional
++
++Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
++Upstream-Status: Submitted [https://github.com/osvenskan/posix_ipc/pull/77]
++---
++ build_support/discover_system_info.py | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/build_support/discover_system_info.py b/build_support/discover_system_info.py
++index bc4d174..6d059d9 100644
++--- a/build_support/discover_system_info.py
+++++ b/build_support/discover_system_info.py
++@@ -60,7 +60,7 @@ def does_build_succeed(filename, linker_options=""):
++     #     Rather than testing whether or not it's needed, I just specify it
++     #     everywhere since it's harmless to specify it when it's not needed.
++     cc = os.getenv("CC", "cc")
++-    cmd = "%s -Wall -o ./build_support/src/foo ./build_support/src/%s %s -lpthread" % (cc, filename, linker_options)
+++    cmd = "%s -Wall -o ./build_support/src/%s ./build_support/src/%s %s -lpthread" % (cc, filename[:-2], filename, linker_options)
++ 
++     p = subprocess.Popen(cmd, shell=True, stdout=STDOUT, stderr=STDERR)
++ 
++@@ -73,7 +73,7 @@ def compile_and_run(filename, linker_options=""):
++     # Utility function that returns the stdout output from running the
++     # compiled source file; None if the compile fails.
++     cc = os.getenv("CC", "cc")
++-    cmd = "%s -Wall -o ./build_support/src/foo %s ./build_support/src/%s" % (cc, linker_options, filename)
+++    cmd = "%s -Wall -o ./build_support/src/%s ./build_support/src/%s %s -lpthread" % (cc, filename[:-2], filename, linker_options)
++ 
++     p = subprocess.Popen(cmd, shell=True, stdout=STDOUT, stderr=STDERR)
++ 
++@@ -82,7 +82,7 @@ def compile_and_run(filename, linker_options=""):
++         return None
++     
++     try:
++-        s = subprocess.Popen(["./build_support/src/foo"],
+++        s = subprocess.Popen(["./build_support/src/%s" % filename[:-2]],
++                              stdout=subprocess.PIPE).communicate()[0]
++         return s.strip().decode()
++     except Exception:
+diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc/0002-build_support-handle-empty-max_priority-value-as-Non.patch b/meta-python/recipes-devtools/python/python3-posix-ipc/0002-build_support-handle-empty-max_priority-value-as-Non.patch
+new file mode 100644
+index 0000000000..54c8ddaba7
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-posix-ipc/0002-build_support-handle-empty-max_priority-value-as-Non.patch
+@@ -0,0 +1,49 @@
++From 8fc46d871639dbe799f6ff0a61b046412ef5dcc6 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <martin.jansa@gmail.com>
++Date: Mon, 5 May 2025 08:16:30 +0200
++Subject: [PATCH] build_support: handle empty max_priority value as None
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++When cross-compiling these tests they fail when the host cannot execute
++the binaries built for target.
++
++On my local ubuntu-22.04 docker container running
++build_support/src/sniff_mq_prio_max results in:
++posix_ipc-1.2.0 $ ./build_support/src/foo
++bash: ./build_support/src/foo: cannot execute binary file: Exec format error
++which triggers the Exception in compile_and_run and returns None
++
++While on some other ubuntu-22.04 containers I see:
++posix_ipc-1.2.0$ ./build_support/src/sniff_mq_prio_max
++/usr/lib/ld-linux-aarch64.so.1: No such file or directory
++
++and the compile_and_run returns
++b''
++which then causes
++posix_ipc-1.2.0/build_support/discover_system_info.py", line 244, in sniff_mq_prio_max
++    if max_priority < 0:
++       ^^^^^^^^^^^^^^^^
++
++Handle the empty value the same as None to avoid this.
++
++Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
++Upstream-Status: Submitted [https://github.com/osvenskan/posix_ipc/pull/77]
++---
++ build_support/discover_system_info.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/build_support/discover_system_info.py b/build_support/discover_system_info.py
++index 6d059d9..f8a3c83 100644
++--- a/build_support/discover_system_info.py
+++++ b/build_support/discover_system_info.py
++@@ -223,7 +223,7 @@ def sniff_mq_prio_max():
++         except ValueError:
++             max_priority = None
++ 
++-    if max_priority is None:
+++    if not max_priority:
++         # Looking for a #define didn't work; ask sysconf() instead.
++         # Note that sys.sysconf_names doesn't exist under Cygwin.
++         if hasattr(os, "sysconf_names") and \
+diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc/0003-build_support-use-does_build_succeed-in-compile_and_.patch b/meta-python/recipes-devtools/python/python3-posix-ipc/0003-build_support-use-does_build_succeed-in-compile_and_.patch
+new file mode 100644
+index 0000000000..b36d1cdb3a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-posix-ipc/0003-build_support-use-does_build_succeed-in-compile_and_.patch
+@@ -0,0 +1,62 @@
++From 760374e778fc28193cfea1416a739e206f9201c6 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <martin.jansa@gmail.com>
++Date: Mon, 5 May 2025 08:28:56 +0200
++Subject: [PATCH] build_support: use does_build_succeed in compile_and_run
++
++* avoid the duplication and building the sniff_mq_prio_max.c twice
++
++Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
++Upstream-Status: Submitted [https://github.com/osvenskan/posix_ipc/pull/77]
++---
++ build_support/discover_system_info.py | 27 ++++++++++-----------------
++ 1 file changed, 10 insertions(+), 17 deletions(-)
++
++diff --git a/build_support/discover_system_info.py b/build_support/discover_system_info.py
++index f8a3c83..f6e6c8c 100644
++--- a/build_support/discover_system_info.py
+++++ b/build_support/discover_system_info.py
++@@ -72,22 +72,17 @@ def does_build_succeed(filename, linker_options=""):
++ def compile_and_run(filename, linker_options=""):
++     # Utility function that returns the stdout output from running the
++     # compiled source file; None if the compile fails.
++-    cc = os.getenv("CC", "cc")
++-    cmd = "%s -Wall -o ./build_support/src/%s ./build_support/src/%s %s -lpthread" % (cc, filename[:-2], filename, linker_options)
++-
++-    p = subprocess.Popen(cmd, shell=True, stdout=STDOUT, stderr=STDERR)
++-
++-    if p.wait():
+++    if does_build_succeed(filename, linker_options=""):
+++        try:
+++            s = subprocess.Popen(["./build_support/src/%s" % filename[:-2]],
+++                                 stdout=subprocess.PIPE).communicate()[0]
+++            return s.strip().decode()
+++        except Exception:
+++            # execution resulted in an error
+++            return None
+++    else:
++         # uh-oh, compile failed
++         return None
++-    
++-    try:
++-        s = subprocess.Popen(["./build_support/src/%s" % filename[:-2]],
++-                             stdout=subprocess.PIPE).communicate()[0]
++-        return s.strip().decode()
++-    except Exception:
++-        # execution resulted in an error
++-        return None
++ 
++ 
++ def get_sysctl_value(name):
++@@ -211,11 +206,9 @@ def sniff_mq_prio_max():
++     # ref: http://www.opengroup.org/onlinepubs/009695399/basedefs/limits.h.html
++     DEFAULT_PRIORITY_MAX = 32
++ 
++-    max_priority = None
++     # OS X up to and including 10.8 doesn't support POSIX messages queues and
++     # doesn't define MQ_PRIO_MAX. Maybe this aggravation will cease in 10.9?
++-    if does_build_succeed("sniff_mq_prio_max.c"):
++-        max_priority = compile_and_run("sniff_mq_prio_max.c")
+++    max_priority = compile_and_run("sniff_mq_prio_max.c")
++ 
++     if max_priority:
++         try:
+diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb b/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
+index b3da09c35b..05a73f2896 100644
+--- a/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
+@@ -9,4 +9,9 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+ 
+ SRC_URI[sha256sum] = "b7444e2703c156b3cb9fcb568e85d716232f3e78f04529ebc881cfb2aedb3838"
+ 
++SRC_URI += " \
++    file://0001-build_support-use-source-filename-instead-of-foo-for.patch \
++    file://0002-build_support-handle-empty-max_priority-value-as-Non.patch \
++    file://0003-build_support-use-does_build_succeed-in-compile_and_.patch \
++"
+ inherit pypi python_setuptools_build_meta
 
