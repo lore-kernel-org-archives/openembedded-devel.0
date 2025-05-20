@@ -2,37 +2,35 @@ Return-Path: <chris.paterson2@renesas.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F140AC54E90
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F13DAC3DA6D
 	for <webhook@archiver.kernel.org>; Tue, 20 May 2025 21:52:54 +0000 (UTC)
-Received: from relmlie6.idc.renesas.com (relmlie6.idc.renesas.com [210.160.252.172])
- by mx.groups.io with SMTP id smtpd.web11.3059.1747777966087204327
+Received: from relmlie5.idc.renesas.com (relmlie5.idc.renesas.com [210.160.252.171])
+ by mx.groups.io with SMTP id smtpd.web10.2991.1747777965115471228
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 May 2025 14:52:46 -0700
+ Tue, 20 May 2025 14:52:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: renesas.com, ip: 210.160.252.172, mailfrom: chris.paterson2@renesas.com)
-X-CSE-ConnectionGUID: wV9zKOw5RtKhAbOxrYIZcg==
-X-CSE-MsgGUID: gsU3NA7yR2+swAtSHoj7Qw==
+ dkim=none (message not signed); spf=pass (domain: renesas.com, ip: 210.160.252.171, mailfrom: chris.paterson2@renesas.com)
+X-CSE-ConnectionGUID: JiAvP/4iTn2BZr4uwt9RPA==
+X-CSE-MsgGUID: afixUTXGSzCs2gXPlHLvxg==
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
-  by relmlie6.idc.renesas.com with ESMTP; 21 May 2025 06:52:44 +0900
+  by relmlie5.idc.renesas.com with ESMTP; 21 May 2025 06:52:43 +0900
 Received: from spl2-146.localdomain (unknown [10.226.92.154])
-	by relmlir6.idc.renesas.com (Postfix) with ESMTP id 0551E409DB03;
-	Wed, 21 May 2025 06:52:43 +0900 (JST)
+	by relmlir6.idc.renesas.com (Postfix) with ESMTP id A8300409DB03;
+	Wed, 21 May 2025 06:52:42 +0900 (JST)
 From: Chris Paterson <chris.paterson2@renesas.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Chris Paterson <chris.paterson2@renesas.com>
-Subject: [meta-oe][walnascar][PATCH] smarty: Drop allarch
-Date: Tue, 20 May 2025 22:52:37 +0100
-Message-ID: <20250520215237.454574-2-chris.paterson2@renesas.com>
+Subject: [meta-oe][PATCH] smarty: Drop allarch
+Date: Tue, 20 May 2025 22:52:36 +0100
+Message-ID: <20250520215237.454574-1-chris.paterson2@renesas.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250520215237.454574-1-chris.paterson2@renesas.com>
-References: <20250520215237.454574-1-chris.paterson2@renesas.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 21:52:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117523
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117522
 
 allarch is causing issues when running yocto-layer-check for
 test_machine_signatures on a BSP layer that depends on meta-oe:
@@ -61,13 +59,13 @@ Also remove extra whitespace after comment.
 Link: https://lists.openembedded.org/g/openembedded-devel/topic/issue_meta_oe_walnascar/113168928
 Signed-off-by: Chris Paterson <chris.paterson2@renesas.com>
 ---
- meta-oe/recipes-support/smarty/smarty_5.4.3.bb | 4 +---
+ meta-oe/recipes-support/smarty/smarty_5.4.5.bb | 4 +---
  1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/smarty/smarty_5.4.3.bb b/meta-oe/recipes-support/smarty/smarty_5.4.3.bb
-index 30a274e6c858..ad8d6bcc0444 100644
---- a/meta-oe/recipes-support/smarty/smarty_5.4.3.bb
-+++ b/meta-oe/recipes-support/smarty/smarty_5.4.3.bb
+diff --git a/meta-oe/recipes-support/smarty/smarty_5.4.5.bb b/meta-oe/recipes-support/smarty/smarty_5.4.5.bb
+index 7072641d4585..37336ff5d70e 100644
+--- a/meta-oe/recipes-support/smarty/smarty_5.4.5.bb
++++ b/meta-oe/recipes-support/smarty/smarty_5.4.5.bb
 @@ -18,9 +18,7 @@ S = "${UNPACKDIR}/git"
  
  INHIBIT_DEFAULT_DEPS = "1"
