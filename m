@@ -2,122 +2,131 @@ Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 43955C54756
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4390BC3ABDD
 	for <webhook@archiver.kernel.org>; Tue, 20 May 2025 17:48:54 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.web11.27491.1747763327790657023
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.web11.27487.1747763325608279054
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 May 2025 10:48:47 -0700
+ Tue, 20 May 2025 10:48:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=ebGFobjK;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54KGgF07013444
-	for <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 17:48:47 GMT
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=ch8tEBsh;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54KGjCXg031860
+	for <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 17:48:45 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=hcj3u/jcgvz
-	R9sQlPkihBLfrDGUmkE8WNSxzZHaA4RM=; b=ebGFobjK4sXgnV4Gw+/a3aWrJdr
-	dcdjIF36wv5YiAO+YLrEsfKa+Aj8wRCOmIjI6O+LIVDxLvCLqTWqXAfJeYS71ENQ
-	oacWYnpj0DCdbeiI1ul6IIK8aSwyLpbFDALyS9GhZEbaY1M2hbj/vjqGjiU55GxV
-	0MLtWHCr1pXUmpYhaE/PBYsGUpNR2ZwfAnKGAhav3KNesode6lqGR3IeytF5SHTX
-	NF+ljw4bYf+xzPGnZ3gfHE6XJWhtFsbF9rmXuHszSrNMCcL4t5zG0A752PFn5C/p
-	ptq0Qbytvp8xfn0dN5JyE9Xspx1+ErOHyKKY0LKKn3k3rAybCLloMuLeIsA==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46rwf6g6eb-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=auD1XPjXCRh
+	mdxhJM3MOJr7RO40Kxw+vF+pnSq6GnyU=; b=ch8tEBshQwPsCgnCDdaN6ZWEvjo
+	/NQQ3O19vYQI0yInlM3hFGKp0w2QDdmu68CtQz9AOw5nAfYXa6Pov3FaJVbgUNuk
+	mGGlqtPDma6M0KphhoP0Xf8VWhBkHdD4fVMPaLI3j7sqmp+bhp18iUetq14zexPu
+	D6Uj9ROpZJia8dHkVquFtlvfs/nd3s+UXc0TMrwoaXqkZ49ZqpVxcrtvJV55ViEe
+	uUVAm3lo7cv2lI0QjQxdxiOR2KMAY1mzn4hWnfJm7kRzMjO20k6868tQWie+4P8S
+	/cQLthhwCWDsIDYHHC6NMVYM5yZsOnpDcz2QZrTDTuIpYJBoNRRDLX/7R2g==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46rwf0072n-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 17:48:46 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-6f8dd95985dso48408206d6.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 10:48:46 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 17:48:45 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-6f8b14d49a4so56292446d6.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 10:48:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747763322; x=1748368122;
+        d=1e100.net; s=20230601; t=1747763323; x=1748368123;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=hcj3u/jcgvzR9sQlPkihBLfrDGUmkE8WNSxzZHaA4RM=;
-        b=U9hM7h+p5LasRd26xEKc0obr1lraOFQPIhHukQiUMhnzrLG4/SfH2TOPhyXPorL8LQ
-         9N4YF4UTF34hb9Yncknn97GyOItWIF7O8gfitcI8Ocyzdc9SHHf6HL+EFWdbIW/evF1Z
-         XcYOdnfL+A5pui7NHgZD7SA7PUu3v1E1DxEyzF6QjaSCVxKdX87F14+/q8N3u4I+z4f/
-         KWtCXoM3gkpld1u8ZfHqtqW+aYoWUQci6prKOEXMU2X9C1uL0f4NTB1NsN6pTDmTO7gZ
-         +jmqBPkOGnxD1xGlCKLTS6Lp222rNIgRI1BehQCE+MiGtlKOhcw7Jn0ozowxp6tuvCJk
-         gIIg==
-X-Gm-Message-State: AOJu0YwnRa+C2pxSNgxclBi8whWXJWU4ksNk1JFH7+mcoBs+SIYtJqsD
-	Lo//z8SolCcHR52ae1kfzFJhIBWMCmDOxBlRkFFJgC/nhlcEk2NwL/0p0eatlvdPN8QPbu9TGBW
-	uZuDgdjiNy44bG5dcXZkBAzEllGEkUs6DjFkLWtYNJgvrblxHNFl4AggDiSLdtlZ7xwOdGSu4nP
-	ZaqP8YpYayClo4fpEEzwc=
-X-Gm-Gg: ASbGncsc73nm3rUMyhetZ90JT1+xjs2c81/QkeqtK/SMcYRjcnLcg68HY1/2FA60YTk
-	g+9NCx32rSmGjeSAxwM00MgeWZtzGMDtfrNtpqjxe9JwN1/nnhEijOE9pTfC8Asvbp6eUqMR5Gx
-	XqecfG0IHgQiipSvdjtwbZOmhLkODwMNHGkMNEu6FENdLpemcVeCMVVRiVq3pj42TJlVvN8iQxW
-	3TEG7rl//XU6k7NENACY30EQF3eZhMJPqPkmBx4ACuduwARGd6XuvIH2AOxUKM+ltAVSS8YGK6Q
-	OxdzbrXHp2OifAcMOGhyyqMY2lry3dISY8Rt5ejrxX/VbVF+Tiv7GKz59xktBtPkmk8ppDykws5
-	KHou0Nc3dhIRlbw9QoGHlNUyF
-X-Received: by 2002:a05:6214:248a:b0:6e4:2dcb:33c8 with SMTP id 6a1803df08f44-6f8b2d0d9a0mr256734796d6.29.1747763322558;
-        Tue, 20 May 2025 10:48:42 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGTBC2VmMvHhaAFd4d2DjxnME0mgDG7D40Wgdl0z6CKZ8UdgTrRa7S4ENA0QkP1ncNLekxDgQ==
-X-Received: by 2002:a05:6214:248a:b0:6e4:2dcb:33c8 with SMTP id 6a1803df08f44-6f8b2d0d9a0mr256734356d6.29.1747763321919;
-        Tue, 20 May 2025 10:48:41 -0700 (PDT)
+        bh=auD1XPjXCRhmdxhJM3MOJr7RO40Kxw+vF+pnSq6GnyU=;
+        b=rGappANYH1l0sZGZ0qLQIWlfiW3Kn4GW6qyjM7pczD3oeR9t+1iqnigv616kh9mVkg
+         F0L3Xst4GXpLSEm+sUwqNRVLQIyF+sS9h5OSWtpOaQ1EM/kUd4iHiIIq6w2B8vsHSKaB
+         ygqZHA0RP3W3oGbwCa5nyaA8BYStsgS90xPNbM68IsbydfpI2n8EfuyD8nJPc/SbyS97
+         64FRo1ltKImDsxt3K21KcBgJi5JVE+fOPVRmTdBJ/Lt1gTs1USk5VDABFdLZwiettEDy
+         3U2XzJomiAzn3ZH40CYWq/5wC0NO4eDkzPnL24SYu5ywXoQsgYZIjX4905aU0ept78M4
+         5u/g==
+X-Gm-Message-State: AOJu0YwiZS1OgNDk9LGmVMt15OdzxbeF2nl5aa+OPZhZBNxrdH0EK6Fg
+	DNp4qsWjTJfaTjcElF0/ej38mE+jO/P4Hsug7qP5eNbQsNhWe8V3GjDC8Z3bc1oZhnXVTI3sggE
+	HELtOZVd0pahEIHtlkZR2I2XJrYC4LyoP5d7wSOaFZsxJ/1pu/CnqlbjnzlRS0E0s40XqB9aaOM
+	aPLjfRcS5nHVT/QaslHZU=
+X-Gm-Gg: ASbGncsrQyzHs3UfcGVnXBTstPQBqv2r6brBsJrH+VFC1FpgLCQUOCWweSAsw9AX8zh
+	aIo2Lk4EwaR+iU83lwIBFQ5LfS2gHLy3ix6+lYA7plkXVo9iLMZcnVOyyKkMIfdQdy1Juy3NVXv
+	ItYxV32ITlcOH8IvpZXHqYBa8nhmN8vWKQwbLHcfYIQWZIE1WWBjx68kmtJLRhZsPJ5Ujf1l09k
+	eV3Jn53WFaemkf9X7pOorb6W4BRCVAe0X06w52r09/IigKZdcYihcwgkq1oiTX8nVsmWLgQRZ/I
+	HFCjOgEJ6x/5qMkA5hyuNT1rgTGw3+s2OjoVCpoMkuoZeoOqecDSgk3Na75FUMOjOPWiKm1jHIL
+	FK5MD10ymWL9TFtc/AkjrTRBC
+X-Received: by 2002:a05:6214:2a83:b0:6e4:2f7f:d0bb with SMTP id 6a1803df08f44-6f8b0849362mr248147336d6.4.1747763323635;
+        Tue, 20 May 2025 10:48:43 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHFZIKKvYP59f+gzSq+qzI4dfjxKTxnxj5dtkSVIz56cpz0qt61KTMy94+g9gWUc/7A8QAhZQ==
+X-Received: by 2002:a05:6214:2a83:b0:6e4:2f7f:d0bb with SMTP id 6a1803df08f44-6f8b0849362mr248146976d6.4.1747763323146;
+        Tue, 20 May 2025 10:48:43 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a0c3-3a00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a0c3:3a00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-550e703f6e0sm2441815e87.223.2025.05.20.10.48.40
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-550e703f6e0sm2441815e87.223.2025.05.20.10.48.42
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 May 2025 10:48:41 -0700 (PDT)
+        Tue, 20 May 2025 10:48:42 -0700 (PDT)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2 2/3] libglvnd: RPROVIDE libegl
-Date: Tue, 20 May 2025 20:48:37 +0300
-Message-Id: <20250520174838.1187294-2-dmitry.baryshkov@oss.qualcomm.com>
+Subject: [meta-oe][PATCH v2 3/3] libglvnd: pull in libEGL and libGLX ICDs
+Date: Tue, 20 May 2025 20:48:38 +0300
+Message-Id: <20250520174838.1187294-3-dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250520174838.1187294-1-dmitry.baryshkov@oss.qualcomm.com>
 References: <20250520174838.1187294-1-dmitry.baryshkov@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=VL/dn8PX c=1 sm=1 tr=0 ts=682cc07e cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=xqWC_Br6kY4A:10 a=dt9VzEwgFbYA:10
- a=aR16PxjQAAAA:8 a=EUspDBNiAAAA:8 a=pXe0YPzJT124VR3A5wcA:9
- a=iYH6xdkBrDN1Jqds4HTS:22 a=zbFvvTOBjyH4ze5LlUjX:22
-X-Proofpoint-GUID: 0DbKnxLGP7Ff2IMuhX5Df4tpsa2YH3vN
-X-Proofpoint-ORIG-GUID: 0DbKnxLGP7Ff2IMuhX5Df4tpsa2YH3vN
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTIwMDE0OSBTYWx0ZWRfX3QMTmgjLJTpD
- Va08TrOX0I3qES6xq6cpw4wHfeAoazuPXp8Vu1E5UxefkXZumVwDLF42dW4hQc+M85oMhQh4jbi
- JfHwEpYMLFLVM71ZKxcd8P+xz4PRF1P3QImsfDS2JweUKwlMH8yMnD4SV10jsJMOB/MYOgxpsGD
- 5IIik+scMFHwQ5nUc8bzTzZHtToFnT3ivgKqm7QHf8UEF+jrsBkbOVGoodqYE6iNUfIpFnvAAg+
- HqK8iq1kjP2UP9yu7v7bWZ0cCsPsceLNB7eKk0EPHuealE/EMBPhUYhIw3NBGK81Xtk3YopTJyM
- ZHytGTkSkrToXGRLp/GTqo3C5TL6KXQRab5NuVaojAJcSVd1982goEzC/wvuK+eiCvJ8CgN98wA
- 4uJURUf7Fyd+R6m7cEv7DM0IUuLi94/+3eA7pBxausuKrvHiFoWllNlKrfnl5ZTK3WJFAf77
+X-Proofpoint-GUID: -ukn9VT1AwDEYzKtXhYlUBSbSDGHzDWR
+X-Proofpoint-ORIG-GUID: -ukn9VT1AwDEYzKtXhYlUBSbSDGHzDWR
+X-Authority-Analysis: v=2.4 cv=ZP3XmW7b c=1 sm=1 tr=0 ts=682cc07d cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=xqWC_Br6kY4A:10 a=dt9VzEwgFbYA:10
+ a=EUspDBNiAAAA:8 a=-TUwe_Tb8dWRorOgwa0A:9 a=1HOtulTD9v-eNWfpl4qZ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTIwMDE0OSBTYWx0ZWRfX3CGQr4CGqwC1
+ nh+1B+wjyUs3eQ87aXD+a24fyKsvnCgvt7ydpLG306eS7SC5reb2K/G9YgRLpJKgNom2ftnw3cb
+ WaJDgpHXfGpJOBiq8O+KHd95NYMPwCTwLTwmX/mPx6kQcnPdyeFgWgSnB7Sv9WnLyEc7DGWtoio
+ hxe5Qfqfdfoe6CGh0Zq27SzK3t4Dh5+es1l3y2CpI+9SblW1AUyRez2YzCDWOq6q0No9hw7U2vd
+ xdDSOoSAqLfQlPNbSkSH3XtUXNnkMMZuONqak0bmmhuSOK05hMAY1AQroNI7tOe4D3VHmz8rLdt
+ 2tAzG6j/JQYa0yEysIwfKwgLAq4DkURP1MeDWJIs+kRwO0sOrTCj1rNRio45IcXUDkGyb3XT8TR
+ iKe6J+cggfjlDrFyrhR3NDILQAyxpsLaXKX+1twsh1Z+f6CPpz0+Yn3rr4SaprwYO/e9UCnL
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-20_08,2025-05-20_03,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 mlxlogscore=809 clxscore=1015 bulkscore=0 spamscore=0
- malwarescore=0 suspectscore=0 impostorscore=0 priorityscore=1501 adultscore=0
- mlxscore=0 lowpriorityscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ priorityscore=1501 adultscore=0 mlxlogscore=999 suspectscore=0 bulkscore=0
+ impostorscore=0 phishscore=0 spamscore=0 mlxscore=0 lowpriorityscore=0
+ clxscore=1015 malwarescore=0 classifier=spam authscore=0 authtc=n/a authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505160000
  definitions=main-2505200149
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 17:48:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117520
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117519
 
-Some packages (XWayland, X.org) add runtime dependency on libegl in
-order to let it by open at runtime. Make libglvnd RPROVIDE that package
-name too.
+In order to function, libglvnd requires vendor-provided Installable
+Client Drivers for libEGL and libGLX. RRECOMMEND corresponding virtual
+packages in order to pull default implementation for the target
+platform.
 
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+
 ---
- meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Note, this patch depends on corresonding OE-Core changes and might be
+applied separately, once corresponding patch lands to OE-Core.
+---
+ meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb b/meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb
-index 1c0d3253d8ec..8f8035896376 100644
+index 8f8035896376..a737a735b7ea 100644
 --- a/meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb
 +++ b/meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb
-@@ -35,3 +35,5 @@ PROVIDES = " \
-     ${@bb.utils.contains('PACKAGECONFIG', 'gles2', 'virtual/libgles2 virtual/libgles3', '', d)} \
-     ${@bb.utils.contains('PACKAGECONFIG', 'egl', 'virtual/egl', '', d)} \
- "
-+
-+RPROVIDES:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'egl', 'libegl', '', d)}"
+@@ -22,8 +22,8 @@ PACKAGECONFIG ?= "\
+   "
+ 
+ PACKAGECONFIG[x11] = "-Dx11=enabled,-Dx11=disabled,libx11 libxext xorgproto"
+-PACKAGECONFIG[glx] = "-Dglx=enabled,-Dglx=disabled,libx11 libxext xorgproto"
+-PACKAGECONFIG[egl] = "-Degl=true,-Degl=false,"
++PACKAGECONFIG[glx] = "-Dglx=enabled,-Dglx=disabled,libx11 libxext xorgproto,,libglx-icd"
++PACKAGECONFIG[egl] = "-Degl=true,-Degl=false,,libegl-icd"
+ PACKAGECONFIG[gles1] = "-Dgles1=true,-Dgles1=false,"
+ PACKAGECONFIG[gles2] = "-Dgles2=true,-Dgles2=false,"
+ 
 -- 
 2.39.5
 
