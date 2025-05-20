@@ -1,410 +1,221 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <chris.paterson2@renesas.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D56EC3DA6D
-	for <webhook@archiver.kernel.org>; Tue, 20 May 2025 12:35:42 +0000 (UTC)
-Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
- by mx.groups.io with SMTP id smtpd.web10.19667.1747744534235479070
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C60DC3ABDD
+	for <webhook@archiver.kernel.org>; Tue, 20 May 2025 14:38:03 +0000 (UTC)
+Received: from TYVP286CU001.outbound.protection.outlook.com (TYVP286CU001.outbound.protection.outlook.com [52.101.125.42])
+ by mx.groups.io with SMTP id smtpd.web11.22654.1747751881729892716
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 May 2025 05:35:34 -0700
+ Tue, 20 May 2025 07:38:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cY/wVLcv;
- spf=pass (domain: gmail.com, ip: 209.85.219.176, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-e7b85f1cbacso3239152276.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 05:35:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747744533; x=1748349333; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=nX9Zq+rlnO4KZYytA7yYfHVyDxF0A4hih1RUjxnGa4M=;
-        b=cY/wVLcv/flbJm4I8q15seCMajPjHJTm+u9p9WKpRFd+dHhyrhJEaQfb5Wu/swQRHr
-         S3eRESpHzwz9fC5ft1KtkRhmm7FEQCkHDoiLQyRaOiXk+DDib7/Cq80rLFZ23ouJ5qKm
-         P1Qv2ab527BQF3RnSmaNDHv+VLnS/uUZ3EcZQThKQ9gz0mSbJ9bvsHrFSJCE5CaZZkUx
-         mc0CgDPXMXxripkdy/aXJ5IbaRax/GsWF9O2UhTb46gf7Zweiaj0Js1GskaxgNW0NfI8
-         +u/pOQATpaygBL829s+blWMKZNeOoakrjBU7WNd1HwzmkvvPaXoqAQl1mok/vxAdnf8c
-         HYhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747744533; x=1748349333;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=nX9Zq+rlnO4KZYytA7yYfHVyDxF0A4hih1RUjxnGa4M=;
-        b=Rg4Hh3Qt7ZPx+lOSaPcyWsDJxjnmClVgM2H4yGvsvpoYlOdhzLKF3zu5kSGPP/AWJb
-         21CvQvxobD8N3jizSXrzjxxhmxC1F3I57o/LZ5xxa4AqG8i7rK8b3iSHIx950VOGX5OW
-         Zq9F6zLa9sRmJZtSjrUVrGc6GWSI8DPA+ICGjOwb8fly4alforJqnsola2jFBh1H7edT
-         KGEyNrTgCyH8Jj1rIVoIb1XKYT6xaDLPws0JlCnY6X3GNkAAs6QDWBaN+b6r6HggOvik
-         8JBkFjqoTlJQcgrulAAw++PytvZycFTsOKOrM7AMEIqOv8Y2ItkImP+x56dHFP7AWdls
-         8pWg==
-X-Gm-Message-State: AOJu0Yw5J4qp/GQLqyVWR+nDZljvNvNC3qhYLkMXI9QLgeK+h6D1DJN2
-	QSVCADv5g2xpIRTDtQKC4/gExS1EwVC9jogTShz3RY05DzflfnGEk0uTIAdeUiXZ
-X-Gm-Gg: ASbGncv+aghIXN5Dlxul6G2k6HFnpMu84dxN7P650B31/nHfiMJY+8ugla2C4VLW6CS
-	0qFsHQz2JgNXR/rihqWN4Rcx90hjqKGPtaGmHAhbeNaIW2dQz99XPR5CF+04xtp5AtY0S1Pz44l
-	px44/mSuhY6JdhlOFEY0cUjVVl6cZ84OjYZFHG8ond1vFr8DP1X1q1srWdzP9RTPpHrkYc/+u2z
-	ytRBvmGjutDz+qLioRb9MP9aEyinj0DLsC9WJdW+NH5QKzjRoQ+QZgg+dn+6hOnhUjxLAJacMf5
-	+mVsKktp1OwvT+MlZzCCuWMzXUsCWvTsj9HRO1uVipfiGNEALYQO1D0/
-X-Google-Smtp-Source: AGHT+IH96RLa44RqoNtpLjGNJXB43oLn6zCil+XzgUTXdKgO0uta0QRo+yQu/AH0TSVMB6deCEkGpA==
-X-Received: by 2002:a05:6902:2486:b0:e7d:4adb:5fff with SMTP id 3f1490d57ef6-e7d4adb6142mr3892598276.23.1747744532478;
-        Tue, 20 May 2025 05:35:32 -0700 (PDT)
-Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e7b6adcc6e6sm3313666276.48.2025.05.20.05.35.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 May 2025 05:35:32 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH] xfce4 update HOMEPAGEs
-Date: Tue, 20 May 2025 08:35:02 -0400
-Message-ID: <20250520123502.17673-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@renesas.com header.s=selector1 header.b=drMw2BJL;
+ spf=pass (domain: renesas.com, ip: 52.101.125.42, mailfrom: chris.paterson2@renesas.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=AIEKp0BfcJgOmHyAEX3Tokk9r2IfxzC+d4xxihvaWqz5aK4Fm2ocYD1BprGpq7NGM9VySajM3dgBkiP4JLlA7cvt+xdIPW+kaVsBS3LlszqUQ+oWGtqWJHh7QsokBCP32u1u0+bjQdtUWZ/tY0eLHFB7tzkw1WpIf6S3PRJnqeW12HBrqqwTvOO4gcul/kYbVEg7F5iiqDXhg71ri/nlM9R82W7M2s2P5YgZ7WtQoClLnDV/XvGThL7qUkd3QXxb9zsnDPcB0bqMzSpwYF/QORg8dc0GpPPz1W0LiQey3oeGvk3H9UajPWBCVHDECKA2hnHxmawYUeoHqNU8A4DeSQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MyrYbt7e4E+EWELTngw18br0ayzBNTk+4K7x9uXz704=;
+ b=YuUU2p6MhM/pR4NiBI07Hk2rISCsv/o0GDyGneK21zKMNJl7lJIhH0kEj+wSbnvQsVfQjHQxxIJFvM6VCgG/VyTSMu1bRdvVxkKsGv3rF687yZ+blpYRC0WzZP83KVizgdO8U5cWbPbU1M6y/mR/3MlrVGvIZ/xRkLA5ROTMqdde219t6KeOWueOMqwKUBF82oPuzWfFNksGhsa17Dq1wbB3GZX7M3nmqeIGnDNR2ZiWoWCycOEd4q8rtokPMW0TT4OAlIWktMkeS5XJkNvGli+ybKqJMvAyZIx5idXJ1w/+GrckzBpH2Zjg/csBhUCJoQ+w2Dwt59oGUsLK+bN2vQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=renesas.com; dmarc=pass action=none header.from=renesas.com;
+ dkim=pass header.d=renesas.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=renesas.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MyrYbt7e4E+EWELTngw18br0ayzBNTk+4K7x9uXz704=;
+ b=drMw2BJL7ORsHHQapt2SXgK6PMmv3wg+RWch6Ngg4ccu4j5VSLked9LcvjHpSUgEKIduA6DP+Wtuwnsc0FOhBHyWIC7+/z0XzAh6/vYmny0K/gVN2Oo9K7CsNHXu1Kz2ZpU49exDqLXzH23XthlPUzU7lqaB3rab+N0gY9DjW4Y=
+Received: from OS3PR01MB5896.jpnprd01.prod.outlook.com (2603:1096:604:c6::8)
+ by OS9PR01MB14001.jpnprd01.prod.outlook.com (2603:1096:604:35e::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.19; Tue, 20 May
+ 2025 14:37:56 +0000
+Received: from OS3PR01MB5896.jpnprd01.prod.outlook.com
+ ([fe80::1b62:57c6:c2cf:641b]) by OS3PR01MB5896.jpnprd01.prod.outlook.com
+ ([fe80::1b62:57c6:c2cf:641b%7]) with mapi id 15.20.8746.030; Tue, 20 May 2025
+ 14:37:56 +0000
+From: Chris Paterson <Chris.Paterson2@renesas.com>
+To: Alexander Kanavin <alex.kanavin@gmail.com>, Paul Barker
+	<paul.barker.ct@bp.renesas.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [issue][meta-oe][walnascar] yocto-layer-check not passing
+ for BSP layer when meta-oe is a dependency
+Thread-Topic: [oe] [issue][meta-oe][walnascar] yocto-layer-check not passing
+ for BSP layer when meta-oe is a dependency
+Thread-Index: AdvHdSEI4cqzGwtvRK2R3/3yqcMGlQBMUnMAADbIrAAABG6AgA==
+Date: Tue, 20 May 2025 14:37:56 +0000
+Message-ID: 
+ <OS3PR01MB58965D1C9EA34FFD60523FF5B79FA@OS3PR01MB5896.jpnprd01.prod.outlook.com>
+References: 
+ <OS3PR01MB5896AC2C723041187F4A5BE9B792A@OS3PR01MB5896.jpnprd01.prod.outlook.com>
+ <84313a55-b94c-4de4-a26b-f1c341edd54d@bp.renesas.com>
+ <CANNYZj9O7D5Eq2eeXxuD+VfO65i6VUHis2vOQ+ZYsfxJhk2aog@mail.gmail.com>
+In-Reply-To: 
+ <CANNYZj9O7D5Eq2eeXxuD+VfO65i6VUHis2vOQ+ZYsfxJhk2aog@mail.gmail.com>
+Accept-Language: en-US, en-GB
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=renesas.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: OS3PR01MB5896:EE_|OS9PR01MB14001:EE_
+x-ms-office365-filtering-correlation-id: 7515f106-f69e-4651-7a08-08dd97abe938
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|366016|376014|38070700018;
+x-microsoft-antispam-message-info: 
+ =?utf-8?B?YmdTZnNQdWtBRXFaRFdEb3VyUVIzWnd6YkJpZGRvSE1DTmw5NzRuSlFHVWI4?=
+ =?utf-8?B?UEZ5QklBMXduWUdtNWJSMXVsUHBJUVFmOU9CTjErR3JzdnVhUlRqSjB0RHpo?=
+ =?utf-8?B?WmFOUmIwN2p6b01Pd1JBSnYvRCthOVBEelhXanY1SDA5NlZRZitTQW1seGdI?=
+ =?utf-8?B?MW90UE1mOFVnQ2grVkU1ZG9mbmVacXpXdGdOb3ZmNXNZdEQ0RFFOTVFwZnlz?=
+ =?utf-8?B?NjczckZnS3MyUmNldG1oM1F5LzN0UGIyQnRSSTVYdHN3bkFYdkVFeE90dTV1?=
+ =?utf-8?B?cjg4bTNuUHlOSUFSOVQ3YmovdEtFRmdQUEVacFZrelpNU2Z0UDZXQTVXaXFY?=
+ =?utf-8?B?ZEcremtOLzlJcHVya3Q5Y1EyL21pT050L0t1MFc5dnI2a1lPMiswdURoMUlC?=
+ =?utf-8?B?azVhb0FwVmJTeDd1ZFNsKzFjYUhETlNYSEJxdUtQYlhMci9kcFdxeGdCMGVF?=
+ =?utf-8?B?T0lKTzNrZHYrODNjQm1CbGNPZTdpOG5kM1Nlazd0SUJsRmRMQXZaSmVVVjJn?=
+ =?utf-8?B?amY0WnJYOVhxNnBpQmR2NHpBKzdGTjdhMm14Z1B3bTkyODR1di9FK3d0cG0r?=
+ =?utf-8?B?ZTQ2aVFlUWhLMnBTR2pQTzB1c2Z3NDZVYlZRU0p2bDhNM2pjRkVRdVh1K2gv?=
+ =?utf-8?B?bnZ2MWFOZ0o3YU1uUDQ0TXFianM0Y1QreFpIQ3VjRGlZMWp6RmNyQ1hYY29U?=
+ =?utf-8?B?TG13UGVJdVQyQWZwdHRUWE5WU2FxYVk4ZjlDTnYxNmFqVisrSy9DVWJqYytG?=
+ =?utf-8?B?blBxZWFtdVlWTTVWNnp6NVphVUU3S3BpZ2l3aGZmNjNIa0RoVHJLa2s3Zyt0?=
+ =?utf-8?B?WllFTGhrdHlrdG1yTW5DT2tCVVlPeW1MZVc2Yzl0aXowMm1LQUc3bzJtSmkw?=
+ =?utf-8?B?UmZwZjU2K3VCSHh3T3VxWVl2MlNEbGNZQXcvb2FjcGJJVkJyM2dpRmNhOC9T?=
+ =?utf-8?B?bG9Ka1krQlhwTmtzaThTVVNxWDJYN3ZiYVB5MVVtZTVnSTgwaVFlUjlzR3BT?=
+ =?utf-8?B?dis4RWgrK3lxYkFuUDJ6Ui9jeUVLOXFCbzVLVGhGM0d2RG1tK0NCN0xxbmdM?=
+ =?utf-8?B?WVI0UFJ5NUdKUmVpY0NpUmo1THZOUnMvOTg3bGRna0JhdTkxZ3V0TEN2ckJN?=
+ =?utf-8?B?SWJkRXBndEZONVVtaFFuZWJkQk1xSXVLN084Mi9vTXhzRXd1YUROeU0zNVpx?=
+ =?utf-8?B?dXdGMEJzdm8xRVZjZ3NwUEZNMmR1dnUxODU1TEhRdG1VeEhnL3M2Nmp2cG0x?=
+ =?utf-8?B?TVhlNFQwOUEzR2NDNHlIbkJ1ekVFOWlhY2djVE1qaUZtczdzQUxxaFZlWmhV?=
+ =?utf-8?B?KzR4UWJOcmd1NTBaTWlIQllGK3BGWmRtSkpYQ0dHL0cxZXlkUE5janRLOW1h?=
+ =?utf-8?B?K3dKdUc0MFM1c29JcHBKSnkwU2dhR25vSFpoQ3ExNlVEQnhZQVFYbHJvQ3JM?=
+ =?utf-8?B?QVpaM2MxTVNpL0pGcDdZdWNkejFxYzV0a0hUMUZ4ZzJtZ1VkMVZOdjNnNi9h?=
+ =?utf-8?B?Z3R6UkczSlJsbkVGRFdGQjNaY2pVZDVXZUp5RHRJMVFCV1k4L21xTU9ScGU5?=
+ =?utf-8?B?ODhIbTFaQXNKMStXcUU3QzZtbnRxZE5rb2xwcVhhekxtYjVENEJubDZKTXNq?=
+ =?utf-8?B?b3JiazVBNE45STcrUy9ZeW5YclphTVllNG1Ja0lXTXpoelhROW5OK3o0ek9y?=
+ =?utf-8?B?cW9ZRGFHbHIzUC90MEwxZTNTYlQ2MzUvZjFHSGI1dUpqLzVORkNWTmpFN21W?=
+ =?utf-8?B?ZWlxNXhBaXdoaDRrSFNrM2habXJNaWJMK21GOElTZUd0TzBvQ0F0UzRXNXAr?=
+ =?utf-8?B?T1BldXlMaUtpeTl5SmxIaVFDdjd4UzFVaEJtVzFjTnRhWk4vQzhDYm9PUW1V?=
+ =?utf-8?B?ckRFTndOOGJUMng0Y1NIZ3RMWWxKTzBwa2pRZlVycDh2blk4MjFsSWczVHZ4?=
+ =?utf-8?B?Z1NTejBiVVhpSnVvcU1Eb1d6YkE2WmYyeFNLN0hWQjlVWmhvSENkRGtVQzJ2?=
+ =?utf-8?B?dUg2bmtNWEZ3PT0=?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS3PR01MB5896.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?aFdPT3g2T3pCUU92VisvOHBNZjM0ZFBBR25vdnU3QzFlZ2JIY3dEeCs0WnNk?=
+ =?utf-8?B?SC9RU0d0Zy9PeGpJVG5UU0hMTktBdDI3ak5kNmJMUE1USHRRd2RJMVQ2TmNF?=
+ =?utf-8?B?Z3c2cnErUGZJdEgvNDM0MXhtc2xvbDdHRUpGWEtPTGZXRlVyR2dQTjdCZk9H?=
+ =?utf-8?B?UUMrakVBY1Joc0Z5VE1nSHpoMWV0aCtqaDZrUWpzS2l0VHRyTVVFaW81RjEz?=
+ =?utf-8?B?Zk15RU1laU9SbkZOTEVCeWh2Wmc3eTFVeFh6c1k2WXZRNC9rRWViMCtTampN?=
+ =?utf-8?B?SEwvclpJb3Q1YTFJY1JQTWVIeHQyenJ2QjR6TE9HOFVMTzJFWDd1dGI4dXpF?=
+ =?utf-8?B?aEZPNGJzNWVxdGs5a3ZTSzhucHozaHNBWGIyUXM2MDFrZ085SFQ2T2lSb1VO?=
+ =?utf-8?B?QmNzK1ZEUUhrWm5GR04zTzVSTldzYzNwR2VodjFZMjVSMXZoVFFpRElVdkRx?=
+ =?utf-8?B?dnBFT2hEK2sxSzlUeEZRdnJGWllkQWxDcnNXZ2tvdUdaZGZVRlh6MUJ6bWlw?=
+ =?utf-8?B?WDdqMFZnY2pKSHNqMGlYTGVHRWlmRDhMbDBkYjltNEpsNk1nMEZCbDVmUFho?=
+ =?utf-8?B?ZjBZM3AwMHZPUFAyY0JvR3RZdWZEQXY5UjdrUHFuMkoxeDNEVm1OU3FBeUgz?=
+ =?utf-8?B?U2g5U005WWVxb1N3aVR3dHFiSnRvazJpMU1pOFN0Kzd0bGhaRHQwZklxUXU0?=
+ =?utf-8?B?Yk9IYWVrUTZySnlHZmkweWZURTRnWExRUE44K1FSZ2p5NXg3YUhSWjhHcjQ5?=
+ =?utf-8?B?QkpLejNQVkczMVZNWVBWdFU4SG9HLy95ZHE5a25PbG83NjJocnd2TWpzNWtQ?=
+ =?utf-8?B?Y1dhcmw3TVVsbXdNTzlwQ2FKQ0M4QzBQdWs3aDJqcXllRkIwcWdsOENlSzc3?=
+ =?utf-8?B?dGYwSGVjdlVTNDFWZUoyMVVrR2hGaWpCcVdhVlYxcFgzNjc4UTZ1cmpnZWVy?=
+ =?utf-8?B?M2Y1OHl1Zmh5Y00vZ0dZUDBqZlQvL1F4bHdhM1h5RjdRR3V5VTBXWElnNEQr?=
+ =?utf-8?B?NVI5VStOczdSMERHeG9FaG1QdkI0Zkk2dS84d0ZRTVp6UjJ5RVJHUTNmOStu?=
+ =?utf-8?B?SVJkMzhod2pJSUFOSVVaek9RK0E0TE1FOEZxdXJZekFyVGtrdlRvWEpzcEZX?=
+ =?utf-8?B?SVZGM2xxQzNESzJvR2d1SGk1YjlpUVhMTXB4ckFOUDFxRmo2dGJFcU9JMHBn?=
+ =?utf-8?B?aVVwcG1Sc1BBZnJzcmFaYU9JV0JKWFRnWmc5MHRwZlFTc2NpeHI5S0U4bTJF?=
+ =?utf-8?B?WEpLVnBXLzlsWmM0MzEzSjdSTXJwYUdSUU1XUU5EWEZUZ0FjSUlsWEV1M2Zp?=
+ =?utf-8?B?c0x6WThacE1Kc1dMRzRvMFFhUU0vV0VKWjdranNCZ1FheWxIeEV6Um43NkVj?=
+ =?utf-8?B?Rzh2VHl6TWtRK1lxRWVqelJJTUZDc2psNkR3elQ3Z05lNzNxSzNlS3ZYUk9o?=
+ =?utf-8?B?NFl2WGxWSUkzUWcvTno4b0tZdmR1N0hpQ0hFTWdUSjY0cDBQanhWZkRsNzVE?=
+ =?utf-8?B?OWpDTkdCQkptc2E2ZHN0UVplemkxT2NxdXBtaXA5TWFBM1BrOGdOVHh6MFJ5?=
+ =?utf-8?B?QktEREZaOUc4cVlWY0wxdFQ1eUJqSUJHbXNQclp1TWo1eS9XS2JsOGdhaXRD?=
+ =?utf-8?B?RXkweE5aSlZ5SUR5UW44YkYxaTN1a21mYko2a3Z4SHRyTllMcmdEQlFQdjNG?=
+ =?utf-8?B?UGdJZk1JRVZqT0lsVm5odXlPcjdOSVNrM2lJTU9vNzJwQkd2aGx1ak12MjBY?=
+ =?utf-8?B?YkZZMDFVSmZZYlV4akJNNjNvcEh3RGppYldpNmpoU25VcWxxcmtBZE9VZmV1?=
+ =?utf-8?B?a1p2OVdlYVo3ZG0ycENoaWNzWTgyUFlzS0IrMzNjc3NlejB2a1loamlhV0Rk?=
+ =?utf-8?B?a1hSbUxnQkN2cnJqYWRFQ1R4RjUyL0VjU2o4M2xtQjB6MlpuSGE0a2hZWjJW?=
+ =?utf-8?B?bFRmSjlVSmR5N2ZraUJ4MXFXZEVvTXlRQW9kNWhsUTJjMHdHSVByTy9hb3F1?=
+ =?utf-8?B?U2wxcUNMRG5YQmRMb1lCd3JHOEVkN1J1ZUwydEJGenUzck9CMEIvczEwUVp4?=
+ =?utf-8?B?YVRyUUZ2N2x1SmVxUTV0K0ZxWjB3eVRRS1NtUzczQldTWHpwMW42dDltMkNx?=
+ =?utf-8?B?NkNvUjltWmg0U2ordUtGQVpRVVdCcEF5MUxncFZVeGtLRXBTNVcyMmxWS3FU?=
+ =?utf-8?B?Mnc9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: renesas.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: OS3PR01MB5896.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7515f106-f69e-4651-7a08-08dd97abe938
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 May 2025 14:37:56.3886
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 53d82571-da19-47e4-9cb4-625a166a4a2a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: NqbHMKl1qEQr/4yzs8Acp71Hi9azDeLTiHs0pKEdxrEqkQZSXdpg20ExOUhYRBLix7PZ0wavMBgjKsodUiMLUxGhKN0+vvPCnT1OwoZlPp8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS9PR01MB14001
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 12:35:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117512
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 14:38:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117513
 
-https://goodies.xfce.org/ states "Starting this month (November 2019), a project is starting
-to migrate the goodies.xfce.org documentation to https://docs.xfce.org/start. The goal is to
-remove deprecated projects and, eventually, de-commission the goodies.xfce.org URLs. Additional
-information will be posted on https://wiki.xfce.org/projects/goodies-decomm/start as the project
-proceeds."
-
-This patch updates the URLs being used in the HOMEPAGEs to reflect where the address is actually
-resolving.
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- .../xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.3.bb                  | 2 +-
- .../recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb | 2 +-
- .../calculator/xfce4-calculator-plugin_0.7.2.bb                 | 2 +-
- .../recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb | 2 +-
- .../recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.8.bb | 2 +-
- .../cpugraph/xfce4-cpugraph-plugin_1.2.8.bb                     | 2 +-
- .../datetime/xfce4-datetime-plugin_0.8.3.bb                     | 2 +-
- .../diskperf/xfce4-diskperf-plugin_2.7.0.bb                     | 2 +-
- meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb | 2 +-
- .../recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb | 2 +-
- .../recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.2.0.bb   | 2 +-
- .../mailwatch/xfce4-mailwatch-plugin_1.3.1.bb                   | 2 +-
- .../recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb     | 2 +-
- .../recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.1.bb | 2 +-
- .../recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.2.bb    | 2 +-
- .../recipes-panel-plugins/places/xfce4-places-plugin_1.8.3.bb   | 2 +-
- .../recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.5.bb | 2 +-
- .../smartbookmark/xfce4-smartbookmark-plugin_0.5.2.bb           | 2 +-
- .../systemload/xfce4-systemload-plugin_1.3.2.bb                 | 2 +-
- .../time-out/xfce4-time-out-plugin_1.1.3.bb                     | 2 +-
- .../recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.2.bb     | 2 +-
- .../recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb     | 2 +-
- .../recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb | 2 +-
- .../weather/xfce4-weather-plugin_0.11.3.bb                      | 2 +-
- meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.8.2.bb   | 2 +-
- .../archive/thunar-archive-plugin_0.5.2.bb                      | 2 +-
- .../xfce4-power-manager/xfce4-power-manager_4.20.0.bb           | 2 +-
- 27 files changed, 27 insertions(+), 27 deletions(-)
-
-diff --git a/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.3.bb b/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.3.bb
-index cd868c243b..2d4cdfa498 100644
---- a/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.3.bb
-+++ b/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Simple client plugin for Music Player Daemon"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-mpc-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-mpc-plugin/start"
- SECTION = "x11/application"
- LICENSE = "0BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3604d987e6dfdfc672c754d08953b0e0"
-diff --git a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb
-index ce119bb6da..16ebebf235 100644
---- a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb
-+++ b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "A battery monitor panel plugin for Xfce4, compatible with APM and ACP"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-battery-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-battery-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/calculator/xfce4-calculator-plugin_0.7.2.bb b/meta-xfce/recipes-panel-plugins/calculator/xfce4-calculator-plugin_0.7.2.bb
-index 0c464930e1..d5ce9ad361 100644
---- a/meta-xfce/recipes-panel-plugins/calculator/xfce4-calculator-plugin_0.7.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/calculator/xfce4-calculator-plugin_0.7.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "A calculator plugin for the Xfce panel"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-calculator-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-calculator-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=909430f63fddd63f120ba29e8979f65c"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb
-index 39a8f2edfe..59fb8578c1 100644
---- a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Clipman is a clipboard manager for Xfce"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-clipman-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-clipman-plugin/start"
- SECTION = "x11/application"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-diff --git a/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.8.bb b/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.8.bb
-index 8ddf48d6ef..1a19f488c0 100644
---- a/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.8.bb
-+++ b/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.8.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Panel plugin to display frequency of all cpus"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-cpufreq-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-cpufreq-plugin/start"
- LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=1f6f1c0be32491a0c8d2915607a28f36"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.8.bb b/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.8.bb
-index 8e58175615..b240eaad5e 100644
---- a/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.8.bb
-+++ b/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.8.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Panel plugin with graphical representation of the cpu frequency"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-cpugraph-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-cpugraph-plugin/start"
- LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=415654f59d8fa70fe4eac2c3f86c8f5e"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.8.3.bb b/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.8.3.bb
-index f292a6deaf..f025edd4c5 100644
---- a/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.8.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.8.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Panel plugin displaying date and time and a calendar when left-clicked"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-datetime-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-datetime-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb
-index 25a57f3233..583aa9a006 100644
---- a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Panel plugin displaying instant disk/partition performance"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-diskperf-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-diskperf-plugin/start"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d3e627798d6a60bece47aa8b3532e1f1"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb
-index 0c796534ab..6eaac70a09 100644
---- a/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Panel plugin with graphical representation of the cpu frequency"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-eyes-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-eyes-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb
-index 380d2e19e3..de8d6786c2 100644
---- a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "The FSGuard panel plugin checks free space on a chosen mount point frequently and displays a message when a limit is reached"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-fsguard-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-fsguard-plugin/start"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3434d79d62df09abf5f78bb76d6cd21b"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.2.0.bb b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.2.0.bb
-index 31ad5e7ced..6558a1492d 100644
---- a/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.2.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.2.0.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "This plugin cyclically spawns the indicated script/program, captures its output (stdout) and displays the resulting string into the panel."
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-genmon-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-genmon-plugin/start"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb b/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb
-index 6ea260765f..d6b367c0da 100644
---- a/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb
-+++ b/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Multi-protocol, multi-mailbox mail watcher for the Xfce4 panel"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-mailwatch-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-mailwatch-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb
-index 3a6baf21f9..f11e41f9bd 100644
---- a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb
-+++ b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Mount/umount utility for the xfce panel"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-mount-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-mount-plugin/start"
- SECTION = "x11/application"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.1.bb b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.1.bb
-index c30f17a7d4..6ed4747565 100644
---- a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.1.bb
-+++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Panel plugin displaying current load of the network interfaces"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-netload-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-netload-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2b6065ae7d3696cdad6869dd8627a9fe"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.2.bb b/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.2.bb
-index 0bdd2bb5f3..83e527e380 100644
---- a/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Notes plugin for the Xfce Panel"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-notes-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-notes-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.8.3.bb b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.8.3.bb
-index 6400e0d3e4..753dcae91e 100644
---- a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.8.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.8.3.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Menu for quick access to folders, documents and removable media"
- DESCRIPTION = "Panel plugin displaying menu with quick access to folders, documents and removable media"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-places-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-places-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b6952d9a47fc2ad0f315510e1290455f"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.5.bb b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.5.bb
-index 596feacba2..d283684aa2 100644
---- a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.5.bb
-+++ b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.5.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Sensors plugin for the Xfce Panel"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-sensors-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-sensors-plugin/start"
- LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.2.bb b/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.2.bb
-index fdec598190..68e9cbd3a3 100644
---- a/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Panel plugin allowing to send requests directly to browser"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-smartbookmark-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-smartbookmark-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/systemload/xfce4-systemload-plugin_1.3.2.bb b/meta-xfce/recipes-panel-plugins/systemload/xfce4-systemload-plugin_1.3.2.bb
-index e7a3e9936e..0b07bda32b 100644
---- a/meta-xfce/recipes-panel-plugins/systemload/xfce4-systemload-plugin_1.3.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/systemload/xfce4-systemload-plugin_1.3.2.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Panel plugin displaying current CPU load, the memory in use, the swap space and the system uptime"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-systemload-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-systemload-plugin/start"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9acb172a93ff6c43cce2aff790a8aef8"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.1.3.bb b/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.1.3.bb
-index 9fa287a1ca..1622cd4d2b 100644
---- a/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.1.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.1.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "This plugin makes it possible to take periodical breaks"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-time-out-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-time-out-plugin/start"
- SECTION = "x11/application"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-diff --git a/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.2.bb b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.2.bb
-index 33b60438d1..0f164b79c5 100644
---- a/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.2.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "XFCE panel plugin to generate alarm messages"
- DESCRIPTION = "This is a simple plugin that lets the user run an alarm at a specified time or at the end of a specified countdown period"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-timer-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-timer-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f1c52159bdaebd029cb11927cbe709e4"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb b/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb
-index 9dcaae8ceb..844d8caf17 100644
---- a/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Verve panel plugin is a comfortable command line plugin for the Xfce panel"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-verve-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-verve-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb b/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb
-index 530f52425a..64e7ea6a18 100644
---- a/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Panel plugin displaying stats from a wireless lan interface"
--HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-wavelan-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-wavelan-plugin/start"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e1e5872df9c5cf1a23f16493d9104920"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb
-index 7a16556eef..c0c2ad3313 100644
---- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Panel plugin to display current temperature and weather condition"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-weather-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-weather-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
-diff --git a/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.8.2.bb b/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.8.2.bb
-index 3d935a3d71..0e482af353 100644
---- a/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.8.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.8.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "XKB layout switching panel plug-in for the Xfce desktop environment"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-xkb-plugin"
-+HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-xkb-plugin/start"
- SECTION = "x11/application"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=496f09f084b0f7e6f02f769a84490c6b"
-diff --git a/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.2.bb b/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.2.bb
-index 91b3efa83e..0ba997b544 100644
---- a/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.2.bb
-+++ b/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.2.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Thunar Archive Plugin allows you to create and extract archive files using file context menus in Thunar"
--HOMEPAGE = "http://goodies.xfce.org/projects/thunar-plugins/thunar-archive-plugin"
-+HOMEPAGE = "https://docs.xfce.org/xfce/thunar/archive"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4cf66a4984120007c9881cc871cf49db"
- 
-diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.20.0.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.20.0.bb
-index 46f70e6e03..c6eed849be 100644
---- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.20.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.20.0.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Power manager for the Xfce desktop environment"
--HOMEPAGE = "http://goodies.xfce.org/projects/applications/xfce4-power-manager"
-+HOMEPAGE = "https://docs.xfce.org/xfce/xfce4-power-manager/start"
- SECTION = "x11"
- 
- LICENSE = "GPL-2.0-or-later"
--- 
-2.43.0
-
+SGVsbG8gQWxleGFuZGVyLA0KDQo+IEZyb206IEFsZXhhbmRlciBLYW5hdmluIDxhbGV4LmthbmF2
+aW5AZ21haWwuY29tPg0KPiBTZW50OiAyMCBNYXkgMjAyNSAxMzoyMA0KPiANCj4gT24gTW9uLCAx
+OSBNYXkgMjAyNSBhdCAxMjoxMSwgUGF1bCBCYXJrZXIgdmlhIGxpc3RzLm9wZW5lbWJlZGRlZC5v
+cmcNCj4gPHBhdWwuYmFya2VyLmN0PWJwLnJlbmVzYXMuY29tQGxpc3RzLm9wZW5lbWJlZGRlZC5v
+cmc+IHdyb3RlOg0KPiA+IElzIGFuIGFsbGFyY2ggcGFja2FnZSBhbGxvd2VkIHRvIGhhdmUgYXJj
+aC1zcGVjaWZpYyBvciBtYWNoaW5lLXNwZWNpZmljDQo+ID4gcGFja2FnZXMgaW4gUkRFUEVORFMv
+UlJFQ09NTUVORFM/IEFuZCBpcyBhbiBhcmNoLXNwZWNpZmljIHBhY2thZ2UNCj4gPiBhbGxvd2Vk
+IHRvIGhhdmUgbWFjaGluZS1zcGVjaWZpYyBwYWNrYWdlcyBpbiBSREVQRU5EUy9SUkVDT01NRU5E
+Uz8NCj4gDQo+IEkgdGhpbmsgdGhlIGFuc3dlciBpcyBubyB0byBib3RoLCBidXQgZG9uJ3QgaGF2
+ZSB0aW1lIHRvIHJlc2VhcmNoIGFuDQo+IGF1dGhvcml0YXRpdmUgYW5zd2VyLiBBbGxhcmNoIGlu
+IHBhcnRpY3VsYXIgc2VlbXMgaW50ZW5kZWQgZm9yIHJlY2lwZXMNCj4gdGhhdCBvbmx5IGluc3Rh
+bGwgZGF0YSBidXQgbm90IHNjcmlwdHMgKG9yLCBvYnZpb3VzbHksIGJpbmFyaWVzKS4NCj4gDQo+
+IERvZXMgdGhlIGlzc3VlIGdvIGF3YXkgaWYgYWxsYXJjaCBpcyBkcm9wcGVkIGZyb20gdGhlIG9m
+ZmVuZGluZyByZWNpcGVzPw0KDQprZXJuZWwtaGFyZGVuaW5nLWNoZWNrZXJfMC42LjEwLmJiIGRv
+ZXNuJ3QgdXNlIGFsbGFyY2guDQpJZiBJIHJlbW92ZSBhbGxhcmNoIGZyb20gc21hcnRfNS40LjMu
+YmIgdGhlbiB0aGlzIHJlY2lwZSBubyBsb25nZXIgZmFpbHMgOikNCklmIEkgcmVtb3ZlIGFsbGFy
+Y2ggZnJvbSBzcGVjdHJlLW1lbHRkb3duLWNoZWNrZXJfMC40Ni5iYiBJIHN0aWxsIHNlZSBhbiBp
+c3N1ZToNCg0KQXNzZXJ0aW9uRXJyb3I6IFRoZSBtYWNoaW5lcyBoYXZlIGNvbmZsaWN0aW5nIHNp
+Z25hdHVyZXMgZm9yIHNvbWUgc2hhcmVkIHRhc2tzOg0KICAgY29ydGV4YTU1IHNwZWN0cmUtbWVs
+dGRvd24tY2hlY2tlcjpkb19jcmVhdGVfcGFja2FnZV9zcGR4OiBlYTk3Y2Y1MTI1MDZkZmIxMGQ1
+YWE0NjYzMWM1NmRlMmZmYTVjOWIzMzlhZGViNzMyZjViZjc0MzJiMDQ5YzQxIChzbWFyYy1yemcy
+bCkgIT0gNmZjNDNjZjIzOGNhZDUxN2U4ZThjNjBlNzE4ODMzZTMwN2ZhZGUxZDIwOTc0OTZlOTM3
+NDgzOTZlNTJlOWM1NyAoc21hcmMtcnpnMmxjKSAhPSA0OGEwM2UxNDdmNGFiN2Q0MGVjNjBiNzNi
+OTI2YmNlZjY3OThhNDNmOTk4N2Y3Nzg5ZDVlMGQ3YjUxYzdkMDM0IChzbWFyYy1yemcydWwpICE9
+IDE4MTc4MmM0YWE2YzhjMzkyYTM2Y2QwOGRiODA0NWRiMDFjMjZhYjI1Y2VjNTNlNmYwMDk4NGZl
+ODVkYzRkYTcgKHNtYXJjLXJ6djJsKQ0KICAgY29ydGV4YTU3LWNvcnRleGE1MyBzcGVjdHJlLW1l
+bHRkb3duLWNoZWNrZXI6ZG9fY3JlYXRlX3BhY2thZ2Vfc3BkeDogZDhmNTFjY2E2YWY1MDIxOWFl
+ZTEwZDhjZTFkNWEwMDliZmZmY2I2NWE5MzRjMTEyN2ZlODA0ZjU2YzU5MDAwYyAoaGlob3BlLXJ6
+ZzJoKSAhPSBhZTY1NDlkYzBmODIwNDI2ZmExYzhjOGZjYmEyYjUxZjc2NzIwMTY1MmJhYTQ4YTYx
+ZjcwZDM5NGQzZmViMGQ2IChoaWhvcGUtcnpnMm0pDQoNCjQgdGFza3Mgd2hlcmUgbm90IGxpc3Rl
+ZCBiZWNhdXNlIHNvbWUgb3RoZXIgdGFzayBvZiB0aGUgcmVjaXBlIGFscmVhZHkgZGlmZmVyZWQu
+DQpJdCBpcyBsaWtlbHkgdGhhdCBkaWZmZXJlbmNlcyBmcm9tIGRpZmZlcmVudCByZWNpcGVzIGFs
+c28gaGF2ZSB0aGUgc2FtZSByb290IGNhdXNlLg0KDQpUbyBpbnZlc3RpZ2F0ZSwgcnVuIGJpdGJh
+a2UtZGlmZnNpZ3MgLXQgcmVjaXBlbmFtZSB0YXNrbmFtZSAtcyBmcm9tc2lnIHRvc2lnLg0KRXhh
+bXBsZTogKGhpaG9wZS1yemcyaCkgIT0gKGhpaG9wZS1yemcybSkgaW4gdGhlIGxhc3QgbGluZQ0K
+Q29tbWFuZDogYml0YmFrZS1kaWZmc2lncyAtdCBzcGVjdHJlLW1lbHRkb3duLWNoZWNrZXIgZG9f
+Y3JlYXRlX3BhY2thZ2Vfc3BkeCAtcyBkOGY1MWNjYTZhZjUwMjE5YWVlMTBkOGNlMWQ1YTAwOWJm
+ZmZjYjY1YTkzNGMxMTI3ZmU4MDRmNTZjNTkwMDBjIGFlNjU0OWRjMGY4MjA0MjZmYTFjOGM4ZmNi
+YTJiNTFmNzY3MjAxNjUyYmFhNDhhNjFmNzBkMzk0ZDNmZWIwZDYNCiAgIE5PVEU6IFJlY29ubmVj
+dGluZyB0byBiaXRiYWtlIHNlcnZlci4uLg0KICAgSGFzaCBmb3IgdGFzayBkZXBlbmRlbmN5IGxp
+bnV4LWNpcDpkb19jcmVhdGVfc3BkeCBjaGFuZ2VkIGZyb20gNGRiNGUxYjQyNGQ3OTY5YmE4MGM4
+ZTAzNDUwZWM3MGU4OGJhYjI2NmIxZTQzMDU0MzgxYWIxYzU3MmNmNTgwYSB0byBiZmViY2MzMTk1
+YWEwMTA2NjMwZTJkM2NmN2ZjODMzNWRmODc2OGFkMDU5MTQzZDU0ZjcxNWIzOTllZWE4YjY5DQog
+ICAgICAgSGFzaCBmb3IgdGFzayBkZXBlbmRlbmN5IGxpbnV4LWNpcDpkb19jb2xsZWN0X3NwZHhf
+ZGVwcyBjaGFuZ2VkIGZyb20gYWUyMjE3MWJhYjJmNDU2YjQ3NDNmYjBjYTA1ZGU5MWExNmI2NWZl
+NmJiZGRkNGNiOTdkMmVkMDRlNWQ0ZjY1MSB0byBlNDNlZDNmMmNlZTgxOThkOTE1MzVjZTM4MDU3
+ZDk5NmNkYjhlNzJjMTBkNzUwOWMyNTQyZTY2NzY3ODJlYmRjDQogICAgICAgICAgIEhhc2ggZm9y
+IHRhc2sgZGVwZW5kZW5jeSBsaW51eC1jaXA6ZG9fdW5wYWNrIGNoYW5nZWQgZnJvbSA2Y2YyZTdm
+ZDFlMWQ2NzU3OGY2YmVkNzYxMzc4OTUzZjkxYThhNThkZjAxMDc2OThjYzI1OWMxOTg5Njc0ZGEx
+IHRvIDVkOThmYTMxNjA2ZjA2ZjBlNDQxNmY5ZGY4MmY5N2ZkYzZmNjM3OTliNjU0ODY5MTJkYzRh
+M2ZjN2Y4NzFmM2MNCiAgICAgICAgICAgICAgIGJhc2VoYXNoIGNoYW5nZWQgZnJvbSA1NTZmYWQ0
+ZTQ0MjZhOTM5MGRlNmNjZGNjNjMxYWViMzVkMzkxY2NjOTY3NmY2YTQ4MTAyMzdlMmY1MDFjZjg1
+IHRvIDcyYmVjZWQ2MjQyMGNjOTJmMjc2ZjhhMzFjZDRkZTNkNmY5ZTM4NzdiMTRmZmY5ZDgyZmY3
+ZDg2Mzg1NWI3ZGENCiAgICAgICAgICAgICAgIFZhcmlhYmxlIE1BQ0hJTkUgdmFsdWUgY2hhbmdl
+ZCBmcm9tICdoaWhvcGUtcnpnMmgnIHRvICdoaWhvcGUtcnpnMm0nDQoNCg0KDQpUaGFua3MsIENo
+cmlzDQo=
 
