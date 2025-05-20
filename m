@@ -1,83 +1,410 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D42FC3ABDD
-	for <webhook@archiver.kernel.org>; Tue, 20 May 2025 12:20:42 +0000 (UTC)
-Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
- by mx.groups.io with SMTP id smtpd.web10.19371.1747743633433231112
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D56EC3DA6D
+	for <webhook@archiver.kernel.org>; Tue, 20 May 2025 12:35:42 +0000 (UTC)
+Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
+ by mx.groups.io with SMTP id smtpd.web10.19667.1747744534235479070
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 May 2025 05:20:33 -0700
+ Tue, 20 May 2025 05:35:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Dl/v1xES;
- spf=pass (domain: gmail.com, ip: 209.85.219.52, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-qv1-f52.google.com with SMTP id 6a1803df08f44-6f8c0c8da93so56129066d6.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 05:20:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cY/wVLcv;
+ spf=pass (domain: gmail.com, ip: 209.85.219.176, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-e7b85f1cbacso3239152276.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 05:35:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747743632; x=1748348432; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=e49uBOHmsK3InH08nvXgvJ+gHrFTgP4a3IIIEqL/au4=;
-        b=Dl/v1xESKXXmUoZKFDhAUSsbz5cx9+0IsuixD7KrvtyPNQ/LirppNm8/XCMzwRpZM/
-         YY6lnyHzK/lmQLRY/3UAFVf0GqqMrswwTgWJpgECYt4Qz0x8dSff64XszraN3O0NFguu
-         iKSk+ZdBKpIsCLTegBd2Z1qDc5qResAqxWBXyP+BL4OG9b2zV3Lcz7THkt75Bn6BmL10
-         KDchP3kg0fQaYkxnjboJ102noj3AofbCcaDambGQmsoAwuX5UZxOznZDWY6+0b/j+Zuv
-         kd+G44ujglTsqYsWVeVz4mfxUp9E9lYvc6iVNI9eeUcXsSM5ZGDuXKR1vae2A+X7ElMo
-         Tzsg==
+        d=gmail.com; s=20230601; t=1747744533; x=1748349333; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nX9Zq+rlnO4KZYytA7yYfHVyDxF0A4hih1RUjxnGa4M=;
+        b=cY/wVLcv/flbJm4I8q15seCMajPjHJTm+u9p9WKpRFd+dHhyrhJEaQfb5Wu/swQRHr
+         S3eRESpHzwz9fC5ft1KtkRhmm7FEQCkHDoiLQyRaOiXk+DDib7/Cq80rLFZ23ouJ5qKm
+         P1Qv2ab527BQF3RnSmaNDHv+VLnS/uUZ3EcZQThKQ9gz0mSbJ9bvsHrFSJCE5CaZZkUx
+         mc0CgDPXMXxripkdy/aXJ5IbaRax/GsWF9O2UhTb46gf7Zweiaj0Js1GskaxgNW0NfI8
+         +u/pOQATpaygBL829s+blWMKZNeOoakrjBU7WNd1HwzmkvvPaXoqAQl1mok/vxAdnf8c
+         HYhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747743632; x=1748348432;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1747744533; x=1748349333;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=e49uBOHmsK3InH08nvXgvJ+gHrFTgP4a3IIIEqL/au4=;
-        b=hLE1+Y0Ns7Av6O4gXsyi2X9Ui1Mi8hkpBz678QGw6jgeJ3ejiAfL0xNQqQxWH4/cOn
-         KeMyMj1yiFlczWNylG/3t1Mg8DofHFYIoOgJOEBPqJtVByeR5/z1ci8e6VLsQmnBQ5Ju
-         q/CzNIA6AhqgjB7NnwxhQlYF9Q4wmPG49/QNJKyyK3BWwpqIFPfQ+Myiu4l88vjKtlX9
-         fV2EJApcip3X5LBNRsVg6pwU5p8uvIGoz1YuvQImIpIOYMF7fPu8rkd/fWfbsvaGMW28
-         XihSB33hI6hSmH9LvkTWpmOlDA3LhYbtnpnKiPqGtdqPbUE4Ycs+IThQ+OBQxmbUbKIr
-         whXA==
-X-Forwarded-Encrypted: i=1; AJvYcCVJ8QfDocfd6+0eRR80Wse2YQMY4jnVR3NSf/urK/OdBdlxi5s41ayKonKEIvt8kuUpMF6s9zj4bO9hfWcXFCQQaJI=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Ywwmdyfvwy8U6Cpjo3lE2ork7hkjqUb/I3dJ4itG1VYtYt6fjsN
-	JxvfCSZu8HYDEDdVCDBw4KZqq0QeR16sNL7irXhzW+rm1ncLPJibqeb1Io8o+HE2ctYcl436xNP
-	I+Qkp25GABXLebRDfz3x4p6+W6YFUu4s/4g==
-X-Gm-Gg: ASbGncud9fGuTbTg12tk7p0yRxbFmQ/kvjFZAG1Q8TaJGuQ8s1uryoBT3FZoGsnl46o
-	9QOczqSkLeqP4I+f5kwa1VkXjsfHwibKm3qir4Bh2gkIkHWDbxheWeno9s1BQG9x2KOsYmQqc7w
-	V3qSj0bmNqn3UHjqE8iQpE7BLF7zq/jWkofanlmVuODwNC
-X-Google-Smtp-Source: AGHT+IFDuhcTjQILyM3Zi11zNqxsPGRrVkW83Zsxjp28SRfZaIOTXbkvty8LoT47j5L0XtOjbm0mmWKCxY7B8zx0meY=
-X-Received: by 2002:a05:6214:1cc7:b0:6e4:7307:51c6 with SMTP id
- 6a1803df08f44-6f8b085282emr276396866d6.34.1747743632269; Tue, 20 May 2025
- 05:20:32 -0700 (PDT)
+        bh=nX9Zq+rlnO4KZYytA7yYfHVyDxF0A4hih1RUjxnGa4M=;
+        b=Rg4Hh3Qt7ZPx+lOSaPcyWsDJxjnmClVgM2H4yGvsvpoYlOdhzLKF3zu5kSGPP/AWJb
+         21CvQvxobD8N3jizSXrzjxxhmxC1F3I57o/LZ5xxa4AqG8i7rK8b3iSHIx950VOGX5OW
+         Zq9F6zLa9sRmJZtSjrUVrGc6GWSI8DPA+ICGjOwb8fly4alforJqnsola2jFBh1H7edT
+         KGEyNrTgCyH8Jj1rIVoIb1XKYT6xaDLPws0JlCnY6X3GNkAAs6QDWBaN+b6r6HggOvik
+         8JBkFjqoTlJQcgrulAAw++PytvZycFTsOKOrM7AMEIqOv8Y2ItkImP+x56dHFP7AWdls
+         8pWg==
+X-Gm-Message-State: AOJu0Yw5J4qp/GQLqyVWR+nDZljvNvNC3qhYLkMXI9QLgeK+h6D1DJN2
+	QSVCADv5g2xpIRTDtQKC4/gExS1EwVC9jogTShz3RY05DzflfnGEk0uTIAdeUiXZ
+X-Gm-Gg: ASbGncv+aghIXN5Dlxul6G2k6HFnpMu84dxN7P650B31/nHfiMJY+8ugla2C4VLW6CS
+	0qFsHQz2JgNXR/rihqWN4Rcx90hjqKGPtaGmHAhbeNaIW2dQz99XPR5CF+04xtp5AtY0S1Pz44l
+	px44/mSuhY6JdhlOFEY0cUjVVl6cZ84OjYZFHG8ond1vFr8DP1X1q1srWdzP9RTPpHrkYc/+u2z
+	ytRBvmGjutDz+qLioRb9MP9aEyinj0DLsC9WJdW+NH5QKzjRoQ+QZgg+dn+6hOnhUjxLAJacMf5
+	+mVsKktp1OwvT+MlZzCCuWMzXUsCWvTsj9HRO1uVipfiGNEALYQO1D0/
+X-Google-Smtp-Source: AGHT+IH96RLa44RqoNtpLjGNJXB43oLn6zCil+XzgUTXdKgO0uta0QRo+yQu/AH0TSVMB6deCEkGpA==
+X-Received: by 2002:a05:6902:2486:b0:e7d:4adb:5fff with SMTP id 3f1490d57ef6-e7d4adb6142mr3892598276.23.1747744532478;
+        Tue, 20 May 2025 05:35:32 -0700 (PDT)
+Received: from localhost.localdomain ([71.215.9.36])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e7b6adcc6e6sm3313666276.48.2025.05.20.05.35.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 May 2025 05:35:32 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-xfce][PATCH] xfce4 update HOMEPAGEs
+Date: Tue, 20 May 2025 08:35:02 -0400
+Message-ID: <20250520123502.17673-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <OS3PR01MB5896AC2C723041187F4A5BE9B792A@OS3PR01MB5896.jpnprd01.prod.outlook.com>
- <84313a55-b94c-4de4-a26b-f1c341edd54d@bp.renesas.com>
-In-Reply-To: <84313a55-b94c-4de4-a26b-f1c341edd54d@bp.renesas.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Tue, 20 May 2025 14:20:20 +0200
-X-Gm-Features: AX0GCFslInRp1OhwCxwh78pokw723wqK8OHt-D-FioQnb-V9ZD9D0BlWVoH_FNs
-Message-ID: <CANNYZj9O7D5Eq2eeXxuD+VfO65i6VUHis2vOQ+ZYsfxJhk2aog@mail.gmail.com>
-Subject: Re: [oe] [issue][meta-oe][walnascar] yocto-layer-check not passing
- for BSP layer when meta-oe is a dependency
-To: paul.barker.ct@bp.renesas.com
-Cc: Chris Paterson <Chris.Paterson2@renesas.com>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 12:20:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117511
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 12:35:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117512
 
-On Mon, 19 May 2025 at 12:11, Paul Barker via lists.openembedded.org
-<paul.barker.ct=bp.renesas.com@lists.openembedded.org> wrote:
-> Is an allarch package allowed to have arch-specific or machine-specific
-> packages in RDEPENDS/RRECOMMENDS? And is an arch-specific package
-> allowed to have machine-specific packages in RDEPENDS/RRECOMMENDS?
+https://goodies.xfce.org/ states "Starting this month (November 2019), a project is starting
+to migrate the goodies.xfce.org documentation to https://docs.xfce.org/start. The goal is to
+remove deprecated projects and, eventually, de-commission the goodies.xfce.org URLs. Additional
+information will be posted on https://wiki.xfce.org/projects/goodies-decomm/start as the project
+proceeds."
 
-I think the answer is no to both, but don't have time to research an
-authoritative answer. Allarch in particular seems intended for recipes
-that only install data but not scripts (or, obviously, binaries).
+This patch updates the URLs being used in the HOMEPAGEs to reflect where the address is actually
+resolving.
 
-Does the issue go away if allarch is dropped from the offending recipes?
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ .../xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.3.bb                  | 2 +-
+ .../recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb | 2 +-
+ .../calculator/xfce4-calculator-plugin_0.7.2.bb                 | 2 +-
+ .../recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb | 2 +-
+ .../recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.8.bb | 2 +-
+ .../cpugraph/xfce4-cpugraph-plugin_1.2.8.bb                     | 2 +-
+ .../datetime/xfce4-datetime-plugin_0.8.3.bb                     | 2 +-
+ .../diskperf/xfce4-diskperf-plugin_2.7.0.bb                     | 2 +-
+ meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb | 2 +-
+ .../recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb | 2 +-
+ .../recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.2.0.bb   | 2 +-
+ .../mailwatch/xfce4-mailwatch-plugin_1.3.1.bb                   | 2 +-
+ .../recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb     | 2 +-
+ .../recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.1.bb | 2 +-
+ .../recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.2.bb    | 2 +-
+ .../recipes-panel-plugins/places/xfce4-places-plugin_1.8.3.bb   | 2 +-
+ .../recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.5.bb | 2 +-
+ .../smartbookmark/xfce4-smartbookmark-plugin_0.5.2.bb           | 2 +-
+ .../systemload/xfce4-systemload-plugin_1.3.2.bb                 | 2 +-
+ .../time-out/xfce4-time-out-plugin_1.1.3.bb                     | 2 +-
+ .../recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.2.bb     | 2 +-
+ .../recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb     | 2 +-
+ .../recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb | 2 +-
+ .../weather/xfce4-weather-plugin_0.11.3.bb                      | 2 +-
+ meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.8.2.bb   | 2 +-
+ .../archive/thunar-archive-plugin_0.5.2.bb                      | 2 +-
+ .../xfce4-power-manager/xfce4-power-manager_4.20.0.bb           | 2 +-
+ 27 files changed, 27 insertions(+), 27 deletions(-)
 
-Alex
+diff --git a/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.3.bb b/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.3.bb
+index cd868c243b..2d4cdfa498 100644
+--- a/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.3.bb
++++ b/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.3.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Simple client plugin for Music Player Daemon"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-mpc-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-mpc-plugin/start"
+ SECTION = "x11/application"
+ LICENSE = "0BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3604d987e6dfdfc672c754d08953b0e0"
+diff --git a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb
+index ce119bb6da..16ebebf235 100644
+--- a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb
++++ b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "A battery monitor panel plugin for Xfce4, compatible with APM and ACP"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-battery-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-battery-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/calculator/xfce4-calculator-plugin_0.7.2.bb b/meta-xfce/recipes-panel-plugins/calculator/xfce4-calculator-plugin_0.7.2.bb
+index 0c464930e1..d5ce9ad361 100644
+--- a/meta-xfce/recipes-panel-plugins/calculator/xfce4-calculator-plugin_0.7.2.bb
++++ b/meta-xfce/recipes-panel-plugins/calculator/xfce4-calculator-plugin_0.7.2.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "A calculator plugin for the Xfce panel"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-calculator-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-calculator-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=909430f63fddd63f120ba29e8979f65c"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb
+index 39a8f2edfe..59fb8578c1 100644
+--- a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb
++++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Clipman is a clipboard manager for Xfce"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-clipman-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-clipman-plugin/start"
+ SECTION = "x11/application"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.8.bb b/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.8.bb
+index 8ddf48d6ef..1a19f488c0 100644
+--- a/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.8.bb
++++ b/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.8.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Panel plugin to display frequency of all cpus"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-cpufreq-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-cpufreq-plugin/start"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1f6f1c0be32491a0c8d2915607a28f36"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.8.bb b/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.8.bb
+index 8e58175615..b240eaad5e 100644
+--- a/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.8.bb
++++ b/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.8.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Panel plugin with graphical representation of the cpu frequency"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-cpugraph-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-cpugraph-plugin/start"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=415654f59d8fa70fe4eac2c3f86c8f5e"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.8.3.bb b/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.8.3.bb
+index f292a6deaf..f025edd4c5 100644
+--- a/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.8.3.bb
++++ b/meta-xfce/recipes-panel-plugins/datetime/xfce4-datetime-plugin_0.8.3.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Panel plugin displaying date and time and a calendar when left-clicked"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-datetime-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-datetime-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb
+index 25a57f3233..583aa9a006 100644
+--- a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb
++++ b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Panel plugin displaying instant disk/partition performance"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-diskperf-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-diskperf-plugin/start"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d3e627798d6a60bece47aa8b3532e1f1"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb
+index 0c796534ab..6eaac70a09 100644
+--- a/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb
++++ b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Panel plugin with graphical representation of the cpu frequency"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-eyes-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-eyes-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb
+index 380d2e19e3..de8d6786c2 100644
+--- a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb
++++ b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "The FSGuard panel plugin checks free space on a chosen mount point frequently and displays a message when a limit is reached"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-fsguard-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-fsguard-plugin/start"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3434d79d62df09abf5f78bb76d6cd21b"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.2.0.bb b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.2.0.bb
+index 31ad5e7ced..6558a1492d 100644
+--- a/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.2.0.bb
++++ b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.2.0.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "This plugin cyclically spawns the indicated script/program, captures its output (stdout) and displays the resulting string into the panel."
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-genmon-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-genmon-plugin/start"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb b/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb
+index 6ea260765f..d6b367c0da 100644
+--- a/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb
++++ b/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Multi-protocol, multi-mailbox mail watcher for the Xfce4 panel"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-mailwatch-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-mailwatch-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb
+index 3a6baf21f9..f11e41f9bd 100644
+--- a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb
++++ b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Mount/umount utility for the xfce panel"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-mount-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-mount-plugin/start"
+ SECTION = "x11/application"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.1.bb b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.1.bb
+index c30f17a7d4..6ed4747565 100644
+--- a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.1.bb
++++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.1.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Panel plugin displaying current load of the network interfaces"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-netload-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-netload-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2b6065ae7d3696cdad6869dd8627a9fe"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.2.bb b/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.2.bb
+index 0bdd2bb5f3..83e527e380 100644
+--- a/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.2.bb
++++ b/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.2.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Notes plugin for the Xfce Panel"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-notes-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-notes-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.8.3.bb b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.8.3.bb
+index 6400e0d3e4..753dcae91e 100644
+--- a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.8.3.bb
++++ b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.8.3.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Menu for quick access to folders, documents and removable media"
+ DESCRIPTION = "Panel plugin displaying menu with quick access to folders, documents and removable media"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-places-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-places-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b6952d9a47fc2ad0f315510e1290455f"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.5.bb b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.5.bb
+index 596feacba2..d283684aa2 100644
+--- a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.5.bb
++++ b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.5.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Sensors plugin for the Xfce Panel"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-sensors-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-sensors-plugin/start"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.2.bb b/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.2.bb
+index fdec598190..68e9cbd3a3 100644
+--- a/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.2.bb
++++ b/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.2.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Panel plugin allowing to send requests directly to browser"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-smartbookmark-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-smartbookmark-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/systemload/xfce4-systemload-plugin_1.3.2.bb b/meta-xfce/recipes-panel-plugins/systemload/xfce4-systemload-plugin_1.3.2.bb
+index e7a3e9936e..0b07bda32b 100644
+--- a/meta-xfce/recipes-panel-plugins/systemload/xfce4-systemload-plugin_1.3.2.bb
++++ b/meta-xfce/recipes-panel-plugins/systemload/xfce4-systemload-plugin_1.3.2.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Panel plugin displaying current CPU load, the memory in use, the swap space and the system uptime"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-systemload-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-systemload-plugin/start"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=9acb172a93ff6c43cce2aff790a8aef8"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.1.3.bb b/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.1.3.bb
+index 9fa287a1ca..1622cd4d2b 100644
+--- a/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.1.3.bb
++++ b/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.1.3.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "This plugin makes it possible to take periodical breaks"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-time-out-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-time-out-plugin/start"
+ SECTION = "x11/application"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+diff --git a/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.2.bb b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.2.bb
+index 33b60438d1..0f164b79c5 100644
+--- a/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.2.bb
++++ b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.7.2.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "XFCE panel plugin to generate alarm messages"
+ DESCRIPTION = "This is a simple plugin that lets the user run an alarm at a specified time or at the end of a specified countdown period"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-timer-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-timer-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f1c52159bdaebd029cb11927cbe709e4"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb b/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb
+index 9dcaae8ceb..844d8caf17 100644
+--- a/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb
++++ b/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Verve panel plugin is a comfortable command line plugin for the Xfce panel"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-verve-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-verve-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb b/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb
+index 530f52425a..64e7ea6a18 100644
+--- a/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb
++++ b/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Panel plugin displaying stats from a wireless lan interface"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-wavelan-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-wavelan-plugin/start"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e1e5872df9c5cf1a23f16493d9104920"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb
+index 7a16556eef..c0c2ad3313 100644
+--- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb
++++ b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Panel plugin to display current temperature and weather condition"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-weather-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-weather-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+diff --git a/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.8.2.bb b/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.8.2.bb
+index 3d935a3d71..0e482af353 100644
+--- a/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.8.2.bb
++++ b/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.8.2.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "XKB layout switching panel plug-in for the Xfce desktop environment"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-xkb-plugin"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-xkb-plugin/start"
+ SECTION = "x11/application"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=496f09f084b0f7e6f02f769a84490c6b"
+diff --git a/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.2.bb b/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.2.bb
+index 91b3efa83e..0ba997b544 100644
+--- a/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.2.bb
++++ b/meta-xfce/recipes-thunar-plugins/archive/thunar-archive-plugin_0.5.2.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Thunar Archive Plugin allows you to create and extract archive files using file context menus in Thunar"
+-HOMEPAGE = "http://goodies.xfce.org/projects/thunar-plugins/thunar-archive-plugin"
++HOMEPAGE = "https://docs.xfce.org/xfce/thunar/archive"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4cf66a4984120007c9881cc871cf49db"
+ 
+diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.20.0.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.20.0.bb
+index 46f70e6e03..c6eed849be 100644
+--- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.20.0.bb
++++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.20.0.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Power manager for the Xfce desktop environment"
+-HOMEPAGE = "http://goodies.xfce.org/projects/applications/xfce4-power-manager"
++HOMEPAGE = "https://docs.xfce.org/xfce/xfce4-power-manager/start"
+ SECTION = "x11"
+ 
+ LICENSE = "GPL-2.0-or-later"
+-- 
+2.43.0
+
 
