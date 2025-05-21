@@ -1,128 +1,89 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B15A5C54E65
-	for <webhook@archiver.kernel.org>; Wed, 21 May 2025 07:17:34 +0000 (UTC)
-Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
- by mx.groups.io with SMTP id smtpd.web11.5359.1747811849786818390
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77167C2D0CD
+	for <webhook@archiver.kernel.org>; Wed, 21 May 2025 09:00:05 +0000 (UTC)
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.web11.6737.1747817995751750177
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 May 2025 00:17:29 -0700
+ Wed, 21 May 2025 01:59:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Kqx0sTe9;
- spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-2d4e91512b4so2347901fac.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 00:17:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747811849; x=1748416649; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=f3JPOzoU1XconRiY+1ia2gH0S05dOzBascyBCwLnMCY=;
-        b=Kqx0sTe99ukwZtOrP9GUTw3mJ+HG4MU33YnhZlj9UXQmzffElmgi/LVvMxR5+BVaCy
-         qT9HKiRo/D/UvfNkVMUMLoVh8YC1VaR0hCBCi/v9C9j1IQhXiyX4ql83mD5KR1JLfTWE
-         NGwjKL0tZ0nq5DK+uZ7AYgTH6vaCrbQkWkZXXwg5XhCa9i24R1BrqZXWv9DqdQ7CFRBi
-         lOD/DrmjHch1e6mgg4x1Hdl9S2U5xS1Bet59NZ4Qxaz0lrr6Q6GJPvc/SzXmAMUNxY2O
-         q6ETdrH7N4KNRdJObaJACYhy+pm+clnlmxOqG7f/CE+k73DOPp1mreoPsfFVoVF1sG2X
-         rsXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747811849; x=1748416649;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=f3JPOzoU1XconRiY+1ia2gH0S05dOzBascyBCwLnMCY=;
-        b=kDQmqgs231vIpBo2nKJSszHO6ppS+Y/tD7ff7IGL/+huRD2GgWEJAZ7VBZdSJJ21jU
-         ILZoQ83zpEMIgPrY3ona39uyJEz91Be9ZzUiTxbNSYQrYUO1DbBvZG6rXaELxjF9zuHq
-         BreYnufMzfXB9zd72Vl9Foe8BOu3E5nqAhzeVv0F55sPTpNXxClEYwRSwxMsxvkh3I8Q
-         Ue3k+XcVojPk8kLDUKOtVujRenGJj934O2TMoRZpXcQaMs2ia/ubOf6n29q+yFEBgLCq
-         WXM1QhX7TNV9CHZujOG51pqgPufsKAasGI/r0aur8AUY5qv7NQFp6evQvTTTOd1uV4EP
-         +tOw==
-X-Gm-Message-State: AOJu0YyowhQ8APIdfByB7EV6eao7rtH123sy4GbZVSQsC9TVLGlj/3O+
-	M4pt1Gf5TWfb+XxvIHZgLh4BtRl/C5YR4CinkEmT57HbkW1BrIhaYTq9o098M6ZqnC+mN8E25pO
-	i+XrClUYlmnJb/N0xmBrRxGnQNtqfZBo=
-X-Gm-Gg: ASbGncteBKKnRqJXlrdwBj0dG0Jgmk6YxYAiGrFrygptHU+RRQ87D0CDDzbzc8huvD1
-	rhcBBGHCQZWCJzb7cQXeCAVyTfA7EY76RBpM9st1iMd7h1i6EjI7R29RrSSerJuhMbkt523CJ2k
-	LnW7HiifEutI7wo5qgQR/kGaOvCXILHFP1
-X-Google-Smtp-Source: AGHT+IFJEMD1jYgSYWQxpXp6XU/BOcSXWQs+ShNllsWbxRmZcGav0ExxY+ZD+Gm6a6Yr1+brwgDCqVc7YNnTc8BXPXs=
-X-Received: by 2002:a05:6871:7b81:b0:2d4:ce45:6987 with SMTP id
- 586e51a60fabf-2e3c81f8f20mr11803864fac.9.1747811848957; Wed, 21 May 2025
- 00:17:28 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250519141525.3708957-1-jeroen@myspectrum.nl> <20250519141525.3708957-2-jeroen@myspectrum.nl>
-In-Reply-To: <20250519141525.3708957-2-jeroen@myspectrum.nl>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 21 May 2025 00:17:03 -0700
-X-Gm-Features: AX0GCFt2BlGbETo6XhfjIyXLOpZnSR6kbWNmQhXxbohJjTqOO3PHAn9VSsRkddY
-Message-ID: <CAMKF1sr_Ss+P2XnuwnJZ+5ZoJY_68+q-5Q0UwJfpR6XBaxsEbw@mail.gmail.com>
-Subject: Re: [oe][meta-oe][PATCH 2/2] socketcand: add recipe
-To: jeroen@myspectrum.nl
-Cc: openembedded-devel@lists.openembedded.org, 
-	marc Kleine-Budde <mkl@pengutronix.de>, Jeroen Hofstee <jhofstee@victronenergy.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=IOeAgx0H;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1747817995; x=1779353995;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references;
+  bh=hPXsmnya3yYiMTY3xJQpaF+CwiSyI0sMp+hWQcqQlqw=;
+  b=IOeAgx0H2kluIjsVQAcVvJCKwF3buqlCt2e2xJ7LneUYO+U9PYDUPup9
+   ctxm0ZHwAhZA0BdPf3hNFt8POLF5p5W3qDTTc127AuLkWRCaE1FnhxtTz
+   UmbfjY94JWxAlMPnPgU5aueR5i7LDMzZ1YlO9m7+cLFzTZSdaCHiyjJcZ
+   Q7D+Cx9t21E4yYqGyUP1DNtl1p2PR0VLQ0CljUoG6yDWZHezOkmFa2/9Q
+   /b1STFYwZ2HDxeyasg3YqF9xFJMQnaQBJuV2grH91l/pHeVaMf+G4+bY3
+   bqNi6qZA8h0M8hCoQSAzvIKUBevaQxXLUPVM7YhQuNuHEyU8kKaezNK/L
+   A==;
+X-CSE-ConnectionGUID: 4+b0vgltQziL6qrB2WqYEA==
+X-CSE-MsgGUID: +JV+cTYeQnGy2i0kqLMlvQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11439"; a="179076126"
+X-IronPort-AV: E=Sophos;i="6.15,303,1739804400"; 
+   d="scan'208";a="179076126"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 May 2025 17:59:53 +0900
+Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 7A770D4C24
+	for <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 17:59:51 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 29F9CBDCBB
+	for <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 17:59:51 +0900 (JST)
+Received: from localhost.localdomain (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id AEEE01A009A;
+	Wed, 21 May 2025 16:59:50 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 02/43] python3-apispec: upgrade 6.8.1 -> 6.8.2
+Date: Wed, 21 May 2025 16:58:51 +0800
+Message-Id: <1747817972-28874-2-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1747817972-28874-1-git-send-email-wangmy@fujitsu.com>
+References: <1747817972-28874-1-git-send-email-wangmy@fujitsu.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 07:17:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117526
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 09:00:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117527
 
-Fails to build with gcc-15 -
-https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/2442453/raw_inlin=
-e
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-On Mon, May 19, 2025 at 1:34=E2=80=AFPM jeroen via lists.openembedded.org
-<jeroen=3Dmyspectrum.nl@lists.openembedded.org> wrote:
->
-> From: Jeroen Hofstee <jhofstee@victronenergy.com>
->
-> Socketcand allows to transfer socketcan messages over tcp/ip.
->
-> Signed-off-by: Jeroen Hofstee <jhofstee@victronenergy.com>
-> ---
->  .../recipes-extended/socketcan/socketcand_git.bb | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/socketcan/socketcand_git.bb
->
-> diff --git a/meta-oe/recipes-extended/socketcan/socketcand_git.bb b/meta-=
-oe/recipes-extended/socketcan/socketcand_git.bb
-> new file mode 100644
-> index 0000000000..764a87f874
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/socketcan/socketcand_git.bb
-> @@ -0,0 +1,16 @@
-> +SUMMARY =3D "Socketcand, socketcan over tcp/ip"
-> +LICENSE =3D "GPL-2.0-only | BSD-3-Clause"
-> +LIC_FILES_CHKSUM =3D " \
-> +    file://LICENSES/BSD-3-Clause;md5=3D4c00cf8b0a04a9441d8fa24850231d00 =
-\
-> +    file://LICENSES/GPL-2.0-only.txt;md5=3Df9d20a453221a1b7e32ae84694da2=
-c37 \
-> +"
-> +
-> +SRC_URI =3D "git://github.com/linux-can/socketcand;branch=3Dmaster;proto=
-col=3Dhttps"
-> +SRCREV =3D "7b5e91ec656b33c325db2f9136daebb9e357bb65"
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit meson pkgconfig
-> +
-> +PACKAGECONFIG ?=3D "libconfig libsocketcan"
-> +PACKAGECONFIG[libconfig] =3D "-Dlibconfig=3Dtrue,-Dlibconfig=3Dfalse,lib=
-config"
-> +PACKAGECONFIG[libsocketcan] =3D "-Dlibsocketcan=3Dtrue,-Dlibsocketcan=3D=
-false,libsocketcan"
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117480): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117480
-> Mute This Topic: https://lists.openembedded.org/mt/113200001/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Changelog:
+============
+- MarshmallowPlugin doesn't override additionalProperties explicitly passed to fields.Dict
+- Perf improvement to filter_excluded_fields
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../{python3-apispec_6.8.1.bb => python3-apispec_6.8.2.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-apispec_6.8.1.bb => python3-apispec_6.8.2.bb} (80%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-apispec_6.8.1.bb b/meta-python/recipes-devtools/python/python3-apispec_6.8.2.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-apispec_6.8.1.bb
+rename to meta-python/recipes-devtools/python/python3-apispec_6.8.2.bb
+index 7619210eb9..28b31991cf 100644
+--- a/meta-python/recipes-devtools/python/python3-apispec_6.8.1.bb
++++ b/meta-python/recipes-devtools/python/python3-apispec_6.8.2.bb
+@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a75956865b40c80a37c1e864716592b4"
+ 
+ inherit pypi python_setuptools_build_meta
+ 
+-SRC_URI[sha256sum] = "f4916cbb7be156963b18f5929a0e42bd2349135834b680a81b12432bcfaa9a39"
++SRC_URI[sha256sum] = "ce5b69b9fcf0250cb56ba0c1a52a75ff22c2f7c586654e57884399018c519f26"
+ 
+ RDEPENDS:${PN} += "python3-packaging"
+-- 
+2.43.0
+
 
