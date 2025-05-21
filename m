@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1D05C54E65
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5DE8C54F32
 	for <webhook@archiver.kernel.org>; Wed, 21 May 2025 09:00:05 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.web11.6740.1747817996379290218
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web10.6713.1747817996313122889
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 May 2025 02:00:03 -0700
+ Wed, 21 May 2025 01:59:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=n9j7blGl;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=WaurBegf;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1747818003; x=1779354003;
+  t=1747817996; x=1779353996;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=0SHwNfN33QfBzOrMLKvVIQDEjQ4+2JJaQ2QkSP0Tj3o=;
-  b=n9j7blGlCa5lgmBtlKdlgvicXlzow0ISv4r/TtT64Vahf+dVOoPrihlu
-   BRDCU9YKN/NuxqyXd80PJZz8llFmAtqbe8FYNjz5i1poYjL5/WnnuYZNw
-   diFQMtlBNJOcAZkoqd5D/DGhIpazCn8zo3ez20BI3e49nCDyLF9yRbWrb
-   IcxeUIS9sPGz4udQ5uIKW4ojsDiHFI8v0Yg+3bIoGfXuClQRzYLqgEOKO
-   wKvU0+D3cKL7BEt1b/B6mtGSQ19FU4treJ6glLVwThaIKrbZqyeXWq8BT
-   EDjjdElREtbw6N2MeguPWbu5IngQXSilxz5JGoNbPvjozsTB13r1KyOvs
+  bh=yy8lCjG6mvLVsOzh8Sz533zJuBrK9ce2uMiNYJ3bZxk=;
+  b=WaurBegfhKVBhca4tWabQoe/HrKQ8vYXqwtN8sJMN9Lwcg6IqyqwdRDd
+   4xyEK6YHRWx5rJPxtkWauEBdhLmiuTBapFhatOx1/O5qpjIlAO3bBkvAM
+   eSmNJQfyF9+EUyzvxr+EIpHx6kVI52G482x9QjruEL4HALGmm5m3Jueq/
+   bcVpExaScyKwUGuwO3V2C2MZvWOKguWwcdLlgCoJ3ZBcnbA7X+H9M3+lf
+   zVUjfVI6/CN1SWGvt5JTbl4CYS2zR+ZqhJxVyhy0PTSILankAwEILhgRS
+   FZkHqnZwse5gV0id/P1I5KDIR92c17ouBdwkwMtkQg7rhlvbUgoYbibc7
    A==;
-X-CSE-ConnectionGUID: 91boFrn3Q8uM+O4JBRn4+A==
-X-CSE-MsgGUID: TtQv+DvlRym+1/ULotF/SQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11439"; a="200161120"
+X-CSE-ConnectionGUID: n3Vr1GAWRPWcG0kMLbVEKw==
+X-CSE-MsgGUID: KnR1yn2wT42AcLEVUGia/A==
+X-IronPort-AV: E=McAfee;i="6700,10204,11439"; a="188581259"
 X-IronPort-AV: E=Sophos;i="6.15,303,1739804400"; 
-   d="scan'208";a="200161120"
+   d="scan'208";a="188581259"
 Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 May 2025 18:00:02 +0900
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 May 2025 17:59:54 +0900
 Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 38E17D8E67
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 18:00:00 +0900 (JST)
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id EE0D3D8E67
+	for <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 17:59:51 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id ED8ABD8C1F
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 17:59:59 +0900 (JST)
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id ACBE9D8B94
+	for <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 17:59:51 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 7D4241A009A;
-	Wed, 21 May 2025 16:59:59 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 3EEFD1A00A1;
+	Wed, 21 May 2025 16:59:51 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 34/43] python3-sqlalchemy: upgrade 2.0.40 -> 2.0.41
-Date: Wed, 21 May 2025 16:59:23 +0800
-Message-Id: <1747817972-28874-34-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 04/43] python3-bitarray: upgrade 3.3.1 -> 3.4.1
+Date: Wed, 21 May 2025 16:58:53 +0800
+Message-Id: <1747817972-28874-4-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1747817972-28874-1-git-send-email-wangmy@fujitsu.com>
 References: <1747817972-28874-1-git-send-email-wangmy@fujitsu.com>
@@ -53,34 +53,55 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 09:00:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117559
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117531
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
- https://docs.sqlalchemy.org/en/20/changelog/changelog_20.html#change-2.0.41
+==========
+* add 'pyproject.toml'
+* implement 'bits2bytes()' in C
+* optimize 'delslice()' when 'step' is larger than about 5
+* consistently name '*_span()' and '*_range()' in C for
+  invert, set and count
+* organize and add tests
+* remove '.endian()' method in favor of data descriptor '.endian'
+* allow bitarray initializer 'bytes' or 'bytearray' to set buffer directly
+* allow calling '.extend()' with 'bytes' object (although the only
+  valid bytes are 0x00 and 0x01)
+* add 'util.byteswap()'
+* add 'util.correspond_all()'
+* fix '.reverse()' for imported buffer
+* drop Python 3.5 support
+* add tests
+* fix off-by-one-error in check for length of count argument
+  in 'util.canonical_decode()'
+* simplify 'util.int2ba()'
+* add tests
+* add [masked indexing example](../examples/masked.py)
+* add [tricks example](../examples/tricks.py)
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ython3-sqlalchemy_2.0.40.bb => python3-sqlalchemy_2.0.41.bb} | 2 +-
+ .../{python3-bitarray_3.3.1.bb => python3-bitarray_3.4.1.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_2.0.40.bb => python3-sqlalchemy_2.0.41.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_3.3.1.bb => python3-bitarray_3.4.1.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.40.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.41.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.40.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.41.bb
-index c86a2d29d9..c9f337946a 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.40.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.41.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://www.sqlalchemy.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=061025f14213ac2818ff353223d6eca6"
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_3.3.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_3.4.1.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-bitarray_3.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_3.4.1.bb
+index ccb0238382..01030b43f7 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_3.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_3.4.1.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF-2.0"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=6abe80c028e4ee53045a33ae807c64fd"
  
--SRC_URI[sha256sum] = "d827099289c64589418ebbcaead0145cd19f4e3e8a93919a0100247af245fa00"
-+SRC_URI[sha256sum] = "edba70118c4be3c2b1f90754d308d0b79c6fe2c0fdc52d8ddf603916f83f4db9"
+-SRC_URI[sha256sum] = "8c89219a672d0a15ab70f8a6f41bc8355296ec26becef89a127c1a32bb2e6345"
++SRC_URI[sha256sum] = "e5fa88732bbcfb5437ee554e18f842a8f6c86be73656b0580ee146fd373176c9"
  
- inherit pypi python_setuptools_build_meta cython
+ inherit setuptools3 pypi
  
 -- 
 2.43.0
