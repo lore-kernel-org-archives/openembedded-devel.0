@@ -1,94 +1,104 @@
-Return-Path: <philip@balister.org>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75ACCC2D0CD
-	for <webhook@archiver.kernel.org>; Wed, 21 May 2025 13:19:48 +0000 (UTC)
-Received: from outbound10.mail.transip.nl (outbound10.mail.transip.nl [136.144.136.17])
- by mx.groups.io with SMTP id smtpd.web11.6985.1747819054449048772
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5C7FC2D0CD
+	for <webhook@archiver.kernel.org>; Wed, 21 May 2025 15:09:42 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.1506.1747840176071341742
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 May 2025 02:17:35 -0700
+ Wed, 21 May 2025 08:09:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@myspectrum.nl header.s=transip-a header.b=qPyxHUpn;
- spf=pass (domain: myspectrum.nl, ip: 136.144.136.17, mailfrom: jeroen@myspectrum.nl)
-Received: from submission12.mail.transip.nl (unknown [10.103.8.163])
-	by outbound10.mail.transip.nl (Postfix) with ESMTP id 4b2Qmq5bNrzTPMZw;
-	Wed, 21 May 2025 11:17:31 +0200 (CEST)
-Received: from yellow.myspectrum.nl (yellow.myspectrum.nl [136.144.146.76])
-	by submission12.mail.transip.nl (Postfix) with ESMTPSA id 4b2Qmq1Qxpz2nC3Hx;
-	Wed, 21 May 2025 11:17:31 +0200 (CEST)
-Received: from yellow.myspectrum.nl (84-27-20-154.cable.dynamic.v4.ziggo.nl [84.27.20.154])
-	(Authenticated sender: sendmail@myspectrum.nl)
-	by yellow.myspectrum.nl (Postfix) with ESMTPSA id B8AA720295;
-	Wed, 21 May 2025 09:17:29 +0000 (UTC)
-Authentication-Results: yellow.myspectrum.nl;
-	auth=pass smtp.auth=sendmail@myspectrum.nl smtp.mailfrom=jeroen@myspectrum.nl
-Received: by yellow.myspectrum.nl (sSMTP sendmail emulation); Wed, 21 May 2025 11:17:27 +0200
-From: "Jeroen Hofstee" <jeroen@myspectrum.nl>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout03.t-online.de (Postfix) with SMTP id 43DC745D
+	for <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 17:09:33 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.33.59]) by fwd88.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1uHl4W-4TRWOv0; Wed, 21 May 2025 17:09:32 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Marc Kleine-Budde <mkl@pengutronix.de>,
-	Jeroen Hofstee <jhofstee@victronenergy.com>
-Subject: [oe][meta-oe][PATCH v2] socketcand: add recipe
-Date: Wed, 21 May 2025 11:17:21 +0200
-Message-ID: <20250521091721.2622210-1-jeroen@myspectrum.nl>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-oe][PATCH] libsdl2-compat: update 2.32.52 -> 2.32.56
+Date: Wed, 21 May 2025 17:09:24 +0200
+Message-ID: <20250521150924.3819838-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-Scanned-By: ClueGetter at submission12.mail.transip.nl
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=transip-a; d=myspectrum.nl; t=1747819051; h=from:subject:to:cc:date:
- mime-version; bh=bbDBSqQHjei6XaInM/iZbnaoeXrIDuIRHWsPuyH/xSM=;
- b=qPyxHUpn74oukg96RqiNBgZ+f0xRlIi92YP2A5UmbsBFIazhLjwApz3zguAeMCFUckh6AR
- Vh3WzCxuSAoxuh6mO3ad5Cgx4vnJGeKCwVrQunTcxCreuJvuLYp9rtH75t4O+HdHLune/p
- ZCmcOGdr6gkowDsXsNzq++E6JS4rQ3iY9V4jHyg5Q754TD9FEx/AkJg2Q3Y7TNQtw9Nm57
- esmcckt8aepvdMbxfVSmQHagBg21tbEAvfHTFBAc0OAnwuQPBLqD/kg4ofmkdTrqCRoZAv
- xw9LkLMB75Q/Q+g+W7ub3/zvFou4/EMXaZG23paHY8H8zVo4vkUnJC/U7dt1BQ==
-X-Report-Abuse-To: abuse@transip.nl
+X-TOI-EXPURGATEID: 150726::1747840172-427FA5E8-2B7397B9/0/0 CLEAN NORMAL
+X-TOI-MSGID: 43d4ed0f-f292-4b52-abec-55295630d0ed
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 13:19:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117571
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 15:09:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117572
 
-From: Jeroen Hofstee <jhofstee@victronenergy.com>
+2.32.56
+This is a stable bugfix release, with the following changes:
 
-Socketcand allows to transfer socketcan messages over tcp/ip.
+    Fixed rendering in Mesen2
+    Fixed brightness in ioquake3
+    Fixed a hang at launch in the xemu emulator
+    Fixed crackling and sped up audio in OpenRCT2
+    Fixed fullscreen window positioning on Wayland with multiple displays
+    Key events are now sent for dead keys on X11
+    Fixed mouse wheel integer scrolling values
+    Fixed a double-free when working with RLE surfaces
+    Fixed a memory leak in SDL_LockTextureToSurface()
+    Fixed sending SDL3 controller events to SDL2 applications
 
-Signed-off-by: Jeroen Hofstee <jhofstee@victronenergy.com>
+2.32.54
+This is a stable bugfix release, with the following changes:
+
+    sdl2_compat.pc was renamed to sdl2-compat.pc
+    Fixed creating fullscreen exclusive windows
+    Fixed relative mouse motion for Half-Life and mods on Windows
+    Fixed crash during controller hotplug in RetroArch
+    Fixed display scale under Wayland in ioquake3
+    Default to using X11 for the UE5 editor, fixing mouse input
+    Fixed SDL_SetWindowInputFocus() return value
+    Improved accuracy of SDL_GetRenderDriverInfo()
+    Improved handling of very slight mouse movements
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../recipes-extended/socketcan/socketcand_git.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-oe/recipes-extended/socketcan/socketcand_git.bb
+ .../{libsdl2-compat_2.32.52.bb =3D> libsdl2-compat_2.32.56.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/libsdl3/{libsdl2-compat_2.32.52.bb =3D> =
+libsdl2-compat_2.32.56.bb} (85%)
 
-diff --git a/meta-oe/recipes-extended/socketcan/socketcand_git.bb b/meta-=
-oe/recipes-extended/socketcan/socketcand_git.bb
-new file mode 100644
-index 0000000000..4e58c76460
---- /dev/null
-+++ b/meta-oe/recipes-extended/socketcan/socketcand_git.bb
-@@ -0,0 +1,16 @@
-+SUMMARY =3D "Socketcand, socketcan over tcp/ip"
-+LICENSE =3D "GPL-2.0-only | BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D " \
-+    file://LICENSES/BSD-3-Clause;md5=3D4c00cf8b0a04a9441d8fa24850231d00 =
-\
-+    file://LICENSES/GPL-2.0-only.txt;md5=3Df9d20a453221a1b7e32ae84694da2=
-c37 \
-+"
-+
-+SRC_URI =3D "git://github.com/linux-can/socketcand;branch=3Dmaster;proto=
-col=3Dhttps"
-+SRCREV =3D "998b0394d028e791aa97d549bfc686b4fbadf5ee"
-+S =3D "${WORKDIR}/git"
-+
-+inherit meson pkgconfig
-+
-+PACKAGECONFIG ?=3D "libconfig libsocketcan"
-+PACKAGECONFIG[libconfig] =3D "-Dlibconfig=3Dtrue,-Dlibconfig=3Dfalse,lib=
-config"
-+PACKAGECONFIG[libsocketcan] =3D "-Dlibsocketcan=3Dtrue,-Dlibsocketcan=3D=
-false,libsocketcan"
+diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.52.bb b=
+/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.56.bb
+similarity index 85%
+rename from meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.52.bb
+rename to meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.56.bb
+index 4553ac14e1..7e3a06f34f 100644
+--- a/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.52.bb
++++ b/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.56.bb
+@@ -11,7 +11,7 @@ LICENSE =3D "Zlib"
+ LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D98241180d857fe975e4b60d44=
+d6c01a5"
+=20
+ SRC_URI =3D "http://www.libsdl.org/release/sdl2-compat-${PV}.tar.gz"
+-SRC_URI[sha256sum] =3D "eb02c4c47d90e7a2585a65c712cf4a08ff4c37c0a1efc17a=
+f49d8ebde3292c23"
++SRC_URI[sha256sum] =3D "27e845b1b7dc0a91a85f1a1f18892ed205adb38caf767741=
+eb258008d8264de0"
+ S =3D "${WORKDIR}/sdl2-compat-${PV}"
+=20
+ DEPENDS +=3D "libsdl3"
+@@ -23,7 +23,7 @@ inherit cmake pkgconfig upstream-version-is-even featur=
+es_check
+ REQUIRED_DISTRO_FEATURES =3D "opengl x11"
+=20
+ do_install:append() {
+-	mv ${D}${libdir}/pkgconfig/sdl2_compat.pc ${D}${libdir}/pkgconfig/sdl2.=
+pc
++	mv ${D}${libdir}/pkgconfig/sdl2-compat.pc ${D}${libdir}/pkgconfig/sdl2.=
+pc
+ }
+=20
+ FILES:${PN} +=3D "${datadir}/licenses"
 --=20
-2.43.0
+2.49.0
 
 
