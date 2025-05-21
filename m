@@ -1,96 +1,114 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05B9CC54E65
-	for <webhook@archiver.kernel.org>; Wed, 21 May 2025 09:00:17 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web10.6729.1747818013761683612
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78207C3ABC9
+	for <webhook@archiver.kernel.org>; Wed, 21 May 2025 13:19:48 +0000 (UTC)
+Received: from outbound5.mail.transip.nl (outbound5.mail.transip.nl [136.144.136.9])
+ by mx.groups.io with SMTP id smtpd.web11.5608.1747813156961333658
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 May 2025 02:00:15 -0700
+ Wed, 21 May 2025 00:39:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=rqf0Gflc;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1747818015; x=1779354015;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=t6GZMd6k7Hr+T1Q2YUZ45cqyL37AHyYvpWxnb2TkJIw=;
-  b=rqf0GflcFJ7wzh6Iz3BodvOWCqaXK0Q3T9emT5pd65EabJH/1hxNJoLS
-   LPONzyzD6LVizg94j1+j7rhKQ6GKB784Aj/jXuRPc1bQ3GZ5zErLw2Pcb
-   U6zc5XDZAA0jpT4kbRAbHTXiO2lhvih7djI5K7X45Mi4e2WOKgOs4Oy1I
-   WTQwOWXl0AqRhseuvUlreVsDpmja3abHBzLSfEE41qnz/8CU5QbYJDcKq
-   rTl4/in8XZgIZHZ1Kdyqlu4oG+KgPrWHxLQG/POjUoj/GAnsZjxu5H270
-   Pmpoft17Q3bB7pA3ZFhrsC3LslpQvU5PaqmT8E9zg74V1mKkG8Cfc6yoN
-   w==;
-X-CSE-ConnectionGUID: 1LHl9vkbTp+FpZKKeAK9sA==
-X-CSE-MsgGUID: w4m2bg46QbKZ5YZBowdV4Q==
-X-IronPort-AV: E=McAfee;i="6700,10204,11439"; a="200152543"
-X-IronPort-AV: E=Sophos;i="6.15,303,1739804400"; 
-   d="scan'208";a="200152543"
-Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 May 2025 18:00:03 +0900
-Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 52ED5E8FE0
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 18:00:01 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 0D2ADD52D2
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 18:00:01 +0900 (JST)
-Received: from localhost.localdomain (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 90B661A0078;
-	Wed, 21 May 2025 17:00:00 +0800 (CST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 38/43] python3-tox: upgrade 4.25.0 -> 4.26.0
-Date: Wed, 21 May 2025 16:59:27 +0800
-Message-Id: <1747817972-28874-38-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1747817972-28874-1-git-send-email-wangmy@fujitsu.com>
-References: <1747817972-28874-1-git-send-email-wangmy@fujitsu.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@myspectrum.nl header.s=transip-a header.b=GQXbs85r;
+ spf=pass (domain: myspectrum.nl, ip: 136.144.136.9, mailfrom: jeroen@myspectrum.nl)
+Received: from submission15.mail.transip.nl (unknown [10.103.8.166])
+	by outbound5.mail.transip.nl (Postfix) with ESMTP id 4b2NbQ20LDzHTw6;
+	Wed, 21 May 2025 09:39:14 +0200 (CEST)
+Received: from yellow.myspectrum.nl (yellow.myspectrum.nl [136.144.146.76])
+	by submission15.mail.transip.nl (Postfix) with ESMTPSA id 4b2NbN6zykz2mZN1M;
+	Wed, 21 May 2025 09:39:12 +0200 (CEST)
+Received: from [192.168.178.63] (84-27-20-154.cable.dynamic.v4.ziggo.nl [84.27.20.154])
+	(Authenticated sender: jeroen@myspectrum.nl)
+	by yellow.myspectrum.nl (Postfix) with ESMTPSA id 8F736200E2;
+	Wed, 21 May 2025 07:39:11 +0000 (UTC)
+Authentication-Results: yellow.myspectrum.nl;
+	auth=pass smtp.auth=jeroen@myspectrum.nl smtp.mailfrom=jeroen@myspectrum.nl
+Message-ID: <4568b2f3-6231-4bc4-be50-184bdef4050c@myspectrum.nl>
+Date: Wed, 21 May 2025 09:39:10 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-oe][PATCH 2/2] socketcand: add recipe
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org,
+ marc Kleine-Budde <mkl@pengutronix.de>,
+ Jeroen Hofstee <jhofstee@victronenergy.com>
+References: <20250519141525.3708957-1-jeroen@myspectrum.nl>
+ <20250519141525.3708957-2-jeroen@myspectrum.nl>
+ <CAMKF1sr_Ss+P2XnuwnJZ+5ZoJY_68+q-5Q0UwJfpR6XBaxsEbw@mail.gmail.com>
+From: "Jeroen Hofstee" <jeroen@myspectrum.nl>
+In-Reply-To: <CAMKF1sr_Ss+P2XnuwnJZ+5ZoJY_68+q-5Q0UwJfpR6XBaxsEbw@mail.gmail.com>
+X-Scanned-By: ClueGetter at submission15.mail.transip.nl
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=transip-a; d=myspectrum.nl; t=1747813153; h=from:subject:to:cc:
+ references:in-reply-to:date:mime-version:content-type;
+ bh=mXgt6bY0+b8s/kaCij0i+frS9g9e5PESFllQCBVbzr0=;
+ b=GQXbs85r9E5+f9zZOYLp8WZ2058xEVXhZJTtO+JBGKwyw7rcRl8xxMj4ppDzJRvggl9EwX
+ S84q1Hrw8ToeWib1C36bm7RcQTns+oUQV29crSOQ844rs41VJUqh5xsDRlyfXWaznutM6Z
+ VkCHkRO58VGKXA1Rb6Ewa/PQv9VWLExGoPc+uWlbxxzeGItn9uGcxZNyretj0KVVj8RILY
+ fwO+vcTrRHH79Nz7CO1D0jkKKWwWs+RXpRHXrKo23aFQsQU7Au/SjBTFNa0pZ2Be8dAj6S
+ 6kkx+gLJEIvb+13EbE2omiFSm8+5Yc494eCcKnSxNdrhk47fKX4OnQYth03r+A==
+X-Report-Abuse-To: abuse@transip.nl
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 09:00:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117569
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 13:19:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117570
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+That is odd, I will have a look what is happening there.
 
-Changelog:
-==========
-- Add a missing quote in a TOML example @ config.rst
-- Add colour to GitHub Actions CI logs
-- Fix using deprecated virtualenv option --wheel
-- Fix custom HelpFormatter for Python 3.14
-- Drop support for EOL Python 3.8
-- Test with Python 3.14
-- Fix for tox4 regression issue with setenv file and substitutions
-- Feat: free-threaded python support
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../python/{python3-tox_4.25.0.bb => python3-tox_4.26.0.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-tox_4.25.0.bb => python3-tox_4.26.0.bb} (92%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-tox_4.25.0.bb b/meta-python/recipes-devtools/python/python3-tox_4.26.0.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-tox_4.25.0.bb
-rename to meta-python/recipes-devtools/python/python3-tox_4.26.0.bb
-index c7a7d2e29c..7062a5fcee 100644
---- a/meta-python/recipes-devtools/python/python3-tox_4.25.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-tox_4.26.0.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://tox.readthedocs.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
- 
--SRC_URI[sha256sum] = "dd67f030317b80722cf52b246ff42aafd3ed27ddf331c415612d084304cf5e52"
-+SRC_URI[sha256sum] = "a83b3b67b0159fa58e44e646505079e35a43317a62d2ae94725e0586266faeca"
- 
- BBCLASSEXTEND = "native nativesdk"
- inherit pypi python_hatchling
--- 
-2.43.0
-
+On 5/21/25 09:17, Khem Raj wrote:
+> Fails to build with gcc-15 -
+> https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/2442453/raw_inl=
+ine
+>
+> On Mon, May 19, 2025 at 1:34=E2=80=AFPM jeroen via lists.openembedded.org
+> <jeroen=3Dmyspectrum.nl@lists.openembedded.org> wrote:
+>> From: Jeroen Hofstee <jhofstee@victronenergy.com>
+>>
+>> Socketcand allows to transfer socketcan messages over tcp/ip.
+>>
+>> Signed-off-by: Jeroen Hofstee <jhofstee@victronenergy.com>
+>> ---
+>>   .../recipes-extended/socketcan/socketcand_git.bb | 16 ++++++++++++++++
+>>   1 file changed, 16 insertions(+)
+>>   create mode 100644 meta-oe/recipes-extended/socketcan/socketcand_git.b=
+b
+>>
+>> diff --git a/meta-oe/recipes-extended/socketcan/socketcand_git.bb b/meta=
+-oe/recipes-extended/socketcan/socketcand_git.bb
+>> new file mode 100644
+>> index 0000000000..764a87f874
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/socketcan/socketcand_git.bb
+>> @@ -0,0 +1,16 @@
+>> +SUMMARY =3D "Socketcand, socketcan over tcp/ip"
+>> +LICENSE =3D "GPL-2.0-only | BSD-3-Clause"
+>> +LIC_FILES_CHKSUM =3D " \
+>> +    file://LICENSES/BSD-3-Clause;md5=3D4c00cf8b0a04a9441d8fa24850231d00=
+ \
+>> +    file://LICENSES/GPL-2.0-only.txt;md5=3Df9d20a453221a1b7e32ae84694da=
+2c37 \
+>> +"
+>> +
+>> +SRC_URI =3D "git://github.com/linux-can/socketcand;branch=3Dmaster;prot=
+ocol=3Dhttps"
+>> +SRCREV =3D "7b5e91ec656b33c325db2f9136daebb9e357bb65"
+>> +S =3D "${WORKDIR}/git"
+>> +
+>> +inherit meson pkgconfig
+>> +
+>> +PACKAGECONFIG ?=3D "libconfig libsocketcan"
+>> +PACKAGECONFIG[libconfig] =3D "-Dlibconfig=3Dtrue,-Dlibconfig=3Dfalse,li=
+bconfig"
+>> +PACKAGECONFIG[libsocketcan] =3D "-Dlibsocketcan=3Dtrue,-Dlibsocketcan=
+=3Dfalse,libsocketcan"
+>> --
+>> 2.43.0
+>>
+>>
+>>=20
+>>
 
