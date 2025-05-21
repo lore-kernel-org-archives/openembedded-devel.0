@@ -1,83 +1,279 @@
-Return-Path: <chris.paterson2@renesas.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F13DAC3DA6D
-	for <webhook@archiver.kernel.org>; Tue, 20 May 2025 21:52:54 +0000 (UTC)
-Received: from relmlie5.idc.renesas.com (relmlie5.idc.renesas.com [210.160.252.171])
- by mx.groups.io with SMTP id smtpd.web10.2991.1747777965115471228
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEE04C54E71
+	for <webhook@archiver.kernel.org>; Wed, 21 May 2025 06:39:24 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web10.4898.1747809558295382713
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 May 2025 14:52:45 -0700
+ Tue, 20 May 2025 23:39:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: renesas.com, ip: 210.160.252.171, mailfrom: chris.paterson2@renesas.com)
-X-CSE-ConnectionGUID: JiAvP/4iTn2BZr4uwt9RPA==
-X-CSE-MsgGUID: afixUTXGSzCs2gXPlHLvxg==
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
-  by relmlie5.idc.renesas.com with ESMTP; 21 May 2025 06:52:43 +0900
-Received: from spl2-146.localdomain (unknown [10.226.92.154])
-	by relmlir6.idc.renesas.com (Postfix) with ESMTP id A8300409DB03;
-	Wed, 21 May 2025 06:52:42 +0900 (JST)
-From: Chris Paterson <chris.paterson2@renesas.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Chris Paterson <chris.paterson2@renesas.com>
-Subject: [meta-oe][PATCH] smarty: Drop allarch
-Date: Tue, 20 May 2025 22:52:36 +0100
-Message-ID: <20250520215237.454574-1-chris.paterson2@renesas.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@mvista.com header.s=google header.b=dbamkesc;
+ spf=pass (domain: mvista.com, ip: 209.85.218.44, mailfrom: vanusuri@mvista.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-ac2bb7ca40bso1074759966b.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 23:39:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1747809556; x=1748414356; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=E5D2SNJ3tIw0Zs6uyWqW1dm9aYpqiP4edDXEtTpjofI=;
+        b=dbamkescnP5xNL9kBEt31JC/P4fuHA67vx5+F1OjgzpCPkw3lnGrFZhgw4GWKyD4fx
+         By0EkeRJ/0QOfmczNQG1e4k6KLVwOwiVZbRgQCrwQxVonECyhFQnjpiutQHJsTysduB9
+         JXfM+Ao8DNLHcRr3ewHec0OKyP0874anwfJnc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747809556; x=1748414356;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=E5D2SNJ3tIw0Zs6uyWqW1dm9aYpqiP4edDXEtTpjofI=;
+        b=mFghdDdtvt4ETXo8VJP9q6WLS8n2EI/oluxnttEsfZuA3vvxGxttI2BcGRyP1sOpfZ
+         ieHscbjsgB+fn95P5LAXa9WqKqurP+Bcbts52h8M01i3Q8/GmPo96F9B/l7PzyKU8L3Q
+         nHLeEkrsyi1feAFk1ABtoy55ejil21Xmh8HnnxY5mTZHLQ/wo/kaWBKrOISVBQ8ddUXq
+         FA4R8xXG7taIaS3iQUIYZ6rxUS5f7n0yfqSKiPhR6uT4vGpVDx4Sf6byf0RaLGoYekZy
+         wiEwRd5dG2sjEv/+Zh4wAm0ltBU+9H3GwlyxFvVp7vOAeU0KQ6siwgsBWkNn2rYKgyy/
+         MLOQ==
+X-Gm-Message-State: AOJu0Yzo0DiTYObrbBYXgBt/z9KiUgtAwu+y4Y8dy1K2SxliZWLU8jhO
+	HwJCjq2qycBavB+VjC3KSv8a/rmwm4Dqh0UbwLCsD+SylaM10rmtUj0XMMUJ4dKIj7bBN5Gcd6I
+	weUqwd0U2lFfB9T/z1VA2GDQPTOB0UND55xI5Gw3u1lHdZtynnExBbfg=
+X-Gm-Gg: ASbGncsogmxllPt6gaJ+cQ+/WNlPKs2yZRHhuyutyQ9s2VOl2WoH7Y5EStWGXCgF8KH
+	Wf8RLadpZs9+Az9O4cBn4FmHtOZ1Lnc6RS66t2FRWrNqkDi2DC7pJmwom3WoOJC8BAveBQpkqgz
+	5fuKC41ebZJWMM31Xl558Nh5uIic7QrLoKSA==
+X-Google-Smtp-Source: AGHT+IEW/pMS53C/UBG5Gf4bi5/VNbQo54S3ZJiyM7irSdusGqed73aFgztBmH4yFqug3XYPDPcGAluLjw5p6sl2uLo=
+X-Received: by 2002:a17:907:d86:b0:ad2:55e4:454e with SMTP id
+ a640c23a62f3a-ad52d5e07f2mr1976216066b.58.1747809555580; Tue, 20 May 2025
+ 23:39:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250507125553.1421417-1-vanusuri@mvista.com>
+In-Reply-To: <20250507125553.1421417-1-vanusuri@mvista.com>
+From: Vijay Anusuri <vanusuri@mvista.com>
+Date: Wed, 21 May 2025 12:09:03 +0530
+X-Gm-Features: AX0GCFuCKEGwWaRvGXpAVCNZoGxT7E8spQdGRBcXy-oVprXfFkhSkVHPpkAMl48
+Message-ID: <CANQUz18fGcRtcSHYQo1p0JtaD_4me8Ryqr_8rOLRQHHFxGnd4A@mail.gmail.com>
+Subject: Re: [oe][meta-networking][scarthgap][PATCH] proftpd: Fix CVE-2024-57392
+To: openembedded-devel@lists.openembedded.org
+Cc: Armin Kuster <akuster808@gmail.com>, Khem Raj <raj.khem@gmail.com>
+Content-Type: multipart/alternative; boundary="000000000000b21c0506359f9fdb"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 May 2025 21:52:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117522
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 06:39:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117524
 
-allarch is causing issues when running yocto-layer-check for
-test_machine_signatures on a BSP layer that depends on meta-oe:
+--000000000000b21c0506359f9fdb
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-bitbake-diffsigs -t smarty do_package_qa -s 416787047ca76d43b094860cf617234f957d11895e7b7be20cbe9203289f27e1 1e482ffc1ead26bcd1f89d4dcf92e497dd6223933941b3ec6e483cb0072c9f5d
-Hash for task dependency php:do_packagedata changed from 6bfffcbbcd4507bd0be6cf3138583b92d82e75099c13dcf58363aaa938ed6f9a to 24c5373ca06af905e35fa48b7ca3477283add52fc54348fee9dd5a28efd1bc05
-Hash for task dependency php:do_package changed from cc9a8c60aeb862dd19eda30bd6ed137beb2ddd8b5b730a8b996fc58681a2ccdd to e8d7465054669b47fcf933f060e1fb69a3871d1d1e3d5b9a9610644edd17d2a8
-Hash for task dependency bzip2:do_packagedata changed from c00269772615a22d528f4205b4a1ce88a2325c9acd08de20445d20e22e255b1c to c3629ef771a2b92ed5eb9c36cffd96557537542e2bae0568e191225af0c5f4fc
-Hash for task dependency bzip2:do_package changed from bf71dc096cc85a6f6cdddebb908709f47b55ed8401a7f56fc7810484f8d0a226 to 3326e837bd452b74e32ab6b4f96fca7ed69e4d5cbbdd57acc6c9325201638cc4
-Hash for task dependency bzip2:do_install changed from 9e253b0c997975295046712d52a305e50d73148a00b6970aa39d5e548d66dc91 to a78a2933308498a16e713a934c1cc59480d5fd4c8bedf6b055c2ef6608836f78
-Hash for task dependency bzip2:do_compile changed from b515ce5b36cc71307ce02f27a4b5187482acfeeddc74e6679c60ebef46ab6e1d to fe7f086dbf72dc1924bf9b4f7ddd54e519627fd7782434b50f67b245ce72073f
-Hash for task dependency bzip2:do_configure changed from 52680e9abaad7c7ec1ba6098f965bfd991924a5ce1a57db73725eb8917cfda31 to 3395d5acb3b7d42a4ff2cfd010d4d05c0595f91d36f8d9cd9888a367987ddb4f
-Hash for task dependency bzip2:do_deploy_source_date_epoch changed from b3cb06d6eb2fcd84f94c4f66c8e68dcb4f277622e1e3e5809fe2ea02ab589b31 to a6eade80d249c35f50b8b4d7ba5d72ccaed07068dde6529a5f219b918a7c5294
-  basehash changed from f275277525924e477f47fb1b0bd4eb782ef2818fa2bd930159cd5ae5960f1e91 to 7aaec6b4c1f6b5ce5726d99f3a040678c1e49a5aa6f2f22d28503563b8e6fb32
-  Variable TUNE_CCARGS value changed:
-  " [--mcpu=cortex-a57.cortex-a53+crc-] {+-mcpu=cortex-a57+crc+} -mbranch-protection=standard"
+Hi Team,
 
-allarch was introduced to smarty in
-0f33416ad038 ("smarty: update 4.5.5 -> 5.4.2") which was first introduced
-for Walnascar hence the issue wasn't caught until now.
+Any update on this ?
 
-Removing the allarch inheritance fixes the issue.
+Thanks & Regards,
+Vijay
 
-Also remove extra whitespace after comment.
+On Wed, May 7, 2025 at 6:26=E2=80=AFPM <vanusuri@mvista.com> wrote:
 
-Link: https://lists.openembedded.org/g/openembedded-devel/topic/issue_meta_oe_walnascar/113168928
-Signed-off-by: Chris Paterson <chris.paterson2@renesas.com>
----
- meta-oe/recipes-support/smarty/smarty_5.4.5.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+> From: Vijay Anusuri <vanusuri@mvista.com>
+>
+> Upstream-Status: Backport from
+> https://github.com/proftpd/proftpd/commit/981a37916fdb7b73435c6d5cdb01428=
+b2269427d
+>
+> Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+> ---
+>  .../proftpd/files/CVE-2024-57392.patch        | 42 +++++++++++++++++++
+>  .../recipes-daemons/proftpd/proftpd_1.3.7c.bb |  1 +
+>  2 files changed, 43 insertions(+)
+>  create mode 100644
+> meta-networking/recipes-daemons/proftpd/files/CVE-2024-57392.patch
+>
+> diff --git
+> a/meta-networking/recipes-daemons/proftpd/files/CVE-2024-57392.patch
+> b/meta-networking/recipes-daemons/proftpd/files/CVE-2024-57392.patch
+> new file mode 100644
+> index 0000000000..0b50175a55
+> --- /dev/null
+> +++ b/meta-networking/recipes-daemons/proftpd/files/CVE-2024-57392.patch
+> @@ -0,0 +1,42 @@
+> +From 981a37916fdb7b73435c6d5cdb01428b2269427d Mon Sep 17 00:00:00 2001
+> +From: TJ Saunders <tj@castaglia.org>
+> +Date: Sun, 9 Feb 2025 12:14:25 -0800
+> +Subject: [PATCH] Issue #1866: Some of the fuzzing tests submitted in the
+> + advisory ran into existing null pointer dereferences (not buffer
+> overflows);
+> + let's correct them. (#1867)
+> +
+> +Upstream-Status: Backport [
+> https://github.com/proftpd/proftpd/commit/981a37916fdb7b73435c6d5cdb01428=
+b2269427d
+> ]
+> +CVE: CVE-2024-57392
+> +Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+> +---
+> + modules/mod_ls.c | 7 +++++--
+> + 1 file changed, 5 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/modules/mod_ls.c b/modules/mod_ls.c
+> +index 45a3187bd..f7abfe540 100644
+> +--- a/modules/mod_ls.c
+> ++++ b/modules/mod_ls.c
+> +@@ -349,7 +349,8 @@ static int sendline(int flags, char *fmt, ...) {
+> +           errno !=3D 0) {
+> +         int xerrno =3D errno;
+> +
+> +-        if (session.d !=3D NULL) {
+> ++        if (session.d !=3D NULL &&
+> ++          session.d->outstrm !=3D NULL) {
+> +           xerrno =3D PR_NETIO_ERRNO(session.d->outstrm);
+> +         }
+> +
+> +@@ -1039,7 +1040,9 @@ static int outputfiles(cmd_rec *cmd) {
+> +     return res;
+> +   }
+> +
+> +-  tail->down =3D NULL;
+> ++  if (tail !=3D NULL) {
+> ++    tail->down =3D NULL;
+> ++  }
+> +   tail =3D NULL;
+> +   colwidth =3D (colwidth | 7) + 1;
+> +   if (opt_l || !opt_C) {
+> +--
+> +2.25.1
+> +
+> diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+> b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+> index ecd2777247..b45cb6aaec 100644
+> --- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+> +++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+> @@ -15,6 +15,7 @@ SRC_URI =3D "git://
+> github.com/proftpd/proftpd.git;branch=3D${BRANCH};protocol=3Dhttps
+> <http://github.com/proftpd/proftpd.git;branch=3D$%7BBRANCH%7D;protocol=3D=
+https>
+>             file://contrib.patch  \
+>             file://build_fixup.patch \
+>             file://proftpd.service \
+> +           file://CVE-2024-57392.patch \
+>             "
+>
+>  S =3D "${WORKDIR}/git"
+> --
+> 2.25.1
+>
+>
 
-diff --git a/meta-oe/recipes-support/smarty/smarty_5.4.5.bb b/meta-oe/recipes-support/smarty/smarty_5.4.5.bb
-index 7072641d4585..37336ff5d70e 100644
---- a/meta-oe/recipes-support/smarty/smarty_5.4.5.bb
-+++ b/meta-oe/recipes-support/smarty/smarty_5.4.5.bb
-@@ -18,9 +18,7 @@ S = "${UNPACKDIR}/git"
- 
- INHIBIT_DEFAULT_DEPS = "1"
- 
--inherit allarch
--
--# `make clean` removes files, they can't be rebuild with `make all` 
-+# `make clean` removes files, they can't be rebuild with `make all`
- CLEANBROKEN = "1"
- 
- do_configure[noexec] = "1"
--- 
-2.43.0
+--000000000000b21c0506359f9fdb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div><div><div>Hi Team,<br><br></div>Any update on this ?<=
+br><br></div>Thanks &amp;=C2=A0Regards,<br></div>Vijay</div><br><div class=
+=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr=
+">On Wed, May 7, 2025 at 6:26=E2=80=AFPM &lt;<a href=3D"mailto:vanusuri@mvi=
+sta.com">vanusuri@mvista.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">From: Vijay Anusuri &lt;<a href=3D"mailto:vanus=
+uri@mvista.com" target=3D"_blank">vanusuri@mvista.com</a>&gt;<br>
+<br>
+Upstream-Status: Backport from <a href=3D"https://github.com/proftpd/proftp=
+d/commit/981a37916fdb7b73435c6d5cdb01428b2269427d" rel=3D"noreferrer" targe=
+t=3D"_blank">https://github.com/proftpd/proftpd/commit/981a37916fdb7b73435c=
+6d5cdb01428b2269427d</a><br>
+<br>
+Signed-off-by: Vijay Anusuri &lt;<a href=3D"mailto:vanusuri@mvista.com" tar=
+get=3D"_blank">vanusuri@mvista.com</a>&gt;<br>
+---<br>
+=C2=A0.../proftpd/files/CVE-2024-57392.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 4=
+2 +++++++++++++++++++<br>
+=C2=A0.../recipes-daemons/proftpd/<a href=3D"http://proftpd_1.3.7c.bb" rel=
+=3D"noreferrer" target=3D"_blank">proftpd_1.3.7c.bb</a> |=C2=A0 1 +<br>
+=C2=A02 files changed, 43 insertions(+)<br>
+=C2=A0create mode 100644 meta-networking/recipes-daemons/proftpd/files/CVE-=
+2024-57392.patch<br>
+<br>
+diff --git a/meta-networking/recipes-daemons/proftpd/files/CVE-2024-57392.p=
+atch b/meta-networking/recipes-daemons/proftpd/files/CVE-2024-57392.patch<b=
+r>
+new file mode 100644<br>
+index 0000000000..0b50175a55<br>
+--- /dev/null<br>
++++ b/meta-networking/recipes-daemons/proftpd/files/CVE-2024-57392.patch<br=
+>
+@@ -0,0 +1,42 @@<br>
++From 981a37916fdb7b73435c6d5cdb01428b2269427d Mon Sep 17 00:00:00 2001<br>
++From: TJ Saunders &lt;<a href=3D"mailto:tj@castaglia.org" target=3D"_blank=
+">tj@castaglia.org</a>&gt;<br>
++Date: Sun, 9 Feb 2025 12:14:25 -0800<br>
++Subject: [PATCH] Issue #1866: Some of the fuzzing tests submitted in the<b=
+r>
++ advisory ran into existing null pointer dereferences (not buffer overflow=
+s);<br>
++ let&#39;s correct them. (#1867)<br>
++<br>
++Upstream-Status: Backport [<a href=3D"https://github.com/proftpd/proftpd/c=
+ommit/981a37916fdb7b73435c6d5cdb01428b2269427d" rel=3D"noreferrer" target=
+=3D"_blank">https://github.com/proftpd/proftpd/commit/981a37916fdb7b73435c6=
+d5cdb01428b2269427d</a>]<br>
++CVE: CVE-2024-57392<br>
++Signed-off-by: Vijay Anusuri &lt;<a href=3D"mailto:vanusuri@mvista.com" ta=
+rget=3D"_blank">vanusuri@mvista.com</a>&gt;<br>
++---<br>
++ modules/mod_ls.c | 7 +++++--<br>
++ 1 file changed, 5 insertions(+), 2 deletions(-)<br>
++<br>
++diff --git a/modules/mod_ls.c b/modules/mod_ls.c<br>
++index 45a3187bd..f7abfe540 100644<br>
++--- a/modules/mod_ls.c<br>
+++++ b/modules/mod_ls.c<br>
++@@ -349,7 +349,8 @@ static int sendline(int flags, char *fmt, ...) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0errno !=3D 0) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int xerrno =3D errno;<br>
++ <br>
++-=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (session.d !=3D NULL) {<br>
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (session.d !=3D NULL &amp;&amp;<br>
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 session.d-&gt;outstrm !=3D NULL) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0xerrno =3D PR_NETIO_ERRNO(session=
+.d-&gt;outstrm);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
++ <br>
++@@ -1039,7 +1040,9 @@ static int outputfiles(cmd_rec *cmd) {<br>
++=C2=A0 =C2=A0 =C2=A0return res;<br>
++=C2=A0 =C2=A0}<br>
++ <br>
++-=C2=A0 tail-&gt;down =3D NULL;<br>
+++=C2=A0 if (tail !=3D NULL) {<br>
+++=C2=A0 =C2=A0 tail-&gt;down =3D NULL;<br>
+++=C2=A0 }<br>
++=C2=A0 =C2=A0tail =3D NULL;<br>
++=C2=A0 =C2=A0colwidth =3D (colwidth | 7) + 1;<br>
++=C2=A0 =C2=A0if (opt_l || !opt_C) {<br>
++-- <br>
++2.25.1<br>
++<br>
+diff --git a/meta-networking/recipes-daemons/proftpd/<a href=3D"http://prof=
+tpd_1.3.7c.bb" rel=3D"noreferrer" target=3D"_blank">proftpd_1.3.7c.bb</a> b=
+/meta-networking/recipes-daemons/proftpd/<a href=3D"http://proftpd_1.3.7c.b=
+b" rel=3D"noreferrer" target=3D"_blank">proftpd_1.3.7c.bb</a><br>
+index ecd2777247..b45cb6aaec 100644<br>
+--- a/meta-networking/recipes-daemons/proftpd/<a href=3D"http://proftpd_1.3=
+.7c.bb" rel=3D"noreferrer" target=3D"_blank">proftpd_1.3.7c.bb</a><br>
++++ b/meta-networking/recipes-daemons/proftpd/<a href=3D"http://proftpd_1.3=
+.7c.bb" rel=3D"noreferrer" target=3D"_blank">proftpd_1.3.7c.bb</a><br>
+@@ -15,6 +15,7 @@ SRC_URI =3D &quot;git://<a href=3D"http://github.com/prof=
+tpd/proftpd.git;branch=3D$%7BBRANCH%7D;protocol=3Dhttps" rel=3D"noreferrer"=
+ target=3D"_blank">github.com/proftpd/proftpd.git;branch=3D${BRANCH};protoc=
+ol=3Dhttps</a><br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://contrib.patch=C2=A0 \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://build_fixup.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://proftpd.service \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://CVE-2024-57392.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
+<br>
+=C2=A0S =3D &quot;${WORKDIR}/git&quot;<br>
+-- <br>
+2.25.1<br>
+<br>
+</blockquote></div>
+
+--000000000000b21c0506359f9fdb--
 
