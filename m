@@ -2,197 +2,209 @@ Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA649C54E90
-	for <webhook@archiver.kernel.org>; Thu, 22 May 2025 12:46:19 +0000 (UTC)
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
- by mx.groups.io with SMTP id smtpd.web11.23156.1747917969137697588
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1A12C54E65
+	for <webhook@archiver.kernel.org>; Thu, 22 May 2025 12:50:39 +0000 (UTC)
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com [209.85.222.180])
+ by mx.groups.io with SMTP id smtpd.web10.22960.1747918233151938210
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 May 2025 05:46:09 -0700
+ Thu, 22 May 2025 05:50:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20230601.gappssmtp.com header.s=20230601 header.b=VX0lwy3z;
- spf=pass (domain: baylibre.com, ip: 209.85.222.178, mailfrom: tgamblin@baylibre.com)
-Received: by mail-qk1-f178.google.com with SMTP id af79cd13be357-7c5b2472969so841078685a.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 May 2025 05:46:08 -0700 (PDT)
+ dkim=pass header.i=@baylibre-com.20230601.gappssmtp.com header.s=20230601 header.b=SeDV4JRG;
+ spf=pass (domain: baylibre.com, ip: 209.85.222.180, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qk1-f180.google.com with SMTP id af79cd13be357-7c5568355ffso716229185a.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 May 2025 05:50:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1747917967; x=1748522767; darn=lists.openembedded.org;
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1747918231; x=1748523031; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hry6sYgRKjnuuTJJFegA5JZ+IlNB60ezflpnXI3W7Ng=;
-        b=VX0lwy3zflXdc6idzyah2AmfbzuFpoSuuXgiQ9Mjp4sZrEQgL1Pr/c0Ur2cQtnstF+
-         wxZeNjm7B6fjAbSIiq2/UYJPBX8EsytXuG0nAmTKb44JLQk1nmB9QKqcfBUfXZGwtEo6
-         Ca+lg3/jbRBp1u3bhaW/vTrHRFHEZ8uA927Lb94EHqOYa1roYq6GJhrtPo2YQgIl4kuV
-         yPGjnMRWZlwUmTs53i1Ujw9mN7N9r9rTNIUfQ0FriSmhZPOcgBkgBfCZjNZtXhOlZDpY
-         FZ/46WxNvAiwruDMjgcbXx4HjkpkQiaCrwP7oYD4f7gjxMJLGLiD/GmuDeQPuyvc9jcs
-         oacQ==
+        bh=AA6tG5ecxdDc6qnfzbXwgk7YB+Tk4LpTIgCMD1uQHow=;
+        b=SeDV4JRGCwbUmXGzKt0QlII8bIYLUMZKZ7jpy922nMBO5eWn5DbktioBcPL8yJW2+C
+         J2nlqu0j188p7s5iqtrTdXXdhW20UUu583R2AWwS5EZ8LJzGzPKWVA1Msp5EtxGoWruF
+         qED6Y1BWn5TN3VdJc21Ky44vQHQ2czaBf2U62W1t/vRMflyN3exmJp0bLqNS/pxev9Ol
+         luXBLXGfmpyvaJbGPe3JHsutOzhAI9+eppT4quc8soAPOZqr9ZMNaK6w9PmkmcY54Ayw
+         /f3XQmYasCaDzMHHeWjnvfrdn7k/WTgY7d1iQzBH7YMnAw2j8jzHp1SKs/+KmP/IHeq7
+         bkpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747917967; x=1748522767;
+        d=1e100.net; s=20230601; t=1747918231; x=1748523031;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=hry6sYgRKjnuuTJJFegA5JZ+IlNB60ezflpnXI3W7Ng=;
-        b=pntjaIXZcPgcYGPetvacW5yAqE3uFtQrpBJ2fZ4+cZPZhq866jjzxRThmw542z4qI3
-         iQikH+e6hvDhR1v/U6B/tYQBN5SnERiuCDVSqinuZfmUY1df3A++98Y1ybT7pGd9xi1/
-         YKSd+0vwKlmenOqVUzbY55kjfDXK7g9Oz3/k9jT/yE+Y+vprs8lS/SGgIWfSCtGt3FYi
-         GXF6NhQ1rb9Y8LQDpq9jrOhJOCsPfIY2dw3Oi0L8Tkcuq/VHh9slqmXQ+uJCHMhmLiNt
-         bwp0hG6j8PrLTsuIJJby9QPlLfqPY9nevcPnhOhWGeHZxF0Uqr7pb4WpvFn2CIr2k9si
-         zyQg==
-X-Gm-Message-State: AOJu0Yx3xPLCnIVl0umesKonZ5VraBn7N6aUR1nHQDsO/K19lkoc+Qpt
-	VOD9r+e605T5UXMhpiQwnZ448+C3uSHCLZOC7WEw94P9vB/1hR3AQTmMPwujbTkrnQHe10FTmeq
-	3abNRTBo=
-X-Gm-Gg: ASbGncttTd5wB45+PnsJauv6XWPvvoOR/jRVD6JYWLfcIHDunFRFxDg+EH2/oO4eBJ9
-	eF9KJDkGiuMuuYLDW7kDNtqTqMGJ4lBzj/9WIzJ20PK++mm+xatBTZfmjc80XAnHZppjqvHDOCH
-	avaHHYy+nZj9SA6jshUmP98QzTUuL2dNYQ9Ax3l1gTPuMGxYp4tEOtUOWQe6wrJk6lwhtTdR5QM
-	7TgDzKMwq1jKYm1CvtXa98cv5b8yGM6VvVLCo+oWchteXnawW5G7z5KN/XC/sw3iKCbsbkg6I/P
-	Tnl9pszxIzDm5uhDeie12WJ8IJLR66Wh+DgTRIdhlY1IAZ4YtDGeNTiQO2elO4urulsOVtZRofH
-	Dmct+YPJqxPc=
-X-Google-Smtp-Source: AGHT+IHNJS1kQixtX8RCETq7RS6Mvuv2DaKhffXtC8iX5IlbuRqxUcHLaOdswufzhU2QOVlwjYllHg==
-X-Received: by 2002:ad4:4ee1:0:b0:6ec:edf9:4658 with SMTP id 6a1803df08f44-6f8b0844130mr415143416d6.18.1747917967148;
-        Thu, 22 May 2025 05:46:07 -0700 (PDT)
+        bh=AA6tG5ecxdDc6qnfzbXwgk7YB+Tk4LpTIgCMD1uQHow=;
+        b=P9ZyvwdJEuvzAL8PxOUnT5HBYpSmmxxcafB5Yk56Zv3BQbr0I3Bo9Qova98CMviC4B
+         i/EW2SNfecSG5I9bB0zF5hr+xXdlZsl9Fl8tvayMuos3/hdu8IzkKCCFsoM85VXx7hLN
+         Ac3lEOP5Y/vG/VeQnsEK7PfI61j3TtUDNI/jyrNtzylKrEupsOWzViQPD/f31WXhzhwq
+         SYQCO2tWh95pc/BmEasy7UcDdgHlhspEm9qMN82AD+dgicQIU5ECeYrMJ3kf/Tdhw3xa
+         F7lmdVIjl7CNaxHh5jhGKBfEM5FXJc6aCK/ByUFtftakVnbaLrbXhGA15s36FUpVkfy6
+         2L/Q==
+X-Gm-Message-State: AOJu0YwcyPvbkZ8OI8vaTReFfhfCWCyONjhSdaV24EqYiRuAx0XnP1Yf
+	aRHDxAuNQm4AoEHtiidLjoeBbXUVOCzGc9+eURB+klEpPsyzoHAWjOS92N5zd0z/MZ/lZdjp1gs
+	tatCPRxQ=
+X-Gm-Gg: ASbGncuGj6YQ09qNDM97FUUrETLtF1139CrN7VhinhUlyomTXa7A0naQrQUJTJ2PPuh
+	jtd5AjhGadMA56UamRQePbtu7EK1GfmlJ6ntdIKQomrv11UdhUw99dEiUhwtVqvsqwPtto4skco
+	EBbE0Sk3H9qKlu3wlfxvC9UoI3OaEHlOIYS61SVHEeQtIHw0SyHlBoRTfTqjMkuxSP0HEY/T27z
+	ykk2olkOxvn131SekkD+LnMGJGM6zDXDj40EZNIlPwbqFcR8qMxe8NDmxUHHt0xHvlL4V2GdN9h
+	WxWnjOeoFJixHHUBRUz1h5y3HULOjOJ8g9cwbgv6SsycmNCu+4+7749FdNFYe4X5HFOssmT6fkJ
+	+bc0Y3PL7lB8=
+X-Google-Smtp-Source: AGHT+IEyEfPAkOR2dZse03YL0JAcJgtIeeWbTaGcy8d1zOQM8lC8qAxV2gNHuuoQ+Lb32ApPEhudBA==
+X-Received: by 2002:a05:620a:4248:b0:7c5:94e0:cafb with SMTP id af79cd13be357-7cd467ac226mr4129000385a.48.1747918231569;
+        Thu, 22 May 2025 05:50:31 -0700 (PDT)
 Received: from localhost (d24-150-219-207.home.cgocable.net. [24.150.219.207])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-6f8b097b993sm98890826d6.110.2025.05.22.05.46.06
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-7cd468cc89fsm1015782485a.105.2025.05.22.05.50.30
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 May 2025 05:46:06 -0700 (PDT)
+        Thu, 22 May 2025 05:50:31 -0700 (PDT)
 From: Trevor Gamblin <tgamblin@baylibre.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-pychromecast: fix build with setuptools 80.x
-Date: Thu, 22 May 2025 08:46:05 -0400
-Message-Id: <20250522124605.754023-1-tgamblin@baylibre.com>
+Subject: [meta-python][PATCH] distutils: remove classes
+Date: Thu, 22 May 2025 08:50:29 -0400
+Message-Id: <20250522125029.754490-1-tgamblin@baylibre.com>
 X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 May 2025 12:46:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117591
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 May 2025 12:50:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117592
 
-Backport two patches to fix the pyproject.toml versions around
-setuptools. Once the next version of pychromecast is out, these should
-be removable.
+distutils is no longer in Python as of 3.12. Nothing seems to be using
+these classes in the layer, so remove them.
 
 Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
 ---
- ...s-requirement-from-79.0-65.6-to-65.6.patch | 42 +++++++++++++++++++
- ...s-requirement-from-80.0-65.6-to-65.6.patch | 42 +++++++++++++++++++
- .../python/python3-pychromecast_14.0.7.bb     |  7 +++-
- 3 files changed, 90 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-pychromecast/0001-Update-setuptools-requirement-from-79.0-65.6-to-65.6.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pychromecast/0001-Update-setuptools-requirement-from-80.0-65.6-to-65.6.patch
+ .../classes/distutils-common-base.bbclass     | 28 --------
+ meta-python/classes/distutils3-base.bbclass   |  9 ---
+ meta-python/classes/distutils3.bbclass        | 71 -------------------
+ 3 files changed, 108 deletions(-)
+ delete mode 100644 meta-python/classes/distutils-common-base.bbclass
+ delete mode 100644 meta-python/classes/distutils3-base.bbclass
+ delete mode 100644 meta-python/classes/distutils3.bbclass
 
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast/0001-Update-setuptools-requirement-from-79.0-65.6-to-65.6.patch b/meta-python/recipes-devtools/python/python3-pychromecast/0001-Update-setuptools-requirement-from-79.0-65.6-to-65.6.patch
-new file mode 100644
-index 0000000000..b0d4a88c8e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast/0001-Update-setuptools-requirement-from-79.0-65.6-to-65.6.patch
-@@ -0,0 +1,42 @@
-+From ef27075e087e139921b99729a4ec7683e42c5c4a Mon Sep 17 00:00:00 2001
-+From: "dependabot[bot]" <49699333+dependabot[bot]@users.noreply.github.com>
-+Date: Mon, 21 Apr 2025 16:34:55 +0200
-+Subject: [PATCH] Update setuptools requirement from <79.0,>=65.6 to
-+ >=65.6,<80.0 (#1056)
-+
-+Upstream-Status: Backport [https://github.com/home-assistant-libs/pychromecast/commit/ef27075e087e139921b99729a4ec7683e42c5c4a]
-+
-+Updates the requirements on [setuptools](https://github.com/pypa/setuptools) to permit the latest version.
-+- [Release notes](https://github.com/pypa/setuptools/releases)
-+- [Changelog](https://github.com/pypa/setuptools/blob/main/NEWS.rst)
-+- [Commits](https://github.com/pypa/setuptools/compare/v65.6.0...v79.0.0)
-+
-+---
-+updated-dependencies:
-+- dependency-name: setuptools
-+  dependency-version: 79.0.0
-+  dependency-type: direct:production
-+...
-+
-+Signed-off-by: dependabot[bot] <support@github.com>
-+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-+
-+Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
-+---
-+ pyproject.toml | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/pyproject.toml b/pyproject.toml
-+index 34f5dc0..88d67fe 100644
-+--- a/pyproject.toml
-++++ b/pyproject.toml
-+@@ -1,5 +1,5 @@
-+ [build-system]
-+-requires = ["setuptools>=65.6,<79.0", "wheel>=0.37.1,<0.46.0"]
-++requires = ["setuptools>=65.6,<80.0", "wheel>=0.37.1,<0.46.0"]
-+ build-backend = "setuptools.build_meta"
-+ 
-+ [project]
-+-- 
-+2.39.5
-+
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast/0001-Update-setuptools-requirement-from-80.0-65.6-to-65.6.patch b/meta-python/recipes-devtools/python/python3-pychromecast/0001-Update-setuptools-requirement-from-80.0-65.6-to-65.6.patch
-new file mode 100644
-index 0000000000..8630c1632d
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast/0001-Update-setuptools-requirement-from-80.0-65.6-to-65.6.patch
-@@ -0,0 +1,42 @@
-+From 7017a1db10a21ed97b79800e31a2f7c70abbffc3 Mon Sep 17 00:00:00 2001
-+From: "dependabot[bot]" <49699333+dependabot[bot]@users.noreply.github.com>
-+Date: Mon, 28 Apr 2025 16:43:13 +0200
-+Subject: [PATCH] Update setuptools requirement from <80.0,>=65.6 to
-+ >=65.6,<81.0 (#1060)
-+
-+Upstream-Status: Backport [https://github.com/home-assistant-libs/pychromecast/commit/7017a1db10a21ed97b79800e31a2f7c70abbffc3]
-+
-+Updates the requirements on [setuptools](https://github.com/pypa/setuptools) to permit the latest version.
-+- [Release notes](https://github.com/pypa/setuptools/releases)
-+- [Changelog](https://github.com/pypa/setuptools/blob/main/NEWS.rst)
-+- [Commits](https://github.com/pypa/setuptools/compare/v65.6.0...v80.0.0)
-+
-+---
-+updated-dependencies:
-+- dependency-name: setuptools
-+  dependency-version: 80.0.0
-+  dependency-type: direct:production
-+...
-+
-+Signed-off-by: dependabot[bot] <support@github.com>
-+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-+
-+Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
-+---
-+ pyproject.toml | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/pyproject.toml b/pyproject.toml
-+index 88d67fe..d5a518c 100644
-+--- a/pyproject.toml
-++++ b/pyproject.toml
-+@@ -1,5 +1,5 @@
-+ [build-system]
-+-requires = ["setuptools>=65.6,<80.0", "wheel>=0.37.1,<0.46.0"]
-++requires = ["setuptools>=65.6,<81.0", "wheel>=0.37.1,<0.46.0"]
-+ build-backend = "setuptools.build_meta"
-+ 
-+ [project]
-+-- 
-+2.39.5
-+
-diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_14.0.7.bb b/meta-python/recipes-devtools/python/python3-pychromecast_14.0.7.bb
-index 7bae0721db..260f6395b7 100644
---- a/meta-python/recipes-devtools/python/python3-pychromecast_14.0.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-pychromecast_14.0.7.bb
-@@ -3,7 +3,12 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
- 
--SRC_URI += "file://0001-Update-setuptools-requirement-from-78.0-65.6-to-65.6.patch"
-+SRC_URI += "\
-+            file://0001-Update-setuptools-requirement-from-78.0-65.6-to-65.6.patch \
-+            file://0001-Update-setuptools-requirement-from-79.0-65.6-to-65.6.patch \
-+            file://0001-Update-setuptools-requirement-from-80.0-65.6-to-65.6.patch \
-+"
-+
- SRC_URI[sha256sum] = "7abbae80a2c9e05b93b1a7b8b4d771bbc764d88fd5e56a566f46ac1bd3f93848"
- 
- inherit pypi python_setuptools_build_meta
+diff --git a/meta-python/classes/distutils-common-base.bbclass b/meta-python/classes/distutils-common-base.bbclass
+deleted file mode 100644
+index 59c750a3cf..0000000000
+--- a/meta-python/classes/distutils-common-base.bbclass
++++ /dev/null
+@@ -1,28 +0,0 @@
+-export STAGING_INCDIR
+-export STAGING_LIBDIR
+-
+-# LDSHARED is the ld *command* used to create shared library
+-export LDSHARED  = "${CCLD} -shared"
+-# LDXXSHARED is the ld *command* used to create shared library of C++
+-# objects
+-export LDCXXSHARED  = "${CXX} -shared"
+-# CCSHARED are the C *flags* used to create objects to go into a shared
+-# library (module)
+-export CCSHARED  = "-fPIC -DPIC"
+-# LINKFORSHARED are the flags passed to the $(CC) command that links
+-# the python executable
+-export LINKFORSHARED = "${SECURITY_CFLAGS} -Xlinker -export-dynamic"
+-
+-FILES:${PN} += "${libdir}/* ${libdir}/${PYTHON_DIR}/*"
+-
+-FILES:${PN}-staticdev += "\
+-  ${PYTHON_SITEPACKAGES_DIR}/*.a \
+-"
+-FILES:${PN}-dev += "\
+-  ${datadir}/pkgconfig \
+-  ${libdir}/pkgconfig \
+-  ${PYTHON_SITEPACKAGES_DIR}/*.la \
+-"
+-python __anonymous() {
+-    bb.warn("distutils-common-base.bbclass is deprecated, please use setuptools3-base.bbclass instead")
+-}
+diff --git a/meta-python/classes/distutils3-base.bbclass b/meta-python/classes/distutils3-base.bbclass
+deleted file mode 100644
+index d36b4c4a3e..0000000000
+--- a/meta-python/classes/distutils3-base.bbclass
++++ /dev/null
+@@ -1,9 +0,0 @@
+-DEPENDS:append:class-target = " python3-native python3"
+-DEPENDS:append:class-nativesdk = " python3-native python3"
+-RDEPENDS:${PN} += "${@['', 'python3-core']['${CLASSOVERRIDE}' == 'class-target']}"
+-
+-inherit distutils-common-base python3native python3targetconfig
+-
+-python __anonymous() {
+-    bb.warn("distutils3-base.bbclass is deprecated, please use setuptools3-base.bbclass instead")
+-}
+diff --git a/meta-python/classes/distutils3.bbclass b/meta-python/classes/distutils3.bbclass
+deleted file mode 100644
+index 909415efa0..0000000000
+--- a/meta-python/classes/distutils3.bbclass
++++ /dev/null
+@@ -1,71 +0,0 @@
+-inherit distutils3-base
+-
+-B = "${WORKDIR}/build"
+-distutils_do_configure[cleandirs] = "${B}"
+-
+-DISTUTILS_BUILD_ARGS ?= ""
+-DISTUTILS_INSTALL_ARGS ?= "--root=${D} \
+-    --prefix=${prefix} \
+-    --install-lib=${PYTHON_SITEPACKAGES_DIR} \
+-    --install-data=${datadir}"
+-
+-DISTUTILS_PYTHON = "python3"
+-DISTUTILS_PYTHON:class-native = "nativepython3"
+-
+-DISTUTILS_SETUP_PATH ?= "${S}"
+-
+-python __anonymous() {
+-    bb.warn("distutils3.bbclass is deprecated, please use setuptools3.bbclass instead")
+-}
+-
+-distutils3_do_configure() {
+-    :
+-}
+-
+-distutils3_do_compile() {
+-        cd ${DISTUTILS_SETUP_PATH}
+-        NO_FETCH_BUILD=1 \
+-        STAGING_INCDIR=${STAGING_INCDIR} \
+-        STAGING_LIBDIR=${STAGING_LIBDIR} \
+-        ${STAGING_BINDIR_NATIVE}/python3-native/python3 setup.py \
+-        build --build-base=${B} ${DISTUTILS_BUILD_ARGS} || \
+-        bbfatal_log "'python3 setup.py build ${DISTUTILS_BUILD_ARGS}' execution failed."
+-}
+-distutils3_do_compile[vardepsexclude] = "MACHINE"
+-
+-distutils3_do_install() {
+-        cd ${DISTUTILS_SETUP_PATH}
+-        install -d ${D}${PYTHON_SITEPACKAGES_DIR}
+-        STAGING_INCDIR=${STAGING_INCDIR} \
+-        STAGING_LIBDIR=${STAGING_LIBDIR} \
+-        PYTHONPATH=${D}${PYTHON_SITEPACKAGES_DIR} \
+-        ${STAGING_BINDIR_NATIVE}/python3-native/python3 setup.py \
+-        build --build-base=${B} install --skip-build ${DISTUTILS_INSTALL_ARGS} || \
+-        bbfatal_log "'python3 setup.py install ${DISTUTILS_INSTALL_ARGS}' execution failed."
+-
+-        # support filenames with *spaces*
+-        find ${D} -name "*.py" -exec grep -q ${D} {} \; \
+-                               -exec sed -i -e s:${D}::g {} \;
+-
+-        for i in ${D}${bindir}/* ${D}${sbindir}/*; do
+-            if [ -f "$i" ]; then
+-                sed -i -e s:${PYTHON}:${USRBINPATH}/env\ ${DISTUTILS_PYTHON}:g $i
+-                sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g $i
+-            fi
+-        done
+-
+-        rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/easy-install.pth
+-
+-        #
+-        # FIXME: Bandaid against wrong datadir computation
+-        #
+-        if [ -e ${D}${datadir}/share ]; then
+-            mv -f ${D}${datadir}/share/* ${D}${datadir}/
+-            rmdir ${D}${datadir}/share
+-        fi
+-}
+-distutils3_do_install[vardepsexclude] = "MACHINE"
+-
+-EXPORT_FUNCTIONS do_configure do_compile do_install
+-
+-export LDSHARED="${CCLD} -shared"
 -- 
 2.39.5
 
