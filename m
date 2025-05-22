@@ -1,96 +1,146 @@
-Return-Path: <philip@balister.org>
+Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF464C54ED1
-	for <webhook@archiver.kernel.org>; Thu, 22 May 2025 09:56:18 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web10.15505.1747884161734751726
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EAA40C54E90
+	for <webhook@archiver.kernel.org>; Thu, 22 May 2025 10:20:48 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.20816.1747909240520957002
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 May 2025 20:22:41 -0700
+ Thu, 22 May 2025 03:20:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=nOotFsT/;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: nguyenthaithuanalg@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-742af84818cso4575809b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 May 2025 20:22:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747884160; x=1748488960; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=e9TwZS/Mn2ODMn4D19iq8GmCg10OUxCzBfrgFXa+4Y4=;
-        b=nOotFsT/dHPRx5tAW4aaoMqpaVNRzfWSnA/WstqfV4k/MN4Tk/yw8Fa02KiTuDnvN9
-         UTuUcr/AaM1OQCd8V5o5nqGWnxibYLQpBwoPo+9gw2a0LI31ie6b42UgquO10KGdO0OP
-         yGiO57kR0hsOOa6hiI9FBNj8CprbHrL9cu1ZFMCyMeG7XmZwS4CAO+tgjOTOswZXBKNZ
-         /z87p1hRfknpjQuwaW7kV2FDdeTT0xOakaMIgk5onJ+ivz8QSaRwuCZkHXrpOmbRa6H2
-         H4O3AWqprhgXruF6fyoEoD0GKB9htJOxq/Jt6FPJJSQHzEI1K5kJ6F38nI/927wNQORb
-         Nlag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747884160; x=1748488960;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=e9TwZS/Mn2ODMn4D19iq8GmCg10OUxCzBfrgFXa+4Y4=;
-        b=C9mUsVcXD3MadCLw6AAXtYVypPoK3AHAHAFLvThQUgwTF6NezJxtvYg6LOOk+/p7Ld
-         ZRE6B8LD266U632si9+/AdvO6/y7MjHUG/jR43EUmAh9lSoQ9cHDW82kqP1RrIV0L/HG
-         sH96evsGLnZcnOWeaeI/kpLrBppNsRipiQbDmSOEkpTpY6IX3wvl1M4FePakqhdExwMG
-         cqclVhuQNb9HkVl/SiXzHF5/XIzf7AobD6P+FY5VQuz6oUDd+2N2KR+rmFTeMjix/69n
-         gU8K6MEucYwWoM6csck+GQwlsiIqu8XKuTJicGZhS+ggDEnTqNxDb7RevmbRdMaSYwZ/
-         diYw==
-X-Gm-Message-State: AOJu0YyDPo6p1+ey1Bs0pCM0i7egcQO/vnv13hn1SZ+AZ4H0qqDOf0Nn
-	BCnTeeb5KSQjDkjuud5pahOkKtSUavC6jRGpXRAmjqHiglDf/v3faw3VFSlGlw==
-X-Gm-Gg: ASbGncuLqdjH2sgpW/Cliu3B2ptDVMEtbPHr78LAlHjyAhrs80a9S1GlAdiUrDcahct
-	RVnEsM4pvEAzJcf7XjxOye4FhLTjl/zQCbWUvro68bDgaAnghn0HC8WHPjQACIGcrFlEnkGknN9
-	WSaPBMpty9WUnUewHB72JhEwK1rSM3kObLgteXEeIkhhI8613QzP+Cep/muu+NZFiBxLraSLy+g
-	bWSSGx10g1zdehuJIW6xfsNASnbofPWiyBL0EftbCYU1UFvhSZuiQXNBXbOQ2Rsk3uGASHDuLCk
-	tn6RJ3W6oMe/aZ1Eu29KcxJ2vtkVmZYLOl0oJFkcjz5gl7LlV5jYKPXlHGCO5V3XmJeuzFu5ceZ
-	RetRtExuUVAsSjNY=
-X-Google-Smtp-Source: AGHT+IGorVWtVfNODkuSgkko+H9pwC38LBUJooNrKNcbiJBTPyPQ3zytRZdDAvzvOTJePhdr2jfn5A==
-X-Received: by 2002:a05:6a00:ab87:b0:73d:fefb:325 with SMTP id d2e1a72fcca58-742a9787708mr31746428b3a.5.1747884160092;
-        Wed, 21 May 2025 20:22:40 -0700 (PDT)
-Received: from localhost.localdomain ([2405:4802:9111:1040:76d4:35ff:fe85:dd7a])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-742b6c3989asm8875794b3a.122.2025.05.21.20.22.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 May 2025 20:22:39 -0700 (PDT)
-From: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
-Subject: [meta-oe][PATCH] libsimplelog: v1.0.6 -> v1.0.7
-Date: Thu, 22 May 2025 10:22:07 +0700
-Message-ID: <20250522032207.13061-1-nguyenthaithuanalg@gmail.com>
-X-Mailer: git-send-email 2.47.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=723784239f=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54M4A2qr028618
+	for <openembedded-devel@lists.openembedded.org>; Thu, 22 May 2025 10:20:39 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 46rwfx2dcn-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 22 May 2025 10:20:39 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Thu, 22 May 2025 03:20:21 -0700
+Received: from pek-lpg-core5.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Thu, 22 May 2025 03:20:20 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-initramfs][PATCH] fix broken symlink in dracut config examples
+Date: Thu, 22 May 2025 18:20:36 +0800
+Message-ID: <20250522102036.2075922-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=ObSYDgTY c=1 sm=1 tr=0 ts=682efa77 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=dt9VzEwgFbYA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=P5Pi0_c-0Di90tlZlCkA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTIyMDEwNCBTYWx0ZWRfXy8DleJYJU8vR pkx251qKx59YvStyt4rR0Oph0OaKLaO/4TcefCQwUowEOwthao+xy2ATr3XC+rz0t5l0qsJ2QWB RvLyKFmK7IgTE4kkTjd4txLrMR83GrccZ34O/4Mmi7pqhjBPoHfMBBA+8xb6heD0tovLk4fW2yU
+ 5vlHvjRsKpahTxRS65CwMg1bKmb5VLWjPIKgjeP3ICtz6K/qZ0HnCNYIT3dh6iPTjk8whsJHE5s aLaAdILL0tCqkSBQPfdhGi7A2isfZIbD3ewyY7V6hnfNSQwdqTtZac5+LfDBFQwxzU8MyxHgDLu yv21HfZ5ROKY6p0bIwDyN4TcHU6zAwT+smBRWpRjw08gZMoSeyIPulrgGEhE5xKSSiU3Z/A9acZ
+ qxMcG5NMQT8IdL+01sq2ajHSQSrZaTsYXPTDCksLw9044vnW3IfNlnqO/69wWF0bYezVwwQ0
+X-Proofpoint-GUID: 63BEnhOLKuyjJqyJtMVOJLXQJ_pj95Tk
+X-Proofpoint-ORIG-GUID: 63BEnhOLKuyjJqyJtMVOJLXQJ_pj95Tk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-22_05,2025-05-22_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 lowpriorityscore=0
+ bulkscore=0 spamscore=0 mlxlogscore=999 phishscore=0 malwarescore=0
+ adultscore=0 priorityscore=1501 suspectscore=0 clxscore=1015
+ impostorscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505160000
+ definitions=main-2505220104
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 May 2025 09:56:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117580
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 May 2025 10:20:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117582
 
-- Add "spl_err_txt", to get text of error code.
+Due to commit [1], it installs dracut config examples under /usr.
+But while enable_test=no, the symlink of test in dracut config is broken
+...
+root@qemux86-64:~# ls /usr/lib/dracut/dracut.conf.d/test*  -ahl
+lrwxrwxrwx 1 root root 27 Apr  5  2011 /usr/lib/dracut/dracut.conf.d/test -> ../test/dracut.conf.d/test/
+lrwxrwxrwx 1 root root 36 Apr  5  2011 /usr/lib/dracut/dracut.conf.d/test-makeroot -> ../test/dracut.conf.d/test-makeroot/
+lrwxrwxrwx 1 root root 31 Apr  5  2011 /usr/lib/dracut/dracut.conf.d/test-root -> ../test/dracut.conf.d/test-root
+root@qemux86-64:~# realpath /usr/lib/dracut/dracut.conf.d/test*
+realpath: /usr/lib/dracut/dracut.conf.d/test: No such file or directory
+realpath: /usr/lib/dracut/dracut.conf.d/test-makeroot: No such file or directory
+realpath: /usr/lib/dracut/dracut.conf.d/test-root: No such file or directory
+...
 
-Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
+This commit cleans up test symlink if enable_test=no
+
+[1] https://github.com/dracut-ng/dracut-ng/commit/0d369e3e30935dffe48dfff1e90463868e7f804a
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../{libsimplelog_1.0.6.bb => libsimplelog_1.0.7.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libsimplelog/{libsimplelog_1.0.6.bb => libsimplelog_1.0.7.bb} (92%)
+ ...en-symlink-in-dracut-config-examples.patch | 44 +++++++++++++++++++
+ .../recipes-devtools/dracut/dracut_106.bb     |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-initramfs/recipes-devtools/dracut/dracut/0001-fix-broken-symlink-in-dracut-config-examples.patch
 
-diff --git a/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.6.bb b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.7.bb
-similarity index 92%
-rename from meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.6.bb
-rename to meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.7.bb
-index 0aacbcd2cc..0302f7c89f 100644
---- a/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.6.bb
-+++ b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.7.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22cdd382a6275cb4c2e75c517952ac7c"
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/0001-fix-broken-symlink-in-dracut-config-examples.patch b/meta-initramfs/recipes-devtools/dracut/dracut/0001-fix-broken-symlink-in-dracut-config-examples.patch
+new file mode 100644
+index 0000000000..7d0b65a161
+--- /dev/null
++++ b/meta-initramfs/recipes-devtools/dracut/dracut/0001-fix-broken-symlink-in-dracut-config-examples.patch
+@@ -0,0 +1,44 @@
++From 8871c593973d9abfef45408575e5da887830f42e Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Thu, 22 May 2025 18:07:27 +0800
++Subject: [PATCH] fix broken symlink in dracut config examples
++
++Due to commit [1], it installs dracut config examples under /usr.
++But while enable_test=no, the symlink of test in dracut config is broken
++...
++root@qemux86-64:~# ls /usr/lib/dracut/dracut.conf.d/test*  -ahl
++lrwxrwxrwx 1 root root 27 Apr  5  2011 /usr/lib/dracut/dracut.conf.d/test -> ../test/dracut.conf.d/test/
++lrwxrwxrwx 1 root root 36 Apr  5  2011 /usr/lib/dracut/dracut.conf.d/test-makeroot -> ../test/dracut.conf.d/test-makeroot/
++lrwxrwxrwx 1 root root 31 Apr  5  2011 /usr/lib/dracut/dracut.conf.d/test-root -> ../test/dracut.conf.d/test-root
++root@qemux86-64:~# realpath /usr/lib/dracut/dracut.conf.d/test*
++realpath: /usr/lib/dracut/dracut.conf.d/test: No such file or directory
++realpath: /usr/lib/dracut/dracut.conf.d/test-makeroot: No such file or directory
++realpath: /usr/lib/dracut/dracut.conf.d/test-root: No such file or directory
++...
++
++This commit cleans up test symlink if enable_test=no
++
++[1] https://github.com/dracut-ng/dracut-ng/commit/0d369e3e30935dffe48dfff1e90463868e7f804a
++
++Upstream-Status: Submitted [https://github.com/dracut-ng/dracut-ng/pull/1344]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ Makefile | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/Makefile b/Makefile
++index d33aebbc..151d9f79 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -180,6 +180,7 @@ ifneq ($(enable_test),no)
++ 	cp -arx test $(DESTDIR)$(pkglibdir)
++ else
++ 	rm -rf $(DESTDIR)$(pkglibdir)/modules.d/80test*
+++	rm -rf $(DESTDIR)$(pkglibdir)/dracut.conf.d/test*
++ endif
++ ifneq ($(enable_documentation),no)
++ 	for i in $(man1pages); do install -m 0644 $$i $(DESTDIR)$(mandir)/man1/$${i##*/}; done
++-- 
++2.34.1
++
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_106.bb b/meta-initramfs/recipes-devtools/dracut/dracut_106.bb
+index b474514713..b70ee4baeb 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_106.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_106.bb
+@@ -10,6 +10,7 @@ PE = "1"
+ SRCREV = "956c08774074ddc45b2f975e13d5c13d1fc36eff"
+ SRC_URI = "git://github.com/dracut-ng/dracut-ng.git;protocol=http;branch=main \
+            file://0001-feat-dracut-install-split-ldd-command-arguments-for-.patch \
++           file://0001-fix-broken-symlink-in-dracut-config-examples.patch \
+            "
  
- SRC_URI = "git://github.com/thuanalg/simplelog-topic.git;branch=main;protocol=https;tag=v${PV}"
- 
--SRCREV = "7676b9cf871bedd8648d2cf68ebf43dc2c79b94d"
-+SRCREV = "edbe423bdd1b36faf30d2eeeb869e4c1755864de"
- 
- S = "${WORKDIR}/git"
- 
+ DEPENDS += "kmod"
 -- 
-2.47.1
+2.34.1
 
 
