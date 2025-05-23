@@ -2,175 +2,129 @@ Return-Path: <dimitris@siganos.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6E7DC54ED0
-	for <webhook@archiver.kernel.org>; Fri, 23 May 2025 19:23:43 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web10.2098.1748028220324446019
- for <Openembedded-devel@lists.openembedded.org>;
- Fri, 23 May 2025 12:23:40 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1532C54ED0
+	for <webhook@archiver.kernel.org>; Fri, 23 May 2025 19:46:33 +0000 (UTC)
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web10.2546.1748029591985194864
+ for <openembedded-devel@lists.openembedded.org>;
+ Fri, 23 May 2025 12:46:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siganos-org.20230601.gappssmtp.com header.s=20230601 header.b=HbGX6tTT;
- spf=none, err=permanent DNS error (domain: siganos.org, ip: 209.85.128.53, mailfrom: dimitris@siganos.org)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-44b1ff82597so1057405e9.3
-        for <Openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 12:23:40 -0700 (PDT)
+ dkim=pass header.i=@siganos-org.20230601.gappssmtp.com header.s=20230601 header.b=tWIxhxkA;
+ spf=none, err=permanent DNS error (domain: siganos.org, ip: 209.85.214.182, mailfrom: dimitris@siganos.org)
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-23205d55bf4so2259285ad.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 12:46:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=siganos-org.20230601.gappssmtp.com; s=20230601; t=1748028218; x=1748633018; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0mlnJ9yK/remk4YEgvyOM6A3HSEKodVQMQAWOmogqN4=;
-        b=HbGX6tTTLAyVrdtPh2mBiwjwtTG5PKQ7yrwae3XWgOrmamc4QGjj7UlAyDdocx+y6k
-         q2+WHGBhdGpiLQluVonTBv7zggPNNTgRXc3AJP8RynvVxI68RlVYdTQEm3P5sexwW8Ol
-         DESUmRbw7owTdjsLsANMAii+TsnW3o0gsGrXaAHV4xKvSrXCjtNVZIMEsMcLh0RSuaSG
-         X98LSgfHja9gGIUZOQWVcApTgt7ZztuWLQksSI8AUxz8PsMusKGWU/eu5Cy6fDCfNIz0
-         KJc+Rznu4g8M9TRzuyih7QK/0up0aPXkZv/WX9aRDlyCQwr4Xq3J6wfUGTrrdMEeW4ao
-         kTFA==
+        d=siganos-org.20230601.gappssmtp.com; s=20230601; t=1748029591; x=1748634391; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=+iQzFKFm90W39zc0EiccYnZNKT/M/sIbwPSv/6iyF1M=;
+        b=tWIxhxkAIZH+fGSsN6e/ZDESbxFAQaCElQeLGRRykBq+2Vbm51Gw+JE5S/gHE9Vlzq
+         zoqGsPZoB6PGa5vPT+E6s22QVgF9R1phq5uGlHWsFHyaz/gXOIa9jYojrk0hiF+TYDUj
+         AMHPB+DT3EAJIQ2m50KDffaJPobdWZUPPXJMpavJxnlT/aOCekqIW43KETZK8rOfV5AP
+         dKeoHqprexPaIawXXU9CCNPJtgW6yWCtptlxoT/wc5nxzY/RTmNuk57n3Zm1YoZVRKb/
+         Wx9tTQF/aBq/apDHacqW7/Uk7y4qmdltlhJuonQQcvEsfl6JBNudAxrVp2gNjqDy+5tT
+         /GGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748028218; x=1748633018;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1748029591; x=1748634391;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=0mlnJ9yK/remk4YEgvyOM6A3HSEKodVQMQAWOmogqN4=;
-        b=QBBy/b6L7w0Rb4vWML0i4l2Szkm6NeqgN/xdWgoyPn7cmp4vg0kCpqQ8o/ZD4iVk8C
-         KNv8Hy6nBwFVxBlH5jFs9l2J/U4XCeCcConMed82Zwzl1xFDDSl3ze08doWJjAEumfz1
-         L9xFihOYtS5R7GBwPEArvkcMsuKguPpKmH8cDFSIsV6zPi8FFXME8CiABOXLTfWoL3qu
-         UAeI6jhMGepNc5/la4c6G9QDTTZawR7lJxs64CIKsq9Q1ciSEMXQaZRnZoh3qLpeZdM3
-         TXnenFy+PCE/12ZZsXEwpN6zFc12eO50fluDJz2iYCoJ/USx1GUNX6vks2cL+SkGfMZy
-         6vtg==
-X-Gm-Message-State: AOJu0Yz/nj2MTqpSsYRSbEwsJO43wl8adnnxzxjtgnBXLkvLkI4PuS4w
-	aTkIw7OSGAXA6BIUtCLex6Qjy3Rg+9ZUETkkJnTe9/1PKzRWL2m/LIDiQgTly4TPOSwvkdSZR7L
-	td17GIQI=
-X-Gm-Gg: ASbGnctjNdnRdiHd1OqEI4RVgTubXlz6GfpfYY5GocOIZxHRSRGN0vXAQWU8TIKCYXy
-	IMshz8/khlX6lU6GewlyK7ea81KiYrSVwbEE4WrMBoGlyh/L3aWUyWYsVZqZbQjQYTLKX+J07rm
-	wq7BArgur/WA3X1WsafraxyBj7bo8lEMT1tLP6VnwhXTk+zI723QcfLVFIiJSVWEYIDI8mXa0nx
-	HhVtAVCguHrOAtHAJaSziQ9HILbQSvlhHDpgovScclJ9Twy8ylRracyLLgdpbkfryd9pX7qibfk
-	VrMBwxRlrYc+fnCV/gljbTzf5NLNGmhC+1YJ0XgpjDoRcRef7w==
-X-Google-Smtp-Source: AGHT+IG/mo6LzbokqaZR9z4+6a8QVxDwdnwCQDrVO5OzKylIiSFYs+auMFiSiR9/eSPlUSCD4nZFzg==
-X-Received: by 2002:a5d:5f8b:0:b0:3a3:63d3:369d with SMTP id ffacd0b85a97d-3a4cafc8330mr536182f8f.0.1748028218089;
-        Fri, 23 May 2025 12:23:38 -0700 (PDT)
-Received: from tux.home ([2a00:23c5:31e:9001:6ec4:b52e:4857:f27c])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a35ca5a892sm27002371f8f.24.2025.05.23.12.23.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 May 2025 12:23:37 -0700 (PDT)
-From: Dimitrios Siganos <dimitris@siganos.org>
-To: Openembedded-devel@lists.openembedded.org
-Cc: Dimitrios Siganos <dimitris@siganos.org>
-Subject: [meta-oe][PATCH v3] bvi: add new package
-Date: Fri, 23 May 2025 20:23:21 +0100
-Message-Id: <20250523192321.333048-1-dimitris@siganos.org>
-X-Mailer: git-send-email 2.34.1
+        bh=+iQzFKFm90W39zc0EiccYnZNKT/M/sIbwPSv/6iyF1M=;
+        b=uy6HloMNm4+j3g765HrLvf/xMnlLvZ6KSAat9HZRXrbkzC0SehYoyWBUVHSXvtCoDk
+         CnAgZhJeB/Cga9cndAaePw5fwdXOYGfx87AAtsRutwzabaCEeoNpvbXju536ZKgYoRb2
+         lN1M1ZJCUB7IldoRNZkqd2jG7vYgDt3gVuXERwSKBGig/iKVJQCJfIIafc0bc4HG4l1r
+         hhmNWAW/SetIiYgYt2kMYwwR5stMPK19XzE/acImdiSEReAQB1Kwoncb9teLryz2Gf3C
+         0FuxJPPVPYQG3LI5Y4FsvCD77N8QtL2qGhBt+hvH8vXSaFjTRCXXJO/GiRxKQkDdyIzh
+         6Kdw==
+X-Gm-Message-State: AOJu0Yzx+IwIK1v0/fLQbqkGS+OW1Jqy6n+64J8dGr/ffZTWJxUL2NkO
+	BBxdZWY6iY70dv+Km7R/6LqCsBmXWcPhK4Pyi7D49hjUX2HtpgIO+hL2dbNsrzHKV1UxVWFycdN
+	0GHrVkxJFj/UEJd+zDNqGDGdaM3LaP5Gq046K+bCPWMwChKjrgoMubqoeUQ==
+X-Gm-Gg: ASbGncvO6E+jRehwcD8m3/q91z3JK7gplGRntqLHYrU1uRQldFswPj4qcWxW/i8NfFX
+	Qk4+2sfUo7Hk/P/usIcLVZo2HleoimZSnOIGXrFjKgX3095Vw24GeYIXEliiLQcnKP7nrH7b7vR
+	KrrWby0jIDIicsxdVtI49ObHzLSyHr91cApT4oIpL9JoIGw90KuYuaj1Hh+Ld+YuZ1VA==
+X-Google-Smtp-Source: AGHT+IGy0dEMQjZk8Cb17CONoEOuCcCloD6hIsxcD2GZWbexsbBSNV22hBeCvbF/kGASQUN5WCr4ddAY6u5DoBk5BW4=
+X-Received: by 2002:a17:902:cf4c:b0:211:e812:3948 with SMTP id
+ d9443c01a7336-23414e9fbdfmr10722475ad.0.1748029591230; Fri, 23 May 2025
+ 12:46:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <18423E67C86AEF70.8857@lists.openembedded.org>
+In-Reply-To: <18423E67C86AEF70.8857@lists.openembedded.org>
+From: Dimitrios Siganos <dimitris@siganos.org>
+Date: Fri, 23 May 2025 20:46:20 +0100
+X-Gm-Features: AX0GCFvvppVk9VfxSuHWxzP-0xC4TfDRF8aQI8N0b-sPv0W1aoS5krmX5OmRsDY
+Message-ID: <CADGVJSL4munjKAe7UETxf7PReoC22PSCw+68CK8JANs=5UFxLw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v3] bvi: add new package
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>, Khem Raj <raj.khem@gmail.com>
+Content-Type: multipart/alternative; boundary="000000000000d7b0a80635d2dafb"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 19:23:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117612
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 19:46:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117613
 
-bvi is a visual editor for binary files
+--000000000000d7b0a80635d2dafb
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Dimitrios Siganos <dimitris@siganos.org>
----
- meta-oe/recipes-support/bvi/bvi_1.4.2.bb      | 18 ++++++
- .../bvi/files/0001-gcc-15.patch               | 60 +++++++++++++++++++
- 2 files changed, 78 insertions(+)
- create mode 100644 meta-oe/recipes-support/bvi/bvi_1.4.2.bb
- create mode 100644 meta-oe/recipes-support/bvi/files/0001-gcc-15.patch
+Hi Yoann, Raj,
 
-diff --git a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb b/meta-oe/recipes-sup=
-port/bvi/bvi_1.4.2.bb
-new file mode 100644
-index 0000000000..a44a7e7078
---- /dev/null
-+++ b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
-@@ -0,0 +1,18 @@
-+SUMMARY =3D "Binary VI editor"
-+DESCRIPTION =3D "bvi is a visual editor for binary files."
-+HOMEPAGE =3D "https://sourceforge.net/projects/bvi"
-+SECTION =3D "console/utils"
-+LICENSE =3D "GPL-3.0-or-later"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da36207309d382da27cd66fdaae922e3=
-c"
-+
-+SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
-+           file://0001-gcc-15.patch \
-+          "
-+SRC_URI[sha256sum] =3D "4bba16c2b496963a9b939336c0abcc8d488664492080ae43a8=
-6da18cf4ce94f2"
-+
-+DEPENDS +=3D "ncurses"
-+
-+# The project uses old style C interfaces, disable the warnings
-+CFLAGS:append =3D " -Wno-old-style-definition"
-+
-+inherit pkgconfig autotools-brokensep
-diff --git a/meta-oe/recipes-support/bvi/files/0001-gcc-15.patch b/meta-oe/=
-recipes-support/bvi/files/0001-gcc-15.patch
-new file mode 100644
-index 0000000000..d5cb108eb6
---- /dev/null
-+++ b/meta-oe/recipes-support/bvi/files/0001-gcc-15.patch
-@@ -0,0 +1,60 @@
-+This patch fixes the incompatibility problems with C23.=0D
-+=0D
-+The code uses some function prototypes without argument specifications,=0D
-+which makes it incompatible with C23 and this patch fixes them.=0D
-+=0D
-+The patch was copied from here:=0D
-+https://sourceforge.net/p/bvi/bugs/16=0D
-+=0D
-+Upstream-Status: Submitted [https://sourceforge.net/p/bvi/bugs/16]=0D
-+=0D
-+--- bvi.orig/re.c=0D
-++++ bvi/re.c=0D
-+@@ -36,7 +36,11 @@=0D
-+ #include	"bvi.h"=0D
-+ #include	"set.h"=0D
-+ =0D
-++#ifdef __STDC__=0D
-++static	int sbracket(int, char *, int);=0D
-++#else=0D
-+ static	int sbracket();=0D
-++#endif=0D
-+ =0D
-+ char	act_pat[MAXCMD];  /* found pattern */=0D
-+ char	pattern[MAXCMD + 1];=0D
-+--- bvi.orig/bm_unix.c=0D
-++++ bvi/bm_unix.c=0D
-+@@ -161,7 +161,11 @@=0D
-+ {=0D
-+ 	int	ret;=0D
-+ #ifndef DJGPP=0D
-++#ifdef __STDC__=0D
-++	char	*getenv(const char *);=0D
-++#else=0D
-+ 	char	*getenv();=0D
-++#endif=0D
-+ 	char	*shell;=0D
-+ 	char	cline[128];=0D
-+ #endif=0D
-+--- bvi.orig/bmore.h=0D
-++++ bvi/bmore.h=0D
-+@@ -136,7 +136,7 @@=0D
-+ =0D
-+ =0D
-+ =0D
-+-#ifdef ANSI=0D
-++#if defined(ANSI) || defined(__STDC__)=0D
-+ 	void	initterm(void), set_tty(void), reset_tty(void);=0D
-+ 	void	cleartoeol(void), clearscreen(void), highlight(void);=0D
-+ 	void	normal(void), bmbeep(void), home(void), sig(int);=0D
-+--- bvi.orig/bvi.h=0D
-++++ bvi/bvi.h=0D
-+@@ -214,7 +214,7 @@=0D
-+ 	void	d_memmove(PTR, PTR, off_t);=0D
-+ #endif=0D
-+ =0D
-+-#ifdef ANSI=0D
-++#if defined(ANSI) || defined(__STDC__)=0D
-+ 	off_t	alloc_buf(off_t, char **), yd_addr(void);=0D
-+ 	off_t	range(int);=0D
-+ 	void	do_dot(void), do_exit(void), do_shell(void), do_undo(void);=0D
---=20
-2.34.1
+I took your feedback and created a 3rd version of the bvi recipe.
+I made the following changes:
 
+1) I fixed the license which is actually GPLv3-or-later and not GPLv3-only
+that I had initially set it as.
+
+2) I changed SRC_URI to: ${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz, as
+per your suggestion.
+
+3) As per your suggestion, I removed the compiler flag "-std=gnu17" and
+replaced it with a patch file that fixes the C23 problem. The patchfile was
+actually made available by the debian devs who had the same problem.
+
+Finally, it is true that the project is not very actively maintained but
+has been going for almost 30 years and has stood the test of time.
+This editor is designed for small footprint and console access and it is an
+ideal editor to have in an embedded system and I think it should be part of
+yocto.
+
+The bvi editor is included in all the major linux distros, so yocto will
+not be alone in maintaining it. In fact, in this case, the debian guys
+fixed the C23 problem for us.
+See the list of distros that include it here:
+https://repology.org/project/bvi/versions
+
+Regards,
+Dimitrios Siganos
+
+--000000000000d7b0a80635d2dafb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div>Hi Yoann, Raj,</div><div><br></div><=
+div>I took your feedback and created a 3rd version of the bvi recipe.</div>=
+<div>I made the following changes:</div><div><br></div><div>1) I fixed the =
+license which is actually GPLv3-or-later and not GPLv3-only that I had init=
+ially set it as.</div><div><br></div><div>2) I changed SRC_URI to: ${SOURCE=
+FORGE_MIRROR}/${BPN}/${BP}.src.tar.gz, as per your suggestion.</div><div><b=
+r></div><div>3)
+ As per your suggestion, I removed the compiler flag &quot;-std=3Dgnu17&quo=
+t; and=20
+replaced it with a patch file that fixes the C23 problem. The patchfile=20
+was actually made available by the debian devs who had the same problem.</d=
+iv><div><br></div><div>Finally,
+ it is true that the project is not very actively maintained but has=20
+been going for almost 30 years and has stood the test of time.</div><div>Th=
+is
+ editor is designed for small footprint and console access and it is an=20
+ideal editor to have in an embedded system and I think it should be part
+ of yocto.</div><div><br></div><div><div>The bvi editor is included in all =
+the major=20
+linux distros, so yocto will not be alone in maintaining it. In fact, in=20
+this case, the debian guys fixed the C23 problem for us.</div><div>See the =
+list of distros that include it here:<br><a href=3D"https://repology.org/pr=
+oject/bvi/versions" target=3D"_blank">https://repology.org/project/bvi/vers=
+ions</a></div><div><br></div><div>Regards,</div><div>Dimitrios Siganos</div=
+></div><br></div></div>
+
+--000000000000d7b0a80635d2dafb--
 
