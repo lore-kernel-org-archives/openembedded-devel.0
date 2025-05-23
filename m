@@ -1,97 +1,219 @@
-Return-Path: <philip@balister.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D601AC54ED0
-	for <webhook@archiver.kernel.org>; Fri, 23 May 2025 11:10:19 +0000 (UTC)
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web11.40797.1747971134107963139
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE6F6C54ED1
+	for <webhook@archiver.kernel.org>; Fri, 23 May 2025 16:36:41 +0000 (UTC)
+Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
+ by mx.groups.io with SMTP id smtpd.web10.52378.1748018197996538378
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 May 2025 20:32:14 -0700
+ Fri, 23 May 2025 09:36:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lzRBYI0F;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: nguyenthaithuanalg@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-742c9563fd9so4817148b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 May 2025 20:32:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kPCMYKCT;
+ spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-2c76a1b574cso54735fac.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 09:36:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747971133; x=1748575933; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ESmTumey/r28OcZsWJUVoMxVMJymAYQOqFYEnn1lwYQ=;
-        b=lzRBYI0Fvj7WTzzkIX0OaWm85IJ5cI5h0Hf8oB08VPsgiaZ2Iazhw0Hp7iVGvb7l8R
-         GAj67Z5Ef4y7mo8LlRKYgEKJr+4Q1z3RpqiV1s+PzcZt8u/lTvh/UHRHQBJxdkzuiNB1
-         nR1UdwV4EqppRJ6LWOeD0DvujrylwfE5RfXtAzV7o3aJXF9i9esIcoWpadf8O4aUC9gt
-         DhvAwKwk75Hywee0TwNsvwdpfvTINKDrSPuZN8wAyYQb5PNcNqpkYGRkyyI3pvcY8Ada
-         RK5KQo+ZwmXKW5hFgAfTHnu/sInMJ8EokV5wGcbkDccnYaWlivpUwJab7MLH5+PfKGpB
-         Pt6w==
+        d=gmail.com; s=20230601; t=1748018197; x=1748622997; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0CPN/140NDWOYb4xehUlqSsKwiUyz5S57NXxFqNNSBY=;
+        b=kPCMYKCT+d7ooxVI8onP6+oLETuHOkIiLGL+xKV5uC66PHVOuOUDMy5zRD60lfIkDl
+         Lj83GT5uRGExGqg0AtVMT2fpTPRB9UoFTnlSSoCdpvEgDmisVFNDefGenL93sHV9wXZf
+         FMeoB/Pf+Nv42x6gp113dkZVMLe07L3pJXmjErfxk2x81h+2wYob4LZ8EZE+Agd84H/F
+         DCb5bp7BSMTRFkrzk/sSOpkupcWlsB5qFpGI/X9uvvAm9Yp2TuJ/x8HdXB9tq8gcV+BD
+         LJF7GGFBl3uBurge5F15JDTpjJXw6N1z+2kif/rL/QczzhlFZW9i38+uCP70IzUzrYUJ
+         TL8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747971133; x=1748575933;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ESmTumey/r28OcZsWJUVoMxVMJymAYQOqFYEnn1lwYQ=;
-        b=iZy9UYwBlDFlMo8mbKJJuggN4sLbWsRqI1owcaFPFvDTKMkWw6QHqBV7NBUo44/oEZ
-         UMl8hANK3rYvqSbELajyChDCk8CVQKg0GiBE9yoQGSJMnZjFAG8meDYRILFxh8stdBOv
-         nZrLgoik96drqge3ChDZJT1fWv6eAFpHjMeSCo+vsrNvJebSRqoHlALagigPp2QIeqeN
-         yGZI9K6094w0OEWyUaGpp6kxKYfVISPSJ2glLdk0SVKZ2UHP1s5LTyN5MPuzjePnFDYU
-         20WaSX/UQ5Xb0EwMaoGQq3G/Mb/N0/tGrrd23lvewpPMkuVZDMIhwBiIKybliNZw11Ln
-         yydQ==
-X-Gm-Message-State: AOJu0Yz3hfWmWTP/tuKB9gft8No5ZkWdWvhc3WvrS0wRbNhXoGG7KBdh
-	ake+gexxMC7u3MGqszHJSfl7yojJAeA90MBhKyagzx/ADeSa6wzMWr0NF7EuKA==
-X-Gm-Gg: ASbGncv4OhMKZkJflaGdjiDz2cJZwaV3UJf1fPNzFfnwN23NmVNGElLcC6o5p/Hio06
-	bjl4nYHOyAr+PcREk30nKqa62dhnN+cXGO25+Dmu4kslwMjwySvTvPu23y6A9DYlh/ko3Q1jfur
-	mEVMzTmBWT15QgfwQZfvquAiVyF3di5n8Bay2+Ppoip/gdNgVXbbvNBSApi9lRId1Uf6TJk5d7k
-	MFR5psqAYShAh6zSMVF4fRh+FfrMXSmwCi+tSQ2a781/I+2hywGZegqP0Vj6LSA1Ll4ox1U9odk
-	eBOFJo1yHxUPhMPlPxvjvighiDadhPTyigTnDf9aNfwZzQgib4MvnJ6LRxHVQHERh0IBlhp6dlr
-	QfjBpKjZBqOnMEgI=
-X-Google-Smtp-Source: AGHT+IHlKeXNbSB0UMNixrJZspmahjYnaqOnCyJPVRwm0s8ghHySMdlmqqh1FFY1kPa749hm8W0jMw==
-X-Received: by 2002:a05:6a00:e0e:b0:730:9946:5973 with SMTP id d2e1a72fcca58-742acc8da9fmr32825949b3a.5.1747971132769;
-        Thu, 22 May 2025 20:32:12 -0700 (PDT)
-Received: from localhost.localdomain ([2405:4802:9111:1040:76d4:35ff:fe85:dd7a])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-742a97398f8sm11936728b3a.78.2025.05.22.20.32.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 May 2025 20:32:12 -0700 (PDT)
-From: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
-Subject: [meta-oe][PATCH] libserialmodule: v1.0.6 -> v1.0.7
-Date: Fri, 23 May 2025 10:31:55 +0700
-Message-ID: <20250523033155.9118-1-nguyenthaithuanalg@gmail.com>
-X-Mailer: git-send-email 2.47.1
+        d=1e100.net; s=20230601; t=1748018197; x=1748622997;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=0CPN/140NDWOYb4xehUlqSsKwiUyz5S57NXxFqNNSBY=;
+        b=YK4fTL5Gj5y/tUopnL0alr8LHW/YbOhqst/P1iv/6X4bTKPNvrl79UGqDY0tfm4Ywo
+         j1F8/DvnlxVqMLqquZ2sQahXOdmo0n88XK8yTBj05oWBVgHVkCDBFlqIUGdm2zIA+ZnX
+         pZox0GZt98Gwv6hus9Bki+JX/iLEpABk7cVd1r8LfN6LOd5ZmrHfKr0N6ShT4AsQNok7
+         OGfKjZjMrfHwRXV1GEBPqRw40Mz+Dqyi71Iy0R6V0J05wIlY4vbRbhEaVdAU9md2Xo/S
+         79mV+kzKVpWGJ1nOIbJemqo9SvGsXoCv7DE32QZP1vW6N051aMf/8OPXEE0vWW88YFb3
+         tc4g==
+X-Gm-Message-State: AOJu0YzzIBNcwh/3dVSd/EZHyl977D/+X1FBVtNJxSYF5OnlRsfw27OC
+	F8Ei15HXLp3G3VeV3X2GaRb67j1ZSCCTyQGjz/Ss+r2wVRbywxVACsBg6KMFd63GRyEvz0Nxxfe
+	D4zxW0EN3qsVxALmA3ZVkKbUH9XabuNc9CPd6eYE=
+X-Gm-Gg: ASbGnctPasJB9Z2nXBtI5nqqQ1UCg4xs8Y3c8LZy3sFsNyCFBVVcN8R9J86swnKbT4Z
+	tpmk5uCAMOyFVZBiSiMgnGWw9xA+O7bFaJm0lBC+Yi6DPBjvm8ZCABK3VTwScJsm/uI/EzGDVrJ
+	LQexPgyOI1AuAda6GgkPVCzbqRmLPj114=
+X-Google-Smtp-Source: AGHT+IEvHVHybe7V84sqi9uReiLa7mrJanKAcvUyOU02rMVlaDaIGuvzQx/b3UZuBpADU+deYKXtaLnN57ILQ73aFBY=
+X-Received: by 2002:a05:6820:178a:b0:604:66b4:a8f2 with SMTP id
+ 006d021491bc7-60b9fa6253cmr60232eaf.2.1748018197099; Fri, 23 May 2025
+ 09:36:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250522224420.107223-1-f_l_k@t-online.de>
+In-Reply-To: <20250522224420.107223-1-f_l_k@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 23 May 2025 09:36:11 -0700
+X-Gm-Features: AX0GCFvBDwlOTXkDf8epNNnMNGfvTY5hfnZfu5bwFHmh0eTnJiJY4wLDo8U2MPo
+Message-ID: <CAMKF1sqcC+nvK-HtOsR4R3B75R3SyWma26G6eD=TGjB_40k-pw@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH 1/2] webrtc-audio-processing-2: add recipe
+To: f_l_k@t-online.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 11:10:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117609
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 16:36:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117610
 
-1. Fix/check "DSR" is connected before writing.
-2. Add "spsr_err_txt" to get text of error code.
+I am seeing a failure on riscv32
 
-Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
----
- .../{libserialmodule_1.0.6.bb => libserialmodule_1.0.7.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libserialmodule/{libserialmodule_1.0.6.bb => libserialmodule_1.0.7.bb} (89%)
+riscv32-yoe-linux-ld.lld: error: undefined reference: __atomic_load_8
+   >>> referenced by
+/home/kraj200/yoe/build/tmp/work/riscv32-yoe-linux/webrtc-audio-processing-=
+2/2.1/recipe-sysroot/usr/lib/libabsl_spinlock_wait.so
+(
+   =E2=86=AA disallowed by --no-allow-shlib-undefined)
 
-diff --git a/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.6.bb b/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.7.bb
-similarity index 89%
-rename from meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.6.bb
-rename to meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.7.bb
-index 558547c1ed..ac5a3eaf09 100644
---- a/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.6.bb
-+++ b/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.7.bb
-@@ -6,7 +6,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22cdd382a6275cb4c2e75c517952ac7c"
- DEPENDS = "libsimplelog"
- SRC_URI = "git://git@github.com/thuanalg/libserialmodule.git;branch=main;protocol=https;tag=v${PV}"
--SRCREV = "975a95d38ba6bd4ae214567ed2bacd4b3e9f0268"
-+SRCREV = "b5a5a436900d0bd69f990ca062de916c65f7e2e0"
- S = "${WORKDIR}/git"
- inherit cmake
- EXTRA_OECMAKE = "-DUNIX_LINUX=1 -DMETA_OPENEMBEDDED=1"
--- 
-2.47.1
+I think we need to add -latomic to LDFLAGS on 32bit arches where 64bit
+intriniscs are not available e.g. mips,ppc,rv32 etc. I will test a
+patch
 
+On Thu, May 22, 2025 at 3:44=E2=80=AFPM Markus Volk via lists.openembedded.=
+org
+<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
+>
+> - add backport patch to fix build with gcc15
+> - dont add the patches from webrtc-audio-processing-1
+>   The fixes have not been merged but it was said that
+>   those issues should have been fixed
+>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  ...8dc4712fa6362b0c839ad57b6b46dce1ba83.patch | 50 +++++++++++++++++++
+>  .../webrtc-audio-processing-2_2.1.bb          | 20 ++++++++
+>  2 files changed, 70 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-multimedia/webrtc-audio-proce=
+ssing/webrtc-audio-processing-2/e9c78dc4712fa6362b0c839ad57b6b46dce1ba83.pa=
+tch
+>  create mode 100644 meta-multimedia/recipes-multimedia/webrtc-audio-proce=
+ssing/webrtc-audio-processing-2_2.1.bb
+>
+> diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/w=
+ebrtc-audio-processing-2/e9c78dc4712fa6362b0c839ad57b6b46dce1ba83.patch b/m=
+eta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-proc=
+essing-2/e9c78dc4712fa6362b0c839ad57b6b46dce1ba83.patch
+> new file mode 100644
+> index 0000000000..3e2ac72c69
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-a=
+udio-processing-2/e9c78dc4712fa6362b0c839ad57b6b46dce1ba83.patch
+> @@ -0,0 +1,50 @@
+> +From e9c78dc4712fa6362b0c839ad57b6b46dce1ba83 Mon Sep 17 00:00:00 2001
+> +From: =3D?UTF-8?q?Fran=3DC3=3DA7ois=3D20Laignel?=3D <francois@centricula=
+r.com>
+> +Date: Mon, 14 Apr 2025 16:48:19 +0200
+> +Subject: [PATCH] Fix compilation with gcc-15
+> +
+> +This commit fixes compilation errors with gcc-15 (default for Fedora 42)=
+.
+> +
+> +From [1]:
+> +
+> +> Common C++ headers (like <memory>) in GCC 15.0.0 (combined with libstd=
+c++)
+> +> don't transitively include uint64_t anymore.
+> +
+> +See also [2].
+> +
+> +[1]: https://github.com/ROCm/rocm_smi_lib/pull/198
+> +[2]: https://github.com/root-project/root/issues/17444
+> +
+> +Upstream-Status: Backport [https://gitlab.freedesktop.org/pulseaudio/web=
+rtc-audio-processing/-/commit/e9c78dc4712fa6362b0c839ad57b6b46dce1ba83.patc=
+h]
+> +---
+> + .../audio_processing/aec3/multi_channel_content_detector.h       | 1 +
+> + webrtc/rtc_base/trace_event.h                                    | 1 +
+> + 2 files changed, 2 insertions(+)
+> +
+> +diff --git a/webrtc/modules/audio_processing/aec3/multi_channel_content_=
+detector.h b/webrtc/modules/audio_processing/aec3/multi_channel_content_det=
+ector.h
+> +index 2b2f3b8..feb29fd 100644
+> +--- a/webrtc/modules/audio_processing/aec3/multi_channel_content_detecto=
+r.h
+> ++++ b/webrtc/modules/audio_processing/aec3/multi_channel_content_detecto=
+r.h
+> +@@ -12,6 +12,7 @@
+> + #define MODULES_AUDIO_PROCESSING_AEC3_MULTI_CHANNEL_CONTENT_DETECTOR_H_
+> +
+> + #include <stddef.h>
+> ++#include <cstdint>
+> +
+> + #include <memory>
+> + #include <optional>
+> +diff --git a/webrtc/rtc_base/trace_event.h b/webrtc/rtc_base/trace_event=
+.h
+> +index 2aee713..f88a68e 100644
+> +--- a/webrtc/rtc_base/trace_event.h
+> ++++ b/webrtc/rtc_base/trace_event.h
+> +@@ -28,6 +28,7 @@
+> +
+> + #if !defined(RTC_USE_PERFETTO)
+> + #include <string>
+> ++#include <cstdint>
+> +
+> + #include "rtc_base/event_tracer.h"
+> +
+> +--
+> +GitLab
+> +
+> diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/w=
+ebrtc-audio-processing-2_2.1.bb b/meta-multimedia/recipes-multimedia/webrtc=
+-audio-processing/webrtc-audio-processing-2_2.1.bb
+> new file mode 100644
+> index 0000000000..00bf26c750
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-a=
+udio-processing-2_2.1.bb
+> @@ -0,0 +1,20 @@
+> +DESCRIPTION =3D "Audio processing bits of the WebRTC reference implement=
+ation"
+> +HOMEPAGE =3D "https://www.freedesktop.org/software/pulseaudio/webrtc-aud=
+io-processing/"
+> +SECTION =3D "audio"
+> +
+> +DEPENDS =3D "abseil-cpp"
+> +DEPENDS:append:libc-musl =3D " libexecinfo"
+> +
+> +LICENSE =3D "BSD-3-Clause"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dda08a38a32a340c5d91e13ee86a11=
+8f2"
+> +
+> +SRC_URI =3D " \
+> +    http://freedesktop.org/software/pulseaudio/webrtc-audio-processing/w=
+ebrtc-audio-processing-${PV}.tar.xz \
+> +    file://e9c78dc4712fa6362b0c839ad57b6b46dce1ba83.patch \
+> +"
+> +SRC_URI[sha256sum] =3D "ae9302824b2038d394f10213cab05312c564a038434269f1=
+1dbf68f511f9f9fe"
+> +S =3D "${WORKDIR}/webrtc-audio-processing-${PV}"
+> +
+> +LDFLAGS:append:libc-musl =3D " -lexecinfo"
+> +
+> +inherit meson pkgconfig
+> --
+> 2.49.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#117598): https://lists.openembedded.org/g/openembedde=
+d-devel/message/117598
+> Mute This Topic: https://lists.openembedded.org/mt/113256471/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
