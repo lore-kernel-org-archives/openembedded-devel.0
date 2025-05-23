@@ -1,102 +1,141 @@
-Return-Path: <majortomtosourcecontrol@gmail.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73C9BC54ED1
-	for <webhook@archiver.kernel.org>; Fri, 23 May 2025 03:18:56 +0000 (UTC)
-Received: from mail-il1-f180.google.com (mail-il1-f180.google.com [209.85.166.180])
- by mx.groups.io with SMTP id smtpd.web10.40353.1747970332325839176
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51EBDC54ED0
+	for <webhook@archiver.kernel.org>; Fri, 23 May 2025 07:50:38 +0000 (UTC)
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web10.43178.1747986636688172197
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 May 2025 20:18:52 -0700
+ Fri, 23 May 2025 00:50:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=R5ORTWjV;
- spf=pass (domain: gmail.com, ip: 209.85.166.180, mailfrom: majortomtosourcecontrol@gmail.com)
-Received: by mail-il1-f180.google.com with SMTP id e9e14a558f8ab-3dc6f3fe907so1927925ab.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 May 2025 20:18:52 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=TAA8zJq9;
+ spf=pass (domain: mvista.com, ip: 209.85.210.176, mailfrom: vanusuri@mvista.com)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-742caef5896so4970001b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 00:50:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747970331; x=1748575131; darn=lists.openembedded.org;
-        h=content-transfer-encoding:subject:from:cc:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=TrZpHhWpxdua1VaLGwofoKW2WLIWlwm2kpMwecaNJSw=;
-        b=R5ORTWjVuxKaq3EvRY0WMyq8rmPxZtMiPX12UwfsRXvle6ILvO2nCUQ71R0neEgL8Y
-         7SMxsD+dtnYlFxRFa6gfbt/ppomOTi0XyoS01xE4VqGEKnoDVnXWuNaUPginbl9xmPlb
-         wvvRn4tgNvm8ToEnZX9KjKlencbQq3l8gjIgv9sPUVwReNqxcNVLrfuqgFcHDaqf3oat
-         WypFI5oXCce5KwzB6QVLF9/7x/kermbS140XeQYLELq2QNvv0zV1pFtVB2SFjVCTTUBQ
-         0K+Xc7Pbq4H9Q6gr/4Cy36sUrZIOgg+HSvZ17oVE69wYYHLvip46LkK4jI7vEDDOKGT8
-         iD5Q==
+        d=mvista.com; s=google; t=1747986636; x=1748591436; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xLiHqgYTPkSKVaBTlN9r3qjb9CvmpbbG0NOvihJJIQY=;
+        b=TAA8zJq9sXJKerf8t/t88KMrKqp6FYizyU78zvdIeZGWW49P5IZ/EeiDgba3JlvhtL
+         gYt4k2RHbuy3hCAQuyAYshY8uG54+rVAqGFXOI+SgcE52tjOKDQU04h88gvrHJ8ir2Yw
+         i036J5HvRzfhh0oBUDTAhA60IvM9GNeHCZ/LY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747970331; x=1748575131;
-        h=content-transfer-encoding:subject:from:cc:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=TrZpHhWpxdua1VaLGwofoKW2WLIWlwm2kpMwecaNJSw=;
-        b=sQwhkqMd/yYkoRUH6Nl9bvcu4+xHgNx3qCnc6O7dwKIgoiYZlqnNjtPXGv0AZQVL/e
-         MDdjehen5j27nWQyL25DgZtkEOoyp7V6qzrPA08rdyC2RUSq+WYhXbsfx19CefJNsieE
-         mo1rw5rXTU/r64P2CmYY5DDJ/baua9t2zrkspwoIEFqPDKyL65Zyu/v+RNG33GTdHgGf
-         KRnNzMP1bFfoUAyhTVr9YqAhQNV/6atidxIPZC43+MutQU/JPDztvEeCF9dp04CFa0SP
-         txaECJu8tirVAou6CthQGG7RIFDudcpdrfbjN+1Z5t8rV+j3Om5Cb3Y7ltI7FvC4qOtZ
-         1okQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXDi5V2s3aUPQc68Itbiz6htGmpiFGClqcHr17SKyec+UJQ1scc4SB317kyRoVOXIwN0yhUINJ/lbr7Np9FrRGFx24=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxTztLggDDKteRY6dRS9Jv4uv8MZBlKrhcRiTk1ySIRGxWtTwk8
-	sW29IBNszPt2mQ29mQQzgTSdyOqYf2zTueZ9ByPhJTAuphQEk5fP6FOu
-X-Gm-Gg: ASbGncs11bFjXPoiYp/jL2iFcoQFWWz2G6/157PDKCfyo9PCFe5aWaVPBd54Ldnm/PH
-	IE0dmruyRNyFm0GmWtpwLjQ+medCEOMcjxBOjf/n/R7vpPSJzF2XWg2qlJYPPSK6wytHw9VbnXw
-	s4XFNEFBMGGObaGzqokZZmuau7TZ2W+aTfRb6JhOtQuE5XCKBMgF5cWgwxSiqE8FDXCe2vduKq4
-	CwNpiecDluyJBgd0S8b/Ve5vT4QTErsm1guojXatyzY2pacCyyWsFJjDwRqnoAhPPIP+7AaG3V9
-	nei0wJjRVjEI94JJems3mdKVMzE6NgskEoluKJYUlEXuURVZQHXqpiPqFv+7s5DsdQTO4dRahSK
-	VIrOQdn4aEbgCCF4bdwKwMaFZLz4j
-X-Google-Smtp-Source: AGHT+IFAQRxhhRRz2QVq/pm0GykEaKYcbwHNo7ucTwr9bi2ac1Bl2ZJmo8J0DE1jgX5dmof8D/QzPg==
-X-Received: by 2002:a05:6e02:1d92:b0:3dc:635b:6724 with SMTP id e9e14a558f8ab-3dc92c2d16amr22121875ab.10.1747970331513;
-        Thu, 22 May 2025 20:18:51 -0700 (PDT)
-Received: from [172.26.252.3] (174-29-216-122.hlrn.qwest.net. [174.29.216.122])
-        by smtp.gmail.com with ESMTPSA id e9e14a558f8ab-3dc8298d8c6sm12517225ab.69.2025.05.22.20.18.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 22 May 2025 20:18:51 -0700 (PDT)
-Message-ID: <b9bb4d2d-a0cd-42e7-9790-6a8f9b6431c5@gmail.com>
-Date: Thu, 22 May 2025 21:18:50 -0600
+        d=1e100.net; s=20230601; t=1747986636; x=1748591436;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=xLiHqgYTPkSKVaBTlN9r3qjb9CvmpbbG0NOvihJJIQY=;
+        b=J31Os+lpyU1EIi1FHZFpnth2oUkKKBP3q0/FiyKD1WIRlzNaQJgwjwcAU3aEs/VvyZ
+         fDpudflGht5cTWEh3DUZRVjSYbtzd8guzTn8iFz4WxmF8CriIzxR/QQPY7gJn3+SgJpX
+         knvg8kPoTXW8/wGXEs9M11V3uTELj8TadJAN82Jj5LrhGWCuqpBZDHft4R42KkjQVujU
+         lStHwhcM0nLlOpuCabxdbpI3ssBhK4AxVJLTQg7/2qvyQn6sOVB50l27kf64dO/+heiG
+         CftnSgGz0t29M1DS8izJMoUqaSuzNxmfogLzeEGm8kMqVfzJiVxsMkYjN3RJqElSTY+L
+         hhQA==
+X-Gm-Message-State: AOJu0YyHH2Wo3DpqLkXM3agKQ2Wvar5XRX+f3zXXo7EP6lFyPxivg8mL
+	XiMZVO6KKYaHe9R8DWrQk4vo3U0gQeimy0GVEztnOrHIaHjFtoajKnuB2cTVH+yK9y+d7TKXH/y
+	82kNab/4=
+X-Gm-Gg: ASbGnctz59r4hjvRfSBRUCAvWYzmAmA8Ab8i+rf+AIoZ5+yqCl+PZuqcZmb8f7kfeAs
+	sUyGXZS130w0uv+w19nx+0uDClJOfCnHtsvDrhx0vdZl9nCW/Q05rt8YXXn/YsHhkmvt6UyLf+m
+	yE1t4Gp613rWKxie8bviXGoWWZ9E7Cpo2auYg8GznyNxsLhl4eAcEYwObP/RXrj49RXlaidaS2V
+	ul9CF5O+uio57Z24eUsLFiEzFs2S3wByQ/6IwtPUkPy6iFOQEUhG+Gm/d0mb/VwCLkvVVqi5gAi
+	UV0ZmSZbdvxG7LTZaWA8p/xxryFAeBDsg2LJ1cawp2AwXwNZZBDsRiqIzQ3TQqmAsJPCEEdi+g=
+	=
+X-Google-Smtp-Source: AGHT+IHloDhD5c9uYOkpf2UPFxsED2OgJT5QcyDDMmNAmN6/7dYvRb1uWshFMCayXlA8dJfD0bTbcQ==
+X-Received: by 2002:a05:6a00:9455:b0:73d:ff02:8d83 with SMTP id d2e1a72fcca58-742a9786a85mr41414748b3a.3.1747986635506;
+        Fri, 23 May 2025 00:50:35 -0700 (PDT)
+Received: from MVIN00020.mvista.com ([49.207.211.216])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-742a970d5f0sm12699251b3a.56.2025.05.23.00.50.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 23 May 2025 00:50:34 -0700 (PDT)
+From: vanusuri@mvista.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-networking][kirkstone][PATCH] proftpd: Fix CVE-2024-57392
+Date: Fri, 23 May 2025 13:20:17 +0530
+Message-Id: <20250523075017.82930-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org,
- joe@deserted.net
-Cc: afenkart@gmail.com
-From: Clayton Casciato <majortomtosourcecontrol@gmail.com>
-Subject: [meta-networking][walnascar][PATCH] chrony: use inherit_defer for
- conditional inherit of useradd
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 03:18:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117603
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 07:50:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117604
 
-[ Upstream commit 63df976d8eec0fa714e8da30f4333f8af23c57d3 ]
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-conditionnal inherit is missed when PACKAGECONFIG privdrop is
-activated after this inherit, eg in .bbappend.
+Upstream-Status: Backport from https://github.com/proftpd/proftpd/commit/981a37916fdb7b73435c6d5cdb01428b2269427d
 
-Signed-off-by: Andreas Fenkart <afenkart@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Clayton Casciato <majortomtosourcecontrol@gmail.com>
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
-Maintainers - resending as mailing list likely bounced
+ .../proftpd/files/CVE-2024-57392.patch        | 42 +++++++++++++++++++
+ .../recipes-daemons/proftpd/proftpd_1.3.7c.bb |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/CVE-2024-57392.patch
 
- meta-networking/recipes-support/chrony/chrony_4.6.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+diff --git a/meta-networking/recipes-daemons/proftpd/files/CVE-2024-57392.patch b/meta-networking/recipes-daemons/proftpd/files/CVE-2024-57392.patch
+new file mode 100644
+index 0000000000..0b50175a55
+--- /dev/null
++++ b/meta-networking/recipes-daemons/proftpd/files/CVE-2024-57392.patch
+@@ -0,0 +1,42 @@
++From 981a37916fdb7b73435c6d5cdb01428b2269427d Mon Sep 17 00:00:00 2001
++From: TJ Saunders <tj@castaglia.org>
++Date: Sun, 9 Feb 2025 12:14:25 -0800
++Subject: [PATCH] Issue #1866: Some of the fuzzing tests submitted in the
++ advisory ran into existing null pointer dereferences (not buffer overflows);
++ let's correct them. (#1867)
++
++Upstream-Status: Backport [https://github.com/proftpd/proftpd/commit/981a37916fdb7b73435c6d5cdb01428b2269427d]
++CVE: CVE-2024-57392
++Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++---
++ modules/mod_ls.c | 7 +++++--
++ 1 file changed, 5 insertions(+), 2 deletions(-)
++
++diff --git a/modules/mod_ls.c b/modules/mod_ls.c
++index 45a3187bd..f7abfe540 100644
++--- a/modules/mod_ls.c
+++++ b/modules/mod_ls.c
++@@ -349,7 +349,8 @@ static int sendline(int flags, char *fmt, ...) {
++           errno != 0) {
++         int xerrno = errno;
++ 
++-        if (session.d != NULL) {
+++        if (session.d != NULL &&
+++	    session.d->outstrm != NULL) {
++           xerrno = PR_NETIO_ERRNO(session.d->outstrm);
++         }
++ 
++@@ -1039,7 +1040,9 @@ static int outputfiles(cmd_rec *cmd) {
++     return res;
++   }
++ 
++-  tail->down = NULL;
+++  if (tail != NULL) {
+++    tail->down = NULL;
+++  }
++   tail = NULL;
++   colwidth = (colwidth | 7) + 1;
++   if (opt_l || !opt_C) {
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+index 9d846f46a2..3a0fff5599 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https
+            file://build_fixup.patch \
+            file://proftpd.service \
+            file://CVE-2023-51713.patch \
++           file://CVE-2024-57392.patch \
+            "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.25.1
 
-diff --git a/meta-networking/recipes-support/chrony/chrony_4.6.1.bb b/meta-networking/recipes-support/chrony/chrony_4.6.1.bb
-index 83dee9143b..d21a1c6216 100644
---- a/meta-networking/recipes-support/chrony/chrony_4.6.1.bb
-+++ b/meta-networking/recipes-support/chrony/chrony_4.6.1.bb
-@@ -48,7 +48,7 @@ DEPENDS = "pps-tools"
- inherit update-rc.d systemd pkgconfig
- 
- # Add chronyd user if privdrop packageconfig is selected
--inherit ${@bb.utils.contains('PACKAGECONFIG', 'privdrop', 'useradd', '', d)}
-+inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'privdrop', 'useradd', '', d)}
- USERADD_PACKAGES = "${@bb.utils.contains('PACKAGECONFIG', 'privdrop', '${PN}', '', d)}"
- USERADD_PARAM:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'privdrop', '--system -d / -M --shell /bin/nologin chronyd;', '', d)}"
- 
 
