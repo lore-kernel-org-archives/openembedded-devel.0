@@ -1,90 +1,176 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <dimitris@siganos.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86539C54ED1
-	for <webhook@archiver.kernel.org>; Fri, 23 May 2025 17:55:13 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web10.369.1748022911746406694
- for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 May 2025 10:55:11 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6E7DC54ED0
+	for <webhook@archiver.kernel.org>; Fri, 23 May 2025 19:23:43 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web10.2098.1748028220324446019
+ for <Openembedded-devel@lists.openembedded.org>;
+ Fri, 23 May 2025 12:23:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PkHVQfpl;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2322f8afe02so1196445ad.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 10:55:11 -0700 (PDT)
+ dkim=pass header.i=@siganos-org.20230601.gappssmtp.com header.s=20230601 header.b=HbGX6tTT;
+ spf=none, err=permanent DNS error (domain: siganos.org, ip: 209.85.128.53, mailfrom: dimitris@siganos.org)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-44b1ff82597so1057405e9.3
+        for <Openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 12:23:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748022911; x=1748627711; darn=lists.openembedded.org;
+        d=siganos-org.20230601.gappssmtp.com; s=20230601; t=1748028218; x=1748633018; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3M6kNcLNn/84Hq5LSKLpzxhDBAidtYjsZnDC6K8ESew=;
-        b=PkHVQfplaBayvjry75cRphXCWw/Ob59QYPnQU52gP5IvM31smkJm0MIJvkTtmrKaqX
-         hM+c1Fd0eC5jYCAIeCXGj/1X6x8Qwqh9Bpjwz7qdegQbKdMVwg+VIriCTw507NLgGEC3
-         6ERAL46xY7ofFWpl7hFg4FCBCYPL6FSJZ67avzIwTmKvUbqlQvzJn1Voju5kEemoJmc4
-         CcapuhTYiv8eN1IXHYn817KpyPrVla9Z82ctUFRg6lwr+40HCg9V9cqC+huTDakqhvOL
-         wUJ2z0yQPpRzXcw2d1NqE8D6KpMMd1WBhP0HeFoQIFGnxALBtrfghrfkW2ZatnbhGpOX
-         Chcw==
+        bh=0mlnJ9yK/remk4YEgvyOM6A3HSEKodVQMQAWOmogqN4=;
+        b=HbGX6tTTLAyVrdtPh2mBiwjwtTG5PKQ7yrwae3XWgOrmamc4QGjj7UlAyDdocx+y6k
+         q2+WHGBhdGpiLQluVonTBv7zggPNNTgRXc3AJP8RynvVxI68RlVYdTQEm3P5sexwW8Ol
+         DESUmRbw7owTdjsLsANMAii+TsnW3o0gsGrXaAHV4xKvSrXCjtNVZIMEsMcLh0RSuaSG
+         X98LSgfHja9gGIUZOQWVcApTgt7ZztuWLQksSI8AUxz8PsMusKGWU/eu5Cy6fDCfNIz0
+         KJc+Rznu4g8M9TRzuyih7QK/0up0aPXkZv/WX9aRDlyCQwr4Xq3J6wfUGTrrdMEeW4ao
+         kTFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748022911; x=1748627711;
+        d=1e100.net; s=20230601; t=1748028218; x=1748633018;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=3M6kNcLNn/84Hq5LSKLpzxhDBAidtYjsZnDC6K8ESew=;
-        b=VEj6AI+84YaiNXn1fHHdl1ojjqusurCJqcv62qR0NFs0y4YIqthawk55S+RG+4IouL
-         8oDS6qaN8V7uG69niPiI1nRtCxnw2TyjfaHMGVZ2BGMeYnLRBjhl+2ccskw6ZfNdS01r
-         YqenJuRm2XOd+suK1gXjsc8bX4IsK2sBbaxHoKQYvSbBBHS4TxdrtbYJW5r5WRNd9aik
-         iAurcGJo3iNjAM2pj12VTfv8VMglPNq0qILqKtuadr3zivlr2UN3EdOpgS+EZMutCi4M
-         qFBZLsNGNkTuykpC0b0JzJequwOk1dqF07c7g/Kuo2GoBU5aE/Aw4jiihK6o4EhMoLpf
-         EmaA==
-X-Gm-Message-State: AOJu0YzRLYwSSwaI1yg3Q1uJyXIjH2E6UniGtH1kv8DQBJ0PifgAjwdi
-	R4hcD7wmkCK3pjqMFydNpheLCH7lKT+KFmq0vy6IbRZxCyKt5U67l8a+amvxEjiD
-X-Gm-Gg: ASbGncuVvjNA0VTI4HXs4O6lc7TV8IB+DgfSpJaQI2w1xKs+6iMO01Po43C1wZliwZE
-	jnKMBsly/QYYfRCTfVylmeAaZ8UQtVaHuwDLenSAuM8acuTvPKOWwa8HvbSpEQhk80j1WUyFWj7
-	cN64haWr3ZiqgmsTphTXpE3PImsU+4k79JEgf8DFbBGJDpcYXGSUz6jGIK56qB/lBKlxj3FF7+y
-	SepeDrhp2vjipgvJcQ6Jkvue55vYqPTLWkGbPiMox7RMHHBrRgugAZKzo3r0xigmXZjMiHHFNUJ
-	wRmjU/Esh8tBlurf8mRRe4mH4zJuvm0lkbrwvqTSZjI=
-X-Google-Smtp-Source: AGHT+IEHCeiDdYGLNB0SdWGZz7nrt1lumR+yT1iKVc1ET9n8NTIe8OMJoIyy16C/rf1b8nKxoG6vuA==
-X-Received: by 2002:a17:903:1b6d:b0:232:1daf:6f06 with SMTP id d9443c01a7336-23414fdf1f9mr3758115ad.47.1748022910747;
-        Fri, 23 May 2025 10:55:10 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::5f56])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-231d4ac9fc8sm126892655ad.27.2025.05.23.10.55.10
+        bh=0mlnJ9yK/remk4YEgvyOM6A3HSEKodVQMQAWOmogqN4=;
+        b=QBBy/b6L7w0Rb4vWML0i4l2Szkm6NeqgN/xdWgoyPn7cmp4vg0kCpqQ8o/ZD4iVk8C
+         KNv8Hy6nBwFVxBlH5jFs9l2J/U4XCeCcConMed82Zwzl1xFDDSl3ze08doWJjAEumfz1
+         L9xFihOYtS5R7GBwPEArvkcMsuKguPpKmH8cDFSIsV6zPi8FFXME8CiABOXLTfWoL3qu
+         UAeI6jhMGepNc5/la4c6G9QDTTZawR7lJxs64CIKsq9Q1ciSEMXQaZRnZoh3qLpeZdM3
+         TXnenFy+PCE/12ZZsXEwpN6zFc12eO50fluDJz2iYCoJ/USx1GUNX6vks2cL+SkGfMZy
+         6vtg==
+X-Gm-Message-State: AOJu0Yz/nj2MTqpSsYRSbEwsJO43wl8adnnxzxjtgnBXLkvLkI4PuS4w
+	aTkIw7OSGAXA6BIUtCLex6Qjy3Rg+9ZUETkkJnTe9/1PKzRWL2m/LIDiQgTly4TPOSwvkdSZR7L
+	td17GIQI=
+X-Gm-Gg: ASbGnctjNdnRdiHd1OqEI4RVgTubXlz6GfpfYY5GocOIZxHRSRGN0vXAQWU8TIKCYXy
+	IMshz8/khlX6lU6GewlyK7ea81KiYrSVwbEE4WrMBoGlyh/L3aWUyWYsVZqZbQjQYTLKX+J07rm
+	wq7BArgur/WA3X1WsafraxyBj7bo8lEMT1tLP6VnwhXTk+zI723QcfLVFIiJSVWEYIDI8mXa0nx
+	HhVtAVCguHrOAtHAJaSziQ9HILbQSvlhHDpgovScclJ9Twy8ylRracyLLgdpbkfryd9pX7qibfk
+	VrMBwxRlrYc+fnCV/gljbTzf5NLNGmhC+1YJ0XgpjDoRcRef7w==
+X-Google-Smtp-Source: AGHT+IG/mo6LzbokqaZR9z4+6a8QVxDwdnwCQDrVO5OzKylIiSFYs+auMFiSiR9/eSPlUSCD4nZFzg==
+X-Received: by 2002:a5d:5f8b:0:b0:3a3:63d3:369d with SMTP id ffacd0b85a97d-3a4cafc8330mr536182f8f.0.1748028218089;
+        Fri, 23 May 2025 12:23:38 -0700 (PDT)
+Received: from tux.home ([2a00:23c5:31e:9001:6ec4:b52e:4857:f27c])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a35ca5a892sm27002371f8f.24.2025.05.23.12.23.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 May 2025 10:55:10 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Markus Volk <f_l_k@t-online.de>
-Subject: [meta-multimedia][PATCH] webrtc-audio-processing-2: Add latomic to linker flags on riscv32
-Date: Fri, 23 May 2025 10:55:07 -0700
-Message-ID: <20250523175507.1099934-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.49.0
+        Fri, 23 May 2025 12:23:37 -0700 (PDT)
+From: Dimitrios Siganos <dimitris@siganos.org>
+To: Openembedded-devel@lists.openembedded.org
+Cc: Dimitrios Siganos <dimitris@siganos.org>
+Subject: [meta-oe][PATCH v3] bvi: add new package
+Date: Fri, 23 May 2025 20:23:21 +0100
+Message-Id: <20250523192321.333048-1-dimitris@siganos.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 17:55:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117611
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 May 2025 19:23:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117612
 
-This is flagged by lld linker since it defaults to --no-allow-shlib-undefined
-which disallows undefined references in shared libs
+bvi is a visual editor for binary files
 
-Cc: Markus Volk <f_l_k@t-online.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Dimitrios Siganos <dimitris@siganos.org>
 ---
- .../webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb   | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/bvi/bvi_1.4.2.bb      | 18 ++++++
+ .../bvi/files/0001-gcc-15.patch               | 60 +++++++++++++++++++
+ 2 files changed, 78 insertions(+)
+ create mode 100644 meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+ create mode 100644 meta-oe/recipes-support/bvi/files/0001-gcc-15.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb
-index 00bf26c750..8eab2c4ff0 100644
---- a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb
-+++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb
-@@ -16,5 +16,6 @@ SRC_URI[sha256sum] = "ae9302824b2038d394f10213cab05312c564a038434269f11dbf68f511
- S = "${WORKDIR}/webrtc-audio-processing-${PV}"
- 
- LDFLAGS:append:libc-musl = " -lexecinfo"
--
-+# | riscv32-yoe-linux-musl-ld.lld: error: undefined reference: __atomic_store_8
-+LDFLAGS:append:riscv32 = " -latomic"
- inherit meson pkgconfig
+diff --git a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb b/meta-oe/recipes-sup=
+port/bvi/bvi_1.4.2.bb
+new file mode 100644
+index 0000000000..a44a7e7078
+--- /dev/null
++++ b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+@@ -0,0 +1,18 @@
++SUMMARY =3D "Binary VI editor"
++DESCRIPTION =3D "bvi is a visual editor for binary files."
++HOMEPAGE =3D "https://sourceforge.net/projects/bvi"
++SECTION =3D "console/utils"
++LICENSE =3D "GPL-3.0-or-later"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da36207309d382da27cd66fdaae922e3=
+c"
++
++SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
++           file://0001-gcc-15.patch \
++          "
++SRC_URI[sha256sum] =3D "4bba16c2b496963a9b939336c0abcc8d488664492080ae43a8=
+6da18cf4ce94f2"
++
++DEPENDS +=3D "ncurses"
++
++# The project uses old style C interfaces, disable the warnings
++CFLAGS:append =3D " -Wno-old-style-definition"
++
++inherit pkgconfig autotools-brokensep
+diff --git a/meta-oe/recipes-support/bvi/files/0001-gcc-15.patch b/meta-oe/=
+recipes-support/bvi/files/0001-gcc-15.patch
+new file mode 100644
+index 0000000000..d5cb108eb6
+--- /dev/null
++++ b/meta-oe/recipes-support/bvi/files/0001-gcc-15.patch
+@@ -0,0 +1,60 @@
++This patch fixes the incompatibility problems with C23.=0D
++=0D
++The code uses some function prototypes without argument specifications,=0D
++which makes it incompatible with C23 and this patch fixes them.=0D
++=0D
++The patch was copied from here:=0D
++https://sourceforge.net/p/bvi/bugs/16=0D
++=0D
++Upstream-Status: Submitted [https://sourceforge.net/p/bvi/bugs/16]=0D
++=0D
++--- bvi.orig/re.c=0D
+++++ bvi/re.c=0D
++@@ -36,7 +36,11 @@=0D
++ #include	"bvi.h"=0D
++ #include	"set.h"=0D
++ =0D
+++#ifdef __STDC__=0D
+++static	int sbracket(int, char *, int);=0D
+++#else=0D
++ static	int sbracket();=0D
+++#endif=0D
++ =0D
++ char	act_pat[MAXCMD];  /* found pattern */=0D
++ char	pattern[MAXCMD + 1];=0D
++--- bvi.orig/bm_unix.c=0D
+++++ bvi/bm_unix.c=0D
++@@ -161,7 +161,11 @@=0D
++ {=0D
++ 	int	ret;=0D
++ #ifndef DJGPP=0D
+++#ifdef __STDC__=0D
+++	char	*getenv(const char *);=0D
+++#else=0D
++ 	char	*getenv();=0D
+++#endif=0D
++ 	char	*shell;=0D
++ 	char	cline[128];=0D
++ #endif=0D
++--- bvi.orig/bmore.h=0D
+++++ bvi/bmore.h=0D
++@@ -136,7 +136,7 @@=0D
++ =0D
++ =0D
++ =0D
++-#ifdef ANSI=0D
+++#if defined(ANSI) || defined(__STDC__)=0D
++ 	void	initterm(void), set_tty(void), reset_tty(void);=0D
++ 	void	cleartoeol(void), clearscreen(void), highlight(void);=0D
++ 	void	normal(void), bmbeep(void), home(void), sig(int);=0D
++--- bvi.orig/bvi.h=0D
+++++ bvi/bvi.h=0D
++@@ -214,7 +214,7 @@=0D
++ 	void	d_memmove(PTR, PTR, off_t);=0D
++ #endif=0D
++ =0D
++-#ifdef ANSI=0D
+++#if defined(ANSI) || defined(__STDC__)=0D
++ 	off_t	alloc_buf(off_t, char **), yd_addr(void);=0D
++ 	off_t	range(int);=0D
++ 	void	do_dot(void), do_exit(void), do_shell(void), do_undo(void);=0D
+--=20
+2.34.1
+
 
