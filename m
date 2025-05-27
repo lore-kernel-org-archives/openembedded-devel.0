@@ -1,160 +1,115 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 561B5C5B543
-	for <webhook@archiver.kernel.org>; Fri, 30 May 2025 17:11:59 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web10.710.1748625108973243652
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF890C5AE59
+	for <webhook@archiver.kernel.org>; Sat, 31 May 2025 10:56:04 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web10.48807.1748341500934009903
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 May 2025 10:11:49 -0700
+ Tue, 27 May 2025 03:25:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Cvk+yVVO;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-450d37d4699so8717535e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 May 2025 10:11:48 -0700 (PDT)
+ dkim=pass header.i=@elfin.de header.s=google header.b=CWz3aZx+;
+ spf=none, err=permanent DNS error (domain: elfin.de, ip: 209.85.128.48, mailfrom: marcel.behlau@elfin.de)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-442f4d40152so4104925e9.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 May 2025 03:25:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748625107; x=1749229907; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=X7teKBYz17g808p+ftpJNsyLKK8Fo6q2ND3+Mj2H+Is=;
-        b=Cvk+yVVO7AUrqVDt5LPA2w0dvInlMLWPIC+cdnq2sxdZGNG+SvpSs+fqva3OQ48JBR
-         qwNgQJx8RU3EejMdVdw2VcGWPsocdN3vkg1hQxPGQzIFb4Ce45967l0uEkFB315tooe/
-         ycjgPcTowdKhrDNYE1iv0Q3i2uTTKe/TlKXCkmvOr4+GdAtNHOu7mQMEZwON6sFKUGwn
-         sdsKFK5EIN8XwRwOMoJHyvVk6Z4qPk5M8v6cQgl9AIelnOG3Ups2OYX2K4vlIBDo5TfI
-         FkOFtI0TFzZ6CMntnjka0Ouq6Hdb02IaJh5NmGWWdKukG5nYJQJANy8I3avlKuxWBXa6
-         U/Nw==
+        d=elfin.de; s=google; t=1748341499; x=1748946299; darn=lists.openembedded.org;
+        h=content-transfer-encoding:content-language:to:subject:from
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=n1XszylzekhCIFLcrJ24h4l/gPJlYIqnh2AX6rdDoyI=;
+        b=CWz3aZx+KGBj2iW4QAyOelBobxuZwxIajk8C6qNebp0GC9ECJ+KTsZDTSAe5n+V4W7
+         EGZ9XcP/LkmC2LP2euznlah4hDfHvZXhVnjbNPxK6np73lz5D3L/N0/nACJ3Z1i5gfKH
+         RPJ6Z1uoAPoa8w0i57Xf5sTIEFZMLIPhxhZ4hpZyz3/3pfHLmFTKsVMs7pg/BFbo5RcE
+         hf1hbWbFBQgU1bLL1xif5Mf5x6gA0glDAfcm1854AREnIO+YlWlg33UnjnjyAlTaSGC0
+         qkzpvQ9W7wMyNvQjQr7H6feZ3/TVLu/Yd19VQ/Nxj0x73zyl/zHEK6ljNCcKCtOAvEtn
+         PCzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748625107; x=1749229907;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=X7teKBYz17g808p+ftpJNsyLKK8Fo6q2ND3+Mj2H+Is=;
-        b=LSdK6YbTtO8ZuMgjONpSMiCFs0raHk6CnzKavgWGD5U//ZOZN7/ivyCrIx0UxDoraH
-         8lNpjnHfp2uH9GK+Z5U4UZPlRSpaq4dI+B9GZKuE+AezOAzjF1NNY7HobWkpSH4iYZ4A
-         deFMVyGArqWCn3GkY72Q5c8sasR2cXhHqEr5cE/dUFfmZV32b+i4QNK5vif4fRiqfkAT
-         mDS2Ve/w/6p5cOKeme1ZtKHN2LSr/tucjQlM0TQ5Ydfrj80SZ/upDjcoCztWeSHFRVMg
-         AS2LUoVtdxLRtg3VJgMmeAlxaX4o9jMJPQ/CxKQzuh5j0Ftg8m53CSMaF7bpav2Ylgy4
-         YUEw==
-X-Gm-Message-State: AOJu0YwRhqWwcKn5JHffImx5RDwQmxMEMm0t7UPFdt6aC/pA13bm0n5B
-	BPxFmXDqzercUweAV17DnY4ITA/WDyYrKW7V82ZZp746FehDznUOpw1XgbXX/Q==
-X-Gm-Gg: ASbGncu4w+BLzh15yQENm3uW6RebF/PyKSNesCQnn2LWe0UllRh20WKH/q7trXMujzn
-	QSP7KF4B7NSrU8s4Gr1UYzDao1ow+cmsT/zDiPu14QD4zvOb85VGrEhzLZCsfjcEtHrazt7EYhl
-	u22g/naGHtJWbCDHjiJUY5/GCHMbFsZetE+no1RTQMhVm3UENXpX7+4HURuUF7TcMhTQctQOyHc
-	3C35f22s3ZGyyO+pDmT2nonLN2M4NmQrT8O4fMFi4oL9NOVVJ7C8dbWTqck7Ggl6sCAMpxJ324z
-	s/DkiyjCwL3BV/PlSsLbaFLNX6D7/za9DQZeyFwaupMsfvByr7zDMtgmL+80klMk/x3DDwdyn+t
-	NSspMGIz5+NWYh+JOFMSU1zmC1RLquVnkNNjB5n8t3FcO5w+IJl3P9erIRnjNHH9TZ9hx
-X-Google-Smtp-Source: AGHT+IG6bXsEKPuly0PlwWiM3R54VUMN1WeMfzPRQmf0H+Mb3vgDjno/3Rnj1wby5RP5qBwomVjZag==
-X-Received: by 2002:a05:600c:4688:b0:442:d5dd:5b4b with SMTP id 5b1f17b1804b1-450d655b5c1mr49298595e9.31.1748625106945;
-        Fri, 30 May 2025 10:11:46 -0700 (PDT)
-Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-450d7fa270csm23307305e9.16.2025.05.30.10.11.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 May 2025 10:11:46 -0700 (PDT)
-From: Jan Vermaete <jan.vermaete@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-oe][PATCH] freeglut: version bump (3.4.0 -> 3.6.0)
-Date: Fri, 30 May 2025 19:11:39 +0200
-Message-Id: <20250530171139.525281-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.39.5
+        d=1e100.net; s=20230601; t=1748341499; x=1748946299;
+        h=content-transfer-encoding:content-language:to:subject:from
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=n1XszylzekhCIFLcrJ24h4l/gPJlYIqnh2AX6rdDoyI=;
+        b=uaOPvP4kr8EqrgsjOdSte7dRyQtom5X0iL6Ga7IzSFWv39O4JEWG2+RoxMn2aEyEho
+         61mF+kHxGFT5IkbnimJ3ZMFAxUVU0A48hZ+tLxyZmHa61FIkc+0o/8H03iIdqzs13wgm
+         B1d7qW1h2ieO8bl+gLcGRUTD8EOsUhatFzfNBXhHZV+T3jN8NhOVmOPPY5A7AN5fCeJ9
+         qu8Dd8Uq9XEQsvjYJ2ZMYhRfPELBPE7ZZP07v7lCGVUJAyNj5zT2+4NoHtDEbbaPK8ja
+         1gsIegJAuYXIwAfpqr1GT0PlZX3O9UNd3eVbUCMTfqcJhwPCtgm/TE6m6a3pHGUkOJii
+         ihDw==
+X-Gm-Message-State: AOJu0Yx4qNKx5oh0kS+6GtBIDu0mbLVMZ88TNdel7xoQ1pgcpnqkAaiN
+	YKKOfTfLaCYT3K8Iia0Wli+xmCg6SZp+or16vXp5n3jHwtxWtqEpYTiVghxW7rnrc1ihXqOtFn6
+	Q4gHgjNA=
+X-Gm-Gg: ASbGnctMoML1uJk+cszS/wz4v+qBdNybM87UMJfasBisN+yiGhR7Djv39cWIAF0RVjb
+	wdC7cWbUqLOiABZb6odbtF6VrSeAd6dFkiE3gxBPUMpGDnziMlhj87VFH1dAwPL+00kt6lA66HV
+	nuKiLMno2/NYiVQFey2i0meSiqOsJAQkYry55MeVAce3UFtNPl+Y24dS8JUatWUPItE+UHBUJgV
+	MVLYlPFz4P/SReIVIJcHRD63oYzmTTskV3yekTWBhNahm6FdIQKe2lCiv0NHZPa8+jrkU+LuXix
+	ny7cOvsSKD3HSPnbvsKu+MBoy1W1yBgiPTkblWCRgTy+YozPz9d0WBnm8KfpRhYNAAwy63WXL6m
+	ACxGZVNWjHQ==
+X-Google-Smtp-Source: AGHT+IG0SNM4qRlf1R6C+6lTSgLsElUs877cgRq4hWzJLwK+J6cPP5rVCKgu0ahjI5CFZgWzEEgF8A==
+X-Received: by 2002:a05:600c:4f8e:b0:439:90f5:3919 with SMTP id 5b1f17b1804b1-44c934e611fmr41566545e9.4.1748341499084;
+        Tue, 27 May 2025 03:24:59 -0700 (PDT)
+Received: from [192.168.2.195] (static-87-78-131-86.nc.de. [87.78.131.86])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-447f78aef8asm273577975e9.29.2025.05.27.03.24.58
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 27 May 2025 03:24:58 -0700 (PDT)
+Message-ID: <d0d7fb88-0579-4391-85ea-bafded19823f@elfin.de>
+Date: Tue, 27 May 2025 12:24:58 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: "Marcel Behlau" <marcel.behlau@elfin.de>
+Subject: Broken access to openembedded repos
+To: openembedded-devel@lists.openembedded.org
+Content-Language: en-US-large
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 30 May 2025 17:11:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117675
+ <openembedded-devel@lists.openembedded.org>; Sat, 31 May 2025 10:56:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117676
 
-- apply upstream patch to compile at master
-- added HOMEPAGE
-- downloads are not from github
-  "Stable releases are available on our releases page on github, where you can find more information about each release. All releases are also mirrored on the old downloads page on sourceforge."
-  @see: https://freeglut.sourceforge.net/
-- fixed 'devtool check-upgrade-status'
+Hi,
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
----
- ...formDestroyContext-prototype-for-C23.patch | 30 +++++++++++++++++++
- .../{freeglut_3.4.0.bb => freeglut_3.6.0.bb}  | 14 +++++++--
- 2 files changed, 41 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/freeglut/freeglut/0001-egl-fix-fgPlatformDestroyContext-prototype-for-C23.patch
- rename meta-oe/recipes-graphics/freeglut/{freeglut_3.4.0.bb => freeglut_3.6.0.bb} (69%)
+we observed problems while access openembedded repos. It seems, path has 
+been changed, repos has been renamed or removed.
 
-diff --git a/meta-oe/recipes-graphics/freeglut/freeglut/0001-egl-fix-fgPlatformDestroyContext-prototype-for-C23.patch b/meta-oe/recipes-graphics/freeglut/freeglut/0001-egl-fix-fgPlatformDestroyContext-prototype-for-C23.patch
-new file mode 100644
-index 0000000000..13ba2316f3
---- /dev/null
-+++ b/meta-oe/recipes-graphics/freeglut/freeglut/0001-egl-fix-fgPlatformDestroyContext-prototype-for-C23.patch
-@@ -0,0 +1,30 @@
-+From 800772e993a3ceffa01ccf3fca449d3279cde338 Mon Sep 17 00:00:00 2001
-+From: Sam James <sam@gentoo.org>
-+Date: Sun, 17 Nov 2024 01:14:26 +0000
-+Subject: [PATCH 1/1] egl: fix fgPlatformDestroyContext prototype for C23
-+
-+C23 removes unprototyped functions, so this conflicted with the definition
-+in fg_init_x11.c.
-+
-+Bug: https://github.com/freeglut/freeglut/issues/186
-+
-+Upstream-Status: Backport [https://github.com/freeglut/freeglut/commit/800772e993a3ceffa01ccf3fca449d3279cde338]
-+---
-+ src/egl/fg_init_egl.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/egl/fg_init_egl.h b/src/egl/fg_init_egl.h
-+index 592c5221..8753dc0b 100644
-+--- a/src/egl/fg_init_egl.h
-++++ b/src/egl/fg_init_egl.h
-+@@ -28,6 +28,6 @@
-+ 
-+ extern void fghPlatformInitializeEGL();
-+ extern void fghPlatformCloseDisplayEGL();
-+-extern void fgPlatformDestroyContext();
-++extern void fgPlatformDestroyContext ( SFG_PlatformDisplay pDisplay, SFG_WindowContextType MContext );
-+ 
-+ #endif
-+-- 
-+2.39.5
-+
-diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb b/meta-oe/recipes-graphics/freeglut/freeglut_3.6.0.bb
-similarity index 69%
-rename from meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-rename to meta-oe/recipes-graphics/freeglut/freeglut_3.6.0.bb
-index 2cd00b0349..ebd5fbcbce 100644
---- a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-+++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.6.0.bb
-@@ -1,10 +1,15 @@
- DESCRIPTION = "FreeGLUT is a free-software/open-source alternative to the OpenGL \
-                Utility Toolkit (GLUT) library"
-+HOMEPAGE = "https://freeglut.sourceforge.net"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=89c0b58a3e01ce3d8254c9f59e78adfb"
- 
--SRC_URI = "https://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
--SRC_URI[sha256sum] = "3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6f3eaec"
-+SRC_URI = "\
-+    https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
-+    file://0001-egl-fix-fgPlatformDestroyContext-prototype-for-C23.patch \
-+"
-+
-+SRC_URI[sha256sum] = "9c3d4d6516fbfa0280edc93c77698fb7303e443c1aaaf37d269e3288a6c3ea52"
- 
- inherit cmake features_check pkgconfig
- 
-@@ -22,7 +27,10 @@ CFLAGS += "-Wno-implicit-function-declaration"
- 
- PROVIDES += "mesa-glut"
- 
--DEPENDS = "virtual/libgl libxi"
-+DEPENDS += "virtual/libgl libxi"
-+
-+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
-+UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
- 
- do_install:append() {
-     # Remove buildpaths
+What we observed:
+
+* https://git.openembedded.org/openembedded-core/ --> Clone now via 
+https://git.openembedded.org/openembedded-core/git/0/
+* https://git.openembedded.org/bitbake --> Clone now via 
+https://git.openembedded.org/bitbake-devel/git/0/
+* https://git.openembedded.org/meta-python2 --> Has been removed
+
+Was this changes intended?
+
+Thank you very much in advance and best regards,
+
+Marcel
+
+
+
+
 -- 
-2.39.5
+Marcel Behlau
+(Soft- und Hardwareentwicklung)
+
+ELFIN Technology GmbH
+Im Zollhafen 22
+50678 Köln
+
+Germany
+
+Tel: +49 (221) 6778932-0
+Fax: +49 (221) 6778932-2
+marcel.behlau@elfin.de
+
+www.elfin.de
+
+Unternehmenssitz: Im Zollhafen 22, 50678 Köln
+Amtsgericht Köln,
+HRB 101386 | Geschäftsführer: Jörg Hellmich
 
 
