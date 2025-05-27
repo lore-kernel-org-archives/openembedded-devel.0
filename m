@@ -1,72 +1,59 @@
-Return-Path: <marcel.behlau@elfin.de>
+Return-Path: <kelefa.sane@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B216CC54ED1
-	for <webhook@archiver.kernel.org>; Tue, 27 May 2025 10:28:18 +0000 (UTC)
-Subject: Broken access to openembedded repos
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 12470C54F30
+	for <webhook@archiver.kernel.org>; Tue, 27 May 2025 11:14:59 +0000 (UTC)
+Subject: Re: [meta-oe][PATCH] pcp: fix race condition build error
 To: openembedded-devel@lists.openembedded.org
-From: "Marcel Behlau" <marcel.behlau@elfin.de>
-X-Originating-Location: Cologne, North Rhine-Westphalia, DE (87.78.131.86)
-X-Originating-Platform: Linux Chrome 128
+From: kelefa.sane@smile.fr
+X-Originating-Location: Aixe-sur-Vienne, Nouvelle-Aquitaine, FR (176.157.204.145)
+X-Originating-Platform: Linux Chrome 134
 User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Date: Tue, 27 May 2025 03:28:17 -0700
-Message-ID: <s3wf.1748341634942227679.Wl1y@lists.openembedded.org>
-X-Old-Date: Tue, 27 May 2025 03:27:14 -0700
-Content-Type: multipart/alternative; boundary="o00S4fVrzsiWSkkelbqw"
+Date: Tue, 27 May 2025 04:14:52 -0700
+References: <20250527095732.1491355-1-yoann.congal@smile.fr>
+In-Reply-To: <20250527095732.1491355-1-yoann.congal@smile.fr>
+Message-ID: <15379.1748344492262632657@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="eMCZQCk2PxmEgvbaoMyg"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 May 2025 10:28:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117634
-Message-ID: <20250527102817.fDhgdBsBk4QuCrlTlJkzWZwcHhwP9D1a9eHZ4oT4GPA@z>
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 May 2025 11:14:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117635
 
---o00S4fVrzsiWSkkelbqw
-Content-Type: text/plain; charset=UTF-8
+--eMCZQCk2PxmEgvbaoMyg
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Reviewed-by: K=C3=A9l=C3=A9fa San=C3=A9 < kelefa.sane@smile.fr >
 
-we observed problems while access openembedded repos. It seems, path has be=
-en changed, repos has been renamed or removed.
-
-What we observed:
-
-* https://git.openembedded.org/openembedded-core/ --> Clone now via https:/=
-/git.openembedded.org/openembedded-core/git/0/
-* https://git.openembedded.org/bitbake --> Clone now via https://git.openem=
-bedded.org/bitbake-devel/git/0/
-* https://git.openembedded.org/meta-python2 --> Has been removed
-
-Were this changes intended?
-
-Thank you very much in advance and best regards,
-
-Marcel
-
---o00S4fVrzsiWSkkelbqw
-Content-Type: text/html; charset=UTF-8
+--eMCZQCk2PxmEgvbaoMyg
+Content-Type: text/html; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div>Hi, <br /><br />we observed problems while access openembedded repos. =
-It seems, path has been changed, repos has been renamed or removed. <br /><=
-br />What we observed: <br /><br />* <a class=3D"moz-txt-link-freetext" hre=
-f=3D"https://git.openembedded.org/openembedded-core/" target=3D"_blank" rel=
-=3D"nofollow noopener">https://git.openembedded.org/openembedded-core/</a> =
---&gt; Clone now via <a class=3D"moz-txt-link-freetext" href=3D"https://git=
-.openembedded.org/openembedded-core/git/0/" target=3D"_blank" rel=3D"nofoll=
-ow noopener">https://git.openembedded.org/openembedded-core/git/0/</a> <br =
-/>* <a class=3D"moz-txt-link-freetext" href=3D"https://git.openembedded.org=
-/bitbake" target=3D"_blank" rel=3D"nofollow noopener">https://git.openembed=
-ded.org/bitbake</a> --&gt; Clone now via <a class=3D"moz-txt-link-freetext"=
- href=3D"https://git.openembedded.org/bitbake-devel/git/0/" target=3D"_blan=
-k" rel=3D"nofollow noopener">https://git.openembedded.org/bitbake-devel/git=
-/0/</a> <br />* <a class=3D"moz-txt-link-freetext" href=3D"https://git.open=
-embedded.org/meta-python2" target=3D"_blank" rel=3D"nofollow noopener">http=
-s://git.openembedded.org/meta-python2</a> --&gt; Has been removed <br /><br=
- />Were this changes intended? <br /><br />Thank you very much in advance a=
-nd best regards, <br /><br />Marcel&nbsp;</div>
+<div><span style=3D"color: #222222; font-family: Arial, Helvetica, sans-ser=
+if; font-size: small; font-style: normal; font-variant-ligatures: normal; f=
+ont-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans=
+: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; bac=
+kground-color: #ffffff; text-decoration-thickness: initial; text-decoration=
+-style: initial; text-decoration-color: initial; display: inline !important=
+; float: none;">Reviewed-by: K&eacute;l&eacute;fa San&eacute; &lt;</span><a=
+ style=3D"color: #1155cc; font-family: Arial, Helvetica, sans-serif; font-s=
+ize: small; font-style: normal; font-variant-ligatures: normal; font-varian=
+t-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-=
+align: start; text-indent: 0px; text-transform: none; widows: 2; word-spaci=
+ng: 0px; -webkit-text-stroke-width: 0px; white-space: normal;" href=3D"mail=
+to:kelefa.sane@smile.fr" target=3D"_blank" rel=3D"noopener">kelefa.sane@smi=
+le.fr</a><span style=3D"color: #222222; font-family: Arial, Helvetica, sans=
+-serif; font-size: small; font-style: normal; font-variant-ligatures: norma=
+l; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orp=
+hans: 2; text-align: start; text-indent: 0px; text-transform: none; widows:=
+ 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal;=
+ background-color: #ffffff; text-decoration-thickness: initial; text-decora=
+tion-style: initial; text-decoration-color: initial; display: inline !impor=
+tant; float: none;">&gt;</span></div>
 
---o00S4fVrzsiWSkkelbqw--
+--eMCZQCk2PxmEgvbaoMyg--
 
