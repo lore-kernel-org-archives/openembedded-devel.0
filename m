@@ -1,104 +1,122 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CBC5C54ED1
-	for <webhook@archiver.kernel.org>; Wed, 28 May 2025 00:54:44 +0000 (UTC)
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
- by mx.groups.io with SMTP id smtpd.web11.5345.1748393683033436412
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C20AFC3ABB2
+	for <webhook@archiver.kernel.org>; Wed, 28 May 2025 06:15:25 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web11.9714.1748412915509910144
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 May 2025 17:54:43 -0700
+ Tue, 27 May 2025 23:15:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mJt7O/Ui;
- spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-70e3e0415a7so4643257b3.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 May 2025 17:54:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748393682; x=1748998482; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=EohShUP2qUAP9kcpKAtw/2vurOxrmxWpnx8xxuxxk8U=;
-        b=mJt7O/UiLm7EN8dpuldOwO09Eo3L0CiCmDBT7u8B3cizLCnz6lf/LHAgvwV8j8nrcp
-         gTRY1g4KSGb6S4JZaaW3qKdxEtaV8uUiOsWpUu5I99LMxNz/VtP86EVNdX22Zt8HCz3u
-         3wHByRvDNs9RdZAYsnocqCArJ6+PSFyQ3xguQAGQiVopFKMERYxBOp9jW9yjG78HCzQh
-         nAUH9jeJAFipemYt86IlPKsdQgc/7RRsfnYuxS+nfgM1RnYfGgnP3NDuwSCZx2tAm0Lv
-         IP1ilF/JnYt1EC/NXTF91rAdbbf4Rvz4O+vH+m28kPUuylGB+cVvowVOvO3GRGq6p4n+
-         OHag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748393682; x=1748998482;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=EohShUP2qUAP9kcpKAtw/2vurOxrmxWpnx8xxuxxk8U=;
-        b=mDCI7r4qorIh5EhHT+68Tr8r9VL9zn3fLtVfRHfeUIL6jwkqI8YDncLJ2I5YaIAb8l
-         MctQlsu0KWD/75bcprjtlkJJecIdMlPNTQtxGSR/thkhDiqSfDURqQnv8f3XoqxBHzIx
-         bG1WnEszuHZdVmeQFPk7RQc+oqQxjr2BA7bpTkMluO89VnNrIfI6fV9d13jxjgcq66T3
-         /Ee0iOFjv5hceBcmY4cP8/676/kFgRwam222TLINJA4mxwNh6BTUda+VMASQ4TngiXfF
-         aLpy8oQ9XbbaDlKyubTpqFLPN1/33smvG/1Zat0UYiQ9IdQZOu7gRf3JSDyuoqgbOqf4
-         TBuA==
-X-Gm-Message-State: AOJu0YxoZBIvZr0iv5RzPYUy2Ij9BKq+Gi7a6b04DAXDCY+pLcSAGZCP
-	mgODly1Kalo0LBS3oVWI07SSD+N1r9zXr9jAaVf2ZLIl3KQFDtQrooc895w5j+EH
-X-Gm-Gg: ASbGnctypKvS6nSCggs6mg2JbHsbl95Lk3JDT1Tca6rBJeBpxOYuGHdvJNmWno+3o1u
-	Ygo6s2YvRJBvxAubOUCXbeMDBn3tU1IC9q7XKK0jMqxZPdgIC6Pq/n5yhfwqJgmaRtpl2RtbY85
-	el0GAssmT2+nvAREhORitoKie2eYxYUtBpXZIfrwJeQx/LFq5KDZEQYqmFnZqBr3lYvII4+/Qqg
-	YyOdyfgOvzOhXyQBxIguiDAtJd8+hq+21yVjkKb8fSCANBUiUN7UWv7mLzPxSFnI53+YUxEBU0D
-	akBGUNUGuw+wIBush2+zUTw+pvvCCkF4iDZlleUSpLhbVWoYtZfr1Hgx
-X-Google-Smtp-Source: AGHT+IHEpLXbgQZiwIaZ8ky6I/9xCOLhPqaAyth/sXjASDKfqMS8vD2wQUk5AVzrbRgn3K3m8hUZfA==
-X-Received: by 2002:a05:690c:d:b0:70e:2804:9930 with SMTP id 00721157ae682-70e833a3d93mr43772837b3.10.1748393681532;
-        Tue, 27 May 2025 17:54:41 -0700 (PDT)
-Received: from localhost.localdomain ([71.215.9.36])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-70f67e4c7e1sm64297b3.107.2025.05.27.17.54.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 May 2025 17:54:41 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout02.t-online.de (Postfix) with SMTP id D942FEAE
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 May 2025 08:15:12 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([79.219.238.136]) by fwd74.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1uKA4G-0IzTQ90; Wed, 28 May 2025 08:15:12 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] xerces-c: upgrade 3.2.5 -> 3.3.0
-Date: Tue, 27 May 2025 20:53:43 -0400
-Message-ID: <20250528005343.1254660-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-networking][PATCH] networkmanager: update 1.50.0 -> 1-52-0
+Date: Wed, 28 May 2025 08:15:06 +0200
+Message-ID: <20250528061506.466361-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1748412912-65FF9541-BAC8427B/0/0 CLEAN NORMAL
+X-TOI-MSGID: e8ee0170-00ab-4dc1-b21a-611d61213a38
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 28 May 2025 00:54:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117641
+ <openembedded-devel@lists.openembedded.org>; Wed, 28 May 2025 06:15:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117642
 
-Release notes : https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12355023&projectId=10510
+- there is no tarball hosted at gnome anymore -> switch from
+  gnomebase class to meson + git
+- add missing dependencies for uuid and nvme, add pkgconfig class
+- dhcpcanon option was removed upstream
+- gtkdoc is broken. Disable to unbreak builds if api-documentation
+  is enabled
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../xerces-c/{xerces-c_3.2.5.bb => xerces-c_3.3.0.bb}         | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/xerces-c/{xerces-c_3.2.5.bb => xerces-c_3.3.0.bb} (90%)
+ ...rkmanager_1.50.0.bb =3D> networkmanager_1.52.0.bb} | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanag=
+er_1.50.0.bb =3D> networkmanager_1.52.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.2.5.bb b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.3.0.bb
-similarity index 90%
-rename from meta-oe/recipes-devtools/xerces-c/xerces-c_3.2.5.bb
-rename to meta-oe/recipes-devtools/xerces-c/xerces-c_3.3.0.bb
-index 9fd7e8fbab..2819366dc9 100644
---- a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.2.5.bb
-+++ b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.3.0.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- SRC_URI = "http://archive.apache.org/dist/xerces/c/3/sources/${BP}.tar.bz2 \
-     file://0001-aclocal.m4-don-t-use-full-path-of-with_curl-in-xerce.patch \
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkm=
+anager_1.50.0.bb b/meta-networking/recipes-connectivity/networkmanager/ne=
+tworkmanager_1.52.0.bb
+similarity index 96%
+rename from meta-networking/recipes-connectivity/networkmanager/networkma=
+nager_1.50.0.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmana=
+ger_1.52.0.bb
+index 702b80ac68..cc37bd05d7 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_=
+1.50.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_=
+1.52.0.bb
+@@ -25,32 +25,34 @@ DEPENDS =3D " \
+     intltool-native \
+     libxslt-native \
+     libnl \
++    libnvme \
+     udev \
+     util-linux \
++    util-linux-libuuid \
+     libndp \
+     curl \
+     dbus \
  "
--SRC_URI[sha256sum] = "1db4028c9b7f1f778efbf4a9462d65e13f9938f2c22f9e9994e12c49ba97e252"
-+SRC_URI[sha256sum] = "ef752578587e26013a933f16d76305c9b43ca32f869e3d3426986e03efb01d64"
- 
- inherit autotools
- 
-@@ -29,7 +29,7 @@ PACKAGES = "libxerces-c \
- 
- RPROVIDES:${PN}-dbg += "libxerces-c-dbg xerces-c-samples-dbg"
- 
--FILES:libxerces-c = "${libdir}/libxerces-c-3.2.so"
-+FILES:libxerces-c = "${libdir}/libxerces-c-3.3.so"
- FILES:libxerces-c-dev = "${libdir}/lib*.la \
-     ${libdir}/libxerces-c.so \
-     ${libdir}/pkgconfig/xerces-c.pc \
--- 
-2.43.0
+ DEPENDS:append:class-target =3D " bash-completion"
+=20
+-inherit gnomebase gettext update-rc.d systemd gobject-introspection gtk-=
+doc update-alternatives upstream-version-is-even
++inherit meson gettext update-rc.d systemd gobject-introspection update-a=
+lternatives upstream-version-is-even pkgconfig
+=20
+ SRC_URI =3D " \
+-    ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkMana=
+ger-${PV}.tar.xz \
++    git://github.com/NetworkManager/NetworkManager.git;protocol=3Dhttps;=
+branch=3Dmain \
+     file://${BPN}.initd \
+     file://enable-dhcpcd.conf \
+     file://enable-iwd.conf \
+ "
+ SRC_URI:append:libc-musl =3D "${@bb.utils.contains('DISTRO_FEATURES', 'l=
+d-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patc=
+h', '', d)}"
+=20
+-SRC_URI[sha256sum] =3D "fc03e7388a656cebc454c5d89481626122b1975d7c26babc=
+64dc7e488faa66e3"
++SRCREV =3D "7ee8d84a1ea030f5a4dd867702ed2992f192c5c8"
+=20
+-S =3D "${WORKDIR}/NetworkManager-${PV}"
++S =3D "${WORKDIR}/git"
+=20
+ # ['auto', 'symlink', 'file', 'netconfig', 'resolvconf']
+ NETWORKMANAGER_DNS_RC_MANAGER_DEFAULT ??=3D "auto"
+=20
+-# ['dhcpcanon', 'dhclient', 'dhcpcd', 'internal', 'nettools']
++# ['dhclient', 'dhcpcd', 'internal', 'nettools']
+ NETWORKMANAGER_DHCP_DEFAULT ??=3D "internal"
+=20
+ # The default gets detected based on whether /usr/sbin/nft or /usr/sbin/=
+iptables is installed, with nftables preferred.
+@@ -65,7 +67,6 @@ EXTRA_OEMESON =3D "\
+     -Dqt=3Dfalse \
+     -Dconfig_dns_rc_manager_default=3D${NETWORKMANAGER_DNS_RC_MANAGER_DE=
+FAULT} \
+     -Dconfig_dhcp_default=3D${NETWORKMANAGER_DHCP_DEFAULT} \
+-    -Ddhcpcanon=3Dfalse \
+     -Diptables=3D${sbindir}/iptables \
+     -Dnft=3D${sbindir}/nft \
+ "
+--=20
+2.49.0
 
 
