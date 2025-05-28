@@ -2,279 +2,108 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD98DC5AD49
-	for <webhook@archiver.kernel.org>; Wed, 28 May 2025 20:09:21 +0000 (UTC)
-Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
- by mx.groups.io with SMTP id smtpd.web11.5007.1748462956579442253
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8F40C5B543
+	for <webhook@archiver.kernel.org>; Wed, 28 May 2025 23:40:32 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web10.9375.1748475623791350522
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 28 May 2025 13:09:16 -0700
+ Wed, 28 May 2025 16:40:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=J5Dzwj0X;
- spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-2e3dea42465so164764fac.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 28 May 2025 13:09:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dpstdcAC;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-742caef5896so208399b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 28 May 2025 16:40:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748462956; x=1749067756; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1748475623; x=1749080423; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jCknuiPm+9Z+plGOOw9Qwbny8UAz6NVJ+d6MDy41uVo=;
-        b=J5Dzwj0XBpGmzfEwgUpb4zWua9L+BLn632mUVXLDql+eHhkW64GT4lBcJ+baSQqVMc
-         GyzREB35g8gSvJWjXWccBlCGveBhI2irQWH1wjkWbjHa+LyPQB+W7i9kOZyXmnJUn7QS
-         9hqhTBN3oO3QGbo3dY+3DlWbrOHRCqZbtkKF2rDrTaVWWQWV+Mk2ZIL2LmF3KPqI7tZ2
-         NYZeeryJ+yrbJQkLkTlRtkrkCoedAcxcytdQI7Th+8M4tfy1uH3/625tlr0EKoR3ABcI
-         RCtQQmCsBl+OI4lNPL0sY9OcoY5hWfpJrO5WLQaimY+ne2AnW8o4BL/CgPGx+dSScmDU
-         8nAA==
+        bh=rCsxDRT0krHo9SaXxY87AFIiG8krnyOdI6JpFP/a1x4=;
+        b=dpstdcACo6kNtHCDLy0WnPYZhiGjHqKTcjkMf6kTnkO+e7HE+tBmSd8BFMlcWHqbtU
+         hpo3LB8k6kiMoRBA95n6V5GW9CkZ2T1XPOgJz8IabjFKWi9ZVEy3Xbvea3VNRYPSirzA
+         o3B9CM0WYNir9miQGz3ClPeHo+V6QyrViTazAEolqQQzRVVOLysTYpad9a4S8ymZ9Yzg
+         FhkVtf6mCFa2fGE8QCzQNdYnWqx9LGssyic24IVlCAlfanyY8mEiZOjLGsIqeIR0/KU3
+         F1TdxrroBQ4QpVdXSOAqAxQ+xLWDbnw4R/tF3Bnfcc+whk2uBYXoc1MrCbZaYcQ4aW8A
+         ifvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748462956; x=1749067756;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1748475623; x=1749080423;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jCknuiPm+9Z+plGOOw9Qwbny8UAz6NVJ+d6MDy41uVo=;
-        b=AlBkFLbZA6926P49PWYS7xkj3EW0lsgyI0xGcaLdRJKXqHIhUoFRk/PKZiAUyzUzg3
-         Pdl6D7hUSGzGt5yDFjKCjy8SHP7RYdIb/IqTJcoFMiLIBrbDXChWCrYVo5aTFZu83NB1
-         WNiDlIrG70Gf8zuBih9cs2PUX2ZS0azQrVZw4LYPtYJsNhMcNE9ZOEs9gCOe4ZH7NuZF
-         pxedbxvxV+U3xBLmVjH6UwgCgvHJDaHtaAIzP0+XstdHyr2HKuC7Q+6MZQkqCYLWXEkI
-         Oq71tbR/NTgG4vFytxrZOL2yu/tbz+F4LwXBtUvepjBV2JuUE5zr/tRFVB7BaA1UeRwR
-         GuHg==
-X-Gm-Message-State: AOJu0YzNIAbe/5ik2uxXSyLsQpUVxJXdbQaZZKaXUx72h/cJ/A0At2uX
-	FKBghqsDooggQ9DWZToupRiIa/Pt5hvAWWyEMIHK8kcodDM/ItQqXT6RD8+OXv1Qb1ekaXEk1Ar
-	nlLdJ1dSMFDAMhpEnXPF7DmaaocPWOBA=
-X-Gm-Gg: ASbGncvsAcw+7kCNdmDYssmkUvNF/vaX9su6d97WHFdc+1mpqg2UETsEgUjwzloqdGa
-	DMlOxRIOKTFdlkf8mCs6YFOXaXOG6y2YPmLPRBLFhayUCrSFMThUb+2dYEO3xGjYjYfRjVDwrQ/
-	6K2EFyBn/AmQDnGTmH
-X-Google-Smtp-Source: AGHT+IHFUgokZ4CQ2lIxCj4dQs6400XrfY1qLXbaIE8OQgYDa3QqhmMqLB9Rd97TiRKGYlS4acmXuKhtnvbnPwIhSI8=
-X-Received: by 2002:a05:6871:bb22:b0:2d6:8eb:8918 with SMTP id
- 586e51a60fabf-2e8fc906d0emr569265fac.7.1748462953729; Wed, 28 May 2025
- 13:09:13 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250528-add-cryptopp-v3-1-6ad49cdb41bb@bootlin.com>
-In-Reply-To: <20250528-add-cryptopp-v3-1-6ad49cdb41bb@bootlin.com>
+        bh=rCsxDRT0krHo9SaXxY87AFIiG8krnyOdI6JpFP/a1x4=;
+        b=TBpEIc7BQQOx/T/R0rOsVQJAE+qXryKvgRUKoql1cL3dJs0QJHkj847IYQaWZYW+Rp
+         U4XG9E1FWJtmjtiBnQxI0nDpgalA+/Ba/LJFPRPRdyxybg1Y40KmyPJ63IfRY6vM8m5B
+         zCGnW3cL3Sy476xKMrqmfOuol/mjI0vK1xB+Tic9gnBCuIZPAvtiKRdkoBrW9ouai4k6
+         AZvDjUg0a3ISRPaUFpugmUUSOjRIDyEGy9fEeueGPb8y9lC25O0AaqPV3T9zj0d276cy
+         dqySs/ePfjXX3BsaCLHqHf74Mv6iVTwoDRjvvARv+qgisBhb7m9vKJ9EJVboZcUdFqDC
+         kMeA==
+X-Gm-Message-State: AOJu0YycjTywe07Jre5cmv5+CodqfU7cUnchbrqyg9ujuFvm7KBGcgSN
+	hbuv89XPSGlzk9wB/WoTcDUvcVzYpxSrdMPVbGPHgcEanT7ICl0i06FYk5ysCON0
+X-Gm-Gg: ASbGnctt9EgdRIK4bMJIeqcvVgp8EoJnVRQ/0JaLfJ0YEuZi2LVEj/K60yDvWbe9LHx
+	D1IzISv6Dt/9oQ21bXUk/TmrFjWyac443gFazzM6PQh8mPgCuBz51pkLFHus2Haw9azbbVfXzoq
+	FfQskDmXUg8/R+pPL8v7+YWZpl/lu+YEEAd1yqN0OrX4sKzOjlLYOGyyLKNRhV2mzzXzTp0Efk5
+	JFiBm7mSOivNs+tqSkLFgAKezjZKpiEPUk/qJH9kOSMNV10IjTD0VXB1w/TkjeaMNfc7geoglOC
+	+e7Kb7ZTIGuGGrzdL4itiiHpFdDOlUrxWREiuHDoXOw=
+X-Google-Smtp-Source: AGHT+IG4E5kpzB6OC0zNvdGPlaidADLLQY11cP1rCC2wEGFcebuOriwK0gQaojv0YaSkvRNbdM15aw==
+X-Received: by 2002:a05:6a20:4388:b0:1f5:7b6f:f8e8 with SMTP id adf61e73a8af0-21acba1015bmr63312637.6.1748475622935;
+        Wed, 28 May 2025 16:40:22 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::deb9])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-747afe966c7sm156446b3a.8.2025.05.28.16.40.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 28 May 2025 16:40:22 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 28 May 2025 13:08:47 -0700
-X-Gm-Features: AX0GCFtKYaMOJXxVlR26Xlk3pFNexh1AZMoWYmn81NXxCXn2bK50UwYQNpeVuAE
-Message-ID: <CAMKF1spXgkHhn9fSVnx+7X513h-HnXSsY_+ts=TYUQZV5KQuuQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe PATCH v3] cryptopp: add a recipe for version 8.9.0
-To: antonin.godard@bootlin.com
-Cc: openembedded-devel@lists.openembedded.org, 
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>, Martin Jansa <martin.jansa@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH v2] wolfssl: Upgrade to 5.8.0
+Date: Wed, 28 May 2025 16:40:14 -0700
+Message-ID: <20250528234014.3625637-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250528234014.3625637-1-raj.khem@gmail.com>
+References: <20250528234014.3625637-1-raj.khem@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 28 May 2025 20:09:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117650
+ <openembedded-devel@lists.openembedded.org>; Wed, 28 May 2025 23:40:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117652
 
-Fails to patch
+Define relative path for certs
 
-ERROR: cryptopp-8.9.0-r0 do_patch: Applying patch
-'0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch' on target
-directory '/mnt/b/yoe/master/build/tmp/work/riscv64-yoe-linux/cryptopp/8.9.=
-0/git'
-CmdError('quilt --quiltrc
-/mnt/b/yoe/master/build/tmp/work/riscv64-yoe-linux/cryptopp/8.9.0/recipe-sy=
-sroot-native/etc/quiltrc
-push', 0, 'stdout: Applying patch
-0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch
-patching file config_asm.h
-Hunk #1 FAILED at 278 (different line endings).
-Hunk #2 FAILED at 290 (different line endings).
-Hunk #3 FAILED at 302 (different line endings).
-3 out of 3 hunks FAILED -- rejects in file config_asm.h
-Patch 0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch does not
-apply (enforce with -f)
+Fixes
+WARNING: wolfssl-5.8.0-r0 do_package_qa: QA Issue: File /usr/lib/wolfssl/ptest/test/.libs/unit.test in package wolfssl-ptest contains reference to TMPDIR [buildpaths]
 
-On Wed, May 28, 2025 at 6:22=E2=80=AFAM Antonin Godard via
-lists.openembedded.org
-<antonin.godard=3Dbootlin.com@lists.openembedded.org> wrote:
->
-> Cryptopp is a library of cryptographic schemes written in C++.
-> Add a recipe for it in meta-oe/recipes-crypto.
->
-> Signed-off-by: Antonin Godard <antonin.godard@bootlin.com>
-> ---
-> Note: I had no issue building with MACHINE to "qemux86-64" and TCLIBC =3D
-> "musl", as reported here:
-> https://lore.kernel.org/r/CAMKF1sreBnjjX0GW-G9+15Y+EgFQUmKUPX_cqYE7J3WaZ9=
-=3D94g@mail.gmail.com
-> Any extra steps to reproduce the issue would be appreciated.
-> ---
-> Changes in v3:
-> - Add 0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch to fix the
->   arm64 build issue.
-> - Revert UNPACKDIR -> WORKDIR.
-> - Use +=3D not append.
-> - Link to v2: https://lore.kernel.org/r/20241122-add-cryptopp-v2-1-194560=
-62f791@bootlin.com
->
-> Changes in v2:
-> - WORKDIR -> UNPACKDIR in S
-> - remove bb.utils.contains in CXXFLAGS:append:aarch64 (forgot to remove
->   after adding aarch64 override)
-> - Link to v1: https://lore.kernel.org/r/20241121-add-cryptopp-v1-1-36382a=
-60cecb@bootlin.com
-> ---
->  ...ix-arm-crypto-logic-issue-in-config_asm.h.patch | 57 ++++++++++++++++=
-++++++
->  meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb  | 45 ++++++++++++++++=
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Fix buildpaths in test binaries
+
+ .../wolfssl/{wolfssl_5.7.2.bb => wolfssl_5.8.0.bb}            | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_5.7.2.bb => wolfssl_5.8.0.bb} (94%)
+
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+similarity index 94%
+rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb
+rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+index b7ff23e719..5454b7c7c2 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+@@ -17,7 +17,7 @@ SRC_URI = " \
+     file://run-ptest \
+ "
+ 
+-SRCREV = "00e42151ca061463ba6a95adb2290f678cbca472"
++SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -28,6 +28,8 @@ PACKAGECONFIG ?= "reproducible-build"
+ PACKAGECONFIG[reproducible-build] = "--enable-reproducible-build,--disable-reproducible-build,"
+ BBCLASSEXTEND += "native nativesdk"
+ 
++CFLAGS += '-DCERT_REL_PREFIX=\\"./\\"'
 +
->  2 files changed, 102 insertions(+)
->
-> diff --git a/meta-oe/recipes-crypto/cryptopp/cryptopp-8.9.0/0001-Fix-arm-=
-crypto-logic-issue-in-config_asm.h.patch b/meta-oe/recipes-crypto/cryptopp/=
-cryptopp-8.9.0/0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch
-> new file mode 100644
-> index 0000000000..6200c575aa
-> --- /dev/null
-> +++ b/meta-oe/recipes-crypto/cryptopp/cryptopp-8.9.0/0001-Fix-arm-crypto-=
-logic-issue-in-config_asm.h.patch
-> @@ -0,0 +1,57 @@
-> +From 553643dffef249ff70155ea4896d83649bc213a1 Mon Sep 17 00:00:00 2001
-> +From: Antonin Godard <antonin.godard@bootlin.com>
-> +Date: Tue, 27 May 2025 09:00:53 +0200
-> +Subject: [PATCH] Fix arm crypto logic issue in config_asm.h
-> +
-> +The current logic for enabling or disabling the CRYPTOPP_ARM_*_AVAILABLE
-> +macros seems wrong, because we do an OR between all of the conditions
-> +following `defined(__ARM_FEATURE_CRYPTO)`. Fix the logic so that the
-> +CRYPTOPP_ARM_*_AVAILABLE macros are set if __ARM_FEATURE_CRYPTO is set
-> +_AND_ any of the following condition is true.
-> +
-> +Upstream-Status: Submitted [https://github.com/weidai11/cryptopp/pull/13=
-24]
-> +Signed-off-by: Antonin Godard <antonin.godard@bootlin.com>
-> +---
-> + config_asm.h | 12 ++++++------
-> + 1 file changed, 6 insertions(+), 6 deletions(-)
-> +
-> +diff --git a/config_asm.h b/config_asm.h
-> +index 71ffb9f8..d388124f 100644
-> +--- a/config_asm.h
-> ++++ b/config_asm.h
-> +@@ -278,9 +278,9 @@
-> + // Requires GCC 4.8, Clang 3.3 or Visual Studio 2017
-> + #if !defined(CRYPTOPP_ARM_AES_AVAILABLE) && !defined(CRYPTOPP_DISABLE_A=
-RM_AES)
-> + # if defined(__aarch32__) || defined(__aarch64__) || defined(_M_ARM64)
-> +-#  if defined(__ARM_FEATURE_CRYPTO) || (CRYPTOPP_GCC_VERSION >=3D 40800=
-) || \
-> ++#  if defined(__ARM_FEATURE_CRYPTO) && ((CRYPTOPP_GCC_VERSION >=3D 4080=
-0) || \
-> +       (CRYPTOPP_LLVM_CLANG_VERSION >=3D 30300) || (CRYPTOPP_APPLE_CLANG=
-_VERSION >=3D 40300) || \
-> +-      (CRYPTOPP_MSC_VERSION >=3D 1916)
-> ++      (CRYPTOPP_MSC_VERSION >=3D 1916))
-> + #   define CRYPTOPP_ARM_AES_AVAILABLE 1
-> + #  endif  // Compilers
-> + # endif  // Platforms
-> +@@ -290,9 +290,9 @@
-> + // Requires GCC 4.8, Clang 3.3 or Visual Studio 2017
-> + #if !defined(CRYPTOPP_ARM_PMULL_AVAILABLE) && !defined(CRYPTOPP_DISABLE=
-_ARM_PMULL)
-> + # if defined(__aarch32__) || defined(__aarch64__) || defined(_M_ARM64)
-> +-#  if defined(__ARM_FEATURE_CRYPTO) || (CRYPTOPP_GCC_VERSION >=3D 40800=
-) || \
-> ++#  if defined(__ARM_FEATURE_CRYPTO) && ((CRYPTOPP_GCC_VERSION >=3D 4080=
-0) || \
-> +       (CRYPTOPP_LLVM_CLANG_VERSION >=3D 30300) || (CRYPTOPP_APPLE_CLANG=
-_VERSION >=3D 40300) || \
-> +-      (CRYPTOPP_MSC_VERSION >=3D 1916)
-> ++      (CRYPTOPP_MSC_VERSION >=3D 1916))
-> + #   define CRYPTOPP_ARM_PMULL_AVAILABLE 1
-> + #  endif  // Compilers
-> + # endif  // Platforms
-> +@@ -302,9 +302,9 @@
-> + // Requires GCC 4.8, Clang 3.3 or Visual Studio 2017
-> + #if !defined(CRYPTOPP_ARM_SHA_AVAILABLE) && !defined(CRYPTOPP_DISABLE_A=
-RM_SHA)
-> + # if defined(__aarch32__) || defined(__aarch64__) || defined(_M_ARM64)
-> +-#  if defined(__ARM_FEATURE_CRYPTO) || (CRYPTOPP_GCC_VERSION >=3D 40800=
-) || \
-> ++#  if defined(__ARM_FEATURE_CRYPTO) && ((CRYPTOPP_GCC_VERSION >=3D 4080=
-0) || \
-> +       (CRYPTOPP_LLVM_CLANG_VERSION >=3D 30300) || (CRYPTOPP_APPLE_CLANG=
-_VERSION >=3D 40300) || \
-> +-      (CRYPTOPP_MSC_VERSION >=3D 1916)
-> ++      (CRYPTOPP_MSC_VERSION >=3D 1916))
-> + #   define CRYPTOPP_ARM_SHA1_AVAILABLE 1
-> + #   define CRYPTOPP_ARM_SHA2_AVAILABLE 1
-> + #  endif  // Compilers
-> diff --git a/meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb b/meta-oe/=
-recipes-crypto/cryptopp/cryptopp_8.9.0.bb
-> new file mode 100644
-> index 0000000000..b1235d6b2c
-> --- /dev/null
-> +++ b/meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb
-> @@ -0,0 +1,45 @@
-> +SUMMARY =3D "A C++ class library of cryptographic schemes"
-> +DESCRIPTION =3D "Crypto++ Library is a C++ class library of cryptographi=
-c schemes"
-> +CVE_PRODUCT =3D "cryptopp"
-> +HOMEPAGE =3D "http://www.cryptopp.com/"
-> +SECTION =3D "libs"
-> +LICENSE =3D "BSL-1.0"
-> +LIC_FILES_CHKSUM =3D "file://License.txt;md5=3Dca6dacb7ef68b1ab5dfa3bed2=
-4c12003"
-> +
-> +SRC_URI =3D "git://github.com/weidai11/cryptopp.git;protocol=3Dhttps;bra=
-nch=3Dmaster \
-> +           file://0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch =
-\
-> +           "
-> +SRCREV =3D "843d74c7c97f9e19a615b8ff3c0ca06599ca501b"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit pkgconfig
-> +
-> +CXXFLAGS +=3D "-fPIC"
-> +EXTRA_OEMAKE +=3D "HAS_SOLIB_VERSION=3D1"
-> +
-> +do_compile () {
-> +    oe_runmake -f GNUmakefile-cross libcryptopp.a libcryptopp.so cryptes=
-t.exe
-> +}
-> +
-> +do_install () {
-> +    DESTDIR=3D"${D}" \
-> +        BINDIR=3D"${bindir}" \
-> +        DATADIR=3D"${datadir}" \
-> +        INCLUDEDIR=3D"${includedir}" \
-> +        LIBDIR=3D"${libdir}" \
-> +        oe_runmake install
-> +
-> +    # Rename cryptest.exe to cryptest
-> +    if [ -f "${D}${bindir}/cryptest.exe" ]; then
-> +        mv "${D}${bindir}/cryptest.exe" "${D}${bindir}/cryptest"
-> +    fi
-> +}
-> +
-> +PACKAGE_BEFORE_PN +=3D "${PN}-cryptest ${PN}-testdata ${PN}-testvectors"
-> +
-> +FILES:${PN}-cryptest =3D "${bindir}/cryptest"
-> +FILES:${PN}-testdata =3D "${datadir}/cryptopp/TestData"
-> +FILES:${PN}-testvectors =3D "${datadir}/cryptopp/TestVectors"
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
->
-> ---
-> base-commit: 5df267759c953b9615290ea6b8d9051b83863bf9
-> change-id: 20241121-add-cryptopp-f78794be963c
->
-> Best regards,
-> --
-> Antonin Godard <antonin.godard@bootlin.com>
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117647): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117647
-> Mute This Topic: https://lists.openembedded.org/mt/113343502/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+ RDEPENDS:${PN}-ptest += " bash"
+ 
+ do_install_ptest() {
 
