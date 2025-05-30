@@ -1,92 +1,162 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FFDEC54FB3
-	for <webhook@archiver.kernel.org>; Fri, 30 May 2025 02:42:09 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.2274.1748572921727962995
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3218C54F30
+	for <webhook@archiver.kernel.org>; Fri, 30 May 2025 04:04:29 +0000 (UTC)
+Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
+ by mx.groups.io with SMTP id smtpd.web11.3443.1748577864921195995
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 May 2025 19:42:01 -0700
+ Thu, 29 May 2025 21:04:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=8245d0438c=changqing.li@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54U2BPHt022207
-	for <openembedded-devel@lists.openembedded.org>; Thu, 29 May 2025 19:42:01 -0700
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 46u9d45yxh-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 29 May 2025 19:42:01 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Thu, 29 May 2025 19:41:41 -0700
-Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Thu, 29 May 2025 19:41:40 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-initramfs][PATCH 8/8] dracut: set DRACUT_FULL_VERSION to PV
-Date: Fri, 30 May 2025 10:41:51 +0800
-Message-ID: <20250530024151.4152523-8-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250530024151.4152523-1-changqing.li@windriver.com>
-References: <20250530024151.4152523-1-changqing.li@windriver.com>
+ dkim=pass header.i=@mvista.com header.s=google header.b=WSK3CX2h;
+ spf=pass (domain: mvista.com, ip: 209.85.160.48, mailfrom: vanusuri@mvista.com)
+Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-2d0920ce388so887786fac.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 May 2025 21:04:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1748577864; x=1749182664; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mrRRPm+XYUMy0LcF0zfGd4Pg++GGxpLfsRo7/hU6fog=;
+        b=WSK3CX2h2qYpWeLVcDmHaifjHGajTmolohs11uNcEXw4FqXSeAiQm3MJeuiCUf1ZEr
+         HH5p3NSCqSjIFTBEyX6lzsWyCRVwEHkB+OdOiIYxolPPli8xzm90f2e/O4WIm4+2Xipv
+         5a81AN7pUoJlaaliu5Js9fer9HL8szEKuss3Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1748577864; x=1749182664;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mrRRPm+XYUMy0LcF0zfGd4Pg++GGxpLfsRo7/hU6fog=;
+        b=tGu0MiCJ7qXtBX7fMgVjedS+FS7ZR6STVXgpSvQL7WBfLZ6u2mgV9MXvkXav3Tuzza
+         1S0LvOFhOyDfSz0wn650h9pNzuKh6UZhbBfKH+IX5Ub8gQBGU15mgd9+JRHO+FuwxGZN
+         mMX0AJmEWcgs86y2xfLRXSDdAG8Q5FaeTh5twoVlARqT9pq0HaTiTgp96bSJWc9Jv1bG
+         rW1NtnZFXmzdu4Krbs1jX5B0QmBenxIt5mbU5gbg8NXCi3C99f8vScLIix8CjWeCQX/j
+         XBMKZAP8hseFXYggIefbFIiwRxsRp1dxRrh+VfU0BRYPziXu3pF9yHSRd1/91mYcRQWo
+         XlEg==
+X-Gm-Message-State: AOJu0YxR1gI5n58cOF4+jTnZRq0sMnaaDN+H8etNUshewSGaEhnh0BcB
+	ZsDZs9aiGZCFUUJ4kj9HXvoiy08Cgl9V3Mut6v0Twh2g11MFwTLzItMvaJj6zt0Vn1lSFRxfql9
+	pSmCqJU4=
+X-Gm-Gg: ASbGncuBPRnMGy6lMrXUGYmfd4/AhN7G2DX859i1FeSGa4xYc5pTdH7qDI8a5b8equB
+	96jwf8F3fqroAztvVf/PAMuUkIIr3iZ3AdV1meJhBVc4h80bchs6fXX06/JICZUHZJ3hC+VEBL4
+	b2jj31pQj8qqGUbNs6ZN+jNP27ikJyy9pGixA8OZds65pzDvnzzXhJ5uvI9mrrD6gND4cL0JZ3V
+	5bCS9LX11Qmeoe3oGVDQS19AnHkj7zbgF8p4A/agxLCXa1RsDPfaCWqmAv0WzUTvntuiVQ5gkmS
+	lsZTTDYTIQ/9HPjWP1I6iKB0/0aXZCe4vF08d0Yi5LMfrgx4EhaoULM/TPYvQI8=
+X-Google-Smtp-Source: AGHT+IHfmtPUT+XS6Vlmizhjol8L/gay6MoMbneZq369cCIC/x6vMZF6uTAKyY/1C2VxZIUYmTz0KA==
+X-Received: by 2002:a05:687c:2181:b0:2df:787a:d8f9 with SMTP id 586e51a60fabf-2e92151f4b0mr898025fac.26.1748577863625;
+        Thu, 29 May 2025 21:04:23 -0700 (PDT)
+Received: from MVIN00020.mvista.com ([49.207.228.102])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-2e906b7fbbcsm548872fac.33.2025.05.29.21.04.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 29 May 2025 21:04:21 -0700 (PDT)
+From: vanusuri@mvista.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-oe][scarthgap][PATCH] redis: upgrade 7.2.7 -> 7.2.8
+Date: Fri, 30 May 2025 09:34:10 +0530
+Message-Id: <20250530040410.29699-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: UWevOnJ25kEHOCblDNkkMjvSHf3F8OlP
-X-Proofpoint-ORIG-GUID: UWevOnJ25kEHOCblDNkkMjvSHf3F8OlP
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTMwMDAyMiBTYWx0ZWRfX604AbepxlOng 0U/Ln+JpAcBYiijee9iNREeiwqBlrTns0E6SvLQiXwRsA1kXHBT1hDCCtjkB32FqLn4dhyuwb7M wyS4ey601+O5W3sJnppUucPAqJDnaHXU4U75GKEFlS3PW0oVcfeu3+U7kjPWFFIjaMzN4b4/r9H
- siL+q9Ur+MsHf6AdHk4OHfzoOuFOtAbUmd/T2qY5LiwSEFAg4cvMIetZN7J/jQnajLo5EYXlWo4 bSSJEaq7ig2Ej08mbjs3BY5nsz2u8Gi2NXG6qC9Gawlnq5FMfwBagHKo5zwJrtW9rSr9J4z3X9j s5eyhlIVHqQYT2yARH11SWF8JBlCfql9qHAxFENC254cXe+4KqwDe8PFTOBhYHHzDPvR/Cuu87v
- exUSa2a72SOUCZBVi9pmWes5dGl7STrkwkC3BhimZdbwwxknHyqBbP77UkKmBejirLfJcYPE
-X-Authority-Analysis: v=2.4 cv=fdCty1QF c=1 sm=1 tr=0 ts=68391af9 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=dt9VzEwgFbYA:10 a=t7CeM3EgAAAA:8 a=tFQAytT4SFPGcj8ao_8A:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-30_01,2025-05-29_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- phishscore=0 adultscore=0 malwarescore=0 suspectscore=0 impostorscore=0
- clxscore=1015 mlxscore=0 spamscore=0 bulkscore=0 mlxlogscore=999
- priorityscore=1501 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505160000
- definitions=main-2505300022
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 30 May 2025 02:42:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117664
+ <openembedded-devel@lists.openembedded.org>; Fri, 30 May 2025 04:04:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117665
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-RACUT_FULL_VERSION is conditional assigned in Makefile as below:
-DRACUT_FULL_VERSION ?= $(shell env GIT_CEILING_DIRECTORIES=$(CURDIR)/.. git describe --tags --always 2>/dev/null || :)
+ChangeLog:
+https://github.com/redis/redis/releases/tag/7.2.8
 
-When build from git shallow tarball, since tag info is not included,
-956c087 is returned. This will make dracut version in dracut.pc
-different with build from git repo.
+Update urgency: SECURITY: There are security fixes in the release.
 
-Set DRACUT_FULL_VERSION to PV, to improve reproducibility for this
-recipe, and also fix the version mismatch warning
+Security fixes
+==================
+* (CVE-2025-21605) An unauthenticated client can cause an unlimited growth of output buffers
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Bug fixes
+=================
+* #12817, #12905 Fix race condition issues between the main thread and module threads
+* #13863 RANDOMKEY - infinite loop during client pause
+* #13877 ShardID inconsistency when both primary and replica support it
+
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- meta-initramfs/recipes-devtools/dracut/dracut_106.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../0001-hiredis-use-default-CC-if-it-is-set.patch              | 0
+ ...2-lua-update-Makefile-to-use-environment-build-setting.patch | 0
+ .../0003-hack-to-force-use-of-libc-malloc.patch                 | 0
+ .../0004-src-Do-not-reset-FINAL_LIBS.patch                      | 0
+ ...05-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch | 0
+ .../0006-Define-correct-gregs-for-RISCV32.patch                 | 0
+ .../redis/{redis-7.2.7 => redis-7.2.8}/init-redis-server        | 0
+ .../redis/{redis-7.2.7 => redis-7.2.8}/redis.conf               | 0
+ .../redis/{redis-7.2.7 => redis-7.2.8}/redis.service            | 0
+ .../recipes-extended/redis/{redis_7.2.7.bb => redis_7.2.8.bb}   | 2 +-
+ 10 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.7 => redis-7.2.8}/0001-hiredis-use-default-CC-if-it-is-set.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.7 => redis-7.2.8}/0002-lua-update-Makefile-to-use-environment-build-setting.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.7 => redis-7.2.8}/0003-hack-to-force-use-of-libc-malloc.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.7 => redis-7.2.8}/0004-src-Do-not-reset-FINAL_LIBS.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.7 => redis-7.2.8}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.7 => redis-7.2.8}/0006-Define-correct-gregs-for-RISCV32.patch (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.7 => redis-7.2.8}/init-redis-server (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.7 => redis-7.2.8}/redis.conf (100%)
+ rename meta-oe/recipes-extended/redis/{redis-7.2.7 => redis-7.2.8}/redis.service (100%)
+ rename meta-oe/recipes-extended/redis/{redis_7.2.7.bb => redis_7.2.8.bb} (96%)
 
-diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_106.bb b/meta-initramfs/recipes-devtools/dracut/dracut_106.bb
-index b70ee4baeb..871119521f 100644
---- a/meta-initramfs/recipes-devtools/dracut/dracut_106.bb
-+++ b/meta-initramfs/recipes-devtools/dracut/dracut_106.bb
-@@ -35,7 +35,7 @@ EXTRA_OECONF = "--prefix=${prefix} \
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
- PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,,,systemd"
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.7/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0001-hiredis-use-default-CC-if-it-is-set.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.7/0001-hiredis-use-default-CC-if-it-is-set.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.8/0001-hiredis-use-default-CC-if-it-is-set.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.7/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.7/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.8/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.7/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0003-hack-to-force-use-of-libc-malloc.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.7/0003-hack-to-force-use-of-libc-malloc.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.8/0003-hack-to-force-use-of-libc-malloc.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.7/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0004-src-Do-not-reset-FINAL_LIBS.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.7/0004-src-Do-not-reset-FINAL_LIBS.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.8/0004-src-Do-not-reset-FINAL_LIBS.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.7/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.7/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.8/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.7/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0006-Define-correct-gregs-for-RISCV32.patch
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.7/0006-Define-correct-gregs-for-RISCV32.patch
+rename to meta-oe/recipes-extended/redis/redis-7.2.8/0006-Define-correct-gregs-for-RISCV32.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.7/init-redis-server b/meta-oe/recipes-extended/redis/redis-7.2.8/init-redis-server
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.7/init-redis-server
+rename to meta-oe/recipes-extended/redis/redis-7.2.8/init-redis-server
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.7/redis.conf b/meta-oe/recipes-extended/redis/redis-7.2.8/redis.conf
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.7/redis.conf
+rename to meta-oe/recipes-extended/redis/redis-7.2.8/redis.conf
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.7/redis.service b/meta-oe/recipes-extended/redis/redis-7.2.8/redis.service
+similarity index 100%
+rename from meta-oe/recipes-extended/redis/redis-7.2.7/redis.service
+rename to meta-oe/recipes-extended/redis/redis-7.2.8/redis.service
+diff --git a/meta-oe/recipes-extended/redis/redis_7.2.7.bb b/meta-oe/recipes-extended/redis/redis_7.2.8.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/redis/redis_7.2.7.bb
+rename to meta-oe/recipes-extended/redis/redis_7.2.8.bb
+index 2f5e45ca0c..bf9de7a166 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.2.7.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.2.8.bb
+@@ -18,7 +18,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+           "
  
--EXTRA_OEMAKE += 'libdir=${nonarch_libdir} LDLIBS="${LDLIBS}" enable_test=no'
-+EXTRA_OEMAKE += 'libdir=${nonarch_libdir} LDLIBS="${LDLIBS}" enable_test=no DRACUT_FULL_VERSION=${PV}'
+-SRC_URI[sha256sum] = "72c081e3b8cfae7144273d26d76736f08319000af46c01515cad5d29765cead5"
++SRC_URI[sha256sum] = "6be4fdfcdb2e5ac91454438246d00842d2671f792673390e742dfcaf1bf01574"
  
- CFLAGS:append = " -fPIC"
- LDLIBS:append:libc-musl = " -lfts"
+ inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
+ 
 -- 
-2.34.1
+2.25.1
 
 
