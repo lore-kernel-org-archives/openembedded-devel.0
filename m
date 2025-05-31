@@ -2,22 +2,22 @@ Return-Path: <johannes.schneider@leica-geosystems.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5EC7C5AE59
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBDEFC5B543
 	for <webhook@archiver.kernel.org>; Sat, 31 May 2025 11:00:44 +0000 (UTC)
-Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.46])
- by mx.groups.io with SMTP id smtpd.web11.3642.1748689238740352089
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.61])
+ by mx.groups.io with SMTP id smtpd.web10.3724.1748689241685023080
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 31 May 2025 04:00:39 -0700
+ Sat, 31 May 2025 04:00:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=Eq9r0j0J;
- spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 52.101.70.46, mailfrom: johannes.schneider@leica-geosystems.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=TRt09mVq;
+ spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 40.107.21.61, mailfrom: johannes.schneider@leica-geosystems.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HTVCe3cFu1cGEqcANq32PFddVMxd/aWq1NNmB8731fyEE6gHjTFsBJ6vl8CXxiqrKajhbaLwGjSv7/lYCIin7iRz8MdOp0/RaKauCQMpg7g1nlFyhX0NEPTBb2tRJeeUQSp+bMtc16FHOk7emcV4PUeSlCWPrrQr70AG0ZoV11n2DWigQQo6No0QLOHu5shZ6NF/GKBlDDTUgS65Cn9GAmtDCWJF31+bUlUBItP0J2au3egkfRXp6liavuRvRF/ag+bvU9VSp0uiKDvC+PKz5sUwmfkdx7ET7NKaBx6bJS7kkOEGoEJ2tM4s1hsmZ/pnRT9zTRFMBG2uDr/tOD7Qfg==
+ b=Rj/q2knmr2gHUbJWF1GPYpPgA9NdgJziIOCrqRQ6VLN5TuXwEOQMAZhBFR5m2pzpaXaR6BFDqnbH9Upsx6W6yQlPXFmtZ3CC48oyrsb/EntX/yQ9KbF41y3TJPw4OB6rpKxYIuMo8wCdoBf/tva+hmNAwEAc+PCknWCB71iNGGjy4aoP3aZSFtpYISdYR3FuZeEaFmjrri63jOxwy3Y69ElNfJxnL5W3m+X8M5H+cysOn4Y/ke0/7nRiPz4oeYLMdvLBYBGvDxgWjL+V2AIJIWjzSiKsHNTpS5vGZW+HG5GMl7D6OSUx5aSqOT+WVt49Vo10OyUPlQiY/YyKJbj2ug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=90IHeF/pMe/IBc9dti9g2umYzQEiez637B6Fm+iXHpo=;
- b=Mp3vHdVVrV1bbaoqeE7cwoeE6WZ3evuvdFhk9uBcxoOknSZQtkN3ijwU8DmrnPt3sgviOVl5p/NqUtT2/juw6N2E7rCEmDi4IqYqGyzGdj8I6DHs0d5JF1/QZfkOyTSYQGZjNsyx8OWFZnMoETsZlpt/VUTmKIBX4MSeV1QBE9IoUvEPhaBHjh/7pV/byABvwG4dj/4n+2ux28UrxeJK5xwUin6odX4+AtdH52u/BA4d/5qZ6S1QqgUInzzYz7bloe8Yr949CM0F7C1WxE7ezuo2DhX9dLnntElp/6eOINhevl5/1hwSfn/j9i17U9l2tj9ZYGI+AxrO4jk5oEC8tA==
+ bh=0HqfXlJSrnk+R/mh7gdHOgi3SqwL7ur+oT5MA6+3rio=;
+ b=YWwUTiLYEoG0sbALkfuyaetqVKIcZflnQ8Jl5cuhJ+bN4Vou+vluaun7g+cEK/V7KsOzBXLrwis7oz9LjIPaDbYvOY0MT6zmDary65gQjq5kBr6VVn8pPq8OQkuEOAEA7m3HaJpGdOREXDsIrDOLApJEyQuAXhYrlHLZlKFsBl+VpNPlbt8QDPrclNjpGGRCzgB+E3lqHcAEwYLnVeKi4um7v1b+hzlTtIdTxz/tgtbVP5qYqfvoVhS/YEMHFsVxROpAerSovSrOnqF9uCM7cR7zfgEMRvyPLQBhTUO3ItaEvugyrCeHsLgdADJgoJVabZGeISbkNyfQxmTw5yMPyQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  193.8.40.94) smtp.rcpttodomain=lists.openembedded.org
  smtp.mailfrom=leica-geosystems.com; dmarc=pass (p=reject sp=reject pct=100)
@@ -26,18 +26,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=90IHeF/pMe/IBc9dti9g2umYzQEiez637B6Fm+iXHpo=;
- b=Eq9r0j0JfM0gdDkU6uB8xMhCtjAS9GOr9Ae1XBCAqFbGJovBhgQhImHdnniNPMiyvPtk4pShCyLhWtfCt3jnEJ8+2gPifjtqi8JnLmZx8nHbY2kLXU1OLg3F3mDnxi7BJq4qYX4gxhBwzsEfG57tQYhkFcF405KofQqcd9UaSbo=
-Received: from DU7P189CA0019.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:552::19)
- by AS5PR06MB8704.eurprd06.prod.outlook.com (2603:10a6:20b:67c::18) with
+ bh=0HqfXlJSrnk+R/mh7gdHOgi3SqwL7ur+oT5MA6+3rio=;
+ b=TRt09mVqTyehy2d179f6fUd0u0V/4ZMR9OvSEzMLPD3otOhRpfH8rSUnnv76gB+c/BKn45jPz5qwjElvc4BYeKEM6BBMJ4Wj1YfIkwxU5xY4+Jp/0A3t+4akII2U0fhWuMdmZMFfqRNzLHgfCULNpSYp97CzRFA0NDN2LNfzPEQ=
+Received: from DU7P189CA0004.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:552::20)
+ by PA2PR06MB9540.eurprd06.prod.outlook.com (2603:10a6:102:405::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.31; Sat, 31 May
- 2025 11:00:32 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.34; Sat, 31 May
+ 2025 11:00:36 +0000
 Received: from DB1PEPF00039230.eurprd03.prod.outlook.com
- (2603:10a6:10:552:cafe::86) by DU7P189CA0019.outlook.office365.com
- (2603:10a6:10:552::19) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10a6:10:552:cafe::77) by DU7P189CA0004.outlook.office365.com
+ (2603:10a6:10:552::20) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8792.24 via Frontend Transport; Sat,
- 31 May 2025 11:00:32 +0000
+ 31 May 2025 11:00:35 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 193.8.40.94)
  smtp.mailfrom=leica-geosystems.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=leica-geosystems.com;
@@ -47,9 +47,9 @@ Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
 Received: from hexagon.com (193.8.40.94) by
  DB1PEPF00039230.mail.protection.outlook.com (10.167.8.103) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8792.29 via Frontend Transport; Sat, 31 May 2025 11:00:30 +0000
+ 15.20.8792.29 via Frontend Transport; Sat, 31 May 2025 11:00:35 +0000
 Received: from aherlnxbspsrv01.lgs-net.com ([10.60.34.116]) by hexagon.com with Microsoft SMTPSVC(10.0.17763.1697);
-	 Sat, 31 May 2025 13:00:30 +0200
+	 Sat, 31 May 2025 13:00:31 +0200
 From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
 To: openembedded-devel@lists.openembedded.org,
 	raj.khem@gmail.com,
@@ -57,169 +57,186 @@ To: openembedded-devel@lists.openembedded.org,
 	erik@riscstar.com
 CC: bsp-development.geo@leica-geosystems.com,
 	Johannes Schneider <johannes.schneider@leica-geosystems.com>
-Subject: [meta-oe][PATCH v1 1/3] systemd: add recipe for systemd-repart-native 257.6
-Date: Sat, 31 May 2025 13:00:20 +0200
-Message-ID: <20250531110022.3843938-2-johannes.schneider@leica-geosystems.com>
+Subject: [meta-oe][PATCH v1 3/3] classes: add a systemd-sysext image class
+Date: Sat, 31 May 2025 13:00:22 +0200
+Message-ID: <20250531110022.3843938-4-johannes.schneider@leica-geosystems.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250531110022.3843938-1-johannes.schneider@leica-geosystems.com>
 References: <20250531110022.3843938-1-johannes.schneider@leica-geosystems.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-X-OriginalArrivalTime: 31 May 2025 11:00:30.0340 (UTC) FILETIME=[3936BC40:01DBD21B]
+X-OriginalArrivalTime: 31 May 2025 11:00:31.0621 (UTC) FILETIME=[39FA3350:01DBD21B]
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF00039230:EE_|AS5PR06MB8704:EE_
-X-MS-Office365-Filtering-Correlation-Id: a9a7b543-c6f4-497d-4216-08dda0325be0
+X-MS-TrafficTypeDiagnostic: DB1PEPF00039230:EE_|PA2PR06MB9540:EE_
+X-MS-Office365-Filtering-Correlation-Id: b038bdb9-06c7-4e3a-8c5a-08dda0325efb
 X-SET-LOWER-SCL-SCANNER: YES
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|36860700013|1800799024|376014|13003099007;
+	BCL:0;ARA:13230040|36860700013|376014|82310400026|1800799024|13003099007;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?Lo0fA0qehJsx5VkqpRvySvPpPUu6p7gZwXFYWjDwUGXNCx/y8ukmL/OUPI+j?=
- =?us-ascii?Q?PZvgk09sdP8hPgBw1tehDLfkCQxp3cJZdCrm3U7lmndRIFVbkhZiVTeUUo6a?=
- =?us-ascii?Q?vCaAYA4HdakBN0yaJD3fkhN5b2aAfjOXlZNbpueMhUBglmpvK8fTT8DVtB12?=
- =?us-ascii?Q?WTITeTqS+0XJYOESz+/NWFWWiwOPGMlMAS0zaEFAJQZ/bJtw+VtgG2AE0B2a?=
- =?us-ascii?Q?MCkWK2EyMlQvXc1diWhRVlT/HgpqIVOSmbLWKfGaABV5aF7zDR7PNNzwLIeb?=
- =?us-ascii?Q?4IlHGCcQcorwLEkaHWNiq4ihD9Y8qWY62rM8phzyCS0Pk3eP5gugQV9m7oeA?=
- =?us-ascii?Q?1piBZCJT7ETEauAbvBEkjS0tE4TIybu0qyBEhBQ5Rv0/zTZAnWPYh49LLzdI?=
- =?us-ascii?Q?QY8mtx9145snIzdF/p6z+4KOAeuUIfMeLtKZJBa+kCU3GSF3/3XMYMs7yH0u?=
- =?us-ascii?Q?He4AJ7i7pHTJXV+kYMvhcrukpTt1y8IK1oeA2CZH9m8QO9SmnyMjLyrnRy4O?=
- =?us-ascii?Q?tfe+V3Gg6mLjGzD/u0o5wVRWEF4I/Ivx05yKKY9P4F+283s4Sp4A0ngg/Saw?=
- =?us-ascii?Q?52fwfgtmesmIWi1eHYIsh9T1eTBUD4JYi+y5IYSi/DnYoXnYKdOFsw6d0yc0?=
- =?us-ascii?Q?hGga+7h3aMXmT3QhF0I1CbJKNeCz+j2X/IEkB3jF+W3oiB0OWsxVYS4SRuqJ?=
- =?us-ascii?Q?AmHJn4c1gR6la6EbCFiSeJ+T0qEDecMYmtpg/6bWmn6xNuKF/VvsXjSwfzc5?=
- =?us-ascii?Q?8TWEad+5W9ujdaAmgc8WShWBuBX+zRDLmObPhZIQtdDLmlle3XJIKZccLzS/?=
- =?us-ascii?Q?bCtfvekws3LTSQqm5F8WSgkf+5T8Mmt+s6623uVm3BcrTMBlyEDJBlSyA6tI?=
- =?us-ascii?Q?ODiWdyd4sG8Z7qqe/6j0jJcdDeIVof8rP7M/tgmt0aYhv5xCtTlhKyo0tKsX?=
- =?us-ascii?Q?YnYlu63EvfVRHz/q3YtHPr6Hgqa+CmLj7L5VZb9qIsLaMmvTwd3sl1h+tJeV?=
- =?us-ascii?Q?Y9ig9alEvqSmKbYupgxIqt24i9Q7HHOGOzc4NGQkdCJBr5lsm8MWbIdB9VgY?=
- =?us-ascii?Q?r19olEJfQqfU3EG2+mmQH37Ktms64/B8fmqVMa/60khyy2uwrAe7EN4t19JM?=
- =?us-ascii?Q?8+LwafpruBViwnx4hsv9viy5Mp99idtdSzN8Azn33bL3sChtfxLiSo2n+O4m?=
- =?us-ascii?Q?Y83bcuI9d2gQUeZSYVjS3SUViUjJ4cXCmLUejvfQF3KD+HinjxDLxaXZhBy0?=
- =?us-ascii?Q?gvB1NrrpizfuN35OzjkCJt475BpkvMNC5/T7uay44yjySa3M3t7GajmW6MSR?=
- =?us-ascii?Q?NU0nKwqjfrHAsJWTis4PsEBTQJwvB6uEzS8ivhlFbs1/WAc3W3t1BUNwaMnm?=
- =?us-ascii?Q?xmUvJw6155sHlvl8Wnijo52PW0m1+kc5Bnrsfd8jYKWJF6c1S1CHk80JysPJ?=
- =?us-ascii?Q?3c+nwliFrXvvwSPz18nEdLW3f+KWCCGc5p2uKbmKmTSoti1bWFs6Yw=3D=3D?=
+	=?us-ascii?Q?COchoCBwaW4aaY4jv+U9RXTv4mUMw3CW4dsDiF2rYprywLUWRsOGAShdoT00?=
+ =?us-ascii?Q?tLfJM/SzB9qoNOwv15j/MEGrcg+Mm4Prm4Z+Ix0wQCk5WTkn94tw67gKb4N2?=
+ =?us-ascii?Q?idvDUTvzSNQVyTs+NXVcL1G0OqPVPDWFTf10GOM2LNaKgneruY/SmEtuLvrh?=
+ =?us-ascii?Q?Gwh++vTe3anAWbq3tsJPv2KCpEUIAF32gwe2WzilFSlXvZE2/2wVYn4qbbSv?=
+ =?us-ascii?Q?Wac2M++VS59y7BYJFBL1G2JeVuNV2xWJRWtOwTRNYamO2oBO2HPmDzKM+rqH?=
+ =?us-ascii?Q?nc/gzfYC1rvxXe2mOlN7sG5UNLqW+6B0B5RRE7ZvqyjjpFWUoirCqIpry6X0?=
+ =?us-ascii?Q?FHi39CWEI0B+bqSudCBnOWQbyf4eDGS4VrFIQ1twKI+gh2mxMoOwoD1B3NCb?=
+ =?us-ascii?Q?gIjhwgWbUz8PWwevcJZ8SwlDIAkrJ4zSfYEPA5N3PrDvj9zq2lPIb2aTdLJX?=
+ =?us-ascii?Q?AbvbC0bJdxNOPFoUcycWkVHZhLqchwUrL/wzWuSYU9dXSg//VLzdsBFuu3A1?=
+ =?us-ascii?Q?J83IEFPPRhBrkOtzTLPwMMYiC3U7bjoy3iolmxY4V+GzixfUoJa2li/NOmby?=
+ =?us-ascii?Q?imNJ9vlc+lttFr9S9mHK08jlqVs0wFTw7RamrAqcmFLz8JA3z/bIkr8T+S8E?=
+ =?us-ascii?Q?hYPHzJ736Bea7AHrXkI/3t+rfheYHJd/4spyvVV1d81FufBqEdTsLrtA6G+d?=
+ =?us-ascii?Q?oNvvLQD0A7ty59zVX0tPd5Rnn6r/zW4WyeO0wMNl/sLc96qQ5Y0bB6rP6RUA?=
+ =?us-ascii?Q?WG/SzpMP/u94smwB3nw2MuTbWIILU7hbBzgvyYMggpIaVLpQLPnFsHvfUQEa?=
+ =?us-ascii?Q?G7FwcvFa89OpLnTpdJjIXEdoJ2Wbubet9ioRP/Ez/5BVIo/7GrWk7e/EVgZB?=
+ =?us-ascii?Q?HDtYl0DEUjzDKE2dZiegNVoZNG9fZR5i1wOyqoRJFVL8bqiKHecWAYUdB2S6?=
+ =?us-ascii?Q?W39izvo9q2Y/MnCmEUAI3feYPHsjoYn03yWI3UP07O/o3Z3iQUKHMsMumtiV?=
+ =?us-ascii?Q?b1U3Nc1NWf08Zo9W7NoeNBubtqtaeJzjNgMN9EXNACRk2mWcOtR49tT6PnT8?=
+ =?us-ascii?Q?QwCOsOamyY1Bd3+jqyZWKfSozgTVlHgRmm+iwh+CgiqsLEB0FhVMuumlfKu2?=
+ =?us-ascii?Q?eT3Sw4YVBGRdvCbuPfxuDQ7D9JlNJa6l29kzJmryIgcFUT1nhlIYFVtJAd1x?=
+ =?us-ascii?Q?UxKH8JvV9Mg+dvWFwD/Dp04pu6cG4cM9wiAi8s8VtzVplnvVBSLhcn04URmo?=
+ =?us-ascii?Q?BwSuVYGDgybjiYNKEY5EbCZqsGsKeWH7jWiL3m61L0W/hFgAzd8VwNO2mLoZ?=
+ =?us-ascii?Q?Yjyc8UJ+fpdK256KjTRCV2WyNjIZlvamk00kicI+REFa0XFdvqWD5drY883+?=
+ =?us-ascii?Q?xaRiwEJjKA0ZqzLRXhpgRksZ5HJCFPj2VEqjTig4pKDN0cVSG6k/d/UXCzqi?=
+ =?us-ascii?Q?dxQn8FRROG7i5IavC0ThLNjg6TG3KaS8uvNgj2kE/q+iUjcfdoM+cg=3D=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:193.8.40.94;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom50.leica-geosystems.com;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014)(13003099007);DIR:OUT;SFP:1101;
+	CIP:193.8.40.94;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom50.leica-geosystems.com;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024)(13003099007);DIR:OUT;SFP:1101;
 X-OriginatorOrg: leica-geosystems.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2025 11:00:30.6068
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2025 11:00:35.8203
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a9a7b543-c6f4-497d-4216-08dda0325be0
+X-MS-Exchange-CrossTenant-Network-Message-Id: b038bdb9-06c7-4e3a-8c5a-08dda0325efb
 X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.94];Helo=[hexagon.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
 	DB1PEPF00039230.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR06MB8704
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR06MB9540
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 31 May 2025 11:00:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117679
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117680
 
-Add a recipe to build systemd-repart-native.
-The chosen version is a relatively recent one, to support:
+systemd-sysext can load a raw-image containing usr/ and opt/ folders
+to mount them as RO overlay over the rootfs, to "extend" the systems.
 
-1) PKCS#11 uris [1] to pass in the private key when creating a
-discoverable disk image (as=C2=B7--private-key-source).
+This class provides the necessary changes/additions to the enclosed
+filesystem so that systemd-sysext accepts the extension for "merge"
+into the rootfs.
 
-2) setting Compression=3D/CompressionLevel=3D in the configuration [2],
-which is then passed over to a (recent version of) mkfs.erofs
+With such a created image, placed into the correct folder (see [1]),
+`systemd-sysext list` should be able to list the "extension" and
+`systemd-sysext merge` should enable the overlay. On both commands a
+preceding "SYSTEMD_LOG_LEVEL=3Ddebug" can aide in figuring out what is
+amiss.
 
-The recipe was adapted from an incomplete 'systemd-tools' patch [3]
-that is floating upstream.
-
-Link: [1]: https://github.com/systemd/systemd/commit/0a8264080a5d4b5e13e65e=
-ed80ac98a476f7fe43
-Link: [2]: https://github.com/systemd/systemd/commit/27cacec939a46f61706d7b=
-48a51b6f5880be4662
-Link: [3]: https://lists.openembedded.org/g/openembedded-core/topic/1082239=
-84#msg204065
+Link: https://www.freedesktop.org/software/systemd/man/latest/systemd-sysex=
+t.html
+Link: https://0pointer.net/blog/testing-my-system-code-in-usr-without-modif=
+ying-usr.html
 Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
 ---
- .../systemd/systemd-repart-native_257.6.bb    | 59 +++++++++++++++++++
- 1 file changed, 59 insertions(+)
- create mode 100644 meta-oe/recipes-core/systemd/systemd-repart-native_257.=
-6.bb
+ meta-oe/classes/sysext-image.bbclass | 76 ++++++++++++++++++++++++++++
+ 1 file changed, 76 insertions(+)
+ create mode 100644 meta-oe/classes/sysext-image.bbclass
 
-diff --git a/meta-oe/recipes-core/systemd/systemd-repart-native_257.6.bb b/=
-meta-oe/recipes-core/systemd/systemd-repart-native_257.6.bb
+diff --git a/meta-oe/classes/sysext-image.bbclass b/meta-oe/classes/sysext-=
+image.bbclass
 new file mode 100644
-index 0000000000..15b60af02e
+index 0000000000..4d97b59ce3
 --- /dev/null
-+++ b/meta-oe/recipes-core/systemd/systemd-repart-native_257.6.bb
-@@ -0,0 +1,59 @@
++++ b/meta-oe/classes/sysext-image.bbclass
+@@ -0,0 +1,76 @@
++#
++# Copyright OpenEmbedded Contributors
++#
 +# SPDX-License-Identifier: MIT
 +#
-+# Copyright Leica Geosystems AG
++
++# System extension images may =E2=80=93 dynamically at runtime =E2=80=94 e=
+xtend the
++# /usr/ and /opt/ directory hierarchies with additional files. This is
++# particularly useful on immutable system images where a /usr/ and/or
++# /opt/ hierarchy residing on a read-only file system shall be
++# extended temporarily at runtime without making any persistent
++# modifications.
++
++# Example usage:
++## place a symlink into the systemd-sysext image search path:
++# $> mkdir /run/extensions
++# $> ln -s /tmp/extension-example.sysext.ddi /run/extensions/example.raw
++## list all available extensions:
++# $> systemd-sysext list
++## and enable the found extensions:
++# $> SYSTEMD_LOG_LEVEL=3Ddebug systemd-sysext merge
++
++# Note: PACKAGECONFIG:pn-systemd needs to include 'sysext'
++
++# systemd-sysext [1] has a simple mechanism for version compatibility:
++# the extension to be loaded has to contain a file named
++# /usr/lib/extension-release.d/extension-release.NAME
++# with "NAME" part *exactly* matching the filename of the extensions
++# raw-device filename/
 +#
++# From the extension-release file the "ID" and "VERSION_ID" fields are
++# matched against same fields present in `os-release` and the extension
++# is "merged" only if values in both fields from both files are an
++# exact match.
++#
++# Link: https://www.freedesktop.org/software/systemd/man/latest/systemd-sy=
+sext.html
 +
-+SUMMARY =3D "systemd-repart"
-+DESCRIPTION =3D "systemd-repart grows and adds partitions to a partition t=
-able, based on the configuration files described in repart.d(5), or generat=
-es a Discoverable Disk Image (DDI) for a system extension (sysext, see syst=
-emd-sysext(8))."
-+HOMEPAGE =3D "http://www.freedesktop.org/wiki/Software/systemd"
++inherit image
 +
-+LICENSE =3D "GPL-2.0-only & LGPL-2.1-or-later"
-+LICENSE:libsystemd =3D "LGPL-2.1-or-later"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.GPL2;md5=3D751419260aa954499f7abaabaa=
-882bbe \
-+                    file://LICENSE.LGPL2.1;md5=3D4fbd65380cdd255951079008b=
-364516c"
++# Include '.sysext' in the deployed image filename and symlink
++IMAGE_NAME =3D "${IMAGE_BASENAME}${IMAGE_MACHINE_SUFFIX}${IMAGE_VERSION_SU=
+FFIX}.sysext"
++IMAGE_LINK_NAME =3D "${IMAGE_BASENAME}${IMAGE_MACHINE_SUFFIX}.sysext"
++EXTENSION_NAME =3D "${IMAGE_LINK_NAME}.${IMAGE_FSTYPES}"
 +
-+SRCREV =3D "00a12c234e2506f5cab683460199575f13c454db"
-+SRCBRANCH =3D "v257-stable"
-+SRC_URI =3D "git://github.com/systemd/systemd.git;protocol=3Dhttps;branch=
-=3D${SRCBRANCH}"
++# Base extension identification fields
++EXTENSION_ID_FIELD ?=3D "${DISTRO}"
++EXTENSION_VERSION_FIELD ?=3D "${DISTRO_VERSION}"
 +
-+S =3D "${WORKDIR}/git"
++sysext_image_add_version_identifier_file() {
++    # Use matching based on Distro name and version
++    echo 'ID=3D${EXTENSION_ID_FIELD}' > ${WORKDIR}/extension-release.base
++    # os-release.bb does "sanitise_value(ver)", which needs to be done her=
+e too
++    echo 'VERSION_ID=3D${EXTENSION_VERSION_FIELD}' \
++        | sed 's,+,-,g;s, ,_,g' \
++        >> ${WORKDIR}/extension-release.base
 +
-+DEPENDS =3D " \
-+    cryptsetup-native \
-+    gperf-native \
-+    libcap \
-+    python3-jinja2-native \
-+    util-linux \
-+"
++    # Instruct `systemd-sysext` to perform re-load once extension image is=
+ verified
++    echo 'EXTENSION_RELOAD_MANAGER=3D1' >> ${WORKDIR}/extension-release.ba=
+se
 +
-+inherit meson pkgconfig gettext native
++    install -d ${IMAGE_ROOTFS}${nonarch_libdir}/extension-release.d
++    install -m 0644 ${WORKDIR}/extension-release.base \
++        ${IMAGE_ROOTFS}${nonarch_libdir}/extension-release.d/extension-rel=
+ease.${EXTENSION_NAME}
 +
-+MESON_TARGET =3D "systemd-repart"
-+
-+# Helper variables to clarify locations. This mirrors the logic in systemd=
-'s
-+# build system.
-+rootprefix ?=3D "${root_prefix}"
-+rootlibdir ?=3D "${base_libdir}"
-+rootlibexecdir =3D "${rootprefix}/lib"
-+
-+EXTRA_OEMESON +=3D "-Dnobody-user=3Dnobody \
-+    -Dnobody-group=3Dnogroup \
-+    -Drootlibdir=3D${rootlibdir} \
-+    -Drootprefix=3D${rootprefix} \
-+    -Ddefault-locale=3DC \
-+    -Dmode=3Drelease \
-+    -Dsystem-alloc-uid-min=3D101 \
-+    -Dsystem-uid-max=3D999 \
-+    -Dsystem-alloc-gid-min=3D101 \
-+    -Dsystem-gid-max=3D999 \
-+"
-+
-+do_install() {
-+    install -d ${D}${bindir}/
-+    install -m 0755 ${B}/systemd-repart ${D}${bindir}/systemd-repart
-+    install -d ${D}${libdir}/
-+    install -m 0644 ${B}/src/shared/libsystemd-shared-257.so ${D}${libdir}=
-/libsystemd-shared-257.so
-+
-+    install -d ${D}${libdir}/systemd/repart/
-+    cp -r ${S}/src/repart/definitions ${D}${libdir}/systemd/repart/
++    # systemd-sysext expects an extension-release file of the exact same n=
+ame as the image;
++    # by setting a xattr we allow renaming of the extension image file.
++    # (Kernel: this requires xattr support in the used filesystem)
++    setfattr -n user.extension-release.strict -v false \
++        ${IMAGE_ROOTFS}${nonarch_libdir}/extension-release.d/extension-rel=
+ease.${EXTENSION_NAME}
 +}
++
++ROOTFS_POSTPROCESS_COMMAND +=3D "sysext_image_add_version_identifier_file"
++
++# remove 'os-release' from the packages to be installed into the image.
++# systemd-sysext otherwise raises the error:
++# Extension contains '/usr/lib/os-release', which is not allowed, refusing=
+.
++PACKAGE_EXCLUDE +=3D "os-release"
 --=20
 2.34.1
 
