@@ -2,22 +2,22 @@ Return-Path: <johannes.schneider@leica-geosystems.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CB12C5B556
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FEF2C5B559
 	for <webhook@archiver.kernel.org>; Sat, 31 May 2025 11:33:05 +0000 (UTC)
-Received: from AM0PR83CU005.outbound.protection.outlook.com (AM0PR83CU005.outbound.protection.outlook.com [52.101.69.56])
- by mx.groups.io with SMTP id smtpd.web11.4006.1748691180447518251
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.86])
+ by mx.groups.io with SMTP id smtpd.web11.4004.1748691179989056860
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 31 May 2025 04:33:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=kD+sP4j/;
- spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 52.101.69.56, mailfrom: johannes.schneider@leica-geosystems.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=hl8KfnHK;
+ spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 40.107.20.86, mailfrom: johannes.schneider@leica-geosystems.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=I/BYfKEtQZQAJvTxO+ytxYnvUt/aumEumUnn1IsojLh5O2Z2vLApg6utw23Tix6iceuxxTboZAg9xwdH6UkVm9t5cMgrA1ak9KHiJrz1PLv1tjpANUdJUOqc6nsLoLQvMU2JlfGfOOaVJxYYIyWqu/bTTH7T1k++Kh9vlsB0XezLyAiIJ+J1IPU8oN32jrScSY/X2Wj7xlDb0wJR8XYabnZUeQfxNYRKaFwftqImel53RYZu3+5h/P5uf9WK93ylPeaPwP3wDl7ILawpmRbIgrK9N+T28xdaYhMIlNlKDTjFXggqCSBFnAscZIUx14A+ymHHV2+hyQglV0FxJ240WQ==
+ b=mSUarPOzor2gjTZBdujrJikm2/2vfvVKp3iaKOBsVT0D+EDfXLiMVWXiYKNW5oSmrlrM1GjBpjBGRn6/pX4IikGTJo5FCRzrLLehzac/L818wahK0hnTCuyq8qj67scqil8d1+emxU3Gqx6IT34rU3mA56ifM32MjclA3M22mSxvfleQkjiHf9AgD6yRNUHpDuvagnoKhIXuSnfUG5AXJa03u3y9/4MlW4vpANsUeJt8xbxsk5Dwf1MRWyUHt7ltzeNAuXGwaXLoFoHhrn/Qi0RfRIR3x5tO0ruUzR/IGovjkgf4H5C+yZQicl9/Gje/ZFNTyBdT3IitsNGdE0TEtg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TtHvIPVSI/9iWvHBejzLOrXPhITknPxEIcf9amQeDGM=;
- b=WJLrb6yAd89dNnE2vKU6buQN2klHXUjk1iyyCFPkXiewmWeqgBpmjELO07q5coezCYxt2SifyzNO7ADZQG/UexKABNHqhc4ER5tddwUb0gYgP4kfPR7gxQnT4JoLs1XF9SE2J6D0w60tiJO6DlSBLaMPVJNSAYKA9U/+vN9aggFJZAg10thsSb7NPDYEO0W/k0QPL8Pop2+VFbytoh0X8auDW6USH2JTSg0cksy5cKcHl7lx5SKM3NkWW2HfF2NSTWqo3wi9IsLG45UeRWbUziNcwxn7uVAhwo6VkDoYc+ZKB8wweZVhQP0Zt+0CiGhZXT0tNk7HPC0u4Ee+RY0TFA==
+ bh=LVT1GAG42P2SNywJNWNDGjnHnDqqbXWWTVVePD7GpKg=;
+ b=qq74kHD/BoQKI0HXDVRdE/4rxkOLJYGFw//R/hEnP6Pi5LroggHFjNY3WQ30ufPKlwo4nvdByD7n8ofEvljWZeYcHWj5ip85cXTPb2Vj4iLCWysH+2rqBFrdPSng1p1O3MvZt6Rc7av6kaHxmI70K+CRfGsUOLyRcr2g2Gu5ymYDkrj3qzeqUUayNg63SXIbrUQbzbg6m4NZyVpoQb1FerL/B8nHSuRQsoymOMfpAnh+JBdCeEaqWEEyhyDYonY6VmOfeZ/8ER2aoivpP/ebBdLYvm++bBw9J1ED7xwNIo4JMkwTPNjT686aqPLKh8rlCWmBwma9+F5Ljt5dpuhfZQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  193.8.40.94) smtp.rcpttodomain=lists.openembedded.org
  smtp.mailfrom=leica-geosystems.com; dmarc=pass (p=reject sp=reject pct=100)
@@ -26,16 +26,16 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TtHvIPVSI/9iWvHBejzLOrXPhITknPxEIcf9amQeDGM=;
- b=kD+sP4j/fGglw/Wr2+W1pR7LycJSEZ8jHo93odTEmO5QBZWYn7lQADbMMk/bmhtHPLpFVBd8uRCfGe1IFwJECQNIaefXoecDocNpSawxoM14OSiZjCi7pKT+RhHpyEc5cXmqa4EP1dMso3XMRisDjDgtFtvRyJpBeBIaP/ce+e8=
-Received: from PR2PR09CA0012.eurprd09.prod.outlook.com (2603:10a6:101:16::24)
- by PAXPR06MB8160.eurprd06.prod.outlook.com (2603:10a6:102:199::24) with
+ bh=LVT1GAG42P2SNywJNWNDGjnHnDqqbXWWTVVePD7GpKg=;
+ b=hl8KfnHKoJpDnlUSkzEzMLVDIo0/1Vxokgtmsz0FApeCkYGUp4wzDdcxtyi5r0PZRCYAXiCgumM7tDpfJWLtBGt0GcAaLxK/qrC+QJLQdUsns1QJI3jAJjjIWDllgy3uMT0st0+5NCJ7dQ8yXT5KAdFIYbbp8wrsNlStUDeSHv8=
+Received: from PR2PR09CA0018.eurprd09.prod.outlook.com (2603:10a6:101:16::30)
+ by AS5PR06MB8653.eurprd06.prod.outlook.com (2603:10a6:20b:672::19) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.34; Sat, 31 May
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8746.30; Sat, 31 May
  2025 11:32:56 +0000
 Received: from AMS0EPF000001B5.eurprd05.prod.outlook.com
- (2603:10a6:101:16:cafe::bd) by PR2PR09CA0012.outlook.office365.com
- (2603:10a6:101:16::24) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10a6:101:16:cafe::18) by PR2PR09CA0018.outlook.office365.com
+ (2603:10a6:101:16::30) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.27 via Frontend Transport; Sat,
  31 May 2025 11:32:56 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 193.8.40.94)
@@ -57,125 +57,119 @@ To: openembedded-devel@lists.openembedded.org,
 CC: bsp-development.geo@leica-geosystems.com,
 	customers.leicageo@pengutronix.de,
 	Johannes Schneider <johannes.schneider@leica-geosystems.com>
-Subject: [meta-oe][PATCH v2 5/6] signing.bbclass: add signing_extract_cert helpers
-Date: Sat, 31 May 2025 13:32:51 +0200
-Message-ID: <20250531113252.3889951-6-johannes.schneider@leica-geosystems.com>
+Subject: [meta-oe][PATCH v2 4/6] signing.bbclass: add signing_get_intermediate_certs
+Date: Sat, 31 May 2025 13:32:50 +0200
+Message-ID: <20250531113252.3889951-5-johannes.schneider@leica-geosystems.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250531113252.3889951-1-johannes.schneider@leica-geosystems.com>
 References: <20250531113252.3889951-1-johannes.schneider@leica-geosystems.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-X-OriginalArrivalTime: 31 May 2025 11:32:53.0965 (UTC) FILETIME=[BFB45FD0:01DBD21F]
+X-OriginalArrivalTime: 31 May 2025 11:32:53.0918 (UTC) FILETIME=[BFAD33E0:01DBD21F]
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001B5:EE_|PAXPR06MB8160:EE_
+X-MS-TrafficTypeDiagnostic: AMS0EPF000001B5:EE_|AS5PR06MB8653:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 049685a6-5e6d-4f74-b0c8-08dda036e3bb
+X-MS-Office365-Filtering-Correlation-Id: ed5b8474-6d6b-4092-f9e7-08dda036e378
 X-SET-LOWER-SCL-SCANNER: YES
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024;
+	BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700013;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?iwPMUtHo17LBXZ40aBZGKRypahd0x9bms1lMOeyEj1tVRNntL+YnI9pML609?=
- =?us-ascii?Q?Ao4SpsVE7JMa2ZT6z03h7XwoFTw1KrOdqKjVqjeIWBfqkx0lf30hikdzdImI?=
- =?us-ascii?Q?QorQ3luv3j/DDGb975roo6C6g215qaj0ZCd4ZF0BJD4Cle5QbZJlWKH+fHmR?=
- =?us-ascii?Q?QRzLgoScohyiidwCFFRRH4ihStsL7HNDhScL+0INNRgu7Gs1yi22HxquD/HL?=
- =?us-ascii?Q?4DWST7DAL7xaxdE9z8tihO6fab7OFG4avssgBUfvLaB1mY+yUd4I/NIEUzPi?=
- =?us-ascii?Q?03GAg8/cZDzg41YooaT/4RuJpII98sjP8SWmcAJHMO6abYXKaGciMPMba1/I?=
- =?us-ascii?Q?HYlhH07WA3/hRxfc43lnJucu8ZWkyTNtFsCHCJ8p+tk8lM9ad2hDapzXC9Nl?=
- =?us-ascii?Q?AzeAUiwE8fUbi9U5feP55ckfB/48QEAzC1LEjYokgCgPcdIB3FzRRcJ7hkkR?=
- =?us-ascii?Q?zyPMvU0ovRln+zMH8rzLRl/uyUkvQQc66fLyvRfvh5fa3zOTqoR2uT/HKHtO?=
- =?us-ascii?Q?IOSu+wmfcpEOoeEpwL/obiphIe0+lh5ty5GrLheV8WCAnLsdE9KfEmL/wTs8?=
- =?us-ascii?Q?O5etlhpXhyggM04LybqCYLMQ2unkzQLfU0xm/c8IVOHO7L+JgKidYGH2uetc?=
- =?us-ascii?Q?l75UYFizRgQDcDaJCNqnff/Y39I0i1HZE5U51SekJwTGASog2LiEuV+TF4Gw?=
- =?us-ascii?Q?G+jTv3nW5dEjgfI9rRX+/juy9U/WvHqyILSO9VrN10Ju2fqcAY1sC0zhaQ06?=
- =?us-ascii?Q?+w5wX3ae6il/VETLmWjhityi8hA9Wk6fYtjJgCxg+8MBpABDcXs7wpSjPuXY?=
- =?us-ascii?Q?KAVumEBiPHLRStGGzmNAiyQwoHo7z8Tj8Eip3IYBoruJh63pUt2ZxLJafGcx?=
- =?us-ascii?Q?/D6N6iVquErzpLQobOAXeuXsowu1TZV2jL3Iko2g+UPJ03Eyg+2mnIfAWsLs?=
- =?us-ascii?Q?9zhvGKlWhCL3JqeShnIt1dyOD1j40L9jRW8DJyQEqFbvthLGT4Bz+0LTHfE1?=
- =?us-ascii?Q?U/G9Cqj3+HK4PEZqeYehXnkNMHNHnnGYvr8+0TjJjxRy0dZ/oe5RN62eejvG?=
- =?us-ascii?Q?5F8A2uTz2qusRg+T9NNuPEgcL8uBrTR3DkNXs1lndzz2jcjHwy+fsc6S8mHB?=
- =?us-ascii?Q?CdSpin0sCiLOJfjeejT8KT/uZ/Q15vput1dwnLmaUywjEoVOsqZ/hKniuXz3?=
- =?us-ascii?Q?QnQTSMPFSGFX1WHrustA/1U8nOccgN6ijz/VPkO72Wn+g7jYyf4LjB54tuvG?=
- =?us-ascii?Q?1MO+9elEx4kObMV9+0p2ey44Ig8sUgv67OJrI+ozm5dYqUjF1IRGhmEgUAHq?=
- =?us-ascii?Q?PA0CHwjNmaXBQmFMSP6kjPCc0ZA+4uDn2TYLLI0zmxqBE6mD24Mc+gC/g8UW?=
- =?us-ascii?Q?HMSfxjsmsI2vAunOLwcL+Q1VwZFYao7WK6ldv4NZBuaYfbMeKBg1nEP0ctTS?=
- =?us-ascii?Q?uxtKdUUByOpo0FQsWBbh2y2dE9i5sQcjhkC4fJ4KPIy+KqpOlptfeiPKe/cR?=
- =?us-ascii?Q?Szc5wTksrdHaLMAVVE4XH3wED8+l+2MsLoPa?=
+	=?us-ascii?Q?sJlhZBM1YQ09GhpgzZ7XkvELFutbIQbX3hhusLSlTihVf4JLhyTcsBrEDHcR?=
+ =?us-ascii?Q?/2jSQe2YkQ7tkyzvoZsPgwj6AYKN9L7mE3XmCmIDuK5f/CPqaEwTglg5W/Li?=
+ =?us-ascii?Q?avEkhziJeBHSvwC14PPywm4ZcIcMlVdkheiI9dmvyWlQinQiIAR1Jd4+JGIA?=
+ =?us-ascii?Q?SVHbRg5Ps9QYAm/Dc5HQNPx5wbkvMb0s1LD5JKe+AVURAvyUBh+emm5dMPPW?=
+ =?us-ascii?Q?nv3Kt//1VFKJxuVqS1Smhlg1rzMPrXo4Tzeizws/LBPvepLZbsawa3SX7EON?=
+ =?us-ascii?Q?UhivA24SYlpX4ydIwGi6eGQhq/ROpbl9bdYeI6IFpEGoSxaXBqvr8FwkHYqE?=
+ =?us-ascii?Q?0hyclcJkI1qlbI8kP3ElLk8B6Y0yc4Uv8zqivMoEHCdycy/D+/J9OBXB/iz4?=
+ =?us-ascii?Q?dIcWjNKIMry4E+/KkpjcVzQm5Z2jaUwz7x6yvCvnkhKtdHg1I4GXbPMhZt4I?=
+ =?us-ascii?Q?cnMxzTx1osEhUkwB5D+iiLEXQAqbD/mK8hXw0NCy28UeRVPA+KzE6H9IwWxv?=
+ =?us-ascii?Q?JLj4z9ZDVkWA8oazbLReGQPotrkwbVBADIZn6prZRXGuOdJ+YUJbwyLiyD4p?=
+ =?us-ascii?Q?P2ocTHfTB6V+sdWDEU/H6YgJ7IGq1Z81b9BI9gDNonylF/xgiyUzbwwfoB8W?=
+ =?us-ascii?Q?Avu+ra/tNBzudLtABU0LpgRLm0cjfqdtKs+2izKiW3zGIX52Pz2GPf7yz0iG?=
+ =?us-ascii?Q?zrLrEbyV/bVQc1dMXsgVhcu+204N8KFIUoywEyFfwgTkIHJ5ce15i5bI1DBt?=
+ =?us-ascii?Q?FjY4bnULVNlRhxoJLRl1WqpsoxFM2yNWVAu0Ge08YbqQCubW/GCwzRR4q+P5?=
+ =?us-ascii?Q?0OQlNVjvDdwSOivyZbfPCO8g0coq75YWUtl+cTdOUC+FEqHzpHh3mFdqsruL?=
+ =?us-ascii?Q?dysZS3poBV556amtVFHWngJi44QXvylvwxiEHKQVex23FMmo04WL9Cf+2OTc?=
+ =?us-ascii?Q?FlAdt3BcwyTiDJV5p3TJk+Cr81b0Mfa6Qq0RkVjTAhT/eqS6kAkWeKyY5c4r?=
+ =?us-ascii?Q?9aNWu5Pxa4UgbvCWqJNTaof3BHoQ0n94Q3b941+ETP1IKYgGDfi+UhyOmmIk?=
+ =?us-ascii?Q?1d9lcnIKb1j16uxq7JaPU0uUo6tXCnT+y64BgaC3x3nSf/B77ju0xfXRHzGa?=
+ =?us-ascii?Q?VIu4UpG8rV64ofTrjReSLIqiXO0dBixovK4p64NmlT+LZEB+K9CBXcqp21/v?=
+ =?us-ascii?Q?UbgAUzMhWg31aUyMDOVWWqNzaFBmnsZsNIt+SB0znw8WxmqfM6bTJRuuq75a?=
+ =?us-ascii?Q?rHNRG5eHvd7l8VzcLIjx+UeP2NvyRWkZFUTYfGVGSVlYDOrrG2AODTlbFkYK?=
+ =?us-ascii?Q?E+NnlE8w6H18pgaFYtx0F+NnihBx/2tvAVnf+9ImZSJ8HyUvlQm2tvUQrrd1?=
+ =?us-ascii?Q?LyG01/JW6dmcAX3q3S2zMmeBNnrYirFBfHIS0J2S4mVm0O6buv/bY3unTfmD?=
+ =?us-ascii?Q?R6fxZnCfTl9trmb4TsiCDND/2aA5GpOtfsf0vywvevDC32XiuWSe5ZLHWTaj?=
+ =?us-ascii?Q?NLUX56CQGhuA890viK64wEBHJOK2RAR3ZkuH?=
 X-Forefront-Antispam-Report: 
-	CIP:193.8.40.94;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom50.leica-geosystems.com;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);DIR:OUT;SFP:1101;
+	CIP:193.8.40.94;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom50.leica-geosystems.com;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013);DIR:OUT;SFP:1101;
 X-OriginatorOrg: leica-geosystems.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2025 11:32:56.5542
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2025 11:32:56.1168
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 049685a6-5e6d-4f74-b0c8-08dda036e3bb
+X-MS-Exchange-CrossTenant-Network-Message-Id: ed5b8474-6d6b-4092-f9e7-08dda036e378
 X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.94];Helo=[hexagon.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
 	AMS0EPF000001B5.eurprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR06MB8160
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR06MB8653
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 31 May 2025 11:33:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117685
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117683
 
-Add extract-cert wrapping helper functions, to easily extract
-certificates again that had been previously imported into the softhsm.
+Add a method that returns a list of intermediary CA roles.
+
+When using a complex PKI structure with for example "openssl cms",
+these roles can then be iterated over adding in turn a '-certificate'.
+Pseudo-code example:
+  for intermediate in $(signing_get_intermediate_certs 'FooBaa'); do
+     signing_extract_cert_pem $intermediate $intermediate.pem
+     CMD+=3D" --certificate=3D$intermediate.pem"
+  done
 
 Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
 ---
- meta-oe/classes/signing.bbclass | 26 +++++++++++++++++++++++++-
- 1 file changed, 25 insertions(+), 1 deletion(-)
+ meta-oe/classes/signing.bbclass | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
 diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bbcl=
 ass
-index 7bc3e7cb12..1f50e89d1e 100644
+index ee32cc12f7..7bc3e7cb12 100644
 --- a/meta-oe/classes/signing.bbclass
 +++ b/meta-oe/classes/signing.bbclass
-@@ -54,7 +54,7 @@
- SIGNING_PKCS11_URI ?=3D ""
- SIGNING_PKCS11_MODULE ?=3D ""
-=20
--DEPENDS +=3D "softhsm-native libp11-native opensc-native openssl-native"
-+DEPENDS +=3D "softhsm-native libp11-native opensc-native openssl-native ex=
-tract-cert-native"
-=20
- def signing_class_prepare(d):
-     import os.path
-@@ -439,6 +439,30 @@ signing_get_module() {
-     fi
+@@ -180,6 +180,27 @@ signing_has_ca() {
+     return $?
  }
 =20
-+# signing_extract_cert_der <role> <der>
++# signing_get_intermediate_certs <cert_name>
 +#
-+# Export a certificate attached to a role into a DER file.
++# return a list of role/name intermediary CA certificates for a given
++# <cert_name> by walking the chain setup with signing_import_set_ca.
++#
++# The returned list will not include the the root CA, and can
++# potentially be empty.
++#
 +# To be used with SoftHSM.
-+signing_extract_cert_der() {
-+    local role=3D"${1}"
-+    local output=3D"${2}"
-+
-+    extract-cert "$(signing_get_uri $role)" "${output}"
++signing_get_intermediate_certs() {
++    local cert_name=3D"${1}"
++    local intermediary=3D""
++    while signing_has_ca "${cert_name}"; do
++        cert_name=3D"$(signing_get_ca ${cert_name})"
++        if signing_has_ca "${cert_name}"; then
++            intermediary=3D"${intermediary} ${cert_name}"
++        fi
++    done
++    echo "${intermediary}"
 +}
 +
-+# signing_extract_cert_pem <role> <pem>
-+#
-+# Export a certificate attached to a role into a PEM file.
-+# To be used with SoftHSM.
-+signing_extract_cert_pem() {
-+    local role=3D"${1}"
-+    local output=3D"${2}"
-+
-+    extract-cert "$(signing_get_uri $role)" "${output}.tmp-der"
-+    openssl x509 -inform der -in "${output}.tmp-der" -out "${output}"
-+    rm "${output}.tmp-der"
-+}
-+
- python () {
-     signing_class_prepare(d)
- }
+ # signing_get_root_cert <cert_name>
+ #
+ # return the role/name of the CA root certificate for a given
 --=20
 2.34.1
 
