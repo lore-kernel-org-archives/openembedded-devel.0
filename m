@@ -1,114 +1,95 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <dimitris@siganos.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0141FC5AE59
-	for <webhook@archiver.kernel.org>; Sat, 31 May 2025 19:49:27 +0000 (UTC)
-Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com [209.85.208.176])
- by mx.groups.io with SMTP id smtpd.web10.13595.1748720960122344449
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36008C5AE59
+	for <webhook@archiver.kernel.org>; Sat, 31 May 2025 19:55:18 +0000 (UTC)
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
+ by mx.groups.io with SMTP id smtpd.web11.13578.1748721314025603540
  for <Openembedded-devel@lists.openembedded.org>;
- Sat, 31 May 2025 12:49:20 -0700
+ Sat, 31 May 2025 12:55:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MWAgPuTe;
- spf=pass (domain: gmail.com, ip: 209.85.208.176, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f176.google.com with SMTP id 38308e7fff4ca-31062172698so31872211fa.0
-        for <Openembedded-devel@lists.openembedded.org>; Sat, 31 May 2025 12:49:19 -0700 (PDT)
+ dkim=pass header.i=@siganos-org.20230601.gappssmtp.com header.s=20230601 header.b=mnlBl8tJ;
+ spf=none, err=permanent DNS error (domain: siganos.org, ip: 209.85.221.67, mailfrom: dimitris@siganos.org)
+Received: by mail-wr1-f67.google.com with SMTP id ffacd0b85a97d-3a375888297so1844235f8f.1
+        for <Openembedded-devel@lists.openembedded.org>; Sat, 31 May 2025 12:55:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748720958; x=1749325758; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WqW6Hm6nCIA2fgUuGU1aVR/Bzh29rQlDU+Qa3G0iR1k=;
-        b=MWAgPuTeppYSvS+xrkMesg/1b2U4TeLna2nhnzbshlMvKziVoiYwKOXh/VcSd8pIVc
-         3jfZUZB7hy8HLlnBdBr2jPbeOHoEN4HXWMFw4EPtzFQhM2gMDd5Hg/5BEgA8ml529TXM
-         eW2aFB2YHYOtI41lMIIvH1UAy1CIQuz1co3Ryk9zkx8vWgj2LNrk+YdH8LvbGtgUoWok
-         ZEOydiRv8HNuKAHWIWlPULsgRI/MxylRLZrA4F19fEZsmvoasYtqTUHn1QOwTNzPU/GD
-         PrmIxybrPGK8pmPtk5UXO7E3dOU5H5joSmY+Km2OCqGM3tVU4qoCh0DrgL0ORuXdG637
-         ipqQ==
+        d=siganos-org.20230601.gappssmtp.com; s=20230601; t=1748721312; x=1749326112; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=veGcNkEnkc9GuBZrCrF2l1iiLHn7VLYtCvv0QQMdOkM=;
+        b=mnlBl8tJHeSO00VuY96xJ6V0M49yNJadQxpGjvREjXNzmUCcnKryuUyH/paWkL3cES
+         yTW0+CMzs1Cfjg0ne2EbJ2+OP5KUTwdP0ZZlNGA5KVP3uGyv3ATAmY8EoZSlu0aNgOr/
+         un+52iYBQRszMJYNfnSdzTsXtWs+8Njq7SNOm+CPH/THVXOou3LBBiDRp+qlAy4RI4bC
+         /DK/gKVIlY1J0VNxVhoPbnckVi1qoX2DyHg4sORivB77uqkNAsVfkCPqqbbTpgA0sHRC
+         mBGGbyNwmNLs6iGrI/hgG/J2G4fjS2pY8n4q1T3k0tXu+QZDnFHkvM/rbmmKj+2OuAW/
+         oY5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748720958; x=1749325758;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=WqW6Hm6nCIA2fgUuGU1aVR/Bzh29rQlDU+Qa3G0iR1k=;
-        b=UZZl63k17dShJTEjLHbuHPVQfYDW+QoTTrUIMcf62AytNdMUmOAyiQZ3jqojzxuPQD
-         Kg/VZq/FoyrNIU4rowzLuOeeGDp7H0xeFzs76baw1InROj2g9+A/JmL86Q+TiX3J01XA
-         2pakDK26zz+6TNUNusaNAC1N6GBB3X8zS7iN6FCnqCnoGzyW0Vq/MKaAYCSaG596NIwt
-         oxC1NgsifuM8u0+pwQrxPO46xUTBCYRFCK3Hx2jiont6RrpVNw7Xh4VLi36+UZeoyiO1
-         vj5p64KzgWv+mEVGfRMAWWR5IqiyE71Cpe20r8Jst0MbGUQYs6dy4mHRBPl1W2j7pCAl
-         NJqA==
-X-Gm-Message-State: AOJu0YyQnI6Rsb8Pm12R8XcucsW3njezBpsrAzbtrR6ZogsAML+KKGrO
-	N9/xJA5GW/VJrvFxU3qMxKfLkUIL4jL0+svQLdKDvzTSFzojRN1PEqlsPM32AtOv7tJKEbLqdjJ
-	7VMjfrvY8HIt/Eknc4D0KiypUogGunNc=
-X-Gm-Gg: ASbGncsW/mBotFEnQQsUc4NLt8D2yLcj3Mog+lTdYQJQJX0mkPUcuKOuJacR9MWYeVz
-	CuuHyrbLs/zBsv1AMntHsK4Z60oXHN5P8+HJz/jpYXySJvdTh/+cB7INaKwis1Pyy2+DFbOt1DR
-	JFaAaFD7V61iP9qjahbNsNmeWuwt8orcTHfjbqX24sC7A/SQ==
-X-Google-Smtp-Source: AGHT+IFi3f/SXr9wE+dWvct63a7RszQ/gy4Lld5I3nRLYBRl1Nwv0AlcMuMHmlCIdK+bz3UQL87IydUW0jAZGV4DXXc=
-X-Received: by 2002:a05:651c:1509:b0:32a:78f7:9bef with SMTP id
- 38308e7fff4ca-32a9e9b2d8cmr7686171fa.8.1748720957573; Sat, 31 May 2025
- 12:49:17 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1748721312; x=1749326112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=veGcNkEnkc9GuBZrCrF2l1iiLHn7VLYtCvv0QQMdOkM=;
+        b=RUfP0qUphpg2cHlgIRbkgWE7GLLSvyA3KQLmKrGv1+KvWdjb3A8hdfMFdpKiq79Df8
+         MR/YYdMlhxYfrix076oRxAhOIJgVC0DKdW3vnXOKNb2yrkZP4N0giHETCr6lbhPdoLM6
+         kBQfYyFaMXn8uTYVRuZFhKIlSxU8GXhdj+UwIyyF4tYE3ZPhW5ME8wXiJOzUWzOo0r3g
+         f6T4V1ipLrNwZrfskCwcocOkFcwjO6eQ4QebiATmssQaEV0BDPws9c/JfLCIhLjh3Kyl
+         XsKTTjH71KJS/mVzBYqX+EGJAikFBjBlMNj5P4nBWaUZRzne54kO31ZUMMrq6rjW/Hdi
+         lugQ==
+X-Gm-Message-State: AOJu0YwN6hIDbPy0fWgsXnExRwe+VUBbpWAEyi+BLqR7aks4tspyG+SL
+	RC8p8/rWQdF9pN1ITlttWpf0vU7fHCegOgyAxs8DGO3thXgiedFR0bZCZrmxhGVooF68QVn3JH6
+	JtmeEUSlDOzGf
+X-Gm-Gg: ASbGnctHevJkPSmrYTMIk8ptcTfuU0SsxZLtSc2j0Uo+wx4D9pA6jVBZeHVu+H6Jja7
+	HefFwy89TeInYFzaZxvGw5ACV1Ryaa/m0AIq+PGXtcyVDl0iRiG6JvDy2sOihuQwSjbtxcOC2OU
+	OqhpcebQRvT2jyNwpfZz6MOJxsmGnoCrUm4A2e84P1A+p3SPNVqhdYkazr5UzOtLPpcces7Gros
+	wMRL7s2w8cL77hnBDtWPwO8s0z14ofZciE+qkrvirz0Af4nn0WWnWyg7/tnYjGS+CN0h733aQjj
+	StIIpanGIwj9fE8nWlOxJCCK+0u4YYtFMoldDYKQYKMtTyBE6+twDNgal2IYk3MEfTRzUl18vN0
+	osjXTyLsMSlR0mOywKGBJDSlBWYYl+xI=
+X-Google-Smtp-Source: AGHT+IHWJzqYYAQT7e1LKUwq9LO44XXtdTUqLLQwsBHoxP3zICtc91YY4ymzsTXMmXeRn8pv5ucjjg==
+X-Received: by 2002:a5d:5f8c:0:b0:3a4:dc80:b907 with SMTP id ffacd0b85a97d-3a4f79e725fmr6993056f8f.26.1748721312076;
+        Sat, 31 May 2025 12:55:12 -0700 (PDT)
+Received: from tux.. (cpc79031-cbly7-2-0-cust13.6-2.cable.virginm.net. [82.14.108.14])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a4efe754acsm9145460f8f.59.2025.05.31.12.55.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 31 May 2025 12:55:11 -0700 (PDT)
+From: Dimitrios Siganos <dimitris@siganos.org>
+To: Openembedded-devel@lists.openembedded.org
+Cc: Dimitrios Siganos <dimitris@siganos.org>
+Subject: [meta-oe][PATCH v2] bvi: fix license + tiny improvement in SRC_URI
+Date: Sat, 31 May 2025 20:54:41 +0100
+Message-Id: <20250531195441.586612-1-dimitris@siganos.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250531190624.583666-1-dimitris@siganos.org>
-In-Reply-To: <20250531190624.583666-1-dimitris@siganos.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 31 May 2025 21:49:04 +0200
-X-Gm-Features: AX0GCFtCsj4OrmkIITgluVuaZ1XcqXkrEz1xSXX6JH7P2Jf65ecZE1N777o9YFI
-Message-ID: <CA+chaQf4VHLugsnMC0RMvtgw+MwqbDR3_U1V+UgLtoAf5akQ=g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] Fix bvi license + tiny improvement in SRC_URI
-To: dimitris@siganos.org
-Cc: Openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 31 May 2025 19:49:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117690
+ <openembedded-devel@lists.openembedded.org>; Sat, 31 May 2025 19:55:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117691
 
-Please follow the commit message convention and start the summary with
-"<recipe>: " as "bvi: ".
+Signed-off-by: Dimitrios Siganos <dimitris@siganos.org>
+---
+ meta-oe/recipes-support/bvi/bvi_1.4.2.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On Sat, May 31, 2025 at 9:06=E2=80=AFPM Dimitrios Siganos via
-lists.openembedded.org <dimitris=3Dsiganos.org@lists.openembedded.org>
-wrote:
->
-> Signed-off-by: Dimitrios Siganos <dimitris@siganos.org>
-> ---
->  meta-oe/recipes-support/bvi/bvi_1.4.2.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb b/meta-oe/recipes-s=
-upport/bvi/bvi_1.4.2.bb
-> index b0081794d0..fb136e16a6 100644
-> --- a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
-> +++ b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
-> @@ -2,10 +2,10 @@ SUMMARY =3D "Binary VI editor"
->  DESCRIPTION =3D "bvi is a visual editor for binary files."
->  HOMEPAGE =3D "https://sourceforge.net/projects/bvi"
->  SECTION =3D "console/utils"
-> -LICENSE =3D "GPL-3.0-only"
-> +LICENSE =3D "GPL-3.0-or-later"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da36207309d382da27cd66fdaae922=
-e3c"
->
-> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/bvi/bvi-${PV}.src.tar.gz"
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz"
->  SRC_URI[sha256sum] =3D "4bba16c2b496963a9b939336c0abcc8d488664492080ae43=
-a86da18cf4ce94f2"
->
->  DEPENDS +=3D "ncurses"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117689): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117689
-> Mute This Topic: https://lists.openembedded.org/mt/113400854/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+index b0081794d0..fb136e16a6 100644
+--- a/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
++++ b/meta-oe/recipes-support/bvi/bvi_1.4.2.bb
+@@ -2,10 +2,10 @@ SUMMARY = "Binary VI editor"
+ DESCRIPTION = "bvi is a visual editor for binary files."
+ HOMEPAGE = "https://sourceforge.net/projects/bvi"
+ SECTION = "console/utils"
+-LICENSE = "GPL-3.0-only"
++LICENSE = "GPL-3.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a36207309d382da27cd66fdaae922e3c"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/bvi/bvi-${PV}.src.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz"
+ SRC_URI[sha256sum] = "4bba16c2b496963a9b939336c0abcc8d488664492080ae43a86da18cf4ce94f2"
+ 
+ DEPENDS += "ncurses"
+-- 
+2.34.1
+
 
