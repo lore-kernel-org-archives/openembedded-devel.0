@@ -2,114 +2,96 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF890C5AE59
-	for <webhook@archiver.kernel.org>; Sat, 31 May 2025 10:56:04 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.48807.1748341500934009903
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE5C3C5B543
+	for <webhook@archiver.kernel.org>; Sat, 31 May 2025 10:56:44 +0000 (UTC)
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web10.2655.1748683408276867597
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 May 2025 03:25:01 -0700
+ Sat, 31 May 2025 02:23:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@elfin.de header.s=google header.b=CWz3aZx+;
- spf=none, err=permanent DNS error (domain: elfin.de, ip: 209.85.128.48, mailfrom: marcel.behlau@elfin.de)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-442f4d40152so4104925e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 May 2025 03:25:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cysMK7XX;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: nguyenthaithuanalg@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-747d59045a0so94986b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 31 May 2025 02:23:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=elfin.de; s=google; t=1748341499; x=1748946299; darn=lists.openembedded.org;
-        h=content-transfer-encoding:content-language:to:subject:from
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=n1XszylzekhCIFLcrJ24h4l/gPJlYIqnh2AX6rdDoyI=;
-        b=CWz3aZx+KGBj2iW4QAyOelBobxuZwxIajk8C6qNebp0GC9ECJ+KTsZDTSAe5n+V4W7
-         EGZ9XcP/LkmC2LP2euznlah4hDfHvZXhVnjbNPxK6np73lz5D3L/N0/nACJ3Z1i5gfKH
-         RPJ6Z1uoAPoa8w0i57Xf5sTIEFZMLIPhxhZ4hpZyz3/3pfHLmFTKsVMs7pg/BFbo5RcE
-         hf1hbWbFBQgU1bLL1xif5Mf5x6gA0glDAfcm1854AREnIO+YlWlg33UnjnjyAlTaSGC0
-         qkzpvQ9W7wMyNvQjQr7H6feZ3/TVLu/Yd19VQ/Nxj0x73zyl/zHEK6ljNCcKCtOAvEtn
-         PCzw==
+        d=gmail.com; s=20230601; t=1748683407; x=1749288207; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=blZWfe7149Mje4BX1dkGXTUhl79Dbr6nFHF9NlsgbI8=;
+        b=cysMK7XXV9+Bs/Gpv+y6OFMGd33Ih9ke/nDM0YztCX6UD0LVLtKeaRw8L1L5qI6ipB
+         epXIYK+A+YVQ6JiKvXD5+Rdh1mmnoG+9CwNdleQK4UYbobcdI6IOSaOL9do+NjiAiL1D
+         WYHfHumrM7e+aYZchhUvBY4rDRMC26lSIczAW7UjgetTb21CbIVWmIPazgWxlILptW1R
+         MVin5m3dj3KpcVyFU35xOCs6iPL+ienKvyW3cj7eiscNVTSye1gf9txxk9I2P/NheRsu
+         ki1YSzBe8VsCDKERwWvV+PUvHz09DgNPsnWkoS14KpabtkDw9yZsJi/9M8r9JeRKZqpI
+         OmxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748341499; x=1748946299;
-        h=content-transfer-encoding:content-language:to:subject:from
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=n1XszylzekhCIFLcrJ24h4l/gPJlYIqnh2AX6rdDoyI=;
-        b=uaOPvP4kr8EqrgsjOdSte7dRyQtom5X0iL6Ga7IzSFWv39O4JEWG2+RoxMn2aEyEho
-         61mF+kHxGFT5IkbnimJ3ZMFAxUVU0A48hZ+tLxyZmHa61FIkc+0o/8H03iIdqzs13wgm
-         B1d7qW1h2ieO8bl+gLcGRUTD8EOsUhatFzfNBXhHZV+T3jN8NhOVmOPPY5A7AN5fCeJ9
-         qu8Dd8Uq9XEQsvjYJ2ZMYhRfPELBPE7ZZP07v7lCGVUJAyNj5zT2+4NoHtDEbbaPK8ja
-         1gsIegJAuYXIwAfpqr1GT0PlZX3O9UNd3eVbUCMTfqcJhwPCtgm/TE6m6a3pHGUkOJii
-         ihDw==
-X-Gm-Message-State: AOJu0Yx4qNKx5oh0kS+6GtBIDu0mbLVMZ88TNdel7xoQ1pgcpnqkAaiN
-	YKKOfTfLaCYT3K8Iia0Wli+xmCg6SZp+or16vXp5n3jHwtxWtqEpYTiVghxW7rnrc1ihXqOtFn6
-	Q4gHgjNA=
-X-Gm-Gg: ASbGnctMoML1uJk+cszS/wz4v+qBdNybM87UMJfasBisN+yiGhR7Djv39cWIAF0RVjb
-	wdC7cWbUqLOiABZb6odbtF6VrSeAd6dFkiE3gxBPUMpGDnziMlhj87VFH1dAwPL+00kt6lA66HV
-	nuKiLMno2/NYiVQFey2i0meSiqOsJAQkYry55MeVAce3UFtNPl+Y24dS8JUatWUPItE+UHBUJgV
-	MVLYlPFz4P/SReIVIJcHRD63oYzmTTskV3yekTWBhNahm6FdIQKe2lCiv0NHZPa8+jrkU+LuXix
-	ny7cOvsSKD3HSPnbvsKu+MBoy1W1yBgiPTkblWCRgTy+YozPz9d0WBnm8KfpRhYNAAwy63WXL6m
-	ACxGZVNWjHQ==
-X-Google-Smtp-Source: AGHT+IG0SNM4qRlf1R6C+6lTSgLsElUs877cgRq4hWzJLwK+J6cPP5rVCKgu0ahjI5CFZgWzEEgF8A==
-X-Received: by 2002:a05:600c:4f8e:b0:439:90f5:3919 with SMTP id 5b1f17b1804b1-44c934e611fmr41566545e9.4.1748341499084;
-        Tue, 27 May 2025 03:24:59 -0700 (PDT)
-Received: from [192.168.2.195] (static-87-78-131-86.nc.de. [87.78.131.86])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-447f78aef8asm273577975e9.29.2025.05.27.03.24.58
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 27 May 2025 03:24:58 -0700 (PDT)
-Message-ID: <d0d7fb88-0579-4391-85ea-bafded19823f@elfin.de>
-Date: Tue, 27 May 2025 12:24:58 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: "Marcel Behlau" <marcel.behlau@elfin.de>
-Subject: Broken access to openembedded repos
+        d=1e100.net; s=20230601; t=1748683407; x=1749288207;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=blZWfe7149Mje4BX1dkGXTUhl79Dbr6nFHF9NlsgbI8=;
+        b=iqGMYlAa3RG7nwi+5LmxQbNPU1MHogQ+yS6nH5PcuWuh/B/VcoJLNMQsoTIWKIyaIl
+         NYkFFQKMn1ExMysDW8lBgNMiHeyoqVSmRhRQPgBkPseW46p+K06Bx/I/fpqUhKdGVyVy
+         V5JjuqQAP6CSJ9qxtH8muHcaRM/OeeeSK8vpXSMBtgNqEmzslMuX7lhSzDjVrZ9Is+b3
+         Lhv5e0gvni25Jjz8gSc0JT4iVeaheD3wYtMkkojtPEVLqdDdpW7MfZQZQViyTwC/KRI9
+         meaWbSgrfhRSarhMYxYfeJNc7wsQoI/mStbv/B6PqXJFyjlBAybRMOrTQqO2EtM6eiAe
+         cv7A==
+X-Gm-Message-State: AOJu0Yx1KrtCyzy811BefiCp9FgLTdLhKxr/2hoF4gtWif7Q1S/ei1gZ
+	CSgpyV4ESqiHFNKGTnBKkGWSvOCOs854RW9/WSLiNX23m/KMcUI5CnHoPrhI4A==
+X-Gm-Gg: ASbGncuzh9yF3L/lDN2xNEBOUH3nQC5oU1NUWTXHRRJZy79x+HymbJfC15dOYRq0HvH
+	7VvD01Gj2///up72cuasqRWNJvkG4Cq1DRFwJOcq3TYn7wXsLb1c07YJVuBLG8eHRU8HgEXu0lJ
+	gXAYMm01jnFb+esI9DNJGZmPSZEOMyuityvnG3jpCDGyXIeKgTUsseGVMB3AxLVkHyq4o5FekN6
+	/8A7huHJ51tE23xURkTz7rn9GT3etXGpF63eThzn9cnCR9FLoZjyA0OSSJjLKU/sQVplklxl2Lj
+	bqrVAUJcEIoPKUkaIH+66JQlis3LQWI9hGdbzOxr7tWB3b04HlUtPnZm6Bobu2LJeDdETSmpLkC
+	+rm5r
+X-Google-Smtp-Source: AGHT+IG8hrUrx8Q2kNylyFLxy/sOQQErfRAcq7KmMuS+2kI7yuzWA6JWBUtvo8H1heHdGHpFO7iHnw==
+X-Received: by 2002:a05:6a21:7a47:b0:201:2834:6c62 with SMTP id adf61e73a8af0-21ae0082bf8mr7961023637.25.1748683407172;
+        Sat, 31 May 2025 02:23:27 -0700 (PDT)
+Received: from localhost.localdomain ([2405:4802:91b8:fb80:76d4:35ff:fe85:dd7a])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-747afff71fbsm4248199b3a.165.2025.05.31.02.23.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 31 May 2025 02:23:26 -0700 (PDT)
+From: =?UTF-8?B?VGh14bqtbiBOZ3V54buFbi1UaMOhaQ==?= <nguyenthaithuanalg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Content-Language: en-US-large
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Cc: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
+Subject: [meta-oe][PATCH] libserialmodule: v1.0.7 -> v1.0.8
+Date: Sat, 31 May 2025 16:23:16 +0700
+Message-ID: <20250531092316.13901-1-nguyenthaithuanalg@gmail.com>
+X-Mailer: git-send-email 2.47.1
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 31 May 2025 10:56:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117676
+ <openembedded-devel@lists.openembedded.org>; Sat, 31 May 2025 10:56:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117677
 
-Hi,
+- Backward compatibility with older versions.
+- Supports both full-duplex and half-duplex modes (e.g., RS-485, Modbus).
 
-we observed problems while access openembedded repos. It seems, path has 
-been changed, repos has been renamed or removed.
+Signed-off-by: Thuan Nguyen Thai <nguyenthaithuanalg@gmail.com>
+---
+ .../{libserialmodule_1.0.7.bb => libserialmodule_1.0.8.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libserialmodule/{libserialmodule_1.0.7.bb => libserialmodule_1.0.8.bb} (89%)
 
-What we observed:
-
-* https://git.openembedded.org/openembedded-core/ --> Clone now via 
-https://git.openembedded.org/openembedded-core/git/0/
-* https://git.openembedded.org/bitbake --> Clone now via 
-https://git.openembedded.org/bitbake-devel/git/0/
-* https://git.openembedded.org/meta-python2 --> Has been removed
-
-Was this changes intended?
-
-Thank you very much in advance and best regards,
-
-Marcel
-
-
-
-
+diff --git a/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.7.bb b/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.8.bb
+similarity index 89%
+rename from meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.7.bb
+rename to meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.8.bb
+index ac5a3eaf09..7994907e13 100644
+--- a/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.7.bb
++++ b/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.8.bb
+@@ -6,7 +6,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22cdd382a6275cb4c2e75c517952ac7c"
+ DEPENDS = "libsimplelog"
+ SRC_URI = "git://git@github.com/thuanalg/libserialmodule.git;branch=main;protocol=https;tag=v${PV}"
+-SRCREV = "b5a5a436900d0bd69f990ca062de916c65f7e2e0"
++SRCREV = "f89f98ff0c9d0aaee2624d40addb0687a74c5d81"
+ S = "${WORKDIR}/git"
+ inherit cmake
+ EXTRA_OECMAKE = "-DUNIX_LINUX=1 -DMETA_OPENEMBEDDED=1"
 -- 
-Marcel Behlau
-(Soft- und Hardwareentwicklung)
-
-ELFIN Technology GmbH
-Im Zollhafen 22
-50678 Köln
-
-Germany
-
-Tel: +49 (221) 6778932-0
-Fax: +49 (221) 6778932-2
-marcel.behlau@elfin.de
-
-www.elfin.de
-
-Unternehmenssitz: Im Zollhafen 22, 50678 Köln
-Amtsgericht Köln,
-HRB 101386 | Geschäftsführer: Jörg Hellmich
+2.47.1
 
 
