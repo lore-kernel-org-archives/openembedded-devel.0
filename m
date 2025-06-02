@@ -1,104 +1,172 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <ejo@pengutronix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A8A4C5B559
-	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 09:41:45 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web11.45905.1748857303211928154
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 741FDC54FB3
+	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 09:55:25 +0000 (UTC)
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+ by mx.groups.io with SMTP id smtpd.web10.46024.1748858120680372457
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jun 2025 02:41:43 -0700
+ Mon, 02 Jun 2025 02:55:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=VbcL4GKH;
- spf=pass (domain: konsulko.com, ip: 209.85.221.53, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-3a363d15c64so2876271f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 02:41:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1748857301; x=1749462101; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=n/G6NBC5bj409FGZAxQWWF29w7jFATezNl13xwVnW8U=;
-        b=VbcL4GKHeYVgaolNJbEsGxjX8pivOby071RYDCAuOe0OH9V467mvIticyrOotkTR/J
-         C1+ba4+bVc206JF4W8y/DJ2Yb2BkPiWx+0zlQgY8EmXvIHbKDs0cGSfvR9wINlM0T3Iu
-         /5bWD/EL0bHfagq4m+kWIi9uHykGycgvYtKyo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748857301; x=1749462101;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=n/G6NBC5bj409FGZAxQWWF29w7jFATezNl13xwVnW8U=;
-        b=OfbbJVCFJ8iN/9x2z+AwM3tg+Q9PfsS/OwrzMZkaT+jw8Yz1P1vEO9vSSZ9wsGVOU1
-         5z+4l6VX5w4MCqx8CY6SwYFLdr+zo8VdGbN80NDzPRenDwLzhCHDq+TuneqPHDKUNgwy
-         nOK+yMFKEP1uoKGLWrojFkbcm5EgwVxsFlrjtnoKmHc8ju7kzba+g+nL1JKrHgX/VwvJ
-         e4EpXoDZWbk4ymieOW4msPRfOffpNPxgeUegu9rbFLuI8/4Wi06xH6mgKuI/4LBjqEbh
-         ONeMO8DtrjBRI2f7ZrRMdeGCQEsgWrs5GDIzjv85kYmSwrCP8L4e0IBBQyQ30Jw0Ma5E
-         hIqQ==
-X-Gm-Message-State: AOJu0YwN6bBj0Vu5ULICo6ZCKWt9FLE9driA02s7P/Yd/d4WNvjaMidi
-	CiTP409l8SeZIwmF4X3QZ8pRFWObjTFKE1GvQAQeFmLqrPoRAjUbCb5SQLpYb+7edyCvKmOouU7
-	XqR3G
-X-Gm-Gg: ASbGncsMbSpD8tCGuwlxxO5vY4uPQ6hKFtKCJMymvpqTZc42fu+hw/P9ejDdchukPDl
-	HAHxT3MEdwK5xywx3sXTfrMly/FKQks8MZDx95V29xuVAwZoutjMCc2yaRyHCHzFGhudc2BhJHK
-	L5TqUpmsKE45Zpuz7fm1g04kt2d2jN4GRStz/vCAi/FqeCejW14fV3d90O7sOiSzDkuWrrr429g
-	xGZ5FH7YFMRlOkru/ycijjn18Ra29WoWY9oCotJsLJ98BSWej6NNvs424Ept3OnSSABLkGRwb3U
-	2srRjZck+SQFep6ZeBK/RU9vB7k5iKnSKAa+CanRGaPpYmGthCtNwijzTBqcxnoToNA4ZwQzqEA
-	S
-X-Google-Smtp-Source: AGHT+IFnuYY+3wZe7qMhXM4vihvLLITzSYtAzhc/+p2w0NGszn4ytbkoxK2X4uxgLn81gdgdqb+PCA==
-X-Received: by 2002:a05:6000:4009:b0:3a3:7bad:29cb with SMTP id ffacd0b85a97d-3a4f7a7ced6mr9076755f8f.52.1748857301468;
-        Mon, 02 Jun 2025 02:41:41 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a4efe73eadsm14025417f8f.41.2025.06.02.02.41.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Jun 2025 02:41:40 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/4] python3-coverage: Upgrade to release 7.8.2
-Date: Mon,  2 Jun 2025 12:41:35 +0300
-Message-Id: <20250602094135.830557-4-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250602094135.830557-1-leon.anavi@konsulko.com>
-References: <20250602094135.830557-1-leon.anavi@konsulko.com>
+ dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: ejo@pengutronix.de)
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[IPv6:::1])
+	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+	(envelope-from <ejo@pengutronix.de>)
+	id 1uM1t1-00039D-78; Mon, 02 Jun 2025 11:55:19 +0200
+Message-ID: <9d73f186246db36363f095aada9289215561d43c.camel@pengutronix.de>
+Subject: Re: [oe] [meta-oe][PATCH v1 0/3] add support for building "system
+ extension images"
+From: Enrico =?ISO-8859-1?Q?J=F6rns?= <ejo@pengutronix.de>
+To: johannes.schneider@leica-geosystems.com, 
+	openembedded-devel@lists.openembedded.org, raj.khem@gmail.com, 
+	mikko.rapeli@linaro.org, erik@riscstar.com
+Cc: bsp-development.geo@leica-geosystems.com, ejo <ejo@pengutronix.de>
+Date: Mon, 02 Jun 2025 11:55:18 +0200
+In-Reply-To: <20250531110022.3843938-1-johannes.schneider@leica-geosystems.com>
+References: 
+	<20250531110022.3843938-1-johannes.schneider@leica-geosystems.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4-2 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: ejo@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 09:41:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117701
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 09:55:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117702
 
-Upgrade to release 7.8.2:
+Hi Johannes,
 
-- Wheels are provided for Windows ARM64 on Python 3.11, 3.12, and
-  3.13
-- A number of EncodingWarnings were fixed that could appear if
-  you've enabled PYTHONWARNDEFAULTENCODING
-- Fixed a race condition when using sys.monitoring with
-  free-threading Python
+thank you for sharing you approach!
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../{python3-coverage_7.8.0.bb => python3-coverage_7.8.2.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-coverage_7.8.0.bb => python3-coverage_7.8.2.bb} (84%)
+I few quick notes that came to my mind when scrolling through the patches/c=
+over letter.
 
-diff --git a/meta-python/recipes-devtools/python/python3-coverage_7.8.0.bb b/meta-python/recipes-devtools/python/python3-coverage_7.8.2.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-coverage_7.8.0.bb
-rename to meta-python/recipes-devtools/python/python3-coverage_7.8.2.bb
-index 9c4330a361..9438d2f32c 100644
---- a/meta-python/recipes-devtools/python/python3-coverage_7.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-coverage_7.8.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://coverage.readthedocs.io"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2ee41112a44fe7014dce33e26468ba93"
- 
--SRC_URI[sha256sum] = "7a3d62b3b03b4b6fd41a085f3574874cf946cb4604d2b4d3e8dca8cd570ca501"
-+SRC_URI[sha256sum] = "a886d531373a1f6ff9fad2a2ba4a045b68467b779ae729ee0b3b10ac20033b27"
- 
- inherit pypi python_setuptools_build_meta
- 
--- 
-2.39.5
+Am Samstag, dem 31.05.2025 um 13:00 +0200 schrieb Johannes Schneider via li=
+sts.openembedded.org:
+> This patch-stack adds support for building "system extension images" to m=
+eta-oe - to quote the
+> man-page [1]:
+> "The primary use case for system images are immutable environments where =
+debugging and development
+> tools shall optionally be made available, but not included in the immutab=
+le base OS image itself
+> (e.g. strace(1) and gdb(1) shall be an optionally installable addition in=
+ order to make
+> debugging/development easier). System extension images should not be misu=
+nderstood as a generic
+> software packaging framework, as no dependency scheme is available: syste=
+m extensions should carry
+> all files they need themselves, except for those already shipped in the u=
+nderlying host system
+> image. Typically, system extension images are built at the same time as t=
+he base OS image =E2=80=94 within
+> the same build system."
+>=20
+> Link: https://www.freedesktop.org/software/systemd/man/latest/systemd-sys=
+ext.html
 
+The interesting part
+
+  system extensions should carry all files they need themselves, except for=
+ those
+  already shipped in the underlying host system image.
+
+is not really addressed yet by the class, since it takes a conventional roo=
+tfs image recipe, adds a
+version file and ensures that the removal of 'os-release' works around the =
+sanity check.
+
+To better solve this, I guess we would need a way to either split the sysex=
+t content from the rootfs
+before generating both, or, a proper way to create a 'non-rootfs', i.e. a f=
+ile system that does not
+contain the default rootfs files, etc.
+
+I'd assume these base questions are relevant for a number of similar proble=
+ms, too. Like for
+creating layered containers.
+
+For now, to not give the impression of being a generic solution for creatin=
+g systext's, maybe one
+should rename the class to reflect its for a rootfs or covers only the vers=
+ion file generation so
+far? E.g.: systemd-sysext-rootfs.bbclass.
+
+> These patches are added to meta-oe - instead of oe-core - because systemd=
+-repart-native requires
+> 'cryptsetup' to build discoverable-disk-images with verity and optional s=
+ignature partitions - and
+> cryptsetup is currently only/still in meta-oe.
+
+This could also be a point where one might consider moving it to oe-core, s=
+ince it provides 'core'
+functionality for creating encrypted system setups, which becomes more and =
+more relevant, e.g. for
+properly protecting sensitive personal data.
+
+> Note that erofs-utils and systemd-repart-native have to be of a recent ve=
+rsion, to support
+> features like compression and signing through PKCS#11 (e.g. as provided b=
+y the
+> classes/signing.bbclass)
+>=20
+> As an example consider this simple image recipe:
+> SUMMARY =3D "An example image to showcase a system extension image."
+> LICENSE =3D "MIT"
+> inherit discoverable-disk-image sysext-image
+> IMAGE_FEATURES =3D ""
+> IMAGE_LINGUAS =3D ""
+> IMAGE_INSTALL =3D "gdb"
+
+This example might be quite helpful to see how the class intents to be used=
+.
+As it will get lost when patches are merged, maybe move it to the class inl=
+ine documentation or at
+least into the corresponding commit message?
+
+
+Regards, Enrico
+
+> After building, the resulting 'extension-image-example-*sysext.rootfs.ddi=
+' can be deployed to an
+> embedded system (running from a RO rootfs) and 'merged' into the OS by fo=
+llowing steps:
+> place a symlink into the systemd-sysext image search path:
+> $> mkdir /run/extensions
+> $> ln -s /tmp/extension-example.sysext.ddi /run/extensions/example.raw
+> list all available extensions:
+> $> systemd-sysext list
+> and enable the found extensions:
+> $> SYSTEMD_LOG_LEVEL=3Ddebug systemd-sysext merge
+>=20
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#117678): https://lists.openembedded.org/g/openembedde=
+d-devel/message/117678
+> Mute This Topic: https://lists.openembedded.org/mt/113393897/3616721
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=C2=
+=A0[ejo@pengutronix.de]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>=20
+
+--=20
+Pengutronix e.K.=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0| Enrico J=C3=B6rns=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0|
+Embedded Linux Consulting & Support=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0| https://www.pengutronix.de/ |
+Steuerwalder Str. 21=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0| Phone: +49-5121-206917-180=C2=A0=C2=A0|
+31137 Hildesheim, Germany=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0| Fax:=C2=A0=C2=
+=A0=C2=A0+49-5121-206917-9=C2=A0=C2=A0=C2=A0=C2=A0|
 
