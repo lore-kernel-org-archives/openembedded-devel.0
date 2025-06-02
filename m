@@ -1,206 +1,121 @@
-Return-Path: <jlu@pengutronix.de>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 820BDC5AD49
-	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 10:10:35 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.web10.46268.1748859033848362595
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C1F9C54FB3
+	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 10:36:55 +0000 (UTC)
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web10.45090.1748854929196346591
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jun 2025 03:10:34 -0700
+ Mon, 02 Jun 2025 02:02:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: jlu@pengutronix.de)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM27k-0000KY-Cn; Mon, 02 Jun 2025 12:10:32 +0200
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM27k-001RB1-0S;
-	Mon, 02 Jun 2025 12:10:32 +0200
-Received: from localhost ([127.0.0.1] helo=[IPv6:::1])
-	by ptz.office.stw.pengutronix.de with esmtp (Exim 4.96)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM27j-002fy1-36;
-	Mon, 02 Jun 2025 12:10:32 +0200
-Message-ID: <b6bff5beab33d550ec7efa84d47bfc8af53d4f25.camel@pengutronix.de>
-Subject: Re: [oe] [meta-oe][PATCH v2 2/6] signing.bbclass: add
- set|get|has_ca functions
-From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jlu@pengutronix.de>
-To: johannes.schneider@leica-geosystems.com, 
-	openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
-Cc: bsp-development.geo@leica-geosystems.com, 
-	customers.leicageo@pengutronix.de
-Date: Mon, 02 Jun 2025 12:10:31 +0200
-In-Reply-To: <20250531113252.3889951-3-johannes.schneider@leica-geosystems.com>
-References: 
-	<20250531113252.3889951-1-johannes.schneider@leica-geosystems.com>
-	 <20250531113252.3889951-3-johannes.schneider@leica-geosystems.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.4-2 
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CxhHVBUi;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: sanakazi720@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-23539a1a421so17407985ad.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 02:02:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1748854928; x=1749459728; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=gKKUQXVCN8zdVqKLfXUdsIm56qOBqA+HfCXgtuK1eJk=;
+        b=CxhHVBUiSGBEOsd0xVpQJWvwSk+QEleQQXg+I5b10UUIeq6xw8NkhlbEr6kigIyQfD
+         +R+oalVogPgQ3QeAGxYrf8soK6KAZ4T5p1jaKjJ09VtkoOGPIwCMhYlOO0x+cGbcoE+t
+         akw0OaPmA9Q1veL3KTGZ7lKIUOG9nJvq8oBZ2ayEgTBhAAYYKIbgPwBxcYvzOjhW0NTX
+         mBPRneTWclkDi3mBH0ZFn7FrOMk86KDea9bzBKi1YcsArj0ioVqE4JRNeQGHVh6wrP9N
+         Peg7T77uvuyzIov233MOc2ZhHs5vmkJ1qjzFXYJbEzKOVVoQtpwcjSysu/M27ZbQWfEP
+         cWgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1748854928; x=1749459728;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=gKKUQXVCN8zdVqKLfXUdsIm56qOBqA+HfCXgtuK1eJk=;
+        b=O2t9IArJkwRr5xOUW07UhGkNRsPVPPmXIuFfE1YH/kINcdD+wXRy4zUFuMmtZHyKVj
+         3NC3IY1jKr5EdgxekjQpismx8RgIu5bIff1n09vNobGWyUMuqWlBw5j/VIzERieKJPjK
+         lpnl2wsZjN3XbDCDuFX6CnOkgpj3cEn15WBNSu6Pynjz5iVLG1VDmTvEqlm9MI0LwtGl
+         G/yPs4eOW485YOxpaysClA29dfisF5N0nOhl5TptUFssS51wvr64oArdTl0cSkUOJN9j
+         1t82VmYTCDpTSyfEVOIu0syfNGOnLfskCki9gB93IlQAbGTD8KUjQPdmHikkiyneauGh
+         Z65Q==
+X-Gm-Message-State: AOJu0YzQpUhFhlBYuTRoS21bVjpIc+00kHBtElBh4Hfm/33RjGOy0eqN
+	wK0s8cqV1IshTIh/ujUBlkgMgegQQuWGzk3Bre7n6WEs7guG5wWQlv3U2ozTdA==
+X-Gm-Gg: ASbGncuLgD65iZCyX8kCNHa/tLb+L8vgfLHm8PN/khAvrSFTrEMIqE2xNYZ5yzH+i9j
+	k9o5M0YAl0sxEBlJtty+/Ka5t/Dt8AlMY8nnfK9jXUIPTgukqPr80seDCk8CXUgNXs/tAZ8EulZ
+	wNOhafdSHgmYySw8/zBrnujcXxj8H8dpV/CwbqjUkDWH+xlOtuWvee8rP6hfX825Y+N1Q4wU0C3
+	AigqrJlsJw5K7wp+3JWSJsw1NCrAR+uuZcLhHvIqpkYxc1gwGiUyIvq6WW5GSWgYDZo8V/eZJwi
+	BRdLXjWz/qBCua/2kFrjv1S3LGBJWhM66mjpQzu+QAVfDwV7VX2o2heeLeIxXK4aZ/ZkMIPmdAY
+	XY2xSqA==
+X-Google-Smtp-Source: AGHT+IFD0Nk1RtbEwUMlhaAtYeJyjgQCY15eXnMhLsNx+BEdQrTcX9Nm/5jim6wlOzUmfMIrPir+cQ==
+X-Received: by 2002:a17:903:2f92:b0:234:a139:1215 with SMTP id d9443c01a7336-2355f77ea51mr118202755ad.35.1748854927919;
+        Mon, 02 Jun 2025 02:02:07 -0700 (PDT)
+Received: from localhost.localdomain ([2401:4900:889e:c424:68c3:216f:8607:73ca])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23506d2323csm66165895ad.259.2025.06.02.02.02.06
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Jun 2025 02:02:07 -0700 (PDT)
+From: "Sana Kazi" <sanakazi720@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [scarthgap][PATCH] imagemagick: guard sed operations in do_install for optional files
+Date: Mon,  2 Jun 2025 14:31:58 +0530
+Message-Id: <20250602090158.93392-1-sanakazi720@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: jlu@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 10:10:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117703
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 10:36:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117704
 
-On Sat, 2025-05-31 at 13:32 +0200, Johannes Schneider via lists.openembedde=
-d.org
-wrote:
-> Add a mechanism to establish a (metadata) link between roles, in the
-> form of a new 'ca' variable.  Which is intended to point from one role
-> to another, to preserve the leaf->intermediary certificate relation.
+When PACKAGECONFIG options like 'cxx' 'webp' and 'xml' are disabled,
+certain files such as Magick++-config.im7, configure.xml, or
+delegates.xml are not installed. Unconditionally running sed
+on these files results in errors during do_install
+Error:
+sed: can't read .../image/usr/bin/Magick++-config.im7: No such file or directory
 
-Perhaps instead:
+Update do_install to check file existence before running sed
 
- Add a mechanism to establish a (metadata) link between roles and signer
- certificates, in the form of a new 'ca' variable.  It must point from one=
-=C2=A0
- role=C2=A0or cert to the signer certificate to preserve the leaf->intermed=
-iary->
- root=C2=A0certificate relation.
+Signed-off-by: Nikhil R <nikhilr5@kpit.com>
+Signed-off-by: Sana Kazi <sanakazi720@gmail.com>
+---
+ .../imagemagick/imagemagick_7.1.1.bb          | 23 ++++++++++++++-----
+ 1 file changed, 17 insertions(+), 6 deletions(-)
 
-> With this additional mechanism, it would be now possible to import a
-> complex PKI tree of certificates (either just the certificates, or
-> both cert+key where available); and then later during usage of one
-> role, reconstruct the verification chain from the leaf, through
-> multiple intermediary, and up to the root role.
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
+index 5407c4e400..752fef303b 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
+@@ -36,13 +36,24 @@ PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11 libxext libxt"
+ PACKAGECONFIG[xml] = "--with-xml,--without-xml,libxml2"
+ 
+ do_install:append:class-target() {
+-    for file in MagickCore-config.im7 MagickWand-config.im7 Magick++-config.im7; do
+-        sed -i 's,${STAGING_DIR_TARGET},,g' ${D}${bindir}/"$file"
++    for file in MagickCore-config.im7 MagickWand-config.im7; do
++        sed -i 's,${STAGING_DIR_TARGET},,g' "${D}${bindir}/$file"
+     done
+-    sed -i 's,${S},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml
+-    sed -i 's,${B},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml
+-    sed -i 's,${RECIPE_SYSROOT},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml
+-    sed -i 's,${HOSTTOOLS_DIR},${bindir},g' ${D}${sysconfdir}/ImageMagick-7/delegates.xml
++
++    if ${@bb.utils.contains('PACKAGECONFIG', 'cxx', 'true', 'false', d)}; then
++        sed -i 's,${STAGING_DIR_TARGET},,g' "${D}${bindir}/Magick++-config.im7"
++    fi
++
++    if ${@bb.utils.contains('PACKAGECONFIG', 'xml', 'true', 'false', d)}; then
++        xml_config="${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml"
++        sed -i 's,${S},,g' "$xml_config"
++        sed -i 's,${B},,g' "$xml_config"
++        sed -i 's,${RECIPE_SYSROOT},,g' "$xml_config"
++    fi
++
++    if ${@bb.utils.contains_any('PACKAGECONFIG', 'webp openjpeg', 'true', 'false', d)}; then
++        sed -i 's,${HOSTTOOLS_DIR},${bindir},g' "${D}${sysconfdir}/ImageMagick-7/delegates.xml"
++    fi
+ }
+ 
+ FILES:${PN} += "${libdir}/ImageMagick-${BASE_PV}/config-Q16* \
+-- 
+2.25.1
 
-Keys should be only imported for roles, not ca certificates. So perhaps:
-
- With this additional mechanism, it would be now possible to import a
- complex PKI tree of certificates and then later during usage of one
- role, reconstruct the certificate chain from the leaf, through
- multiple intermediary, and up to the root certificate.
-
-Also add a note that the PKI hierarchy cannot be overridden from local.conf=
- yet.
-
-> Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.co=
-m>
-> ---
->  meta-oe/classes/signing.bbclass | 36 ++++++++++++++++++++++++++++++++-
->  1 file changed, 35 insertions(+), 1 deletion(-)
->=20
-> diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bb=
-class
-> index c768371151..5992a75be7 100644
-> --- a/meta-oe/classes/signing.bbclass
-> +++ b/meta-oe/classes/signing.bbclass
-> @@ -145,9 +145,43 @@ signing_import_cert_from_der() {
->      signing_pkcs11_tool --type cert --write-object "${der}" --label "${c=
-ert_name}"
->  }
-> =20
-> -# signing_import_cert_chain_from_pem <role> <pem>
-> +# signing_import_set_ca <cert_name> <ca_cert_name>
-> +#
-> +# Link the certificate from <cert_name> to its issuer stored in
-> +# <ca_cert_name> By walking this linked list a CA-chain can later be
-> +# reconstructed from the involed roles.
-> +signing_import_set_ca() {
-> +    local cert_name=3D"${1}"
-> +    local ca_cert_name=3D"${2}"
-> +
-> +    echo "_SIGNING_CA_${cert_name}_=3D\"${ca_cert_name}\"" >> $_SIGNING_=
-ENV_FILE_
-> +    echo "added link from ${cert_name} to ${ca_cert_name}"
-> +}
-> +
-> +# signing_get_ca <cert_name>
->  #
-> +# returns the <ca_cert_name> that has been set previously through
-> +# signing_import_set_ca; or the empty string if none was set
-
-For cases, where the real PKI hierarchy loaded in to the real HSM differs f=
-rom
-the one loaded into SoftHSM, we'll need a way to override these variables. =
-So,
-similar to how signing_get_module() first checks the overrides set up from
-bitbake variables by signing_class_prepare().
-
-Then, a user could set use something the following for the provider:
-  signing_import_prepare
-
-  signing_import_cert_from_pem kernel ".../kernel-ca.crt"
-
-  signing_import_define_role kernel_modules
-  signing_import_cert_from_pem kernel_modules "${S}/kmod-development.crt"
-  signing_import_key_from_pem kernel_modules "${S}/kmod-development.key"
-  signing_import_set_ca kernel_modules kernel
-
-  signing_import_define_role kernel_ipe
-  signing_import_cert_from_pem kernel_ipe "${S}/ipe-development.crt"
-  signing_import_key_from_pem kernel_ipe "${S}/ipe-development.key"
-  signing_import_set_ca kernel_ipe kernel
-
-  signing_import_finish
-
-For release builds, in addition to overriding URIs for the role, you'd need=
- to
-override the certificates as well in your local.conf with something like th=
-is:
- SIGNING_PKCS11_MODULE =3D "/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so"
- SIGNING_PKCS11_URI[kernel_modules] =3D "pkcs11:serial=3DDENK0200554;object=
-=3Dproduction-kernel-modules&pin-value=3D123456"
- SIGNING_PKCS11_URI[kernel_modules] =3D "kernel_inter"
- SIGNING_PKCS11_URI[kernel_inter] =3D "pkcs11:serial=3DDENK0200554;object=
-=3Dproduction-kernel-inter&pin-value=3D123456"
- SIGNING_PKCS11_URI[kernel_inter] =3D "kernel_ca"
- SIGNING_PKCS11_URI[kernel_ca] =3D "pkcs11:serial=3DDENK0200554;object=3Dpr=
-oduction-kernel-ca&pin-value=3D123456"
-
-In this case, the real hierarchy has an additional intermediate certificate=
- that
-is not part of the one used during development. Perhaps also support simply=
- a
-file URL or path for the certs, so that it doesn't have to be imported to t=
-he
-HSM, depending how we implement it later.
-
-This doesn't need to be implemented here, yet, as long the limitation is
-documented (also in the class comment).
-
-> +signing_get_ca() {
-> +    local cert_name=3D"${1}"
-> =20
-> +    eval local ca_cert_name=3D"\$_SIGNING_CA_${cert_name}_"
-> +    echo "$ca_cert_name"
-> +}
-> +
-> +# signing_has_ca <cert_name>
-> +#
-> +# check if the cert_name links to another cert_name that is its
-> +# certificate authority/issuer.
-> +signing_has_ca() {
-> +    local ca_cert_name=3D"$(signing_get_ca ${1})"
-> +
-> +    test -n "$ca_cert_name"
-> +    return $?
-> +}
-> +
-> +# signing_import_cert_chain_from_pem <role> <pem>
-> +#
->  # Import a certificate *chain* from a PEM file to a role.
->  # (e.g. multiple ones concatenated in one file)
->  #
->=20
-
-Regards,
-Jan
-
---=20
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
