@@ -1,177 +1,104 @@
-Return-Path: <jlu@pengutronix.de>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39201C54FB3
-	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 09:38:15 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.web10.45746.1748857091480975609
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B0AEC5B555
+	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 09:41:45 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web10.45811.1748857300528600256
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jun 2025 02:38:12 -0700
+ Mon, 02 Jun 2025 02:41:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: jlu@pengutronix.de)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM1cP-0005qS-RX; Mon, 02 Jun 2025 11:38:09 +0200
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM1cP-001QrA-1N;
-	Mon, 02 Jun 2025 11:38:09 +0200
-Received: from localhost ([127.0.0.1] helo=[IPv6:::1])
-	by ptz.office.stw.pengutronix.de with esmtp (Exim 4.96)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM1cP-002b48-0q;
-	Mon, 02 Jun 2025 11:38:09 +0200
-Message-ID: <acd9f5dac0d1fd5b700d1a0a5b634ba509b2d3b0.camel@pengutronix.de>
-Subject: Re: [oe] [meta-oe][PATCH v2 1/6] signing.bbclass: refactor
- signing_import_cert_from_*
-From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jlu@pengutronix.de>
-To: johannes.schneider@leica-geosystems.com, 
-	openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
-Cc: bsp-development.geo@leica-geosystems.com, 
-	customers.leicageo@pengutronix.de
-Date: Mon, 02 Jun 2025 11:38:08 +0200
-In-Reply-To: <20250531113252.3889951-2-johannes.schneider@leica-geosystems.com>
-References: 
-	<20250531113252.3889951-1-johannes.schneider@leica-geosystems.com>
-	 <20250531113252.3889951-2-johannes.schneider@leica-geosystems.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.4-2 
+ dkim=pass header.i=@konsulko.com header.s=google header.b=e++CHHYr;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-3a361b8a664so4068556f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 02:41:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1748857299; x=1749462099; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UMWs8ELzS01YC/n7dhpEbaE9iQne55jhp7PB6yymfzE=;
+        b=e++CHHYr/K3rMu5gWZmeqNNVf1nBaXW5Jm5CAO+XgLa7x2e8kEBWd6kK6jFtUJMEKQ
+         uLqL8cPzQBrNvLMyafTIoEFiVE3GGBaijIl092aBvgIwZSQVquzUxvO/8EeWhmLiU2/f
+         siJ2/JJXCUQpnthOC5T0KbXWQV7S3hPw23Uus=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1748857299; x=1749462099;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UMWs8ELzS01YC/n7dhpEbaE9iQne55jhp7PB6yymfzE=;
+        b=U21e380kOPojBue6rCu1FH1EKJJ7u9hosPMkmjy8l+zcRVQKxl7xt4yfk4eZ/5t1Gu
+         8pmoznHO6oK76NiNYAiqOl2gjT61b0J3s3C0ypSxlnM6voUyynY+GUju+p5hgrUh/wxo
+         LoHgxP0l4m4/Wyh2nrUh3Yy7C58LTIa3UC+efU03h67ay9GO04qwCafjqeJXOHaSQe2B
+         /pHGM+6KUy9vpHrYKc9In+KwXzFi79X79TmLoG5YYAV04pOFdNXQIiQiCMruG4dN+TRu
+         ADjxy1eThSbE+IdThCtt3AJ2xI643So2vRd0otollcp3Dl088hGOqWRflwtx6ervZ6hq
+         kfMQ==
+X-Gm-Message-State: AOJu0Yy3iZWooLZjr9aeTuuzpe8MKEMt32tCAlhDurW1CjIHvsghDY67
+	WWBFl8ZloR2AT0z28/qRfHg/EjbyRQRlr2JipBfgh6uGeAs4zkpOxWCw17Xm6h2dVioLr4U+X2J
+	N7BEB
+X-Gm-Gg: ASbGncu/IY2Uj8y9aRyR6CsZDuVnKDlqgIkb3aO1hHKm8ySh2eta4yIdSUMP2YW7ymA
+	PMm9eG58SmDqzduW4TN6z7e5OBT/nnIJReH8r2kNPBTsz7a7y/mkKmGF+uJvATafACBvsFV3lbA
+	aFgZNQOsks5k/VPifkFecMHZ6Zg4qQllOX5/pKYpvV0TlW3wC40cRMizyXnDNoBJvKKZr2F7tSr
+	cK/C3aHS8leKXEiwRXTwiBGhTxJcBBlSA1UvoatwGTJkj9jCFkMfw6trNpooDQBBCd8N6eab6KT
+	h/pplUL7ULv/kiWY4Guu7oxCVpXHmgVHdRMhqdUePxSzRDTF2kQhBJgF1xNe86tf7Rtff170ph1
+	h
+X-Google-Smtp-Source: AGHT+IFemK4F90PvaGxyd3PkvhVk7pEmrexO2NlnRFM7rfvY7k24av3WHfeu2yW8GHKMwDcrE2LCiQ==
+X-Received: by 2002:a5d:5f52:0:b0:3a4:ee51:8144 with SMTP id ffacd0b85a97d-3a4f7a4ccf2mr9162120f8f.13.1748857298645;
+        Mon, 02 Jun 2025 02:41:38 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a4efe73eadsm14025417f8f.41.2025.06.02.02.41.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Jun 2025 02:41:38 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/4] python3-awesomeversion: Upgrade 24.6.0 -> 25.5.0
+Date: Mon,  2 Jun 2025 12:41:32 +0300
+Message-Id: <20250602094135.830557-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: jlu@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 09:38:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117697
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 09:41:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117698
 
-On Sat, 2025-05-31 at 13:32 +0200, Johannes Schneider via lists.openembedde=
-d.org
-wrote:
-> Refactor the two methods to import certificates from PEM/DER to be
-> usable independently from keymaterial that is linked to a role.
->=20
-> By having the import_cert_from methods create a storage location (aka
-> role) in the softhsm dynamically.  This way certificates can - but
-> don't have to - be linked to a key, or can stand on their own if chain
-> of certificates from a PKI has to be managed.
->=20
-> Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.co=
-m>
-> ---
->  meta-oe/classes/signing.bbclass | 42 +++++++++++++++++++++++++--------
->  1 file changed, 32 insertions(+), 10 deletions(-)
->=20
-> diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bb=
-class
-> index 8af7bbf8e0..c768371151 100644
-> --- a/meta-oe/classes/signing.bbclass
-> +++ b/meta-oe/classes/signing.bbclass
-> @@ -123,15 +123,26 @@ signing_import_define_role() {
->      echo "_SIGNING_PKCS11_MODULE_${role}_=3D\"softhsm\"" >> $_SIGNING_EN=
-V_FILE_
->  }
-> =20
-> -# signing_import_cert_from_der <role> <der>
-> +# signing_import_cert_from_der <cert_name> <der>
->  #
-> -# Import a certificate from DER file to a role. To be used
-> -# with SoftHSM.
-> +# Import a certificate from DER file to a cert_name.
-> +# Where the <cert_name> can either be a previously setup
-> +# signing_import_define_role linking the certificate to a signing key,
-> +# or a new identifier when dealing with a standalone certificate.
-> +#
-> +# To be used with SoftHSM.
->  signing_import_cert_from_der() {
-> -    local role=3D"${1}"
-> +    local cert_name=3D"${1}"
->      local der=3D"${2}"
-> =20
-> -    signing_pkcs11_tool --type cert --write-object "${der}" --label "${r=
-ole}"
-> +    # check wether the cert_name/role needs to be defined first,
-> +    # or do so otherwise
-> +    local uri=3D$(siging_get_uri $cert_name)
-> +    if [ -z "$uri" ]; then
-> +        signing_import_define_role "$cert_name"
+Upgrade to release 25.5.0:
 
-Semantically, this isn't a 'role' any more, but we can resolve the naming o=
-f
-signing_import_define_role later.
+- Add testing for Python 3.13
+- Remove support for EOL Python 3.8
+- Break after first hit with find_first_match
+- Use cached_property for the prefix property
+- Use cached_property for the major property
+- Use cached_property for the minor property
+- Use cached_property for the simple property
+- Use cached_property for the strategy property
+- Set full tag names in actions
 
-> +    fi
-> +
-> +    signing_pkcs11_tool --type cert --write-object "${der}" --label "${c=
-ert_name}"
->  }
-> =20
->  # signing_import_cert_chain_from_pem <role> <pem>
-> @@ -164,17 +175,28 @@ signing_import_cert_chain_from_pem() {
->          done
->  }
-> =20
-> -# signing_import_cert_from_pem <role> <pem>
-> +# signing_import_cert_from_pem <cert_name> <pem>
->  #
-> -# Import a certificate from PEM file to a role. To be used
-> -# with SoftHSM.
-> +# Import a certificate from PEM file to a cert_name.
-> +# Where the <cert_name> can either be a previously setup
-> +# signing_import_define_role linking the certificate to a signing key,
-> +# or a new identifier when dealing with a standalone certificate.
-> +#
-> +# To be used with SoftHSM.
->  signing_import_cert_from_pem() {
-> -    local role=3D"${1}"
-> +    local cert_name=3D"${1}"
->      local pem=3D"${2}"
-> =20
-> +    # check wether the cert_name/role needs to be defined first,
-> +    # or do so otherwise
-> +    local uri=3D$(siging_get_uri $cert_name)
-> +    if [ -z "$uri" ]; then
-> +        signing_import_define_role "$cert_name"
-> +    fi
-> +
->      openssl x509 \
->          -in "${pem}" -inform pem -outform der |
-> -    signing_pkcs11_tool --type cert --write-object /proc/self/fd/0 --lab=
-el "${role}"
-> +    signing_pkcs11_tool --type cert --write-object /proc/self/fd/0 --lab=
-el "${cert_name}"
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ ...wesomeversion_24.6.0.bb => python3-awesomeversion_25.5.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-awesomeversion_24.6.0.bb => python3-awesomeversion_25.5.0.bb} (82%)
 
-In the meantime, we found that we can also load PEMs with recent pkcs11-too=
-l, so
-Enrico will send a patch to simplify this.
+diff --git a/meta-python/recipes-devtools/python/python3-awesomeversion_24.6.0.bb b/meta-python/recipes-devtools/python/python3-awesomeversion_25.5.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-awesomeversion_24.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-awesomeversion_25.5.0.bb
+index 8bb5ddd54e..ae600a48b6 100644
+--- a/meta-python/recipes-devtools/python/python3-awesomeversion_24.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-awesomeversion_25.5.0.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENCE.md;md5=92622b5a8e216099be741d78328bae5d"
+ 
+-SRC_URI[sha256sum] = "aee7ccbaed6f8d84e0f0364080c7734a0166d77ea6ccfcc4900b38917f1efc71"
++SRC_URI[sha256sum] = "d64c9f3579d2f60a5aa506a9dd0b38a74ab5f45e04800f943a547c1102280f31"
+ 
+ RDEPENDS:${PN} += "python3-profile python3-logging"
+ 
+-- 
+2.39.5
 
-Reviewed-by: Jan Luebbe <jlu@pengutronix.de>
-
->  }
-> =20
->  # signing_import_pubkey_from_der <role> <der>
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117687): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117687
-> Mute This Topic: https://lists.openembedded.org/mt/113394167/2167243
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [j=
-lu@pengutronix.de]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->=20
-
---=20
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
