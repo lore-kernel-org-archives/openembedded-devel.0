@@ -1,123 +1,114 @@
-Return-Path: <jlu@pengutronix.de>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C3D9C5AD49
-	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 15:51:07 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.web10.53257.1748879465379917716
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A1BFC5AD49
+	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 15:51:37 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.53263.1748879492042491135
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jun 2025 08:51:05 -0700
+ Mon, 02 Jun 2025 08:51:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: jlu@pengutronix.de)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM7RH-0000bf-QU; Mon, 02 Jun 2025 17:51:03 +0200
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM7RH-001Tl8-1u;
-	Mon, 02 Jun 2025 17:51:03 +0200
-Received: from localhost ([127.0.0.1] helo=[IPv6:::1])
-	by ptz.office.stw.pengutronix.de with esmtp (Exim 4.96)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM7RH-003Y1T-1N;
-	Mon, 02 Jun 2025 17:51:03 +0200
-Message-ID: <ea86ffbeb48f4f6ddff0093796ebfbcb3e9fdc21.camel@pengutronix.de>
-Subject: Re: [oe] [meta-oe][PATCH v2 4/6] signing.bbclass: add
- signing_get_intermediate_certs
-From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jlu@pengutronix.de>
-To: johannes.schneider@leica-geosystems.com, 
-	openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
-Cc: bsp-development.geo@leica-geosystems.com, 
-	customers.leicageo@pengutronix.de
-Date: Mon, 02 Jun 2025 17:51:03 +0200
-In-Reply-To: <20250531113252.3889951-5-johannes.schneider@leica-geosystems.com>
-References: 
-	<20250531113252.3889951-1-johannes.schneider@leica-geosystems.com>
-	 <20250531113252.3889951-5-johannes.schneider@leica-geosystems.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.4-2 
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=82488074cc=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5527ZWYY031622
+	for <openembedded-devel@lists.openembedded.org>; Mon, 2 Jun 2025 08:51:31 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47019m1vhh-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 08:51:31 -0700 (PDT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Mon, 2 Jun 2025 08:51:07 -0700
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Mon, 2 Jun 2025 08:51:06 -0700
+From: <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][scarthgap][PATCH  1/2] tftpy: fix CVE-2023-46566
+Date: Mon, 2 Jun 2025 21:21:25 +0530
+Message-ID: <20250602155126.1197444-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: jlu@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: _TTLsOs2vv7OKRiMrazmkR7u1vZWrkKQ
+X-Authority-Analysis: v=2.4 cv=SpqQ6OO0 c=1 sm=1 tr=0 ts=683dc883 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=6IFa9wvqVegA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=AUd_NHdVAAAA:8 a=NeKOnoxPV5cGKiNFdNkA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: _TTLsOs2vv7OKRiMrazmkR7u1vZWrkKQ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjAyMDEyOSBTYWx0ZWRfX2jHHDVH0xW5Y i1yHFDNoP3FDQvs8ZkU7W7GnNHVBYMxiJMzCvDKZKL6B00zfGCaqPCinDDY8pF7lb8yiC2W2YRv CSBQvTUY2i4fb7tKRCTijBi10jdjaCD4IEWbGC8YvmbSW/0bgtkk7DAjcRXpeehR0r805/6iS43
+ YHcC4fPGwA20yQG/YX1L7F2AVBnVvkFUyA4D+aLhpHrqsXzcvV3VkfL/wk0iEw2LRjDlZVVpa+0 YrqZXK5902GYKWibAiA/MIZ1WjA2yj6rY/VWIzBJ9OqBzodRW1jEgeugwerUC5ryWmDkkhdrcp4 2bFyKCUv5vKKbmbxUSooQpHnkQXHL621JS+23Sbosf82Q6+CytSm3XFb6onyvkUFj5c/i/sl46K
+ vWKlQ2+hKBlIc+HkX1nnzK5k08UaZmuMtH9F6gSRAcVjf8U6kuIrpWdJldXWfl5C3x7i79JG
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-02_06,2025-06-02_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 mlxscore=0
+ clxscore=1015 impostorscore=0 phishscore=0 adultscore=0 mlxlogscore=999
+ lowpriorityscore=0 malwarescore=0 suspectscore=0 spamscore=0
+ priorityscore=1501 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505160000
+ definitions=main-2506020129
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 15:51:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117711
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 15:51:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117712
 
-On Sat, 2025-05-31 at 13:32 +0200, Johannes Schneider via lists.openembedde=
-d.org
-wrote:
-> Add a method that returns a list of intermediary CA roles.
->=20
-> When using a complex PKI structure with for example "openssl cms",
-> these roles can then be iterated over adding in turn a '-certificate'.
-> Pseudo-code example:
->   for intermediate in $(signing_get_intermediate_certs 'FooBaa'); do
->      signing_extract_cert_pem $intermediate $intermediate.pem
->      CMD+=3D" --certificate=3D$intermediate.pem"
->   done
+From: Archana Polampalli <archana.polampalli@windriver.com>
 
-+ The typical use-case would be adding these intermediate certificates to t=
-he
-CMS structure so that the relying party can build the chain from the signin=
-g
-leaf certificate to the locally stored trusted CA certificate.
+Buffer Overflow vulnerability in msoulier tftpy commit 467017b844bf6e31745138a30e2509145b0c529c
+allows a remote attacker to cause a denial of service via the parse function in the TftpPacketFactory class.
 
-> Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.co=
-m>
-> ---
->  meta-oe/classes/signing.bbclass | 21 +++++++++++++++++++++
->  1 file changed, 21 insertions(+)
->=20
-> diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bb=
-class
-> index ee32cc12f7..7bc3e7cb12 100644
-> --- a/meta-oe/classes/signing.bbclass
-> +++ b/meta-oe/classes/signing.bbclass
-> @@ -180,6 +180,27 @@ signing_has_ca() {
->      return $?
->  }
-> =20
-> +# signing_get_intermediate_certs <cert_name>
-> +#
-> +# return a list of role/name intermediary CA certificates for a given
-> +# <cert_name> by walking the chain setup with signing_import_set_ca.
-> +#
-> +# The returned list will not include the the root CA, and can
-> +# potentially be empty.
-> +#
-> +# To be used with SoftHSM.
-> +signing_get_intermediate_certs() {
-> +    local cert_name=3D"${1}"
-> +    local intermediary=3D""
-> +    while signing_has_ca "${cert_name}"; do
-> +        cert_name=3D"$(signing_get_ca ${cert_name})"
-> +        if signing_has_ca "${cert_name}"; then
-> +            intermediary=3D"${intermediary} ${cert_name}"
-> +        fi
-> +    done
-> +    echo "${intermediary}"
-> +}
-> +
->  # signing_get_root_cert <cert_name>
->  #
->  # return the role/name of the CA root certificate for a given
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+---
+ .../python/tftpy/CVE-2023-46566.patch         | 26 +++++++++++++++++++
+ .../recipes-devtools/python/tftpy_0.8.2.bb    |  2 ++
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/tftpy/CVE-2023-46566.patch
 
-Reviewed-by: Jan Luebbe <jlu@pengutronix.de>
+diff --git a/meta-python/recipes-devtools/python/tftpy/CVE-2023-46566.patch b/meta-python/recipes-devtools/python/tftpy/CVE-2023-46566.patch
+new file mode 100644
+index 0000000000..0131dedb1c
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/tftpy/CVE-2023-46566.patch
+@@ -0,0 +1,26 @@
++From 5b4dcbe1c8fb178e4d31b9a9e63e603b73e8fb2f Mon Sep 17 00:00:00 2001
++From: Dave Wapstra <dwapstra@cisco.com>
++Date: Wed, 3 Jul 2024 14:32:58 +1200
++Subject: [PATCH] Add packet size check
++
++CVE: CVE-2023-46566
++
++Upstream-Status: Backport [https://github.com/msoulier/tftpy/commit/5b4dcbe1c8fb178e4d31b9a9e63e603b73e8fb2f]
++---
++ tftpy/TftpPacketFactory.py | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/tftpy/TftpPacketFactory.py b/tftpy/TftpPacketFactory.py
++index 41f39a9..a8c9cd0 100644
++--- a/tftpy/TftpPacketFactory.py
+++++ b/tftpy/TftpPacketFactory.py
++@@ -29,6 +29,7 @@ class TftpPacketFactory(object):
++         """This method is used to parse an existing datagram into its
++         corresponding TftpPacket object. The buffer is the raw bytes off of
++         the network."""
+++        tftpassert(len(buffer) > 2, 'Invalid packet size')
++         log.debug("parsing a %d byte packet" % len(buffer))
++         (opcode,) = struct.unpack(str("!H"), buffer[:2])
++         log.debug("opcode is %d" % opcode)
++--
++2.40.0
+diff --git a/meta-python/recipes-devtools/python/tftpy_0.8.2.bb b/meta-python/recipes-devtools/python/tftpy_0.8.2.bb
+index c1b3234f72..c169916845 100644
+--- a/meta-python/recipes-devtools/python/tftpy_0.8.2.bb
++++ b/meta-python/recipes-devtools/python/tftpy_0.8.2.bb
+@@ -11,3 +11,5 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=22770e72ae03c61f5bcc4e333b61368d"
+ SRC_URI[sha256sum] = "e1d1a680efd88eba176b351175844253067392a9b0f8b81588e3ff2b9e7bbb5b"
+ 
+ inherit pypi setuptools3
++
++SRC_URI += "file://CVE-2023-46566.patch"
+-- 
+2.40.0
 
-
---=20
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
