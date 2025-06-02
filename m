@@ -1,172 +1,206 @@
-Return-Path: <ejo@pengutronix.de>
+Return-Path: <jlu@pengutronix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 741FDC54FB3
-	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 09:55:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 820BDC5AD49
+	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 10:10:35 +0000 (UTC)
 Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.web10.46024.1748858120680372457
+ by mx.groups.io with SMTP id smtpd.web10.46268.1748859033848362595
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jun 2025 02:55:20 -0700
+ Mon, 02 Jun 2025 03:10:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: ejo@pengutronix.de)
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77] helo=[IPv6:::1])
-	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
-	(envelope-from <ejo@pengutronix.de>)
-	id 1uM1t1-00039D-78; Mon, 02 Jun 2025 11:55:19 +0200
-Message-ID: <9d73f186246db36363f095aada9289215561d43c.camel@pengutronix.de>
-Subject: Re: [oe] [meta-oe][PATCH v1 0/3] add support for building "system
- extension images"
-From: Enrico =?ISO-8859-1?Q?J=F6rns?= <ejo@pengutronix.de>
+ dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: jlu@pengutronix.de)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <jlu@pengutronix.de>)
+	id 1uM27k-0000KY-Cn; Mon, 02 Jun 2025 12:10:32 +0200
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77])
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <jlu@pengutronix.de>)
+	id 1uM27k-001RB1-0S;
+	Mon, 02 Jun 2025 12:10:32 +0200
+Received: from localhost ([127.0.0.1] helo=[IPv6:::1])
+	by ptz.office.stw.pengutronix.de with esmtp (Exim 4.96)
+	(envelope-from <jlu@pengutronix.de>)
+	id 1uM27j-002fy1-36;
+	Mon, 02 Jun 2025 12:10:32 +0200
+Message-ID: <b6bff5beab33d550ec7efa84d47bfc8af53d4f25.camel@pengutronix.de>
+Subject: Re: [oe] [meta-oe][PATCH v2 2/6] signing.bbclass: add
+ set|get|has_ca functions
+From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jlu@pengutronix.de>
 To: johannes.schneider@leica-geosystems.com, 
-	openembedded-devel@lists.openembedded.org, raj.khem@gmail.com, 
-	mikko.rapeli@linaro.org, erik@riscstar.com
-Cc: bsp-development.geo@leica-geosystems.com, ejo <ejo@pengutronix.de>
-Date: Mon, 02 Jun 2025 11:55:18 +0200
-In-Reply-To: <20250531110022.3843938-1-johannes.schneider@leica-geosystems.com>
+	openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
+Cc: bsp-development.geo@leica-geosystems.com, 
+	customers.leicageo@pengutronix.de
+Date: Mon, 02 Jun 2025 12:10:31 +0200
+In-Reply-To: <20250531113252.3889951-3-johannes.schneider@leica-geosystems.com>
 References: 
-	<20250531110022.3843938-1-johannes.schneider@leica-geosystems.com>
+	<20250531113252.3889951-1-johannes.schneider@leica-geosystems.com>
+	 <20250531113252.3889951-3-johannes.schneider@leica-geosystems.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.46.4-2 
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: ejo@pengutronix.de
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: jlu@pengutronix.de
 X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
 X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 09:55:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117702
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 10:10:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117703
 
-Hi Johannes,
+On Sat, 2025-05-31 at 13:32 +0200, Johannes Schneider via lists.openembedde=
+d.org
+wrote:
+> Add a mechanism to establish a (metadata) link between roles, in the
+> form of a new 'ca' variable.  Which is intended to point from one role
+> to another, to preserve the leaf->intermediary certificate relation.
 
-thank you for sharing you approach!
+Perhaps instead:
 
-I few quick notes that came to my mind when scrolling through the patches/c=
-over letter.
+ Add a mechanism to establish a (metadata) link between roles and signer
+ certificates, in the form of a new 'ca' variable.  It must point from one=
+=C2=A0
+ role=C2=A0or cert to the signer certificate to preserve the leaf->intermed=
+iary->
+ root=C2=A0certificate relation.
 
-Am Samstag, dem 31.05.2025 um 13:00 +0200 schrieb Johannes Schneider via li=
-sts.openembedded.org:
-> This patch-stack adds support for building "system extension images" to m=
-eta-oe - to quote the
-> man-page [1]:
-> "The primary use case for system images are immutable environments where =
-debugging and development
-> tools shall optionally be made available, but not included in the immutab=
-le base OS image itself
-> (e.g. strace(1) and gdb(1) shall be an optionally installable addition in=
- order to make
-> debugging/development easier). System extension images should not be misu=
-nderstood as a generic
-> software packaging framework, as no dependency scheme is available: syste=
-m extensions should carry
-> all files they need themselves, except for those already shipped in the u=
-nderlying host system
-> image. Typically, system extension images are built at the same time as t=
-he base OS image =E2=80=94 within
-> the same build system."
+> With this additional mechanism, it would be now possible to import a
+> complex PKI tree of certificates (either just the certificates, or
+> both cert+key where available); and then later during usage of one
+> role, reconstruct the verification chain from the leaf, through
+> multiple intermediary, and up to the root role.
+
+Keys should be only imported for roles, not ca certificates. So perhaps:
+
+ With this additional mechanism, it would be now possible to import a
+ complex PKI tree of certificates and then later during usage of one
+ role, reconstruct the certificate chain from the leaf, through
+ multiple intermediary, and up to the root certificate.
+
+Also add a note that the PKI hierarchy cannot be overridden from local.conf=
+ yet.
+
+> Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.co=
+m>
+> ---
+>  meta-oe/classes/signing.bbclass | 36 ++++++++++++++++++++++++++++++++-
+>  1 file changed, 35 insertions(+), 1 deletion(-)
 >=20
-> Link: https://www.freedesktop.org/software/systemd/man/latest/systemd-sys=
-ext.html
+> diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bb=
+class
+> index c768371151..5992a75be7 100644
+> --- a/meta-oe/classes/signing.bbclass
+> +++ b/meta-oe/classes/signing.bbclass
+> @@ -145,9 +145,43 @@ signing_import_cert_from_der() {
+>      signing_pkcs11_tool --type cert --write-object "${der}" --label "${c=
+ert_name}"
+>  }
+> =20
+> -# signing_import_cert_chain_from_pem <role> <pem>
+> +# signing_import_set_ca <cert_name> <ca_cert_name>
+> +#
+> +# Link the certificate from <cert_name> to its issuer stored in
+> +# <ca_cert_name> By walking this linked list a CA-chain can later be
+> +# reconstructed from the involed roles.
+> +signing_import_set_ca() {
+> +    local cert_name=3D"${1}"
+> +    local ca_cert_name=3D"${2}"
+> +
+> +    echo "_SIGNING_CA_${cert_name}_=3D\"${ca_cert_name}\"" >> $_SIGNING_=
+ENV_FILE_
+> +    echo "added link from ${cert_name} to ${ca_cert_name}"
+> +}
+> +
+> +# signing_get_ca <cert_name>
+>  #
+> +# returns the <ca_cert_name> that has been set previously through
+> +# signing_import_set_ca; or the empty string if none was set
 
-The interesting part
+For cases, where the real PKI hierarchy loaded in to the real HSM differs f=
+rom
+the one loaded into SoftHSM, we'll need a way to override these variables. =
+So,
+similar to how signing_get_module() first checks the overrides set up from
+bitbake variables by signing_class_prepare().
 
-  system extensions should carry all files they need themselves, except for=
- those
-  already shipped in the underlying host system image.
+Then, a user could set use something the following for the provider:
+  signing_import_prepare
 
-is not really addressed yet by the class, since it takes a conventional roo=
-tfs image recipe, adds a
-version file and ensures that the removal of 'os-release' works around the =
-sanity check.
+  signing_import_cert_from_pem kernel ".../kernel-ca.crt"
 
-To better solve this, I guess we would need a way to either split the sysex=
-t content from the rootfs
-before generating both, or, a proper way to create a 'non-rootfs', i.e. a f=
-ile system that does not
-contain the default rootfs files, etc.
+  signing_import_define_role kernel_modules
+  signing_import_cert_from_pem kernel_modules "${S}/kmod-development.crt"
+  signing_import_key_from_pem kernel_modules "${S}/kmod-development.key"
+  signing_import_set_ca kernel_modules kernel
 
-I'd assume these base questions are relevant for a number of similar proble=
-ms, too. Like for
-creating layered containers.
+  signing_import_define_role kernel_ipe
+  signing_import_cert_from_pem kernel_ipe "${S}/ipe-development.crt"
+  signing_import_key_from_pem kernel_ipe "${S}/ipe-development.key"
+  signing_import_set_ca kernel_ipe kernel
 
-For now, to not give the impression of being a generic solution for creatin=
-g systext's, maybe one
-should rename the class to reflect its for a rootfs or covers only the vers=
-ion file generation so
-far? E.g.: systemd-sysext-rootfs.bbclass.
+  signing_import_finish
 
-> These patches are added to meta-oe - instead of oe-core - because systemd=
--repart-native requires
-> 'cryptsetup' to build discoverable-disk-images with verity and optional s=
-ignature partitions - and
-> cryptsetup is currently only/still in meta-oe.
+For release builds, in addition to overriding URIs for the role, you'd need=
+ to
+override the certificates as well in your local.conf with something like th=
+is:
+ SIGNING_PKCS11_MODULE =3D "/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so"
+ SIGNING_PKCS11_URI[kernel_modules] =3D "pkcs11:serial=3DDENK0200554;object=
+=3Dproduction-kernel-modules&pin-value=3D123456"
+ SIGNING_PKCS11_URI[kernel_modules] =3D "kernel_inter"
+ SIGNING_PKCS11_URI[kernel_inter] =3D "pkcs11:serial=3DDENK0200554;object=
+=3Dproduction-kernel-inter&pin-value=3D123456"
+ SIGNING_PKCS11_URI[kernel_inter] =3D "kernel_ca"
+ SIGNING_PKCS11_URI[kernel_ca] =3D "pkcs11:serial=3DDENK0200554;object=3Dpr=
+oduction-kernel-ca&pin-value=3D123456"
 
-This could also be a point where one might consider moving it to oe-core, s=
-ince it provides 'core'
-functionality for creating encrypted system setups, which becomes more and =
-more relevant, e.g. for
-properly protecting sensitive personal data.
+In this case, the real hierarchy has an additional intermediate certificate=
+ that
+is not part of the one used during development. Perhaps also support simply=
+ a
+file URL or path for the certs, so that it doesn't have to be imported to t=
+he
+HSM, depending how we implement it later.
 
-> Note that erofs-utils and systemd-repart-native have to be of a recent ve=
-rsion, to support
-> features like compression and signing through PKCS#11 (e.g. as provided b=
-y the
-> classes/signing.bbclass)
+This doesn't need to be implemented here, yet, as long the limitation is
+documented (also in the class comment).
+
+> +signing_get_ca() {
+> +    local cert_name=3D"${1}"
+> =20
+> +    eval local ca_cert_name=3D"\$_SIGNING_CA_${cert_name}_"
+> +    echo "$ca_cert_name"
+> +}
+> +
+> +# signing_has_ca <cert_name>
+> +#
+> +# check if the cert_name links to another cert_name that is its
+> +# certificate authority/issuer.
+> +signing_has_ca() {
+> +    local ca_cert_name=3D"$(signing_get_ca ${1})"
+> +
+> +    test -n "$ca_cert_name"
+> +    return $?
+> +}
+> +
+> +# signing_import_cert_chain_from_pem <role> <pem>
+> +#
+>  # Import a certificate *chain* from a PEM file to a role.
+>  # (e.g. multiple ones concatenated in one file)
+>  #
 >=20
-> As an example consider this simple image recipe:
-> SUMMARY =3D "An example image to showcase a system extension image."
-> LICENSE =3D "MIT"
-> inherit discoverable-disk-image sysext-image
-> IMAGE_FEATURES =3D ""
-> IMAGE_LINGUAS =3D ""
-> IMAGE_INSTALL =3D "gdb"
 
-This example might be quite helpful to see how the class intents to be used=
-.
-As it will get lost when patches are merged, maybe move it to the class inl=
-ine documentation or at
-least into the corresponding commit message?
-
-
-Regards, Enrico
-
-> After building, the resulting 'extension-image-example-*sysext.rootfs.ddi=
-' can be deployed to an
-> embedded system (running from a RO rootfs) and 'merged' into the OS by fo=
-llowing steps:
-> place a symlink into the systemd-sysext image search path:
-> $> mkdir /run/extensions
-> $> ln -s /tmp/extension-example.sysext.ddi /run/extensions/example.raw
-> list all available extensions:
-> $> systemd-sysext list
-> and enable the found extensions:
-> $> SYSTEMD_LOG_LEVEL=3Ddebug systemd-sysext merge
->=20
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117678): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117678
-> Mute This Topic: https://lists.openembedded.org/mt/113393897/3616721
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=C2=
-=A0[ejo@pengutronix.de]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->=20
+Regards,
+Jan
 
 --=20
-Pengutronix e.K.=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0| Enrico J=C3=B6rns=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0|
-Embedded Linux Consulting & Support=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0| https://www.pengutronix.de/ |
-Steuerwalder Str. 21=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0| Phone: +49-5121-206917-180=C2=A0=C2=A0|
-31137 Hildesheim, Germany=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0| Fax:=C2=A0=C2=
-=A0=C2=A0+49-5121-206917-9=C2=A0=C2=A0=C2=A0=C2=A0|
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
