@@ -1,127 +1,90 @@
-Return-Path: <jlu@pengutronix.de>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19734C5AD49
-	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 15:52:17 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.web11.53336.1748879535976491628
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B36AC54FB3
+	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 15:58:17 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web11.53524.1748879896264404846
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jun 2025 08:52:16 -0700
+ Mon, 02 Jun 2025 08:58:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: jlu@pengutronix.de)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM7SQ-0001Mu-HI; Mon, 02 Jun 2025 17:52:14 +0200
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM7SQ-001TlJ-0y;
-	Mon, 02 Jun 2025 17:52:14 +0200
-Received: from localhost ([127.0.0.1] helo=[IPv6:::1])
-	by ptz.office.stw.pengutronix.de with esmtp (Exim 4.96)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1uM7SQ-003YBI-0O;
-	Mon, 02 Jun 2025 17:52:14 +0200
-Message-ID: <de7f555011f8753bd8c79c631ccb0fce2fcc23df.camel@pengutronix.de>
-Subject: Re: [oe] [meta-oe][PATCH v2 6/6] signing.bbclass: remove
- signing_import_cert_chain_from_pem
-From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jlu@pengutronix.de>
-To: johannes.schneider@leica-geosystems.com, 
-	openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
-Cc: bsp-development.geo@leica-geosystems.com, 
-	customers.leicageo@pengutronix.de
-Date: Mon, 02 Jun 2025 17:52:13 +0200
-In-Reply-To: <20250531113252.3889951-7-johannes.schneider@leica-geosystems.com>
-References: 
-	<20250531113252.3889951-1-johannes.schneider@leica-geosystems.com>
-	 <20250531113252.3889951-7-johannes.schneider@leica-geosystems.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.4-2 
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XwXDjPU6;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-ad89333d603so877903766b.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 08:58:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1748879894; x=1749484694; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=j1lmuwzriV6Ak3I5MsVqMDUcHtKZMUn+v47A3DLhdYY=;
+        b=XwXDjPU6bSbKLsbo2+cCdee8zqauEbqWGwwI8dSkSIBDtPO13fDcwyAiC9HL0Fj+cY
+         qVcRox5UIF0hDu+q/EQXIPfSlqxltk4sO41odhnu2k2s3ystlaqBfEZHyPbUwyACoTKM
+         B0tYm4or4Bwcqp5SvjLQty12gttLurLgCYswgJsleAIcLUAfIm8FrX2t/8M+pWGgOS9Z
+         q9don91ER7pocHYE+V1q/Q4Wco2K4gGwXdPfxATVsHiKoBnna9e5VvXOIR+0oz23CU85
+         iz6W8k+kSv+6t/e3HzlHZRX8kWPK6Vr5JbGKCdYx+zVPK1WEwid5mr166D1PvLoqZGiN
+         Quow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1748879894; x=1749484694;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=j1lmuwzriV6Ak3I5MsVqMDUcHtKZMUn+v47A3DLhdYY=;
+        b=uIpWTb88Tiw+y9AiwpB9YQPC8q/C/ZKL6S025/rmm66uUkDWdbQc9WbULxkhvsoLAO
+         BidZlU1isV8/1Kxa1MeuVPH+cB6n32zDefFJh/HPYzxVfEPBkWRVaiufjntS7WJnoei7
+         Cu+P+iK+/nsHiiwKcZ/UJRQPl/9tDps2EG11YIuoVtulYn+EefF0NheLsU4+Sgu90nbu
+         biOonG013hl1n3o1SZLfzzQ+eulOZI6f1YXMgSnWhEouYLgMokCGRyaoRzDIfdHbqSCd
+         i6U7iSeQuNtg7bqKTDNAchROCh7leYlY7YuGGY4VTetTbyEAj0xHAYHgneO6uldHe7GG
+         E96A==
+X-Forwarded-Encrypted: i=1; AJvYcCVFNOsQE5oEqlpC/qpF+Nuz61VswsWwjClX3Uhqyqa7UHvWjSI69lTjBHUUY2zH+IrXdwXXZU9wUuSVoy/NWc/93b0=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yz9K7ngAxkhA75wgkYMYhIyjW9Ti9RZD+unl1YzfT9B36SQOHiY
+	9iRnsm4CTS6hyVz9rXzNLKx9oYAJwXBaAqDDHyUdeG8P0YFWJ6ie64knYPbXOA==
+X-Gm-Gg: ASbGncspDHQZtW0kdyNgwIOjVRrsbTyjLam2ngk+jdabsK2ck5PgalOIC0tbFtf4qUR
+	Rceb6ayf3PVtBWSgwW0ZIL4C45dh9f/ue+czp1hZ3TIy7EiHYc7QLd9DcvhUCYluhivfvpjrs/+
+	MBF8SkfeZN6kNGpYPsWmxwmO54ngaDUBmFPy7Vl1UGzsyjfoOTKuz9lxUIdKpErttKnAe07BQMG
+	cLrSx+s7m8kbyE+bwB2wnCdPvnaWB62TF/BUbQFgyaU8i+6OouT4n/+4AcF8lS8EMk66+OpUc7E
+	zLRkiKYI8xeynsuS59XjGUjFC4iCaItSlRzMYYBd1GHw3rX9ZBHMRAh5T+FvQfjM9iR6MQ==
+X-Google-Smtp-Source: AGHT+IFmm+RrhE2qRjArZ+gRK4+IDYRv593rSpiuWrjy4Vk2aa25tZcNt0JnKFRw7maV2W977ucg1w==
+X-Received: by 2002:a17:906:6a21:b0:ad5:23e3:48b6 with SMTP id a640c23a62f3a-adb3230518fmr1333112066b.45.1748879894176;
+        Mon, 02 Jun 2025 08:58:14 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ada5e878152sm818694766b.107.2025.06.02.08.58.13
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 02 Jun 2025 08:58:13 -0700 (PDT)
+Message-ID: <444ee160-c5cb-49e2-8b00-d11b5d9c277e@gmail.com>
+Date: Mon, 2 Jun 2025 17:58:13 +0200
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: jlu@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-oe][scarthgap][PATCH 2/2] tcpreplay: fix CVE-2024-22654
+To: archana.polampalli@windriver.com,
+ openembedded-devel@lists.openembedded.org
+References: <20250602155126.1197444-1-archana.polampalli@windriver.com>
+ <20250602155126.1197444-2-archana.polampalli@windriver.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20250602155126.1197444-2-archana.polampalli@windriver.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 15:52:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117715
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 15:58:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117716
 
-On Sat, 2025-05-31 at 13:32 +0200, Johannes Schneider via lists.openembedde=
-d.org
-wrote:
-> With the now available set|get|has_ca functions to establish a CA link
-> between roles during their import, the
-> signing_import_cert_chain_from_pem can now be removed.  As it had the
-> shortcoming of dynamically creating roles, which are harder to handle
-> then the manually/specifically setup CA roles.
->=20
-> This effectively reverts:
-> a825b853634 signing.bbclass: add certificate ca-chain handling
->=20
-> Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.co=
-m>
+On 6/2/25 17:51, Polampalli, Archana via lists.openembedded.org wrote:
 > ---
->  meta-oe/classes/signing.bbclass | 29 -----------------------------
->  1 file changed, 29 deletions(-)
->=20
-> diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bb=
-class
-> index 1f50e89d1e..c9759e9198 100644
-> --- a/meta-oe/classes/signing.bbclass
-> +++ b/meta-oe/classes/signing.bbclass
-> @@ -217,35 +217,6 @@ signing_get_root_cert() {
->      echo "${cert_name}"
->  }
-> =20
-> -# signing_import_cert_chain_from_pem <role> <pem>
-> -#
-> -# Import a certificate *chain* from a PEM file to a role.
-> -# (e.g. multiple ones concatenated in one file)
-> -#
-> -# Due to limitations in the toolchain:
-> -#   signing class -> softhsm -> 'extract-cert'
-> -# the input certificate is split into a sequentially numbered list of ro=
-les,
-> -# starting at <role>_1
-> -#
-> -# (The limitations are the conversion step from x509 to a plain .der, an=
-d
-> -# extract-cert expecting a x509 and then producing only plain .der again=
-)
-> -signing_import_cert_chain_from_pem() {
-> -    local role=3D"${1}"
-> -    local pem=3D"${2}"
-> -    local i=3D1
-> -
-> -    cat "${pem}" | \
-> -        while openssl x509 -inform pem -outform der -out ${B}/temp_${i}.=
-der; do
-> -            signing_import_define_role "${role}_${i}"
-> -            signing_pkcs11_tool --type cert \
-> -                                --write-object  ${B}/temp_${i}.der \
-> -                                --label "${role}_${i}"
-> -            rm ${B}/temp_${i}.der
-> -            echo "imported ${pem} under role: ${role}_${i}"
-> -            i=3D$(awk "BEGIN {print $i+1}")
-> -        done
-> -}
-> -
->  # signing_import_cert_from_pem <cert_name> <pem>
->  #
->  # Import a certificate from PEM file to a cert_name.
-
-Reviewed-by: Jan Luebbe <jlu@pengutronix.de>
-
---=20
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+>  .../tcpreplay/CVE-2024-22654-0002.patch       | 35 +++++++++++++++++++
+>  .../tcpreplay/tcpreplay_4.4.4.bb              |  2 ++
+>  2 files changed, 37 insertions(+)
+<snip>
+> @@ -13,6 +13,8 @@ SRC_URI = "https://github.com/appneta/${BPN}/releases/download/v${PV}/${BP}.tar.
+>      file://0001-configure.ac-do-not-run-conftest-in-case-of-cross-co.patch \
+>      file://CVE-2023-4256.patch \
+>      file://CVE-2023-43279.patch \
+> +    file://CVE-2024-22654-0001.patch \
+> +    file://CVE-2024-22654-0002.patch \
+>  "
+Looks like the first part (CVE-2024-22654-0001.patch) was left out of
+the patch.
 
