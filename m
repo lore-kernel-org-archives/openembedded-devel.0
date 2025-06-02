@@ -1,182 +1,147 @@
-Return-Path: <jhaller.oss@gmail.com>
+Return-Path: <kelefa.sane@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F2B3C54FB3
-	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 13:18:16 +0000 (UTC)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com (EUR02-AM0-obe.outbound.protection.outlook.com [40.107.247.69])
- by mx.groups.io with SMTP id smtpd.web10.49487.1748870292970743747
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4FB1C5AD49
+	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 14:08:56 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web10.50624.1748873326163468125
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jun 2025 06:18:13 -0700
+ Mon, 02 Jun 2025 07:08:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@Philips.onmicrosoft.com header.s=selector2-Philips-onmicrosoft-com header.b=esrXhZ36;
- spf=pass (domain: bbl.ms.philips.com, ip: 40.107.247.69, mailfrom: jhaller@bbl.ms.philips.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=upl6AVR84R0VYYW5fiEobJqN9ZJY9qKmS6Yzu+Ri9NIia8WJRQHv8+1+YsfJr3q4YbzQpW8VqheKIrtTtUHII9u7ovmyZtaHTqst06rVME+cZpyh1vJKEn/u1omaiWTO8cibyDxQyokyMyjNpAN0LrqFs6XOZ2ZdSOzAaaW76osBsNJnndzRlw7uebTl/M99lNvmawaKk/Do9/+ApCaXn3PAlMdGqS61gsiSx2FNGQymAjB86KpRHqrSfzfyG2D6GyWOitT1xIFHqVp1mW7me4DICJxsE6x8hdmV+b3CQau7vkrPiQHPC1+YeEok5NpBj79YObAmo9YaRsy9JxqOCg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=S6YtCtFCqpaOMErSdcYiYjUwKQsU847NwPlmaJjNQ2I=;
- b=hBrAWKX+tE1u1tFASHxaVpVUTnQ9i9/0u76FCi7VJ1Zj+him68gBGNhyFviOl6BWkWFW0R2ZB/6ZxOHlZAgRfoaURJZlY+d4PAX+SDai/NfBB6ZPUy3jWZkkZeXHiZBdteXw/C3P/G6gGJH5gNSeJgx9YS+eUB6s6qD8VRWE6MWCFO4Qo2rhUflbKjzI+dCOCquX/5rayPIW74i8cIg63rsFGoaAv8uJEV0hbdCEPuk96OMZfT0OFalW3k+LO5ext9GUQYSI4aaUIk+jsCHNW3L+ij1VYFQZ8BNZl926cdtX6FPqsoUfoain2MA3D9GbLAC8XeZYVoqQNpL5WUM4BQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 3.248.88.141) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=bbl.ms.philips.com; dmarc=fail (p=none sp=quarantine pct=100)
- action=none header.from=gmail.com; dkim=none (message not signed); arc=none
- (0)
+ dkim=pass header.i=@smile.fr header.s=google header.b=me8kDgDN;
+ spf=pass (domain: smile.fr, ip: 209.85.128.48, mailfrom: kelefa.sane@smile.fr)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-441d437cfaaso29812845e9.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 07:08:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=Philips.onmicrosoft.com; s=selector2-Philips-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S6YtCtFCqpaOMErSdcYiYjUwKQsU847NwPlmaJjNQ2I=;
- b=esrXhZ36CvSN/q5xbZkPLpFXGvnQKBGSE26n3ZMS/n4cN9UUTfsF6GHrKuvoqbfQm/T+VVILZ6/ut1WZt3ARnjePC5/etCCAUjv8+hjz1hApeXe+2z0Y3VfMH2X31CEKAWG5w3CNFRJBzabU84sdJ4plRpYTKQDiaRB4AstVQJ4=
-Received: from AM0PR02CA0189.eurprd02.prod.outlook.com (2603:10a6:20b:28e::26)
- by AM9P122MB0268.EURP122.PROD.OUTLOOK.COM (2603:10a6:20b:22f::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.38; Mon, 2 Jun
- 2025 13:18:08 +0000
-Received: from AM4PEPF00027A65.eurprd04.prod.outlook.com
- (2603:10a6:20b:28e:cafe::6b) by AM0PR02CA0189.outlook.office365.com
- (2603:10a6:20b:28e::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.29 via Frontend Transport; Mon,
- 2 Jun 2025 13:18:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 3.248.88.141)
- smtp.mailfrom=bbl.ms.philips.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=gmail.com;
-Received-SPF: Pass (protection.outlook.com: domain of bbl.ms.philips.com
- designates 3.248.88.141 as permitted sender) receiver=protection.outlook.com;
- client-ip=3.248.88.141; helo=ext-eur1.smtp.philips.com; pr=C
-Received: from ext-eur1.smtp.philips.com (3.248.88.141) by
- AM4PEPF00027A65.mail.protection.outlook.com (10.167.16.86) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8792.29 via Frontend Transport; Mon, 2 Jun 2025 13:18:08 +0000
-Received: from smtprelay-eur1.philips.com ([130.138.84.184])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 256/256 bits)
-	(Client did not present a certificate)
-	by ext-eur1.smtp.philips.com with ESMTPS
-	id LvuPug47Y07hKM53HutrqL; Mon, 02 Jun 2025 15:18:07 +0200
-Received: from mail.bbl.ms.philips.com ([130.143.87.230])
-	by smtprelay-eur1.philips.com with ESMTP
-	id M53HulhbrinGMM53HuLCRO; Mon, 02 Jun 2025 15:18:07 +0200
-X-CLAM-Verdict: legit
-X-CLAM-Score: ??
-X-CLAM-Description: ??
-Received: from bbl2xr12.bbl.ms.philips.com (bbl2xr12.bbl.ms.philips.com [130.143.223.70])
-	by mail.bbl.ms.philips.com (Postfix) with ESMTP id BB55818480D
-	for <openembedded-devel@lists.openembedded.org>; Mon,  2 Jun 2025 15:18:07 +0200 (CEST)
-Received: by bbl2xr12.bbl.ms.philips.com (Postfix, from userid 1876)
-	id ADBD67C020D; Mon,  2 Jun 2025 15:18:07 +0200 (CEST)
-From: jhaller.oss@gmail.com
+        d=smile.fr; s=google; t=1748873324; x=1749478124; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=S+SVxiIpGTTsuHDnImRmBRiJyRg1Q97fqkAlEb0eD+c=;
+        b=me8kDgDNgpMHu6Rc3cq+m9zDZommSv9SZ0kmp1eLKwpP3V0IkKi0RCLo1BmTRvreOy
+         0ELakd5hqoLXzbzyUbyrntWDSWq/LtpSXrMFhRIL5dy4+6p3ZiNipTde3FhFC6yzmMIw
+         xo65G5bQAuRtteQJMlcrw6hUBtgoe0JM/Y+6s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1748873324; x=1749478124;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=S+SVxiIpGTTsuHDnImRmBRiJyRg1Q97fqkAlEb0eD+c=;
+        b=XDT4hKSTADFHl7Ru2te8pKt5p3N7EgYeGhmOqIWjkNF4bZMyOhAaywUvDVekkyTIUe
+         W+TvG9rv2bzKIQBm1Ozn2TXjOiYOcVVack0sdxb9DcCejVEgXVRzfeGEKxuRKypmJcbr
+         WeJqCvDplBdM6T1VkV1M1G5KJt+YyG0VYkvaNqKGI0nkEXt86E8FxciEQpdzFPzYemlz
+         B9Vi/bMhQyrXUHrRZvVaz6JBjlZ7AYSDHRM+j4MfK5UPT3x2CF4t1Zs0K6F4J4bGdOau
+         MA9VUU3d0bI0Ql7VevG1dWNzeeaTk3POiIP7K296OxJTUrlTEVbtuZZDXFddmupq7Ksr
+         yBgw==
+X-Gm-Message-State: AOJu0YzuUioWNw7dhtXzAYekzBkRDPX7wFQoWq3eMr5/M/FA9zG8vyT/
+	QXkHOdXZ5jlx9yuhs9/CvQuzYQoPGd3QvC/WScqGFQDBvbEH+vejrB1ieHxjb7U4oYy3fd8C41w
+	z4AEr
+X-Gm-Gg: ASbGncsZj9ZYIh8Yv8frCTQLsembF1wqbghiL8rBpuMnSSVgGhIn/NfiAEviOOkLDRt
+	ru/VKJoQZREgjj1fkdE3aYwKu/FBmwZasPMVyvjBYzHSJhAWLuWuQYM/tgEZpkiZzD5mAbaD3Lq
+	owClMX6e4Myocamf34U40Hy7TFhxWxjveC7CVLF8rFrEMBFu6mqLq9LNwmfeKhWHiNH/2AXv+FT
+	9d3Xvi2wba3BUCCnwCSwMIbb1HpxGiX9DrFHoVydJn1EmIAw9CojiggpvSULhWZrxDebF4q+Skl
+	csgr6YuyPlDy1v4+VIkRsXhZqMCNAmrCpR7oLV+eUI54TLXG9tUjX4f9e93KoD+/ZQi4AtINBBV
+	niBr5hb0SmVUHe15VyQwyAGm6y3MByRMj6UrjemPHqc1ackJNkRR2og==
+X-Google-Smtp-Source: AGHT+IEKsqbds5p5KBYZBmk4APN4X8j9Ed4Rw65LEcn7fz7y8vzozyYkshgHdW9BjZADxecQ81Rx4w==
+X-Received: by 2002:a05:6000:3103:b0:3a4:eecd:f4d2 with SMTP id ffacd0b85a97d-3a4f89ddd7cmr10300210f8f.38.1748873324095;
+        Mon, 02 Jun 2025 07:08:44 -0700 (PDT)
+Received: from FRSMI24-OUB.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-450d7fc28f3sm124871295e9.39.2025.06.02.07.08.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Jun 2025 07:08:43 -0700 (PDT)
+From: kelefa.sane@smile.fr
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] cli11: Use the standard catch2 version
-Date: Mon,  2 Jun 2025 15:18:07 +0200
-Message-ID: <20250602131807.3748115-1-jhaller.oss@gmail.com>
+Cc: =?UTF-8?q?K=C3=A9l=C3=A9fa=20San=C3=A9?= <kelefa.sane@smile.fr>
+Subject: [meta-oe][PATCH] imx-cst:fix race condition build error
+Date: Mon,  2 Jun 2025 16:08:28 +0200
+Message-ID: <20250602140828.518094-1-kelefa.sane@smile.fr>
 X-Mailer: git-send-email 2.43.0
-Reply-To: Julian Haller <julian.haller@philips.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A65:EE_|AM9P122MB0268:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: f6675f81-f654-4f04-7f8e-08dda1d7ea83
-X-MS-Exchange-SenderADCheck: 0
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|376014|82310400026|7093399015|61400799027|48200799018|13003099007|35450700002;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?d8MGWneAHJPkh3XzO7zS5RljLfGP7LwN5xrtRyoYOKZomaxzX4Xy+p83jtDS?=
- =?us-ascii?Q?YxUBNenhx65EGjeXrDtw3o/RYlJzJAqDuHSJEjt5eicOK6B6ct1/uNEIieav?=
- =?us-ascii?Q?95OePj2UBDtINtr+7/gcgjcrJh7YVT8KQ5xnjTYLA390KVwZUPCPEfM+k8WE?=
- =?us-ascii?Q?zE89PI7CgyFOWtcZp2OQ1DCzgWHVk1fDRp/rTYwWjhRxqlfIC3szb+T60sJE?=
- =?us-ascii?Q?Me4kCBhWyabsonceWeYLnYZ1Ho3RVkaxxlQ7Dg5Dm7OYzKRAy0SLmGYLAfKh?=
- =?us-ascii?Q?ihxaInhkIToMsE5hTtqmebeMN0QYWjo+X/qxjNrO+Uli+XhVQkR643J7abP4?=
- =?us-ascii?Q?+1UsMJmYixLdatvf+DHN/3AV+kkzIdQ/6RmazuoXH2wA+qVdVRGa9rqw18kY?=
- =?us-ascii?Q?SpPi//6JCRKR3BuczZvG97D8n0asCyhIQzAOLfsnl8zGbJ0B/XDNfRJsRQHK?=
- =?us-ascii?Q?PgcNYnb1DD4PFaxJ9dhnpbAtUXOEPhOG+u6DZOp0WkeC0rLoD0Jn5d0zQ2UR?=
- =?us-ascii?Q?raGBBZs9OO+7c5UG2TOL9VZgWrwDgcVOzcGZs8s8JsbtyOkKwgy2/gt+zY0B?=
- =?us-ascii?Q?GVBa3zd6HZ9qlLmw8ck8GCML5ORfscXuCKhuAbPzpolKgRCqczTATXFhhW1X?=
- =?us-ascii?Q?3ItzwAldGkWK1xBOmy0B831mnofEoV3D1abzcM1ngp3WMwZ4J2hM5iy49JSH?=
- =?us-ascii?Q?ifydvkVzTwH69yr8fd49+hyMRT8LhGJBqlO9pZbvnA2KSpNxnyHlC2zZbXnE?=
- =?us-ascii?Q?Y6Q9dK8LJ8mJFiOWTKCYCnG35Cen9DQTJr8MyyUOVjU+zdUFPpTn5GKAyWjd?=
- =?us-ascii?Q?GZcrYCm+iiX4lcEuiokGBjtJ+sjKxYxBA//sK3VT/vJmCjub9EoK2C6etdv2?=
- =?us-ascii?Q?f+XMhm/MeX5s92Yzwi0U1Jy6cGcXCbpYmUL3LKjLAWNbQi7wzQ/qnwL3SlVj?=
- =?us-ascii?Q?SzDhbQe8CjC3m0AD1R4JEVT6gbtVyD7RKjqgJQVOKCkxBMx0RfIHZ1r7+y4u?=
- =?us-ascii?Q?SQTOdi4Bae7hMkMbctBAsvZhzz6wiI3GyqV5rMd6Es7M7p7oeft6QMh8PjmP?=
- =?us-ascii?Q?Ho4dhu2wJcfBoiKD4bp7Yz6PTuMhNdEXLH1epLJWCnbgb2VpwzAjuYUInQuD?=
- =?us-ascii?Q?dQWwmuMVmtAxFgDNaxm5vCHjJOoIiJ70iM8fNsiECsGsgoqzcDbhyQNIOiDn?=
- =?us-ascii?Q?8FyQ+opOlsOwRsj2hSeXQ/8RrmXyEXvPDXQvkAZh+/nZLZ+yqj765yOPJxDn?=
- =?us-ascii?Q?9xnVJ6Ucp2viOSyC9iO4opDyWDSZV/Lvkw0zGXTy5idCaP1Ti9gWVCnrcc1c?=
- =?us-ascii?Q?54bm+N9vK7iy/jx0pPm7yGb0jPhVsSw/I1PKE4eVH6RZ6xtxA673J8awY4wb?=
- =?us-ascii?Q?yYIEZhZTgeOL4AVLq/3nCCXGzU8k0K4VG9uimHvQaZXqDQUAjoXynyLwM1Wq?=
- =?us-ascii?Q?CtKSQmLaIg5aTiCgVuViZW4OeYF9T27Ko/EoSXfaCsEdwj28Pb9mNw1EXy7H?=
- =?us-ascii?Q?aaTsKZz8t4DlvEY=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:3.248.88.141;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:ext-eur1.smtp.philips.com;PTR:ext-eur1.smtp.philips.com;CAT:NONE;SFS:(13230040)(36860700013)(376014)(82310400026)(7093399015)(61400799027)(48200799018)(13003099007)(35450700002);DIR:OUT;SFP:1101;
-X-OriginatorOrg: ms.philips.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2025 13:18:08.0481
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f6675f81-f654-4f04-7f8e-08dda1d7ea83
-X-MS-Exchange-CrossTenant-Id: 1a407a2d-7675-4d17-8692-b3ac285306e4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1a407a2d-7675-4d17-8692-b3ac285306e4;Ip=[3.248.88.141];Helo=[ext-eur1.smtp.philips.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM4PEPF00027A65.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9P122MB0268
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 13:18:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117706
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 14:08:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117707
 
-From: Julian Haller <julian.haller@philips.com>
+From: Kéléfa Sané <kelefa.sane@smile.fr>
 
-The cmake infrastructure already supports using catch2 from the recipe
-sysroot. Make use of this mechanism and add catch2 as build time
-dependency. This allows us to drop the custom patch, the additional
-catch2 fork reference and the do_configure workaround.
+Add missing makefile rule depedency on compilation of cst_lexer.c, which
+require header cst_parser.h generated at compilation with cst_parser.c
 
-Also, cli11 does not use git submodules, so change the SRC_URI type to
-git.
+This issue has been detected during the Yocto autobuilder test CI,
+probably during a high CPU load
+(https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/46/steps/33/logs/stdio).
 
-Fixes: 62db1c041f81 ("cli11: upgrade 1.9.1 -> 2.2.0")
-Signed-off-by: Julian Haller <julian.haller@philips.com>
+Signed-off-by: Kelefa Sane <kelefa.sane@smile.fr>
 ---
- meta-oe/recipes-support/cli11/cli11_2.3.2.bb | 12 +++---------
- 1 file changed, 3 insertions(+), 9 deletions(-)
+ ...fix-missing-makefile-rule-dependency.patch | 45 +++++++++++++++++++
+ .../recipes-support/imx-cst/imx-cst_3.4.0.bb  |  1 +
+ 2 files changed, 46 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imx-cst/imx-cst/0001-fix-missing-makefile-rule-dependency.patch
 
-diff --git a/meta-oe/recipes-support/cli11/cli11_2.3.2.bb b/meta-oe/recipes=
--support/cli11/cli11_2.3.2.bb
-index ef3c951bbf..a247509c24 100644
---- a/meta-oe/recipes-support/cli11/cli11_2.3.2.bb
-+++ b/meta-oe/recipes-support/cli11/cli11_2.3.2.bb
-@@ -6,17 +6,11 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dafb20fe5f67e21=
-074b10b864d9563c11"
- SRCREV =3D "291c58789c031208f08f4f261a858b5b7083e8e2"
- PV .=3D "+git"
-=20
--SRC_URI +=3D "gitsm://github.com/CLIUtils/CLI11;branch=3Dmain;protocol=3Dh=
-ttps \
--            https://github.com/philsquared/Catch/releases/download/v2.13.7=
-/catch.hpp \
--            file://0001-Do-not-download-the-catch-framework-during-configu=
-re.patch"
-+DEPENDS =3D "catch2"
-=20
--SRC_URI[sha256sum] =3D "ea379c4a3cb5799027b1eb451163dff065a3d641aaba23bf4e=
-24ee6b536bd9bc"
--S =3D "${WORKDIR}/git"
-+SRC_URI =3D "git://github.com/CLIUtils/CLI11;branch=3Dmain;protocol=3Dhttp=
-s"
-=20
--do_configure:prepend() {
--    mkdir -p ${S}/tests/catch2
--    cp ${DL_DIR}/catch.hpp ${S}/tests/catch2/catch.hpp
--}
-+S =3D "${WORKDIR}/git"
-=20
- inherit cmake
-=20
---=20
-2.43.0
-
+diff --git a/meta-oe/recipes-support/imx-cst/imx-cst/0001-fix-missing-makefile-rule-dependency.patch b/meta-oe/recipes-support/imx-cst/imx-cst/0001-fix-missing-makefile-rule-dependency.patch
+new file mode 100644
+index 0000000000..ce7626ab31
+--- /dev/null
++++ b/meta-oe/recipes-support/imx-cst/imx-cst/0001-fix-missing-makefile-rule-dependency.patch
+@@ -0,0 +1,45 @@
++From 73509cb22ffab827dc3e3ccda2781683b8e8296d Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?K=C3=A9l=C3=A9fa=20San=C3=A9?= <kelefa.sane@smile.fr>
++Date: Mon, 2 Jun 2025 11:07:08 +0200
++Subject: [PATCH] fix missing makefile rule dependency
++
++During, the package build with an high CPU load we can face
++a build failed issue, caused by the header file cst_parser.h not present
++when compiling cst_lexer.c, which depend on cst_parser.h:
++| x86_64-poky-linux-gcc  ... -c cst_lexer.c -o cst_lexer.d
++| ../../code/front_end/src/cst_lexer.l:21:10: fatal error:
++|cst_parser.h: No such file or directory
++|    21 | #include "cst_parser.h"
++|       |          ^~~~~~~~~~~~~~
++| compilation terminated.
++
++The file cst_parser.h is generated during compilation
++by a makefile rule which also generate cst_parser.c
++
++To fix the issue, makefile rule needed to be update
++in order for compilation of cst_lexer.c to be done,
++always after the generation of cst_parser.h and .c
++
++Upstream-Status: Submitted [https://community.nxp.com/t5/Other-NXP-Products/Package-imx-code-signing-tool-3-4-0-dfsg-2-build-issue/m-p/2108575#M28853]
++
++Signed-off-by: Kelefa Sane <kelefa.sane@smile.fr>
++---
++ code/build/make/rules.mk | 5 +++++
++ 1 file changed, 5 insertions(+)
++
++diff --git a/code/build/make/rules.mk b/code/build/make/rules.mk
++index 7720e4b..239108b 100644
++--- a/code/build/make/rules.mk
+++++ b/code/build/make/rules.mk
++@@ -35,6 +35,11 @@ LFLAGS  := -t
++ 	@echo "Link $@"
++ 	$(LD) $^ $(LDFLAGS) -o $@
++ 
+++# Compilation of cst_lexer.c require cst_parser.h 
+++# (cst_lexer.c include cst_parser.h) which is generated
+++# by the same makefile genrating cst_parser.c
+++cst_lexer.o: cst_parser.c
+++
++ %.o: %.c
++ 	@echo "Compile $@"
++ 	# generate dependency file
+diff --git a/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb b/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb
+index c4b7ce032d..375c0b4e10 100644
+--- a/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb
++++ b/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb
+@@ -16,6 +16,7 @@ DEBIAN_PGK_VERSION = "${PV}+dfsg"
+ 
+ SRC_URI = "\
+     ${DEBIAN_MIRROR}/main/i/${DEBIAN_PGK_NAME}/${DEBIAN_PGK_NAME}_${DEBIAN_PGK_VERSION}.orig.tar.xz \
++    file://0001-fix-missing-makefile-rule-dependency.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "52ee3cee3bc500a42095f73c4584e223b4b9d2dfc1cd3e5df965c5952eba8c8d"
 
