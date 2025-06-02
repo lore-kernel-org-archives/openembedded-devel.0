@@ -1,127 +1,134 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <jlu@pengutronix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1928EC54FB3
-	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 15:51:37 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.53264.1748879495304419247
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19EA2C54FB3
+	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 15:51:57 +0000 (UTC)
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+ by mx.groups.io with SMTP id smtpd.web10.53273.1748879515773802758
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jun 2025 08:51:35 -0700
+ Mon, 02 Jun 2025 08:51:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=82488074cc=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 552AuMrC028586
-	for <openembedded-devel@lists.openembedded.org>; Mon, 2 Jun 2025 15:51:34 GMT
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 46yrr8a53r-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 15:51:34 +0000 (GMT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.43; Mon, 2 Jun 2025 08:51:10 -0700
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.43 via Frontend Transport; Mon, 2 Jun 2025 08:51:08 -0700
-From: <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH  2/2] tcpreplay: fix CVE-2024-22654
-Date: Mon, 2 Jun 2025 21:21:26 +0530
-Message-ID: <20250602155126.1197444-2-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20250602155126.1197444-1-archana.polampalli@windriver.com>
-References: <20250602155126.1197444-1-archana.polampalli@windriver.com>
+ dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: jlu@pengutronix.de)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <jlu@pengutronix.de>)
+	id 1uM7S6-00019G-Ag; Mon, 02 Jun 2025 17:51:54 +0200
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77])
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <jlu@pengutronix.de>)
+	id 1uM7S5-001TlD-33;
+	Mon, 02 Jun 2025 17:51:53 +0200
+Received: from localhost ([127.0.0.1] helo=[IPv6:::1])
+	by ptz.office.stw.pengutronix.de with esmtp (Exim 4.96)
+	(envelope-from <jlu@pengutronix.de>)
+	id 1uM7S5-003Y8p-2U;
+	Mon, 02 Jun 2025 17:51:53 +0200
+Message-ID: <16b2d59c8d390bfc40e451e3c25131dd982d6706.camel@pengutronix.de>
+Subject: Re: [oe] [meta-oe][PATCH v2 5/6] signing.bbclass: add
+ signing_extract_cert helpers
+From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jlu@pengutronix.de>
+To: johannes.schneider@leica-geosystems.com, 
+	openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
+Cc: bsp-development.geo@leica-geosystems.com, 
+	customers.leicageo@pengutronix.de
+Date: Mon, 02 Jun 2025 17:51:53 +0200
+In-Reply-To: <20250531113252.3889951-6-johannes.schneider@leica-geosystems.com>
+References: 
+	<20250531113252.3889951-1-johannes.schneider@leica-geosystems.com>
+	 <20250531113252.3889951-6-johannes.schneider@leica-geosystems.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4-2 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjAyMDEyOSBTYWx0ZWRfX+C2Yc3J87IWe 7G009bCCk84WiIctuP1ZeSiFBb0F41TZFcw+YwNG2Y0UPYskJwXK3TmZ3kTi0QQ9EY6TbhCeIEa 0YqrbcezC/5FRawXxcWSwo4XGPgRBekaeFaFCFb9LKxtiFCuMoooq33sxG6wsxJoZQQqcdXzf3+
- K3OVgod28p4U1//PqkIp3uKBeG2PiitQ5eYnliSB/tRv237XQJGVdCvLysaXUCs29TvRl6qh7Sr O2YruaPtUybqwJf3d/NKSeQhGhCz98JhE4tssJWc4TAiLvDfQ1gJDdYFBraB4DzkYN8mkgaodU7 aPZcYfIw/cyfziNSFhrBJ5iXrnf/ZFhCLzxQJNoNONg2hgcXtwT84TkEpSMvwJJzltvSxQ4zpcY
- n52OmBScdDRH8pGT3GLlQATA9nyWfZDfEyjraoWo+xdihbGeMHUxsNyn4yOeZehIO/HJVuHo
-X-Proofpoint-GUID: yXrkfubqnOspZyXIKvF9MG7fYIcl1x_G
-X-Authority-Analysis: v=2.4 cv=b9Gy4sGx c=1 sm=1 tr=0 ts=683dc886 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=6IFa9wvqVegA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=zrF71jlvRmYy0Kh3cNEA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: yXrkfubqnOspZyXIKvF9MG7fYIcl1x_G
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-06-02_06,2025-06-02_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 spamscore=0
- mlxscore=0 clxscore=1015 mlxlogscore=999 suspectscore=0 bulkscore=0
- malwarescore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
- phishscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.21.0-2505160000
- definitions=main-2506020129
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: jlu@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 15:51:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117713
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 15:51:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117714
 
-From: Archana Polampalli <archana.polampalli@windriver.com>
+On Sat, 2025-05-31 at 13:32 +0200, Johannes Schneider via lists.openembedde=
+d.org
+wrote:
+> Add extract-cert wrapping helper functions, to easily extract
+> certificates again that had been previously imported into the softhsm.
+>=20
+> Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.co=
+m>
+> ---
+>  meta-oe/classes/signing.bbclass | 26 +++++++++++++++++++++++++-
+>  1 file changed, 25 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bb=
+class
+> index 7bc3e7cb12..1f50e89d1e 100644
+> --- a/meta-oe/classes/signing.bbclass
+> +++ b/meta-oe/classes/signing.bbclass
+> @@ -54,7 +54,7 @@
+>  SIGNING_PKCS11_URI ?=3D ""
+>  SIGNING_PKCS11_MODULE ?=3D ""
+> =20
+> -DEPENDS +=3D "softhsm-native libp11-native opensc-native openssl-native"
+> +DEPENDS +=3D "softhsm-native libp11-native opensc-native openssl-native =
+extract-cert-native"
+> =20
+>  def signing_class_prepare(d):
+>      import os.path
+> @@ -439,6 +439,30 @@ signing_get_module() {
+>      fi
+>  }
+> =20
+> +# signing_extract_cert_der <role> <der>
+> +#
+> +# Export a certificate attached to a role into a DER file.
+> +# To be used with SoftHSM.
+> +signing_extract_cert_der() {
+> +    local role=3D"${1}"
+> +    local output=3D"${2}"
+> +
+> +    extract-cert "$(signing_get_uri $role)" "${output}"
+> +}
+> +
+> +# signing_extract_cert_pem <role> <pem>
+> +#
+> +# Export a certificate attached to a role into a PEM file.
+> +# To be used with SoftHSM.
+> +signing_extract_cert_pem() {
+> +    local role=3D"${1}"
+> +    local output=3D"${2}"
+> +
+> +    extract-cert "$(signing_get_uri $role)" "${output}.tmp-der"
+> +    openssl x509 -inform der -in "${output}.tmp-der" -out "${output}"
+> +    rm "${output}.tmp-der"
+> +}
+> +
+>  python () {
+>      signing_class_prepare(d)
+>  }
 
-tcpreplay v4.4.4 was discovered to contain an infinite loop via the tcprewrite function at get.c.
+Reviewed-by: Jan Luebbe <jlu@pengutronix.de>
 
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
----
- .../tcpreplay/CVE-2024-22654-0002.patch       | 35 +++++++++++++++++++
- .../tcpreplay/tcpreplay_4.4.4.bb              |  2 ++
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0002.patch
 
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0002.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0002.patch
-new file mode 100644
-index 0000000000..bcf560c0e5
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0002.patch
-@@ -0,0 +1,35 @@
-+From 52ed63329b37ae83cb86504db2c9deb6a91e2fe9 Mon Sep 17 00:00:00 2001
-+From: Gabriel Ganne <gabriel.ganne@gmail.com>
-+Date: Sun, 21 Jan 2024 08:59:10 +0100
-+Subject: [PATCH 2/2] ipv6 - add check for extension header length
-+
-+Fixes #827
-+
-+Signed-off-by: Gabriel Ganne <gabriel.ganne@gmail.com>
-+
-+CVE: CVE-2024-22654
-+
-+Upstream-Status: Backport [https://github.com/appneta/tcpreplay/commit/52ed63329b37ae83cb86504db2c9deb6a91e2fe9]
-+
-+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
-+---
-+ src/common/get.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/common/get.c b/src/common/get.c
-+index 89fe95b..c31de5d 100644
-+--- a/src/common/get.c
-++++ b/src/common/get.c
-+@@ -676,6 +676,10 @@ get_ipv6_next(struct tcpr_ipv6_ext_hdr_base *exthdr, const u_char *end_ptr)
-+     case TCPR_IPV6_NH_HBH:
-+     case TCPR_IPV6_NH_AH:
-+         extlen = IPV6_EXTLEN_TO_BYTES(exthdr->ip_len);
-++        if (extlen == 0) {
-++            dbg(3, "Malformed IPv6 extension header...");
-++            return NULL;
-++        }
-+         dbgx(3,
-+              "Looks like we're an ext header (0x%hhx).  Jumping %u bytes"
-+              " to the next",
-+--
-+2.40.0
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
-index 03a6cfdba5..a784190868 100644
---- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
-@@ -13,6 +13,8 @@ SRC_URI = "https://github.com/appneta/${BPN}/releases/download/v${PV}/${BP}.tar.
-     file://0001-configure.ac-do-not-run-conftest-in-case-of-cross-co.patch \
-     file://CVE-2023-4256.patch \
-     file://CVE-2023-43279.patch \
-+    file://CVE-2024-22654-0001.patch \
-+    file://CVE-2024-22654-0002.patch \
- "
- 
- SRC_URI[sha256sum] = "44f18fb6d3470ecaf77a51b901a119dae16da5be4d4140ffbb2785e37ad6d4bf"
--- 
-2.40.0
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#117685): https://lists.openembedded.org/g/openembedde=
+d-devel/message/117685
+> Mute This Topic: https://lists.openembedded.org/mt/113394165/2167243
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [j=
+lu@pengutronix.de]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>=20
 
+--=20
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
