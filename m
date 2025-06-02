@@ -1,205 +1,185 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6AF49C54FB3
-	for <webhook@archiver.kernel.org>; Sun,  1 Jun 2025 20:55:00 +0000 (UTC)
-Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.0])
- by mx.groups.io with SMTP id smtpd.web10.35392.1748811292202614961
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5250AC5B549
+	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 07:04:43 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.43725.1748847874750039200
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Jun 2025 13:54:52 -0700
+ Mon, 02 Jun 2025 00:04:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=MRNLbxwz;
- spf=pass (domain: axis.com, ip: 52.101.65.0, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=8248fd1b17=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5525Ta54005041
+	for <openembedded-devel@lists.openembedded.org>; Mon, 2 Jun 2025 00:04:34 -0700
+Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12on2072.outbound.protection.outlook.com [40.107.237.72])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47019m1b6v-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 00:04:34 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OxwO426bczMMczZ+lVxvNZ14vvQxCdBtynq5SFhvJy9pFM/RtSAJPLKRh/j1M8IdLFUbd4LNWDmGSJ3nO3GoQKnCo40mb3Vac/2IzpUQyoxhqAoXWmiDlhIZX2mG80TB1Pg4/ZSYAi2lPYyBrg7vqk3iQ2IDXpxeMmdqQwSST1iDARq23AfH4kyDhVZEhNSPyf4tS+eUBVn1ifRgdMQzaVl1gHq6K7n5iXa5TK9YHnhcGWxxHST1IILFrwEIzYQabl0YdziXNBFWkd/m+zB5cS8PdQllp0c3nIYQ8O6MrYUKfOlTbALiwwZbwKPFL1JXIHlgBUlD2WVUaV8VLMddCA==
+ b=Wb11mldf/lNELG+IToUJTRZIubUdvb7ipRcpGt6ikk1b+4JpuxPAMhEqGKmvoeW7FX0Tl9cLU0VMcSi6AwsLDqDQCdS2vRF5eH95AvBF3Y7jzwFMUuf013GuNmSW0knacgaCw995aTTnYch1fadynMMv9IJlvFjfZNPf+ipo6p9U6xhgAGzA3q2Xan3EFfuiuADqa52OJLAtegYejGxSZbTyMmg/PENtez0r83dW21/yvMuqlvDQGMA2DFsLvySdIY6ZLtRJD173ilURQuwGGExzW1fRV4UueAADwT8lOdUF2DnwKX8A9+xbNt6fHb9w1BHuw2WayPsG0xiHew4rpg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Fl29y3tuEczNZEz1hToiRtukUVlY/CFOiCkj+OUJRhw=;
- b=ih1SC3EIGvbr/uwdGzwDHMeXm9C0Alg+KNJgzX/+jU/jzYs5Pa/085+FGYiOfpYcRn5zW1moScdIPv4I99YLuH8AM+CYYtgLOLzcn7d/3zLJf6qOntWWU2lTDuQMqn/4xgV8wnH1vKH014ZjiJRlSi/TXS+LyL7SK9XO2JZXziUWCZX6hXiOp8dUDMryu/R+tJDuYPkmBgQnQ+yJKiQTA0/XwmbhxuJJOf5cZXxCxDqvsZ+064S1S283Db8/mxogOCEYiEVj/ld1e07Y144hyFYZwjbKX3xZqAU7ceGA9lQm7Y4AHfOmUipVPpN/QhyasPNBdGXhTjdcyXuBXXgdgw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=axis.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Fl29y3tuEczNZEz1hToiRtukUVlY/CFOiCkj+OUJRhw=;
- b=MRNLbxwzrjIA4Ov0T6Ui102T0FK4bclDkbJ6sPuFi281uPeyfRpb/p0L74xIVxex2jJa5tu2ZMz3prhqzNGwWqd9THbxCP9qZQriIynbJJqBmfIg3Mgvpr0HukpmDRISVVfXL6MkoJRar24K5yW6iWRmr4zND9R7/dhlOGnf6x8=
-Received: from DB7PR03CA0085.eurprd03.prod.outlook.com (2603:10a6:10:72::26)
- by DB9PR02MB9732.eurprd02.prod.outlook.com (2603:10a6:10:459::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8792.23; Sun, 1 Jun
- 2025 20:54:46 +0000
-Received: from DU2PEPF00028D02.eurprd03.prod.outlook.com
- (2603:10a6:10:72:cafe::30) by DB7PR03CA0085.outlook.office365.com
- (2603:10a6:10:72::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8792.21 via Frontend Transport; Sun,
- 1 Jun 2025 20:54:46 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
- smtp.mailfrom=axis.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=axis.com;
-Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
- 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=195.60.68.100; helo=mail.axis.com; pr=C
-Received: from mail.axis.com (195.60.68.100) by
- DU2PEPF00028D02.mail.protection.outlook.com (10.167.242.186) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8792.29 via Frontend Transport; Sun, 1 Jun 2025 20:54:45 +0000
-Received: from se-mail02w.axis.com (10.20.40.8) by se-mail02w.axis.com
- (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Sun, 1 Jun
- 2025 22:54:45 +0200
-Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail02w.axis.com
- (10.20.40.8) with Microsoft SMTP Server id 15.1.2507.44 via Frontend
- Transport; Sun, 1 Jun 2025 22:54:45 +0200
-Received: from pc56063-2339.se.axis.com (pc56063-2339.se.axis.com [10.92.3.2])
-	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 6C6EDA77
-	for <openembedded-devel@lists.openembedded.org>; Sun,  1 Jun 2025 22:54:45 +0200 (CEST)
-Received: by pc56063-2339.se.axis.com (Postfix, from userid 14323)
-	id 67C4312038E; Sun,  1 Jun 2025 22:54:45 +0200 (CEST)
-From: Peter Kjellerstedt <pkj@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] abseil-cpp: Backport a patch to build code that uses C++17 with GCC 15
-Date: Sun, 1 Jun 2025 22:54:33 +0200
-Message-ID: <20250601205433.550936-1-pkj@axis.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+ bh=b7D+oGwxSY448khKTZS8S/3uZnFI3djJtvtRdPo8QRk=;
+ b=wjJ1Q0KcT2TkM0oECA4PBcHwd9a8DGA4oT1YLHcBvcgyZhxFmpX3kijOda2xb3uZXN+oXF+lMHoeKJjqTncH6sIz8EsPdA/Xv1DBvmJmepZBXCTVwyNWpmVk9kNuJnXbxqElbDQnOj++nT3sYLXtmCTI9N6n4XSymxv9x6wiMP/CGujJgedjsPRVadma3n02lmEqruSjMB2PzhdhaMqgc9e+2ikljesdoo1itfMuboIh/h1ocW+n/TGJ+i6V9g46ic8guzzoCyRGyPKKHFqns5cSe4LN6ZeDuvx0PfBZ0UnMPBGIWZOVkSdBOPhK9YVdgKGsdjT7qd3T8f0Uty5qbQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
+ SA0PR11MB4528.namprd11.prod.outlook.com (2603:10b6:806:99::12) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8769.37; Mon, 2 Jun 2025 07:04:31 +0000
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad%3]) with mapi id 15.20.8769.037; Mon, 2 Jun 2025
+ 07:04:31 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] audit: upgrade 4.0.3 -> 4.0.4
+Date: Mon,  2 Jun 2025 15:03:39 +0800
+Message-Id: <20250602070339.3632772-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: PN4PR01CA0064.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:26c::14) To DS0PR11MB6399.namprd11.prod.outlook.com
+ (2603:10b6:8:c8::5)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D02:EE_|DB9PR02MB9732:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7210483a-b47a-44f7-271e-08dda14e8a72
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|SA0PR11MB4528:EE_
+X-MS-Office365-Filtering-Correlation-Id: 45f77f76-b308-401d-289c-08dda1a3b933
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|376014|36860700013|1800799024|13003099007;
+	BCL:0;ARA:13230040|1800799024|366016|52116014|376014|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?YOAGnDoN4oMYZ8PCbCHNY62X2noUksunpnd3CIzgRth054MwmLZvh1kjldrm?=
- =?us-ascii?Q?ZnJFZMFy2Knt+gJf1ND9VZQv0+vdmDgP84SoM44tYBcWYP0cnU1kucxvSwnZ?=
- =?us-ascii?Q?uYATcrBEahfC22oi9CMFC4wrWNCpBd67NTgMlk+YBDIu2iv5nBHmwv3/B/Kt?=
- =?us-ascii?Q?2xZXOiDn2x23yb/T1MXpUzbVyLdYSxJ91QYB6Tv6eptHytyJY8iwOIY2Mv6U?=
- =?us-ascii?Q?vfWJveRahT8E5RydSt6M9BtK/tk+coQs7teUO7oyAKHMUZMCDV+r+e/zheMr?=
- =?us-ascii?Q?q+7QYHuIGGe1AqKS0UvW9JzealqZsRxXz5VnfrcjHLm1BFBaOawJRJRlOoML?=
- =?us-ascii?Q?OwDQhU3r6WbUu1mzgKe81chLQPF2UtyE8KHoI8SCSfzB4U0pjVVmsnf8Enay?=
- =?us-ascii?Q?2der9d9buZ7pTIMrxvt6c88v07P6DgDwNmx04TX9xIfZVwHLadKlpdlBv/oF?=
- =?us-ascii?Q?pATM3UmW04FsuCZtGPqBcyLmRlXNJO0hXqY8e2xOvabPINcXVwydlGzId6re?=
- =?us-ascii?Q?18rFIL5w0k/Wpva2fgPbbt7smn/jSIm2nj77586CLUIYwK+xkOKNXDXKUhXE?=
- =?us-ascii?Q?kJZTlzee8GLCTTHJ8WjxG2r4iYqjA7PLCJD/2pvDWrMoMUyAMjsFayXECwTP?=
- =?us-ascii?Q?JMLIOpcY7irKvzWF1wUSeQGgr6mceKGBF4yvylmqkB2igBjfW6QnzDkV6U0J?=
- =?us-ascii?Q?YLi5BM0RiPOinoxSJeBySkFLpCKTxtj2I16gSseOze5af02AqcVQLYJ4Vrm7?=
- =?us-ascii?Q?gHwEueSTfOZySWXHBJqt+i4yeqRxNofVuBTo/QRb1xnl6xeAv+j8/N/Qe2Vb?=
- =?us-ascii?Q?JSO/B1uAjOqv3v6TP9st9AaWjZ4ootindkSkFdDkX2xKQPYwv2fZ539DuEQi?=
- =?us-ascii?Q?Ih8e0uw5a7vPjv5R7cQzQdLh3JUD2hkIXhuj6SLavSCd4Zq6UykMxQHWBu8F?=
- =?us-ascii?Q?RJZDy3LOOgngEDzYLCoT+MJzkGRLNdWYC4kUCxe5Zd/q6qSKU5x+QWZ0I8rI?=
- =?us-ascii?Q?OSqk3liZg3cyM5ChA6zWaFeD4NNz7CkJN+Nh2rX17r/TqLNKA5/sBxDCz7DL?=
- =?us-ascii?Q?66aC7Atg3DrL0FV7DWZ5qu9VfmflF8Hmg3mtRlJZA3N2lio58GxPYOItijqU?=
- =?us-ascii?Q?NzTApjCkuUkuuLwc+tyF6mmCZPzuASbi0iGZNfdctedGG/UiaTnQBXJLoyl0?=
- =?us-ascii?Q?ZyarOKOh06cvGUFfCQPhGyDcRFJHKqFbJYoJFHvL7kAy2z63vImESWot/lXi?=
- =?us-ascii?Q?7WmQZF8fmcPRtLKqDESuZaR8rVujzD2PxGaC0TDyi7xZjs7hvOukJCf0hZM1?=
- =?us-ascii?Q?+y7FOMVHIiU9wgNunXe13zVyv6kndS/tdxM/iPePMkp8GBNRSWt2d+nVwnZz?=
- =?us-ascii?Q?M5E9dy/sYwlvESsuP+SsffBO4G9FMLUmrGsxhrK5Ja/bCUDKZR8XMjee1CPO?=
- =?us-ascii?Q?PMkAA0SVQJq2m972NZDAV9GWA7Kcs0gdnusbl44gMb8/G7eFWQDErJbChmfx?=
- =?us-ascii?Q?bnu+xNYrs/Jx+aRsHrZfUmbp/Y+gYYgGtqY1?=
+	=?us-ascii?Q?DF5UY8TupjcNe0206MT1RrSNTk7qUR8VcwWK219D10uL7+Xbeewlct8BKX8c?=
+ =?us-ascii?Q?c1EVNRYTWkIefvBFQ31P4i380aBgFtvSoZjIi1kNVgMEp+8QyLlnidzUD/EM?=
+ =?us-ascii?Q?JRwiPvOHWy+z1lwFo+oZpx9QGU8FmDHGqidv509TdhvFgFcGhpH3Om1ClWrO?=
+ =?us-ascii?Q?PyQ2PZUKYat4yt2pQPCnlPDF5f+9jXbPsz/EL0fRifuIQx82xrUwLxZWeLhn?=
+ =?us-ascii?Q?YrjzC/+xNWa70fuX+qe4f3WuYCsbkkp4W1EL4qqU9lREy7bSaR6YS+GfUchk?=
+ =?us-ascii?Q?kES7wA/t6kezmOj5Sq8lcxdYrDgjQofElnVupkgIeFNAY18whcz9+y+wiXib?=
+ =?us-ascii?Q?/5LTmKfY8tCxsqNeruT7xIGwnrLF/0AueDh29WewQWl9dEHqNmHsF6Smj0BV?=
+ =?us-ascii?Q?IbmXTECl43EW1zO01sUm6zLCy8bDSyQipBwCq/3j8J4fvX5vnhU500bUFiE+?=
+ =?us-ascii?Q?bJxr5B4EimY4wXWA7SRHJ883WGLolNIVqGsHdgHjsbne1JE1a6Y/sBWFZoxm?=
+ =?us-ascii?Q?J/2N/Fv7/T4iLhrPbUZAdSKZJDW28IERysIFU+4fPSgkACakmNemMvAMxA9I?=
+ =?us-ascii?Q?Q+EtfFtuiMexLIzFNPUBdlV2AcEQJlVNtwJhzM/ZZHkXJb+E3UP63o5z51tA?=
+ =?us-ascii?Q?0OMYZmqJSIaYCP6/uWCOdXWMte3hXwpV8zGgsIYCXE9ry/K4LVsoFuR/U8qT?=
+ =?us-ascii?Q?1pWhMM6O3+335ra0SG8obgWF5+7Ui21660wY5iRrw60z55czCNn6tRCNcvD9?=
+ =?us-ascii?Q?eWEgAMtl1AR7d48cfxVGgtk/hPlnQv+uMK9o3lT8orWR9BonmApSVv7Ig0s3?=
+ =?us-ascii?Q?jQiDy8Hb1p/fh0jDMUX6yfWOJtCaq4p+C1kNSkj7JelpzDGDS5/37ANvWNNh?=
+ =?us-ascii?Q?z37IZjB2fAEn1OEXjEYD5OSLaJWl1aZhQDsvuky8bbtw+QK+tdVHoTcRN9is?=
+ =?us-ascii?Q?L0sw9JasKKr+JN9aNzMnaX22zUI0JSGQiAT8TY4roRuQwZ7QUkk1RnI7MbpA?=
+ =?us-ascii?Q?Xf0q1pERmbEcDdDobegl/QcM0Vqa+rz1/15VkrnyrDE+8Bz2WxoPufulcxps?=
+ =?us-ascii?Q?8rPMhZzMBrc/LZX7ihKo/INdrdA+n5edymGYlu/jh8uHqDC8LFe2nLAX1OVF?=
+ =?us-ascii?Q?aXAJN/rAEG4XKeiftz29yGe0oHJSzevuiVtvd70IC+G7P6sFEJmLF2JuTfhF?=
+ =?us-ascii?Q?N1ahQ+Nm7uNA/LGZOcdH2F2gsw2K5WHkDs6MhdvxnsEGKJzg7ExygwVpF7R4?=
+ =?us-ascii?Q?pmAdvRCQloZxi40yUIla+ohdJXG01J8flhZoJtNQFN6u/F+X8i5K8AqvNLTd?=
+ =?us-ascii?Q?nYAwvLIY36ycf0aNELcIvPML/+SBrbFPBlUVPGddAZeIdl+iq1+eYiLcwLSo?=
+ =?us-ascii?Q?OJxUB+CyxwaAGNQg6NGG8a1cPLYk9Nf4NB8iFydG1qbv9jI7d4HZyhXyADom?=
+ =?us-ascii?Q?7fiJxQRxgrjd708EQ9YoOENJWbz4XRMHFZIBP9EuiDq20K14B2AdTA=3D=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024)(13003099007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2025 20:54:45.8222
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(52116014)(376014)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?HyBf5cr2zj5f3Ye35fjfL8lMJx1YGBDXwsC210T29IWFybDU7lfEIaOS8iiq?=
+ =?us-ascii?Q?T0/mW0pCCMTpDKyg7e51ku46gFCFoZVrKlyXvfA4AV8s2VNXWOROK+xVQsJm?=
+ =?us-ascii?Q?0fpqpU1gXulMCSljgKSOCQ6sZC7lJrYyO4H0mSmkOniYEXtyzIIomkyZbCxe?=
+ =?us-ascii?Q?+wTvacWIpJALL5BefP8Vhcssi+DjU57f79wsaILw2JXqqfexUWk2IHFETHnY?=
+ =?us-ascii?Q?lNOgEjujsrGixwgfkdlaynucvhXQwMBfBLdqVrMUL0Sdm7QrlN4mmYwSy9x6?=
+ =?us-ascii?Q?/RvvCaLSR4JUlQN2dz/dlow4MjLlQVgj+v7bC18RKkKKvjB0xfQavrOv0oML?=
+ =?us-ascii?Q?aUV3WLSc8QbGdeCU612hW+OnW6z44AX0p32h5LNhwmQ3Pff/FfT6r2fLbhKv?=
+ =?us-ascii?Q?fQNIOEzAF/ZNP4fZQEWSKdskcahE0Sy9cgLfht5oSGE+I/H6jtUZGZhDycoX?=
+ =?us-ascii?Q?pBftw3BIhCUDJuyfS9PgAvcwDm5NDaLQH5APAmJtjayBY5aIUwKy6xLDteKU?=
+ =?us-ascii?Q?N1hq7+O5TorR4AGH/5f4mERDB1s7vXoVTmcWhcV0yKxnTjZr+doT7QCKlJmq?=
+ =?us-ascii?Q?f7KeUZ2WESJCAfR24i68q49lFH+/iumMvFzWe9HP+j8kRznlx2GmVcaTXzPy?=
+ =?us-ascii?Q?y0jcxiOql+3giZvBMWNx/SV8YYr8ugdWsqb0auS5KYN8p/vJ/ljDKDX9Dg5b?=
+ =?us-ascii?Q?/uL/P9rEuGYtJ6CiKJL35nf7c+KLBKkRs1OJ4FG/NQCeX82aSeImOpSbQW4v?=
+ =?us-ascii?Q?iq7WrQ/VZ2tpzti06Ps+gFnl0aogHQcXwAjQlC3fssmIxzM5NX9MTV8JjIYe?=
+ =?us-ascii?Q?7bLhHvYQw8i7bkia4n5KM4/bLJRTB1x3FhbSVDVsgUHRocwnrkRRbvD+aqD+?=
+ =?us-ascii?Q?OTfZRTW30HRLEBcJmqLhYbbslKM9gm2oF0js0gpCjiGtfxuYc6U/9XoKZjpl?=
+ =?us-ascii?Q?HfFswP/kDdIoLGAsRGIXpzji79aCOPvCLBdqg2ZNIMeaUPkL8kv6Jc6+nPP0?=
+ =?us-ascii?Q?WS7sXa+GLFFIkTadRsivzbIyoIP0SOnQz2zrRynbnn/+bMTdqqaI7f3rRR4p?=
+ =?us-ascii?Q?lHW/lHEEkLyHaDYL9NMExVE6OZlA14W5sMoSCmhBdcAiNd8u1Ps+iYfomAwe?=
+ =?us-ascii?Q?xn7PTPF9WBLVc4UMUE3+dlRs79aO9l6NVNJnevPeV3wadgVnv3+tWCeLkc5N?=
+ =?us-ascii?Q?Ndwft9l/wcPSVAjTa/SMpoe/EWaY5yIfoVRwbSEiCHGaVI0ocYld/lmhROZ0?=
+ =?us-ascii?Q?KSC6AoQMJu2ECws5gXP4BHlePHsrCjTWfadWa4T8bKm5xaipr5xevSogCoBE?=
+ =?us-ascii?Q?urEFH0fQW23yfa2Q7bbPYtPPGI013clTSlymGWexzeMWzzQosS0Ozdcy/LlT?=
+ =?us-ascii?Q?EDjYymSzBGAfthC9ASgCJqw4RnhGmRqji2JDPsjmeYS4icuuN4APgyBF73u3?=
+ =?us-ascii?Q?Fwq0lsUGvI+93bLrlJCtQLU4+h8U2WKHSSGSD1CNBMuh/znAQpLnwhB5JpVh?=
+ =?us-ascii?Q?LmLeQT1Us0A1xaqI7ashzTvF9xLnCZTZA7yFX09F8iCdgIYV83xV8CZfzcAo?=
+ =?us-ascii?Q?TONOSw9W4wREAGZAsFQhSDvFQEcjy+ab9U+vw8Yc?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45f77f76-b308-401d-289c-08dda1a3b933
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2025 07:04:31.7518
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7210483a-b47a-44f7-271e-08dda14e8a72
-X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DU2PEPF00028D02.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR02MB9732
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5z5d+xFLDgJajRYrD+r9K2hCMw/+cUm07emv5QiKE8xLeJ3lX3EPchNh50Nh1EIA6HCRtYiMsQKjXVmL2t3xSw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR11MB4528
+X-Proofpoint-ORIG-GUID: XgXU5ZwpJa52PmKXhlB-UcEFzSAY0ipe
+X-Authority-Analysis: v=2.4 cv=SpqQ6OO0 c=1 sm=1 tr=0 ts=683d4d02 cx=c_pps a=3w+TbvVJ0pkczneH0cxqQw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19
+ a=xqWC_Br6kY4A:10 a=6IFa9wvqVegA:10 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8 a=oipQQ5Rr0Rkjn5Io5H0A:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: XgXU5ZwpJa52PmKXhlB-UcEFzSAY0ipe
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjAyMDA1OSBTYWx0ZWRfX8qBfvwqgzWbv P2op5jPywvTU2rjDqz2zMTbmFc5OLNpTTFhlrNE559rdyhRNYwC53Ij7gUVa4NmAxY/sbMuH+Vn ZDc9gAFRVl/KF1wOakFmI1tw2AHdcZgjclV3InblhRCBT9G4N9t3FTWxHKiiprhmU2Fw8W6+E6l
+ EwvpM5XXlk975N/CEvaQMs0mKjtubn3qI0y5iALxsiQ2C1kADzsPKov9TMCYQHV+nqMxdoV8uXI YhVXVlob9d1CQYxpUyGRGGh9deIp835nZNIO1ZTN6n5Xg1gErUom+HYSYxy22DBibFLj8Hp3vlm JWfKKrgGJLlJryyRb0bSsDbnAmj+P+0Wcny3mwTPb4jpSdnFC5Anky/K/OdLifyyY/oacRH9SIn
+ HafNaT0v1QdH8Sg1Hb06m+YlTuUn9K8Mu9MGRj91VBmh65BGqFNulHbxdjFgzTh/inXWSOo3
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-02_02,2025-05-30_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 mlxscore=0
+ clxscore=1015 impostorscore=0 phishscore=0 adultscore=0 mlxlogscore=999
+ lowpriorityscore=0 malwarescore=0 suspectscore=0 spamscore=0
+ priorityscore=1501 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505160000
+ definitions=main-2506020059
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 01 Jun 2025 20:55:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117695
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 07:04:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117696
 
-GCC 15 seems to be confused about when the <version> header was
-introduced (C++20) and expects it to be used with C++17.
+ChangeLog:
+- auditctl: update io_uring operations table
+- update syscall table for 6.15
+- auditd.cron.5: Describe time-based log rotation setup
+- auditd: Broadcast a warning on startup if a system halt is possible
+- Fix audisp-remote segfault on connection error
+- Improve locating last event if ausearch is using checkpointing
+- af_unix plugin: fix string mode support
+- Remove const from audit_rule_fieldpair_data &
+  audit_rule_interfield_comp_data
+- Add various updates to the experimental ids plugin
+- Add glibc memory statistics to auditd state report
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- ...g-that-ciso646-is-deprecated-in-C-17.patch | 43 +++++++++++++++++++
- .../abseil-cpp/abseil-cpp_20250127.1.bb       |  1 +
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0005-Fix=
--GCC15-warning-that-ciso646-is-deprecated-in-C-17.patch
+ .../recipes-security/audit/{audit_4.0.3.bb => audit_4.0.4.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-security/audit/{audit_4.0.3.bb => audit_4.0.4.bb} (98%)
 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0005-Fix-GCC15-=
-warning-that-ciso646-is-deprecated-in-C-17.patch b/meta-oe/recipes-devtools=
-/abseil-cpp/abseil-cpp/0005-Fix-GCC15-warning-that-ciso646-is-deprecated-in=
--C-17.patch
-new file mode 100644
-index 0000000000..7fe9ab4708
---- /dev/null
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0005-Fix-GCC15-warning=
--that-ciso646-is-deprecated-in-C-17.patch
-@@ -0,0 +1,43 @@
-+From aa102147cdfff3aa971e61038a6455bff6828350 Mon Sep 17 00:00:00 2001
-+From: Derek Mauro <dmauro@google.com>
-+Date: Tue, 29 Apr 2025 06:23:36 -0700
-+Subject: [PATCH] Fix GCC15 warning that <ciso646> is deprecated in C++17
-+
-+PiperOrigin-RevId: 752709743
-+Change-Id: I4d6b52bca913d888818e1380268089743b03ca2b
-+Upstream-Status: Backport [https://github.com/abseil/abseil-cpp/commit/5f3=
-435aba00bcd7f12062d2e8e1839b4eaf1a575]
-+---
-+ absl/hash/internal/hash.h | 14 +++++++++++++-
-+ 1 file changed, 13 insertions(+), 1 deletion(-)
-+
-+diff --git a/absl/hash/internal/hash.h b/absl/hash/internal/hash.h
-+index f4a0d785..6937f413 100644
-+--- a/absl/hash/internal/hash.h
-++++ b/absl/hash/internal/hash.h
-+@@ -26,13 +26,25 @@
-+=20
-+ #include "absl/base/config.h"
-+=20
-++// GCC15 warns that <ciso646> is deprecated in C++17 and suggests using
-++// <version> instead, even though <version> is not available in C++17 mod=
-e prior
-++// to GCC9.
-++#if defined(__has_include)
-++#if __has_include(<version>)
-++#define ABSL_INTERNAL_VERSION_HEADER_AVAILABLE 1
-++#endif
-++#endif
-++
-+ // For feature testing and determining which headers can be included.
-+-#if ABSL_INTERNAL_CPLUSPLUS_LANG >=3D 202002L
-++#if ABSL_INTERNAL_CPLUSPLUS_LANG >=3D 202002L || \
-++    ABSL_INTERNAL_VERSION_HEADER_AVAILABLE
-+ #include <version>
-+ #else
-+ #include <ciso646>
-+ #endif
-+=20
-++#undef ABSL_INTERNAL_VERSION_HEADER_AVAILABLE
-++
-+ #include <algorithm>
-+ #include <array>
-+ #include <bitset>
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.1.bb b=
-/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.1.bb
-index 5368dfaada..39c3b0b6db 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.1.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.1.bb
-@@ -14,6 +14,7 @@ SRC_URI =3D "git://github.com/abseil/abseil-cpp;branch=3D=
-${BRANCH};protocol=3Dhttps \
-            file://0002-Remove-maes-option-from-cross-compilation.patch \
-            file://0003-Remove-neon-option-from-cross-compilation.patch \
-            file://0004-abseil-ppc-fixes.patch \
-+           file://0005-Fix-GCC15-warning-that-ciso646-is-deprecated-in-C-1=
-7.patch \
-            "
-=20
- S =3D "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-security/audit/audit_4.0.3.bb b/meta-oe/recipes-security/audit/audit_4.0.4.bb
+similarity index 98%
+rename from meta-oe/recipes-security/audit/audit_4.0.3.bb
+rename to meta-oe/recipes-security/audit/audit_4.0.4.bb
+index 356ee6a84d..952a362698 100644
+--- a/meta-oe/recipes-security/audit/audit_4.0.3.bb
++++ b/meta-oe/recipes-security/audit/audit_4.0.4.bb
+@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;proto
+           "
+ 
+ S = "${WORKDIR}/git"
+-SRCREV = "51d154c5b7ec91831cbb89fe6ca54d8eb7ba344c"
++SRCREV = "81dcded2ed9e407dd1357eda0bdc0855f06085e6"
+ 
+ inherit autotools python3targetconfig update-rc.d systemd
+ 
+-- 
+2.34.1
+
 
