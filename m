@@ -1,146 +1,102 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 480F5C5AD49
-	for <webhook@archiver.kernel.org>; Mon,  2 Jun 2025 21:12:38 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
- by mx.groups.io with SMTP id smtpd.web11.6563.1748898750823371433
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FA82C5B549
+	for <webhook@archiver.kernel.org>; Tue,  3 Jun 2025 03:05:04 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.web11.2706.1748919900606330502
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Jun 2025 14:12:30 -0700
+ Mon, 02 Jun 2025 20:05:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ULGCay0t;
- spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-70f31433d96so45840097b3.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 14:12:30 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=aBNK60nH;
+ spf=pass (domain: mvista.com, ip: 209.85.216.44, mailfrom: vanusuri@mvista.com)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-312a62055d0so2219249a91.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 20:05:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748898750; x=1749503550; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1cUxTEHBw72zOIZ7Qg7Tr5f1iBEW7P8wHhwvdEmwLEU=;
-        b=ULGCay0t6kWS5fTulacnUO2Av9X0/9qyPnaNIWbIi8hTux8WWuEtXypu1kuguKd0J+
-         MQOZLdfE8Qd22E55rOeyZt8Vne62VkMg5aQK5HkuOKUHoaAx8G293/fbGGxevMYvr5a1
-         8DC/4lZsQcH+Yf9pWGzA4k15GI+eGMhmD2ydWSy+Cxn1PKlUjveQOfn1Qb4y96anvIZM
-         bsZUY1CQjL3q3COs1UVRyl5Ba1XIGUEsvczs7Apph8Ro5isLlak7I8ikbTLqrAJyHNYT
-         YGZDiNq4+/Pgi2LRL0MAcmgCmFPQqBVpE9raa2cmZWDIPoYU3YCI8xoIlf3L7l4OvugY
-         mV3Q==
+        d=mvista.com; s=google; t=1748919899; x=1749524699; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=qfu/kGoCn0C393dqdcBHNU6mqeApIBg2bxOKg+LBIpk=;
+        b=aBNK60nHOpXzzG2npkw870DYUX6ScIgqSKraR0iZgOE8DbebU1XLkZCStLp2h7ZfI3
+         Jw6l/Q6fjhyT0xVX15v2hZ7odEccNmwZtf/pUrj8tBenEfYWZfbOYJr7HvWksnT+rq6U
+         xxxssjo51znlWLuIqRKxx29HXVrVtkGI0zj18=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748898750; x=1749503550;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1cUxTEHBw72zOIZ7Qg7Tr5f1iBEW7P8wHhwvdEmwLEU=;
-        b=IMls1BsKh/KWrMki/NlbAnlJve5ubCMH4QHxnjWmB5R4gbN8coF8DoMJwubB6xbOQt
-         pHi50JlgHEuhLasp5B/vPOciPis2dhO2NzXL+XKSVKEX5SEYh6NnF+t/GEbzMXTcyS4F
-         yk9uF9S/5IIJUEqJyYbN+DdJKU9DPZjxYv8VFRoCrHTL7QKjVLoQyAzhY2GVeQdgLerE
-         SHcttgSbcklP9IHXoBSlLIQiOtDC81vhBwjmjMEqn6eeRS5OW4SJ/77OrfmVvzzV5qNC
-         vd1oKajD0ZNyqU69jqfWbu7IerUFMCiA1/J0VkcCnJok8VCySKbZGvLeSpXNiIEKCAXX
-         OXYA==
-X-Gm-Message-State: AOJu0YyTLlw3iizX33D5Cuj/gqFcNPyzGaSif0/xV4JTQGN5hPhKMhn4
-	WGIZJBAf+gPzttlC+Dkf7693ArrAfLB+KnQ+jKDurxS1/bkZNW3D7WsD1K/of+L6HzceyPYXcWb
-	WqAXGVmZHWHf+eL+FzUIkP2zZa5CZgoI=
-X-Gm-Gg: ASbGncsMD1bFEkBiCnDx2l0LVWrlsd5RCrSOaSvT0f36th6ERlzlqJY7ANIZ0ZbSiBR
-	IGEQ16T7L/037Buf9C1N0cTH+VnpKsquTeVLRa4tHWPQNO8BDMbx9aAnjYIDdh9uIWtJu/grGJJ
-	74Y6D8dH8txMNkBZQ+QQ91X+fcA1u3WfyDkSM2x5vkPGTTAe+ZeCNiyuxOrhFOPgYb+Q==
-X-Google-Smtp-Source: AGHT+IE/RGikyGuJWBiurDel999d2xaCyBH54OUsqhAL9Dd4Gqd1FZbeySJKlJCIwnYUJnteM0iz80Z1g49EIP6REks=
-X-Received: by 2002:a05:690c:4d0a:b0:70e:2c7f:2ed4 with SMTP id
- 00721157ae682-7104f03f914mr169220757b3.0.1748898749861; Mon, 02 Jun 2025
- 14:12:29 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1748919899; x=1749524699;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=qfu/kGoCn0C393dqdcBHNU6mqeApIBg2bxOKg+LBIpk=;
+        b=swzi99vIRfyR7kIl81ek5debZ3AiV28QDeD366mZH7FLiq/zhMkvGArLs2AYTe1XVn
+         yTnePhPUKBmGV1VjtQoG6TWk8N3tPQJASZbHAdUfa1Wxnr1BfAFFHLQrwKL2TiBzfPMa
+         vUDMX7FiWcz6WlkOuYcMdGHI7waowv6FJQszORM4aKzxcnIGt+9uQYB+4eBqEh6Mh+9u
+         ixN48uVsCEFEmoFRO4OXzvEaqW02I7WdkRyJ35702rbqnPiuLhOgzgDRSQIJVdY0g1MT
+         0e4t0hP0Bd9m81h4qvgRcjTiOtk67eN5gWq4VM5wNoaxv6ZPIDMAObwomjzS/8Gx2LGm
+         Y2kw==
+X-Gm-Message-State: AOJu0Yxcr8BmV62kyVewB0j6/G3kxQGfdvNxd+aJ4uiV+Cp9G56lwgfT
+	Le796FE/WmE9f27Qh9F57ctIqw1rZoUaONzcBt9SHZPulsjuy1AjDo0rClkRrIvo14sTETan9Pv
+	PR2b56Vk=
+X-Gm-Gg: ASbGncsAIGxcQuChGWXqMNiHfyIBK7OSQLmgabo0VNICe3bOzI75xuIu/BQknzhkKz3
+	XLcUr8nnHNNtx6T5CR1sZreVBcRoovl1qj8cq1zqU+MMbyqW71KhyLC6hpl07F+PmCnqXw2GnkT
+	pD+URTHyHiRn+sau1F8k09/g9ac2kx2FPvaVtw5gOlEfaqMby/k2KTLjR0NOKMwaCRdrHD/1ldx
+	jWYiuCkXhKCOJbK/QeF8+JANSrYWTz6nJwTkMhMNAA6fkR8vtqtx/ZXYT1IioC6CxaSNRJEHRGP
+	y/cCcWEPhfK3s9t1Zzsv0GsqAgcIHoHkpnIAeChL7Dv5N+u8119e3iv1Gijd/JQ=
+X-Google-Smtp-Source: AGHT+IGFZd8zYXj/F5JX5OJuArokQCNHVWwlV3B4oxwdtW19Tbn7nYV/hRyE2Uhm6SIKS+cc2wbCEQ==
+X-Received: by 2002:a17:90a:2ce2:b0:312:db8f:9a09 with SMTP id 98e67ed59e1d1-312db8f9a7cmr3118390a91.14.1748919899532;
+        Mon, 02 Jun 2025 20:04:59 -0700 (PDT)
+Received: from MVIN00020.mvista.com ([49.207.194.251])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3124e30b693sm6310464a91.31.2025.06.02.20.04.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Jun 2025 20:04:58 -0700 (PDT)
+From: vanusuri@mvista.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-oe][master][walnascar[PATCH] redis: upgrade 6.2.16 -> 6.2.18
+Date: Tue,  3 Jun 2025 08:34:44 +0530
+Message-Id: <20250603030444.5927-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20250602131807.3748115-1-jhaller.oss@gmail.com>
-In-Reply-To: <20250602131807.3748115-1-jhaller.oss@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 2 Jun 2025 14:12:03 -0700
-X-Gm-Features: AX0GCFsoHg4VqqDsWONm-QAz0NyxZzO4r14gf1rFQ1rv51euduMi2WJ9pZO2KFo
-Message-ID: <CAMKF1srpM-mTdZTTxTnmvzGw1jx6f-TUvjDLiZwkD1FXDo-GhA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] cli11: Use the standard catch2 version
-To: jhaller.oss@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Jun 2025 21:12:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117717
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Jun 2025 03:05:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117718
 
-fails with ptest in DISTR_FEATURES
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-   /home/kraj200/yoe/build/tmp/work/riscv32-yoe-linux-musl/cli11/2.3.2+git/=
-git/tests/catch.hpp:9:10:
-fatal error: 'catch2/catch.hpp' file not found
-       9 | #include <catch2/catch.hpp>
-         |          ^~~~~~~~~~~~~~~~~~
-   1 error generated.
+Changelog:
+https://github.com/redis/redis/releases/tag/6.2.17
+https://github.com/redis/redis/releases/tag/6.2.18
 
-sometimes there are hard version dependencies too, have you checked
-that it will not run out of sync
+Security fixes
+==============
+* (CVE-2024-46981) Lua script commands may lead to remote code execution
+* (CVE-2025-21605) An unauthenticated client can cause an unlimited growth of output buffers
 
-On Mon, Jun 2, 2025 at 6:18=E2=80=AFAM Julian Haller via
-lists.openembedded.org <jhaller.oss=3Dgmail.com@lists.openembedded.org>
-wrote:
->
-> From: Julian Haller <julian.haller@philips.com>
->
-> The cmake infrastructure already supports using catch2 from the recipe
-> sysroot. Make use of this mechanism and add catch2 as build time
-> dependency. This allows us to drop the custom patch, the additional
-> catch2 fork reference and the do_configure workaround.
->
-> Also, cli11 does not use git submodules, so change the SRC_URI type to
-> git.
->
-> Fixes: 62db1c041f81 ("cli11: upgrade 1.9.1 -> 2.2.0")
-> Signed-off-by: Julian Haller <julian.haller@philips.com>
-> ---
->  meta-oe/recipes-support/cli11/cli11_2.3.2.bb | 12 +++---------
->  1 file changed, 3 insertions(+), 9 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/cli11/cli11_2.3.2.bb b/meta-oe/recip=
-es-support/cli11/cli11_2.3.2.bb
-> index ef3c951bbf..a247509c24 100644
-> --- a/meta-oe/recipes-support/cli11/cli11_2.3.2.bb
-> +++ b/meta-oe/recipes-support/cli11/cli11_2.3.2.bb
-> @@ -6,17 +6,11 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dafb20fe5f67e=
-21074b10b864d9563c11"
->  SRCREV =3D "291c58789c031208f08f4f261a858b5b7083e8e2"
->  PV .=3D "+git"
->
-> -SRC_URI +=3D "gitsm://github.com/CLIUtils/CLI11;branch=3Dmain;protocol=
-=3Dhttps \
-> -            https://github.com/philsquared/Catch/releases/download/v2.13=
-.7/catch.hpp \
-> -            file://0001-Do-not-download-the-catch-framework-during-confi=
-gure.patch"
-> +DEPENDS =3D "catch2"
->
-> -SRC_URI[sha256sum] =3D "ea379c4a3cb5799027b1eb451163dff065a3d641aaba23bf=
-4e24ee6b536bd9bc"
-> -S =3D "${WORKDIR}/git"
-> +SRC_URI =3D "git://github.com/CLIUtils/CLI11;branch=3Dmain;protocol=3Dht=
-tps"
->
-> -do_configure:prepend() {
-> -    mkdir -p ${S}/tests/catch2
-> -    cp ${DL_DIR}/catch.hpp ${S}/tests/catch2/catch.hpp
-> -}
-> +S =3D "${WORKDIR}/git"
->
->  inherit cmake
->
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117706): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117706
-> Mute This Topic: https://lists.openembedded.org/mt/113427706/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+---
+ .../recipes-extended/redis/{redis_6.2.16.bb => redis_6.2.18.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/redis/{redis_6.2.16.bb => redis_6.2.18.bb} (96%)
+
+diff --git a/meta-oe/recipes-extended/redis/redis_6.2.16.bb b/meta-oe/recipes-extended/redis/redis_6.2.18.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/redis/redis_6.2.16.bb
+rename to meta-oe/recipes-extended/redis/redis_6.2.18.bb
+index fbf2f04e3d..171c6640f2 100644
+--- a/meta-oe/recipes-extended/redis/redis_6.2.16.bb
++++ b/meta-oe/recipes-extended/redis/redis_6.2.18.bb
+@@ -18,7 +18,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+           "
+ 
+-SRC_URI[sha256sum] = "846bff83c26d827d49f8cc8114ea9d1e72eea1169f7de36b8135ea2cec104e7d"
++SRC_URI[sha256sum] = "470c75bac73d7390be4dd66479c6f29e86371c5d380ce0c7efb4ba2bbda3612d"
+ 
+ inherit update-rc.d systemd useradd
+ 
+-- 
+2.25.1
+
 
