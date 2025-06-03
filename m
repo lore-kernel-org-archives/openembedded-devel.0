@@ -1,141 +1,138 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 92F5FC5AE59
-	for <webhook@archiver.kernel.org>; Tue,  3 Jun 2025 08:28:06 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web10.6325.1748939281935802516
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 62C9FC5AD49
+	for <webhook@archiver.kernel.org>; Tue,  3 Jun 2025 11:51:58 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web11.9336.1748951515857737767
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Jun 2025 01:28:02 -0700
+ Tue, 03 Jun 2025 04:51:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QzkJbyfx;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-ad51ba0af48so1118184966b.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Jun 2025 01:28:01 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=V6qtUARV;
+ spf=pass (domain: smile.fr, ip: 209.85.221.48, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-3a3673e12c4so3662044f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Jun 2025 04:51:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1748939280; x=1749544080; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=N2xNCnbTe4Ta9H8mKYx9Xx9v9MI1dtXNfnYsVFkUk+4=;
-        b=QzkJbyfx9h1cyOXA/LmUJOj+hCryIYa4TOAEGuzzrPzidNEqmAGsaQjsz9M7idLFUZ
-         vdbX1Yre0zobSTUMjIDa6glU+HslcDd0nBb3saInmHrkauWmET9P8o1wA6TzTCcKOU5s
-         JOEmqzxAQBBEqXaZf0p5lQ3URWg0gXjrby9UAHWUj+NmA4gBjsAFQc8UQncmyLp8xYo+
-         9cPBoqjs2kHV9lfRvuuQt0sw7GsYJlTIEkIf7Jvld3KnTCnF4lOEM+E9UqPRIi8+B8ON
-         4Gl+bWaDc4GKf2BCFmhMEBlEjGY4AMECVtqmHLhBZ18C9MdRqIP7oXBtXgyoHxQKZcY4
-         cATQ==
+        d=smile.fr; s=google; t=1748951514; x=1749556314; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=DjIrxpO2nNeFqofKKt5cY+8DFdVGtVffR1HpzZvLrO8=;
+        b=V6qtUARVL1tAmhctaI+iUiLNnxYIPmNCIT8WywIpT6k86yZFdx6yBpFUV8nMb267wj
+         cI/pBbZbOFRpniERdiXyxSqg1KyMpik7PTl57XneJKnnjvg9W5sVru9EUUiM2BYkC443
+         rCrIq7cEZxOFOuksEW1bLmyaidXSgGX/ZCZsw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748939280; x=1749544080;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=N2xNCnbTe4Ta9H8mKYx9Xx9v9MI1dtXNfnYsVFkUk+4=;
-        b=Js2TkS6RJP7ZqDhsSbIc5IPiP8UP6SAZkP8bT17HVtJK3Rhgm72J5j7Nnd0KP5dv5Q
-         6f2l7XD5JcQLegojgLo5y8QaMH3PwnVPKmi8y2SmsVbsoNA5wAY3BEA3ORUcxu4wXO/C
-         HDhB3lx6HdI0tljwp8Ed4+lb/FTP40V/WZgQvDE1eHeOWONywWSFvL49+yLkeO+hDQgz
-         K/I9ZP1OVKQezC7eUCtZPkOHPXxBSdlvni6Bj6LRRLlls1aQZewbVAPdy4JXpkGGtL1q
-         TZAe/C8/gECz4aWHv3e/CoFDWWwWxde3LoFSNWa0J/PCjtJEybODjF2cfq/a/32G1pfj
-         ssZg==
-X-Forwarded-Encrypted: i=1; AJvYcCWnQaEcGcws9i2XMNxROMvqvfdkh1HxrVKTfZ3Y7Ozv7lu3TZM4XNwmPSSOCRXNYv72YiUkumbb8NVD3oVCL8T5zqk=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yx8KjWEoHpdMORaeVqXdwp/SB7DyoKWLfBerL2H/sT+HbRcP/QV
-	sH/4F0TMUnbO9gfmz1ycPSB6KC7tnVznaxUHjIVAgL4Nn6F9JBjNQd7q
-X-Gm-Gg: ASbGncuOdCf0IZf5fDh2Pdhgp4dcM+a4xrEoQoABUMtIJefoHffPOz7rN7aAe/yW1OW
-	xY3F+bQbmlz1k9rD042jYmcNtY2158oRiPcJ1KlNaLjxv6nboFejHMwQtM52/HjJBC4w34y3tub
-	3IAGJRGVh/4aPPNBkjD6mnDP7qzQ4wYXuQ8qXttdOByO45EMQ7icHT9jvY38XuMCVqVPIvjcGA6
-	M2dhLsYjaEMTk8WvxSeAXifQsKM7Al+B0Gh4FlMqua2i+jc4lWyFO7dH1BPvMIOdIPt4lXMSDbA
-	DOwJERgyPoYkTrD1y/4bw4hnrWrEVKXNZmF0ULMQSVqm6oX2aAJd01nobmA=
-X-Google-Smtp-Source: AGHT+IHDyKEPGAQt53vvr+Rq2abaRETBdCULeoCrJbAuW1mkSE1/I11KASJcPMLV5Ape0gtAcVY8IQ==
-X-Received: by 2002:a17:907:1c9f:b0:ad5:5a7e:bcd with SMTP id a640c23a62f3a-adde5ec8284mr190593566b.8.1748939280044;
-        Tue, 03 Jun 2025 01:28:00 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ada5e878178sm932458166b.91.2025.06.03.01.27.59
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 03 Jun 2025 01:27:59 -0700 (PDT)
-Message-ID: <9f7eca94-4a39-44a2-9c09-cba41c537d43@gmail.com>
-Date: Tue, 3 Jun 2025 10:27:58 +0200
+        d=1e100.net; s=20230601; t=1748951514; x=1749556314;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=DjIrxpO2nNeFqofKKt5cY+8DFdVGtVffR1HpzZvLrO8=;
+        b=DkgZwqXarvO+BA3rKhkH1gU9u8+w/TYeyrzGaf20zpIL8qGt1+VZsprTSnuZSGdwaB
+         eoAfgVl87VZ9zLY7e2lFDvVS01f+iVpYlcP/NRd7tuBs9tOT2Nw3RQC8rCLus7Trsqr5
+         PGxmv2vRln8z1lfszA2rNSX1WzxEpfSaWwGa17tXOj86yKgPlJDQrpQT23hcdEbVxDrt
+         2LDRI78EeEI15LBmA07/Mg02F56la8N9WjjCyeD8uY9nxaKtNe8BpRqykWGnxh1BLVyh
+         jOBNP5Lkm9qaHb5cSI44UxAXOepeqIxvz9a64j8u4LjDna68LUCG53NbJ7jNgDzKO1Te
+         5CAg==
+X-Gm-Message-State: AOJu0Yz/kK8YYwU5clMNQM9OR0LviRha8SKVp9cOvO2HscHK0JFZf39D
+	KvPeu+cKRsHEPx7k1mWBCPGnJ6M93aGy7WSskR+DMTylbM5PIJ2g5Kj1ISgXJgfXWpEw4oXPMjN
+	v0GiWwq0=
+X-Gm-Gg: ASbGncvSU2Ox3vr/ULtoTjCmru9c/IwYwWDNenhBzjJMuGEblm1gTalJni1w9JcZn9R
+	5Et9FLTzkZIE9MegCM5mtmSDViXpaFaI/kpdmRrAbhI7ox9p92L1rTFdG1aJoDl6lsLpE6rkm/Y
+	aNElEqacyUQHqUk41pxoUktaWCMMeIiPPjEpaKZXByLXKGDAdPrvBoRpKmqDMcbt5wsGNaLWLuJ
+	hcrDXuchLn1aIZpAiKbzWqa/w3oO4QBbKcA1Y+UWQCBGzI+U1MVCDjlzQsCU/5rdyQ9ehkOAPuz
+	ecXlOUWgzB+tT88+lpTuPVexxu/5tmB9LIr0PUTxMbLeUnG5j/W6NuP97DeyFql2kamPFTA4nwv
+	C/wKE73aruiBMENmYa2OeVBkZ/pKEAArdqX+JDebfWZCdIOOplFbITSJu/+eHzMQ+qo4T
+X-Google-Smtp-Source: AGHT+IGLhH8HR2cUlWga0uI6NAHYICcfj196fUQLkNJE0E54l7NU1ZsgDaz71S3+lXP0Wm+UXjsk2Q==
+X-Received: by 2002:a05:6000:2089:b0:3a4:e68c:beeb with SMTP id ffacd0b85a97d-3a4f7a4d34dmr11673508f8f.22.1748951513684;
+        Tue, 03 Jun 2025 04:51:53 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.home (2a01cb001331aa00bbdc09194e7fd0f8.ipv6.abo.wanadoo.fr. [2a01:cb00:1331:aa00:bbdc:919:4e7f:d0f8])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-450d8000e9asm159527845e9.21.2025.06.03.04.51.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Jun 2025 04:51:53 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-oe][PATCH] pcp: fix build race condition
+Date: Tue,  3 Jun 2025 13:51:30 +0200
+Message-Id: <20250603115130.1530093-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [scarthgap][PATCHv2] imagemagick: guard sed operations in
- do_install for optional files
-To: sanakazi720@gmail.com, openembedded-devel@lists.openembedded.org
-References: <20250602115123.103345-1-sanakazi720@gmail.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250602115123.103345-1-sanakazi720@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Jun 2025 08:28:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117720
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Jun 2025 11:51:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117721
 
-At the first sight it looks like this would be useful for master branch
-too - do you think you could send a patch for that also?
+From: Yoann Congal <yoann.congal@smile.fr>
 
-As a separate note, maybe checking if the files themselves exist
-(instead of checking the pkgconfig values) would be more explicit -
-though that's more like a random thought, and I don't have strong
-feelings about this.
+In upstream (handcrafted) Makefile, .c and .h files are soft-linked
+before being compiled. Under heavy load or a build with a high CPU
+count, the compilation can start before header files are softlinked,
+resulting in a build error:
+| pcp-htop.c:13:10: fatal error: CommandLine.h: No such file or directory
+|    13 | #include "CommandLine.h"
+|       |          ^~~~~~~~~~~~~~~
 
-On 6/2/25 13:51, Sana Kazi via lists.openembedded.org wrote:
-> When PACKAGECONFIG options like 'cxx' 'webp' and 'xml' are disabled,
-> certain files such as Magick++-config.im7, configure.xml, or
-> delegates.xml are not installed. Unconditionally running sed
-> on these files results in errors during do_install
-> Error:
-> sed: can't read .../image/usr/bin/Magick++-config.im7: No such file or directory
->
-> Signed-off-by: Nikhil R <nikhilr5@kpit.com>
-> Signed-off-by: Sana Kazi <sanakazi720@gmail.com>
-> ---
->  .../imagemagick/imagemagick_7.1.1.bb          | 23 ++++++++++++++-----
->  1 file changed, 17 insertions(+), 6 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-> index 5407c4e400..752fef303b 100644
-> --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-> +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-> @@ -36,13 +36,24 @@ PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11 libxext libxt"
->  PACKAGECONFIG[xml] = "--with-xml,--without-xml,libxml2"
->  
->  do_install:append:class-target() {
-> -    for file in MagickCore-config.im7 MagickWand-config.im7 Magick++-config.im7; do
-> -        sed -i 's,${STAGING_DIR_TARGET},,g' ${D}${bindir}/"$file"
-> +    for file in MagickCore-config.im7 MagickWand-config.im7; do
-> +        sed -i 's,${STAGING_DIR_TARGET},,g' "${D}${bindir}/$file"
->      done
-> -    sed -i 's,${S},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml
-> -    sed -i 's,${B},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml
-> -    sed -i 's,${RECIPE_SYSROOT},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml
-> -    sed -i 's,${HOSTTOOLS_DIR},${bindir},g' ${D}${sysconfdir}/ImageMagick-7/delegates.xml
-> +
-> +    if ${@bb.utils.contains('PACKAGECONFIG', 'cxx', 'true', 'false', d)}; then
-> +        sed -i 's,${STAGING_DIR_TARGET},,g' "${D}${bindir}/Magick++-config.im7"
-> +    fi
-> +
-> +    if ${@bb.utils.contains('PACKAGECONFIG', 'xml', 'true', 'false', d)}; then
-> +        xml_config="${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HDRI/configure.xml"
-> +        sed -i 's,${S},,g' "$xml_config"
-> +        sed -i 's,${B},,g' "$xml_config"
-> +        sed -i 's,${RECIPE_SYSROOT},,g' "$xml_config"
-> +    fi
-> +
-> +    if ${@bb.utils.contains_any('PACKAGECONFIG', 'webp openjpeg', 'true', 'false', d)}; then
-> +        sed -i 's,${HOSTTOOLS_DIR},${bindir},g' "${D}${sysconfdir}/ImageMagick-7/delegates.xml"
-> +    fi
->  }
->  
->  FILES:${PN} += "${libdir}/ImageMagick-${BASE_PV}/config-Q16* \
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117705): https://lists.openembedded.org/g/openembedded-devel/message/117705
-> Mute This Topic: https://lists.openembedded.org/mt/113426936/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Fix this by adding the make dependency between object files and the
+headers.
 
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+ ...htop-fix-header-build-race-condition.patch | 33 +++++++++++++++++++
+ meta-oe/recipes-support/pcp/pcp_6.3.7.bb      |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-support/pcp/pcp/0001-pcp-htop-fix-header-build-race-condition.patch
+
+diff --git a/meta-oe/recipes-support/pcp/pcp/0001-pcp-htop-fix-header-build-race-condition.patch b/meta-oe/recipes-support/pcp/pcp/0001-pcp-htop-fix-header-build-race-condition.patch
+new file mode 100644
+index 0000000000..48880fbb4d
+--- /dev/null
++++ b/meta-oe/recipes-support/pcp/pcp/0001-pcp-htop-fix-header-build-race-condition.patch
+@@ -0,0 +1,33 @@
++From d04ea418c5fcfec2f6fbb2dd9f982ddf12c5be87 Mon Sep 17 00:00:00 2001
++From: Yoann Congal <yoann.congal@smile.fr>
++Date: Tue, 3 Jun 2025 10:02:58 +0200
++Subject: [PATCH] pcp-htop: fix header build race condition
++
++.c and .h files are soft-linked before being compiled. Under heavy load
++or a build with a high CPU count, the compilation can start before
++header files are softlinked, resulting in a build error:
++| pcp-htop.c:13:10: fatal error: CommandLine.h: No such file or directory
++|    13 | #include "CommandLine.h"
++|       |          ^~~~~~~~~~~~~~~
++
++Fix this by adding the make dependency between object files and the
++headers.
++
++Upstream-Status: Submitted [https://github.com/performancecopilot/pcp/pull/2217]
++Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
++---
++ src/pcp/htop/GNUmakefile | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/pcp/htop/GNUmakefile b/src/pcp/htop/GNUmakefile
++index 3e29638d6..898f0b766 100644
++--- a/src/pcp/htop/GNUmakefile
+++++ b/src/pcp/htop/GNUmakefile
++@@ -224,6 +224,7 @@ default:	build-me
++ include $(BUILDRULES)
++ 
++ ifeq "$(HAVE_NCURSESW)" "true"
+++$(OBJECTS): $(HFILES)
++ build-me: $(TOPXFILES) $(SUBXFILES) $(CFGXFILES) $(CMDTARGET) $(DISTLINKS) $(MAN_PAGES)
++ 
++ install: default
+diff --git a/meta-oe/recipes-support/pcp/pcp_6.3.7.bb b/meta-oe/recipes-support/pcp/pcp_6.3.7.bb
+index c390b9eec2..65efac06be 100644
+--- a/meta-oe/recipes-support/pcp/pcp_6.3.7.bb
++++ b/meta-oe/recipes-support/pcp/pcp_6.3.7.bb
+@@ -14,6 +14,7 @@ SRC_URI += "file://0001-Remove-unsuitble-part-for-cross-compile.patch \
+             file://pass-options-to-AR.patch \
+             file://fix_parallel_make.patch \
+ 			file://0001-bind2-Use-pmcpp-from-native-builds.patch \
++            file://0001-pcp-htop-fix-header-build-race-condition.patch \
+            "
+ 
+ export PCP_DIR = "${RECIPE_SYSROOT_NATIVE}"
 
