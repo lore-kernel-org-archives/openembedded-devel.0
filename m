@@ -1,227 +1,113 @@
-Return-Path: <antonin.godard@bootlin.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6228DC5B543
-	for <webhook@archiver.kernel.org>; Wed,  4 Jun 2025 08:54:50 +0000 (UTC)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
- by mx.groups.io with SMTP id smtpd.web11.11926.1749027280322992896
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CB7B4C5B552
+	for <webhook@archiver.kernel.org>; Wed,  4 Jun 2025 09:43:40 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.12731.1749030215494519385
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Jun 2025 01:54:40 -0700
+ Wed, 04 Jun 2025 02:43:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=gm1 header.b=oLcvO/Uk;
- spf=pass (domain: bootlin.com, ip: 217.70.183.198, mailfrom: antonin.godard@bootlin.com)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id C67714327B;
-	Wed,  4 Jun 2025 08:54:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1749027277;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=AYB+WSBFULORvGVL5GAcVsj8bJFScEcVfv49G4gMNyg=;
-	b=oLcvO/Uk51LCVYYvyL+ptxq23ST92ktAWlsVP/6DYqjior+ul4G4rl/6EKcwCAzidRIEVX
-	Cu51uXnAkR+Uub8W9bblDG+sQ+mWUqomAZ4f08tiVvvMmjM6e7Njp3jWbRIMGJb67Qt1OO
-	TZzZUP3iCKJrUo9VuMt/RI55so7PYDHfGvldoXU039KNZ78ZhumIytfILjcf6TVwJQ49pO
-	Pri5q8jyCIeaspR5T+xVLfVie8ziuDRKBfTPVbXz3tqJFiKUYEmMeWTMYtTsd1IPhy8Q+9
-	s9vfZA9ECLPwRrCkleynMjb3OMDSTyMSJJGEQAq3yA5KR9nBZulJnmact6husg==
-From: Antonin Godard <antonin.godard@bootlin.com>
-Date: Wed, 04 Jun 2025 10:54:30 +0200
-Subject: [meta-oe PATCH v4] cryptopp: add a recipe for version 8.9.0
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=825020491d=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5546d4op006881
+	for <openembedded-devel@lists.openembedded.org>; Wed, 4 Jun 2025 02:43:35 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 471g9rt9bh-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 04 Jun 2025 02:43:34 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Wed, 4 Jun 2025 02:43:31 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] postgresql: upgrade 14.17 -> 14.18
+Date: Wed, 4 Jun 2025 15:13:08 +0530
+Message-ID: <20250604094308.2408808-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250604-add-cryptopp-v4-1-9e9400a9e877@bootlin.com>
-X-B4-Tracking: v=1; b=H4sIAMUJQGgC/3XN3wqCMBTH8VeJXbfwnM3puuo9oov9MwflZMpIx
- HdvCkEYXf4OfL5nJoOL3g3kfJhJdMkPPnR58OOBmFZ1d0e9zZtggRwAgSprqYlTP4a+p01VV5J
- rJwUzJJM+usa/ttz1lnfrhzHEaasnWK9/QgkoUCZYjUoUxhl90SGMD9+dTHiSNZXwm+OOY+Yge
- SkKgU0l4ZezDy+LEusdZ5kLZbk0VnPQu+/LsrwBoJYIrSgBAAA=
-X-Change-ID: 20241121-add-cryptopp-f78794be963c
-To: openembedded-devel@lists.openembedded.org
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Martin Jansa <martin.jansa@gmail.com>, 
- Antonin Godard <antonin.godard@bootlin.com>
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6618;
- i=antonin.godard@bootlin.com; h=from:subject:message-id;
- bh=7W8q3iudfLP5aqi0FMsGwEcjNf3s8iL7hsyFSv0ftMM=;
- b=owEBbQKS/ZANAwAIAdGAQUApo6g2AcsmYgBoQAnMqTZkwe1eYSJkDyxZhZSDEl+av2aR9i2+t
- 22KbixdluGJAjMEAAEIAB0WIQSGSHJRiN1AG7mg0//RgEFAKaOoNgUCaEAJzAAKCRDRgEFAKaOo
- NmJfEACc/yrRcliPTGLAPzR4Xtxb+R5DVMClpqgL+SdR1Muf4MyhMBYOtHpMMgtJVYSCVUXlYLI
- 7UxHQ4PkHXCpSvLnVWDwUmCk/qXZQFnHDMoR3plicRI/e4fki15MJms3rqFYtI5miJnCXWwO3vA
- zn4E4IJdsuAfSVMycZB+5j33Izmh5ydpOqLK2r3emFMYnNhGj69ljsPuIwpyJN/G2vM4zRtYKpm
- +pprKgcnI6cTccQl/upLicZa/ZJaGQqo9TCGYwi0iVjesfgSmPP4Fb9HDOhVjpP7l6Epu+DIDUu
- cogV+eA+a0ZOY5IGotlSxFGLjhplISR30q+uvvwhc/l6kIhgdESJFj78vmMef93npgvKqzGLWB8
- hW/+F+xq2FAi6JgiWReW7Ie1Geeal+qscim9xIFUYRZgvnvZ9tNEXVI3mgRteZ7jxaW1kg+3d4v
- 5L20p4R/c1z5eKhmu4KmHHL33HGTSFSaVSyQlcryoDnbEnNpkVyo1mSZ5qKzv5+19HIyaHOjG/o
- PYs88i3oJ02Rjo9xRpJUs5QvDJafVtL3jBdT8oZbAxnOBMM4xNUy+PpnyTScF6go4d0Gklu71LH
- sjtBsPPyvRUCdYRm3mFh6FmD3yyjioVwFl3hVecDDqyB3zA5qfE5xdj9T0JIs5vk/7FaFoDiDS8
- k+HZCuM+gbZ08sw==
-X-Developer-Key: i=antonin.godard@bootlin.com; a=openpgp;
- fpr=8648725188DD401BB9A0D3FFD180414029A3A836
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddugddukeeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhfffugggtgffkvfevofesthejredtredtjeenucfhrhhomheptehnthhonhhinhcuifhouggrrhguuceorghnthhonhhinhdrghhouggrrhgusegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeffgffgffdukeefteeutdeuheekvdejtdfgkeevtefgffeukeeftdejueejfeevteenucffohhmrghinhepkhgvrhhnvghlrdhorhhgpdhgihhthhhusgdrtghomhdptghrhihpthhophhprdgtohhmnecukfhppedvuddvrddutdehrdduhedtrddvhedvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepvdduvddruddthedrudehtddrvdehvddphhgvlhhopegluddvjedrtddruddrudgnpdhmrghilhhfrhhomheprghnthhonhhinhdrghhouggrrhgusegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeegpdhrtghpthhtohepthhhohhmrghsrdhpvghtrgiiiihonhhisegsohhothhlihhnrdgtohhmpdhrtghpthhtohepmhgrrhhtihhnrdhjrghnshgrsehgmhgrihhlrdgtohhmpdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvn
- hgvmhgsvgguuggvugdrohhrghdprhgtphhtthhopegrnhhtohhnihhnrdhgohgurghrugessghoohhtlhhinhdrtghomh
-X-GND-Sasl: antonin.godard@bootlin.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: upaE056CNKX9GXcQI4GbKphFeN_UO96z
+X-Authority-Analysis: v=2.4 cv=VIHdn8PX c=1 sm=1 tr=0 ts=68401546 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=6IFa9wvqVegA:10 a=epTmVMiNAAAA:8 a=t7CeM3EgAAAA:8 a=eG7aWNzutWAoOeBMYPIA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjA0MDA3MiBTYWx0ZWRfX8lXF/Zlvsoy3 O5+vG43RoBLnlU96kZwit7ytfS3hxCIl+2+eXBWk9ReWBYB00QOqOvYNWE7S5e0dBtlON0JNbq1 h2Ygpux0lVk0iNwUYt9GJEX6HMnYHiLIwrb0Vifldql+0311N8bCzBVIgUacirWVnSdI/LF3l+d
+ bufEzHYbKigyumpkdRiQYWXchDgiv1HPGqLy/eXVHS7WjeFeWs0Wki3ltquImYK2GAd/F+uYwCh +keUZpf9f/NJsi1d/1/tBZ1yUFy8k87RVo4RWfOMSEoBItH1jt/J/5tChHGPak6KCY4jsISMtHa fR1ZRmVjn9wspGdPvAjduPzsPHbR4hFmPm38ZaAfX4bd/PXW98+ofqGMf2zAGMGjNsKD4NWFj9v
+ VnV2fw0BKAIXW/anAz1/B5w17aTcpQp051desXfKthtDYsVREROut1+eZmbmw1YQ7T3nBoUu
+X-Proofpoint-ORIG-GUID: upaE056CNKX9GXcQI4GbKphFeN_UO96z
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-04_02,2025-06-03_02,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=999
+ adultscore=0 malwarescore=0 spamscore=0 impostorscore=0 mlxscore=0
+ priorityscore=1501 clxscore=1015 lowpriorityscore=0 bulkscore=0
+ suspectscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505280000
+ definitions=main-2506040072
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Jun 2025 08:54:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117733
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Jun 2025 09:43:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117734
 
-Cryptopp is a library of cryptographic schemes written in C++.
+From: Yogita Urade <yogita.urade@windriver.com>
 
-Signed-off-by: Antonin Godard <antonin.godard@bootlin.com>
+Upgrade includes fix for CVE-2025-4207
+
+Release notes:
+https://www.postgresql.org/docs/release/14.18/
+
+0001-configure.ac-bypass-autoconf-2.69-version-check.patch
+refreshed for 14.18
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
-Note: I had no issue building with MACHINE to "qemux86-64" and TCLIBC =
-"musl", as reported here:
-https://lore.kernel.org/r/CAMKF1sreBnjjX0GW-G9+15Y+EgFQUmKUPX_cqYE7J3WaZ9=94g@mail.gmail.com
-Any extra steps to reproduce the issue would be appreciated.
----
-Changes in v4:
-- Make the recipe inherit dos2unix as it was preventing the patch from
-  applied after going through the mailing list. Remove the CRLF from the
-  patch file accordingly.
-- Link to v3: https://lore.kernel.org/r/20250528-add-cryptopp-v3-1-6ad49cdb41bb@bootlin.com
+ ...0001-configure.ac-bypass-autoconf-2.69-version-check.patch | 4 ++--
+ .../postgresql/{postgresql_14.17.bb => postgresql_14.18.bb}   | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_14.17.bb => postgresql_14.18.bb} (84%)
 
-Changes in v3:
-- Add 0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch to fix the
-  arm64 build issue.
-- Revert UNPACKDIR -> WORKDIR.
-- Use += not append.
-- Link to v2: https://lore.kernel.org/r/20241122-add-cryptopp-v2-1-19456062f791@bootlin.com
-
-Changes in v2:
-- WORKDIR -> UNPACKDIR in S
-- remove bb.utils.contains in CXXFLAGS:append:aarch64 (forgot to remove
-  after adding aarch64 override)
-- Link to v1: https://lore.kernel.org/r/20241121-add-cryptopp-v1-1-36382a60cecb@bootlin.com
----
- ...ix-arm-crypto-logic-issue-in-config_asm.h.patch | 57 ++++++++++++++++++++++
- meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb  | 45 +++++++++++++++++
- 2 files changed, 102 insertions(+)
-
-diff --git a/meta-oe/recipes-crypto/cryptopp/cryptopp-8.9.0/0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch b/meta-oe/recipes-crypto/cryptopp/cryptopp-8.9.0/0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch
-new file mode 100644
-index 0000000000..ec040bc1cd
---- /dev/null
-+++ b/meta-oe/recipes-crypto/cryptopp/cryptopp-8.9.0/0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch
-@@ -0,0 +1,57 @@
-+From 9cbe7e5165e8bfa1bbb632682e049e2f92f79717 Mon Sep 17 00:00:00 2001
-+From: Antonin Godard <antonin.godard@bootlin.com>
-+Date: Fri, 30 May 2025 13:33:39 +0200
-+Subject: [PATCH] Fix arm crypto logic issue in config_asm.h
-+
-+The current logic for enabling or disabling the CRYPTOPP_ARM_*_AVAILABLE
-+macros seems wrong, because we do an OR between all of the conditions
-+following `defined(__ARM_FEATURE_CRYPTO)`. Fix the logic so that the
-+CRYPTOPP_ARM_*_AVAILABLE macros are set if __ARM_FEATURE_CRYPTO is set
-+_AND_ any of the following condition is true.
-+
-+Upstream-Status: Submitted [https://github.com/weidai11/cryptopp/pull/1324]
-+Signed-off-by: Antonin Godard <antonin.godard@bootlin.com>
-+---
-+ config_asm.h | 12 ++++++------
-+ 1 file changed, 6 insertions(+), 6 deletions(-)
-+
-+diff --git a/config_asm.h b/config_asm.h
-+index 71ffb9f8..d388124f 100644
-+--- a/config_asm.h
-++++ b/config_asm.h
-+@@ -278,9 +278,9 @@
-+ // Requires GCC 4.8, Clang 3.3 or Visual Studio 2017
-+ #if !defined(CRYPTOPP_ARM_AES_AVAILABLE) && !defined(CRYPTOPP_DISABLE_ARM_AES)
-+ # if defined(__aarch32__) || defined(__aarch64__) || defined(_M_ARM64)
-+-#  if defined(__ARM_FEATURE_CRYPTO) || (CRYPTOPP_GCC_VERSION >= 40800) || \
-++#  if defined(__ARM_FEATURE_CRYPTO) && ((CRYPTOPP_GCC_VERSION >= 40800) || \
-+       (CRYPTOPP_LLVM_CLANG_VERSION >= 30300) || (CRYPTOPP_APPLE_CLANG_VERSION >= 40300) || \
-+-      (CRYPTOPP_MSC_VERSION >= 1916)
-++      (CRYPTOPP_MSC_VERSION >= 1916))
-+ #   define CRYPTOPP_ARM_AES_AVAILABLE 1
-+ #  endif  // Compilers
-+ # endif  // Platforms
-+@@ -290,9 +290,9 @@
-+ // Requires GCC 4.8, Clang 3.3 or Visual Studio 2017
-+ #if !defined(CRYPTOPP_ARM_PMULL_AVAILABLE) && !defined(CRYPTOPP_DISABLE_ARM_PMULL)
-+ # if defined(__aarch32__) || defined(__aarch64__) || defined(_M_ARM64)
-+-#  if defined(__ARM_FEATURE_CRYPTO) || (CRYPTOPP_GCC_VERSION >= 40800) || \
-++#  if defined(__ARM_FEATURE_CRYPTO) && ((CRYPTOPP_GCC_VERSION >= 40800) || \
-+       (CRYPTOPP_LLVM_CLANG_VERSION >= 30300) || (CRYPTOPP_APPLE_CLANG_VERSION >= 40300) || \
-+-      (CRYPTOPP_MSC_VERSION >= 1916)
-++      (CRYPTOPP_MSC_VERSION >= 1916))
-+ #   define CRYPTOPP_ARM_PMULL_AVAILABLE 1
-+ #  endif  // Compilers
-+ # endif  // Platforms
-+@@ -302,9 +302,9 @@
-+ // Requires GCC 4.8, Clang 3.3 or Visual Studio 2017
-+ #if !defined(CRYPTOPP_ARM_SHA_AVAILABLE) && !defined(CRYPTOPP_DISABLE_ARM_SHA)
-+ # if defined(__aarch32__) || defined(__aarch64__) || defined(_M_ARM64)
-+-#  if defined(__ARM_FEATURE_CRYPTO) || (CRYPTOPP_GCC_VERSION >= 40800) || \
-++#  if defined(__ARM_FEATURE_CRYPTO) && ((CRYPTOPP_GCC_VERSION >= 40800) || \
-+       (CRYPTOPP_LLVM_CLANG_VERSION >= 30300) || (CRYPTOPP_APPLE_CLANG_VERSION >= 40300) || \
-+-      (CRYPTOPP_MSC_VERSION >= 1916)
-++      (CRYPTOPP_MSC_VERSION >= 1916))
-+ #   define CRYPTOPP_ARM_SHA1_AVAILABLE 1
-+ #   define CRYPTOPP_ARM_SHA2_AVAILABLE 1
-+ #  endif  // Compilers
-diff --git a/meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb b/meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb
-new file mode 100644
-index 0000000000..4e34c60888
---- /dev/null
-+++ b/meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb
-@@ -0,0 +1,45 @@
-+SUMMARY = "A C++ class library of cryptographic schemes"
-+DESCRIPTION = "Crypto++ Library is a C++ class library of cryptographic schemes"
-+CVE_PRODUCT = "cryptopp"
-+HOMEPAGE = "http://www.cryptopp.com/"
-+SECTION = "libs"
-+LICENSE = "BSL-1.0"
-+LIC_FILES_CHKSUM = "file://License.txt;md5=51c7d279a47eba5246eb5a5123bc1b77"
-+
-+SRC_URI = "git://github.com/weidai11/cryptopp.git;protocol=https;branch=master \
-+           file://0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch \
-+           "
-+SRCREV = "843d74c7c97f9e19a615b8ff3c0ca06599ca501b"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig dos2unix
-+
-+CXXFLAGS += "-fPIC"
-+EXTRA_OEMAKE += "HAS_SOLIB_VERSION=1"
-+
-+do_compile() {
-+    oe_runmake -f GNUmakefile-cross libcryptopp.a libcryptopp.so cryptest.exe
-+}
-+
-+do_install() {
-+    DESTDIR="${D}" \
-+        BINDIR="${bindir}" \
-+        DATADIR="${datadir}" \
-+        INCLUDEDIR="${includedir}" \
-+        LIBDIR="${libdir}" \
-+        oe_runmake install
-+
-+    # Rename cryptest.exe to cryptest
-+    if [ -f "${D}${bindir}/cryptest.exe" ]; then
-+        mv "${D}${bindir}/cryptest.exe" "${D}${bindir}/cryptest"
-+    fi
-+}
-+
-+PACKAGE_BEFORE_PN += "${PN}-cryptest ${PN}-testdata ${PN}-testvectors"
-+
-+FILES:${PN}-cryptest = "${bindir}/cryptest"
-+FILES:${PN}-testdata = "${datadir}/cryptopp/TestData"
-+FILES:${PN}-testvectors = "${datadir}/cryptopp/TestVectors"
-+
-+BBCLASSEXTEND = "native nativesdk"
-
----
-base-commit: 5df267759c953b9615290ea6b8d9051b83863bf9
-change-id: 20241121-add-cryptopp-f78794be963c
-
-Best regards,
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
+index fc3b1db6f6..2396be2df9 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
+@@ -13,12 +13,12 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+  1 file changed, 4 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 4653dcf..72e4dad 100644
++index bbbb204..0919d2b 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
+  
+- AC_INIT([PostgreSQL], [14.17], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
++ AC_INIT([PostgreSQL], [14.18], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
+  
+ -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
+ -Untested combinations of 'autoconf' and PostgreSQL versions are not
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.17.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.18.bb
+similarity index 84%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_14.17.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_14.18.bb
+index a7563c3f8b..c9616c21ff 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_14.17.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.18.bb
+@@ -11,7 +11,7 @@ SRC_URI += "\
+    file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "6ce0ccd6403bf7f0f2eddd333e2ee9ba02edfa977c66660ed9b4b1057e7630a1"
++SRC_URI[sha256sum] = "83ab29d6bfc3dc58b2ed3c664114fdfbeb6a0450c4b8d7fa69aee91e3ca14f8e"
+ 
+ CVE_CHECK_IGNORE += "\
+    CVE-2017-8806 \
 -- 
-Antonin Godard <antonin.godard@bootlin.com>
+2.40.0
 
 
