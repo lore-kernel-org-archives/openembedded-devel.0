@@ -1,82 +1,103 @@
-Return-Path: <antonin.godard@bootlin.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1207EC5B543
-	for <webhook@archiver.kernel.org>; Wed,  4 Jun 2025 13:17:13 +0000 (UTC)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
- by mx.groups.io with SMTP id smtpd.web10.16230.1749043022191616361
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47E4AC5B543
+	for <webhook@archiver.kernel.org>; Wed,  4 Jun 2025 14:26:13 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.17894.1749047171114738192
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Jun 2025 06:17:02 -0700
+ Wed, 04 Jun 2025 07:26:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=gm1 header.b=CX9aqncY;
- spf=pass (domain: bootlin.com, ip: 217.70.183.198, mailfrom: antonin.godard@bootlin.com)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 42D3F43987;
-	Wed,  4 Jun 2025 13:16:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1749043018;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=aWzcpHx075xe1QfS3BT9OMVMnwXuvyGt1mokvvPI26A=;
-	b=CX9aqncYmlCtxt8zzrzmHSLz6Tlu+qzDKSw82awgf2k40qL8+N05XRmSKZuMPGxSip0wXQ
-	Vq3KGmIvrDQQ9HWGNRMzIwtpbhArUK+BsHHqQDG7Tn7xETvGedNdq3hY6WUL7S07VypIHE
-	ISulnqxuzabTTU4krOYjtbAgu7Yj0guNmGUvTOvIbwASCqIyzU1ZHSfLXMYM0x6b87oW8D
-	oOCWt1HvZaFUKKNTPMpuYw/jXfcXLvpzHzZaLJnHWOqX6JkzGsa0stt/quvFh2FJljcK5g
-	ZyTiO4z5WJCYJ52xYiRhOqwY0W6Qqh71AOhiSAFoxxM+pqqiGXSmoPUh+IwF3A==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 04 Jun 2025 15:16:57 +0200
-Message-Id: <DADS05TNTW47.2RJD9AAHCUP7I@bootlin.com>
-From: "Antonin Godard" <antonin.godard@bootlin.com>
-To: "Gyorgy Sarvari" <skandigraun@gmail.com>,
- <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe PATCH v4] cryptopp: add a recipe for version
- 8.9.0
-Cc: "Thomas Petazzoni" <thomas.petazzoni@bootlin.com>, "Martin Jansa"
- <martin.jansa@gmail.com>
-References: <20250604-add-cryptopp-v4-1-9e9400a9e877@bootlin.com>
- <2cf31147-fa1a-4277-892d-a6b89648ed5e@gmail.com>
-In-Reply-To: <2cf31147-fa1a-4277-892d-a6b89648ed5e@gmail.com>
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddugddvudelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpegggfgtfffkhffvufevfhgjsehtqhertddttdejnecuhfhrohhmpedftehnthhonhhinhcuifhouggrrhgufdcuoegrnhhtohhnihhnrdhgohgurghrugessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepleelvefggffgvedtudekffffjedukeehtdefhfefkedugfffvdfgudfggfehjedtnecuffhomhgrihhnpehophgvnhgvmhgsvgguuggvugdrohhrghdpkhgvrhhnvghlrdhorhhgpdgsohhothhlihhnrdgtohhmnecukfhppedvuddvrddutdehrdduhedtrddvhedvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepvdduvddruddthedrudehtddrvdehvddphhgvlhhopehlohgtrghlhhhoshhtpdhmrghilhhfrhhomheprghnthhonhhinhdrghhouggrrhgusegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeegpdhrtghpthhtohepshhkrghnughighhrrghunhesghhmrghilhdrtghomhdprhgtphhtthhopehophgvnhgvmhgsvgguuggvugdquggvvhgvlheslhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhgpdhrtghpthhtohepthhhohhmrghsrdhpvghtr
- giiiihonhhisegsohhothhlihhnrdgtohhmpdhrtghpthhtohepmhgrrhhtihhnrdhjrghnshgrsehgmhgrihhlrdgtohhm
-X-GND-Sasl: antonin.godard@bootlin.com
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=825020491d=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 554BFuox004226
+	for <openembedded-devel@lists.openembedded.org>; Wed, 4 Jun 2025 14:26:10 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 471g9t2neb-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 04 Jun 2025 14:26:10 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Wed, 4 Jun 2025 07:26:06 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][walnascar][PATCH 1/2] c-ares: upgrade 1.34.3 -> 1.34.4
+Date: Wed, 4 Jun 2025 19:55:40 +0530
+Message-ID: <20250604142541.1251029-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: bPBkOmFiiD-1uNyicu55d7UwZpcMjd2D
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjA0MDExMCBTYWx0ZWRfX2xC+/m8zJcJQ UoBn1vHba76D6Vzo8lkrZdx0im/vLVb+fcm4m9OP5wnEXVFv562lwo3wNUZ8qAHacBO3dZ/378k +GtFMoiCf/ZV6yULe0vnYHpS6YrbyL/ON95sD6ElWmB0iFQ5xxkxCIJZBBSOalH/w6fspG13Sev
+ 9IXRQiCP0Af7lnklAVJPm4InpUzRxrog3Ypi3OCmS41OBaAxCi8ICq7b4elty7PpCIr7TwgTetW ljU/9n7bNCW2NwankYCfvmaSHYKlKpDwoD7Hw/NcGMX9rMZqLj+zFfN5Bc+D7pq4lhhtDJVuCMH xD18cZKflbi2VQv0AZHnIhRtgWwRqL5kjum4FmWn05kpslyLMJHJEXG0YsvSuZYKx6b8Chv9EWL
+ yL9OJenCKYBwupG7xRBewWssjnPhIrLOSfYimNLuEfM7iEMC/6XjcBNsSdRr1MLKfHrB201a
+X-Proofpoint-GUID: bPBkOmFiiD-1uNyicu55d7UwZpcMjd2D
+X-Authority-Analysis: v=2.4 cv=Q4DS452a c=1 sm=1 tr=0 ts=68405782 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=6IFa9wvqVegA:10 a=NEAV23lmAAAA:8 a=pGLkceISAAAA:8 a=t7CeM3EgAAAA:8 a=d6DZ1Rd_tSB6Bevis2gA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-04_03,2025-06-03_02,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 mlxlogscore=999
+ suspectscore=0 bulkscore=0 impostorscore=0 mlxscore=0 priorityscore=1501
+ adultscore=0 malwarescore=0 phishscore=0 spamscore=0 lowpriorityscore=0
+ classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.21.0-2505280000
+ definitions=main-2506040110
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Jun 2025 13:17:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117739
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Jun 2025 14:26:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117740
 
-On Wed Jun 4, 2025 at 12:33 PM CEST, Gyorgy Sarvari wrote:
-> On 6/4/25 10:54, Antonin Godard via lists.openembedded.org wrote:
->> Cryptopp is a library of cryptographic schemes written in C++.
->>
->> Signed-off-by: Antonin Godard <antonin.godard@bootlin.com>
->> ---
->> Note: I had no issue building with MACHINE to "qemux86-64" and TCLIBC =
-=3D
->> "musl", as reported here:
->> https://lore.kernel.org/r/CAMKF1sreBnjjX0GW-G9+15Y+EgFQUmKUPX_cqYE7J3WaZ=
-9=3D94g@mail.gmail.com
->> Any extra steps to reproduce the issue would be appreciated.
-> Looking at the linked logs, Khem was using clang - and indeed,
-> 'TOOLCHAIN =3D "clang"' reproduces the error on my end.
+From: Jason Schonberg <schonm@gmail.com>
 
-Thanks for the hint, I'll try that.
+Changelog: https://github.com/c-ares/c-ares/releases/tag/v1.34.4
 
-> If there will be a v5, could you also add "tag" to the SRC_URI?
+Changes:
 
-And thanks for the reminder!
+    QNX Port: Port to QNX 8, add primary config reading support, add CI build. PR #934, PR #937, PR #938
 
-Antonin
+Bugfixes:
 
---=20
-Antonin Godard, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+    Empty TXT records were not being preserved. PR #922
+    docs: update deprecation notices for ares_create_query() and ares_mkquery(). PR #910
+    license: some files weren't properly updated. PR #920
+    Fix bind local device regression from 1.34.0. PR #929, PR #931, PR #935
+    CMake: set policy version to prevent deprecation warnings. PR #932
+    CMake: shared and static library names should be the same on unix platforms like autotools uses. PR #933
+    Update to latest autoconf archive macros for enhanced system compatibility. PR #936
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+---
+ .../c-ares/{c-ares_1.34.3.bb => c-ares_1.34.4.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/c-ares/{c-ares_1.34.3.bb => c-ares_1.34.4.bb} (91%)
+
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.34.3.bb b/meta-oe/recipes-support/c-ares/c-ares_1.34.4.bb
+similarity index 91%
+rename from meta-oe/recipes-support/c-ares/c-ares_1.34.3.bb
+rename to meta-oe/recipes-support/c-ares/c-ares_1.34.4.bb
+index c02bdbcc5c..1fee769f25 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.34.3.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.34.4.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=d3e72a10e08191f2ca1be3f3228d78f3"
+ 
+ SRC_URI = "https://github.com/c-ares/c-ares/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
+            file://run-ptest"
+-SRC_URI[sha256sum] = "26e1f7771da23e42a18fdf1e58912a396629e53a2ac71b130af93bbcfb90adbe"
++SRC_URI[sha256sum] = "fa38dbed659ee4cc5a32df5e27deda575fa6852c79a72ba1af85de35a6ae222f"
+ 
+ PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
+ PACKAGECONFIG[manpages] = ""
+-- 
+2.40.0
 
 
