@@ -1,253 +1,227 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <antonin.godard@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 524C4C5B543
-	for <webhook@archiver.kernel.org>; Wed,  4 Jun 2025 07:53:18 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web10.10769.1749023594045285681
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6228DC5B543
+	for <webhook@archiver.kernel.org>; Wed,  4 Jun 2025 08:54:50 +0000 (UTC)
+Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
+ by mx.groups.io with SMTP id smtpd.web11.11926.1749027280322992896
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Jun 2025 00:53:14 -0700
+ Wed, 04 Jun 2025 01:54:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=cRW0Mi6H;
- spf=pass (domain: smile.fr, ip: 209.85.218.48, mailfrom: yoann.congal@smile.fr)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-ad69e4f2100so963487866b.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Jun 2025 00:53:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1749023592; x=1749628392; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NUYYtcA49bG7LTNzc95B69pWLKND3hhkiFrR6KqTxcY=;
-        b=cRW0Mi6HF8rOUVGdaYzKHvWKIG+o6VTpEZo1+lCAmJh44qYS1XolHaSn88zTbmS5DL
-         HV1km8j5Bs+skwmimbsjUa18u0AaSS2ql0WFSLs9NZiL+HNtD7Rd14vXM3qJT68ShQbP
-         ZHAU6HK+RBkLiUqJh7stsejtdaDgpF6Po8ZGE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749023592; x=1749628392;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NUYYtcA49bG7LTNzc95B69pWLKND3hhkiFrR6KqTxcY=;
-        b=qALtph3AEn6Lhc88YaeGVAQgErtDWGCkhaxxIQRKg5gxyjliDQaxLuZ1Rtw9/wbkuh
-         ek6ZVQD+Qq09gpLQ8skscB5z5Rt/IwBC04vy8OkUKSaarHCTwQDUqCzgQ+fVv+8vCYjF
-         1wPgXjeBzxEywJlW+Hb4a4sCNM5q3EzCEkCo1c0fSeKkii7MYdFbl8TMsbfHkERkEIWp
-         SWGYeCmYbCa6iIgAT4TT78QWTv4wiap78HY8LSRG0L3rVKkNktorHf1MgE2+SBXAshW0
-         0E+6hLel5cUibOGkNVH19Vele3un4Fax0J2D0h72rAh7Wc3eAjHJcBwm9aq3WlGLBO9Z
-         Jf5Q==
-X-Gm-Message-State: AOJu0YyHWhsIRVDFQ4sMkgOuThQbhJo0Is1oYDDchCY07wH9xKEzr/zv
-	IFTsyJkt+W55TohIgMWf8k2sqd0PZ7vWJhsLzU6EYK5P1M8zDyzf1Ek4qOoDS6Lcz/vmoXI6o+c
-	uerRkEiA=
-X-Gm-Gg: ASbGncsafasfuyIYgG3yIo7WTLFMvBO1KCqgvsp+MVwNv/W5SdnoJ8PASYbmI1aAPcG
-	L8NLIQd4x75b5QrlJrOyl7VnW8ldjvWj1S94Fc26rIfjqjlA4BYPbveEjSRdsUW6+ypDxxiaVdU
-	SydBhassZi/LgPJsfb9uSmiVlnglnN6PVMosFL+cP4awQDdim5QDnfxkMrzCoKkCmap+Zr5kjij
-	r79X1o3rS8bUZk/UGB3GoYgOk//+cQqi1K0iaJfqaix6sUPIQ/wLBybsh7OBRdW3ho/sAObHObT
-	lrcyWb0owhAWb30siw4tBYpxKwpGUObTmE3ya2pGR/CjUvBljt3IHKeQIK6uRPm/uG+kyWaYXF+
-	QIAvCKi4lzjmXhAn0DzjW//+A/2PzEq5MjBZa9w5A/+yoBhNYfCKvFpwnCcM=
-X-Google-Smtp-Source: AGHT+IHPI8Y+zo3U0G/pTxyPF/K4ud6BvjuKVehL74yrV+NJ0ACWGdgCrC+glLDV/dSRStgzQKusvw==
-X-Received: by 2002:a05:600c:19c6:b0:43c:f87c:24ce with SMTP id 5b1f17b1804b1-451f0b0d5cdmr10262975e9.21.1749023108767;
-        Wed, 04 Jun 2025 00:45:08 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.home (2a01cb001331aa0017b58d8bf04048c3.ipv6.abo.wanadoo.fr. [2a01:cb00:1331:aa00:17b5:8d8b:f040:48c3])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a4efe73f22sm20494145f8f.43.2025.06.04.00.45.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Jun 2025 00:45:08 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>,
-	Guillaume Swaenepoel <guillaume.swaenepoel@smile.fr>
-Subject: [RFC PATCH] reproducibility: move known non-repro list to the new common file
-Date: Wed,  4 Jun 2025 09:44:58 +0200
-Message-Id: <20250604074458.2460753-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.5
+ dkim=pass header.i=@bootlin.com header.s=gm1 header.b=oLcvO/Uk;
+ spf=pass (domain: bootlin.com, ip: 217.70.183.198, mailfrom: antonin.godard@bootlin.com)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id C67714327B;
+	Wed,  4 Jun 2025 08:54:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1749027277;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=AYB+WSBFULORvGVL5GAcVsj8bJFScEcVfv49G4gMNyg=;
+	b=oLcvO/Uk51LCVYYvyL+ptxq23ST92ktAWlsVP/6DYqjior+ul4G4rl/6EKcwCAzidRIEVX
+	Cu51uXnAkR+Uub8W9bblDG+sQ+mWUqomAZ4f08tiVvvMmjM6e7Njp3jWbRIMGJb67Qt1OO
+	TZzZUP3iCKJrUo9VuMt/RI55so7PYDHfGvldoXU039KNZ78ZhumIytfILjcf6TVwJQ49pO
+	Pri5q8jyCIeaspR5T+xVLfVie8ziuDRKBfTPVbXz3tqJFiKUYEmMeWTMYtTsd1IPhy8Q+9
+	s9vfZA9ECLPwRrCkleynMjb3OMDSTyMSJJGEQAq3yA5KR9nBZulJnmact6husg==
+From: Antonin Godard <antonin.godard@bootlin.com>
+Date: Wed, 04 Jun 2025 10:54:30 +0200
+Subject: [meta-oe PATCH v4] cryptopp: add a recipe for version 8.9.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250604-add-cryptopp-v4-1-9e9400a9e877@bootlin.com>
+X-B4-Tracking: v=1; b=H4sIAMUJQGgC/3XN3wqCMBTH8VeJXbfwnM3puuo9oov9MwflZMpIx
+ HdvCkEYXf4OfL5nJoOL3g3kfJhJdMkPPnR58OOBmFZ1d0e9zZtggRwAgSprqYlTP4a+p01VV5J
+ rJwUzJJM+usa/ttz1lnfrhzHEaasnWK9/QgkoUCZYjUoUxhl90SGMD9+dTHiSNZXwm+OOY+Yge
+ SkKgU0l4ZezDy+LEusdZ5kLZbk0VnPQu+/LsrwBoJYIrSgBAAA=
+X-Change-ID: 20241121-add-cryptopp-f78794be963c
+To: openembedded-devel@lists.openembedded.org
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Martin Jansa <martin.jansa@gmail.com>, 
+ Antonin Godard <antonin.godard@bootlin.com>
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6618;
+ i=antonin.godard@bootlin.com; h=from:subject:message-id;
+ bh=7W8q3iudfLP5aqi0FMsGwEcjNf3s8iL7hsyFSv0ftMM=;
+ b=owEBbQKS/ZANAwAIAdGAQUApo6g2AcsmYgBoQAnMqTZkwe1eYSJkDyxZhZSDEl+av2aR9i2+t
+ 22KbixdluGJAjMEAAEIAB0WIQSGSHJRiN1AG7mg0//RgEFAKaOoNgUCaEAJzAAKCRDRgEFAKaOo
+ NmJfEACc/yrRcliPTGLAPzR4Xtxb+R5DVMClpqgL+SdR1Muf4MyhMBYOtHpMMgtJVYSCVUXlYLI
+ 7UxHQ4PkHXCpSvLnVWDwUmCk/qXZQFnHDMoR3plicRI/e4fki15MJms3rqFYtI5miJnCXWwO3vA
+ zn4E4IJdsuAfSVMycZB+5j33Izmh5ydpOqLK2r3emFMYnNhGj69ljsPuIwpyJN/G2vM4zRtYKpm
+ +pprKgcnI6cTccQl/upLicZa/ZJaGQqo9TCGYwi0iVjesfgSmPP4Fb9HDOhVjpP7l6Epu+DIDUu
+ cogV+eA+a0ZOY5IGotlSxFGLjhplISR30q+uvvwhc/l6kIhgdESJFj78vmMef93npgvKqzGLWB8
+ hW/+F+xq2FAi6JgiWReW7Ie1Geeal+qscim9xIFUYRZgvnvZ9tNEXVI3mgRteZ7jxaW1kg+3d4v
+ 5L20p4R/c1z5eKhmu4KmHHL33HGTSFSaVSyQlcryoDnbEnNpkVyo1mSZ5qKzv5+19HIyaHOjG/o
+ PYs88i3oJ02Rjo9xRpJUs5QvDJafVtL3jBdT8oZbAxnOBMM4xNUy+PpnyTScF6go4d0Gklu71LH
+ sjtBsPPyvRUCdYRm3mFh6FmD3yyjioVwFl3hVecDDqyB3zA5qfE5xdj9T0JIs5vk/7FaFoDiDS8
+ k+HZCuM+gbZ08sw==
+X-Developer-Key: i=antonin.godard@bootlin.com; a=openpgp;
+ fpr=8648725188DD401BB9A0D3FFD180414029A3A836
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddugddukeeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhfffugggtgffkvfevofesthejredtredtjeenucfhrhhomheptehnthhonhhinhcuifhouggrrhguuceorghnthhonhhinhdrghhouggrrhgusegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeffgffgffdukeefteeutdeuheekvdejtdfgkeevtefgffeukeeftdejueejfeevteenucffohhmrghinhepkhgvrhhnvghlrdhorhhgpdhgihhthhhusgdrtghomhdptghrhihpthhophhprdgtohhmnecukfhppedvuddvrddutdehrdduhedtrddvhedvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepvdduvddruddthedrudehtddrvdehvddphhgvlhhopegluddvjedrtddruddrudgnpdhmrghilhhfrhhomheprghnthhonhhinhdrghhouggrrhgusegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeegpdhrtghpthhtohepthhhohhmrghsrdhpvghtrgiiiihonhhisegsohhothhlihhnrdgtohhmpdhrtghpthhtohepmhgrrhhtihhnrdhjrghnshgrsehgmhgrihhlrdgtohhmpdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvn
+ hgvmhgsvgguuggvugdrohhrghdprhgtphhtthhopegrnhhtohhnihhnrdhgohgurghrugessghoohhtlhhinhdrtghomh
+X-GND-Sasl: antonin.godard@bootlin.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Jun 2025 07:53:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117732
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Jun 2025 08:54:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117733
 
-From: Guillaume Swaenepoel <guillaume.swaenepoel@smile.fr>
+Cryptopp is a library of cryptographic schemes written in C++.
 
-Since commit [<insert here merged OE-Core commit>], the reproducible
-test uses the known_non_repro.inc file to get the known non-reproducible
-package list from each layers.
-
-This patch moves the ad-hoc file to this new common interface.
-
-Co-Developed-by: Yoann Congal <yoann.congal@smile.fr>
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-Signed-off-by: Guillaume Swaenepoel <guillaume.swaenepoel@smile.fr>
+Signed-off-by: Antonin Godard <antonin.godard@bootlin.com>
 ---
-RFC: This is the application/example of
-[PATCH] reproducible: allow each layer to define its known non-repro packages
-https://lists.openembedded.org/g/openembedded-core/message/217827
+Note: I had no issue building with MACHINE to "qemux86-64" and TCLIBC =
+"musl", as reported here:
+https://lore.kernel.org/r/CAMKF1sreBnjjX0GW-G9+15Y+EgFQUmKUPX_cqYE7J3WaZ9=94g@mail.gmail.com
+Any extra steps to reproduce the issue would be appreciated.
 ---
- .../{non-repro-meta-filesystems.inc => known_non_repro.inc}     | 2 +-
- .../include/{non-repro-meta-gnome.inc => known_non_repro.inc}   | 2 +-
- .../{non-repro-meta-initramfs.inc => known_non_repro.inc}       | 2 +-
- .../{non-repro-meta-multimedia.inc => known_non_repro.inc}      | 2 +-
- .../{non-repro-meta-networking.inc => known_non_repro.inc}      | 2 +-
- .../conf/include/{non-repro-meta-oe.inc => known_non_repro.inc} | 2 +-
- .../include/{non-repro-meta-perl.inc => known_non_repro.inc}    | 2 +-
- .../include/{non-repro-meta-python.inc => known_non_repro.inc}  | 2 +-
- .../{non-repro-meta-webserver.inc => known_non_repro.inc}       | 2 +-
- .../include/{non-repro-meta-xfce.inc => known_non_repro.inc}    | 2 +-
- 10 files changed, 10 insertions(+), 10 deletions(-)
- rename meta-filesystems/conf/include/{non-repro-meta-filesystems.inc => known_non_repro.inc} (78%)
- rename meta-gnome/conf/include/{non-repro-meta-gnome.inc => known_non_repro.inc} (86%)
- rename meta-initramfs/conf/include/{non-repro-meta-initramfs.inc => known_non_repro.inc} (73%)
- rename meta-multimedia/conf/include/{non-repro-meta-multimedia.inc => known_non_repro.inc} (89%)
- rename meta-networking/conf/include/{non-repro-meta-networking.inc => known_non_repro.inc} (95%)
- rename meta-oe/conf/include/{non-repro-meta-oe.inc => known_non_repro.inc} (98%)
- rename meta-perl/conf/include/{non-repro-meta-perl.inc => known_non_repro.inc} (86%)
- rename meta-python/conf/include/{non-repro-meta-python.inc => known_non_repro.inc} (95%)
- rename meta-webserver/conf/include/{non-repro-meta-webserver.inc => known_non_repro.inc} (80%)
- rename meta-xfce/conf/include/{non-repro-meta-xfce.inc => known_non_repro.inc} (80%)
+Changes in v4:
+- Make the recipe inherit dos2unix as it was preventing the patch from
+  applied after going through the mailing list. Remove the CRLF from the
+  patch file accordingly.
+- Link to v3: https://lore.kernel.org/r/20250528-add-cryptopp-v3-1-6ad49cdb41bb@bootlin.com
 
-diff --git a/meta-filesystems/conf/include/non-repro-meta-filesystems.inc b/meta-filesystems/conf/include/known_non_repro.inc
-similarity index 78%
-rename from meta-filesystems/conf/include/non-repro-meta-filesystems.inc
-rename to meta-filesystems/conf/include/known_non_repro.inc
-index 509907d889..bf0d08fdc0 100644
---- a/meta-filesystems/conf/include/non-repro-meta-filesystems.inc
-+++ b/meta-filesystems/conf/include/known_non_repro.inc
-@@ -1,6 +1,6 @@
- # List of known non-reproducible package of the meta-filesystems layer
- # Please keep this list sorted
--KNOWN_NON_REPRO_META_FILESYSTEMS = " \
-+KNOWN_NON_REPRO_PACKAGES_LIST += " \
-     e2tools-ptest \
-     xfsprogs-doc \
- "
-diff --git a/meta-gnome/conf/include/non-repro-meta-gnome.inc b/meta-gnome/conf/include/known_non_repro.inc
-similarity index 86%
-rename from meta-gnome/conf/include/non-repro-meta-gnome.inc
-rename to meta-gnome/conf/include/known_non_repro.inc
-index 553bc32cc6..46701a8905 100755
---- a/meta-gnome/conf/include/non-repro-meta-gnome.inc
-+++ b/meta-gnome/conf/include/known_non_repro.inc
-@@ -1,6 +1,6 @@
- # List of known non-reproducible package of the meta-gnome layer
- # Please keep this list sorted
--KNOWN_NON_REPRO_META_GNOME = " \
-+KNOWN_NON_REPRO_PACKAGES_LIST += " \
-     geary \
-     geary-dbg \
-     gegl-dev \
-diff --git a/meta-initramfs/conf/include/non-repro-meta-initramfs.inc b/meta-initramfs/conf/include/known_non_repro.inc
-similarity index 73%
-rename from meta-initramfs/conf/include/non-repro-meta-initramfs.inc
-rename to meta-initramfs/conf/include/known_non_repro.inc
-index c05f59d1a2..6395d20fc1 100755
---- a/meta-initramfs/conf/include/non-repro-meta-initramfs.inc
-+++ b/meta-initramfs/conf/include/known_non_repro.inc
-@@ -1,3 +1,3 @@
- # List of known non-reproducible package of the meta-initramfs layer
- # Please keep this list sorted
--KNOWN_NON_REPRO_META_INITRAMFS = ""
-+KNOWN_NON_REPRO_PACKAGES_LIST += ""
-diff --git a/meta-multimedia/conf/include/non-repro-meta-multimedia.inc b/meta-multimedia/conf/include/known_non_repro.inc
-similarity index 89%
-rename from meta-multimedia/conf/include/non-repro-meta-multimedia.inc
-rename to meta-multimedia/conf/include/known_non_repro.inc
-index b02de42eb9..524c3c80dd 100755
---- a/meta-multimedia/conf/include/non-repro-meta-multimedia.inc
-+++ b/meta-multimedia/conf/include/known_non_repro.inc
-@@ -1,6 +1,6 @@
- # List of known non-reproducible package of the meta-multimedia layer
- # Please keep this list sorted
--KNOWN_NON_REPRO_META_MULTIMEDIA = " \
-+KNOWN_NON_REPRO_PACKAGES_LIST += " \
-     crossguid \
-     libcamera \
-     libcamera-dbg \
-diff --git a/meta-networking/conf/include/non-repro-meta-networking.inc b/meta-networking/conf/include/known_non_repro.inc
-similarity index 95%
-rename from meta-networking/conf/include/non-repro-meta-networking.inc
-rename to meta-networking/conf/include/known_non_repro.inc
-index 16240df059..68d293ff7f 100755
---- a/meta-networking/conf/include/non-repro-meta-networking.inc
-+++ b/meta-networking/conf/include/known_non_repro.inc
-@@ -1,6 +1,6 @@
- # List of known non-reproducible package of the meta-networking layer
- # Please keep this list sorted
--KNOWN_NON_REPRO_META_NETWORKING = " \
-+KNOWN_NON_REPRO_PACKAGES_LIST += " \
-     babeld \
-     babeld-dbg \
-     dhcp-relay-staticdev \
-diff --git a/meta-oe/conf/include/non-repro-meta-oe.inc b/meta-oe/conf/include/known_non_repro.inc
-similarity index 98%
-rename from meta-oe/conf/include/non-repro-meta-oe.inc
-rename to meta-oe/conf/include/known_non_repro.inc
-index ae4fb1d194..e621259466 100755
---- a/meta-oe/conf/include/non-repro-meta-oe.inc
-+++ b/meta-oe/conf/include/known_non_repro.inc
-@@ -1,6 +1,6 @@
- # List of known non-reproducible package of the meta-oe layer
- # Please keep this list sorted
--KNOWN_NON_REPRO_META_OE = " \
-+KNOWN_NON_REPRO_PACKAGES_LIST += " \
-     apitrace \
-     apitrace-dbg \
-     asio-dbg \
-diff --git a/meta-perl/conf/include/non-repro-meta-perl.inc b/meta-perl/conf/include/known_non_repro.inc
-similarity index 86%
-rename from meta-perl/conf/include/non-repro-meta-perl.inc
-rename to meta-perl/conf/include/known_non_repro.inc
-index 9082691f67..81da990ba8 100755
---- a/meta-perl/conf/include/non-repro-meta-perl.inc
-+++ b/meta-perl/conf/include/known_non_repro.inc
-@@ -1,6 +1,6 @@
- # List of known non-reproducible package of the meta-perl layer
- # Please keep this list sorted
--KNOWN_NON_REPRO_META_PERL = " \
-+KNOWN_NON_REPRO_PACKAGES_LIST += " \
-     libencode-perl-src \
-     libhtml-tree-perl \
-     libhtml-tree-perl-doc \
-diff --git a/meta-python/conf/include/non-repro-meta-python.inc b/meta-python/conf/include/known_non_repro.inc
-similarity index 95%
-rename from meta-python/conf/include/non-repro-meta-python.inc
-rename to meta-python/conf/include/known_non_repro.inc
-index 03d3fefba5..71cc6efd43 100755
---- a/meta-python/conf/include/non-repro-meta-python.inc
-+++ b/meta-python/conf/include/known_non_repro.inc
-@@ -1,6 +1,6 @@
- # List of known non-reproducible package of the meta-python layer
- # Please keep this list sorted
--KNOWN_NON_REPRO_META_PYTHON = " \
-+KNOWN_NON_REPRO_PACKAGES_LIST += " \
-     python3-evdev \
-     python3-evdev-dbg \
-     python3-evdev-src \
-diff --git a/meta-webserver/conf/include/non-repro-meta-webserver.inc b/meta-webserver/conf/include/known_non_repro.inc
-similarity index 80%
-rename from meta-webserver/conf/include/non-repro-meta-webserver.inc
-rename to meta-webserver/conf/include/known_non_repro.inc
-index ee998ea961..f7461e83d1 100755
---- a/meta-webserver/conf/include/non-repro-meta-webserver.inc
-+++ b/meta-webserver/conf/include/known_non_repro.inc
-@@ -1,6 +1,6 @@
- # List of known non-reproducible package of the meta-webserver layer
- # Please keep this list sorted
--KNOWN_NON_REPRO_META_WEBSERVER = " \
-+KNOWN_NON_REPRO_PACKAGES_LIST += " \
-     netdata \
-     netdata-dbg \
-     php-phar \
-diff --git a/meta-xfce/conf/include/non-repro-meta-xfce.inc b/meta-xfce/conf/include/known_non_repro.inc
-similarity index 80%
-rename from meta-xfce/conf/include/non-repro-meta-xfce.inc
-rename to meta-xfce/conf/include/known_non_repro.inc
-index aad6b0c24d..b227b29cd5 100755
---- a/meta-xfce/conf/include/non-repro-meta-xfce.inc
-+++ b/meta-xfce/conf/include/known_non_repro.inc
-@@ -1,6 +1,6 @@
- # List of known non-reproducible package of the meta-xfce layer
- # Please keep this list sorted
--KNOWN_NON_REPRO_META_XFCE = " \
-+KNOWN_NON_REPRO_PACKAGES_LIST += " \
-     catfish \
-     libsamba-util0 \
-     samba-dbg \
+Changes in v3:
+- Add 0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch to fix the
+  arm64 build issue.
+- Revert UNPACKDIR -> WORKDIR.
+- Use += not append.
+- Link to v2: https://lore.kernel.org/r/20241122-add-cryptopp-v2-1-19456062f791@bootlin.com
+
+Changes in v2:
+- WORKDIR -> UNPACKDIR in S
+- remove bb.utils.contains in CXXFLAGS:append:aarch64 (forgot to remove
+  after adding aarch64 override)
+- Link to v1: https://lore.kernel.org/r/20241121-add-cryptopp-v1-1-36382a60cecb@bootlin.com
+---
+ ...ix-arm-crypto-logic-issue-in-config_asm.h.patch | 57 ++++++++++++++++++++++
+ meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb  | 45 +++++++++++++++++
+ 2 files changed, 102 insertions(+)
+
+diff --git a/meta-oe/recipes-crypto/cryptopp/cryptopp-8.9.0/0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch b/meta-oe/recipes-crypto/cryptopp/cryptopp-8.9.0/0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch
+new file mode 100644
+index 0000000000..ec040bc1cd
+--- /dev/null
++++ b/meta-oe/recipes-crypto/cryptopp/cryptopp-8.9.0/0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch
+@@ -0,0 +1,57 @@
++From 9cbe7e5165e8bfa1bbb632682e049e2f92f79717 Mon Sep 17 00:00:00 2001
++From: Antonin Godard <antonin.godard@bootlin.com>
++Date: Fri, 30 May 2025 13:33:39 +0200
++Subject: [PATCH] Fix arm crypto logic issue in config_asm.h
++
++The current logic for enabling or disabling the CRYPTOPP_ARM_*_AVAILABLE
++macros seems wrong, because we do an OR between all of the conditions
++following `defined(__ARM_FEATURE_CRYPTO)`. Fix the logic so that the
++CRYPTOPP_ARM_*_AVAILABLE macros are set if __ARM_FEATURE_CRYPTO is set
++_AND_ any of the following condition is true.
++
++Upstream-Status: Submitted [https://github.com/weidai11/cryptopp/pull/1324]
++Signed-off-by: Antonin Godard <antonin.godard@bootlin.com>
++---
++ config_asm.h | 12 ++++++------
++ 1 file changed, 6 insertions(+), 6 deletions(-)
++
++diff --git a/config_asm.h b/config_asm.h
++index 71ffb9f8..d388124f 100644
++--- a/config_asm.h
+++++ b/config_asm.h
++@@ -278,9 +278,9 @@
++ // Requires GCC 4.8, Clang 3.3 or Visual Studio 2017
++ #if !defined(CRYPTOPP_ARM_AES_AVAILABLE) && !defined(CRYPTOPP_DISABLE_ARM_AES)
++ # if defined(__aarch32__) || defined(__aarch64__) || defined(_M_ARM64)
++-#  if defined(__ARM_FEATURE_CRYPTO) || (CRYPTOPP_GCC_VERSION >= 40800) || \
+++#  if defined(__ARM_FEATURE_CRYPTO) && ((CRYPTOPP_GCC_VERSION >= 40800) || \
++       (CRYPTOPP_LLVM_CLANG_VERSION >= 30300) || (CRYPTOPP_APPLE_CLANG_VERSION >= 40300) || \
++-      (CRYPTOPP_MSC_VERSION >= 1916)
+++      (CRYPTOPP_MSC_VERSION >= 1916))
++ #   define CRYPTOPP_ARM_AES_AVAILABLE 1
++ #  endif  // Compilers
++ # endif  // Platforms
++@@ -290,9 +290,9 @@
++ // Requires GCC 4.8, Clang 3.3 or Visual Studio 2017
++ #if !defined(CRYPTOPP_ARM_PMULL_AVAILABLE) && !defined(CRYPTOPP_DISABLE_ARM_PMULL)
++ # if defined(__aarch32__) || defined(__aarch64__) || defined(_M_ARM64)
++-#  if defined(__ARM_FEATURE_CRYPTO) || (CRYPTOPP_GCC_VERSION >= 40800) || \
+++#  if defined(__ARM_FEATURE_CRYPTO) && ((CRYPTOPP_GCC_VERSION >= 40800) || \
++       (CRYPTOPP_LLVM_CLANG_VERSION >= 30300) || (CRYPTOPP_APPLE_CLANG_VERSION >= 40300) || \
++-      (CRYPTOPP_MSC_VERSION >= 1916)
+++      (CRYPTOPP_MSC_VERSION >= 1916))
++ #   define CRYPTOPP_ARM_PMULL_AVAILABLE 1
++ #  endif  // Compilers
++ # endif  // Platforms
++@@ -302,9 +302,9 @@
++ // Requires GCC 4.8, Clang 3.3 or Visual Studio 2017
++ #if !defined(CRYPTOPP_ARM_SHA_AVAILABLE) && !defined(CRYPTOPP_DISABLE_ARM_SHA)
++ # if defined(__aarch32__) || defined(__aarch64__) || defined(_M_ARM64)
++-#  if defined(__ARM_FEATURE_CRYPTO) || (CRYPTOPP_GCC_VERSION >= 40800) || \
+++#  if defined(__ARM_FEATURE_CRYPTO) && ((CRYPTOPP_GCC_VERSION >= 40800) || \
++       (CRYPTOPP_LLVM_CLANG_VERSION >= 30300) || (CRYPTOPP_APPLE_CLANG_VERSION >= 40300) || \
++-      (CRYPTOPP_MSC_VERSION >= 1916)
+++      (CRYPTOPP_MSC_VERSION >= 1916))
++ #   define CRYPTOPP_ARM_SHA1_AVAILABLE 1
++ #   define CRYPTOPP_ARM_SHA2_AVAILABLE 1
++ #  endif  // Compilers
+diff --git a/meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb b/meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb
+new file mode 100644
+index 0000000000..4e34c60888
+--- /dev/null
++++ b/meta-oe/recipes-crypto/cryptopp/cryptopp_8.9.0.bb
+@@ -0,0 +1,45 @@
++SUMMARY = "A C++ class library of cryptographic schemes"
++DESCRIPTION = "Crypto++ Library is a C++ class library of cryptographic schemes"
++CVE_PRODUCT = "cryptopp"
++HOMEPAGE = "http://www.cryptopp.com/"
++SECTION = "libs"
++LICENSE = "BSL-1.0"
++LIC_FILES_CHKSUM = "file://License.txt;md5=51c7d279a47eba5246eb5a5123bc1b77"
++
++SRC_URI = "git://github.com/weidai11/cryptopp.git;protocol=https;branch=master \
++           file://0001-Fix-arm-crypto-logic-issue-in-config_asm.h.patch \
++           "
++SRCREV = "843d74c7c97f9e19a615b8ff3c0ca06599ca501b"
++
++S = "${WORKDIR}/git"
++
++inherit pkgconfig dos2unix
++
++CXXFLAGS += "-fPIC"
++EXTRA_OEMAKE += "HAS_SOLIB_VERSION=1"
++
++do_compile() {
++    oe_runmake -f GNUmakefile-cross libcryptopp.a libcryptopp.so cryptest.exe
++}
++
++do_install() {
++    DESTDIR="${D}" \
++        BINDIR="${bindir}" \
++        DATADIR="${datadir}" \
++        INCLUDEDIR="${includedir}" \
++        LIBDIR="${libdir}" \
++        oe_runmake install
++
++    # Rename cryptest.exe to cryptest
++    if [ -f "${D}${bindir}/cryptest.exe" ]; then
++        mv "${D}${bindir}/cryptest.exe" "${D}${bindir}/cryptest"
++    fi
++}
++
++PACKAGE_BEFORE_PN += "${PN}-cryptest ${PN}-testdata ${PN}-testvectors"
++
++FILES:${PN}-cryptest = "${bindir}/cryptest"
++FILES:${PN}-testdata = "${datadir}/cryptopp/TestData"
++FILES:${PN}-testvectors = "${datadir}/cryptopp/TestVectors"
++
++BBCLASSEXTEND = "native nativesdk"
+
+---
+base-commit: 5df267759c953b9615290ea6b8d9051b83863bf9
+change-id: 20241121-add-cryptopp-f78794be963c
+
+Best regards,
+-- 
+Antonin Godard <antonin.godard@bootlin.com>
+
 
