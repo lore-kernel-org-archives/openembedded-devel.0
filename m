@@ -1,243 +1,93 @@
-Return-Path: <denis.osterland@diehl.com>
+Return-Path: <andrej.v@skyrain.eu>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 748EBC5B543
-	for <webhook@archiver.kernel.org>; Thu,  5 Jun 2025 08:20:08 +0000 (UTC)
-Received: from enterprise02.smtp.diehl.com (enterprise02.smtp.diehl.com [193.201.238.220])
- by mx.groups.io with SMTP id smtpd.web10.2289.1749111599282593161
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88368C5B559
+	for <webhook@archiver.kernel.org>; Thu,  5 Jun 2025 09:04:28 +0000 (UTC)
+Received: from h2.cmg1.smtp.forpsi.com (h2.cmg1.smtp.forpsi.com [81.2.195.163])
+ by mx.groups.io with SMTP id smtpd.web10.2893.1749114265047252009
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Jun 2025 01:20:00 -0700
+ Thu, 05 Jun 2025 02:04:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@diehl.com header.s=default header.b=wTdKSeDD;
- spf=pass (domain: diehl.com, ip: 193.201.238.220, mailfrom: prvs=2444d4bbc=denis.osterland@diehl.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=diehl.com; i=@diehl.com; q=dns/txt; s=default;
-  t=1749111599; x=1780647599;
-  h=from:to:subject:date:message-id:mime-version;
-  bh=IdOt9qDQxJbfO2i5/D7PcBIaGeFQCy3TCRY289TtKDo=;
-  b=wTdKSeDDb2RIE8DafIHAn9ZMHUNHK/gFsD9YXYI+CN7VfuhIBCgjtFXA
-   wDCcHn+5nFQ2gKeuVHLE8RN7TKwyXv6ZNRArLsqr4MgM9AjleQObv0lYw
-   0jf06aRFoUVj+W8fNkQ/ivVXMTGK9xL8AuPEaxpcutAp2JN2ZPPIPtcAu
-   zHO56jKM84RXTuUWpUbjL8xmRMk8s2wdRBNsjQw6huBOSX4KY0Q/izpZS
-   X3Ql97t6xI3l4oNXrnk/bFyH8DGPQokxbF7DoD/RXivYG7JduiYCULNJI
-   nLDO7Nmgumc5W1xPPiZ8ZBAVk6/EwGX5pQuFqr6oVenAfNxwwwt7uhwcl
-   g==;
-X-CSE-ConnectionGUID: R1DvH1saQG+MGQ9W5vmNWg==
-X-CSE-MsgGUID: zHkUQt4OSWqqNcst//waWw==
-X-ThreatScanner-Verdict: Negative
-IronPort-Data: A9a23:wycjbKklSO7vwwxrHRYk6V7o5gykIURdPkR7XQ2eYbSJt16W5kVWj
- iJDADrXfqbVPH29ZpktO86x6Alf7siEipMhHTLYn1l2SnNPpIzdWs/xwizYNHnJI5PNRhxp4
- ZRHNYCcfM5kQ3aHqB78O+W7oCctiq3RSuGsUbSVNnx9T1BqRSks1Eo7xuBk24cxjYHkCFjT5
- bsez+XWIEeh2jV9LmMT7eWbqxh047HpuTwet0Ajf/0jUHr2zhH5W7pBffrhR5eBfqFUAvKiF
- aGExbCwuHjG/gw2EdKqlPDwcgoDQ6SXZ1aH1SNdA/nn3kdPrGluj/sycasWMxcS1z+FwIp9x
- o0c78y8ET1qZickUModTwVAQWY5OqZd4PncPnmkqteSwEuAeHur2PRhCgYxNpZd8+98CmpD+
- aFddm4APlXf37znheOxE+MpiMh5fcDhY9gStHxrlSvkZcrKOqsvNZgmn/cDmm9Yu+hOAerGN
- Y1eYDtmKg/fYgZUIVYYDtQ1nKChh2O6LzQHpgvK9fpyuTbZkUktgLXmddOIJoPPTpxekh6Sq
- DuZ9D/1WixyCDDk8tbzz57WrrSJxUvGcIIOCKXqsblhmlnV3XMSEwYNVFS95/K5zUWyQ5cEJ
- kFJpyQi8e1vpRf7C4WkUhD98CSItFtHAYALGuY35lyGkPGM3m6l6hM/okh8hKYO74luLQEC1
- kOVh4GuQjd1tPuOVnOG7ayVojX0MihSJmMaICJVEgVdvNK/5Yxt1U6KEt1uG+vlg4f8XGmsy
- WrSpXc33O0Y0JY2v5lXhmsr9Q9A3LCSCFZd2zjqY46F0u9YTICubNXy5AeK4f8Zcd/HRFDQs
- HIKxMXH4b9QBs3dyCeEHLxdTbqk2a2IYWbW6bJN8zvN1BzwoSL5LdAIiN1aDB00WirRUWaxO
- Cc/gSsIutkLeiPsNfIrC26II5xC5bD6Etj4XezjYNNLY5xgHCeK5ygGiXS4hggBq2By1/hhU
- XunWZz0VytCV/w6lGPeq9o1itfH+AhvnAs/erirl3xL4ZLGDFaJRLEMNke5b+xRxMusvAXP/
- t9DANCBwhNZXfeWSnG/HVk7dA1iwdATXPgamuQPHgKxClMO9FIJUpc99Ygcl7lNxMy5oAtqE
- kaVASe0wHKn7ZHOxJ7jhnpLMNsDVr4nxZ430LBF0f9FFBHPbK72hJrzeafbcpEdrcB97advR
- sAqOOCvO6VwFyrC3QsSOMyVQIxKLHxHhCqCOjiubydnJdhrQBbRvNPlcwvrsiIJC0Jbt+Nn+
- /vwjEWCEdxaHF4K4MX+MZpDy3u9sH4cg6R1RFfFON1afknE/IlnKyi3hfgySy0JAUyamWbCj
- lzIXH/0o8Hfg4wIycWVopu7tp6PGPBiWQ1FFlbEuOPe2S7yuzDLLZV7eOGQcDbQUWn59Kmva
- aBZwu/xNNUDnU1WqMx7C7ttwKc06tfjqrMcyR5rdEgndHzyUvUweD/fjY8W7fclKqJlhDZak
- 3mnorFyUYhl8uu4eLLNDGLJtti+6Mw=
-IronPort-HdrOrdr: A9a23:is+SBKnIEOAKIndSYGR3fbE/OMvpDfIb3DAbv31ZSRFFG/Fwz/
- re+MjzpiWE7wr5OUtQ4uxoV5PhfZqxz/NICMwqTNKftWrdyRGVxeNZnOjfKlTbckWUnNK1l5
- 0QEZSWY+eeMbEOt6fHCX6DferIruPqzEniv5a5854kd3ASV0hP1XYANjqm
-X-Talos-CUID: =?us-ascii?q?9a23=3AYz0DcGnlpYvrytD0RnpLx0sWf7nXOUeE4GnwelS?=
- =?us-ascii?q?xMEkqbZKsGGDN5qZCrMU7zg=3D=3D?=
-X-Talos-MUID: =?us-ascii?q?9a23=3AEF8ytg8GzSPP1ythVyFA2quQf9VI4JmXFBwqqqo?=
- =?us-ascii?q?fou+PLjA3fCiUsyviFw=3D=3D?=
-X-IronPort-AV: E=Sophos;i="6.16,211,1744063200"; 
-   d="p7s'346?scan'346,208,346,223";a="117501265"
-From: Denis OSTERLAND-HEIM <denis.osterland@diehl.com>
-To: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] [meta-oe] libusbgx: fix example gadget start
-Date: Thu, 5 Jun 2025 10:19:57 +0200 (CEST)
-Message-ID: <a1c65c9cef2b4ef9bab4d128d8078ab4@diehl.com>
+ dkim=pass header.i=@skyrain.eu header.s=f2022 header.b=jvNnX+se;
+ spf=none, err=permanent DNS error (domain: skyrain.eu, ip: 81.2.195.163, mailfrom: andrej.v@skyrain.eu)
+Received: from lt-aval.kyiv.ciklum.net ([85.248.43.180])
+	by cmgsmtp with ESMTPSA
+	id N6VsuYeSJwQNXN6WMuuaNb; Thu, 05 Jun 2025 11:04:23 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=skyrain.eu; s=f2022;
+	t=1749114263; bh=s84F2tlI5uajW2wMcMHz9TplLIIVtmAdMNfe1R65PUg=;
+	h=From:To:Subject:Date:Message-Id:MIME-Version;
+	b=jvNnX+seDBWWYizgPPULDj8FNy6gkRiQwpift+QyDnlZhSsayzz2uTTzK+Toso3GZ
+	 fEMqoK/mM3nylD5rp+jjyMynchMRxopueyCATvl2oNQsvCkAsBtUUhlQqiHr/QAZyG
+	 xEtQlfxqiXBJFexieiAQK4FCwr6TwGRTbgBTRIz737HCv/VOCYV2KmVPnxAQGxZGw7
+	 j2wWW71IdyUXukDBt+lAs4Q6LtpxWeY3t2BaUeLmLMaH+wb14vjzO01wKEoNbC7yhe
+	 zQWhNt0S2w5Gqn/W8rZVHBKorinK8CneZ5FZ07CRhQMxdUT5kC5w6T9NUBRg7W2vQW
+	 95Kw1NIPE5wZQ==
+From: Andrej Valek <andrej.v@skyrain.eu>
+To: openembedded-devel@lists.openembedded.org
+Cc: Andrej Valek <andrej.v@skyrain.eu>
+Subject: [oe][meta-oe][PATCH] freerdp: move alsa to packageconfig
+Date: Thu,  5 Jun 2025 11:03:35 +0200
+Message-Id: <20250605090335.47577-1-andrej.v@skyrain.eu>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature"; micalg="sha-256"; boundary="----2CBE0FBB17F2C3D4A810B88F066FC365"
+Content-Transfer-Encoding: 8bit
+X-CMAE-Envelope: MS4xfIzWaz3CvfiIcYa9eFERconNIyGuW3w6/zgxt+bl6uFmzUSNBqyV/FnMlmGJDhb6LsSJHv7fD031rF6Xjc3h4GN/UdYTXDyq4nHplV4O7pTgSBchJDTT
+ pnuC0GjjI5nmKYO2IYengTTHPGY1bNBHVFzqUyqNJXMrcRhu1KCrYScwOBbCLdccrzR3AznpgrTNJYHpmQSJ6sc2vmMmMg/t5gs8ExOO3hGkIBOcWjt5XW0U
+ mHNli0pk/xJfNxWUs2xGEitUfflxtAw9Db3xYIIbEjM=
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Jun 2025 08:20:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117746
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Jun 2025 09:04:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117747
 
-This is an S/MIME signed message
+This will allow to disable alsa which pulls the audio stuff even if
+it could be disabled.
 
-------2CBE0FBB17F2C3D4A810B88F066FC365
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-
-From variables docu:
-> Setting it to "0" does not disable inhibition.
-> Only the empty string will disable inhibition.
-
-That means in case of examples enabled we need ""
-and if not "1" to disable update-rc.d.
-
-Signed-off-by: Denis OSTERLAND-HEIM <denis.osterland@diehl.com>
+Signed-off-by: Andrej Valek <andrej.v@skyrain.eu>
 ---
- meta-oe/recipes-support/libusbgx/libusbgx_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-index 41c2e8c2e4..8d49bf55ba 100644
---- a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-+++ b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-@@ -35,7 +35,7 @@ SYSTEMD_AUTO_ENABLE:${PN}-examples = "${@bb.utils.contains('PACKAGECONFIG', 'exa
- INITSCRIPT_PACKAGES = "${@bb.utils.contains('PACKAGECONFIG', 'examples', '${PN}-examples', '', d)}"
- INITSCRIPT_NAME = "usbgx"
- INITSCRIPT_PARAMS = "defaults"
--INHIBIT_UPDATERCD_BBCLASS = "${@bb.utils.contains('PACKAGECONFIG', 'examples', '1', '0', d)}"
-+INHIBIT_UPDATERCD_BBCLASS = "${@bb.utils.contains('PACKAGECONFIG', 'examples', '', '1', d)}"
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
+index 846ebbf28f..e200f59b05 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
+@@ -3,7 +3,7 @@
  
- do_install:append() {
-     install -Dm 0755 ${UNPACKDIR}/gadget-start ${D}${bindir}/gadget-start
+ DESCRIPTION = "FreeRDP RDP client & server library"
+ HOMEPAGE = "http://www.freerdp.com"
+-DEPENDS = "openssl alsa-lib libusb1"
++DEPENDS = "openssl libusb1"
+ SECTION = "net"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+@@ -26,7 +26,6 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https
+ S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE += " \
+-    -DWITH_ALSA=ON \
+     -DWITH_FFMPEG=OFF \
+     -DWITH_CUNIT=OFF \
+     -DWITH_NEON=OFF \
+@@ -38,7 +37,7 @@ EXTRA_OECMAKE += " \
+ 
+ PACKAGECONFIG ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'directfb pam pulseaudio wayland x11', d)}\
+-    gstreamer cups pcsc server \
++    alsa gstreamer cups pcsc server \
+ "
+ 
+ X11_DEPS = "virtual/libx11 libxinerama libxext libxcursor libxv libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
+@@ -51,6 +50,7 @@ PACKAGECONFIG[pulseaudio] = "-DWITH_PULSEAUDIO=ON,-DWITH_PULSEAUDIO=OFF,pulseaud
+ PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER_1_0=ON,-DWITH_GSTREAMER_1_0=OFF,gstreamer1.0 gstreamer1.0-plugins-base"
+ PACKAGECONFIG[cups] = "-DWITH_CUPS=ON,-DWITH_CUPS=OFF,cups"
+ PACKAGECONFIG[server] = "-DWITH_SERVER=ON,-DWITH_SERVER=OFF"
++PACKAGECONFIG[alsa] = "-DWITH_ALSA=ON,-DWITH_ALSA=OFF,alsa-lib"
+ 
+ PACKAGES =+ "libfreerdp"
+ 
 -- 
-2.47.2
-
-------2CBE0FBB17F2C3D4A810B88F066FC365
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-
-MIIXkgYJKoZIhvcNAQcCoIIXgzCCF38CAQExDzANBglghkgBZQMEAgEFADALBgkq
-hkiG9w0BBwGgghPaMIIGpTCCBI2gAwIBAgIUPseeE9qJ+oSdbny5LvEHTpzUCAIw
-DQYJKoZIhvcNAQELBQAwUzELMAkGA1UEBhMCQ0gxFTATBgNVBAoTDFN3aXNzU2ln
-biBBRzEtMCsGA1UEAxMkU3dpc3NTaWduIFJTQSBTTUlNRSBSb290IENBIDIwMjIg
-LSAxMB4XDTI0MDUyODA4NDExMFoXDTM2MDUyODA4NDExMFowUjELMAkGA1UEBhMC
-Q0gxFTATBgNVBAoTDFN3aXNzU2lnbiBBRzEsMCoGA1UEAwwjU3dpc3NTaWduIFJT
-QSBTTUlNRSBNViBJQ0EgMjAyNCAtIDEwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAw
-ggIKAoICAQC6Dz+IfbUsaCl0cWcbnNS1BIaKrdka8ev1Kc1G6OCYH4PMtkZmC6Zo
-nnh/Dl5bOuiH+pMq1fj4BSEkRYTuOGtsWelcf6UNA11KL//zh1enaaNayqqRaCSE
-JTZH+JFb0UJWwO+qGVb1RfHnPXYrI6n8w1chCxL9AibzvsDPR6I37iUwiNo4p6Uo
-aPNAmIncpDIGgTGodkOjjPPbGwYjg58eINT63rqMQASJxUnPPIa0gZRix0NY7A6U
-z8Iv98RbbQy7ZEDvHdLFeVmzl/5TXKbQExfnEpyOjjifWoJ+FeKkEj4O9Ohd/2fg
-HQ6Y+DYwLFbHZPTmDvHQoOSS//V2NBkdnGTsfIcziIH1hypFxR/hqexJ+Da7Z7uN
-jBh2ligdXNHDGMeq640X2WVx0sfSZljxbeknrr3KFfzqfealPps1UI68Q+1iBLl/
-Ep8aZeRmzwCK+ibAPQpKfbxsjd8cBe8FcXaOWU4DjP6YmYy0xMC4vHXr3ZgrHqL9
-8D56InfiYbrBMZp1UKDSzlz/rjXWRmrXnsY5gFU705KWrJu2guSYCrc4InG3Pj+E
-mPmE6Eosikk2wg90nYFxJDM/9dPJnyIw6IdkV6qdrv9h7VKrpLrl22qETWC4/Xfi
-JU7YsY6HFKnpAElKu8t6rUnU5GcwgWjcB+zBfQD1Kt59jlLob2PcDwIDAQABo4IB
-cDCCAWwwXAYIKwYBBQUHAQEEUDBOMEwGCCsGAQUFBzAChkBodHRwOi8vYWlhLnN3
-aXNzc2lnbi5jaC9haXItNGE3ZjE3ODgtMjZiNS00OGVjLWE1NDctYzFjZDBiZjE3
-YzNkMBIGA1UdEwEB/wQIMAYBAf8CAQAwQAYDVR0gBDkwNzAJBgdngQwBBQEBMAkG
-B2eBDAEFAQIwCQYHZ4EMAQUBAzAIBgYEAI96AQMwCgYIYIV0AVkCAQswUQYDVR0f
-BEowSDBGoESgQoZAaHR0cDovL2NybC5zd2lzc3NpZ24uY2gvY2RwLTNlZTU1ZmQ0
-LTU5MzgtNDFlZS04MmRiLTMyMjNhY2VmNWMyMzATBgNVHSUEDDAKBggrBgEFBQcD
-BDAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFL+0FkGip5/XTYUBCqFcvtvF0uWU
-MB8GA1UdIwQYMBaAFMwurYmMg+NAoyVppeqSfdI3OsfGMA0GCSqGSIb3DQEBCwUA
-A4ICAQBGpYYvkjNsVP7geKv1jY+KtUNmyx8vlCoOo8tZ5Cc76175ocrVs50lZit+
-nHWXe9Lqnuu1fMo+0jEpgC9dqy6cCxAEgNH5kwbFxXFPHOB/kxMdWubZ1xwcOP2l
-B4ns7Ps9RUGOIcpfuAp2KLYwavjO58g+6FVGhY3R6VAhmNRO6bHhz0wQRwKAZNo2
-GMwYMmxW63mI4bz1JYvCSeZtqZhyxTMDOwEUDdYkxrz3g5gQUoMnrrak1kGRdpFB
-Eefok8aK8ngfwwIgefNBF9BnzoRhlIVrm3//zboqShj4IXqMEUgScWNz2WTjqKaU
-uhLk+MyynNqrbp6EeFZ0BPgA7AfVWevRf4OOCxrH6S4FJtMKmuczZ0wqebTML7Ax
-VtkSqeT7/NBDTh8D8j+HVvHwMi4s+cunS3DMdXE9yzuixlcjfsD/2aS17quE23Qf
-nNESdDy5TUs5Wlm1ClYQ+L1cZGwSwAyqMs9RNg57+gtJu5Uhjn+FGVLndGQgzIor
-/+ynq6KEzN2rhGzLpPHpwUdDoX+YnNlrZpdx/IOgknaSGznJ/mQzA6PjffNS0Fx3
-pqd41QO0uX5HWDFEa/gG0Uo7faymzXFcFb9AKCrKR5Xrd0W+f2U2z/hvC843i9q2
-8CoJ7xRMt0wF8Sun9U278iaLgPNNyCNDJorz9NmIomvT45XK7jCCBe4wggPWoAMC
-AQICEACzBRGxFrSgVlEdfGgfh30wDQYJKoZIhvcNAQELBQAwRTELMAkGA1UEBhMC
-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
-bIRutw/gmkT7b9aP2Wmm3PtjnasrM+RdDlfGKqHkeCR2zkeRDDP2BE2LKc9CFGJB
-PysNjZSVlp5/fxb8atVwVk+TphIHuHjeP+3z/ykiDr64Yq2yjyNlXrWVg2yxju4M
-LdX8wfkCx/uAIlYLACinK+/RATAYz1f3Y+kJ81CQbfFpnFZBRhxjDfj65zxMrWsJ
-ydnoGsZUHt7zXFOQvw7JrFL/X5s7hBv/3uy107vBwcA8Hyw9m3DH/ChBMen6gyy+
-CkNXalP9AOZ66CoEgIE8PfsrzfBVjVxQq2+iQLNlJ8a1r6URPNd5h1YZILBy6yTK
-8tUs5MbM2CjbXAylEC1P02GFKhh/aN0gW5RTRk3vpA64KPQ/ckvUTmHVWONUE9cj
-iE1/MVDuc+tMfQus2HBQ0LH+EKaVZmsA1OEKujelRFleMEpBBWS0fQ+zT2Y4bfPZ
-RB5iQLGLf9hSacG+ib5cid44OL6s9kjzE5+Yy70LNcoHwIaQzqoc6t7sFNVDecMc
-tTbrs+raTu/cOMSc45aEDKXjhYw46cyuLwnY9DauweK3K89jUrCNqNqPwQke6QID
-AQABo4ICCzCCAgcwgbIGCCsGAQUFBwEBBIGlMIGiMEwGCCsGAQUFBzAChkBodHRw
-Oi8vYWlhLnN3aXNzc2lnbi5jaC9haXItMjZhNzFjMDktNDdlYi00NTVhLTliMjgt
-NGJkNzJkZjA5MjhkMFIGCCsGAQUFBzABhkZodHRwOi8vb2NzcC5zd2lzc3NpZ24u
-Y2gvc2lnbi9vY3MtYWFjY2NlZDUtNjZlOC00MDY5LTliMWItZmQyOWFiNzNlZmVj
-MHIGA1UdIARrMGkwCQYHZ4EMAQUBATAIBgYEAI96AQMwUgYIYIV0AVkCAQswRjBE
-BggrBgEFBQcCARY4aHR0cHM6Ly9yZXBvc2l0b3J5LnN3aXNzc2lnbi5jb20vU3dp
-c3NTaWduX0NQU19TTUlNRS5wZGYwUQYDVR0fBEowSDBGoESgQoZAaHR0cDovL2Ny
-bC5zd2lzc3NpZ24uY2gvY2RwLWU5N2YwN2M0LWU2MzQtNGNlYy04ZTJhLTA0YjIw
-YTdhMzBjNTATBgNVHSUEDDAKBggrBgEFBQcDBDAOBgNVHQ8BAf8EBAMCBaAwJAYD
-VR0RBB0wG4EZZGVuaXMub3N0ZXJsYW5kQGRpZWhsLmNvbTAdBgNVHQ4EFgQUcDNC
-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
-
-------2CBE0FBB17F2C3D4A810B88F066FC365--
+2.34.1
 
 
