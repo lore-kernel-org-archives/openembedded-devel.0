@@ -1,379 +1,199 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BA35C5B549
-	for <webhook@archiver.kernel.org>; Fri,  6 Jun 2025 06:20:37 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web11.27675.1749190831598991530
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A0B07C5AD49
+	for <webhook@archiver.kernel.org>; Fri,  6 Jun 2025 07:01:18 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.28140.1749193274842493199
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Jun 2025 23:20:31 -0700
+ Fri, 06 Jun 2025 00:01:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=iZ2cG08D;
- spf=pass (domain: mvista.com, ip: 209.85.210.180, mailfrom: vanusuri@mvista.com)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-7481600130eso1968234b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Jun 2025 23:20:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1749190830; x=1749795630; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CKvy5UZu95UB59JMvXllCA7bV6pm9lzq1S9m9IxDWok=;
-        b=iZ2cG08DxNthEJA5/JiDOsXOuGSLO9zlzyCgYrG0GbHvsEP0pFcgA2JGyoZc2hf+PG
-         uFHY18pXc7DLNfK1JyKH7K3FQFRyFFqr9GUCBfLpI6DkQC7FLBLSjX/xRWuM8gINlFp0
-         Mqra9GdOIHaFkoPu3M2p5ymzWhL3ejEerQjFs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749190830; x=1749795630;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=CKvy5UZu95UB59JMvXllCA7bV6pm9lzq1S9m9IxDWok=;
-        b=aCgSB+HJ/+8pbVKjriTqmGkDP8voARAE0ZC/+CnyY6NsZAwi5Y1ZUoBU6SoMYQJpNt
-         3gjciADsO31QNuBCZEriT9gX9ZGD0PkTz3P6wPHs4HFmvjzxjOzpaMhuDvbQEO9XPaRb
-         Y+igKbCUIXdkbkx+yLNujBzzkDLSrGVXJRkm6lW7epoK1dL9v9fhd/haRJXzc8X/88fu
-         01unKczU1DlubGA4/7peiB86fiie6jyitt13FHBD7G+nvbNB6UOcAMR3gW2Ae8V4xSfH
-         nbbX8YtdnranVgMVwJ1+M8mz21HnpujQrx+k/1yZJcYPYOG5LGbkY/G+3iSoNlYxpo7C
-         zAYQ==
-X-Gm-Message-State: AOJu0YwNHS3lVydINgfiZtmZxGyOzCUiRWs/BqwGTviS24+DFelee3Zc
-	7M7nv8nW+3xaru3h2WQ8P/pv7m1gmeLiaFvV6GPTY0zXgIiTIC4RNYbwTFR/RKUiHiKncb8TzAJ
-	ce6DAUog=
-X-Gm-Gg: ASbGncu/ZjI1glY454KHYzpNFY4KDVFlEe8fKtPR5w3wdiD1Ec/YoI7XA3+rsgC7Oc5
-	cmTFMLjsb17hoHvvOvhoiJKZc0EY3/5qzsX5CAnq2wc4jwnZ2Dqt+LUfB/fviLlowFzqQE/LcEa
-	rxCXVCxIGKvOLgLW3+qvTYZq50NXoh5Q6YRvFsqS9D11X0N9cRImFI1p6zxChKyz1SQ/yX5s0me
-	KwnW7oOPCwgjzAz0d1kEXqnhqHkTy1gaKN+fARo/7CMhHdSkREgohakWbiBkR1dqtC7kknaUsfb
-	UE/GAabrUsRAJ5YeReCdozk+Gji9/3jn6IyH5mJdGggXjDdSktgW+cz/WTen74KXgIb2l5E44g=
-	=
-X-Google-Smtp-Source: AGHT+IE/aNGxkbqA3W1t5lMHhOvSfRz0fEyU6aA6fRHoN90skrvl/PDQavdZ7TuijWhRotbVMc+gFg==
-X-Received: by 2002:a05:6a00:991:b0:736:31cf:2590 with SMTP id d2e1a72fcca58-74827f15a33mr3160936b3a.16.1749190830337;
-        Thu, 05 Jun 2025 23:20:30 -0700 (PDT)
-Received: from MVIN00020.mvista.com ([49.207.224.145])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7482af7b5fbsm622544b3a.63.2025.06.05.23.20.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Jun 2025 23:20:29 -0700 (PDT)
-From: vanusuri@mvista.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-networking][scarthgap][PATCH] proftpd: Fix CVE-2023-51713
-Date: Fri,  6 Jun 2025 11:50:20 +0530
-Message-Id: <20250606062020.6004-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=8252828ab7=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5564VQaY004165
+	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Jun 2025 00:01:14 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 471g9rw39d-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 06 Jun 2025 00:01:13 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Fri, 6 Jun 2025 00:01:11 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][walnascar][PATCH 1/1] postgresql: upgrade 17.4 -> 17.5
+Date: Fri, 6 Jun 2025 12:30:49 +0530
+Message-ID: <20250606070049.1602170-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjA2MDA2NCBTYWx0ZWRfX18OEWOPYFbb+ oDyc5vi0u5R8yJVkuTnPRZYkU2sPNZXSHd00IyqvD+09+tVcHxlYCa3aay+wXsIcKRaQaCo0P/2 m0nvZalY5doLLaTwHwXsvlugU1yvtvV6Z5xsM5AE2qjRhd/Zbq6NmaFWXkKGmAYArWsNKW0CXcQ
+ wkNC+CDiw3+iYTq0fBIU0C7fuA5SMA7Yi/YD65F/ahg+GKaVvD5Ke4E2JYuJI0wYZix4ySFvELF u9Zc4t8L/5Rl7mvRnFNzU0/vYDadknT5lcnraX6iyNyNqpRuq0ilE9+VSNF3W1JXziB+I8KkHcc xvoI9Yx2/kxl1ZM6Hv7wf9mnLD418u1Ct9Q2IXhcaNkkzmMnK61cP1TyqADTAc52tEWT8jOv1Zl
+ PyRmK2s8laNQsNwmX7TVcwagIrmjZ3PC6+gL5WTylsOuAKkgy6d4Cuiv8c6MUp4Uo72+gd2z
+X-Authority-Analysis: v=2.4 cv=PvyTbxM3 c=1 sm=1 tr=0 ts=6842923a cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=6IFa9wvqVegA:10 a=epTmVMiNAAAA:8 a=omOdbC7AAAAA:8 a=pGLkceISAAAA:8 a=t7CeM3EgAAAA:8
+ a=sQvdjrug7g35QjmkKfAA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: 9G5rJi0DAtWlIYlvr1oHdeZeMefgT9s5
+X-Proofpoint-ORIG-GUID: 9G5rJi0DAtWlIYlvr1oHdeZeMefgT9s5
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-06_01,2025-06-05_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 clxscore=1015
+ bulkscore=0 adultscore=0 mlxscore=0 mlxlogscore=999 impostorscore=0
+ lowpriorityscore=0 phishscore=0 suspectscore=0 spamscore=0
+ priorityscore=1501 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505280000
+ definitions=main-2506060064
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 Jun 2025 06:20:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117760
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 Jun 2025 07:01:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117761
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Upstream-Status: Backport from https://github.com/proftpd/proftpd/commit/97bbe68363ccf2de0c07f67170ec64a8b4d62592
+0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+0004-config_info.c-not-expose-build-info.patch
+not-check-libperl.patch
+refreshed for 17.5
 
-Link: https://git.openembedded.org/meta-openembedded/commit/?h=kirkstone&id=730e44900a0a86265bad93a16b5a5ff344a07266
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- .../proftpd/files/CVE-2023-51713.patch        | 278 ++++++++++++++++++
- .../recipes-daemons/proftpd/proftpd_1.3.7c.bb |   1 +
- 2 files changed, 279 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch
+ ...gure.ac-bypass-autoconf-2.69-version-check.patch |  9 +++------
+ .../0004-config_info.c-not-expose-build-info.patch  | 13 +++++--------
+ .../postgresql/files/not-check-libperl.patch        |  9 +++------
+ .../{postgresql_17.4.bb => postgresql_17.5.bb}      |  2 +-
+ 4 files changed, 12 insertions(+), 21 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_17.4.bb => postgresql_17.5.bb} (87%)
 
-diff --git a/meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch b/meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch
-new file mode 100644
-index 0000000000..377d8a74ec
---- /dev/null
-+++ b/meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch
-@@ -0,0 +1,278 @@
-+From 97bbe68363ccf2de0c07f67170ec64a8b4d62592 Mon Sep 17 00:00:00 2001
-+From: TJ Saunders <tj@castaglia.org>
-+Date: Sun, 6 Aug 2023 13:16:26 -0700
-+Subject: [PATCH] Issue #1683: Avoid an edge case when handling unexpectedly
-+ formatted input text from client, caused by quote/backslash semantics, by
-+ skipping those semantics.
-+
-+Upstream-Status: Backport [https://github.com/proftpd/proftpd/commit/97bbe68363ccf2de0c07f67170ec64a8b4d62592]
-+CVE: CVE-2023-51713
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ include/str.h   |  3 ++-
-+ src/main.c      | 34 +++++++++++++++++++++++++++++----
-+ src/str.c       | 22 +++++++++++++---------
-+ tests/api/str.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++++-
-+ 4 files changed, 94 insertions(+), 15 deletions(-)
-+
-+diff --git a/include/str.h b/include/str.h
-+index f08398017..1261ae2c2 100644
-+--- a/include/str.h
-++++ b/include/str.h
-+@@ -1,6 +1,6 @@
-+ /*
-+  * ProFTPD - FTP server daemon
-+- * Copyright (c) 2008-2020 The ProFTPD Project team
-++ * Copyright (c) 2008-2023 The ProFTPD Project team
-+  *
-+  * This program is free software; you can redistribute it and/or modify
-+  * it under the terms of the GNU General Public License as published by
-+@@ -131,6 +131,7 @@ const char *pr_gid2str(pool *, gid_t);
-+ #define PR_STR_FL_PRESERVE_COMMENTS		0x0001
-+ #define PR_STR_FL_PRESERVE_WHITESPACE		0x0002
-+ #define PR_STR_FL_IGNORE_CASE			0x0004
-++#define PR_STR_FL_IGNORE_QUOTES			0x0008
-+ 
-+ char *pr_str_get_token(char **, char *);
-+ char *pr_str_get_token2(char **, char *, size_t *);
-+diff --git a/src/main.c b/src/main.c
-+index ee9c1eecb..e6b70731d 100644
-+--- a/src/main.c
-++++ b/src/main.c
-+@@ -811,8 +811,24 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
-+     return NULL;
-+   }
-+ 
-++  /* By default, pr_str_get_word will handle quotes and backslashes for
-++   * escaping characters.  This can produce words which are shorter, use
-++   * fewer bytes than the corresponding input buffer.
-++   *
-++   * In this particular situation, we use the length of this initial word
-++   * for determining the length of the remaining buffer bytes, assumed to
-++   * contain the FTP command arguments.  If this initial word is thus
-++   * unexpectedly "shorter", due to nonconformant FTP text, it can lead
-++   * the subsequent buffer scan, looking for CRNUL sequencees, to access
-++   * unexpected memory addresses (Issue #1683).
-++   *
-++   * Thus for this particular situation, we tell the function to ignore/skip
-++   * such quote/backslash semantics, and treat them as any other character
-++   * using the IGNORE_QUOTES flag.
-++   */
-++
-+   ptr = buf;
-+-  wrd = pr_str_get_word(&ptr, str_flags);
-++  wrd = pr_str_get_word(&ptr, str_flags|PR_STR_FL_IGNORE_QUOTES);
-+   if (wrd == NULL) {
-+     /* Nothing there...bail out. */
-+     pr_trace_msg("ctrl", 5, "command '%s' is empty, ignoring", buf);
-+@@ -820,6 +836,11 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
-+     return NULL;
-+   }
-+ 
-++  /* Note that this first word is the FTP command.  This is why we make
-++   * use of the ptr buffer, which advances through the input buffer as
-++   * we read words from the buffer.
-++   */
-++
-+   subpool = make_sub_pool(p);
-+   pr_pool_tag(subpool, "make_ftp_cmd pool");
-+   cmd = pcalloc(subpool, sizeof(cmd_rec));
-+@@ -846,6 +867,7 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
-+   arg_len = buflen - strlen(wrd);
-+   arg = pcalloc(cmd->pool, arg_len + 1);
-+ 
-++  /* Remember that ptr here is advanced past the first word. */
-+   for (i = 0, j = 0; i < arg_len; i++) {
-+     pr_signals_handle();
-+     if (i > 1 &&
-+@@ -854,14 +876,13 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
-+ 
-+       /* Strip out the NUL by simply not copying it into the new buffer. */
-+       have_crnul = TRUE;
-++
-+     } else {
-+       arg[j++] = ptr[i];
-+     }
-+   }
-+ 
-+-  cmd->arg = arg;
-+-
-+-  if (have_crnul) {
-++  if (have_crnul == TRUE) {
-+     char *dup_arg;
-+ 
-+     /* Now make a copy of the stripped argument; this is what we need to
-+@@ -871,6 +892,11 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
-+     ptr = dup_arg;
-+   }
-+ 
-++  cmd->arg = arg;
-++
-++  /* Now we can read the remamining words, as command arguments, from the
-++   * input buffer.
-++   */
-+   while ((wrd = pr_str_get_word(&ptr, str_flags)) != NULL) {
-+     pr_signals_handle();
-+     *((char **) push_array(tarr)) = pstrdup(cmd->pool, wrd);
-+diff --git a/src/str.c b/src/str.c
-+index bcca4ae4d..a2ff74daf 100644
-+--- a/src/str.c
-++++ b/src/str.c
-+@@ -1,6 +1,6 @@
-+ /*
-+  * ProFTPD - FTP server daemon
-+- * Copyright (c) 2008-2017 The ProFTPD Project team
-++ * Copyright (c) 2008-2023 The ProFTPD Project team
-+  *
-+  * This program is free software; you can redistribute it and/or modify
-+  * it under the terms of the GNU General Public License as published by
-+@@ -1209,7 +1209,7 @@ int pr_str_get_nbytes(const char *str, const char *units, off_t *nbytes) {
-+ 
-+ char *pr_str_get_word(char **cp, int flags) {
-+   char *res, *dst;
-+-  char quote_mode = 0;
-++  int quote_mode = FALSE;
-+ 
-+   if (cp == NULL ||
-+      !*cp ||
-+@@ -1238,24 +1238,28 @@ char *pr_str_get_word(char **cp, int flags) {
-+     }
-+   }
-+ 
-+-  if (**cp == '\"') {
-+-    quote_mode++;
-+-    (*cp)++;
-++  if (!(flags & PR_STR_FL_IGNORE_QUOTES)) {
-++    if (**cp == '\"') {
-++      quote_mode = TRUE;
-++      (*cp)++;
-++    }
-+   }
-+ 
-+   while (**cp && (quote_mode ? (**cp != '\"') : !PR_ISSPACE(**cp))) {
-+     pr_signals_handle();
-+ 
-+-    if (**cp == '\\' && quote_mode) {
-+-
-++    if (**cp == '\\' &&
-++        quote_mode == TRUE) {
-+       /* Escaped char */
-+       if (*((*cp)+1)) {
-+-        *dst = *(++(*cp));
-++        *dst++ = *(++(*cp));
-++        (*cp)++;
-++        continue;
-+       }
-+     }
-+ 
-+     *dst++ = **cp;
-+-    ++(*cp);
-++    (*cp)++;
-+   }
-+ 
-+   if (**cp) {
-+diff --git a/tests/api/str.c b/tests/api/str.c
-+index 050f5c563..bc64f0fb0 100644
-+--- a/tests/api/str.c
-++++ b/tests/api/str.c
-+@@ -1,6 +1,6 @@
-+ /*
-+  * ProFTPD - FTP server testsuite
-+- * Copyright (c) 2008-2017 The ProFTPD Project team
-++ * Copyright (c) 2008-2023 The ProFTPD Project team
-+  *
-+  * This program is free software; you can redistribute it and/or modify
-+  * it under the terms of the GNU General Public License as published by
-+@@ -695,19 +695,23 @@ END_TEST
-+ START_TEST (get_word_test) {
-+   char *ok, *res, *str;
-+ 
-++  mark_point();
-+   res = pr_str_get_word(NULL, 0);
-+   fail_unless(res == NULL, "Failed to handle null arguments");
-+   fail_unless(errno == EINVAL, "Failed to set errno to EINVAL");
-+ 
-++  mark_point();
-+   str = NULL;
-+   res = pr_str_get_word(&str, 0);
-+   fail_unless(res == NULL, "Failed to handle null str argument");
-+   fail_unless(errno == EINVAL, "Failed to set errno to EINVAL");
-+ 
-++  mark_point();
-+   str = pstrdup(p, "  ");
-+   res = pr_str_get_word(&str, 0);
-+   fail_unless(res == NULL, "Failed to handle whitespace argument");
-+ 
-++  mark_point();
-+   str = pstrdup(p, " foo");
-+   res = pr_str_get_word(&str, PR_STR_FL_PRESERVE_WHITESPACE);
-+   fail_unless(res != NULL, "Failed to handle whitespace argument: %s",
-+@@ -723,6 +727,7 @@ START_TEST (get_word_test) {
-+   ok = "foo";
-+   fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
-+ 
-++  mark_point();
-+   str = pstrdup(p, "  # foo");
-+   res = pr_str_get_word(&str, 0);
-+   fail_unless(res == NULL, "Failed to handle commented argument");
-+@@ -742,6 +747,8 @@ START_TEST (get_word_test) {
-+   fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
-+ 
-+   /* Test multiple embedded quotes. */
-++
-++  mark_point();
-+   str = pstrdup(p, "foo \"bar baz\" qux \"quz norf\"");
-+   res = pr_str_get_word(&str, 0);
-+   fail_unless(res != NULL, "Failed to handle quoted argument: %s",
-+@@ -770,6 +777,47 @@ START_TEST (get_word_test) {
-+ 
-+   ok = "quz norf";
-+   fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
-++
-++
-++  /* Test embedded quotes with backslashes (Issue #1683). */
-++  mark_point();
-++
-++  str = pstrdup(p, "\"\\\\SYST\"");
-++  res = pr_str_get_word(&str, 0);
-++  fail_unless(res != NULL, "Failed to handle quoted argument: %s",
-++    strerror(errno));
-++
-++  ok = "\\SYST";
-++  fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
-++
-++  mark_point();
-++  str = pstrdup(p, "\"\"\\\\SYST");
-++  res = pr_str_get_word(&str, 0);
-++  fail_unless(res != NULL, "Failed to handle quoted argument: %s",
-++    strerror(errno));
-++
-++  /* Note that pr_str_get_word() is intended to be called multiple times
-++   * on an advancing buffer, effectively tokenizing the buffer.  This is
-++   * why the function does NOT decrement its quote mode.
-++   */
-++  ok = "";
-++  fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
-++
-++  /* Now do the same tests with the IGNORE_QUOTES flag */
-++  mark_point();
-++
-++  str = ok = pstrdup(p, "\"\\\\SYST\"");
-++  res = pr_str_get_word(&str, PR_STR_FL_IGNORE_QUOTES);
-++  fail_unless(res != NULL, "Failed to handle quoted argument: %s",
-++    strerror(errno));
-++  fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
-++
-++  mark_point();
-++  str = ok = pstrdup(p, "\"\"\\\\SYST");
-++  res = pr_str_get_word(&str, PR_STR_FL_IGNORE_QUOTES);
-++  fail_unless(res != NULL, "Failed to handle quoted argument: %s",
-++    strerror(errno));
-++  fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
-+ }
-+ END_TEST
-+ 
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
-index b45cb6aaec..ec38fb54e1 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
-@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https
-            file://contrib.patch  \
-            file://build_fixup.patch \
-            file://proftpd.service \
-+           file://CVE-2023-51713.patch \
-            file://CVE-2024-57392.patch \
-            "
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+index 92ac335a7b..4382741da9 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+@@ -1,4 +1,4 @@
+-From 5ce7d8398f6aff41eee8c8c80eeaad2fcb3da1fc Mon Sep 17 00:00:00 2001
++From 84febaf9330fe99802f75bcd0606ac7d86c35b25 Mon Sep 17 00:00:00 2001
+ From: Yi Fan Yu <yifan.yu@windriver.com>
+ Date: Fri, 5 Feb 2021 17:15:42 -0500
+ Subject: [PATCH] configure.ac: bypass autoconf 2.69 version check
+@@ -13,12 +13,12 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+  1 file changed, 4 deletions(-)
  
+ diff --git a/configure.ac b/configure.ac
+-index a8a61c5..27c2760 100644
++index 493d5cd..f0fa973 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
+  
+- AC_INIT([PostgreSQL], [17.4], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
++ AC_INIT([PostgreSQL], [17.5], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
+  
+ -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
+ -Untested combinations of 'autoconf' and PostgreSQL versions are not
+@@ -27,6 +27,3 @@ index a8a61c5..27c2760 100644
+  AC_COPYRIGHT([Copyright (c) 1996-2024, PostgreSQL Global Development Group])
+  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
+  AC_CONFIG_AUX_DIR(config)
+--- 
+-2.34.1
+-
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch b/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
+index ff0582ab80..d94f028036 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
+@@ -1,7 +1,7 @@
+-From 5be3ffdf767c1efcbfd2d1be87aa83f2e37e348e Mon Sep 17 00:00:00 2001
++From 62733bdc9346651637d9e5ac7cbf8d7311ef5d97 Mon Sep 17 00:00:00 2001
+ From: Mingli Yu <mingli.yu@windriver.com>
+ Date: Mon, 1 Aug 2022 15:44:38 +0800
+-Subject: [PATCH 4/5] config_info.c: not expose build info
++Subject: [PATCH] config_info.c: not expose build info
+ 
+ Don't collect the build information to fix the buildpaths issue.
+ 
+@@ -14,10 +14,10 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+  2 files changed, 2 insertions(+), 70 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 27f382d..3dd6bb1 100644
++index f0fa973..8ccd8bc 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -23,7 +23,7 @@ AC_COPYRIGHT([Copyright (c) 1996-2023, PostgreSQL Global Development Group])
++@@ -23,7 +23,7 @@ AC_COPYRIGHT([Copyright (c) 1996-2024, PostgreSQL Global Development Group])
+  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
+  AC_CONFIG_AUX_DIR(config)
+  AC_PREFIX_DEFAULT(/usr/local/pgsql)
+@@ -27,7 +27,7 @@ index 27f382d..3dd6bb1 100644
+  [PG_MAJORVERSION=`expr "$PACKAGE_VERSION" : '\([0-9][0-9]*\)'`]
+  [PG_MINORVERSION=`expr "$PACKAGE_VERSION" : '.*\.\([0-9][0-9]*\)'`]
+ diff --git a/src/common/config_info.c b/src/common/config_info.c
+-index 09e78a6..86e4230 100644
++index 89c1ccb..a2206de 100644
+ --- a/src/common/config_info.c
+ +++ b/src/common/config_info.c
+ @@ -38,7 +38,7 @@ get_configdata(const char *my_exec_path, size_t *configdata_len)
+@@ -114,6 +114,3 @@ index 09e78a6..86e4230 100644
+  	configdata[i].name = pstrdup("VERSION");
+  	configdata[i].setting = pstrdup("PostgreSQL " PG_VERSION);
+  	i++;
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
+index 1f735f322b..a2f0500a8c 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
+@@ -1,4 +1,4 @@
+-From 56b830edecff1cac5f8a8a956e7a7eeef2aa7c17 Mon Sep 17 00:00:00 2001
++From 1a9416bae71aa935797add3fa11407732ad010c0 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Tue, 27 Nov 2018 13:25:15 +0800
+ Subject: [PATCH] not check libperl under cross compiling
+@@ -20,10 +20,10 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index fba79ee..7170f26 100644
++index f398184..493d5cd 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -2297,7 +2297,7 @@ Use --without-tcl to disable building PL/Tcl.])
++@@ -2336,7 +2336,7 @@ Use --without-tcl to disable building PL/Tcl.])
+  fi
+  
+  # check for <perl.h>
+@@ -32,6 +32,3 @@ index fba79ee..7170f26 100644
+    ac_save_CPPFLAGS=$CPPFLAGS
+    CPPFLAGS="$CPPFLAGS $perl_includespec"
+    AC_CHECK_HEADER(perl.h, [], [AC_MSG_ERROR([header file <perl.h> is required for Perl])],
+--- 
+-2.34.1
+-
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_17.4.bb b/meta-oe/recipes-dbs/postgresql/postgresql_17.5.bb
+similarity index 87%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_17.4.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_17.5.bb
+index b1c95ed244..b7fce886f8 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_17.4.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_17.5.bb
+@@ -12,6 +12,6 @@ SRC_URI += "\
+    file://0001-tcl.m4-Recognize-tclsh9.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "c4605b73fea11963406699f949b966e5d173a7ee0ccaef8938dec0ca8a995fe7"
++SRC_URI[sha256sum] = "fcb7ab38e23b264d1902cb25e6adafb4525a6ebcbd015434aeef9eda80f528d8"
+ 
+ CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Ddoesn't apply to out configuration of postgresql so we can safely ignore it."
 -- 
-2.25.1
+2.40.0
 
 
