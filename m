@@ -2,62 +2,62 @@ Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76628C5B555
-	for <webhook@archiver.kernel.org>; Fri,  6 Jun 2025 04:06:56 +0000 (UTC)
-Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com [209.85.219.173])
- by mx.groups.io with SMTP id smtpd.web11.26327.1749182814655805137
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7410FC5AD49
+	for <webhook@archiver.kernel.org>; Fri,  6 Jun 2025 04:07:06 +0000 (UTC)
+Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com [209.85.219.170])
+ by mx.groups.io with SMTP id smtpd.web10.26231.1749182821475113897
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Jun 2025 21:06:54 -0700
+ Thu, 05 Jun 2025 21:07:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FqjLGrX4;
- spf=pass (domain: gmail.com, ip: 209.85.219.173, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f173.google.com with SMTP id 3f1490d57ef6-e7db5c13088so1497479276.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Jun 2025 21:06:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CEAa/VjB;
+ spf=pass (domain: gmail.com, ip: 209.85.219.170, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f170.google.com with SMTP id 3f1490d57ef6-e740a09eb00so1426428276.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Jun 2025 21:07:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749182814; x=1749787614; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1749182820; x=1749787620; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aJyZK6FwkSpL/ZRDs/zQapXeCkF+j7XMf9YUMAVf0bA=;
-        b=FqjLGrX4/HW5/5TS605C/lkMu0u30JKtaejTDuWS19ujrPtDufxp0vIRobOO9kdjlp
-         EEjh5TPj6tNWUtzuQ0LvDTTwrGZcdva145XP47HOR92jh445T0nY16WH9Gk10dOSDNp9
-         oE1sUEYnomr/0tqLeM+WAS4q6VEA6yMBQbYTOZPhmliIW4rbZxNw1wEMjtVJvYEUZQOT
-         94DsjtzxAdH7zqOLvLPuBYNBy6ZdkIf5UD9VEO8PtM+mBl0NOeEVb90oKpLu0elTeQTz
-         W1wZZR9yI0ZKtrlPeQjwKg4ENi4XOpZPjDbMkxHnd7kPc/yGCAr24D3CybfxdCZWalwa
-         3ciA==
+        bh=nKVeg75VelhRl8aN9m1Lm4goH1Uto7GIj5G1gkyuLFw=;
+        b=CEAa/VjBN5CECw3csKx/QGRUCK0A3STAUgWuy+zl6QOBDRWJsp3RayUyqQqVabalqG
+         Hzl+SVxp2ImNmv6xv2l0wJ8byJKH65cPsM+sFz2ORI+Q4SxwZlHNzSOU3rFtViZS+6XV
+         s8BHvDKmDfg1p4eWx/Hbn9fO3bsqmTdcdpSUGJGsZscJXPmdgg8DK4CiyDDBnVPJcB6n
+         mhoVjba5gfWwndU1A2GMaC1+3TDlHjNYqBDofmKVoIeWZ1LQ4JQJv7zEVzptQ7TTB+1E
+         G2AGxJc3JJx9Tw90rkozUCO+1HbClHpI8MDPbyHY7rrhn5rbo+ySiQZeEBNtb7tbk+dq
+         rUpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749182814; x=1749787614;
+        d=1e100.net; s=20230601; t=1749182820; x=1749787620;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=aJyZK6FwkSpL/ZRDs/zQapXeCkF+j7XMf9YUMAVf0bA=;
-        b=muJiUFmjkuEsM6xt7Xd0shClrfwnuG7/i/MMgzxEaqw8VpvtON2YYVE4BS5hrjOj3x
-         0KR+ACpQ5rexwXep+Qfnhxmi4EPb0QhNc6M+D964Nudss6gVFgkiV21rx7KMRx0wredQ
-         D81tytDVrp6hqCb5jkFEnGfRIk5K61MvX9IfaXsaOOlE9yho5sSoFQNW6V385adTAldj
-         pP/AQT9s0dLWC60Y3wyHdFgFZJkD99sAKyxitaMwzfbpuq6k6dVK1fjfU2rUb7zL2e4N
-         Bm7PpdiY1T4nOIHy4WLXHs04ymM6Zy1dzDzO5CQjRJ8i+dpwctCQF43kaeyguqYCa5ag
-         lTiQ==
-X-Gm-Message-State: AOJu0YyWqvjj+cNK4IaAXFAO5pzxrSG1gX79QwENSh7N0QnFi0pi82hJ
-	CzqglqUlK9vkaYOU8UeZZAIyqBdzb831ZWGADI16gvoweBwY/XRIXzIILOUqlu6J
-X-Gm-Gg: ASbGncsXRX0jo3+TttQYE78Mbc8bUqJA9za4TF1rdW1RWawzWzkxPQwsr/hPz+9mQHK
-	9mSKUxVR+38k8aDHsles6ZyU57Tb90+ZN4pw+nskljtmR/uCXeZi1OfYsKzUqtw0dr5yghh8UP1
-	pBmkuY5gT6E+I5tm05IPdHJ8dUWRFbP0GtP7WLveINAs0pQIK3qLDnYpHaFT69Ci20EyQHjV9Rl
-	cN1QI1ESYmU8zmQMyaQoY8s5js7FSgK8CbhqO6GPwcomc7KOY7/BEzESCBc3ATCVd+0bbaJFLSv
-	AKtvbwj6UuM0K54p+NPA/l7EoRaZVzxRyDp3xRiJ0QrVtY7V5WZvMyvKIw2ksQDVZfsc1CU9Ohz
-	RCh7VhPhbpQ==
-X-Google-Smtp-Source: AGHT+IGb5uUY7T+gOpQTHc/2sIuQz6pgumlBoRmtSKGvfdpaWFQQJ916UyQDr4yLiywHJt3gYqpcMQ==
-X-Received: by 2002:a05:6902:c04:b0:e81:8760:15a1 with SMTP id 3f1490d57ef6-e81a3810281mr2096156276.11.1749182813316;
-        Thu, 05 Jun 2025 21:06:53 -0700 (PDT)
+        bh=nKVeg75VelhRl8aN9m1Lm4goH1Uto7GIj5G1gkyuLFw=;
+        b=K4VK3Bbdxj+6y4ZaEu/8SiQ82P1ZA2hEDbgivtxejSk+XebBpZdsmpm2NpIjUzigjv
+         zoVeYcdVLygFENRLU5xRiIF3mvg2T4Z0s+IZBtNA+DLfuluNl9GUyIQ9KAu4mlqbrPVI
+         5z1+xu+6/R/RWAe1VKF741vBTQeIlpBTp5eM6nS/E+mNkFgQZAwsbWuJgvUObw2/tuC4
+         2Ybp0wonzHITxakMewYACqdrO01YvXPuwAvKLbuDTqyMKC4zamYUEj9lQXtLTFJQCptq
+         wv68KWPZ2BcYDm/oTYLP12HTFTEsyAKp+HiOUJzUNzlGthsfnoMcccshPcnlI2JOdkvP
+         jF5g==
+X-Gm-Message-State: AOJu0Yw9DRqJoqHgo0m3QJqLV0rnllGB740me8C4EZp84MTzWkJzmELX
+	2mSA5lpv27kJL9ahEw2Pdn9dIXcIF1RhG3S9cwfJ5N+q7EsrRrtUXJHpvDNXrdX6
+X-Gm-Gg: ASbGncuInkOyOFOi8qORMluMtdGtvps9fMtEe6ICHQd9+ssdJWEgifomhRAOnXpd6gL
+	Q+SYurXjWWMBnLHBHoX499+FC/QD0Fit5jmSi4YvYjXq0ghsaX+KKG0WN+8RPO8utiQUqMAyglQ
+	alxjtC6GDLD0yTZ4GKmsJo8SLH1K07+cOUcSh8vO5mfEb4/gwH63szWYND5oH7tcDuc8lvNk5lp
+	KeBJKOdczo+hXNRz3zpaVjVe7R1jjvqtkSJfnFlxC9h09DHwVPkSlDKSxkeVXcVLx+Qo3y2UK0j
+	EG67YhiQEwEtcJsSY/m/bivldd4xH/l9xzHWj2EUI7agB4JnZZ7X6QIN2vGbsa6EehTy4uYJQH8
+	A2jo0GTargQ==
+X-Google-Smtp-Source: AGHT+IFg2EXvqwjz+yX9sSHPLwhkl4eepOSpUo580Zn+xZ/6tYpRLzoAAqMwZfKSew/p1AG+/HFemg==
+X-Received: by 2002:a05:6902:228d:b0:e81:9ebf:f5ed with SMTP id 3f1490d57ef6-e81a226a62dmr3146482276.1.1749182819991;
+        Thu, 05 Jun 2025 21:06:59 -0700 (PDT)
 Received: from localhost.localdomain (71-208-4-221.ftmy.qwest.net. [71.208.4.221])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e81a4157c3csm241440276.33.2025.06.05.21.06.52
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e81a4157c3csm241440276.33.2025.06.05.21.06.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Jun 2025 21:06:53 -0700 (PDT)
+        Thu, 05 Jun 2025 21:06:59 -0700 (PDT)
 From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH 4/6] xfce4-eyes-plugin: upgrade 4.6.0 -> 4.6.1
-Date: Fri,  6 Jun 2025 00:06:01 -0400
-Message-ID: <20250606040603.2410505-4-schonm@gmail.com>
+Subject: [meta-xfce][PATCH 5/6] xfce4-fsguard-plugin: upgrade 1.1.3 -> 1.1.4
+Date: Fri,  6 Jun 2025 00:06:02 -0400
+Message-ID: <20250606040603.2410505-5-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250606040603.2410505-1-schonm@gmail.com>
 References: <20250606040603.2410505-1-schonm@gmail.com>
@@ -66,32 +66,30 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 Jun 2025 04:06:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117757
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 Jun 2025 04:07:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117758
 
-Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-eyes-plugin/-/tags/xfce4-eyes-plugin-4.6.1
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-fsguard-plugin/-/tags/xfce4-fsguard-plugin-1.1.4
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../{xfce4-eyes-plugin_4.6.0.bb => xfce4-eyes-plugin_4.6.1.bb}  | 2 +-
+ ...e4-fsguard-plugin_1.1.3.bb => xfce4-fsguard-plugin_1.1.4.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-panel-plugins/eyes/{xfce4-eyes-plugin_4.6.0.bb => xfce4-eyes-plugin_4.6.1.bb} (78%)
+ rename meta-xfce/recipes-panel-plugins/fsguard/{xfce4-fsguard-plugin_1.1.3.bb => xfce4-fsguard-plugin_1.1.4.bb} (79%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.1.bb
-similarity index 78%
-rename from meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb
-rename to meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.1.bb
-index 6eaac70a09..61de603756 100644
---- a/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.6.1.bb
-@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.4.bb
+similarity index 79%
+rename from meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb
+rename to meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.4.bb
+index de8d6786c2..d94ccadb5f 100644
+--- a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.3.bb
++++ b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.4.bb
+@@ -5,4 +5,4 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3434d79d62df09abf5f78bb76d6cd21b"
  
  inherit xfce-panel-plugin
  
--SRC_URI[sha256sum] = "ad0ff05d88ba393b7c8922f8233edd33fc0a4e8b000b61de1f8f3a10c5ae5324"
-+SRC_URI[sha256sum] = "5219b2ec0f203ab65990671a95b1607f539201e09e8910b854aea848d478cb53"
- 
- FILES:${PN} += "${datadir}/xfce4/eyes"
+-SRC_URI[sha256sum] = "84ef8bb4752292d64c0ef101badf7b14448790bfa0a85de644dbfa22986ec258"
++SRC_URI[sha256sum] = "24b3789be6de92678e7036678530c4da4b3838aa3cda428439aa8d140704a4a6"
 -- 
 2.43.0
 
