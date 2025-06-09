@@ -1,99 +1,105 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 741EBC5B552
-	for <webhook@archiver.kernel.org>; Mon,  9 Jun 2025 11:12:25 +0000 (UTC)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
- by mx.groups.io with SMTP id smtpd.web10.57142.1749467537068456734
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEBA7C61CE8
+	for <webhook@archiver.kernel.org>; Mon,  9 Jun 2025 17:27:37 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web11.65660.1749490049750923544
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jun 2025 04:12:17 -0700
+ Mon, 09 Jun 2025 10:27:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mQCbbrT2;
- spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-7086dcab64bso34397697b3.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Jun 2025 04:12:16 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=mZ9YUKQi;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-450cb2ddd46so28346955e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Jun 2025 10:27:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749467536; x=1750072336; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1749490048; x=1750094848; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Z9w4ReJYDzIjWKgGnIyFXDNI8R0LKOS2RdDjEzkGryg=;
-        b=mQCbbrT2VgLn0sMoAsn1zQRk9YxvduIS5hG5B9dP0qfxLBTzGLqShEeybRrMcEkI36
-         obe/0L7SAalktaCdxmqB+Eg7oMwnKdSu3CeQkYeBbHwc+O2ZpmQz0petYGwY/ZwuAHik
-         atlpKmL+Wp1pBQevbfxBo3oAgULvy1ARi33toa6apkYKG3dowQ2JIOCupjfQQAEGd4qD
-         +yKgqIiM+pdX62dDTRatRIDXDHZb44Rhjb7BjrktI+f9VU2TtHkXlBIJ5FWiHaLqv3hD
-         ktYVdzBYEOi+rWZjTGDy0yiwpiynh7/NystT3hvuFDzu1s7e/XcCxY1rDfLUUV6p3Qtw
-         vmtA==
+        bh=kmv2oIk92EDn+xi9IxxhPLaFoh25aMGff3E/8+W0nFM=;
+        b=mZ9YUKQi5Tug7Nbh+CJ/hWSOrGktPbUrvaHdcq4t0RWGepqjiFYVPxuXo007oaIZ6H
+         HNWbxrtzrT8+NbsVmwyTPBivc4NJkFlqoZhEHBO8Bzb1ZNKl9p0YKA3SkqMEBh9rfFUX
+         zZJPk/wgt0+wrpXZJfHpF44UIlQZOfz4Qa9bM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749467536; x=1750072336;
+        d=1e100.net; s=20230601; t=1749490048; x=1750094848;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Z9w4ReJYDzIjWKgGnIyFXDNI8R0LKOS2RdDjEzkGryg=;
-        b=NLnTjse+vNepgalsJaI7gblXBVZW/FH6YSsvbmaqek04irFNEn4qGOOUYnl7mHkRpU
-         /c92p5/SP9OGWBjK9yxCsFVcqaNhlTd9QHnqGvY99zl+HVrqfqfHzwAdoGpSx65hYz6E
-         JWeSqtgfLXNeHppJRraon6U150x0sijpCG61XY8rfgaTimbG8GaDxPWYFxvvUo56GlNJ
-         +XtSNYZygl5kHln7gIJeXv6DtHXRSwyQoh1hTOXufhnSN5+ZlnPBko8vCKSeYbq0gApp
-         kQQe40dqnSctreHy5XrcbdUobHVTF3yZ02XpqJUow5aIfxIoaGBk7OnIfMTTvDf0ynmg
-         u4bQ==
-X-Gm-Message-State: AOJu0YyowGJlbT1dLsWthPqop5Tl86ijd7N8byUKrIv9JYai2SvPZR3d
-	5ry62CM7GgS1b31FDCIDFWTJfAL7wGNj7ZISxcZu8KdOcIAdA6Sl2uYWco3cg2xt
-X-Gm-Gg: ASbGnctTnYt49JL53ex/fKTEfDb6jAgbjStdvxFXi6YNfFqjNAP279yc+lPxvZbdGSw
-	xNTPoZjkmrCaxOmQBaWSfBgqgOMYdutFNE4/4QJ0jYh02hzLmbI74mIuS/Vjcf17IpWfI9E40kh
-	KC8YPucf1xUfqdPeSYmc6VkvrcgCE4s2iDshvYWQNz2Ca0sexBqiDqKDCVyqiTjbT6FrOVgThmu
-	/K/Vktp08HtWQnKoNEzVVHT18mv7GoUQ+bZQ2FLEXyl+6B4x+nqIqAIAtJHK2sYM8oVJs9scvpm
-	BpomyHzBcn7/Gig9dTbhqqUU9TrKtcxsXtgvWbczvqL6L+95nMPbBPREn2HReSkDuMY1m+krA8/
-	PHUELh6sCwQ==
-X-Google-Smtp-Source: AGHT+IGy4kVL4/wvV8txU7ObJMn/m5Y4PaEKN9QAf+CglLXxC2X5xjpCksoXm9GWTq+L+7wjXOUf8A==
-X-Received: by 2002:a05:690c:45ca:b0:70c:bb54:ccfb with SMTP id 00721157ae682-710f76c4a02mr176969227b3.21.1749467535650;
-        Mon, 09 Jun 2025 04:12:15 -0700 (PDT)
-Received: from localhost.localdomain (71-208-4-221.ftmy.qwest.net. [71.208.4.221])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-710f9a2e5aesm11979157b3.125.2025.06.09.04.12.15
+        bh=kmv2oIk92EDn+xi9IxxhPLaFoh25aMGff3E/8+W0nFM=;
+        b=gTGrRx215pxRxzK6PntNWV+ciOZnfV9W0xX0/K400vI/ycTrJebRnbHmczF0CnHLzb
+         X5fx3YWj7B3JV2wL4JmaYUSGgWHtlJn+nnwuizsyaHnAI/PBi7jXrwxutOErcUJi+OP6
+         /UmCZ571sLmRh8sW8YR2pjLV96wVhY6XHno2FjMvwKhmwt177dRXemmwKvQaDFBmhbiI
+         0JXXlA/ZGBoGK9cEg+8xe/BoTZxEVXEOSwcYfW2WWaQLN87mn3qUPYmcWWnU2O/5b+PU
+         ges29yAp+iDTbGVJF5ZDGdHxaofYLqzw0NsWhga226wm69iQgZWZmrAKOIhh4VV0X6UR
+         h65w==
+X-Gm-Message-State: AOJu0YwMvEfDM9cRrj9Wtus6e1RtOhXA+PsE7P7NXv3VBE8ORoIu11ej
+	m3LKhVMGI+3BK5XNvJr5LgCr/OHZqqWZB8nzhUKAqLNjksxPSPoJJcuJv0CTH4nrHpGAY7leUeI
+	NA6TU
+X-Gm-Gg: ASbGncsdU59fHh9scrPM0NgQmpoSpQKihg1vUj3MegkdRtsGVX1NItl9roq3mypRYEi
+	W5urme7ODXoAq0MdxzrV53AzHFZrPOyLM+4WRF00Qer4A5HiGoKC+7if8mNoTZaT2TTf11XJokk
+	n7AfHPUJM1x3rjL3DC2Fo7pcOPbyQ15l/6HPPPE8WWSCAE+hTwbfYh+I3e3C1+ZMK5e6zl8fva3
+	+UniFoT2W47kvPlYpBVyiG1qW8cPVFNhOu+dSbyAAVuReKu+o4XFVKOaBOleXTue4P5TGKAzXuM
+	EZpeoj6Thtd2sX2Tmqzp9T2w+nwlib/dqLpnl86aJ5bXu1gA91sdFRghb7wg4wcYBF5AogHvrzS
+	m
+X-Google-Smtp-Source: AGHT+IHRVx4F62cmhVD/I0b07HH8H6vH9TtnX20H+fP3sXgSn8ULDBg28NvoEVWlb+dXZe7qjvA3jA==
+X-Received: by 2002:a05:600c:8508:b0:43c:f0ae:da7 with SMTP id 5b1f17b1804b1-45201336ff5mr124840155e9.7.1749490047377;
+        Mon, 09 Jun 2025 10:27:27 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45307678020sm68014835e9.15.2025.06.09.10.27.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Jun 2025 04:12:15 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Mon, 09 Jun 2025 10:27:27 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH 3/3] xfmpc: upgrade 0.3.1 -> 0.3.2
-Date: Mon,  9 Jun 2025 07:11:54 -0400
-Message-ID: <20250609111154.1056573-3-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250609111154.1056573-1-schonm@gmail.com>
-References: <20250609111154.1056573-1-schonm@gmail.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-starlette: Upgrade 0.46.2 -> 0.47.0
+Date: Mon,  9 Jun 2025 20:27:21 +0300
+Message-Id: <20250609172722.2923788-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250609172722.2923788-1-leon.anavi@konsulko.com>
+References: <20250609172722.2923788-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Jun 2025 11:12:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117787
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Jun 2025 17:27:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117789
 
-Changelog: https://gitlab.xfce.org/apps/xfmpc/-/blob/master/NEWS#L19
+Upgrade to release 0.47.0:
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+- Add support for ASGI pathsend extension
+- Add partitioned attribute to Response.set_cookie
+- Change methods parameter type from list[str] to Collection[str]
+- Replace import typing by from typing import ... in the whole
+  codebase
+- Mark ExceptionMiddleware.http_exception as async to prevent
+  thread creation
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-multimedia/xfmpc/{xfmpc_0.3.1.bb => xfmpc_0.3.2.bb} | 2 +-
+ ...{python3-starlette_0.46.2.bb => python3-starlette_0.47.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-multimedia/xfmpc/{xfmpc_0.3.1.bb => xfmpc_0.3.2.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-starlette_0.46.2.bb => python3-starlette_0.47.0.bb} (91%)
 
-diff --git a/meta-xfce/recipes-multimedia/xfmpc/xfmpc_0.3.1.bb b/meta-xfce/recipes-multimedia/xfmpc/xfmpc_0.3.2.bb
-similarity index 87%
-rename from meta-xfce/recipes-multimedia/xfmpc/xfmpc_0.3.1.bb
-rename to meta-xfce/recipes-multimedia/xfmpc/xfmpc_0.3.2.bb
-index 73eafeebcf..f92618bfc7 100644
---- a/meta-xfce/recipes-multimedia/xfmpc/xfmpc_0.3.1.bb
-+++ b/meta-xfce/recipes-multimedia/xfmpc/xfmpc_0.3.2.bb
-@@ -12,7 +12,7 @@ RRECOMMENDS:${PN} = "mpd"
+diff --git a/meta-python/recipes-devtools/python/python3-starlette_0.46.2.bb b/meta-python/recipes-devtools/python/python3-starlette_0.47.0.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-starlette_0.46.2.bb
+rename to meta-python/recipes-devtools/python/python3-starlette_0.47.0.bb
+index cdbb951647..182b6d60d5 100644
+--- a/meta-python/recipes-devtools/python/python3-starlette_0.46.2.bb
++++ b/meta-python/recipes-devtools/python/python3-starlette_0.47.0.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Starlette is a lightweight ASGI framework/toolkit, which is ideal for
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=11e8c8dbfd5fa373c703de492140ff7a"
  
- inherit xfce-app
+-SRC_URI[sha256sum] = "7f7361f34eed179294600af672f565727419830b54b7b084efe44bb82d2fccd5"
++SRC_URI[sha256sum] = "1f64887e94a447fed5f23309fb6890ef23349b7e478faa7b24a851cd4eb844af"
  
--SRC_URI[sha256sum] = "4867d5dd100fa42ab39ebde6c784ec21ee31717f1adb3f4da070dafb3848d96d"
-+SRC_URI[sha256sum] = "4a58bd9e9c14c391943bb35b57ed8eb49000655da176639e7245da7286b07825"
+ inherit pypi python_hatchling ptest
  
- # Fixes build with GCC-14 which enables incompatible-pointer-types as error
- CFLAGS += "-Wno-error=incompatible-pointer-types"
 -- 
-2.43.0
+2.39.5
 
 
