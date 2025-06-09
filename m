@@ -1,88 +1,101 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EAD6AC61CE8
-	for <webhook@archiver.kernel.org>; Mon,  9 Jun 2025 09:43:44 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web10.55899.1749462217595749812
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC0DAC677C4
+	for <webhook@archiver.kernel.org>; Mon,  9 Jun 2025 11:12:15 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.web11.56730.1749467534175686247
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jun 2025 02:43:37 -0700
+ Mon, 09 Jun 2025 04:12:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mxDI3aE1;
- spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-60700a745e5so5338032a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Jun 2025 02:43:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=T9G+fU7I;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-70e64b430daso38105057b3.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Jun 2025 04:12:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749462216; x=1750067016; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=nNvrTXlpblgcU7n2bb5FU57y0msx4/J+X6cPAF8BpNU=;
-        b=mxDI3aE11QS0ljLPtaggQNcph2En6E8swsxewoj5C1vSF5azLVuWKZcn+YX8FF5/jW
-         YXUzyhR+Cfjpfnc1w4P3SofjEI5bb0+aZx4j0GsGAPRx+LJGUOVTAgZhw2utQWYpmFWK
-         OGroPx9GpZ8IreS2eb6CocoXXTI9QRal8LV6MGqVXoeDn9GQrGlLlJV9yUMXMNdz+1/2
-         PVvL+iQuFKI1VwmHQP7s26Ox3RxOIWn6ZUhvdD8xWqCom84QDqiFNCzikDRBS+bnWC58
-         lV/BHD6kjzRTcEdNXuIJJ6VZDIuhXSwuNHUjYBqgNL8QhVUF0y074PkmG7WECrwJxi0D
-         IHbA==
+        d=gmail.com; s=20230601; t=1749467533; x=1750072333; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=o0/CjJhlYEwnUxAW+Nsi2ODNCBbBqOzyJdAuTXpc9vE=;
+        b=T9G+fU7IOCNCB3sVP2IDNGWjQ6OMzHw8553xyJPVJBfToqqLfT67NDaLPNFyFmWDG0
+         wjentdLOvW1oSA/e6GE7lPVb/hQlDDBXid+PPKiI182hVBUu4+Sq+xyM7yOqOicUfiNp
+         JyFZOYb1Ho8aBq1DCuUNz7YtVHWXvEzG2Pr2fb8c5yxg87nw72UJcatoX2UzesiZgwTu
+         D6qlWuwlaCv8PbQ0ifHnnAiN7qVv193a8KaipOtkB+cCvLins7ok1vSWQIp4Tcd8OZI7
+         HPynvm3psSsu++OC/S+E0Etobv6A5NOt3sK9mSHVeQevA1zjXQrvmglhWKPVRGJYWGR0
+         68oA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749462216; x=1750067016;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=nNvrTXlpblgcU7n2bb5FU57y0msx4/J+X6cPAF8BpNU=;
-        b=K48nssSFIt9q+SRJmdHF7pDk3oz9Il5pVkUI2++aFFQU3AYGaHjQdOy7gbJ/s11msF
-         9X+yfioi9wj/Z2O2k/8qDyWywfis1bgeBMNdqB1qjnIoSZdypunKk6/2Z4V2tvzdY05k
-         G39hQBtkp0JQQVRVIetof7XHnjWJTNBQ/XDokddXD/l5G/3Lop4w29viZzrTfqL64Rt4
-         H3Vg2KVJo68uMHnlHn5cY0OGJTkGvF/6gSxfywlNcPzGQXg6RURvCvqsmbYR8zF1d8+k
-         x0RBTjqtUhKMWW6QBfQtKIO8WqDiP7U7j6v1KN+yR3mj85OMNGlH6tItXBXupeeptrBU
-         dtRg==
-X-Gm-Message-State: AOJu0Yxm88OOZKpoILYnPDf9oJRuSRO/TFthbEILE0PmAysvhhbWN/yO
-	0OJcutmA/sAucvOukJe2KfVENypcSW6E3sMFDUVLVqfs2b+kg07u8UGT
-X-Gm-Gg: ASbGnctxWw1gwGs46NrGIFDo6LlhTdwpr2koHh7YndYviOTVDP6PENXM3fH5R636e7O
-	0tgfna+crly4uLjYLbWsb95xXMJoiJYDqS5Ax37scsfPLD8ji1Iua8GE2ALz0MfY4eWKz2duWyg
-	aRsUf5UGNmdgMgOCGywm6WBl31AxKehuEixSwwNw8yko1G4R3Iv71OHt864Yr9iL3wXaHerzBh9
-	hlGDO/TdecHzu3TeHRTvyXVm7/2Gg/NWqAL4Bxo6jcbvig9QNla9fBxqslg8jCzLgrN0pvkbe4C
-	8s+qry3409aXrFhXhasy6tK2gWHgetbQ2nGOHv3TBfxd8AOEbBUd6haynPI=
-X-Google-Smtp-Source: AGHT+IGRpzoVVqQ4pzH5D+weyKGjfqRrYhAPcNhT2PskrR3KN+RYxAiuvpf2bwCR6NDm/Hdxr+Z5Gg==
-X-Received: by 2002:a17:906:6a13:b0:ad8:9c97:c2eb with SMTP id a640c23a62f3a-ade1a932bb3mr1186854766b.19.1749462215669;
-        Mon, 09 Jun 2025 02:43:35 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ade1dc3a496sm529424466b.144.2025.06.09.02.43.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 09 Jun 2025 02:43:35 -0700 (PDT)
-Message-ID: <e0e8bd2f-e513-4850-be17-2078a5d4c9d8@gmail.com>
-Date: Mon, 9 Jun 2025 11:43:34 +0200
+        d=1e100.net; s=20230601; t=1749467533; x=1750072333;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=o0/CjJhlYEwnUxAW+Nsi2ODNCBbBqOzyJdAuTXpc9vE=;
+        b=laVCSsH0U3Mrz0XG3TtBxNl0/bEoF5OY/QBfq2u7I8TPVOsSdg4tsWWx+/01tYUIg6
+         kRZI4MEKdHjCSvYwMXZBjIA7SyW2QJOECjTyXojNzNwg+9R45sdwaFu8ov5ntreHwugZ
+         r077oLw8V9nsv4wmmAn5DvBX7ty3moVyBLCBGTjZtWCPs9VoW3O9wZSXvZSi7wuxINiq
+         +1OmXeTkiOLPDFn7ZOQBAMlQg9OlEGLf+6E8Ow5r2tr//6Rs8N5amOy3ScMp6ivMAW6U
+         bhFzh90h++pgdocY32m+DP5FhN9gKGm1ioRPfUgzVnauPU4KnKchaQ7HIsLXxiAXOih6
+         eyaA==
+X-Gm-Message-State: AOJu0YyGCFyRMIhAHfEl2DqLfzq2nDh4fOlU8E2mkjzObmC2w43r4GVp
+	/8JjYBk3tejPSAwb71gVdk/+uyvqrhyLu5neBDiU123LFwiV/6yc48owgUhnfNaw
+X-Gm-Gg: ASbGnct8n07BxhLSqYe+S83nU4vOPWyUh8MKgpcI0dNnl/hdla8cCg5QIDDx4YbiUt7
+	pKSv5Vrf1lcFuuF4Am8ajFjjifwozZozM6DkqlYe+wR6JSiqZVxdNzaEN1fzWd3XzI4tchXd/bG
+	hPgjw9vf3g2yTUGdDe1dikcMtCuMK8JSqupt3xrEVP4DfVBMO/zYzGQUUsDyYL7nlGAT48qydXC
+	apLYO2xXrO5fJBqHDLumqfTU0ql3OjZPbhWstY9X/gDS11efkJeOWyZkbtjY8h03XW8+Iw4HxbE
+	o8AO5RaTFNLx3zUJnojM5tARLETDDenCEOJBb60LlmrCSBa5P4BPZmcuazSzziOme9NgpQ50YGp
+	cs9nMiel2fZ81U/2rB0ty
+X-Google-Smtp-Source: AGHT+IEpSTvjvTbbVYptZ/pKPjERYXEJWTTMJQl62LRqB5hXWcIsK9KXDAJ1xrG+2lG8lZMj9l8e1A==
+X-Received: by 2002:a05:690c:670d:b0:70e:d35:fbf5 with SMTP id 00721157ae682-710f772c329mr184127787b3.35.1749467532855;
+        Mon, 09 Jun 2025 04:12:12 -0700 (PDT)
+Received: from localhost.localdomain (71-208-4-221.ftmy.qwest.net. [71.208.4.221])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-710f9a2e5aesm11979157b3.125.2025.06.09.04.12.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Jun 2025 04:12:12 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-xfce][PATCH 2/3] parole: upgrade 4.18.0 -> 4.18.2
+Date: Mon,  9 Jun 2025 07:11:53 -0400
+Message-ID: <20250609111154.1056573-2-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250609111154.1056573-1-schonm@gmail.com>
+References: <20250609111154.1056573-1-schonm@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe] [PATCH] procmail: fix compile failure with gcc-15
-To: liuyd.fnst@fujitsu.com, Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20250609083102.1925-1-liuyd.fnst@fujitsu.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250609083102.1925-1-liuyd.fnst@fujitsu.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Jun 2025 09:43:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117784
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Jun 2025 11:12:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117786
 
-On 6/9/25 10:31, Yiding Liu (Fujitsu) via lists.openembedded.org wrote:
-> +Upstream-Status: Pending
-> +Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-While musing about this quarter-century old release, I have found an
-Debian bugreport[1] where someone else was doing the same - when
-suddenly the original developer showed up, announcing that procmail
-isn't quite as dead as it looks. Procmail now lives officially on
-github[2] and to my surprise there has been even a new release.
+Changelog: https://gitlab.xfce.org/apps/parole/-/tags/parole-4.18.2
 
-Though it has been silent again for the past 3 years unfortunately,
-maybe it would worth it still opening a PR with these new patches (and
-to remove the Pending state).
+Changelog: https://gitlab.xfce.org/apps/parole/-/tags/parole-4.18.1
 
-[1]: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1006633
-[2]: https://github.com/BuGlessRB/procmail
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ .../parole/{parole_4.18.0.bb => parole_4.18.2.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-xfce/recipes-multimedia/parole/{parole_4.18.0.bb => parole_4.18.2.bb} (90%)
+
+diff --git a/meta-xfce/recipes-multimedia/parole/parole_4.18.0.bb b/meta-xfce/recipes-multimedia/parole/parole_4.18.2.bb
+similarity index 90%
+rename from meta-xfce/recipes-multimedia/parole/parole_4.18.0.bb
+rename to meta-xfce/recipes-multimedia/parole/parole_4.18.2.bb
+index eaa233ceb4..7787196fdd 100644
+--- a/meta-xfce/recipes-multimedia/parole/parole_4.18.0.bb
++++ b/meta-xfce/recipes-multimedia/parole/parole_4.18.2.bb
+@@ -16,7 +16,7 @@ DEPENDS += " \
+     taglib \
+ "
+ 
+-SRC_URI[sha256sum] = "bbe52fbc4d3abe30f6c79fc7ac57bd9de9cf74ce1a79b508a1d7de83dc4f3771"
++SRC_URI[sha256sum] = "6625288b760d38a15c295051ecf66c556fcad21dd1516d6d661c2a582421ee0e"
+ 
+ RDEPENDS:${PN} += "gstreamer1.0-plugins-good"
+ 
+-- 
+2.43.0
+
 
