@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 205A2C678DA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 358EBC71135
 	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 03:34:02 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.web11.77955.1749526431400049978
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.web11.77959.1749526439495541180
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jun 2025 20:34:01 -0700
+ Mon, 09 Jun 2025 20:34:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=UQsd7yVE;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=XxBMVylF;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1749526440; x=1781062440;
+  t=1749526441; x=1781062441;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=IPAAab3dfvlo7O1c0kREi3OPw48MjTyd6YMIeGScU58=;
-  b=UQsd7yVEySRRItCi2Q0ABp6tgO3Hbgw2I/BdbO68HEGSmoRhYWcnRiX0
-   lXVM3feLSdituPdq/Z5ut4WbYxH+YQlLaw2R21TIHkv65uMYUwUbuhUxm
-   c/suODUd6Ryaa2KwdtgiREjTAg5lRcIM/nX5/rDFx2CF5siFu6xNaXr4/
-   SeUPay3sa6JRxgjrlHR94VkL/WBvWF/mpSMqihCe2dwiiX6H9zXk/x7u2
-   SQZ4pmweEzmuUcf+8z7Lv9ves7l92nNzr/sRozrM1JP6ovnZViaWX1rtY
-   46biNHduB9/aFJRlGVzlIo78npXgozNLru+JqvP7QpNXcqp2LYtSXPmsq
-   w==;
-X-CSE-ConnectionGUID: UxwdztkrRVypi9WIBfWS/g==
-X-CSE-MsgGUID: F/NqPi8jRHyiYX4LRjkVyA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="181121919"
+  bh=//UWh5cU/ZApQB10qnGfqCuhAhGzgNPdlx9XqfJDs/s=;
+  b=XxBMVylFlL7QschsPknABADnQzo698aaVKdgxdkdtFhefXOzYoEcdV0F
+   Mq2YatZXf5OkpQSqSIVpMh3J1NooUqCAuaiAR1AzPZ3ChzDgbrYt27jfY
+   RC2sTc6Q+ZXYRTQ51EpTmt3ASQ4xX5PTpDWvGfa/0pNkQVjcgszmEklA6
+   ZIGB4FmKlJCZeWWnUeRgapu6uBZ7EEnqqIMC7DFfqa8/SgKR5TmLtq74d
+   sKvYrk1ynKqYYRDqou60q3AHdnuBYQ8qhOsV5L4LSdVrdbiTd9h4aqSEG
+   fhQNWtYM0wgl6zPHW333/ilx4y8F9OD2QJKN/eU1MlyhdQY+7GhPknktK
+   g==;
+X-CSE-ConnectionGUID: FIGS+8yCTFae80Aix47zrg==
+X-CSE-MsgGUID: x6PX+puaR4WCEMlbPEmxgw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="201453633"
 X-IronPort-AV: E=Sophos;i="6.16,224,1744038000"; 
-   d="scan'208";a="181121919"
-Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:33:59 +0900
-Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id E0F4BD4C24
+   d="scan'208";a="201453633"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:33:59 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 86DA1E495E
 	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:56 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 87714D4C19
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 2F46ED50B0
 	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:56 +0900 (JST)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id BB0BF1A009B;
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 5A7301A009A;
 	Tue, 10 Jun 2025 11:33:55 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH 59/64] stunnel: upgrade 5.74 -> 5.75
-Date: Tue, 10 Jun 2025 11:33:25 +0800
-Message-ID: <20250610033330.924-59-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 58/64] sip: upgrade 6.11.0 -> 6.12.0
+Date: Tue, 10 Jun 2025 11:33:24 +0800
+Message-ID: <20250610033330.924-58-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250610033330.924-1-wangmy@fujitsu.com>
 References: <20250610033330.924-1-wangmy@fujitsu.com>
@@ -55,78 +55,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 03:34:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117851
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117849
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-License-Update: Copyright year updated to 2025
-
-fix-openssl-no-des.patch
-refreshed for 5.75
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../stunnel/stunnel/fix-openssl-no-des.patch              | 8 ++++----
- .../stunnel/{stunnel_5.74.bb => stunnel_5.75.bb}          | 4 ++--
- 2 files changed, 6 insertions(+), 6 deletions(-)
- rename meta-networking/recipes-support/stunnel/{stunnel_5.74.bb => stunnel_5.75.bb} (87%)
+ meta-oe/recipes-devtools/sip/{sip_6.11.0.bb => sip_6.12.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/sip/{sip_6.11.0.bb => sip_6.12.0.bb} (87%)
 
-diff --git a/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch b/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
-index 08edc254ae..3520bf429e 100644
---- a/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
-+++ b/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
-@@ -1,4 +1,4 @@
--From 71751d30ca6bdae6c62e41b8bdd20eb69cecd556 Mon Sep 17 00:00:00 2001
-+From e08b9760d319d0334f2aad02d32d791c8ebd8564 Mon Sep 17 00:00:00 2001
- From: Kai Kang <kai.kang@windriver.com>
- Date: Wed, 1 Nov 2017 09:23:41 -0400
- Subject: [PATCH] stunnel: fix compile error when openssl disable des support
-@@ -17,10 +17,10 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
-  2 files changed, 5 insertions(+), 3 deletions(-)
- 
- diff --git a/src/common.h b/src/common.h
--index f112cf9..8d4be01 100644
-+index c2229d0..5eaee8c 100644
- --- a/src/common.h
- +++ b/src/common.h
--@@ -496,7 +496,9 @@ extern char *sys_errlist[];
-+@@ -497,7 +497,9 @@ extern char *sys_errlist[];
-  #ifndef OPENSSL_NO_MD4
-  #include <openssl/md4.h>
-  #endif /* !defined(OPENSSL_NO_MD4) */
-@@ -31,7 +31,7 @@ index f112cf9..8d4be01 100644
-  #include <openssl/dh.h>
-  #if OPENSSL_VERSION_NUMBER<0x10100000L
- diff --git a/src/protocol.c b/src/protocol.c
--index 616a65f..5ccbcb0 100644
-+index c390a6f..7aca745 100644
- --- a/src/protocol.c
- +++ b/src/protocol.c
- @@ -82,7 +82,7 @@ NOEXPORT void ldap_client_middle(CLI *);
-diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.74.bb b/meta-networking/recipes-support/stunnel/stunnel_5.75.bb
+diff --git a/meta-oe/recipes-devtools/sip/sip_6.11.0.bb b/meta-oe/recipes-devtools/sip/sip_6.12.0.bb
 similarity index 87%
-rename from meta-networking/recipes-support/stunnel/stunnel_5.74.bb
-rename to meta-networking/recipes-support/stunnel/stunnel_5.75.bb
-index 558eacd709..e13872abcd 100644
---- a/meta-networking/recipes-support/stunnel/stunnel_5.74.bb
-+++ b/meta-networking/recipes-support/stunnel/stunnel_5.75.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "SSL encryption wrapper between remote client and local (inetd-sta
- HOMEPAGE = "https://www.stunnel.org/"
- SECTION = "net"
- LICENSE = "GPL-2.0-or-later"
--LIC_FILES_CHKSUM = "file://COPYING.md;md5=906ac034adaee9d093318e51b53453ca"
-+LIC_FILES_CHKSUM = "file://COPYING.md;md5=1e4388407e163ad0cde171362f9a7b94"
+rename from meta-oe/recipes-devtools/sip/sip_6.11.0.bb
+rename to meta-oe/recipes-devtools/sip/sip_6.12.0.bb
+index 0db80c3cc0..20e705f1a6 100644
+--- a/meta-oe/recipes-devtools/sip/sip_6.11.0.bb
++++ b/meta-oe/recipes-devtools/sip/sip_6.12.0.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=236276327275fdb261636fb40b18d88d"
+ inherit pypi python_setuptools_build_meta python3native
  
- DEPENDS = "autoconf-archive libnsl2 openssl"
+ PYPI_PACKAGE = "sip"
+-SRC_URI[sha256sum] = "237d24ead97a5ef2e8c06521dd94c38626e43702a2984c8a2843d7e67f07e799"
++SRC_URI[sha256sum] = "083ced94f85315493231119a63970b2ba42b1d38b38e730a70e02a99191a89c6"
  
-@@ -11,7 +11,7 @@ SRC_URI = "https://stunnel.org/archive/5.x/${BP}.tar.gz \
-            file://fix-openssl-no-des.patch \
- "
- 
--SRC_URI[sha256sum] = "9bef235ab5d24a2a8dff6485dfd782ed235f4407e9bc8716deb383fc80cd6230"
-+SRC_URI[sha256sum] = "0c1ef0ed85240974dccb94fe74fb92d6383474c7c0d10e8796d1f781a3ba5683"
- 
- inherit autotools bash-completion pkgconfig
+ DEPENDS += "python3-setuptools-scm-native"
  
 -- 
 2.43.0
