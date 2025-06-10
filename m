@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE9CCC7115C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B834FC71148
 	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 03:34:02 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web10.78439.1749526433911033951
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.web10.78436.1749526427996707314
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jun 2025 20:33:54 -0700
+ Mon, 09 Jun 2025 20:33:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Ky/h9D6U;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=h7CWvxqi;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
   t=1749526435; x=1781062435;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=bWaPJrIxYZ5S0SoI+HgtnjyxFIUYhPD7j82oZFJrAJo=;
-  b=Ky/h9D6UDdR2rF3fB26/TWe2c39OnD4bprYOG280T2HZkCmGg8NluUcz
-   mizXbFcwXyZlf30RW6sDhYzrFypwHYWrfPGk1DrLkgiyE2NiGpTFtAI7F
-   wrEbppRpsw8mdk3aTLRyyeXe4fyEMqu0hizVi97SvzYkZSXo1NuuKTR+U
-   +zl7l71T+HUef0/fxt2lA4TM2LXnxOizRlrvDE5x9AeV9EIvGEpVb4OS/
-   ndlmi4wnmzQsvNsMLiUPX/KaoSQquhIqhdYMmL/L2ayRLuBCJ3cJ7DSUg
-   YPgj+dm6qwqVykgIMhiQRf0J3h2ahsKNjIIXBrHUAirS343JfL8VX8l7v
+  bh=xwvquLbNCxTKO3rsRkjskIJtf/W3LIO3+g5ok1UxgU4=;
+  b=h7CWvxqiUDVmXOPTF+WCojJ91q5167ElW7fWdKoAo1WoxX/r2fKl9HM0
+   IDd8+2DmKI+1B3YWkG5BItPpxAOSE21FVPJLjnmvVN7EfpgxyZkEIZIbt
+   iVRjbLvRToxUYIGZbz/yTefaw+qeCjdh/JM2Xjh66+gOyCU2ASS/BaC77
+   gCe/725E0gCmMeZ1i3IXV2MYs1GeqSwl6MwDMn6zOJ9ahDkMr9HZn/HQE
+   YbzesAO10mfx1KjTcAhtHfNhf9HVIh7Zt0aJF6auD5dBmvUNGCTIIEKDc
+   PYKAzYyNt6fzoCXAFhnbyRxFrfM8Eu8d1C+DRGTMoW57xT+/JqZN0PKgc
    A==;
-X-CSE-ConnectionGUID: UJ5ZgBgnQjmIFD82i3RxRQ==
-X-CSE-MsgGUID: mIylAshfTtaMFSo08v9mgA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="202196194"
+X-CSE-ConnectionGUID: DFgSSkctTG26/BpOnEkuKA==
+X-CSE-MsgGUID: LLNomcw7S5KIpnfsWtzFLg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="202680487"
 X-IronPort-AV: E=Sophos;i="6.16,224,1744038000"; 
-   d="scan'208";a="202196194"
-Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:33:52 +0900
+   d="scan'208";a="202680487"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:33:54 +0900
 Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 4B860D5004
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:49 +0900 (JST)
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 3F983D6883
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:52 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id EDA71D5068
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:48 +0900 (JST)
+	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id DB688D5068
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:51 +0900 (JST)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 7B9401A009B;
-	Tue, 10 Jun 2025 11:33:48 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 6195B1A0071;
+	Tue, 10 Jun 2025 11:33:51 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 40/64] python3-inflate64: upgrade 1.0.1 -> 1.0.3
-Date: Tue, 10 Jun 2025 11:33:06 +0800
-Message-ID: <20250610033330.924-40-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 48/64] python3-pyais: upgrade 2.9.2 -> 2.9.4
+Date: Tue, 10 Jun 2025 11:33:14 +0800
+Message-ID: <20250610033330.924-48-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250610033330.924-1-wangmy@fujitsu.com>
 References: <20250610033330.924-1-wangmy@fujitsu.com>
@@ -55,40 +55,36 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 03:34:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117834
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117839
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-=============
-- Add readthedocs manual page.
-- Publish Python 3.13 wheels.
-- Fix GitHub Actions CI/CD script for aarch64.
-- Published to PyPI using GItHub Actions as a trusted publisher
-- Add GitHub Actions CI/CD script
-- Drop Azure Pipelines CI/CD
+============
+* better error handling of invalid fragment counts
+* add support for variant of message type 8
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-inflate64_1.0.1.bb => python3-inflate64_1.0.3.bb}  | 2 +-
+ .../python/{python3-pyais_2.9.2.bb => python3-pyais_2.9.4.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-inflate64_1.0.1.bb => python3-inflate64_1.0.3.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-pyais_2.9.2.bb => python3-pyais_2.9.4.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-inflate64_1.0.1.bb b/meta-python/recipes-devtools/python/python3-inflate64_1.0.3.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-inflate64_1.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-inflate64_1.0.3.bb
-index 841c9239a5..a6f0c67ab8 100644
---- a/meta-python/recipes-devtools/python/python3-inflate64_1.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-inflate64_1.0.3.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-python/recipes-devtools/python/python3-pyais_2.9.2.bb b/meta-python/recipes-devtools/python/python3-pyais_2.9.4.bb
+similarity index 93%
+rename from meta-python/recipes-devtools/python/python3-pyais_2.9.2.bb
+rename to meta-python/recipes-devtools/python/python3-pyais_2.9.4.bb
+index a1ae92985a..a661606b80 100644
+--- a/meta-python/recipes-devtools/python/python3-pyais_2.9.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyais_2.9.4.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=79d9e278b76e3e5b3358cd70b328173c"
+ SRC_URI = "git://github.com/M0r13n/pyais;protocol=https;branch=master"
  
- inherit python_setuptools_build_meta pypi
+ PV .= "+git"
+-SRCREV = "9ce53ae21f19e8dc6e7b841dd0ccc246898730ea"
++SRCREV = "e7780f743b03c5e6ecc651fdeb209fa94e0e0250"
  
--SRC_URI[sha256sum] = "3b1c83c22651b5942b35829df526e89602e494192bf021e0d7d0b600e76c429d"
-+SRC_URI[sha256sum] = "a89edd416c36eda0c3a5d32f31ff1555db2c5a3884aa8df95e8679f8203e12ee"
- 
- DEPENDS += "python3-setuptools-scm-native"
+ S = "${WORKDIR}/git"
  
 -- 
 2.43.0
