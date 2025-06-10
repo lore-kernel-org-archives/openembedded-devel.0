@@ -2,25 +2,25 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62E01C678DA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 700CBC71132
 	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 15:09:27 +0000 (UTC)
 Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.web11.85654.1749560177165641586
+ by mx.groups.io with SMTP id smtpd.web10.86331.1749560715918987124
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Jun 2025 05:56:17 -0700
+ Tue, 10 Jun 2025 06:05:16 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: bst@pengutronix.de)
 Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
 	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
 	(envelope-from <bst@pengutronix.de>)
-	id 1uOyWV-0000H8-MX; Tue, 10 Jun 2025 14:56:15 +0200
+	id 1uOyfC-00063I-FC; Tue, 10 Jun 2025 15:05:14 +0200
 From: "Bastian Krause" <bst@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: yocto@pengutronix.de,
 	Bastian Krause <bst@pengutronix.de>
-Subject: [meta-oe][PATCH] libsocketcan: use https instead of git protocol
-Date: Tue, 10 Jun 2025 14:56:06 +0200
-Message-Id: <20250610125606.3181247-1-bst@pengutronix.de>
+Subject: [meta-oe][scarthgap][PATCH] libsocketcan: use https instead of git protocol
+Date: Tue, 10 Jun 2025 15:05:13 +0200
+Message-Id: <20250610130513.3192444-1-bst@pengutronix.de>
 X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 X-SA-Exim-Connect-IP: 2a0a:edc0:0:1101:1d::ac
@@ -32,7 +32,7 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 15:09:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117873
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117875
 
 The git server at git.pengutronix.de no longer supports the git
 protocol, so switch to https.
