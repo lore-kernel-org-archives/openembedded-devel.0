@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AAD7C71148
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44C35C71147
 	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 03:33:51 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web11.77947.1749526420542438253
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.web10.78430.1749526423382039445
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jun 2025 20:33:44 -0700
+ Mon, 09 Jun 2025 20:33:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=EValVYSF;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ITCU1+bo;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
   t=1749526425; x=1781062425;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ITM/u1j/hqRwVTAB2UKhL9zr6XUIvkcFOBsUJHIEd4E=;
-  b=EValVYSF/WpkAO3II45B7y3LM3UiT428kgive3RszkShRdm4DNd9e9/Q
-   frLHaM7XuNQd0iPo275l8uxvxfIXGDiP/MrZkioNYfyv75MTpCT5Ug2Lc
-   eEkOrn/1oaalPl/D/3FExTIVcoS8YrFyeDIo/0ZiTJ/1+a7CG/GetsM+w
-   9J7Kg+Rxv/kbE8z/vJDbpb6WZZ7y75t47Dfr3zx28c5pNSiIb37k9iP6h
-   16fPsBt4ejpy+DkdphaDQlrPJyBBEuyWXU12YopeC8za8pt2kyMUqOfIX
-   Llgi360tHNibuhYDwKxUuHfbPN4uwmKFLz+WX45JZOuF1Fu38QwkCQ07G
-   A==;
-X-CSE-ConnectionGUID: PDlAZyOJRWqTK5M831z93w==
-X-CSE-MsgGUID: 5ae/cJzWSsCUxEhIVjspDA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="202196170"
+  bh=UUhA2Ep/TwJB7UQMCPkg9qPWj5dEB40DuoajQJNeENQ=;
+  b=ITCU1+bo92CBpi0xitneatCz1EfF7v4G/hkuU7oFvQwtIQHJUDyeZulf
+   C/hzXTGiC2cFLxpHME1X9Wnor+cHttByuDnUsLjkRzJvk9fSeQ6pLloKe
+   BSLRhGwZE8xXahCj1+YxdSaKBD8DXs9ZkI1Gxp7PETZ/uowHKLF4mYBxE
+   y5VG1wT995EuboaBUJEWMXXWZCooqJuRStj/OgQxPZKgtt1peMVobRW7C
+   5rTMTSLy/gYLe0YuGZRCZHilByVjGek5Uh0sYsdV0fsi+jJWiVPrpwTZq
+   VvY0sFc3siK+8PYALtDLfWVf6GQ1X0N/aZyFpWEvrkTgYhwd2lCnV0h/t
+   w==;
+X-CSE-ConnectionGUID: JjV1gNdjRZm1HX+9tF5PEQ==
+X-CSE-MsgGUID: yABfl1BwRVO05xOcbGYLKw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="205286176"
 X-IronPort-AV: E=Sophos;i="6.16,224,1744038000"; 
-   d="scan'208";a="202196170"
-Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:33:44 +0900
+   d="scan'208";a="205286176"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:33:44 +0900
 Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 86463D5051
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:40 +0900 (JST)
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 04051DE53F
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:42 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 2D664D5068
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:40 +0900 (JST)
+	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id A4517D5068
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:41 +0900 (JST)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id AA6B41A009B;
-	Tue, 10 Jun 2025 11:33:39 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 2666E1A009B;
+	Tue, 10 Jun 2025 11:33:41 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 16/64] libmbim: upgrade 1.32.0 -> 1.33.1
-Date: Tue, 10 Jun 2025 11:32:42 +0800
-Message-ID: <20250610033330.924-16-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 20/64] libvpx: upgrade 1.15.1 -> 1.15.2
+Date: Tue, 10 Jun 2025 11:32:46 +0800
+Message-ID: <20250610033330.924-20-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250610033330.924-1-wangmy@fujitsu.com>
 References: <20250610033330.924-1-wangmy@fujitsu.com>
@@ -55,34 +55,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 03:33:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117806
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117808
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libmbim/{libmbim_1.32.0.bb => libmbim_1.33.1.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/libmbim/{libmbim_1.32.0.bb => libmbim_1.33.1.bb} (90%)
+ .../webm/{libvpx_1.15.1.bb => libvpx_1.15.2.bb}                 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-multimedia/webm/{libvpx_1.15.1.bb => libvpx_1.15.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.32.0.bb b/meta-oe/recipes-connectivity/libmbim/libmbim_1.33.1.bb
-similarity index 90%
-rename from meta-oe/recipes-connectivity/libmbim/libmbim_1.32.0.bb
-rename to meta-oe/recipes-connectivity/libmbim/libmbim_1.33.1.bb
-index 5cc4f804ba..a4174e06e3 100644
---- a/meta-oe/recipes-connectivity/libmbim/libmbim_1.32.0.bb
-+++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.33.1.bb
-@@ -11,8 +11,8 @@ DEPENDS = "glib-2.0 glib-2.0-native libgudev"
+diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.15.1.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.15.2.bb
+similarity index 96%
+rename from meta-oe/recipes-multimedia/webm/libvpx_1.15.1.bb
+rename to meta-oe/recipes-multimedia/webm/libvpx_1.15.2.bb
+index 54433a2b98..f709541c20 100644
+--- a/meta-oe/recipes-multimedia/webm/libvpx_1.15.1.bb
++++ b/meta-oe/recipes-multimedia/webm/libvpx_1.15.2.bb
+@@ -7,7 +7,7 @@ LICENSE = "BSD-3-Clause"
  
- inherit meson pkgconfig bash-completion gobject-introspection upstream-version-is-even
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
  
--SRCREV = "2bc1080292aae30000e808ec77d7a99b87eb3553"
--SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libmbim.git;protocol=https;branch=mbim-1-32"
-+SRCREV = "e10df4b6b3edfe6a46d93f7f5f5cab31c29a7091"
-+SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libmbim.git;protocol=https;branch=main"
- 
- S = "${WORKDIR}/git"
- 
+-SRCREV = "39e8b9dcd4696d9ac3ebd4722e012488382f1adb"
++SRCREV = "d168454ecd099805c675d4a98c66f4891373302a"
+ SRC_URI += "git://chromium.googlesource.com/webm/libvpx;protocol=https;branch=main;tag=v${PV} \
+            file://libvpx-configure-support-blank-prefix.patch \
+            "
 -- 
 2.43.0
 
