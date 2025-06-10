@@ -1,101 +1,97 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51192C5B543
-	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 14:43:27 +0000 (UTC)
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
- by mx.groups.io with SMTP id smtpd.web10.88989.1749566602037382281
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AE6EC5B543
+	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 14:47:47 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.89093.1749566864318512454
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Jun 2025 07:43:22 -0700
+ Tue, 10 Jun 2025 07:47:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CDiV6mcP;
- spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-70e302191a3so41441377b3.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 07:43:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749566601; x=1750171401; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=7vg7Y1LAI7S2eq9Q90Izk8GConzyKOyH0SvLn6glQVQ=;
-        b=CDiV6mcPojEKDYwr6GllU+yKJ9Ks5HeVdEpuSNR1DK3rHtE1NEqs2XEURCZ8GGp0Qe
-         lXjfBjN+hXQu2k4DYu7xIXa1kRg6zwo9cZSKd82wjmyDHAgKA1KE5ISrgoQxK2xmrS2x
-         Jr0sYA+VALJCeYKkgPQ8CXNk4kNTLiWnijZ4qTMrx0BtVKsqpfB4kRj4WoP3koEDRHOb
-         a38Xi0Aed1seTx5j/HajQRtriLvS6vLdeksZWxNlAXkvGg7u9y1DvMo98uh7WYGpmwOp
-         qzb6NuxZuuKCNj/SW4AshIULVx3atBenEgI+iBF1AkIX51baLyz3tvkfxdp8ep05lGik
-         RG3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749566601; x=1750171401;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=7vg7Y1LAI7S2eq9Q90Izk8GConzyKOyH0SvLn6glQVQ=;
-        b=miMlincoaE3qSSc3Q6I6jRcOeC4pAdVOPvNHdGa2KrtKtK0T8hGX79iFPFyNHb/2aL
-         9EJgxMUpMXwKuslTliRZ0CrvovrXSFZWoTOA8ph3vth5lCmYwWewo301JoSXESvmzXWE
-         lN4sERjuBXf0QigJPW+VkkYTMtZNSPwpVXB7IFqWbhzC3ae8qsSqSSwHjrM5BBmD6b7i
-         8jch3ZC3f63VFpQkdRO+Eo9WZjPr4rtoFRW9mCbXlbSWAO7jU11Vox+cJbSwzDzHZMC3
-         eJBCEPU3HH7GPoVzbiaWc1pukBovn3Gp32CFeb0qOUwQnhSMlEHEZfCeTKdTgQy+/Oel
-         6Owg==
-X-Gm-Message-State: AOJu0YxwphwLDmDfcSgkPu0nLrJg0MElwqlx+xySV7YnKULIsAulhzPy
-	DCHzaMY45Gbg20Y+HcisGJfO18P+DNpxb06PYrFhs1tWPiYxKLVL7MJHPkoHrOtr
-X-Gm-Gg: ASbGnctG13tyrvJSwhiXUkzuXGnlAZK9b8MgBxeYgT8MLZSIZdj53x0XUtoOTK5wUIH
-	jWp6BM4HdR+BAM/MbgRvet+RWLmPKWE+FCGVW/sBrPbl+j64ntSoi30EfwH9iuufJhvTyWs8Nzd
-	nGhP8DJBUcxxAHYg5c8Fx1NzJDOSuxorWSvTqXEn+0zFr7gI5QG/7VD97e41oJiswEN+zfqJt+1
-	Pc4Dsgm6tYBg9pulzIPR6VsZYJD4CXd0jYs0hqvZRzOpm3fr3ZjA2oW2u94MonDzRjjO5V3Rsny
-	uG2BruLAdN2SYcroUn8Y/TUWKFC/bSdLvt1JI53xlouieynsyuCBaLzkWA1GbwcHsu30UzEn9VH
-	vIbUTKr7FvGVxSg4KcwJH0gu4+3nmlu8=
-X-Google-Smtp-Source: AGHT+IFHNHCoqy1+eo04CJuG1yImqIyxNOdC5WVGFgDO0I35jwGZsl8LDOH8iGFPl80wxZHzH2oEeQ==
-X-Received: by 2002:a05:690c:6c0a:b0:70f:8913:ed66 with SMTP id 00721157ae682-7113fcc6b75mr1870527b3.38.1749566600546;
-        Tue, 10 Jun 2025 07:43:20 -0700 (PDT)
-Received: from localhost.localdomain (71-208-4-221.ftmy.qwest.net. [71.208.4.221])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-710f9a0fc34sm16379947b3.97.2025.06.10.07.43.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Jun 2025 07:43:20 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH 6/6] xfce4-screenshooter: upgrade 1.10.4 -> 1.10.6
-Date: Tue, 10 Jun 2025 10:42:54 -0400
-Message-ID: <20250610144254.884143-6-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250610144254.884143-1-schonm@gmail.com>
-References: <20250610144254.884143-1-schonm@gmail.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=8256ed4fc1=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55AEXUN4010170
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 14:47:43 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 474an2k5wp-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 14:47:43 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Tue, 10 Jun 2025 07:47:42 -0700
+Received: from pek-lpg-core5.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.57 via Frontend Transport; Tue, 10 Jun 2025 07:47:41 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] nodejs: Disable for powerpc64le
+Date: Tue, 10 Jun 2025 22:47:40 +0800
+Message-ID: <20250610144740.1026927-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjEwMDExNyBTYWx0ZWRfX38o9E6qMNp2V nM52yfHx1pME9QSxik0IY+Fj3sw0Iv4OvX/ZOMbunGyow4Xlmt3C+rozk7XJpae4ScuVcbT4heO qeJDEIy7zv8uKplOE+0oOGLsBaxFVYYXZeIqe74qyGtC2W33Dz5++WVmhp14zjVlmA0eP7DmrdI
+ fKxuvOThnNo7l/p5ZYJoK/gKOhSDZUSt390e5rnFzO2Q3OxeuqN/bD+AmCpe+TFRS94ZBacgtON Q7a42QMaHsLskxz+hPCQP5b86Owzr7VWXkwECwDaTMpXogiCCV9oDttUfAptXB5v4p7d4MisH/2 vLtzbOT6vQJpiThshjxtHxKJRDj2Vzz+ggpBlsgc+JVgRw/EeT50V0Bar+a7eeZrEXpncXnVT5v
+ SC5KQFkmuMNOHPQXsQxfzSPVnsXcNL16Tbi78nBQ3xQAvFWw8QBN9xQryuE8kMT3usWDO3gn
+X-Proofpoint-GUID: AuL4PA4Lm_GQmkeviBSWeGz2qPMo-b_l
+X-Authority-Analysis: v=2.4 cv=fdSty1QF c=1 sm=1 tr=0 ts=6848458f cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=IkcTkHD0fZMA:10 a=6IFa9wvqVegA:10 a=-LCu6K_DAAAA:8 a=t7CeM3EgAAAA:8 a=BKFLrg-tKnoQ1W-ekQIA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: AuL4PA4Lm_GQmkeviBSWeGz2qPMo-b_l
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-06-10_06,2025-06-10_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxlogscore=999
+ bulkscore=0 impostorscore=0 clxscore=1015 malwarescore=0 suspectscore=0
+ mlxscore=0 phishscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501
+ classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.21.0-2505280000
+ definitions=main-2506100117
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 55AEXUN4010170
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 14:43:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117870
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 14:47:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117871
 
-Changelog: https://gitlab.xfce.org/apps/xfce4-screenshooter/-/tags/xfce4-screenshooter-1.10.6
+Fixes:
+1. Compile failure with host gcc 11.4.0 (on ubuntu 22.04)
+$ echo 'MACHINE =3D "qemuppc64"' >> conf/local.conf
+$ bitbake nodejs
+'''
+../deps/v8/src/execution/ppc/simulator-ppc.cc:5126:33: error: =E2=80=98ce=
+ilf=E2=80=99 is not a member of =E2=80=98std=E2=80=99; did you mean =E2=80=
+=98ceil=E2=80=99?
+ 5126 |       VECTOR_FP_ROUNDING(float, ceilf)
+      |                                 ^~~~~
+'''
 
-Changelog: https://gitlab.xfce.org/apps/xfce4-screenshooter/-/tags/xfce4-screenshooter-1.10.5
+2. Segment fault on qemuppc64
+$ runqemu qemuppc64 slirp nographic ext4 snapshot qemuparams=3D"-m 8192"
+root@qemuppc64:~# node --help
+Segmentation fault (core dumped)
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...e4-screenshooter_1.10.4.bb => xfce4-screenshooter_1.10.6.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-apps/xfce4-screenshooter/{xfce4-screenshooter_1.10.4.bb => xfce4-screenshooter_1.10.6.bb} (87%)
+ meta-oe/recipes-devtools/nodejs/nodejs_22.16.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.10.4.bb b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.10.6.bb
-similarity index 87%
-rename from meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.10.4.bb
-rename to meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.10.6.bb
-index da929b7fca..8778ff3451 100644
---- a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.10.4.bb
-+++ b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.10.6.bb
-@@ -7,7 +7,7 @@ DEPENDS = "xfce4-panel libxfce4util libxfce4ui gdk-pixbuf gtk+3 glib-2.0 libsoup
- 
- inherit xfce-app perlnative
- 
--SRC_URI[sha256sum] = "a2f199687e54e16a936d5636d660d42b6b9a5d548cdd0f04bd69213554806494"
-+SRC_URI[sha256sum] = "992066cfecfb44a68681340bfd55d524d40410aac3da6ef25c6c6cb2150a5965"
- 
- do_compile:prepend() {
-     mkdir -p lib
--- 
-2.43.0
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.16.0.bb b/meta-oe/=
+recipes-devtools/nodejs/nodejs_22.16.0.bb
+index 43d9b99fd8..b29c83400a 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_22.16.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.16.0.bb
+@@ -18,6 +18,7 @@ COMPATIBLE_MACHINE:mips64 =3D "(!.*mips64).*"
+ COMPATIBLE_HOST:riscv64 =3D "null"
+ COMPATIBLE_HOST:riscv32 =3D "null"
+ COMPATIBLE_HOST:powerpc =3D "null"
++COMPATIBLE_HOST:powerpc64le =3D "null"
+=20
+ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-Do-not-use-glob-in-deps.patch \
+--=20
+2.34.1
 
 
