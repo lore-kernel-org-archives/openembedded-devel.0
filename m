@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E338C71144
-	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 03:34:02 +0000 (UTC)
-Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
- by mx.groups.io with SMTP id smtpd.web11.77954.1749526430938462080
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07389C7115E
+	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 03:34:03 +0000 (UTC)
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web11.77956.1749526432094742799
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jun 2025 20:33:57 -0700
+ Mon, 09 Jun 2025 20:33:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=nxgZeZfz;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Ja50xR8B;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1749526436; x=1781062436;
+  t=1749526432; x=1781062432;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=rHyPm0cc+hn1PFVtW7CcC3XsH1wJX2DBXeCD3T4qIyM=;
-  b=nxgZeZfzfjFp/aawu+83epz9MKo9CtYgj9RDVXzYxdndFfkoTmTaN7bq
-   0YZYMUK5+FDuurxNe50DeaVSBEXjKqMZDjg2gUSvnZ5kVWoFuVQkIjZcu
-   19nZiE4CMVuLzaF5Wy09YVi7l/U1x5XDNLtBijXPJAtblR4SbAPho0r4D
-   UL51gZXqVhLr/egxnM8CsykzJp5tnOtNuq1DWNnUPkjh40Mi8eTCAc3Ne
-   XpanwEgERM23ZihXUt0Sypwy/HltAFlJG4EXRqmiAv3e/hjPUvdOhReCz
-   +a+k9CZ316caqpGaStLw9TRr6p1xdHQCMVoGxD/jH17jrCGJqKmJA3Sdh
-   g==;
-X-CSE-ConnectionGUID: qpMjLt+fSiCJIZ3IRMq5PQ==
-X-CSE-MsgGUID: gtLuJuNkRxqVu3Bge0lLcw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="190206654"
+  bh=qKCEd+etKIgLUyHOC37jtzcRWWMAwqDTzKtKhxq+qo0=;
+  b=Ja50xR8B/7pMMikpDQ8vz3RqE+N6OmFSz47EuW93sC4DCIILA1aXfJio
+   KxqK5rY1FqtjZIL4OykN8fOH+5bFuaNJxllcax1nEI0H6YlEkV7qRb/JM
+   1lOKM2v0cfIsBycYcfcwEfNdB39QLXRPrJT8ZWl0AcAjbozmx2l+F2IcR
+   hU1NT2AdnOHQ/+pPW9+F6YkJHG4Vy40wO3gc8XDEKez/3+z5UE+6cnBAd
+   HiCVlYL+If+P4fEyZ4222QpDHWwJj78ltl1Pfm2b61KkQndy0JEZ55axv
+   a1Qm3pJj2igWgeKvnWLnO7nYudgjXhoAmxSyI0uSwihmju9vYtWU09PtM
+   A==;
+X-CSE-ConnectionGUID: xtm4DwxxTH6LFLR/1nPNPg==
+X-CSE-MsgGUID: ZMQ9VHW1Tem61oyvXHkwSg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="190662475"
 X-IronPort-AV: E=Sophos;i="6.16,224,1744038000"; 
-   d="scan'208";a="190206654"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:33:55 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 4B704E495E
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:53 +0900 (JST)
+   d="scan'208";a="190662475"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:33:49 +0900
+Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id CCC5FC68FB
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:47 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id E7555BF3C1
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:52 +0900 (JST)
+	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 78E58D5068
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:47 +0900 (JST)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 79A841A0071;
-	Tue, 10 Jun 2025 11:33:52 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id F329C1A009B;
+	Tue, 10 Jun 2025 11:33:46 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 51/64] python3-scikit-build-core: upgrade 0.11.3 -> 0.11.4
-Date: Tue, 10 Jun 2025 11:33:17 +0800
-Message-ID: <20250610033330.924-51-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 36/64] python3-grpcio-reflection: upgrade 1.72.0 -> 1.72.1
+Date: Tue, 10 Jun 2025 11:33:02 +0800
+Message-ID: <20250610033330.924-36-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250610033330.924-1-wangmy@fujitsu.com>
 References: <20250610033330.924-1-wangmy@fujitsu.com>
@@ -54,49 +54,33 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 03:34:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117841
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 03:34:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117829
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-=============
-Fixes:
-- Typo in license-files
-- Fix dynamic-metadata iteration (only affected GraalPy)
-- Better abiflags implementation, uses ABIFLAGS on 3.14+, supports GraalPy
-- File API commandFragments is optional
-- Add python -m scikit_build_core printout and a few CLI issues
-- Add some platform info to logging
-
-Internal:
-- Explicit mypy ignores
-- Adjust typing to be ready for next mypy release
-
-Documentation:
-- Refactor the documentation to use single-line summaries
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...build-core_0.11.3.bb => python3-scikit-build-core_0.11.4.bb} | 2 +-
+ ...reflection_1.72.0.bb => python3-grpcio-reflection_1.72.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-scikit-build-core_0.11.3.bb => python3-scikit-build-core_0.11.4.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-grpcio-reflection_1.72.0.bb => python3-grpcio-reflection_1.72.1.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-scikit-build-core_0.11.3.bb b/meta-python/recipes-devtools/python/python3-scikit-build-core_0.11.4.bb
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.72.0.bb b/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.72.1.bb
 similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-scikit-build-core_0.11.3.bb
-rename to meta-python/recipes-devtools/python/python3-scikit-build-core_0.11.4.bb
-index 134bb3aeac..d1b2fde166 100644
---- a/meta-python/recipes-devtools/python/python3-scikit-build-core_0.11.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-scikit-build-core_0.11.4.bb
-@@ -10,6 +10,6 @@ DEPENDS = "python3-hatch-vcs-native"
- inherit pypi python_hatchling
+rename from meta-python/recipes-devtools/python/python3-grpcio-reflection_1.72.0.bb
+rename to meta-python/recipes-devtools/python/python3-grpcio-reflection_1.72.1.bb
+index 77c0ec4bbe..a922dcd873 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.72.0.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.72.1.bb
+@@ -11,7 +11,7 @@ DEPENDS += "python3-grpcio"
+ PYPI_PACKAGE = "grpcio_reflection"
+ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
  
- SRC_URI += "file://0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch"
--SRC_URI[sha256sum] = "74baf7cbc089f8621cc0646d9c5679034d5be1b014c10912dc32a4bcd1092506"
-+SRC_URI[sha256sum] = "5b194bbb04092ae327d294b23e4bbffb6181adce4259440a86c9cf6abb8eaa6c"
+-SRC_URI[sha256sum] = "75c4bc9accf8458c635ebfd408317bfb61368424e1219642a20332adf5570dff"
++SRC_URI[sha256sum] = "f04f0c8c21937162c3a7d2b9532a42e568fd4096327bec8eb1cff8e7d8146150"
  
- BBCLASSEXTEND = "native nativesdk"
+ RDEPENDS:${PN} = "python3-grpcio"
+ 
 -- 
 2.43.0
 
