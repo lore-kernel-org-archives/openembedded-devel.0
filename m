@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78CF1C7113E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3236BC71133
 	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 03:34:02 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.web10.78443.1749526438015429840
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.web10.78436.1749526427996707314
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jun 2025 20:33:58 -0700
+ Mon, 09 Jun 2025 20:34:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=L0iyBsMV;
- spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=i8Doolm9;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1749526438; x=1781062438;
+  t=1749526440; x=1781062440;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=RUYtbB4c07uKef/SyxUVvpOhZjdVv+qGWbLU16ishHY=;
-  b=L0iyBsMVaTqkfiUubobUN636StgobuyaQOtBwgFzaGMy7I5cKpf40NvQ
-   2JueqLxvtKF/xbBwQ/1ZecaP/OmB15kUt9TfNUdAFEJndIEu6kCAXC7yp
-   Xun2XiPW1b/ORKJYkAwb2s0WGcBORKoT19/TwK1eLASJohRH3ubIoxkh2
-   KYPlfYHrY7PguHhvGc0CuvrYCeTXbKR3VGHLsO42zuzxCy5HGOaOVMzAC
-   3eZxE42/p4yloN1C3ESo7Khxb3VnduyjmJvz2tj5ThQCJlC4ocShgtSOW
-   NAB+e18fxbTz+1QIz73nfev+OSqqweA3SrHRmBEZJG7aBoXONCUR9A+D1
-   Q==;
-X-CSE-ConnectionGUID: Bh8a2VmzRBuJWDkRraGh/A==
-X-CSE-MsgGUID: 3bsMaxlTQ1mNhELZco1Hvg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="181135337"
+  bh=rmEnWratWKbAY88iyRRtlp2FT+eDcBxkmqcWTYXVTdk=;
+  b=i8Doolm9PcNmYL3rBOiBBznlZMolXsfrjSgRxhUuyxMknG45OZqkhw9X
+   vkjRvmNGxehlSU42GJG4Y6lFESO2OjMbcWadKVUxCwjqqaHL8GN6/74J1
+   9Zo05VpXottASQDrXqtrvl6FbBfeF9zXfcI/YGJFYLtQdGwxBXMQWcxR+
+   81+JtvUwpRHLYa0isp6sVYPYI+EHjGU379xegIdJ5q3wLGO8oAgMzfwxM
+   uLSfcENLlerzLgihvT9brC/Hzxa7+OwWtzA1qOuoTME2c2tPid1Ne8lsU
+   I3m/FfxxewkaIe+9dJ4c6P1srDhRJ+1YTz3viKhBdsb7YXFHJnRjds/zu
+   g==;
+X-CSE-ConnectionGUID: ov3vGf98TZC34Y3as4FV1A==
+X-CSE-MsgGUID: vSXSIctbQtCDibpBZGhjTQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="202680498"
 X-IronPort-AV: E=Sophos;i="6.16,224,1744038000"; 
-   d="scan'208";a="181135337"
-Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:33:56 +0900
+   d="scan'208";a="202680498"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:33:59 +0900
 Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id AA04DD5004
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:53 +0900 (JST)
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id E9284C68FB
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:56 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 535CBD5068
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:53 +0900 (JST)
+	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 94663D5068
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:56 +0900 (JST)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id CC3631A009A;
-	Tue, 10 Jun 2025 11:33:52 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 1CA291A0071;
+	Tue, 10 Jun 2025 11:33:56 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 52/64] python3-thrift: upgrade 0.21.0 -> 0.22.0
-Date: Tue, 10 Jun 2025 11:33:18 +0800
-Message-ID: <20250610033330.924-52-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 60/64] tesseract: upgrade 5.5.0 -> 5.5.1
+Date: Tue, 10 Jun 2025 11:33:26 +0800
+Message-ID: <20250610033330.924-60-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250610033330.924-1-wangmy@fujitsu.com>
 References: <20250610033330.924-1-wangmy@fujitsu.com>
@@ -55,32 +55,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 03:34:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117844
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117850
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-thrift_0.21.0.bb => python3-thrift_0.22.0.bb}      | 2 +-
+ .../tesseract/{tesseract_5.5.0.bb => tesseract_5.5.1.bb}        | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-connectivity/python-thrift/{python3-thrift_0.21.0.bb => python3-thrift_0.22.0.bb} (85%)
+ rename meta-oe/recipes-graphics/tesseract/{tesseract_5.5.0.bb => tesseract_5.5.1.bb} (91%)
 
-diff --git a/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.21.0.bb b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.22.0.bb
-similarity index 85%
-rename from meta-python/recipes-connectivity/python-thrift/python3-thrift_0.21.0.bb
-rename to meta-python/recipes-connectivity/python-thrift/python3-thrift_0.22.0.bb
-index 6a22f2170d..2dba3d48a6 100644
---- a/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.21.0.bb
-+++ b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.22.0.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Python bindings for the Apache Thrift RPC system"
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.0.bb b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.1.bb
+similarity index 91%
+rename from meta-oe/recipes-graphics/tesseract/tesseract_5.5.0.bb
+rename to meta-oe/recipes-graphics/tesseract/tesseract_5.5.1.bb
+index 33d928fa2c..213dfada23 100644
+--- a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.0.bb
++++ b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.1.bb
+@@ -5,7 +5,7 @@ BUGTRACKER = "https://github.com/tesseract-ocr/tesseract/issues"
  LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=7145f7cdd263359b62d342a02f005515"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
--SRC_URI[sha256sum] = "5e6f7c50f936ebfa23e924229afc95eb219f8c8e5a83202dd4a391244803e402"
-+SRC_URI[sha256sum] = "42e8276afbd5f54fe1d364858b6877bc5e5a4a5ed69f6a005b94ca4918fe1466"
+-SRCREV = "64eab6c457b2337dd690746a5fde5c222b40d5f8"
++SRCREV = "3b7c70e34dea179549ed3e995872e2e019eb8477"
+ SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https"
  
- inherit pypi setuptools3
- 
+ S = "${WORKDIR}/git"
 -- 
 2.43.0
 
