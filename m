@@ -2,50 +2,50 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AC70C61CE8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AB5EC5B552
 	for <webhook@archiver.kernel.org>; Tue, 10 Jun 2025 03:34:13 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.web10.78447.1749526442820210475
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.web11.77966.1749526445651764459
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Jun 2025 20:34:03 -0700
+ Mon, 09 Jun 2025 20:34:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=S1VH+Boc;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=iNJnnPsx;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1749526442; x=1781062442;
+  t=1749526446; x=1781062446;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=iKTEtk0F0LOhJDXrKre8ZBvsGsR1edQ92jQrqyNfSKs=;
-  b=S1VH+Boc9p5paZ/o0NUTCHFa6ZZE2xQ1ghl1+kyUtC5RLrtHKxWs823s
-   HHmJbTWfFLpfVqFOqhKzTdTSg/jjyfOhMZ6DAHYJD2TmSbll49ys1+eZ2
-   e54knB4LaO8f4ywHcQmAQtLtvrU43LbYpdZf3PzLTIukBfR4sBwvFQZTQ
-   emsxV+uu7QRFITwJs01PMR3za45ugTMwyIGoqMQnb8KVq5htgf1eoim84
-   V/3KbNSZwX+cdebPSBfLEfFWZKjcpI+zCd1cnX53yVOanKA70dyJOLYYD
-   MSbd/3aaHosOSACHy1rDJu6TTYonEbiKRd2xUo+wV8ba0h7ca4oyqHguO
-   w==;
-X-CSE-ConnectionGUID: 4nljME0iSRGhh0V947LNZQ==
-X-CSE-MsgGUID: ruC7Y7rtR/6sP755lzm6Jg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="190662515"
+  bh=F/sUMkiHwBvVBLHX/Y0huqlgguUF76wXjFod8iAau3Y=;
+  b=iNJnnPsxtuhUVZ25DOnjMx1O4lmECOQvNtxHn28yojdJfLBqasqMuDK4
+   N8ojbDCkMeBOZ97uPLvoiRLu2wNXDCDz1Qf/9lfD4ty9A/9q1iEiOLBsw
+   t0mZB9ZYZ+sRQnbl0C2Fahi2cGRxN2bLXN24qhobi/T7J7zFGcyw281ZJ
+   qVLK2LApcrOFBq5Oq4hj5iK1tans0EBmBywBofLJs+yMzxIqp6UhHg0tv
+   7w7oMe737tXlOC6jChYJIVsZhyyIH/bgTEv22nhOfN0jEVgU90K3yyC7U
+   wRziBiNJleIqHMfP98sCnMYGfuPeT8+Y1belacq8q9lv8hr4ffhS4mCM9
+   Q==;
+X-CSE-ConnectionGUID: 82yLhckQSGqtA3OY7uYKYA==
+X-CSE-MsgGUID: 9jfXSmkgSC6HL4K/f9StNg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="202190337"
 X-IronPort-AV: E=Sophos;i="6.16,224,1744038000"; 
-   d="scan'208";a="190662515"
-Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:34:00 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 6BA2DD5004
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:58 +0900 (JST)
+   d="scan'208";a="202190337"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jun 2025 12:34:03 +0900
+Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 1474ED8033
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:54 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 1150511C7F
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:58 +0900 (JST)
+	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id A7127BF3C1
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 12:33:53 +0900 (JST)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 3A3321A009B;
-	Tue, 10 Jun 2025 11:33:57 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 351911A0071;
+	Tue, 10 Jun 2025 11:33:53 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH 63/64] wireguard-tools: upgrade 1.0.20210914 -> 1.0.20250521
-Date: Tue, 10 Jun 2025 11:33:29 +0800
-Message-ID: <20250610033330.924-63-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 53/64] python3-tomlkit: upgrade 0.13.2 -> 0.13.3
+Date: Tue, 10 Jun 2025 11:33:19 +0800
+Message-ID: <20250610033330.924-53-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250610033330.924-1-wangmy@fujitsu.com>
 References: <20250610033330.924-1-wangmy@fujitsu.com>
@@ -55,31 +55,59 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Jun 2025 03:34:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117856
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117857
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+============
+- fix: register encoder's doc incorrectly mentions TypeError
+- [pre-commit.ci] pre-commit autoupdate
+- chore(deps-dev): bump virtualenv from 20.26.1 to 20.26.6
+- chore(deps): bump jinja2 from 3.1.4 to 3.1.5 in /docs
+- [pre-commit.ci] pre-commit autoupdate
+- chore(deps-dev): bump jinja2 from 3.1.4 to 3.1.5
+- [pre-commit.ci] pre-commit autoupdate
+- feat: add .item() method to retrieve the item object
+- Fix: Inconsistent newlines on Windows
+- Replace pytest's legacy tmpdir fixture with tmp_path
+- Update README.md
+- Prevent repeated whitespace items in arrays
+- Aot setitem not implemented fix
+- [pre-commit.ci] pre-commit autoupdate
+- Fix removal of items from Arrays
+- Fix: reject single keys that aren't strings
+- [pre-commit.ci] pre-commit autoupdate
+- fix: Invalid serialization when overwriting out-of-order table key
+- fix: Dumping a subelement of a parsed toml fails starting on 4rd level of nesting
+- chore(deps-dev): bump jinja2 from 3.1.5 to 3.1.6
+- fix: ensure unique table indices when adding items to out-of-order tables
+- fix: add newline indentation after existing items in Container class
+- fix: Missing newline at end of file with multiple array of tables can corrupt during dumping
+- chore: update version to 0.13.3
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...rd-tools_1.0.20210914.bb => wireguard-tools_1.0.20250521.bb} | 2 +-
+ .../{python3-tomlkit_0.13.2.bb => python3-tomlkit_0.13.3.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-kernel/wireguard/{wireguard-tools_1.0.20210914.bb => wireguard-tools_1.0.20250521.bb} (94%)
+ rename meta-python/recipes-devtools/python/{python3-tomlkit_0.13.2.bb => python3-tomlkit_0.13.3.bb} (83%)
 
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20250521.bb
-similarity index 94%
-rename from meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb
-rename to meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20250521.bb
-index c12b8abd5d..8fb86bc31e 100644
---- a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20250521.bb
-@@ -1,6 +1,6 @@
- require wireguard.inc
+diff --git a/meta-python/recipes-devtools/python/python3-tomlkit_0.13.2.bb b/meta-python/recipes-devtools/python/python3-tomlkit_0.13.3.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-tomlkit_0.13.2.bb
+rename to meta-python/recipes-devtools/python/python3-tomlkit_0.13.3.bb
+index 8eeb9d7603..934c624670 100644
+--- a/meta-python/recipes-devtools/python/python3-tomlkit_0.13.2.bb
++++ b/meta-python/recipes-devtools/python/python3-tomlkit_0.13.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/tomlkit/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=31aac0dbc1babd278d5386dadb7f8e82"
  
--SRCREV = "3ba6527130c502144e7388b900138bca6260f4e8"
-+SRCREV = "e2ecaaa739144997ccff89d6ad6ec81698ea6ced"
- SRC_URI = "git://github.com/WireGuard/wireguard-tools.git;branch=master;protocol=https"
+-SRC_URI[sha256sum] = "fff5fe59a87295b278abd31bec92c15d9bc4a06885ab12bcea52c71119392e79"
++SRC_URI[sha256sum] = "430cf247ee57df2b94ee3fbe588e71d362a941ebb545dec29b53961d61add2a1"
  
- inherit bash-completion systemd pkgconfig
+ inherit pypi python_poetry_core ptest-python-pytest
+ 
 -- 
 2.43.0
 
