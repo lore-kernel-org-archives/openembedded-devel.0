@@ -1,117 +1,76 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <esben@geanix.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25411C7115D
-	for <webhook@archiver.kernel.org>; Fri, 20 Jun 2025 11:58:57 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web10.6047.1750420731426743952
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 138CFC7115D
+	for <webhook@archiver.kernel.org>; Fri, 20 Jun 2025 15:29:26 +0000 (UTC)
+Received: from mail-106112.protonmail.ch (mail-106112.protonmail.ch [79.135.106.112])
+ by mx.groups.io with SMTP id smtpd.web11.3007.1750433362553946482
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Jun 2025 04:58:51 -0700
+ Fri, 20 Jun 2025 08:29:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=c8TlD4Yf;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-60768f080d8so3050109a12.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 04:58:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750420730; x=1751025530; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=gIGvR6dwKgRo55Sk/GE3DSze5n3iTAW4es0tIgz1ykM=;
-        b=c8TlD4YfbdKd18W/vD6IrpGMK6X00xlEZVB0G+SmeP6xZG7DteLpA4XsrD7+WXyLSH
-         ZGFnvIGmXfJxDMW/dN8jckl+B434VFXFtlMWjPJXEMkTGoI1pzr4jX4ixHz3NCCca+FX
-         19L8IFTPzCKA2LcS86jssgRKKccu0iUx5pCD7H+vDlgNveykAEGNn2JDm6FN2IPgdfxk
-         rqjVKvpR+s7pHpXntu2LFwi1uTOxKAYJFIgfXIpfLpkXZUyCpU8lmb5Ab6IpYrepAmVz
-         sP3uK1R/gw5ej/BWC/iT5ERssWvdFRiaHS+1U/yrH1oBeNbg76FKINBB2FltXI101YXU
-         Cs3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750420730; x=1751025530;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=gIGvR6dwKgRo55Sk/GE3DSze5n3iTAW4es0tIgz1ykM=;
-        b=pBz6amsmRNKQECdf2+MIHae72aPWw1wHiHW/cZwbOsIq7v/4FxvIwXHmuRtryztKSl
-         i28nCw3n/LmlD44B2YnTG7VKvrtdVE8TyUXJnOYpEtvf2MXg8CIia+nE1w2FAqUpO9D4
-         ZghWWBef1pp3moYCo5hpKTYva4MzFsOi88stef/JmbfWtjcwiGLaqmQG48Uk1bVsxfJJ
-         1mU/ilVEW031rabwj7TxWhlHRcNmLABsVdKw3XQ7I1xrY5Gp19wRTpeApUwgKKGak2zS
-         tFKzAL88J3EozHWfQB33TwpdeXOwInGgDnHvT8y9DX1mZk3KhyQDLmJjbi8WW7fV+z9H
-         vnIw==
-X-Forwarded-Encrypted: i=1; AJvYcCUkpN0wNEY2NlD+lgBFihpq+NbGPZmHTxEIuk/23tWsqnirx7YnAGiNBccb9li4szaMVVOn7NaNX+u2FriOgZfXuRM=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxP3WAN9/M0VeyH82WtX66R2+JNOgZ18Gv9okE35QLodCBlcC6a
-	ppvxJKL63bue2/FmZcUH1ytIaH9STMofTDPj/C+PXwEhrghuiq8Dq16SgQEbaiwK
-X-Gm-Gg: ASbGncuevzZ00uiBj1pnPbYfckiSJQBkA9wWLYYlguVAnzp9F1PukVijc29188czdsE
-	XrKVeYHLCcgTxGoqvFFH1ZCmLT1RE4DRRFBeOTiISejgH/Lx+hb/PEviwmhXccU4vO/gbCtWvch
-	5c8Fvy4WA2p7KI+LyKVhpet2tcp4tWaq/quGfZU5gwtUEFJCNy0Kjw6UmIupZ+JP+JYHmwwU7P9
-	hPeuqGaH5xbH05ikWnIyCx7gZ0R6ePbbjNJ2IEAoON5JTQec3pc0SIATmPwp/eSBetnt54mKoyf
-	Ex9WkbXxV+Ssr7oKueKTruqC4PrOhq2309d7oXEutv0etx7cy/H6KBE0DKM/COVNhhu4B9M2vWZ
-	QzY7L
-X-Google-Smtp-Source: AGHT+IET3CvW3njT6iuQSLpLgepGxx1UpxBJA+uzDStdz51DsNiwbqP542hbLGwJBBE1qDroHNXSJQ==
-X-Received: by 2002:a05:6402:2693:b0:608:155c:bf81 with SMTP id 4fb4d7f45d1cf-60a1cf3671emr1985760a12.31.1750420729429;
-        Fri, 20 Jun 2025 04:58:49 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-60a18579604sm1322380a12.34.2025.06.20.04.58.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 20 Jun 2025 04:58:48 -0700 (PDT)
-Message-ID: <1a7945c4-9a7d-4587-8a85-915bae147202@gmail.com>
-Date: Fri, 20 Jun 2025 13:58:48 +0200
+ dkim=fail reason="dkim: signature did not verify: crypto/rsa: verification error" header.i=@geanix.com header.s=protonmail header.b=CBKmfvkU;
+ spf=pass (domain: geanix.com, ip: 79.135.106.112, mailfrom: esben@geanix.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=geanix.com;
+	s=protonmail; t=1750433359; x=1750692559;
+	bh=CQd/u4kDhfvOP3SwaMW80+nW/mOGaaPQL8tBfS3nEG0=;
+	h=From:Subject:Date:Message-Id:To:Cc:From:To:Cc:Date:Subject:
+	 Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=CBKmfvkUQfFLVyhpmGFaIgN8Hglsd/3l5X+JIKQssmBCMfxWT+UDlrElrTDRdpwT5
+	 UGVC57WoSRUw1NjwtluMbPb1hV705Xc+5h9P2VbGsXWt2bNRh6VnL/0bQzdA8kODS1
+	 vbZjlJNQV0o9oV2nTv5p3xS40Rh0Yxp7Bu06xEEqeJlYd1HPmQupQu3oHB7Iar6iXx
+	 Y25zhExJP7LCb0nueSerD5+cgLHdteC3FpQYaRsfHtL6S5iWsgR3So2RXvJ1ZbuE/U
+	 DWwkt5yJmNHlnZPhePEY83e4tUz/YLLBTPggBrUExj76i4cmkHYRS+ho02ZQYDfH7n
+	 1hEuYiWay3lWg==
+X-Pm-Submission-Id: 4bP1bx6Y5bzNg
+From: Esben Haabendal <esben@geanix.com>
+Subject: [PATCH meta-oe 0/2] syslog-ng: Add stomp and examples
+ PACKAGECONFIG options
+Date: Fri, 20 Jun 2025 17:29:06 +0200
+Message-Id: <20250620-syslog-ng-stomp-v1-0-4406b09e1e20@geanix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] xmlsec1: avoid hardcoded ${RECIPE_SYSROOT}
- in xmlsec1-gnutls.pc
-To: Jiaying.Song.CN@windriver.com, openembedded-devel@lists.openembedded.org
-Cc: liezhi.yang@windriver.com, changqing.li@windriver.com
-References: <20250620041131.2424118-1-jiaying.song.cn@windriver.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250620041131.2424118-1-jiaying.song.cn@windriver.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAEJ+VWgC/x3MQQqAIBBA0avErBtQKYmuEi2sJhsoDSeiiO6et
+ HyL/x8QSkwCbfFAopOFY8jQZQHj4oIn5CkbjDK1skah3LJGj8GjHHHbcXLV0FitrW0U5GpPNPP
+ 1HzvY6HAYCfr3/QAdXSYMagAAAA==
+X-Change-ID: 20250620-syslog-ng-stomp-da4b86116680
+To: openembedded-devel@lists.openembedded.org
+Cc: Esben Haabendal <esben@geanix.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1750433356; l=713;
+ i=esben@geanix.com; s=20240523; h=from:subject:message-id;
+ bh=Va7DsbfASPFeU8ntDzYfgNRvekvwFgfltkHMi6qLaPc=;
+ b=wCg7TwjXEhrr2dbGjRA3b0xpVa16YTiS7leM13QW5q3DEFn8+/+I4/qExzINoDO+HBd2mfOTj
+ guLmHiR58pHBX2WXJ/C/WKqteVLnLqYFZYVxOU/8yy/ON8woz3cZXXq
+X-Developer-Key: i=esben@geanix.com; a=ed25519;
+ pk=PbXoezm+CERhtgVeF/QAgXtEzSkDIahcWfC7RIXNdEk=
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 11:58:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117970
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 15:29:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117973
 
-On 6/20/25 06:11, Song, Jiaying (CN) via lists.openembedded.org wrote:
-> From: Jiaying Song <jiaying.song.cn@windriver.com>
->
-> Fix do_package_qa error by removing ${RECIPE_SYSROOT} from the installed xmlsec1-gnutls.pc file.
-> This ensures the generated .pc file does not leak build-time paths, complying with QA checks.
->
-> Fixes QA error:
-> ERROR: xmlsec1-1.3.7-r0.wr2500 do_package_qa: QA Issue: File /usr/lib/pkgconfig/xmlsec1-gnutls.pc in package xmlsec1-dev contains reference to TMPDIR [buildpaths]
+While STOMP module is optional in syslog-ng, we have been enabling it by
+default without PACKAGECONFIG support to disable it since forever.
 
-How could this be reproduced? Does it need some special config or
-environment?
+This change disables it (and example modules), requiring anyone actually
+wanting it to enable it through PACKAGECONFIG.
 
-I tried to build it in both master and walnascar for qemux86-64, and it
-was successful, QA checks passed. I used the default recipe, where
-gnutls is part of PACKAGECONFIG, and also when PACKAGECONFIG only
-contained "gnutls".  xmlsec1-gnutls.pc was also generated and installed.
+Signed-off-by: Esben Haabendal <esben@geanix.com>
+---
+Esben Haabendal (2):
+      syslog-ng: Add stomp PACKAGECONFIG option
+      syslog-ng: Add examples PACKAGECONFIG option
 
-> Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
-> ---
->  meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.7.bb | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.7.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.7.bb
-> index 2fdfd55f24..0f4ae205b1 100644
-> --- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.7.bb
-> +++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.7.bb
-> @@ -54,8 +54,11 @@ do_compile_ptest () {
->  }
->  
->  do_install:append() {
-> -    for i in ${bindir}/xmlsec1-config ${libdir}/xmlsec1Conf.sh \
-> -        ${libdir}/pkgconfig/xmlsec1-openssl.pc; do
-> +    for i in \
-> +        ${bindir}/xmlsec1-config \
-> +        ${libdir}/xmlsec1Conf.sh \
-> +        ${libdir}/pkgconfig/xmlsec1-openssl.pc \
-> +        ${libdir}/pkgconfig/xmlsec1-gnutls.pc; do
->          sed -i -e "s@${RECIPE_SYSROOT}@@g" ${D}$i
->      done
->  }
->
+ meta-oe/recipes-support/syslog-ng/syslog-ng_4.8.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+---
+base-commit: 820047afe48a0d48056f4752defc3d2803c9d906
+change-id: 20250620-syslog-ng-stomp-da4b86116680
+
+Best regards,
+-- 
+Esben Haabendal <esben@geanix.com>
+
 
