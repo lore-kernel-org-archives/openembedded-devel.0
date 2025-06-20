@@ -1,4825 +1,14266 @@
-Return-Path: <Yogita.Urade@windriver.com>
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-	aws-us-west-2-korg-lkml-1.web.codeaurora.org
+Return-Path: <alex.kanavin@gmail.com>
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB3CAC83F27
-	for <webhook@archiver.kernel.org>; Wed, 16 Jul 2025 14:41:06 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.23853.1752676858282265963
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7730BC7115C
+	for <webhook@archiver.kernel.org>; Fri, 20 Jun 2025 14:07:05 +0000 (UTC)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web11.1102.1750428422197971757
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 16 Jul 2025 07:40:58 -0700
+ Fri, 20 Jun 2025 07:07:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9292b056a7=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 56G7Si3c2142796
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Jul 2025 07:40:57 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47wds0t09h-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 16 Jul 2025 07:40:57 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Wed, 16 Jul 2025 07:40:54 -0700
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] poppler: fix CVE-2025-52886
-Date: Wed, 16 Jul 2025 20:10:33 +0530
-Message-ID: <20250716144033.1780473-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Oo8HGARY;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-ade76b8356cso324089366b.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 07:07:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1750428420; x=1751033220; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=56oQ+cd/oCLws52ACjQJk43pgG7S+QjPFmj6UOdjXm0=;
+        b=Oo8HGARYkW2XqTvsX862i744GqqWhNJNe/v/96WH87olQzCz/rjJSjpghINN+drVYG
+         zE5BnX4BrzuAHG8qJhbMkOmbI+wdaBY6UAKYFGE9xivBBZcg5YmPoEfO1RoWYxt7BYTn
+         LLHe+Y0qmzeNg8gfAUmMOLuLVZ/mQsTsxO8WI/Yc87BO85fxmcjHICnCBBTCfxUBBxzp
+         pTyhoRVU7iDQNXOK5wy4JXdNLdo/bMy0X3KoV/UZx0QqsDX+rHpztwia+aDq9B5SibcU
+         Fe5UgyaZBP3MiVY8IktbfzOfM5hXHYPTOlg6EV8mkNbNjtRofWVBcoUcZj64mOvB/Qql
+         05WA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1750428420; x=1751033220;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=56oQ+cd/oCLws52ACjQJk43pgG7S+QjPFmj6UOdjXm0=;
+        b=waQzEjdSyXIe9LKqO9Ll/rudooeTXzYHlKLZ7PtlY2MmCaG4kfU0t3SAkqx+CarPg9
+         4+YSxkAEpCFmiJOgRng1NITc7T0zbVK2nwNiv1YNiT3+p/+xVXqeY9ql2E8AbldKpVSP
+         eMRfTCAqsiOvcEkcIW4YGV4kAbvy0Pt7Zs0zJV5Ts6HY/hk1Sh9HA956fr8/F7JyguN0
+         R/+VJYZhInjOOkBdmoSUaHfGGLDllCQVtuhW1VofYD1qZHICxlpNoq2JxGqpM8RF9hYk
+         axa7KhoiVILoCkkkoNDt3vNEec1zvYv5j995QOzlqCSCpZX8kRSG/0mrjaAlidVcFcUE
+         l4jw==
+X-Gm-Message-State: AOJu0Yz7ufHYBCPWcJzapFuNuaBanvY3c6dxvdLTntz0kSSD0dQ3L4kk
+	QvUbeF6QcnWPllrdU2aP5Q4ZhQca1KgVya+dpoa3Bs+6FpORUL+gK8awbKIHtw==
+X-Gm-Gg: ASbGnctL+sQKy5mQc3CbIEjI+46K+d+DlcppBTqT3eJfwQIUEDUPv/My+we11yqyZ97
+	bLgVSm/LHjHB/7vtj+wqNqTMCIXuo5eVnESwso4c3A7GmGI/GPL0FTe/zi7ZorcaKLvPAUgH8L6
+	BFws5nJx02JpZ96QKK2g7CsYaRlunfQ0NyuX0ucAtWmPsXHGAGAX7+e4hCrPKdnama3iQXMMsZR
+	HGxoMmwZLRUl/1IJ08MZbbLJekIfl+FoMFt8yYhCdk9eJ9c3ccVER1qeXX6XO3E2ePNFZrfCicb
+	Jevge8p30n98eXpEpqqzqxVmU3uKEzv0LcgFx4zakPLD1T5nvVK6sDASuO5tbodBgRBAZr7wmQH
+	kKmL/4sJJll/QnOXmULYufLM=
+X-Google-Smtp-Source: AGHT+IFyd/cbFJeKNJQX+tPeVusOVEznzI1jBPN6KVO1de2KhtRoz6XWtPwN0/KVITMN4nw52sA3gg==
+X-Received: by 2002:a17:907:9912:b0:ad8:9c97:c2dd with SMTP id a640c23a62f3a-ae057d4eb6cmr282758366b.17.1750428418317;
+        Fri, 20 Jun 2025 07:06:58 -0700 (PDT)
+Received: from Zen2.lab.linutronix.de. (drugstore.linutronix.de. [80.153.143.164])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae053e80447sm169315266b.6.2025.06.20.07.06.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 20 Jun 2025 07:06:57 -0700 (PDT)
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alexander Kanavin <alex@linutronix.de>
+Subject: [PATCH] meta-openembedded/all: adapt to UNPACKDIR changes
+Date: Fri, 20 Jun 2025 16:06:53 +0200
+Message-Id: <20250620140653.158090-1-alex@linutronix.de>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: buvYlCiajM48rmVd6GXRNPAuO5G1FRMc
-X-Authority-Analysis: v=2.4 cv=bLkWIO+Z c=1 sm=1 tr=0 ts=6877b9f9 cx=c_pps
- a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17
- a=HCiNrPZc1L8A:10 a=Wb1JkmetP80A:10 a=PYnjg3YJAAAA:8 a=xNf9USuDAAAA:8
- a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8 a=3fyaaF4VAAAA:8 a=B0OJKUvFRUz7NUuQav4A:9
- a=Xu3gaw_SWqBT90MC:21 a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzE1MDAxNSBTYWx0ZWRfX8Ci571K7vfsl
- 4ySaaUNWtW0UfBVVD4rWgFFfWpE3etAWUfycQwW50r0/owafPIrtad9XVqvKMKv9lUd08yO4w5y
- XeD4TpuRHV3csM9Hg/9Zk4Oykk8CnsFIyHZx6SVOX9RRMVnb9xg118VsU3ObwHaDmbTKxV5DBcr
- aeU0/VMRB0MQplUo2h7PoMtmP33YpENTjZ4zuwiGOFJnHolG1fSk3vRAtX/xzCUvHxKmYKK88S4
- 0KhVVPvxvpLLfsa75F8QeX/NzEwix2rDhZGWO9WZHE2fWi5352LEDK2vI91e+fEusKZaMUlGeEY
- BftneOtQ3nyx1SqiDe4TNEsqaONG1D4cw5Wzp44irV9cUgxllqE/0EXmn04uPsRuAXzXjOu7lkf
- A6MxM8TB
-X-Proofpoint-GUID: buvYlCiajM48rmVd6GXRNPAuO5G1FRMc
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-16_02,2025-07-16_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 phishscore=0 bulkscore=0 impostorscore=0
- clxscore=1015 adultscore=0 priorityscore=1501 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2506270000 definitions=main-2507150015
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Jul 2025 14:41:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118599
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 14:07:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117971
 
-From: Yogita Urade <yogita.urade@windriver.com>
+Please see
+https://git.yoctoproject.org/poky/commit/?id=4dd321f8b83afecd962393101b2a6861275b5265
+for what changes are needed, and sed commands that can be used to make them en masse.
 
-Poppler is a PDF rendering library. Versions prior to 25.06.0
-use `std::atomic_int` for reference counting. Because
-`std::atomic_int` is only 32 bits, it is possible to overflow
-the reference count and trigger a use-after-free. Version 25.06.0
-patches the issue.
+I've verified that bitbake -c patch world works with these, but did not run a world
+build; the majority of recipes shouldn't need further fixups, but if there are
+some that still fall out, they can be fixed in followups.
 
-CVE-2025-52886-0001 and CVE-2025-52886-0002 are dependent commits
-while rest are actual CVE fixes.
-
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2025-52886
-https://security-tracker.debian.org/tracker/CVE-2025-52886
-
-Upstream patches:
-https://gitlab.freedesktop.org/poppler/poppler/-/commit/d35e11a8f84d396a9d9ef43ef852d377adc3830a
-https://gitlab.freedesktop.org/poppler/poppler/-/commit/af3e1e1a3577c4e1c66cbe69ebdc6a632038e299
-https://gitlab.freedesktop.org/poppler/poppler/-/commit/3449a16d3b1389870eb3e20795e802c6ae8bc04f
-https://gitlab.freedesktop.org/poppler/poppler/-/commit/ac36affcc8486de38e8905a8d6547a3464ff46e5
-
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- .../poppler/poppler/CVE-2025-52886-0001.patch |  318 ++
- .../poppler/poppler/CVE-2025-52886-0002.patch |  108 +
- .../poppler/poppler/CVE-2025-52886-0003.patch | 4201 +++++++++++++++++
- .../poppler/poppler/CVE-2025-52886-0004.patch |   58 +
- .../poppler/poppler_22.04.0.bb                |    4 +
- 5 files changed, 4689 insertions(+)
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0001.patch
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0002.patch
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0003.patch
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0004.patch
+ .../httpfs2-fuse/httpfs2_0.1.5.bb             |  2 +-
+ .../logfsprogs/logfsprogs_git.bb              |  1 -
+ .../ntfs-3g-ntfsprogs_2022.10.3.bb            |  2 +-
+ .../recipes-filesystems/owfs/owfs_3.2p3.bb    |  1 -
+ .../simple-mtpfs/simple-mtpfs_0.4.0.bb        |  1 -
+ .../smbnetfs/smbnetfs_git.bb                  |  1 -
+ .../sshfs-fuse/sshfs-fuse_3.7.3.bb            |  1 -
+ .../unionfs-fuse/unionfs-fuse_3.4.bb          |  1 -
+ .../yaffs2/yaffs2-utils_git.bb                |  1 -
+ .../recipes-filesystems/zfs/zfs_2.2.5.bb      |  1 -
+ .../recipes-utils/aufs-util/aufs-util_git.bb  |  1 -
+ .../recipes-utils/binfs/bindfs_1.18.0.bb      |  1 -
+ .../btrfsmaintenance/btrfsmaintenance_0.5.bb  |  1 -
+ .../recipes-utils/e2tools/e2tools_0.1.2.bb    |  1 -
+ .../f2fs-tools/f2fs-tools_1.16.0.bb           |  1 -
+ .../recipes-utils/fatcat/fatcat_1.1.1.bb      |  1 -
+ .../fatresize/fatresize_1.1.0.bb              |  1 -
+ .../overlayfs/overlayfs-tools_v2024.07.bb     |  1 -
+ .../ufs-utils/ufs-utils_6.13.11.bb            |  1 -
+ .../xfstests/xfstests_2025.04.27.bb           |  1 -
+ meta-gnome/classes/clutter.bbclass            |  2 +-
+ .../recipes-connectivity/geary/geary_46.0.bb  |  1 -
+ .../polkit-gnome/polkit-gnome_0.105.bb        |  1 -
+ meta-gnome/recipes-gimp/gimp/gimp_3.0.4.bb    |  1 -
+ .../recipes-gimp/mypaint/libmypaint_git.bb    |  1 -
+ .../mypaint/mypaint-brushes-1.0_git.bb        |  1 -
+ .../devilspie/devilspie2_0.44.bb              |  1 -
+ .../faenza-icon-theme_1.3.bb                  |  3 +-
+ .../gedit/libgedit-amtk_5.8.0.bb              |  1 -
+ .../gedit/libgedit-gtksourceview_299.2.1.bb   |  1 -
+ .../gnome-bluetooth3_3.34.5.bb                |  2 +-
+ .../gnome-chess/gnome-chess_48.0.bb           |  1 -
+ .../gnome-chess/gnuchess_6.2.9.bb             |  2 +-
+ .../gnome-terminal/gnome-terminal_3.54.0.bb   |  1 -
+ .../gnome-user-share/gnome-user-share_47.0.bb |  1 -
+ .../gtksourceview-classic-light_1.0.bb        |  3 +-
+ .../gtksourceview/gtksourceview3_3.24.11.bb   |  2 +-
+ .../gtksourceview/gtksourceview4_4.8.4.bb     |  2 +-
+ .../gtksourceview/gtksourceview5_5.16.0.bb    |  2 +-
+ .../libchamplain/libchamplain_0.12.21.bb      |  1 -
+ .../libgweather/libgweather4_4.4.4.bb         |  2 +-
+ meta-gnome/recipes-gnome/tepl/tepl_6.8.0.bb   |  1 -
+ meta-gnome/recipes-support/ibus/ibus.inc      |  1 -
+ .../keybinder/keybinder_3.0.bb                |  1 -
+ .../libwacom/libwacom_2.8.0.bb                |  1 -
+ .../webp-pixbuf-loader_0.2.7.bb               |  1 -
+ .../xdg-desktop-portal-gtk_1.15.3.bb          |  1 -
+ .../kexecboot/kexecboot-cfg_0.2.bb            |  3 +-
+ .../recipes-bsp/kexecboot/kexecboot_git.bb    |  1 -
+ .../initrdscripts/initramfs-debug_1.0.bb      |  3 +-
+ .../recipes-devtools/dracut/dracut_106.bb     |  1 -
+ .../recipes-devtools/grubby/grubby_git.bb     |  1 -
+ .../recipes-devtools/klibc/klibc.inc          |  2 +-
+ .../mtd/ubi-utils-klibc_2.0.2.bb              |  1 -
+ .../kexec/kexec-tools-klibc_git.bb            |  1 -
+ .../libupnp/libupnp_1.14.18.bb                |  1 -
+ .../recipes-dvb/oscam/oscam_1.20.bb           |  1 -
+ .../recipes-dvb/tvheadend/tvheadend_git.bb    |  1 -
+ .../recipes-mkv/libebml/libebml_1.4.5.bb      |  1 -
+ .../libmatroska/libmatroska_1.7.1.bb          |  1 -
+ .../alsa-equal/alsa-equal_0.6.bb              |  2 +-
+ .../recipes-multimedia/aom/aom_3.12.1.bb      |  1 -
+ .../bluealsa/bluealsa_4.3.0.bb                |  1 -
+ .../cdparanoia/cdparanoia_10.2.bb             |  2 +-
+ .../recipes-multimedia/dav1d/dav1d_1.5.1.bb   |  1 -
+ .../recipes-multimedia/dca/dcadec_0.2.0.bb    |  1 -
+ .../dleyna/dleyna-connector-dbus_0.3.0.bb     |  1 -
+ .../dleyna/dleyna-core_0.6.0.bb               |  1 -
+ .../dleyna/dleyna-renderer_0.6.0.bb           |  1 -
+ .../dleyna/dleyna-server_0.6.0.bb             |  1 -
+ .../dvb-apps/dvb-apps_1.1.1.20140321.bb       |  2 +-
+ .../fdk-aac/fdk-aac_2.0.2.bb                  |  1 -
+ .../recipes-multimedia/flite/flite_2.2.bb     |  1 -
+ .../fluidsynth/fluidsynth_2.4.5.bb            |  1 -
+ .../gerbera/gerbera_2.4.1.bb                  |  1 -
+ .../gstreamer-1.0/gst-shark_0.8.1.bb          |  3 +-
+ .../gstreamer-1.0/gstd_git.bb                 |  1 -
+ .../recipes-multimedia/juce/projucer.inc      |  1 -
+ .../libavif/libavif_1.0.1.bb                  |  1 -
+ .../libavtp/libavtp_0.2.0.bb                  |  1 -
+ .../libcamera/libcamera_0.4.0.bb              |  1 -
+ .../libde265/libde265_1.0.15.bb               |  1 -
+ .../libdvbcsa/libdvbcsa_1.1.0.bb              |  1 -
+ .../libheif/libheif_1.19.8.bb                 |  1 -
+ .../recipes-multimedia/liblc3/liblc3_1.0.4.bb |  1 -
+ .../libopenmpt/libopenmpt_0.7.10.bb           |  2 +-
+ .../libsquish/libsquish_git.bb                |  1 -
+ .../recipes-multimedia/libuvc/libuvc_0.0.7.bb |  1 -
+ .../recipes-multimedia/mimic/mimic_1.3.0.1.bb |  1 -
+ .../recipes-multimedia/minidlna/minidlna.inc  |  1 -
+ .../musicbrainz/libmusicbrainz_git.bb         |  1 -
+ .../musicpd/libmpdclient_2.22.bb              |  1 -
+ .../recipes-multimedia/musicpd/mpc_0.35.bb    |  1 -
+ .../recipes-multimedia/musicpd/mpd_0.24.3.bb  |  1 -
+ .../recipes-multimedia/musicpd/ncmpc_0.49.bb  |  1 -
+ .../mycroft/mycroft_19.8.1.bb                 |  1 -
+ .../nv-codec-headers_12.1.14.0.bb             |  1 -
+ .../openal/openal-soft_1.24.3.bb              |  1 -
+ .../openh264/openh264_2.6.0.bb                |  1 -
+ .../opus-tools/opus-tools_0.2.bb              |  2 +-
+ .../pipewire/pipewire-media-session_0.4.2.bb  |  1 -
+ .../pipewire/pipewire_1.4.5.bb                |  1 -
+ .../rtmpdump/rtmpdump_2.6.bb                  |  1 -
+ .../sample-content/bigbuckbunny-1080p.bb      |  3 +-
+ .../sample-content/bigbuckbunny-480p.bb       |  3 +-
+ .../sample-content/bigbuckbunny-720p.bb       |  3 +-
+ .../sample-content/tearsofsteel-1080p.bb      |  3 +-
+ .../recipes-multimedia/sox/sox_14.4.2.bb      |  1 -
+ .../recipes-multimedia/spandsp/spandsp_git.bb |  1 -
+ .../tinyalsa/tinyalsa_2.0.0.bb                |  1 -
+ .../tremor/tremor_20180319.bb                 |  1 -
+ .../webrtc-audio-processing-1_1.3.bb          |  2 +-
+ .../webrtc-audio-processing-2_2.1.bb          |  2 +-
+ .../wireplumber/wireplumber_0.5.10.bb         |  1 -
+ .../recipes-multimedia/x265/x265_4.1.bb       |  2 +-
+ .../crossguid/crossguid_0.2.2.bb              |  1 -
+ .../gst-instruments/gst-instruments_git.bb    |  1 -
+ .../libmediaart/libmediaart-2.0_1.9.6.bb      |  2 +-
+ .../recipes-support/libsrtp/libsrtp_2.5.0.bb  |  1 -
+ .../recipes-support/srt/srt_1.4.4.bb          |  1 -
+ .../xdg-desktop-portal-wlr_0.7.0.bb           |  1 -
+ .../system-config-printer_1.5.18.bb           |  1 -
+ .../recipes-connectivity/adcli/adcli_0.9.2.bb |  1 -
+ .../bearssl/bearssl_0.6.bb                    |  1 -
+ .../blueman/blueman_2.4.4.bb                  |  1 -
+ .../recipes-connectivity/bluepy/bluepy_git.bb |  1 -
+ .../bluez-tools/bluez-tools_git.bb            |  1 -
+ .../cannelloni/cannelloni_1.1.0.bb            |  1 -
+ .../civetweb/civetweb_1.16.bb                 |  1 -
+ .../recipes-connectivity/daq/libdaq_3.0.19.bb |  1 -
+ .../dhcp/dhcp-relay_4.4.3p1.bb                |  2 +-
+ .../dibbler/dibbler_git.bb                    |  1 -
+ .../freeradius/freeradius_3.2.7.bb            |  1 -
+ .../libdnet/libdnet_1.18.0.bb                 |  1 -
+ .../libiec61850/libiec61850_1.5.3.bb          |  1 -
+ .../mbedtls/mbedtls_2.28.10.bb                |  1 -
+ .../mbedtls/mbedtls_3.6.3.1.bb                |  1 -
+ .../nanomsg/nanomsg_1.2.1.bb                  |  1 -
+ .../recipes-connectivity/nanomsg/nng_1.7.3.bb |  1 -
+ .../recipes-connectivity/nanomsg/nngpp_git.bb |  1 -
+ .../networkmanager-fortisslvpn_1.4.0.bb       |  2 +-
+ .../networkmanager-openconnect_1.2.8.bb       |  2 +-
+ .../networkmanager-openvpn_1.12.0.bb          |  2 +-
+ .../networkmanager/networkmanager_1.52.0.bb   |  1 -
+ .../openconnect/openconnect_9.12.bb           |  1 -
+ .../openfortivpn/openfortivpn_1.23.1.bb       |  1 -
+ .../openthread/ot-br-posix_git.bb             |  1 -
+ .../openthread/ot-daemon_git.bb               |  1 -
+ .../openthread/wpantund_git.bb                |  1 -
+ .../recipes-connectivity/relayd/relayd_git.bb |  1 -
+ .../restinio/restinio_0.6.13.bb               |  2 +-
+ .../snort/snort3_3.7.1.0.bb                   |  1 -
+ .../recipes-connectivity/vlan/vlan_1.9.bb     |  2 +-
+ .../recipes-connectivity/vpnc/vpnc_0.5.3.bb   |  1 -
+ .../wolfssl/wolfssl_5.8.0.bb                  |  1 -
+ .../recipes-daemons/atftp/atftp_0.8.0.bb      |  1 -
+ .../iscsi-initiator-utils_2.1.11.bb           |  1 -
+ .../networkd-dispatcher_2.2.4.bb              |  1 -
+ .../recipes-daemons/postfix/postfix_3.10.1.bb |  2 +-
+ .../recipes-daemons/proftpd/proftpd_1.3.9.bb  |  1 -
+ .../recipes-daemons/ptpd/ptpd_2.3.1.bb        |  2 +-
+ .../recipes-daemons/vblade/vblade_25.bb       |  1 -
+ .../recipes-devtools/libcoap/libcoap_4.3.4.bb |  1 -
+ .../python/python3-scapy_2.6.0.bb             |  1 -
+ .../recipes-extended/dlm/dlm_4.2.0.bb         |  2 +-
+ .../kronosnet/kronosnet_1.24.bb               |  1 -
+ .../recipes-extended/tgt/tgt_1.0.90.bb        |  1 -
+ .../arno-iptables-firewall_2.1.2.bb           |  1 -
+ .../libnetfilter/libnetfilter-acct_1.0.3.bb   |  2 +-
+ .../libnetfilter-conntrack_1.1.0.bb           |  2 +-
+ .../libnetfilter-cthelper_1.0.1.bb            |  2 +-
+ .../libnetfilter-cttimeout_1.0.1.bb           |  2 +-
+ .../libnetfilter/libnetfilter-log_1.0.2.bb    |  1 -
+ .../libnetfilter/libnetfilter-queue_1.0.5.bb  |  1 -
+ .../recipes-filter/libnftnl/libnftnl_1.2.9.bb |  1 -
+ .../recipes-filter/ulogd2/ulogd2_2.0.8.bb     |  1 -
+ meta-networking/recipes-irc/znc/znc_1.8.2.bb  |  1 -
+ .../recipes-kernel/wireguard/wireguard.inc    |  2 +-
+ .../recipes-protocols/babeld/babeld_1.13.1.bb |  1 -
+ .../freediameter/freediameter_1.5.0.bb        |  1 -
+ .../recipes-protocols/frr/frr_10.3.bb         |  1 -
+ .../mdns/mdns_2600.120.12.bb                  |  1 -
+ .../opcua/open62541_1.3.15.bb                 |  7 ++---
+ .../openflow/openflow_git.bb                  |  1 -
+ .../openlldp/openlldp_1.1.1.bb                |  1 -
+ .../pptp-linux/pptp-linux_1.10.0.bb           |  2 +-
+ .../tsocks/tsocks_1.8beta5.bb                 |  2 +-
+ .../recipes-protocols/usrsctp/usrsctp_git.bb  |  1 -
+ .../vsomeip/vsomeip_3.5.3.bb                  |  3 +-
+ .../recipes-protocols/xl2tpd/xl2tpd_1.3.16.bb |  1 -
+ .../arptables/arptables_git.bb                |  1 -
+ .../recipes-support/bmon/bmon_4.0.bb          |  1 -
+ .../bridge-utils/bridge-utils_1.7.1.bb        |  1 -
+ .../recipes-support/celt051/celt051_git.bb    |  1 -
+ .../recipes-support/cifs/cifs-utils_7.0.bb    |  1 -
+ .../recipes-support/curlpp/curlpp_0.8.1.bb    |  1 -
+ .../recipes-support/drbd/drbd-utils_9.30.0.bb |  3 +-
+ .../dropwatch/dropwatch_1.5.4.bb              |  1 -
+ .../ettercap/ettercap_0.8.3.1.bb              |  1 -
+ .../recipes-support/fping/fping_5.3.bb        |  2 +-
+ .../recipes-support/geoip/geoip-perl_1.51.bb  |  1 -
+ .../recipes-support/geoip/geoip_1.6.12.bb     |  1 -
+ .../http-parser/http-parser_2.9.4.bb          |  1 -
+ .../ifenslave/ifenslave_2.14.bb               |  1 -
+ .../recipes-support/ipcalc/ipcalc_1.0.3.bb    |  1 -
+ .../recipes-support/libcpr/libcpr_1.10.5.bb   |  1 -
+ .../libesmtp/libesmtp_1.1.0.bb                |  1 -
+ .../recipes-support/libldb/libldb_2.8.1.bb    |  2 +-
+ .../libtalloc/libtalloc_2.4.3.bb              |  2 +-
+ .../recipes-support/libtdb/libtdb_1.4.13.bb   |  2 +-
+ .../libtevent/libtevent_0.16.2.bb             |  2 +-
+ .../lksctp-tools/lksctp-tools_1.0.21.bb       |  1 -
+ .../lowpan-tools/lowpan-tools_git.bb          |  1 -
+ .../recipes-support/mctp/mctp_2.1.bb          |  1 -
+ .../mdio-tools/mdio-netlink_1.3.1.bb          |  1 -
+ .../mdio-tools/mdio-tools_1.3.1.bb            |  1 -
+ .../recipes-support/mtr/mtr_0.95.bb           |  1 -
+ .../recipes-support/nbdkit/nbdkit_1.33.11.bb  |  1 -
+ .../recipes-support/nbdkit/nbdkit_1.43.11.bb  |  1 -
+ .../recipes-support/ndisc6/ndisc6_1.0.8.bb    |  1 -
+ .../recipes-support/netcf/netcf_0.2.8.bb      |  1 -
+ .../recipes-support/netperf/netperf_git.bb    |  1 -
+ .../netsniff-ng/netsniff-ng_0.6.8.bb          |  1 -
+ .../recipes-support/nis/yp-tools_4.2.3.bb     |  1 -
+ .../recipes-support/ntimed/ntimed_git.bb      |  1 -
+ .../recipes-support/ntopng/ndpi_4.2.bb        |  1 -
+ .../recipes-support/ntopng/ntopng_5.2.1.bb    |  1 -
+ .../recipes-support/nuttcp/nuttcp_8.2.2.bb    |  3 +-
+ .../open-isns/open-isns_0.102.bb              |  1 -
+ .../open-vm-tools/open-vm-tools_12.5.0.bb     |  2 +-
+ .../openipmi/openipmi_2.0.36.bb               |  2 +-
+ .../recipes-support/pgpool2/pgpool2_4.5.3.bb  |  2 +-
+ .../recipes-support/phytool/phytool.bb        |  1 -
+ .../rdma-core/rdma-core_51.0.bb               |  1 -
+ .../smcroute/smcroute_2.5.7.bb                |  1 -
+ .../recipes-support/sngrep/sngrep_1.8.2.bb    |  1 -
+ .../recipes-support/spice/libcacard_2.8.1.bb  |  1 -
+ .../recipes-support/spice/spice-gtk_0.42.bb   |  1 -
+ .../spice/spice-guest-vdagent_0.22.1.bb       |  1 -
+ .../spice/spice-protocol_0.14.4.bb            |  1 -
+ .../recipes-support/spice/spice_git.bb        |  1 -
+ .../recipes-support/spice/usbredir_0.14.0.bb  |  1 -
+ .../recipes-support/unbound/unbound_1.22.0.bb |  1 -
+ .../recipes-support/wavemon/wavemon_0.9.6.bb  |  1 -
+ .../wpan-tools/wpan-tools_0.10.bb             |  1 -
+ meta-oe/classes/fitimage.bbclass              |  3 +-
+ .../spdm-utils/spdm-utils_0.7.2.bb            |  1 -
+ .../thin-provisioning-tools_1.1.0.bb          |  1 -
+ .../recipes-bsp/rwmem/rwmem_1.2.bb            |  1 -
+ .../netplan/netplan_1.1.2.bb                  |  1 -
+ .../recipes-dbs/mongodb/mongodb_git.bb        |  1 -
+ .../recipes-devtools/nanopb/nanopb.inc        |  1 -
+ .../recipes-extended/lcdproc/lcdproc_git.bb   |  1 -
+ .../recipes-multimedia/kmsxx/kmsxx_git.bb     |  1 -
+ .../recipes-support/nvmetcli/nvmetcli_0.8.bb  |  1 -
+ .../recipes-support/smem/smem_1.5.bb          |  2 +-
+ .../recipes-graphics/taisei/taisei_1.4.2.bb   |  1 -
+ .../rasdaemon/rasdaemon_0.8.3.bb              |  1 -
+ .../android-tools-conf-configfs_1.0.bb        |  3 +-
+ .../android-tools/android-tools-conf_1.0.bb   |  3 +-
+ .../android-tools/android-tools_29.0.6.r14.bb |  5 ++--
+ .../cpuburn/cpuburn-arm_git.bb                |  1 -
+ meta-oe/recipes-benchmark/fio/fio_3.39.bb     |  1 -
+ .../recipes-benchmark/glmark2/glmark2_git.bb  |  1 -
+ .../recipes-benchmark/iozone3/iozone3_507.bb  |  2 +-
+ .../recipes-benchmark/iperf2/iperf2_2.2.1.bb  |  2 +-
+ .../recipes-benchmark/iperf3/iperf3_3.18.bb   |  1 -
+ .../libc-bench/libc-bench_git.bb              |  1 -
+ .../libhugetlbfs/libhugetlbfs_2.24.bb         |  1 -
+ .../recipes-benchmark/linpack/linpack_1.0.bb  |  3 +-
+ meta-oe/recipes-benchmark/mbw/mbw_2.0.bb      |  1 -
+ .../phoronix-test-suite_10.8.4.bb             |  2 +-
+ .../recipes-benchmark/qperf/qperf_0.4.11.bb   |  1 -
+ .../recipes-benchmark/s-suite/s-suite_git.bb  |  1 -
+ .../stressapptest/stressapptest_1.0.11.bb     |  1 -
+ .../sysbench/sysbench_1.0.20.bb               |  1 -
+ .../tinymembench/tinymembench_git.bb          |  1 -
+ .../whetstone/whetstone_1.2.bb                |  3 +-
+ meta-oe/recipes-bsp/bolt/bolt_0.9.6.bb        |  1 -
+ .../recipes-bsp/con2fbmap/con2fbmap_git.bb    |  1 -
+ .../cpufrequtils/cpufrequtils_008.bb          |  1 -
+ .../dediprog-flasher_1.14.20.bb               |  1 -
+ .../recipes-bsp/edac-utils/edac-utils_git.bb  |  1 -
+ .../recipes-bsp/firmwared/firmwared_git.bb    |  1 -
+ .../recipes-bsp/flashrom/flashrom_1.5.1.bb    |  2 +-
+ meta-oe/recipes-bsp/fwupd/fwupd-efi_1.6.bb    |  1 -
+ meta-oe/recipes-bsp/i2cdev/i2cdev_git.bb      |  1 -
+ meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb     |  1 -
+ .../lm_sensors/lmsensors-config_1.0.bb        |  3 +-
+ .../recipes-bsp/lm_sensors/lmsensors_3.6.0.bb |  1 -
+ meta-oe/recipes-bsp/lsscsi/lsscsi_0.32.bb     |  2 +-
+ meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.12.bb |  1 -
+ .../recipes-bsp/pointercal/pointercal_0.0.bb  |  3 +-
+ meta-oe/recipes-connectivity/ace/ace_8.0.2.bb |  2 +-
+ .../asyncmqtt/asyncmqtt_10.1.0.bb             |  1 -
+ .../gammu/python3-gammu_3.2.4.bb              |  2 +-
+ .../gattlib/gattlib_git.bb                    |  1 -
+ .../gensio/gensio_2.8.7.bb                    |  1 -
+ .../recipes-connectivity/krb5/krb5_1.21.3.bb  |  2 +-
+ .../libimobiledevice-glue_1.3.2.bb            |  1 -
+ .../libimobiledevice/libimobiledevice_git.bb  |  1 -
+ .../libirecovery/libirecovery_1.2.1.bb        |  1 -
+ .../libmbim/libmbim_1.33.1.bb                 |  1 -
+ .../recipes-connectivity/libndp/libndp_1.9.bb |  1 -
+ .../recipes-connectivity/libnet/libnet_1.3.bb |  1 -
+ .../libnfs/libnfs_6.0.2.bb                    |  1 -
+ .../libqmi/libqmi_1.34.0.bb                   |  1 -
+ .../libqrtr-glib/libqrtr-glib_git.bb          |  1 -
+ .../libtorrent-rasterbar_2.0.10.bb            |  3 +-
+ .../libtorrent/libtorrent_0.14.0.bb           |  1 -
+ .../libwebsockets/libwebsockets_4.3.5.bb      |  1 -
+ .../modemmanager/modemmanager_1.22.0.bb       |  1 -
+ .../obex/openobex_1.7.2.bb                    |  2 +-
+ .../obexftp/obexftp_0.24.2.bb                 |  2 +-
+ .../paho-mqtt-c/paho-mqtt-c_1.3.14.bb         |  1 -
+ .../paho-mqtt-cpp/paho-mqtt-cpp_1.4.1.bb      |  1 -
+ .../pcapplusplus/pcapplusplus_24.09.bb        |  1 -
+ .../rabbitmq-c/rabbitmq-c_0.15.0.bb           |  1 -
+ .../rtorrent/rtorrent_0.10.0.bb               |  1 -
+ .../smstools3/smstools3_3.1.21.bb             |  2 +-
+ .../transmission/transmission_4.0.6.bb        |  1 -
+ .../usbmuxd/usbmuxd_git.bb                    |  1 -
+ .../wifi-test-suite_10.10.1.bb                |  1 -
+ .../zeromq/cppzmq_4.10.0.bb                   |  1 -
+ meta-oe/recipes-core/basu/basu_0.2.1.bb       |  1 -
+ .../recipes-core/dbus-cxx/dbus-cxx_2.5.2.bb   |  1 -
+ .../dbus/dbus-daemon-proxy_git.bb             |  1 -
+ meta-oe/recipes-core/emlog/emlog.inc          |  1 -
+ meta-oe/recipes-core/glfw/glfw_3.3.8.bb       |  1 -
+ .../glib-2.0/glib-testing_0.1.1.bb            |  1 -
+ .../glib-2.0/glibmm-2.68_2.80.0.bb            |  2 +-
+ meta-oe/recipes-core/libnfc/libnfc_git.bb     |  1 -
+ .../libsigc++-2.0/libsigc++-2.0_2.12.1.bb     |  2 +-
+ .../libsigc++-2.0/libsigc++-3_3.6.0.bb        |  2 +-
+ .../recipes-core/libxml/libxml++-5.0_5.0.1.bb |  2 +-
+ meta-oe/recipes-core/mdbus2/mdbus2_git.bb     |  1 -
+ .../minizip-ng/minizip-ng_4.0.8.bb            |  1 -
+ meta-oe/recipes-core/minizip/minizip_1.3.1.bb |  2 +-
+ .../musl-rpmatch/musl-rpmatch_git.bb          |  1 -
+ meta-oe/recipes-core/ndctl/ndctl_v79.bb       |  1 -
+ meta-oe/recipes-core/opencl/clpeak_1.1.4.bb   |  1 -
+ meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb  |  1 -
+ .../opencl/opencl-clhpp_2024.10.24.bb         |  1 -
+ .../opencl/opencl-cts_2025.01.22.bb           |  1 -
+ .../opencl/opencl-headers_2024.10.24.bb       |  1 -
+ .../opencl/opencl-icd-loader_2024.05.08.bb    |  1 -
+ meta-oe/recipes-core/pim435/pim435_git.bb     |  1 -
+ meta-oe/recipes-core/safec/safec_3.7.1.bb     |  1 -
+ .../sdbus-c++/sdbus-c++-libsystemd_255.6.bb   |  1 -
+ .../sdbus-c++/sdbus-c++-tools_2.1.0.bb        |  2 +-
+ .../recipes-core/sdbus-c++/sdbus-c++_2.1.0.bb |  1 -
+ meta-oe/recipes-core/usleep/usleep_1.2.bb     |  3 +-
+ .../uutils-coreutils_0.1.0.bb                 |  1 -
+ meta-oe/recipes-crypto/botan/botan_3.7.1.bb   |  2 +-
+ .../fsverity-utils/fsverity-utils_1.6.bb      |  1 -
+ .../recipes-crypto/libkcapi/libkcapi_1.5.0.bb |  1 -
+ .../libtomcrypt/libtomcrypt_1.18.2.bb         |  1 -
+ .../monocypher/monocypher_4.0.2.bb            |  2 +-
+ .../pkcs11-helper/pkcs11-helper_1.30.0.bb     |  1 -
+ meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb   |  1 -
+ meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb       |  2 +-
+ meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb |  1 -
+ .../abseil-cpp/abseil-cpp_20250127.1.bb       |  1 -
+ .../aer-inject/aer-inject_1.0.bb              |  1 -
+ .../android-tools-conf-configfs_1.0.bb        |  3 +-
+ .../android-tools/android-tools-conf_1.0.bb   |  3 +-
+ .../android-tools/android-tools_5.1.1.r37.bb  | 11 ++++----
+ .../apitrace/apitrace_11.1.bb                 |  1 -
+ .../breakpad/breakpad_2023.06.01.bb           |  7 ++---
+ .../capnproto/capnproto_1.0.2.bb              |  2 +-
+ .../cbindgen/cbindgen_0.28.0.bb               |  1 -
+ .../recipes-devtools/cjson/cjson_1.7.18.bb    |  1 -
+ .../concurrencykit/concurrencykit_git.bb      |  1 -
+ .../cppgenerate/cppgenerate_0.3.bb            |  1 -
+ .../recipes-devtools/cpuset/cpuset_1.6.2.bb   |  1 -
+ .../ctags/ctags_6.2.20250608.0.bb             |  1 -
+ .../debootstrap/debootstrap_1.0.141.bb        |  2 +-
+ .../dnf-plugin-tui/dnf-plugin-tui_1.4.bb      |  1 -
+ .../doxygen/doxygen_1.14.0.bb                 |  1 -
+ .../editorconfig-core-c_0.12.9.bb             |  1 -
+ meta-oe/recipes-devtools/exprtk/exprtk_git.bb |  1 -
+ .../extract-cert/extract-cert_0.3.bb          |  1 -
+ .../flatbuffers/flatbuffers.bb                |  1 -
+ .../flatbuffers/python3-flatbuffers.bb        |  2 +-
+ meta-oe/recipes-devtools/flatcc/flatcc_git.bb |  1 -
+ meta-oe/recipes-devtools/grpc/grpc_1.71.0.bb  |  1 -
+ .../recipes-devtools/guider/guider_3.9.9.bb   |  1 -
+ .../heaptrack/heaptrack_1.2.0.bb              |  1 -
+ .../jemalloc/jemalloc_5.3.0.bb                |  1 -
+ .../json-schema-validator_2.2.0.bb            |  1 -
+ .../json-spirit/json-spirit_4.08.bb           |  2 +-
+ .../recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb |  1 -
+ .../recipes-devtools/jsonrpc/jsonrpc_1.4.1.bb |  1 -
+ .../recipes-devtools/jwt-cpp/jwt-cpp_0.7.1.bb |  1 -
+ .../kconfig-frontends_4.11.0.1.bb             |  1 -
+ .../recipes-devtools/lapack/lapack_3.12.1.bb  |  1 -
+ .../recipes-devtools/lemon/lemon_3.44.2.bb    |  1 -
+ .../libsombok3/libsombok3_2.4.0.bb            |  1 -
+ .../libtoml11/libtoml11_4.4.0.bb              |  5 ++--
+ .../recipes-devtools/libubox/libubox_git.bb   |  1 -
+ meta-oe/recipes-devtools/lshw/lshw_02.20.bb   |  1 -
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb |  1 -
+ meta-oe/recipes-devtools/luajit/luajit_git.bb |  1 -
+ .../luaposix/luaposix_36.2.1.bb               |  1 -
+ .../makeself/makeself_2.5.0.bb                |  1 -
+ .../recipes-devtools/mbpoll/mbpoll_1.5.2.bb   |  1 -
+ .../recipes-devtools/memstat/memstat_1.0.bb   |  2 +-
+ .../mercurial/mercurial_6.6.3.bb              |  2 +-
+ .../microsoft-gsl/microsoft-gsl_4.0.0.bb      |  1 -
+ .../msgpack/msgpack-c_6.0.0.bb                |  1 -
+ .../msgpack/msgpack-cpp_6.1.1.bb              |  2 +-
+ .../msr-tools/msr-tools_1.3.bb                |  2 +-
+ .../recipes-devtools/musl/musl-nscd_git.bb    |  1 -
+ .../nlohmann-fifo/nlohmann-fifo_git.bb        |  1 -
+ .../nlohmann-json/nlohmann-json_3.12.0.bb     |  3 +-
+ .../nodejs/nodejs-oe-cache-native_22.16.bb    |  3 +-
+ .../recipes-devtools/nodejs/nodejs_22.16.0.bb |  2 +-
+ .../recipes-devtools/openocd/openocd_git.bb   |  5 ++--
+ .../recipes-devtools/pahole/pahole_1.29.bb    |  1 -
+ meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb |  1 -
+ meta-oe/recipes-devtools/perfetto/perfetto.bb | 28 +++++++++----------
+ .../recipes-devtools/perfetto/perfetto.inc    |  1 -
+ .../recipes-devtools/perl/dbd-mariadb_1.24.bb |  2 +-
+ .../recipes-devtools/perl/exiftool_12.89.bb   |  1 -
+ .../perl/ipc-run_20231003.0.bb                |  1 -
+ .../perl/libconfig-general-perl_2.67.bb       |  2 +-
+ .../perl/libdbi-perl_1.647.bb                 |  2 +-
+ .../perl/libdev-checklib-perl_1.16.bb         |  2 +-
+ .../perl/libio-pty-perl_1.20.bb               |  2 +-
+ .../perl/libjson-perl_4.05000.bb              |  1 -
+ .../perl/libparse-yapp-perl_1.21.bb           |  2 +-
+ .../perl/libpcsc-perl_1.4.15.bb               |  2 +-
+ .../perl/libperlio-gzip-perl_0.20.bb          |  2 +-
+ meta-oe/recipes-devtools/php/php_8.4.6.bb     |  2 +-
+ .../pistache/pistache_0.4.26.bb               |  1 -
+ meta-oe/recipes-devtools/ply/ply_git.bb       |  1 -
+ .../pocketpy/pocketpy_2.0.6.bb                |  1 -
+ .../protobuf/protobuf-c_1.5.1.bb              |  1 -
+ .../protobuf/protobuf_5.29.4.bb               |  1 -
+ .../python/python3-apt_2.5.3.bb               |  1 -
+ .../python/python3-distutils-extra_2.39.bb    |  2 +-
+ .../rapidjson/rapidjson_git.bb                |  1 -
+ .../serialcheck/serialcheck_1.0.0.bb          |  1 -
+ .../sexpect/sexpect_2.3.15.bb                 |  1 -
+ .../smemstat/smemstat_0.02.13.bb              |  1 -
+ .../sqlite-orm/sqlite-orm_1.5.bb              |  1 -
+ .../squashfs-tools-ng_1.3.2.bb                |  1 -
+ .../recipes-devtools/ssd1306/ssd1306_git.bb   |  1 -
+ .../suitesparse/suitesparse_5.10.1.bb         |  1 -
+ .../systemd/nativesdk-systemd-systemctl.bb    |  3 +-
+ meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb |  1 -
+ meta-oe/recipes-devtools/tcltk/tk8_8.6.15.bb  |  2 +-
+ meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb    |  2 +-
+ .../tomlplusplus/tomlplusplus_git.bb          |  1 -
+ .../recipes-devtools/uftrace/uftrace_0.17.bb  |  1 -
+ .../unattended-upgrades_2.9.1.bb              |  1 -
+ .../recipes-devtools/uw-imap/uw-imap_2007f.bb |  2 +-
+ .../valijson/valijson_1.0.6.bb                |  1 -
+ .../xmlrpc-c/xmlrpc-c_1.64.0.bb               |  2 +-
+ meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb  |  1 -
+ meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb   |  1 -
+ meta-oe/recipes-devtools/yasm/yasm_git.bb     |  1 -
+ meta-oe/recipes-extended/7zip/7zip_24.09.bb   |  1 -
+ meta-oe/recipes-extended/7zip/bit7z_4.0.9.bb  |  1 -
+ meta-oe/recipes-extended/beep/beep_1.4.12.bb  |  1 -
+ .../recipes-extended/bitwise/bitwise_0.50.bb  |  2 +-
+ .../boinc/boinc-client_7.20.5.bb              |  1 -
+ .../recipes-extended/brotli/brotli_1.1.0.bb   |  1 -
+ .../canopenterm/canopenterm_1.0.10.bb         |  1 -
+ .../recipes-extended/cmatrix/cmatrix_2.0.bb   |  1 -
+ .../cmpi-bindings/cmpi-bindings_1.0.5.bb      |  1 -
+ .../dialog/dialog_1.3-20250116.bb             |  2 +-
+ .../dlt-daemon/dlt-daemon_2.18.10.bb          |  1 -
+ .../docopt.cpp/docopt.cpp_git.bb              |  1 -
+ .../dumb-init/dumb-init_1.2.5.bb              |  1 -
+ .../etcd/etcd-cpp-apiv3_0.15.4.bb             |  1 -
+ meta-oe/recipes-extended/figlet/figlet_git.bb |  1 -
+ .../flatpak/flatpak-xdg-utils_1.0.6.bb        |  1 -
+ .../flatpak/flatpak_1.16.0.bb                 |  1 -
+ .../fluentbit/fluentbit_4.0.1.bb              |  1 -
+ .../haveged/haveged_1.9.19.bb                 |  1 -
+ .../recipes-extended/hexedit/hexedit_1.6.bb   |  1 -
+ .../recipes-extended/highway/highway_1.2.0.bb |  1 -
+ .../recipes-extended/hiredis/hiredis_1.2.0.bb |  1 -
+ .../inputattach-config/inputattach-config.bb  |  3 +-
+ meta-oe/recipes-extended/iotop/iotop_1.30.bb  |  1 -
+ .../isomd5sum/isomd5sum_1.2.5.bb              |  1 -
+ .../jpnevulator/jpnevulator_git.bb            |  1 -
+ .../konkretcmpi/konkretcmpi_0.9.2.bb          |  1 -
+ .../libbacktrace/libbacktrace_git.bb          |  1 -
+ .../libblockdev/libblockdev_3.2.1.bb          |  1 -
+ .../libcbor/libcbor_0.12.0.bb                 |  1 -
+ .../recipes-extended/libcec/libcec_7.0.0.bb   |  1 -
+ .../libdeflate/libdeflate_1.20.bb             |  1 -
+ .../libdivecomputer/libdivecomputer_git.bb    |  1 -
+ .../libimobiledevice/libplist_2.6.0.bb        |  1 -
+ .../libimobiledevice/libplist_git.bb          |  1 -
+ .../libimobiledevice/libusbmuxd_2.1.1.bb      |  1 -
+ .../libimobiledevice/libusbmuxd_git.bb        |  1 -
+ .../recipes-extended/libleak/libleak_0.3.6.bb |  1 -
+ .../liblightmodbus/liblightmodbus_2.0.2.bb    |  1 -
+ .../liblockfile/liblockfile_1.17.bb           |  2 +-
+ .../liblognorm/liblognorm_2.0.6.bb            |  1 -
+ .../libmodbus/libmodbus_3.1.11.bb             |  1 -
+ .../libpwquality/libpwquality_1.4.5.bb        |  1 -
+ .../libreport/libreport_2.17.15.bb            |  1 -
+ .../recipes-extended/libuio/libuio_0.2.1.bb   |  1 -
+ .../recipes-extended/libwmf/libwmf_0.2.13.bb  |  1 -
+ .../libyang/libyang_3.12.2.bb                 |  1 -
+ .../linuxconsole/linuxconsole_1.7.1.bb        |  2 +-
+ .../magic-enum/magic-enum_0.9.7.bb            |  1 -
+ .../recipes-extended/md5deep/md5deep_git.bb   |  1 -
+ .../minifi-cpp/minifi-cpp_0.99.1.bb           |  1 -
+ .../mozjs/mozjs-128_128.5.2.bb                |  2 +-
+ meta-oe/recipes-extended/mraa/mraa_git.bb     |  1 -
+ meta-oe/recipes-extended/nana/nana_git.bb     |  1 -
+ .../recipes-extended/networking/mstpd_git.bb  |  1 -
+ .../recipes-extended/newt/libnewt_0.52.25.bb  |  2 +-
+ .../openwsman/openwsman_2.7.2.bb              |  1 -
+ .../recipes-extended/ostree/ostree_2024.10.bb |  2 +-
+ .../p8platform/p8platform_git.bb              |  1 -
+ .../pam/pam-plugin-ccreds_11.bb               |  1 -
+ .../pam/pam-plugin-ldapdb_1.3.1.bb            |  1 -
+ .../recipes-extended/pam/pam-radius_3.0.0.bb  |  1 -
+ .../pam/pam-ssh-agent-auth_0.10.3.bb          |  2 +-
+ meta-oe/recipes-extended/pegtl/pegtl_3.2.8.bb |  1 -
+ .../perl/libfile-fnmatch-perl_0.02.bb         |  2 +-
+ meta-oe/recipes-extended/pmdk/pmdk_2.1.1.bb   |  1 -
+ meta-oe/recipes-extended/polkit/polkit_126.bb |  1 -
+ .../properties-cpp/properties-cpp_git.bb      |  1 -
+ meta-oe/recipes-extended/qad/qad_git.bb       |  1 -
+ meta-oe/recipes-extended/qcbor/qcbor_1.4.1.bb |  1 -
+ .../recipes-extended/rarpd/rarpd_ss981107.bb  |  2 +-
+ .../redis-plus-plus/redis-plus-plus_1.3.11.bb |  1 -
+ .../recipes-extended/rrdtool/rrdtool_1.9.0.bb |  1 -
+ .../rsyslog/libfastjson_1.2304.0.bb           |  1 -
+ .../rsyslog/librelp_1.11.0.bb                 |  1 -
+ .../recipes-extended/sanlock/sanlock_4.0.0.bb |  1 -
+ .../sblim-sfc-common_1.0.1.bb                 |  2 +-
+ .../recipes-extended/sedutil/sedutil_git.bb   |  1 -
+ .../recipes-extended/sgpio/sgpio_1.2.0.10.bb  |  2 +-
+ .../recipes-extended/snappy/snappy_1.1.10.bb  |  1 -
+ .../socketcan/can-isotp_git.bb                |  1 -
+ .../socketcan/can-utils_2025.01.bb            |  1 -
+ .../socketcan/canutils_4.0.6.bb               |  1 -
+ .../socketcan/libsocketcan_0.0.12.bb          |  1 -
+ .../socketcan/socketcand_git.bb               |  1 -
+ .../recipes-extended/sysdig/sysdig_0.28.0.bb  |  3 +-
+ .../tipcutils/tipcutils_git.bb                |  1 -
+ meta-oe/recipes-extended/tmate/tmate_2.4.0.bb |  1 -
+ .../triggerhappy/triggerhappy_git.bb          |  1 -
+ .../uml-utilities/uml-utilities_20040406.bb   |  2 +-
+ meta-oe/recipes-extended/upm/upm_git.bb       |  1 -
+ .../recipes-extended/valkey/valkey_8.1.1.bb   |  1 -
+ .../volume_key/volume-key_0.3.12.bb           |  2 +-
+ meta-oe/recipes-extended/wipe/wipe_0.24.bb    |  1 -
+ .../recipes-extended/wtmpdb/wtmpdb_0.11.0.bb  |  1 -
+ .../wxwidgets/wxwidgets_3.2.6.bb              |  1 -
+ meta-oe/recipes-extended/zlog/zlog_1.2.16.bb  |  1 -
+ meta-oe/recipes-extended/zram/zram_0.2.bb     |  3 +-
+ .../recipes-extended/zsync/zsync-curl_git.bb  |  1 -
+ .../recipes-gnome/atk/atkmm-2.36_2.36.3.bb    |  2 +-
+ meta-oe/recipes-gnome/gcr/gcr3_3.41.2.bb      |  2 +-
+ .../gnome-doc-utils-stub_1.0.bb               |  3 +-
+ .../gnome-themes/adw-gtk3_5.10.bb             |  1 -
+ .../recipes-gnome/libjcat/libjcat_0.2.3.bb    |  1 -
+ .../recipes-gnome/malcontent/malcontent.inc   |  1 -
+ meta-oe/recipes-gnome/pyxdg/pyxdg_0.28.bb     |  1 -
+ meta-oe/recipes-graphics/aml/aml_git.bb       |  1 -
+ .../cairo/cairomm-1.16_1.18.0.bb              |  2 +-
+ meta-oe/recipes-graphics/cglm/cglm_0.9.6.bb   |  1 -
+ .../dietsplash/dietsplash_git.bb              |  1 -
+ .../directfb/directfb-examples_1.7.0.bb       |  2 +-
+ .../recipes-graphics/directfb/directfb.inc    |  2 +-
+ .../dnfdragora/dnfdragora_2.1.6.bb            |  1 -
+ .../recipes-graphics/drm/drm-info_2.7.0.bb    |  1 -
+ meta-oe/recipes-graphics/fbgrab/fbgrab_1.5.bb |  1 -
+ meta-oe/recipes-graphics/fbida/fbida_git.bb   |  1 -
+ .../fontforge/fontforge_20230101.bb           |  1 -
+ meta-oe/recipes-graphics/ftgl/ftgl_2.4.0.bb   |  1 -
+ meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb   |  1 -
+ meta-oe/recipes-graphics/glad/glad_2.0.8.bb   |  1 -
+ meta-oe/recipes-graphics/glm/glm_0.9.9.8.bb   |  1 -
+ .../recipes-graphics/gtkperf/gtkperf_0.40.bb  |  2 +-
+ .../gtkwave/gtkwave_3.3.122.bb                |  2 +-
+ meta-oe/recipes-graphics/imlib2/imlib2_git.bb |  1 -
+ .../libdecor/libdecor_0.2.3.bb                |  1 -
+ .../libforms/libforms_1.2.5pre1.bb            |  2 +-
+ .../libglvnd/libglvnd_1.7.0.bb                |  1 -
+ .../libsdl/libsdl-gfx_2.0.27.bb               |  2 +-
+ .../libsdl/libsdl-image_1.2.12.bb             |  2 +-
+ .../libsdl/libsdl-mixer_1.2.12.bb             |  2 +-
+ .../libsdl/libsdl-net_1.2.8.bb                |  2 +-
+ .../libsdl/libsdl-ttf_2.0.11.bb               |  2 +-
+ .../libsdl/libsdl2-image_2.8.8.bb             |  2 +-
+ .../libsdl/libsdl2-mixer_2.8.1.bb             |  2 +-
+ .../libsdl/libsdl2-net_2.2.0.bb               |  2 +-
+ .../recipes-graphics/libsdl/libsdl_1.2.15.bb  |  2 +-
+ .../libsdl3/libsdl2-compat_2.32.56.bb         |  2 +-
+ .../libsdl3/libsdl3-image_3.2.4.bb            |  1 -
+ .../libsdl3/libsdl3-ttf_3.2.2.bb              |  2 +-
+ .../libsdl3/libsdl3_3.2.16.bb                 |  2 +-
+ .../libvncserver/libvncserver_0.9.14.bb       |  1 -
+ .../libyui/libyui-ncurses_4.6.2.bb            |  2 +-
+ .../recipes-graphics/libyui/libyui_4.6.2.bb   |  2 +-
+ .../lvgl/lvgl-demo-fb_9.2.2.bb                |  3 +-
+ meta-oe/recipes-graphics/lvgl/lvgl_9.2.2.bb   |  1 -
+ .../recipes-graphics/neatvnc/neatvnc_0.8.1.bb |  1 -
+ .../recipes-graphics/nyancat/nyancat_1.5.2.bb |  1 -
+ .../recipes-graphics/openbox/obconf_git.bb    |  1 -
+ .../openjpeg/openjpeg_2.5.3.bb                |  1 -
+ .../panel-mipi-dbi-native_git.bb              |  1 -
+ .../pango/pangomm-2.48_2.56.1.bb              |  2 +-
+ .../parallel-deqp-runner_git.bb               |  1 -
+ .../qrencode/qrencode_4.1.1.bb                |  1 -
+ .../renderdoc/renderdoc_1.38.bb               |  1 -
+ .../spir/spirv-shader-generator_git.bb        |  1 -
+ meta-oe/recipes-graphics/surf/surf_2.1.bb     |  1 -
+ .../tesseract/tesseract-lang_4.1.0.bb         |  1 -
+ .../tesseract/tesseract_5.5.1.bb              |  1 -
+ .../tigervnc/tigervnc_1.15.0.bb               |  1 -
+ .../source-code-pro-fonts_2.030_1.050.bb      |  2 +-
+ .../ttf-fonts/ttf-abyssinica_2.300.bb         |  2 +-
+ .../ttf-fonts/ttf-arphic-uming_20080216.bb    |  2 +-
+ .../ttf-fonts/ttf-dejavu_2.37.bb              |  2 +-
+ .../ttf-fonts/ttf-droid_git.bb                |  2 +-
+ .../ttf-fonts/ttf-gentium_1.02.bb             |  2 +-
+ .../ttf-fonts/ttf-google-fira.bb              |  3 +-
+ .../ttf-fonts/ttf-hunkyfonts_0.3.1.bb         |  2 +-
+ .../ttf-fonts/ttf-inconsolata_20100526.bb     |  3 +-
+ .../ttf-fonts/ttf-ipa_003.03.01.bb            |  2 +-
+ .../ttf-liberation-sans-narrow_1.07.4.bb      |  2 +-
+ .../ttf-fonts/ttf-liberation_2.1.5.bb         |  1 -
+ .../ttf-lklug_0.6-14.20090803cvs.fc24.bb      |  3 +-
+ .../ttf-fonts/ttf-lohit_2.92.1.bb             |  1 -
+ .../ttf-fonts/ttf-mplus_027.bb                |  2 +-
+ .../ttf-fonts/ttf-noto-emoji_20200916.bb      |  1 -
+ .../ttf-fonts/ttf-roboto_2.138.bb             |  3 +-
+ .../ttf-fonts/ttf-sazanami_20040629.bb        |  2 +-
+ .../ttf-fonts/ttf-takao_003.03.01.bb          |  2 +-
+ .../ttf-fonts/ttf-ubuntu-font-family_0.83.bb  |  2 +-
+ .../ttf-fonts/ttf-vlgothic_20200720.bb        |  2 +-
+ .../ttf-fonts/ttf-wqy-zenhei_0.9.45.bb        |  2 +-
+ .../unclutter-xfixes/unclutter-xfixes_1.6.bb  |  1 -
+ .../recipes-graphics/vdpau/libvdpau_1.5.bb    |  1 -
+ .../recipes-graphics/vdpau/vdpauinfo_1.5.bb   |  1 -
+ .../vk-gl-cts/khronos-cts.inc                 |  1 -
+ .../vk-gl-cts/opengl-es-cts-sources.inc       | 22 +++++++--------
+ .../vk-gl-cts/vulkan-cts-sources.inc          | 22 +++++++--------
+ .../recipes-graphics/wayland/libei_1.4.1.bb   |  1 -
+ .../wayland/waylandpp_1.0.0.bb                |  1 -
+ .../recipes-graphics/x11vnc/x11vnc_0.9.16.bb  |  1 -
+ .../xorg-driver/xf86-video-armsoc_1.4.1.bb    |  1 -
+ meta-oe/recipes-graphics/yad/yad_6.0.bb       |  1 -
+ .../recipes-graphics/ydotool/ydotool_git.bb   |  1 -
+ .../agent-proxy/agent-proxy_1.97.bb           |  1 -
+ meta-oe/recipes-kernel/blktests/blktests.bb   |  1 -
+ .../broadcom-bt-firmware_12.0.1.1105_p3.bb    |  1 -
+ meta-oe/recipes-kernel/crash/crash.inc        |  3 +-
+ .../drgn/python3-drgn_0.0.31.bb               |  1 -
+ .../ipmitool/ipmitool_1.8.19.bb               |  1 -
+ .../kernel-selftest/kernel-selftest.bb        |  5 ++--
+ meta-oe/recipes-kernel/kpatch/kpatch.inc      |  1 -
+ meta-oe/recipes-kernel/kpatch/kpatch_git.bb   |  1 -
+ .../ktls-utils/ktls-utils_1.0.0.bb            |  1 -
+ meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb |  2 +-
+ .../recipes-kernel/libpfm/libpfm4_4.13.0.bb   |  2 +-
+ .../libtracefs/libtracefs_1.8.1.bb            |  1 -
+ .../minicoredumper/minicoredumper_2.0.7.bb    |  1 -
+ .../recipes-kernel/pm-graph/pm-graph_5.13.bb  |  1 -
+ .../trace-cmd/trace-cmd_3.1.5.bb              |  1 -
+ meta-oe/recipes-kernel/turbostat/turbostat.bb |  3 +-
+ .../recipes-kernel/usbip-tools/usbip-tools.bb |  2 +-
+ .../recipes-multimedia/faad2/faad2_2.11.2.bb  |  1 -
+ meta-oe/recipes-multimedia/jack/a2jmidid_9.bb |  1 -
+ .../jack/jack-example-tools_4.bb              |  1 -
+ .../recipes-multimedia/jack/jack_1.9.22.bb    |  1 -
+ .../libass/libass_0.17.4.bb                   |  1 -
+ .../libid3tag/libid3tag_0.15.1b.bb            |  2 +-
+ .../libjxl/libjxl_0.10.3.bb                   |  1 -
+ .../libmad/libmad_0.15.1b.bb                  |  2 +-
+ .../libopus/libopus_1.5.2.bb                  |  2 +-
+ .../libopusenc/libopusenc_0.2.1.bb            |  2 +-
+ .../recipes-multimedia/libxmp/libxmp_4.6.3.bb |  1 -
+ .../live555/live555_20210824.bb               |  2 +-
+ .../mplayer/libplacebo_7.351.0.bb             |  1 -
+ .../recipes-multimedia/mplayer/mpv_0.40.0.bb  |  1 -
+ .../v4l2apps/v4l-utils_1.28.1.bb              |  1 -
+ .../recipes-multimedia/v4l2apps/yavta_git.bb  |  1 -
+ .../wavpack/wavpack_5.6.0.bb                  |  1 -
+ .../recipes-multimedia/webm/libvpx_1.15.2.bb  |  1 -
+ .../recipes-multimedia/xpext/xpext_1.0-5.bb   |  2 +-
+ meta-oe/recipes-multimedia/xsp/xsp_1.0.0-8.bb |  2 +-
+ .../geoclue/geoclue_2.7.2.bb                  |  1 -
+ .../cyrus-sasl/cyrus-sasl_2.1.28.bb           |  1 -
+ meta-oe/recipes-printing/qpdf/qpdf_12.2.0.bb  |  1 -
+ meta-oe/recipes-security/audit/audit_4.0.5.bb |  1 -
+ .../kernel-hardening-checker_0.6.10.bb        |  1 -
+ .../keyutils/keyutils_1.6.3.bb                |  1 -
+ .../spectre-meltdown-checker_0.46.bb          |  1 -
+ .../tomoyo-tools/tomoyo-tools_2.6.1.bb        |  2 +-
+ meta-oe/recipes-shells/mksh/mksh_59c.bb       |  2 +-
+ .../ace-cloud-editor/ace-cloud-editor_git.bb  |  1 -
+ .../recipes-support/avro/avro-c++_1.11.3.bb   |  2 +-
+ meta-oe/recipes-support/avro/avro-c_1.11.3.bb |  2 +-
+ meta-oe/recipes-support/bcu/bcu_1.1.115.bb    |  1 -
+ meta-oe/recipes-support/bdwgc/bdwgc_8.2.8.bb  |  1 -
+ .../bmap-writer/bmap-writer_1.0.2.bb          |  1 -
+ .../boost-sml/boost-sml_1.1.12.bb             |  1 -
+ meta-oe/recipes-support/btop/btop_1.4.3.bb    |  1 -
+ .../c-periphery/c-periphery_2.4.3.bb          |  1 -
+ .../ceres-solver/ceres-solver_2.2.0.bb        |  1 -
+ meta-oe/recipes-support/cli11/cli11_2.3.2.bb  |  1 -
+ meta-oe/recipes-support/cmark/cmark_0.31.1.bb |  1 -
+ .../composefs/composefs_1.0.8.bb              |  1 -
+ .../consolation/consolation_0.0.9.bb          |  1 -
+ .../cpp-netlib/cpp-netlib_git.bb              |  1 -
+ .../cpprest/cpprest_2.10.19.bb                |  1 -
+ .../recipes-support/cpulimit/cpulimit_0.2.bb  |  1 -
+ .../crucible/crucible_2023.11.02.bb           |  1 -
+ .../ctapi-common/ctapi-common_1.1-14.bb       |  3 +-
+ meta-oe/recipes-support/ctre/ctre_3.9.0.bb    |  1 -
+ .../recipes-support/cxxopts/cxxopts_3.3.1.bb  |  1 -
+ meta-oe/recipes-support/cyaml/cyaml_1.4.1.bb  |  1 -
+ .../daemonize/daemonize_git.bb                |  1 -
+ .../daemontools/daemontools_0.76.bb           |  2 +-
+ .../dc/double-conversion_3.3.1.bb             |  1 -
+ .../recipes-support/devmem2/devmem2_2.0.bb    |  1 -
+ meta-oe/recipes-support/dhex/dhex_0.69.bb     |  2 +-
+ .../digitemp/digitemp_3.7.2.bb                |  1 -
+ meta-oe/recipes-support/dool/dool_1.3.4.bb    |  1 -
+ .../driverctl/driverctl_0.115.bb              |  1 -
+ .../edid-decode/edid-decode_git.bb            |  1 -
+ meta-oe/recipes-support/eject/eject_2.1.5.bb  |  2 +-
+ meta-oe/recipes-support/epeg/epeg_git.bb      |  1 -
+ .../recipes-support/espeak/espeak_1.48.04.bb  |  2 +-
+ .../evemu-tools/evemu-tools_git.bb            |  1 -
+ meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb |  1 -
+ meta-oe/recipes-support/fbset/fbset-modes.bb  |  3 +-
+ .../recipes-support/freerdp/freerdp3_3.5.1.bb |  1 -
+ .../recipes-support/freerdp/freerdp_2.11.7.bb |  1 -
+ .../function2/function2_4.2.4.bb              |  1 -
+ meta-oe/recipes-support/fuse/fuse3_3.16.2.bb  |  2 +-
+ meta-oe/recipes-support/gd/gd_2.3.3.bb        |  1 -
+ .../recipes-support/gflags/gflags_2.2.2.bb    |  1 -
+ meta-oe/recipes-support/glog/glog_0.7.1.bb    |  1 -
+ .../recipes-support/gnulib/gnulib_202401.bb   |  1 -
+ .../googlebenchmark/googlebenchmark_1.9.4.bb  |  1 -
+ .../gperftools/gperftools_2.16.bb             |  1 -
+ meta-oe/recipes-support/gpm/gpm_git.bb        |  1 -
+ .../gradm/gradm_3.1-202111052217.bb           |  2 +-
+ .../recipes-support/gsoap/gsoap_2.8.134.bb    |  2 +-
+ .../recipes-support/hidapi/hidapi_0.15.0.bb   |  1 -
+ meta-oe/recipes-support/hstr/hstr_3.1.0.bb    |  2 +-
+ meta-oe/recipes-support/htop/htop_3.3.0.bb    |  1 -
+ .../hunspell/hunspell-dictionaries.bb         |  1 -
+ .../hunspell/hunspell_1.7.2.bb                |  1 -
+ .../idevicerestore/idevicerestore_git.bb      |  1 -
+ .../imagemagick/imagemagick_7.1.1-43.bb       |  1 -
+ .../imapfilter/imapfilter_2.8.3.bb            |  1 -
+ .../recipes-support/imx-cst/imx-cst_3.4.0.bb  |  2 +-
+ meta-oe/recipes-support/inih/libinih_58.bb    |  1 -
+ .../iniparser/iniparser_4.2.6.bb              |  1 -
+ .../inotify-tools/inotify-tools_4.23.9.0.bb   |  1 -
+ .../jsoncons/jsoncons_1.3.2.bb                |  1 -
+ meta-oe/recipes-support/lcms/lcms_2.16.bb     |  2 +-
+ meta-oe/recipes-support/lgi/lua-lgi_0.9.2.bb  |  1 -
+ .../libatasmart/libatasmart_0.19.bb           |  1 -
+ .../recipes-support/libb64/libb64_2.0.0.1.bb  |  1 -
+ .../libbytesize/libbytesize_2.11.bb           |  1 -
+ .../libcereal/libcereal_1.3.2.bb              |  1 -
+ .../libconfuse/libconfuse_3.3.bb              |  2 +-
+ .../libcppkafka/libcppkafka_git.bb            |  1 -
+ .../libcyusbserial/libcyusbserial_git.bb      |  1 -
+ .../libeigen/libeigen_3.4.0.bb                |  1 -
+ .../recipes-support/libfann/libfann_git.bb    |  1 -
+ .../recipes-support/libftdi/libftdi_1.5.bb    |  2 +-
+ .../recipes-support/libgusb/libgusb_0.4.9.bb  |  1 -
+ .../recipes-support/libharu/libharu_2.4.5.bb  |  1 -
+ meta-oe/recipes-support/libiio/libiio_0.26.bb |  1 -
+ .../libjs/libjs-jquery-cookie_3.0.5.bb        |  1 -
+ .../libjs/libjs-jquery-globalize_1.7.0.bb     |  1 -
+ .../libjs/libjs-jquery-icheck_1.0.3.bb        |  1 -
+ .../libjs/libjs-jquery_3.3.1.bb               |  3 +-
+ .../libjs/libjs-sizzle_1.10.18.bb             |  2 +-
+ .../libmimetic/libmimetic_0.9.8.bb            |  1 -
+ .../recipes-support/libmxml/libmxml_4.0.4.bb  |  1 -
+ .../recipes-support/libnvme/libnvme_1.12.bb   |  1 -
+ .../libosinfo/libosinfo_1.12.0.bb             |  1 -
+ .../libosinfo/osinfo-db-tools_1.12.0.bb       |  1 -
+ .../libosinfo/osinfo-db_20250606.bb           |  1 -
+ .../recipes-support/libp11/libp11_0.4.13.bb   |  1 -
+ .../recipes-support/libraw/libraw_0.21.2.bb   |  1 -
+ .../librdkafka/librdkafka_1.8.2.bb            |  1 -
+ .../librsync/librsync_2.3.4.bb                |  1 -
+ .../libserialmodule/libserialmodule_1.0.8.bb  |  1 -
+ .../libsimplelog/libsimplelog_1.0.7.bb        |  1 -
+ .../recipes-support/libsoc/libsoc_0.8.2.bb    |  1 -
+ .../libsoup/libsoup-2.4_2.74.3.bb             |  2 +-
+ .../recipes-support/libspdm/libspdm_3.7.0.bb  |  1 -
+ .../recipes-support/libssh/libssh_0.11.1.bb   |  1 -
+ .../libstemmer/libstemmer_2.2.0.bb            |  1 -
+ .../recipes-support/libtar/libtar_1.2.20.bb   |  2 +-
+ .../recipes-support/libteam/libteam_1.32.bb   |  1 -
+ .../libtinyxml/libtinyxml_2.6.2.bb            |  2 +-
+ .../libtinyxml2/libtinyxml2_11.0.0.bb         |  1 -
+ .../libtommath/libtommath_1.3.0.bb            |  1 -
+ .../recipes-support/liburing/liburing_2.9.bb  |  1 -
+ .../libusb/libusb-compat_0.1.8.bb             |  1 -
+ .../recipes-support/libusbg/libusbg_git.bb    |  1 -
+ .../libusbgx/libusbgx-config.bb               |  3 +-
+ .../recipes-support/libusbgx/libusbgx_git.bb  |  1 -
+ .../libutempter/libutempter_1.2.2-alt1.bb     |  2 +-
+ .../recipes-support/links/links-x11_2.26.bb   |  2 +-
+ .../recipes-support/log4cpp/log4cpp_1.1.4.bb  |  2 +-
+ meta-oe/recipes-support/lvm2/lvm2.inc         |  1 -
+ .../recipes-support/mcelog/mce-inject_git.bb  |  1 -
+ .../recipes-support/mcelog/mce-test_git.bb    |  1 -
+ meta-oe/recipes-support/mcelog/mcelog_204.bb  |  1 -
+ meta-oe/recipes-support/md4c/md4c_0.5.2.bb    |  1 -
+ meta-oe/recipes-support/mg/mg_20230501.bb     |  1 -
+ .../mime-support/mime-support_3.62.bb         |  2 +-
+ .../multipath-tools/multipath-tools_0.11.1.bb |  1 -
+ meta-oe/recipes-support/ne10/ne10_1.2.1.bb    |  1 -
+ meta-oe/recipes-support/nmon/nmon_16m.bb      |  3 +-
+ meta-oe/recipes-support/nspr/nspr_4.36.bb     |  2 +-
+ .../opencl/clinfo_3.0.23.01.25.bb             |  1 -
+ meta-oe/recipes-support/opencv/ade_0.1.2.bb   |  1 -
+ .../recipes-support/opencv/opencv_4.11.0.bb   | 13 ++++-----
+ .../recipes-support/opensc/opensc_0.26.1.bb   |  1 -
+ .../recipes-support/opensync/wbxml2_0.10.8.bb |  2 +-
+ .../opentelemetry/opentelemetry-cpp_1.20.0.bb |  1 -
+ meta-oe/recipes-support/p910nd/p910nd_0.97.bb |  1 -
+ meta-oe/recipes-support/pcp/pcp.inc           |  1 -
+ .../pcsc-lite/pcsc-lite_2.0.3.bb              |  2 +-
+ .../pcsc-tools/pcsc-tools_1.7.2.bb            |  1 -
+ .../recipes-support/picocom/picocom_2024.bb   |  1 -
+ .../pidgin/funyahoo-plusplus_git.bb           |  1 -
+ meta-oe/recipes-support/pidgin/icyque_git.bb  |  1 -
+ .../pidgin/purple-skypeweb_git.bb             |  1 -
+ .../pkcs11-provider/pkcs11-provider_1.0.bb    |  1 -
+ meta-oe/recipes-support/poco/poco_1.13.3.bb   |  1 -
+ .../portaudio/portaudio-v19_19.7.0.bb         |  1 -
+ .../pps-tools/pps-tools_1.0.3.bb              |  1 -
+ .../recipes-support/pxaregs/pxaregs_1.14.bb   |  3 +-
+ meta-oe/recipes-support/re2/re2_2024.03.01.bb |  1 -
+ .../reboot-mode/reboot-mode_git.bb            |  1 -
+ .../recipes-support/remmina/remmina_1.4.36.bb |  1 -
+ .../recipes-support/reptyr/reptyr_0.10.0.bb   |  1 -
+ .../rsnapshot/rsnapshot_git.bb                |  1 -
+ .../rtc-tools/rtc-tools_2022.02.bb            |  1 -
+ meta-oe/recipes-support/rtkit/rtkit_0.13.bb   |  1 -
+ meta-oe/recipes-support/satyr/satyr_0.43.bb   |  1 -
+ meta-oe/recipes-support/sdmon/sdmon_git.bb    |  1 -
+ .../serial-utils/pty-forward-native.bb        |  2 +-
+ .../serial-utils/serial-forward_git.bb        |  2 +-
+ .../recipes-support/serial/serial_1.2.1.bb    |  1 -
+ .../sg3-utils/sg3-utils_1.48.bb               |  2 +-
+ .../recipes-support/smarty/smarty_5.4.5.bb    |  1 -
+ .../recipes-support/snapper/snapper_0.11.2.bb |  1 -
+ .../source-highlight/source-highlight_git.bb  |  1 -
+ .../span-lite/span-lite_0.11.0.bb             |  1 -
+ .../recipes-support/spdlog/spdlog_1.15.0.bb   |  1 -
+ .../recipes-support/spitools/spitools_git.bb  |  1 -
+ .../recipes-support/srecord/srecord_1.65.0.bb |  2 +-
+ .../recipes-support/ssiapi/ssiapi_1.3.0.bb    |  2 +-
+ .../switchtec-user/switchtec-user_4.2.bb      |  1 -
+ .../recipes-support/synergy/synergy_git.bb    |  1 -
+ .../systemd-netlogd/systemd-netlogd_1.4.4.bb  |  1 -
+ meta-oe/recipes-support/tbb/tbb_2022.1.0.bb   |  1 -
+ meta-oe/recipes-support/tio/tio_3.9.bb        |  1 -
+ .../recipes-support/udisks/udisks2_2.10.1.bb  |  1 -
+ .../recipes-support/uhubctl/uhubctl_2.6.0.bb  |  1 -
+ .../unicode-ucd/unicode-ucd_14.0.0.bb         |  3 +-
+ .../unixodbc/unixodbc_2.3.12.bb               |  2 +-
+ .../upower/power-profiles-daemon_0.30.bb      |  1 -
+ .../recipes-support/upower/upower_1.90.6.bb   |  2 +-
+ .../usbids/usbids_2025.04.01.bb               |  1 -
+ .../recipes-support/uthash/uthash_2.3.0.bb    |  1 -
+ .../utouch/utouch-evemu_git.bb                |  1 -
+ .../utouch/utouch-frame_git.bb                |  1 -
+ .../utouch/utouch-mtview_git.bb               |  1 -
+ .../vboxguestdrivers_7.1.8.bb                 |  4 +--
+ .../webkitgtk/webkitgtk3_2.48.1.bb            |  2 +-
+ .../websocketpp/websocketpp_0.8.2.bb          |  1 -
+ .../recipes-support/xdelta/xdelta3_3.1.0.bb   |  2 +-
+ .../xdg-dbus-proxy/xdg-dbus-proxy_0.1.6.bb    |  1 -
+ .../xdg-desktop-portal_1.20.0.bb              |  1 -
+ .../xorg-xrdp/xorgxrdp_0.9.19.bb              |  1 -
+ .../yaml-cpp/yaml-cpp_0.8.0.bb                |  1 -
+ .../recipes-support/yyjson/yyjson_0.11.1.bb   |  1 -
+ meta-oe/recipes-support/zbar/zbar_git.bb      |  1 -
+ .../recipes-support/zchunk/zchunk_1.5.1.bb    |  1 -
+ meta-oe/recipes-test/bats/bats_1.12.0.bb      |  1 -
+ meta-oe/recipes-test/catch2/catch2_3.8.1.bb   |  1 -
+ meta-oe/recipes-test/cmocka/cmocka_1.1.7.bb   |  1 -
+ meta-oe/recipes-test/cpputest/cpputest_4.0.bb |  1 -
+ meta-oe/recipes-test/cukinia/cukinia_0.7.0.bb |  1 -
+ meta-oe/recipes-test/cunit/cunit_2.1-3.bb     |  2 +-
+ meta-oe/recipes-test/evtest/evtest_1.35.bb    |  1 -
+ meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb  |  1 -
+ .../googletest/googletest_1.16.0.bb           |  1 -
+ .../libfaketime/libfaketime_0.9.10.bb         |  1 -
+ .../linux-serial-test_git.bb                  |  1 -
+ meta-oe/recipes-test/pm-qa/pm-qa_git.bb       |  1 -
+ meta-oe/recipes-test/shunit2/shunit2_2.1.8.bb |  1 -
+ .../recipes-test/testfloat/testfloat_3e.bb    |  3 +-
+ .../trompeloeil/trompeloeil_v47.bb            |  1 -
+ .../recipes-perl/adduser/adduser_3.118.bb     |  2 +-
+ .../libalgorithm-diff-perl_1.15.bb            |  2 +-
+ .../libauthen/libauthen-radius-perl_0.22.bb   |  2 +-
+ .../libauthen/libauthen-sasl-perl_2.1800.bb   |  2 +-
+ .../libcapture/libcapture-tiny-perl_0.50.bb   |  2 +-
+ .../recipes-perl/libcgi/libcgi-perl_4.68.bb   |  2 +-
+ .../libclass-method-modifiers-perl_2.15.bb    |  2 +-
+ .../libcompress-raw-bzip2-perl_2.213.bb       |  2 +-
+ .../libcompress-raw-lzma-perl_2.213.bb        |  2 +-
+ .../libcompress-raw-zlib-perl_2.213.bb        |  2 +-
+ .../libconfig-tiny-perl_2.30.bb               |  2 +-
+ .../libconfig-autoconf-perl_0.319.bb          |  2 +-
+ .../libcrypt-openssl-guess-perl_0.15.bb       |  2 +-
+ .../libcrypt-openssl-random-perl_0.17.bb      |  2 +-
+ .../libcrypt-openssl-rsa-perl_0.33.bb         |  2 +-
+ .../libcurses/libcurses-perl_1.45.bb          |  2 +-
+ .../libdata/libdata-hexdump-perl_0.02.bb      |  2 +-
+ .../libdb/libdbd-sqlite-perl_1.76.bb          |  2 +-
+ .../libdevel-globaldestruction-perl_0.14.bb   |  2 +-
+ .../libdigest/libdigest-hmac-perl_1.05.bb     |  2 +-
+ .../libdigest/libdigest-sha1-perl_2.13.bb     |  2 +-
+ .../recipes-perl/libenv/libenv-perl_1.04.bb   |  2 +-
+ .../liberror/liberror-perl_0.17030.bb         |  2 +-
+ .../libextutils-config-perl_0.008.bb          |  2 +-
+ .../libextutils-cppguess-perl_0.27.bb         |  2 +-
+ .../libextutils-helpers-perl_0.028.bb         |  2 +-
+ .../libextutils-installpaths-perl_0.012.bb    |  2 +-
+ .../libextutils-parsexs-perl_3.35.bb          |  2 +-
+ .../libfile/libfile-slurp-perl_9999.19.bb     |  2 +-
+ .../libfile/libfile-slurper-perl_0.014.bb     |  2 +-
+ .../libhtml/libhtml-parser-perl_3.72.bb       |  2 +-
+ .../libhtml/libhtml-tagset-perl_3.20.bb       |  2 +-
+ .../libhtml/libhtml-tree-perl_5.03.bb         |  2 +-
+ .../libimport/libimport-into-perl_1.002004.bb |  2 +-
+ .../libio/libio-compress-lzma-perl_2.213.bb   |  2 +-
+ .../libio/libio-compress-perl_2.213.bb        |  2 +-
+ .../libio/libio-socket-ssl-perl_2.090.bb      |  2 +-
+ .../libio/libio-stringy-perl_2.111.bb         |  2 +-
+ .../libipc/libipc-signal-perl_1.00.bb         |  2 +-
+ .../liblocale/liblocale-gettext-perl_1.07.bb  |  2 +-
+ .../libmime/libmime-charset-perl_1.013.1.bb   |  2 +-
+ .../libmime/libmime-types-perl_2.28.bb        |  2 +-
+ .../libmodule-build-tiny-perl_0.048.bb        |  2 +-
+ .../libmodule/libmodule-pluggable-perl_5.2.bb |  2 +-
+ .../libmodule/libmodule-runtime-perl_0.016.bb |  2 +-
+ .../libmoo/libmoo-perl_2.005005.bb            |  2 +-
+ .../libmozilla/libmozilla-ca-perl_20250602.bb |  2 +-
+ .../libnet/libnet-dns-perl_1.50.bb            |  2 +-
+ .../libnet/libnet-dns-sec-perl_1.10.bb        |  2 +-
+ .../libnet/libnet-idn-encode_2.500.bb         |  2 +-
+ .../libnet/libnet-ldap-perl_0.68.bb           |  2 +-
+ .../libnet/libnet-libidn-perl_0.12.bb         |  2 +-
+ .../libnet/libnet-ssleay-perl_1.85.bb         |  2 +-
+ .../libnet/libnet-telnet-perl_3.05.bb         |  2 +-
+ .../libproc/libproc-waitstat-perl_1.00.bb     |  2 +-
+ .../librole/librole-tiny-perl_2.002004.bb     |  2 +-
+ .../libstatgrab/libunix-statgrab_0.112.bb     |  2 +-
+ .../libstrictures-perl_2.000006.bb            |  2 +-
+ ...bsub-exporter-progressive-perl_0.001013.bb |  2 +-
+ .../libsub/libsub-uplevel-perl_0.2800.bb      |  2 +-
+ .../libterm/libterm-readkey-perl_2.38.bb      |  2 +-
+ .../libtest/libtest-deep-perl_1.205.bb        |  2 +-
+ .../libtest/libtest-harness-perl_3.50.bb      |  2 +-
+ .../libtest/libtest-nowarnings-perl_1.04.bb   |  2 +-
+ .../libtest/libtest-warn-perl_0.37.bb         |  2 +-
+ .../libtext/libtext-charwidth-perl_0.04.bb    |  2 +-
+ .../libtext/libtext-diff-perl_1.41.bb         |  2 +-
+ .../libtext/libtext-iconv-perl_1.7.bb         |  2 +-
+ .../libtext/libtext-wrapi18n-perl_0.06.bb     |  2 +-
+ .../libunicode-linebreak-perl_2019.001.bb     |  2 +-
+ .../recipes-perl/liburi/liburi-perl_5.32.bb   |  2 +-
+ .../libxml-filter-buffertext-perl_1.01.bb     |  2 +-
+ .../libxml/libxml-libxml-perl_2.0134.bb       |  2 +-
+ .../libxml/libxml-sax-writer-perl_0.57.bb     |  2 +-
+ .../python-txws/python3-txws_0.9.1.bb         |  1 -
+ .../telepathy/telepathy-python3_0.15.19.bb    |  2 +-
+ meta-python/recipes-devtools/gyp/gyp_git.bb   |  1 -
+ .../python/python3-annotated-types_0.7.0.bb   |  2 +-
+ .../python/python3-astor_0.8.1.bb             |  1 -
+ ...python3-aws-iot-device-sdk-python_1.5.2.bb |  1 -
+ .../python/python3-behave_1.2.6.bb            |  1 -
+ .../python/python3-betamax_0.9.0.bb           |  1 -
+ .../python/python3-binwalk_2.3.4.bb           |  1 -
+ .../python/python3-bleak_0.22.3.bb            |  3 +-
+ .../python/python3-covdefaults_2.3.0.bb       |  1 -
+ .../python/python3-crypt-r_3.13.1.bb          |  1 -
+ .../python/python3-cvxopt_1.3.2.bb            |  1 -
+ .../python/python3-dasbus_1.7.bb              |  1 -
+ .../python/python3-dbussy_1.3.bb              |  1 -
+ .../python/python3-dirty-equals_0.9.0.bb      |  2 +-
+ .../python/python3-gcovr_8.3.bb               |  1 -
+ .../python/python3-icu_2.15.2.bb              |  2 +-
+ .../python3-importlib-metadata_8.7.0.bb       |  2 +-
+ .../python/python3-inotify_git.bb             |  1 -
+ .../python/python3-jsonrpcclient_4.0.3.bb     |  1 -
+ .../python3-keras-applications_1.0.8.bb       |  1 -
+ .../python/python3-kivy_2.3.1.bb              |  1 -
+ .../python/python3-lief_0.16.5.bb             |  1 -
+ .../python/python3-linux-procfs_0.7.3.bb      |  1 -
+ .../python/python3-lrparsing_1.0.17.bb        |  2 +-
+ .../python/python3-monotonic_1.6.bb           |  1 -
+ .../python/python3-moteus_0.3.87.bb           |  2 +-
+ .../python/python3-multidict_6.4.4.bb         |  3 +-
+ .../python/python3-paho-mqtt_2.1.0.bb         |  2 +-
+ .../python/python3-pillow_11.1.0.bb           |  1 -
+ .../python/python3-prctl_1.8.1.bb             |  1 -
+ .../python/python3-ptyprocess_0.7.0.bb        |  2 +-
+ .../python/python3-pyais_2.9.4.bb             |  1 -
+ .../python/python3-pyatspi_2.46.1.bb          |  1 -
+ .../python/python3-pybind11-json_0.2.15.bb    |  1 -
+ .../python/python3-pybind11_2.13.6.bb         |  1 -
+ .../python/python3-pydantic_2.11.3.bb         |  1 -
+ .../python/python3-pydbus_0.6.0.bb            |  1 -
+ .../python/python3-pyhsslms_2.0.0.bb          |  1 -
+ .../python/python3-pylint_3.3.6.bb            |  1 -
+ .../python/python3-pymetno_0.13.0.bb          |  1 -
+ .../python/python3-pyruvate_1.2.1.bb          |  1 -
+ .../python/python3-pyyaml-include_2.2.bb      |  1 -
+ .../python/python3-schedutils_0.6.bb          |  1 -
+ .../python/python3-slip-dbus_0.6.5.bb         |  2 +-
+ .../python/python3-smbus_4.3.bb               |  2 +-
+ .../python/python3-tomli-w_1.2.0.bb           |  3 +-
+ .../python/python3-uefi-firmware_1.12.bb      |  1 -
+ .../python/python3-wrapt_1.17.2.bb            |  1 -
+ .../python/python3-xlrd_2.0.1.bb              |  1 -
+ .../python3-piccata/python3-piccata_2.0.3.bb  |  1 -
+ .../python3-wxgtk4/python3-wxgtk4_4.2.2.bb    |  2 +-
+ .../python-blivet/python3-blivetgui_2.6.0.bb  |  1 -
+ .../python-cson/python3-cson_git.bb           |  1 -
+ .../python-meh/python3-meh_0.52.bb            |  1 -
+ .../python3-pykickstart_3.63.bb               |  1 -
+ .../recipes-extended/tuna/tuna_0.19.bb        |  1 -
+ .../swagger-ui/swagger-ui_5.18.2.bb           |  1 -
+ .../apache-mod/apache-websocket_git.bb        |  1 -
+ .../recipes-httpd/apache-mod/mod-dnssd_0.6.bb |  1 -
+ .../recipes-httpd/apache2/apache2_2.4.63.bb   |  2 +-
+ .../recipes-httpd/monkey/monkey_1.6.9.bb      |  1 -
+ .../recipes-httpd/sthttpd/sthttpd_2.27.1.bb   |  1 -
+ .../phpmyadmin/phpmyadmin_5.2.2.bb            |  2 +-
+ .../recipes-support/fcgi/fcgi_git.bb          |  1 -
+ .../recipes-support/fcgiwrap/fcgiwrap_git.bb  |  1 -
+ .../xarchiver/xarchiver_0.5.4.21.bb           |  1 -
+ .../xfce-polkit/xfce-polkit_0.3.bb            |  1 -
+ .../xfce4-datetime-setter_3.32.2.bb           |  1 -
+ .../cursor-themes/openzone_1.2.4.bb           |  2 +-
+ .../imsettings/imsettings_1.8.10.bb           |  1 -
+ .../xfce4-closebutton-plugin_git.bb           |  1 -
+ 1055 files changed, 386 insertions(+), 1162 deletions(-)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0001.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0001.patch
-new file mode 100644
-index 0000000000..d7d5921943
---- /dev/null
-+++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0001.patch
-@@ -0,0 +1,318 @@
-+From d35e11a8f84d396a9d9ef43ef852d377adc3830a Mon Sep 17 00:00:00 2001
-+From: Albert Astals Cid <aacid@kde.org>
-+Date: Fri, 1 Apr 2022 16:26:25 +0200
-+Subject: [PATCH] Annots: Just return the std::vector instead of two getters
-+
-+Simpler code to use and solves the int vs size_t mismatch by not having a
-+type involved at all
-+
-+CVE: CVE-2025-52886
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/d35e11a8f84d396a9d9ef43ef852d377adc3830a]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ glib/poppler-page.cc          |  5 +----
-+ poppler/Annot.cc              |  4 ++--
-+ poppler/Annot.h               |  5 ++---
-+ poppler/FontInfo.cc           |  4 ++--
-+ poppler/Form.cc               |  7 +++----
-+ poppler/JSInfo.cc             | 14 +++++++-------
-+ poppler/Link.cc               |  3 +--
-+ poppler/PSOutputDev.cc        |  4 ++--
-+ poppler/Page.cc               | 17 ++++-------------
-+ qt5/src/poppler-annotation.cc | 10 ++--------
-+ qt6/src/poppler-annotation.cc | 10 ++--------
-+ utils/pdfdetach.cc            |  4 +---
-+ 12 files changed, 29 insertions(+), 58 deletions(-)
-+
-+diff --git a/glib/poppler-page.cc b/glib/poppler-page.cc
-+index d075502..f0b7245 100644
-+--- a/glib/poppler-page.cc
-++++ b/glib/poppler-page.cc
-+@@ -1285,7 +1285,6 @@ GList *poppler_page_get_annot_mapping(PopplerPage *page)
-+ {
-+     GList *map_list = nullptr;
-+     double width, height;
-+-    gint i;
-+     Annots *annots;
-+     const PDFRectangle *crop_box;
-+
-+@@ -1299,14 +1298,12 @@ GList *poppler_page_get_annot_mapping(PopplerPage *page)
-+     poppler_page_get_size(page, &width, &height);
-+     crop_box = page->page->getCropBox();
-+
-+-    for (i = 0; i < annots->getNumAnnots(); i++) {
-++    for (Annot *annot : annots->getAnnots()) {
-+         PopplerAnnotMapping *mapping;
-+         PopplerRectangle rect;
-+-        Annot *annot;
-+         gboolean flag_no_rotate;
-+         gint rotation = 0;
-+
-+-        annot = annots->getAnnot(i);
-+         flag_no_rotate = annot->getFlags() & Annot::flagNoRotate;
-+
-+         /* Create the mapping */
-+diff --git a/poppler/Annot.cc b/poppler/Annot.cc
-+index 60c023d..366e7de 100644
-+--- a/poppler/Annot.cc
-++++ b/poppler/Annot.cc
-+@@ -1087,8 +1087,8 @@ void AnnotAppearance::removeStream(Ref refToStream)
-+             continue;
-+         }
-+         Annots *annots = page->getAnnots();
-+-        for (int i = 0; i < annots->getNumAnnots(); ++i) {
-+-            AnnotAppearance *annotAp = annots->getAnnot(i)->getAppearStreams();
-++        for (Annot *annot : annots->getAnnots()) {
-++            AnnotAppearance *annotAp = annot->getAppearStreams();
-+             if (annotAp && annotAp != this && annotAp->referencesStream(refToStream)) {
-+                 return; // Another annotation points to the stream -> Don't delete it
-+             }
-+diff --git a/poppler/Annot.h b/poppler/Annot.h
-+index 9ae274d..8d1f18b 100644
-+--- a/poppler/Annot.h
-++++ b/poppler/Annot.h
-+@@ -1766,9 +1766,8 @@ public:
-+     Annots(const Annots &) = delete;
-+     Annots &operator=(const Annots &) = delete;
-+
-+-    // Iterate through list of annotations.
-+-    int getNumAnnots() const { return annots.size(); }
-+-    Annot *getAnnot(int i) { return annots[i]; }
-++    const std::vector<Annot *> &getAnnots() { return annots; }
-++
-+     void appendAnnot(Annot *annot);
-+     bool removeAnnot(Annot *annot);
-+
-+diff --git a/poppler/FontInfo.cc b/poppler/FontInfo.cc
-+index 23425f6..309ec6d 100644
-+--- a/poppler/FontInfo.cc
-++++ b/poppler/FontInfo.cc
-+@@ -82,8 +82,8 @@ std::vector<FontInfo *> FontInfoScanner::scan(int nPages)
-+             delete resDict;
-+         }
-+         annots = page->getAnnots();
-+-        for (int i = 0; i < annots->getNumAnnots(); ++i) {
-+-            Object obj1 = annots->getAnnot(i)->getAppearanceResDict();
-++        for (Annot *annot : annots->getAnnots()) {
-++            Object obj1 = annot->getAppearanceResDict();
-+             if (obj1.isDict()) {
-+                 scanFonts(xrefA.get(), obj1.getDict(), &result);
-+             }
-+diff --git a/poppler/Form.cc b/poppler/Form.cc
-+index 97b5be0..b88972a 100644
-+--- a/poppler/Form.cc
-++++ b/poppler/Form.cc
-+@@ -2732,14 +2732,13 @@ FormPageWidgets::FormPageWidgets(Annots *annots, unsigned int page, Form *form)
-+     widgets = nullptr;
-+     size = 0;
-+
-+-    if (annots && annots->getNumAnnots() > 0 && form) {
-+-        size = annots->getNumAnnots();
-++    if (annots && !annots->getAnnots().empty() > 0 && form) {
-++        size = annots->getAnnots().size();
-+         widgets = (FormWidget **)greallocn(widgets, size, sizeof(FormWidget *));
-+
-+         /* For each entry in the page 'Annots' dict, try to find
-+            a matching form field */
-+-        for (int i = 0; i < size; ++i) {
-+-            Annot *annot = annots->getAnnot(i);
-++        for (Annot *annot : annots->getAnnots()) {
-+
-+             if (annot->getType() != Annot::typeWidget) {
-+                 continue;
-+diff --git a/poppler/JSInfo.cc b/poppler/JSInfo.cc
-+index 6607085..eaef33e 100644
-+--- a/poppler/JSInfo.cc
-++++ b/poppler/JSInfo.cc
-+@@ -191,15 +191,15 @@ void JSInfo::scan(int nPages)
-+         }
-+         // annotation actions (links, screen, widget)
-+         annots = page->getAnnots();
-+-        for (int i = 0; i < annots->getNumAnnots(); ++i) {
-+-            if (annots->getAnnot(i)->getType() == Annot::typeLink) {
-+-                AnnotLink *annot = static_cast<AnnotLink *>(annots->getAnnot(i));
-++        for (Annot *a : annots->getAnnots()) {
-++            if (a->getType() == Annot::typeLink) {
-++                AnnotLink *annot = static_cast<AnnotLink *>(a);
-+                 scanLinkAction(annot->getAction(), "Link Annotation Activated");
-+                 if (onlyFirstJS && hasJS) {
-+                     return;
-+                 }
-+-            } else if (annots->getAnnot(i)->getType() == Annot::typeScreen) {
-+-                AnnotScreen *annot = static_cast<AnnotScreen *>(annots->getAnnot(i));
-++            } else if (a->getType() == Annot::typeScreen) {
-++                AnnotScreen *annot = static_cast<AnnotScreen *>(a);
-+                 scanLinkAction(annot->getAction(), "Screen Annotation Activated");
-+                 scanLinkAction(annot->getAdditionalAction(Annot::actionCursorEntering).get(), "Screen Annotation Cursor Enter");
-+                 scanLinkAction(annot->getAdditionalAction(Annot::actionCursorLeaving).get(), "Screen Annotation Cursor Leave");
-+@@ -215,8 +215,8 @@ void JSInfo::scan(int nPages)
-+                 if (onlyFirstJS && hasJS) {
-+                     return;
-+                 }
-+-            } else if (annots->getAnnot(i)->getType() == Annot::typeWidget) {
-+-                AnnotWidget *annot = static_cast<AnnotWidget *>(annots->getAnnot(i));
-++            } else if (a->getType() == Annot::typeWidget) {
-++                AnnotWidget *annot = static_cast<AnnotWidget *>(a);
-+                 scanLinkAction(annot->getAction(), "Widget Annotation Activated");
-+                 scanLinkAction(annot->getAdditionalAction(Annot::actionCursorEntering).get(), "Widget Annotation Cursor Enter");
-+                 scanLinkAction(annot->getAdditionalAction(Annot::actionCursorLeaving).get(), "Widget Annotation Cursor Leave");
-+diff --git a/poppler/Link.cc b/poppler/Link.cc
-+index b2e48cb..8aca0b9 100644
-+--- a/poppler/Link.cc
-++++ b/poppler/Link.cc
-+@@ -890,8 +890,7 @@ Links::Links(Annots *annots)
-+         return;
-+     }
-+
-+-    for (int i = 0; i < annots->getNumAnnots(); ++i) {
-+-        Annot *annot = annots->getAnnot(i);
-++    for (Annot *annot : annots->getAnnots()) {
-+
-+         if (annot->getType() != Annot::typeLink) {
-+             continue;
-+diff --git a/poppler/PSOutputDev.cc b/poppler/PSOutputDev.cc
-+index 111b472..9db6229 100644
-+--- a/poppler/PSOutputDev.cc
-++++ b/poppler/PSOutputDev.cc
-+@@ -1745,8 +1745,8 @@ void PSOutputDev::writeDocSetup(Catalog *catalog, const std::vector<int> &pageLi
-+             setupResources(resDict);
-+         }
-+         annots = page->getAnnots();
-+-        for (int i = 0; i < annots->getNumAnnots(); ++i) {
-+-            Object obj1 = annots->getAnnot(i)->getAppearanceResDict();
-++        for (Annot *annot : annots->getAnnots()) {
-++            Object obj1 = annot->getAppearanceResDict();
-+             if (obj1.isDict()) {
-+                 setupResources(obj1.getDict());
-+             }
-+diff --git a/poppler/Page.cc b/poppler/Page.cc
-+index 727dd28..6b33500 100644
-+--- a/poppler/Page.cc
-++++ b/poppler/Page.cc
-+@@ -367,16 +367,9 @@ void Page::replaceXRef(XRef *xrefA)
-+ /* Loads standalone fields into Page, should be called once per page only */
-+ void Page::loadStandaloneFields(Annots *annotations, Form *form)
-+ {
-+-    const int numAnnots = annotations ? annotations->getNumAnnots() : 0;
-+-
-+-    if (numAnnots < 1) {
-+-        return;
-+-    }
-+-
-+     /* Look for standalone annots, identified by being: 1) of type Widget
-+      * 2) not referenced from the Catalog's Form Field array */
-+-    for (int i = 0; i < numAnnots; ++i) {
-+-        Annot *annot = annotations->getAnnot(i);
-++    for (Annot *annot : annots->getAnnots()) {
-+
-+         if (annot->getType() != Annot::typeWidget || !annot->getHasRef()) {
-+             continue;
-+@@ -564,7 +557,6 @@ void Page::displaySlice(OutputDev *out, double hDPI, double vDPI, int rotate, bo
-+ {
-+     Gfx *gfx;
-+     Annots *annotList;
-+-    int i;
-+
-+     if (!out->checkPageSlice(this, hDPI, vDPI, rotate, useMediaBox, crop, sliceX, sliceY, sliceW, sliceH, printing, abortCheckCbk, abortCheckCbkData, annotDisplayDecideCbk, annotDisplayDecideCbkData)) {
-+         return;
-+@@ -591,14 +583,13 @@ void Page::displaySlice(OutputDev *out, double hDPI, double vDPI, int rotate, bo
-+     // draw annotations
-+     annotList = getAnnots();
-+
-+-    if (annotList->getNumAnnots() > 0) {
-++    if (!annotList->getAnnots().empty()) {
-+         if (globalParams->getPrintCommands()) {
-+             printf("***** Annotations\n");
-+         }
-+-        for (i = 0; i < annotList->getNumAnnots(); ++i) {
-+-            Annot *annot = annotList->getAnnot(i);
-++        for (Annot *annot : annots->getAnnots()) {
-+             if ((annotDisplayDecideCbk && (*annotDisplayDecideCbk)(annot, annotDisplayDecideCbkData)) || !annotDisplayDecideCbk) {
-+-                annotList->getAnnot(i)->draw(gfx, printing);
-++                annot->draw(gfx, printing);
-+             }
-+         }
-+         out->dump();
-+diff --git a/qt5/src/poppler-annotation.cc b/qt5/src/poppler-annotation.cc
-+index ab45673..cdf25da 100644
-+--- a/qt5/src/poppler-annotation.cc
-++++ b/qt5/src/poppler-annotation.cc
-+@@ -438,10 +438,6 @@ AnnotPath *AnnotationPrivate::toAnnotPath(const QLinkedList<QPointF> &list) cons
-+ QList<Annotation *> AnnotationPrivate::findAnnotations(::Page *pdfPage, DocumentData *doc, const QSet<Annotation::SubType> &subtypes, int parentID)
-+ {
-+     Annots *annots = pdfPage->getAnnots();
-+-    const uint numAnnotations = annots->getNumAnnots();
-+-    if (numAnnotations == 0) {
-+-        return QList<Annotation *>();
-+-    }
-+
-+     const bool wantTextAnnotations = subtypes.isEmpty() || subtypes.contains(Annotation::AText);
-+     const bool wantLineAnnotations = subtypes.isEmpty() || subtypes.contains(Annotation::ALine);
-+@@ -459,11 +455,9 @@ QList<Annotation *> AnnotationPrivate::findAnnotations(::Page *pdfPage, Document
-+
-+     // Create Annotation objects and tie to their native Annot
-+     QList<Annotation *> res;
-+-    for (uint k = 0; k < numAnnotations; k++) {
-+-        // get the j-th annotation
-+-        Annot *ann = annots->getAnnot(k);
-++    for (Annot *ann : annots->getAnnots()) {
-+         if (!ann) {
-+-            error(errInternal, -1, "Annot {0:ud} is null", k);
-++            error(errInternal, -1, "Annot is null");
-+             continue;
-+         }
-+
-+diff --git a/qt6/src/poppler-annotation.cc b/qt6/src/poppler-annotation.cc
-+index b92b76b..5770be6 100644
-+--- a/qt6/src/poppler-annotation.cc
-++++ b/qt6/src/poppler-annotation.cc
-+@@ -360,10 +360,6 @@ AnnotPath *AnnotationPrivate::toAnnotPath(const QVector<QPointF> &list) const
-+ std::vector<std::unique_ptr<Annotation>> AnnotationPrivate::findAnnotations(::Page *pdfPage, DocumentData *doc, const QSet<Annotation::SubType> &subtypes, int parentID)
-+ {
-+     Annots *annots = pdfPage->getAnnots();
-+-    const uint numAnnotations = annots->getNumAnnots();
-+-    if (numAnnotations == 0) {
-+-        return std::vector<std::unique_ptr<Annotation>>();
-+-    }
-+
-+     const bool wantTextAnnotations = subtypes.isEmpty() || subtypes.contains(Annotation::AText);
-+     const bool wantLineAnnotations = subtypes.isEmpty() || subtypes.contains(Annotation::ALine);
-+@@ -381,11 +377,9 @@ std::vector<std::unique_ptr<Annotation>> AnnotationPrivate::findAnnotations(::Pa
-+
-+     // Create Annotation objects and tie to their native Annot
-+     std::vector<std::unique_ptr<Annotation>> res;
-+-    for (uint k = 0; k < numAnnotations; k++) {
-+-        // get the j-th annotation
-+-        Annot *ann = annots->getAnnot(k);
-++    for (Annot *ann : annots->getAnnots()) {
-+         if (!ann) {
-+-            error(errInternal, -1, "Annot {0:ud} is null", k);
-++            error(errInternal, -1, "Annot is null");
-+             continue;
-+         }
-+
-+diff --git a/utils/pdfdetach.cc b/utils/pdfdetach.cc
-+index 61c3728..247c2c1 100644
-+--- a/utils/pdfdetach.cc
-++++ b/utils/pdfdetach.cc
-+@@ -85,7 +85,6 @@ int main(int argc, char *argv[])
-+     int nFiles, nPages, n, i, j;
-+     Page *page;
-+     Annots *annots;
-+-    Annot *annot;
-+     const GooString *s1;
-+     Unicode u;
-+     bool isUnicode;
-+@@ -151,8 +150,7 @@ int main(int argc, char *argv[])
-+             break;
-+         }
-+
-+-        for (j = 0; j < annots->getNumAnnots(); ++j) {
-+-            annot = annots->getAnnot(j);
-++        for (Annot *annot : annots->getAnnots()) {
-+             if (annot->getType() != Annot::typeFileAttachment) {
-+                 continue;
-+             }
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0002.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0002.patch
-new file mode 100644
-index 0000000000..5c8b6c0a8b
---- /dev/null
-+++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0002.patch
-@@ -0,0 +1,108 @@
-+From af3e1e1a3577c4e1c66cbe69ebdc6a632038e299 Mon Sep 17 00:00:00 2001
-+From: Albert Astals Cid <aacid@kde.org>
-+Date: Fri, 1 Apr 2022 16:03:46 +0200
-+Subject: [PATCH] Link: Just return the std::vector instead of two getters
-+
-+Simpler code to use and solves the int vs size_t mismatch by not having a
-+type involved at all
-+
-+CVE: CVE-2025-52886
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/af3e1e1a3577c4e1c66cbe69ebdc6a632038e299]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ glib/poppler-page.cc   | 5 +----
-+ poppler/Link.h         | 4 +---
-+ poppler/Page.cc        | 4 ++--
-+ utils/HtmlOutputDev.cc | 4 ++--
-+ utils/pdfinfo.cc       | 3 +--
-+ 5 files changed, 7 insertions(+), 13 deletions(-)
-+
-+diff --git a/glib/poppler-page.cc b/glib/poppler-page.cc
-+index f0b7245..a9515f3 100644
-+--- a/glib/poppler-page.cc
-++++ b/glib/poppler-page.cc
-+@@ -1119,7 +1119,6 @@ static void poppler_page_init(PopplerPage *page) { }
-+ GList *poppler_page_get_link_mapping(PopplerPage *page)
-+ {
-+     GList *map_list = nullptr;
-+-    gint i;
-+     Links *links;
-+     double width, height;
-+
-+@@ -1133,13 +1132,11 @@ GList *poppler_page_get_link_mapping(PopplerPage *page)
-+
-+     poppler_page_get_size(page, &width, &height);
-+
-+-    for (i = 0; i < links->getNumLinks(); i++) {
-++    for (AnnotLink *link : links->getLinks()) {
-+         PopplerLinkMapping *mapping;
-+         PopplerRectangle rect;
-+         LinkAction *link_action;
-+-        AnnotLink *link;
-+
-+-        link = links->getLink(i);
-+         link_action = link->getAction();
-+
-+         /* Create the mapping */
-+diff --git a/poppler/Link.h b/poppler/Link.h
-+index 0c4677c..204207b 100644
-+--- a/poppler/Link.h
-++++ b/poppler/Link.h
-+@@ -555,9 +555,7 @@ public:
-+     Links(const Links &) = delete;
-+     Links &operator=(const Links &) = delete;
-+
-+-    // Iterate through list of links.
-+-    int getNumLinks() const { return links.size(); }
-+-    AnnotLink *getLink(int i) const { return links[i]; }
-++    const std::vector<AnnotLink *> &getLinks() const { return links; }
-+
-+ private:
-+     std::vector<AnnotLink *> links;
-+diff --git a/poppler/Page.cc b/poppler/Page.cc
-+index 6b33500..c256d39 100644
-+--- a/poppler/Page.cc
-++++ b/poppler/Page.cc
-+@@ -778,8 +778,8 @@ void Page::makeBox(double hDPI, double vDPI, int rotate, bool useMediaBox, bool
-+ void Page::processLinks(OutputDev *out)
-+ {
-+     std::unique_ptr<Links> links = getLinks();
-+-    for (int i = 0; i < links->getNumLinks(); ++i) {
-+-        out->processLink(links->getLink(i));
-++    for (AnnotLink *link : links->getLinks()) {
-++        out->processLink(link);
-+     }
-+ }
-+
-+diff --git a/utils/HtmlOutputDev.cc b/utils/HtmlOutputDev.cc
-+index 71fe672..2056188 100644
-+--- a/utils/HtmlOutputDev.cc
-++++ b/utils/HtmlOutputDev.cc
-+@@ -1247,8 +1247,8 @@ void HtmlOutputDev::startPage(int pageNumA, GfxState *state, XRef *xref)
-+ void HtmlOutputDev::endPage()
-+ {
-+     std::unique_ptr<Links> linksList = docPage->getLinks();
-+-    for (int i = 0; i < linksList->getNumLinks(); ++i) {
-+-        doProcessLink(linksList->getLink(i));
-++    for (AnnotLink *link : linksList->getLinks()) {
-++        doProcessLink(link);
-+     }
-+
-+     pages->conv();
-+diff --git a/utils/pdfinfo.cc b/utils/pdfinfo.cc
-+index 4b9166f..5f96b41 100644
-+--- a/utils/pdfinfo.cc
-++++ b/utils/pdfinfo.cc
-+@@ -415,8 +415,7 @@ static void printUrlList(PDFDoc *doc)
-+         Page *page = doc->getPage(pg);
-+         if (page) {
-+             std::unique_ptr<Links> links = page->getLinks();
-+-            for (int i = 0; i < links->getNumLinks(); i++) {
-+-                AnnotLink *annot = links->getLink(i);
-++            for (AnnotLink *annot : links->getLinks()) {
-+                 LinkAction *action = annot->getAction();
-+                 if (action->getKind() == actionURI) {
-+                     LinkURI *linkUri = dynamic_cast<LinkURI *>(action);
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0003.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0003.patch
-new file mode 100644
-index 0000000000..11cd286223
---- /dev/null
-+++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0003.patch
-@@ -0,0 +1,4201 @@
-+From 3449a16d3b1389870eb3e20795e802c6ae8bc04f Mon Sep 17 00:00:00 2001
-+From: Sune Vuorela <sune@vuorela.dk>
-+Date: Wed, 2 Apr 2025 16:19:28 +0200
-+Subject: [PATCH] Annot: Do refcount with shared_ptr
-+
-+Manage annots by shared_ptr rather than the manual ref/deref usage.
-+
-+Also do a bit more documentation of ownerships with unique ptr's
-+
-+CVE: CVE-2025-52886
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/3449a16d3b1389870eb3e20795e802c6ae8bc04f]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ glib/poppler-annot.cc                | 132 +++++----
-+ glib/poppler-page.cc                 |   8 +-
-+ glib/poppler-private.h               |  22 +-
-+ poppler/Annot.cc                     | 143 ++++------
-+ poppler/Annot.h                      |  34 +--
-+ poppler/FontInfo.cc                  |   2 +-
-+ poppler/Form.cc                      |  11 +-
-+ poppler/Form.h                       |   6 +-
-+ poppler/JSInfo.cc                    |   8 +-
-+ poppler/Link.cc                      |  13 +-
-+ poppler/Link.h                       |   4 +-
-+ poppler/PDFDoc.cc                    |   2 +-
-+ poppler/PSOutputDev.cc               |   2 +-
-+ poppler/Page.cc                      |  39 ++-
-+ poppler/Page.h                       |   8 +-
-+ qt5/src/poppler-annotation-private.h |  10 +-
-+ qt5/src/poppler-annotation.cc        | 385 ++++++++++++--------------
-+ qt5/src/poppler-form.cc              |   4 +-
-+ qt6/src/poppler-annotation-private.h |  10 +-
-+ qt6/src/poppler-annotation.cc        | 393 +++++++++++++--------------
-+ qt6/src/poppler-form.cc              |   4 +-
-+ utils/HtmlOutputDev.cc               |   4 +-
-+ utils/pdfdetach.cc                   |   4 +-
-+ utils/pdfinfo.cc                     |   2 +-
-+ 24 files changed, 564 insertions(+), 686 deletions(-)
-+
-+diff --git a/glib/poppler-annot.cc b/glib/poppler-annot.cc
-+index 2c9a760..33a0709 100644
-+--- a/glib/poppler-annot.cc
-++++ b/glib/poppler-annot.cc
-+@@ -19,6 +19,7 @@
-+  * Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA 02110-1301, USA.
-+  */
-+
-++#include "AnnotStampImageHelper.h"
-+ #include "config.h"
-+ #include "poppler.h"
-+ #include "poppler-private.h"
-+@@ -166,13 +167,12 @@ G_DEFINE_TYPE(PopplerAnnotLine, poppler_annot_line, POPPLER_TYPE_ANNOT_MARKUP)
-+ G_DEFINE_TYPE(PopplerAnnotCircle, poppler_annot_circle, POPPLER_TYPE_ANNOT_MARKUP)
-+ G_DEFINE_TYPE(PopplerAnnotSquare, poppler_annot_square, POPPLER_TYPE_ANNOT_MARKUP)
-+
-+-static PopplerAnnot *_poppler_create_annot(GType annot_type, Annot *annot)
-++static PopplerAnnot *_poppler_create_annot(GType annot_type, std::shared_ptr<Annot> annot)
-+ {
-+     PopplerAnnot *poppler_annot;
-+
-+     poppler_annot = POPPLER_ANNOT(g_object_new(annot_type, nullptr));
-+-    poppler_annot->annot = annot;
-+-    annot->incRefCnt();
-++    poppler_annot->annot = std::move(annot);
-+
-+     return poppler_annot;
-+ }
-+@@ -182,8 +182,7 @@ static void poppler_annot_finalize(GObject *object)
-+     PopplerAnnot *poppler_annot = POPPLER_ANNOT(object);
-+
-+     if (poppler_annot->annot) {
-+-        poppler_annot->annot->decRefCnt();
-+-        poppler_annot->annot = nullptr;
-++        poppler_annot->annot.reset();
-+     }
-+
-+     G_OBJECT_CLASS(poppler_annot_parent_class)->finalize(object);
-+@@ -198,7 +197,7 @@ static void poppler_annot_class_init(PopplerAnnotClass *klass)
-+     gobject_class->finalize = poppler_annot_finalize;
-+ }
-+
-+-PopplerAnnot *_poppler_annot_new(Annot *annot)
-++PopplerAnnot *_poppler_annot_new(const std::shared_ptr<Annot> &annot)
-+ {
-+     return _poppler_create_annot(POPPLER_TYPE_ANNOT, annot);
-+ }
-+@@ -211,7 +210,7 @@ static void poppler_annot_text_init(PopplerAnnotText *poppler_annot) { }
-+
-+ static void poppler_annot_text_class_init(PopplerAnnotTextClass *klass) { }
-+
-+-PopplerAnnot *_poppler_annot_text_new(Annot *annot)
-++PopplerAnnot *_poppler_annot_text_new(const std::shared_ptr<Annot> &annot)
-+ {
-+     return _poppler_create_annot(POPPLER_TYPE_ANNOT_TEXT, annot);
-+ }
-+@@ -231,15 +230,14 @@ PopplerAnnot *_poppler_annot_text_new(Annot *annot)
-+  */
-+ PopplerAnnot *poppler_annot_text_new(PopplerDocument *doc, PopplerRectangle *rect)
-+ {
-+-    Annot *annot;
-+     PDFRectangle pdf_rect(rect->x1, rect->y1, rect->x2, rect->y2);
-+
-+-    annot = new AnnotText(doc->doc, &pdf_rect);
-++    auto annot = std::make_shared<AnnotText>(doc->doc, &pdf_rect);
-+
-+     return _poppler_annot_text_new(annot);
-+ }
-+
-+-PopplerAnnot *_poppler_annot_text_markup_new(Annot *annot)
-++PopplerAnnot *_poppler_annot_text_markup_new(const std::shared_ptr<Annot> &annot)
-+ {
-+     return _poppler_create_annot(POPPLER_TYPE_ANNOT_TEXT_MARKUP, annot);
-+ }
-+@@ -312,10 +310,9 @@ static void poppler_annot_text_markup_class_init(PopplerAnnotTextMarkupClass *kl
-+ PopplerAnnot *poppler_annot_text_markup_new_highlight(PopplerDocument *doc, PopplerRectangle *rect, GArray *quadrilaterals)
-+ {
-+     PopplerAnnot *poppler_annot;
-+-    AnnotTextMarkup *annot;
-+     PDFRectangle pdf_rect(rect->x1, rect->y1, rect->x2, rect->y2);
-+
-+-    annot = new AnnotTextMarkup(doc->doc, &pdf_rect, Annot::typeHighlight);
-++    auto annot = std::make_shared<AnnotTextMarkup>(doc->doc, &pdf_rect, Annot::typeHighlight);
-+
-+     poppler_annot = _poppler_annot_text_markup_new(annot);
-+     poppler_annot_text_markup_set_quadrilaterals(POPPLER_ANNOT_TEXT_MARKUP(poppler_annot), quadrilaterals);
-+@@ -339,12 +336,11 @@ PopplerAnnot *poppler_annot_text_markup_new_highlight(PopplerDocument *doc, Popp
-+ PopplerAnnot *poppler_annot_text_markup_new_squiggly(PopplerDocument *doc, PopplerRectangle *rect, GArray *quadrilaterals)
-+ {
-+     PopplerAnnot *poppler_annot;
-+-    AnnotTextMarkup *annot;
-+     PDFRectangle pdf_rect(rect->x1, rect->y1, rect->x2, rect->y2);
-+
-+     g_return_val_if_fail(quadrilaterals != nullptr && quadrilaterals->len > 0, NULL);
-+
-+-    annot = new AnnotTextMarkup(doc->doc, &pdf_rect, Annot::typeSquiggly);
-++    auto annot = std::make_shared<AnnotTextMarkup>(doc->doc, &pdf_rect, Annot::typeSquiggly);
-+
-+     poppler_annot = _poppler_annot_text_markup_new(annot);
-+     poppler_annot_text_markup_set_quadrilaterals(POPPLER_ANNOT_TEXT_MARKUP(poppler_annot), quadrilaterals);
-+@@ -368,12 +364,11 @@ PopplerAnnot *poppler_annot_text_markup_new_squiggly(PopplerDocument *doc, Poppl
-+ PopplerAnnot *poppler_annot_text_markup_new_strikeout(PopplerDocument *doc, PopplerRectangle *rect, GArray *quadrilaterals)
-+ {
-+     PopplerAnnot *poppler_annot;
-+-    AnnotTextMarkup *annot;
-+     PDFRectangle pdf_rect(rect->x1, rect->y1, rect->x2, rect->y2);
-+
-+     g_return_val_if_fail(quadrilaterals != nullptr && quadrilaterals->len > 0, NULL);
-+
-+-    annot = new AnnotTextMarkup(doc->doc, &pdf_rect, Annot::typeStrikeOut);
-++    auto annot = std::make_shared<AnnotTextMarkup>(doc->doc, &pdf_rect, Annot::typeStrikeOut);
-+
-+     poppler_annot = _poppler_annot_text_markup_new(annot);
-+     poppler_annot_text_markup_set_quadrilaterals(POPPLER_ANNOT_TEXT_MARKUP(poppler_annot), quadrilaterals);
-+@@ -397,12 +392,11 @@ PopplerAnnot *poppler_annot_text_markup_new_strikeout(PopplerDocument *doc, Popp
-+ PopplerAnnot *poppler_annot_text_markup_new_underline(PopplerDocument *doc, PopplerRectangle *rect, GArray *quadrilaterals)
-+ {
-+     PopplerAnnot *poppler_annot;
-+-    AnnotTextMarkup *annot;
-+     PDFRectangle pdf_rect(rect->x1, rect->y1, rect->x2, rect->y2);
-+
-+     g_return_val_if_fail(quadrilaterals != nullptr && quadrilaterals->len > 0, NULL);
-+
-+-    annot = new AnnotTextMarkup(doc->doc, &pdf_rect, Annot::typeUnderline);
-++    auto annot = std::make_shared<AnnotTextMarkup>(doc->doc, &pdf_rect, Annot::typeUnderline);
-+
-+     poppler_annot = _poppler_annot_text_markup_new(annot);
-+     poppler_annot_text_markup_set_quadrilaterals(POPPLER_ANNOT_TEXT_MARKUP(poppler_annot), quadrilaterals);
-+@@ -413,7 +407,7 @@ static void poppler_annot_free_text_init(PopplerAnnotFreeText *poppler_annot) {
-+
-+ static void poppler_annot_free_text_class_init(PopplerAnnotFreeTextClass *klass) { }
-+
-+-PopplerAnnot *_poppler_annot_free_text_new(Annot *annot)
-++PopplerAnnot *_poppler_annot_free_text_new(const std::shared_ptr<Annot> &annot)
-+ {
-+     return _poppler_create_annot(POPPLER_TYPE_ANNOT_FREE_TEXT, annot);
-+ }
-+@@ -422,7 +416,7 @@ static void poppler_annot_file_attachment_init(PopplerAnnotFileAttachment *poppl
-+
-+ static void poppler_annot_file_attachment_class_init(PopplerAnnotFileAttachmentClass *klass) { }
-+
-+-PopplerAnnot *_poppler_annot_file_attachment_new(Annot *annot)
-++PopplerAnnot *_poppler_annot_file_attachment_new(const std::shared_ptr<Annot> &annot)
-+ {
-+     return _poppler_create_annot(POPPLER_TYPE_ANNOT_FILE_ATTACHMENT, annot);
-+ }
-+@@ -448,13 +442,13 @@ static void poppler_annot_movie_class_init(PopplerAnnotMovieClass *klass)
-+     gobject_class->finalize = poppler_annot_movie_finalize;
-+ }
-+
-+-PopplerAnnot *_poppler_annot_movie_new(Annot *annot)
-++PopplerAnnot *_poppler_annot_movie_new(const std::shared_ptr<Annot> &annot)
-+ {
-+     PopplerAnnot *poppler_annot;
-+     AnnotMovie *annot_movie;
-+
-+     poppler_annot = _poppler_create_annot(POPPLER_TYPE_ANNOT_MOVIE, annot);
-+-    annot_movie = static_cast<AnnotMovie *>(poppler_annot->annot);
-++    annot_movie = static_cast<AnnotMovie *>(poppler_annot->annot.get());
-+     POPPLER_ANNOT_MOVIE(poppler_annot)->movie = _poppler_movie_new(annot_movie->getMovie());
-+
-+     return poppler_annot;
-+@@ -481,14 +475,14 @@ static void poppler_annot_screen_class_init(PopplerAnnotScreenClass *klass)
-+     gobject_class->finalize = poppler_annot_screen_finalize;
-+ }
-+
-+-PopplerAnnot *_poppler_annot_screen_new(PopplerDocument *doc, Annot *annot)
-++PopplerAnnot *_poppler_annot_screen_new(PopplerDocument *doc, const std::shared_ptr<Annot> &annot)
-+ {
-+     PopplerAnnot *poppler_annot;
-+     AnnotScreen *annot_screen;
-+     LinkAction *action;
-+
-+     poppler_annot = _poppler_create_annot(POPPLER_TYPE_ANNOT_SCREEN, annot);
-+-    annot_screen = static_cast<AnnotScreen *>(poppler_annot->annot);
-++    annot_screen = static_cast<AnnotScreen *>(poppler_annot->annot.get());
-+     action = annot_screen->getAction();
-+     if (action) {
-+         POPPLER_ANNOT_SCREEN(poppler_annot)->action = _poppler_action_new(doc, action, nullptr);
-+@@ -497,7 +491,7 @@ PopplerAnnot *_poppler_annot_screen_new(PopplerDocument *doc, Annot *annot)
-+     return poppler_annot;
-+ }
-+
-+-PopplerAnnot *_poppler_annot_line_new(Annot *annot)
-++PopplerAnnot *_poppler_annot_line_new(const std::shared_ptr<Annot> &annot)
-+ {
-+     return _poppler_create_annot(POPPLER_TYPE_ANNOT_LINE, annot);
-+ }
-+@@ -524,17 +518,16 @@ static void poppler_annot_line_class_init(PopplerAnnotLineClass *klass) { }
-+ PopplerAnnot *poppler_annot_line_new(PopplerDocument *doc, PopplerRectangle *rect, PopplerPoint *start, PopplerPoint *end)
-+ {
-+     PopplerAnnot *poppler_annot;
-+-    Annot *annot;
-+     PDFRectangle pdf_rect(rect->x1, rect->y1, rect->x2, rect->y2);
-+
-+-    annot = new AnnotLine(doc->doc, &pdf_rect);
-++    auto annot = std::make_shared<AnnotLine>(doc->doc, &pdf_rect);
-+
-+     poppler_annot = _poppler_annot_line_new(annot);
-+     poppler_annot_line_set_vertices(POPPLER_ANNOT_LINE(poppler_annot), start, end);
-+     return poppler_annot;
-+ }
-+
-+-PopplerAnnot *_poppler_annot_circle_new(Annot *annot)
-++PopplerAnnot *_poppler_annot_circle_new(const std::shared_ptr<Annot> &annot)
-+ {
-+     return _poppler_create_annot(POPPLER_TYPE_ANNOT_CIRCLE, annot);
-+ }
-+@@ -558,15 +551,14 @@ static void poppler_annot_circle_class_init(PopplerAnnotCircleClass *klass) { }
-+  **/
-+ PopplerAnnot *poppler_annot_circle_new(PopplerDocument *doc, PopplerRectangle *rect)
-+ {
-+-    Annot *annot;
-+     PDFRectangle pdf_rect(rect->x1, rect->y1, rect->x2, rect->y2);
-+
-+-    annot = new AnnotGeometry(doc->doc, &pdf_rect, Annot::typeCircle);
-++    auto annot = std::make_shared<AnnotGeometry>(doc->doc, &pdf_rect, Annot::typeCircle);
-+
-+     return _poppler_annot_circle_new(annot);
-+ }
-+
-+-PopplerAnnot *_poppler_annot_square_new(Annot *annot)
-++PopplerAnnot *_poppler_annot_square_new(const std::shared_ptr<Annot> &annot)
-+ {
-+     return _poppler_create_annot(POPPLER_TYPE_ANNOT_SQUARE, annot);
-+ }
-+@@ -590,10 +582,9 @@ static void poppler_annot_square_class_init(PopplerAnnotSquareClass *klass) { }
-+  **/
-+ PopplerAnnot *poppler_annot_square_new(PopplerDocument *doc, PopplerRectangle *rect)
-+ {
-+-    Annot *annot;
-+     PDFRectangle pdf_rect(rect->x1, rect->y1, rect->x2, rect->y2);
-+
-+-    annot = new AnnotGeometry(doc->doc, &pdf_rect, Annot::typeSquare);
-++    auto annot = std::make_shared<AnnotGeometry>(doc->doc, &pdf_rect, Annot::typeSquare);
-+
-+     return _poppler_annot_square_new(annot);
-+ }
-+@@ -982,7 +973,7 @@ void poppler_annot_set_rectangle(PopplerAnnot *poppler_annot, PopplerRectangle *
-+     if (page && SUPPORTED_ROTATION(page->getRotate())) {
-+         /* annot is inside a rotated page, as core poppler rect must be saved
-+          * un-rotated, let's proceed to un-rotate rect before saving */
-+-        _unrotate_rect_for_annot_and_page(page, poppler_annot->annot, &x1, &y1, &x2, &y2);
-++        _unrotate_rect_for_annot_and_page(page, poppler_annot->annot.get(), &x1, &y1, &x2, &y2);
-+     }
-+
-+     poppler_annot->annot->setRect(x1 + crop_box->x1, y1 + crop_box->y1, x2 + crop_box->x1, y2 + crop_box->y1);
-+@@ -1004,7 +995,7 @@ gchar *poppler_annot_markup_get_label(PopplerAnnotMarkup *poppler_annot)
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot), NULL);
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     text = annot->getLabel();
-+
-+@@ -1028,7 +1019,7 @@ void poppler_annot_markup_set_label(PopplerAnnotMarkup *poppler_annot, const gch
-+
-+     g_return_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot));
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     tmp = label ? g_convert(label, -1, "UTF-16BE", "UTF-8", nullptr, &length, nullptr) : nullptr;
-+     annot->setLabel(std::make_unique<GooString>(tmp, length));
-+@@ -1051,7 +1042,7 @@ gboolean poppler_annot_markup_has_popup(PopplerAnnotMarkup *poppler_annot)
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot), FALSE);
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     return annot->getPopup() != nullptr;
-+ }
-+@@ -1073,8 +1064,8 @@ void poppler_annot_markup_set_popup(PopplerAnnotMarkup *poppler_annot, PopplerRe
-+
-+     g_return_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot));
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-+-    annot->setPopup(std::make_unique<AnnotPopup>(annot->getDoc(), &pdf_rect));
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-++    annot->setPopup(std::make_shared<AnnotPopup>(annot->getDoc(), &pdf_rect));
-+ }
-+
-+ /**
-+@@ -1093,9 +1084,9 @@ gboolean poppler_annot_markup_get_popup_is_open(PopplerAnnotMarkup *poppler_anno
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot), FALSE);
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+-    if ((annot_popup = annot->getPopup())) {
-++    if ((annot_popup = annot->getPopup().get())) {
-+         return annot_popup->getOpen();
-+     }
-+
-+@@ -1118,9 +1109,9 @@ void poppler_annot_markup_set_popup_is_open(PopplerAnnotMarkup *poppler_annot, g
-+
-+     g_return_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot));
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+-    annot_popup = annot->getPopup();
-++    annot_popup = annot->getPopup().get();
-+     if (!annot_popup) {
-+         return;
-+     }
-+@@ -1149,8 +1140,8 @@ gboolean poppler_annot_markup_get_popup_rectangle(PopplerAnnotMarkup *poppler_an
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot), FALSE);
-+     g_return_val_if_fail(poppler_rect != nullptr, FALSE);
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-+-    annot_popup = annot->getPopup();
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-++    annot_popup = annot->getPopup().get();
-+     if (!annot_popup) {
-+         return FALSE;
-+     }
-+@@ -1184,8 +1175,8 @@ void poppler_annot_markup_set_popup_rectangle(PopplerAnnotMarkup *poppler_annot,
-+     g_return_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot));
-+     g_return_if_fail(poppler_rect != nullptr);
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-+-    annot_popup = annot->getPopup();
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-++    annot_popup = annot->getPopup().get();
-+     if (!annot_popup) {
-+         return;
-+     }
-+@@ -1208,7 +1199,7 @@ gdouble poppler_annot_markup_get_opacity(PopplerAnnotMarkup *poppler_annot)
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot), 0);
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     return annot->getOpacity();
-+ }
-+@@ -1230,7 +1221,7 @@ void poppler_annot_markup_set_opacity(PopplerAnnotMarkup *poppler_annot, gdouble
-+
-+     g_return_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot));
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+     annot->setOpacity(opacity);
-+ }
-+
-+@@ -1251,7 +1242,7 @@ GDate *poppler_annot_markup_get_date(PopplerAnnotMarkup *poppler_annot)
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot), NULL);
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+     annot_date = annot->getDate();
-+     if (!annot_date) {
-+         return nullptr;
-+@@ -1284,7 +1275,7 @@ gchar *poppler_annot_markup_get_subject(PopplerAnnotMarkup *poppler_annot)
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot), NULL);
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     text = annot->getSubject();
-+
-+@@ -1305,7 +1296,7 @@ PopplerAnnotMarkupReplyType poppler_annot_markup_get_reply_to(PopplerAnnotMarkup
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot), POPPLER_ANNOT_MARKUP_REPLY_TYPE_R);
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     switch (annot->getReplyTo()) {
-+     case AnnotMarkup::replyTypeR:
-+@@ -1333,7 +1324,7 @@ PopplerAnnotExternalDataType poppler_annot_markup_get_external_data(PopplerAnnot
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_MARKUP(poppler_annot), POPPLER_ANNOT_EXTERNAL_DATA_MARKUP_UNKNOWN);
-+
-+-    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     switch (annot->getExData()) {
-+     case annotExternalDataMarkup3D:
-+@@ -1363,7 +1354,7 @@ gboolean poppler_annot_text_get_is_open(PopplerAnnotText *poppler_annot)
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_TEXT(poppler_annot), FALSE);
-+
-+-    annot = static_cast<AnnotText *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotText *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     return annot->getOpen();
-+ }
-+@@ -1383,7 +1374,7 @@ void poppler_annot_text_set_is_open(PopplerAnnotText *poppler_annot, gboolean is
-+
-+     g_return_if_fail(POPPLER_IS_ANNOT_TEXT(poppler_annot));
-+
-+-    annot = static_cast<AnnotText *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotText *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+     annot->setOpen(is_open);
-+ }
-+
-+@@ -1402,7 +1393,7 @@ gchar *poppler_annot_text_get_icon(PopplerAnnotText *poppler_annot)
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_TEXT(poppler_annot), NULL);
-+
-+-    annot = static_cast<AnnotText *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotText *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     text = annot->getIcon();
-+
-+@@ -1455,7 +1446,7 @@ void poppler_annot_text_set_icon(PopplerAnnotText *poppler_annot, const gchar *i
-+
-+     g_return_if_fail(POPPLER_IS_ANNOT_TEXT(poppler_annot));
-+
-+-    annot = static_cast<AnnotText *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotText *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     text = new GooString(icon);
-+     annot->setIcon(text);
-+@@ -1476,7 +1467,7 @@ PopplerAnnotTextState poppler_annot_text_get_state(PopplerAnnotText *poppler_ann
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_TEXT(poppler_annot), POPPLER_ANNOT_TEXT_STATE_UNKNOWN);
-+
-+-    annot = static_cast<AnnotText *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotText *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     switch (annot->getState()) {
-+     case AnnotText::stateUnknown:
-+@@ -1523,7 +1514,7 @@ void poppler_annot_text_markup_set_quadrilaterals(PopplerAnnotTextMarkup *popple
-+     g_return_if_fail(POPPLER_IS_ANNOT_TEXT_MARKUP(poppler_annot));
-+     g_return_if_fail(quadrilaterals != nullptr && quadrilaterals->len > 0);
-+
-+-    annot = static_cast<AnnotTextMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotTextMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+     crop_box = _poppler_annot_get_cropbox_and_page(POPPLER_ANNOT(poppler_annot), &page);
-+     quads = create_annot_quads_from_poppler_quads(quadrilaterals);
-+
-+@@ -1562,7 +1553,7 @@ GArray *poppler_annot_text_markup_get_quadrilaterals(PopplerAnnotTextMarkup *pop
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_TEXT_MARKUP(poppler_annot), NULL);
-+
-+-    annot = static_cast<AnnotTextMarkup *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotTextMarkup *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+     crop_box = _poppler_annot_get_cropbox(POPPLER_ANNOT(poppler_annot));
-+     AnnotQuadrilaterals *quads = annot->getQuadrilaterals();
-+
-+@@ -1584,7 +1575,7 @@ PopplerAnnotFreeTextQuadding poppler_annot_free_text_get_quadding(PopplerAnnotFr
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_FREE_TEXT(poppler_annot), POPPLER_ANNOT_FREE_TEXT_QUADDING_LEFT_JUSTIFIED);
-+
-+-    annot = static_cast<AnnotFreeText *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotFreeText *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     switch (annot->getQuadding()) {
-+     case VariableTextQuadding::leftJustified:
-+@@ -1618,7 +1609,7 @@ PopplerAnnotCalloutLine *poppler_annot_free_text_get_callout_line(PopplerAnnotFr
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_FREE_TEXT(poppler_annot), NULL);
-+
-+-    annot = static_cast<AnnotFreeText *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotFreeText *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     if ((line = annot->getCalloutLine())) {
-+         AnnotCalloutMultiLine *multiline;
-+@@ -1662,11 +1653,10 @@ PopplerAttachment *poppler_annot_file_attachment_get_attachment(PopplerAnnotFile
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_FILE_ATTACHMENT(poppler_annot), NULL);
-+
-+-    annot = static_cast<AnnotFileAttachment *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotFileAttachment *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+-    FileSpec *file = new FileSpec(annot->getFile());
-+-    attachment = _poppler_attachment_new(file);
-+-    delete file;
-++    FileSpec file { annot->getFile() };
-++    attachment = _poppler_attachment_new(&file);
-+
-+     return attachment;
-+ }
-+@@ -1688,7 +1678,7 @@ gchar *poppler_annot_file_attachment_get_name(PopplerAnnotFileAttachment *popple
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_FILE_ATTACHMENT(poppler_annot), NULL);
-+
-+-    annot = static_cast<AnnotFileAttachment *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotFileAttachment *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+     name = annot->getName();
-+
-+     return name ? _poppler_goo_string_to_utf8(name) : nullptr;
-+@@ -1760,7 +1750,7 @@ gchar *poppler_annot_movie_get_title(PopplerAnnotMovie *poppler_annot)
-+
-+     g_return_val_if_fail(POPPLER_IS_ANNOT_MOVIE(poppler_annot), NULL);
-+
-+-    annot = static_cast<AnnotMovie *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotMovie *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     title = annot->getTitle();
-+
-+@@ -1819,7 +1809,7 @@ void poppler_annot_line_set_vertices(PopplerAnnotLine *poppler_annot, PopplerPoi
-+     g_return_if_fail(start != nullptr);
-+     g_return_if_fail(end != nullptr);
-+
-+-    annot = static_cast<AnnotLine *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotLine *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+     annot->setVertices(start->x, start->y, end->x, end->y);
-+ }
-+
-+@@ -1828,7 +1818,7 @@ static PopplerColor *poppler_annot_geometry_get_interior_color(PopplerAnnot *pop
-+ {
-+     AnnotGeometry *annot;
-+
-+-    annot = static_cast<AnnotGeometry *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotGeometry *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     return create_poppler_color_from_annot_color(annot->getInteriorColor());
-+ }
-+@@ -1837,7 +1827,7 @@ static void poppler_annot_geometry_set_interior_color(PopplerAnnot *poppler_anno
-+ {
-+     AnnotGeometry *annot;
-+
-+-    annot = static_cast<AnnotGeometry *>(POPPLER_ANNOT(poppler_annot)->annot);
-++    annot = static_cast<AnnotGeometry *>(POPPLER_ANNOT(poppler_annot)->annot.get());
-+
-+     annot->setInteriorColor(create_annot_color_from_poppler_color(poppler_color));
-+ }
-+diff --git a/glib/poppler-page.cc b/glib/poppler-page.cc
-+index a9515f3..65e94ef 100644
-+--- a/glib/poppler-page.cc
-++++ b/glib/poppler-page.cc
-+@@ -1132,7 +1132,7 @@ GList *poppler_page_get_link_mapping(PopplerPage *page)
-+
-+     poppler_page_get_size(page, &width, &height);
-+
-+-    for (AnnotLink *link : links->getLinks()) {
-++    for (const std::shared_ptr<AnnotLink> &link : links->getLinks()) {
-+         PopplerLinkMapping *mapping;
-+         PopplerRectangle rect;
-+         LinkAction *link_action;
-+@@ -1295,7 +1295,7 @@ GList *poppler_page_get_annot_mapping(PopplerPage *page)
-+     poppler_page_get_size(page, &width, &height);
-+     crop_box = page->page->getCropBox();
-+
-+-    for (Annot *annot : annots->getAnnots()) {
-++    for (const std::shared_ptr<Annot> &annot : annots->getAnnots()) {
-+         PopplerAnnotMapping *mapping;
-+         PopplerRectangle rect;
-+         gboolean flag_no_rotate;
-+@@ -1569,12 +1569,12 @@ void poppler_page_add_annot(PopplerPage *page, PopplerAnnot *annot)
-+     if (page_is_rotated) {
-+         /* annot is inside a rotated page, as core poppler rect must be saved
-+          * un-rotated, let's proceed to un-rotate rect before saving */
-+-        _unrotate_rect_for_annot_and_page(page->page, annot->annot, &x1, &y1, &x2, &y2);
-++        _unrotate_rect_for_annot_and_page(page->page, annot->annot.get(), &x1, &y1, &x2, &y2);
-+     }
-+
-+     annot->annot->setRect(x1 + page_crop_box->x1, y1 + page_crop_box->y1, x2 + page_crop_box->x1, y2 + page_crop_box->y1);
-+
-+-    AnnotTextMarkup *annot_markup = dynamic_cast<AnnotTextMarkup *>(annot->annot);
-++    AnnotTextMarkup *annot_markup = dynamic_cast<AnnotTextMarkup *>(annot->annot.get());
-+     if (annot_markup) {
-+         AnnotQuadrilaterals *quads;
-+         crop_box = _poppler_annot_get_cropbox(annot);
-+diff --git a/glib/poppler-private.h b/glib/poppler-private.h
-+index ce2c473..775d211 100644
-+--- a/glib/poppler-private.h
-++++ b/glib/poppler-private.h
-+@@ -85,7 +85,7 @@ struct _PopplerFormField
-+ struct _PopplerAnnot
-+ {
-+     GObject parent_instance;
-+-    Annot *annot;
-++    std::shared_ptr<Annot> annot;
-+ };
-+
-+ typedef struct _Layer
-+@@ -146,16 +146,16 @@ PopplerFormField *_poppler_form_field_new(PopplerDocument *document, FormWidget
-+ PopplerAttachment *_poppler_attachment_new(FileSpec *file);
-+ PopplerMovie *_poppler_movie_new(const Movie *movie);
-+ PopplerMedia *_poppler_media_new(const MediaRendition *media);
-+-PopplerAnnot *_poppler_annot_new(Annot *annot);
-+-PopplerAnnot *_poppler_annot_text_new(Annot *annot);
-+-PopplerAnnot *_poppler_annot_free_text_new(Annot *annot);
-+-PopplerAnnot *_poppler_annot_text_markup_new(Annot *annot);
-+-PopplerAnnot *_poppler_annot_file_attachment_new(Annot *annot);
-+-PopplerAnnot *_poppler_annot_movie_new(Annot *annot);
-+-PopplerAnnot *_poppler_annot_screen_new(PopplerDocument *doc, Annot *annot);
-+-PopplerAnnot *_poppler_annot_line_new(Annot *annot);
-+-PopplerAnnot *_poppler_annot_circle_new(Annot *annot);
-+-PopplerAnnot *_poppler_annot_square_new(Annot *annot);
-++PopplerAnnot *_poppler_annot_new(const std::shared_ptr<Annot> &annot);
-++PopplerAnnot *_poppler_annot_text_new(const std::shared_ptr<Annot> &annot);
-++PopplerAnnot *_poppler_annot_free_text_new(const std::shared_ptr<Annot> &annot);
-++PopplerAnnot *_poppler_annot_text_markup_new(const std::shared_ptr<Annot> &annot);
-++PopplerAnnot *_poppler_annot_file_attachment_new(const std::shared_ptr<Annot> &annot);
-++PopplerAnnot *_poppler_annot_movie_new(const std::shared_ptr<Annot> &annot);
-++PopplerAnnot *_poppler_annot_screen_new(PopplerDocument *doc, const std::shared_ptr<Annot> &annot);
-++PopplerAnnot *_poppler_annot_line_new(const std::shared_ptr<Annot> &annot);
-++PopplerAnnot *_poppler_annot_circle_new(const std::shared_ptr<Annot> &annot);
-++PopplerAnnot *_poppler_annot_square_new(const std::shared_ptr<Annot> &annot);
-+
-+ const PDFRectangle *_poppler_annot_get_cropbox(PopplerAnnot *poppler_annot);
-+
-+diff --git a/poppler/Annot.cc b/poppler/Annot.cc
-+index 366e7de..19ec824 100644
-+--- a/poppler/Annot.cc
-++++ b/poppler/Annot.cc
-+@@ -1087,7 +1087,7 @@ void AnnotAppearance::removeStream(Ref refToStream)
-+             continue;
-+         }
-+         Annots *annots = page->getAnnots();
-+-        for (Annot *annot : annots->getAnnots()) {
-++        for (const std::shared_ptr<Annot> &annot : annots->getAnnots()) {
-+             AnnotAppearance *annotAp = annot->getAppearStreams();
-+             if (annotAp && annotAp != this && annotAp->referencesStream(refToStream)) {
-+                 return; // Another annotation points to the stream -> Don't delete it
-+@@ -1286,7 +1286,6 @@ double AnnotAppearanceBBox::getPageYMax() const
-+ Annot::Annot(PDFDoc *docA, PDFRectangle *rectA)
-+ {
-+
-+-    refCnt = 1;
-+     flags = flagUnknown;
-+     type = typeUnknown;
-+
-+@@ -1307,7 +1306,6 @@ Annot::Annot(PDFDoc *docA, PDFRectangle *rectA)
-+
-+ Annot::Annot(PDFDoc *docA, Object &&dictObject)
-+ {
-+-    refCnt = 1;
-+     hasRef = false;
-+     flags = flagUnknown;
-+     type = typeUnknown;
-+@@ -1317,7 +1315,6 @@ Annot::Annot(PDFDoc *docA, Object &&dictObject)
-+
-+ Annot::Annot(PDFDoc *docA, Object &&dictObject, const Object *obj)
-+ {
-+-    refCnt = 1;
-+     if (obj->isRef()) {
-+         hasRef = true;
-+         ref = obj->getRef();
-+@@ -1691,18 +1688,6 @@ void Annot::removeReferencedObjects()
-+     invalidateAppearance();
-+ }
-+
-+-void Annot::incRefCnt()
-+-{
-+-    refCnt++;
-+-}
-+-
-+-void Annot::decRefCnt()
-+-{
-+-    if (--refCnt == 0) {
-+-        delete this;
-+-    }
-+-}
-+-
-+ Annot::~Annot() { }
-+
-+ void AnnotAppearanceBuilder::setDrawColor(const AnnotColor *drawColor, bool fill)
-+@@ -2243,7 +2228,7 @@ void AnnotMarkup::setLabel(std::unique_ptr<GooString> &&new_label)
-+     update("T", Object(label->copy()));
-+ }
-+
-+-void AnnotMarkup::setPopup(std::unique_ptr<AnnotPopup> &&new_popup)
-++void AnnotMarkup::setPopup(std::shared_ptr<AnnotPopup> new_popup)
-+ {
-+     // If there exists an old popup annotation that is already
-+     // associated with a page, then we need to remove that
-+@@ -2252,7 +2237,7 @@ void AnnotMarkup::setPopup(std::unique_ptr<AnnotPopup> &&new_popup)
-+     if (popup && popup->getPageNum() != 0) {
-+         Page *pageobj = doc->getPage(popup->getPageNum());
-+         if (pageobj) {
-+-            pageobj->removeAnnot(popup.get());
-++            pageobj->removeAnnot(popup);
-+         }
-+     }
-+
-+@@ -2269,7 +2254,7 @@ void AnnotMarkup::setPopup(std::unique_ptr<AnnotPopup> &&new_popup)
-+             Page *pageobj = doc->getPage(page);
-+             assert(pageobj != nullptr); // pageobj should exist in doc (see setPage())
-+
-+-            pageobj->addAnnot(popup.get());
-++            pageobj->addAnnot(popup);
-+         }
-+     } else {
-+         popup = nullptr;
-+@@ -2301,7 +2286,7 @@ void AnnotMarkup::removeReferencedObjects()
-+
-+     // Remove popup
-+     if (popup) {
-+-        pageobj->removeAnnot(popup.get());
-++        pageobj->removeAnnot(popup);
-+     }
-+
-+     Annot::removeReferencedObjects();
-+@@ -2969,7 +2954,7 @@ void AnnotFreeText::setStyleString(GooString *new_string)
-+     update("DS", Object(styleString->copy()));
-+ }
-+
-+-void AnnotFreeText::setCalloutLine(AnnotCalloutLine *line)
-++void AnnotFreeText::setCalloutLine(std::unique_ptr<AnnotCalloutLine> &&line)
-+ {
-+     Object obj1;
-+     if (line == nullptr) {
-+@@ -2984,15 +2969,13 @@ void AnnotFreeText::setCalloutLine(AnnotCalloutLine *line)
-+         obj1.arrayAdd(Object(x2));
-+         obj1.arrayAdd(Object(y2));
-+
-+-        AnnotCalloutMultiLine *mline = dynamic_cast<AnnotCalloutMultiLine *>(line);
-++        AnnotCalloutMultiLine *mline = dynamic_cast<AnnotCalloutMultiLine *>(line.get());
-+         if (mline) {
-+             double x3 = mline->getX3(), y3 = mline->getY3();
-+             obj1.arrayAdd(Object(x3));
-+             obj1.arrayAdd(Object(y3));
-+-            calloutLine = std::make_unique<AnnotCalloutMultiLine>(x1, y1, x2, y2, x3, y3);
-+-        } else {
-+-            calloutLine = std::make_unique<AnnotCalloutLine>(x1, y1, x2, y2);
-+         }
-++        calloutLine = std::move(line);
-+     }
-+
-+     update("CL", std::move(obj1));
-+@@ -5518,10 +5501,7 @@ AnnotStamp::AnnotStamp(PDFDoc *docA, Object &&dictObject, const Object *obj) : A
-+     initialize(docA, annotObj.getDict());
-+ }
-+
-+-AnnotStamp::~AnnotStamp()
-+-{
-+-    delete stampImageHelper;
-+-}
-++AnnotStamp::~AnnotStamp() = default;
-+
-+ void AnnotStamp::initialize(PDFDoc *docA, Dict *dict)
-+ {
-+@@ -5532,7 +5512,6 @@ void AnnotStamp::initialize(PDFDoc *docA, Dict *dict)
-+         icon = std::make_unique<GooString>("Draft");
-+     }
-+
-+-    stampImageHelper = nullptr;
-+     updatedAppearanceStream = Ref::INVALID();
-+ }
-+
-+@@ -5690,16 +5669,18 @@ void AnnotStamp::setIcon(GooString *new_icon)
-+     invalidateAppearance();
-+ }
-+
-+-void AnnotStamp::setCustomImage(AnnotStampImageHelper *stampImageHelperA)
-++void AnnotStamp::setCustomImage(std::unique_ptr<AnnotStampImageHelper> &&stampImageHelperA)
-+ {
-+     if (!stampImageHelperA) {
-+         return;
-+     }
-+
-+     annotLocker();
-+-    clearCustomImage();
-++    if (stampImageHelper) {
-++        stampImageHelper->removeAnnotStampImageObject();
-++    }
-+
-+-    stampImageHelper = stampImageHelperA;
-++    stampImageHelper = std::move(stampImageHelperA);
-+     generateStampCustomAppearance();
-+
-+     if (updatedAppearanceStream == Ref::INVALID()) {
-+@@ -5714,16 +5695,6 @@ void AnnotStamp::setCustomImage(AnnotStampImageHelper *stampImageHelperA)
-+     update("AP", std::move(obj1));
-+ }
-+
-+-void AnnotStamp::clearCustomImage()
-+-{
-+-    if (stampImageHelper != nullptr) {
-+-        stampImageHelper->removeAnnotStampImageObject();
-+-        delete stampImageHelper;
-+-        stampImageHelper = nullptr;
-+-        invalidateAppearance();
-+-    }
-+-}
-+-
-+ //------------------------------------------------------------------------
-+ // AnnotGeometry
-+ //------------------------------------------------------------------------
-+@@ -7270,96 +7241,90 @@ const GooString *AnnotRichMedia::Params::getFlashVars() const
-+
-+ Annots::Annots(PDFDoc *docA, int page, Object *annotsObj)
-+ {
-+-    Annot *annot;
-+-    int i;
-+-
-+     doc = docA;
-+
-+     if (annotsObj->isArray()) {
-+-        for (i = 0; i < annotsObj->arrayGetLength(); ++i) {
-++        for (int i = 0; i < annotsObj->arrayGetLength(); ++i) {
-+             // get the Ref to this annot and pass it to Annot constructor
-+             // this way, it'll be possible for the annot to retrieve the corresponding
-+             // form widget
-+             Object obj1 = annotsObj->arrayGet(i);
-+             if (obj1.isDict()) {
-+                 const Object &obj2 = annotsObj->arrayGetNF(i);
-+-                annot = createAnnot(std::move(obj1), &obj2);
-++                std::shared_ptr<Annot> annot = createAnnot(std::move(obj1), &obj2);
-+                 if (annot) {
-+                     if (annot->isOk()) {
-+                         annot->setPage(page, false); // Don't change /P
-+                         appendAnnot(annot);
-+                     }
-+-                    annot->decRefCnt();
-+                 }
-+             }
-+         }
-+     }
-+ }
-+
-+-void Annots::appendAnnot(Annot *annot)
-++void Annots::appendAnnot(std::shared_ptr<Annot> annot)
-+ {
-+     if (annot && annot->isOk()) {
-+-        annots.push_back(annot);
-+-        annot->incRefCnt();
-++        annots.push_back(std::move(annot));
-+     }
-+ }
-+
-+-bool Annots::removeAnnot(Annot *annot)
-++bool Annots::removeAnnot(const std::shared_ptr<Annot> &annot)
-+ {
-+     auto idx = std::find(annots.begin(), annots.end(), annot);
-+
-+     if (idx == annots.end()) {
-+         return false;
-+     } else {
-+-        annot->decRefCnt();
-+         annots.erase(idx);
-+         return true;
-+     }
-+ }
-+
-+-Annot *Annots::createAnnot(Object &&dictObject, const Object *obj)
-++std::shared_ptr<Annot> Annots::createAnnot(Object &&dictObject, const Object *obj)
-+ {
-+-    Annot *annot = nullptr;
-++    std::shared_ptr<Annot> annot = nullptr;
-+     Object obj1 = dictObject.dictLookup("Subtype");
-+     if (obj1.isName()) {
-+         const char *typeName = obj1.getName();
-+
-+         if (!strcmp(typeName, "Text")) {
-+-            annot = new AnnotText(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotText>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Link")) {
-+-            annot = new AnnotLink(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotLink>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "FreeText")) {
-+-            annot = new AnnotFreeText(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotFreeText>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Line")) {
-+-            annot = new AnnotLine(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotLine>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Square")) {
-+-            annot = new AnnotGeometry(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotGeometry>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Circle")) {
-+-            annot = new AnnotGeometry(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotGeometry>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Polygon")) {
-+-            annot = new AnnotPolygon(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotPolygon>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "PolyLine")) {
-+-            annot = new AnnotPolygon(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotPolygon>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Highlight")) {
-+-            annot = new AnnotTextMarkup(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotTextMarkup>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Underline")) {
-+-            annot = new AnnotTextMarkup(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotTextMarkup>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Squiggly")) {
-+-            annot = new AnnotTextMarkup(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotTextMarkup>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "StrikeOut")) {
-+-            annot = new AnnotTextMarkup(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotTextMarkup>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Stamp")) {
-+-            annot = new AnnotStamp(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotStamp>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Caret")) {
-+-            annot = new AnnotCaret(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotCaret>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Ink")) {
-+-            annot = new AnnotInk(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotInk>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "FileAttachment")) {
-+-            annot = new AnnotFileAttachment(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotFileAttachment>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Sound")) {
-+-            annot = new AnnotSound(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotSound>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Movie")) {
-+-            annot = new AnnotMovie(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotMovie>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Widget")) {
-+             // Find the annot in forms
-+             if (obj->isRef()) {
-+@@ -7368,25 +7333,24 @@ Annot *Annots::createAnnot(Object &&dictObject, const Object *obj)
-+                     FormWidget *widget = form->findWidgetByRef(obj->getRef());
-+                     if (widget) {
-+                         annot = widget->getWidgetAnnotation();
-+-                        annot->incRefCnt();
-+                     }
-+                 }
-+             }
-+             if (!annot) {
-+-                annot = new AnnotWidget(doc, std::move(dictObject), obj);
-++                annot = std::make_shared<AnnotWidget>(doc, std::move(dictObject), obj);
-+             }
-+         } else if (!strcmp(typeName, "Screen")) {
-+-            annot = new AnnotScreen(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotScreen>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "PrinterMark")) {
-+-            annot = new Annot(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<Annot>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "TrapNet")) {
-+-            annot = new Annot(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<Annot>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Watermark")) {
-+-            annot = new Annot(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<Annot>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "3D")) {
-+-            annot = new Annot3D(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<Annot3D>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "RichMedia")) {
-+-            annot = new AnnotRichMedia(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<AnnotRichMedia>(doc, std::move(dictObject), obj);
-+         } else if (!strcmp(typeName, "Popup")) {
-+             /* Popup annots are already handled by markup annots
-+              * Here we only care about popup annots without a
-+@@ -7394,21 +7358,21 @@ Annot *Annots::createAnnot(Object &&dictObject, const Object *obj)
-+              */
-+             Object obj2 = dictObject.dictLookup("Parent");
-+             if (obj2.isNull()) {
-+-                annot = new AnnotPopup(doc, std::move(dictObject), obj);
-++                annot = std::make_shared<AnnotPopup>(doc, std::move(dictObject), obj);
-+             } else {
-+                 annot = nullptr;
-+             }
-+         } else {
-+-            annot = new Annot(doc, std::move(dictObject), obj);
-++            annot = std::make_shared<Annot>(doc, std::move(dictObject), obj);
-+         }
-+     }
-+
-+     return annot;
-+ }
-+
-+-Annot *Annots::findAnnot(Ref *ref)
-++std::shared_ptr<Annot> Annots::findAnnot(Ref *ref)
-+ {
-+-    for (auto *annot : annots) {
-++    for (const auto &annot : annots) {
-+         if (annot->match(ref)) {
-+             return annot;
-+         }
-+@@ -7416,12 +7380,7 @@ Annot *Annots::findAnnot(Ref *ref)
-+     return nullptr;
-+ }
-+
-+-Annots::~Annots()
-+-{
-+-    for (auto *annot : annots) {
-+-        annot->decRefCnt();
-+-    }
-+-}
-++Annots::~Annots() = default;
-+
-+ //------------------------------------------------------------------------
-+ // AnnotAppearanceBuilder
-+diff --git a/poppler/Annot.h b/poppler/Annot.h
-+index 8d1f18b..7885c4a 100644
-+--- a/poppler/Annot.h
-++++ b/poppler/Annot.h
-+@@ -717,9 +717,6 @@ public:
-+     Annot(PDFDoc *docA, Object &&dictObject, const Object *obj);
-+     bool isOk() { return ok; }
-+
-+-    void incRefCnt();
-+-    void decRefCnt();
-+-
-+     virtual void draw(Gfx *gfx, bool printing);
-+     // Get the resource dict of the appearance stream
-+     virtual Object getAppearanceResDict();
-+@@ -774,6 +771,8 @@ public:
-+
-+     static void layoutText(const GooString *text, GooString *outBuf, int *i, const GfxFont &font, double *width, double widthLimit, int *charCount, bool noReencode);
-+
-++    virtual ~Annot();
-++
-+ private:
-+     void readArrayNum(Object *pdfArray, int key, double *value);
-+     // write vStr[i:j[ in appearBuf
-+@@ -782,7 +781,6 @@ private:
-+     void setPage(int pageIndex, bool updateP); // Called by Page::addAnnot and Annots ctor
-+
-+ protected:
-+-    virtual ~Annot();
-+     virtual void removeReferencedObjects(); // Called by Page::removeAnnot
-+     Object createForm(const GooString *appearBuf, const double *bbox, bool transparencyGroup, Dict *resDict);
-+     Object createForm(const GooString *appearBuf, const double *bbox, bool transparencyGroup, Object &&resDictObject); // overload to support incRef/decRef
-+@@ -799,8 +797,6 @@ protected:
-+
-+     Object annotObj;
-+
-+-    std::atomic_int refCnt;
-+-
-+     // required data
-+     AnnotSubtype type; // Annotation type
-+     std::unique_ptr<PDFRectangle> rect; // Rect
-+@@ -871,7 +867,7 @@ public:
-+
-+     // getters
-+     const GooString *getLabel() const { return label.get(); }
-+-    AnnotPopup *getPopup() const { return popup.get(); }
-++    std::shared_ptr<AnnotPopup> getPopup() const { return popup; }
-+     double getOpacity() const { return opacity; }
-+     // getRC
-+     const GooString *getDate() const { return date.get(); }
-+@@ -882,7 +878,7 @@ public:
-+     AnnotExternalDataType getExData() const { return exData; }
-+
-+     // The annotation takes the ownership of new_popup
-+-    void setPopup(std::unique_ptr<AnnotPopup> &&new_popup);
-++    void setPopup(std::shared_ptr<AnnotPopup> new_popup);
-+     void setLabel(std::unique_ptr<GooString> &&new_label);
-+     void setOpacity(double opacityA);
-+     void setDate(GooString *new_date);
-+@@ -891,7 +887,7 @@ protected:
-+     void removeReferencedObjects() override;
-+
-+     std::unique_ptr<GooString> label; // T            (Default author)
-+-    std::unique_ptr<AnnotPopup> popup; // Popup
-++    std::shared_ptr<AnnotPopup> popup; // Popup
-+     double opacity; // CA           (Default 1.0)
-+     // RC
-+     std::unique_ptr<GooString> date; // CreationDate
-+@@ -1066,7 +1062,7 @@ public:
-+     void setDefaultAppearance(const DefaultAppearance &da);
-+     void setQuadding(VariableTextQuadding new_quadding);
-+     void setStyleString(GooString *new_string);
-+-    void setCalloutLine(AnnotCalloutLine *line);
-++    void setCalloutLine(std::unique_ptr<AnnotCalloutLine> &&line);
-+     void setIntent(AnnotFreeTextIntent new_intent);
-+
-+     // getters
-+@@ -1222,9 +1218,7 @@ public:
-+
-+     void setIcon(GooString *new_icon);
-+
-+-    void setCustomImage(AnnotStampImageHelper *stampImageHelperA);
-+-
-+-    void clearCustomImage();
-++    void setCustomImage(std::unique_ptr<AnnotStampImageHelper> &&stampImageHelperA);
-+
-+     // getters
-+     const GooString *getIcon() const { return icon.get(); }
-+@@ -1235,7 +1229,7 @@ private:
-+     void generateStampCustomAppearance();
-+
-+     std::unique_ptr<GooString> icon; // Name       (Default Draft)
-+-    AnnotStampImageHelper *stampImageHelper;
-++    std::unique_ptr<AnnotStampImageHelper> stampImageHelper;
-+     Ref updatedAppearanceStream;
-+ };
-+
-+@@ -1766,17 +1760,17 @@ public:
-+     Annots(const Annots &) = delete;
-+     Annots &operator=(const Annots &) = delete;
-+
-+-    const std::vector<Annot *> &getAnnots() { return annots; }
-++    const std::vector<std::shared_ptr<Annot>> &getAnnots() { return annots; }
-+
-+-    void appendAnnot(Annot *annot);
-+-    bool removeAnnot(Annot *annot);
-++    void appendAnnot(std::shared_ptr<Annot> annot);
-++    bool removeAnnot(const std::shared_ptr<Annot> &annot);
-+
-+ private:
-+-    Annot *createAnnot(Object &&dictObject, const Object *obj);
-+-    Annot *findAnnot(Ref *ref);
-++    std::shared_ptr<Annot> createAnnot(Object &&dictObject, const Object *obj);
-++    std::shared_ptr<Annot> findAnnot(Ref *ref);
-+
-+     PDFDoc *doc;
-+-    std::vector<Annot *> annots;
-++    std::vector<std::shared_ptr<Annot>> annots;
-+ };
-+
-+ #endif
-+diff --git a/poppler/FontInfo.cc b/poppler/FontInfo.cc
-+index 309ec6d..c8c1bdf 100644
-+--- a/poppler/FontInfo.cc
-++++ b/poppler/FontInfo.cc
-+@@ -82,7 +82,7 @@ std::vector<FontInfo *> FontInfoScanner::scan(int nPages)
-+             delete resDict;
-+         }
-+         annots = page->getAnnots();
-+-        for (Annot *annot : annots->getAnnots()) {
-++        for (const std::shared_ptr<Annot> &annot : annots->getAnnots()) {
-+             Object obj1 = annot->getAppearanceResDict();
-+             if (obj1.isDict()) {
-+                 scanFonts(xrefA.get(), obj1.getDict(), &result);
-+diff --git a/poppler/Form.cc b/poppler/Form.cc
-+index b88972a..9a55095 100644
-+--- a/poppler/Form.cc
-++++ b/poppler/Form.cc
-+@@ -110,12 +110,7 @@ FormWidget::FormWidget(PDFDoc *docA, Object *aobj, unsigned num, Ref aref, FormF
-+     widget = nullptr;
-+ }
-+
-+-FormWidget::~FormWidget()
-+-{
-+-    if (widget) {
-+-        widget->decRefCnt();
-+-    }
-+-}
-++FormWidget::~FormWidget() = default;
-+
-+ void FormWidget::print(int indent)
-+ {
-+@@ -129,7 +124,7 @@ void FormWidget::createWidgetAnnotation()
-+     }
-+
-+     Object obj1(ref);
-+-    widget = new AnnotWidget(doc, &obj, &obj1, field);
-++    widget = std::make_shared<AnnotWidget>(doc, &obj, &obj1, field);
-+ }
-+
-+ bool FormWidget::inRect(double x, double y) const
-+@@ -2738,7 +2733,7 @@ FormPageWidgets::FormPageWidgets(Annots *annots, unsigned int page, Form *form)
-+
-+         /* For each entry in the page 'Annots' dict, try to find
-+            a matching form field */
-+-        for (Annot *annot : annots->getAnnots()) {
-++        for (const std::shared_ptr<Annot> &annot : annots->getAnnots()) {
-+
-+             if (annot->getType() != Annot::typeWidget) {
-+                 continue;
-+diff --git a/poppler/Form.h b/poppler/Form.h
-+index c48ae83..23f6a81 100644
-+--- a/poppler/Form.h
-++++ b/poppler/Form.h
-+@@ -143,8 +143,8 @@ public:
-+     static void decodeID(unsigned id, unsigned *pageNum, unsigned *fieldNum);
-+
-+     void createWidgetAnnotation();
-+-    AnnotWidget *getWidgetAnnotation() const { return widget; }
-+-    void setWidgetAnnotation(AnnotWidget *_widget) { widget = _widget; }
-++    std::shared_ptr<AnnotWidget> getWidgetAnnotation() const { return widget; }
-++    void setWidgetAnnotation(std::shared_ptr<AnnotWidget> _widget) { widget = std::move(_widget); }
-+
-+     virtual void updateWidgetAppearance() = 0;
-+
-+@@ -153,7 +153,7 @@ public:
-+ protected:
-+     FormWidget(PDFDoc *docA, Object *aobj, unsigned num, Ref aref, FormField *fieldA);
-+
-+-    AnnotWidget *widget;
-++    std::shared_ptr<AnnotWidget> widget;
-+     FormField *field;
-+     FormFieldType type;
-+     Object obj;
-+diff --git a/poppler/JSInfo.cc b/poppler/JSInfo.cc
-+index eaef33e..e4c4f37 100644
-+--- a/poppler/JSInfo.cc
-++++ b/poppler/JSInfo.cc
-+@@ -191,15 +191,15 @@ void JSInfo::scan(int nPages)
-+         }
-+         // annotation actions (links, screen, widget)
-+         annots = page->getAnnots();
-+-        for (Annot *a : annots->getAnnots()) {
-++        for (const std::shared_ptr<Annot> &a : annots->getAnnots()) {
-+             if (a->getType() == Annot::typeLink) {
-+-                AnnotLink *annot = static_cast<AnnotLink *>(a);
-++                AnnotLink *annot = static_cast<AnnotLink *>(a.get());
-+                 scanLinkAction(annot->getAction(), "Link Annotation Activated");
-+                 if (onlyFirstJS && hasJS) {
-+                     return;
-+                 }
-+             } else if (a->getType() == Annot::typeScreen) {
-+-                AnnotScreen *annot = static_cast<AnnotScreen *>(a);
-++                AnnotScreen *annot = static_cast<AnnotScreen *>(a.get());
-+                 scanLinkAction(annot->getAction(), "Screen Annotation Activated");
-+                 scanLinkAction(annot->getAdditionalAction(Annot::actionCursorEntering).get(), "Screen Annotation Cursor Enter");
-+                 scanLinkAction(annot->getAdditionalAction(Annot::actionCursorLeaving).get(), "Screen Annotation Cursor Leave");
-+@@ -216,7 +216,7 @@ void JSInfo::scan(int nPages)
-+                     return;
-+                 }
-+             } else if (a->getType() == Annot::typeWidget) {
-+-                AnnotWidget *annot = static_cast<AnnotWidget *>(a);
-++                AnnotWidget *annot = static_cast<AnnotWidget *>(a.get());
-+                 scanLinkAction(annot->getAction(), "Widget Annotation Activated");
-+                 scanLinkAction(annot->getAdditionalAction(Annot::actionCursorEntering).get(), "Widget Annotation Cursor Enter");
-+                 scanLinkAction(annot->getAdditionalAction(Annot::actionCursorLeaving).get(), "Widget Annotation Cursor Leave");
-+diff --git a/poppler/Link.cc b/poppler/Link.cc
-+index 8aca0b9..0fbfc0c 100644
-+--- a/poppler/Link.cc
-++++ b/poppler/Link.cc
-+@@ -35,6 +35,7 @@
-+
-+ #include <cstddef>
-+ #include <cstring>
-++#include <memory>
-+ #include "goo/gmem.h"
-+ #include "goo/GooString.h"
-+ #include "Error.h"
-+@@ -890,20 +891,14 @@ Links::Links(Annots *annots)
-+         return;
-+     }
-+
-+-    for (Annot *annot : annots->getAnnots()) {
-++    for (const std::shared_ptr<Annot> &annot : annots->getAnnots()) {
-+
-+         if (annot->getType() != Annot::typeLink) {
-+             continue;
-+         }
-+
-+-        annot->incRefCnt();
-+-        links.push_back(static_cast<AnnotLink *>(annot));
-++        links.push_back(std::static_pointer_cast<AnnotLink>(annot));
-+     }
-+ }
-+
-+-Links::~Links()
-+-{
-+-    for (AnnotLink *link : links) {
-+-        link->decRefCnt();
-+-    }
-+-}
-++Links::~Links() = default;
-+diff --git a/poppler/Link.h b/poppler/Link.h
-+index 204207b..9bd01f0 100644
-+--- a/poppler/Link.h
-++++ b/poppler/Link.h
-+@@ -555,10 +555,10 @@ public:
-+     Links(const Links &) = delete;
-+     Links &operator=(const Links &) = delete;
-+
-+-    const std::vector<AnnotLink *> &getLinks() const { return links; }
-++    const std::vector<std::shared_ptr<AnnotLink>> &getLinks() const { return links; }
-+
-+ private:
-+-    std::vector<AnnotLink *> links;
-++    std::vector<std::shared_ptr<AnnotLink>> links;
-+ };
-+
-+ #endif
-+diff --git a/poppler/PDFDoc.cc b/poppler/PDFDoc.cc
-+index 20bb191..47c0023 100644
-+--- a/poppler/PDFDoc.cc
-++++ b/poppler/PDFDoc.cc
-+@@ -2150,7 +2150,7 @@ bool PDFDoc::sign(const char *saveFilename, const char *certNickname, const char
-+     field->setImageResource(imageResourceRef);
-+
-+     Object refObj(ref);
-+-    AnnotWidget *signatureAnnot = new AnnotWidget(this, &annotObj, &refObj, field.get());
-++    auto signatureAnnot = std::make_shared<AnnotWidget>(this, &annotObj, &refObj, field.get());
-+     signatureAnnot->setFlags(signatureAnnot->getFlags() | Annot::flagPrint | Annot::flagLocked | Annot::flagNoRotate);
-+     Dict dummy(getXRef());
-+     auto appearCharacs = std::make_unique<AnnotAppearanceCharacs>(&dummy);
-+diff --git a/poppler/PSOutputDev.cc b/poppler/PSOutputDev.cc
-+index 9db6229..541cae3 100644
-+--- a/poppler/PSOutputDev.cc
-++++ b/poppler/PSOutputDev.cc
-+@@ -1745,7 +1745,7 @@ void PSOutputDev::writeDocSetup(Catalog *catalog, const std::vector<int> &pageLi
-+             setupResources(resDict);
-+         }
-+         annots = page->getAnnots();
-+-        for (Annot *annot : annots->getAnnots()) {
-++        for (const std::shared_ptr<Annot> annot : annots->getAnnots()) {
-+             Object obj1 = annot->getAppearanceResDict();
-+             if (obj1.isDict()) {
-+                 setupResources(obj1.getDict());
-+diff --git a/poppler/Page.cc b/poppler/Page.cc
-+index c256d39..b27c90d 100644
-+--- a/poppler/Page.cc
-++++ b/poppler/Page.cc
-+@@ -319,14 +319,7 @@ err1:
-+     ok = false;
-+ }
-+
-+-Page::~Page()
-+-{
-+-    delete attrs;
-+-    delete annots;
-+-    for (auto frmField : standaloneFields) {
-+-        delete frmField;
-+-    }
-+-}
-++Page::~Page() = default;
-+
-+ Dict *Page::getResourceDict()
-+ {
-+@@ -365,11 +358,11 @@ void Page::replaceXRef(XRef *xrefA)
-+ }
-+
-+ /* Loads standalone fields into Page, should be called once per page only */
-+-void Page::loadStandaloneFields(Annots *annotations, Form *form)
-++void Page::loadStandaloneFields(Form *form)
-+ {
-+     /* Look for standalone annots, identified by being: 1) of type Widget
-+      * 2) not referenced from the Catalog's Form Field array */
-+-    for (Annot *annot : annots->getAnnots()) {
-++    for (const std::shared_ptr<Annot> &annot : annots->getAnnots()) {
-+
-+         if (annot->getType() != Annot::typeWidget || !annot->getHasRef()) {
-+             continue;
-+@@ -385,7 +378,7 @@ void Page::loadStandaloneFields(Annots *annotations, Form *form)
-+
-+         if (field && field->getNumWidgets() == 1) {
-+
-+-            static_cast<AnnotWidget *>(annot)->setField(field);
-++            std::static_pointer_cast<AnnotWidget>(annot)->setField(field);
-+
-+             field->setStandAlone(true);
-+             FormWidget *formWidget = field->getWidget(0);
-+@@ -406,15 +399,15 @@ Annots *Page::getAnnots(XRef *xrefA)
-+ {
-+     if (!annots) {
-+         Object obj = getAnnotsObject(xrefA);
-+-        annots = new Annots(doc, num, &obj);
-++        annots = std::make_unique<Annots>(doc, num, &obj);
-+         // Load standalone fields once for the page
-+-        loadStandaloneFields(annots, doc->getCatalog()->getForm());
-++        loadStandaloneFields(doc->getCatalog()->getForm());
-+     }
-+
-+-    return annots;
-++    return annots.get();
-+ }
-+
-+-void Page::addAnnot(Annot *annot)
-++void Page::addAnnot(const std::shared_ptr<Annot> &annot)
-+ {
-+     const Ref annotRef = annot->getRef();
-+
-+@@ -451,21 +444,21 @@ void Page::addAnnot(Annot *annot)
-+     // Popup annots are already handled by markup annots,
-+     // so add to the list only Popup annots without a
-+     // markup annotation associated.
-+-    if (annot->getType() != Annot::typePopup || !static_cast<AnnotPopup *>(annot)->hasParent()) {
-++    if (annot->getType() != Annot::typePopup || !static_cast<AnnotPopup *>(annot.get())->hasParent()) {
-+         annots->appendAnnot(annot);
-+     }
-+     annot->setPage(num, true);
-+
-+-    AnnotMarkup *annotMarkup = dynamic_cast<AnnotMarkup *>(annot);
-++    AnnotMarkup *annotMarkup = dynamic_cast<AnnotMarkup *>(annot.get());
-+     if (annotMarkup) {
-+-        AnnotPopup *annotPopup = annotMarkup->getPopup();
-++        std::shared_ptr<AnnotPopup> annotPopup = annotMarkup->getPopup();
-+         if (annotPopup) {
-+             addAnnot(annotPopup);
-+         }
-+     }
-+ }
-+
-+-void Page::removeAnnot(Annot *annot)
-++void Page::removeAnnot(const std::shared_ptr<Annot> &annot)
-+ {
-+     Ref annotRef = annot->getRef();
-+
-+@@ -587,8 +580,8 @@ void Page::displaySlice(OutputDev *out, double hDPI, double vDPI, int rotate, bo
-+         if (globalParams->getPrintCommands()) {
-+             printf("***** Annotations\n");
-+         }
-+-        for (Annot *annot : annots->getAnnots()) {
-+-            if ((annotDisplayDecideCbk && (*annotDisplayDecideCbk)(annot, annotDisplayDecideCbkData)) || !annotDisplayDecideCbk) {
-++        for (const std::shared_ptr<Annot> &annot : annots->getAnnots()) {
-++            if ((annotDisplayDecideCbk && (*annotDisplayDecideCbk)(annot.get(), annotDisplayDecideCbkData)) || !annotDisplayDecideCbk) {
-+                 annot->draw(gfx, printing);
-+             }
-+         }
-+@@ -778,8 +771,8 @@ void Page::makeBox(double hDPI, double vDPI, int rotate, bool useMediaBox, bool
-+ void Page::processLinks(OutputDev *out)
-+ {
-+     std::unique_ptr<Links> links = getLinks();
-+-    for (AnnotLink *link : links->getLinks()) {
-+-        out->processLink(link);
-++    for (const std::shared_ptr<AnnotLink> &link : links->getLinks()) {
-++        out->processLink(link.get());
-+     }
-+ }
-+
-+diff --git a/poppler/Page.h b/poppler/Page.h
-+index fbd2c16..3159e70 100644
-+--- a/poppler/Page.h
-++++ b/poppler/Page.h
-+@@ -181,9 +181,9 @@ public:
-+     // Get annotations array.
-+     Object getAnnotsObject(XRef *xrefA = nullptr) { return annotsObj.fetch(xrefA ? xrefA : xref); }
-+     // Add a new annotation to the page
-+-    void addAnnot(Annot *annot);
-++    void addAnnot(const std::shared_ptr<Annot> &annot);
-+     // Remove an existing annotation from the page
-+-    void removeAnnot(Annot *annot);
-++    void removeAnnot(const std::shared_ptr<Annot> &annot);
-+
-+     // Return a list of links.
-+     std::unique_ptr<Links> getLinks();
-+@@ -252,7 +252,7 @@ private:
-+     Ref pageRef; // page reference
-+     int num; // page number
-+     PageAttrs *attrs; // page attributes
-+-    Annots *annots; // annotations
-++    std::unique_ptr<Annots> annots; // annotations
-+     Object annotsObj; // annotations array
-+     Object contents; // page contents
-+     Object thumb; // page thumbnail
-+@@ -267,7 +267,7 @@ private:
-+     // create standalone FormFields to contain those special FormWidgets, as
-+     // they are 'de facto' being used to implement tooltips. See #34
-+     std::vector<FormField *> standaloneFields;
-+-    void loadStandaloneFields(Annots *annotations, Form *form);
-++    void loadStandaloneFields(Form *form);
-+ };
-+
-+ #endif
-+diff --git a/qt5/src/poppler-annotation-private.h b/qt5/src/poppler-annotation-private.h
-+index 1f8d756..ef0c8b4 100644
-+--- a/qt5/src/poppler-annotation-private.h
-++++ b/qt5/src/poppler-annotation-private.h
-+@@ -57,7 +57,7 @@ public:
-+
-+     /* Returns an Annotation of the right subclass whose d_ptr points to
-+      * this AnnotationPrivate */
-+-    virtual Annotation *makeAlias() = 0;
-++    virtual std::unique_ptr<Annotation> makeAlias() = 0;
-+
-+     /* properties: contents related */
-+     QString author;
-+@@ -77,18 +77,18 @@ public:
-+     /* revisions */
-+     Annotation::RevScope revisionScope;
-+     Annotation::RevType revisionType;
-+-    QList<Annotation *> revisions;
-++    std::vector<std::unique_ptr<Annotation>> revisions;
-+
-+     /* After this call, the Annotation object will behave like a wrapper for
-+      * the specified Annot object. All cached values are discarded */
-+-    void tieToNativeAnnot(Annot *ann, ::Page *page, DocumentData *doc);
-++    void tieToNativeAnnot(std::shared_ptr<Annot> ann, ::Page *page, DocumentData *doc);
-+
-+     /* Creates a new Annot object on the specified page, flushes current
-+      * values to that object and ties this Annotation to that object */
-+-    virtual Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) = 0;
-++    virtual std::shared_ptr<Annot> *createNativeAnnot(::Page *destPage, DocumentData *doc) = 0;
-+
-+     /* Inited to 0 (i.e. untied annotation) */
-+-    Annot *pdfAnnot;
-++    std::shared_ptr<Annot> pdfAnnot;
-+     ::Page *pdfPage;
-+     DocumentData *parentDoc;
-+
-+diff --git a/qt5/src/poppler-annotation.cc b/qt5/src/poppler-annotation.cc
-+index cdf25da..ea86917 100644
-+--- a/qt5/src/poppler-annotation.cc
-++++ b/qt5/src/poppler-annotation.cc
-+@@ -65,6 +65,12 @@
-+  * static data set at creation time by findAnnotations
-+  */
-+
-++template<typename T, typename U>
-++static std::unique_ptr<T> static_pointer_cast(std::unique_ptr<U> &&in)
-++{
-++    return std::unique_ptr<T>(static_cast<std::add_pointer_t<T>>(in.release()));
-++}
-++
-+ namespace Poppler {
-+
-+ // BEGIN AnnotationUtils implementation
-+@@ -199,36 +205,25 @@ void getRawDataFromQImage(const QImage &qimg, int bitsPerPixel, QByteArray *data
-+ void AnnotationPrivate::addRevision(Annotation *ann, Annotation::RevScope scope, Annotation::RevType type)
-+ {
-+     /* Since ownership stays with the caller, create an alias of ann */
-+-    revisions.append(ann->d_ptr->makeAlias());
-++    revisions.push_back(ann->d_ptr->makeAlias());
-+
-+     /* Set revision properties */
-+     revisionScope = scope;
-+     revisionType = type;
-+ }
-+
-+-AnnotationPrivate::~AnnotationPrivate()
-+-{
-+-    // Delete all children revisions
-+-    qDeleteAll(revisions);
-++AnnotationPrivate::~AnnotationPrivate() = default;
-+
-+-    // Release Annot object
-+-    if (pdfAnnot) {
-+-        pdfAnnot->decRefCnt();
-+-    }
-+-}
-+-
-+-void AnnotationPrivate::tieToNativeAnnot(Annot *ann, ::Page *page, Poppler::DocumentData *doc)
-++void AnnotationPrivate::tieToNativeAnnot(std::shared_ptr<Annot> ann, ::Page *page, Poppler::DocumentData *doc)
-+ {
-+     if (pdfAnnot) {
-+         error(errIO, -1, "Annotation is already tied");
-+         return;
-+     }
-+
-+-    pdfAnnot = ann;
-++    pdfAnnot = std::move(ann);
-+     pdfPage = page;
-+     parentDoc = doc;
-+-
-+-    pdfAnnot->incRefCnt();
-+ }
-+
-+ /* This method is called when a new annotation is created, after pdfAnnot and
-+@@ -237,7 +232,7 @@ void AnnotationPrivate::flushBaseAnnotationProperties()
-+ {
-+     Q_ASSERT(pdfPage);
-+
-+-    Annotation *q = makeAlias(); // Setters are defined in the public class
-++    std::unique_ptr<Annotation> q = makeAlias(); // Setters are defined in the public class
-+
-+     // Since pdfAnnot has been set, this calls will write in the Annot object
-+     q->setAuthor(author);
-+@@ -251,12 +246,7 @@ void AnnotationPrivate::flushBaseAnnotationProperties()
-+     q->setPopup(popup);
-+
-+     // Flush revisions
-+-    foreach (Annotation *r, revisions) {
-+-        // TODO: Flush revision
-+-        delete r; // Object is no longer needed
-+-    }
-+-
-+-    delete q;
-++    revisions.clear();
-+
-+     // Clear some members to save memory
-+     author.clear();
-+@@ -455,14 +445,14 @@ QList<Annotation *> AnnotationPrivate::findAnnotations(::Page *pdfPage, Document
-+
-+     // Create Annotation objects and tie to their native Annot
-+     QList<Annotation *> res;
-+-    for (Annot *ann : annots->getAnnots()) {
-++    for (const std::shared_ptr<Annot> &ann : annots->getAnnots()) {
-+         if (!ann) {
-+             error(errInternal, -1, "Annot is null");
-+             continue;
-+         }
-+
-+         // Check parent annotation
-+-        AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(ann);
-++        AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(ann.get());
-+         if (!markupann) {
-+             // Assume it's a root annotation, and skip if user didn't request it
-+             if (parentID != -1) {
-+@@ -536,7 +526,7 @@ QList<Annotation *> AnnotationPrivate::findAnnotations(::Page *pdfPage, Document
-+                 continue;
-+             }
-+             // parse Link params
-+-            AnnotLink *linkann = static_cast<AnnotLink *>(ann);
-++            AnnotLink *linkann = static_cast<AnnotLink *>(ann.get());
-+             LinkAnnotation *l = new LinkAnnotation();
-+             annotation = l;
-+
-+@@ -566,7 +556,7 @@ QList<Annotation *> AnnotationPrivate::findAnnotations(::Page *pdfPage, Document
-+             if (!wantFileAttachmentAnnotations) {
-+                 continue;
-+             }
-+-            AnnotFileAttachment *attachann = static_cast<AnnotFileAttachment *>(ann);
-++            AnnotFileAttachment *attachann = static_cast<AnnotFileAttachment *>(ann.get());
-+             FileAttachmentAnnotation *f = new FileAttachmentAnnotation();
-+             annotation = f;
-+             // -> fileIcon
-+@@ -581,7 +571,7 @@ QList<Annotation *> AnnotationPrivate::findAnnotations(::Page *pdfPage, Document
-+             if (!wantSoundAnnotations) {
-+                 continue;
-+             }
-+-            AnnotSound *soundann = static_cast<AnnotSound *>(ann);
-++            AnnotSound *soundann = static_cast<AnnotSound *>(ann.get());
-+             SoundAnnotation *s = new SoundAnnotation();
-+             annotation = s;
-+
-+@@ -596,7 +586,7 @@ QList<Annotation *> AnnotationPrivate::findAnnotations(::Page *pdfPage, Document
-+             if (!wantMovieAnnotations) {
-+                 continue;
-+             }
-+-            AnnotMovie *movieann = static_cast<AnnotMovie *>(ann);
-++            AnnotMovie *movieann = static_cast<AnnotMovie *>(ann.get());
-+             MovieAnnotation *m = new MovieAnnotation();
-+             annotation = m;
-+
-+@@ -614,7 +604,7 @@ QList<Annotation *> AnnotationPrivate::findAnnotations(::Page *pdfPage, Document
-+             if (!wantScreenAnnotations) {
-+                 continue;
-+             }
-+-            AnnotScreen *screenann = static_cast<AnnotScreen *>(ann);
-++            AnnotScreen *screenann = static_cast<AnnotScreen *>(ann.get());
-+             // TODO Support other link types than Link::Rendition in ScreenAnnotation
-+             if (!screenann->getAction() || screenann->getAction()->getKind() != actionRendition) {
-+                 continue;
-+@@ -644,7 +634,7 @@ QList<Annotation *> AnnotationPrivate::findAnnotations(::Page *pdfPage, Document
-+             annotation = new WidgetAnnotation();
-+             break;
-+         case Annot::typeRichMedia: {
-+-            const AnnotRichMedia *annotRichMedia = static_cast<AnnotRichMedia *>(ann);
-++            const AnnotRichMedia *annotRichMedia = static_cast<AnnotRichMedia *>(ann.get());
-+
-+             RichMediaAnnotation *richMediaAnnotation = new RichMediaAnnotation;
-+
-+@@ -852,9 +842,9 @@ Link *AnnotationPrivate::additionalAction(Annotation::AdditionalActionType type)
-+
-+     std::unique_ptr<::LinkAction> linkAction = nullptr;
-+     if (pdfAnnot->getType() == Annot::typeScreen) {
-+-        linkAction = static_cast<AnnotScreen *>(pdfAnnot)->getAdditionalAction(actionType);
-++        linkAction = static_cast<AnnotScreen *>(pdfAnnot.get())->getAdditionalAction(actionType);
-+     } else {
-+-        linkAction = static_cast<AnnotWidget *>(pdfAnnot)->getAdditionalAction(actionType);
-++        linkAction = static_cast<AnnotWidget *>(pdfAnnot.get())->getAdditionalAction(actionType);
-+     }
-+
-+     Link *link = nullptr;
-+@@ -875,7 +865,7 @@ void AnnotationPrivate::addAnnotationToPage(::Page *pdfPage, DocumentData *doc,
-+
-+     // Unimplemented annotations can't be created by the user because their ctor
-+     // is private. Therefore, createNativeAnnot will never return 0
-+-    Annot *nativeAnnot = ann->d_ptr->createNativeAnnot(pdfPage, doc);
-++    std::shared_ptr<Annot> nativeAnnot = ann->d_ptr->createNativeAnnot(pdfPage, doc);
-+     Q_ASSERT(nativeAnnot);
-+
-+     if (ann->d_ptr->annotationAppearance.isStream()) {
-+@@ -1400,7 +1390,7 @@ QString Annotation::author() const
-+         return d->author;
-+     }
-+
-+-    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot);
-++    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot.get());
-+     return markupann ? UnicodeParsedString(markupann->getLabel()) : QString();
-+ }
-+
-+@@ -1413,7 +1403,7 @@ void Annotation::setAuthor(const QString &author)
-+         return;
-+     }
-+
-+-    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot);
-++    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot.get());
-+     if (markupann) {
-+         markupann->setLabel(std::unique_ptr<GooString>(QStringToUnicodeGooString(author)));
-+     }
-+@@ -1511,7 +1501,7 @@ QDateTime Annotation::creationDate() const
-+         return d->creationDate;
-+     }
-+
-+-    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot);
-++    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot.get());
-+
-+     if (markupann && markupann->getDate()) {
-+         return convertDate(markupann->getDate()->c_str());
-+@@ -1529,7 +1519,7 @@ void Annotation::setCreationDate(const QDateTime &date)
-+         return;
-+     }
-+
-+-    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot);
-++    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot.get());
-+     if (markupann) {
-+         if (date.isValid()) {
-+             const time_t t = date.toSecsSinceEpoch();
-+@@ -1659,7 +1649,7 @@ Annotation::Style Annotation::style() const
-+     Style s;
-+     s.setColor(convertAnnotColor(d->pdfAnnot->getColor()));
-+
-+-    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot);
-++    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot.get());
-+     if (markupann) {
-+         s.setOpacity(markupann->getOpacity());
-+     }
-+@@ -1687,11 +1677,11 @@ Annotation::Style Annotation::style() const
-+     AnnotBorderEffect *border_effect;
-+     switch (d->pdfAnnot->getType()) {
-+     case Annot::typeFreeText:
-+-        border_effect = static_cast<AnnotFreeText *>(d->pdfAnnot)->getBorderEffect();
-++        border_effect = static_cast<AnnotFreeText *>(d->pdfAnnot.get())->getBorderEffect();
-+         break;
-+     case Annot::typeSquare:
-+     case Annot::typeCircle:
-+-        border_effect = static_cast<AnnotGeometry *>(d->pdfAnnot)->getBorderEffect();
-++        border_effect = static_cast<AnnotGeometry *>(d->pdfAnnot.get())->getBorderEffect();
-+         break;
-+     default:
-+         border_effect = nullptr;
-+@@ -1715,7 +1705,7 @@ void Annotation::setStyle(const Annotation::Style &style)
-+
-+     d->pdfAnnot->setColor(convertQColor(style.color()));
-+
-+-    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot);
-++    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot.get());
-+     if (markupann) {
-+         markupann->setOpacity(style.opacity());
-+     }
-+@@ -1739,9 +1729,9 @@ Annotation::Popup Annotation::popup() const
-+     AnnotPopup *popup = nullptr;
-+     int flags = -1; // Not initialized
-+
-+-    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot);
-++    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot.get());
-+     if (markupann) {
-+-        popup = markupann->getPopup();
-++        popup = markupann->getPopup().get();
-+         w.setSummary(UnicodeParsedString(markupann->getSubject()));
-+     }
-+
-+@@ -1757,7 +1747,7 @@ Annotation::Popup Annotation::popup() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeText) {
-+-        const AnnotText *textann = static_cast<const AnnotText *>(d->pdfAnnot);
-++        const AnnotText *textann = static_cast<const AnnotText *>(d->pdfAnnot.get());
-+
-+         // Text annotations default to same rect as annotation
-+         if (flags == -1) {
-+@@ -1813,7 +1803,7 @@ Annotation::RevScope Annotation::revisionScope() const
-+         return d->revisionScope;
-+     }
-+
-+-    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot);
-++    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot.get());
-+
-+     if (markupann && markupann->isInReplyTo()) {
-+         switch (markupann->getReplyTo()) {
-+@@ -1835,7 +1825,7 @@ Annotation::RevType Annotation::revisionType() const
-+         return d->revisionType;
-+     }
-+
-+-    const AnnotText *textann = dynamic_cast<const AnnotText *>(d->pdfAnnot);
-++    const AnnotText *textann = dynamic_cast<const AnnotText *>(d->pdfAnnot.get());
-+
-+     if (textann && textann->isInReplyTo()) {
-+         switch (textann->getState()) {
-+@@ -1866,8 +1856,8 @@ QList<Annotation *> Annotation::revisions() const
-+     if (!d->pdfAnnot) {
-+         /* Return aliases, whose ownership goes to the caller */
-+         QList<Annotation *> res;
-+-        foreach (Annotation *rev, d->revisions)
-+-            res.append(rev->d_ptr->makeAlias());
-++        for (const std::unique_ptr<Annotation> &rev, d->revisions)
-++            res.append(rev->d_ptr->makeAlias().release());
-+         return res;
-+     }
-+
-+@@ -1884,7 +1874,7 @@ std::unique_ptr<AnnotationAppearance> Annotation::annotationAppearance() const
-+ {
-+     Q_D(const Annotation);
-+
-+-    return std::make_unique<AnnotationAppearance>(new AnnotationAppearancePrivate(d->pdfAnnot));
-++    return std::make_unique<AnnotationAppearance>(new AnnotationAppearancePrivate(d->pdfAnnot.get()));
-+ }
-+
-+ void Annotation::setAnnotationAppearance(const AnnotationAppearance &annotationAppearance)
-+@@ -1909,8 +1899,8 @@ class TextAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     TextAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+     void setDefaultAppearanceToNative();
-+     std::unique_ptr<DefaultAppearance> getDefaultAppearanceFromNative() const;
-+
-+@@ -1926,15 +1916,15 @@ public:
-+
-+ TextAnnotationPrivate::TextAnnotationPrivate() : AnnotationPrivate(), textType(TextAnnotation::Linked), textIcon(QStringLiteral("Note")), inplaceAlign(0), inplaceIntent(TextAnnotation::Unknown) { }
-+
-+-Annotation *TextAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> TextAnnotationPrivate::makeAlias()
-+ {
-+-    return new TextAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new TextAnnotation(*this));
-+ }
-+
-+-Annot *TextAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> TextAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+-    // Setters are defined in the public class
-+-    TextAnnotation *q = static_cast<TextAnnotation *>(makeAlias());
-++    // Setters are defined in the public clas
-++    std::unique_ptr<TextAnnotation> q = static_pointer_cast<TextAnnotation *>(makeAlias());
-+
-+     // Set page and contents
-+     pdfPage = destPage;
-+@@ -1943,14 +1933,14 @@ Annot *TextAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+     if (textType == TextAnnotation::Linked) {
-+-        pdfAnnot = new AnnotText { destPage->getDoc(), &rect };
-++        pdfAnnot = std::make_shared<AnnotText>(destPage->getDoc(), &rect);
-+     } else {
-+         const double pointSize = textFont ? textFont->pointSizeF() : AnnotFreeText::undefinedFontPtSize;
-+         if (pointSize < 0) {
-+             qWarning() << "TextAnnotationPrivate::createNativeAnnot: font pointSize < 0";
-+         }
-+         DefaultAppearance da { { objName, "Invalid_font" }, pointSize, convertQColor(textColor) };
-+-        pdfAnnot = new AnnotFreeText { destPage->getDoc(), &rect, da };
-++        pdfAnnot = std::make_shared<AnnotFreeText>(destPage->getDoc(), &rect, da);
-+     }
-+
-+     // Set properties
-+@@ -1960,8 +1950,6 @@ Annot *TextAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+     q->setCalloutPoints(inplaceCallout);
-+     q->setInplaceIntent(inplaceIntent);
-+
-+-    delete q;
-+-
-+     inplaceCallout.clear(); // Free up memory
-+
-+     return pdfAnnot;
-+@@ -1970,7 +1958,7 @@ Annot *TextAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+ void TextAnnotationPrivate::setDefaultAppearanceToNative()
-+ {
-+     if (pdfAnnot && pdfAnnot->getType() == Annot::typeFreeText) {
-+-        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(pdfAnnot);
-++        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(pdfAnnot.get());
-+         const double pointSize = textFont ? textFont->pointSizeF() : AnnotFreeText::undefinedFontPtSize;
-+         if (pointSize < 0) {
-+             qWarning() << "TextAnnotationPrivate::createNativeAnnot: font pointSize < 0";
-+@@ -1983,7 +1971,7 @@ void TextAnnotationPrivate::setDefaultAppearanceToNative()
-+ std::unique_ptr<DefaultAppearance> TextAnnotationPrivate::getDefaultAppearanceFromNative() const
-+ {
-+     if (pdfAnnot && pdfAnnot->getType() == Annot::typeFreeText) {
-+-        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(pdfAnnot);
-++        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(pdfAnnot.get());
-+         return ftextann->getDefaultAppearance();
-+     } else {
-+         return {};
-+@@ -2140,7 +2128,7 @@ QString TextAnnotation::textIcon() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeText) {
-+-        const AnnotText *textann = static_cast<const AnnotText *>(d->pdfAnnot);
-++        const AnnotText *textann = static_cast<const AnnotText *>(d->pdfAnnot.get());
-+         return QString::fromLatin1(textann->getIcon()->c_str());
-+     }
-+
-+@@ -2157,7 +2145,7 @@ void TextAnnotation::setTextIcon(const QString &icon)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeText) {
-+-        AnnotText *textann = static_cast<AnnotText *>(d->pdfAnnot);
-++        AnnotText *textann = static_cast<AnnotText *>(d->pdfAnnot.get());
-+         QByteArray encoded = icon.toLatin1();
-+         GooString s(encoded.constData());
-+         textann->setIcon(&s);
-+@@ -2231,7 +2219,7 @@ int TextAnnotation::inplaceAlign() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeFreeText) {
-+-        const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot);
-++        const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot.get());
-+         return static_cast<int>(ftextann->getQuadding());
-+     }
-+
-+@@ -2248,7 +2236,7 @@ void TextAnnotation::setInplaceAlign(int align)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeFreeText) {
-+-        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot);
-++        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot.get());
-+         ftextann->setQuadding((VariableTextQuadding)align);
-+     }
-+ }
-+@@ -2275,7 +2263,7 @@ QVector<QPointF> TextAnnotation::calloutPoints() const
-+         return QVector<QPointF>();
-+     }
-+
-+-    const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot);
-++    const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot.get());
-+     const AnnotCalloutLine *callout = ftextann->getCalloutLine();
-+
-+     if (!callout) {
-+@@ -2307,7 +2295,7 @@ void TextAnnotation::setCalloutPoints(const QVector<QPointF> &points)
-+         return;
-+     }
-+
-+-    AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot);
-++    AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot.get());
-+     const int count = points.size();
-+
-+     if (count == 0) {
-+@@ -2320,7 +2308,7 @@ void TextAnnotation::setCalloutPoints(const QVector<QPointF> &points)
-+         return;
-+     }
-+
-+-    AnnotCalloutLine *callout;
-++    std::unique_ptr<AnnotCalloutLine> callout;
-+     double x1, y1, x2, y2;
-+     double MTX[6];
-+     d->fillTransformationMTX(MTX);
-+@@ -2330,13 +2318,12 @@ void TextAnnotation::setCalloutPoints(const QVector<QPointF> &points)
-+     if (count == 3) {
-+         double x3, y3;
-+         XPDFReader::invTransform(MTX, points[2], x3, y3);
-+-        callout = new AnnotCalloutMultiLine(x1, y1, x2, y2, x3, y3);
-++        callout = std::make_unique<AnnotCalloutMultiLine>(x1, y1, x2, y2, x3, y3);
-+     } else {
-+-        callout = new AnnotCalloutLine(x1, y1, x2, y2);
-++        callout = std::make_unique<AnnotCalloutLine>(x1, y1, x2, y2);
-+     }
-+
-+-    ftextann->setCalloutLine(callout);
-+-    delete callout;
-++    ftextann->setCalloutLine(std::move(callout));
-+ }
-+
-+ TextAnnotation::InplaceIntent TextAnnotation::inplaceIntent() const
-+@@ -2348,7 +2335,7 @@ TextAnnotation::InplaceIntent TextAnnotation::inplaceIntent() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeFreeText) {
-+-        const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot);
-++        const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot.get());
-+         return (TextAnnotation::InplaceIntent)ftextann->getIntent();
-+     }
-+
-+@@ -2365,7 +2352,7 @@ void TextAnnotation::setInplaceIntent(TextAnnotation::InplaceIntent intent)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeFreeText) {
-+-        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot);
-++        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot.get());
-+         ftextann->setIntent((AnnotFreeText::AnnotFreeTextIntent)intent);
-+     }
-+ }
-+@@ -2375,8 +2362,8 @@ class LineAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     LineAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields (note uses border for rendering style)
-+     QLinkedList<QPointF> linePoints;
-+@@ -2396,15 +2383,15 @@ LineAnnotationPrivate::LineAnnotationPrivate()
-+ {
-+ }
-+
-+-Annotation *LineAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> LineAnnotationPrivate::makeAlias()
-+ {
-+-    return new LineAnnotation(*this);
-++    return std::unique_ptr<LineAnnotation>(new LineAnnotation(*this));
-+ }
-+
-+-Annot *LineAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> LineAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     // Setters are defined in the public class
-+-    LineAnnotation *q = static_cast<LineAnnotation *>(makeAlias());
-++    std::unique_ptr<LineAnnotation> q = static_pointer_cast<LineAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -2413,9 +2400,9 @@ Annot *LineAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+     if (lineType == LineAnnotation::StraightLine) {
-+-        pdfAnnot = new AnnotLine(doc->doc, &rect);
-++        pdfAnnot = std::make_shared<AnnotLine>(doc->doc, &rect);
-+     } else {
-+-        pdfAnnot = new AnnotPolygon(doc->doc, &rect, lineClosed ? Annot::typePolygon : Annot::typePolyLine);
-++        pdfAnnot = std::make_shared<AnnotPolygon>(doc->doc, &rect, lineClosed ? Annot::typePolygon : Annot::typePolyLine);
-+     }
-+
-+     // Set properties
-+@@ -2429,8 +2416,6 @@ Annot *LineAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+     q->setLineShowCaption(lineShowCaption);
-+     q->setLineIntent(lineIntent);
-+
-+-    delete q;
-+-
-+     linePoints.clear(); // Free up memory
-+
-+     return pdfAnnot;
-+@@ -2596,14 +2581,14 @@ QLinkedList<QPointF> LineAnnotation::linePoints() const
-+
-+     QLinkedList<QPointF> res;
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         QPointF p;
-+         XPDFReader::transform(MTX, lineann->getX1(), lineann->getY1(), p);
-+         res.append(p);
-+         XPDFReader::transform(MTX, lineann->getX2(), lineann->getY2(), p);
-+         res.append(p);
-+     } else {
-+-        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot);
-++        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot.get());
-+         const AnnotPath *vertices = polyann->getVertices();
-+
-+         for (int i = 0; i < vertices->getCoordsLength(); ++i) {
-+@@ -2626,7 +2611,7 @@ void LineAnnotation::setLinePoints(const QLinkedList<QPointF> &points)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         if (points.size() != 2) {
-+             error(errSyntaxError, -1, "Expected two points for a straight line");
-+             return;
-+@@ -2638,7 +2623,7 @@ void LineAnnotation::setLinePoints(const QLinkedList<QPointF> &points)
-+         XPDFReader::invTransform(MTX, points.last(), x2, y2);
-+         lineann->setVertices(x1, y1, x2, y2);
-+     } else {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+         AnnotPath *p = d->toAnnotPath(points);
-+         polyann->setVertices(p);
-+         delete p;
-+@@ -2654,10 +2639,10 @@ LineAnnotation::TermStyle LineAnnotation::lineStartStyle() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return (LineAnnotation::TermStyle)lineann->getStartStyle();
-+     } else {
-+-        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot);
-++        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot.get());
-+         return (LineAnnotation::TermStyle)polyann->getStartStyle();
-+     }
-+ }
-+@@ -2672,10 +2657,10 @@ void LineAnnotation::setLineStartStyle(LineAnnotation::TermStyle style)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setStartEndStyle((AnnotLineEndingStyle)style, lineann->getEndStyle());
-+     } else {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+         polyann->setStartEndStyle((AnnotLineEndingStyle)style, polyann->getEndStyle());
-+     }
-+ }
-+@@ -2689,10 +2674,10 @@ LineAnnotation::TermStyle LineAnnotation::lineEndStyle() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return (LineAnnotation::TermStyle)lineann->getEndStyle();
-+     } else {
-+-        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot);
-++        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot.get());
-+         return (LineAnnotation::TermStyle)polyann->getEndStyle();
-+     }
-+ }
-+@@ -2707,10 +2692,10 @@ void LineAnnotation::setLineEndStyle(LineAnnotation::TermStyle style)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setStartEndStyle(lineann->getStartStyle(), (AnnotLineEndingStyle)style);
-+     } else {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+         polyann->setStartEndStyle(polyann->getStartStyle(), (AnnotLineEndingStyle)style);
-+     }
-+ }
-+@@ -2736,7 +2721,7 @@ void LineAnnotation::setLineClosed(bool closed)
-+     }
-+
-+     if (d->pdfAnnot->getType() != Annot::typeLine) {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+
-+         // Set new subtype and switch intent if necessary
-+         if (closed) {
-+@@ -2764,10 +2749,10 @@ QColor LineAnnotation::lineInnerColor() const
-+     AnnotColor *c;
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         c = lineann->getInteriorColor();
-+     } else {
-+-        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot);
-++        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot.get());
-+         c = polyann->getInteriorColor();
-+     }
-+
-+@@ -2786,10 +2771,10 @@ void LineAnnotation::setLineInnerColor(const QColor &color)
-+     auto c = convertQColor(color);
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setInteriorColor(std::move(c));
-+     } else {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+         polyann->setInteriorColor(std::move(c));
-+     }
-+ }
-+@@ -2803,7 +2788,7 @@ double LineAnnotation::lineLeadingForwardPoint() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return lineann->getLeaderLineLength();
-+     }
-+
-+@@ -2820,7 +2805,7 @@ void LineAnnotation::setLineLeadingForwardPoint(double point)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setLeaderLineLength(point);
-+     }
-+ }
-+@@ -2834,7 +2819,7 @@ double LineAnnotation::lineLeadingBackPoint() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return lineann->getLeaderLineExtension();
-+     }
-+
-+@@ -2851,7 +2836,7 @@ void LineAnnotation::setLineLeadingBackPoint(double point)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setLeaderLineExtension(point);
-+     }
-+ }
-+@@ -2865,7 +2850,7 @@ bool LineAnnotation::lineShowCaption() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return lineann->getCaption();
-+     }
-+
-+@@ -2882,7 +2867,7 @@ void LineAnnotation::setLineShowCaption(bool show)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setCaption(show);
-+     }
-+ }
-+@@ -2896,10 +2881,10 @@ LineAnnotation::LineIntent LineAnnotation::lineIntent() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return (LineAnnotation::LineIntent)(lineann->getIntent() + 1);
-+     } else {
-+-        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot);
-++        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot.get());
-+         if (polyann->getIntent() == AnnotPolygon::polygonCloud) {
-+             return LineAnnotation::PolygonCloud;
-+         } else { // AnnotPolygon::polylineDimension, AnnotPolygon::polygonDimension
-+@@ -2922,10 +2907,10 @@ void LineAnnotation::setLineIntent(LineAnnotation::LineIntent intent)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setIntent((AnnotLine::AnnotLineIntent)(intent - 1));
-+     } else {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+         if (intent == LineAnnotation::PolygonCloud) {
-+             polyann->setIntent(AnnotPolygon::polygonCloud);
-+         } else // LineAnnotation::Dimension
-+@@ -2944,8 +2929,8 @@ class GeomAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     GeomAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields (note uses border for rendering style)
-+     GeomAnnotation::GeomType geomType;
-+@@ -2954,15 +2939,15 @@ public:
-+
-+ GeomAnnotationPrivate::GeomAnnotationPrivate() : AnnotationPrivate(), geomType(GeomAnnotation::InscribedSquare) { }
-+
-+-Annotation *GeomAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> GeomAnnotationPrivate::makeAlias()
-+ {
-+-    return new GeomAnnotation(*this);
-++    return std::unique_ptr<GeomAnnotation>(new GeomAnnotation(*this));
-+ }
-+
-+-Annot *GeomAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> GeomAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     // Setters are defined in the public class
-+-    GeomAnnotation *q = static_cast<GeomAnnotation *>(makeAlias());
-++    std::unique_ptr<GeomAnnotation> q = static_pointer_cast<GeomAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -2977,13 +2962,12 @@ Annot *GeomAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+-    pdfAnnot = new AnnotGeometry(destPage->getDoc(), &rect, type);
-++    pdfAnnot = std::make_shared<AnnotGeometry>(destPage->getDoc(), &rect, type);
-+
-+     // Set properties
-+     flushBaseAnnotationProperties();
-+     q->setGeomInnerColor(geomInnerColor);
-+
-+-    delete q;
-+     return pdfAnnot;
-+ }
-+
-+@@ -3064,7 +3048,7 @@ void GeomAnnotation::setGeomType(GeomAnnotation::GeomType type)
-+         return;
-+     }
-+
-+-    AnnotGeometry *geomann = static_cast<AnnotGeometry *>(d->pdfAnnot);
-++    AnnotGeometry *geomann = static_cast<AnnotGeometry *>(d->pdfAnnot.get());
-+     if (type == GeomAnnotation::InscribedSquare) {
-+         geomann->setType(Annot::typeSquare);
-+     } else { // GeomAnnotation::InscribedCircle
-+@@ -3080,7 +3064,7 @@ QColor GeomAnnotation::geomInnerColor() const
-+         return d->geomInnerColor;
-+     }
-+
-+-    const AnnotGeometry *geomann = static_cast<const AnnotGeometry *>(d->pdfAnnot);
-++    const AnnotGeometry *geomann = static_cast<const AnnotGeometry *>(d->pdfAnnot.get());
-+     return convertAnnotColor(geomann->getInteriorColor());
-+ }
-+
-+@@ -3093,7 +3077,7 @@ void GeomAnnotation::setGeomInnerColor(const QColor &color)
-+         return;
-+     }
-+
-+-    AnnotGeometry *geomann = static_cast<AnnotGeometry *>(d->pdfAnnot);
-++    AnnotGeometry *geomann = static_cast<AnnotGeometry *>(d->pdfAnnot.get());
-+     geomann->setInteriorColor(convertQColor(color));
-+ }
-+
-+@@ -3102,8 +3086,8 @@ class HighlightAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     HighlightAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     HighlightAnnotation::HighlightType highlightType;
-+@@ -3117,9 +3101,9 @@ public:
-+
-+ HighlightAnnotationPrivate::HighlightAnnotationPrivate() : AnnotationPrivate(), highlightType(HighlightAnnotation::Highlight) { }
-+
-+-Annotation *HighlightAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> HighlightAnnotationPrivate::makeAlias()
-+ {
-+-    return new HighlightAnnotation(*this);
-++    return std::unique_ptr<HighlightAnnotation>(new HighlightAnnotation(*this));
-+ }
-+
-+ Annot::AnnotSubtype HighlightAnnotationPrivate::toAnnotSubType(HighlightAnnotation::HighlightType type)
-+@@ -3192,10 +3176,10 @@ AnnotQuadrilaterals *HighlightAnnotationPrivate::toQuadrilaterals(const QList<Hi
-+     return new AnnotQuadrilaterals(std::move(ac), count);
-+ }
-+
-+-Annot *HighlightAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> HighlightAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     // Setters are defined in the public class
-+-    HighlightAnnotation *q = static_cast<HighlightAnnotation *>(makeAlias());
-++    std::unique_ptr<HighlightAnnotation q = static_pointer_cast<HighlightAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -3203,7 +3187,7 @@ Annot *HighlightAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentD
-+
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+-    pdfAnnot = new AnnotTextMarkup(destPage->getDoc(), &rect, toAnnotSubType(highlightType));
-++    pdfAnnot = std::make_shared<AnnotTextMarkup>(destPage->getDoc(), &rect, toAnnotSubType(highlightType));
-+
-+     // Set properties
-+     flushBaseAnnotationProperties();
-+@@ -3211,8 +3195,6 @@ Annot *HighlightAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentD
-+
-+     highlightQuads.clear(); // Free up memory
-+
-+-    delete q;
-+-
-+     return pdfAnnot;
-+ }
-+
-+@@ -3345,7 +3327,7 @@ void HighlightAnnotation::setHighlightType(HighlightAnnotation::HighlightType ty
-+         return;
-+     }
-+
-+-    AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot);
-++    AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot.get());
-+     hlann->setType(HighlightAnnotationPrivate::toAnnotSubType(type));
-+ }
-+
-+@@ -3357,7 +3339,7 @@ QList<HighlightAnnotation::Quad> HighlightAnnotation::highlightQuads() const
-+         return d->highlightQuads;
-+     }
-+
-+-    const AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot);
-++    const AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot.get());
-+     return d->fromQuadrilaterals(hlann->getQuadrilaterals());
-+ }
-+
-+@@ -3370,7 +3352,7 @@ void HighlightAnnotation::setHighlightQuads(const QList<HighlightAnnotation::Qua
-+         return;
-+     }
-+
-+-    AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot);
-++    AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot.get());
-+     AnnotQuadrilaterals *quadrilaterals = d->toQuadrilaterals(quads);
-+     hlann->setQuadrilaterals(quadrilaterals);
-+     delete quadrilaterals;
-+@@ -3381,10 +3363,10 @@ class StampAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     StampAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+-    AnnotStampImageHelper *convertQImageToAnnotStampImageHelper(const QImage &qimg);
-++    std::unique_ptr<AnnotStampImageHelper> convertQImageToAnnotStampImageHelper(const QImage &qimg);
-+
-+     // data fields
-+     QString stampIconName;
-+@@ -3393,14 +3375,14 @@ public:
-+
-+ StampAnnotationPrivate::StampAnnotationPrivate() : AnnotationPrivate(), stampIconName(QStringLiteral("Draft")) { }
-+
-+-Annotation *StampAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> StampAnnotationPrivate::makeAlias()
-+ {
-+-    return new StampAnnotation(*this);
-++    return std::unique_ptr<StampAnnotation>(new StampAnnotation(*this));
-+ }
-+
-+-Annot *StampAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> StampAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+-    StampAnnotation *q = static_cast<StampAnnotation *>(makeAlias());
-++    std::unique_ptr<StampAnnotation> q = static_pointer_cast<StampAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -3408,21 +3390,19 @@ Annot *StampAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData
-+
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+-    pdfAnnot = new AnnotStamp(destPage->getDoc(), &rect);
-++    pdfAnnot = std::make_shared<AnnotStamp>(destPage->getDoc(), &rect);
-+
-+     // Set properties
-+     flushBaseAnnotationProperties();
-+     q->setStampIconName(stampIconName);
-+     q->setStampCustomImage(stampCustomImage);
-+
-+-    delete q;
-+-
-+     stampIconName.clear(); // Free up memory
-+
-+     return pdfAnnot;
-+ }
-+
-+-AnnotStampImageHelper *StampAnnotationPrivate::convertQImageToAnnotStampImageHelper(const QImage &qimg)
-++std::unique_ptr<AnnotStampImageHelper> StampAnnotationPrivate::convertQImageToAnnotStampImageHelper(const QImage &qimg)
-+ {
-+     QImage convertedQImage = qimg;
-+
-+@@ -3503,13 +3483,13 @@ AnnotStampImageHelper *StampAnnotationPrivate::convertQImageToAnnotStampImageHel
-+
-+     getRawDataFromQImage(convertedQImage, convertedQImage.depth(), &data, &sMaskData);
-+
-+-    AnnotStampImageHelper *annotImg;
-++    std::unique_ptr<AnnotStampImageHelper> annotImg;
-+
-+     if (sMaskData.count() > 0) {
-+         AnnotStampImageHelper sMask(parentDoc->doc, width, height, ColorSpace::DeviceGray, 8, sMaskData.data(), sMaskData.count());
-+-        annotImg = new AnnotStampImageHelper(parentDoc->doc, width, height, colorSpace, bitsPerComponent, data.data(), data.count(), sMask.getRef());
-++        annotImg = std::unique_ptr<AnnotStampImageHelper>(parentDoc->doc, width, height, colorSpace, bitsPerComponent, data.data(), data.count(), sMask.getRef());
-+     } else {
-+-        annotImg = new AnnotStampImageHelper(parentDoc->doc, width, height, colorSpace, bitsPerComponent, data.data(), data.count());
-++        annotImg = std::unique_ptr<AnnotStampImageHelper>(parentDoc->doc, width, height, colorSpace, bitsPerComponent, data.data(), data.count());
-+     }
-+
-+     return annotImg;
-+@@ -3570,7 +3550,7 @@ QString StampAnnotation::stampIconName() const
-+         return d->stampIconName;
-+     }
-+
-+-    const AnnotStamp *stampann = static_cast<const AnnotStamp *>(d->pdfAnnot);
-++    const AnnotStamp *stampann = static_cast<const AnnotStamp *>(d->pdfAnnot.get());
-+     return QString::fromLatin1(stampann->getIcon()->c_str());
-+ }
-+
-+@@ -3583,7 +3563,7 @@ void StampAnnotation::setStampIconName(const QString &name)
-+         return;
-+     }
-+
-+-    AnnotStamp *stampann = static_cast<AnnotStamp *>(d->pdfAnnot);
-++    AnnotStamp *stampann = static_cast<AnnotStamp *>(d->pdfAnnot.get());
-+     QByteArray encoded = name.toLatin1();
-+     GooString s(encoded.constData());
-+     stampann->setIcon(&s);
-+@@ -3602,9 +3582,9 @@ void StampAnnotation::setStampCustomImage(const QImage &image)
-+         return;
-+     }
-+
-+-    AnnotStamp *stampann = static_cast<AnnotStamp *>(d->pdfAnnot);
-+-    AnnotStampImageHelper *annotCustomImage = d->convertQImageToAnnotStampImageHelper(image);
-+-    stampann->setCustomImage(annotCustomImage);
-++    AnnotStamp *stampann = static_cast<AnnotStamp *>(d->pdfAnnot.get());
-++    std::unique_ptr<AnnotStampImageHelper> annotCustomImage = d->convertQImageToAnnotStampImageHelper(image);
-++    stampann->setCustomImage(std::move(annotCustomImage));
-+ }
-+
-+ /** InkAnnotation [Annotation] */
-+@@ -3612,8 +3592,8 @@ class InkAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     InkAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     QList<QLinkedList<QPointF>> inkPaths;
-+@@ -3624,9 +3604,9 @@ public:
-+
-+ InkAnnotationPrivate::InkAnnotationPrivate() : AnnotationPrivate() { }
-+
-+-Annotation *InkAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> InkAnnotationPrivate::makeAlias()
-+ {
-+-    return new InkAnnotation(*this);
-++    return std::unique_ptr<InkAnnotation>(new InkAnnotation(*this));
-+ }
-+
-+ // Note: Caller is required to delete array elements and the array itself after use
-+@@ -3640,10 +3620,10 @@ AnnotPath **InkAnnotationPrivate::toAnnotPaths(const QList<QLinkedList<QPointF>>
-+     return res;
-+ }
-+
-+-Annot *InkAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> InkAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     // Setters are defined in the public class
-+-    InkAnnotation *q = static_cast<InkAnnotation *>(makeAlias());
-++    std::unique_ptr<InkAnnotation> q = static_pointer_cast<InkAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -3651,7 +3631,7 @@ Annot *InkAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *d
-+
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+-    pdfAnnot = new AnnotInk(destPage->getDoc(), &rect);
-++    pdfAnnot = std::make_shared<AnnotInk>(destPage->getDoc(), &rect);
-+
-+     // Set properties
-+     flushBaseAnnotationProperties();
-+@@ -3659,8 +3639,6 @@ Annot *InkAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *d
-+
-+     inkPaths.clear(); // Free up memory
-+
-+-    delete q;
-+-
-+     return pdfAnnot;
-+ }
-+
-+@@ -3762,7 +3740,7 @@ QList<QLinkedList<QPointF>> InkAnnotation::inkPaths() const
-+         return d->inkPaths;
-+     }
-+
-+-    const AnnotInk *inkann = static_cast<const AnnotInk *>(d->pdfAnnot);
-++    const AnnotInk *inkann = static_cast<const AnnotInk *>(d->pdfAnnot.get());
-+
-+     const AnnotPath *const *paths = inkann->getInkList();
-+     if (!paths || !inkann->getInkListLength()) {
-+@@ -3800,7 +3778,7 @@ void InkAnnotation::setInkPaths(const QList<QLinkedList<QPointF>> &paths)
-+         return;
-+     }
-+
-+-    AnnotInk *inkann = static_cast<AnnotInk *>(d->pdfAnnot);
-++    AnnotInk *inkann = static_cast<AnnotInk *>(d->pdfAnnot.get());
-+     AnnotPath **annotpaths = d->toAnnotPaths(paths);
-+     const int pathsNumber = paths.size();
-+     inkann->setInkList(annotpaths, pathsNumber);
-+@@ -3817,8 +3795,8 @@ class LinkAnnotationPrivate : public AnnotationPrivate
-+ public:
-+     LinkAnnotationPrivate();
-+     ~LinkAnnotationPrivate() override;
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot>(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     Link *linkDestination;
-+@@ -4119,8 +4097,8 @@ class CaretAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     CaretAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     CaretAnnotation::CaretSymbol symbol;
-+@@ -4149,15 +4127,15 @@ static CaretAnnotation::CaretSymbol caretSymbolFromString(const QString &symbol)
-+
-+ CaretAnnotationPrivate::CaretAnnotationPrivate() : AnnotationPrivate(), symbol(CaretAnnotation::None) { }
-+
-+-Annotation *CaretAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> CaretAnnotationPrivate::makeAlias()
-+ {
-+-    return new CaretAnnotation(*this);
-++    return std::unique_ptr<CaretAnnotation>(new CaretAnnotation(*this));
-+ }
-+
-+-Annot *CaretAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> CaretAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     // Setters are defined in the public class
-+-    CaretAnnotation *q = static_cast<CaretAnnotation *>(makeAlias());
-++    std::unique_ptr<CaretAnnotation> q = static_pointer_cast<CaretAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -4165,13 +4143,12 @@ Annot *CaretAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData
-+
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+-    pdfAnnot = new AnnotCaret(destPage->getDoc(), &rect);
-++    pdfAnnot = std::make_shared<AnnotCaret>(destPage->getDoc(), &rect);
-+
-+     // Set properties
-+     flushBaseAnnotationProperties();
-+     q->setCaretSymbol(symbol);
-+
-+-    delete q;
-+     return pdfAnnot;
-+ }
-+
-+@@ -4230,7 +4207,7 @@ CaretAnnotation::CaretSymbol CaretAnnotation::caretSymbol() const
-+         return d->symbol;
-+     }
-+
-+-    const AnnotCaret *caretann = static_cast<const AnnotCaret *>(d->pdfAnnot);
-++    const AnnotCaret *caretann = static_cast<const AnnotCaret *>(d->pdfAnnot.get());
-+     return (CaretAnnotation::CaretSymbol)caretann->getSymbol();
-+ }
-+
-+@@ -4243,7 +4220,7 @@ void CaretAnnotation::setCaretSymbol(CaretAnnotation::CaretSymbol symbol)
-+         return;
-+     }
-+
-+-    AnnotCaret *caretann = static_cast<AnnotCaret *>(d->pdfAnnot);
-++    AnnotCaret *caretann = static_cast<AnnotCaret *>(d->pdfAnnot.get());
-+     caretann->setSymbol((AnnotCaret::AnnotCaretSymbol)symbol);
-+ }
-+
-+@@ -4253,8 +4230,8 @@ class FileAttachmentAnnotationPrivate : public AnnotationPrivate
-+ public:
-+     FileAttachmentAnnotationPrivate();
-+     ~FileAttachmentAnnotationPrivate() override;
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     QString icon;
-+@@ -4268,12 +4245,12 @@ FileAttachmentAnnotationPrivate::~FileAttachmentAnnotationPrivate()
-+     delete embfile;
-+ }
-+
-+-Annotation *FileAttachmentAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> FileAttachmentAnnotationPrivate::makeAlias()
-+ {
-+-    return new FileAttachmentAnnotation(*this);
-++    return std::unique_ptr<FileAttachmentAnnotation>(new FileAttachmentAnnotation(*this));
-+ }
-+
-+-Annot *FileAttachmentAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> FileAttachmentAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     return nullptr; // Not implemented
-+ }
-+@@ -4345,8 +4322,8 @@ class SoundAnnotationPrivate : public AnnotationPrivate
-+ public:
-+     SoundAnnotationPrivate();
-+     ~SoundAnnotationPrivate() override;
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     QString icon;
-+@@ -4360,12 +4337,12 @@ SoundAnnotationPrivate::~SoundAnnotationPrivate()
-+     delete sound;
-+ }
-+
-+-Annotation *SoundAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> SoundAnnotationPrivate::makeAlias()
-+ {
-+-    return new SoundAnnotation(*this);
-++    return std::unique_ptr<SoundAnnotation>(new SoundAnnotation(*this));
-+ }
-+
-+-Annot *SoundAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptrAnnot> SoundAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     return nullptr; // Not implemented
-+ }
-+@@ -4437,8 +4414,8 @@ class MovieAnnotationPrivate : public AnnotationPrivate
-+ public:
-+     MovieAnnotationPrivate();
-+     ~MovieAnnotationPrivate() override;
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     MovieObject *movie;
-+@@ -4452,12 +4429,12 @@ MovieAnnotationPrivate::~MovieAnnotationPrivate()
-+     delete movie;
-+ }
-+
-+-Annotation *MovieAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> MovieAnnotationPrivate::makeAlias()
-+ {
-+-    return new MovieAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new MovieAnnotation(*this));
-+ }
-+
-+-Annot *MovieAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> MovieAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     return nullptr; // Not implemented
-+ }
-+@@ -4529,8 +4506,8 @@ class ScreenAnnotationPrivate : public AnnotationPrivate
-+ public:
-+     ScreenAnnotationPrivate();
-+     ~ScreenAnnotationPrivate() override;
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     LinkRendition *action;
-+@@ -4546,12 +4523,12 @@ ScreenAnnotationPrivate::~ScreenAnnotationPrivate()
-+
-+ ScreenAnnotation::ScreenAnnotation(ScreenAnnotationPrivate &dd) : Annotation(dd) { }
-+
-+-Annotation *ScreenAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> ScreenAnnotationPrivate::makeAlias()
-+ {
-+-    return new ScreenAnnotation(*this);
-++    return std::unique_ptr<ScreenAnnotation>(new ScreenAnnotation(*this));
-+ }
-+
-+-Annot *ScreenAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> ScreenAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     return nullptr; // Not implemented
-+ }
-+@@ -4609,16 +4586,16 @@ Link *ScreenAnnotation::additionalAction(AdditionalActionType type) const
-+ class WidgetAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+ };
-+
-+-Annotation *WidgetAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> WidgetAnnotationPrivate::makeAlias()
-+ {
-+-    return new WidgetAnnotation(*this);
-++    return std::unique_ptr<WidgetAnnotation>(new WidgetAnnotation(*this));
-+ }
-+
-+-Annot *WidgetAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> WidgetAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     return nullptr; // Not implemented
-+ }
-+@@ -4942,9 +4919,9 @@ public:
-+
-+     ~RichMediaAnnotationPrivate() override;
-+
-+-    Annotation *makeAlias() override { return new RichMediaAnnotation(*this); }
-++    std::unique_ptr<Annotation> makeAlias() override { return std::unique_ptr<RichMediaAnnotation>(new RichMediaAnnotation(*this)); }
-+
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override
-+     {
-+         Q_UNUSED(destPage);
-+         Q_UNUSED(doc);
-+diff --git a/qt5/src/poppler-form.cc b/qt5/src/poppler-form.cc
-+index 665fb5f..db0a6e8 100644
-+--- a/qt5/src/poppler-form.cc
-++++ b/qt5/src/poppler-form.cc
-+@@ -259,7 +259,7 @@ Link *FormField::additionalAction(AdditionalActionType type) const
-+
-+ Link *FormField::additionalAction(Annotation::AdditionalActionType type) const
-+ {
-+-    ::AnnotWidget *w = m_formData->fm->getWidgetAnnotation();
-++    std::shared_ptr<AnnotWidget> w = m_formData->fm->getWidgetAnnotation();
-+     if (!w) {
-+         return nullptr;
-+     }
-+@@ -340,7 +340,7 @@ void FormFieldButton::setIcon(const FormFieldIcon &icon)
-+
-+     FormWidgetButton *fwb = static_cast<FormWidgetButton *>(m_formData->fm);
-+     if (fwb->getButtonType() == formButtonPush) {
-+-        ::AnnotWidget *w = m_formData->fm->getWidgetAnnotation();
-++        ::AnnotWidget *w = m_formData->fm->getWidgetAnnotation().get();
-+         FormFieldIconData *data = FormFieldIconData::getData(icon);
-+         if (data->icon != nullptr) {
-+             w->setNewAppearance(data->icon->lookup("AP"));
-+diff --git a/qt6/src/poppler-annotation-private.h b/qt6/src/poppler-annotation-private.h
-+index 35e2676..da1ab71 100644
-+--- a/qt6/src/poppler-annotation-private.h
-++++ b/qt6/src/poppler-annotation-private.h
-+@@ -59,7 +59,7 @@ public:
-+
-+     /* Returns an Annotation of the right subclass whose d_ptr points to
-+      * this AnnotationPrivate */
-+-    virtual Annotation *makeAlias() = 0;
-++    virtual Astd::unique_ptr<nnotation> makeAlias() = 0;
-+
-+     /* properties: contents related */
-+     QString author;
-+@@ -79,18 +79,18 @@ public:
-+     /* revisions */
-+     Annotation::RevScope revisionScope;
-+     Annotation::RevType revisionType;
-+-    QList<Annotation *> revisions;
-++    std::vector<std::unique_ptr<Annotation>> revisions;
-+
-+     /* After this call, the Annotation object will behave like a wrapper for
-+      * the specified Annot object. All cached values are discarded */
-+-    void tieToNativeAnnot(Annot *ann, ::Page *page, DocumentData *doc);
-++    void tieToNativeAnnot(std::shared_ptr<Annot> ann, ::Page *page, DocumentData *doc);
-+
-+     /* Creates a new Annot object on the specified page, flushes current
-+      * values to that object and ties this Annotation to that object */
-+-    virtual Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) = 0;
-++    virtual std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) = 0;
-+
-+     /* Inited to 0 (i.e. untied annotation) */
-+-    Annot *pdfAnnot;
-++    std::shared_ptr<Annot> pdfAnnot;
-+     ::Page *pdfPage;
-+     DocumentData *parentDoc;
-+
-+diff --git a/qt6/src/poppler-annotation.cc b/qt6/src/poppler-annotation.cc
-+index 5770be6..d38aee2 100644
-+--- a/qt6/src/poppler-annotation.cc
-++++ b/qt6/src/poppler-annotation.cc
-+@@ -57,6 +57,12 @@
-+ #include <Link.h>
-+ #include <DateInfo.h>
-+
-++template<typename T, typename U>
-++static std::unique_ptr<T> static_pointer_cast(std::unique_ptr<U> &&in)
-++{
-++    return std::unique_ptr<T>(static_cast<std::add_pointer_t<T>>(in.release()));
-++}
-++
-+ /* Almost all getters directly query the underlying poppler annotation, with
-+  * the exceptions of link, file attachment, sound, movie and screen annotations,
-+  * Whose data retrieval logic has not been moved yet. Their getters return
-+@@ -129,36 +135,25 @@ void getRawDataFromQImage(const QImage &qimg, int bitsPerPixel, QByteArray *data
-+ void AnnotationPrivate::addRevision(Annotation *ann, Annotation::RevScope scope, Annotation::RevType type)
-+ {
-+     /* Since ownership stays with the caller, create an alias of ann */
-+-    revisions.append(ann->d_ptr->makeAlias());
-++    revisions.push_back(ann->d_ptr->makeAlias());
-+
-+     /* Set revision properties */
-+     revisionScope = scope;
-+     revisionType = type;
-+ }
-+
-+-AnnotationPrivate::~AnnotationPrivate()
-+-{
-+-    // Delete all children revisions
-+-    qDeleteAll(revisions);
-+-
-+-    // Release Annot object
-+-    if (pdfAnnot) {
-+-        pdfAnnot->decRefCnt();
-+-    }
-+-}
-++AnnotationPrivate::~AnnotationPrivate() = default;
-+
-+-void AnnotationPrivate::tieToNativeAnnot(Annot *ann, ::Page *page, Poppler::DocumentData *doc)
-++void AnnotationPrivate::tieToNativeAnnot(std::shared_ptr<Annot> ann, ::Page *page, Poppler::DocumentData *doc)
-+ {
-+     if (pdfAnnot) {
-+         error(errIO, -1, "Annotation is already tied");
-+         return;
-+     }
-+
-+-    pdfAnnot = ann;
-++    pdfAnnot = std::move(ann);
-+     pdfPage = page;
-+     parentDoc = doc;
-+-
-+-    pdfAnnot->incRefCnt();
-+ }
-+
-+ /* This method is called when a new annotation is created, after pdfAnnot and
-+@@ -167,7 +162,7 @@ void AnnotationPrivate::flushBaseAnnotationProperties()
-+ {
-+     Q_ASSERT(pdfPage);
-+
-+-    Annotation *q = makeAlias(); // Setters are defined in the public class
-++    std::unique_ptr<Annotation> q = makeAlias(); // Setters are defined in the public class
-+
-+     // Since pdfAnnot has been set, this calls will write in the Annot object
-+     q->setAuthor(author);
-+@@ -180,14 +175,6 @@ void AnnotationPrivate::flushBaseAnnotationProperties()
-+     q->setStyle(style);
-+     q->setPopup(popup);
-+
-+-    // Flush revisions
-+-    foreach (Annotation *r, revisions) {
-+-        // TODO: Flush revision
-+-        delete r; // Object is no longer needed
-+-    }
-+-
-+-    delete q;
-+-
-+     // Clear some members to save memory
-+     author.clear();
-+     contents.clear();
-+@@ -377,14 +364,14 @@ std::vector<std::unique_ptr<Annotation>> AnnotationPrivate::findAnnotations(::Pa
-+
-+     // Create Annotation objects and tie to their native Annot
-+     std::vector<std::unique_ptr<Annotation>> res;
-+-    for (Annot *ann : annots->getAnnots()) {
-++    for (const std::shared_ptr<Annot> &ann : annots->getAnnots()) {
-+         if (!ann) {
-+             error(errInternal, -1, "Annot is null");
-+             continue;
-+         }
-+
-+         // Check parent annotation
-+-        AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(ann);
-++        AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(ann.get());
-+         if (!markupann) {
-+             // Assume it's a root annotation, and skip if user didn't request it
-+             if (parentID != -1) {
-+@@ -458,7 +445,7 @@ std::vector<std::unique_ptr<Annotation>> AnnotationPrivate::findAnnotations(::Pa
-+                 continue;
-+             }
-+             // parse Link params
-+-            AnnotLink *linkann = static_cast<AnnotLink *>(ann);
-++            AnnotLink *linkann = static_cast<AnnotLink *>(ann.get());
-+             LinkAnnotation *l = new LinkAnnotation();
-+
-+             // -> hlMode
-+@@ -488,7 +475,7 @@ std::vector<std::unique_ptr<Annotation>> AnnotationPrivate::findAnnotations(::Pa
-+             if (!wantFileAttachmentAnnotations) {
-+                 continue;
-+             }
-+-            AnnotFileAttachment *attachann = static_cast<AnnotFileAttachment *>(ann);
-++            AnnotFileAttachment *attachann = static_cast<AnnotFileAttachment *>(ann.get());
-+             FileAttachmentAnnotation *f = new FileAttachmentAnnotation();
-+             // -> fileIcon
-+             f->setFileIconName(QString::fromLatin1(attachann->getName()->c_str()));
-+@@ -503,7 +490,7 @@ std::vector<std::unique_ptr<Annotation>> AnnotationPrivate::findAnnotations(::Pa
-+             if (!wantSoundAnnotations) {
-+                 continue;
-+             }
-+-            AnnotSound *soundann = static_cast<AnnotSound *>(ann);
-++            AnnotSound *soundann = static_cast<AnnotSound *>(ann.get());
-+             SoundAnnotation *s = new SoundAnnotation();
-+
-+             // -> soundIcon
-+@@ -518,7 +505,7 @@ std::vector<std::unique_ptr<Annotation>> AnnotationPrivate::findAnnotations(::Pa
-+             if (!wantMovieAnnotations) {
-+                 continue;
-+             }
-+-            AnnotMovie *movieann = static_cast<AnnotMovie *>(ann);
-++            AnnotMovie *movieann = static_cast<AnnotMovie *>(ann.get());
-+             MovieAnnotation *m = new MovieAnnotation();
-+
-+             // -> movie
-+@@ -536,7 +523,7 @@ std::vector<std::unique_ptr<Annotation>> AnnotationPrivate::findAnnotations(::Pa
-+             if (!wantScreenAnnotations) {
-+                 continue;
-+             }
-+-            AnnotScreen *screenann = static_cast<AnnotScreen *>(ann);
-++            AnnotScreen *screenann = static_cast<AnnotScreen *>(ann.get());
-+             // TODO Support other link types than Link::Rendition in ScreenAnnotation
-+             if (!screenann->getAction() || screenann->getAction()->getKind() != actionRendition) {
-+                 continue;
-+@@ -566,7 +553,7 @@ std::vector<std::unique_ptr<Annotation>> AnnotationPrivate::findAnnotations(::Pa
-+             annotation.reset(new WidgetAnnotation());
-+             break;
-+         case Annot::typeRichMedia: {
-+-            const AnnotRichMedia *annotRichMedia = static_cast<AnnotRichMedia *>(ann);
-++            const AnnotRichMedia *annotRichMedia = static_cast<AnnotRichMedia *>(ann.get());
-+
-+             RichMediaAnnotation *richMediaAnnotation = new RichMediaAnnotation;
-+
-+@@ -774,9 +761,9 @@ std::unique_ptr<Link> AnnotationPrivate::additionalAction(Annotation::Additional
-+
-+     std::unique_ptr<::LinkAction> linkAction;
-+     if (pdfAnnot->getType() == Annot::typeScreen) {
-+-        linkAction = static_cast<AnnotScreen *>(pdfAnnot)->getAdditionalAction(actionType);
-++        linkAction = static_cast<AnnotScreen *>(pdfAnnot.get())->getAdditionalAction(actionType);
-+     } else {
-+-        linkAction = static_cast<AnnotWidget *>(pdfAnnot)->getAdditionalAction(actionType);
-++        linkAction = static_cast<AnnotWidget *>(pdfAnnot.get())->getAdditionalAction(actionType);
-+     }
-+
-+     if (linkAction) {
-+@@ -795,7 +782,7 @@ void AnnotationPrivate::addAnnotationToPage(::Page *pdfPage, DocumentData *doc,
-+
-+     // Unimplemented annotations can't be created by the user because their ctor
-+     // is private. Therefore, createNativeAnnot will never return 0
-+-    Annot *nativeAnnot = ann->d_ptr->createNativeAnnot(pdfPage, doc);
-++    std::shared_ptr<Annot> nativeAnnot = ann->d_ptr->createNativeAnnot(pdfPage, doc);
-+     Q_ASSERT(nativeAnnot);
-+
-+     if (ann->d_ptr->annotationAppearance.isStream()) {
-+@@ -1038,7 +1025,7 @@ QString Annotation::author() const
-+         return d->author;
-+     }
-+
-+-    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot);
-++    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot.get());
-+     return markupann ? UnicodeParsedString(markupann->getLabel()) : QString();
-+ }
-+
-+@@ -1051,7 +1038,7 @@ void Annotation::setAuthor(const QString &author)
-+         return;
-+     }
-+
-+-    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot);
-++    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot.get());
-+     if (markupann) {
-+         markupann->setLabel(std::unique_ptr<GooString>(QStringToUnicodeGooString(author)));
-+     }
-+@@ -1149,7 +1136,7 @@ QDateTime Annotation::creationDate() const
-+         return d->creationDate;
-+     }
-+
-+-    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot);
-++    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot.get());
-+
-+     if (markupann && markupann->getDate()) {
-+         return convertDate(markupann->getDate()->c_str());
-+@@ -1167,7 +1154,7 @@ void Annotation::setCreationDate(const QDateTime &date)
-+         return;
-+     }
-+
-+-    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot);
-++    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot.get());
-+     if (markupann) {
-+         if (date.isValid()) {
-+             const time_t t = date.toSecsSinceEpoch();
-+@@ -1279,8 +1266,7 @@ void Annotation::setBoundary(const QRectF &boundary)
-+     Q_D(Annotation);
-+
-+     if (!d->pdfAnnot) {
-+-        d->boundary = boundary;
-+-        return;
-++        d->boundary = boundary;        return;
-+     }
-+
-+     PDFRectangle rect = d->boundaryToPdfRectangle(boundary, flags());
-+@@ -1298,7 +1284,7 @@ Annotation::Style Annotation::style() const
-+     Style s;
-+     s.setColor(convertAnnotColor(d->pdfAnnot->getColor()));
-+
-+-    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot);
-++    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot.get());
-+     if (markupann) {
-+         s.setOpacity(markupann->getOpacity());
-+     }
-+@@ -1326,11 +1312,11 @@ Annotation::Style Annotation::style() const
-+     AnnotBorderEffect *border_effect;
-+     switch (d->pdfAnnot->getType()) {
-+     case Annot::typeFreeText:
-+-        border_effect = static_cast<AnnotFreeText *>(d->pdfAnnot)->getBorderEffect();
-++        border_effect = static_cast<AnnotFreeText *>(d->pdfAnnot.get())->getBorderEffect();
-+         break;
-+     case Annot::typeSquare:
-+     case Annot::typeCircle:
-+-        border_effect = static_cast<AnnotGeometry *>(d->pdfAnnot)->getBorderEffect();
-++        border_effect = static_cast<AnnotGeometry *>(d->pdfAnnot.get())->getBorderEffect();
-+         break;
-+     default:
-+         border_effect = nullptr;
-+@@ -1354,7 +1340,7 @@ void Annotation::setStyle(const Annotation::Style &style)
-+
-+     d->pdfAnnot->setColor(convertQColor(style.color()));
-+
-+-    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot);
-++    AnnotMarkup *markupann = dynamic_cast<AnnotMarkup *>(d->pdfAnnot.get());
-+     if (markupann) {
-+         markupann->setOpacity(style.opacity());
-+     }
-+@@ -1375,10 +1361,10 @@ Annotation::Popup Annotation::popup() const
-+     }
-+
-+     Popup w;
-+-    AnnotPopup *popup = nullptr;
-++    std::shared_ptr<AnnotPopup> popup = nullptr;
-+     int flags = -1; // Not initialized
-+
-+-    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot);
-++    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot.get());
-+     if (markupann) {
-+         popup = markupann->getPopup();
-+         w.setSummary(UnicodeParsedString(markupann->getSubject()));
-+@@ -1396,7 +1382,7 @@ Annotation::Popup Annotation::popup() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeText) {
-+-        const AnnotText *textann = static_cast<const AnnotText *>(d->pdfAnnot);
-++        const AnnotText *textann = static_cast<const AnnotText *>(d->pdfAnnot.get());
-+
-+         // Text annotations default to same rect as annotation
-+         if (flags == -1) {
-+@@ -1452,7 +1438,7 @@ Annotation::RevScope Annotation::revisionScope() const
-+         return d->revisionScope;
-+     }
-+
-+-    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot);
-++    const AnnotMarkup *markupann = dynamic_cast<const AnnotMarkup *>(d->pdfAnnot.get());
-+
-+     if (markupann && markupann->isInReplyTo()) {
-+         switch (markupann->getReplyTo()) {
-+@@ -1505,8 +1491,10 @@ std::vector<std::unique_ptr<Annotation>> Annotation::revisions() const
-+     if (!d->pdfAnnot) {
-+         /* Return aliases, whose ownership goes to the caller */
-+         std::vector<std::unique_ptr<Annotation>> res;
-+-        foreach (Annotation *rev, d->revisions)
-+-            res.push_back(std::unique_ptr<Annotation>(rev->d_ptr->makeAlias()));
-++        res.reserve(d->revisions.size());
-++        for (const std::unique_ptr<Annotation> &rev : d->revisions) {
-++            res.push_back(rev->d_ptr->makeAlias());
-++        }
-+         return res;
-+     }
-+
-+@@ -1523,7 +1511,7 @@ std::unique_ptr<AnnotationAppearance> Annotation::annotationAppearance() const
-+ {
-+     Q_D(const Annotation);
-+
-+-    return std::make_unique<AnnotationAppearance>(new AnnotationAppearancePrivate(d->pdfAnnot));
-++    return std::make_unique<AnnotationAppearance>(new AnnotationAppearancePrivate(d->pdfAnnot.get()));
-+ }
-+
-+ void Annotation::setAnnotationAppearance(const AnnotationAppearance &annotationAppearance)
-+@@ -1548,8 +1536,8 @@ class TextAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     TextAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+     void setDefaultAppearanceToNative();
-+     std::unique_ptr<DefaultAppearance> getDefaultAppearanceFromNative() const;
-+
-+@@ -1565,15 +1553,15 @@ public:
-+
-+ TextAnnotationPrivate::TextAnnotationPrivate() : AnnotationPrivate(), textType(TextAnnotation::Linked), textIcon(QStringLiteral("Note")), inplaceAlign(TextAnnotation::InplaceAlignLeft), inplaceIntent(TextAnnotation::Unknown) { }
-+
-+-Annotation *TextAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> TextAnnotationPrivate::makeAlias()
-+ {
-+-    return new TextAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new TextAnnotation(*this));
-+ }
-+
-+-Annot *TextAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> TextAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     // Setters are defined in the public class
-+-    TextAnnotation *q = static_cast<TextAnnotation *>(makeAlias());
-++    std::unique_ptr<TextAnnotation> q = static_pointer_cast<TextAnnotation *>(makeAlias());
-+
-+     // Set page and contents
-+     pdfPage = destPage;
-+@@ -1582,14 +1570,14 @@ Annot *TextAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+     if (textType == TextAnnotation::Linked) {
-+-        pdfAnnot = new AnnotText { destPage->getDoc(), &rect };
-++        pdfAnnot = std::make_shared<AnnotText>(destPage->getDoc(), &rect);
-+     } else {
-+         const double pointSize = textFont ? textFont->pointSizeF() : AnnotFreeText::undefinedFontPtSize;
-+         if (pointSize < 0) {
-+             qWarning() << "TextAnnotationPrivate::createNativeAnnot: font pointSize < 0";
-+         }
-+         DefaultAppearance da { { objName, "Invalid_font" }, pointSize, convertQColor(textColor) };
-+-        pdfAnnot = new AnnotFreeText { destPage->getDoc(), &rect, da };
-++        pdfAnnot = std::make_shared<AnnotFreeText>(destPage->getDoc(), &rect, da);
-+     }
-+
-+     // Set properties
-+@@ -1599,8 +1587,6 @@ Annot *TextAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+     q->setCalloutPoints(inplaceCallout);
-+     q->setInplaceIntent(inplaceIntent);
-+
-+-    delete q;
-+-
-+     inplaceCallout.clear(); // Free up memory
-+
-+     return pdfAnnot;
-+@@ -1609,7 +1595,7 @@ Annot *TextAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+ void TextAnnotationPrivate::setDefaultAppearanceToNative()
-+ {
-+     if (pdfAnnot && pdfAnnot->getType() == Annot::typeFreeText) {
-+-        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(pdfAnnot);
-++        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(pdfAnnot.get());
-+         const double pointSize = textFont ? textFont->pointSizeF() : AnnotFreeText::undefinedFontPtSize;
-+         if (pointSize < 0) {
-+             qWarning() << "TextAnnotationPrivate::createNativeAnnot: font pointSize < 0";
-+@@ -1622,7 +1608,7 @@ void TextAnnotationPrivate::setDefaultAppearanceToNative()
-+ std::unique_ptr<DefaultAppearance> TextAnnotationPrivate::getDefaultAppearanceFromNative() const
-+ {
-+     if (pdfAnnot && pdfAnnot->getType() == Annot::typeFreeText) {
-+-        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(pdfAnnot);
-++        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(pdfAnnot.get());
-+         return ftextann->getDefaultAppearance();
-+     } else {
-+         return {};
-+@@ -1676,7 +1662,7 @@ QString TextAnnotation::textIcon() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeText) {
-+-        const AnnotText *textann = static_cast<const AnnotText *>(d->pdfAnnot);
-++        const AnnotText *textann = static_cast<const AnnotText *>(d->pdfAnnot.get());
-+         return QString::fromLatin1(textann->getIcon()->c_str());
-+     }
-+
-+@@ -1693,7 +1679,7 @@ void TextAnnotation::setTextIcon(const QString &icon)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeText) {
-+-        AnnotText *textann = static_cast<AnnotText *>(d->pdfAnnot);
-++        AnnotText *textann = static_cast<AnnotText *>(d->pdfAnnot.get());
-+         QByteArray encoded = icon.toLatin1();
-+         GooString s(encoded.constData());
-+         textann->setIcon(&s);
-+@@ -1767,7 +1753,7 @@ TextAnnotation::InplaceAlignPosition TextAnnotation::inplaceAlign() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeFreeText) {
-+-        const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot);
-++        const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot.get());
-+         switch (ftextann->getQuadding()) {
-+         case VariableTextQuadding::leftJustified:
-+             return InplaceAlignLeft;
-+@@ -1804,7 +1790,7 @@ void TextAnnotation::setInplaceAlign(InplaceAlignPosition align)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeFreeText) {
-+-        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot);
-++        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot.get());
-+         ftextann->setQuadding(alignToQuadding(align));
-+     }
-+ }
-+@@ -1831,7 +1817,7 @@ QVector<QPointF> TextAnnotation::calloutPoints() const
-+         return QVector<QPointF>();
-+     }
-+
-+-    const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot);
-++    const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot.get());
-+     const AnnotCalloutLine *callout = ftextann->getCalloutLine();
-+
-+     if (!callout) {
-+@@ -1863,7 +1849,7 @@ void TextAnnotation::setCalloutPoints(const QVector<QPointF> &points)
-+         return;
-+     }
-+
-+-    AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot);
-++    AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot.get());
-+     const int count = points.size();
-+
-+     if (count == 0) {
-+@@ -1876,7 +1862,7 @@ void TextAnnotation::setCalloutPoints(const QVector<QPointF> &points)
-+         return;
-+     }
-+
-+-    AnnotCalloutLine *callout;
-++    std::unique_ptr<AnnotCalloutLine> callout;
-+     double x1, y1, x2, y2;
-+     double MTX[6];
-+     d->fillTransformationMTX(MTX);
-+@@ -1886,13 +1872,12 @@ void TextAnnotation::setCalloutPoints(const QVector<QPointF> &points)
-+     if (count == 3) {
-+         double x3, y3;
-+         XPDFReader::invTransform(MTX, points[2], x3, y3);
-+-        callout = new AnnotCalloutMultiLine(x1, y1, x2, y2, x3, y3);
-++        callout = std::unique_ptr<AnnotCalloutMultiLine>(x1, y1, x2, y2, x3, y3);
-+     } else {
-+-        callout = new AnnotCalloutLine(x1, y1, x2, y2);
-++        callout = std::unique_ptr<AnnotCalloutLine>(x1, y1, x2, y2);
-+     }
-+
-+-    ftextann->setCalloutLine(callout);
-+-    delete callout;
-++    ftextann->setCalloutLine(std::move(callout));
-+ }
-+
-+ TextAnnotation::InplaceIntent TextAnnotation::inplaceIntent() const
-+@@ -1904,7 +1889,7 @@ TextAnnotation::InplaceIntent TextAnnotation::inplaceIntent() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeFreeText) {
-+-        const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot);
-++        const AnnotFreeText *ftextann = static_cast<const AnnotFreeText *>(d->pdfAnnot.get());
-+         return (TextAnnotation::InplaceIntent)ftextann->getIntent();
-+     }
-+
-+@@ -1921,7 +1906,7 @@ void TextAnnotation::setInplaceIntent(TextAnnotation::InplaceIntent intent)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeFreeText) {
-+-        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot);
-++        AnnotFreeText *ftextann = static_cast<AnnotFreeText *>(d->pdfAnnot.get());
-+         ftextann->setIntent((AnnotFreeText::AnnotFreeTextIntent)intent);
-+     }
-+ }
-+@@ -1931,8 +1916,8 @@ class LineAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     LineAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields (note uses border for rendering style)
-+     QVector<QPointF> linePoints;
-+@@ -1952,15 +1937,15 @@ LineAnnotationPrivate::LineAnnotationPrivate()
-+ {
-+ }
-+
-+-Annotation *LineAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> LineAnnotationPrivate::makeAlias()
-+ {
-+-    return new LineAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new LineAnnotation(*this));
-+ }
-+
-+-Annot *LineAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> LineAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     // Setters are defined in the public class
-+-    LineAnnotation *q = static_cast<LineAnnotation *>(makeAlias());
-++    std::unique_ptr<LineAnnotation> q = static_pointer_cast<LineAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -1969,9 +1954,9 @@ Annot *LineAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+     if (lineType == LineAnnotation::StraightLine) {
-+-        pdfAnnot = new AnnotLine(doc->doc, &rect);
-++        pdfAnnot = std::shared_ptr<AnnotLine>(doc->doc, &rect);
-+     } else {
-+-        pdfAnnot = new AnnotPolygon(doc->doc, &rect, lineClosed ? Annot::typePolygon : Annot::typePolyLine);
-++        pdfAnnot = std::shared_ptr<AnnotPolygon>(doc->doc, &rect, lineClosed ? Annot::typePolygon : Annot::typePolyLine);
-+     }
-+
-+     // Set properties
-+@@ -1985,8 +1970,6 @@ Annot *LineAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+     q->setLineShowCaption(lineShowCaption);
-+     q->setLineIntent(lineIntent);
-+
-+-    delete q;
-+-
-+     linePoints.clear(); // Free up memory
-+
-+     return pdfAnnot;
-+@@ -2043,14 +2026,14 @@ QVector<QPointF> LineAnnotation::linePoints() const
-+
-+     QVector<QPointF> res;
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         QPointF p;
-+         XPDFReader::transform(MTX, lineann->getX1(), lineann->getY1(), p);
-+         res.append(p);
-+         XPDFReader::transform(MTX, lineann->getX2(), lineann->getY2(), p);
-+         res.append(p);
-+     } else {
-+-        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot);
-++        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot.get());
-+         const AnnotPath *vertices = polyann->getVertices();
-+
-+         for (int i = 0; i < vertices->getCoordsLength(); ++i) {
-+@@ -2073,7 +2056,7 @@ void LineAnnotation::setLinePoints(const QVector<QPointF> &points)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         if (points.size() != 2) {
-+             error(errSyntaxError, -1, "Expected two points for a straight line");
-+             return;
-+@@ -2085,7 +2068,7 @@ void LineAnnotation::setLinePoints(const QVector<QPointF> &points)
-+         XPDFReader::invTransform(MTX, points.last(), x2, y2);
-+         lineann->setVertices(x1, y1, x2, y2);
-+     } else {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+         AnnotPath *p = d->toAnnotPath(points);
-+         polyann->setVertices(p);
-+         delete p;
-+@@ -2101,10 +2084,10 @@ LineAnnotation::TermStyle LineAnnotation::lineStartStyle() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return (LineAnnotation::TermStyle)lineann->getStartStyle();
-+     } else {
-+-        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot);
-++        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot.get());
-+         return (LineAnnotation::TermStyle)polyann->getStartStyle();
-+     }
-+ }
-+@@ -2119,10 +2102,10 @@ void LineAnnotation::setLineStartStyle(LineAnnotation::TermStyle style)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setStartEndStyle((AnnotLineEndingStyle)style, lineann->getEndStyle());
-+     } else {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+         polyann->setStartEndStyle((AnnotLineEndingStyle)style, polyann->getEndStyle());
-+     }
-+ }
-+@@ -2136,10 +2119,10 @@ LineAnnotation::TermStyle LineAnnotation::lineEndStyle() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return (LineAnnotation::TermStyle)lineann->getEndStyle();
-+     } else {
-+-        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot);
-++        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot.get());
-+         return (LineAnnotation::TermStyle)polyann->getEndStyle();
-+     }
-+ }
-+@@ -2154,10 +2137,10 @@ void LineAnnotation::setLineEndStyle(LineAnnotation::TermStyle style)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setStartEndStyle(lineann->getStartStyle(), (AnnotLineEndingStyle)style);
-+     } else {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+         polyann->setStartEndStyle(polyann->getStartStyle(), (AnnotLineEndingStyle)style);
-+     }
-+ }
-+@@ -2183,7 +2166,7 @@ void LineAnnotation::setLineClosed(bool closed)
-+     }
-+
-+     if (d->pdfAnnot->getType() != Annot::typeLine) {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+
-+         // Set new subtype and switch intent if necessary
-+         if (closed) {
-+@@ -2211,10 +2194,10 @@ QColor LineAnnotation::lineInnerColor() const
-+     AnnotColor *c;
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         c = lineann->getInteriorColor();
-+     } else {
-+-        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot);
-++        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot.get());
-+         c = polyann->getInteriorColor();
-+     }
-+
-+@@ -2233,10 +2216,10 @@ void LineAnnotation::setLineInnerColor(const QColor &color)
-+     auto c = convertQColor(color);
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setInteriorColor(std::move(c));
-+     } else {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+         polyann->setInteriorColor(std::move(c));
-+     }
-+ }
-+@@ -2250,7 +2233,7 @@ double LineAnnotation::lineLeadingForwardPoint() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return lineann->getLeaderLineLength();
-+     }
-+
-+@@ -2267,7 +2250,7 @@ void LineAnnotation::setLineLeadingForwardPoint(double point)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setLeaderLineLength(point);
-+     }
-+ }
-+@@ -2281,7 +2264,7 @@ double LineAnnotation::lineLeadingBackPoint() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return lineann->getLeaderLineExtension();
-+     }
-+
-+@@ -2298,7 +2281,7 @@ void LineAnnotation::setLineLeadingBackPoint(double point)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setLeaderLineExtension(point);
-+     }
-+ }
-+@@ -2312,7 +2295,7 @@ bool LineAnnotation::lineShowCaption() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return lineann->getCaption();
-+     }
-+
-+@@ -2329,7 +2312,7 @@ void LineAnnotation::setLineShowCaption(bool show)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setCaption(show);
-+     }
-+ }
-+@@ -2343,10 +2326,10 @@ LineAnnotation::LineIntent LineAnnotation::lineIntent() const
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot);
-++        const AnnotLine *lineann = static_cast<const AnnotLine *>(d->pdfAnnot.get());
-+         return (LineAnnotation::LineIntent)(lineann->getIntent() + 1);
-+     } else {
-+-        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot);
-++        const AnnotPolygon *polyann = static_cast<const AnnotPolygon *>(d->pdfAnnot.get());
-+         if (polyann->getIntent() == AnnotPolygon::polygonCloud) {
-+             return LineAnnotation::PolygonCloud;
-+         } else { // AnnotPolygon::polylineDimension, AnnotPolygon::polygonDimension
-+@@ -2369,10 +2352,10 @@ void LineAnnotation::setLineIntent(LineAnnotation::LineIntent intent)
-+     }
-+
-+     if (d->pdfAnnot->getType() == Annot::typeLine) {
-+-        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot);
-++        AnnotLine *lineann = static_cast<AnnotLine *>(d->pdfAnnot.get());
-+         lineann->setIntent((AnnotLine::AnnotLineIntent)(intent - 1));
-+     } else {
-+-        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot);
-++        AnnotPolygon *polyann = static_cast<AnnotPolygon *>(d->pdfAnnot.get());
-+         if (intent == LineAnnotation::PolygonCloud) {
-+             polyann->setIntent(AnnotPolygon::polygonCloud);
-+         } else // LineAnnotation::Dimension
-+@@ -2391,8 +2374,8 @@ class GeomAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     GeomAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields (note uses border for rendering style)
-+     GeomAnnotation::GeomType geomType;
-+@@ -2401,15 +2384,15 @@ public:
-+
-+ GeomAnnotationPrivate::GeomAnnotationPrivate() : AnnotationPrivate(), geomType(GeomAnnotation::InscribedSquare) { }
-+
-+-Annotation *GeomAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> GeomAnnotationPrivate::makeAlias()
-+ {
-+-    return new GeomAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new GeomAnnotation(*this));
-+ }
-+
-+-Annot *GeomAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> GeomAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     // Setters are defined in the public class
-+-    GeomAnnotation *q = static_cast<GeomAnnotation *>(makeAlias());
-++    std::unique_ptr<GeomAnnotation> q = static_pointer_cast<GeomAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -2424,13 +2407,12 @@ Annot *GeomAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *
-+
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+-    pdfAnnot = new AnnotGeometry(destPage->getDoc(), &rect, type);
-++    pdfAnnot = std::make_shared<AnnotGeometry>(destPage->getDoc(), &rect, type);
-+
-+     // Set properties
-+     flushBaseAnnotationProperties();
-+     q->setGeomInnerColor(geomInnerColor);
-+
-+-    delete q;
-+     return pdfAnnot;
-+ }
-+
-+@@ -2469,7 +2451,7 @@ void GeomAnnotation::setGeomType(GeomAnnotation::GeomType type)
-+         return;
-+     }
-+
-+-    AnnotGeometry *geomann = static_cast<AnnotGeometry *>(d->pdfAnnot);
-++    AnnotGeometry *geomann = static_cast<AnnotGeometry *>(d->pdfAnnot.get());
-+     if (type == GeomAnnotation::InscribedSquare) {
-+         geomann->setType(Annot::typeSquare);
-+     } else { // GeomAnnotation::InscribedCircle
-+@@ -2485,7 +2467,7 @@ QColor GeomAnnotation::geomInnerColor() const
-+         return d->geomInnerColor;
-+     }
-+
-+-    const AnnotGeometry *geomann = static_cast<const AnnotGeometry *>(d->pdfAnnot);
-++    const AnnotGeometry *geomann = static_cast<const AnnotGeometry *>(d->pdfAnnot.get());
-+     return convertAnnotColor(geomann->getInteriorColor());
-+ }
-+
-+@@ -2498,7 +2480,7 @@ void GeomAnnotation::setGeomInnerColor(const QColor &color)
-+         return;
-+     }
-+
-+-    AnnotGeometry *geomann = static_cast<AnnotGeometry *>(d->pdfAnnot);
-++    AnnotGeometry *geomann = static_cast<AnnotGeometry *>(d->pdfAnnot.get());
-+     geomann->setInteriorColor(convertQColor(color));
-+ }
-+
-+@@ -2507,8 +2489,8 @@ class HighlightAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     HighlightAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     HighlightAnnotation::HighlightType highlightType;
-+@@ -2522,9 +2504,9 @@ public:
-+
-+ HighlightAnnotationPrivate::HighlightAnnotationPrivate() : AnnotationPrivate(), highlightType(HighlightAnnotation::Highlight) { }
-+
-+-Annotation *HighlightAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> HighlightAnnotationPrivate::makeAlias()
-+ {
-+-    return new HighlightAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new HighlightAnnotation(*this));
-+ }
-+
-+ Annot::AnnotSubtype HighlightAnnotationPrivate::toAnnotSubType(HighlightAnnotation::HighlightType type)
-+@@ -2597,10 +2579,10 @@ AnnotQuadrilaterals *HighlightAnnotationPrivate::toQuadrilaterals(const QList<Hi
-+     return new AnnotQuadrilaterals(std::move(ac), count);
-+ }
-+
-+-Annot *HighlightAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> HighlightAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     // Setters are defined in the public class
-+-    HighlightAnnotation *q = static_cast<HighlightAnnotation *>(makeAlias());
-++    std::unique_ptr<HighlightAnnotation> q = static_pointer_cast<HighlightAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -2608,7 +2590,7 @@ Annot *HighlightAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentD
-+
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+-    pdfAnnot = new AnnotTextMarkup(destPage->getDoc(), &rect, toAnnotSubType(highlightType));
-++    pdfAnnot = std::shared_ptr<AnnotTextMarkup>(destPage->getDoc(), &rect, toAnnotSubType(highlightType));
-+
-+     // Set properties
-+     flushBaseAnnotationProperties();
-+@@ -2616,8 +2598,6 @@ Annot *HighlightAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentD
-+
-+     highlightQuads.clear(); // Free up memory
-+
-+-    delete q;
-+-
-+     return pdfAnnot;
-+ }
-+
-+@@ -2662,7 +2642,7 @@ void HighlightAnnotation::setHighlightType(HighlightAnnotation::HighlightType ty
-+         return;
-+     }
-+
-+-    AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot);
-++    AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot.get());
-+     hlann->setType(HighlightAnnotationPrivate::toAnnotSubType(type));
-+ }
-+
-+@@ -2674,7 +2654,7 @@ QList<HighlightAnnotation::Quad> HighlightAnnotation::highlightQuads() const
-+         return d->highlightQuads;
-+     }
-+
-+-    const AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot);
-++    const AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot.get());
-+     return d->fromQuadrilaterals(hlann->getQuadrilaterals());
-+ }
-+
-+@@ -2687,7 +2667,7 @@ void HighlightAnnotation::setHighlightQuads(const QList<HighlightAnnotation::Qua
-+         return;
-+     }
-+
-+-    AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot);
-++    AnnotTextMarkup *hlann = static_cast<AnnotTextMarkup *>(d->pdfAnnot.get());
-+     AnnotQuadrilaterals *quadrilaterals = d->toQuadrilaterals(quads);
-+     hlann->setQuadrilaterals(quadrilaterals);
-+     delete quadrilaterals;
-+@@ -2698,10 +2678,10 @@ class StampAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     StampAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+-    AnnotStampImageHelper *convertQImageToAnnotStampImageHelper(const QImage &qimg);
-++    std::unique_ptr<AnnotStampImageHelper> convertQImageToAnnotStampImageHelper(const QImage &qimg);
-+
-+     // data fields
-+     QString stampIconName;
-+@@ -2710,14 +2690,14 @@ public:
-+
-+ StampAnnotationPrivate::StampAnnotationPrivate() : AnnotationPrivate(), stampIconName(QStringLiteral("Draft")) { }
-+
-+-Annotation *StampAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> StampAnnotationPrivate::makeAlias()
-+ {
-+-    return new StampAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new StampAnnotation(*this));
-+ }
-+
-+-Annot *StampAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> StampAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+-    StampAnnotation *q = static_cast<StampAnnotation *>(makeAlias());
-++    std::unique_ptr<StampAnnotation> q = static_pointer_cast<StampAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -2725,21 +2705,19 @@ Annot *StampAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData
-+
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+-    pdfAnnot = new AnnotStamp(destPage->getDoc(), &rect);
-++    pdfAnnot = std::make_shared<AnnotStamp>(destPage->getDoc(), &rect);
-+
-+     // Set properties
-+     flushBaseAnnotationProperties();
-+     q->setStampIconName(stampIconName);
-+     q->setStampCustomImage(stampCustomImage);
-+
-+-    delete q;
-+-
-+     stampIconName.clear(); // Free up memory
-+
-+     return pdfAnnot;
-+ }
-+
-+-AnnotStampImageHelper *StampAnnotationPrivate::convertQImageToAnnotStampImageHelper(const QImage &qimg)
-++std::unique_ptr<AnnotStampImageHelper> StampAnnotationPrivate::convertQImageToAnnotStampImageHelper(const QImage &qimg)
-+ {
-+     QImage convertedQImage = qimg;
-+
-+@@ -2818,13 +2796,13 @@ AnnotStampImageHelper *StampAnnotationPrivate::convertQImageToAnnotStampImageHel
-+
-+     getRawDataFromQImage(convertedQImage, convertedQImage.depth(), &data, &sMaskData);
-+
-+-    AnnotStampImageHelper *annotImg;
-++    std::unique_ptr<AnnotStampImageHelper> annotImg;
-+
-+     if (sMaskData.count() > 0) {
-+         AnnotStampImageHelper sMask(parentDoc->doc, width, height, ColorSpace::DeviceGray, 8, sMaskData.data(), sMaskData.count());
-+-        annotImg = new AnnotStampImageHelper(parentDoc->doc, width, height, colorSpace, bitsPerComponent, data.data(), data.count(), sMask.getRef());
-++        annotImg = std::unique_ptr<AnnotStampImageHelper>(parentDoc->doc, width, height, colorSpace, bitsPerComponent, data.data(), data.count(), sMask.getRef());
-+     } else {
-+-        annotImg = new AnnotStampImageHelper(parentDoc->doc, width, height, colorSpace, bitsPerComponent, data.data(), data.count());
-++        annotImg = std::unique_ptr<AnnotStampImageHelper>(parentDoc->doc, width, height, colorSpace, bitsPerComponent, data.data(), data.count());
-+     }
-+
-+     return annotImg;
-+@@ -2849,7 +2827,7 @@ QString StampAnnotation::stampIconName() const
-+         return d->stampIconName;
-+     }
-+
-+-    const AnnotStamp *stampann = static_cast<const AnnotStamp *>(d->pdfAnnot);
-++    const AnnotStamp *stampann = static_cast<const AnnotStamp *>(d->pdfAnnot.get());
-+     return QString::fromLatin1(stampann->getIcon()->c_str());
-+ }
-+
-+@@ -2862,7 +2840,7 @@ void StampAnnotation::setStampIconName(const QString &name)
-+         return;
-+     }
-+
-+-    AnnotStamp *stampann = static_cast<AnnotStamp *>(d->pdfAnnot);
-++    AnnotStamp *stampann = static_cast<AnnotStamp *>(d->pdfAnnot.get());
-+     QByteArray encoded = name.toLatin1();
-+     GooString s(encoded.constData());
-+     stampann->setIcon(&s);
-+@@ -2881,9 +2859,9 @@ void StampAnnotation::setStampCustomImage(const QImage &image)
-+         return;
-+     }
-+
-+-    AnnotStamp *stampann = static_cast<AnnotStamp *>(d->pdfAnnot);
-+-    AnnotStampImageHelper *annotCustomImage = d->convertQImageToAnnotStampImageHelper(image);
-+-    stampann->setCustomImage(annotCustomImage);
-++    AnnotStamp *stampann = static_cast<AnnotStamp *>(d->pdfAnnot.get());
-++    std::unique_ptr<AnnotStampImageHelper> annotCustomImage = d->convertQImageToAnnotStampImageHelper(image);
-++    stampann->setCustomImage(std::move(annotCustomImage));
-+ }
-+
-+ /** InkAnnotation [Annotation] */
-+@@ -2891,8 +2869,8 @@ class InkAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     InkAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     QList<QVector<QPointF>> inkPaths;
-+@@ -2903,9 +2881,9 @@ public:
-+
-+ InkAnnotationPrivate::InkAnnotationPrivate() : AnnotationPrivate() { }
-+
-+-Annotation *InkAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> InkAnnotationPrivate::makeAlias()
-+ {
-+-    return new InkAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new InkAnnotation(*this));
-+ }
-+
-+ // Note: Caller is required to delete array elements and the array itself after use
-+@@ -2919,10 +2897,10 @@ AnnotPath **InkAnnotationPrivate::toAnnotPaths(const QList<QVector<QPointF>> &pa
-+     return res;
-+ }
-+
-+-Annot *InkAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> InkAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     // Setters are defined in the public class
-+-    InkAnnotation *q = static_cast<InkAnnotation *>(makeAlias());
-++    std::unique_ptr<InkAnnotation> q = static_pointer_cast<InkAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -2930,7 +2908,7 @@ Annot *InkAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *d
-+
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+-    pdfAnnot = new AnnotInk(destPage->getDoc(), &rect);
-++    pdfAnnot = std::make_shared<AnnotInk>(destPage->getDoc(), &rect);
-+
-+     // Set properties
-+     flushBaseAnnotationProperties();
-+@@ -2938,8 +2916,6 @@ Annot *InkAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *d
-+
-+     inkPaths.clear(); // Free up memory
-+
-+-    delete q;
-+-
-+     return pdfAnnot;
-+ }
-+
-+@@ -2962,7 +2938,7 @@ QList<QVector<QPointF>> InkAnnotation::inkPaths() const
-+         return d->inkPaths;
-+     }
-+
-+-    const AnnotInk *inkann = static_cast<const AnnotInk *>(d->pdfAnnot);
-++    const AnnotInk *inkann = static_cast<const AnnotInk *>(d->pdfAnnot.get());
-+
-+     const AnnotPath *const *paths = inkann->getInkList();
-+     if (!paths || !inkann->getInkListLength()) {
-+@@ -3000,7 +2976,7 @@ void InkAnnotation::setInkPaths(const QList<QVector<QPointF>> &paths)
-+         return;
-+     }
-+
-+-    AnnotInk *inkann = static_cast<AnnotInk *>(d->pdfAnnot);
-++    AnnotInk *inkann = static_cast<AnnotInk *>(d->pdfAnnot.get());
-+     AnnotPath **annotpaths = d->toAnnotPaths(paths);
-+     const int pathsNumber = paths.size();
-+     inkann->setInkList(annotpaths, pathsNumber);
-+@@ -3017,8 +2993,8 @@ class LinkAnnotationPrivate : public AnnotationPrivate
-+ public:
-+     LinkAnnotationPrivate();
-+     ~LinkAnnotationPrivate() override;
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     std::unique_ptr<Link> linkDestination;
-+@@ -3030,12 +3006,12 @@ LinkAnnotationPrivate::LinkAnnotationPrivate() : AnnotationPrivate(), linkHLMode
-+
-+ LinkAnnotationPrivate::~LinkAnnotationPrivate() { }
-+
-+-Annotation *LinkAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> LinkAnnotationPrivate::makeAlias()
-+ {
-+-    return new LinkAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new LinkAnnotation(*this));
-+ }
-+
-+-Annot *LinkAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> LinkAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     return nullptr; // Not implemented
-+ }
-+@@ -3100,8 +3076,8 @@ class CaretAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+     CaretAnnotationPrivate();
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     CaretAnnotation::CaretSymbol symbol;
-+@@ -3109,15 +3085,15 @@ public:
-+
-+ CaretAnnotationPrivate::CaretAnnotationPrivate() : AnnotationPrivate(), symbol(CaretAnnotation::None) { }
-+
-+-Annotation *CaretAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> CaretAnnotationPrivate::makeAlias()
-+ {
-+-    return new CaretAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new CaretAnnotation(*this));
-+ }
-+
-+-Annot *CaretAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> CaetAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     // Setters are defined in the public class
-+-    CaretAnnotation *q = static_cast<CaretAnnotation *>(makeAlias());
-++    std::unique_ptr<CaretAnnotation> q = static_pointer_cast<CaretAnnotation *>(makeAlias());
-+
-+     // Set page and document
-+     pdfPage = destPage;
-+@@ -3125,13 +3101,12 @@ Annot *CaretAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData
-+
-+     // Set pdfAnnot
-+     PDFRectangle rect = boundaryToPdfRectangle(boundary, flags);
-+-    pdfAnnot = new AnnotCaret(destPage->getDoc(), &rect);
-++    pdfAnnot = std::shared_ptr<AnnotCaret>(destPage->getDoc(), &rect);
-+
-+     // Set properties
-+     flushBaseAnnotationProperties();
-+     q->setCaretSymbol(symbol);
-+
-+-    delete q;
-+     return pdfAnnot;
-+ }
-+
-+@@ -3154,7 +3129,7 @@ CaretAnnotation::CaretSymbol CaretAnnotation::caretSymbol() const
-+         return d->symbol;
-+     }
-+
-+-    const AnnotCaret *caretann = static_cast<const AnnotCaret *>(d->pdfAnnot);
-++    const AnnotCaret *caretann = static_cast<const AnnotCaret *>(d->pdfAnnot.get());
-+     return (CaretAnnotation::CaretSymbol)caretann->getSymbol();
-+ }
-+
-+@@ -3167,7 +3142,7 @@ void CaretAnnotation::setCaretSymbol(CaretAnnotation::CaretSymbol symbol)
-+         return;
-+     }
-+
-+-    AnnotCaret *caretann = static_cast<AnnotCaret *>(d->pdfAnnot);
-++    AnnotCaret *caretann = static_cast<AnnotCaret *>(d->pdfAnnot.get());
-+     caretann->setSymbol((AnnotCaret::AnnotCaretSymbol)symbol);
-+ }
-+
-+@@ -3177,8 +3152,8 @@ class FileAttachmentAnnotationPrivate : public AnnotationPrivate
-+ public:
-+     FileAttachmentAnnotationPrivate();
-+     ~FileAttachmentAnnotationPrivate() override;
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     QString icon;
-+@@ -3192,12 +3167,12 @@ FileAttachmentAnnotationPrivate::~FileAttachmentAnnotationPrivate()
-+     delete embfile;
-+ }
-+
-+-Annotation *FileAttachmentAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> FileAttachmentAnnotationPrivate::makeAlias()
-+ {
-+-    return new FileAttachmentAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new FileAttachmentAnnotation(*this));
-+ }
-+
-+-Annot *FileAttachmentAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> FileAttachmentAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     return nullptr; // Not implemented
-+ }
-+@@ -3243,8 +3218,8 @@ class SoundAnnotationPrivate : public AnnotationPrivate
-+ public:
-+     SoundAnnotationPrivate();
-+     ~SoundAnnotationPrivate() override;
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     QString icon;
-+@@ -3258,12 +3233,12 @@ SoundAnnotationPrivate::~SoundAnnotationPrivate()
-+     delete sound;
-+ }
-+
-+-Annotation *SoundAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> SoundAnnotationPrivate::makeAlias()
-+ {
-+-    return new SoundAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new SoundAnnotation(*this));
-+ }
-+
-+-Annot *SoundAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> SoundAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     return nullptr; // Not implemented
-+ }
-+@@ -3309,8 +3284,8 @@ class MovieAnnotationPrivate : public AnnotationPrivate
-+ public:
-+     MovieAnnotationPrivate();
-+     ~MovieAnnotationPrivate() override;
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     MovieObject *movie;
-+@@ -3324,12 +3299,12 @@ MovieAnnotationPrivate::~MovieAnnotationPrivate()
-+     delete movie;
-+ }
-+
-+-Annotation *MovieAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> MovieAnnotationPrivate::makeAlias()
-+ {
-+-    return new MovieAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new MovieAnnotation(*this));
-+ }
-+
-+-Annot *MovieAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> MovieAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     return nullptr; // Not implemented
-+ }
-+@@ -3375,8 +3350,8 @@ class ScreenAnnotationPrivate : public AnnotationPrivate
-+ public:
-+     ScreenAnnotationPrivate();
-+     ~ScreenAnnotationPrivate() override;
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+
-+     // data fields
-+     LinkRendition *action;
-+@@ -3392,12 +3367,12 @@ ScreenAnnotationPrivate::~ScreenAnnotationPrivate()
-+
-+ ScreenAnnotation::ScreenAnnotation(ScreenAnnotationPrivate &dd) : Annotation(dd) { }
-+
-+-Annotation *ScreenAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> ScreenAnnotationPrivate::makeAlias()
-+ {
-+-    return new ScreenAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new ScreenAnnotation(*this));
-+ }
-+
-+-Annot *ScreenAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> ScreenAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     return nullptr; // Not implemented
-+ }
-+@@ -3445,16 +3420,16 @@ std::unique_ptr<Link> ScreenAnnotation::additionalAction(AdditionalActionType ty
-+ class WidgetAnnotationPrivate : public AnnotationPrivate
-+ {
-+ public:
-+-    Annotation *makeAlias() override;
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-++    std::unique_ptr<Annotation> makeAlias() override;
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override;
-+ };
-+
-+-Annotation *WidgetAnnotationPrivate::makeAlias()
-++std::unique_ptr<Annotation> WidgetAnnotationPrivate::makeAlias()
-+ {
-+-    return new WidgetAnnotation(*this);
-++    return std::unique_ptr<Annotation>(new WidgetAnnotation(*this));
-+ }
-+
-+-Annot *WidgetAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-++std::shared_ptr<Annot> WidgetAnnotationPrivate::createNativeAnnot(::Page *destPage, DocumentData *doc)
-+ {
-+     return nullptr; // Not implemented
-+ }
-+@@ -3768,9 +3743,9 @@ public:
-+
-+     ~RichMediaAnnotationPrivate() override;
-+
-+-    Annotation *makeAlias() override { return new RichMediaAnnotation(*this); }
-++    std::unique_ptr<Annotation> makeAlias() override { return std::unique_ptr<Annotation>(new RichMediaAnnotation(*this)); }
-+
-+-    Annot *createNativeAnnot(::Page *destPage, DocumentData *doc) override
-++    std::shared_ptr<Annot> createNativeAnnot(::Page *destPage, DocumentData *doc) override
-+     {
-+         Q_UNUSED(destPage);
-+         Q_UNUSED(doc);
-+diff --git a/qt6/src/poppler-form.cc b/qt6/src/poppler-form.cc
-+index 7e963f0..93b80b6 100644
-+--- a/qt6/src/poppler-form.cc
-++++ b/qt6/src/poppler-form.cc
-+@@ -259,7 +259,7 @@ std::unique_ptr<Link> FormField::additionalAction(AdditionalActionType type) con
-+
-+ std::unique_ptr<Link> FormField::additionalAction(Annotation::AdditionalActionType type) const
-+ {
-+-    ::AnnotWidget *w = m_formData->fm->getWidgetAnnotation();
-++    ::AnnotWidget *w = m_formData->fm->getWidgetAnnotation().get();
-+     if (!w) {
-+         return {};
-+     }
-+@@ -340,7 +340,7 @@ void FormFieldButton::setIcon(const FormFieldIcon &icon)
-+
-+     FormWidgetButton *fwb = static_cast<FormWidgetButton *>(m_formData->fm);
-+     if (fwb->getButtonType() == formButtonPush) {
-+-        ::AnnotWidget *w = m_formData->fm->getWidgetAnnotation();
-++        std::shared_ptr<::AnnotWidget> w = m_formData->fm->getWidgetAnnotation();
-+         FormFieldIconData *data = FormFieldIconData::getData(icon);
-+         if (data->icon != nullptr) {
-+             w->setNewAppearance(data->icon->lookup("AP"));
-+diff --git a/utils/HtmlOutputDev.cc b/utils/HtmlOutputDev.cc
-+index 2056188..cc41b2f 100644
-+--- a/utils/HtmlOutputDev.cc
-++++ b/utils/HtmlOutputDev.cc
-+@@ -1247,8 +1247,8 @@ void HtmlOutputDev::startPage(int pageNumA, GfxState *state, XRef *xref)
-+ void HtmlOutputDev::endPage()
-+ {
-+     std::unique_ptr<Links> linksList = docPage->getLinks();
-+-    for (AnnotLink *link : linksList->getLinks()) {
-+-        doProcessLink(link);
-++    for (const std::shared_ptr<AnnotLink> &link : linksList->getLinks()) {
-++        doProcessLink(link.get());
-+     }
-+
-+     pages->conv();
-+diff --git a/utils/pdfdetach.cc b/utils/pdfdetach.cc
-+index 247c2c1..cbb4f30 100644
-+--- a/utils/pdfdetach.cc
-++++ b/utils/pdfdetach.cc
-+@@ -150,11 +150,11 @@ int main(int argc, char *argv[])
-+             break;
-+         }
-+
-+-        for (Annot *annot : annots->getAnnots()) {
-++        for (const std::shared_ptr<Annot> &annot : annots->getAnnots()) {
-+             if (annot->getType() != Annot::typeFileAttachment) {
-+                 continue;
-+             }
-+-            embeddedFiles.push_back(std::make_unique<FileSpec>(static_cast<AnnotFileAttachment *>(annot)->getFile()));
-++            embeddedFiles.push_back(std::make_unique<FileSpec>(static_cast<AnnotFileAttachment *>(annot.get())->getFile()));
-+         }
-+     }
-+
-+diff --git a/utils/pdfinfo.cc b/utils/pdfinfo.cc
-+index 5f96b41..7b3896e 100644
-+--- a/utils/pdfinfo.cc
-++++ b/utils/pdfinfo.cc
-+@@ -415,7 +415,7 @@ static void printUrlList(PDFDoc *doc)
-+         Page *page = doc->getPage(pg);
-+         if (page) {
-+             std::unique_ptr<Links> links = page->getLinks();
-+-            for (AnnotLink *annot : links->getLinks()) {
-++            for (const std::shared_ptr<AnnotLink> &annot : links->getLinks()) {
-+                 LinkAction *action = annot->getAction();
-+                 if (action->getKind() == actionURI) {
-+                     LinkURI *linkUri = dynamic_cast<LinkURI *>(action);
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0004.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0004.patch
-new file mode 100644
-index 0000000000..680d3004be
---- /dev/null
-+++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0004.patch
-@@ -0,0 +1,58 @@
-+From ac36affcc8486de38e8905a8d6547a3464ff46e5 Mon Sep 17 00:00:00 2001
-+From: Sune Vuorela <sune@vuorela.dk>
-+Date: Tue, 3 Jun 2025 00:35:19 +0200
-+Subject: [PATCH] Limit ammount of annots per document/page
-+
-+CVE: CVE-2025-52886
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/ac36affcc8486de38e8905a8d6547a3464ff46e5]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ poppler/Annot.cc |  4 ++++
-+ poppler/Page.cc  | 16 ++++++++++++++++
-+ 2 files changed, 20 insertions(+)
-+
-+diff --git a/poppler/Annot.cc b/poppler/Annot.cc
-+index 19ec824..9b5145c 100644
-+--- a/poppler/Annot.cc
-++++ b/poppler/Annot.cc
-+@@ -7253,6 +7253,10 @@ Annots::Annots(PDFDoc *docA, int page, Object *annotsObj)
-+                 const Object &obj2 = annotsObj->arrayGetNF(i);
-+                 std::shared_ptr<Annot> annot = createAnnot(std::move(obj1), &obj2);
-+                 if (annot) {
-++                    if (annot.use_count() > 100000) {
-++                        error(errSyntaxError, -1, "Annotations likely malformed. Too many references. Stopping processing annots on page {0:d}", page);
-++                        break;
-++                    }
-+                     if (annot->isOk()) {
-+                         annot->setPage(page, false); // Don't change /P
-+                         appendAnnot(annot);
-+diff --git a/poppler/Page.cc b/poppler/Page.cc
-+index b27c90d..8b5da2f 100644
-+--- a/poppler/Page.cc
-++++ b/poppler/Page.cc
-+@@ -289,6 +289,22 @@ Page::Page(PDFDoc *docA, int numA, Object &&pageDict, Ref pageRefA, PageAttrs *a
-+         goto err2;
-+     }
-+
-++    if (annotsObj.isArray() && annotsObj.arrayGetLength() > 10000) {
-++        error(errSyntaxError, -1, "Page annotations object (page {0:d}) is likely malformed. Too big: ({1:d})", num, annotsObj.arrayGetLength());
-++        goto err2;
-++    }
-++    if (annotsObj.isRef()) {
-++        auto resolvedObj = getAnnotsObject();
-++        if (resolvedObj.isArray() && resolvedObj.arrayGetLength() > 10000) {
-++            error(errSyntaxError, -1, "Page annotations object (page {0:d}) is likely malformed. Too big: ({1:d})", num, resolvedObj.arrayGetLength());
-++            goto err2;
-++        }
-++        if (!resolvedObj.isArray() && !resolvedObj.isNull()) {
-++            error(errSyntaxError, -1, "Page annotations object (page {0:d}) is wrong type ({1:s})", num, resolvedObj.getTypeName());
-++            goto err2;
-++        }
-++    }
-++
-+     // contents
-+     contents = pageObj.dictLookupNF("Contents").copy();
-+     if (!(contents.isRef() || contents.isArray() || contents.isNull())) {
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-support/poppler/poppler_22.04.0.bb b/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
-index bb6e64d657..87f240616f 100644
---- a/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
-@@ -14,6 +14,10 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://CVE-2025-32364.patch \
-            file://CVE-2025-32365.patch \
-            file://CVE-2025-43903.patch \
-+           file://CVE-2025-52886-0001.patch \
-+           file://CVE-2025-52886-0002.patch \
-+           file://CVE-2025-52886-0003.patch \
-+           file://CVE-2025-52886-0004.patch \
+diff --git a/meta-filesystems/recipes-filesystems/httpfs2-fuse/httpfs2_0.1.5.bb b/meta-filesystems/recipes-filesystems/httpfs2-fuse/httpfs2_0.1.5.bb
+index 5dc3ea6632..2370633551 100644
+--- a/meta-filesystems/recipes-filesystems/httpfs2-fuse/httpfs2_0.1.5.bb
++++ b/meta-filesystems/recipes-filesystems/httpfs2-fuse/httpfs2_0.1.5.bb
+@@ -11,7 +11,7 @@ RDEPENDS:${PN} += "fuse"
+ SRC_URI += "${SOURCEFORGE_MIRROR}/project/httpfs/httpfs2/httpfs2-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "01cb4bb38deb344f540da6f1464dc7edbdeb51213ad810b8c9c282c1e17e0fc1"
+ 
+-S = "${WORKDIR}/httpfs2-${PV}"
++S = "${UNPACKDIR}/httpfs2-${PV}"
+ 
+ do_compile() {
+     oe_runmake -C ${S} httpfs2
+diff --git a/meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs_git.bb b/meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs_git.bb
+index 7d0a83609e..06051d8013 100644
+--- a/meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs_git.bb
++++ b/meta-filesystems/recipes-filesystems/logfsprogs/logfsprogs_git.bb
+@@ -18,7 +18,6 @@ SRC_URI = "git://github.com/prasad-joshi/logfsprogs.git;branch=master;protocol=h
             "
- SRC_URI[sha256sum] = "813fb4b90e7bda63df53205c548602bae728887a60f4048aae4dbd9b1927deff"
+ SRCREV = "45b72c81ce3c6fa17ca19bafc207ea93e76312f4"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "CC="${CC}" LD="${LD}" AR="${AR}""
+ 
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
+index be2a5245ce..4c7fff8ea9 100644
+--- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2022.10.3.bb
+@@ -10,7 +10,7 @@ SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz \
+            file://0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch \
+            file://0001-unistr.c-Fix-use-after-free-in-ntfs_uppercase_mbs.patch \
+ "
+-S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
++S = "${UNPACKDIR}/ntfs-3g_ntfsprogs-${PV}"
+ SRC_URI[sha256sum] = "f20e36ee68074b845e3629e6bced4706ad053804cbaf062fbae60738f854170c"
+ 
+ UPSTREAM_CHECK_URI = "https://www.tuxera.com/community/open-source-ntfs-3g/"
+diff --git a/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb
+index 7768a734d6..890c8aecc0 100644
+--- a/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb
++++ b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb
+@@ -17,7 +17,6 @@ SRC_URI = "git://github.com/owfs/owfs;branch=master;protocol=https \
+            file://owserver \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep update-rc.d pkgconfig systemd
+ 
+diff --git a/meta-filesystems/recipes-filesystems/simple-mtpfs/simple-mtpfs_0.4.0.bb b/meta-filesystems/recipes-filesystems/simple-mtpfs/simple-mtpfs_0.4.0.bb
+index b8399265cd..05a1004b65 100644
+--- a/meta-filesystems/recipes-filesystems/simple-mtpfs/simple-mtpfs_0.4.0.bb
++++ b/meta-filesystems/recipes-filesystems/simple-mtpfs/simple-mtpfs_0.4.0.bb
+@@ -11,4 +11,3 @@ inherit autotools pkgconfig
+ SRC_URI = "git://github.com/phatina/simple-mtpfs.git;protocol=https;branch=master"
+ SRCREV = "19e7bb9b608b0c0dce2ee6f56fac75901bc69529"
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+index 1f8357db00..97c7ad396e 100644
+--- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
++++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+@@ -27,6 +27,5 @@ SRC_URI = "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetfs;branch=m
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[libsecret] = "--with-libsecret=yes,--with-libsecret=no,libsecret"
+ 
+-S = "${WORKDIR}/git"
+ 
+ LDFLAGS:append:libc-musl = " -lexecinfo"
+diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
+index 569c7f6901..c3a00566ab 100644
+--- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
++++ b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/libfuse/sshfs;branch=master;protocol=https \
+            file://a1d58ae1be99571a88b8439b027abe6349b74658.patch \
+ "
+ SRCREV = "c91eb9a9a992f1a36c49a8e6f1146e45b5e1c8e7"
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig ptest
+ 
+diff --git a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.4.bb b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.4.bb
+index e8fda05365..fc474e3238 100644
+--- a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.4.bb
++++ b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.4.bb
+@@ -14,6 +14,5 @@ SRCREV = "773f1853b043eeb64b7459f903a2c65bd096f9d9"
+ DEPENDS = "fuse3"
+ RDEPENDS:${PN} = "bash"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+diff --git a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+index ca5e3302b3..f7379d8935 100644
+--- a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
++++ b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+@@ -25,7 +25,6 @@ SRCREV = "613a901a229e8a701c18f003dd0aee18453e0670"
+ 
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CFLAGS:append = " -I.. -DCONFIG_YAFFS_UTIL -DCONFIG_YAFFS_DEFINES_TYPES"
+ EXTRA_OEMAKE = "-e MAKEFLAGS="
+diff --git a/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb b/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb
+index 6fa9104236..cf56cca84c 100644
+--- a/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb
++++ b/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.2-release \
+            file://0001-fs-tests-cmd-readmmap-Replace-uint_t-with-uint32_t.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # Using both 'module' and 'autotools' classes seems a bit odd, they both
+ # define a do_compile function.
+diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
+index 4d2b909809..913b2c1d32 100644
+--- a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
++++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
+@@ -21,7 +21,6 @@ UPSTREAM_CHECK_COMMITS = "1"
+ 
+ PV = "4.9+git"
+ 
+-S = "${WORKDIR}/git"
+ 
+ export HOSTCC = "${BUILD_CC}"
+ do_configure:prepend() {
+diff --git a/meta-filesystems/recipes-utils/binfs/bindfs_1.18.0.bb b/meta-filesystems/recipes-utils/binfs/bindfs_1.18.0.bb
+index 040cbc95bb..eda41010a9 100644
+--- a/meta-filesystems/recipes-utils/binfs/bindfs_1.18.0.bb
++++ b/meta-filesystems/recipes-utils/binfs/bindfs_1.18.0.bb
+@@ -10,6 +10,5 @@ RDEPENDS:${PN} = "fuse"
+ SRC_URI = "git://github.com/mpartel/bindfs;protocol=https;branch=master;tag=${PV}"
+ SRCREV = "a276dbe66faaf7af02d967a648f7598589bf5c5b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig gettext
+diff --git a/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb b/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb
+index b4e5da6e20..645e38ca49 100644
+--- a/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb
++++ b/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb
+@@ -20,7 +20,6 @@ UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
+ 
+ RDEPENDS:${PN} = "bash btrfs-tools"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_configure[noexec] = "1"
+ do_compile[noexec] = "1"
+diff --git a/meta-filesystems/recipes-utils/e2tools/e2tools_0.1.2.bb b/meta-filesystems/recipes-utils/e2tools/e2tools_0.1.2.bb
+index d7e654babe..40c4f56650 100644
+--- a/meta-filesystems/recipes-utils/e2tools/e2tools_0.1.2.bb
++++ b/meta-filesystems/recipes-utils/e2tools/e2tools_0.1.2.bb
+@@ -18,7 +18,6 @@ SRC_URI = " \
+ 
+ SRCREV = "46da6c398e70635a296245851fcedbc56c35e824"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig ptest
+ 
+diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb
+index a51c2ef8bd..68727b008e 100644
+--- a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb
++++ b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git;
+            "
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig autotools
+ 
+diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
+index 214b3f914c..bdde0d311a 100644
+--- a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
++++ b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
+@@ -15,6 +15,5 @@ SRC_URI = "git://github.com/Gregwar/fatcat.git;branch=master;protocol=https \
+ 
+ SRCREV = "99cb99fc86eb1601ac7ae27f5bba23add04d2543"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+diff --git a/meta-filesystems/recipes-utils/fatresize/fatresize_1.1.0.bb b/meta-filesystems/recipes-utils/fatresize/fatresize_1.1.0.bb
+index 6832634f61..7f90bfd666 100644
+--- a/meta-filesystems/recipes-utils/fatresize/fatresize_1.1.0.bb
++++ b/meta-filesystems/recipes-utils/fatresize/fatresize_1.1.0.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://salsa.debian.org/parted-team/fatresize.git;protocol=https;branc
+           "
+ SRCREV = "12da22087de2ec43f0fe5af1237389e94619c483"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "parted"
+ 
+diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_v2024.07.bb b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_v2024.07.bb
+index d11ee0c479..708bbfcf02 100644
+--- a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_v2024.07.bb
++++ b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_v2024.07.bb
+@@ -11,7 +11,6 @@ SRC_URI = "\
+ 
+ SRCREV = "7a4a0c4f2c6c86aa46a40e3468e394fd4a237491"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_6.13.11.bb b/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_6.13.11.bb
+index a6cacdc3c0..86d58c3d7c 100644
+--- a/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_6.13.11.bb
++++ b/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_6.13.11.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/westerndigitalcorporation/ufs-utils.git;protocol=htt
+ 
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}" CFLAGS="${CFLAGS}""
+ 
+diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_2025.04.27.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_2025.04.27.bb
+index 2afa752b78..9e86b77c5e 100644
+--- a/meta-filesystems/recipes-utils/xfstests/xfstests_2025.04.27.bb
++++ b/meta-filesystems/recipes-utils/xfstests/xfstests_2025.04.27.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;ta
+            file://0001-bstat-use-uint32_t-instead-of-__uint32_t-to-fix-buil.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # brokensep because m4/package_globals.m4 calls ". ./VERSION" (and that's not the only issue)
+ inherit autotools-brokensep useradd pkgconfig
+diff --git a/meta-gnome/classes/clutter.bbclass b/meta-gnome/classes/clutter.bbclass
+index 24b53a13e4..6cf746261a 100644
+--- a/meta-gnome/classes/clutter.bbclass
++++ b/meta-gnome/classes/clutter.bbclass
+@@ -12,7 +12,7 @@ VERMINOR = "${@get_minor_dir("${PV}")}"
+ REALNAME = "${@get_real_name("${BPN}")}"
+ 
+ SRC_URI = "${GNOME_MIRROR}/${REALNAME}/${VERMINOR}/${REALNAME}-${PV}.tar.xz;name=archive"
+-S = "${WORKDIR}/${REALNAME}-${PV}"
++S = "${UNPACKDIR}/${REALNAME}-${PV}"
+ 
+ CLUTTERBASEBUILDCLASS ??= "autotools"
+ inherit ${CLUTTERBASEBUILDCLASS} pkgconfig gtk-doc gettext
+diff --git a/meta-gnome/recipes-connectivity/geary/geary_46.0.bb b/meta-gnome/recipes-connectivity/geary/geary_46.0.bb
+index 81aa923c03..2012534993 100644
+--- a/meta-gnome/recipes-connectivity/geary/geary_46.0.bb
++++ b/meta-gnome/recipes-connectivity/geary/geary_46.0.bb
+@@ -41,7 +41,6 @@ SRC_URI = " \
+ 	file://0001-meson-Do-not-check-for-iso-xml-files-during-build.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "46e93c0c0dafc381e8a308b1befb07e908121722"
+ 
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+diff --git a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome_0.105.bb b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome_0.105.bb
+index af1a7d8673..032532456d 100644
+--- a/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome_0.105.bb
++++ b/meta-gnome/recipes-extended/polkit-gnome/polkit-gnome_0.105.bb
+@@ -19,7 +19,6 @@ SRC_URI = " \
+     file://polkit-gnome-authentication-agent-1.desktop \
+ "
+ SRCREV = "a0763a246a81188f60b0f9810143e49224dc752f"
+-S = "${WORKDIR}/git"
+ 
+ 
+ do_install:append() {
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.4.bb b/meta-gnome/recipes-gimp/gimp/gimp_3.0.4.bb
+index 32603af310..414f9c5203 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.4.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.4.bb
+@@ -63,7 +63,6 @@ SRC_URI += "file://0001-meson.build-dont-check-for-lgi.patch"
+ SRC_URI += "file://0001-meson.build-require-iso-codes-native.patch"
+ SRCREV = "c1901c5be644ab8dcaf779b1f383bf5370bc90c6"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
+ PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib"
+diff --git a/meta-gnome/recipes-gimp/mypaint/libmypaint_git.bb b/meta-gnome/recipes-gimp/mypaint/libmypaint_git.bb
+index b0f9b82e42..b64e91a765 100644
+--- a/meta-gnome/recipes-gimp/mypaint/libmypaint_git.bb
++++ b/meta-gnome/recipes-gimp/mypaint/libmypaint_git.bb
+@@ -19,7 +19,6 @@ SRCREV = "2768251dacce3939136c839aeca413f4aa4241d0"
+ 
+ PV = "1.6.1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_AUTORECONF += "-I m4"
+ 
+diff --git a/meta-gnome/recipes-gimp/mypaint/mypaint-brushes-1.0_git.bb b/meta-gnome/recipes-gimp/mypaint/mypaint-brushes-1.0_git.bb
+index ca3912da88..b6b8ff8c1f 100644
+--- a/meta-gnome/recipes-gimp/mypaint/mypaint-brushes-1.0_git.bb
++++ b/meta-gnome/recipes-gimp/mypaint/mypaint-brushes-1.0_git.bb
+@@ -7,6 +7,5 @@ inherit autotools allarch
+ SRC_URI = "git://github.com/mypaint/mypaint-brushes.git;protocol=https;branch=v1.3.x"
+ SRCREV = "8a0124ac0675103eae8fa41fad533851768ae1ce"
+ PV = "1.3.1"
+-S = "${WORKDIR}/git"
+ 
+ FILES:${PN} += "${datadir}/mypaint-data"
+diff --git a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb
+index 9e641daa5a..2bbf73dffc 100644
+--- a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb
++++ b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.44.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/dsalt/devilspie2;branch=master;protocol=https \
+     file://devilspie2.desktop \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit features_check pkgconfig gettext
+ 
+diff --git a/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb b/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
+index 5db9457122..922c93cc53 100644
+--- a/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
++++ b/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
+@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ inherit allarch gtk-icon-cache
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ SRC_URI = "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/${BPN}/${BPN}_${PV}.zip"
+ SRC_URI[sha256sum] = "d4486fda0413f8a81a87e0dd2329f50f2a8a7cb4147b48cf147f0160add8174a"
+diff --git a/meta-gnome/recipes-gnome/gedit/libgedit-amtk_5.8.0.bb b/meta-gnome/recipes-gnome/gedit/libgedit-amtk_5.8.0.bb
+index 11da836ff4..c2e7dd67e9 100644
+--- a/meta-gnome/recipes-gnome/gedit/libgedit-amtk_5.8.0.bb
++++ b/meta-gnome/recipes-gnome/gedit/libgedit-amtk_5.8.0.bb
+@@ -8,7 +8,6 @@ DEPENDS = "glib-2.0 gtk+3"
+ inherit meson pkgconfig gobject-introspection features_check gtk-doc
+ 
+ SRC_URI = "git://github.com/gedit-technology/libgedit-amtk.git;protocol=https;branch=main"
+-S = "${WORKDIR}/git"
+ SRCREV = "f6fbfd1c57de3d97cab2056a5c3088b0da49e8a4"
+ 
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+diff --git a/meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.2.1.bb b/meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.2.1.bb
+index d66ce60802..4f21c3e569 100644
+--- a/meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.2.1.bb
++++ b/meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.2.1.bb
+@@ -8,7 +8,6 @@ DEPENDS = "glib-2.0 gtk+3 libxml2"
+ inherit meson pkgconfig gobject-introspection features_check gtk-doc
+ 
+ SRC_URI = "git://github.com/gedit-technology/libgedit-gtksourceview.git;protocol=https;branch=main"
+-S = "${WORKDIR}/git"
+ SRCREV = "eaafc892d033713c7c823d8ad602061e456b3c88"
+ 
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth3_3.34.5.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth3_3.34.5.bb
+index 2a97263125..1ceff5ffcf 100644
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth3_3.34.5.bb
++++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth3_3.34.5.bb
+@@ -9,7 +9,7 @@ SECTION = "x11/gnome"
+ DEPENDS = "udev gtk+3 libnotify libcanberra bluez5"
+ 
+ GNOMEBN = "gnome-bluetooth"
+-S = "${WORKDIR}/${GNOMEBN}-${PV}"
++S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
+ 
+ GTKDOC_MESON_OPTION = "gtk_doc"
+ 
+diff --git a/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_48.0.bb b/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_48.0.bb
+index 0e41626e6d..3aa353748b 100644
+--- a/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_48.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-chess/gnome-chess_48.0.bb
+@@ -28,7 +28,6 @@ inherit meson pkgconfig gobject-introspection gtk-icon-cache vala features_check
+ 
+ GIR_MESON_OPTION = ""
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "b0bf5288438f74fcb455e1e49f855b4964a2c7cb"
+ 
+ FILES:${PN} += "${datadir}"
+diff --git a/meta-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.bb b/meta-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.bb
+index 78606b8a2a..9e2a21d4cc 100644
+--- a/meta-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.bb
++++ b/meta-gnome/recipes-gnome/gnome-chess/gnuchess_6.2.9.bb
+@@ -8,7 +8,7 @@ SRC_URI = "https://git.savannah.gnu.org/cgit/chess.git/snapshot/chess-${PV}.tar.
+            file://0001-Remove-register-storage-class-classifier.patch"
+ SRC_URI[sha256sum] = "03f9e844ccdd48d20ee49314174404f8b643d83bb8ce9ec9d2e6a21f1b6fb9f5"
+ 
+-S = "${WORKDIR}/chess-${PV}"
++S = "${UNPACKDIR}/chess-${PV}"
+ 
+ inherit autotools gettext
+ 
+diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.54.0.bb b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.54.0.bb
+index cfbde967fd..332c2c5423 100644
+--- a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.54.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.54.0.bb
+@@ -24,7 +24,6 @@ SRC_URI = " \
+ 	file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch \
+ "
+ SRCREV = "965cb9307713c618253918633416fcad86bcc5d2"
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[nautilus] = "-Dnautilus_extension=true,-Dnautilus_extension=false,nautilus,nautilus"
+diff --git a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_47.0.bb b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_47.0.bb
+index 07d631bccb..3b087c148d 100644
+--- a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_47.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_47.0.bb
+@@ -16,7 +16,6 @@ REQUIRED_DISTRO_FEATURES = "systemd"
+ SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-user-share.git;protocol=https;branch=master"
+ SRC_URI += "file://0001-build-Define-list-of-libc-feature-test-macros.patch"
+ SRCREV = "77ecbaddab0ed2121859926acbfccc9cecdee0db"
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "modules"
+ PACKAGECONFIG[httpd] = "-Dhttpd=${sbindir}/httpd,,,apache2 mod-dnssd"
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview-classic-light_1.0.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview-classic-light_1.0.bb
+index 9d46b43c42..cefb975890 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview-classic-light_1.0.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview-classic-light_1.0.bb
+@@ -6,8 +6,7 @@ inherit allarch
+ 
+ SRC_URI = "file://classic-light.xml"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install() {
+     install -d ${D}${datadir}/gtksourceview-3.0/styles
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
+index 0ab9b14692..0e74ae5870 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
+@@ -8,7 +8,7 @@ DEPENDS = "gtk+3 libxml2 glib-2.0-native"
+ 
+ PNAME = "gtksourceview"
+ 
+-S = "${WORKDIR}/${PNAME}-${PV}"
++S = "${UNPACKDIR}/${PNAME}-${PV}"
+ 
+ GNOMEBASEBUILDCLASS = "autotools"
+ inherit gnomebase lib_package gettext features_check gtk-doc gobject-introspection upstream-version-is-even
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
+index 38ca4a39e6..e9a9bd7bd3 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
+@@ -8,7 +8,7 @@ DEPENDS = "gtk+3 libxml2 glib-2.0-native"
+ 
+ PNAME = "gtksourceview"
+ 
+-S = "${WORKDIR}/${PNAME}-${PV}"
++S = "${UNPACKDIR}/${PNAME}-${PV}"
+ 
+ inherit gnomebase lib_package gettext features_check gtk-doc gobject-introspection vala
+ 
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.16.0.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.16.0.bb
+index deab259299..7051cba2c1 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.16.0.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.16.0.bb
+@@ -16,7 +16,7 @@ DEPENDS = " \
+ 
+ PNAME = "gtksourceview"
+ 
+-S = "${WORKDIR}/${PNAME}-${PV}"
++S = "${UNPACKDIR}/${PNAME}-${PV}"
+ 
+ 
+ inherit gnomebase lib_package gettext features_check gi-docgen gtk-icon-cache gobject-introspection vala
+diff --git a/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.21.bb b/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.21.bb
+index a89ab8cc74..b7c587d25f 100644
+--- a/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.21.bb
++++ b/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.21.bb
+@@ -10,5 +10,4 @@ REQUIRED_DISTRO_FEATURES = "opengl"
+ SRCREV = "941560af497148588783db991e8135f52a82574d"
+ SRC_URI = "git://github.com/gnome/libchamplain.git;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+diff --git a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.4.bb b/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.4.bb
+index 85bc21b5da..3d8a5ed33a 100644
+--- a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.4.bb
++++ b/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.4.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ GNOMEBN = "libgweather"
+-S = "${WORKDIR}/${GNOMEBN}-${PV}"
++S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
+ 
+ inherit gnomebase gsettings gobject-introspection gettext gi-docgen vala features_check
+ 
+diff --git a/meta-gnome/recipes-gnome/tepl/tepl_6.8.0.bb b/meta-gnome/recipes-gnome/tepl/tepl_6.8.0.bb
+index 6c9c36f3ed..f4d027ebf7 100644
+--- a/meta-gnome/recipes-gnome/tepl/tepl_6.8.0.bb
++++ b/meta-gnome/recipes-gnome/tepl/tepl_6.8.0.bb
+@@ -22,7 +22,6 @@ inherit meson gobject-introspection gettext features_check pkgconfig
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ SRC_URI = "git://gitlab.gnome.org/swilmet/tepl;protocol=https;branch=main"
+ SRCREV = "16ab2567257a053bd957699f89080fafd0999035"
+-S = "${WORKDIR}/git"
+ 
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
+diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipes-support/ibus/ibus.inc
+index 9dce2ce4f3..9ec1dfe578 100644
+--- a/meta-gnome/recipes-support/ibus/ibus.inc
++++ b/meta-gnome/recipes-support/ibus/ibus.inc
+@@ -17,7 +17,6 @@ SRC_URI = " \
+     file://0001-src-Fix-declaration-errors-with-GCC-15.patch \
+ "
+ SRCREV = "6a70ab0338206bd1c7d01a4e1874ea0ee5b3a9d3"
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG[appindicator] = "--enable-appindicator,--disable-appindicator,qtbase"
+ PACKAGECONFIG[dconf] = "--enable-dconf,--disable-dconf,dconf"
+diff --git a/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb b/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
+index 5365db270e..bbd7c866e1 100644
+--- a/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
++++ b/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
+@@ -8,7 +8,6 @@ DEPENDS = "gtk+3 gobject-introspection-native \
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1f18f9c6d8b4cfcc7d7804a243a4c0b4"
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRCREV = "736ccef40d39603b8111c8a3a0bca0319bbafdc0"
+ PV = "3.0+git"
+diff --git a/meta-gnome/recipes-support/libwacom/libwacom_2.8.0.bb b/meta-gnome/recipes-support/libwacom/libwacom_2.8.0.bb
+index 8f45221ad3..f816cdf239 100644
+--- a/meta-gnome/recipes-support/libwacom/libwacom_2.8.0.bb
++++ b/meta-gnome/recipes-support/libwacom/libwacom_2.8.0.bb
+@@ -15,7 +15,6 @@ DEPENDS = " \
+     libgudev \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-gnome/recipes-support/webp-pixbuf-loader/webp-pixbuf-loader_0.2.7.bb b/meta-gnome/recipes-support/webp-pixbuf-loader/webp-pixbuf-loader_0.2.7.bb
+index 73f22a3d95..726139a6b3 100644
+--- a/meta-gnome/recipes-support/webp-pixbuf-loader/webp-pixbuf-loader_0.2.7.bb
++++ b/meta-gnome/recipes-support/webp-pixbuf-loader/webp-pixbuf-loader_0.2.7.bb
+@@ -14,7 +14,6 @@ EXTRA_OEMESON = "-Dupdate_cache=true"
+ 
+ SRC_URI = "git://github.com/aruiz/webp-pixbuf-loader.git;protocol=https;branch=mainline"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "52232e4ba282b2fed68e8fcb4b5d45ed0eaa4ed3"
+ 
+ FILES:${PN} = " \
+diff --git a/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gtk_1.15.3.bb b/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gtk_1.15.3.bb
+index 0f6a9291b8..5e83a07a4b 100644
+--- a/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gtk_1.15.3.bb
++++ b/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gtk_1.15.3.bb
+@@ -17,7 +17,6 @@ REQUIRED_DISTRO_FEATURES = "polkit"
+ 
+ SRC_URI = "git://github.com/flatpak/xdg-desktop-portal-gtk.git;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "337202d4e7179857bc37b03c1a6d8c9d92e47c44"
+ 
+ PACKAGECONFIG ?= "wallpaper appchooser lockdown settings"
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
+index d8134b228c..18b831fb72 100644
+--- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
++++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
+@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
+ 
+ SRC_URI = "file://icon.xpm"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install:prepend () {
+ echo '# /boot/boot.cfg - KEXECBOOT configuration file.
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
+index 2be9076726..00985c09c5 100644
+--- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
++++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
+@@ -4,7 +4,6 @@ HOMEPAGE = "https://github.com/kexecboot/kexecboot/wiki"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ PV = "0.6+git"
+-S = "${WORKDIR}/git"
+ SRC_URI = " \
+     git://github.com/kexecboot/kexecboot.git;branch=master;protocol=https \
+     file://0001-Fix-argument-errors-in-gcc-15.patch \
+diff --git a/meta-initramfs/recipes-core/initrdscripts/initramfs-debug_1.0.bb b/meta-initramfs/recipes-core/initrdscripts/initramfs-debug_1.0.bb
+index c2b3faddda..21dce17bb7 100644
+--- a/meta-initramfs/recipes-core/initrdscripts/initramfs-debug_1.0.bb
++++ b/meta-initramfs/recipes-core/initrdscripts/initramfs-debug_1.0.bb
+@@ -3,8 +3,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+ SRC_URI = "file://init-debug.sh"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install() {
+         install -m 0755 ${UNPACKDIR}/init-debug.sh ${D}/init
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_106.bb b/meta-initramfs/recipes-devtools/dracut/dracut_106.bb
+index 871119521f..d59b357dc1 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_106.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_106.bb
+@@ -18,7 +18,6 @@ DEPENDS:append:libc-musl = " fts"
+ 
+ inherit bash-completion pkgconfig
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF = "--prefix=${prefix} \
+                 --libdir=${nonarch_libdir} \
+diff --git a/meta-initramfs/recipes-devtools/grubby/grubby_git.bb b/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
+index ff18b0b190..60f68728e9 100644
+--- a/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
++++ b/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
+@@ -12,7 +12,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
+ DEPENDS = "popt util-linux rpm"
+ DEPENDS:append:libc-musl = " libexecinfo argp-standalone"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "c01b0d5bb182bde35b464d14996acf354a3ada2e"
+ SRC_URI = "git://github.com/rhboot/grubby.git;protocol=https;;branch=main \
+            file://0001-rename-grub2-editenv-to-grub-editenv.patch \
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 6093e19b7c..2af53b18e3 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -29,7 +29,7 @@ ARMPATCHES:arm = " \
+                  "
+ SRC_URI[sha256sum] = "d673a294f742d59368222ff5c38462d81098c55063799de6fb8a7ba3d4af0436"
+ 
+-S = "${WORKDIR}/klibc-${PV}"
++S = "${UNPACKDIR}/klibc-${PV}"
+ 
+ OPTFLAGS = "${TUNE_CCARGS} -Os -fcommon"
+ OPTFLAGS:append = " ${DEBUG_PREFIX_MAP}"
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
+index 43ddb82a00..461d75e625 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
+@@ -19,7 +19,6 @@ SRC_URI = "git://git.infradead.org/mtd-utils.git;branch=master \
+              file://0001-make-Add-compiler-includes-in-cflags.patch \
+              "
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--disable-tests --without-jffs --without-ubifs"
+ 
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+index 363cdb9adf..2df53ff38e 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+@@ -61,7 +61,6 @@ SRC_URI:append:aarch64 = " file://arm64_kexec-image-header.h-add-missing-le64toh
+ 
+ SRC_URI:append:powerpc = " file://powerpc-purgatory-Makefile-remove-unknown-flags.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--without-zlib --without-lzma --without-xen"
+ 
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.18.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.18.bb
+index 326a754ce7..5a42fc760c 100644
+--- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.18.bb
++++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.18.bb
+@@ -12,7 +12,6 @@ SRCREV = "c540ce2431bdeac73359029d4592b45790e1d154"
+ SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=branch-1.14.x \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-dvb/oscam/oscam_1.20.bb b/meta-multimedia/recipes-dvb/oscam/oscam_1.20.bb
+index e20358955a..37431dca05 100644
+--- a/meta-multimedia/recipes-dvb/oscam/oscam_1.20.bb
++++ b/meta-multimedia/recipes-dvb/oscam/oscam_1.20.bb
+@@ -9,7 +9,6 @@ DEPENDS = "libusb1 openssl pcsc-lite"
+ SRCREV = "190d6dee96ca70f8b614932b1498332b1504632b"
+ SRC_URI = "git://repo.or.cz/oscam.git;protocol=https;nobranch=1"
+ 
+-S = "${UNPACKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+index 2d79777001..6a7f6c3f5d 100644
+--- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+@@ -16,7 +16,6 @@ SRCREV = "cc602833684953fc3e6f1c89d4f08f6dfef179e3"
+ PV = "4.3+git"
+ PKGV = "4.3+git${GITPKGV}"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--arch=${TARGET_ARCH} \
+                  --disable-hdhomerun_static \
+diff --git a/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb b/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
+index 6803806063..4b439e2ca5 100644
+--- a/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
++++ b/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
+ SRC_URI = "git://github.com/Matroska-Org/libebml.git;branch=v1.x;protocol=https"
+ SRCREV = "1878e784321673561039a6a37076b2736f4dc98f"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig cmake dos2unix
+ 
+diff --git a/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.7.1.bb b/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.7.1.bb
+index 16862e690e..d38366a735 100644
+--- a/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.7.1.bb
++++ b/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.7.1.bb
+@@ -8,7 +8,6 @@ DEPENDS = "libebml"
+ SRC_URI = "git://github.com/Matroska-Org/libmatroska.git;branch=v1.x;protocol=https"
+ SRCREV = "f5315fddda2d434e47035c038549a808d8b8eac7"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig cmake
+ 
+diff --git a/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb b/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
+index b5c8ddca11..92f7270972 100644
+--- a/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
++++ b/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
+@@ -15,7 +15,7 @@ SRC_URI = " \
+ SRC_URI[md5sum] = "d2edc7710c72cbf3ab297c414e35ebda"
+ SRC_URI[sha256sum] = "916e7d152added24617efc350142438a46099efe062bd8781d36dbf10b4e6ff0"
+ 
+-S = "${WORKDIR}/alsaequal"
++S = "${UNPACKDIR}/alsaequal"
+ 
+ EXTRA_OEMAKE = " \
+     Q='' \
+diff --git a/meta-multimedia/recipes-multimedia/aom/aom_3.12.1.bb b/meta-multimedia/recipes-multimedia/aom/aom_3.12.1.bb
+index 94e3f4f14f..72baf58cf0 100644
+--- a/meta-multimedia/recipes-multimedia/aom/aom_3.12.1.bb
++++ b/meta-multimedia/recipes-multimedia/aom/aom_3.12.1.bb
+@@ -9,7 +9,6 @@ SRCREV = "10aece4157eb79315da205f39e19bf6ab3ee30d0"
+ SRC_URI = "git://aomedia.googlesource.com/aom;protocol=https;branch=main;tag=v${PV} \
+            file://0001-subpel_variance_neon-Provide-prototypes-for-missing-.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
+index f089e036e3..162a51284e 100644
+--- a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
++++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
+@@ -21,7 +21,6 @@ SRC_URI = "git://github.com/Arkq/bluez-alsa.git;protocol=https;branch=master \
+ 
+ SRCREV = "959573c2cccef5cf074f5b2fa7941abbd699c5f4"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "aplay cli hcitop ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ PACKAGECONFIG[a2dpconf] = "--enable-a2dpconf,--disable-a2dpconf"
+diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb b/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb
+index 0b844ee7d3..0928da1dbd 100644
+--- a/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb
++++ b/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb
+@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "005db45ef4ee017f5c32ec124f913a0546e77014266c6a1c50df902a55
+ 
+ # Uppercase letters are not allowed in the recipe name, thus the recipe can not be named cdparanoia-III and
+ # we need to add the path to the extracted sources explicitely:
+-S = "${WORKDIR}/cdparanoia-III-${PV}"
++S = "${UNPACKDIR}/cdparanoia-III-${PV}"
+ 
+ # cdparanoia Makefile can not be used with several threads (because the static library target and the shared
+ # library target use object files which are compiled in the same directory, the object files are just removed
+diff --git a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.1.bb b/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.1.bb
+index 47341e2106..d600e3b5e3 100644
+--- a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.1.bb
++++ b/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.5.1.bb
+@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c8055cfe7548dfdaa3a6dc45d8793669"
+ SRC_URI = "git://code.videolan.org/videolan/dav1d.git;protocol=https;nobranch=1"
+ SRCREV = "42b2b24fb8819f1ed3643aa9cf2a62f03868e3aa"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS:append:x86 = " nasm-native"
+ DEPENDS:append:x86-64 = " nasm-native"
+diff --git a/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb b/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
+index ddd4c26efe..a330d769c5 100644
+--- a/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
++++ b/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/foo86/dcadec.git;protocol=https;branch=master \
+            file://0001-define-BASELIB-make-variable.patch \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit lib_package
+ 
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0.bb
+index bed5af9bf3..21a6613622 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0.bb
+@@ -9,7 +9,6 @@ DEPENDS = "glib-2.0 dbus dleyna-core"
+ 
+ SRC_URI = "git://github.com/01org/${BPN}.git;branch=master;protocol=https"
+ SRCREV = "de913c35e5c936e2d40ddbd276ee902cd802bd3a"
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb
+index 8aaab7893e..4f743b16f6 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb
+@@ -15,7 +15,6 @@ PV .= "+git"
+ 
+ SRC_URI = "git://github.com/01org/${BPN}.git;branch=master;protocol=https"
+ SRCREV = "1c6853f5bc697dc0a8774fd70dbc915c4dbe7c5b"
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
+index a385a50de7..3e55a212d4 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/01org/${BPN}.git;branch=master;protocol=https \
+            file://0001-add-gupnp-1.2-API-support.patch \
+           "
+ SRCREV = "50fd1ec9d51328e7dea98874129dc8d6fe3ea1dd"
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
+index b0a347f252..d60abd2082 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
+@@ -14,7 +14,6 @@ RDEPENDS:${PN} = "dleyna-connector-dbus"
+ PV .= "+git"
+ SRC_URI = "git://github.com/01org/${BPN}.git;branch=master;protocol=https"
+ SRCREV = "eb895ae82715e9889a948ffa810c0f828b4f4c76"
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-multimedia/dvb-apps/dvb-apps_1.1.1.20140321.bb b/meta-multimedia/recipes-multimedia/dvb-apps/dvb-apps_1.1.1.20140321.bb
+index 833ec2a393..232130be0f 100644
+--- a/meta-multimedia/recipes-multimedia/dvb-apps/dvb-apps_1.1.1.20140321.bb
++++ b/meta-multimedia/recipes-multimedia/dvb-apps/dvb-apps_1.1.1.20140321.bb
+@@ -13,7 +13,7 @@ SRC_URI = "https://www.linuxtv.org/hg/dvb-apps/archive/3d43b280298c.tar.bz2;down
+           file://0001-dvbdate-Remove-Obsoleted-stime-API-calls.patch \
+           "
+ SRC_URI[sha256sum] = "f39e2f0ebed7e32bce83522062ad4d414f67fccd5df1b647618524497e15e057"
+-S = "${WORKDIR}/${BPN}-3d43b280298c"
++S = "${UNPACKDIR}/${BPN}-3d43b280298c"
+ 
+ inherit perlnative
+ 
+diff --git a/meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.2.bb b/meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.2.bb
+index 55475b40f1..97196bbcf2 100644
+--- a/meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.2.bb
++++ b/meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.2.bb
+@@ -14,7 +14,6 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=5985e1e12f4afa710d64ed7bfd291875"
+ SRC_URI = "git://github.com/mstorsjo/fdk-aac.git;protocol=https;branch=master"
+ SRCREV = "801f67f671929311e0c9952c5f92d6e147c7b003"
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRC_URI[md5sum] = "fef453b5d6ee28ff302c600b8cded3e7"
+ SRC_URI[sha256sum] = "07c2a64b098eb48b2e9d729d5e778c08f7d22f28adc8da7c3f92c58da1cbbd8e"
+diff --git a/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb b/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
+index bb9edfd5bf..af543af80e 100644
+--- a/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
++++ b/meta-multimedia/recipes-multimedia/flite/flite_2.2.bb
+@@ -13,7 +13,6 @@ SRC_URI += "file://0001-Remove-defining-const-as-nothing.patch"
+ 
+ SRCREV = "e9e2e37c329dbe98bfeb27a1828ef9a71fa84f88"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--enable-shared"
+ 
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.4.5.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.4.5.bb
+index 62900011a1..b8396209c5 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.4.5.bb
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_2.4.5.bb
+@@ -13,7 +13,6 @@ SRC_URI = " \
+ "
+ SRCREV = "9f2edaa3cbd456997cb420fb68b6f960faaafd12"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig lib_package
+ 
+diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.4.1.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.4.1.bb
+index c12be91664..6348f25a57 100644
+--- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.4.1.bb
++++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.4.1.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
+ SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master"
+ SRCREV = "870dd32d42f626dc2246d34b2224ffb6fd73e205"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "pugixml sqlite3 zlib fmt spdlog util-linux-libuuid libupnp libnsl2"
+ 
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.8.1.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.8.1.bb
+index dc43bed63b..e1c903f6ed 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.8.1.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.8.1.bb
+@@ -15,11 +15,10 @@ SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
+ SRCREV_FORMAT = "default_common"
+ SRC_URI = " \
+     git://github.com/RidgeRun/gst-shark.git;protocol=https;branch=${SRCBRANCH} \
+-    git://gitlab.freedesktop.org/gstreamer/common.git;protocol=https;branch=master;destsuffix=git/common;name=common \
++    git://gitlab.freedesktop.org/gstreamer/common.git;protocol=https;branch=master;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/common;name=common \
+     file://0001-tracers-Fix-buffer-overflow.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += " \
+     --disable-graphviz \
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_git.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_git.bb
+index 4720edf153..d068d66bb6 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_git.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_git.bb
+@@ -11,7 +11,6 @@ SRCBRANCH ?= "master"
+ SRCREV = "dac03d5e4102080a8f3ef274a6a6583455962095"
+ SRC_URI = "git://git@github.com/RidgeRun/gstd-1.x.git;protocol=https;branch=${SRCBRANCH} \
+            file://0001-gstd-Remove-redundant-rpaths.patch"
+-S = "${WORKDIR}/git"
+ 
+ # Remove the +really when upstream version is > 1.0
+ PV = "1.0+really0.15.2"
+diff --git a/meta-multimedia/recipes-multimedia/juce/projucer.inc b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+index b60cba1dd6..999891c232 100644
+--- a/meta-multimedia/recipes-multimedia/juce/projucer.inc
++++ b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+@@ -21,7 +21,6 @@ SRC_URI = "git://github.com/WeAreROLI/JUCE.git;protocol=https;branch=${BRANCH} \
+            file://0001-StandardHeader-Include-utility-for-GCC-12-compatibil.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ PV = "6.1.6"
+ 
+ JUCE_PROJUCER_BUILD_PATH = "${B}/extras/Projucer/Builds"
+diff --git a/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb b/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb
+index 885758b6a4..9a82cd86bb 100644
+--- a/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb
++++ b/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c528b75b07425b5c1d2e34de98c397b5"
+ 
+ SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=v1.0.x"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "d1c26facaf5a8a97919ceee06814d05d10e25622"
+ 
+ DEPENDS = "dav1d"
+diff --git a/meta-multimedia/recipes-multimedia/libavtp/libavtp_0.2.0.bb b/meta-multimedia/recipes-multimedia/libavtp/libavtp_0.2.0.bb
+index 98f8e5b84d..69d33c9f6a 100644
+--- a/meta-multimedia/recipes-multimedia/libavtp/libavtp_0.2.0.bb
++++ b/meta-multimedia/recipes-multimedia/libavtp/libavtp_0.2.0.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/Avnu/libavtp.git;branch=master;protocol=https"
+ SRC_URI:append:libc-musl = " file://0001-provide-64bit-host-to-network-conversion-macros.patch"
+ SRCREV = "3599a5bf2d18fc3ae89b64f208d8380e6ee3a866"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
+index 3d43b4f1da..c7fe631a43 100644
+--- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.4.0.bb
+@@ -18,7 +18,6 @@ SRCREV = "35ed4b91291d9f3d08e4b51acfb51163e65df8f8"
+ 
+ PE = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls chrpath-native libevent libyaml"
+ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
+diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.15.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.15.bb
+index e9d5107986..a509337894 100644
+--- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.15.bb
++++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.15.bb
+@@ -11,7 +11,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
+ SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https"
+ SRCREV = "17bb8d9fcea62db8cdeb0fc7ef8d15dbd19a22e4"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb b/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb
+index bfa6de90d3..93bdc63b56 100644
+--- a/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb
++++ b/meta-multimedia/recipes-multimedia/libdvbcsa/libdvbcsa_1.1.0.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://code.videolan.org/videolan/libdvbcsa.git;protocol=https;branch=
+            file://libdvbcsa.pc \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools lib_package pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-multimedia/libheif/libheif_1.19.8.bb b/meta-multimedia/recipes-multimedia/libheif/libheif_1.19.8.bb
+index ac469fce87..a3f5f21406 100644
+--- a/meta-multimedia/recipes-multimedia/libheif/libheif_1.19.8.bb
++++ b/meta-multimedia/recipes-multimedia/libheif/libheif_1.19.8.bb
+@@ -8,7 +8,6 @@ COMPATIBLE_MACHINE:powerpc64le = "null"
+ 
+ SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "5e9deb19fe6b3768af0bb8e9e5e8438b15171bf3"
+ 
+ inherit cmake pkgconfig
+diff --git a/meta-multimedia/recipes-multimedia/liblc3/liblc3_1.0.4.bb b/meta-multimedia/recipes-multimedia/liblc3/liblc3_1.0.4.bb
+index 7f531efc63..bcf91b5453 100644
+--- a/meta-multimedia/recipes-multimedia/liblc3/liblc3_1.0.4.bb
++++ b/meta-multimedia/recipes-multimedia/liblc3/liblc3_1.0.4.bb
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+ SRC_URI = "git://github.com/google/liblc3.git;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "1a5938ebaca4f13fe79ce074f5dee079783aa29f"
+ 
+ inherit pkgconfig meson
+diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.10.bb b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.10.bb
+index f59220d0da..613147598a 100644
+--- a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.10.bb
++++ b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.10.bb
+@@ -16,7 +16,7 @@ SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release
+           "
+ SRC_URI[sha256sum] = "093713c1c1024f4f10c4779a66ceb2af51fb7c908a9e99feb892d04019220ba1"
+ 
+-S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
++S = "${UNPACKDIR}/libopenmpt-${PV}+release.autotools"
+ 
+ inherit autotools pkgconfig ptest
+ 
+diff --git a/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb b/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
+index 3d631ea0b6..d7325abd7a 100644
+--- a/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
++++ b/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/OpenELEC/libsquish.git;protocol=https;branch=master
+            file://0001-Add-support-for-variable-libdir.patch \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "INSTALL_DIR=${D}${prefix} LIBDIR_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
+                 ${@bb.utils.contains('TUNE_FEATURES', 'altivec', 'USE_ALTIVEC=1', '', d)}"
+diff --git a/meta-multimedia/recipes-multimedia/libuvc/libuvc_0.0.7.bb b/meta-multimedia/recipes-multimedia/libuvc/libuvc_0.0.7.bb
+index b1572b32ac..10e64e9878 100644
+--- a/meta-multimedia/recipes-multimedia/libuvc/libuvc_0.0.7.bb
++++ b/meta-multimedia/recipes-multimedia/libuvc/libuvc_0.0.7.bb
+@@ -9,6 +9,5 @@ DEPENDS = "libusb jpeg"
+ SRC_URI = "git://github.com/libuvc/libuvc.git;branch=master;protocol=https"
+ SRCREV = "68d07a00e11d1944e27b7295ee69673239c00b4b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+diff --git a/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb b/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
+index 76f51196aa..b9093d19bb 100644
+--- a/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
++++ b/meta-multimedia/recipes-multimedia/mimic/mimic_1.3.0.1.bb
+@@ -27,6 +27,5 @@ SRC_URI = "git://github.com/MycroftAI/mimic1.git;branch=master;protocol=https \
+ 
+ inherit autotools pkgconfig
+ 
+-S = "${WORKDIR}/git"
+ 
+ CPPFLAGS:append = " -Wno-error"
+diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
+index 170e676b24..cb2a1865e8 100644
+--- a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
++++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
+@@ -15,7 +15,6 @@ SRC_URI = "git://git.code.sf.net/p/minidlna/git;branch=master;module=git \
+            file://0001-Add-compatibility-with-FFMPEG-7.0.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # This remove "--exclude=autopoint" option from autoreconf argument to avoid
+ # configure.ac:30: error: required file './ABOUT-NLS' not found
+diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+index 2b373d31e5..1ae43e8aef 100644
+--- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
++++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git;branch=master;protocol
+            file://0001-http-fetch-Pass-a-non-null-buffer-to-ne_set_request_.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.22.bb b/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.22.bb
+index 2746c6bb80..a9dae6073a 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.22.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.22.bb
+@@ -9,7 +9,6 @@ SRC_URI = " \
+     git://github.com/MusicPlayerDaemon/libmpdclient;branch=master;protocol=https \
+ "
+ SRCREV = "7124a0ad4841a44db084bb785a6e7120bc8f0139"
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "tcp"
+ PACKAGECONFIG[tcp] = "-Dtcp=true,-Dtcp=false"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpc_0.35.bb b/meta-multimedia/recipes-multimedia/musicpd/mpc_0.35.bb
+index 93df25ee2f..6f337febb3 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpc_0.35.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpc_0.35.bb
+@@ -10,4 +10,3 @@ DEPENDS += "libmpdclient"
+ SRC_URI = "git://github.com/MusicPlayerDaemon/mpc;branch=master;protocol=https"
+ SRCREV = "31c900b79b3a1cd7f2944e92f24223d12589fdaa"
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.24.3.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.24.3.bb
+index 7250c22a68..d1dd4d7442 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.24.3.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.24.3.bb
+@@ -23,7 +23,6 @@ SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
+            "
+ SRCREV = "063abb31a68f7ee92a246256eec4234ab8b7ed8b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)} \
+     -Dadplug=disabled \
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.49.bb b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.49.bb
+index d93c054f45..626897aa3b 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.49.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.49.bb
+@@ -34,4 +34,3 @@ PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
+ 
+ SRC_URI = "git://github.com/MusicPlayerDaemon/ncmpc;branch=master;protocol=https"
+ SRCREV = "f81f875fc5785383d24f54fb9bd3cf06efd915a4"
+-S = "${WORKDIR}/git"
+diff --git a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
+index 8bedc693ba..bdc4d7280c 100644
+--- a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
++++ b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
+@@ -20,7 +20,6 @@ SRC_URI = "git://github.com/MycroftAI/mycroft-core.git;branch=master;protocol=ht
+            file://mycroft.service \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit systemd features_check
+ 
+diff --git a/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers_12.1.14.0.bb b/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers_12.1.14.0.bb
+index 36885f29e2..6ac74748be 100644
+--- a/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers_12.1.14.0.bb
++++ b/meta-multimedia/recipes-multimedia/nv-codec-headers/nv-codec-headers_12.1.14.0.bb
+@@ -8,7 +8,6 @@ SRC_URI = " \
+     file://0001-Makefile-add-clean-target.patch \
+ "
+ SRCREV = "1889e62e2d35ff7aa9baca2bceb14f053785e6f1"
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D} LIBDIR=${baselib}"
+ 
+diff --git a/meta-multimedia/recipes-multimedia/openal/openal-soft_1.24.3.bb b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.24.3.bb
+index d57c9b5c64..4204017c20 100644
+--- a/meta-multimedia/recipes-multimedia/openal/openal-soft_1.24.3.bb
++++ b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.24.3.bb
+@@ -10,7 +10,6 @@ DEPENDS = "zlib libsndfile1"
+ SRCREV = "dc7d7054a5b4f3bec1dc23a42fd616a0847af948"
+ SRC_URI = "git://github.com/kcat/openal-soft.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'alsa pipewire pulseaudio', d)}"
+ PACKAGECONFIG[alsa] = "-DALSOFT_BACKEND_ALSA=ON,-DALSOFT_BACKEND_ALSA=OFF,alsa-lib"
+diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264_2.6.0.bb b/meta-multimedia/recipes-multimedia/openh264/openh264_2.6.0.bb
+index 0226745bbc..b210454efd 100644
+--- a/meta-multimedia/recipes-multimedia/openh264/openh264_2.6.0.bb
++++ b/meta-multimedia/recipes-multimedia/openh264/openh264_2.6.0.bb
+@@ -11,7 +11,6 @@ DEPENDS = " nasm-native"
+ 
+ inherit meson pkgconfig
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "19120fcb8f89b16126e9cfee096b2f0751554fdc"
+ BRANCH = "openh264v${PV}"
+ SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH} \
+diff --git a/meta-multimedia/recipes-multimedia/opus-tools/opus-tools_0.2.bb b/meta-multimedia/recipes-multimedia/opus-tools/opus-tools_0.2.bb
+index b76c5ba01d..92df308ce0 100644
+--- a/meta-multimedia/recipes-multimedia/opus-tools/opus-tools_0.2.bb
++++ b/meta-multimedia/recipes-multimedia/opus-tools/opus-tools_0.2.bb
+@@ -8,7 +8,7 @@ SRC_URI = "http://downloads.xiph.org/releases/opus/opus-tools-${PV}.tar.gz"
+ SRC_URI[md5sum] = "ff2d0536e960cabbfb8ca7c8c1759b6c"
+ SRC_URI[sha256sum] = "b4e56cb00d3e509acfba9a9b627ffd8273b876b4e2408642259f6da28fa0ff86"
+ 
+-S = "${WORKDIR}/opus-tools-${PV}"
++S = "${UNPACKDIR}/opus-tools-${PV}"
+ 
+ DEPENDS = "libopus libopusenc flac opusfile"
+ 
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
+index 184ed45d2d..dde0039584 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_0.4.2.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://gitlab.freedesktop.org/pipewire/media-session.git;protocol=http
+            file://0001-pass-right-types-to-methods.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "80dae7e24bec02b2befe09a72fbac6e2b38ccb5c"
+ 
+ inherit meson pkgconfig
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.5.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.5.bb
+index d4ae3381bd..e41cfd221c 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.5.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.5.bb
+@@ -16,7 +16,6 @@ SRCREV = "83ada1e086f8fa49bf9652df2edd9ccee5efa48b"
+ BRANCH = "${@oe.utils.trim_version('${PV}', 2)}"
+ SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=${BRANCH};protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig systemd gettext useradd
+ 
+diff --git a/meta-multimedia/recipes-multimedia/rtmpdump/rtmpdump_2.6.bb b/meta-multimedia/recipes-multimedia/rtmpdump/rtmpdump_2.6.bb
+index 9297641c88..c02b45054f 100644
+--- a/meta-multimedia/recipes-multimedia/rtmpdump/rtmpdump_2.6.bb
++++ b/meta-multimedia/recipes-multimedia/rtmpdump/rtmpdump_2.6.bb
+@@ -13,7 +13,6 @@ SRC_URI = " \
+     git://git.ffmpeg.org/rtmpdump;branch=master \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_STATUS_GROUPS += "CVES_2015"
+ CVES_2015 = "CVE-2015-8270 CVE-2015-8271 CVE-2015-8272"
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
+index 5eba4da207..e650007f73 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
+@@ -9,8 +9,7 @@ SRC_URI[sha256sum] = "69fe2cfe7154a6e752688e3a0d7d6b07b1605bbaf75b56f6470dc7b4c2
+ 
+ inherit allarch
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install() {
+     install -d ${D}${datadir}/movies
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
+index 29e60cb0a8..945a27b233 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
+@@ -9,8 +9,7 @@ SRC_URI[sha256sum] = "40d1cf5bc8e1b0e55dac7bb2e3fbc2aea05b6679444864781299b24db0
+ 
+ inherit allarch
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install() {
+     install -d ${D}${datadir}/movies
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
+index 50ea2e3c88..94787142b9 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
+@@ -9,8 +9,7 @@ SRC_URI[sha256sum] = "b957d6e6212638441b52d3b620af157cc8d40c2a0342669294854a06ed
+ 
+ inherit allarch
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install() {
+     install -d ${D}${datadir}/movies
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
+index ed3ff75ac0..293c73135d 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
+@@ -8,8 +8,7 @@ SRC_URI[sha256sum] = "bd2b5bc6c16d4085034f47ef7e4b3938afe86b4eec4ac3cf2685367d3b
+ 
+ inherit allarch
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install() {
+     install -d ${D}${datadir}/movies
+diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
+index 8607af64ed..90a7a85df8 100644
+--- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
++++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
+@@ -41,7 +41,6 @@ SRC_URI = "git://git.code.sf.net/p/sox/code;protocol=https;branch=master \
+ # last release was in 2015, use latest hash from 2024-05-30
+ PV .= "+git"
+ SRCREV = "f3094754a7c2a7e55c35621d20fa9945736e72df"
+-S = "${WORKDIR}/git"
+ 
+ CVE_PRODUCT:append = " libsox_project:libsox sound_exchange_project:sound_exchange"
+ 
+diff --git a/meta-multimedia/recipes-multimedia/spandsp/spandsp_git.bb b/meta-multimedia/recipes-multimedia/spandsp/spandsp_git.bb
+index f115553fd1..9993837f19 100644
+--- a/meta-multimedia/recipes-multimedia/spandsp/spandsp_git.bb
++++ b/meta-multimedia/recipes-multimedia/spandsp/spandsp_git.bb
+@@ -28,7 +28,6 @@ SRC_URI = "\
+ # https://lists.openembedded.org/g/openembedded-devel/message/109325
+ SRCREV = "df1282eb9af538ab1aadb6d66146e258451d4fe4"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa_2.0.0.bb b/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa_2.0.0.bb
+index b513e959d3..8965c8ee75 100644
+--- a/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa_2.0.0.bb
++++ b/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa_2.0.0.bb
+@@ -10,7 +10,6 @@ PV .= "+git"
+ SRCREV = "f78ed25aced2dfea743867b8205a787bfb091340"
+ SRC_URI = "git://github.com/tinyalsa/tinyalsa;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson
+ 
+diff --git a/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
+index f8ab1bf680..f195a4a654 100644
+--- a/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
++++ b/meta-multimedia/recipes-multimedia/tremor/tremor_20180319.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://gitlab.xiph.org/xiph/tremor.git;protocol=https;branch=master \
+ "
+ SRCREV = "7c30a66346199f3f09017a09567c6c8a3a0eedc8"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb
+index 15ddcdb04e..08104cbc62 100644
+--- a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb
++++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-1_1.3.bb
+@@ -15,7 +15,7 @@ SRC_URI = " \
+     file://0001-task_queue-fix-build-with-gcc-15.patch \
+ "
+ SRC_URI[sha256sum] = "2365e93e778d7b61b5d6e02d21c47d97222e9c7deff9e1d0838ad6ec2e86f1b9"
+-S = "${WORKDIR}/webrtc-audio-processing-${PV}"
++S = "${UNPACKDIR}/webrtc-audio-processing-${PV}"
+ 
+ LDFLAGS:append:libc-musl = " -lexecinfo"
+ 
+diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb
+index 8eab2c4ff0..9aab57a089 100644
+--- a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb
++++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb
+@@ -13,7 +13,7 @@ SRC_URI = " \
+     file://e9c78dc4712fa6362b0c839ad57b6b46dce1ba83.patch \
+ "
+ SRC_URI[sha256sum] = "ae9302824b2038d394f10213cab05312c564a038434269f11dbf68f511f9f9fe"
+-S = "${WORKDIR}/webrtc-audio-processing-${PV}"
++S = "${UNPACKDIR}/webrtc-audio-processing-${PV}"
+ 
+ LDFLAGS:append:libc-musl = " -lexecinfo"
+ # | riscv32-yoe-linux-musl-ld.lld: error: undefined reference: __atomic_store_8
+diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.10.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.10.bb
+index 9140b724d1..8e50378bfd 100644
+--- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.10.bb
++++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.10.bb
+@@ -16,7 +16,6 @@ SRC_URI = " \
+     file://90-OE-disable-session-dbus-dependent-features.lua \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig gobject-introspection systemd
+ 
+diff --git a/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb b/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
+index ae0f7758c1..dedc3aa4d3 100644
+--- a/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
++++ b/meta-multimedia/recipes-multimedia/x265/x265_4.1.bb
+@@ -13,7 +13,7 @@ SRC_URI = " \
+     file://0001-json11.cpp-Include-cstdint.patch \
+ "
+ SRC_URI[sha256sum] = "a31699c6a89806b74b0151e5e6a7df65de4b49050482fe5ebf8a4379d7af8f29"
+-S = "${WORKDIR}/x265_${PV}/source"
++S = "${UNPACKDIR}/x265_${PV}/source"
+ 
+ inherit lib_package cmake pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-support/crossguid/crossguid_0.2.2.bb b/meta-multimedia/recipes-support/crossguid/crossguid_0.2.2.bb
+index 5e680c4640..811a876885 100644
+--- a/meta-multimedia/recipes-support/crossguid/crossguid_0.2.2.bb
++++ b/meta-multimedia/recipes-support/crossguid/crossguid_0.2.2.bb
+@@ -11,7 +11,6 @@ SRCREV = "ca1bf4b810e2d188d04cb6286f957008ee1b7681"
+ SRC_URI = "git://github.com/graeme-hill/crossguid;protocol=https;branch=master \
+            file://0001-include-missing-cstdint.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-multimedia/recipes-support/gst-instruments/gst-instruments_git.bb b/meta-multimedia/recipes-support/gst-instruments/gst-instruments_git.bb
+index 04d16ffe11..b3953cf5c3 100644
+--- a/meta-multimedia/recipes-support/gst-instruments/gst-instruments_git.bb
++++ b/meta-multimedia/recipes-support/gst-instruments/gst-instruments_git.bb
+@@ -10,7 +10,6 @@ PV = "0.3.1+git"
+ 
+ SRC_URI = "git://github.com/kirushyk/gst-instruments.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit vala meson pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.6.bb b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.6.bb
+index 376dd15d17..c5d497c468 100644
+--- a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.6.bb
++++ b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.6.bb
+@@ -13,7 +13,7 @@ inherit gnomebase gobject-introspection vala features_check
+ SRC_URI = "${GNOME_MIRROR}/libmediaart/1.9/libmediaart-${PV}.tar.xz"
+ SRC_URI[sha256sum] = "c3bc5025d7db380587f9c8eb800c611f6b5a16d6b4b78fcff93f62876a677f17"
+ 
+-S = "${WORKDIR}/libmediaart-${PV}"
++S = "${UNPACKDIR}/libmediaart-${PV}"
+ 
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp_2.5.0.bb b/meta-multimedia/recipes-support/libsrtp/libsrtp_2.5.0.bb
+index d1cbe0f590..9130b290b9 100644
+--- a/meta-multimedia/recipes-support/libsrtp/libsrtp_2.5.0.bb
++++ b/meta-multimedia/recipes-support/libsrtp/libsrtp_2.5.0.bb
+@@ -11,7 +11,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2909fcf6f09ffff8430463d91c08c4e1"
+ SRC_URI = "git://github.com/cisco/libsrtp.git;branch=main;protocol=https"
+ SRCREV = "a566a9cfcd619e8327784aa7cff4a1276dc1e895"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[nss] = "-Dcrypto-library=nss,, nss,,, openssl"
+diff --git a/meta-multimedia/recipes-support/srt/srt_1.4.4.bb b/meta-multimedia/recipes-support/srt/srt_1.4.4.bb
+index d6cf36dfbe..91651fda8e 100644
+--- a/meta-multimedia/recipes-support/srt/srt_1.4.4.bb
++++ b/meta-multimedia/recipes-support/srt/srt_1.4.4.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/Haivision/srt;protocol=https;branch=master \
+            file://0001-don-t-install-srt-ffplay.patch \
+            "
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.7.0.bb b/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.7.0.bb
+index 0b90bc0db9..c3056c9e86 100644
+--- a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.7.0.bb
++++ b/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.7.0.bb
+@@ -19,7 +19,6 @@ REQUIRED_DISTRO_FEATURES = "opengl wayland"
+ SRC_URI = "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;branch=master \
+            file://0001-screencast-Fix-build-with-older-mesa.patch"
+ 
+-S = "${WORKDIR}/git"
+ PV .= "+git"
+ SRCREV = "d9ada849aeca6137915de2df69beaef4e272cc1d"
+ 
+diff --git a/meta-networking/dynamic-layers/meta-python/recipes-printing/system-config-printer/system-config-printer_1.5.18.bb b/meta-networking/dynamic-layers/meta-python/recipes-printing/system-config-printer/system-config-printer_1.5.18.bb
+index 6cd25e346a..ac23182009 100644
+--- a/meta-networking/dynamic-layers/meta-python/recipes-printing/system-config-printer/system-config-printer_1.5.18.bb
++++ b/meta-networking/dynamic-layers/meta-python/recipes-printing/system-config-printer/system-config-printer_1.5.18.bb
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SRC_URI = "git://github.com/OpenPrinting/system-config-printer.git;protocol=https;branch=master"
+ 
+ SRCREV = "895d3dec50c93bfd4f142bac9bfcc13051bf84cb"
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools gettext pkgconfig python3native features_check
+ 
+diff --git a/meta-networking/recipes-connectivity/adcli/adcli_0.9.2.bb b/meta-networking/recipes-connectivity/adcli/adcli_0.9.2.bb
+index c5dcccbac5..2f15abbcfd 100644
+--- a/meta-networking/recipes-connectivity/adcli/adcli_0.9.2.bb
++++ b/meta-networking/recipes-connectivity/adcli/adcli_0.9.2.bb
+@@ -8,7 +8,6 @@ SRCREV = "8e88e3590a19006362ea8b8dfdc18bb88b3cb3b5"
+ 
+ SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ LICENSE = "LGPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=23c2a5e0106b99d75238986559bb5fc6"
+diff --git a/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb b/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
+index 39569e9d06..17ef3c99cb 100644
+--- a/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
++++ b/meta-networking/recipes-connectivity/bearssl/bearssl_0.6.bb
+@@ -40,7 +40,6 @@ EXTRA_OEMAKE += 'CC="${CC}" CFLAGS="${CFLAGS}" LDDLL="${CCLD} ${LDFLAGS}" LD="${
+                  ${@ "STATICLIB=no" if d.getVar('DISABLE_STATIC') != "" else "" } \
+ '
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+ 	install -d ${D}/${bindir} ${D}/${libdir} ${D}/${includedir}
+diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.4.4.bb b/meta-networking/recipes-connectivity/blueman/blueman_2.4.4.bb
+index 629e1bc8cd..4a2e3a3ba0 100644
+--- a/meta-networking/recipes-connectivity/blueman/blueman_2.4.4.bb
++++ b/meta-networking/recipes-connectivity/blueman/blueman_2.4.4.bb
+@@ -9,7 +9,6 @@ inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon-cache f
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+ 
+ SRC_URI = "git://github.com/blueman-project/blueman.git;protocol=https;branch=2-4-stable"
+-S = "${WORKDIR}/git"
+ SRCREV = "bdacba8afe53066bc3a338997e26fee416af2261"
+ 
+ EXTRA_OEMESON = "-Druntime_deps_check=false \
+diff --git a/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb b/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
+index 5b784d9a04..e1f01de8a0 100644
+--- a/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
++++ b/meta-networking/recipes-connectivity/bluepy/bluepy_git.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/IanHarvey/bluepy.git;protocol=https;branch=master \
+            file://0001-bluepy-Fix-username-issue-with-tarballs.patch \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3 pkgconfig
+ 
+diff --git a/meta-networking/recipes-connectivity/bluez-tools/bluez-tools_git.bb b/meta-networking/recipes-connectivity/bluez-tools/bluez-tools_git.bb
+index 22005632c2..ab9cebaf38 100644
+--- a/meta-networking/recipes-connectivity/bluez-tools/bluez-tools_git.bb
++++ b/meta-networking/recipes-connectivity/bluez-tools/bluez-tools_git.bb
+@@ -17,7 +17,6 @@ SRC_URI = "\
+ "
+ SRCREV = "f65321736475429316f07ee94ec0deac8e46ec4a"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.bb b/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.bb
+index dfa7437ba8..835f33055a 100644
+--- a/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.bb
++++ b/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.bb
+@@ -11,7 +11,6 @@ LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ inherit cmake
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "lksctp-tools"
+ PACKAGECONFIG[lksctp-tools] = "-DSCTP_SUPPORT=true, -DSCTP_SUPPORT=false, lksctp-tools"
+diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
+index a7e81213c3..06d78b9328 100644
+--- a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
++++ b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/civetweb/civetweb.git;branch=master;protocol=https \
+            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # civetweb supports building with make or cmake (although cmake lacks few features)
+ inherit cmake
+diff --git a/meta-networking/recipes-connectivity/daq/libdaq_3.0.19.bb b/meta-networking/recipes-connectivity/daq/libdaq_3.0.19.bb
+index a8436ea84d..23a439a989 100644
+--- a/meta-networking/recipes-connectivity/daq/libdaq_3.0.19.bb
++++ b/meta-networking/recipes-connectivity/daq/libdaq_3.0.19.bb
+@@ -14,6 +14,5 @@ SRC_URI = "git://github.com/snort3/libdaq.git;protocol=https;branch=master \
+ 
+ SRCREV = "434f205cbd45de0961cc42e541b5bf54569e912a"
+ 
+-S = "${WORKDIR}/git"
+ 
+ FILES:${PN} += "${libdir}/daq/*.so"
+diff --git a/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb
+index e458321e6e..8a33feec21 100644
+--- a/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb
++++ b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb
+@@ -24,7 +24,7 @@ SRC_URI[sha256sum] = "0ac416bb55997ca8632174fd10737fd61cdb8dba2752160a335775bc21
+ UPSTREAM_CHECK_URI = "http://ftp.isc.org/isc/dhcp/"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+\.\d+\.(\d+?))/"
+ 
+-S = "${WORKDIR}/dhcp-4.4.3-P1"
++S = "${UNPACKDIR}/dhcp-4.4.3-P1"
+ 
+ inherit autotools-brokensep systemd pkgconfig
+ 
+diff --git a/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb b/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb
+index cc36fbd4f0..1dff38f0d5 100644
+--- a/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb
++++ b/meta-networking/recipes-connectivity/dibbler/dibbler_git.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/tomaszmrugalski/dibbler;branch=master;protocol=https
+            "
+ PV = "1.0.1+1.0.2RC1+git${SRCREV}"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "debug bind-reuse resolvconf dns-update"
+ 
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb
+index 5abdd97594..fea4d858ed 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb
+@@ -48,7 +48,6 @@ CVE_STATUS[CVE-2011-4966] = "fixed-version: The CPE in the NVD database doesn't
+ 
+ PARALLEL_MAKE = ""
+ 
+-S = "${WORKDIR}/git"
+ 
+ LDFLAGS:append:powerpc = " -latomic"
+ LDFLAGS:append:mipsarch = " -latomic"
+diff --git a/meta-networking/recipes-connectivity/libdnet/libdnet_1.18.0.bb b/meta-networking/recipes-connectivity/libdnet/libdnet_1.18.0.bb
+index 75aaf521c4..f79121b142 100644
+--- a/meta-networking/recipes-connectivity/libdnet/libdnet_1.18.0.bb
++++ b/meta-networking/recipes-connectivity/libdnet/libdnet_1.18.0.bb
+@@ -10,7 +10,6 @@ SRCREV = "3dfbe889b1f65077efe579da34fc1d6819fcb7f3"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "libdnet-(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools multilib_script pkgconfig
+ 
+diff --git a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.3.bb b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.3.bb
+index 0e1f50164a..cfded66e41 100644
+--- a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.3.bb
++++ b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.3.bb
+@@ -20,7 +20,6 @@ SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5;protocol=https
+            file://0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig python3-dir python3native siteinfo
+ 
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
+index b6938b2991..950c1ff52d 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
+@@ -22,7 +22,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
+ 
+ SECTION = "libs"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "2fc8413bfcb51354c8e679141b17b3f1a5942561"
+ SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-2.28 \
+            file://run-ptest \
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.3.1.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.3.1.bb
+index 1e99f92306..0b64d661c4 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.3.1.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.3.1.bb
+@@ -22,7 +22,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
+ 
+ SECTION = "libs"
+ 
+-S = "${WORKDIR}/git"
+ SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=main;tag=v${PV} \
+            file://run-ptest \
+            "
+diff --git a/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.1.bb b/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.1.bb
+index c250ea8779..8dce6c5c4a 100644
+--- a/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.1.bb
++++ b/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.1.bb
+@@ -12,7 +12,6 @@ SECTION = "libs/networking"
+ SRC_URI = "git://github.com/nanomsg/nanomsg.git;protocol=https;branch=master"
+ SRCREV = "fc3f684a80151a3319446fc96083a9ff384ee4fe"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-networking/recipes-connectivity/nanomsg/nng_1.7.3.bb b/meta-networking/recipes-connectivity/nanomsg/nng_1.7.3.bb
+index 9ae3b89371..8d681f495e 100644
+--- a/meta-networking/recipes-connectivity/nanomsg/nng_1.7.3.bb
++++ b/meta-networking/recipes-connectivity/nanomsg/nng_1.7.3.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a41e579bb4326c21c774f8e51e41d8a3"
+ SRC_URI = "git://github.com/nanomsg/nng.git;branch=main;protocol=https"
+ SRCREV = "85fbe7f9e4642b554d0d97f2e3ff2aa12978691a"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-networking/recipes-connectivity/nanomsg/nngpp_git.bb b/meta-networking/recipes-connectivity/nanomsg/nngpp_git.bb
+index b52154025b..aac26966f1 100644
+--- a/meta-networking/recipes-connectivity/nanomsg/nngpp_git.bb
++++ b/meta-networking/recipes-connectivity/nanomsg/nngpp_git.bb
+@@ -9,6 +9,5 @@ PV = "1.3.0"
+ 
+ SRC_URI = "git://github.com/cwzx/nngpp;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-fortisslvpn_1.4.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-fortisslvpn_1.4.0.bb
+index 48f50abaf1..026aea7777 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-fortisslvpn_1.4.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-fortisslvpn_1.4.0.bb
+@@ -16,7 +16,7 @@ SRC_URI = " \
+ "
+ SRC_URI[sha256sum] = "b055e26349b516b23585798ab3ef57b436b014800e92a8ac732cfc8e76c5dafa"
+ 
+-S = "${WORKDIR}/NetworkManager-fortisslvpn-${PV}"
++S = "${UNPACKDIR}/NetworkManager-fortisslvpn-${PV}"
+ 
+ # meta-gnome in layers is required using gnome:
+ PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome,gtk+3 libnma libsecret,"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openconnect_1.2.8.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openconnect_1.2.8.bb
+index ee19afbd11..6369d8d0ef 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openconnect_1.2.8.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openconnect_1.2.8.bb
+@@ -13,7 +13,7 @@ SRC_URI = "${GNOME_MIRROR}/NetworkManager-openconnect/${@gnome_verdir("${PV}")}/
+ 
+ SRC_URI[sha256sum] = "5dedaa785d82d8e239ddd082bfac5250c691e964464be1807b6827263633cdcc"
+ 
+-S = "${WORKDIR}/NetworkManager-openconnect-${PV}"
++S = "${UNPACKDIR}/NetworkManager-openconnect-${PV}"
+ 
+ # meta-gnome in layers is required using gnome:
+ PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome,gtk+3 gcr3 libnma libsecret,"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.12.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.12.0.bb
+index 2d2055ba65..9859d01463 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.12.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.12.0.bb
+@@ -15,7 +15,7 @@ SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld',
+ 
+ SRC_URI[sha256sum] = "903fd4c0aebd2aa7ac70c9d8c2bed8df922655d22d764514403566ae89b7e886"
+ 
+-S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
++S = "${UNPACKDIR}/NetworkManager-openvpn-${PV}"
+ 
+ # meta-gnome in layers is required using gnome:
+ PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome,gtk+3 libnma libsecret"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.52.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.52.0.bb
+index dd894c0900..b8c6a936ad 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.52.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.52.0.bb
+@@ -47,7 +47,6 @@ SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld',
+ 
+ SRCREV = "995a28fa1ccc54ad22e794294c3c6783cc3f30ed"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # ['auto', 'symlink', 'file', 'netconfig', 'resolvconf']
+ NETWORKMANAGER_DNS_RC_MANAGER_DEFAULT ??= "auto"
+diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_9.12.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_9.12.bb
+index 7d0e5f2052..e1027747b6 100644
+--- a/meta-networking/recipes-connectivity/openconnect/openconnect_9.12.bb
++++ b/meta-networking/recipes-connectivity/openconnect/openconnect_9.12.bb
+@@ -21,7 +21,6 @@ PACKAGECONFIG[libproxy]  = "--with-libproxy,--without-libproxy,libproxy,"
+ # not config defaults
+ PACKAGECONFIG[pcsc-lite] = "--with-libpcsclite,--without-libpcsclite,pcsc-lite,"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig bash-completion
+ 
+diff --git a/meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.23.1.bb b/meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.23.1.bb
+index 4e964b3448..9823d772a3 100644
+--- a/meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.23.1.bb
++++ b/meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.23.1.bb
+@@ -12,7 +12,6 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ PACKAGECONFIG[resolvconf] = "--with-resolvconf=${base_sbindir}/resolvconf --enable-resolvconf,--with-resolvconf=DISABLED,,"
+ PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_system_unitdir},--without-systemdsystemunitdir,,"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig systemd
+ 
+diff --git a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
+index 3bca9df5ab..576c316ec3 100644
+--- a/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
++++ b/meta-networking/recipes-connectivity/openthread/ot-br-posix_git.bb
+@@ -21,7 +21,6 @@ SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=m
+            file://0001-Musl-build-fix.patch;patchdir=third_party/openthread/repo \
+            "
+ 
+-S = "${WORKDIR}/git"
+ SYSTEMD_SERVICE:${PN} = "otbr-agent.service"
+ 
+ inherit pkgconfig cmake systemd
+diff --git a/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb b/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb
+index 4456835410..009a6ef88c 100644
+--- a/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb
++++ b/meta-networking/recipes-connectivity/openthread/ot-daemon_git.bb
+@@ -14,7 +14,6 @@ PV = "0.1+git"
+ SRC_URI = "git://github.com/openthread/openthread.git;protocol=https;branch=main \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-networking/recipes-connectivity/openthread/wpantund_git.bb b/meta-networking/recipes-connectivity/openthread/wpantund_git.bb
+index 6a84897426..9c64872917 100644
+--- a/meta-networking/recipes-connectivity/openthread/wpantund_git.bb
++++ b/meta-networking/recipes-connectivity/openthread/wpantund_git.bb
+@@ -19,7 +19,6 @@ SRC_URI = "gitsm://github.com/openthread/wpantund.git;protocol=https;branch=mast
+            file://basename.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig perlnative autotools
+ 
+diff --git a/meta-networking/recipes-connectivity/relayd/relayd_git.bb b/meta-networking/recipes-connectivity/relayd/relayd_git.bb
+index 871df69909..17745da806 100644
+--- a/meta-networking/recipes-connectivity/relayd/relayd_git.bb
++++ b/meta-networking/recipes-connectivity/relayd/relayd_git.bb
+@@ -12,7 +12,6 @@ PV = "0.0.1+git"
+ 
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb b/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb
+index 9239bd81c2..841f7d5cf8 100644
+--- a/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb
++++ b/meta-networking/recipes-connectivity/restinio/restinio_0.6.13.bb
+@@ -12,7 +12,7 @@ SRC_URI = "https://github.com/Stiffstream/restinio/releases/download/v.${PV}/${B
+ SRC_URI[md5sum] = "37a4310e98912030a74bdd4ed789f33c"
+ SRC_URI[sha256sum] = "b35d696e6fafd4563ca708fcecf9d0cf6705c846d417b5000f5252e0188848e7"
+ 
+-S = "${WORKDIR}/${BP}/dev"
++S = "${UNPACKDIR}/${BP}/dev"
+ 
+ inherit cmake
+ 
+diff --git a/meta-networking/recipes-connectivity/snort/snort3_3.7.1.0.bb b/meta-networking/recipes-connectivity/snort/snort3_3.7.1.0.bb
+index 54eef87a41..e9169a050f 100644
+--- a/meta-networking/recipes-connectivity/snort/snort3_3.7.1.0.bb
++++ b/meta-networking/recipes-connectivity/snort/snort3_3.7.1.0.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master \
+ 
+ SRCREV = "6a11279883a8584e06ad9ab2df162c639961cd61"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGES =+ "${PN}-scripts"
+ 
+diff --git a/meta-networking/recipes-connectivity/vlan/vlan_1.9.bb b/meta-networking/recipes-connectivity/vlan/vlan_1.9.bb
+index b478692e39..845c3cf53c 100644
+--- a/meta-networking/recipes-connectivity/vlan/vlan_1.9.bb
++++ b/meta-networking/recipes-connectivity/vlan/vlan_1.9.bb
+@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "3b8f0a1bf0d3642764e5f646e1f3bbc8b1eeec474a77392d9aeb486884
+ UPSTREAM_CHECK_URI = "http://vlan.sourcearchive.com/"
+ UPSTREAM_CHECK_REGEX = "/(?P<pver>\d+(\.\d+)+)/"
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ inherit update-alternatives
+ 
+diff --git a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
+index 5876b58273..5d9d2634a0 100644
+--- a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
++++ b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
+@@ -29,7 +29,6 @@ PACKAGECONFIG[openssl] = ",,openssl"
+ 
+ PACKAGES =+ "${PN}-script"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit perlnative pkgconfig
+ 
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+index b420795cee..af591cfd7a 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+@@ -20,7 +20,6 @@ SRC_URI = " \
+ 
+ SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools ptest
+ 
+diff --git a/meta-networking/recipes-daemons/atftp/atftp_0.8.0.bb b/meta-networking/recipes-daemons/atftp/atftp_0.8.0.bb
+index 41b7cf0878..eca004302b 100644
+--- a/meta-networking/recipes-daemons/atftp/atftp_0.8.0.bb
++++ b/meta-networking/recipes-daemons/atftp/atftp_0.8.0.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://git.code.sf.net/p/atftp/code;branch=master;protocol=https \
+            file://atftpd.service \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools update-rc.d systemd
+ 
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.11.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.11.bb
+index 5f88aea5f2..db4a4313a4 100644
+--- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.11.bb
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.1.11.bb
+@@ -23,7 +23,6 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi;branch=master;protocol=https \
+            file://iscsi-initiator-targets.service \
+            file://set_initiatorname \
+            "
+-S = "${WORKDIR}/git"
+ 
+ inherit update-rc.d systemd autotools pkgconfig
+ 
+diff --git a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.2.4.bb b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.2.4.bb
+index 7f06e0ebf3..e7db8a948b 100644
+--- a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.2.4.bb
++++ b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.2.4.bb
+@@ -14,7 +14,6 @@ REQUIRED_DISTRO_FEATURES = "systemd gobject-introspection-data"
+ SRCREV = "dfd26d72793914eb3da910ef8c71de6d7c8942a2"
+ SRC_URI = "git://gitlab.com/craftyguy/networkd-dispatcher;protocol=https;nobranch=1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ SYSTEMD_PACKAGES = "${PN}"
+ SYSTEMD_SERVICE:${PN} = "networkd-dispatcher.service"
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb b/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb
+index a9a2163a2f..a85176d871 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb
+@@ -32,7 +32,7 @@ SRC_URI[sha256sum] = "75868db7a8ed252cd3a14c13a3ce383ddd42563160c02027d061202ee3
+ 
+ UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.10(\.\d+)+).tar.gz"
+ 
+-S = "${WORKDIR}/postfix-${PV}"
++S = "${UNPACKDIR}/postfix-${PV}"
+ 
+ CLEANBROKEN = "1"
+ 
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9.bb
+index c6782fcdd3..65dd2f9561 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9.bb
+@@ -17,7 +17,6 @@ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https;
+            file://proftpd.service \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep useradd update-rc.d systemd multilib_script
+ 
+diff --git a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
+index f2c300855c..be0652dfbd 100644
+--- a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
++++ b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
+@@ -34,7 +34,7 @@ SRC_URI[sha256sum] = "0dbf54dd2c178bd9fe62481d2c37513ee36636d8bf137cfdad96891490
+ 
+ UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/ptpd/files/releases"
+ 
+-S = "${WORKDIR}/ptpd-${PV}"
++S = "${UNPACKDIR}/ptpd-${PV}"
+ 
+ EXTRA_OEMAKE = ""
+ 
+diff --git a/meta-networking/recipes-daemons/vblade/vblade_25.bb b/meta-networking/recipes-daemons/vblade/vblade_25.bb
+index 54bb798344..f73e72442b 100644
+--- a/meta-networking/recipes-daemons/vblade/vblade_25.bb
++++ b/meta-networking/recipes-daemons/vblade/vblade_25.bb
+@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/OpenAoE/vblade;branch=master;protocol=https \
+            file://volatiles.99_vblade \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/OpenAoE/vblade/archive/"
+ 
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
+index 604fec8072..26c59d4b52 100644
+--- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
++++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
+            "
+ SRCREV = "5fd2f89ef068214130e5d60b7087ef48711fa615"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools manpages pkgconfig ptest
+ 
+diff --git a/meta-networking/recipes-devtools/python/python3-scapy_2.6.0.bb b/meta-networking/recipes-devtools/python/python3-scapy_2.6.0.bb
+index ba21c46055..fdef5473ef 100644
+--- a/meta-networking/recipes-devtools/python/python3-scapy_2.6.0.bb
++++ b/meta-networking/recipes-devtools/python/python3-scapy_2.6.0.bb
+@@ -20,7 +20,6 @@ SRCREV = "f7a64114b35fd8ee63ce07290f8a2dffd52b215f"
+ SRC_URI = "git://github.com/secdev/scapy.git;branch=master;protocol=https \
+            file://run-ptest"
+ 
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+diff --git a/meta-networking/recipes-extended/dlm/dlm_4.2.0.bb b/meta-networking/recipes-extended/dlm/dlm_4.2.0.bb
+index 93d293493c..b7966d7f12 100644
+--- a/meta-networking/recipes-extended/dlm/dlm_4.2.0.bb
++++ b/meta-networking/recipes-extended/dlm/dlm_4.2.0.bb
+@@ -21,7 +21,7 @@ UPSTREAM_CHECK_REGEX = "dlm-(?P<pver>\d+(\.\d+)+)"
+ LICENSE = "LGPL-2.0-or-later & GPL-2.0-only & GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://README.license;md5=8f0bbcdd678df1bce9863492b6c8832d"
+ 
+-S = "${WORKDIR}/dlm-dlm-${PV}"
++S = "${UNPACKDIR}/dlm-dlm-${PV}"
+ 
+ DEPENDS += "corosync"
+ 
+diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb b/meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb
+index cbd5e7a0fd..06b2fa4d2d 100644
+--- a/meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb
++++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb
+@@ -20,7 +20,6 @@ UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
+ 
+ inherit autotools pkgconfig
+ 
+-S = "${WORKDIR}/git"
+ 
+ # libknet/transport_udp.c:326:48: error: comparison of integers of different signs: 'unsigned long' and 'int' [-Werror,-Wsign-compare]
+ # for (cmsg = CMSG_FIRSTHDR(&msg);cmsg; cmsg = CMSG_NXTHDR(&msg, cmsg)) {
+diff --git a/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb b/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb
+index e816b79e87..a110d556a3 100644
+--- a/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb
++++ b/meta-networking/recipes-extended/tgt/tgt_1.0.90.bb
+@@ -17,7 +17,6 @@ SRC_URI += "file://tgtd.init \
+             file://tgtd \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ CONFFILES:${PN} += "${sysconfdir}/tgt/targets.conf"
+ 
+diff --git a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.2.bb b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.2.bb
+index 940454c3ac..20ba132fd0 100644
+--- a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.2.bb
++++ b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.2.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://gpl_license.txt;md5=11c7b65c4a4acb9d5175f7e9bf99c403"
+ SRCREV = "c8dfd85b9e8e453e279525f30c1e3184c092f036"
+ SRC_URI = "git://github.com/arno-iptables-firewall/aif;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit systemd
+ 
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb
+index d92c676fa9..880d962eb3 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb
+@@ -12,6 +12,6 @@ SRC_URI = "http://ftp.netfilter.org/pub/libnetfilter_acct/libnetfilter_acct-1.0.
+ SRC_URI[md5sum] = "814b2972b2f5c740ff87510bc109168b"
+ SRC_URI[sha256sum] = "4250ceef3efe2034f4ac05906c3ee427db31b9b0a2df41b2744f4bf79a959a1a"
+ 
+-S = "${WORKDIR}/libnetfilter_acct-${PV}"
++S = "${UNPACKDIR}/libnetfilter_acct-${PV}"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.1.0.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.1.0.bb
+index 83533832d4..08d3ab691c 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.1.0.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.1.0.bb
+@@ -11,6 +11,6 @@ SRC_URI = "https://www.netfilter.org/projects/libnetfilter_conntrack/files/libne
+ 
+ SRC_URI[sha256sum] = "67edcb4eb826c2f8dc98af08dabff68f3b3d0fe6fb7d9d0ac1ee7ecce0fe694e"
+ 
+-S = "${WORKDIR}/libnetfilter_conntrack-${PV}"
++S = "${UNPACKDIR}/libnetfilter_conntrack-${PV}"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-cthelper_1.0.1.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-cthelper_1.0.1.bb
+index ebb0eb2329..9a0d6cabbd 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-cthelper_1.0.1.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-cthelper_1.0.1.bb
+@@ -12,6 +12,6 @@ SRC_URI = "https://www.netfilter.org/projects/libnetfilter_cthelper/files/libnet
+ SRC_URI[md5sum] = "e59279645fe65d40dd7dfc82a797ca5b"
+ SRC_URI[sha256sum] = "14073d5487233897355d3ff04ddc1c8d03cc5ba8d2356236aa88161a9f2dc912"
+ 
+-S = "${WORKDIR}/libnetfilter_cthelper-${PV}"
++S = "${UNPACKDIR}/libnetfilter_cthelper-${PV}"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-cttimeout_1.0.1.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-cttimeout_1.0.1.bb
+index 5349e6e4b8..46576f4d32 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-cttimeout_1.0.1.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-cttimeout_1.0.1.bb
+@@ -11,6 +11,6 @@ SRC_URI = "https://www.netfilter.org/projects/libnetfilter_cttimeout/files/libne
+ SRC_URI[md5sum] = "ac64b55952b79cb9910db95ce8883940"
+ SRC_URI[sha256sum] = "0b59da2f3204e1c80cb85d1f6d72285fc07b01a2f5678abf5dccfbbefd650325"
+ 
+-S = "${WORKDIR}/libnetfilter_cttimeout-${PV}"
++S = "${UNPACKDIR}/libnetfilter_cttimeout-${PV}"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.2.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.2.bb
+index 699b096ae8..a6e6b9b153 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.2.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.2.bb
+@@ -9,6 +9,5 @@ SRCREV = "b0e4be94c0b8f68d4e912402b93a130063c34e17"
+ 
+ SRC_URI = "git://git.netfilter.org/libnetfilter_log;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.5.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.5.bb
+index 301dd86cf3..ccaa80f5ff 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.5.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.5.bb
+@@ -11,7 +11,6 @@ SRCREV = "2ff321690b8dafeca99ee8e9cafac71e36f292b9"
+ SRC_URI = "git://git.netfilter.org/libnetfilter_queue;branch=master \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.9.bb b/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.9.bb
+index 4a5435a743..abcebceab8 100644
+--- a/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.9.bb
++++ b/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.9.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://git.netfilter.org/libnftnl;branch=master;tag=${BP} \
+            "
+ SRCREV = "17190762f33f78090f5ff99a436c4cb866ac3ccd"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig ptest
+ 
+diff --git a/meta-networking/recipes-filter/ulogd2/ulogd2_2.0.8.bb b/meta-networking/recipes-filter/ulogd2/ulogd2_2.0.8.bb
+index 635fa6a408..febcf5147c 100644
+--- a/meta-networking/recipes-filter/ulogd2/ulogd2_2.0.8.bb
++++ b/meta-networking/recipes-filter/ulogd2/ulogd2_2.0.8.bb
+@@ -17,7 +17,6 @@ SRC_URI = "git://git.netfilter.org/ulogd2;branch=master \
+ "
+ SRCREV = "79aa980f2df9dda0c097e8f883a62f414b9e5138"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools manpages pkgconfig systemd update-rc.d
+ 
+diff --git a/meta-networking/recipes-irc/znc/znc_1.8.2.bb b/meta-networking/recipes-irc/znc/znc_1.8.2.bb
+index 48a5426572..7356115d53 100644
+--- a/meta-networking/recipes-irc/znc/znc_1.8.2.bb
++++ b/meta-networking/recipes-irc/znc/znc_1.8.2.bb
+@@ -9,7 +9,6 @@ SRC_URI = "gitsm://github.com/znc/znc.git;branch=master;protocol=https"
+ 
+ SRCREV = "bf253640d33d03331310778e001fb6f5aba2989e"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep pkgconfig
+ 
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+index 5659a20bd2..9afe009bea 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard.inc
++++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+@@ -10,4 +10,4 @@ LICENSE = "GPL-2.0-only"
+ 
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-S = "${WORKDIR}/git/src"
++S = "${UNPACKDIR}/${BP}/src"
+diff --git a/meta-networking/recipes-protocols/babeld/babeld_1.13.1.bb b/meta-networking/recipes-protocols/babeld/babeld_1.13.1.bb
+index a799ad197e..cc69f1448a 100644
+--- a/meta-networking/recipes-protocols/babeld/babeld_1.13.1.bb
++++ b/meta-networking/recipes-protocols/babeld/babeld_1.13.1.bb
+@@ -17,7 +17,6 @@ SRCREV = "3d61ea1e843e2c5f9706c74d1adad4e1d24d44b9"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "babeld-(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE += "CFLAGS='${CFLAGS}'"
+ 
+diff --git a/meta-networking/recipes-protocols/freediameter/freediameter_1.5.0.bb b/meta-networking/recipes-protocols/freediameter/freediameter_1.5.0.bb
+index 15368a9a3d..89b2572c04 100644
+--- a/meta-networking/recipes-protocols/freediameter/freediameter_1.5.0.bb
++++ b/meta-networking/recipes-protocols/freediameter/freediameter_1.5.0.bb
+@@ -27,7 +27,6 @@ SRC_URI = "git://github.com/freeDiameter/freeDiameter;protocol=https;branch=mast
+     file://0001-fixes-for-gcc-15.patch \
+     "
+ 
+-S = "${WORKDIR}/git"
+ 
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=868c059b6147748b1d621e500feeac4f"
+diff --git a/meta-networking/recipes-protocols/frr/frr_10.3.bb b/meta-networking/recipes-protocols/frr/frr_10.3.bb
+index be2d986fc3..f0f3f34ab3 100644
+--- a/meta-networking/recipes-protocols/frr/frr_10.3.bb
++++ b/meta-networking/recipes-protocols/frr/frr_10.3.bb
+@@ -20,7 +20,6 @@ UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
+ 
+ CVE_PRODUCT = "frrouting"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep python3native pkgconfig useradd systemd
+ 
+diff --git a/meta-networking/recipes-protocols/mdns/mdns_2600.120.12.bb b/meta-networking/recipes-protocols/mdns/mdns_2600.120.12.bb
+index b6efa528d4..f7c8f17800 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns_2600.120.12.bb
++++ b/meta-networking/recipes-protocols/mdns/mdns_2600.120.12.bb
+@@ -27,7 +27,6 @@ SRCREV = "3a0deda2995d98243dae379bcec10e57928c15e8"
+ #
+ # We can't use the approach of setting ${S} to mDNSPosix as we need
+ # DEBUG_PREFIX_MAP to cover files which come from the Clients directory too.
+-S = "${WORKDIR}/git"
+ 
+ inherit github-releases manpages systemd update-rc.d
+ 
+diff --git a/meta-networking/recipes-protocols/opcua/open62541_1.3.15.bb b/meta-networking/recipes-protocols/opcua/open62541_1.3.15.bb
+index 1fde165c4f..b7f5112197 100644
+--- a/meta-networking/recipes-protocols/opcua/open62541_1.3.15.bb
++++ b/meta-networking/recipes-protocols/opcua/open62541_1.3.15.bb
+@@ -15,13 +15,12 @@ SRCREV_mqtt-c = "f69ce1e7fd54f3b1834c9c9137ce0ec5d703cb4d"
+ 
+ SRC_URI = " \
+     git://github.com/open62541/open62541.git;name=opcua;branch=1.3;protocol=https \
+-    git://github.com/Pro/mdnsd.git;name=mdnsd;protocol=https;branch=master;destsuffix=git/deps/mdnsd \
+-    git://github.com/OPCFoundation/UA-Nodeset;name=ua-nodeset;protocol=https;branch=v1.04;destsuffix=git/deps/ua-nodeset \
+-    git://github.com/LiamBindle/MQTT-C.git;name=mqtt-c;protocol=https;branch=master;destsuffix=git/deps/mqtt-c \
++    git://github.com/Pro/mdnsd.git;name=mdnsd;protocol=https;branch=master;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/mdnsd \
++    git://github.com/OPCFoundation/UA-Nodeset;name=ua-nodeset;protocol=https;branch=v1.04;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/ua-nodeset \
++    git://github.com/LiamBindle/MQTT-C.git;name=mqtt-c;protocol=https;branch=master;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/mqtt-c \
+     file://0001-fix-build-do-not-install-git-files.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake python3native
+ 
+diff --git a/meta-networking/recipes-protocols/openflow/openflow_git.bb b/meta-networking/recipes-protocols/openflow/openflow_git.bb
+index 0061565f90..1588245f8a 100644
+--- a/meta-networking/recipes-protocols/openflow/openflow_git.bb
++++ b/meta-networking/recipes-protocols/openflow/openflow_git.bb
+@@ -37,7 +37,6 @@ EXTRA_OECONF += " \
+                 "
+ DEPENDS:append:libc-musl = " libexecinfo"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep pkgconfig
+ 
+diff --git a/meta-networking/recipes-protocols/openlldp/openlldp_1.1.1.bb b/meta-networking/recipes-protocols/openlldp/openlldp_1.1.1.bb
+index 010cd5af84..ad72b5cdde 100644
+--- a/meta-networking/recipes-protocols/openlldp/openlldp_1.1.1.bb
++++ b/meta-networking/recipes-protocols/openlldp/openlldp_1.1.1.bb
+@@ -5,7 +5,6 @@ HOMEPAGE = "http://open-lldp.org/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig autotools
+ inherit ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}
+diff --git a/meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.10.0.bb b/meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.10.0.bb
+index cabe18ef8a..a19b313cc3 100644
+--- a/meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.10.0.bb
++++ b/meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.10.0.bb
+@@ -18,7 +18,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/sourceforge/pptpclient/pptp-${PV}.tar.gz \
+ SRC_URI[md5sum] = "8d25341352fdae5ad5b36b9f18254908"
+ SRC_URI[sha256sum] = "82492db8e487ce73b182ee7f444251d20c44f5c26d6e96c553ec7093aefb5af4"
+ 
+-S = "${WORKDIR}/pptp-${PV}"
++S = "${UNPACKDIR}/pptp-${PV}"
+ 
+ EXTRA_OEMAKE = "-e MAKEFLAGS="
+ 
+diff --git a/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb b/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
+index 8099fa5c6e..2cbb025049 100644
+--- a/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
++++ b/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
+@@ -21,7 +21,7 @@ inherit autotools-brokensep
+ LIBS:append:libc-musl = " -lssp_nonshared"
+ LIBS:append:libc-glibc = " -lc_nonshared"
+ 
+-S = "${WORKDIR}/tsocks-1.8"
++S = "${UNPACKDIR}/tsocks-1.8"
+ 
+ FILES:${PN} = "${libdir}/* ${bindir}/tsocks"
+ FILES:${PN}-dev = ""
+diff --git a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
+index 3769d5cab0..8f21620584 100644
+--- a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
++++ b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
+@@ -6,7 +6,6 @@ SRCREV = "848eca82f92273af9a79687a90343a2ebcf3481d"
+ SRC_URI = "git://github.com/sctplab/usrsctp;protocol=https;branch=master \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.3.bb b/meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.3.bb
+index f227ab749b..f854078004 100644
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.3.bb
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.3.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
+ 
+ GTEST_VER = "1.15.2"
+ SRC_URI = "git://github.com/GENIVI/${BPN}.git;branch=master;protocol=https;name=vsomeip \
+-           https://github.com/google/googletest/releases/download/v${GTEST_VER}/googletest-${GTEST_VER}.tar.gz;name=gtest;subdir=git/ \
++           https://github.com/google/googletest/releases/download/v${GTEST_VER}/googletest-${GTEST_VER}.tar.gz;name=gtest;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/ \
+            file://0001-Fix-pkgconfig-dir-for-multilib.patch \
+            file://0002-Install-example-configuration-files-to-etc-vsomeip.patch \
+            file://0004-Do-not-specify-PIE-flag-explicitly.patch \
+@@ -26,7 +26,6 @@ COMPATIBLE_HOST:libc-musl = 'null'
+ 
+ DEPENDS = "boost dlt-daemon googletest"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.16.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.16.bb
+index 0b7887dacb..e1638bfa19 100644
+--- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.16.bb
++++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_1.3.16.bb
+@@ -15,7 +15,6 @@ SRCREV = "1ef2a025981223c1e16fc833bef226c86ff8c295"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/xelerance/xl2tpd/releases"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit update-rc.d
+ 
+diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b/meta-networking/recipes-support/arptables/arptables_git.bb
+index f9dd66f605..be2cfb0816 100644
+--- a/meta-networking/recipes-support/arptables/arptables_git.bb
++++ b/meta-networking/recipes-support/arptables/arptables_git.bb
+@@ -14,7 +14,6 @@ SRC_URI = " \
+ SRC_URI[arptables.md5sum] = "1d4ab05761f063b0751645d8f2b8f8e5"
+ SRC_URI[arptables.sha256sum] = "e529fd465c67d69ad335299a043516e6b38cdcd337a5ed21718413e96073f928"
+ 
+-S = "${WORKDIR}/git"
+ SYSTEMD_SERVICE:${PN} = "arptables.service"
+ 
+ inherit systemd
+diff --git a/meta-networking/recipes-support/bmon/bmon_4.0.bb b/meta-networking/recipes-support/bmon/bmon_4.0.bb
+index c974d54fe8..f47069471a 100644
+--- a/meta-networking/recipes-support/bmon/bmon_4.0.bb
++++ b/meta-networking/recipes-support/bmon/bmon_4.0.bb
+@@ -9,4 +9,3 @@ SRC_URI = "git://github.com/tgraf/bmon.git;branch=master;protocol=https"
+ 
+ inherit autotools pkgconfig
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-support/bridge-utils/bridge-utils_1.7.1.bb b/meta-networking/recipes-support/bridge-utils/bridge-utils_1.7.1.bb
+index e213cd2c60..59e3dbae5f 100644
+--- a/meta-networking/recipes-support/bridge-utils/bridge-utils_1.7.1.bb
++++ b/meta-networking/recipes-support/bridge-utils/bridge-utils_1.7.1.bb
+@@ -15,7 +15,6 @@ SRC_URI = "\
+     file://0004-cleanup-includes.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_PRODUCT = "kernel:bridge-utils"
+ 
+diff --git a/meta-networking/recipes-support/celt051/celt051_git.bb b/meta-networking/recipes-support/celt051/celt051_git.bb
+index 4842a0fbdf..a9a664c196 100644
+--- a/meta-networking/recipes-support/celt051/celt051_git.bb
++++ b/meta-networking/recipes-support/celt051/celt051_git.bb
+@@ -21,7 +21,6 @@ SRC_URI = "git://gitlab.xiph.org/xiph/celt.git;branch=compat-v0.5.1;protocol=htt
+            file://0001-tests-Include-entcode.c-into-test-sources-to-provide.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig autotools-brokensep
+ 
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb b/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb
+index c78bbae7b8..e2918503be 100644
+--- a/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb
++++ b/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ SRCREV = "316522036133d44ed02cd39ed2748e2b59c85b30"
+ SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ DEPENDS += "libtalloc"
+ 
+ PACKAGECONFIG ??= ""
+diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb b/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
+index cacdc9773b..25ea1fdefb 100644
+--- a/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
++++ b/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/jpbarrette/curlpp.git;branch=master;protocol=https \
+ 
+ SRCREV = "592552a165cc569dac7674cb7fc9de3dc829906f"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig binconfig
+ 
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.30.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.30.0.bb
+index ab515603f5..4c520e8c78 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_9.30.0.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_9.30.0.bb
+@@ -8,7 +8,7 @@ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
+ 
+ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=master;protocol=https \
+-           git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
++           git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/drbd-headers;branch=master;protocol=https \
+            file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
+            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
+            file://0001-Fix-build-with-gcc-15.patch \
+@@ -18,7 +18,6 @@ SRCREV_drbd-headers = "94f4472513f351efba5788f783feba6ac6efe9fc"
+ 
+ SRCREV_FORMAT = "drbd-utils_drbd-headers"
+ 
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/LINBIT/drbd-utils/releases"
+ 
+diff --git a/meta-networking/recipes-support/dropwatch/dropwatch_1.5.4.bb b/meta-networking/recipes-support/dropwatch/dropwatch_1.5.4.bb
+index baa9398a18..badeed8e82 100644
+--- a/meta-networking/recipes-support/dropwatch/dropwatch_1.5.4.bb
++++ b/meta-networking/recipes-support/dropwatch/dropwatch_1.5.4.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/nhorman/dropwatch.git;protocol=https;nobranch=1 \
+ "
+ SRCREV = "1e7e487a019a7c02f1f429c4d3a4647fa3787a13"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "binutils libnl libpcap readline"
+ 
+diff --git a/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb b/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb
+index 723d7c8f78..d5dc10a889 100644
+--- a/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb
++++ b/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb
+@@ -25,7 +25,6 @@ SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https \
+ 
+ SRCREV = "7281fbddb7da7478beb1d21e3cb105fff3778b31"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE = " \
+     -DCMAKE_SKIP_RPATH=TRUE \
+diff --git a/meta-networking/recipes-support/fping/fping_5.3.bb b/meta-networking/recipes-support/fping/fping_5.3.bb
+index d5f77d7c5a..5f3ec67cfc 100644
+--- a/meta-networking/recipes-support/fping/fping_5.3.bb
++++ b/meta-networking/recipes-support/fping/fping_5.3.bb
+@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c6170fbadddfcd74f011515291d96901"
+ SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "d57bd0141aea082e3adfc198bfc3db5dfd12a7014c7c2655e97f61cd54901d0e"
+ 
+-S = "${WORKDIR}/fping-${PV}"
++S = "${UNPACKDIR}/fping-${PV}"
+ 
+ inherit autotools
+ 
+diff --git a/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb b/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb
+index 8e23b66c48..9c2535b95b 100644
+--- a/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb
++++ b/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb
+@@ -9,7 +9,6 @@ SECTION = "libdevel"
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e4f3ea6e9b28af88dc0321190a1f8250"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "4cdfdc38eca237c19c22a8b90490446ce6d970fa"
+ SRC_URI = "git://github.com/maxmind/geoip-api-perl.git;branch=main;protocol=https \
+     file://run-ptest \
+diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+index a054ef0147..7482dba64a 100644
+--- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
++++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+@@ -36,7 +36,6 @@ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=243b725d71bb5df4a1e5920b344b86ad \
+                     file://LICENSE;md5=0388276749a542b0d611601fa7c1dcc8 "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-networking/recipes-support/http-parser/http-parser_2.9.4.bb b/meta-networking/recipes-support/http-parser/http-parser_2.9.4.bb
+index 528289b7fd..7def915db5 100644
+--- a/meta-networking/recipes-support/http-parser/http-parser_2.9.4.bb
++++ b/meta-networking/recipes-support/http-parser/http-parser_2.9.4.bb
+@@ -14,7 +14,6 @@ LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=9bfa835d048c194ab30487af8d7b3778"
+ SRC_URI = "git://github.com/nodejs/http-parser.git;branch=master;protocol=https"
+ SRCREV = "2343fd6b5214b2ded2cdcf76de2bf60903bb90cd"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "PLATFORM=linux"
+ 
+diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_2.14.bb b/meta-networking/recipes-support/ifenslave/ifenslave_2.14.bb
+index b41eb78374..bc0975ecc1 100644
+--- a/meta-networking/recipes-support/ifenslave/ifenslave_2.14.bb
++++ b/meta-networking/recipes-support/ifenslave/ifenslave_2.14.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=acc89812938cf9ad6b1debc37cea0253
+ SRCREV = "62e60904afbe58fda0c7104fdad1c4f618266ba6"
+ SRC_URI = "git://salsa.debian.org/debian/ifenslave.git;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+     install -m 0755 -D ${S}/debian/ifenslave.if-pre-up ${D}${sysconfdir}/network/if-pre-up.d/ifenslave
+diff --git a/meta-networking/recipes-support/ipcalc/ipcalc_1.0.3.bb b/meta-networking/recipes-support/ipcalc/ipcalc_1.0.3.bb
+index 055c6e1432..18970751c3 100644
+--- a/meta-networking/recipes-support/ipcalc/ipcalc_1.0.3.bb
++++ b/meta-networking/recipes-support/ipcalc/ipcalc_1.0.3.bb
+@@ -9,6 +9,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SRC_URI = "git://gitlab.com/ipcalc/ipcalc.git;protocol=https;branch=master"
+ SRCREV = "c341e55be386649c0a5347eefeae410753c4e753"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson
+diff --git a/meta-networking/recipes-support/libcpr/libcpr_1.10.5.bb b/meta-networking/recipes-support/libcpr/libcpr_1.10.5.bb
+index 93fdb78eba..8af763fee9 100644
+--- a/meta-networking/recipes-support/libcpr/libcpr_1.10.5.bb
++++ b/meta-networking/recipes-support/libcpr/libcpr_1.10.5.bb
+@@ -11,7 +11,6 @@ DEPENDS = "curl openssl"
+ SRC_URI = "git://github.com/libcpr/cpr.git;protocol=https;branch=1.10.x"
+ SRCREV = "3b15fa82ea74739b574d705fea44959b58142eb8"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb b/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
+index 3d0764a3b9..50f83221c0 100644
+--- a/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
++++ b/meta-networking/recipes-support/libesmtp/libesmtp_1.1.0.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/libesmtp/libESMTP.git;branch=master;protocol=https \
+            file://0001-Add-build-option-for-NTLM-support.patch"
+ SRCREV = "1d0af244310a66943ab400be56b15a9087f181eb"
+ 
+-S = "${WORKDIR}/git"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1803fa9c2c3ce8cb06b4861d75310742 \
+                     file://COPYING.GPL;md5=393a5ca445f6965873eca0259a17f833"
+diff --git a/meta-networking/recipes-support/libldb/libldb_2.8.1.bb b/meta-networking/recipes-support/libldb/libldb_2.8.1.bb
+index 2040d016e5..dbb27e6ba6 100644
+--- a/meta-networking/recipes-support/libldb/libldb_2.8.1.bb
++++ b/meta-networking/recipes-support/libldb/libldb_2.8.1.bb
+@@ -38,7 +38,7 @@ SRC_URI[sha256sum] = "b68ce6eb0ccd2870fa3c8c334f2028b5d16606fd41308696c17b71959f
+ 
+ inherit pkgconfig waf-samba ptest
+ 
+-S = "${WORKDIR}/ldb-${PV}"
++S = "${UNPACKDIR}/ldb-${PV}"
+ 
+ # Cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
+ # to cross Popen
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.4.3.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.4.3.bb
+index c7f6f1fb31..ff36a61d15 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc_2.4.3.bb
++++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.4.3.bb
+@@ -30,7 +30,7 @@ PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
+ 
+ SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'attr', '', 'file://avoid-attr-unless-wanted.patch', d)}"
+ 
+-S = "${WORKDIR}/talloc-${PV}"
++S = "${UNPACKDIR}/talloc-${PV}"
+ 
+ # Cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
+ # to cross Popen
+diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.4.13.bb b/meta-networking/recipes-support/libtdb/libtdb_1.4.13.bb
+index 2f8be7fe61..7221130fe6 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb_1.4.13.bb
++++ b/meta-networking/recipes-support/libtdb/libtdb_1.4.13.bb
+@@ -28,7 +28,7 @@ PACKAGECONFIG[libbsd] = "--with-libbsd,--without-libbsd,libbsd"
+ PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
+ PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
+ 
+-S = "${WORKDIR}/tdb-${PV}"
++S = "${UNPACKDIR}/tdb-${PV}"
+ 
+ inherit waf-samba pkgconfig ptest
+ 
+diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.16.2.bb b/meta-networking/recipes-support/libtevent/libtevent_0.16.2.bb
+index f38ca3a836..36364b8874 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent_0.16.2.bb
++++ b/meta-networking/recipes-support/libtevent/libtevent_0.16.2.bb
+@@ -33,7 +33,7 @@ PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
+ 
+ SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'attr', '', 'file://avoid-attr-unless-wanted.patch', d)}"
+ 
+-S = "${WORKDIR}/tevent-${PV}"
++S = "${UNPACKDIR}/tevent-${PV}"
+ 
+ # Cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
+ # to cross Popen
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.21.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.21.bb
+index 1300fc658d..407194792f 100644
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.21.bb
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.21.bb
+@@ -17,7 +17,6 @@ SRC_URI = " \
+     file://v6test.sh \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ BBCLASSEXTEND = "native"
+ 
+diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+index f0b7e9184e..b442fb9f56 100644
+--- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
++++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+@@ -19,7 +19,6 @@ SRC_URI = "git://github.com/linux-wpan/lowpan-tools;branch=master;protocol=https
+            "
+ SRCREV = "1c2d8674cc6f4b1166a066e8822e295c105ae7a2"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools python3-dir pkgconfig
+ 
+diff --git a/meta-networking/recipes-support/mctp/mctp_2.1.bb b/meta-networking/recipes-support/mctp/mctp_2.1.bb
+index c76fc09af3..04fecf7aca 100644
+--- a/meta-networking/recipes-support/mctp/mctp_2.1.bb
++++ b/meta-networking/recipes-support/mctp/mctp_2.1.bb
+@@ -10,7 +10,6 @@ SRCREV = "dd944cf5b5a8b834f3685bcb2017190258dbcd0b"
+ SRC_URI = "git://github.com/CodeConstruct/mctp;branch=main;protocol=https \
+            file://0001-mctp-bench-Adjust-headers.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig systemd
+ 
+diff --git a/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb b/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb
+index 9a00d66a52..52e7e53c32 100644
+--- a/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb
++++ b/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb
+@@ -3,7 +3,6 @@ require mdio-tools.inc
+ DEPENDS += "virtual/kernel libmnl"
+ # This module requires Linux 5.6 higher
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit module
+ 
+diff --git a/meta-networking/recipes-support/mdio-tools/mdio-tools_1.3.1.bb b/meta-networking/recipes-support/mdio-tools/mdio-tools_1.3.1.bb
+index 457064c019..2c8f9b8c37 100644
+--- a/meta-networking/recipes-support/mdio-tools/mdio-tools_1.3.1.bb
++++ b/meta-networking/recipes-support/mdio-tools/mdio-tools_1.3.1.bb
+@@ -2,7 +2,6 @@ require mdio-tools.inc
+ 
+ DEPENDS += "virtual/kernel libmnl"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig autotools
+ 
+diff --git a/meta-networking/recipes-support/mtr/mtr_0.95.bb b/meta-networking/recipes-support/mtr/mtr_0.95.bb
+index 92f9c4bfc0..ac8b48e4e5 100644
+--- a/meta-networking/recipes-support/mtr/mtr_0.95.bb
++++ b/meta-networking/recipes-support/mtr/mtr_0.95.bb
+@@ -11,7 +11,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+ SRCREV = "852e5617fbf331cf292723702161f0ac9afe257c"
+ SRC_URI = "git://github.com/traviscross/mtr;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-networking/recipes-support/nbdkit/nbdkit_1.33.11.bb b/meta-networking/recipes-support/nbdkit/nbdkit_1.33.11.bb
+index cdf2677f13..1c9db1e956 100644
+--- a/meta-networking/recipes-support/nbdkit/nbdkit_1.33.11.bb
++++ b/meta-networking/recipes-support/nbdkit/nbdkit_1.33.11.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/libguestfs/nbdkit.git;protocol=https;branch=master \
+            file://0001-plugins-Avoid-absolute-buildpaths-in-binaries.patch"
+ SRCREV = "6c02c6a469d62a047f230b0ccf03f72328312d2b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "curl xz e2fsprogs zlib"
+ 
+diff --git a/meta-networking/recipes-support/nbdkit/nbdkit_1.43.11.bb b/meta-networking/recipes-support/nbdkit/nbdkit_1.43.11.bb
+index 2a122ec282..9e7bdc9966 100644
+--- a/meta-networking/recipes-support/nbdkit/nbdkit_1.43.11.bb
++++ b/meta-networking/recipes-support/nbdkit/nbdkit_1.43.11.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://gitlab.com/nbdkit/nbdkit.git;protocol=https;branch=master;tag=v
+            "
+ SRCREV = "2d0f232b590f4001881dd0819f55af72b88c4b2f"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "curl xz e2fsprogs zlib"
+ 
+diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
+index 21579d64c1..6931c64d4a 100644
+--- a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
++++ b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.8.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://git.remlab.net/git/ndisc6.git;protocol=http;branch=master \
+            file://0001-Remove-use-of-variables-indicating-buildtime-informa.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "coreutils-native"
+ 
+diff --git a/meta-networking/recipes-support/netcf/netcf_0.2.8.bb b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+index c68974f9f0..cddb0ead2f 100644
+--- a/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
++++ b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+@@ -18,7 +18,6 @@ DEPENDS += "augeas libnl libxslt libxml2"
+ 
+ do_configure[depends] += "${MLPREFIX}gnulib:do_populate_sysroot"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit gettext autotools perlnative pkgconfig systemd
+ 
+diff --git a/meta-networking/recipes-support/netperf/netperf_git.bb b/meta-networking/recipes-support/netperf/netperf_git.bb
+index 151f243c27..4043da5621 100644
+--- a/meta-networking/recipes-support/netperf/netperf_git.bb
++++ b/meta-networking/recipes-support/netperf/netperf_git.bb
+@@ -21,7 +21,6 @@ SRC_URI = "git://github.com/HewlettPackard/netperf.git;branch=master;protocol=ht
+ 
+ SRCREV = "3bc455b23f901dae377ca0a558e1e32aa56b31c4"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit update-rc.d autotools texinfo systemd
+ 
+diff --git a/meta-networking/recipes-support/netsniff-ng/netsniff-ng_0.6.8.bb b/meta-networking/recipes-support/netsniff-ng/netsniff-ng_0.6.8.bb
+index 341eab015c..58ace6263d 100644
+--- a/meta-networking/recipes-support/netsniff-ng/netsniff-ng_0.6.8.bb
++++ b/meta-networking/recipes-support/netsniff-ng/netsniff-ng_0.6.8.bb
+@@ -10,7 +10,6 @@ SRC_URI = " \
+ 	file://0001-Cmds-automatically-create-folder.patch \
+ 	"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig
+ 
+diff --git a/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb b/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
+index 9b2c186873..54fd68ed43 100644
+--- a/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
++++ b/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
+@@ -18,7 +18,6 @@ SRC_URI = "git://github.com/thkukuk/yp-tools;branch=master;protocol=https \
+            file://domainname.service \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "libtirpc libnsl2 virtual/crypt"
+ 
+diff --git a/meta-networking/recipes-support/ntimed/ntimed_git.bb b/meta-networking/recipes-support/ntimed/ntimed_git.bb
+index 955c03f42d..36fba5f57b 100644
+--- a/meta-networking/recipes-support/ntimed/ntimed_git.bb
++++ b/meta-networking/recipes-support/ntimed/ntimed_git.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/bsdphk/Ntimed;branch=master;protocol=https \
+ PV = "0.0+git"
+ SRCREV = "db0abbb4c80f2ecef6bc5d9639bca5bea28532a2"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # use adjtimex on musl
+ CFLAGS:append:libc-musl = " -Dntp_adjtime=adjtimex"
+diff --git a/meta-networking/recipes-support/ntopng/ndpi_4.2.bb b/meta-networking/recipes-support/ntopng/ndpi_4.2.bb
+index ae5139c948..f0175167a4 100644
+--- a/meta-networking/recipes-support/ntopng/ndpi_4.2.bb
++++ b/meta-networking/recipes-support/ntopng/ndpi_4.2.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/ntop/nDPI.git;branch=4.2-stable;protocol=https \
+            file://0001-autogen.sh-not-generate-configure.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep pkgconfig
+ 
+diff --git a/meta-networking/recipes-support/ntopng/ntopng_5.2.1.bb b/meta-networking/recipes-support/ntopng/ntopng_5.2.1.bb
+index 9bb93910f8..014706893a 100644
+--- a/meta-networking/recipes-support/ntopng/ntopng_5.2.1.bb
++++ b/meta-networking/recipes-support/ntopng/ntopng_5.2.1.bb
+@@ -23,7 +23,6 @@ SRC_URI = "git://github.com/ntop/ntopng.git;protocol=https;branch=5.2-stable \
+            file://ntopng.service \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # don't use the lua under thirdparty as it supports cross compiling badly
+ export LUA_LIB = "${STAGING_LIBDIR}/liblua.a"
+diff --git a/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb b/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
+index b02f775a55..17fc818e8a 100644
+--- a/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
++++ b/meta-networking/recipes-support/nuttcp/nuttcp_8.2.2.bb
+@@ -18,8 +18,7 @@ SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c \
+ SRC_URI[md5sum] = "d3c92c4d2f261221193c3726c1b9a42f"
+ SRC_URI[sha256sum] = "8c5595bcd27c2fd66831be74c390df078cfb1870aa427f2511ac2586d236c8a1"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_compile () {
+     ${CC} ${CFLAGS} ${LDFLAGS} -o nuttcp nuttcp-${PV}.c
+diff --git a/meta-networking/recipes-support/open-isns/open-isns_0.102.bb b/meta-networking/recipes-support/open-isns/open-isns_0.102.bb
+index 24c520901d..5c38f6b5dc 100644
+--- a/meta-networking/recipes-support/open-isns/open-isns_0.102.bb
++++ b/meta-networking/recipes-support/open-isns/open-isns_0.102.bb
+@@ -19,7 +19,6 @@ SRC_URI = "git://github.com/open-iscsi/open-isns;branch=master;protocol=https \
+ 
+ SRCREV = "c0e6d9fedc5a7041260de477fe1a8455fa074113"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit systemd autotools-brokensep update-rc.d
+ 
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.5.0.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.5.0.bb
+index 0288a59458..fa26a759dc 100644
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.5.0.bb
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.5.0.bb
+@@ -53,7 +53,7 @@ SRC_URI:append:libc-musl = " file://0001-Add-resolv_compat.h-for-musl-builds.pat
+ 
+ SRCREV = "f2ca37ef3510543172657b82493d1eceefa9a134"
+ 
+-S = "${WORKDIR}/git/open-vm-tools"
++S = "${UNPACKDIR}/${BP}/open-vm-tools"
+ 
+ DEPENDS = "glib-2.0 glib-2.0-native util-linux libdnet procps libtirpc"
+ 
+diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
+index 74c5ef220d..86b24c1795 100644
+--- a/meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
++++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.36.bb
+@@ -32,7 +32,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
+            file://ipmi.service \
+            "
+ 
+-S = "${WORKDIR}/OpenIPMI-${PV}"
++S = "${UNPACKDIR}/OpenIPMI-${PV}"
+ 
+ SRC_URI[sha256sum] = "a0403148fa5f7bed930c958a4d1c558047e273763a408b3a0368edc137cc55d9"
+ 
+diff --git a/meta-networking/recipes-support/pgpool2/pgpool2_4.5.3.bb b/meta-networking/recipes-support/pgpool2/pgpool2_4.5.3.bb
+index 7b51fc558e..bdd715aacf 100644
+--- a/meta-networking/recipes-support/pgpool2/pgpool2_4.5.3.bb
++++ b/meta-networking/recipes-support/pgpool2/pgpool2_4.5.3.bb
+@@ -18,7 +18,7 @@ SRC_URI = "https://www.pgpool.net/mediawiki/images/pgpool-II-${PV}.tar.gz \
+            "
+ SRC_URI[sha256sum] = "25ed340d7b7dc00c20e4ba763d3f9c07ba891b150d9d48af313a1351cafdd778"
+ 
+-S = "${WORKDIR}/pgpool-II-${PV}"
++S = "${UNPACKDIR}/pgpool-II-${PV}"
+ 
+ inherit autotools-brokensep systemd
+ 
+diff --git a/meta-networking/recipes-support/phytool/phytool.bb b/meta-networking/recipes-support/phytool/phytool.bb
+index b918e50c68..6471f46c28 100644
+--- a/meta-networking/recipes-support/phytool/phytool.bb
++++ b/meta-networking/recipes-support/phytool/phytool.bb
+@@ -6,7 +6,6 @@ PV = "2+git"
+ SRCREV = "8882328c08ba2efb13c049812098f1d0cb8adf0c"
+ SRC_URI = "git://github.com/wkz/phytool.git;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # The Makefile has "$PREFIX/bin" hardcoded into it, hence not using $bindir here
+ do_install() {
+diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_51.0.bb b/meta-networking/recipes-support/rdma-core/rdma-core_51.0.bb
+index 0c204c109f..2555c43a85 100644
+--- a/meta-networking/recipes-support/rdma-core/rdma-core_51.0.bb
++++ b/meta-networking/recipes-support/rdma-core/rdma-core_51.0.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=master;protocol=http
+            file://0001-librdmacm-Use-overloadable-function-attribute-with-c.patch \
+ "
+ SRCREV = "6cd09097ad2eebde9a7fa3d3bb09a2cea6e3c2d6"
+-S = "${WORKDIR}/git"
+ 
+ #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
+ LICENSE = "BSD-2-Clause | GPL-2.0-only"
+diff --git a/meta-networking/recipes-support/smcroute/smcroute_2.5.7.bb b/meta-networking/recipes-support/smcroute/smcroute_2.5.7.bb
+index 950f6a2e21..bb12d7a907 100644
+--- a/meta-networking/recipes-support/smcroute/smcroute_2.5.7.bb
++++ b/meta-networking/recipes-support/smcroute/smcroute_2.5.7.bb
+@@ -8,6 +8,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ SRCREV = "b315d06ddb0dad16a52fe91e5831b4030ce37010"
+ SRC_URI = "git://github.com/troglobit/smcroute.git;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-networking/recipes-support/sngrep/sngrep_1.8.2.bb b/meta-networking/recipes-support/sngrep/sngrep_1.8.2.bb
+index 518ca9e277..12fe3ececa 100644
+--- a/meta-networking/recipes-support/sngrep/sngrep_1.8.2.bb
++++ b/meta-networking/recipes-support/sngrep/sngrep_1.8.2.bb
+@@ -18,7 +18,6 @@ DEPENDS = "\
+ SRC_URI = "git://github.com/irontec/sngrep.git;protocol=https;branch=master"
+ SRCREV = "dad1033640f249fa4994f976cf6ee96826c15702"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-networking/recipes-support/spice/libcacard_2.8.1.bb b/meta-networking/recipes-support/spice/libcacard_2.8.1.bb
+index 65f2f80ace..1a2d9dc9c4 100644
+--- a/meta-networking/recipes-support/spice/libcacard_2.8.1.bb
++++ b/meta-networking/recipes-support/spice/libcacard_2.8.1.bb
+@@ -8,7 +8,6 @@ SRCREV = "7b07684ea6698d4885ff2062350ad8798a04de42"
+ 
+ SRC_URI = "git://gitlab.freedesktop.org/spice/libcacard.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-networking/recipes-support/spice/spice-gtk_0.42.bb b/meta-networking/recipes-support/spice/spice-gtk_0.42.bb
+index 4ef39f0904..3588d674f7 100644
+--- a/meta-networking/recipes-support/spice/spice-gtk_0.42.bb
++++ b/meta-networking/recipes-support/spice/spice-gtk_0.42.bb
+@@ -14,7 +14,6 @@ SRC_URI = "gitsm://gitlab.freedesktop.org/spice/spice-gtk.git;protocol=https;bra
+ 
+ CVE_STATUS[CVE-2012-4425] = "fixed-version: fixed since 0.15.3"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = " \
+ 	${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)} \
+diff --git a/meta-networking/recipes-support/spice/spice-guest-vdagent_0.22.1.bb b/meta-networking/recipes-support/spice/spice-guest-vdagent_0.22.1.bb
+index 3af973eed1..b13dd5d148 100644
+--- a/meta-networking/recipes-support/spice/spice-guest-vdagent_0.22.1.bb
++++ b/meta-networking/recipes-support/spice/spice-guest-vdagent_0.22.1.bb
+@@ -7,7 +7,6 @@ SRCREV = "aa08162f036840d3e33502dc0a836b03b9cec97c"
+ 
+ SRC_URI = "git://gitlab.freedesktop.org/spice/linux/vd_agent.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ REQUIRED_DISTRO_FEATURES = "opengl x11"
+diff --git a/meta-networking/recipes-support/spice/spice-protocol_0.14.4.bb b/meta-networking/recipes-support/spice/spice-protocol_0.14.4.bb
+index 3c8458baac..7f08eebee7 100644
+--- a/meta-networking/recipes-support/spice/spice-protocol_0.14.4.bb
++++ b/meta-networking/recipes-support/spice/spice-protocol_0.14.4.bb
+@@ -12,7 +12,6 @@ SRCREV = "6f453a775d87087c6ba59fc180c1a1e466631a47"
+ 
+ SRC_URI = "git://gitlab.freedesktop.org/spice/spice-protocol.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+index fc83be415e..c9418a1765 100644
+--- a/meta-networking/recipes-support/spice/spice_git.bb
++++ b/meta-networking/recipes-support/spice/spice_git.bb
+@@ -19,7 +19,6 @@ SRCREV = "0c2c1413a8b387ea597a95b6c867470a7c56c8ab"
+ 
+ SRC_URI = "gitsm://gitlab.freedesktop.org/spice/spice;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_STATUS[CVE-2016-0749] = "fixed-version: patched since 0.13.2"
+ CVE_STATUS[CVE-2016-2150] = "fixed-version: patched since 0.13.2"
+diff --git a/meta-networking/recipes-support/spice/usbredir_0.14.0.bb b/meta-networking/recipes-support/spice/usbredir_0.14.0.bb
+index 82f48ccdb8..81c7fdf0c8 100644
+--- a/meta-networking/recipes-support/spice/usbredir_0.14.0.bb
++++ b/meta-networking/recipes-support/spice/usbredir_0.14.0.bb
+@@ -11,7 +11,6 @@ SRCREV = "2d373432e604960c1dcc14fb97098febe4d64025"
+ 
+ SRC_URI = "git://gitlab.freedesktop.org/spice/usbredir;branch=main;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-networking/recipes-support/unbound/unbound_1.22.0.bb b/meta-networking/recipes-support/unbound/unbound_1.22.0.bb
+index c434ca181f..c35148b77e 100644
+--- a/meta-networking/recipes-support/unbound/unbound_1.22.0.bb
++++ b/meta-networking/recipes-support/unbound/unbound_1.22.0.bb
+@@ -26,7 +26,6 @@ inherit autotools pkgconfig systemd update-rc.d ptest
+ DEPENDS = "openssl libtool-native bison-native expat"
+ RDEPENDS:${PN} = "bash openssl-bin daemonize"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF = "--with-libexpat=${STAGING_EXECPREFIXDIR} \
+                 --disable-rpath --with-ssl=${STAGING_EXECPREFIXDIR} \
+diff --git a/meta-networking/recipes-support/wavemon/wavemon_0.9.6.bb b/meta-networking/recipes-support/wavemon/wavemon_0.9.6.bb
+index c3de38a6f8..4857c0af4f 100644
+--- a/meta-networking/recipes-support/wavemon/wavemon_0.9.6.bb
++++ b/meta-networking/recipes-support/wavemon/wavemon_0.9.6.bb
+@@ -22,7 +22,6 @@ EXTRA_OEMAKE = "\
+     CC='${CC}' CFLAGS='${CFLAGS} -pthread -I${STAGING_INCDIR}/libnl3' \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # wavemon does not support using out-of-tree builds
+ inherit autotools-brokensep pkgconfig
+diff --git a/meta-networking/recipes-support/wpan-tools/wpan-tools_0.10.bb b/meta-networking/recipes-support/wpan-tools/wpan-tools_0.10.bb
+index a0f9fb8b50..2f5ebe53ae 100644
+--- a/meta-networking/recipes-support/wpan-tools/wpan-tools_0.10.bb
++++ b/meta-networking/recipes-support/wpan-tools/wpan-tools_0.10.bb
+@@ -11,6 +11,5 @@ DEPENDS = "libnl"
+ SRC_URI = "git://github.com/linux-wpan/wpan-tools;branch=master;protocol=https"
+ SRCREV = "91b0f038aef2f62cb6a222d190b887fdfd6bc164"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-oe/classes/fitimage.bbclass b/meta-oe/classes/fitimage.bbclass
+index 76e7241820..03fa2fcd57 100644
+--- a/meta-oe/classes/fitimage.bbclass
++++ b/meta-oe/classes/fitimage.bbclass
+@@ -127,8 +127,7 @@ python __anonymous() {
+             d.setVar('EXTERNAL_KERNEL_DEVICETREE', '${RECIPE_SYSROOT}/boot/devicetree')
+ }
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ B = "${WORKDIR}/build"
+ 
+ #
+diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-devtools/spdm-utils/spdm-utils_0.7.2.bb b/meta-oe/dynamic-layers/clang-layer/recipes-devtools/spdm-utils/spdm-utils_0.7.2.bb
+index 64cd1d928a..ba6ad09098 100644
+--- a/meta-oe/dynamic-layers/clang-layer/recipes-devtools/spdm-utils/spdm-utils_0.7.2.bb
++++ b/meta-oe/dynamic-layers/clang-layer/recipes-devtools/spdm-utils/spdm-utils_0.7.2.bb
+@@ -16,7 +16,6 @@ SRC_URI += "git://github.com/westerndigitalcorporation/spdm-utils.git;protocol=h
+ include spdm-utils-crates.inc
+ 
+ SRCREV = "f67ac9e00b79f603ecbbd29928a4ecc3dec5abd5"
+-S = "${WORKDIR}/git"
+ 
+ # bindgen-cli comes from meta-clang and depends on libclang
+ DEPENDS += "libspdm udev bindgen-cli-native pciutils"
+diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
+index a60ca11244..3ec7d486fa 100644
+--- a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
++++ b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
+@@ -5,7 +5,6 @@ LICENSE = "GPL-3.0-only"
+ SECTION = "devel"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
+-S = "${WORKDIR}/git"
+ 
+ SRC_URI = " \
+     git://github.com/jthornber/thin-provisioning-tools;branch=main;protocol=https \
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb
+index 90c9a7147c..a32c9403c8 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb
+@@ -20,7 +20,6 @@ SRCREV = "8416326777b2aada0706539b8f9f6acefa476b16"
+ SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem;branch=master \
+            file://0001-include-missing-cstdint.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig python3native
+ 
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.1.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.1.2.bb
+index 69c2165ab1..ef1945b4fe 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.1.2.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.1.2.bb
+@@ -22,7 +22,6 @@ SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined
+ 
+ SRCREV = "01045f683b9419beb90119497cd1b2be44e83b8e"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "glib-2.0 libyaml util-linux-libuuid \
+            systemd python3-cffi-native \
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+index cacf211034..23515d9fa8 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
+@@ -48,7 +48,6 @@ SRC_URI:append:toolchain-clang = "\
+            file://0001-asio-Dont-use-experimental-with-clang.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_STATUS[CVE-2014-8180] = "not-applicable-config: Not affecting our configuration so it can be safely ignored."
+ CVE_STATUS[CVE-2017-2665] = "not-applicable-config: Not affecting our configuration so it can be safely ignored."
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb.inc b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb.inc
+index 371d66bdfe..4fe3995cd5 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb.inc
++++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb.inc
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9db4b73a55a3994384112efcdb37c01f"
+ SRC_URI = "git://github.com/nanopb/nanopb.git;branch=maintenance_0.4;protocol=https"
+ SRCREV = "cad3c18ef15a663e30e3e43e3a752b66378adec1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-extended/lcdproc/lcdproc_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-extended/lcdproc/lcdproc_git.bb
+index c29c51a2ae..d4987acede 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-extended/lcdproc/lcdproc_git.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-extended/lcdproc/lcdproc_git.bb
+@@ -13,7 +13,6 @@ PV = "0.5.9+git"
+ SRCREV = "0e2ce9b9c46c47363436f9ee730f7c71bf455f0f"
+ SRC_URI = "git://github.com/lcdproc/lcdproc;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig update-rc.d
+ 
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-multimedia/kmsxx/kmsxx_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-multimedia/kmsxx/kmsxx_git.bb
+index f37c63d316..5d204d7d94 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-multimedia/kmsxx/kmsxx_git.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-multimedia/kmsxx/kmsxx_git.bb
+@@ -20,7 +20,6 @@ PACKAGECONFIG[utils] += "-Dutils=true, -Dutils=false"
+ 
+ DEPENDS += "libdrm libevdev fmt"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-support/nvmetcli/nvmetcli_0.8.bb b/meta-oe/dynamic-layers/meta-python/recipes-support/nvmetcli/nvmetcli_0.8.bb
+index ad9873563f..cf2d54c07d 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-support/nvmetcli/nvmetcli_0.8.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-support/nvmetcli/nvmetcli_0.8.bb
+@@ -22,7 +22,6 @@ RDEPENDS:${PN} += "python3 python3-six python3-pyparsing python3-configshell-fb"
+ SRCREV = "d323d5a3091af490502c5d025ec7361a3a2cfbd9"
+ SRC_URI = "git://git.infradead.org/users/hch/nvmetcli.git;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install:append() {
+     # Install example configuration scripts.
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-support/smem/smem_1.5.bb b/meta-oe/dynamic-layers/meta-python/recipes-support/smem/smem_1.5.bb
+index 4e0afefde7..79a7f4095e 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-support/smem/smem_1.5.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-support/smem/smem_1.5.bb
+@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "161131c686a6d9962a0e96912526dd46308e022d62e3f8acaed5a56fda
+ UPSTREAM_CHECK_URI = "https://selenic.com/repo/smem/tags"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/${BPN}-${HG_CHANGESET}"
++S = "${UNPACKDIR}/${BPN}-${HG_CHANGESET}"
+ 
+ do_compile() {
+         ${CC} ${CFLAGS} ${LDFLAGS} smemcap.c -o smemcap
+diff --git a/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei_1.4.2.bb b/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei_1.4.2.bb
+index 7c90db9314..ee65f89ab7 100644
+--- a/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei_1.4.2.bb
++++ b/meta-oe/dynamic-layers/multimedia-layer/recipes-graphics/taisei/taisei_1.4.2.bb
+@@ -38,7 +38,6 @@ SRC_URI = "gitsm://github.com/taisei-project/taisei.git;branch=v1.4.x;protocol=h
+ 
+ SRCREV = "c098579d4fa0f004ccc204c5bc46eac3717cba28"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit features_check meson mime mime-xdg pkgconfig python3native
+ 
+diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.3.bb b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.3.bb
+index f21a3216af..301861de38 100644
+--- a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.3.bb
++++ b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.3.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master;protocol=https \
+ 
+ SRCREV = "db0870edd2919f4f4d0101843136bcae92ab0743"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "libtraceevent"
+ RDEPENDS:${BPN} = "perl perl-module-file-basename perl-module-file-find perl-module-file-spec perl-module-getopt-long \
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb
+index 86b0ce0778..4d30327372 100644
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb
++++ b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb
+@@ -3,8 +3,7 @@ SECTION = "console/utils"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ SRC_URI = " \
+     file://android-gadget-setup \
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf_1.0.bb b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf_1.0.bb
+index b98c70db77..7bbac1db75 100644
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf_1.0.bb
++++ b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf_1.0.bb
+@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
+ 
+ SRC_URI = "file://android-gadget-setup"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install() {
+     install -d ${D}${bindir}
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
+index cd3c54e32e..63e31e90cc 100644
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
++++ b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
+@@ -43,9 +43,9 @@ SRC_URI += " \
+ 
+ # patches which don't come from debian
+ SRC_URI += " \
+-    file://rules_yocto.mk;subdir=git \
++    file://rules_yocto.mk;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
+     file://android-tools-adbd.service \
+-    file://adbd.mk;subdir=git/debian/system/core \
++    file://adbd.mk;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/debian/system/core \
+     file://remount \
+     file://0001-Fixes-for-yocto-build.patch \
+     file://0002-android-tools-modifications-to-make-it-build-in-yoct.patch \
+@@ -55,7 +55,6 @@ SRC_URI += " \
+     file://0001-liblp-fix-building-with-GCC-14.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ B = "${WORKDIR}/${BPN}"
+ 
+ # http://errors.yoctoproject.org/Errors/Details/1debian881/
+diff --git a/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb b/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb
+index c58524aa64..feda6599a8 100644
+--- a/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb
++++ b/meta-oe/recipes-benchmark/cpuburn/cpuburn-arm_git.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/ssvb/cpuburn-arm.git;branch=master;protocol=https \
+            file://0003-burn.S-Remove-.func-.endfunc.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_compile() {
+ 
+diff --git a/meta-oe/recipes-benchmark/fio/fio_3.39.bb b/meta-oe/recipes-benchmark/fio/fio_3.39.bb
+index 91bd23e50e..345c7f08e7 100644
+--- a/meta-oe/recipes-benchmark/fio/fio_3.39.bb
++++ b/meta-oe/recipes-benchmark/fio/fio_3.39.bb
+@@ -27,7 +27,6 @@ SRCREV = "a6e474c9e896e4ba1eb40066a03402afb040710a"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "fio-(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # avoids build breaks when using no-static-libs.inc
+ DISABLE_STATIC = ""
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+index 0b61d6ed62..8bcb763f06 100644
+--- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+@@ -21,7 +21,6 @@ SRC_URI = " \
+ "
+ SRCREV = "42e3d8fe3aa88743ef90348138f643f7b04a9237"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig features_check
+ 
+diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3_507.bb b/meta-oe/recipes-benchmark/iozone3/iozone3_507.bb
+index 8e229499b1..725b0af209 100644
+--- a/meta-oe/recipes-benchmark/iozone3/iozone3_507.bb
++++ b/meta-oe/recipes-benchmark/iozone3/iozone3_507.bb
+@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "1e8087ada056f5d8018ee0bc76686d416fc2251ed03038055dbd0af78d
+ 
+ UPSTREAM_CHECK_REGEX = "iozone3_(?P<pver>\d+).tar"
+ 
+-S = "${WORKDIR}/${BPN}_${PV}/src/current"
++S = "${UNPACKDIR}/${BPN}_${PV}/src/current"
+ 
+ #
+ # All other arches can use the default OEMAKE except those
+diff --git a/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb b/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
+index c353ce02e1..3d965dac00 100644
+--- a/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
++++ b/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
+@@ -10,7 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/iperf-${PV}.tar.gz \
+ 
+ SRC_URI[sha256sum] = "754ab0a7e28033dbea81308ef424bc7df4d6e2fe31b60cc536b61b51fefbd8fb"
+ 
+-S = "${WORKDIR}/iperf-${PV}"
++S = "${UNPACKDIR}/iperf-${PV}"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb
+index 4a71e83b73..08f29937c0 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb
+@@ -20,7 +20,6 @@ SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
+ 
+ SRCREV = "2a2984488d6de8f7a2d1f5938e03ca7be57e227c"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb b/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb
+index df76067a44..ae87262870 100644
+--- a/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb
++++ b/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb
+@@ -16,7 +16,6 @@ SRC_URI = "git://git.musl-libc.org/libc-bench;branch=master \
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install () {
+     install -d ${D}${bindir}
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
+index 6d96a13cd4..e688d6ede2 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
+@@ -28,7 +28,6 @@ SRC_URI = " \
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/git"
+ 
+ COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
+ 
+diff --git a/meta-oe/recipes-benchmark/linpack/linpack_1.0.bb b/meta-oe/recipes-benchmark/linpack/linpack_1.0.bb
+index 735b5560e0..6a500dbf01 100644
+--- a/meta-oe/recipes-benchmark/linpack/linpack_1.0.bb
++++ b/meta-oe/recipes-benchmark/linpack/linpack_1.0.bb
+@@ -10,8 +10,7 @@ SRC_URI = "http://www.netlib.org/benchmark/linpackc.new;downloadfilename=linpack
+           "
+ SRC_URI[sha256sum] = "a63f2ec86512959f1fd926bfafb85905b2d7b7402942ffae3af374d48745e97e"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_compile () {
+ 	${CC} ${CFLAGS} ${LDFLAGS} -DDP -o linpack_dp linpacknew.c -lm
+diff --git a/meta-oe/recipes-benchmark/mbw/mbw_2.0.bb b/meta-oe/recipes-benchmark/mbw/mbw_2.0.bb
+index bb8c4625d5..1fd95de038 100644
+--- a/meta-oe/recipes-benchmark/mbw/mbw_2.0.bb
++++ b/meta-oe/recipes-benchmark/mbw/mbw_2.0.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/raas/${BPN}.git;branch=master;protocol=https"
+ 
+ SRCREV = "c3155b544a5065e8235508059c6512af6c46bd4d"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+     install -d ${D}${bindir}
+diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.4.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.4.bb
+index 7ca80c02af..5f105c9f8e 100644
+--- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.4.bb
++++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_10.8.4.bb
+@@ -11,7 +11,7 @@ SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz \
+ 
+ SRC_URI[sha256sum] = "1f2092d536c0a3193efc53e4a50f3cee65c0ef1a78d31e5404f1c663fff7b7f4"
+ 
+-S = "${WORKDIR}/phoronix-test-suite"
++S = "${UNPACKDIR}/phoronix-test-suite"
+ 
+ inherit systemd allarch mime mime-xdg
+ 
+diff --git a/meta-oe/recipes-benchmark/qperf/qperf_0.4.11.bb b/meta-oe/recipes-benchmark/qperf/qperf_0.4.11.bb
+index b32f37153e..e034371604 100644
+--- a/meta-oe/recipes-benchmark/qperf/qperf_0.4.11.bb
++++ b/meta-oe/recipes-benchmark/qperf/qperf_0.4.11.bb
+@@ -9,7 +9,6 @@ inherit autotools-brokensep
+ SRCREV = "c706363815a38ff2c5cbc07b73e2cfaaa59bae0f"
+ SRC_URI = "git://github.com/linux-rdma/qperf.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_configure() {
+   ./cleanup
+diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+index 2cfeb72416..caefdb7b6b 100644
+--- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
++++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/Algodev-github/S.git;protocol=https;branch=master"
+ # upstream updates
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # installing in /opt/S-suite since the package has
+ # dependencies to the directory structure.
+diff --git a/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.11.bb b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.11.bb
+index ba61ff971e..2d450094b7 100644
+--- a/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.11.bb
++++ b/meta-oe/recipes-benchmark/stressapptest/stressapptest_1.0.11.bb
+@@ -18,6 +18,5 @@ GI_DATA_ENABLED:libc-musl:armv7a = "False"
+ GI_DATA_ENABLED:libc-musl:armv7ve = "False"
+ SRC_URI = "git://github.com/stressapptest/stressapptest;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+diff --git a/meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb b/meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb
+index 11e33fec55..198552e5c6 100644
+--- a/meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb
++++ b/meta-oe/recipes-benchmark/sysbench/sysbench_1.0.20.bb
+@@ -13,7 +13,6 @@ inherit autotools-brokensep pkgconfig
+ SRC_URI = "git://github.com/akopytov/sysbench.git;protocol=https;branch=master"
+ SRCREV = "ebf1c90da05dea94648165e4f149abc20c979557"
+ 
+-S = "${WORKDIR}/git"
+ 
+ COMPATIBLE_HOST = "(arm|aarch64|i.86|x86_64).*-linux*"
+ 
+diff --git a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+index 200a0de849..8f65a6135c 100644
+--- a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
++++ b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/ssvb/tinymembench.git;branch=master;protocol=https \
+            file://0001-asm-Delete-.func-.endfunc-directives.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ TARGET_CC_ARCH += "${LDFLAGS}"
+ 
+diff --git a/meta-oe/recipes-benchmark/whetstone/whetstone_1.2.bb b/meta-oe/recipes-benchmark/whetstone/whetstone_1.2.bb
+index fa80236022..0c6661567b 100644
+--- a/meta-oe/recipes-benchmark/whetstone/whetstone_1.2.bb
++++ b/meta-oe/recipes-benchmark/whetstone/whetstone_1.2.bb
+@@ -7,8 +7,7 @@ LIC_FILES_CHKSUM = "file://${UNPACKDIR}/whetstone.c;beginline=1;endline=52;md5=c
+ SRC_URI = "http://www.netlib.org/benchmark/whetstone.c"
+ SRC_URI[sha256sum] = "333e4ceca042c146f63eec605573d16ae8b07166cbc44a17bec1ea97c6f1efbf"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_compile () {
+ 	${CC} ${CFLAGS} ${LDFLAGS} -Ofast -o whetstone whetstone.c -lm
+diff --git a/meta-oe/recipes-bsp/bolt/bolt_0.9.6.bb b/meta-oe/recipes-bsp/bolt/bolt_0.9.6.bb
+index c278a0982a..ec3cdcaa75 100644
+--- a/meta-oe/recipes-bsp/bolt/bolt_0.9.6.bb
++++ b/meta-oe/recipes-bsp/bolt/bolt_0.9.6.bb
+@@ -10,7 +10,6 @@ REQUIRED_DISTRO_FEATURES = "polkit"
+ SRC_URI = "git://gitlab.freedesktop.org/bolt/bolt.git;protocol=https;branch=master"
+ SRCREV = "f03c50b22ae3fda26711ddabd91e2c5dd8103478"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_PRODUCT = "freedesktop:bolt"
+ 
+diff --git a/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb b/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
+index b623d0525a..515c009ead 100644
+--- a/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
++++ b/meta-oe/recipes-bsp/con2fbmap/con2fbmap_git.bb
+@@ -16,7 +16,6 @@ SRC_URI = "git://gitlab.com/pibox/con2fbmap.git;protocol=https;branch=master \
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb b/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb
+index fbe9483740..9e23a4b67d 100644
+--- a/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb
++++ b/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb
+@@ -20,7 +20,6 @@ UPSTREAM_CHECK_COMMITS = "1"
+ EXTRA_OEMAKE:append = " ${@['', 'NLS=false']['${USE_NLS}' == 'no']} "
+ 
+ 
+-S = "${WORKDIR}/git"
+ 
+ TARGET_CC_ARCH += "${LDFLAGS}"
+ 
+diff --git a/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher_1.14.20.bb b/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher_1.14.20.bb
+index 42256a7afd..e0041b58e6 100644
+--- a/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher_1.14.20.bb
++++ b/meta-oe/recipes-bsp/dediprog-flasher/dediprog-flasher_1.14.20.bb
+@@ -16,7 +16,6 @@ EXTRA_OEMAKE = "NOSTRIP=1 DESTDIR=${D} PREFIX=${prefix}"
+ 
+ PV = "1.0+${SRCPV}"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+     oe_runmake install
+diff --git a/meta-oe/recipes-bsp/edac-utils/edac-utils_git.bb b/meta-oe/recipes-bsp/edac-utils/edac-utils_git.bb
+index 6c80f4c81d..0d8f3c8a6b 100644
+--- a/meta-oe/recipes-bsp/edac-utils/edac-utils_git.bb
++++ b/meta-oe/recipes-bsp/edac-utils/edac-utils_git.bb
+@@ -13,7 +13,6 @@ DEPENDS = " sysfsutils"
+ SRCREV = "1c57818ecee186aa47af0342149577df5302c022"
+ PV = "0.18+git"
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRC_URI = "git://github.com/grondo/edac-utils;branch=master;protocol=https \
+     file://make-init-script-be-able-to-automatically-load-EDAC-.patch \
+diff --git a/meta-oe/recipes-bsp/firmwared/firmwared_git.bb b/meta-oe/recipes-bsp/firmwared/firmwared_git.bb
+index 2b7ed256eb..1542ee73d1 100644
+--- a/meta-oe/recipes-bsp/firmwared/firmwared_git.bb
++++ b/meta-oe/recipes-bsp/firmwared/firmwared_git.bb
+@@ -16,7 +16,6 @@ SRCREV = "2e6b5db43d63a5c0283a4cae9a6a20b7ad107a04"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "glib-2.0 systemd"
+ 
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.5.1.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.5.1.bb
+index 9a8e81bae3..f7121e2503 100644
+--- a/meta-oe/recipes-bsp/flashrom/flashrom_1.5.1.bb
++++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.5.1.bb
+@@ -9,7 +9,7 @@ SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.xz \
+ 
+ SRC_URI[sha256sum] = "1f934b076ed49eace203655ec249fc7861a6b8e87fe4aef732e47b6e485b6293"
+ 
+-S = "${WORKDIR}/flashrom-v${PV}"
++S = "${UNPACKDIR}/flashrom-v${PV}"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-bsp/fwupd/fwupd-efi_1.6.bb b/meta-oe/recipes-bsp/fwupd/fwupd-efi_1.6.bb
+index d72f2d9c53..bbf2b1fdac 100644
+--- a/meta-oe/recipes-bsp/fwupd/fwupd-efi_1.6.bb
++++ b/meta-oe/recipes-bsp/fwupd/fwupd-efi_1.6.bb
+@@ -6,7 +6,6 @@ SRC_URI = "git://github.com/fwupd/fwupd-efi;protocol=https;branch=main \
+            file://0001-efi-generate_binary.py-Use-env-to-detect-python3.patch"
+ 
+ SRCREV = "58a2928f778278ab1f7f8fcddbab81ba587a8962"
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "gnu-efi python3-pefile-native"
+ 
+diff --git a/meta-oe/recipes-bsp/i2cdev/i2cdev_git.bb b/meta-oe/recipes-bsp/i2cdev/i2cdev_git.bb
+index 87a71efbe8..d3d08720a6 100644
+--- a/meta-oe/recipes-bsp/i2cdev/i2cdev_git.bb
++++ b/meta-oe/recipes-bsp/i2cdev/i2cdev_git.bb
+@@ -21,6 +21,5 @@ SRC_URI = "\
+ "
+ SRCREV = "ed9ad777d842880e7ac6ca5e0de4bd2d3b4d02dc"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb b/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
+index 88a6e5bb30..ff3b29406b 100644
+--- a/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
++++ b/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
+@@ -23,7 +23,6 @@ SRCREV = "b0edae14e8660b80ffe0384354038a9f62e2978d"
+ COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
+ COMPATIBLE_HOST:libc-musl = "null"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-systemd', '', d)}"
+ 
+diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors-config_1.0.bb b/meta-oe/recipes-bsp/lm_sensors/lmsensors-config_1.0.bb
+index 6fad255c89..aebdd25bda 100644
+--- a/meta-oe/recipes-bsp/lm_sensors/lmsensors-config_1.0.bb
++++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors-config_1.0.bb
+@@ -12,8 +12,7 @@ SRC_URI = "file://fancontrol \
+            file://sensors.conf \
+            file://sensord \
+ "
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ PACKAGECONFIG ??= "sensord"
+ PACKAGECONFIG[sensord] = ",,"
+diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+index 74a9b839c9..af0f5a7999 100644
+--- a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
++++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+@@ -44,7 +44,6 @@ SYSTEMD_SERVICE:${PN}-fancontrol = "fancontrol.service"
+ SYSTEMD_SERVICE:${PN}-sensord = "sensord.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = 'EXLDFLAGS="${LDFLAGS}" \
+         MACHINE=${TARGET_ARCH} PREFIX=${prefix} MANDIR=${mandir} \
+diff --git a/meta-oe/recipes-bsp/lsscsi/lsscsi_0.32.bb b/meta-oe/recipes-bsp/lsscsi/lsscsi_0.32.bb
+index 127be8fbfa..9df6ee9efc 100644
+--- a/meta-oe/recipes-bsp/lsscsi/lsscsi_0.32.bb
++++ b/meta-oe/recipes-bsp/lsscsi/lsscsi_0.32.bb
+@@ -10,6 +10,6 @@ SRC_URI[sha256sum] = "0a800e9e94dca2ab702d65d72777ae8cae078e3d74d0bcbed64ba0849e
+ 
+ inherit autotools
+ 
+-S = "${WORKDIR}/lsscsi-${PV}"
++S = "${UNPACKDIR}/lsscsi-${PV}"
+ 
+ UPSTREAM_CHECK_REGEX = "lsscsi-(?P<pver>\d+(\.\d+)+)\.tgz"
+diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.12.bb b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.12.bb
+index 7ab244f3cc..eae49b04ea 100644
+--- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.12.bb
++++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.12.bb
+@@ -9,7 +9,6 @@ DEPENDS = "json-c libnvme"
+ SRCREV = "71fa5d9310d6b41a69e844593423ac91b1453472"
+ 
+ SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
+-S = "${WORKDIR}/git"
+ 
+ inherit bash-completion meson pkgconfig systemd
+ 
+diff --git a/meta-oe/recipes-bsp/pointercal/pointercal_0.0.bb b/meta-oe/recipes-bsp/pointercal/pointercal_0.0.bb
+index 20e870ccb2..a270a23dde 100644
+--- a/meta-oe/recipes-bsp/pointercal/pointercal_0.0.bb
++++ b/meta-oe/recipes-bsp/pointercal/pointercal_0.0.bb
+@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4b5fcfc87fb615860d398b5e38685edf"
+ SRC_URI = "file://pointercal \
+            file://COPYING"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install() {
+     # Only install file if it has a contents
+diff --git a/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb b/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
+index 05f4973aed..0fe41a7b92 100644
+--- a/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
++++ b/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
+@@ -20,7 +20,7 @@ CVE_STATUS[CVE-2009-1147] = "cpe-incorrect: this CVE is for vmware ace"
+ 
+ COMPATIBLE_HOST:libc-musl = "null"
+ 
+-S = "${WORKDIR}/ACE_wrappers"
++S = "${UNPACKDIR}/ACE_wrappers"
+ B = "${WORKDIR}/ACE_wrappers/ace"
+ export ACE_ROOT = "${WORKDIR}/ACE_wrappers"
+ 
+diff --git a/meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_10.1.0.bb b/meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_10.1.0.bb
+index 3a02c714c1..fc020695e3 100644
+--- a/meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_10.1.0.bb
++++ b/meta-oe/recipes-connectivity/asyncmqtt/asyncmqtt_10.1.0.bb
+@@ -9,6 +9,5 @@ SRCREV = "21046ebc4a5475c14cea446715734c88fe33d276"
+ 
+ DEPENDS = "openssl boost"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+diff --git a/meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb b/meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb
+index 979199a1fa..52a0af810f 100644
+--- a/meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb
++++ b/meta-oe/recipes-connectivity/gammu/python3-gammu_3.2.4.bb
+@@ -12,7 +12,7 @@ inherit pypi setuptools3 pkgconfig
+ SRC_URI += "file://0001-setup.py-StrictVersion-packaging.version.patch"
+ SRC_URI[sha256sum] = "49fc70f01bc192c43ff3ec815e082df5261ea4c8d36a695e977734c4eb4df868"
+ 
+-S = "${WORKDIR}/python-gammu-${PV}"
++S = "${UNPACKDIR}/python-gammu-${PV}"
+ 
+ DEPENDS += "gammu python3-packaging-native"
+ 
+diff --git a/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb b/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
+index 0841dc2596..06f0b5bf0a 100644
+--- a/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
++++ b/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/labapart/gattlib.git;branch=master;protocol=https \
+ SRCBRANCH = "master"
+ SRCREV = "33a8a275928b186381bb0aea0f9778e330e57ec3"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_STATUS[CVE-2019-6498] = "fixed-version: patch is already included in sources"
+ 
+diff --git a/meta-oe/recipes-connectivity/gensio/gensio_2.8.7.bb b/meta-oe/recipes-connectivity/gensio/gensio_2.8.7.bb
+index f4d0c09306..9325b1e5dc 100644
+--- a/meta-oe/recipes-connectivity/gensio/gensio_2.8.7.bb
++++ b/meta-oe/recipes-connectivity/gensio/gensio_2.8.7.bb
+@@ -9,7 +9,6 @@ SRCREV = "e4dbb9687bd5e887fa98a4cdcec012ea85da1ef2"
+ 
+ SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb
+index e500749025..c042dba5a7 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb
+@@ -40,7 +40,7 @@ SRC_URI[sha256sum] = "b7a4cd5ead67fb08b980b21abd150ff7217e85ea320c9ed0c6dadd3048
+ CVE_PRODUCT = "kerberos"
+ CVE_VERSION = "5-${PV}"
+ 
+-S = "${WORKDIR}/${BP}/src"
++S = "${UNPACKDIR}/${BP}/src"
+ 
+ DEPENDS = "bison-native ncurses util-linux e2fsprogs e2fsprogs-native openssl"
+ 
+diff --git a/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.3.2.bb b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.3.2.bb
+index 977f34b574..8b7306b598 100644
+--- a/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.3.2.bb
++++ b/meta-oe/recipes-connectivity/libimobiledevice-glue/libimobiledevice-glue_1.3.2.bb
+@@ -11,5 +11,4 @@ DEPENDS = "libplist"
+ SRCREV = "aef2bf0f5bfe961ad83d224166462d87b1df2b00"
+ SRC_URI = "git://github.com/libimobiledevice/libimobiledevice-glue;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_git.bb b/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_git.bb
+index b8d7e8872b..3c93c9a37b 100644
+--- a/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_git.bb
++++ b/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_git.bb
+@@ -14,7 +14,6 @@ SRCREV = "860ffb707af3af94467d2ece4ad258dda957c6cd"
+ SRC_URI = "git://github.com/libimobiledevice/libimobiledevice;protocol=https;branch=master \
+            file://0001-include-unistd.h-for-usleep.patch"
+ 
+-S = "${WORKDIR}/git"
+ inherit autotools pkgconfig
+ 
+ EXTRA_OECONF = " --without-cython "
+diff --git a/meta-oe/recipes-connectivity/libirecovery/libirecovery_1.2.1.bb b/meta-oe/recipes-connectivity/libirecovery/libirecovery_1.2.1.bb
+index 818033243f..6049369290 100644
+--- a/meta-oe/recipes-connectivity/libirecovery/libirecovery_1.2.1.bb
++++ b/meta-oe/recipes-connectivity/libirecovery/libirecovery_1.2.1.bb
+@@ -11,5 +11,4 @@ DEPENDS = "libimobiledevice-glue libusb1 readline"
+ SRCREV = "2fb767d784c01269a0ded5bacd5539aee3768c35"
+ SRC_URI = "git://github.com/libimobiledevice/libirecovery;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.33.1.bb b/meta-oe/recipes-connectivity/libmbim/libmbim_1.33.1.bb
+index a4174e06e3..27d28d71cb 100644
+--- a/meta-oe/recipes-connectivity/libmbim/libmbim_1.33.1.bb
++++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.33.1.bb
+@@ -14,7 +14,6 @@ inherit meson pkgconfig bash-completion gobject-introspection upstream-version-i
+ SRCREV = "e10df4b6b3edfe6a46d93f7f5f5cab31c29a7091"
+ SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libmbim.git;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMESON = " \
+     -Dgtk_doc=false \
+diff --git a/meta-oe/recipes-connectivity/libndp/libndp_1.9.bb b/meta-oe/recipes-connectivity/libndp/libndp_1.9.bb
+index 69eecdd9fa..fdf5694e9f 100644
+--- a/meta-oe/recipes-connectivity/libndp/libndp_1.9.bb
++++ b/meta-oe/recipes-connectivity/libndp/libndp_1.9.bb
+@@ -8,6 +8,5 @@ SRC_URI = "git://github.com/jpirko/libndp;branch=master;protocol=https \
+            "
+ # tag for v1.8
+ SRCREV = "2730638bf88984b09531813974f9bd14e1a50165"
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+diff --git a/meta-oe/recipes-connectivity/libnet/libnet_1.3.bb b/meta-oe/recipes-connectivity/libnet/libnet_1.3.bb
+index b4648832f1..0594b2485e 100644
+--- a/meta-oe/recipes-connectivity/libnet/libnet_1.3.bb
++++ b/meta-oe/recipes-connectivity/libnet/libnet_1.3.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/libnet/libnet.git;protocol=https;branch=master"
+ SRC_URI[sha256sum] = "1e9e9054d688b059bcbaf878d8c4fbf69bfc0c9386cd4e7779fbb53339050d2e"
+ SRCREV = "deaebdfe2743e8a6f04d3c307d9272afeeecfade"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools binconfig multilib_script
+ MULTILIB_SCRIPTS = "${PN}-dev:${bindir}/libnet-config"
+diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs_6.0.2.bb b/meta-oe/recipes-connectivity/libnfs/libnfs_6.0.2.bb
+index 0d21a7e596..83f32d3a07 100644
+--- a/meta-oe/recipes-connectivity/libnfs/libnfs_6.0.2.bb
++++ b/meta-oe/recipes-connectivity/libnfs/libnfs_6.0.2.bb
+@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/sahlberg/libnfs.git;protocol=https;branch=master \
+            file://0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch \
+            "
+ SRCREV = "18c5c73ee88bb7dc8da0d55dc95164bb77e49dc6"
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS += "gnutls"
+ 
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.34.0.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.34.0.bb
+index 94164a0b5a..8dc7ec3773 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.34.0.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.34.0.bb
+@@ -15,7 +15,6 @@ inherit meson pkgconfig bash-completion gobject-introspection upstream-version-i
+ SRCREV = "3f07d6e5b4677558543b3b4484ea88ad92257e92"
+ SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqmi.git;protocol=https;branch=qmi-1-34"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "udev mbim"
+ PACKAGECONFIG[udev] = "-Dudev=true,-Dudev=false,libgudev"
+diff --git a/meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb b/meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb
+index 3549cac568..f195008650 100644
+--- a/meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb
++++ b/meta-oe/recipes-connectivity/libqrtr-glib/libqrtr-glib_git.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqrtr-glib.git;protoc
+ PV = "1.2.2+git"
+ SRCREV = "8991f0e93713ebf4da48ae4f23940ead42f64c8c"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig gobject-introspection
+ 
+diff --git a/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb b/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb
+index f2de1f468d..6bfcbec25f 100644
+--- a/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb
++++ b/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb
+@@ -7,13 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8b6cb42d66e6b3c47a909c3ce678a7b"
+ DEPENDS = "boost openssl"
+ 
+ SRC_URI = "git://github.com/arvidn/libtorrent.git;branch=master;protocol=https \
+-	git://github.com/arvidn/try_signal.git;branch=master;protocol=https;destsuffix=git/deps/try_signal;name=try_signal"
++	git://github.com/arvidn/try_signal.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/try_signal;name=try_signal"
+ 
+ SRCREV = "74bc93a37a5e31c78f0aa02037a68fb9ac5deb41"
+ SRCREV_try_signal = "105cce59972f925a33aa6b1c3109e4cd3caf583d"
+ SRCREV_FORMAT .= "_try_signal"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig python3targetconfig
+ 
+diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb
+index 912b002618..220bb62c64 100644
+--- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb
++++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb
+@@ -13,7 +13,6 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+ CVE_STATUS[CVE-2009-1760] = "backported-patch: patched in our product"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_PRODUCT = ""
+ 
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.5.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.5.bb
+index 4d6ec3b7ea..0751cff178 100644
+--- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.5.bb
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.5.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=382bfdf329e774859fd401eaf850d29b"
+ DEPENDS = "zlib"
+ DEPENDS:append:class-native = " libcap-native"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "ab9df9cfc39de7a49967f18387b6b76310947442"
+ SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.3-stable \
+            file://0001-sll_protocol-may-be-be16.patch \
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.22.0.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.22.0.bb
+index 6b4336eb80..82cc1167e2 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.22.0.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.22.0.bb
+@@ -14,7 +14,6 @@ DEPENDS = "glib-2.0 libgudev libxslt-native dbus"
+ SRCREV = "03f786ce66360d67c669f4f122f8aa458e6f01ea"
+ SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=https;branch=mm-1-22"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # strict, permissive
+ MODEMMANAGER_POLKIT_TYPE ??= "permissive"
+diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
+index fecf9b129c..be8482ab50 100644
+--- a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
++++ b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
+@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "158860aaea52f0fce0c8e4b64550daaae06df2689e05834697b7e8c7d7
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/openobex/files/openobex/"
+ UPSTREAM_CHECK_REGEX = "${BPN}/(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/${BP}-Source"
++S = "${UNPACKDIR}/${BP}-Source"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb b/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb
+index a9a12f8e05..30326e89ef 100644
+--- a/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb
++++ b/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb
+@@ -27,7 +27,7 @@ PACKAGECONFIG[swig] = "-DENABLE_SWIG=ON,-DENABLE_SWIG=OFF,swig"
+ 
+ DEPENDS:remove:class-native = "fuse-native"
+ 
+-S = "${WORKDIR}/${BP}-Source"
++S = "${UNPACKDIR}/${BP}-Source"
+ 
+ EXTRA_OECMAKE += "-DCMAKE_SKIP_RPATH=ON \
+                   -DENABLE_PERL=OFF -DENABLE_PYTHON=OFF \
+diff --git a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.14.bb b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.14.bb
+index b971851b90..ad6637ed88 100644
+--- a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.14.bb
++++ b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.14.bb
+@@ -19,7 +19,6 @@ SRCREV = "2150ba29d9df24ad1733c460eb099f292af84ee5"
+ 
+ DEPENDS = "openssl"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.4.1.bb b/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.4.1.bb
+index 6f2efcda50..cfe5142312 100644
+--- a/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.4.1.bb
++++ b/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.4.1.bb
+@@ -18,7 +18,6 @@ PV .= "+git"
+ 
+ DEPENDS = "openssl paho-mqtt-c"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-connectivity/pcapplusplus/pcapplusplus_24.09.bb b/meta-oe/recipes-connectivity/pcapplusplus/pcapplusplus_24.09.bb
+index 7979094a0b..a04102aa42 100644
+--- a/meta-oe/recipes-connectivity/pcapplusplus/pcapplusplus_24.09.bb
++++ b/meta-oe/recipes-connectivity/pcapplusplus/pcapplusplus_24.09.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/seladb/PcapPlusPlus.git;protocol=https;branch=master
+           "
+ SRCREV = "4af4b8b04e6d5dd40b8e69cc30c5c1f62e7fe368"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.15.0.bb b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.15.0.bb
+index 680174f005..4fd6302f2c 100644
+--- a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.15.0.bb
++++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.15.0.bb
+@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/alanxz/rabbitmq-c.git;branch=master;protocol=https \
+ "
+ SRCREV = "84b81cd97a1b5515d3d4b304796680da24c666d8"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "popt openssl"
+ 
+diff --git a/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.10.0.bb b/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.10.0.bb
+index 4c963d9cc4..02a97cd6e3 100644
+--- a/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.10.0.bb
++++ b/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.10.0.bb
+@@ -8,7 +8,6 @@ DEPENDS = "autoconf-archive libsigc++-2.0 curl cppunit libtool libtorrent ncurse
+ SRC_URI = "git://github.com/rakshasa/rtorrent;branch=master;protocol=https"
+ SRCREV = "a88cab6d2e764e22cac232ef8d5af039d41b8280"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
+ 
+diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
+index 38dcb395b2..e5a3f88867 100644
+--- a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
++++ b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
+@@ -14,7 +14,7 @@ SRC_URI = "http://smstools3.kekekasvi.com/packages/${BP}.tar.gz \
+ SRC_URI[sha256sum] = "a26ba4c02b16f6cf13177bffca6c9230dc5fefaeba8e3030cd4e4905f6a92084"
+ 
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ EXTRA_OEMAKE += "LFLAGS='${LDFLAGS}'"
+ 
+diff --git a/meta-oe/recipes-connectivity/transmission/transmission_4.0.6.bb b/meta-oe/recipes-connectivity/transmission/transmission_4.0.6.bb
+index f86389998f..5d0dd6a389 100644
+--- a/meta-oe/recipes-connectivity/transmission/transmission_4.0.6.bb
++++ b/meta-oe/recipes-connectivity/transmission/transmission_4.0.6.bb
+@@ -15,7 +15,6 @@ SRC_URI = " \
+ # Transmission release 4.0.6
+ SRCREV = "38c164933e9f77c110b48fe745861c3b98e3d83e"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake gettext update-rc.d pkgconfig systemd mime-xdg
+ 
+diff --git a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
+index 569d6a41cf..5a880ed6d2 100644
+--- a/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
++++ b/meta-oe/recipes-connectivity/usbmuxd/usbmuxd_git.bb
+@@ -14,7 +14,6 @@ PV = "1.1.2+git"
+ SRCREV = "01c94c77f59404924f1c46d99c4e5e0c7817281b"
+ SRC_URI = "git://github.com/libimobiledevice/usbmuxd;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--without-preflight"
+ 
+diff --git a/meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_10.10.1.bb b/meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_10.10.1.bb
+index c372b03072..9703c10452 100644
+--- a/meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_10.10.1.bb
++++ b/meta-oe/recipes-connectivity/wifi-test-suite/wifi-test-suite_10.10.1.bb
+@@ -7,7 +7,6 @@ LICENSE  = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=0542427ed5c315ca34aa09ae7a85ed32"
+ SECTION = "test"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "12e85fbeca8ca21a632d18e55089a8a7606d64aa"
+ SRC_URI = "git://github.com/Wi-FiTestSuite/Wi-FiTestSuite-Linux-DUT.git;branch=master;protocol=https \
+ 	file://0001-Use-toolchain-from-environment-variables.patch \
+diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_4.10.0.bb b/meta-oe/recipes-connectivity/zeromq/cppzmq_4.10.0.bb
+index 135121c5ba..e411e6efc0 100644
+--- a/meta-oe/recipes-connectivity/zeromq/cppzmq_4.10.0.bb
++++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_4.10.0.bb
+@@ -8,7 +8,6 @@ SRCREV = "c94c20743ed7d4aa37835a5c46567ab0790d4acc"
+ 
+ SRC_URI = "git://github.com/zeromq/cppzmq.git;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-core/basu/basu_0.2.1.bb b/meta-oe/recipes-core/basu/basu_0.2.1.bb
+index 1b4d5a0fe5..330fe1c607 100644
+--- a/meta-oe/recipes-core/basu/basu_0.2.1.bb
++++ b/meta-oe/recipes-core/basu/basu_0.2.1.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://git.sr.ht/~emersion/basu;protocol=https;branch=master"
+ 
+ DEPENDS += "gperf-native"
+ 
+-S = "${WORKDIR}/git"
+ PV = "0.2.1+git"
+ SRCREV = "a08cf5a575325435040d35710dbac3d0c32b1676"
+ 
+diff --git a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.5.2.bb b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.5.2.bb
+index 992a414009..0908409e1e 100644
+--- a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.5.2.bb
++++ b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.5.2.bb
+@@ -12,7 +12,6 @@ DEPENDS = "libsigc++-3"
+ 
+ RDEPENDS:${PN}:class-target = "${VIRTUAL-RUNTIME_dbus}"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig cmake
+ 
+diff --git a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
+index 086a37ca1c..e99bf28ce5 100644
+--- a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
++++ b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/alban/dbus-daemon-proxy;branch=master;protocol=https
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig
+ 
+diff --git a/meta-oe/recipes-core/emlog/emlog.inc b/meta-oe/recipes-core/emlog/emlog.inc
+index 713b012177..ff2a106c6e 100644
+--- a/meta-oe/recipes-core/emlog/emlog.inc
++++ b/meta-oe/recipes-core/emlog/emlog.inc
+@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/nicupavel/emlog.git;protocol=https;branch=master"
+ SRC_URI += "file://0001-emlog-Do-not-use-no_llseek-with-kernel-6.12.0.patch"
+ SRCREV = "a9bbf324fde131ff4cf064e32674086c4ced4dca"
+ PV = "0.70+git"
+-S = "${WORKDIR}/git"
+ 
+ CVE_PRODUCT = "nicupavel:emlog"
+ 
+diff --git a/meta-oe/recipes-core/glfw/glfw_3.3.8.bb b/meta-oe/recipes-core/glfw/glfw_3.3.8.bb
+index 684355ef3e..8abb13b580 100644
+--- a/meta-oe/recipes-core/glfw/glfw_3.3.8.bb
++++ b/meta-oe/recipes-core/glfw/glfw_3.3.8.bb
+@@ -14,7 +14,6 @@ PV .= "+git"
+ SRCREV = "7482de6071d21db77a7236155da44c172a7f6c9e"
+ SRC_URI = "git://github.com/glfw/glfw.git;branch=3.3-stable;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON -DGLFW_BUILD_DOCS=OFF"
+ 
+diff --git a/meta-oe/recipes-core/glib-2.0/glib-testing_0.1.1.bb b/meta-oe/recipes-core/glib-2.0/glib-testing_0.1.1.bb
+index ebcc2b267b..97a5592f94 100644
+--- a/meta-oe/recipes-core/glib-2.0/glib-testing_0.1.1.bb
++++ b/meta-oe/recipes-core/glib-2.0/glib-testing_0.1.1.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ SRC_URI = "git://gitlab.gnome.org/pwithnall/libglib-testing.git;protocol=https;branch=main"
+ 
+ PV = "0.1.1"
+-S = "${WORKDIR}/git"
+ SRCREV = "e326f73a7139c5e54fcf926896ae6e4cc899a1a7"
+ 
+ inherit  meson pkgconfig
+diff --git a/meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.80.0.bb b/meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.80.0.bb
+index a45d31edc2..48a1a2a624 100644
+--- a/meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.80.0.bb
++++ b/meta-oe/recipes-core/glib-2.0/glibmm-2.68_2.80.0.bb
+@@ -14,7 +14,7 @@ SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+ 
+ SRC_URI[archive.sha256sum] = "539b0a29e15a96676c4f0594541250566c5ca44da5d4d87a3732fa2d07909e4a"
+ 
+-S = "${WORKDIR}/${GNOMEBN}-${PV}"
++S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
+ 
+ FILES:${PN} = "${libdir}/lib*.so.*"
+ FILES:${PN}-dev += "${datadir}/glibmm-* ${libdir}/${BPN}/include/ ${libdir}/${BPN}/proc/ ${libdir}/giomm-2.68/include/"
+diff --git a/meta-oe/recipes-core/libnfc/libnfc_git.bb b/meta-oe/recipes-core/libnfc/libnfc_git.bb
+index a97a2841f7..ac3a0d85a4 100644
+--- a/meta-oe/recipes-core/libnfc/libnfc_git.bb
++++ b/meta-oe/recipes-core/libnfc/libnfc_git.bb
+@@ -9,7 +9,6 @@ inherit autotools pkgconfig
+ 
+ PV = "1.8.0+git"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "f02ff51449240102c27a97173dc495e8e7789046"
+ SRC_URI = "git://github.com/nfc-tools/libnfc.git;branch=master;protocol=https"
+ 
+diff --git a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.12.1.bb b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.12.1.bb
+index ede57bc3ec..0aa025b530 100644
+--- a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.12.1.bb
++++ b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.12.1.bb
+@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "a9dbee323351d109b7aee074a9cb89ca3e7bcf8ad8edef1851f4cf359b
+ UPSTREAM_CHECK_URI = "https://download.gnome.org/sources/libsigc++/2.12/"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/libsigc++-${PV}"
++S = "${UNPACKDIR}/libsigc++-${PV}"
+ 
+ inherit meson
+ 
+diff --git a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-3_3.6.0.bb b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-3_3.6.0.bb
+index b3875e8436..1cca118229 100644
+--- a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-3_3.6.0.bb
++++ b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-3_3.6.0.bb
+@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "c3d23b37dfd6e39f2e09f091b77b1541fbfa17c4f0b6bf5c89baef7229
+ UPSTREAM_CHECK_URI = "https://download.gnome.org/sources/libsigc++/3.6/"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/libsigc++-${PV}"
++S = "${UNPACKDIR}/libsigc++-${PV}"
+ 
+ inherit setuptools3 meson
+ 
+diff --git a/meta-oe/recipes-core/libxml/libxml++-5.0_5.0.1.bb b/meta-oe/recipes-core/libxml/libxml++-5.0_5.0.1.bb
+index 0271602555..58c2697b9a 100644
+--- a/meta-oe/recipes-core/libxml/libxml++-5.0_5.0.1.bb
++++ b/meta-oe/recipes-core/libxml/libxml++-5.0_5.0.1.bb
+@@ -11,7 +11,7 @@ DEPENDS = "libxml2 glibmm"
+ GNOMEBN = "libxml++"
+ inherit gnomebase ptest
+ 
+-S = "${WORKDIR}/libxml++-${PV}"
++S = "${UNPACKDIR}/libxml++-${PV}"
+ 
+ SRC_URI[archive.sha256sum] = "15c38307a964fa6199f4da6683a599eb7e63cc89198545b36349b87cf9aa0098"
+ 
+diff --git a/meta-oe/recipes-core/mdbus2/mdbus2_git.bb b/meta-oe/recipes-core/mdbus2/mdbus2_git.bb
+index a7ac358f27..948d50b471 100644
+--- a/meta-oe/recipes-core/mdbus2/mdbus2_git.bb
++++ b/meta-oe/recipes-core/mdbus2/mdbus2_git.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/freesmartphone/mdbus.git;protocol=https;branch=maste
+            "
+ SRCREV = "28202692d0b441000f4ddb8f347f72d1355021aa"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig vala
+ 
+diff --git a/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb b/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb
+index a013d99ba1..cf98c0cf2e 100644
+--- a/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb
++++ b/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/zlib-ng/minizip-ng.git;protocol=https;branch=master
+ 
+ SRCREV = "55db144e03027b43263e5ebcb599bf0878ba58de"
+ 
+-S = "${WORKDIR}/git"
+ 
+ RCONFLICTS:${PN} += "minizip"
+ 
+diff --git a/meta-oe/recipes-core/minizip/minizip_1.3.1.bb b/meta-oe/recipes-core/minizip/minizip_1.3.1.bb
+index 0d36ffbcf6..56cd28c9ae 100644
+--- a/meta-oe/recipes-core/minizip/minizip_1.3.1.bb
++++ b/meta-oe/recipes-core/minizip/minizip_1.3.1.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://zip.h;beginline=14;endline=30;md5=8eaa8535a3a1a2296b3
+ SRC_URI = "${SOURCEFORGE_MIRROR}/libpng/zlib/${PV}/zlib-${PV}.tar.gz"
+ UPSTREAM_CHECK_URI = "http://zlib.net/"
+ 
+-S = "${WORKDIR}/zlib-${PV}/contrib/minizip"
++S = "${UNPACKDIR}/zlib-${PV}/contrib/minizip"
+ 
+ SRC_URI[sha256sum] = "9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23"
+ 
+diff --git a/meta-oe/recipes-core/musl-rpmatch/musl-rpmatch_git.bb b/meta-oe/recipes-core/musl-rpmatch/musl-rpmatch_git.bb
+index fe3cf73e43..9c4db7efec 100644
+--- a/meta-oe/recipes-core/musl-rpmatch/musl-rpmatch_git.bb
++++ b/meta-oe/recipes-core/musl-rpmatch/musl-rpmatch_git.bb
+@@ -12,4 +12,3 @@ UPSTREAM_CHECK_COMMITS = "1"
+ 
+ inherit autotools
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-core/ndctl/ndctl_v79.bb b/meta-oe/recipes-core/ndctl/ndctl_v79.bb
+index 1ad1476d93..4014e3bca6 100644
+--- a/meta-oe/recipes-core/ndctl/ndctl_v79.bb
++++ b/meta-oe/recipes-core/ndctl/ndctl_v79.bb
+@@ -18,7 +18,6 @@ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>v\d+(\.\d+)*)"
+ 
+ DEPENDS = "kmod udev json-c keyutils iniparser libtraceevent libtracefs"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMESON += "-Diniparserdir=${STAGING_INCDIR}/iniparser"
+ 
+diff --git a/meta-oe/recipes-core/opencl/clpeak_1.1.4.bb b/meta-oe/recipes-core/opencl/clpeak_1.1.4.bb
+index 8c05ad6d02..59f807b7ae 100644
+--- a/meta-oe/recipes-core/opencl/clpeak_1.1.4.bb
++++ b/meta-oe/recipes-core/opencl/clpeak_1.1.4.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ 
+ SRCREV = "527695de8393a3144863a0a07f9b92f1c734d1c4"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb b/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
+index d43ea281ae..9e32242e31 100644
+--- a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
++++ b/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/OCL-dev/ocl-icd.git;protocol=https;branch=master"
+ 
+ SRCREV = "fdde6677b21329432db8b481e2637cd10f7d3cb2"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-core/opencl/opencl-clhpp_2024.10.24.bb b/meta-oe/recipes-core/opencl/opencl-clhpp_2024.10.24.bb
+index b815c22eec..7335712d6f 100644
+--- a/meta-oe/recipes-core/opencl/opencl-clhpp_2024.10.24.bb
++++ b/meta-oe/recipes-core/opencl/opencl-clhpp_2024.10.24.bb
+@@ -10,7 +10,6 @@ SRCREV = "c7b4aded1cab9560b226041dd962f63375a9a384"
+ 
+ SRC_URI = "git://github.com/KhronosGroup/OpenCL-CLHPP.git;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-core/opencl/opencl-cts_2025.01.22.bb b/meta-oe/recipes-core/opencl/opencl-cts_2025.01.22.bb
+index e374ef1863..c766a66640 100644
+--- a/meta-oe/recipes-core/opencl/opencl-cts_2025.01.22.bb
++++ b/meta-oe/recipes-core/opencl/opencl-cts_2025.01.22.bb
+@@ -8,7 +8,6 @@ inherit pkgconfig cmake
+ DEPENDS += "opencl-headers opencl-icd-loader"
+ RDEPENDS:${PN} += "python3-core python3-io"
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRC_URI = "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=https;branch=main;lfs=0 \
+ 	   file://0001-Ignore-Compiler-Warnings.patch"
+diff --git a/meta-oe/recipes-core/opencl/opencl-headers_2024.10.24.bb b/meta-oe/recipes-core/opencl/opencl-headers_2024.10.24.bb
+index 412b573cb4..0ec2fe5f33 100644
+--- a/meta-oe/recipes-core/opencl/opencl-headers_2024.10.24.bb
++++ b/meta-oe/recipes-core/opencl/opencl-headers_2024.10.24.bb
+@@ -4,7 +4,6 @@ LICENSE  = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SECTION = "base"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "4ea6df132107e3b4b9407f903204b5522fdffcd6"
+ SRC_URI = "git://github.com/KhronosGroup/OpenCL-Headers.git;branch=main;protocol=https \
+            file://0001-Command-buffer-supported-queue-properties-265.patch \
+diff --git a/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb b/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb
+index 38db7a2453..7cfc75f5ed 100644
+--- a/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb
++++ b/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb
+@@ -11,7 +11,6 @@ DEPENDS += "opencl-headers"
+ PROVIDES = "virtual/opencl-icd"
+ RPROVIDES:${PN} = "virtual-opencl-icd"
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRCREV = "861b68b290e76d08e7241608479c16431f529945"
+ SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https"
+diff --git a/meta-oe/recipes-core/pim435/pim435_git.bb b/meta-oe/recipes-core/pim435/pim435_git.bb
+index 8fc8749a1f..a18e889683 100644
+--- a/meta-oe/recipes-core/pim435/pim435_git.bb
++++ b/meta-oe/recipes-core/pim435/pim435_git.bb
+@@ -15,7 +15,6 @@ SRCREV = "445ed623ec8d3ecbb1d566900b4ef3fb3031d689"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "i2c-tools"
+ 
+diff --git a/meta-oe/recipes-core/safec/safec_3.7.1.bb b/meta-oe/recipes-core/safec/safec_3.7.1.bb
+index 9dd6f1c7cc..a2f66e9a1a 100644
+--- a/meta-oe/recipes-core/safec/safec_3.7.1.bb
++++ b/meta-oe/recipes-core/safec/safec_3.7.1.bb
+@@ -6,7 +6,6 @@ SECTION = "lib"
+ 
+ inherit autotools pkgconfig
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "f9add9245b97c7bda6e28cceb0ee37fb7e254fd8"
+ SRC_URI = "git://github.com/rurban/safeclib.git;branch=master;protocol=https \
+            file://0001-strpbrk_s-Remove-unused-variable-len.patch \
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_255.6.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_255.6.bb
+index ceb422325c..9c39d40d23 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_255.6.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_255.6.bb
+@@ -55,7 +55,6 @@ CFLAGS:append:libc-musl = " -D__UAPI_DEF_ETHHDR=0 "
+ 
+ EXTRA_OEMESON += "-Dstatic-libsystemd=pic"
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN}-dev = ""
+ 
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.1.0.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.1.0.bb
+index c55c305611..0467c834b8 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.1.0.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-tools_2.1.0.bb
+@@ -11,6 +11,6 @@ DEPENDS += "expat"
+ SRCREV = "0261d0ec60b68c1f0a6ec9acf63d1379f7d569f8"
+ SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;tag=v${PV};subpath=tools"
+ 
+-S = "${WORKDIR}/tools"
++S = "${UNPACKDIR}/tools"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.1.0.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.1.0.bb
+index f3799adb3c..62b30e9894 100644
+--- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.1.0.bb
++++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.1.0.bb
+@@ -24,7 +24,6 @@ EXTRA_OECMAKE = "-DSDBUSCPP_BUILD_CODEGEN=OFF \
+                  -DSDBUSCPP_BUILD_DOCS=ON \
+                  -DSDBUSCPP_BUILD_DOXYGEN_DOCS=OFF"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # Link libatomic on architectures without 64bit atomics fixes
+ # libsdbus-c++.so.1.1.0: undefined reference to `__atomic_load_8'
+diff --git a/meta-oe/recipes-core/usleep/usleep_1.2.bb b/meta-oe/recipes-core/usleep/usleep_1.2.bb
+index e8b4a7fef9..530104e964 100644
+--- a/meta-oe/recipes-core/usleep/usleep_1.2.bb
++++ b/meta-oe/recipes-core/usleep/usleep_1.2.bb
+@@ -3,8 +3,7 @@ SECTION = "base"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ DEPENDS = "popt"
+ 
+ SRC_URI = "file://usleep.c \
+diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.1.0.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.1.0.bb
+index d7c8c44aad..fb95a2de5c 100644
+--- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.1.0.bb
++++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.1.0.bb
+@@ -13,7 +13,6 @@ SRC_URI += "git://github.com/uutils/coreutils.git;protocol=https;branch=main \
+ "
+ 
+ SRCREV = "18b963ed6f612ac30ebca92426280cf4c1451f6a"
+-S = "${WORKDIR}/git"
+ 
+ require ${BPN}-crates.inc
+ 
+diff --git a/meta-oe/recipes-crypto/botan/botan_3.7.1.bb b/meta-oe/recipes-crypto/botan/botan_3.7.1.bb
+index a9d080c9a5..74f895cf3c 100644
+--- a/meta-oe/recipes-crypto/botan/botan_3.7.1.bb
++++ b/meta-oe/recipes-crypto/botan/botan_3.7.1.bb
+@@ -7,7 +7,7 @@ SECTION = "libs"
+ SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
+ SRC_URI[sha256sum] = "fc0620463461caaea8e60f06711d7e437a3ad1eebd6de4ac29c14bbd901ccd1b"
+ 
+-S = "${WORKDIR}/Botan-${PV}"
++S = "${UNPACKDIR}/Botan-${PV}"
+ 
+ inherit python3native siteinfo lib_package
+ 
+diff --git a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.6.bb b/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.6.bb
+index b8ffa45947..840c04e52e 100644
+--- a/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.6.bb
++++ b/meta-oe/recipes-crypto/fsverity-utils/fsverity-utils_1.6.bb
+@@ -12,7 +12,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bc974d217b525ea216a336adb73e1220"
+ SRCREV = "2543e6e5037c0b1b448282c2793f8a6ce8b12d71"
+ SRC_URI = "git://git.kernel.org/pub/scm/fs/fsverity/fsverity-utils.git;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "openssl"
+ 
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
+index a34614dd9d..7d27081964 100644
+--- a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
+@@ -3,7 +3,6 @@ HOMEPAGE = "https://www.chronox.de/libkcapi/index.html"
+ LICENSE = "BSD-3-Clause | GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3d8a091d797491204567185a6efce70f"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "fc937358e71253a6efaa3ba74885364976b040ea"
+ SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https \
+           "
+diff --git a/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb b/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
+index 5479007d92..a9a147c35b 100644
+--- a/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
++++ b/meta-oe/recipes-crypto/libtomcrypt/libtomcrypt_1.18.2.bb
+@@ -21,7 +21,6 @@ SRC_URI = "git://github.com/libtom/libtomcrypt.git;protocol=https;branch=master
+ 
+ SRCREV = "7e7eb695d581782f04b24dc444cbfde86af59853"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig
+ 
+diff --git a/meta-oe/recipes-crypto/monocypher/monocypher_4.0.2.bb b/meta-oe/recipes-crypto/monocypher/monocypher_4.0.2.bb
+index 813c6ec4c8..a601d88e7c 100644
+--- a/meta-oe/recipes-crypto/monocypher/monocypher_4.0.2.bb
++++ b/meta-oe/recipes-crypto/monocypher/monocypher_4.0.2.bb
+@@ -11,7 +11,7 @@ SRC_URI[sha512sum] = "bf275d4c53ff94af6cdc723a4e002e9f080f4d1436c86c76bb37870b34
+ 
+ MIRRORS = "https://.*/.* https://github.com/LoupVaillant/Monocypher/releases/download/${PV}/${BPN}-${PV}.tar.gz "
+ 
+-S = "${WORKDIR}/${BPN}-${PV}"
++S = "${UNPACKDIR}/${BPN}-${PV}"
+ 
+ CFLAGS += "-pedantic -Wall -Wextra -O3"
+ EXTRA_OEMAKE = "'PREFIX=${prefix}' 'DESTDIR=${D}' 'CFLAGS=${CFLAGS}' 'LIBDIR=${libdir}'"
+diff --git a/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.30.0.bb b/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.30.0.bb
+index d3922cf79e..15d0aefc36 100644
+--- a/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.30.0.bb
++++ b/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.30.0.bb
+@@ -17,7 +17,6 @@ LIC_FILES_CHKSUM = " \
+ "
+ SRC_URI = "git://github.com/OpenSC/${BPN}.git;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ # master
+ SRCREV = "8bed16034f629a0361fa8ff89deed2b43dc45d8b"
+ PV .= "+1.30.0+git"
+diff --git a/meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb b/meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb
+index 60b486df78..9cefc528ae 100644
+--- a/meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb
++++ b/meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb
+@@ -11,7 +11,6 @@ SRC_URI = "gitsm://github.com/google/${BPN}.git;branch=main;protocol=https \
+ "
+ 
+ SRCREV = "068d5ee1a3ac40dabd00d211d5013af44be55bea"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake ptest
+ PACKAGECONFIG ??= ""
+diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb
+index b2f1920f6b..065c8559ff 100644
+--- a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb
++++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb
+@@ -18,7 +18,7 @@ SRCREV = "ce201088de95d26fc0da36ba805bf2ddc2ba74ff"
+ 
+ inherit ptest
+ 
+-S = "${WORKDIR}/git/libraries/liblmdb"
++S = "${UNPACKDIR}/${BP}/libraries/liblmdb"
+ 
+ do_compile() {
+     oe_runmake CC="${CC}" SOEXT=".so.${PV}" LDFLAGS="${LDFLAGS}" XCFLAGS="${CFLAGS}"
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb
+index fefb6df8aa..5bbb010f8b 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb
+@@ -29,7 +29,6 @@ SRC_URI:append:mips = " file://0001-replace-old-sync-with-new-atomic-builtin-equ
+ SRC_URI:append:powerpc = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
+ SRC_URI:remove:toolchain-clang:riscv32 = "file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake ptest
+ 
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.1.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.1.bb
+index 39c3b0b6db..0e73c137b7 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.1.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250127.1.bb
+@@ -17,7 +17,6 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
+            file://0005-Fix-GCC15-warning-that-ciso646-is-deprecated-in-C-17.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-devtools/aer-inject/aer-inject_1.0.bb b/meta-oe/recipes-devtools/aer-inject/aer-inject_1.0.bb
+index 87c09f5118..e027b8d4aa 100644
+--- a/meta-oe/recipes-devtools/aer-inject/aer-inject_1.0.bb
++++ b/meta-oe/recipes-devtools/aer-inject/aer-inject_1.0.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/gong.chen/aer-inject.gi
+ "
+ SRCREV = "9bd5e2c7886fca72f139cd8402488a2235957d41"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "bison-native"
+ 
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs_1.0.bb b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs_1.0.bb
+index f473d22849..342e7fd1a5 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs_1.0.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs_1.0.bb
+@@ -3,8 +3,7 @@ SECTION = "console/utils"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ SRC_URI = " \
+     file://android-gadget-setup \
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb b/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
+index abf21803e5..764d6b404f 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
+@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
+ 
+ SRC_URI = "file://android-gadget-setup"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+index fe915c3e30..ff83b6c2ee 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+@@ -21,11 +21,11 @@ SRCREV_build = "16e987def3d7d8f7d30805eb95cef69e52a87dbc"
+ 
+ SRCREV_FORMAT = "core_extras_libhardware_libselinux_build"
+ SRC_URI = " \
+-    git://${ANDROID_MIRROR}/platform/system/core;name=core;protocol=https;nobranch=1;destsuffix=git/system/core \
+-    git://${ANDROID_MIRROR}/platform/system/extras;name=extras;protocol=https;nobranch=1;destsuffix=git/system/extras \
+-    git://${ANDROID_MIRROR}/platform/hardware/libhardware;name=libhardware;protocol=https;nobranch=1;destsuffix=git/hardware/libhardware \
+-    git://${ANDROID_MIRROR}/platform/external/libselinux;name=libselinux;protocol=https;nobranch=1;destsuffix=git/external/libselinux \
+-    git://${ANDROID_MIRROR}/platform/build;name=build;protocol=https;nobranch=1;destsuffix=git/build \
++    git://${ANDROID_MIRROR}/platform/system/core;name=core;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/system/core \
++    git://${ANDROID_MIRROR}/platform/system/extras;name=extras;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/system/extras \
++    git://${ANDROID_MIRROR}/platform/hardware/libhardware;name=libhardware;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/hardware/libhardware \
++    git://${ANDROID_MIRROR}/platform/external/libselinux;name=libselinux;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/libselinux \
++    git://${ANDROID_MIRROR}/platform/build;name=build;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/build \
+     file://core/0001-adb-remove-selinux-extensions.patch;patchdir=system/core \
+     file://core/0002-adb-Use-local-sockets-where-appropriate.patch;patchdir=system/core \
+     file://core/0003-adb-define-shell-command.patch;patchdir=system/core \
+@@ -62,7 +62,6 @@ SRC_URI = " \
+ "
+ 
+ 
+-S = "${WORKDIR}/git"
+ B = "${WORKDIR}/${BPN}"
+ 
+ # http://errors.yoctoproject.org/Errors/Details/133881/
+diff --git a/meta-oe/recipes-devtools/apitrace/apitrace_11.1.bb b/meta-oe/recipes-devtools/apitrace/apitrace_11.1.bb
+index 48ba7dbaea..244d9a3c6f 100644
+--- a/meta-oe/recipes-devtools/apitrace/apitrace_11.1.bb
++++ b/meta-oe/recipes-devtools/apitrace/apitrace_11.1.bb
+@@ -11,7 +11,6 @@ SRC_URI = "gitsm://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
+            file://0001-Explicit-header-stdint.patch \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS += "zlib libpng python3-native"
+ 
+diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_2023.06.01.bb b/meta-oe/recipes-devtools/breakpad/breakpad_2023.06.01.bb
+index 3bf4371e85..0e51289507 100644
+--- a/meta-oe/recipes-devtools/breakpad/breakpad_2023.06.01.bb
++++ b/meta-oe/recipes-devtools/breakpad/breakpad_2023.06.01.bb
+@@ -27,9 +27,9 @@ SRCREV_protobuf = "cb6dd4ef5f82e41e06179dcd57d3b1d9246ad6ac"
+ SRCREV_lss = "9719c1e1e676814c456b55f5f070eabad6709d31"
+ 
+ SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main;protocol=https \
+-           git://github.com/google/googletest.git;destsuffix=git/src/testing/gtest;name=gtest;branch=main;protocol=https \
+-           git://github.com/protocolbuffers/protobuf.git;destsuffix=git/src/third_party/protobuf/protobuf;name=protobuf;branch=master;protocol=https \
+-           git://chromium.googlesource.com/linux-syscall-support;protocol=https;branch=main;destsuffix=git/src/third_party/lss;name=lss \
++           git://github.com/google/googletest.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src/testing/gtest;name=gtest;branch=main;protocol=https \
++           git://github.com/protocolbuffers/protobuf.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src/third_party/protobuf/protobuf;name=protobuf;branch=master;protocol=https \
++           git://chromium.googlesource.com/linux-syscall-support;protocol=https;branch=main;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src/third_party/lss;name=lss \
+            file://0001-include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch \
+            file://0003-Fix-conflict-between-musl-libc-dirent.h-and-lss.patch \
+            file://0001-Turn-off-sign-compare-for-musl-libc.patch \
+@@ -41,7 +41,6 @@ SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main;protocol=h
+            file://0001-lss-Match-syscalls-to-match-musl.patch;patchdir=src/third_party/lss \
+            file://mips_asm_sgidefs.patch;patchdir=src/third_party/lss \
+ "
+-S = "${WORKDIR}/git"
+ 
+ CXXFLAGS += "-D_GNU_SOURCE"
+ LDFLAGS:append:libc-musl = " -lucontext"
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb b/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb
+index 77bde79217..0ea243fd20 100644
+--- a/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_1.0.2.bb
+@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};prot
+            file://0001-Export-binaries-only-for-native-build.patch"
+ SRCREV = "1a0e12c0a3ba1f0dbbad45ddfef555166e0a14fc"
+ 
+-S = "${WORKDIR}/git/c++"
++S = "${UNPACKDIR}/${BP}/c++"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-devtools/cbindgen/cbindgen_0.28.0.bb b/meta-oe/recipes-devtools/cbindgen/cbindgen_0.28.0.bb
+index eb8556ebc6..8a6337a0d2 100644
+--- a/meta-oe/recipes-devtools/cbindgen/cbindgen_0.28.0.bb
++++ b/meta-oe/recipes-devtools/cbindgen/cbindgen_0.28.0.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
+ SRC_URI += "git://github.com/mozilla/cbindgen.git;protocol=https;branch=master \
+             file://0001-Define-more-ioctl-codes-on-riscv32gc-unknown-linux-g.patch;patchdir=${CARGO_VENDORING_DIRECTORY}/libc-0.2.155"
+ SRCREV = "bd78bbe59b10eda6ef1255e4acda95c56c6d0279"
+-S = "${WORKDIR}/git"
+ 
+ inherit cargo pkgconfig
+ 
+diff --git a/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb b/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
+index bdeab3055c..33c8c28531 100644
+--- a/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
++++ b/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https \
+          "
+ SRCREV = "acc76239bee01d8e9c858ae2cab296704e52d916"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig ptest
+ 
+diff --git a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
+index 47a3d88853..ab4e6148e9 100644
+--- a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
++++ b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/concurrencykit/ck.git;branch=master;protocol=https \
+            file://0001-configure-Fix-compoiler-detection-logic-for-cross-co.patch \
+            file://0001-build-Use-ilp32d-abi-on-riscv32-and-lp64d-on-rv64.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ COMPATIBLE_HOST = "(arm|aarch64|i.86|x86_64|powerpc|powerpc64|riscv32|riscv64).*-linux*"
+ 
+diff --git a/meta-oe/recipes-devtools/cppgenerate/cppgenerate_0.3.bb b/meta-oe/recipes-devtools/cppgenerate/cppgenerate_0.3.bb
+index 961c94205f..6e709b6e7e 100644
+--- a/meta-oe/recipes-devtools/cppgenerate/cppgenerate_0.3.bb
++++ b/meta-oe/recipes-devtools/cppgenerate/cppgenerate_0.3.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
+ SRC_URI = "git://github.com/rm5248/libcppgenerate.git;branch=master;protocol=https"
+ SRCREV = "930c5503f76c877b72b9ff8546353d6f422bd010"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-devtools/cpuset/cpuset_1.6.2.bb b/meta-oe/recipes-devtools/cpuset/cpuset_1.6.2.bb
+index b404d4131e..98419a8069 100644
+--- a/meta-oe/recipes-devtools/cpuset/cpuset_1.6.2.bb
++++ b/meta-oe/recipes-devtools/cpuset/cpuset_1.6.2.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ SRC_URI = "git://github.com/SUSE/cpuset.git;protocol=https;branch=master"
+ 
+ SRCREV = "4f80263208935f0df4f616cf9d8cb7285599a670"
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+ 
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.2.20250608.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.2.20250608.0.bb
+index 6f0fbff0b2..845a78da76 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_6.2.20250608.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_6.2.20250608.0.bb
+@@ -17,7 +17,6 @@ inherit autotools-brokensep pkgconfig manpages
+ SRCREV = "c06d333b3162660694b26604a364cdab89e2010e"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https;tag=p${PV}"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= " \
+     readcmd \
+diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.141.bb b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.141.bb
+index 5fa71896b2..9287962ab7 100644
+--- a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.141.bb
++++ b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.141.bb
+@@ -13,7 +13,7 @@ SRC_URI  = "\
+ 
+ SRC_URI[sha256sum] = "232ec755f4b1f445f829996885846abba6f1b6fd55d049476ab26ddd8c4b4e1b"
+ 
+-S = "${WORKDIR}/debootstrap"
++S = "${UNPACKDIR}/debootstrap"
+ 
+ DEPENDS = " \
+     virtual/fakeroot-native \
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_1.4.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_1.4.bb
+index 599675a345..bc558b7d62 100644
+--- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_1.4.bb
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_1.4.bb
+@@ -10,7 +10,6 @@ SRC_URI:append:class-target = " file://oe-remote.repo.sample"
+ 
+ inherit setuptools3-base
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install:append() {
+     install -d ${D}${datadir}/dnf
+diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.14.0.bb b/meta-oe/recipes-devtools/doxygen/doxygen_1.14.0.bb
+index 1c8b442eef..512a63549e 100644
+--- a/meta-oe/recipes-devtools/doxygen/doxygen_1.14.0.bb
++++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.14.0.bb
+@@ -12,7 +12,6 @@ SRC_URI = "\
+ 
+ SRCREV = "cbe58f6237b2238c9af7f51c6b7afb8bbf52c866"
+ 
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "Release_(?P<pver>\d+(\_\d+)+)"
+ 
+diff --git a/meta-oe/recipes-devtools/editorconfig/editorconfig-core-c_0.12.9.bb b/meta-oe/recipes-devtools/editorconfig/editorconfig-core-c_0.12.9.bb
+index b567f11f5c..c6db2ef38c 100644
+--- a/meta-oe/recipes-devtools/editorconfig/editorconfig-core-c_0.12.9.bb
++++ b/meta-oe/recipes-devtools/editorconfig/editorconfig-core-c_0.12.9.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=38f617473e9f7373b5e79baf437accf8"
+ 
+ SRC_URI = "git://github.com/editorconfig/editorconfig-core-c.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "e082c947e7f7b14240195d55c060a6e1eda1b0a1"
+ 
+ inherit cmake
+diff --git a/meta-oe/recipes-devtools/exprtk/exprtk_git.bb b/meta-oe/recipes-devtools/exprtk/exprtk_git.bb
+index 74a14f4f08..bdaa39b402 100644
+--- a/meta-oe/recipes-devtools/exprtk/exprtk_git.bb
++++ b/meta-oe/recipes-devtools/exprtk/exprtk_git.bb
+@@ -7,7 +7,6 @@ SRCREV = "a4b17d543f072d2e3ba564e4bc5c3a0d2b05c338"
+ 
+ SRC_URI = "git://github.com/ArashPartow/exprtk.git;branch=release;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # other packages commonly reference the file directly as "exprtk.hpp"
+ # create symlink to allow this usage
+diff --git a/meta-oe/recipes-devtools/extract-cert/extract-cert_0.3.bb b/meta-oe/recipes-devtools/extract-cert/extract-cert_0.3.bb
+index a4cd7ad157..83e9383d4a 100644
+--- a/meta-oe/recipes-devtools/extract-cert/extract-cert_0.3.bb
++++ b/meta-oe/recipes-devtools/extract-cert/extract-cert_0.3.bb
+@@ -7,7 +7,6 @@ DEPENDS = "openssl"
+ SRC_URI = "git://git.pengutronix.de/git/extract-cert;protocol=https;branch=master;"
+ SRCREV = "d652b4e8279aef2a85f58676ab472744bafeafc9"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.bb
+index 3103fd0091..c51a49ba01 100644
+--- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers.bb
++++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers.bb
+@@ -13,7 +13,6 @@ DEPENDS = "flatbuffers-native"
+ RDEPENDS:${PN}-compiler = "${PN}"
+ RDEPENDS:${PN}-dev += "${PN}-compiler"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE += " \
+     -DFLATBUFFERS_BUILD_TESTS=OFF \    
+diff --git a/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers.bb b/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers.bb
+index 1fab013580..feb206f27c 100644
+--- a/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers.bb
++++ b/meta-oe/recipes-devtools/flatbuffers/python3-flatbuffers.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+ require flatbuffers.inc
+ 
+-S = "${WORKDIR}/git/python"
++S = "${UNPACKDIR}/${BP}/python"
+ 
+ RDEPENDS:${PN} = "flatbuffers"
+ 
+diff --git a/meta-oe/recipes-devtools/flatcc/flatcc_git.bb b/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
+index 2530dac526..2565e3b9bd 100644
+--- a/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
++++ b/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
+@@ -14,7 +14,6 @@ SRC_URI = " \
+ "
+ SRCREV = "1653ec964730ec7d9892a08a1695ada6d20f5196"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.71.0.bb b/meta-oe/recipes-devtools/grpc/grpc_1.71.0.bb
+index 6b1a6e5453..53867b8fe6 100644
+--- a/meta-oe/recipes-devtools/grpc/grpc_1.71.0.bb
++++ b/meta-oe/recipes-devtools/grpc/grpc_1.71.0.bb
+@@ -23,7 +23,6 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
+ # Both dependencies are mutually exclusive
+ # RDEPENDS:${PN}-dev += "${PN}-compiler"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV_grpc = "4e9357bca1408596663a218c0c608a4c0560a867"
+ BRANCH = "v1.71.x"
+ SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
+diff --git a/meta-oe/recipes-devtools/guider/guider_3.9.9.bb b/meta-oe/recipes-devtools/guider/guider_3.9.9.bb
+index 9c956f0ed1..27f39ed1e1 100644
+--- a/meta-oe/recipes-devtools/guider/guider_3.9.9.bb
++++ b/meta-oe/recipes-devtools/guider/guider_3.9.9.bb
+@@ -10,7 +10,6 @@ PV = "3.9.9"
+ SRC_URI = "git://github.com/iipeace/${BPN};branch=master;protocol=https;tag=versions/${PV}"
+ SRCREV = "118ab61773463e56dedc78f5cf6723b97a4ad946"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+ 
+diff --git a/meta-oe/recipes-devtools/heaptrack/heaptrack_1.2.0.bb b/meta-oe/recipes-devtools/heaptrack/heaptrack_1.2.0.bb
+index 599fd2c373..3aca51ee3e 100644
+--- a/meta-oe/recipes-devtools/heaptrack/heaptrack_1.2.0.bb
++++ b/meta-oe/recipes-devtools/heaptrack/heaptrack_1.2.0.bb
+@@ -19,7 +19,6 @@ SRC_URI = "git://github.com/KDE/heaptrack.git;protocol=https;branch=master \
+ 
+ SRCREV = "bc9e3744bcc47de978673d1e382f4125a1ab5fa8"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.3.0.bb b/meta-oe/recipes-devtools/jemalloc/jemalloc_5.3.0.bb
+index cc21c8beae..aa1f417604 100644
+--- a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.3.0.bb
++++ b/meta-oe/recipes-devtools/jemalloc/jemalloc_5.3.0.bb
+@@ -20,7 +20,6 @@ SRCREV = "630434bb0ac619f7beec927569782d924c459385"
+ PV_LONG := "${PV}-171-g${SRCREV}"
+ PV .= "+git"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools ptest
+ 
+diff --git a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb
+index 02dcdb2696..241fd328d8 100644
+--- a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb
++++ b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/pboettch/json-schema-validator;branch=main;protocol=
+ 
+ SRCREV = "6b17782d6a5d1dee5d2c4fc5d25ffb1123913431"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS += "nlohmann-json"
+ 
+diff --git a/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb b/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
+index d6e42c81d5..56ddaf59a5 100644
+--- a/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
++++ b/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
+@@ -16,7 +16,7 @@ SRC_URI = "file://json_spirit_v${PV}.zip \
+            file://0001-Link-to-libatomic.patch \
+ "
+ 
+-S = "${WORKDIR}/json_spirit_v${PV}"
++S = "${UNPACKDIR}/json_spirit_v${PV}"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
+index 28820baf48..f68ffd2c0f 100644
+--- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
++++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
+@@ -16,7 +16,6 @@ PE = "1"
+ SRCREV = "89e2973c754a9c02a49974d839779b151e95afd6"
+ SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.4.1.bb b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.4.1.bb
+index 75f2a53b10..ae86e20a4a 100644
+--- a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.4.1.bb
++++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.4.1.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp;branch=master;protocol=http
+ 
+ SRCREV = "ec5ce12fc9c0299e1454cc002c70218b5a6f005b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[coverage] = "-DWITH_COVERAGE=YES,-DWITH_COVERAGE=NO,,"
+diff --git a/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.7.1.bb b/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.7.1.bb
+index 57a9cbade1..5ad953d260 100644
+--- a/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.7.1.bb
++++ b/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.7.1.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/Thalhammer/jwt-cpp.git;branch=master;protocol=https
+ 
+ SRCREV = "e71e0c2d584baff06925bbb3aad683f677e4d498"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "openssl"
+ 
+diff --git a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
+index efa8c936b4..43a61908f5 100644
+--- a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
++++ b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
+@@ -23,7 +23,6 @@ SRCREV = "f22fce3a308be1c7790ebefc6bbedb33c5f7c86a"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ do_configure:prepend () {
+diff --git a/meta-oe/recipes-devtools/lapack/lapack_3.12.1.bb b/meta-oe/recipes-devtools/lapack/lapack_3.12.1.bb
+index 7cb6c097f3..63069b4b83 100644
+--- a/meta-oe/recipes-devtools/lapack/lapack_3.12.1.bb
++++ b/meta-oe/recipes-devtools/lapack/lapack_3.12.1.bb
+@@ -20,7 +20,6 @@ SRCREV = "5ebe92156143a341ab7b14bf76560d30093cfc54"
+ SRC_URI = "git://github.com/Reference-LAPACK/lapack.git;protocol=https;branch=master \
+            ${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-ptest', '', d)} \
+           "
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[lapacke] = "-DLAPACKE=ON,-DLAPACKE=OFF"
+diff --git a/meta-oe/recipes-devtools/lemon/lemon_3.44.2.bb b/meta-oe/recipes-devtools/lemon/lemon_3.44.2.bb
+index 2904a454dc..8a8491b76b 100644
+--- a/meta-oe/recipes-devtools/lemon/lemon_3.44.2.bb
++++ b/meta-oe/recipes-devtools/lemon/lemon_3.44.2.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/sqlite/sqlite;protocol=https;branch=branch-3.44"
+ 
+ SRCREV = "c8f9803dc32bfee78a9ca2b1abbe39499729219b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_compile() {
+     ${CC} ${CFLAGS} ${LDFLAGS} tool/lemon.c -o lemon
+diff --git a/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb b/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
+index 9b18269bcb..3616eb519d 100644
+--- a/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
++++ b/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
+@@ -16,7 +16,6 @@ inherit autotools-brokensep pkgconfig
+ # sombok-2.4.0
+ SRCREV = "0098d85a037ef5c99a648a3669a077781a45e8cc"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # Disable libthai support
+ EXTRA_OECONF = "--disable-libthai"
+diff --git a/meta-oe/recipes-devtools/libtoml11/libtoml11_4.4.0.bb b/meta-oe/recipes-devtools/libtoml11/libtoml11_4.4.0.bb
+index 5b357e2492..38786b79ed 100644
+--- a/meta-oe/recipes-devtools/libtoml11/libtoml11_4.4.0.bb
++++ b/meta-oe/recipes-devtools/libtoml11/libtoml11_4.4.0.bb
+@@ -16,14 +16,13 @@ SRCREV_json = "8c391e04fe4195d8be862c97f38cfe10e2a3472e"
+ SRCREV_doctest = "ae7a13539fb71f270b87eb2e874fbac80bc8dda2"
+ 
+ SRC_URI = "git://github.com/ToruNiina/toml11;branch=main;protocol=https \
+-           git://github.com/nlohmann/json;destsuffix=git/tests/extlib/json;name=json;branch=develop;protocol=https \
+-           git://github.com/doctest/doctest;destsuffix=git/tests/extlib/doctest;name=doctest;branch=master;protocol=https \
++           git://github.com/nlohmann/json;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/tests/extlib/json;name=json;branch=develop;protocol=https \
++           git://github.com/doctest/doctest;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/tests/extlib/doctest;name=doctest;branch=master;protocol=https \
+            file://0001-Remove-whitespace-in-operator.patch \
+            file://run-ptest \
+ "
+ SRCREV_FORMAT = "json_doctest"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake ptest
+ 
+diff --git a/meta-oe/recipes-devtools/libubox/libubox_git.bb b/meta-oe/recipes-devtools/libubox/libubox_git.bb
+index 131929b30e..394cf9c000 100644
+--- a/meta-oe/recipes-devtools/libubox/libubox_git.bb
++++ b/meta-oe/recipes-devtools/libubox/libubox_git.bb
+@@ -25,7 +25,6 @@ PV = "1.0.1+git"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-devtools/lshw/lshw_02.20.bb b/meta-oe/recipes-devtools/lshw/lshw_02.20.bb
+index 0fb68d8684..95e2084255 100644
+--- a/meta-oe/recipes-devtools/lshw/lshw_02.20.bb
++++ b/meta-oe/recipes-devtools/lshw/lshw_02.20.bb
+@@ -18,7 +18,6 @@ SRC_URI = " \
+     file://0001-disable-docbook2man.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig
+ 
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+index 58cfcb2f06..f84d989eef 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+@@ -31,7 +31,6 @@ SRC_URI = "git://gitlab.com/cespedes/ltrace.git;protocol=https;branch=main \
+            "
+ SRC_URI:append:libc-musl = " file://add_ppc64le.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+index cbad79f3ae..f4a1345ab2 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
+ PV = "2.1"
+ SRCREV = "538a82133ad6fddfd0ca64de167c4aca3bc1a2da"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig binconfig siteinfo
+ 
+diff --git a/meta-oe/recipes-devtools/luaposix/luaposix_36.2.1.bb b/meta-oe/recipes-devtools/luaposix/luaposix_36.2.1.bb
+index 7fb0965813..59bc4dfcfe 100644
+--- a/meta-oe/recipes-devtools/luaposix/luaposix_36.2.1.bb
++++ b/meta-oe/recipes-devtools/luaposix/luaposix_36.2.1.bb
+@@ -8,7 +8,6 @@ DEPENDS += "lua-native lua virtual/crypt"
+ SRC_URI = "git://github.com/luaposix/luaposix.git;branch=release-v36.2;protocol=https \
+ "
+ SRCREV = "5a8d8c768fc3c51f42cb591e9523a60399efc6a1"
+-S = "${WORKDIR}/git"
+ LUA_VERSION = "5.4"
+ 
+ B = "${S}"
+diff --git a/meta-oe/recipes-devtools/makeself/makeself_2.5.0.bb b/meta-oe/recipes-devtools/makeself/makeself_2.5.0.bb
+index f94025dd05..57c8417f44 100644
+--- a/meta-oe/recipes-devtools/makeself/makeself_2.5.0.bb
++++ b/meta-oe/recipes-devtools/makeself/makeself_2.5.0.bb
+@@ -14,7 +14,6 @@ SRC_URI = "\
+ 
+ SRCREV = "09488c50c6bdc40aec8e3a9b23a539c5054a634c"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_configure[noexec] = "1"
+ do_compile[noexec] = "1"
+diff --git a/meta-oe/recipes-devtools/mbpoll/mbpoll_1.5.2.bb b/meta-oe/recipes-devtools/mbpoll/mbpoll_1.5.2.bb
+index 028a8f9e46..4590b49955 100644
+--- a/meta-oe/recipes-devtools/mbpoll/mbpoll_1.5.2.bb
++++ b/meta-oe/recipes-devtools/mbpoll/mbpoll_1.5.2.bb
+@@ -11,6 +11,5 @@ DEPENDS = "libmodbus (>=3.1.4)"
+ SRC_URI = "git://github.com/epsilonrt/mbpoll;protocol=https;branch=master"
+ SRCREV = "a0bd6c08d3d15b086f2104477295c0705aed366a"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig cmake
+diff --git a/meta-oe/recipes-devtools/memstat/memstat_1.0.bb b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
+index 502843c0d1..a65782d017 100644
+--- a/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
++++ b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
+@@ -8,7 +8,7 @@ SECTION = "devtool"
+ 
+ LICENSE = "GPL-2.0-only"
+ 
+-S = "${WORKDIR}/memstattool"
++S = "${UNPACKDIR}/memstattool"
+ 
+ LIC_FILES_CHKSUM = "file://debian/copyright;md5=87be186443b1ac2cfa466f475e1ee0cb"
+ 
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial_6.6.3.bb b/meta-oe/recipes-devtools/mercurial/mercurial_6.6.3.bb
+index 9331cd16fe..a312be4aa7 100644
+--- a/meta-oe/recipes-devtools/mercurial/mercurial_6.6.3.bb
++++ b/meta-oe/recipes-devtools/mercurial/mercurial_6.6.3.bb
+@@ -12,7 +12,7 @@ inherit python3native python3targetconfig
+ SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
+ SRC_URI[sha256sum] = "f75d6a4a75823a1b7d713a4967eca2f596f466e58fc6bc06d72642932fd7e307"
+ 
+-S = "${WORKDIR}/mercurial-${PV}"
++S = "${UNPACKDIR}/mercurial-${PV}"
+ 
+ BBCLASSEXTEND = "native"
+ 
+diff --git a/meta-oe/recipes-devtools/microsoft-gsl/microsoft-gsl_4.0.0.bb b/meta-oe/recipes-devtools/microsoft-gsl/microsoft-gsl_4.0.0.bb
+index 8ba121d5ea..2fbbf8f06a 100644
+--- a/meta-oe/recipes-devtools/microsoft-gsl/microsoft-gsl_4.0.0.bb
++++ b/meta-oe/recipes-devtools/microsoft-gsl/microsoft-gsl_4.0.0.bb
+@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/microsoft/GSL.git;protocol=https;branch=main \
+ "
+ SRCREV = "a3534567187d2edc428efd3f13466ff75fe5805c"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig ptest
+ 
+diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c_6.0.0.bb b/meta-oe/recipes-devtools/msgpack/msgpack-c_6.0.0.bb
+index 40d997a52c..aa7629763c 100644
+--- a/meta-oe/recipes-devtools/msgpack/msgpack-c_6.0.0.bb
++++ b/meta-oe/recipes-devtools/msgpack/msgpack-c_6.0.0.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/msgpack/msgpack-c;branch=c_master;protocol=https \
+            "
+ SRCREV = "8160ede5e20fd3019a77eea46d9c72cf6163f802"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-cpp_6.1.1.bb b/meta-oe/recipes-devtools/msgpack/msgpack-cpp_6.1.1.bb
+index ccbaf9cea7..3457964609 100644
+--- a/meta-oe/recipes-devtools/msgpack/msgpack-cpp_6.1.1.bb
++++ b/meta-oe/recipes-devtools/msgpack/msgpack-cpp_6.1.1.bb
+@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "5fd555742e37bbd58d166199e669f01f743c7b3c6177191dd7b31fb0c3
+ UPSTREAM_CHECK_URI = "https://github.com/msgpack/msgpack-c/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/msgpack-cxx-${PV}"
++S = "${UNPACKDIR}/msgpack-cxx-${PV}"
+ 
+ DEPENDS += "boost"
+ 
+diff --git a/meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb b/meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb
+index 51fb98ccc8..2183170ba6 100644
+--- a/meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb
++++ b/meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb
+@@ -7,7 +7,7 @@ SECTION = "devel"
+ SRC_URI = "https://01.org/sites/default/files/downloads/msr-tools/msr-tools-${PV}.zip"
+ SRC_URI[sha256sum] = "f9457b5340f5f274da4239a461f0db6b514142b40461559d9c6150f05aab1d1e"
+ 
+-S = "${WORKDIR}/msr-tools-master"
++S = "${UNPACKDIR}/msr-tools-master"
+ 
+ COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
+ 
+diff --git a/meta-oe/recipes-devtools/musl/musl-nscd_git.bb b/meta-oe/recipes-devtools/musl/musl-nscd_git.bb
+index 82e5c3bc5e..ef2553760d 100644
+--- a/meta-oe/recipes-devtools/musl/musl-nscd_git.bb
++++ b/meta-oe/recipes-devtools/musl/musl-nscd_git.bb
+@@ -20,7 +20,6 @@ UPSTREAM_CHECK_COMMITS = "1"
+ 
+ inherit autotools-brokensep
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_configure () {
+     # no debug set -s flag
+diff --git a/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb b/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
+index 36e46021bb..ec87535ec7 100644
+--- a/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
++++ b/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
+@@ -12,7 +12,6 @@ SRCREV = "d732aaf9a315415ae8fd7eb11e3a4c1f80e42a48"
+ 
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # nlohmann-fifo is a header only C++ library, so the main package will be empty.
+ 
+diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.12.0.bb b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.12.0.bb
+index 58567a781e..1dfcc6ad75 100644
+--- a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.12.0.bb
++++ b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.12.0.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=3b489645de9825cca5beeb9a7e18b6eb"
+ CVE_PRODUCT = "json-for-modern-cpp"
+ 
+ SRC_URI = "git://github.com/nlohmann/json.git;branch=master;protocol=https \
+-           git://github.com/nlohmann/json_test_data.git;destsuffix=git/json_test_data;name=json-test-data;branch=master;protocol=https \
++           git://github.com/nlohmann/json_test_data.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/json_test_data;name=json-test-data;branch=master;protocol=https \
+            file://run-ptest \
+ "
+ 
+@@ -16,7 +16,6 @@ SRCREV_json-test-data = "a1375cea09d27cc1c4cadb8d00470375b421ac37"
+ 
+ SRCREV_FORMAT .= "_json-test-data"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake ptest
+ 
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.16.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.16.bb
+index d4b818f967..1dcd1f7926 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.16.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.16.bb
+@@ -8,8 +8,7 @@ SRC_URI = "\
+ 
+ inherit native
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ B = "${WORKDIR}/build"
+ 
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.16.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.16.0.bb
+index 43d9b99fd8..f80a2186e1 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_22.16.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.16.0.bb
+@@ -39,7 +39,7 @@ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            "
+ SRC_URI[sha256sum] = "720894f323e5c1ac24968eb2676660c90730d715cb7f090be71a668662a17c37"
+ 
+-S = "${WORKDIR}/node-v${PV}"
++S = "${UNPACKDIR}/node-v${PV}"
+ 
+ CVE_PRODUCT += "node.js"
+ 
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+index b1ce2ec168..3bbe33ca1d 100644
+--- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -7,8 +7,8 @@ RDEPENDS:${PN} = "libusb1"
+ SRC_URI = " \
+     git://repo.or.cz/openocd.git;protocol=http;name=openocd;branch=master \
+     git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl;branch=master \
+-    git://github.com/msteveb/jimtcl.git;protocol=https;destsuffix=git/jimtcl;name=jimtcl;branch=master \
+-    git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink;branch=master \
++    git://github.com/msteveb/jimtcl.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/jimtcl;name=jimtcl;branch=master \
++    git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src/jtag/drivers/libjaylink;name=libjaylink;branch=master \
+     file://0001-Makefile.am-Use-SOURCE_DATE_EPOCH-environment-variab.patch \
+ "
+ 
+@@ -19,7 +19,6 @@ SRCREV_jimtcl = "fcbb4499a6b46ef69e7a95da53e30796e20817f0"
+ SRCREV_libjaylink = "9aa7a5957c07bb6e862fc1a6d3153d109c7407e4"
+ 
+ PV = "0.12+git"
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig autotools-brokensep gettext
+ 
+diff --git a/meta-oe/recipes-devtools/pahole/pahole_1.29.bb b/meta-oe/recipes-devtools/pahole/pahole_1.29.bb
+index d5fa3b4746..aca915bf32 100644
+--- a/meta-oe/recipes-devtools/pahole/pahole_1.29.bb
++++ b/meta-oe/recipes-devtools/pahole/pahole_1.29.bb
+@@ -13,7 +13,6 @@ SRCREV = "b9cc7963051b2099795129450f9b70c81950d02f"
+ SRC_URI = "git://git.kernel.org/pub/scm/devel/pahole/pahole.git;branch=master \
+            file://0001-Use-usr-bin-env-python3-instead-of-just-usr-bin-pyth.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+index 52af9b99b1..130980b0cd 100644
+--- a/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
++++ b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/billfarrow/pcimem.git;branch=master;protocol=https"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+     install -D -m 0755 ${B}/pcimem ${D}${bindir}/pcimem
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.bb b/meta-oe/recipes-devtools/perfetto/perfetto.bb
+index 6b4e6372d3..e284ec8d1e 100644
+--- a/meta-oe/recipes-devtools/perfetto/perfetto.bb
++++ b/meta-oe/recipes-devtools/perfetto/perfetto.bb
+@@ -11,20 +11,20 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d2572d98547d43906b53615f856a8c2d \
+ 
+ # Dependencies from perfetto/tools/install-build-deps
+ SRC_URI:append = " \
+-           git://github.com/protocolbuffers/protobuf.git;branch=main;protocol=https;destsuffix=git/buildtools/protobuf;name=protobuf \
+-           git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxx.git;protocol=https;destsuffix=git/buildtools/libcxx;branch=main;name=libcxx \
+-           git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git;protocol=https;destsuffix=git/buildtools/libcxxabi;branch=main;name=libcxxabi \
+-           git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libunwind.git;protocol=https;destsuffix=git/buildtools/libunwind;branch=main;name=libunwind \
+-           git://android.googlesource.com/platform/system/libbase.git;branch=master;protocol=https;destsuffix=git/buildtools/android-libbase;name=libbase \
+-           git://android.googlesource.com/platform/system/unwinding.git;branch=master;protocol=https;destsuffix=git/buildtools/android-unwinding;name=unwinding \
+-           git://android.googlesource.com/platform/system/logging.git;branch=master;protocol=https;destsuffix=git/buildtools/android-logging;name=logging \
+-           git://android.googlesource.com/platform/system/libprocinfo.git;branch=master;protocol=https;destsuffix=git/buildtools/android-libprocinfo;name=libprocinfo \
+-           git://android.googlesource.com/platform/system/core.git;branch=master;protocol=https;destsuffix=git/buildtools/android-core;name=core \
+-           git://android.googlesource.com/platform/bionic.git;branch=master;protocol=https;destsuffix=git/buildtools/bionic;name=bionic \
+-           git://android.googlesource.com/platform/external/zlib.git;branch=master;protocol=https;destsuffix=git/buildtools/zlib;name=zlib \
+-           git://android.googlesource.com/platform/external/lzma.git;branch=master;protocol=https;destsuffix=git/buildtools/lzma;name=lzma \
+-           git://android.googlesource.com/platform/external/zstd.git;branch=master;protocol=https;destsuffix=git/buildtools/zstd;name=zstd \
+-           https://storage.googleapis.com/perfetto/gn-linux64-1968-0725d782;subdir=git/buildtools/;name=gn \
++           git://github.com/protocolbuffers/protobuf.git;branch=main;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/protobuf;name=protobuf \
++           git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxx.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/libcxx;branch=main;name=libcxx \
++           git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/libcxxabi;branch=main;name=libcxxabi \
++           git://chromium.googlesource.com/external/github.com/llvm/llvm-project/libunwind.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/libunwind;branch=main;name=libunwind \
++           git://android.googlesource.com/platform/system/libbase.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/android-libbase;name=libbase \
++           git://android.googlesource.com/platform/system/unwinding.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/android-unwinding;name=unwinding \
++           git://android.googlesource.com/platform/system/logging.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/android-logging;name=logging \
++           git://android.googlesource.com/platform/system/libprocinfo.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/android-libprocinfo;name=libprocinfo \
++           git://android.googlesource.com/platform/system/core.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/android-core;name=core \
++           git://android.googlesource.com/platform/bionic.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/bionic;name=bionic \
++           git://android.googlesource.com/platform/external/zlib.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/zlib;name=zlib \
++           git://android.googlesource.com/platform/external/lzma.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/lzma;name=lzma \
++           git://android.googlesource.com/platform/external/zstd.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/zstd;name=zstd \
++           https://storage.googleapis.com/perfetto/gn-linux64-1968-0725d782;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/buildtools/;name=gn \
+            \
+            file://0001-Remove-check_build_deps-build-steps.patch \
+            file://0002-traced-fix-missing-include.patch \
+diff --git a/meta-oe/recipes-devtools/perfetto/perfetto.inc b/meta-oe/recipes-devtools/perfetto/perfetto.inc
+index 3cd0cb91b8..1c7e9144cc 100644
+--- a/meta-oe/recipes-devtools/perfetto/perfetto.inc
++++ b/meta-oe/recipes-devtools/perfetto/perfetto.inc
+@@ -10,4 +10,3 @@ SRCREV_perfetto = "c74251226a8caa0b43377902ee06d2570faa0c15"
+ SRCREV_FORMAT = "perfetto"
+ PV = "47.0"
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb b/meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb
+index 3b686f7fdc..65f2ec232a 100644
+--- a/meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb
++++ b/meta-oe/recipes-devtools/perl/dbd-mariadb_1.24.bb
+@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "f977a25b4116a0a95a7c8a894fd37097abe19af9a6a9ed4d800604ec17
+ 
+ RDEPENDS:${PN} = "libdbi-perl"
+ 
+-S = "${WORKDIR}/DBD-MariaDB-${PV}"
++S = "${UNPACKDIR}/DBD-MariaDB-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-oe/recipes-devtools/perl/exiftool_12.89.bb b/meta-oe/recipes-devtools/perl/exiftool_12.89.bb
+index 3d745146f1..69a4f79815 100644
+--- a/meta-oe/recipes-devtools/perl/exiftool_12.89.bb
++++ b/meta-oe/recipes-devtools/perl/exiftool_12.89.bb
+@@ -10,7 +10,6 @@ inherit cpan
+ SRCREV = "e04534a40925354187e8432d44248229d774f34a"
+ SRC_URI = "git://github.com/exiftool/exiftool;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN} = " \
+     perl \
+diff --git a/meta-oe/recipes-devtools/perl/ipc-run_20231003.0.bb b/meta-oe/recipes-devtools/perl/ipc-run_20231003.0.bb
+index e28b6ea018..9cdb0a52cc 100644
+--- a/meta-oe/recipes-devtools/perl/ipc-run_20231003.0.bb
++++ b/meta-oe/recipes-devtools/perl/ipc-run_20231003.0.bb
+@@ -12,7 +12,6 @@ DEPENDS = "perl"
+ SRC_URI = "git://github.com/toddr/IPC-Run.git;branch=master;protocol=https"
+ SRCREV = "ad56c3b5f5a211d32bbb8ac29f180d707ee58c1b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cpan
+ 
+diff --git a/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.67.bb b/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.67.bb
+index 9171cbc89c..4886333f3a 100644
+--- a/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.67.bb
++++ b/meta-oe/recipes-devtools/perl/libconfig-general-perl_2.67.bb
+@@ -10,7 +10,7 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TL/TLINDEN/${SRCNAME}-${PV}.
+ 
+ SRC_URI[sha256sum] = "473d65127b23dac0e8039c01e28bc4072cb9a6e93e81a1ea4893cea08c698db0"
+ 
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
++S = "${UNPACKDIR}/${SRCNAME}-${PV}"
+ 
+ EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
+ 
+diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
+index f70f737ba2..c128cb7154 100644
+--- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
++++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.647.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=65f65488c774efe1da488e36ad6c4a36"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HM/HMBRAND/DBI-${PV}.tgz"
+ SRC_URI[sha256sum] = "0df16af8e5b3225a68b7b592ab531004ddb35a9682b50300ce50174ad867d9aa"
+ 
+-S = "${WORKDIR}/DBI-${PV}"
++S = "${UNPACKDIR}/DBI-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.16.bb b/meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.16.bb
+index 21e46f5521..43614d55ac 100644
+--- a/meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.16.bb
++++ b/meta-oe/recipes-devtools/perl/libdev-checklib-perl_1.16.bb
+@@ -13,7 +13,7 @@ SRC_URI = "https://cpan.metacpan.org/modules/by-module/Devel/Devel-CheckLib-${PV
+ "
+ SRC_URI[sha256sum] = "869d38c258e646dcef676609f0dd7ca90f085f56cf6fd7001b019a5d5b831fca"
+ 
+-S = "${WORKDIR}/Devel-CheckLib-${PV}"
++S = "${UNPACKDIR}/Devel-CheckLib-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-oe/recipes-devtools/perl/libio-pty-perl_1.20.bb b/meta-oe/recipes-devtools/perl/libio-pty-perl_1.20.bb
+index 6029b7aae9..1464a84d34 100644
+--- a/meta-oe/recipes-devtools/perl/libio-pty-perl_1.20.bb
++++ b/meta-oe/recipes-devtools/perl/libio-pty-perl_1.20.bb
+@@ -7,7 +7,7 @@ SRC_URI = "http://www.cpan.org/modules/by-module/IO/IO-Tty-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "b15309fc85623893289cb9b2b88dfa9ed1e69156b75f29938553a45be6d730af"
+ 
+-S = "${WORKDIR}/IO-Tty-${PV}"
++S = "${UNPACKDIR}/IO-Tty-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-oe/recipes-devtools/perl/libjson-perl_4.05000.bb b/meta-oe/recipes-devtools/perl/libjson-perl_4.05000.bb
+index 407ba39140..ded0dea0d1 100644
+--- a/meta-oe/recipes-devtools/perl/libjson-perl_4.05000.bb
++++ b/meta-oe/recipes-devtools/perl/libjson-perl_4.05000.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/makamaka/JSON.git;protocol=https;branch=master"
+ 
+ SRCREV = "39bc0e567c202762a575fed2844ebdb941c3ca09"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cpan
+ 
+diff --git a/meta-oe/recipes-devtools/perl/libparse-yapp-perl_1.21.bb b/meta-oe/recipes-devtools/perl/libparse-yapp-perl_1.21.bb
+index b77a5c95a2..a7e05922d6 100644
+--- a/meta-oe/recipes-devtools/perl/libparse-yapp-perl_1.21.bb
++++ b/meta-oe/recipes-devtools/perl/libparse-yapp-perl_1.21.bb
+@@ -13,7 +13,7 @@ SRC_URI = "https://www.cpan.org/authors/id/W/WB/WBRASWELL/Parse-Yapp-${PV}.tar.g
+ 
+ SRC_URI[sha256sum] = "3810e998308fba2e0f4f26043035032b027ce51ce5c8a52a8b8e340ca65f13e5"
+ 
+-S = "${WORKDIR}/Parse-Yapp-${PV}"
++S = "${UNPACKDIR}/Parse-Yapp-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-oe/recipes-devtools/perl/libpcsc-perl_1.4.15.bb b/meta-oe/recipes-devtools/perl/libpcsc-perl_1.4.15.bb
+index 1bdb332a75..3e4137a68c 100644
+--- a/meta-oe/recipes-devtools/perl/libpcsc-perl_1.4.15.bb
++++ b/meta-oe/recipes-devtools/perl/libpcsc-perl_1.4.15.bb
+@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "5cc834438739bd6e4e837fb7e10bd8befb809cd185ae6cf4b33e5fa916
+ UPSTREAM_CHECK_URI = "https://cpan.metacpan.org/authors/id/W/WH/WHOM/"
+ UPSTREAM_CHECK_REGEX = "pcsc-perl-(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/pcsc-perl-${PV}"
++S = "${UNPACKDIR}/pcsc-perl-${PV}"
+ 
+ inherit cpan pkgconfig
+ 
+diff --git a/meta-oe/recipes-devtools/perl/libperlio-gzip-perl_0.20.bb b/meta-oe/recipes-devtools/perl/libperlio-gzip-perl_0.20.bb
+index 4ce31d6fe6..981c946483 100644
+--- a/meta-oe/recipes-devtools/perl/libperlio-gzip-perl_0.20.bb
++++ b/meta-oe/recipes-devtools/perl/libperlio-gzip-perl_0.20.bb
+@@ -13,7 +13,7 @@ SRC_URI = "https://cpan.metacpan.org/authors/id/N/NW/NWCLARK/PerlIO-gzip-${PV}.t
+ 
+ SRC_URI[sha256sum] = "4848679a3f201e3f3b0c5f6f9526e602af52923ffa471a2a3657db786bd3bdc5"
+ 
+-S = "${WORKDIR}/PerlIO-gzip-${PV}"
++S = "${UNPACKDIR}/PerlIO-gzip-${PV}"
+ 
+ EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
+ 
+diff --git a/meta-oe/recipes-devtools/php/php_8.4.6.bb b/meta-oe/recipes-devtools/php/php_8.4.6.bb
+index 1b8c019a5d..5118ddd6ab 100644
+--- a/meta-oe/recipes-devtools/php/php_8.4.6.bb
++++ b/meta-oe/recipes-devtools/php/php_8.4.6.bb
+@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
+             file://php-fpm.service \
+           "
+ 
+-S = "${WORKDIR}/php-${PV}"
++S = "${UNPACKDIR}/php-${PV}"
+ 
+ SRC_URI[sha256sum] = "9cf2734509b603f6589617ab52a9712a03e0fe059951cddd2d4623df4bf7c6c6"
+ 
+diff --git a/meta-oe/recipes-devtools/pistache/pistache_0.4.26.bb b/meta-oe/recipes-devtools/pistache/pistache_0.4.26.bb
+index feffff623d..b0a20e3ece 100644
+--- a/meta-oe/recipes-devtools/pistache/pistache_0.4.26.bb
++++ b/meta-oe/recipes-devtools/pistache/pistache_0.4.26.bb
+@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/pistacheio/pistache.git;branch=master;protocol=https
+ # SRCREV tagged 0.4.26
+ SRCREV = "ddffda861aa49012dcda28f1362d0339e718cd52"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "rapidjson"
+ 
+diff --git a/meta-oe/recipes-devtools/ply/ply_git.bb b/meta-oe/recipes-devtools/ply/ply_git.bb
+index 5a39456b2d..916ff29118 100644
+--- a/meta-oe/recipes-devtools/ply/ply_git.bb
++++ b/meta-oe/recipes-devtools/ply/ply_git.bb
+@@ -10,7 +10,6 @@ PV = "2.4.0"
+ SRC_URI = "git://github.com/iovisor/ply;branch=master;protocol=https"
+ SRCREV = "282558cfa1c0f0e095354e3a6ec4486b524179dc"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CACHED_CONFIGUREVARS = 'LD="${HOST_PREFIX}ld.bfd${TOOLCHAIN_OPTIONS} ${HOST_LD_ARCH}"'
+ 
+diff --git a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.0.6.bb b/meta-oe/recipes-devtools/pocketpy/pocketpy_2.0.6.bb
+index 7b06d10526..f3ffccf626 100644
+--- a/meta-oe/recipes-devtools/pocketpy/pocketpy_2.0.6.bb
++++ b/meta-oe/recipes-devtools/pocketpy/pocketpy_2.0.6.bb
+@@ -16,7 +16,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8cdfa87bc5e09bc07f8cf64135026d91"
+ SRC_URI = "git://github.com/pocketpy/pocketpy.git;protocol=https;branch=main"
+ SRCREV = "8a3bdd7e0a43b44e3b32548543128d95e68a3802"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.5.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.5.1.bb
+index 7640797771..30c9e19b16 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.5.1.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.5.1.bb
+@@ -19,7 +19,6 @@ SRC_URI:append:class-native = " file://0001-Makefile.am-do-not-compile-the-code-
+ 
+ SRCREV = "185beed28e65494be7505b30c1afeaf199e19b23"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_5.29.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_5.29.4.bb
+index 30b805e6b1..61aff1da28 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_5.29.4.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_5.29.4.bb
+@@ -26,7 +26,6 @@ SRC_URI:append:mipsarcho32:toolchain-clang = " file://0001-Fix-build-on-mips-cla
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>.(25\.(\d+)))"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_PRODUCT = "google:protobuf protobuf:protobuf google-protobuf protobuf-cpp"
+ 
+diff --git a/meta-oe/recipes-devtools/python/python3-apt_2.5.3.bb b/meta-oe/recipes-devtools/python/python3-apt_2.5.3.bb
+index 1d54b9f6af..d5c440f413 100644
+--- a/meta-oe/recipes-devtools/python/python3-apt_2.5.3.bb
++++ b/meta-oe/recipes-devtools/python/python3-apt_2.5.3.bb
+@@ -7,7 +7,6 @@ SRC_URI = "git://salsa.debian.org/apt-team/python-apt.git;protocol=https;branch=
+ 
+ SRCREV = "3252935b6224b3bd2e2250894b9559b47c61b2e1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+ 
+diff --git a/meta-oe/recipes-devtools/python/python3-distutils-extra_2.39.bb b/meta-oe/recipes-devtools/python/python3-distutils-extra_2.39.bb
+index a98dfab6d9..d80eac7756 100644
+--- a/meta-oe/recipes-devtools/python/python3-distutils-extra_2.39.bb
++++ b/meta-oe/recipes-devtools/python/python3-distutils-extra_2.39.bb
+@@ -10,6 +10,6 @@ SRC_URI[sha256sum] = "723f24f4d65fc8d99b33a002fbbb3771d4cc9d664c97085bf37f3997ae
+ 
+ inherit setuptools3
+ 
+-S = "${WORKDIR}/python-distutils-extra-${PV}"
++S = "${UNPACKDIR}/python-distutils-extra-${PV}"
+ 
+ BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+index 8519479c4d..724d329ee2 100644
+--- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+@@ -10,7 +10,6 @@ SRCREV = "0ccdbf364c577803e2a751f5aededce935314313"
+ 
+ PV = "1.1.0+git"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb b/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb
+index 29abfe1af5..672c46055d 100644
+--- a/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb
++++ b/meta-oe/recipes-devtools/serialcheck/serialcheck_1.0.0.bb
+@@ -9,7 +9,6 @@ SRC_URI = " \
+ 
+ SRCREV = "45eb2ffa5378396e85432872833890b0a1cba872"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-devtools/sexpect/sexpect_2.3.15.bb b/meta-oe/recipes-devtools/sexpect/sexpect_2.3.15.bb
+index b97700e53d..72ccd1d6b7 100644
+--- a/meta-oe/recipes-devtools/sexpect/sexpect_2.3.15.bb
++++ b/meta-oe/recipes-devtools/sexpect/sexpect_2.3.15.bb
+@@ -7,6 +7,5 @@ BRANCH = "master"
+ SRC_URI = "git://github.com/clarkwang/sexpect;branch=${BRANCH};protocol=https;tag=v${PV}"
+ SRCREV = "d3645392424d47532be90fcbc0abf3148324785b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+diff --git a/meta-oe/recipes-devtools/smemstat/smemstat_0.02.13.bb b/meta-oe/recipes-devtools/smemstat/smemstat_0.02.13.bb
+index bf5c52fe50..ea4fc5d3dd 100644
+--- a/meta-oe/recipes-devtools/smemstat/smemstat_0.02.13.bb
++++ b/meta-oe/recipes-devtools/smemstat/smemstat_0.02.13.bb
+@@ -9,7 +9,6 @@ DEPENDS = "ncurses"
+ SRC_URI = "git://github.com/ColinIanKing/smemstat.git;protocol=https;branch=master"
+ SRCREV = "1edc560602aa116b96408110b8b9d66a4edef60e"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit bash-completion
+ 
+diff --git a/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb b/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb
+index 17c24d5abf..ee203f83e2 100644
+--- a/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb
++++ b/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb
+@@ -12,7 +12,6 @@ SRC_URI = " \
+     git://github.com/fnc12/sqlite_orm;protocol=https;branch=master \
+     file://0001-fix-cstdint-error-with-gcc-15.0.1.patch \
+ "
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE += "-DSqliteOrm_BuildTests=OFF -DLIB_INSTALL_DIR=${libdir} \
+                   -DCMAKE_INSTALL_DIR=${libdir}/cmake \
+diff --git a/meta-oe/recipes-devtools/squashfs-tools-ng/squashfs-tools-ng_1.3.2.bb b/meta-oe/recipes-devtools/squashfs-tools-ng/squashfs-tools-ng_1.3.2.bb
+index 10e0e27a20..966d14874e 100644
+--- a/meta-oe/recipes-devtools/squashfs-tools-ng/squashfs-tools-ng_1.3.2.bb
++++ b/meta-oe/recipes-devtools/squashfs-tools-ng/squashfs-tools-ng_1.3.2.bb
+@@ -14,7 +14,6 @@ LIC_FILES_CHKSUM = "file://COPYING.md;md5=a709b68f1ce8a9f10aeea6401446c1f4 \
+ SRCREV = "667faf69cc35215e33e747b4bffdcba3643c2629"
+ SRC_URI = "git://github.com/AgentD/squashfs-tools-ng.git;protocol=https;branch=fixes-1.3.0"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb b/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
+index 2c01e126ff..7824ed1a68 100644
+--- a/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
++++ b/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
+@@ -11,7 +11,6 @@ SRC_URI = " \
+ "
+ SRCREV = "34b42992a43fda69c6ba2557b718601cafe16251"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # coreutils provides fmt which is used in the Makefile
+ DEPENDS = "i2c-tools coreutils-native"
+diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
+index b113145808..75067f70a2 100644
+--- a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
++++ b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
+@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https;branc
+            "
+ SRCREV = "538273cfd53720a10e34a3d80d3779b607e1ac26"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "cmake-native lapack gmp mpfr chrpath-native"
+ 
+diff --git a/meta-oe/recipes-devtools/systemd/nativesdk-systemd-systemctl.bb b/meta-oe/recipes-devtools/systemd/nativesdk-systemd-systemctl.bb
+index 3360ccf357..6c5591b461 100644
+--- a/meta-oe/recipes-devtools/systemd/nativesdk-systemd-systemctl.bb
++++ b/meta-oe/recipes-devtools/systemd/nativesdk-systemd-systemctl.bb
+@@ -7,8 +7,7 @@ inherit nativesdk
+ 
+ SRC_URI = "file://systemctl"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install() {
+ 	install -d ${D}${bindir}
+diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb b/meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb
+index 60dbc7b422..6f452d3b93 100644
+--- a/meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb
++++ b/meta-oe/recipes-devtools/tclap/tclap_1.4.0.bb
+@@ -13,7 +13,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5c64b2e8cc50917b2744a90950faa7cd"
+ SRCREV = "81b3d2a0c47895c22e9bb8c577f5ab521f76e5d2"
+ SRC_URI = "git://git.code.sf.net/p/tclap/code;branch=1.4"
+ 
+-S = "${WORKDIR}/git"
+ inherit cmake
+ 
+ ALLOW_EMPTY:${PN} = "1"
+diff --git a/meta-oe/recipes-devtools/tcltk/tk8_8.6.15.bb b/meta-oe/recipes-devtools/tcltk/tk8_8.6.15.bb
+index 8518fb8dfe..8cb9f6cb5e 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk8_8.6.15.bb
++++ b/meta-oe/recipes-devtools/tcltk/tk8_8.6.15.bb
+@@ -29,7 +29,7 @@ SRC_URI[sha256sum] = "550969f35379f952b3020f3ab7b9dd5bfd11c1ef7c9b7c6a75f5c49aca
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/tcl/files/Tcl/"
+ UPSTREAM_CHECK_REGEX = "Tcl/(?P<pver>\d+(\.\d+)+)/"
+ 
+-S = "${WORKDIR}/tk${PV}"
++S = "${UNPACKDIR}/tk${PV}"
+ 
+ # Short version format: "8.6"
+ VER = "${@os.path.splitext(d.getVar('PV'))[0]}"
+diff --git a/meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb b/meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb
+index 8701686b11..504b40927e 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb
++++ b/meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb
+@@ -25,7 +25,7 @@ SRC_URI[sha256sum] = "d6f01a4d598bfc6398be9584e1bab828c907b0758db4bbb351a1429106
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/tcl/files/Tcl/"
+ UPSTREAM_CHECK_REGEX = "Tcl/(?P<pver>\d+(\.\d+)+)/"
+ 
+-S = "${WORKDIR}/${BPN}${PV}"
++S = "${UNPACKDIR}/${BPN}${PV}"
+ 
+ # Short version format: "8.6"
+ VER = "${@os.path.splitext(d.getVar('PV'))[0]}"
+diff --git a/meta-oe/recipes-devtools/tomlplusplus/tomlplusplus_git.bb b/meta-oe/recipes-devtools/tomlplusplus/tomlplusplus_git.bb
+index a6ec89a2ff..da8b1602be 100644
+--- a/meta-oe/recipes-devtools/tomlplusplus/tomlplusplus_git.bb
++++ b/meta-oe/recipes-devtools/tomlplusplus/tomlplusplus_git.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/marzer/tomlplusplus.git;protocol=https;branch=master
+ 
+ PV = "3.4.0"
+ SRCREV = "30172438cee64926dc41fdd9c11fb3ba5b2ba9de"
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "cmake-native"
+ 
+diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.17.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.17.bb
+index 8fecadb22f..776bb014f4 100644
+--- a/meta-oe/recipes-devtools/uftrace/uftrace_0.17.bb
++++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.17.bb
+@@ -13,7 +13,6 @@ inherit autotools
+ SRCREV = "b0d936107edcefb519abbc9c363ca40daaac23b3"
+ SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https \
+            file://0001-include-libgen.h-for-basename.patch"
+-S = "${WORKDIR}/git"
+ 
+ LDFLAGS:append:libc-musl = " -largp"
+ 
+diff --git a/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.9.1.bb b/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.9.1.bb
+index e37dbcd02f..3d92f59ff2 100644
+--- a/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.9.1.bb
++++ b/meta-oe/recipes-devtools/unattended-upgrades/unattended-upgrades_2.9.1.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/mvo5/unattended-upgrades.git;protocol=https;branch=m
+ 
+ SRCREV = "5aff8fa2b5b60b7c11bbfb39c884477e72d11d02"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3_legacy
+ 
+diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+index 54d33379da..877f1d57f6 100644
+--- a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
++++ b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+@@ -22,7 +22,7 @@ SRC_URI = "https://fossies.org/linux/misc/old/imap-${PV}.tar.gz \
+ 
+ SRC_URI[sha256sum] = "53e15a2b5c1bc80161d42e9f69792a3fa18332b7b771910131004eb520004a28"
+ 
+-S = "${WORKDIR}/imap-${PV}"
++S = "${UNPACKDIR}/imap-${PV}"
+ 
+ CVE_STATUS[CVE-2005-0198] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
+ 
+diff --git a/meta-oe/recipes-devtools/valijson/valijson_1.0.6.bb b/meta-oe/recipes-devtools/valijson/valijson_1.0.6.bb
+index 7f5d0b1416..4e5f02746c 100644
+--- a/meta-oe/recipes-devtools/valijson/valijson_1.0.6.bb
++++ b/meta-oe/recipes-devtools/valijson/valijson_1.0.6.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5c4583a434195e4f3b418e17c8ca2daf"
+ SRC_URI = "git://github.com/tristanpenman/valijson.git;branch=master;protocol=https;tag=v${PV}"
+ SRCREV = "4edda758546436462da479bb8c8514f8a95c35ad"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb
+index e9442697fa..3b923fb99e 100644
+--- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb
++++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.64.0.bb
+@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/mirror/xmlrpc-c.git;branch=master;protocol=https \
+            "
+ SRCREV = "8ce36bce2438df9b02fcaafd19efa90a56426601"
+ 
+-S = "${WORKDIR}/git/advanced"
++S = "${UNPACKDIR}/${BP}/advanced"
+ 
+ inherit autotools-brokensep binconfig pkgconfig
+ 
+diff --git a/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+index 186f2c8ed0..3e569859b7 100644
+--- a/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
++++ b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/lloyd/yajl;nobranch=1;protocol=https"
+ 
+ inherit cmake lib_package
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
+ 
+diff --git a/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb b/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
+index c5b5e60027..e4434bee45 100644
+--- a/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
++++ b/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/lloyd/yajl;branch=master;protocol=https \
+            "
+ SRCREV = "a0ecdde0c042b9256170f2f8890dd9451a4240aa"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake lib_package
+ 
+diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+index de7eb45c1d..68895a1697 100644
+--- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
++++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/yasm/yasm.git;branch=master;protocol=https \
+            file://0001-bitvect-fix-build-with-gcc-15.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools gettext python3native
+ 
+diff --git a/meta-oe/recipes-extended/7zip/7zip_24.09.bb b/meta-oe/recipes-extended/7zip/7zip_24.09.bb
+index 4b6c7a613c..74e44c44e3 100644
+--- a/meta-oe/recipes-extended/7zip/7zip_24.09.bb
++++ b/meta-oe/recipes-extended/7zip/7zip_24.09.bb
+@@ -14,7 +14,6 @@ SRCREV = "e5431fa6f5505e385c6f9367260717e9c47dc2ee"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # Support Yocto cross compiling
+ CXXFLAGS:append:toolchain-clang = " -Wno-error=cast-qual -Wno-error=sign-conversion \
+diff --git a/meta-oe/recipes-extended/7zip/bit7z_4.0.9.bb b/meta-oe/recipes-extended/7zip/bit7z_4.0.9.bb
+index 645ea1a2ae..033461d614 100644
+--- a/meta-oe/recipes-extended/7zip/bit7z_4.0.9.bb
++++ b/meta-oe/recipes-extended/7zip/bit7z_4.0.9.bb
+@@ -32,7 +32,6 @@ SRCHASH_CPM = "c8cdc32c03816538ce22781ed72964dc864b2a34a310d3b7104812a5ca2d835d"
+ TAG_CPM = "0.40.2"
+ SRC_URI[sha256sum] = "${SRCHASH_CPM}"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake ptest
+ 
+diff --git a/meta-oe/recipes-extended/beep/beep_1.4.12.bb b/meta-oe/recipes-extended/beep/beep_1.4.12.bb
+index a4bc10c366..a8d720d9dd 100644
+--- a/meta-oe/recipes-extended/beep/beep_1.4.12.bb
++++ b/meta-oe/recipes-extended/beep/beep_1.4.12.bb
+@@ -10,7 +10,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SRC_URI = "git://github.com/spkr-beep/beep.git;protocol=https;branch=master \
+            file://0001-beep-library-Make-it-compatible-with-c99.patch"
+ SRCREV = "11453a79f2cea81832329b06ca3a284aa7a0a52e"
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "prefix='${prefix}' CFLAGS='${CFLAGS}' LDFLAGS='${LDFLAGS}'"
+ 
+diff --git a/meta-oe/recipes-extended/bitwise/bitwise_0.50.bb b/meta-oe/recipes-extended/bitwise/bitwise_0.50.bb
+index 4d560eb4b8..397829c87b 100644
+--- a/meta-oe/recipes-extended/bitwise/bitwise_0.50.bb
++++ b/meta-oe/recipes-extended/bitwise/bitwise_0.50.bb
+@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "806271fa5bf31de0600315e8720004a8f529954480e991ca84a9868dc1
+ UPSTREAM_CHECK_URI = "https://github.com/mellowcandle/bitwise/releases"
+ UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/${BPN}-v${PV}"
++S = "${UNPACKDIR}/${BPN}-v${PV}"
+ 
+ DEPENDS = "ncurses readline"
+ 
+diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb
+index cfd134dd4f..b2cfd9b874 100644
+--- a/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb
++++ b/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb
+@@ -41,7 +41,6 @@ inherit gettext autotools pkgconfig features_check systemd
+ 
+ REQUIRED_DISTRO_FEATURES += "opengl"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "\
+     --enable-libraries \
+diff --git a/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb b/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb
+index 58214ea59c..411f8a7610 100644
+--- a/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb
++++ b/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb
+@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=941ee9cd1609382f946352712a319b4b"
+ SRC_URI = "git://github.com/google/brotli.git;branch=master;protocol=https"
+ SRCREV = "ed738e842d2fbdf2d6459e39267a633c4a9b2f5d"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake lib_package
+ 
+diff --git a/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.10.bb b/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.10.bb
+index dad8e8e8e2..26c80195b0 100644
+--- a/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.10.bb
++++ b/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.10.bb
+@@ -19,7 +19,6 @@ SRC_URI = "git://github.com/CANopenTerm/CANopenTerm.git;protocol=https;branch=ma
+ 
+ SRCREV  = "e0760b2e9657907e691be4df384ca7617109635d"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake ptest
+ 
+diff --git a/meta-oe/recipes-extended/cmatrix/cmatrix_2.0.bb b/meta-oe/recipes-extended/cmatrix/cmatrix_2.0.bb
+index 829e9588c8..e1a6af622b 100644
+--- a/meta-oe/recipes-extended/cmatrix/cmatrix_2.0.bb
++++ b/meta-oe/recipes-extended/cmatrix/cmatrix_2.0.bb
+@@ -8,7 +8,6 @@ SRC_URI = " \
+     file://0001-reproducibility-Prevent-configuration-from-reading-h.patch \
+ "
+ SRCREV = "adfdf1656f23e5ab3b52c7d7edf91249a4477e8d"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.5.bb b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.5.bb
+index e1f6c558df..da710eaedb 100644
+--- a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.5.bb
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.5.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/kkaempf/cmpi-bindings.git;protocol=https;branch=main
+            "
+ 
+ SRCREV = "49d6dcfc71ca421100fcf325e31625817c469fc9"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake python3targetconfig
+ 
+diff --git a/meta-oe/recipes-extended/dialog/dialog_1.3-20250116.bb b/meta-oe/recipes-extended/dialog/dialog_1.3-20250116.bb
+index f2dbe4029b..7c596371e5 100644
+--- a/meta-oe/recipes-extended/dialog/dialog_1.3-20250116.bb
++++ b/meta-oe/recipes-extended/dialog/dialog_1.3-20250116.bb
+@@ -12,7 +12,7 @@ SRC_URI = "https://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
+ SRC_URI[sha256sum] = "68406329827b783d0a8959cc20a94c6e1791ac861a27f854e06e9020541816dd"
+ 
+ # hardcoded here for use in dialog-static recipe
+-S = "${WORKDIR}/dialog-${PV}"
++S = "${UNPACKDIR}/dialog-${PV}"
+ 
+ inherit autotools-brokensep pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
+index 888289b357..8b48d20aac 100644
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
+@@ -23,7 +23,6 @@ SRC_URI = "git://github.com/COVESA/${BPN}.git;protocol=https;branch=master \
+            "
+ SRCREV = "0f2d4cfffada6f8448a2cb27995b38eb4271044f"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd systemd-watchdog systemd-journal ', '', d)} \
+  dlt-examples dlt-adaptor dlt-adaptor-stdin dlt-adaptor-udp dlt-console \
+diff --git a/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb
+index ec0b4da935..71305cc35f 100644
+--- a/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb
++++ b/meta-oe/recipes-extended/docopt.cpp/docopt.cpp_git.bb
+@@ -20,7 +20,6 @@ SRC_URI = "\
+     git://github.com/docopt/docopt.cpp.git;protocol=https;branch=master \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-extended/dumb-init/dumb-init_1.2.5.bb b/meta-oe/recipes-extended/dumb-init/dumb-init_1.2.5.bb
+index 310081b822..ad2aee4570 100644
+--- a/meta-oe/recipes-extended/dumb-init/dumb-init_1.2.5.bb
++++ b/meta-oe/recipes-extended/dumb-init/dumb-init_1.2.5.bb
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5940d39995ea6857d01b8227109c2e9c"
+ 
+ SRCREV = "89c1502b9d40b5cb4a844498b14d74ba1dd559bf"
+ SRC_URI = "git://github.com/Yelp/dumb-init;branch=master;protocol=https"
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "CC='${CC}' CFLAGS='${CFLAGS} ${LDFLAGS}'"
+ 
+diff --git a/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb b/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb
+index 82f8366aeb..c3a5a02a3f 100644
+--- a/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb
++++ b/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.4.bb
+@@ -16,7 +16,6 @@ inherit cmake
+ 
+ DEPENDS += "grpc protobuf cpprest grpc-native protobuf-native"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "-DCPPREST_EXCLUDE_WEBSOCKETS=ON"
+ 
+diff --git a/meta-oe/recipes-extended/figlet/figlet_git.bb b/meta-oe/recipes-extended/figlet/figlet_git.bb
+index 9789ac16d4..d226806050 100644
+--- a/meta-oe/recipes-extended/figlet/figlet_git.bb
++++ b/meta-oe/recipes-extended/figlet/figlet_git.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1688bcd97b27704f1afcac7336409857"
+ SRC_URI = "git://github.com/cmatsuoka/figlet.git;branch=master;protocol=https \
+            file://0001-build-add-autotools-support-to-allow-easy-cross-comp.patch"
+ SRCREV = "5bbcd7383a8c3a531299b216b0c734e1495c6db3"
+-S = "${WORKDIR}/git"
+ PV = "2.2.5+git"
+ 
+ inherit autotools
+diff --git a/meta-oe/recipes-extended/flatpak/flatpak-xdg-utils_1.0.6.bb b/meta-oe/recipes-extended/flatpak/flatpak-xdg-utils_1.0.6.bb
+index 5dfba25140..df7a4e2758 100644
+--- a/meta-oe/recipes-extended/flatpak/flatpak-xdg-utils_1.0.6.bb
++++ b/meta-oe/recipes-extended/flatpak/flatpak-xdg-utils_1.0.6.bb
+@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/flatpak/flatpak-xdg-utils.git;protocol=https;branch=
+ 
+ SRCREV = "05abdd7421688be5835a6b12f2b068086c38d4aa"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/flatpak/flatpak_1.16.0.bb b/meta-oe/recipes-extended/flatpak/flatpak_1.16.0.bb
+index 6696d8347b..f99c8ac36a 100644
+--- a/meta-oe/recipes-extended/flatpak/flatpak_1.16.0.bb
++++ b/meta-oe/recipes-extended/flatpak/flatpak_1.16.0.bb
+@@ -10,7 +10,6 @@ SRC_URI = " \
+ 
+ SRCREV = "1440f4faa67ebf69c7559f31d2cab59e6ec6fe2b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection python3native mime features_check useradd
+ 
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_4.0.1.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_4.0.1.bb
+index 4d82abc783..05e4fd937f 100644
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_4.0.1.bb
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_4.0.1.bb
+@@ -32,7 +32,6 @@ SRC_URI:append:libc-musl = "\
+ # prefix tag with "v" to avoid upgrade to random tags like "20220215"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>(\d+(\.\d+)+))"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "\
+     aws \
+diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.19.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.19.bb
+index 7dcc36080a..69de5628c4 100644
+--- a/meta-oe/recipes-extended/haveged/haveged_1.9.19.bb
++++ b/meta-oe/recipes-extended/haveged/haveged_1.9.19.bb
+@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ SRCREV = "0ef7dd915ee8be4ca2bb10b5cc2bee92b8ede61d"
+ SRC_URI = "git://github.com/jirka-h/haveged.git;branch=master;protocol=https \
+ "
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/jirka-h/haveged/releases"
+ 
+diff --git a/meta-oe/recipes-extended/hexedit/hexedit_1.6.bb b/meta-oe/recipes-extended/hexedit/hexedit_1.6.bb
+index d2b23b41b4..2299d55b2b 100644
+--- a/meta-oe/recipes-extended/hexedit/hexedit_1.6.bb
++++ b/meta-oe/recipes-extended/hexedit/hexedit_1.6.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/pixel/hexedit.git;branch=master;protocol=https \
+ 
+ SRCREV = "eab92dcaa34b66bc5182772afc9fda4ac8a27597"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep update-alternatives
+ 
+diff --git a/meta-oe/recipes-extended/highway/highway_1.2.0.bb b/meta-oe/recipes-extended/highway/highway_1.2.0.bb
+index e7dfc706bd..ea38310398 100644
+--- a/meta-oe/recipes-extended/highway/highway_1.2.0.bb
++++ b/meta-oe/recipes-extended/highway/highway_1.2.0.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/google/highway.git;protocol=https;branch=master \
+            file://0001-Add-cmake-check-for-deducing-32bit-or-64bit-RISCV.patch"
+ 
+ SRCREV = "457c891775a7397bdb0376bb1031e6e027af1c48"
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE = "-DBUILD_TESTING=0 -DCMAKE_BUILD_TYPE=Release"
+ 
+diff --git a/meta-oe/recipes-extended/hiredis/hiredis_1.2.0.bb b/meta-oe/recipes-extended/hiredis/hiredis_1.2.0.bb
+index dfabbb91a6..8678447cf5 100644
+--- a/meta-oe/recipes-extended/hiredis/hiredis_1.2.0.bb
++++ b/meta-oe/recipes-extended/hiredis/hiredis_1.2.0.bb
+@@ -10,7 +10,6 @@ SRC_URI = " \
+     "
+ SRCREV = "60e5075d4ac77424809f855ba3e398df7aacefe8"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake ptest
+ 
+diff --git a/meta-oe/recipes-extended/inputattach-config/inputattach-config.bb b/meta-oe/recipes-extended/inputattach-config/inputattach-config.bb
+index 9bb2e2f1f3..af9fbda9b8 100644
+--- a/meta-oe/recipes-extended/inputattach-config/inputattach-config.bb
++++ b/meta-oe/recipes-extended/inputattach-config/inputattach-config.bb
+@@ -4,8 +4,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171d
+ 
+ SRC_URI = "file://inputattach.conf"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_configure[noexec] = "1"
+ do_compile[noexec] = "1"
+diff --git a/meta-oe/recipes-extended/iotop/iotop_1.30.bb b/meta-oe/recipes-extended/iotop/iotop_1.30.bb
+index 7d04a3b17b..9fe774f9f2 100644
+--- a/meta-oe/recipes-extended/iotop/iotop_1.30.bb
++++ b/meta-oe/recipes-extended/iotop/iotop_1.30.bb
+@@ -7,7 +7,6 @@ DEPENDS = "ncurses"
+ SRC_URI = "git://github.com/Tomas-M/iotop.git;branch=master;protocol=https;tag=v${PV}"
+ SRCREV = "c3366a8a235f9c8ddc4797625f22cfdf12ba2c36"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/isomd5sum/isomd5sum_1.2.5.bb b/meta-oe/recipes-extended/isomd5sum/isomd5sum_1.2.5.bb
+index 87fcf8cc61..fc94d2caab 100644
+--- a/meta-oe/recipes-extended/isomd5sum/isomd5sum_1.2.5.bb
++++ b/meta-oe/recipes-extended/isomd5sum/isomd5sum_1.2.5.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/rhinstaller/isomd5sum.git;branch=master;protocol=htt
+            file://0002-fix-parallel-error.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ inherit python3native
+ 
+ EXTRA_OEMAKE += " \
+diff --git a/meta-oe/recipes-extended/jpnevulator/jpnevulator_git.bb b/meta-oe/recipes-extended/jpnevulator/jpnevulator_git.bb
+index bfa0e79d8f..7129d6ef8c 100644
+--- a/meta-oe/recipes-extended/jpnevulator/jpnevulator_git.bb
++++ b/meta-oe/recipes-extended/jpnevulator/jpnevulator_git.bb
+@@ -7,7 +7,6 @@ PV = "2.3.6+git"
+ SRC_URI = "git://github.com/snarlistic/jpnevulator.git;protocol=https;branch=master"
+ SRCREV = "bc1d4f6587a4a4829b5d55e3ca7ad584da6de545"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_compile() {
+ 	oe_runmake
+diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+index bd3a8f2ff5..f3f70b8da3 100644
+--- a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
++++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/rnovacek/konkretcmpi.git;branch=master;protocol=http
+            "
+ 
+ SRCREV = "ad28225e6eceff88417a60c1ba8896c8e40f21a7"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake python3-dir
+ 
+diff --git a/meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb b/meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb
+index 0c2382fe85..6ca8569bc5 100644
+--- a/meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb
++++ b/meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb
+@@ -16,7 +16,6 @@ SRCREV = "9ae4f4ae4481b1e69d38ed810980d33103544613"
+ # The current PV is not a git tag but a README content
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_3.2.1.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_3.2.1.bb
+index b98942379e..37c514a219 100644
+--- a/meta-oe/recipes-extended/libblockdev/libblockdev_3.2.1.bb
++++ b/meta-oe/recipes-extended/libblockdev/libblockdev_3.2.1.bb
+@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/storaged-project/libblockdev;branch=3.2.x-branch;pro
+            file://0001-fix-pythondir-for-multilib-when-cross-compiling.patch \
+            "
+ SRCREV = "b829b60d9ff049abb190f09a3b9a5fac648cd5a3"
+-S = "${WORKDIR}/git"
+ 
+ FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}"
+ 
+diff --git a/meta-oe/recipes-extended/libcbor/libcbor_0.12.0.bb b/meta-oe/recipes-extended/libcbor/libcbor_0.12.0.bb
+index 4c5eb8a640..60c3c6fadd 100755
+--- a/meta-oe/recipes-extended/libcbor/libcbor_0.12.0.bb
++++ b/meta-oe/recipes-extended/libcbor/libcbor_0.12.0.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=6f3b3881df62ca763a02d359a6e94071"
+ SRC_URI = "git://github.com/PJK/libcbor.git;protocol=https;branch=master"
+ SRCREV = "ae000f44e8d2a69e1f72a738f7c0b6b4b7cc4fbf"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-extended/libcec/libcec_7.0.0.bb b/meta-oe/recipes-extended/libcec/libcec_7.0.0.bb
+index 532179a9bb..2def38d73f 100644
+--- a/meta-oe/recipes-extended/libcec/libcec_7.0.0.bb
++++ b/meta-oe/recipes-extended/libcec/libcec_7.0.0.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release;protocol=https
+            file://0001-Enhance-reproducibility.patch \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/libdeflate/libdeflate_1.20.bb b/meta-oe/recipes-extended/libdeflate/libdeflate_1.20.bb
+index e3de8aca62..6683c396e2 100644
+--- a/meta-oe/recipes-extended/libdeflate/libdeflate_1.20.bb
++++ b/meta-oe/recipes-extended/libdeflate/libdeflate_1.20.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/ebiggers/libdeflate.git;protocol=https;branch=master
+     file://0001-lib-arm-don-t-use-explicit-armv8.2-a-on-gcc-13.2-and.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "275aa5141db6eda3587214e0f1d3a134768f557d"
+ 
+ inherit cmake pkgconfig
+diff --git a/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb b/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
+index 87778c6314..9f4b2a19d0 100644
+--- a/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
++++ b/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
+@@ -14,6 +14,5 @@ SRCREV = "db9371cf9f38b5a3b2f6e4fae3f92eb052d2d929"
+ SRC_URI = "git://github.com/libdivecomputer/libdivecomputer.git;protocol=https;branch=master \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ 
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
+index 7278299a08..7f01962a97 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
+@@ -11,7 +11,6 @@ inherit autotools pkgconfig python3native python3targetconfig
+ SRCREV = "2117b8fdb6b4096455bd2041a63e59a028120136"
+ SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_STATUS_GROUPS += "CVE_STATUS_LIBLIST"
+ CVE_STATUS_LIBLIST[status] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
+index bfd4af053c..e29ec88e06 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
+@@ -13,7 +13,6 @@ PV = "2.3.0+git"
+ SRCREV = "2cd858c679d25633077ca78b67182a9b77653816"
+ SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_STATUS_GROUPS += "CVE_STATUS_LIBLIST"
+ CVE_STATUS_LIBLIST[status] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_2.1.1.bb b/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_2.1.1.bb
+index 5a7548a7e6..7869fc1941 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_2.1.1.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_2.1.1.bb
+@@ -11,6 +11,5 @@ PKGV = "${GITPKGVTAG}"
+ SRCREV = "adf9c22b9010490e4b55eaeb14731991db1c172c"
+ SRC_URI = "git://github.com/libimobiledevice/libusbmuxd;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ FILES:${PN} += "${base_libdir}/udev/rules.d/"
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_git.bb b/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_git.bb
+index b9f5c34094..76759fe69d 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_git.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_git.bb
+@@ -12,6 +12,5 @@ PV = "2.0.2+git"
+ SRCREV = "36ffb7ab6e2a7e33bd1b56398a88895b7b8c615a"
+ SRC_URI = "git://github.com/libimobiledevice/libusbmuxd;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ FILES:${PN} += "${base_libdir}/udev/rules.d/"
+diff --git a/meta-oe/recipes-extended/libleak/libleak_0.3.6.bb b/meta-oe/recipes-extended/libleak/libleak_0.3.6.bb
+index e3e4c01acb..8021d8cf06 100644
+--- a/meta-oe/recipes-extended/libleak/libleak_0.3.6.bb
++++ b/meta-oe/recipes-extended/libleak/libleak_0.3.6.bb
+@@ -14,7 +14,6 @@ SRC_URI = "gitsm://github.com/WuBingzheng/libleak;protocol=https;branch=master \
+            file://0001-respect-environment-variables.patch \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_configure () {
+ 	:
+diff --git a/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb b/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb
+index 1d650ac63b..c310e0f527 100644
+--- a/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb
++++ b/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb
+@@ -12,4 +12,3 @@ SRC_URI = "git://github.com/Jacajack/liblightmodbus.git;protocol=https;branch=ma
+           "
+ SRCREV = "59d2b405f95701e5b04326589786dbb43ce49e81"
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb b/meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
+index b094337e90..99f23fef05 100644
+--- a/meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
++++ b/meta-oe/recipes-extended/liblockfile/liblockfile_1.17.bb
+@@ -17,7 +17,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.17.orig.tar.gz \
+ SRC_URI[sha256sum] = "6e937f3650afab4aac198f348b89b1ca42edceb17fb6bb0918f642143ccfd15e"
+ SRC_URI[1.17-1.sha256sum] = "e3657c0e3facfeccb58900c0b48d56cd68ad5f9f24d1b4c6eaa69c26490fb673"
+ 
+-S = "${WORKDIR}/${BP}"
++S = "${UNPACKDIR}/${BP}"
+ 
+ inherit autotools-brokensep
+ 
+diff --git a/meta-oe/recipes-extended/liblognorm/liblognorm_2.0.6.bb b/meta-oe/recipes-extended/liblognorm/liblognorm_2.0.6.bb
+index 0cc128c8c4..89670d10ca 100644
+--- a/meta-oe/recipes-extended/liblognorm/liblognorm_2.0.6.bb
++++ b/meta-oe/recipes-extended/liblognorm/liblognorm_2.0.6.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/rsyslog/liblognorm;branch=master;protocol=https \
+            "
+ SRCREV = "46c6ee4c8e5f827893e485a4ef1aff04ea881273"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.11.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.11.bb
+index 80644b0833..ffbb3a8c8e 100644
+--- a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.11.bb
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.11.bb
+@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
+ SRC_URI = "git://github.com/stephane/libmodbus;branch=master;protocol=https"
+ SRCREV = "5190e5e141780ae481f24be16d7b39a5f3ad8f8f"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb
+index f08fea7de3..7ec01ecd3f 100644
+--- a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb
++++ b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/libpwquality/libpwquality;branch=master;protocol=htt
+ "
+ SRCREV = "5490e96a3dd6ed7371435ca5b3ccef98bdb48b5a"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep gettext setuptools3-base
+ 
+diff --git a/meta-oe/recipes-extended/libreport/libreport_2.17.15.bb b/meta-oe/recipes-extended/libreport/libreport_2.17.15.bb
+index 28c64a1614..ba10f062ec 100644
+--- a/meta-oe/recipes-extended/libreport/libreport_2.17.15.bb
++++ b/meta-oe/recipes-extended/libreport/libreport_2.17.15.bb
+@@ -21,7 +21,6 @@ SRCREV = "f6bb06a699617d078fcd4f8b71b4d063bf47b52b"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit features_check
+ REQUIRED_DISTRO_FEATURES = "systemd"
+diff --git a/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb b/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
+index 6e6c8cc226..d7e88f4fd0 100644
+--- a/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
++++ b/meta-oe/recipes-extended/libuio/libuio_0.2.1.bb
+@@ -11,7 +11,6 @@ PV .= "+0.2.2+git"
+ 
+ inherit autotools
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGES += "${PN}-tools"
+ 
+diff --git a/meta-oe/recipes-extended/libwmf/libwmf_0.2.13.bb b/meta-oe/recipes-extended/libwmf/libwmf_0.2.13.bb
+index 7a82f6b4b6..c5411d53a1 100644
+--- a/meta-oe/recipes-extended/libwmf/libwmf_0.2.13.bb
++++ b/meta-oe/recipes-extended/libwmf/libwmf_0.2.13.bb
+@@ -19,7 +19,6 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ SRC_URI = "git://github.com/caolanm/libwmf.git;protocol=https;branch=master"
+ SRCREV = "9e4737f2293c0d127bda92e5b01896df10571424"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install:append() {
+     sed -i -e 's@${RECIPE_SYSROOT}@@g' ${D}${bindir}/libwmf-config ${D}${libdir}/pkgconfig/libwmf.pc
+diff --git a/meta-oe/recipes-extended/libyang/libyang_3.12.2.bb b/meta-oe/recipes-extended/libyang/libyang_3.12.2.bb
+index ea51f6cb14..7fff0b96a1 100644
+--- a/meta-oe/recipes-extended/libyang/libyang_3.12.2.bb
++++ b/meta-oe/recipes-extended/libyang/libyang_3.12.2.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/CESNET/libyang.git;branch=master;protocol=https;tag=
+            file://run-ptest \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # Main dependencies
+ inherit cmake pkgconfig lib_package ptest multilib_header
+diff --git a/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.1.bb b/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.1.bb
+index 53023b99a0..4911cebd16 100644
+--- a/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.1.bb
++++ b/meta-oe/recipes-extended/linuxconsole/linuxconsole_1.7.1.bb
+@@ -21,7 +21,7 @@ SRC_URI = "\
+ 
+ SRC_URI[sha256sum] = "bd4d4b7e37da02fc67e47ddf20b6f1243c0a7af7b02b918d5e72138ea8727547"
+ 
+-S = "${WORKDIR}/linuxconsoletools-${PV}"
++S = "${UNPACKDIR}/linuxconsoletools-${PV}"
+ 
+ inherit systemd pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb b/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
+index 4557ed0a80..6d5399c8d0 100644
+--- a/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
++++ b/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
+@@ -17,7 +17,6 @@ SRC_URI = " \
+ "
+ 
+ SRCREV = "e046b69a3736d314fad813e159b1c192eaef92cd"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake ptest
+ 
+diff --git a/meta-oe/recipes-extended/md5deep/md5deep_git.bb b/meta-oe/recipes-extended/md5deep/md5deep_git.bb
+index 5351a37db6..4b7192290e 100644
+--- a/meta-oe/recipes-extended/md5deep/md5deep_git.bb
++++ b/meta-oe/recipes-extended/md5deep/md5deep_git.bb
+@@ -13,6 +13,5 @@ SRC_URI = "git://github.com/jessek/hashdeep.git;branch=master;protocol=https \
+            file://0001-Fix-literal-and-identifier-spacing-as-dictated-by-C-.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb
+index 44daf94c98..ab08322805 100644
+--- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb
++++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb
+@@ -58,7 +58,6 @@ SRC_URI[ossp-uuid.sha256sum] = "11a615225baa5f8bb686824423f50e4427acd3f70d394765
+ # libsodium: 1.0.19
+ SRC_URI[libsodium.sha256sum] = "018d79fe0a045cca07331d37bd0cb57b2e838c51bc48fd837a1472e50068bbea"
+ 
+-S = "${UNPACKDIR}/git"
+ 
+ inherit pkgconfig cmake systemd
+ 
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb b/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
+index c3804ec64d..ceb81d07e5 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
+@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "25d633eb81499cbda44b8c64fa1c1a5879d55024b864ef495d4997154d
+ UPSTREAM_CHECK_URI = "https://tracker.debian.org/pkg/mozjs128"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/firefox-${PV}"
++S = "${UNPACKDIR}/firefox-${PV}"
+ 
+ inherit pkgconfig perlnative python3native rust cargo
+ 
+diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
+index df487bd769..b53be9803e 100644
+--- a/meta-oe/recipes-extended/mraa/mraa_git.bb
++++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/eclipse/${BPN}.git;protocol=https;branch=master \
+            file://0002-gpio-Include-limits.h-for-PATH_MAX.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # CMakeLists.txt checks the architecture, only x86 and ARM supported for now
+ COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
+diff --git a/meta-oe/recipes-extended/nana/nana_git.bb b/meta-oe/recipes-extended/nana/nana_git.bb
+index d292bb8827..bad5a797a7 100644
+--- a/meta-oe/recipes-extended/nana/nana_git.bb
++++ b/meta-oe/recipes-extended/nana/nana_git.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/pjmaker/nana;protocol=https;branch=master \
+     file://0001-Makefile.am-fix-build-with-separate-build-dir.patch \
+     file://0002-man-Makefile.am-we-seem-not-to-need-the-work-around-.patch \
+ "
+-S = "${WORKDIR}/git"
+ 
+ LICENSE = "BSD-2-Clause"
+ 
+diff --git a/meta-oe/recipes-extended/networking/mstpd_git.bb b/meta-oe/recipes-extended/networking/mstpd_git.bb
+index e6e1f9a3b2..b003b52d25 100644
+--- a/meta-oe/recipes-extended/networking/mstpd_git.bb
++++ b/meta-oe/recipes-extended/networking/mstpd_git.bb
+@@ -9,7 +9,6 @@ SRC_URI = " \
+     file://mstpd.service \
+ "
+ SRCREV = "181c453fc1a00573e19f14960dcc54ad84beea7c"
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+){2,})"
+ 
+diff --git a/meta-oe/recipes-extended/newt/libnewt_0.52.25.bb b/meta-oe/recipes-extended/newt/libnewt_0.52.25.bb
+index aa6b120037..18a45a3342 100644
+--- a/meta-oe/recipes-extended/newt/libnewt_0.52.25.bb
++++ b/meta-oe/recipes-extended/newt/libnewt_0.52.25.bb
+@@ -24,7 +24,7 @@ SRC_URI = "https://releases.pagure.org/newt/newt-${PV}.tar.gz \
+ 
+ SRC_URI[sha256sum] = "ef0ca9ee27850d1a5c863bb7ff9aa08096c9ed312ece9087b30f3a426828de82"
+ 
+-S = "${WORKDIR}/newt-${PV}"
++S = "${UNPACKDIR}/newt-${PV}"
+ 
+ inherit autotools-brokensep python3native python3-dir python3targetconfig
+ 
+diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb
+index d8dda6d090..970d7fb5fc 100644
+--- a/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb
++++ b/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb
+@@ -24,7 +24,6 @@ SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=main;protocol=https \
+            file://0001-Link-with-libm-for-floor-function.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d4f53d4c6cf73b9d43186ce3be6dd0ba"
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2024.10.bb b/meta-oe/recipes-extended/ostree/ostree_2024.10.bb
+index 0667fd670f..c33624987a 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2024.10.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2024.10.bb
+@@ -24,7 +24,7 @@ SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
+            "
+ SRC_URI[sha256sum] = "54e3387dee1ff16031a0679aca2b60da90ab7f4a26c211822333c7f23000abee"
+ 
+-S = "${WORKDIR}/libostree-${PV}"
++S = "${UNPACKDIR}/libostree-${PV}"
+ 
+ inherit autotools bash-completion gobject-introspection github-releases gtk-doc manpages pkgconfig ptest-gnome systemd
+ 
+diff --git a/meta-oe/recipes-extended/p8platform/p8platform_git.bb b/meta-oe/recipes-extended/p8platform/p8platform_git.bb
+index dc7280f099..e69d544b66 100644
+--- a/meta-oe/recipes-extended/p8platform/p8platform_git.bb
++++ b/meta-oe/recipes-extended/p8platform/p8platform_git.bb
+@@ -9,7 +9,6 @@ PV = "2.1.0.1+git"
+ SRC_URI = "git://github.com/Pulse-Eight/platform.git;branch=master;protocol=https"
+ SRCREV = "a7cd0d5780ed80a4e70480d1650749f29e8a1fb2"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb b/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb
+index 1637389dba..ab5a8ef342 100644
+--- a/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb
++++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb
+@@ -18,7 +18,6 @@ SRC_URI = "git://github.com/PADL/pam_ccreds;branch=master;protocol=https \
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.1.bb b/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.1.bb
+index d5137f80af..2886137b7d 100644
+--- a/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.1.bb
++++ b/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.1.bb
+@@ -13,7 +13,6 @@ REQUIRED_DISTRO_FEATURES = "pam"
+ SRCREV = "3e026863cad1fd45c760ee1bc93ef4f0606cc852"
+ SRC_URI = "git://github.com/rmbreak/pam_ldapdb;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install () {
+     oe_runmake install DESTDIR=${D} PAMDIR=${base_libdir}/security
+diff --git a/meta-oe/recipes-extended/pam/pam-radius_3.0.0.bb b/meta-oe/recipes-extended/pam/pam-radius_3.0.0.bb
+index 6633656cea..0e2199b066 100644
+--- a/meta-oe/recipes-extended/pam/pam-radius_3.0.0.bb
++++ b/meta-oe/recipes-extended/pam/pam-radius_3.0.0.bb
+@@ -10,7 +10,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd794e2a0a289b9dfcc9f513d1996e"
+ SRC_URI = "git://github.com/FreeRADIUS/pam_radius.git;protocol=https;branch=master"
+ SRCREV = "b6442c3e0147f1019990520483fa3a30e4ccf059"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "libpam"
+ 
+diff --git a/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb b/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb
+index 609d2902c0..d14a20609a 100644
+--- a/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb
++++ b/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb
+@@ -25,7 +25,7 @@ RDEPENDS:${PN} += "openssh-misc"
+ 
+ # Kind of unfortunate to have underscores in the name.
+ #
+-S = "${WORKDIR}/pam_ssh_agent_auth-${PV}"
++S = "${UNPACKDIR}/pam_ssh_agent_auth-${PV}"
+ 
+ inherit autotools-brokensep perlnative
+ 
+diff --git a/meta-oe/recipes-extended/pegtl/pegtl_3.2.8.bb b/meta-oe/recipes-extended/pegtl/pegtl_3.2.8.bb
+index 917cc694c7..4d540d0180 100644
+--- a/meta-oe/recipes-extended/pegtl/pegtl_3.2.8.bb
++++ b/meta-oe/recipes-extended/pegtl/pegtl_3.2.8.bb
+@@ -12,7 +12,6 @@ SRCREV = "be527327653e94b02e711f7eff59285ad13e1db0"
+ 
+ inherit cmake ptest
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install_ptest () {
+     install -d ${D}${PTEST_PATH}/src/test/pegtl/data
+diff --git a/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb b/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb
+index eeb314fdd4..367aedd4c5 100644
+--- a/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb
++++ b/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb
+@@ -14,7 +14,7 @@ SRC_URI = "https://cpan.metacpan.org/authors/id/M/MJ/MJP/File-FnMatch-${PV}.tar.
+ 
+ SRC_URI[sha256sum] = "962454b8e86bea8b132bf8af35757d0c6a8f5d599015bd6a5d68cb7ae7a9e916"
+ 
+-S = "${WORKDIR}/File-FnMatch-${PV}"
++S = "${UNPACKDIR}/File-FnMatch-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-oe/recipes-extended/pmdk/pmdk_2.1.1.bb b/meta-oe/recipes-extended/pmdk/pmdk_2.1.1.bb
+index 7baa7945b5..5aba331acc 100644
+--- a/meta-oe/recipes-extended/pmdk/pmdk_2.1.1.bb
++++ b/meta-oe/recipes-extended/pmdk/pmdk_2.1.1.bb
+@@ -9,7 +9,6 @@ DEPENDS = "ndctl"
+ # Required to have the fts.h header for musl
+ DEPENDS:append:libc-musl = " fts"
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRC_URI = "git://github.com/pmem/pmdk.git;branch=master;protocol=https"
+ SRCREV = "0f0ab391d8e3db52f745f33c92b9d9a462bb3695"
+diff --git a/meta-oe/recipes-extended/polkit/polkit_126.bb b/meta-oe/recipes-extended/polkit/polkit_126.bb
+index c503ca9dc4..0438c4e464 100644
+--- a/meta-oe/recipes-extended/polkit/polkit_126.bb
++++ b/meta-oe/recipes-extended/polkit/polkit_126.bb
+@@ -7,7 +7,6 @@ BUGTRACKER = "https://github.com/polkit-org/polkit/issues"
+ 
+ SRC_URI = "git://github.com/polkit-org/polkit.git;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "d627b0d1e1108563658dabe3fb8d2a065e64df10"
+ 
+ DEPENDS = "expat glib-2.0 duktape"
+diff --git a/meta-oe/recipes-extended/properties-cpp/properties-cpp_git.bb b/meta-oe/recipes-extended/properties-cpp/properties-cpp_git.bb
+index 029ec2337e..20b7f0a5bd 100644
+--- a/meta-oe/recipes-extended/properties-cpp/properties-cpp_git.bb
++++ b/meta-oe/recipes-extended/properties-cpp/properties-cpp_git.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/lib-cpp/${BPN}.git;branch=master;protocol=https"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_configure:prepend() {
+     echo " " > ${S}/tests/CMakeLists.txt
+diff --git a/meta-oe/recipes-extended/qad/qad_git.bb b/meta-oe/recipes-extended/qad/qad_git.bb
+index c68469fce5..189d2f9d15 100644
+--- a/meta-oe/recipes-extended/qad/qad_git.bb
++++ b/meta-oe/recipes-extended/qad/qad_git.bb
+@@ -17,7 +17,6 @@ SRCREV = "ae0c099c1fdc0ca6f5d631cea6b302937122b362"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ PV = "0.0+git"
+ 
+ DEPENDS = "cjson libmicrohttpd libdrm libpng"
+diff --git a/meta-oe/recipes-extended/qcbor/qcbor_1.4.1.bb b/meta-oe/recipes-extended/qcbor/qcbor_1.4.1.bb
+index b04d8df131..00cae11c4e 100644
+--- a/meta-oe/recipes-extended/qcbor/qcbor_1.4.1.bb
++++ b/meta-oe/recipes-extended/qcbor/qcbor_1.4.1.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/laurencelundblade/QCBOR;protocol=https;branch=master
+ 
+ SRCREV = "4487f10e1bf258434fb8a39e4f59c29e31910ad0"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
+index 2b09b6bcad..c7f320660f 100644
+--- a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
++++ b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
+@@ -24,7 +24,7 @@ SRC_URI += "file://0001-rarpd.8-add-man-file.patch \
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://rarpd.c;md5=199b20b172ea93121bc613a9c77b6931"
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ EXTRA_OEMAKE = "-e MAKEFLAGS="
+ 
+diff --git a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.11.bb b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.11.bb
+index 3e757e6037..d643c6f0b9 100644
+--- a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.11.bb
++++ b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.11.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https
+            file://0001-CMakeLists.txt-fix-substitution-for-static-libs.patch"
+ SRCREV = "ad6baa121f4c6fbc7622d83d606210ac22549c78"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.9.0.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.9.0.bb
+index 330647a210..69c281bd92 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.9.0.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.9.0.bb
+@@ -13,7 +13,6 @@ SRC_URI = "\
+     git://github.com/oetiker/rrdtool-1.x.git;protocol=https;branch=master \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cpan autotools-brokensep gettext pkgconfig python3native python3-dir systemd
+ 
+diff --git a/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb b/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
+index 967018ca1f..f1235d7b96 100644
+--- a/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/rsyslog/libfastjson.git;protocol=https;branch=master
+ 
+ SRCREV = "3a8402c1de7c7747c95229db26d8d32fb85a7a52"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_PRODUCT = "rsyslog:libfastjson"
+ 
+diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb b/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
+index 343a2c2840..3ccb87a9c5 100644
+--- a/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/librelp_1.11.0.bb
+@@ -17,7 +17,6 @@ SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=stable \
+ 
+ SRCREV = "b421f56d9ee31a966058d23bd23c966221c91396"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_PRODUCT = "rsyslog:librelp"
+ 
+diff --git a/meta-oe/recipes-extended/sanlock/sanlock_4.0.0.bb b/meta-oe/recipes-extended/sanlock/sanlock_4.0.0.bb
+index 8da180ac05..fe8592be39 100644
+--- a/meta-oe/recipes-extended/sanlock/sanlock_4.0.0.bb
++++ b/meta-oe/recipes-extended/sanlock/sanlock_4.0.0.bb
+@@ -19,7 +19,6 @@ SRC_URI = "git://pagure.io/sanlock.git;protocol=http;branch=master \
+            "
+ SRCREV = "70c268a07273da78a4aadd14c40ffb75138ccebe"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_STATUS[CVE-2012-5638] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
+ 
+diff --git a/meta-oe/recipes-extended/sblim-sfc-common/sblim-sfc-common_1.0.1.bb b/meta-oe/recipes-extended/sblim-sfc-common/sblim-sfc-common_1.0.1.bb
+index 29b01d5bf4..03d8d4940c 100644
+--- a/meta-oe/recipes-extended/sblim-sfc-common/sblim-sfc-common_1.0.1.bb
++++ b/meta-oe/recipes-extended/sblim-sfc-common/sblim-sfc-common_1.0.1.bb
+@@ -9,7 +9,7 @@ SECTION = "Development/Libraries"
+ 
+ DEPENDS = "cmpi-bindings"
+ 
+-S = "${WORKDIR}/sblim-sfcCommon-${PV}"
++S = "${UNPACKDIR}/sblim-sfcCommon-${PV}"
+ SRC_URI = "http://downloads.sourceforge.net/sblim/sblim-sfcCommon-${PV}.tar.bz2"
+ SRC_URI[sha256sum] = "b9b1037173d6ae0181c3bd5a316ddab5afd6a342ad0dbdc18e940fc0ad2c3297"
+ 
+diff --git a/meta-oe/recipes-extended/sedutil/sedutil_git.bb b/meta-oe/recipes-extended/sedutil/sedutil_git.bb
+index 64d5111f45..e8987b2dd0 100644
+--- a/meta-oe/recipes-extended/sedutil/sedutil_git.bb
++++ b/meta-oe/recipes-extended/sedutil/sedutil_git.bb
+@@ -14,6 +14,5 @@ SRC_URI = "git://github.com/Drive-Trust-Alliance/sedutil.git;branch=master;proto
+            file://0001-Fix-build-on-big-endian-architectures.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep
+diff --git a/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb b/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
+index 98e22f1164..1b3a484ccb 100644
+--- a/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
++++ b/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
+@@ -8,7 +8,7 @@ SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/${BPN}/${BPN}-1.2-0.10-src.ta
+            "
+ SRC_URI[sha256sum] = "9bf8c42acaa247efd9321bdb1fc2390022f0c554d77fbbd4a7363d990fc0270b"
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE_GPL;md5=393a5ca445f6965873eca0259a17f833"
+diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.10.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.10.bb
+index bc3bc3aa47..2a49ba99b0 100644
+--- a/meta-oe/recipes-extended/snappy/snappy_1.1.10.bb
++++ b/meta-oe/recipes-extended/snappy/snappy_1.1.10.bb
+@@ -15,7 +15,6 @@ SRC_URI = "gitsm://github.com/google/snappy.git;protocol=https;branch=main \
+ 
+ SRCREV = "dc05e026488865bc69313a68bcc03ef2e4ea8e83"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+index fa43c9de58..530e38ce21 100644
+--- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
++++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/hartkopp/can-isotp.git;protocol=https;branch=master"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit module
+ 
+diff --git a/meta-oe/recipes-extended/socketcan/can-utils_2025.01.bb b/meta-oe/recipes-extended/socketcan/can-utils_2025.01.bb
+index 63c1e130ad..5dc41bcb93 100644
+--- a/meta-oe/recipes-extended/socketcan/can-utils_2025.01.bb
++++ b/meta-oe/recipes-extended/socketcan/can-utils_2025.01.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=https;branch=master \
+ 
+ SRCREV = "01083a64ebf28cc716efe2d2fd51c141042ae34b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig update-alternatives
+ 
+diff --git a/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb b/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb
+index 6989531c81..b92b8086d6 100644
+--- a/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb
++++ b/meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://git.pengutronix.de/git/tools/canutils.git;protocol=https;branch
+ 
+ inherit update-alternatives
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.12.bb b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.12.bb
+index f45c2d750d..535f37f84c 100644
+--- a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.12.bb
++++ b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.12.bb
+@@ -9,7 +9,6 @@ SRCREV = "077def398ad303043d73339112968e5112d8d7c8"
+ 
+ SRC_URI = "git://git.pengutronix.de/git/tools/libsocketcan.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/socketcan/socketcand_git.bb b/meta-oe/recipes-extended/socketcan/socketcand_git.bb
+index 4e58c76460..ba69875c93 100644
+--- a/meta-oe/recipes-extended/socketcan/socketcand_git.bb
++++ b/meta-oe/recipes-extended/socketcan/socketcand_git.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = " \
+ 
+ SRC_URI = "git://github.com/linux-can/socketcand;branch=master;protocol=https"
+ SRCREV = "998b0394d028e791aa97d549bfc686b4fbadf5ee"
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb b/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
+index 9b95c14de0..b60f9c643c 100644
+--- a/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
++++ b/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
+@@ -23,7 +23,7 @@ DEPENDS += "libb64 lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp \
+ RDEPENDS:${PN} = "bash"
+ 
+ SRC_URI = "git://github.com/draios/sysdig.git;branch=dev;protocol=https;name=sysdig \
+-           git://github.com/falcosecurity/libs;protocol=https;branch=master;name=falco;subdir=git/falcosecurity-libs \
++           git://github.com/falcosecurity/libs;protocol=https;branch=master;name=falco;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/falcosecurity-libs \
+            file://0001-Add-cstdint-for-uintXX_t-types.patch;patchdir=./falcosecurity-libs \
+            file://0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch \
+            file://0001-libsinsp-fix-build-with-gcc-15.patch;patchdir=./falcosecurity-libs \
+@@ -33,7 +33,6 @@ SRCREV_falco = "caa0e4d0044fdaaebab086592a97f0c7f32aeaa9"
+ 
+ SRCREV_FORMAT = "sysdig_falco"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE = "\
+                 -DBUILD_DRIVER=OFF \
+diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+index 71b62cc513..a4bf3eaaca 100644
+--- a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
++++ b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+@@ -18,7 +18,6 @@ DEPENDS += "libdaemon"
+ 
+ RDEPENDS:${PN} = "iproute2-tipc"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_configure:prepend() {
+     ( cd ${S}; ${S}/bootstrap )
+diff --git a/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb b/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb
+index 4e66d8d05a..5fb28b0085 100644
+--- a/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb
++++ b/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb
+@@ -12,6 +12,5 @@ SRC_URI = "\
+ 
+ SRCREV = "5e00bfa5e137e76c81888727712ced2b3fd99f5b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig autotools
+diff --git a/meta-oe/recipes-extended/triggerhappy/triggerhappy_git.bb b/meta-oe/recipes-extended/triggerhappy/triggerhappy_git.bb
+index 5eb8e4d9aa..1a453ebe10 100644
+--- a/meta-oe/recipes-extended/triggerhappy/triggerhappy_git.bb
++++ b/meta-oe/recipes-extended/triggerhappy/triggerhappy_git.bb
+@@ -9,7 +9,6 @@ SRCREV = "44a173195986d0d853316cb02a58785ded66c12b"
+ PV = "0.5.0+git"
+ SRC_URI = "git://github.com/wertarbyte/${BPN}.git;branch=debian;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig perlnative update-rc.d systemd
+ 
+diff --git a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
+index 09797124c5..0e189b558f 100644
+--- a/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
++++ b/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb
+@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "4f179b1db021ef15ac7e9b2eed57c525db127a754c574f591c367460cd
+ 
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/user-mode-linux/files/tools/1/"
+ 
+-S = "${WORKDIR}/tools"
++S = "${UNPACKDIR}/tools"
+ 
+ inherit update-alternatives
+ 
+diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-extended/upm/upm_git.bb
+index 3aa766d0bd..616f4ca09a 100644
+--- a/meta-oe/recipes-extended/upm/upm_git.bb
++++ b/meta-oe/recipes-extended/upm/upm_git.bb
+@@ -21,7 +21,6 @@ SRC_URI = "git://github.com/eclipse/${BPN}.git;protocol=https;branch=master \
+ 
+ SRC_URI:append:toolchain-clang:x86 = " file://0001-nmea_gps-Link-with-latomic.patch "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # Depends on mraa which only supports x86 and ARM for now
+ COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
+diff --git a/meta-oe/recipes-extended/valkey/valkey_8.1.1.bb b/meta-oe/recipes-extended/valkey/valkey_8.1.1.bb
+index 1686e533af..35b3d3c4a7 100644
+--- a/meta-oe/recipes-extended/valkey/valkey_8.1.1.bb
++++ b/meta-oe/recipes-extended/valkey/valkey_8.1.1.bb
+@@ -19,7 +19,6 @@ SRC_URI = " \
+ "
+ SRCREV = "fcd8bc3ee40f5d7841b7d5a8f3cd12252fec14e4"
+ 
+-S = "${WORKDIR}/git"
+ 
+ RPROVIDES:${PN} = "virtual-redis"
+ 
+diff --git a/meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb b/meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb
+index 92a9bbb499..01215a4b25 100644
+--- a/meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb
++++ b/meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb
+@@ -13,7 +13,7 @@ SRC_URI = "https://releases.pagure.org/volume_key/volume_key-${PV}.tar.xz \
+ SRC_URI[sha256sum] = "6ca3748fc1dad22c450bbf6601d4e706cb11c5e662d11bb4aeb473a9cd77309b"
+ 
+ SRCNAME = "volume_key"
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
++S = "${UNPACKDIR}/${SRCNAME}-${PV}"
+ 
+ inherit autotools python3native python3targetconfig gettext pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/wipe/wipe_0.24.bb b/meta-oe/recipes-extended/wipe/wipe_0.24.bb
+index ad32cb0e72..ba3ed29d59 100644
+--- a/meta-oe/recipes-extended/wipe/wipe_0.24.bb
++++ b/meta-oe/recipes-extended/wipe/wipe_0.24.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/berke/wipe.git;branch=master;protocol=https \
+ "
+ SRCREV = "796b62293e007546e051619bd03f5ba338ef28e5"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "linux"
+ 
+diff --git a/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.11.0.bb b/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.11.0.bb
+index d4a8b49e1d..b901e8815a 100644
+--- a/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.11.0.bb
++++ b/meta-oe/recipes-extended/wtmpdb/wtmpdb_0.11.0.bb
+@@ -10,7 +10,6 @@ SRCREV = "493e9704dbc50f141d5fbd41c823311e79d7e8d3"
+ SRC_URI = "git://github.com/thkukuk/wtmpdb.git;branch=main;protocol=https \
+            file://0001-include-libgen.h-for-basename.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig systemd features_check
+ 
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.6.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.6.bb
+index 1ef707ca60..2cd154cab6 100644
+--- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.6.bb
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.6.bb
+@@ -28,7 +28,6 @@ SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https
+            file://0007-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch \
+            "
+ SRCREV = "5ff25322553c1870cf20a2e1ba6f20ed50d9fe9a"
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+diff --git a/meta-oe/recipes-extended/zlog/zlog_1.2.16.bb b/meta-oe/recipes-extended/zlog/zlog_1.2.16.bb
+index b75802f09f..f450c2cf01 100644
+--- a/meta-oe/recipes-extended/zlog/zlog_1.2.16.bb
++++ b/meta-oe/recipes-extended/zlog/zlog_1.2.16.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ SRCREV = "dc2c284664757fce6ef8f96f8b3ab667a53ef489"
+ SRC_URI = "git://github.com/HardySimpson/zlog;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig
+ 
+diff --git a/meta-oe/recipes-extended/zram/zram_0.2.bb b/meta-oe/recipes-extended/zram/zram_0.2.bb
+index e4522f89a1..2c894c0230 100644
+--- a/meta-oe/recipes-extended/zram/zram_0.2.bb
++++ b/meta-oe/recipes-extended/zram/zram_0.2.bb
+@@ -17,8 +17,7 @@ SRC_URI = " \
+            file://dev-zram0.swap \
+ "
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install () {
+     # Install systemd related configuration file
+diff --git a/meta-oe/recipes-extended/zsync/zsync-curl_git.bb b/meta-oe/recipes-extended/zsync/zsync-curl_git.bb
+index be658561e2..5227b834f9 100644
+--- a/meta-oe/recipes-extended/zsync/zsync-curl_git.bb
++++ b/meta-oe/recipes-extended/zsync/zsync-curl_git.bb
+@@ -17,7 +17,6 @@ UPSTREAM_CHECK_COMMITS = "1"
+ 
+ inherit autotools
+ 
+-S = "${WORKDIR}/git"
+ AUTOTOOLS_SCRIPT_PATH = "${S}/src"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.3.bb b/meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.3.bb
+index 62ca015309..23e2ff7811 100644
+--- a/meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.3.bb
++++ b/meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.3.bb
+@@ -15,7 +15,7 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ 
+ SRC_URI[archive.sha256sum] = "6ec264eaa0c4de0adb7202c600170bde9a7fbe4d466bfbe940eaf7faaa6c5974"
+ 
+-S = "${WORKDIR}/${GNOMEBN}-${PV}"
++S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
+ 
+ EXTRA_OEMESON = "-Dbuild-documentation=false"
+ 
+diff --git a/meta-oe/recipes-gnome/gcr/gcr3_3.41.2.bb b/meta-oe/recipes-gnome/gcr/gcr3_3.41.2.bb
+index 0fd30f7424..bb905265ee 100644
+--- a/meta-oe/recipes-gnome/gcr/gcr3_3.41.2.bb
++++ b/meta-oe/recipes-gnome/gcr/gcr3_3.41.2.bb
+@@ -25,7 +25,7 @@ SRC_URI = "https://download.gnome.org/sources/gcr/3.41/gcr-${PV}.tar.xz;name=arc
+ SRC_URI += "file://0001-meson.build-correctly-handle-disabled-ssh_agent-opti.patch"
+ SRC_URI[archive.sha256sum] = "bad10f3c553a0e1854649ab59c5b2434da22ca1a54ae6138f1f53961567e1ab7"
+ 
+-S = "${WORKDIR}/gcr-${PV}"
++S = "${UNPACKDIR}/gcr-${PV}"
+ 
+ PACKAGECONFIG ??= " \
+ 	${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+diff --git a/meta-oe/recipes-gnome/gnome-doc-utils-stub/gnome-doc-utils-stub_1.0.bb b/meta-oe/recipes-gnome/gnome-doc-utils-stub/gnome-doc-utils-stub_1.0.bb
+index c929763763..f10537eca7 100644
+--- a/meta-oe/recipes-gnome/gnome-doc-utils-stub/gnome-doc-utils-stub_1.0.bb
++++ b/meta-oe/recipes-gnome/gnome-doc-utils-stub/gnome-doc-utils-stub_1.0.bb
+@@ -8,8 +8,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0-only;m
+ 
+ SRC_URI = "file://gnome-doc-utils.m4"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ PROVIDES = "gnome-doc-utils"
+ 
+diff --git a/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.10.bb b/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.10.bb
+index b00b4a4679..70da55c137 100644
+--- a/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.10.bb
++++ b/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.10.bb
+@@ -10,7 +10,6 @@ inherit meson
+ 
+ SRC_URI = "git://github.com/lassekongo83/adw-gtk3.git;protocol=https;branch=main;tag=v${PV}"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "c2e74c9d2a5c3895b8025ac1d4b9e4cced71fbe9"
+ 
+ FILES:${PN} = "${datadir}/themes"
+diff --git a/meta-oe/recipes-gnome/libjcat/libjcat_0.2.3.bb b/meta-oe/recipes-gnome/libjcat/libjcat_0.2.3.bb
+index 0e6f4a2ed1..6e31889b69 100644
+--- a/meta-oe/recipes-gnome/libjcat/libjcat_0.2.3.bb
++++ b/meta-oe/recipes-gnome/libjcat/libjcat_0.2.3.bb
+@@ -12,7 +12,6 @@ SRC_URI = "\
+     file://run-ptest \
+ "
+ SRCREV = "f284d18a694ed98f49ddb06e6920265781a30125"
+-S = "${WORKDIR}/git"
+ 
+ inherit gobject-introspection gtk-doc meson ptest-gnome vala lib_package
+ 
+diff --git a/meta-oe/recipes-gnome/malcontent/malcontent.inc b/meta-oe/recipes-gnome/malcontent/malcontent.inc
+index 68523fa21e..10597f3308 100644
+--- a/meta-oe/recipes-gnome/malcontent/malcontent.inc
++++ b/meta-oe/recipes-gnome/malcontent/malcontent.inc
+@@ -1,4 +1,3 @@
+ SRC_URI = "git://gitlab.freedesktop.org/pwithnall/malcontent.git;protocol=https;branch=main"
+-S = "${WORKDIR}/git"
+ SRCREV = "21f3ef7b6f984710a23b607d2298fe16e554f0c3"
+ PV = "0.13.0"
+diff --git a/meta-oe/recipes-gnome/pyxdg/pyxdg_0.28.bb b/meta-oe/recipes-gnome/pyxdg/pyxdg_0.28.bb
+index 0c9599a49c..b4dc739ec3 100644
+--- a/meta-oe/recipes-gnome/pyxdg/pyxdg_0.28.bb
++++ b/meta-oe/recipes-gnome/pyxdg/pyxdg_0.28.bb
+@@ -9,4 +9,3 @@ SRC_URI = "git://anongit.freedesktop.org/xdg/pyxdg;branch=master"
+ 
+ inherit setuptools3
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-graphics/aml/aml_git.bb b/meta-oe/recipes-graphics/aml/aml_git.bb
+index 2633e0d215..a0b27bd256 100644
+--- a/meta-oe/recipes-graphics/aml/aml_git.bb
++++ b/meta-oe/recipes-graphics/aml/aml_git.bb
+@@ -10,7 +10,6 @@ SRCREV = "b83f3576ce4187d9285f06e9066ef43a691464d4"
+ 
+ PV = "0.3.0+git"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[examples] = "-Dexamples=true,-Dexamples=false"
+diff --git a/meta-oe/recipes-graphics/cairo/cairomm-1.16_1.18.0.bb b/meta-oe/recipes-graphics/cairo/cairomm-1.16_1.18.0.bb
+index a6872ef0cd..8a8e783309 100644
+--- a/meta-oe/recipes-graphics/cairo/cairomm-1.16_1.18.0.bb
++++ b/meta-oe/recipes-graphics/cairo/cairomm-1.16_1.18.0.bb
+@@ -10,7 +10,7 @@ DEPENDS += "boost cairo libsigc++-3"
+ SRC_URI = "https://www.cairographics.org/releases/cairomm-${PV}.tar.xz"
+ SRC_URI[sha256sum] = "b81255394e3ea8e8aa887276d22afa8985fc8daef60692eb2407d23049f03cfb"
+ 
+-S = "${WORKDIR}/cairomm-${PV}"
++S = "${UNPACKDIR}/cairomm-${PV}"
+ 
+ FILES:${PN}-doc += "${datadir}/devhelp"
+ FILES:${PN}-dev += "${libdir}/cairomm-*/"
+diff --git a/meta-oe/recipes-graphics/cglm/cglm_0.9.6.bb b/meta-oe/recipes-graphics/cglm/cglm_0.9.6.bb
+index cbcd6c0c6e..b2673f1e9b 100644
+--- a/meta-oe/recipes-graphics/cglm/cglm_0.9.6.bb
++++ b/meta-oe/recipes-graphics/cglm/cglm_0.9.6.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/recp/cglm;branch=master;protocol=https"
+ # Tag v0.9.6
+ SRCREV = "144d1e7c29b3b0c6dede7917a0476cc95248559c"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG[build_tests] = "-Dbuild_tests=true,-Dbuild_tests=false,"
+ 
+diff --git a/meta-oe/recipes-graphics/dietsplash/dietsplash_git.bb b/meta-oe/recipes-graphics/dietsplash/dietsplash_git.bb
+index 1ee2657bd0..1018e0675e 100644
+--- a/meta-oe/recipes-graphics/dietsplash/dietsplash_git.bb
++++ b/meta-oe/recipes-graphics/dietsplash/dietsplash_git.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/lucasdemarchi/dietsplash.git;branch=master;protocol=
+ 
+ inherit autotools
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF = " --with-systemdsystemunitdir=${systemd_unitdir}/system \
+                  --disable-staticimages --with-rootdir=${root_prefix}"
+diff --git a/meta-oe/recipes-graphics/directfb/directfb-examples_1.7.0.bb b/meta-oe/recipes-graphics/directfb/directfb-examples_1.7.0.bb
+index de91d027e5..f4a257ce89 100644
+--- a/meta-oe/recipes-graphics/directfb/directfb-examples_1.7.0.bb
++++ b/meta-oe/recipes-graphics/directfb/directfb-examples_1.7.0.bb
+@@ -14,7 +14,7 @@ SRC_URI = " \
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ecf6fd2b19915afc4da56043926ca18f"
+ 
+-S = "${WORKDIR}/DirectFB-examples-${PV}"
++S = "${UNPACKDIR}/DirectFB-examples-${PV}"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/directfb/directfb.inc b/meta-oe/recipes-graphics/directfb/directfb.inc
+index 4d962ab5d9..0dc410b2cb 100644
+--- a/meta-oe/recipes-graphics/directfb/directfb.inc
++++ b/meta-oe/recipes-graphics/directfb/directfb.inc
+@@ -28,7 +28,7 @@ SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/DirectFB-${PV}.tar.g
+            file://0001-libdirect-remove-use-of-keyword-register.patch \
+            "
+ 
+-S = "${WORKDIR}/DirectFB-${PV}"
++S = "${UNPACKDIR}/DirectFB-${PV}"
+ 
+ LDFLAGS:append = " -lm"
+ 
+diff --git a/meta-oe/recipes-graphics/dnfdragora/dnfdragora_2.1.6.bb b/meta-oe/recipes-graphics/dnfdragora/dnfdragora_2.1.6.bb
+index 50504caf9f..ef6dc14ca6 100644
+--- a/meta-oe/recipes-graphics/dnfdragora/dnfdragora_2.1.6.bb
++++ b/meta-oe/recipes-graphics/dnfdragora/dnfdragora_2.1.6.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/manatools/dnfdragora.git;branch=stable-2.x;protocol=
+ 
+ SRCREV = "abbe08b7a487325182758d5285b54437a914207b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake gettext pkgconfig python3-dir python3native setuptools3-base mime-xdg
+ 
+diff --git a/meta-oe/recipes-graphics/drm/drm-info_2.7.0.bb b/meta-oe/recipes-graphics/drm/drm-info_2.7.0.bb
+index 9f1cbb47fb..810be40013 100644
+--- a/meta-oe/recipes-graphics/drm/drm-info_2.7.0.bb
++++ b/meta-oe/recipes-graphics/drm/drm-info_2.7.0.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=32fd56d355bd6a61017655d8da26b67c"
+ SRC_URI = "git://gitlab.freedesktop.org/emersion/drm_info.git;branch=master;protocol=https"
+ SRCREV = "c1f5ca4cf750b26eb26c1d9d5c2ef057acbcfefc"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.5.bb b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.5.bb
+index efcf5a9ea6..72187696e3 100644
+--- a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.5.bb
++++ b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.5.bb
+@@ -7,7 +7,6 @@ DEPENDS = "libpng zlib"
+ SRC_URI = "git://github.com/GunnarMonell/fbgrab.git;protocol=https;branch=master"
+ 
+ SRCREV = "f43ce6d5ce48fb01360eaa7c4a92c2573a1d02f8"
+-S = "${WORKDIR}/git"
+ 
+ do_configure:prepend() {
+     sed \
+diff --git a/meta-oe/recipes-graphics/fbida/fbida_git.bb b/meta-oe/recipes-graphics/fbida/fbida_git.bb
+index 6c06748499..2736f61004 100644
+--- a/meta-oe/recipes-graphics/fbida/fbida_git.bb
++++ b/meta-oe/recipes-graphics/fbida/fbida_git.bb
+@@ -21,7 +21,6 @@ SRC_URI = "git://github.com/kraxel/fbida;protocol=https;branch=master \
+            file://0001-fbida-Include-missing-sys-types.h.patch \
+ "
+ SRCREV = "eb769e3d7f4a073d4c37ed524ebd5017c6a578f5"
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig features_check
+ 
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
+index d470ff12d4..af77ec913e 100644
+--- a/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
++++ b/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
+@@ -22,7 +22,6 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
+            file://0001-Fix-Translations-containing-invalid-directives-hs.patch \
+            file://CVE-2024-25081_CVE-2024-25082.patch \
+ "
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE = "-DENABLE_DOCS=OFF"
+ PACKAGECONFIG = "readline"
+diff --git a/meta-oe/recipes-graphics/ftgl/ftgl_2.4.0.bb b/meta-oe/recipes-graphics/ftgl/ftgl_2.4.0.bb
+index 4db453bc66..c5c547186f 100644
+--- a/meta-oe/recipes-graphics/ftgl/ftgl_2.4.0.bb
++++ b/meta-oe/recipes-graphics/ftgl/ftgl_2.4.0.bb
+@@ -17,4 +17,3 @@ PV .= "+git"
+ SRC_URI = "git://github.com/HamzaM3/ftgl;protocol=https;branch=master \
+            file://0001-Fix-type-mismatch-with-latest-FreeType.patch"
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb b/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb
+index fcf1bd9cae..959463e962 100644
+--- a/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb
++++ b/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb
+@@ -41,7 +41,6 @@ SRC_URI = " \
+ 
+ SRCREV = "7baf540e56fb1a3e91752acba872a88543529d46"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools gettext update-alternatives pkgconfig python3native perlnative features_check
+ # depends on virtual/libx11
+diff --git a/meta-oe/recipes-graphics/glad/glad_2.0.8.bb b/meta-oe/recipes-graphics/glad/glad_2.0.8.bb
+index 4065c27e6f..ea4ee6eac6 100644
+--- a/meta-oe/recipes-graphics/glad/glad_2.0.8.bb
++++ b/meta-oe/recipes-graphics/glad/glad_2.0.8.bb
+@@ -4,7 +4,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ae570f26774ac096cff8f992091a223c"
+ 
+ SRC_URI = "git://github.com/Dav1dde/glad.git;protocol=https;branch=glad2"
+ SRCREV = "73db193f853e2ee079bf3ca8a64aa2eaf6459043"
+-S = "${WORKDIR}/git"
+ 
+ inherit python_setuptools_build_meta
+ 
+diff --git a/meta-oe/recipes-graphics/glm/glm_0.9.9.8.bb b/meta-oe/recipes-graphics/glm/glm_0.9.9.8.bb
+index e313d7a192..e6fd0edd21 100644
+--- a/meta-oe/recipes-graphics/glm/glm_0.9.9.8.bb
++++ b/meta-oe/recipes-graphics/glm/glm_0.9.9.8.bb
+@@ -20,7 +20,6 @@ SRC_URI = " \
+ SRCREV = "efec5db081e3aad807d0731e172ac597f6a39447"
+ PV .= "+0.9.9.9+git"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb b/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb
+index 16ab6d6fd4..ef9b194f9a 100644
+--- a/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb
++++ b/meta-oe/recipes-graphics/gtkperf/gtkperf_0.40.bb
+@@ -18,7 +18,7 @@ UPSTREAM_CHECK_REGEX = "${BPN}_(?P<pver>\d+(\.\d+)+)"
+ 
+ DEPENDS = "gtk+"
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ inherit features_check autotools binconfig pkgconfig gettext
+ 
+diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.122.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.122.bb
+index 43367aa415..f912686c41 100644
+--- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.122.bb
++++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.122.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
+ 
+ SRC_URI = "http://gtkwave.sourceforge.net/gtkwave-gtk3-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "6201b5f93dcaeafa92fc0ec4ad4baeaf60acf16fc8f019bbf061cf4ebf27938a"
+-S = "${WORKDIR}/${BPN}-gtk3-${PV}"
++S = "${UNPACKDIR}/${BPN}-gtk3-${PV}"
+ 
+ DEPENDS = " \
+     gperf-native \
+diff --git a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
+index 9c9bf10398..66e9f8a0c4 100644
+--- a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
++++ b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
+@@ -15,7 +15,6 @@ inherit autotools pkgconfig lib_package
+ AUTO_LIBNAME_PKGS = ""
+ 
+ SRC_URI = "git://git.enlightenment.org/old/legacy-${BPN}.git;protocol=https;branch=master"
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "jpeg png zlib ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+ 
+diff --git a/meta-oe/recipes-graphics/libdecor/libdecor_0.2.3.bb b/meta-oe/recipes-graphics/libdecor/libdecor_0.2.3.bb
+index 9c6807d7e6..35deb8d2aa 100644
+--- a/meta-oe/recipes-graphics/libdecor/libdecor_0.2.3.bb
++++ b/meta-oe/recipes-graphics/libdecor/libdecor_0.2.3.bb
+@@ -12,7 +12,6 @@ DEPENDS = " \
+     wayland-protocols \
+ "
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "15afd30a6e23e949d022ff18f17dd7fdbd3361e4"
+ 
+ PACKAGECONFIG ?= "dbus ${@bb.utils.filter('DISTRO_FEATURES', 'gtk+3', d)}"
+diff --git a/meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb b/meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb
+index db648ec8c2..e59de6f0ca 100644
+--- a/meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb
++++ b/meta-oe/recipes-graphics/libforms/libforms_1.2.5pre1.bb
+@@ -18,7 +18,7 @@ inherit autotools features_check
+ 
+ REQUIRED_DISTRO_FEATURES = "opengl x11"
+ 
+-S = "${WORKDIR}/xforms-${PV}"
++S = "${UNPACKDIR}/xforms-${PV}"
+ 
+ DEPENDS = "libxpm jpeg libx11 virtual/libgl"
+ RDEPENDS:${PN} = "bash"
+diff --git a/meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb b/meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb
+index a737a735b7..f26caf6940 100644
+--- a/meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb
++++ b/meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb
+@@ -13,7 +13,6 @@ REQUIRED_DISTRO_FEATURES = "opengl"
+ 
+ inherit meson pkgconfig features_check
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ?= "\
+   ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.27.bb b/meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.27.bb
+index 4f702029d9..d707b6c9b4 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.27.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.27.bb
+@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "dfb15ac5f8ce7a4952dc12d2aed9747518c5e6b335c0e31636d23f93c6
+ 
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/sdlgfx/files/"
+ 
+-S = "${WORKDIR}/SDL_gfx-${PV}"
++S = "${UNPACKDIR}/SDL_gfx-${PV}"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-image_1.2.12.bb b/meta-oe/recipes-graphics/libsdl/libsdl-image_1.2.12.bb
+index 01137bb0ca..29fb8cb4aa 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl-image_1.2.12.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl-image_1.2.12.bb
+@@ -11,7 +11,7 @@ SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL_image-${PV}.tar.
+            file://configure.patch"
+ SRC_URI[sha256sum] = "0b90722984561004de84847744d566809dbb9daf732a9e503b91a1b5a84e5699"
+ 
+-S = "${WORKDIR}/SDL_image-${PV}"
++S = "${UNPACKDIR}/SDL_image-${PV}"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-mixer_1.2.12.bb b/meta-oe/recipes-graphics/libsdl/libsdl-mixer_1.2.12.bb
+index 35f278c890..d87c15aebc 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl-mixer_1.2.12.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl-mixer_1.2.12.bb
+@@ -10,7 +10,7 @@ SRC_URI = "http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-${PV}.tar.
+ 
+ SRC_URI[sha256sum] = "1644308279a975799049e4826af2cfc787cad2abb11aa14562e402521f86992a"
+ 
+-S = "${WORKDIR}/SDL_mixer-${PV}"
++S = "${UNPACKDIR}/SDL_mixer-${PV}"
+ 
+ inherit autotools-brokensep pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-net_1.2.8.bb b/meta-oe/recipes-graphics/libsdl/libsdl-net_1.2.8.bb
+index 93466872ac..ef4d13ebb6 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl-net_1.2.8.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl-net_1.2.8.bb
+@@ -14,6 +14,6 @@ SRC_URI = " \
+   file://am_foreign.patch \
+ "
+ 
+-S = "${WORKDIR}/SDL_net-${PV}"
++S = "${UNPACKDIR}/SDL_net-${PV}"
+ 
+ SRC_URI[sha256sum] = "5f4a7a8bb884f793c278ac3f3713be41980c5eedccecff0260411347714facb4"
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-ttf_2.0.11.bb b/meta-oe/recipes-graphics/libsdl/libsdl-ttf_2.0.11.bb
+index c104444319..2cf3e88f17 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl-ttf_2.0.11.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl-ttf_2.0.11.bb
+@@ -9,7 +9,7 @@ SRC_URI = "http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-${PV}.tar.gz \
+ "
+ SRC_URI[sha256sum] = "724cd895ecf4da319a3ef164892b72078bd92632a5d812111261cde248ebcdb7"
+ 
+-S = "${WORKDIR}/SDL_ttf-${PV}"
++S = "${UNPACKDIR}/SDL_ttf-${PV}"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-image_2.8.8.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-image_2.8.8.bb
+index d3dbf13ae7..c15e986dc3 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl2-image_2.8.8.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl2-image_2.8.8.bb
+@@ -9,7 +9,7 @@ DEPENDS = "tiff zlib libpng jpeg virtual/libsdl2 libwebp"
+ SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL2_image-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "2213b56fdaff2220d0e38c8e420cbe1a83c87374190cba8c70af2156097ce30a"
+ 
+-S = "${WORKDIR}/SDL2_image-${PV}"
++S = "${UNPACKDIR}/SDL2_image-${PV}"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
+index b24c8782cf..46e6ba0774 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.8.1.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbb0010b2f7cf6e8a13bcac1ef4d2455"
+ SRC_URI = "http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "cb760211b056bfe44f4a1e180cc7cb201137e4d1572f2002cc1be728efd22660"
+ 
+-S = "${WORKDIR}/SDL2_mixer-${PV}"
++S = "${UNPACKDIR}/SDL2_mixer-${PV}"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-net_2.2.0.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-net_2.2.0.bb
+index d26a545f83..4a7ada94cb 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl2-net_2.2.0.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl2-net_2.2.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=68a088513da90254b2fbe664f42af315"
+ SRC_URI = " \
+   https://www.libsdl.org/projects/SDL_net/release/SDL2_net-${PV}.tar.gz \
+ "
+-S = "${WORKDIR}/SDL2_net-${PV}"
++S = "${UNPACKDIR}/SDL2_net-${PV}"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl_1.2.15.bb b/meta-oe/recipes-graphics/libsdl/libsdl_1.2.15.bb
+index 35870c4814..8122b88a68 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl_1.2.15.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl_1.2.15.bb
+@@ -31,7 +31,7 @@ SRC_URI = "http://www.libsdl.org/release/SDL-${PV}.tar.gz \
+ 
+ UPSTREAM_CHECK_REGEX = "SDL-(?P<pver>\d+(\.\d+)+)\.tar"
+ 
+-S = "${WORKDIR}/SDL-${PV}"
++S = "${UNPACKDIR}/SDL-${PV}"
+ 
+ SRC_URI[sha256sum] = "d6d316a793e5e348155f0dd93b979798933fb98aa1edebcc108829d6474aad00"
+ 
+diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.56.bb b/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.56.bb
+index 7e3a06f34f..3b17f350df 100644
+--- a/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.56.bb
++++ b/meta-oe/recipes-graphics/libsdl3/libsdl2-compat_2.32.56.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=98241180d857fe975e4b60d44d6c01a5"
+ 
+ SRC_URI = "http://www.libsdl.org/release/sdl2-compat-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "27e845b1b7dc0a91a85f1a1f18892ed205adb38caf767741eb258008d8264de0"
+-S = "${WORKDIR}/sdl2-compat-${PV}"
++S = "${UNPACKDIR}/sdl2-compat-${PV}"
+ 
+ DEPENDS += "libsdl3"
+ 
+diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3-image_3.2.4.bb b/meta-oe/recipes-graphics/libsdl3/libsdl3-image_3.2.4.bb
+index 8ef20521a9..ac425f6ad2 100644
+--- a/meta-oe/recipes-graphics/libsdl3/libsdl3-image_3.2.4.bb
++++ b/meta-oe/recipes-graphics/libsdl3/libsdl3-image_3.2.4.bb
+@@ -9,7 +9,6 @@ DEPENDS = "tiff zlib libpng jpeg libsdl3 libwebp"
+ SRC_URI = "git://github.com/libsdl-org/SDL_image.git;protocol=https;branch=release-3.2.x"
+ SRCREV = "11154afb7855293159588b245b446a4ef09e574f"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3-ttf_3.2.2.bb b/meta-oe/recipes-graphics/libsdl3/libsdl3-ttf_3.2.2.bb
+index f914d1dcff..1f82f95d65 100644
+--- a/meta-oe/recipes-graphics/libsdl3/libsdl3-ttf_3.2.2.bb
++++ b/meta-oe/recipes-graphics/libsdl3/libsdl3-ttf_3.2.2.bb
+@@ -8,7 +8,7 @@ SRC_URI = "http://www.libsdl.org/projects/SDL_ttf/release/SDL3_ttf-${PV}.tar.gz
+ "
+ SRC_URI[sha256sum] = "63547d58d0185c833213885b635a2c0548201cc8f301e6587c0be1a67e1e045d"
+ 
+-S = "${WORKDIR}/SDL3_ttf-${PV}"
++S = "${UNPACKDIR}/SDL3_ttf-${PV}"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.16.bb b/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.16.bb
+index 7a2a37f69a..9579cb73a1 100644
+--- a/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.16.bb
++++ b/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.16.bb
+@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "\
+ 
+ SRC_URI = "http://www.libsdl.org/release/SDL3-${PV}.tar.gz"
+ 
+-S = "${WORKDIR}/SDL3-${PV}"
++S = "${UNPACKDIR}/SDL3-${PV}"
+ 
+ SRC_URI[sha256sum] = "6340e58879b2d15830c8460d2f589a385c444d1faa2a4828a9626c7322562be8"
+ 
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.14.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.14.bb
+index e518461d7d..ff5df428e8 100644
+--- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.14.bb
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.14.bb
+@@ -47,7 +47,6 @@ inherit cmake
+ SRC_URI = "git://github.com/LibVNC/libvncserver;branch=master;protocol=https"
+ SRCREV = "10e9eb75f73e973725dc75c373de5d89807af028"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE = "-DMAKE_INSTALL_LIBDIR=${libdir}"
+ 
+diff --git a/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.6.2.bb b/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.6.2.bb
+index 4196449f3a..d7c96492b2 100644
+--- a/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.6.2.bb
++++ b/meta-oe/recipes-graphics/libyui/libyui-ncurses_4.6.2.bb
+@@ -11,7 +11,7 @@ SRC_URI:append:class-target = " file://0001-Fix-the-error-of-can-t-find-header-f
+ 
+ SRCREV = "e691b563262306a40a61bbf228839fa06e4f0516"
+ 
+-S = "${WORKDIR}/git/libyui-ncurses"
++S = "${UNPACKDIR}/${BP}/libyui-ncurses"
+ 
+ inherit cmake gettext pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/libyui/libyui_4.6.2.bb b/meta-oe/recipes-graphics/libyui/libyui_4.6.2.bb
+index 419a9522a4..d86aa4da91 100644
+--- a/meta-oe/recipes-graphics/libyui/libyui_4.6.2.bb
++++ b/meta-oe/recipes-graphics/libyui/libyui_4.6.2.bb
+@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/libyui/libyui.git;branch=master;protocol=https \
+ 
+ SRCREV = "e691b563262306a40a61bbf228839fa06e4f0516"
+ 
+-S = "${WORKDIR}/git/libyui"
++S = "${UNPACKDIR}/${BP}/libyui"
+ 
+ inherit cmake gettext pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.2.2.bb b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.2.2.bb
+index 1228748701..ede5c16f3f 100644
+--- a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.2.2.bb
++++ b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.2.2.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=802d3d83ae80ef5f343050bf96cce3a4 \
+ 
+ SRC_URI = "\
+ 	git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=https;branch=release/v9.2;name=demo \
+-	git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.2;name=lvgl;subdir=git/lvgl \
++	git://github.com/lvgl/lvgl;protocol=https;branch=release/v9.2;name=lvgl;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
+ 	file://0001-thorvg-fix-build-with-gcc-15.patch;patchdir=lvgl \
+ 	"
+ SRCREV_demo = "c924e24c7aa55317521bcd9dd75ce9337508f5a5"
+@@ -24,7 +24,6 @@ require lv-conf.inc
+ 
+ inherit cmake
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_configure:prepend() {
+ 	if [ "${LVGL_CONFIG_USE_SDL}" -eq 1 ] ; then
+diff --git a/meta-oe/recipes-graphics/lvgl/lvgl_9.2.2.bb b/meta-oe/recipes-graphics/lvgl/lvgl_9.2.2.bb
+index 935e84ad23..28306a1101 100644
+--- a/meta-oe/recipes-graphics/lvgl/lvgl_9.2.2.bb
++++ b/meta-oe/recipes-graphics/lvgl/lvgl_9.2.2.bb
+@@ -17,7 +17,6 @@ SRCREV = "7f07a129e8d77f4984fff8e623fd5be18ff42e74"
+ inherit cmake
+ 
+ EXTRA_OECMAKE = "-DLIB_INSTALL_DIR=${baselib} -DBUILD_SHARED_LIBS=ON"
+-S = "${WORKDIR}/git"
+ 
+ require lv-conf.inc
+ 
+diff --git a/meta-oe/recipes-graphics/neatvnc/neatvnc_0.8.1.bb b/meta-oe/recipes-graphics/neatvnc/neatvnc_0.8.1.bb
+index 9065050c62..2b26ec57ae 100644
+--- a/meta-oe/recipes-graphics/neatvnc/neatvnc_0.8.1.bb
++++ b/meta-oe/recipes-graphics/neatvnc/neatvnc_0.8.1.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/any1/neatvnc;branch=v0.8;protocol=https"
+ 
+ SRCREV = "07081567ab21a2b099ceb41ae8cab872a31cbb9a"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "libdrm pixman aml zlib"
+ 
+diff --git a/meta-oe/recipes-graphics/nyancat/nyancat_1.5.2.bb b/meta-oe/recipes-graphics/nyancat/nyancat_1.5.2.bb
+index a44e79362d..c31ad985d9 100644
+--- a/meta-oe/recipes-graphics/nyancat/nyancat_1.5.2.bb
++++ b/meta-oe/recipes-graphics/nyancat/nyancat_1.5.2.bb
+@@ -5,7 +5,6 @@ SECTION = "graphics"
+ LICENSE = "NCSA"
+ LIC_FILES_CHKSUM = "file://src/nyancat.c;beginline=27;endline=49;md5=285f7ac87da4a631f348800687d845bd"
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRCREV = "5ffb6c5c03d0e9156db8f360599d4f0449bb16b9"
+ SRC_URI = " \
+diff --git a/meta-oe/recipes-graphics/openbox/obconf_git.bb b/meta-oe/recipes-graphics/openbox/obconf_git.bb
+index 1210af70ea..917492c982 100644
+--- a/meta-oe/recipes-graphics/openbox/obconf_git.bb
++++ b/meta-oe/recipes-graphics/openbox/obconf_git.bb
+@@ -16,7 +16,6 @@ SRC_URI = " \
+     file://0001-Fix-function-protype-visibility.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools gettext pkgconfig mime mime-xdg features_check
+ # depends on openbox, which is X11-only
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
+index 231bf84573..6c383e3423 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.3.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/uclouvain/openjpeg.git;branch=master;protocol=https
+            file://0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
+            "
+ SRCREV = "210a8a5690d0da66f02d49420d7176a21ef409dc"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-graphics/panel-mipi-dbi/panel-mipi-dbi-native_git.bb b/meta-oe/recipes-graphics/panel-mipi-dbi/panel-mipi-dbi-native_git.bb
+index 0e88e84aff..d3c96cd66f 100644
+--- a/meta-oe/recipes-graphics/panel-mipi-dbi/panel-mipi-dbi-native_git.bb
++++ b/meta-oe/recipes-graphics/panel-mipi-dbi/panel-mipi-dbi-native_git.bb
+@@ -15,7 +15,6 @@ SRCREV = "1cbd40135a8c7f25d7b444a7fac77fd3c3ad471e"
+ 
+ SRC_URI = "git://github.com/notro/panel-mipi-dbi.git;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit native
+ 
+diff --git a/meta-oe/recipes-graphics/pango/pangomm-2.48_2.56.1.bb b/meta-oe/recipes-graphics/pango/pangomm-2.48_2.56.1.bb
+index 896195c57d..d99c6ceac0 100644
+--- a/meta-oe/recipes-graphics/pango/pangomm-2.48_2.56.1.bb
++++ b/meta-oe/recipes-graphics/pango/pangomm-2.48_2.56.1.bb
+@@ -12,7 +12,7 @@ inherit gnomebase features_check
+ SRC_URI[archive.sha256sum] = "539f5aa60e9bdc6b955bb448e2a62cc14562744df690258040fbb74bf885755d"
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-S = "${WORKDIR}/${GNOMEBN}-${PV}"
++S = "${UNPACKDIR}/${GNOMEBN}-${PV}"
+ 
+ FILES:${PN} = "${libdir}/lib*.so.*"
+ FILES:${PN}-dev += "${libdir}/*/include/ ${libdir}/pangomm-*/"
+diff --git a/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb b/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb
+index 2ec89bc05b..88cdce26d1 100644
+--- a/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb
++++ b/meta-oe/recipes-graphics/parallel-deqp-runner/parallel-deqp-runner_git.bb
+@@ -10,6 +10,5 @@ SRC_URI = "git://gitlab.freedesktop.org/mesa/parallel-deqp-runner.git;protocol=h
+ PV = "2020.06.15+git"
+ SRCREV = "e1642fb691d29b1462504b58916f7f514a963e80"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig meson
+diff --git a/meta-oe/recipes-graphics/qrencode/qrencode_4.1.1.bb b/meta-oe/recipes-graphics/qrencode/qrencode_4.1.1.bb
+index 039816e4a0..c794f41370 100644
+--- a/meta-oe/recipes-graphics/qrencode/qrencode_4.1.1.bb
++++ b/meta-oe/recipes-graphics/qrencode/qrencode_4.1.1.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ SRCREV = "715e29fd4cd71b6e452ae0f4e36d917b43122ce8"
+ SRC_URI = "git://github.com/fukuchi/libqrencode.git;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.38.bb b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.38.bb
+index 8aab26c824..c5a0cdc6aa 100644
+--- a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.38.bb
++++ b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.38.bb
+@@ -8,7 +8,6 @@ SRCREV = "34c3c40787f440da9c2947cd63a41e6c4d1f95b9"
+ SRC_URI = " \
+     git://github.com/baldurk/${BPN}.git;protocol=https;branch=v1.x \
+ "
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS += "virtual/libx11 virtual/libgl libxcb xcb-util-keysyms"
+ 
+diff --git a/meta-oe/recipes-graphics/spir/spirv-shader-generator_git.bb b/meta-oe/recipes-graphics/spir/spirv-shader-generator_git.bb
+index bf3070701f..567f7a55e8 100644
+--- a/meta-oe/recipes-graphics/spir/spirv-shader-generator_git.bb
++++ b/meta-oe/recipes-graphics/spir/spirv-shader-generator_git.bb
+@@ -4,7 +4,6 @@ LICENSE  = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SECTION = "graphics"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "f09ba2777714871bddb70d049878af34b94fa54d"
+ SRC_URI = "git://github.com/KhronosGroup/SPIRV-Cross.git;branch=master;protocol=https"
+ inherit cmake pkgconfig
+diff --git a/meta-oe/recipes-graphics/surf/surf_2.1.bb b/meta-oe/recipes-graphics/surf/surf_2.1.bb
+index 4d9d4d3dd0..258c78e509 100644
+--- a/meta-oe/recipes-graphics/surf/surf_2.1.bb
++++ b/meta-oe/recipes-graphics/surf/surf_2.1.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://git.suckless.org/surf;branch=surf-webkit2 \
+            "
+ SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'soup3', 'file://0001-config.mk-Fix-compiler-and-linker.patch file://0001-config.ml-make-compatible-with-webkitgtk-2.34.0.patch', '', d)}"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig features_check
+ 
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract-lang_4.1.0.bb b/meta-oe/recipes-graphics/tesseract/tesseract-lang_4.1.0.bb
+index 0d45ee765c..f4923f3f00 100644
+--- a/meta-oe/recipes-graphics/tesseract/tesseract-lang_4.1.0.bb
++++ b/meta-oe/recipes-graphics/tesseract/tesseract-lang_4.1.0.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SRCREV = "4767ea922bcc460e70b87b1d303ebdfed0897da8"
+ SRC_URI = "git://github.com/tesseract-ocr/tessdata.git;branch=main;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit allarch
+ 
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.1.bb b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.1.bb
+index 213dfada23..4bc0f5b88f 100644
+--- a/meta-oe/recipes-graphics/tesseract/tesseract_5.5.1.bb
++++ b/meta-oe/recipes-graphics/tesseract/tesseract_5.5.1.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SRCREV = "3b7c70e34dea179549ed3e995872e2e019eb8477"
+ SRC_URI = "git://github.com/${BPN}-ocr/${BPN}.git;branch=main;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "leptonica"
+ 
+diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
+index 98777970b0..dd4f79c314 100644
+--- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
++++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
+@@ -7,7 +7,6 @@ RDEPENDS:${PN} = "coreutils hicolor-icon-theme perl bash xkbcomp"
+ 
+ LIC_FILES_CHKSUM = "file://LICENCE.TXT;md5=75b02c2872421380bbd47781d2bd75d3"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools cmake features_check pkgconfig systemd
+ 
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.030_1.050.bb b/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.030_1.050.bb
+index 15449b216a..38a5126eea 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.030_1.050.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/source-code-pro-fonts_2.030_1.050.bb
+@@ -12,7 +12,7 @@ SRC_URI = " \
+     file://44-source-code-pro-fonts-fontconfig.conf \
+ "
+ SRC_URI[sha256sum] = "da2ac159497d31b0c6d9daa8fc390fb8252e75b4a9805ace6a2c9cccaed4932e"
+-S = "${WORKDIR}/source-code-pro-2.030R-ro-1.050R-it"
++S = "${UNPACKDIR}/source-code-pro-2.030R-ro-1.050R-it"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/adobe-fonts/source-code-pro/tags"
+ UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+\.\d+)R"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_2.300.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_2.300.bb
+index beb2cf2ff7..4a3b8e471e 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_2.300.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_2.300.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://OFL.txt;md5=6c56db018aa8803f8aff326829e3ce32"
+ 
+ SRCNAME = "AbyssinicaSIL"
+ SRC_URI = "http://software.sil.org/downloads/r/abyssinica/${SRCNAME}-${PV}.zip"
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
++S = "${UNPACKDIR}/${SRCNAME}-${PV}"
+ 
+ UPSTREAM_CHECK_URI = "https://software.sil.org/abyssinica/download/"
+ 
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
+index ea734182de..82b2541a60 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-arphic-uming_20080216.bb
+@@ -8,7 +8,7 @@ RPROVIDES:${PN} = "virtual-chinese-font"
+ FONT_PACKAGES = "${PN}"
+ 
+ SRC_URI = "https://deb.debian.org/debian/pool/main/f/fonts-arphic-uming/fonts-arphic-uming_0.2.${PV}.2.orig.tar.bz2"
+-S = "${WORKDIR}/ttf-arphic-uming-0.2.20080216.2"
++S = "${UNPACKDIR}/ttf-arphic-uming-0.2.20080216.2"
+ 
+ require ttf.inc
+ 
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.37.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.37.bb
+index 90a11ca4d6..9dc23fc4c7 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.37.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.37.bb
+@@ -17,7 +17,7 @@ RDEPENDS:${PN}-common = ""
+ SRC_URI = "${SOURCEFORGE_MIRROR}/dejavu/dejavu-fonts-ttf-${PV}.tar.bz2 \
+            file://30-dejavu-aliases.conf"
+ 
+-S = "${WORKDIR}/dejavu-fonts-ttf-${PV}/ttf"
++S = "${UNPACKDIR}/dejavu-fonts-ttf-${PV}/ttf"
+ 
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/dejavu/files/dejavu/"
+ 
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb
+index cc9213ec5b..06ab2a7921 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-droid_git.bb
+@@ -9,7 +9,7 @@ PV = "0.1+git"
+ 
+ SRC_URI = "git://github.com/android/platform_frameworks_base.git;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git/data/fonts"
++S = "${UNPACKDIR}/${BP}/data/fonts"
+ 
+ do_install:append() {
+     for f in Ahem.ttf MTLc3m.ttf DroidSansArabic.ttf DroidSansThai.ttf \
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
+index 84cd30d3c0..f50da65ddc 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-gentium_1.02.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://OFL;md5=33a5bf7b98a9c0ae87430760ba762295 \
+ 
+ SRC_URI = "https://archive.debian.org/debian/pool/main/t/ttf-gentium/ttf-gentium_${PV}.orig.tar.gz "
+ 
+-S = "${WORKDIR}/ttf-sil-gentium-${PV}"
++S = "${UNPACKDIR}/ttf-sil-gentium-${PV}"
+ 
+ do_install:append() {
+ 
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
+index c142f1dd02..0697e69399 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-google-fira.bb
+@@ -23,8 +23,7 @@ SRC_URI = "git://github.com/google/fonts.git;protocol=https;branch=main;subpath=
+            git://github.com/google/fonts.git;protocol=https;branch=main;subpath=ofl/firasanscondensed;name=firasanscondensed \
+            git://github.com/google/fonts.git;protocol=https;branch=main;subpath=ofl/firasansextracondensed;name=firasansextracondensed"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install:append() {
+     install -d ${D}${datadir}/fonts/truetype/
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.1.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.1.bb
+index 8101c7d7a0..373bdb4bde 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.1.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.1.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://../COPYRIGHT.TXT;md5=70d34478e38b1ad9995079f9921f9ef7
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/hunkyfonts/hunkyfonts-${PV}.tar.bz2"
+ 
+-S = "${WORKDIR}/hunkyfonts-${PV}/TTF"
++S = "${UNPACKDIR}/hunkyfonts-${PV}/TTF"
+ 
+ PACKAGES = "ttf-hunky-sans ttf-hunky-serif"
+ FONT_PACKAGES = "ttf-hunky-sans ttf-hunky-serif"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
+index 85a64000ee..2c671840e2 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
+@@ -8,8 +8,7 @@ LIC_FILES_CHKSUM = "file://${UNPACKDIR}/OFL.txt;md5=969851e3a70122069a4d9ee61dd5
+ SRC_URI = "http://levien.com/type/myfonts/Inconsolata.otf \
+     file://OFL.txt"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ FILES:${PN} = "${datadir}/fonts/truetype/Inconsolata.ttf \
+     ${datadir}/doc/ttf-inconsolata/*"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-ipa_003.03.01.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-ipa_003.03.01.bb
+index 89c48d5fe2..165ea7576a 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-ipa_003.03.01.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-ipa_003.03.01.bb
+@@ -10,7 +10,7 @@ SRC_URI = "https://moji.or.jp/wp-content/ipafont/IPAfont/IPAfont00303.zip "
+ 
+ SRC_URI[sha256sum] = "f755ed79a4b8e715bed2f05a189172138aedf93db0f465b4e20c344a02766fe5"
+ 
+-S = "${WORKDIR}/IPAfont00303"
++S = "${UNPACKDIR}/IPAfont00303"
+ 
+ PACKAGES = "ttf-ipag ttf-ipagp ttf-ipam ttf-ipamp"
+ FONT_PACKAGES = "ttf-ipag ttf-ipagp ttf-ipam ttf-ipamp"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb
+index ab7308e735..bb2930ae0b 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb
+@@ -15,7 +15,7 @@ SRC_URI = "https://releases.pagure.org/liberation-fonts/liberation-fonts-ttf-${P
+ 
+ SRC_URI[sha256sum] = "61a7e2b6742a43c73e8762cdfeaf6dfcf9abdd2cfa0b099a9854d69bc4cfee5c"
+ 
+-S = "${WORKDIR}/liberation-fonts-ttf-${PV}"
++S = "${UNPACKDIR}/liberation-fonts-ttf-${PV}"
+ 
+ do_install:append () {
+     install -d ${D}${datadir}/fonts/TTF/
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_2.1.5.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_2.1.5.bb
+index 7b0828574c..92717da32f 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_2.1.5.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation_2.1.5.bb
+@@ -11,7 +11,6 @@ SRCREV = "4b0192046158094654e865245832c66d2104219e"
+ SRC_URI = "git://github.com/liberationfonts/liberation-fonts.git;branch=main;protocol=https"
+ 
+ DEPENDS = "fontforge-native"
+-S = "${WORKDIR}/git"
+ 
+ PACKAGES = "ttf-liberation-mono ttf-liberation-sans ttf-liberation-serif"
+ FONT_PACKAGES = "ttf-liberation-mono ttf-liberation-sans ttf-liberation-serif"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
+index 65d0f0bb35..d4c7a2f219 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
+@@ -10,8 +10,7 @@ SRC_URI[sha256sum] = "de5750f7048973f851961050f76b8b58e9bda400d5007c3078d9317fbe
+ 
+ DEPENDS = "fontforge-native"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ FONT_PACKAGES = "${PN}"
+ FILES:${PN} = "${datadir}"
+ 
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.92.1.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.92.1.bb
+index 8340cccbb4..43ec61772b 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.92.1.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.92.1.bb
+@@ -11,7 +11,6 @@ SRCREV = "a403c9b7f509dad5e58dde85ef63b1c36fde3a21"
+ SRC_URI = "git://github.com/pravins/lohit.git;branch=master;protocol=https"
+ 
+ DEPENDS = "fontforge-native"
+-S = "${WORKDIR}/git"
+ FONT_PACKAGES = "${PN}"
+ FILES:${PN} = "${datadir}"
+ 
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
+index 4adada04fa..1ae1d1a2b4 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE_E;md5=ac161e96eda00db9a3aec7870b5d9658 \
+                     file://LICENSE_J;md5=a120ca8d7c8e4a475d5277c9aeb95221 \
+ "
+ SRC_URI = "http://downloads.sourceforge.jp/mplus-fonts/6650/mplus-TESTFLIGHT-${PV}.tar.gz"
+-S = "${WORKDIR}/mplus-TESTFLIGHT-${PV}"
++S = "${UNPACKDIR}/mplus-TESTFLIGHT-${PV}"
+ 
+ PACKAGESPLITFUNCS:prepend = "split_ttf_mplus_packages "
+ 
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20200916.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20200916.bb
+index 9d6a9a6c2e..b5dae22a9d 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20200916.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20200916.bb
+@@ -11,7 +11,6 @@ SRCREV = "aac7ccaa4d1dea4543453b96f7d6fc47066a57ff"
+ PACKAGES = "${PN}-color ${PN}-regular"
+ FONT_PACKAGES = "${PN}-color ${PN}-regular"
+ 
+-S = "${WORKDIR}/git"
+ 
+ FILES:${PN}-color = "${datadir}/fonts/truetype/NotoColorEmoji.ttf"
+ FILES:${PN}-regular = "${datadir}/fonts/truetype/NotoEmoji-Regular.ttf"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-roboto_2.138.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-roboto_2.138.bb
+index 25ce8e930d..9c9f2e566d 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-roboto_2.138.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-roboto_2.138.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ SRC_URI = "https://github.com/google/roboto/releases/download/v${PV}/roboto-android.zip"
+ SRC_URI[sha256sum] = "c825453253f590cfe62557733e7173f9a421fff103b00f57d33c4ad28ae53baf"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ FILES:${PN} = "${datadir}/fonts/truetype/*.ttf"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
+index 76016c57b9..b72307519c 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://README;md5=97d739900be6e852830f55aa3c07d4a0"
+ RPROVIDES:${PN} = "virtual-japanese-font"
+ 
+ SRC_URI = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2"
+-S = "${WORKDIR}/sazanami-20040629"
++S = "${UNPACKDIR}/sazanami-20040629"
+ 
+ PACKAGES = "ttf-sazanami-gothic ttf-sazanami-mincho"
+ FONT_PACKAGES = "ttf-sazanami-gothic ttf-sazanami-mincho"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
+index 156dc983d7..b224f46869 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-takao_003.03.01.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://IPA_Font_License_Agreement_v1.0.txt;md5=6cd3351ba979c
+ SRC_URI = "https://launchpad.net/takao-fonts/trunk/15.03/+download/TakaoFonts_00303.01.tar.xz"
+ SRC_URI[sha256sum] = "e9871f72ac69acb3e277aebbee7ca01fbebf54800733e29fafdc46133fc3552f"
+ 
+-S = "${WORKDIR}/TakaoFonts_00303.01"
++S = "${UNPACKDIR}/TakaoFonts_00303.01"
+ 
+ PACKAGES = "ttf-takao-pgothic ttf-takao-gothic ttf-takao-pmincho ttf-takao-mincho"
+ FONT_PACKAGES = "ttf-takao-pgothic ttf-takao-gothic ttf-takao-pmincho ttf-takao-mincho"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.83.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.83.bb
+index 8512b1fd19..ff89f7466a 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.83.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-ubuntu-font-family_0.83.bb
+@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "61a2b342526fd552f19fef438bb9211a8212de19ad96e32a1209c039f1
+ UPSTREAM_CHECK_URI = "https://repology.org/project/fonts:ubuntu/packages"
+ UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/ubuntu-font-family-${PV}"
++S = "${UNPACKDIR}/ubuntu-font-family-${PV}"
+ 
+ PACKAGES = "ttf-ubuntu-mono ttf-ubuntu-sans"
+ FONT_PACKAGES = "ttf-ubuntu-mono ttf-ubuntu-sans"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
+index 4cc5afd4a7..c7be162b1b 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
+@@ -12,7 +12,7 @@ SRC_URI = "https://osdn.jp/dl/vlgothic/VLGothic-${PV}.tar.xz"
+ 
+ SRC_URI[sha256sum] = "297a3813675fbea12c5813b55a78091c9a5946515ecbf9fde8b8102e01c579f4"
+ 
+-S = "${WORKDIR}/VLGothic"
++S = "${UNPACKDIR}/VLGothic"
+ 
+ do_install:append () {
+     install -D -m644 ${S}/LICENSE_E.mplus ${D}${datadir}/licenses/${PN}/COPYING_MPLUS.txt
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.9.45.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.9.45.bb
+index dc85617a9b..8d721d00ad 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.9.45.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.9.45.bb
+@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "e4b7e306475bf9427d1757578f0e4528930c84c44eaa3f167d4c42f110
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/wqy/files/wqy-zenhei/"
+ UPSTREAM_CHECK_REGEX = "wqy-zenhei/(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/wqy-zenhei"
++S = "${UNPACKDIR}/wqy-zenhei"
+ 
+ do_install:append () {
+     sed -i -e '/<string>[^W]/d' ${S}/44-wqy-zenhei.conf
+diff --git a/meta-oe/recipes-graphics/unclutter-xfixes/unclutter-xfixes_1.6.bb b/meta-oe/recipes-graphics/unclutter-xfixes/unclutter-xfixes_1.6.bb
+index e80aebc89b..5aea738c15 100644
+--- a/meta-oe/recipes-graphics/unclutter-xfixes/unclutter-xfixes_1.6.bb
++++ b/meta-oe/recipes-graphics/unclutter-xfixes/unclutter-xfixes_1.6.bb
+@@ -14,7 +14,6 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ DEPENDS = "libev libx11 libxi libxfixes"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install:append() {
+     # LICENSE is installed to /usr/share/licenses but we don't want it in the package
+diff --git a/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb b/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb
+index db3c045588..3ba561a54e 100644
+--- a/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb
++++ b/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb
+@@ -8,7 +8,6 @@ DEPENDS = "virtual/libx11 libxext xorgproto"
+ SRCREV = "79f1506a3307d3275b0fdfb2e110c173f68e6f78"
+ SRC_URI = "git://anongit.freedesktop.org/vdpau/libvdpau;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit features_check meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb b/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb
+index 3f44e537a4..a7db743239 100644
+--- a/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb
++++ b/meta-oe/recipes-graphics/vdpau/vdpauinfo_1.5.bb
+@@ -15,6 +15,5 @@ RDEPENDS:${PN} = "libvdpau"
+ SRCREV = "d3c5bd63bf8878d59b22d618d2bb5116db392d28"
+ SRC_URI = "git://anongit.freedesktop.org/vdpau/vdpauinfo;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+index 02af1c6ed0..1cc2da7a49 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+@@ -12,7 +12,6 @@ SRC_URI:append:toolchain-clang = "file://fix-clang-private-operator.patch"
+ 
+ SRCREV_FORMAT = "vk-gl-cts"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig cmake cmake-qemu features_check python3native
+ 
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
+index 68e8a3b0a9..4e7155cd7f 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
+@@ -11,15 +11,15 @@ python __anonymous() {
+ }
+ 
+ SRC_URI += " \
+-    https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=git/external/renderdoc/src;sha256sum=e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e \
+-    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=git/external/spirv-tools/src;rev=04b4a204aa501992ae85a207be1e200e195c98e1 \
+-    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=git/external/glslang/src;rev=0549c7127c2fbab2904892c9d6ff491fa1e93751 \
+-    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=git/external/spirv-headers/src;rev=e7294a8ebed84f8c5bd3686c68dbe12a4e65b644 \
+-    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=git/external/vulkan-docs/src;rev=645c59c70e826d9738b6bb103316c03d887dfed3 \
+-    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=git/external/vulkan-validationlayers/src;rev=6cf616f131e9870c499a50441bca2d07ccda9733 \
+-    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=git/external/amber/src;rev=6fa5ac1fb3b01c93eef3caa2aeb8841565e38d90 \
+-    git://github.com/open-source-parsers/jsoncpp.git;protocol=https;nobranch=1;destsuffix=git/external/jsoncpp/src;rev=9059f5cad030ba11d37818847443a53918c327b1 \
+-    git://github.com/Igalia/vk_video_samples.git;protocol=https;nobranch=1;destsuffix=git/external/nvidia-video-samples/src;rev=45fe88b456c683120138f052ea81f0a958ff3ec4 \
+-    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=git/external/vulkan-video-samples/src;rev=0e87744edbb84c9c56c3fc8de9ea5150af5ee4ea \
+-    git://github.com/Igalia/video_generator.git;protocol=https;nobranch=1;destsuffix=git/external/video_generator/src;rev=426300e12a5cc5d4676807039a1be237a2b68187 \
++    https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/external/renderdoc/src;sha256sum=e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e \
++    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-tools/src;rev=04b4a204aa501992ae85a207be1e200e195c98e1 \
++    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/glslang/src;rev=0549c7127c2fbab2904892c9d6ff491fa1e93751 \
++    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-headers/src;rev=e7294a8ebed84f8c5bd3686c68dbe12a4e65b644 \
++    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-docs/src;rev=645c59c70e826d9738b6bb103316c03d887dfed3 \
++    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-validationlayers/src;rev=6cf616f131e9870c499a50441bca2d07ccda9733 \
++    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/amber/src;rev=6fa5ac1fb3b01c93eef3caa2aeb8841565e38d90 \
++    git://github.com/open-source-parsers/jsoncpp.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/jsoncpp/src;rev=9059f5cad030ba11d37818847443a53918c327b1 \
++    git://github.com/Igalia/vk_video_samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/nvidia-video-samples/src;rev=45fe88b456c683120138f052ea81f0a958ff3ec4 \
++    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-video-samples/src;rev=0e87744edbb84c9c56c3fc8de9ea5150af5ee4ea \
++    git://github.com/Igalia/video_generator.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/video_generator/src;rev=426300e12a5cc5d4676807039a1be237a2b68187 \
+ "
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
+index 45b9464711..563da1007a 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
+@@ -11,16 +11,16 @@ python __anonymous() {
+ }
+ 
+ SRC_URI += " \
+-    https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=git/external/renderdoc/src;sha256sum=e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e \
+-    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=git/external/spirv-tools/src;rev=3364b982713a0440d1d342dd5eec65b122a61b71 \
+-    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=git/external/glslang/src;rev=1b65bd602b23d401d1c4c86dfa90a36a52c66294 \
+-    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=git/external/spirv-headers/src;rev=767e901c986e9755a17e7939b3046fc2911a4bbd \
+-    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=git/external/vulkan-docs/src;rev=645c59c70e826d9738b6bb103316c03d887dfed3 \
+-    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=git/external/vulkan-validationlayers/src;rev=6cf616f131e9870c499a50441bca2d07ccda9733 \
+-    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=git/external/amber/src;rev=6fa5ac1fb3b01c93eef3caa2aeb8841565e38d90 \
+-    git://github.com/open-source-parsers/jsoncpp.git;protocol=https;nobranch=1;destsuffix=git/external/jsoncpp/src;rev=9059f5cad030ba11d37818847443a53918c327b1 \
+-    git://github.com/Igalia/vk_video_samples.git;protocol=https;nobranch=1;destsuffix=git/external/nvidia-video-samples/src;rev=45fe88b456c683120138f052ea81f0a958ff3ec4 \
+-    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=git/external/vulkan-video-samples/src;rev=0e87744edbb84c9c56c3fc8de9ea5150af5ee4ea \
+-    git://github.com/Igalia/video_generator.git;protocol=https;nobranch=1;destsuffix=git/external/video_generator/src;rev=426300e12a5cc5d4676807039a1be237a2b68187 \
++    https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/external/renderdoc/src;sha256sum=e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e \
++    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-tools/src;rev=3364b982713a0440d1d342dd5eec65b122a61b71 \
++    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/glslang/src;rev=1b65bd602b23d401d1c4c86dfa90a36a52c66294 \
++    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-headers/src;rev=767e901c986e9755a17e7939b3046fc2911a4bbd \
++    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-docs/src;rev=645c59c70e826d9738b6bb103316c03d887dfed3 \
++    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-validationlayers/src;rev=6cf616f131e9870c499a50441bca2d07ccda9733 \
++    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/amber/src;rev=6fa5ac1fb3b01c93eef3caa2aeb8841565e38d90 \
++    git://github.com/open-source-parsers/jsoncpp.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/jsoncpp/src;rev=9059f5cad030ba11d37818847443a53918c327b1 \
++    git://github.com/Igalia/vk_video_samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/nvidia-video-samples/src;rev=45fe88b456c683120138f052ea81f0a958ff3ec4 \
++    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-video-samples/src;rev=0e87744edbb84c9c56c3fc8de9ea5150af5ee4ea \
++    git://github.com/Igalia/video_generator.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/video_generator/src;rev=426300e12a5cc5d4676807039a1be237a2b68187 \
+     file://0001-Fix-missing-include-cstdint-causing-build-failures.patch;patchdir=external/amber/src \
+ "
+diff --git a/meta-oe/recipes-graphics/wayland/libei_1.4.1.bb b/meta-oe/recipes-graphics/wayland/libei_1.4.1.bb
+index a2705785ae..764616906f 100644
+--- a/meta-oe/recipes-graphics/wayland/libei_1.4.1.bb
++++ b/meta-oe/recipes-graphics/wayland/libei_1.4.1.bb
+@@ -16,7 +16,6 @@ DEPENDS = " \
+ 
+ SRC_URI = "git://gitlab.freedesktop.org/libinput/libei.git;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "9e0413cbc7d3ae6656266890425f152589ddf74d"
+ 
+ inherit meson pkgconfig
+diff --git a/meta-oe/recipes-graphics/wayland/waylandpp_1.0.0.bb b/meta-oe/recipes-graphics/wayland/waylandpp_1.0.0.bb
+index c1f5f4ed8e..bb909a313a 100644
+--- a/meta-oe/recipes-graphics/wayland/waylandpp_1.0.0.bb
++++ b/meta-oe/recipes-graphics/wayland/waylandpp_1.0.0.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/NilsBrause/waylandpp.git;protocol=https;branch=maste
+ DEPENDS = "pugixml"
+ DEPENDS:append:class-target = " waylandpp-native wayland virtual/egl virtual/libgles2"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "4321ed5c7b4bffa41b8a2a13dc7f3ece1191f4f3"
+ 
+ inherit cmake pkgconfig features_check
+diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
+index 74f80e1844..1493eed7af 100644
+--- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
++++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/LibVNC/x11vnc;branch=master;protocol=https \
+            file://starting-fix.patch \
+            file://CVE-2020-29074.patch \
+            "
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "\
+ 	jpeg \
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb
+index 8b4526fc5e..8fd2ae2e84 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb
+@@ -9,6 +9,5 @@ DEPENDS += "virtual/libx11 libdrm xorgproto"
+ SRCREV = "8bbdb2ae3bb8ef649999a8da33ddbe11a04763b8"
+ SRC_URI = "git://anongit.freedesktop.org/xorg/driver/xf86-video-armsoc;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN} += "xserver-xorg-module-exa"
+diff --git a/meta-oe/recipes-graphics/yad/yad_6.0.bb b/meta-oe/recipes-graphics/yad/yad_6.0.bb
+index 9e46215fd8..64c12f5904 100644
+--- a/meta-oe/recipes-graphics/yad/yad_6.0.bb
++++ b/meta-oe/recipes-graphics/yad/yad_6.0.bb
+@@ -13,6 +13,5 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ DEPENDS = "gtk+3 glib-2.0-native intltool-native"
+ 
+-S = "${WORKDIR}/git"
+ 
+ FILES:${PN} += "${datadir}/icons/"
+diff --git a/meta-oe/recipes-graphics/ydotool/ydotool_git.bb b/meta-oe/recipes-graphics/ydotool/ydotool_git.bb
+index 3acf70235e..7562271d90 100644
+--- a/meta-oe/recipes-graphics/ydotool/ydotool_git.bb
++++ b/meta-oe/recipes-graphics/ydotool/ydotool_git.bb
+@@ -8,7 +8,6 @@ PV = "1.0.4+git"
+ SRC_URI = "git://github.com/ReimuNotMoe/ydotool;protocol=https;branch=master"
+ SRCREV = "0c295346d55afcc6aebaaee564333b3e1efabcbd"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake systemd
+ 
+diff --git a/meta-oe/recipes-kernel/agent-proxy/agent-proxy_1.97.bb b/meta-oe/recipes-kernel/agent-proxy/agent-proxy_1.97.bb
+index 0e17800c4b..3bbfe4cf9f 100644
+--- a/meta-oe/recipes-kernel/agent-proxy/agent-proxy_1.97.bb
++++ b/meta-oe/recipes-kernel/agent-proxy/agent-proxy_1.97.bb
+@@ -16,7 +16,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kgdb/agent-proxy.git;protoc
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install () {
+     install -d ${D}${bindir}
+diff --git a/meta-oe/recipes-kernel/blktests/blktests.bb b/meta-oe/recipes-kernel/blktests/blktests.bb
+index 2fb6db9184..ded03a4de2 100644
+--- a/meta-oe/recipes-kernel/blktests/blktests.bb
++++ b/meta-oe/recipes-kernel/blktests/blktests.bb
+@@ -10,7 +10,6 @@ SRC_URI = " \
+ 	git://github.com/osandov/blktests.git;nobranch=1;protocol=https \
+ 	"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep
+ 
+diff --git a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb
+index 4b6026ebc0..fe980e3e6f 100644
+--- a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb
++++ b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_12.0.1.1105_p3.bb
+@@ -14,7 +14,6 @@ SRCREV = "a0eb4805dbb232f02f156b9351a23790c1a4cec7"
+ 
+ PE = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit allarch
+ 
+diff --git a/meta-oe/recipes-kernel/crash/crash.inc b/meta-oe/recipes-kernel/crash/crash.inc
+index 45fc9cd1fd..3c9a99ae4a 100644
+--- a/meta-oe/recipes-kernel/crash/crash.inc
++++ b/meta-oe/recipes-kernel/crash/crash.inc
+@@ -14,9 +14,8 @@ DEPENDS = "zlib readline coreutils-native ncurses-native"
+ 
+ INC_PR = "r1"
+ 
+-S = "${WORKDIR}/git"
+ SRC_URI = "git://github.com/crash-utility/${BPN}.git;branch=master;protocol=https \
+-           ${GNU_MIRROR}/gdb/gdb-10.2.tar.gz;name=gdb;subdir=git \
++           ${GNU_MIRROR}/gdb/gdb-10.2.tar.gz;name=gdb;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
+            file://7001force_define_architecture.patch \
+            file://7003cross_ranlib.patch \
+            file://0001-cross_add_configure_option.patch \
+diff --git a/meta-oe/recipes-kernel/drgn/python3-drgn_0.0.31.bb b/meta-oe/recipes-kernel/drgn/python3-drgn_0.0.31.bb
+index 035ccd58a7..b1ff8d4019 100644
+--- a/meta-oe/recipes-kernel/drgn/python3-drgn_0.0.31.bb
++++ b/meta-oe/recipes-kernel/drgn/python3-drgn_0.0.31.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7c83d30e99508d6b790eacdd3abab846"
+ SRC_URI = "git://github.com/osandov/drgn.git;protocol=https;branch=main;tag=v${PV}"
+ SRCREV = "8209a147fb61deed38ca376d063bbff0343ca234"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "\
+     autoconf-native \
+diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
+index 5095dbb253..b5b8075fd7 100644
+--- a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
++++ b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
+@@ -35,7 +35,6 @@ IANA_ENTERPRISE_NUMBERS ?= ""
+ #IANA_ENTERPRISE_NUMBERS = "http://www.iana.org/assignments/enterprise-numbers.txt;name=iana-enterprise-numbers;downloadfilename=iana-enterprise-numbers"
+ #SRC_URI[iana-enterprise-numbers.sha256sum] = "cdd97fc08325667434b805eb589104ae63f7a9eb720ecea73cb55110b383934c"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index 3a058cd286..648a5d7c5a 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
+ 
+ DEPENDS = "rsync-native llvm-native"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ # for musl libc
+ SRC_URI:append:libc-musl = "\
+@@ -46,7 +45,7 @@ do_compile[depends] += "virtual/kernel:do_install"
+ 
+ inherit linux-kernel-base module-base kernel-arch ptest siteinfo
+ 
+-S = "${WORKDIR}/${BP}"
++S = "${UNPACKDIR}/${BP}"
+ 
+ DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
+ 
+diff --git a/meta-oe/recipes-kernel/kpatch/kpatch.inc b/meta-oe/recipes-kernel/kpatch/kpatch.inc
+index 4d187200ec..b8ef092262 100644
+--- a/meta-oe/recipes-kernel/kpatch/kpatch.inc
++++ b/meta-oe/recipes-kernel/kpatch/kpatch.inc
+@@ -22,7 +22,6 @@ EXTRA_OEMAKE = " \
+ 	CC='${CC}' \
+ 	"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install () {
+ 	oe_runmake install
+diff --git a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
+index ba3983e6ff..6521830b7a 100644
+--- a/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
++++ b/meta-oe/recipes-kernel/kpatch/kpatch_git.bb
+@@ -6,6 +6,5 @@ SRCREV = "0c3c21930895f6582a5c9d9d797f7e11ff41ffb2"
+ 
+ PV = "0.9.1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.0.0.bb b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.0.0.bb
+index ff54d72bca..1a90dcf998 100644
+--- a/meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.0.0.bb
++++ b/meta-oe/recipes-kernel/ktls-utils/ktls-utils_1.0.0.bb
+@@ -14,7 +14,6 @@ SRC_URI = " \
+ 	file://0002-tlshd-configure.ac-Use-AC_CHECK_HEADER-instead-of-AC.patch \
+ 	"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep pkgconfig systemd
+ 
+diff --git a/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb b/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
+index 45caca0114..36312c386b 100644
+--- a/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
++++ b/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
+@@ -17,7 +17,7 @@ SRCREV = "09b9e83102eb8ab9e540d36b4559c55f3bcdb95d"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|mips64).*-linux"
+ 
+-S = "${WORKDIR}/git/src"
++S = "${UNPACKDIR}/${BP}/src"
+ 
+ EXTRA_OEMAKE += "DESTDIR=${D} LIBDIR=${libdir} INCLUDEDIR=${includedir}"
+ EXTRA_OEMAKE:append:class-native = " UAPIDIR=${includedir}"
+diff --git a/meta-oe/recipes-kernel/libpfm/libpfm4_4.13.0.bb b/meta-oe/recipes-kernel/libpfm/libpfm4_4.13.0.bb
+index be0659ad2a..f87502930e 100644
+--- a/meta-oe/recipes-kernel/libpfm/libpfm4_4.13.0.bb
++++ b/meta-oe/recipes-kernel/libpfm/libpfm4_4.13.0.bb
+@@ -26,7 +26,7 @@ EXTRA_OEMAKE:append:powerpc64 = " ARCH=\"powerpc\" BITMODE=\"64\""
+ EXTRA_OEMAKE:append:powerpc64le = " ARCH=\"powerpc\" BITMODE=\"64\""
+ EXTRA_OEMAKE:append:aarch64 = " ARCH=\"arm64\""
+ 
+-S = "${WORKDIR}/libpfm-${PV}"
++S = "${UNPACKDIR}/libpfm-${PV}"
+ 
+ do_install () {
+ 	oe_runmake install
+diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.1.bb b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.1.bb
+index 66869b29a9..6b9e8b9b38 100644
+--- a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.1.bb
++++ b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.1.bb
+@@ -13,7 +13,6 @@ SRCREV = "417c2e3aa21af670cc5c13db633dd35292f2d0fa"
+ SRC_URI = "git://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=${BPN};protocol=https \
+            file://0001-makefile-Do-not-preserve-ownership-in-cp-command.patch \
+            "
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig
+ 
+diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb
+index 90e847c137..4073381899 100644
+--- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb
++++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb
+@@ -18,7 +18,6 @@ SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https;branch=master \
+            file://0001-corestripper-Fix-uninitialized-warning.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ SYSTEMD_SERVICE:${PN} = "minicoredumper.service"
+ SYSTEMD_AUTO_ENABLE = "enable"
+diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.13.bb b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.13.bb
+index 037e30abc4..219629d4d7 100644
+--- a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.13.bb
++++ b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.13.bb
+@@ -9,7 +9,6 @@ SRCREV = "0987732b013936ad771334f51cba31c453c8a9c9"
+ SRC_URI = "git://github.com/intel/pm-graph.git;branch=master;protocol=https \
+            file://0001-Makefile-fix-multilib-build-failure.patch \
+ "
+-S = "${WORKDIR}/git"
+ 
+ # Apart from the listed RDEPENDS, analyze-suspend depends on some features
+ # provided by the kernel. These options are:
+diff --git a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb
+index 11c4037b23..6782dec228 100644
+--- a/meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb
++++ b/meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/trace-cmd.git;b
+            file://0001-Do-not-emit-useless-rpath.patch"
+ SRCREV = "18233e4c32857cb7ddd4960beeec8360ed834fc5"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS += "libtraceevent libtracefs zstd xmlto-native asciidoc-native swig-native bison-native flex-native"
+ 
+diff --git a/meta-oe/recipes-kernel/turbostat/turbostat.bb b/meta-oe/recipes-kernel/turbostat/turbostat.bb
+index 8ac15164d4..f65699865e 100644
+--- a/meta-oe/recipes-kernel/turbostat/turbostat.bb
++++ b/meta-oe/recipes-kernel/turbostat/turbostat.bb
+@@ -23,8 +23,7 @@ SRC_URI += "\
+             file://COPYING \
+             "
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ DEPENDS = "libcap"
+diff --git a/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb b/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb
+index e7e4ca50af..aae17a9fd7 100644
+--- a/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb
++++ b/meta-oe/recipes-kernel/usbip-tools/usbip-tools.bb
+@@ -28,7 +28,7 @@ do_configure[depends] += "virtual/kernel:do_shared_workdir"
+ 
+ # We need to set S, for not being set to STAGING_KERNEL_DIR, and by that
+ # be wiped when we prune dest below. We just set it to usbip-tools-1.0
+-S = "${WORKDIR}/${BP}"
++S = "${UNPACKDIR}/${BP}"
+ 
+ # Copy the source files from KERNEL/tools/usb/usbip to ${S}
+ do_configure[prefuncs] += "copy_usbip_source_from_kernel"
+diff --git a/meta-oe/recipes-multimedia/faad2/faad2_2.11.2.bb b/meta-oe/recipes-multimedia/faad2/faad2_2.11.2.bb
+index 9a7ee412da..83fcaa248d 100644
+--- a/meta-oe/recipes-multimedia/faad2/faad2_2.11.2.bb
++++ b/meta-oe/recipes-multimedia/faad2/faad2_2.11.2.bb
+@@ -12,6 +12,5 @@ PV .= "+git"
+ SRC_URI = "git://github.com/knik0/faad2.git;branch=master;protocol=https"
+ SRCREV = "673a22a3c7c33e96e2ff7aae7c4d2bc190dfbf92"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+diff --git a/meta-oe/recipes-multimedia/jack/a2jmidid_9.bb b/meta-oe/recipes-multimedia/jack/a2jmidid_9.bb
+index da92a80ce0..7f8988c3c3 100644
+--- a/meta-oe/recipes-multimedia/jack/a2jmidid_9.bb
++++ b/meta-oe/recipes-multimedia/jack/a2jmidid_9.bb
+@@ -16,7 +16,6 @@ SRC_URI = " \
+     file://ppc_musl_ucontext.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-multimedia/jack/jack-example-tools_4.bb b/meta-oe/recipes-multimedia/jack/jack-example-tools_4.bb
+index a868a2969d..58bbd8cac3 100644
+--- a/meta-oe/recipes-multimedia/jack/jack-example-tools_4.bb
++++ b/meta-oe/recipes-multimedia/jack/jack-example-tools_4.bb
+@@ -9,7 +9,6 @@ DEPENDS = "jack"
+ SRC_URI = "git://github.com/jackaudio/jack-example-tools.git;branch=main;protocol=https"
+ SRCREV = "33de8b4285fa5054af1b37fe0496c110604ed564"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-multimedia/jack/jack_1.9.22.bb b/meta-oe/recipes-multimedia/jack/jack_1.9.22.bb
+index d4e6447aad..3b3ea85349 100644
+--- a/meta-oe/recipes-multimedia/jack/jack_1.9.22.bb
++++ b/meta-oe/recipes-multimedia/jack/jack_1.9.22.bb
+@@ -24,7 +24,6 @@ SRCREV = "4f58969432339a250ce87fe855fb962c67d00ddb"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit waf pkgconfig
+ 
+diff --git a/meta-oe/recipes-multimedia/libass/libass_0.17.4.bb b/meta-oe/recipes-multimedia/libass/libass_0.17.4.bb
+index 297b7c01e8..3165736981 100644
+--- a/meta-oe/recipes-multimedia/libass/libass_0.17.4.bb
++++ b/meta-oe/recipes-multimedia/libass/libass_0.17.4.bb
+@@ -9,7 +9,6 @@ DEPENDS = "fontconfig freetype fribidi harfbuzz"
+ 
+ SRC_URI = "git://github.com/libass/libass.git;protocol=https;branch=master"
+ SRCREV = "bbb3c7f1570a4a021e52683f3fbdf74fe492ae84"
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-multimedia/libid3tag/libid3tag_0.15.1b.bb b/meta-oe/recipes-multimedia/libid3tag/libid3tag_0.15.1b.bb
+index 82db2f159e..23487329fb 100644
+--- a/meta-oe/recipes-multimedia/libid3tag/libid3tag_0.15.1b.bb
++++ b/meta-oe/recipes-multimedia/libid3tag/libid3tag_0.15.1b.bb
+@@ -21,6 +21,6 @@ UPSTREAM_CHECK_REGEX = "/projects/mad/files/libid3tag/(?P<pver>.*)/$"
+ 
+ SRC_URI[sha256sum] = "63da4f6e7997278f8a3fef4c6a372d342f705051d1eeb6a46a86b03610e26151"
+ 
+-S = "${WORKDIR}/libid3tag-${PV}"
++S = "${UNPACKDIR}/libid3tag-${PV}"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.3.bb b/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.3.bb
+index 505fca4c8f..2405126e5c 100644
+--- a/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.3.bb
++++ b/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.3.bb
+@@ -13,7 +13,6 @@ SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1 \
+            "
+ 
+ SRCREV = "4a3b22d2600f92d8706fb72d85d52bfee2acbd54"
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE = " \
+ 	-DCMAKE_BUILD_TYPE=Release \
+diff --git a/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb b/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
+index 3f5a052906..0f89574b9a 100644
+--- a/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
++++ b/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
+@@ -25,7 +25,7 @@ SRC_URI[sha256sum] = "bbfac3ed6bfbc2823d3775ebb931087371e142bb0e9bb1bee51a76a6e0
+ 
+ CVE_PRODUCT:append = " mad_libmad"
+ 
+-S = "${WORKDIR}/libmad-${PV}"
++S = "${UNPACKDIR}/libmad-${PV}"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.5.2.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.5.2.bb
+index 02958ef023..642f34f71d 100644
+--- a/meta-oe/recipes-multimedia/libopus/libopus_1.5.2.bb
++++ b/meta-oe/recipes-multimedia/libopus/libopus_1.5.2.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4b365c2155d66e550e1447075d6744a5"
+ SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "65c1d2f78b9f2fb20082c38cbe47c951ad5839345876e46941612ee87f9a7ce1"
+ 
+-S = "${WORKDIR}/opus-${PV}"
++S = "${UNPACKDIR}/opus-${PV}"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-multimedia/libopusenc/libopusenc_0.2.1.bb b/meta-oe/recipes-multimedia/libopusenc/libopusenc_0.2.1.bb
+index 6d941ae5d3..fb822d7a0e 100644
+--- a/meta-oe/recipes-multimedia/libopusenc/libopusenc_0.2.1.bb
++++ b/meta-oe/recipes-multimedia/libopusenc/libopusenc_0.2.1.bb
+@@ -14,6 +14,6 @@ UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
+ SRC_URI = "https://ftp.osuosl.org/pub/xiph/releases/opus/libopusenc-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "8298db61a8d3d63e41c1a80705baa8ce9ff3f50452ea7ec1c19a564fe106cbb9"
+ 
+-S = "${WORKDIR}/libopusenc-${PV}"
++S = "${UNPACKDIR}/libopusenc-${PV}"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-multimedia/libxmp/libxmp_4.6.3.bb b/meta-oe/recipes-multimedia/libxmp/libxmp_4.6.3.bb
+index b8d916e70a..c302f65ed5 100644
+--- a/meta-oe/recipes-multimedia/libxmp/libxmp_4.6.3.bb
++++ b/meta-oe/recipes-multimedia/libxmp/libxmp_4.6.3.bb
+@@ -8,4 +8,3 @@ inherit cmake pkgconfig
+ SRC_URI = "git://github.com/libxmp/libxmp.git;protocol=https;branch=master;tag=libxmp-${PV}"
+ SRCREV = "bed660f8e530d399c38f27a5a7732f4e79740585"
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-multimedia/live555/live555_20210824.bb b/meta-oe/recipes-multimedia/live555/live555_20210824.bb
+index 80c770c3e3..1622a97fe1 100644
+--- a/meta-oe/recipes-multimedia/live555/live555_20210824.bb
++++ b/meta-oe/recipes-multimedia/live555/live555_20210824.bb
+@@ -18,7 +18,7 @@ MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.or
+ 
+ SRC_URI[sha256sum] = "ce95a1c79f6d18e959f9dc129b8529b711c60e76754acc285e60946303b923ec"
+ 
+-S = "${WORKDIR}/live"
++S = "${UNPACKDIR}/live"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+                     file://COPYING.LESSER;md5=e6a600fd5e1d9cbde2d983680233ad02 \
+diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.351.0.bb b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.351.0.bb
+index 272e293fd4..68a29dde91 100644
+--- a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.351.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.351.0.bb
+@@ -9,7 +9,6 @@ SRCREV = "3188549fba13bbdf3a5a98de2a38c2e71f04e21e"
+ 
+ inherit meson pkgconfig
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'vulkan opengl', d)} lcms"
+ 
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.40.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.40.0.bb
+index 3d54bbb341..3223dd69d7 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mpv_0.40.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.40.0.bb
+@@ -18,7 +18,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=570a9b3749dd0463a1778803b12a6dce"
+ 
+ SRCREV = "e48ac7ce08462f5e33af6ef9deeac6fa87eef01e"
+ SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/${@oe.utils.trim_version('${PV}', 2)};protocol=https"
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig mime-xdg
+ 
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb
+index afe217e1f3..0a3b5d28b6 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb
+@@ -33,7 +33,6 @@ SRC_URI = "\
+ 
+ SRCREV = "fc15e229d9d337e46d730f00647821adbbd58548"
+ 
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v4l-utils-(?P<pver>\d+(\.\d+)+)"
+ 
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb b/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
+index 699b5608db..87dc7a7be6 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/yavta_git.bb
+@@ -7,7 +7,6 @@ SRC_URI = "git://git.ideasonboard.org/yavta.git;branch=master;protocol=https \
+ SRCREV = "52c975e5542504ac10bed8b1d68df5c75951d202"
+ 
+ PV = "0.0"
+-S = "${WORKDIR}/git"
+ 
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+diff --git a/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb b/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb
+index 7384d2892f..651fbc4192 100644
+--- a/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb
++++ b/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/dbry/WavPack.git;branch=master;protocol=https \
+ 
+ SRCREV = "e03e8e29dc618e08e7baba9636e57ba1254874ce"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig lib_package
+ 
+diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.15.2.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.15.2.bb
+index f709541c20..a7cd76e0c7 100644
+--- a/meta-oe/recipes-multimedia/webm/libvpx_1.15.2.bb
++++ b/meta-oe/recipes-multimedia/webm/libvpx_1.15.2.bb
+@@ -12,7 +12,6 @@ SRC_URI += "git://chromium.googlesource.com/webm/libvpx;protocol=https;branch=ma
+            file://libvpx-configure-support-blank-prefix.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # ffmpeg links with this and fails
+ # sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIBC_2.4'
+diff --git a/meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb b/meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb
+index 3d100b870c..5023e4e842 100644
+--- a/meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb
++++ b/meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=db043791349ba57ad1169e1c92477cb6"
+ 
+ SRC_URI = "http://repository.maemo.org/pool/maemo/ossw/source/x/${BPN}/${BPN}_${PV}.tar.gz \
+            file://auxdir.patch;striplevel=0"
+-S = "${WORKDIR}/xpext-1.0"
++S = "${UNPACKDIR}/xpext-1.0"
+ 
+ inherit autotools pkgconfig features_check
+ # depends on virtual/libx11
+diff --git a/meta-oe/recipes-multimedia/xsp/xsp_1.0.0-8.bb b/meta-oe/recipes-multimedia/xsp/xsp_1.0.0-8.bb
+index 8b9247694c..5350cf1c65 100644
+--- a/meta-oe/recipes-multimedia/xsp/xsp_1.0.0-8.bb
++++ b/meta-oe/recipes-multimedia/xsp/xsp_1.0.0-8.bb
+@@ -7,7 +7,7 @@ SRC_URI = "http://repository.maemo.org/pool/maemo/ossw/source/x/xsp/${BPN}_${PV}
+            file://xsp-fix-pc.patch \
+            file://0001-fix-incompatible-pointer-types-build-error-in-gcc-15.patch \
+ "
+-S = "${WORKDIR}/Xsp"
++S = "${UNPACKDIR}/Xsp"
+ 
+ inherit autotools pkgconfig features_check
+ # depends on virtual/libx11
+diff --git a/meta-oe/recipes-navigation/geoclue/geoclue_2.7.2.bb b/meta-oe/recipes-navigation/geoclue/geoclue_2.7.2.bb
+index db0142502f..48b2535a03 100644
+--- a/meta-oe/recipes-navigation/geoclue/geoclue_2.7.2.bb
++++ b/meta-oe/recipes-navigation/geoclue/geoclue_2.7.2.bb
+@@ -17,7 +17,6 @@ SRC_URI = "git://gitlab.freedesktop.org/geoclue/geoclue.git;protocol=https;branc
+     file://0001-libgeoclue-don-t-try-to-use-g-ir-scanner-when-intros.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # Without this line, package is declared a library and named libgeoclue*
+ AUTO_LIBNAME_PKGS = ""
+diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
+index 40e51a6a43..bd15b0bda8 100644
+--- a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
++++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
+@@ -24,7 +24,6 @@ SRC_URI = " \
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/cyrusimap/cyrus-sasl/archives"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig useradd systemd
+ 
+diff --git a/meta-oe/recipes-printing/qpdf/qpdf_12.2.0.bb b/meta-oe/recipes-printing/qpdf/qpdf_12.2.0.bb
+index e615681687..8ed993aa78 100644
+--- a/meta-oe/recipes-printing/qpdf/qpdf_12.2.0.bb
++++ b/meta-oe/recipes-printing/qpdf/qpdf_12.2.0.bb
+@@ -20,7 +20,6 @@ EXTRA_OECMAKE = ' \
+ LDFLAGS:append:mipsarch = " -latomic"
+ LDFLAGS:append:riscv32 = " -latomic"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ?= "gnutls"
+ PACKAGECONFIG[gnutls] = "-DREQUIRE_CRYPTO_GNUTLS=ON,-DREQUIRE_CRYPTO_OPENSSL=ON"
+diff --git a/meta-oe/recipes-security/audit/audit_4.0.5.bb b/meta-oe/recipes-security/audit/audit_4.0.5.bb
+index 6fa025abd4..58100b206d 100644
+--- a/meta-oe/recipes-security/audit/audit_4.0.5.bb
++++ b/meta-oe/recipes-security/audit/audit_4.0.5.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;proto
+            file://auditd \
+           "
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "97c4ec3d68b5b199f2796d1e126c2144506bd228"
+ 
+ inherit autotools python3targetconfig update-rc.d systemd
+diff --git a/meta-oe/recipes-security/kernel-hardening-checker/kernel-hardening-checker_0.6.10.bb b/meta-oe/recipes-security/kernel-hardening-checker/kernel-hardening-checker_0.6.10.bb
+index f4816e733b..e7610ac785 100644
+--- a/meta-oe/recipes-security/kernel-hardening-checker/kernel-hardening-checker_0.6.10.bb
++++ b/meta-oe/recipes-security/kernel-hardening-checker/kernel-hardening-checker_0.6.10.bb
+@@ -15,7 +15,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
+ SRC_URI = "git://github.com/a13xp0p0v/kernel-hardening-checker;protocol=https;branch=master"
+ SRCREV = "f4dbe258ff3d37489962ea9cf210192ae7ff9280"
+ 
+-S = "${UNPACKDIR}/git"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+diff --git a/meta-oe/recipes-security/keyutils/keyutils_1.6.3.bb b/meta-oe/recipes-security/keyutils/keyutils_1.6.3.bb
+index 7b3d728216..86f45656f6 100644
+--- a/meta-oe/recipes-security/keyutils/keyutils_1.6.3.bb
++++ b/meta-oe/recipes-security/keyutils/keyutils_1.6.3.bb
+@@ -26,7 +26,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git;p
+            "
+ SRCREV = "cb3bb194cca88211cbfcdde2f10c0f43c3fb8ec3"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[manpages] = ""
+diff --git a/meta-oe/recipes-security/spectre-meltdown-checker/spectre-meltdown-checker_0.46.bb b/meta-oe/recipes-security/spectre-meltdown-checker/spectre-meltdown-checker_0.46.bb
+index 40858258c3..48f9a738bb 100644
+--- a/meta-oe/recipes-security/spectre-meltdown-checker/spectre-meltdown-checker_0.46.bb
++++ b/meta-oe/recipes-security/spectre-meltdown-checker/spectre-meltdown-checker_0.46.bb
+@@ -11,7 +11,6 @@ LIC_FILES_CHKSUM = "file://spectre-meltdown-checker.sh;beginline=2;endline=2;md5
+ SRC_URI = "git://github.com/speed47/spectre-meltdown-checker;protocol=https;branch=master"
+ SRCREV = "b8f8c81d519435c0871b13f02b5c4a72c5bffd5e"
+ 
+-S = "${UNPACKDIR}/git"
+ 
+ # binutils: readelf,objdump might be used for deeper analysis
+ # coreutils: dd with iflag=skip_bytes oflag=seek_bytes in some cases
+diff --git a/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb b/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb
+index 86acdc7aa1..f172168335 100644
+--- a/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb
++++ b/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb
+@@ -8,7 +8,7 @@ SECTION = "System Environment/Kernel"
+ SRC_URI = "http://jaist.dl.sourceforge.jp/tomoyo/70710/${BP}-20210910.tar.gz"
+ SRC_URI[sha256sum] = "47a12cdb1fe7bbd0b2e3486150fe1e754fa9c869aeefd42fd311c4022b78010a"
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING.tomoyo;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-oe/recipes-shells/mksh/mksh_59c.bb b/meta-oe/recipes-shells/mksh/mksh_59c.bb
+index e3a8ca8b5e..d27320cf1f 100644
+--- a/meta-oe/recipes-shells/mksh/mksh_59c.bb
++++ b/meta-oe/recipes-shells/mksh/mksh_59c.bb
+@@ -15,7 +15,7 @@ UPSTREAM_CHECK_REGEX = "${BPN}-R(?P<pver>.*)\.tgz"
+ 
+ inherit update-alternatives
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ ALTERNATIVE:${PN} = "sh"
+ ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
+diff --git a/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb b/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
+index 6d64ab71bf..85443984a2 100644
+--- a/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
++++ b/meta-oe/recipes-support/ace-cloud-editor/ace-cloud-editor_git.bb
+@@ -11,7 +11,6 @@ SRCREV = "812e2c56aed246931a667f16c28b096e34597016"
+ 
+ FILES:${PN} = "${datadir}/ace-builds"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS += "rsync-native"
+ 
+diff --git a/meta-oe/recipes-support/avro/avro-c++_1.11.3.bb b/meta-oe/recipes-support/avro/avro-c++_1.11.3.bb
+index 0ac1decccf..c1e8863fb3 100644
+--- a/meta-oe/recipes-support/avro/avro-c++_1.11.3.bb
++++ b/meta-oe/recipes-support/avro/avro-c++_1.11.3.bb
+@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/apache/avro;branch=${BRANCH};protocol=https \
+            file://0003-Update-CXX-standard-to-CXX14.patch \
+           "
+ 
+-S = "${WORKDIR}/git/lang/c++"
++S = "${UNPACKDIR}/${BP}/lang/c++"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/avro/avro-c_1.11.3.bb b/meta-oe/recipes-support/avro/avro-c_1.11.3.bb
+index 37a12006ba..f7da323710 100644
+--- a/meta-oe/recipes-support/avro/avro-c_1.11.3.bb
++++ b/meta-oe/recipes-support/avro/avro-c_1.11.3.bb
+@@ -14,6 +14,6 @@ SRC_URI = " \
+     file://0001-AVRO-3960-C-Fix-st-ANYARGS-warning-2798.patch;patchdir=../.. \
+     file://0001-AVRO-3957-C-Fix-typos-in-docs-and-examples-2795.patch;patchdir=../.. \
+ "
+-S = "${WORKDIR}/git/lang/c"
++S = "${UNPACKDIR}/${BP}/lang/c"
+ 
+ inherit cmake pkgconfig
+diff --git a/meta-oe/recipes-support/bcu/bcu_1.1.115.bb b/meta-oe/recipes-support/bcu/bcu_1.1.115.bb
+index 897e7031ca..260fba02a9 100644
+--- a/meta-oe/recipes-support/bcu/bcu_1.1.115.bb
++++ b/meta-oe/recipes-support/bcu/bcu_1.1.115.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/nxp-imx/bcu;protocol=https;branch=master \
+            "
+ SRCREV = "f081c69c26e330cf03ec790051c415c4716509d9"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "curl libyaml libusb1 openssl libftdi"
+ 
+diff --git a/meta-oe/recipes-support/bdwgc/bdwgc_8.2.8.bb b/meta-oe/recipes-support/bdwgc/bdwgc_8.2.8.bb
+index fe51c1029d..3c8c41cc03 100644
+--- a/meta-oe/recipes-support/bdwgc/bdwgc_8.2.8.bb
++++ b/meta-oe/recipes-support/bdwgc/bdwgc_8.2.8.bb
+@@ -26,7 +26,6 @@ DEPENDS = "libatomic-ops"
+ SRCREV = "ee59af3722e56de8404de6cd0c21c2493cc4d855"
+ SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-8_2;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/bmap-writer/bmap-writer_1.0.2.bb b/meta-oe/recipes-support/bmap-writer/bmap-writer_1.0.2.bb
+index 4f4f58def3..f49aa480da 100644
+--- a/meta-oe/recipes-support/bmap-writer/bmap-writer_1.0.2.bb
++++ b/meta-oe/recipes-support/bmap-writer/bmap-writer_1.0.2.bb
+@@ -10,7 +10,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e49f4652534af377a713df3d9dec60cb"
+ 
+ SRC_URI = "git://github.com/embetrix/${BPN};branch=master;protocol=https"
+ SRCREV = "7489280a7a1247f23543343aba4e95bf2f2e8fa6"
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "libtinyxml2 libarchive"
+ inherit cmake pkgconfig
+diff --git a/meta-oe/recipes-support/boost-sml/boost-sml_1.1.12.bb b/meta-oe/recipes-support/boost-sml/boost-sml_1.1.12.bb
+index a4b5650c90..0a2514237a 100644
+--- a/meta-oe/recipes-support/boost-sml/boost-sml_1.1.12.bb
++++ b/meta-oe/recipes-support/boost-sml/boost-sml_1.1.12.bb
+@@ -11,7 +11,6 @@ DEPENDS += "boost qemu-native"
+ SRC_URI = "git://github.com/boost-ext/sml.git;protocol=https;branch=master"
+ SRCREV = "cd3ef80206b71463de96d6b682cfdc99703ec147"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/btop/btop_1.4.3.bb b/meta-oe/recipes-support/btop/btop_1.4.3.bb
+index b0d74d49d7..9a5a21c56d 100644
+--- a/meta-oe/recipes-support/btop/btop_1.4.3.bb
++++ b/meta-oe/recipes-support/btop/btop_1.4.3.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/aristocratos/btop.git;protocol=https;branch=main;tag
+            "
+ SRCREV = "3f1ccd9f6c455fef6d4d8cfbc8ed71b86961323d"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/c-periphery/c-periphery_2.4.3.bb b/meta-oe/recipes-support/c-periphery/c-periphery_2.4.3.bb
+index f512111d66..058ede614e 100644
+--- a/meta-oe/recipes-support/c-periphery/c-periphery_2.4.3.bb
++++ b/meta-oe/recipes-support/c-periphery/c-periphery_2.4.3.bb
+@@ -11,7 +11,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e88456d0a60de4c71ff4d787c212f253"
+ SRC_URI = "git://github.com/vsergeev/c-periphery;protocol=https;branch=master"
+ SRCREV = "911e989fe41eb90c7df274cb54555346caf2a632"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb
+index 18db0721de..63500def05 100644
+--- a/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_2.2.0.bb
+@@ -8,7 +8,6 @@ DEPENDS = "libeigen glog"
+ SRC_URI = "git://github.com/ceres-solver/ceres-solver.git;branch=master;protocol=https"
+ SRCREV = "85331393dc0dff09f6fb9903ab0c4bfa3e134b01"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/cli11/cli11_2.3.2.bb b/meta-oe/recipes-support/cli11/cli11_2.3.2.bb
+index ef3c951bbf..346ccd6c69 100644
+--- a/meta-oe/recipes-support/cli11/cli11_2.3.2.bb
++++ b/meta-oe/recipes-support/cli11/cli11_2.3.2.bb
+@@ -11,7 +11,6 @@ SRC_URI += "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https \
+             file://0001-Do-not-download-the-catch-framework-during-configure.patch"
+ 
+ SRC_URI[sha256sum] = "ea379c4a3cb5799027b1eb451163dff065a3d641aaba23bf4e24ee6b536bd9bc"
+-S = "${WORKDIR}/git"
+ 
+ do_configure:prepend() {
+     mkdir -p ${S}/tests/catch2
+diff --git a/meta-oe/recipes-support/cmark/cmark_0.31.1.bb b/meta-oe/recipes-support/cmark/cmark_0.31.1.bb
+index 1edb95e455..bbbb36dace 100644
+--- a/meta-oe/recipes-support/cmark/cmark_0.31.1.bb
++++ b/meta-oe/recipes-support/cmark/cmark_0.31.1.bb
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=81f9cae6293cc0345a9144b78152ab62"
+ 
+ SRC_URI = "git://github.com/commonmark/cmark.git;branch=master;protocol=https"
+ SRCREV = "bb3678d7a73cb02d35c8876ecd097072636200a8"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake lib_package
+ 
+diff --git a/meta-oe/recipes-support/composefs/composefs_1.0.8.bb b/meta-oe/recipes-support/composefs/composefs_1.0.8.bb
+index c1df5dce03..f2bae91f44 100644
+--- a/meta-oe/recipes-support/composefs/composefs_1.0.8.bb
++++ b/meta-oe/recipes-support/composefs/composefs_1.0.8.bb
+@@ -16,7 +16,6 @@ LIC_FILES_CHKSUM = "\
+ SRCREV = "858ce1b38e1534c2602eb431124b5dca706bc746"
+ SRC_URI = "git://github.com/containers/composefs.git;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson
+ 
+diff --git a/meta-oe/recipes-support/consolation/consolation_0.0.9.bb b/meta-oe/recipes-support/consolation/consolation_0.0.9.bb
+index 17981b6e9b..a1523be376 100644
+--- a/meta-oe/recipes-support/consolation/consolation_0.0.9.bb
++++ b/meta-oe/recipes-support/consolation/consolation_0.0.9.bb
+@@ -17,7 +17,6 @@ DEPENDS = " \
+ SRC_URI = "git://salsa.debian.org/consolation-team/consolation.git;branch=master"
+ SRCREV = "5ef08f0cd6ede62de14de477b74fc3611108c676"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig systemd
+ 
+diff --git a/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb b/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb
+index 8b50cb0654..4b8bf162fa 100644
+--- a/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb
++++ b/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb
+@@ -16,7 +16,6 @@ SRC_URI = "\
+     file://a53f123040998744602f190944464af0e159ea19.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.19.bb b/meta-oe/recipes-support/cpprest/cpprest_2.10.19.bb
+index 1444974b44..ec7be4ad37 100644
+--- a/meta-oe/recipes-support/cpprest/cpprest_2.10.19.bb
++++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.19.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=maste
+ # tag 2.10.19
+ SRCREV = "411a109150b270f23c8c97fa4ec9a0a4a98cdecf"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
+index ee2f91343e..676028efa1 100644
+--- a/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
++++ b/meta-oe/recipes-support/cpulimit/cpulimit_0.2.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/opsengine/cpulimit.git;protocol=https;branch=master
+            file://0002-busy.c-Fix-incompatible-pointer-type-error.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_compile() {
+     oe_runmake all
+diff --git a/meta-oe/recipes-support/crucible/crucible_2023.11.02.bb b/meta-oe/recipes-support/crucible/crucible_2023.11.02.bb
+index 8966194704..132395e023 100644
+--- a/meta-oe/recipes-support/crucible/crucible_2023.11.02.bb
++++ b/meta-oe/recipes-support/crucible/crucible_2023.11.02.bb
+@@ -9,7 +9,6 @@ require ${BPN}-go-mods.inc
+ 
+ SRCREV = "dec27cd4e0e0db106c0a21d429c04ca8d36bbdd5"
+ 
+-S = "${WORKDIR}/git"
+ 
+ GO_IMPORT = "github.com/usbarmory/crucible"
+ GO_INSTALL = "\
+diff --git a/meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-14.bb b/meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-14.bb
+index ece30a598b..04362db7e5 100644
+--- a/meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-14.bb
++++ b/meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-14.bb
+@@ -8,8 +8,7 @@ SRC_URI = "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/
+            https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/23/Everything/source/SRPMS/c/${BPN}-${PV}.fc23.src.rpm;extract=ctapi-common.README"
+ SRC_URI[sha256sum] = "87a74eb0a66055c34ba2c5c919e74f3211c5950ae1c2cbab967fdf4137f5de91"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_compile() {
+     install -pm 644 ${UNPACKDIR}/ctapi-common.LICENSE LICENSE
+diff --git a/meta-oe/recipes-support/ctre/ctre_3.9.0.bb b/meta-oe/recipes-support/ctre/ctre_3.9.0.bb
+index 3a09fe743c..901763f0ad 100644
+--- a/meta-oe/recipes-support/ctre/ctre_3.9.0.bb
++++ b/meta-oe/recipes-support/ctre/ctre_3.9.0.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2e982d844baa4df1c80de75470e0c5cb"
+ SRC_URI = "git://github.com/hanickadot/compile-time-regular-expressions.git;protocol=https;branch=main"
+ SRCREV = "eb9577aae3515d14e6c5564f9aeb046d2e7c1124"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/cxxopts/cxxopts_3.3.1.bb b/meta-oe/recipes-support/cxxopts/cxxopts_3.3.1.bb
+index 8df707b86f..7b0cc05979 100644
+--- a/meta-oe/recipes-support/cxxopts/cxxopts_3.3.1.bb
++++ b/meta-oe/recipes-support/cxxopts/cxxopts_3.3.1.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8de00431559a76a1b43f6fd44f8f6689"
+ SRC_URI = "git://github.com/jarro2783/cxxopts.git;protocol=https;branch=master"
+ SRCREV = "44380e5a44706ab7347f400698c703eb2a196202"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/cyaml/cyaml_1.4.1.bb b/meta-oe/recipes-support/cyaml/cyaml_1.4.1.bb
+index f63348a328..5f33c27c52 100644
+--- a/meta-oe/recipes-support/cyaml/cyaml_1.4.1.bb
++++ b/meta-oe/recipes-support/cyaml/cyaml_1.4.1.bb
+@@ -11,7 +11,6 @@ SRCREV = "07ff8654a270ec9b410acd3152b60de9e9f941af"
+ 
+ SRC_URI = "git://github.com/tlsa/libcyaml.git;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/daemonize/daemonize_git.bb b/meta-oe/recipes-support/daemonize/daemonize_git.bb
+index b0712e521b..bae04ca7a3 100644
+--- a/meta-oe/recipes-support/daemonize/daemonize_git.bb
++++ b/meta-oe/recipes-support/daemonize/daemonize_git.bb
+@@ -12,6 +12,5 @@ SRC_URI = " \
+     file://0001-fix-getopt.c-too-many-arguments-to-function-write-er.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_AUTORECONF += "--exclude=autoheader"
+diff --git a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
+index 3738b080ff..351a0a3041 100644
+--- a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
++++ b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
+@@ -31,7 +31,7 @@ SRC_URI[sha256sum] = "a55535012b2be7a52dcd9eccabb9a198b13be50d0384143bd3b32b8710
+ 
+ UPSTREAM_CHECK_URI = "http://cr.yp.to/daemontools/install.html"
+ 
+-S = "${WORKDIR}/admin/${BP}"
++S = "${UNPACKDIR}/admin/${BP}"
+ 
+ do_compile() {
+     ./package/compile
+diff --git a/meta-oe/recipes-support/dc/double-conversion_3.3.1.bb b/meta-oe/recipes-support/dc/double-conversion_3.3.1.bb
+index 50a36a2c27..31330faa17 100644
+--- a/meta-oe/recipes-support/dc/double-conversion_3.3.1.bb
++++ b/meta-oe/recipes-support/dc/double-conversion_3.3.1.bb
+@@ -6,7 +6,6 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1ea35644f0ec0d9767897115667e901f"
+ 
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRC_URI = " \
+         git://github.com/google/double-conversion.git;protocol=https;branch=master \
+diff --git a/meta-oe/recipes-support/devmem2/devmem2_2.0.bb b/meta-oe/recipes-support/devmem2/devmem2_2.0.bb
+index 5d2e8463e2..e601755af4 100644
+--- a/meta-oe/recipes-support/devmem2/devmem2_2.0.bb
++++ b/meta-oe/recipes-support/devmem2/devmem2_2.0.bb
+@@ -8,7 +8,6 @@ SRCREV = "5b395a946894eb4f4ef5d07c80a50a88573a541e"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CFLAGS += "-DFORCE_STRICT_ALIGNMENT"
+ 
+diff --git a/meta-oe/recipes-support/dhex/dhex_0.69.bb b/meta-oe/recipes-support/dhex/dhex_0.69.bb
+index 14e6ec7112..f292cf8d4f 100644
+--- a/meta-oe/recipes-support/dhex/dhex_0.69.bb
++++ b/meta-oe/recipes-support/dhex/dhex_0.69.bb
+@@ -13,7 +13,7 @@ SRC_URI = " \
+ "
+ SRC_URI[sha256sum] = "52730bcd1cf16bd4dae0de42531be9a4057535ec61ca38c0804eb8246ea6c41b"
+ 
+-S = "${WORKDIR}/dhex_${PV}"
++S = "${UNPACKDIR}/dhex_${PV}"
+ 
+ EXTRA_OEMAKE += "'CC=${CC}' 'LDFLAGS=${LDFLAGS}' 'CPPFLAGS=${CPPFLAGS}'"
+ 
+diff --git a/meta-oe/recipes-support/digitemp/digitemp_3.7.2.bb b/meta-oe/recipes-support/digitemp/digitemp_3.7.2.bb
+index 5272b8ea06..baddf42e6b 100644
+--- a/meta-oe/recipes-support/digitemp/digitemp_3.7.2.bb
++++ b/meta-oe/recipes-support/digitemp/digitemp_3.7.2.bb
+@@ -11,7 +11,6 @@ SRC_URI = " \
+ 
+ SRCREV = "a162e63aad35358aab325388f3d5e88121606419"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "ds9097 ds9097u \
+                 SYSTYPE='Linux' \
+diff --git a/meta-oe/recipes-support/dool/dool_1.3.4.bb b/meta-oe/recipes-support/dool/dool_1.3.4.bb
+index 25662a0271..d18f5c8b01 100644
+--- a/meta-oe/recipes-support/dool/dool_1.3.4.bb
++++ b/meta-oe/recipes-support/dool/dool_1.3.4.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/scottchiefbaker/dool.git;branch=master;protocol=http
+ 
+ SRCREV = "5068abef0a960c173a91e84a45e7fea1b0a802c0"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+     oe_runmake 'DESTDIR=${D}' install
+diff --git a/meta-oe/recipes-support/driverctl/driverctl_0.115.bb b/meta-oe/recipes-support/driverctl/driverctl_0.115.bb
+index 970844f982..578a2b8d3b 100644
+--- a/meta-oe/recipes-support/driverctl/driverctl_0.115.bb
++++ b/meta-oe/recipes-support/driverctl/driverctl_0.115.bb
+@@ -10,7 +10,6 @@ RDEPENDS:${PN} += "bash bash-completion"
+ SRC_URI = "git://gitlab.com/driverctl/driverctl.git;branch=master;protocol=https"
+ SRCREV = "2ba60536eb20ca0a6a751bd8b6501dba84ec45d3"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig systemd features_check
+ 
+diff --git a/meta-oe/recipes-support/edid-decode/edid-decode_git.bb b/meta-oe/recipes-support/edid-decode/edid-decode_git.bb
+index 197e4b7184..fc8681ca44 100644
+--- a/meta-oe/recipes-support/edid-decode/edid-decode_git.bb
++++ b/meta-oe/recipes-support/edid-decode/edid-decode_git.bb
+@@ -13,7 +13,6 @@ PV = "0.0+git"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+     oe_runmake 'DESTDIR=${D}' install
+diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+index 3f6017977a..aa0e86db12 100644
+--- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
++++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+@@ -15,7 +15,7 @@ SRC_URI = "https://downloads.yoctoproject.org/mirror/sources/${BP}.tar.gz \
+ 
+ SRC_URI[sha256sum] = "ef9f7906484cfde4ba223b2682a37058f9a3c7d3bb1adda7a34a67402e2ffe55"
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ 
+ do_compile:prepend() {
+diff --git a/meta-oe/recipes-support/epeg/epeg_git.bb b/meta-oe/recipes-support/epeg/epeg_git.bb
+index e5277b1579..63c1455f25 100644
+--- a/meta-oe/recipes-support/epeg/epeg_git.bb
++++ b/meta-oe/recipes-support/epeg/epeg_git.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/mattes/epeg.git;branch=master;protocol=https \
+            file://0001-configure-Fix-checks-for-libjpeg-and-libexif.patch \
+            "
+ SRCREV = "9a175cd67eaa61fe45413d8da82da72936567047"
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/espeak/espeak_1.48.04.bb b/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
+index b4812d59d6..c80bf12ade 100644
+--- a/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
++++ b/meta-oe/recipes-support/espeak/espeak_1.48.04.bb
+@@ -10,7 +10,7 @@ SRC_URI = "http://downloads.sourceforge.net/espeak/espeak-1.48.04-source.zip \
+ "
+ SRC_URI[sha256sum] = "bf9a17673adffcc28ff7ea18764f06136547e97bbd9edf2ec612f09b207f0659"
+ 
+-S = "${WORKDIR}/espeak-${PV}-source"
++S = "${UNPACKDIR}/espeak-${PV}-source"
+ 
+ DEPENDS = "portaudio-v19 qemu-helper-native"
+ inherit siteinfo qemu
+diff --git a/meta-oe/recipes-support/evemu-tools/evemu-tools_git.bb b/meta-oe/recipes-support/evemu-tools/evemu-tools_git.bb
+index 491f10dda0..225d15cc7f 100644
+--- a/meta-oe/recipes-support/evemu-tools/evemu-tools_git.bb
++++ b/meta-oe/recipes-support/evemu-tools/evemu-tools_git.bb
+@@ -10,7 +10,6 @@ DEPENDS = "libevdev"
+ SRCREV = "86a5627dbeac8d9d9bc34326a758d6a477e876e4"
+ SRC_URI = "git://git@gitlab.freedesktop.org/libevdev/evemu.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ PV = "2.7.0+git"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb b/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
+index 3e33ab7953..c0fb32ab79 100644
+--- a/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
++++ b/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
+@@ -6,6 +6,5 @@ DEPENDS = "zlib expat brotli libinih"
+ 
+ SRC_URI = "git://github.com/Exiv2/exiv2.git;protocol=https;branch=0.28.x"
+ SRCREV = "a6a79ef064f131ffd03c110acce2d3edb84ffa2e"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake gettext
+diff --git a/meta-oe/recipes-support/fbset/fbset-modes.bb b/meta-oe/recipes-support/fbset/fbset-modes.bb
+index fcaf31795b..8ab79f6d7a 100644
+--- a/meta-oe/recipes-support/fbset/fbset-modes.bb
++++ b/meta-oe/recipes-support/fbset/fbset-modes.bb
+@@ -7,8 +7,7 @@ PV = "0.1.0"
+ 
+ SRC_URI = "file://fb.modes"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install() {
+     install -d ${D}${sysconfdir}
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
+index 109b2b599b..284f61c137 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
+@@ -10,7 +10,6 @@ inherit pkgconfig cmake
+ SRCREV = "eda5c99686e15327f2f37b9cadf307e852b96adf"
+ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CVE_PRODUCT = "freerdp"
+ 
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
+index e200f59b05..18af3229d7 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
+@@ -23,7 +23,6 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https
+            file://CVE-2024-32661.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE += " \
+     -DWITH_FFMPEG=OFF \
+diff --git a/meta-oe/recipes-support/function2/function2_4.2.4.bb b/meta-oe/recipes-support/function2/function2_4.2.4.bb
+index 98d05f6e25..588e44deaa 100644
+--- a/meta-oe/recipes-support/function2/function2_4.2.4.bb
++++ b/meta-oe/recipes-support/function2/function2_4.2.4.bb
+@@ -8,7 +8,6 @@ PV .= "+git"
+ 
+ SRC_URI += "gitsm://github.com/Naios/function2;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ inherit ptest
+diff --git a/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb b/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb
+index e75c88210c..5333c25a9c 100644
+--- a/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb
++++ b/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb
+@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = " \
+ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "f797055d9296b275e981f5f62d4e32e089614fc253d1ef2985851025b8a0ce87"
+ 
+-S = "${WORKDIR}/fuse-${PV}"
++S = "${UNPACKDIR}/fuse-${PV}"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
+ UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>3(\.\d+)+).tar.xz"
+diff --git a/meta-oe/recipes-support/gd/gd_2.3.3.bb b/meta-oe/recipes-support/gd/gd_2.3.3.bb
+index cc2c1571e6..ea5c487c52 100644
+--- a/meta-oe/recipes-support/gd/gd_2.3.3.bb
++++ b/meta-oe/recipes-support/gd/gd_2.3.3.bb
+@@ -19,7 +19,6 @@ SRC_URI = "git://github.com/libgd/libgd.git;nobranch=1;protocol=https \
+ 
+ SRCREV = "b5319a41286107b53daa0e08e402aa1819764bdc"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools binconfig gettext pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/gflags/gflags_2.2.2.bb b/meta-oe/recipes-support/gflags/gflags_2.2.2.bb
+index 15efc8cb00..8ea158eab3 100644
+--- a/meta-oe/recipes-support/gflags/gflags_2.2.2.bb
++++ b/meta-oe/recipes-support/gflags/gflags_2.2.2.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
+ SRC_URI = "git://github.com/gflags/gflags.git;branch=master;protocol=https"
+ SRCREV = "e171aa2d15ed9eb17054558e0b3a6a413bb01067"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/glog/glog_0.7.1.bb b/meta-oe/recipes-support/glog/glog_0.7.1.bb
+index 586afcad53..570d9a7e5f 100644
+--- a/meta-oe/recipes-support/glog/glog_0.7.1.bb
++++ b/meta-oe/recipes-support/glog/glog_0.7.1.bb
+@@ -12,7 +12,6 @@ SRC_URI = " \
+ 
+ SRCREV = "7b134a5c82c0c0b5698bb6bf7a835b230c5638e4"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/gnulib/gnulib_202401.bb b/meta-oe/recipes-support/gnulib/gnulib_202401.bb
+index 8f70cd7a09..f3fbb94ae8 100644
+--- a/meta-oe/recipes-support/gnulib/gnulib_202401.bb
++++ b/meta-oe/recipes-support/gnulib/gnulib_202401.bb
+@@ -16,7 +16,6 @@ SRCREV = "c99c8d491850dc3a6e0b8604a2729d8bc5c0eff1"
+ SRC_URI = "git://git.savannah.gnu.org/git/gnulib.git;branch=stable-${PV};protocol=https \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install () {
+     install -d ${D}/${datadir}/gnulib
+diff --git a/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.9.4.bb b/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.9.4.bb
+index 8fda2990d8..4558aa13d6 100644
+--- a/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.9.4.bb
++++ b/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.9.4.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SRC_URI = "git://github.com/google/benchmark.git;protocol=https;branch=main;tag=v${PV}"
+ SRCREV = "eddb0241389718a23a42db6af5f0164b6e0139af"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE = " \
+     -DBUILD_SHARED_LIBS=yes \
+diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.16.bb b/meta-oe/recipes-support/gperftools/gperftools_2.16.bb
+index 2b0fb534b3..c0fe586f6d 100644
+--- a/meta-oe/recipes-support/gperftools/gperftools_2.16.bb
++++ b/meta-oe/recipes-support/gperftools/gperftools_2.16.bb
+@@ -21,7 +21,6 @@ SRC_URI:append:libc-musl = " \
+ 
+ inherit autotools
+ 
+-S = "${WORKDIR}/git"
+ 
+ # On mips, we have the following error.
+ #   do_page_fault(): sending SIGSEGV to ls for invalid read access from 00000008
+diff --git a/meta-oe/recipes-support/gpm/gpm_git.bb b/meta-oe/recipes-support/gpm/gpm_git.bb
+index a379065912..155e56bdef 100644
+--- a/meta-oe/recipes-support/gpm/gpm_git.bb
++++ b/meta-oe/recipes-support/gpm/gpm_git.bb
+@@ -20,7 +20,6 @@ SRC_URI = "git://github.com/telmich/gpm;protocol=https;branch=master \
+            file://0003-Add-incomplete-type-definition-for-WINDOW-in-Gpm_Wge.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep update-rc.d systemd texinfo
+ 
+diff --git a/meta-oe/recipes-support/gradm/gradm_3.1-202111052217.bb b/meta-oe/recipes-support/gradm/gradm_3.1-202111052217.bb
+index 89119389fd..c0eb3e02d8 100644
+--- a/meta-oe/recipes-support/gradm/gradm_3.1-202111052217.bb
++++ b/meta-oe/recipes-support/gradm/gradm_3.1-202111052217.bb
+@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "2459290f367a47c8a1ce4ea2ec08359799ea33dc15ed4436439596ce88
+ 
+ UPSTREAM_CHECK_URI = "https://grsecurity.net/download"
+ 
+-S = "${WORKDIR}/gradm"
++S = "${UNPACKDIR}/gradm"
+ 
+ do_compile() {
+     oe_runmake 'CC=${CC}'                               \
+diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.134.bb b/meta-oe/recipes-support/gsoap/gsoap_2.8.134.bb
+index 5528e87e6c..0956eb121c 100644
+--- a/meta-oe/recipes-support/gsoap/gsoap_2.8.134.bb
++++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.134.bb
+@@ -13,7 +13,7 @@ inherit autotools
+ 
+ BBCLASSEXTEND = "native"
+ 
+-S = "${WORKDIR}/${BPN}-2.8"
++S = "${UNPACKDIR}/${BPN}-2.8"
+ 
+ EXTRA_OECONF += "--enable-ipv6 --enable-c-locale"
+ PARALLEL_MAKE = ""
+diff --git a/meta-oe/recipes-support/hidapi/hidapi_0.15.0.bb b/meta-oe/recipes-support/hidapi/hidapi_0.15.0.bb
+index 12823575f9..7d2c87d02d 100644
+--- a/meta-oe/recipes-support/hidapi/hidapi_0.15.0.bb
++++ b/meta-oe/recipes-support/hidapi/hidapi_0.15.0.bb
+@@ -12,4 +12,3 @@ inherit autotools pkgconfig
+ 
+ SRC_URI = "git://github.com/libusb/hidapi.git;protocol=https;branch=master"
+ SRCREV = "d6b2a974608dec3b76fb1e36c189f22b9cf3650c"
+-S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-support/hstr/hstr_3.1.0.bb b/meta-oe/recipes-support/hstr/hstr_3.1.0.bb
+index a641feef6f..0ee900ca3d 100644
+--- a/meta-oe/recipes-support/hstr/hstr_3.1.0.bb
++++ b/meta-oe/recipes-support/hstr/hstr_3.1.0.bb
+@@ -10,7 +10,7 @@ SRC_URI = "https://github.com/dvorka/hstr/releases/download/3.1/hstr-${PV}-tarba
+            file://0001-configure.ac-Don-t-use-AC_CHECK_FILE.patch \
+            file://0001-Use-OE-specific-checks-for-ncurses.patch"
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ SRC_URI[sha256sum] = "4dabf61f045f022bac8bc909e5fd96041af6c53df56d97dfa3cfbf49af4453a5"
+ 
+diff --git a/meta-oe/recipes-support/htop/htop_3.3.0.bb b/meta-oe/recipes-support/htop/htop_3.3.0.bb
+index cd5b766f0f..efb89bf3ae 100644
+--- a/meta-oe/recipes-support/htop/htop_3.3.0.bb
++++ b/meta-oe/recipes-support/htop/htop_3.3.0.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/htop-dev/htop.git;branch=main;protocol=https \
+ "
+ SRCREV = "68c970c7ef4a0682760ed570b3d82388ae7ccf54"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb b/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
+index ed342d6757..7f6fba995c 100644
+--- a/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
++++ b/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
+@@ -140,7 +140,6 @@ SRC_URI = "git://github.com/wooorm/dictionaries.git;branch=main;protocol=https"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+     for LANGUAGE in `ls -d1 ${S}/dictionaries/*` ; do
+diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.7.2.bb b/meta-oe/recipes-support/hunspell/hunspell_1.7.2.bb
+index afe75472a5..67a51f5c9f 100644
+--- a/meta-oe/recipes-support/hunspell/hunspell_1.7.2.bb
++++ b/meta-oe/recipes-support/hunspell/hunspell_1.7.2.bb
+@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = " \
+ SRCREV = "2969be996acad84b91ab3875b1816636fe61a40e"
+ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig gettext
+ 
+diff --git a/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb b/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
+index 8218b08084..03eb7ccbf1 100644
+--- a/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
++++ b/meta-oe/recipes-support/idevicerestore/idevicerestore_git.bb
+@@ -13,5 +13,4 @@ PV = "1.0.1+git"
+ SRCREV = "ecae6c6e8ca6b6bad080a1c73f10ffd0e67d75a7"
+ SRC_URI = "git://github.com/libimobiledevice/idevicerestore;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-43.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-43.bb
+index a892a55844..10d2150998 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-43.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-43.bb
+@@ -15,7 +15,6 @@ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>([0-9][\.|_|-]?)+)"
+ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
+ SRCREV = "a2d96f40e707ba54b57e7d98c3277d3ea6611ace"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig update-alternatives
+ export ac_cv_sys_file_offset_bits = "64"
+diff --git a/meta-oe/recipes-support/imapfilter/imapfilter_2.8.3.bb b/meta-oe/recipes-support/imapfilter/imapfilter_2.8.3.bb
+index 7b6ed6fdd9..f4905e3c0b 100644
+--- a/meta-oe/recipes-support/imapfilter/imapfilter_2.8.3.bb
++++ b/meta-oe/recipes-support/imapfilter/imapfilter_2.8.3.bb
+@@ -7,7 +7,6 @@ SRCREV = "72f7fa621357299bb6c8f5d29b4efbafcbd34bf7"
+ SRC_URI = "git://github.com/lefcha/imapfilter;protocol=https;branch=master;tag=v${PV} \
+            file://ldflags.patch \
+ "
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "openssl lua libpcre2"
+ 
+diff --git a/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb b/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb
+index 375c0b4e10..3b57f4ed81 100644
+--- a/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb
++++ b/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb
+@@ -21,7 +21,7 @@ SRC_URI = "\
+ 
+ SRC_URI[sha256sum] = "52ee3cee3bc500a42095f73c4584e223b4b9d2dfc1cd3e5df965c5952eba8c8d"
+ 
+-S = "${WORKDIR}/${DEBIAN_PGK_NAME}-${DEBIAN_PGK_VERSION}"
++S = "${UNPACKDIR}/${DEBIAN_PGK_NAME}-${DEBIAN_PGK_VERSION}"
+ 
+ EXTRA_OEMAKE = 'CC="${CC}" LD="${CC}" AR="${AR}" OBJCOPY="${OBJCOPY}"'
+ 
+diff --git a/meta-oe/recipes-support/inih/libinih_58.bb b/meta-oe/recipes-support/inih/libinih_58.bb
+index 2bcf2b4bd4..0ebeec6851 100644
+--- a/meta-oe/recipes-support/inih/libinih_58.bb
++++ b/meta-oe/recipes-support/inih/libinih_58.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a7a95d2af90376e85a05318794e6f202"
+ 
+ SRC_URI = "git://github.com/benhoyt/inih.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "5cc5e2c24642513aaa5b19126aad42d0e4e0923e"
+ 
+ inherit meson pkgconfig
+diff --git a/meta-oe/recipes-support/iniparser/iniparser_4.2.6.bb b/meta-oe/recipes-support/iniparser/iniparser_4.2.6.bb
+index aaabfaa085..9ab713ee92 100644
+--- a/meta-oe/recipes-support/iniparser/iniparser_4.2.6.bb
++++ b/meta-oe/recipes-support/iniparser/iniparser_4.2.6.bb
+@@ -7,7 +7,6 @@ SRCBRANCH = "main"
+ SRCREV = "4bef811283e0ec1658c60e09950bd5a1ddc92e4b"
+ 
+ SRC_URI = "git://gitlab.com/iniparser/iniparser.git;protocol=https;branch=${SRCBRANCH}"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/inotify-tools/inotify-tools_4.23.9.0.bb b/meta-oe/recipes-support/inotify-tools/inotify-tools_4.23.9.0.bb
+index fdec940268..cb77dc81b0 100644
+--- a/meta-oe/recipes-support/inotify-tools/inotify-tools_4.23.9.0.bb
++++ b/meta-oe/recipes-support/inotify-tools/inotify-tools_4.23.9.0.bb
+@@ -9,7 +9,6 @@ SRCREV = "5c2ab772338bcbe516306bf8cf1059ddf2fa6bb7"
+ SRC_URI = "git://github.com/${BPN}/${BPN};branch=master;protocol=https \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-support/jsoncons/jsoncons_1.3.2.bb b/meta-oe/recipes-support/jsoncons/jsoncons_1.3.2.bb
+index 781a0ef18f..314f67928a 100644
+--- a/meta-oe/recipes-support/jsoncons/jsoncons_1.3.2.bb
++++ b/meta-oe/recipes-support/jsoncons/jsoncons_1.3.2.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6ee7f7ed2001e4cde4679fdb8926f820"
+ SRC_URI = "git://github.com/danielaparker/jsoncons.git;protocol=https;branch=master;tag=v${PV}"
+ SRCREV = "64b9da1e9f15eeff4ec9d6bc856538db542118f2"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/lcms/lcms_2.16.bb b/meta-oe/recipes-support/lcms/lcms_2.16.bb
+index 8135f83a05..87b0979200 100644
+--- a/meta-oe/recipes-support/lcms/lcms_2.16.bb
++++ b/meta-oe/recipes-support/lcms/lcms_2.16.bb
+@@ -10,7 +10,7 @@ DEPENDS = "tiff"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
+-S = "${WORKDIR}/lcms2-${PV}"
++S = "${UNPACKDIR}/lcms2-${PV}"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-support/lgi/lua-lgi_0.9.2.bb b/meta-oe/recipes-support/lgi/lua-lgi_0.9.2.bb
+index 8b436668dc..344bf119b9 100644
+--- a/meta-oe/recipes-support/lgi/lua-lgi_0.9.2.bb
++++ b/meta-oe/recipes-support/lgi/lua-lgi_0.9.2.bb
+@@ -13,7 +13,6 @@ DEPENDS = " \
+ 	gobject-introspection-native \
+ "
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "d7666f77e7ee33907c84f5efdef32aef2e1cc196"
+ SRCPV = "${PV}+${SRCREV}"
+ 
+diff --git a/meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb b/meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb
+index dfe63ddbcd..89b2dff0ba 100644
+--- a/meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb
++++ b/meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://git.0pointer.net/libatasmart.git;protocol=http;branch=master \
+            file://0001-Makefile.am-add-CFLAGS-and-LDFLAGS-definiton.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools lib_package pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/libb64/libb64_2.0.0.1.bb b/meta-oe/recipes-support/libb64/libb64_2.0.0.1.bb
+index e0683b177b..4a1052e75b 100644
+--- a/meta-oe/recipes-support/libb64/libb64_2.0.0.1.bb
++++ b/meta-oe/recipes-support/libb64/libb64_2.0.0.1.bb
+@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/libb64/libb64;protocol=https;branch=master \
+            file://0001-examples-Use-proper-function-prototype-for-main.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ CFLAGS += "-fPIC"
+ 
+diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_2.11.bb b/meta-oe/recipes-support/libbytesize/libbytesize_2.11.bb
+index 214c2b2844..ef2a6c76fb 100644
+--- a/meta-oe/recipes-support/libbytesize/libbytesize_2.11.bb
++++ b/meta-oe/recipes-support/libbytesize/libbytesize_2.11.bb
+@@ -6,7 +6,6 @@ SECTION = "devel/lib"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRCREV = "9da72b2732508b0ba0ceed27f5e50bc276ef31f2"
+ SRC_URI = "git://github.com/storaged-project/libbytesize;branch=main;protocol=https"
+diff --git a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
+index c2ab0d61b8..7d4a352a31 100644
+--- a/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
++++ b/meta-oe/recipes-support/libcereal/libcereal_1.3.2.bb
+@@ -26,7 +26,6 @@ SRC_URI = "git://github.com/USCiLab/cereal.git;branch=master;protocol=https \
+            file://run-ptest \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig ptest
+ 
+diff --git a/meta-oe/recipes-support/libconfuse/libconfuse_3.3.bb b/meta-oe/recipes-support/libconfuse/libconfuse_3.3.bb
+index 0e2f1f27b3..20966a535c 100644
+--- a/meta-oe/recipes-support/libconfuse/libconfuse_3.3.bb
++++ b/meta-oe/recipes-support/libconfuse/libconfuse_3.3.bb
+@@ -10,6 +10,6 @@ SRC_URI += "file://CVE-2022-40320.patch"
+ 
+ inherit autotools-brokensep pkgconfig gettext
+ 
+-S = "${WORKDIR}/confuse-${PV}"
++S = "${UNPACKDIR}/confuse-${PV}"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb b/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
+index cf2d933169..d825f8fdee 100644
+--- a/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
++++ b/meta-oe/recipes-support/libcppkafka/libcppkafka_git.bb
+@@ -21,7 +21,6 @@ inherit cmake
+ 
+ EXTRA_OECMAKE = "-DCPPKAFKA_BUILD_SHARED=ON"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install:append(){
+     chrpath -d ${D}${libdir}/libcppkafka.so.${BASEPV}
+diff --git a/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb b/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
+index 32db913eff..939e7db24e 100644
+--- a/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
++++ b/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/cyrozap/${BPN}.git;branch=master;protocol=https \
+     file://0001-Fix-gcc-15-incompatible-pointer-types-error.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb b/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
+index 998a396af1..f5f874941a 100644
+--- a/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
+@@ -19,7 +19,6 @@ SRC_URI = "git://gitlab.com/libeigen/eigen.git;protocol=http;branch=3.4 \
+ 
+ SRCREV = "3147391d946bb4b6c68edd901f2add6ac1f31f8c"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/libfann/libfann_git.bb b/meta-oe/recipes-support/libfann/libfann_git.bb
+index 40f91ac43d..2f68ea95a8 100644
+--- a/meta-oe/recipes-support/libfann/libfann_git.bb
++++ b/meta-oe/recipes-support/libfann/libfann_git.bb
+@@ -14,6 +14,5 @@ SRC_URI = "git://github.com/libfann/fann.git;branch=master;protocol=https \
+ 
+ PV = "2.2.0+git"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
+diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.5.bb b/meta-oe/recipes-support/libftdi/libftdi_1.5.bb
+index 1679f212b3..8c30eca0e7 100644
+--- a/meta-oe/recipes-support/libftdi/libftdi_1.5.bb
++++ b/meta-oe/recipes-support/libftdi/libftdi_1.5.bb
+@@ -19,7 +19,7 @@ SRC_URI[sha256sum] = "7c7091e9c86196148bd41177b4590dccb1510bfe6cea5bf7407ff19448
+ 
+ UPSTREAM_CHECK_URI = "http://www.intra2net.com/en/developer/libftdi/download.php"
+ 
+-S = "${WORKDIR}/${BPN}1-${PV}"
++S = "${UNPACKDIR}/${BPN}1-${PV}"
+ 
+ inherit cmake binconfig pkgconfig python3native
+ 
+diff --git a/meta-oe/recipes-support/libgusb/libgusb_0.4.9.bb b/meta-oe/recipes-support/libgusb/libgusb_0.4.9.bb
+index 7f6bec3ea7..9007574fc6 100644
+--- a/meta-oe/recipes-support/libgusb/libgusb_0.4.9.bb
++++ b/meta-oe/recipes-support/libgusb/libgusb_0.4.9.bb
+@@ -16,6 +16,5 @@ GIDOCGEN_MESON_OPTION = 'docs'
+ 
+ SRC_URI = "git://github.com/hughsie/libgusb.git;branch=main;protocol=https"
+ SRCREV = "ed31c8134d80d006bd45450e84180be2a7c0742e"
+-S = "${WORKDIR}/git"
+ 
+ BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/libharu/libharu_2.4.5.bb b/meta-oe/recipes-support/libharu/libharu_2.4.5.bb
+index db8acd4532..0ad4bd92c0 100644
+--- a/meta-oe/recipes-support/libharu/libharu_2.4.5.bb
++++ b/meta-oe/recipes-support/libharu/libharu_2.4.5.bb
+@@ -11,6 +11,5 @@ DEPENDS += "libpng zlib"
+ SRC_URI = "git://github.com/libharu/libharu.git;branch=master;protocol=https"
+ SRCREV = "8fe5a738541a04642885fb7a75b2b5b9c5b416fa"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+diff --git a/meta-oe/recipes-support/libiio/libiio_0.26.bb b/meta-oe/recipes-support/libiio/libiio_0.26.bb
+index e8e6d5f683..ecd9223600 100644
+--- a/meta-oe/recipes-support/libiio/libiio_0.26.bb
++++ b/meta-oe/recipes-support/libiio/libiio_0.26.bb
+@@ -9,7 +9,6 @@ SRCREV = "a0eca0d2bf10326506fb762f0eec14255b27bef5"
+ SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https;branch=libiio-v0"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/git"
+ 
+ SETUPTOOLS_SETUP_PATH ?= "${B}/bindings/python/"
+ 
+diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.5.bb b/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.5.bb
+index 38ffd032ab..f4e26a65fc 100644
+--- a/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.5.bb
++++ b/meta-oe/recipes-support/libjs/libjs-jquery-cookie_3.0.5.bb
+@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/js-cookie/js-cookie.git;protocol=https;branch=main"
+ 
+ SRCREV = "ab3f67fc4fad88cdf07b258c08e4164e06bf7506"
+ 
+-S = "${WORKDIR}/git"
+ 
+ JQUERYCOOKIEDIR = "${datadir}/javascript/jquery-cookie"
+ JQUERYCOOKIEDOCDIR = "${docdir}/libjs-jquery-cookie"
+diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb b/meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb
+index b6147ffeb2..cbf5700a5b 100644
+--- a/meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb
++++ b/meta-oe/recipes-support/libjs/libjs-jquery-globalize_1.7.0.bb
+@@ -3,7 +3,6 @@ SECTION = "console/network"
+ HOMEPAGE = "https://github.com/globalizejs/globalize"
+ LICENSE = "MIT"
+ 
+-S = "${WORKDIR}/git"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4db68fb4d1d9986d736b35039f2ad9ea"
+ 
+diff --git a/meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb b/meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb
+index 63dfc6fa78..88fbc109ee 100644
+--- a/meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb
++++ b/meta-oe/recipes-support/libjs/libjs-jquery-icheck_1.0.3.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/fronteed/icheck.git;protocol=https;branch=${PV}"
+ 
+ SRCREV = "c8c1af84e4b90b4aea31466aad09bf877619e943"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+         install -d ${D}${datadir}/javascript/jquery-icheck/
+diff --git a/meta-oe/recipes-support/libjs/libjs-jquery_3.3.1.bb b/meta-oe/recipes-support/libjs/libjs-jquery_3.3.1.bb
+index 68b5086701..be8a29d998 100644
+--- a/meta-oe/recipes-support/libjs/libjs-jquery_3.3.1.bb
++++ b/meta-oe/recipes-support/libjs/libjs-jquery_3.3.1.bb
+@@ -13,8 +13,7 @@ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ JQUERYDIR = "${datadir}/javascript/jquery"
+ JQUERYDOCDIR = "${docdir}/libjs-jquery"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_install() {
+     install -d -m 0755 ${D}${JQUERYDIR}
+diff --git a/meta-oe/recipes-support/libjs/libjs-sizzle_1.10.18.bb b/meta-oe/recipes-support/libjs/libjs-sizzle_1.10.18.bb
+index 3889b17a3c..ffd26d263c 100644
+--- a/meta-oe/recipes-support/libjs/libjs-sizzle_1.10.18.bb
++++ b/meta-oe/recipes-support/libjs/libjs-sizzle_1.10.18.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://MIT-LICENSE.txt;md5=e43aa437a6a1ba421653bd5034333bf9"
+ SRC_URI = "http://kr.archive.ubuntu.com/ubuntu/pool/universe/s/sizzle/sizzle_1.10.18.orig.tar.gz"
+ SRC_URI[sha256sum] = "8e04ab84bb74b2e338dffc63cd2e52b007f1d8af01b3d25da4d2e07f2b5890f8"
+ 
+-S = "${WORKDIR}/sizzle-${PV}"
++S = "${UNPACKDIR}/sizzle-${PV}"
+ 
+ SIZZLEDIR = "${S}/dist"
+ 
+diff --git a/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb b/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
+index 4d4a5ff109..a2de42d946 100644
+--- a/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
++++ b/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
+@@ -16,7 +16,6 @@ SRC_URI += "git://github.com/LadislavSopko/mimetic/;branch=master;protocol=https
+ 
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ CXXFLAGS += "-Wno-narrowing -std=c++14"
+ 
+diff --git a/meta-oe/recipes-support/libmxml/libmxml_4.0.4.bb b/meta-oe/recipes-support/libmxml/libmxml_4.0.4.bb
+index a271b697cd..d692774f08 100644
+--- a/meta-oe/recipes-support/libmxml/libmxml_4.0.4.bb
++++ b/meta-oe/recipes-support/libmxml/libmxml_4.0.4.bb
+@@ -6,7 +6,6 @@ BUGTRACKER = "https://github.com/michaelrsweet/mxml/issues"
+ 
+ SRC_URI = "git://github.com/michaelrsweet/mxml.git;branch=master;protocol=https"
+ SRCREV = "0d5afc4278d7a336d554602b951c2979c3f8f296"
+-S = "${WORKDIR}/git"
+ 
+ # Package does not support out of tree builds.
+ inherit autotools-brokensep
+diff --git a/meta-oe/recipes-support/libnvme/libnvme_1.12.bb b/meta-oe/recipes-support/libnvme/libnvme_1.12.bb
+index 1054f83487..95d18a1ed0 100644
+--- a/meta-oe/recipes-support/libnvme/libnvme_1.12.bb
++++ b/meta-oe/recipes-support/libnvme/libnvme_1.12.bb
+@@ -16,7 +16,6 @@ SRCREV = "5ec1f5284ecb0eda481f3d2d61236fbc5b46164f"
+ SRC_URI = "git://github.com/linux-nvme/libnvme;protocol=https;branch=master \
+            file://0001-mock.c-fix-checking-of-HAVE_GLIBC_IOCTL.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/libosinfo/libosinfo_1.12.0.bb b/meta-oe/recipes-support/libosinfo/libosinfo_1.12.0.bb
+index edcebf522a..2462786aae 100644
+--- a/meta-oe/recipes-support/libosinfo/libosinfo_1.12.0.bb
++++ b/meta-oe/recipes-support/libosinfo/libosinfo_1.12.0.bb
+@@ -13,7 +13,6 @@ SRC_URI = " \
+ 
+ SRCREV = "b505ef5161d2552102a743acd4ad83298d3d8f99"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig gtk-doc gobject-introspection vala
+ 
+diff --git a/meta-oe/recipes-support/libosinfo/osinfo-db-tools_1.12.0.bb b/meta-oe/recipes-support/libosinfo/osinfo-db-tools_1.12.0.bb
+index 11de5e404b..ee75c39eee 100644
+--- a/meta-oe/recipes-support/libosinfo/osinfo-db-tools_1.12.0.bb
++++ b/meta-oe/recipes-support/libosinfo/osinfo-db-tools_1.12.0.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://gitlab.com/libosinfo/osinfo-db-tools.git;branch=main;protocol=h
+            "
+ SRCREV = "e5564be303bfac49cc3490bd0fada342cd65566f"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/libosinfo/osinfo-db_20250606.bb b/meta-oe/recipes-support/libosinfo/osinfo-db_20250606.bb
+index 5c5894da01..33e17234ce 100644
+--- a/meta-oe/recipes-support/libosinfo/osinfo-db_20250606.bb
++++ b/meta-oe/recipes-support/libosinfo/osinfo-db_20250606.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://gitlab.com/libosinfo/osinfo-db.git;branch=main;protocol=https"
+ 
+ SRCREV = "62f8adceb8ee88e643a134f2cfaf04fc11b9fc51"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit allarch autotools-brokensep
+ 
+diff --git a/meta-oe/recipes-support/libp11/libp11_0.4.13.bb b/meta-oe/recipes-support/libp11/libp11_0.4.13.bb
+index 74c70df180..1731d350ae 100644
+--- a/meta-oe/recipes-support/libp11/libp11_0.4.13.bb
++++ b/meta-oe/recipes-support/libp11/libp11_0.4.13.bb
+@@ -15,7 +15,6 @@ SRCREV = "6d669183c7b241ce47ecce28744837ad92814f5c"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "libp11-(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/libraw/libraw_0.21.2.bb b/meta-oe/recipes-support/libraw/libraw_0.21.2.bb
+index 6b1355fa37..01425c6db0 100644
+--- a/meta-oe/recipes-support/libraw/libraw_0.21.2.bb
++++ b/meta-oe/recipes-support/libraw/libraw_0.21.2.bb
+@@ -4,7 +4,6 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1501ae0aa3c8544e63f08d6f7bf88a6f"
+ 
+ SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=0.21-stable;protocol=https"
+ SRCREV = "1ef70158d7fde1ced6aaddb0b9443c32a7121d3d"
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/librdkafka/librdkafka_1.8.2.bb b/meta-oe/recipes-support/librdkafka/librdkafka_1.8.2.bb
+index 6148e7cb08..968094daff 100644
+--- a/meta-oe/recipes-support/librdkafka/librdkafka_1.8.2.bb
++++ b/meta-oe/recipes-support/librdkafka/librdkafka_1.8.2.bb
+@@ -16,7 +16,6 @@ DEPENDS = "zlib openssl zstd"
+ 
+ inherit cmake
+ 
+-S = "${WORKDIR}/git"
+ 
+ FILES:${PN} += "${datadir}"
+ 
+diff --git a/meta-oe/recipes-support/librsync/librsync_2.3.4.bb b/meta-oe/recipes-support/librsync/librsync_2.3.4.bb
+index 3cad665389..c8dfafa2aa 100644
+--- a/meta-oe/recipes-support/librsync/librsync_2.3.4.bb
++++ b/meta-oe/recipes-support/librsync/librsync_2.3.4.bb
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
+ 
+ SRC_URI = "git://github.com/librsync/librsync.git;branch=master;protocol=https"
+ SRCREV = "e364852674780e43d578e4239128ff7014190ed3"
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "popt"
+ 
+diff --git a/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.8.bb b/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.8.bb
+index 7994907e13..245d501b8a 100644
+--- a/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.8.bb
++++ b/meta-oe/recipes-support/libserialmodule/libserialmodule_1.0.8.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22cdd382a6275cb4c2e75c517952ac7c"
+ DEPENDS = "libsimplelog"
+ SRC_URI = "git://git@github.com/thuanalg/libserialmodule.git;branch=main;protocol=https;tag=v${PV}"
+ SRCREV = "f89f98ff0c9d0aaee2624d40addb0687a74c5d81"
+-S = "${WORKDIR}/git"
+ inherit cmake
+ EXTRA_OECMAKE = "-DUNIX_LINUX=1 -DMETA_OPENEMBEDDED=1"
+ 
+diff --git a/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.7.bb b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.7.bb
+index 0302f7c89f..9f576b2388 100644
+--- a/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.7.bb
++++ b/meta-oe/recipes-support/libsimplelog/libsimplelog_1.0.7.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/thuanalg/simplelog-topic.git;branch=main;protocol=ht
+ 
+ SRCREV = "edbe423bdd1b36faf30d2eeeb869e4c1755864de"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb b/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
+index 5969220a41..958f3cf5a1 100644
+--- a/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
++++ b/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
+@@ -12,7 +12,6 @@ inherit autotools pkgconfig python3-dir
+ SRCREV = "fd1ad6e7823fa76d8db0d3c5884faffa8ffddafb"
+ SRC_URI = "git://github.com/jackmitch/libsoc.git;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ BOARD ??= "devboard"
+ 
+diff --git a/meta-oe/recipes-support/libsoup/libsoup-2.4_2.74.3.bb b/meta-oe/recipes-support/libsoup/libsoup-2.4_2.74.3.bb
+index 52e732b78d..cbc886a2cb 100644
+--- a/meta-oe/recipes-support/libsoup/libsoup-2.4_2.74.3.bb
++++ b/meta-oe/recipes-support/libsoup/libsoup-2.4_2.74.3.bb
+@@ -44,7 +44,7 @@ SRC_URI[sha256sum] = "e4b77c41cfc4c8c5a035fcdc320c7bc6cfb75ef7c5a034153df1413fa1
+ 
+ CVE_PRODUCT = "libsoup"
+ 
+-S = "${WORKDIR}/libsoup-${PV}"
++S = "${UNPACKDIR}/libsoup-${PV}"
+ 
+ inherit meson gettext pkgconfig upstream-version-is-even gobject-introspection gtk-doc
+ 
+diff --git a/meta-oe/recipes-support/libspdm/libspdm_3.7.0.bb b/meta-oe/recipes-support/libspdm/libspdm_3.7.0.bb
+index e5915aa795..c6bbd1716b 100644
+--- a/meta-oe/recipes-support/libspdm/libspdm_3.7.0.bb
++++ b/meta-oe/recipes-support/libspdm/libspdm_3.7.0.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/DMTF/libspdm.git;branch=main;protocol=https \
+            file://0001-Backport-API-introduced-in-openssl-3.5.0.patch"
+ SRCREV = "1be116c7b7713fa9003e1bd53b53a34758549eb9"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/libssh/libssh_0.11.1.bb b/meta-oe/recipes-support/libssh/libssh_0.11.1.bb
+index 5f39c2d79c..bb2b0dc466 100644
+--- a/meta-oe/recipes-support/libssh/libssh_0.11.1.bb
++++ b/meta-oe/recipes-support/libssh/libssh_0.11.1.bb
+@@ -15,7 +15,6 @@ SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused
+ 
+ SRCREV = "854795c654eda518ed6de6c1ebb4e2107fcb2e73"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake ptest
+ 
+diff --git a/meta-oe/recipes-support/libstemmer/libstemmer_2.2.0.bb b/meta-oe/recipes-support/libstemmer/libstemmer_2.2.0.bb
+index be2935a385..d462d3018f 100644
+--- a/meta-oe/recipes-support/libstemmer/libstemmer_2.2.0.bb
++++ b/meta-oe/recipes-support/libstemmer/libstemmer_2.2.0.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/snowballstem/snowball.git;branch=master;protocol=htt
+            file://0001-Build-so-lib.patch \
+            "
+ SRCREV = "48a67a2831005f49c48ec29a5837640e23e54e6b"
+-S = "${WORKDIR}/git"
+ 
+ LIBVER = "0.0.0"
+ 
+diff --git a/meta-oe/recipes-support/libtar/libtar_1.2.20.bb b/meta-oe/recipes-support/libtar/libtar_1.2.20.bb
+index 9be5601967..a17509d2e5 100644
+--- a/meta-oe/recipes-support/libtar/libtar_1.2.20.bb
++++ b/meta-oe/recipes-support/libtar/libtar_1.2.20.bb
+@@ -22,7 +22,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/libt/${BPN}/${BPN}_${PV}.orig.tar.gz \
+            file://CVE-2013-4420.patch \
+            "
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ SRC_URI[sha256sum] = "50f24c857a7ef1cb092e6508758b86d06f1188508f897f3e6b40c573e8879109"
+ 
+diff --git a/meta-oe/recipes-support/libteam/libteam_1.32.bb b/meta-oe/recipes-support/libteam/libteam_1.32.bb
+index 508cbb13bb..4686f4be5c 100644
+--- a/meta-oe/recipes-support/libteam/libteam_1.32.bb
++++ b/meta-oe/recipes-support/libteam/libteam_1.32.bb
+@@ -17,7 +17,6 @@ SRC_URI = "git://github.com/jpirko/libteam;branch=master;protocol=https \
+            "
+ SRCREV = "8b843e93cee1dab61fb79b01791201cdad45e1d1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig ptest
+ 
+diff --git a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
+index c99930f9e2..b91a455aff 100644
+--- a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
++++ b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
+@@ -16,7 +16,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/tinyxml/tinyxml_${@'${PV}'.replace('.', '_')}.t
+ "
+ SRC_URI[sha256sum] = "15bdfdcec58a7da30adc87ac2b078e4417dbe5392f3afb719f9ba6d062645593"
+ 
+-S = "${WORKDIR}/tinyxml"
++S = "${UNPACKDIR}/tinyxml"
+ 
+ EXTRA_CXXFLAGS = "-I. -fPIC"
+ 
+diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_11.0.0.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_11.0.0.bb
+index e0b07deca3..89e6eca99b 100644
+--- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_11.0.0.bb
++++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_11.0.0.bb
+@@ -9,7 +9,6 @@ SRCREV = "9148bdf719e997d1f474be6bcc7943881046dba1"
+ SRC_URI = "git://github.com/leethomason/tinyxml2.git;branch=master;protocol=https \
+            file://run-ptest"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson ptest
+ 
+diff --git a/meta-oe/recipes-support/libtommath/libtommath_1.3.0.bb b/meta-oe/recipes-support/libtommath/libtommath_1.3.0.bb
+index 4d6c06240d..28c474e1dd 100644
+--- a/meta-oe/recipes-support/libtommath/libtommath_1.3.0.bb
++++ b/meta-oe/recipes-support/libtommath/libtommath_1.3.0.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/libtom/libtommath.git;protocol=https;branch=master"
+ 
+ SRCREV = "95d80fd8229d05dd6cb4ec88bc8d4f5377ff00ef"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "'PREFIX=${prefix}' 'DESTDIR=${D}' 'LIBPATH=${libdir}' 'CFLAGS=${CFLAGS}'"
+ 
+diff --git a/meta-oe/recipes-support/liburing/liburing_2.9.bb b/meta-oe/recipes-support/liburing/liburing_2.9.bb
+index e17d829c3d..a645a8e4c4 100644
+--- a/meta-oe/recipes-support/liburing/liburing_2.9.bb
++++ b/meta-oe/recipes-support/liburing/liburing_2.9.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
+            file://0001-test-Including-missing-string.h-for-memcpy.patch"
+ SRCREV = "08468cc3830185c75f9e7edefd88aa01e5c2f8ab"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS:append:libc-musl = " libucontext"
+ XCFLAGS = "-pthread"
+diff --git a/meta-oe/recipes-support/libusb/libusb-compat_0.1.8.bb b/meta-oe/recipes-support/libusb/libusb-compat_0.1.8.bb
+index 57f1f54387..960f547f94 100644
+--- a/meta-oe/recipes-support/libusb/libusb-compat_0.1.8.bb
++++ b/meta-oe/recipes-support/libusb/libusb-compat_0.1.8.bb
+@@ -28,7 +28,6 @@ SRC_URI = " \
+     file://run-ptest \
+ "
+ SRCREV = "c497eff1ae8c4cfd4fdff370f04c78fa0584f4f3"
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/libusb/libusb-compat-0.1/releases"
+ 
+diff --git a/meta-oe/recipes-support/libusbg/libusbg_git.bb b/meta-oe/recipes-support/libusbg/libusbg_git.bb
+index 716d9c4ce4..84f97aab2c 100644
+--- a/meta-oe/recipes-support/libusbg/libusbg_git.bb
++++ b/meta-oe/recipes-support/libusbg/libusbg_git.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/libusbg/libusbg.git;branch=master;protocol=https \
+            file://0001-Fix-out-of-tree-builds.patch \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ ALTERNATIVE:${PN} = "gadget-acm-ecm show-gadgets"
+ ALTERNATIVE_LINK_NAME[gadget-acm-ecm] = "${bindir}/gadget-acm-ecm"
+diff --git a/meta-oe/recipes-support/libusbgx/libusbgx-config.bb b/meta-oe/recipes-support/libusbgx/libusbgx-config.bb
+index c79dd092cd..f3870203ad 100644
+--- a/meta-oe/recipes-support/libusbgx/libusbgx-config.bb
++++ b/meta-oe/recipes-support/libusbgx/libusbgx-config.bb
+@@ -4,8 +4,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
+ 
+ SRC_URI = "file://usbgx.default"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_configure[noexec] = "1"
+ do_compile[noexec] = "1"
+diff --git a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
+index 8d49bf55ba..7b12b911d8 100644
+--- a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
++++ b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
+@@ -18,7 +18,6 @@ SRC_URI = " \
+     file://usbgx.service \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "examples gadget-schemes libconfig"
+ PACKAGECONFIG[libconfig] = "--with-libconfig=yes,--without-libconfig,libconfig"
+diff --git a/meta-oe/recipes-support/libutempter/libutempter_1.2.2-alt1.bb b/meta-oe/recipes-support/libutempter/libutempter_1.2.2-alt1.bb
+index 0d2cd135c6..cc28860b04 100644
+--- a/meta-oe/recipes-support/libutempter/libutempter_1.2.2-alt1.bb
++++ b/meta-oe/recipes-support/libutempter/libutempter_1.2.2-alt1.bb
+@@ -14,7 +14,7 @@ SRC_URI = "git://git.altlinux.org/people/ldv/packages/libutempter.git;branch=mas
+            file://0002-Proper-macro-path-generation.patch \
+            "
+ 
+-S = "${WORKDIR}/git/${BPN}"
++S = "${UNPACKDIR}/${BP}/${BPN}"
+ 
+ CFLAGS += "-DLIBEXECDIR=${libexecdir}"
+ 
+diff --git a/meta-oe/recipes-support/links/links-x11_2.26.bb b/meta-oe/recipes-support/links/links-x11_2.26.bb
+index 713919bca1..c1601ab7d9 100644
+--- a/meta-oe/recipes-support/links/links-x11_2.26.bb
++++ b/meta-oe/recipes-support/links/links-x11_2.26.bb
+@@ -13,7 +13,7 @@ SRC_URI += " file://links2.desktop \
+ SRC_URI[sha256sum] = "f05b3577f25dbe63e491c424f0ecb31f7bfadce9b2bc2f111dfed049c004c9cb"
+ SRC_URI[icon.sha256sum] = "eddcd8b8c8698aa621d1a453943892d77b72ed492e0d14e0dbac5c6a57e52f47"
+ 
+-S = "${WORKDIR}/links-${PV}"
++S = "${UNPACKDIR}/links-${PV}"
+ 
+ EXTRA_OECONF = "--enable-graphics \
+                 --with-ssl=${STAGING_LIBDIR}/.. --with-libjpeg \
+diff --git a/meta-oe/recipes-support/log4cpp/log4cpp_1.1.4.bb b/meta-oe/recipes-support/log4cpp/log4cpp_1.1.4.bb
+index 929b1d186b..d51e51387b 100644
+--- a/meta-oe/recipes-support/log4cpp/log4cpp_1.1.4.bb
++++ b/meta-oe/recipes-support/log4cpp/log4cpp_1.1.4.bb
+@@ -8,7 +8,7 @@ SRC_URI = "http://downloads.sourceforge.net/${BPN}/${BP}.tar.gz \
+           "
+ SRC_URI[sha256sum] = "696113659e426540625274a8b251052cc04306d8ee5c42a0c7639f39ca90c9d6"
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 7a87baf5c3..0ff17aed5c 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -19,7 +19,6 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main \
+            "
+ 
+ SRCREV = "8817523c5682a7fd83770d3f58a99c436f7e73f7"
+-S = "${WORKDIR}/git"
+ PV = "2.03.32"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
+diff --git a/meta-oe/recipes-support/mcelog/mce-inject_git.bb b/meta-oe/recipes-support/mcelog/mce-inject_git.bb
+index 6c1255772d..c8ffb65fa1 100644
+--- a/meta-oe/recipes-support/mcelog/mce-inject_git.bb
++++ b/meta-oe/recipes-support/mcelog/mce-inject_git.bb
+@@ -15,7 +15,6 @@ DEPENDS = "bison-native"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://README;beginline=30;md5=94c18755082a2da9c9cf97cba3ad47d6"
+ 
+-S = "${WORKDIR}/git"
+ 
+ COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
+ 
+diff --git a/meta-oe/recipes-support/mcelog/mce-test_git.bb b/meta-oe/recipes-support/mcelog/mce-test_git.bb
+index c1661b5ed4..3b96210633 100644
+--- a/meta-oe/recipes-support/mcelog/mce-test_git.bb
++++ b/meta-oe/recipes-support/mcelog/mce-test_git.bb
+@@ -22,7 +22,6 @@ RDEPENDS:${PN} = "mcelog mce-inject dialog bash"
+ 
+ COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE += "CFLAGS='${CFLAGS}'"
+ 
+diff --git a/meta-oe/recipes-support/mcelog/mcelog_204.bb b/meta-oe/recipes-support/mcelog/mcelog_204.bb
+index b0d238361f..c3d082aa67 100644
+--- a/meta-oe/recipes-support/mcelog/mcelog_204.bb
++++ b/meta-oe/recipes-support/mcelog/mcelog_204.bb
+@@ -15,7 +15,6 @@ SRCREV = "ad244c6b60fcbd08a5d73497bfb3487983801598"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit ptest
+ 
+diff --git a/meta-oe/recipes-support/md4c/md4c_0.5.2.bb b/meta-oe/recipes-support/md4c/md4c_0.5.2.bb
+index 6c409666fc..59f2e430aa 100644
+--- a/meta-oe/recipes-support/md4c/md4c_0.5.2.bb
++++ b/meta-oe/recipes-support/md4c/md4c_0.5.2.bb
+@@ -6,7 +6,6 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=383f39920f391605af6e8e46e60e2378"
+ 
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRC_URI = " \
+         git://github.com/mity/md4c.git;protocol=https;branch=master \
+diff --git a/meta-oe/recipes-support/mg/mg_20230501.bb b/meta-oe/recipes-support/mg/mg_20230501.bb
+index ee00003977..04811f1bdd 100644
+--- a/meta-oe/recipes-support/mg/mg_20230501.bb
++++ b/meta-oe/recipes-support/mg/mg_20230501.bb
+@@ -14,7 +14,6 @@ SRC_URI:append:libc-musl = "\
+            file://0001-Undefine-REGEX-for-musl-based-systems.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # CFLAGS isn't in EXTRA_OEMAKE, as the makefile picks it up via ?=
+ EXTRA_OEMAKE = "\
+diff --git a/meta-oe/recipes-support/mime-support/mime-support_3.62.bb b/meta-oe/recipes-support/mime-support/mime-support_3.62.bb
+index 46def2a23c..1c0aec13e3 100644
+--- a/meta-oe/recipes-support/mime-support/mime-support_3.62.bb
++++ b/meta-oe/recipes-support/mime-support/mime-support_3.62.bb
+@@ -12,7 +12,7 @@ RRECOMMENDS:${PN} = "file"
+ 
+ SRC_URI = "${DEBIAN_MIRROR}/main/m/mime-support/mime-support_${PV}.tar.gz"
+ SRC_URI[sha256sum] = "54e0a03e0cd63c7c9fe68a18ead0a2143fd3c327604215f989d85484d0409f4a"
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ inherit update-alternatives
+ 
+diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.11.1.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.11.1.bb
+index 3443175d21..07bc84ce8b 100644
+--- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.11.1.bb
++++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.11.1.bb
+@@ -53,7 +53,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
+ 
+ SRCREV = "cb8de98b2cc3b62fd1a578ba479c0820778e9c02"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit systemd pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+index 39ff7ab969..b4db0c0f64 100644
+--- a/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
++++ b/meta-oe/recipes-support/ne10/ne10_1.2.1.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/projectNe10/Ne10.git;branch=master;protocol=https \
+            "
+ SRCREV = "18c4c982a595dad069cd8df4932aefb1d257591f"
+ 
+-S = "${WORKDIR}/git"
+ PV .= "+git"
+ 
+ inherit cmake
+diff --git a/meta-oe/recipes-support/nmon/nmon_16m.bb b/meta-oe/recipes-support/nmon/nmon_16m.bb
+index 495afd164f..4e7abb2123 100644
+--- a/meta-oe/recipes-support/nmon/nmon_16m.bb
++++ b/meta-oe/recipes-support/nmon/nmon_16m.bb
+@@ -21,8 +21,7 @@ CFLAGS += "-D JFS -D GETUSER -Wall -D LARGEMEM"
+ LDFLAGS += "-ltinfo -lncursesw -lm"
+ ASNEEDED:pn-nmon = ""
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_compile() {
+     ${CC} ${CFLAGS} ${LDFLAGS} lmon${PV}.c -o nmon
+diff --git a/meta-oe/recipes-support/nspr/nspr_4.36.bb b/meta-oe/recipes-support/nspr/nspr_4.36.bb
+index a717520666..c129362539 100644
+--- a/meta-oe/recipes-support/nspr/nspr_4.36.bb
++++ b/meta-oe/recipes-support/nspr/nspr_4.36.bb
+@@ -27,7 +27,7 @@ SRC_URI[sha256sum] = "55dec317f1401cd2e5dba844d340b930ab7547f818179a4002bce62e6f
+ 
+ CVE_PRODUCT = "netscape_portable_runtime"
+ 
+-S = "${WORKDIR}/nspr-${PV}/nspr"
++S = "${UNPACKDIR}/nspr-${PV}/nspr"
+ 
+ RDEPENDS:${PN}-dev += "perl"
+ TARGET_CC_ARCH += "${LDFLAGS}"
+diff --git a/meta-oe/recipes-support/opencl/clinfo_3.0.23.01.25.bb b/meta-oe/recipes-support/opencl/clinfo_3.0.23.01.25.bb
+index 6cacd3722c..7390d83bcc 100644
+--- a/meta-oe/recipes-support/opencl/clinfo_3.0.23.01.25.bb
++++ b/meta-oe/recipes-support/opencl/clinfo_3.0.23.01.25.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/Oblomov/clinfo.git;protocol=https;branch=master"
+ 
+ SRCREV = "748c3930a9b9cb826e631d77439e2cb8f84f5bcf"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS += "opencl-headers virtual/opencl-icd"
+ 
+diff --git a/meta-oe/recipes-support/opencv/ade_0.1.2.bb b/meta-oe/recipes-support/opencv/ade_0.1.2.bb
+index 93b14ad4f3..b54c28d624 100644
+--- a/meta-oe/recipes-support/opencv/ade_0.1.2.bb
++++ b/meta-oe/recipes-support/opencv/ade_0.1.2.bb
+@@ -13,7 +13,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+ inherit cmake
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECMAKE += " -DCMAKE_BUILD_TYPE=Release"
+ 
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.11.0.bb b/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
+index 3f90500784..826eff30ca 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.11.0.bb
+@@ -21,12 +21,12 @@ SRCREV_fastcv = "8d86e68dad8b80b8575a8d3cf401d3ee96c24148"
+ 
+ SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv"
+ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https \
+-           git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=4.x;protocol=https \
+-           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=git/boostdesc;name=boostdesc;protocol=https \
+-           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=git/vgg;name=vgg;protocol=https \
+-           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=git/face;name=face;protocol=https \
+-           git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=git/wechat_qrcode;name=wechat-qrcode;protocol=https \
+-           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250410;destsuffix=git/fastcv;name=fastcv;protocol=https  \
++           git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=4.x;protocol=https \
++           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/boostdesc;name=boostdesc;protocol=https \
++           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/vgg;name=vgg;protocol=https \
++           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/face;name=face;protocol=https \
++           git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/wechat_qrcode;name=wechat-qrcode;protocol=https \
++           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250410;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/fastcv;name=fastcv;protocol=https  \
+            file://0003-To-fix-errors-as-following.patch \
+            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
+            file://0001-Dont-use-isystem.patch \
+@@ -39,7 +39,6 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=ht
+            "
+ SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # OpenCV wants to download more files during configure.  We download these in
+ # do_fetch and construct a source cache in the format it expects
+diff --git a/meta-oe/recipes-support/opensc/opensc_0.26.1.bb b/meta-oe/recipes-support/opensc/opensc_0.26.1.bb
+index 9c9dfd5f45..78258c965a 100644
+--- a/meta-oe/recipes-support/opensc/opensc_0.26.1.bb
++++ b/meta-oe/recipes-support/opensc/opensc_0.26.1.bb
+@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/OpenSC/OpenSC;branch=0.26.1;protocol=https"
+ 
+ CVE_STATUS[CVE-2024-8443] = "fixed-version: this is fixed since 0.26.0"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig bash-completion
+ 
+diff --git a/meta-oe/recipes-support/opensync/wbxml2_0.10.8.bb b/meta-oe/recipes-support/opensync/wbxml2_0.10.8.bb
+index 2d87f13564..02815ec7ba 100644
+--- a/meta-oe/recipes-support/opensync/wbxml2_0.10.8.bb
++++ b/meta-oe/recipes-support/opensync/wbxml2_0.10.8.bb
+@@ -10,7 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/libwbxml/libwbxml-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "a057daa098f12838eb4e635bb28413027f1b73819872c3fbf64e3207790a3f7d"
+ 
+-S = "${WORKDIR}/libwbxml-${PV}"
++S = "${UNPACKDIR}/libwbxml-${PV}"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.20.0.bb b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.20.0.bb
+index e022b407a0..eb108c177c 100644
+--- a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.20.0.bb
++++ b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.20.0.bb
+@@ -10,7 +10,6 @@ DEPENDS = "nlohmann-json"
+ SRC_URI = "gitsm://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main;tag=v${PV}"
+ SRCREV = "6175aa0b213eea053247e43b4f35b8d201fa356e"
+ 
+-S = "${WORKDIR}/git"
+ inherit cmake pkgconfig lib_package
+ 
+ LDFLAGS:append:riscv32 = " -latomic"
+diff --git a/meta-oe/recipes-support/p910nd/p910nd_0.97.bb b/meta-oe/recipes-support/p910nd/p910nd_0.97.bb
+index c6a3079ea2..0b5740c161 100644
+--- a/meta-oe/recipes-support/p910nd/p910nd_0.97.bb
++++ b/meta-oe/recipes-support/p910nd/p910nd_0.97.bb
+@@ -10,7 +10,6 @@ SRCREV = "57ebc07ad8723ea4106090536c58c7f7160743e2"
+ SRC_URI = "git://github.com/kenyapcomau/p910nd;protocol=https;branch=master \
+            file://fix-var-lock.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit update-rc.d
+ 
+diff --git a/meta-oe/recipes-support/pcp/pcp.inc b/meta-oe/recipes-support/pcp/pcp.inc
+index 4ab4f5502f..c54c054cf8 100644
+--- a/meta-oe/recipes-support/pcp/pcp.inc
++++ b/meta-oe/recipes-support/pcp/pcp.inc
+@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/performancecopilot/pcp;branch=stable;protocol=https
+ 
+ SRCREV = "d8d97b79ee47d9dfb076a3242564ed3cae04eba9"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3-base pkgconfig autotools-brokensep
+ 
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.3.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.3.bb
+index d5a560a6a0..169630d319 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.3.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.3.bb
+@@ -21,7 +21,7 @@ EXTRA_OECONF = " \
+     --enable-usbdropdir=${libdir}/pcsc/drivers \
+ "
+ 
+-S = "${WORKDIR}/pcsc-lite-${PV}"
++S = "${UNPACKDIR}/pcsc-lite-${PV}"
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd polkit', d)} udev"
+ PACKAGECONFIG:class-native ??= ""
+diff --git a/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.2.bb b/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.2.bb
+index 1dfba7c716..14ffab6128 100644
+--- a/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.2.bb
++++ b/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.2.bb
+@@ -9,7 +9,6 @@ SRCREV = "778da3d86a59f5166443118c158e11ba4da9a5f1"
+ 
+ inherit autotools pkgconfig
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "pcsc-lite autoconf-archive-native"
+ 
+diff --git a/meta-oe/recipes-support/picocom/picocom_2024.bb b/meta-oe/recipes-support/picocom/picocom_2024.bb
+index c0c3e25de9..37cf2d0a4c 100644
+--- a/meta-oe/recipes-support/picocom/picocom_2024.bb
++++ b/meta-oe/recipes-support/picocom/picocom_2024.bb
+@@ -9,7 +9,6 @@ SRCREV = "7b6acbd421a2d4ca99376b7b427828dc1bcba4d8"
+ SRC_URI = "git://gitlab.com/wsakernel/picocom;branch=master;protocol=https \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "'CC=${CC}' 'LD=${CC}' 'VERSION=${PV}' \
+ 		'CFLAGS=${CFLAGS}' 'LDFLAGS=${LDFLAGS}' "
+diff --git a/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
+index 9337ae5966..c547b0532e 100644
+--- a/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
++++ b/meta-oe/recipes-support/pidgin/funyahoo-plusplus_git.bb
+@@ -13,7 +13,6 @@ SRCREV = "fbbd9c591100aa00a0487738ec7b6acd3d924b3f"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_compile() {
+     oe_runmake CC="${CC}" CXX="${CXX}" EXTRA_INCLUDES="${TARGET_CFLAGS}" AR="${AR}";
+diff --git a/meta-oe/recipes-support/pidgin/icyque_git.bb b/meta-oe/recipes-support/pidgin/icyque_git.bb
+index b2f9944c16..e8b4a3c2c3 100644
+--- a/meta-oe/recipes-support/pidgin/icyque_git.bb
++++ b/meta-oe/recipes-support/pidgin/icyque_git.bb
+@@ -15,7 +15,6 @@ SRCREV = "513fc162d5d1a201c2b044e2b42941436d1069d5"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_compile() {
+     oe_runmake;
+diff --git a/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb b/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
+index 1981f1ee9c..421b1725ba 100644
+--- a/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
++++ b/meta-oe/recipes-support/pidgin/purple-skypeweb_git.bb
+@@ -10,7 +10,6 @@ inherit pkgconfig
+ SRC_URI = "git://github.com/EionRobb/skype4pidgin;branch=master;protocol=https"
+ SRCREV = "b226d1c457d73900ae89b8a7469247fbe33677a6"
+ 
+-S = "${WORKDIR}/git"
+ PV = "1.7+git"
+ 
+ do_compile() {
+diff --git a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.0.bb b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.0.bb
+index 18a156286d..a403289cfc 100644
+--- a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.0.bb
++++ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.0.bb
+@@ -19,7 +19,6 @@ SRCREV = "8f6b94409d4872265076df310492da1e5f6abdf7"
+ 
+ SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/poco/poco_1.13.3.bb b/meta-oe/recipes-support/poco/poco_1.13.3.bb
+index 662caa27d7..e0f6c4169e 100644
+--- a/meta-oe/recipes-support/poco/poco_1.13.3.bb
++++ b/meta-oe/recipes-support/poco/poco_1.13.3.bb
+@@ -18,7 +18,6 @@ SRCREV = "7f848d25aa0461d3beeff1189dc61b48ffe8e2f4"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake ptest
+ 
+diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
+index 2bf4d0a449..4451e96307 100644
+--- a/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
++++ b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
+@@ -8,7 +8,6 @@ PV .= "+git"
+ SRC_URI = "git://github.com/PortAudio/portaudio.git;branch=master;protocol=https"
+ SRCREV = "929e2e8f7af281c5eb4fa07758930d542ec43d97"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/pps-tools/pps-tools_1.0.3.bb b/meta-oe/recipes-support/pps-tools/pps-tools_1.0.3.bb
+index 34b4bbf75a..65caa05a13 100644
+--- a/meta-oe/recipes-support/pps-tools/pps-tools_1.0.3.bb
++++ b/meta-oe/recipes-support/pps-tools/pps-tools_1.0.3.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/ago/pps-tools.git;branch=master;protocol=https \
+            file://0001-Use-lld-in-printf-for-64-bit-time_t.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN} = "bash"
+ 
+diff --git a/meta-oe/recipes-support/pxaregs/pxaregs_1.14.bb b/meta-oe/recipes-support/pxaregs/pxaregs_1.14.bb
+index bdbe6e73ba..ff4668ecde 100644
+--- a/meta-oe/recipes-support/pxaregs/pxaregs_1.14.bb
++++ b/meta-oe/recipes-support/pxaregs/pxaregs_1.14.bb
+@@ -9,8 +9,7 @@ SRC_URI = "file://pxaregs.c \
+            file://serial.patch \
+            file://usb.patch "
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_compile() {
+     ${CC} pxaregs.c -o pxaregs ${CFLAGS} ${LDFLAGS}
+diff --git a/meta-oe/recipes-support/re2/re2_2024.03.01.bb b/meta-oe/recipes-support/re2/re2_2024.03.01.bb
+index 76d6f0c7a9..55a834fa42 100644
+--- a/meta-oe/recipes-support/re2/re2_2024.03.01.bb
++++ b/meta-oe/recipes-support/re2/re2_2024.03.01.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/google/re2.git;branch=main;protocol=https \
+            ${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-ptest', '', d)} \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "abseil-cpp ${@bb.utils.contains('PTEST_ENABLED', '1', 'gtest googlebenchmark', '', d)}"
+ 
+diff --git a/meta-oe/recipes-support/reboot-mode/reboot-mode_git.bb b/meta-oe/recipes-support/reboot-mode/reboot-mode_git.bb
+index 5e0c6cd21c..4172de857c 100644
+--- a/meta-oe/recipes-support/reboot-mode/reboot-mode_git.bb
++++ b/meta-oe/recipes-support/reboot-mode/reboot-mode_git.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
+ SRC_URI = "git://gitlab.com/postmarketOS/reboot-mode.git;protocol=http;branch=master"
+ SRCREV = "84831b20512abd9033414ca5f5a023f333525335"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # Upstream repo has not made releases/tags after 1.0.0
+ UPSTREAM_CHECK_COMMITS = "1"
+diff --git a/meta-oe/recipes-support/remmina/remmina_1.4.36.bb b/meta-oe/recipes-support/remmina/remmina_1.4.36.bb
+index 9d0b676386..aefd871354 100644
+--- a/meta-oe/recipes-support/remmina/remmina_1.4.36.bb
++++ b/meta-oe/recipes-support/remmina/remmina_1.4.36.bb
+@@ -27,7 +27,6 @@ LDFLAGS:append:libc-musl = " -lexecinfo"
+ 
+ SRCREV = "17cf7956b9f925fa788083a2db8d5e669f86bfaf"
+ SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https;branch=master"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake features_check mime mime-xdg gtk-icon-cache pkgconfig
+ REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-oe/recipes-support/reptyr/reptyr_0.10.0.bb b/meta-oe/recipes-support/reptyr/reptyr_0.10.0.bb
+index 6889758224..5f4ffcd657 100644
+--- a/meta-oe/recipes-support/reptyr/reptyr_0.10.0.bb
++++ b/meta-oe/recipes-support/reptyr/reptyr_0.10.0.bb
+@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=25a0555028c71837623fa6dfa4cc45c0"
+ SRC_URI = "git://github.com/nelhage/reptyr.git;protocol=https;branch=master"
+ SRCREV = "1238097fc2cd15db058d2185cc4985daa87bcd41"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit bash-completion github-releases manpages pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
+index 3cbd04bd5c..8c4183bae3 100644
+--- a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
++++ b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
+@@ -29,7 +29,6 @@ SRC_URI = "git://github.com/DrHyde/${BPN};branch=master;protocol=https \
+            file://configure-fix-cmd_rsync.patch \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools perlnative
+ 
+diff --git a/meta-oe/recipes-support/rtc-tools/rtc-tools_2022.02.bb b/meta-oe/recipes-support/rtc-tools/rtc-tools_2022.02.bb
+index d65f5da859..711d4696fd 100644
+--- a/meta-oe/recipes-support/rtc-tools/rtc-tools_2022.02.bb
++++ b/meta-oe/recipes-support/rtc-tools/rtc-tools_2022.02.bb
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74274e8a218423e49eefdea80bc55038"
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/abelloni/${BPN}.git;protocol=https;branch=master"
+ SRCREV = "61839777afedcc7bdb68ea4628c5ce5ca72c2ac8"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "DESTDIR=${D}"
+ 
+diff --git a/meta-oe/recipes-support/rtkit/rtkit_0.13.bb b/meta-oe/recipes-support/rtkit/rtkit_0.13.bb
+index 4f06e55e8e..b68820dfd6 100644
+--- a/meta-oe/recipes-support/rtkit/rtkit_0.13.bb
++++ b/meta-oe/recipes-support/rtkit/rtkit_0.13.bb
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a8e768468b658b3ed44971b53d4a6716"
+ SRC_URI = "git://github.com/heftig/rtkit.git;protocol=https;branch=master"
+ 
+ SRCREV = "b9169402fe5e82d20efb754509eb0b191f214599"
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig features_check useradd
+ 
+diff --git a/meta-oe/recipes-support/satyr/satyr_0.43.bb b/meta-oe/recipes-support/satyr/satyr_0.43.bb
+index 9e6d701c7f..1976a929bd 100644
+--- a/meta-oe/recipes-support/satyr/satyr_0.43.bb
++++ b/meta-oe/recipes-support/satyr/satyr_0.43.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/abrt/satyr.git;branch=master;protocol=https \
+            file://0002-fix-compile-failure-against-musl-C-library.patch \
+            "
+ SRCREV = "5891618d6a95afc4cde6757374485adf9bf0e9a5"
+-S = "${WORKDIR}/git"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+diff --git a/meta-oe/recipes-support/sdmon/sdmon_git.bb b/meta-oe/recipes-support/sdmon/sdmon_git.bb
+index 81c8033c15..8007ead6c6 100644
+--- a/meta-oe/recipes-support/sdmon/sdmon_git.bb
++++ b/meta-oe/recipes-support/sdmon/sdmon_git.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/Ognian/sdmon;protocol=https;branch=master"
+ PV = "0.9.0"
+ SRCREV = "4dff9b690e8d4454fada6abfbb6b32fcb794968c"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_compile() {
+ 	oe_runmake -C ${S}/src CC="${CC}" CFLAGS="${CFLAGS} -D_REENTRANT -DVERSION=\"\\\"${PV}\\\"\"" LDFLAGS="${LDFLAGS}"
+diff --git a/meta-oe/recipes-support/serial-utils/pty-forward-native.bb b/meta-oe/recipes-support/serial-utils/pty-forward-native.bb
+index 82994331ee..1d7e29ecc5 100644
+--- a/meta-oe/recipes-support/serial-utils/pty-forward-native.bb
++++ b/meta-oe/recipes-support/serial-utils/pty-forward-native.bb
+@@ -6,7 +6,7 @@ SRCREV = "00dbec2636ae0385ad028587e20e446272ff97ec"
+ PV = "1.1+git"
+ 
+ SRC_URI = "git://github.com/freesmartphone/cornucopia.git;protocol=https;branch=master"
+-S = "${WORKDIR}/git/tools/serial_forward"
++S = "${UNPACKDIR}/${BP}/tools/serial_forward"
+ 
+ inherit autotools native
+ 
+diff --git a/meta-oe/recipes-support/serial-utils/serial-forward_git.bb b/meta-oe/recipes-support/serial-utils/serial-forward_git.bb
+index 541ae84a93..05e965fc63 100644
+--- a/meta-oe/recipes-support/serial-utils/serial-forward_git.bb
++++ b/meta-oe/recipes-support/serial-utils/serial-forward_git.bb
+@@ -9,6 +9,6 @@ SRC_URI = "git://github.com/freesmartphone/cornucopia.git;branch=master;protocol
+            file://0001-serial_forward-Disable-default-static-linking.patch;striplevel=3 \
+            file://0001-correct-the-typo-in-include-file-name-string.h.patch;striplevel=3 \
+           "
+-S = "${WORKDIR}/git/tools/serial_forward"
++S = "${UNPACKDIR}/${BP}/tools/serial_forward"
+ 
+ inherit autotools
+diff --git a/meta-oe/recipes-support/serial/serial_1.2.1.bb b/meta-oe/recipes-support/serial/serial_1.2.1.bb
+index c3f13d1af5..42151da532 100644
+--- a/meta-oe/recipes-support/serial/serial_1.2.1.bb
++++ b/meta-oe/recipes-support/serial/serial_1.2.1.bb
+@@ -11,7 +11,6 @@ SRC_URI = " \
+ SRCREV = "10ac4e1c25c2cda1dc0a32a8e12b87fd89f3bb4f"
+ SRC_URI[sha256sum] = "c8cd235dda2ef7d977ba06dfcb35c35e42f45cfd9149ba3ad257756123d8ff96"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.48.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.48.bb
+index 6c3d813983..4af20fe72a 100644
+--- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.48.bb
++++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.48.bb
+@@ -17,6 +17,6 @@ SRC_URI[sha256sum] = "d62b6c3cf20390fa7357044390084166d25f1d932a1135c450b69fe5c2
+ 
+ inherit autotools-brokensep
+ 
+-S = "${WORKDIR}/sg3_utils-${PV}"
++S = "${UNPACKDIR}/sg3_utils-${PV}"
+ 
+ RDEPENDS:${PN} += "bash"
+diff --git a/meta-oe/recipes-support/smarty/smarty_5.4.5.bb b/meta-oe/recipes-support/smarty/smarty_5.4.5.bb
+index 37336ff5d7..047f10589d 100644
+--- a/meta-oe/recipes-support/smarty/smarty_5.4.5.bb
++++ b/meta-oe/recipes-support/smarty/smarty_5.4.5.bb
+@@ -14,7 +14,6 @@ SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master;t
+ 
+ SRCREV = "e26f82d02c4d18fc82094c28fbc65f711e39ed5d"
+ 
+-S = "${UNPACKDIR}/git"
+ 
+ INHIBIT_DEFAULT_DEPS = "1"
+ 
+diff --git a/meta-oe/recipes-support/snapper/snapper_0.11.2.bb b/meta-oe/recipes-support/snapper/snapper_0.11.2.bb
+index 74181ad6ae..887615ef45 100644
+--- a/meta-oe/recipes-support/snapper/snapper_0.11.2.bb
++++ b/meta-oe/recipes-support/snapper/snapper_0.11.2.bb
+@@ -15,7 +15,6 @@ SRC_URI = " \
+ "
+ SRCREV = "6c603565f36e9996d85045c8012cd04aba5f3708"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--disable-zypp"
+ 
+diff --git a/meta-oe/recipes-support/source-highlight/source-highlight_git.bb b/meta-oe/recipes-support/source-highlight/source-highlight_git.bb
+index 109af2cfe9..8b0a38095f 100644
+--- a/meta-oe/recipes-support/source-highlight/source-highlight_git.bb
++++ b/meta-oe/recipes-support/source-highlight/source-highlight_git.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ff95bfe019feaf92f524b73dd79e76eb"
+ SRCREV = "894cacd0799ca60afa359a63782729dec76cbb79"
+ PV = "3.1.9+git"
+ SRC_URI = "git://git.savannah.gnu.org/git/src-highlite.git;protocol=https;branch=master"
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/span-lite/span-lite_0.11.0.bb b/meta-oe/recipes-support/span-lite/span-lite_0.11.0.bb
+index 9dc393fd08..9fef39216f 100644
+--- a/meta-oe/recipes-support/span-lite/span-lite_0.11.0.bb
++++ b/meta-oe/recipes-support/span-lite/span-lite_0.11.0.bb
+@@ -6,6 +6,5 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+ SRC_URI += "git://github.com/martinmoene/span-lite;branch=master;protocol=https"
+ SRCREV = "50f55c59d1b66910837313c40d11328d03447a41"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+diff --git a/meta-oe/recipes-support/spdlog/spdlog_1.15.0.bb b/meta-oe/recipes-support/spdlog/spdlog_1.15.0.bb
+index 963de54f73..25d8249917 100644
+--- a/meta-oe/recipes-support/spdlog/spdlog_1.15.0.bb
++++ b/meta-oe/recipes-support/spdlog/spdlog_1.15.0.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x"
+ 
+ DEPENDS += "fmt"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
+index 929721b27d..e313685d95 100644
+--- a/meta-oe/recipes-support/spitools/spitools_git.bb
++++ b/meta-oe/recipes-support/spitools/spitools_git.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
+ PV = "1.0.2"
+ SRCREV = "1748e092425a4a0ff693aa347062a57fc1ffdd00"
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRC_URI = "git://github.com/cpb-/spi-tools.git;protocol=https;branch=master"
+ 
+diff --git a/meta-oe/recipes-support/srecord/srecord_1.65.0.bb b/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
+index b4294975bd..1797112a90 100644
+--- a/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
++++ b/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
+@@ -11,7 +11,7 @@ SRC_URI = " \
+     file://0001-fix-build-failure-with-gcc-15-by-adding-cstdint-head.patch \
+ "
+ SRC_URI[sha256sum] = "81c3d07cf15ce50441f43a82cefd0ac32767c535b5291bcc41bd2311d1337644"
+-S = "${WORKDIR}/${BP}-Source"
++S = "${UNPACKDIR}/${BP}-Source"
+ 
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/srecord/files/releases"
+ 
+diff --git a/meta-oe/recipes-support/ssiapi/ssiapi_1.3.0.bb b/meta-oe/recipes-support/ssiapi/ssiapi_1.3.0.bb
+index 613a2199ca..d634ca1b6e 100644
+--- a/meta-oe/recipes-support/ssiapi/ssiapi_1.3.0.bb
++++ b/meta-oe/recipes-support/ssiapi/ssiapi_1.3.0.bb
+@@ -24,7 +24,7 @@ SRC_URI = "http://sourceforge.net/projects/irstessi/files/${BPN}.${PV}.tgz \
+            "
+ SRC_URI[sha256sum] = "59daab29363d6e9f07c524029c4239653cfbbee6b0e57fd75df62499728dad8a"
+ 
+-S = "${WORKDIR}/${BPN}.${PV}"
++S = "${UNPACKDIR}/${BPN}.${PV}"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-support/switchtec-user/switchtec-user_4.2.bb b/meta-oe/recipes-support/switchtec-user/switchtec-user_4.2.bb
+index 17f54dcf4c..bba2507e14 100644
+--- a/meta-oe/recipes-support/switchtec-user/switchtec-user_4.2.bb
++++ b/meta-oe/recipes-support/switchtec-user/switchtec-user_4.2.bb
+@@ -10,7 +10,6 @@ SRCREV = "e7c351c6c722336b3c79b79cd002c7c2986eefb0"
+ SRC_URI = "git://github.com/Microsemi/switchtec-user.git;protocol=https;branch=master"
+ SRC_URI[sha256sum] = "a715e46d8498418dbb8a2519318ba0714ee148151d7e4a7fa5e27770a2f6888f"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/synergy/synergy_git.bb b/meta-oe/recipes-support/synergy/synergy_git.bb
+index 2717320886..e215c62620 100644
+--- a/meta-oe/recipes-support/synergy/synergy_git.bb
++++ b/meta-oe/recipes-support/synergy/synergy_git.bb
+@@ -16,7 +16,6 @@ SRC_URI += "file://CVE-2020-15117.patch"
+ SRCREV ?= "1b4c076127687aceac931d269e898beaac1cad9f"
+ PV = "1.10.1+git"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake features_check
+ 
+diff --git a/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb b/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb
+index d88cad75cd..019098fdf7 100644
+--- a/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb
++++ b/meta-oe/recipes-support/systemd-netlogd/systemd-netlogd_1.4.4.bb
+@@ -11,7 +11,6 @@ inherit meson systemd pkgconfig useradd features_check
+ REQUIRED_DISTRO_FEATURES = "systemd"
+ COMPATIBLE_HOST:libc-musl = "null"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS += "systemd"
+ DEPENDS += "openssl"
+diff --git a/meta-oe/recipes-support/tbb/tbb_2022.1.0.bb b/meta-oe/recipes-support/tbb/tbb_2022.1.0.bb
+index 967ace9075..937cf6a0b9 100644
+--- a/meta-oe/recipes-support/tbb/tbb_2022.1.0.bb
++++ b/meta-oe/recipes-support/tbb/tbb_2022.1.0.bb
+@@ -17,7 +17,6 @@ SRCREV = "45587e94dfb6dfe00220c5f520020a5bc745e92f"
+ SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/tio/tio_3.9.bb b/meta-oe/recipes-support/tio/tio_3.9.bb
+index ff9c552d02..67107e2924 100644
+--- a/meta-oe/recipes-support/tio/tio_3.9.bb
++++ b/meta-oe/recipes-support/tio/tio_3.9.bb
+@@ -9,7 +9,6 @@ SRCREV = "bdfe87e1cbf6e3bfd48324a25ea026fcd3cc47e9"
+ 
+ SRC_URI = "git://github.com/tio/tio;protocol=https;branch=master;tag=v${PV}"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit meson pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb b/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
+index cb1cbe670d..85859cd968 100644
+--- a/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
++++ b/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
+@@ -22,7 +22,6 @@ SRC_URI = " \
+ 	file://0001-Makefile.am-Dont-include-buildpath.patch \
+ "
+ SRCREV = "18c9faf089e306ad6f3f51f5cb887a6b9aa08350"
+-S = "${WORKDIR}/git"
+ 
+ CVE_PRODUCT = "udisks"
+ 
+diff --git a/meta-oe/recipes-support/uhubctl/uhubctl_2.6.0.bb b/meta-oe/recipes-support/uhubctl/uhubctl_2.6.0.bb
+index bf1103fb57..f4c2eaa63f 100644
+--- a/meta-oe/recipes-support/uhubctl/uhubctl_2.6.0.bb
++++ b/meta-oe/recipes-support/uhubctl/uhubctl_2.6.0.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRCREV = "352f5878e999c0a9d5a453b34110479b2056d7e7"
+ SRC_URI = "git://github.com/mvp/${BPN};branch=master;protocol=https"
+-S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
+index 02f952e528..890568d727 100644
+--- a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
++++ b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
+@@ -12,8 +12,7 @@ SRC_URI[ucd-license.sha256sum] = "abf84f74dea2812799e1dbef7f0581adf7db244881e4fe
+ 
+ inherit allarch
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_configure[noexec] = "1"
+ 
+diff --git a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb
+index 0927f5c904..389c3be903 100644
+--- a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb
++++ b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb
+@@ -20,7 +20,7 @@ UPSTREAM_CHECK_REGEX = "unixODBC-(?P<pver>\d+(\.\d+)+)\.tar"
+ 
+ inherit autotools-brokensep multilib_header qemu
+ 
+-S = "${WORKDIR}/unixODBC-${PV}"
++S = "${UNPACKDIR}/unixODBC-${PV}"
+ 
+ EXTRA_OEMAKE += "LIBS=-lltdl"
+ EXTRA_OECONF += "--enable-utf8ini"
+diff --git a/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb b/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
+index cc56e2ea8a..f9f7e86990 100644
+--- a/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
++++ b/meta-oe/recipes-support/upower/power-profiles-daemon_0.30.bb
+@@ -18,7 +18,6 @@ EXTRA_OEMESON = "-Dtests=false"
+ 
+ SRCREV = "5b4994c8a91290481bef87a5bae95391d0ec677f"
+ SRC_URI = "git://gitlab.freedesktop.org/upower/power-profiles-daemon;branch=main;protocol=https"
+-S = "${WORKDIR}/git"
+ 
+ do_install:append() {
+ 	install -d ${D}${sysconfdir}/tmpfiles.d
+diff --git a/meta-oe/recipes-support/upower/upower_1.90.6.bb b/meta-oe/recipes-support/upower/upower_1.90.6.bb
+index 5bac85c57d..d2f58d5b22 100644
+--- a/meta-oe/recipes-support/upower/upower_1.90.6.bb
++++ b/meta-oe/recipes-support/upower/upower_1.90.6.bb
+@@ -13,7 +13,7 @@ DEPENDS = " \
+ 
+ SRC_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/archive/v${PV}/${BPN}-v${PV}.tar.bz2"
+ SRC_URI[sha256sum] = "aed4e42a21307512ad236ad58d7ee4e0196670c8524a168a0edccdc32964ea0c"
+-S = "${WORKDIR}/${BPN}-v${PV}"
++S = "${UNPACKDIR}/${BPN}-v${PV}"
+ 
+ UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/tags"
+ UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-oe/recipes-support/usbids/usbids_2025.04.01.bb b/meta-oe/recipes-support/usbids/usbids_2025.04.01.bb
+index bdb5807aa6..aa884419f8 100644
+--- a/meta-oe/recipes-support/usbids/usbids_2025.04.01.bb
++++ b/meta-oe/recipes-support/usbids/usbids_2025.04.01.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/usbids/usbids.git;branch=master;protocol=https"
+ # April 1, 2025
+ SRCREV = "635738b64eb52d376c5d1756c265de67236c8934"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+ 	install -d ${D}${datadir}
+diff --git a/meta-oe/recipes-support/uthash/uthash_2.3.0.bb b/meta-oe/recipes-support/uthash/uthash_2.3.0.bb
+index ef15613586..357ddfdbca 100644
+--- a/meta-oe/recipes-support/uthash/uthash_2.3.0.bb
++++ b/meta-oe/recipes-support/uthash/uthash_2.3.0.bb
+@@ -16,7 +16,6 @@ SRC_URI = "\
+     file://run-ptest \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit ptest
+ 
+diff --git a/meta-oe/recipes-support/utouch/utouch-evemu_git.bb b/meta-oe/recipes-support/utouch/utouch-evemu_git.bb
+index bd69dbb11c..e42b19a8d0 100644
+--- a/meta-oe/recipes-support/utouch/utouch-evemu_git.bb
++++ b/meta-oe/recipes-support/utouch/utouch-evemu_git.bb
+@@ -14,6 +14,5 @@ SRCREV = "9752b50e922572e4cd214ac45ed95e4ee410fe24"
+ 
+ PV = "1.0.6+git"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PARALLEL_MAKE = ""
+diff --git a/meta-oe/recipes-support/utouch/utouch-frame_git.bb b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
+index ddd27a7e30..44994cafe0 100644
+--- a/meta-oe/recipes-support/utouch/utouch-frame_git.bb
++++ b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
+@@ -18,4 +18,3 @@ SRCREV = "95363d5a1f7394d71144bf3b408ef4e6db4350fc"
+ 
+ PV = "1.1.2+git"
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-support/utouch/utouch-mtview_git.bb b/meta-oe/recipes-support/utouch/utouch-mtview_git.bb
+index d964d7f263..eccaa81d18 100644
+--- a/meta-oe/recipes-support/utouch/utouch-mtview_git.bb
++++ b/meta-oe/recipes-support/utouch/utouch-mtview_git.bb
+@@ -16,4 +16,3 @@ DEPENDS += "mtdev utouch-frame utouch-evemu libx11"
+ 
+ PV = "1.1.7+git"
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.8.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.8.bb
+index c894a61617..dbfa454f13 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.8.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.8.bb
+@@ -18,9 +18,9 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2
+ 
+ SRC_URI[sha256sum] = "3f7132c55ac6c5f50585bfaa115d29e30b47ccf535cb0a12ff50214ddae2f63d"
+ 
+-S ?= "${WORKDIR}/vbox_module"
++S ?= "${UNPACKDIR}/vbox_module"
+ S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
+-S:task-patch = "${WORKDIR}/${BP}"
++S:task-patch = "${UNPACKDIR}/${BP}"
+ 
+ export VBOX_KBUILD_TARGET_ARCH = "${ARCH}"
+ export VBOX_KBUILD_TARGET_ARCH:x86-64 = "amd64"
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.1.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.1.bb
+index b03ed3cbb9..d11d4808fd 100644
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.1.bb
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.1.bb
+@@ -26,7 +26,7 @@ SRC_URI[sha256sum] = "98efdf21c4cdca0fe0b73ab5a8cb52093b5aa52d9b1b016a93f71dbfa1
+ 
+ inherit cmake pkgconfig gobject-introspection perlnative features_check upstream-version-is-even gi-docgen
+ 
+-S = "${WORKDIR}/webkitgtk-${PV}"
++S = "${UNPACKDIR}/webkitgtk-${PV}"
+ 
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'opengl', '', d)}"
+diff --git a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.2.bb b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.2.bb
+index 7b8097c80c..17b71411ca 100644
+--- a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.2.bb
++++ b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.2.bb
+@@ -25,7 +25,6 @@ RDEPENDS:${PN}-dev = ""
+ # tag 0.8.2
+ SRCREV = "56123c87598f8b1dd471be83ca841ceae07f95ba"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/xdelta/xdelta3_3.1.0.bb b/meta-oe/recipes-support/xdelta/xdelta3_3.1.0.bb
+index 6b35d71a55..93692af682 100644
+--- a/meta-oe/recipes-support/xdelta/xdelta3_3.1.0.bb
++++ b/meta-oe/recipes-support/xdelta/xdelta3_3.1.0.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+ 
+ SRC_URI = "git://github.com/jmacd/xdelta.git;branch=release3_1_apl;protocol=https"
+ SRCREV = "4b4aed71a959fe11852e45242bb6524be85d3709"
+-S = "${WORKDIR}/git/xdelta3"
++S = "${UNPACKDIR}/${BP}/xdelta3"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-support/xdg-dbus-proxy/xdg-dbus-proxy_0.1.6.bb b/meta-oe/recipes-support/xdg-dbus-proxy/xdg-dbus-proxy_0.1.6.bb
+index fa63196da2..43536f5d7b 100644
+--- a/meta-oe/recipes-support/xdg-dbus-proxy/xdg-dbus-proxy_0.1.6.bb
++++ b/meta-oe/recipes-support/xdg-dbus-proxy/xdg-dbus-proxy_0.1.6.bb
+@@ -13,7 +13,6 @@ inherit meson pkgconfig
+ 
+ SRC_URI = "git://github.com/flatpak/xdg-dbus-proxy.git;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "1c1989e56f94b9eb3b7567f8a6e8a0aa16cba496"
+ 
+ BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.0.bb b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.0.bb
+index 800624bd90..440d836874 100644
+--- a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.0.bb
++++ b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.0.bb
+@@ -31,7 +31,6 @@ SRC_URI = " \
+ 	file://0001-meson.build-add-a-hack-for-crosscompile.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "85df26fb1c53334969fea3f15c2a06a14831094b"
+ 
+ FILES:${PN} += "${libdir}/systemd ${datadir}/dbus-1"
+diff --git a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.9.19.bb b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.9.19.bb
+index cad5c07099..533b0801cb 100644
+--- a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.9.19.bb
++++ b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.9.19.bb
+@@ -16,7 +16,6 @@ SRCREV = "d463bad9639c910fadc2f30dac473c7688b11cfc"
+ 
+ PV = "0.9.19"
+ 
+-S = "${WORKDIR}/git"
+ 
+ FILES:${PN} += "${libdir}/xorg/modules/*"
+ 
+diff --git a/meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.8.0.bb b/meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.8.0.bb
+index 29e53fcf04..09db5519ea 100644
+--- a/meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.8.0.bb
++++ b/meta-oe/recipes-support/yaml-cpp/yaml-cpp_0.8.0.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/jbeder/yaml-cpp.git;branch=master;protocol=https"
+ SRCREV = "28f93bdec6387d42332220afa9558060c8016795"
+ PV .= "+git"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/yyjson/yyjson_0.11.1.bb b/meta-oe/recipes-support/yyjson/yyjson_0.11.1.bb
+index 57966980e0..0655f225b4 100644
+--- a/meta-oe/recipes-support/yyjson/yyjson_0.11.1.bb
++++ b/meta-oe/recipes-support/yyjson/yyjson_0.11.1.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c8ae1b99922935413d4c596f50b59545"
+ SRC_URI = "git://github.com/ibireme/yyjson.git;protocol=https;branch=master;tag=${PV}"
+ SRCREV = "9e24d6bcead647231f81173cc5c6bb6c097c00e4"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-support/zbar/zbar_git.bb b/meta-oe/recipes-support/zbar/zbar_git.bb
+index 975779cd18..053e0161d7 100644
+--- a/meta-oe/recipes-support/zbar/zbar_git.bb
++++ b/meta-oe/recipes-support/zbar/zbar_git.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/mchehab/zbar.git;branch=master;protocol=https \
+ "
+ SRCREV = "89e7900d85dd54ef351a7ed582aec6a5a5d7fa37"
+ 
+-S = "${WORKDIR}/git"
+ PV = "0.23.1+git"
+ 
+ DEPENDS += "xmlto-native"
+diff --git a/meta-oe/recipes-support/zchunk/zchunk_1.5.1.bb b/meta-oe/recipes-support/zchunk/zchunk_1.5.1.bb
+index a15540f968..9ef380005c 100644
+--- a/meta-oe/recipes-support/zchunk/zchunk_1.5.1.bb
++++ b/meta-oe/recipes-support/zchunk/zchunk_1.5.1.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=daf6e68539f564601a5a5869c31e5242"
+ SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;branch=main"
+ 
+ SRCREV = "69dd7d6764e333413dd12848607d72cab310e406"
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS = "zstd"
+ DEPENDS:append:libc-musl = " argp-standalone"
+diff --git a/meta-oe/recipes-test/bats/bats_1.12.0.bb b/meta-oe/recipes-test/bats/bats_1.12.0.bb
+index ae59a27dc9..14a234c866 100644
+--- a/meta-oe/recipes-test/bats/bats_1.12.0.bb
++++ b/meta-oe/recipes-test/bats/bats_1.12.0.bb
+@@ -12,7 +12,6 @@ SRC_URI = "\
+ # v1.12.0
+ SRCREV = "713504bc0224a19b3d7c7958c18dc07f64f54b44"
+ 
+-S = "${WORKDIR}/git"
+ 
+ # Numerous scripts assume ${baselib} == lib, which is not true.
+ #
+diff --git a/meta-oe/recipes-test/catch2/catch2_3.8.1.bb b/meta-oe/recipes-test/catch2/catch2_3.8.1.bb
+index f106b39de4..6a7fc5ad47 100644
+--- a/meta-oe/recipes-test/catch2/catch2_3.8.1.bb
++++ b/meta-oe/recipes-test/catch2/catch2_3.8.1.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+ SRC_URI = "git://github.com/catchorg/Catch2.git;branch=devel;protocol=https"
+ SRCREV = "2b60af89e23d28eefc081bc930831ee9d45ea58b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake python3native
+ 
+diff --git a/meta-oe/recipes-test/cmocka/cmocka_1.1.7.bb b/meta-oe/recipes-test/cmocka/cmocka_1.1.7.bb
+index 6c94e9e275..09afe36666 100644
+--- a/meta-oe/recipes-test/cmocka/cmocka_1.1.7.bb
++++ b/meta-oe/recipes-test/cmocka/cmocka_1.1.7.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://git.cryptomilk.org/projects/cmocka.git;protocol=https;branch=st
+            file://run-ptest \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake ptest
+ 
+diff --git a/meta-oe/recipes-test/cpputest/cpputest_4.0.bb b/meta-oe/recipes-test/cpputest/cpputest_4.0.bb
+index 5536cf07b6..5710585b6c 100644
+--- a/meta-oe/recipes-test/cpputest/cpputest_4.0.bb
++++ b/meta-oe/recipes-test/cpputest/cpputest_4.0.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ce5d5f1fe02bcd1343ced64a06fd4177"
+ SRC_URI = "git://github.com/cpputest/cpputest.git;protocol=https;branch=master"
+ SRCREV = "67d2dfd41e13f09ff218aa08e2d35f1c32f032a1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-oe/recipes-test/cukinia/cukinia_0.7.0.bb b/meta-oe/recipes-test/cukinia/cukinia_0.7.0.bb
+index e3424d019e..ad545e627b 100644
+--- a/meta-oe/recipes-test/cukinia/cukinia_0.7.0.bb
++++ b/meta-oe/recipes-test/cukinia/cukinia_0.7.0.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/savoirfairelinux/cukinia.git;protocol=https;branch=m
+ 
+ SRCREV = "be56f653743cc0e68bef81ef35df7c50ff8919c4"
+ 
+-S = "${WORKDIR}/git"
+ 
+ RRECOMMENDS:${PN} = "libgpiod-tools"
+ 
+diff --git a/meta-oe/recipes-test/cunit/cunit_2.1-3.bb b/meta-oe/recipes-test/cunit/cunit_2.1-3.bb
+index b68f0edb3f..9aab617487 100644
+--- a/meta-oe/recipes-test/cunit/cunit_2.1-3.bb
++++ b/meta-oe/recipes-test/cunit/cunit_2.1-3.bb
+@@ -4,7 +4,7 @@ LICENSE = "LGPL-2.0-only"
+ SECTION = "libs"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=7734aa853b85d6f935466f081490ddbb"
+ 
+-S = "${WORKDIR}/CUnit-${PV}"
++S = "${UNPACKDIR}/CUnit-${PV}"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/project/cunit/CUnit/${PV}/CUnit-${PV}.tar.bz2 \
+            file://fixup-install-docdir.patch \
+diff --git a/meta-oe/recipes-test/evtest/evtest_1.35.bb b/meta-oe/recipes-test/evtest/evtest_1.35.bb
+index 52f684ce5f..9c42efcdab 100644
+--- a/meta-oe/recipes-test/evtest/evtest_1.35.bb
++++ b/meta-oe/recipes-test/evtest/evtest_1.35.bb
+@@ -11,6 +11,5 @@ SRC_URI = "git://gitlab.freedesktop.org/libevdev/evtest.git;protocol=https;branc
+            file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb b/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
+index b19bba0156..98db76eda1 100644
+--- a/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
++++ b/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com//ponty/fb-test-app.git;branch=master;protocol=https"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+     install -d ${D}${bindir}
+diff --git a/meta-oe/recipes-test/googletest/googletest_1.16.0.bb b/meta-oe/recipes-test/googletest/googletest_1.16.0.bb
+index fe2f732a5d..55d670a428 100644
+--- a/meta-oe/recipes-test/googletest/googletest_1.16.0.bb
++++ b/meta-oe/recipes-test/googletest/googletest_1.16.0.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
+ 
+ PROVIDES += "gmock gtest"
+ 
+-S = "${WORKDIR}/git"
+ SRCREV = "6910c9d9165801d8827d628cb72eb7ea9dd538c5"
+ SRC_URI = "git://github.com/google/googletest.git;branch=v1.16.x;protocol=https \
+     file://gtest-ciso646.patch \
+diff --git a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
+index f13925ee18..3588e96847 100644
+--- a/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
++++ b/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb
+@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/wolfcw/libfaketime.git;branch=master;protocol=https
+            file://0001-Makefile-Detect-compiler-in-makefile.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ CFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
+ 
+diff --git a/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git.bb b/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git.bb
+index 7346011158..c617cf09a3 100644
+--- a/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git.bb
++++ b/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git.bb
+@@ -11,6 +11,5 @@ SRCREV = "2ee61484167eab846f7b7c565284d7c350d738d3"
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+diff --git a/meta-oe/recipes-test/pm-qa/pm-qa_git.bb b/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
+index 482e5694f6..d7e9618985 100644
+--- a/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
++++ b/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
+@@ -15,7 +15,6 @@ SRC_URI = " \
+     file://0001-fix-build-with-gcc-15-Wincompatible-pointer-types-er.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ CFLAGS += "-pthread"
+ 
+diff --git a/meta-oe/recipes-test/shunit2/shunit2_2.1.8.bb b/meta-oe/recipes-test/shunit2/shunit2_2.1.8.bb
+index 683600f712..8d298e3c1d 100644
+--- a/meta-oe/recipes-test/shunit2/shunit2_2.1.8.bb
++++ b/meta-oe/recipes-test/shunit2/shunit2_2.1.8.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
+ SRC_URI = " git://github.com/kward/shunit2.git;branch=master;protocol=https"
+ SRCREV = "080159b303537888c5d41910b4d47a5002638e30"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+     install -D -m 0755 ${S}/shunit2 ${D}${bindir}/shunit2
+diff --git a/meta-oe/recipes-test/testfloat/testfloat_3e.bb b/meta-oe/recipes-test/testfloat/testfloat_3e.bb
+index f5aace4d33..5000c7d106 100644
+--- a/meta-oe/recipes-test/testfloat/testfloat_3e.bb
++++ b/meta-oe/recipes-test/testfloat/testfloat_3e.bb
+@@ -21,8 +21,7 @@ SRC_URI[SoftFloat.sha256sum] = "21130ce885d35c1fe73fc1e1bf2244178167e05c6747cad5
+ 
+ UPSTREAM_CHECK_URI = "http://www.jhauser.us/arithmetic/TestFloat.html"
+ 
+-S = "${WORKDIR}/sources"
+-UNPACKDIR = "${S}"
++S = "${UNPACKDIR}"
+ 
+ do_compile(){
+     oe_runmake -C SoftFloat-${PV}/build/Linux-Cross-Compile/
+diff --git a/meta-oe/recipes-test/trompeloeil/trompeloeil_v47.bb b/meta-oe/recipes-test/trompeloeil/trompeloeil_v47.bb
+index 788a15dba2..3f2f07c28f 100644
+--- a/meta-oe/recipes-test/trompeloeil/trompeloeil_v47.bb
++++ b/meta-oe/recipes-test/trompeloeil/trompeloeil_v47.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+ SRC_URI = "git://github.com/rollbear/trompeloeil.git;branch=main;protocol=https"
+ SRCREV = "ad9bc41b1e01ae92802de59a12d19cf7c8683d6d"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
+diff --git a/meta-perl/recipes-perl/adduser/adduser_3.118.bb b/meta-perl/recipes-perl/adduser/adduser_3.118.bb
+index 431b41a2dd..9718a2ce9b 100644
+--- a/meta-perl/recipes-perl/adduser/adduser_3.118.bb
++++ b/meta-perl/recipes-perl/adduser/adduser_3.118.bb
+@@ -13,7 +13,7 @@ SRC_URI = "https://launchpad.net/debian/+archive/primary/+sourcefiles/adduser/${
+ 
+ SRC_URI[sha256sum] = "3e9eea661c9aac6b2c791bfcc1de3a9c6a422d45c8f3d38ed417737ed3166ffc"
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${UNPACKDIR}/${BPN}"
+ 
+ inherit cpan-base update-alternatives
+ 
+diff --git a/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb b/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
+index cef17fb400..edecc8dbb0 100644
+--- a/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
++++ b/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
+@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://lib/Algorithm/Diff.pm;beginline=406;endline=409;md5=d
+ SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEDKONZ/Algorithm-Diff-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "aa848b75ad3ecc32d31e8651909551e851cceef74a32822c7a3cb35c259f5190"
+ 
+-S = "${WORKDIR}/Algorithm-Diff-${PV}"
++S = "${UNPACKDIR}/Algorithm-Diff-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb b/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
+index 835fd2f6cc..b36006acd3 100644
+--- a/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
++++ b/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
+@@ -18,7 +18,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MANOWAR/RadiusPerl-${PV}.tar.gz \
+ "
+ SRC_URI[sha256sum] = "3b276506986ccaa4949d92b13ce053a0017ad11562a991cc753364923fe81ca7"
+ 
+-S = "${WORKDIR}/Authen-Radius-${PV}"
++S = "${UNPACKDIR}/Authen-Radius-${PV}"
+ 
+ inherit cpan ptest
+ 
+diff --git a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.1800.bb b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.1800.bb
+index e8ee641d9c..bcd155ff6f 100644
+--- a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.1800.bb
++++ b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.1800.bb
+@@ -16,7 +16,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/E/EH/EHUELS/Authen-SASL-${PV}.tar.gz \
+           "
+ SRC_URI[sha256sum] = "0b03686bddbbf7d5c6548e468d079a4051c9b73851df740ae28cfd2db234e922"
+ 
+-S = "${WORKDIR}/Authen-SASL-${PV}"
++S = "${UNPACKDIR}/Authen-SASL-${PV}"
+ 
+ inherit cpan ptest
+ 
+diff --git a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.50.bb b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.50.bb
+index 7154a18788..efd78e20e2 100644
+--- a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.50.bb
++++ b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.50.bb
+@@ -17,7 +17,7 @@ SRCNAME = "Capture-Tiny"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DAGOLDEN/${SRCNAME}-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "ca6e8d7ce7471c2be54e1009f64c367d7ee233a2894cacf52ebe6f53b04e81e5"
+ 
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
++S = "${UNPACKDIR}/${SRCNAME}-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.68.bb b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.68.bb
+index 59934fe36d..0c738b0b06 100644
+--- a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.68.bb
++++ b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.68.bb
+@@ -12,7 +12,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "12fb5a5b392032413571169257f98533488005550774bcbd0715be687a590cf2"
+ 
+-S = "${WORKDIR}/CGI-${PV}"
++S = "${UNPACKDIR}/CGI-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.15.bb b/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.15.bb
+index f6ed718239..93c186d2d5 100644
+--- a/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.15.bb
++++ b/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.15.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d49d07ae038f38923335ac8cc301e1ba"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETHER/Class-Method-Modifiers-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "65cd85bfe475d066e9186f7a8cc636070985b30b0ebb1cde8681cf062c2e15fc"
+ 
+-S = "${WORKDIR}/Class-Method-Modifiers-${PV}"
++S = "${UNPACKDIR}/Class-Method-Modifiers-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.213.bb b/meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.213.bb
+index 5735bbba1e..409216fe69 100644
+--- a/meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.213.bb
++++ b/meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.213.bb
+@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "8d75d3d366c9101ca18061b00d438d3da39478c06159147dea3c666770
+ 
+ DEPENDS += "bzip2"
+ 
+-S = "${WORKDIR}/Compress-Raw-Bzip2-${PV}"
++S = "${UNPACKDIR}/Compress-Raw-Bzip2-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libcompress/libcompress-raw-lzma-perl_2.213.bb b/meta-perl/recipes-perl/libcompress/libcompress-raw-lzma-perl_2.213.bb
+index 2bc42cb941..6f18bae7dd 100644
+--- a/meta-perl/recipes-perl/libcompress/libcompress-raw-lzma-perl_2.213.bb
++++ b/meta-perl/recipes-perl/libcompress/libcompress-raw-lzma-perl_2.213.bb
+@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "6b979a8347701ced3ac26123d428c1f202b7999850444da19c4aedbb7c
+ 
+ DEPENDS += "xz"
+ 
+-S = "${WORKDIR}/Compress-Raw-Lzma-${PV}"
++S = "${UNPACKDIR}/Compress-Raw-Lzma-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libcompress/libcompress-raw-zlib-perl_2.213.bb b/meta-perl/recipes-perl/libcompress/libcompress-raw-zlib-perl_2.213.bb
+index 205e6a548e..0c6a1070cd 100644
+--- a/meta-perl/recipes-perl/libcompress/libcompress-raw-zlib-perl_2.213.bb
++++ b/meta-perl/recipes-perl/libcompress/libcompress-raw-zlib-perl_2.213.bb
+@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "56b21c99cb3a3a7f7876a74dd05daa3f41fc9143ddd4dc98f8e46710a1
+ 
+ DEPENDS += "zlib"
+ 
+-S = "${WORKDIR}/Compress-Raw-Zlib-${PV}"
++S = "${UNPACKDIR}/Compress-Raw-Zlib-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libconfig-tiny/libconfig-tiny-perl_2.30.bb b/meta-perl/recipes-perl/libconfig-tiny/libconfig-tiny-perl_2.30.bb
+index f232c3585b..73694bb95f 100644
+--- a/meta-perl/recipes-perl/libconfig-tiny/libconfig-tiny-perl_2.30.bb
++++ b/meta-perl/recipes-perl/libconfig-tiny/libconfig-tiny-perl_2.30.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab27c3cedbdb0eb6e656a8722476191a"
+ 
+ RDEPENDS:${PN} += "perl"
+ 
+-S = "${WORKDIR}/Config-Tiny-${PV}"
++S = "${UNPACKDIR}/Config-Tiny-${PV}"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/R/RS/RSAVAGE/Config-Tiny-${PV}.tgz"
+ 
+diff --git a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb
+index 8331a1d4af..086b2ff32e 100644
+--- a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb
++++ b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb
+@@ -33,7 +33,7 @@ RDEPENDS:${PN} += "perl-module-text-parsewords"
+ RDEPENDS:${PN} += "perl-module-warnings"
+ RRECOMMENDS:${PN} += "libfile-slurper-perl"
+ 
+-S = "${WORKDIR}/Config-AutoConf-${PV}"
++S = "${UNPACKDIR}/Config-AutoConf-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb
+index dd6cd8041f..09c145e7cd 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb
+@@ -23,7 +23,7 @@ RDEPENDS:${PN} = "\
+ 
+ EXTRA_CPANFLAGS = "INC='-I${STAGING_INCDIR}' LIBS='-L${STAGING_LIBDIR} -lssl -L${STAGING_DIR_TARGET}${base_libdir} -lcrypto'"
+ 
+-S = "${WORKDIR}/Crypt-OpenSSL-Guess-${PV}"
++S = "${UNPACKDIR}/Crypt-OpenSSL-Guess-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.17.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.17.bb
+index c55f7f7680..982d604eaa 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.17.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.17.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9e876d4149406d88b4ff1b37645363ad"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/R/RU/RURBAN/Crypt-OpenSSL-Random-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "a571b24181baaa76c96704e92acffc6934ff593e380dade274db4e43c140ad51"
+ 
+-S = "${WORKDIR}/Crypt-OpenSSL-Random-${PV}"
++S = "${UNPACKDIR}/Crypt-OpenSSL-Random-${PV}"
+ 
+ DEPENDS += " \
+     openssl \
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.33.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.33.bb
+index 36f96d59cd..5b81cfa4a3 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.33.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.33.bb
+@@ -22,7 +22,7 @@ RDEPENDS:${PN} = " \
+ 
+ EXTRA_CPANFLAGS = "INC='-I${STAGING_INCDIR}' LIBS='-L${STAGING_LIBDIR} -lssl -L${STAGING_DIR_TARGET}${base_libdir} -lcrypto'"
+ 
+-S = "${WORKDIR}/Crypt-OpenSSL-RSA-${PV}"
++S = "${UNPACKDIR}/Crypt-OpenSSL-RSA-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libcurses/libcurses-perl_1.45.bb b/meta-perl/recipes-perl/libcurses/libcurses-perl_1.45.bb
+index f440209860..e6fc3c8300 100644
+--- a/meta-perl/recipes-perl/libcurses/libcurses-perl_1.45.bb
++++ b/meta-perl/recipes-perl/libcurses/libcurses-perl_1.45.bb
+@@ -15,7 +15,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/G/GI/GIRAFFED/Curses-${PV}.tar.gz \
+ 
+ SRC_URI[sha256sum] = "84221e0013a2d64a0bae6a32bb44b1ae5734d2cb0465fb89af3e3abd6e05aeb2"
+ 
+-S = "${WORKDIR}/Curses-${PV}"
++S = "${UNPACKDIR}/Curses-${PV}"
+ 
+ EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR} LIBS=-L${STAGING_LIBDIR} TEST_SYMS_OPTS=-v"
+ 
+diff --git a/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb b/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb
+index f52d0034f2..793889de6d 100644
+--- a/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb
++++ b/meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb
+@@ -20,7 +20,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/F/FT/FTASSIN/Data-HexDump-${PV}.tar.gz \
+ "
+ SRC_URI[sha256sum] = "1a9d843e7f667c1c6f77c67af5d77e7462ff23b41937cb17454d03535cd9be70"
+ 
+-S = "${WORKDIR}/Data-HexDump-${PV}"
++S = "${UNPACKDIR}/Data-HexDump-${PV}"
+ 
+ inherit cpan ptest update-alternatives
+ 
+diff --git a/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.76.bb b/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.76.bb
+index 8425607eeb..e8bbf79b13 100644
+--- a/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.76.bb
++++ b/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.76.bb
+@@ -18,7 +18,7 @@ SRC_URI[sha256sum] = "0a33a7a935be63371071dbe600cfaefa67cd971b67580a917bbf6ebaf7
+ 
+ UPSTREAM_CHECK_REGEX = "DBD\-SQLite\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ 
+-S = "${WORKDIR}/DBD-SQLite-${PV}"
++S = "${UNPACKDIR}/DBD-SQLite-${PV}"
+ 
+ DEPENDS += "libdbi-perl-native"
+ 
+diff --git a/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb b/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb
+index e8450c7ac8..1da94516eb 100644
+--- a/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb
++++ b/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=53;endline=55;md5=935dadb9423774f535
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Devel-GlobalDestruction-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "34b8a5f29991311468fe6913cadaba75fd5d2b0b3ee3bb41fe5b53efab9154ab"
+ 
+-S = "${WORKDIR}/Devel-GlobalDestruction-${PV}"
++S = "${UNPACKDIR}/Devel-GlobalDestruction-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.05.bb b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.05.bb
+index 5bbabf24de..bb19dfb415 100644
+--- a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.05.bb
++++ b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.05.bb
+@@ -13,7 +13,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/A/AR/ARODLAND/Digest-HMAC-${PV}.tar.gz \
+           "
+ SRC_URI[sha256sum] = "215cb59cba610745cfb2d4b3f8ef756d590e57e3ad7986a992e87c4969fcdc7a"
+ 
+-S = "${WORKDIR}/Digest-HMAC-${PV}"
++S = "${UNPACKDIR}/Digest-HMAC-${PV}"
+ 
+ inherit cpan ptest
+ 
+diff --git a/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
+index c677e8ea59..350bad3ea2 100644
+--- a/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
++++ b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
+@@ -11,7 +11,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/G/GA/GAAS/Digest-SHA1-${PV}.tar.gz \
+           "
+ SRC_URI[sha256sum] = "68c1dac2187421f0eb7abf71452a06f190181b8fc4b28ededf5b90296fb943cc"
+ 
+-S = "${WORKDIR}/Digest-SHA1-${PV}"
++S = "${UNPACKDIR}/Digest-SHA1-${PV}"
+ 
+ inherit cpan ptest
+ 
+diff --git a/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb b/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb
+index f88a418a47..e2a7084061 100644
+--- a/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb
++++ b/meta-perl/recipes-perl/libenv/libenv-perl_1.04.bb
+@@ -13,7 +13,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/F/FL/FLORA/Env-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "d94a3d412df246afdc31a2199cbd8ae915167a3f4684f7b7014ce1200251ebb0"
+ 
+-S = "${WORKDIR}/Env-${PV}"
++S = "${UNPACKDIR}/Env-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/liberror/liberror-perl_0.17030.bb b/meta-perl/recipes-perl/liberror/liberror-perl_0.17030.bb
+index cce79f807a..7b28d59228 100644
+--- a/meta-perl/recipes-perl/liberror/liberror-perl_0.17030.bb
++++ b/meta-perl/recipes-perl/liberror/liberror-perl_0.17030.bb
+@@ -35,7 +35,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/S/SH/SHLOMIF/Error-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "34d382276c0fb0d6b38355b94c96a30b12d834d5662eb53f088ee25e3e712924"
+ 
+-S = "${WORKDIR}/Error-${PV}"
++S = "${UNPACKDIR}/Error-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb b/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
+index b6e80cd888..401f607571 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1932ab4d8b84c25fd7967aa18088e57e"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/ExtUtils-Config-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "ae5104f634650dce8a79b7ed13fb59d67a39c213a6776cfdaa3ee749e62f1a8c"
+ 
+-S = "${WORKDIR}/ExtUtils-Config-${PV}"
++S = "${UNPACKDIR}/ExtUtils-Config-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.27.bb b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.27.bb
+index c7accb3171..f23d4e3eda 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.27.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.27.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=81;endline=84;md5=84c0390b90ea8c6702
+ SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETJ/ExtUtils-CppGuess-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "b2c7b581901054a32dfcea12536fda8626457ed0bfbc02600bd354bde7e2a9b4"
+ 
+-S = "${WORKDIR}/ExtUtils-CppGuess-${PV}"
++S = "${UNPACKDIR}/ExtUtils-CppGuess-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.028.bb b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.028.bb
+index e03496d789..42c99ddf58 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.028.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.028.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c0280160e4f26faafef507664884bf63"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/ExtUtils-Helpers-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "c8574875cce073e7dc5345a7b06d502e52044d68894f9160203fcaab379514fe"
+ 
+-S = "${WORKDIR}/ExtUtils-Helpers-${PV}"
++S = "${UNPACKDIR}/ExtUtils-Helpers-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb b/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb
+index 25de3fc5d4..13d5a31d0b 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.012.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b6fa54d873ce6bcf4809ea88bdf97769"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "84735e3037bab1fdffa3c2508567ad412a785c91599db3c12593a50a1dd434ed"
+ 
+-S = "${WORKDIR}/ExtUtils-InstallPaths-${PV}"
++S = "${UNPACKDIR}/ExtUtils-InstallPaths-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.35.bb b/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.35.bb
+index c3a85f6f4f..f5b87ff896 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.35.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-parsexs-perl_3.35.bb
+@@ -16,7 +16,7 @@ SRCNAME = "ExtUtils-ParseXS"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/S/SM/SMUELLER/${SRCNAME}-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "41def0511278a2a8ba9afa25ccab45b0453f75e7fd774e8644b5f9a57cc4ee1c"
+ 
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
++S = "${UNPACKDIR}/${SRCNAME}-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb b/meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb
+index a0dcacfaa4..d857f1316a 100644
+--- a/meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb
++++ b/meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb
+@@ -10,7 +10,7 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=37;endline=41;md5=255fbd5f98a90d51d9908d31271ae4d4"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/U/UR/URI/File-Slurp-${PV}.tar.gz"
+ 
+-S = "${WORKDIR}/File-Slurp-${PV}"
++S = "${UNPACKDIR}/File-Slurp-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.014.bb b/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.014.bb
+index 410ce80461..03001de45e 100644
+--- a/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.014.bb
++++ b/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.014.bb
+@@ -28,7 +28,7 @@ RDEPENDS:${PN}-ptest += "libtest-warnings-perl \
+     perl-module-test-more \
+     "
+ 
+-S = "${WORKDIR}/File-Slurper-${PV}"
++S = "${UNPACKDIR}/File-Slurper-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb b/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb
+index 64330ceeaa..bd6129e4f2 100644
+--- a/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb
++++ b/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.72.bb
+@@ -11,7 +11,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/G/GA/GAAS/HTML-Parser-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "ec28c7e1d9e67c45eca197077f7cdc41ead1bb4c538c7f02a3296a4bb92f608b"
+ 
+-S = "${WORKDIR}/HTML-Parser-${PV}"
++S = "${UNPACKDIR}/HTML-Parser-${PV}"
+ 
+ EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
+ 
+diff --git a/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb b/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb
+index a0ce7c0b2e..519c2ad54c 100644
+--- a/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb
++++ b/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=62;endline=66;md5=aa91eed6adfe182d2a
+ SRC_URI = "${CPAN_MIRROR}/authors/id/P/PE/PETDANCE/HTML-Tagset-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "adb17dac9e36cd011f5243881c9739417fd102fce760f8de4e9be4c7131108e2"
+ 
+-S = "${WORKDIR}/HTML-Tagset-${PV}"
++S = "${UNPACKDIR}/HTML-Tagset-${PV}"
+ 
+ 
+ inherit cpan ptest-perl
+diff --git a/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
+index 7bdebcd37c..77737f666d 100644
+--- a/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
++++ b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.03.bb
+@@ -16,7 +16,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/C/CJ/CJM/HTML-Tree-${PV}.tar.gz \
+ "
+ SRC_URI[sha256sum] = "7d6d73fca622aa74855a8b088faa39454a0f91b7af83c9ec0387f01eefc2148f"
+ 
+-S = "${WORKDIR}/HTML-Tree-${PV}"
++S = "${UNPACKDIR}/HTML-Tree-${PV}"
+ 
+ inherit cpan_build
+ 
+diff --git a/meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb b/meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb
+index c16c358fcf..76e4d3bbf1 100644
+--- a/meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb
++++ b/meta-perl/recipes-perl/libimport/libimport-into-perl_1.002004.bb
+@@ -19,7 +19,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=209;endline=223;md5=3cf363f1e405dea6
+ SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETHER/Import-Into-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "decb259bc2ff015fe3dac85e4a287d4128e9b0506a0b2c5fa7244836a68b1084"
+ 
+-S = "${WORKDIR}/Import-Into-${PV}"
++S = "${UNPACKDIR}/Import-Into-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libio/libio-compress-lzma-perl_2.213.bb b/meta-perl/recipes-perl/libio/libio-compress-lzma-perl_2.213.bb
+index f6733ad02d..b2da8a903f 100644
+--- a/meta-perl/recipes-perl/libio/libio-compress-lzma-perl_2.213.bb
++++ b/meta-perl/recipes-perl/libio/libio-compress-lzma-perl_2.213.bb
+@@ -11,7 +11,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/IO-Compress-Lzma-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "daa63c3fa1f7708aa55b97a4d189820f5e849f8e4583dc24b5cceebd06a493eb"
+ 
+-S = "${WORKDIR}/IO-Compress-Lzma-${PV}"
++S = "${UNPACKDIR}/IO-Compress-Lzma-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libio/libio-compress-perl_2.213.bb b/meta-perl/recipes-perl/libio/libio-compress-perl_2.213.bb
+index 4e0a0be4f0..ce764334f1 100644
+--- a/meta-perl/recipes-perl/libio/libio-compress-perl_2.213.bb
++++ b/meta-perl/recipes-perl/libio/libio-compress-perl_2.213.bb
+@@ -20,7 +20,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/IO-Compress-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "ae4d01ae574e4568c5f2fb0573e74631e2720b71ad3bc5a3ffe9480f1cb9a851"
+ 
+-S = "${WORKDIR}/IO-Compress-${PV}"
++S = "${UNPACKDIR}/IO-Compress-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.090.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.090.bb
+index ce3097cb63..58d099043d 100644
+--- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.090.bb
++++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.090.bb
+@@ -23,7 +23,7 @@ RDEPENDS:${PN} += "\
+ SRC_URI = "${CPAN_MIRROR}/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "fdda17888df9f88251b62856f17fcac8f144858c72d7e01d1c4b437d23383d97"
+ 
+-S = "${WORKDIR}/IO-Socket-SSL-${PV}"
++S = "${UNPACKDIR}/IO-Socket-SSL-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb b/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
+index 5c5ccf7db2..a2c3e8a46e 100644
+--- a/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
++++ b/meta-perl/recipes-perl/libio/libio-stringy-perl_2.111.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=01406e4ff2e60d88d42ef1caebdd0011"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/D/DS/DSKOLL/IO-stringy-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "8c67fd6608c3c4e74f7324f1404a856c331dbf48d9deda6aaa8296ea41bf199d"
+ 
+-S = "${WORKDIR}/IO-stringy-${PV}"
++S = "${UNPACKDIR}/IO-stringy-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb b/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb
+index 43a6ff6527..84fcca8da5 100644
+--- a/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb
++++ b/meta-perl/recipes-perl/libipc/libipc-signal-perl_1.00.bb
+@@ -8,7 +8,7 @@ SECTION = "libs"
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=16;endline=18;md5=f36550f59a0ae5e6e3b0be6a4da60d26"
+ 
+-S = "${WORKDIR}/IPC-Signal-${PV}"
++S = "${UNPACKDIR}/IPC-Signal-${PV}"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/R/RO/ROSCH/IPC-Signal-${PV}.tar.gz"
+ 
+diff --git a/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb b/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
+index 9774ac55d1..7c23619cde 100644
+--- a/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
++++ b/meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
+@@ -13,7 +13,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/P/PV/PVANDRY/Locale-gettext-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "909d47954697e7c04218f972915b787bd1244d75e3bd01620bc167d5bbc49c15"
+ 
+-S = "${WORKDIR}/Locale-gettext-${PV}"
++S = "${UNPACKDIR}/Locale-gettext-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.013.1.bb b/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.013.1.bb
+index a390818511..b7b287c399 100644
+--- a/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.013.1.bb
++++ b/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.013.1.bb
+@@ -11,7 +11,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEZUMI/MIME-Charset-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "1bb7a6e0c0d251f23d6e60bf84c9adefc5b74eec58475bfee4d39107e60870f0"
+ 
+-S = "${WORKDIR}/MIME-Charset-${PV}"
++S = "${UNPACKDIR}/MIME-Charset-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.28.bb b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.28.bb
+index d8203f4353..043e1549af 100644
+--- a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.28.bb
++++ b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.28.bb
+@@ -16,7 +16,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MARKOV/MIME-Types-${PV}.tar.gz \
+           "
+ SRC_URI[sha256sum] = "7099cb5133401acc92d8fb0fd398cac682140be0680e7dfcb4aaf40315a2dfca"
+ 
+-S = "${WORKDIR}/MIME-Types-${PV}"
++S = "${UNPACKDIR}/MIME-Types-${PV}"
+ 
+ inherit cpan ptest
+ 
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.048.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.048.bb
+index bab9c5c95d..f3c6e1a016 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.048.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.048.bb
+@@ -17,7 +17,7 @@ DEPENDS = "libextutils-config-perl-native libextutils-helpers-perl-native libext
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Module-Build-Tiny-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "79a73e506fb7badabdf79137a45c6c5027daaf6f9ac3dcfb9d4ffcce92eb36bd"
+ 
+-S = "${WORKDIR}/Module-Build-Tiny-${PV}"
++S = "${UNPACKDIR}/Module-Build-Tiny-${PV}"
+ 
+ inherit cpan_build ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb b/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb
+index fac74ba97e..108c965968 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb
+@@ -23,7 +23,7 @@ SRC_URI[sha256sum] = "b3f2ad45e4fd10b3fb90d912d78d8b795ab295480db56dc64e86b9fa75
+ UPSTREAM_CHECK_REGEX = "Module\-Pluggable\-(?P<pver>(\d+\.\d+))"
+ UPSTREAM_CHECK_URI = "https://metacpan.org/release/${SRCNAME}"
+ 
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
++S = "${UNPACKDIR}/${SRCNAME}-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb b/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
+index 0ed61ac3a4..4526def40a 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
+@@ -25,7 +25,7 @@ SRC_URI[sha256sum] = "68302ec646833547d410be28e09676db75006f4aa58a11f3bdb44ffe99
+ 
+ UPSTREAM_CHECK_REGEX = "Module\-Runtime\-(?P<pver>(\d+\.\d+)).tar"
+ 
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
++S = "${UNPACKDIR}/${SRCNAME}-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libmoo/libmoo-perl_2.005005.bb b/meta-perl/recipes-perl/libmoo/libmoo-perl_2.005005.bb
+index e92d793d9c..bbb8d9868f 100644
+--- a/meta-perl/recipes-perl/libmoo/libmoo-perl_2.005005.bb
++++ b/meta-perl/recipes-perl/libmoo/libmoo-perl_2.005005.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=742;endline=787;md5=74f4de483dce5aa4
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Moo-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "fb5a2952649faed07373f220b78004a9c6aba387739133740c1770e9b1f4b108"
+ 
+-S = "${WORKDIR}/Moo-${PV}"
++S = "${UNPACKDIR}/Moo-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20250602.bb b/meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20250602.bb
+index b5f980e646..d5c7db4764 100644
+--- a/meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20250602.bb
++++ b/meta-perl/recipes-perl/libmozilla/libmozilla-ca-perl_20250602.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=32;endline=39;md5=51e666dce556490a11
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LW/LWP/Mozilla-CA-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "adeac0752440b2da094e8036bab6c857e22172457658868f5ac364f0c7b35481"
+ 
+-S = "${WORKDIR}/Mozilla-CA-${PV}"
++S = "${UNPACKDIR}/Mozilla-CA-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.50.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.50.bb
+index c7c0e381a6..05027f693c 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.50.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.50.bb
+@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "c660500b9d96e5aa2b16d9f4260b6f9f05b5602d3c4bea0ca39b45bcd0
+ 
+ UPSTREAM_CHECK_REGEX = "Net\-DNS\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ 
+-S = "${WORKDIR}/Net-DNS-${PV}"
++S = "${UNPACKDIR}/Net-DNS-${PV}"
+ 
+ EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
+ 
+diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb b/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb
+index ba79922bac..ee365f9328 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb
+@@ -12,7 +12,7 @@ DEPENDS += "openssl"
+ 
+ UPSTREAM_CHECK_REGEX = "Net\-DNS\-SEC\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ 
+-S = "${WORKDIR}/Net-DNS-SEC-${PV}"
++S = "${UNPACKDIR}/Net-DNS-SEC-${PV}"
+ 
+ EXTRA_CPANFLAGS = "INC='-I${STAGING_INCDIR}' LIBS='-L${STAGING_LIBDIR} -lssl -L${STAGING_BASELIBDIR} -lcrypto'"
+ 
+diff --git a/meta-perl/recipes-perl/libnet/libnet-idn-encode_2.500.bb b/meta-perl/recipes-perl/libnet/libnet-idn-encode_2.500.bb
+index 7f33fd2b1f..dd53bebf4c 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-idn-encode_2.500.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-idn-encode_2.500.bb
+@@ -12,7 +12,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/C/CF/CFAERBER/Net-IDN-Encode-${PV}.tar.gz \
+ "
+ SRC_URI[sha256sum] = "55453633e3ff24ce325b34bc2c8157b9859962a31ab5cf28bf7ccc1c9b3a3eaa"
+ 
+-S = "${WORKDIR}/Net-IDN-Encode-${PV}"
++S = "${UNPACKDIR}/Net-IDN-Encode-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb b/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb
+index a7793200a5..c620485123 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.68.bb
+@@ -13,7 +13,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MARSCHAP/perl-ldap-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "e2f389fe3e7a9e4b61488692919ad723b98f3b479b5288f610daa8c27995b351"
+ 
+-S = "${WORKDIR}/perl-ldap-${PV}"
++S = "${UNPACKDIR}/perl-ldap-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
+index f56b5a26e4..8f029492b1 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
+@@ -19,7 +19,7 @@ SRC_URI += "file://libidn-wr-cross-compile.patch"
+ 
+ LIC_FILES_CHKSUM = "file://README;beginline=42;endline=92;md5=3374ea0369ca3ead6047520477a43147"
+ 
+-S = "${WORKDIR}/Net-LibIDN-${PV}"
++S = "${UNPACKDIR}/Net-LibIDN-${PV}"
+ 
+ EXTRA_CPANFLAGS = "--with-libidn=${STAGING_LIBDIR} --with-libidn-inc=${STAGING_INCDIR} --compiler='${CC}'"
+ EXTRA_CPANFLAGS += "--disable-tld"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+index d09f756fbb..daf07baa22 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+@@ -29,7 +29,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
+           "
+ SRC_URI[sha256sum] = "9d8188b9fb1cae3bd791979c20554925d5e94a138d00414f1a6814549927b0c8"
+ 
+-S = "${WORKDIR}/Net-SSLeay-${PV}"
++S = "${UNPACKDIR}/Net-SSLeay-${PV}"
+ 
+ inherit cpan ptest
+ 
+diff --git a/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb b/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
+index 2e79a3b1cd..3d05a3d7a3 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.05.bb
+@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=4;endline=7;md5=e94ab3b72335e3cdadd6
+ SRC_URI = "${CPAN_MIRROR}/authors/id/J/JR/JROGERS/Net-Telnet-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "677f68ba2cd2a824fae323fa82e183bf7e3d03c3c499c91d923bd6283796a743"
+ 
+-S = "${WORKDIR}/Net-Telnet-${PV}"
++S = "${UNPACKDIR}/Net-Telnet-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb b/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
+index d9424ed4d6..8478441211 100644
+--- a/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
++++ b/meta-perl/recipes-perl/libproc/libproc-waitstat-perl_1.00.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=21;endline=23;md5=f36550f59a0ae5e6e3
+ 
+ RDEPENDS:${PN} += "perl libipc-signal-perl"
+ 
+-S = "${WORKDIR}/Proc-WaitStat-${PV}"
++S = "${UNPACKDIR}/Proc-WaitStat-${PV}"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/R/RO/ROSCH/Proc-WaitStat-${PV}.tar.gz"
+ 
+diff --git a/meta-perl/recipes-perl/librole/librole-tiny-perl_2.002004.bb b/meta-perl/recipes-perl/librole/librole-tiny-perl_2.002004.bb
+index 8ccd269e6d..69d84a6edf 100644
+--- a/meta-perl/recipes-perl/librole/librole-tiny-perl_2.002004.bb
++++ b/meta-perl/recipes-perl/librole/librole-tiny-perl_2.002004.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=197;endline=234;md5=26df7e7c20551fb1
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Role-Tiny-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "d7bdee9e138a4f83aa52d0a981625644bda87ff16642dfa845dcb44d9a242b45"
+ 
+-S = "${WORKDIR}/Role-Tiny-${PV}"
++S = "${UNPACKDIR}/Role-Tiny-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+index 6b1c4e8c0f..be52caacf2 100644
+--- a/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
++++ b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+@@ -30,7 +30,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c195
+ 
+ SRC_URI[sha256sum] = "16a29f7acaeec081bf0e7303ba5ee24fda1d21a1104669b837745f3ea61d6afa"
+ 
+-S = "${WORKDIR}/Unix-Statgrab-${PV}"
++S = "${UNPACKDIR}/Unix-Statgrab-${PV}"
+ 
+ export LD = "${CCLD}"
+ 
+diff --git a/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000006.bb b/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000006.bb
+index 5a779a6733..426ba68ab8 100644
+--- a/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000006.bb
++++ b/meta-perl/recipes-perl/libstrictures/libstrictures-perl_2.000006.bb
+@@ -31,7 +31,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=246;endline=262;md5=43be558cf4f19823
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/strictures-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "09d57974a6d1b2380c802870fed471108f51170da81458e2751859f2714f8d57"
+ 
+-S = "${WORKDIR}/strictures-${PV}"
++S = "${UNPACKDIR}/strictures-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001013.bb b/meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001013.bb
+index 10f0fa2044..5ffc3eaef9 100644
+--- a/meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001013.bb
++++ b/meta-perl/recipes-perl/libsub/libsub-exporter-progressive-perl_0.001013.bb
+@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=003fa970662359a43ac2c2961108b0f1"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/F/FR/FREW/Sub-Exporter-Progressive-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "d535b7954d64da1ac1305b1fadf98202769e3599376854b2ced90c382beac056"
+ 
+-S = "${WORKDIR}/Sub-Exporter-Progressive-${PV}"
++S = "${UNPACKDIR}/Sub-Exporter-Progressive-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libsub/libsub-uplevel-perl_0.2800.bb b/meta-perl/recipes-perl/libsub/libsub-uplevel-perl_0.2800.bb
+index 7487712a93..084d55ee60 100644
+--- a/meta-perl/recipes-perl/libsub/libsub-uplevel-perl_0.2800.bb
++++ b/meta-perl/recipes-perl/libsub/libsub-uplevel-perl_0.2800.bb
+@@ -19,7 +19,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/${CPAN_AUTHOR}/${CPAN_PACKAGE}-${PV}.t
+ 
+ SRC_URI[sha256sum] = "b4f3f63b80f680a421332d8851ddbe5a8e72fcaa74d5d1d98f3c8cc4a3ece293"
+ 
+-S = "${WORKDIR}/${CPAN_PACKAGE}-${PV}"
++S = "${UNPACKDIR}/${CPAN_PACKAGE}-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb b/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
+index 3f184badf5..889b6b655b 100644
+--- a/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
++++ b/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.38.bb
+@@ -16,7 +16,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/J/JS/JSTOWE/TermReadKey-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "5a645878dc570ac33661581fbb090ff24ebce17d43ea53fd22e105a856a47290"
+ 
+-S = "${WORKDIR}/TermReadKey-${PV}"
++S = "${UNPACKDIR}/TermReadKey-${PV}"
+ 
+ UPSTREAM_CHECK_URI = "https://metacpan.org/release/TermReadKey"
+ UPSTREAM_CHECK_REGEX = "TermReadKey\-(?P<pver>(\d+\.\d+))(?!_\d+)\.tar.gz"
+diff --git a/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.205.bb b/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.205.bb
+index 7fbddad7fc..414f0efe3d 100644
+--- a/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.205.bb
++++ b/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.205.bb
+@@ -30,7 +30,7 @@ SRC_URI[sha256sum] = "42781e9943a7a215e662c4973b9feafdc019fd16469bdb849a8537ee58
+ 
+ UPSTREAM_CHECK_REGEX = "Test\-Deep\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ 
+-S = "${WORKDIR}/Test-Deep-${PV}"
++S = "${UNPACKDIR}/Test-Deep-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.50.bb b/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.50.bb
+index 24b6806bc6..0af38719c7 100644
+--- a/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.50.bb
++++ b/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.50.bb
+@@ -30,7 +30,7 @@ SRC_URI[sha256sum] = "79b6acdc444f1924cd4c2e9ed868bdc6e09580021aca8ff078ede2ffef
+ 
+ UPSTREAM_CHECK_REGEX = "Test\-Harness\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ 
+-S = "${WORKDIR}/Test-Harness-${PV}"
++S = "${UNPACKDIR}/Test-Harness-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libtest/libtest-nowarnings-perl_1.04.bb b/meta-perl/recipes-perl/libtest/libtest-nowarnings-perl_1.04.bb
+index fe178b46ca..23f339bcda 100644
+--- a/meta-perl/recipes-perl/libtest/libtest-nowarnings-perl_1.04.bb
++++ b/meta-perl/recipes-perl/libtest/libtest-nowarnings-perl_1.04.bb
+@@ -29,7 +29,7 @@ SRC_URI[sha256sum] = "638a57658cb119af1fe5b15e73d47c2544dcfef84af0c6b1b2e97f0820
+ 
+ RDEPENDS:${PN} += "perl-module-test-builder perl-module-test-more perl-module-test-tester"
+ 
+-S = "${WORKDIR}/${CPAN_PACKAGE}-${PV}"
++S = "${UNPACKDIR}/${CPAN_PACKAGE}-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libtest/libtest-warn-perl_0.37.bb b/meta-perl/recipes-perl/libtest/libtest-warn-perl_0.37.bb
+index 0f0816df9b..6536787623 100644
+--- a/meta-perl/recipes-perl/libtest/libtest-warn-perl_0.37.bb
++++ b/meta-perl/recipes-perl/libtest/libtest-warn-perl_0.37.bb
+@@ -19,7 +19,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/B/BI/${CPAN_AUTHOR}/${CPAN_PACKAGE}-${PV}.t
+ 
+ SRC_URI[sha256sum] = "98ca32e7f2f5ea89b8bfb9a0609977f3d153e242e2e51705126cb954f1a06b57"
+ 
+-S = "${WORKDIR}/${CPAN_PACKAGE}-${PV}"
++S = "${UNPACKDIR}/${CPAN_PACKAGE}-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb b/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
+index 8f16aa1ec0..15f8b3f81e 100644
+--- a/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
++++ b/meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
+@@ -19,7 +19,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/K/KU/KUBOTA/Text-CharWidth-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "abded5f4fdd9338e89fd2f1d8271c44989dae5bf50aece41b6179d8e230704f8"
+ 
+-S = "${WORKDIR}/Text-CharWidth-${PV}"
++S = "${UNPACKDIR}/Text-CharWidth-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
+index 9c473d15a2..90bd555403 100644
+--- a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
++++ b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
+@@ -16,7 +16,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/O/OV/OVID/Text-Diff-${PV}.tar.gz \
+           "
+ SRC_URI[sha256sum] = "a67f50a48e313c1680cc662109ce5f913ea71454db355d0cf4db87ac89d2d2fa"
+ 
+-S = "${WORKDIR}/Text-Diff-${PV}"
++S = "${UNPACKDIR}/Text-Diff-${PV}"
+ 
+ inherit cpan ptest
+ RDEPENDS:${PN}-ptest += "perl-module-test perl-module-test-more"
+diff --git a/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb b/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
+index 80c976561a..2d0242d878 100644
+--- a/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
++++ b/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
+@@ -17,7 +17,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/M/MP/MPIOTR/Text-Iconv-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "5b80b7d5e709d34393bcba88971864a17b44a5bf0f9e4bcee383d029e7d2d5c3"
+ 
+-S = "${WORKDIR}/Text-Iconv-${PV}"
++S = "${UNPACKDIR}/Text-Iconv-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb b/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
+index 7bc2e234ac..025bcc2873 100644
+--- a/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
++++ b/meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
+@@ -20,7 +20,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/K/KU/KUBOTA/Text-WrapI18N-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "4bd29a17f0c2c792d12c1005b3c276f2ab0fae39c00859ae1741d7941846a488"
+ 
+-S = "${WORKDIR}/Text-WrapI18N-${PV}"
++S = "${UNPACKDIR}/Text-WrapI18N-${PV}"
+ 
+ DEPENDS = "libtext-charwidth-perl"
+ 
+diff --git a/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb b/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb
+index ae922d9dda..6b552d9502 100644
+--- a/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb
++++ b/meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2019.001.bb
+@@ -14,7 +14,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEZUMI/Unicode-LineBreak-${PV}.tar.gz"
+ 
+ SRC_URI[sha256sum] = "486762e4cacddcc77b13989f979a029f84630b8175e7fef17989e157d4b6318a"
+ 
+-S = "${WORKDIR}/Unicode-LineBreak-${PV}"
++S = "${UNPACKDIR}/Unicode-LineBreak-${PV}"
+ 
+ DEPENDS = "libsombok3 libmime-charset-perl"
+ 
+diff --git a/meta-perl/recipes-perl/liburi/liburi-perl_5.32.bb b/meta-perl/recipes-perl/liburi/liburi-perl_5.32.bb
+index 604b046f0d..7c42a7e4a4 100644
+--- a/meta-perl/recipes-perl/liburi/liburi-perl_5.32.bb
++++ b/meta-perl/recipes-perl/liburi/liburi-perl_5.32.bb
+@@ -14,7 +14,7 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/O/OA/OALDERS/URI-${PV}.tar.gz \
+ 
+ SRC_URI[sha256sum] = "9632067d34e14e0dae2da94631c4f25a387fcc48d06fa29330e8b3c04c4e913d"
+ 
+-S = "${WORKDIR}/URI-${PV}"
++S = "${UNPACKDIR}/URI-${PV}"
+ 
+ EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
+ 
+diff --git a/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb b/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
+index 4393fbd91a..6dc2a19e0b 100644
+--- a/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
++++ b/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
+@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "8fd2126d3beec554df852919f4739e689202cbba6a17506e9b66ea1658
+ 
+ LIC_FILES_CHKSUM = "file://BufferText.pm;beginline=88;endline=90;md5=497aa6d79cc84c3d769a2a0016bee928"
+ 
+-S = "${WORKDIR}/XML-Filter-BufferText-${PV}"
++S = "${UNPACKDIR}/XML-Filter-BufferText-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
+index e0ed6e7c3e..6450111da9 100644
+--- a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
++++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0134.bb
+@@ -34,7 +34,7 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=64eda1bc135f0ece1d1187f2a8ac82c1
+ SRC_URI[libxml.md5sum] = "dce687dd8b7e82d1c359fd74b1852f64"
+ SRC_URI[libxml.sha256sum] = "f0bca4d0c2da35d879fee4cd13f352014186cedab27ab5e191f39b5d7d4f46cf"
+ 
+-S = "${WORKDIR}/XML-LibXML-${PV}"
++S = "${UNPACKDIR}/XML-LibXML-${PV}"
+ 
+ inherit cpan ptest-perl
+ 
+diff --git a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
+index d4a027e6d8..b66cbc3945 100644
+--- a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
++++ b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
+@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "3d61d07ef43b0126f5b4de4f415a256fa859fa88dc4fdabaad70b7be7c
+ 
+ LIC_FILES_CHKSUM = "file://README;beginline=45;endline=46;md5=d41d8cd98f00b204e9800998ecf8427e"
+ 
+-S = "${WORKDIR}/XML-SAX-Writer-${PV}"
++S = "${UNPACKDIR}/XML-SAX-Writer-${PV}"
+ 
+ inherit cpan
+ 
+diff --git a/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb b/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
+index 2d77c32945..205775ef63 100644
+--- a/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
++++ b/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
+@@ -14,6 +14,5 @@ RDEPENDS:${PN} += " \
+ SRC_URI = "git://github.com/MostAwesomeDude/txWS.git;branch=master;protocol=https"
+ SRCREV = "88cf6d9b9b685ffa1720644bd53c742afb10a414"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+diff --git a/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb b/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
+index cf2b7fa15e..a6395b9e47 100644
+--- a/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
++++ b/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
+@@ -12,7 +12,7 @@ SRC_URI = "http://telepathy.freedesktop.org/releases/telepathy-python/telepathy-
+            file://telepathy-python_fix_for_automake_1.12.patch"
+ 
+ 
+-S = "${WORKDIR}/telepathy-python-${PV}"
++S = "${UNPACKDIR}/telepathy-python-${PV}"
+ 
+ inherit autotools python3native
+ 
+diff --git a/meta-python/recipes-devtools/gyp/gyp_git.bb b/meta-python/recipes-devtools/gyp/gyp_git.bb
+index 6ac4228a8b..668aaa5340 100644
+--- a/meta-python/recipes-devtools/gyp/gyp_git.bb
++++ b/meta-python/recipes-devtools/gyp/gyp_git.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://chromium.googlesource.com/external/gyp;protocol=https;branch=ma
+            "
+ SRCREV = "a03d7413becefc8d55c8aa3df58b55b9bd0e9052"
+ 
+-S = "${WORKDIR}/git"
+ PV = "0.1+git"
+ 
+ inherit setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-annotated-types_0.7.0.bb b/meta-python/recipes-devtools/python/python3-annotated-types_0.7.0.bb
+index 79e26e7ae3..cf579c74fe 100644
+--- a/meta-python/recipes-devtools/python/python3-annotated-types_0.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-annotated-types_0.7.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c6afb13fdc220497ee5cded1e717ed67"
+ 
+ SRC_URI[sha256sum] = "aff07c09a53a08bc8cfccb9c85b05f1aa9a2a6f23728d790723543408344ce89"
+ 
+-S = "${WORKDIR}/annotated_types-${PV}"
++S = "${UNPACKDIR}/annotated_types-${PV}"
+ PYPI_PACKAGE = "annotated_types"
+ 
+ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+diff --git a/meta-python/recipes-devtools/python/python3-astor_0.8.1.bb b/meta-python/recipes-devtools/python/python3-astor_0.8.1.bb
+index bc3315f751..b2834568b7 100644
+--- a/meta-python/recipes-devtools/python/python3-astor_0.8.1.bb
++++ b/meta-python/recipes-devtools/python/python3-astor_0.8.1.bb
+@@ -11,6 +11,5 @@ SRCREV ?= "c7553c79f9222e20783fe9bd8a553f932e918072"
+ 
+ inherit setuptools3
+ 
+-S = "${WORKDIR}/git"
+ 
+ BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.5.2.bb b/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.5.2.bb
+index bdadf7c774..4b4ff952ef 100644
+--- a/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.5.2.bb
++++ b/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.5.2.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/aws/aws-iot-device-sdk-python;branch=master;protocol
+            file://0001-setup.py-Use-setuptools-instead-of-distutils.patch \
+            "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb b/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
+index da4f3047f9..97b59358f7 100644
+--- a/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
++++ b/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
+@@ -7,7 +7,6 @@ PV .= "+git${SRCREV}"
+ SRCREV = "9520119376046aeff73804b5f1ea05d87a63f370"
+ SRC_URI += "git://github.com/behave/behave;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-betamax_0.9.0.bb b/meta-python/recipes-devtools/python/python3-betamax_0.9.0.bb
+index 68572d98b1..f88d43a21a 100644
+--- a/meta-python/recipes-devtools/python/python3-betamax_0.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-betamax_0.9.0.bb
+@@ -12,7 +12,6 @@ SRC_URI += " \
+         file://0001-Drop-ptests-fixtures-and-recorde_modes.patch \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3 ptest
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-binwalk_2.3.4.bb b/meta-python/recipes-devtools/python/python3-binwalk_2.3.4.bb
+index 45b1ff5145..288c4068cd 100644
+--- a/meta-python/recipes-devtools/python/python3-binwalk_2.3.4.bb
++++ b/meta-python/recipes-devtools/python/python3-binwalk_2.3.4.bb
+@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/ReFirmLabs/binwalk;protocol=https;branch=master"
+ 
+ SRCREV = "cddfede795971045d99422bd7a9676c8803ec5ee"
+ 
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-bleak_0.22.3.bb b/meta-python/recipes-devtools/python/python3-bleak_0.22.3.bb
+index 47b3bcc62f..4c534e1892 100644
+--- a/meta-python/recipes-devtools/python/python3-bleak_0.22.3.bb
++++ b/meta-python/recipes-devtools/python/python3-bleak_0.22.3.bb
+@@ -4,11 +4,10 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bcbc2069a86cba1b5e47253679f66ed7"
+ 
+ SRCREV = "2e6890f68f6718b4f92e602b9b926aa3d107b556"
+-PYPI_SRC_URI = "git://github.com/hbldh/bleak.git;protocol=https;branch=develop"
++PYPI_SRC_URI = "git://github.com/hbldh/bleak.git;protocol=https;branch=develop;destsuffix=${S}"
+ 
+ inherit pypi python_poetry_core ptest-python-pytest
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN}-ptest += " \
+ 	python3-pytest-asyncio \
+diff --git a/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb b/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb
+index 7391c3ae2e..16aa5c3477 100644
+--- a/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb
+@@ -11,7 +11,6 @@ SRC_URI += " \
+ 
+ SRCREV = "007f5aff5d1c817883385a5f61f742dd11776dc6"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3 ptest
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-crypt-r_3.13.1.bb b/meta-python/recipes-devtools/python/python3-crypt-r_3.13.1.bb
+index 8710b59a95..6e6e3eba31 100644
+--- a/meta-python/recipes-devtools/python/python3-crypt-r_3.13.1.bb
++++ b/meta-python/recipes-devtools/python/python3-crypt-r_3.13.1.bb
+@@ -6,6 +6,5 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fcf6b249c2641540219a727f35d8d2c2"
+ SRC_URI = "git://github.com/fedora-python/crypt_r.git;branch=main;protocol=https"
+ SRCREV = "b20e21d9f24d6fa17a6781bbc9f272ce38246eef"
+ 
+-S = "${UNPACKDIR}/git"
+ 
+ inherit python_setuptools_build_meta
+diff --git a/meta-python/recipes-devtools/python/python3-cvxopt_1.3.2.bb b/meta-python/recipes-devtools/python/python3-cvxopt_1.3.2.bb
+index ab24870a2a..78402d50f4 100644
+--- a/meta-python/recipes-devtools/python/python3-cvxopt_1.3.2.bb
++++ b/meta-python/recipes-devtools/python/python3-cvxopt_1.3.2.bb
+@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/cvxopt/cvxopt;protocol=https;branch=master"
+ 
+ SRCREV = "3b718ee560b3b97d6255c55f0ed7f64cb4b72082"
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN} += "lapack suitesparse"
+ DEPENDS += "lapack suitesparse"
+diff --git a/meta-python/recipes-devtools/python/python3-dasbus_1.7.bb b/meta-python/recipes-devtools/python/python3-dasbus_1.7.bb
+index 141e6bfbaf..7c759613ee 100644
+--- a/meta-python/recipes-devtools/python/python3-dasbus_1.7.bb
++++ b/meta-python/recipes-devtools/python/python3-dasbus_1.7.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/dasbus-project/dasbus.git;protocol=https;branch=mast
+ "
+ SRCREV = "413cf9a0b7c231468f1d28d9a29dd8dd8bda15c5"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3 ptest-python-pytest
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb b/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
+index 59da4545aa..b72d7bd401 100644
+--- a/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
++++ b/meta-python/recipes-devtools/python/python3-dbussy_1.3.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/ldo/dbussy.git;branch=master;protocol=https \
+ 
+ SRCREV = "37ede4242b48def73ada46c2747a4c5cae6abf45"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-dirty-equals_0.9.0.bb b/meta-python/recipes-devtools/python/python3-dirty-equals_0.9.0.bb
+index f944d75e97..5fa86e1d8f 100644
+--- a/meta-python/recipes-devtools/python/python3-dirty-equals_0.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-dirty-equals_0.9.0.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
+ 
+ SRC_URI[sha256sum] = "17f515970b04ed7900b733c95fd8091f4f85e52f1fb5f268757f25c858eb1f7b"
+ 
+-S = "${WORKDIR}/dirty_equals-${PV}"
++S = "${UNPACKDIR}/dirty_equals-${PV}"
+ 
+ inherit pypi python_hatchling
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-gcovr_8.3.bb b/meta-python/recipes-devtools/python/python3-gcovr_8.3.bb
+index a9b29a4458..4f0b6bb150 100644
+--- a/meta-python/recipes-devtools/python/python3-gcovr_8.3.bb
++++ b/meta-python/recipes-devtools/python/python3-gcovr_8.3.bb
+@@ -10,7 +10,6 @@ SRC_URI = " \
+ "
+ SRCREV = "fe536afac4da31e86909191ef31708755ab8cf83"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit python_hatchling
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-icu_2.15.2.bb b/meta-python/recipes-devtools/python/python3-icu_2.15.2.bb
+index d265a20975..8331f9175a 100644
+--- a/meta-python/recipes-devtools/python/python3-icu_2.15.2.bb
++++ b/meta-python/recipes-devtools/python/python3-icu_2.15.2.bb
+@@ -18,4 +18,4 @@ SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch \
+ inherit pkgconfig pypi python_setuptools_build_meta
+ 
+ # it's lowercase pyicu instead of ${PYPI_PACKAGE} in this version
+-S = "${WORKDIR}/pyicu-${PV}"
++S = "${UNPACKDIR}/pyicu-${PV}"
+diff --git a/meta-python/recipes-devtools/python/python3-importlib-metadata_8.7.0.bb b/meta-python/recipes-devtools/python/python3-importlib-metadata_8.7.0.bb
+index 7f5da81376..af716ffeb6 100644
+--- a/meta-python/recipes-devtools/python/python3-importlib-metadata_8.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-importlib-metadata_8.7.0.bb
+@@ -10,7 +10,7 @@ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+ 
+ SRC_URI[sha256sum] = "d13b81ad223b890aa16c5471f2ac3056cf76c5f10f82d6f9292f0b415f389000"
+ 
+-S = "${WORKDIR}/importlib_metadata-${PV}"
++S = "${UNPACKDIR}/importlib_metadata-${PV}"
+ 
+ DEPENDS += "python3-setuptools-scm-native"
+ RDEPENDS:${PN} += "python3-zipp"
+diff --git a/meta-python/recipes-devtools/python/python3-inotify_git.bb b/meta-python/recipes-devtools/python/python3-inotify_git.bb
+index f7df716654..e8d88250a3 100644
+--- a/meta-python/recipes-devtools/python/python3-inotify_git.bb
++++ b/meta-python/recipes-devtools/python/python3-inotify_git.bb
+@@ -12,7 +12,6 @@ SRC_URI = " \
+ 
+ SRCREV = "9be6a51d1660991562eefaaddefa757ca0e0e00f"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3 ptest-python-pytest
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcclient_4.0.3.bb b/meta-python/recipes-devtools/python/python3-jsonrpcclient_4.0.3.bb
+index 459726199e..99f583e717 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonrpcclient_4.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonrpcclient_4.0.3.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/explodinglabs/jsonrpcclient.git;branch=main;protocol
+ 
+ inherit python_setuptools_build_meta
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN} += "\
+     python3-json \
+diff --git a/meta-python/recipes-devtools/python/python3-keras-applications_1.0.8.bb b/meta-python/recipes-devtools/python/python3-keras-applications_1.0.8.bb
+index ba1819979b..ce965b3e43 100644
+--- a/meta-python/recipes-devtools/python/python3-keras-applications_1.0.8.bb
++++ b/meta-python/recipes-devtools/python/python3-keras-applications_1.0.8.bb
+@@ -9,7 +9,6 @@ SRCREV ?= "3b180cb10eda683dda7913ecee2e6487288d292d"
+ 
+ inherit setuptools3
+ 
+-S = "${WORKDIR}/git"
+ 
+ BBCLASSEXTEND = "native"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb b/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb
+index 83dc97955c..4cdc773ba6 100644
+--- a/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb
+@@ -17,7 +17,6 @@ SRC_URI = "git://github.com/kivy/kivy.git;protocol=https;branch=stable \
+ 
+ SRCREV = "20d74dcd30f143abbd1aa94c76bafc5bd934d5bd"
+ 
+-S = "${WORKDIR}/git"
+ 
+ PACKAGES += "${PN}-examples"
+ FILES:${PN}-examples = "/usr/share/kivy-examples"
+diff --git a/meta-python/recipes-devtools/python/python3-lief_0.16.5.bb b/meta-python/recipes-devtools/python/python3-lief_0.16.5.bb
+index 2166e3257f..8a0e30133c 100644
+--- a/meta-python/recipes-devtools/python/python3-lief_0.16.5.bb
++++ b/meta-python/recipes-devtools/python/python3-lief_0.16.5.bb
+@@ -13,7 +13,6 @@ SRC_URI = " \
+ SRCREV = "abcf929efb748c7846dd59007cbb807e108db311"
+ PV .= "+git"
+ 
+-S = "${WORKDIR}/git"
+ PEP517_SOURCE_PATH = "${S}/api/python"
+ 
+ export LIEF_BUILD_DIR = "${B}"
+diff --git a/meta-python/recipes-devtools/python/python3-linux-procfs_0.7.3.bb b/meta-python/recipes-devtools/python/python3-linux-procfs_0.7.3.bb
+index 8c53d38ce3..26da91b16b 100644
+--- a/meta-python/recipes-devtools/python/python3-linux-procfs_0.7.3.bb
++++ b/meta-python/recipes-devtools/python/python3-linux-procfs_0.7.3.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6855782848d572347212f667a2d637"
+ SRC_URI = "git://git.kernel.org/pub/scm/libs/python/python-linux-procfs/python-linux-procfs.git;branch=main"
+ SRCREV = "59ecd1ba018141a02ffe59c16a9346991dfd0d48"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb b/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
+index f52f0f8970..1022724814 100644
+--- a/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
++++ b/meta-python/recipes-devtools/python/python3-lrparsing_1.0.17.bb
+@@ -18,6 +18,6 @@ RDEPENDS:${PN} = " \
+ 
+ inherit setuptools3
+ 
+-S = "${WORKDIR}/lrparsing-${PV}"
++S = "${UNPACKDIR}/lrparsing-${PV}"
+ 
+ BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-monotonic_1.6.bb b/meta-python/recipes-devtools/python/python3-monotonic_1.6.bb
+index aacc32a6d6..b801c5d731 100644
+--- a/meta-python/recipes-devtools/python/python3-monotonic_1.6.bb
++++ b/meta-python/recipes-devtools/python/python3-monotonic_1.6.bb
+@@ -8,6 +8,5 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
+ SRCREV = "80681f6604e136e513550342f977edb98f5fc5ad"
+ SRC_URI = "git://github.com/atdt/monotonic.git;branch=master;protocol=https"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-moteus_0.3.87.bb b/meta-python/recipes-devtools/python/python3-moteus_0.3.87.bb
+index 433bfc4965..514eafb1b2 100644
+--- a/meta-python/recipes-devtools/python/python3-moteus_0.3.87.bb
++++ b/meta-python/recipes-devtools/python/python3-moteus_0.3.87.bb
+@@ -7,7 +7,7 @@ inherit pypi setuptools3
+ 
+ SRC_URI[sha256sum] = "988f264c330a17d63219c49dd2365bdaff97156be3ab6c5eaa204b45dca621e8"
+ 
+-S = "${WORKDIR}/moteus-${PV}"
++S = "${UNPACKDIR}/moteus-${PV}"
+ 
+ RDEPENDS:${PN} += "\
+     python3-can \
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_6.4.4.bb b/meta-python/recipes-devtools/python/python3-multidict_6.4.4.bb
+index da8403af40..1a4bdae3c3 100644
+--- a/meta-python/recipes-devtools/python/python3-multidict_6.4.4.bb
++++ b/meta-python/recipes-devtools/python/python3-multidict_6.4.4.bb
+@@ -9,8 +9,7 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
+ PV .= "+git"
+ 
+ SRCREV = "e77793a006e8c27ee96ae8b638a38c6413f87b9c"
+-PYPI_SRC_URI = "git://github.com/aio-libs/multidict;branch=master;protocol=https"
+-S = "${WORKDIR}/git"
++PYPI_SRC_URI = "git://github.com/aio-libs/multidict;branch=master;protocol=https;destsuffix=${S}"
+ 
+ RDEPENDS:${PN}-ptest += " \
+     python3-objgraph \
+diff --git a/meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb b/meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb
+index 0c3e6e9266..88a07f20ee 100644
+--- a/meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-paho-mqtt_2.1.0.bb
+@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "12d6e7511d4137555a3f6ea167ae846af2c7357b10bc6fa4f7c3968fc1
+ 
+ PYPI_SRC_URI = "https://files.pythonhosted.org/packages/39/15/0a6214e76d4d32e7f663b109cf71fb22561c2be0f701d67f93950cd40542/paho_mqtt-${PV}.tar.gz"
+ 
+-S = "${WORKDIR}/paho_mqtt-${PV}"
++S = "${UNPACKDIR}/paho_mqtt-${PV}"
+ 
+ DEPENDS += "python3-pytest-runner-native"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_11.1.0.bb b/meta-python/recipes-devtools/python/python3-pillow_11.1.0.bb
+index f8341c90f7..e089a5c06c 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_11.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_11.1.0.bb
+@@ -60,7 +60,6 @@ RDEPENDS:${PN}-ptest += " \
+ 
+ CVE_PRODUCT = "pillow"
+ 
+-S = "${WORKDIR}/git"
+ 
+ RPROVIDES:${PN} += "python3-imaging"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+index a4732993f8..c5f4c1c395 100644
+--- a/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
++++ b/meta-python/recipes-devtools/python/python3-prctl_1.8.1.bb
+@@ -7,7 +7,6 @@ SECTION = "devel/python"
+ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1475481f9ec754d758859bd2c75f6f6f"
+ 
+-S = "${WORKDIR}/git"
+ B = "${S}"
+ 
+ SRCREV = "5e12e398eb5c4e30d7b29b02458c76d2cc780700"
+diff --git a/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb b/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb
+index f16fddf36f..1f372d49ba 100644
+--- a/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ptyprocess_0.7.0.bb
+@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "5c5d0a3b48ceee0b48485e0c26037c0acd7d29765ca3fbb5cb3831d347
+ 
+ inherit pypi python_flit_core ptest-python-pytest
+ 
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
++S = "${UNPACKDIR}/${SRCNAME}-${PV}"
+ 
+ RDEPENDS:${PN} = "\
+     python3-core \
+diff --git a/meta-python/recipes-devtools/python/python3-pyais_2.9.4.bb b/meta-python/recipes-devtools/python/python3-pyais_2.9.4.bb
+index a661606b80..53996cc231 100644
+--- a/meta-python/recipes-devtools/python/python3-pyais_2.9.4.bb
++++ b/meta-python/recipes-devtools/python/python3-pyais_2.9.4.bb
+@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/M0r13n/pyais;protocol=https;branch=master"
+ PV .= "+git"
+ SRCREV = "e7780f743b03c5e6ecc651fdeb209fa94e0e0250"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit python_setuptools_build_meta ptest-python-pytest
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pyatspi_2.46.1.bb b/meta-python/recipes-devtools/python/python3-pyatspi_2.46.1.bb
+index 2b6a6c2c0e..cb9b61bd66 100644
+--- a/meta-python/recipes-devtools/python/python3-pyatspi_2.46.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyatspi_2.46.1.bb
+@@ -10,7 +10,6 @@ DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygob
+ SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=master"
+ SRCREV = "8c69016b38d0e4caaf4c986938ea3410fb7351b6"
+ 
+-S = "${WORKDIR}/git" 
+ 
+ # Same restriction as gtk+
+ inherit features_check setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb
+index bb2ccae794..fa4a74f925 100644
+--- a/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb
++++ b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb
+@@ -9,6 +9,5 @@ SRC_URI = "git://github.com/pybind/pybind11_json;branch=master;protocol=https \
+ DEPENDS += "nlohmann-json python3-pybind11"
+ 
+ EXTRA_OECMAKE += "-DPYBIND11_USE_CROSSCOMPILING=ON"
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake python3native python3targetconfig
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.13.6.bb b/meta-python/recipes-devtools/python/python3-pybind11_2.13.6.bb
+index e853bb33d8..7d71767297 100644
+--- a/meta-python/recipes-devtools/python/python3-pybind11_2.13.6.bb
++++ b/meta-python/recipes-devtools/python/python3-pybind11_2.13.6.bb
+@@ -12,7 +12,6 @@ SRC_URI = "\
+     git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit cmake python_setuptools_build_meta
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.11.3.bb b/meta-python/recipes-devtools/python/python3-pydantic_2.11.3.bb
+index c323534e12..47c077853a 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic_2.11.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pydantic_2.11.3.bb
+@@ -15,7 +15,6 @@ SRCREV = "bce81efdeac1cbefd0196b478a32aa2586bd595a"
+ PV .= "+git"
+ SRC_URI = "git://github.com/pydantic/pydantic;protocol=https;branch=main"
+ 
+-S = "${WORKDIR}/git"
+ 
+ DEPENDS += "python3-hatch-fancy-pypi-readme-native"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
+index cfdacf53bb..5a1934383e 100644
+--- a/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
+@@ -14,7 +14,6 @@ SRC_URI = " \
+ 
+ inherit ptest setuptools3
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN} = "python3-pygobject \
+                   python3-io \
+diff --git a/meta-python/recipes-devtools/python/python3-pyhsslms_2.0.0.bb b/meta-python/recipes-devtools/python/python3-pyhsslms_2.0.0.bb
+index 310366325e..58f571be3f 100644
+--- a/meta-python/recipes-devtools/python/python3-pyhsslms_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyhsslms_2.0.0.bb
+@@ -10,7 +10,6 @@ inherit python_setuptools_build_meta
+ SRC_URI = "git:///github.com/russhousley/pyhsslms.git;branch=master;protocol=https"
+ SRCREV = "c798728deed6d3f681c9e6bfd7fe8a6705f5638b"
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN} += " \
+     python3-core \
+diff --git a/meta-python/recipes-devtools/python/python3-pylint_3.3.6.bb b/meta-python/recipes-devtools/python/python3-pylint_3.3.6.bb
+index 073e0cdb1c..04761471d3 100644
+--- a/meta-python/recipes-devtools/python/python3-pylint_3.3.6.bb
++++ b/meta-python/recipes-devtools/python/python3-pylint_3.3.6.bb
+@@ -12,7 +12,6 @@ SRC_URI += "git://github.com/pylint-dev/pylint;branch=maintenance/3.3.x;protocol
+ 
+ inherit python_setuptools_build_meta ptest
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN} += "\
+     python3-astroid \
+diff --git a/meta-python/recipes-devtools/python/python3-pymetno_0.13.0.bb b/meta-python/recipes-devtools/python/python3-pymetno_0.13.0.bb
+index 1937606642..a9d06c6f1f 100644
+--- a/meta-python/recipes-devtools/python/python3-pymetno_0.13.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pymetno_0.13.0.bb
+@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d503272f52c35147ec960cb56a03bf4"
+ 
+ SRC_URI = "git://github.com/Danielhiversen/pyMetno.git;protocol=https;branch=master"
+ SRCREV = "921812ddad3f147489916c3c7ab7fb7a80d8c646"
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pyruvate_1.2.1.bb b/meta-python/recipes-devtools/python/python3-pyruvate_1.2.1.bb
+index 297eecad0e..e05b63587f 100644
+--- a/meta-python/recipes-devtools/python/python3-pyruvate_1.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyruvate_1.2.1.bb
+@@ -20,7 +20,6 @@ SRCREV = "57db64c9f65ced05c71b8d786c1cedfaa2991597"
+ 
+ SRC_URI:append:mips = " file://0001-check-for-mips-targets-for-stat.st_dev-definitions.patch;patchdir=${UNPACKDIR}/cargo_home/bitbake/libsystemd-0.5.0/"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit python_setuptools3_rust cargo-update-recipe-crates
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pyyaml-include_2.2.bb b/meta-python/recipes-devtools/python/python3-pyyaml-include_2.2.bb
+index 5a3b2f0ab2..41ebe44dbd 100644
+--- a/meta-python/recipes-devtools/python/python3-pyyaml-include_2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyyaml-include_2.2.bb
+@@ -9,7 +9,6 @@ SRC_URI = " \
+             git://github.com/tanbro/pyyaml-include;protocol=https;branch=main \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit python_setuptools_build_meta ptest-python-pytest
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-schedutils_0.6.bb b/meta-python/recipes-devtools/python/python3-schedutils_0.6.bb
+index 50868b9c40..dba3bcace7 100644
+--- a/meta-python/recipes-devtools/python/python3-schedutils_0.6.bb
++++ b/meta-python/recipes-devtools/python/python3-schedutils_0.6.bb
+@@ -7,6 +7,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ SRC_URI = "git://git.kernel.org/pub/scm/libs/python/python-schedutils/python-schedutils.git;branch=main"
+ SRCREV = "46469f425f9844f355f6496785ee1ce993b58747"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb b/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
+index b6680568b4..b706db8d49 100644
+--- a/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
++++ b/meta-python/recipes-devtools/python/python3-slip-dbus_0.6.5.bb
+@@ -20,7 +20,7 @@ SRC_URI = "https://github.com/nphilipp/${SRCNAME}/releases/download/${SRCNAME}-$
+           "
+ SRC_URI[sha256sum] = "c726c086f0dd93a0ac7a0176f383a12af91b6657b78a301e3f5b25d9f8d4d10b"
+ 
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
++S = "${UNPACKDIR}/${SRCNAME}-${PV}"
+ 
+ do_compile:prepend() {
+     sed -e 's/@VERSION@/${PV}/g' ${S}/setup.py.in > ${S}/setup.py
+diff --git a/meta-python/recipes-devtools/python/python3-smbus_4.3.bb b/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
+index b305a128a2..4eb2037c5b 100644
+--- a/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
++++ b/meta-python/recipes-devtools/python/python3-smbus_4.3.bb
+@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "eec464e42301d93586cbeca3845ed61bff40f560670e5b35baec57301d
+ 
+ DEPENDS += "i2c-tools"
+ 
+-S = "${WORKDIR}/i2c-tools-${PV}"
++S = "${UNPACKDIR}/i2c-tools-${PV}"
+ 
+ inherit setuptools3
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-tomli-w_1.2.0.bb b/meta-python/recipes-devtools/python/python3-tomli-w_1.2.0.bb
+index 55b56616db..ea364ae8f6 100644
+--- a/meta-python/recipes-devtools/python/python3-tomli-w_1.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-tomli-w_1.2.0.bb
+@@ -4,11 +4,10 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=aaaaf0879d17df0110d1aa8c8c9f46f5"
+ 
+ SRCREV = "a8f80172ba16fe694e37f6e07e6352ecee384c58"
+-PYPI_SRC_URI = "git://github.com/hukkin/tomli-w.git;protocol=https;branch=master"
++PYPI_SRC_URI = "git://github.com/hukkin/tomli-w.git;protocol=https;branch=master;destsuffix=${S}"
+ 
+ inherit pypi python_flit_core ptest-python-pytest
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN}-ptest += " \
+         python3-tomli \
+diff --git a/meta-python/recipes-devtools/python/python3-uefi-firmware_1.12.bb b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.12.bb
+index e9e799e168..09732fc865 100644
+--- a/meta-python/recipes-devtools/python/python3-uefi-firmware_1.12.bb
++++ b/meta-python/recipes-devtools/python/python3-uefi-firmware_1.12.bb
+@@ -11,7 +11,6 @@ SRC_URI = "git://github.com/theopolis/uefi-firmware-parser;protocol=https;branch
+ 
+ SRCREV = "0c5fb74bcecc0e5c80625c38130fe948c2a3656e"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-wrapt_1.17.2.bb b/meta-python/recipes-devtools/python/python3-wrapt_1.17.2.bb
+index ace11be8e5..3a187f9386 100644
+--- a/meta-python/recipes-devtools/python/python3-wrapt_1.17.2.bb
++++ b/meta-python/recipes-devtools/python/python3-wrapt_1.17.2.bb
+@@ -12,7 +12,6 @@ SRCREV = "bcc1f26b2fe8fc962f5033c3a3a773425500789a"
+ SRC_URI += "git://github.com/GrahamDumpleton/wrapt;protocol=https;branch=master \
+ "
+ 
+-S = "${WORKDIR}/git"
+ 
+ # python3-misc for 'this' module
+ RDEPENDS:${PN}-ptest += " \
+diff --git a/meta-python/recipes-devtools/python/python3-xlrd_2.0.1.bb b/meta-python/recipes-devtools/python/python3-xlrd_2.0.1.bb
+index f8b7c9b5ff..4707e31854 100644
+--- a/meta-python/recipes-devtools/python/python3-xlrd_2.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-xlrd_2.0.1.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/python-excel/xlrd.git;branch=master;protocol=https \
+ "
+ SRCREV = "b8d573e11ec149da695d695c81a156232b89a949"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit ptest-python-pytest setuptools3
+ 
+diff --git a/meta-python/recipes-devtools/python3-piccata/python3-piccata_2.0.3.bb b/meta-python/recipes-devtools/python3-piccata/python3-piccata_2.0.3.bb
+index fadcc32c24..af231ca908 100644
+--- a/meta-python/recipes-devtools/python3-piccata/python3-piccata_2.0.3.bb
++++ b/meta-python/recipes-devtools/python3-piccata/python3-piccata_2.0.3.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e664eb75e2791c2e505e6e1c274e6d4f"
+ SRCREV = "218d310e3d840715b1c8e67cefd5b6d71a2d7a1a"
+ SRC_URI = "git://github.com/NordicSemiconductor/piccata.git;protocol=https;branch=master"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit setuptools3
+ 
+diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.2.bb b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.2.bb
+index bed660ced4..dc57c864e4 100644
+--- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.2.bb
++++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.2.bb
+@@ -18,7 +18,7 @@ SRC_URI += "file://add-back-option-build-base.patch \
+            "
+ SRC_URI[sha256sum] = "5dbcb0650f67fdc2c5965795a255ffaa3d7b09fb149aa8da2d0d9aa44e38e2ba"
+ 
+-S = "${WORKDIR}/wxPython-${PV}"
++S = "${UNPACKDIR}/wxPython-${PV}"
+ 
+ inherit pypi setuptools3 pkgconfig features_check
+ 
+diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.6.0.bb b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.6.0.bb
+index b615ff2c92..79bee63d08 100644
+--- a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.6.0.bb
++++ b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.6.0.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SRC_URI = "git://github.com/storaged-project/blivet-gui.git;branch=main;protocol=https"
+ SRCREV = "7cec4bd48af4c8f7beb1a74bac751c3d520dedf1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit features_check setuptools3
+ REQUIRED_DISTRO_FEATURES = "x11 systemd gobject-introspection-data"
+diff --git a/meta-python/recipes-extended/python-cson/python3-cson_git.bb b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
+index 489733c767..4ffe68aab6 100644
+--- a/meta-python/recipes-extended/python-cson/python3-cson_git.bb
++++ b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
+@@ -12,7 +12,6 @@ SRCREV = "69090778bccc5ed124342ba288597fbb2bfa9f39"
+ SRC_URI = "git://github.com/gt3389b/python-cson.git;branch=master;protocol=https \
+            file://0001-setup.py-Do-not-poke-at-git-describe-to-find-version.patch"
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN} = "python3-json"
+ 
+diff --git a/meta-python/recipes-extended/python-meh/python3-meh_0.52.bb b/meta-python/recipes-extended/python-meh/python3-meh_0.52.bb
+index 266b94c9d8..80f9881b58 100644
+--- a/meta-python/recipes-extended/python-meh/python3-meh_0.52.bb
++++ b/meta-python/recipes-extended/python-meh/python3-meh_0.52.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ inherit setuptools3_legacy
+ 
+-S = "${WORKDIR}/git"
+ 
+ SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=master"
+ 
+diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
+index c701e361b7..830e46a63c 100644
+--- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
++++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.63.bb
+@@ -37,4 +37,3 @@ SRCREV = "6e0d1238cb4696a9040072a5a28a706e5775c552"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "r(?P<pver>\d+(\.\d+)+(-\d+)*)"
+ 
+-S = "${WORKDIR}/git"
+diff --git a/meta-python/recipes-extended/tuna/tuna_0.19.bb b/meta-python/recipes-extended/tuna/tuna_0.19.bb
+index ea0f157921..643e3a09ff 100644
+--- a/meta-python/recipes-extended/tuna/tuna_0.19.bb
++++ b/meta-python/recipes-extended/tuna/tuna_0.19.bb
+@@ -7,7 +7,6 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/tuna/tuna.git;branch=main"
+ 
+ SRCREV = "b972b8ce386c29bcbcd45029a617db3db9e5b6ca"
+ 
+-S = "${WORKDIR}/git"
+ 
+ RDEPENDS:${PN} += " \
+     python3-io \
+diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.18.2.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.18.2.bb
+index 0998643b2a..f0653006a3 100644
+--- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.18.2.bb
++++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.18.2.bb
+@@ -16,7 +16,6 @@ SRCREV = "3c7e281d97fd3e70b25f7ff4a001eabd56e375d7"
+ 
+ CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_install() {
+     install -d ${D}${localstatedir}/www/openapi/static
+diff --git a/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb b/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
+index 4dbf595c19..b93fa2d186 100644
+--- a/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
++++ b/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
+@@ -17,7 +17,6 @@ SRCREV = "0ee34c77fc78ff08fd548706300b80a7bc7874e4"
+ 
+ PV = "0.1.2+git"
+ 
+-S = "${WORKDIR}/git"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
+ 
+diff --git a/meta-webserver/recipes-httpd/apache-mod/mod-dnssd_0.6.bb b/meta-webserver/recipes-httpd/apache-mod/mod-dnssd_0.6.bb
+index 6f2a2330ae..aca6d598f8 100644
+--- a/meta-webserver/recipes-httpd/apache-mod/mod-dnssd_0.6.bb
++++ b/meta-webserver/recipes-httpd/apache-mod/mod-dnssd_0.6.bb
+@@ -8,7 +8,6 @@ DEPENDS = "apache2 avahi"
+ SRC_URI = "git://git.0pointer.net/mod_dnssd.git;protocol=https;branch=master"
+ SRCREV = "be2fb9f6158f800685de7a1bc01c39b6cf1fa12c"
+ 
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF = "--disable-lynx"
+ 
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.63.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.63.bb
+index 9ef8c13b79..2b4ae41d95 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.63.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.63.bb
+@@ -29,7 +29,7 @@ SRC_URI:append:class-target = " \
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+ SRC_URI[sha256sum] = "88fc236ab99b2864b248de7d49a008ec2afd7551e64dce8b95f58f32f94c46ab"
+ 
+-S = "${WORKDIR}/httpd-${PV}"
++S = "${UNPACKDIR}/httpd-${PV}"
+ 
+ inherit autotools update-rc.d pkgconfig systemd multilib_script multilib_header
+ 
+diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
+index cdb6fb605c..d593b7092b 100644
+--- a/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
++++ b/meta-webserver/recipes-httpd/monkey/monkey_1.6.9.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/monkey/monkey;branch=1.6;protocol=https \
+            file://monkey.init"
+ 
+ SRCREV = "7999b487fded645381d387ec0e057e92407b0d2c"
+-S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/monkey/monkey/releases"
+ UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+).tar.gz"
+diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
+index ec188cc482..9ff1772531 100644
+--- a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
++++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
+@@ -16,7 +16,6 @@ SRC_URI = "git://github.com/blueness/${BPN};branch=master;protocol=https \
+ UPSTREAM_CHECK_URI = "https://github.com/blueness/sthttpd/releases/"
+ UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+).tar.gz"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools update-rc.d systemd update-alternatives
+ 
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.2.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.2.bb
+index b896f4409a..f0e8b749aa 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.2.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.2.bb
+@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "f881819a3b11e653b0212afaf0cc105db85c767715cb3f5852670f7fc3
+ UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
+ UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
+ 
+-S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
++S = "${UNPACKDIR}/phpMyAdmin-${PV}-all-languages"
+ 
+ inherit allarch
+ 
+diff --git a/meta-webserver/recipes-support/fcgi/fcgi_git.bb b/meta-webserver/recipes-support/fcgi/fcgi_git.bb
+index 61ef6073e0..03425c53c9 100644
+--- a/meta-webserver/recipes-support/fcgi/fcgi_git.bb
++++ b/meta-webserver/recipes-support/fcgi/fcgi_git.bb
+@@ -9,7 +9,6 @@ PV = "2.4.2"
+ SRC_URI = "git://github.com/FastCGI-Archives/fcgi2.git;protocol=https;branch=master \
+           "
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+diff --git a/meta-webserver/recipes-support/fcgiwrap/fcgiwrap_git.bb b/meta-webserver/recipes-support/fcgiwrap/fcgiwrap_git.bb
+index a9a8ce0541..7aa28885e4 100644
+--- a/meta-webserver/recipes-support/fcgiwrap/fcgiwrap_git.bb
++++ b/meta-webserver/recipes-support/fcgiwrap/fcgiwrap_git.bb
+@@ -13,7 +13,6 @@ SRC_URI = "git://github.com/gnosek/fcgiwrap.git;protocol=https;branch=${BRANCH}
+ BRANCH = "master"
+ SRCREV = "99c942c90063c73734e56bacaa65f947772d9186"
+ 
+-S = "${WORKDIR}/git"
+ CFLAGS =+ "-I${B}"
+ EXTRA_OEMAKE = "VPATH=${S}"
+ 
+diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb
+index 4822f0cada..61a94f7bf4 100644
+--- a/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb
++++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_0.5.4.21.bb
+@@ -10,7 +10,6 @@ DEPENDS = "gtk+3 glib-2.0 xfce4-dev-tools-native intltool-native"
+ SRC_URI = "git://github.com/ib/xarchiver.git;branch=master;protocol=https"
+ SRCREV = "55f923ebc623bcc8f53368543847350a23688189"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit gettext pkgconfig autotools gtk-icon-cache features_check mime-xdg
+ 
+diff --git a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
+index 3e3301f748..880e73849c 100644
+--- a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
++++ b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
+@@ -11,4 +11,3 @@ SRC_URI = " \
+     git://github.com/ncopa/${BPN}.git;branch=master;protocol=https \
+ "
+ SRCREV = "6d3282cc1734c305850d48f5bf4b4d94e88885e9"
+-S = "${WORKDIR}/git"
+diff --git a/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
+index 6bcfc4ba43..308da40c34 100644
+--- a/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
++++ b/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb
+@@ -12,7 +12,6 @@ SRC_URI = "git://github.com/schnitzeltony/xfce4-datetime-setter.git;protocol=htt
+ "
+ SRCREV = "5c7a73a3824b03b91719e05e2604b97c7a72d50f"
+ 
+-S = "${WORKDIR}/git"
+ 
+ inherit gettext meson features_check pkgconfig
+ 
+diff --git a/meta-xfce/recipes-art/cursor-themes/openzone_1.2.4.bb b/meta-xfce/recipes-art/cursor-themes/openzone_1.2.4.bb
+index 4b2071eb3f..8ba962fbd4 100644
+--- a/meta-xfce/recipes-art/cursor-themes/openzone_1.2.4.bb
++++ b/meta-xfce/recipes-art/cursor-themes/openzone_1.2.4.bb
+@@ -9,7 +9,7 @@ inherit allarch gtk-icon-cache
+ SRC_URI = "https://mirrors.dotsrc.org/mirrors/exherbo/111343-OpenZone-${PV}.tar.xz"
+ SRC_URI[sha256sum] = "db6fa6d0798aceb56998ce81382fa2246c77911d56b3b06e6aadee4cf5b4816e"
+ 
+-S = "${WORKDIR}/OpenZone"
++S = "${UNPACKDIR}/OpenZone"
+ 
+ do_compile() {
+ }
+diff --git a/meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb b/meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb
+index b2d74a3015..59de3b3a08 100644
+--- a/meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb
++++ b/meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb
+@@ -22,7 +22,6 @@ SRC_URI = "git://gitlab.com/tagoh/imsettings.git;protocol=https;branch=main \
+           "
+ SRCREV = "27d84c88831ef76397a15891ba0738ce9a83902a"
+ 
+-S = "${WORKDIR}/git"
+ 
+ do_configure:prepend() {
+     cp ${STAGING_DATADIR_NATIVE}/gettext/ABOUT-NLS ${AUTOTOOLS_AUXDIR}/
+diff --git a/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb b/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb
+index 2384682ecb..f2a5e544d5 100644
+--- a/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb
++++ b/meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb
+@@ -11,7 +11,6 @@ PV = "4.16.0"
+ 
+ SRC_URI = "git://github.com/schnitzeltony/xfce4-closebutton-plugin.git;branch=master;protocol=https"
+ SRCREV = "538f9acfc5d5019f5cde734d056bcc0c95da9b4c"
+-S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "--enable-maintainer-mode"
  
 -- 
-2.40.0
+2.39.5
 
 
