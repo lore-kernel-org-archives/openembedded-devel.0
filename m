@@ -1,85 +1,88 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F3846C7115C
-	for <webhook@archiver.kernel.org>; Fri, 20 Jun 2025 17:49:31 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.web10.2846.1750441769260572193
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82F99C7115C
+	for <webhook@archiver.kernel.org>; Fri, 20 Jun 2025 19:32:12 +0000 (UTC)
+Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
+ by mx.groups.io with SMTP id smtpd.web10.4887.1750447926015601471
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Jun 2025 10:49:29 -0700
+ Fri, 20 Jun 2025 12:32:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=TAXaORLO;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.128.41, mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-450dd065828so15770285e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 10:49:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ezdX9spS;
+ spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-70e3980757bso19118517b3.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 12:32:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google; t=1750441768; x=1751046568; darn=lists.openembedded.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=s0fYK0/otCOzFR6K/lxjwNLtE+7Ql3YGBM2WsLv3BYs=;
-        b=TAXaORLO2GIYAN1ZEuyBOFyf+8a3Mh48cSYHN3pc3lqaE2iC7XCeCuJprQjZFukbUE
-         TaCRSgykcXdoDNpbyIN5xwFPSGFtfh8B6gi35MIgVwrPkETrTvr8UdSTBGi35S15lQ81
-         NDnzFMSMjkaM/WdMmCNQvocAvpJbjfEyud3/Y=
+        d=gmail.com; s=20230601; t=1750447925; x=1751052725; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zmIezV49zyuLdcRBJOdy9KaP1dUhcYLzhX/jFHzA7qM=;
+        b=ezdX9spSkmw/pj1XXUdM2aAnSBnlolL1QgQReLXr/SY33ZQ0lYojGMEAOfwagvmKfB
+         kxdufZcWp9VNyx5Sn5pBd4uezqVoDDX5cBgrQFSJ64L1sa8kSqmQ6jxsuZcDTCJYtv2w
+         sGSFJ/cJb8tNeu37AaP6B1M5vPwm9UhpF5HI8VL0f8lsCSSijhMS8o9AM0Y28PwHhQjA
+         qkhAbC8Zi2D7Ax2DS/JWhrYogugc40u6AkAA1U3ySQYz+LKJ4wEJ4yEMll2AGyvssn3p
+         6VFN1MzQNi+TPIGLSe2KORf1WIF4xz1ZxYvK5ec/BOeWe3vThfgAvi6w4UPzccX+Tv9C
+         YdNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750441768; x=1751046568;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=s0fYK0/otCOzFR6K/lxjwNLtE+7Ql3YGBM2WsLv3BYs=;
-        b=uYOl8D4T+2h0RHkaLZ893vfNASoYm2m+fETwTFAwpPBxdlT+Wn1fR2AVx2plC9OI6d
-         DMphPfwG4AQ5IepVW7xYeBOVm2XJuc6gIo8IPlln5onT70M48th2Fp48kWm/1tVG8PzF
-         KxcpPwWoxFmBSwN6pJSAYhW5H5l+OI8GL/7IQj22fPPAbqVZZE97rMUEysFk2rkgTwZ3
-         beelTcJZ823R/Eisdsgo9K/m6dcPaDWbwoVGKYvMIk2KbbczRbPu5u/xi2ZuASXyLghN
-         Z30XtCGjE74ncSd38RuM0RfUsS6NDIieLrzISnOAwuxmegLT+HPYVCMFPdK5OfoEEUw2
-         yVag==
-X-Gm-Message-State: AOJu0YxMKaDhli5S2EWdbmn+V+jEgv0xGvUEkORjrw0RnjiKWQws+WMh
-	2ZwDoRBZCVizOP9qnfGLjSQOkywMUqD3KPOSx68C9CM3QNSEHkMRsoLMYL4jBPc7Nt1bFQ7WE52
-	NTf0qAE8=
-X-Gm-Gg: ASbGncvaQAZ6k932hjNKhl4cS283C+toDbt8WS1nZ6YBl6YKi8sHsZ1jsN8fWL+GWLR
-	I4tIC2yEgTRDgD+Ozbuvqvalfy1+BC/46qxFUadoulBLrHTUGD3gy4wf0SdIkYwamyXBSDDsPvE
-	t3GjJtpjJDZPsxH4hTpuQytmx+vR0cT806AAl3VGP+hrQnm10sam3MraPVdb4boX9/42rfEw4nP
-	ox18lA58Kki9oOi5O91Cdgo1601s/H+IswGkFKaiXOPX+OM+fEJflv98c/zUJ8nSWkTzP0hUtd4
-	Atbt0NcWKTrLqt70RFaCH/vPA7k8t9Ur5zIaklVYcJb7O7MPKXH6yTH3Xg74ibOlDA/qqPodGYk
-	KasIbGQ==
-X-Google-Smtp-Source: AGHT+IGg1mirkQLb6aiUvp+aKLKxVlG/buOr37bZvR3rO21N8KGem3oLGwhz/iT4R1HmWHpiEWKp4w==
-X-Received: by 2002:a05:600d:10:b0:453:483b:6272 with SMTP id 5b1f17b1804b1-453662c5af2mr25810365e9.7.1750441767736;
-        Fri, 20 Jun 2025 10:49:27 -0700 (PDT)
-Received: from max.broadband ([84.69.248.84])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4535e983a4bsm66660335e9.13.2025.06.20.10.49.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Jun 2025 10:49:27 -0700 (PDT)
-Message-ID: <129c0dd0a015e07194ddc629f4b116fc99b68a4b.camel@linuxfoundation.org>
+        d=1e100.net; s=20230601; t=1750447925; x=1751052725;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=zmIezV49zyuLdcRBJOdy9KaP1dUhcYLzhX/jFHzA7qM=;
+        b=rmP5UkYSAl4GVlX/3agDpdeTsE2iD3yK2l8mdSF+G/tpEQv0GOte4b2tr4ugreozec
+         0UgtblO+TbGYnBSLFO/7laTlIJusmM3ui9jrp21mi9m/Vg+C4/Tva2LOHmKBP+BClZP3
+         TYu6YPcLj8MoS73C5aG3VS4uu9b86KbwcXizp26xh5vJaNdnTXMeR28rsQ2sGwDP9uYU
+         R6UtYNjdxmG/F7SwNO66DvS5S2PHbJgiMmXfoP1BjEZp7nOFaXYegsgTBnUeyi2MpPX1
+         VuBFhOe0E1frt5PXAsmabyzeNtyy7gsfB8ocGnuBe/c5FRLzaYbtLr9PhEsjyv+netmB
+         2MRg==
+X-Gm-Message-State: AOJu0YwVGg3bQwnr3sbZjS9GgSJwc7iTR5i3qhkuCbSM5i6zNaSRSRfM
+	6hFfVHhpeFtLKQ38EFB02iYtN6Kzjton65o4kiaIyBu9NYL+eoV4yXTAWhywtnAa+BHN5AFFdrX
+	WsllVeAupN1wyuW8ySPc1EhXBI3BA7NF+ZDdi
+X-Gm-Gg: ASbGncvsVFZFPP90TriUWHzoORi38h8h3YWCcovQTpDeRdkF1cPaT0wAV/jXeLyKqPU
+	qzVFHy/bu+rBO+Uyf/UMABQE+JuGk/Nku1MAP17TCKrzNgxe7GyKc0fESi4WVhD0cfGpI9EpsB8
+	+8jXzu5+6jXDSa7cIvsfcwDB0roF/t0dqNkWCXTSuO2Q==
+X-Google-Smtp-Source: AGHT+IEynhYqlLAd1S4s/EScAnlg6G9rhuPvEaOjUT4K8sKIFArEv9RBuuXdPjsWsdLfI761WDxjm7fYV70/KAp0I9I=
+X-Received: by 2002:a05:690c:7105:b0:712:ca60:c5fd with SMTP id
+ 00721157ae682-712ca60e3d4mr45185917b3.1.1750447925030; Fri, 20 Jun 2025
+ 12:32:05 -0700 (PDT)
+MIME-Version: 1.0
+References: <20250620101405.2455812-1-richard.purdie@linuxfoundation.org>
+ <CAMKF1soTE4VvLTHRcAVDkby4UnM2v18hojkie3RQY_zuwgZTPg@mail.gmail.com> <129c0dd0a015e07194ddc629f4b116fc99b68a4b.camel@linuxfoundation.org>
+In-Reply-To: <129c0dd0a015e07194ddc629f4b116fc99b68a4b.camel@linuxfoundation.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 20 Jun 2025 12:31:38 -0700
+X-Gm-Features: AX0GCFtroFRahJkUQQcQvObmMnA8mgZkWboJbNCm82IThvRGR1KNJL-sp6QGsiI
+Message-ID: <CAMKF1srM8E291sQfU-8bCqmO47zWVwSTY9e5ziyErcuCw=sUSA@mail.gmail.com>
 Subject: Re: [oe] [meta-openembedded] [PATCH] suitesparse: Update after
  toolchain selection changes
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Khem Raj <raj.khem@gmail.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
 Cc: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Jun 2025 18:49:25 +0100
-In-Reply-To: <CAMKF1soTE4VvLTHRcAVDkby4UnM2v18hojkie3RQY_zuwgZTPg@mail.gmail.com>
-References: <20250620101405.2455812-1-richard.purdie@linuxfoundation.org>
-	 <CAMKF1soTE4VvLTHRcAVDkby4UnM2v18hojkie3RQY_zuwgZTPg@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.0-1 
-MIME-Version: 1.0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 17:49:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117985
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 19:32:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117986
 
-On Fri, 2025-06-20 at 10:38 -0700, Khem Raj wrote:
-> This one looks better than other proposals for this recipe so far,
-> but I am not able to apply it, would be good to rebase it on master-
-> next
-> and resend
+On Fri, Jun 20, 2025 at 10:49=E2=80=AFAM Richard Purdie
+<richard.purdie@linuxfoundation.org> wrote:
+>
+> On Fri, 2025-06-20 at 10:38 -0700, Khem Raj wrote:
+> > This one looks better than other proposals for this recipe so far,
+> > but I am not able to apply it, would be good to rebase it on master-
+> > next
+> > and resend
+>
+> I've resent a version where you can drop the patch in master-next and
+> then apply that one.
+>
 
-I've resent a version where you can drop the patch in master-next and
-then apply that one.
+Right, it did not apply after dropping that, but thanks for v2, that works.
 
-Cheers,
-
-Richard
+> Cheers,
+>
+> Richard
 
