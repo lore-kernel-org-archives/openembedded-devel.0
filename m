@@ -1,193 +1,162 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <richard.purdie@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF474C7115B
-	for <webhook@archiver.kernel.org>; Fri, 20 Jun 2025 17:39:31 +0000 (UTC)
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
- by mx.groups.io with SMTP id smtpd.web10.2637.1750441164197520366
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F08A3C7115C
+	for <webhook@archiver.kernel.org>; Fri, 20 Jun 2025 17:48:21 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.web10.2821.1750441694582708150
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Jun 2025 10:39:24 -0700
+ Fri, 20 Jun 2025 10:48:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CY/iAjiK;
- spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-70a57a8ffc3so19334697b3.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 10:39:24 -0700 (PDT)
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=LaVHxJaw;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.128.43, mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-450cb2ddd46so12671435e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 10:48:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750441163; x=1751045963; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uIlFdY7jjwXgUL8ep3R8el+o8aW+S2gX0ahjTiqrndw=;
-        b=CY/iAjiKMLPeo8KiepJgW6+NNkTCAucrA4jGZs3SrD9t/Nix6kuQ1fojS/sHbUBKsg
-         AE0GJXeTIzUyLYy435r93J1Hw4kgNPmZoguB7Ao+bWqOzpY6g9zn/Ls1Mzx0q5vi/S8n
-         /SdcX+mz7UX5zBec9gGDP0aGy8MeuQuV8Sqfoe6pdnWdIczWbXr7Xb3h4LHEoLKqKhdI
-         +St2yp6eX/8f0KHWZHju5jL+nbntI/Wd54H37LPjgQ1fIvW/bti/wdbP0j+YRnF46BN1
-         MwtaaQLaB+XHuxM6AfZ47EL7PUKHxK0ggXUpxC9URxwJJyMvd/kzh0CYLYJDtbWDNZ7G
-         vdxA==
+        d=linuxfoundation.org; s=google; t=1750441692; x=1751046492; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Rv4oYGpZ4AAnkDGhzsHQEtAwSX8TjSo3TUrkDOw3kgU=;
+        b=LaVHxJawx7atACLoUVNlE9gaBBdDySQuUyxZHZvZiwPQjEDgp5RUc6ek1QQay+Zjpi
+         QHiCc3NLlgEdJYh3UE0qk+Sk3jwkwe0ySMs4rUKPFOihZTTPP0P3dO+uLS1cnRCePjht
+         z1zuVsaRPYX4p21z2jXInXGT5klFRyhBiqFR0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750441163; x=1751045963;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uIlFdY7jjwXgUL8ep3R8el+o8aW+S2gX0ahjTiqrndw=;
-        b=ZM1J/TNXkXh52wAyY2+dc8bBfnxTYkYGf6XMvvnhtSit9Ok4z6JyZ9XKasmhNLj4Id
-         vDOXtEXZY+S4bTYNThl6GI3b7ZI8nhDaM6IZo2P1dJhDdFk7WpKnRwpNcKQU18ksWW4S
-         ZVFkBbLZGirQkGG8xHWQJsVlQS/w6NdUOQaoUGWIaZ1cjtLlsCrDjeFR81RAeLjMNl04
-         O7KCz99Oeo2IYMhVXhrBQsQqWPPsl8ics5R8DfKxb5d/ScWXbhh6t4Yd0taq1ddAtt1X
-         H/CT/L4EHNu0l+VUj5mRFepHU8dPcqr2Ntej4X9N58RA4QvHztzx+eXopsQInozyBD+j
-         m7nw==
-X-Gm-Message-State: AOJu0Yxo3hEReAujKBUlaADcW13tS/U3mZiDkbXK0D0TzXrkkO/GNNkW
-	XAwZXOTY49/8ZZPV3PYlC/KVtXwgzrUd6MEmk/bY5Ew11atpqqgUhJuWSvL0SVAKhVXL0p96C5b
-	jQDLk3M8BxPTx09uyQZsNHrqOaaeyHes=
-X-Gm-Gg: ASbGncvLlmeKLk7EsZont6dHXyfngi5LdnssPd3UI2BPKjC/ceOd3FlJqzLw7qRiba5
-	pKQBrJ/dse89pba81ikRb8fTED1+2qKLu0PoYk5x4m+Z50pE7ntSJM19k2FliMQLmwTq7Mumnvi
-	qEg0tCIirHpNv+mFc8ZDRcGXU9GF24q2LYbeROqKCuFw==
-X-Google-Smtp-Source: AGHT+IF+SGvnbKsbuG7wrLVjtKVHK9BXTGR+Z0/OXAGZG4H28NBhG+VtlZXVB+5ro00VdAiMPOk9dyzmuxFy5MRTbaw=
-X-Received: by 2002:a05:690c:5506:10b0:712:d54e:2209 with SMTP id
- 00721157ae682-712d54e2895mr3276257b3.14.1750441163206; Fri, 20 Jun 2025
- 10:39:23 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1750441692; x=1751046492;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Rv4oYGpZ4AAnkDGhzsHQEtAwSX8TjSo3TUrkDOw3kgU=;
+        b=jRe/t3roQTKGO0aYsSq/q6tnDXgQ0EVDSZSskpsy56tfSx8/kJwwmvMkvYlxRD2p6m
+         MOoLkqn19E6iokK42hE4ss2oKD36ResPGczf6944mcrggEzqATFRH2rFNcyQ05zWN2Ul
+         DUxuEK8Oyt8EkCngyccBRZ9FxbsjlcD/iN+DcQrAadBqhxT1z01YZu0CwhEWPs0FvGPE
+         rzQaeVD3kFKIUs4wy7eDZjL4RLUhiBa0ZrKSqiER8JcGik0HL7PEDiceK/+5GHGS8fP5
+         pfmeN1Mp8OheVMuRbp54hzVZNAe+RP60gJrJHJEF8ftmYtTRV2zwLXd5JYt2huw+2V9t
+         sP9w==
+X-Gm-Message-State: AOJu0YxZnpqWesXkOD0W/VaV/eMThzLgOmL1oDO053V4NaHvzNyZuk3c
+	B89np+VlQT48IjZuoTWjNru6H36cQVNNfeCj/p7iLJWG0RTvBvceXcGvEOrXa9/8FIiZPfgbYU3
+	1y7C/DtM=
+X-Gm-Gg: ASbGncvUAYWNjRoWGZ5R5WmuKUk3ZTH6ft9ztBo1ZcShv0xDtXx5M0v+NDHrsCF4Vd2
+	Yb/ts2tb+xi0gCt9yE5/pcN0QwoxL0x5EumvdcgVewvjg9utFQXpbTYpZRa+1FYM8PmOSR/G4la
+	R2dg9QgxfhGDjZu1YFP8b00ObzhoZd5QBYGEniSsTAYNvLqvBKeUBZ0R3MC/D55eXaRkKX0e7Ma
+	0KLBQQwlKDrCy+ztV7yPI/kXV+5mRsAndoUpum+BWBcacRwVh2BdqIq41cpn9Hmt8E6qSHOCNk+
+	o0d8csOvxGa8HAa1qDTFKSkEP2LeIoCRtbV+h5Y0dR/bzhBlvrhFSfh/+LS2QTk1U4GLTHeCfRg
+	B6F1dsA==
+X-Google-Smtp-Source: AGHT+IHc/9HfRGJQ4ur7P6h2SmRcnrVYFSrNgkzuLkRCflAjMJ/K66SJAOHivrQooeW5wySb7IczbQ==
+X-Received: by 2002:a05:600c:4754:b0:453:23fe:ca86 with SMTP id 5b1f17b1804b1-453659be4d6mr35312835e9.4.1750441692028;
+        Fri, 20 Jun 2025 10:48:12 -0700 (PDT)
+Received: from max.broadband ([84.69.248.84])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-453646d1508sm31863715e9.12.2025.06.20.10.48.10
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 20 Jun 2025 10:48:11 -0700 (PDT)
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-openembedded] [PATCH v2] suitesparse: Update after toolchain selection changes
+Date: Fri, 20 Jun 2025 18:48:09 +0100
+Message-ID: <20250620174809.2544647-1-richard.purdie@linuxfoundation.org>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250620101405.2455812-1-richard.purdie@linuxfoundation.org>
-In-Reply-To: <20250620101405.2455812-1-richard.purdie@linuxfoundation.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 20 Jun 2025 10:38:56 -0700
-X-Gm-Features: AX0GCFtmQIUGf-M2kgwydpGkDXfyj1ZzNh_a9IbbO5V4OixD_Tr6f-fbN10FdSI
-Message-ID: <CAMKF1soTE4VvLTHRcAVDkby4UnM2v18hojkie3RQY_zuwgZTPg@mail.gmail.com>
-Subject: Re: [oe] [meta-openembedded] [PATCH] suitesparse: Update after
- toolchain selection changes
-To: richard.purdie@linuxfoundation.org
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 17:39:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117983
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 17:48:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117984
 
-Hi RIchard,
+The toolchain selection changes mean CC is not set until after the recipe
+is parsed, breaking the manipulations made by this recipe.
 
-This one looks better than other proposals for this recipe so far, but
-I am not able to apply it, would be good to rebase it on master-next
-and resend
+Replace it with code to inherit the cmake class, which correctly
+configures cmake to use the right compiler/compiler flags.
 
-On Fri, Jun 20, 2025 at 3:14=E2=80=AFAM Richard Purdie via
-lists.openembedded.org
-<richard.purdie=3Dlinuxfoundation.org@lists.openembedded.org> wrote:
->
-> The toolchain selection changes mean CC is not set until after the recipe
-> is parsed, breaking the manipulations made by this recipe.
->
-> Replace it with code to inherit the cmake class, which correctly
-> configures cmake to use the right compiler/compiler flags.
->
-> We need to patch the makefiles to avoid those options being added
-> incorrectly.
->
-> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-> ---
->  .../suitesparse/makefile-quoting.patch        | 32 +++++++++++++++++++
->  .../suitesparse/suitesparse_5.10.1.bb         |  7 ++++
->  2 files changed, 39 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/suitesparse/suitesparse/make=
-file-quoting.patch
->
-> diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse/makefile-qu=
-oting.patch b/meta-oe/recipes-devtools/suitesparse/suitesparse/makefile-quo=
-ting.patch
-> new file mode 100644
-> index 0000000000..6bd2ffbb55
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/suitesparse/suitesparse/makefile-quoting.p=
-atch
-> @@ -0,0 +1,32 @@
-> +OE's CC and CXX contain spaces and extra options which is incompatible w=
-ith
-> +cmake way of handling them. Remove passing the compiler options this way=
- in
-> +favour of our normal cmake toolchain files added elsewhere.
-> +
-> +Upstream-Status: Pending
-> +
-> +Index: git/Makefile
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- git.orig/Makefile
-> ++++ git/Makefile
-> +@@ -282,7 +282,7 @@ metis: include/metis.h
-> + # hardcoded below.
-> + include/metis.h:
-> + ifeq (,$(MY_METIS_LIB))
-> +-      - ( cd metis-5.1.0 && $(MAKE) config shared=3D1 prefix=3D$(SUITES=
-PARSE) cc=3D$(CC) )
-> ++      - ( cd metis-5.1.0 && $(MAKE) config shared=3D1 prefix=3D$(SUITES=
-PARSE) )
-> +       - ( cd metis-5.1.0 && $(MAKE) )
-> +       - ( cd metis-5.1.0 && $(MAKE) install )
-> +       - $(SO_INSTALL_NAME) $(SUITESPARSE)/lib/libmetis.dylib \
-> +Index: git/SuiteSparse_config/SuiteSparse_config.mk
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- git.orig/SuiteSparse_config/SuiteSparse_config.mk
-> ++++ git/SuiteSparse_config/SuiteSparse_config.mk
-> +@@ -146,7 +146,7 @@ SUITESPARSE_VERSION =3D 5.10.1
-> +         endif
-> +     endif
-> +
-> +-    CMAKE_OPTIONS +=3D -DCMAKE_CXX_COMPILER=3D$(CXX) -DCMAKE_C_COMPILER=
-=3D$(CC)
-> ++    #CMAKE_OPTIONS +=3D -DCMAKE_CXX_COMPILER=3D$(CXX) -DCMAKE_C_COMPILE=
-R=3D$(CC)
-> +
-> +     #------------------------------------------------------------------=
----------
-> +     # CFLAGS for the C/C++ compiler
-> diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb b=
-/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
-> index b113145808..29f114a9dc 100644
-> --- a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
-> +++ b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
-> @@ -4,6 +4,7 @@ SRC_URI =3D "git://github.com/DrTimothyAldenDavis/SuiteSp=
-arse;protocol=3Dhttps;branc
->             file://0001-Preserve-CXXFLAGS-from-environment-in-Mongoose.pa=
-tch \
->             file://0002-Preserve-links-when-installing-libmetis.patch \
->             file://0003-Add-version-information-to-libmetis.patch \
-> +           file://makefile-quoting.patch \
->             "
->  SRCREV =3D "538273cfd53720a10e34a3d80d3779b607e1ac26"
->
-> @@ -14,11 +15,17 @@ DEPENDS =3D "cmake-native lapack gmp mpfr chrpath-nat=
-ive"
->  PROVIDES =3D "mongoose graphblas"
->  RPROVIDES:${PN} =3D "mongoose graphblas"
->
-> +inherit cmake
-> +
-> +B =3D "${S}"
-> +
->  export CMAKE_OPTIONS =3D " \
->      -DCMAKE_INSTALL_PREFIX=3D${D}${prefix} \
->      -DCMAKE_INSTALL_LIBDIR=3D${baselib} \
->  "
->
-> +OECMAKE_SOURCEPATH =3D "${S}/Mongoose ${S}/metis-5.1.0 ${S}/GraphBLAS"
-> +
->  do_compile () {
->         oe_runmake library
->  }
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#117967): https://lists.openembedded.org/g/openembedde=
-d-devel/message/117967
-> Mute This Topic: https://lists.openembedded.org/mt/113739884/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+We need to patch the makefiles to avoid those options being added
+incorrectly.
+
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+---
+ .../suitesparse/makefile-quoting.patch        | 32 +++++++++++++++++++
+ .../suitesparse/suitesparse_5.10.1.bb         | 17 +++-------
+ 2 files changed, 37 insertions(+), 12 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/suitesparse/suitesparse/makefile-quoting.patch
+
+diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse/makefile-quoting.patch b/meta-oe/recipes-devtools/suitesparse/suitesparse/makefile-quoting.patch
+new file mode 100644
+index 0000000000..6bd2ffbb55
+--- /dev/null
++++ b/meta-oe/recipes-devtools/suitesparse/suitesparse/makefile-quoting.patch
+@@ -0,0 +1,32 @@
++OE's CC and CXX contain spaces and extra options which is incompatible with 
++cmake way of handling them. Remove passing the compiler options this way in
++favour of our normal cmake toolchain files added elsewhere.
++
++Upstream-Status: Pending
++
++Index: git/Makefile
++===================================================================
++--- git.orig/Makefile
+++++ git/Makefile
++@@ -282,7 +282,7 @@ metis: include/metis.h
++ # hardcoded below.
++ include/metis.h:
++ ifeq (,$(MY_METIS_LIB))
++-	- ( cd metis-5.1.0 && $(MAKE) config shared=1 prefix=$(SUITESPARSE) cc=$(CC) )
+++	- ( cd metis-5.1.0 && $(MAKE) config shared=1 prefix=$(SUITESPARSE) )
++ 	- ( cd metis-5.1.0 && $(MAKE) )
++ 	- ( cd metis-5.1.0 && $(MAKE) install )
++ 	- $(SO_INSTALL_NAME) $(SUITESPARSE)/lib/libmetis.dylib \
++Index: git/SuiteSparse_config/SuiteSparse_config.mk
++===================================================================
++--- git.orig/SuiteSparse_config/SuiteSparse_config.mk
+++++ git/SuiteSparse_config/SuiteSparse_config.mk
++@@ -146,7 +146,7 @@ SUITESPARSE_VERSION = 5.10.1
++         endif
++     endif
++ 
++-    CMAKE_OPTIONS += -DCMAKE_CXX_COMPILER=$(CXX) -DCMAKE_C_COMPILER=$(CC)
+++    #CMAKE_OPTIONS += -DCMAKE_CXX_COMPILER=$(CXX) -DCMAKE_C_COMPILER=$(CC)
++ 
++     #---------------------------------------------------------------------------
++     # CFLAGS for the C/C++ compiler
+diff --git a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
+index 13e6fd066c..29f114a9dc 100644
+--- a/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
++++ b/meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb
+@@ -4,6 +4,7 @@ SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https;branc
+            file://0001-Preserve-CXXFLAGS-from-environment-in-Mongoose.patch \
+            file://0002-Preserve-links-when-installing-libmetis.patch \
+            file://0003-Add-version-information-to-libmetis.patch \
++           file://makefile-quoting.patch \
+            "
+ SRCREV = "538273cfd53720a10e34a3d80d3779b607e1ac26"
+ 
+@@ -14,25 +15,17 @@ DEPENDS = "cmake-native lapack gmp mpfr chrpath-native"
+ PROVIDES = "mongoose graphblas"
+ RPROVIDES:${PN} = "mongoose graphblas"
+ 
+-# The values of $CC, $CXX, and $LD that Bitbake uses have spaces in them which
+-# causes problems when the SuiteSparse Makefiles try to pass these values on
+-# the command line. To get around this problem, set these variables to only the
+-# program name and prepend the rest of the value onto the corresponding FLAGS
+-# variable.
+-CFLAGS:prepend := "${@" ".join(d.getVar('CC').split()[1:])} "
+-export CC := "${@d.getVar('CC').split()[0]}"
++inherit cmake
+ 
+-CXXFLAGS:prepend := "${@" ".join(d.getVar('CXX').split()[1:])} "
+-export CXX := "${@d.getVar('CXX').split()[0]}"
+-
+-LDFLAGS:prepend := "${@" ".join(d.getVar('LD').split()[1:])} "
+-export LD := "${@d.getVar('LD').split()[0]}"
++B = "${S}"
+ 
+ export CMAKE_OPTIONS = " \
+     -DCMAKE_INSTALL_PREFIX=${D}${prefix} \
+     -DCMAKE_INSTALL_LIBDIR=${baselib} \
+ "
+ 
++OECMAKE_SOURCEPATH = "${S}/Mongoose ${S}/metis-5.1.0 ${S}/GraphBLAS"
++
+ do_compile () {
+ 	oe_runmake library
+ }
 
