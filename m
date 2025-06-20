@@ -2,75 +2,74 @@ Return-Path: <esben@geanix.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 138CFC7115D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E153C71155
 	for <webhook@archiver.kernel.org>; Fri, 20 Jun 2025 15:29:26 +0000 (UTC)
-Received: from mail-106112.protonmail.ch (mail-106112.protonmail.ch [79.135.106.112])
- by mx.groups.io with SMTP id smtpd.web11.3007.1750433362553946482
+Received: from mail-43171.protonmail.ch (mail-43171.protonmail.ch [185.70.43.171])
+ by mx.groups.io with SMTP id smtpd.web11.3009.1750433364348772923
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Jun 2025 08:29:23 -0700
+ Fri, 20 Jun 2025 08:29:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: signature did not verify: crypto/rsa: verification error" header.i=@geanix.com header.s=protonmail header.b=CBKmfvkU;
- spf=pass (domain: geanix.com, ip: 79.135.106.112, mailfrom: esben@geanix.com)
+ dkim=fail reason="dkim: signature did not verify: crypto/rsa: verification error" header.i=@geanix.com header.s=protonmail header.b=QXi3TUMv;
+ spf=pass (domain: geanix.com, ip: 185.70.43.171, mailfrom: esben@geanix.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=geanix.com;
-	s=protonmail; t=1750433359; x=1750692559;
-	bh=CQd/u4kDhfvOP3SwaMW80+nW/mOGaaPQL8tBfS3nEG0=;
-	h=From:Subject:Date:Message-Id:To:Cc:From:To:Cc:Date:Subject:
-	 Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=CBKmfvkUQfFLVyhpmGFaIgN8Hglsd/3l5X+JIKQssmBCMfxWT+UDlrElrTDRdpwT5
-	 UGVC57WoSRUw1NjwtluMbPb1hV705Xc+5h9P2VbGsXWt2bNRh6VnL/0bQzdA8kODS1
-	 vbZjlJNQV0o9oV2nTv5p3xS40Rh0Yxp7Bu06xEEqeJlYd1HPmQupQu3oHB7Iar6iXx
-	 Y25zhExJP7LCb0nueSerD5+cgLHdteC3FpQYaRsfHtL6S5iWsgR3So2RXvJ1ZbuE/U
-	 DWwkt5yJmNHlnZPhePEY83e4tUz/YLLBTPggBrUExj76i4cmkHYRS+ho02ZQYDfH7n
-	 1hEuYiWay3lWg==
-X-Pm-Submission-Id: 4bP1bx6Y5bzNg
+	s=protonmail; t=1750433362; x=1750692562;
+	bh=HIghIflVcoZLIlLeOhGeGA76cL86Bsrt0XVAV7qoVe8=;
+	h=From:Date:Subject:Message-Id:References:In-Reply-To:To:Cc:From:To:
+	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=QXi3TUMvK+K+NeV2j/RK0aVsdNVAwxT5/EmxmMpwmOpbOb70KJU9yHnqWIk4CnOBC
+	 SJkCMTxn6ZL/WY1Gg7W+LHezrfdNynwTI7KwUXcyRyX5zWHc20oC48QXGpG95Cjbd4
+	 ev51UKmQqoxhRKFoCF2+L5ZK8LLaj3UwPtAjgQdJ9u4jGzh8L6CfNxjeVECOvlbtZk
+	 wyXkIXz8EeBCcp62z3GIFw0EqPoEmT93eEkot+bB9p/L8etjfM1tKU8n5QJ1+4XwRT
+	 KVDlo+knKjgeTffVUozRhP1rmJZhndSS7v59AeRFPWy3WqJHopmBkLdLNj5ErFGaae
+	 wpPC7z/2Ec98g==
+X-Pm-Submission-Id: 4bP1c02Sxjz1DDWj
 From: Esben Haabendal <esben@geanix.com>
-Subject: [PATCH meta-oe 0/2] syslog-ng: Add stomp and examples
- PACKAGECONFIG options
-Date: Fri, 20 Jun 2025 17:29:06 +0200
-Message-Id: <20250620-syslog-ng-stomp-v1-0-4406b09e1e20@geanix.com>
+Date: Fri, 20 Jun 2025 17:29:07 +0200
+Subject: [PATCH meta-oe 1/2] syslog-ng: Add stomp PACKAGECONFIG option
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAEJ+VWgC/x3MQQqAIBBA0avErBtQKYmuEi2sJhsoDSeiiO6et
- HyL/x8QSkwCbfFAopOFY8jQZQHj4oIn5CkbjDK1skah3LJGj8GjHHHbcXLV0FitrW0U5GpPNPP
- 1HzvY6HAYCfr3/QAdXSYMagAAAA==
-X-Change-ID: 20250620-syslog-ng-stomp-da4b86116680
+Message-Id: <20250620-syslog-ng-stomp-v1-1-4406b09e1e20@geanix.com>
+References: <20250620-syslog-ng-stomp-v1-0-4406b09e1e20@geanix.com>
+In-Reply-To: <20250620-syslog-ng-stomp-v1-0-4406b09e1e20@geanix.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Esben Haabendal <esben@geanix.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1750433356; l=713;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1750433356; l=1227;
  i=esben@geanix.com; s=20240523; h=from:subject:message-id;
- bh=Va7DsbfASPFeU8ntDzYfgNRvekvwFgfltkHMi6qLaPc=;
- b=wCg7TwjXEhrr2dbGjRA3b0xpVa16YTiS7leM13QW5q3DEFn8+/+I4/qExzINoDO+HBd2mfOTj
- guLmHiR58pHBX2WXJ/C/WKqteVLnLqYFZYVxOU/8yy/ON8woz3cZXXq
+ bh=Sv7eCO6AF4sbOjbeQoGmLMu/vM2WTRF3DZa0DjY0Bjc=;
+ b=PUtkudqmAMOwvNIbOSVQT80IiCC46Pcar1ngckMfb+F3vTvMjmJWLCrmqCcVwEZ/4hyLU3c8i
+ gmzuqnm8O6sBEiezoR5sHrgWQGxsLiovpyX6WF//wXuXgJ0bm2V7HJ2
 X-Developer-Key: i=esben@geanix.com; a=ed25519;
  pk=PbXoezm+CERhtgVeF/QAgXtEzSkDIahcWfC7RIXNdEk=
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 15:29:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117973
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117974
 
-While STOMP module is optional in syslog-ng, we have been enabling it by
-default without PACKAGECONFIG support to disable it since forever.
-
-This change disables it (and example modules), requiring anyone actually
-wanting it to enable it through PACKAGECONFIG.
+The STOMP protocol is optional, and should not need to be enabled by
+default.
 
 Signed-off-by: Esben Haabendal <esben@geanix.com>
 ---
-Esben Haabendal (2):
-      syslog-ng: Add stomp PACKAGECONFIG option
-      syslog-ng: Add examples PACKAGECONFIG option
+ meta-oe/recipes-support/syslog-ng/syslog-ng_4.8.2.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
- meta-oe/recipes-support/syslog-ng/syslog-ng_4.8.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
----
-base-commit: 820047afe48a0d48056f4752defc3d2803c9d906
-change-id: 20250620-syslog-ng-stomp-da4b86116680
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.8.2.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.8.2.bb
+index ebeab51961b2370653e32fc0601740c1a25492a8..d2af451dea64048fe44b6d80d87c1ae848e080fb 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.8.2.bb
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.8.2.bb
+@@ -59,6 +59,7 @@ PACKAGECONFIG[dbi] = "--enable-sql,--disable-sql,libdbi,"
+ PACKAGECONFIG[spoof-source] = "--enable-spoof-source --with-libnet=${STAGING_BINDIR_CROSS},--disable-spoof-source,libnet,"
+ PACKAGECONFIG[http] = "--enable-http,--disable-http,curl,"
+ PACKAGECONFIG[smtp] = "--enable-smtp --with-libesmtp=${STAGING_LIBDIR},--disable-smtp,libesmtp,"
++PACKAGECONFIG[smtp] = "--enable-stomp,--disable-stomp,,"
+ PACKAGECONFIG[json] = "--enable-json,--disable-json,json-c,"
+ PACKAGECONFIG[tcp-wrapper] = "--enable-tcp-wrapper,--disable-tcp-wrapper,tcp-wrappers,"
+ PACKAGECONFIG[geoip] = "--enable-geoip,--disable-geoip,geoip,"
 
-Best regards,
 -- 
-Esben Haabendal <esben@geanix.com>
+2.50.0
 
 
