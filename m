@@ -2,60 +2,60 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 218BEC71155
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D93DC77B7F
 	for <webhook@archiver.kernel.org>; Fri, 20 Jun 2025 09:03:26 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web11.3609.1750410200101032703
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web10.3608.1750410198782792203
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Jun 2025 02:03:20 -0700
+ Fri, 20 Jun 2025 02:03:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=UtJYMOHh;
- spf=pass (domain: konsulko.com, ip: 209.85.218.43, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-ad883afdf0cso329201066b.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 02:03:19 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=W1/XtDfA;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.48, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-60789b450ceso3020604a12.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 02:03:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1750410198; x=1751014998; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1750410197; x=1751014997; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9MTCSoSv4Y6edw8bcXeWi9HGMSKKbktKkrJ3H4B2R2o=;
-        b=UtJYMOHhTKCJa+NZ9tyOumJ1+0E7Rh6yMbIGTDiDsXn+irO/R95VlllJjhmYLOAJOE
-         ys7o7JaM7iPlAftebtgme93m7nMkNUFyeKezzRxGKsipfGDVtttD6AcV+iNEaRr3iZkg
-         oaVtpKcy240SkYHw32AMMpczPD1uY9wVYnNBI=
+        bh=+AcBONUT5C17FpsgEuS57x6+4E/COIICAXisXbbqv8w=;
+        b=W1/XtDfAmM8FldHIJKnyyt7vZdA+wST4yO+krsxquGDEDnIA8pXoB++4hiC3YiVNt5
+         qKOQd8cuNndyTIOP/jnrLfLIPFn0GGdFPFl15ypraR6tlYPxGaNOgPI5Bj0WjQ7eJl8C
+         vk/DQTcJ/lBTGC2VQjhy+FwhgjwzbbwCLqj4s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750410198; x=1751014998;
+        d=1e100.net; s=20230601; t=1750410197; x=1751014997;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9MTCSoSv4Y6edw8bcXeWi9HGMSKKbktKkrJ3H4B2R2o=;
-        b=dsGFgh2tTPKP9bBUCmQAE3xPbyouL3Y/1iZOalq06R2FfV/lZOi4u1FlPA+y3gMkaQ
-         TGqNZixI3MWmqyv6vBLQ6uG79PakoU8KC3Y6zMQyEeqXFFNfvD5KwnWVCLTz7gnG8UEE
-         32lHahKs75MVbjBc3WKJlw3EcBUR8crrePxz9uVYyVnoPgb+pHgYN7ZA14bmJVSOP8ux
-         JgW+/+W6aWriWz8AQGNBjZNhGl+DfaYH0C6RIhNyTaQ/BvkPu3btiK8YVGTvq54LhaIT
-         bmCdVht5zS8hSl0XO/Ae249TmkMyGezOtOax4A/3vgcp0G+ODgkjHenBATHn8CNDu9dB
-         lFEA==
-X-Gm-Message-State: AOJu0YwOVqvzfkdkGVZe3bIPODij/99pO/JqrK/t0iY4f0oUo0HmYdVL
-	7RofDjUATdV6ulKbZQVb4dVf/QafuAY0LXbrZtvu0RUYNom6zqjP4DviEgBfLbHXpLLOwW1s1cD
-	aeWLd
-X-Gm-Gg: ASbGncsrRoikGyApEIiHaSd4YmOMrP43icAniSX9FL/a6kQQRX2vU7Mg575YhJOpWIC
-	r5WSm4DgmWeuj+JvwAV4f5khbpR0DaF/NxSXHjleZNU8APJEY3gvcARwarb5h0Osooll8xPoBRm
-	3o1+egW+NNBcbFCvoDHZCMrXsGyetoCwawf8/zFAFe9ABD9teKHTSgC5GFmMP08WthocfXi1N1O
-	tenO9lgBys8oX/cj3Czw1Wu2amZiVsGlz+ix6xGcKNiRE966Vx5JQwwAovJfGAoxbtxBjAWZ7Tp
-	PgxEJn2BOGVaUcGPVsNeYooY35fAhdJSEjBJD0f1NY3kWfmaVryW+kan4YvZ2J0PcwS5Bs3b89M
-	i7EGjio98R9Y=
-X-Google-Smtp-Source: AGHT+IFOI/P5BEuuthbKWKA4ZndqxZ6hKm/8oaaEum1IhZG5wPNOobrp7YJ31cHe44ttwfyExS2TAg==
-X-Received: by 2002:a17:906:9f85:b0:ad5:2e5b:d16b with SMTP id a640c23a62f3a-ae05795a62dmr177498866b.27.1750410197777;
-        Fri, 20 Jun 2025 02:03:17 -0700 (PDT)
+        bh=+AcBONUT5C17FpsgEuS57x6+4E/COIICAXisXbbqv8w=;
+        b=GrIkr/DrA15i75nfXdnMt6RtUaF+jHAzCTiJfEmlTe2yhNiKFarPm6Ch0n6DlZYsqY
+         QI4TNR1jxERmIXSYIi87HWKyID+i39qOV8o7pS+fyRRuyJK35B8cAD/X9pAe6k7hP5TL
+         u5lYWcSzyWvHDbXyRD60cDYDeb1xOnTqChooFRrJ6mcEu/D3FV2hDOjDkey2N9bezkwp
+         jRFDsSIrFl7qjscl8JypuYSTcrIKbh3mneu4y40f6yxwlp4DREwTSr95m+eQiz6/6i45
+         m+VKDlGt7IDd/Jplh9Dl8XMdCmqszY7OeS8fVId5ClYAePwu0x8ordiof7MYCvZGtnl9
+         ANJA==
+X-Gm-Message-State: AOJu0YwQu3nOU7eB5Gfkdp0jltcBLFGsc5yum3kQGBXa2ftAEmOzDnjM
+	GZdIpjIi9wbtwlW3ayrIdAEM2K/Aq/CDzKIc/6I6ckpT0kDhWBKLOokzZOEIgeNOI8kZzJ9IhHs
+	NaLNt
+X-Gm-Gg: ASbGncsJewumJQ+jnfMmy5kGUsNtaR/Bc5EpsjDjxRTFqMnkixHhzAYtNc3+oAs9R/W
+	C1FVM44K0juCdFn//XPMCdwkwYv1lVAVVt0S6kPYJepV1Ww4roycRjXBOIvOEScNYTEo/vy8Cri
+	JzIcS1wSO+RdEATo0RIksVBzFqV7U3mx4NEK1MaQcYbvxQdxfGBJClNb/5bITk/9QNJ355kwoQn
+	eV5dH+lmMgY2Ahsds04i+teF3zKM9Em5GakogdF06VcJ7jVv57JdGyuvCEHN2LITrZterApG0Ex
+	0X4Ze850g2cdIcX6nbShgAKQNJtGGtGnnEDlNHtseB4zg95SWh0RhWsLBfPN9Not+A0XADdosSd
+	u
+X-Google-Smtp-Source: AGHT+IELxGIkZyZ4vUimT9PMXXJHXocCNavhUYBvYG6cSkBK9z4KIA7sWF4KeC4+Jba8G9gQ2C9ecA==
+X-Received: by 2002:a17:906:d7d1:b0:ae0:4254:a8ac with SMTP id a640c23a62f3a-ae057ceb181mr186963966b.5.1750410196730;
+        Fri, 20 Jun 2025 02:03:16 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae054080a54sm130551966b.102.2025.06.20.02.03.16
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae054080a54sm130551966b.102.2025.06.20.02.03.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Jun 2025 02:03:17 -0700 (PDT)
+        Fri, 20 Jun 2025 02:03:16 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-typeguard: Upgrade 4.4.3 -> 4.4.4
-Date: Fri, 20 Jun 2025 12:03:09 +0300
-Message-Id: <20250620090309.1619406-5-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/5] python3-cachetools: Upgrade 6.0.0 -> 6.1.0
+Date: Fri, 20 Jun 2025 12:03:08 +0300
+Message-Id: <20250620090309.1619406-4-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250620090309.1619406-1-leon.anavi@konsulko.com>
 References: <20250620090309.1619406-1-leon.anavi@konsulko.com>
@@ -65,37 +65,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 20 Jun 2025 09:03:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117966
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117965
 
-Upgrade to release 4.4.4:
+Upgrade to release 6.1.0:
 
-- Fixed IndexError when using @typechecked on more than one
-  function with the same name under certain circumstances
-- Fixed TypeError during type checking when the value to check
-  is a parametrized generic class
+- Improve LFUCache insertion performance by switching to an
+  implementation based on the cacheing library.
+- Update CI environment.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-typeguard_4.4.3.bb => python3-typeguard_4.4.4.bb}  | 2 +-
+ ...{python3-cachetools_6.0.0.bb => python3-cachetools_6.1.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-typeguard_4.4.3.bb => python3-typeguard_4.4.4.bb} (87%)
+ rename meta-python/recipes-devtools/python/{python3-cachetools_6.0.0.bb => python3-cachetools_6.1.0.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-typeguard_4.4.3.bb b/meta-python/recipes-devtools/python/python3-typeguard_4.4.4.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-typeguard_4.4.3.bb
-rename to meta-python/recipes-devtools/python/python3-typeguard_4.4.4.bb
-index 42aa7f228b..83dc52ca19 100644
---- a/meta-python/recipes-devtools/python/python3-typeguard_4.4.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-typeguard_4.4.4.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
+diff --git a/meta-python/recipes-devtools/python/python3-cachetools_6.0.0.bb b/meta-python/recipes-devtools/python/python3-cachetools_6.1.0.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-cachetools_6.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-cachetools_6.1.0.bb
+index 1032fc0b06..702f87f94d 100644
+--- a/meta-python/recipes-devtools/python/python3-cachetools_6.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cachetools_6.1.0.bb
+@@ -14,6 +14,6 @@ RDEPENDS:${PN} += " \
+ 	python3-math \
+ "
  
--SRC_URI[sha256sum] = "be72b9c85f322c20459b29060c5c099cd733d5886c4ee14297795e62b0c0d59b"
-+SRC_URI[sha256sum] = "3a7fd2dffb705d4d0efaed4306a704c89b9dee850b688f060a8b1615a79e5f74"
+-SRC_URI[sha256sum] = "f225782b84438f828328fc2ad74346522f27e5b1440f4e9fd18b20ebfd1aa2cf"
++SRC_URI[sha256sum] = "b4c4f404392848db3ce7aac34950d17be4d864da4b8b66911008e430bc544587"
  
- inherit pypi python_setuptools_build_meta ptest-python-pytest
- 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.39.5
 
