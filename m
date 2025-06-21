@@ -1,97 +1,104 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D84B1C7115C
-	for <webhook@archiver.kernel.org>; Sat, 21 Jun 2025 10:26:02 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
- by mx.groups.io with SMTP id smtpd.web10.4924.1750501558773039873
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EEC55C71157
+	for <webhook@archiver.kernel.org>; Sat, 21 Jun 2025 10:40:22 +0000 (UTC)
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.web11.4974.1750502420481207143
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jun 2025 03:25:59 -0700
+ Sat, 21 Jun 2025 03:40:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QTfreAxZ;
- spf=pass (domain: gmail.com, ip: 209.85.167.51, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-54d98aa5981so3483199e87.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 03:25:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=b5BWUBJh;
+ spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-712cba3c6dcso12632177b3.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 03:40:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750501556; x=1751106356; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1750502419; x=1751107219; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=TBYzPHk+EILRreG0Igt9a5OwrSLC6LUvcfneVeNnB/0=;
-        b=QTfreAxZ1nWsdyu6vXjPVD8Tv684KNTIhI+TUGO4+KZnlosFTlru9EtEj5czSE0HmZ
-         /5vJRGxIL7yvJ8L6wlw5oCxqNsIRMFfZoEj+VC6e4yl7ea1ndzC0Hj1OptHovtnAKMzf
-         56j6oVA/MijQppXu/iyNQSwJEy8PFk5ayCwm/aK0gYJCi8jKr78v74cyLG7NoXKI3qRd
-         61w/PEEKduZWH7qnxtadHtNxpfxL5AFfgJ2Cey68tWnIoBF79qWTW9zToQrNkelENlmQ
-         qLctQvlJNDLlIkEr2slofmfmLMorTI/8cTM69EkjU8itNPZxWWQ8pVum9t67OH3TG/TX
-         dDxg==
+        bh=3chMAMMysvKf5kvIYfKv5l5ZadJ7YP6PEJtqqD/pHPE=;
+        b=b5BWUBJhXp2UUw5ukIHsa7oNpOk6NX0PYS/8Iw0vm4sy88gqFZsKJPjELa45QCezib
+         TlRfTiUFgsGuuJ9DpfNen5xlyIVHiNEWUsFYNsEkKBOdQwqDm8YA+QlpM9jtTRUjS2xH
+         tHpTBGWYSndxFsq7f1dx3e+ttgCkFCUBi+wYtAUg/bwVB3EEx7f10CifC2t94FqPkRVg
+         ySaHP3drvzfL0UL4xrXArR8PAAP/3zJc7C1vn7YKxY+Oh7yS2vFYnDp+922aXu277DrA
+         ln6xrMXYdYdCS/jwR2fB5JaPll7FAOoUjdyRnXFQIvfsuybX3xmSvSktNiKwxg/7fX0v
+         gKvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750501556; x=1751106356;
+        d=1e100.net; s=20230601; t=1750502419; x=1751107219;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=TBYzPHk+EILRreG0Igt9a5OwrSLC6LUvcfneVeNnB/0=;
-        b=lBsW901wjPEPI46sTpme7DevGb9LsKB5xbzOTggfPPezadAOlZxadn+bamWnyyeGiW
-         UwMgg4kfFCdKdckMhzgpb4CQD2IkuDa8kjrgW0tRQ36xWccUSuFC+wBHjiTP2IdThMiq
-         iyTCRCnbfct4tqOc4QN25eL51E/c2foTjDKXZWWhPkHX+FHJWum/mSUk4d+D1VPYfMID
-         Csm3Sq2obljFJhyzp90LPwP/spZcS+TzmiP+6vthColzExwRB3u7QeCN/RHbhfr/tU6r
-         93eakcOEa/xs84Cs4YTUBss7dHWNsf8ffavFSTi6NSuRC5i47ghXb7+sQlF0r5z0IOVt
-         0aXw==
-X-Gm-Message-State: AOJu0YyW5vdR82e8iPWNZ1TgV3Vj+M9fOfzCLaGG9Swm2a3ZEwgfzAMR
-	r9SJXA/AwdbCRWIxnWuNx2PvV+Fn1WgmKLTPKJjO38w98t0jQXXKq1II4cNEafqJ
-X-Gm-Gg: ASbGncv3b10Xr2HGs7T9/0I+QcYvY0G23YlFxA8Nmprgnz+0+swLa1e+eMPf0bCy9CQ
-	Apvqqfd4Xd6qYAbOciRQHsQ+lk+q5Rn0sOdxufnZSfq4FSpXFCX00Sv3YYPGhik7BpkgNom/5gS
-	NPRpo2z3qvyFvNqLgiEGZgziZOxQWmLgWCrKTe/Ee+ROhd+nrk8YgpLVX1vM/w9z0vVfDWF9EPY
-	JGsTqZctbYLU0LTagKM3pnMsjjcHx7TPu3MrZZNdhFKsAjPRqVqAnaZTd7bpRu6FVY/0zEa2X2G
-	5fc59A97Oae+LwlhAL9+Yi4LSI+homjVV7svFBirBZh82NmArt59/0tQ/tttPVzf2XN/80vGfCg
-	DoIg7GV5o1UnGJA==
-X-Google-Smtp-Source: AGHT+IFR6LdNCr6WZBEbhkWzk3vQfkly42Pf/8nZF/tWO3VcblXJtx8tOL2w8eOXTjgtiOyAY+Gy4A==
-X-Received: by 2002:a05:6512:6ce:b0:550:e648:182a with SMTP id 2adb3069b0e04-553e3d0c94cmr1892954e87.55.1750501556172;
-        Sat, 21 Jun 2025 03:25:56 -0700 (PDT)
-Received: from localhost.localdomain ([176.33.70.153])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-553e41c4448sm616639e87.187.2025.06.21.03.25.53
+        bh=3chMAMMysvKf5kvIYfKv5l5ZadJ7YP6PEJtqqD/pHPE=;
+        b=cgZvxyyy8EOeTCOeLBqXX32QJYw0glRjEzXwzY/LnZyFLHe2Wsk9qFZJy8TEQgeipA
+         y14RwiI9a9FgsxVWAFuvTl/eypOP84yhywWrRoi8y4FwpFFSHSowHNx4QKzAz8xgB0O8
+         RMcodM48Cj75Fc3I6CJ0tzELvc07CZl5six0nIqfqu17pNihoj54Awz7J2t69hnpRIDx
+         qZt3lsdzLjDy/CN3aaFauprax8br8VxWAWGOIDLrEL2L9FJ9ZYekqUNkDyGO8tg+9+tj
+         lop9AuAHXz/nowFUuqvdLQ9xDDGQkhz/D1vyH14GXcbtqq7n02AGP1vr3AQTTObTRLeA
+         zjVg==
+X-Gm-Message-State: AOJu0YwJ2m2jL01wFCF/iKUUE8Brd5Oze8wW/SEnPIjEPasUfvL1jI9T
+	aTVAFrwYjAKcaxjtEtJUpK15GZKcZThcjft7fSEpwVz9+AnfSsyUkxpWyfxVAQ6G
+X-Gm-Gg: ASbGncvHWm+mt6Or3UTiD2dTX6Kfxo+4Ay4KC9jgvhz8OD78t21Axf2qfv32c1sZmHE
+	wseOqNDQnikNz9qbgeWwY7Y8Rdu+QpoPyGSzGGgloWSsG8YuNNuX6wL6Brs2Mh/1xW7NnNB13+k
+	97MlXjwhoPeD2fUask1rx1EyOs196+jxDx8dV3oCrglULN8YDsqVqvOYWbCzxv/3IrMUvKbN7kk
+	LIekPIVilny/uNntiiTsBk1v1xj+3Neo5AwjKUT+Tyq+VibFX8mKuYKWXjBgQVbsB7QzLOH1dmR
+	CpF/WRwDVN5lzfhvvUJDsj7rx/zey4Gw1mZib3yOvsY8D91Cmhc9nBUo6d/CFkjuDnoLrKHt9lq
+	rKA09sRoARZHVjv7kjjrh
+X-Google-Smtp-Source: AGHT+IGUDrBCPsuf0pE0MTxd+TQHx2VE6R5wNspq26Y5eOsDV2F+fYB+MJNNsI31jxgRhYoZ8edUjA==
+X-Received: by 2002:a05:690c:6704:b0:70e:142d:9c4e with SMTP id 00721157ae682-712c651255bmr94725937b3.26.1750502419000;
+        Sat, 21 Jun 2025 03:40:19 -0700 (PDT)
+Received: from localhost.localdomain (71-208-4-221.ftmy.qwest.net. [71.208.4.221])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-712c4be2c76sm7792147b3.102.2025.06.21.03.40.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Jun 2025 03:25:54 -0700 (PDT)
-From: Alper Ak <alperyasinak1@gmail.com>
+        Sat, 21 Jun 2025 03:40:18 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] ace: Fix contains reference to TMPDIR [buildpaths] error
-Date: Sat, 21 Jun 2025 13:25:50 +0300
-Message-ID: <20250621102550.1523918-1-alperyasinak1@gmail.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-xfce][PATCH 1/5] libxfce4windowing: upgrade 4.20.0 -> 4.20.3
+Date: Sat, 21 Jun 2025 06:40:05 -0400
+Message-ID: <20250621104010.766706-1-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 10:26:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117996
+ <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 10:40:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117997
 
-ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE_Compression.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buildpaths]
-ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE_ETCL_Parser.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buildpaths]
-ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE_ETCL.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buildpaths]
-ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buildpaths]
-ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE_Monitor_Control.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buildpaths]
-ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE_RLECompression.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buildpaths]
-ERROR: ace-8.0.2-r0 do_package_qa: Fatal QA errors were found, failing task.
+Changelog: https://github.com/xfce-mirror/libxfce4windowing/releases/tag/libxfce4windowing-4.20.3
 
-Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
+Changelog: https://github.com/xfce-mirror/libxfce4windowing/releases/tag/libxfce4windowing-4.20.2
+
+Changelog: https://github.com/xfce-mirror/libxfce4windowing/releases/tag/libxfce4windowing-4.20.1
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-connectivity/ace/ace_8.0.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...libxfce4windowing_4.20.0.bb => libxfce4windowing_4.20.3.bb} | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-xfce/recipes-xfce/libxfce4windowing/{libxfce4windowing_4.20.0.bb => libxfce4windowing_4.20.3.bb} (83%)
 
-diff --git a/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb b/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
-index b730b0a86c..e62ed39d0b 100644
---- a/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
-+++ b/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
-@@ -27,7 +27,7 @@ export ACE_ROOT = "${UNPACKDIR}/ACE_wrappers"
- inherit pkgconfig
+diff --git a/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.0.bb b/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.3.bb
+similarity index 83%
+rename from meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.0.bb
+rename to meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.3.bb
+index e16997ca11..988814a22f 100644
+--- a/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.0.bb
++++ b/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.3.bb
+@@ -1,11 +1,12 @@
+ SUMMARY = "Windowing concept abstraction library for X11 and Wayland"
++HOMEPAGE = "https://docs.xfce.org/xfce/libxfce4windowing/start"
+ SECTION = "x11/libs"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=435ed639f84d4585d93824e7da3d85da"
  
- CXXFLAGS:append = " -fpermissive -Wnodeprecated-declarations"
--CXX:append = " -ffile-prefix-map=${UNPACKDIR}= "
-+CXX:append = " ${DEBUG_PREFIX_MAP} -ffile-prefix-map=${UNPACKDIR}= "
- EXTRA_OEMAKE += "INSTALL_LIB=${baselib} install_rpath=0"
+ DEPENDS = "xfce4-dev-tools-native libdisplay-info libwnck3"
  
- do_install() {
+-SRC_URI[sha256sum] = "56f29b1d79606fb00a12c83ef4ece12877d2b22bf1acaaff89537fbe8e939f68"
++SRC_URI[sha256sum] = "df2419a6bd960c0bfac3307eff593050857524642597eb35a26fb4f8261a017b"
+ 
+ inherit features_check gobject-introspection gtk-doc xfce
+ 
 -- 
 2.43.0
 
