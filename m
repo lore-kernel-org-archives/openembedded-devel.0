@@ -2,135 +2,90 @@ Return-Path: <t.f.g.geelen@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A4E5C71157
-	for <webhook@archiver.kernel.org>; Sat, 21 Jun 2025 14:18:04 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web10.8111.1750515482525876909
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE977C71157
+	for <webhook@archiver.kernel.org>; Sat, 21 Jun 2025 14:18:23 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web11.8082.1750515496196673754
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jun 2025 07:18:02 -0700
+ Sat, 21 Jun 2025 07:18:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=P1dPXIMy;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: t.f.g.geelen@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-ad8826c05f2so510516966b.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 07:18:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=C6vv44FM;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: t.f.g.geelen@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-609c6afade7so6890589a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 07:18:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750515480; x=1751120280; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=VacLqZOQUb4mvfXjmGGn+36SHz/eV5vjOaEZkKibt2Y=;
-        b=P1dPXIMy68CJfgQxlVITZp6677TZFD70wsICfv5E03ZnH8ldlIzybdxEtreOxeDgaO
-         0o+GbPVD/NotwwnCqSGL2eZnV4WTc7oJH7hyBPhVh/wJ3oWIU96K2lBwGPjKfjq9ErNM
-         QONDiiS/mD9tEUjoS8HykMNBMG6TJAGBBppshAeQ0nPoB+LFpzZJ+Z+aaQk2nyg1gUPh
-         Db4hYDGkVihCBWKwUwShcSzGgshdOowKfCZdNpouHLQg4jsaQVRnTD3xgFccA053mXzh
-         vNT8Mz5K3FOdiJot2XN/TNqNQkF9kS/0M4ym9Y89Hjb2ktFujjjBh92bDKphdFhHJYXo
-         Mj0g==
+        d=gmail.com; s=20230601; t=1750515494; x=1751120294; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=qeOHtV6NLjLagddeWKHAPWsRgR3YOLzH+xmiOvvPU34=;
+        b=C6vv44FM7PH5zBRkI6hLe8rwvVRNsUJ83g9MoVclLsIwHFMfXguUtrKq1MOOtI4fu4
+         Dy8ccDItBLqjSSmx4hbRnn0cO8SF/hekIFwEmIfSptmbPJjnWczAdsU2E5A8JOP+sUwT
+         ZhzqDyN7IJZkhd+YnpxhpbovukVVX/L32l+IuZdsOuZt6DASiTd56zGC5OYzlGnkGo4v
+         f6VRwgeNwxvpUha9WSS53qENjivCZxS4BufbLW6eH42+7h80rpHZvGzmL0TNdNFU789X
+         I8eSv50A3QNKLlrTN4NhJbkSFDxmnQGvDYz/rpMiR51y3f1tFWWV71k7y25hqN6oj7qi
+         zOhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750515480; x=1751120280;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=VacLqZOQUb4mvfXjmGGn+36SHz/eV5vjOaEZkKibt2Y=;
-        b=HOms2MnGg8L7Vw3FrOkDc41Uw5JJeIi87iqJSGxlmQ74Rh/nyTK6NLY+gUSLaQoeXu
-         UpekLrmrL4/UtbN5fajcBJEgTowFedv0J2MAQMnssqfjjRIY0vL4Xcgtm53FYx2Ey/fZ
-         FJsDiPoNtKAZLbaSu7IvZPwuevxjv9Z3sN7zskIFq6hmJYrJWo110caK0DlEVhWPniQN
-         5IAfxTclwb6xov2i7z0lpmjXevLJUyo3QB6wzmcSuQ3wX/cJPf79lIAxPMVcZttsCVlA
-         38p01P2QH3KjeBW3+htGVCki8tL+3oau5V3ZmdUiVdXu8QOM9gx1ssdi2eyS/rcgG4in
-         9VhA==
-X-Gm-Message-State: AOJu0Yzt8lH6v3SB9pdtiV72I75W+81YoYfGyulcivIWCNDbZov9lfOy
-	vlsQs8pLF+DFvjQ9Ohc5bFLywiqZ+FTWscTwBWhxtDLsMnR13dfVMoA7ifobFdaS
-X-Gm-Gg: ASbGncuQI3ah6MZfHFUG3pVFj7E4nMrn+MQDI2z+JmRqfi6UeQsRAyxH5GQvYMVAs7d
-	Qzx/hNWTCITtxyEgnFA+2EwcsvY53yAlLLhVxWFT5hpfOsCtYr1natsuGihXOw3rzic3I4fKs2p
-	bJiI68+sOI+tkerCau7oyGHjhMN+GbcioEfZS13/R5sDUbO4/Y7lzPbtz34ZsYDJY5+dGrU/hGk
-	XMpOeYWqh6LQ97qsYbuxgBrwMBW0jiE2n54mMUSCtpyxn9HqDMCcFYgkEqaMR606YhPWzHZqcqQ
-	0LbkZGTOVrfNcK7lonyez+Vi3reC+nUcv8rNbEZ/451ShwB2wPEqPmHzt5peBqyrqyRbrxIm9gI
-	+VMOFsPRCDQIjEEfXVBDaPeBc7UgotCywQVYgQoEJ
-X-Google-Smtp-Source: AGHT+IHGu14zEK3ez5+eM6dXlpc9JHnmI/KDMHizR2pXb3bWG91Yj3Y4XlHc7hcIjiNmYsJBqP6bRA==
-X-Received: by 2002:a17:907:980a:b0:ad8:a4a8:103a with SMTP id a640c23a62f3a-ae0578d81d4mr669445866b.4.1750515480248;
-        Sat, 21 Jun 2025 07:18:00 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1750515494; x=1751120294;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=qeOHtV6NLjLagddeWKHAPWsRgR3YOLzH+xmiOvvPU34=;
+        b=NSC25aAaTmvO1zWMpoPHB8Ym/Is39POB5ZAtdsCHJr5lA6IeLoKxm2t1WkKRq9D/2y
+         iz+7QDxirzRNt055ioiprmfhGKP+6QG38wTDFkoe6oBkEcKCXEyuVjcFp0U3FeNAwiHk
+         sL9mZayKUdVcB9IND6Kv+9pyXP2qWRK5Qlbp7wOPNGWwsAgpQltkheeCIwmZJ+SRNk0I
+         1mVesY83s41YuFfjsbh9yRfiPjKWTasV6A2rvd/C+UNv7ZCix9rS4vcVxCHvtH4eV4Q2
+         K8f5m/0VTnk39sxAQmnw0LgLTTJtTE1ZMof5CbYUNXYETvHzrv3gJPwcFYyaJ1y1jBPV
+         J4Yg==
+X-Gm-Message-State: AOJu0Yx+AXkzR69guNIbhfTqIMEe3qBoNsl4jJxPdCGhKoraaS9lVMQb
+	Fs4ZmPcrLdYxRA8ykbxSjIpMk4+SAfyuFRiAyZMsGDFUPXxFyudbl3lldhKYWUts
+X-Gm-Gg: ASbGnct71ASytY2Q4PHLnl7vs9w79JvTKw9iDkf92CqURP3zQcq4qs472owNUxvhBJv
+	DL7XSD6MqVtd0yzQNTIWSDWR4rfuWEpbOQLWJtlMSolZQsLbnNB2tpdXbgXnPq0FgAGQkch5XCw
+	3SX49Zej+nuYPu9W4QQNrzUGe8s/eNfmiDD80BMS845egPmyRsj7kpvoGBESEXvvcySyEhG6B0q
+	fTOXZQlG1b587ztm/FxXP/MUm2AkRQHwZ5jGwvbxLuLWFCRjvrW/caewZTLeMRy2a0iQ3o7UNYP
+	fsl7fFVLYYCJmg+8O0WUVpPzVgX97/LH1CeWG2wnWLPMx9smhtBkir6th8VouIZb3eclZWoHKBp
+	2aW3F0+CpcoBVGPgLVaVIAsWk1NqsEqwo37xXn2U6
+X-Google-Smtp-Source: AGHT+IEedcp6G0UFHPC85N3yOYe/or+8ne4C3F5h9ifFDlZmHcT2RvcTbxgabvxMNJr2F8v1T/kqIw==
+X-Received: by 2002:a17:907:6ea7:b0:ad5:6cfc:e519 with SMTP id a640c23a62f3a-ae05ae21ad4mr594778866b.11.1750515493850;
+        Sat, 21 Jun 2025 07:18:13 -0700 (PDT)
 Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae0541bbcd9sm381148066b.144.2025.06.21.07.17.59
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae0541bbcd9sm381148066b.144.2025.06.21.07.18.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Jun 2025 07:17:59 -0700 (PDT)
+        Sat, 21 Jun 2025 07:18:13 -0700 (PDT)
 From: Tom Geelen <t.f.g.geelen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tom Geelen <t.f.g.geelen@gmail.com>
-Subject: [meta-python][PATCH 1/2] python3-propcache: 0.3.1 -> 0.3.2
-Date: Sat, 21 Jun 2025 16:17:15 +0200
-Message-ID: <20250621141715.3978875-2-t.f.g.geelen@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-multidict: fix: update S for python3-multidict recipe
+Date: Sat, 21 Jun 2025 16:17:17 +0200
+Message-ID: <20250621141715.3978875-4-t.f.g.geelen@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250621141715.3978875-2-t.f.g.geelen@gmail.com>
+References: <20250621141715.3978875-2-t.f.g.geelen@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 14:18:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118008
+ <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 14:18:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118009
 
-Drop patch which allows Cython 3.1.x as source now supports it.
 ---
- .../0001-Fix-build-with-cython-3.1.x.patch    | 34 -------------------
- ...he_0.3.1.bb => python3-propcache_0.3.2.bb} |  3 +-
- 2 files changed, 1 insertion(+), 36 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-propcache/0001-Fix-build-with-cython-3.1.x.patch
- rename meta-python/recipes-devtools/python/{python3-propcache_0.3.1.bb => python3-propcache_0.3.2.bb} (74%)
+ meta-python/recipes-devtools/python/python3-multidict_6.5.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-propcache/0001-Fix-build-with-cython-3.1.x.patch b/meta-python/recipes-devtools/python/python3-propcache/0001-Fix-build-with-cython-3.1.x.patch
-deleted file mode 100644
-index 3b86b23c00..0000000000
---- a/meta-python/recipes-devtools/python/python3-propcache/0001-Fix-build-with-cython-3.1.x.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 8d44d867f7cd86da4edf328e06b13778577ea4b7 Mon Sep 17 00:00:00 2001
--From: WXbet <57314510+WXbet@users.noreply.github.com>
--Date: Thu, 15 May 2025 21:54:48 +0200
--Subject: [PATCH] Fix build with cython 3.1.x
--
--closes #113
--
--Upstream-Status: Submitted [https://github.com/aio-libs/propcache/pull/114]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- packaging/pep517_backend/_backend.py | 2 +-
-- requirements/cython.txt              | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/packaging/pep517_backend/_backend.py b/packaging/pep517_backend/_backend.py
--index 7588db3..f75b83a 100644
----- a/packaging/pep517_backend/_backend.py
--+++ b/packaging/pep517_backend/_backend.py
--@@ -379,7 +379,7 @@ def get_requires_for_build_wheel(
--     elif sysconfig.get_config_var('Py_GIL_DISABLED'):
--         c_ext_build_deps = ['Cython ~= 3.1.0a1']
--     else:
---        c_ext_build_deps = ['Cython ~= 3.0.12']
--+        c_ext_build_deps = ['Cython ~= 3.1']
-- 
--     return _setuptools_get_requires_for_build_wheel(
--         config_settings=config_settings,
--diff --git a/requirements/cython.txt b/requirements/cython.txt
--index 69a1d6f..5b356ed 100644
----- a/requirements/cython.txt
--+++ b/requirements/cython.txt
--@@ -1 +1 @@
---cython==3.0.12
--+cython~=3.1
-diff --git a/meta-python/recipes-devtools/python/python3-propcache_0.3.1.bb b/meta-python/recipes-devtools/python/python3-propcache_0.3.2.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-propcache_0.3.1.bb
-rename to meta-python/recipes-devtools/python/python3-propcache_0.3.2.bb
-index afa6822563..e78d7b3428 100644
---- a/meta-python/recipes-devtools/python/python3-propcache_0.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-propcache_0.3.2.bb
-@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/aio-libs/propcache"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_6.5.0.bb b/meta-python/recipes-devtools/python/python3-multidict_6.5.0.bb
+index 7b34169105..6c30c55cff 100644
+--- a/meta-python/recipes-devtools/python/python3-multidict_6.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-multidict_6.5.0.bb
+@@ -10,7 +10,7 @@ PV .= "+git"
  
--SRC_URI += "file://0001-Fix-build-with-cython-3.1.x.patch"
--SRC_URI[sha256sum] = "40d980c33765359098837527e18eddefc9a24cea5b45e078a7f3bb5b032c6ecf"
-+SRC_URI[sha256sum] = "20d7d62e4e7ef05f221e0db2856b979540686342e7dd9973b815599c7057e168"
+ SRCREV = "df5b5dbb6e3e262b9311755cf130c669e121eb81"
+ PYPI_SRC_URI = "git://github.com/aio-libs/multidict;branch=master;protocol=https"
+-S = "${WORKDIR}/git"
++S = "${UNPACKDIR}/python3-multidict-${PV}"
  
- inherit pypi python_setuptools_build_meta ptest-python-pytest cython
- 
+ RDEPENDS:${PN}-ptest += " \
+     python3-objgraph \
 -- 
 2.43.0
 
