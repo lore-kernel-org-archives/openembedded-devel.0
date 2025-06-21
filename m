@@ -2,62 +2,62 @@ Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBCF1C71157
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CCA72C77B7F
 	for <webhook@archiver.kernel.org>; Sat, 21 Jun 2025 10:40:32 +0000 (UTC)
-Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com [209.85.219.181])
- by mx.groups.io with SMTP id smtpd.web10.5065.1750502429582758570
+Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
+ by mx.groups.io with SMTP id smtpd.web10.5063.1750502424892965916
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jun 2025 03:40:29 -0700
+ Sat, 21 Jun 2025 03:40:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=U7r26/Qw;
- spf=pass (domain: gmail.com, ip: 209.85.219.181, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f181.google.com with SMTP id 3f1490d57ef6-e81826d5b72so2476596276.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 03:40:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nqf1xr2r;
+ spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-70f862dbeaeso25262997b3.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 03:40:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750502428; x=1751107228; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1750502424; x=1751107224; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=juHKQNjNQLrz9agche2OXAc7Xbx7GEiMVvBPUTPajq4=;
-        b=U7r26/Qw8f1y+OMdds+FT/2qMu0wy+57BRr/02cNTzMOR/4LWBhm8wc0Dhbp5d5a/5
-         ixQfjiyCWm3gHkD+F9PNtlVUbFo/wO6RPl6e3Wy2wrxFyk4YdfcMZSvozrEjC6Od9GIV
-         IEFZ7OLZt8voSnFLuraBW26R/yNSca1thKGSn9rSSpEnG7FqJkyiIEIk64tLAPiPbSiB
-         8+IWS6jMaiyPLWcKKxd8Cx5gc7yoyuormMWdV2qHSvhjneeolLoCOHxe9pCtTKMwELLE
-         zRmWzIbYS+pZ2wt2QpiqQhUmV32cYgiVjxYaf47EGyPdsgoNrz3nkCoUszc7FJUEahZb
-         4mDA==
+        bh=iwoMW09ihndrav9Xqx5C8qfTfLQJRjhzaOspfoTnp6Y=;
+        b=nqf1xr2re+c7bd861BnqnpTm9Ti35S7xQMC/HJQdRGkz/EQavI5K/VGYbfE79v8LCd
+         SFsWpQ/HAjPoy5ljmCMWH7008s9Jx7Cb3zVKc5zWua7yWGBxOLUVoXV7EZlaAMOit6sj
+         j5N8NI4J0Ij/MXdWtafIKmiknFjIyfUaQ+tK8HnlZMK0SzKfddlfFyC3QizkO0gSpEXt
+         3HXe9e2+n0EKn49k44bcJPsUGI7L/NtIT/ag/uLJL6AKcFjGQl3j2vyt+ciISv3qaNNM
+         /iyD62xVlWQjgi1hxUnR4QyPfRmp2ZGabttaed+w2Q1w83FRTcL3i8hYyho05thS5Dpk
+         1q7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750502428; x=1751107228;
+        d=1e100.net; s=20230601; t=1750502424; x=1751107224;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=juHKQNjNQLrz9agche2OXAc7Xbx7GEiMVvBPUTPajq4=;
-        b=fTn8+igywH36xKWmkIb8BB6PaCmC90jWddFavuLVcRDjQZJIlA5NgoQSF0xI8/nQrj
-         KfRqGncm5RVaFEjYSMRO/+7GbhDvguMomnD+qb4ELEPZXE78JgURgd5G7Ts6Jd1KBsxI
-         O393d25u/1wwi0FGtNe/6UJ9DBChhbTvP2DsCRgipdwYpxypc4CtOSriGJ3kCVSeML0X
-         oqbmBy+4ye5ijDj4ASU9QECDaCrD8g+LLtWLtioLhgCW04V9qeDDQeGJjX22VFCIy9Vq
-         RwEAk35jIk1sTknpjRof0Pr+fauf1kgj4peN6GUoGArANk2bFBPGQNyuVocIEevHOeCW
-         JbmA==
-X-Gm-Message-State: AOJu0YxAOpDuJSeC9hVzwVZwL1ZS0234Yi4kaWQ8HnzxLJLdy7PSw3Kj
-	ml6DNbalMOJrJy5eAOGSxJVj2nLUc9SqR2iwx6s4iFCkTJe/hnlR1khJ9EFSdYJA
-X-Gm-Gg: ASbGncvxPwdx4YNueoQePkc1yuX6If7fYD76FV3rNiK84NQk5FIINwlCDqMOgNkcyp6
-	GoTlldIdJxWYPhcwIbL6B+Nf12VoTTd4JgokIYysKGumInPaQvDDVn8NiK6CStbAkSRE0d19MM4
-	cCuHoHBHPVOe7klva0XvfppyOp39Aed9TSmc7aK0nhm+wRtoR5f8Jq/ecyw4HBIk/0MpQ40tcMI
-	A/8J+U9p3xGYMzB5B7lEA5tcBt9bF3UQQ5ZM+8OiMTZkGZMEl/hj1O27thrVGMl5VqqmLudm5fu
-	2x5CxnIeSV82mT04SZWVfH6ufXJb12EvxPh8QYuO45a18rywQh19PXf+0S7bW5ZD7Ch1ubASJu6
-	oiJP5zx1V1gFGgMutqpAH
-X-Google-Smtp-Source: AGHT+IEU8+ogkqq82Ex3IaOv2v3NkkQYroO7L1BkVtdNHz76H68C7DgiYcqZFknGzKCnUGL3MyPDhA==
-X-Received: by 2002:a05:690c:7082:b0:70e:7a67:b4b5 with SMTP id 00721157ae682-712c6517813mr83844177b3.22.1750502427548;
-        Sat, 21 Jun 2025 03:40:27 -0700 (PDT)
+        bh=iwoMW09ihndrav9Xqx5C8qfTfLQJRjhzaOspfoTnp6Y=;
+        b=giPvB1ctqcWkbHQPWfoSDZB5u+CMkfy17Y1Xkor7eYGeSa+VzzjUDlBclzSCvuiALE
+         ycK+p+AQt1LS/mJHlr2KbskeBNtRS9IbHs65XW83tALMe8N1I0+77+FAqVQg99AVwQep
+         1DKtuSgLCt7UEPHChzn2D45I25wkD/PwjjCOA4/OHw10TJMwmTqCUt4/nLwfd9DtN8+N
+         j+5+f10mTKL0RQ00tfNG+yW05SFRmpkHiPOpYWQIgjQhZZ9SbIa78HOStUQK/gpOwbbV
+         Qn3CvdEi1iyhbEAp45ae0ftt1DIiLkHthaUSBiVPHKpHfiBdbrQ28eP4Ga2DSS2tbQxO
+         OSlA==
+X-Gm-Message-State: AOJu0YyjbYPmxGI4UHNXO0P7e4bdke9s/xMtZ5yktb8Yc8zM2N5KSv6Q
+	NuxG263L8vXr4Wn5bbLxQgn/yvaNfknYwbsEEqi2Uz14uiF+2CpXhbf3b/KrmK85
+X-Gm-Gg: ASbGncs1N25ivT1PsQTRdi0jYCaE81/evCcX09TLrhE+8a6PGGwJg9K5LN7cpO52qZ0
+	rPit2nDBAb0Eu01uZj+D3ssMk0VxfAwclB8mvrltPSzNvIGTJnnzsY6QD1WooSdWN2cFJJgCHCq
+	9o4j4YAfGVdZc5zW9hlHqd8/HoyO/dAdPBINTBZW/6Ed0jTq80TnbjappPGoyD63mnAL3AQFk7u
+	i3jGAwojDcm3LEJuNWqTCXVCiQFUCGqXHR/lQVY4Wt2db5h9wKOZykoj9ohvNvk84hPL72ppGnh
+	2kZuggtjBkpt/Fqnd5lZAmKfyloZpynwXM6fzY+9X2vJS4l9oob1uZK8BbTXNcpQ5M0QpVI25Xt
+	+Ij3o3dSB2OPYqo1rY/Jx
+X-Google-Smtp-Source: AGHT+IFERIQ5AmU18Zp+HRpHwTBB1dKVN0GmAv1a85Zk80YcLOgoMI7Q4fcW/zwqANoBVc+XSTVAuA==
+X-Received: by 2002:a05:690c:ece:b0:70c:d256:e7fc with SMTP id 00721157ae682-712c64e5821mr86000077b3.21.1750502423407;
+        Sat, 21 Jun 2025 03:40:23 -0700 (PDT)
 Received: from localhost.localdomain (71-208-4-221.ftmy.qwest.net. [71.208.4.221])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-712c4be2c76sm7792147b3.102.2025.06.21.03.40.26
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-712c4be2c76sm7792147b3.102.2025.06.21.03.40.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Jun 2025 03:40:27 -0700 (PDT)
+        Sat, 21 Jun 2025 03:40:22 -0700 (PDT)
 From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH 3/5] libxfce4ui: upgrade 4.20.0 -> 4.20.1
-Date: Sat, 21 Jun 2025 06:40:07 -0400
-Message-ID: <20250621104010.766706-3-schonm@gmail.com>
+Subject: [meta-xfce][PATCH 2/5] libxfce4util: upgrade 4.20.0 -> 4.20.1
+Date: Sat, 21 Jun 2025 06:40:06 -0400
+Message-ID: <20250621104010.766706-2-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250621104010.766706-1-schonm@gmail.com>
 References: <20250621104010.766706-1-schonm@gmail.com>
@@ -67,38 +67,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 10:40:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117999
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/117998
 
-Changelog: https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.20.1
+Changelog: https://gitlab.xfce.org/xfce/libxfce4util/-/tags/libxfce4util-4.20.1
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../libxfce4ui/{libxfce4ui_4.20.0.bb => libxfce4ui_4.20.1.bb}  | 3 ++-
+ .../{libxfce4util_4.20.0.bb => libxfce4util_4.20.1.bb}         | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.20.0.bb => libxfce4ui_4.20.1.bb} (88%)
+ rename meta-xfce/recipes-xfce/libxfce4util/{libxfce4util_4.20.0.bb => libxfce4util_4.20.1.bb} (65%)
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.20.0.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.20.1.bb
-similarity index 88%
-rename from meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.20.0.bb
-rename to meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.20.1.bb
-index 22ce3fe67b..b2dd9dfa79 100644
---- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.20.0.bb
-+++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.20.1.bb
+diff --git a/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.0.bb b/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.1.bb
+similarity index 65%
+rename from meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.0.bb
+rename to meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.1.bb
+index 0b8356e0a2..22f1ec28c3 100644
+--- a/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.0.bb
++++ b/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.20.1.bb
 @@ -1,4 +1,5 @@
- SUMMARY = "Xfce4 Widget library and X Window System interaction"
-+HOMEPAGE = "https://docs.xfce.org/xfce/libxfce4ui/start"
+ SUMMARY = "Basic utility library for Xfce4"
++HOMEPAGE = "https://docs.xfce.org/xfce/libxfce4util/start"
  SECTION = "x11/libs"
  LICENSE = "LGPL-2.0-or-later"
  LIC_FILES_CHKSUM = "file://COPYING;md5=4cf66a4984120007c9881cc871cf49db"
-@@ -12,7 +13,7 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+@@ -6,4 +7,4 @@ DEPENDS = "intltool-native xfce4-dev-tools-native glib-2.0"
  
- # TODO: Check if 0001-... can go
- SRC_URI += "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch"
--SRC_URI[sha256sum] = "75e8996984f20375aadecd5c16f5147c211ed0bd26d7861ab0257561eb76eaee"
-+SRC_URI[sha256sum] = "ec99f0b8f6d7cd4222c8f8e3bca51d144fb240d719829344b354900eb3a07100"
+ inherit xfce gtk-doc gobject-introspection vala
  
- EXTRA_OECONF += "--with-vendor-info=${DISTRO}"
- EXTRA_OECONF += "--disable-vala"
+-SRC_URI[sha256sum] = "21493f9c9995a282823db93839f6b9f06ae31edb094191ba9acf04d932a2b592"
++SRC_URI[sha256sum] = "84bfc4daab9e466193540c3665eee42b2cf4d24e3f38fc3e8d1e0a2bebe3b8f1"
 -- 
 2.43.0
 
