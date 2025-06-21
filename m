@@ -2,77 +2,82 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E028C7115C
-	for <webhook@archiver.kernel.org>; Sat, 21 Jun 2025 11:20:13 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web10.5549.1750504807295597627
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CD2CC71157
+	for <webhook@archiver.kernel.org>; Sat, 21 Jun 2025 11:31:33 +0000 (UTC)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.web11.5626.1750505489160112640
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jun 2025 04:20:07 -0700
+ Sat, 21 Jun 2025 04:31:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Eww9gr14;
- spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-ade5a0442dfso517119466b.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 04:20:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=K7MZPJsA;
+ spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-ad891bb0957so481100066b.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 04:31:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750504805; x=1751109605; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1750505487; x=1751110287; darn=lists.openembedded.org;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=miXFRqXKmZaNJcoX0jjFR2gAQKB92sLgbnot2l2TBrc=;
-        b=Eww9gr14x9GjfjkdyGtZZB2iEaGyTrNdOcY2w4Cy1x/eGoTYnxlJCe5V4dQ60DWZAm
-         oteM3nm7xq0Rm7k5ufiVP3Uj3ZaydWsP7NUEI6ZLXmn9CNll0T/vn5XoKX4aMwawBW7R
-         p3tWDYa1abE4C+SgteyG0kUEdyE9RHhrfBGRVuqwBoOc33LGQUt/PCQxfI8H+XscwoJE
-         Pi1Sr4utp5J3Mh0XrsBJDR/76hIPzWN7gebFF9phqNgBcjxRVX9WxDeCjnB0TgiGhHAn
-         Qja5TdVWX38SDVe+mvca12dap0qniwexflLUigKiC2E1F3AtrLn7k8+UEa65gSw3qnHT
-         pPFQ==
+        bh=mc0BBTrgSS6WDu9OlawlNZxH8Nvp8f1/JU0BIBuEiS0=;
+        b=K7MZPJsAe3MhAQEwdJRRR3aGoBgM3mgx7NszYCxQwQwZuyY0ThKEWhcxJC02zPqChp
+         st1s6eSYX/i5EsB8DyRDAgpVp1qKsruVY9i47o1S3LapITpkNOWGDoXR0M23CX5e6x92
+         FGjr29uNfUwFYv4P+XOO7CFIUsdYgRrJUSPUzktw9Z7P+/LtWd3tU1DGQFtYzh1DHn1Y
+         EUDCvCVMIfsnVLgg5dQmSbrTYZhsFnGrCOg6zD2rOVDWjPVhK9r1UNKUW3HNt2m9IXAk
+         4Y26lLI0RpflFKA7GBwkgEOlGO/KEVKO2uOqk5ZfL3AAXB1POnH6z7UPlBpZqi31Nxyh
+         PVjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750504805; x=1751109605;
+        d=1e100.net; s=20230601; t=1750505487; x=1751110287;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=miXFRqXKmZaNJcoX0jjFR2gAQKB92sLgbnot2l2TBrc=;
-        b=DFJdvLAspj/7A/wMJwQ10FjD32IAciJEFtXBOtw//HdY2BNJLkusGCwemHCHh0LCDs
-         TLJ9ppGcmy8Rv0zXX9RNBd/NMcynPXePj4vMH9GEY8n+n7L1GJ5sktWCM1M5h+1VM/xI
-         L25zrK72uVGF18djmMY0xjq1yrXBJDjr80atIpFjQ2JRFjfsQ1SbP4qORCaJK8HWjA50
-         JZI/KH7saQ1YWHB8ApRtN2K1zWhtmJP1UtH5U2nERfEyamQl6duyFmRw21eD1plP80BB
-         lNC+jD+bGqNIRjlooHXO4ap3zMe5d9XsHD1ad2wocghR8B2z/u8TWvjBFD0ap+p5kUT9
-         j6/A==
-X-Forwarded-Encrypted: i=1; AJvYcCWetIMYx4X0t/B9FJkIXwU6hxCAsT3fNP4JPm+Fw6i3LQaKVEfwe2h3WYZ6a6eB08wDj3eameOefPJRUghrSSevrPY=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwoE2CDWpNkCZgBaEYH0QwxR20jl8pIj84cmL7HHSXKjjzaIfzM
-	zLW0f7o9l9KxHcsjezkNlKOc2X5/3r6oLCBz6HXfk2I59z+p1q2Wwz7h
-X-Gm-Gg: ASbGnctClzdNx+YSDmsU7FLk+UAGko6Gj3A6ksEPNXdgXdS7nnztFA/yULYJSRHu3h+
-	yevoA2zy5zla9ZD2ZEsgcURcL9Z76bynLNCzZfkL+ZBnWDL6p1pMEnI5JakWLE0IuV3O6Dk0ETa
-	Je/Q3viiluIDIg5lD6XBz/ClSl4Tb46Tf6XpaceKBw4ihKrK3RUVc6J19q6YOIFndvRyeqWgWDg
-	RoQz/1T20x1+AoL5O7MWIOIjxsLmw/tIIKnLOMxyqNMktjeqPMKZwxusScSgnrtiPjBBra1wM9O
-	/XCJplFmgrlI3DayWDMun/Pf/ElLISnJmp+KiB+btyoC6u9nmClwg1W7NnCey7rIAUrL2w==
-X-Google-Smtp-Source: AGHT+IFF7TxmASKUuSl5GTWqfluF9/9in7eEcbf+Cegk+PRObAPKH+YiHSQ9u9Wm76au3TKTLfmf5w==
-X-Received: by 2002:a17:907:6088:b0:ad5:7bc4:84be with SMTP id a640c23a62f3a-ae057b97f80mr566473066b.52.1750504805347;
-        Sat, 21 Jun 2025 04:20:05 -0700 (PDT)
+        bh=mc0BBTrgSS6WDu9OlawlNZxH8Nvp8f1/JU0BIBuEiS0=;
+        b=BfSAOWI2F1+pRT+M4iTZvKHqJR+DQpjOAiKgPfe+RCsmENUeLHnbjJxOXfnYFsU6zw
+         BHmzTkE0V3VCXtSy+zLBqtaFP54XCP2GZWY43oA2vlw4S3AE+I1U0zZebhNetpDIxexn
+         XcSuomBe72+if7EmE83C039nOsk1QeYOYxPAGpOB7G4hI6eWqK3mJAqwgDQD3DNO+fHt
+         BY4Aqzk6QChChgOUMslhc9ECrX9J4oCiE6zfppj+6EisEe7IUUenIFaH6846ET5PrnMi
+         uu/TfEBu+VQWxXMXWODqVPUqqMpPqwj5Z3JMGaZ+kdfQ3Z4GYTvCdgT29SE1aapn6Y70
+         w6bg==
+X-Forwarded-Encrypted: i=1; AJvYcCUARCTZYKS2PdhMFLrPvg9KwHeDu+CHT0/W9YnLr8t5oCHPJf076Bfm3v3Dg8KJiVwYP3I7h8ZwAQRjKyR1FAYF1cA=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yw6sqfezJeo9t0F9g8ulNkmf2S1JiUZvHhLrpwfQliOdvZTh85i
+	fnJXlgkLogmpwCVuT6iV8xiEqUwmkkWHU6Tf5MoqjXnLO+dMmudE5H64
+X-Gm-Gg: ASbGnct79KqeGTr0m4xM7NF+CSZvyZMeUpZiXf672Gj4QoyoPKywX67i/FTCgqWz0ij
+	4tu64c+1VYH+K3dmP+W6axASUXzZ15CTUQ8OCfjxSezEFQbsSCKVp2Tyt8oJbiZQxr994ySN/+Z
+	hhUfN+071l2iZ/f660b+WLjoVgtSRn9iZwMMyjnvprrwixQTp9RSycl3iF0f9sNj4n4mCcSh4d+
+	MjxvRZRaMfKVTeoVbeduIA2y4lLgL1kp0nnYapUGrl8J/pGw5nhbl0I+6jTisk8Muo9IDShQZKM
+	1dACprq3czp3WeoNlISDeEEQVs3VH6aYDfirHXLAPKJu/EXasJk/lPJ7j8W7fUoQk0UuLA==
+X-Google-Smtp-Source: AGHT+IFBWih1IT+PWr9/vRGh50J7dtBlL8F/5Vxr69l1x9IHTpJrPcXvGGLUrLyj7OOMqI7K1G34kw==
+X-Received: by 2002:a17:906:c115:b0:ae0:5fb7:c9d5 with SMTP id a640c23a62f3a-ae05fb7caf3mr447141966b.1.1750505486751;
+        Sat, 21 Jun 2025 04:31:26 -0700 (PDT)
 Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae0541bb5c3sm344684466b.129.2025.06.21.04.20.04
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae054083caasm349216566b.87.2025.06.21.04.31.25
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 21 Jun 2025 04:20:04 -0700 (PDT)
-Message-ID: <0123aa94-7e4d-46db-a7de-84af5cc7e407@gmail.com>
-Date: Sat, 21 Jun 2025 13:20:03 +0200
+        Sat, 21 Jun 2025 04:31:26 -0700 (PDT)
+Message-ID: <1b4ae87e-8f6f-4297-9e22-3d4d4e9d796a@gmail.com>
+Date: Sat, 21 Jun 2025 13:31:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] crucible: Allow network access during
+Subject: Re: [oe] [meta-oe][PATCH] influxdb: Allow network access during
  do_compile
 To: alperyasinak1@gmail.com, openembedded-devel@lists.openembedded.org
-References: <20250621090926.1466318-1-alperyasinak1@gmail.com>
+References: <20250621095506.1484044-1-alperyasinak1@gmail.com>
 Content-Language: en-US
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250621090926.1466318-1-alperyasinak1@gmail.com>
+In-Reply-To: <20250621095506.1484044-1-alperyasinak1@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 11:20:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118003
+ <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 11:31:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118004
 
-On 6/21/25 11:09, Alper Ak via lists.openembedded.org wrote:
-> Allow network access during do_compile to let Go modules be fetched at build time and avoid network unreachable errors.
+On 6/21/25 11:55, Alper Ak via lists.openembedded.org wrote:
+> +do_compile[network] = "1"
+> +
 >
-Is the new go-mod fetcher not usable with this recipe?
+This was just removed yesterday[1], it hasn't found its way to the
+master branch yet. It would be better if the original patch trying to
+fix this could be tweaked - if that is possible.
+
+[1]: https://lists.openembedded.org/g/openembedded-devel/message/117947
 
