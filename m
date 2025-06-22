@@ -2,60 +2,60 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B903C7115A
-	for <webhook@archiver.kernel.org>; Sun, 22 Jun 2025 09:17:20 +0000 (UTC)
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
- by mx.groups.io with SMTP id smtpd.web11.23263.1750583838318316357
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 587DEC7115A
+	for <webhook@archiver.kernel.org>; Sun, 22 Jun 2025 09:20:40 +0000 (UTC)
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.web11.23284.1750584034218474494
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Jun 2025 02:17:18 -0700
+ Sun, 22 Jun 2025 02:20:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GDUTOZnC;
- spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-b31d0dcfea3so2246818a12.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Jun 2025 02:17:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=L2+kevtE;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-b31d489a76dso2675123a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Jun 2025 02:20:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750583837; x=1751188637; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1750584034; x=1751188834; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=LRAvngFA7R+ulteq2D2nFW/3gr0MQZV6GD7zormE5dk=;
-        b=GDUTOZnCQoZALvsoiezS87CaBF8X9CcWqsTqDCMBwW+eaVgbcK1H9Y3MreavkYr1ng
-         nbrJ4m6odr235+ZQul4216RqnRUkze33Uf6QGz1lJtnyVsx1ugScL2vnRxE07u7IAUOK
-         NnJkPGkwBRvTrInBh5M30RhOYvNXfBJH1Ovcn2BX/Q2w9Fym8vqw82rQ/DGbLlcweXMd
-         XO2xNEVT6/kFNTc3Y3bRayfciZHPhy3ZlJYYvwh5YSWI/dsIjSj/6qdxaMhJeYKIkNEM
-         nVHx82XAd/KTOa/CDEkvxJKOFOM6/8nUZuf0cXbHOC1Pw6RY6DazbInSvMVklCmjvQAO
-         mYLA==
+        bh=JsyjM14ugqHaiVhzmVfBX6LozXtu7IolGfuZtABIkcE=;
+        b=L2+kevtEFsiLBeYP7VccDTRciGJb6ihwMWEiMOcseqOCPG+aHs7R9Bykqeow9we+oI
+         F+3VZKHqCRZR0I+vl+JTA79yM1+wy4XWBi5i9k/1+4aJRWT5B98tYi/AMPZuW931RP15
+         orvFbM+qISkgGhfdAoytVtWBuTcpIH9WUkpQGaNmarqk8T9C4BEU1Jvv1HH9+ZMJBSS6
+         dPw1neoD8b4oAxYL0kcz6vDhzvOJFZWxGmBByDBbXTuvJPon/r2BBysGVgWcc/9u+yAw
+         loHWkmKbhvVpd9sT/sIWTtpZ3spEQ7xCbbVr6QxTovAA0CHF5J+769Ta70GWEqcWx7ex
+         rYiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750583837; x=1751188637;
+        d=1e100.net; s=20230601; t=1750584034; x=1751188834;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=LRAvngFA7R+ulteq2D2nFW/3gr0MQZV6GD7zormE5dk=;
-        b=TDAUg9if1G3njc9lg1I4M1ABsugpYz4p9RYElIJ+RCxJARENNfcNLU9dswnQcuBX1J
-         0HtOdZbqrmZywqUh/ZkAF7Ue4VAmu1JYt37UISWb2PPvyA4h/aY3HgQ3nhpvs7IkCuw4
-         GWQK6C6qCFU7AYit1FdIkPgficc9cNL43KovuJ+uVZfg8zQzZ8JrUUGuG+8Qk2NYQ584
-         2tNx0rseDiqA44AcS6e4Fb7QSpb7LOPC1zbocTn3EMXWlii+eIjuYu6rYOEoiSIOjHkw
-         1LfUnkUMLQ6fO+nG1HsjYKzFne2DbdEmRr8FZrseULSfhwtbDrDa3FXw3804/pDqe2+e
-         hsoA==
-X-Gm-Message-State: AOJu0Yw3jeyzAEfoM7WqYOlsaXr6J4Z+61aKyOYGsfrYcfDph9f0Sa5q
-	AK/NS4mc6UpVjZTq4f9kIAknbgwrQdbul0JbalSb1DwiNnVyyzVN/vafWoft1zaOnRi8LPEvGJ+
-	MbrlUAIiTEJLhAB/n+WJ574sxhPuI1wA=
-X-Gm-Gg: ASbGncsDKw1p69rUq6t5kShODjPIbTJaed5W5WHLjvIISLSGzoiXDP91NxheEyheXn1
-	MzFoFMLnM8i7ftMK0Lt8oG2+GJJ8NcI/aaNIRetkdqu7eIGPToqQSdG9Z3rCAc8fzWg8ZzxSI5E
-	FHa55mpf3Elqc502Gx5DRk4JLY8Mf+H2FMBZwocLVBgAQ=
-X-Google-Smtp-Source: AGHT+IHOd72JfBLX9PwGv7IKo/wXSwP+aBMGAjUVko4QlTo4CXeM10sos4FZOnH6RswPci3QrKGsN5U0OFc7obTLr9k=
-X-Received: by 2002:a17:90b:4cc5:b0:312:639:a058 with SMTP id
- 98e67ed59e1d1-3159d8d9d72mr12405265a91.27.1750583837361; Sun, 22 Jun 2025
- 02:17:17 -0700 (PDT)
+        bh=JsyjM14ugqHaiVhzmVfBX6LozXtu7IolGfuZtABIkcE=;
+        b=J19DczMRQxplJILsUrQ7/zDv80xMHTmLMbju+c9LrAwASHtiQkMe9hzhKiy6QMC/Z1
+         S3MfFboPF6HvxXhwNM+KA7SopSkf/pyS2m/pXPEsMrLQAbX/chWrRLAVjCsiLN5hE4yt
+         IzSZA80u5rvOsCpBK9YzFyzj/LJweg94XZKSRbl6DamA2F3ZCHeGrLMQiT8rK408KMXc
+         b2gu8wWJ6wkMZZ2Z5y9dxvfRJMmxgnYDaJUZZIo5hPIVj4nPXMHch5YMKQuEpNpLBh8z
+         tTNPr1GQ6nAPTc1gbX2aSDRF806upiJr94MnR5Intc5nrk05fn/FGbOntvtVrzlUC8IE
+         LZig==
+X-Gm-Message-State: AOJu0YyQhsDS5HRRWGKdIC6aMgbCEMOKTiW2gx1xFPEY20UDWrPFQIg0
+	T2nmvIEF5dD1eC8q2p7IVSd2GetHW+NvjvVn1v6mOAFQGhEs67/qTIui4fvi2prainchS63e7Cw
+	v55F77KylQwjct3mAQFSGaNqFvbykpabwMU/lsZk=
+X-Gm-Gg: ASbGncv7Z9lRgUxSAHF9d6YIeC0XMAGucXzKZ2TxOwieIX5mWWKSQ8/dxbKQ6Hym/z0
+	lMp5cECo/atsLnsOWbQtmJKUwa048aDpzYjr97kEpEJqrcU49sZBKDTeN028ugwDn2PzVbOHFcq
+	yZxjvNuimQ24dqQPGSOAEZ5rlPAPgauoDonB0NwRHaRAE=
+X-Google-Smtp-Source: AGHT+IGPpLpVSbVTaL+YqwL+w3YVGm9BpBijnjgW7HTp9kWPAnjSji3OFI7pBEEzOCgNFaGwbk1rOQuUi3SD+jkE2Jo=
+X-Received: by 2002:a17:90b:3905:b0:311:9c9a:58ca with SMTP id
+ 98e67ed59e1d1-3159d64287dmr14311006a91.8.1750584033469; Sun, 22 Jun 2025
+ 02:20:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250621102550.1523918-1-alperyasinak1@gmail.com> <CAMSfU+5ymAa0RFBaSkfuke3H_Bimui5sJn8_BNZ+yKE1hCvYSA@mail.gmail.com>
-In-Reply-To: <CAMSfU+5ymAa0RFBaSkfuke3H_Bimui5sJn8_BNZ+yKE1hCvYSA@mail.gmail.com>
+References: <20250621111721.1857015-1-alperyasinak1@gmail.com> <CAMSfU+6SWhgHfMXAm3gfJf2=msp8H1CsZTLNXi+rq-b5kLp23g@mail.gmail.com>
+In-Reply-To: <CAMSfU+6SWhgHfMXAm3gfJf2=msp8H1CsZTLNXi+rq-b5kLp23g@mail.gmail.com>
 From: Alper Ak <alperyasinak1@gmail.com>
-Date: Sun, 22 Jun 2025 12:17:06 +0300
-X-Gm-Features: AX0GCFsSh-XLBGNa_eGkDpd1hXn6e41ZsUwKZMPVwJMr0i62nKdOnwzJjVJO4ak
-Message-ID: <CAGpma=61wNNLVtKYC_okEvvU-31f2xP69=VtUKqHCJZC05Dy2g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] ace: Fix contains reference to TMPDIR
- [buildpaths] error
+Date: Sun, 22 Jun 2025 12:20:22 +0300
+X-Gm-Features: AX0GCFsBxOFDDjaLyuPHJyD9Q46CAw3Pzl4Q-1KRyruGDlKhVXvHKDXghSqgLmw
+Message-ID: <CAGpma=6eZ7FUonsg-hLxFsk__hC7iAX6jRz+HX_0TxXNbv2yTQ@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] autossh: Replace WORKDIR with
+ UNPACKDIR to prevent compile error
 To: Yoann Congal <yoann.congal@smile.fr>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
@@ -63,111 +63,85 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 22 Jun 2025 09:17:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118018
+ <openembedded-devel@lists.openembedded.org>; Sun, 22 Jun 2025 09:20:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118019
 
-> Hello,
-> ${DEBUG_PREFIX_MAP} is usually in CXXFLAGS (set in poky/meta/conf/bitbake=
-.conf)
-> Do you know why it is not the case here? or why does it not work?
-> Thanks!
+Oops, I overlooked that. Thanks for letting me know!
 
-Although Yocto/BitBake sets variables like CXXFLAGS and passes them to
-the build environment, if i'm not wrong, these flags will only affect
-the final compiler invocation if the project's own build system
-actually uses those variables in its Makefiles or build scripts.
-
-Looks like ACE doesn't use CXXFLAGS in its main Makefiles or compiler
-calls.  Instead of it, it often uses variables like CCFLAGS, CPPFLAGS
-or directly invokes the compiler using the CXX, without including
-CXXFLAGS. As a result, any flags added to CXXFLAGS, such as
-${DEBUG_PREFIX_MAP}, don't reach the compiler and the QA buildpaths
-issue remains unresolved.
-
-Appending the flag directly to CXX works because ACE always calls the
-compiler as "$(CXX) ...", so anything added to CXX is included in
-every compiler invocation regardless of how the build system is
-structured.  As I said, I was found that ACE's Makefiles do include
-CPPFLAGS in the compiler calls. So, adding ${DEBUG_PREFIX_MAP} to
-CPPFLAGS allows the flag to be properly propagated to the compiler and
-resolves the QA issue.
-
-My thought before you asked the question was just "the problem is
-caused by the project.". Now we have detailed it and figured out why.
-
-It seems that our solution here should be CPPFLAGS:append =3D "
-${DEBUG_PREFIX_MAP}". Let me know if I'm wrong or if there is a better
-way.
-
-
-Yoann Congal <yoann.congal@smile.fr>, 21 Haz 2025 Cmt, 16:00 tarihinde
+Yoann Congal <yoann.congal@smile.fr>, 21 Haz 2025 Cmt, 16:07 tarihinde
 =C5=9Funu yazd=C4=B1:
 >
 >
 >
-> Le sam. 21 juin 2025 =C3=A0 12:26, Alper Ak via lists.openembedded.org <a=
+> Le sam. 21 juin 2025 =C3=A0 13:17, Alper Ak via lists.openembedded.org <a=
 lperyasinak1=3Dgmail.com@lists.openembedded.org> a =C3=A9crit :
 >>
->> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
-_Compression.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buil=
-dpaths]
->> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
-_ETCL_Parser.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buil=
-dpaths]
->> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
-_ETCL.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buildpaths]
->> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
-.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buildpaths]
->> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
-_Monitor_Control.so.8.0.2 in package ace-dbg contains reference to TMPDIR [=
-buildpaths]
->> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
-_RLECompression.so.8.0.2 in package ace-dbg contains reference to TMPDIR [b=
-uildpaths]
->> ERROR: ace-8.0.2-r0 do_package_qa: Fatal QA errors were found, failing t=
-ask.
+>> Issue was related to latest UNPACKDIR changes -> https://git.openembedde=
+d.org/openembedded-core/commit/?id=3D46480a5e66747a673041fe4452a0ab14a1736d=
+5e
+>>
+>> ERROR: autossh-1.4g-r0 do_compile: Execution of '/srv/pokybuild/yocto-wo=
+rker/meta-oe/build/build/tmp/work/core2-64-poky-linux/autossh/1.4g/temp/run=
+.do_compile.2252' failed with exit code 1
 >>
 >> Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 >> ---
->>  meta-oe/recipes-connectivity/ace/ace_8.0.2.bb | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>  .../recipes-connectivity/autossh/autossh_1.4g.bb   | 14 +++++++-------
+>>  1 file changed, 7 insertions(+), 7 deletions(-)
 >>
->> diff --git a/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb b/meta-oe/rec=
-ipes-connectivity/ace/ace_8.0.2.bb
->> index b730b0a86c..e62ed39d0b 100644
->> --- a/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
->> +++ b/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
->> @@ -27,7 +27,7 @@ export ACE_ROOT =3D "${UNPACKDIR}/ACE_wrappers"
->>  inherit pkgconfig
+>> diff --git a/meta-networking/recipes-connectivity/autossh/autossh_1.4g.b=
+b b/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
+>> index 4613ac61f1..2bc302081e 100644
+>> --- a/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
+>> +++ b/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
+>> @@ -11,19 +11,19 @@ SRC_URI[sha256sum] =3D "5fc3cee3361ca1615af862364c48=
+0593171d0c54ec156de79fc421e31a
 >>
->>  CXXFLAGS:append =3D " -fpermissive -Wnodeprecated-declarations"
->> -CXX:append =3D " -ffile-prefix-map=3D${UNPACKDIR}=3D "
->> +CXX:append =3D " ${DEBUG_PREFIX_MAP} -ffile-prefix-map=3D${UNPACKDIR}=
-=3D "
+>>  RDEPENDS:${PN} =3D "ssh"
+>>
+>> -CFLAGS:prepend =3D "-I${WORKDIR}/build "
+>> +CFLAGS:prepend =3D "-I${B} "
+>>
+>>  inherit autotools
+>>
+>>  EXTRA_OECONF =3D "--with-ssh=3D/usr/bin/ssh"
+>>
+>>  do_compile:append() {
+>> -        cp ${WORKDIR}/autossh-${PV}/CHANGES ${WORKDIR}/build
+>> -        cp ${WORKDIR}/autossh-${PV}/README ${WORKDIR}/build
+>> -        cp ${WORKDIR}/autossh-${PV}/autossh.host ${WORKDIR}/build
+>> -        cp ${WORKDIR}/autossh-${PV}/rscreen ${WORKDIR}/build
+>> -        cp ${WORKDIR}/autossh-${PV}/autossh.1 ${WORKDIR}/build
+>> -        cp ${WORKDIR}/autossh-${PV}/autossh.spec ${WORKDIR}/build
+>> +        cp ${UNPACKDIR}/autossh-${PV}/CHANGES ${B}/
+>> +        cp ${UNPACKDIR}/autossh-${PV}/README ${B}/
+>> +        cp ${UNPACKDIR}/autossh-${PV}/autossh.host ${B}/
+>> +        cp ${UNPACKDIR}/autossh-${PV}/rscreen ${B}/
+>> +        cp ${UNPACKDIR}/autossh-${PV}/autossh.1 ${B}/
+>> +        cp ${UNPACKDIR}/autossh-${PV}/autossh.spec ${B}/
 >
 >
 > Hello,
 >
-> ${DEBUG_PREFIX_MAP} is usually in CXXFLAGS (set in poky/meta/conf/bitbake=
-.conf)
->
-> Do you know why it is not the case here? or why does it not work?
+> Can those "${UNPACKDIR}/autossh-${PV}/" be replaced by ${S} while you're =
+changing these lines? (Sounds better to me)
 >
 > Thanks!
 >
+>
 >>
->>  EXTRA_OEMAKE +=3D "INSTALL_LIB=3D${baselib} install_rpath=3D0"
+>>  }
 >>
->>  do_install() {
+>>  do_install:append() {
 >> --
 >> 2.43.0
 >>
 >>
 >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >> Links: You receive all messages sent to this group.
->> View/Reply Online (#117996): https://lists.openembedded.org/g/openembedd=
-ed-devel/message/117996
->> Mute This Topic: https://lists.openembedded.org/mt/113755735/4316185
+>> View/Reply Online (#118002): https://lists.openembedded.org/g/openembedd=
+ed-devel/message/118002
+>> Mute This Topic: https://lists.openembedded.org/mt/113756056/4316185
 >> Group Owner: openembedded-devel+owner@lists.openembedded.org
 >> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
 yoann.congal@smile.fr]
