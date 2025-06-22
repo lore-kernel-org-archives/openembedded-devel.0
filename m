@@ -1,256 +1,181 @@
-Return-Path: <johannes.schneider@leica-geosystems.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57389C7115C
-	for <webhook@archiver.kernel.org>; Sat, 21 Jun 2025 20:47:06 +0000 (UTC)
-Received: from OSPPR02CU001.outbound.protection.outlook.com (OSPPR02CU001.outbound.protection.outlook.com [40.107.159.20])
- by mx.groups.io with SMTP id smtpd.web10.14978.1750538815773840661
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B903C7115A
+	for <webhook@archiver.kernel.org>; Sun, 22 Jun 2025 09:17:20 +0000 (UTC)
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web11.23263.1750583838318316357
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Jun 2025 13:46:56 -0700
+ Sun, 22 Jun 2025 02:17:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=MFISNh5s;
- spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 40.107.159.20, mailfrom: johannes.schneider@leica-geosystems.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PuthH5+JOdvGl0z6mUogms7bhn1uJ8Ptsn5ohpqMHE13hGBGAGE7BErFkk2+N24WUVDijh75DhgIxuvZmuSPBNIsFgXNrGk2ACQAzGk0Av+JO9xzF4rWA2CuMasSLA6nTM37ki95FXL+wiieTmQ6epJ+ycj6OcQVddRiRZw4Z7jY7CmjBqb9WlnFJZlJq4uONp7GXgfJOB8rKrHUbGd0WmmZ5PWqzhUH1jScedJrJZh6vC9IDVGvRoPWYq7UAm6qjVdwItwCOlW5HX8YlyXcXgTqDZa4jno2MgIgRqyxppR7ekqNQ03cyLx3JS0bqOgDOvZSl7x0M5FEdTulBuHqyA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Bz5PraUsv85pzidLV0l80cuwqvMCjQmxFASP9y1EonM=;
- b=Oac1KgkG3Px23R/WDG8ehdMKxgPJ4OtdHbcT3B19kRjcFZ8iKVnL9Ncpd/xhltIm9Ha41TDuRQGPKKOqu3TrzVKnGNppn8D1fPqDRZA8O4ExxIicdiQPVKRxGfZbOtEeavv7eN7gT1n3s+ae6Ac31/0niAz2lItjZO4GeRkqY2wPCkoiarF8VtJcJCuNKKnFXIr5P4CIJm0TD2f+tfr9n5hwL2f6ZdB8nDl9+tEp767Y7fhimIeL/DDlTND6iOnmXqd63TP9/DX+1nlUKIy0xoN1AyYKf5CvPYiPE7oD/oUEo0rhSHsBGPcZJMxAhlYBv6QntHGnf/ET53XTFCVUdg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 193.8.40.94) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=leica-geosystems.com; dmarc=pass (p=reject sp=reject pct=100)
- action=none header.from=leica-geosystems.com; dkim=none (message not signed);
- arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Bz5PraUsv85pzidLV0l80cuwqvMCjQmxFASP9y1EonM=;
- b=MFISNh5sAV8PE/vwfKioquPSV/sT374QzK2kZxYh1up7Qkh84c7tV08z/Z3vWoLq7efbYtDdl58sNrC8PLv4YHt5ti6guoi9WDt9IQsqkaifJvAKJI4xmFehlp/XI2biFu+lyWYEYMXwgRB5PwdiO6AzMehKDU5jH2tcSNeiUCM=
-Received: from AM0PR03CA0035.eurprd03.prod.outlook.com (2603:10a6:208:14::48)
- by PA4PR06MB8547.eurprd06.prod.outlook.com (2603:10a6:102:2aa::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.26; Sat, 21 Jun
- 2025 20:46:50 +0000
-Received: from AM4PEPF00027A6A.eurprd04.prod.outlook.com
- (2603:10a6:208:14:cafe::25) by AM0PR03CA0035.outlook.office365.com
- (2603:10a6:208:14::48) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8857.27 via Frontend Transport; Sat,
- 21 Jun 2025 20:46:50 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 193.8.40.94)
- smtp.mailfrom=leica-geosystems.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=leica-geosystems.com;
-Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
- designates 193.8.40.94 as permitted sender) receiver=protection.outlook.com;
- client-ip=193.8.40.94; helo=hexagon.com; pr=C
-Received: from hexagon.com (193.8.40.94) by
- AM4PEPF00027A6A.mail.protection.outlook.com (10.167.16.88) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8880.14 via Frontend Transport; Sat, 21 Jun 2025 20:46:50 +0000
-Received: from aherlnxbspsrv01.lgs-net.com ([10.60.34.116]) by hexagon.com with Microsoft SMTPSVC(10.0.17763.1697);
-	 Sat, 21 Jun 2025 22:46:42 +0200
-From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
-Date: Sat, 21 Jun 2025 22:46:30 +0200
-Subject: [PATCH meta-oe v2 3/3] classes: add a systemd-sysext image class
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GDUTOZnC;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-b31d0dcfea3so2246818a12.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Jun 2025 02:17:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1750583837; x=1751188637; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=LRAvngFA7R+ulteq2D2nFW/3gr0MQZV6GD7zormE5dk=;
+        b=GDUTOZnCQoZALvsoiezS87CaBF8X9CcWqsTqDCMBwW+eaVgbcK1H9Y3MreavkYr1ng
+         nbrJ4m6odr235+ZQul4216RqnRUkze33Uf6QGz1lJtnyVsx1ugScL2vnRxE07u7IAUOK
+         NnJkPGkwBRvTrInBh5M30RhOYvNXfBJH1Ovcn2BX/Q2w9Fym8vqw82rQ/DGbLlcweXMd
+         XO2xNEVT6/kFNTc3Y3bRayfciZHPhy3ZlJYYvwh5YSWI/dsIjSj/6qdxaMhJeYKIkNEM
+         nVHx82XAd/KTOa/CDEkvxJKOFOM6/8nUZuf0cXbHOC1Pw6RY6DazbInSvMVklCmjvQAO
+         mYLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1750583837; x=1751188637;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=LRAvngFA7R+ulteq2D2nFW/3gr0MQZV6GD7zormE5dk=;
+        b=TDAUg9if1G3njc9lg1I4M1ABsugpYz4p9RYElIJ+RCxJARENNfcNLU9dswnQcuBX1J
+         0HtOdZbqrmZywqUh/ZkAF7Ue4VAmu1JYt37UISWb2PPvyA4h/aY3HgQ3nhpvs7IkCuw4
+         GWQK6C6qCFU7AYit1FdIkPgficc9cNL43KovuJ+uVZfg8zQzZ8JrUUGuG+8Qk2NYQ584
+         2tNx0rseDiqA44AcS6e4Fb7QSpb7LOPC1zbocTn3EMXWlii+eIjuYu6rYOEoiSIOjHkw
+         1LfUnkUMLQ6fO+nG1HsjYKzFne2DbdEmRr8FZrseULSfhwtbDrDa3FXw3804/pDqe2+e
+         hsoA==
+X-Gm-Message-State: AOJu0Yw3jeyzAEfoM7WqYOlsaXr6J4Z+61aKyOYGsfrYcfDph9f0Sa5q
+	AK/NS4mc6UpVjZTq4f9kIAknbgwrQdbul0JbalSb1DwiNnVyyzVN/vafWoft1zaOnRi8LPEvGJ+
+	MbrlUAIiTEJLhAB/n+WJ574sxhPuI1wA=
+X-Gm-Gg: ASbGncsDKw1p69rUq6t5kShODjPIbTJaed5W5WHLjvIISLSGzoiXDP91NxheEyheXn1
+	MzFoFMLnM8i7ftMK0Lt8oG2+GJJ8NcI/aaNIRetkdqu7eIGPToqQSdG9Z3rCAc8fzWg8ZzxSI5E
+	FHa55mpf3Elqc502Gx5DRk4JLY8Mf+H2FMBZwocLVBgAQ=
+X-Google-Smtp-Source: AGHT+IHOd72JfBLX9PwGv7IKo/wXSwP+aBMGAjUVko4QlTo4CXeM10sos4FZOnH6RswPci3QrKGsN5U0OFc7obTLr9k=
+X-Received: by 2002:a17:90b:4cc5:b0:312:639:a058 with SMTP id
+ 98e67ed59e1d1-3159d8d9d72mr12405265a91.27.1750583837361; Sun, 22 Jun 2025
+ 02:17:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+References: <20250621102550.1523918-1-alperyasinak1@gmail.com> <CAMSfU+5ymAa0RFBaSkfuke3H_Bimui5sJn8_BNZ+yKE1hCvYSA@mail.gmail.com>
+In-Reply-To: <CAMSfU+5ymAa0RFBaSkfuke3H_Bimui5sJn8_BNZ+yKE1hCvYSA@mail.gmail.com>
+From: Alper Ak <alperyasinak1@gmail.com>
+Date: Sun, 22 Jun 2025 12:17:06 +0300
+X-Gm-Features: AX0GCFsSh-XLBGNa_eGkDpd1hXn6e41ZsUwKZMPVwJMr0i62nKdOnwzJjVJO4ak
+Message-ID: <CAGpma=61wNNLVtKYC_okEvvU-31f2xP69=VtUKqHCJZC05Dy2g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] ace: Fix contains reference to TMPDIR
+ [buildpaths] error
+To: Yoann Congal <yoann.congal@smile.fr>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Message-ID: <20250621-discoverable-disk-image-v2-3-52df3053fc1f@leica-geosystems.com>
-References: <20250621-discoverable-disk-image-v2-0-52df3053fc1f@leica-geosystems.com>
-In-Reply-To: <20250621-discoverable-disk-image-v2-0-52df3053fc1f@leica-geosystems.com>
-To: openembedded-devel@lists.openembedded.org
-CC: =?utf-8?q?Enrico_J=C3=B6rns?= <ejo@pengutronix.de>, raj.khem@gmail.com, 
- mikko.rapeli@linaro.org, erik@riscstar.com, 
- bsp-development.geo@leica-geosystems.com, 
- Johannes Schneider <johannes.schneider@leica-geosystems.com>
-X-Mailer: b4 0.14.2
-X-OriginalArrivalTime: 21 Jun 2025 20:46:42.0656 (UTC) FILETIME=[9838FE00:01DBE2ED]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A6A:EE_|PA4PR06MB8547:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2217136e-f69b-416e-53d3-08ddb104bf3d
-X-SET-LOWER-SCL-SCANNER: YES
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700013|13003099007;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?/Wjjh2aMnJzRBUTPBKy/K2WgSl6b42/TkdNehN85HnKRgoO1Zh5TUQw7bhUu?=
- =?us-ascii?Q?ysYESD4vOhionDv8NQ6JaBJCiP86EdyhWt6GnQOzBkqWv+W2aUQDrPmLRRtq?=
- =?us-ascii?Q?BPuAyqFMFlAYnTYCsnsH7lqNCOmmtN1XV3ocjiWDND+79WPj7fOajm/yb5lJ?=
- =?us-ascii?Q?sBW2VwP9G9ePxCVSIMTF9W0m17Ii7KZiEb9F578TJ2g7x1DGlkmNMw8wq/qw?=
- =?us-ascii?Q?VYac/bT2uEbHjanYovkQx+Rzf+D8+8Wvcm9LkAgxfUowds4832qpKTBap4E/?=
- =?us-ascii?Q?gv49t+RveES+1AoySZsBfHUerdglEuDBArCWGVWI98zFuHOyX5PKVfsBfqIC?=
- =?us-ascii?Q?a0U7dFqgAq7y+RLj4FueRPonFiwL/1rxXSj99A7jzOu76WxGZvY59GlfwSXT?=
- =?us-ascii?Q?eCZHB8jlrb9+rh2xsyyLMryp/3uV/HMwb0/rIR2ZgbpgSIEBJK98E5ImGc+W?=
- =?us-ascii?Q?ezDHL8FLsqhX2Aq3MF2RTT3agYAzYrAZiT8CGf7rK50a3tVYFVEcAycWjUFz?=
- =?us-ascii?Q?EZ5uH4RLjTe1hHV7dZG/MHlmy9eBq7JzJC8trmz5e5GPFujWYEMvthHvgcS+?=
- =?us-ascii?Q?KBYCom0wzcctlyJ12n55mnByHGfeZfGPfKD4myp3GjNGJq4KFNtIknp776Tf?=
- =?us-ascii?Q?NmvanqtmnNqxfsQtl1sTHE2ddh8So5Pcx9hDsGqVjgdC58f9pLJkdYNfZHJO?=
- =?us-ascii?Q?sMlSVgq46GiEe3OKikwpz2ztpbKpmFv1SE+e8jWhaTs0tMZWF8xo98s/ZjZK?=
- =?us-ascii?Q?bbctp2JtfNqAiSlyJGTjQC99WDbacEC31O8LYQO8kY7xhCPN8SIelM8klVp1?=
- =?us-ascii?Q?M39e9cyMDGl9w0RxM2iXLCt+bQb4/GZ5loVaCgQjnomyQYeXSGSlzxfDu8nj?=
- =?us-ascii?Q?7VSQLiccHF0ZmyVYKhkANvR2VsxgVKU8vqmsz1BZoVRoa01KYovGcdLl1HbT?=
- =?us-ascii?Q?HCS5u03KRi1i0/Upro8BMJmMtXaTDAsO3BtTGGvP3Hig5lzW3Ah6mokehTZP?=
- =?us-ascii?Q?rXWD/8GQ8Ddon3q1BIhhz7HvpaTTVwNIS6POhBxQLKQdJVTjUfx+aPbr2Jtw?=
- =?us-ascii?Q?zJzcjcdTrysNKc3IxDFtNcDdJ0qz5DnsWzuHK1GNuvYRyfX7A2SxGKxlvSwC?=
- =?us-ascii?Q?YjrRO6RR9p3pzvAs43GnvcS+wSTX9ss0uwuMXPcqMChDBhunRdygAq16zhyr?=
- =?us-ascii?Q?iy6G04P0QnwtRQj3AsErS0EAIwlAIxnubKgRKSTLml1kP5Xeaz7SCQpd9k8a?=
- =?us-ascii?Q?THmlLWkwLHi8Fez8IRpeT4VBxkD/+NJ85rEiJy7kyXQMn4eZZFoq0nJmmaun?=
- =?us-ascii?Q?vlCHKhJRTF7oxhI+JoTCLCkc7QUC3jIBwN3hRuIQXwm8m1Ae3PlSNJ9Lg1w6?=
- =?us-ascii?Q?RtvGb4utUHamNvbp+RZC8NsHqje/fcgod/L/PcZVTzaA+v94fvRROrkrolWt?=
- =?us-ascii?Q?ywDJDTzzt6OQsl++Tku1nKL84TTE8KlTOJgTqOn+JAfXoN8ljNfP2w=3D=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:193.8.40.94;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom50.leica-geosystems.com;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013)(13003099007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: leica-geosystems.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jun 2025 20:46:50.2591
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2217136e-f69b-416e-53d3-08ddb104bf3d
-X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.94];Helo=[hexagon.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM4PEPF00027A6A.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR06MB8547
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 21 Jun 2025 20:47:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118017
+ <openembedded-devel@lists.openembedded.org>; Sun, 22 Jun 2025 09:17:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118018
 
-systemd-sysext can load a raw-image containing usr/ and opt/ folders
-to mount them as RO overlay over the rootfs, to "extend" the systems.
+> Hello,
+> ${DEBUG_PREFIX_MAP} is usually in CXXFLAGS (set in poky/meta/conf/bitbake=
+.conf)
+> Do you know why it is not the case here? or why does it not work?
+> Thanks!
 
-This class provides the necessary changes/additions to the enclosed
-filesystem so that systemd-sysext accepts the extension for "merge"
-into the rootfs.
+Although Yocto/BitBake sets variables like CXXFLAGS and passes them to
+the build environment, if i'm not wrong, these flags will only affect
+the final compiler invocation if the project's own build system
+actually uses those variables in its Makefiles or build scripts.
 
-With such a created image, placed into the correct folder (see [1]),
-`systemd-sysext list` should be able to list the "extension" and
-`systemd-sysext merge` should enable the overlay. On both commands a
-preceding "SYSTEMD_LOG_LEVEL=3Ddebug" can aide in figuring out what is
-amiss.
+Looks like ACE doesn't use CXXFLAGS in its main Makefiles or compiler
+calls.  Instead of it, it often uses variables like CCFLAGS, CPPFLAGS
+or directly invokes the compiler using the CXX, without including
+CXXFLAGS. As a result, any flags added to CXXFLAGS, such as
+${DEBUG_PREFIX_MAP}, don't reach the compiler and the QA buildpaths
+issue remains unresolved.
 
-Link: https://www.freedesktop.org/software/systemd/man/latest/systemd-sysex=
-t.html
-Link: https://0pointer.net/blog/testing-my-system-code-in-usr-without-modif=
-ying-usr.html
-Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
----
- meta-oe/classes/sysext-image.bbclass | 87 ++++++++++++++++++++++++++++++++=
-++++
- 1 file changed, 87 insertions(+)
+Appending the flag directly to CXX works because ACE always calls the
+compiler as "$(CXX) ...", so anything added to CXX is included in
+every compiler invocation regardless of how the build system is
+structured.  As I said, I was found that ACE's Makefiles do include
+CPPFLAGS in the compiler calls. So, adding ${DEBUG_PREFIX_MAP} to
+CPPFLAGS allows the flag to be properly propagated to the compiler and
+resolves the QA issue.
 
-diff --git a/meta-oe/classes/sysext-image.bbclass b/meta-oe/classes/sysext-=
-image.bbclass
-new file mode 100644
-index 0000000000000000000000000000000000000000..3771236c6ea35d8152b676ca915=
-b14da57c38372
---- /dev/null
-+++ b/meta-oe/classes/sysext-image.bbclass
-@@ -0,0 +1,87 @@
-+#
-+# Copyright OpenEmbedded Contributors
-+#
-+# SPDX-License-Identifier: MIT
-+#
-+
-+# System extension images may =E2=80=93 dynamically at runtime =E2=80=94 e=
-xtend the
-+# /usr/ and /opt/ directory hierarchies with additional files. This is
-+# particularly useful on immutable system images where a /usr/ and/or
-+# /opt/ hierarchy residing on a read-only file system shall be
-+# extended temporarily at runtime without making any persistent
-+# modifications.
-+
-+## Example usage:
-+# extension-image-example.bb
-+#SUMMARY =3D "An example image to showcase a system extension image."
-+#LICENSE =3D "MIT"
-+#inherit discoverable-disk-image sysext-image
-+#IMAGE_FEATURES =3D ""
-+#IMAGE_LINGUAS =3D ""
-+#IMAGE_INSTALL =3D "gdb"
-+#
-+## After building, the resulting 'extension-image-example-*sysext.rootfs.d=
-di'
-+# can be deployed to an embedded system (running from a RO rootfs) and
-+# 'merged' into the OS by following steps:
-+## 1. place a symlink into the systemd-sysext image search path:
-+# $> mkdir /run/extensions
-+# $> ln -s /tmp/extension-example.sysext.ddi /run/extensions/example.raw
-+## 2. list all available extensions:
-+# $> systemd-sysext list
-+## 3. and enable the found extensions:
-+# $> SYSTEMD_LOG_LEVEL=3Ddebug systemd-sysext merge
-+
-+# Note: PACKAGECONFIG:pn-systemd needs to include 'sysext'
-+
-+# systemd-sysext [1] has a simple mechanism for version compatibility:
-+# the extension to be loaded has to contain a file named
-+# /usr/lib/extension-release.d/extension-release.NAME
-+# with "NAME" part *exactly* matching the filename of the extensions
-+# raw-device filename/
-+#
-+# From the extension-release file the "ID" and "VERSION_ID" fields are
-+# matched against same fields present in `os-release` and the extension
-+# is "merged" only if values in both fields from both files are an
-+# exact match.
-+#
-+# Link: https://www.freedesktop.org/software/systemd/man/latest/systemd-sy=
-sext.html
-+
-+inherit image
-+
-+# Include '.sysext' in the deployed image filename and symlink
-+IMAGE_NAME =3D "${IMAGE_BASENAME}${IMAGE_MACHINE_SUFFIX}${IMAGE_VERSION_SU=
-FFIX}.sysext"
-+IMAGE_LINK_NAME =3D "${IMAGE_BASENAME}${IMAGE_MACHINE_SUFFIX}.sysext"
-+EXTENSION_NAME =3D "${IMAGE_LINK_NAME}.${IMAGE_FSTYPES}"
-+
-+# Base extension identification fields
-+EXTENSION_ID_FIELD ?=3D "${DISTRO}"
-+EXTENSION_VERSION_FIELD ?=3D "${DISTRO_VERSION}"
-+
-+sysext_image_add_version_identifier_file() {
-+    # Use matching based on Distro name and version
-+    echo 'ID=3D${EXTENSION_ID_FIELD}' > ${WORKDIR}/extension-release.base
-+    # os-release.bb does "sanitise_value(ver)", which needs to be done her=
-e too
-+    echo 'VERSION_ID=3D${EXTENSION_VERSION_FIELD}' \
-+        | sed 's,+,-,g;s, ,_,g' \
-+        >> ${WORKDIR}/extension-release.base
-+
-+    # Instruct `systemd-sysext` to perform re-load once extension image is=
- verified
-+    echo 'EXTENSION_RELOAD_MANAGER=3D1' >> ${WORKDIR}/extension-release.ba=
-se
-+
-+    install -d ${IMAGE_ROOTFS}${nonarch_libdir}/extension-release.d
-+    install -m 0644 ${WORKDIR}/extension-release.base \
-+        ${IMAGE_ROOTFS}${nonarch_libdir}/extension-release.d/extension-rel=
-ease.${EXTENSION_NAME}
-+
-+    # systemd-sysext expects an extension-release file of the exact same n=
-ame as the image;
-+    # by setting a xattr we allow renaming of the extension image file.
-+    # (Kernel: this requires xattr support in the used filesystem)
-+    setfattr -n user.extension-release.strict -v false \
-+        ${IMAGE_ROOTFS}${nonarch_libdir}/extension-release.d/extension-rel=
-ease.${EXTENSION_NAME}
-+}
-+
-+ROOTFS_POSTPROCESS_COMMAND +=3D "sysext_image_add_version_identifier_file"
-+
-+# remove 'os-release' from the packages to be installed into the image.
-+# systemd-sysext otherwise raises the error:
-+# Extension contains '/usr/lib/os-release', which is not allowed, refusing=
-.
-+PACKAGE_EXCLUDE +=3D "os-release"
+My thought before you asked the question was just "the problem is
+caused by the project.". Now we have detailed it and figured out why.
 
---=20
-2.34.1
+It seems that our solution here should be CPPFLAGS:append =3D "
+${DEBUG_PREFIX_MAP}". Let me know if I'm wrong or if there is a better
+way.
 
+
+Yoann Congal <yoann.congal@smile.fr>, 21 Haz 2025 Cmt, 16:00 tarihinde
+=C5=9Funu yazd=C4=B1:
+>
+>
+>
+> Le sam. 21 juin 2025 =C3=A0 12:26, Alper Ak via lists.openembedded.org <a=
+lperyasinak1=3Dgmail.com@lists.openembedded.org> a =C3=A9crit :
+>>
+>> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
+_Compression.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buil=
+dpaths]
+>> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
+_ETCL_Parser.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buil=
+dpaths]
+>> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
+_ETCL.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buildpaths]
+>> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
+.so.8.0.2 in package ace-dbg contains reference to TMPDIR [buildpaths]
+>> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
+_Monitor_Control.so.8.0.2 in package ace-dbg contains reference to TMPDIR [=
+buildpaths]
+>> ERROR: ace-8.0.2-r0 do_package_qa: QA Issue: File /usr/lib/.debug/libACE=
+_RLECompression.so.8.0.2 in package ace-dbg contains reference to TMPDIR [b=
+uildpaths]
+>> ERROR: ace-8.0.2-r0 do_package_qa: Fatal QA errors were found, failing t=
+ask.
+>>
+>> Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
+>> ---
+>>  meta-oe/recipes-connectivity/ace/ace_8.0.2.bb | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb b/meta-oe/rec=
+ipes-connectivity/ace/ace_8.0.2.bb
+>> index b730b0a86c..e62ed39d0b 100644
+>> --- a/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
+>> +++ b/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
+>> @@ -27,7 +27,7 @@ export ACE_ROOT =3D "${UNPACKDIR}/ACE_wrappers"
+>>  inherit pkgconfig
+>>
+>>  CXXFLAGS:append =3D " -fpermissive -Wnodeprecated-declarations"
+>> -CXX:append =3D " -ffile-prefix-map=3D${UNPACKDIR}=3D "
+>> +CXX:append =3D " ${DEBUG_PREFIX_MAP} -ffile-prefix-map=3D${UNPACKDIR}=
+=3D "
+>
+>
+> Hello,
+>
+> ${DEBUG_PREFIX_MAP} is usually in CXXFLAGS (set in poky/meta/conf/bitbake=
+.conf)
+>
+> Do you know why it is not the case here? or why does it not work?
+>
+> Thanks!
+>
+>>
+>>  EXTRA_OEMAKE +=3D "INSTALL_LIB=3D${baselib} install_rpath=3D0"
+>>
+>>  do_install() {
+>> --
+>> 2.43.0
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#117996): https://lists.openembedded.org/g/openembedd=
+ed-devel/message/117996
+>> Mute This Topic: https://lists.openembedded.org/mt/113755735/4316185
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
+yoann.congal@smile.fr]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
+>
+>
+> --
+> Yoann Congal
+> Smile ECS
 
