@@ -1,103 +1,130 @@
-Return-Path: <peron.clem@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6B63C7115B
-	for <webhook@archiver.kernel.org>; Mon, 23 Jun 2025 19:56:20 +0000 (UTC)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.web11.4468.1750708572486775680
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3EEAC77B7C
+	for <webhook@archiver.kernel.org>; Mon, 23 Jun 2025 20:18:00 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web11.4928.1750709873738774085
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Jun 2025 12:56:12 -0700
+ Mon, 23 Jun 2025 13:17:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Pp6q752w;
- spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: peron.clem@gmail.com)
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-3a50fc819f2so3666656f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 12:56:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OIvb8yh4;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-b31c84b8052so5117722a12.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 13:17:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750708570; x=1751313370; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=AeiDIYiY8WoQFknC5egdl++VPdnYI7Gm87c+XEtISGA=;
-        b=Pp6q752wnldb9GDGh5NawJz+ZfL1WLci9VGqkatm8iW1oP8vchZdeF00AELK4CQyRY
-         r7z/R8XsUXLSPNkknXmsOIKvRt+Fbw5pos/ANlBCUdyKZsX+RjbsIJvioeT+zTqS+85R
-         pZLm3uC+yDpsZ1RdFDeA9RPeue4HvpeOWPFH9NpNZpiDUg93MWfBxyMa/2apDbQr0vBT
-         pnTdAlbujW4cXbeAvTsBghoYrfybanGtoZkmuFoLfOtYs8mj+8Wvhtx1+LTsvldqeXEd
-         cHJx5RqkbwCGRmxYWuOFnW9R4LsMMwjS9/ACDsyxEcmkxguqWhRCaOeAg/CDMSJrzaku
-         6lZg==
+        d=gmail.com; s=20230601; t=1750709873; x=1751314673; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=k5032Krb7yxFtpLYaHs4ydl3/LCx5vDp/hdUytg+C3g=;
+        b=OIvb8yh4F+0qjC7oslV2oOfnxSqCzdiQPh1uXq5xFt8aHS6UNBNa3UrRETpl7M4ytP
+         3ESqcloslndEH/wJO6C8U1nK9NS9oQx0RFDI9d5GDeKKnstL/vylh40x2bq+pF/Uoy9y
+         PLSOJmbPgOKdHAmyP3TEE1T4T0nlo1+x+EgrLqzK1alkY8OOGdTUJiPptNhWmMp4T2gv
+         KtyURdUA03ewAPbxwEPcQfV4o0qkn+4Fx7UqA098x4pGMXtSg7COnfF24no0ZGRcSIAF
+         3W3Xya/vC+EaknUAG9gaGkzdctij6qK03hSBtL33z2dEAFZC8f9tbXc+wHtN9qEmbM/j
+         syGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750708570; x=1751313370;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=AeiDIYiY8WoQFknC5egdl++VPdnYI7Gm87c+XEtISGA=;
-        b=Z2fv/rW7zQeQNsxK04lfttjU9sCHDcTdpk37BucY6vAmkC3xOyaS6rXaV41sZtW4iO
-         q7K8PRrm+k7EB+kmBRIlB+y39oeWGVTZbKY/iwt5J3hCRj6OcFlaxbNVMFDiG3tkIglx
-         VEj3rEP830yVBVgDIBOXXYVqVM5sqQVKspCE//1p6gL45RNNkJexY41kTAISPsin6l7F
-         Il2UkUfbLUsB6S0P3PFUz3ab8NERhVgKrSyN7nVpdkDmZ9FY8VS/MHgFbh7DRdhAm2xB
-         1qxtBRUTw834mlWhlSmTOblDV36byxfPR0cVmJf/a8nviUTfpY7m3nzJNiFJpBvi4q0g
-         CRqw==
-X-Gm-Message-State: AOJu0YziZAvQosOjGdXk+jIeqJQVWkAnAIS8AdhdeRi8v6UXJHUKpylB
-	GIOyEIW8YRQLGST8SV9f/chqHezGr5qM+mFOtK7WJd3fLJvfO9gWCZitDNpuCqIs
-X-Gm-Gg: ASbGncsNAP0xpDjDAK9Ecv93lS5pVh+VLlZSxkbe1JPAPQSZt+6DiyGiFe39Ju33Yue
-	k/8/ljHdtFUhr6iRZwD78yx7wAyW87wuptWhLbgM/rwf+O8fmlSTTNarjxN8yyNZYg/UiNomk8k
-	epPyDLB0Lxk1nFug7deUGdpXm1Lfn46Cy0aXS3V6Z/JbNGqwho692jT+3F9CByO+oouLHkflqwC
-	owYJIHxI9ooC8Jtvs//LUcGaMIdycT6nVvvZ2g0QLTYN6Su82ROc9le5nNnf47X7zKsC4qjZYoO
-	KBD51VXpTucK2BJx5PVl1vImIpy3u2KApquZ7hBB0Zew7rxWLU9qc2XU9Z3Enp2hm8+d55FtBMT
-	rj2GmM3r4zG3UfpE7eYzGs+9qwoV0WRGq9RkfESin+RNrLoQiRJ0DzU0B7YMZid+dZhm0mou2X9
-	GAE627aQ==
-X-Google-Smtp-Source: AGHT+IElOTBRl5TMKpuNHxPEvjg1PdB5QUpd1o6QRk26P7kvT+ztfAtHAk5pakdOtYGNGGKZ/3u5kA==
-X-Received: by 2002:a05:6000:1acc:b0:3a5:52d4:5b39 with SMTP id ffacd0b85a97d-3a6d12bb56bmr10069550f8f.8.1750708569690;
-        Mon, 23 Jun 2025 12:56:09 -0700 (PDT)
-Received: from localhost.localdomain (2a01cb000999240070929077922e876b.ipv6.abo.wanadoo.fr. [2a01:cb00:999:2400:7092:9077:922e:876b])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a6d1190cc3sm10135140f8f.89.2025.06.23.12.56.08
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Mon, 23 Jun 2025 12:56:08 -0700 (PDT)
-From: =?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
-Subject: [PATCH] python3-supervisor: Add missing runtime dependencies
-Date: Mon, 23 Jun 2025 21:55:57 +0200
-Message-ID: <20250623195557.65704-1-peron.clem@gmail.com>
-X-Mailer: git-send-email 2.48.1
+        d=1e100.net; s=20230601; t=1750709873; x=1751314673;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=k5032Krb7yxFtpLYaHs4ydl3/LCx5vDp/hdUytg+C3g=;
+        b=vpKe7Q3m5ys1yQEWaHmaxuaF0zH/vQkNQ6LltxatBeXD7bM2iPFvDTz5DM3B3p6lrw
+         t1T0pFznuETW6WYqoQt/vccLNqxjT7ny8GNPU8ovup2VFm6QpQsS77uRoGyHAQCWEUMs
+         9IwAeYvf7SPF7VBmSV8sr2l/WeQJ3zL/OhdJAZ+1rs5XyeEZ4S5RLWicTRJNdltCZsUs
+         qRlmv5rEivaCPWAyW13LSk5GU2Nqg8QxAWoC8juj5RmY24JtRq+wetSRyG5XJY1/lrxT
+         DGqgt244o2NWMN4ILciLLq3aeH3YvN+a3OMzImNt5mUvADeZ1bnDw/nlNuRJ5v5SPCgc
+         XLcg==
+X-Gm-Message-State: AOJu0Yxho0DtJ47q093D9+tLTPDjOHAwAuBbHw7QAwNvdMuGcL90glj4
+	WWFJJTBucCB39vCcyIq/uHg5EmZiC5O+dQjz9yxRvJWsCRinX8Wl4FYTMt5Cb6AEyadzN9F81Lb
+	r4km2vpowOV+eC2Ap2pvQB2txS9IebAI=
+X-Gm-Gg: ASbGncuPjXHRXoXqqDm08xQ/RBxgT3Zom1y5I4VYDyiaawxJ9JjOnoIdzW9OmaSJnDx
+	uT3vDvYSEii7xO0dDtlbSyBmtKx8CjE+P7a/sn93xkGYt0J5ZOx+HHH13MN1gM/U5p8rmP6F3p7
+	cq/aAfena9ZPAK76LGODVpNS/A+03BfQ6oCjvrt8EE0tE=
+X-Google-Smtp-Source: AGHT+IGey9MbhCHIwnL8IovPp6uc4YRRgVmWiAr8syPuSrs9+OtJ4zRNMZr9BZmS+FIpKQdA0kcIKytYY/g/+0iqLa4=
+X-Received: by 2002:a17:90a:dfce:b0:311:f05b:86a5 with SMTP id
+ 98e67ed59e1d1-3159d565d3dmr25708338a91.0.1750709872931; Mon, 23 Jun 2025
+ 13:17:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20250623191048.488812-1-alperyasinak1@gmail.com> <CABF_=yia4NmdasTLkJNs+t10Z3YZL3pXkOpjN+WLw42=JyiPQw@mail.gmail.com>
+In-Reply-To: <CABF_=yia4NmdasTLkJNs+t10Z3YZL3pXkOpjN+WLw42=JyiPQw@mail.gmail.com>
+From: Alper Ak <alperyasinak1@gmail.com>
+Date: Mon, 23 Jun 2025 23:17:41 +0300
+X-Gm-Features: AX0GCFuWCebiLeq1QjB1cqYK2y0ABhZRKmaoxak8Ps8AcEnY9GUW14-87hrAxdQ
+Message-ID: <CAGpma=6-q0_RmzvkXXoWvt6iK8KTBnX9RUO9cG7SnRSqAmFQaA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] tk: Fix compile error
+To: jan vermaete <jan.vermaete@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 19:56:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118090
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 20:18:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118091
 
-Add python3-fcntl and python3-unixadmin to RDEPENDS as these are
-required runtime dependencies for supervisor functionality.
-Also reorder RDEPENDS alphabetically for better maintainability.
+I thought about using PV, but if tcl and tk can be upgraded
+independently (tcl recipe is in poky, tk is in meta-oe), this may
+cause failures if tcl is upgraded without upgrading tk. That's why I
+preferred to hard code the version.
 
-Signed-off-by: Clément Péron <peron.clem@gmail.com>
----
- .../recipes-devtools/python/python3-supervisor_4.2.5.bb     | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+If there is a better way to handle this, I=E2=80=99m open to suggestions.
 
-diff --git a/meta-python/recipes-devtools/python/python3-supervisor_4.2.5.bb b/meta-python/recipes-devtools/python/python3-supervisor_4.2.5.bb
-index e104e1c0ce..ca6203c755 100644
---- a/meta-python/recipes-devtools/python/python3-supervisor_4.2.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-supervisor_4.2.5.bb
-@@ -12,11 +12,13 @@ SRC_URI[sha256sum] = "34761bae1a23c58192281a5115fb07fbf22c9b0133c08166beffc70fed
- PYPI_PACKAGE = "supervisor"
- inherit pypi systemd setuptools3
- RDEPENDS:${PN} = "\
--    python3-meld3 \
-+    python3-fcntl \
-     python3-io \
--    python3-xmlrpc \
-+    python3-meld3 \
-     python3-resource \
-     python3-setuptools \
-+    python3-unixadmin \
-+    python3-xmlrpc \
- "
- 
- SRC_URI += "file://supervisord.conf \
--- 
-2.48.1
-
+jan vermaete <jan.vermaete@gmail.com>, 23 Haz 2025 Pzt, 22:45
+tarihinde =C5=9Funu yazd=C4=B1:
+>
+> Could the variable PV not be used in the directory name to replace the
+> hard code version number?
+>
+> Br
+>
+> On Mon, Jun 23, 2025 at 9:11=E2=80=AFPM Alper Ak via lists.openembedded.o=
+rg
+> <alperyasinak1=3Dgmail.com@lists.openembedded.org> wrote:
+> >
+> > tk9.0.1/unix/../generic/tk.h:19:10: fatal error: tcl.h: No such file or=
+ directory
+> > |    19 | #include <tcl.h>
+> > |       |          ^~~~~~~
+> >
+> > Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
+> > ---
+> >  meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb b/meta-oe/recip=
+es-devtools/tcltk/tk_9.0.1.bb
+> > index 504b40927e..230a244a6b 100644
+> > --- a/meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb
+> > +++ b/meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb
+> > @@ -30,6 +30,8 @@ S =3D "${UNPACKDIR}/${BPN}${PV}"
+> >  # Short version format: "8.6"
+> >  VER =3D "${@os.path.splitext(d.getVar('PV'))[0]}"
+> >
+> > +CFLAGS +=3D "-I${STAGING_INCDIR}/tcl9.0.1/generic"
+> > +
+> >  LDFLAGS +=3D "-Wl,-rpath,${libdir}/tcltk/${PV}/lib"
+> >
+> >  inherit autotools features_check pkgconfig
+> > --
+> > 2.43.0
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#118088): https://lists.openembedded.org/g/openembed=
+ded-devel/message/118088
+> > Mute This Topic: https://lists.openembedded.org/mt/113794949/2167232
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[jan.vermaete@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
+>
+> --
+> Jan Vermaete
+> =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
 
