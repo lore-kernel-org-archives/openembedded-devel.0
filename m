@@ -1,152 +1,114 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B6A4C7115B
-	for <webhook@archiver.kernel.org>; Mon, 23 Jun 2025 14:07:30 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web10.20739.1750687644323520739
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18CAFC77B7F
+	for <webhook@archiver.kernel.org>; Mon, 23 Jun 2025 15:40:13 +0000 (UTC)
+Received: from mout.web.de (mout.web.de [212.227.17.11])
+ by mx.groups.io with SMTP id smtpd.web10.1824.1750692739440268241
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Jun 2025 07:07:24 -0700
+ Mon, 23 Jun 2025 08:32:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QfN0j+CJ;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-70a57a8ffc3so35617687b3.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 07:07:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750687643; x=1751292443; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=BmB0HZcR+xscAB8VpdKTWHf6TAJOuQzghILkgi3eDGQ=;
-        b=QfN0j+CJguhOERSTE3utGvezbKNR0YqkPAtFtHmA5htvGe3ISXl0k6gk/boJ3AJeXr
-         5ioXFk//8UMAhcpXFPpPFiykjsEy4uMvhxwtdy/R6CsBLerH+z8QF9xjEErTzfhiXOJz
-         Ff400NoQQ/8Gzq5Ergm562ZywULAEACImNcHGi6NJxms82Oa9Vs8FfM3AWbd7KMMLNre
-         fnDNkTCf5UfPSDDxttzKkpbK+D0cD0v7nfC/+KX4q8q7BCh8NvmKBl9eWojF97akPeU7
-         eyvpJwxBqo1Y4aaW0S6AkLeSQ6qRFEHNsrHsFksrUN4wubsdXGovsoTDR8QzAE3aT+CQ
-         dIZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750687643; x=1751292443;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BmB0HZcR+xscAB8VpdKTWHf6TAJOuQzghILkgi3eDGQ=;
-        b=kzbBy8Y0QySl9/nWsvZC/BXhP5WTTiYI07v0CEmVlTJlNHi1LM1mR1C/hljSLE0990
-         JcJ4d4jvl8Eul62bY6IS/gFxvaNEPY0NRiZCQbZyVD9q0LqyMMAtfzDeb25WXva1X/4B
-         TGHBIZXGiZBx6VIoln6sIaCKP1emvxkve4QFuEl4Q/lDFbQn3Pw/+Xm7LWdDJdm87NTa
-         TQvIpEJlXzKxrjhbV961qu7NeSd55uHN+aUfHwa3gkRp2gXUlEssYjnHGKzcCX21XjAr
-         sffl9g+n6wXrmRjSKFaMVdayNLxTHb3Sagyl1x5WyDlKm9Ct2Ix1wOy/j9qFd3Nb/ikU
-         9GPw==
-X-Gm-Message-State: AOJu0YxkbniUtOl83WfKT+rmlxqd0XDDOcyrTJFEeysEAVvqpNWheIIK
-	xuYH+KiOYl3ePKeGqJGuuWaZOwE9past4U/J8EblaCKBI0kvx2DXyR9MrLVplDOhujd7/+q/KXG
-	m5AtInnshkgfa5nByy69TK6bi4QdoK8U=
-X-Gm-Gg: ASbGncsCUcX7CNufqaBswzY6XSEur0LFAz0NO5Scl6xNm005fN1RAgcfGDZFPyhVH+J
-	UjIIrv22CPJobGyTctfZ61pNNUR0DL1GiKhRdf4Sa5pGdwiVFnbFXGl5zDS6KAIgYNt0bCQy5NJ
-	PiDX0wXeLBoHEt3E+Q5xXDFZf2zxzCZuZbwG67y7Jfyl97DdOFEfsuVOl+uxytmO0mZ2kv8Ww+B
-	OFWm020Vkk4wBg=
-X-Google-Smtp-Source: AGHT+IGGLeZgwRh90N+w5dv4zbB3UfPO+5j9QuYvIOd/HGSQJ+jAKudzJff2IqiASRivB0KnsXBDqkmD3fqsAZuQRgc=
-X-Received: by 2002:a05:690c:601:b0:70e:2c7f:2edd with SMTP id
- 00721157ae682-712c63f06b1mr164143687b3.9.1750687643360; Mon, 23 Jun 2025
- 07:07:23 -0700 (PDT)
+ dkim=fail reason="dkim: signature did not verify: crypto/rsa: verification error" header.i=michaelestner@web.de header.s=s29768273 header.b=TGrAhmwj;
+ spf=pass (domain: web.de, ip: 212.227.17.11, mailfrom: michaelestner@web.de)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+	s=s29768273; t=1750692737; x=1751297537; i=michaelestner@web.de;
+	bh=xNG2Sr+XEvYa6rNrlDtrlLOEnUNP4/SuD2ScG3hY//4=;
+	h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-Id:
+	 MIME-Version:Content-Transfer-Encoding:cc:
+	 content-transfer-encoding:content-type:date:from:message-id:
+	 mime-version:reply-to:subject:to;
+	b=TGrAhmwjjMLQiqCpFN4D2+XB7XwtVkPwCF7jJ1t/m+SikTq4vd99C99atQpSAoip
+	 9K0Qvt0XSl46Q8fsh2bKKagQEeIF5lUbNsCvTx71q0OKv2nR9ONwWX2JJJnym2Klw
+	 Pd1ikrm8ZCNrVlcjHpxGYrkKQbWr8CG04oAQfNyc+OLHvkhg7vElOgWNgoCD/ypcS
+	 NP1s3LlefplUXtJ+g7+hLAQBBJDSeNPRnnO2NAEGIkX+9HUqrMStngWjzGqIdI9PR
+	 YfAkIrV78veMy5olk2Bc0rVxihHDALizUbEx5ACUCWWswl1RUT1DAZ77+UUPcO02i
+	 d8JD33vZgtM5dFu9ZQ==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from del01453.ebgroup.elektrobit.com ([217.85.92.231]) by
+ smtp.web.de (mrweb106 [213.165.67.124]) with ESMTPSA (Nemesis) id
+ 1MiuSs-1uzkWb0aSy-00q9JX; Mon, 23 Jun 2025 17:32:17 +0200
+From: "Michael Estner" <michaelestner@web.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Michael Estner <michaelestner@web.de>
+Subject: [PATCH 0/1] Add nilfs-utils
+Date: Mon, 23 Jun 2025 17:32:09 +0200
+Message-Id: <20250623153210.304150-1-michaelestner@web.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250619145738.3562283-1-christli@axis.com> <ab6d6f50-0409-4469-be0b-2b07f5333d6c@gmail.com>
- <CAMKF1sqKnL85LrUv2ResvCS1_X5Ggf4udG9iOyQqyRyM+8JkXQ@mail.gmail.com> <b54aa060-9664-4a79-8844-d4029843949a@axis.com>
-In-Reply-To: <b54aa060-9664-4a79-8844-d4029843949a@axis.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 23 Jun 2025 07:07:12 -0700
-X-Gm-Features: AX0GCFtYrM-Av0lYkW7VaDuiovp1ij1zbfw0qTe707fiocdfjoHxsFdBqFxLDqA
-Message-ID: <CAMKF1sq5Xs1fAgw0-T1p4pk9yp-0LLaUfxMBo_TA9Buk73grcw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] influxdb: Use go module fetcher
-To: Christian Lindeberg <christian.lindeberg@axis.com>
-Cc: openembedded-devel@lists.openembedded.org, skandigraun@gmail.com
-Content-Type: multipart/alternative; boundary="00000000000018637106383dbbad"
+X-Provags-ID: V03:K1:fMKYjmBYY/ExiU9bdiCtqZo8pGGxmOTi1MayFWdH1l7A5IXtWGP
+ njKk4JYu9nTWMNjBTDXqVQPd5CspuaatXS5cWnH+NHRTt/f0Zw6ti+xr4RVVcDlmYD0O5ev
+ gt8/rB46VUNCl9uYZlcs2lqr/zKOTk1EpQaBdMkbwhUMzQQM+iAxF42yE1MWZLth+TMP5E9
+ rxXR5FUXD6JguvMn6In+g==
+UI-OutboundReport: notjunk:1;M01:P0:3/ChJ1vLcoQ=;v5OzfySRlVxoU7aly4/pggdcs1w
+ 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
+ 2HRQ2/kLu3QUo=
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 14:07:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118081
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 15:40:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118083
 
---00000000000018637106383dbbad
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+I want to add the nilfs-utils.
 
-On Mon, Jun 23, 2025 at 12:48=E2=80=AFAM Christian Lindeberg <
-christian.lindeberg@axis.com> wrote:
+Two things need to be clarified:
+* Not sure if the files are added in the right subfolder
+* If no one will take over maintainership, I can step in as maintainer.
 
->
-> On 19/06/2025 18:09, Khem Raj wrote:
-> > On Thu, Jun 19, 2025 at 8:34=E2=80=AFAM Gyorgy Sarvari via
-> > lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
-> > wrote:
-> >> On 6/19/25 16:57, Christian Lindeberg via lists.openembedded.org wrote=
-:
-> >>>   CVE_STATUS[CVE-2019-10329] =3D "cpe-incorrect: Version does not mat=
-ch
-> and only the Jenkins plugin is affected."
-> >>>   SKIP_RECIPE[influxdb] ?=3D "QA Issue: task do_compile has network
-> enabled"
-> >>>
-> >> I believe your patch obsoletes this SKIP_RECIPE variable from the bott=
-om
-> >> of the recipe.
-> >>
-> > Thats right, I have added a patch for removing the skip
-> Oops, I guess I didn't check the result of the rebase properly.
->
-> Should it be added back to packagegroup-meta-oe-dbs as well now when
-> network
-> access is resolved?
+If there are any further concerns then please let me know.
 
+Michael Estner (1):
+  [meta-filesystems]: add nilfs-utils_v2.2.11
 
-Perhaps yes
+ .../recipes-utils/nilfs-utils/nilfs-utils_v2.2.11.bb | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/nilfs-utils/nilfs-utils=
+_v2.2.11.bb
 
+=2D-=20
+2.34.1
 
->
-> Christian
->
->
-
---00000000000018637106383dbbad
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
-iv dir=3D"ltr" class=3D"gmail_attr">On Mon, Jun 23, 2025 at 12:48=E2=80=AFA=
-M Christian Lindeberg &lt;<a href=3D"mailto:christian.lindeberg@axis.com">c=
-hristian.lindeberg@axis.com</a>&gt; wrote:<br></div><blockquote class=3D"gm=
-ail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-le=
-ft:1ex"><br>
-On 19/06/2025 18:09, Khem Raj wrote:<br>
-&gt; On Thu, Jun 19, 2025 at 8:34=E2=80=AFAM Gyorgy Sarvari via<br>
-&gt; <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D=
-"_blank">lists.openembedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:gma=
-il.com@lists.openembedded.org" target=3D"_blank">gmail.com@lists.openembedd=
-ed.org</a>&gt;<br>
-&gt; wrote:<br>
-&gt;&gt; On 6/19/25 16:57, Christian Lindeberg via <a href=3D"http://lists.=
-openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.o=
-rg</a> wrote:<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0CVE_STATUS[CVE-2019-10329] =3D &quot;cpe-incorrect=
-: Version does not match and only the Jenkins plugin is affected.&quot;<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0SKIP_RECIPE[influxdb] ?=3D &quot;QA Issue: task do=
-_compile has network enabled&quot;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt; I believe your patch obsoletes this SKIP_RECIPE variable from the =
-bottom<br>
-&gt;&gt; of the recipe.<br>
-&gt;&gt;<br>
-&gt; Thats right, I have added a patch for removing the skip<br>
-Oops, I guess I didn&#39;t check the result of the rebase properly.<br>
-<br>
-Should it be added back to packagegroup-meta-oe-dbs as well now when networ=
-k<br>
-access is resolved?</blockquote><div dir=3D"auto"><br></div><div dir=3D"aut=
-o">Perhaps yes</div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1=
-ex" dir=3D"auto"><br>
-<br>
-Christian<br>
-<br>
-</blockquote></div></div>
-
---00000000000018637106383dbbad--
 
