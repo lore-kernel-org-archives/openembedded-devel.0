@@ -2,164 +2,153 @@ Return-Path: <christian.lindeberg@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 924BDC7EE30
-	for <webhook@archiver.kernel.org>; Mon, 23 Jun 2025 09:12:38 +0000 (UTC)
-Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.4])
- by mx.groups.io with SMTP id smtpd.web10.15526.1750669955486388096
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78740C77B7F
+	for <webhook@archiver.kernel.org>; Mon, 23 Jun 2025 09:12:58 +0000 (UTC)
+Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.13])
+ by mx.groups.io with SMTP id smtpd.web11.15593.1750669968824307684
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Jun 2025 02:12:35 -0700
+ Mon, 23 Jun 2025 02:12:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=selector1 header.b=OR+pmiUi;
- spf=pass (domain: axis.com, ip: 52.101.65.4, mailfrom: christian.lindeberg@axis.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=jl/Ewr7e;
+ spf=pass (domain: axis.com, ip: 52.101.70.13, mailfrom: christian.lindeberg@axis.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gOmYiIjqRyrmAjxzn5GjR0iANGC+wc5IqzdHvAwA4iEHwOgEPRKcnxeG/4pjSVISTazgT4Ztg3s9jR+A+9Msad4LPunaquDdLFcijH20fJUnf/PiImGAaCC+px0nVgXJ5W4m4uxlJCFO1AsC4uCdmzWFn+U2Y9LUg1qxzJAMMO+fRZZCOwGgnCCX+wZLX/b1PjhenD1EQ8oMx3hxNcQGs9kMk/L7MDM9QnPIf51gAg57C5uQiyZVgpKbtZkDAE/P77z9vOnmWN0mpllZhFAL5aDyFpurJstPTeakNrY0skni6vO++ueDWJVll/DDtVdSuny/muFsVBD+VSRZwFZxzw==
+ b=m0+wCvqlyVdgYkExqbEW/I/EjetExq+7V/xixGA2s5AOFO6Cv6Tq4QiQtbV9svM+0i5Xxd1aQqyjL/aSFgfeHUlqs65Q52HzqQ2avHFrWtSEpohZ0GLdTuoKKXm1OUXkIVpoMhjqAWDP5opgTUnn4cxR1nhiqReNkV0XVuIl8iNaRByvF6vseLHZJbrY4CxDw40daAWYo5QvNYn7T3Jt6A6rj5MjT2LkLQqRColw3OIStCEPKnTVTUhXkjbB8ijE9rJm17zmQkiAWz03HBz55Dr36OwdRuuSbXgVD+MXTRx4MfU8EBXvwuh/D5oVcfwub48sTl7XlVGPl0qsqYNt0g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tqhtayOuQs/vgWksz4J6ATYYyI2930R2BkmGl9JaRyk=;
- b=kGSJa2gIBOtqlhn7EvzfZFADcX5oZc0/4QIVxrj6WEXdbOZjkwudcEV5+VDaSJRdGM/0edkGE8lsemDIqFUhI3tLnzfDstx8BI6Bf9N5gDp6sghML1F3bH76pAxRWXxOjV7T/UYdBPz+0a/sB9Z1/WXREiHzq/Isji2bVunhUhDczuUE/BwabwfWdJ6gWQSrV9DiSEnR0R5b63i4KP4b67DMCZvs3Sxix0TrrjD4z7e4I4LgDWSfZUZdQt6Q81mx5xBUcnxLEgu009m2iZTT3gNIaHLHs5p0kLB5w7ERPR1gb3ZriNaCZbWWHj1oHfYIO7D4+Lm9vZYwRXuFZT+z3w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=axis.com; dmarc=pass action=none header.from=axis.com;
- dkim=pass header.d=axis.com; arc=none
+ bh=wjzkyxYsK2O5aQgnzH5LWB6aYGyq/4K6D/l5+7gGLdQ=;
+ b=FI6GBPCqZWCWYWQE10qivvX6dee7rxz6htQLYnXFX2Pea7g9CFn+o6unj6ZwM4JMlu3+pkrORLDdhqkGh8LvXRXvZzV06YOE0INeNVPqrwpFl36AQRNU/8KmKge+ard5zabXlBhPqos2D0aoPEM12SbQ1JqV0dVb3v7qDsH4KTUbcLBSao5H2CzeBYZxIqqieuQoB8sky8h+w2Sz6v8NxaKHhoKA6y5/w+8edLaAhrY8EZAbY+CCg27pLmtDGWEhiS74p+ykXWT3qZw/3fBLkG7SrJR84/hKmFhyO/5eW7q6xfgJ9t4Up2q8pWRTYfqCoFH4ZMzs9M5IBuChPjkewg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=axis.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tqhtayOuQs/vgWksz4J6ATYYyI2930R2BkmGl9JaRyk=;
- b=OR+pmiUiwSDIlEb4rUQXoK5biDazFnbQfEPbyJzqX00dnIDOU0aVURPYdBrSRlVAV/cXKbHAX3BMF9oA62JEaqIKZS3SaHTX4dyXTItHzPV5ADwaII8eDsYSyaEMlrJqf2/BZ5O6qq4TAte/VQqgpxpzJIqdulNJwsqsPO7jysw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=axis.com;
-Received: from DU0PR02MB9894.eurprd02.prod.outlook.com (2603:10a6:10:44a::6)
- by DB4PR02MB8702.eurprd02.prod.outlook.com (2603:10a6:10:382::19) with
+ bh=wjzkyxYsK2O5aQgnzH5LWB6aYGyq/4K6D/l5+7gGLdQ=;
+ b=jl/Ewr7e3FfK3ntZJiVfQAcmnYxW6oYkfuizWacmenqbc7WZvRL3Tl4XMpW+ZkRwOFvMpMrQH4tKxU1h+IF5euO7shjGem5UZxGJm6fdUsZXdrV8RtzCMPhtjyg4QAIN7vpU14U5aOVMeDu3BFClsSemFpYv6pdeQMgaqrlExXc=
+Received: from PAZP264CA0168.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:236::22)
+ by PA4PR02MB7040.eurprd02.prod.outlook.com (2603:10a6:102:106::24) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8857.27; Mon, 23 Jun
- 2025 09:12:32 +0000
-Received: from DU0PR02MB9894.eurprd02.prod.outlook.com
- ([fe80::74bd:5b24:5e73:94e0]) by DU0PR02MB9894.eurprd02.prod.outlook.com
- ([fe80::74bd:5b24:5e73:94e0%4]) with mapi id 15.20.8857.022; Mon, 23 Jun 2025
- 09:12:32 +0000
-Message-ID: <f655ada2-c3a3-45dd-80df-4601d7fa8147@axis.com>
-Date: Mon, 23 Jun 2025 11:12:30 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] influxdb: remove S in recipes that fetch
- from git via setting BB_GIT_DEFAULT_DESTSUFFIX
-To: alperyasinak1@gmail.com, openembedded-devel@lists.openembedded.org
-References: <20250621094915.1474527-1-alperyasinak1@gmail.com>
-Content-Language: en-US
-From: Christian Lindeberg <christian.lindeberg@axis.com>
-In-Reply-To: <20250621094915.1474527-1-alperyasinak1@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MM0P280CA0057.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:b::17) To DU0PR02MB9894.eurprd02.prod.outlook.com
- (2603:10a6:10:44a::6)
+ 2025 09:12:43 +0000
+Received: from AM4PEPF00025F95.EURPRD83.prod.outlook.com
+ (2603:10a6:102:236:cafe::f5) by PAZP264CA0168.outlook.office365.com
+ (2603:10a6:102:236::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8857.30 via Frontend Transport; Mon,
+ 23 Jun 2025 09:12:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
+ smtp.mailfrom=axis.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=axis.com;
+Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
+ 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
+ client-ip=195.60.68.100; helo=mail.axis.com; pr=C
+Received: from mail.axis.com (195.60.68.100) by
+ AM4PEPF00025F95.mail.protection.outlook.com (10.167.16.4) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8901.1 via Frontend Transport; Mon, 23 Jun 2025 09:12:43 +0000
+Received: from se-mail02w.axis.com (10.20.40.8) by se-mail02w.axis.com
+ (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Mon, 23 Jun
+ 2025 11:12:43 +0200
+Received: from se-intmail02x.se.axis.com (10.4.0.28) by se-mail02w.axis.com
+ (10.20.40.8) with Microsoft SMTP Server id 15.1.2507.44 via Frontend
+ Transport; Mon, 23 Jun 2025 11:12:43 +0200
+Received: from pc50740-2234.se.axis.com (pc50740-2234.se.axis.com [10.94.131.4])
+	by se-intmail02x.se.axis.com (Postfix) with ESMTP id 780192954
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 11:12:42 +0200 (CEST)
+Received: by pc50740-2234.se.axis.com (Postfix, from userid 21184)
+	id 13E4D2597689; Mon, 23 Jun 2025 11:12:43 +0200 (CEST)
+From: Christian Lindeberg <christli@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] influxdb: Use GO_SRCURI_DESTSUFFIX in SRC_URI
+Date: Mon, 23 Jun 2025 11:12:43 +0200
+Message-ID: <20250623091243.2256836-1-christli@axis.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU0PR02MB9894:EE_|DB4PR02MB8702:EE_
-X-MS-Office365-Filtering-Correlation-Id: bb9d9e9f-7104-4bc2-032b-08ddb2361594
+X-MS-TrafficTypeDiagnostic: AM4PEPF00025F95:EE_|PA4PR02MB7040:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2aa464cd-9334-4b5f-05cc-08ddb2361ca5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|82310400026|36860700013|1800799024;
 X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?TXdlVTU4cS9maHl5OERvRlloTWJKbDNDNjdzcEROQXI4MGI5WkdpT2ZJeUEy?=
- =?utf-8?B?ZVNQQ1JzLzVjcUtaVHhmVzFDQSthWWNkS1h0empYcm43YzAwcXRYYm9Dd2xk?=
- =?utf-8?B?VmgwUzhBZVBERkZkZlZMbjhCaE0yWnFwa3MvcUx6UlJabzNHRUw2V0RYWUN2?=
- =?utf-8?B?LzNSV3N3ZHJ1N0RvU1NTRVRiRzA0amlrVGVIQ0dQTGhNL3NHTE5qeXhMRWo3?=
- =?utf-8?B?WmtDQ3pSK3JTRjd6eWkzRWdROFB6SElIU05oQjVRZGd1Y2p2bXJ5c2U5TXg3?=
- =?utf-8?B?eWJVekFiTVBuUHc3ZDJxRXlvUzlqV1NpTUFvTzhjRDhseWlsM1RNR1NGMUNy?=
- =?utf-8?B?eGs4NnFvbkZMTElFaWFIWC90MmlzREt3cml5aXBaU1M5SkVaemV5MU5JRGc1?=
- =?utf-8?B?TUFFNTdkbDNsZUh1WFNRRjE4dkFlRzZUOUZBWXhubmkvdDhIbHhPVm1Sc1Fi?=
- =?utf-8?B?SEdyem4vVi9VaXRDM3oxSDdYdUNvNWM3eU5xb3p5cGM4UmlVMDY3U1c1dllv?=
- =?utf-8?B?TUFCOWU2Nys3VVlVVmYvNFk5WGYyaW5aSHh0d3JxZ3kzV25tdFlZQmw3VDRy?=
- =?utf-8?B?QUsxOXhKOWpaSmZoTTdLNlRxcVBXK0ZpbGtMU2prYm40ZjIvTHZoUGJIb25Y?=
- =?utf-8?B?QWlsZDd4OEprR0QwOU9WclgzK3ZSN29KRUEzZnZVVzY2czlCL1g0V2F3VlhC?=
- =?utf-8?B?aTRFS2JLSEZ5Y292UmVaQm0wT3hrVDI2RHdGTXBMNXk0UTVHb0RZMC9NUTNl?=
- =?utf-8?B?ckhMa3BBaWxhN0lWYU1zK1RHLzhXNnhlVVVSN3NDeXhzVVhMQ1FUeDNPZWtr?=
- =?utf-8?B?L0ZVT2d5dS8wUG9hUVBxK3dpK0djekZTTHpsZDBVYjFxWnFxeHAxWHI3Yld6?=
- =?utf-8?B?ak1veG9jeDNmNnduQzlvYkhhY3g5Q2xGMFRNanBxRlZZSGIvVS9UUlA4N2Rp?=
- =?utf-8?B?T3pEdG1yT2RFVjEwVmUvZnFoYUhwUWliTEVOMTMxZGJLS0dwSnB6SVAycGlK?=
- =?utf-8?B?UWtNWWF5dGhYaU9rOVFTRjhiWDFXbDM5aWlBZ1FxNjVsT3lKMjhzVUVCaEtD?=
- =?utf-8?B?Tlg3TmptaVo4eFNpZTY4QkR4NHR3Vy9nZnpvbklOcTkyMUhQTkxPWC9FZ1FP?=
- =?utf-8?B?MnFTa1ZlWVpKMnEzaTk4UitUb3FmOEFXVG1sOGNlVGx3d25tdm9pQVUrUkc1?=
- =?utf-8?B?YUtBeks5L1hPLzUwckU4dFR0RUwrUlpDamxBMkFTN1Nwa3hZU3ArZWhSODVn?=
- =?utf-8?B?eURGdm0xeHcvclNWaEJQKzdralQ4V3JSZktieVRzYnVhU3oxV1pvMzg1aTNx?=
- =?utf-8?B?eUhRNWwyMW1xRmdqMDhMajNXN0ZDVWFJSVJEczZ4UUVrWFRRaWZ1bUJRSEZX?=
- =?utf-8?B?bDZSeDBzdk9jOTdnNmJHd0JBc3ByVVR6NExPWFdLRzJueUVob3c2eUNZOFh1?=
- =?utf-8?B?aU02NURXM3g0UHJsY0xHV2ZtWElXWTVpTVM5OVNxRmQxYVREdk9JQkJKOVFG?=
- =?utf-8?B?Q0pqTWh2Q20wL3F2Uk1vMjMxb3d1VUF3Q3JlMWJzcnZna016TW5NUVNiZmZq?=
- =?utf-8?B?NEpMQkRRZzB5UnpiRFFqWlpZMWpBUStsaTJGS1RHaGVLT1dlbmRpY3hPZGpt?=
- =?utf-8?B?N2h0RTR4MDY1RnVTVU1RSVQ2TnNGU3RFZmZZTE5TYkd5eFJUWXBVR2diSW5Z?=
- =?utf-8?B?NDhpV0MwWkNmdTZUUTBJUmFmWkQ2c2pMdHFmdmdFREtzdnQ0aEttTlpnanFi?=
- =?utf-8?B?cjlTUUlxM25NQzhuMld6R0laU2JLWjRCYU1wQ0c5YjV4TU5aY09XcWFhaTNo?=
- =?utf-8?B?ZHI1dEVxcDRuOWVBV3FLWkd1cnVHbVNJRjlxOW8wOExnMUgxUlh6RENoL2Rx?=
- =?utf-8?B?bElPMFAwY24xa1Y0bWVtbHpqSUJZMDc2MCtSN201K2ZPQS95VlRMYTd3Q1pE?=
- =?utf-8?Q?YIb3lobRrcU=3D?=
+	=?us-ascii?Q?hMedkX8DZpG4sQVZAs7mnovfmyNzunH5Tvku0dghn5kO7RJdSVUO7XZVZ1Mj?=
+ =?us-ascii?Q?Rf051Y//mOC7kwQLMLkGdpFIzxIz3O4cXmO9mlwkwcHfTXgUprI6fyrayHxk?=
+ =?us-ascii?Q?XwKs7qEV+cp9od/6YRa95cTxgjv1+8z+Pn2oidzw07HKA7NH6wRSMh2gSZOc?=
+ =?us-ascii?Q?JEgDAvTZ8Ad0szPV9qOdS8soJihlM/H8M7VgIu/V10SLtFHV7uptL8veM/3D?=
+ =?us-ascii?Q?2qRc7+0iEsojM6tVXXI6iBEd18f/16Br49dKTOVsNzqnX6t/2VcqXl6cMqcQ?=
+ =?us-ascii?Q?gFcsI5JZijE9xyLhpb/yqNLkTVvKIwlJEVflTyVyUo3bgiurjo/7Ud8tEdBv?=
+ =?us-ascii?Q?E4o5jTNFsG31GBnG50fKINVUcoqxsP/v9/fuP98wduRjfNos1l8KUwJsytFV?=
+ =?us-ascii?Q?vJnXp7n/NZDCkeZ9FKBZiDx1CVn7eNW6qrZ9SLgXTvqxRBe/TCMjP8eK0bX9?=
+ =?us-ascii?Q?KrTlP6irK71k7ga2O/kcmsNWjZp6+FRWndGgDa/q10QV24SLrWOdFtHkkY+u?=
+ =?us-ascii?Q?SZByHKmzs9MNAW7sd2wKp5FtSiUmYmfP15x7tIlIkL1wyu4WdgVgcjYQT0vF?=
+ =?us-ascii?Q?k0p6cFkBILPJlo9EM4QG8nr2kJi21C3EGkIwZ7/AF//fVS0//67WVbzHxgv1?=
+ =?us-ascii?Q?aL+ZF0VZDwKbgzQzdj4PVHejKiSUmVXCyeEiAu7fEmICNJdx+Tj/igqgnQcU?=
+ =?us-ascii?Q?aBg8PgrX5jjSXkGil7hDYtYKbUciADhAlcpen8VJs9Q6nLhu973o8JKCGbxX?=
+ =?us-ascii?Q?F2W7k2Dy6HKe0QGiCcR0OuT2zi5HC01EmkOq+WbaIOKwHVkKoQc8mIJy8PQR?=
+ =?us-ascii?Q?5dWV0e5KLLXiPbcFf81VwZ3AH5mw74hTUPCT9cp6g3bAJxyDC3styoH6ygvG?=
+ =?us-ascii?Q?r1ylzilrqdvhhuUVd8eye6m9x8aBf04vwJ+UxAyqDPlg9pVBa1FSiMoznuAF?=
+ =?us-ascii?Q?MN5rmSMxy4N4EKkxOd8KnLha+oXRIgU63bxd7rXK2yciFyDMrs2krFhIgY4B?=
+ =?us-ascii?Q?ntQCZet+OUfoHnXTy0L/fIHNYGduBi/3a9WwejlzN0GIyCReTDUaClII5mVV?=
+ =?us-ascii?Q?FR1LSoGAqtQgWeqOHRqhOVjlTVx9T5PDetRyUSvQQWXNGFa9+cB/kGgfbi4I?=
+ =?us-ascii?Q?q+S+d90WtqA+itIS4+J+oFHBuhJQch++zxiBsj7LIfeP6HEqRcy66aYJ9lWV?=
+ =?us-ascii?Q?zm45VwcHTQE/SZAxakArfMjauzXYqsYDoSs05202cEMs2CtgpxwP8Pl9pwxG?=
+ =?us-ascii?Q?BkxjTzq6tbDT4dvBrBfbEbB6eOFxaxMHYKc53BtUJFQZ+SWtl/geAezUyufM?=
+ =?us-ascii?Q?rYcmKK9LQJlTFV7e/HfOj9lkF+H0cBgW6GESFP2AW1Fzz2pY6PN+xF3BHK/P?=
+ =?us-ascii?Q?pEUhwP4y13LzJDaymFGDHF1lkFYTnlpSoPGgcO/uiH8bPjALhFOc3yWnkXM/?=
+ =?us-ascii?Q?kLI0WtLum15X/UgKCvm9ry5Itu7KlBwhRZ1yLClrzIoO6VR5vz3vVv0mXIwB?=
+ =?us-ascii?Q?d3pbxdBiPE8Nf5y3Br+e4vxJuKV8LkUCXoLN?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU0PR02MB9894.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?NHovTUNlcE5pWEdBNVYxcVQwcjU5QnNXVUo2ZXV3TDUzdkJSdjBZSlo5WVdZ?=
- =?utf-8?B?djVFOUYxejFwZVVDcklML3BFRnRtNmFDTmFJVGd0NDdMKy96RmF5NnBydTZ3?=
- =?utf-8?B?cUlDSitjcEc0SmcrQkpEZUE5NWc4d2pubjJRRXFoZCtoVTJnZG5HWEtBdStV?=
- =?utf-8?B?M1drZHpHcU1qRFRmYnFKTnBwaGtJVXU3alBtQWk5M3p0RHlDaUtkQlR3TUZK?=
- =?utf-8?B?b1kwalJ6S210NG1lZ2VHYW1jKzdzWlZQYUljSzFYeFdpbk1kWEFOakdub0w0?=
- =?utf-8?B?bVpnaHVjbkV2Rk1QNU5SOEwzbUNNMGZORERhRFVjNm9lR2lOVEZNd3RUOFVa?=
- =?utf-8?B?eVdxcGVGbWlIOFNrbXNwVjhSWTV5TVJ4UjFnNFJRYzFkUkZLakhqUy9tRW1q?=
- =?utf-8?B?cWdGWVlDVGFFblh2c0VxWlNoNEpma0tEYmFubkpGODFhTFFyMnRCZUJZKzVp?=
- =?utf-8?B?RVlMcjAycjc1dUdlQ3NCKzJPZjVBMUFNaWZYMzJQdzZtRFZBb0FlQVNkVDNY?=
- =?utf-8?B?Q0hJM2VWeEdIS09uNDVYK0dUV2RlbHU4UHNlZGVFMUFqNG84MWI0ODhMQlkz?=
- =?utf-8?B?Y3lyUE5UYUN3ZFZKR2pGRVpDSTY5UHFJZWZzWUhuWTAxcGtyQUZXNVVVZWVq?=
- =?utf-8?B?aENOSlRLZS9ka0QvNzY2aXVmQ1BwZzFJMWFBM1JkZTNEWGE4WitPZm9LeDRp?=
- =?utf-8?B?V2JLeDQ0U0lKckgxbzMvVEVCcnVQaDNjb1p4cW1ZRmR6cmxsaWRTakVwbDNa?=
- =?utf-8?B?QWc3RUNUZkd1YkVuSDNjc09waHc0NEQyNk44elRBUG1OWldFaUV0a05qaUlk?=
- =?utf-8?B?Yzg2VEpBZlhBTkJ1TUw5L1NsemYvWE9qczdGa1JQNWp4d2JpOWY3QXNBaFdR?=
- =?utf-8?B?dkRlRmZ3L3VCWXF3TE8wbmp6Q3FrR1VZYnhUTUZETG81Sml0K2dkZzJiVC9U?=
- =?utf-8?B?ZjY0aTB0NitzR2dqZGNGSDZRbVNjWGR6Q2dYOXp6NXArOHZpWHlpMGFTOWRJ?=
- =?utf-8?B?MHhYU3d0eFk2RG5pZTkyOXNYMDBEMjhPUVN2dGVLZmxMYkhoeDQ2VEFoc294?=
- =?utf-8?B?RWNjdTlWYUttR0NyTUJ2Q1Brc1lBeG1nb1J5cEpwVjNqNXdZTHp6REIrTnZk?=
- =?utf-8?B?UWJpckszcXVIUmpraVFtL1lDemlaTlcra0o3bTVhVythQjVwQ1VLZis5RU13?=
- =?utf-8?B?aDlyL1pVNkJNV2RzdFZIZFFYTG5NZ2VkTUs0eElYdHdEQVhSdENWc2JPdlVt?=
- =?utf-8?B?UlhYeEpVVEZsQTcyK21LK3hkaThVTzZWY1RRcEh4d3ovWUdMSlJxM0F2SHdt?=
- =?utf-8?B?ZmE0WktFckZNSmpUMm9yWFBrUWlDSHVrSGdvd1hZYUdkbGdzelE3YUJsOU5P?=
- =?utf-8?B?cDMwcUxONjNjQWNBZFFZQWt1SmVLQ0tYRk9pa2UzVk11M3hnTnFjVitKYkQw?=
- =?utf-8?B?dTZNTjVDOHZtK3VSY1lqU2hNbHYxVjZocDdhRnVSUVVNdkFVMzJpNDBpR2ly?=
- =?utf-8?B?ZU4xMnJqNnVXbjIvS2hyVSt5NjBxNHZqV3R1bEZmT3RIZmZobWRGeGNwcWpw?=
- =?utf-8?B?VFBlY2dRejQwalhVeWJ4UFlzYng4WkVEWjdqQ3kzeFZIOVo4WTFmWEdmUUhu?=
- =?utf-8?B?ZjBwL3dZMWVLVDhGQXNlb3gxSUtQVEQwcFNYR0gyN3BYYllhaE5HdFJuZUVP?=
- =?utf-8?B?UXZoOWxqT2hIRXArU1dVSmhLNlo3VEtqOXhLOS92VWl5UWJsSHJLWXBBODky?=
- =?utf-8?B?MldUNnBmWmdGUTc5dTYrSlRyV0kwRDliL1l5RjZxRG9jSWlIWVZ3RkxQZmow?=
- =?utf-8?B?RjZHNGxHV2o5ejQwQnhXczhVMmpKVUZaeC92MjdZdlV0blpBUk5HNXlOeDNv?=
- =?utf-8?B?VnNHRzZ2Z0FjWDdKazM5YjNpUjVrTGk2Ty9tSW1DUGFnTkpkQjJIbFhUU1dX?=
- =?utf-8?B?eTdZVlhYMkY4blVXSlhLOXVNK1h4L0gwbjVhay8yYTNUZCtVRGNDNFg3WjlW?=
- =?utf-8?B?RG5DcFNISUdQUWRNMm9DWSt5akttQ1pWTXNVcHhtejA2WHZxdjdGSWdLTEt5?=
- =?utf-8?B?RlV6SlpiYmFCYTIxSmRvakY2UnpnVjBHblhLNWQzTElMY3ByMTkxVHUvbmhl?=
- =?utf-8?Q?56nynp0O4OlLIyPh+CsHlX3HV?=
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
 X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bb9d9e9f-7104-4bc2-032b-08ddb2361594
-X-MS-Exchange-CrossTenant-AuthSource: DU0PR02MB9894.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2025 09:12:32.1327
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2025 09:12:43.4607
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2aa464cd-9334-4b5f-05cc-08ddb2361ca5
 X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HJT4YcEILbZPuqnmyqc0ldIhM1xyVfctyFoGb2sqwyALcJIzgAl28El46LyTMcqyUA6Utb5Y1BdvLHbDQfjHfQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR02MB8702
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	AM4PEPF00025F95.EURPRD83.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR02MB7040
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 09:12:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118065
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 09:12:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118066
 
+Use the GO_SRCURI_DESTSUFFIX convenience variable for the Go main module
+in the SRC_URI variable.
 
+Change-Id: Id7a1f476c880b92b6e1eab057a9fc22875f0114c
+---
+ meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On 21/06/2025 11:49, Alper Ak via lists.openembedded.org wrote:
-> Removing all the S = ${WORKDIR}/git assignments works because BB_GIT_DEFAULT_DESTSUFFIX
-> is set to match S from bitbake.conf (which itself is set to match typical tarball
-> releases).
-Oh, I should have used GO_SRCURI_DESTSUFFIX instead as in crucible even 
-though
-the explicit value kind of made sense at the moment together with the patch
-git URIs below.
-
-Christian
+diff --git a/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb b/meta-oe/reci=
+pes-dbs/influxdb/influxdb_1.8.10.bb
+index cc305f6e8d..5dd5644c4c 100644
+--- a/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
++++ b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =3D "file://src/${GO_IMPORT}/LICENSE;md5=
+=3Df39a8d10930fb37bd59adabb
+ require ${BPN}-licenses.inc
+=20
+ SRC_URI =3D "\
+-    git://${GO_IMPORT};protocol=3Dhttps;branch=3D1.8;destsuffix=3D${BB_GIT=
+_DEFAULT_DESTSUFFIX}/src/${GO_IMPORT} \
++    git://${GO_IMPORT};protocol=3Dhttps;branch=3D1.8;destsuffix=3D${GO_SRC=
+URI_DESTSUFFIX} \
+     file://0001-Use-v2.1.2-xxhash-to-fix-build-with-go-1.17.patch;patchdir=
+=3Dsrc/${GO_IMPORT} \
+     file://0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch=
+;patchdir=3Dsrc/${GO_IMPORT} \
+     file://influxdb \
+--=20
+2.39.5
 
 
