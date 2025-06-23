@@ -1,93 +1,92 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A57AC7115D
-	for <webhook@archiver.kernel.org>; Mon, 23 Jun 2025 05:58:06 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web10.12967.1750658281009425336
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02DACC77B7C
+	for <webhook@archiver.kernel.org>; Mon, 23 Jun 2025 07:11:57 +0000 (UTC)
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.web10.13707.1750662711352179060
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Jun 2025 22:58:01 -0700
+ Mon, 23 Jun 2025 00:11:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=h1kvcFiZ;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-ade48b24c97so662018866b.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Jun 2025 22:58:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750658279; x=1751263079; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=F4LgqCckofEQ3lKZeIFmjEti4/9+ZjV6p5+JuCxdH34=;
-        b=h1kvcFiZuOXttoz8ZgUPIkoMyk3ijxfiLCcOl8xXfLxUPoZfzR+73WhDtoNQmv6+Zt
-         p900PA+e31/utM7KC+M6V8rFnrEe3yqSUycR0fW/gf0tLfM/Gv4/PIYJFP2qQw6LuFK1
-         o5LZ0Qld64KCQKxg7/wdw2fN0yo/klpQstcxqGixRIfZM7jhcthUDVHgrbxKrPXO0e1E
-         W9v1BQe+eNHnc8LuJziBR6NKdKHRyjvQfPCBerjerN2dUNnRqqa47AW9fF9IgiUFC20a
-         al+dE69m7ifWMfpUrGBX/ys9/EOW9BmHntfGZehSXx4+ofBkbi2RdXMsKqiV1zpiAKEP
-         zjGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750658279; x=1751263079;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=F4LgqCckofEQ3lKZeIFmjEti4/9+ZjV6p5+JuCxdH34=;
-        b=qk6O4uVJ2pL1qQFVM6se76x4dw0YTcs5gh7Ad5Y4Yw/YgGw9Viimygz1M7RzDtIbSD
-         IhsI23tqMYsHEfJIoB78r3F+tpYrD9/0TAYZ9oJJO3Vwe3Bny8StBXNsIhANPpoCLVkI
-         gZtD7uO5qnt2S09J7yYAELakUFKNs3eMHDFq2MRL1p8TI9zjqw8WF/aRlhHceAvsIC+k
-         PWdoa38ntmqHQ8VlaNthyG1hxMkU9SKhdmZu9K+0TW6qJyQ/Zz3vVKtX7k+X/NkbKoFp
-         r9CWuWBlu3KNM6UzkAVWlVvJsePasCd7jhYdnuiGWnK6e+U2Pt7JxQwbJ8MVn6LFMvX8
-         ptyQ==
-X-Gm-Message-State: AOJu0Yw1TL9gdomuow5N2I3LLz/SBIESza9VnhiovqxBr6hlCe9RA99D
-	KbX1CBaizWU1VWK4nZL1mOx8e0/ZxnL6MUxi73qOQVzpHg2e9Esm7J0l
-X-Gm-Gg: ASbGncscKxLcnDf1cgap9xsaDGpe6engJIc16FtqHfJyquH2q3RdQ4/t/jAt+Q0J7A3
-	lat2sKwIsSlH1hU/VLz8kKeqTOKyvmFfm4t/A22JJCMoj5I9+P2479i6EEQ+jUQVJzgOkXI5ZEB
-	ULqGsxc/+NNC4ws5hW7TKYdlD0tBW1bNPHvRj6JBRlZfpXe7ORvDeCMHBbTqd2sBjnUvO3EaV9Q
-	jM9dlLeWXX6HxRkxUhwrus46ji/28qHKDcP6+E+LI//hETMSAXQhmIAIIGd1X5CyNG8m/yKalTY
-	FEml/X8rEWkpig2AZGABhkSHa+yEKlNkSMAPvEFuDqnI96Kyx8WhutZhqP8KlVnpvGaPLujdh+G
-	XXPSD
-X-Google-Smtp-Source: AGHT+IFLLshTfmEbNVj4sWNTfzwoEeWmAezfxTuemdXrpSkeToEwsq6fZ8VPlckm7odhnbzu2yqp/g==
-X-Received: by 2002:a17:907:3f18:b0:ade:4339:9367 with SMTP id a640c23a62f3a-ae057a222b4mr1079454266b.26.1750658279048;
-        Sun, 22 Jun 2025 22:57:59 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae05408301fsm656319866b.96.2025.06.22.22.57.58
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 22 Jun 2025 22:57:58 -0700 (PDT)
-Message-ID: <ea56cb45-7553-4918-9ae3-55b6fd8e1fa8@gmail.com>
-Date: Mon, 23 Jun 2025 07:57:57 +0200
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=M3raPXDf;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1750662711; x=1782198711;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=OV0Sy5Ji5Pk1B3FfLoY4gBlgZzNcbUpBbfpkxOyLCo4=;
+  b=M3raPXDf6FWPuK+w2mMXPY+aUpkWRRfuZqe22WyD5Dj6Mpx1EZejyJfx
+   5GMNBueKHr5+O7KYvoo5Rm8FFynydT6NLT7u/yEBaGEHrq4vj6UfZS9QX
+   7C8536rht5ypm5Ektm0843FLp6QUhovI8308GGblPqyvb6ez8EPiD8NUs
+   io/7bku5xbf+8+riEvYbl4sfCalZoXNEAfdpQZpdJsQQgoln7H7+I+ipB
+   kQmyInZTp4xNh4+qzocAXAzDwBqXFlyVCTVJLk+zn5j/ruCo9IgC2NDOb
+   t5MY3dKh4O5RuccLeE/wnodxbr8kPEUbezggR5LwEyKi9kiBF/xnhS5Vg
+   g==;
+X-CSE-ConnectionGUID: m0ogWAjnSNa8cRzfpOgiXQ==
+X-CSE-MsgGUID: V3ZBA4m5Rw+Sdce4Hd2AUA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11472"; a="202852331"
+X-IronPort-AV: E=Sophos;i="6.16,258,1744038000"; 
+   d="scan'208";a="202852331"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Jun 2025 16:11:49 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id E970EC9987
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 16:11:46 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 9F2DAD5E22
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 16:11:46 +0900 (JST)
+Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 1C54F1A0073;
+	Mon, 23 Jun 2025 15:11:46 +0800 (CST)
+From: Wang Mingyu < wangmy@fujitsu.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 02/30] clpeak: upgrade 1.1.4 -> 1.1.5
+Date: Mon, 23 Jun 2025 15:11:09 +0800
+Message-ID: <20250623071138.402-2-wangmy@fujitsu.com>
+X-Mailer: git-send-email 2.49.0.windows.1
+In-Reply-To: <20250623071138.402-1-wangmy@fujitsu.com>
+References: <20250623071138.402-1-wangmy@fujitsu.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] nodejs: ignore QEMU_OPTIONS for native
- signature generation
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20250621194009.350944-1-skandigraun@gmail.com>
- <CANNYZj97Dh6m=PzMcdoQK-Om4T18VC+ubw_6hQrVd=_0JDQHLg@mail.gmail.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <CANNYZj97Dh6m=PzMcdoQK-Om4T18VC+ubw_6hQrVd=_0JDQHLg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 05:58:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118029
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 07:11:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118030
 
-On 6/23/25 07:35, Alexander Kanavin wrote:
-> This looks like a better fix possible. Why is qemu a dependency for
-> native variant to begin with, if it's not used? Shouldn't that
-> dependency be eliminated?
->
-> Otherwise, this is prone to regressions if some other qemu-related
-> variable starts invalidating sstate.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Unfortunately you are right - that was the reason for withdrawing this
-patch, I started to run into new variables. Since this patch was a
-failure, currently I'm testing a patch with conditional qemu class
-inheritance, which should only pull it in when needed. So far it hasn't
-blown up - if it stays like this, will give this submission another go
-later today.
+Changelog:
+===========
+- Use _aligned_malloc in Windows/MSVC builds
+- Add option to force number of iteration per kernel
 
-> Alex
->
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../recipes-core/opencl/{clpeak_1.1.4.bb => clpeak_1.1.5.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-core/opencl/{clpeak_1.1.4.bb => clpeak_1.1.5.bb} (87%)
+
+diff --git a/meta-oe/recipes-core/opencl/clpeak_1.1.4.bb b/meta-oe/recipes-core/opencl/clpeak_1.1.5.bb
+similarity index 87%
+rename from meta-oe/recipes-core/opencl/clpeak_1.1.4.bb
+rename to meta-oe/recipes-core/opencl/clpeak_1.1.5.bb
+index 59f807b7ae..a765f1530f 100644
+--- a/meta-oe/recipes-core/opencl/clpeak_1.1.4.bb
++++ b/meta-oe/recipes-core/opencl/clpeak_1.1.5.bb
+@@ -6,7 +6,7 @@ SRC_URI = "git://github.com/krrishnarraj/clpeak.git;protocol=https;branch=master
+ LICENSE  = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ 
+-SRCREV = "527695de8393a3144863a0a07f9b92f1c734d1c4"
++SRCREV = "b2e647ffb8f42aa22ce4b0194d6ef6d16d5002b0"
+ 
+ 
+ inherit cmake
+-- 
+2.43.0
+
 
