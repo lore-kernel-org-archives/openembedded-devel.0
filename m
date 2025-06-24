@@ -1,80 +1,76 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 395D3C71157
-	for <webhook@archiver.kernel.org>; Tue, 24 Jun 2025 06:36:16 +0000 (UTC)
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
- by mx.groups.io with SMTP id smtpd.web10.2398.1750746974258119273
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 403DAC77B7C
+	for <webhook@archiver.kernel.org>; Tue, 24 Jun 2025 06:46:56 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.web10.2487.1750747611139730451
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Jun 2025 23:36:14 -0700
+ Mon, 23 Jun 2025 23:46:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=nlYrfJ+l;
- spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-70f862dbeaeso47892287b3.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 23:36:14 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=ZtOHBJwv;
+ spf=pass (domain: smile.fr, ip: 209.85.128.43, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-451d7b50815so38712295e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 23:46:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750746973; x=1751351773; darn=lists.openembedded.org;
+        d=smile.fr; s=google; t=1750747609; x=1751352409; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=GOenIwe16yWlHSrw2QExe5FyDIQLVpcaGJbHuBIeX40=;
-        b=nlYrfJ+lOy5akfMrhDOpHp3e2l3XvgfpjJXEcIII+0sRFLV8aowyZ/tEDV18bHviIb
-         pIMxR2MqOLoDFD27910wo8IHRcRvghCN0t36/d0TQXUjSsOuKG6oq2BRz9fHhukTFEBm
-         iqVymfDhLHiXWf+2Ko4dGHWCk9IsrzO4XWmVDYE62tNmiNQC1JRxMifPMlnArxeiSk7a
-         6ITynhjWBP+HU2XhXpZtiAP4ruUt/hxJOT5QRiZdD52LOT74pCB/DEU7EPEfASxdRbBu
-         votLE1o2H8oyZIFBfw20TI32yIDNBNd2p26+RUp/j894u1YjuW0byqMO1zvwC+8VqvSi
-         Oj/A==
+        bh=lwndoivzHdsPUMf1Irjh+hmWhX9U8gMa7rXhznDiaLc=;
+        b=ZtOHBJwv2NqUZJkex50Ju55E11+XRk3nrjCbpi2zjLVvgjnrDAAwUImkowCKM43fZi
+         0Hczlqvk87HPT5Ffyti8HjLiyw7Q/CI7XHC9PrrM+JltJonV0hOuXOsoQzCM4AMAEP2a
+         4W5MMe4mZqOb8TEzJRN4a1z8u2amA30mxkMz8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750746973; x=1751351773;
+        d=1e100.net; s=20230601; t=1750747609; x=1751352409;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=GOenIwe16yWlHSrw2QExe5FyDIQLVpcaGJbHuBIeX40=;
-        b=SpiOW73KhfekX3yaFCYRPiiYns5LjFdOTlMK/8tJIrPY8e592olh5+PTvu7sn6fZMP
-         hb6MH2qzO4ytsXJ44lQeqMApe8ZPk29CZrrRg6cFP1BhZZf+yqE2r63QJP6nK37IwvFV
-         C7zRVQrjHjyvoexYNIcr2t0ZOhw1UD/S87mrJWmkh5KhRL4UVVe5BGTdSrV6KRay0/FV
-         +O2hJJwjM/hrL4t/yc9OyyzP+LS7ek9nh6Uq7acogzNw1upSn9pqScWaZvQ0i3HlXw9z
-         44w6p4Lz0I9TNYysIN5XyKTn+qmNMtZIpiW3JU3sv5LnTc5BOP1xq9/BzU3d4Pyy9hmD
-         7Uqw==
-X-Gm-Message-State: AOJu0Yxf8VlM50jOPNz4/HbYdZXNDnp1abegIfvI9VoJPLINIaKaymfI
-	/AccecnmmqWZyJiUkikkkioHlYXbu00S4niGYC7C1lMT4ZhntZZCu2XxLvPJ6RWERHXIYwSLX+P
-	LSCbfwiGphWZ/sdU5vzuh8enHdiv8E38=
-X-Gm-Gg: ASbGncvBni0pxMVd27xwv520qsUjMf0n9TbtHQN8way4M+WAcy/DzYMcsGHcuFE2TIh
-	YoPH4mIDtZTHYdV7jhb1T4kyrr2k7eSTsHrovNgroQVTukraC0/Oy0ykhdJTfs4GyCQ1NzMvqSN
-	qWFxkMoZnB/N5+bynRfX8gFRPXo5BAH7Q/uXkXErmp6kSU
-X-Google-Smtp-Source: AGHT+IF1zL+2ZhXCNlAxzmFmtLahU0P+Jh9IvYNqsPvlbvEF1qDcabzo6tixFfdFWjPMfVTOPCQtFVo4zz9YFqXFmZI=
-X-Received: by 2002:a05:690c:6213:b0:70d:ff2a:d686 with SMTP id
- 00721157ae682-712c6511072mr203932727b3.28.1750746973169; Mon, 23 Jun 2025
- 23:36:13 -0700 (PDT)
+        bh=lwndoivzHdsPUMf1Irjh+hmWhX9U8gMa7rXhznDiaLc=;
+        b=fGcVKEXJ3a4rQMP6nmHy9tCAST5BFBajEpnZ2mjJ1lqH8ZxgvOR5SQ9plyOaK4S/yv
+         RwgUq2UBBKbyJYbj4nucBbFjob2h+hDNap8Tmte9MFTa2w5BrNGr4x2K7rJd/qOFKxI5
+         hjamLKVzFj4AJi8815a6LEmb58+RdUZ/+7/cSn7wSBNLA9eYpJHTR3wcq1PZBZKF/+As
+         e3e3KPq2StYBkVhoDGaxYG5LCIpTbV+WrnzCJltED5s1R5zNdKduFO8Ym0kZ0e3Qrq49
+         JTOUtoSoX6tL6NkpkDi5puit+nxxtM7dyvYOdFXEO3b/0i/jmDXdqMg26haT8KifobDJ
+         fXpQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXuFqQpV84ZvfR3IhtCzWhG6GutgXRRSN3CdiPc52Pgq3vUEvPA9twYNFUvuhxm0BygTDipZyP36NSCf+uBD+e+GUk=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YytgoPLgMN6c0OkXrPtkuXBmecA4G/6rfl0PyqphukZv8Wp1u4O
+	0TMXyjdJPB2zykWL1fHYxj2ToZSirQ6QaaB6lbK37tAiN7gjyCzXMi9CYI15ED3290jcE3u4iAa
+	cWJTSUunvTs/BLOofgCXFONJ2eye5xbWLxmuBrFoiNA==
+X-Gm-Gg: ASbGnctu8Ub2svAtmPtXaUJfu7+IiD9DPMML3NUmsEaH7Go8Tsuu+QXDP79fI2K5a8B
+	njjrY0rKXJVqUM/jj0TMnPO3CEIsveMvKEipMBQyaOQ1BoKMRO7A3DLKuOeQ+JKzVY3fJAwsVZ4
+	+Qla861jpy3fkytwVUkI0s56eD+AAanfehwLNxmNkh4zTucsJ3kt8J8S8WP94QzJJC1eYBKlYsA
+	zxDiQ==
+X-Google-Smtp-Source: AGHT+IFwCzazA+pqdn3Cqftpzc1d/B2miHDsXPRINzEZ/YOxeR8DK4oTQRKXWbZvl/uvVzwgBQtUAFCqAZqLV7thxsg=
+X-Received: by 2002:a05:600c:4ed1:b0:440:6a79:6df0 with SMTP id
+ 5b1f17b1804b1-453659ec1c2mr122349055e9.22.1750747609388; Mon, 23 Jun 2025
+ 23:46:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250623191048.488812-1-alperyasinak1@gmail.com>
  <CABF_=yia4NmdasTLkJNs+t10Z3YZL3pXkOpjN+WLw42=JyiPQw@mail.gmail.com> <CAGpma=6-q0_RmzvkXXoWvt6iK8KTBnX9RUO9cG7SnRSqAmFQaA@mail.gmail.com>
 In-Reply-To: <CAGpma=6-q0_RmzvkXXoWvt6iK8KTBnX9RUO9cG7SnRSqAmFQaA@mail.gmail.com>
-From: jan vermaete <jan.vermaete@gmail.com>
-Date: Tue, 24 Jun 2025 08:36:01 +0200
-X-Gm-Features: AX0GCFuiqLnBMgk1JPEdLTWtFSbawo1ooIuOuLPxyG9bCEGb5q1M6PD6rFnJK7A
-Message-ID: <CABF_=yhdc2NL_Ax2Dk6C5LMT0BYF_k3UzkZ4dF8Fo_b=KWFOVw@mail.gmail.com>
+From: Yoann Congal <yoann.congal@smile.fr>
+Date: Tue, 24 Jun 2025 08:46:23 +0200
+X-Gm-Features: Ac12FXwmiz74vPOaNIJzwYEDvAZoPS4avo815punZt8FMYiCJ_zsPDuogp9YqOs
+Message-ID: <CAMSfU+7i5-NWbcNm-DWL8gy=bK_biVFFXkC7aJ9N5j62xc=OCw@mail.gmail.com>
 Subject: Re: [oe] [meta-oe][PATCH] tk: Fix compile error
-To: Alper Ak <alperyasinak1@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000006d6c5906384b8b27"
+To: alperyasinak1@gmail.com
+Cc: jan vermaete <jan.vermaete@gmail.com>, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000059690d06384bb1cd"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Jun 2025 06:36:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118096
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Jun 2025 06:46:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118097
 
---0000000000006d6c5906384b8b27
+--00000000000059690d06384bb1cd
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Good point. I didn=E2=80=99t touch about the split of TCL and TK.
+Hello,
 
-Jan Vermaete
-=E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
-
-
-On Mon, 23 Jun 2025 at 22:17, Alper Ak <alperyasinak1@gmail.com> wrote:
+Le lun. 23 juin 2025 =C3=A0 22:17, Alper Ak via lists.openembedded.org
+<alperyasinak1=3Dgmail.com@lists.openembedded.org> a =C3=A9crit :
 
 > I thought about using PV, but if tcl and tk can be upgraded
 > independently (tcl recipe is in poky, tk is in meta-oe), this may
@@ -83,6 +79,13 @@ On Mon, 23 Jun 2025 at 22:17, Alper Ak <alperyasinak1@gmail.com> wrote:
 >
 > If there is a better way to handle this, I=E2=80=99m open to suggestions.
 >
+
+I see that the tk recipe uses the pkgconfig class, theoretically, that's
+the way for tcl to tell tk where to find its headers.
+
+Regards,
+
+
 > jan vermaete <jan.vermaete@gmail.com>, 23 Haz 2025 Pzt, 22:45
 > tarihinde =C5=9Funu yazd=C4=B1:
 > >
@@ -123,16 +126,7 @@ On Mon, 23 Jun 2025 at 22:17, Alper Ak <alperyasinak1@gmail.com> wrote:
 > > > 2.43.0
 > > >
 > > >
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#118088):
-> https://lists.openembedded.org/g/openembedded-devel/message/118088
-> > > Mute This Topic: https://lists.openembedded.org/mt/113794949/2167232
-> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b
-> [jan.vermaete@gmail.com]
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > >
 > > >
 > >
 > >
@@ -141,29 +135,47 @@ b
 > > =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hame=
 l
 >
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#118091):
+> https://lists.openembedded.org/g/openembedded-devel/message/118091
+> Mute This Topic: https://lists.openembedded.org/mt/113794949/4316185
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> yoann.congal@smile.fr]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
---0000000000006d6c5906384b8b27
+--=20
+Yoann Congal
+Smile ECS
+
+--00000000000059690d06384bb1cd
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"auto">Good point. I didn=E2=80=99t touch about the split of TCL=
- and TK.<br clear=3D"all"><br clear=3D"all"><div><div dir=3D"ltr" class=3D"=
-gmail_signature" data-smartmail=3D"gmail_signature">Jan Vermaete<br>=E2=80=
-=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel</div></d=
-iv></div><div><br></div><div><br><div class=3D"gmail_quote gmail_quote_cont=
-ainer"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, 23 Jun 2025 at 22:17, =
-Alper Ak &lt;<a href=3D"mailto:alperyasinak1@gmail.com">alperyasinak1@gmail=
-.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">I thought about=
- using PV, but if tcl and tk can be upgraded<br>
+<div dir=3D"ltr"><div dir=3D"ltr"><div>Hello,</div><div><br></div><div dir=
+=3D"ltr">Le=C2=A0lun. 23 juin 2025 =C3=A0=C2=A022:17, Alper Ak via <a href=
+=3D"http://lists.openembedded.org" target=3D"_blank">lists.openembedded.org=
+</a> &lt;alperyasinak1=3D<a href=3D"mailto:gmail.com@lists.openembedded.org=
+" target=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; a =C3=A9crit=
+=C2=A0:</div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" s=
+tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
+ding-left:1ex">I thought about using PV, but if tcl and tk can be upgraded<=
+br>
 independently (tcl recipe is in poky, tk is in meta-oe), this may<br>
 cause failures if tcl is upgraded without upgrading tk. That&#39;s why I<br=
 >
 preferred to hard code the version.<br>
 <br>
 If there is a better way to handle this, I=E2=80=99m open to suggestions.<b=
-r>
-<br>
+r></blockquote><div><br></div><div>I see that the tk recipe uses the pkgcon=
+fig class, theoretically, that&#39;s the way for tcl to tell tk where to fi=
+nd its headers.</div><div><br></div><div>Regards,</div><div>=C2=A0</div><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
+t:1px solid rgb(204,204,204);padding-left:1ex">
+
 jan vermaete &lt;<a href=3D"mailto:jan.vermaete@gmail.com" target=3D"_blank=
 ">jan.vermaete@gmail.com</a>&gt;, 23 Haz 2025 Pzt, 22:45<br>
 tarihinde =C5=9Funu yazd=C4=B1:<br>
@@ -217,23 +229,7 @@ t;<br>
 &gt; &gt; 2.43.0<br>
 &gt; &gt;<br>
 &gt; &gt;<br>
-&gt; &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; &gt; Links: You receive all messages sent to this group.<br>
-&gt; &gt; View/Reply Online (#118088): <a href=3D"https://lists.openembedde=
-d.org/g/openembedded-devel/message/118088" rel=3D"noreferrer" target=3D"_bl=
-ank">https://lists.openembedded.org/g/openembedded-devel/message/118088</a>=
-<br>
-&gt; &gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/113=
-794949/2167232" rel=3D"noreferrer" target=3D"_blank">https://lists.openembe=
-dded.org/mt/113794949/2167232</a><br>
-&gt; &gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.o=
-penembedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembed=
-ded.org</a><br>
-&gt; &gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembe=
-dded-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openem=
-bedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:jan.vermaete@g=
-mail.com" target=3D"_blank">jan.vermaete@gmail.com</a>]<br>
-&gt; &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; &gt; <br>
 &gt; &gt;<br>
 &gt;<br>
 &gt;<br>
@@ -241,7 +237,29 @@ mail.com" target=3D"_blank">jan.vermaete@gmail.com</a>]<br>
 &gt; Jan Vermaete<br>
 &gt; =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Ham=
 el<br>
-</blockquote></div></div>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#118091): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/118091" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/118091</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/113794949/431=
+6185" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/113794949/4316185</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:yoann.congal@smile.fr" t=
+arget=3D"_blank">yoann.congal@smile.fr</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div><div><br clear=3D"all"></div><br><span class=3D"gmail_si=
+gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
+iv dir=3D"ltr"><font face=3D"Raleway, regular">Yoann Congal</font><div><fon=
+t face=3D"Raleway, regular">Smile ECS</font></div></div></div></div>
+</div>
 
---0000000000006d6c5906384b8b27--
+--00000000000059690d06384bb1cd--
 
