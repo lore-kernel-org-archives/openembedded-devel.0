@@ -1,265 +1,208 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 403DAC77B7C
-	for <webhook@archiver.kernel.org>; Tue, 24 Jun 2025 06:46:56 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.web10.2487.1750747611139730451
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB9EFC7EE2A
+	for <webhook@archiver.kernel.org>; Tue, 24 Jun 2025 07:25:06 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web11.3087.1750749898865089297
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Jun 2025 23:46:51 -0700
+ Tue, 24 Jun 2025 00:24:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=ZtOHBJwv;
- spf=pass (domain: smile.fr, ip: 209.85.128.43, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-451d7b50815so38712295e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Jun 2025 23:46:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=l7o2dEWd;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-b31d578e774so3549832a12.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Jun 2025 00:24:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1750747609; x=1751352409; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=lwndoivzHdsPUMf1Irjh+hmWhX9U8gMa7rXhznDiaLc=;
-        b=ZtOHBJwv2NqUZJkex50Ju55E11+XRk3nrjCbpi2zjLVvgjnrDAAwUImkowCKM43fZi
-         0Hczlqvk87HPT5Ffyti8HjLiyw7Q/CI7XHC9PrrM+JltJonV0hOuXOsoQzCM4AMAEP2a
-         4W5MMe4mZqOb8TEzJRN4a1z8u2amA30mxkMz8=
+        d=gmail.com; s=20230601; t=1750749898; x=1751354698; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=XN/Cvyt6JgcgYFKB3g7ATKxx/kMn2EK9buNTeYRwvbI=;
+        b=l7o2dEWdGFtMXz9zBH/jd65nA+GZgpHJKE6x1h8WonWXEBas5GI2nTI04jwgXaVuXx
+         g0K9OzHvMlbHZfFHB6rGiYsvVipOS/KDK+Un1lDXYtvnp7nmcKbt9lhB61cD+o916/8v
+         RnOJNls9XlfvnLrgseVRCyL7HgX4mQZdJYG0uu7nHm8fpObv7j2fjhisaCodbdJSt0Wc
+         pMujehcGLW4cpYbS2glWWIUxMLF+9ICjhvFdoH42j0ynvp9Kt0p4BiaCidwd2OCrjt3p
+         euquh/KaZ0ZTS46OY2A71CCugYTe2qtxAXwJA2SamTHItpQJ+/nKSc2iAuXPXfAh7oV3
+         a4ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750747609; x=1751352409;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=lwndoivzHdsPUMf1Irjh+hmWhX9U8gMa7rXhznDiaLc=;
-        b=fGcVKEXJ3a4rQMP6nmHy9tCAST5BFBajEpnZ2mjJ1lqH8ZxgvOR5SQ9plyOaK4S/yv
-         RwgUq2UBBKbyJYbj4nucBbFjob2h+hDNap8Tmte9MFTa2w5BrNGr4x2K7rJd/qOFKxI5
-         hjamLKVzFj4AJi8815a6LEmb58+RdUZ/+7/cSn7wSBNLA9eYpJHTR3wcq1PZBZKF/+As
-         e3e3KPq2StYBkVhoDGaxYG5LCIpTbV+WrnzCJltED5s1R5zNdKduFO8Ym0kZ0e3Qrq49
-         JTOUtoSoX6tL6NkpkDi5puit+nxxtM7dyvYOdFXEO3b/0i/jmDXdqMg26haT8KifobDJ
-         fXpQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXuFqQpV84ZvfR3IhtCzWhG6GutgXRRSN3CdiPc52Pgq3vUEvPA9twYNFUvuhxm0BygTDipZyP36NSCf+uBD+e+GUk=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YytgoPLgMN6c0OkXrPtkuXBmecA4G/6rfl0PyqphukZv8Wp1u4O
-	0TMXyjdJPB2zykWL1fHYxj2ToZSirQ6QaaB6lbK37tAiN7gjyCzXMi9CYI15ED3290jcE3u4iAa
-	cWJTSUunvTs/BLOofgCXFONJ2eye5xbWLxmuBrFoiNA==
-X-Gm-Gg: ASbGnctu8Ub2svAtmPtXaUJfu7+IiD9DPMML3NUmsEaH7Go8Tsuu+QXDP79fI2K5a8B
-	njjrY0rKXJVqUM/jj0TMnPO3CEIsveMvKEipMBQyaOQ1BoKMRO7A3DLKuOeQ+JKzVY3fJAwsVZ4
-	+Qla861jpy3fkytwVUkI0s56eD+AAanfehwLNxmNkh4zTucsJ3kt8J8S8WP94QzJJC1eYBKlYsA
-	zxDiQ==
-X-Google-Smtp-Source: AGHT+IFwCzazA+pqdn3Cqftpzc1d/B2miHDsXPRINzEZ/YOxeR8DK4oTQRKXWbZvl/uvVzwgBQtUAFCqAZqLV7thxsg=
-X-Received: by 2002:a05:600c:4ed1:b0:440:6a79:6df0 with SMTP id
- 5b1f17b1804b1-453659ec1c2mr122349055e9.22.1750747609388; Mon, 23 Jun 2025
- 23:46:49 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1750749898; x=1751354698;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=XN/Cvyt6JgcgYFKB3g7ATKxx/kMn2EK9buNTeYRwvbI=;
+        b=XYy81wEjY20d0hqM4ieFSeISkvCKGFBpEGYmLtwuxIn/qi2f+kZAjn0kED21M5KE7A
+         kK2hd748PwNXk66r63PYjcV6iXJyjHX9xLwYv/sf2VvkAW8ws4ShCTv6yg+ogveYmXz7
+         MUo0bj5lO31HbM4hTS2y2tmR/v6BgbXgyLRov2ZMgd/RDPsDdN9NeL3G3d/UhSirFja5
+         QMTCIFaykaBA1C68gP4ptk58Xk+JHG8hEntV0dIVavkutcyCcmdIru+VoWqfa/LevcoY
+         g8pTnL1hj495SAS4t5jridi3UScqMVW61mXbhjIjXS8r3yg0RWUDgpdyr2X4sMeaKVaE
+         Q9og==
+X-Gm-Message-State: AOJu0YwBJtohinkAMkOcCIiMYso63gGGm8hAzKI6vYRutFvRpfT9ntra
+	7oPnGeOpPywikGyD6ebhsFELfX7Pd/hWsV+q7iOk4kboh+rU+I77FCpXndXcyBro2cn/Sz0aRig
+	Xu3vkyEL20B0cr92AWvtks0iLhw+Y0R7zR988
+X-Gm-Gg: ASbGncv4wRAwqf1Ap6KUUU55k2d3/kByIGJqKDDehKSJoHKk1tMR1MuhV+EaCv6NLHE
+	P1UeqTkpB7aqK2IwFuLvo1B2HSzkGHH5TloIY9P2aLnDojxcfs7vL/yc3B5RqtbA1V9eqFHbHwu
+	8GsFPe8/X1MUTWpr6IkgUSFr+UpzVowjBqDkdqEGesO04d/AF+BrmhEkpB39OzbHaYh3HsyIW0C
+	ucC783sNcoU5oYi
+X-Google-Smtp-Source: AGHT+IEAUd2oro+pyqYq0ewVfxX80fJYXbhPbm63cXmryfivlSA18N0Z+VEkzDpIsGvfbd32S2c+GToPBa9nOKIXoWs=
+X-Received: by 2002:a17:90b:1d4c:b0:315:9624:37db with SMTP id
+ 98e67ed59e1d1-315ccc488b0mr3250151a91.3.1750749897830; Tue, 24 Jun 2025
+ 00:24:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250623191048.488812-1-alperyasinak1@gmail.com>
- <CABF_=yia4NmdasTLkJNs+t10Z3YZL3pXkOpjN+WLw42=JyiPQw@mail.gmail.com> <CAGpma=6-q0_RmzvkXXoWvt6iK8KTBnX9RUO9cG7SnRSqAmFQaA@mail.gmail.com>
-In-Reply-To: <CAGpma=6-q0_RmzvkXXoWvt6iK8KTBnX9RUO9cG7SnRSqAmFQaA@mail.gmail.com>
-From: Yoann Congal <yoann.congal@smile.fr>
-Date: Tue, 24 Jun 2025 08:46:23 +0200
-X-Gm-Features: Ac12FXwmiz74vPOaNIJzwYEDvAZoPS4avo815punZt8FMYiCJ_zsPDuogp9YqOs
-Message-ID: <CAMSfU+7i5-NWbcNm-DWL8gy=bK_biVFFXkC7aJ9N5j62xc=OCw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] tk: Fix compile error
-To: alperyasinak1@gmail.com
-Cc: jan vermaete <jan.vermaete@gmail.com>, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000059690d06384bb1cd"
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Tue, 24 Jun 2025 00:24:46 -0700
+X-Gm-Features: Ac12FXyHYsnSvd4MPrZde_w1obPFdq0AsokWZNuEO9UXLEqqN7R4mGmuiiWYWQw
+Message-ID: <CAK5yBb-1vV8S5ET4xrcTy=b8Oe9dtpq6udPE2M7S5nQ79YX=cQ@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="000000000000c033ff06384c3922"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Jun 2025 06:46:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118097
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Jun 2025 07:25:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118098
 
---00000000000059690d06384bb1cd
+--000000000000c033ff06384c3922
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+All,
 
-Le lun. 23 juin 2025 =C3=A0 22:17, Alper Ak via lists.openembedded.org
-<alperyasinak1=3Dgmail.com@lists.openembedded.org> a =C3=A9crit :
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-> I thought about using PV, but if tcl and tk can be upgraded
-> independently (tcl recipe is in poky, tk is in meta-oe), this may
-> cause failures if tcl is upgraded without upgrading tk. That's why I
-> preferred to hard code the version.
->
-> If there is a better way to handle this, I=E2=80=99m open to suggestions.
->
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
 
-I see that the tk recipe uses the pkgconfig class, theoretically, that's
-the way for tcl to tell tk where to find its headers.
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 458
+unassigned or newcomer bugs.
 
-Regards,
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.3=E2=80=9D, =E2=80=9C6.0", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.3" and then =E2=80=9C6.0=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
 
 
-> jan vermaete <jan.vermaete@gmail.com>, 23 Haz 2025 Pzt, 22:45
-> tarihinde =C5=9Funu yazd=C4=B1:
-> >
-> > Could the variable PV not be used in the directory name to replace the
-> > hard code version number?
-> >
-> > Br
-> >
-> > On Mon, Jun 23, 2025 at 9:11=E2=80=AFPM Alper Ak via lists.openembedded=
-.org
-> > <alperyasinak1=3Dgmail.com@lists.openembedded.org> wrote:
-> > >
-> > > tk9.0.1/unix/../generic/tk.h:19:10: fatal error: tcl.h: No such file
-> or directory
-> > > |    19 | #include <tcl.h>
-> > > |       |          ^~~~~~~
-> > >
-> > > Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
-> > > ---
-> > >  meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb | 2 ++
-> > >  1 file changed, 2 insertions(+)
-> > >
-> > > diff --git a/meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb
-> b/meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb
-> > > index 504b40927e..230a244a6b 100644
-> > > --- a/meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb
-> > > +++ b/meta-oe/recipes-devtools/tcltk/tk_9.0.1.bb
-> > > @@ -30,6 +30,8 @@ S =3D "${UNPACKDIR}/${BPN}${PV}"
-> > >  # Short version format: "8.6"
-> > >  VER =3D "${@os.path.splitext(d.getVar('PV'))[0]}"
-> > >
-> > > +CFLAGS +=3D "-I${STAGING_INCDIR}/tcl9.0.1/generic"
-> > > +
-> > >  LDFLAGS +=3D "-Wl,-rpath,${libdir}/tcltk/${PV}/lib"
-> > >
-> > >  inherit autotools features_check pkgconfig
-> > > --
-> > > 2.43.0
-> > >
-> > >
-> > >
-> > >
-> >
-> >
-> > --
-> > Jan Vermaete
-> > =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hame=
-l
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118091):
-> https://lists.openembedded.org/g/openembedded-devel/message/118091
-> Mute This Topic: https://lists.openembedded.org/mt/113794949/4316185
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> yoann.congal@smile.fr]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
 
---=20
-Yoann Congal
-Smile ECS
+*Stephen K. Jolley*
 
---00000000000059690d06384bb1cd
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--000000000000c033ff06384c3922
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><div>Hello,</div><div><br></div><div dir=
-=3D"ltr">Le=C2=A0lun. 23 juin 2025 =C3=A0=C2=A022:17, Alper Ak via <a href=
-=3D"http://lists.openembedded.org" target=3D"_blank">lists.openembedded.org=
-</a> &lt;alperyasinak1=3D<a href=3D"mailto:gmail.com@lists.openembedded.org=
-" target=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; a =C3=A9crit=
-=C2=A0:</div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" s=
-tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
-ding-left:1ex">I thought about using PV, but if tcl and tk can be upgraded<=
-br>
-independently (tcl recipe is in poky, tk is in meta-oe), this may<br>
-cause failures if tcl is upgraded without upgrading tk. That&#39;s why I<br=
->
-preferred to hard code the version.<br>
-<br>
-If there is a better way to handle this, I=E2=80=99m open to suggestions.<b=
-r></blockquote><div><br></div><div>I see that the tk recipe uses the pkgcon=
-fig class, theoretically, that&#39;s the way for tcl to tell tk where to fi=
-nd its headers.</div><div><br></div><div>Regards,</div><div>=C2=A0</div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t:1px solid rgb(204,204,204);padding-left:1ex">
+<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
+al">All,<br><br>The triage team is starting to try and collect up and class=
+ify bugs which a newcomer to the project would be able to work on in a way =
+which means people can find them. They&#39;re being listed on the triage pa=
+ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
+wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
+e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
+d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
+org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
+illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
+.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
+ea is these bugs should be straight forward for a person to help work on wh=
+o doesn&#39;t have deep experience with the project.  If anyone can help, p=
+lease take ownership of the bug and send patches!  If anyone needs help/adv=
+ice there are people on irc who can likely do so, or some of the more exper=
+ienced contributors will likely be happy to help too.<br><br>Also, the tria=
+ge team meets weekly and does its best to handle the bugs reported into the=
+ Bugzilla. The number of people attending that meeting has fallen, as have =
+the number of people available to help fix bugs. One of the things we hear =
+users report is they don&#39;t know how to help. We (the triage team) are t=
+herefore going to start reporting out the currently 458 unassigned or newco=
+mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
+ and again to help out with these.  Bugs are split into two types, &quot;tr=
+ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
+ents&quot; which are features we&#39;d want to add to the system.  There ar=
+e also roughly four different &quot;priority&quot; classes right now, =E2=
+=80=9C5.3=E2=80=9D, =E2=80=9C6.0&quot;, &quot;5.99&quot; and &quot;Future&q=
+uot;, the more pressing/urgent issues being in &quot;5.3&quot; and then =E2=
+=80=9C6.0=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
+g you would be able to help with either take ownership of the bug, or send =
+me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
+ an e-mail with the bug number you would like and I will assign it to you (=
+please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
+_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
+ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
+s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
+al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
+al,sans-serif">Thanks,<span></span></span></p>
 
-jan vermaete &lt;<a href=3D"mailto:jan.vermaete@gmail.com" target=3D"_blank=
-">jan.vermaete@gmail.com</a>&gt;, 23 Haz 2025 Pzt, 22:45<br>
-tarihinde =C5=9Funu yazd=C4=B1:<br>
-&gt;<br>
-&gt; Could the variable PV not be used in the directory name to replace the=
-<br>
-&gt; hard code version number?<br>
-&gt;<br>
-&gt; Br<br>
-&gt;<br>
-&gt; On Mon, Jun 23, 2025 at 9:11=E2=80=AFPM Alper Ak via <a href=3D"http:/=
-/lists.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openemb=
-edded.org</a><br>
-&gt; &lt;alperyasinak1=3D<a href=3D"mailto:gmail.com@lists.openembedded.org=
-" target=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote:<br>
-&gt; &gt;<br>
-&gt; &gt; tk9.0.1/unix/../generic/tk.h:19:10: fatal error: tcl.h: No such f=
-ile or directory<br>
-&gt; &gt; |=C2=A0 =C2=A0 19 | #include &lt;tcl.h&gt;<br>
-&gt; &gt; |=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ^=
-~~~~~~<br>
-&gt; &gt;<br>
-&gt; &gt; Signed-off-by: Alper Ak &lt;<a href=3D"mailto:alperyasinak1@gmail=
-.com" target=3D"_blank">alperyasinak1@gmail.com</a>&gt;<br>
-&gt; &gt; ---<br>
-&gt; &gt;=C2=A0 meta-oe/recipes-devtools/tcltk/<a href=3D"http://tk_9.0.1.b=
-b" rel=3D"noreferrer" target=3D"_blank">tk_9.0.1.bb</a> | 2 ++<br>
-&gt; &gt;=C2=A0 1 file changed, 2 insertions(+)<br>
-&gt; &gt;<br>
-&gt; &gt; diff --git a/meta-oe/recipes-devtools/tcltk/<a href=3D"http://tk_=
-9.0.1.bb" rel=3D"noreferrer" target=3D"_blank">tk_9.0.1.bb</a> b/meta-oe/re=
-cipes-devtools/tcltk/<a href=3D"http://tk_9.0.1.bb" rel=3D"noreferrer" targ=
-et=3D"_blank">tk_9.0.1.bb</a><br>
-&gt; &gt; index 504b40927e..230a244a6b 100644<br>
-&gt; &gt; --- a/meta-oe/recipes-devtools/tcltk/<a href=3D"http://tk_9.0.1.b=
-b" rel=3D"noreferrer" target=3D"_blank">tk_9.0.1.bb</a><br>
-&gt; &gt; +++ b/meta-oe/recipes-devtools/tcltk/<a href=3D"http://tk_9.0.1.b=
-b" rel=3D"noreferrer" target=3D"_blank">tk_9.0.1.bb</a><br>
-&gt; &gt; @@ -30,6 +30,8 @@ S =3D &quot;${UNPACKDIR}/${BPN}${PV}&quot;<br>
-&gt; &gt;=C2=A0 # Short version format: &quot;8.6&quot;<br>
-&gt; &gt;=C2=A0 VER =3D &quot;${@os.path.splitext(d.getVar(&#39;PV&#39;))[0=
-]}&quot;<br>
-&gt; &gt;<br>
-&gt; &gt; +CFLAGS +=3D &quot;-I${STAGING_INCDIR}/tcl9.0.1/generic&quot;<br>
-&gt; &gt; +<br>
-&gt; &gt;=C2=A0 LDFLAGS +=3D &quot;-Wl,-rpath,${libdir}/tcltk/${PV}/lib&quo=
-t;<br>
-&gt; &gt;<br>
-&gt; &gt;=C2=A0 inherit autotools features_check pkgconfig<br>
-&gt; &gt; --<br>
-&gt; &gt; 2.43.0<br>
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt; &gt; <br>
-&gt; &gt;<br>
-&gt;<br>
-&gt;<br>
-&gt; --<br>
-&gt; Jan Vermaete<br>
-&gt; =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Ham=
-el<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#118091): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/118091" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/118091</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/113794949/431=
-6185" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/113794949/4316185</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:yoann.congal@smile.fr" t=
-arget=3D"_blank">yoann.congal@smile.fr</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div><div><br clear=3D"all"></div><br><span class=3D"gmail_si=
-gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
-iv dir=3D"ltr"><font face=3D"Raleway, regular">Yoann Congal</font><div><fon=
-t face=3D"Raleway, regular">Smile ECS</font></div></div></div></div>
-</div>
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
 
---00000000000059690d06384bb1cd--
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--000000000000c033ff06384c3922--
 
