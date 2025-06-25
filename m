@@ -2,208 +2,3065 @@ Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6115BC77B7C
-	for <webhook@archiver.kernel.org>; Wed, 25 Jun 2025 07:33:38 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.9979.1750836817603794056
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 576B1C77B7C
+	for <webhook@archiver.kernel.org>; Wed, 25 Jun 2025 07:33:48 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.9820.1750836820161825118
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jun 2025 00:33:37 -0700
+ Wed, 25 Jun 2025 00:33:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=8271b8b582=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55P5VN6d026800
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 07:33:36 GMT
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=8271b8b582=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55P55xDM000606
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 00:33:39 -0700
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47dhy2m3en-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47dv8mkswx-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 07:33:36 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 00:33:38 -0700 (PDT)
 Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Wed, 25 Jun 2025 00:33:31 -0700
+ 15.1.2507.57; Wed, 25 Jun 2025 00:33:33 -0700
 From: yurade <yogita.urade@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/3] mariadb: fix CVE-2023-52968
-Date: Wed, 25 Jun 2025 13:03:11 +0530
-Message-ID: <20250625073313.1882580-1-yogita.urade@windriver.com>
+Subject: [oe][meta-oe][kirkstone][PATCH 2/3] mariadb: fix CVE-2023-52969 and CVE-2023-52970
+Date: Wed, 25 Jun 2025 13:03:12 +0530
+Message-ID: <20250625073313.1882580-2-yogita.urade@windriver.com>
 X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20250625073313.1882580-1-yogita.urade@windriver.com>
+References: <20250625073313.1882580-1-yogita.urade@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [147.11.136.210]
 X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
  ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjI1MDA1NSBTYWx0ZWRfX4ZAIfvuw6I+5 y+WsMxtgEaXzuP1Uv6EVw2Hn9mYnvcvmPPVfvmtYhtWZpWtZkSR4FRyXpIlBsTSyDsNzVudb3Wa L0JmDaNNZzG3Nhzbmk5p/5oUa0kgughcH+ie14luHaWNrTEDRXNo1XpqTjeXdVeKCtsBuZGHWTA
- Cxzv9iFUdiuA240Rs9INs7jVGwrBLTfBGchZuQ4WeYS541lP7pDSz55rIyXVhdv1NC2SjQ5og1o uYe+33rlst+BjOO+PFk9lL+x1pcoaqrRslyo6XJO1WMZ/FXmK+sJNPnTELwEjDQM/M12N6L+xwC rc0p+hCI240/sCEDAS1Sg3neamhe6xAXx1KtW3HMqN5p2Rl4ohiS7JQm9TJ9RoqnRHn/aSBqtr5
- KTGS8VzyXQL2Z9teur3jc+iwnewa1RFetep6MBsAW8tVgBeGs1vQ/Vm2drXMhZKSE1nhSJT9
-X-Authority-Analysis: v=2.4 cv=Qblmvtbv c=1 sm=1 tr=0 ts=685ba650 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=6IFa9wvqVegA:10 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=hkEv4HZQAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8
- a=2axcuBc2iGKZsjvi9gkA:9 a=NA03pvyaApPJG5valX87:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: HyKByQ0odkLs_3xc5HdOQ6IYXgR7mrmn
-X-Proofpoint-GUID: HyKByQ0odkLs_3xc5HdOQ6IYXgR7mrmn
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjI1MDA1NSBTYWx0ZWRfX39qGzGBi2gxE fHYZM4sE5Zh68y38F4Va2jYqna6yotEYkBVuZ1eMgVfrd5IlKpmbeu8MfIyqnRkYtd/UEJOr1QN 31RMyr7hjKASYO7TmDtS0GYdNCUJ2Ya5zmWGMQsYOf4SxxmOWj7nohSu4tUxP9xsuJ42uGPYJsm
+ AO5Uj6CQ5lIOFU5FiCwsGwSGb8WEdU7nWUP91MqF4xPwqTMwE+EAZ4E2Upkc9FNbRO8kyl398oh m98Wozz/mo37nC3MZ010GmAdSIxStUVwUHvyHjpxqMHMfITUnb8g5sMTPiJDBBveVV0Q5GdlJJ5 LDe2O1Wp52byVPGcMpUlauLJ32cHx4JAX46Ara8ZTWwrXD3xkdXh0DxQ+HGbdG2sgfa8wRM4dsk
+ lyBc02VPpx+0KECQe383jJBWU1w4YIa4pgugXigNanUCY51O33XNzp3+mEpPIaXR4XUOx7Ki
+X-Authority-Analysis: v=2.4 cv=MeNsu4/f c=1 sm=1 tr=0 ts=685ba652 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=6IFa9wvqVegA:10 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=hkEv4HZQAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8
+ a=jpp-Wi3FAAAA:8 a=A7TGImObAI45GaWksHkA:9 a=Vcc9DoRjz0hOyLBT:21 a=NA03pvyaApPJG5valX87:22 a=FdTzh2GWekK77mhwV6Dw:22 a=3HWhRrkoiJongTt84g_J:22
+X-Proofpoint-GUID: kSTwfZAkONRVc7g-ugwlHmxKUp92kd7G
+X-Proofpoint-ORIG-GUID: kSTwfZAkONRVc7g-ugwlHmxKUp92kd7G
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
  definitions=2025-06-25_01,2025-06-23_07,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 suspectscore=0
- bulkscore=0 lowpriorityscore=0 mlxlogscore=999 mlxscore=0
- priorityscore=1501 clxscore=1015 impostorscore=0 malwarescore=0
- phishscore=0 adultscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 clxscore=1015
+ mlxscore=0 malwarescore=0 lowpriorityscore=0 priorityscore=1501
+ suspectscore=0 spamscore=0 bulkscore=0 phishscore=0 adultscore=0
+ mlxlogscore=999 classifier=spam authscore=0 authtc=n/a authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505280000
  definitions=main-2506250055
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 07:33:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118103
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 07:33:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118104
 
 From: Yogita Urade <yogita.urade@windriver.com>
 
-MariaDB Server 10.4 before 10.4.33, 10.5 before 10.5.24, 10.6
-before 10.6.17, 10.7 through 10.11 before 10.11.7, 11.0 before
-11.0.5, and 11.1 before 11.1.4 calls fix_fields_if_needed under
-mysql_derived_prepare when derived is not yet prepared, leading
-to a find_field_in_table crash.
+CVE-2023-52969:
+MariaDB Server 10.4 through 10.5., 10.6 through 10.6., 10.7
+through 10.11., and 11.0 through 11.0. can sometimes crash
+with an empty backtrace log. This may be related to
+make_aggr_tables_info and optimize_stage2.
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2023-52968
+CVE-2023-52970:
+MariaDB Server 10.4 through 10.5., 10.6 through 10.6., 10.7
+through 10.11., 11.0 through 11.0., and 11.1 through 11.4.*
+crashes in Item_direct_view_ref::derived_field_transformer_for_where.
 
-Upstream patch:
-https://github.com/MariaDB/server/commit/74883f5e2f4c0e09f4f4e9e272a8e5bfd91a9489
+CVE-2023-52969-CVE-20230-52970-0001 and CVE-2023-52969-CVE-20230-52970-0002
+are dependent commits while CVE-2023-52969-CVE-20230-52970-0003 and
+CVE-2023-52969-CVE-20230-52970-0004 are actual CVE fixes.
 
-Fix indent issue in mariadb.inc file.
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-52969
+https://nvd.nist.gov/vuln/detail/CVE-2023-52970
+
+Upstream patches:
+https://github.com/MariaDB/server/commit/e6403733897483bed249875f0f3e5e9937ca2b38
+https://github.com/MariaDB/server/commit/d98ac8511e39770ef3d8b42937c84e876d1459e
+https://github.com/MariaDB/server/commit/9b313d2de1df65626abb3b1d6c973f74addb12fb
+https://github.com/MariaDB/server/commit/4fc9dc84b017cf9f30585bcdef0663f9425fe460
 
 Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc         |   3 +-
- .../mysql/mariadb/CVE-2023-52968.patch        | 106 ++++++++++++++++++
- 2 files changed, 108 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52968.patch
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |    4 +
+ .../CVE-2023-52969-CVE-20230-52970-0001.patch |  502 +++++
+ .../CVE-2023-52969-CVE-20230-52970-0002.patch |  168 ++
+ .../CVE-2023-52969-CVE-20230-52970-0003.patch |  470 +++++
+ .../CVE-2023-52969-CVE-20230-52970-0004.patch | 1785 +++++++++++++++++
+ 5 files changed, 2929 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0001.patch
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0002.patch
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0003.patch
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0004.patch
 
 diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 7c4b0a467f..6a8ff05039 100644
+index 6a8ff05039..951d3a28e8 100644
 --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
 +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -22,7 +22,8 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://cross-compiling.patch \
-            file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
+@@ -24,6 +24,10 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
             file://0001-MDEV-29644-a-potential-bug-of-null-pointer-dereferen.patch \
--	   file://CVE-2023-22084.patch \
-+           file://CVE-2023-22084.patch \
-+           file://CVE-2023-52968.patch \
+            file://CVE-2023-22084.patch \
+            file://CVE-2023-52968.patch \
++           file://CVE-2023-52969-CVE-20230-52970-0001.patch \
++           file://CVE-2023-52969-CVE-20230-52970-0002.patch \
++           file://CVE-2023-52969-CVE-20230-52970-0003.patch \
++           file://CVE-2023-52969-CVE-20230-52970-0004.patch \
            "
  SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
  
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52968.patch b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52968.patch
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0001.patch b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0001.patch
 new file mode 100644
-index 0000000000..bea473e4a3
+index 0000000000..99e98b19f9
 --- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52968.patch
-@@ -0,0 +1,106 @@
-+From 74883f5e2f4c0e09f4f4e9e272a8e5bfd91a9489 Mon Sep 17 00:00:00 2001
-+From: Aleksey Midenkov <midenok@gmail.com>
-+Date: Thu, 9 Nov 2023 16:26:11 +0300
-+Subject: [PATCH] MDEV-32082 Server crash in find_field_in_table
++++ b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0001.patch
+@@ -0,0 +1,502 @@
++From e6403733897483bed249875f0f3e5e9937ca2b38 Mon Sep 17 00:00:00 2001
++From: Oleg Smirnov <olernov@gmail.com>
++Date: Fri, 25 Oct 2024 14:35:22 +0700
++Subject: [PATCH] Revert "MDEV-26427 MariaDB Server SEGV on INSERT .. SELECT"
 +
-+Attempt to resolve FOR SYSTEM_TIME expression as field for derived
-+table is done before derived table is fully prepared, so we fail on
-+assertion that table_list->table is missing.
++This reverts commit 49e14000eeb245ea27e9207d2f63cb0a28be1ca9
++as it introduces regression MDEV-29935 and has to be reconsidered
++in general
 +
-+Actually Vers_history_point::resolve_unit() is done under the call of
-+mysql_derived_prepare() itself (sql_derived.cc:824) and the table is
-+assigned later at 867.
-+
-+The fix disables unit resolution for field type in FOR SYSTEM_TIME
-+expression as it does a little sense in any case: making historical
-+queries based on variable field values produces the result of multiple
-+time points.
-+
-+fix_fields_if_needed() in resolve_units() was introduced by 46be31982a4
-+
-+CVE: CVE-2023-52968
-+Upstream-Status: Backport [https://github.com/MariaDB/server/commit/74883f5e2f4c0e09f4f4e9e272a8e5bfd91a9489]
-+
-+Changes:
-+-Use old my_error API instead of new bad_expression_data_type_error API.
++CVE: CVE-2023-52969 and CVE-2023-52970
++Upstream-Status: Backport [https://github.com/MariaDB/server/commit/e6403733897483bed249875f0f3e5e9937ca2b38]
 +
 +Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 +---
-+ mysql-test/suite/versioning/r/select.result | 11 ++++++++++-
-+ mysql-test/suite/versioning/t/select.test   | 12 +++++++++++-
-+ sql/table.cc                                |  6 ++++++
-+ 3 files changed, 27 insertions(+), 2 deletions(-)
++ mysql-test/main/insert_select.result |  70 -----------
++ mysql-test/main/insert_select.test   |  54 --------
++ mysql-test/main/view.result          |  10 --
++ mysql-test/main/view.test            |   2 -
++ sql/sql_base.cc                      | 178 ++++++++-------------------
++ sql/sql_insert.cc                    |   4 +-
++ sql/sql_select.cc                    |   4 +
++ sql/sql_select.h                     |   1 +
++ 8 files changed, 59 insertions(+), 264 deletions(-)
 +
-+diff --git a/mysql-test/suite/versioning/r/select.result b/mysql-test/suite/versioning/r/select.result
-+index 90c99d1b..714455b6 100644
-+--- a/mysql-test/suite/versioning/r/select.result
-++++ b/mysql-test/suite/versioning/r/select.result
-+@@ -443,7 +443,7 @@ create or replace table t1 (x int) with system versioning;
-+ select * from t1 for system_time as of current_timestamp;
-+ x
-+ select * from t1 for system_time as of now;
-+-ERROR 42S22: Unknown column 'now' in 'FOR SYSTEM_TIME'
-++ERROR HY000: Illegal parameter data type now for operation 'FOR SYSTEM_TIME'
-+ ### Issue #405, NATURAL JOIN failure
-+ create or replace table t1 (a int) with system versioning;
-+ create or replace table t2 (b int);
-+@@ -708,3 +708,12 @@ No	A	B	C	D
-+ 33	1	1	1	1
-+ 34	1	1	1	1
-+ SET GLOBAL innodb_stats_persistent = @saved_stats_persistent;
-++#
-++# MDEV-32082 Server crash in find_field_in_table
-++#
-++create table t0 (c0 int) with system versioning;
-++select x0 from (
-++select c0 x0 from t0
-++) for system_time as of nowasdf deriv;
-++ERROR HY000: Illegal parameter data type nowasdf for operation 'FOR SYSTEM_TIME'
-++drop table t0;
-+diff --git a/mysql-test/suite/versioning/t/select.test b/mysql-test/suite/versioning/t/select.test
-+index 9142a8fa..5603d1a3 100644
-+--- a/mysql-test/suite/versioning/t/select.test
-++++ b/mysql-test/suite/versioning/t/select.test
-+@@ -314,7 +314,7 @@ select * from t1 where (a, 2) in ((1, 1), (2, 2)) and b = 1;
-+ --echo ### Issue #398, NOW is now non-magic
-+ create or replace table t1 (x int) with system versioning;
-+ select * from t1 for system_time as of current_timestamp;
-+---error ER_BAD_FIELD_ERROR
-++--error ER_ILLEGAL_PARAMETER_DATA_TYPE_FOR_OPERATION
-+ select * from t1 for system_time as of now;
-+
-+ --echo ### Issue #405, NATURAL JOIN failure
-+@@ -487,4 +487,14 @@ call verify_trt_dummy(34);
-+
-+ SET GLOBAL innodb_stats_persistent = @saved_stats_persistent;
-+
-++--echo #
-++--echo # MDEV-32082 Server crash in find_field_in_table
-++--echo #
-++create table t0 (c0 int) with system versioning;
-++--error ER_ILLEGAL_PARAMETER_DATA_TYPE_FOR_OPERATION
-++select x0 from (
-++  select c0 x0 from t0
-++) for system_time as of nowasdf deriv;
-++drop table t0;
++diff --git a/mysql-test/main/insert_select.result b/mysql-test/main/insert_select.result
++index 29618c6d..10c87271 100644
++--- a/mysql-test/main/insert_select.result
+++++ b/mysql-test/main/insert_select.result
++@@ -883,76 +883,6 @@ INSERT INTO t1 SELECT a*2 FROM t1 ORDER BY a;
++ Warnings:
++ Warning	1264	Out of range value for column 'a' at row 4
++ DROP TABLE t1;
++-CREATE TABLE t1 (a INT, b INT);
++-INSERT INTO t1 (a) SELECT SUM(1);
++-INSERT INTO t1 (a, b) SELECT AVG(2), MIN(3);
++-INSERT INTO t1 (b) SELECT AVG('x') OVER ();
++-ERROR 22007: Truncated incorrect DOUBLE value: 'x'
++-INSERT INTO t1 SELECT MIN(7) OVER (), MAX(8) OVER();
++-SELECT * FROM t1;
++-a	b
++-1	NULL
++-2	3
++-7	8
++-PREPARE stmt FROM 'INSERT INTO t1 (a) SELECT AVG(?)';
++-EXECUTE stmt USING 9;
++-EXECUTE stmt USING 10;
++-PREPARE stmt FROM 'INSERT INTO t1 SELECT MIN(?), MAX(?)';
++-EXECUTE stmt USING 11, 12;
++-EXECUTE stmt USING 13, 14;
++-DEALLOCATE PREPARE stmt;
++-SELECT * FROM t1;
++-a	b
++-1	NULL
++-2	3
++-7	8
++-9	NULL
++-10	NULL
++-11	12
++-13	14
++-CREATE PROCEDURE p1(param_a INT, param_b INT)
++-BEGIN
++-INSERT INTO t1 SELECT MIN(param_a) OVER (), MAX(param_b);
++-END//
++-CALL p1(21, 22);
++-CALL p1(23, 24);
++-SELECT * FROM t1;
++-a	b
++-1	NULL
++-2	3
++-7	8
++-9	NULL
++-10	NULL
++-11	12
++-13	14
++-21	22
++-23	24
++-CREATE TABLE t2 (
++-a DECIMAL UNIQUE CHECK (CASE 0 * 27302337.000000 WHEN 34 THEN
++-+ 'x' LIKE 'x' OR a NOT IN (-1 / TRUE ^ 2) ELSE 7105743.000000 END));
++-INSERT INTO t2 VALUES (90),( -1),(31152443.000000),(-32768),(NULL),(NULL);
++-INSERT INTO t2 SELECT AVG('x') OVER (
++-PARTITION BY ((NOT AVG(76698761.000000))) IS NOT NULL);
++-ERROR 22007: Truncated incorrect DOUBLE value: 'x'
++-INSERT IGNORE INTO t2 () VALUES (0),('x'),(3751286.000000),
++-('x'),((a = 'x' AND 0 AND 0));
++-Warnings:
++-Warning	1366	Incorrect decimal value: 'x' for column `test`.`t2`.`a` at row 2
++-Warning	1062	Duplicate entry '0' for key 'a'
++-Warning	1366	Incorrect decimal value: 'x' for column `test`.`t2`.`a` at row 4
++-Warning	1062	Duplicate entry '0' for key 'a'
++-Warning	1062	Duplicate entry '0' for key 'a'
++-INSERT INTO t2 VALUES (127);
++-INSERT INTO t2 SELECT -2147483648 END FROM t2 AS TEXT JOIN t2 JOIN t2 TABLES;
++-ERROR 23000: Duplicate entry '-2147483648' for key 'a'
++-ALTER TABLE t2 ADD (
++-b INT UNIQUE CHECK ((a = 'x' AND ((-(+(BINARY 49730460.000000)))) = 'x' 
++-BETWEEN 'x' AND 'x')));
++-ERROR 22007: Truncated incorrect DECIMAL value: 'x'
++-UPDATE t2 SET a = -128 WHERE a IS NULL ORDER BY 78 IN ('x','x'),a;
++-ERROR 23000: Duplicate entry '-128' for key 'a'
++-DROP TABLE t1, t2;
++-DROP PROCEDURE p1;
++ # End of 10.2 test
++ #
++ # MDEV-28617: INSERT ... SELECT with redundant IN subquery in GROUP BY
++diff --git a/mysql-test/main/insert_select.test b/mysql-test/main/insert_select.test
++index a3604e38..7417bab9 100644
++--- a/mysql-test/main/insert_select.test
+++++ b/mysql-test/main/insert_select.test
++@@ -459,60 +459,6 @@ INSERT INTO t1 SELECT a*2 FROM t1 ORDER BY a;
++ 
++ DROP TABLE t1;
++ 
++-#
++-# MDEV-26427 MariaDB Server SEGV on INSERT .. SELECT
++-#
++-CREATE TABLE t1 (a INT, b INT);
++-INSERT INTO t1 (a) SELECT SUM(1);
++-INSERT INTO t1 (a, b) SELECT AVG(2), MIN(3);
++-
++---error ER_TRUNCATED_WRONG_VALUE
++-INSERT INTO t1 (b) SELECT AVG('x') OVER ();
++-INSERT INTO t1 SELECT MIN(7) OVER (), MAX(8) OVER();
++-SELECT * FROM t1;
++-
++-PREPARE stmt FROM 'INSERT INTO t1 (a) SELECT AVG(?)';
++-EXECUTE stmt USING 9;
++-EXECUTE stmt USING 10;
++-
++-PREPARE stmt FROM 'INSERT INTO t1 SELECT MIN(?), MAX(?)';
++-EXECUTE stmt USING 11, 12;
++-EXECUTE stmt USING 13, 14;
++-DEALLOCATE PREPARE stmt;
++-SELECT * FROM t1;
++-
++-DELIMITER //;
++-CREATE PROCEDURE p1(param_a INT, param_b INT)
++-BEGIN
++-INSERT INTO t1 SELECT MIN(param_a) OVER (), MAX(param_b);
++-END//
++-DELIMITER ;//
++-CALL p1(21, 22);
++-CALL p1(23, 24);
++-SELECT * FROM t1;
++-
++-CREATE TABLE t2 (
++-  a DECIMAL UNIQUE CHECK (CASE 0 * 27302337.000000 WHEN 34 THEN
++-    + 'x' LIKE 'x' OR a NOT IN (-1 / TRUE ^ 2) ELSE 7105743.000000 END));
++-INSERT INTO t2 VALUES (90),( -1),(31152443.000000),(-32768),(NULL),(NULL);
++---error ER_TRUNCATED_WRONG_VALUE
++-INSERT INTO t2 SELECT AVG('x') OVER (
++-  PARTITION BY ((NOT AVG(76698761.000000))) IS NOT NULL);
++-INSERT IGNORE INTO t2 () VALUES (0),('x'),(3751286.000000),
++-                                ('x'),((a = 'x' AND 0 AND 0));
++-INSERT INTO t2 VALUES (127);
++---error ER_DUP_ENTRY
++-INSERT INTO t2 SELECT -2147483648 END FROM t2 AS TEXT JOIN t2 JOIN t2 TABLES;
++---error ER_TRUNCATED_WRONG_VALUE
++-ALTER TABLE t2 ADD (
++-  b INT UNIQUE CHECK ((a = 'x' AND ((-(+(BINARY 49730460.000000)))) = 'x' 
++-    BETWEEN 'x' AND 'x')));
++---error ER_DUP_ENTRY
++-UPDATE t2 SET a = -128 WHERE a IS NULL ORDER BY 78 IN ('x','x'),a;
++-
++-DROP TABLE t1, t2;
++-DROP PROCEDURE p1;
++-
++ --echo # End of 10.2 test
++ 
++ --echo #
++diff --git a/mysql-test/main/view.result b/mysql-test/main/view.result
++index aec4a5d0..69e850cd 100644
++--- a/mysql-test/main/view.result
+++++ b/mysql-test/main/view.result
++@@ -1503,8 +1503,6 @@ execute stmt1 using @a;
++ set @a= 301;
++ execute stmt1 using @a;
++ deallocate prepare stmt1;
++-insert into v3(a) select sum(302);
++-insert into v3(a) select sum(303) over ();
++ select * from v3;
++ a	b
++ 100	0
++@@ -1523,14 +1521,6 @@ a	b
++ 301	10
++ 301	1000
++ 301	2000
++-302	0
++-302	10
++-302	1000
++-302	2000
++-303	0
++-303	10
++-303	1000
++-303	2000
++ drop view v3;
++ drop tables t1,t2;
++ create table t1(f1 int);
++diff --git a/mysql-test/main/view.test b/mysql-test/main/view.test
++index c6cc9a69..f32b148b 100644
++--- a/mysql-test/main/view.test
+++++ b/mysql-test/main/view.test
++@@ -1334,8 +1334,6 @@ execute stmt1 using @a;
++ set @a= 301;
++ execute stmt1 using @a;
++ deallocate prepare stmt1;
++-insert into v3(a) select sum(302);
++-insert into v3(a) select sum(303) over ();
++ --sorted_result
++ select * from v3;
++ 
++diff --git a/sql/sql_base.cc b/sql/sql_base.cc
++index 4142540f..59c13009 100644
++--- a/sql/sql_base.cc
+++++ b/sql/sql_base.cc
++@@ -7750,39 +7750,6 @@ bool setup_fields(THD *thd, Ref_ptr_array ref_pointer_array,
++   DBUG_RETURN(MY_TEST(thd->is_error()));
++ }
++ 
++-/*
++-  make list of leaves for a single TABLE_LIST
++-
++-  SYNOPSIS
++-    make_leaves_for_single_table()
++-    thd             Thread handler
++-    leaves          List of leaf tables to be filled
++-    table           TABLE_LIST object to process
++-    full_table_list Whether to include tables from mergeable derived table/view
++-*/
++-void make_leaves_for_single_table(THD *thd, List<TABLE_LIST> &leaves,
++-                              TABLE_LIST *table, bool& full_table_list,
++-                              TABLE_LIST *boundary)
++-{
++-  if (table == boundary)
++-    full_table_list= !full_table_list;
++-  if (full_table_list && table->is_merged_derived())
++-  {
++-    SELECT_LEX *select_lex= table->get_single_select();
++-    /*
++-      It's safe to use select_lex->leaf_tables because all derived
++-      tables/views were already prepared and has their leaf_tables
++-      set properly.
++-    */
++-    make_leaves_list(thd, leaves, select_lex->get_table_list(),
++-                     full_table_list, boundary);
++-  }
++-  else
++-  {
++-    leaves.push_back(table, thd->mem_root);
++-  }
++-}
++-
++ 
++ /*
++   Perform checks like all given fields exists, if exists fill struct with
++@@ -7809,79 +7776,40 @@ int setup_returning_fields(THD* thd, TABLE_LIST* table_list)
++ 
++   SYNOPSIS
++     make_leaves_list()
++-    leaves          List of leaf tables to be filled
++-    tables          Table list
++-    full_table_list Whether to include tables from mergeable derived table/view.
++-                    We need them for checks for INSERT/UPDATE statements only.
+++    list    pointer to pointer on list first element
+++    tables  table list
+++    full_table_list whether to include tables from mergeable derived table/view.
+++                    we need them for checks for INSERT/UPDATE statements only.
 ++
-+ -- source suite/versioning/common_finish.inc
-+diff --git a/sql/table.cc b/sql/table.cc
-+index e0e06702..81a5674a 100644
-+--- a/sql/table.cc
-++++ b/sql/table.cc
-+@@ -10326,6 +10326,12 @@ bool Vers_history_point::check_unit(THD *thd)
+++  RETURN pointer on pointer to next_leaf of last element
++ */
++ 
++-void make_leaves_list(THD *thd, List<TABLE_LIST> &leaves, TABLE_LIST *tables,
+++void make_leaves_list(THD *thd, List<TABLE_LIST> &list, TABLE_LIST *tables,
++                       bool full_table_list, TABLE_LIST *boundary)
++  
 + {
-+   if (!item)
-+     return false;
-++  if (item->real_type() == Item::FIELD_ITEM)
-++  {
-++    my_error(ER_ILLEGAL_PARAMETER_DATA_TYPE_FOR_OPERATION, MYF(0),
-++             item->full_name(), "FOR SYSTEM_TIME");
-++    return true;
-++  }
-+   if (item->fix_fields_if_needed(thd, &item))
-+     return true;
-+   const Type_handler *t= item->this_item()->real_type_handler();
-+--
++   for (TABLE_LIST *table= tables; table; table= table->next_local)
++   {
++-    make_leaves_for_single_table(thd, leaves, table, full_table_list,
++-                                 boundary);
++-  }
++-}
++-
++-
++-/*
++-  Setup the map and other attributes for a single TABLE_LIST object
++-
++-  SYNOPSIS
++-    setup_table_attributes()
++-    thd                 Thread handler
++-    table_list          TABLE_LIST object to process
++-    first_select_table  First table participating in SELECT for INSERT..SELECT
++-                        statements, NULL for other cases
++-    tablenr             Serial number of the table in the SQL statement
++-
++-  RETURN
++-    false               Success
++-    true                Failure
++-*/
++-bool setup_table_attributes(THD *thd, TABLE_LIST *table_list,
++-                            TABLE_LIST *first_select_table,
++-                            uint &tablenr)
++-{
++-  TABLE *table= table_list->table;
++-  if (table)
++-    table->pos_in_table_list= table_list;
++-  if (first_select_table && table_list->top_table() == first_select_table)
++-  {
++-    /* new counting for SELECT of INSERT ... SELECT command */
++-    first_select_table= 0;
++-    thd->lex->first_select_lex()->insert_tables= tablenr;
++-    tablenr= 0;
++-  }
++-  if (table_list->jtbm_subselect)
++-  {
++-    table_list->jtbm_table_no= tablenr;
++-  }
++-  else if (table)
++-  {
++-    table->pos_in_table_list= table_list;
++-    setup_table_map(table, table_list, tablenr);
++-
++-    if (table_list->process_index_hints(table))
++-      return true;
++-  }
++-  tablenr++;
++-  /*
++-    We test the max tables here as we setup_table_map() should not be called
++-    with tablenr >= 64
++-  */
++-  if (tablenr > MAX_TABLES)
++-  {
++-    my_error(ER_TOO_MANY_TABLES, MYF(0), static_cast<int>(MAX_TABLES));
++-    return true;
+++    if (table == boundary)
+++      full_table_list= !full_table_list;
+++    if (full_table_list && table->is_merged_derived())
+++    {
+++      SELECT_LEX *select_lex= table->get_single_select();
+++      /*
+++        It's safe to use select_lex->leaf_tables because all derived
+++        tables/views were already prepared and has their leaf_tables
+++        set properly.
+++      */
+++      make_leaves_list(thd, list, select_lex->get_table_list(),
+++      full_table_list, boundary);
+++    }
+++    else
+++    {
+++      list.push_back(table, thd->mem_root);
+++    }
++   }
++-  return false;
++ }
++ 
++-
++ /*
++   prepare tables
++ 
++@@ -7938,14 +7866,7 @@ bool setup_tables(THD *thd, Name_resolution_context *context,
++     leaves.empty();
++     if (select_lex->prep_leaf_list_state != SELECT_LEX::SAVED)
++     {
++-      /*
++-        For INSERT ... SELECT statements we must not include the first table
++-        (where the data is being inserted into) in the list of leaves
++-      */
++-      TABLE_LIST *tables_for_leaves=
++-          select_insert ? first_select_table : tables;
++-      make_leaves_list(thd, leaves, tables_for_leaves, full_table_list,
++-                       first_select_table);
+++      make_leaves_list(thd, leaves, tables, full_table_list, first_select_table);
++       select_lex->prep_leaf_list_state= SELECT_LEX::READY;
++       select_lex->leaf_tables_exec.empty();
++     }
++@@ -7956,34 +7877,37 @@ bool setup_tables(THD *thd, Name_resolution_context *context,
++         leaves.push_back(table_list, thd->mem_root);
++     }
++       
++-    List_iterator<TABLE_LIST> ti(leaves);
++     while ((table_list= ti++))
++     {
++-      if (setup_table_attributes(thd, table_list, first_select_table, tablenr))
++-        DBUG_RETURN(1);
++-    }
++-
++-    if (select_insert)
++-    {
++-      /*
++-        The table/view in which the data is inserted must not be included into
++-        the leaf_tables list. But we need this table/view to setup attributes
++-        for it. So build a temporary list of leaves and setup attributes for
++-        the tables included
++-      */
++-      List<TABLE_LIST> leaves;
++-      TABLE_LIST *table= tables;
++-
++-      make_leaves_for_single_table(thd, leaves, table, full_table_list,
++-                                   first_select_table);
++-
++-      List_iterator<TABLE_LIST> ti(leaves);
++-      while ((table_list= ti++))
+++      TABLE *table= table_list->table;
+++      if (table)
+++        table->pos_in_table_list= table_list;
+++      if (first_select_table &&
+++          table_list->top_table() == first_select_table)
++       {
++-        if (setup_table_attributes(thd, table_list, first_select_table,
++-                                   tablenr))
+++        /* new counting for SELECT of INSERT ... SELECT command */
+++        first_select_table= 0;
+++        thd->lex->first_select_lex()->insert_tables= tablenr;
+++        tablenr= 0;
+++      }
+++      if(table_list->jtbm_subselect)
+++      {
+++        table_list->jtbm_table_no= tablenr;
+++      }
+++      else if (table)
+++      {
+++        table->pos_in_table_list= table_list;
+++        setup_table_map(table, table_list, tablenr);
+++
+++        if (table_list->process_index_hints(table))
++           DBUG_RETURN(1);
++       }
+++      tablenr++;
+++    }
+++    if (tablenr > MAX_TABLES)
+++    {
+++      my_error(ER_TOO_MANY_TABLES,MYF(0), static_cast<int>(MAX_TABLES));
+++      DBUG_RETURN(1);
++     }
++   }
++   else
++diff --git a/sql/sql_insert.cc b/sql/sql_insert.cc
++index af2c4606..460c552f 100644
++--- a/sql/sql_insert.cc
+++++ b/sql/sql_insert.cc
++@@ -1570,7 +1570,8 @@ static bool mysql_prepare_insert_check_table(THD *thd, TABLE_LIST *table_list,
++   if (insert_into_view && !fields.elements)
++   {
++     thd->lex->empty_field_list_on_rset= 1;
++-    if (!table_list->table || table_list->is_multitable())
+++    if (!thd->lex->first_select_lex()->leaf_tables.head()->table ||
+++        table_list->is_multitable())
++     {
++       my_error(ER_VIEW_NO_INSERT_FIELD_LIST, MYF(0),
++                table_list->view_db.str, table_list->view_name.str);
++@@ -3828,6 +3829,7 @@ int mysql_insert_select_prepare(THD *thd, select_result *sel_res)
++   if (sel_res)
++     sel_res->prepare(lex->returning()->item_list, NULL);
++ 
+++  DBUG_ASSERT(select_lex->leaf_tables.elements != 0);
++   List_iterator<TABLE_LIST> ti(select_lex->leaf_tables);
++   TABLE_LIST *table;
++   uint insert_tables;
++diff --git a/sql/sql_select.cc b/sql/sql_select.cc
++index 21cc4806..8a7060c3 100644
++--- a/sql/sql_select.cc
+++++ b/sql/sql_select.cc
++@@ -2037,6 +2037,7 @@ JOIN::optimize_inner()
++     /* Merge all mergeable derived tables/views in this SELECT. */
++     if (select_lex->handle_derived(thd->lex, DT_MERGE))
++       DBUG_RETURN(TRUE);  
+++    table_count= select_lex->leaf_tables.elements;
++   }
++ 
++   if (select_lex->first_cond_optimization &&
++@@ -2084,6 +2085,8 @@ JOIN::optimize_inner()
++   
++   eval_select_list_used_tables();
++ 
+++  table_count= select_lex->leaf_tables.elements;
+++
++   if (select_lex->options & OPTION_SCHEMA_TABLE &&
++       optimize_schema_tables_memory_usage(select_lex->leaf_tables))
++     DBUG_RETURN(1);
++@@ -14549,6 +14552,7 @@ void JOIN::cleanup(bool full)
++     /* Free the original optimized join created for the group_by_handler */
++     join_tab= original_join_tab;
++     original_join_tab= 0;
+++    table_count= original_table_count;
++   }
++ 
++   if (join_tab)
++diff --git a/sql/sql_select.h b/sql/sql_select.h
++index 6efdcafd..e1e06e73 100644
++--- a/sql/sql_select.h
+++++ b/sql/sql_select.h
++@@ -1291,6 +1291,7 @@ class JOIN :public Sql_alloc
++ 
++   Pushdown_query *pushdown_query;
++   JOIN_TAB *original_join_tab;
+++  uint	   original_table_count;
++ 
++ /******* Join optimization state members start *******/
++   /*
++-- 
 +2.40.0
++
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0002.patch b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0002.patch
+new file mode 100644
+index 0000000000..75cae12305
+--- /dev/null
++++ b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0002.patch
+@@ -0,0 +1,168 @@
++From d98ac8511e39770ef3d8b42937c84e876d1459e7 Mon Sep 17 00:00:00 2001
++From: Oleg Smirnov <olernov@gmail.com>
++Date: Sat, 26 Oct 2024 20:29:56 +0700
++Subject: [PATCH] MDEV-26247 MariaDB Server SEGV on INSERT .. SELECT
++
++This problem occured for statements like `INSERT INTO t1 SELECT 1`,
++which do not have tables in the SELECT part. In such scenarios
++SELECT_LEX::insert_tables was not properly set at `setup_tables()`,
++and this led to either incorrect execution or a crash
++
++Reviewer: Oleksandr Byelkin <sanja@mariadb.com>
++
++CVE: CVE-2023-52969 and CVE-2023-52970
++Upstream-Status: Backport [https://github.com/MariaDB/server/commit/d98ac8511e39770ef3d8b42937c84e876d1459e7]
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ mysql-test/main/insert_select.result | 49 ++++++++++++++++++++++++++++
++ mysql-test/main/insert_select.test   | 35 ++++++++++++++++++++
++ sql/sql_base.cc                      | 16 +++++++--
++ 3 files changed, 97 insertions(+), 3 deletions(-)
++
++diff --git a/mysql-test/main/insert_select.result b/mysql-test/main/insert_select.result
++index 10c87271..79f8c519 100644
++--- a/mysql-test/main/insert_select.result
+++++ b/mysql-test/main/insert_select.result
++@@ -986,3 +986,52 @@ drop table t1, t2;
++ #
++ # End of 10.3 test
++ #
+++#
+++# MDEV-26427 MariaDB Server SEGV on INSERT .. SELECT
+++#
+++CREATE TABLE t1 (a int);
+++INSERT INTO t1 SELECT AVG(1);
+++SELECT * FROM t1;
+++a
+++1
+++INSERT INTO t1 SELECT MIN(2) OVER ();
+++SELECT * FROM t1;
+++a
+++1
+++2
+++CREATE VIEW v1 AS SELECT * FROM t1 ORDER BY a;
+++INSERT INTO v1 SELECT SUM(3);
+++SELECT * FROM v1;
+++a
+++1
+++2
+++3
+++INSERT INTO v1 SELECT * FROM v1;
+++SELECT * FROM t1;
+++a
+++1
+++1
+++2
+++2
+++3
+++3
+++INSERT INTO t1 SELECT * FROM v1;
+++SELECT * FROM t1;
+++a
+++1
+++1
+++1
+++1
+++2
+++2
+++2
+++2
+++3
+++3
+++3
+++3
+++DROP VIEW v1;
+++DROP TABLE t1;
+++#
+++# End of 10.5 test
+++#
++diff --git a/mysql-test/main/insert_select.test b/mysql-test/main/insert_select.test
++index 7417bab9..0e9bd05a 100644
++--- a/mysql-test/main/insert_select.test
+++++ b/mysql-test/main/insert_select.test
++@@ -559,3 +559,38 @@ drop table t1, t2;
++ --echo #
++ --echo # End of 10.3 test
++ --echo #
+++
+++--echo #
+++--echo # MDEV-26427 MariaDB Server SEGV on INSERT .. SELECT
+++--echo #
+++
+++CREATE TABLE t1 (a int);
+++
+++INSERT INTO t1 SELECT AVG(1);
+++--sorted_result
+++SELECT * FROM t1;
+++
+++INSERT INTO t1 SELECT MIN(2) OVER ();
+++--sorted_result
+++SELECT * FROM t1;
+++
+++CREATE VIEW v1 AS SELECT * FROM t1 ORDER BY a;
+++
+++INSERT INTO v1 SELECT SUM(3);
+++--sorted_result
+++SELECT * FROM v1;
+++
+++INSERT INTO v1 SELECT * FROM v1;
+++--sorted_result
+++SELECT * FROM t1;
+++
+++INSERT INTO t1 SELECT * FROM v1;
+++--sorted_result
+++SELECT * FROM t1;
+++
+++DROP VIEW v1;
+++DROP TABLE t1;
+++
+++--echo #
+++--echo # End of 10.5 test
+++--echo #
++diff --git a/sql/sql_base.cc b/sql/sql_base.cc
++index 4f04f23d..d50f3407 100644
++--- a/sql/sql_base.cc
+++++ b/sql/sql_base.cc
++@@ -7876,18 +7876,19 @@ bool setup_tables(THD *thd, Name_resolution_context *context,
++       while ((table_list= ti++))
++         leaves.push_back(table_list, thd->mem_root);
++     }
++-      
+++
+++    bool is_insert_tables_num_set= false;
++     while ((table_list= ti++))
++     {
++       TABLE *table= table_list->table;
++       if (table)
++         table->pos_in_table_list= table_list;
++-      if (first_select_table &&
+++      if (select_insert && !is_insert_tables_num_set &&
++           table_list->top_table() == first_select_table)
++       {
++         /* new counting for SELECT of INSERT ... SELECT command */
++-        first_select_table= 0;
++         thd->lex->first_select_lex()->insert_tables= tablenr;
+++        is_insert_tables_num_set= true;
++         tablenr= 0;
++       }
++       if(table_list->jtbm_subselect)
++@@ -7909,6 +7910,15 @@ bool setup_tables(THD *thd, Name_resolution_context *context,
++       my_error(ER_TOO_MANY_TABLES,MYF(0), static_cast<int>(MAX_TABLES));
++       DBUG_RETURN(1);
++     }
+++    if (select_insert && !is_insert_tables_num_set)
+++    {
+++      /*
+++        This happens for statements like `INSERT INTO t1 SELECT 1`,
+++        when there are no tables in the SELECT part.
+++        In this case all leaf tables belong to the INSERT part
+++      */
+++      thd->lex->first_select_lex()->insert_tables= tablenr;
+++    }
++   }
++   else
++   { 
++-- 
++2.40.0
++
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0003.patch b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0003.patch
+new file mode 100644
+index 0000000000..a00820c156
+--- /dev/null
++++ b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0003.patch
+@@ -0,0 +1,470 @@
++From 9b313d2de1df65626abb3b1d6c973f74addb12fb Mon Sep 17 00:00:00 2001
++From: Oleksandr Byelkin <sanja@mariadb.com>
++Date: Tue, 1 Apr 2025 20:57:29 +0200
++Subject: [PATCH] MDEV-32086 Server crash when inserting from derived table 
++ containing insert target table
++
++Use original solution for INSERT ... SELECT - select result buferisation.
++
++Also fix MDEV-36447 and MDEV-33139
++
++CVE: CVE-2023-52969 and CVE-2023-52970
++Upstream-Status: Backport [https://github.com/MariaDB/server/commit/9b313d2de1df65626abb3b1d6c973f74addb12fb]
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ mysql-test/main/derived_cond_pushdown.result | 125 ++++++++----------
++ mysql-test/main/derived_view.result          |   2 +
++ mysql-test/main/insert_select.result         | 129 ++++++++++++++++++-
++ mysql-test/main/insert_select.test           |  56 +++++++-
++ sql/sql_base.cc                              |  15 ++-
++ sql/sql_base.h                               |   1 +
++ sql/sql_insert.cc                            |  11 +-
++ 7 files changed, 260 insertions(+), 79 deletions(-)
++
++diff --git a/mysql-test/main/derived_cond_pushdown.result b/mysql-test/main/derived_cond_pushdown.result
++index f47920c0..9eac511e 100644
++--- a/mysql-test/main/derived_cond_pushdown.result
+++++ b/mysql-test/main/derived_cond_pushdown.result
++@@ -10223,9 +10223,8 @@ SELECT * FROM ( SELECT t1.f FROM v1 JOIN t1 ) AS t WHERE f IS NOT NULL;
++ EXPLAIN INSERT INTO t1
++ SELECT * FROM ( SELECT t1.f FROM v1 JOIN t1 ) AS t WHERE f IS NOT NULL;
++ id	select_type	table	type	possible_keys	key	key_len	ref	rows	Extra
++-1	PRIMARY	<derived2>	ALL	NULL	NULL	NULL	NULL	144	Using where
++-2	DERIVED	<derived4>	ALL	NULL	NULL	NULL	NULL	12	
++-2	DERIVED	t1	ALL	NULL	NULL	NULL	NULL	12	Using where; Using join buffer (flat, BNL join)
+++1	PRIMARY	<derived4>	ALL	NULL	NULL	NULL	NULL	12	Using temporary
+++1	PRIMARY	t1	ALL	NULL	NULL	NULL	NULL	12	Using where; Using join buffer (flat, BNL join)
++ 4	DERIVED	t1	ALL	NULL	NULL	NULL	NULL	12	
++ EXPLAIN FORMAT=JSON INSERT INTO t1
++ SELECT * FROM ( SELECT t1.f FROM v1 JOIN t1 ) AS t WHERE f IS NOT NULL;
++@@ -10233,45 +10232,35 @@ EXPLAIN
++ {
++   "query_block": {
++     "select_id": 1,
++-    "table": {
++-      "table_name": "<derived2>",
++-      "access_type": "ALL",
++-      "rows": 144,
++-      "filtered": 100,
++-      "attached_condition": "t.f is not null",
++-      "materialized": {
++-        "query_block": {
++-          "select_id": 2,
++-          "table": {
++-            "table_name": "<derived4>",
++-            "access_type": "ALL",
++-            "rows": 12,
++-            "filtered": 100,
++-            "materialized": {
++-              "query_block": {
++-                "select_id": 4,
++-                "table": {
++-                  "table_name": "t1",
++-                  "access_type": "ALL",
++-                  "rows": 12,
++-                  "filtered": 100
++-                }
++-              }
++-            }
++-          },
++-          "block-nl-join": {
+++    "temporary_table": {
+++      "table": {
+++        "table_name": "<derived4>",
+++        "access_type": "ALL",
+++        "rows": 12,
+++        "filtered": 100,
+++        "materialized": {
+++          "query_block": {
+++            "select_id": 4,
++             "table": {
++               "table_name": "t1",
++               "access_type": "ALL",
++               "rows": 12,
++-              "filtered": 100,
++-              "attached_condition": "t1.f is not null"
++-            },
++-            "buffer_type": "flat",
++-            "buffer_size": "64",
++-            "join_type": "BNL"
+++              "filtered": 100
+++            }
++           }
++         }
+++      },
+++      "block-nl-join": {
+++        "table": {
+++          "table_name": "t1",
+++          "access_type": "ALL",
+++          "rows": 12,
+++          "filtered": 100,
+++          "attached_condition": "t1.f is not null"
+++        },
+++        "buffer_type": "flat",
+++        "buffer_size": "64",
+++        "join_type": "BNL"
++       }
++     }
++   }
++@@ -10302,43 +10291,33 @@ EXPLAIN
++ {
++   "query_block": {
++     "select_id": 1,
++-    "table": {
++-      "table_name": "<derived2>",
++-      "access_type": "ALL",
++-      "rows": 16,
++-      "filtered": 100,
++-      "attached_condition": "t.f is not null",
++-      "materialized": {
++-        "query_block": {
++-          "select_id": 2,
++-          "table": {
++-            "table_name": "t1",
++-            "access_type": "ALL",
++-            "rows": 8,
++-            "filtered": 100,
++-            "attached_condition": "t1.f is not null"
++-          },
++-          "table": {
++-            "table_name": "<derived4>",
++-            "access_type": "ref",
++-            "possible_keys": ["key0"],
++-            "key": "key0",
++-            "key_length": "4",
++-            "used_key_parts": ["f"],
++-            "ref": ["test.t1.f"],
++-            "rows": 2,
++-            "filtered": 100,
++-            "materialized": {
++-              "query_block": {
++-                "select_id": 4,
++-                "table": {
++-                  "table_name": "t1",
++-                  "access_type": "ALL",
++-                  "rows": 8,
++-                  "filtered": 100,
++-                  "attached_condition": "t1.f is not null"
++-                }
++-              }
+++    "temporary_table": {
+++      "table": {
+++        "table_name": "t1",
+++        "access_type": "ALL",
+++        "rows": 8,
+++        "filtered": 100,
+++        "attached_condition": "t1.f is not null"
+++      },
+++      "table": {
+++        "table_name": "<derived4>",
+++        "access_type": "ref",
+++        "possible_keys": ["key0"],
+++        "key": "key0",
+++        "key_length": "4",
+++        "used_key_parts": ["f"],
+++        "ref": ["test.t1.f"],
+++        "rows": 2,
+++        "filtered": 100,
+++        "materialized": {
+++          "query_block": {
+++            "select_id": 4,
+++            "table": {
+++              "table_name": "t1",
+++              "access_type": "ALL",
+++              "rows": 8,
+++              "filtered": 100,
+++              "attached_condition": "t1.f is not null"
++             }
++           }
++         }
++diff --git a/mysql-test/main/derived_view.result b/mysql-test/main/derived_view.result
++index 15a7784c..3df1acc6 100644
++--- a/mysql-test/main/derived_view.result
+++++ b/mysql-test/main/derived_view.result
++@@ -2383,6 +2383,8 @@ SELECT * FROM t1;
++ a
++ 1
++ 1
+++1
+++1
++ drop table t1,t2;
++ set optimizer_switch=@save968720_optimizer_switch;
++ #
++diff --git a/mysql-test/main/insert_select.result b/mysql-test/main/insert_select.result
++index 79f8c519..ceb2fb8f 100644
++--- a/mysql-test/main/insert_select.result
+++++ b/mysql-test/main/insert_select.result
++@@ -1032,6 +1032,133 @@ a
++ 3
++ DROP VIEW v1;
++ DROP TABLE t1;
+++create table t1 (pk int, id int);
+++insert into t1 values (2,2), (3,3), (4,4);
+++insert into t1
+++select 1,10
+++from
+++(
+++select dt2.id from (select id from t1) dt2, t1 t where t.id=dt2.id
+++) dt
+++where dt.id=3;
+++select * from t1;
+++pk	id
+++2	2
+++3	3
+++4	4
+++1	10
+++explain insert into t1
+++select 1,10
+++from
+++(
+++select dt2.id from (select id from t1) dt2, t1 t where t.id=dt2.id
+++) dt
+++where dt.id=3;
+++id	select_type	table	type	possible_keys	key	key_len	ref	rows	Extra
+++1	SIMPLE	t1	ALL	NULL	NULL	NULL	NULL	4	Using where; Using temporary
+++1	SIMPLE	t	ALL	NULL	NULL	NULL	NULL	4	Using where; Using join buffer (flat, BNL join)
+++explain format=json insert into t1
+++select 1,10
+++from
+++(
+++select dt2.id from (select id from t1) dt2, t1 t where t.id=dt2.id
+++) dt
+++where dt.id=3;
+++EXPLAIN
+++{
+++  "query_block": {
+++    "select_id": 1,
+++    "temporary_table": {
+++      "table": {
+++        "table_name": "t1",
+++        "access_type": "ALL",
+++        "rows": 4,
+++        "filtered": 100,
+++        "attached_condition": "t1.`id` = 3"
+++      },
+++      "block-nl-join": {
+++        "table": {
+++          "table_name": "t",
+++          "access_type": "ALL",
+++          "rows": 4,
+++          "filtered": 100,
+++          "attached_condition": "t.`id` = 3"
+++        },
+++        "buffer_type": "flat",
+++        "buffer_size": "65",
+++        "join_type": "BNL"
+++      }
+++    }
+++  }
+++}
+++prepare stmt from "insert into t1
+++select 1,10
+++from
+++(
+++select dt2.id from (select id from t1) dt2, t1 t where t.id=dt2.id
+++) dt
+++where dt.id=3";
+++execute stmt;
+++select * from t1;
+++pk	id
+++2	2
+++3	3
+++4	4
+++1	10
+++1	10
+++execute stmt;
+++select * from t1;
+++pk	id
+++2	2
+++3	3
+++4	4
+++1	10
+++1	10
+++1	10
+++deallocate prepare stmt;
+++create procedure p() insert into t1
+++select 1,10
+++from
+++(
+++select dt2.id from (select id from t1) dt2, t1 t where t.id=dt2.id
+++) dt
+++where dt.id=3;
+++call p();
+++select * from t1;
+++pk	id
+++2	2
+++3	3
+++4	4
+++1	10
+++1	10
+++1	10
+++1	10
+++call p();
+++select * from t1;
+++pk	id
+++2	2
+++3	3
+++4	4
+++1	10
+++1	10
+++1	10
+++1	10
+++1	10
+++drop procedure p;
+++drop table t1;
++ #
++-# End of 10.5 test
+++# MDEV-33139: Crash of INSERT SELECT when preparing structures for
+++# split optimization
++ #
+++CREATE TABLE v0 ( v1 INT UNIQUE ) ;
+++INSERT INTO v0 ( v1 ) VALUES
+++( ( SELECT 
+++FROM
+++( SELECT v1
+++FROM v0 GROUP BY v1 ) AS v6 NATURAL JOIN
+++v0 AS v2 NATURAL JOIN
+++v0 AS v4 NATURAL JOIN
+++v0 AS v3 NATURAL JOIN
+++( SELECT v1 FROM v0 ) AS v7 ) ) ;
+++DROP TABLE v0;
+++# End of 10.5 tests
++diff --git a/mysql-test/main/insert_select.test b/mysql-test/main/insert_select.test
++index 0e9bd05a..5c2691c9 100644
++--- a/mysql-test/main/insert_select.test
+++++ b/mysql-test/main/insert_select.test
++@@ -591,6 +591,60 @@ SELECT * FROM t1;
++ DROP VIEW v1;
++ DROP TABLE t1;
++ 
+++#
+++# MDEV-32086: condition pushdown into two mergeable derived tables,
+++#             one containing the other, when they are forced to be
+++#             materialized in INSERT
+++#
+++create table t1 (pk int, id int);
+++insert into t1 values (2,2), (3,3), (4,4);
+++
+++let $q=
+++insert into t1
+++  select 1,10
+++  from
+++  (
+++    select dt2.id from (select id from t1) dt2, t1 t where t.id=dt2.id
+++  ) dt
+++  where dt.id=3;
+++
+++eval $q;
+++select * from t1;
+++
+++eval explain $q;
+++eval explain format=json $q;
+++
+++eval prepare stmt from "$q";
+++execute stmt;
+++select * from t1;
+++execute stmt;
+++select * from t1;
+++deallocate prepare stmt;
+++
+++eval create procedure p() $q;
+++call p();
+++select * from t1;
+++call p();
+++select * from t1;
+++drop procedure p;
+++
+++drop table t1;
+++
++ --echo #
++---echo # End of 10.5 test
+++--echo # MDEV-33139: Crash of INSERT SELECT when preparing structures for
+++--echo # split optimization
++ --echo #
+++
+++CREATE TABLE v0 ( v1 INT UNIQUE ) ;
+++INSERT INTO v0 ( v1 ) VALUES
+++  ( ( SELECT 1
+++      FROM
+++        ( SELECT v1
+++          FROM v0 GROUP BY v1 ) AS v6 NATURAL JOIN
+++               v0 AS v2 NATURAL JOIN
+++               v0 AS v4 NATURAL JOIN
+++               v0 AS v3 NATURAL JOIN
+++               ( SELECT v1 FROM v0 ) AS v7 ) ) ;
+++DROP TABLE v0;
+++
+++--echo # End of 10.5 tests
++diff --git a/sql/sql_base.cc b/sql/sql_base.cc
++index d50f3407..15a9882b 100644
++--- a/sql/sql_base.cc
+++++ b/sql/sql_base.cc
++@@ -1176,11 +1176,20 @@ TABLE_LIST* find_dup_table(THD *thd, TABLE_LIST *table, TABLE_LIST *table_list,
++     DBUG_PRINT("info",
++                ("found same copy of table or table which we should skip"));
++   }
++-  if (res && res->belong_to_derived)
+++  /*
+++     If we've found a duplicate in a derived table, try to work around that.
+++
+++     For INSERT...SELECT, do not do any workarounds, return the duplicate. The
+++     caller will enable buffering to handle this.
+++  */
+++  if (res && res->belong_to_derived &&
+++      !(check_flag & CHECK_DUP_FOR_INSERT_SELECT))
++   {
++     /*
++-      We come here for queries of type:
++-      INSERT INTO t1 (SELECT tmp.a FROM (select * FROM t1) as tmp);
+++      We come here for queries like this:
+++
+++      INSERT INTO t1 VALUES ((SELECT tmp.a FROM (select * FROM t1)));
+++      DELETE FROM t1 WHERE ( ... (SELECT ... FROM t1) ) ;
++ 
++       Try to fix by materializing the derived table
++     */
++diff --git a/sql/sql_base.h b/sql/sql_base.h
++index 5b449fdd..da9b1575 100644
++--- a/sql/sql_base.h
+++++ b/sql/sql_base.h
++@@ -72,6 +72,7 @@ enum find_item_error_report_type {REPORT_ALL_ERRORS, REPORT_EXCEPT_NOT_FOUND,
++ #define CHECK_DUP_ALLOW_DIFFERENT_ALIAS 1
++ #define CHECK_DUP_FOR_CREATE 2
++ #define CHECK_DUP_SKIP_TEMP_TABLE 4
+++#define CHECK_DUP_FOR_INSERT_SELECT 8
++ 
++ uint get_table_def_key(const TABLE_LIST *table_list, const char **key);
++ TABLE *open_ltable(THD *thd, TABLE_LIST *table_list, thr_lock_type update,
++diff --git a/sql/sql_insert.cc b/sql/sql_insert.cc
++index 50e3bcd3..d9813660 100644
++--- a/sql/sql_insert.cc
+++++ b/sql/sql_insert.cc
++@@ -1741,6 +1741,14 @@ int mysql_prepare_insert(THD *thd, TABLE_LIST *table_list,
++       DBUG_RETURN(1);
++   }
++ 
+++  /*
+++    Check if we read from the same table we're inserting into.
+++    Queries like INSERT INTO t1 VALUES ((SELECT ... FROM t1...)) are not
+++    allowed.
+++
+++    INSERT...SELECT is an exception: it will detect this case and use
+++    buffering to handle it correctly.
+++  */
++   if (!select_insert)
++   {
++     Item *fake_conds= 0;
++@@ -4021,7 +4029,8 @@ select_insert::prepare(List<Item> &values, SELECT_LEX_UNIT *u)
++     Is table which we are changing used somewhere in other parts of
++     query
++   */
++-  if (unique_table(thd, table_list, table_list->next_global, 0))
+++  if (unique_table(thd, table_list, table_list->next_global,
+++                   CHECK_DUP_FOR_INSERT_SELECT))
++   {
++     /* Using same table for INSERT and SELECT */
++     lex->current_select->options|= OPTION_BUFFER_RESULT;
++-- 
++2.40.0
++
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0004.patch b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0004.patch
+new file mode 100644
+index 0000000000..476bee127a
+--- /dev/null
++++ b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52969-CVE-20230-52970-0004.patch
+@@ -0,0 +1,1785 @@
++From 4fc9dc84b017cf9f30585bcdef0663f9425fe460 Mon Sep 17 00:00:00 2001
++From: Oleksandr Byelkin <sanja@mariadb.com>
++Date: Fri, 18 Apr 2025 12:14:23 +0200
++Subject: [PATCH] MDEV-32086 (part 2) Server crash when inserting from derived 
++ table containing insert target table
++
++Get rid of need of matherialization for usual INSERT (cache results in
++Item_cache* if needed)
++
++- subqueries in VALUE do not see new records in the table we are
++  inserting to
++- subqueries in RETIRNING prohibited to use the table we are inserting to
++
++Changes:
++- subselect_elimination.result and subselect_elimination.test files
++are not presented so skip those changes.
++
++CVE: CVE-2023-52969 and CVE-2023-52970
++Upstream-Status: Backport [https://github.com/MariaDB/server/commit/4fc9dc84b017cf9f30585bcdef0663f9425fe460]
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ mysql-test/main/insert.result                 |  72 +++++++-
++ mysql-test/main/insert.test                   |  56 +++++-
++ mysql-test/main/insert_returning.result       |   2 +
++ mysql-test/main/insert_returning.test         |   2 +
++ mysql-test/main/lowercase_view.result         |  12 --
++ mysql-test/main/lowercase_view.test           |  12 --
++ mysql-test/main/merge.result                  |  17 +-
++ mysql-test/main/merge.test                    |  17 +-
++ mysql-test/main/subselect.result              |  20 ++-
++ mysql-test/main/subselect.test                |  10 +-
++ .../main/subselect_no_exists_to_in.result     |  20 ++-
++ mysql-test/main/subselect_no_mat.result       |  20 ++-
++ mysql-test/main/subselect_no_opts.result      |  20 ++-
++ mysql-test/main/subselect_no_scache.result    |  20 ++-
++ mysql-test/main/subselect_no_semijoin.result  |  20 ++-
++ mysql-test/main/view.result                   |  49 ++++--
++ mysql-test/main/view.test                     |  30 ++--
++ mysql-test/suite/sql_sequence/other.result    |   1 -
++ mysql-test/suite/sql_sequence/other.test      |   1 -
++ sql/item.h                                    |  12 ++
++ sql/item_subselect.cc                         |  24 +++
++ sql/item_subselect.h                          |   1 +
++ sql/sql_base.cc                               |  86 +++++++---
++ sql/sql_base.h                                |   3 +-
++ sql/sql_insert.cc                             | 101 +++++++++--
++ sql/sql_insert.h                              |   2 +-
++ sql/sql_lex.cc                                |  42 +++++
++ sql/sql_lex.h                                 |   4 +
++ sql/sql_prepare.cc                            |   4 +-
++ sql/table.h                                   |   2 +
++ tests/mysql_client_test.c                     | 159 ++++++++++++++++++
++ 31 files changed, 682 insertions(+), 159 deletions(-)
++
++diff --git a/mysql-test/main/insert.result b/mysql-test/main/insert.result
++index 586dbbff..49ebd740 100644
++--- a/mysql-test/main/insert.result
+++++ b/mysql-test/main/insert.result
++@@ -806,5 +806,75 @@ a
++ 8
++ drop table t1;
++ #
++-# End of 10.5 tests
+++# MDEV-32086 Server crash when inserting from derived table containing insert target table
+++# (part 2)
++ #
+++create table t1 (pk int, id int);
+++insert into t1 values (2,2), (3,3), (4,4);
+++select * from t1;
+++pk	id
+++2	2
+++3	3
+++4	4
+++select 101+count(*)
+++from
+++(
+++select dt2.id
+++from (select id from t1) dt2, t1 t where t.id=dt2.id
+++) dt
+++where dt.id<1000;
+++101+count(*)
+++104
+++prepare s from '
+++insert into t1 values(
+++  (select 101+count(*)
+++   from
+++   (
+++      select dt2.id
+++      from (select id from t1) dt2, t1 t where t.id=dt2.id
+++   ) dt
+++   where dt.id<1000
+++  ), 123
+++)
+++';
+++execute s;
+++select * from t1;
+++pk	id
+++2	2
+++3	3
+++4	4
+++104	123
+++select 101+count(*)
+++from
+++(
+++select dt2.id
+++from (select id from t1) dt2, t1 t where t.id=dt2.id
+++) dt
+++where dt.id<1000;
+++101+count(*)
+++105
+++execute s;
+++select * from t1;
+++pk	id
+++2	2
+++3	3
+++4	4
+++104	123
+++105	123
+++drop table t1;
+++#
+++# Try this: INSERT INTO t1 VALUES ... reference to t1
+++#           RETURNING (subquery not touching t1)
+++create table t1 (a int, b int);
+++create table t2 (a int, b int);
+++# This is accepted:
+++insert into t1 (a) values 
+++(3),
+++((select max(a) from t1)) 
+++returning 
+++a, b, (select max(a) from t2);
+++a	b	(select max(a) from t2)
+++3	NULL	NULL
+++NULL	NULL	NULL
+++drop table t1,t2;
+++# End of 10.5 tests
++diff --git a/mysql-test/main/insert.test b/mysql-test/main/insert.test
++index e5cb2bac..c1661c27 100644
++--- a/mysql-test/main/insert.test
+++++ b/mysql-test/main/insert.test
++@@ -667,5 +667,59 @@ select * from t1;
++ drop table t1;
++ 
++ --echo #
++---echo # End of 10.5 tests
+++--echo # MDEV-32086 Server crash when inserting from derived table containing insert target table
+++--echo # (part 2)
++ --echo #
+++
+++create table t1 (pk int, id int);
+++insert into t1 values (2,2), (3,3), (4,4);
+++select * from t1;
+++select 101+count(*)
+++   from
+++   (
+++      select dt2.id
+++      from (select id from t1) dt2, t1 t where t.id=dt2.id
+++   ) dt
+++   where dt.id<1000;
+++prepare s from '
+++insert into t1 values(
+++  (select 101+count(*)
+++   from
+++   (
+++      select dt2.id
+++      from (select id from t1) dt2, t1 t where t.id=dt2.id
+++   ) dt
+++   where dt.id<1000
+++  ), 123
+++)
+++';
+++execute s;
+++select * from t1;
+++select 101+count(*)
+++   from
+++   (
+++      select dt2.id
+++      from (select id from t1) dt2, t1 t where t.id=dt2.id
+++   ) dt
+++   where dt.id<1000;
+++execute s;
+++select * from t1;
+++
+++drop table t1;
+++
+++--echo #
+++--echo # Try this: INSERT INTO t1 VALUES ... reference to t1
+++--echo #           RETURNING (subquery not touching t1)
+++create table t1 (a int, b int);
+++create table t2 (a int, b int);
+++
+++--echo # This is accepted:
+++insert into t1 (a) values 
+++  (3),
+++  ((select max(a) from t1)) 
+++returning 
+++  a, b, (select max(a) from t2);
+++
+++drop table t1,t2;
+++
+++--echo # End of 10.5 tests
++diff --git a/mysql-test/main/insert_returning.result b/mysql-test/main/insert_returning.result
++index 1976c1ca..d05c5704 100644
++--- a/mysql-test/main/insert_returning.result
+++++ b/mysql-test/main/insert_returning.result
++@@ -488,6 +488,8 @@ t1 WHERE id1=1)
++ 5	6
++ INSERT INTO t2(id2,val2) VALUES(5,'f') RETURNING (SELECT id2 FROM t2);
++ ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++INSERT INTO t2(id2,val2) VALUES(5,'f') RETURNING (SELECT 1 UNION SELECT id2 FROM t2);
+++ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ INSERT INTO t2 (id2, val2) VALUES (6,'f') RETURNING t1.*;
++ ERROR 42S02: Unknown table 'test.t1'
++ #
++diff --git a/mysql-test/main/insert_returning.test b/mysql-test/main/insert_returning.test
++index 837d61d2..c2ad613a 100644
++--- a/mysql-test/main/insert_returning.test
+++++ b/mysql-test/main/insert_returning.test
++@@ -199,6 +199,8 @@ INSERT INTO t2(id2,val2) VALUES(5,'e') RETURNING id2, (SELECT id1+id2 FROM
++ t1 WHERE id1=1);
++ --error ER_UPDATE_TABLE_USED
++ INSERT INTO t2(id2,val2) VALUES(5,'f') RETURNING (SELECT id2 FROM t2);
+++--error ER_UPDATE_TABLE_USED
+++INSERT INTO t2(id2,val2) VALUES(5,'f') RETURNING (SELECT 1 UNION SELECT id2 FROM t2);
++ --error ER_BAD_TABLE_ERROR
++ INSERT INTO t2 (id2, val2) VALUES (6,'f') RETURNING t1.*;
++ 
++diff --git a/mysql-test/main/lowercase_view.result b/mysql-test/main/lowercase_view.result
++index af53f678..845df4d6 100644
++--- a/mysql-test/main/lowercase_view.result
+++++ b/mysql-test/main/lowercase_view.result
++@@ -16,29 +16,17 @@ create view v1Aa as select * from t1aA;
++ create view v2aA as select * from v1aA;
++ create view v3Aa as select v2Aa.col1 from v2aA,t2Aa where v2Aa.col1 = t2aA.col1;
++ insert into v2Aa values ((select max(col1) from v1aA));
++-ERROR HY000: The definition of table 'v1aA' prevents operation INSERT on table 'v2Aa'
++ insert into t1aA values ((select max(col1) from v1Aa));
++-ERROR HY000: The definition of table 'v1Aa' prevents operation INSERT on table 't1aA'
++ insert into v2aA values ((select max(col1) from v1aA));
++-ERROR HY000: The definition of table 'v1aA' prevents operation INSERT on table 'v2aA'
++ insert into v2Aa values ((select max(col1) from t1Aa));
++-ERROR HY000: The definition of table 'v2Aa' prevents operation INSERT on table 'v2Aa'
++ insert into t1aA values ((select max(col1) from t1Aa));
++-ERROR HY000: Table 't1aA' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into v2aA values ((select max(col1) from t1aA));
++-ERROR HY000: The definition of table 'v2aA' prevents operation INSERT on table 'v2aA'
++ insert into v2Aa values ((select max(col1) from v2aA));
++-ERROR HY000: Table 'v2Aa' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into t1Aa values ((select max(col1) from v2Aa));
++-ERROR HY000: The definition of table 'v2Aa' prevents operation INSERT on table 't1Aa'
++ insert into v2aA values ((select max(col1) from v2Aa));
++-ERROR HY000: Table 'v2aA' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into v3Aa (col1) values ((select max(col1) from v1Aa));
++-ERROR HY000: The definition of table 'v1Aa' prevents operation INSERT on table 'v3Aa'
++ insert into v3aA (col1) values ((select max(col1) from t1aA));
++-ERROR HY000: The definition of table 'v3aA' prevents operation INSERT on table 'v3aA'
++ insert into v3Aa (col1) values ((select max(col1) from v2aA));
++-ERROR HY000: The definition of table 'v2aA' prevents operation INSERT on table 'v3Aa'
++ drop view v3aA,v2Aa,v1aA;
++ drop table t1Aa,t2Aa;
++ create table t1Aa (col1 int);
++diff --git a/mysql-test/main/lowercase_view.test b/mysql-test/main/lowercase_view.test
++index cdd0256d..52aae7b2 100644
++--- a/mysql-test/main/lowercase_view.test
+++++ b/mysql-test/main/lowercase_view.test
++@@ -23,29 +23,17 @@ create table t2aA (col1 int);
++ create view v1Aa as select * from t1aA;
++ create view v2aA as select * from v1aA;
++ create view v3Aa as select v2Aa.col1 from v2aA,t2Aa where v2Aa.col1 = t2aA.col1;
++--- error 1443
++ insert into v2Aa values ((select max(col1) from v1aA));
++--- error 1443
++ insert into t1aA values ((select max(col1) from v1Aa));
++--- error 1443
++ insert into v2aA values ((select max(col1) from v1aA));
++--- error 1443
++ insert into v2Aa values ((select max(col1) from t1Aa));
++--- error 1093
++ insert into t1aA values ((select max(col1) from t1Aa));
++--- error 1443
++ insert into v2aA values ((select max(col1) from t1aA));
++--- error 1093
++ insert into v2Aa values ((select max(col1) from v2aA));
++--- error 1443
++ insert into t1Aa values ((select max(col1) from v2Aa));
++--- error 1093
++ insert into v2aA values ((select max(col1) from v2Aa));
++--- error 1443
++ insert into v3Aa (col1) values ((select max(col1) from v1Aa));
++--- error 1443
++ insert into v3aA (col1) values ((select max(col1) from t1aA));
++--- error 1443
++ insert into v3Aa (col1) values ((select max(col1) from v2aA));
++ drop view v3aA,v2Aa,v1aA;
++ drop table t1Aa,t2Aa;
++diff --git a/mysql-test/main/merge.result b/mysql-test/main/merge.result
++index 1e671e25..d10f0b67 100644
++--- a/mysql-test/main/merge.result
+++++ b/mysql-test/main/merge.result
++@@ -3689,33 +3689,22 @@ insert into tmp (b) values (1);
++ insert into t1 (a) values (1);
++ insert into t3 (b) values (1);
++ insert into m1 (a) values ((select max(a) from m1));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from m2));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from t1));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from t2));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from t3, m1));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from t3, m2));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from t3, t1));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from t3, t2));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from tmp, m1));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from tmp, m2));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from tmp, t1));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from tmp, t2));
++-ERROR HY000: Table 'm1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into m1 (a) values ((select max(a) from v1));
++-ERROR HY000: The definition of table 'v1' prevents operation INSERT on table 'm1'
++ insert into m1 (a) values ((select max(a) from tmp, v1));
++-ERROR HY000: The definition of table 'v1' prevents operation INSERT on table 'm1'
+++select count(*) from m1;
+++count(*)
+++15
++ drop view v1;
++ drop temporary table tmp;
++ drop table t1, t2, t3, m1, m2;
++diff --git a/mysql-test/main/merge.test b/mysql-test/main/merge.test
++index 99cce370..9e76515c 100644
++--- a/mysql-test/main/merge.test
+++++ b/mysql-test/main/merge.test
++@@ -2706,37 +2706,24 @@ insert into tmp (b) values (1);
++ 
++ insert into t1 (a) values (1);
++ insert into t3 (b) values (1);
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from m1));
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from m2));
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from t1));
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from t2));
++ 
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from t3, m1));
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from t3, m2));
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from t3, t1));
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from t3, t2));
++ 
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from tmp, m1));
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from tmp, m2));
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from tmp, t1));
++---error ER_UPDATE_TABLE_USED
++ insert into m1 (a) values ((select max(a) from tmp, t2));
++- 
++---error ER_VIEW_PREVENT_UPDATE
+++
++ insert into m1 (a) values ((select max(a) from v1));
++---error ER_VIEW_PREVENT_UPDATE
++ insert into m1 (a) values ((select max(a) from tmp, v1));
+++select count(*) from m1;
++ 
++ 
++ drop view v1;
++diff --git a/mysql-test/main/subselect.result b/mysql-test/main/subselect.result
++index 4209e2bc..dcbc2023 100644
++--- a/mysql-test/main/subselect.result
+++++ b/mysql-test/main/subselect.result
++@@ -653,22 +653,24 @@ create table t3 (b int);
++ insert into t2 values (1);
++ insert into t3 values (1),(2);
++ INSERT INTO t1 (x) VALUES ((SELECT x FROM t1));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ INSERT INTO t1 (x) VALUES ((SELECT b FROM t3));
++ ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t1 (x) VALUES ((SELECT a FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ insert into t2 values (1);
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ INSERT INTO t1 (x) select (SELECT SUM(a)+1 FROM t2) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -676,6 +678,7 @@ x
++ INSERT INTO t1 (x) select (SELECT SUM(x)+2 FROM t1) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -685,6 +688,7 @@ x
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -701,7 +705,7 @@ insert into t3 values (1),(2);
++ select * from t1;
++ x	y
++ replace into t1 (x, y) VALUES ((SELECT x FROM t1), (SELECT a+1 FROM t2));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 23000: Column 'x' cannot be null
++ replace into t1 (x, y) VALUES ((SELECT a FROM t3), (SELECT a+1 FROM t2));
++ ERROR 21000: Subquery returns more than 1 row
++ replace into t1 (x, y) VALUES ((SELECT a FROM t2), (SELECT a+1 FROM t2));
++@@ -769,13 +773,21 @@ SELECT * FROM t2 WHERE id IN (SELECT 5 UNION SELECT 2);
++ id
++ 2
++ INSERT INTO t2 VALUES ((SELECT * FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t2 VALUES ((SELECT id FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
+++select * from t2;
+++id
+++1
+++2
+++INSERT INTO t2 VALUES ((SELECT count(*) FROM t2));
+++INSERT INTO t2 VALUES ((SELECT max(id) FROM t2));
++ SELECT * FROM t2;
++ id
++ 1
++ 2
+++2
+++2
++ CREATE TABLE t1 (id int(11) default NULL, KEY id (id)) ENGINE=MyISAM CHARSET=latin1;
++ INSERT INTO t1 values (1),(1);
++ UPDATE t2 SET id=(SELECT * FROM t1);
++diff --git a/mysql-test/main/subselect.test b/mysql-test/main/subselect.test
++index be22169a..f4394f08 100644
++--- a/mysql-test/main/subselect.test
+++++ b/mysql-test/main/subselect.test
++@@ -400,7 +400,6 @@ create table t2 (a int) ENGINE=MyISAM;
++ create table t3 (b int);
++ insert into t2 values (1);
++ insert into t3 values (1),(2);
++--- error ER_UPDATE_TABLE_USED
++ INSERT INTO t1 (x) VALUES ((SELECT x FROM t1));
++ -- error ER_SUBQUERY_NO_1_ROW
++ INSERT INTO t1 (x) VALUES ((SELECT b FROM t3));
++@@ -435,7 +434,7 @@ create table t3 (a int);
++ insert into t2 values (1);
++ insert into t3 values (1),(2);
++ select * from t1;
++--- error ER_UPDATE_TABLE_USED
+++-- error ER_BAD_NULL_ERROR
++ replace into t1 (x, y) VALUES ((SELECT x FROM t1), (SELECT a+1 FROM t2));
++ -- error ER_SUBQUERY_NO_1_ROW
++ replace into t1 (x, y) VALUES ((SELECT a FROM t3), (SELECT a+1 FROM t2));
++@@ -475,10 +474,13 @@ EXPLAIN EXTENDED SELECT * FROM t2 WHERE id IN (SELECT 1 UNION SELECT 3);
++ --disable_prepare_warnings
++ SELECT * FROM t2 WHERE id IN (SELECT 5 UNION SELECT 3);
++ SELECT * FROM t2 WHERE id IN (SELECT 5 UNION SELECT 2);
++--- error ER_UPDATE_TABLE_USED
+++-- error ER_SUBQUERY_NO_1_ROW
++ INSERT INTO t2 VALUES ((SELECT * FROM t2));
++--- error ER_UPDATE_TABLE_USED
+++-- error ER_SUBQUERY_NO_1_ROW
++ INSERT INTO t2 VALUES ((SELECT id FROM t2));
+++select * from t2;
+++INSERT INTO t2 VALUES ((SELECT count(*) FROM t2));
+++INSERT INTO t2 VALUES ((SELECT max(id) FROM t2));
++ SELECT * FROM t2;
++ CREATE TABLE t1 (id int(11) default NULL, KEY id (id)) ENGINE=MyISAM CHARSET=latin1;
++ INSERT INTO t1 values (1),(1);
++diff --git a/mysql-test/main/subselect_no_exists_to_in.result b/mysql-test/main/subselect_no_exists_to_in.result
++index e32e6007..5c9e493a 100644
++--- a/mysql-test/main/subselect_no_exists_to_in.result
+++++ b/mysql-test/main/subselect_no_exists_to_in.result
++@@ -657,22 +657,24 @@ create table t3 (b int);
++ insert into t2 values (1);
++ insert into t3 values (1),(2);
++ INSERT INTO t1 (x) VALUES ((SELECT x FROM t1));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ INSERT INTO t1 (x) VALUES ((SELECT b FROM t3));
++ ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t1 (x) VALUES ((SELECT a FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ insert into t2 values (1);
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ INSERT INTO t1 (x) select (SELECT SUM(a)+1 FROM t2) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -680,6 +682,7 @@ x
++ INSERT INTO t1 (x) select (SELECT SUM(x)+2 FROM t1) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -689,6 +692,7 @@ x
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -705,7 +709,7 @@ insert into t3 values (1),(2);
++ select * from t1;
++ x	y
++ replace into t1 (x, y) VALUES ((SELECT x FROM t1), (SELECT a+1 FROM t2));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 23000: Column 'x' cannot be null
++ replace into t1 (x, y) VALUES ((SELECT a FROM t3), (SELECT a+1 FROM t2));
++ ERROR 21000: Subquery returns more than 1 row
++ replace into t1 (x, y) VALUES ((SELECT a FROM t2), (SELECT a+1 FROM t2));
++@@ -773,9 +777,17 @@ SELECT * FROM t2 WHERE id IN (SELECT 5 UNION SELECT 2);
++ id
++ 2
++ INSERT INTO t2 VALUES ((SELECT * FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t2 VALUES ((SELECT id FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
+++select * from t2;
+++id
+++1
+++2
+++2
+++2
+++INSERT INTO t2 VALUES ((SELECT count(*) FROM t2));
+++INSERT INTO t2 VALUES ((SELECT max(id) FROM t2));
++ SELECT * FROM t2;
++ id
++ 1
++diff --git a/mysql-test/main/subselect_no_mat.result b/mysql-test/main/subselect_no_mat.result
++index 07755a51..8c24edcc 100644
++--- a/mysql-test/main/subselect_no_mat.result
+++++ b/mysql-test/main/subselect_no_mat.result
++@@ -660,22 +660,24 @@ create table t3 (b int);
++ insert into t2 values (1);
++ insert into t3 values (1),(2);
++ INSERT INTO t1 (x) VALUES ((SELECT x FROM t1));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ INSERT INTO t1 (x) VALUES ((SELECT b FROM t3));
++ ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t1 (x) VALUES ((SELECT a FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ insert into t2 values (1);
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ INSERT INTO t1 (x) select (SELECT SUM(a)+1 FROM t2) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -683,6 +685,7 @@ x
++ INSERT INTO t1 (x) select (SELECT SUM(x)+2 FROM t1) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -692,6 +695,7 @@ x
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -708,7 +712,7 @@ insert into t3 values (1),(2);
++ select * from t1;
++ x	y
++ replace into t1 (x, y) VALUES ((SELECT x FROM t1), (SELECT a+1 FROM t2));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 23000: Column 'x' cannot be null
++ replace into t1 (x, y) VALUES ((SELECT a FROM t3), (SELECT a+1 FROM t2));
++ ERROR 21000: Subquery returns more than 1 row
++ replace into t1 (x, y) VALUES ((SELECT a FROM t2), (SELECT a+1 FROM t2));
++@@ -776,13 +780,21 @@ SELECT * FROM t2 WHERE id IN (SELECT 5 UNION SELECT 2);
++ id
++ 2
++ INSERT INTO t2 VALUES ((SELECT * FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t2 VALUES ((SELECT id FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
+++select * from t2;
+++id
+++1
+++2
+++INSERT INTO t2 VALUES ((SELECT count(*) FROM t2));
+++INSERT INTO t2 VALUES ((SELECT max(id) FROM t2));
++ SELECT * FROM t2;
++ id
++ 1
++ 2
+++2
+++2
++ CREATE TABLE t1 (id int(11) default NULL, KEY id (id)) ENGINE=MyISAM CHARSET=latin1;
++ INSERT INTO t1 values (1),(1);
++ UPDATE t2 SET id=(SELECT * FROM t1);
++diff --git a/mysql-test/main/subselect_no_opts.result b/mysql-test/main/subselect_no_opts.result
++index 15688fc1..897ec5be 100644
++--- a/mysql-test/main/subselect_no_opts.result
+++++ b/mysql-test/main/subselect_no_opts.result
++@@ -656,22 +656,24 @@ create table t3 (b int);
++ insert into t2 values (1);
++ insert into t3 values (1),(2);
++ INSERT INTO t1 (x) VALUES ((SELECT x FROM t1));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ INSERT INTO t1 (x) VALUES ((SELECT b FROM t3));
++ ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t1 (x) VALUES ((SELECT a FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ insert into t2 values (1);
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ INSERT INTO t1 (x) select (SELECT SUM(a)+1 FROM t2) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -679,6 +681,7 @@ x
++ INSERT INTO t1 (x) select (SELECT SUM(x)+2 FROM t1) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -688,6 +691,7 @@ x
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -704,7 +708,7 @@ insert into t3 values (1),(2);
++ select * from t1;
++ x	y
++ replace into t1 (x, y) VALUES ((SELECT x FROM t1), (SELECT a+1 FROM t2));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 23000: Column 'x' cannot be null
++ replace into t1 (x, y) VALUES ((SELECT a FROM t3), (SELECT a+1 FROM t2));
++ ERROR 21000: Subquery returns more than 1 row
++ replace into t1 (x, y) VALUES ((SELECT a FROM t2), (SELECT a+1 FROM t2));
++@@ -772,13 +776,21 @@ SELECT * FROM t2 WHERE id IN (SELECT 5 UNION SELECT 2);
++ id
++ 2
++ INSERT INTO t2 VALUES ((SELECT * FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t2 VALUES ((SELECT id FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
+++select * from t2;
+++id
+++1
+++2
+++INSERT INTO t2 VALUES ((SELECT count(*) FROM t2));
+++INSERT INTO t2 VALUES ((SELECT max(id) FROM t2));
++ SELECT * FROM t2;
++ id
++ 1
++ 2
+++2
+++2
++ CREATE TABLE t1 (id int(11) default NULL, KEY id (id)) ENGINE=MyISAM CHARSET=latin1;
++ INSERT INTO t1 values (1),(1);
++ UPDATE t2 SET id=(SELECT * FROM t1);
++diff --git a/mysql-test/main/subselect_no_scache.result b/mysql-test/main/subselect_no_scache.result
++index e3bdddbf..df43d4e5 100644
++--- a/mysql-test/main/subselect_no_scache.result
+++++ b/mysql-test/main/subselect_no_scache.result
++@@ -659,22 +659,24 @@ create table t3 (b int);
++ insert into t2 values (1);
++ insert into t3 values (1),(2);
++ INSERT INTO t1 (x) VALUES ((SELECT x FROM t1));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ INSERT INTO t1 (x) VALUES ((SELECT b FROM t3));
++ ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t1 (x) VALUES ((SELECT a FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ insert into t2 values (1);
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ INSERT INTO t1 (x) select (SELECT SUM(a)+1 FROM t2) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -682,6 +684,7 @@ x
++ INSERT INTO t1 (x) select (SELECT SUM(x)+2 FROM t1) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -691,6 +694,7 @@ x
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -707,7 +711,7 @@ insert into t3 values (1),(2);
++ select * from t1;
++ x	y
++ replace into t1 (x, y) VALUES ((SELECT x FROM t1), (SELECT a+1 FROM t2));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 23000: Column 'x' cannot be null
++ replace into t1 (x, y) VALUES ((SELECT a FROM t3), (SELECT a+1 FROM t2));
++ ERROR 21000: Subquery returns more than 1 row
++ replace into t1 (x, y) VALUES ((SELECT a FROM t2), (SELECT a+1 FROM t2));
++@@ -775,13 +779,21 @@ SELECT * FROM t2 WHERE id IN (SELECT 5 UNION SELECT 2);
++ id
++ 2
++ INSERT INTO t2 VALUES ((SELECT * FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t2 VALUES ((SELECT id FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
+++select * from t2;
+++id
+++1
+++2
+++INSERT INTO t2 VALUES ((SELECT count(*) FROM t2));
+++INSERT INTO t2 VALUES ((SELECT max(id) FROM t2));
++ SELECT * FROM t2;
++ id
++ 1
++ 2
+++2
+++2
++ CREATE TABLE t1 (id int(11) default NULL, KEY id (id)) ENGINE=MyISAM CHARSET=latin1;
++ INSERT INTO t1 values (1),(1);
++ UPDATE t2 SET id=(SELECT * FROM t1);
++diff --git a/mysql-test/main/subselect_no_semijoin.result b/mysql-test/main/subselect_no_semijoin.result
++index a06a4aef..b43cf744 100644
++--- a/mysql-test/main/subselect_no_semijoin.result
+++++ b/mysql-test/main/subselect_no_semijoin.result
++@@ -656,22 +656,24 @@ create table t3 (b int);
++ insert into t2 values (1);
++ insert into t3 values (1),(2);
++ INSERT INTO t1 (x) VALUES ((SELECT x FROM t1));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ INSERT INTO t1 (x) VALUES ((SELECT b FROM t3));
++ ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t1 (x) VALUES ((SELECT a FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ insert into t2 values (1);
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ INSERT INTO t1 (x) select (SELECT SUM(a)+1 FROM t2) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -679,6 +681,7 @@ x
++ INSERT INTO t1 (x) select (SELECT SUM(x)+2 FROM t1) FROM t2;
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -688,6 +691,7 @@ x
++ INSERT DELAYED INTO t1 (x) VALUES ((SELECT SUM(a) FROM t2));
++ select * from t1;
++ x
+++NULL
++ 1
++ 2
++ 3
++@@ -704,7 +708,7 @@ insert into t3 values (1),(2);
++ select * from t1;
++ x	y
++ replace into t1 (x, y) VALUES ((SELECT x FROM t1), (SELECT a+1 FROM t2));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 23000: Column 'x' cannot be null
++ replace into t1 (x, y) VALUES ((SELECT a FROM t3), (SELECT a+1 FROM t2));
++ ERROR 21000: Subquery returns more than 1 row
++ replace into t1 (x, y) VALUES ((SELECT a FROM t2), (SELECT a+1 FROM t2));
++@@ -772,13 +776,21 @@ SELECT * FROM t2 WHERE id IN (SELECT 5 UNION SELECT 2);
++ id
++ 2
++ INSERT INTO t2 VALUES ((SELECT * FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
++ INSERT INTO t2 VALUES ((SELECT id FROM t2));
++-ERROR HY000: Table 't2' is specified twice, both as a target for 'INSERT' and as a separate source for data
+++ERROR 21000: Subquery returns more than 1 row
+++select * from t2;
+++id
+++1
+++2
+++INSERT INTO t2 VALUES ((SELECT count(*) FROM t2));
+++INSERT INTO t2 VALUES ((SELECT max(id) FROM t2));
++ SELECT * FROM t2;
++ id
++ 1
++ 2
+++2
+++2
++ CREATE TABLE t1 (id int(11) default NULL, KEY id (id)) ENGINE=MyISAM CHARSET=latin1;
++ INSERT INTO t1 values (1),(1);
++ UPDATE t2 SET id=(SELECT * FROM t1);
++diff --git a/mysql-test/main/view.result b/mysql-test/main/view.result
++index 69e850cd..41ec8f43 100644
++--- a/mysql-test/main/view.result
+++++ b/mysql-test/main/view.result
++@@ -944,31 +944,19 @@ create view v1 as select * from t1;
++ create view v2 as select * from v1;
++ create view v3 as select v2.col1 from v2,t2 where v2.col1 = t2.col1;
++ insert into v2 values ((select max(col1) from v1));
++-ERROR HY000: The definition of table 'v1' prevents operation INSERT on table 'v2'
++ insert into t1 values ((select max(col1) from v1));
++-ERROR HY000: The definition of table 'v1' prevents operation INSERT on table 't1'
++ insert into v2 values ((select max(col1) from v1));
++-ERROR HY000: The definition of table 'v1' prevents operation INSERT on table 'v2'
++ insert into v2 values ((select max(col1) from t1));
++-ERROR HY000: The definition of table 'v2' prevents operation INSERT on table 'v2'
++ insert into t1 values ((select max(col1) from t1));
++-ERROR HY000: Table 't1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into v2 values ((select max(col1) from t1));
++-ERROR HY000: The definition of table 'v2' prevents operation INSERT on table 'v2'
++ insert into v2 values ((select max(col1) from v2));
++-ERROR HY000: Table 'v2' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into t1 values ((select max(col1) from v2));
++-ERROR HY000: The definition of table 'v2' prevents operation INSERT on table 't1'
++ insert into v2 values ((select max(col1) from v2));
++-ERROR HY000: Table 'v2' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into v3 (col1) values ((select max(col1) from v1));
++-ERROR HY000: The definition of table 'v1' prevents operation INSERT on table 'v3'
++ insert into v3 (col1) values ((select max(col1) from t1));
++-ERROR HY000: The definition of table 'v3' prevents operation INSERT on table 'v3'
++ insert into v3 (col1) values ((select max(col1) from v2));
++-ERROR HY000: The definition of table 'v2' prevents operation INSERT on table 'v3'
++-insert into v3 (col1) values ((select CONVERT_TZ('20050101000000','UTC','MET') from v2));
++-ERROR HY000: The definition of table 'v2' prevents operation INSERT on table 'v3'
+++insert into v3 (col1) values ((select CONVERT_TZ('20050101000000','UTC','MET') from v2 LIMIT 1));
+++ERROR 22003: Out of range value for column 'col1' at row 2
++ insert into v3 (col1) values ((select CONVERT_TZ('20050101000000','UTC','MET') from t2));
++ insert into t3 values ((select CONVERT_TZ('20050101000000','UTC','MET') from t2));
++ ERROR 23000: Column 'col1' cannot be null
++@@ -978,6 +966,18 @@ insert into t1 (col1) values ((select max(col1) from v4));
++ select * from t1;
++ col1
++ NULL
+++NULL
+++NULL
+++NULL
+++NULL
+++NULL
+++NULL
+++NULL
+++NULL
+++NULL
+++NULL
+++NULL
+++NULL
++ 1
++ 2
++ 3
++@@ -1332,9 +1332,26 @@ create view v3 as select * from t1 where 20 < (select (s1) from v2);
++ insert into v3 values (30);
++ ERROR HY000: The target table v3 of the INSERT is not insertable-into
++ create view v4 as select * from v2 where 20 < (select (s1) from t1);
+++select * from t1;
+++s1
++ insert into v4 values (30);
++-ERROR HY000: The target table v4 of the INSERT is not insertable-into
++-drop view v4, v3, v2, v1;
+++select * from t1;
+++s1
+++30
+++create view v5 as select * from v2 where s1 < (select min(s1) from t1) WITH CHECK OPTION;
+++# can't insert only less then minimum
+++insert into v5 values (40);
+++ERROR 44000: CHECK OPTION failed `test`.`v5`
+++# allow insert the new minimum
+++insert into v5 values (10);
+++# always emply view (can't be something less than minimum)
+++select * from v5;
+++s1
+++select * from t1;
+++s1
+++30
+++10
+++drop view v5, v4, v3, v2, v1;
++ drop table t1;
++ create table t1 (a int);
++ create view v1 as select * from t1;
++diff --git a/mysql-test/main/view.test b/mysql-test/main/view.test
++index f32b148b..4e1dc911 100644
++--- a/mysql-test/main/view.test
+++++ b/mysql-test/main/view.test
++@@ -865,33 +865,21 @@ create table t3 (col1 datetime not null);
++ create view v1 as select * from t1;
++ create view v2 as select * from v1;
++ create view v3 as select v2.col1 from v2,t2 where v2.col1 = t2.col1;
++--- error ER_VIEW_PREVENT_UPDATE
++ insert into v2 values ((select max(col1) from v1));
++--- error ER_VIEW_PREVENT_UPDATE
++ insert into t1 values ((select max(col1) from v1));
++--- error ER_VIEW_PREVENT_UPDATE
++ insert into v2 values ((select max(col1) from v1));
++--- error ER_VIEW_PREVENT_UPDATE
++ insert into v2 values ((select max(col1) from t1));
++--- error ER_UPDATE_TABLE_USED
++ insert into t1 values ((select max(col1) from t1));
++--- error ER_VIEW_PREVENT_UPDATE
++ insert into v2 values ((select max(col1) from t1));
++--- error ER_UPDATE_TABLE_USED
++ insert into v2 values ((select max(col1) from v2));
++--- error ER_VIEW_PREVENT_UPDATE
++ insert into t1 values ((select max(col1) from v2));
++--- error ER_UPDATE_TABLE_USED
++ insert into v2 values ((select max(col1) from v2));
++--- error ER_VIEW_PREVENT_UPDATE
++ insert into v3 (col1) values ((select max(col1) from v1));
++--- error ER_VIEW_PREVENT_UPDATE
++ insert into v3 (col1) values ((select max(col1) from t1));
++--- error ER_VIEW_PREVENT_UPDATE
++ insert into v3 (col1) values ((select max(col1) from v2));
++ # check with TZ tables in list
++--- error ER_VIEW_PREVENT_UPDATE
++-insert into v3 (col1) values ((select CONVERT_TZ('20050101000000','UTC','MET') from v2));
+++--error ER_WARN_DATA_OUT_OF_RANGE
+++insert into v3 (col1) values ((select CONVERT_TZ('20050101000000','UTC','MET') from v2 LIMIT 1));
++ insert into v3 (col1) values ((select CONVERT_TZ('20050101000000','UTC','MET') from t2));
++ -- error ER_BAD_NULL_ERROR
++ insert into t3 values ((select CONVERT_TZ('20050101000000','UTC','MET') from t2));
++@@ -1209,9 +1197,19 @@ create view v3 as select * from t1 where 20 < (select (s1) from v2);
++ -- error ER_NON_INSERTABLE_TABLE
++ insert into v3 values (30);
++ create view v4 as select * from v2 where 20 < (select (s1) from t1);
++--- error ER_NON_INSERTABLE_TABLE
+++select * from t1;
++ insert into v4 values (30);
++-drop view v4, v3, v2, v1;
+++select * from t1;
+++create view v5 as select * from v2 where s1 < (select min(s1) from t1) WITH CHECK OPTION;
+++--echo # can't insert only less then minimum
+++--error ER_VIEW_CHECK_FAILED
+++insert into v5 values (40);
+++--echo # allow insert the new minimum
+++insert into v5 values (10);
+++--echo # always emply view (can't be something less than minimum)
+++select * from v5;
+++select * from t1;
+++drop view v5, v4, v3, v2, v1;
++ drop table t1;
++ 
++ #
++diff --git a/mysql-test/suite/sql_sequence/other.result b/mysql-test/suite/sql_sequence/other.result
++index d237be63..a2a93d11 100644
++--- a/mysql-test/suite/sql_sequence/other.result
+++++ b/mysql-test/suite/sql_sequence/other.result
++@@ -48,7 +48,6 @@ create sequence s2;
++ insert into s1 (next_not_cached_value, minimum_value) values (100,1000);
++ ERROR HY000: Field 'maximum_value' doesn't have a default value
++ insert into s1 values (next value for s1, 1,9223372036854775806,1,1,1000,0,0);
++-ERROR HY000: Table 's1' is specified twice, both as a target for 'INSERT' and as a separate source for data
++ insert into s1 values(1000,9223372036854775806,1,1,1,1000,0,0);
++ ERROR HY000: Sequence 'test.s1' has out of range value for options
++ insert into s1 values(0,9223372036854775806,1,1,1,1000,0,0);
++diff --git a/mysql-test/suite/sql_sequence/other.test b/mysql-test/suite/sql_sequence/other.test
++index 639cc5c3..69d51b3a 100644
++--- a/mysql-test/suite/sql_sequence/other.test
+++++ b/mysql-test/suite/sql_sequence/other.test
++@@ -36,7 +36,6 @@ create sequence s1;
++ create sequence s2;
++ --error ER_NO_DEFAULT_FOR_FIELD
++ insert into s1 (next_not_cached_value, minimum_value) values (100,1000);
++---error ER_UPDATE_TABLE_USED
++ insert into s1 values (next value for s1, 1,9223372036854775806,1,1,1000,0,0);
++ --error ER_SEQUENCE_INVALID_DATA
++ insert into s1 values(1000,9223372036854775806,1,1,1,1000,0,0);
++diff --git a/sql/item.h b/sql/item.h
++index 6c3b73df..cec075b4 100644
++--- a/sql/item.h
+++++ b/sql/item.h
++@@ -753,6 +753,17 @@ class Item_const
++   virtual const String *const_ptr_string() const { return NULL; }
++ };
++ 
+++struct subselect_table_finder_param
+++{
+++  THD *thd;
+++  /*
+++    We're searching for different TABLE_LIST objects referring to the same
+++    table as this one
+++  */
+++  const TABLE_LIST *find;
+++  /* NUL - not found, ERROR_TABLE - search error, or the found table reference */
+++  TABLE_LIST *dup;
+++};
++ 
++ /****************************************************************************/
++ 
++@@ -2216,6 +2227,7 @@ class Item :public Value_source,
++     set_extraction_flag(*(int16*)arg);
++     return 0;
++   }
+++  virtual bool subselect_table_finder_processor(void *arg) { return 0; };
++ 
++   /**
++     Check db/table_name if they defined in item and match arg values
++diff --git a/sql/item_subselect.cc b/sql/item_subselect.cc
++index f509e00b..4d579f09 100644
++--- a/sql/item_subselect.cc
+++++ b/sql/item_subselect.cc
++@@ -7001,3 +7001,27 @@ void Item_subselect::init_expr_cache_tracker(THD *thd)
++   DBUG_ASSERT(expr_cache->type() == Item::EXPR_CACHE_ITEM);
++   node->cache_tracker= ((Item_cache_wrapper *)expr_cache)->init_tracker(qw->mem_root);
++ }
+++
+++
+++/*
+++  Check if somewhere inside this subselect we read the table. This means a
+++  full read "(SELECT ... FROM tbl)", outside reference to tbl.column does not
+++  count
+++*/
+++
+++bool
+++Item_subselect::subselect_table_finder_processor(void *arg)
+++{
+++  subselect_table_finder_param *param= (subselect_table_finder_param *)arg;
+++  for (SELECT_LEX *sl= unit->first_select(); sl; sl= sl->next_select())
+++  {
+++    TABLE_LIST *dup;
+++    if ((dup= sl->find_table(param->thd, &param->find->db,
+++                             &param->find->table_name)))
+++    {
+++      param->dup= dup;
+++      return TRUE;
+++    }
+++  }
+++  return FALSE;
+++};
++diff --git a/sql/item_subselect.h b/sql/item_subselect.h
++index fdd0333a..b03ad835 100644
++--- a/sql/item_subselect.h
+++++ b/sql/item_subselect.h
++@@ -270,6 +270,7 @@ class Item_subselect :public Item_result_field,
++   {
++     return TRUE;
++   }
+++  bool subselect_table_finder_processor(void *arg) override;
++ 
++   void register_as_with_rec_ref(With_element *with_elem);
++   void init_expr_cache_tracker(THD *thd);
++diff --git a/sql/sql_base.cc b/sql/sql_base.cc
++index 15a9882b..6374d0be 100644
++--- a/sql/sql_base.cc
+++++ b/sql/sql_base.cc
++@@ -19,6 +19,7 @@
++ 
++ #include "mariadb.h"
++ #include "sql_base.h"                           // setup_table_map
+++#include "sql_list.h"
++ #include "sql_priv.h"
++ #include "unireg.h"
++ #include "debug_sync.h"
++@@ -1114,7 +1115,6 @@ TABLE_LIST* find_dup_table(THD *thd, TABLE_LIST *table, TABLE_LIST *table_list,
++   t_name= &table->table_name;
++   t_alias= &table->alias;
++ 
++-retry:
++   DBUG_PRINT("info", ("real table: %s.%s", d_name->str, t_name->str));
++   for (TABLE_LIST *tl= table_list; tl ; tl= tl->next_global, res= 0)
++   {
++@@ -1176,37 +1176,52 @@ TABLE_LIST* find_dup_table(THD *thd, TABLE_LIST *table, TABLE_LIST *table_list,
++     DBUG_PRINT("info",
++                ("found same copy of table or table which we should skip"));
++   }
++-  /*
++-     If we've found a duplicate in a derived table, try to work around that.
++-
++-     For INSERT...SELECT, do not do any workarounds, return the duplicate. The
++-     caller will enable buffering to handle this.
++-  */
++-  if (res && res->belong_to_derived &&
++-      !(check_flag & CHECK_DUP_FOR_INSERT_SELECT))
++-  {
++-    /*
++-      We come here for queries like this:
+++  DBUG_RETURN(res);
+++}
++ 
++-      INSERT INTO t1 VALUES ((SELECT tmp.a FROM (select * FROM t1)));
++-      DELETE FROM t1 WHERE ( ... (SELECT ... FROM t1) ) ;
++ 
++-      Try to fix by materializing the derived table
++-    */
++-    TABLE_LIST *derived=  res->belong_to_derived;
++-    if (derived->is_merged_derived() && !derived->derived->is_excluded())
+++TABLE_LIST* unique_table_in_select_list(THD *thd, TABLE_LIST *table, SELECT_LEX *sel)
+++{
+++  subselect_table_finder_param param= {thd, table, NULL};
+++  List_iterator_fast<Item> it(sel->item_list);
+++  Item *item;
+++  while ((item= it++))
+++  {
+++    if (item->walk(&Item::subselect_table_finder_processor, FALSE, &param))
++     {
++-      DBUG_PRINT("info",
++-                 ("convert merged to materialization to resolve the conflict"));
++-      derived->change_refs_to_fields();
++-      derived->set_materialized_derived();
++-      goto retry;
+++      if (param.dup == NULL)
+++        return ERROR_TABLE;
+++      return param.dup;
++     }
+++    DBUG_ASSERT(param.dup == NULL);
++   }
++-  DBUG_RETURN(res);
+++  return NULL;
++ }
++ 
++ 
+++typedef TABLE_LIST* (*find_table_callback)(THD *thd, TABLE_LIST *table,
+++                                           TABLE_LIST *table_list,
+++                                           uint check_flag, SELECT_LEX *sel);
+++
+++static
+++TABLE_LIST*
+++find_table(THD *thd, TABLE_LIST *table, TABLE_LIST *table_list,
+++           uint check_flag, SELECT_LEX *sel, find_table_callback callback );
+++
+++TABLE_LIST* unique_table_callback(THD *thd, TABLE_LIST *table,
+++                                  TABLE_LIST *table_list,
+++                                  uint check_flag, SELECT_LEX *sel)
+++{
+++  return find_dup_table(thd, table, table_list, check_flag);
+++}
+++
+++
+++TABLE_LIST* unique_in_sel_table_callback(THD *thd, TABLE_LIST *table,
+++                                         TABLE_LIST *table_list,
+++                                         uint check_flag, SELECT_LEX *sel)
+++{
+++  return unique_table_in_select_list(thd, table, sel);
+++}
++ /**
++   Test that the subject table of INSERT/UPDATE/DELETE/CREATE
++   or (in case of MyISAMMRG) one of its children are not used later
++@@ -1225,6 +1240,25 @@ TABLE_LIST* find_dup_table(THD *thd, TABLE_LIST *table, TABLE_LIST *table_list,
++ TABLE_LIST*
++ unique_table(THD *thd, TABLE_LIST *table, TABLE_LIST *table_list,
++              uint check_flag)
+++{
+++  return find_table(thd, table, table_list, check_flag, NULL,
+++                    &unique_table_callback);
+++}
+++
+++
+++TABLE_LIST*
+++unique_table_in_insert_returning_subselect(THD *thd, TABLE_LIST *table, SELECT_LEX *sel)
+++{
+++  return find_table(thd, table, NULL, 0, sel,
+++                    &unique_in_sel_table_callback);
+++
+++}
+++
+++
+++static
+++TABLE_LIST*
+++find_table(THD *thd, TABLE_LIST *table, TABLE_LIST *table_list,
+++           uint check_flag, SELECT_LEX *sel, find_table_callback callback )
++ {
++   TABLE_LIST *dup;
++ 
++@@ -1256,12 +1290,12 @@ unique_table(THD *thd, TABLE_LIST *table, TABLE_LIST *table_list,
++       if (!tmp_parent)
++         break;
++ 
++-      if ((dup= find_dup_table(thd, child, child->next_global, check_flag)))
+++      if ((dup= (*callback)(thd, child, child->next_global, check_flag, sel)))
++         break;
++     }
++   }
++   else
++-    dup= find_dup_table(thd, table, table_list, check_flag);
+++    dup= (*callback)(thd, table, table_list, check_flag, sel);
++   return dup;
++ }
++ 
++diff --git a/sql/sql_base.h b/sql/sql_base.h
++index da9b1575..6de4d2b8 100644
++--- a/sql/sql_base.h
+++++ b/sql/sql_base.h
++@@ -72,7 +72,6 @@ enum find_item_error_report_type {REPORT_ALL_ERRORS, REPORT_EXCEPT_NOT_FOUND,
++ #define CHECK_DUP_ALLOW_DIFFERENT_ALIAS 1
++ #define CHECK_DUP_FOR_CREATE 2
++ #define CHECK_DUP_SKIP_TEMP_TABLE 4
++-#define CHECK_DUP_FOR_INSERT_SELECT 8
++ 
++ uint get_table_def_key(const TABLE_LIST *table_list, const char **key);
++ TABLE *open_ltable(THD *thd, TABLE_LIST *table_list, thr_lock_type update,
++@@ -291,6 +290,8 @@ bool open_and_lock_internal_tables(TABLE *table, bool lock);
++ bool lock_tables(THD *thd, TABLE_LIST *tables, uint counter, uint flags);
++ int decide_logging_format(THD *thd, TABLE_LIST *tables);
++ void close_thread_table(THD *thd, TABLE **table_ptr);
+++TABLE_LIST*
+++unique_table_in_insert_returning_subselect(THD *thd, TABLE_LIST *table, SELECT_LEX *sel);
++ TABLE_LIST *unique_table(THD *thd, TABLE_LIST *table, TABLE_LIST *table_list,
++                          uint check_flag);
++ bool is_equal(const LEX_CSTRING *a, const LEX_CSTRING *b);
++diff --git a/sql/sql_insert.cc b/sql/sql_insert.cc
++index d9813660..91bd6e93 100644
++--- a/sql/sql_insert.cc
+++++ b/sql/sql_insert.cc
++@@ -57,6 +57,7 @@
++ */
++ 
++ #include "mariadb.h"                 /* NO_EMBEDDED_ACCESS_CHECKS */
+++#include "sql_list.h"
++ #include "sql_priv.h"
++ #include "sql_insert.h"
++ #include "sql_update.h"                         // compare_record
++@@ -712,6 +713,8 @@ bool mysql_insert(THD *thd, TABLE_LIST *table_list,
++   Name_resolution_context_state ctx_state;
++   SELECT_LEX *returning= thd->lex->has_returning() ? thd->lex->returning() : 0;
++   unsigned char *readbuff= NULL;
+++  List<List_item> insert_values_cache;
+++  bool cache_insert_values= FALSE;
++ 
++ #ifndef EMBEDDED_LIBRARY
++   char *query= thd->query();
++@@ -769,7 +772,7 @@ bool mysql_insert(THD *thd, TABLE_LIST *table_list,
++ 
++   if ((res= mysql_prepare_insert(thd, table_list, fields, values,
++                                  update_fields, update_values, duplic, ignore,
++-                                 &unused_conds, FALSE)))
+++                                 &unused_conds, FALSE, &cache_insert_values)))
++   {
++     retval= thd->is_error();
++     if (res < 0)
++@@ -1019,8 +1022,41 @@ bool mysql_insert(THD *thd, TABLE_LIST *table_list,
++   if (returning)
++     fix_rownum_pointers(thd, thd->lex->returning(), &info.accepted_rows);
++ 
+++  if (cache_insert_values)
+++  {
+++    insert_values_cache.empty();
+++    while ((values= its++))
+++    {
+++      List<Item> *caches= new (thd->mem_root) List_item;
+++      List_iterator_fast<Item> iv(*values);
+++      Item *item;
+++      if (caches == 0)
+++      {
+++        error= 1;
+++        goto values_loop_end;
+++      }
+++      caches->empty();
+++      while((item= iv++))
+++      {
+++        Item_cache *cache= item->get_cache(thd);
+++        if (!cache)
+++        {
+++          error= 1;
+++          goto values_loop_end;
+++        }
+++        cache->setup(thd, item);
+++        caches->push_back(cache);
+++      }
+++      insert_values_cache.push_back(caches);
+++    }
+++    its.rewind();
+++  }
+++
++   do
++   {
+++    List_iterator_fast<List_item> itc(insert_values_cache);
+++    List_iterator_fast<List_item> *itr;
+++
++     DBUG_PRINT("info", ("iteration %llu", iteration));
++     if (iteration && bulk_parameters_set(thd))
++     {
++@@ -1028,7 +1064,24 @@ bool mysql_insert(THD *thd, TABLE_LIST *table_list,
++       goto values_loop_end;
++     }
++ 
++-    while ((values= its++))
+++    if (cache_insert_values)
+++    {
+++      List_item *caches;
+++      while ((caches= itc++))
+++      {
+++        List_iterator_fast<Item> ic(*caches);
+++        Item_cache *cache;
+++        while((cache= (Item_cache*) ic++))
+++        {
+++          cache->cache_value();
+++        }
+++      }
+++      itc.rewind();
+++      itr= &itc;
+++    }
+++    else
+++      itr= &its;
+++    while ((values= (*itr)++))
++     {
++       thd->get_stmt_da()->inc_current_row_for_warning();
++       if (fields.elements || !value_count)
++@@ -1148,7 +1201,7 @@ bool mysql_insert(THD *thd, TABLE_LIST *table_list,
++         break;
++       info.accepted_rows++;
++     }
++-    its.rewind();
+++    itr->rewind();
++     iteration++;
++   } while (bulk_parameters_iterations(thd));
++ 
++@@ -1620,6 +1673,7 @@ static void prepare_for_positional_update(TABLE *table, TABLE_LIST *tables)
++     table_list          Global/local table list
++     where               Where clause (for insert ... select)
++     select_insert       TRUE if INSERT ... SELECT statement
+++    cache_insert_values insert's VALUES(...) has to be pre-computed
++ 
++   TODO (in far future)
++     In cases of:
++@@ -1642,7 +1696,7 @@ int mysql_prepare_insert(THD *thd, TABLE_LIST *table_list,
++                          List<Item> &update_fields, List<Item> &update_values,
++                          enum_duplicates duplic, bool ignore,
++                          COND **where,
++-                         bool select_insert)
+++                         bool select_insert, bool * const cache_insert_values)
++ {
++   SELECT_LEX *select_lex= thd->lex->first_select_lex();
++   Name_resolution_context *context= &select_lex->context;
++@@ -1743,11 +1797,12 @@ int mysql_prepare_insert(THD *thd, TABLE_LIST *table_list,
++ 
++   /*
++     Check if we read from the same table we're inserting into.
++-    Queries like INSERT INTO t1 VALUES ((SELECT ... FROM t1...)) are not
++-    allowed.
+++    Queries like INSERT INTO t1 VALUES ((SELECT ... FROM t1...)) have
+++    to pre-compute the VALUES part.
+++    Reading from the same table in the RETURNING clause is not allowed.
++ 
++-    INSERT...SELECT is an exception: it will detect this case and use
++-    buffering to handle it correctly.
+++    INSERT...SELECT detects this case in select_insert::prepare and also
+++    uses buffering to handle it correcly.
++   */
++   if (!select_insert)
++   {
++@@ -1756,10 +1811,30 @@ int mysql_prepare_insert(THD *thd, TABLE_LIST *table_list,
++     if ((duplicate= unique_table(thd, table_list, table_list->next_global,
++                                  CHECK_DUP_ALLOW_DIFFERENT_ALIAS)))
++     {
++-      update_non_unique_table_error(table_list, "INSERT", duplicate);
++-      DBUG_RETURN(1);
+++     /*
+++        This is INSERT INTO ... VALUES (...) and it must pre-compute the
+++        values to be inserted.
+++      */
+++      (*cache_insert_values)= true;
++     }
+++    else
+++      (*cache_insert_values)= false;
+++
++     select_lex->fix_prepare_information(thd, &fake_conds, &fake_conds);
+++
+++    if ((*cache_insert_values) && thd->lex->has_returning())
+++    {
+++      // Check if the table we're inserting into is also in RETURNING clause
+++      TABLE_LIST *dup=
+++         unique_table_in_insert_returning_subselect(thd, table_list,
+++                                                    thd->lex->returning());
+++      if (dup)
+++      {
+++        if (dup != ERROR_TABLE)
+++          update_non_unique_table_error(table_list, "INSERT", duplicate);
+++        DBUG_RETURN(1);
+++      }
+++    }
++   }
++   /*
++     Only call prepare_for_posistion() if we are not performing a DELAYED
++@@ -3817,6 +3892,7 @@ int mysql_insert_select_prepare(THD *thd, select_result *sel_res)
++   int res;
++   LEX *lex= thd->lex;
++   SELECT_LEX *select_lex= lex->first_select_lex();
+++  bool cache_insert_values= false;
++   DBUG_ENTER("mysql_insert_select_prepare");
++ 
++   /*
++@@ -3827,7 +3903,7 @@ int mysql_insert_select_prepare(THD *thd, select_result *sel_res)
++   if ((res= mysql_prepare_insert(thd, lex->query_tables, lex->field_list, 0,
++                                  lex->update_list, lex->value_list,
++                                  lex->duplicates, lex->ignore,
++-                                 &select_lex->where, TRUE)))
+++                                 &select_lex->where, TRUE, &cache_insert_values)))
++     DBUG_RETURN(res);
++ 
++   /*
++@@ -4029,8 +4105,7 @@ select_insert::prepare(List<Item> &values, SELECT_LEX_UNIT *u)
++     Is table which we are changing used somewhere in other parts of
++     query
++   */
++-  if (unique_table(thd, table_list, table_list->next_global,
++-                   CHECK_DUP_FOR_INSERT_SELECT))
+++  if (unique_table(thd, table_list, table_list->next_global, 0))
++   {
++     /* Using same table for INSERT and SELECT */
++     lex->current_select->options|= OPTION_BUFFER_RESULT;
++diff --git a/sql/sql_insert.h b/sql/sql_insert.h
++index 8b034c25..656da557 100644
++--- a/sql/sql_insert.h
+++++ b/sql/sql_insert.h
++@@ -28,7 +28,7 @@ int mysql_prepare_insert(THD *thd, TABLE_LIST *table_list,
++                          List<Item> &update_fields,
++                          List<Item> &update_values, enum_duplicates duplic,
++                          bool ignore,
++-                         COND **where, bool select_insert);
+++                         COND **where, bool select_insert, bool * const cache_results);
++ bool mysql_insert(THD *thd,TABLE_LIST *table,List<Item> &fields,
++                   List<List_item> &values, List<Item> &update_fields,
++                   List<Item> &update_values, enum_duplicates flag,
++diff --git a/sql/sql_lex.cc b/sql/sql_lex.cc
++index b3aef010..51678f76 100644
++--- a/sql/sql_lex.cc
+++++ b/sql/sql_lex.cc
++@@ -11872,3 +11872,45 @@ bool SELECT_LEX_UNIT::explainable() const
++                derived->is_materialized_derived() :   // (3)
++                false;
++ }
+++
+++/**
+++  Find the real table in prepared SELECT tree
+++
+++  NOTE: all SELECT must be prepared (to have leaf table list).
+++
+++  NOTE: it looks only for real tables (not view or derived)
+++
+++  @param thd          the current thread handle
+++  @param db_name      name of db of the table to look for
+++  @param db_name      name of db of the table to look for
+++
+++  @return first found table, NULL or ERROR_TABLE
+++*/
+++
+++TABLE_LIST *SELECT_LEX::find_table(THD *thd,
+++                                   const LEX_CSTRING *db_name,
+++                                   const LEX_CSTRING *table_name)
+++{
+++  uchar buff[STACK_BUFF_ALLOC];                 // Max argument in function
+++  if (check_stack_overrun(thd, STACK_MIN_SIZE, buff))
+++    return NULL;
+++
+++  List_iterator_fast <TABLE_LIST> ti(leaf_tables);
+++  TABLE_LIST *table;
+++  while ((table= ti++))
+++  {
+++    if (cmp(&table->db, db_name) == 0 &&
+++        cmp(&table->table_name, table_name) == 0)
+++      return table;
+++  }
+++
+++  for (SELECT_LEX_UNIT *u= first_inner_unit(); u; u= u->next_unit())
+++  {
+++    for (st_select_lex *sl= u->first_select(); sl; sl=sl->next_select())
+++    {
+++      if ((table= sl->find_table(thd, db_name, table_name)))
+++        return table;
+++    }
+++  }
+++  return NULL;
+++}
++diff --git a/sql/sql_lex.h b/sql/sql_lex.h
++index 9d2912c8..2300a772 100644
++--- a/sql/sql_lex.h
+++++ b/sql/sql_lex.h
++@@ -1641,6 +1641,10 @@ class st_select_lex: public st_select_lex_node
++   void lex_start(LEX *plex);
++   bool is_unit_nest() { return (nest_flags & UNIT_NEST_FL); }
++   void mark_as_unit_nest() { nest_flags= UNIT_NEST_FL; }
+++
+++  TABLE_LIST *find_table(THD *thd,
+++                         const LEX_CSTRING *db_name,
+++                         const LEX_CSTRING *table_name);
++ };
++ typedef class st_select_lex SELECT_LEX;
++ 
++diff --git a/sql/sql_prepare.cc b/sql/sql_prepare.cc
++index 65d515d3..ec5d1692 100644
++--- a/sql/sql_prepare.cc
+++++ b/sql/sql_prepare.cc
++@@ -1294,6 +1294,7 @@ static bool mysql_test_insert_common(Prepared_statement *stmt,
++   THD *thd= stmt->thd;
++   List_iterator_fast<List_item> its(values_list);
++   List_item *values;
+++  bool cache_results= FALSE;
++   DBUG_ENTER("mysql_test_insert_common");
++ 
++   if (insert_precheck(thd, table_list))
++@@ -1326,7 +1327,8 @@ static bool mysql_test_insert_common(Prepared_statement *stmt,
++ 
++     if (mysql_prepare_insert(thd, table_list, fields, values, update_fields,
++                              update_values, duplic, ignore,
++-                             &unused_conds, FALSE))
+++                             &unused_conds, FALSE,
+++                             &cache_results))
++       goto error;
++ 
++     value_count= values->elements;
++diff --git a/sql/table.h b/sql/table.h
++index d0f61eb0..5493412d 100644
++--- a/sql/table.h
+++++ b/sql/table.h
++@@ -2973,6 +2973,8 @@ struct TABLE_LIST
++   ulong m_table_ref_version;
++ };
++ 
+++#define ERROR_TABLE  ((TABLE_LIST*) 0x1)
+++
++ class Item;
++ 
++ /*
++diff --git a/tests/mysql_client_test.c b/tests/mysql_client_test.c
++index 528eece5..0bcb1e98 100644
++--- a/tests/mysql_client_test.c
+++++ b/tests/mysql_client_test.c
++@@ -21535,6 +21535,164 @@ static void test_mdev19838()
++   rc = mysql_query(mysql, "drop table mdev19838");
++   myquery(rc);
++ }
+++
+++/* Server crash when inserting from derived table containing insert target table */
+++static void test_mdev_32086()
+++{
+++  int        rc;
+++  MYSQL_STMT *stmt_insert;
+++  MYSQL_BIND bind[2];
+++  MYSQL_RES *result;
+++  MYSQL_ROW row;
+++  unsigned int vals[] = { 123, 124};
+++  unsigned int vals_array_len = 2;
+++  const char *insert_stmt= "\
+++insert into t1 values(\
+++  (select 101+count(*)\
+++   from\
+++   (\
+++      select dt2.id\
+++      from (select id from t1) dt2, t1 t where t.id=dt2.id\
+++   ) dt\
+++   where dt.id<1000\
+++  ), ?\
+++)";
+++
+++  /* Set up test's environment */
+++
+++
+++  rc= mysql_query(mysql, "create table t1 (pk int, id int);");
+++  myquery(rc);
+++
+++  rc= mysql_query(mysql, "insert into t1 values (2,2), (3,3), (4,4);");
+++  myquery(rc);
+++
+++  stmt_insert = mysql_stmt_init(mysql);
+++  if (!stmt_insert)
+++  {
+++    fprintf(stderr, "mysql_stmt_init failed: Error: %s\n",
+++            mysql_error(mysql));
+++    exit(1);
+++  }
+++
+++  rc= mysql_stmt_prepare(stmt_insert, insert_stmt, strlen(insert_stmt));
+++  if (rc)
+++  {
+++    fprintf(stderr, "mysql_stmt_prepare failed: %s\n",
+++            mysql_stmt_error(stmt_insert));
+++    exit(1);
+++  }
+++
+++  memset(&bind[0], 0, sizeof(MYSQL_BIND));
+++
+++  bind[0].buffer_type= MYSQL_TYPE_LONG;
+++  bind[0].buffer= vals;
+++
+++  rc= mysql_stmt_attr_set(stmt_insert, STMT_ATTR_ARRAY_SIZE, &vals_array_len);
+++  if (rc)
+++  {
+++    fprintf(stderr, "mysql_stmt_prepare failed: %s\n",
+++            mysql_stmt_error(stmt_insert));
+++    exit(1);
+++  }
+++
+++  rc= mysql_stmt_bind_param(stmt_insert, bind);
+++  if (rc)
+++  {
+++    fprintf(stderr, "mysql_stmt_bind_param failed: %s\n",
+++            mysql_stmt_error(stmt_insert));
+++    exit(1);
+++  }
+++
+++  rc= mysql_stmt_execute(stmt_insert);
+++  if (rc)
+++  {
+++    fprintf(stderr, "mysql_stmt_execute failed: %s\n",
+++            mysql_stmt_error(stmt_insert));
+++    exit(1);
+++  }
+++
+++  /*
+++    pk	id
+++    2	2
+++    3	3
+++    4	4
+++    104	123
+++    104	124
+++   */
+++  rc= mysql_query(mysql, "select * from t1");
+++  if (rc)
+++  {
+++    fprintf(stderr, "Query failed: %s\n", mysql_error(mysql));
+++  }
+++  result= mysql_store_result(mysql);
+++  row= mysql_fetch_row(result);
+++  DIE_UNLESS(atoi(row[0]) == 2 && atoi(row[1]) == 2);
+++  row= mysql_fetch_row(result);
+++  DIE_UNLESS(atoi(row[0]) == 3 && atoi(row[1]) == 3);
+++  row= mysql_fetch_row(result);
+++  DIE_UNLESS(atoi(row[0]) == 4 && atoi(row[1]) == 4);
+++  row= mysql_fetch_row(result);
+++  printf("\n %d, %d \n", atoi(row[0]), atoi(row[1]));
+++  DIE_UNLESS(atoi(row[0]) == 104 && atoi(row[1]) == 123);
+++  row= mysql_fetch_row(result);
+++  printf("\n %d, %d \n", atoi(row[0]), atoi(row[1]));
+++  DIE_UNLESS(atoi(row[0]) == 104 && atoi(row[1]) == 124);
+++  row= mysql_fetch_row(result);
+++  DIE_UNLESS(row == NULL);
+++
+++  mysql_free_result(result);
+++
+++  rc= mysql_stmt_execute(stmt_insert);
+++  if (rc)
+++  {
+++    fprintf(stderr, "mysql_stmt_execute failed: %s\n",
+++            mysql_stmt_error(stmt_insert));
+++    exit(1);
+++  }
+++  /*
+++    pk	id
+++    2	2
+++    3	3
+++    4	4
+++    104	123
+++    104	124
+++    106	123
+++    106	124
+++   */
+++  rc= mysql_query(mysql, "select * from t1");
+++  if (rc)
+++  {
+++    fprintf(stderr, "Query failed: %s\n", mysql_error(mysql));
+++  }
+++  result= mysql_store_result(mysql);
+++  row= mysql_fetch_row(result);
+++  DIE_UNLESS(atoi(row[0]) == 2 && atoi(row[1]) == 2);
+++  row= mysql_fetch_row(result);
+++  DIE_UNLESS(atoi(row[0]) == 3 && atoi(row[1]) == 3);
+++  row= mysql_fetch_row(result);
+++  DIE_UNLESS(atoi(row[0]) == 4 && atoi(row[1]) == 4);
+++  row= mysql_fetch_row(result);
+++  DIE_UNLESS(atoi(row[0]) == 104 && atoi(row[1]) == 123);
+++  row= mysql_fetch_row(result);
+++  DIE_UNLESS(atoi(row[0]) == 104 && atoi(row[1]) == 124);
+++  row= mysql_fetch_row(result);
+++  printf("\n %d, %d \n", atoi(row[0]), atoi(row[1]));
+++  DIE_UNLESS(atoi(row[0]) == 106 && atoi(row[1]) == 123);
+++  row= mysql_fetch_row(result);
+++  printf("\n %d, %d \n", atoi(row[0]), atoi(row[1]));
+++  DIE_UNLESS(atoi(row[0]) == 106 && atoi(row[1]) == 124);
+++  row= mysql_fetch_row(result);
+++  DIE_UNLESS(row == NULL);
+++
+++  mysql_free_result(result);
+++
+++  mysql_stmt_close(stmt_insert);
+++
+++  /* Clean up */
+++  rc= mysql_query(mysql, "DROP TABLE t1");
+++  myquery(rc);
+++}
++ #endif // EMBEDDED_LIBRARY
++ 
++ 
++@@ -22102,6 +22260,7 @@ static struct my_tests_st my_tests[]= {
++   { "test_explain_meta", test_explain_meta },
++ #ifndef EMBEDDED_LIBRARY
++   { "test_mdev19838", test_mdev19838 },
+++  { "test_mdev_32086", test_mdev_32086 },
++ #endif
++   { "test_mdev_16128", test_mdev_16128 },
++   { "test_mdev18408", test_mdev18408 },
++-- 
++2.40.0
++
 -- 
 2.40.0
 
