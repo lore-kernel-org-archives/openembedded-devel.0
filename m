@@ -1,156 +1,210 @@
-Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99A47C77B7F
-	for <webhook@archiver.kernel.org>; Tue, 24 Jun 2025 21:54:35 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.web10.995.1750802073559975068
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6115BC77B7C
+	for <webhook@archiver.kernel.org>; Wed, 25 Jun 2025 07:33:38 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.9979.1750836817603794056
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Jun 2025 14:54:33 -0700
+ Wed, 25 Jun 2025 00:33:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=f5VTDRfx;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55OJIx7p030059
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Jun 2025 21:54:33 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=7nq3k9tZYmzuGEFqwxCziCQiXRAgnDK+9A/
-	khOoYCk0=; b=f5VTDRfxS19L6lGbDuYGNcUEaT106u/zyJF+QyjwUdU5qv3Pc3C
-	li5/Z5hbH1R7eUO1bxWFKDk7xsyeCeeq/u2natTMMJTVMCRGAxiNSy0SZioqLfxd
-	XbdBzeNDQZQMPFW1yRDcIMP8ZOd/qIWcOFAFGyeLCnQQU8VYjcCNQ4BQQdvWp0f2
-	eJMr0Fvz8Rp2cqJ1k8ATA1ssjIsG6U6nDmWtRJju7hfYLuRqwC9r00pC9AMakGyn
-	DJ+IAB8cXeSlpIAmpI9UZKi/FPQWXQ3ewuiQAAnzSiy3XGD4ILfsloGpNPW9Vg3c
-	ySN6qdjkVz2MqGj4KLGGPm+rwZ3d6/qm6dg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 47g22q8aba-1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=8271b8b582=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55P5VN6d026800
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 07:33:36 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47dhy2m3en-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Jun 2025 21:54:33 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-7d3dcac892bso52840385a.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Jun 2025 14:54:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750802071; x=1751406871;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=7nq3k9tZYmzuGEFqwxCziCQiXRAgnDK+9A/khOoYCk0=;
-        b=J9uBTghQXofGe5zBO8Ip6eT9gs66BOiFRTU6KBC2M2OC4RjVygUe8B1h/TrHUVObgz
-         ZNVrFItCsi315hTKbivsqQ71FIBcFNIVJYfKToEjkGL3vodY1M0D2EhBABvbmxAvA1kq
-         5sNdS+aAhgPaW/10kV1f0RIkMWauTM19zNHT3FL8xk57vsD4ANvH5haUSM2JsJdNh/eY
-         XIn3GoQfoK7xFXwYo8EQyW4KFAkqBhVNuP6emcQOauS8ua9EOXI2SmShMlgY0uLwMW4m
-         TrjKW48IBqrra8SB3Ak28DH6ksmDC0WVbTMCiiJ5+AzIwD0gw4X0kkV8cypckDgZwzVW
-         hdPg==
-X-Gm-Message-State: AOJu0Yzzj47QnUr6U/dne9BnPb7nkX+ifHDOdfS7dpFCh8VL3MKpMKb3
-	A2OzYidK+HeFhSB699F6oz11HwxidvfVNCSuE5ljYis9JCQ8SYfftHfRvFo8uisKnpbUFBgRJju
-	ozYgvVN+4hiHHGNmxrHqU+pSq7QiyonL/E3ULDBRXGTVsVkFX1UF9V7qCGm9/O+UHxYUyGfr7KW
-	9eQsqOHWN4jU3hfnOCNDQ=
-X-Gm-Gg: ASbGnctoOMZvXQ88jyE+z9ufUuYa2wl+FufhcYLgpQt6HplKCnYFAC20pwYquxKKP1u
-	wszTUqzLFOc4NwLe0ruY79iqCstYj2u+PEOO2lK9apFjCQY9caeUNJuOKlAKskYXvplo2jGK2rD
-	hG5Sn1jFpzlWrx1tyA1Ce6Ba5vgfGcrdr6y1W+13QLKcyL+5jmB4XOcIDsxwQFbX9LCF5kdI/OC
-	wvUXb1fLimysA0U/mBw7E6+TTfLs2nN/4MqgUERCQIld3Hkvgs9QKcay2mAsHWFV3fk+AObGLjy
-	WsZQhBVnpd56vUj2fhiJ3E17Q1f57e7gaHe5rI3/E0kS2UMPaEpyV79/zXIMrZfC2A60E1UtRWL
-	VClok7G1QuglXKYhSra9rHs0BZXZJaPYUsE0=
-X-Received: by 2002:a05:620a:3950:b0:7cc:13f:fa30 with SMTP id af79cd13be357-7d41ec6de2emr680622385a.27.1750802071165;
-        Tue, 24 Jun 2025 14:54:31 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEJ9fHkoV/UNBrYbzCE8KOXhxcoKaZPfC0YZXcuTxfotxJS8JMcPyOuiuju0adLpnbJWmTz4Q==
-X-Received: by 2002:a05:620a:3950:b0:7cc:13f:fa30 with SMTP id af79cd13be357-7d41ec6de2emr680617885a.27.1750802070535;
-        Tue, 24 Jun 2025 14:54:30 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a0c3-3a00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a0c3:3a00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-553e41d6eb3sm1967318e87.244.2025.06.24.14.54.29
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Jun 2025 14:54:29 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libglvnd: drop recipe
-Date: Wed, 25 Jun 2025 00:54:29 +0300
-Message-Id: <20250624215429.3666511-1-dmitry.baryshkov@oss.qualcomm.com>
-X-Mailer: git-send-email 2.39.5
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 07:33:36 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.57; Wed, 25 Jun 2025 00:33:31 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/3] mariadb: fix CVE-2023-52968
+Date: Wed, 25 Jun 2025 13:03:11 +0530
+Message-ID: <20250625073313.1882580-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=cuqbk04i c=1 sm=1 tr=0 ts=685b1e99 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=6IFa9wvqVegA:10
- a=e5mUnYsNAAAA:8 a=EUspDBNiAAAA:8 a=DzVgi9rmcOW1Hsj9J5MA:9
- a=NFOGd7dJGGMPyQGDc5-O:22 a=Vxmtnl_E_bksehYqCbjh:22
-X-Proofpoint-GUID: hz521jwbmSUvKNf0nP1Nyyq4u-FxsQKs
-X-Proofpoint-ORIG-GUID: hz521jwbmSUvKNf0nP1Nyyq4u-FxsQKs
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjI0MDE3MyBTYWx0ZWRfX2Lnp2hkjbQ9a
- C6HZIS1W0mX67fZ3pWuJzYODiGFtsPWg2CqkMgfUYBqN6CiQejOIWZjNL+1tWIFROoOY6C3VYAA
- 97Tre5pGsDN4z5REdptTuA4nWpxTJ2p3QDmMeOUC1XZEeqI2iyauBejnPaVQHXmXVKf6BeQFFid
- +DOpl1AG6BlDew13uy9yAH9CzkAEcGQQCajlF5NAnDxEaCXRWcX5eDiZVoQOLDefZ2f/XJNSdBv
- E9f7z/9TAKs95QeKeKyATNtI7HJu9Y0miWjjz7IfUBNmd8kbFC3hFE8xQY0At9fPh6S62kD3dTl
- Od+9mzdeUmWSMm2c0Bf6jlKjsuDRyQobe53y5E6kiZkHDs2YKxAX4Bw7FHpYscFo0zbUy1eaBb7
- Jz5SInVGScF1wrjMKanEBGyiSmQHG4N0Gqr275pq0HusFTTJs0dXjy/6CjEOH0LI8WMz+dzY
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjI1MDA1NSBTYWx0ZWRfX4ZAIfvuw6I+5 y+WsMxtgEaXzuP1Uv6EVw2Hn9mYnvcvmPPVfvmtYhtWZpWtZkSR4FRyXpIlBsTSyDsNzVudb3Wa L0JmDaNNZzG3Nhzbmk5p/5oUa0kgughcH+ie14luHaWNrTEDRXNo1XpqTjeXdVeKCtsBuZGHWTA
+ Cxzv9iFUdiuA240Rs9INs7jVGwrBLTfBGchZuQ4WeYS541lP7pDSz55rIyXVhdv1NC2SjQ5og1o uYe+33rlst+BjOO+PFk9lL+x1pcoaqrRslyo6XJO1WMZ/FXmK+sJNPnTELwEjDQM/M12N6L+xwC rc0p+hCI240/sCEDAS1Sg3neamhe6xAXx1KtW3HMqN5p2Rl4ohiS7JQm9TJ9RoqnRHn/aSBqtr5
+ KTGS8VzyXQL2Z9teur3jc+iwnewa1RFetep6MBsAW8tVgBeGs1vQ/Vm2drXMhZKSE1nhSJT9
+X-Authority-Analysis: v=2.4 cv=Qblmvtbv c=1 sm=1 tr=0 ts=685ba650 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=6IFa9wvqVegA:10 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=hkEv4HZQAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8
+ a=2axcuBc2iGKZsjvi9gkA:9 a=NA03pvyaApPJG5valX87:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: HyKByQ0odkLs_3xc5HdOQ6IYXgR7mrmn
+X-Proofpoint-GUID: HyKByQ0odkLs_3xc5HdOQ6IYXgR7mrmn
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-06-24_06,2025-06-23_07,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 priorityscore=1501 bulkscore=0 mlxlogscore=999
- malwarescore=0 adultscore=0 suspectscore=0 clxscore=1015 mlxscore=0
- lowpriorityscore=0 impostorscore=0 classifier=spam authscore=0 authtc=n/a
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2505280000 definitions=main-2506240173
+ definitions=2025-06-25_01,2025-06-23_07,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 suspectscore=0
+ bulkscore=0 lowpriorityscore=0 mlxlogscore=999 mlxscore=0
+ priorityscore=1501 clxscore=1015 impostorscore=0 malwarescore=0
+ phishscore=0 adultscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505280000
+ definitions=main-2506250055
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Jun 2025 21:54:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118102
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 07:33:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118103
 
-The libglvnd recipe has been picked up into OE-Core. Drop corresponding
-recipe from from meta-oe.
+From: Yogita Urade <yogita.urade@windriver.com>
 
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+MariaDB Server 10.4 before 10.4.33, 10.5 before 10.5.24, 10.6
+before 10.6.17, 10.7 through 10.11 before 10.11.7, 11.0 before
+11.0.5, and 11.1 before 11.1.4 calls fix_fields_if_needed under
+mysql_derived_prepare when derived is not yet prepared, leading
+to a find_field_in_table crash.
+
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2023-52968
+
+Upstream patch:
+https://github.com/MariaDB/server/commit/74883f5e2f4c0e09f4f4e9e272a8e5bfd91a9489
+
+Fix indent issue in mariadb.inc file.
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- .../libglvnd/libglvnd_1.7.0.bb                | 39 -------------------
- 1 file changed, 39 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |   3 +-
+ .../mysql/mariadb/CVE-2023-52968.patch        | 106 ++++++++++++++++++
+ 2 files changed, 108 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52968.patch
 
-diff --git a/meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb b/meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb
-deleted file mode 100644
-index a737a735b7ea..000000000000
---- a/meta-oe/recipes-graphics/libglvnd/libglvnd_1.7.0.bb
-+++ /dev/null
-@@ -1,39 +0,0 @@
--DESCRIPTION = "libglvnd is a vendor-neutral dispatch layer for arbitrating \
--OpenGL API calls between multiple vendors."
--HOMEPAGE = "https://gitlab.freedesktop.org/glvnd/libglvnd"
--LICENSE = "MIT & BSD-1-Clause & BSD-3-Clause & GPL-3.0-with-autoconf-exception"
--LIC_FILES_CHKSUM = "file://README.md;beginline=323;md5=7ac5f0111f648b92fe5427efeb08e8c4"
--
--SRC_URI = "git://git@gitlab.freedesktop.org/glvnd/libglvnd.git;protocol=https;branch=master"
--
--# v1.5.0 tag
--SRCREV = "faa23f21fc677af5792825dc30cb1ccef4bf33a6"
--
--REQUIRED_DISTRO_FEATURES = "opengl"
--
--inherit meson pkgconfig features_check
--
--S = "${WORKDIR}/git"
--
--PACKAGECONFIG ?= "\
--  ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
--  ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'egl gles1 gles2', '', d)} \
--  ${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'glx', '', d)} \
--  "
--
--PACKAGECONFIG[x11] = "-Dx11=enabled,-Dx11=disabled,libx11 libxext xorgproto"
--PACKAGECONFIG[glx] = "-Dglx=enabled,-Dglx=disabled,libx11 libxext xorgproto,,libglx-icd"
--PACKAGECONFIG[egl] = "-Degl=true,-Degl=false,,libegl-icd"
--PACKAGECONFIG[gles1] = "-Dgles1=true,-Dgles1=false,"
--PACKAGECONFIG[gles2] = "-Dgles2=true,-Dgles2=false,"
--
--BBCLASSEXTEND = "native nativesdk"
--
--PROVIDES = " \
--    ${@bb.utils.contains('PACKAGECONFIG', 'glx', 'virtual/libgl', '', d)} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'gles1', 'virtual/libgles1', '', d)} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'gles2', 'virtual/libgles2 virtual/libgles3', '', d)} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'egl', 'virtual/egl', '', d)} \
--"
--
--RPROVIDES:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'egl', 'libegl', '', d)}"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 7c4b0a467f..6a8ff05039 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -22,7 +22,8 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+            file://cross-compiling.patch \
+            file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
+            file://0001-MDEV-29644-a-potential-bug-of-null-pointer-dereferen.patch \
+-	   file://CVE-2023-22084.patch \
++           file://CVE-2023-22084.patch \
++           file://CVE-2023-52968.patch \
+           "
+ SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52968.patch b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52968.patch
+new file mode 100644
+index 0000000000..bea473e4a3
+--- /dev/null
++++ b/meta-oe/recipes-dbs/mysql/mariadb/CVE-2023-52968.patch
+@@ -0,0 +1,106 @@
++From 74883f5e2f4c0e09f4f4e9e272a8e5bfd91a9489 Mon Sep 17 00:00:00 2001
++From: Aleksey Midenkov <midenok@gmail.com>
++Date: Thu, 9 Nov 2023 16:26:11 +0300
++Subject: [PATCH] MDEV-32082 Server crash in find_field_in_table
++
++Attempt to resolve FOR SYSTEM_TIME expression as field for derived
++table is done before derived table is fully prepared, so we fail on
++assertion that table_list->table is missing.
++
++Actually Vers_history_point::resolve_unit() is done under the call of
++mysql_derived_prepare() itself (sql_derived.cc:824) and the table is
++assigned later at 867.
++
++The fix disables unit resolution for field type in FOR SYSTEM_TIME
++expression as it does a little sense in any case: making historical
++queries based on variable field values produces the result of multiple
++time points.
++
++fix_fields_if_needed() in resolve_units() was introduced by 46be31982a4
++
++CVE: CVE-2023-52968
++Upstream-Status: Backport [https://github.com/MariaDB/server/commit/74883f5e2f4c0e09f4f4e9e272a8e5bfd91a9489]
++
++Changes:
++-Use old my_error API instead of new bad_expression_data_type_error API.
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ mysql-test/suite/versioning/r/select.result | 11 ++++++++++-
++ mysql-test/suite/versioning/t/select.test   | 12 +++++++++++-
++ sql/table.cc                                |  6 ++++++
++ 3 files changed, 27 insertions(+), 2 deletions(-)
++
++diff --git a/mysql-test/suite/versioning/r/select.result b/mysql-test/suite/versioning/r/select.result
++index 90c99d1b..714455b6 100644
++--- a/mysql-test/suite/versioning/r/select.result
+++++ b/mysql-test/suite/versioning/r/select.result
++@@ -443,7 +443,7 @@ create or replace table t1 (x int) with system versioning;
++ select * from t1 for system_time as of current_timestamp;
++ x
++ select * from t1 for system_time as of now;
++-ERROR 42S22: Unknown column 'now' in 'FOR SYSTEM_TIME'
+++ERROR HY000: Illegal parameter data type now for operation 'FOR SYSTEM_TIME'
++ ### Issue #405, NATURAL JOIN failure
++ create or replace table t1 (a int) with system versioning;
++ create or replace table t2 (b int);
++@@ -708,3 +708,12 @@ No	A	B	C	D
++ 33	1	1	1	1
++ 34	1	1	1	1
++ SET GLOBAL innodb_stats_persistent = @saved_stats_persistent;
+++#
+++# MDEV-32082 Server crash in find_field_in_table
+++#
+++create table t0 (c0 int) with system versioning;
+++select x0 from (
+++select c0 x0 from t0
+++) for system_time as of nowasdf deriv;
+++ERROR HY000: Illegal parameter data type nowasdf for operation 'FOR SYSTEM_TIME'
+++drop table t0;
++diff --git a/mysql-test/suite/versioning/t/select.test b/mysql-test/suite/versioning/t/select.test
++index 9142a8fa..5603d1a3 100644
++--- a/mysql-test/suite/versioning/t/select.test
+++++ b/mysql-test/suite/versioning/t/select.test
++@@ -314,7 +314,7 @@ select * from t1 where (a, 2) in ((1, 1), (2, 2)) and b = 1;
++ --echo ### Issue #398, NOW is now non-magic
++ create or replace table t1 (x int) with system versioning;
++ select * from t1 for system_time as of current_timestamp;
++---error ER_BAD_FIELD_ERROR
+++--error ER_ILLEGAL_PARAMETER_DATA_TYPE_FOR_OPERATION
++ select * from t1 for system_time as of now;
++
++ --echo ### Issue #405, NATURAL JOIN failure
++@@ -487,4 +487,14 @@ call verify_trt_dummy(34);
++
++ SET GLOBAL innodb_stats_persistent = @saved_stats_persistent;
++
+++--echo #
+++--echo # MDEV-32082 Server crash in find_field_in_table
+++--echo #
+++create table t0 (c0 int) with system versioning;
+++--error ER_ILLEGAL_PARAMETER_DATA_TYPE_FOR_OPERATION
+++select x0 from (
+++  select c0 x0 from t0
+++) for system_time as of nowasdf deriv;
+++drop table t0;
+++
++ -- source suite/versioning/common_finish.inc
++diff --git a/sql/table.cc b/sql/table.cc
++index e0e06702..81a5674a 100644
++--- a/sql/table.cc
+++++ b/sql/table.cc
++@@ -10326,6 +10326,12 @@ bool Vers_history_point::check_unit(THD *thd)
++ {
++   if (!item)
++     return false;
+++  if (item->real_type() == Item::FIELD_ITEM)
+++  {
+++    my_error(ER_ILLEGAL_PARAMETER_DATA_TYPE_FOR_OPERATION, MYF(0),
+++             item->full_name(), "FOR SYSTEM_TIME");
+++    return true;
+++  }
++   if (item->fix_fields_if_needed(thd, &item))
++     return true;
++   const Type_handler *t= item->this_item()->real_type_handler();
++--
++2.40.0
 -- 
-2.39.5
+2.40.0
 
 
