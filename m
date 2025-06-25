@@ -1,129 +1,101 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70237C7115C
-	for <webhook@archiver.kernel.org>; Wed, 25 Jun 2025 14:12:50 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web11.16393.1750860762989735900
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97226C7EE2A
+	for <webhook@archiver.kernel.org>; Wed, 25 Jun 2025 14:45:30 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.web10.17161.1750862729599183230
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jun 2025 07:12:43 -0700
+ Wed, 25 Jun 2025 07:45:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=mC8OMfiH;
- spf=pass (domain: konsulko.com, ip: 209.85.218.54, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-ad89c32a7b5so298733466b.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 07:12:42 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=miFoKUct;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.221.54, mailfrom: brgl@bgdev.pl)
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-3a6d77b43c9so3992459f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 07:45:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1750860761; x=1751465561; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VZHKFbTMq6JoGlBqVsr5LBWK0xKLEIFZ8mdUNFSi6bI=;
-        b=mC8OMfiHftifi3YjiiUF7/LosOhpUl7L2RUIMEoy+rOoNHeyE8eV1TG4ZrRr46LzG4
-         Ou2h4vgnQaKh/bXZagqzTqfp4zFjwKdMlyp3wHOHSjFTk7uRHD/1Assg3xwTVjMQS5gW
-         qwaeXkeIRzeXU+r4Pv5gEG3ceunW43NxiXTaU=
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1750862728; x=1751467528; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=vd8vXY8KS8gBKV/7q6Ft69OdX7Q6MCNS54ZNVCTQ6sU=;
+        b=miFoKUctudemEGJIVLicHSaBsgf86yM5+sX+W1+Jt0YnTMwznYKwLkrXOyenaNFRkC
+         T9/XZzxuKb9rQIROSghQPgZC1/MlDpBjx1EhjiPMSvJ31J1U1r8n5uSWh/iT0+5ytpqg
+         lN8OZiLlUAAOgu5FPeYGixR3xdk6Rj8c8r/N+ambqsBXTNmkTG1cWuy/xF+3axzicaEj
+         l/EG+0689RPjWF3JU01Bu+bzuwHr36Gts+WekMp6jj1An6jptAuA5zIiKDpQtXgbeVt9
+         x9mrUqMvIFjuUovj2lFF+Qc/Nx+i9sy3ZrEoyWrxM1FpJOosk67E9jb0wtpANoojajF0
+         wsvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750860761; x=1751465561;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VZHKFbTMq6JoGlBqVsr5LBWK0xKLEIFZ8mdUNFSi6bI=;
-        b=V8i/kySgzHDCKKCW1Da3HrfSAYO98pa2FBNhXBJcU0zQOmgel+DW6Yc5cRpH1kNpBM
-         GE3CuUZTdMP5SL1JN92QrmC+NDERZG1sU5lBBNQ0HYR76/gP8a+9oj7J9jCXcDDbLo8s
-         G3p2dWq/ye5DXG7BMrg/KQHVl0J5iw1LhmDUQZIyaJwkkjiMMY6Cqu70In7ueMtQDiH0
-         Bwt7XWVfG+OtzZafuHZIw3uyQrlRuGb4XvWzE6gnLaSG6GW9yyZROjZpfv6FxdRB5sBu
-         JJbRnBFJJC+p39fwPMOzZiya20RIxP+y5cam4vopYy9LUA5S5i06mJM4NxWRsrTPrHxI
-         ArmQ==
-X-Gm-Message-State: AOJu0Yzbd1t5iZ9sNRq6AvYzmy3VygnEKkCVFa/PlK5Yoxduaj+NHNZu
-	Nc5ZumO47MTDdpKD6NXUkpNOQ9tV/V0GI18xryL6xjHevoStr3O6lQN8/q4CV4vRYDA6kGs11Oz
-	D+stm
-X-Gm-Gg: ASbGncuVruwJJSTemOxvMC9u7UQgORB5H2YqY3JfVUYgGHt97ka14L+0ggrH9BNzleo
-	6BvdAPt5d/8hD0/GAayM1r5pUt9rHkgxmWYfDadj652ybOQVFWsDujg+xjmw4LxOz3veAWtn0F9
-	rwpuZgIG6OANWfhwieGqR87uuJjUzrZxCJAf4Z4uDvMjB3G+3mqPR3a8whAgE71BVIqZ5kIa0gm
-	CBvmzyRTJAou8iJrkGcYpwkz3FkaiqUB5sSUqXPvCKYe2G+tDX9xqf/3GLDf9H7wdZwbdKXuA1l
-	RH3GyJBXgFq1U0f/l2Ds8d8ALPQ2DIblvS0ztH1bTpgilzj6FCgvgVOYOXHRPHiRWO6NIYtVUjd
-	L3WWTi+D7t/8=
-X-Google-Smtp-Source: AGHT+IFoiHV0NA8VeFHZ/+nZ3wD+LztKJfDqlAF70mphETZKHyQha2qgWnhTG3gjwwr0jh1NcQSXWw==
-X-Received: by 2002:a17:907:c24c:b0:ad2:1cd6:aacf with SMTP id a640c23a62f3a-ae0beed95bamr321081066b.47.1750860760949;
-        Wed, 25 Jun 2025 07:12:40 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae0541b6e41sm1046181166b.121.2025.06.25.07.12.40
+        d=1e100.net; s=20230601; t=1750862728; x=1751467528;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vd8vXY8KS8gBKV/7q6Ft69OdX7Q6MCNS54ZNVCTQ6sU=;
+        b=HW2vyaRtJIQGWd3drTAyiECua7RvWJFdV8+tKqI8Di/uTuP8Lc/LsIj2jUlrTtUaQw
+         LIAu3jQkCmLe1ZNN61wJjCu1NAdKLN/Ee9AOuGErYldHqvT3qLVyqPkSMm5/o/OVhJWo
+         pU4sJwPAknkf+/M9KPHfJ4ovNwi0andu/iapbf0mnrCEd3AJmWh769aVoVMTvAs9vEWI
+         UHB/qmhbhCyaOVz0RAPsLnD+V5+LADFsJbWwXBAt8pKCXjgvsQIjap3KZzdbFkJUTcgn
+         21w8dn16/H6nOAlht7peGIp+MT3ioRRGozpTRqoEaCFFcJYH3b9gcalasDpZV6iHg7mQ
+         pd6A==
+X-Forwarded-Encrypted: i=1; AJvYcCVcYgQd8dgjJkNFE8zeFp48lG9WHLrDf6s97zk94xGasKGXQI88Dw51zMxOenF32PSZ1znVQ6p8+Ipo6CXJ7YbwoX4=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxNdLvCa5xfsh+rDN1lZInxdKPNJLDOUPePRJR9ljZ6hQqJzsP6
+	KzdV343uKzi7jcp8yqEEpyAxfJXLEMr4bG/2+AKlfcoSpbt7YX/VjAzV8Gkom9da/HM=
+X-Gm-Gg: ASbGncs8AN735w1C39kZAYWgrmgAVYcV8AGJDHXu9jOGotfzeihi98AOAbpJOnN1/4F
+	kFij7Q9QCT+a4b9DYzGE+n94paAEaoQfQOAS84SzBIweIc6GdJoMk/t8GDMtCzcftX6cY0q/CMC
+	3AhyG0jsL5aIA1Hzoh82j/eRT5rhJ0DZKxv0lG9jXQL6Ogo2L1YPuUk0PPd/aSQlg2dSayjfD75
+	dQYjP+KjKnhmDP+9Lz/TVOLJvMarTZi8Uo71u4MtQbY8dgNtqyREhUTVUXOpqF1dbRBvuU5co3M
+	OvefyxbGPJ7q+F0wIlZrQmVyVAT3ClM9tUsEf6lmCbEGmqieE8GWDSdjYjscblw=
+X-Google-Smtp-Source: AGHT+IFCs4OFO76wNnBJjiM6FLeO6j73MY0BgeHlcYzDBUOJ0Seivi8mUgmgUqw6pWW+jbUB36tUKQ==
+X-Received: by 2002:a05:6000:4411:b0:3a5:8a68:b81d with SMTP id ffacd0b85a97d-3a6ed646bc4mr1994623f8f.43.1750862727633;
+        Wed, 25 Jun 2025 07:45:27 -0700 (PDT)
+Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:d216:42f3:1e7e:472e])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45380d0f15esm26282745e9.1.2025.06.25.07.45.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Jun 2025 07:12:40 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-nocaselist: Upgrade 2.0.3 -> 2.1.0
-Date: Wed, 25 Jun 2025 17:12:36 +0300
-Message-Id: <20250625141236.3027897-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250625141236.3027897-1-leon.anavi@konsulko.com>
-References: <20250625141236.3027897-1-leon.anavi@konsulko.com>
+        Wed, 25 Jun 2025 07:45:27 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-oe][PATCH] libgpiod: update to v2.2.2
+Date: Wed, 25 Jun 2025 16:45:22 +0200
+Message-ID: <20250625144522.189693-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 14:12:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118109
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 14:45:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118110
 
-- Dropped support for Python 3.6 and 3.7 because they are out of
-  service and to simplify development dependencies.
-- Dev: Changed 'make install' to no longer perform an editable
-  install, but a standalone install, since pip will remove support
-  for editable installs.
-- Dev: Removed support for the env.var TEST_INSTALLED that used the
-  installed package for testing, for simplicity. Now, the local
-  package in the repository main directory is always used for
-  testing.
-- Addressed safety issues up to 2025-04-27.
-- Dev: Added missing dependencies for development.
-- Test: Fixed the issue that coveralls was not found in the test
-  workflow on MacOS with Python 3.9-3.11, by running it without
-  login shell. Added Python 3.11 on MacOS to the normal tests.
-- Fixed new issues of Pylint 3.3.
-- Added support for Python 3.13. This required increasing the
-  minimum version of several packages needed for development.
-- Added '__version_tuple__' with the integer versions.
-- Dev: Changed from setup.py to using pyproject.toml.
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Fixes:
+This is a bugfix release addressing issues in tools and core library. No
+API changes.
 
-WARNING: python3-nocaselist-2.1.0-r0 do_check_backend: QA Issue:
-inherits setuptools3 but has pyproject.toml with
-setuptools.build_meta, use the correct class [pep517-backend]
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- ...3-nocaselist_2.0.3.bb => python3-nocaselist_2.1.0.bb} | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-nocaselist_2.0.3.bb => python3-nocaselist_2.1.0.bb} (54%)
+ .../libgpiod/{libgpiod_2.2.1.bb => libgpiod_2.2.2.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod_2.2.1.bb => libgpiod_2.2.2.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-nocaselist_2.0.3.bb b/meta-python/recipes-devtools/python/python3-nocaselist_2.1.0.bb
-similarity index 54%
-rename from meta-python/recipes-devtools/python/python3-nocaselist_2.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-nocaselist_2.1.0.bb
-index a869453875..ba148cbfa8 100644
---- a/meta-python/recipes-devtools/python/python3-nocaselist_2.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-nocaselist_2.1.0.bb
-@@ -3,9 +3,14 @@ HOMEPAGE = "https://nocaselist.readthedocs.io/en/latest/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.2.bb
+similarity index 98%
+rename from meta-oe/recipes-support/libgpiod/libgpiod_2.2.1.bb
+rename to meta-oe/recipes-support/libgpiod/libgpiod_2.2.2.bb
+index 93c3e3b92d..09b0928dfa 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.1.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.2.bb
+@@ -13,7 +13,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-2.x:"
  
--SRC_URI[sha256sum] = "55714da8433fb4843ce797404977e4385d5e3df9e4aa00f7dde983fd87410fef"
-+SRC_URI[sha256sum] = "fb7306f5a3e045534e737ab7ecbeee039ba5e9bafbc5b5f231f616d7e9211b65"
+ SRC_URI += "file://gpio-manager.init"
  
--inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta
-+
-+DEPENDS += " \
-+	python3-setuptools-scm-native \
-+	python3-toml-native \
-+"
+-SRC_URI[sha256sum] = "0e948049c309b87c220fb24ee0d605d7cd5b72f22376e608470903fffa2d4b18"
++SRC_URI[sha256sum] = "7e3bff0209d75fbca2e9fcff1fd5f07cc58b543e129e08b6d4bb1e4a56cfec0d"
  
- RDEPENDS:${PN} += " \
- 	python3-six \
+ # Enable all project features for ptest
+ PACKAGECONFIG[tests] = " \
 -- 
-2.39.5
+2.48.1
 
 
