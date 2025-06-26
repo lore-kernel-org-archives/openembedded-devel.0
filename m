@@ -1,128 +1,87 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC097C77B7F
-	for <webhook@archiver.kernel.org>; Thu, 26 Jun 2025 06:15:00 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web10.2158.1750918498789110305
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A0DCC7115B
+	for <webhook@archiver.kernel.org>; Thu, 26 Jun 2025 08:49:31 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.3751.1750927766449218096
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Jun 2025 23:14:58 -0700
+ Thu, 26 Jun 2025 01:49:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=CRtKBZNX;
- spf=pass (domain: mvista.com, ip: 209.85.216.44, mailfrom: hprajapati@mvista.com)
-Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-313eeb77b1fso536291a91.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Jun 2025 23:14:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1750918498; x=1751523298; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=E9SbLwdqXpftmEi9jrME6WBFwWqRHHveuQz9jz+gL+U=;
-        b=CRtKBZNXYLc+mfz6qDsAF1j4pFyvDyPkLivw/wYSWNKex6t+e1kF0mufKrYUzQRMdk
-         0ojv1D+oGzqJkovmgyJFgOs50J+zgxTKbM1wVapmHLfaZ//Zbg4fVEvvSSih1z6uTjAs
-         vqg1/dHnbOlhv8j2zIsh7FpZPO5wKKFkuH6E4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750918498; x=1751523298;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=E9SbLwdqXpftmEi9jrME6WBFwWqRHHveuQz9jz+gL+U=;
-        b=eZcfh3rpUA+YP09sX16gvyXKaCQiltz2qB/7fwpLJ7pnUBLwj6HhMpME1fuIaLQ+hW
-         RYWp2/rCnV8+ejifo89333gjigJc/sli0fDVAB7i4I3sTaelT8ixe+adiI94PkBRwNkl
-         gac+d1VoGJJ9HNatQknp4FrcH4VL6BBOXWkXqeQd2NjRLEF6PZbNxLXf6nwbBBdXqrIA
-         BXYYpQ9xog7LK+Zc/0IA5UcLfe/Tq5Gp7fauinvKWGCUGsZ/ED4afd+oGSi6Tzm6AdTh
-         L7BnhBly2xPiiJJxZCsXyqsHtKwqiBsUhPhUxn19pipw/kymUO9urIj5TP+4uLmp8SEQ
-         oSwA==
-X-Gm-Message-State: AOJu0YzwbfIrpNqqP+V6hfitpud3dP+G3GDEb3vSqG5efzXfxFCpIq/V
-	Vtyn3CoOLN3KSw/eMBlrDn2B97UbkGKM+uLzbuXT7Z8b/8TYJYWKLC/x1MCZZCa589tUIT66BnW
-	u7ntU
-X-Gm-Gg: ASbGncsJKtFm78TUUc2jrm2+j+sWw1q2Ri0OQiyxXftl5lfzY+msnDGkCJP3z85AfHg
-	g6IIPgQYkPilOr6dTnQO5qZHdtme1yD8kGlMxKa+dTxp07mifG5VPZveqRB8pyhIFxBQ+HdlbLM
-	Ytjyh9cOxOkHwkcqcA4HqyXNWjn61GrVAuwQN5NQyqFLKsrpB5xJtMSjtt+x/BRldUUqsoxR0ID
-	RpNdoVFbyMiKJKAyKtNRKQKnJQ3/BohVpMmZmMVK1czCQrHiVcEiDOu8pd1p8eJJHlptPL3DXKd
-	ZyPUGx6grS4T8f1DEEc3r5AVI3nWmL7cF/yb+GQThzvtP+PE+7odgkkALRQ7gODNEgQw/LJZdi+
-	ZPtg7ihCAlxw=
-X-Google-Smtp-Source: AGHT+IH0rqpYIWYHLK3MIps5aoZCECSwA7PMlWjVV3rQ2WNH5Ps5mAce5YakYg+HXPXEgpWRikbRjg==
-X-Received: by 2002:a17:90b:1c09:b0:311:f05b:869b with SMTP id 98e67ed59e1d1-315f269d826mr8209167a91.30.1750918496005;
-        Wed, 25 Jun 2025 23:14:56 -0700 (PDT)
-Received: from MVIN00016.mvista.com ([103.250.136.149])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-315f53d9098sm3292476a91.31.2025.06.25.23.14.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Jun 2025 23:14:55 -0700 (PDT)
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-oe][kirkstone][PATCH] libssh: fix CVE-2025-5318
-Date: Thu, 26 Jun 2025 11:44:37 +0530
-Message-ID: <20250626061437.40761-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.49.0
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=827295ca50=changqing.li@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55Q5mlpN032366
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Jun 2025 01:49:26 -0700
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47dr14w81y-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Jun 2025 01:49:25 -0700 (PDT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.43; Thu, 26 Jun 2025 01:49:22 -0700
+Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.43 via Frontend Transport; Thu, 26 Jun 2025 01:49:21 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [walnascar][master][meta-networking][PATCH] netcf: remove EXTRA_AUTORECONF
+Date: Thu, 26 Jun 2025 16:49:21 +0800
+Message-ID: <20250626084921.1698090-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: 46Vs0PSb1HutD5hW575YKtFjQXYlUdEi
+X-Proofpoint-GUID: 46Vs0PSb1HutD5hW575YKtFjQXYlUdEi
+X-Authority-Analysis: v=2.4 cv=XYKJzJ55 c=1 sm=1 tr=0 ts=685d0995 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=EKsbETwGN8wA:10 a=6IFa9wvqVegA:10 a=Q4-j1AaZAAAA:8 a=t7CeM3EgAAAA:8 a=4taaBpbIvRurjojsPoIA:9 a=9H3Qd4_ONW2Ztcrla5EB:22
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjI2MDA3MiBTYWx0ZWRfX/t6CztLu+fYx n4DqlZ8zxCS6qxbvmFoIzHrcy5/0hV0mLzan1rbp8c3KMoZkV4AFezb/psqlRw8QeQJZ+khoWaf dp5XM76+NmQNY5p/DNH0sx7OnjEGQpHFz0SvInT1gpAJJCGmmwxKLdodC42iCrfCh0N5iDWwM+j
+ Vqeq7SOR6gWLujS0ygobebXM8d09aBxpaSKtHttjV/qeGrMg2W+5+Zrgvp5FdVNxv+I9tutK5vM LR8LjSW6NBFG4ABGydtrtEPzlMn+NjaZSjckgliGbUYseCEnnaNcwc67ahlal+PdhHNU31sVzkA adJa3zFjjRFAt5rHMTOov4Prcrm8VfH0iNiifK0W7Suw2iAyAvyHbTRTq1Ne2DG0FEy4JK97dbr
+ 2Rr/M1LQarJbdRffu2gaqkJB+IKVyfUshl5I6Co5xtjL/ggHptP6XJV2zVw7mOoXGgs8+ve9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
+ definitions=2025-06-26_04,2025-06-25_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ spamscore=0 mlxscore=0 impostorscore=0 phishscore=0 mlxlogscore=999
+ malwarescore=0 suspectscore=0 clxscore=1015 adultscore=0 bulkscore=0
+ priorityscore=1501 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505280000
+ definitions=main-2506260072
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Jun 2025 06:15:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118117
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Jun 2025 08:49:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118118
 
-Upstream-Status: Backport from https://git.libssh.org/projects/libssh.git/commit/?id=5f4ffda88770f95482fd0e66aa44106614dbf466
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+Refer [1], Makefile.am already set ACLOCAL_AMFLAGS = -I gnulib/m4, set
+EXTRA_AUTORECONF will cause do_configure failure with long build path,
+just drop EXTRA_AUTORECONF.
+
+[1] https://git.openembedded.org/openembedded-core/commit/meta/classes-recipe/autotools.bbclass?id=e718d1be2c4fb54cf363c23f929358e1be68c724
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../libssh/libssh/CVE-2025-5318.patch         | 31 +++++++++++++++++++
- .../recipes-support/libssh/libssh_0.8.9.bb    |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-5318.patch
+ meta-networking/recipes-support/netcf/netcf_0.2.8.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2025-5318.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2025-5318.patch
-new file mode 100644
-index 0000000000..2f89977873
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-5318.patch
-@@ -0,0 +1,31 @@
-+From 5f4ffda88770f95482fd0e66aa44106614dbf466 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Tue, 22 Apr 2025 21:18:44 +0200
-+Subject: CVE-2025-5318: sftpserver: Fix possible buffer overrun
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
-+
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=5f4ffda88770f95482fd0e66aa44106614dbf466]
-+CVE: CVE-2025-5318
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ src/sftpserver.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/sftpserver.c b/src/sftpserver.c
-+index 1af8a0e7..dee51534 100644
-+--- a/src/sftpserver.c
-++++ b/src/sftpserver.c
-+@@ -530,7 +530,7 @@ void *sftp_handle(sftp_session sftp, ssh_string handle){
-+ 
-+   memcpy(&val, ssh_string_data(handle), sizeof(uint32_t));
-+ 
-+-  if (val > SFTP_HANDLES) {
-++  if (val >= SFTP_HANDLES) {
-+     return NULL;
-+   }
-+ 
-+-- 
-+2.49.0
-+
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-index 061f13912f..e53b8a834e 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-@@ -8,6 +8,7 @@ DEPENDS = "zlib openssl"
+diff --git a/meta-networking/recipes-support/netcf/netcf_0.2.8.bb b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+index cddb0ead2f..4170e9fab0 100644
+--- a/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
++++ b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+@@ -26,8 +26,6 @@ EXTRA_OECONF:append:class-target = " --with-driver=redhat"
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ PACKAGECONFIG[systemd] = "--with-sysinit=systemd,--with-sysinit=initscripts,"
  
- SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.8 \
-            file://CVE-2020-16135.patch \
-+           file://CVE-2025-5318.patch \
-           "
- SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
- 
+-EXTRA_AUTORECONF += "-I ${S}/gnulib/m4"
+-
+ do_configure:prepend() {
+     currdir=`pwd`
+     cd ${S}
 -- 
-2.49.0
+2.34.1
 
 
