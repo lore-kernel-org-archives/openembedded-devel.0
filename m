@@ -2,159 +2,130 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 178B5C7EE30
-	for <webhook@archiver.kernel.org>; Thu, 26 Jun 2025 14:13:13 +0000 (UTC)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
- by mx.groups.io with SMTP id smtpd.web10.9187.1750947190145411199
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1114C7EE31
+	for <webhook@archiver.kernel.org>; Thu, 26 Jun 2025 14:14:12 +0000 (UTC)
+Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
+ by mx.groups.io with SMTP id smtpd.web11.9110.1750947243451451646
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Jun 2025 07:13:10 -0700
+ Thu, 26 Jun 2025 07:14:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KOL4DUhq;
- spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-710fe491842so10169087b3.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Jun 2025 07:13:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PuPyksD9;
+ spf=pass (domain: gmail.com, ip: 209.85.128.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-711d4689084so12154027b3.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Jun 2025 07:14:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750947189; x=1751551989; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1750947242; x=1751552042; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=3nE5yOSU5v2qSeEiBvEhY5P75yIEOL5fv0TzJCNebWA=;
-        b=KOL4DUhq4htONzPYMvaYudC5DwWdTevRN/9ASIUjAbPe1gqEbv9PCH5h8RRhUIS/L0
-         l1pUoQW08krYwA0p1ic7roMfo0yrOUcb9B08e+pg9pbs8s6A5XruDCU6m1BgIvWHYmKc
-         CmCJTsE/bcO3u4jaT3PQAf7xd/mVFNxTHMcHfhJJFYKgfD14SYqpzQPhNXk6dBroZRJ+
-         jKFsQ4i74tTUk/zGh+aviqhR0zpdjUw71171T2Ty6mt3/2qt8f21mePYIZqNGHzRTm4r
-         CL+JAh6vso1T2AmfGITdmYxC54KsLjJxbS0uB339cueiBIVSbNt1ihDEO9XIbc+6r4iy
-         h6tg==
+        bh=rwhdwUccmyzZqkwS1bxj2mFznXLDEZfQUiWP6kMzbOQ=;
+        b=PuPyksD9UQnfP8Wq7DWbmaK655cjI836FIEriG6frUUgrlmOzx8AVSceiDvWSEDEuq
+         695P+iG5NOTvYcEMqrYJVPc/gRiRnwWeb+bUAiYdKkFc9g1o8MvOYtg9XQ+9N86xWEap
+         aqHUhtTXbEhn/D+sTwVj+5EMsOdhQLjwFVkGJv5WAGALfE3Hxbm9+B/2WHMGH7L7y90u
+         kedCbY9pLHiZt3t+gBhgmcLWAYUYEfHcNt/u9Pp87a5tqbyLTr4/BkmPTmPX/8jmv+YP
+         on2AVOFLb+PfMaGRHV7OOyntIvXgy2eNXPq8sJ+0OFfJdZ57vIU6gbWbKF3Y8WtFDxND
+         /9QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750947189; x=1751551989;
+        d=1e100.net; s=20230601; t=1750947242; x=1751552042;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=3nE5yOSU5v2qSeEiBvEhY5P75yIEOL5fv0TzJCNebWA=;
-        b=Z9+aG0EIiVy0jCXN6hdhkyUsqoDmh3B5jZIbhajyou/8YVMU2joVsqEbtCffTi/cwC
-         emvt+UGlo2cPv5YHaGMitBnUK8a3KomO6KeBg/zh8F5gU2z2XYLYh/bmF0tLhT4WaGDq
-         lOVZglXY4Q3M/CI/lDZHSJW5J7Zka0epEIcWJmluRyvrLsfeNdPmAIRapfRVG41wYRBV
-         7evIvE06HV4NUaRlfb+q3xKgnUJmKETWeXkhCkO9QkyDaavsSI1LljupjpjG20ieGPxx
-         QUxqetAyM0Evhc22sgaNgb7M9zCHLP5v47WTNzZHpRafG2ft0Hq9agqcOOEsNyI3oWjr
-         ZWOg==
-X-Gm-Message-State: AOJu0Yz5dhuV2qeDCrWS3ZDQnupJEnDvBaCtz/f7Kp4oC7uikLsVboBg
-	g9yeLqZEcyewnt6OTEJLEy04hMceZybXGb1jtgaDnaI/+FJIQoFlpgLQwpupbyk0kjQZfcuuKXX
-	M+EmkjQXd6XPO8ezuPoUDGX2wzsGP50k=
-X-Gm-Gg: ASbGnct76rqCby779LXNSFwmrPuIXSpMPcgpRGo3i/qQM0yuX7pgnsU6EZjxrV6R6WQ
-	/vBt71R54VmMao/YVeolcFKOJgl1TjF5y+BchDNpERas2pl3ZSPmcpVY/3z8AxpMjRXCKdjFUXu
-	awbkWIvVD/RfqM6iWyLA+6uMi1WMJN67h3F+dpCgumbWg=
-X-Google-Smtp-Source: AGHT+IFEBrFU3LcveCKWoGRycCTXAQUDqlhY2eMnbfnZcW+rZ+SIBvv7Kj+XP35o9Pqdih9uu4GuWX92PVbNbad8DpM=
-X-Received: by 2002:a05:690c:6b0c:b0:70f:8913:ed66 with SMTP id
- 00721157ae682-715087c70bdmr64348247b3.38.1750947189123; Thu, 26 Jun 2025
- 07:13:09 -0700 (PDT)
+        bh=rwhdwUccmyzZqkwS1bxj2mFznXLDEZfQUiWP6kMzbOQ=;
+        b=TDgnDHjVGjtfLQzZkk6WmoCMhE7iGCyS/3MTYFVe/ALU2E3Z239zFzunkam8WirlBm
+         cidjb+fh4GlFyrk+YIN9lkJ+MhiSwZQToUktqx6mxTs6fBid10BfPFsHg3TSvV9KnwhX
+         HeDBJnWilJU2v8Vs5GbP9vCpPXEHpXnymQwD3Ow3ON6HHO9pkNB/R7duDWsbI/sDzmD3
+         e7/+eBpjAAv3ZYfqq0oFi30JlVxh1g5IQJmQuC8sIPuDoTYUp8K0n//SbrRi91qBVcDw
+         EEwr831o60ectCnwYVF2bSruOdcLpxCRK7jQjfAao7DHYTMYQV6J0P5Eoj6fZC/Stvhn
+         BSDQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVqwc3kR37lN7sA4ST9/Nm3NjKydQT+/qYK9/T25h4aym6rufV6dFKHcJnQ94HrJ8kyHM17fufVy4H0/A584i15Du0=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyiG/F5lqX9BXfVjkfHiKiaYYzJDdC/HYKiOoV3ahCW3BzV4C30
+	J5uGIPtxJ8SXOM908vt+V3umZPjRS0EGBhSooxj6UIHTuEKeMWaOQgNOiqCQqP2uaP4tFQLn647
+	RzM1CMlInzCaOQuv89qqTUHdwMFfet+gHo1ag
+X-Gm-Gg: ASbGncuuGEAP1BvuYwRl+yx/+VRKGKLplKzFkwv3hDy0tDXftwgtlEwazD5V8qxN9cN
+	trJBOo4nahW5lijzb5fRj42UGGXreFSrIXGiPuZsxuTmIqrIbllv5dEdAesyhGbf+G6BFO2ZaKV
+	gADQ5OKpKBRgAY9blGGyldBK27Fcs64YU6gkBtRXN6tMo=
+X-Google-Smtp-Source: AGHT+IHzD54Fj6IokGVQdjUhFbe8Csd3tzHj9n9EOYmMBum9+2EEYQeFuaLuxgpbYaz6FvLy30pxOmxpz7itK2dKMVU=
+X-Received: by 2002:a05:690c:18:b0:70e:2d30:43d6 with SMTP id
+ 00721157ae682-71406e153a3mr100988877b3.38.1750947242533; Thu, 26 Jun 2025
+ 07:14:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <ed4ee502-403b-423a-99c4-f41ad6d1fa06@gmail.com>
-In-Reply-To: <ed4ee502-403b-423a-99c4-f41ad6d1fa06@gmail.com>
+References: <184C6E7578662DE2.823@lists.openembedded.org> <cf6b6313-bae2-4a87-b2ca-c5f076507109@ti.com>
+ <DB5PR02MB1021308634340DFD241895C3AEF7AA@DB5PR02MB10213.eurprd02.prod.outlook.com>
+ <CAPoiz9wQpwu7vCC7FPPT5_3W2WEzrjdxtrV5JYF6iGCz8354uQ@mail.gmail.com>
+In-Reply-To: <CAPoiz9wQpwu7vCC7FPPT5_3W2WEzrjdxtrV5JYF6iGCz8354uQ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 26 Jun 2025 08:12:41 -0600
-X-Gm-Features: Ac12FXx2KhaRNWOBasUOwCgjW7fA7sDjQ4ZP94XOcJACgWTI4B2cUN_w4skCZd4
-Message-ID: <CAMKF1spfNPKnDp_gjpiJEWe2jvLo-1Srgv_9rpMC=aA3CtgBuw@mail.gmail.com>
-Subject: Re: scarthgap merge request: June 26th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Date: Thu, 26 Jun 2025 08:13:35 -0600
+X-Gm-Features: Ac12FXw_fXLIzxP2m0lGQyHsksEPThsAA1CxqIcbJG_vdVmduB0At24uVXF6C9g
+Message-ID: <CAMKF1soMbsG1QA2YTQXrjbz8S_BEXLMp46jtJqVcGzLGF6HJNw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/2] protobuf: 5.29.5 -> 6.31.1
+To: jdmason@kudzu.us
+Cc: peter.kjellerstedt@axis.com, "reatmon@ti.com" <reatmon@ti.com>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Jun 2025 14:13:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118124
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Jun 2025 14:14:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118125
 
-merged now thanks Armin.
+On Thu, Jun 26, 2025 at 8:06=E2=80=AFAM Jon Mason via lists.openembedded.or=
+g
+<jdmason=3Dkudzu.us@lists.openembedded.org> wrote:
+>
+> On Wed, Jun 25, 2025 at 9:19=E2=80=AFPM Peter Kjellerstedt via
+> lists.openembedded.org
+> <peter.kjellerstedt=3Daxis.com@lists.openembedded.org> wrote:
+> >
+> > > -----Original Message-----
+> > > From: openembedded-devel@lists.openembedded.org <openembedded-devel@l=
+ists.openembedded.org> On Behalf Of Ryan Eatmon via lists.openembedded.org
+> > > Sent: den 26 juni 2025 01:57
+> > > To: openembedded-devel@lists.openembedded.org
+> > > Subject: Re: [oe] [meta-oe][PATCH 1/2] protobuf: 5.29.5 -> 6.31.1
+> > >
+> > > Not sure why it says 1/2.  Ignore that.
+> >
+> > You probably subconsciously knew that you should update python3-protobu=
+f
+> > as well. ;)
+> >
+> > //Peter
+>
+> Confirmed
+>
+> | Failed to import nanopb_pb2.py: Detected mismatched Protobuf
+> Gencode/Runtime major versions when loading nanopb.proto: gencode
+> 6.31.1 runtime 5.29.5. Same major version is required. See Protobuf
+> version guarantees at
+> https://protobuf.dev/support/cross-version-runtime-guarantee.
+>
+> git mv ./meta-python/recipes-devtools/python/python3-protobuf_5.29.5.bb
+> ./meta-python/recipes-devtools/python/python3-protobuf_6.31.1.bb
+> and
+> SRC_URI[sha256sum] =3D
+> "d8cac4c982f0b957a4dc73a80e2ea24fab08e679c0de9deb835f4a12d69aca9a"
+>
+> Seem to have addressed the issue
+>
 
-On Thu, Jun 26, 2025 at 7:37=E2=80=AFAM akuster808 <akuster808@gmail.com> w=
-rote:
+Please send a patch for this upgrade as well.
+
+> Thanks,
+> Jon
 >
-> The following changes since commit 491671faee11ea131feab5a3a451d1a01deb2a=
-b1:
 >
->    proftpd: Fix CVE-2024-57392 (2025-05-21 09:17:27 -0400)
+> >
+> >
 >
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded scarthgap-next
->
-> for you to fetch changes up to 727811eaf256b88fd135be99559f2cbf14c82fce:
->
->    imagemagick: guard sed operations in do_install for optional files
-> (2025-06-23 17:03:24 -0400)
->
-> ----------------------------------------------------------------
-> Bastian Krause (2):
->        libsocketcan: use https instead of git protocol
->        canutils: use https instead of git protocol
->
-> Clayton Casciato (1):
->        chrony: use inherit_defer for conditional inherit of useradd
->
-> Leonard Anderweit (1):
->        lmsensors: Fix build without sensord
->
-> Sana Kazi (1):
->        imagemagick: guard sed operations in do_install for optional files
->
-> Vijay Anusuri (1):
->        redis: upgrade 7.2.7 -> 7.2.8
->
-> Yogita Urade (1):
->        postgresql: upgrade 16.8 -> 16.9
->
->   meta-networking/recipes-support/chrony/chrony_4.5.bb |  2 +-
->   meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb |  5 +++--
->   .../files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-> |  4 ++--
->   .../recipes-dbs/postgresql/{postgresql_16.8.bb =3D> postgresql_16.9.bb}
-> |  2 +-
->   .../0001-hiredis-use-default-CC-if-it-is-set.patch |  0
->   .../0002-lua-update-Makefile-to-use-environment-build-setting.patch |  =
-0
->   .../0003-hack-to-force-use-of-libc-malloc.patch |  0
->   .../0004-src-Do-not-reset-FINAL_LIBS.patch |  0
->   .../0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch |  0
->   .../0006-Define-correct-gregs-for-RISCV32.patch |  0
->   .../redis/{redis-7.2.7 =3D> redis-7.2.8}/init-redis-server             =
- |  0
->   .../recipes-extended/redis/{redis-7.2.7 =3D> redis-7.2.8}/redis.conf   =
- |  0
->   .../recipes-extended/redis/{redis-7.2.7 =3D> redis-7.2.8}/redis.service=
- |  0
->   meta-oe/recipes-extended/redis/{redis_7.2.7.bb =3D> redis_7.2.8.bb}
-> |  2 +-
->   meta-oe/recipes-extended/socketcan/canutils_4.0.6.bb |  2 +-
->   meta-oe/recipes-extended/socketcan/libsocketcan_0.0.12.bb |  2 +-
->   meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-> | 23 +++++++++++++++++------
->   17 files changed, 27 insertions(+), 15 deletions(-)
->   rename meta-oe/recipes-dbs/postgresql/{postgresql_16.8.bb =3D>
-> postgresql_16.9.bb} (86%)
->   rename meta-oe/recipes-extended/redis/{redis-7.2.7 =3D>
-> redis-7.2.8}/0001-hiredis-use-default-CC-if-it-is-set.patch (100%)
->   rename meta-oe/recipes-extended/redis/{redis-7.2.7 =3D>
-> redis-7.2.8}/0002-lua-update-Makefile-to-use-environment-build-setting.pa=
-tch
-> (100%)
->   rename meta-oe/recipes-extended/redis/{redis-7.2.7 =3D>
-> redis-7.2.8}/0003-hack-to-force-use-of-libc-malloc.patch (100%)
->   rename meta-oe/recipes-extended/redis/{redis-7.2.7 =3D>
-> redis-7.2.8}/0004-src-Do-not-reset-FINAL_LIBS.patch (100%)
->   rename meta-oe/recipes-extended/redis/{redis-7.2.7 =3D>
-> redis-7.2.8}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.pat=
-ch
-> (100%)
->   rename meta-oe/recipes-extended/redis/{redis-7.2.7 =3D>
-> redis-7.2.8}/0006-Define-correct-gregs-for-RISCV32.patch (100%)
->   rename meta-oe/recipes-extended/redis/{redis-7.2.7 =3D>
-> redis-7.2.8}/init-redis-server (100%)
->   rename meta-oe/recipes-extended/redis/{redis-7.2.7 =3D>
-> redis-7.2.8}/redis.conf (100%)
->   rename meta-oe/recipes-extended/redis/{redis-7.2.7 =3D>
-> redis-7.2.8}/redis.service (100%)
->   rename meta-oe/recipes-extended/redis/{redis_7.2.7.bb =3D>
-> redis_7.2.8.bb} (96%)
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#118123): https://lists.openembedded.org/g/openembedde=
+d-devel/message/118123
+> Mute This Topic: https://lists.openembedded.org/mt/113835772/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
