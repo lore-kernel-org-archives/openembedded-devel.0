@@ -1,103 +1,106 @@
-Return-Path: <dev@g0hl1n.net>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27D81C7EE31
-	for <webhook@archiver.kernel.org>; Thu, 26 Jun 2025 14:50:53 +0000 (UTC)
-Received: from out-173.mta1.migadu.com (out-173.mta1.migadu.com [95.215.58.173])
- by mx.groups.io with SMTP id smtpd.web11.9938.1750949443010286428
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 541E0C7EE30
+	for <webhook@archiver.kernel.org>; Thu, 26 Jun 2025 15:00:53 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web10.10345.1750950047622998946
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Jun 2025 07:50:43 -0700
+ Thu, 26 Jun 2025 08:00:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@g0hl1n.net header.s=key1 header.b=NS08eSLM;
- spf=pass (domain: g0hl1n.net, ip: 95.215.58.173, mailfrom: dev@g0hl1n.net)
-Date: Thu, 26 Jun 2025 16:50:28 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=g0hl1n.net; s=key1;
-	t=1750949441;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=nM836ZtruNdh5gP9XNstdWmigVYy8MH5ZQsyuDmteic=;
-	b=NS08eSLMJWCu+BgMPfOt1zfRv/kOrK4CqS72CmFW5Mjpzkcx842LBaif0JyDT2w5pZmJ+F
-	Hcm3HhatE/dMHKMXEPnRDCrs6JX8iyjlZUJvwGZwW4PwrVOG4/AzV/LuIqK877OY2jMAdu
-	laA1e8irlJUc05IgqBQ/42OsVtsNBk0=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Richard Leitner <dev@g0hl1n.net>
-To: openembedded-devel@lists.openembedded.org
-Cc: Richard Leitner <richard.leitner@advastore.com>
-Subject: Re: [meta-python][PATCH] python3-can: upgrade 4.4.2 -> 4.5.0
-Message-ID: <t4jv2rovok75x6zdlbeuzrvg44upmwlh6c2odbvxywlm4hgbvu@lvxwmbuhcnhi>
-References: <20250626144740.3775245-1-dev@g0hl1n.net>
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=j5BLq1gE;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: reatmon@ti.com)
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 55QF0ik01765910;
+	Thu, 26 Jun 2025 10:00:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1750950044;
+	bh=AvVNni1M6slkTSub/OmqI53wV0wnaqoBV1ocMbcN+Kw=;
+	h=Date:Subject:To:References:From:In-Reply-To;
+	b=j5BLq1gEW9KvAYS7IjVToCyYoIR65sBW97+ol1zzUr3vjFBbEqk8HM+8jZyQ5y+Xs
+	 Kr2Tn5oifGNDdRKpzZChpSW2UBFgVGk+PtZz9jV864Km5wsdDZxIgmQYM//RKzh+3z
+	 uDlyt/KAJeHZEReUBqH6q/vLgM8Tz++qtfNBhWR8=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 55QF0itd3724112
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+	Thu, 26 Jun 2025 10:00:44 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 26
+ Jun 2025 10:00:44 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Thu, 26 Jun 2025 10:00:44 -0500
+Received: from [10.249.37.202] ([10.249.37.202])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 55QF0ida1456679;
+	Thu, 26 Jun 2025 10:00:44 -0500
+Message-ID: <de57cc74-9aee-4703-b50b-fd9806bc1c69@ti.com>
+Date: Thu, 26 Jun 2025 10:00:44 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250626144740.3775245-1-dev@g0hl1n.net>
-X-Migadu-Flow: FLOW_OUT
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [PATCH] python3-protobuf: upgrade from 5.29.5 to 6.31.1
+To: Jon Mason <jdmason@kudzu.us>, <openembedded-devel@lists.openembedded.org>
+References: <20250626144912.3573904-1-jdmason@kudzu.us>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20250626144912.3573904-1-jdmason@kudzu.us>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Jun 2025 14:50:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118129
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Jun 2025 15:00:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118130
 
-Hi,
 
-please ignore this one.
+Thanks.
 
-v2 is out already.
 
-Thanks :-)
-
-regards;rl
-
-On Thu, Jun 26, 2025 at 04:47:40PM +0200, Richard Leitner wrote:
-> python3-can 4.4.y requires msgpack~=1.0.0, but openembedded-core
-> versions newer than scarthgap provide msgpack 1.1.0 [1], causing
-> "pip check" to fail with the following error:
+On 6/26/2025 9:49 AM, Jon Mason wrote:
+> From: Jon Mason <jon.mason@arm.com>
 > 
->     python-can 4.4.2 has requirement msgpack~=1.0.0; platform_system != "Windows", but you have msgpack 1.1.0.
+> protobuf was upgraded from 5.29.5 to 6.31.1. Upgrade python3-protobuf
+> to match, otherwise a fatal mismatch error occurs.
 > 
-> This patch resolves the issue by updating python3-can to 4.5.0.
-> 
-> [1] https://layers.openembedded.org/layerindex/recipe/66997/
-> Signed-off-by: Richard Leitner <richard.leitner@advastore.com>
+> Signed-off-by: Jon Mason <jon.mason@arm.com>
 > ---
->  .../python/{python3-can_4.4.2.bb => python3-can_4.5.0.bb}    | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-can_4.4.2.bb => python3-can_4.5.0.bb} (83%)
+>   .../{python3-protobuf_5.29.5.bb => python3-protobuf_6.31.1.bb}  | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>   rename meta-python/recipes-devtools/python/{python3-protobuf_5.29.5.bb => python3-protobuf_6.31.1.bb} (95%)
 > 
-> diff --git a/meta-python/recipes-devtools/python/python3-can_4.4.2.bb b/meta-python/recipes-devtools/python/python3-can_4.5.0.bb
-> similarity index 83%
-> rename from meta-python/recipes-devtools/python/python3-can_4.4.2.bb
-> rename to meta-python/recipes-devtools/python/python3-can_4.5.0.bb
-> index 31190a9f1d..8e32cee622 100644
-> --- a/meta-python/recipes-devtools/python/python3-can_4.4.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-can_4.5.0.bb
-> @@ -4,13 +4,15 @@ SECTION = "devel/python"
->  LICENSE = "LGPL-3.0-only"
->  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e6a600fd5e1d9cbde2d983680233ad02"
->  
-> -SRC_URI[sha256sum] = "1c46c0935f39f7a9c3e76b03249af0580689ebf7a1844195e92f87257f009df5"
-> +SRC_URI[sha256sum] = "d3684cebe5b028a148c1742b3a45cec4fcaf83a7f7c52d0680b2eaeaf52f8eb7"
->  
->  PYPI_PACKAGE = "python_can"
->  UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
->  
->  inherit pypi python_setuptools_build_meta
->  
-> +DEPENDS += "python3-setuptools-scm-native"
-> +
->  RDEPENDS:${PN} += "\
->      python3-aenum \
->      python3-asyncio \
-> @@ -21,6 +23,7 @@ RDEPENDS:${PN} += "\
->      python3-json \
->      python3-logging \
->      python3-misc \
-> +    python3-msgpack \
->      python3-netserver \
->      python3-packaging \
->      python3-pkg-resources \
-> -- 
-> 2.47.2
+> diff --git a/meta-python/recipes-devtools/python/python3-protobuf_5.29.5.bb b/meta-python/recipes-devtools/python/python3-protobuf_6.31.1.bb
+> similarity index 95%
+> rename from meta-python/recipes-devtools/python/python3-protobuf_5.29.5.bb
+> rename to meta-python/recipes-devtools/python/python3-protobuf_6.31.1.bb
+> index 14ab3237b97b..bb801ffb71f4 100644
+> --- a/meta-python/recipes-devtools/python/python3-protobuf_5.29.5.bb
+> +++ b/meta-python/recipes-devtools/python/python3-protobuf_6.31.1.bb
+> @@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
+>   "
+>   
+>   inherit pypi setuptools3
+> -SRC_URI[sha256sum] = "bc1463bafd4b0929216c35f437a8e28731a2b7fe3d98bb77a600efced5a15c84"
+> +SRC_URI[sha256sum] = "d8cac4c982f0b957a4dc73a80e2ea24fab08e679c0de9deb835f4a12d69aca9a"
+>   
+>   CVE_PRODUCT += "google:protobuf protobuf:protobuf google-protobuf protobuf-python"
+>   
 > 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#118127): https://lists.openembedded.org/g/openembedded-devel/message/118127
+> Mute This Topic: https://lists.openembedded.org/mt/113844469/6551054
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [reatmon@ti.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
