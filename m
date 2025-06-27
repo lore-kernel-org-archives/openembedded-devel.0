@@ -1,190 +1,172 @@
-Return-Path: <johannes.schneider@leica-geosystems.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BA54C83000
-	for <webhook@archiver.kernel.org>; Fri, 27 Jun 2025 05:40:34 +0000 (UTC)
-Received: from AM0PR83CU005.outbound.protection.outlook.com (AM0PR83CU005.outbound.protection.outlook.com [52.101.69.57])
- by mx.groups.io with SMTP id smtpd.web11.6720.1751002824875521010
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59BBAC77B7F
+	for <webhook@archiver.kernel.org>; Fri, 27 Jun 2025 08:01:45 +0000 (UTC)
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
+ by mx.groups.io with SMTP id smtpd.web11.8202.1751011296235881015
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Jun 2025 22:40:25 -0700
+ Fri, 27 Jun 2025 01:01:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@leica-geosystems.com header.s=selector1 header.b=IRraICbq;
- spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 52.101.69.57, mailfrom: johannes.schneider@leica-geosystems.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iWY1zE51xi7bJKKooPvm+ZUmOhHF0jzmQtkPgY3XQgMddbMu9bee38erhfSdGCuL3+znCSe4wVn7iPQrpJHh9Ox1Ndzf53hMsJin85ntG4kUH/CeI3Cp/KBegA3GVWeb2RnKQ11jdP2ALMxtzHCO0TpscTKSf8W/6OVmPlowzKeaHdy/l1dyxrKMTs0Ih29dCpJ5Pdi35VodiHm+pqJVAm1orgJViPYOgr6d6rpuV/NjawKtf85ehir6I7kNC5BlgUchTrv1cnDZ/xlvsYv2/K3cNGf66/m3A191rn2hal7u5RdjBwLvMC4lY6D0KkAMnjXi0u0DlIpE120qbbFeqA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mrIJ8R5u1SR1VFVeVowntyvoGrhrIKJisI6lVy/ROe8=;
- b=ixbXtgLgPVHvoA8Q0hIKV0uGFvCX2aT5gTY3OVPVu3EXJE2SCaHijYpCrrTJvqH0W5bsV33zMXpvZYk1MyhXKhSeizC4TeX7pnfEji1wegoZaGG/+GLJwpTiOUpxkUKh05ZqrHg2SYSecz6aIrK/bCBAGqB+qc6bz2PzRu21onevkY8psPY6r5i1nQKlmtzOTwD47ykPsqsozYtI5agcV+i8xf4fdbKhwf6NHOYqc4iUh0my/nrwhMwod/TOVpvqqhz/w6Hck3y27bnW0+ITh09ixX4v0IVfaFDn6Hw5OtXb8tOwIk8rOLqfYO4AHF2Gp2T4hVYSfC1UIYsml+v1GA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 193.8.40.94) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=leica-geosystems.com; dmarc=pass (p=reject sp=reject pct=100)
- action=none header.from=leica-geosystems.com; dkim=none (message not signed);
- arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mrIJ8R5u1SR1VFVeVowntyvoGrhrIKJisI6lVy/ROe8=;
- b=IRraICbqpOghK36Ft1aYD0ZMA9rm48CbrE1nIMuY2PPkgXzHUcQmF8VO9ulVJK0UKOAT4jVAk7J8BoiR6TiQIRA1FOdR2wtqUqDyWvJsp5JxflotUPXvJAwr2dUFXTzfsyDp6Piy6XKm64xz/8NQu/VMd658hoVEyvovs73h+Hc=
-Received: from PR1P264CA0103.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:2cf::10)
- by AM8PR06MB7700.eurprd06.prod.outlook.com (2603:10a6:20b:316::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.23; Fri, 27 Jun
- 2025 05:40:20 +0000
-Received: from AM4PEPF00025F95.EURPRD83.prod.outlook.com
- (2603:10a6:102:2cf:cafe::61) by PR1P264CA0103.outlook.office365.com
- (2603:10a6:102:2cf::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8880.21 via Frontend Transport; Fri,
- 27 Jun 2025 05:40:20 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 193.8.40.94)
- smtp.mailfrom=leica-geosystems.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=leica-geosystems.com;
-Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
- designates 193.8.40.94 as permitted sender) receiver=protection.outlook.com;
- client-ip=193.8.40.94; helo=hexagon.com; pr=C
-Received: from hexagon.com (193.8.40.94) by
- AM4PEPF00025F95.mail.protection.outlook.com (10.167.16.4) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8901.1 via Frontend Transport; Fri, 27 Jun 2025 05:40:20 +0000
-Received: from [127.0.1.1] ([10.60.34.121]) by hexagon.com with Microsoft SMTPSVC(10.0.17763.1697);
-	 Fri, 27 Jun 2025 07:40:17 +0200
-From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
-Date: Fri, 27 Jun 2025 07:40:19 +0200
-Subject: [PATCH meta-oe v3 5/6] signing.bbclass: add signing_extract_cert
- helpers
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gv7Dwwme;
+ spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-708d90aa8f9so19740727b3.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Jun 2025 01:01:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1751011295; x=1751616095; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=RndcICTOww1aHz3Sm7XuOfXP0PDD8Kq5OjQ3ty6h/ng=;
+        b=gv7Dwwmey2qi82MF85rhd/LvP5WTZdpoGEb+hCidoP1qZlXAeE0lyt4xzPbILiH2vV
+         NjC3rPMCy0IIupV7Pnvz4WEnlbvOdXmvFmrZ+hwOyqQdW3nKyQ4Qbfo9M0tSYpxkk/QR
+         e3i6rs9c1MpJNxVThxDt9GY0hExNGn8Gj17FL+vr2GCHACSKJLN5mO6ac9BRtDpgN4Rt
+         2Gf7yIhXMqIkT+VrRsSyKoze99Jl01jWsskerwU//OBOR0B2PGgcbwPQTWQRJSzr/Jcp
+         jyzdSNrNn0lN4uCreU2PWkEFgXCF53bAD/nHD1/ohLHS3B1haOGBGeWGyzOlRhmR31dX
+         AkiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751011295; x=1751616095;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=RndcICTOww1aHz3Sm7XuOfXP0PDD8Kq5OjQ3ty6h/ng=;
+        b=nnVfBM3u6wOYT8Czte3NUAWeLzMSt0KYtVOWzNa6kMgx3PPyiUFgiyTtNA8EXszH+U
+         o0T9QVBNaMeoxugfVLCAjWn/x2Yc/uoACAgDtKcQuiswz/IVp/0J/STuMis1o9M+s/29
+         2Siy00HFq/vgQ9JQFxsVMFUAhPMPNzIWhnW0G5IYLmQjc6gJVF0hPhnPvTThvLhbQ2u4
+         du1tb8niNDe2uaC8aiotRuAEhGTneshLrd3faSB7cEH+BpmDqxM87UYsQIXhaRlJXpU/
+         uKdPs4fJcKBs6TDeK11oMi0YuJrZp5hf6ahsu8Y7F+uR6yt5bWgawLOy/fEYX1HamCSd
+         DH5A==
+X-Forwarded-Encrypted: i=1; AJvYcCUV2kyoVtg4fyUw/KfBESNmstd9fL8mS9Tk/BptV8BWuGyeefMHEVr+fYHsK/Vxw+nsrkO09qrKS3ppDGH9azgL8nY=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzqDF3xvHSnauMWyCzDppH9FxsDH7RnmdCrOevu1wuCOA8KZUJD
+	EGqjAnz5yODgWBmjsH2KHPoU89oaRP/zcac6qz1C14qHRNZqvHMjiSUvnV4XvMTFcTj5twlbS3j
+	EoUAlHasLHMA1pNApuueCRawI7H4TD4q2LRM+
+X-Gm-Gg: ASbGncu8vfhdO6bF9Zp+eLR4gKJYqq6HNxPGZ0pvPINC2rvJhmyoUkWnNMuILVR7fJF
+	Z2VlGA25pMHjlExLeJfs1AY9LuWN8LeaqhWyQcBOhgfluFideapZGlsLw8yyzrGA2NE6123BWen
+	I8jKuRkZgAg99VUCJlFFzEiyEeI1o0V78+G8JU1qgszbLndeOc8C1a
+X-Google-Smtp-Source: AGHT+IEufnkZSZCsbLDrh8V8hO8zVnSIcCHWhL/cW4SsACWaZ2Pg3/oG+oyZM/mbZpzfoB7mPx0l8QNavjrKI4Rqcmc=
+X-Received: by 2002:a05:690c:7401:b0:712:e22d:a235 with SMTP id
+ 00721157ae682-715171af91amr35670887b3.17.1751011295167; Fri, 27 Jun 2025
+ 01:01:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250627-signing-set-ca-v3-5-030812797c6a@leica-geosystems.com>
-References: <20250627-signing-set-ca-v3-0-030812797c6a@leica-geosystems.com>
-In-Reply-To: <20250627-signing-set-ca-v3-0-030812797c6a@leica-geosystems.com>
-To: jlu@pengutronix.de
-Cc: bsp-development.geo@leica-geosystems.com, 
- openembedded-devel@lists.openembedded.org, raj.khem@gmail.com, 
- Johannes Schneider <johannes.schneider@leica-geosystems.com>
-X-Mailer: b4 0.13.0
-X-OriginalArrivalTime: 27 Jun 2025 05:40:17.0594 (UTC) FILETIME=[F6AD99A0:01DBE725]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00025F95:EE_|AM8PR06MB7700:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4053028f-3bf9-4c3e-5973-08ddb53d1aeb
-X-SET-LOWER-SCL-SCANNER: YES
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700013;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?SjdJR3F4Y1F0bGUzVjFDQlFTZ1drWlVYNVNkU0szcExTNVc2eHkxek8xOXd1?=
- =?utf-8?B?OU1xYUZCb1pVbUdCZTFDUEhZZGNneEtHeHRXQnpQVjhDU2xXR0FuQkxhYnpy?=
- =?utf-8?B?RHdVZEFHeHVGTmc4SmxLZXRhVFVPajhKOVdlUVNEVk50clU4eXQzdnJrWlU4?=
- =?utf-8?B?Q1RPMExTVFB1ZXdTMjd4SmhOSUVOQ096MUVPNnRtcVg1V1kwek1zYnRMV05u?=
- =?utf-8?B?c0dyY0lzYUEyYnVSY3JkZ083UEUxcVZSOHJXWnplV3NkUTIrVnhFUkZBYTdy?=
- =?utf-8?B?cGh1UHgrOHo4dU5CZllKVExHV0RtMGQ1ZmRaVmFWckpxakN4cHgvTlhDU3d4?=
- =?utf-8?B?VkoxMlJxYmFwODdqVlZocHBOZy9STVF6RklWeXFJN1NpOEh5ZTEyNjZlaStX?=
- =?utf-8?B?SlJBd01JVEdBdTN1MS8rQ0xWNDVacHhxZkM2NURKcTBoOGFJSy9KU0lybEtU?=
- =?utf-8?B?SDZiU3AxU0ZGckZmQUVwS3ZOMEhmMFU3djNIejJWc2hXVzRFcUdiTHdIMVJ2?=
- =?utf-8?B?bzNUckVpUldIWnJyeWJnS0NSMjV2bjZKSnNLM0N5RmloT1BoemdmbG00dFZw?=
- =?utf-8?B?QURZRXY1OXdtck54K0tneFprZlo2eXMyVG5hQWVCKzhnM1BsSEVKRmpsSHR4?=
- =?utf-8?B?ZnB2QUE3UmxCaTc0S25iREQxMU1DTEtSY3lHcDVZcnBTOFhKRTljMFJWMVdn?=
- =?utf-8?B?MXZOL1hzSy83di9oS3dlbTNkM3ZDS1U3OXlkcURZS2FtMVNIZ2E3YjhSWmZx?=
- =?utf-8?B?SENxRnJ3YTR0MW03NS9FWlhoTmllUVNsODR2UDhaYk1leEZMaUxnWVg0bE5P?=
- =?utf-8?B?T2tLUHZIQUkxb0JYSjFISFAycFFlMWlvSHE5VUtPa2MxUUpGR1p3NnpqaEw3?=
- =?utf-8?B?SDZzMmk3cU1SblJsUngwd0NNTGlpajFEc2ZYOHlIdVdPb29nSE56Wkx1b081?=
- =?utf-8?B?TlJuV0luOWJvcWtYSjlEN1VNMGpDV0NXS3o5MENaY1drTXVIS2lsTXlWYUVC?=
- =?utf-8?B?QU51ZXpVbmNYWndnKyswbnh5clpFUGQ5RnN4WkZFdFBsZXJkUTZDWmhKemNL?=
- =?utf-8?B?Q2lRUnJwUER2Qld6d2dRT0o0bnVEL2lNMVg2MmxuR1ZmNlYwMlRyUHhtcW5C?=
- =?utf-8?B?bGdFanAvVFBnSjk0OWNMZnVRaGdIV0ZnSm1jNlpwMmhZa2xtemk2Y0NEOEtn?=
- =?utf-8?B?RHVFTXBiZEExVzRKeDZzMzFWSFFRaXV4VkpUTlZySFg2dzRGNzdzbGxVL2RD?=
- =?utf-8?B?c011dkNkUGlvNWp4N0VzQzFxcWFKVmtHZk4xVDBLcFpCQkxKYnpxUXpCRHR4?=
- =?utf-8?B?cVZ5MUgxa3lVYng0VjlENjBxa001eVBqMWx1YUVlRVluSDVvYy9RdXprYU9t?=
- =?utf-8?B?cWVPbU5HaTZ3b0JsbFdHN1FqK0pYeVFPanVzQk45YTFZM1lFay9lZEdhb1BK?=
- =?utf-8?B?cXdzNHpYN045UWppaWlOUWFLVE9OeFJmK2pyUlJYczdFQVlqc0xyemI2ZFdR?=
- =?utf-8?B?c1RPaWFYdzl2VGpvUzIzSkZkWHFXZ2MwM0M5aHhFNnFwQUpUZ0dkZ2VJUGll?=
- =?utf-8?B?RHhkN0dVT0dEU3VmU29MS21MSC96bVlTSy9DS3k0QU51Qk01Y2lkOTRTQUVL?=
- =?utf-8?B?bWdsVUxFdDE0ck1PaXYzRHEwTGVyeHpNYnc2bDM2UUtxVG14L3lwYmxhcGZk?=
- =?utf-8?B?U3BqZlN3WVR3Wllqa1JTNDd2d0VUVlgzRTNZT3l5dmNybmtMUURuYWcyOGZN?=
- =?utf-8?B?WVUzY3FDd2JaZ29QVm91UG9RZmR5OWFOeFkxVE5ldWpZaGMzOWpVanMxNUVs?=
- =?utf-8?B?WktqNzhVMlBDVUhma214VWRlT0JQWTIwRmdSdU9sSkJmV0NpVEJuVHlSTjFP?=
- =?utf-8?B?SVpnNUs2eVdscm5YUjQvTWEwaVBFcmpqZzBMbElNelhsY2Q5QzFsUzZhVkRU?=
- =?utf-8?B?R2lJa2dhRE9oRXhrd3JqaU15TjgyWkRnT083MkdoZXp3UkJzSHhZQmVmYnJB?=
- =?utf-8?B?QXZRZzIxN3FSd1B5RFlwWTJFQ0ExZUNxSHBWV0o4V2hUSzVoSkM4TjdyenR0?=
- =?utf-8?Q?I04ZX3?=
-X-Forefront-Antispam-Report: 
-	CIP:193.8.40.94;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom50.leica-geosystems.com;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: leica-geosystems.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2025 05:40:20.5400
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4053028f-3bf9-4c3e-5973-08ddb53d1aeb
-X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.94];Helo=[hexagon.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM4PEPF00025F95.EURPRD83.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR06MB7700
+References: <20250627-signing-set-ca-v3-0-030812797c6a@leica-geosystems.com> <20250627-signing-set-ca-v3-1-030812797c6a@leica-geosystems.com>
+In-Reply-To: <20250627-signing-set-ca-v3-1-030812797c6a@leica-geosystems.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 27 Jun 2025 01:01:09 -0700
+X-Gm-Features: Ac12FXzWMAUj0l_NGkP7X_KlsEOLvna7iRZ6t4-nBjyHrIRyJZmmOkOPEi3e7Ro
+Message-ID: <CAMKF1sonO=SsLeNj71XaO-khTanMeDFnczN5i5C+uufauHT9+Q@mail.gmail.com>
+Subject: Re: [PATCH meta-oe v3 1/6] signing.bbclass: refactor signing_import_cert_from_*
+To: Johannes Schneider <johannes.schneider@leica-geosystems.com>
+Cc: jlu@pengutronix.de, bsp-development.geo@leica-geosystems.com, 
+	openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 27 Jun 2025 05:40:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118135
+ <openembedded-devel@lists.openembedded.org>; Fri, 27 Jun 2025 08:01:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118139
 
-Add extract-cert wrapping helper functions, to easily extract
-certificates again that had been previously imported into the softhsm.
+Please rebase this on top of latest master or master-next and resend,
+it does not apply cleanly.
 
-Reviewed-by: Jan Luebbe <jlu@pengutronix.de>
-Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
----
- meta-oe/classes/signing.bbclass | 26 +++++++++++++++++++++++++-
- 1 file changed, 25 insertions(+), 1 deletion(-)
-
-diff --git meta-oe/classes/signing.bbclass meta-oe/classes/signing.bbclass
-index 248c6400ed..6fde22bf22 100644
---- meta-oe/classes/signing.bbclass
-+++ meta-oe/classes/signing.bbclass
-@@ -54,7 +54,7 @@
- SIGNING_PKCS11_URI ?= ""
- SIGNING_PKCS11_MODULE ?= ""
- 
--DEPENDS += "softhsm-native libp11-native opensc-native openssl-native"
-+DEPENDS += "softhsm-native libp11-native opensc-native openssl-native extract-cert-native"
- 
- def signing_class_prepare(d):
-     import os.path
-@@ -453,6 +453,30 @@ signing_get_module() {
-     fi
- }
- 
-+# signing_extract_cert_der <role> <der>
-+#
-+# Export a certificate attached to a role into a DER file.
-+# To be used with SoftHSM.
-+signing_extract_cert_der() {
-+    local role="${1}"
-+    local output="${2}"
-+
-+    extract-cert "$(signing_get_uri $role)" "${output}"
-+}
-+
-+# signing_extract_cert_pem <role> <pem>
-+#
-+# Export a certificate attached to a role into a PEM file.
-+# To be used with SoftHSM.
-+signing_extract_cert_pem() {
-+    local role="${1}"
-+    local output="${2}"
-+
-+    extract-cert "$(signing_get_uri $role)" "${output}.tmp-der"
-+    openssl x509 -inform der -in "${output}.tmp-der" -out "${output}"
-+    rm "${output}.tmp-der"
-+}
-+
- python () {
-     signing_class_prepare(d)
- }
-
--- 
-2.43.0
-
+On Thu, Jun 26, 2025 at 10:40=E2=80=AFPM Johannes Schneider
+<johannes.schneider@leica-geosystems.com> wrote:
+>
+> Refactor the two methods to import certificates from PEM/DER to be
+> usable independently from keymaterial that is linked to a role.
+>
+> By having the import_cert_from methods create a storage location (aka
+> role) in the softhsm dynamically.  This way certificates can - but
+> don't have to - be linked to a key, or can stand on their own if chain
+> of certificates from a PKI has to be managed.
+>
+> Reviewed-by: Jan Luebbe <jlu@pengutronix.de>
+> Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.co=
+m>
+> ---
+>  meta-oe/classes/signing.bbclass | 42 +++++++++++++++++++++++++++++++----=
+------
+>  1 file changed, 32 insertions(+), 10 deletions(-)
+>
+> diff --git meta-oe/classes/signing.bbclass meta-oe/classes/signing.bbclas=
+s
+> index 8af7bbf8e0..c768371151 100644
+> --- meta-oe/classes/signing.bbclass
+> +++ meta-oe/classes/signing.bbclass
+> @@ -123,15 +123,26 @@ signing_import_define_role() {
+>      echo "_SIGNING_PKCS11_MODULE_${role}_=3D\"softhsm\"" >> $_SIGNING_EN=
+V_FILE_
+>  }
+>
+> -# signing_import_cert_from_der <role> <der>
+> +# signing_import_cert_from_der <cert_name> <der>
+>  #
+> -# Import a certificate from DER file to a role. To be used
+> -# with SoftHSM.
+> +# Import a certificate from DER file to a cert_name.
+> +# Where the <cert_name> can either be a previously setup
+> +# signing_import_define_role linking the certificate to a signing key,
+> +# or a new identifier when dealing with a standalone certificate.
+> +#
+> +# To be used with SoftHSM.
+>  signing_import_cert_from_der() {
+> -    local role=3D"${1}"
+> +    local cert_name=3D"${1}"
+>      local der=3D"${2}"
+>
+> -    signing_pkcs11_tool --type cert --write-object "${der}" --label "${r=
+ole}"
+> +    # check wether the cert_name/role needs to be defined first,
+> +    # or do so otherwise
+> +    local uri=3D$(siging_get_uri $cert_name)
+> +    if [ -z "$uri" ]; then
+> +        signing_import_define_role "$cert_name"
+> +    fi
+> +
+> +    signing_pkcs11_tool --type cert --write-object "${der}" --label "${c=
+ert_name}"
+>  }
+>
+>  # signing_import_cert_chain_from_pem <role> <pem>
+> @@ -164,17 +175,28 @@ signing_import_cert_chain_from_pem() {
+>          done
+>  }
+>
+> -# signing_import_cert_from_pem <role> <pem>
+> +# signing_import_cert_from_pem <cert_name> <pem>
+>  #
+> -# Import a certificate from PEM file to a role. To be used
+> -# with SoftHSM.
+> +# Import a certificate from PEM file to a cert_name.
+> +# Where the <cert_name> can either be a previously setup
+> +# signing_import_define_role linking the certificate to a signing key,
+> +# or a new identifier when dealing with a standalone certificate.
+> +#
+> +# To be used with SoftHSM.
+>  signing_import_cert_from_pem() {
+> -    local role=3D"${1}"
+> +    local cert_name=3D"${1}"
+>      local pem=3D"${2}"
+>
+> +    # check wether the cert_name/role needs to be defined first,
+> +    # or do so otherwise
+> +    local uri=3D$(siging_get_uri $cert_name)
+> +    if [ -z "$uri" ]; then
+> +        signing_import_define_role "$cert_name"
+> +    fi
+> +
+>      openssl x509 \
+>          -in "${pem}" -inform pem -outform der |
+> -    signing_pkcs11_tool --type cert --write-object /proc/self/fd/0 --lab=
+el "${role}"
+> +    signing_pkcs11_tool --type cert --write-object /proc/self/fd/0 --lab=
+el "${cert_name}"
+>  }
+>
+>  # signing_import_pubkey_from_der <role> <der>
+>
+> --
+> 2.43.0
+>
 
