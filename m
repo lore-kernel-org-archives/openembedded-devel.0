@@ -1,107 +1,119 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76596C7EE2A
-	for <webhook@archiver.kernel.org>; Sat, 28 Jun 2025 00:27:20 +0000 (UTC)
-Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
- by mx.groups.io with SMTP id smtpd.web10.751.1751070431930073842
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97C51C7EE39
+	for <webhook@archiver.kernel.org>; Sat, 28 Jun 2025 16:37:44 +0000 (UTC)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.web10.1419.1751128654342139357
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Jun 2025 17:27:12 -0700
+ Sat, 28 Jun 2025 09:37:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=X1Che32y;
- spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-e819aa98e7aso2471038276.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Jun 2025 17:27:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ewpl4MmP;
+ spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4538bc1cffdso8084335e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 28 Jun 2025 09:37:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751070431; x=1751675231; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1751128653; x=1751733453; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=vQUKEO3poe3AEAVLeMBmMGfevTp8+7bNuEfyy7izlaw=;
-        b=X1Che32yXp52rzXlu9STenVm/fEQDLukMpasNV2MRrrdy0UiuvX+OnKNKhaNtA6S/v
-         IbbmTwF0VsZ8943qgDknJh2EjmX9l7ESfAmBK1HB3cwu0drwvptIFLhJYBdr2TnngN7b
-         GCz0Ra5PuYt+6Ab4tT3EHc8OrsEjh+vC1wmQwAsTZhvFeUKp+HSSsGE+xpOWo6Qf+cdY
-         OQxPq/HhqtyqLLDzX4FUINV1rljgZB5pwurvEmaL4drTUn0jdLoV5JHHF7vwSqN3U+8Q
-         ArykBM/w94GipbzwJsq+kZr3A+2R5VE/iMnw5/k9kbDkQpRDP20xzER1byIhuM6PGZuG
-         wWlQ==
+        bh=SeCCF3jw/nSbXMJsgkC3UqJuZl5DFeQvdZnxiw//1dY=;
+        b=Ewpl4MmPMo8r640z1p6fRqyAmXkgJo0MGyOTfoPJfNALepBYtijiQDp+npdJyYoUfz
+         e63QHF7tsF8mJV4zbrfLK07k1qIpWTu6T2XR2rIXc/eTj95DCccdOFLWdVRlGJ7/yqZP
+         VDngvXNQEeRq+HU4g0orbmk+MgYSdF+Q+oWt54tTWYD5awNBG3qZrh7sfQU18CLgPI96
+         ozUOorlntP7WUpXCSr6YVRI075K3EGClVcPouB+BsIjUQRkk6IG9wS5ZgOBmAuutPvjv
+         gKSzNW7MVBGmy9oT3+nVv//sWx4YTs11oSsyDMKryGjVzOaP9WHLCPC3tJncIMlIk8Jv
+         2naA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751070431; x=1751675231;
+        d=1e100.net; s=20230601; t=1751128653; x=1751733453;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=vQUKEO3poe3AEAVLeMBmMGfevTp8+7bNuEfyy7izlaw=;
-        b=amokQaUCLRre4vBYxzo/KbgN843p6tOBdeVy1Pf5RWS5PMCnawU/9Jlq3yCfofV8Hi
-         32No7lPI3QQ4fyyJPbqAcnuDLKDvzksy7T+YsNCib2fWYzSdElXvxFya6m5+RPf9TXfo
-         66tb3pTAzTjl4tqqgy59AWHWLkq07c76sOZWtTTV6CstPvbwVJItRSnfwWR3ozcmKPCQ
-         7TFRItOrIiMONxwUSAFSPY6dLss/kQ7ObFJzTDNAzdk5qjwGgUNEmuSU4BES77pl9iZY
-         kGWty1F/YYlqH/8Zh89NUz60IEu72TUeQ1qL3IjLlzxQ5L48s4uDkWYs3acttK1kkhmD
-         DTNQ==
-X-Gm-Message-State: AOJu0YwLbumYcg9GG9Wh/tJ6damJgfQzqTqxmwaalnRFSj0z+05gQlAU
-	fE08VhGymDKGZpPTPBPKLyX8VaroFxZLB9qxhulm8LAAiupxxcKh4MGVRohO+t0g
-X-Gm-Gg: ASbGncv0vhNVwH5d6fGFx0KzXOk4tbFXj1MaIliFQwc6oXG2i1GQ8jyFECcUUmSsbK/
-	OrGbnObwNeRnPHA42mRGcByiKV5Lb8j/ZgO7XwZ1A/pvCcd2/4JLiNF0962GM6JuYf7wAcMvNzt
-	P16JWGND98bvvmgu7Z1G8Na50miVi6qrdbx8SG9VvMwvrP7MkKOrHn7obhsiCd3srGrmQcbA9Js
-	bKtF3IntZvkUJv/WuLg9OE941C2fUsAKaj83JMhq1JReQ0/ITVoYmwtj5tRteBoJULVH9Ya9TGF
-	eSIabGJxTR0aWrPKne6Tz8WN7Uu82/wLoHicIqTyeno5tQ7/990XKo1SrKqFBVA/NHhePLh5vbZ
-	ZHayabdOeQnzpdwYA9rnYNgbyHkSny2Y=
-X-Google-Smtp-Source: AGHT+IEiPocmoxSpkKqt/p0mLiqJ5qFTtGGoe3EToqRfn6GlidxcFshDgyd5w2IWotQIaWren2WBAg==
-X-Received: by 2002:a05:6902:102c:b0:e85:fe89:7f83 with SMTP id 3f1490d57ef6-e87a7bd9793mr7250646276.45.1751070430563;
-        Fri, 27 Jun 2025 17:27:10 -0700 (PDT)
-Received: from localhost.localdomain (71-208-4-221.ftmy.qwest.net. [71.208.4.221])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e87a6b4c3ecsm873774276.2.2025.06.27.17.27.09
+        bh=SeCCF3jw/nSbXMJsgkC3UqJuZl5DFeQvdZnxiw//1dY=;
+        b=ovyS3PLSYaEdYOgJ+oVRl7yjiJVnrTjq2WrsWZLmM8XdTn8cGUOc+BF0YDkiQLPaVG
+         xhv+XoeEo7yhSfPLjjuefhCEojiEzyBP15wWSZQ4ySQe/yFBYickqZv7mAEIQYBdGo85
+         z1QSQQI8KySOnKa4uawZK3OgZRevdKrMxDxRiNC3U8gi5+f2rke5BOlZehRh4xuZGfL4
+         Ntf5Nvvpor+Cy1jUn2jMVsBkbuVVhU58hQaj/ryxu2poox0C2E3io68x8EhOvGYwoltk
+         iZSFZVjEAo1ktvQAMKu7zv9/uYpX8OZGKPSS6Pe2gZ25t6fIjNPI+W4cC62b2yv7ekEU
+         9Hag==
+X-Gm-Message-State: AOJu0YwY7sbFyvf/NvNA0493zyAN68BjaU91lB2746g8Ql8b4L53toyu
+	RQjAWCQQgW/jsF6Wpk+fQQ3cTCD7g9WF92KyNlKrSQ/p/WFqwyu2IOUIS+6ZPg==
+X-Gm-Gg: ASbGnctYcNu8RwWgGG9HM9BVdibnowQTxPOlGAf6VNvHsvXGgmpQfOdDnA+Ri0aNVcK
+	AwuJhLhM/wcb4DXJEt4ToIbkBIuBfvrAgV4pE7QVFIAA3d8Gyg2/v50vdiUNqX9hrpdgNgGX7Sj
+	7pazvm4qGgDIRQ0OrYRB6AoHQdjfyPL4zaeFdv6yhhDC3lpmRBbnCCoDLGD4WkaziNWdY30lR2Y
+	n7kuPp9uB4sr+OpG5rXyhVG3JoUbVwHdNc5DGR9y3qJBefSO3ZSgKGwvtGgYX3rN4zqrEWI0vOk
+	8JQ8R2aIMzkmL4lnm8G/on0dBhU2ON8ZonLLNAIrXHntRgVfwLSVnMA/Do44oHY7
+X-Google-Smtp-Source: AGHT+IEWRL2vfTL72VIPERtPnBSjGwMM0TFvA3RWyrSODSGxAyZbHuQI1rfvBWW9IYd2krjV/apkdw==
+X-Received: by 2002:a05:600c:1caa:b0:453:6150:de41 with SMTP id 5b1f17b1804b1-453936a4bcbmr56420255e9.17.1751128652325;
+        Sat, 28 Jun 2025 09:37:32 -0700 (PDT)
+Received: from localhost ([109.238.218.228])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-453823b6e9esm116018175e9.28.2025.06.28.09.37.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Jun 2025 17:27:10 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Sat, 28 Jun 2025 09:37:31 -0700 (PDT)
+From: martin.jansa@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH] xfce4-terminal: upgrade 1.1.0 -> 1.1.4
-Date: Fri, 27 Jun 2025 20:27:04 -0400
-Message-ID: <20250628002705.36360-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Armin Kuster <akuster808@gmail.com>,
+	Yoann Congal <yoann.congal@smile.fr>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][walnascar][PATCH 1/2] python3-evdev: Use Yocto kernel headers instead of host's
+Date: Sat, 28 Jun 2025 18:37:26 +0200
+Message-ID: <20250628163727.859462-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 28 Jun 2025 00:27:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118159
+ <openembedded-devel@lists.openembedded.org>; Sat, 28 Jun 2025 16:37:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118160
 
-Changelog: https://gitlab.xfce.org/apps/xfce4-terminal/-/tags/xfce4-terminal-1.1.4
+From: Yoann Congal <yoann.congal@smile.fr>
 
-Changelog: https://gitlab.xfce.org/apps/xfce4-terminal/-/tags/xfce4-terminal-1.1.3
+Commit 01ebfecf1c94 ("python3-evdev: switch to PEP-517 build backend")
+did not update the way build arguments are passed to the build making
+them unused. In python3-evdev case that meant that the build used host
+kernel headers instead of Yocto's.
 
-Changelog: https://gitlab.xfce.org/apps/xfce4-terminal/-/tags/xfce4-terminal-1.1.2
+When host's and Yocto's headers were different (currently the case on
+Debian 12 as seen on AB[0]), that triggered:
 
-Changelog: https://gitlab.xfce.org/apps/xfce4-terminal/-/tags/xfce4-terminal-1.1.1
+| src/evdev/ecodes.c:542:29: error: 'KEY_LINK_PHONE' undeclared (first use in this function); did you mean 'KEY_PICKUP_PHONE'?
+|   542 |     PyModule_AddIntMacro(m, KEY_LINK_PHONE);
+|       |                             ^~~~~~~~~~~~~~
+[...]
+ERROR: Task (.../../../layers/meta-openembedded/meta-python/recipes-devtools/python/python3-evdev_1.9.1.bb:do_compile) failed with exit code '1'
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+To fix this, use PEP517_BUILD_OPTS with the working (but weird looking) escaping.
+
+Now that correct headers are used, their paths end up in the ecode.c
+file which lead to a buildpaths error, skip the check for this patch.
+This will be fixed in a following patch.
+
+[0]: https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/40/steps/40/logs/stdio
+
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{xfce4-terminal_1.1.0.bb => xfce4-terminal_1.1.4.bb}       | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_1.1.0.bb => xfce4-terminal_1.1.4.bb} (70%)
+ meta-python/recipes-devtools/python/python3-evdev_1.9.1.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.0.bb b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.4.bb
-similarity index 70%
-rename from meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.0.bb
-rename to meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.4.bb
-index 718e684d88..50adacbcb1 100644
---- a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.0.bb
-+++ b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.4.bb
-@@ -1,4 +1,5 @@
- SUMMARY = "Terminal emulator for the Xfce desktop environment"
-+HOMEPAGE = "https://docs.xfce.org/apps/xfce4-terminal/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "glib-2.0 gtk+3 vte libxfce4ui gtk-doc-native"
-@@ -10,6 +11,6 @@ FILES:${PN} += " \
-     ${datadir}/gnome-control-center \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-evdev_1.9.1.bb b/meta-python/recipes-devtools/python/python3-evdev_1.9.1.bb
+index c48bc39c1f..b8930c97d5 100644
+--- a/meta-python/recipes-devtools/python/python3-evdev_1.9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-evdev_1.9.1.bb
+@@ -11,7 +11,8 @@ do_compile:prepend() {
+     rm -rf ${S}/evdev/ecodes.c
+ }
  
--SRC_URI[sha256sum] = "40823377242b9b09749f5d4a550f41d465153c235c31f34052f804d3453ad4a3"
-+SRC_URI[sha256sum] = "873c921da1f4b986ffb459d4960789c9c063af98648c9f0ca146dc6f6f5b71b7"
+-SETUPTOOLS_BUILD_ARGS = "build_ecodes --evdev-headers ${STAGING_DIR_TARGET}/usr/include/linux/input.h:${STAGING_DIR_TARGET}/usr/include/linux/input-event-codes.h"
++PEP517_BUILD_OPTS = "--config-setting=--build-option='build_ecodes \
++    --evdev-headers ${STAGING_DIR_TARGET}/usr/include/linux/input.h:${STAGING_DIR_TARGET}/usr/include/linux/input-event-codes.h'"
  
- RRECOMMENDS:${PN} += "vte-prompt"
--- 
-2.43.0
-
+ RDEPENDS:${PN} += "\
+     python3-ctypes \
+@@ -20,3 +21,4 @@ RDEPENDS:${PN} += "\
+     python3-shell \
+     python3-stringold \
+     "
++INSANE_SKIP:${PN}-src = "buildpaths"
 
