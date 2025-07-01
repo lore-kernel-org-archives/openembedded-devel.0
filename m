@@ -1,188 +1,298 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B9A9C8302F
-	for <webhook@archiver.kernel.org>; Tue,  1 Jul 2025 09:16:42 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.6142.1751361401529389362
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDB72C8302F
+	for <webhook@archiver.kernel.org>; Tue,  1 Jul 2025 10:29:22 +0000 (UTC)
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.web11.7429.1751365756415209740
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Jul 2025 02:16:41 -0700
+ Tue, 01 Jul 2025 03:29:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9277f8c7bb=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5615kmD5006939
-	for <openembedded-devel@lists.openembedded.org>; Tue, 1 Jul 2025 02:16:41 -0700
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47jfwm2h2p-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 02:16:40 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Tue, 1 Jul 2025 02:16:39 -0700
-Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.57 via Frontend Transport; Tue, 1 Jul 2025 02:16:38 -0700
-From: <mingli.yu@eng.windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-m2crypto: Use qq format when time_t is 64bit on 32bit system
-Date: Tue, 1 Jul 2025 17:16:38 +0800
-Message-ID: <20250701091638.3259918-1-mingli.yu@eng.windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd80.aul.t-online.de (fwd80.aul.t-online.de [10.223.144.106])
+	by mailout04.t-online.de (Postfix) with SMTP id E05C7E3AA;
+	Tue,  1 Jul 2025 12:29:14 +0200 (CEST)
+Received: from [192.168.178.20] ([84.154.169.229]) by fwd80.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1uWYEh-4PuuWG0; Tue, 1 Jul 2025 12:29:11 +0200
+Date: Tue, 01 Jul 2025 12:29:05 +0200
+From: Markus Volk <f_l_k@t-online.de>
+Subject: Re: [oe] [meta-oe][PATCH] tk: add INCLUDEDIR for tcl9.0
+To: alperyasinak1@gmail.com
+Cc: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+Message-Id: <HGUPYS.61H1F4LSJUJ82@t-online.de>
+In-Reply-To: <184DED0D44CD195B.28277@lists.openembedded.org>
+References: <20250630151655.3505250-1-f_l_k@t-online.de>
+	<25294.1751306716982813583@lists.openembedded.org>
+	<184DED0D44CD195B.28277@lists.openembedded.org>
+X-Mailer: geary/46.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=LPRmQIW9 c=1 sm=1 tr=0 ts=6863a778 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=Wb1JkmetP80A:10 a=bwGbKnmsAAAA:8 a=t7CeM3EgAAAA:8 a=Vlq3iF5mmyObjZHUMIUA:9 a=nuVVIWbBudwLbAahYuja:22
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: 6gIpeOtJKJwFuwJx-8yOkYvDWBbVuS8H
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAxMDA1NCBTYWx0ZWRfX2qFSFRZ2G27z gZ/MMELvhJ1vpvNmSyiLt2yfFoildV2ypy4wthU04Q7nCF/+XqqgBx3uObdR0kBUStlzrSnaHXq xQ9VgeFPLpzmrcnFDnj3Zsiourv58PNwdplvKj5iO9nDaYK4NH0xKm/tYKjqxsnvFtNq1daJ/q+
- VWvuiqZ3sOeBC4jnbIsr9ocFbBMtkesFInks/cEtfbvrJxQaLNLnBSZbanZx9QeAoQBF/RXsM06 JbBiyuKRUTutW1lbxx+z9VlHKoYpJveH+VBbEQgKcTxeBy+jWkfZg7sYaAs7W0YcGYomtwcYXst m/JBF2uiD4foUOXsgVEZRw7moLafrhnNMNTQOiDZxQA8JpBHF9DJHn1904HATXWl+l5tY1mkRfG
- 9DqJPvDtOiwOnPHgDlpstorGA0tsENLiV6LWE7rlVmtivgqVjNB+wIMOMqSewkZaY2LsnjrP
-X-Proofpoint-ORIG-GUID: 6gIpeOtJKJwFuwJx-8yOkYvDWBbVuS8H
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-07-01_01,2025-06-27_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0
- lowpriorityscore=0 priorityscore=1501 clxscore=1015 mlxlogscore=999
- phishscore=0 impostorscore=0 bulkscore=0 spamscore=0 suspectscore=0
- mlxscore=0 malwarescore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505280000
- definitions=main-2507010054
+Content-Type: multipart/alternative; boundary="=-RQd5yfWorvn8NaCpgQGu"
+X-TOI-EXPURGATEID: 150726::1751365751-B97F8505-21D213CA/0/0 CLEAN NORMAL
+X-TOI-MSGID: 13b16001-fe96-463b-b74e-5f5df4233813
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 09:16:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118192
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 10:29:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118193
 
-From: Mingli Yu <mingli.yu@windriver.com>
+--=-RQd5yfWorvn8NaCpgQGu
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-Fixes:
-   # python3 -munittest -v test_ssl.MiscSSLClientTestCase.test_server_simple_timeouts
-test_server_simple_timeouts (test_ssl.MiscSSLClientTestCase.test_server_simple_timeouts) ... ERROR
+I have sent a patch for the issue to oe-core. It fixes the issue in a 
+better way inside tcl.
+This patch should be dropped
 
-======================================================================
-ERROR: test_server_simple_timeouts (test_ssl.MiscSSLClientTestCase.test_server_simple_timeouts)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/opt/python3-m2crypto/tests/test_ssl.py", line 474, in test_server_simple_timeouts
-    s.set_socket_read_timeout(SSL.timeout())
-    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.13/site-packages/M2Crypto/SSL/Connection.py", line 680, in set_socket_read_timeout
-    self.socket.setsockopt(
-    ~~~~~~~~~~~~~~~~~~~~~~^
-        socket.SOL_SOCKET, socket.SO_RCVTIMEO, timeo.pack()
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-OSError: [Errno 22] Invalid argument
+On Mon, Jun 30 2025 at 22:47:42 +02:00:00, Markus Volk via 
+lists.openembedded.org <f_l_k=t-online.de@lists.openembedded.org> wrote:
+> Hi,
+> as I understand it, tcl is configured in tk by using tclConfig.sh 
+> crosscript instead of
+> pkgconfig (at least to some extent) and takes the path specified for 
+> TLC_SRC_DIR to include tcl.h.
+> 
+> This can be overridden by editing the tk recipe, e.g.
+> EXTRA_OEMAKE += "TCLDIR=${STAGING_INCDIR}/tcl$whatever"
+> 
+> But this does not solve the problem that tcl $PV must match whatever 
+> is set in the tk recipe
+> Maybe we can edit tcl in oe-core like this, but I'm not sure if this 
+> would break things:
+> 
+> From c2e5e1e4cb9fb1107db4632c4428607931a1b3b9 Mon Sep 17 00:00:00 2001
+> From: Markus Volk <f_l_k@t-online.de>
+> Date: Mon, 30 Jun 2025 22:03:17 +0200
+> Subject: [PATCH] tcl: dont use version in includedir
+> 
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  .../tcltk/tcl/0004-tcl-update-the-header-location.patch   | 8 
+> ++++----
+>  meta/recipes-devtools/tcltk/tcl_9.0.1.bb                  | 6 +++---
+>  2 files changed, 7 insertions(+), 7 deletions(-)
+> 
+> diff --git 
+> a/meta/recipes-devtools/tcltk/tcl/0004-tcl-update-the-header-location.patch 
+> b/meta/recipes-devtools/tcltk/tcl/0004-tcl-update-the-header-location.patch
+> index 50a4a27256..1bcdfb3c22 100644
+> --- 
+> a/meta/recipes-devtools/tcltk/tcl/0004-tcl-update-the-header-location.patch
+> +++ 
+> b/meta/recipes-devtools/tcltk/tcl/0004-tcl-update-the-header-location.patch
+> @@ -34,7 +34,7 @@ index b5f9ab7..fbc87a2 100644
+> 
+>   # Directory in which to install the include file tcl.h:
+>  -INCLUDE_INSTALL_DIR	= $(INSTALL_ROOT)$(includedir)
+> -+INCLUDE_INSTALL_DIR	= $(INSTALL_ROOT)$(includedir)/tcl$(VERSION)
+> ++INCLUDE_INSTALL_DIR	= $(INSTALL_ROOT)$(includedir)/tcl
+> 
+>   # Path to the private tcl header dir:
+>   PRIVATE_INCLUDE_DIR	= @PRIVATE_INCLUDE_DIR@
+> @@ -47,7 +47,7 @@ index 43ec7e4..19524d1 100644
+> 
+>   test -z "$TCL_LIBRARY" && TCL_LIBRARY='$(libdir)/tcl$(VERSION)'
+>  -PRIVATE_INCLUDE_DIR='$(includedir)'
+> -+PRIVATE_INCLUDE_DIR='$(includedir)/tcl$(VERSION)'
+> ++PRIVATE_INCLUDE_DIR='$(includedir)/tcl'
+>   HTML_DIR='$(DISTDIR)/html'
+> 
+>   # Note:  in the following variable, it's important to use the 
+> absolute
+> @@ -56,7 +56,7 @@ index 43ec7e4..19524d1 100644
+> 
+>   # Install time header dir can be set via --includedir
+>  -eval "TCL_INCLUDE_SPEC=\"-I${includedir}\""
+> -+eval "TCL_INCLUDE_SPEC=\"-I${includedir}/tcl${VERSION}\""
+> ++eval "TCL_INCLUDE_SPEC=\"-I${includedir}/tcl\""
+> 
+>   
+> #------------------------------------------------------------------------
+>   # tclConfig.sh refers to this by a different name
+> @@ -69,7 +69,7 @@ index 9c6da82..8aa5ae8 100644
+>   exec_prefix=@exec_prefix@
+>   libdir=@libdir@
+>  -includedir=@includedir@
+> -+includedir=@includedir@/tcl@PACKAGE_VERSION@
+> ++includedir=@includedir@/tcl
+>   libfile=@TCL_LIB_FILE@
+> 
+>   Name: Tool Command Language
+> diff --git a/meta/recipes-devtools/tcltk/tcl_9.0.1.bb 
+> b/meta/recipes-devtools/tcltk/tcl_9.0.1.bb
+> index 70aa9b606c..bafea067ed 100644
+> --- a/meta/recipes-devtools/tcltk/tcl_9.0.1.bb
+> +++ b/meta/recipes-devtools/tcltk/tcl_9.0.1.bb
+> @@ -51,13 +51,13 @@ do_install() {
+>  	ln -sf ./tclsh${VER} ${D}${bindir}/tclsh
+>  	ln -sf tclsh9.0 ${D}${bindir}/tclsh${VER}
+>  	sed -i "s;-L${B};-L${STAGING_LIBDIR};g" tclConfig.sh
+> -	sed -i "s;'${WORKDIR};'${STAGING_INCDIR};g" tclConfig.sh
+> +	sed -i "s;'${WORKDIR};'${STAGING_INCDIR}/tcl;g" tclConfig.sh
+>  	install -d ${D}${bindir_crossscripts}
+>  	install -m 0755 tclConfig.sh ${D}${bindir_crossscripts}
+>  	install -m 0755 tclConfig.sh ${D}${libdir}
+>  	for dir in compat generic unix; do
+> -		install -d ${D}${includedir}/${BPN}${VER}/$dir
+> -		install -m 0644 ${S}/$dir/*.h ${D}${includedir}/${BPN}${VER}/$dir/
+> +		install -d ${D}${includedir}/${BPN}/$dir
+> +		install -m 0644 ${S}/$dir/*.h ${D}${includedir}/${BPN}/$dir/
+>  	done
+>  }
+> 
+> --
+> 2.49.0
+> 
+> On Mon, Jun 30 2025 at 11:05:16 -07:00:00, Alper Ak via 
+> lists.openembedded.org 
+> <alperyasinak1=gmail.com@lists.openembedded.org> wrote:
+>> Hi Markus,
+>> 
+>> I recently sent a patch similar to yours. Yes, this really solves 
+>> the problem, but there seem to be two things to think about:
+>> 
+>> 1) if tcl and tk can be upgraded independently (tcl recipe is in 
+>> poky, tk is in meta-oe), this may cause failure if tcl is upgraded 
+>> without upgrading tk. We are telling him to look at 
+>> -I${STAGING_INCDIR}/tcl${VER} but when tcl is upgraded, if tk isn't 
+>> upgraded to the same version, it will probably fail.
+>> 
+>> 2) tk uses pkgconfig that's the way for tcl to tell tk where to find 
+>> its headers. When I look at the compile logs, it really tells but 
+>> there is a situation like this in include path:
+>> 
+>> -I.../recipe-sysroot/usr/include/sources/tcl9.0.1/generic
+>> 
+>> Somehow, the "sources" is added to the path from somewhere, and it 
+>> must be /usr/include/tcl9.0.1/generic
+>> 
+>> I know that the "tcl.h" file is available in both 
+>> ../recipe-sysroot/usr/include/tcl9.0/ and 
+>> ../recipe-sysroot/usr/include/tcl9.0.1/generic/  but considering the 
+>> path provided to the compiler as an include, we should use the 
+>> generic one.
+>> 
+>> I have been sick for a while and haven't had much time to look at 
+>> the situation with pkgconfig. I wanted to write to see if it might 
+>> help you.
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...q-format-when-time_t-is-64bit-on-32b.patch | 80 +++++++++++++++++++
- .../python/python3-m2crypto_0.45.1.bb         |  1 +
- 2 files changed, 81 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-m2crypto/0001-timeout.py-use-qq-format-when-time_t-is-64bit-on-32b.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto/0001-timeout.py-use-qq-format-when-time_t-is-64bit-on-32b.patch b/meta-python/recipes-devtools/python/python3-m2crypto/0001-timeout.py-use-qq-format-when-time_t-is-64bit-on-32b.patch
-new file mode 100644
-index 0000000000..120a67b6a2
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto/0001-timeout.py-use-qq-format-when-time_t-is-64bit-on-32b.patch
-@@ -0,0 +1,80 @@
-+From 7fa4f17cc183e04b10684b28219cf15780910206 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Mon, 30 Jun 2025 16:11:16 +0800
-+Subject: [PATCH] timeout.py: use qq format when time_t is 64bit on 32bit
-+ platform
-+
-+Fixes:
-+   # python3
-+  Python 3.13.2 (main, Feb  4 2025, 14:51:09) [GCC 14.2.0] on linux
-+  Type "help", "copyright", "credits" or "license" for more information.
-+  >>> import socket
-+  >>> import struct
-+  >>> s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-+  >>> seconds = 5
-+  >>> microseconds = 0
-+  >>> timeval_packed = struct.pack('ll', seconds, microseconds)
-+  >>> s.setsockopt(socket.SOL_SOCKET, socket.SO_RCVTIMEO, timeval_packed)
-+Traceback (most recent call last):
-+  File "<python-input-6>", line 1, in <module>
-+    s.setsockopt(socket.SOL_SOCKET, socket.SO_RCVTIMEO, timeval_packed)
-+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+OSError: [Errno 22] Invalid argument
-+
-+Upstream-Status: Submitted [https://lists.sr.ht/~mcepl/m2crypto/patches/60463]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ src/M2Crypto/SSL/timeout.py | 18 ++++++++++++++----
-+ 1 file changed, 14 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/M2Crypto/SSL/timeout.py b/src/M2Crypto/SSL/timeout.py
-+index 298a9ca..0b38329 100644
-+--- a/src/M2Crypto/SSL/timeout.py
-++++ b/src/M2Crypto/SSL/timeout.py
-+@@ -15,7 +15,7 @@ __all__ = [
-+ import sys
-+ import struct
-+ 
-+-from M2Crypto import m2
-++from M2Crypto import m2, util
-+ 
-+ DEFAULT_TIMEOUT: int = 600
-+ 
-+@@ -40,7 +40,10 @@ class timeout(object):
-+             if m2.time_t_bits() == 32:
-+                 binstr = struct.pack('ii', self.sec, self.microsec)
-+             else:
-+-                binstr = struct.pack('ll', self.sec, self.microsec)
-++                if util.is_32bit():
-++                    binstr = struct.pack('qq', self.sec, self.microsec)
-++                else:
-++                    binstr = struct.pack('ll', self.sec, self.microsec)
-+         return binstr
-+ 
-+ 
-+@@ -52,7 +55,10 @@ def struct_to_timeout(binstr: bytes) -> timeout:
-+         sec = int(millisec / 1000)
-+         microsec = (millisec % 1000) * 1000
-+     else:
-+-        (sec, microsec) = struct.unpack('ll', binstr)
-++        if sys.platform == 'linux' and util.is_32bit() and m2.time_t_bits() == 64:
-++             (sec, microsec) = struct.unpack('qq', binstr)
-++        else:
-++            (sec, microsec) = struct.unpack('ll', binstr)
-+     return timeout(sec, microsec)
-+ 
-+ 
-+@@ -60,4 +66,8 @@ def struct_size() -> int:
-+     if sys.platform == 'win32':
-+         return struct.calcsize('l')
-+     else:
-+-        return struct.calcsize('ll')
-++        if sys.platform == 'linux' and util.is_32bit() and m2.time_t_bits() == 64:
-++            return struct.calcsize('qq')
-++        else:
-++            return struct.calcsize('ll')
-++
-+-- 
-+2.34.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.45.1.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.45.1.bb
-index b029b2978c..e0e9fdb2bb 100644
---- a/meta-python/recipes-devtools/python/python3-m2crypto_0.45.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.45.1.bb
-@@ -8,6 +8,7 @@ SRC_URI[sha256sum] = "d0fc81a8828edbf4308432b3040bf06bb26bad95abb9e7d4690b611855
- 
- SRC_URI += " \
-            file://0001-setup.py-Make-the-cmd-available.patch \
-+           file://0001-timeout.py-use-qq-format-when-time_t-is-64bit-on-32b.patch \
- "
- 
- inherit pypi siteinfo python_setuptools_build_meta
--- 
-2.34.1
+--=-RQd5yfWorvn8NaCpgQGu
+Content-Type: text/html; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+<div id=3D"geary-body" dir=3D"auto">I have sent a patch for the issue to oe=
+-core. It fixes the issue in a better way inside tcl.<div>This patch should=
+ be dropped</div></div><div id=3D"geary-quote" dir=3D"auto"><br>On Mon, Jun=
+ 30 2025 at 22:47:42 +02:00:00, Markus Volk via lists.openembedded.org &lt;=
+f_l_k=3Dt-online.de@lists.openembedded.org&gt; wrote:<br><blockquote type=
+=3D"cite"><div id=3D"geary-body" dir=3D"auto"><div><div><div>Hi,</div><div>=
+as I understand it, tcl is configured in tk by using tclConfig.sh crosscrip=
+t instead of</div><div>pkgconfig (at least to some extent) and takes the pa=
+th specified for TLC_SRC_DIR to include tcl.h.</div><div><br></div><div>Thi=
+s can be overridden by editing the tk recipe, e.g.</div><div>EXTRA_OEMAKE +=
+=3D "TCLDIR=3D${STAGING_INCDIR}/tcl$whatever"</div><div><br></div><div>But =
+this does not solve the problem that tcl $PV must match whatever is set in =
+the tk recipe</div></div><div>Maybe we can edit tcl in oe-core like this, b=
+ut I'm not sure if this would break things:</div><div><br></div><div><div>F=
+rom c2e5e1e4cb9fb1107db4632c4428607931a1b3b9 Mon Sep 17 00:00:00 2001</div>=
+<div>From: Markus Volk &lt;f_l_k@t-online.de&gt;</div><div>Date: Mon, 30 Ju=
+n 2025 22:03:17 +0200</div><div>Subject: [PATCH] tcl: dont use version in i=
+ncludedir</div><div><br></div><div>Signed-off-by: Markus Volk &lt;f_l_k@t-o=
+nline.de&gt;</div><div>---</div><div>&nbsp;.../tcltk/tcl/0004-tcl-update-th=
+e-header-location.patch &nbsp; | 8 ++++----</div><div>&nbsp;meta/recipes-de=
+vtools/tcltk/tcl_9.0.1.bb &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp;| 6 +++---</div><div>&nbsp;2 files changed, 7 insertions(+), 7=
+ deletions(-)</div><div><br></div><div>diff --git a/meta/recipes-devtools/t=
+cltk/tcl/0004-tcl-update-the-header-location.patch b/meta/recipes-devtools/=
+tcltk/tcl/0004-tcl-update-the-header-location.patch</div><div>index 50a4a27=
+256..1bcdfb3c22 100644</div><div>--- a/meta/recipes-devtools/tcltk/tcl/0004=
+-tcl-update-the-header-location.patch</div><div>+++ b/meta/recipes-devtools=
+/tcltk/tcl/0004-tcl-update-the-header-location.patch</div><div>@@ -34,7 +34=
+,7 @@ index b5f9ab7..fbc87a2 100644</div><div>&nbsp;&nbsp;</div><div>&nbsp;=
+ # Directory in which to install the include file tcl.h:</div><div>&nbsp;-I=
+NCLUDE_INSTALL_DIR<span class=3D"Apple-tab-span" style=3D"white-space: pre;=
+">	</span>=3D $(INSTALL_ROOT)$(includedir)</div><div>-+INCLUDE_INSTALL_DIR<=
+span class=3D"Apple-tab-span" style=3D"white-space: pre;">	</span>=3D $(INS=
+TALL_ROOT)$(includedir)/tcl$(VERSION)</div><div>++INCLUDE_INSTALL_DIR<span =
+class=3D"Apple-tab-span" style=3D"white-space: pre;">	</span>=3D $(INSTALL_=
+ROOT)$(includedir)/tcl</div><div>&nbsp;&nbsp;</div><div>&nbsp; # Path to th=
+e private tcl header dir:</div><div>&nbsp; PRIVATE_INCLUDE_DIR<span class=
+=3D"Apple-tab-span" style=3D"white-space: pre;">	</span>=3D @PRIVATE_INCLUD=
+E_DIR@</div><div>@@ -47,7 +47,7 @@ index 43ec7e4..19524d1 100644</div><div>=
+&nbsp;&nbsp;</div><div>&nbsp; test -z "$TCL_LIBRARY" &amp;&amp; TCL_LIBRARY=
+=3D'$(libdir)/tcl$(VERSION)'</div><div>&nbsp;-PRIVATE_INCLUDE_DIR=3D'$(incl=
+udedir)'</div><div>-+PRIVATE_INCLUDE_DIR=3D'$(includedir)/tcl$(VERSION)'</d=
+iv><div>++PRIVATE_INCLUDE_DIR=3D'$(includedir)/tcl'</div><div>&nbsp; HTML_D=
+IR=3D'$(DISTDIR)/html'</div><div>&nbsp;&nbsp;</div><div>&nbsp; # Note: &nbs=
+p;in the following variable, it's important to use the absolute</div><div>@=
+@ -56,7 +56,7 @@ index 43ec7e4..19524d1 100644</div><div>&nbsp;&nbsp;</div>=
+<div>&nbsp; # Install time header dir can be set via --includedir</div><div=
+>&nbsp;-eval "TCL_INCLUDE_SPEC=3D\"-I${includedir}\""</div><div>-+eval "TCL=
+_INCLUDE_SPEC=3D\"-I${includedir}/tcl${VERSION}\""</div><div>++eval "TCL_IN=
+CLUDE_SPEC=3D\"-I${includedir}/tcl\""</div><div>&nbsp;&nbsp;</div><div>&nbs=
+p; #-----------------------------------------------------------------------=
+-</div><div>&nbsp; # tclConfig.sh refers to this by a different name</div><=
+div>@@ -69,7 +69,7 @@ index 9c6da82..8aa5ae8 100644</div><div>&nbsp; exec_p=
+refix=3D@exec_prefix@</div><div>&nbsp; libdir=3D@libdir@</div><div>&nbsp;-i=
+ncludedir=3D@includedir@</div><div>-+includedir=3D@includedir@/tcl@PACKAGE_=
+VERSION@</div><div>++includedir=3D@includedir@/tcl</div><div>&nbsp; libfile=
+=3D@TCL_LIB_FILE@</div><div>&nbsp;&nbsp;</div><div>&nbsp; Name: Tool Comman=
+d Language</div><div>diff --git a/meta/recipes-devtools/tcltk/tcl_9.0.1.bb =
+b/meta/recipes-devtools/tcltk/tcl_9.0.1.bb</div><div>index 70aa9b606c..bafe=
+a067ed 100644</div><div>--- a/meta/recipes-devtools/tcltk/tcl_9.0.1.bb</div=
+><div>+++ b/meta/recipes-devtools/tcltk/tcl_9.0.1.bb</div><div>@@ -51,13 +5=
+1,13 @@ do_install() {</div><div>&nbsp;<span class=3D"Apple-tab-span" style=
+=3D"white-space: pre;">	</span>ln -sf ./tclsh${VER} ${D}${bindir}/tclsh</di=
+v><div>&nbsp;<span class=3D"Apple-tab-span" style=3D"white-space: pre;">	</=
+span>ln -sf tclsh9.0 ${D}${bindir}/tclsh${VER}</div><div>&nbsp;<span class=
+=3D"Apple-tab-span" style=3D"white-space: pre;">	</span>sed -i "s;-L${B};-L=
+${STAGING_LIBDIR};g" tclConfig.sh</div><div>-<span class=3D"Apple-tab-span"=
+ style=3D"white-space: pre;">	</span>sed -i "s;'${WORKDIR};'${STAGING_INCDI=
+R};g" tclConfig.sh</div><div>+<span class=3D"Apple-tab-span" style=3D"white=
+-space: pre;">	</span>sed -i "s;'${WORKDIR};'${STAGING_INCDIR}/tcl;g" tclCo=
+nfig.sh</div><div>&nbsp;<span class=3D"Apple-tab-span" style=3D"white-space=
+: pre;">	</span>install -d ${D}${bindir_crossscripts}</div><div>&nbsp;<span=
+ class=3D"Apple-tab-span" style=3D"white-space: pre;">	</span>install -m 07=
+55 tclConfig.sh ${D}${bindir_crossscripts}</div><div>&nbsp;<span class=3D"A=
+pple-tab-span" style=3D"white-space: pre;">	</span>install -m 0755 tclConfi=
+g.sh ${D}${libdir}</div><div>&nbsp;<span class=3D"Apple-tab-span" style=3D"=
+white-space: pre;">	</span>for dir in compat generic unix; do</div><div>-<s=
+pan class=3D"Apple-tab-span" style=3D"white-space: pre;">		</span>install -=
+d ${D}${includedir}/${BPN}${VER}/$dir</div><div>-<span class=3D"Apple-tab-s=
+pan" style=3D"white-space: pre;">		</span>install -m 0644 ${S}/$dir/*.h ${D=
+}${includedir}/${BPN}${VER}/$dir/</div><div>+<span class=3D"Apple-tab-span"=
+ style=3D"white-space: pre;">		</span>install -d ${D}${includedir}/${BPN}/$=
+dir</div><div>+<span class=3D"Apple-tab-span" style=3D"white-space: pre;">	=
+	</span>install -m 0644 ${S}/$dir/*.h ${D}${includedir}/${BPN}/$dir/</div><=
+div>&nbsp;<span class=3D"Apple-tab-span" style=3D"white-space: pre;">	</spa=
+n>done</div><div>&nbsp;}</div><div>&nbsp;</div><div>--&nbsp;</div><div>2.49=
+.0</div></div></div></div><div id=3D"geary-quote" dir=3D"auto"><br>On Mon, =
+Jun 30 2025 at 11:05:16 -07:00:00, Alper Ak via lists.openembedded.org &lt;=
+alperyasinak1=3Dgmail.com@lists.openembedded.org&gt; wrote:<br><blockquote =
+type=3D"cite"><div>Hi Markus,<br><br>I recently sent a patch similar to you=
+rs. Yes, this really solves the problem, but there seem to be two things to=
+ think about:<br><br>1) if tcl and tk can be upgraded independently (tcl re=
+cipe is in poky, tk is in meta-oe), this may cause failure if tcl is upgrad=
+ed without upgrading tk. We are telling him to look at -I${STAGING_INCDIR}/=
+tcl${VER} but when tcl is upgraded, if tk isn't upgraded to the same versio=
+n, it will probably fail.<br><br>
+<div>2) tk uses pkgconfig that's the way for tcl to tell tk where to find i=
+ts headers. When I look at the compile logs, it really tells but there is a=
+ situation like this in include path:<br><br></div>
+<div>-I.../recipe-sysroot/usr/include/sources/tcl9.0.1/generic<br><br></div=
+>
+<div>Somehow, the "sources" is added to the path from somewhere, and it mus=
+t be /usr/include/tcl9.0.1/generic<br><br></div>
+<div>I know that the "tcl.h" file is available in both ../recipe-sysroot/us=
+r/include/tcl9.0/ and ../recipe-sysroot/usr/include/tcl9.0.1/generic/&nbsp;=
+ but considering the path provided to the compiler as an include, we should=
+ use the generic one.<br><br>I have been sick for a while and haven't had m=
+uch time to look at the situation with pkgconfig. I wanted to write to see =
+if it might help you.</div>
+</div>
+</blockquote></div>
+</blockquote></div>
+--=-RQd5yfWorvn8NaCpgQGu--
 
 
