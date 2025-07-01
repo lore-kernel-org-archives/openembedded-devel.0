@@ -1,111 +1,135 @@
-Return-Path: <hiagofranco@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3046FC7EE30
-	for <webhook@archiver.kernel.org>; Tue,  1 Jul 2025 19:28:18 +0000 (UTC)
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
- by mx.groups.io with SMTP id smtpd.web10.5946.1751398090813957885
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 63A37C7EE30
+	for <webhook@archiver.kernel.org>; Tue,  1 Jul 2025 20:14:58 +0000 (UTC)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+ by mx.groups.io with SMTP id smtpd.web10.6962.1751400897722353501
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Jul 2025 12:28:10 -0700
+ Tue, 01 Jul 2025 13:14:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kkjWxcud;
- spf=pass (domain: gmail.com, ip: 209.85.160.172, mailfrom: hiagofranco@gmail.com)
-Received: by mail-qt1-f172.google.com with SMTP id d75a77b69052e-4a6f0bcdf45so47260891cf.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 12:28:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Bw+EHzMp;
+ spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-6070293103cso6446696a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 13:14:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751398089; x=1752002889; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=sZqYkIBM7PmQ4edWFTqh0fN/aEY54YbS6nYlFYNz+wM=;
-        b=kkjWxcudwojnUt+jFZ9nel+QhSb219+Aj6raGE9bqyfNLA4DPyrHvbwn57zBNCVRNS
-         aocu92PuaYtIfqfNlAe7KWjAvyH9Cwqd3em3TdcABkDFq4r76U+WO7uigMQBg/989GaZ
-         SXUQL3kFMjbJ63eB9V2DuEsqmgIbrEc23bI956CD0lv229VaTzhjWN94oJ3Cfi8B0I3b
-         +Og5+D1HdDK9LLwz2rY0e0dENgKNHeKQ6GXxgM83MpDGOmx0TpGZTpKeyXvhxIE4aVoA
-         KqDDcg3q6CqQz1XyvQRynsaBCk2cgneb/B5znaXhAeRWLRDEqvflR7NuJmlSQZHkDO+o
-         iytg==
+        d=gmail.com; s=20230601; t=1751400896; x=1752005696; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=fybzT87uDqLb9TSeIC6Z96S3qMJTzvVfQc3NGu6Fymw=;
+        b=Bw+EHzMpeG6wPZak07pIaJkx34jqqK1xQxXFacbVwzN6DaVutuK/x4Jx2OVMKzJsBs
+         /UJ9IBlODgXPIsuBWMfE6f8AY3dtfsPC6YQC1NeFXuPbDisIEz4932eK6YipG0gvY7MG
+         AUcIq3siTUh2/QwTbJMIrEt2lpSUpL/MD/ithYffWXOcn3rapQPXKXBUjI02xz5n995h
+         GCf1JUFj/4TmCS336ZaDXjOgfzvLjuyiUBFJtDlZp5C0+BGA9fRSgblUSG+Re85cIW/H
+         98k7YYqMdkpIDCryjpITLXPNrtgDakYNIaH7I8yo2+D44Wbk4di/eD+bbUFywpLnlhCw
+         tXRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751398089; x=1752002889;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=sZqYkIBM7PmQ4edWFTqh0fN/aEY54YbS6nYlFYNz+wM=;
-        b=X/LoXosSpWTVS+fiH/PZa4ypiS2vyh6A+0By4JjlWkWn6ZQ0g3SD4lm/n2xSQbk6w0
-         r7/dJYjkIK7Tptwli5FQWXMDSZ5U6Xn0Q8hxs5kcvSAH1yau1TMNa9iGiBe+W2V6hJ/T
-         GThINKJd7k9RMP6N4YiWg0gEaTnPw8LrJx7zTwtY2HRl7xIX34tqi7pfHRaeC7rM/YEe
-         3Er/pJMEXh7mPLh6UvXKmj4romAm9t+p4HJ7lxLq2sWxJxBLx7YKZeUz02gjDVX6Ldzb
-         HzGzREYPzvcgaOzG66cYxE8OSvkw94r+PSaJdd5ZIPpbYXn6dLVTGBzCNENBmd9u3DHB
-         feFA==
-X-Gm-Message-State: AOJu0YwtqaVVkj1IqFumngc9a71uw76KsavpyQjoBMf4jX9VqQdAPc5+
-	eEwItyBLsLa0yuDyyVO8ch8Pfzc/+9njR8vSr+GH7tqZe6n4NdxDak6XSIFEQw==
-X-Gm-Gg: ASbGncuOq3Dc1DlB93T44N4MQZskoUMvbBfOjyxwIL/e2PlSV3IjhfyRFeOZLWNb0Yk
-	1Ds6/tDvW9vXCVpW1JCCxuxhFgK5aRbKjU/XAKL0CJDDCVHCWw3bI2bKfyPPN0ksMEhZ8RfyFnv
-	8PLE0xQ1xag5/VzgdNSKHnQiOCnZegl3H1aYr5sdVvWF/I9HvkHI+hGw03oNKDBU/w5xCKxf5uY
-	L2nzab6+6CQfCQDxbZMRSAA2tfVtwuZc3MtS2HNb0S3OxeTrvahB+HwPSVLFtycTWvSc6+dcDR0
-	5JVTKW21sbPHHR6prbpzdxns5m+xvqKftMxwdf3K02wwAMCs1/i4oOBBr+gRx9T1xTKiV8yMA5l
-	DcTMYEN+RM9n6M20L
-X-Google-Smtp-Source: AGHT+IF+CbZxdz88GaSTCcvaqBJ9l9bM0BHVgMO5sUaEJSQdgt3EwiPx+QRVsG8rGMAsorGTItMIIQ==
-X-Received: by 2002:ac8:5ac2:0:b0:477:e2d:2ec7 with SMTP id d75a77b69052e-4a9769e197fmr3065741cf.33.1751398084747;
-        Tue, 01 Jul 2025 12:28:04 -0700 (PDT)
-Received: from hiagonb.corp.toradex.com ([67.159.246.222])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-4a7fc105a86sm80632541cf.11.2025.07.01.12.28.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Jul 2025 12:28:04 -0700 (PDT)
-From: Hiago De Franco <hiagofranco@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hiago De Franco <hiago.franco@toradex.com>
-Subject: [meta-oe][PATCH] gpicview: add recipe
-Date: Tue,  1 Jul 2025 16:27:44 -0300
-Message-Id: <20250701192744.586044-1-hiagofranco@gmail.com>
-X-Mailer: git-send-email 2.39.5
+        d=1e100.net; s=20230601; t=1751400896; x=1752005696;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=fybzT87uDqLb9TSeIC6Z96S3qMJTzvVfQc3NGu6Fymw=;
+        b=FYzFysmk4SqNp8UHdayEH3FkAGoW55oTNbxr6PU3DAH0ys+gCKzUwo1U6PmHlldUJV
+         UBF/8fb/aMovYnEg3kPwykwGba9Dwt5XUqQi9ykzY3LrowGMuBkChbGA4Qm/5Kxxpjlg
+         VelJfBvz4AkGoKaAhSDHuN8PQ1gO+6QZZwAkHby6yrGmXKl0uYq+KMpbEp6G5A+X5N85
+         zum0rZs6p5Aky0nncDh63TOj4ujB7s+eBuLFOwt8LG+BVsLnILOdm6s0Q+B+HLINc+21
+         IWK0qK4Si1sSHp1JvE0wL4kaDubSZwLvj9NA4OnBGkoWYPC2aBqgAxdzdK3Nn/4oyFE3
+         cvqA==
+X-Gm-Message-State: AOJu0YzmYiIY4zY8ZmGj8QSuJuoKU7CBQsKfq8FiTl/dshJht2r+ioIQ
+	qqya5sl0fSrFJAGJF4RuowIujThf4jiwStZveZKzA2NuYeCvSyzqDgyf
+X-Gm-Gg: ASbGnctFDTgQ9Gy9ApiMMVCSNr5AghXHUDnqK0MeQ5oXgxwDwHZz6S+tun86ncsU3wn
+	ix2lM4b1yCHmNEMn1Fu9vgKk/3eLK42wj1tvQk2Kc82YXwaZSrpa2Og9S1st+Jq+TmlwcIpFGZ4
+	oXpPMhPcutaKJaNvVDV+GquPGpK7+rnv6YyYsSnUpiL09AvHSv+etC+3a+HW69EfV3oumF41P6L
+	PsWUfJxOOhLJ0k9q442N2hCmfcOANgy87wxtjvrpD4F9uUf1aEDs0OHMgVvzyIUBoMeppx2iEt3
+	SB5THsr4ihj513IzUhTZ1gYEV7+BMmfA6Y4A6AT/v5a+/E/R1iWjGjqh+SnfKPe0xVlp5Q==
+X-Google-Smtp-Source: AGHT+IGqq2ttWnhuK7E6QCdHZuxGyhMh5OrhcOc30oVHrKK2srw1VMwcMQegTAw2Ayw1WAziqocyKQ==
+X-Received: by 2002:a17:907:7f2a:b0:ad8:9a86:cf52 with SMTP id a640c23a62f3a-ae3c2bf316dmr16285466b.11.1751400895554;
+        Tue, 01 Jul 2025 13:14:55 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae35363b0e6sm928935866b.20.2025.07.01.13.14.54
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 01 Jul 2025 13:14:54 -0700 (PDT)
+Message-ID: <483e12f7-cfaa-41de-9ec8-cbed16223203@gmail.com>
+Date: Tue, 1 Jul 2025 22:14:54 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] nodejs: inherit qemu class conditionally
+To: Alexander Kanavin <alex.kanavin@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20250627140633.354460-1-skandigraun@gmail.com>
+ <CANNYZj_K1AT8nov3Wz30bUVdReE=c=DNvgKEQ5tKAygVb1MshQ@mail.gmail.com>
+ <bd09d601-b551-4621-aa6d-ca9d05473280@gmail.com>
+ <CANNYZj9cDCB6Y5yi18p_+MfTtfeokgrqniwdKRhFi=rTXVtu=g@mail.gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <CANNYZj9cDCB6Y5yi18p_+MfTtfeokgrqniwdKRhFi=rTXVtu=g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 19:28:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118194
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 20:14:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118195
 
-From: Hiago De Franco <hiago.franco@toradex.com>
 
-GPicView is a simple and fast GTK+ image viewer for X which is
-lightweight, desktop independent and has minimal lib dependency.
 
-Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
----
- .../gpicview/gpicview_0.3.1.bb                | 22 +++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb
+On 6/30/25 11:49, Alexander Kanavin wrote:
+> On Mon, 30 Jun 2025 at 11:46, Gyorgy Sarvari <skandigraun@gmail.com> wrote:
+>> Though I thought I do, apparently I don't have a step-by-step
+>> reproduction (yet?) unfortunately. I keep looking at diffsigs and then
+>> bitbake -e, and hope to catch it (which usually point to QEMU_OPTIONS &
+>> co, but yeah. there seems to be more to this).
+>> Until now I thought that it happens just by simply building
+>> nodejs-native for different targets, but now that I tried to observe it
+>> in a targeted way, it doesn't seem to be the case. Keep building images
+>> that have nodejs-native as their build dependency :S
+> If you're unable to reproduce on demand, you can't confirm that this
+> patch is indeed fixing the issue either :-/
+>
+> I can try to help you, but only if the starting point is specific
+> instructions on how to see the problem, otherwise I'd only get
+> frustrated at wasting time trying to get there first.
+>
+> Alex
+Apparently somehow my clean setup broke yesterday - and that caused my
+surprise that the issue doesn't happen as I described in the commit
+message. It was building garbage. After deleting it, and starting new,
+the issue does happen again, 100% - just "MACHINE=foo1 bitbake
+nodejs-native". New target machine comes with new rebuild. Inheriting
+rm_work globally makes it very visible. Even after deleting the env and
+starting it from scratch, the behavior is consistent.
 
-diff --git a/meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb b/meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb
-new file mode 100644
-index 000000000000..dab11a02bc1a
---- /dev/null
-+++ b/meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Lightweight image viewer for X"
-+DESCRIPTION = "GPicView is a simple, lightweight and fast GTK+ based image \
-+viewer with minimal lib dependency and desktop independent."
-+HOMEPAGE = "https://github.com/lxde/gpicview"
-+BUGTRACKER = "https://github.com/lxde/gpicview/issues"
-+SECTION = "x11"
-+
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-+
-+DEPENDS = "glib-2.0-native intltool-native jpeg"
-+
-+SRC_URI = "git://github.com/lxde/gpicview.git;protocol=https;branch=master;tag=${PV}"
-+SRCREV = "ca13623c6176585db4759ce4371fbf89c56fa630"
-+
-+inherit autotools mime-xdg pkgconfig
-+
-+PACKAGECONFIG ?= "gtk3"
-+PACKAGECONFIG[gtk2] = ",,gtk+"
-+PACKAGECONFIG[gtk3] = "--enable-gtk3,,gtk+3"
-+
-+FILES:${PN} += "${datadir}/icons"
--- 
-2.39.5
+Python recipe doesn't use qemu by default, and doesn't use it at all for
+the native build (it even errors out due to circular dependency if one
+tries to force it with pgo packageconfig). When I modify the recipe to
+use it without pgo (comment out  'write_pgo_wrapper:class-native =
+":"'), then it has the same issue: when target machine changes,
+TUNE_PKGARCH changes also, and it kicks off a new python-native rebuild.
 
+Now the issue seems to happen if the qemu_wrapper_cmdline function from
+qemu class is actually part of the recipe. Inheriting qemu class in any
+recipe, and adding e.g. "echo ${@qemu_wrapper_cmdline(d, 'foo',
+['bar'])}" to any task that's running during native build will trigger
+the issue.
+Don't know if it's some optimization to only include variables that are
+actually used, or something else, but today I can't spend time on this,
+and at the end of the day it looks like I'm the only one building images
+for multiple targets with nodejs dependency, so whatever.
+
+As a closing thought, I want to reject all kind of suggestions and
+insinuations that I have asked for your help, I am frustrating you or
+that I am wasting your time.
+If you ignore or spend time on any information I share anywhere, that's
+only your choice. I have never asked any help from you - if you do it on
+your own, that's ok, but if not, that's just as equally ok. If you feel
+that I am pressuring you to do anything, ever, call me out on that.
+Otherwise if you are getting frustrated, that's your own doing, and
+don't put the blame on me nor on anyone else.
+
+The first email was a response to a question, not an demand/ask for help
+or any other action. This email is a curtesy followup, in the hope that
+it will be of interest for some - but not any request nor suggestion for
+you (or anyone else) to do anything whatsoever.
 
