@@ -1,103 +1,89 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yishai1999@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D88B6C8302F
-	for <webhook@archiver.kernel.org>; Tue,  1 Jul 2025 07:07:00 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web11.4272.1751353613870918535
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E119C7EE30
+	for <webhook@archiver.kernel.org>; Tue,  1 Jul 2025 08:44:11 +0000 (UTC)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web10.5566.1751359444290198181
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Jul 2025 00:06:53 -0700
+ Tue, 01 Jul 2025 01:44:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XGa18WyE;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-234b9dfb842so25360885ad.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 00:06:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZgXX/hvu;
+ spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: yishai1999@gmail.com)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-3a53359dea5so1675566f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 01:44:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751353613; x=1751958413; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IWuxV6MQjFYezyyMYzA7mdzC6eQt5KYKSh3F/iS52o4=;
-        b=XGa18WyEsThCjlqmXI24d6LsKppdx3fEWF8nyRasMMSwfLqdQmtEKoGv/2DMmwoETe
-         lfzobYCu28NaGi81WVCY/VblBtb1lzZ95gC25Y0HrA7MPYH4ul9zac8twU/j5UY9XX5X
-         RUGgLefNqJPaC326G6Lp6RfArXaFkAWmEl7je/2P4gbTGXUwzBAQeo9x+MtdNUITd/kH
-         /jQMR0O1sfcTbwugKkGkfGAuX2gej06H/q5kIcXIRHyUIUExOIH8ay7OzvrxHq572m4v
-         mDoRp8zdbtVEgQQrSqaIKKIuVlXHWs53Y6AxnW8DVhQPXkpox/N+OG1AsdtDxW42hNMB
-         a37g==
+        d=gmail.com; s=20230601; t=1751359442; x=1751964242; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=e7NMnWZP67Ekt+EjNoonVOuTjumdd1uP3RB/32/lBJ0=;
+        b=ZgXX/hvuXo1lDru93KH42fX10RR7slcQlRlAKL60Se1JITPHGHq8Z6PyXX05sh6rwV
+         Ii6MMBkIotSgJlyIhxxkIIpdHMD/2/H9MDsxDTlyLuBmuhBNmDbKJR2m1cvNqUW5F5zn
+         vrOvwnRcvAV333c/Z0rsT0N68y9583mbe+3IhOUqDTIuNPkQqziugO//HwWB4oVWdvyG
+         3Fmns1ci28z8Cfzd67qn4u/EAWkeARLq6C5tBYYQatRURJX1P8kN6KP8S28azuPSDmvZ
+         k/F0X6Ba4neTLsR+19F8fVJH2+bB/pkRUfT24P9OCufT73l2mTb48LkHq4KkRN8qFh9Q
+         Bh/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751353613; x=1751958413;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=IWuxV6MQjFYezyyMYzA7mdzC6eQt5KYKSh3F/iS52o4=;
-        b=k6LUovChrEqS5CpQwPkmEpV2GGA+VMQRJ4EJb40nTF96AtV0UwITe6bKORsZY6D9zc
-         V/oiB87ND+dSos7uNqB4mnn0tNm2sjh61EPXuaZsmLvYMak9krSc6HcVAQKQr6e9uvSZ
-         mFIWZIGyqWncQ9CsIlKrxxJCYG5pmN7T9wEoGbJ2hpu09bQLmBPrSSsnbHEK4P4MKpU+
-         x3ifa1t+7XMUDB3BNeo/EZR7l9I8EJaTMfsZkbRxO5Fg/ThVi4/ur+MkYAJH2AXrY0Zs
-         z86cBc9PrhhINcokLAXuVgVzEF/nFPjNMhr8LoQm8qhyLBPFBB8zv5TY3N9DX1sim4j1
-         /RLA==
-X-Gm-Message-State: AOJu0YyLwS22ZjaoEh9TcWooPGdL+bZexaU0rEkiJkoKI9lBTFiUBT0m
-	8i6j2HhgRsCR7Kt8u7/Yh7YA3FMxWQTyHXaSoTvke8WGFOjdtIs8ajNGXqsmu92X
-X-Gm-Gg: ASbGncv6j3uLPGuljzvBtL2y5evZxaLYt8rMaF5Ungxv8/I6GGMkvasToCnBlnkuE55
-	OPzUEoQ3TO4GYcRMJ9L6tKg7/Wz58lstzJnIlER2eBKPmvp4rSYN3ErOfpJGCV8zWkdYadig+ai
-	bfiE7pUZV4ruVr1+rnJwJ4FvtfZ96x+jlQemvwZvLXFycM9DYfxlysKYqb9dFQyzEHS5SOLHmx+
-	iHAN0L1eR6dPbseyuJdIdg+ezf8NO2REkjOLslgaYQ2DdLOBfo2bDSVAfIkVqvMedEDrmW8bWyx
-	pSfEDAZFjZ2zsfVGep/DaSEb3cJhJid5qDP757sy820SKaQhsRQrCA==
-X-Google-Smtp-Source: AGHT+IG6U/qJsgAvIn9hgJBz2zq6vgBnnS70P0ISZAJqXkmzrv6+fwi10oLzC4k43poNoqGqhwPgdg==
-X-Received: by 2002:a17:902:cec4:b0:235:7c6:ebdb with SMTP id d9443c01a7336-23ac2d86a01mr253408755ad.10.1751353612798;
-        Tue, 01 Jul 2025 00:06:52 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::aa8c])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23acb3adc64sm95439885ad.153.2025.07.01.00.06.52
+        d=1e100.net; s=20230601; t=1751359442; x=1751964242;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=e7NMnWZP67Ekt+EjNoonVOuTjumdd1uP3RB/32/lBJ0=;
+        b=lrLG4ZKgovKLrzGra7f4vyDOKmN8Q5M3cime+3Oesrl+/03SQFBibwpt6q4PlegYQO
+         WZht656NBcw4ur4OrbV6qwRsbcE/l8Zezinrc7Ok0kAIJXrvZvG5w2H0F7GWFKNwAdyh
+         2VVt264J5Ud+3J+mIo44P8mQcMiNbS7kTHwZkFha/QZS/pDLhqVuxm92/wGxTkgK+MqN
+         Vhj7j4KmpmcRi8CoRUq1I3SgQO5pQt2dwiaLs2ZUp13FCI9qCxon7wTvUl8bcpkW2Xhu
+         0gh4apRPCL3oGSIfRt1jpru7wMcdbdyqsKF9RtSIVTtSiXi9ixpyvXf0fWt+Ju3bjDh4
+         iDJw==
+X-Gm-Message-State: AOJu0Yy3QG4couo+itFvQfyT5bTLaWBhArtSkGy3N/7tvyF7l1wT96nS
+	8weJX+jwL7UkTw9+NXwk08SrfLe0M38ViLn0kdc2Q6OjDYqkqiAgPhqtO0kxrg==
+X-Gm-Gg: ASbGncvM/Hdqk36V/WDK2CGWXahwNLd0hnCjDpkahB8m/Y95xsFonJ2An4Y67eGiLOb
+	XNBZHt73bptTNppBXKRuBCOVxjaRiqTEQk39TCByoejZ61HtBS+OvPMH+s1TW9GIXGUIdIH0b+F
+	n47/CnRL+/A/l4UqaW1YYFGSh1ZWgmLzodmPgQV4GF/eKukl9xNksHcZwxNGPx+q2QEa2gIiD3R
+	1RTP/4jKez73g9gGudp7gDKTjAiUerEjzU3GQVz7ovloNfVGkzHnqO0+b+fIgRWmdU7bPltfkAm
+	XinZOYiux7AtdcDsifjkFmQk6G6ZPKpL8ZtaRBkCoZnskk1J6Rj3kotMia6lPiNQKwMNeLYZH+X
+	J06wK
+X-Google-Smtp-Source: AGHT+IFq4DXBn4WhAZLtwvJsK3qvfU73cWZms6y2gnZEq1ditfrQnyBVdk501XxjzFw4NzwRPn5SpQ==
+X-Received: by 2002:a05:6000:2892:b0:3a5:1c70:5677 with SMTP id ffacd0b85a97d-3a8f577fd2amr14869186f8f.7.1751359442026;
+        Tue, 01 Jul 2025 01:44:02 -0700 (PDT)
+Received: from bigboy.CASA.NET ([199.203.94.94])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a892e59659sm12597880f8f.77.2025.07.01.01.44.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Jul 2025 00:06:52 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Tue, 01 Jul 2025 01:44:01 -0700 (PDT)
+From: Yishai Jaffe <yishai1999@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] nbdkit: Fix build after S moved into UNPACKDIR
-Date: Tue,  1 Jul 2025 00:06:49 -0700
-Message-ID: <20250701070649.2751375-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.50.0
+Cc: Yishai Jaffe <yishai1999@gmail.com>
+Subject: [PATCH 1/3] zeromq: support native build
+Date: Tue,  1 Jul 2025 11:43:50 +0300
+Message-Id: <20250701084352.4165484-2-yishai1999@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250701084352.4165484-1-yishai1999@gmail.com>
+References: <20250701084352.4165484-1-yishai1999@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 07:07:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118187
+ <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 08:44:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118189
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Add support for native build of zeromq
+
+Signed-off-by: Yishai Jaffe <yishai1999@gmail.com>
 ---
- ...plugins-Avoid-absolute-buildpaths-in-binaries.patch | 10 +++-------
- 1 file changed, 3 insertions(+), 7 deletions(-)
+ meta-oe/recipes-connectivity/zeromq/zeromq_4.3.5.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/nbdkit/nbdkit/0002-plugins-Avoid-absolute-buildpaths-in-binaries.patch b/meta-networking/recipes-support/nbdkit/nbdkit/0002-plugins-Avoid-absolute-buildpaths-in-binaries.patch
-index 2f7ffd3d20..524ea0602d 100644
---- a/meta-networking/recipes-support/nbdkit/nbdkit/0002-plugins-Avoid-absolute-buildpaths-in-binaries.patch
-+++ b/meta-networking/recipes-support/nbdkit/nbdkit/0002-plugins-Avoid-absolute-buildpaths-in-binaries.patch
-@@ -14,15 +14,14 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  plugins/cc/Makefile.am | 7 +++++--
-  1 file changed, 5 insertions(+), 2 deletions(-)
+diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.5.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.5.bb
+index 7569d3200..eb4ee2f4f 100644
+--- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.5.bb
++++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.5.bb
+@@ -27,3 +27,5 @@ do_install_ptest () {
+ }
  
--diff --git a/plugins/cc/Makefile.am b/plugins/cc/Makefile.am
--index df8b5d15..80586a17 100644
- --- a/plugins/cc/Makefile.am
- +++ b/plugins/cc/Makefile.am
--@@ -44,9 +44,12 @@ nbdkit_cc_plugin_la_SOURCES = \
-+@@ -44,9 +44,13 @@ nbdkit_cc_plugin_la_SOURCES = \
-  	$(top_srcdir)/include/nbdkit-plugin.h \
-  	$(NULL)
-  
--+workdir := $(shell dirname $(abs_top_builddir))
-++workdir1 := $(shell dirname $(abs_top_builddir))
-++workdir := $(shell dirname $(workdir1))
- +cc_no_sysroot := $(shell echo \"$(CC)\"|sed -e 's#$(workdir)#<WORKDIR>#g')
- +cflags_no_sysroot := $(shell echo \"$(CFLAGS)\"|sed -e 's#$(workdir)#<WORKDIR>#g')
-  nbdkit_cc_plugin_la_CPPFLAGS = \
-@@ -33,6 +32,3 @@ index df8b5d15..80586a17 100644
-  	-I$(top_srcdir)/include \
-  	-I$(top_builddir)/include \
-  	-I$(top_srcdir)/common/include \
---- 
--2.40.1
--
+ FILES:${PN}-doc += "${datadir}/zmq/*.txt"
++
++BBCLASSEXTEND = "native nativesdk"
 
