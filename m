@@ -2,62 +2,61 @@ Return-Path: <yishai1999@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B797C83039
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94D0CC83033
 	for <webhook@archiver.kernel.org>; Tue,  1 Jul 2025 08:44:11 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web11.5715.1751359447767068239
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web11.5714.1751359446148628550
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 01 Jul 2025 01:44:08 -0700
+ Tue, 01 Jul 2025 01:44:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ScMywwoo;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: yishai1999@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-450cfb790f7so44799015e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 01:44:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fU5HKFYX;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: yishai1999@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-3a54700a463so3212818f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 01:44:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751359446; x=1751964246; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1751359444; x=1751964244; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=MWIxl1I+iFYWqoHK+ENLtC+M/NkNocdsTtZdPI2VOmY=;
-        b=ScMywwooilkNjXOrzJm6DBFK50tYHGcJfsnZ0df0C/c85i4Vhcma/v5Hv/0eMKgcqI
-         bloEdGFlshxeA9wVmPtzxFyckN0waN86oEEYNK+PNGzDPVglIm8Dp+8zqjyfliNqwpAt
-         6Gn/rdieNgHb5R6pE0J0ieCnH+VKGx83B4uDWppvwRa2wLRgdYAzRhUfquDsx1hmGQ8N
-         SXMwXDEcx/OpuJLVRraU0cTyQHwP8FRRWpa6m60Z6c5y9PX532cQh+IUxGX2BstF9sYS
-         /7brC+yV/vKIrbsvmSXnoOD7/x2cSu7/Mj2hdL33h0SuOuWicTvGD/o0tRZ5mlBS/Bs0
-         gYgg==
+        bh=P3WSKn+zqxjyuJxeiGwFlKR0w8dseildRAev24T1UFQ=;
+        b=fU5HKFYXCa48qUYRV3oXHZS4kjtrm6rO5CGOs5HBBs5si2M6Quy3ONJgfR6OMRQyVI
+         dTtUlezhqaxeafQl0Qk8SpURlXTSsQcjAc3IN0avtaFrnOCrwjFX7pe0AAKthLmiDlAK
+         S+zMuT5ZdOUBPrz6KXpBw1mYVt9b67UsavELglgW0Lol88G5Gp1TGw8uGbj29HKQ4+M3
+         7h7PTncuDB0oOc3pV4GWeTQw6Uq5IpxMH4dscvG75AgvWRsP52WNdmPl7dgB1Pxve6V8
+         VBz2kVfEcPrVKGJgGLqZmz/wp1eN8EGh8ye1pS6vWIwbZSpcE64ikgxek1aNsGZU8m2W
+         6k/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751359446; x=1751964246;
+        d=1e100.net; s=20230601; t=1751359444; x=1751964244;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=MWIxl1I+iFYWqoHK+ENLtC+M/NkNocdsTtZdPI2VOmY=;
-        b=mEnIk5k/KT3PwTuGfXhSJz9dWTyYOQ94sgaS5wkdSVNzW+cQG2+esGMlXnoTUpWB8W
-         1mvoRzLUexJ9lDhKqx1GzmNPiAQWbPCkb0WN+t81cZfAhDfMBAzRLbDEHxQ6pslcu1D1
-         CKC/d7YGzwxNEXkNiq0qZYM636tyrfF7fcle1oyB+04nquWKNerdfdv+dJlpFMfNI7Gq
-         kc8JeDrOs1htn1pIjIV5mAauJnyC7UqXnlepSaqcOG2zMeWSsDpg7b+98wG6rgYTdPdo
-         afQG6xh5/GqwG/PPwoH7BINF5TW98+LoR+YAR0U8p5pkFaSvuBNYiNtplOEcoPzw2wmG
-         QXWg==
-X-Gm-Message-State: AOJu0YxjeXknqjfvTM8yGmL8fWXwPHGEiEGP+nqgMh0hl4jcArpwXckp
-	tOPS3C/P5q7RVU/hagxU8yIkZLE9LwNlGrnSKB4sb0e8rQaQCjvMEDwacTiKGw==
-X-Gm-Gg: ASbGnctuL8d68jXOzC7SPgKEp8i7JN4LuArHv6aoPk6gSx/gTXMM9hz8UIv2vJypHB4
-	Aois+ebW4ZyqqVOY7F518zL4McwXJnoGFfwuDFPMl6Ap5qDbJoUCnWoy5V22WvLWwUCaiu7IA3m
-	ELRTLhC4m5XIQVh4R4hCe8pq5RqJFfPeCUXdCGjh2NaQ+490/9lJ1vxfm1GhVNkxirm66KYq6IA
-	HplbWNPgNZIYqzywFQl6rep7xvUL4UI0A+b/2Bdud99frP1RbWpvLCKfWQv3vC+f7LNmx3+FLeQ
-	iX6YDYsMt95DEFawGy5qUJJPNAUkjuqhXuPzI2MY/mxerOgMn3LvUFosDvkv6ZXjb7Xth3zo2fz
-	MkQ90
-X-Google-Smtp-Source: AGHT+IF/sIaWf7jZ070zXpoVN7FfP5ZUxDeU+SB+6D1NYBB24lSpncdnbgGMPs4LSQcGf4lLYI8x5A==
-X-Received: by 2002:a05:6000:402a:b0:3a5:300d:5e17 with SMTP id ffacd0b85a97d-3a917603734mr14768816f8f.29.1751359445608;
-        Tue, 01 Jul 2025 01:44:05 -0700 (PDT)
+        bh=P3WSKn+zqxjyuJxeiGwFlKR0w8dseildRAev24T1UFQ=;
+        b=f+eK5MT+pDP8ylBgxl6xQjgGs0oj1KC8eA+y2zPIgybfql5byZ7Cel+nxuQ4tKSXYX
+         6TG0Mufpvzc+F2OzLV3PzT32MuHPFdbjGVcrshyo4TVVEqReyMhc8eOYjPwtJSkFQael
+         1jdhEPkKpogv+g1g6aPnyXyi879gOB4f4TcrxonWQCwqZ+IjUls1VoPnu+Oml7Fvn4i1
+         1Q0Fe3V9BtSKAX17mgjId903TeFoVufvvU54kTzjuoB8PEAhdkqkzPC1ljn1cnIiKoWB
+         9yb+yztcfLrX1fLsSeqdGYO66U55JU+HBVBIFm+GslrlxLD/teXgKzS+1bwaQjaC1jux
+         RCjg==
+X-Gm-Message-State: AOJu0YxgWxIua5un5rvU+O4tq8mBtwvdrrebkksCLoQCmHsFFTEFBLeB
+	qWsKUi/LXOuj8E4Nnnrp0cGimjIBPZbprfjtd0jOqQEC3gWXAVUqQF/9xLDm1A==
+X-Gm-Gg: ASbGncuhvn4uM8wjTmi7DASBu9hAiiwHvbJMbN/DGd5THbQpHd0eXS00xddMkQu68Vp
+	kIuPd6AOj3Hs0JXCcRXCuhTUXmJJHdN0VmgBszQCHX1zpIzyZ3LqDHg5Aq/m97c6tfSHV5jC5vw
+	fbihVgRZr04YRGkP8ntUhdUfrtPBc+6vfih+xP27lc2m5mCwbBgObl0jsWxsUS0CvaKbYJ1KExQ
+	UPvgqtPyZClfyYlTI9Ak/tO3DmGFeANePgRqIND1PqaPFimg48b2GXe8mzv2q+VBJ2NOzOKPE+l
+	Ryuj7wIMAr9JN6OzmP9KOdL4XxPGsZ+bSbboCh94TxOcZyiBWlGY5LYF5AF8jsPIldkJRw==
+X-Google-Smtp-Source: AGHT+IE7fiQBEStYcUkjG2Ztsj6cI601uOC8D6kej8t6ex17zVt7suQFj9pYU8vHuZYLrN76lfkBPQ==
+X-Received: by 2002:a05:6000:4603:b0:3a5:23c6:eeee with SMTP id ffacd0b85a97d-3afb0247991mr1215095f8f.21.1751359444084;
+        Tue, 01 Jul 2025 01:44:04 -0700 (PDT)
 Received: from bigboy.CASA.NET ([199.203.94.94])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a892e59659sm12597880f8f.77.2025.07.01.01.44.04
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a892e59659sm12597880f8f.77.2025.07.01.01.44.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Jul 2025 01:44:05 -0700 (PDT)
+        Tue, 01 Jul 2025 01:44:03 -0700 (PDT)
 From: Yishai Jaffe <yishai1999@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Yishai Jaffe <yishai1999@gmail.com>
-Subject: [PATCH 3/3] python3-pybind11-json: support native build
-Date: Tue,  1 Jul 2025 11:43:52 +0300
-Message-Id: <20250701084352.4165484-4-yishai1999@gmail.com>
+Subject: [PATCH 2/3] json-schema-validator: support native build
+Date: Tue,  1 Jul 2025 11:43:51 +0300
+Message-Id: <20250701084352.4165484-3-yishai1999@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250701084352.4165484-1-yishai1999@gmail.com>
 References: <20250701084352.4165484-1-yishai1999@gmail.com>
@@ -67,23 +66,23 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 01 Jul 2025 08:44:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118191
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118190
 
-Add support for native build of python3-pybind11-json
+Add support for native build of json-schema-validator
 
 Signed-off-by: Yishai Jaffe <yishai1999@gmail.com>
 ---
- .../recipes-devtools/python/python3-pybind11-json_0.2.15.bb     | 2 ++
+ .../json-schema-validator/json-schema-validator_2.2.0.bb        | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb
-index fa4a74f92..8ad7dba76 100644
---- a/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb
-+++ b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb
-@@ -11,3 +11,5 @@ DEPENDS += "nlohmann-json python3-pybind11"
- EXTRA_OECMAKE += "-DPYBIND11_USE_CROSSCOMPILING=ON"
+diff --git a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb
+index 241fd328d..c6e910a13 100644
+--- a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb
++++ b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb
+@@ -16,3 +16,5 @@ DEPENDS += "nlohmann-json"
  
- inherit cmake python3native python3targetconfig
+ inherit cmake
+ EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON -DJSON_VALIDATOR_BUILD_TESTS=OFF -DJSON_VALIDATOR_BUILD_EXAMPLES=OFF"
 +
 +BBCLASSEXTEND = "native nativesdk"
 
