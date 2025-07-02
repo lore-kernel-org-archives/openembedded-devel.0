@@ -1,97 +1,125 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4AF2C83038
-	for <webhook@archiver.kernel.org>; Wed,  2 Jul 2025 17:29:08 +0000 (UTC)
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.web10.2088.1751477341941182145
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DB9EC83F03
+	for <webhook@archiver.kernel.org>; Wed,  2 Jul 2025 19:55:29 +0000 (UTC)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web10.25676.1751467483967491326
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Jul 2025 10:29:02 -0700
+ Wed, 02 Jul 2025 07:44:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KqVIOk2t;
- spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-708d90aa8f9so73322317b3.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Jul 2025 10:29:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WRQWReqV;
+ spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: ernestvanhoecke@gmail.com)
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-6097d144923so14234909a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Jul 2025 07:44:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751477341; x=1752082141; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1751467482; x=1752072282; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=F1eZOXA6hv0rRjDouAU2kBqGullGUlob5mMt4z33WG0=;
-        b=KqVIOk2tUrC7jQEJqIjLPKUntmiEJzHRu+wtcgnY37VEQft13IVdrsiDonL6+bUFwG
-         N26M3Zb1Zxz8xYMVqP/MxMMo20V70eEG7K0+V0kFsMSsYRT33kcyFuYiGMs0vLVmTvKK
-         14EfVUiRUEd+hPQDBwomUafwJX8Je/3OK4OZZvuC1mWLdLc1OGPEXrSpexowXDwk6h+Q
-         mWUMwRMugYiz1ABvtNfk2pQqC6pf77WbQlqaKJ3bMmaYHmWHP5HB3BFBgJLv0HKbei8g
-         NgDDyJcXplffnm79YZpKbJQY76FSCJBiaWzuQ8wrdfGmZn8jxYYFJq3CBKWtHO4ct1QG
-         C9VQ==
+        bh=C0FX5HFtIapxR0pH5UFjRCI5oS4ONAYQA+9T5yTK9aU=;
+        b=WRQWReqVSW+XcXUwh1F5+J/RkzoC7OWh02XiXBrT4ihAtBzAtjruYq9FAodRM/RSE4
+         3xlqOz41E2txAGdtX5NDYeLlblfbK6S3N3bOcErLJrEYOLW//5OiigvJJSQJVMCyt7EF
+         RSL1y64gq770EbzHLJiRNY8OBQemJ3ngpvpTZo3+0Yks3xV0WytT9XwWgm0BWzdu0qlo
+         IWn2IokCPgf2Pc+gxwNET35H+F8ImbFQ7Q01laDT6VT9mpnGVM4wbC90vn9z+pDe9JK5
+         vdgwEsgeyuNeFQlARvKPL/EueRCXgdTQMZVt+WhcMKbWylcHBAfzEWkB1IVoXrvUJ2ju
+         AR9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751477341; x=1752082141;
+        d=1e100.net; s=20230601; t=1751467482; x=1752072282;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=F1eZOXA6hv0rRjDouAU2kBqGullGUlob5mMt4z33WG0=;
-        b=b6C8230g1TLWabS+Bbk5Z5enNDvq9w3b70J+8sm4Xn8EbBgS7dmVE063cgR0YtFY3O
-         444iYGMjDL/f/K6Ar095KbJ9LgcnHhiO+lC519sqCwYa2l2trZmqkcMlz2xz7BfKwA4N
-         jZC3LNb+7YS1dXidjHjR/aQvmGqeVpORYDL3tnjEXIA3HmmZJPkmHtm+5zOCXK1dz73+
-         R8UFOcoXUkrCv3o6s+o3yD66CqfqfTXJ8z5GjU2hP3UaQkvMv0izNDrC369CrRgsOt2N
-         qKmsNoR7q+73oOKQuhFK8OVuJk8jsBnkfqUgpucivSNhsvcUXxg+IUjUf5witGOuSTLK
-         9ZHw==
-X-Gm-Message-State: AOJu0YxQ+qmMNaZM0BtpOw5v5pHI/3/wrdPOiV15sc3G7RVjPMyzLbok
-	pRcss0FUWmBxVK9I0qEH6PofK+Xqy1cNo1YfUWCaT7c9ONI8SK5vyIqR9a1cl031
-X-Gm-Gg: ASbGncuP/MolEHRP0LBebPLjdTG7+DPwaIQkYTV3snLznuxNExSScp3pg1VG03wVdop
-	KhVHRM12GBeq/elOBNdBDxUGU//XUEodD5FaafF0yR523dCshgXD1jF63xOxIB+med6d0MU+T5D
-	f+3tKm2MPiVZ2M6qf5jGGSHvZc2sLc7aMijuDiYpMO5lXE95ICcFGjbHchTmeKynJG93OoaC1ck
-	2bSJzCWP7WI/NpNgJh1lV2K7p+gZ1BnuqqOwyfdrpfhI42HyIAh73J5I2gIuhxfIgrydxk0fHBa
-	kDWOh/RV+lHYdp3bbNq1XSipSFKgiVJbwVtSaYP8PHd9K/Zvtx6ApO9v8aHtXI1xlR5OtIXyOy6
-	yuIO/TqgQUo2cnLlPHJf6
-X-Google-Smtp-Source: AGHT+IHSEMVUjbSItNCI1e0cOlnKKkzB4zig+20t6JI5fwH/dLc4xSjH8tuKnNG8wKVK5SrBofQvOg==
-X-Received: by 2002:a05:690c:3607:b0:70c:b882:2e5 with SMTP id 00721157ae682-7164d305e4amr55653327b3.2.1751477340345;
-        Wed, 02 Jul 2025 10:29:00 -0700 (PDT)
-Received: from localhost.localdomain (71-208-4-221.ftmy.qwest.net. [71.208.4.221])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-71515c94bd4sm25550547b3.63.2025.07.02.10.28.59
+        bh=C0FX5HFtIapxR0pH5UFjRCI5oS4ONAYQA+9T5yTK9aU=;
+        b=umkWpkuwFsB7J+7KG3t8RyJ5LseHPTnOZwtlSAH+w5BuhXveKvIXQMpE8uKENlnSV1
+         Y5vnZSDHJ7WJI1F7GaPMSjtcMkHdXHO5NWjH2uwug9vGfIcrKdW4s/E0+/mezoD8QikT
+         jcFKeAiWJAbs5Q4T5HCTLlIKSNuhkGP8qWW4ZfZIGE0eIh1j4f/QxVjOfdnIyG8A/fU2
+         OfhKm/chQdI5WBcmQREgMf3SiZBRe9SrzGXbLEnfCcEXejLbwqZEoMN+MPCLDrAqbM9b
+         B14yM3q/lBGirw5ISBjpL1Mv80WeoRCueE5q065Bml0T3wROZErkfI+603RbbfILuzUO
+         0P9w==
+X-Gm-Message-State: AOJu0YzNed+DmM0fxgbRRgf36n4C4T7av5N4ZsqQ4b1AtBJxe1WsZM1l
+	0BEZaDjS6BIW7jcS/tiiineBd15h4EsTaEx4GL/m2cIAiusvhMVCudJpSsgXlA==
+X-Gm-Gg: ASbGncvJgskfiEtytmXHflZ9WsuNpH4rl4XnsAODcD5WA+5b0L7kgDyZB+S1hLHGf/t
+	va7hMznXWXfkIYsL4jtgfDHncvAjx4Xy4LxFhdKHBj2EhZaQtIk3TNVrXwmvE8oLQ+HBaQkIPs6
+	ssPpm+he4Lojz45uFCiByPZgel2k1ZO/6UKD4l+lAqPfe/sSanJAShqIyAu55K9cU+6a1ioYh1L
+	xVhdEPJgDx/Nz6JbfyxagOacVHW998Y4SmxeSPzCvns7qXn2wfl7jXqOFFT1oXmoQSu5fHC93TF
+	u9LQiCW8mzXrS1n/81uOWkgzCIgk6qeroCujV/1KhKNGjr/s2uG5L9l5P/a2i1xNfPKugQskQCi
+	NGR+fxxq5W0PaNc3w4/uakaB03Gt/kU9XO+VIm+6hPyEceGSg6tJT9aaAp253j0SgkBBGX7Elk1
+	Q=
+X-Google-Smtp-Source: AGHT+IGX6yEG3i3v+Bof4qlQ3xlYAX6kBarsG+K06yKq7aeNkLyXonM9UipZWl4irIcLdL+8rkF4mg==
+X-Received: by 2002:a05:600c:a40d:b0:441:d228:3a07 with SMTP id 5b1f17b1804b1-454a3c595d3mr20189955e9.13.1751467112970;
+        Wed, 02 Jul 2025 07:38:32 -0700 (PDT)
+Received: from ernest.corp.toradex.com (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-454a9966919sm46775e9.7.2025.07.02.07.38.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Jul 2025 10:29:00 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Wed, 02 Jul 2025 07:38:32 -0700 (PDT)
+From: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+X-Google-Original-From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-networking][PATCH] pgpool2: upgrade 4.5.3 -> 4.5.4
-Date: Wed,  2 Jul 2025 13:27:27 -0400
-Message-ID: <20250702172727.28311-1-schonm@gmail.com>
+Cc: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+Subject: [meta-oe][PATCH] libusbgx: exit with failure code when no UDC is detected
+Date: Wed,  2 Jul 2025 16:32:09 +0200
+Message-ID: <20250702143209.3345301-1-ernest.vanhoecke@toradex.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Jul 2025 17:29:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118201
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Jul 2025 19:55:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118202
 
-This version brings a fix for CVE-2024-45624
+The systemd target `usb-gadget.target` is triggered by udev when a UDC
+first comes up. It can happen that by the time gadget-start runs, this
+UDC has been removed from the system again.
 
-Changlog: https://www.pgpool.net/docs/latest/en/html/release-4-5-4.html
+Have the gadget-start script exit with status 1 when `ls /sys/class/udc`
+returns nothing.
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Causing a service failure when no UDC is detected and no default was
+given, allows the service to be restarted by a udev rule calling the
+service (and not the target since those are not reentrant) directly. On
+its own this patch will not do much.
+
+For example, we saw such a situation using the DWC3 USB controller and
+usb-conn-gpio kernel modules as loadables. By the time of the DWC3 init,
+udev was active, and during init DWC3 started the USB OTG port in device
+mode. If a pen drive was plugged in at boot, it would quickly switch to
+host mode right after initialisation, emitting another udev event for
+the removal of the UDC. The systemd target as thus reached, but by the
+time gadget-start ran, the UDC was gone.
+
+  dwc3 init       usb-conn-gpio role switch
+      │                       │
+      ▼                       ▼
+udev: add UDC─┐         udev: del UDC─────►/sys/class/udc empty
+              │                                         │
+              │                                         x
+              │                                         │
+              │                                         ▼
+              └────────────►usb-gadget.target─────►gadget-start
+
+Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
 ---
- .../pgpool2/{pgpool2_4.5.3.bb => pgpool2_4.5.4.bb}              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/pgpool2/{pgpool2_4.5.3.bb => pgpool2_4.5.4.bb} (95%)
+ meta-oe/recipes-support/libusbgx/libusbgx/gadget-start | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/pgpool2/pgpool2_4.5.3.bb b/meta-networking/recipes-support/pgpool2/pgpool2_4.5.4.bb
-similarity index 95%
-rename from meta-networking/recipes-support/pgpool2/pgpool2_4.5.3.bb
-rename to meta-networking/recipes-support/pgpool2/pgpool2_4.5.4.bb
-index bdd715aacf..706e7360a2 100644
---- a/meta-networking/recipes-support/pgpool2/pgpool2_4.5.3.bb
-+++ b/meta-networking/recipes-support/pgpool2/pgpool2_4.5.4.bb
-@@ -16,7 +16,7 @@ SRC_URI = "https://www.pgpool.net/mediawiki/images/pgpool-II-${PV}.tar.gz \
- 	   file://pgpool.sysconfig \
- 	   file://pgpool.service \
-            "
--SRC_URI[sha256sum] = "25ed340d7b7dc00c20e4ba763d3f9c07ba891b150d9d48af313a1351cafdd778"
-+SRC_URI[sha256sum] = "d1392e74ce2807f8ae628872cb1ab7914249921180dc99df40a1d602647a10fd"
- 
- S = "${UNPACKDIR}/pgpool-II-${PV}"
- 
+diff --git a/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start b/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start
+index e80cb2c34068..4ef679888ec4 100755
+--- a/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start
++++ b/meta-oe/recipes-support/libusbgx/libusbgx/gadget-start
+@@ -15,6 +15,10 @@ for i in $ENABLED_SCHEMAS; do
+     if [ -n "${configured_udc}" ] && [ -e "/sys/class/udc/${configured_udc}" ]; then
+         echo ${configured_udc} > /sys/kernel/config/usb_gadget/"$i"/UDC
+     else
+-        ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/"$i"/UDC
++        detected_udc=$(ls /sys/class/udc/)
++        if [ -z "${detected_udc}" ]; then
++            exit 1
++        fi
++        echo "${detected_udc}" > /sys/kernel/config/usb_gadget/"$i"/UDC
+     fi
+ done
 -- 
 2.43.0
 
