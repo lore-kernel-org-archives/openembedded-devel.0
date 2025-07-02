@@ -1,256 +1,237 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <denis.osterland@diehl.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CFF9CC83013
-	for <webhook@archiver.kernel.org>; Wed,  2 Jul 2025 07:55:12 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.web11.18266.1751442903649042604
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56EF5C83F04
+	for <webhook@archiver.kernel.org>; Wed,  2 Jul 2025 16:02:48 +0000 (UTC)
+Received: from enterprise01.smtp.diehl.com (enterprise01.smtp.diehl.com [193.201.238.219])
+ by mx.groups.io with SMTP id smtpd.web11.88.1751472165809357150
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Jul 2025 00:55:04 -0700
+ Wed, 02 Jul 2025 09:02:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=kli8KjXQ;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1751442904; x=1782978904;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=DfLVs+5+2bWqN/qcxrI13Kwvy54RUuDAmzNEgYVjiww=;
-  b=kli8KjXQEyhVfhqxi9SvzGx7xBJYGdl1PUU2Ab0JwbCyGAEWwqgCFay7
-   OUteMi0Y2epGOAGLYtU9cmEzBoWO04SRY/iB0Eicc4ccAuhP9DcqLJY6h
-   bXC/H/loeT7x4uGfsVlGwJhz7q5Wa6SPPNzS1PxTbmck5f38B+YxfpaN3
-   lgm7/o4J2sc73ioiSJ6kE+Qq6YD5h+GHM9F4nievKbtRuIQ65/f422v0I
-   9Eoxy4rWp3GKvxYBCqD1KvOcCK81eSq5uFFUYo7yfcvw2Wr6OiM7Pz+PO
-   TrdNxgKd45uChi7QAahtGR4y1MF+LEx0acuhkCqJs/jK9rpKdM/+3i9jj
+ dkim=pass header.i=@diehl.com header.s=default header.b=pm70lA3r;
+ spf=pass (domain: diehl.com, ip: 193.201.238.219, mailfrom: prvs=271e33f41=denis.osterland@diehl.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=diehl.com; i=@diehl.com; q=dns/txt; s=default;
+  t=1751472166; x=1783008166;
+  h=from:to:subject:message-id:mime-version:date;
+  bh=FzVZSMtbXnybmCgcoGsqsQSvHLrnHWcKpymCwBtG4K4=;
+  b=pm70lA3r4g9Vx1oJqnWVGjO9TzTyBEcPmqNfE5BUEoYgF6dE9CWHqzm8
+   0W65Cj9Jx3lx+BZfwlRurFx8QcbMuyamL+8Z26etJ9X5cpnj2btk3+W1E
+   6F8K5tp1rCYjIShol6ZuecGvYOF5OJa+WN/ooLgcNV3MOjfawyIY4Mi2B
+   GMI1WX87Z8Bp8TX6aAZQf/r/lYSSRI3IdE9QK3GJ9WFEyupoFVZrWMNRE
+   /wvvkgA5qCv03WuhtxxVoYqiLD/xFWLcIMr4MdXZHUTpPfdeup99/nQzp
+   9WsZ/pOwiGFc1pnbA0o3LwPYmB9jkUQpRsCjKSBJuwLYwHZm/SJEE7igI
    g==;
-X-CSE-ConnectionGUID: yGwKZHiCScS5E+OgizwEEg==
-X-CSE-MsgGUID: vm+MsdpuQgSYD0DEdaXqcw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11481"; a="208133239"
-X-IronPort-AV: E=Sophos;i="6.16,281,1744038000"; 
-   d="scan'208";a="208133239"
-Received: from unknown (HELO az2uksmgr1.o.css.fujitsu.com) ([52.151.125.19])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jul 2025 16:55:02 +0900
-Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 1703B1C1C701
-	for <openembedded-devel@lists.openembedded.org>; Wed,  2 Jul 2025 07:55:02 +0000 (UTC)
-Received: from yto-m1.gw.nic.fujitsu.com (yto-m1.gw.nic.fujitsu.com [10.128.47.162])
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTP id 52980C06BFA
-	for <openembedded-devel@lists.openembedded.org>; Wed,  2 Jul 2025 07:55:01 +0000 (UTC)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id B687DC18A3
-	for <openembedded-devel@lists.openembedded.org>; Wed,  2 Jul 2025 16:54:59 +0900 (JST)
-Received: from G08FNSTD190088.g08.fujitsu.local (unknown [10.193.160.53])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id DDAAB1A000B;
-	Wed,  2 Jul 2025 15:54:58 +0800 (CST)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
-To: Khem Raj <raj.khem@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Cc: maxj.fnst@fujitsu.com,
-	Liu Yiding <liuyd.fnst@fujitsu.com>
-Subject: [meta-oe] [PATCH] hwloc: upgrade 2.9.3 -> 2.12.1
-Date: Wed,  2 Jul 2025 15:54:50 +0800
-Message-ID: <20250702075451.892-1-liuyd.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
+X-CSE-ConnectionGUID: UeyenP6WQvm6mgOT6JMOuQ==
+X-CSE-MsgGUID: oTBkoMQ3Rq+L9fISuuStgA==
+X-ThreatScanner-Verdict: Negative
+IronPort-Data: A9a23:JGxp+aIRiYezyWo0FE+R9JIlxSXFcZb7ZxGr2PjLsTHJhXpii2xUn
+ yZGBjeZcuLKOTG2fMQ1MdropA5D+8PleuQTC1818HwrVy1RwSauLd7FfxusNn/Cd5SYRxprs
+ Z1ANtedJsw6HnaHrEmmbue79ylxhayEFrGtULLIZiwvHF81E3crhRloy+Rh09Az2obR72+ls
+ Mvqp8zUMUOk3DgzKmEf8P3GsxJguv3upSkV1rAbTakjUAj2ySFOXPrzXJ2ZL2fkWtsTWee7T
+ qDY07Ci5XjY8BFrAdPim7fhNxdUS+GLNlDfzyYJVqLn3kUfr2lj2PxrcaYWZRgNhzvRzoohx
+ I139sQ6oc8HPrHQgLZaFB5TCDk4JrJH46TcIHe598eTiFbHfH2rxP51SUg/NoYT9+oqRD8Q+
+ KxddGhTP1XSjbu8hby3ELhljJt4IcfmN9sFhxlcIUri4YAbrerrGOOSjeJw3CssnpIJWv/fb
+ owCdjt0dw/BbBsJMVdQAZMk2buh2XemLG0I7QjLr/dyvzjex0l4jeSyddGMcdDST8sMwU3Dq
+ jr7l1gVeSr2QuFzsxLetCrEu8fPgT/jCsVVH6e8sOV1gUaI3W0cDlsdVRywreH80UOzBo9RJ
+ xBRp3t1/e1urUGmC4mnUxf9+yTe5RcXVtQNGLdhsDzl9kav2OrvO4R+ZmUHMLQbnM8qWSR4k
+ RiChdevHiNuq6aOSH2bsLyU6ji+IW0YfDAMPXAPEU4IvYK/5d04gxmKHts5Gevt0tevQTivy
+ mvSp3Vmut0vYbUwO9OGESrv2HT0zqX0czPZxjk7f0qsv1tzbd/0N9Skt1TVtqsRIt+XHgbY7
+ HIIysLHsbxeA83UxH2GTdtWEeDy7Z5pEtF+bX1HQsN9rWT9oxZPWagKvVmS8W8wap5slQfBO
+ RGV4UUJoscOYBNGVIcvC6qpEcMm0KP8ItrsU/HQf7Jmb4N4HOO91HgGiXW4gSa0ziDArYllY
+ c3GKZn0Vy5DYUha5GHeq9k1gOZDKh8WlTu7qaDTl3yPzbeYbXiJfrYJWHPmRvw59q6NvDLO+
+ N9ZMcaQoz0HOAEpSnCKmWK7BQliwUkTXfgameQOHgKwClMO9FUaNhPk6ehJl7qJPUhivrygE
+ nmVAie0wbdk7JHNAV3ihntLMNsDUXvjxJ6S0ONF0VuAghAejYiTAKg3SpYmcL8fqtNa0/sqS
+ vYiR5uiJ9NSc2GSk9gdRcGVQI1KeBG5jg2RZ3Djaz8lZ9hsRgHJ/pnveQ6HGCsmV3Lx5ZF4+
+ u3mj1iBKXYAb10K4ML+ZP+pzkj3umMBlfh2Vk3ECtVSdUXotoNtLkQdi9dueZ5UeUmemWLyO
+ wC+Bisypu7omtQP6Zrt1K6llJq0KPdxNx8Pd4XcxfPsXcXAxUKk2YJGXeOCcDzRWW+x9Ki8a
+ OF9y/DnLOZBm05HtYd5Gbtnwa8yodz1qNdnIh9MRS2NPw7tU+MmeyLctSVSipBwKnZikVPec
+ iqyFhNyY91l5OuN/IYtGTcY
+IronPort-HdrOrdr: A9a23:3u2b76p+uJCyQAJ2ltTQ2EsaV5pEeYIsimQD101hICG9E/b4qy
+ nAppQmPHPP4gr5O0tPpTnjAsa9qBrnnPYf3WB7B9uftWfd1VeVEA==
+X-Talos-CUID: 9a23:7fX/U25yixIjepiz6dssyUMFF8YdLELk0nKOJkCfNThLbZqIcArF
+X-Talos-MUID: 9a23:gkWnzAkMjsqM4BoHulmJdnplCO1r5IGXU3oU0rFXtei/KDFLJzi02WE=
+X-IronPort-AV: E=Sophos;i="6.16,281,1744063200"; 
+   d="p7s'346?scan'346,208,346";a="127084571"
+From: Denis OSTERLAND-HEIM <denis.osterland@diehl.com>
+To: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-oe] [PATCH] libp11-native: fix engine install
+Message-ID: <c62c900458294e3591e9f8f4e23a315e@diehl.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature"; micalg="sha-256"; boundary="----466606B8B440EB9D5602C6E9635FC1E1"
+Date: Wed,  2 Jul 2025 18:02:44 +0200 (CEST)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 02 Jul 2025 07:55:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118199
+ <openembedded-devel@lists.openembedded.org>; Wed, 02 Jul 2025 16:02:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118200
 
-Version 2.12.1
---------------
-* Add hwloc-calc's --default-nodes option to hwloc-bind and hwloc-info.
-* Improve the --best-memattr "default" fallback, try to use "default"
-  memory nodes, and add verbose messages and warnings if some
-  performance info are incomplete or missing.
-  Thanks to Antoine Morvan for the report.
-* Fix CPU and memory binding on different locations,
-  thanks to Antoine Morvan for the report.
-* Add HWLOC_LOCAL_NUMANODE_FLAG_INTERSECT_LOCALITY and enable it by
-  default in hwloc-calc --local-memory for finding local NUMA nodes
-  that do not exactly match input locations.
-  Thanks to Antoine Morvan for the report.
-* Fix a possible crash in the x86 backend when Qemu is configured to
-  expose multicore/thread CPUs that are actually single-core/thread.
-  Thanks to Georg Pfuetzenreuter.
+This is an S/MIME signed message
 
-Version 2.12.0
---------------
-* Add hwloc_topology_get_default_nodeset() for the set of default
-  NUMA nodes.
-  - hwloc-calc now has --default-nodes option.
-* Rework oneAPI LevelZero support to use zesInit() and avoid the need
-  to set ZES_ENABLE_SYSMAN=1 in the environment.
-  - zesDriverGetDeviceByUuidExp() is now required in the L0 runtime.
-  - ZES/Sysman variants were added in hwloc/levelzero.h to specifically
-    handle ZES/Sysman device handles.
-* Fix the locality of AMD GPU partitions, thanks to Edgar Leon for
-  reporting and debugging the issue.
-* Better detect Cray Slingshot NICs, thanks to Edgar Leon.
-* Add support for Die objects and Module groups on Windows.
-* Only filter-out Dies that are identical to their Packages
-  when it applies to all Dies.
-* Improve hwloc-calc to handle CPU-less NUMA nodes or platforms with
-  heterogeneous memory without requiring --nodeset-output.
-* hwloc-calc now accepts counting/listing cpukinds and memory tiers
-  with -N and -I cpukind/memorytier.
-* The systemd-dbus-api output of hwloc-calc has changed, and
-  --nodeset-output-format was added, to support NUMA node outputs.
-  Thanks to Pierre Neyron.
-* Update NVLink bandwidth and CUDA capabilities up to NVIDIA Blackwell.
-* Fix some NUMA syscalls on Linux for platforms with old libc headers.
-* Some minor fixes in distances.
+------466606B8B440EB9D5602C6E9635FC1E1
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Version 2.11.2
---------------
-* Add missing CPU info attrs on aarch64 on Linux.
-* Use ACPI CPPC on Linux to get better information about cpukinds,
-  at least on AMD CPUs.
-* Fix crash when manipulating cpukinds after topology
-  duplication, thanks to Hadrien Grasland for the report.
-* Fix missing input target checks in memattr functions,
-  thanks to Hadrien Grasland for the report.
-* Fix a memory leak when ignoring NUMA distances on FreeBSD.
-* Fix build failure on old Linux distributions without accessat().
-* Fix non-Windows importing of XML topologies and CPUID dumps exported
-  on Windows.
-* hwloc-calc --cpuset-output-format systemd-dbus-api now allows
-  to generate AllowedCPUs information for systemd slices.
-  See the hwloc-calc manpage for examples. Thanks to Pierre Neyron.
-* Some fixes in manpage EXAMPLES and split them into subsections.
+openssl-native is compiled with a engine path /not/builtin
+and the config file provides the actual path.
+The configure script looks up this not working path.
+To make it work, provide the runtime path via configure argument.
 
-Version 2.11.1
---------------
-* Fix bash completions, thanks Tavis Rudd.
-
-Version 2.11.0
---------------
-* API
-  + Add HWLOC_MEMBIND_WEIGHTED_INTERLEAVE memory binding policy on
-    Linux 6.9+. Thanks to Honggyu Kim for the patch.
-    - weighted_interleave_membind is added to membind support bits.
-    - The "weighted" policy is added to the hwloc-bind tool.
-  + Add hwloc_obj_set_subtype(). Thanks to Hadrien Grasland for the report.
-* GPU support
-  + Don't hide the GPU NUMA node on NVIDIA Grace Hopper.
-  + Get Intel GPU OpenCL device locality.
-  + Add bandwidths between subdevices in the LevelZero XeLinkBandwidth
-    matrix.
-  + Fix PCI Gen4+ link speed of NVIDIA GPU obtained from NVML,
-    thanks to Akram Sbaih for the report.
-* Windows support
-  + Fix Windows support when UNICODE is enabled, several hwloc features
-    were missing, thanks to Martin for the report.
-  + Fix the enabling of CUDA in Windows CMake build,
-    Thanks to Moritz Kreutzer for the patch.
-  + Fix CUDA/OpenCL test source path in Windows CMake.
-* Tools
-  + Option --best-memattr may now return multiple nodes. Additional
-    configuration flags may be given to tweak its behavior.
-  + hwloc-info has a new --get-attr option to get a single attribute.
-  + hwloc-info now supports "levels", "support" and "topology"
-    special keywords for backward compatibility for hwloc 3.0.
-  + The --taskset command-line option is superseded by the new
-    --cpuset-output-format which also allows to export as list.
-  + hwloc-calc may now import bitmasks described as a list of bits
-    with the new "--cpuset-input-format list".
-* Misc
-  + The MemoryTiersNr info attribute in the root object now says how many
-    memory tiers were built. Thanks to Antoine Morvan for the report.
-  + Fix the management of infinite cpusets in the bitmap printf/sscanf
-    API as well as in command-line tools.
-  + Add section "Compiling software on top of hwloc's C API" in the
-    documentation with examples for GNU Make and CMake,
-    thanks to Florent Pruvost for the help.
-
-Version 2.10.0
---------------
-* Heterogeneous Memory core improvements
-  + Better heuristics to identify the subtype of memory such as HBM,
-    DRAM, NVM, CXL-DRAM, etc.
-  + Build memory tiers, i.e. sets of NUMA nodes with the same subtype
-    and similar performance.
-    - NUMA node tier ranks are exposed in the new MemoryTier info
-      attribute (starts from 0 for highest bandwidth tier)..
-  + See the new Heterogeneous Memory section in the documentation.
-* API
-  + Add hwloc_topology_free_group_object() to discard a Group created
-    by hwloc_topology_alloc_group_object().
-* Linux backend
-  + Fix cpukinds on NVIDIA Grace to report identical cores even if they
-    actually have very small frequency differences.
-    Thanks to John C. Linford for the report.
-  + Add CXLDevice attributes to CXL DAX objects and NUMA nodes to show
-    which PCI device implements which window.
-  + Ignore buggy memory-side caches and memory attributes when fake NUMA
-    emulation is enabled on the Linux kernel command-line.
-  + Add more info attributes in MemoryModule Misc objects,
-    thanks to Zubiao Xiong for the patch.
-  + Get CPUModel and CPUFamily info attributes on LoongArch platforms.
-* x86 backend
-  + Add support for new AMD CPUID leaf 0x80000026 for better detection
-    of Core Complex and Die on Zen4 processors.
-  + Improve Zhaoxin CPU topology detection.
-* Tools
-  + Input locations and many command-line options (e.g. hwloc-calc -I -N -H,
-    lstopo --only) now accept filters such as "NUMA[HBM]" so that only
-    objects are that type and subtype are considered.
-    - NUMA[tier=1] is also accepted for selecting NUMA nodes depending
-      on their MemoryTier info attribute.
-  + Add --object-output to hwloc-calc to report the type as a prefix to
-    object indexes, e.g. Core:2 instead of 2 in the output of -I.
-  + hwloc-info --ancestor and --descendants now accepts kinds of objects
-    instead of single types.
-    - The new --first option only shows the first matching object.
-  + Add --children-of-pid to hwloc-ps to show a hierarchy of processes.
-    Thanks to Antoine Morvan for the suggestion.
-  + Add --misc-from to lstopo to add Misc objects described in a file.
-    - To be combined with the new hwloc-ps --lstopo-misc for a customizable
-      lstopo --top replacement.
-* Misc
-  + lstopo may now configure the layout of memory object placed above,
-    for instance with --children-order memory:above:vert.
-  + Fix XML import from memory or stdin when using libxml2 2.12.
-  + Fix installation failures when configuring with --target,
-    thanks to Clement Foyer for the patch.
-  + Fix support for 128bit pointer architectures.
-  + Remove Netloc.
-
-Changelog: https://github.com/open-mpi/hwloc/blob/v2.12/NEWS
-
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+Signed-off-by: Denis OSTERLAND-HEIM <denis.osterland@diehl.com>
 ---
- .../hwloc/{hwloc_2.9.3.bb => hwloc_2.12.1.bb}               | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-extended/hwloc/{hwloc_2.9.3.bb => hwloc_2.12.1.bb} (86%)
+ meta-oe/recipes-support/libp11/libp11_0.4.13.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-extended/hwloc/hwloc_2.9.3.bb b/meta-oe/recipes-extended/hwloc/hwloc_2.12.1.bb
-similarity index 86%
-rename from meta-oe/recipes-extended/hwloc/hwloc_2.9.3.bb
-rename to meta-oe/recipes-extended/hwloc/hwloc_2.12.1.bb
-index d72c5f2be5..f56142dffd 100644
---- a/meta-oe/recipes-extended/hwloc/hwloc_2.9.3.bb
-+++ b/meta-oe/recipes-extended/hwloc/hwloc_2.12.1.bb
-@@ -7,9 +7,9 @@ SECTION = "base"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=79179bb373cd55cbd834463a514fb714"
+diff --git a/meta-oe/recipes-support/libp11/libp11_0.4.13.bb b/meta-oe/recipes-support/libp11/libp11_0.4.13.bb
+index 1731d350ae..807d079a05 100644
+--- a/meta-oe/recipes-support/libp11/libp11_0.4.13.bb
++++ b/meta-oe/recipes-support/libp11/libp11_0.4.13.bb
+@@ -19,6 +19,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "libp11-(?P<pver>\d+(\.\d+)+)"
+ inherit autotools pkgconfig
  
--SRC_URI = "https://www.open-mpi.org/software/${BPN}/v2.9/downloads/${BP}.tar.bz2"
--SRC_URI[sha256sum] = "5c4062ce556f6d3451fc177ffb8673a2120f81df6835dea6a21a90fbdfff0dec"
--UPSTREAM_CHECK_URI = "https://www.open-mpi.org/software/hwloc/v2.9/"
-+SRC_URI = "https://www.open-mpi.org/software/${BPN}/v2.12/downloads/${BP}.tar.bz2"
-+SRC_URI[sha256sum] = "38a90328bb86259f9bb2fe1dc57fd841e111d1e6358012bef23dfd95d21dc66b"
-+UPSTREAM_CHECK_URI = "https://www.open-mpi.org/software/hwloc/v2.12/"
+ EXTRA_OECONF = "--disable-static"
++EXTRA_OECONF:append:class-native = " --with-enginesdir=${RECIPE_SYSROOT_NATIVE}/usr/lib/engines-3"
  
- inherit autotools bash-completion pkgconfig
- 
+ do_install:append () {
+     rm -rf ${D}${docdir}/${BPN}
 -- 
-2.43.0
+2.47.2
+
+------466606B8B440EB9D5602C6E9635FC1E1
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+
+MIIXkgYJKoZIhvcNAQcCoIIXgzCCF38CAQExDzANBglghkgBZQMEAgEFADALBgkq
+hkiG9w0BBwGgghPaMIIGpTCCBI2gAwIBAgIUPseeE9qJ+oSdbny5LvEHTpzUCAIw
+DQYJKoZIhvcNAQELBQAwUzELMAkGA1UEBhMCQ0gxFTATBgNVBAoTDFN3aXNzU2ln
+biBBRzEtMCsGA1UEAxMkU3dpc3NTaWduIFJTQSBTTUlNRSBSb290IENBIDIwMjIg
+LSAxMB4XDTI0MDUyODA4NDExMFoXDTM2MDUyODA4NDExMFowUjELMAkGA1UEBhMC
+Q0gxFTATBgNVBAoTDFN3aXNzU2lnbiBBRzEsMCoGA1UEAwwjU3dpc3NTaWduIFJT
+QSBTTUlNRSBNViBJQ0EgMjAyNCAtIDEwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAw
+ggIKAoICAQC6Dz+IfbUsaCl0cWcbnNS1BIaKrdka8ev1Kc1G6OCYH4PMtkZmC6Zo
+nnh/Dl5bOuiH+pMq1fj4BSEkRYTuOGtsWelcf6UNA11KL//zh1enaaNayqqRaCSE
+JTZH+JFb0UJWwO+qGVb1RfHnPXYrI6n8w1chCxL9AibzvsDPR6I37iUwiNo4p6Uo
+aPNAmIncpDIGgTGodkOjjPPbGwYjg58eINT63rqMQASJxUnPPIa0gZRix0NY7A6U
+z8Iv98RbbQy7ZEDvHdLFeVmzl/5TXKbQExfnEpyOjjifWoJ+FeKkEj4O9Ohd/2fg
+HQ6Y+DYwLFbHZPTmDvHQoOSS//V2NBkdnGTsfIcziIH1hypFxR/hqexJ+Da7Z7uN
+jBh2ligdXNHDGMeq640X2WVx0sfSZljxbeknrr3KFfzqfealPps1UI68Q+1iBLl/
+Ep8aZeRmzwCK+ibAPQpKfbxsjd8cBe8FcXaOWU4DjP6YmYy0xMC4vHXr3ZgrHqL9
+8D56InfiYbrBMZp1UKDSzlz/rjXWRmrXnsY5gFU705KWrJu2guSYCrc4InG3Pj+E
+mPmE6Eosikk2wg90nYFxJDM/9dPJnyIw6IdkV6qdrv9h7VKrpLrl22qETWC4/Xfi
+JU7YsY6HFKnpAElKu8t6rUnU5GcwgWjcB+zBfQD1Kt59jlLob2PcDwIDAQABo4IB
+cDCCAWwwXAYIKwYBBQUHAQEEUDBOMEwGCCsGAQUFBzAChkBodHRwOi8vYWlhLnN3
+aXNzc2lnbi5jaC9haXItNGE3ZjE3ODgtMjZiNS00OGVjLWE1NDctYzFjZDBiZjE3
+YzNkMBIGA1UdEwEB/wQIMAYBAf8CAQAwQAYDVR0gBDkwNzAJBgdngQwBBQEBMAkG
+B2eBDAEFAQIwCQYHZ4EMAQUBAzAIBgYEAI96AQMwCgYIYIV0AVkCAQswUQYDVR0f
+BEowSDBGoESgQoZAaHR0cDovL2NybC5zd2lzc3NpZ24uY2gvY2RwLTNlZTU1ZmQ0
+LTU5MzgtNDFlZS04MmRiLTMyMjNhY2VmNWMyMzATBgNVHSUEDDAKBggrBgEFBQcD
+BDAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYEFL+0FkGip5/XTYUBCqFcvtvF0uWU
+MB8GA1UdIwQYMBaAFMwurYmMg+NAoyVppeqSfdI3OsfGMA0GCSqGSIb3DQEBCwUA
+A4ICAQBGpYYvkjNsVP7geKv1jY+KtUNmyx8vlCoOo8tZ5Cc76175ocrVs50lZit+
+nHWXe9Lqnuu1fMo+0jEpgC9dqy6cCxAEgNH5kwbFxXFPHOB/kxMdWubZ1xwcOP2l
+B4ns7Ps9RUGOIcpfuAp2KLYwavjO58g+6FVGhY3R6VAhmNRO6bHhz0wQRwKAZNo2
+GMwYMmxW63mI4bz1JYvCSeZtqZhyxTMDOwEUDdYkxrz3g5gQUoMnrrak1kGRdpFB
+Eefok8aK8ngfwwIgefNBF9BnzoRhlIVrm3//zboqShj4IXqMEUgScWNz2WTjqKaU
+uhLk+MyynNqrbp6EeFZ0BPgA7AfVWevRf4OOCxrH6S4FJtMKmuczZ0wqebTML7Ax
+VtkSqeT7/NBDTh8D8j+HVvHwMi4s+cunS3DMdXE9yzuixlcjfsD/2aS17quE23Qf
+nNESdDy5TUs5Wlm1ClYQ+L1cZGwSwAyqMs9RNg57+gtJu5Uhjn+FGVLndGQgzIor
+/+ynq6KEzN2rhGzLpPHpwUdDoX+YnNlrZpdx/IOgknaSGznJ/mQzA6PjffNS0Fx3
+pqd41QO0uX5HWDFEa/gG0Uo7faymzXFcFb9AKCrKR5Xrd0W+f2U2z/hvC843i9q2
+8CoJ7xRMt0wF8Sun9U278iaLgPNNyCNDJorz9NmIomvT45XK7jCCBe4wggPWoAMC
+AQICEACzBRGxFrSgVlEdfGgfh30wDQYJKoZIhvcNAQELBQAwRTELMAkGA1UEBhMC
+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
+bIRutw/gmkT7b9aP2Wmm3PtjnasrM+RdDlfGKqHkeCR2zkeRDDP2BE2LKc9CFGJB
+PysNjZSVlp5/fxb8atVwVk+TphIHuHjeP+3z/ykiDr64Yq2yjyNlXrWVg2yxju4M
+LdX8wfkCx/uAIlYLACinK+/RATAYz1f3Y+kJ81CQbfFpnFZBRhxjDfj65zxMrWsJ
+ydnoGsZUHt7zXFOQvw7JrFL/X5s7hBv/3uy107vBwcA8Hyw9m3DH/ChBMen6gyy+
+CkNXalP9AOZ66CoEgIE8PfsrzfBVjVxQq2+iQLNlJ8a1r6URPNd5h1YZILBy6yTK
+8tUs5MbM2CjbXAylEC1P02GFKhh/aN0gW5RTRk3vpA64KPQ/ckvUTmHVWONUE9cj
+iE1/MVDuc+tMfQus2HBQ0LH+EKaVZmsA1OEKujelRFleMEpBBWS0fQ+zT2Y4bfPZ
+RB5iQLGLf9hSacG+ib5cid44OL6s9kjzE5+Yy70LNcoHwIaQzqoc6t7sFNVDecMc
+tTbrs+raTu/cOMSc45aEDKXjhYw46cyuLwnY9DauweK3K89jUrCNqNqPwQke6QID
+AQABo4ICCzCCAgcwgbIGCCsGAQUFBwEBBIGlMIGiMEwGCCsGAQUFBzAChkBodHRw
+Oi8vYWlhLnN3aXNzc2lnbi5jaC9haXItMjZhNzFjMDktNDdlYi00NTVhLTliMjgt
+NGJkNzJkZjA5MjhkMFIGCCsGAQUFBzABhkZodHRwOi8vb2NzcC5zd2lzc3NpZ24u
+Y2gvc2lnbi9vY3MtYWFjY2NlZDUtNjZlOC00MDY5LTliMWItZmQyOWFiNzNlZmVj
+MHIGA1UdIARrMGkwCQYHZ4EMAQUBATAIBgYEAI96AQMwUgYIYIV0AVkCAQswRjBE
+BggrBgEFBQcCARY4aHR0cHM6Ly9yZXBvc2l0b3J5LnN3aXNzc2lnbi5jb20vU3dp
+c3NTaWduX0NQU19TTUlNRS5wZGYwUQYDVR0fBEowSDBGoESgQoZAaHR0cDovL2Ny
+bC5zd2lzc3NpZ24uY2gvY2RwLWU5N2YwN2M0LWU2MzQtNGNlYy04ZTJhLTA0YjIw
+YTdhMzBjNTATBgNVHSUEDDAKBggrBgEFBQcDBDAOBgNVHQ8BAf8EBAMCBaAwJAYD
+VR0RBB0wG4EZZGVuaXMub3N0ZXJsYW5kQGRpZWhsLmNvbTAdBgNVHQ4EFgQUcDNC
+rQBRcB88zSaXlCXZiARXNi8wHwYDVR0jBBgwFoAUv7QWQaKnn9dNhQEKoVy+28XS
+5ZQwDQYJKoZIhvcNAQELBQADggIBAGERoOSFwVyjYxyHmyClfw+npR6u+lM65HIH
+REUcqiHtzZWVg5fFgcvp4aSgnHDl/LA+cZh1c8oymzZ5NJK7OGUEK3IpcIVhjFl7
+ST/cg29MZy/5C8rWMWWXLjNxaepRN8e0zCxdGSm0nL5qUlPnREay35c19edhvgog
+IBywGTMpVpWvkKkm0XW1q+yK7Nu17UbdlFzPFvIuuvxU/ytTK3V7UCTzZQeRzsuy
+4Nn67ulycgMuVgVnhC8ar1imejfNMTORfcHz+MavkBbEp4IHh3ZGTd6R3U2KWkod
+e2VnU3pGWD7GUefrUHyyRlIVjdnWbSnCrbdpc2BznYl8PbVHcipRvq3BRSfC5j4t
+MOlGJ779WrFLEiEvu8iNUtAAd6/ha8vQRelTHE0HZWDWeND/NYPemmaK7waicfa+
+TXbGEi3HkaJWmy266iw2SEEHYszzeFJVq8uRjxFUdOCRZvsfD6yoY6hchKoXRpkW
+v8oW5LUTlhNfUZT2lRhkCwDdXh1wWzZgZZtx1VmVvYgfQg0RxMVdtqOsj4wpDkUU
+dqnPfobQPmOxrrHqpwLH4sprjIBVmbAIVOHgyhlN31RbUcdyCsRqLIK4srhv1Qqj
+IdMcphv3O2TqF/2mE64g/uinQq7uVqo7Yy0XDATNQ2g4gv/wliv5raoo7geyVNqJ
+kT04CA2CMYIDfDCCA3gCAQEwajBSMQswCQYDVQQGEwJDSDEVMBMGA1UEChMMU3dp
+c3NTaWduIEFHMSwwKgYDVQQDDCNTd2lzc1NpZ24gUlNBIFNNSU1FIE1WIElDQSAy
+MDI0IC0gMQIUcJ9Pf3gC81On6JsQ/RWezTqDIbUwDQYJYIZIAWUDBAIBBQCggeQw
+GAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjUwNzAy
+MTYwMjQ0WjAvBgkqhkiG9w0BCQQxIgQgvqBKzArrBiD3LgKfFoaD27xFeHEzG1X7
+gPPVKAPIYaIweQYJKoZIhvcNAQkPMWwwajALBglghkgBZQMEASowCwYJYIZIAWUD
+BAEWMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0DBzAOBggqhkiG9w0DAgICAIAwDQYI
+KoZIhvcNAwICAUAwBwYFKw4DAgcwDQYIKoZIhvcNAwICASgwDQYJKoZIhvcNAQEB
+BQAEggIAFRqJm07CMvvemsDe5yeA+37UdpNF8Z4OHP5qq2eICOjF5cBU1RcQtYXF
+MawvIJpBZ+maC82DNb+C8+oJPWzZRy2LxejugCdUXcoqRv9QrrBoRCYBrds3HZL8
+S9nMsmIio0/bnPvwZmE7HgBIi73/SGOD3iI7U5YHzIekezAyopgM78x5X95rwgIj
+qyPBgFr7Ow/VQtAMqQcccCQ8TbDG4OeBvySVLzzr+p0GW7hHx4eaGFkoGzd3PATw
+A481VibeeiBl7ql6KIQxFOr/mRsGo1czpFWWMHJDg2FPVXsIqEF0wCX0KuzlPO+c
+pdvokWMtEyZBWg0QZ51OnXdeXu+/UqR0OuvxiNgA4LrS2hCeHTOOsOghTnCcD3VQ
+9A0vPoxGZgC8qP8ikvpdCpAbDP3xrQKQ8px5U06WH28VZDyRbQjJJk6STgVXUwp5
+xPfWqB14WQku6kX8nJIkA5V0v23LKk1K/aNW0owPhj2thhzhTo9orOkvYcTs4KN+
+2gPel5ZnwdDCbQhKsWoT4dvxW18BRZhmd55aFWuiUdqijchvg/DpZxmK1DDN+rcB
+n9wj6MXb9h46eb6pv8lxuaiKQJTRK2fVzQzb2VFoOos5UDUj6sqCTyPRHWGSb1wo
+sKoQ56IbqSeQrIG3++h6NvFbiqDylNTXR5lDZW9eYqRt5pLxb9c=
+
+------466606B8B440EB9D5602C6E9635FC1E1--
 
 
