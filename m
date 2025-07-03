@@ -1,148 +1,109 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFD74C77B7C
-	for <webhook@archiver.kernel.org>; Thu,  3 Jul 2025 07:53:14 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.17191.1751529180679447028
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E34A6C83030
+	for <webhook@archiver.kernel.org>; Thu,  3 Jul 2025 08:42:24 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web10.17666.1751532143183706521
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Jul 2025 00:53:00 -0700
+ Thu, 03 Jul 2025 01:42:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9279aa10a7=changqing.li@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5636vUEl005550
-	for <openembedded-devel@lists.openembedded.org>; Thu, 3 Jul 2025 07:52:51 GMT
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47j5m1dbku-2
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 07:52:51 +0000 (GMT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Thu, 3 Jul 2025 00:52:54 -0700
-Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.57 via Frontend Transport; Thu, 3 Jul 2025 00:52:53 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [scarthgap][meta-oe][PATCH 2/2] udisks2: Hardening measure of CVE-2025-6019
-Date: Thu, 3 Jul 2025 15:52:51 +0800
-Message-ID: <20250703075251.3504823-2-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250703075251.3504823-1-changqing.li@windriver.com>
-References: <20250703075251.3504823-1-changqing.li@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CHef8UGs;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-ae3b336e936so497783866b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 01:42:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1751532141; x=1752136941; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7l1g2WY912luM4ntVGLrFu1kk/se497DYwdLnL9l/cE=;
+        b=CHef8UGst0P9C1sp9c/bMXgl3Jm4dIrVZbigxWqspKjlCG5AeiUA20aUGUD//KJTR3
+         pMFnhYfx2Qq3FEWGtrQiu3HWb0t6kZR+RS0T5XT5aZDwZ+aOzEFZ4MhxlvgG2ytmJFSD
+         pqAcA9PPHtR4WHfO5pgLqzaS8QNXHB8fark5aQe7vNDOZljl5dPxPjswTNbdJpH5E3Uq
+         Utxdifwhywq7LoOVPjw6DbKWsp4OnYHiZ1VwkZQNL1+xeiBOMVCIgYv25X1kWhpwYjsM
+         SM2EAvjLt/kJdj3LckEBuqq/I0uIcwGlMFJ+EyOt14P+PMQmrk/9ZB1HWMQHggtO+Dye
+         1Zow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751532141; x=1752136941;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=7l1g2WY912luM4ntVGLrFu1kk/se497DYwdLnL9l/cE=;
+        b=bF7gdQLnF9d1vMGbDHqZj5q/A40EdgDcy5yamlh1pX++BgUDXj0rr4JdLX3gdqbbyW
+         m8xPGwHEthl64sEyYKI6pYZ7TwbLmA+DSh3oFfRF8PPk/uSDtPein4gASJr3u2BDt8bf
+         QFHfVjE4+fM5O67Mp8Dv3QUYA2J682M4BfQyvsuncgDu7y/ryuEV2yQIiWmN9yocKGb7
+         WlMpUIR4o0c3qQHl2NB2QvhhAyDZhSZK7hWojB/M3dYWhSta76gFsnYXRavlFz9CJvVz
+         uEC+w+U1pgCmsdVMch0mQgFGExLV0Zk7RbUouUDCZTMYNlXOggERVNGTbdYwzHOymi0b
+         INYw==
+X-Gm-Message-State: AOJu0YyXIXG0ekSApIqkGPafeqHz77b8BxBpX9DFJEeuQxWU9gKHPu9r
+	Dx5E1OuimVyYAVt+UZlasTdMJQPXF+kwCBmM/kQt8AuNJ9JHaWyf68bBYjiTTw==
+X-Gm-Gg: ASbGncskLKQs9yKSt039cse6K7CBzgarGRJqjeNYxdoSzbH9396a1wAIUkC3dVttgFs
+	960A/3HUiD3I4kxswCrg9iEF2+Y3a4N/0tSNx4xAzYwTzktatDM6CpQ2sHvtW4kPIcs+ysxzhPz
+	Xn3Hu/SFhBt01U649/Iy1t9ASskf8G7nozIQyydClp1BseIUvQ/dGc1Pshev8s6Vl3EcBBp1WFW
+	7+/RF19FVz0X6QB/iGylTzWKx+IboGsFPLwkklYMm137g+Nsre9/SOMniUQfItyGgL2cOJ7P9ZF
+	a6MdMjtlz1qMKiGsx6jCSQfpXqDyhg9tmzEeLSW/gexnNX5om7mq0FUQQBc=
+X-Google-Smtp-Source: AGHT+IG1BK5/+FxkeKvyDr9lhxV3wtbQYjv9zUQsKXBV4bGnA5BPYaGqtWaNABWrdb9kqBg6ybnlTA==
+X-Received: by 2002:a17:907:2d91:b0:ae0:d78a:2366 with SMTP id a640c23a62f3a-ae3c2a904efmr639477466b.4.1751532141020;
+        Thu, 03 Jul 2025 01:42:21 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae353c014fbsm1212023166b.86.2025.07.03.01.42.20
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 03 Jul 2025 01:42:20 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] mozjs-128: avoid using build host's rust toolchain
+Date: Thu,  3 Jul 2025 10:42:19 +0200
+Message-ID: <20250703084219.268506-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAzMDA2MiBTYWx0ZWRfX8gSrotILLR7n xDO9QqiKP+BxA8SdCqgt/LtdO7q8osbAS+XBAQ2xlBGDPfcZROm8B9NDToBi148oQermNI2E7X3 j1+j/PB9tRSJeT1w4WRAqQqgtgyR+5aE0Q/xTvv//3j3RV17bAs0YGP4nQjYn0MxjT23MhYQI+0
- bGkKJPwxytRoLbwxcjFUA9RjFntahuMUnZG5dyAZX4R0sopGFuZFEqwgBn+BMxlSfLgFXjCzmRA oJlcIkAMSRgcCZco3pDXAxRSBShhnPzjs7ux5vpihJg9L2LUx0Qu4CubzRV0osafYV5uD9bxQr8 hL69Kqn1g2GXt3DSxTvjDD2YvsVhvshOlScWKLEg9s+VbmWz9wVgDluuoaofguAJkE5OgC3zKxB
- NbH0jZgA3ItC4wiDMMbSBynUMbVpWgYWR6JB5CrstXwGoOx5K9Y9yVqzFo+doVAMo30u94sH
-X-Authority-Analysis: v=2.4 cv=IOsCChvG c=1 sm=1 tr=0 ts=686636d3 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=Wb1JkmetP80A:10 a=-Z0NSjAlAAAA:8 a=xNf9USuDAAAA:8 a=fxJcL_dCAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=20KFwNOVAAAA:8
- a=Fk5FKYzdMtvwwneLGJ8A:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: doHnya4YvHQN2mPa_3xzpfhtLUetsl4Z
-X-Proofpoint-ORIG-GUID: doHnya4YvHQN2mPa_3xzpfhtLUetsl4Z
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-07-03_02,2025-07-02_04,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 clxscore=1015
- priorityscore=1501 adultscore=0 spamscore=0 mlxscore=0 lowpriorityscore=0
- mlxlogscore=999 malwarescore=0 suspectscore=0 impostorscore=0 bulkscore=0
- classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.21.0-2505280000
- definitions=main-2507030062
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 07:53:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118212
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 08:42:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118213
 
-From: Changqing Li <changqing.li@windriver.com>
+mozjs uses Rust to build parts of the application, however it doesn't leverage
+the cargo class, as it uses a Makefile to build.
 
-Refer [1], CVE-2025-6019 is strongly related to udisk daemon, and
-this is a hardening measure related to this.
+Due to this, only Rust class is inherited in the recipe, so the toolchain itself
+is available. The Cargo class is not inherited, to avoid the Yocto specific Cargo
+build logic.
 
-[1] https://cdn2.qualys.com/2025/06/17/suse15-pam-udisks-lpe.txt
-[2] https://security-tracker.debian.org/tracker/CVE-2025-6019
-[3] https://ubuntu.com/blog/udisks-libblockdev-lpe-vulnerability-fixes-available
+However in case Cargo class is not inherited, some Cargo specific environment
+variables are not set (most notably CARGO_HOME, CARGO and RUSTC - the latter
+two are derived from the content of CARGO_HOME, unless they are set explicitly),
+and Cargo tries to guess where the Rust toolchain is.
+Usually it guesses correctly, and uses the Yocto toolchain. However in case there
+is no CARGO_HOME environment variable set and the build host has a Rust toolchain
+available, and a ~/.cargo folder is present, then its toolchain configuration has
+a higher priority than the toolchain in the PATH[1], and the compilation fails
+due to the incorrect toolchain.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+To avoid this, make the CARGO and RUSTC environment variables to point to the Yocto
+toolchain. That way even if CARGO_HOME not defined, the correct tools will be used.
+
+[1]: https://github.com/rust-lang/rust/blob/master/src/tools/rust-analyzer/crates/toolchain/src/lib.rs#L28
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../udisks/udisks2/CVE-2025-6019.patch        | 51 +++++++++++++++++++
- .../recipes-support/udisks/udisks2_2.10.1.bb  |  1 +
- 2 files changed, 52 insertions(+)
- create mode 100644 meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
+ meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch b/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
-new file mode 100644
-index 0000000000..2e94c8497f
---- /dev/null
-+++ b/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
-@@ -0,0 +1,51 @@
-+From d0d04a381036b79df91616552706d515639bb762 Mon Sep 17 00:00:00 2001
-+From: Tomas Bzatek <tbzatek@redhat.com>
-+Date: Wed, 4 Jun 2025 15:26:46 +0200
-+Subject: [PATCH] udiskslinuxfilesystemhelpers: Mount private mounts with
-+ 'nodev,nosuid'
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb b/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
+index ceb81d07e5..e327cd7723 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
+@@ -57,6 +57,10 @@ export HOST_CXXFLAGS = "${BUILD_CXXFLAGS}"
+ 
+ export AS = "${CC}"
+ 
++# ensure that the correct rust binaries are used
++export CARGO = "${STAGING_BINDIR_NATIVE}/cargo"
++export RUSTC = "${STAGING_BINDIR_NATIVE}/rustc"
 +
-+The private mount done in take_filesystem_ownership() should always
-+default to 'nodev,nosuid' for security and 'errors=remount-ro' for
-+selected filesystem types to handle an corrupted filesystem. This is
-+consistent with mount options calculation for regular mounts.
-+
-+CVE: CVE-2025-6019
-+Upstream-Status: Backport [ https://github.com/storaged-project/udisks/commit/5e7277debea926370e587408517560afe87d28c9 ]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ src/udiskslinuxfilesystemhelpers.c | 10 +++++++++-
-+ 1 file changed, 9 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/udiskslinuxfilesystemhelpers.c b/src/udiskslinuxfilesystemhelpers.c
-+index 7c5fc037..9eb7742c 100644
-+--- a/src/udiskslinuxfilesystemhelpers.c
-++++ b/src/udiskslinuxfilesystemhelpers.c
-+@@ -123,6 +123,7 @@ take_filesystem_ownership (const gchar  *device,
-+ 
-+ {
-+   gchar *mountpoint = NULL;
-++  const gchar *mount_opts;
-+   GError *local_error = NULL;
-+   gboolean unmount = FALSE;
-+   gboolean success = TRUE;
-+@@ -151,8 +152,15 @@ take_filesystem_ownership (const gchar  *device,
-+               goto out;
-+             }
-+ 
-++          mount_opts = "nodev,nosuid";
-++          if (g_strcmp0 (fstype, "ext2") == 0 ||
-++              g_strcmp0 (fstype, "ext3") == 0 ||
-++              g_strcmp0 (fstype, "ext4") == 0 ||
-++              g_strcmp0 (fstype, "jfs") == 0)
-++            mount_opts = "nodev,nosuid,errors=remount-ro";
-++
-+           /* TODO: mount to a private mount namespace */
-+-          if (!bd_fs_mount (device, mountpoint, fstype, NULL, NULL, &local_error))
-++          if (!bd_fs_mount (device, mountpoint, fstype, mount_opts, NULL, &local_error))
-+             {
-+               g_set_error (error, UDISKS_ERROR, UDISKS_ERROR_FAILED,
-+                            "Cannot mount %s at %s: %s",
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb b/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
-index cb1cbe670d..206de3c0ee 100644
---- a/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
-+++ b/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
-@@ -20,6 +20,7 @@ RDEPENDS:${PN} = "acl"
- SRC_URI = " \
- 	git://github.com/storaged-project/udisks.git;branch=2.10.x-branch;protocol=https \
- 	file://0001-Makefile.am-Dont-include-buildpath.patch \
-+    file://CVE-2025-6019.patch \
- "
- SRCREV = "18c9faf089e306ad6f3f51f5cb887a6b9aa08350"
- S = "${WORKDIR}/git"
--- 
-2.34.1
-
+ export MOZBUILD_STATE_PATH = "${WORKDIR}/mozbuild_state"
+ export RUSTFLAGS
+ 
 
