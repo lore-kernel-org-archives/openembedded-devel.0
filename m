@@ -2,44 +2,46 @@ Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AED12C83030
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AFD74C77B7C
 	for <webhook@archiver.kernel.org>; Thu,  3 Jul 2025 07:53:14 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.17189.1751529180284768680
+ by mx.groups.io with SMTP id smtpd.web10.17191.1751529180679447028
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 03 Jul 2025 00:53:00 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9279aa10a7=changqing.li@windriver.com)
 Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5636vUEk005550
-	for <openembedded-devel@lists.openembedded.org>; Thu, 3 Jul 2025 07:52:50 GMT
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5636vUEl005550
+	for <openembedded-devel@lists.openembedded.org>; Thu, 3 Jul 2025 07:52:51 GMT
 Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47j5m1dbku-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47j5m1dbku-2
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 07:52:50 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 07:52:51 +0000 (GMT)
 Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
  ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Thu, 3 Jul 2025 00:52:52 -0700
+ 15.1.2507.57; Thu, 3 Jul 2025 00:52:54 -0700
 Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
  ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.57 via Frontend Transport; Thu, 3 Jul 2025 00:52:52 -0700
+ 15.1.2507.57 via Frontend Transport; Thu, 3 Jul 2025 00:52:53 -0700
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [scarthgap][meta-oe][PATCH 1/2] libblockdev: fix CVE-2025-6019
-Date: Thu, 3 Jul 2025 15:52:50 +0800
-Message-ID: <20250703075251.3504823-1-changqing.li@windriver.com>
+Subject: [scarthgap][meta-oe][PATCH 2/2] udisks2: Hardening measure of CVE-2025-6019
+Date: Thu, 3 Jul 2025 15:52:51 +0800
+Message-ID: <20250703075251.3504823-2-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250703075251.3504823-1-changqing.li@windriver.com>
+References: <20250703075251.3504823-1-changqing.li@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAzMDA2MiBTYWx0ZWRfX0tNubL/oa8Ue 8OhmdPywD+NnUKDo+bIio09ws/xRFZwiWuh1RC0Ulpj3UehwXss3zuP+tqbPO1LtcEANzsxMquL 4EdKPDf4U631qu7Vb5Ur+OH6nacrl0YgfJU7R0iREtrrwhTHfV7dnoj0A8JmiWH27saW4cNQebg
- oJtppFuLLtLBMm9E041nOgxRvi0viPum8+tcs5oywMIn3+tezkaH0RQwgKdXF5BMjppJ8fN/5VF CiNkaq7ixEB9FmcxhgED2ziLpoCoKcQvhplT0nTfP8d33MZmTnjgb50i6qLSissZ7ANaYAK2NdR B7uJcHuyHZPlKONwi6etdBdpP7lzgenTQ6d4dHxwhwFfsGwwcZrZ59DWF5LyNkeLe6mLwgphOPb
- IAm1LU3tAjVRxLChg8bvpU2o65V8AKwJJ+VaTD9tMgapnhXBFWqjZyTnm+SwJJ1OH+xaYz1z
-X-Authority-Analysis: v=2.4 cv=IOsCChvG c=1 sm=1 tr=0 ts=686636d2 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=Wb1JkmetP80A:10 a=-Z0NSjAlAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=iox4zFpeAAAA:8 a=9FXtMitqcUCsedRI3UEA:9
- a=FdTzh2GWekK77mhwV6Dw:22 a=WzC6qhA0u3u7Ye7llzcV:22
-X-Proofpoint-GUID: XV-lFo58-5ZXNLb_ZIR9Bn1VPHGtXVid
-X-Proofpoint-ORIG-GUID: XV-lFo58-5ZXNLb_ZIR9Bn1VPHGtXVid
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAzMDA2MiBTYWx0ZWRfX8gSrotILLR7n xDO9QqiKP+BxA8SdCqgt/LtdO7q8osbAS+XBAQ2xlBGDPfcZROm8B9NDToBi148oQermNI2E7X3 j1+j/PB9tRSJeT1w4WRAqQqgtgyR+5aE0Q/xTvv//3j3RV17bAs0YGP4nQjYn0MxjT23MhYQI+0
+ bGkKJPwxytRoLbwxcjFUA9RjFntahuMUnZG5dyAZX4R0sopGFuZFEqwgBn+BMxlSfLgFXjCzmRA oJlcIkAMSRgcCZco3pDXAxRSBShhnPzjs7ux5vpihJg9L2LUx0Qu4CubzRV0osafYV5uD9bxQr8 hL69Kqn1g2GXt3DSxTvjDD2YvsVhvshOlScWKLEg9s+VbmWz9wVgDluuoaofguAJkE5OgC3zKxB
+ NbH0jZgA3ItC4wiDMMbSBynUMbVpWgYWR6JB5CrstXwGoOx5K9Y9yVqzFo+doVAMo30u94sH
+X-Authority-Analysis: v=2.4 cv=IOsCChvG c=1 sm=1 tr=0 ts=686636d3 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=Wb1JkmetP80A:10 a=-Z0NSjAlAAAA:8 a=xNf9USuDAAAA:8 a=fxJcL_dCAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=20KFwNOVAAAA:8
+ a=Fk5FKYzdMtvwwneLGJ8A:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: doHnya4YvHQN2mPa_3xzpfhtLUetsl4Z
+X-Proofpoint-ORIG-GUID: doHnya4YvHQN2mPa_3xzpfhtLUetsl4Z
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
  definitions=2025-07-03_02,2025-07-02_04,2025-03-28_01
@@ -53,82 +55,92 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 07:53:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118211
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118212
 
 From: Changqing Li <changqing.li@windriver.com>
 
-CVE-2025-6019:
-A Local Privilege Escalation (LPE) vulnerability was found in
-libblockdev. Generally, the "allow_active" setting in Polkit permits a
-physically present user to take certain actions based on the session
-type. Due to the way libblockdev interacts with the udisks daemon, an
-"allow_active" user on a system may be able escalate to full root
-privileges on the target host. Normally, udisks mounts user-provided
-filesystem images with security flags like nosuid and nodev to prevent
-privilege escalation. However, a local attacker can create a specially
-crafted XFS image containing a SUID-root shell, then trick udisks into
-resizing it. This mounts their malicious filesystem with root
-privileges, allowing them to execute their SUID-root shell and gain
-complete control of the system.
+Refer [1], CVE-2025-6019 is strongly related to udisk daemon, and
+this is a hardening measure related to this.
 
-Refer:
-https://cdn2.qualys.com/2025/06/17/suse15-pam-udisks-lpe.txt
+[1] https://cdn2.qualys.com/2025/06/17/suse15-pam-udisks-lpe.txt
+[2] https://security-tracker.debian.org/tracker/CVE-2025-6019
+[3] https://ubuntu.com/blog/udisks-libblockdev-lpe-vulnerability-fixes-available
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../libblockdev/files/CVE-2025-6019.patch     | 31 +++++++++++++++++++
- .../libblockdev/libblockdev_3.1.1.bb          |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-extended/libblockdev/files/CVE-2025-6019.patch
+ .../udisks/udisks2/CVE-2025-6019.patch        | 51 +++++++++++++++++++
+ .../recipes-support/udisks/udisks2_2.10.1.bb  |  1 +
+ 2 files changed, 52 insertions(+)
+ create mode 100644 meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
 
-diff --git a/meta-oe/recipes-extended/libblockdev/files/CVE-2025-6019.patch b/meta-oe/recipes-extended/libblockdev/files/CVE-2025-6019.patch
+diff --git a/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch b/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
 new file mode 100644
-index 0000000000..2575578e77
+index 0000000000..2e94c8497f
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libblockdev/files/CVE-2025-6019.patch
-@@ -0,0 +1,31 @@
-+From b2e9c16c726f62e500241617f8f3a03aa658fbe3 Mon Sep 17 00:00:00 2001
-+From: Thomas Blume <Thomas.Blume@suse.com>
-+Date: Fri, 16 May 2025 14:27:10 +0200
-+Subject: [PATCH] Don't allow suid and dev set on fs resize
++++ b/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
+@@ -0,0 +1,51 @@
++From d0d04a381036b79df91616552706d515639bb762 Mon Sep 17 00:00:00 2001
++From: Tomas Bzatek <tbzatek@redhat.com>
++Date: Wed, 4 Jun 2025 15:26:46 +0200
++Subject: [PATCH] udiskslinuxfilesystemhelpers: Mount private mounts with
++ 'nodev,nosuid'
 +
-+Fixes: CVE-2025-6019
++The private mount done in take_filesystem_ownership() should always
++default to 'nodev,nosuid' for security and 'errors=remount-ro' for
++selected filesystem types to handle an corrupted filesystem. This is
++consistent with mount options calculation for regular mounts.
 +
 +CVE: CVE-2025-6019
-+Upstream-Status: Backport [ https://github.com/storaged-project/libblockdev/commit/46b54414f66e965e3c37f8f51e621f96258ae22e ]
++Upstream-Status: Backport [ https://github.com/storaged-project/udisks/commit/5e7277debea926370e587408517560afe87d28c9 ]
 +
 +Signed-off-by: Changqing Li <changqing.li@windriver.com>
 +---
-+ src/plugins/fs/generic.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/udiskslinuxfilesystemhelpers.c | 10 +++++++++-
++ 1 file changed, 9 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/plugins/fs/generic.c b/src/plugins/fs/generic.c
-+index 2b2180aa..60f7d75e 100644
-+--- a/src/plugins/fs/generic.c
-++++ b/src/plugins/fs/generic.c
-+@@ -661,7 +661,7 @@ static gchar* fs_mount (const gchar *device, gchar *fstype, gboolean read_only,
-+                              "Failed to create temporary directory for mounting '%s'.", device);
-+                 return NULL;
++diff --git a/src/udiskslinuxfilesystemhelpers.c b/src/udiskslinuxfilesystemhelpers.c
++index 7c5fc037..9eb7742c 100644
++--- a/src/udiskslinuxfilesystemhelpers.c
+++++ b/src/udiskslinuxfilesystemhelpers.c
++@@ -123,6 +123,7 @@ take_filesystem_ownership (const gchar  *device,
++ 
++ {
++   gchar *mountpoint = NULL;
+++  const gchar *mount_opts;
++   GError *local_error = NULL;
++   gboolean unmount = FALSE;
++   gboolean success = TRUE;
++@@ -151,8 +152,15 @@ take_filesystem_ownership (const gchar  *device,
++               goto out;
 +             }
-+-            ret = bd_fs_mount (device, mountpoint, fstype, read_only ? "ro" : NULL, NULL, &l_error);
-++            ret = bd_fs_mount (device, mountpoint, fstype, read_only ? "nosuid,nodev,ro" : "nosuid,nodev", NULL, &l_error);
-+             if (!ret) {
-+                 g_propagate_prefixed_error (error, l_error, "Failed to mount '%s': ", device);
-+                 g_rmdir (mountpoint);
++ 
+++          mount_opts = "nodev,nosuid";
+++          if (g_strcmp0 (fstype, "ext2") == 0 ||
+++              g_strcmp0 (fstype, "ext3") == 0 ||
+++              g_strcmp0 (fstype, "ext4") == 0 ||
+++              g_strcmp0 (fstype, "jfs") == 0)
+++            mount_opts = "nodev,nosuid,errors=remount-ro";
+++
++           /* TODO: mount to a private mount namespace */
++-          if (!bd_fs_mount (device, mountpoint, fstype, NULL, NULL, &local_error))
+++          if (!bd_fs_mount (device, mountpoint, fstype, mount_opts, NULL, &local_error))
++             {
++               g_set_error (error, UDISKS_ERROR, UDISKS_ERROR_FAILED,
++                            "Cannot mount %s at %s: %s",
 +-- 
 +2.34.1
 +
-diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
-index 1ad8036d7b..a7e7162c30 100644
---- a/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
-+++ b/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
-@@ -14,6 +14,7 @@ DEPENDS = "autoconf-archive-native glib-2.0 kmod udev libnvme"
- 
- SRC_URI = "git://github.com/storaged-project/libblockdev;branch=3.1.x-devel;protocol=https \
-            file://0001-fix-pythondir-for-multilib-when-cross-compiling.patch \
-+           file://CVE-2025-6019.patch \
-            "
- SRCREV = "68aaff5556afe26be749c29a2b7cbd714dce3050"
+diff --git a/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb b/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
+index cb1cbe670d..206de3c0ee 100644
+--- a/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
++++ b/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
+@@ -20,6 +20,7 @@ RDEPENDS:${PN} = "acl"
+ SRC_URI = " \
+ 	git://github.com/storaged-project/udisks.git;branch=2.10.x-branch;protocol=https \
+ 	file://0001-Makefile.am-Dont-include-buildpath.patch \
++    file://CVE-2025-6019.patch \
+ "
+ SRCREV = "18c9faf089e306ad6f3f51f5cb887a6b9aa08350"
  S = "${WORKDIR}/git"
 -- 
 2.34.1
