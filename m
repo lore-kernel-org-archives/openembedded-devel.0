@@ -1,104 +1,88 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C06FC77B7C
-	for <webhook@archiver.kernel.org>; Thu,  3 Jul 2025 14:09:26 +0000 (UTC)
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
- by mx.groups.io with SMTP id smtpd.web10.23670.1751551759220410760
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B48EC83F03
+	for <webhook@archiver.kernel.org>; Thu,  3 Jul 2025 18:47:18 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web10.30583.1751568434435433711
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Jul 2025 07:09:19 -0700
+ Thu, 03 Jul 2025 11:47:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ckKFIpZm;
- spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-710fd2d0372so8525217b3.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 07:09:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cp+cWmMF;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2349f096605so3628485ad.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 11:47:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751551758; x=1752156558; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1751568433; x=1752173233; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7hUGzED8WVvkeOpXK8BM2izquwul1JoNlSlS+LAZLo4=;
-        b=ckKFIpZmPXmO+RRSMW2gaDz2EWBautFzzCHbwf61lCf0nAiemp8/G7roROtOWJFpLg
-         kr0sWSInK0uPqyNj0V0IoX71aImM5F5x1X3ZN4Tg/Zyqb3HIpJ/aEIod/y8bY01gqQ5t
-         fC9p2ZzK/zyACDmPG3MPh9srMqgo2OQsEDoELLHshLs5MJdejQKsa2Nv3Licdr+MZMRq
-         ZVJX5f4ObLVVpex6zD7q4dz6Q3tE1WJlzuY0wVAuzK9aLRL6GDAJj4bEBfgULwVSzYAr
-         echbm49Iba0TdXg4Poat4IvyiPSW/v0RhPapPVXAt2uAPffBUMGku3V9zaoLfmPfSBPR
-         A4pw==
+        bh=CsteAG3cPSGoza7Q6Px7D6lwetFFw/p35p/sVAWdgXA=;
+        b=cp+cWmMFAit13RfFK48QteKG3d4Ij2p3HT67o7zyAYaYDbQVAc9BgP4hqG66+oOpWj
+         2AgxxnjkOnBLYZY7k+gCu+FL6onZnEyGWgAKPwM0R0bl+XJOtpoCXzVdKBv00f8R7v9D
+         8qACw4I0t7EoxjTQt5walHnH/4uhxsbTgNEztqRTxIXcoiuA4KJ1wUFnYaXjREcqiMwq
+         ytrttI8W1um8qODtzfSbt2FYoeynFQGfZ/kgeJK7X+LyxzJ+vRuNK8A/lLGx7r8dlbc4
+         7N+JrLBwKWJHg9wHEBkhQZMithFZzc3XqI1rgKWIaxoRpqVzjLLOZCNJol+kfqX/tdW6
+         HmJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751551758; x=1752156558;
+        d=1e100.net; s=20230601; t=1751568433; x=1752173233;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=7hUGzED8WVvkeOpXK8BM2izquwul1JoNlSlS+LAZLo4=;
-        b=Rxd5ZRlmgOIE9QYB8K/H0KYj/UZezhMgkL0Q1GpvvdesG+xHDzP0EoweNe8V0YIeSt
-         /aMtAGwr6eqM3pjTgFwqGET5CPKQzaH5ZWZ4u2ccrqGdDOKkb9u5xUEeL4twslRbGvWp
-         kFk+O68tI34KdUcJsRZBsEXsJ10qF1zd9L7WYri/N+qB6dSod63jXN83rB1wZ7g/a7vx
-         XpT3ecKaL3PoMq4xycChErmx70Cg4ePi9cO6oJL2tjIYmUQYhuIpPBGj383O8LEVYq3F
-         rhF/M4PuOJNO67q2EIRn1rtyktmqKMtLi/8f7bpdjIf04SKE8Z6RGfp6QqvMaqwzwFqR
-         PVUQ==
-X-Gm-Message-State: AOJu0Yx12vO0WiFJj5rdzWfckmsLl9XeuTxbm8aXOU8Wa77CusnDahb9
-	MSGKrkTHb82WbhXAX9dOKAF2DFn8HwNk4LrUdwUXqkZmU/iKeBxYtGCzgUjrG8ny
-X-Gm-Gg: ASbGnctKIPn9+Cd/+s/hR2EX+xsEzhDXusu9ZmsZToY5KGY6Od2IdS3Z7bnAQ3KqkcH
-	JghR+rnUkDdkq7m/VI7vp1sYAByMYgdgWWRdzSkUYCimeZi89xYMSGxzRh5hQHB2FQDaGa2iI/w
-	1HFiqEbKZczH4YGOXQPdtxA187g6s5KnnhBPFfpsRerDSDLS+WYtFl/GzRG44NoSJvUiOxL6NZp
-	FRnPMwZEIudO382aayxBGcaj7Ywnds+SaXXfpQksD5e9nFEHf3i+qpNvlhAJuZZVmITf6lIU0N2
-	+iYOgRy4/fLv/ErO+5CCWhkEwFZH2KDT2zBmUvG7x1JVoy0QfOr1kdY9WH3YJ6QdFW53fzynQu+
-	OULHcCWnjeIsZh3YPo8xwWkr/7/fXhQA=
-X-Google-Smtp-Source: AGHT+IF6Owcbg2yTOrkY+x0FcrS1XWPI3s/5K12m0KR03xDKYkFrltnQQt8mymHT/g8tc+FZEqZ3VA==
-X-Received: by 2002:a05:690c:6d04:b0:714:b7fa:2d7 with SMTP id 00721157ae682-7165cb256dfmr32647167b3.13.1751551757605;
-        Thu, 03 Jul 2025 07:09:17 -0700 (PDT)
-Received: from localhost.localdomain (71-208-4-221.ftmy.qwest.net. [71.208.4.221])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-71515c902acsm29208437b3.70.2025.07.03.07.09.16
+        bh=CsteAG3cPSGoza7Q6Px7D6lwetFFw/p35p/sVAWdgXA=;
+        b=WGlRXYtniNUH7TXmm4vqCVMaYAJM34+1MeAT3sCJ7w3vQzrP+U8cfdxxLJnHD6jYl9
+         /vmJu8DbzAW4YXR/4y0ha1mj7evrF5QpeuqZD3HoxuVv0Q19EB5ipnMPbOsI36MOH2mO
+         sNnspqVSXovpj1mBWnQWPwZen+ZJ0s2siOFkXRr/bIENtBz1OptjDGM7zRI8dZAXjSrl
+         1HzUyrKbv7QozGCA72rJYu2v1USOXYyNHd41aidq+Lj8TQF4XkzvfCa955L42RYAc98p
+         If7aA36IgdUz57089HXHuGYrzSXvQGnSFgXsfoBz2tPJIu8azB5ml+P7enoUh8tFm+2l
+         +Ecg==
+X-Gm-Message-State: AOJu0YwgoRNbhydzZ550RlQUxttjRp+SZ5re5VoXnXebRLZ1FHX8JwCM
+	5eoOyGr5Raoe1WqpnGeIXyIRKSpeG3WUTwsyB4dJMD6PD9Vs1JQEbasQlM/r/Umo
+X-Gm-Gg: ASbGnctqN4UXk8PF7GSvnfuIWmBsRo0BtMH7xrtqW0OSrt84LNR8CHbJuRe0VDtoLS2
+	dss2F9x8a1L0epdo6k8+wZxS/f96BzHEox/4frR6qcdmvxHXsgfpuiSt/H81/BOTxkcrsJSUY23
+	rHnfqR350qOe8pBw0e55M7MVnW+YV2YYkO4DfDDXqFr4wtFdAdyVo89eUjU+3111b7w/2gk26YH
+	+PS8P/coHcHAhQYRAJ0otO+2lZmNxK+9BqYrs28VEHYe8E1GoE8yzpOETAbvnfV3/GWDaGlIlM4
+	iYdoot/t3XSmxBkG1jugUwxNiCnooSyCMf5ocXnTLsShelI9KhWHzsDDj6Dt9y8e
+X-Google-Smtp-Source: AGHT+IEv7igtSIZarzUEECWjt7VQ7XLNPIOU+KPCgMF+Q5Mhd6tbWBAcq0RUY/wk/L3q2bEkweLNOw==
+X-Received: by 2002:a17:902:ce8d:b0:234:b123:b4ff with SMTP id d9443c01a7336-23c6e502d8emr138215585ad.21.1751568433469;
+        Thu, 03 Jul 2025 11:47:13 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::aa8c])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23c8431a3a6sm2176275ad.40.2025.07.03.11.47.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Jul 2025 07:09:17 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Thu, 03 Jul 2025 11:47:12 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] php: upgrade 8.4.8 -> 8.4.10
-Date: Thu,  3 Jul 2025 10:07:30 -0400
-Message-ID: <20250703140730.816996-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-types-psutil: Use pep517-backend Fixes
+Date: Thu,  3 Jul 2025 11:47:10 -0700
+Message-ID: <20250703184710.2598995-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 14:09:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118224
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 18:47:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118225
 
-This is a security update.
+QA Issue: inherits setuptools3 but has pyproject.toml with setuptools.build_meta, use the correct class [pep517-backend]
 
-There are fixes for memory leaks, segfaults and CVEs.
-
-CVE-2025-1735
-CVE-2025-1220
-CVE-2025-6491
-
-Changelog: https://www.php.net/ChangeLog-8.php#8.4.10
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/php/{php_8.4.8.bb => php_8.4.10.bb} | 2 +-
+ .../python/python3-types-psutil_7.0.0.20250601.bb               | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.4.8.bb => php_8.4.10.bb} (99%)
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.4.8.bb b/meta-oe/recipes-devtools/php/php_8.4.10.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.4.8.bb
-rename to meta-oe/recipes-devtools/php/php_8.4.10.bb
-index f38a407968..4d598949a1 100644
---- a/meta-oe/recipes-devtools/php/php_8.4.8.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.4.10.bb
-@@ -29,7 +29,7 @@ SRC_URI:append:class-target = " \
+diff --git a/meta-python/recipes-devtools/python/python3-types-psutil_7.0.0.20250601.bb b/meta-python/recipes-devtools/python/python3-types-psutil_7.0.0.20250601.bb
+index fead4ea903..146361c5fd 100644
+--- a/meta-python/recipes-devtools/python/python3-types-psutil_7.0.0.20250601.bb
++++ b/meta-python/recipes-devtools/python/python3-types-psutil_7.0.0.20250601.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ec038232ab86edd7354b091c54e190e2"
  
- S = "${UNPACKDIR}/php-${PV}"
+ PYPI_PACKAGE = "types_psutil"
  
--SRC_URI[sha256sum] = "36569c64dd1499e570c436603b641eee7cde4af576af786597d0ee711b3a3a8a"
-+SRC_URI[sha256sum] = "8815d10659cde5f03be4d169205d62b7b29ed0edc7cdd84b6384cda0310c3108"
+-inherit pypi setuptools3
++inherit pypi python_setuptools_build_meta
  
- CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
- CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
--- 
-2.43.0
-
+ SRC_URI[sha256sum] = "71fe9c4477a7e3d4f1233862f0877af87bff057ff398f04f4e5c0ca60aded197"
+ 
 
