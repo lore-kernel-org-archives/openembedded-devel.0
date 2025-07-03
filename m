@@ -1,86 +1,148 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 490DAC77B7C
-	for <webhook@archiver.kernel.org>; Thu,  3 Jul 2025 06:23:54 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.web10.16250.1751523827320595129
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 579D8C77B7C
+	for <webhook@archiver.kernel.org>; Thu,  3 Jul 2025 06:39:24 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.16268.1751524759073258895
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Jul 2025 23:23:47 -0700
+ Wed, 02 Jul 2025 23:39:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=i/+AoB6D;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-742c7a52e97so7388990b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Jul 2025 23:23:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751523826; x=1752128626; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yy4PYa776c2oKMxjy6UHrwHgCWBXSiyO46f87B6mU4I=;
-        b=i/+AoB6DhRImXJBDmMDOdxWSI4+tGGxjtiR8NukNElcbCqAQBxy1q6P7VkycJSjYYv
-         btjjBWfR3vqR0+XSiZaenIDSyoNwYBlwSoeo2EYtpwQTyQbRI+FtS4MnzS8w2SrAtJy6
-         bvsYv6WOl/nFt/RTLKwDQTCccyCO70D3S0stcD1VSVGqRwCI2rCDPJIKsGiCxKna+vH5
-         oohtwGUERIEBce3RUb1sbWiIXBtJ6z4Uh2/BnNrelyr6Hzp6j9iI0kxz3bNAozgjzPX1
-         WawzKPdrtMpmYrsaOdb2pDAbh3Kce2HyveSn9SKS7r8kUms7IE4P1+2khsL5T3xkagZd
-         wh6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751523826; x=1752128626;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=yy4PYa776c2oKMxjy6UHrwHgCWBXSiyO46f87B6mU4I=;
-        b=hhnKuiC70z5gyI7qPcUXVXGwzS7zXQFZUoM1IBL7/MB11gsfi7eoXdMk3rUdR+lU3p
-         fGKlW3vAFS2R8NUoJ0qSUqKp7oD8Z9iL+s4zoy3G1uPf7UXU16NVkhiNft4N9vgF8mbE
-         zt918RBDE4ANuL46YEmbaFrEoXxc1UE5TZuUudhsch7lpIR9aba6exbJ25EK4vLZKY3j
-         8F25ZL+uiDOTcUOIcv574peAlIomyWYjXmK4qon091xjf4Nlpk/Du6lMO9zEjfikJrYu
-         YFT6RDA8ONqJ8fGQM/RDI9uuaxR8y0DMiav35dWjhTuIDUf1nF3yYGjrXmN+qzVp3qzz
-         dILg==
-X-Gm-Message-State: AOJu0Yxg0Dw7HtkLdg1Bq6F18qI8Y19SHJyBUrt9UgpfQXT0naz5EFzD
-	WixfO65UWxUc/L/encOJVJmKUe3+Cpd8CVDOwDT3k49+EHWHxrDNfjKuH3jIJ0bF
-X-Gm-Gg: ASbGncv2PcDNnvhckgz+wFykFOB4XjCIyXPg5KHpyKVeOWW09JqOwqA+xt+u2FGKE/N
-	9+PFzr3VHk7unq17ZGbiXPl1YsuVMvqs7Vkk4qbWw6dFCZwNVmE6tfbin1pfhJGTEWYS7KPGF2p
-	sGCnLczu5NA30AaZQv51VvbThpi1unA5PIr/NMJhIDq8/cLxQ6k+9mmAT6y04GyWuRD3ylVvyvg
-	N/67QxtVW01NEzLdi7gI7XsgXrvsm1mkP9jACqyUIJFkqo2zLnF2vxEVUWcjqcIIgUKAR/axzm9
-	7RLu2Im3k+2JwbmbujEFk3JmO7EAQTWA6yR8RQ8OEVqvxkmnxrgx9g==
-X-Google-Smtp-Source: AGHT+IErFhvT515rnanmXILGErerYkJ868HHxyTDb+LmlTa4ADD+NEejbDFc7xVFA+V/ydsUbiEKCw==
-X-Received: by 2002:a05:6a20:6a1f:b0:1f5:8622:5ecb with SMTP id adf61e73a8af0-2240c6a1a38mr4054010637.34.1751523826277;
-        Wed, 02 Jul 2025 23:23:46 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::aa8c])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-74af5409ccfsm15242504b3a.4.2025.07.02.23.23.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Jul 2025 23:23:45 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] jq: Add tzdata to ptest rdeps
-Date: Wed,  2 Jul 2025 23:23:43 -0700
-Message-ID: <20250703062343.2830524-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.50.0
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9279aa10a7=changqing.li@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5633rSin008292
+	for <openembedded-devel@lists.openembedded.org>; Wed, 2 Jul 2025 23:39:18 -0700
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47jbp4d53x-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 02 Jul 2025 23:39:18 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.57; Wed, 2 Jul 2025 23:39:21 -0700
+Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.57 via Frontend Transport; Wed, 2 Jul 2025 23:39:21 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [walnascar][meta-oe][PATCH 2/2] udisks2: Hardening measure of CVE-2025-6019
+Date: Thu, 3 Jul 2025 14:39:19 +0800
+Message-ID: <20250703063919.1284890-2-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250703063919.1284890-1-changqing.li@windriver.com>
+References: <20250703063919.1284890-1-changqing.li@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: 7lgKz7-Ohws6lQtHCG6u2VYvkMMPQ07h
+X-Proofpoint-ORIG-GUID: 7lgKz7-Ohws6lQtHCG6u2VYvkMMPQ07h
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAzMDA1MSBTYWx0ZWRfX1MkaPUZ4bVu5 vF5zd7frzWRh3RT0NdgITaQ767F9av9uOGGzmXkQYCJlJ24epC5Wr3oi8QSrfwi5kGlcYSuTXuC bFKD1tm3B5/bM8KUIM7DIpaiqZV1hAKXjKsjmI+9RAsx1R41nEMwudIKOGluR/4iCWf1gHEKm+2
+ KfjkallMqAQHL54uzn01cdEzXknW8LmvHdQpkZ0/2SNq0w04brvDWDd76dVej58SuU1DdWX+6GI 90BOBvzqEhA072pSJVyntbjQcE3P6jBxkgxv//ElLakMlQiRzRceCUytsMNAi0TyRnR+enTPj50 OVfKfJVqeasJwP+igBQXjqRBBWTSWsVDXXNykyVhqaCh8T+VJJLJGWoeAWBwpKJ0Y9eEBssba/+
+ Bxs5iNSIwI3oBOJ7yYGsyf8xHeQeWEHtoBsUn0NiVPxA+HJX3pW6nCdvncKs5BpEJqhrU02b
+X-Authority-Analysis: v=2.4 cv=JMg7s9Kb c=1 sm=1 tr=0 ts=68662596 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=Wb1JkmetP80A:10 a=-Z0NSjAlAAAA:8 a=xNf9USuDAAAA:8 a=fxJcL_dCAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=20KFwNOVAAAA:8
+ a=Fk5FKYzdMtvwwneLGJ8A:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
+ definitions=2025-07-03_01,2025-07-02_04,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
+ mlxlogscore=999 suspectscore=0 adultscore=0 phishscore=0 spamscore=0
+ priorityscore=1501 lowpriorityscore=0 clxscore=1015 mlxscore=0
+ impostorscore=0 bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505280000
+ definitions=main-2507030051
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 06:23:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118208
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 06:39:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118210
 
-This is needed for some ptests to pass
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Refer [1], CVE-2025-6019 is strongly related to udisk daemon, and
+this is a hardening measure related to this.
+
+[1] https://cdn2.qualys.com/2025/06/17/suse15-pam-udisks-lpe.txt
+[2] https://security-tracker.debian.org/tracker/CVE-2025-6019
+[3] https://ubuntu.com/blog/udisks-libblockdev-lpe-vulnerability-fixes-available
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-oe/recipes-devtools/jq/jq_1.8.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../udisks/udisks2/CVE-2025-6019.patch        | 51 +++++++++++++++++++
+ .../recipes-support/udisks/udisks2_2.10.1.bb  |  1 +
+ 2 files changed, 52 insertions(+)
+ create mode 100644 meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
 
-diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.0.bb b/meta-oe/recipes-devtools/jq/jq_1.8.0.bb
-index af35324b5f..4aaf27da9a 100644
---- a/meta-oe/recipes-devtools/jq/jq_1.8.0.bb
-+++ b/meta-oe/recipes-devtools/jq/jq_1.8.0.bb
-@@ -43,4 +43,6 @@ do_install_ptest() {
-     sed -i s:@libdir@:${libdir}:g ${D}${PTEST_PATH}/run-ptest
- }
- 
-+RDEPENDS:${PN}-ptest += "tzdata"
+diff --git a/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch b/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
+new file mode 100644
+index 0000000000..2e94c8497f
+--- /dev/null
++++ b/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
+@@ -0,0 +1,51 @@
++From d0d04a381036b79df91616552706d515639bb762 Mon Sep 17 00:00:00 2001
++From: Tomas Bzatek <tbzatek@redhat.com>
++Date: Wed, 4 Jun 2025 15:26:46 +0200
++Subject: [PATCH] udiskslinuxfilesystemhelpers: Mount private mounts with
++ 'nodev,nosuid'
 +
- BBCLASSEXTEND = "native"
++The private mount done in take_filesystem_ownership() should always
++default to 'nodev,nosuid' for security and 'errors=remount-ro' for
++selected filesystem types to handle an corrupted filesystem. This is
++consistent with mount options calculation for regular mounts.
++
++CVE: CVE-2025-6019
++Upstream-Status: Backport [ https://github.com/storaged-project/udisks/commit/5e7277debea926370e587408517560afe87d28c9 ]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ src/udiskslinuxfilesystemhelpers.c | 10 +++++++++-
++ 1 file changed, 9 insertions(+), 1 deletion(-)
++
++diff --git a/src/udiskslinuxfilesystemhelpers.c b/src/udiskslinuxfilesystemhelpers.c
++index 7c5fc037..9eb7742c 100644
++--- a/src/udiskslinuxfilesystemhelpers.c
+++++ b/src/udiskslinuxfilesystemhelpers.c
++@@ -123,6 +123,7 @@ take_filesystem_ownership (const gchar  *device,
++ 
++ {
++   gchar *mountpoint = NULL;
+++  const gchar *mount_opts;
++   GError *local_error = NULL;
++   gboolean unmount = FALSE;
++   gboolean success = TRUE;
++@@ -151,8 +152,15 @@ take_filesystem_ownership (const gchar  *device,
++               goto out;
++             }
++ 
+++          mount_opts = "nodev,nosuid";
+++          if (g_strcmp0 (fstype, "ext2") == 0 ||
+++              g_strcmp0 (fstype, "ext3") == 0 ||
+++              g_strcmp0 (fstype, "ext4") == 0 ||
+++              g_strcmp0 (fstype, "jfs") == 0)
+++            mount_opts = "nodev,nosuid,errors=remount-ro";
+++
++           /* TODO: mount to a private mount namespace */
++-          if (!bd_fs_mount (device, mountpoint, fstype, NULL, NULL, &local_error))
+++          if (!bd_fs_mount (device, mountpoint, fstype, mount_opts, NULL, &local_error))
++             {
++               g_set_error (error, UDISKS_ERROR, UDISKS_ERROR_FAILED,
++                            "Cannot mount %s at %s: %s",
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb b/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
+index cb1cbe670d..206de3c0ee 100644
+--- a/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
++++ b/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
+@@ -20,6 +20,7 @@ RDEPENDS:${PN} = "acl"
+ SRC_URI = " \
+ 	git://github.com/storaged-project/udisks.git;branch=2.10.x-branch;protocol=https \
+ 	file://0001-Makefile.am-Dont-include-buildpath.patch \
++    file://CVE-2025-6019.patch \
+ "
+ SRCREV = "18c9faf089e306ad6f3f51f5cb887a6b9aa08350"
+ S = "${WORKDIR}/git"
+-- 
+2.34.1
+
 
