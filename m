@@ -1,123 +1,97 @@
-Return-Path: <Jinfeng.Wang.CN@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 74749C8303C
-	for <webhook@archiver.kernel.org>; Thu,  3 Jul 2025 00:10:32 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.11079.1751501431626699622
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3FD1C8303C
+	for <webhook@archiver.kernel.org>; Thu,  3 Jul 2025 01:19:32 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web11.12298.1751505569011938343
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 02 Jul 2025 17:10:31 -0700
+ Wed, 02 Jul 2025 18:19:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=927982dcb7=jinfeng.wang.cn@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 562Nq67J012521
-	for <openembedded-devel@lists.openembedded.org>; Wed, 2 Jul 2025 17:10:31 -0700
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47jbp4cvv0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 02 Jul 2025 17:10:31 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Wed, 2 Jul 2025 17:10:17 -0700
-Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.57 via Frontend Transport; Wed, 2 Jul 2025 17:10:16 -0700
-From: <jinfeng.wang.cn@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <jinfeng.wang.cn@windriver.com>
-Subject: [walnascar][master][PATCH] postfix: fix rootfs file difference
-Date: Thu, 3 Jul 2025 08:10:15 +0800
-Message-ID: <20250703001015.2081443-1-jinfeng.wang.cn@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ve5UgbEq;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-748d982e97cso5037563b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 02 Jul 2025 18:19:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1751505568; x=1752110368; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Q8tuCBxP1uTfs38XoyvqlF4vaHHEVMTDpU1b2tz/No0=;
+        b=Ve5UgbEqlM1QjrHq17W2tVSVr8QazPkcEnbarMTTxlOOfr2Hg/5WNt/wlN9NlIyChC
+         uka1Oj0OXGm0lagbnO82i/g3FJKE6518p4uAjlLeALk7tIG1K+1/CIFPAhTm0BvGgRgG
+         uHr/wSLkzod6l6E5Gdb7g/rCjj+bxYw8yslpHXMQn85Wl6JdE43RIhXRH3XMw2Y+U6wl
+         BA1TRz8PgdO8qaMMNdiPAvIX8EAmfZ7hQWvuRNQbGOxNpow1PGUNIM5dXShB5YsNFas+
+         DBviZAFJqZNIRu1pQlQuC0c8zR+3OJZ/SgCv6i6bF+iM5IVrH+RbeMJEwpTAIHaHMfkg
+         3dog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751505568; x=1752110368;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Q8tuCBxP1uTfs38XoyvqlF4vaHHEVMTDpU1b2tz/No0=;
+        b=I84SfHCJgEVwKYgqa2SV88uousLwHJXn9nXZ9pNQvNVbk+/N/ynH7YEraUsEbnmket
+         pao2SpIkfjzlO1NNciG1yrEnE8Cn9Oyf69DZkKwQFelCRfUahrjRXVbf4QB92deYAM8I
+         p3P8i1aLengUDR20M95T0HJBj5ptXZvzbZ9lFs8fuIYGbiKPUwRKb/IF04yPavrYD1rW
+         1jGizsuH8KklOnzw9z8tbBaVXl0vMkVItyrk5h9IsIOvg8dC5RBjVsikDmi6+lC90UoL
+         tZro2i+4t/hSIzjyDLYGo5iExSjKT1VUgiGedTxjkvxMDSdUVWXGIfnPFpZ7uuxEtwFX
+         SzaQ==
+X-Gm-Message-State: AOJu0Yx8JDxITKj8a26EZxFlW/CV338bcuVLpZKRF3gZ2FYNepDFnYR6
+	oVAiF3Ek9GkFvg/m8nvAxVh873UxLPcVQaiXJ96H9j+0Zg+K5Y1qJME3NCoblLTr
+X-Gm-Gg: ASbGncvu/CV9orh8haNqoPTyUmpTYss6of0sHwLfzVjgCrICqPt+rJhy4QKcNbN+9a0
+	DTet+zaHC8jtu+VD0zBP7VKmsDZVqUM+NkGvQvXV5LfNKc+XKbCL4n8Ri0FuA9eHyPkF5OtGoTZ
+	bIuLIMUA75vT8Z+OG7sPo8sIyfe5S3iKlF7+wz/9Oq5JRwcRq9EzVdqcMgU5FzCCE3op4O7a9sb
+	teraOpEUnmhzEhS2QKTRwcMpYB3a/Gh7GhsSN8+c6EA0m1sdl5dOIq2F7jEKOxRDeA5Tt2dI8P7
+	+f+y9Cv1k77FkdtWRvmPc3beBtk9laKwWr5a3btwOaAJMMulU4Y8zw==
+X-Google-Smtp-Source: AGHT+IGTEf7HVtxj3PSMs/2aqPHeBRH7y388j/biLLOK87fH0FL8FdSotJepwUdAU4x5IpjYlu8aeA==
+X-Received: by 2002:a05:6a20:d80f:b0:220:83e1:49a1 with SMTP id adf61e73a8af0-2240bec1ec4mr2593560637.19.1751505568031;
+        Wed, 02 Jul 2025 18:19:28 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::aa8c])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b34e301f704sm13891476a12.18.2025.07.02.18.19.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 02 Jul 2025 18:19:27 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-xfce][PATCH] xfce4-screenshooter: Fix build for wayland systems
+Date: Wed,  2 Jul 2025 18:19:25 -0700
+Message-ID: <20250703011925.1469842-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: rN98FWsjEHLhVJUte3pYBpcbsog0Vl2K
-X-Proofpoint-ORIG-GUID: rN98FWsjEHLhVJUte3pYBpcbsog0Vl2K
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAzMDAwMCBTYWx0ZWRfXwIDMFRggxQQj 9aPR4rURMY60dtD644nSAySuLNvVvoNTTdvbbazn0gbaXINPaVWA2Evj3XYMQ54FtThjrzJcyTT dqGoLY9iMznKtBf5PdEKKHB+VVM8YJ6Imznvgq1ApsyPBiLdHKIWP2yU2piHRp4r5pMX7kENBYH
- Lwq8j1X1KpqO7LPgst90Dr9ubNG1iagJPAga9HTSQOljvbkTMR1+rxP2dbstsWCpm4d3IpoFhtM Sa4PevsM8DgMBefqjnFM5kwy14zcBHiMvcx9Aml8ekiFqZopqfjGASZ9ViE/P2dgMZqNx58uxZH wZv89an8xoWGeXNFVnMrrberFTpbgHkISjHMC/ywL/rUcK08UoLtCURe96IMHvL3XE9kSOaJrsI
- XgDuoQcHJu5YJpEigM2pQtZJ9k0UolAaqEBRudLAT8IhroIbfPCygIlHmOdR5s2AGrR7yhm/
-X-Authority-Analysis: v=2.4 cv=JMg7s9Kb c=1 sm=1 tr=0 ts=6865ca77 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=Wb1JkmetP80A:10 a=e1GkridNAAAA:8 a=t7CeM3EgAAAA:8 a=ei_PhQR-cJsUnzt3-wUA:9 a=6ft9yNkZjdd813gQxDxM:22
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-07-02_05,2025-07-02_04,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
- mlxlogscore=999 suspectscore=0 adultscore=0 phishscore=0 spamscore=0
- priorityscore=1501 lowpriorityscore=0 clxscore=1015 mlxscore=0
- impostorscore=0 bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505280000
- definitions=main-2507030000
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 00:10:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118203
+ <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 01:19:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118204
 
-From: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
+Ensure that wayland-scanner is added to dependencies
+Create protocols directory as well where the .c files generated
+during build are emitted into.
 
-Rootfs file differs with the same project configure, add preliminary
-setting to avoid this.
-
-Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...0006-postfix-add-preliminary-setting.patch | 31 +++++++++++++++++++
- .../recipes-daemons/postfix/postfix_3.10.1.bb |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch
+ .../xfce4-screenshooter/xfce4-screenshooter_1.10.6.bb     | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch b/meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch
-new file mode 100644
-index 0000000000..62b3cf0c05
---- /dev/null
-+++ b/meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch
-@@ -0,0 +1,31 @@
-+From a5863e19d298789328e11057c469636aa8775847 Mon Sep 17 00:00:00 2001
-+From: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
-+Date: Wed, 2 Jul 2025 10:55:53 +0800
-+Subject: [PATCH] postfix: add preliminary setting
-+
-+post-install call postconf commands to modify main.cf. When multiple
-+parameters to postconf, the order of those parameters in main.cf is random.
-+Then it will reproduce random results in rootfs file(sample-main.cf). To
-+fix this, add preliminary setting in main.cf.
-+
-+Upstream-Status: Inappropriate [this is the use of post-install,
-+upstream is not affected]
-+
-+Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
-+---
-+ conf/main.cf | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/conf/main.cf b/conf/main.cf
-+index 1d2c8c2..50398ba 100644
-+--- a/conf/main.cf
-++++ b/conf/main.cf
-+@@ -683,3 +683,5 @@ sample_directory =
-+ #
-+ readme_directory =
-+ inet_protocols = ipv4
-++shlib_directory =
-++meta_directory =
-+-- 
-+2.34.1
-+
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb b/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb
-index a85176d871..444bee0668 100644
---- a/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb
-+++ b/meta-networking/recipes-daemons/postfix/postfix_3.10.1.bb
-@@ -26,6 +26,7 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
-            file://0003-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
-            file://0004-Fix-icu-config.patch \
-            file://0005-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
-+           file://0006-postfix-add-preliminary-setting.patch \
-            "
+diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.10.6.bb b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.10.6.bb
+index 8778ff3451..f843b9459e 100644
+--- a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.10.6.bb
++++ b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.10.6.bb
+@@ -9,9 +9,13 @@ inherit xfce-app perlnative
  
- SRC_URI[sha256sum] = "75868db7a8ed252cd3a14c13a3ce383ddd42563160c02027d061202ee36799bf"
--- 
-2.34.1
-
+ SRC_URI[sha256sum] = "992066cfecfb44a68681340bfd55d524d40410aac3da6ef25c6c6cb2150a5965"
+ 
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
++PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland, wayland-native wayland"
++
++EXTRA_OECONF += "WAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner"
++
+ do_compile:prepend() {
+-    mkdir -p lib
+-    mkdir -p src panel-plugin
++    mkdir -p lib src panel-plugin protocols
+ }
+ 
+ FILES:${PN} += " \
 
