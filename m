@@ -2,88 +2,87 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D660C83F04
-	for <webhook@archiver.kernel.org>; Fri,  4 Jul 2025 01:28:14 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web11.3087.1751592486137385045
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9463CC83F04
+	for <webhook@archiver.kernel.org>; Fri,  4 Jul 2025 02:39:04 +0000 (UTC)
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web10.4225.1751596739887709858
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 03 Jul 2025 18:28:06 -0700
+ Thu, 03 Jul 2025 19:38:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Td6tByDU;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-236470b2dceso4798275ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 18:28:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fULGIDId;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-749068b9b63so384640b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 03 Jul 2025 19:38:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751592485; x=1752197285; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1751596739; x=1752201539; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=PnYqPl47KxOE0xA5lFFK6uziVwcF+tk0IH+RX3nKvls=;
-        b=Td6tByDUQBGqe5GyUwmfLD1+/3/7MuN5omL37s7XsuPY5MqlZ/aWAareZVfo8bnHhU
-         k4BZgGNJMDcMK3jKu7Aqt2q2VTLGS5nEdoD4L5LutmZIQ/POISCkEEgbw3rBR2loFXFR
-         dnQcf4qXH23aJBHR7iwotPz9cQGxNdi03Ojml99Xmyl8qQscOqUC11Jx+Wd7XNI7EIpL
-         tC7mcB1aI0AhUctAGNKiZHpOecVEi2eAvsC1IjDKb4tGSEwD12W8NanVE8cg4xkFOJSP
-         mgq6O+cyG5HkEHpBQ82QCSliCABih7mZtfj9fvJ/TYdMJmIlozAyLTJMmS0ucdkt+2xs
-         lRzA==
+        bh=mRPTwSbsZnJRJrWCtDtfAg3hhtF3oLLdcSEybjUVSh4=;
+        b=fULGIDIdUIKsQEgz/SNl34GbNydkPXFUUH+JwgIpx68vl3oVoEj4i7x/6LveOEOxcH
+         5E+wiU+PxjVk41O7LbjEZsUh8H7+BSEWRvI22iB0lvuxxbT0N4XJdKSCrqJDNLcUQYWn
+         sQModMez+Y2JJo9Hm851bnYbbF/MDJzx0q3iqqQ6MIMc7FfRem5hferXkl/BKdpzZ3iU
+         zm2JFdJ9VP8izUKtEibx3FXXGrCswf3f1PWQ0IlrBJu2F7Fu13bJRU+oW6Kv9fJ0a4p0
+         32BJiErcV/dT3pmjRHUQvZVABgDchsAVU+nBINRjZk+vXazTwLxwDOKWHZvxlf05vgrp
+         MYHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751592485; x=1752197285;
+        d=1e100.net; s=20230601; t=1751596739; x=1752201539;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=PnYqPl47KxOE0xA5lFFK6uziVwcF+tk0IH+RX3nKvls=;
-        b=BTsLa5kZdJ/KYDrPwuai+8WuvW92mUKJwNnhYqOI1UVV+iKbVTQa0suVotoVNus0IX
-         vASiVVH9Nz5Go7Y75pO7aeFJ4IiIUnFObkDIZ7eKzZObdfEflVv8xPHEoa+Lq2C1NNQi
-         hUMPJQKQ/EaFEbL5LSKrORC3zqMtGZ5kP1A4Eyw7h3HY7maByucVTFmaKoI40lfm0U+B
-         5zSZWrNuzl+9EElO3rd4olgyrdaaqzSHB9nPziI3F6svTYmlRyJIymHUPaoh+MGOimd5
-         XF85kjXtSUdKaN0uvUqE4mXhDa4LOmelKXPxSAxqRLBt6dQNfBdFHIqwSSTeRrX1o1CY
-         lPsg==
-X-Gm-Message-State: AOJu0YxE2OOkIzMtpSPMlWp17Yd8U+A3Nj5noYh4aRh66jKuqUOW1v0N
-	2bYkN2DYJ3XWjX/ZzMI3LuP2PKBWpT9D9JW0bwoa8uoWfY2dGfv89zK9dLkXZK+E
-X-Gm-Gg: ASbGnctTH9BYwgiBdKatGR/aaKeICo96QS8wYHsd6WpT6R4s73B6Nt4YvtRpTOMx/xm
-	Jko5l6UPoaeU+BoAjg+5iv7fFYBZp8o4lRyGc9Fpna6eUnT9/bj0wx5rl5melfHGNpnNGybQIDD
-	DmxAtSdnuDuLJJ/qWD3Ry+giZO5XDgw7a6YGQGSc6+Amj4vSNj+blQtj6hDCnz1xtX4fi7ECREH
-	Zjst5n5BXYGGmu1Nxlv/B5q8YGSRtpoAehSomZJWqSo1bUCNt6ZbbMjWCQkWLBRLPDG8K5ug5YO
-	mBEzS2l9PlWAh+kLAXcFhHiawrLBjuJbpm4PEsrcM1Uv7WrKO0nqkw==
-X-Google-Smtp-Source: AGHT+IHx7uCQ1KU4oMzz2gf0dRP1rLEa7sIHfwJqcv8SJSRroRHQQX6Nuu84F6rCkY/5RScsmRE7rg==
-X-Received: by 2002:a17:903:15cf:b0:235:1b3e:c01c with SMTP id d9443c01a7336-23c875ac9d6mr3885635ad.39.1751592485150;
-        Thu, 03 Jul 2025 18:28:05 -0700 (PDT)
+        bh=mRPTwSbsZnJRJrWCtDtfAg3hhtF3oLLdcSEybjUVSh4=;
+        b=n8WzlJL7fs2kbaDLwTE/r4HVWnHcXuhJuK3u5b7PpROuGd6VUunDVAiaIBJcr6B7ka
+         hHQ1v0O2cTUbSf+OV1JivfK5m69qEVmy5bOmOR0O2s9+Ob89LfElchl+d55V7QsbwiPg
+         VkRVZ970eVCmwHKRc5xZpq6aMysX8lLntLvyqJr8b/8pZICFv6WdpEMUR8XqT+ftQsy+
+         q/al+qHXCrJwrzpiUyZ0+qNCDrRi2ErqrIYchkeItGG0HOZJB47/JQISahRBar+b9Kno
+         TEeUZpGzxtEp7cAGp2dsR4RqwSSx+YW5mCyrL/de21HWcTaGGzjw5mL494ao3U+guw2A
+         LkSA==
+X-Gm-Message-State: AOJu0Yxx4KxkyrjeIyjt5duzIDiycIgKtRR/jm1B8Wfh4mSJSZUmN8/N
+	qIIrusMZ9Dg7fOddd8SYJXloYibDxxkTEZDhJJKsVCoCSTcCpjT+vRLVA1GcKELi
+X-Gm-Gg: ASbGncu4b+vGv4KTBLWTgevH+0Qq9kL+GVmDLiReD50BCNtn95E6Ehv/Uim6T7sWExy
+	Bw+gFDkb+gdJvQ/+YZf/Dd1wLFUzqyOaOAs0f4M5YIVc46ZNna1qstJkuyXoN2wi3JuHPrrQgCW
+	yys+XO2dsCzPl56lZh+zj7/neSm0TWAhNTXdcVdoVhcqZQJk4KaLZQStV9NYbdQ2eLnoQzqm7a4
+	P30qfe7mxYVWQ0dBtGyKgfUJDyTVrb1vyDCwJyHqf9oIQbfuwzz+pB3ToPxVjX8pmbxXIwQ89uN
+	fKgf4JQugdan1oFHkrKWlkYaQr6pavxVaTdgcWtThKSgnLOlYn/DKw==
+X-Google-Smtp-Source: AGHT+IEZLC6XFf0F47xHzMXyz20inXZxSbDzh+jxDgbZ6cCYLwFQlbEGcB2sm5x1OBjR3bJvIS8M2Q==
+X-Received: by 2002:a05:6a20:1591:b0:21f:4ecc:11ab with SMTP id adf61e73a8af0-225be6e76d6mr1509915637.9.1751596738813;
+        Thu, 03 Jul 2025 19:38:58 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:8201:fd20::aa8c])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23c845bf52asm6735365ad.241.2025.07.03.18.28.04
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b38ee62555asm799426a12.51.2025.07.03.19.38.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Jul 2025 18:28:04 -0700 (PDT)
+        Thu, 03 Jul 2025 19:38:58 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] pstack: Always use gcc to compile it
-Date: Thu,  3 Jul 2025 18:28:01 -0700
-Message-ID: <20250704012802.2817020-1-raj.khem@gmail.com>
+Subject: [meta-xfce][PATCH 1/2] imsettings: Disable two warnings with clang
+Date: Thu,  3 Jul 2025 19:38:55 -0700
+Message-ID: <20250704023856.3131843-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 04 Jul 2025 01:28:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118227
+ <openembedded-devel@lists.openembedded.org>; Fri, 04 Jul 2025 02:39:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118229
 
-Fails to build/compile with clang
-
-TMPDIR/work/cortexa15t2hf-neon-yoe-linux-gnueabi/pstack/2.11/sources/pstack-2.11/libpstack/archreg.h:94:1: error: member access into incomplete type 'const CoreRegisters' (aka 'const pstack::Elf::user_regs_struct')
-   94 | REGMAP(0, regs[0])
-      | ^
+clang is fussy and this package is old. It should perhaps
+be removed but this keeps it going so let it be.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/pstack/pstack.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-devtools/pstack/pstack.inc b/meta-oe/recipes-devtools/pstack/pstack.inc
-index 9831a74d1a..1c85b12061 100644
---- a/meta-oe/recipes-devtools/pstack/pstack.inc
-+++ b/meta-oe/recipes-devtools/pstack/pstack.inc
-@@ -37,3 +37,5 @@ FILES:${PN}-dbg += "${base_bindir}/.debug ${base_sbindir}/.debug ${bindir}/.debu
+diff --git a/meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb b/meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb
+index 59de3b3a08..6daf1f57b1 100644
+--- a/meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb
++++ b/meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb
+@@ -31,6 +31,7 @@ EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
+                 --disable-static \
+                "
  
- PACKAGES += "${PN}-dev"
- FILES:${PN}-dev += "${base_libdir}/*.so"
-+
-+TOOLCHAIN = "gcc"
++CFLAGS:append:toolchain-clang = " -Wno-error=unused-function -Wno-error=single-bit-bitfield-constant-conversion"
+ PACKAGECONFIG ??= "xfce"
+ PACKAGECONFIG[xfce] = ",,xfconf"
+ PACKAGECONFIG[xim] = ",,libgxim"
 
