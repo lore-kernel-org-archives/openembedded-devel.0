@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 210EEC83F12
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BC11C83F15
 	for <webhook@archiver.kernel.org>; Mon,  7 Jul 2025 09:07:17 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web11.56132.1751879233924486135
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.web10.55564.1751879229244037852
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Jul 2025 02:07:14 -0700
+ Mon, 07 Jul 2025 02:07:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=SYDg79rC;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=XbgJJn/b;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1751879233; x=1783415233;
+  t=1751879229; x=1783415229;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=uqL7xTdPXuAAyoLfbH58/RVkB6Fm3sLfJ8II2Fg2/KE=;
-  b=SYDg79rCEao6BJU/lsV6+2OenqGTg/1y+oyQzeXzO2BIKM784fcYwZt9
-   arxRmJGkqfiqtEyzSYAwprNF81qo1WJ4DL973D2ratOtWBiC8QUR7zhdv
-   flnRp90J8oqPX6VozEoNiey/b42amplIClj8NfJX/Gi0v9U8nOaNNM+K8
-   /f1py1p7DWVMG+312FDN4xzYogDBOzI7i/4lonmri7G2uztX43jhTsmT4
-   Ji4YlasUIH1S7Y3EYvZtULXsUx3JhtHz3jxYCvmwDyyqkepp0YZXADZ7x
-   Lg2m/8NCqu9eJbsLG5hT16O7xWMI3rKAhPidhwN94gN7CA2MS7FmPoUSp
-   g==;
-X-CSE-ConnectionGUID: SKdEX9qNQW6h3A0v80bTVA==
-X-CSE-MsgGUID: lebUqYJ5Q+2BmHiLzpadTw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11486"; a="206006866"
+  bh=T9si7GHIqmXjOlMSUAVULn6hypyjjAMtYiEkfBGPG8s=;
+  b=XbgJJn/bwqXZWgfkWCsKLq5VFqzGYedcG99D3NgoDhZx2HroFQDQ3Wrk
+   5QMB2T1kx6YR2SPcCVSpdB+8OQnQcneUHF5rOW34QUOVuUBQ7+bY5QIVB
+   AFwCeXhpbKkrLjFYqJHaYaMLf6Rufr3epDFrtLHJ2CPLnuov3pI30aQdI
+   /gvT47m0kz0xYLJSErJ9Sx9ThCaB9LZ2f9jSLI4DkoI7ysrAem2JJINYN
+   sbz6tNnaJ1GPpAmE2razpC69JNGUHggp2EwVFoTxqxKaAMtJhHPc1vVKF
+   rzKPuJULlYtU+0HfUhXBgRqknALUEvjrZEiGJ1jVZuThr/mu8/heq9zD3
+   w==;
+X-CSE-ConnectionGUID: EI/7gsRZTmeUezGBQa/mug==
+X-CSE-MsgGUID: VTYmIEteTcuMpCWxhzedlw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11486"; a="205517789"
 X-IronPort-AV: E=Sophos;i="6.16,293,1744038000"; 
-   d="scan'208";a="206006866"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.128])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2025 18:07:12 +0900
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
+   d="scan'208";a="205517789"
+Received: from unknown (HELO az2nlsmgr4.o.css.fujitsu.com) ([20.61.8.234])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2025 18:07:07 +0900
+Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 47AB2C000AB
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:12 +0000 (UTC)
-Received: from yto-m2.gw.nic.fujitsu.com (yto-m2.gw.nic.fujitsu.com [10.128.47.163])
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTP id BF4291400381
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:11 +0000 (UTC)
+	by az2nlsmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 810C142A301
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:07 +0000 (UTC)
+Received: from oym-m2.gw.nic.fujitsu.com (oym-m2.gw.nic.fujitsu.com [10.85.9.162])
+	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTP id 00CC310000EE
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:07 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 1FA7868A0B1
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 18:07:11 +0900 (JST)
+	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 4E37FBF3C1
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 18:07:06 +0900 (JST)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.161.187])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id A3A631A0078;
-	Mon,  7 Jul 2025 17:07:10 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 90CC31A000B;
+	Mon,  7 Jul 2025 17:07:05 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 13/35] libgpiod: upgrade 2.2.1 -> 2.2.2
-Date: Mon,  7 Jul 2025 17:06:33 +0800
-Message-ID: <20250707090656.1216-13-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 04/35] genimage: upgrade 18 -> 19
+Date: Mon,  7 Jul 2025 17:06:24 +0800
+Message-ID: <20250707090656.1216-4-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250707090656.1216-1-wangmy@fujitsu.com>
 References: <20250707090656.1216-1-wangmy@fujitsu.com>
@@ -61,38 +61,45 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 07 Jul 2025 09:07:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118256
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118249
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Bug fixes:
-- don't implicity unquote unnamed lines in gpioinfo
-- remove useless variable in reconfigure example
-- don't let struct line_config balloon out of control and trigger an OOM
-- drop python3-config check from configure.ac
+License-Update:
+===============
+Update COPYING with current FSF contact information
+Include the most recent GPLv2 version
+https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+This avoids rpmlint errors like E: incorrect-fsf-address
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libgpiod/{libgpiod_2.2.1.bb => libgpiod_2.2.2.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libgpiod/{libgpiod_2.2.1.bb => libgpiod_2.2.2.bb} (98%)
+ .../genimage/{genimage_18.bb => genimage_19.bb}               | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/genimage/{genimage_18.bb => genimage_19.bb} (79%)
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.2.bb
-similarity index 98%
-rename from meta-oe/recipes-support/libgpiod/libgpiod_2.2.1.bb
-rename to meta-oe/recipes-support/libgpiod/libgpiod_2.2.2.bb
-index 93c3e3b92d..09b0928dfa 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.1.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.2.bb
-@@ -13,7 +13,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-2.x:"
+diff --git a/meta-oe/recipes-support/genimage/genimage_18.bb b/meta-oe/recipes-support/genimage/genimage_19.bb
+similarity index 79%
+rename from meta-oe/recipes-support/genimage/genimage_18.bb
+rename to meta-oe/recipes-support/genimage/genimage_19.bb
+index 23169f5d44..7d760825e3 100644
+--- a/meta-oe/recipes-support/genimage/genimage_18.bb
++++ b/meta-oe/recipes-support/genimage/genimage_19.bb
+@@ -5,12 +5,12 @@ HOMEPAGE = "https://github.com/pengutronix/genimage"
  
- SRC_URI += "file://gpio-manager.init"
+ SECTION = "base"
+ LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++LIC_FILES_CHKSUM = "file://COPYING;md5=570a9b3749dd0463a1778803b12a6dce"
  
--SRC_URI[sha256sum] = "0e948049c309b87c220fb24ee0d605d7cd5b72f22376e608470903fffa2d4b18"
-+SRC_URI[sha256sum] = "7e3bff0209d75fbca2e9fcff1fd5f07cc58b543e129e08b6d4bb1e4a56cfec0d"
+ DEPENDS = "libconfuse"
  
- # Enable all project features for ptest
- PACKAGECONFIG[tests] = " \
+ SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/genimage-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "ebc3f886c4d80064dd6c6d5e3c2e98e5a670078264108ce2f89ada8a2e13fedd"
++SRC_URI[sha256sum] = "7ec4fcb865662a8b2ff20284819044ffa84137bf3ca16fb749701291bc01f108"
+ 
+ EXTRA_OECONF = "--enable-largefile"
+ 
 -- 
 2.43.0
 
