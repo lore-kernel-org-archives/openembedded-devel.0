@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1342C83F0A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB77FC8303C
 	for <webhook@archiver.kernel.org>; Mon,  7 Jul 2025 09:07:16 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.web10.55567.1751879233188693965
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.web11.56132.1751879233924486135
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Jul 2025 02:07:16 -0700
+ Mon, 07 Jul 2025 02:07:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=lGrNtEeT;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ock5tfnO;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1751879237; x=1783415237;
+  t=1751879234; x=1783415234;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=DvRMyijldMMp+RFPVz3uwXCSLjZMFLExOj/750VXFqI=;
-  b=lGrNtEeT2BVxbVLWadvje3b4saaoEhfkRLG3CXV2eJEcFizLvaScGYEh
-   ZZOaXfnS40LmA6+dcWOaScJsrq6dN1LmPjbqj0LXkKc7t5HsoLf2zf9RA
-   nSqb6GnfMdtIaopq10cUbfhxvVFgYn5XyxoMaeJSaHtpNYss8wvmLlg8y
-   sKwasddl+x9QOivrkB36a5XfCBOpMbjwn6tLR2QCIcD5TInmwYfEeTMz7
-   AtRMKbcmNpMxPYWaOWd6U1PZWzL4TIm2nfa7u8HI7KtwprJN89WbOWoP+
-   WV3Af0+8I4TL9YK10RY7gPpmhIkyhDZbbl7sEgkwwo9NOoI+jdbZtgNPo
-   w==;
-X-CSE-ConnectionGUID: utP6ZBjaTw2rI41Yw+RjSw==
-X-CSE-MsgGUID: zfXisJwdScOltBJPMsy+BQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11486"; a="204763765"
+  bh=KKV/2YRtQ4nMT0saFfBJUPTHRS7K+nadtefOWzqXlGQ=;
+  b=ock5tfnOLRsY4oEPfCSZsjNl2lP+d1hxR6u91kQkdFfBlGf+w2V9NIlu
+   PRxc6T6tNi/Lgr46C70jxNKHAFRyGWuh5OZ2vHBjVxfRa9LjXXI+/5L0E
+   e27cTfSFaejBpcASGnyNXradIr4v6klLQoj50DgorTUULU3un/csG+iYM
+   ld/8uIAGlcFUmP8OmTPGxO9knLA41gPAN2XJMCk0VF9ARMlZXvbzcbnu8
+   Z/Sdni4IIEMZzOfOP6Lht9+tWSmwwrGYN+AEWXjXIbjeA+GRy+k/9BEQU
+   kqsf4VBaMcM/EjjGZMHrUpUZ1MgPdORaaDNAeCetL8DB9+nzdhwKugKXe
+   Q==;
+X-CSE-ConnectionGUID: 6SmnBStdR7GkoB0/xhicvg==
+X-CSE-MsgGUID: tMfl7PnlSZGqzswQWKvtug==
+X-IronPort-AV: E=McAfee;i="6800,10657,11486"; a="206006870"
 X-IronPort-AV: E=Sophos;i="6.16,293,1744038000"; 
-   d="scan'208";a="204763765"
-Received: from unknown (HELO az2nlsmgr2.o.css.fujitsu.com) ([20.61.8.234])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2025 18:07:16 +0900
-Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
+   d="scan'208";a="206006870"
+Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.19])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2025 18:07:13 +0900
+Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr2.o.css.fujitsu.com (Postfix) with ESMTPS id 6BF48186B
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:15 +0000 (UTC)
-Received: from oym-m2.gw.nic.fujitsu.com (oym-m2.gw.nic.fujitsu.com [10.85.9.162])
-	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTP id E1D3F10000EE
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:14 +0000 (UTC)
+	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id E264EC00093
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:13 +0000 (UTC)
+Received: from yto-m1.gw.nic.fujitsu.com (yto-m1.gw.nic.fujitsu.com [10.128.47.162])
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTP id 64FBDC02F08
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:13 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 381FFBF3C5
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 18:07:13 +0900 (JST)
+	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id B658825B93E
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 18:07:12 +0900 (JST)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.161.187])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 6DF7D1A0074;
-	Mon,  7 Jul 2025 17:07:12 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 031E11A000B;
+	Mon,  7 Jul 2025 17:07:11 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 16/35] parallel: upgrade 20250522 -> 20250622
-Date: Mon,  7 Jul 2025 17:06:36 +0800
-Message-ID: <20250707090656.1216-16-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 15/35] libssh: upgrade 0.11.1 -> 0.11.2
+Date: Mon,  7 Jul 2025 17:06:35 +0800
+Message-ID: <20250707090656.1216-15-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250707090656.1216-1-wangmy@fujitsu.com>
 References: <20250707090656.1216-1-wangmy@fujitsu.com>
@@ -61,32 +61,62 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 07 Jul 2025 09:07:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118261
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118260
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+ * Security:
+   * CVE-2025-4877 - Write beyond bounds in binary to base64 conversion
+   * CVE-2025-4878 - Use of uninitialized variable in privatekey_from_file()
+   * CVE-2025-5318 - Likely read beyond bounds in sftp server handle management
+   * CVE-2025-5351 - Double free in functions exporting keys
+   * CVE-2025-5372 - ssh_kdf() returns a success code on certain failures
+   * CVE-2025-5449 - Likely read beyond bounds in sftp server message decoding
+   * CVE-2025-5987 - Invalid return code for chacha20 poly1305 with OpenSSL
+ * Compatibility
+   * Fixed compatibility with CPM.cmake
+   * Compatibility with OpenSSH 10.0
+   * Tests compatibility with new Dropbear releases
+   * Removed p11-kit remoting from the pkcs11 testsuite
+ * Bugfixes
+   * Implement missing packet filter for DH GEX
+   * Properly process the SSH2_MSG_DEBUG message
+   * Allow escaping quotes in quoted arguments to ssh configuration
+   * Do not fail with unknown match keywords in ssh configuration
+   * Process packets before selecting signature algorithm during authentication
+   * Do not fail hard when the SFTP status message is not sent by noncompliant
+     servers
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../parallel/{parallel_20250522.bb => parallel_20250622.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/parallel/{parallel_20250522.bb => parallel_20250622.bb} (93%)
+ .../libssh/{libssh_0.11.1.bb => libssh_0.11.2.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libssh/{libssh_0.11.1.bb => libssh_0.11.2.bb} (94%)
 
-diff --git a/meta-oe/recipes-extended/parallel/parallel_20250522.bb b/meta-oe/recipes-extended/parallel/parallel_20250622.bb
-similarity index 93%
-rename from meta-oe/recipes-extended/parallel/parallel_20250522.bb
-rename to meta-oe/recipes-extended/parallel/parallel_20250622.bb
-index 79ea168675..739263fe30 100644
---- a/meta-oe/recipes-extended/parallel/parallel_20250522.bb
-+++ b/meta-oe/recipes-extended/parallel/parallel_20250622.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
- "
+diff --git a/meta-oe/recipes-support/libssh/libssh_0.11.1.bb b/meta-oe/recipes-support/libssh/libssh_0.11.2.bb
+similarity index 94%
+rename from meta-oe/recipes-support/libssh/libssh_0.11.1.bb
+rename to meta-oe/recipes-support/libssh/libssh_0.11.2.bb
+index bb2b0dc466..b50177ab9d 100644
+--- a/meta-oe/recipes-support/libssh/libssh_0.11.1.bb
++++ b/meta-oe/recipes-support/libssh/libssh_0.11.2.bb
+@@ -6,14 +6,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dabb4958b830e5df11d2b0ed8ea255a0"
  
- SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.bz2"
--SRC_URI[sha256sum] = "b4b28f475f8cff8bb6ed4b03cc5a67041f18fc73fa256923b23181b56afdb2cb"
-+SRC_URI[sha256sum] = "69f578cf11f1b124ba3c2b673a16641debe63aeb3d2ac4cec5ad65f8a53d489b"
+ DEPENDS = "zlib openssl"
  
- inherit autotools bash-completion
+-SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.11 \
++SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.11;tag=${BPN}-${PV} \
+            file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch \
+            file://run-ptest \
+           "
  
+ SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused-variable-flag.patch"
+ 
+-SRCREV = "854795c654eda518ed6de6c1ebb4e2107fcb2e73"
++SRCREV = "dff6c0821ed54f6fbf5b755af43f54cbb723b1b1"
+ 
+ 
+ inherit cmake ptest
 -- 
 2.43.0
 
