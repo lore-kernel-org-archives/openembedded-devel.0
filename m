@@ -1,137 +1,185 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79DDFC71130
-	for <webhook@archiver.kernel.org>; Mon,  7 Jul 2025 22:04:49 +0000 (UTC)
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
- by mx.groups.io with SMTP id smtpd.web11.4724.1751925880800340411
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4DEAC83030
+	for <webhook@archiver.kernel.org>; Mon,  7 Jul 2025 22:54:19 +0000 (UTC)
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
+ by mx.groups.io with SMTP id smtpd.web11.5690.1751928857491926947
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Jul 2025 15:04:41 -0700
+ Mon, 07 Jul 2025 15:54:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eT32kSZN;
- spf=pass (domain: gmail.com, ip: 209.85.208.180, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-32b3a3a8201so30207281fa.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Jul 2025 15:04:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IHBXgrpx;
+ spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-5550dca1241so3607464e87.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 07 Jul 2025 15:54:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751925879; x=1752530679; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=EGbzXJDkd4ZFaEk/gcmsplW5EXQZrje8JOLEvRrtht0=;
-        b=eT32kSZNzxm2dkfQNcAcgiUDuLkLsrgEAnyr4bvcq8MMN/MA/0bJRHn9ifj93X+BoH
-         oKh0ChmSRG5E7dPqopOHhyeiKc/JRlzmNK4jSyDrbLSJTMFhyMQTTSTTHJKy/ymeytob
-         Ue6xyxqEUb4u0oAsRgmChCkAvbciks6bLLjgKgs+NTCnCJDX1R/FWUVeBwvgW/HZwKh4
-         xvXiBOzf2F/QABI6lnzL+zgfvaJUnOIuebKe+nkZdiMXcA75eM6dtbiTsVUCY6RCovcw
-         N43LTpn2fqngL+XGf8fsRBj3jeN7COYfJpUS1CBuG+MJC+9aWMdxogpjjGdqQofIr4dt
-         9KGg==
+        d=gmail.com; s=20230601; t=1751928855; x=1752533655; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=BEiw+Etvhj9g4C/02kXEVOqbOXRZEElVruy7k87Orx0=;
+        b=IHBXgrpxYFJ0tbZQtc+ls6hf5vTaQzwGUIJkCld6tQX0wG9ChbwIC70RsSnT3q+q3H
+         3rvBp3o/Mal7OFEfNrGdsBb/VdGGGUStNgzNUmcUFQa3ryV0wTnBOzDqDHoXP52y3HQo
+         sMvu3OcO+ymFCtGCLQhrGpyVVD5Ns9cHo9wVCz8QFs30GVpbfXsiPerw3qe2DXGeE2do
+         RJUAb8clRcyFBLhX6bIqYgWQYlF+GFDc+d34OtV11T1LvEgJ1pIXVInGDcGdloseE2b1
+         vFwyuSKSyfKdurPgfunOIAQO+Wjr/xIw7CMkue+LlJaEqapQpUCeESQFzJKpemVJWE1S
+         bFfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751925879; x=1752530679;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=EGbzXJDkd4ZFaEk/gcmsplW5EXQZrje8JOLEvRrtht0=;
-        b=EtsGCOuQq4qeZ3mIL/PKesYVHvsMaeofHfbWWC7Ayd1JjH4u3qZbamqbrWI46JDKNI
-         f1kQddCx2HEKSfRnGpojj4MZe/fJ54Nv8MekUPaFedY6LUEM0rAHrn02OdonXJmbMc78
-         Cn8XMf5hKHjaDz4CmeSEYLs4IWIl2S+9OPQS3v+sNiuQo/5TN9AxhmueDRrSJ6rPZeew
-         6VJ81dauYDDOu0kS3haatK4mxw3ykj5bE9cusbu34hzS6pxLj+HRTBJpS74AGej+I1VS
-         dQ4YPSYHboxAamAzzG5fdn39wUt5JOn2MMmFIQErVlC6LK1r7MPsphjsusK4x+0Mpz7Q
-         1uqw==
-X-Gm-Message-State: AOJu0Yz0H4Nr+rN1rrlzuMfBEG+ZOqjQ7QujW/x1go0hAEKenXKdPDVR
-	tvzQfs6LaAPC1eaVZ5r4QFlbswgFr5fNXX0XJuinmvg74d5kEOZMVfNC5SX6dynV1UNdduSdMqS
-	XjoSUDRfp35hMpof1wGAMJMZ9MXxCJy8=
-X-Gm-Gg: ASbGncvg4ec9V6rmGHnhPzImYgTaohX6CyyHkilu/ABjaecqoQl9T5yAcDEY7dm2TPJ
-	rmLRGeYtLHdeCOvrKfZ5dicbWWNcozBN0f3KuoJUKJw07yTwjT2+hTCPT6P3sKOVMnQp3jTVYk3
-	Ynt0zdwfxriXRUtj6OwzX+BwUk2hCDXNdQAydOltR54RXys8sXTJltfmnd
-X-Google-Smtp-Source: AGHT+IFFya14xvOn831O5XLAMPDQBwQRqwdmOA0TRot+n+Vj/SNdZ2T7R+PjWHrolss4TNlS64pO/ia7ZWs7uBxd5LU=
-X-Received: by 2002:a05:651c:2117:b0:32a:8062:69b1 with SMTP id
- 38308e7fff4ca-32e5f568c3dmr48494461fa.8.1751925878607; Mon, 07 Jul 2025
- 15:04:38 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1751928855; x=1752533655;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BEiw+Etvhj9g4C/02kXEVOqbOXRZEElVruy7k87Orx0=;
+        b=Wut+cf7BVw9KtHNxoVn9/a5i2OltqjfI1l2LgVrouZ3Qrlwf7uiITKOVLEYJHZetyl
+         2SqmMekBfSStN5Wfu59as9v4pPPjAFjXwhXJTAUv/s0Ubcd+MVFPnEa9+4Le93lWHjLp
+         MnMFTjuo5bBw2WVzoswPS9xav+Alr26ZG6gCC0VRR2SYnantppL4XH/yaVwWuQK2ol/H
+         ZEsuapqWGI709tZHyYg3lWQGzlUb+dtBTrZvoi/xuw882j4iaDuhNWIM+rJnGoygFW/X
+         5prwD21560WBN0by99EeNEscdEfa+al3irqDehpVd6YpT530m8fQAoPCxANRQtZRp/qp
+         CW+w==
+X-Gm-Message-State: AOJu0Yyi5DtZ6UIHjBb06yPaDk/70KgLegHUYp4Nem9P4swykhDD6S0x
+	U2Ig0oZbTxyYEr2nSIMpL9cMG4t+yQVZrn/jn2pOHWM2dDx99qUcjVEapBGVsg==
+X-Gm-Gg: ASbGncuM31ncUfkpDujajyuW+tLer45M6942MoJBDbzDym6gE0ZS4/1LTHWcgo8XRkp
+	RGz5HwSok9lae6h4VQiOfhSnUuCkiUDng96iYtk3o9rv602LrXpUTkrNa8TIE4Gt2v7a15m5WCb
+	vVW8/6CgzEig6Fn2puihE81bZe7GxC1R9uuAPHNWw1SqIfVzRWyI1cKxmLoxxkWXMoOb01Ygmda
+	6nCt6yWQ05tgU1k7JymZVe+3S4pCTxhTGsWnScfg1+e/wO3DXywOS/6V5UZ4eDjByHtOyzC0xNN
+	uxeACc/rNVBf4Tp6AxvOvNlrfJzq6gJVBkne/n1vP0zE2OCxiJCTNBM4bOhvnOMSIoB4oEoTXvD
+	CP4k=
+X-Google-Smtp-Source: AGHT+IGrXfj9jDLTaBAvc18KS5z9KKdKCapQh0ZWBI5EFYZjgGVGz4jsOOsx/2O5R3P+ablxgfJ7NA==
+X-Received: by 2002:a05:6512:2c90:b0:553:2c65:f1ca with SMTP id 2adb3069b0e04-556e701d248mr5469595e87.19.1751928855018;
+        Mon, 07 Jul 2025 15:54:15 -0700 (PDT)
+Received: from localhost.localdomain ([176.33.70.141])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-556384b836dsm1476347e87.197.2025.07.07.15.54.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Jul 2025 15:54:14 -0700 (PDT)
+From: Alper Ak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alper Ak <alperyasinak1@gmail.com>
+Subject: [meta-openembedded][PATCH 1/9] liblightmodbus: Upgrade 2.0.2 -> 3.0 to allow CMake 4+ compatibility
+Date: Tue,  8 Jul 2025 01:53:59 +0300
+Message-ID: <20250707225407.1558421-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250701192744.586044-1-hiagofranco@gmail.com>
-In-Reply-To: <20250701192744.586044-1-hiagofranco@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 8 Jul 2025 00:04:27 +0200
-X-Gm-Features: Ac12FXzrfJ-ZnyFm6VXJiMW-ZQEjbuojZBUAzmJ4vQdtfoB8qAIRFtY44DkZtJ8
-Message-ID: <CA+chaQdT2ujqd_yzgyRUNnMNmhS6vOoW06VaEmwtYAA9AiWSSg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] gpicview: add recipe
-To: hiagofranco@gmail.com
-Cc: openembedded-devel@lists.openembedded.org, 
-	Hiago De Franco <hiago.franco@toradex.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 07 Jul 2025 22:04:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118288
+ <openembedded-devel@lists.openembedded.org>; Mon, 07 Jul 2025 22:54:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118289
 
-On Tue, Jul 1, 2025 at 9:28=E2=80=AFPM Hiago De Franco via
-lists.openembedded.org <hiagofranco=3Dgmail.com@lists.openembedded.org>
-wrote:
->
-> From: Hiago De Franco <hiago.franco@toradex.com>
->
-> GPicView is a simple and fast GTK+ image viewer for X which is
-> lightweight, desktop independent and has minimal lib dependency.
->
-> Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
-> ---
->  .../gpicview/gpicview_0.3.1.bb                | 22 +++++++++++++++++++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb
->
-> diff --git a/meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb b/meta-o=
-e/recipes-graphics/gpicview/gpicview_0.3.1.bb
-> new file mode 100644
-> index 000000000000..dab11a02bc1a
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY =3D "Lightweight image viewer for X"
-> +DESCRIPTION =3D "GPicView is a simple, lightweight and fast GTK+ based i=
-mage \
-> +viewer with minimal lib dependency and desktop independent."
-> +HOMEPAGE =3D "https://github.com/lxde/gpicview"
-> +BUGTRACKER =3D "https://github.com/lxde/gpicview/issues"
-> +SECTION =3D "x11"
-> +
-> +LICENSE =3D "GPL-2.0-only"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6=
-552"
-> +
-> +DEPENDS =3D "glib-2.0-native intltool-native jpeg"
-> +
-> +SRC_URI =3D "git://github.com/lxde/gpicview.git;protocol=3Dhttps;branch=
-=3Dmaster;tag=3D${PV}"
-> +SRCREV =3D "ca13623c6176585db4759ce4371fbf89c56fa630"
-> +
-> +inherit autotools mime-xdg pkgconfig
-> +
-> +PACKAGECONFIG ?=3D "gtk3"
+- Drop 0001-cmake-Use-GNUInstallDirs-instead-of-hardcoding-lib-p.patch because it's no longer exists.
+- Drop pkgconfig and cmake inherit since library is now header-only and does not require build tools
+- Install lightmodbusConfig.cmake for consumers using CMake.
 
-This should respect DISTRO_FEATURES, e.g. like this:
-PACKAGECONFIG ?=3D "${@bb.utils.contains_any('DISTRO_FEATURES',
-'${GTK3DISTROFEATURES}', 'gtk3', '', d)}"
+Changelog: https://github.com/Jacajack/liblightmodbus/releases/tag/v3.0
 
-I'll send a fix tomorrow.
+Fix:
 
-> +PACKAGECONFIG[gtk2] =3D ",,gtk+"
-> +PACKAGECONFIG[gtk3] =3D "--enable-gtk3,,gtk+3"
-> +
-> +FILES:${PN} +=3D "${datadir}/icons"
-> --
-> 2.39.5
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118194): https://lists.openembedded.org/g/openembedde=
-d-devel/message/118194
-> Mute This Topic: https://lists.openembedded.org/mt/113935295/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+| CMake Error at CMakeLists.txt:2 (cmake_minimum_required):
+|   Compatibility with CMake < 3.5 has been removed from CMake.
+|
+|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+|   to tell CMake that the project requires at least <min> but has been updated
+|   to work with policies introduced by <max> or earlier.
+|
+|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
+
+Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
+---
+ ...tallDirs-instead-of-hardcoding-lib-p.patch | 37 -------------------
+ .../liblightmodbus/liblightmodbus_2.0.2.bb    | 14 -------
+ .../liblightmodbus/liblightmodbus_3.0.bb      | 17 +++++++++
+ 3 files changed, 17 insertions(+), 51 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/liblightmodbus/liblightmodbus/0001-cmake-Use-GNUInstallDirs-instead-of-hardcoding-lib-p.patch
+ delete mode 100644 meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb
+ create mode 100644 meta-oe/recipes-extended/liblightmodbus/liblightmodbus_3.0.bb
+
+diff --git a/meta-oe/recipes-extended/liblightmodbus/liblightmodbus/0001-cmake-Use-GNUInstallDirs-instead-of-hardcoding-lib-p.patch b/meta-oe/recipes-extended/liblightmodbus/liblightmodbus/0001-cmake-Use-GNUInstallDirs-instead-of-hardcoding-lib-p.patch
+deleted file mode 100644
+index 321b41289d..0000000000
+--- a/meta-oe/recipes-extended/liblightmodbus/liblightmodbus/0001-cmake-Use-GNUInstallDirs-instead-of-hardcoding-lib-p.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-From 066c49158a71ea77598c9e1ae16bba63d6ac6bb5 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 19 Dec 2019 23:41:35 -0800
+-Subject: [PATCH] cmake: Use GNUInstallDirs instead of hardcoding lib path
+-
+-Upstream-Status: Submitted [https://github.com/Jacajack/liblightmodbus/pull/12]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- CMakeLists.txt | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index ce6cc88..bee83aa 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -242,14 +242,14 @@ if ( DEFINED AVR )
+- 	)
+- endif( )
+- 
+--
+-+include(GNUInstallDirs)
+- #Installation
+- install( 
+- 	TARGETS lightmodbus
+--	ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/"
+-+	ARCHIVE DESTINATION "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/"
+- )
+- 
+- #Install headers
+- install(
+- 	DIRECTORY "${CMAKE_SOURCE_DIR}/include/" DESTINATION "${CMAKE_INSTALL_PREFIX}/include/" FILES_MATCHING PATTERN "*.h"
+--)
+-\ No newline at end of file
+-+)
+--- 
+-2.24.1
+-
+diff --git a/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb b/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb
+deleted file mode 100644
+index c310e0f527..0000000000
+--- a/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_2.0.2.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "A cross-platform, lightweight Modbus RTU library"
+-DESCRIPTION = "liblightmodbus is a very lightweight, highly configurable, \
+-	       platform-independent Modbus RTU library."
+-
+-LICENSE = "GPL-3.0-only"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
+-
+-inherit cmake pkgconfig
+-
+-SRC_URI = "git://github.com/Jacajack/liblightmodbus.git;protocol=https;branch=master \
+-           file://0001-cmake-Use-GNUInstallDirs-instead-of-hardcoding-lib-p.patch \
+-          "
+-SRCREV = "59d2b405f95701e5b04326589786dbb43ce49e81"
+-
+diff --git a/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_3.0.bb b/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_3.0.bb
+new file mode 100644
+index 0000000000..5f1233b2b4
+--- /dev/null
++++ b/meta-oe/recipes-extended/liblightmodbus/liblightmodbus_3.0.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "A cross-platform, lightweight Modbus RTU library"
++DESCRIPTION = "liblightmodbus is a very lightweight, highly configurable, \
++	       platform-independent Modbus RTU library."
++
++LICENSE = "GPL-3.0-only"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
++
++SRC_URI = "git://github.com/Jacajack/liblightmodbus.git;protocol=https;nobranch=1;tag=v${PV}"
++SRCREV = "e7be88bc65abec4a902f4e5194d7235ebd3a19aa"
++
++do_install() {
++        install -d ${D}${includedir}/lightmodbus
++        install -m 0644 ${S}/include/lightmodbus/*.h ${D}${includedir}/lightmodbus/
++
++        install -d ${D}${libdir}/cmake/lightmodbus
++        install -m 0644 ${S}/lightmodbusConfig.cmake ${D}${libdir}/cmake/lightmodbus/
++}
+-- 
+2.43.0
+
 
