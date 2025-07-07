@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04370C83F0C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16B30C83F14
 	for <webhook@archiver.kernel.org>; Mon,  7 Jul 2025 09:07:17 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.web11.56133.1751879234076487371
+Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
+ by mx.groups.io with SMTP id smtpd.web10.55568.1751879234028344688
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 07 Jul 2025 02:07:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=PIqLza2U;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=kJ5FIQ8B;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1751879234; x=1783415234;
+  t=1751879233; x=1783415233;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=LYjqcgVV6lXYn399ZDdaaS/yWshLamGm6LevZ8iAH2Y=;
-  b=PIqLza2UAq4Zd68s/uN6sMQu5B+nejxXru5bhwDjVBxA4gEsw4dM5+jj
-   NJpcmbTQ6/A54n7RbV/04uwTYSNz5Nh2KiFHx9tBfGTvohMZibn+Y/LCr
-   /Rt5q8GrHincqDukuc0uj2nBYAQrFBSC8QNDU+mbLtstFOWkEAYsG1Vqy
-   9QS2vCCgFtAxZDxXSN4/4W5fcINbMHvP0B7ky9FTKLjU9HdgGsm71K4VU
-   pOA18pgQeYqcUTeGaH/ynNyKOZZJ2EmxmnVK2BVVk9yJmBj8/q+tmMIyR
-   +neoj/c4PBdHMcaCZjfvN6LKMg7jepB+Wcx/CryMBY3LBGg2zAMSzYW2D
-   A==;
-X-CSE-ConnectionGUID: qN4BDzWBSmu9LuGCXCj33Q==
-X-CSE-MsgGUID: 8XSHDRblRTiP/BcLO/B42Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11486"; a="193950569"
+  bh=uQHBtaYfdwKxWkb+1NJd3/DVfaEs1AS66VY/bsnc9A8=;
+  b=kJ5FIQ8B/pNSVRuh0IGSl7m90ZTA+LggdDT7wm6M1T1dzHiydCrE123S
+   p2N6Hk849bwfza/aC/Uq6eGVnLlb+esYbYIjAL5uk9PsNFch6eLhQu5p+
+   4cRJdQnLgBjzExToK98yRGwJDM4ZN66Xg8rbshF2iK21c3M6/Tmt4/87I
+   ufuAUiuSOpvxc/wNEwVZ2j//SdXWyPVgae6tB9vmrKeR77szjl36ZIeE8
+   sGvM95qBLz8ydyMxbO10ytn6TT1WDlDWS1sB0XDO454L/EvgEa4OeEKan
+   yVr+1FVJdcZJXaE9zAuEI/aB1ryamq+/aENsyGY0678vB3E7viacf5NWP
+   w==;
+X-CSE-ConnectionGUID: vi3q2ph7S6iA1SB4E2UdXw==
+X-CSE-MsgGUID: 2rQqnU8oRf2hh4JYyFsnvg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11486"; a="193452736"
 X-IronPort-AV: E=Sophos;i="6.16,293,1744038000"; 
-   d="scan'208";a="193950569"
-Received: from unknown (HELO az2uksmgr2.o.css.fujitsu.com) ([52.151.125.19])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2025 18:07:12 +0900
-Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
+   d="scan'208";a="193452736"
+Received: from unknown (HELO az2uksmgr1.o.css.fujitsu.com) ([52.151.125.19])
+  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2025 18:07:11 +0900
+Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr2.o.css.fujitsu.com (Postfix) with ESMTPS id 91D9F8203D6
+	by az2uksmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 1FCF71C1C700
 	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:12 +0000 (UTC)
 Received: from yto-m1.gw.nic.fujitsu.com (yto-m1.gw.nic.fujitsu.com [10.128.47.162])
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTP id 15650C0183F
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:12 +0000 (UTC)
+	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTP id 92A588D65F0
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:11 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 693F925B93E
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 18:07:11 +0900 (JST)
+	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id E3725261519
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 18:07:09 +0900 (JST)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.161.187])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id F13021A0074;
-	Mon,  7 Jul 2025 17:07:10 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 250701A000B;
+	Mon,  7 Jul 2025 17:07:09 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH 14/35] libnet-dns-perl: upgrade 1.50 -> 1.51
-Date: Mon,  7 Jul 2025 17:06:34 +0800
-Message-ID: <20250707090656.1216-14-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 10/35] lvm2: upgrade 2.03.32 -> 2.03.33
+Date: Mon,  7 Jul 2025 17:06:30 +0800
+Message-ID: <20250707090656.1216-10-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250707090656.1216-1-wangmy@fujitsu.com>
 References: <20250707090656.1216-1-wangmy@fujitsu.com>
@@ -61,37 +61,36 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 07 Jul 2025 09:07:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118259
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118257
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Resync with IANA DNS Parameters registry.
-- Add prototype DELEG RR package.
-- Minor code and documentation improvements.
+============
+* Use 'lvconvert --repair' to repair raid arrays with transiently lost devices.
+* Override 'LC_NUMERIC' locale if unsuitable for 'json_std' report format.
+* Fail 'dm_report_group_create' if radix char from locale unsuitable for 'json_std'.
+* Escape the escape character itself on JSON report format output.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libnet/{libnet-dns-perl_1.50.bb => libnet-dns-perl_1.51.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libnet/{libnet-dns-perl_1.50.bb => libnet-dns-perl_1.51.bb} (95%)
+ meta-oe/recipes-support/lvm2/lvm2.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.50.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.51.bb
-similarity index 95%
-rename from meta-perl/recipes-perl/libnet/libnet-dns-perl_1.50.bb
-rename to meta-perl/recipes-perl/libnet/libnet-dns-perl_1.51.bb
-index 05027f693c..48dba40a8c 100644
---- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.50.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.51.bb
-@@ -9,7 +9,7 @@ DEPENDS += "perl"
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 0ff17aed5c..4038e83d46 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -18,8 +18,8 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main \
+            file://0001-include-libgen.h-for-basename.patch \
+            "
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
+-SRCREV = "8817523c5682a7fd83770d3f58a99c436f7e73f7"
+-PV = "2.03.32"
++SRCREV = "0e01a5d3ae1100a6641772ab295e0185d8d6a6b0"
++PV = "2.03.33"
  
--SRC_URI[sha256sum] = "c660500b9d96e5aa2b16d9f4260b6f9f05b5602d3c4bea0ca39b45bcd02ba993"
-+SRC_URI[sha256sum] = "40eec0b2866c67b86505a1c79cbb4b131c98c0bb59f305aa48959c89093d4503"
- 
- UPSTREAM_CHECK_REGEX = "Net\-DNS\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
  
 -- 
 2.43.0
