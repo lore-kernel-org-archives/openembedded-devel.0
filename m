@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1E64C83F1E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8B11C83F1C
 	for <webhook@archiver.kernel.org>; Mon,  7 Jul 2025 09:07:27 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.web11.56133.1751879234076487371
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.web10.55569.1751879234060672811
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 07 Jul 2025 02:07:19 -0700
+ Mon, 07 Jul 2025 02:07:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=QUwAXlX2;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=H423RYRx;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1751879239; x=1783415239;
+  t=1751879238; x=1783415238;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=JYYnig42mhnrdgfd5aGA0ZILYKACgtENdXftiYIcgfQ=;
-  b=QUwAXlX2FoY0RzStlt8bskMEnatHTs6vU9evTZpbS0YhGsLYUorwx2w2
-   C4e4Wf1G6HHiCgaY+Up15P3iiIlBD+Fya/tTv0pwSywgwDwDMdz8oqU7T
-   fKNSWWvkhbevynxjCCO36yJX3tyqOL1kD41H5WuTmRRil7m0UjLn07Zm6
-   js7zAZAh63e9D5epgdP7ewe4Ejl0UDAxV7svKaATa0Iz3EDBrEAQdB9SU
-   KobVWw0btcW4SlhjjlYuQo1DzIamklftUA08HbMc4iMcp3ze4yWxpnN4X
-   g5os/aDbVAmAe+ZTXZIzodIvB6W1uaNYlWTyAvyLBmAflbRs6cRqWfGk9
-   Q==;
-X-CSE-ConnectionGUID: BEdQHDuYTq6y4YyyBJgsHg==
-X-CSE-MsgGUID: G3EAhb29TdiujMjqzhEmXg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11486"; a="193950583"
+  bh=ZeDkgrN7TpoOMm+rizbND13S0FN8W2xMtFj72rMOm5k=;
+  b=H423RYRxGZm5OyAGLRNuv0PUs/BSqKPX0whF5YGpl6sU9szpEecSqny/
+   E0BVVxPuTN7hTNnXkGs4sCzkQLcRbRAfhD9za6S/AQrmgf98CfFEFiUbl
+   Vqh3/A5vke/NJkhhxDNYStCqf2OJYwYXYmd2PdNKrd7smagE1RfsxKQm/
+   954ErpgzR+zvLFxMWZu/1lSgJdmPNOucFGJiWbH+dck/HhoLHCtEmNnTg
+   mm+yAVazprf+z+kfGt9SzlW2alPsYrYLdKQmC14wuTEi7g3I2+cBEuaQx
+   UORjtoXXFRVt3/jEw6bNAPLE74ZqWMN3iVq1NDS4ozG5/tiExSmBl7S0d
+   A==;
+X-CSE-ConnectionGUID: 7qf9wdR4TLS7aZBGdctVuw==
+X-CSE-MsgGUID: YaT9LO36RaK+KoiVPDL5Xg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11486"; a="192895259"
 X-IronPort-AV: E=Sophos;i="6.16,293,1744038000"; 
-   d="scan'208";a="193950583"
-Received: from unknown (HELO az2nlsmgr1.o.css.fujitsu.com) ([20.61.8.234])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2025 18:07:18 +0900
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
+   d="scan'208";a="192895259"
+Received: from unknown (HELO az2nlsmgr3.o.css.fujitsu.com) ([51.138.80.169])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2025 18:07:18 +0900
+Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id E35061C0018C
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:17 +0000 (UTC)
+	by az2nlsmgr3.o.css.fujitsu.com (Postfix) with ESMTPS id 0DB961000363
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:18 +0000 (UTC)
 Received: from oym-m2.gw.nic.fujitsu.com (oym-m2.gw.nic.fujitsu.com [10.85.9.162])
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTP id 625A21C0029E
+	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTP id 868A710000EE
 	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 09:07:17 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id B7125BF3C1
-	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 18:07:15 +0900 (JST)
+	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id D62F0BF3C1
+	for <openembedded-devel@lists.openembedded.org>; Mon,  7 Jul 2025 18:07:16 +0900 (JST)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.161.187])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id EDA771A0074;
-	Mon,  7 Jul 2025 17:07:14 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 777871A0078;
+	Mon,  7 Jul 2025 17:07:16 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 19/35] python3-bleak: upgrade 0.22.3 -> 1.0.1
-Date: Mon,  7 Jul 2025 17:06:39 +0800
-Message-ID: <20250707090656.1216-19-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 24/35] python3-mlcommons-loadgen: upgrade 5.0.22 -> 5.1.0
+Date: Mon,  7 Jul 2025 17:06:44 +0800
+Message-ID: <20250707090656.1216-24-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250707090656.1216-1-wangmy@fujitsu.com>
 References: <20250707090656.1216-1-wangmy@fujitsu.com>
@@ -61,32 +61,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 07 Jul 2025 09:07:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118268
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118265
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../python/{python3-bleak_0.22.3.bb => python3-bleak_1.0.1.bb}  | 2 +-
+ ...ons-loadgen_5.0.22.bb => python3-mlcommons-loadgen_5.1.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bleak_0.22.3.bb => python3-bleak_1.0.1.bb} (91%)
+ rename meta-python/recipes-devtools/python3-mlcommons-loadgen/{python3-mlcommons-loadgen_5.0.22.bb => python3-mlcommons-loadgen_5.1.0.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bleak_0.22.3.bb b/meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb
+diff --git a/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_5.0.22.bb b/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_5.1.0.bb
 similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-bleak_0.22.3.bb
-rename to meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb
-index 4c534e1892..f18502c7c4 100644
---- a/meta-python/recipes-devtools/python/python3-bleak_0.22.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/hbldh/bleak"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bcbc2069a86cba1b5e47253679f66ed7"
+rename from meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_5.0.22.bb
+rename to meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_5.1.0.bb
+index 841753625a..abc47172c1 100644
+--- a/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_5.0.22.bb
++++ b/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_5.1.0.bb
+@@ -17,7 +17,7 @@ inherit setuptools3 pypi
+ PYPI_PACKAGE = "mlcommons_loadgen"
+ UPSTREAM_CHECK_PYPI_PACKAGE = "mlcommons_loadgen"
  
--SRCREV = "2e6890f68f6718b4f92e602b9b926aa3d107b556"
-+SRCREV = "bf224c0230ed9096429a21d782b5b4d9d7ab7bd7"
- PYPI_SRC_URI = "git://github.com/hbldh/bleak.git;protocol=https;branch=develop;destsuffix=${S}"
+-SRC_URI[sha256sum] = "debcae3d1f45d774e76d557805d4dbac5ebc4ff7e0fa91a13a8b4d1a5b537d87"
++SRC_URI[sha256sum] = "d7829729a8d5503fa02cd758f39c3ae6f96d743420ee841027cf7addc165890d"
  
- inherit pypi python_poetry_core ptest-python-pytest
+ # Because the pyproject.toml contains invalid requirements.
+ INSANE_SKIP += "pep517-backend"
 -- 
 2.43.0
 
