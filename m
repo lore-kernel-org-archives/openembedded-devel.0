@@ -2,62 +2,62 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C915CC83F10
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE720C83F15
 	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 19:57:38 +0000 (UTC)
 Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com [209.85.208.173])
- by mx.groups.io with SMTP id smtpd.web11.5590.1752004655500071536
+ by mx.groups.io with SMTP id smtpd.web11.5593.1752004658134709154
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jul 2025 12:57:35 -0700
+ Tue, 08 Jul 2025 12:57:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WJ/3a3Xa;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KEeSHNx1;
  spf=pass (domain: gmail.com, ip: 209.85.208.173, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-32f3ef6178bso6918821fa.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 12:57:35 -0700 (PDT)
+Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-32b78b5aa39so45227641fa.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 12:57:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752004653; x=1752609453; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1752004656; x=1752609456; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=PnRe4mECvhvFVBMsCDg+e37WpmUKsFgh/5X/YXZ0WNs=;
-        b=WJ/3a3XaMwpTfjqnmVo5vYMwrk0pMBED0GpDxIIsr3cqvopWoWLjzo3LW1JO7NhqCn
-         tf3EYwc6IyymxyTMIJHJ87d6vnjbH4fqoTCkKB3QKNKrIZtLZNV7OhETRzIUYaEHxtY8
-         GaojLGSzEETL3zvSNQbdIStQmDH8r3VHLrHG9STpZvql37UKNXBZvwMF2reTae9zUOwM
-         oV70WYGrU58WebuvzeiFQMegLD67DWxYvB5Y6so05ZyxmX3w5+DHl6Wj9ejVhwf2mJPE
-         kmlrqd+vHmLSaFaglXXYQuTbNyEVDSvhqr2B9h3mgTLPBI+yigu4gHSkq5QUq86Aat8g
-         GvOA==
+        bh=kLtEmXyN+M04XUHkU12mKECizQf3A2get8NAK6XWR4Y=;
+        b=KEeSHNx1/M8S0+jc4Lgmze65ruSw5jL1Q85FBkxie4mRJ6hxnzCbdGs8Cb4uUODP/a
+         wuc9nqqdBUHOA5Cm4Rmz9Cog/0KAgSHE6vm6JhnVSiRs9B96vxZDg5oXqb3rEXOYS9uP
+         pijfPyeaMTCQ3P4wJcgb0mKgQfn/eiiLYDixcjA6rd8GVOPqeYBaH6A0ZK6Qu6STSDTP
+         hznP4ssapVZOdeJ9r2rYcZJpS7LjeBtHLzTtNjt8TPMoU47TVYtlED8tKM1mbNdREKCq
+         v88XQMbz8VeWp7XJMtDf4ztNpYzxg+361VvjLVhobBPrN3OHOMFt7gUpLx/LD/NMiURF
+         jc7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752004653; x=1752609453;
+        d=1e100.net; s=20230601; t=1752004656; x=1752609456;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=PnRe4mECvhvFVBMsCDg+e37WpmUKsFgh/5X/YXZ0WNs=;
-        b=nZMBxzU/w0VTM+z6FoY4JKBg3QCykrOslNIWpBySQif5/WO2+la9f43hJzHqeD8RIU
-         E+hzBc+v9MLP7YhRbIW4LfOUc3CYw6sz7i631pZL0EilLjDVPpYkrRM4WKl61qvXKUCi
-         4qxDIR+iCA2YujfzCsVdZU84Fjto+b0ee36wgazTnfeyHnrB4jmkmQPoWAyEXvHu4fbu
-         atRNkVtvh09s7BI1wWOovaUexnolS+spT8cIeBU3tEQtq9GvPFewaZZlYyD26gnWGOfq
-         T6LjCoAOKEr99BtHDFb9frqeMkNwFKWTWSwDEYGuxJWT8/3jNJ7RIZOENYqTa1dvajDh
-         y25Q==
-X-Gm-Message-State: AOJu0YyDPe+mwan73x9chvEhKusR0k8dIrOCKWHAC24LM6oKHA/HhrUC
-	Nyz8nP7Ag66gT3HZFNfN8msm6Ifo0v9wm4JbzTPhpf/2uKf+UnXu7wTxZX3RQA==
-X-Gm-Gg: ASbGncta3IMf8zYsOXA1B8QeJYyRQEq9sidEaLyzc0FIvyANaivKsAmedjQNNYRE7hM
-	L32KSQNnFUZZnHwLkfNuEOvpw2Hfrgwd5vxMDF/yeAOJI5ygT38yhpFqoNBZWx1GiKTpVpUI7eO
-	TmvIFjZDfbPWrZ7zVdoWremiqYlKpWPg00370kTH624tbtdEemvAKONJ88U/IZp0BJ5FO8oh/R0
-	KTPuDct584asOWGzLpZfLj15HXxPImgLCQcLIYVIq5iUBpPRs+B9ygdP0TL12Rbjwjk6DH3cWZa
-	TQ6wzIaZz7dsvxLZQgcb1O97xkUwQZRRadn+HPw+85nI1/0wHbwVSCs/b1MsBYG0rsO0mvH8/78
-	Ns5g=
-X-Google-Smtp-Source: AGHT+IEfNgGJ7XcAzsjm6cyaXAPamjyk3rOPW/hBQ291FzyKguNl6mJFBl9jznGqYg7XminFEkoEqg==
-X-Received: by 2002:a05:651c:40c2:b0:32c:a006:2a1d with SMTP id 38308e7fff4ca-32f42d15dcamr1232451fa.4.1752004653009;
-        Tue, 08 Jul 2025 12:57:33 -0700 (PDT)
+        bh=kLtEmXyN+M04XUHkU12mKECizQf3A2get8NAK6XWR4Y=;
+        b=d24JkW/V/V1TxusrWQaT4OtnGZFlJsTB07L+1TSVq94hYmYemt2T5QMHAsjmvxJG5n
+         v071gUKdsU6xn8Iahr+JO9PTmccYJjIeXMU60Be8PLt06VaEpQAF4Az3uESM6/+85wQJ
+         /Z8TY5AP4/ukakzGb4DSWVrF7/IOj/6DaCjanpt93esL/GEVDyRy4wvKyHvLLPex+2G7
+         gFqLCVpQLjZerYnNP4EeZH1V3zGluaQuXhSRyDhXSLSVA4tN9wkkaXsiAMw55pBWzypW
+         YCFOK4YzpkyGA3fMhfOZgtgNlL9j0YT+BhjYUdloTvdr5JD8+dbrk/L3gxoS+D4Lonm0
+         fslQ==
+X-Gm-Message-State: AOJu0YyicBq4kjAyuAeSjgSPwJMNggGbljwjc2v36tHNRIGDOebl86f2
+	f6XOWODGQUIBS31Xck4vFPpUkPYFANmy0Vt1NPLfuC3m4jgI+9DF76Y42F9fFg==
+X-Gm-Gg: ASbGncsyTRXCmUmpgRvUKEXt9UFonxfmkmwcShqzNZg38R+l3Iv5WWZm6d4sNOvJ39h
+	aPv0tkNvIZU3GTx6VcyZxo8BE+ZbYqIYGawbG7pE8KAYQWHeOX4ksXBMn8HsX7Si1VLUei7id4a
+	ed98Hh62zw1OP1GoqFgMHUTTUHcD9CzhjdexnC06YWUMqSpb/FYdAczKDOeqG+9MyLZX+R8caGg
+	p6aknotAxwoT/3pOlR0d5zgPViCBLD9Jx3fAyVqXyIw5wjOgbU7u93nDhKO5hqxLO22JyDoxxlt
+	GblzzCAFPYEWc4KOI7z5D15A0SCI89iojjnwXQIWUYT+Ms6zePztnN7VgKPOrU5pI7sbzPJ/2t8
+	1jOtXqemrzhRmSA==
+X-Google-Smtp-Source: AGHT+IHPLudHpRhizWnWwpr70L7wJWGfGj7eZtLfwqTuav6HvaNOoCV1zDyfx0clSRbUck3O37e9sQ==
+X-Received: by 2002:a05:651c:1502:b0:32b:4749:f929 with SMTP id 38308e7fff4ca-32f092f1d0cmr61685431fa.30.1752004655665;
+        Tue, 08 Jul 2025 12:57:35 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.70.141])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-32e1aff3debsm16003981fa.44.2025.07.08.12.57.31
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-32e1aff3debsm16003981fa.44.2025.07.08.12.57.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Jul 2025 12:57:32 -0700 (PDT)
+        Tue, 08 Jul 2025 12:57:35 -0700 (PDT)
 From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-openembedded][PATCH 05/20] libebml: Add patch for CMake 4+ compatibility
-Date: Tue,  8 Jul 2025 22:56:21 +0300
-Message-ID: <20250708195636.1678606-5-alperyasinak1@gmail.com>
+Subject: [meta-openembedded][PATCH 07/20] wavpack: Upgrade 5.6.0 -> 5.8.1 to allow CMake 4+ compatibility
+Date: Tue,  8 Jul 2025 22:56:23 +0300
+Message-ID: <20250708195636.1678606-7-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250708195636.1678606-1-alperyasinak1@gmail.com>
 References: <20250708195636.1678606-1-alperyasinak1@gmail.com>
@@ -67,7 +67,14 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 19:57:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118327
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118329
+
+- Drop patches becaus already fixed in the newer version.
+- The LICENSE file has changed so updated LIC_FILES_CHKSUM to match the new md5sum.
+
+Changelog:
+
+https://github.com/dbry/WavPack/blob/5.8.1/ChangeLog
 
 Fix:
 
@@ -85,73 +92,36 @@ Fix:
 
 Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- .../0001-allow-build-with-cmake-4.patch       | 40 +++++++++++++++++++
- .../recipes-mkv/libebml/libebml_1.4.5.bb      |  5 ++-
- 2 files changed, 43 insertions(+), 2 deletions(-)
- create mode 100644 meta-multimedia/recipes-mkv/libebml/libebml/0001-allow-build-with-cmake-4.patch
+ .../wavpack/{wavpack_5.6.0.bb => wavpack_5.8.1.bb}    | 11 +++--------
+ 1 file changed, 3 insertions(+), 8 deletions(-)
+ rename meta-oe/recipes-multimedia/wavpack/{wavpack_5.6.0.bb => wavpack_5.8.1.bb} (56%)
 
-diff --git a/meta-multimedia/recipes-mkv/libebml/libebml/0001-allow-build-with-cmake-4.patch b/meta-multimedia/recipes-mkv/libebml/libebml/0001-allow-build-with-cmake-4.patch
-new file mode 100644
-index 0000000000..f62d412ac4
---- /dev/null
-+++ b/meta-multimedia/recipes-mkv/libebml/libebml/0001-allow-build-with-cmake-4.patch
-@@ -0,0 +1,40 @@
-+From b54451a2cc63672284c7768ecf5562214826ea50 Mon Sep 17 00:00:00 2001
-+From: Alper Ak <alperyasinak1@gmail.com>
-+Date: Tue, 8 Jul 2025 17:15:08 +0300
-+Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
-+ compatibility
-+
-+Fix:
-+
-+| CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
-+|   Compatibility with CMake < 3.5 has been removed from CMake.
-+|
-+|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
-+|   to tell CMake that the project requires at least <min> but has been updated
-+|   to work with policies introduced by <max> or earlier.
-+|
-+|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
-+|
-+|
-+| -- Configuring incomplete, errors occurred!
-+
-+Upstream-Status: Backport [https://github.com/Matroska-Org/libebml/commit/cc63f6b3ed2007a3ef04206a26f9ad5a657331bd]
-+
-+Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
-+---
-+ CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index b168a38..a8b789f 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -1,4 +1,4 @@
-+-cmake_minimum_required(VERSION 3.1.2)
-++cmake_minimum_required(VERSION 3.5)
-+ 
-+ project(ebml VERSION 1.4.5)
-+ 
-+-- 
-+2.43.0
-+
-diff --git a/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb b/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
-index 4b439e2ca5..1bc56b788b 100644
---- a/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
-+++ b/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
-@@ -3,9 +3,10 @@ HOMEPAGE = "https://github.com/Matroska-Org/libebml"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb b/meta-oe/recipes-multimedia/wavpack/wavpack_5.8.1.bb
+similarity index 56%
+rename from meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb
+rename to meta-oe/recipes-multimedia/wavpack/wavpack_5.8.1.bb
+index 651fbc4192..63d0db1b67 100644
+--- a/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb
++++ b/meta-oe/recipes-multimedia/wavpack/wavpack_5.8.1.bb
+@@ -1,16 +1,11 @@
+ DESCRIPTION = "WavPack is a completely open audio compression format providing lossless, high-quality lossy, and a unique hybrid compression mode."
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://license.txt;md5=bb5d037e3ad41a3c84c9f2d8bb65a7b4"
++LIC_FILES_CHKSUM = "file://license.txt;md5=3a6eec695493cff01ff6f7b7888c5631"
  
--SRC_URI = "git://github.com/Matroska-Org/libebml.git;branch=v1.x;protocol=https"
--SRCREV = "1878e784321673561039a6a37076b2736f4dc98f"
-+SRC_URI = "git://github.com/Matroska-Org/libebml.git;branch=v1.x;protocol=https \
-+        file://0001-allow-build-with-cmake-4.patch"
+ DEPENDS = "openssl"
  
-+SRCREV = "1878e784321673561039a6a37076b2736f4dc98f"
+-SRC_URI = "git://github.com/dbry/WavPack.git;branch=master;protocol=https \
+-	    file://set-soversion-and-version.patch \
+-	    file://extract-libtool-and-convert-to-soversion.patch \
+-	   "
+-
+-SRCREV = "e03e8e29dc618e08e7baba9636e57ba1254874ce"
+-
++SRC_URI = "git://github.com/dbry/WavPack.git;branch=master;protocol=https"
++SRCREV = "4827b9889665b937b6ed71b9c6c0123152cd7a02"
  
- inherit pkgconfig cmake dos2unix
+ inherit cmake pkgconfig lib_package
  
 -- 
 2.43.0
