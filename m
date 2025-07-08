@@ -2,367 +2,197 @@ Return-Path: <mikko.rapeli@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29B21C83F0F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F5C3C8303C
 	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 10:03:53 +0000 (UTC)
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
- by mx.groups.io with SMTP id smtpd.web11.14972.1751969031584169843
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
+ by mx.groups.io with SMTP id smtpd.web10.14936.1751969024262851325
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jul 2025 03:03:52 -0700
+ Tue, 08 Jul 2025 03:03:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=mOou5QsX;
- spf=pass (domain: linaro.org, ip: 209.85.167.46, mailfrom: mikko.rapeli@linaro.org)
-Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-54d98aa5981so5449696e87.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 03:03:51 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=Z13z0Tpc;
+ spf=pass (domain: linaro.org, ip: 209.85.167.48, mailfrom: mikko.rapeli@linaro.org)
+Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-5551a770828so4134943e87.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 03:03:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1751969029; x=1752573829; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=squekDr7lt1IVmsNB6Xr8oEU0EkN0mHmXglCK9cJR8s=;
-        b=mOou5QsXO0OAN4MILnvKPR+odC78qohehOp9DR3QH125DepSdySnY0oG7s+2dv8+RK
-         elsUnpDYDPOdaiiLpThQ9ePDtHU23UfGzkdYHlddiVSh0o0mNDyyfGnY9vP8bFj8Zix1
-         MlgOBOA8SUTBcsZRAXhb7DS636X5rR5LyevYDM2f3Xc7KV0XM1O1fq5BM/B9AhQuEfit
-         SDZvd51sHb2DyzVImvhw7P0aKGNu5NTDGE/hCi8xU1mUpJKn2+B/8SsfemX7otmD85kU
-         GLkExvw+CkD71TNSb1iWT9HByDobY0mXww+lXco7h0GEa/vtuuRVSn0OiIKxB+DBd424
-         SHVA==
+        d=linaro.org; s=google; t=1751969022; x=1752573822; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=tN2OOp/fAwtmudHmbLUbTurBZYF7mlxHnr29mBAABLM=;
+        b=Z13z0TpcYmNhLWQL8xeCAMzNO9WAfX92dHAX7+Xz14TXaANGvr2RWBlLQc0mOa+xSi
+         PPJUCshRFmHPkxTwSJNwyn9LN66paIcgSIx/kHVCsgUfypWnB1H6qNjT1eNVZz1G5N9w
+         L8iQNc9uy2qsKMMxKzby3nDv4Pw7FrVelw8pOdWExuwrTWjeYx2q+9Gg6r3KhBaaRF9H
+         J25dh2VxGTv2bQACmljU2m08Pndbp9kQKuGlSpWF6bPTri74k+sgTNX2U4kDED9dy41F
+         JCVHVx+KR5X9QunRn+D+wa5zH1q2zIil3GqGkWvmvBAqPNwMlX394E9NN9kzrnl4ytwp
+         TQmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751969029; x=1752573829;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=squekDr7lt1IVmsNB6Xr8oEU0EkN0mHmXglCK9cJR8s=;
-        b=d7+zBv1WYdbIX29uvl3Irdf7Mgra+fIC1M2EO7bfpW+n9hqml3VI49iQTNGlhQ/7Mh
-         fKhhL0QnGzTt+dYXp6REOtAXmSPxWXgsZ1ZYvslbXqid+LfYIeT9FPav69b0+762yVbc
-         cCOxTM8NFrejgEpXv0XSbPrYpqEPGKAh4l7JkF1ISvaQ6vZXyO4OhHycUDAO5ftditoT
-         FyV3Ix0w1olqyjzXJZXFtm9Bx5ftB5IsRXUaA7OzZ1zSD/OG37uLoYGZMcG1xUROAeqH
-         G6wx318UZkr8FsVEQpV+szNySonH0wohSHlNFoNFd/mcfu5ezklCrXZ31SU6vTeB4vy/
-         YK5g==
-X-Gm-Message-State: AOJu0Yz574CGI7xACKYymp8UnxY4Sz+YeU1KXwgFQ6Z/Z3stGtO1zgmt
-	ge61yRgxdIKtyJqkoW1K5rF8bTeS4+XJfJ8Io2qIUe+XPw+KA8L7Gxudd2uHDGgc3cM3C8y5XNt
-	sifis
-X-Gm-Gg: ASbGnct6IktV9wYo7wHOO3KVJS2Fh8UDujPc7EgPqRDq6eEGtqSROrfVg6oKLrU4q1R
-	m+bkO3eRKD9uRIVVigrtIIvrGQS6dlZ9Ohe6j5FTMRKOzdUjPaCfWkqRCSVJHs+/bgXjQ6Fm7F1
-	3FEtD1/eZJy2NWWFBixOppgDxPArM11e/6r9b69MOIljWvEgUwN8aU9oEVSp48qcu82FSXPz75J
-	iO1MqpjapXvZpR8VIMwtNF4dG3gk4n1GBqAfYMy0tVw04+3HWiKCApXavLmCIIOZ7FQWeQ4JB1c
-	b4UEOWSt8YP0EW1CIKN0hMllDhQ/oV7jkFWROFwDfx2yU95a0cknfULN2SxD8j8S6hwRliZWbst
-	ZXe/n9BukJY1qZpYHJg0eOJqAkugGkOAa+ffV5Cw=
-X-Google-Smtp-Source: AGHT+IFl11uly7DoltFN+ofMQNZPJ9cGTgmKoJsytBA74e3L7vZ8tl4YEgReeNaVnVoPyNmzCthOSw==
-X-Received: by 2002:a05:6512:2309:b0:553:ccef:e318 with SMTP id 2adb3069b0e04-557aa680289mr4951641e87.41.1751969029244;
-        Tue, 08 Jul 2025 03:03:49 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1751969022; x=1752573822;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=tN2OOp/fAwtmudHmbLUbTurBZYF7mlxHnr29mBAABLM=;
+        b=agRi2ziz8D0QPTIOlEBcEFjsLYeCqkADy/E13tuxyGhYa6YjNYbeKHfrbJgrhhtuNT
+         AbTUuNN8mz9iDkcOxBkPzL9PbdrdSlppP39JitOSknwl35MidDUZqd8xHgWS4H9/Rm5e
+         h9UeUJOZ7ziWB+H4M5YtUurcsX4x1awMHL5UztxPLBB+Fw8EgFYz/GyRD/8ZsEoEBmhc
+         R0swxQyJOoMWRVR/OoYUMp6+/s2uG0+HW0OUB6I/0FdNEpS/0qS3ojzSSzu5CxDZPrHA
+         c5HfWkt6CxGDz12zad1rHSsJ3NyO2UNHJPdQphkcefeApT0Yw4ErgNIzYyLdt/D+/OQO
+         +f1A==
+X-Gm-Message-State: AOJu0YyKIZyhE2CTg4dF6I9+MjfErnYgo2Fu5Sz8cGSlF1YDmuw9iHgJ
+	G9ZtfWJJWhYTCbvdMm66g3HuQr5K25ULWtPmqUSzTpzg6kC/HyXMxtDqItVo6xjopuW9P0v53uh
+	4Ue7z
+X-Gm-Gg: ASbGncvLgOvqlpWPCVq0d1DjsV9SrFPPPqgPusmL9rZZpisw3kXt9+TYWn1lyKkf0OK
+	1yiUewghlx0Cp7/fgBztEBMVIciy6iFNfoE8rdULmeNLTNbAgaizCNcF4dYnbQqg+leRYS5cI9a
+	Y9WPEcBBLTpIcLGawX5r+/Q+E2WM93T1/NO3VPkmg1WCG3fKeiWIo9pC+jcHbOnuMt+ZVvYZjjJ
+	22cHNlEWmgm/xIY5ohN6cLHXXNQjYThmY/QDUH3ZX3PEgrPWQdtnvqmJMvzouqDscofKOaNaH3O
+	4YDotfU/HHvsooqNy7hxIgHTiPzd89awogYD0SkjVJzb+6KZpGbPtANp/7BOgOx2dE2SQl9Biaq
+	C230dEbNdhWrpkabJlQWXHRCkqTIBI5M+wwxyxX4=
+X-Google-Smtp-Source: AGHT+IEfMaRH0+o8kVwFc2VaMsVuSbXI3Farx3yQTRIsoQssAywQWEhzrwr+srCD6mPeR1T9F8cREA==
+X-Received: by 2002:a05:6512:3e19:b0:553:af02:78db with SMTP id 2adb3069b0e04-557f83021f7mr712070e87.5.1751969022109;
+        Tue, 08 Jul 2025 03:03:42 -0700 (PDT)
 Received: from localhost.localdomain (87-100-218-141.bb.dnainternet.fi. [87.100.218.141])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-556383d9013sm1623585e87.84.2025.07.08.03.03.48
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-556383d9013sm1623585e87.84.2025.07.08.03.03.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Jul 2025 03:03:48 -0700 (PDT)
+        Tue, 08 Jul 2025 03:03:40 -0700 (PDT)
 From: Mikko Rapeli <mikko.rapeli@linaro.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: Mikko Rapeli <mikko.rapeli@linaro.org>
-Subject: [meta-oe][PATCH 3/4] fwupd: update to 2.0.12
-Date: Tue,  8 Jul 2025 13:03:28 +0300
-Message-ID: <20250708100330.138561-3-mikko.rapeli@linaro.org>
+Subject: [meta-oe][PATCH 1/4] fwupd: update from 1.9.25 to 1.9.30
+Date: Tue,  8 Jul 2025 13:03:26 +0300
+Message-ID: <20250708100330.138561-1-mikko.rapeli@linaro.org>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250708100330.138561-1-mikko.rapeli@linaro.org>
-References: <20250708100330.138561-1-mikko.rapeli@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 10:03:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118305
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118303
 
-New major version release which drops many configure
-options, changes from libgusb to libusb etc.
+Changes:
 
-Upstream changelogs:
+https://github.com/fwupd/fwupd/releases/tag/1.9.30
 
-https://github.com/fwupd/fwupd/releases/tag/2.0.0
-https://github.com/fwupd/fwupd/releases/tag/2.0.1
-https://github.com/fwupd/fwupd/releases/tag/2.0.2
-https://github.com/fwupd/fwupd/releases/tag/2.0.3
-https://github.com/fwupd/fwupd/releases/tag/2.0.4
-https://github.com/fwupd/fwupd/releases/tag/2.0.5
-https://github.com/fwupd/fwupd/releases/tag/2.0.6
-https://github.com/fwupd/fwupd/releases/tag/2.0.7
-https://github.com/fwupd/fwupd/releases/tag/2.0.8
-https://github.com/fwupd/fwupd/releases/tag/2.0.9
-https://github.com/fwupd/fwupd/releases/tag/2.0.10
-https://github.com/fwupd/fwupd/releases/tag/2.0.11
-https://github.com/fwupd/fwupd/releases/tag/2.0.12
+This release fixes the following bugs:
 
-Tested with genericarm64 machine on qemu with ptests and
-manually on AMD KV260.
+    Add several devices with broken firmware to the UEFI dbx blocklist
+    Add /sys/firmware/efi/efivars to ReadWritePaths
+    Do not export Redfish backup partitions as devices
+    Do not show messages or prompt for answers in fwupdtool --json mode
+    Fix a crash when installing some Wacom firmware types
+    Fix deploying RMM updates on the Dell Kestrel dock
+    Fix SMBIOS parsing for SPI ROM size >= 16MiB
+    Never allow updating updatable-hidden devices with fwupdtool
+    Recognize a very old dbx hash to allow upgrades to continue
+    Reduce the Dell dock HID timeout, as retries already cover it
+
+https://github.com/fwupd/fwupd/releases/tag/1.9.29
+
+This release adds the following features:
+
+    Prepend the missing capsule header also when using CoD
+    Support cabinet archives greater in size than 2GB
+
+This release fixes the following bugs:
+
+    Do not add a Redfish release date if set to 00:00:00Z
+    Do not add invalid CoSWID entities
+    Fix creating the Redfish user when the ETAG is set
+    Fix dbx deployment by ignoring missing PE/COFF sections
+    Fix writing EFI variables on new kernel versions
+    Include a SHA-256 checksum when using fwupdtool self-sign
+    Include the length in Wacom USB scaler update for future hardware support
+    Increase the timeout for RMM ack when updating Dell Kestrel docks
+    Mark the Redfish progress as finished even if the update never got to 100%
+    Set the Redfish MIME form-data filename correctly
+    Use the metadata version format to set the lowest possible version
+
+This release adds support for the following hardware:
+
+    Lenovo USB-C Dual Display Travel Dock
+
+https://github.com/fwupd/fwupd/releases/tag/1.9.28
+
+Released: 2025-01-28
+
+This release adds the following features:
+
+    Add support for intel-csme19 version format
+
+This release fixes the following bugs:
+
+    Avoid downstream port resets of Parade USB hubs
+    Cleanup Dell dock devices when disconnected
+    Correctly parse PE files with zero sized sections
+    Correctly set the package version of the Dell dock
+    Run the FwupdClient::changed callback in the correct thread
+    Run the UEFI capsule reboot cleanup action when required
+    Split up the AMD GPU VBIOS P/N for the version
+    Use the ISO date as a dbx version number
+
+This release adds support for the following hardware:
+
+    HP 400/405
+    More ELAN fingerprint readers
+
+https://github.com/fwupd/fwupd/releases/tag/1.9.27
+
+This release fixes the following bugs:
+
+    Add a power quirk for Framework systems
+    Allow cros-ec repair the device after flush failure
+    Check the VLI USB3 firmware size before erasing
+    Disallow DBX updates on the Samsung Galaxy Book2 360
+    Do not show 'Device has been removed' as a dock error
+    Do not use a CMSE11 function when using CSME18
+    Fix an unlikely memory leak when using ModemManger Sahara devices
+    Fix a tiny memory leak in algoltek-usb when checking status
+    Mark UEFI dbx updates as affecting full disk encryption
+    Parse FDTs with missing END tokens
+    Rename the dell-k2 plugin to dell-kestrel and rework the update flow
+
+This release adds support for the following hardware:
+
+    Google GID8 Headset
+    Parade PS188
+    Primax Ryder Mouse
+
+https://github.com/fwupd/fwupd/releases/tag/1.9.26
+
+This release fixes the following bugs:
+
+    Add HSI tests for Arrow and Meteor Lake CSME
+    Allow UEFI capsule config values to be set with fwupdmgr modify-config
+    Check for the logitech-bulkcontroller response packet length correctly
+    Fix using ID_LIKE for fallback when ESP isn't mounted
+    Fix various Coverity-reported overflowed constants
+    Only compare the first 10 characters of the AMD GPU part number
+
+This release adds support for the following hardware:
+
+    Jabra PanaCast
+    Some Lenovo Legion HID devices
 
 Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
 ---
- ...certs.py-use-usr-bin-env-for-python3.patch |  28 ++++
- ...-reduce-lzma-compression-level-from-.patch |  47 ++++++
- meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb     | 137 ++++++------------
- 3 files changed, 120 insertions(+), 92 deletions(-)
- create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/0001-build-certs.py-use-usr-bin-env-for-python3.patch
- create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/0001-fu-lzma-common.c-reduce-lzma-compression-level-from-.patch
+ meta-oe/recipes-bsp/fwupd/{fwupd_1.9.25.bb => fwupd_1.9.30.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-bsp/fwupd/{fwupd_1.9.25.bb => fwupd_1.9.30.bb} (98%)
 
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/0001-build-certs.py-use-usr-bin-env-for-python3.patch b/meta-oe/recipes-bsp/fwupd/fwupd/0001-build-certs.py-use-usr-bin-env-for-python3.patch
-new file mode 100644
-index 000000000000..3a4ecb1f29e2
---- /dev/null
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd/0001-build-certs.py-use-usr-bin-env-for-python3.patch
-@@ -0,0 +1,28 @@
-+From 2c3896878ba8118b48c55528c6bac98f05f223f3 Mon Sep 17 00:00:00 2001
-+From: Mikko Rapeli <mikko.rapeli@linaro.org>
-+Date: Thu, 3 Jul 2025 13:34:21 +0000
-+Subject: [PATCH] build-certs.py: use /usr/bin/env for python3
-+
-+Avoids errors if python3 install path is not
-+in /usr/bin.
-+
-+Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
-+---
-+ data/tests/build-certs.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+Upstream-Status: Submitted [https://github.com/fwupd/fwupd/pull/8998]
-+
-+diff --git a/data/tests/build-certs.py b/data/tests/build-certs.py
-+index 3b8503b72bcf..222e8a4a0f8b 100755
-+--- a/data/tests/build-certs.py
-++++ b/data/tests/build-certs.py
-+@@ -1,4 +1,4 @@
-+-#!/usr/bin/python3
-++#!/usr/bin/env python3
-+ # SPDX-License-Identifier: LGPL-2.1+
-+ 
-+ import os
-+-- 
-+2.43.0
-+
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd/0001-fu-lzma-common.c-reduce-lzma-compression-level-from-.patch b/meta-oe/recipes-bsp/fwupd/fwupd/0001-fu-lzma-common.c-reduce-lzma-compression-level-from-.patch
-new file mode 100644
-index 000000000000..b0d3863eaa2e
---- /dev/null
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd/0001-fu-lzma-common.c-reduce-lzma-compression-level-from-.patch
-@@ -0,0 +1,47 @@
-+From c96668ab830d016eeff977d5ca4f99d288cf38c0 Mon Sep 17 00:00:00 2001
-+From: Mikko Rapeli <mikko.rapeli@linaro.org>
-+Date: Tue, 8 Jul 2025 07:05:02 +0000
-+Subject: [PATCH] fu-lzma-common.c: reduce lzma compression level from 9 to
-+ default 6
-+
-+xz manual page says default is 6 and levels higher than that can cause
-+huge CPU and memory usage. On yocto qemu target, the fwupd tests
-+fail to run with compression level 9:
-+
-+FuSelfTest:ERROR:../sources/fwupd-2.0.12/libfwupdplugin/fu-self-test.c:6342:fu_lzma_func: assertion failed (error == NULL): failed to set up LZMA encoder rc=5 (FwupdError, 10)
-+not ok /fwupd/lzma - FuSelfTest:ERROR:../sources/fwupd-2.0.12/libfwupdplugin/fu-self-test.c:6342:fu_lzma_func: assertion failed (error == NULL): failed to set up LZMA encoder rc=5 (FwupdError, 10)
-+
-+With default compression level 6 the tests pass.
-+
-+https://linux.die.net/man/1/xz
-+
-+ -6 ... -9
-+    Excellent compression with medium to high memory usage.
-+    These are also slower than the lower preset levels.
-+    The default is -6. Unless you want to maximize the compression ratio,
-+    you probably don't want a higher preset level than -7 due to
-+    speed and memory usage.
-+
-+Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
-+---
-+ libfwupdplugin/fu-lzma-common.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+Upstream-Status: Submitted [https://github.com/fwupd/fwupd/pull/9019]
-+
-+diff --git a/libfwupdplugin/fu-lzma-common.c b/libfwupdplugin/fu-lzma-common.c
-+index a64ec773da91..d381ed52e135 100644
-+--- a/libfwupdplugin/fu-lzma-common.c
-++++ b/libfwupdplugin/fu-lzma-common.c
-+@@ -89,7 +89,7 @@ fu_lzma_compress_bytes(GBytes *blob, GError **error)
-+ 	strm.next_in = g_bytes_get_data(blob, NULL);
-+ 	strm.avail_in = g_bytes_get_size(blob);
-+ 
-+-	rc = lzma_easy_encoder(&strm, 9, LZMA_CHECK_CRC64);
-++	rc = lzma_easy_encoder(&strm, 6, LZMA_CHECK_CRC64);
-+ 	if (rc != LZMA_OK) {
-+ 		lzma_end(&strm);
-+ 		g_set_error(error,
-+-- 
-+2.43.0
-+
-diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb b/meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb
-index 52d80be05b41..f7a53979ee68 100644
---- a/meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb
-+++ b/meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb
-@@ -2,11 +2,25 @@ SUMMARY = "A simple daemon to allow session software to update firmware"
- LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.9.30.bb
+similarity index 98%
+rename from meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb
+rename to meta-oe/recipes-bsp/fwupd/fwupd_1.9.30.bb
+index a098bf8eea5a..52d80be05b41 100644
+--- a/meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb
++++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.9.30.bb
+@@ -6,7 +6,7 @@ DEPENDS = "glib-2.0 libxmlb json-glib libjcat gcab vala-native python3-jinja2-na
  
--DEPENDS = "glib-2.0 libxmlb json-glib libjcat gcab vala-native python3-jinja2-native"
-+DEPENDS = "\
-+    curl \
-+    gcab \
-+    glib-2.0 \
-+    json-glib \
-+    libjcat \
-+    libusb \
-+    libxmlb \
-+    python3-jinja2-native \
-+    vala-native \
-+"
- 
--SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
--           file://run-ptest"
--SRC_URI[sha256sum] = "a69de9a494a364095cc820faa10a68ec38d31f55eed5388322182048b81d10b3"
-+SRC_URI = "\
-+    https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
-+    file://0001-build-certs.py-use-usr-bin-env-for-python3.patch \
-+    file://0001-fu-lzma-common.c-reduce-lzma-compression-level-from-.patch \
-+    file://run-ptest \
-+"
-+SRC_URI[sha256sum] = "83eab17ef2e65249491aef5e99419827b43ac56d40c5b0747b59ee94b147215e"
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+            file://run-ptest"
+-SRC_URI[sha256sum] = "a1d484778ae87c69b38f417659b33fe3d689373ce0831d1f95617b8aa76e8c37"
++SRC_URI[sha256sum] = "a69de9a494a364095cc820faa10a68ec38d31f55eed5388322182048b81d10b3"
  
  UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
  UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
-@@ -22,113 +36,52 @@ GIDOCGEN_MESON_DISABLE_FLAG = 'disabled'
- GIR_MESON_ENABLE_FLAG = 'enabled'
- GIR_MESON_DISABLE_FLAG = 'disabled'
- 
--PACKAGECONFIG ??= "curl gnutls gudev gusb \
--                   ${@bb.utils.filter('DISTRO_FEATURES', 'bluetooth polkit', d)} \
--                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd offline', '', d)} \
--                   ${@bb.utils.contains('MACHINE_FEATURES', 'efi', 'plugin_uefi_capsule plugin_uefi_pk', '', d)} \
--                   ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
--                   hsi \
--                   plugin_android_boot \
--                   plugin_acpi_phat \
--                   plugin_bcm57xx \
--                   plugin_emmc \
--                   plugin_ep963x \
--                   plugin_fastboot \
--                   plugin_flashrom \
--                   plugin_gpio \
--                   plugin_igsc \
--                   plugin_intel_me \
--                   plugin_intel_spi \
--                   plugin_logitech_bulkcontroller \
--                   plugin_logitech_scribe \
--                   plugin_modem_manager \
--                   plugin_msr \
--                   plugin_nitrokey \
--                   plugin_nvme \
--                   plugin_parade_lspcon \
--                   plugin_pixart_rf \
--                   plugin_realtek_mst \
--                   plugin_redfish \
--                   plugin_synaptics_mst \
--                   plugin_synaptics_rmi \
--                   plugin_scsi \
--                   plugin_uf2 \
--                   plugin_upower \
--                   sqlite"
-+PACKAGECONFIG ??= "\
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-+    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'bluetooth polkit', d)} \
-+    gnutls \
-+    hsi \
-+    plugin_flashrom \
-+    plugin_modem_manager \
-+    protobuf \
-+"
- 
- PACKAGECONFIG[bluetooth] = "-Dbluez=enabled,-Dbluez=disabled"
--PACKAGECONFIG[compat-cli] = "-Dcompat_cli=true,-Dcompat_cli=false"
--PACKAGECONFIG[consolekit] = "-Dconsolekit=enabled,-Dconsolekit=disabled,consolekit"
--PACKAGECONFIG[curl] = "-Dcurl=enabled,-Dcurl=disabled,curl"
- PACKAGECONFIG[firmware-packager] = "-Dfirmware-packager=true,-Dfirmware-packager=false"
- PACKAGECONFIG[fish-completion] = "-Dfish_completion=true,-Dfish_completion=false"
- PACKAGECONFIG[gnutls] = "-Dgnutls=enabled,-Dgnutls=disabled,gnutls"
--PACKAGECONFIG[gudev] = "-Dgudev=enabled,-Dgudev=disabled,libgudev"
--PACKAGECONFIG[gusb] = "-Dgusb=enabled,-Dgusb=disabled,libgusb"
- PACKAGECONFIG[hsi] = "-Dhsi=enabled,-Dhsi=disabled"
- PACKAGECONFIG[libarchive] = "-Dlibarchive=enabled,-Dlibarchive=disabled,libarchive"
-+PACKAGECONFIG[libdrm] = "-Dlibdrm=enabled,-Dlibdrm=disabled,libdrm"
- PACKAGECONFIG[manpages] = "-Dman=true,-Dman=false"
- PACKAGECONFIG[metainfo] = "-Dmetainfo=true,-Dmetainfo=false"
--PACKAGECONFIG[offline] = "-Doffline=enabled,-Doffline=disabled"
- PACKAGECONFIG[polkit] = "-Dpolkit=enabled,-Dpolkit=disabled,polkit"
--PACKAGECONFIG[sqlite] = "-Dsqlite=enabled,-Dsqlite=disabled,sqlite3"
-+PACKAGECONFIG[readline] = "-Dreadline=enabled,-Dreadline=disabled,readline"
- PACKAGECONFIG[systemd] = "-Dsystemd=enabled,-Dsystemd=disabled,systemd"
- PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,gcab-native"
- 
--
- # TODO plugins-all meta-option that expands to all plugin_*?
--PACKAGECONFIG[plugin_acpi_phat] = "-Dplugin_acpi_phat=enabled,-Dplugin_acpi_phat=disabled"
--PACKAGECONFIG[plugin_android_boot] = "-Dplugin_android_boot=enabled,-Dplugin_android_boot=disabled"
--PACKAGECONFIG[plugin_bcm57xx] = "-Dplugin_bcm57xx=enabled,-Dplugin_bcm57xx=disabled"
--PACKAGECONFIG[plugin_cfu] = "-Dplugin_cfu=enabled,-Dplugin_cfu=disabled"
--PACKAGECONFIG[plugin_emmc] = "-Dplugin_emmc=enabled,-Dplugin_emmc=disabled"
--PACKAGECONFIG[plugin_ep963x] = "-Dplugin_ep963x=enabled,-Dplugin_ep963x=disabled"
--PACKAGECONFIG[plugin_fastboot] = "-Dplugin_fastboot=enabled,-Dplugin_fastboot=disabled"
- PACKAGECONFIG[plugin_flashrom] = "-Dplugin_flashrom=enabled,-Dplugin_flashrom=disabled,flashrom"
--PACKAGECONFIG[plugin_gpio] = "-Dplugin_gpio=enabled,-Dplugin_gpio=disabled"
--PACKAGECONFIG[plugin_igsc] = "-Dplugin_igsc=enabled,-Dplugin_igsc=disabled"
--PACKAGECONFIG[plugin_intel_me] = "-Dplugin_intel_me=enabled,-Dplugin_intel_me=disabled"
--PACKAGECONFIG[plugin_intel_spi] = "-Dplugin_intel_spi=true -Dlzma=enabled,-Dplugin_intel_spi=false -Dlzma=disabled,xz"
--PACKAGECONFIG[plugin_logitech_bulkcontroller] = "-Dplugin_logitech_bulkcontroller=enabled,-Dplugin_logitech_bulkcontroller=disabled,protobuf-c-native protobuf-c"
--PACKAGECONFIG[plugin_logitech_scribe] = "-Dplugin_logitech_scribe=enabled,-Dplugin_logitech_scribe=disabled"
-+PACKAGECONFIG[protobuf] = "-Dprotobuf=enabled,-Dprotobuf=disabled,protobuf-c-native protobuf-c"
- PACKAGECONFIG[plugin_modem_manager] = "-Dplugin_modem_manager=enabled,-Dplugin_modem_manager=disabled,libqmi modemmanager"
--PACKAGECONFIG[plugin_msr] = "-Dplugin_msr=enabled,-Dplugin_msr=disabled,cpuid"
--PACKAGECONFIG[plugin_nitrokey] = "-Dplugin_nitrokey=enabled,-Dplugin_nitrokey=disabled"
--PACKAGECONFIG[plugin_nvme] = "-Dplugin_nvme=enabled,-Dplugin_nvme=disabled"
--PACKAGECONFIG[plugin_parade_lspcon] = "-Dplugin_parade_lspcon=enabled,-Dplugin_parade_lspcon=disabled"
--PACKAGECONFIG[plugin_pixart_rf] = "-Dplugin_pixart_rf=enabled,-Dplugin_pixart_rf=disabled"
--PACKAGECONFIG[plugin_powerd] = "-Dplugin_powerd=enabled,-Dplugin_powerd=disabled"
--PACKAGECONFIG[plugin_realtek_mst] = "-Dplugin_realtek_mst=enabled,-Dplugin_realtek_mst=disabled"
--PACKAGECONFIG[plugin_redfish] = "-Dplugin_redfish=enabled,-Dplugin_redfish=disabled"
--PACKAGECONFIG[plugin_scsi] = "-Dplugin_scsi=enabled,-Dplugin_scsi=disabled"
--PACKAGECONFIG[plugin_synaptics_mst] = "-Dplugin_synaptics_mst=enabled,-Dplugin_synaptics_mst=disabled"
--PACKAGECONFIG[plugin_synaptics_rmi] = "-Dplugin_synaptics_rmi=enabled,-Dplugin_synaptics_rmi=disabled"
--PACKAGECONFIG[plugin_tpm] = "-Dplugin_tpm=enabled,-Dplugin_tpm=disabled,tpm2-tss"
--# Turn off the capsule splash as it needs G-I at buildtime, which isn't currently supported
--PACKAGECONFIG[plugin_uefi_capsule] = "-Dplugin_uefi_capsule=enabled -Dplugin_uefi_capsule_splash=false,-Dplugin_uefi_capsule=disabled,efivar fwupd-efi"
--PACKAGECONFIG[plugin_uefi_pk] = "-Dplugin_uefi_pk=enabled,-Dplugin_uefi_pk=disabled"
--PACKAGECONFIG[plugin_uf2] = "-Dplugin_uf2=enabled,-Dplugin_uf2=disabled"
--PACKAGECONFIG[plugin_upower] = "-Dplugin_upower=enabled,-Dplugin_upower=disabled"
--
--# Always disable these plugins on non-x86 platforms as they don't compile or are useless
--DISABLE_NON_X86 = "plugin_intel_me plugin_intel_spi plugin_msr"
--DISABLE_NON_X86:x86 = ""
--DISABLE_NON_X86:x86-64 = ""
--PACKAGECONFIG:remove = "${DISABLE_NON_X86}"
-+PACKAGECONFIG[plugin_uefi_capsule_splash] = "-Dplugin_uefi_capsule_splash=true,-Dplugin_uefi_capsule_splash=false,python3-pygobject"
- 
--FILES:${PN} += "${libdir}/fwupd-plugins-* \
--                ${libdir}/fwupd-${PV} \
--                ${systemd_unitdir} \
--                ${nonarch_libdir}/sysusers.d/fwupd.conf \
--                ${datadir}/fish \
--                ${datadir}/metainfo \
--                ${datadir}/icons \
--                ${datadir}/dbus-1 \
--                ${datadir}/polkit-1 \
--                ${nonarch_libdir}/modules-load.d"
-+FILES:${PN} += "\
-+    ${libdir}/fwupd-plugins-* \
-+    ${libdir}/fwupd-${PV} \
-+    ${systemd_unitdir} \
-+    ${nonarch_libdir}/sysusers.d/fwupd.conf \
-+    ${datadir}/fish \
-+    ${datadir}/metainfo \
-+    ${datadir}/icons \
-+    ${datadir}/dbus-1 \
-+    ${datadir}/polkit-1 \
-+    ${nonarch_libdir}/modules-load.d \
-+"
- 
- FILES:${PN}-ptest += "${libexecdir}/installed-tests/ \
-                       ${datadir}/installed-tests/"
--RDEPENDS:${PN}-ptest += "gnome-desktop-testing"
-+RDEPENDS:${PN}-ptest += "gnome-desktop-testing python3"
- 
- INSANE_SKIP:${PN}-ptest += "buildpaths"
 -- 
 2.43.0
 
