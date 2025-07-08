@@ -1,93 +1,97 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <yishai1999@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29BE5C83F0A
-	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 13:30:04 +0000 (UTC)
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.web10.18819.1751981403220348448
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0CCEC8303C
+	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 14:48:14 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web10.20710.1751986092074078363
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jul 2025 06:30:03 -0700
+ Tue, 08 Jul 2025 07:48:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
-Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
-	by mailout04.t-online.de (Postfix) with SMTP id F0282E41B
-	for <openembedded-devel@lists.openembedded.org>; Tue,  8 Jul 2025 15:30:00 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.164.68]) by fwd81.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1uZ8OV-2fMRSj0; Tue, 8 Jul 2025 15:29:59 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CMNfEOsh;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: yishai1999@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-453066fad06so31624545e9.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 07:48:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1751986089; x=1752590889; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=AwEAkuUjA/J02OEi75cf6OQ52GTx4hAV/7cxN1Eg7D8=;
+        b=CMNfEOsh2wrV6x8WgXSxKJVNHnQdklW7Nsn2UcqFmiz0wej3tWvAIp6NvGeGj0laqR
+         1YuEGVvKCRsrSqn4yquWITkuhlR/AruYe8QWQCNuDdAbVWMgIVPwxB8Pp1Br+wSwz0qF
+         dYVaJ+RcmBtCJkysCNeTbU3zolaDbo40h0KlnMftzmmXqvV6jhY1uKX0gO+RKbo4s+ys
+         KgTPxuIU5UPzFvjWu2YGaJVlT4WY5E+UbDDNKWMuAo8fCXSrzCxI72z3AJ9C1vDyFJRE
+         S5N6hthCqY71vqHpgKOcxOD/0gLpsm9BS6kspUfrJHAAlQZ9v36fy3Ms9v254XPYE7yg
+         i2lA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751986089; x=1752590889;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=AwEAkuUjA/J02OEi75cf6OQ52GTx4hAV/7cxN1Eg7D8=;
+        b=jHSimPEKD0AVcXEbZJRVTfzm9LaiYDdDOJ1n/Qei9h59woBrDk+042HIuB6bMn7HOw
+         kXPBg87ezHMTSNo79r3FvA4jlTSW8oE3pd9750OpHjxwU7HxTmMjKxl5NCnB24hECTF7
+         lLsgwSAOoCbL0Lz0tzGCAZgZ4oOVptPicsmbqsJ/PdUcOVLL1N36cXU6xrZDqodCUnSQ
+         8LKw2JQlsZjBknogndnfNVrNbNxCirgnPi84ZFiCVHOoRsqn5q0lkIdrAogGH7aKu2GY
+         aunYWbOVcmgW8FkFpZ1sG7ch65a8w16kyivjBnJKr1xIQeGwed5TMr5tQbMWCNJE1bHJ
+         GEUg==
+X-Gm-Message-State: AOJu0YxuaCcssEaigG/hSA+lvDLUYmpqMJD8SHxxcveMIs8I98yHtoD2
+	hYgnewdbNIwMNhw8DN6SP1ZutBjdUSRYqLUpF5GxucPBRY2odogvzpyyAtRZaw==
+X-Gm-Gg: ASbGncuUQWAH0qFpg1kuzdDphggyWBPpAO8BMobveGe/CcrEsJaeXhHC5YqMdjcL8ib
+	qoai9k2C3049NqSFThfjdb3M+k4yigURO2uklzbhV5SpU3FX7sdgx5gm4QRCKIBwMs/8hkPTLkU
+	tkJe/RfHyvCIgPkIY7pQrXTW/7S703zhWlVWM4YaSErFQsRxKPg80EWzL6aFJpWv8qxxAG2p58m
+	RRd6p9IfosS1BQcVNGK+k/zEU8sY1r70kzkLuQCnl/2OLSP0UgVfS+m6YwEW4nkOIt5kPWtJd5L
+	LcB/TjQWP+g8vEenEghhvub/7CJpLijtR5jT8+Xer1Iy5gTngsOgyuBDPH7ixn9hvZYcrg==
+X-Google-Smtp-Source: AGHT+IF1kJL/WTuL4wKHT35YQpkktSWFuK5r79Ec0UjcwmXE9nxtlGpLDStD9ZVtbRCLMlIcn1tNZg==
+X-Received: by 2002:a05:600c:1c08:b0:445:1984:2479 with SMTP id 5b1f17b1804b1-454cd4ba879mr33487575e9.5.1751986089207;
+        Tue, 08 Jul 2025 07:48:09 -0700 (PDT)
+Received: from bigboy.CASA.NET ([199.203.94.94])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-454cd49d0e0sm24628085e9.28.2025.07.08.07.48.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Jul 2025 07:48:08 -0700 (PDT)
+From: Yishai Jaffe <yishai1999@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-openembedded][PATCH 1/2] pipewire: update 1.4.5 -> 1.4.6
-Date: Tue,  8 Jul 2025 15:29:52 +0200
-Message-ID: <20250708132953.198453-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.49.0
+Cc: Yishai Jaffe <yishai1999@gmail.com>
+Subject: [meta-oe][PATCH] cpp-argparse: added recipe
+Date: Tue,  8 Jul 2025 17:48:00 +0300
+Message-Id: <20250708144800.286647-1-yishai1999@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1751981399-C17F85F1-D6070203/0/0 CLEAN NORMAL
-X-TOI-MSGID: 80afc8f6-7f05-4edc-b639-0b19fc237554
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 13:30:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118311
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 14:48:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118313
 
-PipeWire 1.4.6 (2025-06-27)
+Added recipe for C++ argparse library
 
-This is a bugfix release that is API and ABI compatible with
-previous 1.x releases.
-
-Highlights
-  - Fix a crasher bug in filter-chain and one in the ALSA plugin.
-  - Improve latency reporting in module-combine-stream.
-  - Some smaller fixes and cleanups.
-
-modules
-  - Improve latency handling in module-combine-stream. (#4731)
-  - Improve save activation/deactivation of the filter-graph in
-    module-filter-chain to avoid crashes. (#4700, #4750)
-  - Add an option to disable RAOP with a context.property.
-
-SPA
-  - Handle NULL io in alsa wakeup code. This can happen when there
-    is negotiation happening. (#4734)
-  - Enable interrupts after an ALSA error to keep the dataflow
-    going.
-  - Reset some stats better after an ALSA error.
-  - Support the alsa.use-ucm property for the ALSA udev plugin.
-
-pulse-server
-  - Mark empty buffers. This improves some code paths in the mixer.
-
-GStreamer
-  - Fix a refcount issue in the device provider.
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Yishai Jaffe <yishai1999@gmail.com>
 ---
- .../pipewire/{pipewire_1.4.5.bb =3D> pipewire_1.4.6.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.4.5.bb =3D=
-> pipewire_1.4.6.bb} (99%)
+ .../cpp-argparse/cpp-argparse_3.2.bb              | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/cpp-argparse/cpp-argparse_3.2.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.5.b=
-b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.6.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.5.bb
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.6.bb
-index e41cfd221c..34415c4444 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.5.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.4.6.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "83ada1e086f8fa49bf9652df2edd9ccee5efa48b"
-+SRCREV =3D "83a155d0c09d703bdc95ed4558277784e9751bd3"
- BRANCH =3D "${@oe.utils.trim_version('${PV}', 2)}"
- SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-${BRANCH};protocol=3Dhttps"
-=20
---=20
-2.49.0
-
+diff --git a/meta-oe/recipes-devtools/cpp-argparse/cpp-argparse_3.2.bb b/meta-oe/recipes-devtools/cpp-argparse/cpp-argparse_3.2.bb
+new file mode 100644
+index 0000000000..5d7965149f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/cpp-argparse/cpp-argparse_3.2.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Argument Parser for Modern C++"
++HOMEPAGE = "https://github.com/p-ranav/argparse"
++BUGTRACKER = "https://github.com/p-ranav/argparse/issues"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=4f3ed9ec2c801700ac8fda1fcd29a330"
++
++SRCREV = "3eda91b2e1ce7d569f84ba295507c4cd8fd96910"
++SRC_URI = "git://github.com/p-ranav/argparse.git;branch=master;protocol=https"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++EXTRA_OECMAKE = "-DARGPARSE_BUILD_TESTS=OFF"
++
++BBCLASSEXTEND = "native nativesdk"
 
