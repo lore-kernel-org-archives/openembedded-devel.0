@@ -1,94 +1,115 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C12AC8303C
-	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 10:52:23 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.web11.15635.1751971940365215406
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1226C83F0A
+	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 11:54:23 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.16591.1751975654995562482
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jul 2025 03:52:20 -0700
+ Tue, 08 Jul 2025 04:54:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m4WDVytR;
- spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-3a528243636so2393808f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 03:52:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751971939; x=1752576739; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Le0eWy2KTxjy1neIZUbJSznAv6V9HyofgxgA38obeyk=;
-        b=m4WDVytRrHufOxuNpP2n9qiH59ekncO3y07/LFMoovz/rR3U1HoR8a9dgWHptUxzR6
-         ld5TPMUheHCrnLveFjep5KBfj9azA3HbFaPwj2w8/ff2RrHnUpSTTsqDHoLgCBvJfK3+
-         1Ejab1f05HYNtmorLme+eGzlAmh+zDOInyLrp9EfApJT4cjSpHV4sdstxWSDbSlpMKCM
-         0mtwTLebpoZ8az4Y+ywgKtZsVkKXrsboVP+Z0OZeHZwbvn2j3TlCKDO0TyLtVapxhGBR
-         kJ+ZPyWUMG+iWD2sBUT6z2Q6MxZtB6mRE0zjUR2sCF10/WPMYFfqWLbNN/i/ayh60/0a
-         qFpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751971939; x=1752576739;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Le0eWy2KTxjy1neIZUbJSznAv6V9HyofgxgA38obeyk=;
-        b=EFhCfV0onGBcmBAYdmoX4+HiOAs+4d7/DfLvI2VRXdnS0+I2CORTQsFmUEVRaHeEUi
-         bY1jdut9+YXYvshqHGiJHvBdz41eB0CZ7SKSBZ+jCg7/kAeW/NnnKyYAirCXGp8ZumuH
-         LQ1hfAW/LBMMRbeKfVBsLvWfLP7u3h1OyWN2NYJBRcyHKMqOVyFmBXx/uwbsorCBComc
-         L2AL75ThULpWaFv0fnYYX4sRgFiTkDQBT+vnFnqP3MaTGd0RFzehCww4A1Fe6mR4/6n9
-         f5ZPLSRx6FSW2Q0EKL26/LRxjMZgmhj+LlOhrYiN0txIVWNjiUf+5sifpKroSgGCVn3W
-         lQmg==
-X-Gm-Message-State: AOJu0YwrfG2+LbnO4VHbAF/rdxpvxjUFa5QkGwZ3KxWfEYny8iEiaUSO
-	cVHpRjJ9C+fkipIHCP9Gf95xij/pMf4MrOOhAdEGuVxVyMnJEIg4KJ56EZivFg==
-X-Gm-Gg: ASbGncsxYfyNGK4VQlHmcXpiHriv60yGXss8+r1smRcL0n0LtJ9Pc+n99IcZwfV7EN/
-	fSgh5IuMFjX1w5zDRDTnGUIjNXKu2hKS6IT9m4Lzi0fFOjV+QM25F+o/wNzdsxLxIAnub9108jD
-	A9iBLfDekrfTBCvxd638iMAND0lYB8gGBnUB3vHKjO6M8cdH05MzRKim2RsHyNRtcmsgwPfo5Px
-	fOLUQ7uQE3PrXi65GkW6PGNFRyst9y/W1ElIM5C6oLGAV5JPJPbUjNy9NRKcW/M24Sg6C5owpym
-	+dzIMAkyte3sBKig7v9k8gW0WFbgHPkBbao+/Tg0wuxDMBdSUJuj92oOcgcfzRxX
-X-Google-Smtp-Source: AGHT+IF8sBZ1MPuy7fQ2cYSWKiPoyv+zstEI1tn5twZTkRBgRlc2uaxxlcFmnC638MMiCq8L532jnA==
-X-Received: by 2002:a05:6000:1887:b0:3a4:e665:ca5 with SMTP id ffacd0b85a97d-3b5dde8bb3bmr2065842f8f.23.1751971938660;
-        Tue, 08 Jul 2025 03:52:18 -0700 (PDT)
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-3b47225985csm12782127f8f.69.2025.07.08.03.52.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Jul 2025 03:52:18 -0700 (PDT)
-From: martin.jansa@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster808@gmail.com>,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][walnascar][PATCH] xmlsec1: fix build with gnutls or openssl PACKAGECONFIG not enabled
-Date: Tue,  8 Jul 2025 12:52:19 +0200
-Message-ID: <20250708105219.478633-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.50.0
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9284bb4a79=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 568AiHZF015323
+	for <openembedded-devel@lists.openembedded.org>; Tue, 8 Jul 2025 04:54:14 -0700
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47q3jn2m60-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 04:54:14 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.57; Tue, 8 Jul 2025 04:53:57 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][walnascar][PATCH 1/1] poppler: upgrade 25.04.0 -> 25.06.0
+Date: Tue, 8 Jul 2025 17:23:52 +0530
+Message-ID: <20250708115352.4153872-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: E1PO5fkEkHyCmRXzoYLB0sFSVoSqKZtV
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzA4MDA5OCBTYWx0ZWRfX9MuzCQwTuGA5 NFIeS/VoNIAYzOHV5srWCfjbPR7gqS9LSSgl+SnDZrHNf4AjZsUkbtVrhAsJJrHNnlvFM1LvvK3 Is6MI7cSXYQWxF7eR7BPhZvaNmHw7vDQnzBTJI89ycuazdAD5CiMV15aMd9egr4ijlnY4e6gBiM
+ 0z/tBXt+nt4AJku91R4OkAncMV/NjG4lIx/QRNAw0elrHhzMTMLP3f7k0lQl7CL1uPZTc/CS8qB rtB8DLlBtBkvdgt2MjclY82qYs7jAO0aP9D95DAno2E65CB/58mT24lL8zmDwUxqLHbWkhNRSZV FyyQstGLx9V5YwF/xgQlA4v6WioBFdLz6iCYYViCkYgqn5CTVHrXSvWcV4r+skeTu0YcQfVZEKE
+ tu09jG0IGH6MNXHi1vPCPBhZcohEl1Z3tivL1k9sw1ciqKBXtAYX+cXU39opzzwxMGNkVls7
+X-Proofpoint-ORIG-GUID: E1PO5fkEkHyCmRXzoYLB0sFSVoSqKZtV
+X-Authority-Analysis: v=2.4 cv=fv3cZE4f c=1 sm=1 tr=0 ts=686d06e6 cx=c_pps a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17 a=HCiNrPZc1L8A:10 a=Wb1JkmetP80A:10 a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8 a=AFn_XR_YslFJA8mfB4oA:9 a=Vxmtnl_E_bksehYqCbjh:22
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
+ definitions=2025-07-08_03,2025-07-07_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ adultscore=0 phishscore=0 mlxlogscore=847 malwarescore=0 bulkscore=0
+ suspectscore=0 priorityscore=1501 mlxscore=0 impostorscore=0 spamscore=0
+ clxscore=1015 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505280000
+ definitions=main-2507080098
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 10:52:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118309
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 11:54:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118310
 
-From: Martin Jansa <martin.jansa@gmail.com>
+From: Yogita Urade <yogita.urade@windriver.com>
 
-the .pc files might not be installed based on the PACKAGECONFIG
-value
+Includes fix for CVE-2025-52886
 
-fixes:
-https://git.openembedded.org/meta-openembedded/commit/?id=cce20b5124e28ee55adf03fe062084f38d065580
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+poppler 25.06.0 changelog:
+==========================
+core:
+ * Fix writing dates back to file
+ * Internal code improvements
+ * Fix crashes in malformed documents
+
+glib:
+ * Add the ink annotation type
+ * Add missing autopointers definitions
+
+utils:
+ * pdfsig: Add assert-signer feature
+ * pdfsig: Return error code on error
+
+poppler 25.05.0 changelog:
+==========================
+core:
+ * Fix re-fetching after xref reconstruction. Issue #1584
+ * Fix compilation with ENABLE_ZLIB_UNCOMPRESS=ON
+ * Various annotation improvements. Issues #642, #1558, #1055
+ * CairoFontEngine: invalidate broken embedded fonts. Issue #1453
+ * Splash: Performance improvements
+ * Internal code improvements
+
+glib:
+ * Small signature improvements
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.7.bb | 2 +-
+ .../poppler/{poppler_25.04.0.bb => poppler_25.06.0.bb}          | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/poppler/{poppler_25.04.0.bb => poppler_25.06.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.7.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.7.bb
-index 0f4ae205b1..3e97bde86c 100644
---- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.7.bb
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.7.bb
-@@ -59,7 +59,7 @@ do_install:append() {
-         ${libdir}/xmlsec1Conf.sh \
-         ${libdir}/pkgconfig/xmlsec1-openssl.pc \
-         ${libdir}/pkgconfig/xmlsec1-gnutls.pc; do
--        sed -i -e "s@${RECIPE_SYSROOT}@@g" ${D}$i
-+        [ -f ${D}$i ] && sed -i -e "s@${RECIPE_SYSROOT}@@g" ${D}$i || true
-     done
- }
+diff --git a/meta-oe/recipes-support/poppler/poppler_25.04.0.bb b/meta-oe/recipes-support/poppler/poppler_25.06.0.bb
+similarity index 96%
+rename from meta-oe/recipes-support/poppler/poppler_25.04.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_25.06.0.bb
+index 1cd5f28cd8..9ab9b926b7 100644
+--- a/meta-oe/recipes-support/poppler/poppler_25.04.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_25.06.0.bb
+@@ -8,7 +8,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://basename-include.patch \
+            file://0001-cmake-Do-not-use-isystem.patch \
+            "
+-SRC_URI[sha256sum] = "b010c596dce127fba88532fd2f1043e55ea30601767952d0f2c0a80e7dc0da3d"
++SRC_URI[sha256sum] = "8199532d38984fab46dbd0020ec9c40f20e928e33e9b4cc6043572603a821d83"
  
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
+ 
+-- 
+2.40.0
+
 
