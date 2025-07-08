@@ -2,62 +2,62 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1473C83F0F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C915CC83F10
 	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 19:57:38 +0000 (UTC)
-Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
- by mx.groups.io with SMTP id smtpd.web11.5591.1752004656719951108
+Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com [209.85.208.173])
+ by mx.groups.io with SMTP id smtpd.web11.5590.1752004655500071536
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jul 2025 12:57:37 -0700
+ Tue, 08 Jul 2025 12:57:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=As8+tel2;
- spf=pass (domain: gmail.com, ip: 209.85.208.179, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-32e14ce168eso43751791fa.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 12:57:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WJ/3a3Xa;
+ spf=pass (domain: gmail.com, ip: 209.85.208.173, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-32f3ef6178bso6918821fa.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 12:57:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752004654; x=1752609454; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1752004653; x=1752609453; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=A4Z2+hqJBWgTw92k454g9fClJ/UHHS6m0GiwMRU13jk=;
-        b=As8+tel2HgbIU22eKDFCIglzmIPLX3tKvazARgH+JUvaboljE4iFGZM7WDycO+jdR4
-         QsIntFY6I7HbyoTbaCxW9ruvfWe/GFqBMCN0mp/tMVSVtRBKnWO81RcVlNd/PyJsUN/t
-         5kJfQuwgBqFURdgUOsh3SkzSrSOrLKQBfcguWIoO6q7h4F/0Uo/v75dj9cTHogew2OXy
-         7jwpJvDdo4e+hjH49a6iOIVKontd0EPn5MVdyiqyC12uGUt/aC+nlBvg/MQKuSrEJ1mh
-         T2JTyuXD/OBC8RBcaEtuWqKIrzrn6Tn4ys9sSRssdz3iT6wlI6aXbNF/wq5Cgb1mgfjv
-         +VgA==
+        bh=PnRe4mECvhvFVBMsCDg+e37WpmUKsFgh/5X/YXZ0WNs=;
+        b=WJ/3a3XaMwpTfjqnmVo5vYMwrk0pMBED0GpDxIIsr3cqvopWoWLjzo3LW1JO7NhqCn
+         tf3EYwc6IyymxyTMIJHJ87d6vnjbH4fqoTCkKB3QKNKrIZtLZNV7OhETRzIUYaEHxtY8
+         GaojLGSzEETL3zvSNQbdIStQmDH8r3VHLrHG9STpZvql37UKNXBZvwMF2reTae9zUOwM
+         oV70WYGrU58WebuvzeiFQMegLD67DWxYvB5Y6so05ZyxmX3w5+DHl6Wj9ejVhwf2mJPE
+         kmlrqd+vHmLSaFaglXXYQuTbNyEVDSvhqr2B9h3mgTLPBI+yigu4gHSkq5QUq86Aat8g
+         GvOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752004654; x=1752609454;
+        d=1e100.net; s=20230601; t=1752004653; x=1752609453;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=A4Z2+hqJBWgTw92k454g9fClJ/UHHS6m0GiwMRU13jk=;
-        b=hvWi/c5u1ehKtEHsqar+gHgdRgNFoxZTAGCv+c1NSYKz7P4L4KUPxUccEvKU1FlVtm
-         9ePJP4TuvCLMuU7a3IfQYVm9a72A/0NYlBy8gK7HskzbPTW36HZycffSfFOinKp7zzJo
-         rFkcuQx9gQK0EtaNyRclN5SPXHTztY0vd+V/Hna7t/mwmZfIIrKR61JIRqlqGZi1laoH
-         gu+pBSO6oyNHaX29g9LpelaCGFZ6MERc9tQF78hDxaluGD08XRDd+4PcZXgUyX4vrw2E
-         pg/K3EEzwVIPFXsNyjjnWIEsmadjw7XsOWHulwPd6sBeGSXyqohRGNfSIxxAjyifu6MV
-         2UVg==
-X-Gm-Message-State: AOJu0Yync64cUiT9pgKKT/Oy62EqLwmpA8x8bP+ioFnBC+XFon26wIvn
-	sW1Qydb/Gza7fYP7ijTuncssioREAGl2x510FbijBo4deBZVKLcekkq3V8WAgg==
-X-Gm-Gg: ASbGncu6af6DdPtViFQIYOLRpEdqujM3+PU70TEdqHJ66cT1vpjYAltpGgK1LNfizIP
-	LwLR3rvNkoCbr1qphnK2UBCpHX03YTJkKNKZfWU3yWyCe4KprOAUNVg4OjTJOARx+Qiw/rXCMq3
-	NH5wCXuDUF8jsl14BRl5dNZQs9qF3axqARCe6m6/m07pAHQzbpipHc8fouGoViAXbjoRLbt6WgN
-	teJmMeO0AQw+TaN0J/hXv1yET5RY50sKCdv2nYe56s2LmjybGww5DtCL7+dne2MwI7ZMsK8PXyN
-	YboEzJ/Eg3rsmW+ghFOCE+Eh7I40S0ZhpMInyVHCDfHW1uG2FIy8zfFJj1/flLiuammrEPHO6/p
-	R4W0=
-X-Google-Smtp-Source: AGHT+IHSUDVat+ga1nS4QMOw629iGErJLjBCg+NbeeoAOE91qdDra0byW3AbCxkVvZGFTMJLby+INg==
-X-Received: by 2002:a05:651c:1108:20b0:32f:45e5:df57 with SMTP id 38308e7fff4ca-32f45e5e10cmr831351fa.20.1752004654267;
-        Tue, 08 Jul 2025 12:57:34 -0700 (PDT)
-Received: from localhost.localdomain ([176.33.70.141])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-32e1aff3debsm16003981fa.44.2025.07.08.12.57.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        bh=PnRe4mECvhvFVBMsCDg+e37WpmUKsFgh/5X/YXZ0WNs=;
+        b=nZMBxzU/w0VTM+z6FoY4JKBg3QCykrOslNIWpBySQif5/WO2+la9f43hJzHqeD8RIU
+         E+hzBc+v9MLP7YhRbIW4LfOUc3CYw6sz7i631pZL0EilLjDVPpYkrRM4WKl61qvXKUCi
+         4qxDIR+iCA2YujfzCsVdZU84Fjto+b0ee36wgazTnfeyHnrB4jmkmQPoWAyEXvHu4fbu
+         atRNkVtvh09s7BI1wWOovaUexnolS+spT8cIeBU3tEQtq9GvPFewaZZlYyD26gnWGOfq
+         T6LjCoAOKEr99BtHDFb9frqeMkNwFKWTWSwDEYGuxJWT8/3jNJ7RIZOENYqTa1dvajDh
+         y25Q==
+X-Gm-Message-State: AOJu0YyDPe+mwan73x9chvEhKusR0k8dIrOCKWHAC24LM6oKHA/HhrUC
+	Nyz8nP7Ag66gT3HZFNfN8msm6Ifo0v9wm4JbzTPhpf/2uKf+UnXu7wTxZX3RQA==
+X-Gm-Gg: ASbGncta3IMf8zYsOXA1B8QeJYyRQEq9sidEaLyzc0FIvyANaivKsAmedjQNNYRE7hM
+	L32KSQNnFUZZnHwLkfNuEOvpw2Hfrgwd5vxMDF/yeAOJI5ygT38yhpFqoNBZWx1GiKTpVpUI7eO
+	TmvIFjZDfbPWrZ7zVdoWremiqYlKpWPg00370kTH624tbtdEemvAKONJ88U/IZp0BJ5FO8oh/R0
+	KTPuDct584asOWGzLpZfLj15HXxPImgLCQcLIYVIq5iUBpPRs+B9ygdP0TL12Rbjwjk6DH3cWZa
+	TQ6wzIaZz7dsvxLZQgcb1O97xkUwQZRRadn+HPw+85nI1/0wHbwVSCs/b1MsBYG0rsO0mvH8/78
+	Ns5g=
+X-Google-Smtp-Source: AGHT+IEfNgGJ7XcAzsjm6cyaXAPamjyk3rOPW/hBQ291FzyKguNl6mJFBl9jznGqYg7XminFEkoEqg==
+X-Received: by 2002:a05:651c:40c2:b0:32c:a006:2a1d with SMTP id 38308e7fff4ca-32f42d15dcamr1232451fa.4.1752004653009;
         Tue, 08 Jul 2025 12:57:33 -0700 (PDT)
+Received: from localhost.localdomain ([176.33.70.141])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-32e1aff3debsm16003981fa.44.2025.07.08.12.57.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Jul 2025 12:57:32 -0700 (PDT)
 From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-openembedded][PATCH 06/20] qhull: Add patch for CMake 4+ compatibility
-Date: Tue,  8 Jul 2025 22:56:22 +0300
-Message-ID: <20250708195636.1678606-6-alperyasinak1@gmail.com>
+Subject: [meta-openembedded][PATCH 05/20] libebml: Add patch for CMake 4+ compatibility
+Date: Tue,  8 Jul 2025 22:56:21 +0300
+Message-ID: <20250708195636.1678606-5-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250708195636.1678606-1-alperyasinak1@gmail.com>
 References: <20250708195636.1678606-1-alperyasinak1@gmail.com>
@@ -67,11 +67,11 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 19:57:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118328
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118327
 
 Fix:
 
-| CMake Error at CMakeLists.txt:71 (cmake_minimum_required):
+| CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
 |   Compatibility with CMake < 3.5 has been removed from CMake.
 |
 |   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -85,26 +85,26 @@ Fix:
 
 Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- .../qhull/0002-allow-build-with-cmake-4.patch | 43 +++++++++++++++++++
- .../recipes-extended/qhull/qhull_2020.2.bb    |  1 +
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-extended/qhull/qhull/0002-allow-build-with-cmake-4.patch
+ .../0001-allow-build-with-cmake-4.patch       | 40 +++++++++++++++++++
+ .../recipes-mkv/libebml/libebml_1.4.5.bb      |  5 ++-
+ 2 files changed, 43 insertions(+), 2 deletions(-)
+ create mode 100644 meta-multimedia/recipes-mkv/libebml/libebml/0001-allow-build-with-cmake-4.patch
 
-diff --git a/meta-oe/recipes-extended/qhull/qhull/0002-allow-build-with-cmake-4.patch b/meta-oe/recipes-extended/qhull/qhull/0002-allow-build-with-cmake-4.patch
+diff --git a/meta-multimedia/recipes-mkv/libebml/libebml/0001-allow-build-with-cmake-4.patch b/meta-multimedia/recipes-mkv/libebml/libebml/0001-allow-build-with-cmake-4.patch
 new file mode 100644
-index 0000000000..5ca865316d
+index 0000000000..f62d412ac4
 --- /dev/null
-+++ b/meta-oe/recipes-extended/qhull/qhull/0002-allow-build-with-cmake-4.patch
-@@ -0,0 +1,43 @@
-+From 26db5aece1220e4142b5b82720123371a9223bc7 Mon Sep 17 00:00:00 2001
++++ b/meta-multimedia/recipes-mkv/libebml/libebml/0001-allow-build-with-cmake-4.patch
+@@ -0,0 +1,40 @@
++From b54451a2cc63672284c7768ecf5562214826ea50 Mon Sep 17 00:00:00 2001
 +From: Alper Ak <alperyasinak1@gmail.com>
-+Date: Tue, 8 Jul 2025 17:44:57 +0300
++Date: Tue, 8 Jul 2025 17:15:08 +0300
 +Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
 + compatibility
 +
 +Fix:
 +
-+| CMake Error at CMakeLists.txt:71 (cmake_minimum_required):
++| CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
 +|   Compatibility with CMake < 3.5 has been removed from CMake.
 +|
 +|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -116,7 +116,7 @@ index 0000000000..5ca865316d
 +|
 +| -- Configuring incomplete, errors occurred!
 +
-+Upstream-Status: Backport [https://github.com/qhull/qhull/commit/62ccc56af071eaa478bef6ed41fd7a55d3bb2d80]
++Upstream-Status: Backport [https://github.com/Matroska-Org/libebml/commit/cc63f6b3ed2007a3ef04206a26f9ad5a657331bd]
 +
 +Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 +---
@@ -124,32 +124,34 @@ index 0000000000..5ca865316d
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index c2248f9..b2303c6 100644
++index b168a38..a8b789f 100644
 +--- a/CMakeLists.txt
 ++++ b/CMakeLists.txt
-+@@ -68,7 +68,7 @@
-+ # $DateTime: 2020/09/03 21:26:22 $$Author: bbarber $
-+ 
-+ project(qhull)
-+-cmake_minimum_required(VERSION 3.0)
++@@ -1,4 +1,4 @@
++-cmake_minimum_required(VERSION 3.1.2)
 ++cmake_minimum_required(VERSION 3.5)
 + 
-+ # Define qhull_VERSION in README.txt, Announce.txt, qh-get.htm, CMakeLists.txt
-+ #   qhull-zip.sh (twice), qhull-wiki.md, qhull-news.htm, File_id.diz, index.htm
++ project(ebml VERSION 1.4.5)
++ 
 +-- 
 +2.43.0
 +
-diff --git a/meta-oe/recipes-extended/qhull/qhull_2020.2.bb b/meta-oe/recipes-extended/qhull/qhull_2020.2.bb
-index 13638c391b..9efadbc7f4 100644
---- a/meta-oe/recipes-extended/qhull/qhull_2020.2.bb
-+++ b/meta-oe/recipes-extended/qhull/qhull_2020.2.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=484ee0cacf0472e8b40225b116f6296c"
+diff --git a/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb b/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
+index 4b439e2ca5..1bc56b788b 100644
+--- a/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
++++ b/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
+@@ -3,9 +3,10 @@ HOMEPAGE = "https://github.com/Matroska-Org/libebml"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
  
- SRC_URI = "http://www.qhull.org/download/qhull-2020-src-8.0.2.tgz \
-     file://0001-Use-LIB_INSTALL_DIR-for-cmake-and-pkgconfig-files-to.patch \
-+    file://0002-allow-build-with-cmake-4.patch \
- "
- SRC_URI[sha256sum] = "b5c2d7eb833278881b952c8a52d20179eab87766b00b865000469a45c1838b7e"
+-SRC_URI = "git://github.com/Matroska-Org/libebml.git;branch=v1.x;protocol=https"
+-SRCREV = "1878e784321673561039a6a37076b2736f4dc98f"
++SRC_URI = "git://github.com/Matroska-Org/libebml.git;branch=v1.x;protocol=https \
++        file://0001-allow-build-with-cmake-4.patch"
+ 
++SRCREV = "1878e784321673561039a6a37076b2736f4dc98f"
+ 
+ inherit pkgconfig cmake dos2unix
  
 -- 
 2.43.0
