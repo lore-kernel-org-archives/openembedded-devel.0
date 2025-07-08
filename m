@@ -1,207 +1,114 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6701CC8303C
-	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 07:21:22 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.13136.1751959276050729484
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7876DC83F0F
+	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 07:33:22 +0000 (UTC)
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web11.13274.1751959998368395249
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jul 2025 00:21:16 -0700
+ Tue, 08 Jul 2025 00:33:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9284fa5eea=changqing.li@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5685dYCU010742
-	for <openembedded-devel@lists.openembedded.org>; Tue, 8 Jul 2025 00:21:15 -0700
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47q3jn2cfn-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 00:21:15 -0700 (PDT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Tue, 8 Jul 2025 00:21:00 -0700
-Received: from pek-lpg-core6.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.57 via Frontend Transport; Tue, 8 Jul 2025 00:20:59 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] libsoup-2.4: fix CVE-2025-4945
-Date: Tue, 8 Jul 2025 15:21:13 +0800
-Message-ID: <20250708072113.4100657-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=mD7SF37F;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.167.47, mailfrom: brgl@bgdev.pl)
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-557e20222c3so2612368e87.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 00:33:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1751959996; x=1752564796; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lGXyQNLz1vf1NeRl6FBkw/8shqnO80oPglUPFgMiQG0=;
+        b=mD7SF37Ftx14Yx9UMQdhDFF7cm/EGHtJ8zFuBgf5R62FCu18rbCFf4O+v+ZDClzoF1
+         XCyBM0fbtTVWxrZi4Pe3EfYRzQAjgVgnoNLvOzK++4nrGlIhlOE06mQK+0NBhud6cL85
+         87Hx01pKcBSonASZOGsAtL1ZwLRX2AOCJy9b/j4j/Xzhr3uGwpXBSHc9JJWz3fJrEc7T
+         26mpCcWvaZIPkljbFN9217oWIeyp7/ECZvxm2xGUIDy5OdxQWUwHhfXM7eaTRmdy6wDF
+         vs3oqQcfEtIXSRFaADqU8Wc8ILCU/tErDh4Ms6a5A7eRKXzYHwDouPuUnkf8QsAfhk2p
+         GRSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751959996; x=1752564796;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lGXyQNLz1vf1NeRl6FBkw/8shqnO80oPglUPFgMiQG0=;
+        b=NUaP3SqK7DPu0UdEfyR4N5xVOIW+eE0ktgeZ0LtOyHLoqWba4jfpgNJCKNmBN5C0C7
+         oAPxIPpu4rAsNAK2RXdzNu/l1pqF75NdM27N0LWwyRI+BAtwYzktfo66eyWY3p88LIKg
+         eHhZvKyaYnM/s8qHZNQ3zgcFd8Ht/jQVd2SIxZIrPpkPrJZw8SmfLhl1zVyzO+gui3xB
+         THNwufKz4gFVlv28BFmJEZGj/yaWamQYBJ4B7ZpYPsCsasgo4oNR9Hwt47SjK1EWnibz
+         SHaw7VDXGs4dZBptCHMogl6n6Ak+9x0prbgdw9LiCGTRfPqXxa3MFlHAK3uJSDa7Ow7W
+         pRoQ==
+X-Forwarded-Encrypted: i=1; AJvYcCV/HykKrsRwNKEG65gcoGw2f9zbm6xb+pwQlosbrKy+nrm8o9GVh4uh7bdPG0UkyppTYYXgXLKvq/6uJRw0XkpWo3Y=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yy3WiyGbphjzcGZKfYydqFq/wxPpwp/UzCLe479gq5dNTOpg6Qj
+	D1Ek7iPbIs6Es4cyb9zoxNeDTjdMXPXsKvYiVMsPkKct+dOgTFJcGUhGQmOjn77+XFfP3mQ6CuX
+	HoPUeQGfTGZUlDaqpwO3Qp2i2dyHM8sQdrzzGnwL8wA==
+X-Gm-Gg: ASbGncuRsgWGxF+DGVa1e4LQbcNH5gc5994jfm9BKeR3IwTgCUVxe+P8SNgdJ8xBo5i
+	vhr8Bubue4JkvEbbbqNF+Im89fneYNb4ZsivPfuvQRnJRhCz9YxMzcldXGi2cSPf1IyIpAeogLc
+	gH0taFArIGTVeaH0ex0kXsIHqHKh1JPvBT9tp417XQx4xh2kGmCqk5G4IE/oIe4MWJHvzfro5t2
+	Zs=
+X-Google-Smtp-Source: AGHT+IELEsWu46qJDVmYSjf4X+5wLY/M4TCwMJJ0NDYsJ0EgEbQ5fevIaz4SQeL49SbXfpibto6xI9EVCMwZE+62qdM=
+X-Received: by 2002:a05:6512:234f:b0:553:aea0:6ee4 with SMTP id
+ 2adb3069b0e04-557f8321876mr776006e87.16.1751959996131; Tue, 08 Jul 2025
+ 00:33:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: zyg3Va0p1grtiRVsrREm-DAFXB3WY4w1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzA4MDA1OSBTYWx0ZWRfXyzinK9V5gvHC 2NbkNA+XDeOio+j4DOr54NrypnPVgO6eynLqgk3SsiTTFJGPRfzoSv5pFByJLx4pN6+NtZpJgt5 IvpxLIgPNZNonBaIt/FlmH3xIy4PSxI5iluGEHff0bB6Q3MvxutB+wKVctTmanZeJbbvL5siV+Y
- nF4P1AKd6eJr29xYo0jnXaB4AfzFXNq7GcekOrj91mq8SqfNrTbfdQwO4LfGYlIE5fHbeWZbyEC 8Jt6Y+RRZmiNHNfoXPD4NpCzX4j4fJgY5uwb4aqBy+V6CUBAbEnSaT58WLFrjrgZWOQ91Lr7HDC 0BEUfvG989wixS1Nvt6blVnR0AR8ofe4kSNQO04KkNrYYjl/4H1Jhxa4L5K1pZo67nSTmKqrvL+
- dixeNSNzIL5rKdQHONsh1anNqgEtFqQVuviNM+ZtqOIQyL6VjJZlpXV4/D5LtHtRNRXkNDOB
-X-Proofpoint-ORIG-GUID: zyg3Va0p1grtiRVsrREm-DAFXB3WY4w1
-X-Authority-Analysis: v=2.4 cv=fv3cZE4f c=1 sm=1 tr=0 ts=686cc6eb cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=Wb1JkmetP80A:10 a=GHR8O2WEAAAA:20 a=t7CeM3EgAAAA:8 a=OpW423ZGpPkB8jfHPfgA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-07-08_02,2025-07-07_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- adultscore=0 phishscore=0 mlxlogscore=954 malwarescore=0 bulkscore=0
- suspectscore=0 priorityscore=1501 mlxscore=0 impostorscore=0 spamscore=0
- clxscore=1015 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.21.0-2505280000
- definitions=main-2507080059
+References: <20250625144522.189693-1-brgl@bgdev.pl>
+In-Reply-To: <20250625144522.189693-1-brgl@bgdev.pl>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Tue, 8 Jul 2025 09:33:05 +0200
+X-Gm-Features: Ac12FXwG-H5k-whXgtSJDeqPYZMM_RDAOqtZgsWVWiIdKHYJemOZDtVNVCjjb18
+Message-ID: <CAMRc=Md=exc9r+cRi+GXV_5DvJAEVXfnMk_0JmbtSCTdnbs12g@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] libgpiod: update to v2.2.2
+To: Khem Raj <raj.khem@gmail.com>, Bruce Ashfield <bruce.ashfield@gmail.com>, 
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 07:21:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118299
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 07:33:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118300
 
-From: Changqing Li <changqing.li@windriver.com>
+On Wed, Jun 25, 2025 at 4:45=E2=80=AFPM Bartosz Golaszewski <brgl@bgdev.pl>=
+ wrote:
+>
+> From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+>
+> This is a bugfix release addressing issues in tools and core library. No
+> API changes.
+>
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> ---
+>  .../libgpiod/{libgpiod_2.2.1.bb =3D> libgpiod_2.2.2.bb}           | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-support/libgpiod/{libgpiod_2.2.1.bb =3D> libgpiod=
+_2.2.2.bb} (98%)
+>
+> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.1.bb b/meta-oe=
+/recipes-support/libgpiod/libgpiod_2.2.2.bb
+> similarity index 98%
+> rename from meta-oe/recipes-support/libgpiod/libgpiod_2.2.1.bb
+> rename to meta-oe/recipes-support/libgpiod/libgpiod_2.2.2.bb
+> index 93c3e3b92d..09b0928dfa 100644
+> --- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.1.bb
+> +++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.2.bb
+> @@ -13,7 +13,7 @@ FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${BPN}-2.x:"
+>
+>  SRC_URI +=3D "file://gpio-manager.init"
+>
+> -SRC_URI[sha256sum] =3D "0e948049c309b87c220fb24ee0d605d7cd5b72f22376e608=
+470903fffa2d4b18"
+> +SRC_URI[sha256sum] =3D "7e3bff0209d75fbca2e9fcff1fd5f07cc58b543e129e08b6=
+d4bb1e4a56cfec0d"
+>
+>  # Enable all project features for ptest
+>  PACKAGECONFIG[tests] =3D " \
+> --
+> 2.48.1
+>
 
-Refer:
-https://gitlab.gnome.org/GNOME/libsoup/-/issues/448
+Hi!
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../libsoup/libsoup-2.4/CVE-2025-4945.patch   | 117 ++++++++++++++++++
- .../libsoup/libsoup-2.4_2.74.3.bb             |   1 +
- 2 files changed, 118 insertions(+)
- create mode 100644 meta-oe/recipes-support/libsoup/libsoup-2.4/CVE-2025-4945.patch
+Gentle ping, as this patch seems to have been lost on the list.
 
-diff --git a/meta-oe/recipes-support/libsoup/libsoup-2.4/CVE-2025-4945.patch b/meta-oe/recipes-support/libsoup/libsoup-2.4/CVE-2025-4945.patch
-new file mode 100644
-index 0000000000..c9fbdbacc8
---- /dev/null
-+++ b/meta-oe/recipes-support/libsoup/libsoup-2.4/CVE-2025-4945.patch
-@@ -0,0 +1,117 @@
-+From 3844026f74a41dd9ccab955899e005995293d246 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Tue, 8 Jul 2025 14:58:30 +0800
-+Subject: [PATCH] soup-date-utils: Add value checks for date/time parsing
-+
-+Reject date/time when it does not represent a valid value.
-+
-+Closes #448
-+
-+CVE: CVE-2025-4945
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/libsoup/-/commit/8988379984e33dcc7d3aa58551db13e48755959f]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ libsoup/soup-date.c  | 21 +++++++++++++++------
-+ tests/cookies-test.c | 10 ++++++++++
-+ 2 files changed, 25 insertions(+), 6 deletions(-)
-+
-+diff --git a/libsoup/soup-date.c b/libsoup/soup-date.c
-+index 9602d1f..4c114c1 100644
-+--- a/libsoup/soup-date.c
-++++ b/libsoup/soup-date.c
-+@@ -284,7 +284,7 @@ parse_day (SoupDate *date, const char **date_string)
-+ 	while (*end == ' ' || *end == '-')
-+ 		end++;
-+ 	*date_string = end;
-+-	return TRUE;
-++	return date->day >= 1 && date->day <= 31;
-+ }
-+ 
-+ static inline gboolean
-+@@ -324,7 +324,7 @@ parse_year (SoupDate *date, const char **date_string)
-+ 	while (*end == ' ' || *end == '-')
-+ 		end++;
-+ 	*date_string = end;
-+-	return TRUE;
-++	return date->year > 0 && date->year < 9999;
-+ }
-+ 
-+ static inline gboolean
-+@@ -348,7 +348,7 @@ parse_time (SoupDate *date, const char **date_string)
-+ 	while (*p == ' ')
-+ 		p++;
-+ 	*date_string = p;
-+-	return TRUE;
-++	return  date->hour >= 0 && date->hour < 24 && date->minute >= 0 && date->minute < 60 && date->second >= 0 && date->second < 60;
-+ }
-+ 
-+ static inline gboolean
-+@@ -361,8 +361,15 @@ parse_timezone (SoupDate *date, const char **date_string)
-+ 		gulong val;
-+ 		int sign = (**date_string == '+') ? -1 : 1;
-+ 		val = strtoul (*date_string + 1, (char **)date_string, 10);
-++		if (val > 9999)
-++			return FALSE;
-+ 		if (**date_string == ':')
-+-			val = 60 * val + strtoul (*date_string + 1, (char **)date_string, 10);
-++		{
-++			gulong val2 = strtoul (*date_string + 1, (char **)date_string, 10);
-++			if (val > 99 || val2 > 99)
-++				return FALSE;
-++			val = 60 * val + val2;
-++		}
-+ 		else
-+ 			val =  60 * (val / 100) + (val % 100);
-+ 		date->offset = sign * val;
-+@@ -407,7 +414,8 @@ parse_textual_date (SoupDate *date, const char *date_string)
-+ 		if (!parse_month (date, &date_string) ||
-+ 		    !parse_day (date, &date_string) ||
-+ 		    !parse_time (date, &date_string) ||
-+-		    !parse_year (date, &date_string))
-++		    !parse_year (date, &date_string) ||
-++		    !g_date_valid_dmy(date->day, date->month, date->year))
-+ 			return FALSE;
-+ 
-+ 		/* There shouldn't be a timezone, but check anyway */
-+@@ -419,7 +427,8 @@ parse_textual_date (SoupDate *date, const char *date_string)
-+ 		if (!parse_day (date, &date_string) ||
-+ 		    !parse_month (date, &date_string) ||
-+ 		    !parse_year (date, &date_string) ||
-+-		    !parse_time (date, &date_string))
-++		    !parse_time (date, &date_string) ||
-++		    !g_date_valid_dmy(date->day, date->month, date->year))
-+ 			return FALSE;
-+ 
-+ 		/* This time there *should* be a timezone, but we
-+diff --git a/tests/cookies-test.c b/tests/cookies-test.c
-+index 2e2a54f..6035a86 100644
-+--- a/tests/cookies-test.c
-++++ b/tests/cookies-test.c
-+@@ -413,6 +413,15 @@ do_remove_feature_test (void)
-+ 	soup_uri_free (uri);
-+ }
-+ 
-++static void
-++do_cookies_parsing_int32_overflow (void)
-++{
-++	SoupCookie *cookie = soup_cookie_parse ("Age=1;expires=3Mar9    999:9:9+ 999999999-age=main=gne=", NULL);
-++	g_assert_nonnull (cookie);
-++	g_assert_null (soup_cookie_get_expires (cookie));
-++	soup_cookie_free (cookie);
-++}
-++
-+ int
-+ main (int argc, char **argv)
-+ {
-+@@ -434,6 +443,7 @@ main (int argc, char **argv)
-+ 	g_test_add_func ("/cookies/accept-policy-subdomains", do_cookies_subdomain_policy_test);
-+ 	g_test_add_func ("/cookies/parsing", do_cookies_parsing_test);
-+ 	g_test_add_func ("/cookies/parsing/no-path-null-origin", do_cookies_parsing_nopath_nullorigin);
-++	g_test_add_func ("/cookies/parsing/int32-overflow", do_cookies_parsing_int32_overflow);
-+ 	g_test_add_func ("/cookies/get-cookies/empty-host", do_get_cookies_empty_host_test);
-+ 	g_test_add_func ("/cookies/remove-feature", do_remove_feature_test);
-+ 	g_test_add_func ("/cookies/secure-cookies", do_cookies_strict_secure_test);
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-support/libsoup/libsoup-2.4_2.74.3.bb b/meta-oe/recipes-support/libsoup/libsoup-2.4_2.74.3.bb
-index cbc886a2cb..68ec576d9b 100644
---- a/meta-oe/recipes-support/libsoup/libsoup-2.4_2.74.3.bb
-+++ b/meta-oe/recipes-support/libsoup/libsoup-2.4_2.74.3.bb
-@@ -39,6 +39,7 @@ SRC_URI = "${GNOME_MIRROR}/libsoup/${SHRT_VER}/libsoup-${PV}.tar.xz \
-            file://CVE-2025-32907.patch \
-            file://CVE-2025-4948.patch \
-            file://CVE-2025-4969.patch \
-+           file://CVE-2025-4945.patch \
- "
- SRC_URI[sha256sum] = "e4b77c41cfc4c8c5a035fcdc320c7bc6cfb75ef7c5a034153df1413fa1d92f13"
- 
--- 
-2.34.1
-
+Bart
 
