@@ -1,95 +1,122 @@
-Return-Path: <yishai1999@gmail.com>
+Return-Path: <hiagofranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFB3EC83F09
-	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 17:17:07 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.web11.1947.1751995022849202283
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05D8CC83F0A
+	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 17:21:08 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web11.2031.1751995262904804660
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jul 2025 10:17:03 -0700
+ Tue, 08 Jul 2025 10:21:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Xw3zJXw/;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: yishai1999@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-3a6f2c6715fso4140348f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 10:17:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SYjHKHol;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: hiagofranco@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-234c5b57557so43443945ad.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 10:21:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751995020; x=1752599820; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=tl19cYCX9h/hPh1bd+Ei8qcZHOmgY7sY3xpYLc6DlUU=;
-        b=Xw3zJXw/U2iShENnRe8pa5R2MezMtSEFTdq4SG/eL3vH/eHT6nqoly4z3tpaid/N5C
-         wARnvPad5LlnCtc6hsEayJOrIl8SVB8kOyqAAS240gtOf4lFw17aXBJ5IP5zgkLAT8Uc
-         fX7PB857WA5EF6FbFqO7eR0ZxPJhRll+GvlL79gSPcHUetcgNbT0MhACmTcNpbUqDfYC
-         hT77HZDqzHH4wgiDWjVJGhnEHaPyLE0g6jmVJGKg0nYe5Apo4tv9owIVio5M2RKqw4+y
-         KtwENgkgKb4yxazs4vKX3QEMLOpd5eblhxrdF2wPoVQiSC5lmMeUXMWx1yYNGvlVhL2V
-         H25g==
+        d=gmail.com; s=20230601; t=1751995262; x=1752600062; darn=lists.openembedded.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=zH+zQ7Q1krGnGE0BWbadtlGM4IJ1Fz2qFW+7cXc2OpQ=;
+        b=SYjHKHolz4mjCcXxEysRdZzro+CFXjkVYN2G7RxgLUjHj54FrVcxp/91W2lWUr6pc5
+         XaSqWwVFfxr2fVyv/8vGZG2KMQPatEwhWUmffu0psXL3erwKBGg2Rne+iBBZaul3ZRAP
+         yLrlA6+jZ88osCR/fd5POLeWlFbu26dj37ujE34wx9LDJd2IS+Wae5ZwcLwSAcsz6hsM
+         4cygD3Ej7ygVFzc2gZ9SY/0dLxWH9MXeVUN4j9WlvUPHA8mszuBVVas3FCe2dSGXf2L6
+         IHcMOPZOHpQIo5gGArcm3K0I2djVsZ+79/oZDVNxfen3j8lkhZP5L8Bt/hkE6QyNUz9d
+         Xkpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751995020; x=1752599820;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=tl19cYCX9h/hPh1bd+Ei8qcZHOmgY7sY3xpYLc6DlUU=;
-        b=IFlu9WIfGR0i1wHTcC9pTL4y8Kqbdg7sVgGl9Zg1wJnBKbSajlYmE3lnLV52LtLDXa
-         jqGeAS+jwmHE8+1FQNkCsbyMMxF5SW2BWNG3qQURltQtghlnxrc/Wk8pBTZqTfZ9QjEv
-         513fGk6zSv6ZaoPODYiAmdXRTGzkPaPU6BXCIQ4KlryVAK1P4GH29iHXvlh79kFc7dXu
-         bqHE7Zn6jBxG5mIddjKOLySPBRDIGQnPlIwcKabhpFClc64xhpHN+WaGstcpge4GlL0z
-         SIizxrDwwXgSzPhgcf8VjTvNxIE9AvNL8Ml9PI2yO+OyBbtOq3d3IlVGSLZrtt6Lq8y/
-         2xVw==
-X-Gm-Message-State: AOJu0YwpP7RDI8+p7/Hydyc/igSnTz5Cl8SAbidm6luBWQ2NbRJwqHRC
-	SLPDQgWyyQ3bgpFVs6O1SQWoQ6BmRXU+0bLvqyXLBKU6Yr/KMLgBHStYi9YY4Q==
-X-Gm-Gg: ASbGncuz8hI1NeEAw8oCOe0H2jFDS1RJo/AJ4O5salgqOdAfvbzOaPBsuAljlTzgfvx
-	h10VdY0KgY9cBs3HjwLnFEhaxdmUrO6iv0aFaPeDFcwMijIlLiWs2RuIFRgFP7MiDvCvEO4/xv/
-	FuQI/Ezzi+MleYjxRrJFgC1l+zYgHopB7dhUC/AHm2BQaRgJjyevuREIBMibnrGczugp13e7BA9
-	saELrI0kpi2ODkhLEKvs9hGZ1i0yzm/wnajjmUlMSi9LeGApyV0i7S0atlwZ3bWA7MpowFthGtr
-	8WmZV8TATSGJesMJhK2KPyQ7jNR8X2rXzgJgPQsaQEe8lNbYKS/OWgvAs2729hhavrvy7g==
-X-Google-Smtp-Source: AGHT+IF70twwQIbSTDVTGVaqwoUVqw8sJtUXMA/UUU9MUg+ESqS9of0R22d7d9if3V+oqojseIG60A==
-X-Received: by 2002:a05:6000:4022:b0:3a5:27ba:47c7 with SMTP id ffacd0b85a97d-3b49702ea79mr16346114f8f.48.1751995019781;
-        Tue, 08 Jul 2025 10:16:59 -0700 (PDT)
-Received: from bigboy.CASA.NET ([199.203.94.94])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3b47285c6c9sm13342132f8f.89.2025.07.08.10.16.58
+        d=1e100.net; s=20230601; t=1751995262; x=1752600062;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zH+zQ7Q1krGnGE0BWbadtlGM4IJ1Fz2qFW+7cXc2OpQ=;
+        b=o/5XiQ4ovyps1sigHcobKpnLb1vrn44kjwJ4jkIEccRGfEV7qPMQ3hyI2RX6IqasoX
+         +tP66kGJC7OhN5KOw8xoxDUuxXUicwSt1jhtDAdUA4e8Qg7UuNPXcwoGs5WBG80S91Sq
+         Blhwf8XjpUDCqwOdYg0qMllPsgPzZDDMqhPzNcxHCBMLe589NkG0sePpJDDmZ8KWo/TK
+         WTx6uwSRsF8D6fsQQMWnH6JNFm6DjKWTi7MB6FEgS8BEdWigpNtiiO0UefN0cW5faeU0
+         83FLdZKgJVRDXQFD4bxJNEJQxqtAVObrCtQ1ox54pM6kC3P40bXyfQFe8WX92GlA2EQJ
+         OQqQ==
+X-Gm-Message-State: AOJu0YxGIVINf4lIpaFbhqS4Ti9sgyF5imJ8zoErRt5hmoE1GCpzpVeX
+	E8GwLkM3jEou1ypyR0mGnmWiJ9nA8aa2CMijHVpYVqEEOvFFyPa5XVQF
+X-Gm-Gg: ASbGncvCWVPZUShppJHBQDsXYRN0pcKUoWtxshxzqcnGsGUXKpEN74gGxos4K1oh2dy
+	oASsYCSrRN74HRf5B/xo+Y5RuMgjfHtGMhgQKBciNh3YlBmlQC0zpN5UTRtNXTVyNib9oqhmoBt
+	+LYLv8woGDr0z0Radt9yCcNXDIa14VX/T6wRQS/FEvPpeplEFhAiyjrFim6Ked/jAG+9H8RM5TA
+	pByLGqjEXxT7ii365kLiznX/NMoetEZR/l9IN+HRMGs+K4noPwmPEbxMzmfwZzsKzmNKGX3Me5z
+	pYvsLG3+4AOdpvMfJHY/KtOPsHCdv2RR7ExdT715V/tDhFiRT2qjpZNRLUA=
+X-Google-Smtp-Source: AGHT+IEtrAykeGE0mdw7ejQyKkCUn0mrExXuvs8hiIlbDi59JJf66wvU0ucVgHz5l0rs4is6UdFoRA==
+X-Received: by 2002:a17:903:124d:b0:235:f143:9b16 with SMTP id d9443c01a7336-23c85eacab9mr306764695ad.41.1751995262211;
+        Tue, 08 Jul 2025 10:21:02 -0700 (PDT)
+Received: from hiagonb ([67.159.246.222])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23c845b740fsm116408505ad.232.2025.07.08.10.21.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Jul 2025 10:16:58 -0700 (PDT)
-From: Yishai Jaffe <yishai1999@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Yishai Jaffe <yishai1999@gmail.com>
-Subject: [meta-oe][PATCH] cpp-argparse: added recipe
-Date: Tue,  8 Jul 2025 20:16:47 +0300
-Message-Id: <20250708171647.2706820-1-yishai1999@gmail.com>
-X-Mailer: git-send-email 2.34.1
+        Tue, 08 Jul 2025 10:21:01 -0700 (PDT)
+Date: Tue, 8 Jul 2025 14:20:58 -0300
+From: Hiago De Franco <hiagofranco@gmail.com>
+To: martin.jansa@gmail.com
+Cc: openembedded-devel@lists.openembedded.org,
+	Hiago De Franco <hiago.franco@toradex.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/2] gpicview: enable gtk3 PACKAGECONFIG
+ only when gtk+3 is available
+Message-ID: <20250708172058.xa73kq2wf7nbhuyf@hiagonb>
+References: <20250708105155.478279-1-martin.jansa@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250708105155.478279-1-martin.jansa@gmail.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 17:17:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118320
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 17:21:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118321
 
-Added recipe for C++ argparse library
+Hi Martin,
 
-Signed-off-by: Yishai Jaffe <yishai1999@gmail.com>
----
- .../cpp-argparse/cpp-argparse_3.2.bb                | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/cpp-argparse/cpp-argparse_3.2.bb
+On Tue, Jul 08, 2025 at 12:51:53PM +0200, Martin Jansa via lists.openembedded.org wrote:
+> From: Martin Jansa <martin.jansa@gmail.com>
+> 
+> Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+> ---
+>  meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb b/meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb
+> index dab11a02bc..ace909fcf1 100644
+> --- a/meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb
+> +++ b/meta-oe/recipes-graphics/gpicview/gpicview_0.3.1.bb
+> @@ -15,7 +15,7 @@ SRCREV = "ca13623c6176585db4759ce4371fbf89c56fa630"
+>  
+>  inherit autotools mime-xdg pkgconfig
+>  
+> -PACKAGECONFIG ?= "gtk3"
+> +PACKAGECONFIG ?= "${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk3', '', d)}"
 
-diff --git a/meta-oe/recipes-devtools/cpp-argparse/cpp-argparse_3.2.bb b/meta-oe/recipes-devtools/cpp-argparse/cpp-argparse_3.2.bb
-new file mode 100644
-index 0000000000..cb7ae45d38
---- /dev/null
-+++ b/meta-oe/recipes-devtools/cpp-argparse/cpp-argparse_3.2.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "Argument Parser for Modern C++"
-+HOMEPAGE = "https://github.com/p-ranav/argparse"
-+BUGTRACKER = "https://github.com/p-ranav/argparse/issues"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4f3ed9ec2c801700ac8fda1fcd29a330"
-+
-+SRCREV = "3eda91b2e1ce7d569f84ba295507c4cd8fd96910"
-+SRC_URI = "git://github.com/p-ranav/argparse.git;branch=master;protocol=https;tag=v${PV}"
-+
-+inherit cmake
-+EXTRA_OECMAKE = "-DARGPARSE_BUILD_TESTS=OFF"
-+
-+BBCLASSEXTEND = "native nativesdk"
+Thanks for the patch. In this case, shouldn't we add gtk+ if gtk3 is not
+set? If PACKAGECONFIG is empty, then the compilation will fail:
+
+| configure: WARNING: using cross tools not prefixed with host triplet
+| checking pkg-config is at least version 0.9.0... yes
+| checking for gtk+-2.0 >= 2.12.0... no
+| configure: error: Package requirements (gtk+-2.0 >= 2.12.0) were not met:
+| 
+| No package 'gtk+-2.0' found
+
+Or maybe add gtk+ as dependency and keep the gtk+3 only on the
+PACKAGECONFIG?
+
+Best Regards,
+Hiago.
+
+>  PACKAGECONFIG[gtk2] = ",,gtk+"
+>  PACKAGECONFIG[gtk3] = "--enable-gtk3,,gtk+3"
+>  
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#118307): https://lists.openembedded.org/g/openembedded-devel/message/118307
+> Mute This Topic: https://lists.openembedded.org/mt/114043964/9076898
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [hiagofranco@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+
 
