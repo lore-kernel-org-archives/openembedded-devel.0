@@ -2,62 +2,62 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E4F9C83F1A
-	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 19:57:49 +0000 (UTC)
-Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
- by mx.groups.io with SMTP id smtpd.web10.5756.1752004668500914620
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 296F5C83F10
+	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 19:57:59 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web10.5759.1752004674679614697
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jul 2025 12:57:48 -0700
+ Tue, 08 Jul 2025 12:57:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ns7Dfd6O;
- spf=pass (domain: gmail.com, ip: 209.85.208.179, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-32ac42bb4e4so39283841fa.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 12:57:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gGZCRkvG;
+ spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-553b584ac96so4667595e87.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 12:57:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752004666; x=1752609466; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1752004672; x=1752609472; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=r/yM9UrERi9oRjJ8N7WfrYvk/OMan8ahq6GaSsmMRYo=;
-        b=Ns7Dfd6O2q07Wlr36bL2iBPhmF4zZNGRDCVBF5uKh1zisXvNLHXeTq4H8a13uZR/89
-         1+k9OTlOBxAQImZg72sXWlVBRj05EHwjcVEn5tXUYFGXX5hM+0ovWrXR9mjZ/ypbeFh2
-         0Lz/VJjUZ2gYIZjMq1DybNJgukkZs5L2A3F0hRDzDEe4TOkN2QLXUV2KpmItnp8Tmsai
-         7wE2jz21UwaOVnfjxkojc20WV7EkjAOS64P5Co+7CLjsDgz9r8BimzscMDKGrdxK5QZj
-         gTld0eYUi1+ZaW7EpTFRDc5i/QtuU8Gxb2IYwJRF0T17qpCbHKWQm3k4Rt80Q2kYygVZ
-         Ixvw==
+        bh=WQP9iOrdXEAPKkJhoH9KkkIiZFgjF7FuGzblMJG151o=;
+        b=gGZCRkvGhvYUXhufXGJGjyJy+A9ibDxzxG7PuIVwtGv27C427bvj/xQdoABSItmxF5
+         kBB4iuuN2tKmsh8ouN+x6P6QqKJWDePWmI3/S/ck2ROUi/Pqo331rkHLW99StbNIiuEG
+         uI+9i2kC/6SKTj+5G5xSkUM1zvrP2Vb3tyDzuOMG+7jbZhiUAXmph9Deot/7s7f6Uvq4
+         rwOdyDqkE69D7rcURxRBjHiz/TIcGS6BcR5f4Jrn0eTmYAs8M4jXTv32tBEvxqJnY6+l
+         MGlIZY1+IRpEciGlLvd1DlhtKqySgO2e5G2hfoyyyyFi5Ti367VMqxqmd0OvQDSWjlrn
+         ZPpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752004666; x=1752609466;
+        d=1e100.net; s=20230601; t=1752004672; x=1752609472;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=r/yM9UrERi9oRjJ8N7WfrYvk/OMan8ahq6GaSsmMRYo=;
-        b=lJ3viv3Em5OmFLGALPT6DAJuER4XIBPzUOC5h8I+oMK0I35XbU3gzl4ndC0Vc5TtZY
-         kFOYceA12I8Z3Fr0a4n6Sf55PUlbxl7Np+5xqrIH0eOThqCaWMCxacU0V2EKULoOmdLk
-         jnlMPCnQ0+lYcD0WmBxMw8eXT8F1TLdC+DDiOupZ9sPaAMjrkTVAG4+t0yDrTMwyJVDb
-         CS/ni8Ucqmyqbkn2Sd+c6MSwvNLk5bz6Zn1E7leFudFy43OJPUjv5xp0oJF128aiV/D+
-         FmBHvMEHqRKYJqQ/awnMLZKiXL3w3RQ5yiUJsZTEH1AcZ0fU6EtI/SyQUX1DmmJh7TnT
-         e4YA==
-X-Gm-Message-State: AOJu0Yzd24L9yXDNlzKt0G9ObwTKCgVMGbeKad9bOIN2XNsUFnOhHfLk
-	9GDfX1NzMSqrVkPfX/XGbjRMkOlfLaxlXHkMkl0ZUuJhwiVKz2hE8EMEaSWAvw==
-X-Gm-Gg: ASbGncs9VimTzQa4lFk5e9a8N4s+Do53ug756Zw7Eqy1LcYqEBV1oT2eb3Rz0OpcThy
-	IOJdqvhDQcNQjmHIMIrFwmv2Nw6IQ2QIFguZYT71gfo7UIyKUnbznoZNAUJ2c0J7FoAcmQ70shG
-	a77s6t3KjJ0M1GMktKcnqdn+TJLJAwG2Idrsj0aW66Hb0NNEKjOVf4IjWZap89Ga5AiP/BM/Gy8
-	R6VuOlgDE9YDkK8Maoy1SVGdAUyruWsQkj/t+LNYIhaXlhQAbkh4yhNMCq23d9iZHCJYP2sGM5Z
-	w/+QtWzyG+OjuzISwjvS+IHDNbmgr4FKaviQRgUUI2ker3SvN+YMk9k5fmhZCmvxKIJKdHr6VLK
-	ZBCk=
-X-Google-Smtp-Source: AGHT+IHDiJ+e2PbhDCJA1jakA408MWG7xHW7hsZQRuqYv94+Rbw8Q1z7IjuS8pVwfzNYjgvkVCN7ZQ==
-X-Received: by 2002:a2e:bea5:0:b0:32b:8045:7264 with SMTP id 38308e7fff4ca-32f00cb64a9mr53333801fa.12.1752004666065;
-        Tue, 08 Jul 2025 12:57:46 -0700 (PDT)
+        bh=WQP9iOrdXEAPKkJhoH9KkkIiZFgjF7FuGzblMJG151o=;
+        b=X2OTplOpGH+IMjKNGii6wzZukUOV40EvQlJc/vsAys9kS6Lurx+5rsfsm0G6v2v36R
+         gwpLfTjbFQUqv7GK/u6aCLYIeTokPqXRXmcT5IlxU3w0Ghk2EFkBCehF5ih9hpRMs2N4
+         OJrqrdAuPpql/Hl32of7oWxh0y0nxpOPiCF+ggVm6uqqz20VlshjeMipeSGNfQTI38hm
+         PYdmngyQhBFeuP86M0TLkS23ldN6IaF5PaQUfMO4g2PQ+q/OF99pSF0XEc8Zw8YYrmEf
+         3xuywaVUMs6kQWjVaGjAHd4XNabWqZONxagNZToyPXjvnXjVG+nzueoOkj5PpGqIvkit
+         TzlA==
+X-Gm-Message-State: AOJu0YzBWuvqNvRwK13qTSKba/n/CuM8Kh/ZuxmRPweKozMGCoTb0dv4
+	lo3kwlHzhQD0XiklznBlki0GBUfE+X2at7IELWRRP4Ntd/OLJNMX/N2xutix6Q==
+X-Gm-Gg: ASbGncs8As9+hFTBZ4tkmas4K1XIHQ3s5mjr57iL1Hb7WEI3fLiVasDWM0oRnWXuSFI
+	3GFb83AdrkjyWyCvpW6/H2vMyb0JW5vWt6jT73x8OnFBb22DP9iS4jIObQgyxqzun2jEe14p0bj
+	ihoicWFSIf9MHzCKeP/pgE2RISVWC9NP+UDD+R8vYUUkEyaPeEJUgg38rsb5Y26k+7qs0F7qc3D
+	Yevf14C8VKDc/P1AsIvsLLiG7eUdQjtq1Z37oC3sJfijzi+2aDp1eCSnOVOXvCr23/J5YB4JmNS
+	nGrenQi2Eyqa5/aUlOo2z7Txa1i2T85FTcGjvGbRLcSo7kfEzM1/ARflTgTWqMuQwY4LY6JEM6V
+	6cDs=
+X-Google-Smtp-Source: AGHT+IFx9R8CS/oboH/Xj5emN5w1CZUds7f3YK0u2PIDi5ntCeDmVKEkeLu/xc6EYkZ/cipNvhT+1A==
+X-Received: by 2002:a05:6512:1194:b0:553:affd:948d with SMTP id 2adb3069b0e04-558fa87754bmr5245e87.12.1752004672197;
+        Tue, 08 Jul 2025 12:57:52 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.70.141])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-32e1aff3debsm16003981fa.44.2025.07.08.12.57.45
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-32e1aff3debsm16003981fa.44.2025.07.08.12.57.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Jul 2025 12:57:45 -0700 (PDT)
+        Tue, 08 Jul 2025 12:57:51 -0700 (PDT)
 From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-openembedded][PATCH 15/20] spirv-shader-generator: Add patch for CMake 4+ compatibility
-Date: Tue,  8 Jul 2025 22:56:31 +0300
-Message-ID: <20250708195636.1678606-15-alperyasinak1@gmail.com>
+Subject: [meta-openembedded][PATCH 20/20] gammu: Add patch for CMake 4+ compatibility
+Date: Tue,  8 Jul 2025 22:56:36 +0300
+Message-ID: <20250708195636.1678606-20-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250708195636.1678606-1-alperyasinak1@gmail.com>
 References: <20250708195636.1678606-1-alperyasinak1@gmail.com>
@@ -66,12 +66,12 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 19:57:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118337
+ <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 19:57:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118342
 
 Fix:
 
-| CMake Error at CMakeLists.txt:22 (cmake_minimum_required):
+| CMake Error at CMakeLists.txt:5 (cmake_minimum_required):
 |   Compatibility with CMake < 3.5 has been removed from CMake.
 |
 |   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -85,26 +85,26 @@ Fix:
 
 Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- .../0001-allow-build-with-cmake-4.patch       | 43 +++++++++++++++++++
- .../spir/spirv-shader-generator_git.bb        |  4 +-
- 2 files changed, 46 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-graphics/spir/spirv-shader-generator/0001-allow-build-with-cmake-4.patch
+ .../gammu/0001-allow-build-with-cmake-4.patch | 43 +++++++++++++++++++
+ .../gammu/gammu_1.42.0.bb                     |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch
 
-diff --git a/meta-oe/recipes-graphics/spir/spirv-shader-generator/0001-allow-build-with-cmake-4.patch b/meta-oe/recipes-graphics/spir/spirv-shader-generator/0001-allow-build-with-cmake-4.patch
+diff --git a/meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch b/meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch
 new file mode 100644
-index 0000000000..31b3ef81fa
+index 0000000000..5ab63b809f
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/spir/spirv-shader-generator/0001-allow-build-with-cmake-4.patch
++++ b/meta-oe/recipes-connectivity/gammu/gammu/0001-allow-build-with-cmake-4.patch
 @@ -0,0 +1,43 @@
-+From ba72528b21e024fe4f5464466976a8234d7c330c Mon Sep 17 00:00:00 2001
++From ea068ac152b9b375be51611ca04d0f833e2f6856 Mon Sep 17 00:00:00 2001
 +From: Alper Ak <alperyasinak1@gmail.com>
-+Date: Tue, 8 Jul 2025 20:27:11 +0300
++Date: Tue, 8 Jul 2025 22:52:11 +0300
 +Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
 + compatibility
 +
 +Fix:
 +
-+| CMake Error at CMakeLists.txt:22 (cmake_minimum_required):
++| CMake Error at CMakeLists.txt:5 (cmake_minimum_required):
 +|   Compatibility with CMake < 3.5 has been removed from CMake.
 +|
 +|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -116,7 +116,7 @@ index 0000000000..31b3ef81fa
 +|
 +| -- Configuring incomplete, errors occurred!
 +
-+Upstream-Status: Backport [https://github.com/KhronosGroup/SPIRV-Cross/commit/82331a2ca9f2ea90d05901e931aa8c21e70dc40c]
++Upstream-Status: Pending
 +
 +Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 +---
@@ -124,36 +124,33 @@ index 0000000000..31b3ef81fa
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index cf14c8d5..ef9695a9 100644
++index d0a79b3..23dba35 100644
 +--- a/CMakeLists.txt
 ++++ b/CMakeLists.txt
-+@@ -19,7 +19,7 @@
-+ #  2. The MIT License, found at <http://opensource.org/licenses/MIT>.
-+ #
++@@ -2,7 +2,7 @@
++ # Copyright (c) 2007 - 2018 Michal Cihar
++ # vim: expandtab sw=4 ts=4 sts=4:
 + 
-+-cmake_minimum_required(VERSION 3.0)
-++cmake_minimum_required(VERSION 3.5)
-+ set(CMAKE_CXX_STANDARD 11)
-+ set(CMAKE_CXX_EXTENSIONS OFF)
++-cmake_minimum_required (VERSION 3.0)
+++cmake_minimum_required (VERSION 3.5)
++ INCLUDE (CMakeForceCompiler)
 + 
++ project (Gammu C)
 +-- 
 +2.43.0
 +
-diff --git a/meta-oe/recipes-graphics/spir/spirv-shader-generator_git.bb b/meta-oe/recipes-graphics/spir/spirv-shader-generator_git.bb
-index 567f7a55e8..1ecd315a2e 100644
---- a/meta-oe/recipes-graphics/spir/spirv-shader-generator_git.bb
-+++ b/meta-oe/recipes-graphics/spir/spirv-shader-generator_git.bb
-@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- SECTION = "graphics"
+diff --git a/meta-oe/recipes-connectivity/gammu/gammu_1.42.0.bb b/meta-oe/recipes-connectivity/gammu/gammu_1.42.0.bb
+index e6ec9c3573..353ee37f46 100644
+--- a/meta-oe/recipes-connectivity/gammu/gammu_1.42.0.bb
++++ b/meta-oe/recipes-connectivity/gammu/gammu_1.42.0.bb
+@@ -7,6 +7,7 @@ HOMEPAGE = "https://wammu.eu/"
+ SRC_URI = "https://dl.cihar.com/${BPN}/releases/${BP}.tar.xz \
+     file://gammurc \
+     file://gammu-smsdrc \
++    file://0001-allow-build-with-cmake-4.patch \
+ "
  
- SRCREV = "f09ba2777714871bddb70d049878af34b94fa54d"
--SRC_URI = "git://github.com/KhronosGroup/SPIRV-Cross.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/KhronosGroup/SPIRV-Cross.git;branch=master;protocol=https \
-+        file://0001-allow-build-with-cmake-4.patch"
-+
- inherit cmake pkgconfig
- 
- EXTRA_OECMAKE = "-DSPIRV_CROSS_SHARED=ON"
+ SRC_URI[sha256sum] = "d8f152314d7e4d3d643610d742845e0a016ce97c234ad4b1151574e1b09651ee"
 -- 
 2.43.0
 
