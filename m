@@ -2,62 +2,62 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9136C8303C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9174C83F10
 	for <webhook@archiver.kernel.org>; Tue,  8 Jul 2025 19:57:48 +0000 (UTC)
-Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
- by mx.groups.io with SMTP id smtpd.web11.5598.1752004663257301506
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
+ by mx.groups.io with SMTP id smtpd.web11.5594.1752004659277978668
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 08 Jul 2025 12:57:43 -0700
+ Tue, 08 Jul 2025 12:57:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BXQAOItE;
- spf=pass (domain: gmail.com, ip: 209.85.208.177, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-32b50f357ecso40790281fa.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 12:57:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Z4rKjGn9;
+ spf=pass (domain: gmail.com, ip: 209.85.208.180, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-32ca160b4bcso54554371fa.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 12:57:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752004661; x=1752609461; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1752004657; x=1752609457; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=B55YJxedTuAMAmfaCQX9pTd04MRCXfTzS4tnzdpea04=;
-        b=BXQAOItEfkq0dKENhFgHeH3FFdGlnajJ95UcC8zy/B3LyaLlFAtOjula0r1xCnRZ4M
-         LsRreR+szf+wRzZ1uMY4XAcDsYxfmFofzvl35CEQ0CH23i/0Sd09Au/HnoZBihlXdERx
-         8nOBP7DE7JBjoKpR9TJSbk9FFIw3/H9OEcqo2v6o2P10uRjPnlfmCWkIXV75GAOEgAis
-         egP4D2Nyxt9CzAK2CNC52+T+W+59kkpa73jRkHq8CizM/BFILF3UzUpaapfGcXBZ9Tlq
-         7QLEslPgfRLQtiGz7vVsK1wDsp4VrrgtFZwKbQPuUmL7yMJ3IX1Atm1g/KZLgSPg/O65
-         s2xw==
+        bh=cMPKJgL1djg+o+3/P7bOUAumHWKef1WsebK0BJuq7M8=;
+        b=Z4rKjGn9Zn/wcMSGE2tW3YxXPqqccKfNVhUW5HinrJHff9XlRdGpXbgh2P2x9uAD6N
+         hHkqPyos9BUElbpga3THKqQCZvR2WwaKFSWNNd3XkvftC5URqhC1eg91Zte/PyEd/XUy
+         3kqviWcpppzAnYMTNSoqMUCibpVafagLHe/jki76yVSqYF7Q03LjBa3uKaWTFXcFRSXV
+         s+kktCLfeLYWfp4JXLeBPFNEaH0fgBMLE1muWO2G0Frs/T7R3vSa5GNz7LzBybC3AJsS
+         KDpfvshbgwBfmFZjfy7/VTraTWVPfu5GTWC6GIPWsG1hsFW1jHi9uLBXZymH3tLWylUz
+         aqDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752004661; x=1752609461;
+        d=1e100.net; s=20230601; t=1752004657; x=1752609457;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=B55YJxedTuAMAmfaCQX9pTd04MRCXfTzS4tnzdpea04=;
-        b=O6O3X/Cw54wSCpjtQ//HHAglHM521pwXN5NIB+UcDhMaDawKhb6ye15V43sly4g6Jt
-         MqH4As7KTWL7wcMAg3OFJeBu4qpWm7PumQ1bWryZzCPhkdt8fhIInZOF9o147xPIzjYR
-         yA6FVa2IlvR9lIAxap8cTgKiHGQMtxGhsZ0VnCtNPP7TKZ4pUwWMJ74XLNEDit90Wku2
-         TGjY8aYSap/5Izg2QBjvsiCQ3KIwRVlKPMluj51bqEkjO3BZU/BZpdtUypNfmeYV0RZA
-         pIyoVGAWFQ/1RsZGz/H/Vp1ZD1ARkZYc7qAeU5vf+htMN6Tm/BUJjnYiyVKrcZrQr36S
-         /UsQ==
-X-Gm-Message-State: AOJu0Yyd+apVbMS62HZvDD+6In8t01wus63IsJUHsPuFEAYxTKbyHkyr
-	cgUEL4KX64BlSu+vz4Xe189qGznlmY/XLQ4ofatwNsGUW8C8Dby2CnTQHJ8p8w==
-X-Gm-Gg: ASbGncvKQ2vjV8b8FYp9nIzVwf/4pWCngaSdialvHivWHcWrA5gS6xlYg2uRkvUxGJV
-	T1jioomSOyQXsfM4Wj5bt6K2WGp5juKfeaL/VQ2Uawl7xRmP9GBwP5AaILiJyv9fue6JaN2nrag
-	chIzLu5J2YuYmuAB6TmgO5H+FWM/Ys8BEaasi77rvb+Owesjg/RBplp4KtoXyk5hRmnhYuFKao4
-	prbQUHSpWdrZAoWEIyrCf229BUCBH6Te8PAEE4XyU3QvYFMjI/LeIL7vBEMrm6MVH83eGRKghrW
-	IhbXDE5oTOd7eRcpRqLE7I7k1rMYW7rCG3TtGsppFonTts4Yg7vX8L1FORxqsd2QtB6RJyMgd+j
-	2xRI=
-X-Google-Smtp-Source: AGHT+IGLXiLYTIjwVeFyqfdf+bG8VnmEu+fqGw+t6rIWChANg0X4Ks3EYlo+JHST0ZKKThhLhYhfRg==
-X-Received: by 2002:a2e:be11:0:b0:32b:3c94:9964 with SMTP id 38308e7fff4ca-32f00cf6d6amr56818771fa.18.1752004660792;
-        Tue, 08 Jul 2025 12:57:40 -0700 (PDT)
+        bh=cMPKJgL1djg+o+3/P7bOUAumHWKef1WsebK0BJuq7M8=;
+        b=bHUbfyDi37LqCRPPSPKZmL6pAHRagCvK8FvP3dMEtCxoh10LCfRHm6fox/+ljTnSfo
+         EGgg/+Uqt/QOwd/0gzZvGm5BgtGUtZos6xPQB4iazPeyQG0Vw/T9bRI2A872bdPvaIFl
+         IylNqSMHdYiTZ41PTSWQuA7WSka4O7yRDga7l2aJAGSjf8LtfWumIqZTUM93XHTJtEn4
+         tVgeoFKF5Nitw96BDRU5pQbKie5EMqJARYc/LFWgxONfSaycUhsDocD5+1h7Jqw9TzwF
+         KNDW3RwF+UvtKQYBT9KMbbfH0FOAdmIwwKTZwMtEwqZcHJ0FotGvK3SZihxLWVnGDajY
+         TKCw==
+X-Gm-Message-State: AOJu0Yz0fDd961CPYOnyR3CQ76eRSTDKhrZiwipkzGwFmvAVbE5dmKjU
+	4CBbL4U696cp6YZNgmQd+Nav+rmX6ke302b9cehEQidXIHTU+xitbyrcLkRN3Q==
+X-Gm-Gg: ASbGnct7mi69ZdjEYDyO3TKIm+/2P0as2rlCV/Wsv6ORaKvKQgjrZm1OCOq4KZiJZMx
+	/i1NCkQarCsKWWr7V4vSp+9gGUlR5xJNr3ned1cXZ/QHbZaB0puerffoy5tEXvVTTWNnOxl3Kin
+	wTYiKfYawXmxLaj0JkI2pKR1/5EunIW0b3Gb46oeIhoaRKsF5Txp7cHDoPIW7BFrO3Xm7NP+YR2
+	4zMrt02mx/MvNA+J9xZbWfsxA6l7T8Gh7niqOMCN385c+c2w4dEcnt/lEX5Dll98h50Jgk4hbv4
+	NM5Gsu0bHCY/f/9zImPAf3sGEk4Cx9Kp9c28DSYanP9teLrdfWLZHNEa6vKwlEHhp5oPN9Tmcm8
+	raZY=
+X-Google-Smtp-Source: AGHT+IEWQ46P6/n2J84xXBV4MosQohXyOXpMzZ5yQWXSCUPEZblYG9mPsz3nMp2c6uHGYvUrQ1HMUw==
+X-Received: by 2002:a2e:b8d3:0:b0:32a:80bc:1755 with SMTP id 38308e7fff4ca-32f4254ce1cmr3169511fa.0.1752004656857;
+        Tue, 08 Jul 2025 12:57:36 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.70.141])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-32e1aff3debsm16003981fa.44.2025.07.08.12.57.39
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-32e1aff3debsm16003981fa.44.2025.07.08.12.57.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Jul 2025 12:57:40 -0700 (PDT)
+        Tue, 08 Jul 2025 12:57:36 -0700 (PDT)
 From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-openembedded][PATCH 11/20] gflags: Add patch for CMake 4+ compatibility
-Date: Tue,  8 Jul 2025 22:56:27 +0300
-Message-ID: <20250708195636.1678606-11-alperyasinak1@gmail.com>
+Subject: [meta-openembedded][PATCH 08/20] portaudio-v19: Add patch for CMake 4+ compatibility
+Date: Tue,  8 Jul 2025 22:56:24 +0300
+Message-ID: <20250708195636.1678606-8-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250708195636.1678606-1-alperyasinak1@gmail.com>
 References: <20250708195636.1678606-1-alperyasinak1@gmail.com>
@@ -67,11 +67,13 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 08 Jul 2025 19:57:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118333
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118330
+
+- Since recipe uses a fixed release version and not a git snapshot, the "+git" suffix in PV is unnecessary and has been dropped.
 
 Fix:
 
-| CMake Error at CMakeLists.txt:73 (cmake_minimum_required):
+| CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
 |   Compatibility with CMake < 3.5 has been removed from CMake.
 |
 |   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -85,26 +87,26 @@ Fix:
 
 Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- .../0001-allow-build-with-cmake-4.patch       | 69 +++++++++++++++++++
- .../recipes-support/gflags/gflags_2.2.2.bb    |  4 +-
- 2 files changed, 71 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/gflags/gflags/0001-allow-build-with-cmake-4.patch
+ .../0001-allow-build-with-cmake-4.patch       | 40 +++++++++++++++++++
+ .../portaudio/portaudio-v19_19.7.0.bb         |  6 +--
+ 2 files changed, 42 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-support/portaudio/portaudio-v19/0001-allow-build-with-cmake-4.patch
 
-diff --git a/meta-oe/recipes-support/gflags/gflags/0001-allow-build-with-cmake-4.patch b/meta-oe/recipes-support/gflags/gflags/0001-allow-build-with-cmake-4.patch
+diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19/0001-allow-build-with-cmake-4.patch b/meta-oe/recipes-support/portaudio/portaudio-v19/0001-allow-build-with-cmake-4.patch
 new file mode 100644
-index 0000000000..bc3ca94de8
+index 0000000000..d6b17ce2be
 --- /dev/null
-+++ b/meta-oe/recipes-support/gflags/gflags/0001-allow-build-with-cmake-4.patch
-@@ -0,0 +1,69 @@
-+From b533cf275db99b1d37ba20d96497cafcedc9ace0 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/portaudio/portaudio-v19/0001-allow-build-with-cmake-4.patch
+@@ -0,0 +1,40 @@
++From ff000097d226f21cf05a94c22459e55cf1f5c5c6 Mon Sep 17 00:00:00 2001
 +From: Alper Ak <alperyasinak1@gmail.com>
-+Date: Tue, 8 Jul 2025 18:57:26 +0300
++Date: Tue, 8 Jul 2025 18:06:03 +0300
 +Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
 + compatibility
 +
 +Fix:
 +
-+| CMake Error at CMakeLists.txt:73 (cmake_minimum_required):
++| CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
 +|   Compatibility with CMake < 3.5 has been removed from CMake.
 +|
 +|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -116,72 +118,45 @@ index 0000000000..bc3ca94de8
 +|
 +| -- Configuring incomplete, errors occurred!
 +
-+Upstream-Status: Backport [https://github.com/gflags/gflags/commit/70c01a642f08734b7bddc9687884844ca117e080]
++Upstream-Status: Backport [https://github.com/PortAudio/portaudio/commit/ccd16c85e64d8c1a5462541388b6fbcaedbb1cad]
 +
 +Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 +---
-+ CMakeLists.txt             | 2 +-
-+ test/config/CMakeLists.txt | 2 +-
-+ test/nc/CMakeLists.txt     | 2 +-
-+ 3 files changed, 3 insertions(+), 3 deletions(-)
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 657a1f4..a5440bb 100644
++index 87d0bb8..eee16fd 100644
 +--- a/CMakeLists.txt
 ++++ b/CMakeLists.txt
-+@@ -70,7 +70,7 @@
-+ ## - GFLAGS_INSTALL_SHARED_LIBS
-+ ## - GFLAGS_INSTALL_STATIC_LIBS
++@@ -1,4 +1,4 @@
++-cmake_minimum_required(VERSION 3.1.0)
+++cmake_minimum_required(VERSION 3.5)
++ project(PortAudio VERSION 19.8)
 + 
-+-cmake_minimum_required (VERSION 3.0.2 FATAL_ERROR)
-++cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
-+ 
-+ if (POLICY CMP0042)
-+   cmake_policy (SET CMP0042 NEW)
-+diff --git a/test/config/CMakeLists.txt b/test/config/CMakeLists.txt
-+index 6190b25..205121e 100644
-+--- a/test/config/CMakeLists.txt
-++++ b/test/config/CMakeLists.txt
-+@@ -1,6 +1,6 @@
-+ ## gflags package configuration tests
-+ 
-+-cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
-++cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
-+ 
-+ project (gflags_${TEST_NAME})
-+ 
-+diff --git a/test/nc/CMakeLists.txt b/test/nc/CMakeLists.txt
-+index d00b07d..1b4d511 100644
-+--- a/test/nc/CMakeLists.txt
-++++ b/test/nc/CMakeLists.txt
-+@@ -1,6 +1,6 @@
-+ ## gflags negative compilation tests
-+ 
-+-cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
-++cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
-+ 
-+ if (NOT TEST_NAME)
-+   message (FATAL_ERROR "Missing TEST_NAME CMake flag")
++ #
 +-- 
 +2.43.0
 +
-diff --git a/meta-oe/recipes-support/gflags/gflags_2.2.2.bb b/meta-oe/recipes-support/gflags/gflags_2.2.2.bb
-index 8ea158eab3..925aa6d6e6 100644
---- a/meta-oe/recipes-support/gflags/gflags_2.2.2.bb
-+++ b/meta-oe/recipes-support/gflags/gflags_2.2.2.bb
-@@ -3,10 +3,10 @@ HOMEPAGE = "https://github.com/gflags/gflags"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
+diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
+index 4451e96307..7376f7ca77 100644
+--- a/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
++++ b/meta-oe/recipes-support/portaudio/portaudio-v19_19.7.0.bb
+@@ -3,12 +3,10 @@ SECTION = "libs/multimedia"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02df"
  
--SRC_URI = "git://github.com/gflags/gflags.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/gflags/gflags.git;branch=master;protocol=https \
+-PV .= "+git"
+-
+-SRC_URI = "git://github.com/PortAudio/portaudio.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/PortAudio/portaudio.git;branch=master;protocol=https \
 +        file://0001-allow-build-with-cmake-4.patch"
- SRCREV = "e171aa2d15ed9eb17054558e0b3a6a413bb01067"
+ SRCREV = "929e2e8f7af281c5eb4fa07758930d542ec43d97"
  
 -
- inherit cmake
+ inherit cmake pkgconfig
  
- EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON -DREGISTER_INSTALL_PREFIX=OFF -DLIB_INSTALL_DIR=${baselib}"
+ EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
 -- 
 2.43.0
 
