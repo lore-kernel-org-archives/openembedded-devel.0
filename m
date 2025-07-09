@@ -1,105 +1,100 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9ED3FC83F0A
-	for <webhook@archiver.kernel.org>; Wed,  9 Jul 2025 18:13:16 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.web11.4030.1752084786950098588
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB4AAC83F03
+	for <webhook@archiver.kernel.org>; Wed,  9 Jul 2025 18:22:06 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web10.4203.1752085319767099078
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jul 2025 11:13:07 -0700
+ Wed, 09 Jul 2025 11:22:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout07.t-online.de (Postfix) with SMTP id 695A8DE94
-	for <openembedded-devel@lists.openembedded.org>; Wed,  9 Jul 2025 20:13:04 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.161.46]) by fwd74.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1uZZHx-1L1wav0; Wed, 9 Jul 2025 20:13:01 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] waylandpp: fix build with cmake 4
-Date: Wed,  9 Jul 2025 20:12:56 +0200
-Message-ID: <20250709181256.1981722-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.49.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TMz56Z/7;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-ae0d7b32322so18140366b.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 11:21:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1752085318; x=1752690118; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Ipq3/qURNySMn6XMd9U390DVtXuGhzSJClaiwkEdm8M=;
+        b=TMz56Z/700rtnMyBXJGWgkmZy7GlC4JBayWZRhkrhpcv2tOhoL9Tq1c97z7Vn2EoZt
+         Tfv/6Y3wg7t4TUahRULO915LNOlbYdKlaCaPIojHR5dSUtqu/RbizuLmYy7q8ZRQkDoi
+         l63PLffHIQCGDIxd3Y8Xi1s8CR1UtygpQkDd6T/0NF6tpZfuM9D1gc+iWaLQACpF3axt
+         TYUJLuhz9fKvEkpMv+mZQMB2s/5X0/ObA+2JV77c4L2J8wWjHDFjyTHeGQdCGIwytiP7
+         mqeOY2+INBz9b7OUTb8ak808qQCFUBP2iUlLiOcnDC/lQsBryOJ8rM9avfJJP0Y09V95
+         GpCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1752085318; x=1752690118;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ipq3/qURNySMn6XMd9U390DVtXuGhzSJClaiwkEdm8M=;
+        b=D10eKrfNS7VnrijgQdddpag2dsOr8mxbZegw3ylBvzcX4VITcsPkf09H5w9TWSNDe+
+         5ffZ/J+RUcso94K9vx/4AU6fV8E721XKbmDkGQD5Fdyr3j+34ZaKCRra733qFSIGuFwY
+         WWYKStwBG5Ce4hh7zlhscUAUWcGyQWoe7kUbfSyjuyjzjFACPi4K2t3y41tOBWswlwJV
+         YNMrcfbIucSUMdYQ4oVngzC1aMgGOzjba73SWdDoh0QEoWsv5z2OylwbE5b0mrdOYFYy
+         KcSgnlpMVMAXgrDFipOUyuqXoJn2FGgFWcMvq35zSFJVgWFhAOqRkiyEIVlkyy7FjqcN
+         M1Gw==
+X-Forwarded-Encrypted: i=1; AJvYcCViFEqgMhyi50m4gbHgjbvWcor+nJPu1cbBL1QyqPctPFiTc5S5OTv6Szcccz/658AKXhYMqdqITGmG/GsaxZJxN+M=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YySu1NibQHs3i4b6y+mPziLZYNlU+SeZMxISKdufAQgD5l43HBm
+	DXjmi7YTeG5nkLZAi66ek6whmgbtgW76ccM6Gs7s7rObCrhlL0psLzfK
+X-Gm-Gg: ASbGncvdlq6jjoaoFc4CUw/UyIN74NZD3yx7SIVrnwB5LwZKT3fSMZYBDPDDOT61v7s
+	SyKANichLc6dwj+4rvtF3kHycUyFqeG4RcAS98Ik8AOuipZVAVPC+MyaNa5JPvU4Kqk/hdw7r+p
+	tJQlntWZ954OO55pcdD/N3J04cR/5xUmsNSLykReHGr8A/If3QlPYGYX9fABFMYDfBnyooqDFuj
+	mH/RgcpHNdDYVd+d1SeT3n7ZSHElcvdU4yvLnzZOb93STifqXIMFiYp83bXBN9FCmrcGPWj1XRj
+	OLRlxKp2yd2p5qWiNiuH/FH8g6rO8wrH7vJED8D33aljNbFIOfoQEsH/To1wVSdaw2U1+7UGZnG
+	V7wqM
+X-Google-Smtp-Source: AGHT+IHrATS7fQA0UIA5fpT+L1FPF2jJBGQkRIOCbqNIVIuaYGvULlHoVKxXkn4Sw9PzGN/XW1F6wQ==
+X-Received: by 2002:a17:907:7fa5:b0:ae0:afb7:6060 with SMTP id a640c23a62f3a-ae6cf5c9665mr461000366b.19.1752085317656;
+        Wed, 09 Jul 2025 11:21:57 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae3f66d93ffsm1145404166b.36.2025.07.09.11.21.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 09 Jul 2025 11:21:57 -0700 (PDT)
+Message-ID: <d9678565-9f1a-4fc3-a501-ee534b087fb1@gmail.com>
+Date: Wed, 9 Jul 2025 20:21:56 +0200
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1752084781-5F7FC4FD-A53BE477/0/0 CLEAN NORMAL
-X-TOI-MSGID: 7a5a7d18-4263-4706-a7ec-781de6e6514d
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-openembedded][PATCH 16/20] cpputest: Add patch for
+ CMake 4+ compatibility
+To: alperyasinak1@gmail.com, openembedded-devel@lists.openembedded.org
+References: <20250709173054.605430-1-alperyasinak1@gmail.com>
+ <20250709173054.605430-16-alperyasinak1@gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20250709173054.605430-16-alperyasinak1@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 18:13:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118375
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 18:22:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118376
 
-Add a backport patch that fixes build with cmake 4
+On 7/9/25 19:30, Alper Ak via lists.openembedded.org wrote:
+> --- a/meta-oe/recipes-test/cpputest/cpputest_4.0.bb
+> +++ b/meta-oe/recipes-test/cpputest/cpputest_4.0.bb
+> @@ -5,9 +5,10 @@ SECTION = "devel"
+>  LICENSE = "BSD-3-Clause"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=ce5d5f1fe02bcd1343ced64a06fd4177"
+>  
+> -SRC_URI = "git://github.com/cpputest/cpputest.git;protocol=https;branch=master"
+> -SRCREV = "67d2dfd41e13f09ff218aa08e2d35f1c32f032a1"
+> +SRC_URI = "git://github.com/cpputest/cpputest.git;protocol=https;branch=master \
+> +        file://0001-allow-build-with-cmake-4.patch"
+>  
+> +SRCREV = "67d2dfd41e13f09ff218aa08e2d35f1c32f032a1"
+>  
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- ...426020932ebc481ae35c15f644af2f17e88a.patch | 23 +++++++++++++++++++
- .../wayland/waylandpp_1.0.0.bb                |  7 ++++--
- 2 files changed, 28 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/wayland/waylandpp/4576426020=
-932ebc481ae35c15f644af2f17e88a.patch
+Apparently this, 4.0 is the last tagged release of this application -
+which is now over 5 years old. However it seems to be actively developed
+ever since. Would it worth trying to switch to the latest git revision
+(which has the cmake fix also), instead of patching? The developer
+claims in https://github.com/cpputest/cpputest/issues/1651 that is the
+revision survives their CI build, than it is considered "pretty stable",
+just like the latest tag.
 
-diff --git a/meta-oe/recipes-graphics/wayland/waylandpp/4576426020932ebc4=
-81ae35c15f644af2f17e88a.patch b/meta-oe/recipes-graphics/wayland/waylandp=
-p/4576426020932ebc481ae35c15f644af2f17e88a.patch
-new file mode 100644
-index 0000000000..5011f05f3d
---- /dev/null
-+++ b/meta-oe/recipes-graphics/wayland/waylandpp/4576426020932ebc481ae35c=
-15f644af2f17e88a.patch
-@@ -0,0 +1,23 @@
-+From 4576426020932ebc481ae35c15f644af2f17e88a Mon Sep 17 00:00:00 2001
-+From: Alexey Sokolov <alexey@asokolov.org>
-+Date: Sun, 4 May 2025 14:38:52 +0100
-+Subject: [PATCH] Fix build with cmake 4
-+
-+Upstream-Status: Backport
-+---
-+ CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 866477b..8e9d2ad 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -21,7 +21,7 @@
-+ # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE=
- OF THIS
-+ # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-+=20
-+-cmake_minimum_required(VERSION 3.4)
-++cmake_minimum_required(VERSION 3.4...4.0)
-+ project(waylandpp VERSION 1.0.0 LANGUAGES CXX)
-+=20
-+ # packages
-diff --git a/meta-oe/recipes-graphics/wayland/waylandpp_1.0.0.bb b/meta-o=
-e/recipes-graphics/wayland/waylandpp_1.0.0.bb
-index bb909a313a..0e53807cc7 100644
---- a/meta-oe/recipes-graphics/wayland/waylandpp_1.0.0.bb
-+++ b/meta-oe/recipes-graphics/wayland/waylandpp_1.0.0.bb
-@@ -2,8 +2,11 @@ SUMMARY =3D " C++ binding for Wayland using the most mod=
-ern C++ technology"
- LICENSE =3D "MIT"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3aae28cc66d61975114c2b14df215=
-407"
-=20
--SRC_URI =3D "git://github.com/NilsBrause/waylandpp.git;protocol=3Dhttps;=
-branch=3Dmaster \
--           file://0001-include-missing-cstdint.patch"
-+SRC_URI =3D " \
-+	git://github.com/NilsBrause/waylandpp.git;protocol=3Dhttps;branch=3Dmas=
-ter \
-+	file://0001-include-missing-cstdint.patch \
-+	file://4576426020932ebc481ae35c15f644af2f17e88a.patch \
-+"
-=20
- DEPENDS =3D "pugixml"
- DEPENDS:append:class-target =3D " waylandpp-native wayland virtual/egl v=
-irtual/libgles2"
---=20
-2.49.0
-
+(If you are busy, that's fine, I can give it a test also later)
 
