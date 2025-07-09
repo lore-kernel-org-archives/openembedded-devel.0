@@ -2,185 +2,213 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AB2FC83F0A
-	for <webhook@archiver.kernel.org>; Wed,  9 Jul 2025 16:09:45 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web11.964.1752077379464609299
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7424CC83F03
+	for <webhook@archiver.kernel.org>; Wed,  9 Jul 2025 16:15:35 +0000 (UTC)
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web11.1128.1752077733665926100
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jul 2025 09:09:39 -0700
+ Wed, 09 Jul 2025 09:15:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Xv5n+MtU;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-234b9dfb842so878385ad.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 09:09:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LIRj0Mdj;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-23694cec0feso647345ad.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 09:15:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752077379; x=1752682179; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1752077733; x=1752682533; darn=lists.openembedded.org;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=j1V1vYyX6uwD81ilCU7XYs0Zv0MbCYp5HupJByq02MU=;
-        b=Xv5n+MtUrw0lHs9YSVVhx1gzYIChzJ8Uaeq6FJZG37Zb4y9LL3t6qAngaPvtwCr525
-         Z3NzDzPf35gHMnUp1tqrymF9skJIZkwXhQaDtr583I5LmeSAN5YHGvs1YZTP/xjBFQwg
-         f0V348VOfahmcONGOSQBYkLRIJegHn8LAqZLjGsVqDhp3WLcYTfwLSsWgyQR+P8lXrsB
-         Bas2BhoOAuq26uRXMcGUvwliUgPGpt2wgkEa1Ey2AQl2PCr/2RjURJFYieIYKy2gfnKi
-         Jf1Apf3pWQ9y1YCsVm+S/+x9yeaUYqZqMtbkjEiaKn+C8N5BAuj0J3jXw4jYpFzxWjPa
-         SyXA==
+        bh=jWJwjP5JhXB4E4jhBRzQOBoSBpIWzHh5dZu6sOpyxcc=;
+        b=LIRj0MdjwR6EHlzFJRmcCi9UyerUZaCsaEudVozbWWt/hJADvrSlIrdr6GMtPe9/Z5
+         88lFVBvruNmxpEFcR5gxDv7eSpi50SB/lG8RLMHy1D4p0j6q9qtpUtBmvBDj2UdObNL9
+         WJ3mx6vU/ZCntOvogeK/PfsJO7jds/Ryo7lM1ckfP+nLGrVx/erOhHHE2uX61P85bvpQ
+         dK6Ja6oXaVjT0m2quINyTQpfnjmSQ8JlgPtW1HDeU0/tMOpBA1LaPM5JVz1TJ6jeHjco
+         WaU1aK29TwHrVYgEe5sEW8SMWGXZK98nQQAx2JS3Rd4ua26nW1ZHm+8QawIRa+gTBLEJ
+         BVOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752077379; x=1752682179;
+        d=1e100.net; s=20230601; t=1752077733; x=1752682533;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=j1V1vYyX6uwD81ilCU7XYs0Zv0MbCYp5HupJByq02MU=;
-        b=AxQhlGRV2KroYH4JR+wgYJvrxHbX5G+MCN1XOQ9lhOCOb2qtgJH/Ja7+TXo3G4ZpKD
-         /fT/jnhGvma45ImcLiHChHLqk2eegwSixjf3OFnwddkcrADuXksO82+MB6UvJVDvGrYz
-         JNCZfeh6OtauX6FTpj3GFoP4YuT9qLUdCbYxRpvyS3+1Lnq2fBqYrELn5rWH9QQjuWsA
-         s4QW6g4U9N1ujKgqIiZOQAVAjUvYfWHS6M21eX4YqJZqB1E9vTJ+1Pe3WmPeUC+22/An
-         NwFs6NLnIAusOVCDXDgRNxibgjzmpnHEmzitTo03schb+Jh4lST0Gy4FfakWpP27/U/h
-         6aDQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVbx2F94WQwANeM/1IkKVxtXda0XT4Q7Asb3plfm1YDBT/807qLbwJ2SCPVsnhc8N5UAOc3Nk+3D3uD4n/HFWVrVdg=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxUoshelk2KPjDD7ji2p0OJqAA/YkxxQv3kFOwYI4lZAK/zUbgN
-	XHhEfgMaOcjD0ETgqbQXUQzjrbwzNf1xdkUtiT0XHuhRSTHUsfeV3U/8
-X-Gm-Gg: ASbGnctWbkE3QCqq4eIcQWWlJoVSkx6Wx/m8UGBGTqaRpMwTAolnF8BoPOPWhsp+e+2
-	MUl6QRpi124vz0zZNIzeDmqnj0veXENvg3BAd5QjPWjuqcYPnSGivH0dxP+90b8ZzwUvZoXfXGM
-	Mm9ASiW8Ly0jnYWchsZS4NuP4J/wrV2O1iTB/PeWXignk2aPM6j52130dEZs35XBl+/ks9hGNLQ
-	lUrecFO1Kz4Uqpal5EqeOcdMWHURoNZCDGqfUOh4pdSG47u7BXG+WNr3o1qh5ctUUUancprx2ZH
-	wMNpG8ysJiTweKe+WUuKJXcJVpjSAVJQkoSXoYHTNqM9D4xTlxIlTKludJ9/ifOc3CWCHkmm1mT
-	VRBNIrYXryf5tuvbo3A7AsqGftTHj71SkSRLAzgoPL7iJqy5R6w==
-X-Google-Smtp-Source: AGHT+IE0gvl4feGXXSQk7DY3XvgmnaUUXkpM1EkAXI0Wq1BkKLIqp5tBA+bavu0p1/hyAab+yGt3kg==
-X-Received: by 2002:a17:903:124a:b0:235:f3df:bc1f with SMTP id d9443c01a7336-23ddb3053cfmr50512205ad.36.1752077378441;
-        Wed, 09 Jul 2025 09:09:38 -0700 (PDT)
+        bh=jWJwjP5JhXB4E4jhBRzQOBoSBpIWzHh5dZu6sOpyxcc=;
+        b=VG563MgqR/QKsazl3fBQI4/bn4k1YuP2hexCI9aDw1R3XjoGcBHJEx8oI6EOQd1xXu
+         TmWk8Xhr90+mUb8OWXQEd/G5hvexWqA1pIAuKF8hCuAtJ7+cWwNGbQ7OI75sZSlqolgK
+         O1YRjaYp4RepShKarfpaqx2TtzZrkmlQe5AeJwIkxGEMb8cfXUEx8iJ4L7tUMz0VSn0X
+         ipF8boBNWJr14fsJPj02pr7SdVstvF8PbwZcAAQtkbLMIbKsGPnCt4nFXQI+RP4svoTI
+         G+bPU6no3jMjETq7AcDSXOZilaX2mUaBScT96AIppcbCxHkb55L6Fv6XpWXkMwSNT7e+
+         L4vA==
+X-Forwarded-Encrypted: i=1; AJvYcCUAcMN+sbpVt+bgUmzjUY7zIOrRThKdgFs2AXsKAq5Fsu/QEHFr4q2IE0HHMYBPU2y5pB2tY5EbImTt8DgNviPhQHY=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzHQhnBmg0ofz794YJ44ARbjcHgsgKs5wVLHjX/NNt4a/GMnKb5
+	g6zG3K0Afiigfz2ZrxELwelaSoadHjRPQvtN5OqjfqiK//ZfDtMZviIA
+X-Gm-Gg: ASbGncsfPYy05S9VO2eWN54Vyc5cXap82un1C4pTJGxTd33r/wWFiDuFHQ17SnTMk6Y
+	WXWfETXx71/xn6euvf5QJw7PehzEmWLsUNdjxjgme4dnXU7/jwfdaJEy2ReHxQIruPNZrbEzfeb
+	KFRdHHXYZDgl5AmBe8dQMRRklEROW9QCYmSNJ3jYS70KDVnsWAXIis3KHpflbLIfBHQkPHs9IiM
+	wS8XwK2I9+Ud95utAmOU41TUvZAG+b+EO9Z3Vsdel++tkGNmHw/n3YkXZ7hg8X9I2aAry1yrFdO
+	f+6Qp5hvLSxGC/CeyybNMulu5CPZ0T44T+3ifhF0gCE3n+8nhBlxAZ8ovsBOZGF3CdYIBnWL7xL
+	aAWcY7yp7hUXY6wysQT/YmPbQu3Hg7lntX+wOVxC1k453g9pCuQ==
+X-Google-Smtp-Source: AGHT+IGks3tCd4boUqgEtoxcO/zYLFj7Lo7HhABr3W4HsUdYbDPfn7ordCgHaJh9Nz/e9+B6uwHL7g==
+X-Received: by 2002:a17:902:ec91:b0:23c:7876:e6a8 with SMTP id d9443c01a7336-23ddb3524d7mr47390265ad.51.1752077732585;
+        Wed, 09 Jul 2025 09:15:32 -0700 (PDT)
 Received: from ?IPV6:2601:646:8201:fd20:d1b7:aad6:2c95:a1d8? ([2601:646:8201:fd20:d1b7:aad6:2c95:a1d8])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23c8431f25csm153410235ad.48.2025.07.09.09.09.37
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23c845bca96sm141473535ad.242.2025.07.09.09.15.31
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Jul 2025 09:09:38 -0700 (PDT)
-Message-ID: <3cbc36cb-3602-4585-84f7-01df20856991@gmail.com>
-Date: Wed, 9 Jul 2025 09:09:37 -0700
+        Wed, 09 Jul 2025 09:15:32 -0700 (PDT)
+Message-ID: <acffd07e-6eea-4669-a03d-28d37c0bb2ce@gmail.com>
+Date: Wed, 9 Jul 2025 09:15:31 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-openembedded][PATCH 01/20] cannelloni: Upgrade 1.1.0
- -> 2.0.0 to allow CMake 4+ compatibility
-To: alperyasinak1@gmail.com, openembedded-devel@lists.openembedded.org
-References: <20250708195636.1678606-1-alperyasinak1@gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/4] fwupd: update from 1.9.25 to 1.9.30
+To: mikko.rapeli@linaro.org, openembedded-devel@lists.openembedded.org
+References: <20250708100330.138561-1-mikko.rapeli@linaro.org>
 Content-Language: en-US
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20250708195636.1678606-1-alperyasinak1@gmail.com>
+In-Reply-To: <20250708100330.138561-1-mikko.rapeli@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 16:09:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118353
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 16:15:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118354
 
-fails to build with clang ( I think its upgrade having added 
-incompatible code )
+fails to build on YP AB
 
-https://errors.yoctoproject.org/Errors/Details/869562/
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/766/steps/14/logs/stdio
 
-On 7/8/25 12:56 PM, Alper Ak via lists.openembedded.org wrote:
-> - Drop 0001-include-bits-stdc-.h-only-when-using-libstdc.patch because already fixed in newer version.
+On 7/8/25 3:03 AM, Mikko Rapeli via lists.openembedded.org wrote:
+> Changes:
 > 
-> Changelog:
+> https://github.com/fwupd/fwupd/releases/tag/1.9.30
 > 
-> https://github.com/mguentner/cannelloni/compare/v1.1.0...v2.0.0
+> This release fixes the following bugs:
 > 
-> Fix:
+>      Add several devices with broken firmware to the UEFI dbx blocklist
+>      Add /sys/firmware/efi/efivars to ReadWritePaths
+>      Do not export Redfish backup partitions as devices
+>      Do not show messages or prompt for answers in fwupdtool --json mode
+>      Fix a crash when installing some Wacom firmware types
+>      Fix deploying RMM updates on the Dell Kestrel dock
+>      Fix SMBIOS parsing for SPI ROM size >= 16MiB
+>      Never allow updating updatable-hidden devices with fwupdtool
+>      Recognize a very old dbx hash to allow upgrades to continue
+>      Reduce the Dell dock HID timeout, as retries already cover it
 > 
-> | CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
-> |   Compatibility with CMake < 3.5 has been removed from CMake.
-> |
-> |   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
-> |   to tell CMake that the project requires at least <min> but has been updated
-> |   to work with policies introduced by <max> or earlier.
-> |
-> |   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
-> |
-> |
-> | -- Configuring incomplete, errors occurred!
+> https://github.com/fwupd/fwupd/releases/tag/1.9.29
 > 
-> Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
+> This release adds the following features:
+> 
+>      Prepend the missing capsule header also when using CoD
+>      Support cabinet archives greater in size than 2GB
+> 
+> This release fixes the following bugs:
+> 
+>      Do not add a Redfish release date if set to 00:00:00Z
+>      Do not add invalid CoSWID entities
+>      Fix creating the Redfish user when the ETAG is set
+>      Fix dbx deployment by ignoring missing PE/COFF sections
+>      Fix writing EFI variables on new kernel versions
+>      Include a SHA-256 checksum when using fwupdtool self-sign
+>      Include the length in Wacom USB scaler update for future hardware support
+>      Increase the timeout for RMM ack when updating Dell Kestrel docks
+>      Mark the Redfish progress as finished even if the update never got to 100%
+>      Set the Redfish MIME form-data filename correctly
+>      Use the metadata version format to set the lowest possible version
+> 
+> This release adds support for the following hardware:
+> 
+>      Lenovo USB-C Dual Display Travel Dock
+> 
+> https://github.com/fwupd/fwupd/releases/tag/1.9.28
+> 
+> Released: 2025-01-28
+> 
+> This release adds the following features:
+> 
+>      Add support for intel-csme19 version format
+> 
+> This release fixes the following bugs:
+> 
+>      Avoid downstream port resets of Parade USB hubs
+>      Cleanup Dell dock devices when disconnected
+>      Correctly parse PE files with zero sized sections
+>      Correctly set the package version of the Dell dock
+>      Run the FwupdClient::changed callback in the correct thread
+>      Run the UEFI capsule reboot cleanup action when required
+>      Split up the AMD GPU VBIOS P/N for the version
+>      Use the ISO date as a dbx version number
+> 
+> This release adds support for the following hardware:
+> 
+>      HP 400/405
+>      More ELAN fingerprint readers
+> 
+> https://github.com/fwupd/fwupd/releases/tag/1.9.27
+> 
+> This release fixes the following bugs:
+> 
+>      Add a power quirk for Framework systems
+>      Allow cros-ec repair the device after flush failure
+>      Check the VLI USB3 firmware size before erasing
+>      Disallow DBX updates on the Samsung Galaxy Book2 360
+>      Do not show 'Device has been removed' as a dock error
+>      Do not use a CMSE11 function when using CSME18
+>      Fix an unlikely memory leak when using ModemManger Sahara devices
+>      Fix a tiny memory leak in algoltek-usb when checking status
+>      Mark UEFI dbx updates as affecting full disk encryption
+>      Parse FDTs with missing END tokens
+>      Rename the dell-k2 plugin to dell-kestrel and rework the update flow
+> 
+> This release adds support for the following hardware:
+> 
+>      Google GID8 Headset
+>      Parade PS188
+>      Primax Ryder Mouse
+> 
+> https://github.com/fwupd/fwupd/releases/tag/1.9.26
+> 
+> This release fixes the following bugs:
+> 
+>      Add HSI tests for Arrow and Meteor Lake CSME
+>      Allow UEFI capsule config values to be set with fwupdmgr modify-config
+>      Check for the logitech-bulkcontroller response packet length correctly
+>      Fix using ID_LIKE for fallback when ESP isn't mounted
+>      Fix various Coverity-reported overflowed constants
+>      Only compare the first 10 characters of the AMD GPU part number
+> 
+> This release adds support for the following hardware:
+> 
+>      Jabra PanaCast
+>      Some Lenovo Legion HID devices
+> 
+> Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
 > ---
->   ...bits-stdc-.h-only-when-using-libstdc.patch | 37 -------------------
->   ...annelloni_1.1.0.bb => cannelloni_2.0.0.bb} |  7 +---
->   2 files changed, 2 insertions(+), 42 deletions(-)
->   delete mode 100644 meta-networking/recipes-connectivity/cannelloni/cannelloni/0001-include-bits-stdc-.h-only-when-using-libstdc.patch
->   rename meta-networking/recipes-connectivity/cannelloni/{cannelloni_1.1.0.bb => cannelloni_2.0.0.bb} (71%)
+>   meta-oe/recipes-bsp/fwupd/{fwupd_1.9.25.bb => fwupd_1.9.30.bb} | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>   rename meta-oe/recipes-bsp/fwupd/{fwupd_1.9.25.bb => fwupd_1.9.30.bb} (98%)
 > 
-> diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni/0001-include-bits-stdc-.h-only-when-using-libstdc.patch b/meta-networking/recipes-connectivity/cannelloni/cannelloni/0001-include-bits-stdc-.h-only-when-using-libstdc.patch
-> deleted file mode 100644
-> index 71f447c94b..0000000000
-> --- a/meta-networking/recipes-connectivity/cannelloni/cannelloni/0001-include-bits-stdc-.h-only-when-using-libstdc.patch
-> +++ /dev/null
-> @@ -1,37 +0,0 @@
-> -From 7aed36765ae44b41ede7e139da0a11b3696f2e06 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Mon, 13 Nov 2023 00:07:23 -0800
-> -Subject: [PATCH] include bits/stdc++.h only when using libstdc++
-> -
-> -We have other c++ runtime implementations e.g. llvm's libc++ which does
-> -not provide this header bits/stdc++.h, therefore make sure that this
-> -header is only included when using libstdc++
-> -
-> -Fixes
-> -| /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/cannelloni/1.1.0/git/tcpthread.cpp:27:10: fatal error: 'bits/stdc++.h' file not found
-> -|    27 | #include <bits/stdc++.h>
-> -|       |          ^~~~~~~~~~~~~~~
-> -
-> -Upstream-Status: Submitted [https://github.com/mguentner/cannelloni/pull/56]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - tcpthread.cpp | 2 ++
-> - 1 file changed, 2 insertions(+)
-> -
-> -diff --git a/tcpthread.cpp b/tcpthread.cpp
-> -index a1b3047..bb5a7b2 100644
-> ---- a/tcpthread.cpp
-> -+++ b/tcpthread.cpp
-> -@@ -24,7 +24,9 @@
-> - #include <cstdint>
-> - #include <cstdio>
-> -
-> -+#ifdef __GLIBCXX__
-> - #include <bits/stdc++.h>
-> -+#endif
-> -
-> - #include <linux/can.h>
-> - #include <string.h>
-> ---
-> -2.42.1
-> -
-> diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.bb b/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
-> similarity index 71%
-> rename from meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.bb
-> rename to meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
-> index 835f33055a..287c7685e4 100644
-> --- a/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.bb
-> +++ b/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.bb
-> @@ -2,15 +2,12 @@ SUMMARY = "a SocketCAN over Ethernet tunnel"
->   HOMEPAGE = "https://github.com/mguentner/cannelloni"
->   LICENSE = "GPL-2.0-only"
+> diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.9.30.bb
+> similarity index 98%
+> rename from meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb
+> rename to meta-oe/recipes-bsp/fwupd/fwupd_1.9.30.bb
+> index a098bf8eea5a..52d80be05b41 100644
+> --- a/meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb
+> +++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.9.30.bb
+> @@ -6,7 +6,7 @@ DEPENDS = "glib-2.0 libxmlb json-glib libjcat gcab vala-native python3-jinja2-na
 >   
-> -SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https;branch=master \
-> -           file://0001-include-bits-stdc-.h-only-when-using-libstdc.patch \
-> -          "
-> -SRCREV = "3d4fb8c8b07f6d7c62b2bdad7e5a94de61c9a29b"
-> +SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https;branch=master"
-> +SRCREV = "9f649ef21710999c6f674bc3d914ab2e88363bac"
+>   SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+>              file://run-ptest"
+> -SRC_URI[sha256sum] = "a1d484778ae87c69b38f417659b33fe3d689373ce0831d1f95617b8aa76e8c37"
+> +SRC_URI[sha256sum] = "a69de9a494a364095cc820faa10a68ec38d31f55eed5388322182048b81d10b3"
 >   
->   LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->   
->   inherit cmake
->   
-> -
->   PACKAGECONFIG ??= "lksctp-tools"
->   PACKAGECONFIG[lksctp-tools] = "-DSCTP_SUPPORT=true, -DSCTP_SUPPORT=false, lksctp-tools"
+>   UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
+>   UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 > 
 > 
 > 
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#118323): https://lists.openembedded.org/g/openembedded-devel/message/118323
-> Mute This Topic: https://lists.openembedded.org/mt/114053246/1997914
+> View/Reply Online (#118303): https://lists.openembedded.org/g/openembedded-devel/message/118303
+> Mute This Topic: https://lists.openembedded.org/mt/114043642/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
