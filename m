@@ -2,62 +2,62 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F741C83F16
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21FAEC83F15
 	for <webhook@archiver.kernel.org>; Wed,  9 Jul 2025 17:31:26 +0000 (UTC)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web10.3049.1752082281251777134
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
+ by mx.groups.io with SMTP id smtpd.web11.3021.1752082278696743159
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jul 2025 10:31:21 -0700
+ Wed, 09 Jul 2025 10:31:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MIgdtmcF;
- spf=pass (domain: gmail.com, ip: 209.85.167.43, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5550dca1241so71586e87.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 10:31:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kCcffaAi;
+ spf=pass (domain: gmail.com, ip: 209.85.167.42, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-558fa0b2cc8so61069e87.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 10:31:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752082279; x=1752687079; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1752082276; x=1752687076; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8o/Fz1jDmreNFFMbtvyPNK/r60rF4NoKG8sRm/1zYws=;
-        b=MIgdtmcF1FcuvyL5tAvfjqPZv8AOU/TE6Up15ECvrzHvpnqbsR7E587XP9J65GuI3z
-         E0G/st/QGwtDG2Ii8t4CJQnVtNQMaVBqYF8RBfARCBhR2qwixsRybEmIRPGjG5GlG0iR
-         Om4wnDcYgFqYk0yi0VRzLW3fXPCKAvpl9O1mHqgzsJR5elWMRN8Xbz9mvNsi3GzOwQv3
-         A3j/o9TeoMQNmPSyE+3+tnrf6ntEaHqUmTrS2K5m5OMKkmaDavRiYuHYLoT7sKtSApju
-         PCTTdXmiJDDjXx1M1/3a09E2BuygTOFU2UzhPfmDNi8xwDSfB+ONop7JKCr9btpVtvu9
-         NAow==
+        bh=4jsH5eubNbr/sm1/NAIF7FIK4uYq+6w3VOoSeNTp0CA=;
+        b=kCcffaAiksY8FJk4AKjpyQNp9BLDDHLaAzfnJ4Ske6IoPGOU3EpQCr6OGrSvMlsXsB
+         FS3D1w/VLZMgUPPUlERTczeG51Jd+H3y+it1NcSeQ0kHi+x7EjR+eAjgRrSNg1sgQaBB
+         r+MiDvITfUB6aC7TCaMId8mjgazfex5wWWP7wRHu3IVH6A5DQq+TVSh3kcwZmTC1BuRa
+         gYBxMiWFXrxrhSHZi8rgeXY+HPj8iVSOIAoXYecoy8+Cmpi6N442rtgYtFevfZIx4G/q
+         FYP0AfxGXxXVbuEmswtPcOkOd74pbpIvGEU9ZbNPtRExPYBIoBs9LENDGH7XJR2b+dA9
+         iRWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752082279; x=1752687079;
+        d=1e100.net; s=20230601; t=1752082276; x=1752687076;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=8o/Fz1jDmreNFFMbtvyPNK/r60rF4NoKG8sRm/1zYws=;
-        b=DTRvQj03b/jq6/K1/hTDvEMB+f4OAl7FuxfLGrpmQ45ihWNX4lH9+gSUqD/POJ17qf
-         JUjn2mXljbbR0Un9W15OioNhssc/qEejuJH7jA/PS2ytKYEnB8Mk5OqrZtqS3gocIYSh
-         hhJdMPYeIvr8RxUCdsmnwwYB5/nsBHpxCCLBmaOfM1+Q4+6R1bNUYCzxqbVNN+r0r9SD
-         +wYPZjmHTZnc99lgjIKSjsoNUvwxatFhyiQB2fe2hbjKG+wOfz3U9vu6hGNZlM8SqwMR
-         U10RXSffHWS2rrD4fMeZ6uwK1akL10+VH1rQtWHpxujjL5D9HBxuBYNqTO0d43DlF1fx
-         7+Dg==
-X-Gm-Message-State: AOJu0YwX1eyDxpw0l8xp2TgEEOMfWoXlSBrXaQ9ZTfvA7MWP44Y0wSVY
-	sq2PPjX4dXSDHJ9RbeA/whR0mZq7p7f99qTXBcbXy/FElqP7cQQ3JuwVru+JvA==
-X-Gm-Gg: ASbGncuVXZzv5a27Qe0ILxT6Cq8QWzqVJP+F9rASeGAIQsQ3ycgPlOj6x5XBBXIr/g/
-	5JD7F336SBZwD60ADWLa6CMDe60mxfjypfAps6okjIVrMfCPYRPorCH8oGXhfgbXN89Jxual9Bt
-	UUovcRWDHyDGOQxzPH6YmsVf39Jn9KRiG63s25D3xjq5SV8H4idKTc2+vaozAod2cY2ibQG5xA3
-	UKqas+75Oc2WCQaCMS8Rh19051N1qmTmYTlX6Njz4lu/uXVDYHu0u9YusHr+TvN9/BmWPcn+ubh
-	iDnJJ/zWH72Pz3lkh+IgeSclFIHVF9iRCLQM0Z+bmcWbeRzo17ern7VEZl/PpIYiQyxmjGzcSSM
-	RB8I=
-X-Google-Smtp-Source: AGHT+IGRLMilwkMdPuJJ30QZ8HMpnacbnat2hIrYqVm/enY8+yQZfDG30YjuKgS8RrXwZ9yThq+A4A==
-X-Received: by 2002:a05:6512:3c86:b0:553:5e35:b250 with SMTP id 2adb3069b0e04-559000c51e0mr306651e87.32.1752082278801;
-        Wed, 09 Jul 2025 10:31:18 -0700 (PDT)
+        bh=4jsH5eubNbr/sm1/NAIF7FIK4uYq+6w3VOoSeNTp0CA=;
+        b=EaOWbL3FRLOcszovZPeb8IoH1vmfAJu94vQJmPeXXt24IqOOLLxOuZCWR7gkviPPGC
+         43FBivQW5ySs9bH4B/YtF29D19RHLj+C6d7etTlDcmxvGUbTcYqL+RtgxWSfdoUZoUf9
+         1zbTMW7P+khgsfjKTXYvSxr9YFZ9wC46iN6lIEKxF938vciZ5Sa+RQTE32ZYTuZokPIr
+         rIDoieDXdvxPIC8cMY8+rIGNWpqS8oZ4CxxvUXujJoNRWVh/d6LFZt3FsTkcaU9VPT9V
+         /zSsLBhMQpcgxDqnfXXcNE3dE2+H71oUkXwUz7G6qbrA9ivnDnGXw5WnnpX3vKzykZal
+         4YpQ==
+X-Gm-Message-State: AOJu0YwDX/56+nT1pa6vpSkFunUZ58mLMZpdQYhRQldUXmpQnSTlS0LJ
+	HpnpLL7EOBrMlWIHipjH9wmJJYccjgFlS/zCXhK7UhGb021S10O31SpfL6pWTQ==
+X-Gm-Gg: ASbGncsttorbf5KZciel1gMq9V2QCv92C0Dx4oq6TBKZ0TiLDvRF8W/aIqCxpSu+vXk
+	9QsDrWMhj1TilCVbUjCPk0cRlgirkGeG2rzD/QSy//yN/+VpAup3paNB266ABjTtA5Cn3gsQzO/
+	sgB/PrhwIG2NTJzG3BlsTRUiIU4jhEk6LeC1HDTBQQhU/E/Po2/g9beEa75u1X3aysZ9ifABwVF
+	2X7SEL+AEu1ARQW3DyofmWeWL1SkNOS7tXViXMjpqGNFtJaiwEUiNMVDM+hlp1bXHmM9iCXIegm
+	z0MDTP1Q7l1mLv0xfU45tMhsGGCp8f2qrJkpDbE8zNoiEDyJIafx4tae4wsLPPtR4eWLTbwmm/i
+	v4h0=
+X-Google-Smtp-Source: AGHT+IHj1OIjDvRv5+gPQbtXqSHfZ9PKvzroV1jezu+JlkoXi7Nxp6oV4aYX7SwDX999nhmJbK9FgA==
+X-Received: by 2002:a05:6512:2c8d:b0:553:cc61:1724 with SMTP id 2adb3069b0e04-559000476bemr269518e87.24.1752082276260;
+        Wed, 09 Jul 2025 10:31:16 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.70.141])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-556383baeffsm2073854e87.2.2025.07.09.10.31.17
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-556383baeffsm2073854e87.2.2025.07.09.10.31.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Jul 2025 10:31:18 -0700 (PDT)
+        Wed, 09 Jul 2025 10:31:15 -0700 (PDT)
 From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-openembedded][PATCH 10/20] flatcc: Add patch for CMake 4+ compatibility
-Date: Wed,  9 Jul 2025 20:30:44 +0300
-Message-ID: <20250709173054.605430-10-alperyasinak1@gmail.com>
+Subject: [meta-openembedded][PATCH 08/20] snort3: Upgrade 3.7.1.0 -> 3.9.1.0 to allow CMake 4+ compatibility
+Date: Wed,  9 Jul 2025 20:30:42 +0300
+Message-ID: <20250709173054.605430-8-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250709173054.605430-1-alperyasinak1@gmail.com>
 References: <20250709173054.605430-1-alperyasinak1@gmail.com>
@@ -67,11 +67,17 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 17:31:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118364
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118362
+
+- Drop 0001-Fix-build-with-gcc-15.patch because fixed in the newer version.
+
+Changelog:
+
+https://github.com/snort3/snort3/blob/3.9.1.0/ChangeLog.md
 
 Fix:
 
-| CMake Error at CMakeLists.txt:2 (cmake_minimum_required):
+| CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
 |   Compatibility with CMake < 3.5 has been removed from CMake.
 |
 |   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -85,85 +91,118 @@ Fix:
 
 Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- .../0002-allow-build-with-cmake-4.patch       | 52 +++++++++++++++++++
- meta-oe/recipes-devtools/flatcc/flatcc_git.bb |  2 +-
- 2 files changed, 53 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/flatcc/flatcc/0002-allow-build-with-cmake-4.patch
+ .../snort3/0001-Fix-build-with-gcc-15.patch   | 79 -------------------
+ .../{snort3_3.7.1.0.bb => snort3_3.9.1.0.bb}  |  6 +-
+ 2 files changed, 2 insertions(+), 83 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/snort/snort3/0001-Fix-build-with-gcc-15.patch
+ rename meta-networking/recipes-connectivity/snort/{snort3_3.7.1.0.bb => snort3_3.9.1.0.bb} (87%)
 
-diff --git a/meta-oe/recipes-devtools/flatcc/flatcc/0002-allow-build-with-cmake-4.patch b/meta-oe/recipes-devtools/flatcc/flatcc/0002-allow-build-with-cmake-4.patch
-new file mode 100644
-index 0000000000..b0b0cedbfb
---- /dev/null
-+++ b/meta-oe/recipes-devtools/flatcc/flatcc/0002-allow-build-with-cmake-4.patch
-@@ -0,0 +1,52 @@
-+From 4a53680194dac08b8f0247a7f3459c95ce0fddbb Mon Sep 17 00:00:00 2001
-+From: Alper Ak <alperyasinak1@gmail.com>
-+Date: Wed, 9 Jul 2025 13:03:33 +0300
-+Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
-+ compatibility
-+
-+Fix:
-+
-+| CMake Error at CMakeLists.txt:2 (cmake_minimum_required):
-+|   Compatibility with CMake < 3.5 has been removed from CMake.
-+|
-+|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
-+|   to tell CMake that the project requires at least <min> but has been updated
-+|   to work with policies introduced by <max> or earlier.
-+|
-+|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
-+|
-+|
-+| -- Configuring incomplete, errors occurred!
-+
-+Upstream-Status: Submitted [https://github.com/dvidelabs/flatcc/pull/349]
-+
-+Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
-+---
-+ CMakeLists.txt               | 2 +-
-+ external/hash/CMakeLists.txt | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index cb6715a..b69b0bb 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -1,5 +1,5 @@
-+ # Ubuntu 14.04 (Trusty)
-+-cmake_minimum_required (VERSION 2.8.12.2)
-++cmake_minimum_required (VERSION 3.5)
-+ # Centos 7
-+ #cmake_minimum_required (VERSION 2.8.11)
-+ #cmake_minimum_required (VERSION 2.8)
-+diff --git a/external/hash/CMakeLists.txt b/external/hash/CMakeLists.txt
-+index 7b7d990..12eb3da 100644
-+--- a/external/hash/CMakeLists.txt
-++++ b/external/hash/CMakeLists.txt
-+@@ -1,4 +1,4 @@
-+-cmake_minimum_required (VERSION 3.0.2)
-++cmake_minimum_required (VERSION 3.5)
-+ 
-+ project (HashTest)
-+ 
-+-- 
-+2.43.0
-+
-diff --git a/meta-oe/recipes-devtools/flatcc/flatcc_git.bb b/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
-index 2565e3b9bd..a4bdda162d 100644
---- a/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
-+++ b/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
-@@ -11,10 +11,10 @@ PV = "0.6.2+git"
- SRC_URI = " \
-            git://github.com/dvidelabs/flatcc.git;protocol=https;branch=master \
-            file://0001-Check-for-C-standard-version-23-for-__fallthrough__.patch \
-+           file://0002-allow-build-with-cmake-4.patch \
- "
- SRCREV = "1653ec964730ec7d9892a08a1695ada6d20f5196"
- 
+diff --git a/meta-networking/recipes-connectivity/snort/snort3/0001-Fix-build-with-gcc-15.patch b/meta-networking/recipes-connectivity/snort/snort3/0001-Fix-build-with-gcc-15.patch
+deleted file mode 100644
+index f9cade5256..0000000000
+--- a/meta-networking/recipes-connectivity/snort/snort3/0001-Fix-build-with-gcc-15.patch
++++ /dev/null
+@@ -1,79 +0,0 @@
+-From 2bfb46b11d35f2fc5f3926376651cc936c6eab13 Mon Sep 17 00:00:00 2001
+-From: Nguyen Dat Tho <tho3.nguyen@lge.com>
+-Date: Mon, 31 Mar 2025 15:59:51 +0900
+-Subject: [PATCH] Fix build with gcc-15
 -
- inherit cmake
+-Signed-off-by: Nguyen Dat Tho <tho3.nguyen@lge.com>
+-
+-Upstream-Status: Submitted <https://github.com/snort3/snort3/pull/408>
+----
+- tools/snort2lua/config_states/config_ignore_ports.cc     | 1 +
+- tools/snort2lua/preprocessor_states/pps_dcerpc_server.cc | 1 +
+- tools/snort2lua/preprocessor_states/pps_frag3_engine.cc  | 1 +
+- tools/snort2lua/preprocessor_states/pps_stream5_tcp.cc   | 1 +
+- tools/snort2lua/rule_states/rule_gid_sid.cc              | 1 +
+- 5 files changed, 5 insertions(+)
+-
+-diff --git a/tools/snort2lua/config_states/config_ignore_ports.cc b/tools/snort2lua/config_states/config_ignore_ports.cc
+-index 4ddfebb5d..ec180a558 100644
+---- a/tools/snort2lua/config_states/config_ignore_ports.cc
+-+++ b/tools/snort2lua/config_states/config_ignore_ports.cc
+-@@ -21,6 +21,7 @@
+- #include <vector>
+- #include <string>
+- #include <stdexcept>
+-+#include <cstdint>
+- 
+- #include "conversion_state.h"
+- #include "helpers/converter.h"
+-diff --git a/tools/snort2lua/preprocessor_states/pps_dcerpc_server.cc b/tools/snort2lua/preprocessor_states/pps_dcerpc_server.cc
+-index 2a41decb8..79e98dd2b 100644
+---- a/tools/snort2lua/preprocessor_states/pps_dcerpc_server.cc
+-+++ b/tools/snort2lua/preprocessor_states/pps_dcerpc_server.cc
+-@@ -25,6 +25,7 @@
+- 
+- #include <algorithm>
+- #include <cstring>
+-+#include <cstdint>
+- 
+- namespace preprocessors
+- {
+-diff --git a/tools/snort2lua/preprocessor_states/pps_frag3_engine.cc b/tools/snort2lua/preprocessor_states/pps_frag3_engine.cc
+-index d5c1fcf4d..c0309cc6f 100644
+---- a/tools/snort2lua/preprocessor_states/pps_frag3_engine.cc
+-+++ b/tools/snort2lua/preprocessor_states/pps_frag3_engine.cc
+-@@ -19,6 +19,7 @@
+- 
+- #include <sstream>
+- #include <vector>
+-+#include <cstdint>
+- 
+- #include "conversion_state.h"
+- #include "helpers/converter.h"
+-diff --git a/tools/snort2lua/preprocessor_states/pps_stream5_tcp.cc b/tools/snort2lua/preprocessor_states/pps_stream5_tcp.cc
+-index 1e97a58ad..3df35340e 100644
+---- a/tools/snort2lua/preprocessor_states/pps_stream5_tcp.cc
+-+++ b/tools/snort2lua/preprocessor_states/pps_stream5_tcp.cc
+-@@ -20,6 +20,7 @@
+- #include <sstream>
+- #include <vector>
+- #include <string>
+-+#include <cstdint>
+- 
+- #include "conversion_state.h"
+- #include "helpers/s2l_util.h"
+-diff --git a/tools/snort2lua/rule_states/rule_gid_sid.cc b/tools/snort2lua/rule_states/rule_gid_sid.cc
+-index 7f2b84ae4..d3215b655 100644
+---- a/tools/snort2lua/rule_states/rule_gid_sid.cc
+-+++ b/tools/snort2lua/rule_states/rule_gid_sid.cc
+-@@ -27,6 +27,7 @@
+- 
+- #include <sstream>
+- #include <unordered_map>
+-+#include <cstdint>
+- 
+- #include "conversion_state.h"
+- #include "helpers/converter.h"
+--- 
+-2.34.1
+-
+diff --git a/meta-networking/recipes-connectivity/snort/snort3_3.7.1.0.bb b/meta-networking/recipes-connectivity/snort/snort3_3.9.1.0.bb
+similarity index 87%
+rename from meta-networking/recipes-connectivity/snort/snort3_3.7.1.0.bb
+rename to meta-networking/recipes-connectivity/snort/snort3_3.9.1.0.bb
+index e9169a050f..598b1f4dfb 100644
+--- a/meta-networking/recipes-connectivity/snort/snort3_3.7.1.0.bb
++++ b/meta-networking/recipes-connectivity/snort/snort3_3.9.1.0.bb
+@@ -9,11 +9,9 @@ DEPENDS = "flex-native hwloc libdaq libdnet libpcap libpcre libtirpc libunwind l
  
- # Enable installation for target
+ SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master \
+            file://0001-cmake-Check-for-HP-libunwind.patch \
+-           file://0001-cmake-Pass-noline-flag-to-flex.patch \
+-           file://0001-Fix-build-with-gcc-15.patch"
+-
+-SRCREV = "6a11279883a8584e06ad9ab2df162c639961cd61"
++           file://0001-cmake-Pass-noline-flag-to-flex.patch"
+ 
++SRCREV = "6730d53f99f3714654804d07203f33e6b1b8a107"
+ 
+ PACKAGES =+ "${PN}-scripts"
+ 
 -- 
 2.43.0
 
