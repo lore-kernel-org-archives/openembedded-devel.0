@@ -1,216 +1,138 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C0DFC83F0A
-	for <webhook@archiver.kernel.org>; Wed,  9 Jul 2025 20:07:07 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web11.6665.1752091626592302313
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A057C83F0A
+	for <webhook@archiver.kernel.org>; Wed,  9 Jul 2025 20:35:27 +0000 (UTC)
+Received: from mail-yb1-f179.google.com (mail-yb1-f179.google.com [209.85.219.179])
+ by mx.groups.io with SMTP id smtpd.web10.7271.1752093326837058723
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jul 2025 13:07:06 -0700
+ Wed, 09 Jul 2025 13:35:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZZTE460F;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-234bfe37cccso3904935ad.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 13:07:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AEIjnK7S;
+ spf=pass (domain: gmail.com, ip: 209.85.219.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-yb1-f179.google.com with SMTP id 3f1490d57ef6-e7311e66a8eso214814276.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 13:35:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752091626; x=1752696426; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1752093326; x=1752698126; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=o8WxU8uZ3DYvNPBc/LULISuzhW867ZlH7akWlrWFlfc=;
-        b=ZZTE460F76Xf34vApfwMEdcZjKsYAc0HgLWE0WcczwC6jMu2wtgSrC+OTRbSjKf+0r
-         lFw3ejAun7YAjE5AbF2Ci/+fJV1BH/pT7ZAcYwxqsWfVyBNDPuT9Wu5bf2BCoJieDVMO
-         A2Q3OfwzFIsK3dZ8ETaJOheinFPx8arhIyg/I+n7XqUSrsoq8VTUFmrGp5DEl45fju7e
-         RhNjV2k0LG3bgiIL4OuPa7uUm2NB3MzxitJLUyOH/BJsPZCJHC8O1ihK+VDLj9P/HmPK
-         5blhhEis4y/EwKUoWEQv83vB7/YWsr4hOIZSnU04+/8hwUp/FyYRCY68c2nKe+akM1si
-         i53w==
+        bh=J6GjtFYeTqlR+0RJ+fsJXasy4+d0Oh2orbwNFek7hes=;
+        b=AEIjnK7S67Nf/sZZYVGxf7WkP6/yByBq6MbWsYSM5ZyK5vYwcNfD0p9ezl44kctF6i
+         mj9+AAMzjqM44IVVzYRKoZwy2xchU8fte9tyqCbbf0WmWPLDD6KH/E2hYmRSZCyqP5NA
+         h3JHPhqCoLHGa/t4tDDMsNtQBskp/iIrYMOc/9rMn0CKhqO8S5f39vLwXRVOlg0IKasQ
+         lS+ORBWTuhuLzAT9C4wGw7L404PhIyum8Pn6/dHdxeMfgGLSvCSTu37zTzVO462FzUco
+         9ZGdktcgyeakW/3QcV7bprw6Qlo66Ku2DduuumzyTKJIW8EUdnGSqwzG0pa61HeJhQQ6
+         SOiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752091626; x=1752696426;
+        d=1e100.net; s=20230601; t=1752093326; x=1752698126;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=o8WxU8uZ3DYvNPBc/LULISuzhW867ZlH7akWlrWFlfc=;
-        b=W2SxydsxgUGrw+QLYYk2UP7H1VB7wTKa+RzMPzTNItO9aT+XfRqZ6R+Trf7VUwTiU0
-         jYwFiRDERo0qiyRpfThV7G2FJfrPDQOzFmt1FmkPzA9b2XvsGBRSeMtRLBuD5d7sqmnk
-         9JI2B58NktMs+Z0Oj+XJcan7AHtyWsymzjQj2E9r3gUUX6jHK5784AZwQ9F7ta90im1s
-         CZgU4gRyl/Lx4qAgCMcMX3wnaUszIbz4e9xkiYVMr6OVbkrj+2Tw/5eZ6PM/Cc6ojNm7
-         0QSHiEK6/o9FTVVgzY/2k9Kj9tInK4OH+jD56DpF1yaO3QDuPKdkopYTmidkIIUyTSqT
-         1W0w==
-X-Gm-Message-State: AOJu0YzaP264xE0WQFYtV+rgIZCytrsAU1VvrkaHTbil6mwI1z+HSgil
-	YtyAex+iUGE06G7wZzdNImX3cNu12BZeXbHm3F22kJAknrxhTJoRF1wbBcJLFZ8FQvuwBn1HWh7
-	uCAbW5v5/rE3a0YNYzSx18jbw8rkN362d+h3F
-X-Gm-Gg: ASbGncunft3BSKTyupqQIPy7sVvfEPzorcwM78XwxCtzoTr2n+3OqO8kRlddEa10pR8
-	BTvY+89E9QtQQdt1afoL1B48Br2hILHxRvoRsqr1iTDfBo/GF2m6WuGHjailwabMrlGC0eyPLge
-	xaBr8C5MjnTnuqcpSBSi6x979c7RaOAE3Lu72iEdXcivjo8RiUM4NY6Q==
-X-Google-Smtp-Source: AGHT+IEF7V1GNn5cCR0iSFoZfYnSYhMN7CeDGkpFsgK7AESPMmwRR0tpE/AP+RQzePGhJAbxraF3FDunmdQUDCycOQs=
-X-Received: by 2002:a17:90b:1f84:b0:313:31ca:a74 with SMTP id
- 98e67ed59e1d1-31c3c2e2d8amr1857885a91.16.1752091625829; Wed, 09 Jul 2025
- 13:07:05 -0700 (PDT)
+        bh=J6GjtFYeTqlR+0RJ+fsJXasy4+d0Oh2orbwNFek7hes=;
+        b=KcK/+chgaBhx+yhse1KVPy/Eq+wyPNyipwGrCtdhWpbhiED6VkBrqRVWrcHu1rhMiZ
+         1rNekxWvzvqkTW7LtKJ25XMBUYc6J+rZLuPCLNglXEMKAON/B7bG2plAtpqjiiYME/0v
+         SShKIIWXgmXYIgbBuyk52LKFEOlp9+iK4N0MBc5f+YgCqRYwu6L7unYF/Dxk+UvrSoak
+         rGXgU4SzZ0IMhbVu9IXxV0zTxvMRhmrfrJaz26ry8QfF0pblJbwzMSOP/CPxRn/qBues
+         V0HkEYrd4qBwWpqF5GQd6C/+fvxk06CeaEYXDhNXJWtb+xlKNKVcY5/VWge4Ws3vk4TB
+         +DvQ==
+X-Gm-Message-State: AOJu0Yw0oDkF2kzB8yRhr+7SnMi2QYoAHx0FY52XZLWnMObTEw42BqlB
+	XJTSYcFdVlDK68aS2JuAoydP0w67g4z41zDWFoPL+iT2FyFGhnr4EL9EEappFkQZon3JjWqG8o1
+	fkUsRUu4PrLm89lRoE5ca52LZsLhvZE0=
+X-Gm-Gg: ASbGncv/YK611El3abYeyCwpZEchZsqh38uhvhhIPLUEcnlk574dGec9j94NoxKbhPx
+	z0o0oTqR21lR9Hs+x7yV+1GoYWKjtkqMUzgt30zXosog6TDpMDYpJXqVrEOmJM0QY+ZLhK0Dsvc
+	Fmiep9zEF09PeQ3SjOuDhgE/2tBJYAfsu6NPIqmJrndsqIZgGYfSTQjQ==
+X-Google-Smtp-Source: AGHT+IEZ7eqsMT0Di9idi3OQAXhB6UGsh/MZ8vT9E8pPHXQTMgreR8XsYka3kquXTl6eUne6FvW77ptxJ1jRvMRwGu8=
+X-Received: by 2002:a05:690c:670a:b0:70e:16a3:ce92 with SMTP id
+ 00721157ae682-717c4741ea2mr3052117b3.17.1752093325825; Wed, 09 Jul 2025
+ 13:35:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250708195636.1678606-1-alperyasinak1@gmail.com> <3cbc36cb-3602-4585-84f7-01df20856991@gmail.com>
-In-Reply-To: <3cbc36cb-3602-4585-84f7-01df20856991@gmail.com>
-From: Alper Ak <alperyasinak1@gmail.com>
-Date: Wed, 9 Jul 2025 23:06:54 +0300
-X-Gm-Features: Ac12FXyQg-c5zeoFrtWLjIBXneSOZImthx6Wnvx520pZDg6Yc_El4q2V8CaBsys
-Message-ID: <CAGpma=6H4-agQt9rzSK6koc+rY51X_p01SW3sR5p1FU6sh6iVQ@mail.gmail.com>
-Subject: Re: [oe] [meta-openembedded][PATCH 01/20] cannelloni: Upgrade 1.1.0
- -> 2.0.0 to allow CMake 4+ compatibility
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
+References: <3c8dd1aa0e7a4abcbb93c151a7e671f1@diehl.com>
+In-Reply-To: <3c8dd1aa0e7a4abcbb93c151a7e671f1@diehl.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 9 Jul 2025 13:34:58 -0700
+X-Gm-Features: Ac12FXwggytwGUgHtLL-x3cWO6Gy4SDjKRf6mnGZdFnMDOJdRQ9Fbz77dz_tbHo
+Message-ID: <CAMKF1sprBm4-mHNzh+2Hiv8V7kEF3djUWJFaFAx_3o6Ch8Q8zw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] libp11: version bump 0.4.13 -> 0.4.16
+To: denis.osterland@diehl.com
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 20:07:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118381
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 20:35:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118382
 
-Sent a v2 patch ->
-https://lists.openembedded.org/g/openembedded-devel/message/118380
+This fails to build for distros having 'usrmerge' in DISTRO_FEATURES
 
-Khem Raj <raj.khem@gmail.com>, 9 Tem 2025 =C3=87ar, 19:09 tarihinde =C5=9Fu=
-nu yazd=C4=B1:
+ERROR: libp11-0.4.16-r0 do_package: QA Issue: libp11:
+Files/directories were installed but not shipped in any package:
+  /usr/lib/ossl-modules/pkcs11prov.so
+  /usr/lib/ossl-modules/libpkcs11.so
+Please set FILES such that these items are packaged. Alternatively if
+they are unneeded, avoid installing them or delete them within
+do_install.
+libp11: 2 installed and not shipped files. [installed-vs-shipped]
+
+On Wed, Jul 9, 2025 at 7:35=E2=80=AFAM Denis OSTERLAND-HEIM via
+lists.openembedded.org
+<denis.osterland=3Ddiehl.com@lists.openembedded.org> wrote:
 >
-> fails to build with clang ( I think its upgrade having added
-> incompatible code )
+> This version comes with a pkcs11 provider called 'pkcs11prov'.
+> Configure modules directory for native build for the provider.
 >
-> https://errors.yoctoproject.org/Errors/Details/869562/
+> Signed-off-by: Denis Osterland-Heim <denis.osterland@diehl.com>
+> ---
+>  .../libp11/{libp11_0.4.13.bb =3D> libp11_0.4.16.bb}          | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-support/libp11/{libp11_0.4.13.bb =3D> libp11_0.4.=
+16.bb} (77%)
 >
-> On 7/8/25 12:56 PM, Alper Ak via lists.openembedded.org wrote:
-> > - Drop 0001-include-bits-stdc-.h-only-when-using-libstdc.patch because =
-already fixed in newer version.
-> >
-> > Changelog:
-> >
-> > https://github.com/mguentner/cannelloni/compare/v1.1.0...v2.0.0
-> >
-> > Fix:
-> >
-> > | CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
-> > |   Compatibility with CMake < 3.5 has been removed from CMake.
-> > |
-> > |   Update the VERSION argument <min> value.  Or, use the <min>...<max>=
- syntax
-> > |   to tell CMake that the project requires at least <min> but has been=
- updated
-> > |   to work with policies introduced by <max> or earlier.
-> > |
-> > |   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3D3.5 to try configuring any=
-way.
-> > |
-> > |
-> > | -- Configuring incomplete, errors occurred!
-> >
-> > Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
-> > ---
-> >   ...bits-stdc-.h-only-when-using-libstdc.patch | 37 ------------------=
--
-> >   ...annelloni_1.1.0.bb =3D> cannelloni_2.0.0.bb} |  7 +---
-> >   2 files changed, 2 insertions(+), 42 deletions(-)
-> >   delete mode 100644 meta-networking/recipes-connectivity/cannelloni/ca=
-nnelloni/0001-include-bits-stdc-.h-only-when-using-libstdc.patch
-> >   rename meta-networking/recipes-connectivity/cannelloni/{cannelloni_1.=
-1.0.bb =3D> cannelloni_2.0.0.bb} (71%)
-> >
-> > diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni=
-/0001-include-bits-stdc-.h-only-when-using-libstdc.patch b/meta-networking/=
-recipes-connectivity/cannelloni/cannelloni/0001-include-bits-stdc-.h-only-w=
-hen-using-libstdc.patch
-> > deleted file mode 100644
-> > index 71f447c94b..0000000000
-> > --- a/meta-networking/recipes-connectivity/cannelloni/cannelloni/0001-i=
-nclude-bits-stdc-.h-only-when-using-libstdc.patch
-> > +++ /dev/null
-> > @@ -1,37 +0,0 @@
-> > -From 7aed36765ae44b41ede7e139da0a11b3696f2e06 Mon Sep 17 00:00:00 2001
-> > -From: Khem Raj <raj.khem@gmail.com>
-> > -Date: Mon, 13 Nov 2023 00:07:23 -0800
-> > -Subject: [PATCH] include bits/stdc++.h only when using libstdc++
-> > -
-> > -We have other c++ runtime implementations e.g. llvm's libc++ which doe=
-s
-> > -not provide this header bits/stdc++.h, therefore make sure that this
-> > -header is only included when using libstdc++
-> > -
-> > -Fixes
-> > -| /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/cannelloni/1.1.0=
-/git/tcpthread.cpp:27:10: fatal error: 'bits/stdc++.h' file not found
-> > -|    27 | #include <bits/stdc++.h>
-> > -|       |          ^~~~~~~~~~~~~~~
-> > -
-> > -Upstream-Status: Submitted [https://github.com/mguentner/cannelloni/pu=
-ll/56]
-> > -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ----
-> > - tcpthread.cpp | 2 ++
-> > - 1 file changed, 2 insertions(+)
-> > -
-> > -diff --git a/tcpthread.cpp b/tcpthread.cpp
-> > -index a1b3047..bb5a7b2 100644
-> > ---- a/tcpthread.cpp
-> > -+++ b/tcpthread.cpp
-> > -@@ -24,7 +24,9 @@
-> > - #include <cstdint>
-> > - #include <cstdio>
-> > -
-> > -+#ifdef __GLIBCXX__
-> > - #include <bits/stdc++.h>
-> > -+#endif
-> > -
-> > - #include <linux/can.h>
-> > - #include <string.h>
-> > ---
-> > -2.42.1
-> > -
-> > diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni=
-_1.1.0.bb b/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.=
-0.bb
-> > similarity index 71%
-> > rename from meta-networking/recipes-connectivity/cannelloni/cannelloni_=
-1.1.0.bb
-> > rename to meta-networking/recipes-connectivity/cannelloni/cannelloni_2.=
-0.0.bb
-> > index 835f33055a..287c7685e4 100644
-> > --- a/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.=
-bb
-> > +++ b/meta-networking/recipes-connectivity/cannelloni/cannelloni_2.0.0.=
-bb
-> > @@ -2,15 +2,12 @@ SUMMARY =3D "a SocketCAN over Ethernet tunnel"
-> >   HOMEPAGE =3D "https://github.com/mguentner/cannelloni"
-> >   LICENSE =3D "GPL-2.0-only"
-> >
-> > -SRC_URI =3D "git://github.com/mguentner/cannelloni.git;protocol=3Dhttp=
-s;branch=3Dmaster \
-> > -           file://0001-include-bits-stdc-.h-only-when-using-libstdc.pa=
-tch \
-> > -          "
-> > -SRCREV =3D "3d4fb8c8b07f6d7c62b2bdad7e5a94de61c9a29b"
-> > +SRC_URI =3D "git://github.com/mguentner/cannelloni.git;protocol=3Dhttp=
-s;branch=3Dmaster"
-> > +SRCREV =3D "9f649ef21710999c6f674bc3d914ab2e88363bac"
-> >
-> >   LIC_FILES_CHKSUM =3D "file://gpl-2.0.txt;md5=3Db234ee4d69f5fce4486a80=
-fdaf4a4263"
-> >
-> >   inherit cmake
-> >
-> > -
-> >   PACKAGECONFIG ??=3D "lksctp-tools"
-> >   PACKAGECONFIG[lksctp-tools] =3D "-DSCTP_SUPPORT=3Dtrue, -DSCTP_SUPPOR=
-T=3Dfalse, lksctp-tools"
-> >
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#118323): https://lists.openembedded.org/g/openembed=
-ded-devel/message/118323
-> > Mute This Topic: https://lists.openembedded.org/mt/114053246/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+> diff --git a/meta-oe/recipes-support/libp11/libp11_0.4.13.bb b/meta-oe/re=
+cipes-support/libp11/libp11_0.4.16.bb
+> similarity index 77%
+> rename from meta-oe/recipes-support/libp11/libp11_0.4.13.bb
+> rename to meta-oe/recipes-support/libp11/libp11_0.4.16.bb
+> index 807d079a05..0f62abbf96 100644
+> --- a/meta-oe/recipes-support/libp11/libp11_0.4.13.bb
+> +++ b/meta-oe/recipes-support/libp11/libp11_0.4.16.bb
+> @@ -11,7 +11,7 @@ DEPENDS =3D "libtool openssl"
+>
+>  SRC_URI =3D "git://github.com/OpenSC/libp11.git;branch=3Dmaster;protocol=
+=3Dhttps"
+>
+> -SRCREV =3D "6d669183c7b241ce47ecce28744837ad92814f5c"
+> +SRCREV =3D "b9c2de288833e38a391ee3cb106f965a40153629"
+>
+>  UPSTREAM_CHECK_GITTAGREGEX =3D "libp11-(?P<pver>\d+(\.\d+)+)"
+>
+> @@ -19,7 +19,10 @@ UPSTREAM_CHECK_GITTAGREGEX =3D "libp11-(?P<pver>\d+(\.=
+\d+)+)"
+>  inherit autotools pkgconfig
+>
+>  EXTRA_OECONF =3D "--disable-static"
+> -EXTRA_OECONF:append:class-native =3D " --with-enginesdir=3D${RECIPE_SYSR=
+OOT_NATIVE}/usr/lib/engines-3"
+> +EXTRA_OECONF:append:class-native =3D "\
+> +    --with-enginesdir=3D${RECIPE_SYSROOT_NATIVE}/usr/lib/engines-3 \
+> +    --with-modulesdir=3D${RECIPE_SYSROOT_NATIVE}/usr/lib/ossl-modules \
+> +"
+>
+>  do_install:append () {
+>      rm -rf ${D}${docdir}/${BPN}
+> --
+> 2.47.2
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#118351): https://lists.openembedded.org/g/openembedde=
+d-devel/message/118351
+> Mute This Topic: https://lists.openembedded.org/mt/114065514/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
