@@ -2,225 +2,102 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 773E1C83F0A
-	for <webhook@archiver.kernel.org>; Wed,  9 Jul 2025 21:11:27 +0000 (UTC)
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
- by mx.groups.io with SMTP id smtpd.web10.8069.1752095483540407379
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7ADC2C83F0A
+	for <webhook@archiver.kernel.org>; Wed,  9 Jul 2025 21:13:07 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.web10.8090.1752095586023066590
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jul 2025 14:11:23 -0700
+ Wed, 09 Jul 2025 14:13:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MDhpGtQ/;
- spf=pass (domain: gmail.com, ip: 209.85.167.46, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-553b60de463so235703e87.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 14:11:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Zl2nJUE5;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-3121aed2435so386662a91.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 14:13:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752095481; x=1752700281; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=K7+Xj4BPYiYsKWBMnrNgkLfU5thDI8INrTakri+KlS8=;
-        b=MDhpGtQ/7HWdcl/Uc5+yiDAqOorqg0RlLiOjO1ja5TvZEK2MADj7zoX+BAdHXyQ36b
-         0wPpDKfDqBhdvaLM+fKOqUrN52hl4gjM7QbRged7WUUq9Gh2bVuLKqY+ryOzTXitY+ev
-         aq/++ljTRi60WhPoiaaJ50wnBn3naGxF8aqqPipAFXGm2Y54a2RZN71byafmvL8p/wQ3
-         JzwBHI7G2qFPEJ95HDZk+ZvTpSu4PHtF99LooNFZB5x0ydKk0F9z1sYnghxMr7K0zQZx
-         XrSLtVyT/mvItRHrqva2zmY6eUZJZZxCIOEDR9M+1hzL5XB5yKaEol/ctRBZRiMYKsq+
-         cU/g==
+        d=gmail.com; s=20230601; t=1752095585; x=1752700385; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=nsbcr1XjuCfiGhNd0R7tPBerEZLSDuR2W73trfhTCpE=;
+        b=Zl2nJUE53XvdtrIB5/Jtj5ILjQD2esMuCZWVOooaI/Povfnc2SbEMQ8DsHBz6AafBh
+         /M/9llVxkJphM8dMGTB/gb/u30lieijz6WeWV1/JBAcybIiw6X3/mJHARw9QRXjl5RWH
+         V9QFe4ao5tRYejzifctYvYs8u+RODTQoPn2MPoZkfcMEn7/v3D9q2j7WSqWpJQ3KFkHT
+         39KbBh56KBq4iJ76GwEScOweRObwc9e+m68Z+Q/iftzGAfzk6uH5i+9nc8QtUJbCgQ3S
+         p67mcYyhcJfUflMeP7v/kHWIX8J5kYABdVOyG2sbG6ec1wRFTiDvTQk2ghp+GPBqNbPv
+         83cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752095481; x=1752700281;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=K7+Xj4BPYiYsKWBMnrNgkLfU5thDI8INrTakri+KlS8=;
-        b=ud9v7d9IPkZH7VPiLIdCHrdA2oE/TOcYIEKIMGgt3JoPCk4Sz5WVJMzlzhjKOlh71z
-         wJBBlspd/961EBdxgDJ9/ucx5uypdgJcsNVunSdNst9/fBHBvIRlHxTaQBYV1j5k0meh
-         y4MGhKzA1MMq7aN1AoQvAsoQSg6zUwtFypTEwXATQar8KQ5i4kKTYAjjSztfUcsbLEf1
-         o/YJ/NDDGGZDjLK2fRK3ZVfvlJaA3ZJIZP8NepVH5s6DHdHTNIq96WfaQlK1sXlIAM0E
-         i3dTZrb7IqWJr3irL5fD0FsFvoO1UxOSsQKoqs+jO9CPvIkZjVdWKklJvXIla49aihja
-         R1cw==
-X-Gm-Message-State: AOJu0YylVQLw/OSYbWVFriGICoWKV24tuVCG/IKRDDsA+tWCC/76i00f
-	ehSAuBTC8BizvcC4zgP7+F+j0gQf8OxlN5+SKjBFyNHp2ddVJw/Qt4nNWA3sDQ==
-X-Gm-Gg: ASbGncsMgJ4QXyBbJlU/J0FiSh9k8Z4CZoOn7rci1Z+s5oGoxtYQwsf49io/Tjv24r5
-	ft53nZFvhusyFzqbkZXPKcRU2vJ2I1/exeF/BGhKsZQitsmOwives8ylZNltgJg13krHn6iJ8re
-	UsMhTHFwV/z0q555AIMDLjc+jTgOXA+MB/N+iIZ73bPVrrj0Y9G4y0gFprxDekPMLn0UozAvYYm
-	h6PKVaK/Yn0530pWPJ8StqzSC9/V1vMpTJmgTtBbjdJ2aFvjHmr5YgdSQDSgxDFGhis7M8cnoJ7
-	LisrkbFcAEeR369SCLpKHRfzR/lhSBlgGF+jp54nxw6Db4KFMJtWsRBZaRcMnnvP5AGk66NTF+m
-	bA6Y=
-X-Google-Smtp-Source: AGHT+IFzxTgTFhrtBpanAPaGMiN1erCIZ+lmnTgh/frpUr5D5Q1Ti3q75Ow29M6q8ShQ0AHMzn9tTA==
-X-Received: by 2002:a05:6512:158b:b0:553:349c:646c with SMTP id 2adb3069b0e04-559000c43aamr378768e87.27.1752095480937;
-        Wed, 09 Jul 2025 14:11:20 -0700 (PDT)
-Received: from localhost.localdomain ([176.33.70.141])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-55943b6be22sm21411e87.186.2025.07.09.14.11.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Jul 2025 14:11:20 -0700 (PDT)
-From: Alper Ak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCHv2] yajl: Add patch for CMake 4+ compatibility and fix build issue
-Date: Thu, 10 Jul 2025 00:11:12 +0300
-Message-ID: <20250709211112.663441-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1752095585; x=1752700385;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=nsbcr1XjuCfiGhNd0R7tPBerEZLSDuR2W73trfhTCpE=;
+        b=qMVwj2/en01YEJcmyzJlOUS0qrtjSniipyITt2Jw6cH9GkB4sFzYYdiBdcJVtLUXVK
+         Lc0J8xCLroyCAJ1a+x9rCg5wRubjF4/o3Fr+lTGNKwBfMWDpfJ/H+cIeWn4hXkYYXRd4
+         1K3fod/HzeXGi3tft0P3XrcW4NhcaPttygyfviLUzQll6d4iir94G9Py4+9PUQOSSRKi
+         ryXSM1+YMcQ9tQsBeiIyxzd48nGQChrJ6bD7XU1SiACz5tLw4d78nmbSj8sun+rUl/51
+         t7t4/iIJWdzExBrOMfQWrt/kYgc839n1WyNORV9WYPEqMTW/vwqQ6vD0an1B5vaZvt29
+         pRRw==
+X-Gm-Message-State: AOJu0Yx5ZtfsZsgpDlGl8yODG6FBnE0n3YY6g7x69SXPNzNKs1DNGmha
+	Z2t2jpRueEAcmP6GXnh3wtI/fFDvkRQuG5Zza9c6hsSTp7PDv895Xm/5iBXeCRUkMgAEZpY7Rk+
+	oYERTANA3/r3ORB/3372G1p0r9cpYFI4=
+X-Gm-Gg: ASbGncsIcVLkj6CYTaDVAWz0S5iWqsiJXVRCOEqcyNj+tEytn7pVMNUZC4HErOEDxkn
+	yGX7XltijbDkumCsrzrSbBRM/dbcwW0QHURxaA2GjtIsLT1HhGS50nOUSRJ/jSOAsnLIyL3IJU6
+	BTvq4kgOFyVOBfumyrc+BiqV1qV6C5gCxDVFIR3qRkUxhWNUcvHUiuNQ==
+X-Google-Smtp-Source: AGHT+IFpVqLPLpbAnMowf6EVByYoeTzau066LK7ydJrktsZcLzDG5+rctUzNaTfONQHk91q+K+FLvTYEyC84mc9CKTA=
+X-Received: by 2002:a17:90b:3a10:b0:31c:15d9:8a5 with SMTP id
+ 98e67ed59e1d1-31c2fdb90e5mr5725458a91.19.1752095585452; Wed, 09 Jul 2025
+ 14:13:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250708195636.1678606-1-alperyasinak1@gmail.com>
+ <20250708195636.1678606-9-alperyasinak1@gmail.com> <b2bd24e4-8fb3-46bb-bab4-7cb1aa879939@gmail.com>
+ <CAGpma=4KFF47kXbLoAxkG8ZWw1ppNw4Hz+pvb2zCbdP3fUFsvg@mail.gmail.com>
+In-Reply-To: <CAGpma=4KFF47kXbLoAxkG8ZWw1ppNw4Hz+pvb2zCbdP3fUFsvg@mail.gmail.com>
+From: Alper Ak <alperyasinak1@gmail.com>
+Date: Thu, 10 Jul 2025 00:12:53 +0300
+X-Gm-Features: Ac12FXwMhzdKmweHxPaW9DC42Dnzr6xcyhOeUaEIUr6FNb74VIiEVhMsE4jtgBM
+Message-ID: <CAGpma=6En51-3akzWUyW6+90PtO0GWviz=s6ZXYw3zap28sH4w@mail.gmail.com>
+Subject: Re: [oe] [meta-openembedded][PATCH 09/20] yajl: Add patch for CMake
+ 4+ compatibility and fix build issue
+To: Gyorgy Sarvari <skandigraun@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 21:11:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118386
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 21:13:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118387
 
-- CMake 3.0 and newer disallow reading the LOCATION property of targets directly.
-Instead, use the recommended $<TARGET_FILE:target> generator expression when
-referencing the output binary in add_custom_command.
+Sent a v2 patch ->
+https://lists.openembedded.org/g/openembedded-devel/message/118386
 
-Fixes:
-
-| CMake Error at CMakeLists.txt:15 (CMAKE_MINIMUM_REQUIRED):
-|   Compatibility with CMake < 3.5 has been removed from CMake.
-|
-|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
-|   to tell CMake that the project requires at least <min> but has been updated
-|   to work with policies introduced by <max> or earlier.
-|
-|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
-|
-|
-| -- Configuring incomplete, errors occurred!
-
------
-
-| CMake Error at reformatter/CMakeLists.txt:38 (GET_TARGET_PROPERTY):
-|   The LOCATION property may not be read from target "json_reformat".  Use the
-|   target name directly with add_custom_command, or use the generator
-|   expression $<TARGET_FILE>, as appropriate.
-|
-|
-|
-| CMake Error at verify/CMakeLists.txt:32 (GET_TARGET_PROPERTY):
-|   The LOCATION property may not be read from target "json_verify".  Use the
-|   target name directly with add_custom_command, or use the generator
-|   expression $<TARGET_FILE>, as appropriate.
-
-Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
----
- .../yajl/0001-allow-build-with-cmake-4.patch  | 93 +++++++++++++++++++
- meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb   |  2 +-
- 2 files changed, 94 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/yajl/yajl/0001-allow-build-with-cmake-4.patch
-
-diff --git a/meta-oe/recipes-devtools/yajl/yajl/0001-allow-build-with-cmake-4.patch b/meta-oe/recipes-devtools/yajl/yajl/0001-allow-build-with-cmake-4.patch
-new file mode 100644
-index 0000000000..78076e5c1e
---- /dev/null
-+++ b/meta-oe/recipes-devtools/yajl/yajl/0001-allow-build-with-cmake-4.patch
-@@ -0,0 +1,93 @@
-+From e67398dad70e5d0174ad0eca5c293a5bf1ce1796 Mon Sep 17 00:00:00 2001
-+From: Alper Ak <alperyasinak1@gmail.com>
-+Date: Thu, 10 Jul 2025 00:00:33 +0300
-+Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
-+ compatibility
-+
-+CMake 3.0 and newer disallow reading the LOCATION property of targets directly.
-+Instead, use the recommended $<TARGET_FILE:target> generator expression when
-+referencing the output binary in add_custom_command.
-+
-+Fix:
-+
-+| CMake Error at CMakeLists.txt:15 (CMAKE_MINIMUM_REQUIRED):
-+|   Compatibility with CMake < 3.5 has been removed from CMake.
-+|
-+|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
-+|   to tell CMake that the project requires at least <min> but has been updated
-+|   to work with policies introduced by <max> or earlier.
-+|
-+|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
-+|
-+|
-+| -- Configuring incomplete, errors occurred!
-+
-+---
-+
-+| CMake Error at reformatter/CMakeLists.txt:38 (GET_TARGET_PROPERTY):
-+|   The LOCATION property may not be read from target "json_reformat".  Use the
-+|   target name directly with add_custom_command, or use the generator
-+|   expression $<TARGET_FILE>, as appropriate.
-+|
-+|
-+|
-+| CMake Error at verify/CMakeLists.txt:32 (GET_TARGET_PROPERTY):
-+|   The LOCATION property may not be read from target "json_verify".  Use the
-+|   target name directly with add_custom_command, or use the generator
-+|   expression $<TARGET_FILE>, as appropriate.
-+
-+Upstream-Status: Submitted [https://github.com/lloyd/yajl/pull/256]
-+
-+Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
-+---
-+ CMakeLists.txt             | 2 +-
-+ reformatter/CMakeLists.txt | 4 +---
-+ verify/CMakeLists.txt      | 4 +---
-+ 3 files changed, 3 insertions(+), 7 deletions(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 4c0a9be..e7031c8 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -12,7 +12,7 @@
-+ # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
-+ # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-+ 
-+-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-++CMAKE_MINIMUM_REQUIRED(VERSION 2.8.0...3.10)
-+ 
-+ PROJECT(YetAnotherJSONParser C)
-+ 
-+diff --git a/reformatter/CMakeLists.txt b/reformatter/CMakeLists.txt
-+index 52a9bee..267d02e 100644
-+--- a/reformatter/CMakeLists.txt
-++++ b/reformatter/CMakeLists.txt
-+@@ -35,9 +35,7 @@ IF (NOT WIN32)
-+ ENDIF (NOT WIN32)
-+ 
-+ # copy the binary into the output directory
-+-GET_TARGET_PROPERTY(binPath json_reformat LOCATION)
-+-
-+ ADD_CUSTOM_COMMAND(TARGET json_reformat POST_BUILD
-+-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${binPath} ${binDir})
-++    COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:json_reformat> ${binDir})
-+ 
-+ INSTALL(TARGETS json_reformat RUNTIME DESTINATION bin)
-+diff --git a/verify/CMakeLists.txt b/verify/CMakeLists.txt
-+index 967fca1..2f39008 100644
-+--- a/verify/CMakeLists.txt
-++++ b/verify/CMakeLists.txt
-+@@ -29,9 +29,7 @@ ADD_EXECUTABLE(json_verify ${SRCS})
-+ TARGET_LINK_LIBRARIES(json_verify yajl_s)
-+ 
-+ # copy in the binary
-+-GET_TARGET_PROPERTY(binPath json_verify LOCATION)
-+-
-+ ADD_CUSTOM_COMMAND(TARGET json_verify POST_BUILD
-+-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${binPath} ${binDir})
-++    COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:json_verify> ${binDir})
-+ 
-+ INSTALL(TARGETS json_verify RUNTIME DESTINATION bin)
-+-- 
-+2.43.0
-+
-diff --git a/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb b/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
-index e4434bee45..6951e7e705 100644
---- a/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
-+++ b/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
-@@ -12,10 +12,10 @@ SRC_URI = "git://github.com/lloyd/yajl;branch=master;protocol=https \
-            file://CVE-2017-16516.patch \
-            file://CVE-2022-24795.patch \
-            file://CVE-2023-33460.patch \
-+           file://0001-allow-build-with-cmake-4.patch \
-            "
- SRCREV = "a0ecdde0c042b9256170f2f8890dd9451a4240aa"
- 
--
- inherit cmake lib_package
- 
- EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
--- 
-2.43.0
-
+Alper Ak <alperyasinak1@gmail.com>, 9 Tem 2025 =C3=87ar, 13:52 tarihinde =
+=C5=9Funu yazd=C4=B1:
+>
+> > ...this other patch is in the very same PR referenced in the first
+> > patch, but the status is different. Shouldn't this be "Submitted" also,
+> > like above?
+>
+> Yes, it should be as you say. It even makes more sense to do it with a
+> single patch. I will send a fix.
+>
+>
+> Gyorgy Sarvari <skandigraun@gmail.com>, 9 Tem 2025 =C3=87ar, 13:43
+> tarihinde =C5=9Funu yazd=C4=B1:
+> >
+> > On 7/8/25 21:56, Alper Ak via lists.openembedded.org wrote:
+> > > +++ b/meta-oe/recipes-devtools/yajl/yajl/0001-allow-build-with-cmake-=
+4.patch
+> > > +Upstream-Status: Submitted [https://github.com/lloyd/yajl/pull/256]
+> >
+> > Yes, okay, but...
+> >
+> > > +
+> > > +++ b/meta-oe/recipes-devtools/yajl/yajl/0002-cmake-Use-TARGET_FILE-i=
+nstead-of-LOCATION-property-f.patch
+> > > +Upstream-Status: Pending
+> > > +
+> > ...this other patch is in the very same PR referenced in the first
+> > patch, but the status is different. Shouldn't this be "Submitted" also,
+> > like above?
 
