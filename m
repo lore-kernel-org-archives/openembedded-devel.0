@@ -2,62 +2,62 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52277C83F16
-	for <webhook@archiver.kernel.org>; Wed,  9 Jul 2025 17:31:36 +0000 (UTC)
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
- by mx.groups.io with SMTP id smtpd.web11.3028.1752082293865008198
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FFD1C83F03
+	for <webhook@archiver.kernel.org>; Wed,  9 Jul 2025 17:31:46 +0000 (UTC)
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+ by mx.groups.io with SMTP id smtpd.web10.3061.1752082296491906715
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jul 2025 10:31:34 -0700
+ Wed, 09 Jul 2025 10:31:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WFx/pD3u;
- spf=pass (domain: gmail.com, ip: 209.85.167.49, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-553dceb342fso67896e87.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 10:31:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HXCKP468;
+ spf=pass (domain: gmail.com, ip: 209.85.167.45, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-555024588a8so76898e87.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 10:31:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752082292; x=1752687092; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1752082294; x=1752687094; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=1nAfYjSrSFmwuT1JheVI1SJZY6wRqr1atUwOW8IVZ8M=;
-        b=WFx/pD3uSmqvAw57vuv1Uh0HYeC9izKh+qhxXg/P/LfinrVQfvu8dpCfUpKSHPGhBv
-         5Bi2nawMho8XDEYaVnpF1p3KwHn3LSrMZ4BsDRKYhJwOjAn/zAsSDzWvWvtra5Zrogko
-         mxKFyjpxKXfgXnYZOoRNzXbTZI4aF0GEdS41maTF1FhPWjYfZfSlGMV6HzdDtYiCl8tO
-         jd13L01eHF7k4dQGnLSVSXyplfTap1G2en5jMDXiD91lB8HviW/kW2ABRHVuhCw6QcRT
-         Ph8tuvfLAAqVfB90OM/IV18rKIUjVwlB/Uc7/ZdDeee3h5kXfnQH2V12pYL4PXy15uWe
-         Wv7w==
+        bh=JP0v8hxfwPPinYFYeAUgIB3vR19NN2Of2/bXVo/tGQA=;
+        b=HXCKP468xFuznODmg6S0Axg25zhj4IzA0sAZgIgx41PrLqMCUQ4NH6y4X2wks9iYac
+         HYnuPv8KeMq9D1lr6YvOQsUyH1cZSKcOCN0Z3cGduoiahIuxfHJfHMostnoCUnYg7qAZ
+         AbX/wGRIaeYl0Ugh78sVVgd/NtoY1ufQD/zB4KdRivXczuuZpDR6rHRg6C8T89gkvfzI
+         RJFX2gLQjmp91NEF8AU5f5hqJ8zUKABYPvMM3iGbBxJA5QKfSFhd3kbizJLu0/QjSG46
+         9XnwoBb3baG/JG5sSVLvbFGu0fhg6AnMHPeNQwGjsm9POZ6CVE5MwGiS8aQoGigaP87R
+         mwTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752082292; x=1752687092;
+        d=1e100.net; s=20230601; t=1752082294; x=1752687094;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=1nAfYjSrSFmwuT1JheVI1SJZY6wRqr1atUwOW8IVZ8M=;
-        b=uQq9yxlLUodZh0/LMeJCfllG8kCG0P9uJMiSspKYEyl0AuR+fxuXTsG3Q6+u7Mj3JO
-         qfzez0IfNfSuC2Vur+e/+Pn4mC2dOuhxZTlnKt67MMy6uwHHFYpuUs2fSCraACMS6yV6
-         Dkg5ra8mFuabwAzhgO7Y4cVYHW6IJDeHvNm7wM80KSa7j2006833EXCiHR/+391kq9Rm
-         lPRfitXecDek/buCttfKZAAtUmxf4JRorxhYB0uMCeJHaNR4fKurPQYYq8vqXpqu1mG6
-         Fsn6cSpP02tHUM7ELnUPT10sR9nPauAkclo/SSiiXjZNbhfaBsF05Cg3RFusuReeh9Hv
-         9OcQ==
-X-Gm-Message-State: AOJu0YxIAzhq5oHiQC45+oNThQfBVnUodCIBOB1PanpuKDlpcg8Vvjxm
-	DwZAFFsT0osltdscMOIjJl90wqeCPAkQoAYNutVRhaf1/x4EvfF0SjSRz2x8pw==
-X-Gm-Gg: ASbGncvjB9ZTV96T66aWUpOvAwzJIWbIVXioiYbBDKTfYpB+1xoD7Tuayc9ksowDsND
-	lsI6pA6VYjDwm/HQ8CbKM9o2urVcEwKhPTUbptMv1h0eEEMXM1zhlNVAg3JujxVzPXvc4T+ufyV
-	a9scr3bhd+kvlYlf4lZY3TdVtvwTVHbm169CBd/0kPuKSExhlTdty4gPCJ6vPW9I6OpuJ8IuWwM
-	jQCOmi0btqLFJUGcR6TfiFGs+bIfG3UlKSbH2tyeW8u6OdnOEgb95yfuT7auRhuNUap5z9b6Iv1
-	niTMO/sa/XaZtaqTZGGUyyv925Lip1GhUGEyqv87TpFXV0JiJHSoHSnAGzqqDE+OaUCxMtAom2A
-	hXfw=
-X-Google-Smtp-Source: AGHT+IGJYRQs+OGel3XvNQcdAKg81X0Pp9KSjJB/2yu757mq8C4UxkCWbPKBoyedC5aF4p5d8H12TA==
-X-Received: by 2002:a05:6512:6d5:b0:553:314e:8200 with SMTP id 2adb3069b0e04-558fa877c8dmr1286780e87.8.1752082291375;
-        Wed, 09 Jul 2025 10:31:31 -0700 (PDT)
+        bh=JP0v8hxfwPPinYFYeAUgIB3vR19NN2Of2/bXVo/tGQA=;
+        b=Qsickpgy/dB4mCXqaiFf5Pabhj+1UUX2loxDCGYl8Je81+TRB3bioy+tJ+zojw0bPT
+         Mm+b+nov8chDq2fA3Cc+N35Eo53C3MA0kqqPMFVcePAcwqw6Lxm96qUCixRYwNmquynb
+         /rLEUd5dlLmIUC6Bv2K4gUgqLkEovQOVeN+yxPOnAmj1QiITF1jvN2C0oCStqf26M8t+
+         R/fztkzxPWW+KllORRSl1CcFbRUsae1H2SBTEbs+cWII2qfE6nivuD5OTr/UnAG3jx7U
+         +zDBSPbMYn4pM0PaBUpjnGfY4efW9kFjf39wte1jxuqbikUcZCZOJ1SuDPAVqLK+E8mx
+         h9TQ==
+X-Gm-Message-State: AOJu0YwBC5KjZqxBU3a2ejCpb2SDYjxOcuq3E+Ac+kieGfv/mELxlfBu
+	pexwnMKwsMNSf32dsX5fuxTUyeHNMNd2EXbRC/PjDExfs2MhFcrOn4lMwYluzw==
+X-Gm-Gg: ASbGncvsk71c/MjJcNm+cihY0HAXFV+T7Kwg69DcZY53P80367gmoDajKv6eUpdvb5s
+	qaKYRyT2BcmZkX2HI9lRHwfacXKnJm3HroCYeS04lYfDSVgg0PFRU9x0H3KxtWlhZ0O9Y0YuWCv
+	3NRSpV003of7J4TDkDPwPzFIKgB1r/a5QemdRg8LysDqYrkSrKBCvhZE4oiYiQzS/Ssx7BqeYgS
+	rBy52Sm/x0vDDLmOZxjz44Atp2W5irrB7VmUthdJnpIospSwq/2LZBbBnq0BA9LGa6RdlrSPDpE
+	0oWja57FezNPdMzX/2dMg7/gHGLPXvA/rrBRAxlkugN9IcTfa02NxjaVfJ8aIZw7o6h0SSrq8p2
+	ahS4C6nzF6uGCAg==
+X-Google-Smtp-Source: AGHT+IEO8HzHpI8GNN2YuV8zKYSCoSQ8hzsCcqchF14c/ttqhjiIkgcQDfUSyf2J95roXIibifrdvA==
+X-Received: by 2002:a05:6512:4002:b0:553:32f3:7ec4 with SMTP id 2adb3069b0e04-558fa8f8726mr1218477e87.29.1752082294028;
+        Wed, 09 Jul 2025 10:31:34 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.70.141])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-556383baeffsm2073854e87.2.2025.07.09.10.31.30
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-556383baeffsm2073854e87.2.2025.07.09.10.31.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Jul 2025 10:31:30 -0700 (PDT)
+        Wed, 09 Jul 2025 10:31:33 -0700 (PDT)
 From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-openembedded][PATCH 18/20] fatcat: Add patch for CMake 4+ compatibility
-Date: Wed,  9 Jul 2025 20:30:52 +0300
-Message-ID: <20250709173054.605430-18-alperyasinak1@gmail.com>
+Subject: [meta-openembedded][PATCH 20/20] libcyusbserial: Add patch for CMake 4+ compatibility
+Date: Wed,  9 Jul 2025 20:30:54 +0300
+Message-ID: <20250709173054.605430-20-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250709173054.605430-1-alperyasinak1@gmail.com>
 References: <20250709173054.605430-1-alperyasinak1@gmail.com>
@@ -66,8 +66,8 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 17:31:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118372
+ <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 17:31:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118374
 
 Fix:
 
@@ -85,20 +85,20 @@ Fix:
 
 Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- .../0003-allow-build-with-cmake-4.patch       | 40 +++++++++++++++++++
- .../recipes-utils/fatcat/fatcat_1.1.1.bb      |  2 +-
- 2 files changed, 41 insertions(+), 1 deletion(-)
- create mode 100644 meta-filesystems/recipes-utils/fatcat/fatcat/0003-allow-build-with-cmake-4.patch
+ .../0002-allow-build-with-cmake-4.patch       | 51 +++++++++++++++++++
+ .../libcyusbserial/libcyusbserial_git.bb      |  2 +-
+ 2 files changed, 52 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/libcyusbserial/libcyusbserial/0002-allow-build-with-cmake-4.patch
 
-diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat/0003-allow-build-with-cmake-4.patch b/meta-filesystems/recipes-utils/fatcat/fatcat/0003-allow-build-with-cmake-4.patch
+diff --git a/meta-oe/recipes-support/libcyusbserial/libcyusbserial/0002-allow-build-with-cmake-4.patch b/meta-oe/recipes-support/libcyusbserial/libcyusbserial/0002-allow-build-with-cmake-4.patch
 new file mode 100644
-index 0000000000..1baa9c7e87
+index 0000000000..433c845f4c
 --- /dev/null
-+++ b/meta-filesystems/recipes-utils/fatcat/fatcat/0003-allow-build-with-cmake-4.patch
-@@ -0,0 +1,40 @@
-+From a2a3d85d44fc27edfee5c4d9667b2c315dfacd23 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/libcyusbserial/libcyusbserial/0002-allow-build-with-cmake-4.patch
+@@ -0,0 +1,51 @@
++From 0998662e52a4a31e8e7cfe89d695341082aea238 Mon Sep 17 00:00:00 2001
 +From: Alper Ak <alperyasinak1@gmail.com>
-+Date: Wed, 9 Jul 2025 19:38:06 +0300
++Date: Wed, 9 Jul 2025 20:19:39 +0300
 +Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
 + compatibility
 +
@@ -116,41 +116,52 @@ index 0000000000..1baa9c7e87
 +|
 +| -- Configuring incomplete, errors occurred!
 +
-+Upstream-Status: Submitted [https://github.com/Gregwar/fatcat/pull/46]
++Upstream-Status: Submitted [https://github.com/cyrozap/libcyusbserial/pull/8]
 +
 +Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 +---
-+ CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ CMakeLists.txt         | 2 +-
++ include/CMakeLists.txt | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
 +
 +diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index d6a2649..8f3eadc 100644
++index 4d42eb2..4bbb2b0 100644
 +--- a/CMakeLists.txt
 ++++ b/CMakeLists.txt
 +@@ -1,4 +1,4 @@
++-cmake_minimum_required(VERSION 2.8.4)
+++cmake_minimum_required(VERSION 3.5)
++ 
++ project(libcyusbserial C)
++ 
++diff --git a/include/CMakeLists.txt b/include/CMakeLists.txt
++index 8f0c90b..63f4d02 100644
++--- a/include/CMakeLists.txt
+++++ b/include/CMakeLists.txt
++@@ -1,4 +1,4 @@
 +-cmake_minimum_required(VERSION 2.8)
 ++cmake_minimum_required(VERSION 3.5)
-+ project(fatcat)
 + 
-+ OPTION(DEFINE_WIN "Compiling windows" OFF)
++ ################################################################################
++ # Install libbladeRF header files
 +-- 
 +2.43.0
 +
-diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
-index bdde0d311a..876e8618eb 100644
---- a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
-+++ b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
-@@ -11,9 +11,9 @@ SRC_URI = "git://github.com/Gregwar/fatcat.git;branch=master;protocol=https \
-            file://0001-Use-unistd.h-not-argp.h-for-all-POSIX-systems.patch \
-            file://0002-Enable-64bit-off_t.patch \
-            file://0001-Replace-std-ptr_fun-for-c-17.patch \
-+           file://0003-allow-build-with-cmake-4.patch \
-            "
- 
- SRCREV = "99cb99fc86eb1601ac7ae27f5bba23add04d2543"
+diff --git a/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb b/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
+index 939e7db24e..7c9a9908ad 100644
+--- a/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
++++ b/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
+@@ -11,9 +11,9 @@ SRCREV = "655e2d544183d094f0e2d119c7e0c6206a0ddb3f"
+ SRC_URI = "git://github.com/cyrozap/${BPN}.git;branch=master;protocol=https \
+     file://0001-CMakeLists.txt-don-t-fall-back-CMAKE_INSTALL_LIBDIR-.patch \
+     file://0001-Fix-gcc-15-incompatible-pointer-types-error.patch \
++    file://0002-allow-build-with-cmake-4.patch \
+ "
  
 -
  inherit cmake
+ 
+ PACKAGES =+ "${PN}-utils"
 -- 
 2.43.0
 
