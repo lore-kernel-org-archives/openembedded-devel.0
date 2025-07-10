@@ -1,114 +1,124 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94070C83F1A
-	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 05:48:11 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.web11.1580.1752126481660191754
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D852CC83F1A
+	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 06:38:51 +0000 (UTC)
+Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com [209.85.208.175])
+ by mx.groups.io with SMTP id smtpd.web10.2270.1752129523955601053
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 09 Jul 2025 22:48:02 -0700
+ Wed, 09 Jul 2025 23:38:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=O56we1Um;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1752126482; x=1783662482;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=K4z8NH9KqMPRNAJCxQFQ0S7EeZ8kWlFh/iI+XRswiQg=;
-  b=O56we1Umf7cY4/2AgDK8/t21e1Kep8j5p0Mkd8Q2Y9EC55qYP2vDZ2bT
-   NjcvhWSYNfah7PN8/FTFi2Mx8QxD448CQlkgXNWAQ0QNOUzQJR0heD0qq
-   35weRgUpc7tGuyGADYv9ZH7KXmi3NXpnGfygZhyC16NG4gTKpl7Btofrv
-   qsiRj2J8BEzmFJXrK1O6Qqe4II3gJ4rKOaOb043CMQfWq96VhleMVUN1w
-   3zbN+TLAfFU71bI1ZHQo+5FWqRhA0zjzM88kSRUrpahrz2xHYFIx7zEih
-   j0mV1uDs7b3p1yw0aa4jLZDIpenwjlxXN4tcRcz8zwFE9Dk/szE4u9KOB
-   Q==;
-X-CSE-ConnectionGUID: M59nvi9RRA2HNWQWxGzfTA==
-X-CSE-MsgGUID: n64C3DbWR4OoV6Y5VpQYxw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11489"; a="205814514"
-X-IronPort-AV: E=Sophos;i="6.16,299,1744038000"; 
-   d="scan'208";a="205814514"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.128])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jul 2025 14:48:01 +0900
-Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id D8E10C000B9
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 05:47:59 +0000 (UTC)
-Received: from yto-m1.gw.nic.fujitsu.com (yto-m1.gw.nic.fujitsu.com [10.128.47.162])
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTP id 5D581C00213
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 05:47:59 +0000 (UTC)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id B93F7D0820
-	for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 14:47:57 +0900 (JST)
-Received: from G08FNSTD190088.g08.fujitsu.local (unknown [10.193.129.116])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 6FD3E1A0073;
-	Thu, 10 Jul 2025 13:47:56 +0800 (CST)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org,
-	Liu Yiding <liuyd.fnst@fujitsu.com>
-Subject: [meta-oe] [PATCH] dialog: Fix install conflict when enable multilib
-Date: Thu, 10 Jul 2025 13:47:42 +0800
-Message-ID: <20250710054742.1507-1-liuyd.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RpjWt7vw;
+ spf=pass (domain: gmail.com, ip: 209.85.208.175, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lj1-f175.google.com with SMTP id 38308e7fff4ca-32b595891d2so4604001fa.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 09 Jul 2025 23:38:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1752129521; x=1752734321; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Nt2s4SXZPqU3Uu0jt5yeu8ShLwoNZz1zw4h5Q9NNtbM=;
+        b=RpjWt7vwzWZne9Hlk8MyGn37+8PStVpguBNEjNjFYYkp9ebLqeGc7LR/UoP2yQXZ93
+         dtc14dyJuJ6KptT8iOY24nIyMEv6vvDcz6aLsgzeZXPMs3Na3TLx3zE4RtUTHdI2YkAA
+         NpwIlOJwP6F+SBo1zUC1OUWyty18fhsFRis8BkvlB8HPfftKwo+Dhz56UvNU22WzO23A
+         wWlHkZHwdVfzXTVPH5cMb64o8mG+cDtKkHtxz+kVY+c8LMRDsd3vlSSVJ+vf/stTzdKZ
+         Gs2Jph6xjfp8Nub+qpzj43oOOaT/GuJGZFeRibSwcL8g8F0WXqppuNXlmmx78ot5My3D
+         DotQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1752129521; x=1752734321;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Nt2s4SXZPqU3Uu0jt5yeu8ShLwoNZz1zw4h5Q9NNtbM=;
+        b=PPthga0KaujRLdcaapyKmQwvd5gnLMQ+4/6FhxzudKMW3qZh8ELA2hbkusoq6stK/4
+         20zdbhiipAgI3xQgptFwbC3aIz5HYcrGJVX4Su2FUk/UUanKG70ejRJwsWc9jdCoIxTS
+         HW7Xl3eJJvmmSi+kNXq5cXr3eU59vRopPwSXu/cSqC5VFQaJB0wzrR1wUOD87175tjhf
+         NADJQg0sviTAMNCX8Ox7hjLNs1MKZ1rSygDo1MKM4BskX6izHTBLp3moIkChJObO63N7
+         nmwAtawQ1LfJeDmkjkWrmqcXM4+bhMqEyC2rq/ejZFoMIMcWTexvHXH/NSjJAY4RGs9Y
+         X3+A==
+X-Gm-Message-State: AOJu0YzU4f6HlewuO8zsxRPnl2wbW4iVpjwNq2chxyvw4fvzHWsJAMWn
+	afhOW1c26EEhgQoorO+F3ua0JXplo1oiuhI3GypDcw7yf7nmqMkiSXmPsq9gug==
+X-Gm-Gg: ASbGncuoiVH9I+X3e/aLJIS6KprjugQ7VSE5/BgG0FDYRceretSqdOsFmX3HyWUC07X
+	fS8vVYFIbkTjWQZRRworcVsM0+kzTo7CxE1XmO+MieZj+sSJUlTMXn+VNHYxhTiXrbxUljH/+AI
+	hHGMGUIoISPSRdNuy3Pt5b03NSLObjTF/MxOsaSp87ziRmvJvvqU84ECHEx20VwBLfOICIaGSAg
+	clcHabeJ0svpBwr7XGWP4/0BvViUzemNa29ZASKMBynEPgddAm2knhkzuJXTjA5f7VzaF88iIjL
+	z/muKUm/sqgYr09wf82MvhNTf/lZGUs9gb19BO5N22hZMCmpy615RYP4aY8WiN0SXBRXgbTsugR
+	Wjx0=
+X-Google-Smtp-Source: AGHT+IEXjSrr+zuR3vmC6kkhYCMJongLDYifdxg5QH/ZpzmtH1z6RBiIeZmyVjiYsBfwiMrigeaZew==
+X-Received: by 2002:a05:651c:3246:10b0:32b:755e:6ccd with SMTP id 38308e7fff4ca-32f502a23f1mr4051611fa.39.1752129521104;
+        Wed, 09 Jul 2025 23:38:41 -0700 (PDT)
+Received: from localhost.localdomain ([176.33.70.141])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-32fab8bf59fsm1675151fa.69.2025.07.09.23.38.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Jul 2025 23:38:40 -0700 (PDT)
+From: Alper Ak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alper Ak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] properties-cpp: Remove ancient/unmaintained recipe
+Date: Thu, 10 Jul 2025 09:38:02 +0300
+Message-ID: <20250710063802.12567-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 05:48:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118394
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 06:38:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118395
 
-fix issue that:
-file /usr/bin/dialog conflicts between attempted installs of dialog-1.3+20250116-r0.cortexa57 and lib32-dialog-1.3+20250116-r0.armv7at2hf_neon
+Remove the properties-cpp recipe, as the upstream has been inactive for over 10 years.
+No new releases, bug fixes or security updates are expected.
 
-To be noticed that dialog itself is already symlink now
-xxx/image/usr/bin$ ls -l -t
-total 888
-lrwxrwxrwx 1 userland userland     45 Jul 10 02:15 dialog -> /usr/bin/arm-pokymllib32-linux-gnueabi-dialog
--rwxr-xr-x 1 userland userland 907748 Jul 10 02:15 arm-pokymllib32-linux-gnueabi-dialog
-
-xxx/image/usr/bin$ ls -l -t
-total 988
-lrwxrwxrwx 1 userland userland      34 Jul 10 02:15 dialog -> /usr/bin/aarch64-poky-linux-dialog
--rwxr-xr-x 1 userland userland 1037624 Jul 10 02:15 aarch64-poky-linux-dialog
-
-after this commit:
-xxx/tmp/work/qemuarm64-poky-linux/core-image-minimal/1.0/rootfs/usr/bin$ ls -l -t dialog*
-lrwxrwxrwx 1 userland userland 21 Mar  9  2018 dialog -> /usr/bin/dialog-lib64
-lrwxrwxrwx 1 userland userland 45 Mar  9  2018 dialog-lib -> /usr/bin/arm-pokymllib32-linux-gnueabi-dialog
-lrwxrwxrwx 1 userland userland 34 Mar  9  2018 dialog-lib64 -> /usr/bin/aarch64-poky-linux-dialog
-
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- meta-oe/recipes-extended/dialog/dialog_1.3-20250116.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ .../packagegroups/packagegroup-meta-oe.bb     |  2 +-
+ .../properties-cpp/properties-cpp_git.bb      | 24 -------------------
+ 2 files changed, 1 insertion(+), 25 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/properties-cpp/properties-cpp_git.bb
 
-diff --git a/meta-oe/recipes-extended/dialog/dialog_1.3-20250116.bb b/meta-oe/recipes-extended/dialog/dialog_1.3-20250116.bb
-index 7c596371e5..0d09ccea16 100644
---- a/meta-oe/recipes-extended/dialog/dialog_1.3-20250116.bb
-+++ b/meta-oe/recipes-extended/dialog/dialog_1.3-20250116.bb
-@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "68406329827b783d0a8959cc20a94c6e1791ac861a27f854e06e902054
- # hardcoded here for use in dialog-static recipe
- S = "${UNPACKDIR}/dialog-${PV}"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 1d6c45c518..54171a7b15 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -974,7 +974,7 @@ RDEPENDS:packagegroup-meta-oe-fortran-packages = "\
+ # opencl-headers sdbus-c++-libsystemd nlohmann-fifo sqlite-orm
+ # nlohmann-json exprtk liblightmodbus p8platform gnome-doc-utils-stub
+ # glm ttf-mplus xbitmaps ceres-solver cli11 fftw gnulib libeigen ade
+-# spdlog span-lite uthash websocketpp catch2 properties-cpp cpp-netlib
++# spdlog span-lite uthash websocketpp catch2 cpp-netlib
  
--inherit autotools-brokensep pkgconfig
-+inherit autotools-brokensep pkgconfig multilib_script
+ # rsyslog conflicts with syslog-ng so its not included here
  
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
- 
-@@ -23,6 +23,8 @@ PACKAGECONFIG[x11] = "--with-x --x-includes=${STAGING_INCDIR} --x-libraries=${ST
- EXTRA_OECONF = "--with-ncurses \
-                 --disable-rpath-hack"
- 
-+MULTILIB_SCRIPTS = "${PN}:${bindir}/dialog"
-+
- do_configure() {
-     gnu-configize --force
-     sed -i 's,${cf_ncuconfig_root}6-config,${cf_ncuconfig_root}-config,g' -i configure
+diff --git a/meta-oe/recipes-extended/properties-cpp/properties-cpp_git.bb b/meta-oe/recipes-extended/properties-cpp/properties-cpp_git.bb
+deleted file mode 100644
+index 20b7f0a5bd..0000000000
+--- a/meta-oe/recipes-extended/properties-cpp/properties-cpp_git.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-# Copyright (c) 2019 Christophe Chapuis <chris.chapuis@gmail.com>
+-# Copyright (c) 2019 Herman van Hazendonk <github.com@herrie.org>
+-
+-SUMMARY = "A very simple convenience library for handling properties and signals in C++11."
+-SECTION = "libs"
+-LICENSE = "LGPL-3.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02"
+-
+-PV = "0.0.1+git"
+-
+-SRCREV = "45863e849b39c4921d6553e6d27e267a96ac7d77"
+-SRC_URI = "git://github.com/lib-cpp/${BPN}.git;branch=master;protocol=https"
+-
+-# Upstream repo does not tag
+-UPSTREAM_CHECK_COMMITS = "1"
+-
+-
+-do_configure:prepend() {
+-    echo " " > ${S}/tests/CMakeLists.txt
+-}
+-
+-inherit cmake pkgconfig
+-
+-RDEPENDS:${PN}-dev = ""
 -- 
 2.43.0
 
