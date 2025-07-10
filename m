@@ -2,115 +2,83 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36D9AC83F17
-	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 18:11:00 +0000 (UTC)
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
- by mx.groups.io with SMTP id smtpd.web11.1938.1752171049719616296
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BC06C83F1B
+	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 18:13:50 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web11.1993.1752171221606869985
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jul 2025 11:10:50 -0700
+ Thu, 10 Jul 2025 11:13:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TLFyNOqY;
- spf=pass (domain: gmail.com, ip: 209.85.167.44, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-558fa0b2c99so1020179e87.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 11:10:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eGHPw8LC;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-b350704f506so1139383a12.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 11:13:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752171047; x=1752775847; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LoHSjFZPnaD32nb2Ajs7CWYeJQscUWJlGe2TYGc3hBE=;
-        b=TLFyNOqYXv4a2jGuWB/qYzAWmZ17VJg20C+sgIjFm/dLlDB3uzlqu4cciExSY7ZVXC
-         Mhm2gIoM2/G+eFzwp8gwhi3f6rxH/OvBF0s3t4vOPZ42WoUGahgVvjVw40nubzKF+JqD
-         IQComUlwazFiujaWR2nK+4zNKZShbVgknn1v6jk/KJsQFFXyPMSH20Xolc/SFAw0A7UP
-         aecLxOwpSNuLz+4ROjBcXLL5FvaGQMWKr904kHf8QmMLm8gCi50MN/x5rujboSZLgo5V
-         GDhsqZKwzQ9TreWSUggLD2yBYflqT8iSommYBKuZhXBWsmWGiNrcHHBMoR4j1dxLPlPL
-         7PiA==
+        d=gmail.com; s=20230601; t=1752171221; x=1752776021; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=kplh2JvjGa3DAGYlIf363BiZK7Ovq1mQR7Oju95CGL4=;
+        b=eGHPw8LC7G0a3kyAxX7wpnK4KZaPHuPPsGZ2v1RbP2EQPillYpP5SwBNEHmaVI1mFk
+         2z5GHyQy58CCBioMG51gR+IzsssQfpSehaPfIg7CZWViyp0hWOHBzoNJblY4TqSoYRHR
+         xxlwVz27Q6qT04Me0RDlvT0yOdxxPc0xzV6g9kNKpDnBo6+ZYu6+tsZzRYzGHiwL9lIy
+         UE1eh/bViuK7TGM/rtzwKknkB0bGpPIH6f3CfNr2xB/PTfygNUpNRp5R7Un6vKtQnypi
+         p7NM1L7GZGf6rQkcYwFvkLJxnuQE71bZxoepJpehJ1cv8nmze8YLApzWKAUpJRLOefX+
+         cv1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752171047; x=1752775847;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=LoHSjFZPnaD32nb2Ajs7CWYeJQscUWJlGe2TYGc3hBE=;
-        b=LuxMJKh5Sp+n4K/Ks7cx0wRYx6yZhcm5SI7DFK2vIgkG0wT9HzhPOpllnRBtMaPLAh
-         ljTAqTSJHSRd8Md3JXAXD8C92jOfIWKoNZLmMyE04WbBmgeDLDCRdzeox2dpaK56Huat
-         2/j1HKT1UggOuhFzCjjHHorDE3ej6eYytj6xLLtSAgoN3J9q/KupbwbK/ej/nlTNAL5a
-         QapQ9foPl7DWWqhA7hxcFLeagY64JUcL0aTAA8N9/o2tmJMHonaGwurW6pdpV//67PW8
-         c829wmB8V48IsHUx9SWMANxS9HiYNckqsAeRrkQRU+SdHfc7lfhZOzG/enYPBzRlI7mb
-         0o7g==
-X-Gm-Message-State: AOJu0Yy/chJZNzQREDnKYvbTnYtF/QHCAkJXcGmj9Lj+1OLiZ4VIMiwr
-	RNDgG/aV5rv/eP8exG0AO+DQ2DWtOmehGnBnylyMvOHcjhd01+vItybU76VG7g==
-X-Gm-Gg: ASbGncvVwni+uSZbyzyn6ThmfOAzeyXXuEfGUD/CyX4d9Boad14iWtOXtj4EjGU/3Q8
-	9N7ik1BSTy9G7HW2Vty4rw+sihdb7EjNtMW+0blc0k5K5zGRjL9JsvjkP+Y2202i4GP5+XwuH9T
-	J35PjgJBXST4IASKlfkTjPQ2qt27EJmUZ5K/IbgzM83NFlnCsEIjwYXJMXiG02qaEJbrNFNgA1Z
-	IVK7AzSHOxXnE9tFE6VlQ4i878P7zvrlqHz7m4sTlaMumHXcAZuPNrVC2dW6IaKA6x0NXkeAfYD
-	tyjc5bvITaBZTHR+WSlEiZ6wyPyihjs0a57nY+A47vrKEMolfKGQ2UvaiP3vymu8uayf/q1DTMl
-	4Qm0=
-X-Google-Smtp-Source: AGHT+IED89OWuv1jzgs3j275FJCE6NMs/3ktku84Nuk+HzgwMd59a2WH8W7Mxuu/HkZT1bdRHYe8cw==
-X-Received: by 2002:a05:6512:12c4:b0:553:cfa8:dd38 with SMTP id 2adb3069b0e04-558fa8f916amr2954592e87.36.1752171047214;
-        Thu, 10 Jul 2025 11:10:47 -0700 (PDT)
-Received: from localhost.localdomain ([176.33.70.141])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-32fab8bd4a8sm3239181fa.65.2025.07.10.11.10.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jul 2025 11:10:46 -0700 (PDT)
-From: Alper Ak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCHv2] ade: Upgrade 0.1.2 -> 0.1.2e to allow CMake 4+ compatibility
-Date: Thu, 10 Jul 2025 21:10:41 +0300
-Message-ID: <20250710181041.49619-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1752171221; x=1752776021;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=kplh2JvjGa3DAGYlIf363BiZK7Ovq1mQR7Oju95CGL4=;
+        b=m1MygWId/rVwcq4ql+5+jRQelv099PdcRObFuBq1CZwMv+AGkoQ8IVLRg+LmNWBgHd
+         ZhQhT0SWqAFWoL40pDQ+pjJo5JaUjHO8//S1sLubo8b9419L2RNOmre0SuWE8wa5ts7j
+         2f8FAQE/PjSaaomFN3jtIOW3E8ca6Z452HrZ8KRzzlKh0o0GKwtf5lejt0pqf7vQq6o6
+         0oRoIUVEN0q59WakWJS5Z1NEoeqCgpvu6IlObNjc7zawp+adcMEjCN4XyUUyV4Vuey3D
+         2xNgNIDSv5jhM8pwdVBcthu1KeCSt9ESt9AspvhlMNvLT2otnAPtfiUdNFVG0iblu5Bi
+         bmVw==
+X-Gm-Message-State: AOJu0YwsyGuZ8tY2xHFc5wp+60bS3dHk+dT3Urf4Cf6wswjQEMFWEI3Z
+	Q+6QyFW+rDt/j/cgxwFIBqT1eJyWTgaX3UvmAOq7OStRqmll0PDpuk7IeotZlhsb2+tLwTJdweZ
+	KsVo7Hajnel3k6Dwd+t3UNX5XJzgQwImT8NHn
+X-Gm-Gg: ASbGnct+ho4URzPH4E1W87ab+SZ7qAw+MkSRPw/WGS6wSGTJBHCNl31ptG+UvloUksP
+	Y61nGNOc4OuVr1cGQuPXQCBJ+0Lmvyt87mfaKsaTG1rL6xtujMHdWLBW/43gZym3lCBQqAydfUQ
+	2giRXMzuA+Bjsr8nTF5UFzGjCxvyJ1IbLChAs7aUHI7Ek=
+X-Google-Smtp-Source: AGHT+IEDGjl1sZjOZmqsky9DhMOXLtRQQw0N31vzgIj9M6oPK8f/sJU6DwOTgfqVU10xoRqXm3lwwe4SFZf/xoO90p0=
+X-Received: by 2002:a17:90b:1c0f:b0:2fa:562c:c1cf with SMTP id
+ 98e67ed59e1d1-31c3cf1ab0bmr7697282a91.1.1752171220951; Thu, 10 Jul 2025
+ 11:13:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250709173054.605430-1-alperyasinak1@gmail.com>
+ <20250709173054.605430-3-alperyasinak1@gmail.com> <7d94e8f3-71e5-4046-98cf-330a9df9ab07@gmail.com>
+In-Reply-To: <7d94e8f3-71e5-4046-98cf-330a9df9ab07@gmail.com>
+From: Alper Ak <alperyasinak1@gmail.com>
+Date: Thu, 10 Jul 2025 21:13:29 +0300
+X-Gm-Features: Ac12FXwm5tBaVLznk85EgN92gPZ_7GnmIWccLx30nS-fE6F4niRyJKDRPWXUZmI
+Message-ID: <CAGpma=6jk0F9M0Wad5Xgpum5M0sk88ZY=wmLVj_7hQYAhCnQTA@mail.gmail.com>
+Subject: Re: [oe] [meta-openembedded][PATCH 03/20] ade: Add patch for CMake 4+ compatibility
+To: Gyorgy Sarvari <skandigraun@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 18:11:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118421
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 18:13:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118422
 
-Fix:
+Sent a v2 patch ->
+https://lists.openembedded.org/g/openembedded-devel/message/118421
 
-| CMake Error at CMakeLists.txt:7 (cmake_minimum_required):
-|   Compatibility with CMake < 3.5 has been removed from CMake.
-|
-|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
-|   to tell CMake that the project requires at least <min> but has been updated
-|   to work with policies introduced by <max> or earlier.
-|
-|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
-|
-|
-| -- Configuring incomplete, errors occurred!
-
-Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
----
- .../recipes-support/opencv/{ade_0.1.2.bb => ade_0.1.2e.bb}    | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-oe/recipes-support/opencv/{ade_0.1.2.bb => ade_0.1.2e.bb} (91%)
-
-diff --git a/meta-oe/recipes-support/opencv/ade_0.1.2.bb b/meta-oe/recipes-support/opencv/ade_0.1.2e.bb
-similarity index 91%
-rename from meta-oe/recipes-support/opencv/ade_0.1.2.bb
-rename to meta-oe/recipes-support/opencv/ade_0.1.2e.bb
-index b54c28d624..a7af2f2da9 100644
---- a/meta-oe/recipes-support/opencv/ade_0.1.2.bb
-+++ b/meta-oe/recipes-support/opencv/ade_0.1.2e.bb
-@@ -5,15 +5,13 @@ organizing data flow processing and execution."
- HOMEPAGE = "https://github.com/opencv/ade"
- 
- SRC_URI = "git://github.com/opencv/ade.git;branch=master;protocol=https"
--
--SRCREV = "1e02d7486bdb9c87993d91b9910e7cc6c4ddbf66"
-+SRCREV = "ffc83ad372d72b16732f201d8a9d1d80dd16515b"
- 
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
- inherit cmake
- 
--
- EXTRA_OECMAKE += " -DCMAKE_BUILD_TYPE=Release"
- 
- FILES:${PN}-dev += "${datadir}/${BPN}/*.cmake"
--- 
-2.43.0
-
+Gyorgy Sarvari <skandigraun@gmail.com>, 9 Tem 2025 =C3=87ar, 21:44
+tarihinde =C5=9Funu yazd=C4=B1:
+>
+> On 7/9/25 19:30, Alper Ak via lists.openembedded.org wrote:
+> > +
+> > +Upstream-Status: Backport [https://github.com/opencv/ade/commit/8b24d5=
+f1286d178fd0d3a22d584e1a798f5e9a6c]
+> > +
+> >
+> There are multiple new tags that contain this commit (v0.1.2c ...
+> v0.1.2e), unless we need this specific old tag, I think a tag bump would
+> be better over having a patch.
 
