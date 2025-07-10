@@ -2,73 +2,76 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 226EBC83F1B
-	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 17:39:00 +0000 (UTC)
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
- by mx.groups.io with SMTP id smtpd.web11.1131.1752169136505964087
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDF03C83F21
+	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 17:39:09 +0000 (UTC)
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
+ by mx.groups.io with SMTP id smtpd.web10.1046.1752169142525529554
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jul 2025 10:38:56 -0700
+ Thu, 10 Jul 2025 10:39:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jIMre/ZB;
- spf=pass (domain: gmail.com, ip: 209.85.167.49, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-55511c3e203so1171516e87.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 10:38:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=f4mUcyRf;
+ spf=pass (domain: gmail.com, ip: 209.85.208.177, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-32b7cf56cacso12721621fa.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 10:39:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752169134; x=1752773934; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=efqe4zVXEXcxQSoF2wZfOCFxuFe2/KQkJYMnJQ+wUXw=;
-        b=jIMre/ZBeQXNOxbWLQjdFAGU6PtLziRFtm1mj7bsYvh162ta8YOftpjgPvEVpN96Nq
-         NcbDuFZKeR+b/bSxwjEXQgmi4U1qoYVugoGQel9fpcxEmSb18KWhc3lRj+lIzm69XMm/
-         qRae/pm8pxzoBoXIO3JiHrhVWEb1jTWK8CiyybD7b6pAV0AGGCBGWl5bg9SfT8idUydz
-         ZcHSIJq7kFX9B4QwnCo57GWJ6iSlAH/sL+wZN/teZRqTKNaCWVUU0D0W9/3qrZ3lsI5S
-         af5478NgaANxUa/+c7t2EL+uz+gGMJ0IH2V+R0LBxELgdckADZISrIqscsr6+gHAYpdG
-         OjWQ==
+        d=gmail.com; s=20230601; t=1752169140; x=1752773940; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lh/z4ecFPAfaS9VjIwhZexM32Gtd1kSIBHqSUc5StEQ=;
+        b=f4mUcyRfghGWHTdXqdXqgu2sb26iTbfyHG8idXRbc+bZTLbTHph+T5QLAyt9xY2jxf
+         NUUwKLCAudWrjVQnD80WokltjnUulmcmhuPozHs/0OImcCrUvSoXqhZeGSof0S01pmpZ
+         IEryvKdGEFAJeNCO527ysuFx0MRtGn5/st3ffhmk0c2sNNVyzVs6aNo/4HIwuU1DdHGK
+         Kc4UhpF45HwG/g/UIFk9o9SFXJ3y6tiUJSnz2XoxA1p+uNlnyr1Ot6CxCgq0CHXSKzul
+         trOhLi6wRH2ZC50RyAcUKXWO26aWbc7Issyq2/BmqmCSFvvFzL6yB1vc2j5I9aXHXaza
+         s5+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752169134; x=1752773934;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=efqe4zVXEXcxQSoF2wZfOCFxuFe2/KQkJYMnJQ+wUXw=;
-        b=O1oKi+WlGrFx1ciIF/NugUtbNP6BJKYZns8o1uG+1Ne7nq9TLSQU6Suhh+Gkq1kzWv
-         +/Vshgts6V1bqctWeMP9mTz0xA65JYiI0VcwHY3H+cFxRnGDrPQoldv4PJwqyk+fvwFz
-         yks1ePZpDmib+ReuAvmmtzDt/IUGHWMSZ7yJgUzPWGauOkmoTfKuJWL14u2wddYUWfPE
-         UTBHn9WZIUia5/bCYhJn2rl4oqz2AUNbo1NKI8a4R2E9LnEGs0u3kNY2iuLqO97nAQmb
-         h5qqqd3Ot51yHWsSoZriIqwpz/oax5BKWRwE94XxN5rl9RwnmPShdhqkdD1v/Sbq5/q9
-         pQew==
-X-Gm-Message-State: AOJu0YwRX77UpwKmX9cKRV0VVCHKKh0cPrMlyzrG2g5+PpumijeGqn0R
-	OQm/+5SOWdRO5oydRo5xtA0+JnzvDJ650by1JnVqHEOaqw85iDIBaH/FamW+1g==
-X-Gm-Gg: ASbGnctppP7FHO2V4967y9tjxpIC39G7lruCD5mmSlxlASyWcfIhCMTmnRmUmZiONwO
-	Aid/YIMGjxO4M/oiWaSh5qsyByRpa8A+aJmd7V5Ci2Lvo/O9WoQEOZkg3mXHivNq52BvFc6gdqM
-	K9FNORiAUsMGyetsiCEZ33SwaMdEpqrHM/Ie5xlv3BZS6PrLvVkTzqYQZN9Um2p9ZzRTc//iJ1I
-	g5y6CAolMhu2XHVTP0D/doQ3il5OyF0+vdxPUEFANHU40l+u7ON2iHYHcoZhmpFWN73DTGAlNuZ
-	uiDESXID7Nsq7JSmm9yMtMCkp62s5dkxRBgr/Q5vtEA5p7E9dwZE3UDEQoAs5syOAWLKuw1sM6z
-	PF40=
-X-Google-Smtp-Source: AGHT+IFKAjqnIQf4uZ2/bLNNpSUmrmDQ8aTUEvdvo2H9616EMpaVuN3Gyn6vUKktQ21oYt0kzTWn2g==
-X-Received: by 2002:a05:6512:1104:b0:553:abe9:c321 with SMTP id 2adb3069b0e04-55935b35c7fmr1309473e87.44.1752169133735;
-        Thu, 10 Jul 2025 10:38:53 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1752169140; x=1752773940;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lh/z4ecFPAfaS9VjIwhZexM32Gtd1kSIBHqSUc5StEQ=;
+        b=bdbqByrJAa+v8Y01EmxE0ep1+c9Nqd1GEM4h5M3haEMl6r98Ph9+F5XYgnc16lig9R
+         ujLtIFV1FRfCosJ2uasWXA8BBS6YNSWy7pt7TZZ+QEX3HhFxbtf4ZtmMEQ+qP6zmZ8rO
+         6L6Ir3XUhV7r/H5QKMQWeJTGzu+I5Fjd/xMSSBWNE83jE+CkQoaAav2rSRAbv1sgbkYW
+         6DIPyn0OD6oNwHmMngiJbpPJ/A9mTuAa4Fs2msK3cAhJ6/v7iX1oP0xMXIiEzQg7+Fw0
+         WGL/s20r2VhpQEL9Gu+XF6FkOnoFi5HioU+K6RE/Lfdd/f8fH0dMRVrQy/4QYmjk6XnW
+         2ZDA==
+X-Gm-Message-State: AOJu0YxTnFHmGebXHA8OK+5qQ8ZOb20ZuaBFxJOcbd4noCkMym1FyPaL
+	sKHXFFBViijNqd6NOskdwe/h/qyo6yeDIXBOYEYJkBho6HHCKbw/SxaU9wnSlA==
+X-Gm-Gg: ASbGnctWmfBfuJxVN8Ejus3nJ9viq6rv5nc9RTWoY3a62Atpef8ZHuiBUhuUUaHVG8y
+	sVLlg32MTDNiL4asWOMQTwF76xN0m7p1fNO411G779gKkY1DG2G+JTLbnRgtWKnkIj3fFDRt7Zb
+	vs3qk2/45fhnN39g+awPcz/x1aGOxm7A++/LCPu1AsXo2CK1WBY0REclkBqIgG1xeS+k5Xrxsm4
+	F8Et5mc+opkS6csvpK7CXSQtBUQTYRYzFc2NtL/wrP68NiIkSrL2x5KBebhLSs2kPcIhvsHUaaf
+	ncZzAoqKPDv+HlP8NUqfy3FOptq93HtktYQqrWp7bKovSMnIfMWU4cxo8ScfJvJkIIT0u+VQLkG
+	GrPZ6ayYqY0dRwQ==
+X-Google-Smtp-Source: AGHT+IHc8Oeysh1zd/3c/MJAxfuVtumW8LgR8di58HJ9YVeX3I6YDXp4kXj/gs55syfZG24jyTR0lw==
+X-Received: by 2002:a05:6512:4013:b0:549:38eb:d694 with SMTP id 2adb3069b0e04-558fa8f915fmr2504822e87.26.1752169139652;
+        Thu, 10 Jul 2025 10:38:59 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.70.141])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-55943b8185csm431191e87.246.2025.07.10.10.38.52
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-55943b8185csm431191e87.246.2025.07.10.10.38.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jul 2025 10:38:53 -0700 (PDT)
+        Thu, 10 Jul 2025 10:38:58 -0700 (PDT)
 From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-openembedded][PATCH 1/5] physfs: Add patch for CMake 4+ compatibility
-Date: Thu, 10 Jul 2025 20:38:23 +0300
-Message-ID: <20250710173827.43239-1-alperyasinak1@gmail.com>
+Subject: [meta-openembedded][PATCH 5/5] linux-serial-test: Add patch for CMake 4+ compatibility
+Date: Thu, 10 Jul 2025 20:38:27 +0300
+Message-ID: <20250710173827.43239-5-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250710173827.43239-1-alperyasinak1@gmail.com>
+References: <20250710173827.43239-1-alperyasinak1@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 17:39:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118416
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 17:39:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118420
 
 Fix:
 
-| CMake Error at CMakeLists.txt:12 (cmake_minimum_required):
+| CMake Error at CMakeLists.txt:4 (cmake_minimum_required):
 |   Compatibility with CMake < 3.5 has been removed from CMake.
 |
 |   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -83,25 +86,25 @@ Fix:
 Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
  .../0001-allow-build-with-cmake-4.patch       | 43 +++++++++++++++++++
- .../recipes-support/physfs/physfs_3.0.2.bb    |  3 +-
+ .../linux-serial-test_git.bb                  |  3 +-
  2 files changed, 45 insertions(+), 1 deletion(-)
- create mode 100644 meta-filesystems/recipes-support/physfs/physfs/0001-allow-build-with-cmake-4.patch
+ create mode 100644 meta-oe/recipes-test/linux-serial-test/linux-serial-test/0001-allow-build-with-cmake-4.patch
 
-diff --git a/meta-filesystems/recipes-support/physfs/physfs/0001-allow-build-with-cmake-4.patch b/meta-filesystems/recipes-support/physfs/physfs/0001-allow-build-with-cmake-4.patch
+diff --git a/meta-oe/recipes-test/linux-serial-test/linux-serial-test/0001-allow-build-with-cmake-4.patch b/meta-oe/recipes-test/linux-serial-test/linux-serial-test/0001-allow-build-with-cmake-4.patch
 new file mode 100644
-index 0000000000..1584921e65
+index 0000000000..0b67ad03b1
 --- /dev/null
-+++ b/meta-filesystems/recipes-support/physfs/physfs/0001-allow-build-with-cmake-4.patch
++++ b/meta-oe/recipes-test/linux-serial-test/linux-serial-test/0001-allow-build-with-cmake-4.patch
 @@ -0,0 +1,43 @@
-+From 09f8ca5776f5265571d95454b7307bbee56474da Mon Sep 17 00:00:00 2001
++From 83ec3d72913cbdee0c0f27fe74f77bf2ef1d1901 Mon Sep 17 00:00:00 2001
 +From: Alper Ak <alperyasinak1@gmail.com>
-+Date: Thu, 10 Jul 2025 13:19:24 +0300
++Date: Thu, 10 Jul 2025 14:11:22 +0300
 +Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
 + compatibility
 +
 +Fix:
 +
-+| CMake Error at CMakeLists.txt:12 (cmake_minimum_required):
++| CMake Error at CMakeLists.txt:4 (cmake_minimum_required):
 +|   Compatibility with CMake < 3.5 has been removed from CMake.
 +|
 +|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -113,7 +116,7 @@ index 0000000000..1584921e65
 +|
 +| -- Configuring incomplete, errors occurred!
 +
-+Upstream-Status: Backport [https://github.com/icculus/physfs/commit/f7d24ce8486d9229207cca1ff98858fe60ffe583]
++Upstream-Status: Submitted [https://github.com/cbrake/linux-serial-test/pull/60]
 +
 +Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 +---
@@ -121,35 +124,35 @@ index 0000000000..1584921e65
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 4a67c27..f0f0183 100644
++index 10e3968..4ce6ef1 100644
 +--- a/CMakeLists.txt
 ++++ b/CMakeLists.txt
-+@@ -9,7 +9,7 @@
-+ #  compile, using preprocessor checks for platform-specific bits instead of
-+ #  testing in here.
++@@ -1,7 +1,7 @@
++ # SPDX-License-Identifier: MIT
 + 
-+-cmake_minimum_required(VERSION 2.8.4)
++ project(linux-serial-test C)
++-cmake_minimum_required(VERSION 2.6)
 ++cmake_minimum_required(VERSION 3.5)
-+ 
-+ project(PhysicsFS)
-+ set(PHYSFS_VERSION 3.0.2)
++ add_executable(linux-serial-test linux-serial-test.c)
++ target_link_libraries(linux-serial-test rt)
++ install(TARGETS linux-serial-test DESTINATION bin)
 +-- 
 +2.43.0
 +
-diff --git a/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb b/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb
-index 57cfdcdf82..2571d3f6a0 100644
---- a/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb
-+++ b/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb
-@@ -8,7 +8,8 @@ inherit cmake
+diff --git a/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git.bb b/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git.bb
+index c617cf09a3..a451db2a76 100644
+--- a/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git.bb
++++ b/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git.bb
+@@ -3,7 +3,8 @@ HOMEPAGE = "https://github.com/cbrake/linux-serial-test"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSES/MIT;md5=544799d0b492f119fa04641d1b8868ed"
  
- PE = "1"
- 
--SRC_URI = "http://icculus.org/${BPN}/downloads/${BP}.tar.bz2"
-+SRC_URI = "http://icculus.org/${BPN}/downloads/${BP}.tar.bz2 \
+-SRC_URI = "git://github.com/cbrake/linux-serial-test.git;protocol=https;branch=master"
++SRC_URI = "git://github.com/cbrake/linux-serial-test.git;protocol=https;branch=master \
 +        file://0001-allow-build-with-cmake-4.patch"
- SRC_URI[md5sum] = "dc751294aaf59d1359bbe34e693d1d87"
- SRC_URI[sha256sum] = "304df76206d633df5360e738b138c94e82ccf086e50ba84f456d3f8432f9f863"
  
+ PV = "0+git"
+ SRCREV = "2ee61484167eab846f7b7c565284d7c350d738d3"
 -- 
 2.43.0
 
