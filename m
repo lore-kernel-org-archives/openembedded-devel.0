@@ -2,85 +2,73 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EDECBC83F1B
-	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 17:39:09 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
- by mx.groups.io with SMTP id smtpd.web11.1135.1752169140802704724
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36D9AC83F17
+	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 18:11:00 +0000 (UTC)
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
+ by mx.groups.io with SMTP id smtpd.web11.1938.1752171049719616296
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jul 2025 10:39:01 -0700
+ Thu, 10 Jul 2025 11:10:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HFj4NPl5;
- spf=pass (domain: gmail.com, ip: 209.85.167.51, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-558f7fda97eso772336e87.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 10:39:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TLFyNOqY;
+ spf=pass (domain: gmail.com, ip: 209.85.167.44, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-558fa0b2c99so1020179e87.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 11:10:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752169138; x=1752773938; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bkbZ1iddh0zLz5DLooGTAYxrMNch1xkIu/wBJWL5qSw=;
-        b=HFj4NPl5e4UV/DXynTL0fcQu0XTYMec3JRqah/GDavlWdMfuQ2bPFkjmBN0Nyw5+ip
-         twFWOl2110T5ra0eRMY4tNr7j4awuyxwIle41uIMu/XsgSjKUb+jyvdeUOXzfCHhQP8z
-         N3nBe9k7RtGK9eTPzL5r+i3fjk5ejMkeWF3TMpqqcUUoLM0caz3FL1zqXdAVbk405WqL
-         3A2SvVPo4QFMasmoVKHNTR1lYrrywcJpkxH0K4BHoqFbLxR05VxUmeWm+fiiobhcrTET
-         eWV5zBVKWwJKkVoDBbZI71gx9cNC7ewvh6hpFVVEv067erTAUurEUjhd63MDx/a5ZfjS
-         DaOw==
+        d=gmail.com; s=20230601; t=1752171047; x=1752775847; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=LoHSjFZPnaD32nb2Ajs7CWYeJQscUWJlGe2TYGc3hBE=;
+        b=TLFyNOqYXv4a2jGuWB/qYzAWmZ17VJg20C+sgIjFm/dLlDB3uzlqu4cciExSY7ZVXC
+         Mhm2gIoM2/G+eFzwp8gwhi3f6rxH/OvBF0s3t4vOPZ42WoUGahgVvjVw40nubzKF+JqD
+         IQComUlwazFiujaWR2nK+4zNKZShbVgknn1v6jk/KJsQFFXyPMSH20Xolc/SFAw0A7UP
+         aecLxOwpSNuLz+4ROjBcXLL5FvaGQMWKr904kHf8QmMLm8gCi50MN/x5rujboSZLgo5V
+         GDhsqZKwzQ9TreWSUggLD2yBYflqT8iSommYBKuZhXBWsmWGiNrcHHBMoR4j1dxLPlPL
+         7PiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752169138; x=1752773938;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=bkbZ1iddh0zLz5DLooGTAYxrMNch1xkIu/wBJWL5qSw=;
-        b=asSkebDNxeagwTRMsqZChFhpTseEg5Tfhb9x+WBA8HTsLSuI52C8tUxSkCepP7HwBE
-         Pi/RU6n6scfq9lHfzSrHgNOD88Q6CFgazFg1FuArXdtZlg5jng1gWLiN8m0Tnke/dg0g
-         x8ikgq16dTgklvt5dy2Hf1kjyVejGWZvx1hG/0Ht0Smdb2MiKoqDvG3cZ1SIzM3qd/O4
-         IqYNEo724zFZtVcKnOe3vCQJLR76foBHq3YGHKNfT99Nb6QJ061sLiZzS2GxE6IMiM2n
-         oh7jsFIXL5pd0p4Esg8B8nO3qS4dL7Ie42Zh/QPlG+hoGoSHcie6WQ55wDNO0LbR/fJq
-         NPfw==
-X-Gm-Message-State: AOJu0YzXoc9DRtZlZfPueVlOCF9oTSzWhbwE/fbGWJqUN7UwJIc3FxEC
-	vA1U7fHo/99nSXYs1jCtF28o5kCJdoSMKSspAsRzVLSFDYkrRuf3s/3+vOTlAg==
-X-Gm-Gg: ASbGnctCR2HMJgYmr1pXYZVf9dhmQE1gl7RQb2c8O7DPTkYkuEke5cp8PQ7ukAn1+EE
-	QSrf2eUCdjrDiRTU1lm6rwzs5gxQdmVV1+ytFVLobH/LXCTKFYcQ+TBC0bsCsigx2GI+9eGM5y5
-	B3mkWtJmODdd8PkDni7Jg5qmgWNCd/CRVfvq7HWGZkiBD1It3Klfin5FVd8Ul7bQ/u33nq9zvIn
-	6Aqr+UKv+S8DmFevBdsZBtPnucunfYe6n4YAO31jHckU2WAtywXtIpSQd6o8+3EW4HssdNiCHSz
-	fkh7kf/+zpAe9dRmZZGNyyO9r5fqT/pQpk7Uyfv4cJoA2S7SA64O/Nv9weVs07OK9fUyZh6Qkim
-	78pM=
-X-Google-Smtp-Source: AGHT+IEThGcx+qZMnbFWx/szIr99FU4n4RkODC2/osXBdl9QNKq34/sfeOIoeqQAjo67yUcJD5cR4w==
-X-Received: by 2002:a05:6512:1343:b0:553:3892:5ec6 with SMTP id 2adb3069b0e04-5592e3e1179mr1000953e87.35.1752169138182;
-        Thu, 10 Jul 2025 10:38:58 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1752171047; x=1752775847;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=LoHSjFZPnaD32nb2Ajs7CWYeJQscUWJlGe2TYGc3hBE=;
+        b=LuxMJKh5Sp+n4K/Ks7cx0wRYx6yZhcm5SI7DFK2vIgkG0wT9HzhPOpllnRBtMaPLAh
+         ljTAqTSJHSRd8Md3JXAXD8C92jOfIWKoNZLmMyE04WbBmgeDLDCRdzeox2dpaK56Huat
+         2/j1HKT1UggOuhFzCjjHHorDE3ej6eYytj6xLLtSAgoN3J9q/KupbwbK/ej/nlTNAL5a
+         QapQ9foPl7DWWqhA7hxcFLeagY64JUcL0aTAA8N9/o2tmJMHonaGwurW6pdpV//67PW8
+         c829wmB8V48IsHUx9SWMANxS9HiYNckqsAeRrkQRU+SdHfc7lfhZOzG/enYPBzRlI7mb
+         0o7g==
+X-Gm-Message-State: AOJu0Yy/chJZNzQREDnKYvbTnYtF/QHCAkJXcGmj9Lj+1OLiZ4VIMiwr
+	RNDgG/aV5rv/eP8exG0AO+DQ2DWtOmehGnBnylyMvOHcjhd01+vItybU76VG7g==
+X-Gm-Gg: ASbGncvVwni+uSZbyzyn6ThmfOAzeyXXuEfGUD/CyX4d9Boad14iWtOXtj4EjGU/3Q8
+	9N7ik1BSTy9G7HW2Vty4rw+sihdb7EjNtMW+0blc0k5K5zGRjL9JsvjkP+Y2202i4GP5+XwuH9T
+	J35PjgJBXST4IASKlfkTjPQ2qt27EJmUZ5K/IbgzM83NFlnCsEIjwYXJMXiG02qaEJbrNFNgA1Z
+	IVK7AzSHOxXnE9tFE6VlQ4i878P7zvrlqHz7m4sTlaMumHXcAZuPNrVC2dW6IaKA6x0NXkeAfYD
+	tyjc5bvITaBZTHR+WSlEiZ6wyPyihjs0a57nY+A47vrKEMolfKGQ2UvaiP3vymu8uayf/q1DTMl
+	4Qm0=
+X-Google-Smtp-Source: AGHT+IED89OWuv1jzgs3j275FJCE6NMs/3ktku84Nuk+HzgwMd59a2WH8W7Mxuu/HkZT1bdRHYe8cw==
+X-Received: by 2002:a05:6512:12c4:b0:553:cfa8:dd38 with SMTP id 2adb3069b0e04-558fa8f916amr2954592e87.36.1752171047214;
+        Thu, 10 Jul 2025 11:10:47 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.70.141])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-55943b8185csm431191e87.246.2025.07.10.10.38.56
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-32fab8bd4a8sm3239181fa.65.2025.07.10.11.10.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jul 2025 10:38:57 -0700 (PDT)
+        Thu, 10 Jul 2025 11:10:46 -0700 (PDT)
 From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-openembedded][PATCH 4/5] sqlite-orm: Upgrade 1.5 -> 1.9.1 to allow CMake 4+ compatibility
-Date: Thu, 10 Jul 2025 20:38:26 +0300
-Message-ID: <20250710173827.43239-4-alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCHv2] ade: Upgrade 0.1.2 -> 0.1.2e to allow CMake 4+ compatibility
+Date: Thu, 10 Jul 2025 21:10:41 +0300
+Message-ID: <20250710181041.49619-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250710173827.43239-1-alperyasinak1@gmail.com>
-References: <20250710173827.43239-1-alperyasinak1@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 17:39:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118419
-
-- Dropped the patch as the issue is already fixed in the newer version.
-- The LICENSE file has changed so updated LIC_FILES_CHKSUM to match the new md5sum.
-- Updated CMake flag to disable tests according to the new version.
-
-Changelog:
-
-https://github.com/fnc12/sqlite_orm/compare/v1.5...v1.9.1
-https://github.com/fnc12/sqlite_orm/releases
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 18:11:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118421
 
 Fix:
 
-| CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
+| CMake Error at CMakeLists.txt:7 (cmake_minimum_required):
 |   Compatibility with CMake < 3.5 has been removed from CMake.
 |
 |   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -94,100 +82,34 @@ Fix:
 
 Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- ...01-fix-cstdint-error-with-gcc-15.0.1.patch | 52 -------------------
- ...{sqlite-orm_1.5.bb => sqlite-orm_1.9.1.bb} |  7 ++-
- 2 files changed, 3 insertions(+), 56 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/sqlite-orm/sqlite-orm/0001-fix-cstdint-error-with-gcc-15.0.1.patch
- rename meta-oe/recipes-devtools/sqlite-orm/{sqlite-orm_1.5.bb => sqlite-orm_1.9.1.bb} (68%)
+ .../recipes-support/opencv/{ade_0.1.2.bb => ade_0.1.2e.bb}    | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename meta-oe/recipes-support/opencv/{ade_0.1.2.bb => ade_0.1.2e.bb} (91%)
 
-diff --git a/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm/0001-fix-cstdint-error-with-gcc-15.0.1.patch b/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm/0001-fix-cstdint-error-with-gcc-15.0.1.patch
-deleted file mode 100644
-index af884808f2..0000000000
---- a/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm/0001-fix-cstdint-error-with-gcc-15.0.1.patch
-+++ /dev/null
-@@ -1,52 +0,0 @@
--From f011501e719e0042fc6ca29ac7b33e8a14562246 Mon Sep 17 00:00:00 2001
--From: "mark.yang" <mark.yang@lge.com>
--Date: Tue, 1 Apr 2025 19:45:01 +0900
--Subject: [PATCH] fix cstdint error with gcc-15.0.1
+diff --git a/meta-oe/recipes-support/opencv/ade_0.1.2.bb b/meta-oe/recipes-support/opencv/ade_0.1.2e.bb
+similarity index 91%
+rename from meta-oe/recipes-support/opencv/ade_0.1.2.bb
+rename to meta-oe/recipes-support/opencv/ade_0.1.2e.bb
+index b54c28d624..a7af2f2da9 100644
+--- a/meta-oe/recipes-support/opencv/ade_0.1.2.bb
++++ b/meta-oe/recipes-support/opencv/ade_0.1.2e.bb
+@@ -5,15 +5,13 @@ organizing data flow processing and execution."
+ HOMEPAGE = "https://github.com/opencv/ade"
+ 
+ SRC_URI = "git://github.com/opencv/ade.git;branch=master;protocol=https"
 -
--* see more details:
--  http://errors.yoctoproject.org/Errors/Details/850148/
--    TOPDIR/tmp/work/core2-64-oe-linux/sqlite-orm/1.5/git/examples/synchronous.cpp:7:5: error: 'uint16_t' does not name a type
--        7 |     uint16_t src_port;
--        |     ^~~~~~~~
--    TOPDIR/tmp/work/core2-64-oe-linux/sqlite-orm/1.5/git/examples/synchronous.cpp:3:1: note: 'uint16_t' is defined in header '<cstdint>'; this is probably fixable by adding '#include <cstdint>'
--        2 | #include <sqlite_orm/sqlite_orm.h>
--    +++ |+#include <cstdint>
--        3 | #include <string>
--
--While this was backported from 6a96d1cec4(Explicitly included <cstdint> in examples and unit tests),
--since it was a commit made in v1.9, only synchronous.cpp was modified as other files do not exist in the current version.
--
--Signed-off-by: mark.yang <mark.yang@lge.com>
--
--Upstream-Status: Backport [6a96d1c Explicitly included <cstdint> in examples and unit tests]
-----
-- examples/synchronous.cpp | 11 ++++++-----
-- 1 file changed, 6 insertions(+), 5 deletions(-)
--
--diff --git a/examples/synchronous.cpp b/examples/synchronous.cpp
--index d10da13d..b103b48c 100644
----- a/examples/synchronous.cpp
--+++ b/examples/synchronous.cpp
--@@ -1,15 +1,16 @@
-- 
-- #include <sqlite_orm/sqlite_orm.h>
--+#include <cstdint>
-- #include <string>
-- 
-- struct Query {
--     std::string src_ip;
---    uint16_t src_port;
---    uint16_t txn_id;
---    uint32_t tv_sec;
---    uint32_t tv_usec;
--+    std::uint16_t src_port;
--+    std::uint16_t txn_id;
--+    std::uint32_t tv_sec;
--+    std::uint32_t tv_usec;
--     std::string name;
---    uint16_t type;
--+    std::uint16_t type;
-- };
-- 
-- int main(int, char **) {
--
-diff --git a/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb b/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.9.1.bb
-similarity index 68%
-rename from meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb
-rename to meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.9.1.bb
-index ee203f83e2..a4da31ebc7 100644
---- a/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb
-+++ b/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.9.1.bb
-@@ -1,19 +1,18 @@
- SUMMARY = "SQLite ORM light header only library for modern C++"
- HOMEPAGE = "https://github.com/fnc12/sqlite_orm"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=3b5bf5ee8bb16d8e19359efe11bdc3f2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4ae09d45eac4aa08d013b5f2e01c67f6"
+-SRCREV = "1e02d7486bdb9c87993d91b9910e7cc6c4ddbf66"
++SRCREV = "ffc83ad372d72b16732f201d8a9d1d80dd16515b"
+ 
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
  inherit cmake
  
- DEPENDS += "sqlite3"
+-
+ EXTRA_OECMAKE += " -DCMAKE_BUILD_TYPE=Release"
  
--SRCREV = "e8a9e9416f421303f4b8970caab26dadf8bae98b"
-+SRCREV = "5f1a2ce84a3d72711b4f0a440fdaba977868ae67"
- SRC_URI = " \
-     git://github.com/fnc12/sqlite_orm;protocol=https;branch=master \
--    file://0001-fix-cstdint-error-with-gcc-15.0.1.patch \
- "
- 
--EXTRA_OECMAKE += "-DSqliteOrm_BuildTests=OFF -DLIB_INSTALL_DIR=${libdir} \
-+EXTRA_OECMAKE += "-DBUILD_TESTING=OFF -DLIB_INSTALL_DIR=${libdir} \
-                   -DCMAKE_INSTALL_DIR=${libdir}/cmake \
-                   -DPKGCONFIG_INSTALL_DIR=${libdir}/pkgconfig"
- 
+ FILES:${PN}-dev += "${datadir}/${BPN}/*.cmake"
 -- 
 2.43.0
 
