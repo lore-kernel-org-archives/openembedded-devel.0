@@ -1,84 +1,102 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BC06C83F1B
-	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 18:13:50 +0000 (UTC)
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.web11.1993.1752171221606869985
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A29CAC83F1A
+	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 20:54:39 +0000 (UTC)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.web11.70.1752180877398437431
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jul 2025 11:13:41 -0700
+ Thu, 10 Jul 2025 13:54:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eGHPw8LC;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-b350704f506so1139383a12.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 11:13:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kZB/wZEJ;
+ spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-70e5d953c0bso17227797b3.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 13:54:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752171221; x=1752776021; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kplh2JvjGa3DAGYlIf363BiZK7Ovq1mQR7Oju95CGL4=;
-        b=eGHPw8LC7G0a3kyAxX7wpnK4KZaPHuPPsGZ2v1RbP2EQPillYpP5SwBNEHmaVI1mFk
-         2z5GHyQy58CCBioMG51gR+IzsssQfpSehaPfIg7CZWViyp0hWOHBzoNJblY4TqSoYRHR
-         xxlwVz27Q6qT04Me0RDlvT0yOdxxPc0xzV6g9kNKpDnBo6+ZYu6+tsZzRYzGHiwL9lIy
-         UE1eh/bViuK7TGM/rtzwKknkB0bGpPIH6f3CfNr2xB/PTfygNUpNRp5R7Un6vKtQnypi
-         p7NM1L7GZGf6rQkcYwFvkLJxnuQE71bZxoepJpehJ1cv8nmze8YLApzWKAUpJRLOefX+
-         cv1Q==
+        d=gmail.com; s=20230601; t=1752180876; x=1752785676; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0LnqL/brzVwcsqvgTd3XLT14I6wm2JA/BZI+/7F6SEc=;
+        b=kZB/wZEJ2iG4oJhAF7ngB+Pv7a1g+AsJVnbIhZWGraZaMO5Wrr6VaE1h+JF/gNjZJD
+         RFkubZI7kAVhT+dnDhPi+V3tIVy06NJefaJcLmjoiGSmbr3NenDRnObFlEToatPr0jqN
+         AALKIvhGW/hZre4hwz774AGw4fpDgZobKf6Bq4BOLcpn+eZLFmIeCloFyC8OUuNB8BO8
+         mdyAojnaYPHMtHiCO+7+uWB6VI+OLNEImVUAFGLzC6hRXkR3xMGOQq+NWu9NIs4q0VmE
+         XbTwhEWm7KqYXtnUMUP8cCgpSs31EJa95lUMbe1SaSKxgc5ksUR1UtqYizAbexPUW5if
+         eGKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752171221; x=1752776021;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=kplh2JvjGa3DAGYlIf363BiZK7Ovq1mQR7Oju95CGL4=;
-        b=m1MygWId/rVwcq4ql+5+jRQelv099PdcRObFuBq1CZwMv+AGkoQ8IVLRg+LmNWBgHd
-         ZhQhT0SWqAFWoL40pDQ+pjJo5JaUjHO8//S1sLubo8b9419L2RNOmre0SuWE8wa5ts7j
-         2f8FAQE/PjSaaomFN3jtIOW3E8ca6Z452HrZ8KRzzlKh0o0GKwtf5lejt0pqf7vQq6o6
-         0oRoIUVEN0q59WakWJS5Z1NEoeqCgpvu6IlObNjc7zawp+adcMEjCN4XyUUyV4Vuey3D
-         2xNgNIDSv5jhM8pwdVBcthu1KeCSt9ESt9AspvhlMNvLT2otnAPtfiUdNFVG0iblu5Bi
-         bmVw==
-X-Gm-Message-State: AOJu0YwsyGuZ8tY2xHFc5wp+60bS3dHk+dT3Urf4Cf6wswjQEMFWEI3Z
-	Q+6QyFW+rDt/j/cgxwFIBqT1eJyWTgaX3UvmAOq7OStRqmll0PDpuk7IeotZlhsb2+tLwTJdweZ
-	KsVo7Hajnel3k6Dwd+t3UNX5XJzgQwImT8NHn
-X-Gm-Gg: ASbGnct+ho4URzPH4E1W87ab+SZ7qAw+MkSRPw/WGS6wSGTJBHCNl31ptG+UvloUksP
-	Y61nGNOc4OuVr1cGQuPXQCBJ+0Lmvyt87mfaKsaTG1rL6xtujMHdWLBW/43gZym3lCBQqAydfUQ
-	2giRXMzuA+Bjsr8nTF5UFzGjCxvyJ1IbLChAs7aUHI7Ek=
-X-Google-Smtp-Source: AGHT+IEDGjl1sZjOZmqsky9DhMOXLtRQQw0N31vzgIj9M6oPK8f/sJU6DwOTgfqVU10xoRqXm3lwwe4SFZf/xoO90p0=
-X-Received: by 2002:a17:90b:1c0f:b0:2fa:562c:c1cf with SMTP id
- 98e67ed59e1d1-31c3cf1ab0bmr7697282a91.1.1752171220951; Thu, 10 Jul 2025
- 11:13:40 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1752180876; x=1752785676;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0LnqL/brzVwcsqvgTd3XLT14I6wm2JA/BZI+/7F6SEc=;
+        b=sjWFgdYjYNOQSn4qCFO+FoaM6B3z8I7b524Z6BxZSJAR9RWxuoEE7anQGeJyO1ywEh
+         nv9InrNhNTFCUS11h4FK6Hf4MVMVD8Ynmz0o6nAD5aG1UncBQIyoAMrpiVaq8VH3U7S8
+         Zb8WrNKQqW8D4ZRsPjbeN1jLz7HhnvpuObPzLlIFg6COGviTlSiicPPsWw5SCmyz6C+U
+         GEHamkglcio3mNCA4a53sEkm0cDZHV6QnDfu/WAn8JsCFtnWIZ8ks1OjFC87xp0tzbCF
+         hQaayZqZa8Bo3W4r5bVfw2Cg+hcqRzP2FcVcbKD618qvECG1kGMn1KD2XonyOmySseUq
+         7ddw==
+X-Gm-Message-State: AOJu0YwhIj4Bgxhb3HTpO9Stywq2YLxaAENg+uiyN9tvhUaNlQ0p21UG
+	igBC+reM2zPP3gAu8wdWML4e1m9pWXeIcEvoKOCBAkZ+jbafD8HLP9NNnqKLB/Rt
+X-Gm-Gg: ASbGncto+xKpnfakeK1E3iPk4CFgUjRrKYOeUGFeEG1ixsy7rd0u+U+pfEYmX6CY7uB
+	NuYDYiMqrf8L8xpVK+OMh8C6jNuk5hoX8auAKXc7CwL6fQh8GD/zhWs5CemIpnNeHtRNLeL1G6W
+	72/cI4cv1WRy6NgT5jeZDhilDTbRhbpHwrcswUjdy5Mg5p3dE37VT94mua1987hIxxjEdKjej00
+	yompddKMR30SKZ2fEXdCylDGn60mk+wjRMSozVi6DPugJ9e+pkwvmI91EzSmy5iKGgvLjN+SYoU
+	YBEfu/2YblfcU5gCrPjojonH3bRo4gnQLz06dSSp3IDIrsnhcmFmeiipWizUywDGgAZmZlXy0vA
+	ubUfutmSvuoWrIeGkHUWC143uVhmSA8iTSpbevmOf03x0DLeTZ60NsxKp
+X-Google-Smtp-Source: AGHT+IFhEa+rLeZIgPnd2vW6KtHNPQP08GV/B62YfdwZSALwpLpolvnOke7qLOfLSoTcA+wsLboCHg==
+X-Received: by 2002:a05:690c:660d:b0:711:9770:161f with SMTP id 00721157ae682-717d5b77e0bmr20411447b3.2.1752180873460;
+        Thu, 10 Jul 2025 13:54:33 -0700 (PDT)
+Received: from localhost.localdomain (71-208-4-221.ftmy.qwest.net. [71.208.4.221])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-717c61b4cf6sm4515407b3.68.2025.07.10.13.54.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 10 Jul 2025 13:54:33 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-xfce][PATCH 1/3] xfce4-clipman-plugin: upgrade 1.6.3 -> 1.6.7
+Date: Thu, 10 Jul 2025 16:54:10 -0400
+Message-ID: <20250710205412.788186-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250709173054.605430-1-alperyasinak1@gmail.com>
- <20250709173054.605430-3-alperyasinak1@gmail.com> <7d94e8f3-71e5-4046-98cf-330a9df9ab07@gmail.com>
-In-Reply-To: <7d94e8f3-71e5-4046-98cf-330a9df9ab07@gmail.com>
-From: Alper Ak <alperyasinak1@gmail.com>
-Date: Thu, 10 Jul 2025 21:13:29 +0300
-X-Gm-Features: Ac12FXwm5tBaVLznk85EgN92gPZ_7GnmIWccLx30nS-fE6F4niRyJKDRPWXUZmI
-Message-ID: <CAGpma=6jk0F9M0Wad5Xgpum5M0sk88ZY=wmLVj_7hQYAhCnQTA@mail.gmail.com>
-Subject: Re: [oe] [meta-openembedded][PATCH 03/20] ade: Add patch for CMake 4+ compatibility
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 18:13:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118422
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 20:54:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118423
 
-Sent a v2 patch ->
-https://lists.openembedded.org/g/openembedded-devel/message/118421
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-clipman-plugin/-/tags/xfce4-clipman-plugin-1.6.7
 
-Gyorgy Sarvari <skandigraun@gmail.com>, 9 Tem 2025 =C3=87ar, 21:44
-tarihinde =C5=9Funu yazd=C4=B1:
->
-> On 7/9/25 19:30, Alper Ak via lists.openembedded.org wrote:
-> > +
-> > +Upstream-Status: Backport [https://github.com/opencv/ade/commit/8b24d5=
-f1286d178fd0d3a22d584e1a798f5e9a6c]
-> > +
-> >
-> There are multiple new tags that contain this commit (v0.1.2c ...
-> v0.1.2e), unless we need this specific old tag, I think a tag bump would
-> be better over having a patch.
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-clipman-plugin/-/tags/xfce4-clipman-plugin-1.6.6
+
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-clipman-plugin/-/tags/xfce4-clipman-plugin-1.6.5
+
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-clipman-plugin/-/tags/xfce4-clipman-plugin-1.6.4
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ ...e4-clipman-plugin_1.6.3.bb => xfce4-clipman-plugin_1.6.7.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-xfce/recipes-panel-plugins/clipman/{xfce4-clipman-plugin_1.6.3.bb => xfce4-clipman-plugin_1.6.7.bb} (83%)
+
+diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.3.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.7.bb
+similarity index 83%
+rename from meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.3.bb
+rename to meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.7.bb
+index e1eed88098..a54abe184f 100644
+--- a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.3.bb
++++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.7.bb
+@@ -8,7 +8,7 @@ inherit xfce-panel-plugin
+ 
+ DEPENDS += "xfconf xorgproto libxtst"
+ 
+-SRC_URI[sha256sum] = "e11c1f976217fc959cee98ecfb934058ae485cb363d2c25c7ddede44394c9a10"
++SRC_URI[sha256sum] = "9bae27808a50e959e0912b7202ea5d651ed7401a6fc227f811d9bdaf2e44178c"
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[qrencode] = "--enable-libqrencode,--disable-libqrencode,qrencode"
+-- 
+2.43.0
+
 
