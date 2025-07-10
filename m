@@ -2,76 +2,73 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 243ADC83F22
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 226EBC83F1B
 	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 17:39:00 +0000 (UTC)
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
- by mx.groups.io with SMTP id smtpd.web11.1132.1752169138320381942
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
+ by mx.groups.io with SMTP id smtpd.web11.1131.1752169136505964087
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jul 2025 10:38:58 -0700
+ Thu, 10 Jul 2025 10:38:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Q66Yfq1g;
- spf=pass (domain: gmail.com, ip: 209.85.167.54, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-55502821bd2so1278683e87.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 10:38:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jIMre/ZB;
+ spf=pass (domain: gmail.com, ip: 209.85.167.49, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-55511c3e203so1171516e87.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 10:38:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752169136; x=1752773936; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=npn0lmJuh9VBbUYnCUVRxxmZ9OewhaiqJEPZYP6Fo5Y=;
-        b=Q66Yfq1g3nuPgkepwjz9Vj0ysoaivwyODPtBex+2eD50nArU5mgtgkD9Y4N0j5+tPu
-         y6uqkmuq8rk+GS/rsnIhAc9hALRvmd3xtltspnTqR9KX8oEuq/2mYaImWVbEoI7mWQZR
-         VJVw40ZnCpZ0Sd0kqbZv3eeJVMJhanW3I1DRmxcZKy4b7vGB+GTzoaRQROamWeekRAaE
-         8ZLjKvmiH/PRIYfapK1aa5SvN+Xzbuq9WAtOmilbPXRePb2eFasdRCzdjjpuKo01p5df
-         An4LLEMGXO6Ub6C36JtKabZXBRLV6k68d8pEfzQRJbOuDv2jGH308vPjxOQS4mvLqVTa
-         Gh6A==
+        d=gmail.com; s=20230601; t=1752169134; x=1752773934; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=efqe4zVXEXcxQSoF2wZfOCFxuFe2/KQkJYMnJQ+wUXw=;
+        b=jIMre/ZBeQXNOxbWLQjdFAGU6PtLziRFtm1mj7bsYvh162ta8YOftpjgPvEVpN96Nq
+         NcbDuFZKeR+b/bSxwjEXQgmi4U1qoYVugoGQel9fpcxEmSb18KWhc3lRj+lIzm69XMm/
+         qRae/pm8pxzoBoXIO3JiHrhVWEb1jTWK8CiyybD7b6pAV0AGGCBGWl5bg9SfT8idUydz
+         ZcHSIJq7kFX9B4QwnCo57GWJ6iSlAH/sL+wZN/teZRqTKNaCWVUU0D0W9/3qrZ3lsI5S
+         af5478NgaANxUa/+c7t2EL+uz+gGMJ0IH2V+R0LBxELgdckADZISrIqscsr6+gHAYpdG
+         OjWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752169136; x=1752773936;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=npn0lmJuh9VBbUYnCUVRxxmZ9OewhaiqJEPZYP6Fo5Y=;
-        b=IsJAgjTHzMMrPtY0NgkeBfYQuztYCQ6wb1j7g4vz1+0gX7G/K2hPajuGtnIQLsotNQ
-         Q8eS4o/lyHXm1rglJdMryJ7dndlAoK6Fn+UM5HzeIU4Je+BbvnBGi7MGr+544BmZdPjl
-         Sou7I2ZH2c4TnajTedpbZSmAeU5XdexVlSLOuu1T3tGgHnaol0CrQldrLBgCFauw+akP
-         Q9nUifBhc3Ed57pLYWWQH9lmgHwpCihmu4maR3WFU+nLid3tkuhvclPUll5P/hLd72qM
-         KzXB6kEi8VMKS8Gxx+qyvofKz6Ys27HziOdyLLmB7BjK73lhWyh06yRstXuGrmEwZYFA
-         EFEg==
-X-Gm-Message-State: AOJu0Yy/j7Qew2EWjDPuE9ao0M5NtknRSxsbSzGtCiukxKI6uuQJAaTv
-	rRLH0ASvP98+DndGcrb59m9Z4AT9j4LOYsFcupyr7qYZcAE5QjpicdRGe1sLUg==
-X-Gm-Gg: ASbGncszqTkEkiKU5EsfczJX0eH15Mvrgrmt0EGXGQ4HRr+nqrbZjirc/WAHjJlTX8M
-	OSGF65ARATSFgt28vZrvlUpIFubJxrpf+xWCnxDO6iadLavA/IHQwxaNX/mjpB6ud4ZATZ2IJNQ
-	Wz8OX3oRR2lhggDAhh+eDqKoMOOUhFu1QiRab2AmRTBhtnS7fAKk79MyiaAwyH2x0e7M8mplvPG
-	6pclMw0CVRhLVArbUWkZHfLHKw/8gMeQzJLhqxZrsyaNLsF2Os7StOQYJuLpdN04pzyzIBmcT21
-	YCPHmM7E0uDlbpJE/0qd+OuuNt93Gj4eiBtNfuffr7a4poicZWj/eGudJkY/qhZJiYSz7tYqymz
-	HA7U=
-X-Google-Smtp-Source: AGHT+IER4CckKqDNTAtOFVhoqVEbkh8D/P22403Dl6AIIjWwgCT1a4PVoyRiWyqG4uVL2RZa2oae+g==
-X-Received: by 2002:a05:6512:3b89:b0:553:ab51:12a4 with SMTP id 2adb3069b0e04-55935b77ed5mr1404508e87.56.1752169135178;
-        Thu, 10 Jul 2025 10:38:55 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1752169134; x=1752773934;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=efqe4zVXEXcxQSoF2wZfOCFxuFe2/KQkJYMnJQ+wUXw=;
+        b=O1oKi+WlGrFx1ciIF/NugUtbNP6BJKYZns8o1uG+1Ne7nq9TLSQU6Suhh+Gkq1kzWv
+         +/Vshgts6V1bqctWeMP9mTz0xA65JYiI0VcwHY3H+cFxRnGDrPQoldv4PJwqyk+fvwFz
+         yks1ePZpDmib+ReuAvmmtzDt/IUGHWMSZ7yJgUzPWGauOkmoTfKuJWL14u2wddYUWfPE
+         UTBHn9WZIUia5/bCYhJn2rl4oqz2AUNbo1NKI8a4R2E9LnEGs0u3kNY2iuLqO97nAQmb
+         h5qqqd3Ot51yHWsSoZriIqwpz/oax5BKWRwE94XxN5rl9RwnmPShdhqkdD1v/Sbq5/q9
+         pQew==
+X-Gm-Message-State: AOJu0YwRX77UpwKmX9cKRV0VVCHKKh0cPrMlyzrG2g5+PpumijeGqn0R
+	OQm/+5SOWdRO5oydRo5xtA0+JnzvDJ650by1JnVqHEOaqw85iDIBaH/FamW+1g==
+X-Gm-Gg: ASbGnctppP7FHO2V4967y9tjxpIC39G7lruCD5mmSlxlASyWcfIhCMTmnRmUmZiONwO
+	Aid/YIMGjxO4M/oiWaSh5qsyByRpa8A+aJmd7V5Ci2Lvo/O9WoQEOZkg3mXHivNq52BvFc6gdqM
+	K9FNORiAUsMGyetsiCEZ33SwaMdEpqrHM/Ie5xlv3BZS6PrLvVkTzqYQZN9Um2p9ZzRTc//iJ1I
+	g5y6CAolMhu2XHVTP0D/doQ3il5OyF0+vdxPUEFANHU40l+u7ON2iHYHcoZhmpFWN73DTGAlNuZ
+	uiDESXID7Nsq7JSmm9yMtMCkp62s5dkxRBgr/Q5vtEA5p7E9dwZE3UDEQoAs5syOAWLKuw1sM6z
+	PF40=
+X-Google-Smtp-Source: AGHT+IFKAjqnIQf4uZ2/bLNNpSUmrmDQ8aTUEvdvo2H9616EMpaVuN3Gyn6vUKktQ21oYt0kzTWn2g==
+X-Received: by 2002:a05:6512:1104:b0:553:abe9:c321 with SMTP id 2adb3069b0e04-55935b35c7fmr1309473e87.44.1752169133735;
+        Thu, 10 Jul 2025 10:38:53 -0700 (PDT)
 Received: from localhost.localdomain ([176.33.70.141])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-55943b8185csm431191e87.246.2025.07.10.10.38.53
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-55943b8185csm431191e87.246.2025.07.10.10.38.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jul 2025 10:38:54 -0700 (PDT)
+        Thu, 10 Jul 2025 10:38:53 -0700 (PDT)
 From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-openembedded][PATCH 2/5] srt: Add patch for CMake 4+ compatibility
-Date: Thu, 10 Jul 2025 20:38:24 +0300
-Message-ID: <20250710173827.43239-2-alperyasinak1@gmail.com>
+Subject: [meta-openembedded][PATCH 1/5] physfs: Add patch for CMake 4+ compatibility
+Date: Thu, 10 Jul 2025 20:38:23 +0300
+Message-ID: <20250710173827.43239-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250710173827.43239-1-alperyasinak1@gmail.com>
-References: <20250710173827.43239-1-alperyasinak1@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 17:39:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118417
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118416
 
 Fix:
 
-| CMake Error at CMakeLists.txt:10 (cmake_minimum_required):
+| CMake Error at CMakeLists.txt:12 (cmake_minimum_required):
 |   Compatibility with CMake < 3.5 has been removed from CMake.
 |
 |   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -85,26 +82,26 @@ Fix:
 
 Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- .../srt/0002-allow-build-with-cmake-4.patch   | 43 +++++++++++++++++++
- .../recipes-support/srt/srt_1.4.4.bb          |  1 +
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch
+ .../0001-allow-build-with-cmake-4.patch       | 43 +++++++++++++++++++
+ .../recipes-support/physfs/physfs_3.0.2.bb    |  3 +-
+ 2 files changed, 45 insertions(+), 1 deletion(-)
+ create mode 100644 meta-filesystems/recipes-support/physfs/physfs/0001-allow-build-with-cmake-4.patch
 
-diff --git a/meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch b/meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch
+diff --git a/meta-filesystems/recipes-support/physfs/physfs/0001-allow-build-with-cmake-4.patch b/meta-filesystems/recipes-support/physfs/physfs/0001-allow-build-with-cmake-4.patch
 new file mode 100644
-index 0000000000..ba281a3a53
+index 0000000000..1584921e65
 --- /dev/null
-+++ b/meta-multimedia/recipes-support/srt/srt/0002-allow-build-with-cmake-4.patch
++++ b/meta-filesystems/recipes-support/physfs/physfs/0001-allow-build-with-cmake-4.patch
 @@ -0,0 +1,43 @@
-+From 5a71ca427a10fe89ad48e9dbb6641e4403d81fa7 Mon Sep 17 00:00:00 2001
++From 09f8ca5776f5265571d95454b7307bbee56474da Mon Sep 17 00:00:00 2001
 +From: Alper Ak <alperyasinak1@gmail.com>
-+Date: Thu, 10 Jul 2025 13:30:25 +0300
++Date: Thu, 10 Jul 2025 13:19:24 +0300
 +Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
 + compatibility
 +
 +Fix:
 +
-+| CMake Error at CMakeLists.txt:10 (cmake_minimum_required):
++| CMake Error at CMakeLists.txt:12 (cmake_minimum_required):
 +|   Compatibility with CMake < 3.5 has been removed from CMake.
 +|
 +|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
@@ -116,7 +113,7 @@ index 0000000000..ba281a3a53
 +|
 +| -- Configuring incomplete, errors occurred!
 +
-+Upstream-Status: Backport [https://github.com/Haivision/srt/commit/0def1b1a1094fc57752f241250e9a1aed71bbffd]
++Upstream-Status: Backport [https://github.com/icculus/physfs/commit/f7d24ce8486d9229207cca1ff98858fe60ffe583]
 +
 +Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 +---
@@ -124,32 +121,34 @@ index 0000000000..ba281a3a53
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 328a433f..448d6254 100644
++index 4a67c27..f0f0183 100644
 +--- a/CMakeLists.txt
 ++++ b/CMakeLists.txt
-+@@ -7,7 +7,7 @@
-+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-+ #
++@@ -9,7 +9,7 @@
++ #  compile, using preprocessor checks for platform-specific bits instead of
++ #  testing in here.
 + 
-+-cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
-++cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
-+ set (SRT_VERSION 1.4.4)
++-cmake_minimum_required(VERSION 2.8.4)
+++cmake_minimum_required(VERSION 3.5)
 + 
-+ set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/scripts")
++ project(PhysicsFS)
++ set(PHYSFS_VERSION 3.0.2)
 +-- 
 +2.43.0
 +
-diff --git a/meta-multimedia/recipes-support/srt/srt_1.4.4.bb b/meta-multimedia/recipes-support/srt/srt_1.4.4.bb
-index 91651fda8e..e72a36f657 100644
---- a/meta-multimedia/recipes-support/srt/srt_1.4.4.bb
-+++ b/meta-multimedia/recipes-support/srt/srt_1.4.4.bb
-@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
- SRCREV = "8b32f3734ff6af7cc7b0fef272591cb80a2d1aae"
- SRC_URI = "git://github.com/Haivision/srt;protocol=https;branch=master \
-            file://0001-don-t-install-srt-ffplay.patch \
-+           file://0002-allow-build-with-cmake-4.patch \
-            "
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb b/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb
+index 57cfdcdf82..2571d3f6a0 100644
+--- a/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb
++++ b/meta-filesystems/recipes-support/physfs/physfs_3.0.2.bb
+@@ -8,7 +8,8 @@ inherit cmake
+ 
+ PE = "1"
+ 
+-SRC_URI = "http://icculus.org/${BPN}/downloads/${BP}.tar.bz2"
++SRC_URI = "http://icculus.org/${BPN}/downloads/${BP}.tar.bz2 \
++        file://0001-allow-build-with-cmake-4.patch"
+ SRC_URI[md5sum] = "dc751294aaf59d1359bbe34e693d1d87"
+ SRC_URI[sha256sum] = "304df76206d633df5360e738b138c94e82ccf086e50ba84f456d3f8432f9f863"
  
 -- 
 2.43.0
