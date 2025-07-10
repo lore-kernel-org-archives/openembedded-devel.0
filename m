@@ -1,91 +1,103 @@
-Return-Path: <yishai1999@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF587C83F17
-	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 12:50:23 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web10.8032.1752151819214266438
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 01DE8C83F17
+	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 13:39:14 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web11.9078.1752154750638435148
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jul 2025 05:50:19 -0700
+ Thu, 10 Jul 2025 06:39:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PGrwsyuk;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: yishai1999@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4538bc1cffdso7838395e9.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 05:50:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PNtjxL2j;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-ae0b2ead33cso191526966b.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 06:39:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752151817; x=1752756617; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SwUzEN8zQeEMDPfHEwTv1m3CW9+VU86/VkyUmjuuvrs=;
-        b=PGrwsyuktAayB6nKdkTi8sQmnrU7bLRPxK02y97+ggJ8x/BkAb4hVI/LYWFbpDCQiJ
-         W5n9XiM156s1iljIF4mH5SjHYy6uF+q8UCavuIdJs3oKumeHDu4JDHGgsU6OiuuCoOv+
-         XQxZ8iaOKGZ20p+4961Lxbbx5UBKIG14P+diT6KbW4+65umcaDnxwIc3RBcyIN0j8I4u
-         IOcGyRuGumylyeWaIcIiTrUCbaneWe1y79AbLubeR/0wRnkaoF+LGcGAt7XYd5DJJP64
-         66YiqybJwivZY8JxVZb/5pk4lOCNWuGqUu3VG67d91GryzGezlQj5HdIECWBiRd3pxQh
-         5x3Q==
+        d=gmail.com; s=20230601; t=1752154749; x=1752759549; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=cuI2kZUFc/xrZBNOz1AxqzlZrxUYMeA9kv5Sx/DsKuc=;
+        b=PNtjxL2juyoH6a+Y2GkzfAKgCy37lzfnvKsHK7+bSZoXiSxSBjIHzC0v4+kW/kLs+1
+         nnsicc+b1HI2vcLRv3Cfc8hMt94Y+pSfXI6Cpgcne2AQF+eStD2BHezPs2qUBhKWdwuU
+         xTs/d8bc30NApCB+ZSwmie3E9H9laKMJ1g5k1j7kIc6msV3vgppoSPuuLbI1h24idN7y
+         3L4OJlQunPILL/eM/m80gO+k2/1BL3FmkTHAWYZ72GA/jF1o2gbQwFSKrM7W1nIl6saz
+         TFMFoKj8zh+HHx/JXYGbXuVlG6sCS6R/q7sw74NLN1q8v7QJJHIJ6Dzxmxi+vcSc89w6
+         tAlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752151817; x=1752756617;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SwUzEN8zQeEMDPfHEwTv1m3CW9+VU86/VkyUmjuuvrs=;
-        b=oQnnFwMbI1ut3IycFiD5mY3Sf+3up+8kKL2hejb4iB3M7fwbcYQ8xODQ3wUnzEFVcs
-         i0Ru8uc0ZDBvtj9Ktdh7pMzzhweR+fApV2omjtvSt9ZNKVo8XeF6eIzGbcdM+ZtArK/v
-         I8MiOCRNgpWVGmtlh/8QHuqdNwDcJt89iRWhibPSaRV19SgEDJdtrDcxMV80DHOwfQvB
-         mB202qIis8202WXv878FgxerBnRhvhBGCBk0ksEX5sy+kmtXGk+01As7s4q2GmnSwLOP
-         W9VwyueaR6sPlJfGD+wB9JjAjdL2kXo44Pzhg4vfJscEqWLW263gKfV6gUS9+3vl70z0
-         9xow==
-X-Gm-Message-State: AOJu0Yx1aopZSRGIvl2cu5OabZzkQeuD8Ood7a7anmIJ4934jK/lNwjy
-	0f09AQxa7e0HND1X9tostQUQi9kDLGgEQhDFctGZXjX5iDP+xXJ29sYmasIsvw==
-X-Gm-Gg: ASbGncvml2ElgCWR8h85JRaJahlNrmJwe/cPdXXtBGynn+dA0EeaIlpHk7ixmGPEGz5
-	RVaAnjAABIePrZ2R0o2K9BlXRr9hJCQtGItCP6aOKE3p7swvd9NWl28cMbduiy10khgGqYQrpPj
-	HJpJNI5mNaW170PByHM80thxIU/EMb1rGjEWh8smcArAO+MGmDF4HAd2r9N/MpuG+MALDmYKP37
-	DfDvr/oBCu6D/ZuRHiuZthbvUNfpBklMB8C52wY0l94ABFNHiVdH2vNifSmYRdLOhp2Z6/1Ijl4
-	+q3cXRkgyj+qBJ896gRFd1SS6y9+Ng0pLdIsOZiZdGzeeVL6iQXkQgAbmTXW3h65tHX+CA==
-X-Google-Smtp-Source: AGHT+IF/gFwMQXeKPi82E3equkDxEac2QOtjOBoy2BY+eF/U66rXZO5+UbXpmBlR546BIlt/ic7yAA==
-X-Received: by 2002:a05:600c:4f47:b0:43d:aed:f7d0 with SMTP id 5b1f17b1804b1-454dd2efdaamr18949945e9.28.1752151817057;
-        Thu, 10 Jul 2025 05:50:17 -0700 (PDT)
-Received: from bigboy.CASA.NET ([199.203.94.94])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3b5e8e1f4edsm1773262f8f.83.2025.07.10.05.50.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jul 2025 05:50:16 -0700 (PDT)
-From: Yishai Jaffe <yishai1999@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Yishai Jaffe <yishai1999@gmail.com>
-Subject: [meta-oe][PATCH] python3-genson: added recipe
-Date: Thu, 10 Jul 2025 15:50:03 +0300
-Message-Id: <20250710125003.2080700-1-yishai1999@gmail.com>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1752154749; x=1752759549;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=cuI2kZUFc/xrZBNOz1AxqzlZrxUYMeA9kv5Sx/DsKuc=;
+        b=bHrCZOic1MiFqKUaJ0C8IZ45sdqbDiVkLiL/bKjpHAAZwEfRWkYBaq1Arg8Qf/rcme
+         iOyBkuxYUWvYBFKmSeLeLkCtJPWRsoidRHh2SQan3ejZ+WEGZxCs7k2bu2PSGTSwtgCj
+         3I7Q2Vw3tN0pTC51+Zewkfah0eTdisDBOX0Lk6ZPSWneOgMAPmeRqAvZ8bisdTybN0cy
+         IFFYWhtlW2ldYZ2Fz6EgN36T8xw4gSlko+IAsjHx2UXMonDKM1nwNxeiVxsX1QF+oZxD
+         fnRsnN1+OGI0v+6aXNFvEWw8nkjETW/Ho5k1QANYGnJNMBB5mOJq4XwK3mYEUTvkzblk
+         xbIA==
+X-Forwarded-Encrypted: i=1; AJvYcCWX44/uv0RvE9Ho0UMohn6OvQhftgWGt4EpiFe2pwzk3IMFgxHtUSlmwtgJ2H6TofdjlMnx9+z+d8pAehPkwZB/bsM=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwOCHVEsbhqbDaF8CNTTo9hmyQjcbn+C7DYcOOjMdFv3ypHYVsp
+	8LvE+J/8UJzdpA9TXv/vy4WsQ7kbR9GsQ/cfOl2z/2QtUyHKpEAAadG5CGk0JA==
+X-Gm-Gg: ASbGncspus2bb+ypXNqok+Zjwy02cFBcvk5XjAVHxJID27+mBnuX7uV4Wu7t+3Oesz1
+	Is5l9fsmRMq7Nt6SeQA2q9aepVDMeY4OjrA11Eb/Lh+/5sHODRObjOpC8rQhrFBaIFMTUONyaHj
+	z5qKXWDWPi1KB1Qkowj1edZ1h43lUiH/OeCp3tTEDEvzakOp+LQJbZGyUjmQyf92LYS9zi7/8GM
+	gG0SwyF9FcvID2MfWLTJ3enJaqhEYtFD+rrT+WOBGgF5pV0LwhdZ3ifNwKp2m+v2DqW2nDS+4dG
+	gsk0n0TRVAUXrGaSIStiRXM+zrGOO78/1lteecKEBXMFRzAJu9sLaITs67pZrlDsrWg/EJDIdnZ
+	WDwbY
+X-Google-Smtp-Source: AGHT+IF8G5NHGbtSkaPul5UxOKDDGPK8S25LaF2+aHCgFyToU/AZNkn+qh5J2R20KxNB+KdeOCLShg==
+X-Received: by 2002:a17:907:3da5:b0:ae3:c72f:6383 with SMTP id a640c23a62f3a-ae6e23e76b2mr400872266b.17.1752154748603;
+        Thu, 10 Jul 2025 06:39:08 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae6e82645fdsm134639966b.97.2025.07.10.06.39.07
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 10 Jul 2025 06:39:08 -0700 (PDT)
+Message-ID: <59936fdd-6d0f-42bd-860b-df187b3c1b3d@gmail.com>
+Date: Thu, 10 Jul 2025 15:39:07 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH 4/4] srt: allow to build with cmake 4
+To: f_l_k@t-online.de, openembedded-devel@lists.openembedded.org
+References: <20250710111827.2550131-1-f_l_k@t-online.de>
+ <20250710111827.2550131-4-f_l_k@t-online.de>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20250710111827.2550131-4-f_l_k@t-online.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 12:50:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118413
+ <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 13:39:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118414
 
-Adde genson python package
+On 7/10/25 13:18, Markus Volk via lists.openembedded.org wrote:
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  .../recipes-support/srt/{srt_1.4.4.bb => srt_1.5.4.bb}          | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-multimedia/recipes-support/srt/{srt_1.4.4.bb => srt_1.5.4.bb} (96%)
+>
+> diff --git a/meta-multimedia/recipes-support/srt/srt_1.4.4.bb b/meta-multimedia/recipes-support/srt/srt_1.5.4.bb
+> similarity index 96%
+> rename from meta-multimedia/recipes-support/srt/srt_1.4.4.bb
+> rename to meta-multimedia/recipes-support/srt/srt_1.5.4.bb
+> index 91651fda8e..e252ad54c0 100644
+> --- a/meta-multimedia/recipes-support/srt/srt_1.4.4.bb
+> +++ b/meta-multimedia/recipes-support/srt/srt_1.5.4.bb
 
-Signed-off-by: Yishai Jaffe <yishai1999@gmail.com>
----
- .../recipes-devtools/python/python3-genson_1.3.0.bb      | 9 +++++++++
- 1 file changed, 9 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-genson_1.3.0.bb
+It looks that either the PV-bump is accidental, or the SRC_REV change is
+missing.
 
-diff --git a/meta-python/recipes-devtools/python/python3-genson_1.3.0.bb b/meta-python/recipes-devtools/python/python3-genson_1.3.0.bb
-new file mode 100644
-index 0000000000..e23af06a2b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-genson_1.3.0.bb
-@@ -0,0 +1,9 @@
-+DESCRIPTION = "GenSON is a powerful, user-friendly JSON Schema generator built in Python."
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e6c30d55dbfb3a28d420d918534adf6b"
-+
-+SRC_URI[sha256sum] = "e02db9ac2e3fd29e65b5286f7135762e2cd8a986537c075b06fc5f1517308e37"
-+
-+inherit pypi python_setuptools_build_meta
-+
-+BBCLASSEXTEND = "native nativesdk"
+> @@ -14,7 +14,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+>  
+>  inherit cmake pkgconfig
+>  
+> -EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release -DENABLE_UNITTESTS=OFF"
+> +EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release -DENABLE_UNITTESTS=OFF -DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+>  
+>  PACKAGECONFIG ??= "crypt"
+>  PACKAGECONFIG[debug] = "-DENABLE_DEBUG=1,,"
+>
 
