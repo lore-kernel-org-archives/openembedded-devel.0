@@ -1,135 +1,73 @@
-Return-Path: <Moritz.Haase@bmw.de>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38605C83F1B
-	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 13:16:18 +0000 (UTC)
-Received: from esa2.hc324-48.eu.iphmx.com (esa2.hc324-48.eu.iphmx.com [207.54.68.120])
- by mx.groups.io with SMTP id smtpd.web11.13549.1752239768736884570
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DA22C83F1A
+	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 13:38:58 +0000 (UTC)
+Received: from 4.mo560.mail-out.ovh.net (4.mo560.mail-out.ovh.net [87.98.172.75])
+ by mx.groups.io with SMTP id smtpd.web11.14003.1752241068194718951
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Jul 2025 06:16:09 -0700
+ Fri, 11 Jul 2025 06:37:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bmw.de header.s=mailing1 header.b=KH2Et0VR;
- spf=pass (domain: bmw.de, ip: 207.54.68.120, mailfrom: prvs=28004f72d=moritz.haase@bmw.de)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
-  t=1752239768; x=1783775768;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=srg+awlyiydEzGgGutDTIvioAFhpwBMdFvi45hRRKEM=;
-  b=KH2Et0VRqk8tFhxnwozLWF6/3GPFFJvbChAT+vCjpX/DnfsbztAnfgu5
-   NPUD/5yWSNA51JYSI05EwrDEcY5YVSdkWoAJZu2J9Htd1XE57RT/C5ttS
-   1WEB16jZb0kxSOWKi5kXTypSGEsJ9LPPdfuSOQdX1xEr1u6V71h+VHAc5
-   U=;
-X-CSE-ConnectionGUID: uOWVnXFqTviA2G5iQQeyHw==
-X-CSE-MsgGUID: HE1JmS+WTpyXuR98jp6jMw==
-Received: from esagw1.bmwgroup.com (HELO esagw1.muc) ([160.46.252.34]) by
- esa2.hc324-48.eu.iphmx.com with ESMTP/TLS; 11 Jul 2025 15:16:06 +0200
-Received: from unknown (HELO esabb2.muc) ([10.31.187.133]) by esagw1.muc with
- ESMTP/TLS; 11 Jul 2025 15:16:06 +0200
-Received: from smucmp12a.bmwgroup.net (HELO smucmp12a.europe.bmw.corp) ([10.30.13.95])
- by esabb2.muc with ESMTP/TLS; 11 Jul 2025 15:16:07 +0200
-Received: from q1054628.de-cci.bmwgroup.net (10.30.85.207) by
- smucmp12a.europe.bmw.corp (2a03:1e80:a15:58f::1:9) with Microsoft SMTP
- Server (version=TLS; Fri, 11 Jul 2025 15:16:06 +0200
-X-CSE-ConnectionGUID: Wz/en6DLSkutOdRAYKyQSQ==
-X-CSE-MsgGUID: WwzoR85xSK+waK2MPqoy8A==
-X-CSE-ConnectionGUID: /nmWoRzERba03tXZBO7kjA==
-X-CSE-MsgGUID: lvRCPjPdR+ea3D1xGOvuCg==
-From: Moritz Haase <Moritz.Haase@bmw.de>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Moritz Haase <Moritz.Haase@bmw.de>
-Subject: [meta-oe][PATCH] jsonrpc: Allow to build with CMake 4+
-Date: Fri, 11 Jul 2025 15:15:52 +0200
-Message-ID: <20250711131552.303728-1-Moritz.Haase@bmw.de>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: non.se.com, ip: 87.98.172.75, mailfrom: louis.rannou@non.se.com)
+Received: from director6.ghost.mail-out.ovh.net (unknown [10.109.249.113])
+	by mo560.mail-out.ovh.net (Postfix) with ESMTP id 4bdt7Z52KmzBMsF
+	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 13:37:46 +0000 (UTC)
+Received: from ghost-submission-5b5ff79f4f-6xttd (unknown [10.111.182.110])
+	by director6.ghost.mail-out.ovh.net (Postfix) with ESMTPS id E8E75802BE;
+	Fri, 11 Jul 2025 13:37:45 +0000 (UTC)
+Received: from syslinbit.com ([37.59.142.108])
+	by ghost-submission-5b5ff79f4f-6xttd with ESMTPSA
+	id s0eDDakTcWhF9gAAXrHVog
+	(envelope-from <louis.rannou@non.se.com>); Fri, 11 Jul 2025 13:37:45 +0000
+Authentication-Results: garm.ovh; auth=pass (GARM-108S0020f8ba3f5-4a7b-46aa-ac82-c3e0525fbbe4,
+                    DDE15C1AE4D89EF56E8A045C747050460A524665) smtp.auth=louis.rannou@syslinbit.com
+X-OVh-ClientIp: 45.81.62.9
+From: "Louis Rannou" <louis.rannou@non.se.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: pascal.eberhard@se.com,
+	louis.rannou@non.se.com
+Subject: [meta-networking][PATCH 0/1] mosquitto: bump for 2.0.21
+Date: Fri, 11 Jul 2025 15:37:32 +0200
+Message-ID: <20250711133735.211734-1-louis.rannou@non.se.com>
 X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: smucmp18a.europe.bmw.corp (2a03:1e80:a15:58f::1:50) To
- smucmp12a.europe.bmw.corp (2a03:1e80:a15:58f::1:9)
+X-Ovh-Tracer-Id: 1416945035688100161
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdegfeeghecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecunecujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepnfhouhhishcutfgrnhhnohhuuceolhhouhhishdrrhgrnhhnohhusehnohhnrdhsvgdrtghomheqnecuggftrfgrthhtvghrnhephffhleefuedvgfduffefgfeggeejgffggfegvddvtedufeefteekjeduvdeuhfeknecuffhomhgrihhnpedvtddrsggspddvuddrsggsnecukfhppeduvdejrddtrddtrddupdeghedrkedurdeivddrledpfeejrdehledrudegvddruddtkeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomheplhhouhhishdrrhgrnhhnohhusehnohhnrdhsvgdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopehophgvnhgvmhgsvgguuggvugdquggvvhgvlheslhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhgpdfovfetjfhoshhtpehmohehiedtmgdpmhhouggvpehsmhhtphhouhht
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 13:16:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118450
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 13:38:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118451
 
-Upstream is inactive, so use the 'minimum policy version' override. An
-additional patch is required to remove usage of an outdated policy that only
-affects MacOS however, so we should we fine.
+Upgrade mosquitto to 2.0.21 with a patch that fixes an issue that causes
+connections to get down when the clock is changed. This patch is supposed=
+ to be
+included in version 2.0.22.
 
-Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
----
- ...-usage-of-obsolete-MacOS-only-policy.patch | 38 +++++++++++++++++++
- .../recipes-devtools/jsonrpc/jsonrpc_1.4.1.bb |  5 ++-
- 2 files changed, 42 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-cmake-Remove-usage-of-obsolete-MacOS-only-policy.patch
+Change the upstream status patch for issue 2895 to submitted. Though, the=
+ patch
+is probably undesired ustreamd as it locks its usage for local brokers on
+offline devices. The issue could also be resolved by having the IP_FREEBI=
+ND
+option in socket connections.
 
-diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-cmake-Remove-usage-of-obsolete-MacOS-only-policy.patch b/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-cmake-Remove-usage-of-obsolete-MacOS-only-policy.patch
-new file mode 100644
-index 0000000000..ef0c12722f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-cmake-Remove-usage-of-obsolete-MacOS-only-policy.patch
-@@ -0,0 +1,38 @@
-+From 7cc415c5b2406b16adcccdce3fc8bf5223a1bdb1 Mon Sep 17 00:00:00 2001
-+From: Moritz Haase <Moritz.Haase@bmw.de>
-+Date: Fri, 11 Jul 2025 12:31:49 +0200
-+Subject: [PATCH] cmake: Remove usage of obsolete MacOS-only policy
-+
-+Workaround an error reported by CMake 4 that only affects MacOS.
-+
-+CMake Error at CMakeLists.txt:21 (cmake_policy):
-+  Policy CMP0042 may not be set to OLD behavior because this version of CMake
-+  no longer supports it.  The policy was introduced in CMake version 3.0.0,
-+  and use of NEW behavior is now required.
-+
-+  Please either update your CMakeLists.txt files to conform to the new
-+  behavior or use an older version of CMake that still supports the old
-+  behavior.  Run cmake --help-policy CMP0042 for more information.
-+
-+Upstream-Status: Inactive-Upstream [2022-01-12]
-+Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
-+---
-+ CMakeLists.txt | 5 -----
-+ 1 file changed, 5 deletions(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 961e55a..909610b 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -16,11 +16,6 @@ project(libjson-rpc-cpp)
-+ cmake_policy(SET CMP0007 NEW)
-+ cmake_policy(SET CMP0012 NEW)
-+ 
-+-if (${CMAKE_MAJOR_VERSION} GREATER 2)
-+-    # old policy do not use MACOSX_RPATH
-+-    cmake_policy(SET CMP0042 OLD)
-+-endif()
-+-
-+ set(MAJOR_VERSION 1)
-+ set(MINOR_VERSION 4)
-+ set(PATCH_VERSION 1)
-diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.4.1.bb b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.4.1.bb
-index ae86e20a4a..18a8904015 100644
---- a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.4.1.bb
-+++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.4.1.bb
-@@ -9,7 +9,9 @@ SECTION = "libs"
- 
- DEPENDS = "curl jsoncpp libmicrohttpd hiredis"
- 
--SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp;branch=master;protocol=https"
-+SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp;branch=master;protocol=https \
-+           file://0001-cmake-Remove-usage-of-obsolete-MacOS-only-policy.patch \
-+           "
- 
- SRCREV = "ec5ce12fc9c0299e1454cc002c70218b5a6f005b"
- 
-@@ -22,6 +24,7 @@ inherit cmake
- EXTRA_OECMAKE += "-DCOMPILE_TESTS=NO -DCOMPILE_STUBGEN=NO -DCOMPILE_EXAMPLES=NO \
-                   -DBUILD_SHARED_LIBS=YES -DBUILD_STATIC_LIBS=YES \
-                   -DCMAKE_LIBRARY_PATH=${libdir} \
-+                  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
- "
- 
- do_install:append() {
+Louis Rannou (1):
+  mosquitto: bump to 2.0.21
+
+ .../mosquitto/files/2895.patch                |  2 +-
+ .../mosquitto/files/3238.patch                | 25 +++++++++++++++++++
+ ...osquitto_2.0.20.bb =3D> mosquitto_2.0.21.bb} |  3 ++-
+ 3 files changed, 28 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/=
+3238.patch
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.20.=
+bb =3D> mosquitto_2.0.21.bb} (96%)
+
+--=20
+2.50.0
+
 
