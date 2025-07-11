@@ -1,178 +1,190 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE6E6C83F17
-	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 00:01:33 +0000 (UTC)
-Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
- by mx.groups.io with SMTP id smtpd.web11.2069.1752192090400526654
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68A69C83F17
+	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 01:59:04 +0000 (UTC)
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
+ by mx.groups.io with SMTP id smtpd.web10.4479.1752199135472937093
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jul 2025 17:01:30 -0700
+ Thu, 10 Jul 2025 18:58:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cn/Q4zyb;
- spf=pass (domain: gmail.com, ip: 209.85.219.176, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-e8259b783f6so1307483276.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 17:01:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PemrYaXm;
+ spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-70e3e0415a7so14995817b3.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 18:58:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752192089; x=1752796889; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=dp4tAydIhq4CVscU6J749dxp9vhXF5I8AX+1ETiyQH4=;
-        b=cn/Q4zybIdEGGMel6huO8HKB/Qj3YBqoPU6lH7kUZHySv95d5eYuLHO45CDVLqR8wj
-         J9vn59ZtyH5aKVjQiarnwBW6QJd3gA7o9+3ppmO+BRrCddGdPaHoOstjSBCsbX4c52i8
-         lsZHjaaQoNmNmVSAc1/VBvGKeC89jqJPt4aWrcConf9gbN8p6J6uqHUe9Wag9IJnK1W0
-         /uq99BOabFA2S+02aY1/PhZphZ5I8mVlj2UDVRoklB4wU9mZd7BaJagmOfD/JkeJlESN
-         uOS5+d9pXrCI7krnHjXSkyZdpgcXL3R8FB5N7JeNrrVS/uGBLGUVZw8Ffd2hqqlDDEn3
-         +DsQ==
+        d=gmail.com; s=20230601; t=1752199134; x=1752803934; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zHkwZSzbPAd81ZDRc0oW8zCyy+RIzXcu+AZeDWADzMY=;
+        b=PemrYaXm6Yp4uSUYV17PdUzd2Zfg0vOhtTwDTHwQzPeuYjOitIpL1OsUB0pjMNPAuj
+         YjoLOEIYDYlpwJYX+XA75jCpFb8/KhdB7shmrlTdYvFRZtVQaeJPOQDEIi7lYHkkdxHg
+         5v1h81zgFNHfMOlm4k1wcVAIej7b03A6IQJNjv1vWHarNV/oSQ2eno3bSB0coRAcehVK
+         2JHNCFf4YU4CNrG6Q8z7hk7tV1myRVh2Fp4KX1+BosjL6KWgCLKmDX9efyxVem7ic+Hg
+         PBZcan/c+mcoaknnV07SSUeQ995+d2XZjpzVYycT4O3euBxFd1SLCBnbfj7S0tQ432zk
+         DbRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752192089; x=1752796889;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=dp4tAydIhq4CVscU6J749dxp9vhXF5I8AX+1ETiyQH4=;
-        b=KIq/7nuBXY8vZLbbPHNxuMhiQL3K2ZwiJ5IDpOPXO2Q5/H9JprQuLextoZ9ivKkNtO
-         +ryq8YOdXVwOi0nsSeXQJ1XBSXK0KtOU4sjQyhDmGkzVQRBwymVxVaMbl5fG8sd75lKN
-         OSjaPw6JRWN6mUrwDlPcvmY5GN5Qv29P19v2n/9LekNURIKz54SD1BbNOGyhExSZs9jG
-         P1LkVtNeQByI2Hx5NtYwiCK0NR/1aY6JfGx2HVC8nssTrVJga7/xbqd/Hat5Q/H6uS3z
-         ONKbGsAXtZKYN71LkRFe2SazwAbZVynTTSY7Hku/9q28ELxTI6yql5ZCe1HfZjP2IzU+
-         1KXw==
-X-Forwarded-Encrypted: i=1; AJvYcCVqsX/Hr06kTU1G8v/M0WcQD73biCeNs4QoqGOA2JQG5ZCUCsAOSbP/VyG7JLsvMgXk8eH4Sv6iiS1SgaJ2Nc60+Mg=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyK4FnFBon6WAvTpbCSmPlkskuL8/4bXF3uzIgSca2LIbWN6JVA
-	KEMf7P3RJRFRNVwPXqhh5mwrl9qy8l1P8vEddOayOUQgvpKBgtxdsRzc
-X-Gm-Gg: ASbGncsJnt4p5Sb1e8LobG6f62pMx62PFCpsK0I+ZOKmPNdOP3KZboxH+Q9CztLgwCS
-	Fr0DQ26lADSrv6y3heHm6yK7whU62lMHmwOHA4DC1MfgOutuCo0n5I8UndBqB3K0lnKYuFxJ286
-	ukrz4KCjsAkMsVEDLIjG5Z7/G8P8vKh8vIh1OuPkf3L6YK2Ahq+UfXjSxp4HdpL8EZVEsF9CAJ1
-	0jJPFxy25AuRk8toSKJd1/3dvaEhKKd0ibpZk/l+eyIQFfDWl80Kq3XMsQ5oV0nAISvmTSJ0fHv
-	UZCsMRSPcZt7Ek5XfOwfTrKTV7rVNAcFeU8IBBUm7WsUuwGQk6PnaD2fS6Tfft4kX0rYoMDpLNb
-	qJrvXtXTo4VTWuSYE++KGVbDSJQHp5GOQuA5qf7w223HkIXPpVzVbW6xy1Fq5/5PL0kQQehc=
-X-Google-Smtp-Source: AGHT+IGzBsOeN+vKjJ7Tl5AhGmSladKPcFnesJ76XwekR8GiRrIS46l6Ych6Ye+vm3TaGlUBqk1OsQ==
-X-Received: by 2002:a05:6902:6c03:b0:e7d:a7c7:3f34 with SMTP id 3f1490d57ef6-e8b85b02395mr951095276.32.1752192089299;
-        Thu, 10 Jul 2025 17:01:29 -0700 (PDT)
-Received: from ?IPV6:2600:1700:45dd:7000:7437:3f28:cfa:3bd4? ([2600:1700:45dd:7000:7437:3f28:cfa:3bd4])
-        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e8b7ae68baesm730703276.23.2025.07.10.17.01.28
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 10 Jul 2025 17:01:28 -0700 (PDT)
-Message-ID: <b868df60-4d34-4e20-9003-0496eb3e76b7@gmail.com>
-Date: Thu, 10 Jul 2025 20:01:28 -0400
+        d=1e100.net; s=20230601; t=1752199134; x=1752803934;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=zHkwZSzbPAd81ZDRc0oW8zCyy+RIzXcu+AZeDWADzMY=;
+        b=D6WDhDymWd21+FmgZGknD/dzGKmyOJDzvYR1IXg00wwOBVH8xzcPGQSlQI0kvifV1k
+         c8Ry6S8kKJj02nAa3HYDcbTJYh6foitnvQry0jmlChJkAcwqSP6RjJxmoHbwqFe1i0oW
+         jWReZtMV6F9w67hd5IjtZNz1NPh9ZnD2etPBH9FcRqlcDJX3bmaIJodTUQEIaQN//DX0
+         DzPW1IbmSsTQsNRvXETxlyYpAi7rzriBb95p05Oi4bj39Y6gE65HzZkXzFbANqv25zSW
+         pVaIawFW5+wG7edQkUkKAxCuqjpvUcsIkxVkOfYxAvPUkDBDianqupiJeQYG/F4/u20g
+         b9Tg==
+X-Gm-Message-State: AOJu0YwhCqOS0Xr8A4vLhnelC+CvFkNzw0lKDmXKQncS6tGaqTTOE3qz
+	UIgncmFWCdrnh4WYfoY7jvalN4XS8hUabpFuTuW+J+sLLFlD394BjZ49+zQGIjwVBppIxkefZed
+	1ZKUnhrYfSBu87m3jYayK07Z4MEj9vyg=
+X-Gm-Gg: ASbGnctr8RTlo9fE/RlVEUVp03HbakqpPEibuIHhINxIQjPokHic+uPrh7cunN57mdx
+	1cyM9BSTD2MptF8wXeHKyCqME2y5HnuBOaiEqeVO/r/FqP4y89joTswALH6f4NnesZvSnT3eUhn
+	TDkFpBVdJJFPrIsPODK4HzsbTzl9JSsg+GIUR4msp0LW7x0GD4DaF4gxytEFKmbIk627CYtvB2h
+	8SJTB8=
+X-Google-Smtp-Source: AGHT+IEpLDTYI0+TBGB5+udX+wFtpPkxIhqeC2cJ4yxRSftnH9viQI3qmf/qZn0LG/fT4POSkYdLW8rh4o8JN8V6Wug=
+X-Received: by 2002:a05:690c:1c:b0:712:c5f7:1ee9 with SMTP id
+ 00721157ae682-717c14b3978mr96489397b3.8.1752199134324; Thu, 10 Jul 2025
+ 18:58:54 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-oe][scarthgap][PATCH] imagemagick: Fix CVE-2022-28463
-To: Virendra Thakur <thakur.virendra1810@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20250706063626.818120-1-thakur.virendra1810@gmail.com>
-Content-Language: en-US
-From: akuster808 <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-In-Reply-To: <20250706063626.818120-1-thakur.virendra1810@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250710173827.43239-1-alperyasinak1@gmail.com> <20250710173827.43239-5-alperyasinak1@gmail.com>
+In-Reply-To: <20250710173827.43239-5-alperyasinak1@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 10 Jul 2025 18:58:28 -0700
+X-Gm-Features: Ac12FXzOkTUXvpBSl8lNoqYU3Qeqd6SNxepsu4XHZPZszBMf1CWODDeK4qQCtM0
+Message-ID: <CAMKF1spBd6BEtZscGGFzrpArx3+w0HsYBrWF4ZOW6+XXBnTs-w@mail.gmail.com>
+Subject: Re: [oe] [meta-openembedded][PATCH 5/5] linux-serial-test: Add patch
+ for CMake 4+ compatibility
+To: alperyasinak1@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 00:01:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118426
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 01:59:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118427
 
+your patch has been accepted. Please bump the SRCREV instead here now ?
 
-
-On 7/6/25 2:36 AM, Virendra Thakur wrote:
-> ImageMagick is vulnerable to Buffer Overflow.
+On Thu, Jul 10, 2025 at 10:39=E2=80=AFAM Alper Ak via lists.openembedded.or=
+g
+<alperyasinak1=3Dgmail.com@lists.openembedded.org> wrote:
 >
-> Reference: https://github.com/ImageMagick/ImageMagick/commit/ca3654ebf7a439dc736f56f083c9aa98e4464b7f
-
-The recipe version is for kirkstone.
-
-- armin
+> Fix:
 >
-> Signed-off-by: Virendra Thakur <thakur.virendra1810@gmail.com>
+> | CMake Error at CMakeLists.txt:4 (cmake_minimum_required):
+> |   Compatibility with CMake < 3.5 has been removed from CMake.
+> |
+> |   Update the VERSION argument <min> value.  Or, use the <min>...<max> s=
+yntax
+> |   to tell CMake that the project requires at least <min> but has been u=
+pdated
+> |   to work with policies introduced by <max> or earlier.
+> |
+> |   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3D3.5 to try configuring anywa=
+y.
+> |
+> |
+> | -- Configuring incomplete, errors occurred!
+>
+> Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 > ---
->   .../imagemagick/files/CVE-2022-28463.patch    | 27 +++++++++++++++++++
->   .../imagemagick/imagemagick_7.0.10.bb         |  5 +++-
->   2 files changed, 31 insertions(+), 1 deletion(-)
->   create mode 100644 meta-oe/recipes-support/imagemagick/files/CVE-2022-28463.patch
+>  .../0001-allow-build-with-cmake-4.patch       | 43 +++++++++++++++++++
+>  .../linux-serial-test_git.bb                  |  3 +-
+>  2 files changed, 45 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-test/linux-serial-test/linux-serial-t=
+est/0001-allow-build-with-cmake-4.patch
 >
-> diff --git a/meta-oe/recipes-support/imagemagick/files/CVE-2022-28463.patch b/meta-oe/recipes-support/imagemagick/files/CVE-2022-28463.patch
+> diff --git a/meta-oe/recipes-test/linux-serial-test/linux-serial-test/000=
+1-allow-build-with-cmake-4.patch b/meta-oe/recipes-test/linux-serial-test/l=
+inux-serial-test/0001-allow-build-with-cmake-4.patch
 > new file mode 100644
-> index 0000000000..c7730957bc
+> index 0000000000..0b67ad03b1
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/imagemagick/files/CVE-2022-28463.patch
-> @@ -0,0 +1,27 @@
-> +From ca3654ebf7a439dc736f56f083c9aa98e4464b7f Mon Sep 17 00:00:00 2001
-> +From: Cristy <urban-warrior@imagemagick.org>
-> +Date: Sat, 26 Mar 2022 09:26:57 -0400
-> +Subject: [PATCH] https://github.com/ImageMagick/ImageMagick/issues/4988
+> +++ b/meta-oe/recipes-test/linux-serial-test/linux-serial-test/0001-allow=
+-build-with-cmake-4.patch
+> @@ -0,0 +1,43 @@
+> +From 83ec3d72913cbdee0c0f27fe74f77bf2ef1d1901 Mon Sep 17 00:00:00 2001
+> +From: Alper Ak <alperyasinak1@gmail.com>
+> +Date: Thu, 10 Jul 2025 14:11:22 +0300
+> +Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
+> + compatibility
 > +
-> +Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/ca3654ebf7a439dc736f56f083c9aa98e4464b7f]
+> +Fix:
 > +
-> +CVE: CVE-2022-28463
-> +Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
+> +| CMake Error at CMakeLists.txt:4 (cmake_minimum_required):
+> +|   Compatibility with CMake < 3.5 has been removed from CMake.
+> +|
+> +|   Update the VERSION argument <min> value.  Or, use the <min>...<max> =
+syntax
+> +|   to tell CMake that the project requires at least <min> but has been =
+updated
+> +|   to work with policies introduced by <max> or earlier.
+> +|
+> +|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3D3.5 to try configuring anyw=
+ay.
+> +|
+> +|
+> +| -- Configuring incomplete, errors occurred!
 > +
+> +Upstream-Status: Submitted [https://github.com/cbrake/linux-serial-test/=
+pull/60]
+> +
+> +Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 > +---
-> + coders/cin.c | 2 ++
-> + 1 file changed, 2 insertions(+)
+> + CMakeLists.txt | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
 > +
-> +diff --git a/coders/cin.c b/coders/cin.c
-> +index e266e7f3c56..23fc17e0890 100644
-> +--- a/coders/cin.c
-> ++++ b/coders/cin.c
-> +@@ -451,6 +451,8 @@ static Image *ReadCINImage(const ImageInfo *image_info,ExceptionInfo *exception)
-> +   image->endian=(magick[0] == 0x80) && (magick[1] == 0x2a) &&
-> +     (magick[2] == 0x5f) && (magick[3] == 0xd7) ? MSBEndian : LSBEndian;
-> +   cin.file.image_offset=ReadBlobLong(image);
-> ++  if (cin.file.image_offset < 712)
-> ++    ThrowReaderException(CorruptImageError,"ImproperImageHeader");
-> +   offset+=4;
-> +   cin.file.generic_length=ReadBlobLong(image);
-> +   offset+=4;
-> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-> index b8167f5a72..db786ea3a5 100644
-> --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-> +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-> @@ -11,7 +11,10 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
->   
->   BASE_PV := "${PV}"
->   PV .= "-62"
-> -SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
-> +SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
-> +           file://CVE-2022-28463.patch \
-> +           "
+> +diff --git a/CMakeLists.txt b/CMakeLists.txt
+> +index 10e3968..4ce6ef1 100644
+> +--- a/CMakeLists.txt
+> ++++ b/CMakeLists.txt
+> +@@ -1,7 +1,7 @@
+> + # SPDX-License-Identifier: MIT
 > +
->   SRCREV = "35b4991eb0939a327f3489988c366e21068b0178"
->   
->   S = "${WORKDIR}/git"
-
+> + project(linux-serial-test C)
+> +-cmake_minimum_required(VERSION 2.6)
+> ++cmake_minimum_required(VERSION 3.5)
+> + add_executable(linux-serial-test linux-serial-test.c)
+> + target_link_libraries(linux-serial-test rt)
+> + install(TARGETS linux-serial-test DESTINATION bin)
+> +--
+> +2.43.0
+> +
+> diff --git a/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git=
+.bb b/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git.bb
+> index c617cf09a3..a451db2a76 100644
+> --- a/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git.bb
+> +++ b/meta-oe/recipes-test/linux-serial-test/linux-serial-test_git.bb
+> @@ -3,7 +3,8 @@ HOMEPAGE =3D "https://github.com/cbrake/linux-serial-test=
+"
+>  LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://LICENSES/MIT;md5=3D544799d0b492f119fa04641d=
+1b8868ed"
+>
+> -SRC_URI =3D "git://github.com/cbrake/linux-serial-test.git;protocol=3Dht=
+tps;branch=3Dmaster"
+> +SRC_URI =3D "git://github.com/cbrake/linux-serial-test.git;protocol=3Dht=
+tps;branch=3Dmaster \
+> +        file://0001-allow-build-with-cmake-4.patch"
+>
+>  PV =3D "0+git"
+>  SRCREV =3D "2ee61484167eab846f7b7c565284d7c350d738d3"
+> --
+> 2.43.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#118420): https://lists.openembedded.org/g/openembedde=
+d-devel/message/118420
+> Mute This Topic: https://lists.openembedded.org/mt/114086939/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
