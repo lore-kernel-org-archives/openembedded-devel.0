@@ -1,222 +1,190 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <Moritz.Haase@bmw.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB538C8303C
-	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 11:35:37 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.11654.1752233733428725758
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2046CC83F1A
+	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 12:53:48 +0000 (UTC)
+Received: from esa14.hc324-48.eu.iphmx.com (esa14.hc324-48.eu.iphmx.com [207.54.69.24])
+ by mx.groups.io with SMTP id smtpd.web10.13172.1752238418917506184
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Jul 2025 04:35:33 -0700
+ Fri, 11 Jul 2025 05:53:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9287d3c5d5=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56B5t2d8024001
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 04:35:33 -0700
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47q3jn68tp-2
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 04:35:33 -0700 (PDT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Fri, 11 Jul 2025 04:35:32 -0700
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.57 via Frontend Transport; Fri, 11 Jul 2025 04:35:31 -0700
-From: <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-openembedded][kirkstone][PATCH  1/1] tcpreplay: fix CVE-2024-22654
-Date: Fri, 11 Jul 2025 17:05:29 +0530
-Message-ID: <20250711113529.3010920-1-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@bmw.de header.s=mailing1 header.b=J+BTKe42;
+ dkim=pass header.i=@bmw.de header.s=selector1 header.b=ntWmnQdS;
+ spf=pass (domain: bmw.de, ip: 207.54.69.24, mailfrom: prvs=28004f72d=moritz.haase@bmw.de)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
+  t=1752238419; x=1783774419;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=tkrwouaN7vQnLhgnAgfZ8Jt1OkBELhtdJgPM9Jx36YU=;
+  b=J+BTKe42PVWnBfFQUV8caT7mWH5rfF0x3kddDtQVAGV0Kot/pB/twB8o
+   gtWGXvZquJH/gEVLes3a03zsDXiRKikva7r+hBz+9PxlPr1O6PN1hqB9j
+   3LOzs5NieZH5MSiFX2sznwSTqjyn8ODNrFApDRs9eyjQZejZOMoZt3U2Y
+   E=;
+X-CSE-ConnectionGUID: 7k0cJ4QBQHmpfVAYNZG7XA==
+X-CSE-MsgGUID: XNh7Mh+JTTmgi6sdMENVxQ==
+Received: from esagw4.bmwgroup.com (HELO esagw4.muc) ([160.46.252.39]) by
+ esa14.hc324-48.eu.iphmx.com with ESMTP/TLS; 11 Jul 2025 14:53:34 +0200
+Received: from unknown (HELO esabb6.muc) ([10.31.187.137]) by esagw4.muc with
+ ESMTP/TLS; 11 Jul 2025 14:53:34 +0200
+Received: from smucmp15a.bmwgroup.net (HELO smucmp15a.europe.bmw.corp)
+ ([10.30.13.135]) by esabb6.muc with ESMTP/TLS; 11 Jul 2025 14:53:34 +0200
+Received: from smucmp15h.europe.bmw.corp (2a03:1e80:a15:58f::1:4f) by
+ smucmp15a.europe.bmw.corp (2a03:1e80:a15:58f::1:68) with Microsoft SMTP
+ Server (version=TLS; Fri, 11 Jul 2025 14:53:34 +0200
+Received: from smucdzmp14.europe.bmw.corp (192.109.190.59) by
+ smucmp15h.europe.bmw.corp (10.30.13.142) with Microsoft SMTP Server
+ (version=TLS; Fri, 11 Jul 2025 14:53:34 +0200
+Received: from outbound.mail.protection.outlook.com (192.109.190.1) by
+ smtpedge.bmwgroup.net (192.109.190.59) with Microsoft SMTP Server
+ (version=TLS; Fri, 11 Jul 2025 14:53:34 +0200
+Received: from DB3PR09MB6202.eurprd09.prod.outlook.com (2603:10a6:10:43a::13) by
+ DB3PR09MB6203.eurprd09.prod.outlook.com (2603:10a6:10:42a::5) with
+ Microsoft SMTP Server (version=TLS; Fri, 11 Jul 2025 12:53:31 +0000
+Received: from DB3PR09MB6202.eurprd09.prod.outlook.com
+ ([fe80::ce00:c6f4:8427:f779]) by DB3PR09MB6202.eurprd09.prod.outlook.com
+ ([fe80::ce00:c6f4:8427:f779%6]) with mapi id 15.20.8857.026; Fri, 11 Jul 2025
+ 12:53:31 +0000
+X-CSE-ConnectionGUID: 1+7u4VB7SUuvJ3L2dWUBuA==
+X-CSE-MsgGUID: hs1plMfFSIaFxFCtKOm9fg==
+X-CSE-ConnectionGUID: rf0pef+jRcCz+RQpIbXKZQ==
+X-CSE-MsgGUID: GNpmudCORguDGJnUp/aXSQ==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qE9eBxZ5zNFgUrXLOEd/ya/qCxMlH89hugbInw/bG+EKIXHuKUR+iuxHN2dZSppCKD/ISBx2jwRyrrPyD9lVFKARB2eQPgl8smdxXOmlShybiD8GJG4I8J8ELz876ofVEou9+kYSnM4n7/+163UzFKv8EegxyiGF8jnQP1xn9pqBtfVcpq6B/3z4ft4b33N18E1JlJtH7LNSk5ORqodq/UUhbbm74bq9u1whAnclp2BQb1I4Of7ci1DXVRT5nZq5wh+R0uVv6yo6Crmvru7jqBPdoon/3THaGdZiDO3LYlAgqjmaDdekUC0FAa+mbOT0o4GlK+NbzaMl/MTsRxt7fg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tkrwouaN7vQnLhgnAgfZ8Jt1OkBELhtdJgPM9Jx36YU=;
+ b=RjlHd4vVLqC5FEmXVwh42VLux+o2ROpkMee2T3AsYKosJ2Q7EtnjSqolGDimVjwYLFxMLbUP+4lepe6w5BFRfuSBTKidCQNktrQu5nf2MUWGhYu4trHpsEbvSP1HMXgXNdVKbZh5Vvtn7FxFPobImvF1RHmz13KN30mQkM4v31yTd6jovGUljBpbqegdhd+XgGAu4Wpw3e44Ij+elGZy70OpaAoaQUTNe4vXXBLz5JkhVxurSvOx0d9cQeozktfnuqabucIWYA8PDMy5R8Uuh8dGPUUeArQ1GM9iZ7IP/LynV2E1jzuDelMbJ20dYu/JWdLHQJOVof+/RS5ga78z/w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bmw.de; dmarc=pass action=none header.from=bmw.de; dkim=pass
+ header.d=bmw.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmw.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tkrwouaN7vQnLhgnAgfZ8Jt1OkBELhtdJgPM9Jx36YU=;
+ b=ntWmnQdSnLKErFvPAMagAKqhM/dTqh/WAHS7NZIwt0/502MI4cvHYael3FDnUlK6Hepw/hrYXCJ8NipFsiagpZiaNTonMcrk9xGqSm9wRB0RWpOhtUAMW7esN+ph1QM5tTZEVjg8aV7S7UqTpt6QIPLeq/Eg6RwfG/kbedQfo77w1U/oXx5vMiSdIFhL42X9b/Gybh9I8rDU+9EgAdHG7iVhB5Q/UJFRLKwE8J7pH2H24KamgGyToqdDVVOLoOOYu7tKp3ugZ1FNoYbYsRxzNaatvtkU9KCXLxEHZc0AMvacjl+6YXYfkjOXG6+zWbB5cgCn3nJcSiLtE6aNJIKRRg==
+From: "Haase Moritz, JD-62" <Moritz.Haase@bmw.de>
+To: "martin.jansa@gmail.com" <martin.jansa@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH 10/10] [RFC] vulkan-cts: upgrade 1.4.2.1 ->
+ 1.4.3.1
+Thread-Topic: [oe] [meta-oe][PATCH 10/10] [RFC] vulkan-cts: upgrade 1.4.2.1 ->
+ 1.4.3.1
+Thread-Index: AQHb8krT+Z225IRXmU2X/lqMvsQfLbQsuGQAgAAnmiE=
+Date: Fri, 11 Jul 2025 12:53:31 +0000
+Message-ID: <DB3PR09MB620201E29FFC898EA3D19F44EA4BA@DB3PR09MB6202.eurprd09.prod.outlook.com>
+References: <20250711100052.255467-1-Moritz.Haase@bmw.de>
+ <20250711100052.255467-11-Moritz.Haase@bmw.de>
+ <CA+chaQckg=5Q4KfAB7T+6e6vLLc-5zGxpvVCCfz0_i3Z7=uD_w@mail.gmail.com>
+In-Reply-To: <CA+chaQckg=5Q4KfAB7T+6e6vLLc-5zGxpvVCCfz0_i3Z7=uD_w@mail.gmail.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bmw.de;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB3PR09MB6202:EE_|DB3PR09MB6203:EE_
+x-ms-office365-filtering-correlation-id: 84a73ca7-4399-40ea-011a-08ddc079f079
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|19092799006|1800799024|366016|38070700018;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?nHZqKvrCanQnaKJp1XLvclsV8bhc2gF+163Bjn5cv6jj171/kzp1MGWveb?=
+ =?iso-8859-1?Q?SUfc8hMKknWG6t0esgSF0OoKYkPlO8xdq4/WATz8+Fobk7SmnDWG/Sy2CZ?=
+ =?iso-8859-1?Q?S5r1mKLOwtSlQmD9+gvYetJKYBvwV4kSZd+J87DjiisRsLKl4+MlNRszLk?=
+ =?iso-8859-1?Q?+LcT6Nt6GC3142+oBdVH1c11yiUWWk2TyueZDt58La8PS+Vcc/PYpXD2wQ?=
+ =?iso-8859-1?Q?YQcF8eKunSkfqkBpXJQDHRw3RNACIY2hLhu5SaD/S6LFiVgGqTOvoChug0?=
+ =?iso-8859-1?Q?rvWHbcDu3ZIkUsLYK4mhvVG8g47NTq0cFkA5hgBy8etayPPNlx/VaKELnW?=
+ =?iso-8859-1?Q?diG77T8aXKJL+SCbYXqujMmCS6XK7oFFSnLyW3zdxebg4neupUNUNtR/2G?=
+ =?iso-8859-1?Q?w4Cu/JePxHnPZVFLdlRBz4jx05YepK3FEbXtHV0gGs0HED8eMn1ug+gXdP?=
+ =?iso-8859-1?Q?vd90NKlsa8K6L6BbAP6r6Qi3k2lBXNPxawJRMhDI+w3g1vTWPVQ+3xcud4?=
+ =?iso-8859-1?Q?j+lE72+DDYZnPYO5oNIUHzxdjOfGFIhYBFXU2KykAl9hmmv8EFtH9munwp?=
+ =?iso-8859-1?Q?b9I9klXGx3pQ34yXnvBUqmupEJv1gKzp68RKR/Mg7GFNtMeK+WL14VQD4+?=
+ =?iso-8859-1?Q?cnODmOg9V2iSdTIF/ls/W2oNJu4EUc9fZTWqnyGPmkbSL7mJqZcDauiWb2?=
+ =?iso-8859-1?Q?VHUExemPkH1lqiAOAKTWdSEjZKosxHXritFzRJeYPCx8rfVe6qazCL3vZN?=
+ =?iso-8859-1?Q?lSrWOcNzGGeQ6p9oBiWCjT8HYTw1zGfY0cwoshP9zzByXiWFtJEotuhAS0?=
+ =?iso-8859-1?Q?os+VLUwXziU4OzmxcCmAwsOf+Ny8Jg6Q85liHU5SA+X6Hg/RUe8+7d9/5F?=
+ =?iso-8859-1?Q?FcQFwmJf1WXrjwlGBGazYkgmUCY1O5rbfcOTGm6z8ZQsWemYMRTD1eBHf6?=
+ =?iso-8859-1?Q?wkGXxm9Y39lEVrBXra+DUKiScqsm3Yu3FQQG5UX277H/VAwMbBtLbHGYTd?=
+ =?iso-8859-1?Q?OrEm6D4G/8TPddl2jIrEr2gQzyfd10LLIJ9h2yW51VTEmHdVzMSNo+gBPg?=
+ =?iso-8859-1?Q?Ih20562AnraZ27T2a6LS0TkAwJEQQF9RuCrOdiREBWEYbpuBdg3TRsraRs?=
+ =?iso-8859-1?Q?c208wky1Zu/S+MORtU+MxUtnUOpaQuBJ3TbaAe8SgFCMFv5YvjfIFbaBze?=
+ =?iso-8859-1?Q?w0NIj6WFbU6HPQCYUvGNjLgnvMCcZYsCPeJ4/psMdutFJHxT4lJmU3LT6I?=
+ =?iso-8859-1?Q?lT0exANgKDnI9d+fraHP6mvXVnyn3EORrLD3DRlalikZ6F+PjiFHfUZoox?=
+ =?iso-8859-1?Q?rbjkw5yLITMnv1Z932T2zGZjSH/88QTxYCyb7UlUsjOXsV9XVZFy/EaDSS?=
+ =?iso-8859-1?Q?OFX0WSl07I4NE2EvUCgnPtmhRLIGSksAy9D5l+g2Otl1+f3xAxAq039sJX?=
+ =?iso-8859-1?Q?LJCDKUpmyAlhrwOjvLh/Y9i/lqjRet5TbAfq6xxqSJVgjPtf38zKek6BJC?=
+ =?iso-8859-1?Q?I=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB3PR09MB6202.eurprd09.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(19092799006)(1800799024)(366016)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?XqL2ZJIwdWEgsm2Xjur8hVD3v52EClTD9QzRzoh96pbtLQsyWC1U0O5UEH?=
+ =?iso-8859-1?Q?vxwJUKCvi+TyVyVwvrFpKD7qBxxmYnoU2Z4z+0I95fleQ53Ouqs2uFXXUo?=
+ =?iso-8859-1?Q?xAvsa2/4ycyx48Q5V8u1q4jjo2xtoaMG0iH0w8OUQ4U606SYTCm1QhYYFU?=
+ =?iso-8859-1?Q?hCHP1Tb7be3C7dv0XkSBYJkIYy4ghs6glBgQE5uN0isaMlLylQRbgTkEB5?=
+ =?iso-8859-1?Q?ZK2T0c9xZC86aVdTM14yGJ5P+zb8oydsxsabI5SjAYZU8N/ThR89Zvt0Hc?=
+ =?iso-8859-1?Q?NnlMi9jncKRImKwiKDBfSzCRrrsNsXFtfmZEJlRk0UI6ZAPsGxA6djk6H+?=
+ =?iso-8859-1?Q?zb5R7x5IJkdWYYYNfVUIvxvsORPLHTA7T8eGEX8SmCh4//J7neuW1bahNE?=
+ =?iso-8859-1?Q?/ZpAlNhAqqbATWHClrsE0cjKAwZZZ7KhljX3hmddCYCTXAbuoOV8nDAuGm?=
+ =?iso-8859-1?Q?dgkRbFQ1/B9q7TwraRVMXk2bP142qADuMbeCANOEh3UL2BSBsvtcPovPqp?=
+ =?iso-8859-1?Q?wqSr7AdYxTJmrHnwDUWJK8Zss2uZkbonOpP6+HgUdFeyIoGDnM4qLXmgNz?=
+ =?iso-8859-1?Q?e+LqFKRgPr07+yfwriFl0R+Pft1kt/yMSQ0pE7xaLgqeSyNiP83vbWa61d?=
+ =?iso-8859-1?Q?NS4wjA1XUhog+tB1erHzfvV2OdtZCWc6sVv57L1Qana8dGOX0gj7JKTOxo?=
+ =?iso-8859-1?Q?GOjrCbV2XcExyzvKE7uHZSqkkr3VEEBlneMCSHJKVhCsGCOQThMTwYlu2i?=
+ =?iso-8859-1?Q?bOhFBOTPOUXMNs3+ecXlhLB4njbNXUccC5hypBu0baUNw2EPBPPZHrSbuU?=
+ =?iso-8859-1?Q?Z1+JsDIUqfBhd1yrySzXVt/sYyMihPqyD2SDg0ubVJfOqQWTCbazQ2yPpS?=
+ =?iso-8859-1?Q?z/A6FLyVDePgon/q4JNhjqjKi7DaYZTev92aHjVU8m3Uj0xzpNzIRWPvyE?=
+ =?iso-8859-1?Q?83WLYiUXvWtslevEnuf24oeEkIoJaUKnK0u6OUlFnNVqmTFDo6HdPPY2Lp?=
+ =?iso-8859-1?Q?zodlfxz+sZ7ntO4K1Lu/KZtcjsJeTJoY78zT3Vbg3673hr/WjWeiEcuT6R?=
+ =?iso-8859-1?Q?yQW59MKQ15JyWNdgYD1p1IsHHerHz5t633EhT18X6vPEEAegxY8NVmuY9O?=
+ =?iso-8859-1?Q?7uVokS4q6ZT7OQbeB0HguzJiSEo9usIKKk3/1WaDokCcCa1X0OcvihEj04?=
+ =?iso-8859-1?Q?k+pAIV94MmgVQkSCMRLXZzhcposyRTSTCQ0yU5nRN4s8tfluXHYobXO4sO?=
+ =?iso-8859-1?Q?6ZH3tkcrhbkh0Y1n+lixYnjN3o0gJCxvcL3VwFCTxLG5dQ6z9UnclnPefE?=
+ =?iso-8859-1?Q?dw9RYdsRyiNhvhqPvZS7FkTKOx8DE62QEgshfZxkgEepR1DDICPMXs8CuD?=
+ =?iso-8859-1?Q?OjXBNms3ddUssxSuR7R66Sp8XgSq/wfwBaJdmeEmJDQlIfWsSeSldJQLan?=
+ =?iso-8859-1?Q?0fuggi0jJ3z4OzRVv/LbSMkpJj2nuLp2TSCwf7CPHjE2QZNLr91yIYtYVy?=
+ =?iso-8859-1?Q?XbiTyBGOJ1AB4cLMilPbawTuYhFpArbSa4yPB9q6hX80U+nzMK/BgCGBT+?=
+ =?iso-8859-1?Q?wgLb9NO+fdsskLG3ak0DvhHCiHWlfpBjgu+EHljdNY0E+uL576uSObv8LP?=
+ =?iso-8859-1?Q?tM2FPmFjmN5WPP1ECTWVkIXE7PBOiJkGgD?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: Blg3mruUnZ0CHtsv-kWrM7P7EY8B8_Xj
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzA4MDE5OCBTYWx0ZWRfX07WXINNOPx3F x1UCl20ZUktwJOokNYfbOF8Q+xCx+2vhIVfIcZ1dosdtduJYAA14LwYseh5ZBtfVzhaF1P1Bgkm 8QxfZzVfa+afJIxYWr4k+JVmWu11Eg8XGoVJWKsOFRDZ1ojdKG832Y/suevflE+xCJ+qSqWg4uw
- zQBPvNKpBHJp4WO8uO5SrrZm4+CzgVk31NcT8xPAKRgWb/qGSRwDrow+4HBLAUG0J592DlzOFxr fhrOGTTzskTl5O/le3uLWwvaNHtapk3Akp42GjUvpmGRyW78RKIZJc9TKZ6pHaBR5rJ6eJbpz97 LkLeQr0ONPcTyZMiAsorZuSZl9ZTckIvXGvcCeii/jTGC2SYc9j4BSidJZrUHr2guzbF5F5ahBL gBB4Q8EO
-X-Proofpoint-ORIG-GUID: Blg3mruUnZ0CHtsv-kWrM7P7EY8B8_Xj
-X-Authority-Analysis: v=2.4 cv=fv3cZE4f c=1 sm=1 tr=0 ts=6870f705 cx=c_pps a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17 a=s7Zim6N_0ZsA:10 a=Wb1JkmetP80A:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=Q-fNiiVtAAAA:8 a=pGLkceISAAAA:8
- a=LIUGxCksFKRzbQeI5wkA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-07-11_03,2025-07-09_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0
- priorityscore=1501 impostorscore=0 spamscore=0 phishscore=0 malwarescore=0
- bulkscore=0 suspectscore=0 clxscore=1011 classifier=typeunknown
- authscore=0 authtc= authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.21.0-2505280000 definitions=main-2507080198
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB3PR09MB6202.eurprd09.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 84a73ca7-4399-40ea-011a-08ddc079f079
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Jul 2025 12:53:31.4489
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: ce849bab-cc1c-465b-b62e-18f07c9ac198
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 0Ix+bhPlhG68M/S5jn/P2CeAzN3yxstWqvpYygjdVR5As9IFTsmzlAbBbXIPBFuFjeWI12VFjTXshw1T0Ntfgg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR09MB6203
+X-OriginatorOrg: bmw.de
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 11:35:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118447
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 12:53:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118448
 
-From: Archana Polampalli <archana.polampalli@windriver.com>
-
-tcpreplay v4.4.4 was discovered to contain an infinite loop via the tcprewrite function at get.c.
-
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
----
- .../tcpreplay/CVE-2024-22654-0001.patch       | 90 +++++++++++++++++++
- .../tcpreplay/CVE-2024-22654-0002.patch       | 35 ++++++++
- .../tcpreplay/tcpreplay_4.4.4.bb              |  2 +
- 3 files changed, 127 insertions(+)
- create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0001.patch
- create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0002.patch
-
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0001.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0001.patch
-new file mode 100644
-index 0000000000..26dedba8d4
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0001.patch
-@@ -0,0 +1,90 @@
-+From 5b5644356693f5c68dd4295e86f24f1d0a515d60 Mon Sep 17 00:00:00 2001
-+From: Fred Klassen <fred.klassen@broadcom.com>
-+Date: Sat, 1 Jun 2024 11:46:10 -0700
-+Subject: [PATCH 1/2] Bug #827 PR# 842: add check for IPv6 extension header
-+ length
-+
-+CVE: CVE-2024-22654
-+
-+Upstream-Status: Backport [https://github.com/appneta/tcpreplay/commit/5b5644356693f5c68dd4295e86f24f1d0a515d60]
-+
-+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
-+---
-+ src/common/get.c | 29 +++++++++++++++++++++--------
-+ 1 file changed, 21 insertions(+), 8 deletions(-)
-+
-+diff --git a/src/common/get.c b/src/common/get.c
-+index 2d91116..89fe95b 100644
-+--- a/src/common/get.c
-++++ b/src/common/get.c
-+@@ -41,8 +41,8 @@ extern const char pcap_version[];
-+ static void *get_ipv6_next(struct tcpr_ipv6_ext_hdr_base *exthdr, const u_char *end_ptr);
-+ 
-+ /**
-+- * Depending on what version of libpcap/WinPcap there are different ways to get
-+- * the version of the libpcap/WinPcap library.  This presents a unified way to
-++ * Depending on what version of libpcap there are different ways to get
-++ * the version of the libpcap library.  This presents a unified way to
-+  * get that information.
-+  */
-+ const char *
-+@@ -196,8 +196,15 @@ parse_metadata(const u_char *pktdata,
-+                uint32_t *vlan_offset)
-+ {
-+     bool done = false;
-+-    int res = 0;
-+-    while (!done && res == 0) {
-++    assert(next_protocol);
-++    assert(l2len);
-++    assert(l2offset);
-++    assert(vlan_offset);
-++
-++    if (!pktdata || !datalen)
-++        errx(-1, "parse_metadata: invalid L2 parameters: pktdata=0x%p len=%d", pktdata, datalen);
-++
-++    while (!done) {
-+         switch (*next_protocol) {
-+         case ETHERTYPE_VLAN:
-+         case ETHERTYPE_Q_IN_Q:
-+@@ -205,18 +212,22 @@ parse_metadata(const u_char *pktdata,
-+             if (*vlan_offset == 0)
-+                 *vlan_offset = *l2len;
-+ 
-+-            res = parse_vlan(pktdata, datalen, next_protocol, l2len);
-++            if (parse_vlan(pktdata, datalen, next_protocol, l2len))
-++                return -1;
-++
-+             break;
-+         case ETHERTYPE_MPLS:
-+         case ETHERTYPE_MPLS_MULTI:
-+-            res = parse_mpls(pktdata, datalen, next_protocol, l2len, l2offset);
-++            if (parse_mpls(pktdata, datalen, next_protocol, l2len, l2offset))
-++                return -1;
-++
-+             break;
-+         default:
-+             done = true;
-+         }
-+     }
-+ 
-+-    return res;
-++    return 0;
-+ }
-+ 
-+ /*
-+@@ -605,9 +616,11 @@ get_layer4_v6(const ipv6_hdr_t *ip6_hdr, const u_char *end_ptr)
-+          * no further processing, either TCP, UDP, ICMP, etc...
-+          */
-+         default:
-+-            if (proto != ip6_hdr->ip_nh) {
-++            if (proto != ip6_hdr->ip_nh && next) {
-+                 dbgx(3, "Returning byte offset of this ext header: %u", IPV6_EXTLEN_TO_BYTES(next->ip_len));
-+                 next = (void *)((u_char *)next + IPV6_EXTLEN_TO_BYTES(next->ip_len));
-++                if ((u_char*)next > end_ptr)
-++                    return NULL;
-+             } else {
-+                 dbgx(3, "%s", "Returning end of IPv6 Header");
-+             }
-+-- 
-+2.40.0
-+
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0002.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0002.patch
-new file mode 100644
-index 0000000000..bcf560c0e5
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0002.patch
-@@ -0,0 +1,35 @@
-+From 52ed63329b37ae83cb86504db2c9deb6a91e2fe9 Mon Sep 17 00:00:00 2001
-+From: Gabriel Ganne <gabriel.ganne@gmail.com>
-+Date: Sun, 21 Jan 2024 08:59:10 +0100
-+Subject: [PATCH 2/2] ipv6 - add check for extension header length
-+
-+Fixes #827
-+
-+Signed-off-by: Gabriel Ganne <gabriel.ganne@gmail.com>
-+
-+CVE: CVE-2024-22654
-+
-+Upstream-Status: Backport [https://github.com/appneta/tcpreplay/commit/52ed63329b37ae83cb86504db2c9deb6a91e2fe9]
-+
-+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
-+---
-+ src/common/get.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/common/get.c b/src/common/get.c
-+index 89fe95b..c31de5d 100644
-+--- a/src/common/get.c
-++++ b/src/common/get.c
-+@@ -676,6 +676,10 @@ get_ipv6_next(struct tcpr_ipv6_ext_hdr_base *exthdr, const u_char *end_ptr)
-+     case TCPR_IPV6_NH_HBH:
-+     case TCPR_IPV6_NH_AH:
-+         extlen = IPV6_EXTLEN_TO_BYTES(exthdr->ip_len);
-++        if (extlen == 0) {
-++            dbg(3, "Malformed IPv6 extension header...");
-++            return NULL;
-++        }
-+         dbgx(3,
-+              "Looks like we're an ext header (0x%hhx).  Jumping %u bytes"
-+              " to the next",
-+--
-+2.40.0
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
-index 32c978c1e0..3ece4b78c6 100644
---- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
-@@ -9,6 +9,8 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=10f0474a2f0e5dccfca20f69d6598ad8"
- 
- SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz \
-            file://CVE-2023-4256.patch \
-+           file://CVE-2024-22654-0001.patch \
-+           file://CVE-2024-22654-0002.patch \
- "
- 
- SRC_URI[sha256sum] = "44f18fb6d3470ecaf77a51b901a119dae16da5be4d4140ffbb2785e37ad6d4bf"
--- 
-2.40.0
-
+Hi Martin,=0A=
+=0A=
+> Isn't it because in this change you have (probably accidentally)=0A=
+> changed the destsuffix in SRC_URI?=0A=
+=0A=
+awesome, thanks! Totally missed that. I updated the file using=0A=
+=0A=
+    bitbake -c refresh_srcuri vulkan-cts=0A=
+=0A=
+but the script is broken, as it wasn't adapted to recent UNPACKDIR changes=
+=0A=
+apparently. The SRC_URI entries were only updated manually in [0]. After=0A=
+adapting the script, the build passes. Will send v2 tomorrow.=0A=
+=0A=
+Moritz=0A=
+=0A=
+[0]: https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-=
+graphics/vk-gl-cts/vulkan-cts-sources.inc?h=3Dmaster-next&id=3Dfc78d37ff0ce=
+9e0d60455465851dbe4e86d7a8b3=0A=
 
