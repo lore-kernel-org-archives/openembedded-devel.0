@@ -2,46 +2,46 @@ Return-Path: <Moritz.Haase@bmw.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FA66C83F28
-	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 10:01:37 +0000 (UTC)
-Received: from esa14.hc324-48.eu.iphmx.com (esa14.hc324-48.eu.iphmx.com [207.54.69.24])
- by mx.groups.io with SMTP id smtpd.web11.10148.1752228090272721448
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FA6AC83F1A
+	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 10:02:07 +0000 (UTC)
+Received: from esa7.hc324-48.eu.iphmx.com (esa7.hc324-48.eu.iphmx.com [207.54.71.126])
+ by mx.groups.io with SMTP id smtpd.web11.10154.1752228116595437643
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Jul 2025 03:01:30 -0700
+ Fri, 11 Jul 2025 03:01:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bmw.de header.s=mailing1 header.b=lsrX0xTu;
- spf=pass (domain: bmw.de, ip: 207.54.69.24, mailfrom: prvs=28004f72d=moritz.haase@bmw.de)
+ dkim=pass header.i=@bmw.de header.s=mailing1 header.b=g3TFpSw6;
+ spf=pass (domain: bmw.de, ip: 207.54.71.126, mailfrom: prvs=28004f72d=moritz.haase@bmw.de)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
-  t=1752228090; x=1783764090;
+  t=1752228118; x=1783764118;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=pinK9yWqAZEvMA/CyIZU+0CoFudcO8QDik1/ozmyaEU=;
-  b=lsrX0xTuBxjBmjtO6d9mhyVr2qpl3aOPNzjSY4KIHDz3f+w+JT0oo7Ko
-   XBJET80Q0riPvSoNCKl3MP9NxXOsavCf6vT/dKFC29Sb5VetA0huDUvDW
-   KN3XtTJXcnq/1N221oUA4KuhoQbhsq840RbgU4Do5g0w8EN0ysSwJ3MFI
-   8=;
-X-CSE-ConnectionGUID: 60qjpYQOSTODvxEjuKEWsg==
-X-CSE-MsgGUID: wgUL+j2PRWicPo6174yTWQ==
-Received: from 160.46.252.34.spf.bmwgroup.com (HELO esagw1.muc) ([160.46.252.34]) by
- esa14.hc324-48.eu.iphmx.com with ESMTP/TLS; 11 Jul 2025 12:01:24 +0200
-Received: from esabb1.muc ([160.50.100.31])  by esagw1.muc with ESMTP/TLS;
- 11 Jul 2025 12:01:25 +0200
+  bh=ANhCN1OmCIt2w7QE0/rO2lnqbgvHrzqeNtpdvYhMr6s=;
+  b=g3TFpSw6qp5WQy4czgHAzmPRZqh3d1l3BdwvExTi/ha3Wig7NUmK8Uxr
+   Nu0Lrnn6z+iY5r79yd1lD6LiUdNiK7WIbQ05broGKVEl7dFre9w8Yeq/o
+   hCchwJGzoufhaRSszktk3JCTEQke2C52olMGBvekSWDM3sFRJ2gtYFmzM
+   o=;
+X-CSE-ConnectionGUID: 1EdOVw/UT5mdj+HcDimMBw==
+X-CSE-MsgGUID: 7o95oDVMQjCoRVRJ7a7iew==
+Received: from esagw4.bmwgroup.com (HELO esagw4.muc) ([160.46.252.39]) by
+ esa7.hc324-48.eu.iphmx.com with ESMTP/TLS; 11 Jul 2025 12:01:39 +0200
+Received: from unknown (HELO esabb5.muc) ([10.31.187.136]) by esagw4.muc with
+ ESMTP/TLS; 11 Jul 2025 12:01:24 +0200
 Received: from smucmp12a.bmwgroup.net (HELO smucmp12a.europe.bmw.corp) ([10.30.13.95])
- by esabb1.muc with ESMTP/TLS; 11 Jul 2025 12:01:25 +0200
+ by esabb5.muc with ESMTP/TLS; 11 Jul 2025 12:01:24 +0200
 Received: from q1054628.de-cci.bmwgroup.net (10.30.85.215) by
  smucmp12a.europe.bmw.corp (2a03:1e80:a15:58f::1:9) with Microsoft SMTP
  Server (version=TLS; Fri, 11 Jul 2025 12:01:24 +0200
-X-CSE-ConnectionGUID: 6nf71w08QnGnsEVV4ACelQ==
-X-CSE-MsgGUID: judHHQ0hQcGzYkCxMDb14A==
-X-CSE-ConnectionGUID: AOQBFYTjTyihKqIZpk3mSg==
-X-CSE-MsgGUID: RDIi6aNHTYCXMJ3FRV4PCA==
+X-CSE-ConnectionGUID: LNxk1XAaSCebA6hdJnm+OQ==
+X-CSE-MsgGUID: SQb7QIimQFSgMzamvLjEJg==
+X-CSE-ConnectionGUID: yLzug7UbR8adKsUQfe6+dw==
+X-CSE-MsgGUID: 9Jqjp/VeQaCUuPtpGlYi8g==
 From: Moritz Haase <Moritz.Haase@bmw.de>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Moritz Haase <Moritz.Haase@bmw.de>
-Subject: [meta-oe][PATCH 06/10] wbxml2: upgrade 0.10.8 -> 0.11.10
-Date: Fri, 11 Jul 2025 12:00:23 +0200
-Message-ID: <20250711100052.255467-7-Moritz.Haase@bmw.de>
+Subject: [meta-oe][PATCH 07/10] upm: Allow to build with CMake 4+
+Date: Fri, 11 Jul 2025 12:00:24 +0200
+Message-ID: <20250711100052.255467-8-Moritz.Haase@bmw.de>
 X-Mailer: git-send-email 2.50.0
 In-Reply-To: <20250711100052.255467-1-Moritz.Haase@bmw.de>
 References: <20250711100052.255467-1-Moritz.Haase@bmw.de>
@@ -53,47 +53,29 @@ X-ClientProxiedBy: SMUCMP12E.europe.bmw.corp (2a03:1e80:a15:58f::1:320) To
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 10:01:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118441
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 10:02:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118444
 
-The project has moved away from SourceForge to GitHub at [0] and has resumed
-publishing releases. The new version includes support to build against CMake 4+.
+Upstream is inactive, so use the 'minimum policy version' override.
 
-[0]: https://github.com/libwbxml/libwbxml
-
-License-Update: Links to project homepage have been updated
 Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
 ---
- .../opensync/{wbxml2_0.10.8.bb => wbxml2_0.11.10.bb}  | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-support/opensync/{wbxml2_0.10.8.bb => wbxml2_0.11.10.bb} (50%)
+ meta-oe/recipes-extended/upm/upm_git.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/opensync/wbxml2_0.10.8.bb b/meta-oe/recipes-support/opensync/wbxml2_0.11.10.bb
-similarity index 50%
-rename from meta-oe/recipes-support/opensync/wbxml2_0.10.8.bb
-rename to meta-oe/recipes-support/opensync/wbxml2_0.11.10.bb
-index 02815ec7ba..50a00b526d 100644
---- a/meta-oe/recipes-support/opensync/wbxml2_0.10.8.bb
-+++ b/meta-oe/recipes-support/opensync/wbxml2_0.11.10.bb
-@@ -1,16 +1,13 @@
- SUMMARY = "WBXML parsing and encoding library"
--HOMEPAGE = "http://libwbxml.opensync.org/"
-+HOMEPAGE = "https://github.com/libwbxml/libwbxml"
- SECTION = "libs"
- LICENSE = "LGPL-2.1-or-later"
--LIC_FILES_CHKSUM = "file://COPYING;md5=c1128ee5341ccd5927d8bafe4b6266e1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b17146e5186e05865f75664e910ace79"
+diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-extended/upm/upm_git.bb
+index 616f4ca09a..9b809ce727 100644
+--- a/meta-oe/recipes-extended/upm/upm_git.bb
++++ b/meta-oe/recipes-extended/upm/upm_git.bb
+@@ -27,7 +27,9 @@ COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
  
- DEPENDS = "expat"
+ inherit setuptools3-base cmake pkgconfig
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/libwbxml/libwbxml-${PV}.tar.gz"
--
--SRC_URI[sha256sum] = "a057daa098f12838eb4e635bb28413027f1b73819872c3fbf64e3207790a3f7d"
--
--S = "${UNPACKDIR}/libwbxml-${PV}"
-+SRC_URI = "git://github.com/libwbxml/libwbxml;branch=master;protocol=https;tag=libwbxml-${PV}"
-+SRCREV = "e58b1f19f11dbadff53e5b486b8c4b16639a656a"
+-EXTRA_OECMAKE += "-UPYTHON_EXECUTABLE -DWERROR=off"
++EXTRA_OECMAKE += "-UPYTHON_EXECUTABLE -DWERROR=off \
++                  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
++"
  
- inherit cmake pkgconfig
- 
+ # override this in local.conf to get needed bindings.
+ # BINDINGS:pn-upm="python"
 
