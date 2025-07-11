@@ -2,86 +2,94 @@ Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64B62C83F1A
-	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 05:25:35 +0000 (UTC)
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web10.7027.1752211527935783137
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93643C8303C
+	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 06:01:45 +0000 (UTC)
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.web10.7399.1752213696932839559
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jul 2025 22:25:28 -0700
+ Thu, 10 Jul 2025 23:01:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=Q8mNmrb3;
- spf=pass (domain: mvista.com, ip: 209.85.215.174, mailfrom: hprajapati@mvista.com)
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-b34c068faf8so1937078a12.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 22:25:27 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=gfB8Jx3c;
+ spf=pass (domain: mvista.com, ip: 209.85.215.177, mailfrom: hprajapati@mvista.com)
+Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-b321bd36a41so1710249a12.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 23:01:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1752211527; x=1752816327; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1752213696; x=1752818496; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NYsuyruuEXtHfF7c8+Ja4Cp/JxOFXqF4xZu9Yr8jjQ8=;
-        b=Q8mNmrb3STdxc6CjFFAZI8+NNq31OhIRRFBSLUhPlfXBJvnwT5fpI86uZefl7rz82e
-         3hxWVqT8IZZ2Gi+CeQ0ZLutoIuGdOFI+kCN2tq77E0V8jCWXMhAsAL4odhw/rRqEbWhw
-         wPhEPrggNGA3XjowibkxwehHR4UI/XN2AHhCY=
+        bh=TY8RspkAUq0vJbEIRf2CIIM87sose0CkCvedxSTKbV0=;
+        b=gfB8Jx3c+enU5xc07NkKjdBmh6+1PchAd2ONLxVYojhhuPp9wO5F8V+bq08XZ6GYxk
+         ONeK/OyYDeFpVsD0eLZiTl8weAWNWaPhZijT+NgkQMFdp+8BxEbfjsrzMMsZpSx2pfgE
+         GCGnMYhmfsV1JWio1r3KX/2zF/F7Ug2EQLodI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752211527; x=1752816327;
+        d=1e100.net; s=20230601; t=1752213696; x=1752818496;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=NYsuyruuEXtHfF7c8+Ja4Cp/JxOFXqF4xZu9Yr8jjQ8=;
-        b=Q/mLer62SkSr3ooSEzr6JbHpc7YpniyTS4EhVeI+obfl5vYqHEqSjPHsG2XcRnfjWl
-         43RO30HSHIJle108FFSD6I7DR7Wa84qxEPCmU6eR5riuqHCh/kKf3ylbdStIy7s5LN/u
-         bpWarwu7G4YtIJQy5TpcBaNE2TYMSX1YpXxCv9X1rmcZNvLPzE0sUnIoCC27V2zM7vhe
-         L3lBmcVlsEI+UacGjHaEQbqhcWTXgB4lc0iB+lP/g27uGXU03er07NA8/2rVHnpaFhCY
-         5aiE665RIfdtf5tuJqX1mP/r+csLdusXFhloyX+QSalaz3V8gJcithaMcWplcy0h/EsL
-         UnIQ==
-X-Gm-Message-State: AOJu0Yw0Sf2g0i062J2Ppcd0JkE/cS4fo76w+XZIfRuityUisp/Pve1+
-	UVCq/m6qAChZWhZD2HKzYbeXW0WCnHvR/DzfjuwOqWMAVbmIMh/BdbiVCNSv5avuUP4uSaUhGPQ
-	MUj9n
-X-Gm-Gg: ASbGncuJDT/X98+3tHRqXukL9294E8LZdNcP6Txotc5Myf2RPA+HGP62JcMdpvOugKa
-	YF/FlXYUu/tZhMfXBw5FztHiGAWXKA8p1cv31IwkdqcqHlU6VJCJbXpPIaFo6+N/zK5Z6ZhQJ/W
-	mgamBBlHqL6+iEhngEOsFmdcUjlbpeJUMYfmBL5rEaALfomU6yrsGreDM2CNaPBBtiYRf56L4yl
-	CihaOFdiPUgHfPaJCSlbG4AooG2YNNYcEZkJkaaIsa4s+o9BV/qYoXIN3RHKYIEdIYQMh4gSKsr
-	+0tF7wSBb+0Cqrb8JoNBMHWBOMsChMnsdHhasC6RIoR18sEXc+zVPaU6wiLx+hO0yTrdYbud8oC
-	4vi1J2+6NW2Gti9muxp7kVtBo4aMxJ1MPpzM=
-X-Google-Smtp-Source: AGHT+IFCEmywFqt0aCz4wj9YDhyxt0WX+oiBONxJa/PpEC9tvw7Oi1cjmYXLPkx15JASpshDPDwAXA==
-X-Received: by 2002:a05:6a21:6d8d:b0:203:bb65:995a with SMTP id adf61e73a8af0-231202f2489mr3694434637.30.1752211526780;
-        Thu, 10 Jul 2025 22:25:26 -0700 (PDT)
+        bh=TY8RspkAUq0vJbEIRf2CIIM87sose0CkCvedxSTKbV0=;
+        b=fj3qhMa+pWpjdze2qv0/PCssUNw+WRIzR/JZjvM8Acd9nU9ZvyxyA2z+01JfjHU/5Q
+         BPKxk0Vgg6jQJcui075B6u/r+s+rVi4O7WcjFDgYSiwZUxEUi9Y28Szc9hd8wzl2YLeW
+         HlWVN3GjQwdpworKe5vgH47RY2U7B4nKEMtrRYcyFj5plYkvB9+veVsG/L3x8OKvtCEQ
+         XgdQEOKl+pxgTElLNRP57oCdwfK9ZU88oc215ydafDwHJTy1vmBaNQHxW8Cdhr8RTBTj
+         nK8HE3Dg0Ij9hff7+hz8qNWv0telaK7TQ04rZUV59hWkZkwSMNWNIJSae+E5a3RysPF7
+         UCWg==
+X-Gm-Message-State: AOJu0YzTLKQNZLhlJoZAe3Ywa81/XelUHas/YOXFufly3hHx/l+whhri
+	I5DTiUQqx/XEby1n0AebuNyLWhuwizxyRoArOs0uugHuKU+ja668Wri52nMmNgUm4KSxBKLxmH3
+	6mIlT
+X-Gm-Gg: ASbGncthlZLY7mKspPb9b7aZJzOK65jNHXQ4hk2NVbDzWKWjJwgsC5STzTaRWaJbVJK
+	aCooXNR1sl22VBFy66EEFpRHJQssv9gMLB+KdPb4roIVnLPS+v+m3sPAPjmVtgbWpta2/D61pY4
+	qeT+Vv+VZ/WRatjNylJwln2U2R++k+HBWRIPOOlfLJA4/jtDTDQbCYObAda8VcZ6R+4DDWHSjhS
+	Hu6KsvmuRf4ZQxTqbuB3H63s49IYt+Mo6njxDPHmLXtoN0+BhHsGIBBTM5X3cJqowN9HNGZbgdW
+	gRwPeALKLeuXNnTBxUDuJ2LcAaCpOxxY1E4yEJc7gDKx0N9IXNxOpJ8wZznmtn5TdjL03BSXf5g
+	UqzL/eTw+qeIdvANte/9YhjUzxDm+KDuWQ0Xzi9QobFS/vA==
+X-Google-Smtp-Source: AGHT+IGiiYUARL5mlNXVcH3Di8GvtrYweiUZIqP/gmRBSVkl/3pLVIyxJPGSu86t79tXNHgQKo7FXQ==
+X-Received: by 2002:a17:90b:4f42:b0:312:1c83:58e7 with SMTP id 98e67ed59e1d1-31c4f48bc78mr1808390a91.1.1752213695320;
+        Thu, 10 Jul 2025 23:01:35 -0700 (PDT)
 Received: from MVIN00016.mvista.com ([43.249.234.153])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-74eb9dd5a7csm3843754b3a.28.2025.07.10.22.25.22
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-31c3eb45c7csm4223788a91.25.2025.07.10.23.01.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jul 2025 22:25:26 -0700 (PDT)
+        Thu, 10 Jul 2025 23:01:34 -0700 (PDT)
 From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-networking][kirkstone][PATCH] open-vm-tools: fix CVE-2025-22247
-Date: Fri, 11 Jul 2025 10:55:13 +0530
-Message-ID: <20250711052513.195261-1-hprajapati@mvista.com>
+Subject: [meta-networking][scarthgap][PATCH] open-vm-tools: fix CVE-2025-22247
+Date: Fri, 11 Jul 2025 11:31:13 +0530
+Message-ID: <20250711060114.389581-1-hprajapati@mvista.com>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 05:25:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118428
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 06:01:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118429
 
-Upstream-Status: Backport from https://github.com/vmware/open-vm-tools/blob/CVE-2025-22247.patch/CVE-2025-22247-1100-1225-VGAuth-updates.patch
+VMware Tools contains an insecure file handling vulnerability.
+\xa0A malicious actor with non-administrative privileges on a
+guest VM may tamper the local files to trigger insecure file
+operations within that VM.
+
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2025-22247
+
+Upstream patch: Backport from https://github.com/vmware/open-vm-tools/blob/CVE-2025-22247.patch/CVE-2025-22247-1230-1250-VGAuth-updates.patch
 
 Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- .../open-vm-tools/CVE-2025-22247.patch        | 383 ++++++++++++++++++
- .../open-vm-tools/open-vm-tools_11.3.5.bb     |   1 +
- 2 files changed, 384 insertions(+)
+ .../open-vm-tools/CVE-2025-22247.patch        | 378 ++++++++++++++++++
+ .../open-vm-tools/open-vm-tools_12.3.5.bb     |   1 +
+ 2 files changed, 379 insertions(+)
  create mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-22247.patch
 
 diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-22247.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-22247.patch
 new file mode 100644
-index 0000000000..e70fd9b7d7
+index 0000000000..4db79ef96d
 --- /dev/null
 +++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-22247.patch
-@@ -0,0 +1,383 @@
-+From 2a2607c6bd94ae22a937fd2adde7472d9a6d506c Mon Sep 17 00:00:00 2001
+@@ -0,0 +1,378 @@
++From 7874e572b5aac5a418551dc5e3935c1e74bf6f1f Mon Sep 17 00:00:00 2001
 +From: John Wolfe <john.wolfe@broadcom.com>
-+Date: Mon, 5 May 2025 16:10:07 -0700
++Date: Mon, 5 May 2025 15:58:03 -0700
 +Subject: [PATCH] Validate user names and file paths
 +
 +Prevent usage of illegal characters in user names and file paths.
@@ -100,18 +108,18 @@ index 0000000000..e70fd9b7d7
 +patch set to allow the patch to be easily applied to previous
 +open-vm-tools source releases.
 +
-+Upstream-Status: Backport [https://github.com/vmware/open-vm-tools/blob/CVE-2025-22247.patch/CVE-2025-22247-1100-1225-VGAuth-updates.patch]
++Upstream-Status: Backport [https://github.com/vmware/open-vm-tools/blob/CVE-2025-22247.patch/CVE-2025-22247-1230-1250-VGAuth-updates.patch]
 +CVE: CVE-2025-22247
 +Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 +---
 + open-vm-tools/vgauth/common/VGAuthUtil.c      | 33 +++++++++
 + open-vm-tools/vgauth/common/VGAuthUtil.h      |  2 +
 + open-vm-tools/vgauth/common/prefs.h           |  3 +
-+ open-vm-tools/vgauth/common/usercheck.c       | 28 +++++--
++ open-vm-tools/vgauth/common/usercheck.c       | 23 +++++-
 + open-vm-tools/vgauth/serviceImpl/alias.c      | 74 ++++++++++++++++++-
 + open-vm-tools/vgauth/serviceImpl/service.c    | 27 +++++++
 + open-vm-tools/vgauth/serviceImpl/serviceInt.h |  1 +
-+ 7 files changed, 160 insertions(+), 8 deletions(-)
++ 7 files changed, 160 insertions(+), 3 deletions(-)
 +
 +diff --git a/open-vm-tools/vgauth/common/VGAuthUtil.c b/open-vm-tools/vgauth/common/VGAuthUtil.c
 +index 76383c462..9c2adb8d0 100644
@@ -166,7 +174,7 @@ index 0000000000..e70fd9b7d7
 ++
 + #endif
 +diff --git a/open-vm-tools/vgauth/common/prefs.h b/open-vm-tools/vgauth/common/prefs.h
-+index 87ccc9b37..689b9e2cf 100644
++index 6c58f3f4b..3299eb26c 100644
 +--- a/open-vm-tools/vgauth/common/prefs.h
 ++++ b/open-vm-tools/vgauth/common/prefs.h
 +@@ -167,6 +167,9 @@ msgCatalog = /etc/vmware-tools/vgauth/messages
@@ -180,7 +188,7 @@ index 0000000000..e70fd9b7d7
 +  * Pref values
 +  */
 +diff --git a/open-vm-tools/vgauth/common/usercheck.c b/open-vm-tools/vgauth/common/usercheck.c
-+index 31eeb5a77..145f1f056 100644
++index 3beede2e8..340aa0411 100644
 +--- a/open-vm-tools/vgauth/common/usercheck.c
 ++++ b/open-vm-tools/vgauth/common/usercheck.c
 +@@ -78,6 +78,8 @@
@@ -192,16 +200,11 @@ index 0000000000..e70fd9b7d7
 + /*
 +  * A single retry works for the LDAP case, but try more often in case NIS
 +  * or something else has a related issue.  Note that a bad username/uid won't
-+@@ -354,17 +356,29 @@ Usercheck_UsernameIsLegal(const gchar *userName)
-+     *
++@@ -354,12 +356,29 @@ Usercheck_UsernameIsLegal(const gchar *userName)
++     * restricted list for local usernames.
 +     */
 +    size_t len;
-+-#ifdef _WIN32
-+-   // allow '\' in for Windows domain usernames
 +-   char *illegalChars = "<>/";
-+-#else
-+-   char *illegalChars = "\\<>/";
-+-#endif
 ++   size_t i = 0;
 ++   int backSlashCnt = 0;
 ++   /*
@@ -230,7 +233,7 @@ index 0000000000..e70fd9b7d7
 + }
 + 
 +diff --git a/open-vm-tools/vgauth/serviceImpl/alias.c b/open-vm-tools/vgauth/serviceImpl/alias.c
-+index b28351eea..687d1b373 100644
++index 4e170202c..c7040ebff 100644
 +--- a/open-vm-tools/vgauth/serviceImpl/alias.c
 ++++ b/open-vm-tools/vgauth/serviceImpl/alias.c
 +@@ -41,6 +41,7 @@
@@ -331,7 +334,7 @@ index 0000000000..e70fd9b7d7
 ++   }
 ++
 +    /*
-+     * All sanity checks passed; read the bits.
++     * All confidence checks passed; read the bits.
 +     */
 +@@ -2803,8 +2847,13 @@ ServiceAliasRemoveAlias(const gchar *reqUserName,
 + 
@@ -448,7 +451,7 @@ index 0000000000..e70fd9b7d7
 +    g_free(escapedName);
 +    return pipeName;
 +diff --git a/open-vm-tools/vgauth/serviceImpl/serviceInt.h b/open-vm-tools/vgauth/serviceImpl/serviceInt.h
-+index ef49f42c2..c37f42fa6 100644
++index 5f420192b..f4f88547d 100644
 +--- a/open-vm-tools/vgauth/serviceImpl/serviceInt.h
 ++++ b/open-vm-tools/vgauth/serviceImpl/serviceInt.h
 +@@ -441,6 +441,7 @@ VGAuthError ServiceFileVerifyAdminGroupOwnedByHandle(const HANDLE hFile);
@@ -462,14 +465,14 @@ index 0000000000..e70fd9b7d7
 +-- 
 +2.49.0
 +
-diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-index 762ac4c0e9..b58b3ddb90 100644
---- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-+++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-@@ -49,6 +49,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=maste
-            file://CVE-2023-20900.patch;patchdir=.. \
-            file://CVE-2023-34058.patch;patchdir=.. \
-            file://CVE-2023-34059.patch;patchdir=.. \
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb
+index 82aab051f1..34ac34ba20 100644
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb
+@@ -43,6 +43,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=stabl
+            file://0012-hgfsServerLinux-Consider-64bit-time_t-possibility.patch;patchdir=.. \
+            file://0013-open-vm-tools-Correct-include-path-for-poll.h.patch;patchdir=.. \
+            file://0014-timeSync-Portable-way-to-print-64bit-time_t.patch;patchdir=.. \
 +           file://CVE-2025-22247.patch;patchdir=.. \
             "
  
