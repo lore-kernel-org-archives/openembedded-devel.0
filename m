@@ -2,189 +2,197 @@ Return-Path: <Moritz.Haase@bmw.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2046CC83F1A
-	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 12:53:48 +0000 (UTC)
-Received: from esa14.hc324-48.eu.iphmx.com (esa14.hc324-48.eu.iphmx.com [207.54.69.24])
- by mx.groups.io with SMTP id smtpd.web10.13172.1752238418917506184
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CAFBC83F1A
+	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 13:14:28 +0000 (UTC)
+Received: from esa11.hc324-48.eu.iphmx.com (esa11.hc324-48.eu.iphmx.com [207.54.69.30])
+ by mx.groups.io with SMTP id smtpd.web10.13674.1752239657842553224
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Jul 2025 05:53:41 -0700
+ Fri, 11 Jul 2025 06:14:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bmw.de header.s=mailing1 header.b=J+BTKe42;
- dkim=pass header.i=@bmw.de header.s=selector1 header.b=ntWmnQdS;
- spf=pass (domain: bmw.de, ip: 207.54.69.24, mailfrom: prvs=28004f72d=moritz.haase@bmw.de)
+ dkim=pass header.i=@bmw.de header.s=mailing1 header.b=CupbjbeI;
+ spf=pass (domain: bmw.de, ip: 207.54.69.30, mailfrom: prvs=28004f72d=moritz.haase@bmw.de)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
-  t=1752238419; x=1783774419;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=tkrwouaN7vQnLhgnAgfZ8Jt1OkBELhtdJgPM9Jx36YU=;
-  b=J+BTKe42PVWnBfFQUV8caT7mWH5rfF0x3kddDtQVAGV0Kot/pB/twB8o
-   gtWGXvZquJH/gEVLes3a03zsDXiRKikva7r+hBz+9PxlPr1O6PN1hqB9j
-   3LOzs5NieZH5MSiFX2sznwSTqjyn8ODNrFApDRs9eyjQZejZOMoZt3U2Y
+  t=1752239658; x=1783775658;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=WryLoskpgDeoukc6ArKLHh5kuMKtzKWH2Qeyc+YNba4=;
+  b=CupbjbeI8rB79ZuVVIEFWWwP6qMXl6HPauDLM6j029abNSqY4K66MEWr
+   0tCHFoaP2LTo7D5ACV1ltdi8+rSo6VYcUH7ylWChRUYzMb4hsHJbktmwK
+   PPjazR5fjc7JhoF8AwdyokH5Q3cGswhZ1ANAr/tYpsNVAU120bHu4JX20
    E=;
-X-CSE-ConnectionGUID: 7k0cJ4QBQHmpfVAYNZG7XA==
-X-CSE-MsgGUID: XNh7Mh+JTTmgi6sdMENVxQ==
-Received: from esagw4.bmwgroup.com (HELO esagw4.muc) ([160.46.252.39]) by
- esa14.hc324-48.eu.iphmx.com with ESMTP/TLS; 11 Jul 2025 14:53:34 +0200
-Received: from unknown (HELO esabb6.muc) ([10.31.187.137]) by esagw4.muc with
- ESMTP/TLS; 11 Jul 2025 14:53:34 +0200
-Received: from smucmp15a.bmwgroup.net (HELO smucmp15a.europe.bmw.corp)
- ([10.30.13.135]) by esabb6.muc with ESMTP/TLS; 11 Jul 2025 14:53:34 +0200
-Received: from smucmp15h.europe.bmw.corp (2a03:1e80:a15:58f::1:4f) by
- smucmp15a.europe.bmw.corp (2a03:1e80:a15:58f::1:68) with Microsoft SMTP
- Server (version=TLS; Fri, 11 Jul 2025 14:53:34 +0200
-Received: from smucdzmp14.europe.bmw.corp (192.109.190.59) by
- smucmp15h.europe.bmw.corp (10.30.13.142) with Microsoft SMTP Server
- (version=TLS; Fri, 11 Jul 2025 14:53:34 +0200
-Received: from outbound.mail.protection.outlook.com (192.109.190.1) by
- smtpedge.bmwgroup.net (192.109.190.59) with Microsoft SMTP Server
- (version=TLS; Fri, 11 Jul 2025 14:53:34 +0200
-Received: from DB3PR09MB6202.eurprd09.prod.outlook.com (2603:10a6:10:43a::13) by
- DB3PR09MB6203.eurprd09.prod.outlook.com (2603:10a6:10:42a::5) with
- Microsoft SMTP Server (version=TLS; Fri, 11 Jul 2025 12:53:31 +0000
-Received: from DB3PR09MB6202.eurprd09.prod.outlook.com
- ([fe80::ce00:c6f4:8427:f779]) by DB3PR09MB6202.eurprd09.prod.outlook.com
- ([fe80::ce00:c6f4:8427:f779%6]) with mapi id 15.20.8857.026; Fri, 11 Jul 2025
- 12:53:31 +0000
-X-CSE-ConnectionGUID: 1+7u4VB7SUuvJ3L2dWUBuA==
-X-CSE-MsgGUID: hs1plMfFSIaFxFCtKOm9fg==
-X-CSE-ConnectionGUID: rf0pef+jRcCz+RQpIbXKZQ==
-X-CSE-MsgGUID: GNpmudCORguDGJnUp/aXSQ==
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qE9eBxZ5zNFgUrXLOEd/ya/qCxMlH89hugbInw/bG+EKIXHuKUR+iuxHN2dZSppCKD/ISBx2jwRyrrPyD9lVFKARB2eQPgl8smdxXOmlShybiD8GJG4I8J8ELz876ofVEou9+kYSnM4n7/+163UzFKv8EegxyiGF8jnQP1xn9pqBtfVcpq6B/3z4ft4b33N18E1JlJtH7LNSk5ORqodq/UUhbbm74bq9u1whAnclp2BQb1I4Of7ci1DXVRT5nZq5wh+R0uVv6yo6Crmvru7jqBPdoon/3THaGdZiDO3LYlAgqjmaDdekUC0FAa+mbOT0o4GlK+NbzaMl/MTsRxt7fg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tkrwouaN7vQnLhgnAgfZ8Jt1OkBELhtdJgPM9Jx36YU=;
- b=RjlHd4vVLqC5FEmXVwh42VLux+o2ROpkMee2T3AsYKosJ2Q7EtnjSqolGDimVjwYLFxMLbUP+4lepe6w5BFRfuSBTKidCQNktrQu5nf2MUWGhYu4trHpsEbvSP1HMXgXNdVKbZh5Vvtn7FxFPobImvF1RHmz13KN30mQkM4v31yTd6jovGUljBpbqegdhd+XgGAu4Wpw3e44Ij+elGZy70OpaAoaQUTNe4vXXBLz5JkhVxurSvOx0d9cQeozktfnuqabucIWYA8PDMy5R8Uuh8dGPUUeArQ1GM9iZ7IP/LynV2E1jzuDelMbJ20dYu/JWdLHQJOVof+/RS5ga78z/w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=bmw.de; dmarc=pass action=none header.from=bmw.de; dkim=pass
- header.d=bmw.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmw.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tkrwouaN7vQnLhgnAgfZ8Jt1OkBELhtdJgPM9Jx36YU=;
- b=ntWmnQdSnLKErFvPAMagAKqhM/dTqh/WAHS7NZIwt0/502MI4cvHYael3FDnUlK6Hepw/hrYXCJ8NipFsiagpZiaNTonMcrk9xGqSm9wRB0RWpOhtUAMW7esN+ph1QM5tTZEVjg8aV7S7UqTpt6QIPLeq/Eg6RwfG/kbedQfo77w1U/oXx5vMiSdIFhL42X9b/Gybh9I8rDU+9EgAdHG7iVhB5Q/UJFRLKwE8J7pH2H24KamgGyToqdDVVOLoOOYu7tKp3ugZ1FNoYbYsRxzNaatvtkU9KCXLxEHZc0AMvacjl+6YXYfkjOXG6+zWbB5cgCn3nJcSiLtE6aNJIKRRg==
-From: "Haase Moritz, JD-62" <Moritz.Haase@bmw.de>
-To: "martin.jansa@gmail.com" <martin.jansa@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH 10/10] [RFC] vulkan-cts: upgrade 1.4.2.1 ->
- 1.4.3.1
-Thread-Topic: [oe] [meta-oe][PATCH 10/10] [RFC] vulkan-cts: upgrade 1.4.2.1 ->
- 1.4.3.1
-Thread-Index: AQHb8krT+Z225IRXmU2X/lqMvsQfLbQsuGQAgAAnmiE=
-Date: Fri, 11 Jul 2025 12:53:31 +0000
-Message-ID: <DB3PR09MB620201E29FFC898EA3D19F44EA4BA@DB3PR09MB6202.eurprd09.prod.outlook.com>
-References: <20250711100052.255467-1-Moritz.Haase@bmw.de>
- <20250711100052.255467-11-Moritz.Haase@bmw.de>
- <CA+chaQckg=5Q4KfAB7T+6e6vLLc-5zGxpvVCCfz0_i3Z7=uD_w@mail.gmail.com>
-In-Reply-To: <CA+chaQckg=5Q4KfAB7T+6e6vLLc-5zGxpvVCCfz0_i3Z7=uD_w@mail.gmail.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=bmw.de;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB3PR09MB6202:EE_|DB3PR09MB6203:EE_
-x-ms-office365-filtering-correlation-id: 84a73ca7-4399-40ea-011a-08ddc079f079
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|376014|19092799006|1800799024|366016|38070700018;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?nHZqKvrCanQnaKJp1XLvclsV8bhc2gF+163Bjn5cv6jj171/kzp1MGWveb?=
- =?iso-8859-1?Q?SUfc8hMKknWG6t0esgSF0OoKYkPlO8xdq4/WATz8+Fobk7SmnDWG/Sy2CZ?=
- =?iso-8859-1?Q?S5r1mKLOwtSlQmD9+gvYetJKYBvwV4kSZd+J87DjiisRsLKl4+MlNRszLk?=
- =?iso-8859-1?Q?+LcT6Nt6GC3142+oBdVH1c11yiUWWk2TyueZDt58La8PS+Vcc/PYpXD2wQ?=
- =?iso-8859-1?Q?YQcF8eKunSkfqkBpXJQDHRw3RNACIY2hLhu5SaD/S6LFiVgGqTOvoChug0?=
- =?iso-8859-1?Q?rvWHbcDu3ZIkUsLYK4mhvVG8g47NTq0cFkA5hgBy8etayPPNlx/VaKELnW?=
- =?iso-8859-1?Q?diG77T8aXKJL+SCbYXqujMmCS6XK7oFFSnLyW3zdxebg4neupUNUNtR/2G?=
- =?iso-8859-1?Q?w4Cu/JePxHnPZVFLdlRBz4jx05YepK3FEbXtHV0gGs0HED8eMn1ug+gXdP?=
- =?iso-8859-1?Q?vd90NKlsa8K6L6BbAP6r6Qi3k2lBXNPxawJRMhDI+w3g1vTWPVQ+3xcud4?=
- =?iso-8859-1?Q?j+lE72+DDYZnPYO5oNIUHzxdjOfGFIhYBFXU2KykAl9hmmv8EFtH9munwp?=
- =?iso-8859-1?Q?b9I9klXGx3pQ34yXnvBUqmupEJv1gKzp68RKR/Mg7GFNtMeK+WL14VQD4+?=
- =?iso-8859-1?Q?cnODmOg9V2iSdTIF/ls/W2oNJu4EUc9fZTWqnyGPmkbSL7mJqZcDauiWb2?=
- =?iso-8859-1?Q?VHUExemPkH1lqiAOAKTWdSEjZKosxHXritFzRJeYPCx8rfVe6qazCL3vZN?=
- =?iso-8859-1?Q?lSrWOcNzGGeQ6p9oBiWCjT8HYTw1zGfY0cwoshP9zzByXiWFtJEotuhAS0?=
- =?iso-8859-1?Q?os+VLUwXziU4OzmxcCmAwsOf+Ny8Jg6Q85liHU5SA+X6Hg/RUe8+7d9/5F?=
- =?iso-8859-1?Q?FcQFwmJf1WXrjwlGBGazYkgmUCY1O5rbfcOTGm6z8ZQsWemYMRTD1eBHf6?=
- =?iso-8859-1?Q?wkGXxm9Y39lEVrBXra+DUKiScqsm3Yu3FQQG5UX277H/VAwMbBtLbHGYTd?=
- =?iso-8859-1?Q?OrEm6D4G/8TPddl2jIrEr2gQzyfd10LLIJ9h2yW51VTEmHdVzMSNo+gBPg?=
- =?iso-8859-1?Q?Ih20562AnraZ27T2a6LS0TkAwJEQQF9RuCrOdiREBWEYbpuBdg3TRsraRs?=
- =?iso-8859-1?Q?c208wky1Zu/S+MORtU+MxUtnUOpaQuBJ3TbaAe8SgFCMFv5YvjfIFbaBze?=
- =?iso-8859-1?Q?w0NIj6WFbU6HPQCYUvGNjLgnvMCcZYsCPeJ4/psMdutFJHxT4lJmU3LT6I?=
- =?iso-8859-1?Q?lT0exANgKDnI9d+fraHP6mvXVnyn3EORrLD3DRlalikZ6F+PjiFHfUZoox?=
- =?iso-8859-1?Q?rbjkw5yLITMnv1Z932T2zGZjSH/88QTxYCyb7UlUsjOXsV9XVZFy/EaDSS?=
- =?iso-8859-1?Q?OFX0WSl07I4NE2EvUCgnPtmhRLIGSksAy9D5l+g2Otl1+f3xAxAq039sJX?=
- =?iso-8859-1?Q?LJCDKUpmyAlhrwOjvLh/Y9i/lqjRet5TbAfq6xxqSJVgjPtf38zKek6BJC?=
- =?iso-8859-1?Q?I=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB3PR09MB6202.eurprd09.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(19092799006)(1800799024)(366016)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?XqL2ZJIwdWEgsm2Xjur8hVD3v52EClTD9QzRzoh96pbtLQsyWC1U0O5UEH?=
- =?iso-8859-1?Q?vxwJUKCvi+TyVyVwvrFpKD7qBxxmYnoU2Z4z+0I95fleQ53Ouqs2uFXXUo?=
- =?iso-8859-1?Q?xAvsa2/4ycyx48Q5V8u1q4jjo2xtoaMG0iH0w8OUQ4U606SYTCm1QhYYFU?=
- =?iso-8859-1?Q?hCHP1Tb7be3C7dv0XkSBYJkIYy4ghs6glBgQE5uN0isaMlLylQRbgTkEB5?=
- =?iso-8859-1?Q?ZK2T0c9xZC86aVdTM14yGJ5P+zb8oydsxsabI5SjAYZU8N/ThR89Zvt0Hc?=
- =?iso-8859-1?Q?NnlMi9jncKRImKwiKDBfSzCRrrsNsXFtfmZEJlRk0UI6ZAPsGxA6djk6H+?=
- =?iso-8859-1?Q?zb5R7x5IJkdWYYYNfVUIvxvsORPLHTA7T8eGEX8SmCh4//J7neuW1bahNE?=
- =?iso-8859-1?Q?/ZpAlNhAqqbATWHClrsE0cjKAwZZZ7KhljX3hmddCYCTXAbuoOV8nDAuGm?=
- =?iso-8859-1?Q?dgkRbFQ1/B9q7TwraRVMXk2bP142qADuMbeCANOEh3UL2BSBsvtcPovPqp?=
- =?iso-8859-1?Q?wqSr7AdYxTJmrHnwDUWJK8Zss2uZkbonOpP6+HgUdFeyIoGDnM4qLXmgNz?=
- =?iso-8859-1?Q?e+LqFKRgPr07+yfwriFl0R+Pft1kt/yMSQ0pE7xaLgqeSyNiP83vbWa61d?=
- =?iso-8859-1?Q?NS4wjA1XUhog+tB1erHzfvV2OdtZCWc6sVv57L1Qana8dGOX0gj7JKTOxo?=
- =?iso-8859-1?Q?GOjrCbV2XcExyzvKE7uHZSqkkr3VEEBlneMCSHJKVhCsGCOQThMTwYlu2i?=
- =?iso-8859-1?Q?bOhFBOTPOUXMNs3+ecXlhLB4njbNXUccC5hypBu0baUNw2EPBPPZHrSbuU?=
- =?iso-8859-1?Q?Z1+JsDIUqfBhd1yrySzXVt/sYyMihPqyD2SDg0ubVJfOqQWTCbazQ2yPpS?=
- =?iso-8859-1?Q?z/A6FLyVDePgon/q4JNhjqjKi7DaYZTev92aHjVU8m3Uj0xzpNzIRWPvyE?=
- =?iso-8859-1?Q?83WLYiUXvWtslevEnuf24oeEkIoJaUKnK0u6OUlFnNVqmTFDo6HdPPY2Lp?=
- =?iso-8859-1?Q?zodlfxz+sZ7ntO4K1Lu/KZtcjsJeTJoY78zT3Vbg3673hr/WjWeiEcuT6R?=
- =?iso-8859-1?Q?yQW59MKQ15JyWNdgYD1p1IsHHerHz5t633EhT18X6vPEEAegxY8NVmuY9O?=
- =?iso-8859-1?Q?7uVokS4q6ZT7OQbeB0HguzJiSEo9usIKKk3/1WaDokCcCa1X0OcvihEj04?=
- =?iso-8859-1?Q?k+pAIV94MmgVQkSCMRLXZzhcposyRTSTCQ0yU5nRN4s8tfluXHYobXO4sO?=
- =?iso-8859-1?Q?6ZH3tkcrhbkh0Y1n+lixYnjN3o0gJCxvcL3VwFCTxLG5dQ6z9UnclnPefE?=
- =?iso-8859-1?Q?dw9RYdsRyiNhvhqPvZS7FkTKOx8DE62QEgshfZxkgEepR1DDICPMXs8CuD?=
- =?iso-8859-1?Q?OjXBNms3ddUssxSuR7R66Sp8XgSq/wfwBaJdmeEmJDQlIfWsSeSldJQLan?=
- =?iso-8859-1?Q?0fuggi0jJ3z4OzRVv/LbSMkpJj2nuLp2TSCwf7CPHjE2QZNLr91yIYtYVy?=
- =?iso-8859-1?Q?XbiTyBGOJ1AB4cLMilPbawTuYhFpArbSa4yPB9q6hX80U+nzMK/BgCGBT+?=
- =?iso-8859-1?Q?wgLb9NO+fdsskLG3ak0DvhHCiHWlfpBjgu+EHljdNY0E+uL576uSObv8LP?=
- =?iso-8859-1?Q?tM2FPmFjmN5WPP1ECTWVkIXE7PBOiJkGgD?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-CSE-ConnectionGUID: k0A0QCQHT7ilKFiUjrGOmA==
+X-CSE-MsgGUID: a1W/TZd/SW2qMGp6Zkn2Gw==
+Received: from 160.46.252.38.spf.bmwgroup.com (HELO esagw2.muc) ([160.46.252.38]) by
+ esa11.hc324-48.eu.iphmx.com with ESMTP/TLS; 11 Jul 2025 15:14:16 +0200
+Received: from esabb1.muc ([160.50.100.31])  by esagw2.muc with ESMTP/TLS;
+ 11 Jul 2025 15:14:14 +0200
+Received: from smucmp12a.bmwgroup.net (HELO smucmp12a.europe.bmw.corp) ([10.30.13.95])
+ by esabb1.muc with ESMTP/TLS; 11 Jul 2025 15:14:13 +0200
+Received: from q1054628.de-cci.bmwgroup.net (10.30.85.211) by
+ smucmp12a.europe.bmw.corp (2a03:1e80:a15:58f::1:9) with Microsoft SMTP
+ Server (version=TLS; Fri, 11 Jul 2025 15:14:12 +0200
+X-CSE-ConnectionGUID: NxZ2m/nqRmuGVGSk+Gnaug==
+X-CSE-MsgGUID: QixY5FgpQ7mfqHIsPbWWaw==
+X-CSE-ConnectionGUID: 8DBSJV99TtKO4QMhD0ppXA==
+X-CSE-MsgGUID: lC3MwwnjQDOXPShhpjvyqQ==
+From: Moritz Haase <Moritz.Haase@bmw.de>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Moritz Haase <Moritz.Haase@bmw.de>
+Subject: [meta-oe][PATCH v2 10/10] vulkan-cts: upgrade 1.4.2.1 -> 1.4.3.1
+Date: Fri, 11 Jul 2025 15:12:55 +0200
+Message-ID: <20250711131254.303582-2-Moritz.Haase@bmw.de>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB3PR09MB6202.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 84a73ca7-4399-40ea-011a-08ddc079f079
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Jul 2025 12:53:31.4489
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: ce849bab-cc1c-465b-b62e-18f07c9ac198
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 0Ix+bhPlhG68M/S5jn/P2CeAzN3yxstWqvpYygjdVR5As9IFTsmzlAbBbXIPBFuFjeWI12VFjTXshw1T0Ntfgg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR09MB6203
-X-OriginatorOrg: bmw.de
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: smucmp17c.europe.bmw.corp (2a03:1e80:a15:58f::1:46) To
+ smucmp12a.europe.bmw.corp (2a03:1e80:a15:58f::1:9)
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 12:53:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118448
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 13:14:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118449
 
-Hi Martin,=0A=
-=0A=
-> Isn't it because in this change you have (probably accidentally)=0A=
-> changed the destsuffix in SRC_URI?=0A=
-=0A=
-awesome, thanks! Totally missed that. I updated the file using=0A=
-=0A=
-    bitbake -c refresh_srcuri vulkan-cts=0A=
-=0A=
-but the script is broken, as it wasn't adapted to recent UNPACKDIR changes=
-=0A=
-apparently. The SRC_URI entries were only updated manually in [0]. After=0A=
-adapting the script, the build passes. Will send v2 tomorrow.=0A=
-=0A=
-Moritz=0A=
-=0A=
-[0]: https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-=
-graphics/vk-gl-cts/vulkan-cts-sources.inc?h=3Dmaster-next&id=3Dfc78d37ff0ce=
-9e0d60455465851dbe4e86d7a8b3=0A=
+New version includes support to build against CMake 4+.
+
+Release notes are available at [0].
+
+The SRC_URI update helper script required adaptations, as it was broken by
+recent Poky changes. The SRC_URI entries were only updated manually back then
+via [1].
+
+[0]: https://github.com/KhronosGroup/VK-GL-CTS/releases
+[1]: https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc?h=master-next&id=fc78d37ff0ce9e0d60455465851dbe4e86d7a8b3
+
+Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
+---
+ ...LAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch | 29 -------------------
+ .../vk-gl-cts/files/generate-srcuri.py        |  8 +++--
+ .../vk-gl-cts/khronos-cts.inc                 |  1 -
+ .../vk-gl-cts/vulkan-cts-sources.inc          | 17 +++++------
+ ...n-cts_1.4.2.1.bb => vulkan-cts_1.4.3.1.bb} |  2 +-
+ 5 files changed, 15 insertions(+), 42 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/vk-gl-cts/files/0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch
+ rename meta-oe/recipes-graphics/vk-gl-cts/{vulkan-cts_1.4.2.1.bb => vulkan-cts_1.4.3.1.bb} (92%)
+
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch
+deleted file mode 100644
+index 9eef9a702e..0000000000
+--- a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From ec12bb7bda60cdf2c848e13df67452a7d30a42be Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 3 Sep 2022 18:52:42 -0700
+-Subject: [PATCH] cmake: Define WAYLAND_SCANNER and WAYLAND_PROTOCOLS_DIR if
+- not already defined
+-
+-This helps with cross compiling and providing these knobs from cmake
+-cmdline
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- framework/platform/CMakeLists.txt | 8 ++++++--
+- 1 file changed, 6 insertions(+), 2 deletions(-)
+-
+---- a/framework/platform/CMakeLists.txt
+-+++ b/framework/platform/CMakeLists.txt
+-@@ -83,8 +83,9 @@ if (NOT DEFINED TCUTIL_PLATFORM_SRCS)
+- 				configure_file(${WAYLAND_XDG_SHELL_SRC_DIR}/xdg-shell.c ${DEQP_XDG_SHELL_GEN_OUTPUTS_DIR}/xdg-shell.c COPYONLY)
+- 				configure_file(${WAYLAND_XDG_SHELL_SRC_DIR}/xdg-shell.h ${DEQP_XDG_SHELL_GEN_OUTPUTS_DIR}/xdg-shell.h COPYONLY)
+- 			else ()
+--				pkg_get_variable(WAYLAND_PROTOCOLS_DIR wayland-protocols pkgdatadir)
+--
+-+				if (NOT WAYLAND_PROTOCOL_DIR)
+-+					pkg_get_variable(WAYLAND_PROTOCOLS_DIR wayland-protocols pkgdatadir)
+-+				endif()
+- 				if (NOT WAYLAND_SCANNER)
+- 					pkg_get_variable(WAYLAND_SCANNER wayland-scanner wayland_scanner)
+- 				endif()
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/generate-srcuri.py b/meta-oe/recipes-graphics/vk-gl-cts/files/generate-srcuri.py
+index c2756b592c..3f64e9dc4a 100755
+--- a/meta-oe/recipes-graphics/vk-gl-cts/files/generate-srcuri.py
++++ b/meta-oe/recipes-graphics/vk-gl-cts/files/generate-srcuri.py
+@@ -53,11 +53,15 @@ def convert_fetch(basedir):
+             # Ignore these as so far we can use the system copies
+             pass
+         elif isinstance(p, fetch.SourceFile):
+-            dest = "/".join(["git/external", p.baseDir, p.extractDir])
++            dest = "/".join(
++                ["${BB_GIT_DEFAULT_DESTSUFFIX}/external", p.baseDir, p.extractDir]
++            )
+             url = f"{p.url};subdir={dest};sha256sum={p.checksum}"
+             lines.append(f"    {url} \\")
+         elif isinstance(p, fetch.GitRepo):
+-            dest = "/".join(["git/external", p.baseDir, p.extractDir])
++            dest = "/".join(
++                ["${BB_GIT_DEFAULT_DESTSUFFIX}/external", p.baseDir, p.extractDir]
++            )
+             url = transform_git(p.httpsUrl, p.revision, dest)
+             lines.append(f"    {url} \\")
+         else:
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+index 1cc2da7a49..67a0dc564c 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+@@ -2,7 +2,6 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+ SRC_URI = "git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts;nobranch=1 \
+-           file://0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch \
+            file://0001-use-library-sonames-for-linking.patch \
+            file://generate-srcuri.py \
+            "
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
+index 563da1007a..8d70bf08c3 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
+@@ -6,21 +6,20 @@
+ RECIPE_UPGRADE_EXTRA_TASKS += "do_refresh_srcuri"
+ 
+ python __anonymous() {
+-    if d.getVar("PV") != "1.4.2.1":
++    if d.getVar("PV") != "1.4.3.1":
+         bb.warn("-sources.inc out of date, run refresh_srcuri task")
+ }
+ 
+ SRC_URI += " \
+     https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/external/renderdoc/src;sha256sum=e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e \
+-    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-tools/src;rev=3364b982713a0440d1d342dd5eec65b122a61b71 \
+-    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/glslang/src;rev=1b65bd602b23d401d1c4c86dfa90a36a52c66294 \
+-    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-headers/src;rev=767e901c986e9755a17e7939b3046fc2911a4bbd \
+-    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-docs/src;rev=645c59c70e826d9738b6bb103316c03d887dfed3 \
+-    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-validationlayers/src;rev=6cf616f131e9870c499a50441bca2d07ccda9733 \
+-    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/amber/src;rev=6fa5ac1fb3b01c93eef3caa2aeb8841565e38d90 \
++    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-tools/src;rev=f06e0f3d2e5acfe4b14e714e4103dd1ccdb237e5 \
++    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/glslang/src;rev=963588074b26326ff0426c8953c1235213309bdb \
++    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-headers/src;rev=6d0784e9f1ab92c17eeea94821b2465c14a52be9 \
++    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-docs/src;rev=112aee75d162412a4623e7d22a3de52e0233cbf5 \
++    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-validationlayers/src;rev=6ae58a2b17b2bcebdc5377995007391b85ffa10f \
++    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/amber/src;rev=57ba1ca211b6f4890c013dcf42cb16069ae916dd \
+     git://github.com/open-source-parsers/jsoncpp.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/jsoncpp/src;rev=9059f5cad030ba11d37818847443a53918c327b1 \
+     git://github.com/Igalia/vk_video_samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/nvidia-video-samples/src;rev=45fe88b456c683120138f052ea81f0a958ff3ec4 \
+-    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-video-samples/src;rev=0e87744edbb84c9c56c3fc8de9ea5150af5ee4ea \
++    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-video-samples/src;rev=a22e0084e6f38a16dc0dcebb4c19a14651a6665b \
+     git://github.com/Igalia/video_generator.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/video_generator/src;rev=426300e12a5cc5d4676807039a1be237a2b68187 \
+-    file://0001-Fix-missing-include-cstdint-causing-build-failures.patch;patchdir=external/amber/src \
+ "
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.2.1.bb b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.3.1.bb
+similarity index 92%
+rename from meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.2.1.bb
+rename to meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.3.1.bb
+index abbd026047..3f7a2480ef 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.2.1.bb
++++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.3.1.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Vulkan CTS"
+ 
+ require khronos-cts.inc
+ 
+-SRCREV_vk-gl-cts = "644f10ca39dea3b7d9dbadaa75c56206b499a520"
++SRCREV_vk-gl-cts = "1ef11bc7acde6b53a499de73db4cf78db9572710"
+ 
+ require vulkan-cts-sources.inc
+ 
 
