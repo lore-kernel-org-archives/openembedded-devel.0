@@ -1,100 +1,178 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E2D4C83F17
-	for <webhook@archiver.kernel.org>; Thu, 10 Jul 2025 20:54:59 +0000 (UTC)
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
- by mx.groups.io with SMTP id smtpd.web10.85.1752180894307606439
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE6E6C83F17
+	for <webhook@archiver.kernel.org>; Fri, 11 Jul 2025 00:01:33 +0000 (UTC)
+Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
+ by mx.groups.io with SMTP id smtpd.web11.2069.1752192090400526654
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 10 Jul 2025 13:54:54 -0700
+ Thu, 10 Jul 2025 17:01:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ddlRYbul;
- spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-70e767ce72eso14395427b3.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 13:54:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cn/Q4zyb;
+ spf=pass (domain: gmail.com, ip: 209.85.219.176, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-e8259b783f6so1307483276.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 17:01:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752180893; x=1752785693; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ywC7fm8uSzN6KTe/S6b02mNYPu1VB9RuPXQDM4Rsk1Y=;
-        b=ddlRYbulBVwiAmlE9HKiHkZYFwWeI+GBAPt/IZdPXmiCk3rlomv3FFeBRyjNwXANBZ
-         FWYsYrI++WOKgP7Z0OqG8jNj5oqiyuZzGGqGT0NTCqUW4a2ZoJLX5b3NBSUGdwSmRL6w
-         GMINhXKcM6FpffWM+xMzekJ2fjMwh6p9p2YgvrBsheWiByoDb355BhkKtid20xODtr3k
-         AjNPB8pNw3KaB/utGxi+EgGWk9bzqGOVwHZCH1dG9irjaH1VAc/6ZSfC3wEFXReMxJfV
-         gVqnm9LHpWnLziMH04EJ9aegK2Pd3TpA14C4VjTVbHXRS42HFb/0Rs7UeVhARYrw0eZc
-         J6iQ==
+        d=gmail.com; s=20230601; t=1752192089; x=1752796889; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=dp4tAydIhq4CVscU6J749dxp9vhXF5I8AX+1ETiyQH4=;
+        b=cn/Q4zybIdEGGMel6huO8HKB/Qj3YBqoPU6lH7kUZHySv95d5eYuLHO45CDVLqR8wj
+         J9vn59ZtyH5aKVjQiarnwBW6QJd3gA7o9+3ppmO+BRrCddGdPaHoOstjSBCsbX4c52i8
+         lsZHjaaQoNmNmVSAc1/VBvGKeC89jqJPt4aWrcConf9gbN8p6J6uqHUe9Wag9IJnK1W0
+         /uq99BOabFA2S+02aY1/PhZphZ5I8mVlj2UDVRoklB4wU9mZd7BaJagmOfD/JkeJlESN
+         uOS5+d9pXrCI7krnHjXSkyZdpgcXL3R8FB5N7JeNrrVS/uGBLGUVZw8Ffd2hqqlDDEn3
+         +DsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752180893; x=1752785693;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ywC7fm8uSzN6KTe/S6b02mNYPu1VB9RuPXQDM4Rsk1Y=;
-        b=eW6MIuTLo19vjuy+xROOYW15ltjGSGj48Eq9Gasnt/BdBKaMCHXjInaRRuw0ZX+aet
-         Y6v2QeZfgYehf+DIAzmLVe9znXlmeOh0P1jcsld4oPrmsETc1uX9AEDiaU1tjt+9/uJS
-         vhxYUv3joQ9WnZ05e8pjQnPYwMbuuOcV7xTa+QCqYJlcVWFBfnPYWV+bb6LgU5h3UDFy
-         zB2S3IJki+h/T6r1YHWCC05N6CQXggxl5mVxVzX5l3qQ5jFttwDlTBIN/6UpLWRh4ywX
-         STbbJ9XOcj0r3wPemBmAee74uI/Z4knsBHmc2hpCrGOLFNNs6B6DXTFD9fMLv2YCYtbQ
-         htyQ==
-X-Gm-Message-State: AOJu0YwtdyTA3SQRDv3M51GBpfgdjPPmJ0mkjUbE4rfXc+caFwflbjOC
-	N/T/UbXupWK8mUftjKgZq1y5SoTGUn6W9rPv+pxJ1qFCsDJM6YfBzHztPpa2HIUk
-X-Gm-Gg: ASbGncs8BvgIGNCMP52u1O5jK/iJKT1X7f2RS+ylpfGeZnwuRTdqxDais5PZFhLshgk
-	gVtOMiL2EwTJPLLj3Zxwk6WolyjRp1T38X+ZaMl6c1H+2Cvd5x6ZM0b7EvKAtdfgHeBymj/KHO8
-	6hKKcDb4jy9cbjtHhF5tdMPY3t+/PPzG3GFEoA3U6HXBEZ2So22QAu+aMLTZZNwgkz8yAcnThHO
-	wpKz/Meyo4Oz+czG8A9aaVjkyGZMQjOyPCvO0bhSu7kTLHvj6dxjq5iX/ozpfe/bIyeb++iysn3
-	WnvPHYaNJEcugStwzG3qHjK/MaR08ngVzBU8Qvf7R8npkTqNHobRmI+RIU223576GZhqT4YqOFB
-	4UC8AUgnwXSkrO0tCbiOh508+qLNqKVaVjfdX56qqW0Pxk8GAiOUX3uJ9
-X-Google-Smtp-Source: AGHT+IE0DsuESv7CrK8HZznqOtFXtbRKanN2BnLBnSAGRDA7yu3xoH9SYCoSo8nYpdE9IY8JYRg2LA==
-X-Received: by 2002:a05:690c:4911:b0:710:ead5:8a95 with SMTP id 00721157ae682-717d5bcbf47mr18556537b3.14.1752180892895;
-        Thu, 10 Jul 2025 13:54:52 -0700 (PDT)
-Received: from localhost.localdomain (71-208-4-221.ftmy.qwest.net. [71.208.4.221])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-717c61b4cf6sm4515407b3.68.2025.07.10.13.54.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jul 2025 13:54:52 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH 3/3] xfce4-cpugraph-plugin: upgrade 1.2.8 -> 1.2.11
-Date: Thu, 10 Jul 2025 16:54:12 -0400
-Message-ID: <20250710205412.788186-3-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250710205412.788186-1-schonm@gmail.com>
-References: <20250710205412.788186-1-schonm@gmail.com>
+        d=1e100.net; s=20230601; t=1752192089; x=1752796889;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=dp4tAydIhq4CVscU6J749dxp9vhXF5I8AX+1ETiyQH4=;
+        b=KIq/7nuBXY8vZLbbPHNxuMhiQL3K2ZwiJ5IDpOPXO2Q5/H9JprQuLextoZ9ivKkNtO
+         +ryq8YOdXVwOi0nsSeXQJ1XBSXK0KtOU4sjQyhDmGkzVQRBwymVxVaMbl5fG8sd75lKN
+         OSjaPw6JRWN6mUrwDlPcvmY5GN5Qv29P19v2n/9LekNURIKz54SD1BbNOGyhExSZs9jG
+         P1LkVtNeQByI2Hx5NtYwiCK0NR/1aY6JfGx2HVC8nssTrVJga7/xbqd/Hat5Q/H6uS3z
+         ONKbGsAXtZKYN71LkRFe2SazwAbZVynTTSY7Hku/9q28ELxTI6yql5ZCe1HfZjP2IzU+
+         1KXw==
+X-Forwarded-Encrypted: i=1; AJvYcCVqsX/Hr06kTU1G8v/M0WcQD73biCeNs4QoqGOA2JQG5ZCUCsAOSbP/VyG7JLsvMgXk8eH4Sv6iiS1SgaJ2Nc60+Mg=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyK4FnFBon6WAvTpbCSmPlkskuL8/4bXF3uzIgSca2LIbWN6JVA
+	KEMf7P3RJRFRNVwPXqhh5mwrl9qy8l1P8vEddOayOUQgvpKBgtxdsRzc
+X-Gm-Gg: ASbGncsJnt4p5Sb1e8LobG6f62pMx62PFCpsK0I+ZOKmPNdOP3KZboxH+Q9CztLgwCS
+	Fr0DQ26lADSrv6y3heHm6yK7whU62lMHmwOHA4DC1MfgOutuCo0n5I8UndBqB3K0lnKYuFxJ286
+	ukrz4KCjsAkMsVEDLIjG5Z7/G8P8vKh8vIh1OuPkf3L6YK2Ahq+UfXjSxp4HdpL8EZVEsF9CAJ1
+	0jJPFxy25AuRk8toSKJd1/3dvaEhKKd0ibpZk/l+eyIQFfDWl80Kq3XMsQ5oV0nAISvmTSJ0fHv
+	UZCsMRSPcZt7Ek5XfOwfTrKTV7rVNAcFeU8IBBUm7WsUuwGQk6PnaD2fS6Tfft4kX0rYoMDpLNb
+	qJrvXtXTo4VTWuSYE++KGVbDSJQHp5GOQuA5qf7w223HkIXPpVzVbW6xy1Fq5/5PL0kQQehc=
+X-Google-Smtp-Source: AGHT+IGzBsOeN+vKjJ7Tl5AhGmSladKPcFnesJ76XwekR8GiRrIS46l6Ych6Ye+vm3TaGlUBqk1OsQ==
+X-Received: by 2002:a05:6902:6c03:b0:e7d:a7c7:3f34 with SMTP id 3f1490d57ef6-e8b85b02395mr951095276.32.1752192089299;
+        Thu, 10 Jul 2025 17:01:29 -0700 (PDT)
+Received: from ?IPV6:2600:1700:45dd:7000:7437:3f28:cfa:3bd4? ([2600:1700:45dd:7000:7437:3f28:cfa:3bd4])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-e8b7ae68baesm730703276.23.2025.07.10.17.01.28
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 10 Jul 2025 17:01:28 -0700 (PDT)
+Message-ID: <b868df60-4d34-4e20-9003-0496eb3e76b7@gmail.com>
+Date: Thu, 10 Jul 2025 20:01:28 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-oe][scarthgap][PATCH] imagemagick: Fix CVE-2022-28463
+To: Virendra Thakur <thakur.virendra1810@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20250706063626.818120-1-thakur.virendra1810@gmail.com>
+Content-Language: en-US
+From: akuster808 <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+In-Reply-To: <20250706063626.818120-1-thakur.virendra1810@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 10 Jul 2025 20:54:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118425
+ <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 00:01:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118426
 
-Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-cpugraph-plugin/-/tags/xfce4-cpugraph-plugin-1.2.11
 
-Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-cpugraph-plugin/-/tags/xfce4-cpugraph-plugin-1.2.10
 
-Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-cpugraph-plugin/-/tags/xfce4-cpugraph-plugin-1.2.9
+On 7/6/25 2:36 AM, Virendra Thakur wrote:
+> ImageMagick is vulnerable to Buffer Overflow.
+>
+> Reference: https://github.com/ImageMagick/ImageMagick/commit/ca3654ebf7a439dc736f56f083c9aa98e4464b7f
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- ...cpugraph-plugin_1.2.8.bb => xfce4-cpugraph-plugin_1.2.11.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-panel-plugins/cpugraph/{xfce4-cpugraph-plugin_1.2.8.bb => xfce4-cpugraph-plugin_1.2.11.bb} (76%)
+The recipe version is for kirkstone.
 
-diff --git a/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.8.bb b/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.11.bb
-similarity index 76%
-rename from meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.8.bb
-rename to meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.11.bb
-index b240eaad5e..052046b0c5 100644
---- a/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.8.bb
-+++ b/meta-xfce/recipes-panel-plugins/cpugraph/xfce4-cpugraph-plugin_1.2.11.bb
-@@ -5,4 +5,4 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=415654f59d8fa70fe4eac2c3f86c8f5e"
- 
- inherit xfce-panel-plugin
- 
--SRC_URI[sha256sum] = "bfb438ce21f37d57241b2596d72aa4bf47587cd5a8833fc30a9599616f75d4bf"
-+SRC_URI[sha256sum] = "58aa31df1934afc2a352744754a730a3d796b1246e12c7a5e86f7b6a403ca20d"
--- 
-2.43.0
+- armin
+>
+> Signed-off-by: Virendra Thakur <thakur.virendra1810@gmail.com>
+> ---
+>   .../imagemagick/files/CVE-2022-28463.patch    | 27 +++++++++++++++++++
+>   .../imagemagick/imagemagick_7.0.10.bb         |  5 +++-
+>   2 files changed, 31 insertions(+), 1 deletion(-)
+>   create mode 100644 meta-oe/recipes-support/imagemagick/files/CVE-2022-28463.patch
+>
+> diff --git a/meta-oe/recipes-support/imagemagick/files/CVE-2022-28463.patch b/meta-oe/recipes-support/imagemagick/files/CVE-2022-28463.patch
+> new file mode 100644
+> index 0000000000..c7730957bc
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/imagemagick/files/CVE-2022-28463.patch
+> @@ -0,0 +1,27 @@
+> +From ca3654ebf7a439dc736f56f083c9aa98e4464b7f Mon Sep 17 00:00:00 2001
+> +From: Cristy <urban-warrior@imagemagick.org>
+> +Date: Sat, 26 Mar 2022 09:26:57 -0400
+> +Subject: [PATCH] https://github.com/ImageMagick/ImageMagick/issues/4988
+> +
+> +Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/ca3654ebf7a439dc736f56f083c9aa98e4464b7f]
+> +
+> +CVE: CVE-2022-28463
+> +Signed-off-by: Virendra Thakur <virendra.thakur@kpit.com>
+> +
+> +---
+> + coders/cin.c | 2 ++
+> + 1 file changed, 2 insertions(+)
+> +
+> +diff --git a/coders/cin.c b/coders/cin.c
+> +index e266e7f3c56..23fc17e0890 100644
+> +--- a/coders/cin.c
+> ++++ b/coders/cin.c
+> +@@ -451,6 +451,8 @@ static Image *ReadCINImage(const ImageInfo *image_info,ExceptionInfo *exception)
+> +   image->endian=(magick[0] == 0x80) && (magick[1] == 0x2a) &&
+> +     (magick[2] == 0x5f) && (magick[3] == 0xd7) ? MSBEndian : LSBEndian;
+> +   cin.file.image_offset=ReadBlobLong(image);
+> ++  if (cin.file.image_offset < 712)
+> ++    ThrowReaderException(CorruptImageError,"ImproperImageHeader");
+> +   offset+=4;
+> +   cin.file.generic_length=ReadBlobLong(image);
+> +   offset+=4;
+> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+> index b8167f5a72..db786ea3a5 100644
+> --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+> +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+> @@ -11,7 +11,10 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
+>   
+>   BASE_PV := "${PV}"
+>   PV .= "-62"
+> -SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
+> +SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
+> +           file://CVE-2022-28463.patch \
+> +           "
+> +
+>   SRCREV = "35b4991eb0939a327f3489988c366e21068b0178"
+>   
+>   S = "${WORKDIR}/git"
 
 
