@@ -2,196 +2,91 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6B77C83F1A
-	for <webhook@archiver.kernel.org>; Sat, 12 Jul 2025 00:07:51 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
- by mx.groups.io with SMTP id smtpd.web10.27309.1752278865379246109
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68AC4C83F1B
+	for <webhook@archiver.kernel.org>; Sat, 12 Jul 2025 01:38:32 +0000 (UTC)
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web11.28397.1752284310250428892
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 11 Jul 2025 17:07:45 -0700
+ Fri, 11 Jul 2025 18:38:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WkcoCpeq;
- spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-710bbd7a9e2so25950207b3.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 17:07:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eBHGysrA;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-748d982e97cso2439412b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 11 Jul 2025 18:38:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752278864; x=1752883664; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=r48N2bWj4Y88gncNkGlxWftqwNgMK7xw8mbqq6tXLH4=;
-        b=WkcoCpeq3fxylK0ggdqUAmj5XbDkdY8G93NIsnNtcDukKGBqOigCO7MYVj0+XwZJSj
-         jG9UHRZor0XkN8re6AwPMuAP53oizFI+JH7clxs6M/xyzE6llFgdNF3oU/rWT1/158V5
-         VR7iFidMwMi9Uk+pd7ISbKwYm3+7VGjXELrcKM3VqpTh/nhOFyGqWLbWR3dAJ8w1uG46
-         zMWiaLyVsmDaM34Fp3O7SuYcyT0a29g7SgcUD9Pv6rwf/A+DbwDLfFjPoNvcsMbRQoHg
-         lB5ZOWflM5+ZCz/+XBN7r53XDeUSOakgxhmKb/se96ZIkL7J7t9f6qif76ut91FPIVqT
-         gvpg==
+        d=gmail.com; s=20230601; t=1752284309; x=1752889109; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=E7RUuo6yy8VH8WqvEqZwDCypbdRNllV55XEp7b4wjQk=;
+        b=eBHGysrAA9vjKWZ/SAi2ZmNYP6TKMYfufJX2EQlS9qGLwJpU66z/zZauaAfNbT2fJd
+         al07Q/5TH9yCxHbqaDZOERM0ql3sqOTniJIJYtLM228Cs87c4ulKLCcz/IBsPINv2t7s
+         dhIEwGN4rq1OW2SvXr0z5ELX195yypcMeV7cbp9xCrAA/7ESB4Xa0nIXmaR3BS5gD3Oa
+         1QD3VKr365DWwUbRP2k16mkHTWXW6IUU79t/T8QvjPKSzOFYee2GVg8AX6dncm7WZOrB
+         Er/EXOna09ztASvCcxg2q5p6qqVPpnzef2PSfHq45Z6TzEDfb/WBD5kNp7pLxERJ0Kg+
+         FAJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752278864; x=1752883664;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=r48N2bWj4Y88gncNkGlxWftqwNgMK7xw8mbqq6tXLH4=;
-        b=VpX4bcxCvmZkvhkBgDe3Q17AB1riBK4XdpDhahCDEUnnlERRIl7VmZvTpjYDa4OKAY
-         DAsJWzcwpUhNtwFIgk19HVSkRGpY3aiApFf9Buafer/7Yp4RL6GwRutxBaHV/j0nZTur
-         o9rn+ZSY7Qom/YCVwwOIz8M93lt7ym/YqC4lZig+cWfvNZd/B6OA3a844swKCJQN1SuJ
-         OQhdgiRDMe5trpXxFZjNbyI9a+vhUlZChXNAXqxPJdTJz9OgoAwMdl3u58/PNII+29dI
-         TTho6RqxB3XnAIxdr/8OUsaRnCBV2fmLNQJWODmfON//wqXwxwWY3wXO8y6euQlHRj4m
-         AOtg==
-X-Gm-Message-State: AOJu0Yyko4FjwlfsV+wpfEFTI5iIxJHzejI+hc9BlWh9dXKBYW+3n8Vi
-	n8dl9RxdxcnvouLolPo7R4+8sdl7M9+aOG24d21j847MzI7IY9ijjk4XNF0eNBC+AKZIsZaxgjC
-	G5ODVzAWDhtwX1QPhchuaNriwu2GbYyw=
-X-Gm-Gg: ASbGncvF84Y4BcEs+eYt8Bfea0r7deu+TMGaBVlx1ZYVgrQet0RCXM5LsuVs6v5dIi5
-	jXLrJaGGOa4tVaDSC6PEbq3t+Hg2SznROtpp69Ly9G6GNTla2Pb0RHJZWX6yt23kFEqcgPhNyLM
-	1WoWeffmfNAhsqF9hLO0l1QUnQKI5l/5E5p2qu6DeEt417eDtdKJAxpbzo9GhHkz5v/u0r8xyvQ
-	S7X7G3W0bVv4nsy8w==
-X-Google-Smtp-Source: AGHT+IGM92iij8Ou8Ia2wTvGr7p/bZvxi1KsxtxNSLGHz6T4CyreRASZfBzJcrmVFsM/0EiBYE4gws0/e3rxJ7J0+4M=
-X-Received: by 2002:a05:690c:338e:b0:710:f39f:4d43 with SMTP id
- 00721157ae682-717d78615aemr74947127b3.7.1752278864381; Fri, 11 Jul 2025
- 17:07:44 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250711174400.2092299-1-alperyasinak1@gmail.com> <20250711174400.2092299-2-alperyasinak1@gmail.com>
-In-Reply-To: <20250711174400.2092299-2-alperyasinak1@gmail.com>
+        d=1e100.net; s=20230601; t=1752284309; x=1752889109;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=E7RUuo6yy8VH8WqvEqZwDCypbdRNllV55XEp7b4wjQk=;
+        b=hseRtXmT0KPASauHegO4vBLcAv+beVjjrfiy5CXX6JTNHh3I9YWI6pxkLksuwQuk8I
+         o2sfSgP7ytz9L/43ZAJkuerYvXr8K1muJillmnBy1qPw1Sv7V4siU2r/C7ccR1iA3MPv
+         CAueykHfrR9WxPQ7SSlccqqHjLhc819Qddt7fninYhqGpdBnL6AnyOg7WuLunh3LEeXQ
+         EqcMrHDhtqKyYbKhiV6k2k+3cC7NhepfHrihw2R9XsPAOxoKKDUsZm6L+TUaMkWNaxiA
+         pYyOJuK/V1Bv+FJqrcpPo4h73EP/P7rOI5qipqge8q/lA6238oD9sAS5/8BrqV+jFCJI
+         4xhg==
+X-Gm-Message-State: AOJu0YzhLpm/eleeQdZrBE2CRxPuAG5ephQHclOrYUziw8KzWP38xlGL
+	uKu0jPjY/Bxs7fOW+3fig5chWBU/aK+YpDyZQgZYf1RZA6G23OGHQrfWHaI5gYSN
+X-Gm-Gg: ASbGnctDYmrjY0sXN0QMa0woAyzDvmxxeDP50eBlIxuQsg8GQoDx71XaA18IP6pxkrR
+	FR1DXhhH6/jaCtyRtdB0Bw2fGOoIUzeDs2I7o8lZSzaTXce8/grj21KhtdYsm0V9YBT2zAWXK7u
+	hfau80CO8CIRLe6c6sh7xwIk9TOOjYrzPWvayY8/HN7D4rwkWSakNIE1OsuEUCy1TMrheTUdl9W
+	M3UwEQrAlxN2ULIw9HK+K+1S5agDZsoM2yr/aHQdHGWSjgMudrarngY6qrD09MFbksRktQftl4/
+	MkaGyOGpog36QbYubjI3wS45B8qK4Rj2fTXdkJErQPwFHm4ypc1yeTc3QeVctkL1bZHpE8aY20A
+	6wyb/SzGzdG/FlLmI6PBeFx/Y
+X-Google-Smtp-Source: AGHT+IFgeIk6pZa+GLeWdQg4apDPJiVkAo3RRrjxFhimtduvl9+QgSeX304T7Qk+eXgz1qzw2O+j6w==
+X-Received: by 2002:a05:6a00:c95:b0:749:472:d3a7 with SMTP id d2e1a72fcca58-74ee2d6067dmr6758625b3a.18.1752284308844;
+        Fri, 11 Jul 2025 18:38:28 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::1c1d])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-74eb9f1a851sm5972348b3a.82.2025.07.11.18.38.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 11 Jul 2025 18:38:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 11 Jul 2025 17:07:18 -0700
-X-Gm-Features: Ac12FXwze6ifstErbpt9KNBm-uIgkevKja3AkjhpNziPMBJfAwYhy2CnqdzhOCM
-Message-ID: <CAMKF1soCY+4Y_x32ARca1gxgvOKo2x95MNak0NVV5biZ0wzEEQ@mail.gmail.com>
-Subject: Re: [oe] [meta-openembedded][PATCH 2/3] libmusicbrainz: Add patch for
- CMake 4+ compatibility
-To: alperyasinak1@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-xfce][PATCH 1/2] classes/xfce-panel-plugin: Make download tarball extention type configurable
+Date: Fri, 11 Jul 2025 18:38:25 -0700
+Message-ID: <20250712013826.3708694-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.50.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 00:07:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118463
+ <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 01:38:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118464
 
-This does fix the compatibility issue but it causes another build regressio=
-n
+Default is still tar.bz2, but there is now option to use tar.xz which is
+some of new plugin releases are only xz compressed tarballs.
 
-| DEBUG: Executing shell function do_compile
-| NOTE: cmake --build
-/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/libmusicbrainz/5.1.0+g=
-it/build
---target all --
-| ninja: error: 'make-c-interface', needed by
-'/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux/libmusicbrainz/5.1.0+=
-git/build/src/mb5_c.cc',
-missing and no known rule to make it
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-xfce/classes/xfce-panel-plugin.bbclass | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-On Fri, Jul 11, 2025 at 10:44=E2=80=AFAM Alper Ak via lists.openembedded.or=
-g
-<alperyasinak1=3Dgmail.com@lists.openembedded.org> wrote:
->
-> Fix:
->
-> | CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
-> |   Compatibility with CMake < 3.5 has been removed from CMake.
-> |
-> |   Update the VERSION argument <min> value.  Or, use the <min>...<max> s=
-yntax
-> |   to tell CMake that the project requires at least <min> but has been u=
-pdated
-> |   to work with policies introduced by <max> or earlier.
-> |
-> |   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3D3.5 to try configuring anywa=
-y.
-> |
-> |
-> | -- Configuring incomplete, errors occurred!
->
-> Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
-> ---
->  .../0002-allow-build-with-cmake-4.patch       | 40 +++++++++++++++++++
->  .../musicbrainz/libmusicbrainz_git.bb         |  1 +
->  2 files changed, 41 insertions(+)
->  create mode 100644 meta-multimedia/recipes-multimedia/musicbrainz/libmus=
-icbrainz/0002-allow-build-with-cmake-4.patch
->
-> diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrain=
-z/0002-allow-build-with-cmake-4.patch b/meta-multimedia/recipes-multimedia/=
-musicbrainz/libmusicbrainz/0002-allow-build-with-cmake-4.patch
-> new file mode 100644
-> index 0000000000..2aad2b617f
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz/0002-=
-allow-build-with-cmake-4.patch
-> @@ -0,0 +1,40 @@
-> +From f5504099fd6f93ebfa351a034d29beb86db3408c Mon Sep 17 00:00:00 2001
-> +From: Alper Ak <alperyasinak1@gmail.com>
-> +Date: Fri, 11 Jul 2025 16:43:29 +0300
-> +Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
-> + compatibility
-> +
-> +Fix:
-> +
-> +| CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
-> +|   Compatibility with CMake < 3.5 has been removed from CMake.
-> +|
-> +|   Update the VERSION argument <min> value.  Or, use the <min>...<max> =
-syntax
-> +|   to tell CMake that the project requires at least <min> but has been =
-updated
-> +|   to work with policies introduced by <max> or earlier.
-> +|
-> +|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3D3.5 to try configuring anyw=
-ay.
-> +|
-> +|
-> +| -- Configuring incomplete, errors occurred!
-> +
-> +Upstream-Status: Submitted [https://github.com/metabrainz/libmusicbrainz=
-/pull/21]
-> +
-> +Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
-> +---
-> + CMakeLists.txt | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index 6181a06..f3672a3 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -1,4 +1,4 @@
-> +-cmake_minimum_required(VERSION 2.6)
-> ++cmake_minimum_required(VERSION 3.5)
-> +
-> + PROJECT(libmusicbrainz5)
-> + SET(PROJECT_VERSION 5.1.0)
-> +--
-> +2.43.0
-> +
-> diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrain=
-z_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_gi=
-t.bb
-> index 1ae43e8aef..9200d0ea72 100644
-> --- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.b=
-b
-> +++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.b=
-b
-> @@ -10,6 +10,7 @@ PV =3D "5.1.0+git"
->  SRCREV =3D "4655b571a70d73d41467091f59c518517c956198"
->  SRC_URI =3D "git://github.com/metabrainz/libmusicbrainz.git;branch=3Dmas=
-ter;protocol=3Dhttps \
->             file://0001-http-fetch-Pass-a-non-null-buffer-to-ne_set_reque=
-st_.patch \
-> +           file://0002-allow-build-with-cmake-4.patch \
->             "
->
->
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118457): https://lists.openembedded.org/g/openembedde=
-d-devel/message/118457
-> Mute This Topic: https://lists.openembedded.org/mt/114104562/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-xfce/classes/xfce-panel-plugin.bbclass b/meta-xfce/classes/xfce-panel-plugin.bbclass
+index b43f9e3125..3f115cab22 100644
+--- a/meta-xfce/classes/xfce-panel-plugin.bbclass
++++ b/meta-xfce/classes/xfce-panel-plugin.bbclass
+@@ -4,7 +4,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ DEPENDS += "libxfce4ui libxfce4util xfce4-panel"
+ 
+-SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
++XFCE_COMPRESS_TYPE ?= "bz2"
++
++SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
+ 
+ FILES:${PN} += "${datadir}/xfce4/panel-plugins/"
+ FILES:${PN} += "${datadir}/xfce4/panel/plugins/"
 
