@@ -1,132 +1,158 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26070C83F1A
-	for <webhook@archiver.kernel.org>; Sat, 12 Jul 2025 07:05:14 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web11.31905.1752303909159067435
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE0F9C83F10
+	for <webhook@archiver.kernel.org>; Sat, 12 Jul 2025 09:45:44 +0000 (UTC)
+Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by mx.groups.io with SMTP id smtpd.web11.33131.1752313536890531071
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Jul 2025 00:05:09 -0700
+ Sat, 12 Jul 2025 02:45:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hxmio+ot;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-b2c2c762a89so2392134a12.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 00:05:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752303908; x=1752908708; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IlTeUkQ0zN0AxIx+QvhwSctwegOFq/fiVY8rexrbQ8c=;
-        b=hxmio+otFFTwurY/eW/4es6bf88pz1UBTt+74juwiZ9TOsadRci8H2DiExR75ypAFu
-         whe3UTHzHSGOIoljfR/vtUNEq/naO0+NLv4+IJaZSkCAzO1tZeIok1sjzvfHsM7QjjjC
-         6rSf5lCtGA1QahW+5bmfH7DBtbkYEvxgUGcWPI2pP0FysywRqAjHgDShJn/LCOC+yoUN
-         SxK55grIxyfm9uzo5C9i4IGhtQiacGeZv0jHNyMDoEQD68u31sQGM/H1wneorAujZPT3
-         sgP1pp6sQ25tbe91H3jUtQXwfID9Btx0DuiZLr8R2Gad2qSMJ0DU57r0frnJjtEqPuHr
-         boRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752303908; x=1752908708;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=IlTeUkQ0zN0AxIx+QvhwSctwegOFq/fiVY8rexrbQ8c=;
-        b=gcXO05nv62JKatdq72IMKsReKReo63Ia6uRQoDo5cRdMmEGqc2B9hLXkcE4zrY+jJH
-         UIb1jlSYacsIke+DqpwqsyvL3WjRHDGWmkR+zQeQCxvr9JWYwHyt5Yw1l7SJ1tLysXv2
-         7DxszIAv3mw58xr+C5gRSrhxH5epIFNb+vfRx8kSQwwmJkFOINEQ35pSsIWw/zeMN6y8
-         3Snmm8ETlXFkX20+28FZiQRg92WyP8vBpRLC0nqdx/K0YxkJNBLzP6E8letZVlS4y76W
-         dQgO8nhEmv16U1biRiHDtLErq1hxM3LSfKeMUSsjSwkMGmwNOV/R623H2RLugxfClfDA
-         hzNA==
-X-Gm-Message-State: AOJu0Ywx2zLccZ+1+8CIpZ8Zv77atZw41/wyTMPiPGFCZxb/sKTUQwgB
-	V6oNCHtUctmzQVSEqchTTxa569Y1JILZ+Jouv51mIzX6wLiD7f4d5Uf1fqElhquH
-X-Gm-Gg: ASbGncu8YIy4ylWCCb6Nf/pR0Ey7dUJ+q6NiVaDlrX+7klqMTKWXsNoifOEKn5r0ygD
-	DjOyTzuqqDx+DQ7GPsTIJ1XrpRew07a+swxlNlPanvCgVOx0YMuHjrJVBlIHKajNIoLgLrQg68X
-	JFf8lusdlQ03xdZHfMHl5RGbSqxXgpPmot+q8Hg3/ZzMeycGh5XNWTGgFDEsIi7vsOAkNn5lHgl
-	p1R57g8/Qv1JcT45iEz2QxkwUI/2K8VzwZQ02t6S04y4ceerccNGTC41PrX3KmMvvfufQ0kz7qF
-	Mdx6RCalhUia9YuvpUyc5ojLgSpilnPhkVDCEro2g+MGAzTw8t3kSYEQfoTfBlvT3us2mAc39TP
-	j32+1qQoffvuWMg==
-X-Google-Smtp-Source: AGHT+IGQFQ8Zeq0QN97yOkB5ADB/tyE/sZgdNwZOjijZavi2T+H/wEiH6B2pFRXNonNypjzolrmaIg==
-X-Received: by 2002:a17:903:1b2e:b0:236:15b7:62e4 with SMTP id d9443c01a7336-23df093c654mr89422945ad.38.1752303908160;
-        Sat, 12 Jul 2025 00:05:08 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::1c1d])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23de42ad295sm58231785ad.81.2025.07.12.00.05.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Jul 2025 00:05:07 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=giI7bhXA;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-202507120945331e5ecd00013d9bd575-9iyqnv@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 202507120945331e5ecd00013d9bd575
+        for <openembedded-devel@lists.openembedded.org>;
+        Sat, 12 Jul 2025 11:45:33 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=BTYTKjPAPVY479VuuwbSTufWLF1y8kMUYVLSt7KWFgk=;
+ b=giI7bhXAgyr9c0V2RBddwRGKsbEMbP9ygR4WE7/HUvjfANp0NbbIIM2NRpMyCJ5lPgJ2C7
+ 2U9iOP6W6K/09Bol+QBcM5MmatYHFf7AnFc1tqwNmV9mWWU/1ruMwzPYheXDg9wuhHBVVJ/j
+ iBllZy/AueOVCcAZnzmhbE2gqb53wkfJtja29CGwtRP/wXexObhdOQV6b924TlWdb+EWPozW
+ Fp2dwj4JBbixkz3IkSZbzHK563w1EH6uxb4nSwGZNi/09qi5CApzw6LK7Uo+35YPgIafOZyH
+ WydhqAYIneYtK1lwMvPSBRZy9jlyIQKclQiQpy+yhab7OKaT+uYjjsow==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-webserver][PATCH] hiawatha: Upgrade to 11.7
-Date: Sat, 12 Jul 2025 00:05:05 -0700
-Message-ID: <20250712070505.4140314-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.50.1
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-networking][walnascar][PATCH] libcoap: patch CVE-2024-31031
+Date: Sat, 12 Jul 2025 11:44:45 +0200
+Message-Id: <20250712094445.1899793-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 07:05:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118469
+ <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 09:45:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118470
 
-Enable TLS support
-Fix build with cmake4+
+From: Peter Marko <peter.marko@siemens.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Pick commit [1] from [2] which fixes [3] as listed in [4].
+
+[1] https://github.com/obgm/libcoap/commit/214665ac4b44b1b6a7e38d4d6907ee835a174928
+[2] https://github.com/obgm/libcoap/pull/1352
+[3] https://github.com/obgm/libcoap/issues/1351
+[4] https://nvd.nist.gov/vuln/detail/CVE-2024-31031
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../{hiawatha_11.2.bb => hiawatha_11.7.bb}       | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
- rename meta-webserver/recipes-httpd/hiawatha/{hiawatha_11.2.bb => hiawatha_11.7.bb} (88%)
+ .../libcoap/libcoap/CVE-2024-31031.patch      | 82 +++++++++++++++++++
+ .../recipes-devtools/libcoap/libcoap_4.3.4.bb |  1 +
+ 2 files changed, 83 insertions(+)
+ create mode 100644 meta-networking/recipes-devtools/libcoap/libcoap/CVE-2024-31031.patch
 
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.2.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.7.bb
-similarity index 88%
-rename from meta-webserver/recipes-httpd/hiawatha/hiawatha_11.2.bb
-rename to meta-webserver/recipes-httpd/hiawatha/hiawatha_11.7.bb
-index 098c07e954..fac1498b3b 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.2.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_11.7.bb
-@@ -10,7 +10,7 @@ SRC_URI = "https://hiawatha.leisink.net/files/hiawatha-${PV}.tar.gz \
-            file://hiawatha-init \
-            file://hiawatha.service "
- 
--SRC_URI[sha256sum] = "99c64f76927f93469f062ab76b74eb79a397ea4be12da86bf746b2bb57cf1bc5"
-+SRC_URI[sha256sum] = "8bc180ae3b986d02466f081efeefdb1595d96783f581fded2a9b198752ab7ae1"
- 
- INITSCRIPT_NAME = "hiawatha"
- INITSCRIPT_PARAMS = "defaults 70"
-@@ -19,12 +19,12 @@ SYSTEMD_SERVICE:${PN} = "hiawatha.service"
- 
- inherit cmake update-rc.d systemd
- 
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap/CVE-2024-31031.patch b/meta-networking/recipes-devtools/libcoap/libcoap/CVE-2024-31031.patch
+new file mode 100644
+index 0000000000..bd1a88c87a
+--- /dev/null
++++ b/meta-networking/recipes-devtools/libcoap/libcoap/CVE-2024-31031.patch
+@@ -0,0 +1,82 @@
++From 214665ac4b44b1b6a7e38d4d6907ee835a174928 Mon Sep 17 00:00:00 2001
++From: Jon Shallow <supjps-libcoap@jpshallow.com>
++Date: Mon, 25 Mar 2024 20:44:48 +0000
++Subject: [PATCH] coap_pdu.c: Fix UndefinedBehaviorSanitizer:
++ undefined-behavior
 +
- CFLAGS += "-std=gnu17"
- 
- EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
-                   -DENABLE_CACHE=OFF \
-                   -DENABLE_DEBUG=OFF \
--                  -DENABLE_TLS=OFF \
-                   -DENABLE_TOOLKIT=OFF \
-                   -DENABLE_CHROOT=OFF \
-                   -DENABLE_XSLT=ON \
-@@ -34,7 +34,9 @@ EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
-                   -DCMAKE_INSTALL_SBINDIR=${sbindir} \
-                   -DCMAKE_INSTALL_SYSCONFDIR=${sysconfdir} \
-                   -DCMAKE_INSTALL_LIBDIR=${libdir} \
--                  -DCMAKE_INSTALL_FULL_LOCALSTATEDIR=${localstatedir}"
-+                  -DCMAKE_INSTALL_FULL_LOCALSTATEDIR=${localstatedir} \
-+                  -DENABLE_TLS=ON \
-+                  -DCMAKE_POLICY_VERSION_MINIMUM=3.5"
- 
- do_install:append() {
-     # Copy over init script and sed in the correct sbin path
-@@ -78,5 +80,11 @@ CONFFILES:${PN} = " \
-     ${sysconfdir}/hiawatha/php-fcgi.conf \
- "
- 
-+PACKAGES =+ "${PN}-letsencrypt"
++This fixes a reported error in coap_update_token() where a size_t
++calculation is overflowed (but all ends up with the correct value).
 +
-+FILES:${PN}-letsencrypt += "${sbindir}/lefh ${libdir}/hiawatha/letsencrypt"
++Instead of adding an overflowed size_t, now subtract the reversed
++size_t calculation as appropriate.
 +
- FILES:${PN} += "${nonarch_libdir}/tmpfiles.d"
--FILES:${PN}-dev = "${libdir}/hiawatha/*${SOLIBSDEV}"
-+FILES:${PN}-dev += "${libdir}/hiawatha/*${SOLIBSDEV}"
++coap_update_option() and coap_insert_option() similarily updated.
 +
-+RDEPENDS:${PN}-letsencrypt += "php-cli"
++CVE: CVE-2024-31031
++Upstream-Status: Backport [https://github.com/obgm/libcoap/commit/214665ac4b44b1b6a7e38d4d6907ee835a174928]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/coap_pdu.c | 33 ++++++++++++++++++++++++---------
++ 1 file changed, 24 insertions(+), 9 deletions(-)
++
++diff --git a/src/coap_pdu.c b/src/coap_pdu.c
++index afe445c8..e3be3f02 100644
++--- a/src/coap_pdu.c
+++++ b/src/coap_pdu.c
++@@ -389,12 +389,15 @@ coap_update_token(coap_pdu_t *pdu, size_t len, const uint8_t *data) {
++     memmove(&pdu->token[(len + bias) - pdu->e_token_length],
++             pdu->token, pdu->used_size);
++     pdu->used_size += len + bias - pdu->e_token_length;
+++    if (pdu->data) {
+++      pdu->data += (len + bias) - pdu->e_token_length;
+++    }
++   } else {
++     pdu->used_size -= pdu->e_token_length - (len + bias);
++     memmove(pdu->token, &pdu->token[pdu->e_token_length - (len + bias)], pdu->used_size);
++-  }
++-  if (pdu->data) {
++-    pdu->data += (len + bias) - pdu->e_token_length;
+++    if (pdu->data) {
+++      pdu->data -= pdu->e_token_length - (len + bias);
+++    }
++   }
++ 
++   pdu->actual_token.length = len;
++@@ -641,9 +644,15 @@ coap_insert_option(coap_pdu_t *pdu, coap_option_num_t number, size_t len,
++                        number - prev_number, data, len))
++     return 0;
++ 
++-  pdu->used_size += shift - shrink;
++-  if (pdu->data)
++-    pdu->data += shift - shrink;
+++  if (shift >= shrink) {
+++    pdu->used_size += shift - shrink;
+++    if (pdu->data)
+++      pdu->data += shift - shrink;
+++  } else {
+++    pdu->used_size -= shrink - shift;
+++    if (pdu->data)
+++      pdu->data -= shrink - shift;
+++  }
++   return shift;
++ }
++ 
++@@ -681,9 +690,15 @@ coap_update_option(coap_pdu_t *pdu, coap_option_num_t number, size_t len,
++                        decode.delta, data, len))
++     return 0;
++ 
++-  pdu->used_size += new_length - old_length;
++-  if (pdu->data)
++-    pdu->data += new_length - old_length;
+++  if (new_length >= old_length) {
+++    pdu->used_size += new_length - old_length;
+++    if (pdu->data)
+++      pdu->data += new_length - old_length;
+++  } else {
+++    pdu->used_size -= old_length - new_length;
+++    if (pdu->data)
+++      pdu->data -= old_length - new_length;
+++  }
++   return 1;
++ }
++ 
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
+index 604fec8072..79683c9632 100644
+--- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
++++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
+@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1978dbc41673ab1c20e64b287c8317bc"
+ SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
+            file://run-ptest \
+            file://CVE-2024-0962.patch \
++           file://CVE-2024-31031.patch \
+            "
+ SRCREV = "5fd2f89ef068214130e5d60b7087ef48711fa615"
+ 
 
