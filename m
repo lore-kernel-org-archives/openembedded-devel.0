@@ -1,119 +1,117 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8FFDC83F1D
-	for <webhook@archiver.kernel.org>; Sat, 12 Jul 2025 12:59:25 +0000 (UTC)
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.web11.35481.1752325164888522249
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CF23C83F22
+	for <webhook@archiver.kernel.org>; Sat, 12 Jul 2025 17:26:57 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.41006.1752341210222413828
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Jul 2025 05:59:25 -0700
+ Sat, 12 Jul 2025 10:26:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=gBtplFv2;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-202507121259236c1b2da6b24caef012-lmarnn@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 202507121259236c1b2da6b24caef012
-        for <openembedded-devel@lists.openembedded.org>;
-        Sat, 12 Jul 2025 14:59:23 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=AL5wFaYqOjSY5FpAk7JfFk7x+NCcrU84iHo2OlBkko0=;
- b=gBtplFv2fFIelZyuI6wHsQ1h7BAPMTJFjb1PF6STdO4mLLEa8PFFY+w/Th6HL3hURVlNaA
- /Zu8UMxQHpWaovODoq6y2TVuAjlwrXGPim3OC73eIslj98CG2R/s2bEeCZW7cp8hqJmj8ioB
- k7OtRyA6msmX3Dh3JRMT5B5ab7nHd0OldgSCEuUwY+QH2yZUgr010w8D3Vs0u9jzqMbXnJGL
- r+5ywWVUo5qrsb4qxdcnOXc6Yu8aLyU2K+3MEb8HSXTatThUpP04gSAKiTsk9rJjOCia7f/B
- xcd8h/peQT6WHvRLX80qIXNAG62Kime2r0WzR5E9kqa/XUE/5L4SWHNQ==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PL0QT9bY;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-23602481460so29451785ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 10:26:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1752341209; x=1752946009; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=48Dt+sjrtm+4MbEPpkZmwHnKVDMfomCkGYuLfNnErhU=;
+        b=PL0QT9bYFD7rhvblzdcO2oLTNhnFAps5JzT1f4A70sm81ZdI0kAE88Zg5/Mcj3R58N
+         OLFbkFxdAtQmZiyDyvWEjBgBLGjm+l7s05gopXxPU+8QGRxvAs+Hyce8X7wpgBqcGK6D
+         JsnYjYsgkpCVe7v6GUig62eb8JiJmoaJhdKq6ZI92ChJZLo3wvu+RjbtNY2OagsCwOns
+         U4YBrGtt6bXzmAbDgLeNaUWdRjkk236msVwwvl2P5uVMggewGyEHhEievYVFm43HyCtz
+         gsLQQvvOI6kyvzyhJZ12b2QTGCtEpNnSRNubHxML55xxLreBT5GsCs9IyxExyZD2xtMg
+         jI3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1752341209; x=1752946009;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=48Dt+sjrtm+4MbEPpkZmwHnKVDMfomCkGYuLfNnErhU=;
+        b=gqkLhaay+9yLRnCOjDl57/goyh+LsuqE4axIBfwbWFaE747vmqlaplZz6pCOpU7VSe
+         q8WvSL/5LuvTX3d4HW7tUXWazF7RwELIV/3yeFyoeQZrIJG0hf57kad0WBEEJdwAhofd
+         Subp+3Tr9FABPEwPHLlzB7M79I7xFHwrmlf38IgbL24HiEP4kCuEOzx736iw1JvXXnr4
+         h6rsWoAgG1lDlW7fj2aKGNNGZX3+4KNASpeuR31nljX3dsRMITbWcBzZfKT3YOkahKvn
+         KRhzTdpjTlPmBsDkIPT9FJvhFZQCJLqT149Lk2Jl5bBZlcj7J+p6UOji9hYfaG3mrozr
+         5n2Q==
+X-Gm-Message-State: AOJu0Yw1K2pbZuijU4wo0gKsjRy+/a1oJiwxMld6nuKAUzkc88OsWGiW
+	TU8/+GXZEL11d+BLZpryIdCwleZ0PqVtLftqW+gxZCSXBpUddECu1Uonh999EXKi
+X-Gm-Gg: ASbGnctay/kvqnkwiuLeSdE+CY4FMO8Mx86DX1Xfd1IjctdjyWKkPTj4RLxsL+kxvr2
+	+p5Pnqx9w/J2tAjE2fz6km4HJt6Vsz30fB6Eda70v1jC9cbLOz9119cLi81MgY5LwQEdmb7KXEo
+	yQJXW2sbZMxTyumX9MZKTqm8ReBtCy20etKyGgKuAxTQSBnZGsw8k79dIxTXufHLLdbYBUs/Ng8
+	JY+SmCvBkQcmNsHcVa0KjXDtATSlNDbSrjN7W9lQV9BIAf6HA1IuLasO95/L+EQNNFrkFz00Ot5
+	7RXn+NDyYQRIVqQcECsEWIGkITeyZy9PII9kl4vfRzjuMl6AFwNkBfxDcvDfqpNMpv62LOnwgMD
+	5mW/6+q9ZJ9L0Hg==
+X-Google-Smtp-Source: AGHT+IG0sTsO9yQY7mBy7N7ll+8iIn2ehbfwHXxjoyeQDHL9otsL5qZv8Qif8MIFY5t8H9ziaZlT5A==
+X-Received: by 2002:a17:903:230c:b0:224:26fd:82e5 with SMTP id d9443c01a7336-23df0969b83mr92266185ad.48.1752341209255;
+        Sat, 12 Jul 2025 10:26:49 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::1c1d])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23de435c2e3sm67021875ad.226.2025.07.12.10.26.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 12 Jul 2025 10:26:48 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][walnascar][PATCH 2/2] minifi-cpp: patch spdlog CVE-2025-6140
-Date: Sat, 12 Jul 2025 14:58:20 +0200
-Message-Id: <20250712125820.3282479-2-peter.marko@siemens.com>
-In-Reply-To: <20250712125820.3282479-1-peter.marko@siemens.com>
-References: <20250712125820.3282479-1-peter.marko@siemens.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-xfce][PATCH v2 1/6] classed/xfce: Make download tarball extention type configurable
+Date: Sat, 12 Jul 2025 10:26:41 -0700
+Message-ID: <20250712172646.3899204-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 12:59:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118478
+ <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 17:26:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118479
 
-From: Peter Marko <peter.marko@siemens.com>
+Default is still tar.bz2, but there is now option to use tar.xz which is
+some of new xfce component releases are only xz compressed tarballs.
 
-Same patch as in spdlog recipe.
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../minifi-cpp/files/CVE-2025-6140.patch      | 46 +++++++++++++++++++
- .../minifi-cpp/minifi-cpp_0.99.1.bb           |  1 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-oe/recipes-extended/minifi-cpp/files/CVE-2025-6140.patch
+ meta-xfce/classes/xfce-app.bbclass          | 2 +-
+ meta-xfce/classes/xfce-panel-plugin.bbclass | 2 +-
+ meta-xfce/classes/xfce.bbclass              | 3 ++-
+ 3 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/minifi-cpp/files/CVE-2025-6140.patch b/meta-oe/recipes-extended/minifi-cpp/files/CVE-2025-6140.patch
-new file mode 100644
-index 0000000000..af135adee2
---- /dev/null
-+++ b/meta-oe/recipes-extended/minifi-cpp/files/CVE-2025-6140.patch
-@@ -0,0 +1,46 @@
-+From 10320184df1eb4638e253a34b1eb44ce78954094 Mon Sep 17 00:00:00 2001
-+From: Gabi Melman <gmelman1@gmail.com>
-+Date: Mon, 17 Mar 2025 15:46:31 +0200
-+Subject: [PATCH] Fixed issue #3360 (#3361)
-+
-+CVE: CVE-2025-6140
-+Upstream-Status: Backport [https://github.com/gabime/spdlog/commit/10320184df1eb4638e253a34b1eb44ce78954094]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ include/spdlog/pattern_formatter-inl.h | 8 +++++---
-+ 1 file changed, 5 insertions(+), 3 deletions(-)
-+
-+diff --git a/include/spdlog/pattern_formatter-inl.h b/include/spdlog/pattern_formatter-inl.h
-+index b53d8051..fd408ed5 100644
-+--- a/include/spdlog/pattern_formatter-inl.h
-++++ b/include/spdlog/pattern_formatter-inl.h
-+@@ -70,6 +70,9 @@ public:
-+             pad_it(remaining_pad_);
-+         } else if (padinfo_.truncate_) {
-+             long new_size = static_cast<long>(dest_.size()) + remaining_pad_;
-++            if (new_size < 0) {
-++                new_size = 0;
-++            }
-+             dest_.resize(static_cast<size_t>(new_size));
-+         }
-+     }
-+@@ -264,7 +267,7 @@ public:
-+         : flag_formatter(padinfo) {}
-+ 
-+     void format(const details::log_msg &, const std::tm &tm_time, memory_buf_t &dest) override {
-+-        const size_t field_size = 10;
-++        const size_t field_size = 8;
-+         ScopedPadder p(field_size, padinfo_, dest);
-+ 
-+         fmt_helper::pad2(tm_time.tm_mon + 1, dest);
-+@@ -926,9 +929,8 @@ private:
-+     memory_buf_t cached_datetime_;
-+ 
-+ #ifndef SPDLOG_NO_TLS
-+-    mdc_formatter<null_scoped_padder> mdc_formatter_{padding_info{}};
-++    mdc_formatter<null_scoped_padder> mdc_formatter_{padding_info {}};
-+ #endif
-+-
-+ };
-+ 
-+ }  // namespace details
-diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb
-index 44daf94c98..229691133f 100644
---- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb
-+++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb
-@@ -28,6 +28,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git;protocol=https;branch=mai
-            file://0007-libsodium-aarch64-set-compiler-attributes-after-including-arm_.patch \
-            file://systemd-volatile.conf \
-            file://sysvinit-volatile.conf \
-+           file://CVE-2025-6140.patch;patchdir=${S}/thirdparty/spdlog-src \
-           "
+diff --git a/meta-xfce/classes/xfce-app.bbclass b/meta-xfce/classes/xfce-app.bbclass
+index d1b07d7457..957cfb3362 100644
+--- a/meta-xfce/classes/xfce-app.bbclass
++++ b/meta-xfce/classes/xfce-app.bbclass
+@@ -2,5 +2,5 @@ inherit xfce features_check
  
- # minifi-cpp: 0.99.1
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
++SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
+ 
+diff --git a/meta-xfce/classes/xfce-panel-plugin.bbclass b/meta-xfce/classes/xfce-panel-plugin.bbclass
+index b43f9e3125..b2d71a4141 100644
+--- a/meta-xfce/classes/xfce-panel-plugin.bbclass
++++ b/meta-xfce/classes/xfce-panel-plugin.bbclass
+@@ -4,7 +4,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ DEPENDS += "libxfce4ui libxfce4util xfce4-panel"
+ 
+-SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
++SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
+ 
+ FILES:${PN} += "${datadir}/xfce4/panel-plugins/"
+ FILES:${PN} += "${datadir}/xfce4/panel/plugins/"
+diff --git a/meta-xfce/classes/xfce.bbclass b/meta-xfce/classes/xfce.bbclass
+index 913202be59..6b3d0b0d0f 100644
+--- a/meta-xfce/classes/xfce.bbclass
++++ b/meta-xfce/classes/xfce.bbclass
+@@ -4,7 +4,8 @@ def xfce_verdir(v):
+     return "%s.%s" % (m.group(1), m.group(2))
+ 
+ HOMEPAGE = "http://www.xfce.org"
+-SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
++XFCE_COMPRESS_TYPE ?= "bz2"
++SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
+ 
+ inherit autotools gettext gtk-icon-cache pkgconfig
+ 
 
