@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE0F9C83F10
-	for <webhook@archiver.kernel.org>; Sat, 12 Jul 2025 09:45:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5413C83F10
+	for <webhook@archiver.kernel.org>; Sat, 12 Jul 2025 09:46:44 +0000 (UTC)
 Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
- by mx.groups.io with SMTP id smtpd.web11.33131.1752313536890531071
+ by mx.groups.io with SMTP id smtpd.web10.33354.1752313600198116713
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Jul 2025 02:45:38 -0700
+ Sat, 12 Jul 2025 02:46:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=giI7bhXA;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-202507120945331e5ecd00013d9bd575-9iyqnv@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 202507120945331e5ecd00013d9bd575
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=SL3sPucr;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-20250712094638b290ee2de9add9369b-5yorah@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20250712094638b290ee2de9add9369b
         for <openembedded-devel@lists.openembedded.org>;
-        Sat, 12 Jul 2025 11:45:33 +0200
+        Sat, 12 Jul 2025 11:46:38 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=BTYTKjPAPVY479VuuwbSTufWLF1y8kMUYVLSt7KWFgk=;
- b=giI7bhXAgyr9c0V2RBddwRGKsbEMbP9ygR4WE7/HUvjfANp0NbbIIM2NRpMyCJ5lPgJ2C7
- 2U9iOP6W6K/09Bol+QBcM5MmatYHFf7AnFc1tqwNmV9mWWU/1ruMwzPYheXDg9wuhHBVVJ/j
- iBllZy/AueOVCcAZnzmhbE2gqb53wkfJtja29CGwtRP/wXexObhdOQV6b924TlWdb+EWPozW
- Fp2dwj4JBbixkz3IkSZbzHK563w1EH6uxb4nSwGZNi/09qi5CApzw6LK7Uo+35YPgIafOZyH
- WydhqAYIneYtK1lwMvPSBRZy9jlyIQKclQiQpy+yhab7OKaT+uYjjsow==;
+ bh=Gzu/iYjxQWlnF63vxidi91skyhNiQJ5zqwKEq3F6VF8=;
+ b=SL3sPucrdrOAHDdCynv9eI6sSEciRqhfHx+m8s4hW2JOa2CzwBvH+isc+OBEjs0YlRu6Kw
+ L77cDvlK25pU11ifToEVy31/v9PheFuc940YONAb3GOwJcaMNwrUIJ2C3V+Y4790IKpufgMI
+ /Z0kYdSFcMw8usCcZfloMvEvQW62NY6SrdBoURzHplzzgA3FjOLIb/fBUc7MoRolOoyMi79I
+ WB5CKyD9EhpOYpB3I0HGg42EqVyiFlChrM9Yew4HJuUG0ED/ruEO1rvduHFklXwhLd7Yua9C
+ OYapEfvo0v1AmNmGtszlvETU8ujq8t1Peg0EFDasWXkNOLRiBaTXeFsQ==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-networking][walnascar][PATCH] libcoap: patch CVE-2024-31031
-Date: Sat, 12 Jul 2025 11:44:45 +0200
-Message-Id: <20250712094445.1899793-1-peter.marko@siemens.com>
+Subject: [meta-networking][scarthgap][PATCH] libcoap: patch CVE-2024-31031
+Date: Sat, 12 Jul 2025 11:45:32 +0200
+Message-Id: <20250712094532.1900044-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -36,8 +36,8 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 09:45:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118470
+ <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 09:46:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118471
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -144,7 +144,7 @@ index 0000000000..bd1a88c87a
 + }
 + 
 diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
-index 604fec8072..79683c9632 100644
+index 98f0f02fb8..65bf455d9b 100644
 --- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
 +++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
 @@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1978dbc41673ab1c20e64b287c8317bc"
