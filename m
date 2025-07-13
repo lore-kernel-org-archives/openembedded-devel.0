@@ -1,105 +1,125 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B3BCC83F1D
-	for <webhook@archiver.kernel.org>; Sun, 13 Jul 2025 06:31:01 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web10.52279.1752388230135294978
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0CF8C83F17
+	for <webhook@archiver.kernel.org>; Sun, 13 Jul 2025 08:28:11 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web11.52496.1752392647738053477
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Jul 2025 23:30:30 -0700
+ Sun, 13 Jul 2025 00:44:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=H035Blbs;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-b31c84b8052so3931100a12.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 23:30:30 -0700 (PDT)
+ dkim=pass header.i=@amarulasolutions.com header.s=google header.b=M4zb5WO2;
+ spf=pass (domain: amarulasolutions.com, ip: 209.85.167.53, mailfrom: dario.binacchi@amarulasolutions.com)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-558f7472d64so3538802e87.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 13 Jul 2025 00:44:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752388229; x=1752993029; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dKbFFyXiCcPNFyeMP5fWPI+2YVDy/Usd0IowgrRQrjs=;
-        b=H035BlbsqkruTBBvCDE0BqOeObuMGG0MYwzhXqtvMRpeJci5WgVMz2zcJZ+tneIU/f
-         ZXVFzHal9pEsWgJlZV65jZB0N6yCa0dmNznewfu9cz9tf9BJ7NwFpBeJFb0fbmFZFkCp
-         ve6FV/Y+n9FS4PfdhGd5Gy+MX1xIqG7u1ihUeu6Sb4rezBqxUvhC4Y5mIIEnKlOqzow1
-         cjI/GmSt1KaFggSSpUpQ1O17H97pdDaunc1y5Gbjz3AYA8Z/AsvAavbvXOXgJmyT/xd9
-         lLO8dNgmly+rbnfEglr/0QAjqfelmF5vGSEiPP5N7hLCQVU4VR7+O6zPlQgrCpk8Jl2k
-         BXQg==
+        d=amarulasolutions.com; s=google; t=1752392645; x=1752997445; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=G767Oigo0FerenWxFtwU0p5/pvV+AKaYJMBLK+y/3UI=;
+        b=M4zb5WO24DEWaab4expkh3HmyuR1xet9FN6pYatwgXJ4iY7kB1aSBWlc6JuuX850pK
+         JtFu88lJD9JImyDMgQ+Xq6sRVwdhHAdMemnLI1AaXz7pgTNkRQEW/6NuhDg3Yn/SVNi2
+         eiCPd4mCg/JtpmmRrv1nfFVdzFcJJfiXtKyLo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752388229; x=1752993029;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=dKbFFyXiCcPNFyeMP5fWPI+2YVDy/Usd0IowgrRQrjs=;
-        b=fcXfOynu9g1G7aVQfjPpoUNSdIT9raiSwrIIJgjurh72up3ejobfu2yi8AnFfO8rQO
-         Pu3pmKccSMr2Dx42XKOnuPdWQrNiQvu07Zr8qFbBb51BdOlWs3aDMxCqfon51b9g4TLA
-         4xAIyeKjT5C0V1H9VKtcP+cDexHHlzJsqGtN0jdV8Jbrezo/rX3qYUEzxumZOatQsWxL
-         ag1cO79Bte37vP+n14CQJZBa1xT6P2mOO3CBfdTsGcK25Xotf4+Wyz9dx4KAkGKVnYWK
-         HXIF2dy88m9s0KcBFhgY6V/HZhGDu+YvCy6rjvkh1iTQLQoQ0r8CbhRiekyOdYgcIT0O
-         n2dA==
-X-Gm-Message-State: AOJu0YxJ/HwQT5X9sBfRVcj5DCDXGaP3MociRuLOrn/2ZbaAiuFy9kpK
-	ltGp7aAg56CQoplkT3j+Qhz0rtWRaNc6RlWRzi7Uj/6ulbHyFmFjIIKVkJtk1Pxj
-X-Gm-Gg: ASbGncu1tzJV71O8m1M7aFswkstQdtsaqh0zfs5BkUQo6hQ7DXeyImwWO9epmIbGKY8
-	zkwDhgyvXUiK3g/vrdOL+dB+qhI60VVmYpDtzHcO+2Hsw7wIAipFZhz8+jpEwzZn4bQRsjbGrLJ
-	4RP0OTbdApz8fNd5yaTtZd9UabDe1FCbdtk4FoMF/io3qjXTzJJUWy14UREg/qybmt5hHyJlm8e
-	8uzBxytIQMutTv8b8TQv+xx5qxV4H1jZXSq0tEh6GGCUYZvlzTw7xyFtD96/WBabVMu4R6dcRW3
-	KuaIwPHdLU0l5QTf+WWDsuJltM/1jdmMyxjqCyQhn36Km+T0DVxM18kKMLGZj3fAYDuc+jbFffJ
-	XmT2tzFAubeD+r/k/nWbaLKg3
-X-Google-Smtp-Source: AGHT+IHPm/LXtPe2VmZ8/OoYhV5XpmmacBPp5DZrkvY3pvwI8S4tRNmhTTKoU/kxwBqPeWl4HvsYqA==
-X-Received: by 2002:a05:6a21:99a7:b0:233:14ec:4f83 with SMTP id adf61e73a8af0-23314fb941emr6400218637.6.1752388228928;
-        Sat, 12 Jul 2025 23:30:28 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::1c1d])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b3bce529689sm4928927a12.52.2025.07.12.23.30.27
+        d=1e100.net; s=20230601; t=1752392645; x=1752997445;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=G767Oigo0FerenWxFtwU0p5/pvV+AKaYJMBLK+y/3UI=;
+        b=BJG3jJIeheRUhTD2WlEBaJHbWOQWDk1CfjhJOz1t2Ahc3TSNQ7G7eQnwwgoE1eIVVj
+         Ay/Rkw9cAcipXYihtN3ow7Qgh8kM02sIq9ReRoh53Y5ekn5l8Mx6igLNjdnN6FA2qEPX
+         Xljvd4y+SpZ87W4XR3AT/JGs+ibz0ZXKFJH+0YbyDqyQ43jp+nESi+EgfhF835ZDFScb
+         y2WJAgb44dXkjVaRXxNm5jLWpqfkGEOhmHxPym3I00zrSQdIU8l8mVhkrpXGfrdGIW+/
+         5tSn9vR2dxYb6wu7krtKI2k51WZkKL9UwlU9VxJJsfqVNzqe/d0UxD4wsUxrP/pZb5+e
+         xHbg==
+X-Gm-Message-State: AOJu0YyTrKsTUGRgxmTmwn7PxbkL0WpSM/+85W7AsyfjdHVin3KCaJOq
+	Xu3qTrkEwYgsUomU22RUvkWhhtuw/pkKw87ziLC5kCKVKipPqWBKeJEIkJAM3cQMXfPk2OCeAQY
+	SkKAv
+X-Gm-Gg: ASbGnctViJGuvjXz4ZxKpyusio9dm9yyKw1wZ0GP+2Afga6YPwju6rjlDA+M7Y55YgK
+	MQTWqhoJ+aP3JpJNrxjwzWItJNsGLBW8+VkWeFWxY9X82rfUs5RZYJcC2Fk+zLSQDOvSfuCXLkh
+	bLEaY/Sx+O//Uw6BmzMoghYXH94VNRlikW1l2TiBW80wGnmb4NIAxYBNqjDuscSyz35tlmq3kGi
+	yftEHAHEdzSL0x4goEUMP06rtfh//aTVQh8F7dbyIaMBrDhxrbqsPVjJJdqJahuYYUvz9GW7zeC
+	wInFbTfTiUCJITougjjZ0qRl6dIEHslSwRbY0CP1E4aM5vpnfcNwG1WUuRgwx27vbXikuyHiekF
+	mTtOe+RsOSvD83LSHEATw0nweTtbws5iMVuZdnC695EH2Y7PM7idxFa0zFqYGFYGLJ2JJA6SdJ6
+	zGGS1JyaB5uHQ84z+HpaxyFETGAueDtbagqJ0qJro9J4OtFqmrMa3X6h5GCg==
+X-Google-Smtp-Source: AGHT+IEjjeCtFDPguii4pI7+4Xe1thOGYlNcwSTuezdwWQaPw9yox0md9BSkzNKPALrn+1F+QIclKQ==
+X-Received: by 2002:a05:6402:35d3:b0:60c:679e:b957 with SMTP id 4fb4d7f45d1cf-611c1cb733fmr12954114a12.1.1752392288174;
+        Sun, 13 Jul 2025 00:38:08 -0700 (PDT)
+Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it (host-87-5-95-99.retail.telecomitalia.it. [87.5.95.99])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-611c973439bsm4568952a12.47.2025.07.13.00.38.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Jul 2025 23:30:28 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Sun, 13 Jul 2025 00:38:07 -0700 (PDT)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/7] python3-wxgtk4: Upgrade to 4.2.3
-Date: Sat, 12 Jul 2025 23:30:18 -0700
-Message-ID: <20250713063023.3538218-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250713063023.3538218-1-raj.khem@gmail.com>
-References: <20250713063023.3538218-1-raj.khem@gmail.com>
+Cc: linux-amarula@amarulasolutions.com,
+	Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Subject: [meta-filesystems][PATCH] ufs-utils: upgrade 6.14.11 -> 7.14.11
+Date: Sun, 13 Jul 2025 09:37:46 +0200
+Message-ID: <20250713073746.43627-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 13 Jul 2025 06:31:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118495
+ <openembedded-devel@lists.openembedded.org>; Sun, 13 Jul 2025 08:28:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118501
 
-Add missing build time dependency on requests python module
+Extending _GNU_SOURCE to the CFGLAS of all platforms, not just
+mipsarchn64, was necessary to fix the following error raised during the
+compilation of the new version:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ufs_emon.c: In function ‘do_emon’:
+ufs_emon.c:455:51: error: ‘O_DIRECT’ undeclared (first use in this function); did you mean ‘O_DIRECTORY’?
+  455 |         fill_data_fd = open("fill_file", O_RDWR | O_DIRECT | O_CREAT,
+      |                                                   ^~~~~~~~
+      |                                                   O_DIRECTORY
+ufs_emon.c:455:51: note: each undeclared identifier is reported only once for each function it appears in
+
+This _GNU_SOURCE define was added upstream in commit [1] in the Makefile
+default CFLAGS, but since Yocto redefines those it needs to be added
+back.
+
+Release notes:
+https://github.com/SanDisk-Open-Source/ufs-utils/releases/tag/v7.14.11
+
+[1] https://github.com/SanDisk-Open-Source/ufs-utils/commit/183e0deb28f13cfb3caf161fc6d0f3cd1edb05c2
+
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 ---
- .../{python3-wxgtk4_4.2.2.bb => python3-wxgtk4_4.2.3.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python3-wxgtk4/{python3-wxgtk4_4.2.2.bb => python3-wxgtk4_4.2.3.bb} (89%)
+ .../ufs-utils/{ufs-utils_6.14.11.bb => ufs-utils_7.14.11.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-filesystems/recipes-utils/ufs-utils/{ufs-utils_6.14.11.bb => ufs-utils_7.14.11.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.2.bb b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.3.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.2.bb
-rename to meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.3.bb
-index dc57c864e4..35bbd3ffc2 100644
---- a/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.2.bb
-+++ b/meta-python/recipes-devtools/python3-wxgtk4/python3-wxgtk4_4.2.3.bb
-@@ -5,7 +5,7 @@ LICENSE = "LGPL-2.0-only & WXwindows & BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=102f37a0d23aa258e59e4cc8b5380b35"
+diff --git a/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_6.14.11.bb b/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_7.14.11.bb
+similarity index 80%
+rename from meta-filesystems/recipes-utils/ufs-utils/ufs-utils_6.14.11.bb
+rename to meta-filesystems/recipes-utils/ufs-utils/ufs-utils_7.14.11.bb
+index a22e54e24c44..50b6b5a16cfd 100644
+--- a/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_6.14.11.bb
++++ b/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_7.14.11.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
- DEPENDS = "python3-attrdict3-native python3-six-native wxwidgets-native \
--           wxwidgets \
-+           python3-requests-native wxwidgets \
-            "
+ BRANCH ?= "dev"
  
- PYPI_PACKAGE = "wxPython"
-@@ -16,7 +16,7 @@ SRC_URI += "file://add-back-option-build-base.patch \
-            file://not-overwrite-cflags-cxxflags.patch \
-            file://0001-sip-Conditionally-use-GetAssertStackTrace-under-USE_.patch \
-            "
--SRC_URI[sha256sum] = "5dbcb0650f67fdc2c5965795a255ffaa3d7b09fb149aa8da2d0d9aa44e38e2ba"
-+SRC_URI[sha256sum] = "20d6e0c927e27ced85643719bd63e9f7fd501df6e9a8aab1489b039897fd7c01"
+-SRCREV = "5539a8ad8e1a9b7ea8b62213ed72eb939c5381b7"
++SRCREV = "92c8e4d732c34f8d0754d0e076879ca7008bace4"
  
- S = "${UNPACKDIR}/wxPython-${PV}"
+ SRC_URI = "git://github.com/westerndigitalcorporation/ufs-utils.git;protocol=https;branch=${BRANCH} \
+           "
+@@ -14,7 +14,8 @@ UPSTREAM_CHECK_COMMITS = "1"
  
+ EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} CC="${CC}" CFLAGS="${CFLAGS}""
+ 
+-CFLAGS:append:mipsarchn64 = " -D__SANE_USERSPACE_TYPES__ -D_GNU_SOURCE"
++CFLAGS:append = " -D_GNU_SOURCE"
++CFLAGS:append:mipsarchn64 = " -D__SANE_USERSPACE_TYPES__"
+ 
+ do_configure() {
+ 	sed -i -e "s|-static$||g" ${S}/Makefile
+-- 
+2.43.0
+
 
