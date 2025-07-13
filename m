@@ -2,95 +2,88 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 65D36C83F17
-	for <webhook@archiver.kernel.org>; Sun, 13 Jul 2025 06:30:31 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.web11.51944.1752388228921833046
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BF68C83F17
+	for <webhook@archiver.kernel.org>; Sun, 13 Jul 2025 06:30:41 +0000 (UTC)
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.web10.52280.1752388232285021134
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 12 Jul 2025 23:30:28 -0700
+ Sat, 12 Jul 2025 23:30:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=necdrBSV;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-75001b1bd76so713559b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 23:30:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=E7COPUM3;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-b3aa2a0022cso3446860a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 12 Jul 2025 23:30:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752388228; x=1752993028; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=8pfS+DaMhVY3jBoDhIyy8SDNbjSib9jApi/i6wovDFM=;
-        b=necdrBSVYQ6Fllt68Ibs+37svENgjGTvb3feEZzcfXItRN/rY3dtDynaHLGWVKF8p3
-         u6UGUq5i69UgNrbgd9OD/jn4QO70aJybpG4Z/1oMG80Qkmqd5hR+5ANsTd7IRHkAnBL2
-         RGH1HPsIGCn0pSzJvD0yyVx29we/wssW0Mcimtz7tovVl5NetsxeShSLEoawezQisZDu
-         Y57aCzHrdf4Ypc2/WcsclbzAv5+V6R3vPAp+CzW7ROEMgBYWEOLRT5dpssirS+kZfgQ/
-         oRl9tGu2qwPKdk+hbzMjkq7MCyt4XgxLRJ7cH2kBL7v3ov/3mfkiH4DiGPYp8TUzIvep
-         TTNQ==
+        d=gmail.com; s=20230601; t=1752388231; x=1752993031; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mCioX6yqlUzc7ckNS0C2LQvPpixnA/ekFbYZhsCrkNM=;
+        b=E7COPUM39m8or+pGW6wWLcl9Da0RN40VjaUS2KwW5pqJym+VD2DqFNs0xdJVJW0ZGi
+         1fahVbylVAhFfqu6l4lTPTw7eKY5hF3Vwtl+1V3OwqJratZqOD1o7cZ7fHu27sniuA6D
+         f792kcDG2KsGRX5guwEvaGYKmObzPT3KnXnp8CYLlX5TJYnBLSCTGROSr+WIFttPkmHs
+         Fy7dFvs14JVn9L72ThbLL3/BdFYp4tWOszsbWbKl73bFa6jQszaHpFeUmJVJLwHi8I3U
+         IfIFzHMbyvT4nqE3U75FXyMapD/+UEGcJ/sKPiMi6Cofz7auVP405sGIJeMQlznV+F2q
+         6UXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752388228; x=1752993028;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=8pfS+DaMhVY3jBoDhIyy8SDNbjSib9jApi/i6wovDFM=;
-        b=kQsCBY/ctN7PKNjx77/VKcFyw1lmoqXIx8tm0YeRGX6W4ScNPCOZUKE4zKaPvwWp2A
-         eBRLfa3qho0pEGEvWBhh3riWDEFpvH7YkW5IVgLG9/4cf/Uro28YcPULKexY8kGP9xAj
-         rKNcsRzohFbvpT5tS7BFCSs9BjKAUc2vjy0rLTW1MoGtzXYH74WhlVrTFptW0iHbvwiK
-         UOcwz0Jfl0/ERkxQ60ycuYdpA+LbReYxI4vDNKVEOju5NvNZWCb4GNS2NSAs392kYCTn
-         Q9VIpjxdJCf2Sr1jLq0oyMuqZozkGILqdr5asKpmhY0fv8ZdhZ4wNkj34v2+m5lDlRpr
-         p3Tg==
-X-Gm-Message-State: AOJu0YzU+IyQTC75Hhi4u6ea325gpbgydR02MG7Yr1pMkHo6pxiVKuyD
-	HKc8l0ExoyIkfNBNVQDKOjv0CMGPUCbTe2V6FDx4EWWiYWt3fHTEDQ8m8+nsQqJb
-X-Gm-Gg: ASbGncsH539NomUVSJmRz6CNThflSj2aHjA5uPrUIKYHd9sHXiD35qJ32FM+Fe7PQHP
-	Jr2bUdAh1zHusnfe+y6nZr3MPDTXiOW9FfXkYFvUnZNzyw8otK76WfWS9b+sLF8/31yj11DyBwL
-	i1iXbt8+wWgUDtDCbxI9Epx1L72Cfsr7VRKD+zd24dZvQX3rrBfZz2p+u3L0caDGSrQVJhZr6wk
-	UcXWD4rF6FIYCTbUP52W48aFp/dHkXaQcU0VC8keENijf6AANLF3LspjmAYuITkpY8by5pfkKO9
-	/IJT+Yr2LWEVEgL0cy+MlL/eL7lA+4vime6CNzYULxLkE10UCtH1rHICVZfuSz+11O1qaQZiGxY
-	j011eQ6yR6AQ4MOUtjEdfLYbw
-X-Google-Smtp-Source: AGHT+IETRUm2w/uHFNhrUX4nglzngYV+h18HK0skgKBShH4ltT0xQj7DFh9EXfJ9zt0gPpdzjrt41w==
-X-Received: by 2002:a05:6a20:43a2:b0:226:c273:1882 with SMTP id adf61e73a8af0-2313504f542mr13996482637.12.1752388227745;
-        Sat, 12 Jul 2025 23:30:27 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1752388231; x=1752993031;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=mCioX6yqlUzc7ckNS0C2LQvPpixnA/ekFbYZhsCrkNM=;
+        b=US2jUX9PJxqvSGckkBdhktFaKyNGQr1JVUjsf8YB0vMofX5LVfuVVZu9evb8zHHFgV
+         PlBaOn2oM+mFLEaU/qBamOXM2tOfH8pXsOzEgZqaRlWqQ7nMzDVVWjUrTc4m5ar1JVb6
+         xaVJkA4S2DhY2tTzkGecZpQytuGi6ffsNxUQowdS9JCa6hMeeLnKyF1EwtgZAGTxLGnP
+         xDtUUGGc66YyawpDt2Io92XoXLPRrQnsy3/SKsXKa7KsLuiDUKrV9F8TkW+rrcgIZG4t
+         m/G5zwXj1TFBkfLZrnQdH6/lu0IKYFOTPypRmPv75rpczadlEO059lfG3FDRrzTuEB+w
+         A7Xw==
+X-Gm-Message-State: AOJu0Ywhf1X/a65O2WRxcXO3wiDQEKl0gd3vxAY9ExubtEpBPGtXrpwE
+	a6XuctxUVY5jeu5saMYBuuaQ7xEWQ2zUVlTvLWOM/Xelwyyjd25o3ZGcHvAZig4f
+X-Gm-Gg: ASbGncuywamVHtUzE/hWV+mqyqW1zEBpd0DtXUCH4uOGUWoWGE/iZOYvrPhopFC3Azu
+	ShItYHoMeCvkfnj3SsNqQi1+2vUsN4OumnF2QenP8yzU0gI/VY/28wtwG4DIbM8vZ17J+QL5TbQ
+	BPEfyoKi39LgfZZlrTDMudX4spLXqVEtjsCJLk4YxsYWgtgOtfreOhU3LHYz7MHKSC00BHtxeEx
+	hIbnn9qifqiJNvYlhryOYmBrwQeMAOrNLdq4esbzIZHPuth7cfrPRanehtpTNea/Yka3V0a0PtA
+	flZpECh8xVN3YaH3s8RpPdp5pagGKzmVDwYZBNXuGPdACtuJMT7tROi0Xhak5WjvQc49Lvrnv/S
+	8zVy4N2joshVWdg==
+X-Google-Smtp-Source: AGHT+IHWc09p8DTOh3ostB1ZfmLTQiD0Q4H0Tod3Qvs4zuhXEr5bERDB4/qEcwTje44uRc7Ft8+r1g==
+X-Received: by 2002:a05:6a20:e198:b0:220:94b1:f1b8 with SMTP id adf61e73a8af0-2311a7c0f53mr15961497637.0.1752388231263;
+        Sat, 12 Jul 2025 23:30:31 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:8201:fd20::1c1d])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b3bce529689sm4928927a12.52.2025.07.12.23.30.24
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b3bce529689sm4928927a12.52.2025.07.12.23.30.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 12 Jul 2025 23:30:25 -0700 (PDT)
+        Sat, 12 Jul 2025 23:30:29 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/7] wxwidgets: Enable webui and mediactrl packageconfigs by default
-Date: Sat, 12 Jul 2025 23:30:17 -0700
-Message-ID: <20250713063023.3538218-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/7] obexftp: Fix build with cmake4
+Date: Sat, 12 Jul 2025 23:30:19 -0700
+Message-ID: <20250713063023.3538218-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250713063023.3538218-1-raj.khem@gmail.com>
+References: <20250713063023.3538218-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 13 Jul 2025 06:30:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118494
-
-these are required by default configuration for python3-wxgtk4
+ <openembedded-devel@lists.openembedded.org>; Sun, 13 Jul 2025 06:30:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118496
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.8.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.8.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.8.bb
-index bfbb49d226..ce45d366c0 100644
---- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.8.bb
-+++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.8.bb
-@@ -46,6 +46,7 @@ EXTRA_OECMAKE:append:class-target = ' -DEGREP="/bin/grep -E"'
- PACKAGECONFIG ?= "${@bb.utils.contains_any('DISTRO_FEATURES', 'x11 wayland', 'gtk', 'no_gui', d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'opengl', '', d)} \
+diff --git a/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb b/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb
+index 30326e89ef..dce7e72c8b 100644
+--- a/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb
++++ b/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb
+@@ -32,6 +32,7 @@ S = "${UNPACKDIR}/${BP}-Source"
+ EXTRA_OECMAKE += "-DCMAKE_SKIP_RPATH=ON \
+                   -DENABLE_PERL=OFF -DENABLE_PYTHON=OFF \
+                   -DENABLE_RUBY=OFF -DENABLE_TCL=OFF \
++                  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
  "
-+PACKAGECONFIG:append:class-target = " mediactrl webkit"
  
- PACKAGECONFIG:remove:class-native = "opengl"
- 
-@@ -70,6 +71,7 @@ python () {
- PACKAGECONFIG[gstreamer] = "-DwxUSE_MEDIACTRL=ON,-DwxUSE_MEDIACTRL=OFF,gstreamer1.0-plugins-base,,,no_gui qt"
- PACKAGECONFIG[libsecret] = "-DwxUSE_SECRETSTORE=ON,-DwxUSE_SECRETSTORE=OFF,libsecret,,,no_gui"
- PACKAGECONFIG[lzma] = "-DwxUSE_LIBLZMA=ON,-DwxUSE_LIBLZMA=OFF,xz"
-+PACKAGECONFIG[mediactrl] = "-DwxUSE_MEDIACTRL=ON,-DwxUSE_MEDIACTRL=OFF,"
- PACKAGECONFIG[mspack] = "-DwxUSE_LIBMSPACK=ON,-DwxUSE_LIBMSPACK=OFF,libmspack"
- PACKAGECONFIG[opengl] = "-DwxUSE_OPENGL=ON,-DwxUSE_OPENGL=OFF,libglu"
- PACKAGECONFIG[sdl_audio] = "-DwxUSE_LIBSDL=ON,-DwxUSE_LIBSDL=OFF,virtual/libsdl2"
+ do_compile:class-native () {
 
