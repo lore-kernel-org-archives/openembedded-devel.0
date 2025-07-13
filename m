@@ -2,35 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66907C83F20
-	for <webhook@archiver.kernel.org>; Sun, 13 Jul 2025 09:49:12 +0000 (UTC)
-Received: from mta-64-226.siemens.flowmailer.net (mta-64-226.siemens.flowmailer.net [185.136.64.226])
- by mx.groups.io with SMTP id smtpd.web11.53730.1752400151345950183
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6391DC83F17
+	for <webhook@archiver.kernel.org>; Sun, 13 Jul 2025 09:51:22 +0000 (UTC)
+Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ by mx.groups.io with SMTP id smtpd.web10.53994.1752400274232952861
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 13 Jul 2025 02:49:11 -0700
+ Sun, 13 Jul 2025 02:51:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=HeDSefG6;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226, mailfrom: fm-256628-2025071309490912644ea1c04a35c5d1-9w_ji0@rts-flowmailer.siemens.com)
-Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id 2025071309490912644ea1c04a35c5d1
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=LfeEOk9W;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-256628-202507130951120ca42a8d4f7543b7ee-z_evzr@rts-flowmailer.siemens.com)
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 202507130951120ca42a8d4f7543b7ee
         for <openembedded-devel@lists.openembedded.org>;
-        Sun, 13 Jul 2025 11:49:09 +0200
+        Sun, 13 Jul 2025 11:51:12 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=s+Rn8r8eKxeo2TzoPDfFJk7C6gKQAra78lGtz9u0qx0=;
- b=HeDSefG6giXOI/CgLDaGRpbIM3h+Y9A3HC3FRqicsv2zaahcPSPsak7kW07R/OzoMz5h6o
- 7bsrXmNvim4HssVlmICdZs30cDbCZCMSb2+cIFVl6D8betXXtBDoLuH1btH1g/m7jsnmaZ9j
- zmMFj/GcK/haIY9nzkr53G+B6HToBPrFYKNiHNxaYVLn14rEo9mq0ofFuSDcNAsQv87x+wzK
- YtU8b6eah1CDwlvgjGODjkIorMzMGr6GWzBoa8zu+AzF9FDHQ/VUQvjEu1w1ebfNMj5Pswwr
- 19Svp8/S32z3MYnkiwhJ3ffVSgyzj15OXrjBmpXrt0ttfNzVYI91+H4w==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=OzHTYSYbbmv3Ax90BiiK3tNQbiTPF6ztKI8XLZQW8uo=;
+ b=LfeEOk9W+wma5iS56M+gCMLRUXp0x9XkcE1P9S0GcPOUcKNbCr4nvBEKsq09k7NbVZPY0R
+ nNfSvmDkKDW01HlXoUic8lrVWbaR897+AcchaO/UKWLknG5Sxcc1Ns7BpzDSKZtkxGcJN/BA
+ PLjNOWLlRrR+B0LQ2LTpGHG39/wVITLbxsMphrI8pLB9xUJrGBK8LTUhvE5bsvKgPj8Zm48g
+ SwPlePo1DwRxFKGGUEDOfyJjsEJ2fW+dNc6p2z6F8EtWeQjHuaQy3LL1hXIpTuDlQOmMqbgp
+ V27oMkXdMIIsP3tfh9XeRiHy60fSuaz8sd6rr06MIP/7U9+Qgp4R5OHQ==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][scarthgap][PATCH 2/2] poco: patch CVE-2025-6375
-Date: Sun, 13 Jul 2025 11:48:12 +0200
-Message-Id: <20250713094812.502038-2-peter.marko@siemens.com>
-In-Reply-To: <20250713094812.502038-1-peter.marko@siemens.com>
-References: <20250713094812.502038-1-peter.marko@siemens.com>
+Subject: [meta-oe][walnascar][PATCH] poco: patch CVE-2025-6375
+Date: Sun, 13 Jul 2025 11:50:21 +0200
+Message-Id: <20250713095021.502242-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -38,8 +36,8 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 13 Jul 2025 09:49:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118506
+ <openembedded-devel@lists.openembedded.org>; Sun, 13 Jul 2025 09:51:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118507
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -49,8 +47,11 @@ Pick commit mentioned in [1].
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
+Note that in my testing there are 25 failing tests.
+However the failures are the same as without this patch.
+
  .../poco/poco/CVE-2025-6375.patch             | 34 +++++++++++++++++++
- meta-oe/recipes-support/poco/poco_1.12.5p2.bb |  1 +
+ meta-oe/recipes-support/poco/poco_1.13.3.bb   |  1 +
  2 files changed, 35 insertions(+)
  create mode 100644 meta-oe/recipes-support/poco/poco/CVE-2025-6375.patch
 
@@ -94,16 +95,16 @@ index 0000000000..2ec8f819f9
 + 
 + 	static const int eof = std::char_traits<char>::eof();
 + 	std::streambuf& buf = *_istr.rdbuf();
-diff --git a/meta-oe/recipes-support/poco/poco_1.12.5p2.bb b/meta-oe/recipes-support/poco/poco_1.12.5p2.bb
-index dc6e65b994..86e0adf522 100644
---- a/meta-oe/recipes-support/poco/poco_1.12.5p2.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.12.5p2.bb
-@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/pocoproject/poco.git;branch=poco-1.12.5;protocol=htt
-            file://0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch \
+diff --git a/meta-oe/recipes-support/poco/poco_1.13.3.bb b/meta-oe/recipes-support/poco/poco_1.13.3.bb
+index 662caa27d7..5899db651d 100644
+--- a/meta-oe/recipes-support/poco/poco_1.13.3.bb
++++ b/meta-oe/recipes-support/poco/poco_1.13.3.bb
+@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/pocoproject/poco.git;branch=poco-1.13.3;protocol=htt
             file://run-ptest \
-            file://0002-fix-build-Install-cmake-files-with-resolved-ENABLE_J.patch \
+            file://0001-SimpleRowFormatter.h-fix-the-build-on-gcc-15-unsatis.patch \
+            file://0002-fix-Foundation-Build-error-with-GCC-15-class-Poco-Pr.patch \
 +           file://CVE-2025-6375.patch \
             "
- SRCREV = "1d6fb3e1383e559cacbada5e3f861c0dafaf5d30"
+ SRCREV = "7f848d25aa0461d3beeff1189dc61b48ffe8e2f4"
  
 
