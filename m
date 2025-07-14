@@ -1,132 +1,155 @@
-Return-Path: <mikko.rapeli@linaro.org>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 991E9C83F1B
-	for <webhook@archiver.kernel.org>; Mon, 14 Jul 2025 13:52:22 +0000 (UTC)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web10.78649.1752501133958027857
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2A30C83F1A
+	for <webhook@archiver.kernel.org>; Mon, 14 Jul 2025 13:59:22 +0000 (UTC)
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web11.74821.1752487833266040324
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Jul 2025 06:52:14 -0700
+ Mon, 14 Jul 2025 03:10:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=ziK7hneM;
- spf=pass (domain: linaro.org, ip: 209.85.167.53, mailfrom: mikko.rapeli@linaro.org)
-Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-55502821bd2so4482073e87.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 06:52:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=H+qm61ip;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: sanakazi720@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-3137c2021a0so3255649a91.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 03:10:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1752501132; x=1753105932; darn=lists.openembedded.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Vw1dWA0/DhICfW5mfZ7ks7dzp5Lp1X9sF0zX/+eeXdI=;
-        b=ziK7hneMHxPqeLPt82zx6jD+rgYP4mLBEH7jlx1ciXDMXgznnSN4sAkSYT0KpT7kK7
-         NTiqolU9i8Dzt3RdrsPdqpn4RlvSpmWFZzalXU3ZjD5c3B/ezQLlC3b9qVHhLPxflz2j
-         pQOmZF31K191H7VUQhJS7xUkcM+bcU8ir9SCaHwxfWrkzV4yHkAcvEgXhgH9JtkUYiIY
-         s2l1bEgZmgaysTa4/PhP4l22pDRMJ+URg+r4zwHvOphCjDidu7ZWcvsqKnAiS8WxpyH2
-         UYDmjDpOwP0t1ciQKKfFHFQd7mC8MCU8XRr8yUjvW5O7Bvodgzq8S9DPVlJmA8f+f5Xp
-         TH1g==
+        d=gmail.com; s=20230601; t=1752487832; x=1753092632; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=j3Mh8PIvR5sYnMpDJzqkBWSnQUJeO7k8YW1dYaqeKew=;
+        b=H+qm61ipR2Gdi35xWtGbB1E5Vv2j0vPU3PJF5wMIpl+vPMl7Luiyw2aP/IxYhCQhtE
+         hrN/NRtpyjICVHgwPl1s6at7ndZhpZSZgjkiTybNomo3cyyiM2mGepyBo6qiDaFf64la
+         HhVx+eCjsDovIGMg8IiUdIcOxk7xrZX092F9T6ou2TgzfsbSeU96/edt7/5y97tLCtmd
+         1PypLPQOjEq8pY4QP4ksBgvvCcVgMCzoIRqZJLI8wGEVZlF3EZFz53MMIJf+H85p00F1
+         E8Vtymt40kp2qLHk+tnkegzASnT8pJFK6PDk8TLcn/yqY/m6uJPj4bIwvzAnb8D2Dg4K
+         bEMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752501132; x=1753105932;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Vw1dWA0/DhICfW5mfZ7ks7dzp5Lp1X9sF0zX/+eeXdI=;
-        b=qQbRwLae6tBxroF9hDicfC5+IRGbRNB4z3JAV5Ae0ZbXcxYkRUctr2SZLSbnvrI3qE
-         3uCLW9NLdekprt88K3SfzTM+JdSXGCbR1Y6FEgv3b7EylJBNeYTUOR/gt8hd66xb3idu
-         7cy7DnI8TYHi0Tqt3GCrn6kbzF99hWjqjjv6AjaosCPVSC0+DJsxnY6YoOtaGHfBznbI
-         fiRNS9scIbFUKmIFye+eU01Lq33waXDNrh47EJdajTZRjS2rIDeO7YPCt7is49ul5INo
-         ILKPhbxbfFBIjnnAiG5sh88DcqLJv+h8J1qqXswOLWjjYk8DZc/MZ5RnazXsgs+99Z/Z
-         wr0w==
-X-Gm-Message-State: AOJu0Yw+1LUqUJKdebdr8ymwwum1HxPe7q9zYeqnHsG8QyBBvNTOGuX+
-	lQaPfzulQ2nBra3/47erG1kEO/g/6okapC137U4iaGQYkUU9ed39HB/F1iYekk8ieqU=
-X-Gm-Gg: ASbGncuvfw1O8av5QHmqNg23F83ogfkpj7Fbd8ze1gESTTwDkKcBzDWjGuMTokwwHhq
-	Fbtz72+IUlwF2VmMuydzEwMWICA3HadmFaMxqYNmgWvPv5QUqSsbPOgN4jc5WJVOC7BahERjT+U
-	P/wFvCIJcA1uzZvJYSOL4j+2WZmkCNi2B+6Q+ru4aDkH6F0Tu4bqZwcjswM5JxmxIqbx/Ch0iF6
-	4SZXloTYTMACVTNih6zqqw5VZdzXQWUjNfkKsS29CJiDPFT33oO8EcA6LRacEHvooedQlqFo7gj
-	82ZRwk+klq/fPb/gcKp1EZ0qIIjgTKzxMEXjuKHUWjjWpxVcXnQq89YTcbqsiWcF5cv0f/1nH1+
-	C71YKmarvdITZpwVoMnQrPpVghF2vMU3Xp8Ud0uuNgVfkvF73uDy82yqNApERNVs7UA==
-X-Google-Smtp-Source: AGHT+IHqDaso58JBj0weswi+qydrVbFdTVrJ0/YlFwhvdVk8PU2u76cFFqNhA8a7RwWYesO9eAQ23A==
-X-Received: by 2002:ac2:4c4c:0:b0:553:2868:6361 with SMTP id 2adb3069b0e04-55a044b3ef4mr3959305e87.18.1752501131722;
-        Mon, 14 Jul 2025 06:52:11 -0700 (PDT)
-Received: from nuoska (87-100-218-141.bb.dnainternet.fi. [87.100.218.141])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-55943b7115dsm1963076e87.190.2025.07.14.06.52.11
+        d=1e100.net; s=20230601; t=1752487832; x=1753092632;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=j3Mh8PIvR5sYnMpDJzqkBWSnQUJeO7k8YW1dYaqeKew=;
+        b=WMxkEZMmg0ZFBsA5RwvQs3S0r1afXsyiqRCjrwkFKCSLX2OliBUoMPO2WemfwnwKAK
+         toeKZvAiHnPl1HJl9MdeXX64s6CQoMXi/a1INYgZEMvNGumJUvXMefLFf8oRlFwUgckX
+         ckY912pBJqIz6iqaYOjFJwrqxszTBDdLe++NBzUuYQBmgnjPO2TSLKCeXT1Kg+VHnUjt
+         MAh2yBHNy2UPNBNo17vS3Niio9TjWCae+aOJJgajah+BpdldkGdhYuWXt9o4iRzchylb
+         IjJ9tCdyh6onhW6uK8K7ZCTBfZtQN9qHZVjPON11Ig3mwBkurqnL94Pwi/W31gi84vjy
+         Zjrg==
+X-Gm-Message-State: AOJu0YzWcJzzF0ZxlCHsePI4ZZmPFtpt63rVZECxhKGwPB5kQP5wALN4
+	naM/y8Ft49zZwoOziPjf9bSYgBtFhGHOoECUcTG1ZbRKSWoR31boviKCno5piA==
+X-Gm-Gg: ASbGnctLpDKGZ98VvmThtrXKvok8ErQac4GkLTvu8xLkV3Io7v/Ea70F5WJy4QvBwzj
+	CtbOi7M4JSds9jOfVY5hyXX9IAfqu5RZ9zEtOtRKfqCZzQj106q7gJ4reHmiBwBbEarcL7Lj9tq
+	QqJL8jJmZvdC8bis2Wd7+jRhOY9Ibk7T5RNXGmmwP7tzjvQtkDiCy/d+OdEeynnMgornflH1gNi
+	qWk2lHebFXMXgdnbBJvasSF/Ni4264YAs3NC54xudXUu1DnJmDOnOgXtgq7mwtgoVv3u2WPGgia
+	dTvo+INDd6w6JXIAaUEQPbyoranC01wfkqRUTn6yt362oZDevT2TAqI70c0mgJHq0WQFi5jM5aM
+	s+3/NWuCmdd2hFuIMfcvdpZqRPYPdsw7ALBlXwYtH2g==
+X-Google-Smtp-Source: AGHT+IEv5rlKNrRtlpSZaTIHawuO/uWoNGWLJqg51BQ+unVjh0wfNJBlXFjjg+VXiLch9FlL98yf0g==
+X-Received: by 2002:a17:90b:580c:b0:311:ad7f:3299 with SMTP id 98e67ed59e1d1-31c4cd9d001mr19310195a91.25.1752487832114;
+        Mon, 14 Jul 2025 03:10:32 -0700 (PDT)
+Received: from localhost.localdomain ([2401:4900:1c16:109b:9344:598d:802f:7ba5])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-31c23006d72sm6714341a91.1.2025.07.14.03.10.30
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Jul 2025 06:52:11 -0700 (PDT)
-Date: Mon, 14 Jul 2025 16:52:09 +0300
-From: Mikko Rapeli <mikko.rapeli@linaro.org>
-To: martin.jansa@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] fwupd: set vendor_ids_dir
-Message-ID: <aHULieE55wXsyrSf@nuoska>
-References: <20250714134657.1620685-1-martin.jansa@gmail.com>
+        Mon, 14 Jul 2025 03:10:31 -0700 (PDT)
+From: "Sana Kazi" <sanakazi720@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [kirkstone][PATCH] tcpdump: Fix patch-fuzz issue
+Date: Mon, 14 Jul 2025 15:40:20 +0530
+Message-Id: <20250714101020.411942-1-sanakazi720@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250714134657.1620685-1-martin.jansa@gmail.com>
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 13:52:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118533
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 13:59:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118535
 
-Hi,
+Fix patch-fuzz for CVE-2024-2397.patch
 
-On Mon, Jul 14, 2025 at 03:46:57PM +0200, martin.jansa@gmail.com wrote:
-> From: Martin Jansa <martin.jansa@gmail.com>
-> 
-> * it's in RSS as fwupd/2.0.12/recipe-sysroot/usr/share/hwdata/usb.ids but
->   meson is searching the paths on host with:
-> 
->   # look for usb.ids in both of the Debian and Fedora locations,
->   # and fall back to the system datadir in case we're building in a venv or prefix
->   vendor_ids_dir = get_option('vendor_ids_dir')
->   if vendor_ids_dir == ''
->     vendor_ids_dir = join_paths(datadir, 'misc')
->     if not fs.is_file(join_paths(vendor_ids_dir, 'usb.ids'))
->       vendor_ids_dir = join_paths(datadir, 'hwdata')
+Signed-off-by: Sana Kazi <sanakazi720@gmail.com>
+---
+ .../tcpdump/tcpdump/CVE-2024-2397.patch       | 25 +++++++++++--------
+ 1 file changed, 15 insertions(+), 10 deletions(-)
 
-Isn't this the same as ${datadir}/hwdata ?
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch b/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
+index 169ec6be70..1207362b91 100644
+--- a/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
++++ b/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
+@@ -1,4 +1,4 @@
+-From b9811ef5bb1b7d45a90e042f81f3aaf233c8bcb2 Mon Sep 17 00:00:00 2001
++From 732d375501d687812866da0602457109a2088254 Mon Sep 17 00:00:00 2001
+ From: Guy Harris <gharris@sonic.net>
+ Date: Tue, 12 Mar 2024 00:37:23 -0700
+ Subject: [PATCH] ppp: use the buffer stack for the de-escaping buffer.
+@@ -29,20 +29,25 @@ Signed-off-by: Ashish Sharma <asharma@mvista.com>
+  print.c     |  8 ++++++--
+  2 files changed, 23 insertions(+), 16 deletions(-)
+ 
++---
++ print-ppp.c | 31 +++++++++++++++++--------------
++ print.c     |  8 ++++++--
++ 2 files changed, 23 insertions(+), 16 deletions(-)
++
+ diff --git a/print-ppp.c b/print-ppp.c
+-index 2cf06c363..9aed23eb9 100644
++index aba243d..e5ae064 100644
+ --- a/print-ppp.c
+ +++ b/print-ppp.c
+-@@ -37,6 +37,8 @@
+- 
+- #include "netdissect-stdinc.h"
++@@ -42,6 +42,8 @@
++ #include <net/if_ppp.h>
++ #endif
+  
+ +#include <stdlib.h>
+ +
+  #include "netdissect.h"
+  #include "extract.h"
+  #include "addrtoname.h"
+-@@ -1358,7 +1360,6 @@ ppp_hdlc(netdissect_options *ndo,
++@@ -1363,7 +1365,6 @@ ppp_hdlc(netdissect_options *ndo,
+  	u_char *b, *t, c;
+  	const u_char *s;
+  	u_int i, proto;
+@@ -50,7 +55,7 @@ index 2cf06c363..9aed23eb9 100644
+  
+  	if (caplen == 0)
+  		return;
+-@@ -1366,9 +1367,11 @@ ppp_hdlc(netdissect_options *ndo,
++@@ -1371,9 +1372,11 @@ ppp_hdlc(netdissect_options *ndo,
+          if (length == 0)
+                  return;
+  
+@@ -65,7 +70,7 @@ index 2cf06c363..9aed23eb9 100644
+  
+  	/*
+  	 * Unescape all the data into a temporary, private, buffer.
+-@@ -1389,13 +1392,15 @@ ppp_hdlc(netdissect_options *ndo,
++@@ -1394,13 +1397,15 @@ ppp_hdlc(netdissect_options *ndo,
+  	}
+  
+  	/*
+@@ -87,7 +92,7 @@ index 2cf06c363..9aed23eb9 100644
+  	length = ND_BYTES_AVAILABLE_AFTER(b);
+  
+          /* now lets guess about the payload codepoint format */
+-@@ -1437,13 +1442,11 @@ ppp_hdlc(netdissect_options *ndo,
++@@ -1442,13 +1447,11 @@ ppp_hdlc(netdissect_options *ndo,
+          }
+  
+  cleanup:
+@@ -104,7 +109,7 @@ index 2cf06c363..9aed23eb9 100644
+  }
+  
+ diff --git a/print.c b/print.c
+-index b9ba5997d..f20633388 100644
++index 9c0ab86..33706b9 100644
+ --- a/print.c
+ +++ b/print.c
+ @@ -431,10 +431,14 @@ pretty_print_packet(netdissect_options *ndo, const struct pcap_pkthdr *h,
+-- 
+2.25.1
 
-Cheers,
-
--Mikko
-
->     endif
->     if not fs.is_file(join_paths(vendor_ids_dir, 'usb.ids'))
->       vendor_ids_dir = '/usr/share/hwdata'
->     endif
->     if not fs.is_file(join_paths(vendor_ids_dir, 'usb.ids'))
->       vendor_ids_dir = '/usr/share/misc'
->     endif
->     if not fs.is_file(join_paths(vendor_ids_dir, 'usb.ids'))
->       vendor_ids_dir = '/usr/local/var/homebrew/linked/usb.ids/share/misc'
->     endif
->     if not fs.is_file(join_paths(vendor_ids_dir, 'usb.ids'))
->       error('could not auto-detect -Dvendor_ids_dir=')
->     endif
->   endif
->   conf.set_quoted ('FWUPD_DATADIR_VENDOR_IDS', vendor_ids_dir)
-> 
->   it shouldn't be looking at host's paths and and on hosts without
->   usb.ids in one of these locations it fails with:
-> 
->   ../sources/fwupd-2.0.12/meson.build:323:4: ERROR: Problem encountered: could not auto-detect -Dvendor_ids_dir=
-> 
-> Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-> ---
->  meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb b/meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb
-> index e25fbe1f54..eb43c3d865 100644
-> --- a/meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb
-> +++ b/meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb
-> @@ -37,6 +37,8 @@ GIDOCGEN_MESON_DISABLE_FLAG = 'disabled'
->  GIR_MESON_ENABLE_FLAG = 'enabled'
->  GIR_MESON_DISABLE_FLAG = 'disabled'
->  
-> +EXTRA_OEMESON = "-Dvendor_ids_dir=${datadir}/hwdata"
-> +
->  PACKAGECONFIG ??= "\
->      ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
->      ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
 
