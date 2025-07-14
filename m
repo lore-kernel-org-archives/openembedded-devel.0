@@ -1,234 +1,208 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB7E5C83F1A
-	for <webhook@archiver.kernel.org>; Mon, 14 Jul 2025 23:29:39 +0000 (UTC)
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.web10.2116.1752535778529408755
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E16C7C83F1B
+	for <webhook@archiver.kernel.org>; Mon, 14 Jul 2025 23:48:29 +0000 (UTC)
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.web10.2473.1752536900689113661
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Jul 2025 16:29:38 -0700
+ Mon, 14 Jul 2025 16:48:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fvVobSSX;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-b3220c39cffso4993609a12.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 16:29:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=niYQnJ/U;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-313154270bbso4622928a91.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 16:48:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752535777; x=1753140577; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=y2RcVsvrBwzi8oXchm7ytAssb+LYVJXGogU5V7dZLY8=;
-        b=fvVobSSXcHqNFuEOPqLHk3FZECQPn1j7merXtT4ZDFMnyiX3KPKlyNKq0/lK4IMob+
-         yy6ezhetJK0Qa5MNPmn1mB7JzSUp6qkAJN+fMGcuo/EHujRzIVsHMBCsgboOWV2mMBfE
-         vzbT8CLWjvEd/lN1hyRg5c72k9Iy5xg5KOQNGWYF8vg9PURwWgh8dTpkuohasniIgAeE
-         ns7pploF5sKRHvWvsPlO7bfEdU8DdWLfo8olSrml+kEW4c5LMWh4+FNwjwRexZJVs7uV
-         at/PJhL4R/GMYCWxLFaFVOFDeZ7iZlFgqNTYjYCbNWrHOEy+mIyTNl51WEukEluPjfBs
-         nzdQ==
+        d=gmail.com; s=20230601; t=1752536900; x=1753141700; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=1RU9Os9gMLOpOR2985XCpanhOPT8uyb4v3af+LbibSc=;
+        b=niYQnJ/UvjPYdHxbXnwgE+i0svZIR+G8vJHm8aBxtQYoiZ7Gobv7HqiApRazgADqEd
+         3dvfyAK0xVluGhuAF9Vx22cbqPnEyS2xEMyoWK7S/qNasz/N3Qgg8xYAvVUh5XR9SJfZ
+         TXlFwbosoX+1DrOBQz6wqNnPxBmDHZaxbZ3IMyoRSEI+o7pDDEqvO0ZobcRYj1acTJNN
+         0kOX0i0AUDrS2mCx+H8ZHKLmcKeXyU5MS8BctfrQ9CotYDbzWOt9xHx92xUD9PyEtr0N
+         DA4K1/Fg88z2/TYXiqBjf0nl8ypAvX9h+j09ng6SdHkrBEcetT/Zl95ubIfh0yKDSid5
+         GzSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752535777; x=1753140577;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=y2RcVsvrBwzi8oXchm7ytAssb+LYVJXGogU5V7dZLY8=;
-        b=YFeW2rkNcSrVIyIsm/8tZh3367HfQ857iMSoA/dXWefdU3wyn5UnfWanU3bDS3ciuu
-         NqKMHeSNBmyQ3sADXuI/Wv5UXcM+K3B9hRVkQ9I9FkA+CSHtV2B+yZfuk3zMVGVW7lgZ
-         ncO5x4+xk9MI16KJqE07JtEnYn9Vlk7zgm+Iq9XBCCTVU//vUtLTT5lP3qQelGpkbthU
-         BUzIob5tu4VYZCwtBn9odn3zEMnImk1KIAL+pI8F+gHFjNXf7wIRi8fkD+Th5u5nWSep
-         0xVwYDY7fAEnMr5N/GLXAFAz1XaUqNeve2IL38Tfll1IgggTtoDaEOVEfWRgtLyPSHME
-         ZySA==
-X-Gm-Message-State: AOJu0Yys9XuYfgPThKto7Yluz8RT0Sd7t8DucLrNJIFi5cjTVPyXiL5b
-	+HyWmi+cbABSW/0TibdY2VeHOB49JoDEA66scbYCy7WSvVC8aKtLTkADFLfBmavT
-X-Gm-Gg: ASbGncudXh+kyxtUBWnuSVqy1jC+Cz1NE0Xvn+wNozZbwuSUADG3ddkpfrld3jEG+Nu
-	3h/bMKnWOJZNXw41C86JZOw7pm2Egm0vvorq85zuvfIdIB2OZfOurtC28DbwQiPgzl7KtfDU2q+
-	eaM4MGZM1wuNZFWyzNhVtkBByUqDFUFfpiPEO/sxoeLXX8O751HHxBBKyoVBG+W5958DOLtSlIc
-	xfWkptivs3ARlS8bvf4Gacq81DlO9iyCycbnQW0PAgykz9qnDnAy53JNObIvpudo3heVVxJt7Xm
-	CrnHZXeT94NeEOjr+9CZgO69Zqcbxhxmb4NrAJ49e7sBeScswUbxL2Z2aXg2s1xZcIOmi0UWo3I
-	OKcpFlZ84hT+kAGVIeIj8E7r5
-X-Google-Smtp-Source: AGHT+IE8kYT+r/L0WicO0rrPWgnp6htHgLnwl90qB27BVTQxq+AWvENdJChuY30QZdCJ+4TAlLmEuQ==
-X-Received: by 2002:a05:6a21:7a44:b0:220:63bd:2bdb with SMTP id adf61e73a8af0-2314986f9ecmr24635784637.40.1752535777334;
-        Mon, 14 Jul 2025 16:29:37 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::1c1d])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b3bbe6bd903sm10929482a12.49.2025.07.14.16.29.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Jul 2025 16:29:36 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] openwsman: Upgrade to 2.8.1 release
-Date: Mon, 14 Jul 2025 16:29:33 -0700
-Message-ID: <20250714232933.230092-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250714232933.230092-1-raj.khem@gmail.com>
-References: <20250714232933.230092-1-raj.khem@gmail.com>
+        d=1e100.net; s=20230601; t=1752536900; x=1753141700;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=1RU9Os9gMLOpOR2985XCpanhOPT8uyb4v3af+LbibSc=;
+        b=r9F6E8aNW2Qzl8zPxYsgpJhyt8gzPdG+ogUddG2xLhpFd+MCvBFpHT2i8gaj2nQc0i
+         Ea0LRTVp+rwfYo4wR6uSZ0BS52M9aBkiUdy66YS6F9nDVlqLpfq53B0Az6MwQXDjzHtE
+         FzX9mDVy3R3cNEcizlDuIMfAMy/ulFA4jMxi28iUEHbY9vQ5pLPlpkQMJwjawd6Kakj/
+         8n+SOpVpIdTrtJ8jb+VJmJd4jwGI1j9Js99fJ7L1p0pOiMBT7NoWIrjjSIcsai2MIQKO
+         KlkHl7XFWrJTxFdnrqX+SBsPPigDej7+SIWmlRQj4/A2Zn7gzjKHG8d369SEfgVgAkeK
+         0W7A==
+X-Gm-Message-State: AOJu0YwrR3v7wzvwfVUoGo1VUg/SyvJZ6AGYusjM7SJxRi0FQQGM6nzO
+	S17M7KUuBhPg20jasWDel5yzXQ/JAAT4vKIgo/VN9b6CAfLxGWagZwRgaUNaRZfCPH9Nv0nkKA/
+	MxqXO/yNjTwJ5K0qwlHibhOj8Qk978PCpunRNC5o=
+X-Gm-Gg: ASbGncuj1wsOc09f2CzSyK58hT7Za26M5SPHU40fqwUje+IwKdPR53yug33hnCfkgy3
+	71Hl3MsHICT5d5OXatrN6SzrSfqo1P2dRLvHxpxBcW+PbWNKUs70ViQXQkyjLDAOb4S0cMMVu6c
+	hRkE7UA/PaAvlCk4QJRbcu/DcESG2Q2uf5DBI2YfL8Vt7iFLYumHOTH0g5TRpyQgybskSjxEGCE
+	RmfInORP6HKpJukRXcw4fAPWA35I7o0yhX68L61bQ==
+X-Google-Smtp-Source: AGHT+IHVTMdg2XHpQD1woLfJqfume98JA5MKfb2xcbxb0CBVzu6CV7SiH0S+rzxmxR780X9Rnq042UIGwFpBYEU880A=
+X-Received: by 2002:a17:90b:3886:b0:311:d28a:73ef with SMTP id
+ 98e67ed59e1d1-31c4ca845famr24096024a91.10.1752536899513; Mon, 14 Jul 2025
+ 16:48:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Mon, 14 Jul 2025 16:48:08 -0700
+X-Gm-Features: Ac12FXx6vFiOhWoI8J-SDJeGRQ-T8vhUHHKJpaJ8yS4pAsnMQKYW6ak8jby70hw
+Message-ID: <CAK5yBb_XjhPaQD=MiBPwiaxPbGPw6VOi-XWfRHkCjtNbTCeMHA@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="00000000000059f3f70639ec4b85"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 23:29:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118546
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 23:48:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118547
 
-Fixes build with cmake4+
-Drop upstreamed patches
+--00000000000059f3f70639ec4b85
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...01-Link-with-libm-for-floor-function.patch | 71 -------------------
- ...HREAD_MUTEX_RECURSIVE_NP-if-undefine.patch |  5 --
- ...sl-is-required-if-eventint-supported.patch | 19 -----
- ...{openwsman_2.7.2.bb => openwsman_2.8.1.bb} |  7 +-
- 4 files changed, 2 insertions(+), 100 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/openwsman/openwsman/0001-Link-with-libm-for-floor-function.patch
- delete mode 100644 meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
- rename meta-oe/recipes-extended/openwsman/{openwsman_2.7.2.bb => openwsman_2.8.1.bb} (92%)
+All,
 
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman/0001-Link-with-libm-for-floor-function.patch b/meta-oe/recipes-extended/openwsman/openwsman/0001-Link-with-libm-for-floor-function.patch
-deleted file mode 100644
-index 2f47261588..0000000000
---- a/meta-oe/recipes-extended/openwsman/openwsman/0001-Link-with-libm-for-floor-function.patch
-+++ /dev/null
-@@ -1,71 +0,0 @@
--From 09101da4efaa5584b7f3f3f3bfa5dbb4d1e26948 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 24 Jul 2023 22:09:21 -0700
--Subject: [PATCH] Link with libm for floor() function
--
--LLD linker finds this missing symbol
--
--arm-yoe-linux-gnueabi-ld.lld: error: undefined reference due to --no-allow-shlib-undefined: floor
-->>> referenced by src/lib/libwsman.so.1.0.0
--
--Upstream-Status: Submitted [https://github.com/Openwsman/openwsman/pull/195]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- CMakeLists.txt         | 10 ++++++++++
-- configure.ac           |  3 ++-
-- src/lib/CMakeLists.txt |  4 ++++
-- 3 files changed, 16 insertions(+), 1 deletion(-)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 6e54c66b..507ee633 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -297,6 +297,16 @@ ELSE(HAVE_LIBDL)
--  SET(HAVE_LIBDL 0)
-- ENDIF(HAVE_LIBDL)
-- 
--+# m
--+
--+FIND_LIBRARY( HAVE_LIBM "m" )
--+IF(HAVE_LIBM)
--+ SET(M_LIBRARIES ${HAVE_LIBM})
--+ SET(HAVE_LIBM 1)
--+ELSE(HAVE_LIBM)
--+ SET(HAVE_LIBM 0)
--+ENDIF(HAVE_LIBM)
--+
-- # crypt
-- 
-- FIND_LIBRARY( HAVE_LIBCRYPT "crypt" )
--diff --git a/configure.ac b/configure.ac
--index 125564da..010fa0b6 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -128,7 +128,8 @@ daemon  \
-- va_copy \
-- memmove \
-- bcopy \
---gmtime_r
--+gmtime_r \
--+floor
-- )
-- AC_CHECK_FUNC(socket, , AC_CHECK_LIB(socket, socket))
-- AC_CHECK_FUNC(gethostbyname, , AC_CHECK_LIB(nsl, gethostbyname))
--diff --git a/src/lib/CMakeLists.txt b/src/lib/CMakeLists.txt
--index 5c51781f..496fd672 100644
----- a/src/lib/CMakeLists.txt
--+++ b/src/lib/CMakeLists.txt
--@@ -36,6 +36,10 @@ if( HAVE_LIBDL )
-- TARGET_LINK_LIBRARIES(wsman ${DL_LIBRARIES})
-- endif( HAVE_LIBDL )
-- 
--+if( HAVE_LIBM )
--+TARGET_LINK_LIBRARIES(wsman ${M_LIBRARIES})
--+endif( HAVE_LIBM )
--+
-- IF( ENABLE_EVENTING_SUPPORT )
-- TARGET_LINK_LIBRARIES( wsman ${WSMAN_CLIENT_PKG} )
-- ENDIF( ENABLE_EVENTING_SUPPORT )
---- 
--2.41.0
--
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman/0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch b/meta-oe/recipes-extended/openwsman/openwsman/0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch
-index 0e2349e303..8440793b89 100644
---- a/meta-oe/recipes-extended/openwsman/openwsman/0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch
-+++ b/meta-oe/recipes-extended/openwsman/openwsman/0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch
-@@ -13,8 +13,6 @@ Upstream-Status: Pending
-  src/lib/u/lock.c | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
--diff --git a/src/lib/u/lock.c b/src/lib/u/lock.c
--index 025eea4c..b31c77b5 100644
- --- a/src/lib/u/lock.c
- +++ b/src/lib/u/lock.c
- @@ -50,7 +50,7 @@
-@@ -26,6 +24,3 @@ index 025eea4c..b31c77b5 100644
-  #define PTHREAD_MUTEX_RECURSIVE_NP PTHREAD_MUTEX_RECURSIVE
-  #endif
-  
---- 
--2.14.1
--
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch b/meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
-deleted file mode 100644
-index 71f3d90a81..0000000000
---- a/meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
-+++ /dev/null
-@@ -1,19 +0,0 @@
--Upstream-Status: Pending
--
--libssl is required by wsman_client_transport if ENABLE_EVENTING_SUPPORT enabled.
--
--Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
--
--diff -Nurp openwsman-2.4.12.orig/src/lib/CMakeLists.txt openwsman-2.4.12/src/lib/CMakeLists.txt
----- openwsman-2.4.12.orig/src/lib/CMakeLists.txt	2014-10-28 23:04:47.000000000 +0800
--+++ openwsman-2.4.12/src/lib/CMakeLists.txt	2014-12-31 11:09:20.340428523 +0800
--@@ -56,6 +56,9 @@ TARGET_LINK_LIBRARIES( ${WSMAN_CLIENT_TR
-- SET_TARGET_PROPERTIES( ${WSMAN_CLIENT_TRANSPORT_PKG} PROPERTIES VERSION 1.0.0 SOVERSION 1)
-- INSTALL(TARGETS ${WSMAN_CLIENT_TRANSPORT_PKG} DESTINATION ${LIB_INSTALL_DIR})
-- 
--+IF( ENABLE_EVENTING_SUPPORT )
--+TARGET_LINK_LIBRARIES( ${WSMAN_CLIENT_TRANSPORT_PKG} ${OPENSSL_LIBRARIES} )
--+ENDIF( ENABLE_EVENTING_SUPPORT )
-- 
-- ############### wsman_client ###############
-- 
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.8.1.bb
-similarity index 92%
-rename from meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb
-rename to meta-oe/recipes-extended/openwsman/openwsman_2.8.1.bb
-index 970d7fb5fc..5abe06d07b 100644
---- a/meta-oe/recipes-extended/openwsman/openwsman_2.7.2.bb
-+++ b/meta-oe/recipes-extended/openwsman/openwsman_2.8.1.bb
-@@ -15,16 +15,13 @@ DEPENDS = "curl libxml2 openssl libpam"
- inherit features_check
- REQUIRED_DISTRO_FEATURES = "pam"
- 
--SRCREV = "0120e256faa255d997d9a49d5207662c0b73d430"
-+SRCREV = "20efbccaf804a5a27a914eb8802b806416c03ece"
- 
--SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=main;protocol=https \
--           file://libssl-is-required-if-eventint-supported.patch \
-+SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=main;protocol=https;tag=v${PV} \
-            file://openwsmand.service \
-            file://0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch \
--           file://0001-Link-with-libm-for-floor-function.patch \
-            "
- 
--
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d4f53d4c6cf73b9d43186ce3be6dd0ba"
- 
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
+
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
+
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 462
+unassigned or newcomer bugs.
+
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.3=E2=80=9D, =E2=80=9C6.0", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.3" and then =E2=80=9C6.0=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--00000000000059f3f70639ec4b85
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
+al">All,<br><br>The triage team is starting to try and collect up and class=
+ify bugs which a newcomer to the project would be able to work on in a way =
+which means people can find them. They&#39;re being listed on the triage pa=
+ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
+wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
+e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
+d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
+org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
+illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
+.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
+ea is these bugs should be straight forward for a person to help work on wh=
+o doesn&#39;t have deep experience with the project.  If anyone can help, p=
+lease take ownership of the bug and send patches!  If anyone needs help/adv=
+ice there are people on irc who can likely do so, or some of the more exper=
+ienced contributors will likely be happy to help too.<br><br>Also, the tria=
+ge team meets weekly and does its best to handle the bugs reported into the=
+ Bugzilla. The number of people attending that meeting has fallen, as have =
+the number of people available to help fix bugs. One of the things we hear =
+users report is they don&#39;t know how to help. We (the triage team) are t=
+herefore going to start reporting out the currently 462 unassigned or newco=
+mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
+ and again to help out with these.  Bugs are split into two types, &quot;tr=
+ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
+ents&quot; which are features we&#39;d want to add to the system.  There ar=
+e also roughly four different &quot;priority&quot; classes right now, =E2=
+=80=9C5.3=E2=80=9D, =E2=80=9C6.0&quot;, &quot;5.99&quot; and &quot;Future&q=
+uot;, the more pressing/urgent issues being in &quot;5.3&quot; and then =E2=
+=80=9C6.0=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
+g you would be able to help with either take ownership of the bug, or send =
+me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
+ an e-mail with the bug number you would like and I will assign it to you (=
+please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
+_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
+ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
+s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
+al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
+al,sans-serif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--00000000000059f3f70639ec4b85--
 
