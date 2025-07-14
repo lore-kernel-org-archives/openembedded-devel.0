@@ -1,257 +1,118 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <mikko.rapeli@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A188FC83F1B
-	for <webhook@archiver.kernel.org>; Mon, 14 Jul 2025 14:01:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6450C83F1A
+	for <webhook@archiver.kernel.org>; Mon, 14 Jul 2025 14:31:42 +0000 (UTC)
 Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
- by mx.groups.io with SMTP id smtpd.web11.78775.1752501706297554407
+ by mx.groups.io with SMTP id smtpd.web10.79551.1752503498111779551
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 14 Jul 2025 07:01:46 -0700
+ Mon, 14 Jul 2025 07:31:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CStSQnS8;
- spf=pass (domain: gmail.com, ip: 209.85.167.46, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-558f7fda97eso2690016e87.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 07:01:46 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=grU2Nacd;
+ spf=pass (domain: linaro.org, ip: 209.85.167.46, mailfrom: mikko.rapeli@linaro.org)
+Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-5561d41fc96so4682445e87.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 07:31:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752501704; x=1753106504; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jR+fL+vCyoUVEOrwV2AyYa5LWvOA1uWVO/L9Jyc4vUw=;
-        b=CStSQnS89zmIPw/auJ6Z5QfpcRoclxLevfl/8M7SIu6WxT1R/q494xBeIVRrN98qyp
-         ORR1+PY+9UhAcmnNP9sUS2cnKA6bm36j6PAs33FnsOjf5nwJYFhfZZk/McSZkBxw9qbp
-         ppueQdcAllv+YZUeQsPltySqmTKisbFD54giSfTAH+c6xAaKjDIF2Oc+d6ctp0ZewjEI
-         9WvXEFVLECY0RS7OHjB+0LFwNBumUQxUyDKnxayQQuXH3KcauB5evH84SCBPKOKlPUdJ
-         iI6PjMiZyHt4X+qn/V/qUzNSUdzGLsHNcVLOCZ67kYpN0MNyknSSTlT53zU/j6YCHqAb
-         +Mvw==
+        d=linaro.org; s=google; t=1752503496; x=1753108296; darn=lists.openembedded.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=UE8fIoTx/HBzG3aW5WLtnzXpJW/YkYbsqbNPKbidkAg=;
+        b=grU2NacdXbjzYzY4mvqEW5fgx96GneNLSK0bwLtGRKSqgYDN13JAGi1JIXumv5MPxq
+         Rgey3BfIAtHbu4o11YVRP9Ip1QSrSqq1vILurB9gMDTMwLux5VY8ZLP5ca0UOYgz5Qrt
+         Ppq6n5szVEb3Sglc0JIQVvaS5JVJQBoBWGiqW5r7vwSyIRxjXfy6UER06EQFacYYXs45
+         9VGWOZsdS1cAc/0/CaosxIpHdPi/M3VgK6vLTDLCQQ771C8AwqXcuRgzkOs9iv5WRE1r
+         6U2S3KYQ3C6qvM70XosOO1BR98on+I9zjICfDoSIjqIZi5c/YQLsmfa3oJIDAPJaZXhJ
+         dS7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752501704; x=1753106504;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jR+fL+vCyoUVEOrwV2AyYa5LWvOA1uWVO/L9Jyc4vUw=;
-        b=RjX2tdTUlejAEdx6y8CMh41U/wabypYcdFfh02SiSWxOJ0ARsyz4U3V2SQFCvzGBc9
-         lazB+ubw5lBJMr2BhK/sfZIXQXW6Bp490GzsSmdDq/OXndBwEYi1wdYyHz2y1+0/d5Y2
-         /ogT6tM+Fk5/tcpWO+SYXJhTHFm/AjYwiidZWDeJIXn+dM/XgvuHT2Znnbr6REc24lRS
-         6Wbg1PhF2aZwNB90tPU8l0McBdWKWoSXXAptE2cjXTdApzx+gnJ6o8JAxUKA7FtyD8Rb
-         rUAF6dkLG+xPSGLfIeNDzCNpmzijJ8xfVcBC4vBjQq4mxKzF6FB/Lzkocn7O+Klekeh0
-         4FLQ==
-X-Gm-Message-State: AOJu0YyMrcqi9qLDRhs1sRBcSTjAiaE96frGxhIVPtqlAuV5v2MzktKr
-	Ma2s6XpSwuPM3SkCbvkypkbRLHsdyTEGinqcCzwLx3NsMPjBBjV/Z0vsdnLHWDg+FNij+Q2xngb
-	TgiVq9GsTorqEyUQHI1ynmFtVeXsl6Yg=
-X-Gm-Gg: ASbGncs2ZQKPr8k9kidbsvIt0xxVZr+4YWZsNL+3vBYByncfiKGeDPB4uRJta3Wktkk
-	SyVHCKYKR/xTFJF0KG28aTQF5edi0/zkthv0aI48cqux7mNxVdSxG1MBvIIZRZEFOOZqLikbh5l
-	P7wdZdQ8QJUD0o0gUYoSD4QnKBMHmSs23nA1xKZxl2YH7nx8qSGibdC3eGIo56ke5LoJC4fCYWc
-	s8zt5j/8a6FVQN5u3h0
-X-Google-Smtp-Source: AGHT+IGoUaWFsvS5/QQKuyn9oFESFf5mSKm4+oZghTBjyBTtS5lVZA2kMb8ucEh7eYXv5Pa9w4JTpLVB9XzkUHvDMmk=
-X-Received: by 2002:ac2:51d6:0:b0:553:663d:736c with SMTP id
- 2adb3069b0e04-55a045ed2c2mr4849724e87.15.1752501703685; Mon, 14 Jul 2025
- 07:01:43 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250714085727.160771-1-sanakazi720@gmail.com>
-In-Reply-To: <20250714085727.160771-1-sanakazi720@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 14 Jul 2025 16:01:31 +0200
-X-Gm-Features: Ac12FXxU2bSOpwBzlRCy75UsJXL3cIqKuaKjCLqqCQpAnZ6-pbR1K8Y4u3D8Pjs
-Message-ID: <CA+chaQeb6B84AiJxf5jH9UET=XRMJD9PE73gfU9NjaCJAsLV_A@mail.gmail.com>
-Subject: Re: [oe] [kirkstone][PATCHv2] fix-cipher-leak.patch: Fix patch-fuzz
-To: sanakazi720@gmail.com
+        d=1e100.net; s=20230601; t=1752503496; x=1753108296;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=UE8fIoTx/HBzG3aW5WLtnzXpJW/YkYbsqbNPKbidkAg=;
+        b=V+AOpti4HiA3+ms8zQQtIVUwpNF2ItMI55JJ8IdPp9md/H+I+X4KDRU6jUdWsp+aQU
+         hS5vFJRuY3S6dhY9uiEv8Emky3520YJeDSLkYlV3Qcu1lGBCrAnnPL2ocRg0rz/0hl+Y
+         UKhmNFoHHwGTGCbej2yZjtANzu6AkTeTUby81ubU3T3weAcZl2Ix4chdo6RkpW9YAAPv
+         PpySPIwX+/lpsC9r/C3Wl1yxeBMC8vaA8g+l71xGVyegFseuY7LXJ7cDWyuI5g/jPzk5
+         iue6hOUU1t1r30EWOtS84bGF85iOgxhBoak0/w3YDIA8Rfc9omiK4arBg89f6Qdtp3QC
+         7xxw==
+X-Gm-Message-State: AOJu0Yzov05spLBQ6W7DigrdrTA1Q6cupX+VhrLWdV05W3htaSIlXR+P
+	G/T05Db4KoFLf5MUesHjpNVBH7q8aosL4Cd+F0xrbbtRiKHTCz9Khs6GUutksu/35dM=
+X-Gm-Gg: ASbGncs+wKYNwSOG2to5GJlDtChuSCRzHfJuUQt7n7cioQDaW67xVpEJXA6GfhMcJoB
+	uJVDvjP6u73osU4Hb+iMDM+klKVG+htwJUwwLM+V7JzQjkKGSYp8VtQVVCY2q587MUPp0fNBatX
+	j/720RlzoFoLnKZr7C1AXrWJhA9Kedc5zNbQB5cRICCtduptZOyOMLJ27fmtFYF7j0SvZ49oLDi
+	cw+d6SPDL4XF+chJ3ZoI3MJOrDhsemMDyxNLLoK5UFvbEnCr+MUpd8wAxHxr9N+CW+J6BXiW+Mh
+	TgsvpPbm0sx/HxKQ72ds+O0JUTPUUOtsfOG3wdcVCyADwUm2eXW90Y1SEDF7X5nreCfhWbf7Nd0
+	6VCrb/NXWzniJzn5c0snaf8lecorljq/VKlMWAJKagyKEeo2Q7XuiAJQ=
+X-Google-Smtp-Source: AGHT+IH/OcOwQZQyelw/I26sjPlguWVsnNJZF01Xn+AUv8xret0hgeUxawqPE1XQHFvWEBEg5DigxQ==
+X-Received: by 2002:a05:6512:3b28:b0:553:288e:149 with SMTP id 2adb3069b0e04-55a0463a508mr3573905e87.27.1752503495838;
+        Mon, 14 Jul 2025 07:31:35 -0700 (PDT)
+Received: from nuoska (87-100-218-141.bb.dnainternet.fi. [87.100.218.141])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-55943b72f3bsm1965602e87.208.2025.07.14.07.31.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Jul 2025 07:31:35 -0700 (PDT)
+Date: Mon, 14 Jul 2025 17:31:33 +0300
+From: Mikko Rapeli <mikko.rapeli@linaro.org>
+To: Martin Jansa <martin.jansa@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [meta-oe][PATCH] fwupd: set vendor_ids_dir
+Message-ID: <aHUUxW_rau2wEQFN@nuoska>
+References: <20250714134657.1620685-1-martin.jansa@gmail.com>
+ <aHULieE55wXsyrSf@nuoska>
+ <CA+chaQc7a9wXuCnF0mrdFbkE_tY+M+1Z44D2qNJzy4VN990ViA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CA+chaQc7a9wXuCnF0mrdFbkE_tY+M+1Z44D2qNJzy4VN990ViA@mail.gmail.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 14:01:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118537
+ <openembedded-devel@lists.openembedded.org>; Mon, 14 Jul 2025 14:31:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118538
 
-Please follow the convention for commit messages and start with "recipe-nam=
-e:".
+Hi,
 
-On Mon, Jul 14, 2025 at 3:59=E2=80=AFPM Sana Kazi via lists.openembedded.or=
-g
-<sanakazi720=3Dgmail.com@lists.openembedded.org> wrote:
->
-> Refresh fix-cipher-leak.patch to fix patch-fuzz issue.
->
-> Signed-off-by: Sana Kazi <sanakazi720@gmail.com>
-> ---
->  .../imagemagick/files/fix-cipher-leak.patch   | 51 ++++++++++---------
->  1 file changed, 26 insertions(+), 25 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/imagemagick/files/fix-cipher-leak.pa=
-tch b/meta-oe/recipes-support/imagemagick/files/fix-cipher-leak.patch
-> index a8985757f2..28fbd9e9ea 100644
-> --- a/meta-oe/recipes-support/imagemagick/files/fix-cipher-leak.patch
-> +++ b/meta-oe/recipes-support/imagemagick/files/fix-cipher-leak.patch
-> @@ -9,7 +9,7 @@ Subject: [PATCH] possible divide by zero + clear buffers
->   MagickCore/memory.c     | 22 ++++++++++++++++------
->   MagickCore/signature.c  |  2 +-
->   coders/thumbnail.c      |  3 ++-
-> - 5 files changed, 41 insertions(+), 25 deletions(-)
-> + 5 files changed, 33 insertions(+), 22 deletions(-)
->
->  CVE: CVE-2021-20311
->  CVE: CVE-2021-20312
-> @@ -19,35 +19,34 @@ Upstream-Status: Backport[https://github.com/ImageMag=
-ick/ImageMagick/commit/70aa
->  Comment: Refreshed patch based on the codebase
->
->  Signed-off-by: Sana Kazi Sana.Kazi@kpit.com
-> +
->  diff --git a/MagickCore/cipher.c b/MagickCore/cipher.c
-> -index 057b11c4720..91ad1d1d662 100644
-> +index 908266457..4548f0d60 100644
->  --- a/MagickCore/cipher.c
->  +++ b/MagickCore/cipher.c
-> -@@ -484,8 +484,8 @@ static void EncipherAESBlock(AESInfo *ae
-> +@@ -482,8 +482,8 @@ static void EncipherAESBlock(AESInfo *aes_info,const=
- unsigned char *plaintext,
->       Reset registers.
->     */
->     alpha=3D0;
->  -  (void) memset(key,0,sizeof(key));
->  -  (void) memset(text,0,sizeof(text));
->  +  (void) ResetMagickMemory(key,0,sizeof(key));
-> -+  (void) ResetMagickMemory(text,0,sizeof(text));
-> ++  (void) ResetMagickMemory(text,0,sizeof(text));
->   }
-> -
-> -
-> +
->   /*
-> -@@ -708,8 +708,8 @@ MagickExport MagickBooleanType PasskeyDe
-> +@@ -706,8 +706,8 @@ MagickExport MagickBooleanType PasskeyDecipherImage(=
-Image *image,
->     */
->     quantum_info=3DDestroyQuantumInfo(quantum_info);
->     aes_info=3DDestroyAESInfo(aes_info);
->  -  (void) memset(input_block,0,sizeof(input_block));
->  -  (void) memset(output_block,0,sizeof(output_block));
->  +  (void) ResetMagickMemory(input_block,0,sizeof(input_block));
-> -+  (void) ResetMagickMemory(output_block,0,sizeof(output_block));
-> ++  (void) ResetMagickMemory(output_block,0,sizeof(output_block));
->     return(y =3D=3D (ssize_t) image->rows ? MagickTrue : MagickFalse);
->   }
-> -
-> -
-> -@@ -925,8 +925,8 @@ MagickExport MagickBooleanType PasskeyEn
-> +
-> +@@ -923,8 +923,8 @@ MagickExport MagickBooleanType PasskeyEncipherImage(=
-Image *image,
->     */
->     quantum_info=3DDestroyQuantumInfo(quantum_info);
->     aes_info=3DDestroyAESInfo(aes_info);
-> @@ -57,13 +56,12 @@ index 057b11c4720..91ad1d1d662 100644
->  +  (void) ResetMagickMemory(output_block,0,sizeof(output_block));
->     return(y =3D=3D (ssize_t) image->rows ? MagickTrue : MagickFalse);
->   }
-> -
-> -
-> +
->  diff --git a/MagickCore/colorspace.c b/MagickCore/colorspace.c
-> -index 2ffc72f88fa..e3b7df339f6 100644
-> +index ac9f7e91b..b78b84b47 100644
->  --- a/MagickCore/colorspace.c
->  +++ b/MagickCore/colorspace.c
-> -@@ -940,15 +940,15 @@ static MagickBooleanType sRGBTransformImage(Image =
-*image,
-> +@@ -850,15 +850,15 @@ static MagickBooleanType sRGBTransformImage(Image =
-*image,
->         if (logmap =3D=3D (Quantum *) NULL)
->           ThrowBinaryException(ResourceLimitError,"MemoryAllocationFailed=
-",
->             image->filename);
-> @@ -83,7 +81,7 @@ index 2ffc72f88fa..e3b7df339f6 100644
->         image_view=3DAcquireAuthenticCacheView(image,exception);
->   #if defined(MAGICKCORE_OPENMP_SUPPORT)
->         #pragma omp parallel for schedule(static) shared(status) \
-> -@@ -2502,14 +2502,14 @@ static MagickBooleanType TransformsRGBImage(Imag=
-e *image,
-> +@@ -2394,14 +2394,14 @@ static MagickBooleanType TransformsRGBImage(Imag=
-e *image,
->         if (logmap =3D=3D (Quantum *) NULL)
->           ThrowBinaryException(ResourceLimitError,"MemoryAllocationFailed=
-",
->             image->filename);
-> @@ -103,10 +101,10 @@ index 2ffc72f88fa..e3b7df339f6 100644
->           logmap[i]=3DQuantumRange;
->         if (image->storage_class =3D=3D PseudoClass)
->  diff --git a/MagickCore/memory.c b/MagickCore/memory.c
-> -index 2598044486a..01bc80d86c5 100644
-> +index 060b05e71..5db57acc7 100644
->  --- a/MagickCore/memory.c
->  +++ b/MagickCore/memory.c
-> -@@ -1269,26 +1269,36 @@ MagickExport MemoryInfo *RelinquishVirtualMemory=
-(MemoryInfo *memory_info)
-> +@@ -1230,26 +1230,36 @@ MagickExport MemoryInfo *RelinquishVirtualMemory=
-(MemoryInfo *memory_info)
->   %                                                                      =
-       %
->   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%=
-%%%%%%%%
->   %
-> @@ -144,13 +142,13 @@ index 2598044486a..01bc80d86c5 100644
->     assert(memory !=3D (void *) NULL);
->  -  return(memset(memory,byte,size));
->  +  while (n-- !=3D 0)
-> -+      *p++=3D(unsigned char) c;
-> -+  return(memory);
-> ++       *p++=3D(unsigned char) c;
-> ++  return(memory);
->   }
-> -
-> +
->   /*
->  diff --git a/MagickCore/signature.c b/MagickCore/signature.c
-> -index 2d9b0801523..1f79c91b11b 100644
-> +index f0f0e42e0..f21feda27 100644
->  --- a/MagickCore/signature.c
->  +++ b/MagickCore/signature.c
->  @@ -736,7 +736,7 @@ RestoreMSCWarning
-> @@ -160,10 +158,10 @@ index 2d9b0801523..1f79c91b11b 100644
->  -  (void) memset(W,0,sizeof(W));
->  +  (void) ResetMagickMemory(W,0,sizeof(W));
->   }
-> -
-> +
->   /*
->  diff --git a/coders/thumbnail.c b/coders/thumbnail.c
-> -index 59d97380d9e..e92dd312011 100644
-> +index 1f7900aef..169bcfea8 100644
->  --- a/coders/thumbnail.c
->  +++ b/coders/thumbnail.c
->  @@ -199,7 +199,8 @@ static MagickBooleanType WriteTHUMBNAILImage(const I=
-mageInfo *image_info,
-> @@ -172,7 +170,10 @@ index 59d97380d9e..e92dd312011 100644
->     }
->  -  if ((q+length) > (GetStringInfoDatum(profile)+GetStringInfoLength(pro=
-file)))
->  +  if ((q > (GetStringInfoDatum(profile)+GetStringInfoLength(profile))) =
-||
-> -+      (length > (GetStringInfoDatum(profile)+GetStringInfoLength(profil=
-e)-q)))
-> ++      (length > (GetStringInfoDatum(profile)+GetStringInfoLength(profil=
-e)-q)))
->       ThrowWriterException(CoderError,"ImageDoesNotHaveAThumbnail");
->     thumbnail_image=3DBlobToImage(image_info,q,length,exception);
->     if (thumbnail_image =3D=3D (Image *) NULL)
-> +--
-> +2.25.1
-> +
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118534): https://lists.openembedded.org/g/openembedde=
-d-devel/message/118534
-> Mute This Topic: https://lists.openembedded.org/mt/114147644/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+On Mon, Jul 14, 2025 at 04:00:03PM +0200, Martin Jansa wrote:
+> On Mon, Jul 14, 2025 at 3:52 PM Mikko Rapeli <mikko.rapeli@linaro.org> wrote:
+> > On Mon, Jul 14, 2025 at 03:46:57PM +0200, martin.jansa@gmail.com wrote:
+> > > From: Martin Jansa <martin.jansa@gmail.com>
+> > >
+> > > * it's in RSS as fwupd/2.0.12/recipe-sysroot/usr/share/hwdata/usb.ids but
+> > >   meson is searching the paths on host with:
+> > >
+> > >   # look for usb.ids in both of the Debian and Fedora locations,
+> > >   # and fall back to the system datadir in case we're building in a venv or prefix
+> > >   vendor_ids_dir = get_option('vendor_ids_dir')
+> > >   if vendor_ids_dir == ''
+> > >     vendor_ids_dir = join_paths(datadir, 'misc')
+> > >     if not fs.is_file(join_paths(vendor_ids_dir, 'usb.ids'))
+> > >       vendor_ids_dir = join_paths(datadir, 'hwdata')
+> >
+> > Isn't this the same as ${datadir}/hwdata ?
+> 
+> It is the same value, but on my host, I don't have
+> /usr/share/hwdata/usb.ids so meson doesn't detect any existing
+> vendor_ids_dir value and fails.
+> 
+> With this change it accepts passed vendor_ids_dir value without
+> testing it's existence (neither on host nor in RSS).
+
+Previous version of fwupd update patches did not include "hwdata"
+as build dependency so recipe sysroot did not have usb.ids file
+but now it should have. Then meson.bbclass is setting datadir
+so I'm wondering if there is a bug in meson.bbclass or in these fwupd
+side scripts that they only check the host paths on not the
+recipe sysroot ones? Is fwupd not using the correct variables?
+
+Should the fwupd meson config actually check if the file is in
+join_paths(sys_root, datadir, 'hwdata')?
+
+I'm fine with this change but just wondering if there is something more
+missing. 
+
+Cheers,
+
+-Mikko
 
