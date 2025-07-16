@@ -1,149 +1,128 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <Jinfeng.Wang.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA36AC83F27
-	for <webhook@archiver.kernel.org>; Tue, 15 Jul 2025 21:41:20 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
- by mx.groups.io with SMTP id smtpd.web10.6896.1752615675375922486
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 459F0C83F1B
+	for <webhook@archiver.kernel.org>; Wed, 16 Jul 2025 05:18:03 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.14959.1752643081882069737
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Jul 2025 14:41:15 -0700
+ Tue, 15 Jul 2025 22:18:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=d5vAb5Ve;
- spf=pass (domain: gmail.com, ip: 209.85.167.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-54d98aa5981so7791416e87.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 15 Jul 2025 14:41:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752615673; x=1753220473; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ZanFODEioVvLjGaCMi6ruX69Q9Hi2acqRcTMiJpdUTM=;
-        b=d5vAb5VeqFoifXcVG9pxRQMlBh3kfKmaxeXTSJ3jA3fhMQc8kn+jg/v2l6cwUhvOPh
-         XsjgPAOL7wS+b/aN4gl3LdMEmOwliOAKa4s+gE0q7sMNI9E63lNnCSzNmoNK7rfJCR0m
-         /7HwGzL2OSf30txmSAwbPysF2+KsWEwrvIFuFj1oRfoYelsPnHht2qDDvnLmdqNSxTEb
-         dxdcmmOo8Zc3GlPJWKDgtimore4l3dwBw6SA4x6Px/o7Bfk46j4CiBWA3ld3T327D/mp
-         b3nX7Z6DSSuYeo4LD9MdN588uh/4QBeH6kZz5Qm9U7C1mt1IcSLzBiWjhiTqsIoRrVJ+
-         ho5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752615673; x=1753220473;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ZanFODEioVvLjGaCMi6ruX69Q9Hi2acqRcTMiJpdUTM=;
-        b=W+M0OK6M35sy72ON/zL2s5xsEwGFFCsSybab8sydSS+XQ0cy8D+cadlRHcrSoX0FKG
-         JHUUswF/ZZMmCGpdaFrgk33Nh/vcWAveM356ZAdJG0rsJ6krQ8Isuofv1CaM47ALRU87
-         txW9A4k/1pR0/eO+zINYHfCMuVyWNiGnHxozosKUqMeAZF5ugazRPaJwTI/FHzEneRlR
-         n90jmOOjeKuhn2DE1O1xygN0wwiZD5/WH0FYk+e5Sjd9K/GEhTqBOQZqN4H6Nb9iMir6
-         /BW8ByxAaR3dGagzFN+g1YGKVUN4Jb1BrL27FxAK3rH8Lb9DENbaYEqI+XScTVvFL22v
-         q30g==
-X-Gm-Message-State: AOJu0YzV/IzL2fFyE9a7SZ5yUYwXvL/3DFxcruGDDqsScQioAAnlqGvK
-	XZjZH2UFnvSToSDjYk7H9yeDBy5O3ls9vduUmkbseVAbqy6DOvUXrz+wOeCK7dePRSY4MDL9gME
-	sqSkO3y4i0B3rWlxrc7NB8L4mhOGDYIlnm3Gf
-X-Gm-Gg: ASbGncvWwvxLTbMzYzWpjzwMg/nP3QmJkXdW3ebAgRNbVWHA4mpCd/nfd7YaW15e8iz
-	Xf6pj+VCufmDMVPV0Yi14/T5YULU/aSrjUIpEsCwjvz16SQYBZ8pAP0Uyh2kfw/z4Q34rk7Pwoq
-	hVwy+HcswmTNbs/k22O/mzXBixWJxaqr0yuvV+eHZyEE77L6Qn1JvGbVErhlcqK6e9GNYm6+G3t
-	5ppSVT5Jg==
-X-Google-Smtp-Source: AGHT+IHtDdVVEcpB8PP/jyZLj5/IndS/52sSGpTqiBCQl0XZuRg7FDByl3tqbOQE1vo+QDUltrf4zK9wR9XWg5PmM+M=
-X-Received: by 2002:a05:6512:1301:b0:558:f76d:5a30 with SMTP id
- 2adb3069b0e04-55a23f97b2amr123945e87.42.1752615673278; Tue, 15 Jul 2025
- 14:41:13 -0700 (PDT)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9292c3e01e=jinfeng.wang.cn@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 56G4j7dk1713972
+	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Jul 2025 22:18:01 -0700
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47wdvdsg54-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Jul 2025 22:18:01 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.57; Tue, 15 Jul 2025 22:18:00 -0700
+Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.57 via Frontend Transport; Tue, 15 Jul 2025 22:17:59 -0700
+From: <jinfeng.wang.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <jinfeng.wang.cn@windriver.com>
+Subject: [meta-networking][scarthgap][PATCH] postfix: fix rootfs file difference
+Date: Wed, 16 Jul 2025 13:17:58 +0800
+Message-ID: <20250716051758.2412737-1-jinfeng.wang.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250711134106.4117273-1-leon.anavi@konsulko.com>
-In-Reply-To: <20250711134106.4117273-1-leon.anavi@konsulko.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 15 Jul 2025 23:41:01 +0200
-X-Gm-Features: Ac12FXxQHtfhV0AqxxWalsVAffyXnP1t2e7nttJQv6a8YpJfQROEfl4fvbkKUEw
-Message-ID: <CA+chaQeimR77=PoEf9ZeGoZ_=szW7g9oJzfODX8ODSuri4O_0A@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 1/2] python3-aiohttp: Upgrade 3.11.18 -> 3.12.14
-To: leon.anavi@konsulko.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: EhEt8dMJ1lYzEqmF2wg2n03BXFfM7G16
+X-Authority-Analysis: v=2.4 cv=JbC8rVKV c=1 sm=1 tr=0 ts=68773609 cx=c_pps
+ a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17
+ a=Wb1JkmetP80A:10 a=e1GkridNAAAA:8 a=t7CeM3EgAAAA:8 a=fWPPgeRKwIsxyyA-Ks8A:9
+ a=6ft9yNkZjdd813gQxDxM:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: EhEt8dMJ1lYzEqmF2wg2n03BXFfM7G16
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzE1MDAxNyBTYWx0ZWRfX411DcnFLqeZU
+ BplcnJ07LJDA8c5yT5fU2Qmk5nYesasMckksmIZvDYcDCt22t+PwOklxsnWpe6kSWmSDziiEO1h
+ Bx7V1p3BXOF9pQfUYIkD+w9AdKKLGBVfp5EzNmJZ9tXamqGak2TnLponD/304FZv1GX+404N1Yz
+ zThfD6QZk5KoW1lDXnjlmnE8QlZf8ggzFZGMAz485XgrESJCW7r+U51Jy/bcJpiEsoYG4U3MFIJ
+ RZ1zYsO/FmavjNE2lU4rsDiFD1x4FnmWoODhNFvZHbPVKrnmOjq7S8H717eUAoE/GcNk7J3+Mir
+ ZvbRN32gz2su70cCu1Mu3GkZIJuTaF/xhjVcraCMubJwoKLwFphzclTL//0Ikg3rusAn8XI/qBi
+ cxTUwgq1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-07-16_01,2025-07-15_02,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 suspectscore=0 bulkscore=0 spamscore=0 priorityscore=1501
+ phishscore=0 clxscore=1015 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2506270000 definitions=main-2507150017
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 15 Jul 2025 21:41:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118568
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Jul 2025 05:18:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118569
 
-This new version seems to fail to build for 32bit MACHINEs:
+From: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
 
-vendor/llhttp/build/c/llhttp.c: In function 'llhttp__internal__run':
-vendor/llhttp/build/c/llhttp.c:2645:9: note: use
-'-flax-vector-conversions' to permit conversions between vectors with
-differing element types or numbers of subparts
- 2645 |         );
-      |         ^
-vendor/llhttp/build/c/llhttp.c:2643:11: error: incompatible type for
-argument 1 of 'vandq_u16'
- 2643 |           vcgeq_u8(input, vdupq_n_u8(' ')),
-      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      |           |
-      |           uint8x16_t
-In file included from vendor/llhttp/build/c/llhttp.c:14:
+Rootfs file differs with the same project configure, add preliminary
+setting to avoid this.
 
-On Fri, Jul 11, 2025 at 3:41=E2=80=AFPM Leon Anavi via lists.openembedded.o=
-rg
-<leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
->
-> Upgrade to release 3.12.14:
->
-> - Fixed file uploads failing with HTTP 422 errors when encountering
->   307/308 redirects, and 301/302 redirects for non-POST methods, by
->   preserving the request body when appropriate per
->   :rfc:9110#section-15.4.3-3.1
-> - Fixed :py:meth:ClientSession.close() <aiohttp.ClientSession.close>
->   hanging indefinitely when using HTTPS requests through HTTP
->   proxies
-> - Bumped minimum version of aiosignal to 1.4+ to resolve typing
->   issues
-> - Added initial trailer parsing logic to Python HTTP parser
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  ...{python3-aiohttp_3.11.18.bb =3D> python3-aiohttp_3.12.14.bb} | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-aiohttp_3.11.18.bb =
-=3D> python3-aiohttp_3.12.14.bb} (81%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.11.18.=
-bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.12.14.bb
-> similarity index 81%
-> rename from meta-python/recipes-devtools/python/python3-aiohttp_3.11.18.b=
-b
-> rename to meta-python/recipes-devtools/python/python3-aiohttp_3.12.14.bb
-> index 898871fe00..642fc6784a 100644
-> --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.11.18.bb
-> +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.12.14.bb
-> @@ -4,10 +4,12 @@ HOMEPAGE =3D "https://github.com/aio-libs/aiohttp"
->  LICENSE =3D "Apache-2.0"
->  LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D748073912af33aa59430d3702=
-aa32d41"
->
-> -SRC_URI[sha256sum] =3D "ae856e1138612b7e412db63b7708735cff4d38d0399f6a54=
-35d3dac2669f558a"
-> +SRC_URI[sha256sum] =3D "6e06e120e34d93100de448fd941522e11dafa78ef1a893c1=
-79901b7d66aa29f2"
->
->  inherit python_setuptools_build_meta pypi
->
-> +DEPENDS =3D "python3-pkgconfig-native"
-> +
->  RDEPENDS:${PN} =3D "\
->      python3-aiohappyeyeballs \
->      python3-aiosignal \
-> --
-> 2.39.5
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118453): https://lists.openembedded.org/g/openembedde=
-d-devel/message/118453
-> Mute This Topic: https://lists.openembedded.org/mt/114100302/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
+---
+ ...0006-postfix-add-preliminary-setting.patch | 31 +++++++++++++++++++
+ .../recipes-daemons/postfix/postfix_3.8.6.bb  |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch
+
+diff --git a/meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch b/meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch
+new file mode 100644
+index 0000000000..50d0073262
+--- /dev/null
++++ b/meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch
+@@ -0,0 +1,31 @@
++From c09d377cd3b91c4c4360ebfab5be37f6296ff26a Mon Sep 17 00:00:00 2001
++From: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
++Date: Wed, 16 Jul 2025 02:54:28 +0000
++Subject: [PATCH] postfix: add preliminary setting
++
++post-install call postconf commands to modify main.cf. When multiple
++parameters to postconf, the order of those parameters in main.cf is random.
++Then it will reproduce random results in rootfs file(sample-main.cf). To
++fix this, add preliminary setting in main.cf.
++
++Upstream-Status: Inappropriate [this is the use of post-install,
++upstream is not affected]
++
++Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
++---
++ conf/main.cf | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/conf/main.cf b/conf/main.cf
++index 2ee7996..0c208e6 100644
++--- a/conf/main.cf
+++++ b/conf/main.cf
++@@ -683,3 +683,5 @@ sample_directory =
++ #
++ readme_directory =
++ inet_protocols = ipv4
+++shlib_directory =
+++meta_directory =
++-- 
++2.31.3
++
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.8.6.bb b/meta-networking/recipes-daemons/postfix/postfix_3.8.6.bb
+index 3ec7f22ad3..b0ac51a9dd 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.8.6.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.8.6.bb
+@@ -26,6 +26,7 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
+            file://0003-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
+            file://0004-Fix-icu-config.patch \
+            file://0005-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
++           file://0006-postfix-add-preliminary-setting.patch \
+            "
+ 
+ SRC_URI[sha256sum] = "4b6e17c826cc438cc3016a9c0a55ea7e77c6cbafba7dd57241d81b690b0e9774"
+-- 
+2.34.1
+
 
