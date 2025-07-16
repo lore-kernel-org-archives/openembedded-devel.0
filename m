@@ -1,128 +1,315 @@
-Return-Path: <Jinfeng.Wang.CN@windriver.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 459F0C83F1B
-	for <webhook@archiver.kernel.org>; Wed, 16 Jul 2025 05:18:03 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.14959.1752643081882069737
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 937F5C83F1B
+	for <webhook@archiver.kernel.org>; Wed, 16 Jul 2025 06:16:03 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web10.15559.1752646546806119990
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 15 Jul 2025 22:18:01 -0700
+ Tue, 15 Jul 2025 23:15:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9292c3e01e=jinfeng.wang.cn@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 56G4j7dk1713972
-	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Jul 2025 22:18:01 -0700
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 47wdvdsg54-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 15 Jul 2025 22:18:01 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Tue, 15 Jul 2025 22:18:00 -0700
-Received: from pek-lpg-core4.wrs.com (128.224.153.44) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.57 via Frontend Transport; Tue, 15 Jul 2025 22:17:59 -0700
-From: <jinfeng.wang.cn@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <jinfeng.wang.cn@windriver.com>
-Subject: [meta-networking][scarthgap][PATCH] postfix: fix rootfs file difference
-Date: Wed, 16 Jul 2025 13:17:58 +0800
-Message-ID: <20250716051758.2412737-1-jinfeng.wang.cn@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@mvista.com header.s=google header.b=X5WOqVgF;
+ spf=pass (domain: mvista.com, ip: 209.85.215.182, mailfrom: hprajapati@mvista.com)
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-b321bd36a41so5638730a12.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 15 Jul 2025 23:15:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1752646546; x=1753251346; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=riYFYXieUsvC3Ju5OgjTNrNJ//rqrzjrMcVi2/M13Qs=;
+        b=X5WOqVgF6ULH/Di062KryNgvunNrLDFkkzZMA61wtRbdWYAMrQ3INBPGWV65C26i0O
+         w9qlgV37gfreF9jayIi+/AvoxuGZUdtomCeP6Fq7gJyYlU9Ts8KqxKrgx1Mwf3mTDJu+
+         nyPBxCyPee5kjcYx2pbSJlP4SVrnPzsOeYEB8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1752646546; x=1753251346;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=riYFYXieUsvC3Ju5OgjTNrNJ//rqrzjrMcVi2/M13Qs=;
+        b=XEtyg2Hzm2OuRL09+jw1O5O/vZMh+BMLDVNhrrc8ZVLiS2zVGla7a9buqjs3k3iTL1
+         kioH8Et94TKNcAfGw5ZWlDKZ56dNhdbCK3WrtJaotuPOk8Um/FvShIwlKoMg6pC6tmZx
+         fs0/K7xw1b1AsYamJNeb15i/qhTv1Mcfosnl5jkEGm6Lb4ljtcU6Z0KWcYw+Lazn388m
+         kBc9cZzbrP0URrr2hiHQqKWmhrf5PsDwOo4XTMYeg8ITgr7IQdkcaAfVi6l9p7xpRZdc
+         /9n0w6OYfjJE9Ut3dlaqW842QRUI9lTHkACnkcA3hZeq1NjVm1FlEcxUFuOfS7UgGzZa
+         Xobg==
+X-Gm-Message-State: AOJu0YwlUfsH3tKCkvoUXTsGMD0FpO0Ktx9+g+HveDxZLxOPAEgzSB91
+	fGh9aPO4Lv4wK18r8fzs6jSaYcsOWOid6e8DVjIXNrdLm92WqzD16XRfcvnmgRT+cHv+5PWJbN6
+	ifrat
+X-Gm-Gg: ASbGncvlPzljx11nlBVgORVc2QD1NIIaIB+3ISx14axRwGutp6tGwsO+5vN9vRCpgqA
+	oRG/Y0AJApp75WZq0YGD4Q+NIsWBTEwQIFIGcve+oMtAyfXrNiVVu0ysRZbzzri5hyd9IjpMWkr
+	HW7vONQEQcsI0Q0PQR8AUl0TRUtJ0K+Jxh1CcDtEZpDzlGOW+qEQFmJUYlFBvGM/4A7WIO7DvbO
+	dFqlJvk1rHmJiTge6R0l6ygzNcRJ3EzSCKon5W+6UAMRvGoYDQa3k2mqCG1EhaLrlvXQlEMzHMb
+	OQLzIDwh5AKYJC/7C+ApsJHMmsIOcyYvQb3TAVsW+yjjNjdlZ64sfzeyJdikCqq5yZeYFGwtxTW
+	3wA3ipkGHxYk2HzPaD/OVbvAOvhSNHK+QqNM=
+X-Google-Smtp-Source: AGHT+IH0MQV8+wltr6DLAEKf/zEfgL9p77s6l5zHCWl7WxnKuyeCKNhuvPTH3fmVsQQQG8cPUfKHRQ==
+X-Received: by 2002:a17:902:ef49:b0:235:779:edfd with SMTP id d9443c01a7336-23e25759752mr22870715ad.39.1752646545664;
+        Tue, 15 Jul 2025 23:15:45 -0700 (PDT)
+Received: from MVIN00016.mvista.com ([43.249.234.153])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23de42ad212sm117870455ad.80.2025.07.15.23.15.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 15 Jul 2025 23:15:45 -0700 (PDT)
+From: Hitendra Prajapati <hprajapati@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-oe][scarthgap][PATCH] redis: fix CVE-2025-32023
+Date: Wed, 16 Jul 2025 11:45:12 +0530
+Message-ID: <20250716061512.27366-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: EhEt8dMJ1lYzEqmF2wg2n03BXFfM7G16
-X-Authority-Analysis: v=2.4 cv=JbC8rVKV c=1 sm=1 tr=0 ts=68773609 cx=c_pps
- a=K4BcnWQioVPsTJd46EJO2w==:117 a=K4BcnWQioVPsTJd46EJO2w==:17
- a=Wb1JkmetP80A:10 a=e1GkridNAAAA:8 a=t7CeM3EgAAAA:8 a=fWPPgeRKwIsxyyA-Ks8A:9
- a=6ft9yNkZjdd813gQxDxM:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: EhEt8dMJ1lYzEqmF2wg2n03BXFfM7G16
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzE1MDAxNyBTYWx0ZWRfX411DcnFLqeZU
- BplcnJ07LJDA8c5yT5fU2Qmk5nYesasMckksmIZvDYcDCt22t+PwOklxsnWpe6kSWmSDziiEO1h
- Bx7V1p3BXOF9pQfUYIkD+w9AdKKLGBVfp5EzNmJZ9tXamqGak2TnLponD/304FZv1GX+404N1Yz
- zThfD6QZk5KoW1lDXnjlmnE8QlZf8ggzFZGMAz485XgrESJCW7r+U51Jy/bcJpiEsoYG4U3MFIJ
- RZ1zYsO/FmavjNE2lU4rsDiFD1x4FnmWoODhNFvZHbPVKrnmOjq7S8H717eUAoE/GcNk7J3+Mir
- ZvbRN32gz2su70cCu1Mu3GkZIJuTaF/xhjVcraCMubJwoKLwFphzclTL//0Ikg3rusAn8XI/qBi
- cxTUwgq1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-16_01,2025-07-15_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 suspectscore=0 bulkscore=0 spamscore=0 priorityscore=1501
- phishscore=0 clxscore=1015 malwarescore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2506270000 definitions=main-2507150017
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 16 Jul 2025 05:18:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118569
+ <openembedded-devel@lists.openembedded.org>; Wed, 16 Jul 2025 06:16:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118570
 
-From: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
+Upstream-Status: Backport from https://github.com/redis/redis/commit/50188747cbfe43528d2719399a2a3c9599169445
 
-Rootfs file differs with the same project configure, add preliminary
-setting to avoid this.
-
-Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- ...0006-postfix-add-preliminary-setting.patch | 31 +++++++++++++++++++
- .../recipes-daemons/postfix/postfix_3.8.6.bb  |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch
+ .../redis/redis-7.2.8/CVE-2025-32023.patch    | 218 ++++++++++++++++++
+ meta-oe/recipes-extended/redis/redis_7.2.8.bb |   1 +
+ 2 files changed, 219 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/redis/redis-7.2.8/CVE-2025-32023.patch
 
-diff --git a/meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch b/meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.8/CVE-2025-32023.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/CVE-2025-32023.patch
 new file mode 100644
-index 0000000000..50d0073262
+index 0000000000..eb7e81c0b9
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch
-@@ -0,0 +1,31 @@
-+From c09d377cd3b91c4c4360ebfab5be37f6296ff26a Mon Sep 17 00:00:00 2001
-+From: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
-+Date: Wed, 16 Jul 2025 02:54:28 +0000
-+Subject: [PATCH] postfix: add preliminary setting
++++ b/meta-oe/recipes-extended/redis/redis-7.2.8/CVE-2025-32023.patch
+@@ -0,0 +1,218 @@
++From 50188747cbfe43528d2719399a2a3c9599169445 Mon Sep 17 00:00:00 2001
++From: "debing.sun" <debing.sun@redis.com>
++Date: Wed, 7 May 2025 18:25:06 +0800
++Subject: [PATCH] Fix out of bounds write in hyperloglog commands
++ (CVE-2025-32023)
 +
-+post-install call postconf commands to modify main.cf. When multiple
-+parameters to postconf, the order of those parameters in main.cf is random.
-+Then it will reproduce random results in rootfs file(sample-main.cf). To
-+fix this, add preliminary setting in main.cf.
++Co-authored-by: oranagra <oran@redislabs.com>
 +
-+Upstream-Status: Inappropriate [this is the use of post-install,
-+upstream is not affected]
-+
-+Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
++Upstream-Status: Backport [https://github.com/redis/redis/commit/50188747cbfe43528d2719399a2a3c9599169445]
++CVE: CVE-2025-32023
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 +---
-+ conf/main.cf | 2 ++
-+ 1 file changed, 2 insertions(+)
++ src/hyperloglog.c          | 47 +++++++++++++++++++++++++++++++----
++ tests/unit/hyperloglog.tcl | 51 ++++++++++++++++++++++++++++++++++++++
++ 2 files changed, 93 insertions(+), 5 deletions(-)
 +
-+diff --git a/conf/main.cf b/conf/main.cf
-+index 2ee7996..0c208e6 100644
-+--- a/conf/main.cf
-++++ b/conf/main.cf
-+@@ -683,3 +683,5 @@ sample_directory =
-+ #
-+ readme_directory =
-+ inet_protocols = ipv4
-++shlib_directory =
-++meta_directory =
++diff --git a/src/hyperloglog.c b/src/hyperloglog.c
++index 1a74f47..ca592a0 100644
++--- a/src/hyperloglog.c
+++++ b/src/hyperloglog.c
++@@ -587,6 +587,7 @@ int hllSparseToDense(robj *o) {
++     struct hllhdr *hdr, *oldhdr = (struct hllhdr*)sparse;
++     int idx = 0, runlen, regval;
++     uint8_t *p = (uint8_t*)sparse, *end = p+sdslen(sparse);
+++    int valid = 1;
++ 
++     /* If the representation is already the right one return ASAP. */
++     hdr = (struct hllhdr*) sparse;
++@@ -606,16 +607,27 @@ int hllSparseToDense(robj *o) {
++     while(p < end) {
++         if (HLL_SPARSE_IS_ZERO(p)) {
++             runlen = HLL_SPARSE_ZERO_LEN(p);
+++            if ((runlen + idx) > HLL_REGISTERS) { /* Overflow. */
+++                valid = 0;
+++                break;
+++            }
++             idx += runlen;
++             p++;
++         } else if (HLL_SPARSE_IS_XZERO(p)) {
++             runlen = HLL_SPARSE_XZERO_LEN(p);
+++            if ((runlen + idx) > HLL_REGISTERS) { /* Overflow. */
+++                valid = 0;
+++                break;
+++            }
++             idx += runlen;
++             p += 2;
++         } else {
++             runlen = HLL_SPARSE_VAL_LEN(p);
++             regval = HLL_SPARSE_VAL_VALUE(p);
++-            if ((runlen + idx) > HLL_REGISTERS) break; /* Overflow. */
+++            if ((runlen + idx) > HLL_REGISTERS) { /* Overflow. */
+++                valid = 0;
+++                break;
+++            }
++             while(runlen--) {
++                 HLL_DENSE_SET_REGISTER(hdr->registers,idx,regval);
++                 idx++;
++@@ -626,7 +638,7 @@ int hllSparseToDense(robj *o) {
++ 
++     /* If the sparse representation was valid, we expect to find idx
++      * set to HLL_REGISTERS. */
++-    if (idx != HLL_REGISTERS) {
+++    if (!valid || idx != HLL_REGISTERS) {
++         sdsfree(dense);
++         return C_ERR;
++     }
++@@ -923,27 +935,40 @@ int hllSparseAdd(robj *o, unsigned char *ele, size_t elesize) {
++ void hllSparseRegHisto(uint8_t *sparse, int sparselen, int *invalid, int* reghisto) {
++     int idx = 0, runlen, regval;
++     uint8_t *end = sparse+sparselen, *p = sparse;
+++    int valid = 1;
++ 
++     while(p < end) {
++         if (HLL_SPARSE_IS_ZERO(p)) {
++             runlen = HLL_SPARSE_ZERO_LEN(p);
+++            if ((runlen + idx) > HLL_REGISTERS) { /* Overflow. */
+++                valid = 0;
+++                break;
+++            }
++             idx += runlen;
++             reghisto[0] += runlen;
++             p++;
++         } else if (HLL_SPARSE_IS_XZERO(p)) {
++             runlen = HLL_SPARSE_XZERO_LEN(p);
+++            if ((runlen + idx) > HLL_REGISTERS) { /* Overflow. */
+++                valid = 0;
+++                break;
+++            }
++             idx += runlen;
++             reghisto[0] += runlen;
++             p += 2;
++         } else {
++             runlen = HLL_SPARSE_VAL_LEN(p);
++             regval = HLL_SPARSE_VAL_VALUE(p);
+++            if ((runlen + idx) > HLL_REGISTERS) { /* Overflow. */
+++                valid = 0;
+++                break;
+++            }
++             idx += runlen;
++             reghisto[regval] += runlen;
++             p++;
++         }
++     }
++-    if (idx != HLL_REGISTERS && invalid) *invalid = 1;
+++    if ((!valid || idx != HLL_REGISTERS) && invalid) *invalid = 1;
++ }
++ 
++ /* ========================= HyperLogLog Count ==============================
++@@ -1091,22 +1116,34 @@ int hllMerge(uint8_t *max, robj *hll) {
++     } else {
++         uint8_t *p = hll->ptr, *end = p + sdslen(hll->ptr);
++         long runlen, regval;
+++        int valid = 1;
++ 
++         p += HLL_HDR_SIZE;
++         i = 0;
++         while(p < end) {
++             if (HLL_SPARSE_IS_ZERO(p)) {
++                 runlen = HLL_SPARSE_ZERO_LEN(p);
+++                if ((runlen + i) > HLL_REGISTERS) { /* Overflow. */
+++                    valid = 0;
+++                    break;
+++                }
++                 i += runlen;
++                 p++;
++             } else if (HLL_SPARSE_IS_XZERO(p)) {
++                 runlen = HLL_SPARSE_XZERO_LEN(p);
+++                if ((runlen + i) > HLL_REGISTERS) { /* Overflow. */
+++                    valid = 0;
+++                    break;
+++                }
++                 i += runlen;
++                 p += 2;
++             } else {
++                 runlen = HLL_SPARSE_VAL_LEN(p);
++                 regval = HLL_SPARSE_VAL_VALUE(p);
++-                if ((runlen + i) > HLL_REGISTERS) break; /* Overflow. */
+++                if ((runlen + i) > HLL_REGISTERS) { /* Overflow. */
+++                    valid = 0;
+++                    break;
+++                }
++                 while(runlen--) {
++                     if (regval > max[i]) max[i] = regval;
++                     i++;
++@@ -1114,7 +1151,7 @@ int hllMerge(uint8_t *max, robj *hll) {
++                 p++;
++             }
++         }
++-        if (i != HLL_REGISTERS) return C_ERR;
+++        if (!valid || i != HLL_REGISTERS) return C_ERR;
++     }
++     return C_OK;
++ }
++diff --git a/tests/unit/hyperloglog.tcl b/tests/unit/hyperloglog.tcl
++index ee43718..bc90eb2 100644
++--- a/tests/unit/hyperloglog.tcl
+++++ b/tests/unit/hyperloglog.tcl
++@@ -137,6 +137,57 @@ start_server {tags {"hll"}} {
++         set e
++     } {*WRONGTYPE*}
++ 
+++    test {Corrupted sparse HyperLogLogs doesn't cause overflow and out-of-bounds with XZERO opcode} {
+++        r del hll
+++        
+++        # Create a sparse-encoded HyperLogLog header
+++        set pl [string cat "HYLL" [binary format c12 {1 0 0 0 0 0 0 0 0 0 0 0}]]
+++
+++        # Create an XZERO opcode with the maximum run length of 16384(2^14)
+++        set runlen [expr 16384 - 1]
+++        set chunk [binary format cc [expr {0b01000000 | ($runlen >> 8)}] [expr {$runlen & 0xff}]]
+++        # Fill the HLL with more than 131072(2^17) XZERO opcodes to make the total
+++        # run length exceed 4GB, will cause an integer overflow.
+++        set repeat [expr 131072 + 1000]
+++        for {set i 0} {$i < $repeat} {incr i} {
+++            append pl $chunk
+++        }
+++
+++        # Create a VAL opcode with a value that will cause out-of-bounds.
+++        append pl [binary format c 0b11111111]
+++        r set hll $pl
+++
+++        # This should not overflow and out-of-bounds.
+++        assert_error {*INVALIDOBJ*} {r pfcount hll hll}
+++        assert_error {*INVALIDOBJ*} {r pfdebug getreg hll}
+++        r ping
+++    }
+++
+++    test {Corrupted sparse HyperLogLogs doesn't cause overflow and out-of-bounds with ZERO opcode} {
+++        r del hll
+++        
+++        # Create a sparse-encoded HyperLogLog header
+++        set pl [string cat "HYLL" [binary format c12 {1 0 0 0 0 0 0 0 0 0 0 0}]]
+++
+++        # # Create an ZERO opcode with the maximum run length of 64(2^6)
+++        set chunk [binary format c [expr {0b00000000 | 0x3f}]]
+++        # Fill the HLL with more than 33554432(2^17) ZERO opcodes to make the total
+++        # run length exceed 4GB, will cause an integer overflow.
+++        set repeat [expr 33554432 + 1000]
+++        for {set i 0} {$i < $repeat} {incr i} {
+++            append pl $chunk
+++        }
+++
+++        # Create a VAL opcode with a value that will cause out-of-bounds.
+++        append pl [binary format c 0b11111111]
+++        r set hll $pl
+++
+++        # This should not overflow and out-of-bounds.
+++        assert_error {*INVALIDOBJ*} {r pfcount hll hll}
+++        assert_error {*INVALIDOBJ*} {r pfdebug getreg hll}
+++        r ping
+++    }
+++
++     test {Corrupted dense HyperLogLogs are detected: Wrong length} {
++         r del hll
++         r pfadd hll a b c
 +-- 
-+2.31.3
++2.49.0
 +
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.8.6.bb b/meta-networking/recipes-daemons/postfix/postfix_3.8.6.bb
-index 3ec7f22ad3..b0ac51a9dd 100644
---- a/meta-networking/recipes-daemons/postfix/postfix_3.8.6.bb
-+++ b/meta-networking/recipes-daemons/postfix/postfix_3.8.6.bb
-@@ -26,6 +26,7 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
-            file://0003-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
-            file://0004-Fix-icu-config.patch \
-            file://0005-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
-+           file://0006-postfix-add-preliminary-setting.patch \
-            "
+diff --git a/meta-oe/recipes-extended/redis/redis_7.2.8.bb b/meta-oe/recipes-extended/redis/redis_7.2.8.bb
+index bf9de7a166..a1739b4f30 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.2.8.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.2.8.bb
+@@ -16,6 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0004-src-Do-not-reset-FINAL_LIBS.patch \
+            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
++           file://CVE-2025-32023.patch \
+           "
  
- SRC_URI[sha256sum] = "4b6e17c826cc438cc3016a9c0a55ea7e77c6cbafba7dd57241d81b690b0e9774"
+ SRC_URI[sha256sum] = "6be4fdfcdb2e5ac91454438246d00842d2671f792673390e742dfcaf1bf01574"
 -- 
-2.34.1
+2.49.0
 
 
