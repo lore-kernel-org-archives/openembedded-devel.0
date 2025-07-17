@@ -1,119 +1,130 @@
-Return-Path: <gudni.m.g@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C65AC83F38
-	for <webhook@archiver.kernel.org>; Thu, 17 Jul 2025 13:56:35 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web10.49419.1752760590270179827
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 452EAC83F38
+	for <webhook@archiver.kernel.org>; Thu, 17 Jul 2025 14:36:49 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web11.337.1752763007775411305
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 17 Jul 2025 06:56:30 -0700
+ Thu, 17 Jul 2025 07:36:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RcCqnLRi;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: gudni.m.g@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-3a582e09144so580768f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Jul 2025 06:56:30 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=LTeEIVi3;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.51, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-6077dea37easo1704746a12.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 17 Jul 2025 07:36:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752760588; x=1753365388; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1752763006; x=1753367806; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=TnAuRSknHY4HwX48hkCZoX3X0ZLp9LRBcmJ8NpjeNu8=;
-        b=RcCqnLRiAsivyUqnpWQMcCiwwmZLYP22Y8JKR7jV5kTOVzuqRDSPkSgOobOlBnGOml
-         G4rtK28RJnygNmF7v2Ru7QkcFWN1+YfGgskb9IxDGKlMiz2czsbgHa9HBs9g+0FELJ6P
-         UnNjdUyDDKSr0T+m4QfIP6we2ZeVL+zUVKb/5v9vI5MUADooWBbtL/KRnF0vMDOF2vQ7
-         WnzBxZr1JUXYD+7cmt27oLC1cx9onhAH62frGng3QXWnaRBCmnhI0bKwoAfnXUU71HuN
-         tuBcr9AjPDX2eEmJagRj6J+piHlKi6E3okwsduCWYzH3fvxf+X2C24Z64pCptKf00+JY
-         GkEg==
+        bh=121RsvGtX2w9hZ4y6/paBol3xcaA9tZCG+VMmFz1DGs=;
+        b=LTeEIVi3oSJ6fR7Q1u/FumQr5umFeZeuoDkDdEXUF9MawrsnotNoSl7TCZi0OmhEVK
+         hz4GLoZxTrFs1Fc9hyfjQp7OLQ64fH8ujxdUABvof8uKQKkCuw+1S0+YmxBVe/jQR9RF
+         h1M4zE950DK5yKknezWKD0w9Sj7STHmfWASQI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752760588; x=1753365388;
+        d=1e100.net; s=20230601; t=1752763006; x=1753367806;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=TnAuRSknHY4HwX48hkCZoX3X0ZLp9LRBcmJ8NpjeNu8=;
-        b=P2P5ai0By0OK1WfYf1gF3skZSFo/fQnDPGvfUMCi0TfC95NcpEkvdOJ33pkySsfabj
-         VCQpBVf5i9KN0Cg7YjMhEZ5fyji8042lig1KaZyPz2vmueMA7ya2KzJykl25I0NDXLyK
-         HJvi0HZXPNn0duVEG3VulRa9XdYCNIFXCw6GLxoJhdiV5P++tEOhKaIc3qXArpBM1j+l
-         MWj0Nnbk2079U+42yW0h/DqrBSXXDlr9UkD3RqE8p+bg1zHi6Ks9gnfI2Tdsw0AQCeQQ
-         QW82ELVI7ts9IeDxzqDKCRwcaEDXfJDPsUCuwVzlfv2pt6yPx2kird7wVTJmCLyDqEY1
-         5Sng==
-X-Gm-Message-State: AOJu0YyVOosMPTKzSeBASFoJm7fBpgRegqX7zsWeVjGu3KYa6/o0/Oh/
-	8P9iWzDZKTdi1eLlQG7I7qSv0bN9cCXb2w45koG1dRFLNurUOgFOrGfW2mBFY6iY
-X-Gm-Gg: ASbGncupRRJ9lP4i+J9GiW24QaAigyn0ZeOT5FVt4gKA+mCU8kDUirZcBTs7KkT7Jfp
-	cEzDoKlRjUO6TP2/gX4zjnvFY0d5ybltSIOBShYzc23JlIIRB3lluJVOb6jBagau3NGBHEkn1LG
-	cMNNJO5voV4DseZH4zV9aF06YwZ9ChVLeXSm41Pf19XnEEcpN2GV38rBevS2uvRuxYrvEBxt2eX
-	XJVPBq0SNQlZ9+YLmBxUF4U7LwqJ9rNlfVMWnssgly8EU3CAI9c+b9dqYVMA5CJdRjURfQJG95p
-	cYX3Nrh5l+aSKTSytXWXmMX0aL2htEplG0sXxl8ZL0Jyy/ovdttPRgWi7GJeF/csJxWLwUAZA2F
-	9C5ZoH6NaLERZG4XrEtv/KJIDxKkDuxoTTxhFVFNQ15LyxQ8=
-X-Google-Smtp-Source: AGHT+IHFZHqakb9DTowBK/8GaUyi2OcbIr5+j/wmCCNYxhQZht8I8gsrANj88wXPyyRu2SZK9e27fg==
-X-Received: by 2002:a05:6000:41f4:b0:3a4:f35b:d016 with SMTP id ffacd0b85a97d-3b60e4d1bb5mr5530961f8f.11.1752760588275;
-        Thu, 17 Jul 2025 06:56:28 -0700 (PDT)
-Received: from localhost.localdomain ([81.15.100.92])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4562e57200csm52764725e9.0.2025.07.17.06.56.26
+        bh=121RsvGtX2w9hZ4y6/paBol3xcaA9tZCG+VMmFz1DGs=;
+        b=tJ0oqyeVm5lFJ4Y36knIB+H0ZfGDvc6I96W8LAMnnl9yR0Wa3NX8XGyJteo1xWL7IF
+         GrBrbbKEekpqP6q0MPecTwK0d/nMU/gn1cKANqXiF+9Pe//0x+LIKolHvlu76IytF4rV
+         nrgir7ij+09n0BmOO1hWAM36adQKwjTDjgmFXY17Y58qk7lWIlea6aXtDEUH2Gbd81U1
+         PVNZclDC85thCes5x70oq7q6uUYm9W1dLSKDNzwOlXNV9EwToz7Q6Zb+2QTB/gnvsktd
+         nE62zM7xMxa9ch3P5y0+I+OGrZGP4vWxPw06xCYRf/xZmQX02J3n4P7GD31cFMi70a9P
+         kBTg==
+X-Gm-Message-State: AOJu0YzNV/hamfT6ZNO9MtMycoS5Brn9SvRZLFoNGpfwQ30n/S4Issg1
+	gTRUutJDYVjmPaNorI1N7IquXUjZXz0JUTd83SK6+higTgzw8uiS7isdWkw0su21LCnGpDJOtdB
+	ABhDT
+X-Gm-Gg: ASbGncu+YWaP1d/jHLOXR1lXBZWiimitBUrVg1AF1YRWgoGAlg2D8lc2/ECZWfsmQeq
+	weVnYOs4wrBbANG8Kggq6MqZNa7AJnpggJrMZ2nE8W58HdtPlfzisQ6PlOKqqSHPL3mBg898NTj
+	JpTEq1AcucnM5Omz0obt9AHYHqVe149iarCvW2vL23u+NXESEi18OTTKLW/9HRBnbaCXNths8p0
+	TPXSip8BdDr2kEQKB6RJyMISKqFh3XJjsqcUP0mtrHybuCknELUimESB3ozrJgo2hrXZQsklIS8
+	D6dwcfOtUTAaZJ+T8V4LJDcD89AdTEk+lgJ8+1euEKyc8uAmIZVGI6NIlc+1xFo6ZSR7NkebGg7
+	eGaXRZK30HpmhVvf1BTvMJ6scquYsH3b5Ywcp
+X-Google-Smtp-Source: AGHT+IGLWuXEYJ0g9ErPUzIFvKs1E3xH2ORRROmk3mQkDdkBzXfR7EY+xR4gvp6VZ5LYfWuuHcDspQ==
+X-Received: by 2002:a17:907:d2cd:b0:ae3:60fb:1b3b with SMTP id a640c23a62f3a-ae9ce1b162dmr640188166b.58.1752763005702;
+        Thu, 17 Jul 2025 07:36:45 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae6e82df562sm1357696266b.164.2025.07.17.07.36.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Jul 2025 06:56:27 -0700 (PDT)
-From: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudni.m.g@gmail.com>
+        Thu, 17 Jul 2025 07:36:44 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudni.m.g@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][scarthgap][PATCH 2/2] mbedtls: upgrade 3.6.3.1 -> 3.6.4
-Date: Thu, 17 Jul 2025 13:56:18 +0000
-Message-ID: <20250717135618.3956-2-gudni.m.g@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250717135618.3956-1-gudni.m.g@gmail.com>
-References: <20250717135618.3956-1-gudni.m.g@gmail.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCHv2 2/2] python3-charset-normalizer: Update mypy
+Date: Thu, 17 Jul 2025 17:36:39 +0300
+Message-Id: <20250717143639.1004847-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250717143639.1004847-1-leon.anavi@konsulko.com>
+References: <20250717143639.1004847-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 17 Jul 2025 13:56:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118611
+ <openembedded-devel@lists.openembedded.org>; Thu, 17 Jul 2025 14:36:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118613
 
-Fixes several security vulnerabilities:
-CVE-2025-49601, CVE-2025-49600, CVE-2025-52496,
-CVE-2025-47917, CVE-2025-48965, CVE-2025-52497,
-and CVE-2025-49087
+Apply a patch to update the requirements on mypy to permit the
+latest version.
 
-The framework directory has been changed into a git submodule.[1][2]
-The recipe now uses Git Submodule Fetcher (gitsm)
-
-Changelog:
-https://github.com/Mbed-TLS/mbedtls/releases/tag/mbedtls-3.6.4
-
-[1] https://github.com/Mbed-TLS/mbedtls/commit/8cf5666a174237998a7965e284d7ba8c1655d16d
-[2] https://github.com/Mbed-TLS/mbedtls/commit/c90c6d8ff787ab8787d9373b0e662a95ed1f4dae
-
-Signed-off-by: Guðni Már Gilbert <gudni.m.g@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../mbedtls/{mbedtls_3.6.3.1.bb => mbedtls_3.6.4.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_3.6.3.1.bb => mbedtls_3.6.4.bb} (95%)
+ ...project.toml-Update-mypy-requirement.patch | 28 +++++++++++++++++++
+ .../python3-charset-normalizer_3.4.2.bb       |  2 ++
+ 2 files changed, 30 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-charset-normalizer/0001-pyproject.toml-Update-mypy-requirement.patch
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.3.1.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
-similarity index 95%
-rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.3.1.bb
-rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
-index 679a05e5c2..88b50a406b 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.3.1.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
-@@ -23,11 +23,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
- SECTION = "libs"
+diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer/0001-pyproject.toml-Update-mypy-requirement.patch b/meta-python/recipes-devtools/python/python3-charset-normalizer/0001-pyproject.toml-Update-mypy-requirement.patch
+new file mode 100644
+index 0000000000..44b5283359
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-charset-normalizer/0001-pyproject.toml-Update-mypy-requirement.patch
+@@ -0,0 +1,28 @@
++From ee56a688a46a2abc2ca46c061898b27b44fb9602 Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Thu, 17 Jul 2025 16:23:58 +0300
++Subject: [PATCH] pyproject.toml: Update mypy requirement
++
++Updates the requirements on mypy to permit the latest version.
++
++Upstream-Status: Submitted [https://github.com/jawah/charset_normalizer/pull/632]
++
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ pyproject.toml | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/pyproject.toml b/pyproject.toml
++index e7f052a..3a75dc1 100644
++--- a/pyproject.toml
+++++ b/pyproject.toml
++@@ -1,5 +1,5 @@
++ [build-system]
++-requires = ["setuptools", "setuptools-scm", "mypy>=1.4.1,<=1.15.0"]
+++requires = ["setuptools", "setuptools-scm", "mypy>=1.4.1,<=1.17.0"]
++ build-backend = "setuptools.build_meta"
++ 
++ [project]
++-- 
++2.39.5
++
+diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.2.bb b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.2.bb
+index e62306fff3..e98f823247 100644
+--- a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.2.bb
+@@ -3,6 +3,8 @@ HOMEPAGE = "https://github.com/ousret/charset_normalizer"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=48178f3fc1374ad7e830412f812bde05"
  
- S = "${WORKDIR}/git"
--SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=main;tag=v${PV} \
-+SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-3.6;tag=v${PV} \
-            file://run-ptest \
-            "
++SRC_URI += "file://0001-pyproject.toml-Update-mypy-requirement.patch"
++
+ SRC_URI[sha256sum] = "5baececa9ecba31eff645232d59845c07aa030f0c81ee70184a90d35099a0e63"
  
--SRCREV = "6fb5120fde4ab889bea402f5ab230c720b0a3b9a"
-+SRCREV = "c765c831e5c2a0971410692f92f7a81d6ec65ec2"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
- 
+ DEPENDS += "python3-setuptools-scm-native python3-mypy-native"
 -- 
-2.43.0
+2.39.5
 
 
