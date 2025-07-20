@@ -1,91 +1,120 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B60ACC83F27
-	for <webhook@archiver.kernel.org>; Sat, 19 Jul 2025 04:22:23 +0000 (UTC)
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web10.4864.1752898928156365905
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F593C83F1A
+	for <webhook@archiver.kernel.org>; Sun, 20 Jul 2025 12:31:45 +0000 (UTC)
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
+ by mx.groups.io with SMTP id smtpd.web11.17193.1753014698952957518
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 18 Jul 2025 21:22:08 -0700
+ Sun, 20 Jul 2025 05:31:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dLHMhV8W;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-747fba9f962so2701502b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 18 Jul 2025 21:22:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UhMhPdYV;
+ spf=pass (domain: gmail.com, ip: 209.85.167.42, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-558fa0b2c99so2942213e87.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Jul 2025 05:31:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752898927; x=1753503727; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1753014696; x=1753619496; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=xhyBREeKgLtY9EdhjO0SxxR8QWVcNeS1t+Zox/a7sCA=;
-        b=dLHMhV8W77d1Oh2+5M+a/3kQbsE3u7l+TjIlGdUio5pYrjXDCyPuy52vfhiai680Y5
-         M6IuepvA2qcQNEnVPylSom5PTFWMTJF7ousHRGNYNuv64EYSst/76ZRRv6L6G3kj3x41
-         qMQg5unoXng1Kg26iMVbyRyR175Drvu+0ygS+rkUuMJJn7uH/PuvKhHk3mXOWDZN4do4
-         i5g4WogpG+ffVozUroXBb9gOZLc8DA7KJtoYU8nCvJUEu0wwe0Y5xzvnfb0DF6AKFlU9
-         PdmmEk8BHBncYZx3SLQ8ZelhLMzKciLyxIXFYW7jSdYesgOhRv4M+SnQqOAugBorWiiZ
-         7oMA==
+        bh=tYskt0BzYqHJ2Uia+CxTJVoP/zqmWOGD33jh9Y3rnRA=;
+        b=UhMhPdYVxnuNx6EBHnql7MWh29najIVHVcAYXwGGfsXX6KhZ6Ms0mpyKreJaOdYYr3
+         eQ+gA+a6BLH3o/vxA0TmZY+fZ3TF1w898dLhMGWhAPU+4HuPiApWx2Ko28df8cSub4+G
+         kHd/iSmZAG8wJ2xWlaXC3nC8BeCfpGtq9PDGONE6TcQNbxIF+vsDYNe9SMWr8aIoSKcO
+         kZl/J9YAfkcGOiLmj3+PkYRdF67ywHksnmwBPcjG/UxJKDKFyb9YgxsAqS096zHOZHVa
+         LIJUmlo3Aq6VsiuRSEKhETCBLps0yFiLCBnYKsTvxqRYTe2f2dDfoVKv3LroJ8pPmsLv
+         qIWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752898927; x=1753503727;
+        d=1e100.net; s=20230601; t=1753014696; x=1753619496;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=xhyBREeKgLtY9EdhjO0SxxR8QWVcNeS1t+Zox/a7sCA=;
-        b=PiBX2DOGc5vye8rAUnrRLk3cNSJ/xbu+WyzmwcPjW1o7gdib0YKEPBuik4amS7Xxhk
-         u9io52gij9assb+1kJiVjf6c369w6y7wAmewkJqvq6FZDybAOCPhjfxrsHhSw1Nzji7A
-         FX3jZ0yJV5P4BYydcq1ZTD3bb2Rv8v1o396UU5HuNTKbKPEwRSyUtDHU4DrBm6WrWxr/
-         vP3YsGGlxe15/fmBCMap+YZPGA7DRUMtaIz20fV8vtNuDQYAWzZyN4yentBHAimYhUGE
-         vQ0LsL5w1ABKP2oACr80Qv7nVHsEy33kJaVW8VWxDnbk5mfx4qJbm9VAYLgX5kY7IvXG
-         kc9Q==
-X-Gm-Message-State: AOJu0YzECRrl9wYouLCijOafkz7Us3NcZnLy9cmFzHWrX4hHEZ/MSDdC
-	p5ZHh6mYcbAzrdYPKGV2tF4FzD9eXv0fs7o7nBVG4bXPDH0dbV4KYQzExpn68WDcwTc=
-X-Gm-Gg: ASbGnctxCdUiHBzI1W4Dg1iBzP8W8UyK4jjpGR9WXfCs/9/6oYrFefxrucGR3+CpffU
-	w7eJaAWwoHTa0fA8mZg0/zOkucSaOlJN7xvqYv2nZse/rVhC4iKIDz24JV2fNlhUwCfTjm1Hu+4
-	G6qOfvx0Wv1K5GQ1+OM+/shZhX+xvU+Hgy8cyZyUYvzKabgjtvLfUggWIg/Y/K1Rk/iR6P4fYdn
-	bUkUGGsP0G/4Wx4NwxGkqR39z+L7Np+UiCeAbjMshLESFwUZ+lqTczo0s6Zc5GCuQays2PGyN85
-	O5ksOuZs+x0npxxZpkoqww+pKoSWs7y9WccUbGsiTunE+GJl/XIsA1hqlL8Q1xxhiU7cImw6ueq
-	VfyuPXZFi19oyyoqesg8EDhTF
-X-Google-Smtp-Source: AGHT+IFw9pdyc+ow/U+USZ/bz5gEzSsIP8c+k3aT8M4Q5JHGyOHlC2l88HUQyRPInqLYaLLbx5INLw==
-X-Received: by 2002:a05:6a00:9189:b0:749:eb:22c6 with SMTP id d2e1a72fcca58-759678986ecmr8102943b3a.1.1752898926984;
-        Fri, 18 Jul 2025 21:22:06 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::edf4])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-759cbf5a13csm2031254b3a.162.2025.07.18.21.22.06
+        bh=tYskt0BzYqHJ2Uia+CxTJVoP/zqmWOGD33jh9Y3rnRA=;
+        b=hjhjS81it9PZdrlCcVGPbVtUcZW+k0leB6KRMBYkth4K0l8rGHJE7zJnvltRkERQqs
+         Eh34iFssI07JNn6b6Dun+ou6O+90BcWDzocY1odpIx21luEMk25H+/BT0dBYbfqRNqXJ
+         d8fMeJ3eBHgZyKP+cIH3UTov2BWJHdI3g8phWC6G0QT2CNE5/+MROd5N1OJ/lqTqjhKM
+         e4plxz0Bei9HT3rkXZ/uXfTH0OAq9kxx47HG5MgNYuABwm9ZN63WJkEwwCHxGuUl7/FK
+         OKEe1MKIGZfgO4rK2KUYE1MhdRBA7RAR5OCOLHy8N0ZEAYOIKaF4QlUb6HFxXqdB3enz
+         QFrQ==
+X-Gm-Message-State: AOJu0YzxgCNSUH8u+IQphhPT5UCRefszC9BDohU+ZljQpOommrf/r7/X
+	CD5R7R1mWYQDvH7OUcIwb/vH94lwIzMDb8VMRvmgVNzSBP0d9UFoVtoiS6j2LQ==
+X-Gm-Gg: ASbGncuUtkqhmOnUJ5Jdw1VSdYNHr/938ngzZ+fxkxM5UwCE4pPA05exuhVFXSnwi7x
+	WwTa/+RE9ZMCH/Jn78BsOs97ibEQm8E+aEQAAhW/2OeZUIgalx5HOMw5K16mFuXzASUkRFtmr3T
+	OBOXSW1c6po7o6vYPN1FeO96tC/htsXlFBjKVsn9HJ88Mr6XM8F58385F/Ct/avHbrh3aUzZ9ID
+	os/7r+wTvoE01gb3OFfnJDNfMWZ8K89OLPJ+ubN8IZsaaOXlDM9JSvFJodG1kK1NZjPkQzZGYN7
+	07cX7Q8/7OoNJfnpXFiiWYa2Krg3kGg9XkIQ/fr026hAkyfzI6RbghHzOoxERGdl36nEO295pCw
+	WW9LQh/R43EoRw1/WOKZ00UdavsGxpcdG+9xBBQ==
+X-Google-Smtp-Source: AGHT+IFIgxalb/E4ehrp5IE9fgQRjUK6UnVWxP2WaJK80bl9v+xd4/l+R+fZ2tIxZMH6mEbyD6og1w==
+X-Received: by 2002:a05:6512:3093:b0:553:aa32:4106 with SMTP id 2adb3069b0e04-55a233359a1mr4861404e87.23.1753014696049;
+        Sun, 20 Jul 2025 05:31:36 -0700 (PDT)
+Received: from localhost.localdomain ([176.33.68.18])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-55a31da25c9sm1103851e87.178.2025.07.20.05.31.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Jul 2025 21:22:06 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Sun, 20 Jul 2025 05:31:34 -0700 (PDT)
+From: Alper Ak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-initramfs][PATCH] klibc: Use libgcc for compiler runtime with clang on arm
-Date: Fri, 18 Jul 2025 21:22:04 -0700
-Message-ID: <20250719042204.1071552-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.50.1
+Cc: Alper Ak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] avro-c++: Fix build for 32-bit targets
+Date: Sun, 20 Jul 2025 15:31:27 +0300
+Message-ID: <20250720123127.25407-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 19 Jul 2025 04:22:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118635
+ <openembedded-devel@lists.openembedded.org>; Sun, 20 Jul 2025 12:31:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118636
 
-Fixes build errors seen building klibc linking recipes
+Building avro-c++ for 32-bit targets currently fails due to the following warnings being treated as errors:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+- `useless-cast` in Symbol.cc
+- `conversion` in FileStream.cc
+
+These are promoted to errors because of `-Werror` in the project's build flags.
+
+Fix:
+
+lib32-avro-c++/1.12/sources/avro-c++-1.12/lang/c++/impl/parsing/Symbol.cc:91:27:
+error: useless cast to type 'int' [-Werror=useless-cast]
+91 | adj.push_back(static_cast(it - rs.begin()));
+| ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cc1plus: all warnings being treated as errors
+
+lib32-avro-c++/1.12/sources/avro-c++-1.12/lang/c++/impl/FileStream.cc:208:41:
+error: conversion from 'int64_t' {aka 'long long int'} to 'size_t' {aka 'unsigned int'} may change value [-Werror=conversion]
+208 | in_->seek(position - byteCount_ - available_);
+| ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+
+lib32-avro-c++/1.12/sources/avro-c++-1.12/lang/c++/impl/FileStream.cc:209:22:
+error: conversion from 'int64_t' {aka 'long long int'} to 'size_t'
+{aka 'unsigned int'} may change value [-Werror=conversion]
+209 | byteCount_ = position;
+| ^~~~~~~~
+cc1plus: all warnings being treated as errors
+
+Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
 ---
- meta-initramfs/classes/klibc.bbclass | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/recipes-support/avro/avro-c++_1.12.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-initramfs/classes/klibc.bbclass b/meta-initramfs/classes/klibc.bbclass
-index c91ca60391..ad5d9019fd 100644
---- a/meta-initramfs/classes/klibc.bbclass
-+++ b/meta-initramfs/classes/klibc.bbclass
-@@ -16,6 +16,10 @@ CPPFLAGS = "${TUNE_CCARGS}"
- CPPFLAGS[export] = "1"
+diff --git a/meta-oe/recipes-support/avro/avro-c++_1.12.bb b/meta-oe/recipes-support/avro/avro-c++_1.12.bb
+index 726a861bc9..9032ff346d 100644
+--- a/meta-oe/recipes-support/avro/avro-c++_1.12.bb
++++ b/meta-oe/recipes-support/avro/avro-c++_1.12.bb
+@@ -26,4 +26,11 @@ do_configure:prepend() {
+         cp -r ${UNPACKDIR}/_deps/fmt-src ${B}/_deps/
+ }
  
- LDFLAGS = "${TUNE_CCARGS}"
-+# Linking with compiler-rt on arm results in
-+# libclang_rt.builtins-armhf.a(divmoddi4.c.o): in function `__divmoddi4':
-+#/usr/src/debug/compiler-rt/20.1.8/compiler-rt/lib/builtins/divmoddi4.c:(.text.__divmoddi4+0x7a): undefined reference to `__stack_chk_fail'
-+LDFLAGS:append:toolchain-clang:libc-klibc:arm = " --rtlib=libgcc --unwindlib=libgcc"
- LDFLAGS[export] = "1"
- 
- OVERRIDES =. "libc-klibc:"
++# Temporary workaround for 32-bit build failures due to -Werror:
++# 'useless-cast' in Symbol.cc and 'conversion' in FileStream.cc
++#
++# A patch has been submitted upstream: https://github.com/apache/avro/pull/3433
++# Once this or an equivalent fix is merged and the recipe upgraded, this can be removed.
++CXXFLAGS:append = " -Wno-error=useless-cast -Wno-error=conversion"
++
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.43.0
+
 
