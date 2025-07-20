@@ -2,147 +2,186 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1610FC83F22
-	for <webhook@archiver.kernel.org>; Sun, 20 Jul 2025 19:01:27 +0000 (UTC)
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
- by mx.groups.io with SMTP id smtpd.web10.23523.1753038085245196247
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B588EC83F22
+	for <webhook@archiver.kernel.org>; Sun, 20 Jul 2025 20:09:17 +0000 (UTC)
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
+ by mx.groups.io with SMTP id smtpd.web10.24757.1753042152880048265
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Jul 2025 12:01:25 -0700
+ Sun, 20 Jul 2025 13:09:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=c0lSS+/3;
- spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-70e64b430daso37647697b3.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Jul 2025 12:01:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mS7MW19W;
+ spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-718389fb988so35168847b3.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Jul 2025 13:09:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753038084; x=1753642884; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1753042152; x=1753646952; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=zL93NLW2KGKYD4fVjMWZEIhvFxtI4nlowVDrVgkb+30=;
-        b=c0lSS+/3MdX/+TO2w7L8BssyFFFkS+aF14ZF9L81R7URprFOu9ME7VS54v/DGiPGJd
-         Yh98gNGLzc1DpMqbUr/qxD5TkhuW+KKc0+J9n+VfGL6C2hYl3eHeR9f6zKf3HUwDxApZ
-         ydXVI+ipQv6BbbWSnRGEV2SGw1p/F6OKBf7Ep8T5tkqc+4YGKeHuY1KIbNoFXKhGxxrK
-         e5j/OtXn3V+fZZJsVhYpSys01tSKt2uX57cQRA4b+EY2c5+5h/SY69mVNdn8eU/7bT+l
-         K2cFNlsfIDdj8I+6vgMdTL+hq6+bYw5zqIpd25NoVgm6eRP9xJAVG2BoL4dTbg15cfjo
-         kX3Q==
+        bh=l/CDc8auNz6ebhAmjFoJBB1Muqp8c0TWKAq/Kvda7yI=;
+        b=mS7MW19WT8yzHC/7DuSf4ZGEeb0reSVC9NMCfB56sEA7GCQ+lkngB3JsgeEosX3lod
+         LKHugtbGQA0CSGVBcVXWp5V6gzqBcYa3pPx6KMfjeAgHZjh49FFNz0xtkoFi39Xymv5L
+         LcTtOkvXkJUS8J8R8I5EhvKjJWb0p59u1aiP6tQXLV4QkK5d0NFDdk8aMyTz1ExyxIES
+         WZbDJqngi3QSjY+vo0bE4W0QljdjyZpEwvSz11G1ZVZnfQJH0PddU3rmnsq3pkiGsB8F
+         MorpP2H99EkHd0ZyRzOBIwhoiAqq/vNDDufpbe6SgFVCECVDHi2Llan9lFWCxU8Tr0+i
+         rXWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753038084; x=1753642884;
+        d=1e100.net; s=20230601; t=1753042152; x=1753646952;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=zL93NLW2KGKYD4fVjMWZEIhvFxtI4nlowVDrVgkb+30=;
-        b=VbJmaDuys22Dm1Vzu9VDICMwoq9I6xAh6pVT78eLU8lYrsCKEc34AgsDpVHXLQKVZ3
-         2oRLWWAC7s1dGWbi5OI678ZvEBIHBr7H+xqF4EjqLVwWyz2P224xxSj+3iIxJ39e77k+
-         9BecYsmNFPC/y36784+aSM0ZdA15bDheOVVWAf4KHPan3dvVzZgbha2SLjAwEwFEFsHk
-         yP2UYYBiGYhaVOCeJ0PW3b3vojjt9Mu2YMmRYV1GFlXhcKF3pA0tQoi9vd8tyinsSqCn
-         Dpk0IOhKVgtJ1L0dOG+cvlpHgyKLPsmqV9gLePfLPc+joD3MIqNUZTtSkiOMVcymoIbC
-         0iyw==
-X-Gm-Message-State: AOJu0YwC9u3KxA+HAfKhBC8CCexRFbDv8B0vcVKI7R8T1eYnOknGBG7S
-	u0sXnXQCOYNEKF5EaIJs6aBzX+OFVnLU5YrqSOPBIsmXb4RGo7gVp/s9D4J4D1ASnVoLcSIH9tg
-	0X/EZV89tz8smOarHffu+iYUYbO/d9uveKOJh
-X-Gm-Gg: ASbGncsTFAqdxhfSbCi8A5kIiUJw/MB6oE5fvVdzuYL5qwXnNugK2hSlxzaxu/QwHfw
-	+JaTUIP6YpulFj83tGkcWbBnIH39+JoSWdJ4/HThEBe4gJqH9NU0ONtp4oGAT7xIOimPQAhjNpA
-	s3RPVkqB0N4IykkHsfv7bQ1StPU7QEvCLWj3k4GG1IIszYb3fW3mpmoeTZz1QP4B6/k0MVEDlsz
-	tDkNYTJiYe5IYziy3izbA==
-X-Google-Smtp-Source: AGHT+IFj9zWXlJ0ESRwbv+YBWXx0X+d/npLBGJvBMCjcmDdj5L/q7lk2lkfShJz1kGFhoXIh8hcvyjA7kPA48Y3wsPY=
-X-Received: by 2002:a05:690c:2783:b0:70c:b534:868f with SMTP id
- 00721157ae682-718374f08ddmr243546337b3.20.1753038084003; Sun, 20 Jul 2025
- 12:01:24 -0700 (PDT)
+        bh=l/CDc8auNz6ebhAmjFoJBB1Muqp8c0TWKAq/Kvda7yI=;
+        b=RzFF6hKT0t/Ahvi+sx0Tbuv8PLRf8rd1mNM883hgxF9glgYuJ/uT3Bdiz8xTcmMIkG
+         7eOrxrTj3hncnNSYTay5F+MjZNvJQN1TJYlrBDbAoMUx6zP880C/nRqWU3Le9DCXNwJx
+         bM19vaVSn8LtANmjT6bcWpaFqE8Tf5qXyqiDJz7g/0y6vyRs/zzPCdkDNffSvPz7Y4MM
+         pcmGjGRakzsC9s58JjnrrtlxQUvKbar7tEg9mlOHcXM6ZZEqbe0MdecRRbRDdjiR8u+L
+         Ylgmx5uw9VHejXoLH9kmluoeu5Dy8LiK5VvgOAvfOxUfl/9AVyf39acYRuHvJsbfvlD/
+         5siA==
+X-Gm-Message-State: AOJu0YxAlQq39ergVf1BwG4NaWOChv7fUhXjLav1FMXJD0ZODxr83Zw7
+	Ba48bbTvXAZGydwMb+hmYlCksogi8tq5e5MX+fJF532rNJ78Sm7Ahn3d9Y10u/fKAXkvm6bg2z1
+	5MbJAqVIYqo7qTJBqRgoV40RLMvR1HDVXfv25
+X-Gm-Gg: ASbGncsSsiiQ5OlnRc2QCfYslGldHnrblSKOohlO1H/drfohrDH2GbUvP/RdNst/c2k
+	0jpkKV12gq31IkNuoslkt7rL2W6e2HxaoCa8o72LKY8hp3s3BzSUWwpv23lChQX/PtBcxz385PR
+	iLxKDbib8PpzJV2C34YedNtWQPx3yv2R67NtiWkSINMMlep3uXsazFxu4gmM8mu3ynOTN4tPNCl
+	RXnUIQvkS6dtxCSZ8lL/RBTxXfber8W
+X-Google-Smtp-Source: AGHT+IFdHaZQ9auLbxRRGyKT82bKqtYnuifdbOnRHp4S/DXzX41WCgfylokHyDEPb3tlUw//VD9RTtxXLwBhyA7OrTM=
+X-Received: by 2002:a05:690c:4909:b0:70e:2d30:43eb with SMTP id
+ 00721157ae682-71834f7c4admr248292137b3.12.1753042151804; Sun, 20 Jul 2025
+ 13:09:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250720123127.25407-1-alperyasinak1@gmail.com>
-In-Reply-To: <20250720123127.25407-1-alperyasinak1@gmail.com>
+References: <848eafbf-de50-4a28-87a0-6f30eadfa543@gmail.com>
+In-Reply-To: <848eafbf-de50-4a28-87a0-6f30eadfa543@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 20 Jul 2025 12:00:57 -0700
-X-Gm-Features: Ac12FXw0GUnHgxc87iGkDAbe6-QUAdQPReWqRfDjhme5ya3GcZup6cEByIUm6F8
-Message-ID: <CAMKF1spJyn03S5SiCVn7+r8qk7y47QrmAFA3_9=6BMZ=nhenmw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] avro-c++: Fix build for 32-bit targets
-To: alperyasinak1@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
+Date: Sun, 20 Jul 2025 13:08:45 -0700
+X-Gm-Features: Ac12FXw7FZ8LDYX52KuywzEmTnW95SAm0EKYfr4YXAWM-quHFZglamFLakiEi0c
+Message-ID: <CAMKF1sowY7nv5aBnVsW0QXOzUW+J2EOkNKtWx0a-eqaU9aoARg@mail.gmail.com>
+Subject: Re: Kirkstone merge request: July 20th.
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 20 Jul 2025 19:01:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118641
+ <openembedded-devel@lists.openembedded.org>; Sun, 20 Jul 2025 20:09:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118642
 
-On Sun, Jul 20, 2025 at 5:31=E2=80=AFAM Alper Ak via lists.openembedded.org
-<alperyasinak1=3Dgmail.com@lists.openembedded.org> wrote:
->
-> Building avro-c++ for 32-bit targets currently fails due to the following=
- warnings being treated as errors:
->
-> - `useless-cast` in Symbol.cc
-> - `conversion` in FileStream.cc
->
-> These are promoted to errors because of `-Werror` in the project's build =
-flags.
->
-> Fix:
->
-> lib32-avro-c++/1.12/sources/avro-c++-1.12/lang/c++/impl/parsing/Symbol.cc=
-:91:27:
-> error: useless cast to type 'int' [-Werror=3Duseless-cast]
-> 91 | adj.push_back(static_cast(it - rs.begin()));
-> | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> cc1plus: all warnings being treated as errors
->
-> lib32-avro-c++/1.12/sources/avro-c++-1.12/lang/c++/impl/FileStream.cc:208=
-:41:
-> error: conversion from 'int64_t' {aka 'long long int'} to 'size_t' {aka '=
-unsigned int'} may change value [-Werror=3Dconversion]
-> 208 | in_->seek(position - byteCount_ - available_);
-> | ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
->
-> lib32-avro-c++/1.12/sources/avro-c++-1.12/lang/c++/impl/FileStream.cc:209=
-:22:
-> error: conversion from 'int64_t' {aka 'long long int'} to 'size_t'
-> {aka 'unsigned int'} may change value [-Werror=3Dconversion]
-> 209 | byteCount_ =3D position;
-> | ^~~~~~~~
-> cc1plus: all warnings being treated as errors
->
-> Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
-> ---
->  meta-oe/recipes-support/avro/avro-c++_1.12.bb | 7 +++++++
->  1 file changed, 7 insertions(+)
->
-> diff --git a/meta-oe/recipes-support/avro/avro-c++_1.12.bb b/meta-oe/reci=
-pes-support/avro/avro-c++_1.12.bb
-> index 726a861bc9..9032ff346d 100644
-> --- a/meta-oe/recipes-support/avro/avro-c++_1.12.bb
-> +++ b/meta-oe/recipes-support/avro/avro-c++_1.12.bb
-> @@ -26,4 +26,11 @@ do_configure:prepend() {
->          cp -r ${UNPACKDIR}/_deps/fmt-src ${B}/_deps/
->  }
->
-> +# Temporary workaround for 32-bit build failures due to -Werror:
-> +# 'useless-cast' in Symbol.cc and 'conversion' in FileStream.cc
-> +#
-> +# A patch has been submitted upstream: https://github.com/apache/avro/pu=
-ll/3433
-> +# Once this or an equivalent fix is merged and the recipe upgraded, this=
- can be removed.
-> +CXXFLAGS:append =3D " -Wno-error=3Duseless-cast -Wno-error=3Dconversion"
+merged.
+thanks Armin.
 
-useless-cast warning option does not exist in clang, so it will break
-clang builds.may be enable -Qunused-arguments
-CCARGS:append:toolchain-clang along with this will make it work across
-both compilers.
-> +
->  BBCLASSEXTEND =3D "native nativesdk"
-> --
-> 2.43.0
+On Sun, Jul 20, 2025 at 11:38=E2=80=AFAM akuster808 <akuster808@gmail.com> =
+wrote:
 >
+> The following changes since commit 058249f9a836e3aa866436aa6e37d6d48ff768=
+fd:
 >
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118636): https://lists.openembedded.org/g/openembedde=
-d-devel/message/118636
-> Mute This Topic: https://lists.openembedded.org/mt/114250491/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>    libssh: fix CVE-2025-5318 (2025-07-02 20:42:48 -0400)
+>
+> are available in the Git repository at:
+>
+>    https://git.openembedded.org/meta-openembedded kirkstone-next
+>
+> for you to fetch changes up to 06fc0278f10d630838d703dde707bbf0e2999873:
+>
+>    poco: Fix ptests (2025-07-13 14:41:35 -0400)
+>
+> ----------------------------------------------------------------
+> Archana Polampalli (1):
+>        tcpreplay: fix CVE-2024-22654
+>
+> Changqing Li (2):
+>        libblockdev: fix CVE-2025-6019
+>        udisks2: Hardening measure of CVE-2025-6019
+>
+> Colin McAllister (1):
+>        jq: Fix CVEs
+>
+> Hitendra Prajapati (1):
+>        open-vm-tools: fix CVE-2025-22247
+>
+> Khem Raj (2):
+>        poco: Remove pushd/popd from run-ptest
+>        poco: Fix ptests
+>
+> Peter Marko (2):
+>        spdlog: patch CVE-2025-6140
+>        poco: patch CVE-2025-6375
+>
+> Sana Kazi (1):
+>        imagemagick: Fix CVE vulnerablities
+>
+>   .../open-vm-tools/open-vm-tools/CVE-2025-22247.patch            | 383
+> ++++++++++++++++++++++++++++
+>   .../recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb       | 1 +
+>   .../tcpreplay/tcpreplay/CVE-2024-22654-0001.patch               | 90
+> +++++++
+>   .../tcpreplay/tcpreplay/CVE-2024-22654-0002.patch               | 35 ++=
++
+>   meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb    | 2 +
+>   meta-oe/recipes-devtools/jq/jq/CVE-2024-23337.patch             | 219
+> ++++++++++++++++
+>   meta-oe/recipes-devtools/jq/jq/CVE-2024-53427-01.patch          | 69 ++=
++++
+>   meta-oe/recipes-devtools/jq/jq/CVE-2024-53427-02.patch          | 56 ++=
+++
+>   meta-oe/recipes-devtools/jq/jq/CVE-2025-48060.patch             | 46 ++=
+++
+>   meta-oe/recipes-devtools/jq/jq_git.bb                           | 8 +-
+>   meta-oe/recipes-extended/libblockdev/files/CVE-2025-6019.patch  | 31 ++=
++
+>   meta-oe/recipes-extended/libblockdev/libblockdev_2.26.bb        | 1 +
+>   meta-oe/recipes-support/imagemagick/files/CVE-2022-1114.patch   | 44 ++=
+++
+>   meta-oe/recipes-support/imagemagick/files/CVE-2023-1289-1.patch | 114
+> +++++++++
+>   meta-oe/recipes-support/imagemagick/files/CVE-2023-1289.patch   | 21 ++
+>   meta-oe/recipes-support/imagemagick/files/CVE-2023-34474.patch  | 35 ++=
++
+>   meta-oe/recipes-support/imagemagick/files/CVE-2023-5341.patch   | 28 ++
+>   meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb       | 5 +
+>   meta-oe/recipes-support/poco/poco/CVE-2025-6375.patch           | 34 ++=
++
+>   meta-oe/recipes-support/poco/poco/run-ptest                     | 7 +-
+>   meta-oe/recipes-support/poco/poco_1.11.2.bb                     | 10 +-
+>   meta-oe/recipes-support/spdlog/spdlog/CVE-2025-6140.patch       | 35 ++=
++
+>   meta-oe/recipes-support/spdlog/spdlog_1.9.2.bb                  | 4 +-
+>   meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch      | 51 ++=
+++
+>   meta-oe/recipes-support/udisks/udisks2_2.9.4.bb                 | 3 +-
+>   25 files changed, 1321 insertions(+), 11 deletions(-)
+>   create mode 100644
+> meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-2224=
+7.patch
+>   create mode 100644
+> meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0001.p=
+atch
+>   create mode 100644
+> meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2024-22654-0002.p=
+atch
+>   create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2024-23337.patch
+>   create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2024-53427-01.pat=
+ch
+>   create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2024-53427-02.pat=
+ch
+>   create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2025-48060.patch
+>   create mode 100644
+> meta-oe/recipes-extended/libblockdev/files/CVE-2025-6019.patch
+>   create mode 100644
+> meta-oe/recipes-support/imagemagick/files/CVE-2022-1114.patch
+>   create mode 100644
+> meta-oe/recipes-support/imagemagick/files/CVE-2023-1289-1.patch
+>   create mode 100644
+> meta-oe/recipes-support/imagemagick/files/CVE-2023-1289.patch
+>   create mode 100644
+> meta-oe/recipes-support/imagemagick/files/CVE-2023-34474.patch
+>   create mode 100644
+> meta-oe/recipes-support/imagemagick/files/CVE-2023-5341.patch
+>   create mode 100644 meta-oe/recipes-support/poco/poco/CVE-2025-6375.patc=
+h
+>   create mode 100644
+> meta-oe/recipes-support/spdlog/spdlog/CVE-2025-6140.patch
+>   create mode 100644
+> meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
 >
 
