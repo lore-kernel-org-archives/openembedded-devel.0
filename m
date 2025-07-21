@@ -2,62 +2,62 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2ED10C87FCA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17098C83F1A
 	for <webhook@archiver.kernel.org>; Mon, 21 Jul 2025 04:00:40 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web10.32329.1753070435226428129
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web11.32558.1753070438304988395
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 20 Jul 2025 21:00:35 -0700
+ Sun, 20 Jul 2025 21:00:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fuxBbNw6;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-74b52bf417cso2468838b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Jul 2025 21:00:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dVHm9WlP;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-74b54af901bso2467696b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 20 Jul 2025 21:00:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753070434; x=1753675234; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1753070437; x=1753675237; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=l5sU9OA/N4un6j7xiEanENv2qHVIO5ybpKkLjFCeVYE=;
-        b=fuxBbNw64ChYJL3+8eY4aEjAiLgi7qSQHBu5lEICShGjERzHAPnOrrhYpXWrrtXAkD
-         X3YxAWeBRy0FEBgIpdXgrSrVF+CH9XAFn45N88TyJU2s+0s9yBFQGnuKDa5eGW5FmdY2
-         09s2DSY9aCXm8NzgYNa/9sSi/hbdH0FKh3PmtAUHiEh4a91/UpV3heCGbU2Oej53NS20
-         zJ23bGaoWS4OYX9L6MkoZKuBkCtk+oiRF5Z3tgzlMa3H7Wv7UMXDcdi8tEYBts9XCJIg
-         uBs2ma6b62e3oeuEfvWahrwUluGceVmeff3/Zlx4pv8uas8Lp6hTApI3bmq08kTpb8EG
-         7CLQ==
+        bh=Jlm9J0prAp6YvEnSRIqFEKATOL060rjiKemeJeu2fIU=;
+        b=dVHm9WlP/NuIzfzRrT8dH6KZiL6GmcyIQh7Tz44U0Nlk7H5BnX3rDVuHrM4Z3h9FSR
+         iCp+3kIgLQh+Y2uCSuMwH+oY1O9D51gZZD+oLl23cP9GWag45HRH91XvV3AQ+m0rosBG
+         0ju32nrIMoSHUqmLPpSzNYH2mSldBa5qB6rFshDX42fejQjCru4wFMV2OMvogH2g7/Sp
+         DETUmdgbZy0OBllu/BWoeF/NA4d2WgD4CaV+inDnG0UD4KGKaEGdLIWfPbRZaiEuF7EX
+         bjcst1GuRuxHYoR/OFJ9PF6Amj30HjhjNfdpOLoPQJgUkDrAEkxhxp1TEu/yannVeu9c
+         mPuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753070434; x=1753675234;
+        d=1e100.net; s=20230601; t=1753070437; x=1753675237;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=l5sU9OA/N4un6j7xiEanENv2qHVIO5ybpKkLjFCeVYE=;
-        b=mPwtZgujHZJ76go8EThFAX4FcyrUooFqghcC9Mg9S7IjzUIghq1Y6PWbFPwX+7D2E2
-         1EWqYkmWxUN38ulymeVleo6s3km62UjFzXn+jpWOunjOAENVe0nY4L9n5U8yszH+qeNa
-         3xcsxnx7U0+h74O6E52WDD8gLXb2JUmeBW9IQcLBfay89HtKnmYLbhNKHoblu9MxfOOp
-         Y5QBnkgUPeB0kpzx7hSSWn+r/DGNHkyzFYhdJ/+I9eShyR3nqRLb9kuiWoZQwEae2ANm
-         ZgrLd1v6+WmpHCXIGNCDdlOU5CytwPv3nbe+pEVsklRr3sdH30KIaFsyG5Fv/vwuC1fK
-         GNkg==
-X-Gm-Message-State: AOJu0YwuMhRHppHSvQ1tNU2Id8NgOHuwDyu2gZU4so3nSIRKACjxrApy
-	4LFqJRi+vRxPKDprS7JV6RWCgG9Ug4oEu/H4WDOcHprL6VozUTQfXKmvnE/gmZf8hWI=
-X-Gm-Gg: ASbGncu4Wrr08r/zeqgxDV36xjzxaRSMKoc1P0eURyF+Xr5CQ4nSlQ4yUeirvScNMeu
-	QYhIAAtVTOnpKLRsE6Ps9Rb3OnY3dduyWsKtI3g8pBNFz1j2IKuW6sAqjgnUZ/1O3PdgNP4Cvac
-	lArznPibpAKsavgnbuM9rvS3ltzEzU3ELsu8uWJx9wW2b3FA3ZLMyvKPFzLc+gcYVLGxaiHL7Qy
-	pY5+9l2+0rVpaqUcNwto3mvZ91JkQYcHRcHVT4+ZF/toQ0AGCU1FGdin1I2d5ZzSGmBLGoaBGCx
-	+QONX89OxRaKsnYXN/4VWfKRZ2eNk21fcQv1E+ulHDRo3hvEPU3WlJ11Cg15276xvkJ03r9OnrL
-	Hzv+8EojCxHLmPw==
-X-Google-Smtp-Source: AGHT+IGJz90gcTLAEkYJrQjVZMGlT/DOK/UfeBoM8K603+anbrNGT4F4BGmlB3qux1zCKlBzk3FNRg==
-X-Received: by 2002:a05:6a00:1945:b0:748:ed51:1300 with SMTP id d2e1a72fcca58-75722869e2dmr25401260b3a.9.1753070433927;
-        Sun, 20 Jul 2025 21:00:33 -0700 (PDT)
+        bh=Jlm9J0prAp6YvEnSRIqFEKATOL060rjiKemeJeu2fIU=;
+        b=WPm2KCG6QLjNJeSmJZE9ZdWEBjUjR/d9brRd7Xf6g/UMjXF4n+NgwWElsLKdUS/P/G
+         mIdC+XZbPEL+jlTHUdz+BZkYZJr/LL9UGfmaw1Q50Q/VOHB6zb/PpYDvJzn8wa9fOHcg
+         KW91dR2EpXdAnBF8YD0exf1TFHZWhGsaCLR//hUEB/heB0RJllhMSWxzHATcGQPaNnpN
+         iS/WC4YFRvTqCEMouzcC7lriRud54HnvDFxoYV/PEclPRoxJPvAG8X+E9AhVAZSzqtbO
+         w2HM+NAKOoLuVORndQiBiTbwukqRMZIFhBkYjsPgurQ10WSwhabkr/qhBK0Jq+a1oPt7
+         IdYg==
+X-Gm-Message-State: AOJu0YwdadnXBHfMUZSUtZ6pR9O0/Mzd0/VvUhN1sRhJuGObK5v6JKr7
+	cxW/pV8LTkuSiW2SfRdJSC/TpgTk5ebjlupvOT8zJyKUmRKZef8mDkMkuV3anumcJ2Q=
+X-Gm-Gg: ASbGncuEvQy4xZSWVd0btjZi6TEdNtf7ksL7E03sNGYjJhWxlHu3CcYMsmH90EM7miW
+	3kMzMqghZiFVq5dal726FLd+3/RPg3bNasn0d+N80Kqs6EXcmBNFvMbp9ibx33d/Nn0NUaPlj/U
+	H0couIg51h0UTUm4kTcLwy+KpdTXDqdd/ynBQrPCSvPL5X8UK6exFqz+vY2qXesH63DvRj9WB1b
+	VpvPgSeu+EWliNQv47mexOeTcRYyzTdS/9h0d61fCW4Xi/s05Rvi/j4tc2qJLgEAUM0fvyxjFqK
+	M1LWOkwFDSqe0qcdYoMtNTUyN/4izHn1pf8mfdUQCIOVTGM8ffwS4QMNgrJ+Cnf/Mjm3qbFBOxd
+	uCtnRfby5L0K6VRaS2FpBQ2UR
+X-Google-Smtp-Source: AGHT+IGQCAOMun/MUgR0nZAUj4jed7oHa99IgyTu4qwAKrHMltKsWNn5e4l8kQ2NgC6+jSodZRdRJQ==
+X-Received: by 2002:a05:6a21:1fc1:b0:233:927b:3ffa with SMTP id adf61e73a8af0-237d661c579mr31041558637.12.1753070437005;
+        Sun, 20 Jul 2025 21:00:37 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:8201:fd20::b985])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-759c89d5e73sm4812987b3a.59.2025.07.20.21.00.33
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-759c89d5e73sm4812987b3a.59.2025.07.20.21.00.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 20 Jul 2025 21:00:33 -0700 (PDT)
+        Sun, 20 Jul 2025 21:00:36 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/7] libhugetlbfs: Do not add LDFLAGS to compiler
-Date: Sun, 20 Jul 2025 21:00:25 -0700
-Message-ID: <20250721040030.641212-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 5/7] libc-bench: Always use libgcc runtime with clang on x86
+Date: Sun, 20 Jul 2025 21:00:28 -0700
+Message-ID: <20250721040030.641212-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250721040030.641212-1-raj.khem@gmail.com>
 References: <20250721040030.641212-1-raj.khem@gmail.com>
@@ -67,80 +67,27 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 21 Jul 2025 04:00:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118645
-
-Add LDFLAGS in makefile for linking the helper libraries instead
-
-when linking with LLD it ends up with errors
-i686-yoe-linux-clang: warning: -Wl,-O1: 'linker' input unused [-Wunused-command-line-argument]
-i686-yoe-linux-clang: warning: -Wl,--hash-style=gnu: 'linker' input unused [-Wunused-command-line-argument]
-i686-yoe-linux-clang: warning: -Wl,--as-needed: 'linker' input unused [-Wunused-command-line-argument]
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118648
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...s-to-linker-commandline-for-libheaps.patch | 33 +++++++++++++++++++
- .../libhugetlbfs/libhugetlbfs_2.24.bb         |  3 +-
- 2 files changed, 34 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0014-tests-Add-ldflags-to-linker-commandline-for-libheaps.patch
+ meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0014-tests-Add-ldflags-to-linker-commandline-for-libheaps.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0014-tests-Add-ldflags-to-linker-commandline-for-libheaps.patch
-new file mode 100644
-index 0000000000..94a88647ea
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0014-tests-Add-ldflags-to-linker-commandline-for-libheaps.patch
-@@ -0,0 +1,33 @@
-+From 834662425936ae222789f4823d10a1371b951ae1 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 20 Jul 2025 14:19:59 -0700
-+Subject: [PATCH] tests: Add ldflags to linker commandline for libheapshrink.so
-+
-+This fixes build QA errors
-+ERROR: libhugetlbfs-1_2.24-r0 do_package_qa: QA Issue: File /usr/lib/libhugetlbfs/tests/obj64/libheapshrink.so in package libhugetlbfs-tests doesn't have GNU_HASH (didn't pass LDFLAGS?) [ldflags]
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ tests/Makefile.in | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/tests/Makefile.in b/tests/Makefile.in
-+index d33a228..042af8d 100644
-+--- a/tests/Makefile.in
-++++ b/tests/Makefile.in
-+@@ -140,12 +140,12 @@ obj64/%-pic.o: %.c
-+ obj32/libheapshrink.so: obj32/heapshrink-helper-pic.o
-+ 	@$(VECHO) LD32 "(shared)" $@
-+ 	@mkdir -p obj32
-+-	$(CC32) -Wl,-soname,$(notdir $@) -shared -o $@ $^
-++	$(CC32) -Wl,-soname,$(notdir $@) -shared $(LDFLAGS) -o $@ $^
-+ 
-+ obj64/libheapshrink.so: obj64/heapshrink-helper-pic.o
-+ 	@$(VECHO) LD64 "(shared)" $@
-+ 	@mkdir -p obj64
-+-	$(CC64) -Wl,-soname,$(notdir $@) -shared -o $@ $^
-++	$(CC64) -Wl,-soname,$(notdir $@) -shared $(LDFLAGS) -o $@ $^
-+ 
-+ $(LIB_TESTS:%=obj32/%): %: %.o obj32/testutils.o obj32/libtestutils.o
-+ 	@$(VECHO) LD32 "(lib test)" $@
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
-index e688d6ede2..a43ddf0d53 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_2.24.bb
-@@ -24,6 +24,7 @@ SRC_URI = " \
-     file://0011-include-limits.h-for-PATH_MAX.patch \
-     file://0012-huge_page_setup_helper-use-python3-interpreter.patch \
-     file://0013-elflink.c-include-libgen.h-for-basename.patch \
-+    file://0014-tests-Add-ldflags-to-linker-commandline-for-libheaps.patch \
- "
+diff --git a/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb b/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb
+index ae87262870..30313f4315 100644
+--- a/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb
++++ b/meta-oe/recipes-benchmark/libc-bench/libc-bench_git.bb
+@@ -16,9 +16,10 @@ SRC_URI = "git://git.musl-libc.org/libc-bench;branch=master \
+ # Upstream repo does not tag
+ UPSTREAM_CHECK_COMMITS = "1"
  
- UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
-@@ -42,8 +43,6 @@ CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0
++# i686-yoe-linux-ld.lld: error: undefined symbol: __addtf3
++LDFLAGS:append:libc-glibc:toolchain-clang:x86 = " --rtlib=libgcc --unwindlib=libgcc"
  
- export HUGETLB_LDSCRIPT_PATH = "${S}/ldscripts"
- 
--TARGET_CC_ARCH += "${LDFLAGS}"
+ do_install () {
+     install -d ${D}${bindir}
+     install -m 0755 ${B}/libc-bench ${D}${bindir}
+ }
 -
- LDFLAGS += "-B${S}"
- 
- inherit autotools-brokensep
 
