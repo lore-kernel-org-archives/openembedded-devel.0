@@ -1,93 +1,77 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <u.oelmann@pengutronix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1983EC83F25
-	for <webhook@archiver.kernel.org>; Mon, 21 Jul 2025 11:49:23 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.38381.1753098554897667513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1095C83F25
+	for <webhook@archiver.kernel.org>; Mon, 21 Jul 2025 13:38:43 +0000 (UTC)
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+ by mx.groups.io with SMTP id smtpd.web11.41077.1753105120874554620
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 21 Jul 2025 04:49:14 -0700
+ Mon, 21 Jul 2025 06:38:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=92976fe5b5=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 56L6xs2V1258303
-	for <openembedded-devel@lists.openembedded.org>; Mon, 21 Jul 2025 04:49:14 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4806n0sqbm-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 21 Jul 2025 04:49:14 -0700 (PDT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Mon, 21 Jul 2025 04:49:02 -0700
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.57 via Frontend Transport; Mon, 21 Jul 2025 04:49:00 -0700
-From: <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-webserver][Walnascar][PATCH  1/1] apache2: upgrade 2.4.63 -> 2.4.64
-Date: Mon, 21 Jul 2025 17:19:08 +0530
-Message-ID: <20250721114908.583914-1-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: uol@pengutronix.de)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <uol@pengutronix.de>)
+	id 1udqj0-0008Aq-Op; Mon, 21 Jul 2025 15:38:38 +0200
+Received: from dude03.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::39])
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <uol@pengutronix.de>)
+	id 1udqj0-009Z7u-12;
+	Mon, 21 Jul 2025 15:38:38 +0200
+Received: from uol by dude03.red.stw.pengutronix.de with local (Exim 4.96)
+	(envelope-from <uol@pengutronix.de>)
+	id 1udqj0-00AtNg-0o;
+	Mon, 21 Jul 2025 15:38:38 +0200
+From: =?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: yocto@pengutronix.de,
+	=?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
+Subject: [meta-oe][PATCH] imx-cst: update to v3.4.1
+Date: Mon, 21 Jul 2025 15:38:36 +0200
+Message-Id: <20250721133836.2596155-1-u.oelmann@pengutronix.de>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzE5MDA2OCBTYWx0ZWRfXx2VQGv+PbPm3
- rAUpS9DlrJYHMqEEyu+nFUvxy/IiY9Z/tNf0QeeIr3bv9qK+qodk/yGCLNzDYFTkBJiRaPccm5J
- lBjX2c/sSyZ2VZZq9idpe/CTWh6urAIBj55Y636CsoCakrNDIV8eRkhnm3WpE5vQsAKYNxko/Uk
- av8hHnvrEgcqAYPPS7OkESypV4HhJBB4m0lN4nnshbSNVfT1y1U5UEg+brZX7nvNiepKT4DyhjP
- 1ssNzpyLf0Fc3p0Cdrd/K4iDNys75IVUvclhylXCh6GfirFODCUo+T0s43RMHIATSrmv/h8QPaB
- iCcfOIP4pq7No9f9x5l0B1XZAahnrSiYTo7FzWK7/3QvvTFLMMwfTS15uYxfQYNSHaLbdhyq04K
- SrWesqSf
-X-Proofpoint-ORIG-GUID: 4VSTOd_iHwsr1F2AeGvgsSk2zxhXi8jC
-X-Proofpoint-GUID: 4VSTOd_iHwsr1F2AeGvgsSk2zxhXi8jC
-X-Authority-Analysis: v=2.4 cv=W4g4VQWk c=1 sm=1 tr=0 ts=687e293a cx=c_pps
- a=/ZJR302f846pc/tyiSlYyQ==:117 a=/ZJR302f846pc/tyiSlYyQ==:17
- a=AC0tdzqdyWkA:10 a=Wb1JkmetP80A:10 a=omOdbC7AAAAA:8 a=pGLkceISAAAA:8
- a=t7CeM3EgAAAA:8 a=OvazYexQGyryQK4VWcwA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-21_03,2025-07-21_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 bulkscore=0 spamscore=0 malwarescore=0
- clxscore=1015 adultscore=0 priorityscore=1501 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2506270000 definitions=main-2507190068
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: uol@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 21 Jul 2025 11:49:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118659
+ <openembedded-devel@lists.openembedded.org>; Mon, 21 Jul 2025 13:38:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118660
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Update as the previous version's source is not available for download anymore
+from the debian mirror.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 207b98bcd720fc4253b13284962ea1b0f84bf7e9)
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
 ---
- .../apache2/{apache2_2.4.63.bb => apache2_2.4.64.bb}            | 2 +-
+ .../imx-cst/{imx-cst_3.4.0.bb => imx-cst_3.4.1.bb}              | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.63.bb => apache2_2.4.64.bb} (99%)
+ rename meta-oe/recipes-support/imx-cst/{imx-cst_3.4.0.bb => imx-cst_3.4.1.bb} (93%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.63.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.64.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.63.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.64.bb
-index 9ef8c13b79..5830568746 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.63.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.64.bb
-@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
-            "
+diff --git a/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb b/meta-oe/recipes-support/imx-cst/imx-cst_3.4.1.bb
+similarity index 93%
+rename from meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb
+rename to meta-oe/recipes-support/imx-cst/imx-cst_3.4.1.bb
+index 3b57f4ed81ce..12b319843eba 100644
+--- a/meta-oe/recipes-support/imx-cst/imx-cst_3.4.0.bb
++++ b/meta-oe/recipes-support/imx-cst/imx-cst_3.4.1.bb
+@@ -19,7 +19,7 @@ SRC_URI = "\
+     file://0001-fix-missing-makefile-rule-dependency.patch \
+ "
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "88fc236ab99b2864b248de7d49a008ec2afd7551e64dce8b95f58f32f94c46ab"
-+SRC_URI[sha256sum] = "120b35a2ebf264f277e20f9a94f870f2063342fbff0861404660d7dd0ab1ac29"
+-SRC_URI[sha256sum] = "52ee3cee3bc500a42095f73c4584e223b4b9d2dfc1cd3e5df965c5952eba8c8d"
++SRC_URI[sha256sum] = "342c0c028658a4a859fe70578b58c3b07e17bee0c7e3a13d063d4791e82c2dee"
  
- S = "${WORKDIR}/httpd-${PV}"
+ S = "${UNPACKDIR}/${DEBIAN_PGK_NAME}-${DEBIAN_PGK_VERSION}"
  
 -- 
-2.40.0
+2.39.5
 
 
