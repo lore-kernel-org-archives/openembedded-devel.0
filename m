@@ -2,57 +2,57 @@ Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A55DC87FC5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6516DC83F25
 	for <webhook@archiver.kernel.org>; Tue, 22 Jul 2025 03:13:20 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.web11.4289.1753153991495450583
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.web11.4287.1753153990949255309
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 21 Jul 2025 20:13:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=OaIfc5k2;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: liuyd.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=iPuTb+gM;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: liuyd.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1753153993; x=1784689993;
+  t=1753153991; x=1784689991;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=n26SP2AAi8fqoYYvVyHkCOoaPYOfqIQZ2p8UVPd73jM=;
-  b=OaIfc5k22PgMDcI6JmwBc6omgIdN5AJzM7f0YMYzzJJaHnJMfsyCcnyo
-   WBHZM2MnfQlOJOuZinslJWBV7JXLXbXx4PpiNVI3zTuLd1YadbW9DlqKu
-   KyQrAUsp5i4QSTZxjSdXxnlkVxgteQUG4Sw8wLQg09Dx5DutFRbezaEuu
-   EYtBCKPg0ksSqGrCNFM0Wp6EQTMmkVnhiypkh6N/+22vkOFSi8OLO25yL
-   AondWwXFKW9vtwVD3ZQU/0x8mizL4sc0nPsNzzug+JKFJjIV6/VBKQFPF
-   iEXzwDJDown/IcZd9Gxjmiz3DGQMlQTdAIZhi2dejObWykQ/hMomQuGGV
-   g==;
-X-CSE-ConnectionGUID: yQTU2zr6ShayjLF388sW7A==
-X-CSE-MsgGUID: yVQtTE8SQOGzDylJfXlyXA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11499"; a="210239159"
+  bh=fjC1cV7plI0etIWHmlugP47lVuSRZZMPtA4GcymYU/0=;
+  b=iPuTb+gMbz7AkBdPl/OPCyUI3SM4etrPNO8R9ED0Ky6V4n5DcZbgs7e/
+   qWdE+yEv6bim9wPGLbMLNPIP1sCkqATMU2ytEraD9S1U2FQv1ZJm68Z0q
+   KqM3GjEvrhdyNtLLdfo8MFdPOfPCghv/pJq04RAv8Hb/1c/4581GnPyLg
+   NR7xpUrUrl2R0011qO6c4XMDcIPVLQ97NWYCwkClDIi7rwhQW3/wAIa2U
+   oe0vZWLR4THjr/b5jCBjNG2vN4G/L6cx+xM0yWn6B5nNqDqCngzC4ythQ
+   kfSqiGLakaUKOqXl5v0LP4gZUgt+KgX8WjMD+ajldr9OLOfDYveNYHm3o
+   w==;
+X-CSE-ConnectionGUID: eAJByVOaSUC0gB9MqKTlAQ==
+X-CSE-MsgGUID: Y6xjoEnmShiYCF7vCnXQZg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11499"; a="207510942"
 X-IronPort-AV: E=Sophos;i="6.16,330,1744038000"; 
-   d="scan'208";a="210239159"
-Received: from unknown (HELO az2nlsmgr4.o.css.fujitsu.com) ([20.61.8.234])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Jul 2025 12:13:12 +0900
-Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
+   d="scan'208";a="207510942"
+Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.128])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Jul 2025 12:13:10 +0900
+Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id F36F142A305
+	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 7AE4EC000AE
 	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Jul 2025 03:13:10 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id 67F7C100010B
-	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Jul 2025 03:13:10 +0000 (UTC)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id EC084C0032C
+	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Jul 2025 03:13:09 +0000 (UTC)
 Received: from G08FNSTD190088.g08.fujitsu.local (unknown [10.193.129.116])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 77E791A008D;
-	Tue, 22 Jul 2025 11:13:07 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 09AC61A0078;
+	Tue, 22 Jul 2025 11:13:06 +0800 (CST)
 From: Liu Yiding <liuyd.fnst@fujitsu.com>
 To: Khem Raj <raj.khem@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Liu Yiding <liuyd.fnst@fujitsu.com>
-Subject: [meta-gnome] [PATCH 21/21] gnome-online-accounts: upgrade 3.54.3 -> 3.55.0
-Date: Tue, 22 Jul 2025 11:12:29 +0800
-Message-ID: <20250722031245.884-21-liuyd.fnst@fujitsu.com>
+Subject: [meta-perl] [PATCH 20/21] libcgi-perl: upgrade 4.68 -> 4.70
+Date: Tue, 22 Jul 2025 11:12:28 +0800
+Message-ID: <20250722031245.884-20-liuyd.fnst@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250722031245.884-1-liuyd.fnst@fujitsu.com>
 References: <20250722031245.884-1-liuyd.fnst@fujitsu.com>
@@ -62,59 +62,51 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 22 Jul 2025 03:13:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118685
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118684
 
-"windows_live" meson option is deprecated now
+add liburi-perl to ptest to fix issue:
+| not ok 135 - calling bake() without mod_perl should survive
+| #   Failed test 'calling bake() without mod_perl should survive'
+| #   at t/cookie.t line 448.
+| #          got: 'Can't locate URI.pm in @INC (you may need to install the URI module) (@INC entries checked: . /usr/lib/perl5/site_perl/5.40.2/x86_64-linux /usr/lib/perl5/site_perl/5.40.2 /usr/lib/perl5/vendor_perl/5.40.2/x86_64-linux /usr/lib/perl5/vendor_perl/5.40.2 /usr/lib/perl5/5.40.2/x86_64-linux /usr/lib/perl5/5.40.2) at /usr/lib/perl5/vendor_perl/5.40.2/CGI.pm line 4.
+| # BEGIN failed--compilation aborted at /usr/lib/perl5/vendor_perl/5.40.2/CGI.pm line 4.
+| # Compilation failed in require at /usr/lib/perl5/vendor_perl/5.40.2/CGI/Cookie.pm line 183.
 
 Changelog:
 ==========
-- Add progress spinner for OAuth2 dialogs
-- Remove Windows Live! option
-- Improve goa_oauth2_provider_ensure_credentials_sync (Jan-Michael
-- er)
-- Authentication failure in goa IMAP accounts
-- Missing files from POTFILES.in
-- WebDAV not detected for mail.ru
-- goaoauth2provider: fix task chaining for subclasses
-- Always lowercase domains when looking up base
-- goadavclient: check Nextcloud fallback last
-- goabackend: add a composite widget for authflow links
-- goadavclient: fix the mailbox.org preconfig
-- Fix Nextcloud and mailbox.org preconfiguration
-- Add DAV preconfig for mail.ru
+- remove github/coveralls/travis badges
+- add github actions for CI
 
 Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- ...ne-accounts_3.54.3.bb => gnome-online-accounts_3.55.0.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-online-accounts/{gnome-online-accounts_3.54.3.bb => gnome-online-accounts_3.55.0.bb} (83%)
+ .../libcgi/{libcgi-perl_4.68.bb => libcgi-perl_4.70.bb}        | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-perl/recipes-perl/libcgi/{libcgi-perl_4.68.bb => libcgi-perl_4.70.bb} (92%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.54.3.bb b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.55.0.bb
-similarity index 83%
-rename from meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.54.3.bb
-rename to meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.55.0.bb
-index 98e67ad957..eb78bd1327 100644
---- a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.54.3.bb
-+++ b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.55.0.bb
-@@ -8,16 +8,15 @@ REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'goabackend',
+diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.68.bb b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.70.bb
+similarity index 92%
+rename from meta-perl/recipes-perl/libcgi/libcgi-perl_4.68.bb
+rename to meta-perl/recipes-perl/libcgi/libcgi-perl_4.70.bb
+index 0c738b0b06..59803b403a 100644
+--- a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.68.bb
++++ b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.70.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=415fc49abed2728f9480cd32c8d67beb"
  
- DEPENDS += "gdk-pixbuf dbus glib-2.0 gcr keyutils"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
  
--SRC_URI[archive.sha256sum] = "bcf655dd1ddc22bc25793b6840da19f5cad7ba0b7227ff969ed9c252f036aac5"
-+SRC_URI[archive.sha256sum] = "fd69d0aec3b672621f525671b5e54f28b73939920b3fc308ade561a83a727b2d"
+-SRC_URI[sha256sum] = "12fb5a5b392032413571169257f98533488005550774bcbd0715be687a590cf2"
++SRC_URI[sha256sum] = "538ad19c40402e3bbbe00e6d374c3ce2966feb391096dac883ac5104c2083bc9"
  
--PACKAGECONFIG ?= "goabackend kerberos owncloud google windows_live"
-+PACKAGECONFIG ?= "goabackend kerberos owncloud google"
+ S = "${UNPACKDIR}/CGI-${PV}"
  
- PACKAGECONFIG[goabackend] = "-Dgoabackend=true,-Dgoabackend=false,gtk4 libadwaita json-glib libxml2 libsoup rest libsecret webkitgtk"
- PACKAGECONFIG[kerberos] = "-Dkerberos=true, -Dkerberos=false,krb5"
- PACKAGECONFIG[exchange] = "-Dexchange=true, -Dexchange=false"
- PACKAGECONFIG[google] = "-Dgoogle=true, -Dgoogle=false"
- PACKAGECONFIG[owncloud] = "-Downcloud=true, -Downcloud=false"
--PACKAGECONFIG[windows_live] = "-Dwindows_live=true, -Dwindows_live=false"
- PACKAGECONFIG[man] = "-Dman=true, -Dman=false,libxslt-native docbook-xsl-stylesheets-native"
- 
- FILES:${PN} += " \
+@@ -34,6 +34,7 @@ do_install:prepend() {
+ RDEPENDS:${PN}-ptest += " \
+     libtest-deep-perl \
+     libtest-warn-perl \
++    liburi-perl \
+     perl-module-bytes \
+     perl-module-file-find \
+     perl-module-filehandle \
 -- 
 2.43.0
 
