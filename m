@@ -1,94 +1,104 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <a-christidis@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E164CC83F25
-	for <webhook@archiver.kernel.org>; Tue, 22 Jul 2025 07:35:21 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.web11.7095.1753169718704213596
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81587C83F34
+	for <webhook@archiver.kernel.org>; Tue, 22 Jul 2025 12:42:53 +0000 (UTC)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ by mx.groups.io with SMTP id smtpd.web11.11661.1753188167852926922
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Jul 2025 00:35:19 -0700
+ Tue, 22 Jul 2025 05:42:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JNsz6SvV;
- spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-612a8e6f675so7611702a12.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 22 Jul 2025 00:35:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753169717; x=1753774517; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=i7vSArDF79lBlXzilhQGoKSGXV7N2BDBJ/nbQpMvNCg=;
-        b=JNsz6SvV21jLV1pNdbFokbExBvz6gJugWTwcuU2qF6VambqToc+yzC0niUapkCpZLD
-         KwigmRRgZJvKpQXU9AtZNYfprF6fe9x21azel3xhp0Tv8LRenWfYLdwxIfS3Ki5zPQ4c
-         syru9HZOULI+SoMobe6p4FUMon9aFOPQGqZ8cIDwK9b6TZ0SPnXyScjiaSg7oLlptyCw
-         YmGGH+r3nm68sCCQXSzJsxIghQwx7T47e64yDNV3qfeQTjfanSCcHuDGMYMn+2H9L/zV
-         yxKeJjDrYF8dpZXUG4Lg3lFSCk/gp5H3xxkJsl3PHB/ZWJs8F5ETuGOxzI4W1CcrwWkm
-         bXTA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753169717; x=1753774517;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=i7vSArDF79lBlXzilhQGoKSGXV7N2BDBJ/nbQpMvNCg=;
-        b=rouJ1qOfUSL/pkMRGM0wiWkyPnHtVpdq2cAI7q6i4IyIxFaPukJg/9/fXulOzOGnXv
-         Y0y7bZ+8B/Cn2OmOQhqG3Q1kvAeVE+vgzCHhxP5aOqAtQXFIpUN2dqYeBipYRXCVgT+X
-         CUcsd1helvFgkopDI8WEFl5vIRW6GVDUtXKur+ICQuYqoOhk2wa8iIjnLh4nmQKdPdVm
-         ErmycH67STKs3dpbknc/fb3tbzNrTk76wkOdsrGdBhqXaYCJ/rdt15yOHX9jE9pGTiok
-         Z5RNLbpOMBddL9Elpn00EqUaqHfogP2Z4LnF28vgbivrji3rez+tI89Qd2pa+A8F8y3q
-         N7Sw==
-X-Forwarded-Encrypted: i=1; AJvYcCUp+SWo7m4AOinf/Wukehbqa2FzFx21eG6qARoIQ/T8dl1KiD3eN4L9cV0C+bo3g6KxeWckWDJHTTP6BIYhgafsoFE=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yx1P/+SLCbyyOItcIRJ8zdI8LOLoxmCVbMtpXKt4vcx0Cg0GJgf
-	bQ/o0SohIqGAKElOL6p0flmbGSislI2hZzqb4gIAnP9ZFzQbXvlbU6U7
-X-Gm-Gg: ASbGnct1FZBAeIQpZLKUmdlDD83iXPlvEc4iYpUXBCEC14G/Ig3YsHzdCH13nlaU43a
-	zE/zuYeOXwmtK8vbJf+BXmCOAH2922+QNRHqZZYV09vGaW+alNkHTEc4zXdFUiLloT4TW3WbM2L
-	NDym0z40imTK5KR6f6ADCRxhLWFUbXfRzlz5RijuiYxJ5XnpC0QNEkgkN43ntTJqCNjYJL+aD6j
-	N/EPdlPRRGrcCefIuqUwKoxy3at6/L+MZggNl+NWTFTMeufnvZZtuWan8JFXfmlJk5xVWkiszCI
-	eyTRI6KQZvGvVkSd3fuOvY40NoUXrUsJmXzKonaZSIq3nUulHXCWI4rA9Dqmo29Xh+MVBXQJi4l
-	bFxkdqvmAjIG8CEMC3hOR271i4ihApg==
-X-Google-Smtp-Source: AGHT+IHReo1MIILn8/pxRaaihplnB29PPjeFOskcR8dOxKTUgeD/jRY+nU+kgH+Tye5pgL39Ke0lRg==
-X-Received: by 2002:a17:906:ae8d:b0:ad8:9257:573d with SMTP id a640c23a62f3a-ae9cde57740mr1651752366b.24.1753169716374;
-        Tue, 22 Jul 2025 00:35:16 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-aec6c79a1a9sm815746266b.3.2025.07.22.00.35.15
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 22 Jul 2025 00:35:15 -0700 (PDT)
-Message-ID: <d49c1275-7214-40de-bca4-5696c85cae0b@gmail.com>
-Date: Tue, 22 Jul 2025 09:35:15 +0200
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=prLwIaDd;
+ spf=pass (domain: ti.com, ip: 198.47.23.234, mailfrom: a-christidis@ti.com)
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56MCghCl1046093;
+	Tue, 22 Jul 2025 07:42:43 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1753188163;
+	bh=toMYoayWBCKz+Wd/7XpqUQeTLIBD9IP47a+0R6KoqDQ=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=prLwIaDdXRZm+W7jcNKlSfe5pC1rRApi1IeHIDDdIIIIWq1TrHDQCQAnrTTuhDwhP
+	 2uBtyuIAtOOwznvyL/so+gJnGO0Mc/PK/wCGADCxFX0HPoeWOk12HCv2a9EIw5hz0f
+	 lGyvRsNFfOXpg0Orx7SoWm2ASTgMBlYkQ4E7NoIY=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56MCghd94102095
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+	Tue, 22 Jul 2025 07:42:43 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 22
+ Jul 2025 07:42:42 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 22 Jul 2025 07:42:43 -0500
+Received: from antonios-ThinkStation-P3-Tower.dhcp.ti.com (antonios-thinkstation-p3-tower.dhcp.ti.com [128.247.81.112])
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56MCggvl1337322;
+	Tue, 22 Jul 2025 07:42:42 -0500
+From: <a-christidis@ti.com>
+To: <raj.khem@gmail.com>
+CC: <Ross.Burton@arm.com>, <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][master][PATCH v3 1/2] ktx-software: Add recipe v4.4.0
+Date: Tue, 22 Jul 2025 07:42:41 -0500
+Message-ID: <20250722124242.190066-2-a-christidis@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250722124242.190066-1-a-christidis@ti.com>
+References: <20250722124242.190066-1-a-christidis@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python] [PATCH 15/21] python3-twitter: upgrade 4.15.0
- -> 4.16.0
-To: liuyd.fnst@fujitsu.com, Khem Raj <raj.khem@gmail.com>,
- openembedded-devel@lists.openembedded.org
-References: <20250722031245.884-1-liuyd.fnst@fujitsu.com>
- <20250722031245.884-15-liuyd.fnst@fujitsu.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250722031245.884-15-liuyd.fnst@fujitsu.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Jul 2025 07:35:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118689
+ <openembedded-devel@lists.openembedded.org>; Tue, 22 Jul 2025 12:42:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118692
 
-On 7/22/25 05:12, Yiding Liu (Fujitsu) via lists.openembedded.org wrote:
-> Licence Update:
-> |# --- PKG-INFO
-> |# +++ PKG-INFO
-> |# @@ -1 +1 @@
-> |# -License: MIT
-> |# +Classifier: Development Status :: 5 - Production/Stable
->
-> License-Update: Changed from 'MIT' to classifier-based license declaration
+From: Antonios Christidis <a-christidis@ti.com>
 
-This shows that the specified line in the PKG-CONFIG has changed, and it
-does not point to the license declaration anymore. Apparently it got
-shifted by 2 lines to line 11, and it is MIT still. But there is also a
-LICENSE file in the source, which would be a much better target for the
-LIC_FILES_CHKSUM
+Introduce recipe for ktx-software, version 4.4.0.
 
+Signed-off-by: Antonios Christidis <a-christidis@ti.com>
+---
+
+v3:
+- Disable lfs for git
+
+v2:
+- Removed individual LIC_FILES_CHKSUMs of all the LICENSE files. Instead
+  now the recipe has 1 LIC_FILES_CHKSUM to REUSE.toml which states which
+  parts of the project have what licenses attached to them. If licenses
+  change/new ones get added, REUSE.toml should change.
+
+
+ .../ktx-software/ktx-software_4.4.0.bb           | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/ktx-software/ktx-software_4.4.0.bb
+
+diff --git a/meta-oe/recipes-graphics/ktx-software/ktx-software_4.4.0.bb b/meta-oe/recipes-graphics/ktx-software/ktx-software_4.4.0.bb
+new file mode 100644
+index 0000000000..c7fa74c92e
+--- /dev/null
++++ b/meta-oe/recipes-graphics/ktx-software/ktx-software_4.4.0.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "KTX (Khronos Texture) Library and Tools "
++DESCRIPTION = "KTX (Khronos Texture) is a lightweight container for textures for OpenGL, Vulkan and other GPU APIs."
++HOMEPAGE = "https://github.com/KhronosGroup/KTX-Software"
++
++LICENSE = "Apache-2.0 & BSD-1-Clause & BSD-2-Clause & BSD-3-Clause & BSL-1.0 \
++	   & CC-BY-3.0 & CC-BY-4.0 & CC0-1.0 & Zlib & MIT & HI-Trademark & fmt & \
++	   Kodak & PNGSuite & ETCSLA & Cesium-Trademark-Terms"
++
++LIC_FILES_CHKSUM = "file://REUSE.toml;md5=45910de791d599e6ba472f6fa506f391"
++
++SRC_URI = "git://github.com/KhronosGroup/KTX-Software.git;protocol=https;branch=main;lfs=0"
++SRCREV = "beef80159525d9fb7abb8645ea85f4c4f6842e8f"
++
++inherit cmake
++
++PACKAGECONFIG[ocl_backend] = "-DBASISU_SUPPORT_OPENCL=ON, -DBASISU_SUPPORT_OPENCL=OFF, virtual/opencl-icd"
+-- 
+2.34.1
 
 
