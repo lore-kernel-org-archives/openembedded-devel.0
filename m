@@ -2,156 +2,180 @@ Return-Path: <guocai.he.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EFA9C83F27
-	for <webhook@archiver.kernel.org>; Wed, 23 Jul 2025 01:52:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47E37C83F27
+	for <webhook@archiver.kernel.org>; Wed, 23 Jul 2025 02:15:33 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.4569.1753235541312966840
+ by mx.groups.io with SMTP id smtpd.web11.4954.1753236925180775173
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Jul 2025 18:52:21 -0700
+ Tue, 22 Jul 2025 19:15:25 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9299de1fec=guocai.he.cn@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 56N1TgRS1349883
-	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Jul 2025 01:52:20 GMT
-Received: from nam11-co1-obe.outbound.protection.outlook.com (mail-co1nam11on2081.outbound.protection.outlook.com [40.107.220.81])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 481vqu9juy-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Jul 2025 01:52:20 +0000 (GMT)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 56N1SiD91249756
+	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Jul 2025 02:15:24 GMT
+Received: from nam02-bn1-obe.outbound.protection.outlook.com (mail-bn1nam02on2065.outbound.protection.outlook.com [40.107.212.65])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 481vqmsm0d-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Jul 2025 02:15:24 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IurOznOjA0i0staBzWgcuKgp/mpG6vrAQhj4lwxj4S+9P8wE8/8U0bqZFcXMygHZ9k/AakmMDvgq1AmKh9yCQ+qBR8p/ywKwREQBOAaHJPzW+orE0fmQixC5RKC6nng+ebG1VTLXOh9ObjyeDwsle9ZOggY4eL9+ZgcXjTgHuI+1bnhZ01Uv8TM8s09j9dLSp2H0f4d4ciFDpdaAasjf//Mp0flX9ZTPOM7arhtvm08wbvO7nzSndk72eh0E/4dhQYdKxSmsQ0VLeUzM7lNCPh+Q200mHb8HR2SK5HwZdgRTByZ+25Dk8dYmVqcLpght2BweRxqnBFT7zmCa1qKdPg==
+ b=DyFa+tQmG4FI5+nPxwn8UeqLB/5tDHVp6MIjOAempl8aGJZMsbXp7mtdbvkUvdBETes2BeRuYOsZ1/JCMkurWEzNoGVtx+coR8BcAtdND6Z1lQnogRgVCLRJev1jMSWIFLb4Neb1hSIyf3ISX0VKdfwRmLXn3HE1hW8i44QOMOsKlPuuqurTRPX0iJT84xfnq1+SJuEwwQWbPwUTKT6bshEGKERc2BO6UBbpBpmzY1bqcg9kKYCWXLzwD6yjDBZczY8FIi9Ik6s/oe65pXeTv8Un0P80CGLh8t1ct+E8SSyMm8j0oLsU7igkufPMDXuYq786t3ui/tFRQZ1J/lNcLg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YSOS27of21skihcUNShyjcHrS2Nhs5NyDeEoafR94a4=;
- b=GFORm5U1QtHEN9ZIU5IEM/HV0bEuYbMxnlbITp0CtvSRU1m9WXxyPED0xAqk8DRvpQR/j4sG85YwBHxM3jOKZG9PBB4hoy/BxbdFeXi0NYyNQIeZEFGVRX41+A9V69iDO92Gj14rMdjIp4nL0ZfjctFbmdZTu39EW+UDPg4KtFTSQM0uuCAk3l/Nj8OBBwJSFarhpc9ooxR5Gig62Q1S0oJCuEvuSFWWyb7Tr1MabmRQle8hyl7kvD5BdHEBWzBbsirHdQB3MjpxBVwP7m52PEMCWpeHO90rHNUe2BrWDaU3sGVoAXfU8+vEWjbDCl1+UpUkXfYeP+zza9qM9xxy1Q==
+ bh=fg3RCkciJEDPXpe9fVnOfKhEILA9tPHN/MC4D+eJO1g=;
+ b=gjRVRkI8SUDff7P8oidyAataXZ3WyJyXqBN9jYcc9Tfq+BmOFemSXbfK5Wj4S5mctqLBUJuf0gi+XmCrHNkep7EugZW7QJwbTb7RyTa8FBZ/AbiDEGGpeO9dSC2rlhuQyYLo0Ikeu3jONLf7Hb8TudQxGtH1Usc3uaE3xYbbYaeq01e1B2N4VUqpVo6bBRYohwvzKhC2CIaHO+P5bfQdb9/dnHAzoVhf5A+x0R0CXh2Cqsup454gXoHz+WInrDaEibaxHrFKwsKrjUih4KBFtD5xuijNDd8IvDKZXX+2IMy8cG6ZO+q55J/apvjluV3WQq12Jp7KXxghiwad/gfmPw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from CO6PR11MB5586.namprd11.prod.outlook.com (2603:10b6:5:35d::21)
- by SJ0PR11MB8296.namprd11.prod.outlook.com (2603:10b6:a03:47a::12) with
+ by CY8PR11MB7058.namprd11.prod.outlook.com (2603:10b6:930:52::11) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8943.30; Wed, 23 Jul
- 2025 01:52:17 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.21; Wed, 23 Jul
+ 2025 02:15:19 +0000
 Received: from CO6PR11MB5586.namprd11.prod.outlook.com
  ([fe80::813a:3211:c8fd:1f86]) by CO6PR11MB5586.namprd11.prod.outlook.com
  ([fe80::813a:3211:c8fd:1f86%4]) with mapi id 15.20.8964.019; Wed, 23 Jul 2025
- 01:52:17 +0000
-From: guocai.he.cn@windriver.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][kirkstone][PATCH] mariadb: File conflicts for multilib
-Date: Wed, 23 Jul 2025 09:51:58 +0800
-Message-Id: <20250723015158.2492694-1-guocai.he.cn@windriver.com>
-X-Mailer: git-send-email 2.35.5
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SEWP216CA0025.KORP216.PROD.OUTLOOK.COM
- (2603:1096:101:2b6::7) To CO6PR11MB5586.namprd11.prod.outlook.com
- (2603:10b6:5:35d::21)
+ 02:15:19 +0000
+From: "He, Guocai (CN)" <Guocai.He.CN@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-openembedded][meta-oe][scarthgap][PATCH] mariadb: File
+ conflicts for multilib
+Thread-Topic: [meta-openembedded][meta-oe][scarthgap][PATCH] mariadb: File
+ conflicts for multilib
+Thread-Index: AQHb+rlwaLBxAm6dc0WMkBLPftDCxbQ++X3j
+Date: Wed, 23 Jul 2025 02:15:19 +0000
+Message-ID: 
+ <CO6PR11MB558698743323B97FB4F2B0AFCD5FA@CO6PR11MB5586.namprd11.prod.outlook.com>
+References: <20250722033332.3579660-1-guocai.he.cn@windriver.com>
+In-Reply-To: <20250722033332.3579660-1-guocai.he.cn@windriver.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_Enabled=True;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_SiteId=8ddb2873-a1ad-4a18-ae4e-4644631433be;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_SetDate=2025-07-23T02:14:58.579Z;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_Name=INTERNAL;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_ContentBits=0;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_Method=Standard;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: CO6PR11MB5586:EE_|CY8PR11MB7058:EE_
+x-ms-office365-filtering-correlation-id: 5bff39eb-6c26-49f5-5d22-08ddc98ec59b
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|376014|366016|1800799024|7053199007|8096899003|38070700018;
+x-microsoft-antispam-message-info: 
+ =?us-ascii?Q?c+0yUzJ2EAMwJpJvs0YpU1MQCUaqMJmL9I7+LDviWQFV2IQS0+iHPAgH+Zoh?=
+ =?us-ascii?Q?ktDyBtJjEpr2EkHkEwscVvAjdrpF/EoODBrTLG8o2Ds7lxXVI8lMCQKLalB0?=
+ =?us-ascii?Q?Xcqaip1A3X+V7GuIoTi0TY0cNAoY7xkRQWfPHZH3s3SLtXop91VB04M8QkDX?=
+ =?us-ascii?Q?uhX6lAV63oMgz3BnoD9e1Vm5F/9HMHXImH9Nb30eeoyEHww1W9EmVfvXuq3O?=
+ =?us-ascii?Q?2Qpk2GAYVSxaP3vDNAUNsG3TEg8uNjlq/lArZ78wSs7538UDvlqTAVe45tdU?=
+ =?us-ascii?Q?oyjp+tKrf0D8AqvC8MQBE3q1VnguLJbzYn8491gQLd6LtF5/RMYWb3oz8N4M?=
+ =?us-ascii?Q?jcVba0HM5wcMV4G/nhylaATuzUoDZC16HWSB07fL2iYoxuixhOSmCkPSit8Z?=
+ =?us-ascii?Q?nsLTgV5BvsXwbu+uPwYQNJy9lcU/CMhENjBLqIP0/j+sNrzAYHKChJJiDyes?=
+ =?us-ascii?Q?GbBrOfsOsW+oBQfDj2fFwtaA8QKcWvhqmj154UPoLbce/Udeb07zLW8rHx8s?=
+ =?us-ascii?Q?YjxSat5qsMJAtThHsWv2H5QaaiHRMvbjsmQxVp6lxrQa1PpzU04bGoqYWmUb?=
+ =?us-ascii?Q?EoVFhSGWyjkfClstERS9lbGpbmgMvGeiRYyXaOuQecJQHhZ6utyQ7ch4Kqba?=
+ =?us-ascii?Q?xz9S0oTIjAbG+I8m8EcAjGbuLO1FqoPjGay9ze4FRMVCIv1gbO+oC85io0ix?=
+ =?us-ascii?Q?jAcQOtTD4B3Q9T5GForTPGc3Vb62oPwo7i/x4/lzwMd8mWefoIJjXnwFlfkw?=
+ =?us-ascii?Q?3Qe4kjfyw0tqOq2C4tdESubCbX2DtKythbd/6jZ4R5HduLTQnZvm+40vFIZ4?=
+ =?us-ascii?Q?clo7UPreo5O9KbAwAgdF9nFEs3UvaPat8WrOMi4LmIlkZBC5SSuF+O+2EFS6?=
+ =?us-ascii?Q?DPYGtD/JM84Mab/Cu4TvehN0wQRcL0DaFNBjYiGu5nroxA/BxFBR8Fwu5Dzf?=
+ =?us-ascii?Q?JnvUV/MXGqMzQZ9qf/UJOwoNyiheSoJPb6Br6zIcW6NPW+PPOGFFWYWVzMAS?=
+ =?us-ascii?Q?is7ju8kUisT6U9oBcmj3Fm9jR4pzMztShIJdqv5+YLC07eiLLrRxM2NS70+J?=
+ =?us-ascii?Q?PVtf/iJQm9kinAQ+ZKzl++P6Bf4zMpSbt6RYRGD6LU4FBZ6zofJE7lNKLLe8?=
+ =?us-ascii?Q?MbB9twGPRhHDgZ8SRxcvfgTDB0H1o86Wgk9Wn8sq6Dnzic//s3zMCDomi0vt?=
+ =?us-ascii?Q?98bFevWB/V3g7n9YfgHRPRCV9Nr5Zh0C3NHVMr4m+f2K6krKvFXNaxBGKAZE?=
+ =?us-ascii?Q?gznIeOJ42qFQo6cv43AneOO848R9IU40dOZfTvPHvEgKQ/gqHgILpozt5q1t?=
+ =?us-ascii?Q?zACTVz5lUoO9JjTTEwe2BMqlTwNUzIxkCDeHBKIz86a/reI9H3TxtqgVfohx?=
+ =?us-ascii?Q?1ALA6XtLTGMcr/sHzOalJ60NUM1NoGmtp0WvVm6HpKzQdHixL21R496U+zyd?=
+ =?us-ascii?Q?GYWH0/njDFwMosSQOofN4NQSPZwf7ddGDvNYnLHZcWoDNGlp9TpdHA=3D=3D?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5586.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(7053199007)(8096899003)(38070700018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?us-ascii?Q?qQ6Yv5A3UMvwNCek0tDntYx40jUfwRnvOmKdxKCvHKUe23gdk9dydMDnT9dM?=
+ =?us-ascii?Q?woucd53GBo5pYCdvWp0rJI+einy/F1ArnRqKOmaTv4F+/sWuSuaXvooKWdAp?=
+ =?us-ascii?Q?U+7L3rDuxeN9giq7eOWH/5ns2BU9wBt1N2NFu7Kliqgi+LsvBMxmvinkTFek?=
+ =?us-ascii?Q?ldXyFARB/7UeUe3fo+NpOWIPynpe9evZDkjpGLy+ouBZEJbWP1Pn2w0v2KID?=
+ =?us-ascii?Q?ZY5KgpIUxNS4I5rk4Qk/anR8quviMXLppq/jEQyWkB5tY+dyD97LW43PVuay?=
+ =?us-ascii?Q?+0S6Uh9IoMNhI9qAPp2NMPyUdumC/tCK5Cfk49wBcnzvu9VH29EMV6U71+nw?=
+ =?us-ascii?Q?+7wasLqApQqZeNsLBIrgr95jap3uWPJzICp2aRcm1PB3H/9T4RM0VGFFKT4b?=
+ =?us-ascii?Q?+fBI2T06kl2VpugUSaunoU6Dr/u4/zV/4jEM9tMmWuRlqldZY7zZwbL0yemX?=
+ =?us-ascii?Q?iLBYtaPHlHhMJdJ/lIKsLitUx1SalSSohgWg37IOWUKb15F5+juqRyvPBxIZ?=
+ =?us-ascii?Q?KlZMRf8U7cZioXShotZZm8UX5I4L0DEoWQHP1Ub+PBtD35Vaa6j5QeFukawa?=
+ =?us-ascii?Q?wwApHOmClxZiVQ7uEWNZWt440TcQw6VlS6GQ1sixAQsjUn59354vL9e18j53?=
+ =?us-ascii?Q?UR7ktfZU9cHdEAfQ2iNpzxqbI5eAE39xmVoVLlxNJzJmywzLR71Jkf08fFI0?=
+ =?us-ascii?Q?xqNtLwBm8vUKYlYrq0OFxWv3P0afyn6lgFqhfFl8sPod96nNHvbLYKuJJ8Ah?=
+ =?us-ascii?Q?NLvoafc1lzV5ptsphUwFan9NAlaGjP6866b3FuI1/4YyJILhKYWYs+dtJZVi?=
+ =?us-ascii?Q?fKMnczuV7TmX/HBrjDOm17VNSUJv+exD+S/rk07mfLqz7uOupz4hwJG+Tpx/?=
+ =?us-ascii?Q?+/rtUI/D/cPu7tTroEo5S83QrVYZZQiGZNU7p79bobb+d76RE7/edBH6aVDo?=
+ =?us-ascii?Q?nzKJ4BCap2zC5Bsd3Z2srtNJYacaTSWd9w66oZTZWrFTjb/6YThrejL4Qzqd?=
+ =?us-ascii?Q?JL754GU3oUDTZaclkJ2MsGKABdPXz/wHX8w3ICSZ0kgM2UDd4u2pQGf3KUYT?=
+ =?us-ascii?Q?cFH0KvreB9Bu2JhDRrqSfUDmo/sidUNhlDd8AVOHgTCDdGb+m9rM7AGBaRl6?=
+ =?us-ascii?Q?/FMcoRL2+CL9V5jU+mnVOjOvWaxQJSeABQYYQ7qkN96QKltUYNYugiDrKeJG?=
+ =?us-ascii?Q?TFfa7nBq5ppCYbiZAB7/Ht788E0pzlnQJop91rUzf1HglspKogk4jgkQVaqH?=
+ =?us-ascii?Q?B4Y9AW7YPbZ9m+DfgwPzhU08DNvaEfp8DdEeoSulXG6lyrKzqDTwLZb6H0S8?=
+ =?us-ascii?Q?lGVKKE29J1mwJk7zIz5ORqO3aTybM7NwBG47Id3dxJPfYWqT4LVDwCfCKByw?=
+ =?us-ascii?Q?JlmzEIbK991fVuu5+V+eAsTNPq3feviw7D/zh8rcAVhAdnqrciPCj0jamCRB?=
+ =?us-ascii?Q?TvkHONpQUvHvg2/OLqaWC8Lj19IVt1shca4Go4DOQMVxWnXBUHCk7p6IakK/?=
+ =?us-ascii?Q?4il7tv1Bth/Yi1eHIZKteESpV32YPlQUr0yqlSJ0rw5Kx7Y79RUTnwqMHVsk?=
+ =?us-ascii?Q?p7B0WFcvY4imN9dYiPH2wrY/IFhWnaCaTi3n6QrV?=
+Content-Type: multipart/alternative;
+	boundary="_000_CO6PR11MB558698743323B97FB4F2B0AFCD5FACO6PR11MB5586namp_"
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO6PR11MB5586:EE_|SJ0PR11MB8296:EE_
-X-MS-Office365-Filtering-Correlation-Id: ea62d4c5-145f-4988-8942-08ddc98b8d66
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|1800799024|376014|52116014|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?Da276WwpVjsaHNTykBikvXZ6XpiUA3xt+bSI9KQ3E5iIMpLuh4p9cC8FtQow?=
- =?us-ascii?Q?aP5TAtKrA1ZzhH4rVvFnx3tjoPXPQErmdv45/0gP0c9gUrdt/zgrAqM2MsTS?=
- =?us-ascii?Q?bovyw90Nz6EMGE99hPgXB94o98Ku9X5UPCa88TNMcAzhb3tK1GN/NPJSoonK?=
- =?us-ascii?Q?5nVF1zVyuijqy5DdO8HsJIDhQlEx5z+Qnu1v38FB3eeqiV2Og3oDsb+ZKgCY?=
- =?us-ascii?Q?AvoGAdOv3AaHnmHnWQl0CT6mKuatSjfh593LaelErJAMU9eLSwQG9FdNHdy0?=
- =?us-ascii?Q?0/MEAw6DaZ/dthn6s98T3WlEi8asAn4/HjF6lJZMLG9qVxGzi83JL/Dve0A/?=
- =?us-ascii?Q?gXepfaOSZGjdO8VFQWoTx8hr/ECWTr3MErBCnWGoCeDhT/Ard6nVNz2IG2V5?=
- =?us-ascii?Q?x5QzyYUOoDn/QouhuYqH/snM7s4/1DVMkYII0KCLxtfRYnfADjg23YJM7aT0?=
- =?us-ascii?Q?Rku6crPWwvVRs426hXssluFHNejn+6zbFg5B07d4sord+sYDejREWZ2HaN+R?=
- =?us-ascii?Q?Lxxo4ioRLAKgGW09dc5A29tgKQ8JIGzSsxBbKZfDT5MFp6njZscbre38Isbe?=
- =?us-ascii?Q?ah+lrf7GHegKiorvoQozmfjPAWb6SXe7kB45/QAIk+mn7SQhlg804q1dE636?=
- =?us-ascii?Q?u5gqKVJrNJfogX8hxGhrtkZsAX9DKgmMW16xHRHdyAqC6GutSMgqAGfXOUFl?=
- =?us-ascii?Q?/KJnPrM6Hpt4tjcrvaM/8YrlnVa67Ev9jxgsrY+edoXSmsshYf8r84VlnlKY?=
- =?us-ascii?Q?ISN0BOnBetAbAZ94XyXvC64r8x5OLzXpTPxO7S7UIU19Jk/6468BnV2Lnpd1?=
- =?us-ascii?Q?F/McFNe1ea0gj4SVCs20my9AuWFWrxHlALwDurp76Vzq6KJoGT2lRxXtfNx2?=
- =?us-ascii?Q?fa3maX7/rGnEM0/HT2647cWb7D9BoJNdxYH9MePtaT1HRTxHsyo8KuyCco5+?=
- =?us-ascii?Q?CCGBU7QFhgs9zGU+GFX+NUx+iQElKpc/3VTbvUTNYnXJJB6gw+1LZQdRfwBD?=
- =?us-ascii?Q?9dP3Ri82JF3FfSLzQVBUEHKXDmiSTs6DdoNYWbX3J7Zzp6opGunew8rn1ogh?=
- =?us-ascii?Q?lvWiasHkbyygi2pL+cDIYISaD03Hl1In5g/m4rIDGKiYZgutmCVq7hLzVTfh?=
- =?us-ascii?Q?lP0R99XFC8+a0p2Y/LG8RMBYx7QysAgrcUxyxNR3xv4nooeafGBhuP5pVPeD?=
- =?us-ascii?Q?5HHyV70SmvH71B+JOFT2XGutZ/nF9JhPpc6dpGSh0LObUQUUrGb2RjO+noYj?=
- =?us-ascii?Q?foQTTl9rc32xhmabS4jbJwvJSy3mL0QtTNA5z1bWm0k1/cvzCLEHSYC08HqV?=
- =?us-ascii?Q?mfXnf6xoS1ibMn8Q1a+0iXct0Nwpy4YNLonfHuW/H3h/ifWZHG1SIZqJCh2x?=
- =?us-ascii?Q?thmVXgseZvBiUYutk8N6EUj6f2jzFGiqO8ErF1KJajWZIYN8hiBQo7ddtlv2?=
- =?us-ascii?Q?3oNzqIXbZUhe0dFGh/Xq+rcluNODTyyuVqzkOaM8tdn7YiqvNgpEuQ=3D=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5586.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(52116014)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?Bt35JdN7GJiiImsJHpnvPB1kU0F+/XYsrAbAC5w7YyvTzcUodGe9g1cT4lb8?=
- =?us-ascii?Q?wwFtmMMBR5OC6ZiW9NfPeiqGaVW71/JOqPmgHqP/Q9mTeQwbQ/joa1vpzHGP?=
- =?us-ascii?Q?IY/mtIrVd0QE1yvZiry/tf5PZ40OO+rJ+Jbla/wT3Exd0jc9yLwC6vfFY1Mm?=
- =?us-ascii?Q?skHBu1TnTGckbEVhQdwmC1vr9uVVIq0HN9/sURvOAh+WSAZJ0NIxjQxGwVdG?=
- =?us-ascii?Q?1vLTmB21oTpn5lgyjOx+plqGpGcn0LP+pcKElm8iydMBXwmqkEYyLGy4X1zi?=
- =?us-ascii?Q?4NjJiYl9JS4XkeTXwHm4oj9efp0YQz+qxEJFjISjwsXYppXRnYAcuDqzir2Q?=
- =?us-ascii?Q?58/Y4wS4qiGpsxT3oMfVIOKnyQ2PlWhDl3hmeFFBbdcyu6mck8TGdfof0Gm3?=
- =?us-ascii?Q?020yqAdcnwX4dADpnjlibl5UnN4XmLtz+GJc2urZhbTPDF7EajcfzHJg19JS?=
- =?us-ascii?Q?eTI0Rxy0zfo/P/BoaRP0KG4s3Xp0QZkXHexKCQRBhO8Z4XDgAZP8t5Hci/L7?=
- =?us-ascii?Q?5elOULPB29iXWF/bIwpcXX7Qk8Re+sAyK1ra+BEq0lV/5MhEdakAZJFVz+1Y?=
- =?us-ascii?Q?NIbUY0R/yAPVJSDq6eP1h8Nfa+jVB1V+Q6FCWbm2H2meKgce+E9xEirC7Bou?=
- =?us-ascii?Q?aCZ07bWRh2dixmkZDz+VaeXvD/ezDKya9ySfOWpkJ+boDQ+VxByTGIPd1kLj?=
- =?us-ascii?Q?IOrgk1lh1pJZIaJGYSIr8aOie4nTj/qLAaDvzCP9iSvlp/atW29wYDlekbCm?=
- =?us-ascii?Q?/ymLG7B4hlWyeXqZyhmPPQpOIS5KWhlt8zj6F+nuF9GxL/WsKSuc42uQB9RP?=
- =?us-ascii?Q?SrSrVQFE+9XeFNIIMNcsvd4DynDuomiqO+nLy1YSilXf2jAte9BevUmK6QZN?=
- =?us-ascii?Q?cLdcYSeYJSUYgN7SoXJUXstWBrJajN85YSRKgwk/g0XZes3hZZpBcjHGwoSN?=
- =?us-ascii?Q?Da+1hFdy+xorI7kKx9NlHldk+mfgrJv+srNPOp3Elv51exYeseEZyrD37HYg?=
- =?us-ascii?Q?lVdzOBqJ+kgaeMOOWmdzcTgk+kAHGGNFVKUWL5jjAiItgs9VVRCcxwLLaJAz?=
- =?us-ascii?Q?oEPsIl+cjF+u9hJkQcmpmkwebcBwFj9JOtx3NxIkJp6SWQV3cQdUV4F89poU?=
- =?us-ascii?Q?L3Gyz2aF4MW4QCIUyymPnJV12DB+4VhkkgqFtCuVHGZmveQhCeP/guZeUG7q?=
- =?us-ascii?Q?Axmw0nFb9T7EX/wMZ6NE8vsUzef8yITo2N3ac+uigA/mYMultQ+heekgFCuW?=
- =?us-ascii?Q?IPvvwlh5hFTBWqRykERW0k+Z6WNQ7AeWDiZPO7hwyMoSEoL3dbBdUTDq8nYR?=
- =?us-ascii?Q?gIbg3BIJ/az9jHkXA3EVMzgdz4VGQkSYKU0IqprDocCL3LKIrWvP2ueowEVG?=
- =?us-ascii?Q?JjXnBRL7WQHyRonKheHt3u19KBC9AG5EAbokJgtD5Wmsa2/8qKBvUMIul7yH?=
- =?us-ascii?Q?V7LHKedh4I78lEUAjOGmoaJ7EUydX8HHEf40XF5X/E6TDS9uIxCRNyYT+Pce?=
- =?us-ascii?Q?QPxOFPlciZGeuB0IBrvaU255YGI/ab07a0i51pg7p0zAHVEpzt+M3YaGfiwM?=
- =?us-ascii?Q?VK20TC+veUuCw7u64n/xQL/03/Ti/B4hCKZ15bo3sgabaxg5IO8w+j2Zgy0I?=
- =?us-ascii?Q?xg=3D=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ea62d4c5-145f-4988-8942-08ddc98b8d66
-X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5586.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2025 01:52:16.9304
+X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5586.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5bff39eb-6c26-49f5-5d22-08ddc98ec59b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Jul 2025 02:15:19.4181
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Hh2Np4SLhdoIXS/0yphi6FnW8YQE6MgAyc/NCSj5wwLv1yTN0jqPTy6jNqUWCxsUw47EaFLThPU3TfrhcMv8H9NSe86zMrTFN15W0NaV3f0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB8296
-X-Proofpoint-GUID: y0EJ9Ry3WTvcYC_-auV3WCYapuZPO4nk
-X-Proofpoint-ORIG-GUID: y0EJ9Ry3WTvcYC_-auV3WCYapuZPO4nk
-X-Authority-Analysis: v=2.4 cv=AbqxH2XG c=1 sm=1 tr=0 ts=68804054 cx=c_pps
- a=OYO+XWnI8e6v5MfLznXSIA==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
- a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=Wb1JkmetP80A:10
- a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=Um4z8P8mbPEqFpxDQRsA:9
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzIzMDAxNCBTYWx0ZWRfX7BNTYUMnl/49
- 1FIT0DmWhKVaTYP8XAmKi6HUOnD8LTHOYD35MOX31/Sh4R3bHoumNpH1LyZgSwXsAy2I4sJ2ilX
- VZydIfHQYzzmJW7F7937ZfdkW+bwzyXzrNEhhQgUNSeDxMSv0WksZOtk7V0MHbfxZHszXfJt+s6
- A3qfbPEoOET1L1iBRFQ7gMH8/WQkmVrBpHWayI/CLOnmUpfvGHOJpt3f5/8UJkvBgRydOrEqkrg
- /TljtGYUOoXeRG/g/vbgQdYiVw11hqY0KlP3ba+A010Z3gW6lhyqldEV79xMHlrPYkH4RtPDiEn
- RdFvSUvkGZDJHMvwq/GrqHZdNfEQO6oAzFvSCYst12Va0pBfnKjda5QQ+UjC0BMV6ZuVq6YtVzO
- DQGGh3ya
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: s5hRiMHAH5YfkxkMSu/jl1GLDzeTgfppghuMJsCtpAom1AuMeRNCCWHL3R5PI0SidYcQ8HmsxKWPvc1qKg2y6udc3/IEz3LS6PcXF4DDwQM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR11MB7058
+X-Proofpoint-ORIG-GUID: tFdvh_agsnwAyQ-MRdfc3tt603gKYaMP
+X-Proofpoint-GUID: tFdvh_agsnwAyQ-MRdfc3tt603gKYaMP
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzIzMDAxNyBTYWx0ZWRfX/WRDli02keRK
+ LCwqFPn7AZ7kE0GkbYsMOpIBi0bpiVTZTWA0fZSx4jFYnLgp5I/CWXKtQnbHHsy4j24Gnqx+ye/
+ Ec5XVwxInzUSySehmFMhjtW/ft1imDsSV2XrLXRhukisTxl3e7z+ETskg+jX98pRuP1JHpwaAuC
+ t2CxjBIb42o2xMVzdlDzt0UEv2gilvbeEgN1lB9wOFRcO4JTG5FYPIOrUlyHzz7qxZyH75P4hY7
+ 0z2Tnf3QMQnkKxHfj7FjTTFLgD77FJdFZPbO7l7uGQkb0RVCibIenFlKBN4Z4oa86C9vfFK1iAl
+ d1wqvGzjVRqDIBqNmkolZVuItP/fzIkZm28jKBCenu9IPTS7IOxzJJC1yjTvd7zHLf5REmN/tZc
+ P26dfEmN
+X-Authority-Analysis: v=2.4 cv=BbrY0qt2 c=1 sm=1 tr=0 ts=688045bc cx=c_pps
+ a=zGATrNSX/tQ3ThVYaNLL7w==:117 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19
+ a=xqWC_Br6kY4A:10 a=Wb1JkmetP80A:10 a=Q4-j1AaZAAAA:8 a=t7CeM3EgAAAA:8
+ a=pGLkceISAAAA:8 a=Um4z8P8mbPEqFpxDQRsA:9 a=CjuIK1q_8ugA:10
+ a=s0UjQqRc4egehh9P1mMA:9 a=Gygpg9l401Ep7aqE:21 a=frz4AuCg-hUA:10
+ a=_W_S_7VecoQA:10 a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-07-22_04,2025-07-22_01,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 malwarescore=0 suspectscore=0 spamscore=0
- phishscore=0 bulkscore=0 priorityscore=1501 adultscore=0
+ malwarescore=0 bulkscore=0 impostorscore=0 phishscore=0 suspectscore=0
+ spamscore=0 priorityscore=1501 adultscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2507210000 definitions=main-2507210183
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 23 Jul 2025 01:52:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118707
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Jul 2025 02:15:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118708
+
+--_000_CO6PR11MB558698743323B97FB4F2B0AFCD5FACO6PR11MB5586namp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Please skip this email.
+I will update the commit info then re-sent the email.
+________________________________
+From: He, Guocai (CN)
+Sent: Tuesday, July 22, 2025 11:33 AM
+To: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.ope=
+nembedded.org>
+Subject: [meta-openembedded][meta-oe][scarthgap][PATCH] mariadb: File confl=
+icts for multilib
 
 From: Guocai He <guocai.he.cn@windriver.com>
 
@@ -159,41 +183,139 @@ File conflicts between attempted installs of mariadb and lib32-mariadb
 
 Signed-off-by: Guocai He <guocai.he.cn@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
-(master rev: ddd322323eba44542b6b631d455e3298c50c4535)
-Signed-off-by: Guocai He <guocai.he.cn@windriver.com>
+(cherry picked from commit ddd322323eba44542b6b631d455e3298c50c4535)
+igned-off-by: Guocai He <guocai.he.cn@windriver.com>
 ---
  meta-oe/recipes-dbs/mysql/mariadb.inc | 7 +++++--
  1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 3980948859..fde5fefd6a 100644
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/my=
+sql/mariadb.inc
+index f52947f359..abcf0b3cda 100644
 --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
 +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -44,10 +44,12 @@ S = "${WORKDIR}/mariadb-${PV}"
- 
- BINCONFIG_GLOB = "mysql_config"
- 
--inherit cmake gettext binconfig update-rc.d useradd systemd multilib_script
-+inherit cmake gettext binconfig update-rc.d useradd systemd multilib_script multilib_header
- 
- MULTILIB_SCRIPTS = "${PN}-server:${bindir}/mariadbd-safe \
+@@ -33,10 +33,12 @@ S =3D "${WORKDIR}/mariadb-${PV}"
+
+ BINCONFIG_GLOB =3D "mysql_config"
+
+-inherit cmake gettext binconfig update-rc.d systemd multilib_script pkgcon=
+fig
++inherit cmake gettext binconfig update-rc.d systemd multilib_script multil=
+ib_header pkgconfig
+
+ MULTILIB_SCRIPTS =3D "${PN}-server:${bindir}/mariadbd-safe \
 -                    ${PN}-setupdb:${bindir}/mariadb-install-db"
 +                    ${PN}-setupdb:${bindir}/mariadb-install-db \
 +                    libmysqlclient-dev:${bindir}/mysql_config \
 +                    "
- 
- INITSCRIPT_PACKAGES = "${PN}-server ${PN}-setupdb"
- INITSCRIPT_NAME:${PN}-server = "mysqld"
-@@ -167,6 +169,7 @@ mariadb_sysroot_preprocess () {
- 
+
+ INITSCRIPT_PACKAGES =3D "${PN}-server ${PN}-setupdb"
+ INITSCRIPT_NAME:${PN}-server =3D "mysqld"
+@@ -159,6 +161,7 @@ mariadb_sysroot_preprocess () {
+
  do_install() {
-     oe_runmake 'DESTDIR=${D}' install
-+    oe_multilib_header mysql/mariadb_version.h mysql/server/my_config.h mysql/server/private/config.h
- 
+     oe_runmake 'DESTDIR=3D${D}' install
++    oe_multilib_header mysql/mariadb_version.h mysql/server/my_config.h my=
+sql/server/private/config.h
+
      install -d ${D}/${sysconfdir}/init.d
      install -m 0644 ${WORKDIR}/my.cnf ${D}/${sysconfdir}/
--- 
+--
 2.34.1
 
+
+--_000_CO6PR11MB558698743323B97FB4F2B0AFCD5FACO6PR11MB5586namp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+Please skip this email.</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+I will update the commit info then re-sent the email.</div>
+<div id=3D"appendonsend"></div>
+<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
+<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
+yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> He, Guocai (CN)<br>
+<b>Sent:</b> Tuesday, July 22, 2025 11:33 AM<br>
+<b>To:</b> openembedded-devel@lists.openembedded.org &lt;openembedded-devel=
+@lists.openembedded.org&gt;<br>
+<b>Subject:</b> [meta-openembedded][meta-oe][scarthgap][PATCH] mariadb: Fil=
+e conflicts for multilib</font>
+<div>&nbsp;</div>
+</div>
+<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
+">
+<div class=3D"PlainText">From: Guocai He &lt;guocai.he.cn@windriver.com&gt;=
+<br>
+<br>
+File conflicts between attempted installs of mariadb and lib32-mariadb<br>
+<br>
+Signed-off-by: Guocai He &lt;guocai.he.cn@windriver.com&gt;<br>
+Signed-off-by: Khem Raj &lt;raj.khem@gmail.com&gt;<br>
+(cherry picked from commit ddd322323eba44542b6b631d455e3298c50c4535)<br>
+igned-off-by: Guocai He &lt;guocai.he.cn@windriver.com&gt;<br>
+---<br>
+&nbsp;meta-oe/recipes-dbs/mysql/mariadb.inc | 7 +++++--<br>
+&nbsp;1 file changed, 5 insertions(+), 2 deletions(-)<br>
+<br>
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/my=
+sql/mariadb.inc<br>
+index f52947f359..abcf0b3cda 100644<br>
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc<br>
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc<br>
+@@ -33,10 +33,12 @@ S =3D &quot;${WORKDIR}/mariadb-${PV}&quot;<br>
+&nbsp;<br>
+&nbsp;BINCONFIG_GLOB =3D &quot;mysql_config&quot;<br>
+&nbsp;<br>
+-inherit cmake gettext binconfig update-rc.d systemd multilib_script pkgcon=
+fig<br>
++inherit cmake gettext binconfig update-rc.d systemd multilib_script multil=
+ib_header pkgconfig<br>
+&nbsp;<br>
+&nbsp;MULTILIB_SCRIPTS =3D &quot;${PN}-server:${bindir}/mariadbd-safe \<br>
+-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${PN}-setupdb:${bindir}/mariadb-in=
+stall-db&quot;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${PN}-setupdb:${bindir}/mariadb-in=
+stall-db \<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; libmysqlclient-dev:${bindir}/mysql=
+_config \<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;<br>
+&nbsp;<br>
+&nbsp;INITSCRIPT_PACKAGES =3D &quot;${PN}-server ${PN}-setupdb&quot;<br>
+&nbsp;INITSCRIPT_NAME:${PN}-server =3D &quot;mysqld&quot;<br>
+@@ -159,6 +161,7 @@ mariadb_sysroot_preprocess () {<br>
+&nbsp;<br>
+&nbsp;do_install() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp; oe_runmake 'DESTDIR=3D${D}' install<br>
++&nbsp;&nbsp;&nbsp; oe_multilib_header mysql/mariadb_version.h mysql/server=
+/my_config.h mysql/server/private/config.h<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp; install -d ${D}/${sysconfdir}/init.d<br>
+&nbsp;&nbsp;&nbsp;&nbsp; install -m 0644 ${WORKDIR}/my.cnf ${D}/${sysconfdi=
+r}/<br>
+-- <br>
+2.34.1<br>
+<br>
+</div>
+</span></font></div>
+</body>
+</html>
+
+--_000_CO6PR11MB558698743323B97FB4F2B0AFCD5FACO6PR11MB5586namp_--
 
