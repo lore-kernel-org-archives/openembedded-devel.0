@@ -1,85 +1,111 @@
-Return-Path: <serosh.deljam@savoirfairelinux.com>
+Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E821AC83F27
-	for <webhook@archiver.kernel.org>; Tue, 22 Jul 2025 18:06:34 +0000 (UTC)
-Received: from mail.savoirfairelinux.com (mail.savoirfairelinux.com [208.88.110.44])
- by mx.groups.io with SMTP id smtpd.web10.20483.1753207589140086565
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20953C83F27
+	for <webhook@archiver.kernel.org>; Wed, 23 Jul 2025 01:39:43 +0000 (UTC)
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web10.4346.1753234765502459112
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 22 Jul 2025 11:06:29 -0700
+ Tue, 22 Jul 2025 18:39:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@savoirfairelinux.com header.s=DFC430D2-D198-11EC-948E-34200CB392D2 header.b=FQvyVP3N;
- spf=pass (domain: savoirfairelinux.com, ip: 208.88.110.44, mailfrom: serosh.deljam@savoirfairelinux.com)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id 29A1F3D85665
-	for <openembedded-devel@lists.openembedded.org>; Tue, 22 Jul 2025 14:06:28 -0400 (EDT)
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
- by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10032)
- with ESMTP id CPzyIcFlVOPy; Tue, 22 Jul 2025 14:06:27 -0400 (EDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id B109B3D8763C;
-	Tue, 22 Jul 2025 14:06:27 -0400 (EDT)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.savoirfairelinux.com B109B3D8763C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=savoirfairelinux.com; s=DFC430D2-D198-11EC-948E-34200CB392D2;
-	t=1753207587; bh=sN+P728lMBXMnj3qKfXDDwBb8YsVA3GcSObwXFyl37s=;
-	h=From:To:Date:Message-ID:MIME-Version;
-	b=FQvyVP3NgsxRYQV1tGmDrmhQuswbiyX8+HuonMe5wAVpNBjiaHqno1Pw8WExmZvKS
-	 tSO3NSFS7l83bHT7gFvTatXDT8B8YTynwU8ELgyTyYdOWjZ8vt7TQsloTDxV5kKofn
-	 u3zfmiCPqubMMi7zgj/Ob1fIbaLNHP22XCuMQjVpnx7LmroSYzVMuysPZq4IJMFCSv
-	 6+9noav1bcyjODcmyXRIXFdg2GMtsSoSaRzLZNmzf2P7hwUxHYKSeQbbv/FZNHSjQq
-	 qtZotbb/tdDO8P8hmtZAWWvg3kzbrCNVb99ARQfylp1Op3NbMzaRZakLlBsTBu5Bo1
-	 jy9AJIzNUclzQ==
-X-Virus-Scanned: amavis at mail.savoirfairelinux.com
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
- by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10026)
- with ESMTP id rs7eM3tPSj_g; Tue, 22 Jul 2025 14:06:27 -0400 (EDT)
-Received: from sdeljam-pc.mtl.sfl (unknown [192.168.51.254])
-	by mail.savoirfairelinux.com (Postfix) with ESMTPSA id 90B6A3D85665;
-	Tue, 22 Jul 2025 14:06:27 -0400 (EDT)
-From: Serosh Deljam <serosh.deljam@savoirfairelinux.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Serosh Deljam <serosh.deljam@savoirfairelinux.com>
-Subject: [meta-oe][PATCH] cukinia: upgrade 0.7.0 -> 0.8.0
-Date: Tue, 22 Jul 2025 14:06:26 -0400
-Message-ID: <20250722180626.579781-1-serosh.deljam@savoirfairelinux.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=fz6KTVJN;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: liuyd.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1753234765; x=1784770765;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=vMoogAXtaT/YH/BTctkUbBgvhti9Yw2zqWmE1kNVlG4=;
+  b=fz6KTVJNplRL8lcqFAYW1BuQeWzdHlmG4971ObaOhm+/sS66VcGhgk7E
+   miiSOvBlf1TnFfB/AeigLUzmEkhcQ95i1BSmtcIy6/4iaHnidjeNeqmIm
+   cWoTsCInVhrgzijc06k6G/1G3l26kce/ELWq/y+5XqAZXW9DaFP9fNxGQ
+   TKUrV4qRiQH9eIfOZtp5n5nnwIUKZzukUzIeUHdtlhTx56w89fYFOQiuM
+   YV9JZZHGXalHj/tyb/WLfi1p3eZyW8Py/a/btXbu+mYpBJSLCN2O/GB3G
+   Ymy+uhDLp83+WHSOCza8w1Eq1gp4dv9VK4WVW1HImfGePB1N7sFMZFa+P
+   w==;
+X-CSE-ConnectionGUID: ujH1wpObT1eVZXe1qwF8vw==
+X-CSE-MsgGUID: VP+CYGlAS3S2+RRgH+4PKw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11500"; a="186027913"
+X-IronPort-AV: E=Sophos;i="6.16,333,1744038000"; 
+   d="scan'208";a="186027913"
+Received: from unknown (HELO az2uksmgr1.o.css.fujitsu.com) ([52.151.125.19])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Jul 2025 10:39:23 +0900
+Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 3FCF61C02136
+	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Jul 2025 01:39:23 +0000 (UTC)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
+	(No client certificate requested)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id AF4E2C0083C
+	for <openembedded-devel@lists.openembedded.org>; Wed, 23 Jul 2025 01:39:22 +0000 (UTC)
+Received: from G08FNSTD190088.g08.fujitsu.local (unknown [10.193.129.116])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 8F14C1A009B;
+	Wed, 23 Jul 2025 09:39:19 +0800 (CST)
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
+To: Gyorgy Sarvari <skandigraun@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Liu Yiding <liuyd.fnst@fujitsu.com>
+Subject: [meta-python] [PATCH v2] python3-twitter: upgrade 4.15.0 -> 4.16.0
+Date: Wed, 23 Jul 2025 09:38:57 +0800
+Message-ID: <20250723013857.970-1-liuyd.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.49.0.windows.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 22 Jul 2025 18:06:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118705
+ <openembedded-devel@lists.openembedded.org>; Wed, 23 Jul 2025 01:39:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118706
 
-Signed-off-by: Serosh Deljam <serosh.deljam@savoirfairelinux.com>
+Changelog:
+==========
+- Re-improve clarity of OAuth 2.0 User Context example code
+- Fix SyntaxWarning
+- Install 'build'
+- Docs config updates to fix build
+- Fix Sphinx context injection removal by readthedocs
+- Revert hoverxref upgrade for now until sphinx can be updated
+- Fix build error for docs related to 'html_context' setting
+- Modernize packaging configuration
+- Add new publish workflow to use trusted publisher
+- Add dev and test dependencies
+- Update publish workflow...
+- Add support for posting tweets to Communities
+
+Change to use LICENSE file instead of PKG-INFO, and
+license is MIT still
+
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- .../recipes-test/cukinia/{cukinia_0.7.0.bb =3D> cukinia_0.8.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-test/cukinia/{cukinia_0.7.0.bb =3D> cukinia_0.8.0=
-.bb} (91%)
+ .../{python3-twitter_4.15.0.bb => python3-twitter_4.16.0.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-twitter_4.15.0.bb => python3-twitter_4.16.0.bb} (62%)
 
-diff --git a/meta-oe/recipes-test/cukinia/cukinia_0.7.0.bb b/meta-oe/reci=
-pes-test/cukinia/cukinia_0.8.0.bb
-similarity index 91%
-rename from meta-oe/recipes-test/cukinia/cukinia_0.7.0.bb
-rename to meta-oe/recipes-test/cukinia/cukinia_0.8.0.bb
-index ad545e627b..2984d9a426 100644
---- a/meta-oe/recipes-test/cukinia/cukinia_0.7.0.bb
-+++ b/meta-oe/recipes-test/cukinia/cukinia_0.8.0.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De3fc50a88d0a36=
-4313df4b21ef20c29e"
-=20
- SRC_URI =3D "git://github.com/savoirfairelinux/cukinia.git;protocol=3Dht=
-tps;branch=3Dmaster"
-=20
--SRCREV =3D "be56f653743cc0e68bef81ef35df7c50ff8919c4"
-+SRCREV =3D "bacdc5437aeae25099b0271231ec8b277e0caed9"
-=20
-=20
- RRECOMMENDS:${PN} =3D "libgpiod-tools"
---=20
+diff --git a/meta-python/recipes-devtools/python/python3-twitter_4.15.0.bb b/meta-python/recipes-devtools/python/python3-twitter_4.16.0.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python3-twitter_4.15.0.bb
+rename to meta-python/recipes-devtools/python/python3-twitter_4.16.0.bb
+index c35b97a9e4..10b7b856bc 100644
+--- a/meta-python/recipes-devtools/python/python3-twitter_4.15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twitter_4.16.0.bb
+@@ -2,9 +2,9 @@ SUMMARY = "Twitter for Python"
+ DESCRIPTION = "Python module to support twitter API"
+ 
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=9;endline=9;md5=8227180126797a0148f94f483f3e1489"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=48c84b17f84a9a623754604ab73f28fe"
+ 
+-SRC_URI[sha256sum] = "1345cbcdf0a75e2d89f424c559fd49fda4d8cd7be25cd5131e3b57bad8a21d76"
++SRC_URI[sha256sum] = "1d95cbdc50bf6353a387f881f2584eaf60d14e00dbbdd8872a73de79c66878e3"
+ 
+ PYPI_PACKAGE = "tweepy"
+ 
+-- 
 2.43.0
 
 
