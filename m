@@ -1,373 +1,190 @@
-Return-Path: <peng.zhang1.cn@windriver.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A6B5C83F1A
-	for <webhook@archiver.kernel.org>; Thu, 24 Jul 2025 09:24:02 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.8413.1753349035752065648
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72613C83F1A
+	for <webhook@archiver.kernel.org>; Thu, 24 Jul 2025 11:44:33 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.7116.1753343066827766879
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 24 Jul 2025 02:23:55 -0700
+ Thu, 24 Jul 2025 00:44:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9300cd684d=peng.zhang1.cn@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 56O8U24f764677
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jul 2025 02:23:55 -0700
-Received: from nam11-co1-obe.outbound.protection.outlook.com (mail-co1nam11on2049.outbound.protection.outlook.com [40.107.220.49])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 483hcdr1k3-1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9300fbe988=bo.sun.cn@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 56O5gpMu452648
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jul 2025 07:44:25 GMT
+Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10on2041.outbound.protection.outlook.com [40.107.93.41])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4838y18agy-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jul 2025 02:23:55 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 24 Jul 2025 07:44:25 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sEhf1C8ykROMnP6ji8Qt16UhW/ERtsZ1c0CH7GIc6tAGlvVtDWC97eC/+HbFa08Q4mQip2iB9ag1FngrmmnJpw4GkvbOhlId5vYN1elpB6meVOLVybstU0KY9QmN4Ot6SUIgwnAa6NX2BcXC1Wxw/bLzLO6P8woNIfJ2AymO+8S28lUKEfwyIZOXoT36NhK+0GIhvsTs18A7e47YTVgcD63O/M8eJujQafPH9PXA6Uam/0to3LxSaCDmmF+8y194/PPa3tvUxlD2kDn54hMEZpW4czcMwVIA5VoJPD6V9tuW/PA4p/S2XVlNZtpm325+BL3FOPgel2g7XU3iGxKQkg==
+ b=JcV6gzC/MCXCI2n0SaPrQT3d+LJjNBdCEvdmkpuaaM0YWUwiVUwSdB2DcoZ/wftBpkJIY7IOlvr0C6Q/HKsg8T/6CJgKXIsQ6Fve4IPqS0e31+GC/Yp9GB3DzhEm/51aHDkU1jgdHqdIF9X8opL8Tw9Ab8YtU63V72R2X8cF2tIU5sYkJAnIU0Ko5ruXUJV1Gyx48yhadQNbv/3zmo/saIIQ3gkGXhx9IKo96eW7kJXvan0Z2wVLjyQk8AmtEdIsbvQlbNvRGVGsMbFYL/XO5eiEVFaIRI2us1ejK4dvsCbF4Sj5XEExW3Tlhgtj74afbidosVd05D4+zKPAWOTSAA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VXFs63PxaJPSQmmN94yI6OmeCppq5s7Rmpm0scfyIJQ=;
- b=HOgp1hPJCrbWgCJB4RlHRwAkLT339jrUyw7ghB+PJsG3SC5s6bqIkb68DCqpYUBhG+UlJ136mHLpDlDcOawVU318IRc4ZQgTLuAtEcLt3NWKxh5tiyVjgKHNcPKiXsT2BpnkJcSEv+b2mrC84Kr6Te7hqjhtjRDDpvCFi8MHWJTgJYICCC3i79ENMJ2URwr0PcOzEHRuDEE7XEaimEtWTaqtbxvx1m/KjCJELxszcGjrCdjm74zNanrNJtw7ktGzr7K9p9Fs1Mgk1BoqQEZwUAflsavwPgaHn9KUAuEr0InqC6i3CQdM1dn0F9eIRj97+78rovqvzAdIYo3adL2edA==
+ bh=/5BtGownMlFY8QxDht4QqB6IvKQ1EVwuJQ80bXXG3us=;
+ b=FwAEAxET5UJButihIcRGZ4+YsbQsv60wIeFPhb/ctnckbZ4M0m6x1TtetNGQFvq6b6bq2dGdLK/SLoeBGUwE4MzgCu6A0D7NGEcJmzyOSfbDUWg20Ri31uoxjcQdQUIyfiq2yvAjdxUeipKsHua3QvT/XZEIjoVYwXZ8kG3yafXPwNvDKDICLKAsqYUeO8TYJJYrtHIgkZ6nVkDWaOKj5mKYABZDacVL08mcztw6vZ5RKzmUGpt5mjjEeQsq5zaNtEH9SbH6sY6OA5uCGywv2v2qoG41qah7fR/3RrbyL2JuJMu50irJlMPx9eb+rRWC6bh8sLC82oiryK8bK80Aaw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
- by DS7PR11MB6245.namprd11.prod.outlook.com (2603:10b6:8:9a::16) with
+Received: from DM4PR11MB6214.namprd11.prod.outlook.com (2603:10b6:8:ac::7) by
+ MW4PR11MB5911.namprd11.prod.outlook.com (2603:10b6:303:16b::16) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.21; Thu, 24 Jul
- 2025 09:23:53 +0000
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::ea76:e083:b8bf:7484]) by CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::ea76:e083:b8bf:7484%3]) with mapi id 15.20.8901.021; Thu, 24 Jul 2025
- 09:23:53 +0000
-From: peng.zhang1.cn@windriver.com
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8964.22; Thu, 24 Jul
+ 2025 07:44:22 +0000
+Received: from DM4PR11MB6214.namprd11.prod.outlook.com
+ ([fe80::31e7:4eb1:db78:8446]) by DM4PR11MB6214.namprd11.prod.outlook.com
+ ([fe80::31e7:4eb1:db78:8446%6]) with mapi id 15.20.8964.021; Thu, 24 Jul 2025
+ 07:44:22 +0000
+From: "Bo Sun" <Bo.Sun.CN@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][walnascar][PATCH] wxwidgets: fix CVE-2024-58249
-Date: Thu, 24 Jul 2025 17:23:42 +0800
-Message-Id: <20250724092342.2896751-1-peng.zhang1.cn@windriver.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SL2P216CA0076.KORP216.PROD.OUTLOOK.COM (2603:1096:101:2::9)
- To CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
+Subject: [meta-oe][walnascar][PATCH] thin-provisioning-tools: fix bindgen build error with clang on octeontx2
+Date: Thu, 24 Jul 2025 15:44:11 +0800
+Message-ID: <20250724074411.2903317-1-bo.sun.cn@windriver.com>
+X-Mailer: git-send-email 2.50.1
+X-ClientProxiedBy: SG2PR01CA0116.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:40::20) To DM4PR11MB6214.namprd11.prod.outlook.com
+ (2603:10b6:8:ac::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|DS7PR11MB6245:EE_
-X-MS-Office365-Filtering-Correlation-Id: d119e214-ed61-44b2-006b-08ddca93ce6b
+X-MS-TrafficTypeDiagnostic: DM4PR11MB6214:EE_|MW4PR11MB5911:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0c0a2efa-701f-4ec0-ce4e-08ddca85e7b9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|52116014|366016|376014|1800799024|38350700014|13003099007;
+	BCL:0;ARA:13230040|52116014|376014|366016|1800799024|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?4Ml5GGkyl/P54W5osGE+ljpf+YHVXt/TtenJI+VL2sRO1TbG3DYeb50lXIZi?=
- =?us-ascii?Q?Of8Yfd6wSHzW9ZfZaZNa61VcbchGnwhRcZ28ha4E0vkoNra0DzRh6ts+MoA+?=
- =?us-ascii?Q?9QYTv06CGSV93g8B3WA/dNsw9CuRsuMmo91xg48YbILgYxWwb3Ab7shpKBsB?=
- =?us-ascii?Q?bCbrZWk0lYgTMNHlGz4lA8bJZ7IPQ5mTZGgrIlj1tJJnaMBS2AUW8PVbsYA1?=
- =?us-ascii?Q?F+2Rphmnu0sfZgeBtGjp70Lle/iZDrOMzVIzpdqOpFHlq2h7zcannLB1OA4w?=
- =?us-ascii?Q?LiRZJgfyo7l/QKGL99ozAQjcEQM7hQPr4sxdPqt5qTZdUDLPlurqCqO57y/d?=
- =?us-ascii?Q?gSOx9ZVrqfyGbGhNoxnNhqaIwbiwSEjv9XHJABVsdvHr3W/eE840fzWGvjAb?=
- =?us-ascii?Q?NHgHkDJl7q7J5nqNd2p3MKV90Ejb8YlKLYwL4IuzS54FiG6ujSxYGXkpmp8y?=
- =?us-ascii?Q?k5/4aBpkOgWHWGxo0tvHFwTOBbgT0lTPDnzRrmECGdV9a+Tcracugv6gl5Er?=
- =?us-ascii?Q?bwTm32dGupdbYgAsWm0SBEFdN4Du+PsTr4E5fnc7CDCgFjWgtVr0IduR1jgk?=
- =?us-ascii?Q?coX3NlSJ3F98+Y1zbZN0JwLxElYumKi17OTvw08fizKaGg00/S8rEYP97Iy2?=
- =?us-ascii?Q?o1PIam02HoISvtj67yfGxQZF08J1Pg2fHgkMemDSxpxbMEFhbCI06emQ7Ahk?=
- =?us-ascii?Q?l4uwcnEAueyDkluqYHnyMtN2ARPImIz4xDnCXq72Pk9V1nKGFAK3R9MZjlf9?=
- =?us-ascii?Q?gx4pftvcFJozVcUXYAx50+hTTXYM+XR40kkHHYjtZnueINj/aPVFyFHFg92f?=
- =?us-ascii?Q?3PFDa/NXHS9wmhrAWbGy6MRhGdO1APDiTFX/vdjur++JvWq17weqKUX7Mggq?=
- =?us-ascii?Q?stlzOpnin5icWeDqU7ncuj73JzsaDXkIT3IfKVzjT/7Uby3Z/O2pwk5WM5fi?=
- =?us-ascii?Q?JpUUwZwj2BsGKZv6qj7KiBKyyVFgF8eJBbmLSExh6rTlLFkVJ2ukpxiLVJVT?=
- =?us-ascii?Q?u+1uDb+ssdyvd/8/TgtFtqOxqEtrCNbf5SJef6Si3HKSckAX6vci3P9NvTMR?=
- =?us-ascii?Q?jfWT6vKKrOpzd1BneRg1SqMF9ST1bsIYyR9KXaEH3uVmYah8Y7nRu3WWPpqn?=
- =?us-ascii?Q?EFKrPbZ9mJ9I4AsMG48UuOiCfX7m9K1lMzrogK2GXSSOIhxrlXvG7CArcitu?=
- =?us-ascii?Q?h2yOsHEPU/1d5eGGyh30NSeFhL5eRe9KDYdT3rtQN+eh16dx62WoU99ouzyM?=
- =?us-ascii?Q?aN0hlV1XBD28oxYK7fa0STe4HqR57EIJZQJOG38FhyRCPk3GSdys0qFMpKqw?=
- =?us-ascii?Q?Vs5/pOZAu86tOHxxZFcS3VgQ1ekcy4BafCSpIGHmf1inuNju+hwW7UxyhJ6E?=
- =?us-ascii?Q?J1KtLHEkABWYnvDLrAPhxw01jav7KXGB40SXz7FW/n2sVn+mLt741vKQ7SDC?=
- =?us-ascii?Q?14uNI0PZEoSxN5iE60z6bBaqzoC4SPr2jnpgqrrcPDkudkkNagLQSHBWpBQA?=
- =?us-ascii?Q?4WPqJ9PyO+j4By4=3D?=
+	=?us-ascii?Q?Sm+eXVWQ4lH4SGXT3X56wesDMcvaDR5zO6vKYrtgkfiqul1xZhgyoYmeOGLg?=
+ =?us-ascii?Q?woSGnTDsPUE519m6rWbex89qlXxWzU4aTetcFxFC3ZWKV5o+GaIX5QwjcUXm?=
+ =?us-ascii?Q?N3x+dnU7Es2sZUDGwFuDAOCTwpEGyBZ+ZJFMwMavKH/rAoqb5GtCShFnKYT7?=
+ =?us-ascii?Q?rwZQ5AHKByONp/dJWB4Jf47nDWOWNbvPJ2NtCyN4rKRZh6BuOCgMLOxl7l7I?=
+ =?us-ascii?Q?YKHsXfKkE9EbNd+k94IgmdFEMfXHQiAoioGmHhZhYyqw4d5MXl+VqX58iyFC?=
+ =?us-ascii?Q?AYHfm7fVflbfE5eYUuM9FHzhLdF/gMLhajamxTuYbhXtkyD3ERxmTkXOW04E?=
+ =?us-ascii?Q?BatWiBuvlt5oE8eN94/Q0y9g8ATNpsERHJu7O1i665n4Rgt97iWO4n8c2Wuw?=
+ =?us-ascii?Q?ragcVztJakC6eAh6//e3yJrsUQpGT3VPvTpG5GgvuAHaOYLyqyLB+ESVMVEP?=
+ =?us-ascii?Q?tsvoBMIlrkFqKEBbOdgUmVVCa3R+1fR+HUO5j/4ufsEWOOa4li0NWnhA4ini?=
+ =?us-ascii?Q?/spWwzU1dxhxy5W9B1xq6Yl7dWjw8HrNtBWWPQJ92uSgzSVdurW/GPcJ5AUV?=
+ =?us-ascii?Q?DN8MU45YHWtfGjVPwOo3yKC6ZLwJqR0ky+pH2ubej+gt8bIJqu1spNi5yhLN?=
+ =?us-ascii?Q?tIh5RDxMez3cp81pGZ1fmYnfSK/G8YDL+fVzpAsWk6gvsRksACrRmGfBus3N?=
+ =?us-ascii?Q?70l8fuXaGV7DZOgECVQWcvfJeB3muw5hWnRFxg0anDJvXmWzjF0xZPtfwPwJ?=
+ =?us-ascii?Q?+GxnrscOxcARlWU+y27G6MfmCb4nNRzQNlZryhYMwLG/AFdCEMvjTzg4bSfj?=
+ =?us-ascii?Q?fbj1vB9RB0hgYBuLEi9VgGvL8IGhcyk0mo0Vfs35N7vgWv5KDtcfWqBICC3v?=
+ =?us-ascii?Q?ZTgn6ksEmVg5z00lVc37LkpMdStlr9clB7LFWNq0L86Jt3QUeAO3tJE36BGk?=
+ =?us-ascii?Q?ENJy2Rx786Codg03verXpoMZxk4Cn0h7FnNjlJ1FFzkONHIEUXtduh6PT4ro?=
+ =?us-ascii?Q?Kd1ybxaVi2V/CpGu1yq38Ay3CfNO41c0XtIa1noyo5JyyMdIbmmGOOkbp8WR?=
+ =?us-ascii?Q?adYtkCw2RW+Lz390v7BD8uCbdU6CCFziBFS/UIq93/1MZGSAWtvyXStlU7Pd?=
+ =?us-ascii?Q?A+WIwC8B2zokF1hACLFrQ0NTVXIS9pACf6gHBylGgbkldxCLQD/WC66ircHB?=
+ =?us-ascii?Q?oa4fMGhqSmQr4sPrOi543gseGTunPm8ZBbxdG4zDx7diIzeCAWC0t/W3BSXN?=
+ =?us-ascii?Q?q1Sj6xNix7wYPyo3I29HkUSquXQo1cfw+KtxZdPV9aAQHKvbLbzi5XCo7VoX?=
+ =?us-ascii?Q?zHuuGjmNBbv48KgKUqGwTCqB40xH/YBeUDuqaAD4i0a9NyCX9wIjJ0IJml0I?=
+ =?us-ascii?Q?XSBg1mVoctUsIPK9EztII6SbzeHfxaRgoEJQqMubGqAFFMfJErOJz6y46n2K?=
+ =?us-ascii?Q?QvzOATNGIVzekDJvv2oRgG7DNqQTfusDPFX8SRp1TCJ4I55jvJsIIg=3D=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(366016)(376014)(1800799024)(38350700014)(13003099007);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR11MB6214.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(376014)(366016)(1800799024)(38350700014);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?3OVMNmsJpFP1Kb15hJmqtnY06L3uYo+UsEa1lHunz+b6scS2jsnrOVHo5fhr?=
- =?us-ascii?Q?W5yuhoPQC8LcnrviMoNkXFSfrf4jv7XrVzbtjSfHKKQ1Vh0JqtDRtxa0Zmo/?=
- =?us-ascii?Q?Z+3Js7YfCl7G5102oi3IbS937zC74r8h7GxCxmgFc6HMg+9hjm7Qk8e6VH5l?=
- =?us-ascii?Q?o+X0wt0z+43rJJMyTK+23SIUamyj8z+qqSpjK4TXaO3PvGihw6+wAM3VH9OY?=
- =?us-ascii?Q?Zt/2woHGdnaXeGFK/AKIJxa8+IAeJ42WecbWOBtfBOqbRPuQGnI2EOSMmBZz?=
- =?us-ascii?Q?U60BnRiJ3icoVy9ui3c2AhPkF1xVLl9/Z75X0DYugBhUaxTwiaHrdIALzQf3?=
- =?us-ascii?Q?UNplUnhnlLb0fKV6Cb9LTOsuW2nxB+vhrp+SwpUCw+EW4IwMXHQ9HX3FUryK?=
- =?us-ascii?Q?9y5dOng/edZaDkeiuhqAnRLegsrylNKQ6sylRRaO/z7JpZe72U9D+xBSsDsw?=
- =?us-ascii?Q?tukoZKK7ujkKUw9nXp7Z8Z/yANcFLxAYAXlHa3UozoFxdBXXm2Bs3BDyO/NP?=
- =?us-ascii?Q?BD/D9CV8YXKQGlFP+Ttgu3W70g8eedYDrdbExA+Sy6VioOHNQgliFctoAiWF?=
- =?us-ascii?Q?jpXY8mlvquasrpkTE4fxzgnuT2KGMLR5VfFYsqU066m6ry6rmcIhIseuis5C?=
- =?us-ascii?Q?+8xYdj5avO5UKPmmbBDCY4T2w55D5rruL5M3h56q+af1n8BiMmC8b1q60CaJ?=
- =?us-ascii?Q?TgLhCvuYFqqVIEyrjvNy48D/vm4bap6Zlt/i8u7+Vl78o4YEtZaPRKTRHqBQ?=
- =?us-ascii?Q?rG/nJbEhk7smqjUZycvm8Wx3cjoa3Yyan9mu968ns88zHuEMncMmKY4shw/Y?=
- =?us-ascii?Q?eAjvsCuzM6xX/OB4bh5eDCti70NVzpx1CFiFX2yyvnMYC5trc467g9cWiiyt?=
- =?us-ascii?Q?G4pQN2nn1kMvVYj+R+apfo8jKgWl6czHBei6oHhXw1EnUy8Yv6r4sXLbLj2N?=
- =?us-ascii?Q?nHXQCq2FU8hnhIEgakEC9j5eEND+Q99kNxFUifPbjOhCUSLKwVya8EKh95Yt?=
- =?us-ascii?Q?sYEVrG5wWdmtD7StjnJ4HfvgfFGh/1h8s1McEwSQzaboAvx3594TfYNawRkd?=
- =?us-ascii?Q?rPY+WzAJ3d59qDNri8tMfrhZsjtUEocXeZVqOxPYbpfYhxH9qdZbEQY9E0pp?=
- =?us-ascii?Q?X7r3Kf/qnA/YN0NXwKYHxHXljQ4PIRvCqgXZNinsVIGAZxHTB6lAb75bD/LH?=
- =?us-ascii?Q?pL1V7qUVZ09BRYpF+sZSZpB1QPFQ508lyeYTZ/Ya4qvJ/lNCDYmSG51/xiMZ?=
- =?us-ascii?Q?W9uv4j/OVOQX71Hiytjz/oUM/ZdzlL48T5FYLTYzYKGKcOAy1VyA8uYoSUd8?=
- =?us-ascii?Q?QtnuxTz1W+//f+eBBjhnzrKFFFVGkkG6fI6Illcg4cAh/9HRrhjZPOjACOIJ?=
- =?us-ascii?Q?8ZZ40kzVBtDRH1D9WoVVJaKLOy8iwC5BtX9luinKGE2DsopvlKuhzETr1twe?=
- =?us-ascii?Q?oX6BtPnIBFwZa7FMC8WrLZPRzaSpN251M8k3vWaokKhhQxDMiuV+utke23p1?=
- =?us-ascii?Q?RTzS7Lll+3y86HAsJyXw+S5V6Hgbisw7nhJbIx2bqWlYjq6PxC9czZ0GsN8Q?=
- =?us-ascii?Q?tI3AqxfnzDFLXXaYexmRCOx2TCdiq50uDRzcng9xL2FplyYQVUUbo3JL00Mw?=
- =?us-ascii?Q?cQ=3D=3D?=
+	=?us-ascii?Q?yVEMqBd+dl8ZX/yyEG0ixTqTw9TGEM7HsZGUX3zNpAmB2oTvfPnfg14+7Hhn?=
+ =?us-ascii?Q?3oTslweKVBjTK5khwClJNZ4GHYrHBfYeNrlfUrbZGAcZkWyq0HXACfw4LPOq?=
+ =?us-ascii?Q?n3Z5LlymJ6xuFqaXKoZ5UGYrmxsee/zfr/F4KedsVXC5Bmb6WRu6pwlRfu0P?=
+ =?us-ascii?Q?DjOSYMj2x2ixS2t11qIORlezG2NgCsk2NzSo7DPlQCuhvOvkdtINohuE7rbC?=
+ =?us-ascii?Q?rgg3Ac7ZY8AstaH4feVbacdYPBHGX1jXiT2lWlL8H84EW9J/tFmGkfKMVdcB?=
+ =?us-ascii?Q?OVKEwi2I0Ev4Oa9NrW0lz3jiJ3MFRUp90fTh7ubayeBMVC/0Vfu0MXvgQ9gX?=
+ =?us-ascii?Q?vfKP6+9+2s8/Tdea9BynDYn+myI/u6wXTF9S62pcuEQ0NA9055xVO64pUZtp?=
+ =?us-ascii?Q?XjItAAraYAFy1UBepoxkND1MfRjudEtFOFeAJ63KgTFTvE3wiQT5e7wRheTT?=
+ =?us-ascii?Q?gDQgY0GSflthI0TmimPe+nzotwCJwt7Us24Oh1Ohiy4SRcCQgqHNmhmFGBqR?=
+ =?us-ascii?Q?YjGhDPUsRhDd5xF1/bnbuL876b18NO4V+YjPxse1qpiWLkrUhiw76nskjaq7?=
+ =?us-ascii?Q?XM1ly/bHY04Hjlgi0jHDBCXzwhKV17QvBkn/wiTjONCaYRsYyF/q9PKtwG2Q?=
+ =?us-ascii?Q?lGbHOMi//yJTAUAqklAxCERe+wUmpv58nqN8XfaB+42bbUHFn8ls5NPh8lu2?=
+ =?us-ascii?Q?pQGNzXrUr6Kv3rae9qctD972y6oVRPRRdR+qgq3GZ5ojqEqR0RHHjk91vH5r?=
+ =?us-ascii?Q?NrVgL98BoYOmWbHd+sSM5kIYIIDdEPJoy4pagXk6I9fyPaxYPk8b1tnaSSCZ?=
+ =?us-ascii?Q?q0ZRMYCGocwfAte+F8MfxP0k34/9PdxBD6Go3sjsmJZ4571a424xB6NRsUlb?=
+ =?us-ascii?Q?eZ8zRtYKlhydbWOuAjscPQEDDUQ5eAaA6LYrhvJ105MUKJjU2oy3QAurcsia?=
+ =?us-ascii?Q?HV7xH10xiDAT5XKGjkonF/V8/r1gn69TMxWssn6LGwScOJ9IBHoFyUr7XGdG?=
+ =?us-ascii?Q?G1HbgkmMr5vIJ00hwpoFRUNag5XpKlRegsimijf2nRidtIlERkrOesekswGE?=
+ =?us-ascii?Q?7yC+oewAp/9erWM+SNBOiNDdELD1/NCeu/zqUohuwAIFGnycaCw2UNNCX6Wz?=
+ =?us-ascii?Q?aWj3sVfuuofTWxlfdrmOP4gLVSwivnqDYkp3t51sF/yQ/uwF5GFNtxXX/i0h?=
+ =?us-ascii?Q?tNi+Z3xiygLrkQgjtn/hs+R4m87MMP44cKFUijTTLyd7Y2X7WUoDGB76xSNa?=
+ =?us-ascii?Q?oT+Dfc8Dqmajq+k7PesltqmLbeIVDBJF1+BXAdrQFp9wvIAqz07vr/ej1HHN?=
+ =?us-ascii?Q?tFL/YrWa+tmL0kEU+gwfcWFruRZwpkhDoj31J2HhRJ+946WhUwGiSSuJmrS0?=
+ =?us-ascii?Q?ME7T/9XoRZ9tcZGnU6l7sOtfFT6DVbjmvprjL8HEDLXTJjDtZOIStiqOBJp8?=
+ =?us-ascii?Q?E3M3LTcDfM1+mcRhwOFxSPoqcCHL/VhnhGH8pFhOFLPlJFRzwiM3HMAP/fua?=
+ =?us-ascii?Q?uSEzNvbuktAlkrxBdPdiLqj0HOdhyjH2xNddn9K0UPI+Ui1b1k0fq1x+FpoX?=
+ =?us-ascii?Q?b04IBpWby1xJ5XeVru3bu0o3gMljFwCnxurvAahD73rI8Xvko9DFIveo2fRz?=
+ =?us-ascii?Q?Sw=3D=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d119e214-ed61-44b2-006b-08ddca93ce6b
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0c0a2efa-701f-4ec0-ce4e-08ddca85e7b9
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB6214.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2025 09:23:53.0717
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2025 07:44:22.5773
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jvKO41026fcbHft0jNcKRz4HUKtwfRqM0kCbqJp0hWFBZBB6HVhybQSlLR3sTftdC5sFAhZdT/Z+4K/Aw5a7/3M9Whw+LcOt/qs+3jV5J4I=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR11MB6245
-X-Proofpoint-GUID: UosSZQv11VJpCFhhlFTr1bYpPeytNnxT
-X-Proofpoint-ORIG-GUID: UosSZQv11VJpCFhhlFTr1bYpPeytNnxT
-X-Authority-Analysis: v=2.4 cv=eujfzppX c=1 sm=1 tr=0 ts=6881fbab cx=c_pps
- a=BZcKXadMzMgoE806unv5Vw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+X-MS-Exchange-CrossTenant-UserPrincipalName: GW23hraY6QsecNsmrrr1cCLMy60wfkZUf7il9sY7AUt+mr8H5dZDP1V2g9t4bVsFb/JF84Re3ZAfea6Dq+/j+g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB5911
+X-Authority-Analysis: v=2.4 cv=ZIfXmW7b c=1 sm=1 tr=0 ts=6881e459 cx=c_pps
+ a=SqOJu+fA6qNg895n5GWYNQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
  a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=Wb1JkmetP80A:10
- a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=IFCbucT4AAAA:8
- a=3epcOkmVbHiDymNTJPUA:9 a=FdTzh2GWekK77mhwV6Dw:22 a=cnuYUo6HLIWjuL6tXTi5:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzI0MDA2OSBTYWx0ZWRfX4MsI3B2c6VEl
- hhToO56Ynn2w2Hzq98FM34yma2vMBtdt/4RQEYCNqHCHlvmeMiycDgmPHFuTlBBCoSp+UfLl2MA
- z+njEC0IHMAk8tvriaEb/HPcF2p3M9n1otvDeSagT4b1OG8JVTm9taunw4weirNbYDfEme0Zp7W
- 9zBGHlxNzyBvLJdtLipWzB2qisoIEgsUIpvqwuVFXMNrjinRWW5nWVPyEoxf+krp9XAJ7SwwjNK
- nEdyIFsOeAN9nViKNWB03Fy3h3B5iE5ZiYL+Cayn3CSTWeMjlo8/HS70AwTJm7ZTH1SnQBvNrsU
- OUGGEYTjTi5LLRSEQ1L5nuw7sIrwu1Yjcbu6F+auZIp3bAVY7KowjUWYQOCcBFyfIerun/J+V7r
- /QQLyqcb
+ a=t7CeM3EgAAAA:8 a=bNap1YoWMQwtF1uxaBcA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: Q89TKvBFsw45_jVak_EaGblL5Iuj5YRf
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzI0MDA1NCBTYWx0ZWRfX3Xj3BPrDfERg
+ KR4Eztr0BG+XcURI1z3F++8QCMZgiXsfsDMXXtWe1o6dcDP7f7y5nDvQ8hpudcEBGicrr2l1EbJ
+ vKCovqXGTHMZU2RwcKW765KlewRQFVkrMpdmFiOotya1e8FQs7GMkPLnZsHNYk8DEHtYLGn8mki
+ gTYvX2jujRp8JjUFN0xpv/dA3jh1M9YctSdjxcjkXNdmg65JVIElY3IykmBJHHfZ6lrHNDLqUgf
+ JlAlPZIeeBz+Ekul04u+9xOo6DaSRUqBc9zl0/F6LpT9Ue0HXlbhvuvsFgOjou99+SEm75OzNbU
+ NDmfgOK9HoR/L4AQfW2GF4u7edODsykiKW+HR4HwY8JRb4jO6Nzrqdx7bhotsuY/kwjDPzayyci
+ gkzq4Qe0
+X-Proofpoint-GUID: Q89TKvBFsw45_jVak_EaGblL5Iuj5YRf
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-24_01,2025-07-23_01,2025-03-28_01
+ definitions=2025-07-23_03,2025-07-23_01,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 suspectscore=0 clxscore=1011 spamscore=0
- adultscore=0 priorityscore=1501 impostorscore=0 malwarescore=0
+ suspectscore=0 spamscore=0 bulkscore=0 clxscore=1011 malwarescore=0
+ priorityscore=1501 phishscore=0 adultscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2507210000 definitions=main-2507240061
+ reason=mlx scancount=1 engine=8.22.0-2507210000 definitions=main-2507230196
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 24 Jul 2025 09:24:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118722
+ <openembedded-devel@lists.openembedded.org>; Thu, 24 Jul 2025 11:44:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118723
 
-From: Zhang Peng <peng.zhang1.cn@windriver.com>
+Remove unsupported '-mcpu=octeontx2+crypto' from BINDGEN_EXTRA_CLANG_ARGS
+as clang does not recognize 'octeontx2' as a valid target CPU, causing
+bindgen to fail when generating Rust bindings.
 
-CVE-2024-58249:
-In wxWidgets before 3.2.7, a crash can be triggered in wxWidgets apps when connections are refused in wxWebRequestCURL.
+Since bindgen only parses headers using Clang, CPU-specific options
+like -mcpu are generally unnecessary.
 
-Reference:
-[https://nvd.nist.gov/vuln/detail/CVE-2024-58249]
+Fixes build failure:
+|   error: unsupported argument 'octeontx2+crypto' to option '-mcpu='
+|   error: unknown target CPU 'octeontx2'
 
-Upstream patches:
-[https://github.com/wxWidgets/wxWidgets/commit/f2918a9ac823074901ce27de939baa57788beb3d]
-
-Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
+Signed-off-by: Bo Sun <bo.sun.cn@windriver.com>
 ---
- .../wxwidgets/wxwidgets/CVE-2024-58249.patch  | 178 ++++++++++++++++++
- .../wxwidgets/wxwidgets_3.2.6.bb              |   1 +
- 2 files changed, 179 insertions(+)
- create mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/CVE-2024-58249.patch
+ .../thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets/CVE-2024-58249.patch b/meta-oe/recipes-extended/wxwidgets/wxwidgets/CVE-2024-58249.patch
-new file mode 100644
-index 0000000000..8ba9cc1b04
---- /dev/null
-+++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets/CVE-2024-58249.patch
-@@ -0,0 +1,178 @@
-+From e440b3a6097546a8aca66bd4c7a21be25e89d340 Mon Sep 17 00:00:00 2001
-+From: Vadim Zeitlin <vadim@wxwidgets.org>
-+Date: Sun, 27 Oct 2024 00:56:21 +0200
-+Subject: [PATCH] Fix crash when connection is refused in wxWebRequestCURL
-+
-+Avoid deleting wxEventLoopSourceHandler which may be still in use, as is
-+the case when we get write IO notification just before an error one: if
-+we delete the handler while handling the former, we crash when getting
-+the latter one.
-+
-+Use a hack to avoid deleting the handlers for which write notification
-+is being processed and delete them later, when we get the error one.
-+
-+See #24885.
-+
-+(cherry picked from commit 4e0fca8ab9756989598d07b41e672af86eac7092)
-+
-+CVE: CVE-2024-58249
-+Upstream-Status: Backport [https://github.com/wxWidgets/wxWidgets/commit/f2918a9ac823074901ce27de939baa57788beb3d]
-+
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-+---
-+ src/common/webrequest_curl.cpp | 80 +++++++++++++++++++++++++---------
-+ 1 file changed, 60 insertions(+), 20 deletions(-)
-+
-+diff --git a/src/common/webrequest_curl.cpp b/src/common/webrequest_curl.cpp
-+index f50acf4f8d..64650ab6b4 100644
-+--- a/src/common/webrequest_curl.cpp
-++++ b/src/common/webrequest_curl.cpp
-+@@ -704,10 +704,13 @@ SocketPollerImpl* SocketPollerImpl::Create(wxEvtHandler* hndlr)
-+ 
-+ // SocketPollerSourceHandler - a source handler used by the SocketPoller class.
-+ 
-++class SourceSocketPoller;
-++
-+ class SocketPollerSourceHandler: public wxEventLoopSourceHandler
-+ {
-+ public:
-+-    SocketPollerSourceHandler(curl_socket_t, wxEvtHandler*);
-++    SocketPollerSourceHandler(curl_socket_t sock, SourceSocketPoller* poller)
-++        : m_socket(sock), m_poller(poller) {}
-+ 
-+     void OnReadWaiting() wxOVERRIDE;
-+     void OnWriteWaiting() wxOVERRIDE;
-+@@ -716,16 +719,9 @@ public:
-+ private:
-+     void SendEvent(int);
-+     curl_socket_t m_socket;
-+-    wxEvtHandler* m_handler;
-++    SourceSocketPoller* const m_poller;
-+ };
-+ 
-+-SocketPollerSourceHandler::SocketPollerSourceHandler(curl_socket_t sock,
-+-                                                     wxEvtHandler* hndlr)
-+-{
-+-    m_socket = sock;
-+-    m_handler = hndlr;
-+-}
-+-
-+ void SocketPollerSourceHandler::OnReadWaiting()
-+ {
-+     SendEvent(SocketPoller::READY_FOR_READ);
-+@@ -741,14 +737,6 @@ void SocketPollerSourceHandler::OnExceptionWaiting()
-+     SendEvent(SocketPoller::HAS_ERROR);
-+ }
-+ 
-+-void SocketPollerSourceHandler::SendEvent(int result)
-+-{
-+-    wxThreadEvent event(wxEVT_SOCKET_POLLER_RESULT);
-+-    event.SetPayload<curl_socket_t>(m_socket);
-+-    event.SetInt(result);
-+-    m_handler->ProcessEvent(event);
-+-}
-+-
-+ // SourceSocketPoller - a SocketPollerImpl based on event loop sources.
-+ 
-+ class SourceSocketPoller: public SocketPollerImpl
-+@@ -760,6 +748,8 @@ public:
-+     void StopPolling(curl_socket_t) wxOVERRIDE;
-+     void ResumePolling(curl_socket_t) wxOVERRIDE;
-+ 
-++    void SendEvent(curl_socket_t sock, int result);
-++
-+ private:
-+     WX_DECLARE_HASH_MAP(curl_socket_t, wxEventLoopSource*, wxIntegerHash,\
-+                         wxIntegerEqual, SocketDataMap);
-+@@ -768,11 +758,25 @@ private:
-+ 
-+     SocketDataMap m_socketData;
-+     wxEvtHandler* m_handler;
-++
-++    // The socket for which we're currently processing a write IO notification.
-++    curl_socket_t m_activeWriteSocket;
-++
-++    // The sockets that we couldn't clean up yet but should do if/when we get
-++    // an error notification for them.
-++    wxVector<curl_socket_t> m_socketsToCleanUp;
-+ };
-+ 
-++// This function must be implemented after full SourceSocketPoller declaration.
-++void SocketPollerSourceHandler::SendEvent(int result)
-++{
-++    m_poller->SendEvent(m_socket, result);
-++}
-++
-+ SourceSocketPoller::SourceSocketPoller(wxEvtHandler* hndlr)
-+ {
-+     m_handler = hndlr;
-++    m_activeWriteSocket = 0;
-+ }
-+ 
-+ SourceSocketPoller::~SourceSocketPoller()
-+@@ -822,9 +826,7 @@ bool SourceSocketPoller::StartPolling(curl_socket_t sock, int pollAction)
-+     }
-+     else
-+     {
-+-        // Otherwise create a new source handler.
-+-        srcHandler =
-+-            new SocketPollerSourceHandler(sock, m_handler);
-++        srcHandler = new SocketPollerSourceHandler(sock, this);
-+     }
-+ 
-+     // Get a new source object for these polling checks.
-+@@ -858,6 +860,15 @@ bool SourceSocketPoller::StartPolling(curl_socket_t sock, int pollAction)
-+ 
-+ void SourceSocketPoller::StopPolling(curl_socket_t sock)
-+ {
-++    if ( sock == m_activeWriteSocket )
-++    {
-++        // We can't clean up the socket while we're inside OnWriteWaiting() for
-++        // it because it could be followed by OnExceptionWaiting() and we'd
-++        // crash if we deleted it already.
-++        m_socketsToCleanUp.push_back(sock);
-++        return;
-++    }
-++
-+     SocketDataMap::iterator it = m_socketData.find(sock);
-+ 
-+     if ( it != m_socketData.end() )
-+@@ -871,6 +882,35 @@ void SourceSocketPoller::ResumePolling(curl_socket_t WXUNUSED(sock))
-+ {
-+ }
-+ 
-++void SourceSocketPoller::SendEvent(curl_socket_t sock, int result)
-++{
-++    if ( result == SocketPoller::READY_FOR_WRITE )
-++    {
-++        // Prevent the handler from this socket from being deleted in case we
-++        // get a HAS_ERROR event for it immediately after this one.
-++        m_activeWriteSocket = sock;
-++    }
-++
-++    wxThreadEvent event(wxEVT_SOCKET_POLLER_RESULT);
-++    event.SetPayload<curl_socket_t>(sock);
-++    event.SetInt(result);
-++    m_handler->ProcessEvent(event);
-++
-++    m_activeWriteSocket = 0;
-++
-++    if ( result == SocketPoller::HAS_ERROR )
-++    {
-++        // Check if we have any sockets to clean up and do it now, it should be
-++        // safe.
-++        for ( size_t n = 0; n < m_socketsToCleanUp.size(); ++n )
-++        {
-++            StopPolling(m_socketsToCleanUp[n]);
-++        }
-++
-++        m_socketsToCleanUp.clear();
-++    }
-++}
-++
-+ void SourceSocketPoller::CleanUpSocketSource(wxEventLoopSource* source)
-+ {
-+     wxEventLoopSourceHandler* srcHandler = source->GetHandler();
-+-- 
-+2.50.0
-+
-diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.6.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.6.bb
-index 71e2a60e0c..1cf44bbfa3 100644
---- a/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.6.bb
-+++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_3.2.6.bb
-@@ -26,6 +26,7 @@ SRC_URI = "gitsm://github.com/wxWidgets/wxWidgets.git;branch=3.2;protocol=https
-            file://0005-wx-config-fix-libdir-for-multilib.patch \
-            file://0006-Fix-locale-on-musl.patch \
-            file://0007-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch \
-+           file://CVE-2024-58249.patch \
-            "
- SRCREV = "5ff25322553c1870cf20a2e1ba6f20ed50d9fe9a"
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
+index a60ca11244..4ed885f8b3 100644
+--- a/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
++++ b/meta-oe/dynamic-layers/clang-layer/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.1.0.bb
+@@ -23,7 +23,10 @@ inherit pkgconfig
+ DEPENDS += "udev libdevmapper libdevmapper-native clang-native"
+ 
+ export LIBCLANG_PATH = "${STAGING_LIBDIR_NATIVE}"
+-export BINDGEN_EXTRA_CLANG_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} --target=${TARGET_SYS}"
++# Remove octeontx2 specific CPU flags that may cause issues with bindgen
++BINDGEN_EXTRA_CLANG_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS} --target=${TARGET_SYS}"
++BINDGEN_EXTRA_CLANG_ARGS:remove = "-mcpu=octeontx2+crypto"
++export BINDGEN_EXTRA_CLANG_ARGS
+ 
+ require ${BPN}-crates.inc
+ require ${BPN}-git-crates.inc
 -- 
-2.34.1
+2.50.1
 
 
