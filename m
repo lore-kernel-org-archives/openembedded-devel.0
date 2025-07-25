@@ -1,94 +1,93 @@
-Return-Path: <philip@balister.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99061C87FCA
-	for <webhook@archiver.kernel.org>; Fri, 25 Jul 2025 10:22:44 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web11.15617.1753435749403326174
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9302AC87FCA
+	for <webhook@archiver.kernel.org>; Fri, 25 Jul 2025 13:38:35 +0000 (UTC)
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web11.19710.1753450714146597402
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Jul 2025 02:29:09 -0700
+ Fri, 25 Jul 2025 06:38:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@amarulasolutions.com header.s=google header.b=OMwjR4R+;
- spf=pass (domain: amarulasolutions.com, ip: 209.85.128.52, mailfrom: dario.binacchi@amarulasolutions.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4563cfac19cso20830355e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Jul 2025 02:29:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TMJtVDbn;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-b3bdab4bf19so1845551a12.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Jul 2025 06:38:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amarulasolutions.com; s=google; t=1753435748; x=1754040548; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=uFbOaiuScLvXX64uQG6RoqCHS6f9fQU69pNeTOKVops=;
-        b=OMwjR4R+nZL1oF2AJhWHFYQj/IEps669V4tIftbTo6z1MBP7rcbPc5YbC7pzcak1Gs
-         92ky2zj0afHoTdGdm8QWtj20n4wcprK1UmFxsOuyKbvZItyoEAspGsl/3U+KpLOopkJ3
-         UCR7MlzeYxkMhNMruhYww3ySGpTGw9CnANqVA=
+        d=gmail.com; s=20230601; t=1753450713; x=1754055513; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=A1iJ5mUHxjeBzHAL2zb5Zrt7O+C7NSWfuro2Xhkw6PE=;
+        b=TMJtVDbnV8+Xmn5vLhgLTh/ExMtdxMQfraHC3h0ZL6H2do9q5gCoyNbTva37gmRHnC
+         ftOVBZezTKelqJ/uO8bs8ieoUk4MzPzuglh6/nlqTvJD+OXJzRisomo53EKa44G/uyo2
+         mKAmu2Vv99n42x24swhHyWmosF61VwqM1M0JY8riKEAR1my23BMJgJo3cvUXBWx9FtJO
+         n2e35xFDR/gYlEe6qgpWIgSq9PoCg1gFK0EwZiYEzxhKAsurTdMcdZEFwXBx6ais9V3Q
+         t+1OE2o7WsreDMG7KILd0s7Qntrg/1PISsJYG14f2vknX6m9o01/F1DSZdPEP5mKJBgd
+         0+Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753435748; x=1754040548;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uFbOaiuScLvXX64uQG6RoqCHS6f9fQU69pNeTOKVops=;
-        b=TfiLNEwWKDTab7mg8u95newTzBju+N4xz9anRoTUJ64c50Pb8DJGR7RbM4fdrFX1uw
-         ZqMJwudFngfWgnhEG7izxt5MiUjd9kiDShOz/WLe1HP07L01oQBtsg3PZkBdTzNH6mbD
-         nW76G6SUc+kusll6eyEowvcgK965IJ0GEVZLcjvO6rl2D4B5u3kL3sEWT16xspcqUz19
-         PGMIvMll/8N2uoicR3SxJRo4GjSXhtlFg5ZNh4Pbop/PUkvyr+tEdFQR5mBba+H7Hjrg
-         SKvXuh4QPRsckI3UyqlxOeITMwzxFd/q3sTJDLjwQtu6+kFNh4gazNHytQUNQa7I0zaD
-         q30A==
-X-Gm-Message-State: AOJu0Yx3hDTYUkvcYenN3dB9FDKX8mZonj/g62Kqu1ms3gSfjx+B9UW/
-	Tyze8yQWRWaYPw96JM/ZG20BskO4Woicq0m/6OVnvMdH59E+fWzK34FL6+rPQNaJ29XOWpzzTr1
-	tJOdE
-X-Gm-Gg: ASbGncslTXlw6Sw2/sfeQalMUI5rGK1+dOpdPD3lL8We5/NZ7T1BKXHqXKS75DN8AJW
-	0tFG0LA0Uyf+lBWZ9LHd0iaJzH3qbm63DaE3uEFJ3tGCOCcBgMVA3pdCuj46GCRbP0h2zhUMzJm
-	MsgAa4/lI+MTBhenMMX6D0Rh01xt9UT0okDiZIJmIdl2ugjLYWa5DFnr8kJRQUlvGLJxcibFfNN
-	ceBwPMMA8sTxVytYYsp/uJ6nKiwptJqHYGBXc6L39U9yAelID1M8ud5tvMW2RXwPxo3W709aHBT
-	99jzY6HLZoaf2Hr4/FaUF+8mLsFrSihF/9tpux0P3MFwwtSfAfU5uRCj0THzRxpNGOEjNxKXZrJ
-	DSRcLghDrL5kFToNWKbMU4BRQrVTrfi5Z0eaLZFbg4JgdYvJfbm65Zf2A9JdbzQ==
-X-Google-Smtp-Source: AGHT+IHsyZ2l5vtfKeu76pEHWpTHsqSB6DpBETdUkoevzOoenWfU8/aGquwvz/Nuxd9ybDcXhB8Nlw==
-X-Received: by 2002:a17:907:7254:b0:ae0:b33d:2a4a with SMTP id a640c23a62f3a-af61e051379mr111525466b.35.1753435341120;
-        Fri, 25 Jul 2025 02:22:21 -0700 (PDT)
-Received: from dario-ThinkPad-P14s-Gen-5.. ([62.19.251.20])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-af47f44da58sm243520366b.91.2025.07.25.02.22.20
+        d=1e100.net; s=20230601; t=1753450713; x=1754055513;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=A1iJ5mUHxjeBzHAL2zb5Zrt7O+C7NSWfuro2Xhkw6PE=;
+        b=hg8qVgZTaYv8uYRkJlhKs/FxaF+friGtADykQ1JBfpcaGG/HCx/p6wWI6V6v2J2Mz7
+         Iqr5rrK0e3BtaCBSOE67MFG2Fdko0KoGa1LW4ENDxP/vwQWuCWyAa1XCk73tAldKcMk+
+         0WFFiprHvudIcEltPBSxg26TZl760eieB4jn6MBHUAoh1nW6EaPUTSrJsD9iltX98DEK
+         02k6M+Fqi5aavuodT8RrycJuC9OoGdwZ1aBrou7sZu+vfd2wyWXI6DfP2XLlIAoQFM83
+         eRwQkgMvbvx6V2lrs8WGT/jqqwe67MbqnN6i6L4gHhsdD2lBSXU9d6g7CjEcrTYUMDFg
+         7LSg==
+X-Gm-Message-State: AOJu0YzGrozLV17Oo9kK71c8Rbk56CmgD92CRmVVUFNvtqpN85UPKvcq
+	LUlcZ3l1dB3wWm8idiCLtP1d8Wb6hnGar5rv+Gz2K/SWH8LimOtAyNB0MJPS7GotTcY=
+X-Gm-Gg: ASbGncuhOK6VZAxVbEJwzPBlvH4ZANMz2mb7dOqQmvRJbi8jCn8FyN8nci7+WqKfEs4
+	R0C0MO+SzBr6HJ3gCCBCpOP+jWrqkL7jgWNwutyl3DpbdDxkmExN0v9OCn2J0h+RjyFMNf5US3h
+	br4sJGk+a4nuT42v8P5YXtkS1587/zEAcAUmQJfC3ynVwRMUJcM8gb9oWrItBGr3ddyLdUH3Z/w
+	TkYWqs2TkT8ECpJ2fnCNgCtpEGrHN20Pv/bBWM9YQ231rNHc4i5WiM8mjpX+8vbX6PH0nEz1lVJ
+	NQlHUa9X9NkxAGgPQDE3JN26FUmzi2YKmetSPobAIMD2R1wazxpg+AoNu+Il1/ia911MyxW++0p
+	j3ZmW2l7jvPJ7Mg==
+X-Google-Smtp-Source: AGHT+IHHyeICJA4i9sDM/dZ7unuMbTtgM3dDReYEG+bXI/bbyeCeUsZac/Bnfpk27KS4tDmP+biMhw==
+X-Received: by 2002:a17:90b:2b4d:b0:311:b5ac:6f5d with SMTP id 98e67ed59e1d1-31e77b22fefmr2882381a91.29.1753450713039;
+        Fri, 25 Jul 2025 06:38:33 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::a237])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-31e6226adfasm2549284a91.2.2025.07.25.06.38.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Jul 2025 02:22:20 -0700 (PDT)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+        Fri, 25 Jul 2025 06:38:32 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: linux-amarula@amarulasolutions.com,
-	Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Subject: [meta-filesystems][PATCH] ufs-utils: update SRC_URI
-Date: Fri, 25 Jul 2025 11:22:07 +0200
-Message-ID: <20250725092207.3059910-1-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 3/3] python3-bleak: Add missing asyncio dependencies for ptests
+Date: Fri, 25 Jul 2025 06:38:27 -0700
+Message-ID: <20250725133827.1533329-3-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250725133827.1533329-1-raj.khem@gmail.com>
+References: <20250725133827.1533329-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 25 Jul 2025 10:22:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118727
+ <openembedded-devel@lists.openembedded.org>; Fri, 25 Jul 2025 13:38:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118730
 
-The ufs-utils repository has changed ownership on GitHub and is now
-maintained under the "SanDisk-Open-Source" organization. Although the
-old URL is still redirected, let's point to the new upstream address to
-reflect the current ownership and avoid relying on redirects.
-
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-filesystems/recipes-utils/ufs-utils/ufs-utils_7.14.12.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_7.14.12.bb b/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_7.14.12.bb
-index 0366654d7b19..3c12bc5fbe9a 100644
---- a/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_7.14.12.bb
-+++ b/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_7.14.12.bb
-@@ -6,7 +6,7 @@ BRANCH ?= "dev"
+diff --git a/meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb b/meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb
+index f18502c7c4..7bc69bfeb9 100644
+--- a/meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb
+@@ -8,9 +8,10 @@ PYPI_SRC_URI = "git://github.com/hbldh/bleak.git;protocol=https;branch=develop;d
  
- SRCREV = "dd2e655780424eadf7610de33e5966be19168a95"
+ inherit pypi python_poetry_core ptest-python-pytest
  
--SRC_URI = "git://github.com/westerndigitalcorporation/ufs-utils.git;protocol=https;branch=${BRANCH} \
-+SRC_URI = "git://github.com/SanDisk-Open-Source/ufs-utils.git;protocol=https;branch=${BRANCH} \
-            file://0001-ufs_cmds-fix-full_path-buffer-size-in-find_bsg_devic.patch \
-           "
+-
+ RDEPENDS:${PN}-ptest += " \
++	python3-asyncio \
+ 	python3-pytest-asyncio \
++	python3-pytest-cov \
+ "
  
--- 
-2.43.0
-
+ RDEPENDS:${PN} += " \
 
