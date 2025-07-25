@@ -2,62 +2,62 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9302AC87FCA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94082C87FCF
 	for <webhook@archiver.kernel.org>; Fri, 25 Jul 2025 13:38:35 +0000 (UTC)
 Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
- by mx.groups.io with SMTP id smtpd.web11.19710.1753450714146597402
+ by mx.groups.io with SMTP id smtpd.web11.19709.1753450712879096846
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Jul 2025 06:38:34 -0700
+ Fri, 25 Jul 2025 06:38:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TMJtVDbn;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WLii6k1H;
  spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-b3bdab4bf19so1845551a12.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Jul 2025 06:38:34 -0700 (PDT)
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-b3bcb168fd5so2040344a12.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Jul 2025 06:38:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753450713; x=1754055513; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1753450712; x=1754055512; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=A1iJ5mUHxjeBzHAL2zb5Zrt7O+C7NSWfuro2Xhkw6PE=;
-        b=TMJtVDbnV8+Xmn5vLhgLTh/ExMtdxMQfraHC3h0ZL6H2do9q5gCoyNbTva37gmRHnC
-         ftOVBZezTKelqJ/uO8bs8ieoUk4MzPzuglh6/nlqTvJD+OXJzRisomo53EKa44G/uyo2
-         mKAmu2Vv99n42x24swhHyWmosF61VwqM1M0JY8riKEAR1my23BMJgJo3cvUXBWx9FtJO
-         n2e35xFDR/gYlEe6qgpWIgSq9PoCg1gFK0EwZiYEzxhKAsurTdMcdZEFwXBx6ais9V3Q
-         t+1OE2o7WsreDMG7KILd0s7Qntrg/1PISsJYG14f2vknX6m9o01/F1DSZdPEP5mKJBgd
-         0+Tg==
+        bh=aHzAu3kM1z6rZCfF1GjMCnqsZwuJOeEpeWD/c7oasjs=;
+        b=WLii6k1HIHitbEhSo21N0VjYVF5Mp2//1KHsPQ2jKwya3Fax3Ii/m+qoFfFKo9UV9+
+         vnFlZl3aVv9gKJanIagHrZyuu48QMPztnLgeWmos2o8mfOa4RLKQSMChDGwTIN5FBdWU
+         yByyOgNqeOBnoaCyqKHTmjlK07OtJGRw2DS69uktIM5eg+fm4L/wlbSVbP4p7Dy4lR9t
+         i69uJKwA9m1dNOv99Z0ND0JVP5QI1pTuNUks/tFs9PA8jUJw1hIgYeH/73so4bV9EKSo
+         lzvSkK6Y6VwjrG+zK/9nONBxIi1qLP+/MlUFBlPispzlQzIxjAsdDGX5pvGZNBYs3FZs
+         ylqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753450713; x=1754055513;
+        d=1e100.net; s=20230601; t=1753450712; x=1754055512;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=A1iJ5mUHxjeBzHAL2zb5Zrt7O+C7NSWfuro2Xhkw6PE=;
-        b=hg8qVgZTaYv8uYRkJlhKs/FxaF+friGtADykQ1JBfpcaGG/HCx/p6wWI6V6v2J2Mz7
-         Iqr5rrK0e3BtaCBSOE67MFG2Fdko0KoGa1LW4ENDxP/vwQWuCWyAa1XCk73tAldKcMk+
-         0WFFiprHvudIcEltPBSxg26TZl760eieB4jn6MBHUAoh1nW6EaPUTSrJsD9iltX98DEK
-         02k6M+Fqi5aavuodT8RrycJuC9OoGdwZ1aBrou7sZu+vfd2wyWXI6DfP2XLlIAoQFM83
-         eRwQkgMvbvx6V2lrs8WGT/jqqwe67MbqnN6i6L4gHhsdD2lBSXU9d6g7CjEcrTYUMDFg
-         7LSg==
-X-Gm-Message-State: AOJu0YzGrozLV17Oo9kK71c8Rbk56CmgD92CRmVVUFNvtqpN85UPKvcq
-	LUlcZ3l1dB3wWm8idiCLtP1d8Wb6hnGar5rv+Gz2K/SWH8LimOtAyNB0MJPS7GotTcY=
-X-Gm-Gg: ASbGncuhOK6VZAxVbEJwzPBlvH4ZANMz2mb7dOqQmvRJbi8jCn8FyN8nci7+WqKfEs4
-	R0C0MO+SzBr6HJ3gCCBCpOP+jWrqkL7jgWNwutyl3DpbdDxkmExN0v9OCn2J0h+RjyFMNf5US3h
-	br4sJGk+a4nuT42v8P5YXtkS1587/zEAcAUmQJfC3ynVwRMUJcM8gb9oWrItBGr3ddyLdUH3Z/w
-	TkYWqs2TkT8ECpJ2fnCNgCtpEGrHN20Pv/bBWM9YQ231rNHc4i5WiM8mjpX+8vbX6PH0nEz1lVJ
-	NQlHUa9X9NkxAGgPQDE3JN26FUmzi2YKmetSPobAIMD2R1wazxpg+AoNu+Il1/ia911MyxW++0p
-	j3ZmW2l7jvPJ7Mg==
-X-Google-Smtp-Source: AGHT+IHHyeICJA4i9sDM/dZ7unuMbTtgM3dDReYEG+bXI/bbyeCeUsZac/Bnfpk27KS4tDmP+biMhw==
-X-Received: by 2002:a17:90b:2b4d:b0:311:b5ac:6f5d with SMTP id 98e67ed59e1d1-31e77b22fefmr2882381a91.29.1753450713039;
-        Fri, 25 Jul 2025 06:38:33 -0700 (PDT)
+        bh=aHzAu3kM1z6rZCfF1GjMCnqsZwuJOeEpeWD/c7oasjs=;
+        b=lc4YibunStu4qaEmGpQ1dcpJF4wiXA+7JxSbuPkOCZrvGFwC01z6zC1MZgYeYEaXiQ
+         86e72tlu+1c3UGQkAF+m3QJUQeLzWRKao9t90RV4zHwf+SzTvo2PY1F1LWkWWOrp/+T6
+         FnCfLS/C50wOZ3kkLqbC27gVVWQu5G8ylX8XKA1hx1xmkugNXPkB/QnCNes6U8PJhyLc
+         dYMsxRyt2VyPF6TnG9OrR0H4iZMhOS03wwhlduuruEUjJ+j+ldA7YT6bGlL0FqdXJs1c
+         1P9O5OwoGONH5MfYYDpigqIFYAL2rTb5p8qe3z3QZRPDvbPEvBPmweQJ8AUDZCKCp4ae
+         3jcw==
+X-Gm-Message-State: AOJu0YwpH+qCiDEdN+uLWZoJ6+10wz1fBDuo3Y5r9TkZihzz3G8PNOi+
+	wBJkQXekeJowUzhbMqWlAD0JOxSHpgt16CTzOjE7qB3xZvWPIBnEAE9l9cTH1dUmKZE=
+X-Gm-Gg: ASbGnctgUqVasHnLnfBB+sy6j4MVxno7DknjVNufw7S+ol044QcxhnTfbIlQ2w2mrWw
+	GX1W5GypxYD11ZBLcp/xsOWYm75Fn0QSxtCZtO4KDxYsXVqnibBr0hIlwEbCAzSgkidjHXNS+R/
+	vgBOabJSAXnbZ2mBXVv63gT+i/2QCjSRhTtt8hrQD6/Wrwebj9hRRejq1QrHhw9lUeVSrtKDFDc
+	IowJVYmRwLnvEQ6meTsFDgT893coXDHwmBPYWuAoupBR8GIVv8Ex5S9pHQgUO4Jcr2f92YL4KBV
+	rw6MTT6lYltAHoQdLrZW85zx2enDG+b7AQHEKiug1PoKO1HJk/I2YbcdUmFSM1xgGbx78w3eyS7
+	ivVRfK8BmveBcIrfpuL/oMlQX
+X-Google-Smtp-Source: AGHT+IGxp7Al9J1Pi64xwolcZnJZOTsG2kJCwZwYSBKthShrxe+OoGtuzkyOazM/Wk3uG1ehF0DXzQ==
+X-Received: by 2002:a17:903:1a44:b0:235:5d1:e366 with SMTP id d9443c01a7336-23fb3051419mr35511165ad.10.1753450711762;
+        Fri, 25 Jul 2025 06:38:31 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:8201:fd20::a237])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-31e6226adfasm2549284a91.2.2025.07.25.06.38.31
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-31e6226adfasm2549284a91.2.2025.07.25.06.38.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Jul 2025 06:38:32 -0700 (PDT)
+        Fri, 25 Jul 2025 06:38:31 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 3/3] python3-bleak: Add missing asyncio dependencies for ptests
-Date: Fri, 25 Jul 2025 06:38:27 -0700
-Message-ID: <20250725133827.1533329-3-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] webkitgtk3: Upgrade to 2.48.3
+Date: Fri, 25 Jul 2025 06:38:26 -0700
+Message-ID: <20250725133827.1533329-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250725133827.1533329-1-raj.khem@gmail.com>
 References: <20250725133827.1533329-1-raj.khem@gmail.com>
@@ -67,27 +67,73 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 25 Jul 2025 13:38:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118730
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118729
+
+WebKitGTK 2.48.3 release:
+
+Fix a crash introduced by the new threaded rendering implementation using Skia API.
+Improve rendering performance by recording layers once and replaying every dirty region in different worker threads.
+Fix a crash when setting WEBKIT_SKIA_GPU_PAINTING_THREADS=0.
+Fix a reference cycle in webkitmediastreamsrc preventing its disposal.
+
+WebKitGTK 2.48.2 release:
+
+Enable CSS Overscroll Behavior by default.
+Change threaded rendering implementation to use Skia API instead of WebCore display list that is not thread safe.
+Fix rendering when device scale factor change comes before the web view geometry update.
+Fix network process crash on exit.
+Fix the build with ENABLE_RESOURCE_USAGE=OFF.
+Fix several crashes and rendering issues.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../webkitgtk3/fix-typo-denormaldisabler.patch | 18 ------------------
+ ...bkitgtk3_2.48.1.bb => webkitgtk3_2.48.3.bb} |  3 +--
+ 2 files changed, 1 insertion(+), 20 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/fix-typo-denormaldisabler.patch
+ rename meta-oe/recipes-support/webkitgtk/{webkitgtk3_2.48.1.bb => webkitgtk3_2.48.3.bb} (98%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb b/meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb
-index f18502c7c4..7bc69bfeb9 100644
---- a/meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-bleak_1.0.1.bb
-@@ -8,9 +8,10 @@ PYPI_SRC_URI = "git://github.com/hbldh/bleak.git;protocol=https;branch=develop;d
- 
- inherit pypi python_poetry_core ptest-python-pytest
- 
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/fix-typo-denormaldisabler.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/fix-typo-denormaldisabler.patch
+deleted file mode 100644
+index c3383fcd41..0000000000
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/fix-typo-denormaldisabler.patch
++++ /dev/null
+@@ -1,18 +0,0 @@
+-From: Alberto Garcia <berto@igalia.com>
+-Subject: Fix build failure due to missing semicolon
 -
- RDEPENDS:${PN}-ptest += " \
-+	python3-asyncio \
- 	python3-pytest-asyncio \
-+	python3-pytest-cov \
- "
+-Source: https://sources.debian.org/data/main/w/webkit2gtk/2.48.1-2/debian/patches/fix-typo-denormaldisabler.patch
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---- a/Source/WebCore/platform/audio/DenormalDisabler.cpp
+-+++ b/Source/WebCore/platform/audio/DenormalDisabler.cpp
+-@@ -91,7 +91,7 @@ DenormalDisabler::~DenormalDisabler()
+-     }
+- }
+- #else
+--DenormalDisabler::DenormalDisabler() = default
+-+DenormalDisabler::DenormalDisabler() = default;
+- DenormalDisabler::~DenormalDisabler() = default;
+- #endif
+- 
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.1.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.3.bb
+similarity index 98%
+rename from meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.1.bb
+rename to meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.3.bb
+index d11d4808fd..23cacc021b 100644
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.1.bb
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.3.bb
+@@ -19,10 +19,9 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
+            file://no-musttail-arm.patch \
+            file://sys_futex.patch \
+            file://0001-Fix-build-errors-on-RISCV-https-bugs.webkit.org-show.patch \
+-           file://fix-typo-denormaldisabler.patch \
+            file://fix-ftbfs-riscv64.patch \
+            "
+-SRC_URI[sha256sum] = "98efdf21c4cdca0fe0b73ab5a8cb52093b5aa52d9b1b016a93f71dbfa1eb258f"
++SRC_URI[sha256sum] = "d4dc5970f0fc6a529ff7fd67bcbfab2bbb5e91be789b2e9279640b3217a782c3"
  
- RDEPENDS:${PN} += " \
+ inherit cmake pkgconfig gobject-introspection perlnative features_check upstream-version-is-even gi-docgen
+ 
 
