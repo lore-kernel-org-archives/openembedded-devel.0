@@ -1,152 +1,111 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 428B0C87FCA
-	for <webhook@archiver.kernel.org>; Sat, 26 Jul 2025 00:08:59 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web10.32390.1753488538919565780
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3203C87FCA
+	for <webhook@archiver.kernel.org>; Sat, 26 Jul 2025 08:44:11 +0000 (UTC)
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
+ by mx.groups.io with SMTP id smtpd.web10.37767.1753519448380865367
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 25 Jul 2025 17:08:58 -0700
+ Sat, 26 Jul 2025 01:44:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZqxJkILw;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-23602481460so27685685ad.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 25 Jul 2025 17:08:58 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=LDfy4tlP;
+ spf=pass (domain: smile.fr, ip: 209.85.221.67, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f67.google.com with SMTP id ffacd0b85a97d-3a507e88b0aso1938831f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 26 Jul 2025 01:44:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753488538; x=1754093338; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VXgRsetWSfhrMrH8bzd+Oe4t8eZxirO2xIstDR/r9Ws=;
-        b=ZqxJkILwVKyGzFbCMnMi9+28mMuougqOS9QRNqYYqDYqJy7qDNZbk6n6exFu2PyoT3
-         MBSddrRol6nOabwBk140gPxUdnsHzMNQk2k3k8tx28ULSaL9O8fZEwE+VE/DSjndDJHs
-         Zh6dj51bGnVmEJRccEDNmxBgEXjKpz/KoaFmIjNRN4hJE649plHYeqx/5/Qr+Ql7HavR
-         pNect+8UrFl80ginaeDLmqn24cX0eEu7aFvOQbjnk0MeRcFTyA/joe1mNq362w88RNg4
-         MNF/zDu0nNvQbJR6q2IB0vJSqT9/vaXwA+QaXCtFknkygk3RPyobHnqoGiYQwDfaNWiY
-         hZjA==
+        d=smile.fr; s=google; t=1753519446; x=1754124246; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=W3kVd+jqwD24O+kOLXlrFJ/GhgJg0HCG9/a6APNy0qU=;
+        b=LDfy4tlP3eRaWeXLey69nWF8y6phAfP/uZaNlGRUZkAfIyG+sF6stO2U39CZc/tBwF
+         wrQ3JXMLRn5bkwLm+NrkJAFxYMoymjdH9ZUEkAptz573UCPt4tJ6PNCMxZJj5pNp90AD
+         L+wWBiZvgbdqEqxW4BSP2cXjyHwK+6fGMQjjg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753488538; x=1754093338;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VXgRsetWSfhrMrH8bzd+Oe4t8eZxirO2xIstDR/r9Ws=;
-        b=mLV9IaOzP8dNmkhQhf3XCHu+XX5H2pAooSsxxReVZtYAzyr0aO2Ra4o5PSyPntTdqS
-         sfAdph1WB03z8pTtOLZ8MdOj09/9+mHKUMpXvDRnHdKUq2mUxbLjsj012jRh+hKxrcqc
-         PaQVIWuDeXgFDDMerQNdky81NI63AAnHmI7VQIe2OPBp1lwmVVzV8s02v/yVrcSq/ZiA
-         OfcPwDDk/iESuzzZL7tpvpKAdtb7KJtE0UpN98yF6bQgbrH+vgOcTISU9QOIlxymWimn
-         rYxoScu5CCYK5PyUnI/Uw/r5YWeQMWntWa51Pb3E877Kclt7vpDQYAU94aHVNPW6fkDJ
-         04vA==
-X-Gm-Message-State: AOJu0YzDhVcxkG5ID/wLiawJnW10Fvxaw7sJbwopr5IJbhxbiOzSAyxK
-	yBoMDYo7WrYrvD3b3FrDogdweDQXgWCM0VC2OzNXTCUvGmkPEssPnv514VcjsU/ejL8=
-X-Gm-Gg: ASbGncs/MF1tBxKOJVOeJGkg60Yniy3B7keZv06hHKTp14L17rYdOM1Cxa1JvJ3yBvH
-	u7hf9FDpAp24ZHb0Uq1xqgU6HvG0bxqM/19anYAXnUHt4vzoEDteNx6F99ghDxV0JjxEyR1/W7z
-	hINkW7LBA2EAfLSL6bjMO6oxIlJ4qoPPHPyU2zaetR/rx3qGFFMf8xnq41y8eya8gUTiU1xFVc9
-	xsWMHFGhzKKy7SNAyIXLc7zXNbLNuvT7/mIEEYrxKcY18lr4XKyIu99WTEA7dVdGmkGeC4NBoKN
-	2XBI4KN6scwFGPCV2OtBf1bavyEYCdGFpdM89d6U7MJ+7yEYzi4cO/PbxPfCec4O3cW/HeTyR7S
-	lZ+Xqm/x/nU/uHg==
-X-Google-Smtp-Source: AGHT+IF/Fp36neYhRMoKpnIsEOE8FrJYHcgfrBOZhXT3cGsJb/1Aun3OZ6opn+DsydefNhnYoehE9A==
-X-Received: by 2002:a17:903:94b:b0:234:c8f6:1b03 with SMTP id d9443c01a7336-23fb317a022mr57278435ad.47.1753488537987;
-        Fri, 25 Jul 2025 17:08:57 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:8201:fd20::a237])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23fbe57753bsm5504185ad.208.2025.07.25.17.08.56
+        d=1e100.net; s=20230601; t=1753519446; x=1754124246;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=W3kVd+jqwD24O+kOLXlrFJ/GhgJg0HCG9/a6APNy0qU=;
+        b=QdeQBeRnTQ1NNs9BmWwjfYL+imUMBtrdK1qk13CzcGWmGIfOd5t8nxw1SwNYAbVoxu
+         ojFe7zp+9/uXSDjYV14fxsLwifDKZ8kLjGtHWpzNcO2TsbHCsbdhtjWz9TYPbzzzngtc
+         31MfpyNwC2XC7geTHgIMA95nP9rIy2rTsbTGDuxzY/OjXgu/wwTgIpPOjyzEtad3V+o0
+         OISqljLP16UGdKrSvbVamPrQ6L8PY0iatz4xTcNzf4WL3v4n8QeMQ0p5GLN2ubKQM89a
+         YMTCJYYZSoTtyCIuRnUM9pOJuAHq6yl9kXJhh64YOv3yWJZ4THJs7euARHfTQ+Hs+YVB
+         supA==
+X-Gm-Message-State: AOJu0YylQxOCsDYGOVrTDteh5U2RsLTOgVsq3blqlluyGCZy0533aNB7
+	S2kjvHFCBeFReXInFEo7t8gbHDViR8NS15g6mojmKxoBZVx6rXMQ4B+ANQ+LErCMj6vL9WZuWKD
+	SVRckKGPG3+0x
+X-Gm-Gg: ASbGncu/HZHqGKwEnwHEnnk5VVH2/92QRQAKm2qCynau9y4Ijs6jPXHofHBxgDCRHkC
+	YsvEOZJZtjEqkg7i2LYTxWiMxrlAyCT/mD/oxHrqRXYT4uizvxWKnzQO1D3/Mevr5WgreYUIOpj
+	qfDvsWYp8AkSrvQA+9gcCqhkrQoxDHdV/6Z2MbE4amFzaAzUwTIJGSft6++hh2V9xWOPD0xPPEk
+	cz9cUH0h8yyzgMMoxNOZvLVSCPh8gWxgG45WCrqQHxaEVx/Ik2KkuYXKbqHopv4wjUrEmGKrKW6
+	SInCxIePyogSCWoKiq4y7TC2UJhEl7ajXnd6EF3R6YLLNXqqSVbdIdHwTBZ/jRkO6G70l13XFab
+	Rletx3JgUzt5wzHjgx01518oTsQjTHl15D97AvMwB0lqoubREAOshsmcboOtXLbXTuElVFOXelP
+	5v/YMeZUtPZL9p2QDkskv61pDMxtlfFeb7I/sgXzTZ
+X-Google-Smtp-Source: AGHT+IFrbm9NnBzFhi59gNuVTuqvImj00aKHYMnlUK9PVloC9sO+Gqx17KaJ5jSChc+FAp6xv/do4Q==
+X-Received: by 2002:a5d:5d84:0:b0:3a0:b940:d479 with SMTP id ffacd0b85a97d-3b776799dfamr5016039f8f.53.1753519446263;
+        Sat, 26 Jul 2025 01:44:06 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.home (2a01cb0591c4a400ed176bd93ed9ff0f.ipv6.abo.wanadoo.fr. [2a01:cb05:91c4:a400:ed17:6bd9:3ed9:ff0f])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3b778eba2f1sm2193960f8f.28.2025.07.26.01.44.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Jul 2025 17:08:57 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Sat, 26 Jul 2025 01:44:05 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] uim: Upgrade to 1.9.6
-Date: Fri, 25 Jul 2025 17:08:54 -0700
-Message-ID: <20250726000854.2481612-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250726000854.2481612-1-raj.khem@gmail.com>
-References: <20250726000854.2481612-1-raj.khem@gmail.com>
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-python][PATCH] python3-mypy*: add nativesdk variant
+Date: Sat, 26 Jul 2025 10:43:53 +0200
+Message-Id: <20250726084353.2046137-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 26 Jul 2025 00:08:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118737
+ <openembedded-devel@lists.openembedded.org>; Sat, 26 Jul 2025 08:44:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118738
 
-uim 1.9.6 (May 16, 2025)
-Improvements:
+From: Yoann Congal <yoann.congal@smile.fr>
 
-Changed the default value of --enable-default-toolkit to automatically detect the default toolkit
-GTK+ 3: Simplified implementation
-GTK+ 2: Added support again (after being dropped in 1.9.4)
+Since commit 9b0015577ce8 ("python3-charset-normalizer: Switch to
+PEP-517 build backends"), python3-charset-normalizer depends on
+python3-mypy and has a nativesdk variant. So, python3-mypy and its
+dependency python3-mypy-extensions also need the nativesdk variant.
 
-Fixes:
+Fixes these warnings from AB[0]:
+WARNING: Nothing RPROVIDES 'nativesdk-python3-mypy' (but virtual:nativesdk:[...]/meta-openembedded/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.2.bb RDEPENDS on or otherwise requires it)
+WARNING: Nothing RPROVIDES 'nativesdk-python3-charset-normalizer-dev' (but virtual:nativesdk:[...]/meta-openembedded/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.2.bb RDEPENDS on or otherwise requires it)
+WARNING: Nothing RPROVIDES 'nativesdk-python3-charset-normalizer' (but virtual:nativesdk:[...]/meta-openembedded/meta-python/recipes-devtools/python/python3-charset-normalizer_3.4.2.bb RDEPENDS on or otherwise requires it)
 
-sqlite3: Added missing libuim-scm.la dependency
+[0]: https://autobuilder.yoctoproject.org/valkyrie/#/builders/82/builds/377/steps/12/logs/warnings
 
-uim 1.9.5 (May 6, 2025)
-Fixes:
-
-GTK+ 3: Fixed a build problem
-
-uim 1.9.4 (May 6, 2025)
-Improvements:
-
-Suppressed incompatible-pointer-types warnings
-Updated bundled SigScheme to 0.9.3
-Dropped support for GTK+ 2 (later restored in 1.9.6)
-
-uim 1.9.3
-Improvements:
-
-Updated bundled SigScheme 0.9.2 that is C23 ready (to support GCC 15's default C23 mode)
-
-uim 1.9.2
-Improvements:
-
-Qt: Changed to use metadata.json from metadata.desktop because metadata.desktop is deprecated
-Qt: Specified cmake_minimum_required() explicitly for CMake 4
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../recipes-support/uim/{uim_1.9.0.bb => uim_1.9.6.bb}    | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-support/uim/{uim_1.9.0.bb => uim_1.9.6.bb} (96%)
+ .../recipes-devtools/python/python3-mypy-extensions_1.1.0.bb    | 2 +-
+ meta-python/recipes-devtools/python/python3-mypy_1.17.0.bb      | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/uim/uim_1.9.0.bb b/meta-oe/recipes-support/uim/uim_1.9.6.bb
-similarity index 96%
-rename from meta-oe/recipes-support/uim/uim_1.9.0.bb
-rename to meta-oe/recipes-support/uim/uim_1.9.6.bb
-index cb3aee3f0d..6e6ed522d8 100644
---- a/meta-oe/recipes-support/uim/uim_1.9.0.bb
-+++ b/meta-oe/recipes-support/uim/uim_1.9.6.bb
-@@ -8,12 +8,12 @@ SRC_URI = "https://github.com/uim/uim/releases/download/${PV}/uim-${PV}.tar.bz2"
- SRC_URI:append:class-target = "\
-     file://uim-module-manager.patch \
- "
--SRC_URI[sha256sum] = "271f0ed5f455e5bffa859f01b2d0f7fb966554ebd4822657afb67a0431dd85a8"
-+SRC_URI[sha256sum] = "67f0e5fa4292a533edc6f98b842df60c531a89cf82d0336a4e1ab72202ab8c83"
+diff --git a/meta-python/recipes-devtools/python/python3-mypy-extensions_1.1.0.bb b/meta-python/recipes-devtools/python/python3-mypy-extensions_1.1.0.bb
+index 9c8cb5533d..21cb517c21 100644
+--- a/meta-python/recipes-devtools/python/python3-mypy-extensions_1.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-mypy-extensions_1.1.0.bb
+@@ -10,4 +10,4 @@ inherit pypi python_setuptools_build_meta
  
- UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
- UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ SRC_URI[sha256sum] = "52e68efc3284861e772bbcd66823fde5ae21fd2fdb51c62a211403730b916558"
  
--DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool libedit"
-+DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool libedit autoconf-archive-native"
- DEPENDS:append:class-target = " intltool-native gtk+ gtk+3 uim-native"
+-BBCLASSEXTEND = "native"
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-mypy_1.17.0.bb b/meta-python/recipes-devtools/python/python3-mypy_1.17.0.bb
+index 0d1e0bd16e..94aaabde4e 100644
+--- a/meta-python/recipes-devtools/python/python3-mypy_1.17.0.bb
++++ b/meta-python/recipes-devtools/python/python3-mypy_1.17.0.bb
+@@ -7,7 +7,7 @@ inherit pypi python_setuptools_build_meta
  
- RDEPENDS:uim = "libuim0 libedit"
-@@ -31,8 +31,6 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ SRC_URI[sha256sum] = "e5d7ccc08ba089c06e2f5629c660388ef1fee708444f1dee0b9203fa031dee03"
  
- GTKIMMODULES_PACKAGES = "uim-gtk2.0 uim-gtk3"
+-BBCLASSEXTEND = "native"
++BBCLASSEXTEND = "native nativesdk"
  
--CFLAGS += "-std=gnu17"
--
- EXTRA_OECONF += "--disable-emacs \
-     --with-libedit=${STAGING_EXECPREFIXDIR} \
-     --without-scim \
-@@ -57,7 +55,7 @@ do_configure:prepend () {
- }
- 
- do_install:append() {
--    rm -rf ${D}/${datadir}/applications
-+    rm -rf ${D}${datadir}/applications
- }
- 
- PACKAGES =+ "uim-xim uim-utils uim-skk uim-gtk2.0 uim-gtk3 uim-fep uim-anthy uim-common libuim0 libuim-dev"
+ DEPENDS += " \
+     python3-mypy-extensions-native \
 
