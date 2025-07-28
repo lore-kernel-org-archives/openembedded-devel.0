@@ -1,117 +1,151 @@
-Return-Path: <kraghava@qti.qualcomm.com>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 565A7C83F17
-	for <webhook@archiver.kernel.org>; Mon, 28 Jul 2025 09:45:46 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.web11.77915.1753695939400314222
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2BC3C87FC9
+	for <webhook@archiver.kernel.org>; Mon, 28 Jul 2025 14:14:07 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.82175.1753712044464434405
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Jul 2025 02:45:39 -0700
+ Mon, 28 Jul 2025 07:14:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=fRpZNdEU;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qti.qualcomm.com, ip: 205.220.180.131, mailfrom: kraghava@qti.qualcomm.com)
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56S4rRqV010591
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 09:45:38 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=gS3wRWf9umOG5016ZgDAfh
-	HX9hGkxnIXgDjTfkEUjy0=; b=fRpZNdEUMxNMlCYRfstsj02wROeS9RugQalN/c
-	xnqlc4PlF7gera8hMQg16iqkpgVG1uPyK8wADRCg/lLYQPNJt2BDcUEUGDzu3kuM
-	5T0Dvc3+cJQQ1Y42wvSCm8iueCOkhBiAfXEPX8jMcTHoGmmyDnUXGSgclfwjGi0L
-	1McwbpIibdPS8x6NJQGgjwyv6JUKeRVhb0hmsaK1LJj01aG3bnyQa5wqekxEZB6q
-	y3mtegFAvaC7ESynyx6VX1HH5dvBcOMy1Py+sflRBqoaCSh9G7G82rw2geXb80I5
-	5tQV6y5gAQ/aup1ZiJWRgM9PabcZCsbjbAGOWMGPBwLT7zsg==
-Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 484q3xm1qq-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 09:45:38 +0000 (GMT)
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
-	by NALASPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 56S9jbR8017450
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 09:45:37 GMT
-Received: from hyd-e160-a01-2-02.qualcomm.com (10.80.80.8) by
- nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.10; Mon, 28 Jul 2025 02:45:35 -0700
-From: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=0304c0fd72=jiaying.song.cn@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 56SBKRFF2047474
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 14:14:03 GMT
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 484m7xhpd9-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 14:14:03 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.57; Mon, 28 Jul 2025 07:14:02 -0700
+Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.57 via Frontend Transport; Mon, 28 Jul 2025 07:14:01 -0700
+From: <jiaying.song.cn@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-CC: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
-Subject: [meta-oe][PATCH] opencv: install test and sample binaries under bin/opencv
-Date: Mon, 28 Jul 2025 15:15:18 +0530
-Message-ID: <20250728094518.1636494-1-kraghava@qti.qualcomm.com>
+Subject: [meta-oe][walnascar][PATCH] v4l-utils: Fix QA and build errors related to _TIME_BITS on 32-bit
+Date: Mon, 28 Jul 2025 22:14:01 +0800
+Message-ID: <20250728141401.3522091-1-jiaying.song.cn@windriver.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Authority-Analysis: v=2.4 cv=JovxrN4C c=1 sm=1 tr=0 ts=688746c2 cx=c_pps
- a=ouPCqIW2jiPt+lZRy3xVPw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=GEpy-HfZoHoA:10 a=Wb1JkmetP80A:10 a=EUspDBNiAAAA:8 a=s84kAb1i70EL4LgKGkgA:9
-X-Proofpoint-ORIG-GUID: MAeRfp6zjXetwEthyTzRNj3MaUNqQdoj
-X-Proofpoint-GUID: MAeRfp6zjXetwEthyTzRNj3MaUNqQdoj
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzI4MDA3MSBTYWx0ZWRfX1LnVajBehiQi
- EzHAdHB/hC5cdh3vLt1j6k9VFIG/zFGdhgkLSpRDt6LN/TVZ9sWEacfpZAJvm+uWm+LupKR3ema
- ROpj4C/z+Tg8hU65zHAdXm7wYeHd5I4/hWcuUpQzvVvy180RL3UkSCE/FfSf+SXd6SIvj7SNYPQ
- ioDmyPRLGUCAnXglitLfMrPUY28AWnteXUqY8El2bC2oJbE11Fph48JXgdvuGqquF+MbqkNJZKA
- tIsJ5RcaHSYCawoXx31SFq7NERkuNfDTSj3Z3JcdkExAcO1VRubYY3l0uoHEp0No0uQwutq3VnD
- 0KMUOJK+5fQduTnNzAmouGrZbJTZ3cfpfbtCsxCc9IvB/33gMjje98cXtJeBI5CWKMTUqBSwBv/
- OzSLBwDt5MrUa8aCeiw6bzFYkAZxVUGb3FQ77VCBVfsYwbDfFFFEbWV7ckVwnhTA1TYRDB9P
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzI4MDEwNCBTYWx0ZWRfX9KtVfUoln7WS
+ uYDbJxDdXX30TJZ97zDFbGVl3ZRZm4xIFQcRkSBUb8T6NwfaiuDFmoqzyXZ5SxiAZjx1p70tdXL
+ 3jP84v4ATIPH5zQ4Nk08+N3LsJaln5eQRPmTZtMoRm//V1l0Ktif1mgvtxssrlcFw3gE5vSRLpH
+ PpxoAlp7/etnEgRxj2E+JDgkxwiVxckordk/6geSvYZ41iGQt5aXnSJtqW4gykDvV+mbcfO04BJ
+ O9/YdOm+VvPB67RhCd846liD5/1wyl5JUZwIodMp2olfSZaax++/tS/puOnBTxMj8BS6/rqQZsj
+ +y2BdYp+dN3qsf6e1rSXRkJricwOnNl2fjChNDy2hK28Ihi1biPwCSYlN0Mc9lF16TMTColxRlt
+ o+PHTtEY
+X-Proofpoint-ORIG-GUID: 9qSfcQKT_NTJE_xrE89p6DvEoFt5OT4j
+X-Proofpoint-GUID: 9qSfcQKT_NTJE_xrE89p6DvEoFt5OT4j
+X-Authority-Analysis: v=2.4 cv=Y9v4sgeN c=1 sm=1 tr=0 ts=688785ab cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=Wb1JkmetP80A:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=xOd6jRPJAAAA:8
+ a=xq3W2uTSAAAA:8 a=A_nkakYrDCRTRnRcKUQA:9 a=FdTzh2GWekK77mhwV6Dw:22
+ a=P5L7wpMTXyg1GfFA3Gwx:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-28_03,2025-07-24_01,2025-03-28_01
+ definitions=2025-07-28_03,2025-07-28_01,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1011 priorityscore=1501 bulkscore=0 impostorscore=0
- lowpriorityscore=0 phishscore=0 suspectscore=0 spamscore=0 mlxlogscore=588
- mlxscore=0 adultscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2507280071
+ priorityscore=1501 suspectscore=0 adultscore=0 impostorscore=0 bulkscore=0
+ phishscore=0 clxscore=1015 malwarescore=0 spamscore=0 classifier=typeunknown
+ authscore=0 authtc= authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2507210000 definitions=main-2507250208
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 09:45:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118745
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 14:14:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118746
 
-The test and sample binaries were not getting installed.
-Install them under "<prefix>/bin/opencv". Installing
-binaries under "<prefix>/bin/opencv" avoids conflict with
-/usr/bin/shape file contributed to rootfs by mesa-demos
-package.
+From: Jiaying Song <jiaying.song.cn@windriver.com>
 
-Signed-off-by: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
+* Remove GLIBC_64BIT_TIME_FLAGS="" to enable _TIME_BITS=64 by default,
+  which avoids the following QA issue during builds on 32-bit systems:
+
+  WARNING: lib32-v4l-utils-1.24.1+git-r0 do_package_qa: QA Issue: /usr/bin/cec-compliance uses 32-bit api 'time'
+
+* Undefine _TIME_BITS to fix the build error:
+
+  /usr/include/features-time64.h:26:5: error: #error "_TIME_BITS=64 is allowed only with _FILE_OFFSET_BITS=64"
+
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
 ---
- meta-oe/recipes-support/opencv/opencv_4.12.0.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ ...on.build-fix-arm-_TIME_BITS-64-error.patch | 38 +++++++++++++++++++
+ .../v4l2apps/v4l-utils_1.28.1.bb              |  5 +--
+ 2 files changed, 39 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-meson.build-fix-arm-_TIME_BITS-64-error.patch
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
-index d8295912fa..4118e96fc5 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
-@@ -75,6 +75,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${S}/contrib/modules \
-     -DOPENCV_GENERATE_PKGCONFIG=ON \
-     -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
-     -DOPENCV_ALLOW_DOWNLOADS=OFF \
-+    -DOPENCV_BIN_INSTALL_PATH=bin/opencv \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3", "", d)} \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41", "", d)} \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41,SSE42", "", d)} \
-@@ -113,9 +114,9 @@ PACKAGECONFIG[openvino] = "-DWITH_OPENVINO=ON,-DWITH_OPENVINO=OFF,openvino-infer
- PACKAGECONFIG[oracle-java] = "-DJAVA_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_INCLUDE_PATH2=${ORACLE_JAVA_HOME}/include/linux -DJAVA_AWT_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_AWT_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/libjawt.so -DJAVA_JVM_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/server/libjvm.so,,ant-native oracle-jse-jdk oracle-jse-jdk-native,"
- PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
- PACKAGECONFIG[python3] = "-DPYTHON3_INCLUDE_PATH=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} -DPYTHON3_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/_core/include,,python3-numpy,"
--PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
-+PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_BIN_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
- PACKAGECONFIG[tbb] = "-DWITH_TBB=ON,-DWITH_TBB=OFF,tbb,"
--PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON,-DBUILD_TESTS=OFF,,"
-+PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON -DINSTALL_TESTS=ON,-DBUILD_TESTS=OFF,,"
- PACKAGECONFIG[text] = "-DBUILD_opencv_text=ON,-DBUILD_opencv_text=OFF,tesseract,"
- PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
- PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-meson.build-fix-arm-_TIME_BITS-64-error.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-meson.build-fix-arm-_TIME_BITS-64-error.patch
+new file mode 100644
+index 0000000000..f41dde0e16
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-meson.build-fix-arm-_TIME_BITS-64-error.patch
+@@ -0,0 +1,38 @@
++From 5aabd01e415374fc97eebe80d4635c3bae728f81 Mon Sep 17 00:00:00 2001
++From: Hans Verkuil <hverkuil@xs4all.nl>
++Date: Sat, 12 Apr 2025 12:30:13 +0200
++Subject: [PATCH] meson.build: fix arm _TIME_BITS=64 error
++
++Undefine _TIME_BITS to avoid this error on 32-bit arm:
++
++/usr/include/features-time64.h:26:5: error: #error "_TIME_BITS=64 is allowed only with _FILE_OFFSET_BITS=64"
++
++Upstream-Status: Backport [https://github.com/gjasny/v4l-utils/commit/d517cfdcdc16533ab7e06e97c07ca089cf261aef]
++
++Signed-off-by: Hans Verkuil <hverkuil@xs4all.nl>
++Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
++---
++ meson.build | 6 +++++-
++ 1 file changed, 5 insertions(+), 1 deletion(-)
++
++diff --git a/meson.build b/meson.build
++index 269a9da7..31927cda 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -53,8 +53,12 @@ v4l2_wrapper_args = [
++     # As the library needs to provide both 32-bit and 64-bit versions
++     # of file operations, disable transparent large file support (fixes
++     # 'Error: symbol `open64/mmap64' is already defined' compile failure
++-    # otherwise)
+++    # otherwise).
+++    #
+++    # Also disable _TIME_BITS=64 since this is allowed only with
+++    # _FILE_OFFSET_BITS=64, which is now 32.
++     '-U_FILE_OFFSET_BITS',
+++    '-U_TIME_BITS',
++     '-D_FILE_OFFSET_BITS=32',
++     '-D_LARGEFILE64_SOURCE',
++ ]
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb
+index afe217e1f3..5d21df04af 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb
+@@ -13,10 +13,6 @@ DEPENDS = "jpeg \
+ DEPENDS:append:libc-musl = " argp-standalone"
+ DEPENDS:append:class-target = " udev"
+ LDFLAGS:append = " -pthread"
+-# v4l2 explicitly sets _FILE_OFFSET_BITS=32 to get access to
+-# both 32 and 64 bit file APIs.  But it does not handle the time side?
+-# Needs further investigation
+-GLIBC_64BIT_TIME_FLAGS = ""
+ 
+ inherit meson gettext pkgconfig
+ 
+@@ -29,6 +25,7 @@ SRC_URI = "\
+     git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=stable-1.28 \
+     file://0001-media-ctl-Install-media-ctl-header-and-library-files.patch \
+     file://0002-media-ctl-Install-media-ctl-pkg-config-files.patch \
++    file://0003-meson.build-fix-arm-_TIME_BITS-64-error.patch \
+ "
+ 
+ SRCREV = "fc15e229d9d337e46d730f00647821adbbd58548"
 -- 
 2.34.1
 
