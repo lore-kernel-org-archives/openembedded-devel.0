@@ -2,188 +2,144 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCAFFC83F17
-	for <webhook@archiver.kernel.org>; Mon, 28 Jul 2025 17:57:58 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
- by mx.groups.io with SMTP id smtpd.web10.87874.1753725471734266863
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EDB3C83F17
+	for <webhook@archiver.kernel.org>; Mon, 28 Jul 2025 21:37:50 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web11.93477.1753738660102382398
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 28 Jul 2025 10:57:51 -0700
+ Mon, 28 Jul 2025 14:37:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bRqbMzhh;
- spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-71a34087749so2297957b3.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 10:57:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=C+Xsvkpt;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-7490acf57b9so3285348b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 14:37:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753725471; x=1754330271; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uQQoBiuGTO0EzEsp/i8uECf5Jdzd+VP5yzFhGcF2j5Y=;
-        b=bRqbMzhho/OH2L1LJQ0t5sDjOmzf7cktpIr2FZx8EJH1+M+zeuyFFzzcMeZ56t00EG
-         7J9RtFvWF3jjcVBLQ6BD/cI3jeIsmW4KjPEMPi2IFCtkKMILbO3ptSsA/YmSAHO8NikO
-         S48OlIAb5AfJUDxQrFJzpOc5R2SK0Yw/cU2oIVh2+NXYhuliDkfJDx2OCFgkRfKleRZj
-         zR/J7ciopI2c3xJCxhSxDAvispX5l5ad7sPleKk8kkcu/rN7ffoL9MFxNFaoZF3IiUtG
-         CAULSkFwJ9RS2FREuWuLUUGsLy/tjC6+0MK96uNjIhJcrNwfSSKLzYp/upErLjF9vL4f
-         zLGQ==
+        d=gmail.com; s=20230601; t=1753738659; x=1754343459; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=CoMsQS2FZ28dJDcAduhxZiToHpM9+vP/Ghty9G6x1A4=;
+        b=C+Xsvkpti7/fSFXviYAqPT2tnVOYMhO2lPFWbOE8vLESQ+bFue+R56YCYxVnvArUrm
+         WmW/v1zYOnSsXmi2flGFqfeamlTibpy/a0mtga3N90F4rM2za79H29qRd3rLT/ZJxWbt
+         dG/2mW6amUk59nZvSuhb4/MzdwCbBN9zzhDgGvDDBizAxh62YTP20Q0U8DobsuZodTpf
+         kwxmlrniDRXEJmf1EibtpyQQMP289GqL3jjMnPMAPNfYtvF+hyGssBVl/Z7/wwQeAmpe
+         UPCLZHEzHesMGk+DAW0/k/ONCm+lwKRa7nG7FJ1nZGrqE+GV7KA2gCt3UJ2uniJLwUvM
+         ONdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753725471; x=1754330271;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uQQoBiuGTO0EzEsp/i8uECf5Jdzd+VP5yzFhGcF2j5Y=;
-        b=Je1ZRhzzsuiu6NkvCGbsP0xEWpZ8j0VPPYb5gnGD5rky5ovx8p/tLWA+MHOgi/SQRP
-         P3HthVD022aZVlivpUSWbPK6SA5HLZ7qXvUemlY4TyljrUEXPyYtIWJWFqkS5b5NYerC
-         t5a8i15Q4TdUI/RLJcO/57yuvDZekz3KE+0SzYsNiL7ww0OZWlsrqalbjyBXh1Qi4nzC
-         4K5sk7jM2pCC3Rlp/J52ycF0TQaH9V3bXzdZMxrABXPJhGTYKddX0Ty+ASuNnxFlxEcB
-         7SHzIqb3X7kFngIzSfcFZoJfJqg7n5/O0KeVu4j/VpP5pjZrMQpN61jEUdugsIPwXhT7
-         RKIw==
-X-Gm-Message-State: AOJu0Yzj4dd0rhy16ujkKnOHcs94K8PmlwZ7UGw9n7ZGJDIcDimZvWtX
-	pneRIq7QJ4gcrAkUEIM0M/omhNmFi+Yd1UplUNSS63qB7V/tBa7JyvHgQIGoXBJKcG5wG6KHBb8
-	1ycBt9aQkHZTXlLDlxi0Q4/sQzSvOby+jT3b65zI=
-X-Gm-Gg: ASbGncuKAfXvqjUzfqBTCmFtEPr4lZxW4SPHmwnfAUj7f9hdNs8V9dqfevqDTVwxSIJ
-	/p0YtQ5n1YvKLTEfntLhoWXKuuqcm/5rihgudHbd62FZoR1Lp1ahEIoNKjWsoJP6bWYkPVtTR58
-	rDIVsbZ4nlSJj3uyVPYTqxAY4NeQPSQm0gpurc9VFyOwcDZSu9QBe1CCN5IUFDsTrVuz2wGHtby
-	Cp7Ds/F6HOODC2dzUAg24ZqgAqBqYU1NUg=
-X-Google-Smtp-Source: AGHT+IG5gA7MBbKKg12dvPLfzo7fDAOKumtfrMEo7MZs5DNN35mKG15npbi4b04YSZaOBQWGHgWPDpCtJ81yVeJ6tcs=
-X-Received: by 2002:a05:690c:61c6:b0:70a:2675:70b3 with SMTP id
- 00721157ae682-719e32ea2dcmr173625357b3.17.1753725470563; Mon, 28 Jul 2025
- 10:57:50 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250728141401.3522091-1-jiaying.song.cn@windriver.com>
-In-Reply-To: <20250728141401.3522091-1-jiaying.song.cn@windriver.com>
+        d=1e100.net; s=20230601; t=1753738659; x=1754343459;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=CoMsQS2FZ28dJDcAduhxZiToHpM9+vP/Ghty9G6x1A4=;
+        b=kHApJ+Hycv27q4AvSo+l1k4UYFQo2max+n5lhcM+e9apXgDDhJ8RRS2cL/Zhs85HR+
+         tvC8SHIGv/g958ps+cxbJBPBSAY9bDWCzKblf9dfh2xdnD5KC7ClzLQRIfwp39nJYETh
+         zo0sgyCJVa8iP6B55dBBv3oO+DiRiSaRtTz8EFp0PjWMXl/LS7XwAxYkYGhz5JjJ9Yee
+         ktAbtNWd/JZYt50bDi7vyqC7l+b2cLVLV9vopFxZYaG+ELRometqoFUys8rXRujZ/EO+
+         Uc2IcFVTcTh5QWMDdvqKqo6L7Lxqry3Yrqz0FOZJGIraXGe6pQc11m5tHVIpj145VTy8
+         KD/w==
+X-Gm-Message-State: AOJu0YxmGDjP1XUkLPrg0aEBP6H+yr7YT56D6ow6xQWN1G1wvGURkfHa
+	OcoC9Y4YOJ37u6olH9AmRnmk2WwhZ11pwma6wVHu6Vi6hl+l0HUgRWpwe76jFk2lGOM=
+X-Gm-Gg: ASbGnct42EJreJr3aLofI9/9M8VLsg3URWLj/VWXPpVQjDcBbYqjYqqGSE568hBIdWa
+	WXRtdpcoe9esSY21krcylcqjyAAbW5tJNiCnclgxyHh/E/bS2zHg74nSpGS7GNtVjtsg3TFzkm9
+	9XiaH9Vu5w/bRmRs9MiXgo9V3ukgEHARcQVemif8XRuAa3TGHjvbn58TupR1n2Z1ST/aqBN4tJX
+	myFXjk33S05O/bVIcIuSTnvLfgmcnfS/VvA+DzSC1aQ7z+BIFzqVkcB1UFiVp1CZwGobPGRh2Tf
+	omnlaWwxLoEMVi2RSsKRg4QjA2jPeP3VKUdJuh1Yko9b+LxvcLtydgce4Ks4VD44YQntpR/yLeD
+	h+v1YTZM2nl6NJA==
+X-Google-Smtp-Source: AGHT+IFETf5G7vB3ODWQgi1yljFsSUKmgDEAZx2/eMBFTIaxa2EFbDUf8pyBmGABBRCocZi3X9rKZg==
+X-Received: by 2002:a05:6a00:3a23:b0:742:a111:ee6f with SMTP id d2e1a72fcca58-76335b749f7mr16641325b3a.10.1753738659062;
+        Mon, 28 Jul 2025 14:37:39 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::33e9])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7640b4d15cfsm6292006b3a.119.2025.07.28.14.37.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Jul 2025 14:37:38 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Jul 2025 10:57:24 -0700
-X-Gm-Features: Ac12FXz3m6-inXs_EFoqqnyi2W4W9XjHMhKq5x0SgZrsUO_b3DhSzX5-XNJMFgw
-Message-ID: <CAMKF1spqPgqXzsdJfJRQq7sWBsatkVHpdaUWEJsabN9rySF06A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][walnascar][PATCH] v4l-utils: Fix QA and build
- errors related to _TIME_BITS on 32-bit
-To: Jiaying.Song.CN@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] leveldb: Fix cast warnings seen with clang-21
+Date: Mon, 28 Jul 2025 14:37:32 -0700
+Message-ID: <20250728213732.3992327-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.50.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 17:57:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118750
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 21:37:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118751
 
-This is needed on the master branch as well. I have picked it for master-ne=
-xt
+backport needed patch for googletest
 
-On Mon, Jul 28, 2025 at 7:14=E2=80=AFAM Song, Jiaying (CN) via
-lists.openembedded.org
-<Jiaying.Song.CN=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Jiaying Song <jiaying.song.cn@windriver.com>
->
-> * Remove GLIBC_64BIT_TIME_FLAGS=3D"" to enable _TIME_BITS=3D64 by default=
-,
->   which avoids the following QA issue during builds on 32-bit systems:
->
->   WARNING: lib32-v4l-utils-1.24.1+git-r0 do_package_qa: QA Issue: /usr/bi=
-n/cec-compliance uses 32-bit api 'time'
->
-> * Undefine _TIME_BITS to fix the build error:
->
->   /usr/include/features-time64.h:26:5: error: #error "_TIME_BITS=3D64 is =
-allowed only with _FILE_OFFSET_BITS=3D64"
->
-> Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
-> ---
->  ...on.build-fix-arm-_TIME_BITS-64-error.patch | 38 +++++++++++++++++++
->  .../v4l2apps/v4l-utils_1.28.1.bb              |  5 +--
->  2 files changed, 39 insertions(+), 4 deletions(-)
->  create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-me=
-son.build-fix-arm-_TIME_BITS-64-error.patch
->
-> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-meson.bui=
-ld-fix-arm-_TIME_BITS-64-error.patch b/meta-oe/recipes-multimedia/v4l2apps/=
-v4l-utils/0003-meson.build-fix-arm-_TIME_BITS-64-error.patch
-> new file mode 100644
-> index 0000000000..f41dde0e16
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-meson.build-fix-=
-arm-_TIME_BITS-64-error.patch
-> @@ -0,0 +1,38 @@
-> +From 5aabd01e415374fc97eebe80d4635c3bae728f81 Mon Sep 17 00:00:00 2001
-> +From: Hans Verkuil <hverkuil@xs4all.nl>
-> +Date: Sat, 12 Apr 2025 12:30:13 +0200
-> +Subject: [PATCH] meson.build: fix arm _TIME_BITS=3D64 error
-> +
-> +Undefine _TIME_BITS to avoid this error on 32-bit arm:
-> +
-> +/usr/include/features-time64.h:26:5: error: #error "_TIME_BITS=3D64 is a=
-llowed only with _FILE_OFFSET_BITS=3D64"
-> +
-> +Upstream-Status: Backport [https://github.com/gjasny/v4l-utils/commit/d5=
-17cfdcdc16533ab7e06e97c07ca089cf261aef]
-> +
-> +Signed-off-by: Hans Verkuil <hverkuil@xs4all.nl>
-> +Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
-> +---
-> + meson.build | 6 +++++-
-> + 1 file changed, 5 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/meson.build b/meson.build
-> +index 269a9da7..31927cda 100644
-> +--- a/meson.build
-> ++++ b/meson.build
-> +@@ -53,8 +53,12 @@ v4l2_wrapper_args =3D [
-> +     # As the library needs to provide both 32-bit and 64-bit versions
-> +     # of file operations, disable transparent large file support (fixes
-> +     # 'Error: symbol `open64/mmap64' is already defined' compile failur=
-e
-> +-    # otherwise)
-> ++    # otherwise).
-> ++    #
-> ++    # Also disable _TIME_BITS=3D64 since this is allowed only with
-> ++    # _FILE_OFFSET_BITS=3D64, which is now 32.
-> +     '-U_FILE_OFFSET_BITS',
-> ++    '-U_TIME_BITS',
-> +     '-D_FILE_OFFSET_BITS=3D32',
-> +     '-D_LARGEFILE64_SOURCE',
-> + ]
-> +--
-> +2.34.1
-> +
-> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb b/me=
-ta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb
-> index afe217e1f3..5d21df04af 100644
-> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb
-> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb
-> @@ -13,10 +13,6 @@ DEPENDS =3D "jpeg \
->  DEPENDS:append:libc-musl =3D " argp-standalone"
->  DEPENDS:append:class-target =3D " udev"
->  LDFLAGS:append =3D " -pthread"
-> -# v4l2 explicitly sets _FILE_OFFSET_BITS=3D32 to get access to
-> -# both 32 and 64 bit file APIs.  But it does not handle the time side?
-> -# Needs further investigation
-> -GLIBC_64BIT_TIME_FLAGS =3D ""
->
->  inherit meson gettext pkgconfig
->
-> @@ -29,6 +25,7 @@ SRC_URI =3D "\
->      git://git.linuxtv.org/v4l-utils.git;protocol=3Dhttps;branch=3Dstable=
--1.28 \
->      file://0001-media-ctl-Install-media-ctl-header-and-library-files.pat=
-ch \
->      file://0002-media-ctl-Install-media-ctl-pkg-config-files.patch \
-> +    file://0003-meson.build-fix-arm-_TIME_BITS-64-error.patch \
->  "
->
->  SRCREV =3D "fc15e229d9d337e46d730f00647821adbbd58548"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118746): https://lists.openembedded.org/g/openembedde=
-d-devel/message/118746
-> Mute This Topic: https://lists.openembedded.org/mt/114413900/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...instead-of-ImplicitCast_-for-charact.patch | 49 +++++++++++++++++++
+ meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb   |  1 +
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/leveldb/leveldb/0001-Use-static_cast-instead-of-ImplicitCast_-for-charact.patch
+
+diff --git a/meta-oe/recipes-dbs/leveldb/leveldb/0001-Use-static_cast-instead-of-ImplicitCast_-for-charact.patch b/meta-oe/recipes-dbs/leveldb/leveldb/0001-Use-static_cast-instead-of-ImplicitCast_-for-charact.patch
+new file mode 100644
+index 0000000000..7a06630918
+--- /dev/null
++++ b/meta-oe/recipes-dbs/leveldb/leveldb/0001-Use-static_cast-instead-of-ImplicitCast_-for-charact.patch
+@@ -0,0 +1,49 @@
++From fa8438ae6b70c57010177de47a9f13d7041a6328 Mon Sep 17 00:00:00 2001
++From: Abseil Team <absl-team@google.com>
++Date: Mon, 19 May 2025 09:01:54 -0700
++Subject: [PATCH] Use static_cast instead of ImplicitCast_ for character
++ conversions
++
++Clang has recently added "warnings when mixing different charN_t types" [1].
++The rationale is that "charN_t represent code units of different UTF encodings.
++Therefore the values of 2 different charN_t objects do not represent the same
++characters."
++
++Note that the warning here may be legitimate - from https://github.com/google/googletest/issues/4762:
++"[...] This is incorrect for values that do not represent valid codepoints."
++
++For the time being, silence the warning by being more explicit about the
++conversion being intentional by using static_cast.
++
++Link: https://github.com/llvm/llvm-project/pull/138708 [1]
++PiperOrigin-RevId: 760644157
++Change-Id: I2e6cc1871975455cecac8731b2f93fd5beeaf0e1
++
++Upstream-Status: Backport [https://github.com/google/googletest/commit/fa8438ae6b70c57010177de47a9f13d7041a6328]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ third_party/googletest/googletest/include/gtest/gtest-printers.h | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
++
++Index: leveldb-1.23/third_party/googletest/googletest/include/gtest/gtest-printers.h
++===================================================================
++--- leveldb-1.23.orig/third_party/googletest/googletest/include/gtest/gtest-printers.h
+++++ leveldb-1.23/third_party/googletest/googletest/include/gtest/gtest-printers.h
++@@ -471,11 +471,15 @@ GTEST_API_ void PrintTo(wchar_t wc, ::st
++ 
++ GTEST_API_ void PrintTo(char32_t c, ::std::ostream* os);
++ inline void PrintTo(char16_t c, ::std::ostream* os) {
++-  PrintTo(ImplicitCast_<char32_t>(c), os);
+++ // TODO(b/418738869): Incorrect for values not representing valid codepoints.
+++ // Also see https://github.com/google/googletest/issues/4762.
+++ PrintTo(static_cast<char32_t>(c), os);
++ }
++ #ifdef __cpp_char8_t
++ inline void PrintTo(char8_t c, ::std::ostream* os) {
++-  PrintTo(ImplicitCast_<char32_t>(c), os);
+++  // TODO(b/418738869): Incorrect for values not representing valid codepoints.
+++  // Also see https://github.com/google/googletest/issues/4762.
+++  PrintTo(static_cast<char32_t>(c), os);
++ }
++ #endif
++ 
+diff --git a/meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb b/meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb
+index 1ccf115793..90e0785e54 100644
+--- a/meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb
++++ b/meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=92d1b128950b11ba8495b64938fc164d"
+ SRC_URI = "gitsm://github.com/google/${BPN}.git;branch=main;protocol=https \
+     file://0001-CMakeLists.txt-fix-googletest-related-options.patch \
+     file://0001-Fix-printing-64-bit-integer-types.patch \
++    file://0001-Use-static_cast-instead-of-ImplicitCast_-for-charact.patch \
+     file://run-ptest \
+ "
+ 
 
