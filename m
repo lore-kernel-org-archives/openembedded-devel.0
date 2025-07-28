@@ -1,179 +1,118 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <kraghava@qti.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1D3BC87FCE
-	for <webhook@archiver.kernel.org>; Sun, 27 Jul 2025 19:14:21 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web11.66011.1753643653696193467
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 565A7C83F17
+	for <webhook@archiver.kernel.org>; Mon, 28 Jul 2025 09:45:46 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.web11.77915.1753695939400314222
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 27 Jul 2025 12:14:13 -0700
+ Mon, 28 Jul 2025 02:45:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=a8/eBEue;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-7184015180fso38389337b3.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 27 Jul 2025 12:14:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1753643653; x=1754248453; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=EUNM5zLmLSsSCni18e13EyO+1+cMap9QB2uv8eaOxwU=;
-        b=a8/eBEueP0al0H3usUajMGHDGLtmzvDOg/DHLL8ujk6MFBRU/kyI3bB+zX5ZMLbQ61
-         P7FUyMaeStUpXbKNYSiGlFLw+5PfV/NpqXQqsp3NshWdHPdOWFOJJlBpfK8PGhNAkDaf
-         GsKuTF8xptJpZvgCoDiQjzL+7np5U0UDZKqzzUt0gZoVdEcGBSlPfiH3gct7ILoaiFRH
-         23mQo7XXsolPIZTDzjr1Mq2xKPtAqACGOo1tXgQ+6/0c9i0fFrZi7bZmy0sQOu8uvJWP
-         G+ehW30u0+5o2wwtsKJ4drvgVEh8hhH1IefnvcUZTVQN+v5gP6/LpfsPQFriqe3N52PO
-         Gx7g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753643653; x=1754248453;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=EUNM5zLmLSsSCni18e13EyO+1+cMap9QB2uv8eaOxwU=;
-        b=M9EtDNFdKILdtlRIUhqCrpAFgdHkQ7/rI8xvyBXKQgsBOsR5BWTiGiii//2TwAitDP
-         7HVaJ5T4siOR26vie9DsGmvibFti6R8Ylt4ZWuoSJp9SqbZ6Yd1Ngk03icsC730IqxCL
-         g1NRXHHGI7hETCiZjbVR7CGvMXzSEIbHaIh56b+owVertwjAKQ9+mfr1uwJd3BOPjHx4
-         950X8jumsgHyM/HgPycaMgA2WdTxOWTKMFF5pa2GHBdlAEOy/P7ADz5Lw0zalz69nE9k
-         TnjNx7v6jJL0wZcH2Ex/b3IlE5LOitjHW/PG1ngGpMHEjxArdZg9Czuyi5o87fvYaJNn
-         TXMg==
-X-Gm-Message-State: AOJu0YxWz1+2iJJcSQVV6TW0RUCOKbheZGmvoxDLpaNnPov//W9vntas
-	mfbDVbDWHu63dur0BZdT9BcmXqr63+AS3e0V6PPPv2sGrtj3Zb9VZNmJRjiHEHG+yvTZO/IpRHv
-	7SlnxBbvfawXFWB39dWYlt0ENCzl80fX/6Uy1Dsw=
-X-Gm-Gg: ASbGncs7U6jmFq3HAj/yWGsfz28Xr6PY4rfGUj0YSZBUwRovMiEfBeQrOJRhYu57ncp
-	V85Z9q5WrzJJ2+BOAfTX+RQpDfaN03ZKa8d/GvK58o8HzSXbqFwQ9h/JJU4whxFsdAY0WgEFMTd
-	hIg9ni83m88x3MZIVokyUHSgXpEGdIKPbNNDtYM4Q0IXzO5VlpFbpNtWkVO10ozC2PaWn9GWjRg
-	rRw7xOktnBmWm5fObMbLJkRWPc1HFgEIil6EFm6
-X-Google-Smtp-Source: AGHT+IH8O/QRJO0nf4wziTLB+k+p2GVKwXTTX1PvdhKf+jDoIHB/VM/tE6nKbvTcc6m/tV8T+9g1l8jSuTDhvCBS/7k=
-X-Received: by 2002:a05:690c:640e:b0:718:4511:e14e with SMTP id
- 00721157ae682-719e32c00f0mr110331107b3.12.1753643652590; Sun, 27 Jul 2025
- 12:14:12 -0700 (PDT)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=fRpZNdEU;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qti.qualcomm.com, ip: 205.220.180.131, mailfrom: kraghava@qti.qualcomm.com)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56S4rRqV010591
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 09:45:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=gS3wRWf9umOG5016ZgDAfh
+	HX9hGkxnIXgDjTfkEUjy0=; b=fRpZNdEUMxNMlCYRfstsj02wROeS9RugQalN/c
+	xnqlc4PlF7gera8hMQg16iqkpgVG1uPyK8wADRCg/lLYQPNJt2BDcUEUGDzu3kuM
+	5T0Dvc3+cJQQ1Y42wvSCm8iueCOkhBiAfXEPX8jMcTHoGmmyDnUXGSgclfwjGi0L
+	1McwbpIibdPS8x6NJQGgjwyv6JUKeRVhb0hmsaK1LJj01aG3bnyQa5wqekxEZB6q
+	y3mtegFAvaC7ESynyx6VX1HH5dvBcOMy1Py+sflRBqoaCSh9G7G82rw2geXb80I5
+	5tQV6y5gAQ/aup1ZiJWRgM9PabcZCsbjbAGOWMGPBwLT7zsg==
+Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 484q3xm1qq-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 09:45:38 +0000 (GMT)
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
+	by NALASPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 56S9jbR8017450
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 09:45:37 GMT
+Received: from hyd-e160-a01-2-02.qualcomm.com (10.80.80.8) by
+ nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.10; Mon, 28 Jul 2025 02:45:35 -0700
+From: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
+Subject: [meta-oe][PATCH] opencv: install test and sample binaries under bin/opencv
+Date: Mon, 28 Jul 2025 15:15:18 +0530
+Message-ID: <20250728094518.1636494-1-kraghava@qti.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <4341066e-e2d3-4636-b0e2-76cb44047e18@gmail.com>
-In-Reply-To: <4341066e-e2d3-4636-b0e2-76cb44047e18@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 27 Jul 2025 12:13:45 -0700
-X-Gm-Features: Ac12FXw5zWVGABy2-5fi02PqswCWgvmqFuGjXSUDODuolLkn65Gsi7XgGvIcJPQ
-Message-ID: <CAMKF1spo-_UAz7pouuRYORc1mwkwvNW1LoJEg3z4Dr0EYBUmfw@mail.gmail.com>
-Subject: Re: walnscar merge request: July 27th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Authority-Analysis: v=2.4 cv=JovxrN4C c=1 sm=1 tr=0 ts=688746c2 cx=c_pps
+ a=ouPCqIW2jiPt+lZRy3xVPw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=GEpy-HfZoHoA:10 a=Wb1JkmetP80A:10 a=EUspDBNiAAAA:8 a=s84kAb1i70EL4LgKGkgA:9
+X-Proofpoint-ORIG-GUID: MAeRfp6zjXetwEthyTzRNj3MaUNqQdoj
+X-Proofpoint-GUID: MAeRfp6zjXetwEthyTzRNj3MaUNqQdoj
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzI4MDA3MSBTYWx0ZWRfX1LnVajBehiQi
+ EzHAdHB/hC5cdh3vLt1j6k9VFIG/zFGdhgkLSpRDt6LN/TVZ9sWEacfpZAJvm+uWm+LupKR3ema
+ ROpj4C/z+Tg8hU65zHAdXm7wYeHd5I4/hWcuUpQzvVvy180RL3UkSCE/FfSf+SXd6SIvj7SNYPQ
+ ioDmyPRLGUCAnXglitLfMrPUY28AWnteXUqY8El2bC2oJbE11Fph48JXgdvuGqquF+MbqkNJZKA
+ tIsJ5RcaHSYCawoXx31SFq7NERkuNfDTSj3Z3JcdkExAcO1VRubYY3l0uoHEp0No0uQwutq3VnD
+ 0KMUOJK+5fQduTnNzAmouGrZbJTZ3cfpfbtCsxCc9IvB/33gMjje98cXtJeBI5CWKMTUqBSwBv/
+ OzSLBwDt5MrUa8aCeiw6bzFYkAZxVUGb3FQ77VCBVfsYwbDfFFFEbWV7ckVwnhTA1TYRDB9P
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-07-28_03,2025-07-24_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 clxscore=1011 priorityscore=1501 bulkscore=0 impostorscore=0
+ lowpriorityscore=0 phishscore=0 suspectscore=0 spamscore=0 mlxlogscore=588
+ mlxscore=0 adultscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
+ definitions=main-2507280071
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 27 Jul 2025 19:14:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118744
+ <openembedded-devel@lists.openembedded.org>; Mon, 28 Jul 2025 09:45:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118745
 
-merged now, thanks.
+The test and sample binaries were not getting installed.
+Install them under "<prefix>/bin/opencv". Installing
+binaries under "<prefix>/bin/opencv" avoids conflict with
+/usr/bin/shape file contributed to rootfs by mesa-demos
+package.
 
-On Sun, Jul 27, 2025 at 11:40=E2=80=AFAM akuster808 <akuster808@gmail.com> =
-wrote:
->
-> The following changes since commit c009244a045923a9dfc32d7f2996cb61629870=
-f6:
->
->    udisks2: Hardening measure of CVE-2025-6019 (2025-07-06 19:23:22 -0400=
-)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded walnascar-next
->
-> for you to fetch changes up to dca497d728792e3cb655c78455c2d649af312ce8:
->
->    ][PATCH] ufs-utils: fix crash for ufs-utils list_bsg (2025-07-27
-> 14:35:10 -0400)
->
-> ----------------------------------------------------------------
-> Jiaying Song (1):
->        python3-aiohttp: fix CVE-2025-53643
->
-> Martin Jansa (1):
->        xmlsec1: fix build with gnutls or openssl PACKAGECONFIG not enable=
-d
->
-> Peter Marko (4):
->        libcoap: patch CVE-2024-31031
->        spdlog: patch CVE-2025-6140
->        minifi-cpp: patch spdlog CVE-2025-6140
->        poco: patch CVE-2025-6375
->
-> Praveen Kumar (2):
->        syslog-ng: upgrade 4.8.1 -> 4.8.2
->        python3-tornado: upgrade 6.4.2 -> 6.5
->
-> Wang Mingyu (1):
->        mbedtls: upgrade 3.6.3 -> 3.6.3.1
->
-> Yi Zhao (1):
->        ][PATCH] ufs-utils: fix crash for ufs-utils list_bsg
->
-> Yogita Urade (2):
->        poppler: upgrade 25.04.0 -> 25.06.0
->        mariadb: upgrade 11.4.5 -> 11.4.6
->
-> gudni (1):
->        mbedtls: upgrade 3.6.3.1 -> 3.6.4
->
->   ...1-ufs_cmds-fix-full_path-buffer-size-in-find_bsg_devic.patch | 39 ++=
-+
->   meta-filesystems/recipes-utils/ufs-utils/ufs-utils_4.13.5.bb    | 1 +
->   .../mbedtls/{mbedtls_3.6.3.bb =3D> mbedtls_3.6.4.bb} |   7 +-
->   .../recipes-devtools/libcoap/libcoap/CVE-2024-31031.patch       | 82 ++=
-+++
->   meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb       | 1 +
->   .../{mariadb-native_11.4.5.bb =3D> mariadb-native_11.4.6.bb} |   0
->   meta-oe/recipes-dbs/mysql/mariadb.inc                           | 4 +-
->   .../mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch  | 40 +-=
--
->   meta-oe/recipes-dbs/mysql/mariadb/3871.patch                    | 29 --
->   meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch               | 23 --
->   .../recipes-dbs/mysql/{mariadb_11.4.5.bb =3D> mariadb_11.4.6.bb} |   0
->   meta-oe/recipes-extended/minifi-cpp/files/CVE-2025-6140.patch   | 46 ++=
-+
->   meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb        | 1 +
->   meta-oe/recipes-support/poco/poco/CVE-2025-6375.patch           | 34 ++
->   meta-oe/recipes-support/poco/poco_1.13.3.bb                     | 1 +
->   .../poppler/{poppler_25.04.0.bb =3D> poppler_25.06.0.bb} |   2 +-
->   meta-oe/recipes-support/spdlog/spdlog/CVE-2025-6140.patch       | 46 ++=
-+
->   meta-oe/recipes-support/spdlog/spdlog_1.15.0.bb                 | 4 +-
->   .../syslog-ng/{syslog-ng_4.8.1.bb =3D> syslog-ng_4.8.2.bb} |   2 +-
->   meta-oe/recipes-support/xmlsec1/xmlsec1_1.3.7.bb                | 2 +-
->   .../python/python3-aiohttp/CVE-2025-53643.patch                 | 526
-> ++++++++++++++++++++++++++++
->   meta-python/recipes-devtools/python/python3-aiohttp_3.11.16.bb  | 2 +
->   .../python/{python3-tornado_6.4.2.bb =3D> python3-tornado_6.5.bb} |   2=
- +-
->   23 files changed, 806 insertions(+), 88 deletions(-)
->   create mode 100644
-> meta-filesystems/recipes-utils/ufs-utils/files/0001-ufs_cmds-fix-full_pat=
-h-buffer-size-in-find_bsg_devic.patch
->   rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_3.6.3.bb
-> =3D> mbedtls_3.6.4.bb} (94%)
->   create mode 100644
-> meta-networking/recipes-devtools/libcoap/libcoap/CVE-2024-31031.patch
->   rename meta-oe/recipes-dbs/mysql/{mariadb-native_11.4.5.bb =3D>
-> mariadb-native_11.4.6.bb} (100%)
->   delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/3871.patch
->   delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch
->   rename meta-oe/recipes-dbs/mysql/{mariadb_11.4.5.bb =3D>
-> mariadb_11.4.6.bb} (100%)
->   create mode 100644
-> meta-oe/recipes-extended/minifi-cpp/files/CVE-2025-6140.patch
->   create mode 100644 meta-oe/recipes-support/poco/poco/CVE-2025-6375.patc=
-h
->   rename meta-oe/recipes-support/poppler/{poppler_25.04.0.bb =3D>
-> poppler_25.06.0.bb} (96%)
->   create mode 100644
-> meta-oe/recipes-support/spdlog/spdlog/CVE-2025-6140.patch
->   rename meta-oe/recipes-support/syslog-ng/{syslog-ng_4.8.1.bb =3D>
-> syslog-ng_4.8.2.bb} (98%)
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-53643.patch
->   rename meta-python/recipes-devtools/python/{python3-tornado_6.4.2.bb
-> =3D> python3-tornado_6.5.bb} (93%)
->
+Signed-off-by: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
+---
+ meta-oe/recipes-support/opencv/opencv_4.12.0.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
+index d8295912fa..4118e96fc5 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
+@@ -75,6 +75,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${S}/contrib/modules \
+     -DOPENCV_GENERATE_PKGCONFIG=ON \
+     -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
+     -DOPENCV_ALLOW_DOWNLOADS=OFF \
++    -DOPENCV_BIN_INSTALL_PATH=bin/opencv \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3", "", d)} \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41", "", d)} \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41,SSE42", "", d)} \
+@@ -113,9 +114,9 @@ PACKAGECONFIG[openvino] = "-DWITH_OPENVINO=ON,-DWITH_OPENVINO=OFF,openvino-infer
+ PACKAGECONFIG[oracle-java] = "-DJAVA_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_INCLUDE_PATH2=${ORACLE_JAVA_HOME}/include/linux -DJAVA_AWT_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_AWT_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/libjawt.so -DJAVA_JVM_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/server/libjvm.so,,ant-native oracle-jse-jdk oracle-jse-jdk-native,"
+ PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
+ PACKAGECONFIG[python3] = "-DPYTHON3_INCLUDE_PATH=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} -DPYTHON3_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/_core/include,,python3-numpy,"
+-PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
++PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_BIN_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
+ PACKAGECONFIG[tbb] = "-DWITH_TBB=ON,-DWITH_TBB=OFF,tbb,"
+-PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON,-DBUILD_TESTS=OFF,,"
++PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON -DINSTALL_TESTS=ON,-DBUILD_TESTS=OFF,,"
+ PACKAGECONFIG[text] = "-DBUILD_opencv_text=ON,-DBUILD_opencv_text=OFF,tesseract,"
+ PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
+ PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
+-- 
+2.34.1
+
 
