@@ -1,56 +1,38 @@
-Return-Path: <denis@denix.org>
+Return-Path: <kraghava@qti.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60434C87FCA
-	for <webhook@archiver.kernel.org>; Tue, 29 Jul 2025 16:50:33 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.13174.1753807827695918961
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 29 Jul 2025 09:50:28 -0700
-Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A7BDD40C2C;
-	Tue, 29 Jul 2025 16:50:26 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tJ3j4QB3hN8J; Tue, 29 Jul 2025 16:50:26 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6592340ACD;
-	Tue, 29 Jul 2025 16:50:23 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id B89F116D30E; Tue, 29 Jul 2025 12:50:22 -0400 (EDT)
-Date: Tue, 29 Jul 2025 12:50:22 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@lists.yoctoproject.org>,
-	openembedded-members@lists.openembedded.org
-Subject: OpenEmbedded Happy Hour July 30 5pm/1700 UTC
-Message-ID: <20250729165022.GO24899@denix.org>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56EF9C87FCB
+	for <webhook@archiver.kernel.org>; Wed, 30 Jul 2025 05:27:47 +0000 (UTC)
+Subject: Re: [meta-oe][PATCH v2] opencv: install test and sample binaries, rename /usr/bin/shape
+To: openembedded-devel@lists.openembedded.org
+From: "Keerthivasan Raghavan" <kraghava@qti.qualcomm.com>
+X-Originating-Location: Hyderabad, Telangana, IN (163.116.219.48)
+X-Originating-Platform: Windows Chrome 138
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Date: Tue, 29 Jul 2025 22:27:43 -0700
+References: <CAMKF1sqCSo3rA65a0d9ScACF_amGmAuF92oXfMqAzAbAwdRn=Q@mail.gmail.com>
+In-Reply-To: <CAMKF1sqCSo3rA65a0d9ScACF_amGmAuF92oXfMqAzAbAwdRn=Q@mail.gmail.com>
+Message-ID: <24681.1753853263526986820@lists.openembedded.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 29 Jul 2025 16:50:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118762
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 05:27:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118763
 
-All,
+The usage part is complex as tracking down every consumer would be impossib=
+le.
+Could this be mitigated with change/release notes ?
+Between installing all binaries in the /usr/bin/opencv directory vs renamin=
+g just the affected
+file/directory the later minimizes the impact. If opencv cmake list files c=
+hanges the installation
+it is still the same problem originating from a different file/owner. symli=
+nk based migration also
+does not help as the files would still collide.=20
 
-Please join us for our monthly OpenEmbedded Happy Hour tomorrow, Wednesday 
-July 30 at 1700/5pm UTC (1pm ET/10am PT).
-
-https://www.openembedded.org/wiki/Calendar
-https://www.openembedded.org/wiki/Happy_Hours
-https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+July+30&iso=20250730T17
-
-Best regards,
-Denys Dmytriyenko
-OpenEmbedded Board of Directors
+Regarding the bindir change, I will raise a new patch addressing it.
 
