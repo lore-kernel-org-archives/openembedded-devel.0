@@ -1,109 +1,84 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <dev@g0hl1n.net>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD4A7C87FD6
-	for <webhook@archiver.kernel.org>; Wed, 30 Jul 2025 09:55:19 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.web10.31496.1753869310513220449
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CD7BC87FCB
+	for <webhook@archiver.kernel.org>; Wed, 30 Jul 2025 11:23:10 +0000 (UTC)
+Received: from out-182.mta1.migadu.com (out-182.mta1.migadu.com [95.215.58.182])
+ by mx.groups.io with SMTP id smtpd.web11.32994.1753874582968696247
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Jul 2025 02:55:11 -0700
+ Wed, 30 Jul 2025 04:23:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=m0qH3++o;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1753869310; x=1785405310;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=PdDScqr2sjfd1AxVSrORVAwzT8vBwUeRMSFsQTpYaTQ=;
-  b=m0qH3++o9oI5sgXWz+qMZOzkk01+rVDzGfsbhRSGLktyvYSTLyjnQJaG
-   RCOBOS7z9V1K1cVAtKFCva8Ni2I/sIPcP1HF+NP9/wWgCcZ9v1z9liV4w
-   St/eBqCWKzzGqC4m4cyGZLBZHq4fjBlyNsa+rGdidaJTP1lHcxCpnA09r
-   7s9Cid4mXHbanpUkY1LBmfNimNex9iZIJIExhwSCxgZ9RJspDlSCptZBn
-   +iBdBC7vcLHiwKBOHcQw7O6OpLcWcDFJWWtpXtiYitfmtzQ4ZTXkENS+D
-   dFHQi+LHYDf1AADNK6BRtJxpOO8J9W5HFrhBO2MyHdEHaX1QFDUSTjtrc
-   w==;
-X-CSE-ConnectionGUID: CbeBNMF/RLWUUJdoRzvCKQ==
-X-CSE-MsgGUID: 3N6v7aG0TuS6qzOOXvZXgQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11506"; a="186784567"
-X-IronPort-AV: E=Sophos;i="6.16,350,1744038000"; 
-   d="scan'208";a="186784567"
-Received: from unknown (HELO az2nlsmgr2.o.css.fujitsu.com) ([20.61.8.234])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jul 2025 18:55:10 +0900
-Received: from az2nlsmgm1.o.css.fujitsu.com (unknown [10.150.26.203])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgr2.o.css.fujitsu.com (Postfix) with ESMTPS id F0515155F
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 09:55:09 +0000 (UTC)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(No client certificate requested)
-	by az2nlsmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 5AAB2C01EEE
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 09:55:09 +0000 (UTC)
-Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.161.187])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 51D551A0096;
-	Wed, 30 Jul 2025 17:55:06 +0800 (CST)
-From: Wang Mingyu < wangmy@fujitsu.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@g0hl1n.net header.s=key1 header.b=i8EqBnA0;
+ spf=pass (domain: g0hl1n.net, ip: 95.215.58.182, mailfrom: dev@g0hl1n.net)
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=g0hl1n.net; s=key1;
+	t=1753874581;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=OnYIUNxX/ZS7j3jofGvBmcGVrZnC6YnwqNmi6Cp4nEk=;
+	b=i8EqBnA0pfs8vto2hU28bbafk6E9idDBJ7lLsOZibo3zSNzxaEsWgkx0d1Z7sZFLX0LWmp
+	/3QxeiYF6reU1HDhG8mkTbfIkCVQDBKDl8J4PWJAP9A5W1OTqwtAFXMKnJCALzBtjeQwmx
+	rCCbYxA1UF/vfnaJL61qAvRg+1e8rr0=
+From: Richard Leitner <dev@g0hl1n.net>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 22/40] python3-bitarray: upgrade 3.5.1 -> 3.5.2
-Date: Wed, 30 Jul 2025 17:54:38 +0800
-Message-ID: <20250730095456.695-22-wangmy@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
-In-Reply-To: <20250730095456.695-1-wangmy@fujitsu.com>
-References: <20250730095456.695-1-wangmy@fujitsu.com>
+Cc: Richard Leitner <dev@g0hl1n.net>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][walnascar][PATCH] python3-moteus: upgrade 0.3.88 -> 0.3.89
+Date: Wed, 30 Jul 2025 13:22:41 +0200
+Message-ID: <20250730112242.881202-1-dev@g0hl1n.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 09:55:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118787
+ <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 11:23:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118793
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Update python3-moteus to the latest release.
 
-Changelog:
-=========
-- change random.seed() test, see comments
-- optimize util.random_p() by also using bitwise AND in final step
-- add ability for heavy testing to example
-- add DummyRanomPTests to example
-- add in-place XOR test for comleteness
-- add --disp option to example
-- add verification tests to example
-- remove duplicate tests
-- add test - wording
-- add links in comments
-- add sanity check
-- add note on limit in relation to 1/K
-- update table in documentation to new example code
+Since no formal changelog is available, here's the git shortlog of the
+moteus python library [1] for the corresponding release:
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Josh Pieper (2):
+      Add some more register definitions
+      Add --version options to moteus_tool and tview
+
+[1] https://github.com/mjbots/moteus/commits/main/lib/python
+
+Signed-off-by: Richard Leitner <dev@g0hl1n.net>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 0285799f54661ceb649c8a7d9d4e0522d615a1aa)
+Signed-off-by: Richard Leitner <dev@g0hl1n.net>
 ---
- .../{python3-bitarray_3.5.1.bb => python3-bitarray_3.5.2.bb}    | 2 +-
+ .../{python3-moteus_0.3.88.bb =3D> python3-moteus_0.3.89.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_3.5.1.bb => python3-bitarray_3.5.2.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-moteus_0.3.88.bb =3D=
+> python3-moteus_0.3.89.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_3.5.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_3.5.2.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-bitarray_3.5.1.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_3.5.2.bb
-index 3cf1751f32..43ea07173c 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_3.5.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_3.5.2.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=6abe80c028e4ee53045a33ae807c64fd"
- 
--SRC_URI[sha256sum] = "b03c49d1a2eb753cc6090053f1c675ada71e1c3ea02011f1996cf4c2b6e9d6d6"
-+SRC_URI[sha256sum] = "08a86f85fd0534da3b753f072c7b0d392d4c0c9418fe2a358be378152cf6b085"
- 
- inherit python_setuptools_build_meta pypi
- 
--- 
-2.43.0
+diff --git a/meta-python/recipes-devtools/python/python3-moteus_0.3.88.bb=
+ b/meta-python/recipes-devtools/python/python3-moteus_0.3.89.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-moteus_0.3.88.bb
+rename to meta-python/recipes-devtools/python/python3-moteus_0.3.89.bb
+index 80557d4959..54d0899c75 100644
+--- a/meta-python/recipes-devtools/python/python3-moteus_0.3.88.bb
++++ b/meta-python/recipes-devtools/python/python3-moteus_0.3.89.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D "file://setup.py;beginline=3D3;endli=
+ne=3D9;md5=3D24025d3c660abfc62a
+=20
+ inherit pypi setuptools3
+=20
+-SRC_URI[sha256sum] =3D "e16387e5fe512a7580ef847e6b2e665d4b40549b064ab237=
+e01fd7dec7c46232"
++SRC_URI[sha256sum] =3D "78ed04c213e20b44c81b73e2b66f5a7e45339014cc3fdaf9=
+4c4fcc875d35402a"
+=20
+ S =3D "${WORKDIR}/moteus-${PV}"
+=20
+--=20
+2.47.2
 
 
