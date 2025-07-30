@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6BC4C87FCB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8CF9C87FC9
 	for <webhook@archiver.kernel.org>; Wed, 30 Jul 2025 09:55:19 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.web10.31493.1753869308081090093
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.web11.31371.1753869307251550651
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Jul 2025 02:55:12 -0700
+ Wed, 30 Jul 2025 02:55:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=by1ycxrl;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Iyg2MdMN;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1753869311; x=1785405311;
+  t=1753869309; x=1785405309;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=jKr2i57HD+OSqEqWHVnEFu4TqXZVj7AKQf9avJtkycA=;
-  b=by1ycxrly/UsfdPvaPrnme4JiVO2PWjIIx/UA4A1CHTWldSrB86kGorO
-   hpBL/FH2NoqT4Xjb57dGaOsj7ZYdK6hLRthcTOLA2vM0hIAMIsXQHbQv8
-   DObNI+rcpeX6Em8uu3VorgYRCg3wQ+FtzvL+OzY/cpAfcL1lnrYdqeqts
-   EnHVR3saiFEarm4RUONi7fnM0YpUekd5Dn1ryhhNwrmL1MHfScUzupqay
-   /ZqursQyZtqWbbqPyLuMcnZKXvMVGJFjM9baXGRmhlIJqHwGOpydEdjPP
-   riOPSzfiCszuYFmtpIFMJco5vQc44/pilYTE7CbRxZXp8xQw1BuFMO1bw
-   A==;
-X-CSE-ConnectionGUID: N+zGy2jwQjKLY99UI9IiDg==
-X-CSE-MsgGUID: /pB18Fc4RmmRZ2q9sKrbeQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11506"; a="207849426"
+  bh=niZYw/HWwFnTigM9iOeDeE+RAglefQaZ7QBiT2XD93U=;
+  b=Iyg2MdMNwybEJrOWgmRJCSxgMCR+qW4X0YRok8wuJhHkk10HpCRH/+y8
+   HRbXvj/ZOIS8la66ZmqdM1a7M4dwEt5hbRLVm78u/kQ03NrffUjAIqLOq
+   2PAF+EzcmRkKBZ/n/djckaRBII7881HnxzH2gNm251wtvbST867mpanir
+   RBMniCNfAh9fL2EuyYZpKZq6V9WVUgyq56fAPoZsK6IXZKi90Qu8Y4Nrg
+   TR21PmNfLOz7U3wHvEQHOhtU6z8dO7uzLvSWKOx5KsaiH9WaXxut6IU2f
+   27j6f32Jc75G9g2sRWWQGmyYXxy/6EhjlWmP7DI7IJa63dGj7CvFQrtvR
+   w==;
+X-CSE-ConnectionGUID: /MeoFGemT9Ch/dXLH5lqcw==
+X-CSE-MsgGUID: UclaD4aORPqM1Aw22eKISQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11506"; a="186784565"
 X-IronPort-AV: E=Sophos;i="6.16,350,1744038000"; 
-   d="scan'208";a="207849426"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.19])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jul 2025 18:55:11 +0900
+   d="scan'208";a="186784565"
+Received: from unknown (HELO az2uksmgr1.o.css.fujitsu.com) ([52.151.125.128])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jul 2025 18:55:08 +0900
 Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 1A50DC000BE
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 09:55:11 +0000 (UTC)
+	by az2uksmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id BC0851C1C700
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 09:55:08 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 84D208319F1
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 09:55:10 +0000 (UTC)
+	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 34B1183D96D
+	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 09:55:08 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.161.187])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 9719F1A0073;
-	Wed, 30 Jul 2025 17:55:07 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id EEE021A00A2;
+	Wed, 30 Jul 2025 17:55:04 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 26/40] python3-grpcio-reflection: upgrade 1.73.1 -> 1.74.0
-Date: Wed, 30 Jul 2025 17:54:42 +0800
-Message-ID: <20250730095456.695-26-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 18/40] parallel: upgrade 20250622 -> 20250722
+Date: Wed, 30 Jul 2025 17:54:34 +0800
+Message-ID: <20250730095456.695-18-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250730095456.695-1-wangmy@fujitsu.com>
 References: <20250730095456.695-1-wangmy@fujitsu.com>
@@ -61,31 +61,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 09:55:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118791
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118783
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...reflection_1.73.1.bb => python3-grpcio-reflection_1.74.0.bb} | 2 +-
+ .../parallel/{parallel_20250622.bb => parallel_20250722.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-grpcio-reflection_1.73.1.bb => python3-grpcio-reflection_1.74.0.bb} (82%)
+ rename meta-oe/recipes-extended/parallel/{parallel_20250622.bb => parallel_20250722.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.73.1.bb b/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.74.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-grpcio-reflection_1.73.1.bb
-rename to meta-python/recipes-devtools/python/python3-grpcio-reflection_1.74.0.bb
-index dfce718a41..914abbf589 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.73.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-reflection_1.74.0.bb
-@@ -11,7 +11,7 @@ DEPENDS += "python3-grpcio"
- PYPI_PACKAGE = "grpcio_reflection"
- UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+diff --git a/meta-oe/recipes-extended/parallel/parallel_20250622.bb b/meta-oe/recipes-extended/parallel/parallel_20250722.bb
+similarity index 93%
+rename from meta-oe/recipes-extended/parallel/parallel_20250622.bb
+rename to meta-oe/recipes-extended/parallel/parallel_20250722.bb
+index 739263fe30..fc7376ce56 100644
+--- a/meta-oe/recipes-extended/parallel/parallel_20250622.bb
++++ b/meta-oe/recipes-extended/parallel/parallel_20250722.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
+ "
  
--SRC_URI[sha256sum] = "2d6a420264e31e83e81114dd2586b5cd05a6c689b01dd5e2121d91f2b4e167f2"
-+SRC_URI[sha256sum] = "c7327d2520dcdac209872ebf57774c3239646dad882e4abb4ad7bebccaca2c83"
+ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.bz2"
+-SRC_URI[sha256sum] = "69f578cf11f1b124ba3c2b673a16641debe63aeb3d2ac4cec5ad65f8a53d489b"
++SRC_URI[sha256sum] = "91a81ff4129cdf5ad3c3c45ec033e75f2bbea5447f4b6813a0d8cfe8e5c7843b"
  
- RDEPENDS:${PN} = "python3-grpcio"
+ inherit autotools bash-completion
  
 -- 
 2.43.0
