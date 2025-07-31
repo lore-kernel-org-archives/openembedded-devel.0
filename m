@@ -1,116 +1,151 @@
-Return-Path: <kraghava@qti.qualcomm.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 486C7C83F17
-	for <webhook@archiver.kernel.org>; Thu, 31 Jul 2025 07:04:58 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.web10.55942.1753945488115578392
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47000C87FCC
+	for <webhook@archiver.kernel.org>; Thu, 31 Jul 2025 09:06:59 +0000 (UTC)
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com [209.85.222.176])
+ by mx.groups.io with SMTP id smtpd.web10.54807.1753939520727785969
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 31 Jul 2025 00:04:48 -0700
+ Wed, 30 Jul 2025 22:25:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=Dedgqzd6;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qti.qualcomm.com, ip: 205.220.168.131, mailfrom: kraghava@qti.qualcomm.com)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56V1g2Co000346
-	for <openembedded-devel@lists.openembedded.org>; Thu, 31 Jul 2025 07:04:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=X3F+gIqGsLBBQajmRQy2am
-	pkHOs0EatZRbwUSHNcW44=; b=Dedgqzd6leN630zKNHwj0RLYEms6muCvG2wJHm
-	rqUtwZdY3TK/VdagEVzHpbdjxH9bSwGS/kCQlf2ZnACCwpgv9xpqp1V3cWYij7YU
-	yP67Cx/dEJgyf2swS3CN/vjI4G7HLk5FW8nz0e3DFu3g3oaYh2/ALBYEgB4RqdCw
-	jdtCTfXkl5o+o55/zRczrESCR55K2rCbUzmnp1eEpbrnvDQ3gNnL2A1b1iDhJNmn
-	HwpKnf2k+ga0SPJOxY+jkW1OxgzrUAEBHI2GBZa/j/dQMiamzeJzP3y4dcDPvb+h
-	WFqnMQu7XZvIdhALqTs1D4UWicv0qa1ZbArEoSHB1gVHUUGw==
-Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4860ep4267-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 31 Jul 2025 07:04:47 +0000 (GMT)
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
-	by NALASPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 56V74kxS022837
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 31 Jul 2025 07:04:46 GMT
-Received: from hyd-e160-a01-2-02.qualcomm.com (10.80.80.8) by
- nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.10; Thu, 31 Jul 2025 00:04:45 -0700
-From: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
-Subject: [meta-oe]PATCH v4] opencv: install test and sample binaries, rename /usr/bin/shape
-Date: Thu, 31 Jul 2025 12:34:26 +0530
-Message-ID: <20250731070426.915767-1-kraghava@qti.qualcomm.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IyvMeUUq;
+ spf=pass (domain: gmail.com, ip: 209.85.222.176, mailfrom: nmjain23@gmail.com)
+Received: by mail-qk1-f176.google.com with SMTP id af79cd13be357-7e638975262so87616685a.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 22:25:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1753939519; x=1754544319; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=XdKn/5V+0AlQnLSpLKTvuMnMwJN/tciYVojwWwmg9NI=;
+        b=IyvMeUUqhS/qmfaRGEXf0umOhBk9atuPs2jkaXFZnBPqNfi3nzLf+TzFBfMqYns50S
+         SPaec/qU3Fz6MlC30griyANeYnkZHRw2PyJGmBXMU6QpovA93jcHLr+wB9hLq7Y2cGQI
+         9yxdbbpwNF4e8LvFT6ZmVmq6SpwzxppyDmF0RyWmldvn4vIyU6k+aomF01ZOvcc+EMVy
+         EECSvZVyoK40rL4UinwBSzEKCiIBFxDdG23h3BW1HfKkBrNWgJR/UDcslQIEY6hgvClP
+         AYLapt6ML8uu+mQyAQTiwFzcZvIFMDedljobvWKjpi3ZfflVb5F9P09IP5obYC7CF1j1
+         ArhA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1753939519; x=1754544319;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XdKn/5V+0AlQnLSpLKTvuMnMwJN/tciYVojwWwmg9NI=;
+        b=koSOiQtLFS9SX9QeLVQHUrO1AxKD/tSEFfT+YQSSYIXv/L0I6EeZ0ToynlUFupdulK
+         K9ujnhEQ9qf98A6yxW5deSSI3nN1XOdcMkdehuZWrTrdgTWewYwmE96sUjlvsxBK1AjQ
+         6KOAWE9lc3qsefsrv8aflNr8XuIpfuyiZZJhddh3m2616LnvHZ0jKvGJMpFhLlnKgsZY
+         QqmOzvwKq7gHdKIY2J5HBEuYMD3GniMvGGWsOVEA/GMahrb1cLwRCamgv27FFAFMHUNi
+         Y7yABvBu1bMjwKa5hN/kb8PzAWtKsHhWBAfMQAIaLdWPnIlRrUsB10fozBXs50yCZ4Jp
+         r3oA==
+X-Gm-Message-State: AOJu0Yyy9MP7AfyfyacSV8JlOW7aIMJPQLtSRRhGkqMSLlxw7Xr6pf7d
+	dsW2l/uvSAKve12yHp8U6sOGIdCDs8G3J8Wuv+pTpAhTlz1Xkd4nXKi9HZ798VkT
+X-Gm-Gg: ASbGncvxEna4UIdYE2I8x2Jvi5o6vokSY0xcflTDxeK+2RytyXXoujL+GKGTdshMqyB
+	0oUsLX2t/P3BaLMA9VhBNJmdW5Ms2fnEsKYjIoE/DlxaENVbBMiAXlt6yLxDanyivcCiYpTZ47w
+	fs1ZGm3Je8Kt1NPw2ZyPR2dMCjNi0KOWeNrq0RYANKzQy2uNW0YwrWWatGi81BX0DziqRjwHvpL
+	td1zoYqN+344t3nEvRxf9wVtsw5+YtgK1WkXhA+Z9uuGgpGAkCMSu0sUyGKAn1qiZAeaLWu/I9v
+	FV0cTjtQ8KjS2rYNsbierOCAl4YmxDiqOdkBnT10nFdXZhBT5YM2zeb5o3VMe+q5mpGSSugEowL
+	tXDOTtQdoGUhFZ7B2txpij+FifTAfxagOggL0yknE73P1paM=
+X-Google-Smtp-Source: AGHT+IGaQlDtKMnc2KqM5F0xRdhsz5OKaI7WR1FTFlBu3FtOJMLLjppIt3Ic4VI/hQdEUj3eldXhbQ==
+X-Received: by 2002:a05:6a20:748e:b0:233:b2f8:70e with SMTP id adf61e73a8af0-23dc0ea3f19mr9886801637.25.1753939128215;
+        Wed, 30 Jul 2025 22:18:48 -0700 (PDT)
+Received: from LL-3450L.kpit.com ([103.133.67.155])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-76bccfec28csm503246b3a.130.2025.07.30.22.18.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Jul 2025 22:18:47 -0700 (PDT)
+From: Naman Jain <nmjain23@gmail.com>
+X-Google-Original-From: Naman Jain <namanj1@kpit.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: akash.hadke@kpit.com
+Subject: [meta-openembedded][kirkstone][PATCH] tcpreplay: fix CVE-2023-43279
+Date: Thu, 31 Jul 2025 10:48:28 +0530
+Message-Id: <20250731051828.506035-1-namanj1@kpit.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: Jwu509_dePYSY8prMKuP9nBJWTydW4xp
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzMxMDA0NiBTYWx0ZWRfXwzokVGdbS5fC
- HL+qjxLUnmfwPcK2pcKLjldtfAoIkqYezhIVHTEYzf1H1dYau+6GWiPWpIvpppkRrtye2IYQrd+
- T2/s45IGLGetQHCkZa809qcxA2W/eD+WoqTkqHSCkIDxBH0uzQvIQ70/tXxYBtNXsje0q9dT9Lc
- YOoyfs7lvz4mEmAcTFSG1QEofvru1loAg0T1SQdPMu4J4o6LQ2FrQe4ysb8mALyu9AfKXNFxMqr
- 21+OW7V160pKBgyYQRFmnDPT/wH10YgZhuGgQ8szXz8uP/wHSb+R+x90I7j04e3Ruqi2dvLVoIz
- Cb/4vdSfNe44PBRds8F5nhsLuRI1V8i4mwfEBkSv3WSIAbMcNaxahxWvQWQmlhbrt2cs6XZTro3
- VDwqje/wG3sgX/cACq85NjvxBngF7iTRcCJntcyfq1W/ngyako7Zvxl8IF4DyZnj3/WpiDij
-X-Authority-Analysis: v=2.4 cv=DIWP4zNb c=1 sm=1 tr=0 ts=688b158f cx=c_pps
- a=ouPCqIW2jiPt+lZRy3xVPw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=GEpy-HfZoHoA:10 a=Wb1JkmetP80A:10 a=EUspDBNiAAAA:8 a=6I0ZPDnRgnCDHxwlYZkA:9
-X-Proofpoint-ORIG-GUID: Jwu509_dePYSY8prMKuP9nBJWTydW4xp
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-31_01,2025-07-31_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 bulkscore=0 mlxscore=0 mlxlogscore=582
- spamscore=0 impostorscore=0 suspectscore=0 malwarescore=0 priorityscore=1501
- adultscore=0 phishscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2507310046
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 31 Jul 2025 07:04:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118815
+ <openembedded-devel@lists.openembedded.org>; Thu, 31 Jul 2025 09:06:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118816
 
-Install the test and sample binaries. Rename "/usr/bin/shape"
-directory to "/usr/bin/opencv_shape". This avoids conflict
-with "/usr/bin/shape" file installed by mesa-demos.
+From: Jiaying Song <jiaying.song.cn@windriver.com>
 
-Signed-off-by: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
+Null Pointer Dereference in mask_cidr6 component at cidr.c in Tcpreplay
+4.4.4 allows attackers to crash the application via crafted tcprewrite
+command.
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-43279
+
+Upstream patches:
+https://github.com/appneta/tcpreplay/pull/860/commits/963842ceca79e97ac3242448a0de94fb901d3560
+
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+(cherry picked from commit ea99328a0685b577adf4175e4d674c560ce9a490)
+Signed-off-by: Divyanshu Rathore <divyanshu.rathore@kpit.com>
 ---
- meta-oe/recipes-support/opencv/opencv_4.12.0.bb | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ .../tcpreplay/tcpreplay/CVE-2023-43279.patch  | 39 +++++++++++++++++++
+ .../tcpreplay/tcpreplay_4.4.4.bb              |  1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
-index d8295912fa..539190553d 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
-@@ -113,9 +113,9 @@ PACKAGECONFIG[openvino] = "-DWITH_OPENVINO=ON,-DWITH_OPENVINO=OFF,openvino-infer
- PACKAGECONFIG[oracle-java] = "-DJAVA_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_INCLUDE_PATH2=${ORACLE_JAVA_HOME}/include/linux -DJAVA_AWT_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_AWT_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/libjawt.so -DJAVA_JVM_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/server/libjvm.so,,ant-native oracle-jse-jdk oracle-jse-jdk-native,"
- PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
- PACKAGECONFIG[python3] = "-DPYTHON3_INCLUDE_PATH=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} -DPYTHON3_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/_core/include,,python3-numpy,"
--PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
-+PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_BIN_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
- PACKAGECONFIG[tbb] = "-DWITH_TBB=ON,-DWITH_TBB=OFF,tbb,"
--PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON,-DBUILD_TESTS=OFF,,"
-+PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON -DINSTALL_TESTS=ON,-DBUILD_TESTS=OFF,,"
- PACKAGECONFIG[text] = "-DBUILD_opencv_text=ON,-DBUILD_opencv_text=OFF,tesseract,"
- PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
- PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
-@@ -213,4 +213,8 @@ do_install:append() {
-             sed -i -e 's,${S},/usr/src/debug/${PN}/${PV},g' ${B}/modules/core/$fn
-         fi
-     done
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch
+new file mode 100644
+index 0000000000..45581268c0
+--- /dev/null
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch
+@@ -0,0 +1,39 @@
++From 3164a75f2660a5c3537feff9fd8751346cf5ca57 Mon Sep 17 00:00:00 2001
++From: Gabriel Ganne <gabriel.ganne@gmail.com>
++Date: Sun, 21 Jan 2024 09:16:38 +0100
++Subject: [PATCH] add check for empty cidr
 +
-+    # rename shape dir to avoid rootfs conflict with
-+    # mesa-demos /usr/bin/shape file.
-+    mv ${D}/${bindir}/shape ${D}/${bindir}/opencv_shape
- }
++This causes tcprewrite to exit with an error instead of crashing.
++
++Fixes: #824
++
++Upstream-Status: Backport
++CVE: CVE-2023-43279
++
++Reference to upstream patch:
++https://github.com/appneta/tcpreplay/pull/860/commits/963842ceca79e97ac3242448a0de94fb901d3560
++
++Signed-off-by: Gabriel Ganne <gabriel.ganne@gmail.com>
++Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
++---
++ src/common/cidr.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/src/common/cidr.c b/src/common/cidr.c
++index 687fd04..9afbfec 100644
++--- a/src/common/cidr.c
+++++ b/src/common/cidr.c
++@@ -249,6 +249,10 @@ parse_cidr(tcpr_cidr_t **cidrdata, char *cidrin, char *delim)
++     char *network;
++     char *token = NULL;
++ 
+++    if (cidrin == NULL) {
+++        errx(-1, "%s", "Unable to parse empty CIDR");
+++    }
+++
++     mask_cidr6(&cidrin, delim);
++ 
++     /* first iteration of input using strtok */
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
+index 32c978c1e0..8b41ba25a4 100644
+--- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
+@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=10f0474a2f0e5dccfca20f69d6598ad8"
+ 
+ SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz \
+            file://CVE-2023-4256.patch \
++           file://CVE-2023-43279.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "44f18fb6d3470ecaf77a51b901a119dae16da5be4d4140ffbb2785e37ad6d4bf"
 -- 
 2.34.1
 
