@@ -1,102 +1,117 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <kraghava@qti.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3F74C87FDA
-	for <webhook@archiver.kernel.org>; Wed, 30 Jul 2025 23:29:45 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.web11.49272.1753918175972642258
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2360CC87FCA
+	for <webhook@archiver.kernel.org>; Thu, 31 Jul 2025 06:53:58 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.web11.55641.1753944835947959899
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 30 Jul 2025 16:29:36 -0700
+ Wed, 30 Jul 2025 23:53:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=q8z7r5c9;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1753918176; x=1785454176;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=FaxSRflMFYKfV8PDJGCuIwj8I8VtXd2piTDv9a9bcAw=;
-  b=q8z7r5c9ALG14f9fqVHdysCQuEuvEfoTD0awgzkUigR4GKMCwgyOxwW1
-   MAAO3GniVQx7Yazo/79xeKZjwCaxN7Na/nkhe6390mi3mkg5C6L3zm0sh
-   HR3DWHRNzeb/pZvnBaSqY4+WaBhPXJ1NS6fdp4nQY8ru7WOsHLIeVj6Ps
-   Dfq/c4/UWjk3T/rOjBlsTzGkCSDQuIGrOOMD2eG9ILqUgB5JDIDUZSRM3
-   ng/atxy7ek3NGmHKJ0Ot18uRRkJY9jwK0SY9FeD/eusqeRoM5dqJaQpEz
-   b20v/DJo6AiLHUjPwcMgzf7qVIpY3WwZdoEYAkldmLoC+x1CNohpTOWd1
-   w==;
-X-CSE-ConnectionGUID: PVesyFsdSL+5bajheWqtUw==
-X-CSE-MsgGUID: eHDVwYw3TTaSo0ghOhdF1w==
-X-IronPort-AV: E=McAfee;i="6800,10657,11507"; a="207232697"
-X-IronPort-AV: E=Sophos;i="6.16,353,1744038000"; 
-   d="scan'208";a="207232697"
-Received: from unknown (HELO az2nlsmgr1.o.css.fujitsu.com) ([51.138.80.169])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Jul 2025 08:29:34 +0900
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 70FD31C00085
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 23:29:34 +0000 (UTC)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id CC1F61C000C4
-	for <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 23:29:33 +0000 (UTC)
-Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.161.187])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id EF0661A0096;
-	Thu, 31 Jul 2025 07:29:28 +0800 (CST)
-From: Wang Mingyu < wangmy@fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 34/40] python3-virtualenv: upgrade 20.31.2 -> 20.32.0
-Date: Thu, 31 Jul 2025 07:29:17 +0800
-Message-ID: <20250730232923.522-8-wangmy@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
-In-Reply-To: <20250730232923.522-1-wangmy@fujitsu.com>
-References: <20250730232923.522-1-wangmy@fujitsu.com>
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=W+Ob87EG;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qti.qualcomm.com, ip: 205.220.168.131, mailfrom: kraghava@qti.qualcomm.com)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56V1fRuq031818
+	for <openembedded-devel@lists.openembedded.org>; Thu, 31 Jul 2025 06:53:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=69yRM/escF2u/AaLoSJxDO
+	b9NYsNKgQ1vMcfkPzk78Q=; b=W+Ob87EG3+NMs40NvTa0ehFr7UngJ7wydrnyvV
+	LWuvbm1ed7Rcsj7EV8CZKAj28sLR246Twx1kruHSlj6k1MCl3Cv89HHD95hAe48b
+	yR7YPuJ2bT2vYOMseeZ9ozmPaoaO8zKPIcVH+9PrM48bpaIkZxWh1S4UY9g+GRlV
+	PoEGvIjRZp98mBx8xW+rOAA4bI13+hhpXq5UUSLoJo/lcjopdQDOkHqZX+Qp2W4l
+	XFKSNBcc77KrXi2x+UwE7ZquZEqB3n/sfqQxG+ganonvDOV/ziJNSU7BeeYNKOOi
+	eDgQ3gBhx4FIeHPeiZn1d25uqsEFWfp9MBiBKqIKER30uDuw==
+Received: from nalasppmta05.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 485v1xm4tc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 31 Jul 2025 06:53:55 +0000 (GMT)
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
+	by NALASPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 56V6rsBw021295
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 31 Jul 2025 06:53:54 GMT
+Received: from hyd-e160-a01-2-02.qualcomm.com (10.80.80.8) by
+ nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.10; Wed, 30 Jul 2025 23:53:53 -0700
+From: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
+Subject: [meta-oe][PATCH v3] opencv: install test and sample binaries, rename /usr/bin/shape
+Date: Thu, 31 Jul 2025 12:23:34 +0530
+Message-ID: <20250731065334.915413-1-kraghava@qti.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzMxMDA0NiBTYWx0ZWRfXwnzHDX4P8hsr
+ DY7jFXTI7mIQwSHjq/noIc6975Kjs7sxoax3Cz7PxCp6yKCP+LDooBDvemTRUs/wooNt0icpKcQ
+ h9RTe5TxrSsum/+65rgmVxv5RZSfsANMNvx8/2ANaM0qyZ5WdhjlRwHqmugDAYTWqOE0aaGVWQt
+ DBZDh4IBLE9SIWInjS66A6yuJNkBxLfmjdIH+YrcGsrj6jEPvBKgv2QNiXv+OBch5II6iXH5tdp
+ oT5B45HmfB7FQMqDvjtWh1PGmzHcZquaJTVKAyVja1PT2Q6dVFHIXVLgbDp9Ocqap6+D94qpGra
+ kdUxNK6EMnV1rPfJxzJCxfCbv9OiDiptJHHve8Rft2XXO2bfOiAFfnQohE/ox0N+RewfcA7gi1L
+ fiiqUsJEAvEJZVoD5Qogac2CAk+onVrddpaIeSfvrYWOzus3MxlhtPQlQSJXLkZz73urDsmO
+X-Authority-Analysis: v=2.4 cv=JKw7s9Kb c=1 sm=1 tr=0 ts=688b1303 cx=c_pps
+ a=ouPCqIW2jiPt+lZRy3xVPw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=GEpy-HfZoHoA:10 a=Wb1JkmetP80A:10 a=EUspDBNiAAAA:8 a=6I0ZPDnRgnCDHxwlYZkA:9
+X-Proofpoint-ORIG-GUID: 6lfFi-1NdXdUDJD-gXB1BnPh8GVL2DlV
+X-Proofpoint-GUID: 6lfFi-1NdXdUDJD-gXB1BnPh8GVL2DlV
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-07-31_01,2025-07-31_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 mlxscore=0 priorityscore=1501 spamscore=0 suspectscore=0
+ phishscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0 clxscore=1015
+ mlxlogscore=582 adultscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
+ definitions=main-2507310046
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 30 Jul 2025 23:29:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118808
+ <openembedded-devel@lists.openembedded.org>; Thu, 31 Jul 2025 06:53:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118814
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Install the test and sample binaries. Rename "/usr/bin/shape"
+directory to "/usr/bin/opencv_shape". This avoids conflict
+with "/usr/bin/shape" file installed by mesa-demos.
 
-Changelog:
-============
-- Fix the CI
-- activate.fish: update fish major version check
-- Fix: Ignore missing absolute paths for python discovery
-- Discover uv-managed Python installations
-- Add warning for incorrect usage of Nushell activation script
-- Update index.rst, compatibility section added, other subheadings created
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Keerthivasan Raghavan <kraghava@qti.qualcomm.com>
 ---
- ...hon3-virtualenv_20.31.2.bb => python3-virtualenv_20.32.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-virtualenv_20.31.2.bb => python3-virtualenv_20.32.0.bb} (87%)
+ meta-oe/recipes-support/opencv/opencv_4.12.0.bb | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_20.31.2.bb b/meta-python/recipes-devtools/python/python3-virtualenv_20.32.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-virtualenv_20.31.2.bb
-rename to meta-python/recipes-devtools/python/python3-virtualenv_20.32.0.bb
-index 6c3aa19266..72946161b1 100644
---- a/meta-python/recipes-devtools/python/python3-virtualenv_20.31.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-virtualenv_20.32.0.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/pypa/virtualenv"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0ce089158cf60a8ab6abb452b6405538"
- 
--SRC_URI[sha256sum] = "e10c0a9d02835e592521be48b332b6caee6887f332c111aa79a09b9e79efc2af"
-+SRC_URI[sha256sum] = "886bf75cadfdc964674e6e33eb74d787dff31ca314ceace03ca5810620f4ecf0"
- 
- BBCLASSEXTEND = "native nativesdk"
- inherit pypi python_hatchling
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
+index d8295912fa..700d68e555 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
+@@ -113,9 +113,9 @@ PACKAGECONFIG[openvino] = "-DWITH_OPENVINO=ON,-DWITH_OPENVINO=OFF,openvino-infer
+ PACKAGECONFIG[oracle-java] = "-DJAVA_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_INCLUDE_PATH2=${ORACLE_JAVA_HOME}/include/linux -DJAVA_AWT_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_AWT_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/libjawt.so -DJAVA_JVM_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/server/libjvm.so,,ant-native oracle-jse-jdk oracle-jse-jdk-native,"
+ PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
+ PACKAGECONFIG[python3] = "-DPYTHON3_INCLUDE_PATH=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} -DPYTHON3_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/_core/include,,python3-numpy,"
+-PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
++PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_BIN_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
+ PACKAGECONFIG[tbb] = "-DWITH_TBB=ON,-DWITH_TBB=OFF,tbb,"
+-PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON,-DBUILD_TESTS=OFF,,"
++PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON -DINSTALL_TESTS=ON,-DBUILD_TESTS=OFF,,"
+ PACKAGECONFIG[text] = "-DBUILD_opencv_text=ON,-DBUILD_opencv_text=OFF,tesseract,"
+ PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
+ PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
+@@ -213,4 +213,8 @@ do_install:append() {
+             sed -i -e 's,${S},/usr/src/debug/${PN}/${PV},g' ${B}/modules/core/$fn
+         fi
+     done
++
++    # rename shape dir to avoid rootfs conflict with
++    # mesa-demos /usr/bin/shape file.
++    mv ${D}/${bindir}/shape ${D}/usr/bin/opencv_shape
+ }
 -- 
-2.43.0
+2.34.1
 
 
