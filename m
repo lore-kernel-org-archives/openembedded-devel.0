@@ -1,114 +1,102 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DEF07CA0EF5
-	for <webhook@archiver.kernel.org>; Tue, 19 Aug 2025 10:44:32 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web11.11036.1755600269781470375
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16BE7CA0EEB
+	for <webhook@archiver.kernel.org>; Tue, 19 Aug 2025 11:02:33 +0000 (UTC)
+Received: from mail-vk1-f175.google.com (mail-vk1-f175.google.com [209.85.221.175])
+ by mx.groups.io with SMTP id smtpd.web10.7264.1755583015618003582
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Aug 2025 03:44:30 -0700
+ Mon, 18 Aug 2025 22:56:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VRskfXAX;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-61868d83059so9860604a12.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Aug 2025 03:44:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BCjmdTat;
+ spf=pass (domain: gmail.com, ip: 209.85.221.175, mailfrom: pratikmanvar09@gmail.com)
+Received: by mail-vk1-f175.google.com with SMTP id 71dfb90a1353d-53b1740154dso3457980e0c.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Aug 2025 22:56:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755600268; x=1756205068; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=mdbX4XOcsn6jxuPvJpFjMc/E+kLP3lUEj6osHUeACFE=;
-        b=VRskfXAXycf/IDquzDunuGTCsc+R6QelnzEDxGGH5bZljkL33WuIn77r/SOWHqLlwq
-         52WX+He9CI7cgNb5TlwmpH0XzMjK7M0ku0cJAePJwOHavPKNWsNZhiwxbVc3TvZAB0Fp
-         hXjRBX5GYE/b7wuZPqAo8EKlLR4TOjncBhCpOfDBZ8N6ORN/njcrMj1ooi3krYerZucE
-         YXJ9HGIMP4C8cYU5Tf8Eh+EWPKd1MvF89swtvKaLF2iYZfZcmSZ7M6TN0f0aUIqkrjAK
-         El1OhfSAHA0ck3QXctQeYgWm0gCz30GLpsJNtLC1ONMx8mmrEZyiqYZPZ9gLtK1IUXXE
-         WpHQ==
+        d=gmail.com; s=20230601; t=1755583014; x=1756187814; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=r/K5k9RF+h67xPl/CyfbDuSgELgK/EITCycwmL4sbSM=;
+        b=BCjmdTatNClIkS+S6l7w9IBIVUxtBKv1/8TP8zqaC33znBgXTb3jFiIZIEjLak/Jtq
+         KKuAqYVoN4+CRom2ZjA5tPsB+r1UihN8glyiKnuwv+o2UBBECY+X6+wzRiWC4ivNmWsU
+         bRe6op3JyrVfFfqbj/xu4qqeXFxLUvn+rNdnwUuCGsXiS90Eq4Jg0PP5jY7EA4OPOd5w
+         5+xV/hwePqjcNDjDcGd2K/XvjYJF9KZ4mieBQviQzAwGSHX8T+Zsv/OepAq1cUgoHVUK
+         en0wdCAvKR20Fy2U5W6Q9Pyd762p8KUxT/RUCK2zwC7EQiPZjp3ujEKPym/riWjomcax
+         /VlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755600268; x=1756205068;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=mdbX4XOcsn6jxuPvJpFjMc/E+kLP3lUEj6osHUeACFE=;
-        b=c3+bWU8v/SvxS2QYoDMVGVNQVyOBCQuzxeuFH50DZg6Fzp+I92gonxGkHasgTEoCUh
-         k2+r8V1zJb7CcvNhaDihAqU3RPa1owwA+U3ZNhM5uSNwc7IyKY+gu3+tu9TxenhHQSE/
-         yJYBQa9QBjMSPU/4AKVFT/quKxxebPTCnOfmB0cF5FfyRMqTeAzQWKXjd4oP7I9cjT4c
-         kGM7ZaDua/uZZ2vNNUlfG+cpDUSp+7LgSVdnmsc6n4pTO/5JZWlxoFioVd/Bl2MqNuv1
-         khlEmr6d5wn3MmQsxOHwxXXKgmmQwjMwx6wjkyx7MKV/2aCXxATrPBSmUQfx+EpD1gUM
-         X62g==
-X-Gm-Message-State: AOJu0YyME9kVYBp3wSw0BtrGc8qPZe8kSY8OzUZsO9RATfLSXo8JgRqC
-	87ZEOKB1H+ujkUZXwHeA0stBpG0pTmjL5L9cp2xzveuFWxP3OOk8c67YWSP4PA==
-X-Gm-Gg: ASbGnct0MHV/1lFA06XoVc0c6hkp5qnkIQlUJxwyem/ElMaOW+U3lYBDivT+Z2N98Eb
-	ag6xzKdD//VfP6zbdfM+jfBJUJ1TVkspM5VX6Hin7A/Leoaj2RWnLTzQ3X6Fy+u8AVLsU9NqKK6
-	TxAsvMVJI7sDp8sLivRZVrg8BhMZqTaf+GGxKI9K4jebvsieWOQKbPICGKiK2wW5cKGaXE+4F5j
-	bkwtarjkvpjFnT4cR+B7cwo34Od/k5MD+OdqTibB+wc0KzGuQr2NqGnVtnpjKE6VY/KdBp6JP8W
-	+7izgoRXXkbP5eym+CYsiNyPf2hZHGpW5HhvIKcKybA19eAzwQeaUsxmncL0UmbQpMAcqAjPoyC
-	YzWnNHekNL3svjdmJmrTn63t2ihk4m6Q=
-X-Google-Smtp-Source: AGHT+IEftx8ndaz3E1cqaueogup+pnVE2LMcJ2AaFExv7l/3yA3yw6etYUjWFkHJNVkFyL9vF754eQ==
-X-Received: by 2002:a17:907:96a8:b0:ae6:d51a:4ca3 with SMTP id a640c23a62f3a-afddf155893mr159869866b.25.1755600267898;
-        Tue, 19 Aug 2025 03:44:27 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-afcdd01168csm973870266b.91.2025.08.19.03.44.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 19 Aug 2025 03:44:27 -0700 (PDT)
-Message-ID: <04cd09ff-cb1d-4948-a198-7b2b7a244f16@gmail.com>
-Date: Tue, 19 Aug 2025 12:44:26 +0200
+        d=1e100.net; s=20230601; t=1755583014; x=1756187814;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=r/K5k9RF+h67xPl/CyfbDuSgELgK/EITCycwmL4sbSM=;
+        b=ZH5W9A80ujkqXr1xifbZfeQT5gumu8Xt51N+HtbRspDdD8sSt6iFryhV3++MDQp/6g
+         JekLArtu7tNLLN34G9C+71H835tTKP8nCghBa+t5FGxnlg3jmfhMrUJz64I/cINjnUNn
+         CVRaZkaKMthiRxJyaVFP1pBpKCr4qGu3DabJ8wSl+TGdLfz/7DbAe/R9RU4q7u5XcFDg
+         ZPZ203imhSBh5rEns82V200FiNMkYMj3AL7vitzg+Pej40BaVhLK7LQs0mgsa8xeia6L
+         8az3St9CuxUrG07zMLvtHuoHDMpBdyjdat1m4icnBa17RXBl913OlV1RzOMm5tTTmfU5
+         mJ0g==
+X-Gm-Message-State: AOJu0Yy3wHIEwaSHIyrbKyW/o9b/0r87yQuu1oAy4g3HHX78d6IHvLkc
+	9RrH3zX2pNJlra3fHRKqu9gNWooS9neNl89YqEujixY+qzivaw58YY75xN4Cew==
+X-Gm-Gg: ASbGncvLBFH8ULj3POXC9wuoPIZ3aXmAu2UjKs3i/6/1KzWMXTDvmHM+6iTNnPXHdNZ
+	GmGIdAwkGGfEzHoa+YxAuWXoZuc1IUsGT269n6lnm1q+m29j2FTZrce4dknbBgk0BcMsi04u5q0
+	pnSXxNC6kLxkTU0785Iz9WNdSucsvGlVxQUuyhYcTuVBnTXWokwxo51FOiFqGAgnsY2ClP3SPbJ
+	kGTzO55Ik3DmtSiayq5BxIvj8cRkM4Fs10nu7uZovgfs6PUM2Mi9JQ8EiEAElZbBe9vbC51ED5g
+	puFxOG2zoAeXOg+QwvsjpybgsAUEFrw9bNSP/xrcnRa/Bt3GCjvCwvEtsoQBKNtwP6uoQIjQLbS
+	3F9A37B6sAKvR/OWlbgxVP5VEJ+7wkpAROK+phrM=
+X-Google-Smtp-Source: AGHT+IG7uv4wp6pWIOpz2u1xInfa4mEzf+dSSPO0SLQbvAXRzUYOV3K06+fCqJKtGl+21g/VSRaezg==
+X-Received: by 2002:a05:6a21:6d9c:b0:243:78a:82d0 with SMTP id adf61e73a8af0-2430db1a50amr1489951637.29.1755582545874;
+        Mon, 18 Aug 2025 22:49:05 -0700 (PDT)
+Received: from bsp.intra.ifm ([137.59.64.99])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-76e7d5246e2sm1350565b3a.82.2025.08.18.22.49.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 18 Aug 2025 22:49:05 -0700 (PDT)
+From: Pratik Manvar <pratikmanvar09@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Pratik Manvar <pratik.manvar@ifm.com>,
+	Florian Glaser <florian.glaser@ifm.com>
+Subject: [meta-networking][scarthgap][PATCH] mbedtls: remove tag from SRC_URI to avoid fetcher conflict
+Date: Fri,  1 Aug 2025 18:21:13 +0530
+Message-ID: <20250801125113.3324-1-pratikmanvar09@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-networking][scarthgap][PATCH] mbedtls: drop tag
- parameter from SRC_URI.
-To: openembedded-devel@lists.openembedded.org,
- "akuster808@gmail.com" <akuster808@gmail.com>, Khem Raj <raj.khem@gmail.com>
-References: <20250815105844.584334-1-karn.jye.lau@intel.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250815105844.584334-1-karn.jye.lau@intel.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Aug 2025 10:44:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119000
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Aug 2025 11:02:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119001
 
-Armin, Khem,
+From: Pratik Manvar <pratik.manvar@ifm.com>
 
-Would that be possible to prepare an unscheduled fix-release with this?
-It keeps tripping people, I see reports on all channels.
+This fixes a fetcher error caused by conflicting SRCREV & tag values,
+even when they point to the same commit.
 
-On 8/15/25 12:58, Lau, Karn Jye via lists.openembedded.org wrote:
-> From: kjlau0112 <karn.jye.lau@intel.com>
->
-> Keep SRCREV and remove tag paramater to avoid
-> Fix Fetcher failure: Conflicting revisions error
->
-> Signed-off-by: kjlau0112 <karn.jye.lau@intel.com>
-> ---
->  meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
-> index 88b50a406..91adf6f5a 100644
-> --- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
-> +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
-> @@ -23,7 +23,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
->  SECTION = "libs"
->  
->  S = "${WORKDIR}/git"
-> -SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-3.6;tag=v${PV} \
-> +SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-3.6;\
->             file://run-ptest \
->             "
->  
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118974): https://lists.openembedded.org/g/openembedded-devel/message/118974
-> Mute This Topic: https://lists.openembedded.org/mt/114715887/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Error logs:
+| # ERROR: ExpansionError during parsing meta-openembedded/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
+| # bb.data_smart.ExpansionError: Failure expanding variable fetcher_hashes_dummyfunc[vardepvalue], expression was ${@bb.fetch.get_hashvalue(d)} which triggered exception FetchError: Fetcher failure: Conflicting revisions (c765c831e5c2a0971410692f92f7a81d6ec65ec2 from SRCREV and v3.6.4 from the url) found, please specify one valid value
+| # The variable dependency chain for the failure is: fetcher_hashes_dummyfunc[vardepvalue]
+
+Signed-off-by: Florian Glaser <florian.glaser@ifm.com>
+Signed-off-by: Pratik Manvar <pratik.manvar@ifm.com>
+---
+ meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
+index 88b50a406b..a0dc6a689a 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
+@@ -23,7 +23,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
+ SECTION = "libs"
+ 
+ S = "${WORKDIR}/git"
+-SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-3.6;tag=v${PV} \
++SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-3.6 \
+            file://run-ptest \
+            "
+ 
+-- 
+2.25.1
 
 
