@@ -1,107 +1,102 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D45E4C87FCA
-	for <webhook@archiver.kernel.org>; Fri,  1 Aug 2025 20:29:47 +0000 (UTC)
-Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
- by mx.groups.io with SMTP id smtpd.web11.97507.1754080178085779152
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF0ADC87FDA
+	for <webhook@archiver.kernel.org>; Fri,  1 Aug 2025 23:13:48 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web10.100912.1754090019184206997
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Aug 2025 13:29:38 -0700
+ Fri, 01 Aug 2025 16:13:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VvTKGPJV;
- spf=pass (domain: gmail.com, ip: 209.85.208.172, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-3323b99094fso10313121fa.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Aug 2025 13:29:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RHRVdDfE;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-b423036a317so1339849a12.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Aug 2025 16:13:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1754080176; x=1754684976; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1754090018; x=1754694818; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jQx4t/USJ1pw9YG7YWxKzTMp2LzxXc/77FfbDMyy60c=;
-        b=VvTKGPJVulJk7SbZq619w5nCb47k79HJ+L7g4+x6u9nmded1Y5WmOG31OZcBIy9D4c
-         ASlgkrfpV41gP+6nO3sPr1GInQC7vzA8t/yjYtS8ZoK5xHofq7Lp8Cs9DY7e/YTDq9QY
-         rFi2SZWeST8GSZmM1+gzlhOvFKoyav2gL0SXI5vQLRoj6B2vzOcFSimLpfqGxDPmwNG4
-         SL0lncANq0/CNTdmsfStUCtrg+aaeRwOimtzawiDPmKLMefxm3BHoG6lpUl8xC/6AMa8
-         P3BNO058XwMHis8Sb77VwUVbEmBpHDw4Cs60Lj76/dwo4hF7sn8DAg+6x1LUFM+mRJls
-         oJgQ==
+        bh=9lr6/gqYZRhPB/pfiX+2tM2zx9zwsfkFRSf7K3xu/e8=;
+        b=RHRVdDfE1dy0+LdpexiGO1E3JBiplof9cyD3vCgYCqCxgWc3050tXAHBk+xkW676p9
+         KZ6QuZV6BfSqFyDL8cbhgDzp3MvZHdoa11PKeH5t8zByA/NShxMugK90ed2KIZcvMlxa
+         vkTOGwwsYkdt7wI8lEyTBC3iJu6ySsyrSULH4C3LsWrJ1riiPWEEJTsD0eYQc8eDNgDM
+         b+fjfho9IZNihL5kAarOEK+e64hkScMjIhpI/LGird8WcPATC20lG1f1BGvU45Ktgk98
+         P/Q5gpqf/2jBZbKvEXxrAovRXRWV8uH8fRKE4cUysrsJKCIYCShtSmxMrdO+IeMnLblj
+         2Vvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754080176; x=1754684976;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1754090018; x=1754694818;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jQx4t/USJ1pw9YG7YWxKzTMp2LzxXc/77FfbDMyy60c=;
-        b=pZr32zF4cygaCjaNL1GCR0XpkpuO0AOO1ZjBz2ga01XnGimAXzF2jmnJdMyNQYViy0
-         23vlAinfSBXjgQ3aN4P8KURXPhmJucYVbdKXj6Kn7bFcyr9yChDZAq7nutbCMfBhbhm2
-         r7a/MhoUALRaVWDNi6vRZqNP+Wufv6+bLN5qc3Uz9RmatB07FCQNsIOZ4ueCupuSHf1Y
-         dhf7T6K+/2ZjklBzyYaIv2lqs3PXNwguwF1lUh/Swqtg2RPmdS6gDjfppQ+6DHUzL+R7
-         mD3r1qPl635BDj3EtUn1rSMsk5yy3qQUYAjAVxABATg3mCuYSKIoqmExmBAmVHZNZddH
-         PJ2Q==
-X-Gm-Message-State: AOJu0Yydj103hdxvZIWvQ0OO6ScFxyPtyizTxt9ds8EWVa6csrM4a03m
-	hOxYGnJdwlwPdVFfB0pbLOZWflxrjPHgkkfTuMH85P5jI+metcP5A5JEVSpx9oKvKRLpwjqgzjM
-	y12H8DpncE/IzFWMqOeRReZo6BnA0gVc=
-X-Gm-Gg: ASbGncsXaliJvoDaN4AiZE8jnnwcBnzyyZ8aThB4HEHLk3Dh2cWSWrj5ouQ5QdOMHoc
-	0/VQlqFszOPO1Uq+fRZHdZqafUhlv+BIkvPTRLutgeGTVd1Xqx4utNdBM9QegQeBu3RvB8yljRI
-	fA5hp53hMIuf31RH9THnGKo86uNAZixof4OsMYUvXinlGEQP6DYjsFZs+D0yy13JDyknpFynaoZ
-	3zZ8q2bHA==
-X-Google-Smtp-Source: AGHT+IGsJ/1w2/YGxypqFny4HEcK1OREIsqB8MCIbUpSXJXwcCQKTwM73niFvMMGsOzTLyia5KsexpIOAyLz+4af1jA=
-X-Received: by 2002:a2e:b954:0:b0:332:1553:a5ee with SMTP id
- 38308e7fff4ca-3325682af6bmr1402841fa.38.1754080175732; Fri, 01 Aug 2025
- 13:29:35 -0700 (PDT)
+        bh=9lr6/gqYZRhPB/pfiX+2tM2zx9zwsfkFRSf7K3xu/e8=;
+        b=iVSnnHXZ+xbWG8MgMCeBMJ63/WaztUygUc+tJ40Ni1Rkf+te3VZp40wTJ4lGcmd1Gp
+         Ul4WBEUAqj8MTJQxpSKjpUaQMgMi2wf2bysr8iXJY6CxKUntv5dN2wet9sARqRPpneWs
+         70qzgxLVD664MdNd0Z8D/NjzFbZP1KpdZVJgjywzhlC+hGQARzIlw2G9AV9MYcRiweWS
+         iQW5QnrW1mSiB59HL92oha8IXSHjJmvhUTYtl8jDV9gX63OYJxaB4RA3iRI1yAs0ylc0
+         4CuGQGu5H8VDpl4nnWMXj7ivC0BBUGp43RnZN9g4bG0SFMlI355XTkq3xmP5iOKz7HTB
+         TNlQ==
+X-Gm-Message-State: AOJu0YyZVDI3amgJHOOjrqS8prMQ1u7mjIRs5iPOoAUFakzS02tBsi2x
+	mRVlIpPGaABypI1OrwBzZw2GCO+Lrr8ebaAPwE6TbtQgWRr0F9YOjG2C9NKAY1BYM+4=
+X-Gm-Gg: ASbGncvCl38/uRBJiYWGlWItbiGJ6EzsOjUCIbl7dwqgVerY89OQ+7ScRULNiFzgt5h
+	Vl7Nujmk1EilEs8TimgCsHjVw5I4LlMLdH1jTrDWgvo2fmP/PZ4ySL+PJmdqm8AFdBz/wq4stRi
+	oXPsCGxRp17EY2IDEg12gaDIzBmGj/GtQ+O7FLXAecrBX9QedXLxi+z5tx3XgHGO5f5h3zxE1ED
+	S+Dp3Qj/zAXNmMc7pv4NbsYN97LtMY+nBxDZRy2rbi4g/qacVwUCKyBGHbwPfrkmA3ZtHiNwxMr
+	RtQwqAUpl7ByCB/L1oC0pGJ9DVYMV+jHdgcqguhwdzy5QnjSlDXYozD0pYzP7ggOImlJk5nAlo8
+	beHOIZCHZwuf4Dw==
+X-Google-Smtp-Source: AGHT+IG3QK2535K5hQy171q+c1m8Bi8ihl164hGqlcZjN2Fx3+lU1rf6/PYeUYUE6IoEoy1RmvavWA==
+X-Received: by 2002:a17:90b:1fd0:b0:315:9cae:bd8 with SMTP id 98e67ed59e1d1-321162b6c7emr1981972a91.23.1754090018234;
+        Fri, 01 Aug 2025 16:13:38 -0700 (PDT)
+Received: from apollo.localdomain ([2601:646:8201:fd20::a237])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b423d2f4fcesm2141884a12.33.2025.08.01.16.13.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 01 Aug 2025 16:13:37 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 3/4] python3-kivy: Set KIVY_NO_ARGS=1
+Date: Fri,  1 Aug 2025 16:13:31 -0700
+Message-ID: <20250801231332.4167568-3-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250801231332.4167568-1-raj.khem@gmail.com>
+References: <20250801231332.4167568-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-References: <20250708080158.50374-2-roland.kovacs@est.tech>
-In-Reply-To: <20250708080158.50374-2-roland.kovacs@est.tech>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 1 Aug 2025 22:29:24 +0200
-X-Gm-Features: Ac12FXxMfRdK6p8fPQQChepceyGIeNHZf8IriEsv9agI_VR_P6yhnl7FAbqqk-I
-Message-ID: <CA+chaQeH+HDZzNiWThCJk+o4gnwL8-PzspJGr7ev9tjjaF2CLw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH v2 0/1] jq-1.7.1: Backport
- multiple CVE fixes
-To: roland.kovacs@est.tech
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 Aug 2025 20:29:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118823
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Aug 2025 23:13:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118826
 
-Looks like v1 without Upstream-Status was merged to scarthgap, can you
-please rebase this v2 and send follow-up patch adding the
-Upstream-Status?
+This fails to compile with latest setuptools3
 
-On Tue, Jul 8, 2025 at 10:02=E2=80=AFAM roland.kovacs via
-lists.openembedded.org <roland.kovacs=3Dest.tech@lists.openembedded.org>
-wrote:
->
-> From: Roland Kovacs <roland.kovacs@est.tech>
->
-> I forgot to run patchtest before sending v1, so this version includes the=
- missing
-> 'Upstream-Status' and 'CVE' fields in the added patch files.
->
-> Roland Kovacs (1):
->   jq-1.7.1: Backport multiple CVE fixes
->
->  .../jq/jq/CVE-2024-23337.patch                | 236 ++++++++++++++++++
->  .../jq/jq/CVE-2024-53427.patch                |  82 ++++++
->  .../jq/jq/CVE-2025-48060.patch                |  48 ++++
->  meta-oe/recipes-devtools/jq/jq_1.7.1.bb       |   3 +
->  4 files changed, 369 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2024-23337.patch
->  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2024-53427.patch
->  create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2025-48060.patch
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118301): https://lists.openembedded.org/g/openembedde=
-d-devel/message/118301
-> Mute This Topic: https://lists.openembedded.org/mt/114042961/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+[ERROR  ] [Core        ] option --verbose not recognized
+Kivy Usage: setup.py [KIVY OPTION...] [-- PROGRAM OPTIONS]::
+
+    Options placed after a '-- ' separator, will not be touched by kivy,
+    and instead passed to your program.
+
+    Set KIVY_NO_ARGS=1 in your environment or before you import Kivy to
+    disable Kivy's argument parser.
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb b/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb
+index 4cdc773ba6..a2602a9a81 100644
+--- a/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb
+@@ -39,6 +39,9 @@ export KIVY_GRAPHICS
+ KIVY_CROSS_SYSROOT = "${RECIPE_SYSROOT}"
+ export KIVY_CROSS_SYSROOT
+ 
++KIVY_NO_ARGS = "1"
++export KIVY_NO_ARGS
++
+ REQUIRED_DISTRO_FEATURES += "opengl gobject-introspection-data"
+ 
+ ANY_OF_DISTRO_FEATURES = "x11 wayland"
 
