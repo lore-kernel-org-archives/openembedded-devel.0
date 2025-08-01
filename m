@@ -2,62 +2,62 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF0ADC87FDA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD46FC87FCB
 	for <webhook@archiver.kernel.org>; Fri,  1 Aug 2025 23:13:48 +0000 (UTC)
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
- by mx.groups.io with SMTP id smtpd.web10.100912.1754090019184206997
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web11.100700.1754090020219259091
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Aug 2025 16:13:39 -0700
+ Fri, 01 Aug 2025 16:13:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RHRVdDfE;
- spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-b423036a317so1339849a12.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Aug 2025 16:13:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RUE4qArw;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-76bd2b11f80so2150747b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Aug 2025 16:13:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1754090018; x=1754694818; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1754090019; x=1754694819; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9lr6/gqYZRhPB/pfiX+2tM2zx9zwsfkFRSf7K3xu/e8=;
-        b=RHRVdDfE1dy0+LdpexiGO1E3JBiplof9cyD3vCgYCqCxgWc3050tXAHBk+xkW676p9
-         KZ6QuZV6BfSqFyDL8cbhgDzp3MvZHdoa11PKeH5t8zByA/NShxMugK90ed2KIZcvMlxa
-         vkTOGwwsYkdt7wI8lEyTBC3iJu6ySsyrSULH4C3LsWrJ1riiPWEEJTsD0eYQc8eDNgDM
-         b+fjfho9IZNihL5kAarOEK+e64hkScMjIhpI/LGird8WcPATC20lG1f1BGvU45Ktgk98
-         P/Q5gpqf/2jBZbKvEXxrAovRXRWV8uH8fRKE4cUysrsJKCIYCShtSmxMrdO+IeMnLblj
-         2Vvg==
+        bh=UgVgLUGtpW3LYhf88ArhVv1TVPMVNqLHQLJQGDYHgKM=;
+        b=RUE4qArwIk8cI1eE/7viGfAEOtvVrqJEET1I7w3OEGI7LSaBSPB+Ufl/mHWiqueic7
+         5FVps7hr3xw7JWjT/IO8HVFXT8WxN3F8Y6UtPaJF0TXIJO6BY4PKpsgNhbNlQ0Fp1MSP
+         //AfjLmV4rz6+XZeGptrICVivYBFNnUL48u1sX8Rra6Ik/HC5fBeSyyZa2oeYrq+AKfb
+         2pKLFM59VrdF/N6kqN5Vgc9/Fc7A8swytjCnPgwIrWGqFQZW99NgDGjjsSuPK89lNDEz
+         frOlemEgexyjRGHsuMY0DRL6dQkidDO0/QbYR0d/UhyHtzXcRRZIzT2tj7CscF/esczx
+         kHzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754090018; x=1754694818;
+        d=1e100.net; s=20230601; t=1754090019; x=1754694819;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9lr6/gqYZRhPB/pfiX+2tM2zx9zwsfkFRSf7K3xu/e8=;
-        b=iVSnnHXZ+xbWG8MgMCeBMJ63/WaztUygUc+tJ40Ni1Rkf+te3VZp40wTJ4lGcmd1Gp
-         Ul4WBEUAqj8MTJQxpSKjpUaQMgMi2wf2bysr8iXJY6CxKUntv5dN2wet9sARqRPpneWs
-         70qzgxLVD664MdNd0Z8D/NjzFbZP1KpdZVJgjywzhlC+hGQARzIlw2G9AV9MYcRiweWS
-         iQW5QnrW1mSiB59HL92oha8IXSHjJmvhUTYtl8jDV9gX63OYJxaB4RA3iRI1yAs0ylc0
-         4CuGQGu5H8VDpl4nnWMXj7ivC0BBUGp43RnZN9g4bG0SFMlI355XTkq3xmP5iOKz7HTB
-         TNlQ==
-X-Gm-Message-State: AOJu0YyZVDI3amgJHOOjrqS8prMQ1u7mjIRs5iPOoAUFakzS02tBsi2x
-	mRVlIpPGaABypI1OrwBzZw2GCO+Lrr8ebaAPwE6TbtQgWRr0F9YOjG2C9NKAY1BYM+4=
-X-Gm-Gg: ASbGncvCl38/uRBJiYWGlWItbiGJ6EzsOjUCIbl7dwqgVerY89OQ+7ScRULNiFzgt5h
-	Vl7Nujmk1EilEs8TimgCsHjVw5I4LlMLdH1jTrDWgvo2fmP/PZ4ySL+PJmdqm8AFdBz/wq4stRi
-	oXPsCGxRp17EY2IDEg12gaDIzBmGj/GtQ+O7FLXAecrBX9QedXLxi+z5tx3XgHGO5f5h3zxE1ED
-	S+Dp3Qj/zAXNmMc7pv4NbsYN97LtMY+nBxDZRy2rbi4g/qacVwUCKyBGHbwPfrkmA3ZtHiNwxMr
-	RtQwqAUpl7ByCB/L1oC0pGJ9DVYMV+jHdgcqguhwdzy5QnjSlDXYozD0pYzP7ggOImlJk5nAlo8
-	beHOIZCHZwuf4Dw==
-X-Google-Smtp-Source: AGHT+IG3QK2535K5hQy171q+c1m8Bi8ihl164hGqlcZjN2Fx3+lU1rf6/PYeUYUE6IoEoy1RmvavWA==
-X-Received: by 2002:a17:90b:1fd0:b0:315:9cae:bd8 with SMTP id 98e67ed59e1d1-321162b6c7emr1981972a91.23.1754090018234;
-        Fri, 01 Aug 2025 16:13:38 -0700 (PDT)
+        bh=UgVgLUGtpW3LYhf88ArhVv1TVPMVNqLHQLJQGDYHgKM=;
+        b=u6R5ZuHlKlOmSM0J+MEZgtQZhpBKOUG0N7RL851yj6JJHwmuWHmYNRY3tG52RpTs4R
+         GS1S5tN1RWKVlQonmU58S0ZBFGnvX2qd+VrioSFjwhVsqhEr+It6BXYZjbxD9gXsjBXQ
+         ylhuvO4I0Qya9NYf8rBoYETR/IPgzzvHnl/IuszEwboMm0dWkdT1jgTvlJ4jOs9+2oY/
+         e3knNB3MW+NTR4I+ZSfvpBc4j/kOT8es08MAIa74yeYKPEVT4UVs1ZGRy+ypD4TbOmJv
+         OdRutiwIXHn4K59VhVRQUxhJosiLPIE3PgRwOGm5tKBaBgv55PObK31a105TgT5rI9em
+         wd/w==
+X-Gm-Message-State: AOJu0YwpSf+dmKz8HH+kqXIKn8T1dZhiTRTLSN8Fip6t9bakVQmFzJEp
+	lqDH1tOXU2D6t2GPGWnOmlZNfEdIWmLojpQor6bKlZoAftIdTDYEKI5nLCY1sk3PhR8=
+X-Gm-Gg: ASbGncusrda0+16DdoH1MRmqb13UqcUYokyfoxs+IO+pAibZYSCn2kpRUMlg1Qhp5G5
+	nW9BxyrJSES46INRFU32N1ESVxx1Jl5qjWgRlm5C4m62Lkrtr/Jds2ecDCkfziTFlqh8vmCZgfG
+	EnwWxEQReMxATMF7ouMbQG8/DC1FrcUhnz0BCFzUel0O9B4UNftX9c/zhhn9RhRNC32EWPVFGkZ
+	MFb8SJgWSF0IXiRY7iqWz54LW7iCsES6bmW6Ss0gmfWiktXI3b+OzxirEaD+mP96pykMP9C17Hu
+	LsGWPjLL4cx6Mp05sCHRiLUghd4F8eZ6mglSRxhZsGBLIy//wCG/9OEDVwSWkZA53PorI4lw5ck
+	5Ak/d5sfsP5svwg==
+X-Google-Smtp-Source: AGHT+IEPlt9w1MbWTdw2/dvuTzG7RtZDZwgEK8MP+x5jgJtDdhGldNJUQQtSChdjMIfAHmfoxz+gig==
+X-Received: by 2002:a05:6a20:3948:b0:22d:fd6:95a4 with SMTP id adf61e73a8af0-23df8fbfba7mr1729672637.12.1754090019283;
+        Fri, 01 Aug 2025 16:13:39 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:8201:fd20::a237])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b423d2f4fcesm2141884a12.33.2025.08.01.16.13.37
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b423d2f4fcesm2141884a12.33.2025.08.01.16.13.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 01 Aug 2025 16:13:37 -0700 (PDT)
+        Fri, 01 Aug 2025 16:13:38 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 3/4] python3-kivy: Set KIVY_NO_ARGS=1
-Date: Fri,  1 Aug 2025 16:13:31 -0700
-Message-ID: <20250801231332.4167568-3-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 4/4] python3-pydantic: Upgrade to v2.12.0a1 prerelease
+Date: Fri,  1 Aug 2025 16:13:32 -0700
+Message-ID: <20250801231332.4167568-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250801231332.4167568-1-raj.khem@gmail.com>
 References: <20250801231332.4167568-1-raj.khem@gmail.com>
@@ -67,36 +67,73 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 01 Aug 2025 23:13:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118826
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118827
 
-This fails to compile with latest setuptools3
-
-[ERROR  ] [Core        ] option --verbose not recognized
-Kivy Usage: setup.py [KIVY OPTION...] [-- PROGRAM OPTIONS]::
-
-    Options placed after a '-- ' separator, will not be touched by kivy,
-    and instead passed to your program.
-
-    Set KIVY_NO_ARGS=1 in your environment or before you import Kivy to
-    disable Kivy's argument parser.
+Needed for python3-pydantic-core v2.37+
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ ...rojects-Bump-pydantic-core-to-2.35.2.patch | 36 -------------------
+ .../python/python3-pydantic_2.11.7.bb         |  3 +-
+ 2 files changed, 1 insertion(+), 38 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pydantic/0001-pyprojects-Bump-pydantic-core-to-2.35.2.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb b/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb
-index 4cdc773ba6..a2602a9a81 100644
---- a/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-kivy_2.3.1.bb
-@@ -39,6 +39,9 @@ export KIVY_GRAPHICS
- KIVY_CROSS_SYSROOT = "${RECIPE_SYSROOT}"
- export KIVY_CROSS_SYSROOT
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic/0001-pyprojects-Bump-pydantic-core-to-2.35.2.patch b/meta-python/recipes-devtools/python/python3-pydantic/0001-pyprojects-Bump-pydantic-core-to-2.35.2.patch
+deleted file mode 100644
+index 794ebdbbc7..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pydantic/0001-pyprojects-Bump-pydantic-core-to-2.35.2.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 6558daf87f8ae156f913c0e76403cbffee40e3cc Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 22 Jul 2025 11:46:35 -0700
+-Subject: [PATCH] pyprojects: Bump pydantic-core to 2.35.2
+-
+-This matches with recipe in meta-python
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- pyproject.toml | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+---- a/pyproject.toml
+-+++ b/pyproject.toml
+-@@ -48,7 +48,7 @@ dependencies = [
+-     'typing-extensions>=4.13.0',
+-     'annotated-types>=0.6.0',
+-     # Keep this in sync with the version in the `check_pydantic_core_version()` function:
+--    'pydantic-core==2.35.1',
+-+    'pydantic-core==2.35.2',
+-     'typing-inspection>=0.4.0',
+- ]
+- dynamic = ['version', 'readme']
+---- a/pydantic/version.py
+-+++ b/pydantic/version.py
+-@@ -66,7 +66,7 @@ def version_info() -> str:
+- def check_pydantic_core_version() -> bool:
+-     """Check that the installed `pydantic-core` dependency is compatible."""
+-     # Keep this in sync with the version constraint in the `pyproject.toml` dependencies:
+--    return __pydantic_core_version__ == '2.35.1'
+-+    return __pydantic_core_version__ == '2.35.2'
+- 
+- 
+- def parse_mypy_version(version: str) -> tuple[int, int, int]:
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.11.7.bb b/meta-python/recipes-devtools/python/python3-pydantic_2.11.7.bb
+index 250a433726..e603e7dccd 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic_2.11.7.bb
++++ b/meta-python/recipes-devtools/python/python3-pydantic_2.11.7.bb
+@@ -11,10 +11,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
  
-+KIVY_NO_ARGS = "1"
-+export KIVY_NO_ARGS
-+
- REQUIRED_DISTRO_FEATURES += "opengl gobject-introspection-data"
+ inherit python_hatchling ptest-python-pytest
  
- ANY_OF_DISTRO_FEATURES = "x11 wayland"
+-SRCREV = "702aaa6354cc30ae815676c57a8bbb4557ccb295"
++SRCREV = "9b52422377d974ffc3de4e8b0bf7faab1acf2ec4"
+ PV .= "+git"
+ SRC_URI = "git://github.com/pydantic/pydantic;protocol=https;branch=main"
+-SRC_URI += "file://0001-pyprojects-Bump-pydantic-core-to-2.35.2.patch"
+ DEPENDS += "python3-hatch-fancy-pypi-readme-native"
+ 
+ RECIPE_NO_UPDATE_REASON = "Must be updated in sync with python3-pydantic-core."
 
