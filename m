@@ -1,127 +1,235 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12196C87FD2
-	for <webhook@archiver.kernel.org>; Sat,  2 Aug 2025 21:55:53 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
- by mx.groups.io with SMTP id smtpd.web11.6660.1754171745602673677
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97190C87FD2
+	for <webhook@archiver.kernel.org>; Sat,  2 Aug 2025 23:59:23 +0000 (UTC)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web11.8374.1754179159825773410
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 02 Aug 2025 14:55:45 -0700
+ Sat, 02 Aug 2025 16:59:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VM5wnOV8;
- spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-af0dc229478so309390166b.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 02 Aug 2025 14:55:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fIzObJLj;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-710e344bbf9so20681447b3.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 02 Aug 2025 16:59:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1754171744; x=1754776544; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1754179159; x=1754783959; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=VKFI5GCC8KnF7ZFiWUakvihNk96/5lboe7JON1MWfrI=;
-        b=VM5wnOV81H9ZDV9BQqnTARS4TruPr+/wb/8E+UCIzeSC+pRidXPWm1AtAZuwTAzSjS
-         Vt0K+B0WjpdS3o6TPcuspVen9VrgPWD9HtNDtJQtfQgncl3EsgQDo/mKFtRCjG3qMKji
-         rshN9UrywHvQ9cDJx9DT6BwKqvdB6wvIGMnCv4l4z9azeCx3BE8JQkTmC/vpQ47bwUcV
-         9TKflsm1/py5aCS8wZKWimWCGdt7MMSK0fyMjhqIb/BXU1/tCHWnqU+ZAPQk1+z04yck
-         ma6RrNrg01mOIp5YeNe04BwW2j6s8WoxLapk5HH6/F4jtqlhCZvBoqUizOu+W+wa/atT
-         30vw==
+        bh=7IZgDQsPqSYSInRrnodG0JqYT32hIGU0FzKyWAgTZVE=;
+        b=fIzObJLjONXSP49qYM3TMLUfhsI3OkXdeKF8zlZM+Iu/V4GsgsHpun5j4WlMwxyAuD
+         SHMnztQQGLsfJmR9fmlydCFiq6QKTTj3pubNQVs4t+cADQvv+FKW/vfTRFfZ3skEDD3C
+         B1jt03JiiA2rslOMkUyHrIhZeRWr1R7tZbYTg7xphsGgsJjqGsA9iJMZ1jzDTTHjriud
+         WxaDokF9L4IJvPqnhSXBf6fw2k/XqGpPtg8iwL2yDsCD1g1h5LDQQc80LCBIObFzRZmR
+         d7VpfQ2y0ay85l9b6KnqZlfGd7WhnrafFG6zwxQhfx0DdfqYDHwRLYFR6G1HOXs0SPoT
+         89lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754171744; x=1754776544;
+        d=1e100.net; s=20230601; t=1754179159; x=1754783959;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=VKFI5GCC8KnF7ZFiWUakvihNk96/5lboe7JON1MWfrI=;
-        b=FW1MudJYk3vUnHJHSkgiwleKtzpOZ/Tl56ezvSSJ+ZdE2o82kdoxmcs1vZpSgt/V9W
-         R2GYh+rpyvfd/RO+cfGrBkFurnlEnE/MTaSfNWw4jy5y0ZNqDMS/D1J73o8h5NVfImz/
-         Y7VjD5uLdJWzJ24RtLTecPBDmYZXmiDYRTbem5ZficJbjoU6H4X5ZgfN6I2QezcTKdvp
-         Irz/VJHrkIRSmMyUDgXVxy9LzYHEStiVGAmaME+dLhxnMvH5o0wHTAh9S/AgVZbXhbGK
-         pWQg7CJZK0OHYN6ytl43JtQpuLDacGC9KrOlKdCxhxPvmJ13PLXN/L0/TQNDsL7CRtsZ
-         514w==
-X-Gm-Message-State: AOJu0YwVjBLqkh4x9jFXIiUcyhgcO0FwFMyardERuYpcqP0ezbH09WYZ
-	yQLORDKisT4nD1Doo5mUbyQ5rib1e6YXtpCqaASRQSMn4ua1DOw7LOTqq0l9nA==
-X-Gm-Gg: ASbGncuLlT2cmRQslZmrIye5pMNpT5sM+MgmpleHvrjPXt3Rj3C4XXPEEXaNjTu4f4B
-	7vnRHUwU3oy0ROuBzaEVM7kUCsSa+53HWLPqAKzHAuKlycqloCHphlUdh7zC+WmZd1LXvjgj0tZ
-	Y8HVRiFN9wQPWKjFLwmR7o43imDyzNM2ta8AzrzibwCE37uLPK9Ezo/SdcrLA6hitbXMcmHZ7PC
-	2bTG6mM0p5pikSi308ILiMit/vYmBO7Vaahlrex79eh7ej/+Wwt2u+f65Es6IU1vvV5+VNdKKPr
-	M+WA7csejG29IYGw6CM6Fm/2AK4JMEtRAHdC4XojPWye1VHXNPO4y7q5Qd/P7g9q7RVnluDOle8
-	em/anOxYAFx3PRnHf1H5sfTePTw==
-X-Google-Smtp-Source: AGHT+IF6NEzxF/JqxH8hNOotolfdLhZLpNnZjt8Kw+jHEHYr8x4068y7aFL1O5WL07Tj1TRHvkkguQ==
-X-Received: by 2002:a17:907:3f99:b0:ae7:1c2b:b715 with SMTP id a640c23a62f3a-af9401932camr467882766b.49.1754171743421;
-        Sat, 02 Aug 2025 14:55:43 -0700 (PDT)
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-af91a1e88desm492741866b.71.2025.08.02.14.55.42
+        bh=7IZgDQsPqSYSInRrnodG0JqYT32hIGU0FzKyWAgTZVE=;
+        b=MhoWgmwa2TogkwDBv+B4pRwVA+9WL+Go6FQMjAJgZlaGOeVFHUu/BAgccoelM+98bN
+         R5LfOvOBmCEgWDwthZEYAqig85Rls8+Qbxr0lIojzisHVM8Ta1/5zWTWrHpVRXrZPw/M
+         9E9o+lio6sjEVrL+yWjiL+eodyvS8N/KmRFlY4y3jRrj6TkAoWyBY70dTSzkBmQJOZ9C
+         FQ3aFyFYla0CL/AaSXCEoPlWvZZcTE7afgJ9HBZ3kBFE71/QISgSJgIrDgkXpNkmpnwD
+         VeeiEXYFQWNTFWDs00TYbo8DW1/998Oz+of2lj3oxuicre2YS55E+t3Aots8ibq9z7D3
+         j/Uw==
+X-Gm-Message-State: AOJu0YxaBCW8FLFjEyXG7UD6xWJkDFtkKRAgtTpTaTzoaJhKFfRAP4iy
+	Y4qM5pIAGevwfUp4FrKiS9KudrpN3OoGQmEmFx/YCueJwhFZP6JLXFszjGM73g==
+X-Gm-Gg: ASbGncv0yoK1TQpxNIdSr7VB9FT40L2G4qeEhstxS213Qat6MMKzqpIXAgtPDUPzWhR
+	4py9gwpbjzqg77IZcXvxavWYKBpValbDLdXDWHca/SVdOSEFkWe7+xHsPZ/j8UPZJC4QW52OJ//
+	BcG7ilFwN6A5ldU9u1amyHsgIz/4gt/swjpa6Hzeb6+J8lxv0bwNfYIR2EIAD1Ne+ZesKmprZBp
+	37ZGwtl0x9O+8akg5bkxnHJ6KOG4qNZik8P2RWu0y0P52c/FloXKSvlIKBD5y/y3ThL7BOj5C1R
+	7PldaWi0yEkfjVYE8i/kXHyynuW5UYZbnTrxNLXoKUZ8XZvRx8BvWBOJV7S+yMOo81kWlYkmvtD
+	WPwW7LYESSxiC1Y0OzGnrngUsD16C
+X-Google-Smtp-Source: AGHT+IFCE5V3qgG1OQD2XtyLNiV4bGPLBm7AJax/0izs9mHHa8G492wN0CkM5cTrZ3ZAuoUT0J72HQ==
+X-Received: by 2002:a05:690c:2a92:b0:71b:66e5:9b54 with SMTP id 00721157ae682-71b7f07fd63mr52419227b3.28.1754179158289;
+        Sat, 02 Aug 2025 16:59:18 -0700 (PDT)
+Received: from localhost.localdomain ([67.233.61.26])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-71b5a3a9b63sm18227467b3.13.2025.08.02.16.59.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 02 Aug 2025 14:55:42 -0700 (PDT)
-From: martin.jansa@gmail.com
+        Sat, 02 Aug 2025 16:59:17 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster808@gmail.com>,
-	Roland Kovacs <roland.kovacs@est.tech>,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][scarthgap][PATCH] jq: add Upstream-Status and CVE tags into .patch files
-Date: Sat,  2 Aug 2025 23:55:36 +0200
-Message-ID: <20250802215536.3321-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.50.1
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] nodejs: upgrade 22.16.0 -> 22.18.0
+Date: Sat,  2 Aug 2025 19:58:12 -0400
+Message-ID: <20250802235812.108716-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 02 Aug 2025 21:55:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118831
+ <openembedded-devel@lists.openembedded.org>; Sat, 02 Aug 2025 23:59:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118832
 
-From: Roland Kovacs <roland.kovacs@est.tech>
+  0001-build-remove-redundant-mXX-flags-for-V8.patch - fix offset and fuzz.
+  0001-deps-disable-io_uring-support-in-libuv.patch - update for new libuv version 1.51.0
+    https://github.com/nodejs/node/commit/e397980a1a
 
-v1 version was merged instead of v2 from:
-https://lists.openembedded.org/g/openembedded-devel/message/118302
-add missing Upstream-Status and CVE tags from v2.
+  License-Update: zlib version change from 1.3.0.1 to 1.3.1
+    https://github.com/nodejs/node/commit/efebf461313db420243717f48aaa0b97d5279580
 
-Signed-off-by: Roland Kovacs <roland.kovacs@est.tech>
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+  Changelog: https://github.com/nodejs/node/releases/tag/v22.18.0
+  Changelog: https://github.com/nodejs/node/releases/tag/v22.17.1
+  Changelog: https://github.com/nodejs/node/releases/tag/v22.17.0
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-devtools/jq/jq/CVE-2024-23337.patch | 3 +++
- meta-oe/recipes-devtools/jq/jq/CVE-2024-53427.patch | 3 +++
- meta-oe/recipes-devtools/jq/jq/CVE-2025-48060.patch | 3 +++
- 3 files changed, 9 insertions(+)
+ .../oe-npm-cache                              |  0
+ ....16.bb => nodejs-oe-cache-native_22.18.bb} |  0
+ ...ld-remove-redundant-mXX-flags-for-V8.patch |  6 +--
+ ...ps-disable-io_uring-support-in-libuv.patch | 41 +++++++++++--------
+ .../{nodejs_22.16.0.bb => nodejs_22.18.0.bb}  |  6 +--
+ 5 files changed, 29 insertions(+), 24 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.16 => nodejs-oe-cache-22.18}/oe-npm-cache (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.16.bb => nodejs-oe-cache-native_22.18.bb} (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_22.16.0.bb => nodejs_22.18.0.bb} (97%)
 
-diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2024-23337.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2024-23337.patch
-index 93f55eecd0..8b8243b752 100644
---- a/meta-oe/recipes-devtools/jq/jq/CVE-2024-23337.patch
-+++ b/meta-oe/recipes-devtools/jq/jq/CVE-2024-23337.patch
-@@ -8,6 +8,9 @@ This commit fixes signed integer overflow and SEGV issues on growing
- arrays and objects. The size of arrays and objects is now limited to
- `536870912` (`0x20000000`). This fixes CVE-2024-23337 and fixes #3262.
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.16/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.18/oe-npm-cache
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.16/oe-npm-cache
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.18/oe-npm-cache
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.16.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.18.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.16.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.18.bb
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-build-remove-redundant-mXX-flags-for-V8.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-build-remove-redundant-mXX-flags-for-V8.patch
+index 7841a9d7bc..b47aa564cf 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-build-remove-redundant-mXX-flags-for-V8.patch
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-build-remove-redundant-mXX-flags-for-V8.patch
+@@ -25,7 +25,7 @@ Index: node-v22.16.0/tools/v8_gypfiles/toolchain.gypi
+ ===================================================================
+ --- node-v22.16.0.orig/tools/v8_gypfiles/toolchain.gypi
+ +++ node-v22.16.0/tools/v8_gypfiles/toolchain.gypi
+-@@ -97,33 +97,6 @@
++@@ -103,33 +103,6 @@
+      # Indicates if gcmole tools are downloaded by a hook.
+      'gcmole%': 0,
+    },
+@@ -57,8 +57,8 @@ Index: node-v22.16.0/tools/v8_gypfiles/toolchain.gypi
+ -    }],
+ -  ],
+    'target_defaults': {
+-     'include_dirs': [
+-       '<(V8_ROOT)',
++     'cflags!': ['-Wall', '-Wextra'],
++     'conditions': [
+ @@ -553,71 +526,6 @@
+            '-mmmx',  # Allows mmintrin.h for MMX intrinsics.
+          ],
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-deps-disable-io_uring-support-in-libuv.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-deps-disable-io_uring-support-in-libuv.patch
+index 01ae50cdc4..50d63cf78c 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-deps-disable-io_uring-support-in-libuv.patch
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-deps-disable-io_uring-support-in-libuv.patch
+@@ -14,15 +14,17 @@ Upstream-Status: Inappropriate [oe specific]
  
-+Upstream-Status: Backport [https://github.com/jqlang/jq.git/commit/de21386681c0df0104a99d9d09db23a9b2a78b1e]
-+CVE: CVE-2024-23337
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 +
- (cherry picked from commit de21386681c0df0104a99d9d09db23a9b2a78b1e)
- Signed-off-by: Roland Kovacs <roland.kovacs@est.tech>
++Updated by Jason Schonberg <schonm@gamil.com> August 1, 2025 for nodejs 22.18.0
++which uses libuv 1.51.0
  ---
-diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2024-53427.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2024-53427.patch
-index 3e27a13036..64a44a1307 100644
---- a/meta-oe/recipes-devtools/jq/jq/CVE-2024-53427.patch
-+++ b/meta-oe/recipes-devtools/jq/jq/CVE-2024-53427.patch
-@@ -7,6 +7,9 @@ This commit drops support for parsing NaN with payload in JSON like
- `NaN123` and fixes CVE-2024-53427. Other JSON extensions like `NaN` and
- `Infinity` are still supported. Fixes #3023, fixes #3196, fixes #3246.
+  deps/uv/src/unix/linux.c | 29 +----------------------------
+  1 file changed, 1 insertion(+), 28 deletions(-)
  
-+Upstream-Status: Backport [https://github.com/jqlang/jq.git/commit/a09a4dfd55e6c24d04b35062ccfe4509748b1dd3]
-+CVE: CVE-2024-53427
-+
- (cherry picked from commit a09a4dfd55e6c24d04b35062ccfe4509748b1dd3)
- Signed-off-by: Roland Kovacs <roland.kovacs@est.tech>
- ---
-diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2025-48060.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2025-48060.patch
-index 237a50413f..c3dfd8ce21 100644
---- a/meta-oe/recipes-devtools/jq/jq/CVE-2025-48060.patch
-+++ b/meta-oe/recipes-devtools/jq/jq/CVE-2025-48060.patch
-@@ -9,6 +9,9 @@ GHSA-p7rr-28xf-3m5w (`0[""*0]`) was fixed by the commit dc849e9bb74a,
- but another case (`0[[]|implode]`) was still vulnerable. This commit
- ensures string data is properly null-terminated, and fixes CVE-2025-48060.
+ diff --git a/deps/uv/src/unix/linux.c b/deps/uv/src/unix/linux.c
+-index 803a9a9d3f0..a4735f56cf0 100644
+ --- a/deps/uv/src/unix/linux.c
+ +++ b/deps/uv/src/unix/linux.c
+-@@ -465,34 +465,7 @@ static int uv__use_io_uring(void) {
++@@ -465,36 +465,7 @@
+    /* See https://github.com/libuv/libuv/issues/4283. */
+    return 0; /* Random SIGSEGV in signal handler. */
+  #else
+@@ -31,30 +33,33 @@ index 803a9a9d3f0..a4735f56cf0 100644
+ -  char* val;
+ -  int use;
+ -
+--  use = atomic_load_explicit(&use_io_uring, memory_order_relaxed);
+--
+--  if (use == 0) {
+--    use = uv__kernel_version() >=
+ -#if defined(__hppa__)
+--    /* io_uring first supported on parisc in 6.1, functional in .51 */
+--    /* https://lore.kernel.org/all/cb912694-b1fe-dbb0-4d8c-d608f3526905@gmx.de/ */
+--    /* 6.1.51 */ 0x060133
+--#else
+--    /* Older kernels have a bug where the sqpoll thread uses 100% CPU. */
+--    /* 5.10.186 */ 0x050ABA
++-  /* io_uring first supported on parisc in 6.1, functional in .51
++-   * https://lore.kernel.org/all/cb912694-b1fe-dbb0-4d8c-d608f3526905@gmx.de/
++-   */
++-  if (uv__kernel_version() < /*6.1.51*/0x060133)
++-    return 0;
+ -#endif
+--    ? 1 : -1;
+ -
+--    /* But users can still enable it if they so desire. */
+--    val = getenv("UV_USE_IO_URING");
+--    if (val != NULL)
+--      use = atoi(val) ? 1 : -1;
++-  /* SQPOLL is all kinds of buggy but epoll batching should work fine. */
++-  if (0 == (flags & UV__IORING_SETUP_SQPOLL))
++-    return 1;
++-
++-  /* Older kernels have a bug where the sqpoll thread uses 100% CPU. */
++-  if (uv__kernel_version() < /*5.10.186*/0x050ABA)
++-    return 0;
+ -
++-  use = atomic_load_explicit(&use_io_uring, memory_order_relaxed);
++-
++-  if (use == 0) {
++-    val = getenv("UV_USE_IO_URING");
++-    use = val != NULL && atoi(val) > 0 ? 1 : -1;
+ -    atomic_store_explicit(&use_io_uring, use, memory_order_relaxed);
+ -  }
+ -
+ -  return use > 0;
+-+  return 0; /* pseudo doesn't support io_uring https://bugzilla.yoctoproject.org/show_bug.cgi?id=15244 */
+++return 0; /* pseudo doesn't support io_uring https://bugzilla.yoctoproject.org/show_bug.cgi?id=15244 */
+  #endif
+  }
+  
++ 
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.16.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.18.0.bb
+similarity index 97%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_22.16.0.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_22.18.0.bb
+index 0663e8c52e..d2e7874a9f 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_22.16.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.18.0.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+ HOMEPAGE = "http://nodejs.org"
+ LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=b4f41dcacabc8f07b9ca7dee2f188a00"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0c50f40949c25ef1b63d51a6ae6c6cbe"
  
-+Upstream-Status: Backport [https://github.com/jqlang/jq.git/commit/c6e041699d8cd31b97375a2596217aff2cfca85b]
-+CVE: CVE-2025-48060
-+
- (cherry picked from commit c6e041699d8cd31b97375a2596217aff2cfca85b)
- Signed-off-by: Roland Kovacs <roland.kovacs@est.tech>
- ---
+ CVE_PRODUCT = "nodejs node.js"
+ 
+@@ -20,7 +20,7 @@ COMPATIBLE_HOST:riscv32 = "null"
+ COMPATIBLE_HOST:powerpc = "null"
+ COMPATIBLE_HOST:powerpc64le = "null"
+ 
+-SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
++SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-Do-not-use-glob-in-deps.patch \
+            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
+            file://0004-v8-don-t-override-ARM-CFLAGS.patch \
+@@ -39,7 +39,7 @@ SRC_URI:append:class-target = " \
+ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] = "720894f323e5c1ac24968eb2676660c90730d715cb7f090be71a668662a17c37"
++SRC_URI[sha256sum] = "120e0f74419097a9fafae1fd80b9de7791a587e6f1c48c22b193239ccd0f7084"
+ 
+ S = "${UNPACKDIR}/node-v${PV}"
+ 
+-- 
+2.43.0
+
 
