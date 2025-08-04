@@ -1,89 +1,116 @@
-Return-Path: <t.f.g.geelen@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BFF2C87FCA
-	for <webhook@archiver.kernel.org>; Sun,  3 Aug 2025 19:29:49 +0000 (UTC)
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.web11.2630.1754249385918308250
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6ACF7C87FDA
+	for <webhook@archiver.kernel.org>; Mon,  4 Aug 2025 08:33:53 +0000 (UTC)
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.web10.13435.1754296427871557363
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Aug 2025 12:29:46 -0700
+ Mon, 04 Aug 2025 01:33:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JvGW+j1s;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: t.f.g.geelen@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-61592ff5ebbso6434445a12.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 03 Aug 2025 12:29:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1754249384; x=1754854184; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=66RiX7TupL2OpNj8p5y86oLedbB2oWmkx0gFhHmlhsc=;
-        b=JvGW+j1s+3wEqZEWK8RUHVa6+Prl0UESSmlg5whCRJL+SjHBR/YqskY7lXW+8mDgOH
-         7jsjdXoGdgkhfXkweayeaSTndYMqBqJHXNxlO4fWCHtJXx0QVgXrgFE1MkibbmO0pgM2
-         5wM0PeEa0oWQWrDWf/eKRclao5q6PWFJ5VBGLsLK/xRcPCefsTw+RkTz6EEh/b0vvhw2
-         5EfYDRttMYZOMENa/6JOqU4tVlbaUwr1tHVJ4bTe1STky6hABD7WbOn5f9h/8vICk0DA
-         SB8FAvcLK94duZGB3Yvaf8pzqxEyYTSOgFus1FT9WCTnD4zG1nRTajuRc0Yb2jvNRpzQ
-         IBHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754249384; x=1754854184;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=66RiX7TupL2OpNj8p5y86oLedbB2oWmkx0gFhHmlhsc=;
-        b=rRTidJNLt3mi2Be2DqZWuMK+XSRFn+t/qXpaN4J19FUjt1fIpSmXgj7oWM11VsNPji
-         rTz32R+FlXnKmgSQN/bWrBrp1oyeWBXClHexZMiQaongVVRuTV0eZ4uFWBdG7vBa/wXA
-         lrpK4qds8dNVp/mKix/jVRfZesA0oogvZNePijDSPLtz+ZfRW9oXfT+QvX2xFxHOXO/E
-         4BrbQTJitGS5aX6cf/QcjA1kwy0L0mKPWNG2zmn/8gCc+8dTO1Bypb+5IFW/z95rDreO
-         2koYeAS6mZtQg3/+vrR3AdcTclbdbAgX2QXztzAtlTpzxqwvE9vBpUSrF6hpbtCQlydp
-         P2nQ==
-X-Gm-Message-State: AOJu0YzGxsLyoU3NT7svPhlcSo4QVsqbtMTt58ODscE4pFfjpcCuA1J6
-	KCjC+tijWjnC7K4lTnQJzqKYVWlgrg2iFBueBYtoxu9Ch9bQQE8KLUMt6ybR6UPP
-X-Gm-Gg: ASbGncsBepIN4Oq2mxj13y0YV6n9PEbCxgkK13JwpeoQvOh+ssu4BpVm4FcgCNWqzM+
-	6Qw8QRPd/QtWqbllAcpeZO50SULd9FFV0cl6QXF2OsWzpdq+pSno3TSyxpelAN/E16p6EJiGBW6
-	vlapKgwAAVE1VGtPqnXF4cx0jqmqMEj1+wnF/8H2ai9ZwD9w8UN/F6I2GB5QEBXUobJeCGXmhy4
-	U7xg4sKzp0FzJCev2YzbfLbEO52BkHfJeCiWjRgeTKrwNSYkeZToE20rovggvZvrMLcda6MX8os
-	aiOqw/4+Ao4nkH1PYZ9Rs3KStxuSHgweXVcPcjwcHOG6U6+KrjBe346GWABG3wSAn5aHWdGl5hk
-	H7/jYslQrXwIWN3z194ZF/ajrFTUjHab6y2XT5rTF1Ws+Cui2v2g6jdhRPHQNK0Qu6s7bP1qrRK
-	sf82g/ccpWkPw=
-X-Google-Smtp-Source: AGHT+IEUGxrlahZTkh8zFEEqd7pQJubyKsmyPUWUamculCM/jHauBTuFwBwP/m5tE/smaQnSpQu+YA==
-X-Received: by 2002:aa7:cb0d:0:b0:615:8012:a365 with SMTP id 4fb4d7f45d1cf-615e715f7a6mr4966724a12.25.1754249383676;
-        Sun, 03 Aug 2025 12:29:43 -0700 (PDT)
-Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-615a8f25739sm5841383a12.21.2025.08.03.12.29.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 03 Aug 2025 12:29:43 -0700 (PDT)
-From: Tom Geelen <t.f.g.geelen@gmail.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=NgBimn8q;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1754296429; x=1785832429;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=0IlcI1ZjxaAyRD7E+QckYu1iQHChBmKMtj8VlFpvxk4=;
+  b=NgBimn8qITXhk+mE1pL6emvmvpmGqa+53hTBLBduQZ1+jYXNkyJMllpy
+   P5tCEPfCmHbfbnrCU02aDfFFXkVSIuukHRaxRR2UOH3R3/QHBnfwbeEwU
+   K6gDE71Wq2RPhqWY890f18G9LF6mvv4XUjVGH/1jT/BlQeQCzSov8s7El
+   fNa53MyJpNYvH0deo4zy6ClUQ6TuIkfU9uLIL/o/8TrRPgF+R1dNUnLsq
+   5R6OleDRwZYcYQ8oZi7WcpvXeB+Vn+CrrEcONw/J7hvz6gxXsNq6gicfv
+   E62Rd1hqZgmWie9RiHmjExWEEhLinwDGZIlZIKDCJkrlZUPGjeNCa7BiB
+   g==;
+X-CSE-ConnectionGUID: VcsKHh3pQ4mMuIBXwnYFlg==
+X-CSE-MsgGUID: dZoI2ta/Rti2K865BBqSWA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11511"; a="207643579"
+X-IronPort-AV: E=Sophos;i="6.17,258,1747666800"; 
+   d="scan'208";a="207643579"
+Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.19])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Aug 2025 17:33:47 +0900
+Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 70490C00561
+	for <openembedded-devel@lists.openembedded.org>; Mon,  4 Aug 2025 08:33:47 +0000 (UTC)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
+	(No client certificate requested)
+	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id DF4F683D94F
+	for <openembedded-devel@lists.openembedded.org>; Mon,  4 Aug 2025 08:33:46 +0000 (UTC)
+Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 0706D1A0074;
+	Mon,  4 Aug 2025 16:33:43 +0800 (CST)
+From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tom Geelen <t.f.g.geelen@gmail.com>
-Subject: [meta-python][PATCH] python3-aioresponses: update inheritance to python_setuptools_build_meta
-Date: Sun,  3 Aug 2025 21:29:36 +0200
-Message-ID: <20250803192936.122824-1-t.f.g.geelen@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 03/18] graphviz: upgrade 13.1.0 -> 13.1.1
+Date: Mon,  4 Aug 2025 16:33:25 +0800
+Message-ID: <20250804083340.1649-3-wangmy@fujitsu.com>
+X-Mailer: git-send-email 2.49.0.windows.1
+In-Reply-To: <20250804083340.1649-1-wangmy@fujitsu.com>
+References: <20250804083340.1649-1-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 03 Aug 2025 19:29:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118833
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Aug 2025 08:33:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118836
 
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+Changelog:
+=============
+- When built with PangoCairo, the Kitty plugin is now available in Graphviz
+  static builds. Previously it was only available in shared library (on-demand
+  plugin loading) builds.
+- The distributed Fedora and Rocky Linux packages now include the Kitty plugin.
+- On Windows, the GDI+ plugin is now available in Graphviz static builds.
+  Previously it was only available in shared library (on-demand plugin loading)
+  builds.
+- Processing a graph with GVPR no longer makes explicit the default '"\N"' label
+  for nodes. This undoes a change from Graphviz 13.0.1.
+- 'nop' no longer preserves empty string labels. This undoes a change from
+  Graphviz 13.0.1.
+- The order of programmatic calls to 'gvContext'/'gvContextPlugin' and
+  'agmemread' once again affects default node labels. This undoes a change from
+  Graphviz 13.0.1.
+- Spline routing can now deal with horizontal and vertical lines. This removes
+  some instances of the "Something is probably seriously wrong" warning.
+- Using 'layerselect' beyond layer 1 no longer causes crashes.
+- Correct parsing of a PDF file's '/MediaBox' section no longer depends on the
+  internal 'BUFSIZ' constant.
+- Round tripping a graph through a file no longer causes it to acquire a default
+  node label '\N'.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-devtools/python/python3-aioresponses_0.7.8.bb       | 2 +-
+ .../graphviz/{graphviz_13.1.0.bb => graphviz_13.1.1.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-graphics/graphviz/{graphviz_13.1.0.bb => graphviz_13.1.1.bb} (97%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aioresponses_0.7.8.bb b/meta-python/recipes-devtools/python/python3-aioresponses_0.7.8.bb
-index 1b74b839a1..4fe9577b7b 100644
---- a/meta-python/recipes-devtools/python/python3-aioresponses_0.7.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-aioresponses_0.7.8.bb
-@@ -7,7 +7,7 @@ SRC_URI[sha256sum] = "b861cdfe5dc58f3b8afac7b0a6973d5d7b2cb608dd0f6253d16b8ee8ea
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_13.1.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_13.1.1.bb
+similarity index 97%
+rename from meta-oe/recipes-graphics/graphviz/graphviz_13.1.0.bb
+rename to meta-oe/recipes-graphics/graphviz/graphviz_13.1.1.bb
+index d15cd7288f..f385280f6d 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_13.1.0.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_13.1.1.bb
+@@ -23,7 +23,7 @@ SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-re
+ SRC_URI:append:class-nativesdk = "\
+            file://graphviz-setup.sh \
+ "
+-SRC_URI[sha256sum] = "13339b83ee5467001a035cfacd175702ac4b14f5d390f0d34e89437b29881278"
++SRC_URI[sha256sum] = "6c49d7dda4329f5a35ce70035d1ec6602dadae7a7077cd7efe43cb57f4bc8f22"
  
- DEPENDS += "python3-pbr-native"
- 
--inherit setuptools3 pypi
-+inherit python_setuptools_build_meta pypi
- 
- RDEPENDS:${PN} += "python3-aiohttp \
-                    python3-asyncio \
+ UPSTREAM_CHECK_URI = "https://graphviz.org/download/"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 -- 
 2.43.0
 
