@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D077DCA0EC7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4341CA0EC8
 	for <webhook@archiver.kernel.org>; Mon,  4 Aug 2025 08:34:03 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.web10.13437.1754296436254496950
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web10.13440.1754296438818344616
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Aug 2025 01:34:03 -0700
+ Mon, 04 Aug 2025 01:33:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=kt5INKGn;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=tFkGECM4;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1754296443; x=1785832443;
+  t=1754296439; x=1785832439;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ptobmNz4T3TZ1VVz5Bm8kqzOWtPDttGEqtOgeoyD6U8=;
-  b=kt5INKGn+403/ceLzVFvx3OpCJRPCufNxwRH3n2c0Hw9tNJM2Vlm0rxG
-   LIuO5Gi1mUePcJ4aWR8Si0SKv1hRQDzSxJSmJKPUrX+s6Y6alJT4PnKu/
-   /wF9AGQUtbKHgu8xc7i3TVmRQtBnzakRFuADNMgK146wQ/fuQejPfav0g
-   fWo/E80lpuo+GF5WJFiffqAEr+lPBzlZg2QOIHyTFIx5z75mxNYQ90Z8n
-   PrEWdFyn3KHUipGsQ8i7ErJ3LXIdkhmyYTcr1mhDSl7mmFDjZHcCC2RCz
-   vWlhMSfgQ7sfvlIbdyAN9NUOP6kVTYxpII9iMyEsgG/jt8AOO07cLHzWf
-   A==;
-X-CSE-ConnectionGUID: +LdufC4rS9e1q6y84SpkDw==
-X-CSE-MsgGUID: G+dz7zLSRK26ap9oKgIy6g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11511"; a="208301719"
+  bh=9NlveSkcMGbHY+pztMCnlESaZRzn/xVKM/C8D21h6B4=;
+  b=tFkGECM4kdEkCAmWJbeNRb7JN2guMX0sCN9840jKLsZks1lqwp9tTGhA
+   Zxytfi3HeTg4t5OzLUnDww9mWCY99rnWtBNCo0VxD02eU98V13VXXP/FG
+   iZLY2UpXkUQBrjyca4sSFtabOmgilDDXrZ23DOEOevv/paPn3CTPYM2Ow
+   YtP0WYJ+v2FCordBpCSSXMI4Ix71r1Q4zDIlSxm8QkebD4EDFZGLEnmXV
+   6XGZX34TS6rz5kgpZiVzbbjyA8gUWyDtKE0dklY9dEUE0Nnw5QPbPLSy8
+   d8eROFmw40Hdl7LJbcODtsio07VzXNq6Bd07Ajw8XIExq3Z1KJblbsdM2
+   w==;
+X-CSE-ConnectionGUID: Bjb30iZyRu6hHCvBKBxwPQ==
+X-CSE-MsgGUID: GQXW9o4tQoauKeiv3ukFLg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11511"; a="196835202"
 X-IronPort-AV: E=Sophos;i="6.17,258,1747666800"; 
-   d="scan'208";a="208301719"
-Received: from unknown (HELO az2nlsmgr1.o.css.fujitsu.com) ([51.138.80.169])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Aug 2025 17:34:03 +0900
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
+   d="scan'208";a="196835202"
+Received: from unknown (HELO az2uksmgr3.o.css.fujitsu.com) ([52.151.125.128])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Aug 2025 17:33:57 +0900
+Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 590AE1C00086
-	for <openembedded-devel@lists.openembedded.org>; Mon,  4 Aug 2025 08:34:02 +0000 (UTC)
+	by az2uksmgr3.o.css.fujitsu.com (Postfix) with ESMTPS id 619301002B9D
+	for <openembedded-devel@lists.openembedded.org>; Mon,  4 Aug 2025 08:33:57 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id BFBA31C00197
-	for <openembedded-devel@lists.openembedded.org>; Mon,  4 Aug 2025 08:34:01 +0000 (UTC)
+	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id CCD83844BFF
+	for <openembedded-devel@lists.openembedded.org>; Mon,  4 Aug 2025 08:33:56 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id C97281A0073;
-	Mon,  4 Aug 2025 16:33:58 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id E5AED1A0074;
+	Mon,  4 Aug 2025 16:33:53 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-webserver] [PATCH 17/18] swagger-ui: upgrade 5.27.0 -> 5.27.1
-Date: Mon,  4 Aug 2025 16:33:39 +0800
-Message-ID: <20250804083340.1649-17-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 10/18] python3-inline-snapshot: upgrade 0.25.3 -> 0.26.0
+Date: Mon,  4 Aug 2025 16:33:32 +0800
+Message-ID: <20250804083340.1649-10-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250804083340.1649-1-wangmy@fujitsu.com>
 References: <20250804083340.1649-1-wangmy@fujitsu.com>
@@ -61,37 +61,39 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 04 Aug 2025 08:34:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118849
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118844
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-bugfix:
- use open-cli instead of require('open') for Node 20+ compatibility
+Changed
+-----------
+ now have to specify test-dir in pyproject.toml when save tests in a folder other than tests/ in project root
+
+Fixed
+--------
+ pyproject.toml is now also located based on the current directory and the pytest-root, which solves problems when use inline-snapshot with uv-workspaces
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../swagger-ui/{swagger-ui_5.27.0.bb => swagger-ui_5.27.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.27.0.bb => swagger-ui_5.27.1.bb} (92%)
+ ...ine-snapshot_0.25.3.bb => python3-inline-snapshot_0.26.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-inline-snapshot_0.25.3.bb => python3-inline-snapshot_0.26.0.bb} (88%)
 
-diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.27.0.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.27.1.bb
-similarity index 92%
-rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.27.0.bb
-rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.27.1.bb
-index 4dc1b86125..f1eb6e4423 100644
---- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.27.0.bb
-+++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.27.1.bb
-@@ -10,9 +10,9 @@ SECTION = "net"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-inline-snapshot_0.25.3.bb b/meta-python/recipes-devtools/python/python3-inline-snapshot_0.26.0.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-inline-snapshot_0.25.3.bb
+rename to meta-python/recipes-devtools/python/python3-inline-snapshot_0.26.0.bb
+index 4f7949bf41..3296210017 100644
+--- a/meta-python/recipes-devtools/python/python3-inline-snapshot_0.25.3.bb
++++ b/meta-python/recipes-devtools/python/python3-inline-snapshot_0.26.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7a35eb90dfdf03953dd2074d0fdba1d4"
  
--SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=master;protocol=https"
-+SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=master;protocol=https;tag=v${PV}"
+ DEPENDS = "python3-hatchling-native"
+-SRC_URI[sha256sum] = "99fc959d1362443b7551246d787f80c4c1d7cc69963ac018caeda3f0a0b3736f"
++SRC_URI[sha256sum] = "cfb66e4c11984eaa9d258c50a6e56fc57bc1e91d253acb4312968899e3f7ad54"
  
--SRCREV = "7b86721ad6494216d8bad0540c737efe1885688c"
-+SRCREV = "43ed706e9519841e97401cfad83faca564b37eaf"
- 
- CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
+ inherit pypi python_hatchling
  
 -- 
 2.43.0
