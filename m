@@ -1,93 +1,99 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB9B8C87FDB
-	for <webhook@archiver.kernel.org>; Mon,  4 Aug 2025 08:34:13 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web10.13443.1754296449301090965
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC748C87FD1
+	for <webhook@archiver.kernel.org>; Mon,  4 Aug 2025 11:19:04 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.15476.1754306338333498364
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Aug 2025 01:34:09 -0700
+ Mon, 04 Aug 2025 04:18:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=oqLBKrEP;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1754296449; x=1785832449;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=8Kwpg2mfy4QYNVZvW9dwKMNpOzYEYlBnQCEyU0QAFao=;
-  b=oqLBKrEP8c39fl2oB5y2oqal79IWc2bNmWocKyGF8rR4XJJrosKV0+WU
-   7ueF/TthzZSCtGzFRJ529PXBOJN6ZIfcmseMYJnV0LErA/Bz8HG84rqBm
-   O7vEeml8fihXa2jI9zJQu+HzNgQjXecchClukFhevqeMFDh3jOdirz20P
-   mN69D0I6PDkrvvybzEjfyP9SCFtiP8SUNfk//KluNp5APF1mN29jW4cKs
-   7N3uoriwDR5SV9sBULHpB8jLpISPjj9rinW0b+giuV8IeeDL5oLIeFzec
-   aia8HXFS55pGFG+xe/3J0oksdmTGAe0OoEBOL5iI3KwllrtqR3zzdYZol
-   w==;
-X-CSE-ConnectionGUID: JBWwSuo7S9W7a+2toDAH2g==
-X-CSE-MsgGUID: kPKy10Z/RXG7P4rrDPw7qA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11511"; a="208890693"
-X-IronPort-AV: E=Sophos;i="6.17,258,1747666800"; 
-   d="scan'208";a="208890693"
-Received: from unknown (HELO az2nlsmgr3.o.css.fujitsu.com) ([51.138.80.169])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Aug 2025 17:34:00 +0900
-Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgr3.o.css.fujitsu.com (Postfix) with ESMTPS id 587C6100034B
-	for <openembedded-devel@lists.openembedded.org>; Mon,  4 Aug 2025 08:34:00 +0000 (UTC)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(No client certificate requested)
-	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id BF60E1800BF6
-	for <openembedded-devel@lists.openembedded.org>; Mon,  4 Aug 2025 08:33:59 +0000 (UTC)
-Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id B01891A0071;
-	Mon,  4 Aug 2025 16:33:56 +0800 (CST)
-From: Wang Mingyu < wangmy@fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 14/18] python3-pyroute2: upgrade 0.9.3 -> 0.9.4
-Date: Mon,  4 Aug 2025 16:33:36 +0800
-Message-ID: <20250804083340.1649-14-wangmy@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
-In-Reply-To: <20250804083340.1649-1-wangmy@fujitsu.com>
-References: <20250804083340.1649-1-wangmy@fujitsu.com>
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=0311c5c32a=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 574AUOCo2437508
+	for <openembedded-devel@lists.openembedded.org>; Mon, 4 Aug 2025 04:18:57 -0700
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 489j6gs9uq-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 04 Aug 2025 04:18:57 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.57; Mon, 4 Aug 2025 04:18:56 -0700
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.57 via Frontend Transport; Mon, 4 Aug 2025 04:18:55 -0700
+From: <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-webserver][scarthgap][PATCH 1/1] apache2: upgrade 2.4.62 -> 2.4.65
+Date: Mon, 4 Aug 2025 16:48:49 +0530
+Message-ID: <20250804111849.3601694-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=d5n1yQjE c=1 sm=1 tr=0 ts=68909721 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=HXCqcy9q75gA:10 a=2OwXVqhp2XgA:10 a=rdg3_GxQAAAA:8 a=t7CeM3EgAAAA:8
+ a=IhUYoywTZCXilfiUsGMA:9 a=dYCL7Ul1fIsA:10 a=oa8Jmjjpy-EA:10
+ a=4bfGIIMrVqvzAeZ94R2q:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: ERbUf0e9icghYSdvzGUu38V9qzqROUR1
+X-Proofpoint-ORIG-GUID: ERbUf0e9icghYSdvzGUu38V9qzqROUR1
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODA0MDA2MSBTYWx0ZWRfX4blLr30cL0tZ
+ c75bupbhNpSSJLWh7NJ9VU/OIuKkyRnARTRxV22tOFwtOnqR9LfbGd2e/Z5OB2+DTTAAPH3yJLP
+ yyudYdJ/B4tyy5rO0HPMdsDwNXbs3fUVc4fdh1kp5A1FqRRoTsGyN9MwjQ6vBv8jfrvPSrgeE+w
+ fCcvTqA4SNsrcX24556YaTGujtgMaOA7UYaPs/ZB0u7sVHLRBRRUNsIENeebiglfQDca7E4SZc/
+ x53z5hlSPinEkeOEhNZs5Pc2+PvBtS0pZuxNim5+wMiapEThMf4L9gpUQogCi8nCIicq3fctC5Z
+ 2eG1YrdxSruXz0CjxlWwCIreHCB5ruuZJ4iVAbnGfSsNrcSh9isMSseahLkobUXlKBeYgBESndF
+ CestJflK
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-04_05,2025-08-04_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 bulkscore=0 suspectscore=0 malwarescore=0 phishscore=0
+ spamscore=0 priorityscore=1501 adultscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2507210000 definitions=main-2508020100
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Aug 2025 08:34:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118850
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Aug 2025 11:19:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118852
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Archana Polampalli <archana.polampalli@windriver.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+This upgrade incorporates the fixes for:
+CVE-2025-53020 CVE-2025-49812 CVE-2025-54090 CVE-2025-49630
+CVE-2025-23048 CVE-2024-47252 CVE-2024-43394 CVE-2024-43204
+CVE-2024-42516
+
+Changelog:
+https://www.apachelounge.com/Changelog-2.4.html
+
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- .../{python3-pyroute2_0.9.3.bb => python3-pyroute2_0.9.4.bb}    | 2 +-
+ .../apache2/{apache2_2.4.62.bb => apache2_2.4.65.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pyroute2_0.9.3.bb => python3-pyroute2_0.9.4.bb} (92%)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.62.bb => apache2_2.4.65.bb} (99%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.3.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.4.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-pyroute2_0.9.3.bb
-rename to meta-python/recipes-devtools/python/python3-pyroute2_0.9.4.bb
-index b0478ecbdf..2925ebbd5a 100644
---- a/meta-python/recipes-devtools/python/python3-pyroute2_0.9.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.9.4.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dccbff78d7d79ae7e53953d43445c6e6 \
-                     file://LICENSE.GPL-2.0-or-later;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://LICENSE.Apache-2.0;md5=34281e312165f843a2b7d1f114fe65ce"
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
+similarity index 99%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
+index 66a017a864..34526fc78e 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
+@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
+            "
  
--SRC_URI[sha256sum] = "97253f8a192e92ac29db9c159a50a59195d72f2b8cdcf20c069d59187fa49ad1"
-+SRC_URI[sha256sum] = "3cbccbe1af0c2b2aeae81b327e0e91aa94c81ab19f851e74b26bef70202f3070"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+-SRC_URI[sha256sum] = "674188e7bf44ced82da8db522da946849e22080d73d16c93f7f4df89e25729ec"
++SRC_URI[sha256sum] = "58b8be97d9940ec17f7656c0c6b9f41b618aac468b894b534148e3296c53b8b3"
  
- inherit python_setuptools_build_meta pypi ptest-python-pytest
+ S = "${WORKDIR}/httpd-${PV}"
  
 -- 
-2.43.0
+2.40.0
 
 
