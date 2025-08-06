@@ -1,50 +1,141 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <Qi.Chen@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D20DAC87FD1
-	for <webhook@archiver.kernel.org>; Wed,  6 Aug 2025 07:49:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DFCB3C87FCB
+	for <webhook@archiver.kernel.org>; Wed,  6 Aug 2025 08:14:10 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.19764.1754466536543590624
+ by mx.groups.io with SMTP id smtpd.web10.20037.1754468048282293607
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Aug 2025 00:48:56 -0700
+ Wed, 06 Aug 2025 01:14:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=0313cf4b72=changqing.li@windriver.com)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=0313fa0978=qi.chen@windriver.com)
 Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 5764g65c2103462
-	for <openembedded-devel@lists.openembedded.org>; Wed, 6 Aug 2025 07:48:55 GMT
-Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48bpyf8n36-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 06 Aug 2025 07:48:55 +0000 (GMT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Wed, 6 Aug 2025 00:48:54 -0700
-Received: from pek-lpg-core6.wrs.com (10.11.232.110) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
- 15.1.2507.57 via Frontend Transport; Wed, 6 Aug 2025 00:48:53 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [scarthgap][meta-oe][PATCH] luajit: fix several CVEs
-Date: Wed, 6 Aug 2025 15:48:52 +0800
-Message-ID: <20250806074852.2256636-1-changqing.li@windriver.com>
+	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 5767e5Lp2394011
+	for <openembedded-devel@lists.openembedded.org>; Wed, 6 Aug 2025 08:14:07 GMT
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11on2040.outbound.protection.outlook.com [40.107.236.40])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48bpyf8nrk-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 06 Aug 2025 08:14:07 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=nEu5q8TeMab3PTVKs4lDaAzFveE2JLiQUJqC6fe2JpnHYSTjuMPB7zlwYkMtywiAbBGAf5b7NScwa6SLpzzTC6h3VokjZvHFB0p0cAGAiACWBVBcIJ7r/EdqjFD9n5eVQfJv4RjtVD1RgSNWGzQYlmo9VCIDkvQs9WjcC46XGUCAQA/93Nzt2G9nkrDp9FFISwHTjswHKn/5D5GbjJ4db51GC1+zWnsZxCifpo7GqQeLTmYkcyNY4ILUwJD80lZ7aDVIT5NBxS+6UZJfcoqgfbr33XRFinEnAe1pe/eVSWjjNchkfWVO4A8vy4H0OyL2XcB4MnI9pyAQNU+XFeG50g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fW1nGScJIO8fh9LeJSzFKgbPoLUzpAPMJjWUtwWsFhU=;
+ b=oajVUYQDVkiOr+YIZG4J288OSBzMP5OBjuSp6grCYa5uE0AHRyv8MsRVU7vknVVmZkvN0kuZu1LsGm88l8DDMdFgpnwvuFvftVmt6hPJidGZxa1YEtQ/wEdBhZTuCMmCMt8nE5y/Uaf5p/xIzvxbs6BVNJ+PGt2JJJEqDhzvsTHdrp/68lljypEwb6D8lUBvOLbLmjF8ZRLJiFntDYfunWa7Cql1j35zL/1NBjmMwSNnDPH9RpCxACtCPo5Ye0NZFDlxC7srBgGiQk4PYK2LU950gLrUcnCfT3Vf8p+0dmXaL4xvM/1fkf0PlUKtc2MAojrF9KKgnOwJux9CZ+ACMQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CO6PR11MB5602.namprd11.prod.outlook.com (2603:10b6:303:13a::5)
+ by DS7PR11MB7932.namprd11.prod.outlook.com (2603:10b6:8:e5::6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9009.15; Wed, 6 Aug 2025 08:14:05 +0000
+Received: from CO6PR11MB5602.namprd11.prod.outlook.com
+ ([fe80::a7e3:721d:9cec:6093]) by CO6PR11MB5602.namprd11.prod.outlook.com
+ ([fe80::a7e3:721d:9cec:6093%6]) with mapi id 15.20.9009.013; Wed, 6 Aug 2025
+ 08:14:05 +0000
+From: Qi.Chen@windriver.com
+To: openembedded-devel@lists.openembedded.org
+Subject: [oe][meta-oe][walnascar][PATCH 1/2] protobuf: upgrade from 5.29.4 to 5.29.5
+Date: Wed,  6 Aug 2025 16:13:45 +0800
+Message-Id: <20250806081346.2626482-1-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-GUID: tA7iOAFI9tGEDcxZ4R77Yis8jbUQg2A3
-X-Proofpoint-ORIG-GUID: tA7iOAFI9tGEDcxZ4R77Yis8jbUQg2A3
-X-Authority-Analysis: v=2.4 cv=ZpHtK87G c=1 sm=1 tr=0 ts=689308e7 cx=c_pps
- a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
- a=2OwXVqhp2XgA:10 a=NEAV23lmAAAA:8 a=nm2HxRzrAAAA:8 a=t7CeM3EgAAAA:8
- a=lPrlyKwi4UVt_kho0m8A:9 a=xTkba3CB784Yst2QIEaM:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODA2MDA0NSBTYWx0ZWRfX2rzzlOWRcdkm
- aZjJnhqQNFNj3x0AHgpDftM/e1m3ChxgC7eAsBk59ac6CVmw+Vl1Xz3b263jze6h3Cq1nKvo+hx
- K2Wmu4oHIsJ5mxqlPBz74IPwL6oo76qKkdKqRfNteSh2KvU7HDKfYtu4CQ3oQyxfFnrSQKl5Rmt
- tZgERDAcA7jHHHbCdGCf4dkxWwGC8C7UDUlAFOsvoYZcoRcY8+prYegUFh7CvJIok0oaBjoKNNa
- EMEkt4fj7v9apCf9/F6uBMAYrg3w9OGXU5iQTvtDp3TouishLmQCQBhgZ3oBgzjnvzbunWQMAcw
- w5/UucP5x5cfSduvoQTI7a5L8c6s5wobFnu6RV3uZBLN8jnob6JdzeZLErEw04=
+X-ClientProxiedBy: TYWPR01CA0040.jpnprd01.prod.outlook.com
+ (2603:1096:400:17f::9) To PH0PR11MB5611.namprd11.prod.outlook.com
+ (2603:10b6:510:ed::9)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO6PR11MB5602:EE_|DS7PR11MB7932:EE_
+X-MS-Office365-Filtering-Correlation-Id: 411a96c0-b406-46b3-2c8a-08ddd4c13354
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|52116014|376014|366016|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?YdB0A5MzTWfPJQLAVPfNeANSN8JwMCKZedqm6B351Y6Mx46gDC7AIH/vcdSM?=
+ =?us-ascii?Q?qfS3+buQvC6XAqLBFhaKKqRK+OBfIvJ5kieYnxm69kVdmwOKCHbsaFkujTv2?=
+ =?us-ascii?Q?HqQz7laosGPbNsSHVZwSX7N29g7VilEi8ub0hTMVHMgjFT2YTMhXsS+8QqUc?=
+ =?us-ascii?Q?71PDPmBINu9SJ+TrDYK17q52l68PxiW8I/aJeqm+eP4k5djgbfrGKHtvbvkX?=
+ =?us-ascii?Q?S7JAkW2KaCA+San6Wcl175ZzkJeF0GGhY0De/AfV4ataczrwSM3F5QSxrU29?=
+ =?us-ascii?Q?Bp8ynQZLHSgyeW9bejfyGZV9g3KmVD7zyQJZ3HYtli31WmILlfv5rGTuckYa?=
+ =?us-ascii?Q?cr3QBuOY163o5QmmxGaKu/3Mtf6Yq72HM/ziH3ztyODlgMhbzcH8gV12iS44?=
+ =?us-ascii?Q?oAWfeMogyhGf6J4EBHILTu5DfA2uJYj/VdSPCl1ak5tsrenCcyr/B8KZ7vUw?=
+ =?us-ascii?Q?5j7Rf1Y+u3Gn2YtFE51Wbw9ujR1pqzHXhKW6p0eIqk3VC7j9hwwDzJeiERB8?=
+ =?us-ascii?Q?mPKpz87E/v8AjldMKY65O67OSvktMcUvX+p5yK+ATuUJJXCvQpLrNgvViJbl?=
+ =?us-ascii?Q?2m8dEHcd5gf6djCqQSOm3txZ9GLItfariJ+ACaMhfEkiTW/Jd7q7zvqLSqGY?=
+ =?us-ascii?Q?NAJMfrPYhODJn6omr7x1hVXFCJqAV7+Yc1Tf9Z/cvf35hs/Uo6Yrn6GKUJYL?=
+ =?us-ascii?Q?Jan0EBkH05oQ0GuXQWClBKM0c0xgIws+r2bDY+hozxw+XTEX6wHSThTX581+?=
+ =?us-ascii?Q?zzRdSkhotEiiIlmcrHIJWp9+kPctHVTP5j4U5UBqy+LA0we6zOwQTA/2tE/u?=
+ =?us-ascii?Q?9hXN4jKODeTXbI8SiQJV5iR81GtbpF2DrsHLsJwhNu4ku1QzEkHxj8yACWRM?=
+ =?us-ascii?Q?kJ2yOYTyohbx9NxlI6SguHOvVZQdt+qISPmnoRQhaVgd7e05q5vcfwap7U7E?=
+ =?us-ascii?Q?zBSHR1t77Hc5IZk6QvHSPUKcpj8deQgE/9AMwfHPFBMxVy9KOwyOc01hHwX+?=
+ =?us-ascii?Q?MOwxAS07incJmtRzDKtMB/c3kvNjFVclyEDB3Um3MR2IJpXHzn2pF7rtRbSX?=
+ =?us-ascii?Q?BimE80wT7ODWEpzu6QEMryrTORlnhrk0NjDLpSQAWUmzPDI5FPl5y1tiIaIX?=
+ =?us-ascii?Q?v9b7NQMxhjNrbpVR12i/tgHUKxaBo4Smcz1+1nrOmPSoj2MWI9RokitnvzW6?=
+ =?us-ascii?Q?04scpds0N4/zuuBCIFYZWnZZw/KeQvFDRmgzyn2DbtKShd2AuyZxEA5cZmtQ?=
+ =?us-ascii?Q?6ozVIaSLLGV6R7F/Urx147vYhKr294K9+zkA1qDEuTIWjQx0JaPEk31A8IQT?=
+ =?us-ascii?Q?11+oHxDwCn+kLhcp8u/+QedwLmYq3z3+X/caBtqsiEyiRLBBqdVm3Umic6x3?=
+ =?us-ascii?Q?uN6GasEFnnqm9M/zwxplIaYkJ/cbSlrtHRTux/y3TikCtiq3xDIQ9ubL5hsI?=
+ =?us-ascii?Q?DjAfH1RK8sxexe/DFzZ49P28um/A0H1ewBPJjCsS9Henv82bucZWoA=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5602.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?WBcN8ZewA8HRINVw3Mg5TImzzrh/ayhK7SROuBpD0Fo+rRgqvN+uaRZUWyw+?=
+ =?us-ascii?Q?4i/hNu9BhEYQ6RX4mbKP38/KHdnxoAy740pPtNsRkZpxjggPiKxf5gNDAzv3?=
+ =?us-ascii?Q?aDjPNo4Ab3KlRNU8+NlzrtZwWIKCDT6gGIqk5YRAzCRh1kA9xkcpWSyCW47e?=
+ =?us-ascii?Q?oshnS4YRjdQSYD4xzIfebuVGBXfcGLVFuGHauR0uFAwc0QKVOZ/w3itE4PtM?=
+ =?us-ascii?Q?R72analsXObJepU3bLZMfUvP3tdW5HwWnMI+qLyWPeb1HHp29ObyNsUth50c?=
+ =?us-ascii?Q?sC6RT9mrIhkUh2kHsNHT1P0Yc04YixwDli7OpHcmOy0WOmgJQzpeDv3/iwGY?=
+ =?us-ascii?Q?9pzCKGy0gyiyR1lVQuIIP2dLTxe72/37PVrLhzSSChwxNAEP+w1ViireHdGZ?=
+ =?us-ascii?Q?AR+AEI1iVg86r5pCtCx6wzkt8AgdNITQB/7gFNyuDE9PaD6eWT1KyWKKS51W?=
+ =?us-ascii?Q?OHAWMxt9iD8GyhqEqCswAku4Di/1Ay9UDxkFqUtcA4rTHlBkWp7w0qp/WGhk?=
+ =?us-ascii?Q?gJ/YXrLbTqFzPwVFGQ6RRgDaKXNPMBUGLwdbC4V09NIKf5wzNbdssIkFmxBD?=
+ =?us-ascii?Q?tqmx1Nz0h9VYow53shQrmBUyb+Rch0F84xI8dlIfQgSkIy9wRjA6c2WMiOiu?=
+ =?us-ascii?Q?Cj3ECAsag5qrCRqlYWVzz1hCTM0sZ768jfgC1+4MWSylXtAdCfYaJ7b1pAUi?=
+ =?us-ascii?Q?RgPHcj91K8y1bqfv/nvhgG7Let20YZQNc9kKRRrMaUM/61ahVkSVCUfPzT+K?=
+ =?us-ascii?Q?0StlGTwO2sDpLjp5nfrCmqFw7AMqc1cfkJOHaJ00pYLQLWA9eMofPO4k2gEC?=
+ =?us-ascii?Q?tVCbVOOVntZMIiwMhusGr/DowizMShrVup7FpAF9hfTTFJwf3odIT0TaOohO?=
+ =?us-ascii?Q?w7/Dxajy/p1gYz0bMXJNhJ6XBuMO2LZOxZKSFOOsw8Dy/w3lZhzMkFkYb9lN?=
+ =?us-ascii?Q?vCDNk3ic4wgd7zcjCdkAw3gW7RM+oKKqhU3VbA8DZw/AJB00KrTuTpjidPkL?=
+ =?us-ascii?Q?UnlqPmGOwLNZnXUFpjdGogSn/KBgSqjb3HiC2+KbZblPuBOcYBnsgiCc1hMS?=
+ =?us-ascii?Q?uqaDeiV7OiEnFKMpQK2O4glEMd5/YrX39r3K8EnF270p6H9Jb3E7qfPFG1S4?=
+ =?us-ascii?Q?tezqZ1bx9GU8C8RUz6kwmgWZnlwmXj82RqQscTh5ZIF0X97Vc9FlkP0CPmOk?=
+ =?us-ascii?Q?aluYEUAoin7M4qi2iZeqIdwSKG0D+QbqazoHeHB4G9cr2tAj3YXhWb0mYsiJ?=
+ =?us-ascii?Q?fgjncGXTGyJyQJ7oHnxFfyMS3Q/NPplPhqD2f5rtLGYaPwjqRQsFAKZJVUsy?=
+ =?us-ascii?Q?PcsM6UVfrORk7jTLyGEZpmksH6I6DWMQa5fxwgDc3oJAHyyD7pAvH9hOvqyQ?=
+ =?us-ascii?Q?5Fcuh4Ci4B34parOAtcgrp8PVBN5iroLkoAb76Mr7l4BuIAkzcvZUtCwRK9i?=
+ =?us-ascii?Q?w2eF8jnpbQfC8lXalV8VbQ/r2MYYCf4smaap8S640wdoQjGRt1l8mkDJGoaO?=
+ =?us-ascii?Q?ZysWH3bU+kCUSLyCAj2iUbvA0DPn275FQ7nt0p1iJQ/dHQJqIZrlCr4EPmXL?=
+ =?us-ascii?Q?uMQgAAwXhzAraLzMftmnwVpj94N0Mkm/mQNApLWD?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 411a96c0-b406-46b3-2c8a-08ddd4c13354
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR11MB5611.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2025 08:14:05.2731
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: gSom3jJANhGFieQdh2064nJdQGNV8FleOJEA3a9xVLkzuMPH8vc8wilJEkrinV/rHWPiM1bwUfcY3HastFVgSg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR11MB7932
+X-Proofpoint-GUID: sl2Fy0Px8yaP7ODOPq3Wj9PHw9atlDnf
+X-Proofpoint-ORIG-GUID: sl2Fy0Px8yaP7ODOPq3Wj9PHw9atlDnf
+X-Authority-Analysis: v=2.4 cv=ZpHtK87G c=1 sm=1 tr=0 ts=68930ecf cx=c_pps
+ a=liEUPl06j6ly8OSD0KH+qw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19
+ a=xqWC_Br6kY4A:10 a=2OwXVqhp2XgA:10 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8
+ a=NEAV23lmAAAA:8 a=jjZwBTYg8Yegfxom1SMA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODA2MDA0OSBTYWx0ZWRfX2rbMBvkNjYM/
+ vJXfaBWu2+DupGdg2NI//1/NlLYFCcTO1jCoeyBShQij6OnULZpvst+z0l7k6Qurt/1rzwFdenX
+ SQNw+mNiiIb7XD5ZyWzZCeXqiEFLyXQbYhILOUxRG5UWOFsz+pemY26F8RjddFhlxhvsYRmgrRo
+ WjmlvuItYLCaUQrv9ekYMVLvSivX5FJTNZEgSpeArmN28xSMAbUb9PULbXZCGZBFzb2/IdLeQdd
+ iYBYVXacqknF8KdWsBJbZJf32vBvtA6NWmcQlev4O/ByF3nLKl77v+Qq7o1nMCarWyWLbs5uoM/
+ +uXrhgRaboPFi23ASF3dqb4RxANgK6pQPGG/Z5yO8RdZid9MerD3FoBRe2V4eo=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-08-06_01,2025-08-04_01,2025-03-28_01
@@ -56,297 +147,40 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Aug 2025 07:49:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118886
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Aug 2025 08:14:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118887
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Chen Qi <Qi.Chen@windriver.com>
 
-Fix CVE-2024-25176, CVE-2024-25177, CVE-2024-25178
+This is a small version bump. It includes to following two
+commits to fix CVE-2025-4565.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+  05ba1a810 Add recursion depth limits to pure python
+  1ef3f01c4 Internal pure python fixes
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../luajit/luajit/CVE-2024-25176.patch        |  32 ++++
- .../luajit/luajit/CVE-2024-25177.patch        |  47 +++++
- .../luajit/luajit/CVE-2024-25178.patch        | 162 ++++++++++++++++++
- meta-oe/recipes-devtools/luajit/luajit_git.bb |   3 +
- 4 files changed, 244 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25176.patch
- create mode 100644 meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25177.patch
- create mode 100644 meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25178.patch
+ .../protobuf/{protobuf_5.29.4.bb => protobuf_5.29.5.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_5.29.4.bb => protobuf_5.29.5.bb} (99%)
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25176.patch b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25176.patch
-new file mode 100644
-index 0000000000..5d3048e05f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25176.patch
-@@ -0,0 +1,32 @@
-+From fd92fb62201b3980af8e538452102e9f21426ec6 Mon Sep 17 00:00:00 2001
-+From: Mike Pall <mike>
-+Date: Thu, 25 Jan 2024 13:23:48 +0100
-+Subject: [PATCH] Fix zero stripping in %g number formatting.
-+
-+Reported by pwnhacker0x18. #1149
-+
-+CVE: CVE-2024-25176
-+Upstream-Status: Backport [https://github.com/LuaJIT/LuaJIT/commit/343ce0edaf3906a62022936175b2f5410024cbfc]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ src/lj_strfmt_num.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/lj_strfmt_num.c b/src/lj_strfmt_num.c
-+index 79ec0263..c6e776aa 100644
-+--- a/src/lj_strfmt_num.c
-++++ b/src/lj_strfmt_num.c
-+@@ -454,7 +454,8 @@ static char *lj_strfmt_wfnum(SBuf *sb, SFormat sf, lua_Number n, char *p)
-+ 	    prec--;
-+ 	    if (!i) {
-+ 	      if (ndlo == ndhi) { prec = 0; break; }
-+-	      lj_strfmt_wuint9(tail, nd[++ndlo]);
-++	      ndlo = (ndlo + 1) & 0x3f;
-++	      lj_strfmt_wuint9(tail, nd[ndlo]);
-+ 	      i = 9;
-+ 	    }
-+ 	  }
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25177.patch b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25177.patch
-new file mode 100644
-index 0000000000..f02749498c
---- /dev/null
-+++ b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25177.patch
-@@ -0,0 +1,47 @@
-+From e27aa9c2fe7e7744b517ff0811defc11a81aa454 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Mon, 4 Aug 2025 16:47:31 +0800
-+Subject: [PATCH] Fix unsinking of IR_FSTORE for NULL metatable.
-+
-+Reported by pwnhacker0x18. #1147
-+
-+CVE: CVE-2024-25177
-+Upstream-Status: Backport [https://github.com/openresty/luajit2/commit/85b4fed0b0353dd78c8c875c2f562d522a2b310f]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ src/lj_snap.c | 11 ++++++++---
-+ 1 file changed, 8 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/lj_snap.c b/src/lj_snap.c
-+index 7d7347a1..f3645e87 100644
-+--- a/src/lj_snap.c
-++++ b/src/lj_snap.c
-+@@ -453,6 +453,7 @@ static TRef snap_replay_const(jit_State *J, IRIns *ir)
-+   case IR_KNUM: case IR_KINT64:
-+     return lj_ir_k64(J, (IROp)ir->o, ir_k64(ir)->u64);
-+   case IR_KPTR: return lj_ir_kptr(J, ir_kptr(ir));  /* Continuation. */
-++  case IR_KNULL: return lj_ir_knull(J, irt_type(ir->t));
-+   default: lj_assertJ(0, "bad IR constant op %d", ir->o); return TREF_NIL;
-+   }
-+ }
-+@@ -902,9 +903,13 @@ static void snap_unsink(jit_State *J, GCtrace *T, ExitState *ex,
-+ 	if (irk->o == IR_FREF) {
-+ 	  switch (irk->op2) {
-+ 	  case IRFL_TAB_META:
-+-	    snap_restoreval(J, T, ex, snapno, rfilt, irs->op2, &tmp);
-+-	    /* NOBARRIER: The table is new (marked white). */
-+-	    setgcref(t->metatable, obj2gco(tabV(&tmp)));
-++	    if (T->ir[irs->op2].o == IR_KNULL) {
-++	      setgcrefnull(t->metatable);
-++	    } else {
-++	      snap_restoreval(J, T, ex, snapno, rfilt, irs->op2, &tmp);
-++	      /* NOBARRIER: The table is new (marked white). */
-++	      setgcref(t->metatable, obj2gco(tabV(&tmp)));
-++	    }
-+ 	    break;
-+ 	  case IRFL_TAB_NOMM:
-+ 	    /* Negative metamethod cache invalidated by lj_tab_set() below. */
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25178.patch b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25178.patch
-new file mode 100644
-index 0000000000..485cffff31
---- /dev/null
-+++ b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25178.patch
-@@ -0,0 +1,162 @@
-+From f57533a41640087904ecbd5ca6946656078e6014 Mon Sep 17 00:00:00 2001
-+From: Mike Pall <mike>
-+Date: Sun, 4 Feb 2024 16:34:30 +0100
-+Subject: [PATCH] Rework stack overflow handling.
-+
-+Reported by pwnhacker0x18. Fixed by Peter Cawley. #1152
-+
-+CVE: CVE-2024-25178
-+Upstream-Status: Backport [https://github.com/LuaJIT/LuaJIT/commit/defe61a56751a0db5f00ff3ab7b8f45436ba74c8
-+https://github.com/LuaJIT/LuaJIT/commit/0d313b243194a0b8d2399d8b549ca5a0ff234db5]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ src/lj_debug.c |  1 +
-+ src/lj_err.c   | 22 +++++++++++++++++---
-+ src/lj_err.h   |  1 +
-+ src/lj_state.c | 54 +++++++++++++++++++++++++++++++++-----------------
-+ 4 files changed, 57 insertions(+), 21 deletions(-)
-+
-+diff --git a/src/lj_debug.c b/src/lj_debug.c
-+index fa189b6e..8d8b9eb5 100644
-+--- a/src/lj_debug.c
-++++ b/src/lj_debug.c
-+@@ -64,6 +64,7 @@ static BCPos debug_framepc(lua_State *L, GCfunc *fn, cTValue *nextframe)
-+     if (cf == NULL || (char *)cframe_pc(cf) == (char *)cframe_L(cf))
-+       return NO_BCPOS;
-+     ins = cframe_pc(cf);  /* Only happens during error/hook handling. */
-++    if (!ins) return NO_BCPOS;
-+   } else {
-+     if (frame_islua(nextframe)) {
-+       ins = frame_pc(nextframe);
-+diff --git a/src/lj_err.c b/src/lj_err.c
-+index 7b11e4d0..6b752728 100644
-+--- a/src/lj_err.c
-++++ b/src/lj_err.c
-+@@ -818,7 +818,14 @@ LJ_NOINLINE void lj_err_mem(lua_State *L)
-+     TValue *base = tvref(G(L)->jit_base);
-+     if (base) L->base = base;
-+   }
-+-  if (curr_funcisL(L)) L->top = curr_topL(L);
-++  if (curr_funcisL(L)) {
-++    L->top = curr_topL(L);
-++    if (LJ_UNLIKELY(L->top > tvref(L->maxstack))) {
-++      /* The current Lua frame violates the stack. Replace it with a dummy. */
-++      L->top = L->base;
-++      setframe_gc(L->base - 1 - LJ_FR2, obj2gco(L), LJ_TTHREAD);
-++    }
-++  }
-+   setstrV(L, L->top++, lj_err_str(L, LJ_ERR_ERRMEM));
-+   lj_err_throw(L, LUA_ERRMEM);
-+ }
-+@@ -879,9 +886,11 @@ LJ_NOINLINE void LJ_FASTCALL lj_err_run(lua_State *L)
-+ {
-+   ptrdiff_t ef = (LJ_HASJIT && tvref(G(L)->jit_base)) ? 0 : finderrfunc(L);
-+   if (ef) {
-+-    TValue *errfunc = restorestack(L, ef);
-+-    TValue *top = L->top;
-++    TValue *errfunc, *top;
-++    lj_state_checkstack(L, LUA_MINSTACK * 2);  /* Might raise new error. */
-+     lj_trace_abort(G(L));
-++    errfunc = restorestack(L, ef);
-++    top = L->top;
-+     if (!tvisfunc(errfunc) || L->status == LUA_ERRERR) {
-+       setstrV(L, top-1, lj_err_str(L, LJ_ERR_ERRERR));
-+       lj_err_throw(L, LUA_ERRERR);
-+@@ -906,6 +915,13 @@ LJ_NOINLINE void LJ_FASTCALL lj_err_trace(lua_State *L, int errcode)
-+ }
-+ #endif
-+ 
-++/* Stack overflow error. */
-++void LJ_FASTCALL lj_err_stkov(lua_State *L)
-++{
-++  lj_debug_addloc(L, err2msg(LJ_ERR_STKOV), L->base-1, NULL);
-++  lj_err_run(L);
-++}
-++
-+ /* Formatted runtime error message. */
-+ LJ_NORET LJ_NOINLINE static void err_msgv(lua_State *L, ErrMsg em, ...)
-+ {
-+diff --git a/src/lj_err.h b/src/lj_err.h
-+index 8768fefd..67686cb7 100644
-+--- a/src/lj_err.h
-++++ b/src/lj_err.h
-+@@ -23,6 +23,7 @@ LJ_DATA const char *lj_err_allmsg;
-+ LJ_FUNC GCstr *lj_err_str(lua_State *L, ErrMsg em);
-+ LJ_FUNCA_NORET void LJ_FASTCALL lj_err_throw(lua_State *L, int errcode);
-+ LJ_FUNC_NORET void lj_err_mem(lua_State *L);
-++LJ_FUNC_NORET void LJ_FASTCALL lj_err_stkov(lua_State *L);
-+ LJ_FUNC_NORET void LJ_FASTCALL lj_err_run(lua_State *L);
-+ #if LJ_HASJIT
-+ LJ_FUNCA_NORET void LJ_FASTCALL lj_err_trace(lua_State *L, int errcode);
-+diff --git a/src/lj_state.c b/src/lj_state.c
-+index 7e4961bd..02cc4440 100644
-+--- a/src/lj_state.c
-++++ b/src/lj_state.c
-+@@ -102,27 +102,45 @@ void lj_state_shrinkstack(lua_State *L, MSize used)
-+ /* Try to grow stack. */
-+ void LJ_FASTCALL lj_state_growstack(lua_State *L, MSize need)
-+ {
-+-  MSize n;
-+-  if (L->stacksize >= LJ_STACK_MAXEX) {
-+-    /* 4. Throw 'error in error handling' when we are _over_ the limit. */
-+-    if (L->stacksize > LJ_STACK_MAXEX)
-++  MSize n = L->stacksize + need;
-++  if (LJ_LIKELY(n < LJ_STACK_MAX)) {  /* The stack can grow as requested. */
-++    if (n < 2 * L->stacksize) {  /* Try to double the size. */
-++      n = 2 * L->stacksize;
-++      if (n > LJ_STACK_MAX)
-++	n = LJ_STACK_MAX;
-++    }
-++    resizestack(L, n);
-++  } else {  /* Request would overflow. Raise a stack overflow error. */
-++    if (curr_funcisL(L)) {
-++      L->top = curr_topL(L);
-++      if (L->top > tvref(L->maxstack)) {
-++	/* The current Lua frame violates the stack, so replace it with a
-++	** dummy. This can happen when BC_IFUNCF is trying to grow the stack.
-++	*/
-++	L->top = L->base;
-++    setframe_gc(L->base - 1 - LJ_FR2, obj2gco(L), LJ_TTHREAD);
-++      }
-++    }
-++    if (L->stacksize <= LJ_STACK_MAXEX) {
-++      /* An error handler might want to inspect the stack overflow error, but
-++      ** will need some stack space to run in. We give it a stack size beyond
-++      ** the normal limit in order to do so, then rely on lj_state_relimitstack
-++      ** calls during unwinding to bring us back to a convential stack size.
-++      ** The + 1 is space for the error message, and 2 * LUA_MINSTACK is for
-++      ** the lj_state_checkstack() call in lj_err_run().
-++      */
-++      resizestack(L, LJ_STACK_MAX + 1 + 2 * LUA_MINSTACK);
-++      lj_err_stkov(L);  /* May invoke an error handler. */
-++    } else {
-++      /* If we're here, then the stack overflow error handler is requesting
-++      ** to grow the stack even further. We have no choice but to abort the
-++      ** error handler.
-++      */
-++      GCstr *em = lj_err_str(L, LJ_ERR_STKOV);  /* Might OOM. */
-++      setstrV(L, L->top++, em);  /* There is always space to push an error. */
-+       lj_err_throw(L, LUA_ERRERR);  /* Does not invoke an error handler. */
-+-    /* 1. We are _at_ the limit after the last growth. */
-+-    if (L->status < LUA_ERRRUN) {  /* 2. Throw 'stack overflow'. */
-+-      L->status = LUA_ERRRUN;  /* Prevent ending here again for pushed msg. */
-+-      lj_err_msg(L, LJ_ERR_STKOV);  /* May invoke an error handler. */
-+     }
-+-    /* 3. Add space (over the limit) for pushed message and error handler. */
-+-  }
-+-  n = L->stacksize + need;
-+-  if (n > LJ_STACK_MAX) {
-+-    n += 2*LUA_MINSTACK;
-+-  } else if (n < 2*L->stacksize) {
-+-    n = 2*L->stacksize;
-+-    if (n >= LJ_STACK_MAX)
-+-      n = LJ_STACK_MAX;
-+   }
-+-  resizestack(L, n);
-+ }
-+ 
-+ void LJ_FASTCALL lj_state_growstack1(lua_State *L)
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-index 240271d410..507d254556 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-@@ -6,6 +6,9 @@ HOMEPAGE = "http://luajit.org"
- SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
-            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
-            file://0001-Use-builtin-for-clear_cache.patch \
-+           file://CVE-2024-25177.patch \
-+           file://CVE-2024-25176.patch \
-+           file://CVE-2024-25178.patch \
-            "
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_5.29.4.bb b/meta-oe/recipes-devtools/protobuf/protobuf_5.29.5.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/protobuf/protobuf_5.29.4.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf_5.29.5.bb
+index 30b805e6b1..88a979d0af 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_5.29.4.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_5.29.5.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = " \
+ DEPENDS = "zlib abseil-cpp jsoncpp"
+ DEPENDS:append:class-target = " protobuf-native"
  
- PV = "2.1"
+-SRCREV = "1be1c9d0ea6efa2a25bd7b76186844d1669be78a"
++SRCREV = "f5de0a0495faa63b4186fc767324f8b9a7bf4fc4"
+ 
+ SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=29.x;protocol=https \
+            file://run-ptest \
 -- 
 2.34.1
 
