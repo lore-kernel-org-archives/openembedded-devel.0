@@ -1,143 +1,353 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99BDDC87FDA
-	for <webhook@archiver.kernel.org>; Wed,  6 Aug 2025 03:49:39 +0000 (UTC)
-Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
- by mx.groups.io with SMTP id smtpd.web10.17159.1754452171026067762
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D20DAC87FD1
+	for <webhook@archiver.kernel.org>; Wed,  6 Aug 2025 07:49:00 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.19764.1754466536543590624
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Aug 2025 20:49:31 -0700
+ Wed, 06 Aug 2025 00:48:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Njen9fCa;
- spf=pass (domain: gmail.com, ip: 209.85.210.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f45.google.com with SMTP id 46e09a7af769-742f983e313so1406593a34.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Aug 2025 20:49:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1754452170; x=1755056970; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZOXabrpQ8n/CnZdBFqwt0hQl5ljNSTgH6L/oYghUMJA=;
-        b=Njen9fCauTxcgGMn4Z/Ly7JxeMA+T1pcEXMMBaKbg2Q5gaL/976wyW8SqrcnFA759d
-         naOC69OWraaBHLyOIx7fmWomuxmfkdTGF728/OF/aHYA+j+zNJVdIhOPXm5VD8rN9xXM
-         koU7vvmc9RRHCLPNNhUpZy20Ov9BFztryXsRywVR16tfsZxeYyY/TPH+OTGYRK9P0bp5
-         CKqntRuD3PiEQpYqH3LOjoHhgwP9LoSdKiTgnPu4PAEgPvMK9qEre0031+pOx9az783W
-         AILuF83iiAFfOU2zKbIutm418dNKZ14BdCOm2TIgj2ct5W6QfeXYUtCYbx87GnE1DMxD
-         tTRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754452170; x=1755056970;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ZOXabrpQ8n/CnZdBFqwt0hQl5ljNSTgH6L/oYghUMJA=;
-        b=GjY0cfJJWuG/FoVAUbiJJmcn50mf+fqq7RR3yBA2mm2l/QYcBnAAFaSfOv3JQwwsrc
-         KkCfJ2awT/CAb3PMdK6qAzI4UHrwHXfm+rTICR25KX3k2mKlEyDUCuoi5kHPbpQLvFyd
-         X9SsxliqpXOyDh4PSl18sKOECredJoK7P8UxWBQ0YCT7qIFhRG/lkzUr6caXICgiXWSe
-         Pc0ezAEQrC/CS0MtwGRufwECoDO30OLrGbjuH3nk6b32BzpcNJjKUp5uDPW6pq6ozCIv
-         8Oa2tDgfobvh6Zd0s4R3Zt9caFspMbOjlh+IuA+YxUEZkeaO6mXTGYkI8LfRA3eDv/OD
-         g0fQ==
-X-Gm-Message-State: AOJu0Ywczk2J49cgsc7opNgelR0vQv/MWXOdMoFCZdHV8+KmnwRWgwd/
-	3+soJYLBwSl6QMkyWufXJYTdKzesf6+7HFH6LKwuoL6DHkp65PJE/iOQZwoFk5PJE/Y=
-X-Gm-Gg: ASbGncs7rkqGoATwfEiiqoC6H7dot7T+T3PV64r/dYow1O1vPHKkSJxUbn3fmIeY6Qc
-	MfbDpvCiBCFIOHf7fbM0g55kWt+U5GAScwEjw6J8Yn4VbuZJYc+c6sQSMrt2+IAMFmlzCxYu2+o
-	U+xgnROE21/+RjzvBNu4yjMAibQwyC7g1OHuGhlKPioOvi5kmpRWTOU4SK1yRz9dhh/xp70F8UE
-	p1eTCjim8FAm/6b3DiSIF6EeqEXGvpGHEvJOb/ZtTjT171vSF2yBHMdoV5Qeki3GGpuL468lLtw
-	Iuegxc7FRAvzBDX+fYYHp9lTAWK61sIL6QHXQ4+vcdatXsUUUtKUzpEH9Z9+sUsO2bJcEzcBuyo
-	o0pSqSmVsezwKjKloWOkNfvmQGH0K1ejv
-X-Google-Smtp-Source: AGHT+IEMhL63NHF670reUvfOyVlVYYKUCjErpqyQ66Gw/MVPyCAyirr+JWnuYncmEq89HuUpdnkzOg==
-X-Received: by 2002:a05:6830:4109:b0:73c:bb23:3d38 with SMTP id 46e09a7af769-74308e8b857mr1153324a34.20.1754452169576;
-        Tue, 05 Aug 2025 20:49:29 -0700 (PDT)
-Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::ccc5])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b422b7b2700sm12361848a12.15.2025.08.05.20.49.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Aug 2025 20:49:28 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] libgphoto2: Upgrade to 2.5.32
-Date: Tue,  5 Aug 2025 20:49:25 -0700
-Message-ID: <20250806034926.3195325-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.50.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=0313cf4b72=changqing.li@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 5764g65c2103462
+	for <openembedded-devel@lists.openembedded.org>; Wed, 6 Aug 2025 07:48:55 GMT
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48bpyf8n36-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 06 Aug 2025 07:48:55 +0000 (GMT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.57; Wed, 6 Aug 2025 00:48:54 -0700
+Received: from pek-lpg-core6.wrs.com (10.11.232.110) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
+ 15.1.2507.57 via Frontend Transport; Wed, 6 Aug 2025 00:48:53 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [scarthgap][meta-oe][PATCH] luajit: fix several CVEs
+Date: Wed, 6 Aug 2025 15:48:52 +0800
+Message-ID: <20250806074852.2256636-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: tA7iOAFI9tGEDcxZ4R77Yis8jbUQg2A3
+X-Proofpoint-ORIG-GUID: tA7iOAFI9tGEDcxZ4R77Yis8jbUQg2A3
+X-Authority-Analysis: v=2.4 cv=ZpHtK87G c=1 sm=1 tr=0 ts=689308e7 cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=2OwXVqhp2XgA:10 a=NEAV23lmAAAA:8 a=nm2HxRzrAAAA:8 a=t7CeM3EgAAAA:8
+ a=lPrlyKwi4UVt_kho0m8A:9 a=xTkba3CB784Yst2QIEaM:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODA2MDA0NSBTYWx0ZWRfX2rzzlOWRcdkm
+ aZjJnhqQNFNj3x0AHgpDftM/e1m3ChxgC7eAsBk59ac6CVmw+Vl1Xz3b263jze6h3Cq1nKvo+hx
+ K2Wmu4oHIsJ5mxqlPBz74IPwL6oo76qKkdKqRfNteSh2KvU7HDKfYtu4CQ3oQyxfFnrSQKl5Rmt
+ tZgERDAcA7jHHHbCdGCf4dkxWwGC8C7UDUlAFOsvoYZcoRcY8+prYegUFh7CvJIok0oaBjoKNNa
+ EMEkt4fj7v9apCf9/F6uBMAYrg3w9OGXU5iQTvtDp3TouishLmQCQBhgZ3oBgzjnvzbunWQMAcw
+ w5/UucP5x5cfSduvoQTI7a5L8c6s5wobFnu6RV3uZBLN8jnob6JdzeZLErEw04=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-06_01,2025-08-04_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 impostorscore=0 spamscore=0 phishscore=0 clxscore=1015
+ bulkscore=0 priorityscore=1501 suspectscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Aug 2025 03:49:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118884
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Aug 2025 07:49:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118886
 
-Use xz for archive and drop upstreamed patch
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Fix CVE-2024-25176, CVE-2024-25177, CVE-2024-25178
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../libgphoto2/fix-build-with-gcc-14.patch    | 36 -------------------
- ...gphoto2_2.5.31.bb => libgphoto2_2.5.32.bb} |  5 ++-
- 2 files changed, 2 insertions(+), 39 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2/fix-build-with-gcc-14.patch
- rename meta-oe/recipes-graphics/gphoto2/{libgphoto2_2.5.31.bb => libgphoto2_2.5.32.bb} (85%)
+ .../luajit/luajit/CVE-2024-25176.patch        |  32 ++++
+ .../luajit/luajit/CVE-2024-25177.patch        |  47 +++++
+ .../luajit/luajit/CVE-2024-25178.patch        | 162 ++++++++++++++++++
+ meta-oe/recipes-devtools/luajit/luajit_git.bb |   3 +
+ 4 files changed, 244 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25176.patch
+ create mode 100644 meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25177.patch
+ create mode 100644 meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25178.patch
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2/fix-build-with-gcc-14.patch b/meta-oe/recipes-graphics/gphoto2/libgphoto2/fix-build-with-gcc-14.patch
-deleted file mode 100644
-index 0c2a8d4bd0..0000000000
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2/fix-build-with-gcc-14.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From 721f7f8c3ec8058d504607873e4c317aac0c99c5 Mon Sep 17 00:00:00 2001
--From: Marcus Meissner <marcus@jet.franken.de>
--Date: Mon, 4 Dec 2023 13:26:08 +0100
--Subject: [PATCH] align outlen length with jpeg jeaders. fixes
-- https://github.com/gphoto/libgphoto2/issues/941
--
-----
--Upstream-Status: Backport [https://github.com/gphoto/libgphoto2/commit/721f7f8c3ec8058d504607873e4c317aac0c99c5]
--
-- camlibs/ptp2/chdk.c | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/camlibs/ptp2/chdk.c b/camlibs/ptp2/chdk.c
--index e1d898f378..e775ea1d4b 100644
----- a/camlibs/ptp2/chdk.c
--+++ b/camlibs/ptp2/chdk.c
--@@ -1150,7 +1150,7 @@ static void yuv_live_to_jpeg(unsigned char *p_yuv,
-- 	struct		jpeg_error_mgr jerr;
-- 	JSAMPROW	row_ptr[1];
-- 	uint8_t		*outbuf = NULL, *tmprowbuf = NULL;
---	uint64_t	outlen = 0;
--+	unsigned long	outlen = 0;
-- 	unsigned int	row_inc;
-- 	int		sshift, dshift, xshift, skip;
-- 
--@@ -1161,8 +1161,8 @@ static void yuv_live_to_jpeg(unsigned char *p_yuv,
-- 		sshift = 6;
-- 		dshift = (width/height > 2) ? 6 : 12;
-- 		xshift = 4;
---	/* Digic 6 cameras: 8 bit per element UYVY,
---	 * 4 bytes used to encode 2 pixels, need 6 bytes raw YUV data for jpeg encoding */
--+		/* Digic 6 cameras: 8 bit per element UYVY,
--+		 * 4 bytes used to encode 2 pixels, need 6 bytes raw YUV data for jpeg encoding */
-- 	} else {
-- 		row_inc = buf_width*2;
-- 		sshift = 4;
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.32.bb
-similarity index 85%
-rename from meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb
-rename to meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.32.bb
-index 0b58e8e75f..0fe2feca6e 100644
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.32.bb
-@@ -9,12 +9,11 @@ DEPENDS = "libtool jpeg virtual/libusb0 libexif zlib libxml2"
- #  libgphoto2-2.5.8/packaging/generic$ qemu-arm -s 1048576 -r 2.6.24 -L /OE/angstrom-dev/staging/armv5te-angstrom-linux-gnueabi/ .libs/print-camera-list
- # They are release specific, so please regen when adding new releases
+diff --git a/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25176.patch b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25176.patch
+new file mode 100644
+index 0000000000..5d3048e05f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25176.patch
+@@ -0,0 +1,32 @@
++From fd92fb62201b3980af8e538452102e9f21426ec6 Mon Sep 17 00:00:00 2001
++From: Mike Pall <mike>
++Date: Thu, 25 Jan 2024 13:23:48 +0100
++Subject: [PATCH] Fix zero stripping in %g number formatting.
++
++Reported by pwnhacker0x18. #1149
++
++CVE: CVE-2024-25176
++Upstream-Status: Backport [https://github.com/LuaJIT/LuaJIT/commit/343ce0edaf3906a62022936175b2f5410024cbfc]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ src/lj_strfmt_num.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/src/lj_strfmt_num.c b/src/lj_strfmt_num.c
++index 79ec0263..c6e776aa 100644
++--- a/src/lj_strfmt_num.c
+++++ b/src/lj_strfmt_num.c
++@@ -454,7 +454,8 @@ static char *lj_strfmt_wfnum(SBuf *sb, SFormat sf, lua_Number n, char *p)
++ 	    prec--;
++ 	    if (!i) {
++ 	      if (ndlo == ndhi) { prec = 0; break; }
++-	      lj_strfmt_wuint9(tail, nd[++ndlo]);
+++	      ndlo = (ndlo + 1) & 0x3f;
+++	      lj_strfmt_wuint9(tail, nd[ndlo]);
++ 	      i = 9;
++ 	    }
++ 	  }
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25177.patch b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25177.patch
+new file mode 100644
+index 0000000000..f02749498c
+--- /dev/null
++++ b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25177.patch
+@@ -0,0 +1,47 @@
++From e27aa9c2fe7e7744b517ff0811defc11a81aa454 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Mon, 4 Aug 2025 16:47:31 +0800
++Subject: [PATCH] Fix unsinking of IR_FSTORE for NULL metatable.
++
++Reported by pwnhacker0x18. #1147
++
++CVE: CVE-2024-25177
++Upstream-Status: Backport [https://github.com/openresty/luajit2/commit/85b4fed0b0353dd78c8c875c2f562d522a2b310f]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ src/lj_snap.c | 11 ++++++++---
++ 1 file changed, 8 insertions(+), 3 deletions(-)
++
++diff --git a/src/lj_snap.c b/src/lj_snap.c
++index 7d7347a1..f3645e87 100644
++--- a/src/lj_snap.c
+++++ b/src/lj_snap.c
++@@ -453,6 +453,7 @@ static TRef snap_replay_const(jit_State *J, IRIns *ir)
++   case IR_KNUM: case IR_KINT64:
++     return lj_ir_k64(J, (IROp)ir->o, ir_k64(ir)->u64);
++   case IR_KPTR: return lj_ir_kptr(J, ir_kptr(ir));  /* Continuation. */
+++  case IR_KNULL: return lj_ir_knull(J, irt_type(ir->t));
++   default: lj_assertJ(0, "bad IR constant op %d", ir->o); return TREF_NIL;
++   }
++ }
++@@ -902,9 +903,13 @@ static void snap_unsink(jit_State *J, GCtrace *T, ExitState *ex,
++ 	if (irk->o == IR_FREF) {
++ 	  switch (irk->op2) {
++ 	  case IRFL_TAB_META:
++-	    snap_restoreval(J, T, ex, snapno, rfilt, irs->op2, &tmp);
++-	    /* NOBARRIER: The table is new (marked white). */
++-	    setgcref(t->metatable, obj2gco(tabV(&tmp)));
+++	    if (T->ir[irs->op2].o == IR_KNULL) {
+++	      setgcrefnull(t->metatable);
+++	    } else {
+++	      snap_restoreval(J, T, ex, snapno, rfilt, irs->op2, &tmp);
+++	      /* NOBARRIER: The table is new (marked white). */
+++	      setgcref(t->metatable, obj2gco(tabV(&tmp)));
+++	    }
++ 	    break;
++ 	  case IRFL_TAB_NOMM:
++ 	    /* Negative metamethod cache invalidated by lj_tab_set() below. */
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25178.patch b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25178.patch
+new file mode 100644
+index 0000000000..485cffff31
+--- /dev/null
++++ b/meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25178.patch
+@@ -0,0 +1,162 @@
++From f57533a41640087904ecbd5ca6946656078e6014 Mon Sep 17 00:00:00 2001
++From: Mike Pall <mike>
++Date: Sun, 4 Feb 2024 16:34:30 +0100
++Subject: [PATCH] Rework stack overflow handling.
++
++Reported by pwnhacker0x18. Fixed by Peter Cawley. #1152
++
++CVE: CVE-2024-25178
++Upstream-Status: Backport [https://github.com/LuaJIT/LuaJIT/commit/defe61a56751a0db5f00ff3ab7b8f45436ba74c8
++https://github.com/LuaJIT/LuaJIT/commit/0d313b243194a0b8d2399d8b549ca5a0ff234db5]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ src/lj_debug.c |  1 +
++ src/lj_err.c   | 22 +++++++++++++++++---
++ src/lj_err.h   |  1 +
++ src/lj_state.c | 54 +++++++++++++++++++++++++++++++++-----------------
++ 4 files changed, 57 insertions(+), 21 deletions(-)
++
++diff --git a/src/lj_debug.c b/src/lj_debug.c
++index fa189b6e..8d8b9eb5 100644
++--- a/src/lj_debug.c
+++++ b/src/lj_debug.c
++@@ -64,6 +64,7 @@ static BCPos debug_framepc(lua_State *L, GCfunc *fn, cTValue *nextframe)
++     if (cf == NULL || (char *)cframe_pc(cf) == (char *)cframe_L(cf))
++       return NO_BCPOS;
++     ins = cframe_pc(cf);  /* Only happens during error/hook handling. */
+++    if (!ins) return NO_BCPOS;
++   } else {
++     if (frame_islua(nextframe)) {
++       ins = frame_pc(nextframe);
++diff --git a/src/lj_err.c b/src/lj_err.c
++index 7b11e4d0..6b752728 100644
++--- a/src/lj_err.c
+++++ b/src/lj_err.c
++@@ -818,7 +818,14 @@ LJ_NOINLINE void lj_err_mem(lua_State *L)
++     TValue *base = tvref(G(L)->jit_base);
++     if (base) L->base = base;
++   }
++-  if (curr_funcisL(L)) L->top = curr_topL(L);
+++  if (curr_funcisL(L)) {
+++    L->top = curr_topL(L);
+++    if (LJ_UNLIKELY(L->top > tvref(L->maxstack))) {
+++      /* The current Lua frame violates the stack. Replace it with a dummy. */
+++      L->top = L->base;
+++      setframe_gc(L->base - 1 - LJ_FR2, obj2gco(L), LJ_TTHREAD);
+++    }
+++  }
++   setstrV(L, L->top++, lj_err_str(L, LJ_ERR_ERRMEM));
++   lj_err_throw(L, LUA_ERRMEM);
++ }
++@@ -879,9 +886,11 @@ LJ_NOINLINE void LJ_FASTCALL lj_err_run(lua_State *L)
++ {
++   ptrdiff_t ef = (LJ_HASJIT && tvref(G(L)->jit_base)) ? 0 : finderrfunc(L);
++   if (ef) {
++-    TValue *errfunc = restorestack(L, ef);
++-    TValue *top = L->top;
+++    TValue *errfunc, *top;
+++    lj_state_checkstack(L, LUA_MINSTACK * 2);  /* Might raise new error. */
++     lj_trace_abort(G(L));
+++    errfunc = restorestack(L, ef);
+++    top = L->top;
++     if (!tvisfunc(errfunc) || L->status == LUA_ERRERR) {
++       setstrV(L, top-1, lj_err_str(L, LJ_ERR_ERRERR));
++       lj_err_throw(L, LUA_ERRERR);
++@@ -906,6 +915,13 @@ LJ_NOINLINE void LJ_FASTCALL lj_err_trace(lua_State *L, int errcode)
++ }
++ #endif
++ 
+++/* Stack overflow error. */
+++void LJ_FASTCALL lj_err_stkov(lua_State *L)
+++{
+++  lj_debug_addloc(L, err2msg(LJ_ERR_STKOV), L->base-1, NULL);
+++  lj_err_run(L);
+++}
+++
++ /* Formatted runtime error message. */
++ LJ_NORET LJ_NOINLINE static void err_msgv(lua_State *L, ErrMsg em, ...)
++ {
++diff --git a/src/lj_err.h b/src/lj_err.h
++index 8768fefd..67686cb7 100644
++--- a/src/lj_err.h
+++++ b/src/lj_err.h
++@@ -23,6 +23,7 @@ LJ_DATA const char *lj_err_allmsg;
++ LJ_FUNC GCstr *lj_err_str(lua_State *L, ErrMsg em);
++ LJ_FUNCA_NORET void LJ_FASTCALL lj_err_throw(lua_State *L, int errcode);
++ LJ_FUNC_NORET void lj_err_mem(lua_State *L);
+++LJ_FUNC_NORET void LJ_FASTCALL lj_err_stkov(lua_State *L);
++ LJ_FUNC_NORET void LJ_FASTCALL lj_err_run(lua_State *L);
++ #if LJ_HASJIT
++ LJ_FUNCA_NORET void LJ_FASTCALL lj_err_trace(lua_State *L, int errcode);
++diff --git a/src/lj_state.c b/src/lj_state.c
++index 7e4961bd..02cc4440 100644
++--- a/src/lj_state.c
+++++ b/src/lj_state.c
++@@ -102,27 +102,45 @@ void lj_state_shrinkstack(lua_State *L, MSize used)
++ /* Try to grow stack. */
++ void LJ_FASTCALL lj_state_growstack(lua_State *L, MSize need)
++ {
++-  MSize n;
++-  if (L->stacksize >= LJ_STACK_MAXEX) {
++-    /* 4. Throw 'error in error handling' when we are _over_ the limit. */
++-    if (L->stacksize > LJ_STACK_MAXEX)
+++  MSize n = L->stacksize + need;
+++  if (LJ_LIKELY(n < LJ_STACK_MAX)) {  /* The stack can grow as requested. */
+++    if (n < 2 * L->stacksize) {  /* Try to double the size. */
+++      n = 2 * L->stacksize;
+++      if (n > LJ_STACK_MAX)
+++	n = LJ_STACK_MAX;
+++    }
+++    resizestack(L, n);
+++  } else {  /* Request would overflow. Raise a stack overflow error. */
+++    if (curr_funcisL(L)) {
+++      L->top = curr_topL(L);
+++      if (L->top > tvref(L->maxstack)) {
+++	/* The current Lua frame violates the stack, so replace it with a
+++	** dummy. This can happen when BC_IFUNCF is trying to grow the stack.
+++	*/
+++	L->top = L->base;
+++    setframe_gc(L->base - 1 - LJ_FR2, obj2gco(L), LJ_TTHREAD);
+++      }
+++    }
+++    if (L->stacksize <= LJ_STACK_MAXEX) {
+++      /* An error handler might want to inspect the stack overflow error, but
+++      ** will need some stack space to run in. We give it a stack size beyond
+++      ** the normal limit in order to do so, then rely on lj_state_relimitstack
+++      ** calls during unwinding to bring us back to a convential stack size.
+++      ** The + 1 is space for the error message, and 2 * LUA_MINSTACK is for
+++      ** the lj_state_checkstack() call in lj_err_run().
+++      */
+++      resizestack(L, LJ_STACK_MAX + 1 + 2 * LUA_MINSTACK);
+++      lj_err_stkov(L);  /* May invoke an error handler. */
+++    } else {
+++      /* If we're here, then the stack overflow error handler is requesting
+++      ** to grow the stack even further. We have no choice but to abort the
+++      ** error handler.
+++      */
+++      GCstr *em = lj_err_str(L, LJ_ERR_STKOV);  /* Might OOM. */
+++      setstrV(L, L->top++, em);  /* There is always space to push an error. */
++       lj_err_throw(L, LUA_ERRERR);  /* Does not invoke an error handler. */
++-    /* 1. We are _at_ the limit after the last growth. */
++-    if (L->status < LUA_ERRRUN) {  /* 2. Throw 'stack overflow'. */
++-      L->status = LUA_ERRRUN;  /* Prevent ending here again for pushed msg. */
++-      lj_err_msg(L, LJ_ERR_STKOV);  /* May invoke an error handler. */
++     }
++-    /* 3. Add space (over the limit) for pushed message and error handler. */
++-  }
++-  n = L->stacksize + need;
++-  if (n > LJ_STACK_MAX) {
++-    n += 2*LUA_MINSTACK;
++-  } else if (n < 2*L->stacksize) {
++-    n = 2*L->stacksize;
++-    if (n >= LJ_STACK_MAX)
++-      n = LJ_STACK_MAX;
++   }
++-  resizestack(L, n);
++ }
++ 
++ void LJ_FASTCALL lj_state_growstack1(lua_State *L)
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+index 240271d410..507d254556 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+@@ -6,6 +6,9 @@ HOMEPAGE = "http://luajit.org"
+ SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
+            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
+            file://0001-Use-builtin-for-clear_cache.patch \
++           file://CVE-2024-25177.patch \
++           file://CVE-2024-25176.patch \
++           file://CVE-2024-25178.patch \
+            "
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2 \
-+SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/${BP}.tar.xz;name=libgphoto2 \
-            file://40-libgphoto2.rules \
-            file://0001-configure-Filter-out-buildpaths-from-CC.patch \
--           file://fix-build-with-gcc-14.patch \
- "
--SRC_URI[libgphoto2.sha256sum] = "4f81c34c0b812bee67afd5f144940fbcbe01a2055586a6a1fa2d0626024a545b"
-+SRC_URI[libgphoto2.sha256sum] = "495a347be21b8f970607a81e739aa91513a8479cbd73b79454a339c73e2b860e"
- 
- inherit autotools pkgconfig gettext lib_package
- 
+ PV = "2.1"
+-- 
+2.34.1
+
 
