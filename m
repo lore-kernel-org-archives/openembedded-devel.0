@@ -1,133 +1,114 @@
-Return-Path: <rs@ti.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CF5AC87FD3
-	for <webhook@archiver.kernel.org>; Wed,  6 Aug 2025 16:32:14 +0000 (UTC)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- by mx.groups.io with SMTP id smtpd.web10.29728.1754497926380904411
- for <Openembedded-devel@lists.openembedded.org>;
- Wed, 06 Aug 2025 09:32:06 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C567C87FD2
+	for <webhook@archiver.kernel.org>; Thu,  7 Aug 2025 06:29:48 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.45132.1754548184075862911
+ for <openembedded-devel@lists.openembedded.org>;
+ Wed, 06 Aug 2025 23:29:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=Cl1sBxM1;
- spf=pass (domain: ti.com, ip: 198.47.23.235, mailfrom: rs@ti.com)
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 576GW4m8615356;
-	Wed, 6 Aug 2025 11:32:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1754497924;
-	bh=cAVbiFgijrU3qwUi0oA1StLDUco6ptqjmIycPY49nAs=;
-	h=From:To:CC:Subject:Date;
-	b=Cl1sBxM1isLFz2LB2Yz0FF1waDkCOUwBPbXDkbnHXWBAGYW/lQ7tn+M4TdXJkjA2m
-	 5kRHZUKyOYMOjc/Yb7c9Psp2GDl8ypXvIClADkCjgk1wKq0VcHAsNmTwUuTU4tBxPw
-	 h/lG7pM1wxKt/rXKeKfrh6ed9mE6MbtZ5BaPpTiI=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 576GW4Im256363
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Wed, 6 Aug 2025 11:32:04 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 6
- Aug 2025 11:32:04 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 6 Aug 2025 11:32:04 -0500
-Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 576GW4jw4122112;
-	Wed, 6 Aug 2025 11:32:04 -0500
-From: <rs@ti.com>
-To: <akuster808@gmail.com>, <raj.khem@gmail.com>
-CC: <Openembedded-devel@lists.openembedded.org>, <reatmon@ti.com>,
-        <a-christidis@ti.com>
-Subject: [meta-oe][scarthgap] vulkan-cts: allow vulkan versions > 1.3
-Date: Wed, 6 Aug 2025 11:29:40 -0500
-Message-ID: <20250806162939.71883-2-rs@ti.com>
-X-Mailer: git-send-email 2.50.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=03146cb354=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 5776Igvi1002708
+	for <openembedded-devel@lists.openembedded.org>; Wed, 6 Aug 2025 23:29:43 -0700
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48bpy7hp3w-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 06 Aug 2025 23:29:43 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.57; Wed, 6 Aug 2025 23:29:41 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH 1/1] poppler: upgrade 25.06.0 -> 25.08.0
+Date: Thu, 7 Aug 2025 11:59:14 +0530
+Message-ID: <20250807062914.2838677-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Originating-IP: [10.11.232.110]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (10.11.224.121) To
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121)
+X-Authority-Analysis: v=2.4 cv=G5McE8k5 c=1 sm=1 tr=0 ts=689447d7 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=gmxlzscTznEA:10 a=2OwXVqhp2XgA:10 a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8
+ a=Fi7xCRcZbbY3uOdkh6oA:9 a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: 2uJRb1hNY_1oA6YYz3SspzxPdfPgQlhN
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODA3MDA0OCBTYWx0ZWRfX0G28dbiRATd6
+ C2RufUHhite9NeYCtPl2tvm1z3kv7XiCZaStNlwicw5BZb+nJDxkaTroj68zX63GBmR0DZdPT6v
+ OjfC23dXWPfCmIoKTv2isl2At7MOHS7bWSGqIzYRcrmHA//PA/69jN/jaC++G3j9FxpgXYkB5fZ
+ pa/Dgk3eixDK2HHoCntCIWOUwt0kPufz7I+RoAfGdSta1UOdqx/iQ2SX2KedRw2HNRZ3kpObzYx
+ j3awEKoMPoD4KKg9DWx72fsCP7u4wAQnGocvoaaV8ie6Hb5UYbOO6Rfs43ccUI8HUGiQ5I8KlQT
+ hqofiey+x+nduSezC/NnQoMadtzETyXcrJsgOjd0FkNZ8vXcFw+3T5Bp/GrAuE=
+X-Proofpoint-ORIG-GUID: 2uJRb1hNY_1oA6YYz3SspzxPdfPgQlhN
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-06_05,2025-08-06_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 adultscore=0 malwarescore=0 suspectscore=0 priorityscore=1501
+ phishscore=0 spamscore=0 impostorscore=0 bulkscore=0 classifier=typeunknown
+ authscore=0 authtc= authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Aug 2025 16:32:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118893
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Aug 2025 06:29:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118894
 
-From: Randolph Sapp <rs@ti.com>
+From: Yogita Urade <yogita.urade@windriver.com>
 
-Backport a patch from upstream that allows vulkan-cts to work with
-Vulkan version greater than 1.3. Previously any unknown Vulkan versions
-will return 0 when we attempt to locate the minimum version with
-minVulkanAPIVersion.
+This upgrade includes fix for CVE-2025-50420.
 
-Signed-off-by: Randolph Sapp <rs@ti.com>
+poppler 25.08.0 changelog:
+==========================
+core:
+* FormWidgetSignature::signDocumentWithAppearance: add imagePath parameter
+* Fix parsing Distinguished Names that end with a hex string
+* Fix crashes in malformed documents
+
+glib:
+* Add poppler_page_render_transparent_selection()
+* Add missing since to the documentation
+
+poppler 25.07.0 changelog:
+==========================
+core:
+* Changed rendering of malformed documents to mimic what Adobe Reader does. Issue #1602
+* Improvemenst in signature validation in the NSS backend
+* Add more detailed output when signing fails
+* Internal code improvements
+* Fix crashes in malformed documents
+
+utils:
+* pdfsig: command line option for allowing PGP signatures in GnuPG backend
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- ...e-CTS-with-unknown-versions-of-Vulka.patch | 41 +++++++++++++++++++
- .../vk-gl-cts/vulkan-cts_1.3.7.3.bb           |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts/0001-Allow-running-the-CTS-with-unknown-versions-of-Vulka.patch
+ .../poppler/{poppler_25.06.0.bb => poppler_25.08.0.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/poppler/{poppler_25.06.0.bb => poppler_25.08.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts/0001-Allow-running-the-CTS-with-unknown-versions-of-Vulka.patch b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts/0001-Allow-running-the-CTS-with-unknown-versions-of-Vulka.patch
-new file mode 100644
-index 0000000000..2797acf416
---- /dev/null
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts/0001-Allow-running-the-CTS-with-unknown-versions-of-Vulka.patch
-@@ -0,0 +1,41 @@
-+From 954b523a998933b1edbe9af3fe7b1c74595cf148 Mon Sep 17 00:00:00 2001
-+From: Lorenzo Dal Col <lorenzo@khronosgroup.org>
-+Date: Tue, 17 Sep 2024 17:18:20 +0200
-+Subject: [PATCH] Allow running the CTS with unknown versions of Vulkan in the
-+ driver
-+
-+This will default to VK_API_MAX_FRAMEWORK_VERSION, which at this time is 1.3.x.
-+VK-GL-CTS issue: 5165
-+Components: Framework, Vulkan
-+Affects: None
-+
-+Change-Id: I954d0144db9ff5f3848c81df61dd263505b17ac2
-+Upstream-Status: Backport [https://github.com/KhronosGroup/VK-GL-CTS/commit/609c09b3163d86d7e4819fbfc00a616e364f14f0]
-+Signed-off-by: Randolph Sapp <rs@ti.com>
-+---
-+ external/vulkancts/framework/vulkan/vkApiVersion.cpp | 9 ++++++++-
-+ 1 file changed, 8 insertions(+), 1 deletion(-)
-+
-+diff --git a/external/vulkancts/framework/vulkan/vkApiVersion.cpp b/external/vulkancts/framework/vulkan/vkApiVersion.cpp
-+index d996cb0e6..8720df52a 100644
-+--- a/external/vulkancts/framework/vulkan/vkApiVersion.cpp
-++++ b/external/vulkancts/framework/vulkan/vkApiVersion.cpp
-+@@ -134,7 +134,14 @@ deUint32 minVulkanAPIVersion(deUint32 lhs, deUint32 rhs)
-+ 	for (auto it = begin(commonPredecessors); it != end(commonPredecessors); ++it)
-+ 		if (isApiVersionPredecessor(rhs, *it) && isApiVersionPredecessor(lhs, *it))
-+ 			return *it;
-+-	return 0;
-++
-++#ifndef CTS_USES_VULKANSC
-++    // If we got to this point, it means we are dealing with an unknown version.
-++    // We assume it to be valid, and we default to VK_API_MAX_FRAMEWORK_VERSION which is generated from the spec.
-++    return VK_API_MAX_FRAMEWORK_VERSION;
-++#else
-++    return VKSC_API_MAX_FRAMEWORK_VERSION;
-++#endif
-+ }
-+ 
-+ } // vk
-+-- 
-+2.50.1
-+
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
-index 7492fe9aa4..cc80549eeb 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
-@@ -19,6 +19,7 @@ SRCREV_video-parser = "138bbe048221d315962ddf8413aa6a08cc62a381"
+diff --git a/meta-oe/recipes-support/poppler/poppler_25.06.0.bb b/meta-oe/recipes-support/poppler/poppler_25.08.0.bb
+similarity index 96%
+rename from meta-oe/recipes-support/poppler/poppler_25.06.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_25.08.0.bb
+index 9ab9b926b7..45f94b0ae7 100644
+--- a/meta-oe/recipes-support/poppler/poppler_25.06.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_25.08.0.bb
+@@ -8,7 +8,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://basename-include.patch \
+            file://0001-cmake-Do-not-use-isystem.patch \
+            "
+-SRC_URI[sha256sum] = "8199532d38984fab46dbd0020ec9c40f20e928e33e9b4cc6043572603a821d83"
++SRC_URI[sha256sum] = "425ed4d4515a093bdcdbbaac6876f20617451edc710df6a4fd6c45dd67eb418d"
  
- SRC_URI += "file://0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch \
-             file://0001-vulkan-cts-include-missing-cstdint.patch \
-+            file://0001-Allow-running-the-CTS-with-unknown-versions-of-Vulka.patch \
- "
+ DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
  
- TOOLCHAIN = "gcc"
 -- 
-2.50.1
+2.40.0
 
 
