@@ -1,204 +1,158 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <dean@sellers.id.au>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7966FC87FCA
-	for <webhook@archiver.kernel.org>; Thu,  7 Aug 2025 10:28:29 +0000 (UTC)
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.web11.48347.1754562498984492648
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C193C87FCF
+	for <webhook@archiver.kernel.org>; Fri,  8 Aug 2025 00:00:04 +0000 (UTC)
+Received: from omta40.uswest2.a.cloudfilter.net (omta40.uswest2.a.cloudfilter.net [35.89.44.39])
+ by mx.groups.io with SMTP id smtpd.web11.10442.1754611200885220139
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Aug 2025 03:28:19 -0700
+ Thu, 07 Aug 2025 17:00:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ax0sE0XD;
- spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-55b978c61acso810436e87.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Aug 2025 03:28:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1754562497; x=1755167297; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PSAGiQW7OnWLFa75KX0dfZHvjorLlob3ApplOZ/CrrY=;
-        b=ax0sE0XDAJaf/HCxIa2FMlVOpvYciVTjxpM6BFrPiPEXn5RVYAKGF/VqueIWALBD27
-         UU0b/hXqZs4TPUbvH7NqTY6XKBcKV8cOcNaEyJ9KYolz/J4Kczjjshco71BtdFFESXBB
-         C4q0sWwQNkbr00yBvVLcKWG1uc9rFlWKjVA7TjuaLwqZcfu33WmcDcNTaDrkVzZE83hu
-         iId4ei8xMKNHMV5E98VRL3yaN1SEZLi/FhTa/QwHf/Ecrv5YoN5unCuiDfyQXrTDIz0g
-         Jc2ekWexnn7Y0BQCIF3pOZ7AjdadwigcIPVNJbxOxU6zk5GIqmFmONdcCNNRsXtD90kT
-         WNKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754562497; x=1755167297;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=PSAGiQW7OnWLFa75KX0dfZHvjorLlob3ApplOZ/CrrY=;
-        b=TkCYekIdNrOrSJLgotCZrqvY/wgLI6RzJ/hYze86xcXhtaYma0d9I66c8gjm/6YrW2
-         nj3/OaAjayzwcvxi7PyLMszSvCzCUwQr58U6rs4XSFSTivruzYEjw8A89Geux754b3zE
-         L1AR24mE75HroR+64Kmx+loQcMz/ZAjY3X9J3iHk1eWHRJluK5BuWjclOw0+sKu9Ts9w
-         ofOZjId9XCHmORy0ifj2UFSPT6YOeSNKkoI6cg8slNZ3OvB6w0OOQQRMd+ys1xvvyEHR
-         APPCWkUkj2VyJ4JYALVjQJPhkNmpbSW3fGRpr5HHK5sGPG61oRISgFkLeYSESCtgdRw6
-         DZ5g==
-X-Gm-Message-State: AOJu0YzaAmh0Amb21Bv7ToYE4u4ZXkSMw8LHtkfRECsk+7T2a8Trz7Om
-	ho1yBv/zMolb+nVynXXZg1odZ+v2WOtlKwNmvUoY/L/iDz92hkDFSzodt32yrRlwljNpPZtc0tD
-	WiSlkMN3eu7F9kZRnRP46RXp1tf5wVE544nhm
-X-Gm-Gg: ASbGncttTQaBngEP77eIAa2xpr8CPcMH0hDfZymuMDh8LWaptvAC+4MAqg7sGrwiXTq
-	rmiMHyibYd4x+j2N51e6zkJ/9hJ3PQElnkf0AYG7mTWzquCo3rTSJkAlfatBx7X6fMFjc+m0DEy
-	SnWGHECCP8OFSzkm1+e+VG8iB9V8+JOskVysPRHdlwTB/IkUDBHYfNJOk1Cg8wsiSLI1H0vA0Yh
-	pfMjIUldA==
-X-Google-Smtp-Source: AGHT+IEOl7IJiBCbEmkTYXopYC/eGDvaFvkvngCRyuP4KIl3pkpyfPjp6I85Y1SJNyHiWLVJFzIiGwRtF2x6kzmhblM=
-X-Received: by 2002:a05:6512:3d21:b0:55b:95a2:d70f with SMTP id
- 2adb3069b0e04-55caf564b32mr2319683e87.18.1754562496762; Thu, 07 Aug 2025
- 03:28:16 -0700 (PDT)
+ dkim=fail reason="dkim: no key for signature: lookup default._domainkey.sellers.id.au on 100.100.100.100:53: no such host" header.i=@sellers.id.au header.s=default header.b=FVwCsC/8;
+ spf=none, err=permanent DNS error (domain: sellers.id.au, ip: 35.89.44.39, mailfrom: dean@sellers.id.au)
+Received: from eig-obgw-5003b.ext.cloudfilter.net ([10.0.29.155])
+	by cmsmtp with ESMTPS
+	id k4uMutKYKanSskAWduvtaC; Fri, 08 Aug 2025 00:00:00 +0000
+Received: from just2044.justhost.com ([173.254.29.206])
+	by cmsmtp with ESMTPS
+	id kAWcutJDBXZDSkAWcuSgfK; Thu, 07 Aug 2025 23:59:58 +0000
+X-Authority-Analysis: v=2.4 cv=SdD3duRu c=1 sm=1 tr=0 ts=68953dfe
+ a=pynxHT4M0AVwz8ROpNtnNw==:117 a=rYJWqwM8jy5GC5dGn5DjfA==:17
+ a=2OwXVqhp2XgA:10 a=QzMiS2WfBm8A:10 a=zVQgEkJGAAAA:8 a=Zqbe0Ig8F8ON6OjErvMA:9
+ a=f9Z7W1HAzlP95tlrx9U8:22 a=kx6rClhKpNpzm8O-7uKn:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=sellers.id.au; s=default; h=Content-Transfer-Encoding:MIME-Version:
+	Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=yb4I9JiT/qZJ7UAK4snOgm2108WhLTg/iHkTketmtk4=; b=FVwCsC/8zfTct+9PQNr6AuRjcg
+	oq++WlUMtXG6evKNpUaYDTiO3jiXuDTw7+SUb4ylPqkIhMMkav7BN2U56GHOWUBTUxCMVAdmUOezH
+	MxNc+JgIe21N8kQPU1HR9Pbcjz8d9iiIEOebqXMsD2pH024wEagsPKO3kO4gt2akXqCM59Xg4zYqk
+	RO2MNgspkGsYRVrOrf5Q2i9UzHcWL9gEFoVU64IDPG/FvNu8VLJRyRzRtgSlAOU1ywwOhyNOA/Vws
+	IsAp+dfemcTSEboE454/YCXfEwaqVF3rc6AjIgq6UWOLuxGsFEjx00eAm1dho+uF06lQdfQGpB91l
+	ZpakWynw==;
+Received: from [60.227.177.195] (port=49108 helo=localhost.localdomain)
+	by just2044.justhost.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.1)
+	(envelope-from <dean@sellers.id.au>)
+	id 1ukAWb-00000003ZBm-2WWU;
+	Thu, 07 Aug 2025 17:59:58 -0600
+From: dean@sellers.id.au
+To: openembedded-devel@lists.openembedded.org
+Cc: Dean Sellers <dean@sellers.id.au>
+Subject: [meta-networking][PATCH] tailscale: Added support for systemd init
+Date: Fri,  8 Aug 2025 09:59:50 +1000
+Message-ID: <20250807235950.2999935-1-dean@sellers.id.au>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250807102104.263783-1-haixiao.yan.cn@windriver.com>
-In-Reply-To: <20250807102104.263783-1-haixiao.yan.cn@windriver.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 7 Aug 2025 12:28:05 +0200
-X-Gm-Features: Ac12FXxjPHYbr4ADq-GjeFnyCdhL0v83YtnZHt56y3PdkP_tsh7K-_UfgExgLzY
-Message-ID: <CA+chaQfw=3nT1j8pdi=uLbe8FHaz22iw6GtWHgGZmv75X8s7wg@mail.gmail.com>
-Subject: Re: [oe] [meta-openembedded][PATCH 1/1] python3-posix-ipc: fix
- runtime error
-To: Haixiao.Yan.CN@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - just2044.justhost.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - sellers.id.au
+X-BWhitelist: no
+X-Source-IP: 60.227.177.195
+X-Source-L: No
+X-Exim-ID: 1ukAWb-00000003ZBm-2WWU
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: (localhost.localdomain) [60.227.177.195]:49108
+X-Source-Auth: dean@sellers.id.au
+X-Email-Count: 1
+X-Org: HG=bhshared_jh;ORG=bluehost;
+X-Source-Cap: cmVhbHN0cjE7cmVhbHN0cjE7anVzdDIwNDQuanVzdGhvc3QuY29t
+X-Local-Domain: yes
+X-CMAE-Envelope: MS4xfIyTYH+Gf6a+jv7eXahGziNGbRBECHuWVP9k0ZuzOJ9KTSZ18xpsbA5yzwnHNOuj91RE/atxs1SkfzxvDT+pYul6ko4Pd9VhU3zvTzhN1naokmk7db2K
+ kIYAdK1LJQ5WGLRhS4ViLJxkWvmqO/Z8fSEv8ezo4fxmTnBapMnnRQ1oTjWt+ow98kBS33Pk8XIInPYPIvTRmf0eJJmty9egNTbFwc72hAF6WQNv/eWg6ZbC
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 Aug 2025 10:28:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118899
+ <openembedded-devel@lists.openembedded.org>; Fri, 08 Aug 2025 00:00:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118900
 
-Please test it with newer version where some of the .patch files submitted =
-in:
-https://github.com/osvenskan/posix_ipc/pull/77
-were replaced by:
-https://github.com/osvenskan/posix_ipc/pull/85
+From: Dean Sellers <dean@sellers.id.au>
 
-If it still doesn't work then report and submit it upstream.
+Includes the provided service and defaults files for using the
+tailscale daemon on systemd init machines.
+Added the other kernel modules necessary for tailscaled to work
+without warnings to RRECOMMENDS.
 
+Tested with `core-image-minimal` under qemu with machines
+`qemux86-64`, `genericx86-64` and `qemuarm64`. Ping
+host on tailscale network using magicDNS host lookup.
 
-On Thu, Aug 7, 2025 at 12:21=E2=80=AFPM Yan, Haixiao (CN) via
-lists.openembedded.org
-<Haixiao.Yan.CN=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Haixiao Yan <haixiao.yan.cn@windriver.com>
->
-> Fix follow runtime error: ./build_support/src/sniff_mq_prio_max:
-> /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required=
- by
-> ./build_support/src/sniff_mq_prio_max)
->
-> Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
-> ---
->  ...ndle-runtime-errors-and-return-None-.patch | 57 +++++++++++++++++++
->  .../python/python3-posix-ipc_1.2.0.bb         |  1 +
->  2 files changed, 58 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-posix-ipc=
-/0004-build_support-handle-runtime-errors-and-return-None-.patch
->
-> diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc/0004-b=
-uild_support-handle-runtime-errors-and-return-None-.patch b/meta-python/rec=
-ipes-devtools/python/python3-posix-ipc/0004-build_support-handle-runtime-er=
-rors-and-return-None-.patch
-> new file mode 100644
-> index 000000000000..f4608e6443b5
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-posix-ipc/0004-build_su=
-pport-handle-runtime-errors-and-return-None-.patch
-> @@ -0,0 +1,57 @@
-> +From aea0522262cc7e2374131f25116a59303fdca8e5 Mon Sep 17 00:00:00 2001
-> +From: Haixiao Yan <haixiao.yan.cn@windriver.com>
-> +Date: Thu, 7 Aug 2025 08:13:06 +0000
-> +Subject: [PATCH] build_support: handle runtime errors and return None fo=
-r
-> + invalid max_priority
-> +
-> +When cross-compiling, test binaries may fail to execute on the host syst=
-em if
-> +the target toolchain was built against a newer glibc version than what i=
-s
-> +available on the host.
-> +
-> +For example, on Ubuntu 20.04 the following error occurs:
-> +
-> +./build_support/src/sniff_mq_prio_max: /lib/x86_64-linux-gnu/libc.so.6: =
-version
-> +`GLIBC_2.34' not found (required by ./build_support/src/sniff_mq_prio_ma=
-x)
-> +
-> +This change ensures that such runtime errors are gracefully handled, and
-> +max_priority is set to None when the test binary cannot be executed.
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
-> +---
-> + build_support/discover_system_info.py | 15 ++++++++++++---
-> + 1 file changed, 12 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/build_support/discover_system_info.py b/build_support/disco=
-ver_system_info.py
-> +index f6e6c8cbe6ba..a0be60e51e24 100644
-> +--- a/build_support/discover_system_info.py
-> ++++ b/build_support/discover_system_info.py
-> +@@ -73,12 +73,21 @@ def compile_and_run(filename, linker_options=3D""):
-> +     # Utility function that returns the stdout output from running the
-> +     # compiled source file; None if the compile fails.
-> +     if does_build_succeed(filename, linker_options=3D""):
-> ++        debug =3D False
-> +         try:
-> +             s =3D subprocess.Popen(["./build_support/src/%s" % filename=
-[:-2]],
-> +-                                 stdout=3Dsubprocess.PIPE).communicate(=
-)[0]
-> +-            return s.strip().decode()
-> +-        except Exception:
-> ++                                 stdout=3Dsubprocess.PIPE, stderr=3Dsub=
-process.PIPE)
-> ++            stdout, stderr =3D s.communicate()
-> ++            if s.returncode !=3D 0:
-> ++                # runtime error
-> ++                if debug:
-> ++                    print("Execution error:", stderr.decode().strip())
-> ++                return None
-> ++            return stdout.strip().decode()
-> ++        except Exception as e:
-> +             # execution resulted in an error
-> ++            if debug:
-> ++                print("Exception during execution:", str(e))
-> +             return None
-> +     else:
-> +         # uh-oh, compile failed
-> +--
-> +2.44.3
-> +
-> diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.=
-bb b/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
-> index 8147e4108b72..cad140381344 100644
-> --- a/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
-> @@ -12,5 +12,6 @@ SRC_URI +=3D " \
->      file://0001-build_support-use-source-filename-instead-of-foo-for.pat=
-ch \
->      file://0002-build_support-handle-empty-max_priority-value-as-Non.pat=
-ch \
->      file://0003-build_support-use-does_build_succeed-in-compile_and_.pat=
-ch \
-> +    file://0004-build_support-handle-runtime-errors-and-return-None-.pat=
-ch \
->  "
->  inherit pypi python_setuptools_build_meta
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118898): https://lists.openembedded.org/g/openembedde=
-d-devel/message/118898
-> Mute This Topic: https://lists.openembedded.org/mt/114580342/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Dean Sellers <dean@sellers.id.au>
+---
+ .../tailscale/tailscale_1.84.3.bb             | 29 +++++++++++++++----
+ 1 file changed, 23 insertions(+), 6 deletions(-)
+
+diff --git a/meta-networking/recipes-connectivity/tailscale/tailscale_1.84.3.bb b/meta-networking/recipes-connectivity/tailscale/tailscale_1.84.3.bb
+index 25b54ae93a..33ae1925d5 100644
+--- a/meta-networking/recipes-connectivity/tailscale/tailscale_1.84.3.bb
++++ b/meta-networking/recipes-connectivity/tailscale/tailscale_1.84.3.bb
+@@ -22,7 +22,9 @@ GO_LINKSHARED = ""
+ GOBUILDFLAGS:prepend = "-tags=${@','.join(d.getVar('PACKAGECONFIG_CONFARGS').split())} "
+ GO_EXTRA_LDFLAGS = "-X tailscale.com/version.longStamp=${PV}-${SRCREV_SHORT} -X tailscale.com/version.shortStamp=${PV}"
+ 
+-inherit go-mod update-rc.d
++inherit go-mod \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'update-rc.d', '', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}
+ 
+ PACKAGECONFIG ??= "aws bird capture cli kube ssh tap wakeonlan"
+ PACKAGECONFIG[aws] = "ts_aws,ts_omit_aws"
+@@ -39,6 +41,9 @@ INITSCRIPT_PACKAGES = "${PN}d"
+ INITSCRIPT_NAME:${PN}d = "tailscaled"
+ INITSCRIPT_PARAMS:${PN}d = "defaults 91 9"
+ 
++SYSTEMD_PACKAGES = "${BPN}d"
++SYSTEMD_SERVICE:${BPN}d = "${BPN}d.service"
++
+ # override do_install, since it installs in bin instead of sbin
+ do_install() {
+     install -d ${D}/${sbindir}
+@@ -49,22 +54,34 @@ do_install() {
+         ln -sr ${D}${sbindir}/tailscaled ${D}${bindir}/tailscale
+     fi
+ 
+-    install -d ${D}${sysconfdir}/default
+-    install -m 644 ${UNPACKDIR}/default ${D}${sysconfdir}/default/${BPN}d
+-
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+         install -d ${D}${sysconfdir}/init.d
+         install -m 0755 ${UNPACKDIR}/tailscaled.init ${D}${sysconfdir}/init.d/tailscaled
++        install -d ${D}${sysconfdir}/default
++        install -m 644 ${UNPACKDIR}/default ${D}${sysconfdir}/default/${BPN}d
+     fi
++
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++        install -d ${D}${systemd_system_unitdir}
++        install -m 644 ${B}/src/tailscale.com/cmd/tailscaled/tailscaled.service ${D}${systemd_system_unitdir}/${BPN}d.service
++        install -d ${D}${sysconfdir}/default
++        install -m 644 ${B}/src/tailscale.com/cmd/tailscaled/tailscaled.defaults ${D}${sysconfdir}/default/${BPN}d
++    fi
++
+ }
+ 
+ PACKAGES =+ "${PN}d"
+ 
+ # mark these as src, since there are bash script etc in there and QA will complain otherwise
+ FILES:${PN}-src += "${libdir}/go/src"
+-FILES:${PN}d = "${sysconfdir}"
++FILES:${PN}d = "${sysconfdir} ${systemd_system_unitdir}"
+ 
+ RDEPENDS:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'completion', 'bash-completion', '', d)}"
+ RDEPENDS:${PN}d = "iptables"
+ 
+-RRECOMMENDS:${PN}d = "kernel-module-wireguard"
++RRECOMMENDS:${PN}d = "\
++    kernel-module-wireguard \
++    kernel-module-tun \
++    kernel-module-xt-mark \
++    kernel-module-xt-tcpudp \
++    kernel-module-xt-masquerade"
 
