@@ -1,158 +1,86 @@
-Return-Path: <dean@sellers.id.au>
+Return-Path: <liezhi.yang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C193C87FCF
-	for <webhook@archiver.kernel.org>; Fri,  8 Aug 2025 00:00:04 +0000 (UTC)
-Received: from omta40.uswest2.a.cloudfilter.net (omta40.uswest2.a.cloudfilter.net [35.89.44.39])
- by mx.groups.io with SMTP id smtpd.web11.10442.1754611200885220139
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BBCFC87FD3
+	for <webhook@archiver.kernel.org>; Fri,  8 Aug 2025 03:46:55 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.13535.1754624810966558706
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Aug 2025 17:00:01 -0700
+ Thu, 07 Aug 2025 20:46:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: no key for signature: lookup default._domainkey.sellers.id.au on 100.100.100.100:53: no such host" header.i=@sellers.id.au header.s=default header.b=FVwCsC/8;
- spf=none, err=permanent DNS error (domain: sellers.id.au, ip: 35.89.44.39, mailfrom: dean@sellers.id.au)
-Received: from eig-obgw-5003b.ext.cloudfilter.net ([10.0.29.155])
-	by cmsmtp with ESMTPS
-	id k4uMutKYKanSskAWduvtaC; Fri, 08 Aug 2025 00:00:00 +0000
-Received: from just2044.justhost.com ([173.254.29.206])
-	by cmsmtp with ESMTPS
-	id kAWcutJDBXZDSkAWcuSgfK; Thu, 07 Aug 2025 23:59:58 +0000
-X-Authority-Analysis: v=2.4 cv=SdD3duRu c=1 sm=1 tr=0 ts=68953dfe
- a=pynxHT4M0AVwz8ROpNtnNw==:117 a=rYJWqwM8jy5GC5dGn5DjfA==:17
- a=2OwXVqhp2XgA:10 a=QzMiS2WfBm8A:10 a=zVQgEkJGAAAA:8 a=Zqbe0Ig8F8ON6OjErvMA:9
- a=f9Z7W1HAzlP95tlrx9U8:22 a=kx6rClhKpNpzm8O-7uKn:22
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=sellers.id.au; s=default; h=Content-Transfer-Encoding:MIME-Version:
-	Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=yb4I9JiT/qZJ7UAK4snOgm2108WhLTg/iHkTketmtk4=; b=FVwCsC/8zfTct+9PQNr6AuRjcg
-	oq++WlUMtXG6evKNpUaYDTiO3jiXuDTw7+SUb4ylPqkIhMMkav7BN2U56GHOWUBTUxCMVAdmUOezH
-	MxNc+JgIe21N8kQPU1HR9Pbcjz8d9iiIEOebqXMsD2pH024wEagsPKO3kO4gt2akXqCM59Xg4zYqk
-	RO2MNgspkGsYRVrOrf5Q2i9UzHcWL9gEFoVU64IDPG/FvNu8VLJRyRzRtgSlAOU1ywwOhyNOA/Vws
-	IsAp+dfemcTSEboE454/YCXfEwaqVF3rc6AjIgq6UWOLuxGsFEjx00eAm1dho+uF06lQdfQGpB91l
-	ZpakWynw==;
-Received: from [60.227.177.195] (port=49108 helo=localhost.localdomain)
-	by just2044.justhost.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.98.1)
-	(envelope-from <dean@sellers.id.au>)
-	id 1ukAWb-00000003ZBm-2WWU;
-	Thu, 07 Aug 2025 17:59:58 -0600
-From: dean@sellers.id.au
-To: openembedded-devel@lists.openembedded.org
-Cc: Dean Sellers <dean@sellers.id.au>
-Subject: [meta-networking][PATCH] tailscale: Added support for systemd init
-Date: Fri,  8 Aug 2025 09:59:50 +1000
-Message-ID: <20250807235950.2999935-1-dean@sellers.id.au>
-X-Mailer: git-send-email 2.43.0
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=031518fd30=liezhi.yang@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.8/8.18.1.8) with ESMTP id 5782BEKu2978126;
+	Thu, 7 Aug 2025 20:46:49 -0700
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48bpy7jm5u-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Thu, 07 Aug 2025 20:46:49 -0700 (PDT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.57; Thu, 7 Aug 2025 20:46:48 -0700
+Received: from pek-lpg-core1.wrs.com (10.11.232.110) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
+ 15.1.2507.57 via Frontend Transport; Thu, 7 Aug 2025 20:46:48 -0700
+From: <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <akuster808@gmail.com>
+Subject: [walnascar][meta-python][PATCH] CVE-2025-53643.patch: Add CVE ID
+Date: Fri, 8 Aug 2025 11:46:47 +0800
+Message-ID: <20250808034647.1594755-1-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - just2044.justhost.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - sellers.id.au
-X-BWhitelist: no
-X-Source-IP: 60.227.177.195
-X-Source-L: No
-X-Exim-ID: 1ukAWb-00000003ZBm-2WWU
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: (localhost.localdomain) [60.227.177.195]:49108
-X-Source-Auth: dean@sellers.id.au
-X-Email-Count: 1
-X-Org: HG=bhshared_jh;ORG=bluehost;
-X-Source-Cap: cmVhbHN0cjE7cmVhbHN0cjE7anVzdDIwNDQuanVzdGhvc3QuY29t
-X-Local-Domain: yes
-X-CMAE-Envelope: MS4xfIyTYH+Gf6a+jv7eXahGziNGbRBECHuWVP9k0ZuzOJ9KTSZ18xpsbA5yzwnHNOuj91RE/atxs1SkfzxvDT+pYul6ko4Pd9VhU3zvTzhN1naokmk7db2K
- kIYAdK1LJQ5WGLRhS4ViLJxkWvmqO/Z8fSEv8ezo4fxmTnBapMnnRQ1oTjWt+ow98kBS33Pk8XIInPYPIvTRmf0eJJmty9egNTbFwc72hAF6WQNv/eWg6ZbC
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=G5McE8k5 c=1 sm=1 tr=0 ts=68957329 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=2OwXVqhp2XgA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=iVO35XYjajBOWhi6EbkA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: _WfhAsMnkNghMCYOaMg6Fhao4taNbwKS
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODA4MDAyOSBTYWx0ZWRfX49hVVJCW44K3
+ 6DJOQg8WYmm6J6VLhWnHDUTsxIKOnXHPWPqs5gjrr2Pg1Psym8cJkya2NdWnB7PvCuEY8z7AT/f
+ 7hRwlBvfQkuuRCFtC5SF5e448VBmO3qoxOdo73viNwUYh6ou49d0v79dJqQqTtdagnVBoGLyj/F
+ 6DBBVFS21F0fXfsCs38QRTmOq8M4UBvjQwaxuv9tQHnD3IkjVJpHIy++xN+dwpNcCMb/+R7USg1
+ JZ4oD8FY+m98VPS71V6Zwc5GTYXovIdQ6gRrG3cf/uo/tNt0QL7SKgqX8t1C4btxzntg1GN1dHz
+ llEDsj5n8Z8OFG0hxqaY2mOdy8mqvCWkuk7qEZWh/gqk0Hnf+Rbos7eNrTgI4Q=
+X-Proofpoint-ORIG-GUID: _WfhAsMnkNghMCYOaMg6Fhao4taNbwKS
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-08_01,2025-08-06_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 adultscore=0 malwarescore=0 suspectscore=0 priorityscore=1501
+ phishscore=0 spamscore=0 impostorscore=0 bulkscore=0 classifier=typeunknown
+ authscore=0 authtc= authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 08 Aug 2025 00:00:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118900
+ <openembedded-devel@lists.openembedded.org>; Fri, 08 Aug 2025 03:46:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118901
 
-From: Dean Sellers <dean@sellers.id.au>
+From: Robert Yang <liezhi.yang@windriver.com>
 
-Includes the provided service and defaults files for using the
-tailscale daemon on systemd init machines.
-Added the other kernel modules necessary for tailscaled to work
-without warnings to RRECOMMENDS.
-
-Tested with `core-image-minimal` under qemu with machines
-`qemux86-64`, `genericx86-64` and `qemuarm64`. Ping
-host on tailscale network using magicDNS host lookup.
-
-Signed-off-by: Dean Sellers <dean@sellers.id.au>
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- .../tailscale/tailscale_1.84.3.bb             | 29 +++++++++++++++----
- 1 file changed, 23 insertions(+), 6 deletions(-)
+ .../python/python3-aiohttp/CVE-2025-53643.patch                 | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/tailscale/tailscale_1.84.3.bb b/meta-networking/recipes-connectivity/tailscale/tailscale_1.84.3.bb
-index 25b54ae93a..33ae1925d5 100644
---- a/meta-networking/recipes-connectivity/tailscale/tailscale_1.84.3.bb
-+++ b/meta-networking/recipes-connectivity/tailscale/tailscale_1.84.3.bb
-@@ -22,7 +22,9 @@ GO_LINKSHARED = ""
- GOBUILDFLAGS:prepend = "-tags=${@','.join(d.getVar('PACKAGECONFIG_CONFARGS').split())} "
- GO_EXTRA_LDFLAGS = "-X tailscale.com/version.longStamp=${PV}-${SRCREV_SHORT} -X tailscale.com/version.shortStamp=${PV}"
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-53643.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-53643.patch
+index fd8f83d563..e63fc8d779 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-53643.patch
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-53643.patch
+@@ -7,6 +7,8 @@ Subject: [PATCH] Add trailer parsing logic (#11269) (#11287)
  
--inherit go-mod update-rc.d
-+inherit go-mod \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'update-rc.d', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}
+ CVE-2025-53643.patch
  
- PACKAGECONFIG ??= "aws bird capture cli kube ssh tap wakeonlan"
- PACKAGECONFIG[aws] = "ts_aws,ts_omit_aws"
-@@ -39,6 +41,9 @@ INITSCRIPT_PACKAGES = "${PN}d"
- INITSCRIPT_NAME:${PN}d = "tailscaled"
- INITSCRIPT_PARAMS:${PN}d = "defaults 91 9"
- 
-+SYSTEMD_PACKAGES = "${BPN}d"
-+SYSTEMD_SERVICE:${BPN}d = "${BPN}d.service"
++CVE: CVE-2025-53643
 +
- # override do_install, since it installs in bin instead of sbin
- do_install() {
-     install -d ${D}/${sbindir}
-@@ -49,22 +54,34 @@ do_install() {
-         ln -sr ${D}${sbindir}/tailscaled ${D}${bindir}/tailscale
-     fi
+ Upstream-Status: Backport
+ [https://github.com/aio-libs/aiohttp/commit/e8d774f635dc6d1cd3174d0e38891da5de0e2b6a]
  
--    install -d ${D}${sysconfdir}/default
--    install -m 644 ${UNPACKDIR}/default ${D}${sysconfdir}/default/${BPN}d
--
-     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-         install -d ${D}${sysconfdir}/init.d
-         install -m 0755 ${UNPACKDIR}/tailscaled.init ${D}${sysconfdir}/init.d/tailscaled
-+        install -d ${D}${sysconfdir}/default
-+        install -m 644 ${UNPACKDIR}/default ${D}${sysconfdir}/default/${BPN}d
-     fi
-+
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+        install -d ${D}${systemd_system_unitdir}
-+        install -m 644 ${B}/src/tailscale.com/cmd/tailscaled/tailscaled.service ${D}${systemd_system_unitdir}/${BPN}d.service
-+        install -d ${D}${sysconfdir}/default
-+        install -m 644 ${B}/src/tailscale.com/cmd/tailscaled/tailscaled.defaults ${D}${sysconfdir}/default/${BPN}d
-+    fi
-+
- }
- 
- PACKAGES =+ "${PN}d"
- 
- # mark these as src, since there are bash script etc in there and QA will complain otherwise
- FILES:${PN}-src += "${libdir}/go/src"
--FILES:${PN}d = "${sysconfdir}"
-+FILES:${PN}d = "${sysconfdir} ${systemd_system_unitdir}"
- 
- RDEPENDS:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'completion', 'bash-completion', '', d)}"
- RDEPENDS:${PN}d = "iptables"
- 
--RRECOMMENDS:${PN}d = "kernel-module-wireguard"
-+RRECOMMENDS:${PN}d = "\
-+    kernel-module-wireguard \
-+    kernel-module-tun \
-+    kernel-module-xt-mark \
-+    kernel-module-xt-tcpudp \
-+    kernel-module-xt-masquerade"
+-- 
+2.34.1
+
 
