@@ -1,116 +1,97 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F016EC87FD2
-	for <webhook@archiver.kernel.org>; Mon, 11 Aug 2025 11:33:35 +0000 (UTC)
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
- by mx.groups.io with SMTP id smtpd.web10.46019.1754912014561602061
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4F9BCA0EC4
+	for <webhook@archiver.kernel.org>; Mon, 11 Aug 2025 16:23:37 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web10.52569.1754929411483208215
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Aug 2025 04:33:34 -0700
+ Mon, 11 Aug 2025 09:23:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IDByhPiN;
- spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-71b5279714cso35441387b3.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Aug 2025 04:33:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=L89k632M;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-459e7ea3ebeso17332155e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Aug 2025 09:23:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1754912013; x=1755516813; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1754929409; x=1755534209; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ky1Uq4dgf3itaJlxKRkhOaqjb9X8PGTYj4cKVlcciT0=;
-        b=IDByhPiNV2HFtqaiUUEU4n0d4a28cs9zqJOOUKBfSxfheLJrSZuIJfaQNTi2fpsBLV
-         Z3kkpKpJEcNEN97ZrKyEshA0P2ULqHLyYIEiLlvNhL2+iC9uF2hFM3J1f75eCVDXkRJb
-         KKEsz2iYGnCH/yyWCQnpK8SS4h/G+IbEI+9BloHCYBNz/zKMN3iQcKlWFifjCGrFKQgU
-         FnJntKdzLfAzxqJxC4IAy7pDNvsKQ+ZxjRb6lPZdiqZaTQjJ4tLFw5L85jtLMNmvCF2U
-         GCm1Ac3CA+GedlVKfEVIQF23ZbQa7xN1LoicrDlQ8n1oaNdEKqH7yirHHtVpMjLGOIc5
-         L+lw==
+        bh=CxLoG2Ct+mu0sMY1do+itRt5EqFadEHGW1pdehsV2As=;
+        b=L89k632MIHNk46rOWXXprea7swImVjmx0zp/2bi5e2blQX3GcaJyPRvb7z9LLO23yX
+         gx1M0+apB+AdsvHBVbn2/DW5sjdrKyMZRG3goxHxmJ4pZFcVKRpTdwa+ECraZnSuJbpT
+         TKbqgFcXAEBcJ9ty6wE9eKgNyRcl400ZE9+m/CdmJJzXgosLc3kg4VYX1LwAgeKfNhg8
+         8LBFqSArGIaHL2ogZfWrLn3PxOV3MICR/4U1aUaUqb7yrWoj+JGv+Ps1DWXlfg+re6Jv
+         lORHullKBPT9Kg/OBB3a1Ws0tFg2bAEB1qKN76bcxZjIZhpp8p94sPzCmk311Xmc+iQZ
+         PE+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754912013; x=1755516813;
+        d=1e100.net; s=20230601; t=1754929409; x=1755534209;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ky1Uq4dgf3itaJlxKRkhOaqjb9X8PGTYj4cKVlcciT0=;
-        b=e07gC1XHVvyvLBrBAjF+ajQglT2Lez74uVt/jKTScMa5UyFY1eVrxIABkqRfFm5Znw
-         kJBdiAVrrkXCIfg7zZ+HYndFg+KMcAq8fZxUx81Sjk9dkCYp+heGuKjt1rHeT102HRWV
-         EEv5Pt4mbMUmjOuVYxQ9DT8PniDcIdWsSDzfpBjbKlFApKpaqLOOGhKdihQqtMo+zzSF
-         O3BEIl0SSBJJ4eKWv9/WMPEWGmpkTSB/yhkjKcFDRPkHadAV/n0p+fSKSQUXNE4my0Je
-         qFQMZD14XU+2cZsbH/Th/pXZniWxtL+n9+CNaKhU/tas9vSSlsQ2WEB24vP3GnvR39wA
-         NcUw==
-X-Gm-Message-State: AOJu0YxQwm+3gHKsNR0ZkQaX6RN+UhTqOJuR+PMxbHgUsiSt0EUSF0Mh
-	oR+DAwI4zZigv0ZBjNpffI3trI5FodwbKTMud+hjoY2xWi/eTehDWV6gX3NUVw==
-X-Gm-Gg: ASbGncuz/4YG4pjiYHDcODrPkxiCcboSJn9NyBitnP8Nw1X9+fqwYtQTKP0jVunN7w8
-	OWckTK+FDgmj7dWY7FuuJnFuB/peoqFXqQg+rH2A1eN/nP+KXQMc2ifKWDLW2NyzEWdIF7FHDwJ
-	kaJncnVzNBiCfHR7KjCX/4xEPk/YevOziz15GfZC4Y/sV8HqbA9l9278jnf9lWuopv36kg3S+K1
-	wtAUOVRUOrTX7k7ZPiheri/q2gcm1+/sgnO+gVRAzVkgtyBjrs6QupDcvAcNWqSNVFhFZzqBPtO
-	9gX3fjycS4uiKOW+LUKNmwISifK7Rq4CiJ26+bMUR03bMWjb7gv3to5Jg3z5vawu9rl+zNz/1nf
-	7GltWzlOIhnQyHq+8yfZUc3rzejk2
-X-Google-Smtp-Source: AGHT+IFg+se1xa+84g2ANDXJenKB6rTzGPsVckNzXyMgc/KmI14XP0HVaDidq2m1o1RU7DppMLYV7A==
-X-Received: by 2002:a05:690c:4b08:b0:71a:3ad2:4b31 with SMTP id 00721157ae682-71bf0f260admr145090087b3.42.1754912013143;
-        Mon, 11 Aug 2025 04:33:33 -0700 (PDT)
-Received: from localhost.localdomain ([67.233.61.26])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-71b5a3fa66bsm68519307b3.36.2025.08.11.04.33.32
+        bh=CxLoG2Ct+mu0sMY1do+itRt5EqFadEHGW1pdehsV2As=;
+        b=baA1E7Pfm1MMsx1iKysqcgh2NPPHcNfCN/ItbZMgzlg8XqMAc/NdFvU1hTY1dairJr
+         o/iFPAHkCbllIDstECiYy1YzUh4UXXrMY+v3lNmcym2i9Zv0+rNINRXkaHowMCsRA4Fd
+         p4U7oY1CEmci74YHq/811KnW4ASAWShcMF9Agi8novT2C8a6KoVedkNnz2v53XtI3d/Y
+         GJ21kaUGm0bWZ3UnsqI5g9KqrrPDXihB1rPmDNtEIHoksNemhGuIqTL8k02O/DwGSJ6l
+         QFfM2iHAT/sB9L++mj4+TqZaEjpYMig6hkXy2MlHqqn5aGE+mvdDUff1q0Fra5Lkj2tu
+         hRNw==
+X-Gm-Message-State: AOJu0YyMraysVEImbV3PwsD6vwjL54BQy6YB0H8rni4W9yd5VVrtpDuj
+	9XuIorSZ0svA0NEZWCph4Hk0pUWF9VViFcqceGj0NziC4Q4AeO2HDqTZp+dROg==
+X-Gm-Gg: ASbGnct90ptePmNvztAV6FMwZER9sD1VDmZZL0tX7b4QXoTyztKU/c5RF7766+DQtI9
+	QHGG3xb/3abiEIwqWACX/zWIOrqHRxnAfjxfy6Ux+txRpsng+3CqmdsS3huSAZc1rb3Kz2CUBwb
+	LVoL9ESrmk3x/qSlPvc0/EaumVq1Q/969zVjiqRktnHRZq3LbFQxFDhCvweScHfnMQYIohmzI+y
+	VkLjxMRlcPgith7G42rHKEoSv8BszX1gX57AZ0wcTpth+GhluDfajtHHCmSY6H067DKrcfPXW/P
+	ijBkzQHHJJgn9XXYchoJNGuNW0trZkA11Oq7F2WLmxy1vKXE6jNN+cjL6oSB3ccjLSmSufqwPOh
+	Pc7oxlompn0YbERKhY2wFi+xBpU5etXfr5fwFxJTzPID3uGw=
+X-Google-Smtp-Source: AGHT+IFBt+Bl6JXPnKkKYUA53Cx4nJPYYJhhYcOPYYOOLsCFpIJSqz8xSKTqfUT00j3EJEulTYHhow==
+X-Received: by 2002:a05:600c:4f48:b0:459:db7b:988e with SMTP id 5b1f17b1804b1-45a10ba8306mr3607555e9.13.1754929409254;
+        Mon, 11 Aug 2025 09:23:29 -0700 (PDT)
+Received: from Unimatrix04-Noble.. ([2a02:b027:11:5644:f634:e4b6:c161:2b33])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-459e5885eb8sm265271385e9.29.2025.08.11.09.23.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 Aug 2025 04:33:32 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Mon, 11 Aug 2025 09:23:28 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][walnascar][PATCH] c-ares: backport a patch for a memory leak
-Date: Mon, 11 Aug 2025 07:33:11 -0400
-Message-ID: <20250811113311.1218652-1-schonm@gmail.com>
+Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
+	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] mosquitto: bump to 2.0.22
+Date: Mon, 11 Aug 2025 18:23:25 +0200
+Message-ID: <20250811162325.201977-1-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 Aug 2025 11:33:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118909
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 Aug 2025 16:23:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118910
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+From: Gianfranco Costamagna <locutusofborg@debian.org>
+
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 ---
- .../c-ares/0001-ares_uri-memory-leak.patch    | 21 +++++++++++++++++++
- .../recipes-support/c-ares/c-ares_1.34.5.bb   |  1 +
- 2 files changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-support/c-ares/c-ares/0001-ares_uri-memory-leak.patch
+ .../mosquitto/{mosquitto_2.0.21.bb => mosquitto_2.0.22.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.21.bb => mosquitto_2.0.22.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/c-ares/c-ares/0001-ares_uri-memory-leak.patch b/meta-oe/recipes-support/c-ares/c-ares/0001-ares_uri-memory-leak.patch
-new file mode 100644
-index 0000000000..4d08651be1
---- /dev/null
-+++ b/meta-oe/recipes-support/c-ares/c-ares/0001-ares_uri-memory-leak.patch
-@@ -0,0 +1,21 @@
-+fix memory leak in ares_uri (#1012)
-+Dynamic memory, referenced by 'outpath', is allocated at ares_uri.c:527
-+by calling function 'ares_buf_create' and lost at ares_uri.c:536.
-+
-+Signed-off-by: Felix The Cat (@F3lixTheCat)
-+
-+--
-+
-+Upstream-Status: Backport [https://github.com/c-ares/c-ares/commit/ee2a1c3eff3c8164b09123005f4b49c571788b59]
-+
-+--- a/src/lib/util/ares_uri.c	2025-08-10 15:59:17.501710307 -0400
-++++ b/src/lib/util/ares_uri.c	2025-08-10 16:00:35.867494819 -0400
-+@@ -533,7 +533,7 @@
-+   status = ares_buf_split_str_array(inpath, (const unsigned char *)"/", 1,
-+                                     ARES_BUF_SPLIT_TRIM, 0, &arr);
-+   if (status != ARES_SUCCESS) {
-+-    return NULL;
-++    goto done;
-+   }
-+ 
-+   for (i = 0; i < (ares_ssize_t)ares_array_len(arr); i++) {
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb b/meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb
-index b6945f221d..8204f25cdb 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb
-@@ -6,6 +6,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=d3e72a10e08191f2ca1be3f3228d78f3"
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.22.bb
+similarity index 97%
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.22.bb
+index dcbcbadd59..ae28093e19 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.22.bb
+@@ -20,7 +20,7 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://3238.patch \
+ "
  
- SRC_URI = "https://github.com/c-ares/c-ares/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
-+           file://0001-ares_uri-memory-leak.patch \
-            file://run-ptest"
- SRC_URI[sha256sum] = "7d935790e9af081c25c495fd13c2cfcda4792983418e96358ef6e7320ee06346"
+-SRC_URI[sha256sum] = "7ad5e84caeb8d2bb6ed0c04614b2a7042def961af82d87f688ba33db857b899d"
++SRC_URI[sha256sum] = "2f752589ef7db40260b633fbdb536e9a04b446a315138d64a7ff3c14e2de6b68"
+ 
+ inherit systemd update-rc.d useradd cmake pkgconfig
  
 -- 
 2.43.0
