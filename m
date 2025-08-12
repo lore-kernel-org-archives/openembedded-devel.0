@@ -1,208 +1,196 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <Jinfeng.Wang.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11FB2C87FCB
-	for <webhook@archiver.kernel.org>; Tue, 12 Aug 2025 06:23:02 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.web10.68435.1754979780802194483
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25511CA0EC4
+	for <webhook@archiver.kernel.org>; Tue, 12 Aug 2025 06:35:52 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.68022.1754980544782044064
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Aug 2025 23:23:00 -0700
+ Mon, 11 Aug 2025 23:35:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bKyILYFV;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-315f6b20cf9so6155495a91.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Aug 2025 23:23:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1754979780; x=1755584580; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=+iy2q0KVa4BQX1mfGjTa7sQ1ubO4uEzCpJ4CaKDrkCU=;
-        b=bKyILYFVxDr9d7D2sOqu2XcSpqjnU94yxX+fnboaXazRYZtLLFm7oiqVCtV404LCBp
-         b9Fx9eJ/Qr9yoLW5F039piEmeoJPWI+yTzAL/6DNRwY+vfTUF7cQa3yf1hLk0jQbFOoB
-         ut5/0zufgmt0MMj6qlS/fO/NurHHmfqv42bD4w3yCZbimW/CFY5QDyEEIcvdGSDFwVqm
-         bwvUaMz3gxk6+QSW1llL+GMjaNPTwj1KbxJoQBKngRHnlGQgaZr6fJwb8hcwSFCnphhO
-         Ua8iuOgx6Np2jD0JT+AdXGBSg8WzeXhIo0vBQd/nCF7qexyogqnhbE6HH6I6PAeGd1tP
-         QJIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754979780; x=1755584580;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=+iy2q0KVa4BQX1mfGjTa7sQ1ubO4uEzCpJ4CaKDrkCU=;
-        b=bnn2BhZcC7FkdciXbEWeEIFtw+eG+DpdYFBTIpWMKfrP01Fr0NXfc4kxVeFTFLBGaw
-         46kLx/KPsftU6k7pDKIeir2mDcpX3EEGlKaaJd3Xk/ZPollnkVyKlu7PuHJYTPmSuXwy
-         XNWgVSJ3kSKEFpEdAcNyB9Ye05RnlC3XtvVtsKO2ysLkAVzNPfj//oT+u0GmuUMmYevE
-         /y+unSjqpFGLKC3M6zLuC4ysbyFjOF4O5a3gYjUFS9A86bUwaxx/SAU+C22qPqCSjrHB
-         wD76NdiOic4QDBIUnCRkieuopZwGfOOG4wEPOd6cK3wLkJ+P9jKLX+NeH+9UKsfyR7NX
-         gjLQ==
-X-Gm-Message-State: AOJu0YyNUsvsEYvFmc1YM+gic9RjmSAovlNkRGuFbqp+p/LLdsuA7xUv
-	wqMh8+LuKD7AUepvQZVb+Kv+2uxnlwLu+sOq/KNRfp/s8l24mOCYS056pnu8k9SGrsSyoy08kzt
-	IOWdyrFZj7uw0KlTuSgsYzvXXMqnXdDm459h/
-X-Gm-Gg: ASbGncsECVYSOUdRjiFXpf4fyWsd8V+1bKgO//USONSUdQL1e70jCtNbOsJ7GiG9x2r
-	SYEHps1W+WMgJO1pHKoCGB/6HTymqxpgyq76HBBU32uNdgnc9hP7bWVpZqwZH3BHLQ7GuiC9R8T
-	wXin/ePgzgZyCM9zzjYiFgm1SI4BW16OxJdMoOasOaaxeHbARRLExVO7+Al5OhWVjf5j4yuk0tl
-	XUmu6c=
-X-Google-Smtp-Source: AGHT+IEayGc19TfUH8Tll1PhsaqB7tTPNLjHmnthfOjuxBw5p/MP3CPxOtq4iBv4Dwt/7NZ7roFE7qACHJRcHgRjLFY=
-X-Received: by 2002:a17:90b:1f91:b0:31e:d2a5:c08d with SMTP id
- 98e67ed59e1d1-32183e55963mr25880736a91.33.1754979779584; Mon, 11 Aug 2025
- 23:22:59 -0700 (PDT)
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=031926cd2b=jinfeng.wang.cn@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 57C6XxEW466841
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Aug 2025 23:35:44 -0700
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48fvchg5f1-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Aug 2025 23:35:44 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.57; Mon, 11 Aug 2025 23:35:37 -0700
+Received: from pek-lpg-core4.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.57 via Frontend Transport; Mon, 11 Aug 2025 23:35:36 -0700
+From: <jinfeng.wang.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [walnascar][meta-oe][PATCH] iperf3: Fix CVE-2025-54349
+Date: Tue, 12 Aug 2025 14:35:41 +0800
+Message-ID: <20250812063541.1174689-1-jinfeng.wang.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 11 Aug 2025 23:22:45 -0700
-X-Gm-Features: Ac12FXyal511xUje1aQUoyg7KEvSqdtUV6T2TYttWVZxyNPbJH0BkN0pK1d_pCw
-Message-ID: <CAK5yBb_FpNzCFtxdtU+Q4wyA_joSFwRJ92ZN-UD8pSS31UuEcA@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="00000000000059a886063c251245"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: YfJSPZ1Go3zpcwWUU7msrzGvbEJu1ukU
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODEyMDA2MSBTYWx0ZWRfX99f4LrhF+U55
+ R6PdRG+pdYS6EVrd2cU7rtsvhrpLuT9WeudGBB3I/HiekStWDtRaAophX6aK2TsxKGfZwnYNH2h
+ XEqP0GbRt44SJbGg5+1fgeN0UQkE8fZLLU6IOfrJmxERtkv3WCRI5+URtYWqQrHvSvxmq8PG6I0
+ jdm1I2acQpRc3W8lUjIHr3sBKL6MolisjnnNF8cBClaE7AnLnh79L5At7do4vOj2dsrGkjijHJv
+ S7s9JDkjg3pxJGd7U8u/MZ231XjHSeB2JK/oJIMWGoWBGt6n7y677GGgUzvjw1V+VQJt5nwhCow
+ NhLoNu/ETlzQspEYo21LgxucXiclkYz7Bz2EpKGIgUD/aansLihrwzq1a9+hGI=
+X-Proofpoint-ORIG-GUID: YfJSPZ1Go3zpcwWUU7msrzGvbEJu1ukU
+X-Authority-Analysis: v=2.4 cv=RPGzH5i+ c=1 sm=1 tr=0 ts=689ae0c0 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=2OwXVqhp2XgA:10 a=NEAV23lmAAAA:8 a=PYnjg3YJAAAA:8 a=t7CeM3EgAAAA:8
+ a=vtXoPY2jAAAA:8 a=k0GfeRJ4tlHh1RdrwsEA:9 a=FdTzh2GWekK77mhwV6Dw:22
+ a=s4FxMMpuSwg4a78zj2vJ:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-12_02,2025-08-11_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 phishscore=0 malwarescore=0 adultscore=0 impostorscore=0
+ suspectscore=0 priorityscore=1501 clxscore=1015 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Aug 2025 06:23:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118913
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 Aug 2025 06:35:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118914
 
---00000000000059a886063c251245
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
 
-All,
+Pick commit [1] as listed in [2].
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+[1] https://github.com/esnet/iperf/commit/42280d2292ed5f213bfcb33b2206ebcdb151ae66
+[2] https://nvd.nist.gov/vuln/detail/CVE-2025-54349
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
+---
+ .../iperf3/iperf3/CVE-2025-54349.patch        | 98 +++++++++++++++++++
+ .../recipes-benchmark/iperf3/iperf3_3.18.bb   |  1 +
+ 2 files changed, 99 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 465
-unassigned or newcomer bugs.
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch
+new file mode 100644
+index 0000000000..fbba42b04b
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch
+@@ -0,0 +1,98 @@
++From 505181fd31501027460eb518d7e4d46498e048f5 Mon Sep 17 00:00:00 2001
++From: Sarah Larsen <swlarsen@es.net>
++Date: Wed, 25 Jun 2025 15:11:03 +0000
++Subject: [PATCH] Fix off-by-one heap overflow in auth.
++
++Reported by Han Lee (Apple Information Security)
++CVE-2025-54349
++
++CVE: CVE-2025-54349
++Upstream-Status: Backport [https://github.com/esnet/iperf/commit/42280d2292ed5f213bfcb33b2206ebcdb151ae66]
++
++Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
++---
++ src/iperf_auth.c | 18 +++++++++++++-----
++ 1 file changed, 13 insertions(+), 5 deletions(-)
++
++diff --git a/src/iperf_auth.c b/src/iperf_auth.c
++index 72e85fc..86b4eba 100644
++--- a/src/iperf_auth.c
+++++ b/src/iperf_auth.c
++@@ -288,6 +288,7 @@ int encrypt_rsa_message(const char *plaintext, EVP_PKEY *public_key, unsigned ch
++ }
++ 
++ int decrypt_rsa_message(const unsigned char *encryptedtext, const int encryptedtext_len, EVP_PKEY *private_key, unsigned char **plaintext, int use_pkcs1_padding) {
+++    int ret =0;
++ #if OPENSSL_VERSION_MAJOR >= 3
++     EVP_PKEY_CTX *ctx;
++ #else
++@@ -310,7 +311,8 @@ int decrypt_rsa_message(const unsigned char *encryptedtext, const int encryptedt
++     keysize = RSA_size(rsa);
++ #endif
++     rsa_buffer  = OPENSSL_malloc(keysize * 2);
++-    *plaintext = (unsigned char*)OPENSSL_malloc(keysize);
+++    // Note: +1 for NULL
+++    *plaintext = (unsigned char*)OPENSSL_malloc(keysize + 1);
++ 
++     BIO *bioBuff   = BIO_new_mem_buf((void*)encryptedtext, encryptedtext_len);
++     rsa_buffer_len = BIO_read(bioBuff, rsa_buffer, keysize * 2);
++@@ -320,13 +322,15 @@ int decrypt_rsa_message(const unsigned char *encryptedtext, const int encryptedt
++         padding = RSA_PKCS1_PADDING;
++     }
++ #if OPENSSL_VERSION_MAJOR >= 3
+++
++     plaintext_len = keysize;
++     EVP_PKEY_decrypt_init(ctx);
++-    int ret = EVP_PKEY_CTX_set_rsa_padding(ctx, padding);
+++
+++    ret = EVP_PKEY_CTX_set_rsa_padding(ctx, padding);
++     if (ret < 0){
++         goto errreturn;
++     }
++-    EVP_PKEY_decrypt(ctx, *plaintext, &plaintext_len, rsa_buffer, rsa_buffer_len);
+++    ret = EVP_PKEY_decrypt(ctx, *plaintext, &plaintext_len, rsa_buffer, rsa_buffer_len);
++     EVP_PKEY_CTX_free(ctx);
++ #else
++     plaintext_len = RSA_private_decrypt(rsa_buffer_len, rsa_buffer, *plaintext, rsa, padding);
++@@ -337,7 +341,7 @@ int decrypt_rsa_message(const unsigned char *encryptedtext, const int encryptedt
++     BIO_free(bioBuff);
++ 
++     /* Treat a decryption error as an empty string. */
++-    if (plaintext_len < 0) {
+++    if (plaintext_len <= 0) {
++         plaintext_len = 0;
++     }
++ 
++@@ -386,24 +390,28 @@ int decode_auth_setting(int enable_debug, const char *authtoken, EVP_PKEY *priva
++     int plaintext_len;
++     plaintext_len = decrypt_rsa_message(encrypted_b64, encrypted_len_b64, private_key, &plaintext, use_pkcs1_padding);
++     free(encrypted_b64);
++-    if (plaintext_len < 0) {
+++    if (plaintext_len <= 0) {
++         return -1;
++     }
+++
++     plaintext[plaintext_len] = '\0';
++ 
++     char *s_username, *s_password;
++     s_username = (char *) calloc(plaintext_len, sizeof(char));
++     if (s_username == NULL) {
+++        OPENSSL_free(plaintext);
++ 	return -1;
++     }
++     s_password = (char *) calloc(plaintext_len, sizeof(char));
++     if (s_password == NULL) {
+++        OPENSSL_free(plaintext);
++ 	free(s_username);
++ 	return -1;
++     }
++ 
++     int rc = sscanf((char *) plaintext, auth_text_format, s_username, s_password, &utc_seconds);
++     if (rc != 3) {
+++        OPENSSL_free(plaintext);
++ 	free(s_password);
++ 	free(s_username);
++ 	return -1;
++-- 
++2.49.0
++
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb
+index 77b441e506..4e9f5f1f46 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb
+@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
+            file://0002-Remove-pg-from-profile_CFLAGS.patch \
+            file://0001-configure.ac-check-for-CPP-prog.patch \
+            file://0001-fix-build-with-gcc-15.patch \
++           file://CVE-2025-54349.patch \
+            "
+ 
+ SRCREV = "2a2984488d6de8f7a2d1f5938e03ca7be57e227c"
+-- 
+2.34.1
 
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.3=E2=80=9D, =E2=80=9C6.0", "5.99" and "Future=
-", the more
-pressing/urgent issues being in "5.3" and then =E2=80=9C6.0=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---00000000000059a886063c251245
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
-al">All,<br><br>The triage team is starting to try and collect up and class=
-ify bugs which a newcomer to the project would be able to work on in a way =
-which means people can find them. They&#39;re being listed on the triage pa=
-ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
-wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
-e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
-d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
-org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
-illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
-.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
-ea is these bugs should be straight forward for a person to help work on wh=
-o doesn&#39;t have deep experience with the project.  If anyone can help, p=
-lease take ownership of the bug and send patches!  If anyone needs help/adv=
-ice there are people on irc who can likely do so, or some of the more exper=
-ienced contributors will likely be happy to help too.<br><br>Also, the tria=
-ge team meets weekly and does its best to handle the bugs reported into the=
- Bugzilla. The number of people attending that meeting has fallen, as have =
-the number of people available to help fix bugs. One of the things we hear =
-users report is they don&#39;t know how to help. We (the triage team) are t=
-herefore going to start reporting out the currently 465 unassigned or newco=
-mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
- and again to help out with these.  Bugs are split into two types, &quot;tr=
-ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
-ents&quot; which are features we&#39;d want to add to the system.  There ar=
-e also roughly four different &quot;priority&quot; classes right now, =E2=
-=80=9C5.3=E2=80=9D, =E2=80=9C6.0&quot;, &quot;5.99&quot; and &quot;Future&q=
-uot;, the more pressing/urgent issues being in &quot;5.3&quot; and then =E2=
-=80=9C6.0=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
-g you would be able to help with either take ownership of the bug, or send =
-me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
- an e-mail with the bug number you would like and I will assign it to you (=
-please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
-_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
-ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
-s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
-al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
-al,sans-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---00000000000059a886063c251245--
 
