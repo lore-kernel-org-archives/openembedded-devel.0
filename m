@@ -2,152 +2,110 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21937CA0EC4
-	for <webhook@archiver.kernel.org>; Tue, 12 Aug 2025 16:03:25 +0000 (UTC)
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web10.79047.1755014596786799104
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 034C1CA0EDC
+	for <webhook@archiver.kernel.org>; Wed, 13 Aug 2025 00:50:58 +0000 (UTC)
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.web11.90046.1755046256043133766
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Aug 2025 09:03:16 -0700
+ Tue, 12 Aug 2025 17:50:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Rv/uK13Q;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-76bc55f6612so20130b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Aug 2025 09:03:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Dkbb0aVX;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-b2c4331c50eso4520651a12.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Aug 2025 17:50:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755014596; x=1755619396; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1755046255; x=1755651055; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=uWsc/0FRNijnQ8zMKaxKlbEVVHKeiBcbcLTPN4s+idI=;
-        b=Rv/uK13QlvPrpVoQ+UUONyDIn+f0MUpgWxRIgnDx5LP6iOGtRd2wyejVcjs/43DhY6
-         Qo3ql1+luJb+0fMLkIz+3xg8OK2UikYv8wpAjS4VkVf3lTdry1pRT/s2SlcpumFvoHE9
-         SI37QM6Vjyxu/ydzqFJzohPWCaF/qg/vcUY1MvZOdbRMMtPmNGwht3lujsfiggvKaXL0
-         4ylIGc6lecJ8gYpoR2QnvMde6Tamf17K57yGDJal1U4vDGiRjq4bxbCKLAgri7ybZm4N
-         qf/XqKo0mmV0TghcTZu7d4uZ0h0M8+deuazTEeHQki5boRTyig5S9YKFYWLC5eogu0Ow
-         srow==
+        bh=n8/wfDx5UxVyxLQ/I+HR7hUsTSD2ipTpDCTqn6+ckF0=;
+        b=Dkbb0aVXVR/ZjePXme63agH+nABH5OlPJ4UNBQiWXZAFIxhQPJN/8vd+vVLrb5MkKc
+         9gWVVGUvxJWi3/9esqpEezy1gL5bhkAuPWiMw7/s+d/SiP9LKU069p3QoW1VEL4nhRSZ
+         oVWVGeMUy3debiE3gS+4bVWyZQFUPwh3r24RttAuBAV82AJPUdWKwLre0XxtV+G7kxRR
+         Fe2/7rQInUkuAE3+Y8ISFlVNUh6RC6ecjywWxHocb+hNpd1ThF/mFiqwUTUtX/Usf6J1
+         l8j3NFwWi08TlfvMA8LYlNe67hFS/hQ/J74Wvkxqv0I/flMtFBKbcC/vUD46gRWXy+BV
+         0/bQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755014596; x=1755619396;
+        d=1e100.net; s=20230601; t=1755046255; x=1755651055;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=uWsc/0FRNijnQ8zMKaxKlbEVVHKeiBcbcLTPN4s+idI=;
-        b=oozN+8jhhbTZcfOrKaAFR8b2p1ISDCULSbA0ofuyryigYZ2y8Ce6kJEVnWZq+zEwwJ
-         MsRXjsMpxHqVPiiOiwpI9aLhRgZj6wrn6aX8GMUExxmf7Ik0r63C22kpNONXj6RzXy7G
-         mOZ3YG8+Dh6tDNh3y3tmJk1DPEhWPQzQ/+E4xzFatPckbWpg06BUhJNgKoODECXaGxp/
-         FLVnbEmGszajvWu/Pdv+jxgHmAlnpCGL+8baTu9HzI860nN7LKc23o0y5xPw7ZDvGbtH
-         9Yxp2IqxwqTYaB8C0d9Q//SF+BjcGU3ydfLIUiL3HNBN2CTdhvJV0iitfo2jYhBCAFZI
-         kgGg==
-X-Gm-Message-State: AOJu0Yzr7I4ADS/0CIUuq3tg6Igu249oNO6BwwjnELzqf2CMso/T95nH
-	9qikYBgqjLYwTxQqgDIqrxBnJ4k2m6X0vVlT8n6zXX2UYLIYams5plU/HmaqgtOnxR4=
-X-Gm-Gg: ASbGncsrRJMdHhPNdOVs6iGPfjs42cptbEy0B/a1EReO9aTMI2RRa5/wSduxunCFi/k
-	FVXXva3Ib0w5DmMo2bT0VSh1xbylc4x4N6Ae0II2NAc/0p/e7BaSYOzQ+cs8oS79ZhCiR3c2xgP
-	0xMRMRB0xORjaAaaw3uywPAYPa4SqBGFnyH6KX1B3LtJlm0/FPldL4uGKQXP9xQv6NseD8GMJoK
-	zp3F/9hYwJGUE6iCmYfVQ9Z/0ZwBqGqE819jATi/mz8p4yg/cd7HC1tgK0Qg6suxxtiEVr4TCu+
-	jkrtq8yGa4alDmHZjfU6OUO8lcol3VMDeuJaYhfFzEP+AG19IP9XnGWHdcBVoz1Ttiq/4EqJRba
-	Tap2Hll/Sp1xnpHGeQ1GwAQ==
-X-Google-Smtp-Source: AGHT+IHsZWvAPcgKbE923LeTrZrqVYKhEFbBVGTHmInNBi4Krxv7nnQp2Hon1BEYK94AEyo4x7E8ew==
-X-Received: by 2002:a05:6a20:729f:b0:23d:48fc:652b with SMTP id adf61e73a8af0-240a7c4e789mr135042637.12.1755014595386;
-        Tue, 12 Aug 2025 09:03:15 -0700 (PDT)
-Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::86a5])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-76bccfd73a2sm29688961b3a.108.2025.08.12.09.03.13
+        bh=n8/wfDx5UxVyxLQ/I+HR7hUsTSD2ipTpDCTqn6+ckF0=;
+        b=eIyKhnQ17guAlvLpdXt0S5BzWKczzE1re1Xv0Tt4tQOZTa6fzrdWgI1PEJufsvh8tZ
+         r5kYZwMbEUkSBEKham9X4FGBz3QVOYRkJWCZY3wpjRhJG6Crq7Q9ID04qp2e+zTIS2+x
+         4criAKOhDNJzkK6pR7Llx8XtpnkG/vT2F/cQqsGaq5KSvFKIFXgS/OEa7bTqk/cjrJfG
+         KK3t6ZEuuICrgRCp78l8DG2dHAsU9gFXAeZH2qrxTtMa6ouVYb0T+d83LVflKlmKX2FO
+         uMOAHmd6IkFGKxQko7A8kyh2dhKkmw2Ubm2Xsl8u9p59ODS7A69FzB0Xuj21bbZjb8Dc
+         SY0Q==
+X-Gm-Message-State: AOJu0Yz0Kz8H8DRmMl0ppZUH10MmprvJUO/oLnpJHWsvTC4eTQaONEOV
+	AbOLnd0+1ytp9rO7k/DS5hc4aX6P9YqifkF9LkM+UD4yxhaLkXPxDyWPG6muSYCPWp8=
+X-Gm-Gg: ASbGncvLWqzlw/7ezMVCkQCfTuXO1A0v4e5rpBdGy8clWzuCNUXlilDykPods2uKmga
+	i9l/lMLPVXaAcWT4dtk6DhcAzvizbCnNe2hXxVmm8EG947YKc628JolvX664ehAFay5Yw5OmeaS
+	drZ6D9Tk+YXljF2JXoFUKpzIMtMgm26Q4QuJGWHAEitkTCrxRuM8A1dAMhIXRJ8zhp9h3pgCpMM
+	qZLJnnq5TrvYqfzn5TPYVTau2tloDOJ27fyU3s3OtF7KHgUu3r/tTSUEZKvelyajNMpiAcidh2P
+	A6eFaBPWTZio570iVwilITG2Mlf/4GRFbMZvBr4D5CrW1K3H8I3ZF/xDktroNtJF3oJaLMKz3ZQ
+	/ON/+JkIHIjUJJ7IRl/cGug==
+X-Google-Smtp-Source: AGHT+IH/VOc25XUHr10SRommGFQojISW17HglCTiu+5J/J6v14RHdehkWdkfwlfxIxafCd4SDL64Tg==
+X-Received: by 2002:a17:90b:3f4f:b0:31f:8723:d128 with SMTP id 98e67ed59e1d1-321d0ef197amr1237240a91.34.1755046254970;
+        Tue, 12 Aug 2025 17:50:54 -0700 (PDT)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::2adb])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b4289c5e123sm13875834a12.3.2025.08.12.17.50.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Aug 2025 09:03:14 -0700 (PDT)
+        Tue, 12 Aug 2025 17:50:54 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libplacebo: Fix build with latest python 3.14
-Date: Tue, 12 Aug 2025 09:03:11 -0700
-Message-ID: <20250812160311.711983-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] oprofile: Adjust ptests for UNPACKDIR changes
+Date: Tue, 12 Aug 2025 17:50:52 -0700
+Message-ID: <20250813005052.150201-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Aug 2025 16:03:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118920
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Aug 2025 00:50:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118921
 
-Fixes
- FAILED: [code=1] src/vulkan/utils_gen.c
-   /home/kraj200/yoe/build/tmp/work/riscv64imafdc-yoe-linux/libplacebo/7.351.0/recipe-sysroot-native/usr/bin/meson.real --
-   ↪ internal exe --unpickle /home/kraj200/yoe/build/tmp/work/riscv64imafdc-yoe-linux/libplacebo/7.351.0/build/meson-private/
-   ↪ meson_exe_nativepython3_7e48a7413404982655e79073cf3065c6194271bf.dat
-   while executing ['/home/kraj200/yoe/build/tmp/work/riscv64imafdc-yoe-linux/libplacebo/7.351.0/recipe-sysroot-native/usr/bin/
-   ↪ nativepython3', '../sources/libplacebo-7.351.0/src/vulkan/utils_gen.py', '/usr/share', '/home/kraj200/yoe/build/tmp/work/
-   ↪ riscv64imafdc-yoe-linux/libplacebo/7.351.0/recipe-sysroot/usr/share/vulkan/registry/vk.xml', 'src/vulkan/utils_gen.c']
-   --- stdout ---
-
-   --- stderr ---
-   Traceback (most recent call last):
-     File "/home/kraj200/yoe/build/tmp/work/riscv64imafdc-yoe-linux/libplacebo/7.351.0/build/../sources/libplacebo-7.351.0/src/
-     ↪ vulkan/utils_gen.py", line 205, in <module>
-       registry = VkXML(ET.parse(xmlfile))
-     File "/home/kraj200/yoe/build/tmp/work/riscv64imafdc-yoe-linux/libplacebo/7.351.0/build/../sources/libplacebo-7.351.0/src/
-     ↪ vulkan/utils_gen.py", line 50, in __init__
-       super().__init__(*args, **kwargs)
-       ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
-     File "/home/kraj200/yoe/build/tmp/work/riscv64imafdc-yoe-linux/libplacebo/7.351.0/recipe-sysroot-native/usr/lib/python3.13/
-     ↪ xml/etree/ElementTree.py", line 527, in __init__
-       raise TypeError('expected an Element, not %s' %
-                       type(element).__name__)
-   TypeError: expected an Element, not ElementTree
+Location of S have moved under UNPACKDIR and this
+needs to reflect in ptest install structure as some
+of tests access the sourcedirs relative to itself
+during run, these locations are built into tests
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...vulkan-utils_gen-fix-for-python-3.14.patch | 30 +++++++++++++++++++
- .../mplayer/libplacebo_7.351.0.bb             |  4 ++-
- 2 files changed, 33 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-multimedia/mplayer/libplacebo/0001-vulkan-utils_gen-fix-for-python-3.14.patch
+ meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-vulkan-utils_gen-fix-for-python-3.14.patch b/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-vulkan-utils_gen-fix-for-python-3.14.patch
-new file mode 100644
-index 0000000000..4e381af340
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-vulkan-utils_gen-fix-for-python-3.14.patch
-@@ -0,0 +1,30 @@
-+From ae40237869ae1db4de7f6d86865bc99820852495 Mon Sep 17 00:00:00 2001
-+From: Nicolas Chauvet <kwizart@gmail.com>
-+Date: Tue, 29 Jul 2025 11:42:35 +0200
-+Subject: [PATCH] vulkan/utils_gen: fix for python 3.14
-+
-+Python 3.14+ has added more type checking. This patch fixes usage
-+
-+Fixes: https://github.com/haasn/libplacebo/issues/335
-+
-+Upstream-Status: Backport [https://code.videolan.org/videolan/libplacebo/-/commit/12509c0f1ee8c22ae163017f0a5e7b8a9d983a17]
-+Signed-off-by: Nicolas Chauvet <kwizart@gmail.com>
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/vulkan/utils_gen.py | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/vulkan/utils_gen.py b/src/vulkan/utils_gen.py
-+index 9a97d35f..9b803d82 100644
-+--- a/src/vulkan/utils_gen.py
-++++ b/src/vulkan/utils_gen.py
-+@@ -202,7 +202,8 @@ if __name__ == '__main__':
-+     if not xmlfile or xmlfile == '':
-+         xmlfile = find_registry_xml(datadir)
-+ 
-+-    registry = VkXML(ET.parse(xmlfile))
-++    tree = ET.parse(xmlfile)
-++    registry = VkXML(tree.getroot())
-+     with open(outfile, 'w') as f:
-+         f.write(TEMPLATE.render(
-+             vkresults = get_vkenum(registry, 'VkResult'),
-diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.351.0.bb b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.351.0.bb
-index 68a29dde91..3a1096bb57 100644
---- a/meta-oe/recipes-multimedia/mplayer/libplacebo_7.351.0.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/libplacebo_7.351.0.bb
-@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
+diff --git a/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb b/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb
+index 45f70aa381..38bb957430 100644
+--- a/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb
++++ b/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb
+@@ -59,18 +59,18 @@ do_install_ptest() {
+ 		find ${tooltest} -perm /u=x -type f| cpio -pvdu ${D}${PTEST_PATH}
+ 	done
  
- DEPENDS += "fastfloat glad-native python3-mako-native python3-jinja2-native vulkan-headers"
+-	install -d ${D}${PTEST_PATH}/../${BP}/events ${D}${PTEST_PATH}/../${BP}/libutil++/tests
++	install -d ${D}${PTEST_PATH}/../sources/${BP}/events ${D}${PTEST_PATH}/../sources/${BP}/libutil++/tests
+ 	# needed by libregex regex_test
+ 	cp libregex/stl.pat ${D}${PTEST_PATH}/libregex
+ 	cp libregex/tests/mangled-name ${D}${PTEST_PATH}/libregex/tests
  
--SRC_URI = "git://code.videolan.org/videolan/libplacebo.git;protocol=https;branch=v7.351"
-+SRC_URI = "git://code.videolan.org/videolan/libplacebo.git;protocol=https;branch=v7.351 \
-+           file://0001-vulkan-utils_gen-fix-for-python-3.14.patch \
-+          "
- SRCREV = "3188549fba13bbdf3a5a98de2a38c2e71f04e21e"
+ 	# needed by litutil++ file_manip_tests
+ 	cp ${S}/libutil++/tests/file_manip_tests.cpp \
+-		libutil++/tests/file_manip_tests.o ${D}${PTEST_PATH}/../${BP}/libutil++/tests
++		libutil++/tests/file_manip_tests.o ${D}${PTEST_PATH}/../sources/${BP}/libutil++/tests
+ 	cp ${S}/libutil++/tests/file_manip_tests.cpp \
+ 		libutil++/tests/file_manip_tests.o ${D}${PTEST_PATH}/libutil++/tests
+ 	# needed by some libop tests
+-	cp -R --no-dereference --preserve=mode,links -v ${S}/events ${D}${PTEST_PATH}/../${BP}
++	cp -R --no-dereference --preserve=mode,links -v ${S}/events ${D}${PTEST_PATH}/../sources/${BP}
+ }
  
- inherit meson pkgconfig
+ RDEPENDS:${PN} = "binutils-symlinks"
+@@ -78,4 +78,4 @@ RDEPENDS:${PN} = "binutils-symlinks"
+ FILES:${PN} = "${bindir} ${libdir}/${BPN}/lib*${SOLIBS} ${datadir}/${BPN}"
+ FILES:${PN}-dev += "${libdir}/${BPN}/lib*${SOLIBSDEV} ${libdir}/${BPN}/lib*.la"
+ FILES:${PN}-staticdev += "${libdir}/${BPN}/lib*.a"
+-FILES:${PN}-ptest += "${libdir}/${BPN}/${BP}"
++FILES:${PN}-ptest += "${libdir} ${libdir}/${BPN}/sources"
 
