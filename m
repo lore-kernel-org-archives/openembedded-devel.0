@@ -1,229 +1,178 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9DA3CA0EDC
-	for <webhook@archiver.kernel.org>; Thu, 14 Aug 2025 17:14:43 +0000 (UTC)
-Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com [209.85.219.175])
- by mx.groups.io with SMTP id smtpd.web11.28119.1755191681762954669
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F11CCA0EE4
+	for <webhook@archiver.kernel.org>; Thu, 14 Aug 2025 17:44:44 +0000 (UTC)
+Received: from mta-65-226.siemens.flowmailer.net (mta-65-226.siemens.flowmailer.net [185.136.65.226])
+ by mx.groups.io with SMTP id smtpd.web10.28822.1755193481047178130
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Aug 2025 10:14:41 -0700
+ Thu, 14 Aug 2025 10:44:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IIKhL41I;
- spf=pass (domain: gmail.com, ip: 209.85.219.175, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-e93265d07b5so528613276.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 14 Aug 2025 10:14:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755191681; x=1755796481; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=g9LiRAP/IeV1+5CCXmKG62aTOggnNr9ZR0FCNQ0w9Ks=;
-        b=IIKhL41IkzZx0yS1II0tEl1vUlVtWWwy728b9F0cHcK1VK9ZfL+aePe0PB5en+lJbt
-         9UcVuptdfh8LfC80qAI8gTbiRIFNe1oNtjICmyOenHronxPel7d7jCsr4fYJUeblm96W
-         /0LNi68vI0bVnVpRUCdlIBnTGoAifkm9Sm8U7SLX6AFeTzcZ6N/B9yj3TAi7bolvWbah
-         KZAmsQwl0rMlsJiXe9eblQ8bo1NAfBoNgLB0cxO59qf25IlLuEbZZ07cacL/8UQkmiXd
-         LQmR+thP83Ht0eQx4qukvLXwPzbxt/dpcpUvncWt/waxzj7h6ZKQRWXLYHt03aBXVQjO
-         KXmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755191681; x=1755796481;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=g9LiRAP/IeV1+5CCXmKG62aTOggnNr9ZR0FCNQ0w9Ks=;
-        b=kvfBTHxNfJg/jRq97Vmxymh9Ve6G/+cj6uIZHPrR8QX/EkQLjMJs4EoLhph6U0ZEGb
-         CpEsc+rRe53usk8t9LGc1DM6wMbsUiq/nHWV8QZiTz0aD0RQF8igfLnlS/RsiEpCuXs8
-         xEpmfc4ldDqKlrF5earjsQ6VKFdCGNMvz6jtBmYHmltAlY/5IlMSXX/Ab8cwNM7Hpz2Y
-         q2OPWpbojuwjMjrMBji9luSNxGSLTtHKktPsqGbOLW3filN8D5J9TzqzEN8JvwDrYKhZ
-         frRtuZxNFf0joMkQPwU5YTbs9j07qYdarbcn/CS7i/3d1d5bJVIG0/DO+g918Uue9mE7
-         sCTw==
-X-Forwarded-Encrypted: i=1; AJvYcCVw2Uel7pOqYLoA1PcXTIa9P07ldZ6Hx4rpg1DODPc/QGrT9Ka8VoA+Y8MCGCFGwUwVqFp4dLqxQqgzxaIXpg3IYyw=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzxvAyzYBygS4WAwQs2hsgoBSZJf5TTcIBWR8s4kn364N5NT+zk
-	ITOSKHzfK7/2XFgNxDUXYng0uU8ou2WIebgGrWWTvX9bIW5Ii8ULKO0G
-X-Gm-Gg: ASbGnctkfKTiaoxbBhYpNpKbGICOHS80OtJzyZA8vfMzTbE5vmV+YnD1OLsaXXHLEBn
-	G1HHusmZhUPFFF5yZMQSBiiofaFeMRujEmtDg0Fn2TEdL7RDb4FQapFJFTmdvb1xFroexdfRqfs
-	Ok1vQAzlSm0M5zFrQCXm1FVN7T77DLP1RqI5NrpLpaVS94tWa32IlMWw7R+NrZ33L8gZevn9oxq
-	LRfk6q+OSOb2RSmGMRecQIKJxB1nTrih/vSoXSSLdvtnsx1m+GfHsc+UjVFJ5oiVR4BoSRmMcdu
-	TZeAITg8txomwEieymGcBQH2jWb4TIldwmviZmP3enJwdQMubRPEmkLqTFVfrjuPmIzPH5ucjDN
-	Yz0mEOaMBPYCtXIA9VMSV5GDKomINpwdPnN9k2epdiXcdO5y1p3UJK9mMTFkAli9rye4Fj6IUgQ
-	==
-X-Google-Smtp-Source: AGHT+IFxAkZ/1J5oSmmmvhBjR23gq8m1tWndGlefCG5k9fuHJn/cXPtXpswbRsYEr9rDKLcZAm8trg==
-X-Received: by 2002:a05:690c:6286:b0:71c:f09:e3f0 with SMTP id 00721157ae682-71d63d0843cmr49019567b3.20.1755191680650;
-        Thu, 14 Aug 2025 10:14:40 -0700 (PDT)
-Received: from ?IPV6:2600:1700:45dd:7000:e065:2785:fd37:d24a? ([2600:1700:45dd:7000:e065:2785:fd37:d24a])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-71d60d8ba48sm7276927b3.23.2025.08.14.10.14.40
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 14 Aug 2025 10:14:40 -0700 (PDT)
-Message-ID: <9e3f12ac-a97b-4592-ab0b-fe720a5692f2@gmail.com>
-Date: Thu, 14 Aug 2025 13:14:39 -0400
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=GCSHTUp4;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.226, mailfrom: fm-256628-20250814174437d07e2f73a7c9733aed-wum_qq@rts-flowmailer.siemens.com)
+Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id 20250814174437d07e2f73a7c9733aed
+        for <openembedded-devel@lists.openembedded.org>;
+        Thu, 14 Aug 2025 19:44:38 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:References:In-Reply-To;
+ bh=qbuXncP8zTnwNemqkW7C6H3Am02C81bzfLkiOmu7EHo=;
+ b=GCSHTUp4tdqBvlqAodrvsjd1M1KOkRwx4TETUAAm0/Pb+YkIPry2uEBs9WLyRwUaccTY+N
+ svUiCyvI0fEwr/w9TQ9x9zyjgUFH5XjsQroPsD1PCAD0t2T8gkWJx9d/W/JNlvyR/t9XtHBI
+ 05oxf8NnLP0syPNnqCGN1ISe/ICQxS7XNouimqXYQOHAhuLDETHCakGwj0MHDFLaLVxrfy+n
+ W2T5w5GQcIqhW4bEl4Xhnm+gVgFD59NvWvG40bj4r813phHubZVlO4/1+qK/YKR0RueSWK4u
+ TS4EOncq+d3Y1RthPAUm5FTc24c1sKw+hScurNsQORs0p8IB6v0YsFOg==;
+From: Peter Marko <peter.marko@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][walnascar][PATCH 4/5] libbpf: patch CVE-2025-29481
+Date: Thu, 14 Aug 2025 19:43:51 +0200
+Message-Id: <20250814174352.10670-4-peter.marko@siemens.com>
+In-Reply-To: <20250814174352.10670-1-peter.marko@siemens.com>
+References: <20250814174352.10670-1-peter.marko@siemens.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: Scarthgap merge request: Aug 14th
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Aug 2025 17:14:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118936
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Aug 2025 17:44:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118941
 
-The following changes since commit e8fd97d86af86cdcc5a6eb3f301cbaf6a2084943:
+From: Peter Marko <peter.marko@siemens.com>
 
-   xfce4 update HOMEPAGEs (2025-07-10 20:29:57 -0400)
+Backport patch which mentions PoC [1] which is also linked from [2].
 
-are available in the Git repository at:
+[1] https://github.com/libbpf/libbpf/commit/806b4e0a9f658d831119cece11a082ba1578b800
+[2] https://nvd.nist.gov/vuln/detail/CVE-2025-29481
 
-   https://git.openembedded.org/meta-openembedded scarthgap-next
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../libbpf/files/CVE-2025-29481.patch         | 102 ++++++++++++++++++
+ meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb |   1 +
+ 2 files changed, 103 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/libbpf/files/CVE-2025-29481.patch
 
-for you to fetch changes up to 205638f9edf8e1aa1fbcf28555625fe56f2701a5:
-
-   poco: patch CVE-2025-6375 (2025-08-02 13:37:04 -0400)
-
-----------------------------------------------------------------
-Guocai He (3):
-       thrift: correct the SRC_URI
-       softhsm: correct the SRC_URI
-       mariadb: File conflicts for multilib
-
-Guðni Már Gilbert (1):
-       mbedtls: upgrade 3.6.3.1 -> 3.6.4
-
-Hitendra Prajapati (3):
-       redis: fix CVE-2025-32023
-       libssh: fix CVE-2025-5351 & CVE-2025-5372
-       open-vm-tools: fix CVE-2025-22247
-
-Jinfeng Wang (1):
-       postfix: fix rootfs file difference
-
-Peter Marko (5):
-       libcoap: patch CVE-2024-31031
-       spdlog: patch CVE-2025-6140
-       minifi-cpp: patch spdlog CVE-2025-6140
-       poco: ignore additional failing tests
-       poco: patch CVE-2025-6375
-
-Swamil Jain (1):
-       kmsxx: Revert to using original name for kmstest
-
-Vijay Anusuri (2):
-       proftpd: Fix CVE-2023-51713
-       apache2: Upgrade 2.4.62 -> 2.4.64
-
-Wang Mingyu (1):
-       mbedtls: upgrade 3.6.3 -> 3.6.3.1
-
-Yogita Urade (2):
-       mariadb: upgrade 10.11.9 -> 10.11.12
-       poppler: fix CVE-2025-52886
-
-  .../mbedtls/{mbedtls_3.6.3.bb => mbedtls_3.6.4.bb} |    7 +-
-  .../postfix/files/0006-postfix-add-preliminary-setting.patch    | 31 +
-  meta-networking/recipes-daemons/postfix/postfix_3.8.6.bb |    1 +
-  .../recipes-daemons/proftpd/files/CVE-2023-51713.patch          | 278 ++
-  meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb |    1 +
-  .../recipes-devtools/libcoap/libcoap/CVE-2024-31031.patch       | 82 +
-  meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb |    1 +
-  .../open-vm-tools/open-vm-tools/CVE-2025-22247.patch            | 378 +++
-  .../recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb |    1 +
-  .../meta-python/recipes-multimedia/kmsxx/kmsxx_git.bb |    7 -
-  meta-oe/recipes-connectivity/thrift/thrift_0.20.0.bb |    2 +-
-  .../{mariadb-native_10.11.9.bb => mariadb-native_10.11.12.bb} |    0
-  meta-oe/recipes-dbs/mysql/mariadb.inc                           | 11 +-
-  .../mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch  | 43 +-
-  meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch               | 13 -
-  meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch    | 43 -
-  .../mysql/{mariadb_10.11.9.bb => mariadb_10.11.12.bb} |    0
-  meta-oe/recipes-extended/minifi-cpp/files/CVE-2025-6140.patch   | 35 +
-  meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.15.0.bb |    1 +
-  meta-oe/recipes-extended/redis/redis-7.2.8/CVE-2025-32023.patch | 218 ++
-  meta-oe/recipes-extended/redis/redis_7.2.8.bb |    1 +
-  meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb |    2 +-
-  meta-oe/recipes-support/libssh/libssh/CVE-2025-5351.patch       | 38 +
-  meta-oe/recipes-support/libssh/libssh/CVE-2025-5372.patch       | 150 +
-  meta-oe/recipes-support/libssh/libssh_0.10.6.bb |    2 +
-  .../0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch  | 21 +-
-  meta-oe/recipes-support/poco/poco/CVE-2025-6375.patch           | 34 +
-  meta-oe/recipes-support/poco/poco_1.12.5p2.bb |    1 +
-  .../recipes-support/poppler/poppler/CVE-2025-52886-0001.patch   | 4325 
-+++++++++++++++++++++++++++
-  .../recipes-support/poppler/poppler/CVE-2025-52886-0002.patch   | 58 +
-  meta-oe/recipes-support/poppler/poppler_23.04.0.bb |    2 +
-  meta-oe/recipes-support/spdlog/spdlog/CVE-2025-6140.patch       | 35 +
-  meta-oe/recipes-support/spdlog/spdlog_1.13.0.bb |    4 +-
-  .../apache2/{apache2_2.4.62.bb => apache2_2.4.64.bb} |    2 +-
-  34 files changed, 5722 insertions(+), 106 deletions(-)
-  rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_3.6.3.bb 
-=> mbedtls_3.6.4.bb} (94%)
-  create mode 100644 
-meta-networking/recipes-daemons/postfix/files/0006-postfix-add-preliminary-setting.patch
-  create mode 100644 
-meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch
-  create mode 100644 
-meta-networking/recipes-devtools/libcoap/libcoap/CVE-2024-31031.patch
-  create mode 100644 
-meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-22247.patch
-  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.11.9.bb => 
-mariadb-native_10.11.12.bb} (100%)
-  delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch
-  delete mode 100644 
-meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
-  rename meta-oe/recipes-dbs/mysql/{mariadb_10.11.9.bb => 
-mariadb_10.11.12.bb} (100%)
-  create mode 100644 
-meta-oe/recipes-extended/minifi-cpp/files/CVE-2025-6140.patch
-  create mode 100644 
-meta-oe/recipes-extended/redis/redis-7.2.8/CVE-2025-32023.patch
-  create mode 100644 
-meta-oe/recipes-support/libssh/libssh/CVE-2025-5351.patch
-  create mode 100644 
-meta-oe/recipes-support/libssh/libssh/CVE-2025-5372.patch
-  create mode 100644 meta-oe/recipes-support/poco/poco/CVE-2025-6375.patch
-  create mode 100644 
-meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0001.patch
-  create mode 100644 
-meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0002.patch
-  create mode 100644 
-meta-oe/recipes-support/spdlog/spdlog/CVE-2025-6140.patch
-  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.62.bb => 
-apache2_2.4.64.bb} (99%)
-
+diff --git a/meta-oe/recipes-kernel/libbpf/files/CVE-2025-29481.patch b/meta-oe/recipes-kernel/libbpf/files/CVE-2025-29481.patch
+new file mode 100644
+index 0000000000..ebfcb94a2f
+--- /dev/null
++++ b/meta-oe/recipes-kernel/libbpf/files/CVE-2025-29481.patch
+@@ -0,0 +1,102 @@
++From 806b4e0a9f658d831119cece11a082ba1578b800 Mon Sep 17 00:00:00 2001
++From: Viktor Malik <vmalik@redhat.com>
++Date: Tue, 15 Apr 2025 17:50:14 +0200
++Subject: [PATCH] libbpf: Fix buffer overflow in bpf_object__init_prog
++
++As shown in [1], it is possible to corrupt a BPF ELF file such that
++arbitrary BPF instructions are loaded by libbpf. This can be done by
++setting a symbol (BPF program) section offset to a large (unsigned)
++number such that <section start + symbol offset> overflows and points
++before the section data in the memory.
++
++Consider the situation below where:
++- prog_start = sec_start + symbol_offset    <-- size_t overflow here
++- prog_end   = prog_start + prog_size
++
++    prog_start        sec_start        prog_end        sec_end
++        |                |                 |              |
++        v                v                 v              v
++    .....................|################################|............
++
++The report in [1] also provides a corrupted BPF ELF which can be used as
++a reproducer:
++
++    $ readelf -S crash
++    Section Headers:
++      [Nr] Name              Type             Address           Offset
++           Size              EntSize          Flags  Link  Info  Align
++    ...
++      [ 2] uretprobe.mu[...] PROGBITS         0000000000000000  00000040
++           0000000000000068  0000000000000000  AX       0     0     8
++
++    $ readelf -s crash
++    Symbol table '.symtab' contains 8 entries:
++       Num:    Value          Size Type    Bind   Vis      Ndx Name
++    ...
++         6: ffffffffffffffb8   104 FUNC    GLOBAL DEFAULT    2 handle_tp
++
++Here, the handle_tp prog has section offset ffffffffffffffb8, i.e. will
++point before the actual memory where section 2 is allocated.
++
++This is also reported by AddressSanitizer:
++
++    =================================================================
++    ==1232==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x7c7302fe0000 at pc 0x7fc3046e4b77 bp 0x7ffe64677cd0 sp 0x7ffe64677490
++    READ of size 104 at 0x7c7302fe0000 thread T0
++        #0 0x7fc3046e4b76 in memcpy (/lib64/libasan.so.8+0xe4b76)
++        #1 0x00000040df3e in bpf_object__init_prog /src/libbpf/src/libbpf.c:856
++        #2 0x00000040df3e in bpf_object__add_programs /src/libbpf/src/libbpf.c:928
++        #3 0x00000040df3e in bpf_object__elf_collect /src/libbpf/src/libbpf.c:3930
++        #4 0x00000040df3e in bpf_object_open /src/libbpf/src/libbpf.c:8067
++        #5 0x00000040f176 in bpf_object__open_file /src/libbpf/src/libbpf.c:8090
++        #6 0x000000400c16 in main /poc/poc.c:8
++        #7 0x7fc3043d25b4 in __libc_start_call_main (/lib64/libc.so.6+0x35b4)
++        #8 0x7fc3043d2667 in __libc_start_main@@GLIBC_2.34 (/lib64/libc.so.6+0x3667)
++        #9 0x000000400b34 in _start (/poc/poc+0x400b34)
++
++    0x7c7302fe0000 is located 64 bytes before 104-byte region [0x7c7302fe0040,0x7c7302fe00a8)
++    allocated by thread T0 here:
++        #0 0x7fc3046e716b in malloc (/lib64/libasan.so.8+0xe716b)
++        #1 0x7fc3045ee600 in __libelf_set_rawdata_wrlock (/lib64/libelf.so.1+0xb600)
++        #2 0x7fc3045ef018 in __elf_getdata_rdlock (/lib64/libelf.so.1+0xc018)
++        #3 0x00000040642f in elf_sec_data /src/libbpf/src/libbpf.c:3740
++
++The problem here is that currently, libbpf only checks that the program
++end is within the section bounds. There used to be a check
++`while (sec_off < sec_sz)` in bpf_object__add_programs, however, it was
++removed by commit 6245947c1b3c ("libbpf: Allow gaps in BPF program
++sections to support overriden weak functions").
++
++Add a check for detecting the overflow of `sec_off + prog_sz` to
++bpf_object__init_prog to fix this issue.
++
++[1] https://github.com/lmarch2/poc/blob/main/libbpf/libbpf.md
++
++Fixes: 6245947c1b3c ("libbpf: Allow gaps in BPF program sections to support overriden weak functions")
++Reported-by: lmarch2 <2524158037@qq.com>
++Signed-off-by: Viktor Malik <vmalik@redhat.com>
++Signed-off-by: Andrii Nakryiko <andrii@kernel.org>
++Reviewed-by: Shung-Hsi Yu <shung-hsi.yu@suse.com>
++Link: https://github.com/lmarch2/poc/blob/main/libbpf/libbpf.md
++Link: https://lore.kernel.org/bpf/20250415155014.397603-1-vmalik@redhat.com
++
++CVE: CVE-2025-29481
++Upstream-Status: Backport [https://github.com/libbpf/libbpf/commit/806b4e0a9f658d831119cece11a082ba1578b800]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/libbpf.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/libbpf.c b/src/libbpf.c
++index b2591f5..56250b5 100644
++--- a/src/libbpf.c
+++++ b/src/libbpf.c
++@@ -889,7 +889,7 @@ bpf_object__add_programs(struct bpf_object *obj, Elf_Data *sec_data,
++ 			return -LIBBPF_ERRNO__FORMAT;
++ 		}
++ 
++-		if (sec_off + prog_sz > sec_sz) {
+++		if (sec_off + prog_sz > sec_sz || sec_off + prog_sz < sec_off) {
++ 			pr_warn("sec '%s': program at offset %zu crosses section boundary\n",
++ 				sec_name, sec_off);
++ 			return -LIBBPF_ERRNO__FORMAT;
+diff --git a/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb b/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
+index 58bb7bca09..45caca0114 100644
+--- a/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
++++ b/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
+@@ -10,6 +10,7 @@ DEPENDS = "zlib elfutils"
+ 
+ SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master \
+            file://0001-libbpf-check-for-empty-BTF-data-section-in-btf_parse.patch \
++           file://CVE-2025-29481.patch;striplevel=2 \
+ "
+ SRCREV = "09b9e83102eb8ab9e540d36b4559c55f3bcdb95d"
+ 
 
