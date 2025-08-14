@@ -2,32 +2,32 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F11CCA0EE4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E38ACA0EDC
 	for <webhook@archiver.kernel.org>; Thu, 14 Aug 2025 17:44:44 +0000 (UTC)
-Received: from mta-65-226.siemens.flowmailer.net (mta-65-226.siemens.flowmailer.net [185.136.65.226])
- by mx.groups.io with SMTP id smtpd.web10.28822.1755193481047178130
+Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
+ by mx.groups.io with SMTP id smtpd.web10.28823.1755193481387606545
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 14 Aug 2025 10:44:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=GCSHTUp4;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.226, mailfrom: fm-256628-20250814174437d07e2f73a7c9733aed-wum_qq@rts-flowmailer.siemens.com)
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id 20250814174437d07e2f73a7c9733aed
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=TpRHj1k0;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-20250814174437e3377d28926df7f2eb-evkv6a@rts-flowmailer.siemens.com)
+Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 20250814174437e3377d28926df7f2eb
         for <openembedded-devel@lists.openembedded.org>;
         Thu, 14 Aug 2025 19:44:38 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:References:In-Reply-To;
- bh=qbuXncP8zTnwNemqkW7C6H3Am02C81bzfLkiOmu7EHo=;
- b=GCSHTUp4tdqBvlqAodrvsjd1M1KOkRwx4TETUAAm0/Pb+YkIPry2uEBs9WLyRwUaccTY+N
- svUiCyvI0fEwr/w9TQ9x9zyjgUFH5XjsQroPsD1PCAD0t2T8gkWJx9d/W/JNlvyR/t9XtHBI
- 05oxf8NnLP0syPNnqCGN1ISe/ICQxS7XNouimqXYQOHAhuLDETHCakGwj0MHDFLaLVxrfy+n
- W2T5w5GQcIqhW4bEl4Xhnm+gVgFD59NvWvG40bj4r813phHubZVlO4/1+qK/YKR0RueSWK4u
- TS4EOncq+d3Y1RthPAUm5FTc24c1sKw+hScurNsQORs0p8IB6v0YsFOg==;
+ bh=RXPUpgEWi/TXPtvZuX+Mri8R2hAR4mspnapwbAB8JIc=;
+ b=TpRHj1k0hZd2LnfTK9sTBnP5fBvx9N2KZ1reWm6y/3IS3StkT2feNmNdDgOwWTGti3hxHV
+ cJd/HR5pWHIljvqKufPybUcJIVOzU63Yj5T9dUT5LGjWnf5FDQe7IVNj1WKm3gtJrSjLSB0/
+ aPOHz79kBgjruF6RKm2h1SECbNfELcYkqu+okjuHdVqmPDZEzxRnn6aeLmV5W5VSJtIQ4mbB
+ ckuzqR8PQ48dzPxYxllYY0aq0G6fLbUF7HyyLN9D4esHpiOEE52xKYQedkNLYUsCr3OZ5EIw
+ sp5wVcolR0bURC4sHxIwRz7wWqnrKp+zKVjw3qpjU0KIdPNWG0WSxoaA==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][walnascar][PATCH 4/5] libbpf: patch CVE-2025-29481
-Date: Thu, 14 Aug 2025 19:43:51 +0200
-Message-Id: <20250814174352.10670-4-peter.marko@siemens.com>
+Subject: [meta-networking][walnascar][PATCH 2/5] corosync: upgrade 3.1.6 -> 3.1.9
+Date: Thu, 14 Aug 2025 19:43:49 +0200
+Message-Id: <20250814174352.10670-2-peter.marko@siemens.com>
 In-Reply-To: <20250814174352.10670-1-peter.marko@siemens.com>
 References: <20250814174352.10670-1-peter.marko@siemens.com>
 MIME-Version: 1.0
@@ -38,141 +38,61 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 14 Aug 2025 17:44:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118941
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118938
 
 From: Peter Marko <peter.marko@siemens.com>
 
-Backport patch which mentions PoC [1] which is also linked from [2].
+dbus dir was changed from sysconfdir to datadir
 
-[1] https://github.com/libbpf/libbpf/commit/806b4e0a9f658d831119cece11a082ba1578b800
-[2] https://nvd.nist.gov/vuln/detail/CVE-2025-29481
+drop unused configure code
+
+License-Update: copyright years refreshed
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libbpf/files/CVE-2025-29481.patch         | 102 ++++++++++++++++++
- meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb |   1 +
- 2 files changed, 103 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/libbpf/files/CVE-2025-29481.patch
+ .../corosync/{corosync_3.1.6.bb => corosync_3.1.9.bb}  | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
+ rename meta-networking/recipes-extended/corosync/{corosync_3.1.6.bb => corosync_3.1.9.bb} (90%)
 
-diff --git a/meta-oe/recipes-kernel/libbpf/files/CVE-2025-29481.patch b/meta-oe/recipes-kernel/libbpf/files/CVE-2025-29481.patch
-new file mode 100644
-index 0000000000..ebfcb94a2f
---- /dev/null
-+++ b/meta-oe/recipes-kernel/libbpf/files/CVE-2025-29481.patch
-@@ -0,0 +1,102 @@
-+From 806b4e0a9f658d831119cece11a082ba1578b800 Mon Sep 17 00:00:00 2001
-+From: Viktor Malik <vmalik@redhat.com>
-+Date: Tue, 15 Apr 2025 17:50:14 +0200
-+Subject: [PATCH] libbpf: Fix buffer overflow in bpf_object__init_prog
-+
-+As shown in [1], it is possible to corrupt a BPF ELF file such that
-+arbitrary BPF instructions are loaded by libbpf. This can be done by
-+setting a symbol (BPF program) section offset to a large (unsigned)
-+number such that <section start + symbol offset> overflows and points
-+before the section data in the memory.
-+
-+Consider the situation below where:
-+- prog_start = sec_start + symbol_offset    <-- size_t overflow here
-+- prog_end   = prog_start + prog_size
-+
-+    prog_start        sec_start        prog_end        sec_end
-+        |                |                 |              |
-+        v                v                 v              v
-+    .....................|################################|............
-+
-+The report in [1] also provides a corrupted BPF ELF which can be used as
-+a reproducer:
-+
-+    $ readelf -S crash
-+    Section Headers:
-+      [Nr] Name              Type             Address           Offset
-+           Size              EntSize          Flags  Link  Info  Align
-+    ...
-+      [ 2] uretprobe.mu[...] PROGBITS         0000000000000000  00000040
-+           0000000000000068  0000000000000000  AX       0     0     8
-+
-+    $ readelf -s crash
-+    Symbol table '.symtab' contains 8 entries:
-+       Num:    Value          Size Type    Bind   Vis      Ndx Name
-+    ...
-+         6: ffffffffffffffb8   104 FUNC    GLOBAL DEFAULT    2 handle_tp
-+
-+Here, the handle_tp prog has section offset ffffffffffffffb8, i.e. will
-+point before the actual memory where section 2 is allocated.
-+
-+This is also reported by AddressSanitizer:
-+
-+    =================================================================
-+    ==1232==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x7c7302fe0000 at pc 0x7fc3046e4b77 bp 0x7ffe64677cd0 sp 0x7ffe64677490
-+    READ of size 104 at 0x7c7302fe0000 thread T0
-+        #0 0x7fc3046e4b76 in memcpy (/lib64/libasan.so.8+0xe4b76)
-+        #1 0x00000040df3e in bpf_object__init_prog /src/libbpf/src/libbpf.c:856
-+        #2 0x00000040df3e in bpf_object__add_programs /src/libbpf/src/libbpf.c:928
-+        #3 0x00000040df3e in bpf_object__elf_collect /src/libbpf/src/libbpf.c:3930
-+        #4 0x00000040df3e in bpf_object_open /src/libbpf/src/libbpf.c:8067
-+        #5 0x00000040f176 in bpf_object__open_file /src/libbpf/src/libbpf.c:8090
-+        #6 0x000000400c16 in main /poc/poc.c:8
-+        #7 0x7fc3043d25b4 in __libc_start_call_main (/lib64/libc.so.6+0x35b4)
-+        #8 0x7fc3043d2667 in __libc_start_main@@GLIBC_2.34 (/lib64/libc.so.6+0x3667)
-+        #9 0x000000400b34 in _start (/poc/poc+0x400b34)
-+
-+    0x7c7302fe0000 is located 64 bytes before 104-byte region [0x7c7302fe0040,0x7c7302fe00a8)
-+    allocated by thread T0 here:
-+        #0 0x7fc3046e716b in malloc (/lib64/libasan.so.8+0xe716b)
-+        #1 0x7fc3045ee600 in __libelf_set_rawdata_wrlock (/lib64/libelf.so.1+0xb600)
-+        #2 0x7fc3045ef018 in __elf_getdata_rdlock (/lib64/libelf.so.1+0xc018)
-+        #3 0x00000040642f in elf_sec_data /src/libbpf/src/libbpf.c:3740
-+
-+The problem here is that currently, libbpf only checks that the program
-+end is within the section bounds. There used to be a check
-+`while (sec_off < sec_sz)` in bpf_object__add_programs, however, it was
-+removed by commit 6245947c1b3c ("libbpf: Allow gaps in BPF program
-+sections to support overriden weak functions").
-+
-+Add a check for detecting the overflow of `sec_off + prog_sz` to
-+bpf_object__init_prog to fix this issue.
-+
-+[1] https://github.com/lmarch2/poc/blob/main/libbpf/libbpf.md
-+
-+Fixes: 6245947c1b3c ("libbpf: Allow gaps in BPF program sections to support overriden weak functions")
-+Reported-by: lmarch2 <2524158037@qq.com>
-+Signed-off-by: Viktor Malik <vmalik@redhat.com>
-+Signed-off-by: Andrii Nakryiko <andrii@kernel.org>
-+Reviewed-by: Shung-Hsi Yu <shung-hsi.yu@suse.com>
-+Link: https://github.com/lmarch2/poc/blob/main/libbpf/libbpf.md
-+Link: https://lore.kernel.org/bpf/20250415155014.397603-1-vmalik@redhat.com
-+
-+CVE: CVE-2025-29481
-+Upstream-Status: Backport [https://github.com/libbpf/libbpf/commit/806b4e0a9f658d831119cece11a082ba1578b800]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ src/libbpf.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/libbpf.c b/src/libbpf.c
-+index b2591f5..56250b5 100644
-+--- a/src/libbpf.c
-++++ b/src/libbpf.c
-+@@ -889,7 +889,7 @@ bpf_object__add_programs(struct bpf_object *obj, Elf_Data *sec_data,
-+ 			return -LIBBPF_ERRNO__FORMAT;
-+ 		}
-+ 
-+-		if (sec_off + prog_sz > sec_sz) {
-++		if (sec_off + prog_sz > sec_sz || sec_off + prog_sz < sec_off) {
-+ 			pr_warn("sec '%s': program at offset %zu crosses section boundary\n",
-+ 				sec_name, sec_off);
-+ 			return -LIBBPF_ERRNO__FORMAT;
-diff --git a/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb b/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
-index 58bb7bca09..45caca0114 100644
---- a/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
-+++ b/meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb
-@@ -10,6 +10,7 @@ DEPENDS = "zlib elfutils"
+diff --git a/meta-networking/recipes-extended/corosync/corosync_3.1.6.bb b/meta-networking/recipes-extended/corosync/corosync_3.1.9.bb
+similarity index 90%
+rename from meta-networking/recipes-extended/corosync/corosync_3.1.6.bb
+rename to meta-networking/recipes-extended/corosync/corosync_3.1.9.bb
+index e8e4540a21..af023307bb 100644
+--- a/meta-networking/recipes-extended/corosync/corosync_3.1.6.bb
++++ b/meta-networking/recipes-extended/corosync/corosync_3.1.9.bb
+@@ -10,11 +10,11 @@ inherit autotools pkgconfig systemd github-releases
+ SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/${BP}.tar.gz \
+            file://corosync.conf \
+           "
+-SRC_URI[sha256sum] = "ca6ed32b4d7f33ed614afce8760fe58d0de92c68b575d4969ebacd892f3d1e27"
++SRC_URI[sha256sum] = "203354bbddee1a97b3c50a076eae89c635f406dd674ccaefc94bb9092acd9535"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
  
- SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master \
-            file://0001-libbpf-check-for-empty-BTF-data-section-in-btf_parse.patch \
-+           file://CVE-2025-29481.patch;striplevel=2 \
- "
- SRCREV = "09b9e83102eb8ab9e540d36b4559c55f3bcdb95d"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d9c2cca5d3448c43e52a399ad611658a"
  
+ DEPENDS = "groff-native nss libqb kronosnet"
+ 
+@@ -34,11 +34,6 @@ PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_system_un
+ EXTRA_OECONF = "ac_cv_path_BASHPATH=${base_bindir}/bash ap_cv_cc_pie=no"
+ EXTRA_OEMAKE = "tmpfilesdir_DATA="
+ 
+-#do_configure:prepend() {
+-#    ( cd ${S}
+-#    ${S}/autogen.sh )
+-#}
+-
+ do_install:append() {
+     install -D -m 0644 ${UNPACKDIR}/corosync.conf ${D}${sysconfdir}/corosync/corosync.conf.example
+     install -d ${D}${sysconfdir}/sysconfig/
+@@ -59,5 +54,6 @@ do_install:append() {
+ 
+ RDEPENDS:${PN} += "bash ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'sysvinit-pidof', 'procps', d)}"
+ 
++FILES:${PN} += "${datadir}/dbus-1"
+ FILES:${PN}-dbg += "${libexecdir}/lcrso/.debug"
+ FILES:${PN}-doc += "${datadir}/snmp/mibs/COROSYNC-MIB.txt"
 
