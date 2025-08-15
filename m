@@ -2,62 +2,60 @@ Return-Path: <karn.jye.lau@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E477CCA0ED1
-	for <webhook@archiver.kernel.org>; Fri, 15 Aug 2025 10:52:39 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
- by mx.groups.io with SMTP id smtpd.web10.9037.1755255139943903184
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF36BCA0ED1
+	for <webhook@archiver.kernel.org>; Fri, 15 Aug 2025 11:01:39 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
+ by mx.groups.io with SMTP id smtpd.web11.9013.1755255694303317778
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Aug 2025 03:52:20 -0700
+ Fri, 15 Aug 2025 04:01:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=FpLVkS3Q;
- spf=pass (domain: intel.com, ip: 198.175.65.16, mailfrom: karn.jye.lau@intel.com)
+ dkim=pass header.i=@intel.com header.s=Intel header.b=PwWrdUgy;
+ spf=pass (domain: intel.com, ip: 192.198.163.19, mailfrom: karn.jye.lau@intel.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1755255140; x=1786791140;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=vMCOYa52RrGTY8gEqju173+2nlYjATXcyRHwz0qseIY=;
-  b=FpLVkS3Qkrzz+nHwShonwTcT0Y9quFgoGOSZgAlqGYSdpXaVA8cGlLn1
-   m/KQDyp5he+CCceXTfJR98zbeZUO+uYlNRJRTBQRKB5y8h1mygJO6srSj
-   sP6Q6K9N2O6ZYQVmOoxKTLF0x7e8om9clAO9lOfI2Tq0u5KF1NSlJiGFG
-   SD8nD2AxRZKnujURSnMuBO4eAQRgj216XP6rFtQkRl1VbidAWxxPG2Vsn
-   6M1tz/KeoL9+4epO/RcNoKkS//ki/B2Lthnv0lu5uYKQU8/O9accb/2Z6
-   bTuWOFRMoSJa/qusnYL3g2mB0bAMwWY5TvyyIBy9uDky9+ZXu3qZhNHNZ
+  t=1755255694; x=1786791694;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=/NHc0cq0h7aqdEurmVUS41sMYi+YzxL25jDLy+ELWUs=;
+  b=PwWrdUgylCIqhQ+bvfTCvVe+uf1yRT7dIHPUjmfGfQNuDMy0HvN1oVbA
+   Co6CJpZwto/zA7xQriGYJSJXqFQuuDYIhS5Pes42grGObJVrnaL88Srz5
+   zzXi1zh94l2p+U+j2ZDSOn2xzaVJtHkrVnj5pmkh/4AKLbfVUTCad/VQQ
+   GGQFakjwDQbEKtrBaLIcMUU+/5IIR6MB9jyHrhSniX5kLLDrBvAaICJfB
+   DmrnJ8rYTpSDeRtwfOnlVamksVW/fz+TzIa1eFDSomWiUCxXZ9aosQ6Ny
+   PBPjDRjQ8aC02R0mjdvTy5G/6Egft1uR8dp6Wl5BYPN4gEX8BJsB6ziq3
    g==;
-X-CSE-ConnectionGUID: LfSs/Oc6TQavm0vHTZVs6Q==
-X-CSE-MsgGUID: 1bZhjWmJQAqhqVWp5L2fnw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11522"; a="57726488"
+X-CSE-ConnectionGUID: p/qZ+nycR/6bdiIYgkLrfQ==
+X-CSE-MsgGUID: 7foWFC4wSRukRu9+KTJD2g==
+X-IronPort-AV: E=McAfee;i="6800,10657,11522"; a="56600579"
 X-IronPort-AV: E=Sophos;i="6.17,290,1747724400"; 
-   d="scan'208";a="57726488"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
-  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Aug 2025 03:52:19 -0700
-X-CSE-ConnectionGUID: avBlaFjmT5ujcU5VfPCeyw==
-X-CSE-MsgGUID: e1IvFu7+TPKKUAI68XeLPA==
+   d="scan'208";a="56600579"
+Received: from orviesa009.jf.intel.com ([10.64.159.149])
+  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Aug 2025 04:01:32 -0700
+X-CSE-ConnectionGUID: s8MlSiaWRmSU7bjDXEcP2Q==
+X-CSE-MsgGUID: BkCldK0SQueMb118maKFJw==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.17,290,1747724400"; 
-   d="scan'208";a="171120103"
+   d="scan'208";a="166627310"
 Received: from ubuntu-8087.iind.intel.com ([10.49.0.122])
-  by fmviesa003.fm.intel.com with ESMTP; 15 Aug 2025 03:52:18 -0700
+  by orviesa009.jf.intel.com with ESMTP; 15 Aug 2025 04:01:32 -0700
 From: karn.jye.lau@intel.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][scarthgap][PATCH v2]  mbedtls: drop tag parameter from SRC_URI.
-Date: Fri, 15 Aug 2025 16:19:32 +0530
-Message-Id: <20250815104932.580839-1-karn.jye.lau@intel.com>
+Subject: [meta-networking][scarthgap][PATCH] mbedtls: drop tag parameter from SRC_URI.
+Date: Fri, 15 Aug 2025 16:28:44 +0530
+Message-Id: <20250815105844.584334-1-karn.jye.lau@intel.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250815041114.481650-1-karn.jye.lau@intel.com>
-References: <20250815041114.481650-1-karn.jye.lau@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Aug 2025 10:52:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118973
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Aug 2025 11:01:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118974
 
 From: kjlau0112 <karn.jye.lau@intel.com>
 
-[v2] Keep SRCREV and remove tag parameter from SRC_URI as per review
-feedback.
+Keep SRCREV and remove tag paramater to avoid
+Fix Fetcher failure: Conflicting revisions error
 
 Signed-off-by: kjlau0112 <karn.jye.lau@intel.com>
 ---
