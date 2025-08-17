@@ -1,150 +1,373 @@
-Return-Path: <michael.opdenacker@rootcommit.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF2B0CA0EDC
-	for <webhook@archiver.kernel.org>; Sun, 17 Aug 2025 19:33:32 +0000 (UTC)
-Received: from bumble.maple.relay.mailchannels.net (bumble.maple.relay.mailchannels.net [23.83.214.25])
- by mx.groups.io with SMTP id smtpd.web10.59428.1755459205884447351
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50B4CCA0EDC
+	for <webhook@archiver.kernel.org>; Sun, 17 Aug 2025 21:30:53 +0000 (UTC)
+Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com [209.85.219.175])
+ by mx.groups.io with SMTP id smtpd.web10.61545.1755466243963826630
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Aug 2025 12:33:26 -0700
+ Sun, 17 Aug 2025 14:30:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@rootcommit.com header.s=hostingermail-a header.b=re4ReIH6;
- spf=pass (domain: rootcommit.com, ip: 23.83.214.25, mailfrom: michael.opdenacker@rootcommit.com)
-X-Sender-Id: hostingeremailsmtpin|x-authuser|michael.opdenacker@rootcommit.com
-Received: from relay.mailchannels.net (localhost [127.0.0.1])
-	by relay.mailchannels.net (Postfix) with ESMTP id 17F5F4457E
-	for <openembedded-devel@lists.openembedded.org>; Sun, 17 Aug 2025 19:33:25 +0000 (UTC)
-Received: from fr-int-smtpout25.hostinger.io (trex-blue-7.trex.outbound.svc.cluster.local [100.96.43.79])
-	(Authenticated sender: hostingeremailsmtpin)
-	by relay.mailchannels.net (Postfix) with ESMTPA id 6F97C445F7
-	for <openembedded-devel@lists.openembedded.org>; Sun, 17 Aug 2025 19:33:24 +0000 (UTC)
-ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1755459204; a=rsa-sha256;
-	cv=none;
-	b=98aEI/qQZTzYTfletV3+cE8h6Si3De091ZPQMKAG+SMEKA+A6afFr+uoCKOMOwv6wt4lK0
-	8Ziv70dL78uITSgKxM6GqjnziRgEkHZJBd69xZbsP43LbD98v+M+dR9IaCPAFK/pc3Bo0u
-	A2M8YoUJse4DOFp9DttxWRu3AxJndGYMl4MU9dbhjHVdbczcsi0o26VtFistVaoqW2V5E9
-	sTK/zv6RzpmZSiCvCSYTyXu5IfbO8huOJbXZeCypWtSTKuRH6CEgYZ2RzKSbIKp61Q0wr/
-	g9shzKWOQuStehGkBTE7Qgz5YP5DoSQA6gmQdyzM5RtN5kO1wURGzFohlXgCgw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailchannels.net;
-	s=arc-2022; t=1755459204;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:dkim-signature;
-	bh=mhZL70OOdGCv2kjXund5cC8mRHcwP4ETm0vZ9BDXBts=;
-	b=ozJjeVz+uB3MABQZ1bQgXVtAO7jfcfDJLfSD08D8ykLktSkIT4b3oOHsoFRjIGYFi8Oz/T
-	mXtOjw8JzI1d+L4Up8oXsyhZqsppjHghL7Z5NNu08K8i0EBHEoNAMVVdoyJD3U8uk7qL1f
-	z92wviBjQ/WNoi7MQYeVp1eEtOxF45yE/o8064SqsDZim9yDN8gGyZYxsmlzU1IeGtXYSR
-	4cdt8aEgJXYV2uOoNozDzAElXRka2Qk41WLDNGa7CMmE7v56U/FvlvG3wk0i1zwSB5H41z
-	eUPTFFuJSXCB9wph8fia2NEqDRtZnmJiHWEFowhfgFR13BHzlUUqUR1W9hHNJQ==
-ARC-Authentication-Results: i=1;
-	rspamd-697fb8bd44-ft9ql;
-	auth=pass smtp.auth=hostingeremailsmtpin
- smtp.mailfrom=michael.opdenacker@rootcommit.com
-X-Sender-Id: hostingeremailsmtpin|x-authuser|michael.opdenacker@rootcommit.com
-X-MC-Relay: Neutral
-X-MailChannels-SenderId: 
- hostingeremailsmtpin|x-authuser|michael.opdenacker@rootcommit.com
-X-MailChannels-Auth-Id: hostingeremailsmtpin
-X-Industry-Plucky: 74cd87a36479f676_1755459204980_2883135492
-X-MC-Loop-Signature: 1755459204980:3527957321
-X-MC-Ingress-Time: 1755459204980
-Received: from fr-int-smtpout25.hostinger.io ([UNAVAILABLE]. [148.222.54.38])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
-	by 100.96.43.79 (trex/7.1.3);
-	Sun, 17 Aug 2025 19:33:24 +0000
-Received: from localhost.localdomain (unknown [IPv6:2001:861:4448:6b00:1022:9db4:c2fd:5d60])
-	(Authenticated sender: michael.opdenacker@rootcommit.com)
-	by smtp.hostinger.com (smtp.hostinger.com) with ESMTPSA id 4c4mGp31pGz1xn2;
-	Sun, 17 Aug 2025 19:33:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rootcommit.com;
-	s=hostingermail-a; t=1755459202;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=mhZL70OOdGCv2kjXund5cC8mRHcwP4ETm0vZ9BDXBts=;
-	b=re4ReIH68mYqOKVN+InYXhkG/fm1Y8OB4J6GmKdhr0UXiDqXn35AIBPjlyOI+kve0Q5wkd
-	lIz2cAZRmbBzrVfWAz0YhkpD9uiEPwu6AN4aITt7JO1Rdn+L2Sav/KD9eJfeu1wXf5D183
-	t+JTzo7/hO52A28m29iDPljQkDKxia3C/QKMWnVbbbmfrE4egJkCZIcFTkQdIXhBfHPJi0
-	mi5Qm5XDHZK5YLD3rN7UOMWmP8cjexvzSLjFQJtq24NBFpWx29F2uFuO9sq0Imnq2OpKNy
-	lDUFSFd8iREkE78HBGdwYnDi+VhKvIEvEa3Fxje/9e1L144QjLcsS+ibJgpR9A==
-From: michael.opdenacker@rootcommit.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Michael Opdenacker <michael.opdenacker@rootcommit.com>
-Subject: [meta-oe][PATCH] kernel-hardening-checker: upgrade to 0.6.10.2
-Message-ID: <20250817193310.3864975-1-michael.opdenacker@rootcommit.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UqBhNKdj;
+ spf=pass (domain: gmail.com, ip: 209.85.219.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-e931cad1fd8so3612946276.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Aug 2025 14:30:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1755466243; x=1756071043; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=zCiHOMBvjgBaH9/v57VYJNoE9qRBDoKD6frk6aJA/7c=;
+        b=UqBhNKdjEqBQ6eOiNCxuHpQO4fekNVDorD+t4y8zlC5esUQo+Vrk9yDm4c/7u4qrJb
+         FxmAMPzMFdDtS7VJQ9VMzwLVSxL6CnIF4pJvSXfyTSeDQVz7tKwTAZ7WR8LwHJ7Y5jNY
+         3xOPYKH3K8/ac1Qmn47fEtkO+n23Rrwac1s4sQ1IXCRLOKYk3ZVu6C8LBYX3jCMZWHSF
+         E8AXrCqRoW97xi2cyNm5FGrFU8eXjtSaWNzYf/nHFA7XTsJ8OtNcWLhy0qT4HmPO15LI
+         Ls2xIFU91Ll/6sYtK3n1R78iVrWzkB376Hsqsb1YPWjeC7QVz6RJ0EWnWFdICVSfqvYH
+         rjbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1755466243; x=1756071043;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=zCiHOMBvjgBaH9/v57VYJNoE9qRBDoKD6frk6aJA/7c=;
+        b=V3ZMzoC6RBs84HKBZLIBdDigU4NNOoGkuSvkhxGfhyUVo794dsKkd+Cgx7pg8eoxZY
+         RdWdg4GY+Uznh0oJ6E5tPETZyLzfEpKjxZqMxTQym0yRX51TZzNWKez4eiFMSSCO8nah
+         NL/CAAcAH9eE3YWv/irlyC0upxs/Co9GnmxXr5QklXZULeeZwexlC0OeNC3YPu827D/H
+         mT269BQwK7jhzc8nhuHeghxuTylcPmp5kqlgiUbjEqiWiHp+7nwqj0eYcQqWD69PjZ8a
+         wzr7lLn+U9754/39/5RH2+KdU/77jEH7v2oFiBFDyzQjTCaNZag/xjVbOKuERmGeElhH
+         JgaQ==
+X-Gm-Message-State: AOJu0YwQAzdfBM6FZVDY9Q9EKFp89aVGXGgJq/rRRFXac8MfUDdFPz3x
+	lmspQg51liV/pP0u4fjLnetPKHJTmd6Ie912R7i+wnFUmHNJPoS3eOMgrYIHijE7hVyaFnAcZi1
+	tIJu4RIXqKstrsxmJRQA/5V9WXX9MyRg=
+X-Gm-Gg: ASbGncsVEfaX5mGUYrpS7E3z4XjiilW/x3VVBNsWISe0Wzc6MbH1Nxz8NBY0VyoWI1g
+	FpzM9XmYQjiUMJCTfS9UESGhu53OGyyTXN18OkG7Jd8/tUZaA1IhrQY99G+7ckSZevsieWhwGIN
+	DBFN22fDwdZsf0kraCiSf706IK5bnMauXshTEjAoPHOwhh3oVyhwrYHxStHuYyXr6gU1KR/Qw7t
+	7/zOg1jMBpE0+xHbKPggK0tniHCxjRYT1MTFgdY
+X-Google-Smtp-Source: AGHT+IF76xkkEgRnGhNlVX/FhEE+QyBffUnTLCLXrJOjCxoV6jCd8KYx2kskHNACKrwkbhnDfRyhNzYuHV+Aakkou4c=
+X-Received: by 2002:a05:6902:110c:b0:e93:3acf:2642 with SMTP id
+ 3f1490d57ef6-e933acf288bmr8793435276.45.1755466242936; Sun, 17 Aug 2025
+ 14:30:42 -0700 (PDT)
 MIME-Version: 1.0
-Date: Sun, 17 Aug 2025 19:33:22 +0000 (UTC)
-X-CM-Analysis: v=2.4 cv=LaRu6Sfi c=1 sm=1 tr=0 ts=68a22e82 a=/4B58YW+q9akEXzE1EpPGA==:617 a=xqWC_Br6kY4A:10 a=d70CFdQeAAAA:8 a=NEAV23lmAAAA:8 a=qpvx0Py9g8YHWCuXceAA:9 a=NcxpMcIZDGm-g932nG_k:22
-X-CM-Envelope: MS4xfK1tVazFJ0y0BVnz79Yew6bm/F9egyF3criHmsec7i7y2Jk3K4Buy0BgCXcn29/XLRnOVbpgyP1cugMf5auL+pmV8OuZXrWcuIb2WwM2UPAcVtfLUt2O AvMd91pCOtiZ6pUXqSS+ARf68MCdZ2CPd0MMfT4dMf0872fSwtAznHV9Ec9T5dDIXwfoPg2Tb9VlUkS+yOZGmSJXsROitbaXo8a+MrhA/okEOLg8Q59//3QC elUCP5vFynkkKM6N2FVl5nqnZ05otU3aavtjkK8YkSWgYrLD2AORBCZG5KuCZ1lZ2GW5BrDCWbEgf5MFos64X6XgRIrlcs3EoK2hD7j6Xjw5LMrBrhN1lVDz 525rYnMR
-X-AuthUser: michael.opdenacker@rootcommit.com
-Content-Transfer-Encoding: quoted-printable
+References: <185C8340ADC0E6D9.8958@lists.openembedded.org> <185C83615B3CBF8D.30607@lists.openembedded.org>
+ <e7f38aaa-b4bc-4aa9-a5a7-3ea30994bb8a@gmail.com>
+In-Reply-To: <e7f38aaa-b4bc-4aa9-a5a7-3ea30994bb8a@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 17 Aug 2025 14:30:31 -0700
+X-Gm-Features: Ac12FXyxVUDCQo3D16JBTVPjVXWI9DrHkmqgoO-0ST_Ch8F5fmNHGX7IsLy2ssA
+Message-ID: <CAMKF1so=E=_ckSGydVbG_WOh9a=pOdCJLfUMJiFDGR6CPJF7eg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] gitpkgv.bbclass: inspect repository in UNPACKDIR
+To: skandigraun@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000d355c6063c9655f2"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 17 Aug 2025 19:33:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118988
+ <openembedded-devel@lists.openembedded.org>; Sun, 17 Aug 2025 21:30:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118989
 
-From: Michael Opdenacker <michael.opdenacker@rootcommit.com>
+--000000000000d355c6063c9655f2
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Major upstream changes (not a minor release update in terms of features):
-- RISCV support
-- New "-a" option: autodetect and check the security hardening options of=
- the running kernel
-  You can now just run "kernel-hardening-checker -a"
-- Require Python 3.9
-- Replace setup.py by pyproject.toml
-- Many fixes and new features
+On Sun, Aug 17, 2025 at 10:35=E2=80=AFAM Gyorgy Sarvari via lists.openembed=
+ded.org
+<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
 
-Signed-off-by: Michael Opdenacker <michael.opdenacker@rootcommit.com>
----
- ...cker_0.6.10.bb =3D> kernel-hardening-checker_0.6.10.2.bb} | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-security/kernel-hardening-checker/{kernel-hardeni=
-ng-checker_0.6.10.bb =3D> kernel-hardening-checker_0.6.10.2.bb} (91%)
+> On 8/17/25 11:20, Gyorgy Sarvari via lists.openembedded.org wrote:
+> > In my testing it looks okay, but if someone else could test/review it
+> > also to see if it makes sense, it would be useful.
+>
+> A short off-list exchange with WXbet made me look a bit more, and there
+> is a gotcha.
+>
+> Looking at older releases, BB_GIT_SHALLOW used to have effect on mirror
+> tarball fetching and generation only, not on fetching from git.
+>
+> But now there is actual shallow cloning, which changes the behavior of
+> this class beyond the folder issue: it's not possible to determine the
+> real number of commits, so the versions generated by this class won't be
+> very sortable.
+>
+> Should there be maybe a bb.warn/fatal error if shallow clone is enabled?
+> Or just a comment in the class? Or just drop this change, and keep it as
+> it is?
+>
+> Does anyone have any preference/suggestion?
+>
 
-diff --git a/meta-oe/recipes-security/kernel-hardening-checker/kernel-har=
-dening-checker_0.6.10.bb b/meta-oe/recipes-security/kernel-hardening-chec=
-ker/kernel-hardening-checker_0.6.10.2.bb
-similarity index 91%
-rename from meta-oe/recipes-security/kernel-hardening-checker/kernel-hard=
-ening-checker_0.6.10.bb
-rename to meta-oe/recipes-security/kernel-hardening-checker/kernel-harden=
-ing-checker_0.6.10.2.bb
-index e7610ac785..559a15a009 100644
---- a/meta-oe/recipes-security/kernel-hardening-checker/kernel-hardening-=
-checker_0.6.10.bb
-+++ b/meta-oe/recipes-security/kernel-hardening-checker/kernel-hardening-=
-checker_0.6.10.2.bb
-@@ -13,13 +13,14 @@ LICENSE =3D "GPL-3.0-only"
- LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dd32239bcb673463ab874e80d4=
-7fae504"
-=20
- SRC_URI =3D "git://github.com/a13xp0p0v/kernel-hardening-checker;protoco=
-l=3Dhttps;branch=3Dmaster"
--SRCREV =3D "f4dbe258ff3d37489962ea9cf210192ae7ff9280"
--
-+SRCREV =3D "0ebece346f187e7d3589883cc1d194fcd1c3cda8"
-=20
- PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-=20
- RDEPENDS:${PN} =3D "\
-     python3-json \
-+    python3-misc \
-+    bash \
- "
-=20
- # /boot/config is required for the analysis
-@@ -27,7 +28,7 @@ RRECOMMENDS:${PN}:class-target =3D "\
-     kernel-dev \
- "
-=20
--inherit setuptools3
-+inherit python_setuptools_build_meta
-=20
- # allow to run on build host, if you don't want it in the image
- # oe-run-native kernel-hardening-checker-native kernel-hardening-checker=
- ...
+I think we should also look at if this class still is valuable a warning is
+perhaps better here
+
+>
+> >
+> > On 8/17/25 11:17, Gyorgy Sarvari via lists.openembedded.org wrote:
+> >> When BB_GIT_SHALLOW =3D "1" is used, the unpacked gir repository doesn=
+'t
+> >> exist in the download folder, and the class isn't able to instect the
+> >> details of the repository.
+> >>
+> >> Instead inspect the repository it the UNPACKDIR.
+> >>
+> >> Reported-by: WXbet <WXbet@proton.me>
+> >> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> >> ---
+> >>  meta-oe/classes/gitpkgv.bbclass | 17 ++++++++++++-----
+> >>  1 file changed, 12 insertions(+), 5 deletions(-)
+> >>
+> >> diff --git a/meta-oe/classes/gitpkgv.bbclass
+> b/meta-oe/classes/gitpkgv.bbclass
+> >> index eb4b1eae9a..1afe9c53d8 100644
+> >> --- a/meta-oe/classes/gitpkgv.bbclass
+> >> +++ b/meta-oe/classes/gitpkgv.bbclass
+> >> @@ -59,6 +59,9 @@ def get_git_pkgv(d, use_tags):
+> >>      from shlex import quote
+> >>
+> >>      src_uri =3D d.getVar('SRC_URI').split()
+> >> +    unpackdir =3D d.getVar('UNPACKDIR')
+> >> +    def_destsuffix =3D (d.getVar("BB_GIT_DEFAULT_DESTSUFFIX") or "git=
+")
+> + "/"
+> >> +
+> >>      fetcher =3D bb.fetch2.Fetch(src_uri, d)
+> >>      ud =3D fetcher.ud
+> >>
+> >> @@ -78,20 +81,24 @@ def get_git_pkgv(d, use_tags):
+> >>      found =3D False
+> >>      for url in ud.values():
+> >>          if url.type =3D=3D 'git' or url.type =3D=3D 'gitsm':
+> >> -            if not os.path.exists(url.localpath):
+> >> +            destsuffix =3D url.parm.get("destsuffix", def_destsuffix)
+> >> +            subdir =3D url.parm.get('subdir', '')
+> >> +            destdir =3D os.path.join(unpackdir, destsuffix, subdir)
+> >> +
+> >> +            if not os.path.exists(destdir):
+> >>                  return None
+> >>
+> >>              found =3D True
+> >>
+> >> -            vars =3D { 'repodir' : quote(url.localpath),
+> >> +            vars =3D { 'repodir' : quote(destdir),
+> >>                       'rev' : quote(url.revision) }
+> >>
+> >>              rev =3D bb.fetch2.get_srcrev(d).split('+')[1]
+> >> -            rev_file =3D os.path.join(url.localpath, "oe-gitpkgv_" +
+> url.revision)
+> >> +            rev_file =3D os.path.join(destdir, "oe-gitpkgv_" +
+> url.revision)
+> >>
+> >>              if not os.path.exists(rev_file) or
+> os.path.getsize(rev_file)=3D=3D0:
+> >>                  commits =3D bb.fetch2.runfetchcmd(
+> >> -                    "git --git-dir=3D%(repodir)s rev-list %(rev)s --
+> 2>/dev/null | wc -l"
+> >> +                    "git -C %(repodir)s rev-list %(rev)s --
+> 2>/dev/null | wc -l"
+> >>                      % vars, d, quiet=3DTrue).strip().lstrip('0')
+> >>
+> >>                  if commits !=3D "":
+> >> @@ -107,7 +114,7 @@ def get_git_pkgv(d, use_tags):
+> >>              if use_tags:
+> >>                  try:
+> >>                      output =3D bb.fetch2.runfetchcmd(
+> >> -                        "git --git-dir=3D%(repodir)s describe %(rev)s
+> --tags --exact-match 2>/dev/null"
+> >> +                        "git -C %(repodir)s describe %(rev)s --tags
+> --exact-match 2>/dev/null"
+> >>                          % vars, d, quiet=3DTrue).strip()
+> >>                      ver =3D gitpkgv_drop_tag_prefix(d, output)
+> >>                  except Exception:
+> >>
+> >>
+> >>
+> >
+> >
+> >
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#118983):
+> https://lists.openembedded.org/g/openembedded-devel/message/118983
+> Mute This Topic: https://lists.openembedded.org/mt/114745266/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000d355c6063c9655f2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
+iv dir=3D"ltr" class=3D"gmail_attr">On Sun, Aug 17, 2025 at 10:35=E2=80=AFA=
+M Gyorgy Sarvari via <a href=3D"http://lists.openembedded.org">lists.openem=
+bedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openembe=
+dded.org">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
+olid;padding-left:1ex">On 8/17/25 11:20, Gyorgy Sarvari via <a href=3D"http=
+://lists.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.opene=
+mbedded.org</a> wrote:<br>
+&gt; In my testing it looks okay, but if someone else could test/review it<=
+br>
+&gt; also to see if it makes sense, it would be useful.<br>
+<br>
+A short off-list exchange with WXbet made me look a bit more, and there<br>
+is a gotcha.<br>
+<br>
+Looking at older releases, BB_GIT_SHALLOW used to have effect on mirror<br>
+tarball fetching and generation only, not on fetching from git.<br>
+<br>
+But now there is actual shallow cloning, which changes the behavior of<br>
+this class beyond the folder issue: it&#39;s not possible to determine the<=
+br>
+real number of commits, so the versions generated by this class won&#39;t b=
+e<br>
+very sortable.<br>
+<br>
+Should there be maybe a bb.warn/fatal error if shallow clone is enabled?<br=
+>
+Or just a comment in the class? Or just drop this change, and keep it as<br=
+>
+it is?<br>
+<br>
+Does anyone have any preference/suggestion?<br>
+</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">I think we shoul=
+d also look at if this class still is valuable a warning is perhaps better =
+here=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8e=
+x;border-left:1px #ccc solid;padding-left:1ex"><br>
+&gt;<br>
+&gt; On 8/17/25 11:17, Gyorgy Sarvari via <a href=3D"http://lists.openembed=
+ded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> wr=
+ote:<br>
+&gt;&gt; When BB_GIT_SHALLOW =3D &quot;1&quot; is used, the unpacked gir re=
+pository doesn&#39;t<br>
+&gt;&gt; exist in the download folder, and the class isn&#39;t able to inst=
+ect the<br>
+&gt;&gt; details of the repository.<br>
+&gt;&gt;<br>
+&gt;&gt; Instead inspect the repository it the UNPACKDIR.<br>
+&gt;&gt;<br>
+&gt;&gt; Reported-by: WXbet &lt;<a href=3D"mailto:WXbet@proton.me" target=
+=3D"_blank">WXbet@proton.me</a>&gt;<br>
+&gt;&gt; Signed-off-by: Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gm=
+ail.com" target=3D"_blank">skandigraun@gmail.com</a>&gt;<br>
+&gt;&gt; ---<br>
+&gt;&gt;=C2=A0 meta-oe/classes/gitpkgv.bbclass | 17 ++++++++++++-----<br>
+&gt;&gt;=C2=A0 1 file changed, 12 insertions(+), 5 deletions(-)<br>
+&gt;&gt;<br>
+&gt;&gt; diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/git=
+pkgv.bbclass<br>
+&gt;&gt; index eb4b1eae9a..1afe9c53d8 100644<br>
+&gt;&gt; --- a/meta-oe/classes/gitpkgv.bbclass<br>
+&gt;&gt; +++ b/meta-oe/classes/gitpkgv.bbclass<br>
+&gt;&gt; @@ -59,6 +59,9 @@ def get_git_pkgv(d, use_tags):<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 from shlex import quote<br>
+&gt;&gt;=C2=A0 <br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 src_uri =3D d.getVar(&#39;SRC_URI&#39;).split(=
+)<br>
+&gt;&gt; +=C2=A0 =C2=A0 unpackdir =3D d.getVar(&#39;UNPACKDIR&#39;)<br>
+&gt;&gt; +=C2=A0 =C2=A0 def_destsuffix =3D (d.getVar(&quot;BB_GIT_DEFAULT_D=
+ESTSUFFIX&quot;) or &quot;git&quot;) + &quot;/&quot;<br>
+&gt;&gt; +<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 fetcher =3D bb.fetch2.Fetch(src_uri, d)<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 ud =3D fetcher.ud<br>
+&gt;&gt;=C2=A0 <br>
+&gt;&gt; @@ -78,20 +81,24 @@ def get_git_pkgv(d, use_tags):<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 found =3D False<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 for url in ud.values():<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if url.type =3D=3D &#39;git&#39;=
+ or url.type =3D=3D &#39;gitsm&#39;:<br>
+&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if not os.path.exists(u=
+rl.localpath):<br>
+&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 destsuffix =3D url.parm=
+.get(&quot;destsuffix&quot;, def_destsuffix)<br>
+&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 subdir =3D url.parm.get=
+(&#39;subdir&#39;, &#39;&#39;)<br>
+&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 destdir =3D os.path.joi=
+n(unpackdir, destsuffix, subdir)<br>
+&gt;&gt; +<br>
+&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if not os.path.exists(d=
+estdir):<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 retu=
+rn None<br>
+&gt;&gt;=C2=A0 <br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 found =3D True<br>
+&gt;&gt;=C2=A0 <br>
+&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vars =3D { &#39;repodir=
+&#39; : quote(url.localpath),<br>
+&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vars =3D { &#39;repodir=
+&#39; : quote(destdir),<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0&#39;rev&#39; : quote(url.revision) }<br>
+&gt;&gt;=C2=A0 <br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rev =3D bb.fetch2.=
+get_srcrev(d).split(&#39;+&#39;)[1]<br>
+&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rev_file =3D os.path.jo=
+in(url.localpath, &quot;oe-gitpkgv_&quot; + url.revision)<br>
+&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rev_file =3D os.path.jo=
+in(destdir, &quot;oe-gitpkgv_&quot; + url.revision)<br>
+&gt;&gt;=C2=A0 <br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if not os.path.exi=
+sts(rev_file) or os.path.getsize(rev_file)=3D=3D0:<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 comm=
+its =3D bb.fetch2.runfetchcmd(<br>
+&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 &quot;git --git-dir=3D%(repodir)s rev-list %(rev)s -- 2&gt;/dev/null=
+ | wc -l&quot;<br>
+&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 &quot;git -C %(repodir)s rev-list %(rev)s -- 2&gt;/dev/null | wc -l&=
+quot;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 % vars, d, quiet=3DTrue).strip().lstrip(&#39;0&#39;)<br>
+&gt;&gt;=C2=A0 <br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if c=
+ommits !=3D &quot;&quot;:<br>
+&gt;&gt; @@ -107,7 +114,7 @@ def get_git_pkgv(d, use_tags):<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if use_tags:<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 try:=
+<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 output =3D bb.fetch2.runfetchcmd(<br>
+&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 &quot;git --git-dir=3D%(repodir)s describe %(rev)s --t=
+ags --exact-match 2&gt;/dev/null&quot;<br>
+&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 &quot;git -C %(repodir)s describe %(rev)s --tags --exa=
+ct-match 2&gt;/dev/null&quot;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 % vars, d, quiet=3DTrue).strip()<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 ver =3D gitpkgv_drop_tag_prefix(d, output)<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 exce=
+pt Exception:<br>
+&gt;&gt;<br>
+&gt;&gt;<br>
+&gt;&gt;<br>
+&gt;<br>
+&gt; <br>
+&gt;<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#118983): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/118983" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/118983</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/114745266/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/114745266/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000d355c6063c9655f2--
 
