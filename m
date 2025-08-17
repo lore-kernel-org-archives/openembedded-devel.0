@@ -1,176 +1,96 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22642CA0EDC
-	for <webhook@archiver.kernel.org>; Sun, 17 Aug 2025 17:35:12 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web10.57237.1755452109591553592
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B798CA0EED
+	for <webhook@archiver.kernel.org>; Sun, 17 Aug 2025 17:41:12 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web11.57012.1755452461873037188
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Aug 2025 10:35:09 -0700
+ Sun, 17 Aug 2025 10:41:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KvKuTITf;
- spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-afcb7a3b3a9so502638766b.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Aug 2025 10:35:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PfUcazE8;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-45a25ce7978so5183055e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Aug 2025 10:41:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755452108; x=1756056908; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=mCCGYO6cJ5FlviHNhfT3+iM2kPAFVsJ9rZy6ne51nKo=;
-        b=KvKuTITfU1YwgXg5spNBqSf/woOSgHTUjv1fxMSVALVaWVo6cZXiCNdVkDQg/V7+z2
-         yeUQUoaKZrQcf1w2OROvbP/4biueqXEC36xWD0t+QgYPnlNJFiv3W7+/X0Sv1yiP9YW8
-         ObFUogH4oJaul1PQ8Y7UWruN03p9F3t6I++d9C2ne66Rxmn2Lu/9+fz9S4/vB48CwXhY
-         lf+3lLtCjNIBQGF6vVSFxgjTKVOnftrYlK5XLag4YzOqitnOarEJrreyz/wGjuAOras8
-         CnicahaspNcn8oWOyuys4J66Fr40D3YfhPgyHa3VIPXInCKw6lz/AhJc9L4V+nE65vCg
-         bOeQ==
+        d=gmail.com; s=20230601; t=1755452460; x=1756057260; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=PnMrNTkvS0DlaoFQTjCKkIcYIvWv87mYEpBA70q/b24=;
+        b=PfUcazE8c7jPruMoQZh/VIfJzdmthdK2caRjd+fmi9czYWLBnxQe7tNLDU7CFNPaJn
+         ADa8JVJ3MfhSp2yqEQC14MgKNxDPJOTDLF7wW7Y2I5pDCGUM9+SuBZZZHp8HVg6CITlZ
+         xmQ9qyIcilFatDmZgROnls1NlmoKDhZTC9T0BxIErnjV/LH/JTBhjl/pMY++CY9OAPlN
+         3hGzQv4fHnENxFZp8cIXEoX8jsOKUn5drxsjVvqFrH2EJ4XwX83hmM5JGE234UTMMdU3
+         OLcSq7Cm1O3HUGIjXb1/7UMyvhWRM4r8tB1vURE/1azq1PSYoIh/3+bmwDydX2FdyhON
+         iFdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755452108; x=1756056908;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=mCCGYO6cJ5FlviHNhfT3+iM2kPAFVsJ9rZy6ne51nKo=;
-        b=dIdYULDgLG0WZ3eJlUe4ZArF4DvxbmT+WmmrQVlzmIj/VsJwal8rf0qcB03l6EH4YC
-         ui7vcoDGGe/Jk5JIXK5LYr7H6NgvbG0IGQYK21zBLCFcB1GUTIqUHcXr7w7pmDKrwt+b
-         NPV7bH8il8UApbdOjkBuqE34yFD41G1C0AYzKy9ptEwwhnBsG0XCrj0z/8prkkVQQ+lp
-         BO+cvcWdHneLOCj9Yvvslxg/iDESTXDVUDkgmTtIrRMveyUZDyCufk3sYPGNDrdP57Py
-         +XUPBzZUuH3D7k8fuvESvCfAGJ/oYKJeHWdUU3Qc/fNtr6WfM0X0xWYTRbffJhT7EeHl
-         JeaA==
-X-Gm-Message-State: AOJu0YyK7L9XEVmwM7SnQUrnGYLW4V9GhymMj55RFxmhpRTNHV9wxfnK
-	/da0IvaPcWvkF2kVPg338oG44SS6bwpPZk+T5tO6Xqge6GECX7oBSLdSsGckrw==
-X-Gm-Gg: ASbGncswDs3R3kvz0D/3aBdoSnqa5M7nGLeS0brzekl++Iivq41h6HMQuGqUxV8rJH/
-	6q+TaZjwxqeMLTRMJ+JrlnW3eq3F3vg+/B4F9pGMAc9zn+2zIrPvhreu4MPmPk3vDjOXxo7CrxK
-	dRwZuijlVKOQ12FAz0gs1KECJSh2Kc2P7q/fH6K94Y+Nvofyg4SzjOO9ic0UJyBCPu8Nd/FOH0e
-	XeawUybPsiFA3XH/FoMZDY60yzJi2+DW59ngJa9oRoNzwzfZPr5MdYJdJRAm11OT8Mk+9Ta/6bQ
-	DmgtsdylK2vuoI0It2XnUY2U1ekLnt4zBLheyQcig+xb7350uQ0P5X+JmjgSbEox0fQASVKfxpW
-	JWSjCcGuwUrHfBjQ7O4DPaCRekIFX6Tif1ZXv3xMI/1FZbvK/fgzm
-X-Google-Smtp-Source: AGHT+IGwFlTdPiY5G0v4rP9epMO5mqOmaejvIdjidaGpKmW4qff3WgxiC4MZ/iB/6JV/Qr2pWjro7w==
-X-Received: by 2002:a17:907:2d06:b0:af9:2002:c18a with SMTP id a640c23a62f3a-afcdc082152mr938720366b.16.1755452107599;
-        Sun, 17 Aug 2025 10:35:07 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-afcdce53c26sm626161266b.17.2025.08.17.10.35.06
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 17 Aug 2025 10:35:07 -0700 (PDT)
-Message-ID: <e7f38aaa-b4bc-4aa9-a5a7-3ea30994bb8a@gmail.com>
-Date: Sun, 17 Aug 2025 19:35:06 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] gitpkgv.bbclass: inspect repository in
- UNPACKDIR
+        d=1e100.net; s=20230601; t=1755452460; x=1756057260;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=PnMrNTkvS0DlaoFQTjCKkIcYIvWv87mYEpBA70q/b24=;
+        b=qChUO90PZje56/P5ZoJ8NV/7a3BRxyX5K29U5bknCfKaGmi3wcuxiqGTU1fXqBVFYR
+         gmgFQcJdQ62iTV3jPPHMrIZNF2st/VibYek5rFnVAJvm2E8W2rGNlMot+2v3p8Ey1Bsi
+         f4APj/4Tfp0aDNO1Fy7ubCxk9r7/a7BltJMchjxVWER+rUEY4RW2zoUO7tgO6DEAOkXc
+         ThFJMiC6MnYZMR8/GiaKCmc2ZhZrtecEhtNKwxJJVSveWq6Aeh3E8uH6oGTMtn/Yuqe3
+         JsNfOvp4Tw9T0aYi6uM94U2KRgM5HjG4iUispFXB+P6DVwGfJgZTaCtESHs1kOaDta/D
+         B3Ag==
+X-Gm-Message-State: AOJu0Yy0V+xtP+48yNaEp4RDvhA4dua+lBWYnjUcX4VbILPR0mMJpUXG
+	rsKhdpboVJ8P9YT/wjpN4xJW6uOmzXEnzcmaSB2YWJnKOnqZ285CeZ0PkcZqEw==
+X-Gm-Gg: ASbGnctLeBQTzDdEdS7CMyvcQgzSnY9wXS3+TudoBFHLZs3XnPGMZFooPdLp+DWaDZj
+	gmpK44VpIoN4qiwhDXuAtT1T4l2UszqYtAes5LggeV0tFq4sr2YaMU+m+kmyjJ+1rsl1KhKJ4jT
+	RDqBh7q6WuRAYgbQF8Tw2/Q5cZpgCwAzcCdgUZ8mkSIyEEqMS01urPfDIwukVZmYDQ0CpUB8xn9
+	8e/B1H3S+B9OARcI+nyWr0PfWae5ZGhPcCQ3fuSkVfqbaHScdWAOBr7u410MthoawaVjKTJrtJq
+	T/Z8ReRWGm/G5/8gLvFipaLCVuG9Dv6LjzQzWPUsbKN3r3jvFdBoVYSsY4poR6SM6XSShcIaRwy
+	8Fbj9eh0LGOEJUDm2PNaIw8zPnocjqKNhhE7kSaAWzOcwqrZYsuBPMBvCY54DrF+OEVTuyKaZi8
+	OvfMkIbo5/uYGgZIzMVLXhtfyN4awE
+X-Google-Smtp-Source: AGHT+IGjF3zO5olkO3e+qglLyhtV8/fiPQvJfJagR7kjzGDLLowiGmKw/2gw8bFPRkTALVOwisqvKQ==
+X-Received: by 2002:a05:600c:8507:b0:456:2b4d:d752 with SMTP id 5b1f17b1804b1-45a285ca477mr33730765e9.20.1755452459916;
+        Sun, 17 Aug 2025 10:40:59 -0700 (PDT)
+Received: from localhost.localdomain (ptr-fij45qxril34oe3x6dm.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:5cba:763c:2ed2:f98a])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45a2232de40sm97345715e9.26.2025.08.17.10.40.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 17 Aug 2025 10:40:59 -0700 (PDT)
+From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <185C8340ADC0E6D9.8958@lists.openembedded.org>
- <185C83615B3CBF8D.30607@lists.openembedded.org>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <185C83615B3CBF8D.30607@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-python][PATCH 1/2] python3-breathe: fixed location + added nativesdk
+Date: Sun, 17 Aug 2025 19:40:51 +0200
+Message-Id: <20250817174052.51506-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.39.5
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 17 Aug 2025 17:35:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118983
+ <openembedded-devel@lists.openembedded.org>; Sun, 17 Aug 2025 17:41:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118984
 
-On 8/17/25 11:20, Gyorgy Sarvari via lists.openembedded.org wrote:
-> In my testing it looks okay, but if someone else could test/review it
-> also to see if it makes sense, it would be useful.
+* moved the recipe from  meta-python/recipes/devtool to meta-python/recipes-devtools/python3-breathe
+  What seems to be a more common location
+* added nativesdk to BBCLASSEXTEND
 
-A short off-list exchange with WXbet made me look a bit more, and there
-is a gotcha.
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+---
+ .../python3-breathe}/python3-breathe_4.36.0.bb                  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/{recipes/devtool => recipes-devtools/python3-breathe}/python3-breathe_4.36.0.bb (93%)
 
-Looking at older releases, BB_GIT_SHALLOW used to have effect on mirror
-tarball fetching and generation only, not on fetching from git.
-
-But now there is actual shallow cloning, which changes the behavior of
-this class beyond the folder issue: it's not possible to determine the
-real number of commits, so the versions generated by this class won't be
-very sortable.
-
-Should there be maybe a bb.warn/fatal error if shallow clone is enabled?
-Or just a comment in the class? Or just drop this change, and keep it as
-it is?
-
-Does anyone have any preference/suggestion?
-
->
-> On 8/17/25 11:17, Gyorgy Sarvari via lists.openembedded.org wrote:
->> When BB_GIT_SHALLOW = "1" is used, the unpacked gir repository doesn't
->> exist in the download folder, and the class isn't able to instect the
->> details of the repository.
->>
->> Instead inspect the repository it the UNPACKDIR.
->>
->> Reported-by: WXbet <WXbet@proton.me>
->> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
->> ---
->>  meta-oe/classes/gitpkgv.bbclass | 17 ++++++++++++-----
->>  1 file changed, 12 insertions(+), 5 deletions(-)
->>
->> diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
->> index eb4b1eae9a..1afe9c53d8 100644
->> --- a/meta-oe/classes/gitpkgv.bbclass
->> +++ b/meta-oe/classes/gitpkgv.bbclass
->> @@ -59,6 +59,9 @@ def get_git_pkgv(d, use_tags):
->>      from shlex import quote
->>  
->>      src_uri = d.getVar('SRC_URI').split()
->> +    unpackdir = d.getVar('UNPACKDIR')
->> +    def_destsuffix = (d.getVar("BB_GIT_DEFAULT_DESTSUFFIX") or "git") + "/"
->> +
->>      fetcher = bb.fetch2.Fetch(src_uri, d)
->>      ud = fetcher.ud
->>  
->> @@ -78,20 +81,24 @@ def get_git_pkgv(d, use_tags):
->>      found = False
->>      for url in ud.values():
->>          if url.type == 'git' or url.type == 'gitsm':
->> -            if not os.path.exists(url.localpath):
->> +            destsuffix = url.parm.get("destsuffix", def_destsuffix)
->> +            subdir = url.parm.get('subdir', '')
->> +            destdir = os.path.join(unpackdir, destsuffix, subdir)
->> +
->> +            if not os.path.exists(destdir):
->>                  return None
->>  
->>              found = True
->>  
->> -            vars = { 'repodir' : quote(url.localpath),
->> +            vars = { 'repodir' : quote(destdir),
->>                       'rev' : quote(url.revision) }
->>  
->>              rev = bb.fetch2.get_srcrev(d).split('+')[1]
->> -            rev_file = os.path.join(url.localpath, "oe-gitpkgv_" + url.revision)
->> +            rev_file = os.path.join(destdir, "oe-gitpkgv_" + url.revision)
->>  
->>              if not os.path.exists(rev_file) or os.path.getsize(rev_file)==0:
->>                  commits = bb.fetch2.runfetchcmd(
->> -                    "git --git-dir=%(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
->> +                    "git -C %(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
->>                      % vars, d, quiet=True).strip().lstrip('0')
->>  
->>                  if commits != "":
->> @@ -107,7 +114,7 @@ def get_git_pkgv(d, use_tags):
->>              if use_tags:
->>                  try:
->>                      output = bb.fetch2.runfetchcmd(
->> -                        "git --git-dir=%(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
->> +                        "git -C %(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
->>                          % vars, d, quiet=True).strip()
->>                      ver = gitpkgv_drop_tag_prefix(d, output)
->>                  except Exception:
->>
->>
->>
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118982): https://lists.openembedded.org/g/openembedded-devel/message/118982
-> Mute This Topic: https://lists.openembedded.org/mt/114745266/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-python/recipes/devtool/python3-breathe_4.36.0.bb b/meta-python/recipes-devtools/python3-breathe/python3-breathe_4.36.0.bb
+similarity index 93%
+rename from meta-python/recipes/devtool/python3-breathe_4.36.0.bb
+rename to meta-python/recipes-devtools/python3-breathe/python3-breathe_4.36.0.bb
+index fe3d1eeb91..a31bc4c849 100644
+--- a/meta-python/recipes/devtool/python3-breathe_4.36.0.bb
++++ b/meta-python/recipes-devtools/python3-breathe/python3-breathe_4.36.0.bb
+@@ -12,4 +12,4 @@ RDEPENDS:${PN} = "python3-sphinx"
+ 
+ PYPI_PACKAGE = "breathe"
+ 
+-BBCLASSEXTEND =+ "native"
++BBCLASSEXTEND =+ "native nativesdk"
+-- 
+2.39.5
 
 
