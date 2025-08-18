@@ -1,194 +1,188 @@
-Return-Path: <WXbet@proton.me>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A789CCA0ED1
-	for <webhook@archiver.kernel.org>; Mon, 18 Aug 2025 15:00:48 +0000 (UTC)
-Received: from mail-24428.protonmail.ch (mail-24428.protonmail.ch [109.224.244.28])
- by mx.groups.io with SMTP id smtpd.web10.77649.1755529244459051043
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E129ECA0ED1
+	for <webhook@archiver.kernel.org>; Mon, 18 Aug 2025 15:54:18 +0000 (UTC)
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
+ by mx.groups.io with SMTP id smtpd.web11.79057.1755532451550387482
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Aug 2025 08:00:44 -0700
+ Mon, 18 Aug 2025 08:54:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@proton.me header.s=protonmail header.b=NKaVrZE3;
- spf=pass (domain: proton.me, ip: 109.224.244.28, mailfrom: wxbet@proton.me)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1755529242; x=1755788442;
-	bh=q6GeC4K3Q5br9g+oWvJD5QC5HCjrCLqALYY8WioqIR8=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=NKaVrZE3bMEsVsCtWGO7gdybCMLK9p/rVHbmAQDhbLHT4RBn1MY3t6ctHTjYruOhx
-	 usltHzay3zUMe7Q3fJ+eLK8/R2nmvQmDh0XjIfDJJGSOLUUDrqMXVvv96J5Ij2YQEG
-	 7U9lVBaod781flCVIF33lfr9jQI70KF/hrsoajfR0+8oPIDXsO/Zxt/hPTx8L8P9b5
-	 KCt1/U3xfMCN9IS1HOnWn/jvwVVu9F2UK2u8ydRaydbARdwjPFrXuAyxCFB9Jie0Gf
-	 uGI8CyCsyqXnIQFtOXXn7wVaKlTs9e5PtX+K5zsgLGZOskZrN37/8ml33h4DIyRYw0
-	 pTomnRHJwZrQg==
-Date: Mon, 18 Aug 2025 15:00:37 +0000
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-From: WXbet <WXbet@proton.me>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Subject: AW: [meta-oe][PATCH v2] gitpkgv.bbclass: inspect repository in UNPACKDIR
-Message-ID: <NbrzaHpfAWPqi-rTp69zmTWSP1WKB335lMHfPXy0Q-L8N9N_Gim_nxk5cjhA4TuNTnwAwurAg894434Gzp1tksD-X8ZavBD7ENbwzewjXP4=@proton.me>
-In-Reply-To: <20250818051822.2020242-1-skandigraun@gmail.com>
-References: <20250818051822.2020242-1-skandigraun@gmail.com>
-Feedback-ID: 106188236:user:proton
-X-Pm-Message-ID: 124f1ab004ffb78fa5d3cd335bb15f0ddab0d63e
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=e7cDUPBH;
+ spf=pass (domain: gmail.com, ip: 209.85.219.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-yb1-f177.google.com with SMTP id 3f1490d57ef6-e931cad1fd8so4414222276.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Aug 2025 08:54:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1755532451; x=1756137251; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=EEM6BGD5f6MNIOTv/VdDOYpF6CqDkIGb7d8OogsESVI=;
+        b=e7cDUPBH+JZMAyaszkO+DA2+7MeJyqjWrUMRL2gM2V3EbiyhwS9501Wx9C+SmSjbGW
+         rB401WYp2S4KKpuIhZUVLA+fS+urjxyKscTN+KEjfHl20elbtBOlOSjN4Dl3VvJ0i2wU
+         B44oTrYcKUMW9uI3+/1ejjJVj0RxPhAUeDous4tgPNxNRDT/1/KqC9243wxqO33FQW4k
+         yVCAHqKVmq1aY5UHVOxhmCadkC2n/U4JWQ4RXhRyvf8ijB9nl133hN+iCaaeAssZdsMH
+         d/qzUznz2KmBF5PH3xmGySqIyalT6Lf6+ruhdJZf8Hb41NHSGr1Fte8G2Fb1qFDV7Tp+
+         7S4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1755532451; x=1756137251;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=EEM6BGD5f6MNIOTv/VdDOYpF6CqDkIGb7d8OogsESVI=;
+        b=hEivOT+lAyZQ8sn2CAu7tu9jifFFmmlE3ITHxuD8BXidAiCQGxLsASn/zaEWysp6Yn
+         QFLIgAVwfqDqY5NsONLhJQmDo9sRtfqQlgi6pR047plf6La49384f14DjvGngypNV2Pc
+         KjOpRdKoqbacTU6X50yWSQvlgUg90Tw9cqeDTX1kDWswCOgCRjtWvz7IHUWxSiumdJHF
+         P/0VBNAupdUSEeZApLNnoF+QeYtc+fv+wB7UInCJwX7xDzwi8QSQCAmSkpMeS3XeEG/i
+         YthtpYruqKUGqd0ivDrSKAZ5sLObyN3c5ubwe225ayqOU97ovVBVuAB1vf3st+F7anJ4
+         2Chw==
+X-Forwarded-Encrypted: i=1; AJvYcCU46D1DC5HMy/niJMoeO45wce5Rr095rbpHrj6nS4cefWj53ZsSWDWVXXnL1TeWXN1teyKaahXfoRlf6o/hSgsdbs0=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzRuoudo029u9pYMdoegSc1aHg+LOWDJ11I690BU/8ADsn/xrNI
+	avmqeWxW1boG8ivMXv5LO/TN4YSfjr3pi6p5MmbKQk5eTbhbUgCjDFegNBGPuXS91rSfOSzMKmG
+	LbpyKCxnlj+3Xwma6Op5g2EGq0s4y/7Y=
+X-Gm-Gg: ASbGncsfTgpEsFK4OiUBZRI69NRjVsdMjTSHhglcJnwVtY0KewrbM/X66f9Yk10mrS+
+	/eMW8F1ksDXjByQ3/y0fOltcEJWYjIC4ZHFWW5HAOR/cJzOorToGC54xT/SNSNeC7pD2FuKY3UV
+	sLNBfn8bGQnrwYcn022TRi49kFHxWKRCsh3bk8q7M+vAE/tTmC0CBx/QoHXd7VEHTzZWt1JCYgl
+	MpABdxkm7RJU8EQBzmsBA5k7i9xVmF5RmSA+Esp
+X-Google-Smtp-Source: AGHT+IG14fzfv0SRe+A5emOrZUVamKBGf2M75/BfCrH8e5bqN91VdhONhjNdP90Y0D3iB3QbFf8ZUylG8DkPGDpQFlI=
+X-Received: by 2002:a05:6902:150c:b0:e8e:2535:5cb with SMTP id
+ 3f1490d57ef6-e93324d796dmr13606207276.35.1755532450539; Mon, 18 Aug 2025
+ 08:54:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="b1=_0CGvreMuwgtX1o3mLJKa1EK8sdNUUjVT8Ha8JhMV3Y"
+References: <20250818051822.2020242-1-skandigraun@gmail.com> <NbrzaHpfAWPqi-rTp69zmTWSP1WKB335lMHfPXy0Q-L8N9N_Gim_nxk5cjhA4TuNTnwAwurAg894434Gzp1tksD-X8ZavBD7ENbwzewjXP4=@proton.me>
+In-Reply-To: <NbrzaHpfAWPqi-rTp69zmTWSP1WKB335lMHfPXy0Q-L8N9N_Gim_nxk5cjhA4TuNTnwAwurAg894434Gzp1tksD-X8ZavBD7ENbwzewjXP4=@proton.me>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 18 Aug 2025 08:53:44 -0700
+X-Gm-Features: Ac12FXxok4vGSectahwfVsnX0_mHICy7wfTbQlnC3D742cPqHYleMNsmgLG9Fd4
+Message-ID: <CAMKF1sp508ax56O92q5g=doZP=1XVh5_d-5jWL+4KTF3f72sTw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] gitpkgv.bbclass: inspect repository in UNPACKDIR
+To: WXbet@proton.me
+Cc: Gyorgy Sarvari <skandigraun@gmail.com>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Aug 2025 15:00:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118994
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Aug 2025 15:54:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118995
 
---b1=_0CGvreMuwgtX1o3mLJKa1EK8sdNUUjVT8Ha8JhMV3Y
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: base64
+On Mon, Aug 18, 2025 at 8:00=E2=80=AFAM WXbet via lists.openembedded.org
+<WXbet=3Dproton.me@lists.openembedded.org> wrote:
+>
+> Idea for shallow clones: Why you don=E2=80=99t convert the last commit=E2=
+=80=98s date/time to a UNIX timestamp number ( e.g. git show -s --format=3D=
+%ct HEAD ) and use this instead of the commit count number?
 
-SWRlYSBmb3Igc2hhbGxvdyBjbG9uZXM6IFdoeSB5b3UgZG9u4oCZdCBjb252ZXJ0IHRoZSBsYXN0
-IGNvbW1pdOKAmHMgZGF0ZS90aW1lIHRvIGEgVU5JWCB0aW1lc3RhbXAgbnVtYmVyICggZS5nLiBn
-aXQgc2hvdyAtcyAtLWZvcm1hdD0lY3QgSEVBRCApIGFuZCB1c2UgdGhpcyBpbnN0ZWFkIG9mIHRo
-ZSBjb21taXQgY291bnQgbnVtYmVyPwoKUmVnYXJkcyBXWGJldAoKQW0gTW9udGFnLCAxOC4gQXVn
-dXN0IDIwMjUgdW0gMDc6MTgsIEd5b3JneSBTYXJ2YXJpIDxbc2thbmRpZ3JhdW5AZ21haWwuY29t
-XShtYWlsdG86QW0gTW9udGFnLCAxOC4gQXVndXN0IDIwMjUgdW0gMDc6MTgsIEd5b3JneSBTYXJ2
-YXJpIDw8YSBocmVmPSk+IHNjaHJpZWI6Cgo+IFdoZW4gQkJfR0lUX1NIQUxMT1cgPSAiMSIgaXMg
-dXNlZCwgdGhlIHVucGFja2VkIGdpciByZXBvc2l0b3J5IGRvZXNuJ3QKPiBleGlzdCBpbiB0aGUg
-ZG93bmxvYWQgZm9sZGVyLCBhbmQgdGhlIGNsYXNzIGlzbid0IGFibGUgdG8gaW5zcGVjdCB0aGUK
-PiBkZXRhaWxzIG9mIHRoZSByZXBvc2l0b3J5Lgo+Cj4gSW5zdGVhZCBpbnNwZWN0IHRoZSByZXBv
-c2l0b3J5IGl0IHRoZSBVTlBBQ0tESVIuCj4KPiBCZXNpZGUgdGhpcywgc2luY2UgQml0QmFrZSBm
-ZXRjaGVyIHBlcmZvcm1zIGFuIGFjdHVhbCBpbml0aWFsIHNoYWxsb3cKPiBjbG9uZSBvZiB0aGUg
-cmVwb3NpdG9yeSB3aGVuIHRoaXMgZmVhdHVyZSBpcyBlbmFibGVkLCBpdCBpcyBub3QgcG9zc2li
-bGUKPiB0byBkZXRlcm1pbmUgdGhlIGV4YWN0IG51bWJlciBvZiBjb21taXRzLiBBZGQgYSB3YXJu
-aW5nIGFib3V0IHRoaXMuCj4KPiBSZXBvcnRlZC1ieTogV1hiZXQgPFdYYmV0QHByb3Rvbi5tZT4K
-PiBTaWduZWQtb2ZmLWJ5OiBHeW9yZ3kgU2FydmFyaSA8c2thbmRpZ3JhdW5AZ21haWwuY29tPgo+
-IC0tLQo+IG1ldGEtb2UvY2xhc3Nlcy9naXRwa2d2LmJiY2xhc3MgfCAyNSArKysrKysrKysrKysr
-KysrKysrKy0tLS0tCj4gMSBmaWxlIGNoYW5nZWQsIDIwIGluc2VydGlvbnMoKyksIDUgZGVsZXRp
-b25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9jbGFzc2VzL2dpdHBrZ3YuYmJjbGFzcyBi
-L21ldGEtb2UvY2xhc3Nlcy9naXRwa2d2LmJiY2xhc3MKPiBpbmRleCBlYjRiMWVhZTlhLi5jM2Q5
-OGNiMmUxIDEwMDY0NAo+IC0tLSBhL21ldGEtb2UvY2xhc3Nlcy9naXRwa2d2LmJiY2xhc3MKPiAr
-KysgYi9tZXRhLW9lL2NsYXNzZXMvZ2l0cGtndi5iYmNsYXNzCj4gQEAgLTIxLDYgKzIxLDExIEBA
-Cj4gIyB2MS4yLCB4dGVzdCwgdjIuMCIgd2lsbCBmb3JjZSB5b3UgdG8gaW5jcmVtZW50IFBFIHRv
-IGdldCB1cGdyYWRlYWJsZQo+ICMgcGF0aCB0byB2Mi4wIHJldmlzaW9ucwo+ICMKPiArIyBBbm90
-aGVyIFdBUk5JTkc6IFNpbmNlIFdhbG5hc2NhciByZWxlYXNlIEJCX1NIQUxMT1dfR0lUIHdpbGwg
-YWN0dWFsbHkKPiArIyBwZXJmb3JtIGEgc2hhbGxvdyBpbml0aWFsIGNoZWNrb3V0LCB3aGljaCBt
-YWtlcyBpdCBpbXBvc3NpYmxlIHRvIGRldGVybWluZQo+ICsjIHRoZSBjb3JyZWN0IG51bWJlciBv
-ZiBjb21taXRzIGluIHRoZSByZXBvc2l0b3J5IC0gdGh1cyB1c2luZyB0aGlzIGNsYXNzCj4gKyMg
-aXMgbm90IHJlY29tbWVuZGVkIHdoZW4gc2hhbGxvdyBjbG9uaW5nIGlzIGVuYWJsZWQuCj4gKyMK
-PiAjIHVzZSBleGFtcGxlOgo+ICMKPiAjIGluaGVyaXQgZ2l0cGtndgo+IEBAIC01OSw2ICs2NCw5
-IEBAIGRlZiBnZXRfZ2l0X3BrZ3YoZCwgdXNlX3RhZ3MpOgo+IGZyb20gc2hsZXggaW1wb3J0IHF1
-b3RlCj4KPiBzcmNfdXJpID0gZC5nZXRWYXIoJ1NSQ19VUkknKS5zcGxpdCgpCj4gKyB1bnBhY2tk
-aXIgPSBkLmdldFZhcignVU5QQUNLRElSJykKPiArIGRlZl9kZXN0c3VmZml4ID0gKGQuZ2V0VmFy
-KCJCQl9HSVRfREVGQVVMVF9ERVNUU1VGRklYIikgb3IgImdpdCIpICsgIi8iCj4gKwo+IGZldGNo
-ZXIgPSBiYi5mZXRjaDIuRmV0Y2goc3JjX3VyaSwgZCkKPiB1ZCA9IGZldGNoZXIudWQKPgo+IEBA
-IC03OCwyMCArODYsMjcgQEAgZGVmIGdldF9naXRfcGtndihkLCB1c2VfdGFncyk6Cj4gZm91bmQg
-PSBGYWxzZQo+IGZvciB1cmwgaW4gdWQudmFsdWVzKCk6Cj4gaWYgdXJsLnR5cGUgPT0gJ2dpdCcg
-b3IgdXJsLnR5cGUgPT0gJ2dpdHNtJzoKPiAtIGlmIG5vdCBvcy5wYXRoLmV4aXN0cyh1cmwubG9j
-YWxwYXRoKToKPiArIGRlc3RzdWZmaXggPSB1cmwucGFybS5nZXQoImRlc3RzdWZmaXgiLCBkZWZf
-ZGVzdHN1ZmZpeCkKPiArIHN1YmRpciA9IHVybC5wYXJtLmdldCgnc3ViZGlyJywgJycpCj4gKyBk
-ZXN0ZGlyID0gb3MucGF0aC5qb2luKHVucGFja2RpciwgZGVzdHN1ZmZpeCwgc3ViZGlyKQo+ICsK
-PiArIGlmIG5vdCBvcy5wYXRoLmV4aXN0cyhkZXN0ZGlyKToKPiByZXR1cm4gTm9uZQo+Cj4gKyBp
-ZiBkLmdldFZhcignQkJfR0lUX1NIQUxMT1cnKSA9PSAnMSc6Cj4gKyBiYi53YXJub25jZSgnJXM6
-IFNoYWxsb3cgY2xvbmluZyBlbmFibGVkIC0gZ2l0cGtndi5iYmNsYXNzIHdpbGwgbm90IGdlbmVy
-YXRlIHNvcnRhYmxlIHZlcnNpb25zJyAlIGQuZ2V0VmFyKCdQTicpKQo+ICsKPiBmb3VuZCA9IFRy
-dWUKPgo+IC0gdmFycyA9IHsgJ3JlcG9kaXInIDogcXVvdGUodXJsLmxvY2FscGF0aCksCj4gKyB2
-YXJzID0geyAncmVwb2RpcicgOiBxdW90ZShkZXN0ZGlyKSwKPiAncmV2JyA6IHF1b3RlKHVybC5y
-ZXZpc2lvbikgfQo+Cj4gcmV2ID0gYmIuZmV0Y2gyLmdldF9zcmNyZXYoZCkuc3BsaXQoJysnKVsx
-XQo+IC0gcmV2X2ZpbGUgPSBvcy5wYXRoLmpvaW4odXJsLmxvY2FscGF0aCwgIm9lLWdpdHBrZ3Zf
-IiArIHVybC5yZXZpc2lvbikKPiArIHJldl9maWxlID0gb3MucGF0aC5qb2luKGRlc3RkaXIsICJv
-ZS1naXRwa2d2XyIgKyB1cmwucmV2aXNpb24pCj4KPiBpZiBub3Qgb3MucGF0aC5leGlzdHMocmV2
-X2ZpbGUpIG9yIG9zLnBhdGguZ2V0c2l6ZShyZXZfZmlsZSk9PTA6Cj4gY29tbWl0cyA9IGJiLmZl
-dGNoMi5ydW5mZXRjaGNtZCgKPiAtICJnaXQgLS1naXQtZGlyPSUocmVwb2RpcilzIHJldi1saXN0
-ICUocmV2KXMgLS0gMj4vZGV2L251bGwgfCB3YyAtbCIKPiArICJnaXQgLUMgJShyZXBvZGlyKXMg
-cmV2LWxpc3QgJShyZXYpcyAtLSAyPi9kZXYvbnVsbCB8IHdjIC1sIgo+ICUgdmFycywgZCwgcXVp
-ZXQ9VHJ1ZSkuc3RyaXAoKS5sc3RyaXAoJzAnKQo+Cj4gaWYgY29tbWl0cyAhPSAiIjoKPiBAQCAt
-MTA3LDcgKzEyMiw3IEBAIGRlZiBnZXRfZ2l0X3BrZ3YoZCwgdXNlX3RhZ3MpOgo+IGlmIHVzZV90
-YWdzOgo+IHRyeToKPiBvdXRwdXQgPSBiYi5mZXRjaDIucnVuZmV0Y2hjbWQoCj4gLSAiZ2l0IC0t
-Z2l0LWRpcj0lKHJlcG9kaXIpcyBkZXNjcmliZSAlKHJldilzIC0tdGFncyAtLWV4YWN0LW1hdGNo
-IDI+L2Rldi9udWxsIgo+ICsgImdpdCAtQyAlKHJlcG9kaXIpcyBkZXNjcmliZSAlKHJldilzIC0t
-dGFncyAtLWV4YWN0LW1hdGNoIDI+L2Rldi9udWxsIgo+ICUgdmFycywgZCwgcXVpZXQ9VHJ1ZSku
-c3RyaXAoKQo+IHZlciA9IGdpdHBrZ3ZfZHJvcF90YWdfcHJlZml4KGQsIG91dHB1dCkKPiBleGNl
-cHQgRXhjZXB0aW9uOg==
-
---b1=_0CGvreMuwgtX1o3mLJKa1EK8sdNUUjVT8Ha8JhMV3Y
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: base64
-
-PGh0bWw+PGhlYWQ+PC9oZWFkPjxib2R5PiAgIDxkaXYgZGlyPSJhdXRvIj5JZGVhIGZvciBzaGFs
-bG93IGNsb25lczogV2h5IHlvdSBkb27igJl0IGNvbnZlcnQgdGhlIGxhc3QgY29tbWl04oCYcyBk
-YXRlL3RpbWUgdG8gYSBVTklYIHRpbWVzdGFtcCBudW1iZXIgKCBlLmcuIGdpdCBzaG93IC1zIC0t
-Zm9ybWF0PSVjdCBIRUFEICkgYW5kIHVzZSB0aGlzIGluc3RlYWQgb2YgdGhlIGNvbW1pdCBjb3Vu
-dCBudW1iZXI/PC9kaXY+PGRpdiBkaXI9ImF1dG8iPjxicj48L2Rpdj48ZGl2IGRpcj0iYXV0byI+
-UmVnYXJkcyBXWGJldDwvZGl2PjxkaXY+PGJyPjwvZGl2PiA8ZGl2IGlkPSJwcm90b25tYWlsX21v
-YmlsZV9zaWduYXR1cmVfYmxvY2siPjxkaXYgZGlyPSJhdXRvIj48YnI+PC9kaXY+PC9kaXY+QW0g
-TW9udGFnLCAxOC4gQXVndXN0IDIwMjUgdW0gMDc6MTgsIEd5b3JneSBTYXJ2YXJpICZsdDs8YSBj
-bGFzcz0iIiBocmVmPSJtYWlsdG86QW0gTW9udGFnLCAxOC4gQXVndXN0IDIwMjUgdW0gMDc6MTgs
-IEd5b3JneSBTYXJ2YXJpIDw8YSBocmVmPSI+c2thbmRpZ3JhdW5AZ21haWwuY29tPC9hPiZndDsg
-c2NocmllYjo8YmxvY2txdW90ZSB0eXBlPSJjaXRlIiBjbGFzcz0icHJvdG9ubWFpbF9xdW90ZSI+
-ICBXaGVuIEJCX0dJVF9TSEFMTE9XID0gIjEiIGlzIHVzZWQsIHRoZSB1bnBhY2tlZCBnaXIgcmVw
-b3NpdG9yeSBkb2Vzbid0DQo8YnI+ZXhpc3QgaW4gdGhlIGRvd25sb2FkIGZvbGRlciwgYW5kIHRo
-ZSBjbGFzcyBpc24ndCBhYmxlIHRvIGluc3BlY3QgdGhlDQo8YnI+ZGV0YWlscyBvZiB0aGUgcmVw
-b3NpdG9yeS4NCjxicj4NCjxicj5JbnN0ZWFkIGluc3BlY3QgdGhlIHJlcG9zaXRvcnkgaXQgdGhl
-IFVOUEFDS0RJUi4NCjxicj4NCjxicj5CZXNpZGUgdGhpcywgc2luY2UgQml0QmFrZSBmZXRjaGVy
-IHBlcmZvcm1zIGFuIGFjdHVhbCBpbml0aWFsIHNoYWxsb3cNCjxicj5jbG9uZSBvZiB0aGUgcmVw
-b3NpdG9yeSB3aGVuIHRoaXMgZmVhdHVyZSBpcyBlbmFibGVkLCBpdCBpcyBub3QgcG9zc2libGUN
-Cjxicj50byBkZXRlcm1pbmUgdGhlIGV4YWN0IG51bWJlciBvZiBjb21taXRzLiBBZGQgYSB3YXJu
-aW5nIGFib3V0IHRoaXMuDQo8YnI+DQo8YnI+UmVwb3J0ZWQtYnk6IFdYYmV0ICZsdDtXWGJldEBw
-cm90b24ubWUmZ3Q7DQo8YnI+U2lnbmVkLW9mZi1ieTogR3lvcmd5IFNhcnZhcmkgJmx0O3NrYW5k
-aWdyYXVuQGdtYWlsLmNvbSZndDsNCjxicj4tLS0NCjxicj4gbWV0YS1vZS9jbGFzc2VzL2dpdHBr
-Z3YuYmJjbGFzcyB8IDI1ICsrKysrKysrKysrKysrKysrKysrLS0tLS0NCjxicj4gMSBmaWxlIGNo
-YW5nZWQsIDIwIGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25zKC0pDQo8YnI+DQo8YnI+ZGlmZiAt
-LWdpdCBhL21ldGEtb2UvY2xhc3Nlcy9naXRwa2d2LmJiY2xhc3MgYi9tZXRhLW9lL2NsYXNzZXMv
-Z2l0cGtndi5iYmNsYXNzDQo8YnI+aW5kZXggZWI0YjFlYWU5YS4uYzNkOThjYjJlMSAxMDA2NDQN
-Cjxicj4tLS0gYS9tZXRhLW9lL2NsYXNzZXMvZ2l0cGtndi5iYmNsYXNzDQo8YnI+KysrIGIvbWV0
-YS1vZS9jbGFzc2VzL2dpdHBrZ3YuYmJjbGFzcw0KPGJyPkBAIC0yMSw2ICsyMSwxMSBAQA0KPGJy
-PiAjIHYxLjIsIHh0ZXN0LCB2Mi4wIiB3aWxsIGZvcmNlIHlvdSB0byBpbmNyZW1lbnQgUEUgdG8g
-Z2V0IHVwZ3JhZGVhYmxlDQo8YnI+ICMgcGF0aCB0byB2Mi4wIHJldmlzaW9ucw0KPGJyPiAjDQo8
-YnI+KyMgQW5vdGhlciBXQVJOSU5HOiBTaW5jZSBXYWxuYXNjYXIgcmVsZWFzZSBCQl9TSEFMTE9X
-X0dJVCB3aWxsIGFjdHVhbGx5DQo8YnI+KyMgcGVyZm9ybSBhIHNoYWxsb3cgaW5pdGlhbCBjaGVj
-a291dCwgd2hpY2ggbWFrZXMgaXQgaW1wb3NzaWJsZSB0byBkZXRlcm1pbmUNCjxicj4rIyB0aGUg
-Y29ycmVjdCBudW1iZXIgb2YgY29tbWl0cyBpbiB0aGUgcmVwb3NpdG9yeSAtIHRodXMgdXNpbmcg
-dGhpcyBjbGFzcw0KPGJyPisjIGlzIG5vdCByZWNvbW1lbmRlZCB3aGVuIHNoYWxsb3cgY2xvbmlu
-ZyBpcyBlbmFibGVkLg0KPGJyPisjDQo8YnI+ICMgdXNlIGV4YW1wbGU6DQo8YnI+ICMNCjxicj4g
-IyBpbmhlcml0IGdpdHBrZ3YNCjxicj5AQCAtNTksNiArNjQsOSBAQCBkZWYgZ2V0X2dpdF9wa2d2
-KGQsIHVzZV90YWdzKToNCjxicj4gZnJvbSBzaGxleCBpbXBvcnQgcXVvdGUNCjxicj4NCjxicj4g
-c3JjX3VyaSA9IGQuZ2V0VmFyKCdTUkNfVVJJJykuc3BsaXQoKQ0KPGJyPisgdW5wYWNrZGlyID0g
-ZC5nZXRWYXIoJ1VOUEFDS0RJUicpDQo8YnI+KyBkZWZfZGVzdHN1ZmZpeCA9IChkLmdldFZhcigi
-QkJfR0lUX0RFRkFVTFRfREVTVFNVRkZJWCIpIG9yICJnaXQiKSArICIvIg0KPGJyPisNCjxicj4g
-ZmV0Y2hlciA9IGJiLmZldGNoMi5GZXRjaChzcmNfdXJpLCBkKQ0KPGJyPiB1ZCA9IGZldGNoZXIu
-dWQNCjxicj4NCjxicj5AQCAtNzgsMjAgKzg2LDI3IEBAIGRlZiBnZXRfZ2l0X3BrZ3YoZCwgdXNl
-X3RhZ3MpOg0KPGJyPiBmb3VuZCA9IEZhbHNlDQo8YnI+IGZvciB1cmwgaW4gdWQudmFsdWVzKCk6
-DQo8YnI+IGlmIHVybC50eXBlID09ICdnaXQnIG9yIHVybC50eXBlID09ICdnaXRzbSc6DQo8YnI+
-LSBpZiBub3Qgb3MucGF0aC5leGlzdHModXJsLmxvY2FscGF0aCk6DQo8YnI+KyBkZXN0c3VmZml4
-ID0gdXJsLnBhcm0uZ2V0KCJkZXN0c3VmZml4IiwgZGVmX2Rlc3RzdWZmaXgpDQo8YnI+KyBzdWJk
-aXIgPSB1cmwucGFybS5nZXQoJ3N1YmRpcicsICcnKQ0KPGJyPisgZGVzdGRpciA9IG9zLnBhdGgu
-am9pbih1bnBhY2tkaXIsIGRlc3RzdWZmaXgsIHN1YmRpcikNCjxicj4rDQo8YnI+KyBpZiBub3Qg
-b3MucGF0aC5leGlzdHMoZGVzdGRpcik6DQo8YnI+IHJldHVybiBOb25lDQo8YnI+DQo8YnI+KyBp
-ZiBkLmdldFZhcignQkJfR0lUX1NIQUxMT1cnKSA9PSAnMSc6DQo8YnI+KyBiYi53YXJub25jZSgn
-JXM6IFNoYWxsb3cgY2xvbmluZyBlbmFibGVkIC0gZ2l0cGtndi5iYmNsYXNzIHdpbGwgbm90IGdl
-bmVyYXRlIHNvcnRhYmxlIHZlcnNpb25zJyAlIGQuZ2V0VmFyKCdQTicpKQ0KPGJyPisNCjxicj4g
-Zm91bmQgPSBUcnVlDQo8YnI+DQo8YnI+LSB2YXJzID0geyAncmVwb2RpcicgOiBxdW90ZSh1cmwu
-bG9jYWxwYXRoKSwNCjxicj4rIHZhcnMgPSB7ICdyZXBvZGlyJyA6IHF1b3RlKGRlc3RkaXIpLA0K
-PGJyPiAncmV2JyA6IHF1b3RlKHVybC5yZXZpc2lvbikgfQ0KPGJyPg0KPGJyPiByZXYgPSBiYi5m
-ZXRjaDIuZ2V0X3NyY3JldihkKS5zcGxpdCgnKycpWzFdDQo8YnI+LSByZXZfZmlsZSA9IG9zLnBh
-dGguam9pbih1cmwubG9jYWxwYXRoLCAib2UtZ2l0cGtndl8iICsgdXJsLnJldmlzaW9uKQ0KPGJy
-PisgcmV2X2ZpbGUgPSBvcy5wYXRoLmpvaW4oZGVzdGRpciwgIm9lLWdpdHBrZ3ZfIiArIHVybC5y
-ZXZpc2lvbikNCjxicj4NCjxicj4gaWYgbm90IG9zLnBhdGguZXhpc3RzKHJldl9maWxlKSBvciBv
-cy5wYXRoLmdldHNpemUocmV2X2ZpbGUpPT0wOg0KPGJyPiBjb21taXRzID0gYmIuZmV0Y2gyLnJ1
-bmZldGNoY21kKA0KPGJyPi0gImdpdCAtLWdpdC1kaXI9JShyZXBvZGlyKXMgcmV2LWxpc3QgJShy
-ZXYpcyAtLSAyJmd0Oy9kZXYvbnVsbCB8IHdjIC1sIg0KPGJyPisgImdpdCAtQyAlKHJlcG9kaXIp
-cyByZXYtbGlzdCAlKHJldilzIC0tIDImZ3Q7L2Rldi9udWxsIHwgd2MgLWwiDQo8YnI+ICUgdmFy
-cywgZCwgcXVpZXQ9VHJ1ZSkuc3RyaXAoKS5sc3RyaXAoJzAnKQ0KPGJyPg0KPGJyPiBpZiBjb21t
-aXRzICE9ICIiOg0KPGJyPkBAIC0xMDcsNyArMTIyLDcgQEAgZGVmIGdldF9naXRfcGtndihkLCB1
-c2VfdGFncyk6DQo8YnI+IGlmIHVzZV90YWdzOg0KPGJyPiB0cnk6DQo8YnI+IG91dHB1dCA9IGJi
-LmZldGNoMi5ydW5mZXRjaGNtZCgNCjxicj4tICJnaXQgLS1naXQtZGlyPSUocmVwb2RpcilzIGRl
-c2NyaWJlICUocmV2KXMgLS10YWdzIC0tZXhhY3QtbWF0Y2ggMiZndDsvZGV2L251bGwiDQo8YnI+
-KyAiZ2l0IC1DICUocmVwb2RpcilzIGRlc2NyaWJlICUocmV2KXMgLS10YWdzIC0tZXhhY3QtbWF0
-Y2ggMiZndDsvZGV2L251bGwiDQo8YnI+ICUgdmFycywgZCwgcXVpZXQ9VHJ1ZSkuc3RyaXAoKQ0K
-PGJyPiB2ZXIgPSBnaXRwa2d2X2Ryb3BfdGFnX3ByZWZpeChkLCBvdXRwdXQpDQo8YnI+IGV4Y2Vw
-dCBFeGNlcHRpb246DQo8YnI+PC9ibG9ja3F1b3RlPjwvYm9keT48L2h0bWw+
-
-
---b1=_0CGvreMuwgtX1o3mLJKa1EK8sdNUUjVT8Ha8JhMV3Y--
-
+sometimes commit times are not applied chronologically, perhaps
+because it preserves the creation time.
+>
+> Regards WXbet
+>
+>
+> Am Montag, 18. August 2025 um 07:18, Gyorgy Sarvari <skandigraun@gmail.co=
+m> schrieb:
+>
+> When BB_GIT_SHALLOW =3D "1" is used, the unpacked gir repository doesn't
+> exist in the download folder, and the class isn't able to inspect the
+> details of the repository.
+>
+> Instead inspect the repository it the UNPACKDIR.
+>
+> Beside this, since BitBake fetcher performs an actual initial shallow
+> clone of the repository when this feature is enabled, it is not possible
+> to determine the exact number of commits. Add a warning about this.
+>
+> Reported-by: WXbet <WXbet@proton.me>
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> ---
+> meta-oe/classes/gitpkgv.bbclass | 25 ++++++++++++++++++++-----
+> 1 file changed, 20 insertions(+), 5 deletions(-)
+>
+> diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bb=
+class
+> index eb4b1eae9a..c3d98cb2e1 100644
+> --- a/meta-oe/classes/gitpkgv.bbclass
+> +++ b/meta-oe/classes/gitpkgv.bbclass
+> @@ -21,6 +21,11 @@
+> # v1.2, xtest, v2.0" will force you to increment PE to get upgradeable
+> # path to v2.0 revisions
+> #
+> +# Another WARNING: Since Walnascar release BB_SHALLOW_GIT will actually
+> +# perform a shallow initial checkout, which makes it impossible to deter=
+mine
+> +# the correct number of commits in the repository - thus using this clas=
+s
+> +# is not recommended when shallow cloning is enabled.
+> +#
+> # use example:
+> #
+> # inherit gitpkgv
+> @@ -59,6 +64,9 @@ def get_git_pkgv(d, use_tags):
+> from shlex import quote
+>
+> src_uri =3D d.getVar('SRC_URI').split()
+> + unpackdir =3D d.getVar('UNPACKDIR')
+> + def_destsuffix =3D (d.getVar("BB_GIT_DEFAULT_DESTSUFFIX") or "git") + "=
+/"
+> +
+> fetcher =3D bb.fetch2.Fetch(src_uri, d)
+> ud =3D fetcher.ud
+>
+> @@ -78,20 +86,27 @@ def get_git_pkgv(d, use_tags):
+> found =3D False
+> for url in ud.values():
+> if url.type =3D=3D 'git' or url.type =3D=3D 'gitsm':
+> - if not os.path.exists(url.localpath):
+> + destsuffix =3D url.parm.get("destsuffix", def_destsuffix)
+> + subdir =3D url.parm.get('subdir', '')
+> + destdir =3D os.path.join(unpackdir, destsuffix, subdir)
+> +
+> + if not os.path.exists(destdir):
+> return None
+>
+> + if d.getVar('BB_GIT_SHALLOW') =3D=3D '1':
+> + bb.warnonce('%s: Shallow cloning enabled - gitpkgv.bbclass will not gen=
+erate sortable versions' % d.getVar('PN'))
+> +
+> found =3D True
+>
+> - vars =3D { 'repodir' : quote(url.localpath),
+> + vars =3D { 'repodir' : quote(destdir),
+> 'rev' : quote(url.revision) }
+>
+> rev =3D bb.fetch2.get_srcrev(d).split('+')[1]
+> - rev_file =3D os.path.join(url.localpath, "oe-gitpkgv_" + url.revision)
+> + rev_file =3D os.path.join(destdir, "oe-gitpkgv_" + url.revision)
+>
+> if not os.path.exists(rev_file) or os.path.getsize(rev_file)=3D=3D0:
+> commits =3D bb.fetch2.runfetchcmd(
+> - "git --git-dir=3D%(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
+> + "git -C %(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
+> % vars, d, quiet=3DTrue).strip().lstrip('0')
+>
+> if commits !=3D "":
+> @@ -107,7 +122,7 @@ def get_git_pkgv(d, use_tags):
+> if use_tags:
+> try:
+> output =3D bb.fetch2.runfetchcmd(
+> - "git --git-dir=3D%(repodir)s describe %(rev)s --tags --exact-match 2>/d=
+ev/null"
+> + "git -C %(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
+> % vars, d, quiet=3DTrue).strip()
+> ver =3D gitpkgv_drop_tag_prefix(d, output)
+> except Exception:
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#118994): https://lists.openembedded.org/g/openembedde=
+d-devel/message/118994
+> Mute This Topic: https://lists.openembedded.org/mt/114758958/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
