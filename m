@@ -1,142 +1,194 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <WXbet@proton.me>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 523B2CA0EC0
-	for <webhook@archiver.kernel.org>; Mon, 18 Aug 2025 10:29:17 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.71621.1755512949748430235
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A789CCA0ED1
+	for <webhook@archiver.kernel.org>; Mon, 18 Aug 2025 15:00:48 +0000 (UTC)
+Received: from mail-24428.protonmail.ch (mail-24428.protonmail.ch [109.224.244.28])
+ by mx.groups.io with SMTP id smtpd.web10.77649.1755529244459051043
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Aug 2025 03:29:10 -0700
+ Mon, 18 Aug 2025 08:00:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=03259f8914=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 57I9Pe1u3011215
-	for <openembedded-devel@lists.openembedded.org>; Mon, 18 Aug 2025 10:29:08 GMT
-Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48jfe8hj1b-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 18 Aug 2025 10:29:08 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Mon, 18 Aug 2025 03:28:59 -0700
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] poppler: fix CVE-2025-50420
-Date: Mon, 18 Aug 2025 15:58:37 +0530
-Message-ID: <20250818102837.3027859-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@proton.me header.s=protonmail header.b=NKaVrZE3;
+ spf=pass (domain: proton.me, ip: 109.224.244.28, mailfrom: wxbet@proton.me)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1755529242; x=1755788442;
+	bh=q6GeC4K3Q5br9g+oWvJD5QC5HCjrCLqALYY8WioqIR8=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=NKaVrZE3bMEsVsCtWGO7gdybCMLK9p/rVHbmAQDhbLHT4RBn1MY3t6ctHTjYruOhx
+	 usltHzay3zUMe7Q3fJ+eLK8/R2nmvQmDh0XjIfDJJGSOLUUDrqMXVvv96J5Ij2YQEG
+	 7U9lVBaod781flCVIF33lfr9jQI70KF/hrsoajfR0+8oPIDXsO/Zxt/hPTx8L8P9b5
+	 KCt1/U3xfMCN9IS1HOnWn/jvwVVu9F2UK2u8ydRaydbARdwjPFrXuAyxCFB9Jie0Gf
+	 uGI8CyCsyqXnIQFtOXXn7wVaKlTs9e5PtX+K5zsgLGZOskZrN37/8ml33h4DIyRYw0
+	 pTomnRHJwZrQg==
+Date: Mon, 18 Aug 2025 15:00:37 +0000
+To: Gyorgy Sarvari <skandigraun@gmail.com>
+From: WXbet <WXbet@proton.me>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Subject: AW: [meta-oe][PATCH v2] gitpkgv.bbclass: inspect repository in UNPACKDIR
+Message-ID: <NbrzaHpfAWPqi-rTp69zmTWSP1WKB335lMHfPXy0Q-L8N9N_Gim_nxk5cjhA4TuNTnwAwurAg894434Gzp1tksD-X8ZavBD7ENbwzewjXP4=@proton.me>
+In-Reply-To: <20250818051822.2020242-1-skandigraun@gmail.com>
+References: <20250818051822.2020242-1-skandigraun@gmail.com>
+Feedback-ID: 106188236:user:proton
+X-Pm-Message-ID: 124f1ab004ffb78fa5d3cd335bb15f0ddab0d63e
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.11.232.110]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) To
- ala-exchng01.corp.ad.wrs.com (10.11.224.121)
-X-Proofpoint-GUID: 3IpB0dNLiv2Bd4LlDnWDjqV2oV4rd4hB
-X-Proofpoint-ORIG-GUID: 3IpB0dNLiv2Bd4LlDnWDjqV2oV4rd4hB
-X-Authority-Analysis: v=2.4 cv=epvfzppX c=1 sm=1 tr=0 ts=68a30074 cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=gmxlzscTznEA:10 a=2OwXVqhp2XgA:10 a=PYnjg3YJAAAA:8 a=e5mUnYsNAAAA:8
- a=t7CeM3EgAAAA:8 a=Ai16GGQhjgwLQAW92vkA:9 a=Vxmtnl_E_bksehYqCbjh:22
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODE4MDEwMCBTYWx0ZWRfXz38lsLV83M4k
- CjP5KYOG0tBu91+8moCNcax8rYXWYp6pT5tYMgGT5lsrAH18RSby0t4BwUkU7E2DR0OQeBsV+Ic
- 4xoJVWm8h/6SR1Me/IbJJvn/B0b5JKHAxqTnW/+7ZqU2f/C3ZMDmXyeD0y1FGJDyRjhWfT5bmQN
- bx45e2o5L5hCYZslLCaIO9K1UVw1Imcpb8f0uy1c4YALTOwgwtZEeR3zqVMqoEYMyKtJ364w7M0
- emBVEYUceFXKATFSJdpZ17KsLJ32YG7GgdrpFULeE1MStEVCkYL4DtqhMEw1NDro8amdwzo6cbH
- mO8pUAp6ckEcuY7vYawnVeXymLPnNPJc1tjawfqE3ztiq7nrLGr5UvnXtG63hc=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-08-18_04,2025-08-14_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 spamscore=0 phishscore=0 priorityscore=1501 malwarescore=0
- clxscore=1015 impostorscore=0 bulkscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
+Content-Type: multipart/alternative;
+ boundary="b1=_0CGvreMuwgtX1o3mLJKa1EK8sdNUUjVT8Ha8JhMV3Y"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Aug 2025 10:29:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118993
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Aug 2025 15:00:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/118994
 
-From: Yogita Urade <yogita.urade@windriver.com>
+--b1=_0CGvreMuwgtX1o3mLJKa1EK8sdNUUjVT8Ha8JhMV3Y
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
 
-An issue in the pdfseparate utility of freedesktop poppler
-v25.04.0 allows attackers to cause an infinite recursion via
-supplying a crafted PDF file. This can lead to a Denial of
-Service (DoS).
+SWRlYSBmb3Igc2hhbGxvdyBjbG9uZXM6IFdoeSB5b3UgZG9u4oCZdCBjb252ZXJ0IHRoZSBsYXN0
+IGNvbW1pdOKAmHMgZGF0ZS90aW1lIHRvIGEgVU5JWCB0aW1lc3RhbXAgbnVtYmVyICggZS5nLiBn
+aXQgc2hvdyAtcyAtLWZvcm1hdD0lY3QgSEVBRCApIGFuZCB1c2UgdGhpcyBpbnN0ZWFkIG9mIHRo
+ZSBjb21taXQgY291bnQgbnVtYmVyPwoKUmVnYXJkcyBXWGJldAoKQW0gTW9udGFnLCAxOC4gQXVn
+dXN0IDIwMjUgdW0gMDc6MTgsIEd5b3JneSBTYXJ2YXJpIDxbc2thbmRpZ3JhdW5AZ21haWwuY29t
+XShtYWlsdG86QW0gTW9udGFnLCAxOC4gQXVndXN0IDIwMjUgdW0gMDc6MTgsIEd5b3JneSBTYXJ2
+YXJpIDw8YSBocmVmPSk+IHNjaHJpZWI6Cgo+IFdoZW4gQkJfR0lUX1NIQUxMT1cgPSAiMSIgaXMg
+dXNlZCwgdGhlIHVucGFja2VkIGdpciByZXBvc2l0b3J5IGRvZXNuJ3QKPiBleGlzdCBpbiB0aGUg
+ZG93bmxvYWQgZm9sZGVyLCBhbmQgdGhlIGNsYXNzIGlzbid0IGFibGUgdG8gaW5zcGVjdCB0aGUK
+PiBkZXRhaWxzIG9mIHRoZSByZXBvc2l0b3J5Lgo+Cj4gSW5zdGVhZCBpbnNwZWN0IHRoZSByZXBv
+c2l0b3J5IGl0IHRoZSBVTlBBQ0tESVIuCj4KPiBCZXNpZGUgdGhpcywgc2luY2UgQml0QmFrZSBm
+ZXRjaGVyIHBlcmZvcm1zIGFuIGFjdHVhbCBpbml0aWFsIHNoYWxsb3cKPiBjbG9uZSBvZiB0aGUg
+cmVwb3NpdG9yeSB3aGVuIHRoaXMgZmVhdHVyZSBpcyBlbmFibGVkLCBpdCBpcyBub3QgcG9zc2li
+bGUKPiB0byBkZXRlcm1pbmUgdGhlIGV4YWN0IG51bWJlciBvZiBjb21taXRzLiBBZGQgYSB3YXJu
+aW5nIGFib3V0IHRoaXMuCj4KPiBSZXBvcnRlZC1ieTogV1hiZXQgPFdYYmV0QHByb3Rvbi5tZT4K
+PiBTaWduZWQtb2ZmLWJ5OiBHeW9yZ3kgU2FydmFyaSA8c2thbmRpZ3JhdW5AZ21haWwuY29tPgo+
+IC0tLQo+IG1ldGEtb2UvY2xhc3Nlcy9naXRwa2d2LmJiY2xhc3MgfCAyNSArKysrKysrKysrKysr
+KysrKysrKy0tLS0tCj4gMSBmaWxlIGNoYW5nZWQsIDIwIGluc2VydGlvbnMoKyksIDUgZGVsZXRp
+b25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9jbGFzc2VzL2dpdHBrZ3YuYmJjbGFzcyBi
+L21ldGEtb2UvY2xhc3Nlcy9naXRwa2d2LmJiY2xhc3MKPiBpbmRleCBlYjRiMWVhZTlhLi5jM2Q5
+OGNiMmUxIDEwMDY0NAo+IC0tLSBhL21ldGEtb2UvY2xhc3Nlcy9naXRwa2d2LmJiY2xhc3MKPiAr
+KysgYi9tZXRhLW9lL2NsYXNzZXMvZ2l0cGtndi5iYmNsYXNzCj4gQEAgLTIxLDYgKzIxLDExIEBA
+Cj4gIyB2MS4yLCB4dGVzdCwgdjIuMCIgd2lsbCBmb3JjZSB5b3UgdG8gaW5jcmVtZW50IFBFIHRv
+IGdldCB1cGdyYWRlYWJsZQo+ICMgcGF0aCB0byB2Mi4wIHJldmlzaW9ucwo+ICMKPiArIyBBbm90
+aGVyIFdBUk5JTkc6IFNpbmNlIFdhbG5hc2NhciByZWxlYXNlIEJCX1NIQUxMT1dfR0lUIHdpbGwg
+YWN0dWFsbHkKPiArIyBwZXJmb3JtIGEgc2hhbGxvdyBpbml0aWFsIGNoZWNrb3V0LCB3aGljaCBt
+YWtlcyBpdCBpbXBvc3NpYmxlIHRvIGRldGVybWluZQo+ICsjIHRoZSBjb3JyZWN0IG51bWJlciBv
+ZiBjb21taXRzIGluIHRoZSByZXBvc2l0b3J5IC0gdGh1cyB1c2luZyB0aGlzIGNsYXNzCj4gKyMg
+aXMgbm90IHJlY29tbWVuZGVkIHdoZW4gc2hhbGxvdyBjbG9uaW5nIGlzIGVuYWJsZWQuCj4gKyMK
+PiAjIHVzZSBleGFtcGxlOgo+ICMKPiAjIGluaGVyaXQgZ2l0cGtndgo+IEBAIC01OSw2ICs2NCw5
+IEBAIGRlZiBnZXRfZ2l0X3BrZ3YoZCwgdXNlX3RhZ3MpOgo+IGZyb20gc2hsZXggaW1wb3J0IHF1
+b3RlCj4KPiBzcmNfdXJpID0gZC5nZXRWYXIoJ1NSQ19VUkknKS5zcGxpdCgpCj4gKyB1bnBhY2tk
+aXIgPSBkLmdldFZhcignVU5QQUNLRElSJykKPiArIGRlZl9kZXN0c3VmZml4ID0gKGQuZ2V0VmFy
+KCJCQl9HSVRfREVGQVVMVF9ERVNUU1VGRklYIikgb3IgImdpdCIpICsgIi8iCj4gKwo+IGZldGNo
+ZXIgPSBiYi5mZXRjaDIuRmV0Y2goc3JjX3VyaSwgZCkKPiB1ZCA9IGZldGNoZXIudWQKPgo+IEBA
+IC03OCwyMCArODYsMjcgQEAgZGVmIGdldF9naXRfcGtndihkLCB1c2VfdGFncyk6Cj4gZm91bmQg
+PSBGYWxzZQo+IGZvciB1cmwgaW4gdWQudmFsdWVzKCk6Cj4gaWYgdXJsLnR5cGUgPT0gJ2dpdCcg
+b3IgdXJsLnR5cGUgPT0gJ2dpdHNtJzoKPiAtIGlmIG5vdCBvcy5wYXRoLmV4aXN0cyh1cmwubG9j
+YWxwYXRoKToKPiArIGRlc3RzdWZmaXggPSB1cmwucGFybS5nZXQoImRlc3RzdWZmaXgiLCBkZWZf
+ZGVzdHN1ZmZpeCkKPiArIHN1YmRpciA9IHVybC5wYXJtLmdldCgnc3ViZGlyJywgJycpCj4gKyBk
+ZXN0ZGlyID0gb3MucGF0aC5qb2luKHVucGFja2RpciwgZGVzdHN1ZmZpeCwgc3ViZGlyKQo+ICsK
+PiArIGlmIG5vdCBvcy5wYXRoLmV4aXN0cyhkZXN0ZGlyKToKPiByZXR1cm4gTm9uZQo+Cj4gKyBp
+ZiBkLmdldFZhcignQkJfR0lUX1NIQUxMT1cnKSA9PSAnMSc6Cj4gKyBiYi53YXJub25jZSgnJXM6
+IFNoYWxsb3cgY2xvbmluZyBlbmFibGVkIC0gZ2l0cGtndi5iYmNsYXNzIHdpbGwgbm90IGdlbmVy
+YXRlIHNvcnRhYmxlIHZlcnNpb25zJyAlIGQuZ2V0VmFyKCdQTicpKQo+ICsKPiBmb3VuZCA9IFRy
+dWUKPgo+IC0gdmFycyA9IHsgJ3JlcG9kaXInIDogcXVvdGUodXJsLmxvY2FscGF0aCksCj4gKyB2
+YXJzID0geyAncmVwb2RpcicgOiBxdW90ZShkZXN0ZGlyKSwKPiAncmV2JyA6IHF1b3RlKHVybC5y
+ZXZpc2lvbikgfQo+Cj4gcmV2ID0gYmIuZmV0Y2gyLmdldF9zcmNyZXYoZCkuc3BsaXQoJysnKVsx
+XQo+IC0gcmV2X2ZpbGUgPSBvcy5wYXRoLmpvaW4odXJsLmxvY2FscGF0aCwgIm9lLWdpdHBrZ3Zf
+IiArIHVybC5yZXZpc2lvbikKPiArIHJldl9maWxlID0gb3MucGF0aC5qb2luKGRlc3RkaXIsICJv
+ZS1naXRwa2d2XyIgKyB1cmwucmV2aXNpb24pCj4KPiBpZiBub3Qgb3MucGF0aC5leGlzdHMocmV2
+X2ZpbGUpIG9yIG9zLnBhdGguZ2V0c2l6ZShyZXZfZmlsZSk9PTA6Cj4gY29tbWl0cyA9IGJiLmZl
+dGNoMi5ydW5mZXRjaGNtZCgKPiAtICJnaXQgLS1naXQtZGlyPSUocmVwb2RpcilzIHJldi1saXN0
+ICUocmV2KXMgLS0gMj4vZGV2L251bGwgfCB3YyAtbCIKPiArICJnaXQgLUMgJShyZXBvZGlyKXMg
+cmV2LWxpc3QgJShyZXYpcyAtLSAyPi9kZXYvbnVsbCB8IHdjIC1sIgo+ICUgdmFycywgZCwgcXVp
+ZXQ9VHJ1ZSkuc3RyaXAoKS5sc3RyaXAoJzAnKQo+Cj4gaWYgY29tbWl0cyAhPSAiIjoKPiBAQCAt
+MTA3LDcgKzEyMiw3IEBAIGRlZiBnZXRfZ2l0X3BrZ3YoZCwgdXNlX3RhZ3MpOgo+IGlmIHVzZV90
+YWdzOgo+IHRyeToKPiBvdXRwdXQgPSBiYi5mZXRjaDIucnVuZmV0Y2hjbWQoCj4gLSAiZ2l0IC0t
+Z2l0LWRpcj0lKHJlcG9kaXIpcyBkZXNjcmliZSAlKHJldilzIC0tdGFncyAtLWV4YWN0LW1hdGNo
+IDI+L2Rldi9udWxsIgo+ICsgImdpdCAtQyAlKHJlcG9kaXIpcyBkZXNjcmliZSAlKHJldilzIC0t
+dGFncyAtLWV4YWN0LW1hdGNoIDI+L2Rldi9udWxsIgo+ICUgdmFycywgZCwgcXVpZXQ9VHJ1ZSku
+c3RyaXAoKQo+IHZlciA9IGdpdHBrZ3ZfZHJvcF90YWdfcHJlZml4KGQsIG91dHB1dCkKPiBleGNl
+cHQgRXhjZXB0aW9uOg==
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2025-50420
+--b1=_0CGvreMuwgtX1o3mLJKa1EK8sdNUUjVT8Ha8JhMV3Y
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: base64
 
-Upstream patch:
-https://gitlab.freedesktop.org/poppler/poppler/-/commit/a7025904e3330dd6cf95f3664ef6fc77034cc5e1
+PGh0bWw+PGhlYWQ+PC9oZWFkPjxib2R5PiAgIDxkaXYgZGlyPSJhdXRvIj5JZGVhIGZvciBzaGFs
+bG93IGNsb25lczogV2h5IHlvdSBkb27igJl0IGNvbnZlcnQgdGhlIGxhc3QgY29tbWl04oCYcyBk
+YXRlL3RpbWUgdG8gYSBVTklYIHRpbWVzdGFtcCBudW1iZXIgKCBlLmcuIGdpdCBzaG93IC1zIC0t
+Zm9ybWF0PSVjdCBIRUFEICkgYW5kIHVzZSB0aGlzIGluc3RlYWQgb2YgdGhlIGNvbW1pdCBjb3Vu
+dCBudW1iZXI/PC9kaXY+PGRpdiBkaXI9ImF1dG8iPjxicj48L2Rpdj48ZGl2IGRpcj0iYXV0byI+
+UmVnYXJkcyBXWGJldDwvZGl2PjxkaXY+PGJyPjwvZGl2PiA8ZGl2IGlkPSJwcm90b25tYWlsX21v
+YmlsZV9zaWduYXR1cmVfYmxvY2siPjxkaXYgZGlyPSJhdXRvIj48YnI+PC9kaXY+PC9kaXY+QW0g
+TW9udGFnLCAxOC4gQXVndXN0IDIwMjUgdW0gMDc6MTgsIEd5b3JneSBTYXJ2YXJpICZsdDs8YSBj
+bGFzcz0iIiBocmVmPSJtYWlsdG86QW0gTW9udGFnLCAxOC4gQXVndXN0IDIwMjUgdW0gMDc6MTgs
+IEd5b3JneSBTYXJ2YXJpIDw8YSBocmVmPSI+c2thbmRpZ3JhdW5AZ21haWwuY29tPC9hPiZndDsg
+c2NocmllYjo8YmxvY2txdW90ZSB0eXBlPSJjaXRlIiBjbGFzcz0icHJvdG9ubWFpbF9xdW90ZSI+
+ICBXaGVuIEJCX0dJVF9TSEFMTE9XID0gIjEiIGlzIHVzZWQsIHRoZSB1bnBhY2tlZCBnaXIgcmVw
+b3NpdG9yeSBkb2Vzbid0DQo8YnI+ZXhpc3QgaW4gdGhlIGRvd25sb2FkIGZvbGRlciwgYW5kIHRo
+ZSBjbGFzcyBpc24ndCBhYmxlIHRvIGluc3BlY3QgdGhlDQo8YnI+ZGV0YWlscyBvZiB0aGUgcmVw
+b3NpdG9yeS4NCjxicj4NCjxicj5JbnN0ZWFkIGluc3BlY3QgdGhlIHJlcG9zaXRvcnkgaXQgdGhl
+IFVOUEFDS0RJUi4NCjxicj4NCjxicj5CZXNpZGUgdGhpcywgc2luY2UgQml0QmFrZSBmZXRjaGVy
+IHBlcmZvcm1zIGFuIGFjdHVhbCBpbml0aWFsIHNoYWxsb3cNCjxicj5jbG9uZSBvZiB0aGUgcmVw
+b3NpdG9yeSB3aGVuIHRoaXMgZmVhdHVyZSBpcyBlbmFibGVkLCBpdCBpcyBub3QgcG9zc2libGUN
+Cjxicj50byBkZXRlcm1pbmUgdGhlIGV4YWN0IG51bWJlciBvZiBjb21taXRzLiBBZGQgYSB3YXJu
+aW5nIGFib3V0IHRoaXMuDQo8YnI+DQo8YnI+UmVwb3J0ZWQtYnk6IFdYYmV0ICZsdDtXWGJldEBw
+cm90b24ubWUmZ3Q7DQo8YnI+U2lnbmVkLW9mZi1ieTogR3lvcmd5IFNhcnZhcmkgJmx0O3NrYW5k
+aWdyYXVuQGdtYWlsLmNvbSZndDsNCjxicj4tLS0NCjxicj4gbWV0YS1vZS9jbGFzc2VzL2dpdHBr
+Z3YuYmJjbGFzcyB8IDI1ICsrKysrKysrKysrKysrKysrKysrLS0tLS0NCjxicj4gMSBmaWxlIGNo
+YW5nZWQsIDIwIGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25zKC0pDQo8YnI+DQo8YnI+ZGlmZiAt
+LWdpdCBhL21ldGEtb2UvY2xhc3Nlcy9naXRwa2d2LmJiY2xhc3MgYi9tZXRhLW9lL2NsYXNzZXMv
+Z2l0cGtndi5iYmNsYXNzDQo8YnI+aW5kZXggZWI0YjFlYWU5YS4uYzNkOThjYjJlMSAxMDA2NDQN
+Cjxicj4tLS0gYS9tZXRhLW9lL2NsYXNzZXMvZ2l0cGtndi5iYmNsYXNzDQo8YnI+KysrIGIvbWV0
+YS1vZS9jbGFzc2VzL2dpdHBrZ3YuYmJjbGFzcw0KPGJyPkBAIC0yMSw2ICsyMSwxMSBAQA0KPGJy
+PiAjIHYxLjIsIHh0ZXN0LCB2Mi4wIiB3aWxsIGZvcmNlIHlvdSB0byBpbmNyZW1lbnQgUEUgdG8g
+Z2V0IHVwZ3JhZGVhYmxlDQo8YnI+ICMgcGF0aCB0byB2Mi4wIHJldmlzaW9ucw0KPGJyPiAjDQo8
+YnI+KyMgQW5vdGhlciBXQVJOSU5HOiBTaW5jZSBXYWxuYXNjYXIgcmVsZWFzZSBCQl9TSEFMTE9X
+X0dJVCB3aWxsIGFjdHVhbGx5DQo8YnI+KyMgcGVyZm9ybSBhIHNoYWxsb3cgaW5pdGlhbCBjaGVj
+a291dCwgd2hpY2ggbWFrZXMgaXQgaW1wb3NzaWJsZSB0byBkZXRlcm1pbmUNCjxicj4rIyB0aGUg
+Y29ycmVjdCBudW1iZXIgb2YgY29tbWl0cyBpbiB0aGUgcmVwb3NpdG9yeSAtIHRodXMgdXNpbmcg
+dGhpcyBjbGFzcw0KPGJyPisjIGlzIG5vdCByZWNvbW1lbmRlZCB3aGVuIHNoYWxsb3cgY2xvbmlu
+ZyBpcyBlbmFibGVkLg0KPGJyPisjDQo8YnI+ICMgdXNlIGV4YW1wbGU6DQo8YnI+ICMNCjxicj4g
+IyBpbmhlcml0IGdpdHBrZ3YNCjxicj5AQCAtNTksNiArNjQsOSBAQCBkZWYgZ2V0X2dpdF9wa2d2
+KGQsIHVzZV90YWdzKToNCjxicj4gZnJvbSBzaGxleCBpbXBvcnQgcXVvdGUNCjxicj4NCjxicj4g
+c3JjX3VyaSA9IGQuZ2V0VmFyKCdTUkNfVVJJJykuc3BsaXQoKQ0KPGJyPisgdW5wYWNrZGlyID0g
+ZC5nZXRWYXIoJ1VOUEFDS0RJUicpDQo8YnI+KyBkZWZfZGVzdHN1ZmZpeCA9IChkLmdldFZhcigi
+QkJfR0lUX0RFRkFVTFRfREVTVFNVRkZJWCIpIG9yICJnaXQiKSArICIvIg0KPGJyPisNCjxicj4g
+ZmV0Y2hlciA9IGJiLmZldGNoMi5GZXRjaChzcmNfdXJpLCBkKQ0KPGJyPiB1ZCA9IGZldGNoZXIu
+dWQNCjxicj4NCjxicj5AQCAtNzgsMjAgKzg2LDI3IEBAIGRlZiBnZXRfZ2l0X3BrZ3YoZCwgdXNl
+X3RhZ3MpOg0KPGJyPiBmb3VuZCA9IEZhbHNlDQo8YnI+IGZvciB1cmwgaW4gdWQudmFsdWVzKCk6
+DQo8YnI+IGlmIHVybC50eXBlID09ICdnaXQnIG9yIHVybC50eXBlID09ICdnaXRzbSc6DQo8YnI+
+LSBpZiBub3Qgb3MucGF0aC5leGlzdHModXJsLmxvY2FscGF0aCk6DQo8YnI+KyBkZXN0c3VmZml4
+ID0gdXJsLnBhcm0uZ2V0KCJkZXN0c3VmZml4IiwgZGVmX2Rlc3RzdWZmaXgpDQo8YnI+KyBzdWJk
+aXIgPSB1cmwucGFybS5nZXQoJ3N1YmRpcicsICcnKQ0KPGJyPisgZGVzdGRpciA9IG9zLnBhdGgu
+am9pbih1bnBhY2tkaXIsIGRlc3RzdWZmaXgsIHN1YmRpcikNCjxicj4rDQo8YnI+KyBpZiBub3Qg
+b3MucGF0aC5leGlzdHMoZGVzdGRpcik6DQo8YnI+IHJldHVybiBOb25lDQo8YnI+DQo8YnI+KyBp
+ZiBkLmdldFZhcignQkJfR0lUX1NIQUxMT1cnKSA9PSAnMSc6DQo8YnI+KyBiYi53YXJub25jZSgn
+JXM6IFNoYWxsb3cgY2xvbmluZyBlbmFibGVkIC0gZ2l0cGtndi5iYmNsYXNzIHdpbGwgbm90IGdl
+bmVyYXRlIHNvcnRhYmxlIHZlcnNpb25zJyAlIGQuZ2V0VmFyKCdQTicpKQ0KPGJyPisNCjxicj4g
+Zm91bmQgPSBUcnVlDQo8YnI+DQo8YnI+LSB2YXJzID0geyAncmVwb2RpcicgOiBxdW90ZSh1cmwu
+bG9jYWxwYXRoKSwNCjxicj4rIHZhcnMgPSB7ICdyZXBvZGlyJyA6IHF1b3RlKGRlc3RkaXIpLA0K
+PGJyPiAncmV2JyA6IHF1b3RlKHVybC5yZXZpc2lvbikgfQ0KPGJyPg0KPGJyPiByZXYgPSBiYi5m
+ZXRjaDIuZ2V0X3NyY3JldihkKS5zcGxpdCgnKycpWzFdDQo8YnI+LSByZXZfZmlsZSA9IG9zLnBh
+dGguam9pbih1cmwubG9jYWxwYXRoLCAib2UtZ2l0cGtndl8iICsgdXJsLnJldmlzaW9uKQ0KPGJy
+PisgcmV2X2ZpbGUgPSBvcy5wYXRoLmpvaW4oZGVzdGRpciwgIm9lLWdpdHBrZ3ZfIiArIHVybC5y
+ZXZpc2lvbikNCjxicj4NCjxicj4gaWYgbm90IG9zLnBhdGguZXhpc3RzKHJldl9maWxlKSBvciBv
+cy5wYXRoLmdldHNpemUocmV2X2ZpbGUpPT0wOg0KPGJyPiBjb21taXRzID0gYmIuZmV0Y2gyLnJ1
+bmZldGNoY21kKA0KPGJyPi0gImdpdCAtLWdpdC1kaXI9JShyZXBvZGlyKXMgcmV2LWxpc3QgJShy
+ZXYpcyAtLSAyJmd0Oy9kZXYvbnVsbCB8IHdjIC1sIg0KPGJyPisgImdpdCAtQyAlKHJlcG9kaXIp
+cyByZXYtbGlzdCAlKHJldilzIC0tIDImZ3Q7L2Rldi9udWxsIHwgd2MgLWwiDQo8YnI+ICUgdmFy
+cywgZCwgcXVpZXQ9VHJ1ZSkuc3RyaXAoKS5sc3RyaXAoJzAnKQ0KPGJyPg0KPGJyPiBpZiBjb21t
+aXRzICE9ICIiOg0KPGJyPkBAIC0xMDcsNyArMTIyLDcgQEAgZGVmIGdldF9naXRfcGtndihkLCB1
+c2VfdGFncyk6DQo8YnI+IGlmIHVzZV90YWdzOg0KPGJyPiB0cnk6DQo8YnI+IG91dHB1dCA9IGJi
+LmZldGNoMi5ydW5mZXRjaGNtZCgNCjxicj4tICJnaXQgLS1naXQtZGlyPSUocmVwb2RpcilzIGRl
+c2NyaWJlICUocmV2KXMgLS10YWdzIC0tZXhhY3QtbWF0Y2ggMiZndDsvZGV2L251bGwiDQo8YnI+
+KyAiZ2l0IC1DICUocmVwb2RpcilzIGRlc2NyaWJlICUocmV2KXMgLS10YWdzIC0tZXhhY3QtbWF0
+Y2ggMiZndDsvZGV2L251bGwiDQo8YnI+ICUgdmFycywgZCwgcXVpZXQ9VHJ1ZSkuc3RyaXAoKQ0K
+PGJyPiB2ZXIgPSBnaXRwa2d2X2Ryb3BfdGFnX3ByZWZpeChkLCBvdXRwdXQpDQo8YnI+IGV4Y2Vw
+dCBFeGNlcHRpb246DQo8YnI+PC9ibG9ja3F1b3RlPjwvYm9keT48L2h0bWw+
 
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
----
- .../poppler/poppler/CVE-2025-50420.patch      | 38 +++++++++++++++++++
- .../poppler/poppler_22.04.0.bb                |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-50420.patch
 
-diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-50420.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-50420.patch
-new file mode 100644
-index 0000000000..ad322cbf97
---- /dev/null
-+++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-50420.patch
-@@ -0,0 +1,38 @@
-+From a7025904e3330dd6cf95f3664ef6fc77034cc5e1 Mon Sep 17 00:00:00 2001
-+From: Sune Vuorela <sune@vuorela.dk>
-+Date: Tue, 29 Jul 2025 14:14:00 +0200
-+Subject: [PATCH] Fix crash in pdfseparate
-+
-+Don't continue recursing in PDFDoc::mark* if things looks a bit weirder
-+than expected
-+
-+CVE: CVE-2025-50420
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/a7025904e3330dd6cf95f3664ef6fc77034cc5e1]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+---
-+ poppler/PDFDoc.cc | 9 +++++++++
-+ 1 file changed, 9 insertions(+)
-+
-+diff --git a/poppler/PDFDoc.cc b/poppler/PDFDoc.cc
-+index 20bb191..c2e90be 100644
-+--- a/poppler/PDFDoc.cc
-++++ b/poppler/PDFDoc.cc
-+@@ -1771,6 +1771,15 @@ bool PDFDoc::markAnnotations(Object *annotsObj, XRef *xRef, XRef *countRef, unsi
-+             if (obj1.isDict()) {
-+                 Dict *dict = obj1.getDict();
-+                 Object type = dict->lookup("Type");
-++                if (type.isNull()) {
-++                    Object subType = dict->lookup("SubType");
-++                    // Type is optional, subtype is required
-++                    // If neither of them exists, something is probably
-++                    // weird here, so let us just skip this entry
-++                    if (subType.isNull()) {
-++                        continue;
-++                    }
-++                }
-+                 if (type.isName() && strcmp(type.getName(), "Annot") == 0) {
-+                     const Object &obj2 = dict->lookupNF("P");
-+                     if (obj2.isRef()) {
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-support/poppler/poppler_22.04.0.bb b/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
-index 87f240616f..ae8462b321 100644
---- a/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
-@@ -18,6 +18,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://CVE-2025-52886-0002.patch \
-            file://CVE-2025-52886-0003.patch \
-            file://CVE-2025-52886-0004.patch \
-+           file://CVE-2025-50420.patch \
-            "
- SRC_URI[sha256sum] = "813fb4b90e7bda63df53205c548602bae728887a60f4048aae4dbd9b1927deff"
- 
--- 
-2.40.0
+--b1=_0CGvreMuwgtX1o3mLJKa1EK8sdNUUjVT8Ha8JhMV3Y--
 
 
