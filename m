@@ -1,137 +1,161 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <johannes.schneider@leica-geosystems.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3602CA0EF8
-	for <webhook@archiver.kernel.org>; Wed, 20 Aug 2025 08:51:00 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.15543.1755679855910732183
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10534CA0EDC
+	for <webhook@archiver.kernel.org>; Wed, 20 Aug 2025 10:11:41 +0000 (UTC)
+Received: from OSPPR02CU001.outbound.protection.outlook.com (OSPPR02CU001.outbound.protection.outlook.com [40.107.159.52])
+ by mx.groups.io with SMTP id smtpd.web10.16408.1755684695924875807
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Aug 2025 01:50:55 -0700
+ Wed, 20 Aug 2025 03:11:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=EJniZt4j;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=03271322d7=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 57K6ZofF321815
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 01:50:55 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=y/9UpLA9MBqYf4xGC2ag
-	+1A3/bFy8NC37hTOQoDUEBo=; b=EJniZt4jryqnald8SErUmzJqY5kGsYrL2SQ2
-	13oxrGgeCw1qP+UodNaNscrlYbYL9Yy6XEmF0dU38QrrPLlzu+G3P5GGSqCQsYSe
-	n8GTV3pwZov6F46D/L770dVIE3eKrE3e/OqvqKK0Mz/WZQxhBTfTZLP0cUyiBxhM
-	9LMtnAqHWYvwDXiptwWGbwzWRJ+TnbgyjMlK5xlnySs/1aKvRaIFMFo8kwcQ7Qj5
-	9P+SLHKarqW1mn/RuuQdl0oiW4wHaRyXn5IBORcTU/w2btuGNBsL8qiKq6NPvg2J
-	UmRz1krSg+j60jpwAQ4Km+k8xDHIx66qM6MM4wMYXaMsksWj2Q==
-Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48mydmgjb5-8
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 01:50:55 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Wed, 20 Aug 2025 01:50:20 -0700
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 1/1] postgresql: upgrade 16.9 -> 16.10
-Date: Wed, 20 Aug 2025 14:19:58 +0530
-Message-ID: <20250820084958.3023878-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=fail reason="dkim: body hash did not verify" header.i=@leica-geosystems.com header.s=selector1 header.b=QBBdYjhI;
+ spf=permerror, err=parse error for token &{10 18 %{i}._ip.%{h}._ehlo.%{d}._spf.vali.email}: invalid domain name (domain: leica-geosystems.com, ip: 40.107.159.52, mailfrom: johannes.schneider@leica-geosystems.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qEzNCsGwfoHZjsr3qEMLFkRQlBoEwosvgcr4khz0ujH73qVLgszox+FuMsOc+VILMPU4mrYyNbjIqbl71ZOkmXstxH6TBXobEdA8yaK6nr5S0KFAjnb6TfenXj3gAPsQQR90381xj0daeJi31F/oPfmMllWsWtllx5ExpOltHZw8K3az9VvCdaC/9wKo4INCibFHrz9gez8W2H6C5qBd3URDDjmjHaEtwwo8Yx1YLhIg2i8OJC5YthpwobMKCLUSGaHO4C1yoaDFtNSjJZcHkERdPJGK15NUlbFtq8fH/nJqDf7ndt7AmwHX1DiSwV4ANpHCrhc3+tIalIoj/4JHzg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=y+GGMqrCmjuzND0r6gprwsQvXLd6la0d9IXGk0etDLA=;
+ b=FDYdZc8G+vxnNlpnP1C4pBMQcTsKJNlrLo0bprKyKFmWhzkXEoOm7qJ7nXWbdsET/kVntn7OmaK2eSaJSxqikhqlxE4/K9DWPkT0y4ZBNcbmXP3MXmd+HxRRl6HNWOAHdvUvH7XvP2H0qrC7t8tmGiXXKT61fhx1lZuyGEyeJEa3WS8ggk9g10i8j/Bfu1Q3JTk20iHmqI4fYUODILJRxwSDKNb2k8Tru/nAu4K5sy5l9uRtB+dDOvw05NQ8Xv7aWF4dsJm5fFV+NhDmfLTwrmn+CpqX/Rzrr9JPCY49hXoB89pX4xpGwB5YozTbD4KkcTu4730f4APx8R2l3Wb8sw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 193.8.40.99) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=leica-geosystems.com; dmarc=pass (p=reject sp=reject pct=100)
+ action=none header.from=leica-geosystems.com; dkim=none (message not signed);
+ arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=y+GGMqrCmjuzND0r6gprwsQvXLd6la0d9IXGk0etDLA=;
+ b=QBBdYjhI2943KKDtCheWZH1EzjYOg12PX7rOB0QyfBGDYHKPEi9hM0/MC93s2v47jyShif41Yr8Y3wHuaNb7mn3G/0V0x3CCPM5m06EjADYIh5Fs/YT5T5nZ7hthq/TAVLaaq1QQz0tO0endYop46ucXHs+fwzPxdZx53RgmbM0=
+Received: from DU7PR01CA0007.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:50f::7) by PAWPR06MB8812.eurprd06.prod.outlook.com
+ (2603:10a6:102:38c::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.14; Wed, 20 Aug
+ 2025 10:11:31 +0000
+Received: from DB5PEPF00014B9A.eurprd02.prod.outlook.com
+ (2603:10a6:10:50f:cafe::c7) by DU7PR01CA0007.outlook.office365.com
+ (2603:10a6:10:50f::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9052.14 via Frontend Transport; Wed,
+ 20 Aug 2025 10:11:41 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 193.8.40.99)
+ smtp.mailfrom=leica-geosystems.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=leica-geosystems.com;
+Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
+ designates 193.8.40.99 as permitted sender) receiver=protection.outlook.com;
+ client-ip=193.8.40.99; helo=hexagon.com; pr=C
+Received: from hexagon.com (193.8.40.99) by
+ DB5PEPF00014B9A.mail.protection.outlook.com (10.167.8.167) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9052.8 via Frontend Transport; Wed, 20 Aug 2025 10:11:30 +0000
+Received: from GEO-H84s5E2W8Pk.lgs-net.com ([10.60.34.93]) by hexagon.com with Microsoft SMTPSVC(10.0.17763.1697);
+	 Wed, 20 Aug 2025 12:11:29 +0200
+From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
+To: openembedded-devel@lists.openembedded.org
+CC: ejo@pengutronix.de,
+	jlu@pengutronix.de,
+	Johannes Schneider <johannes.schneider@leica-geosystems.com>
+Subject: [meta-oe][PATCH] signing.bbclass: create env with 0x600
+Date: Wed, 20 Aug 2025 12:11:28 +0200
+Message-ID: <20250820101128.47638-1-johannes.schneider@leica-geosystems.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+X-OriginalArrivalTime: 20 Aug 2025 10:11:29.0773 (UTC) FILETIME=[CBF591D0:01DC11BA]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B9A:EE_|PAWPR06MB8812:EE_
 Content-Type: text/plain
-X-Originating-IP: [10.11.232.110]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (10.11.224.121) To
- ala-exchng01.corp.ad.wrs.com (10.11.224.121)
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODIwMDA3NiBTYWx0ZWRfX/9uT1ylYtC1W
- S3tehhYCxC291yirBXXCfe/r56uK3TmMvXA/AvL/rEHGOuTdBHBacKpUcCtz8MW3Jy0BJEwjZJY
- UXuEeg5jZCDyiNiWslQSVneVz8j2fIxMgxZfcLwyc9ZVRuq58sD2O7kQ0hnER+cHtQB1hJrj9F2
- QCWALJ+p9u1lFFKcuI3GevCcb7gCXroBhbFqyMj+q0qgN82+M1PzSckVuild8eNM7nU4PM3j8HE
- F5l1NOjJKlL0K8AZ8JrFr1UUAJhEDufXyxHMLWais88pzVrGvEiUXDJ2iDAAdwDxXwiaLuOuBed
- fcCMRD05ozGHZ0j55kpU3fLAxABjyyAAm+O2QF4acLUpA6KC/tHn9K2LaTBNdNpWqLNTa0jQLhj
- AJe3TqIR+Zj6LmzbYzcCdL+O18qnkw==
-X-Proofpoint-ORIG-GUID: YWZY3W0k7Bvpp90Na4Fh8c7jg6Q8iJ37
-X-Authority-Analysis: v=2.4 cv=INNbygvG c=1 sm=1 tr=0 ts=68a58c6f cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=gmxlzscTznEA:10 a=2OwXVqhp2XgA:10 a=epTmVMiNAAAA:8 a=t7CeM3EgAAAA:8
- a=eG7aWNzutWAoOeBMYPIA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: YWZY3W0k7Bvpp90Na4Fh8c7jg6Q8iJ37
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-08-20_03,2025-08-20_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 phishscore=0 spamscore=0 priorityscore=1501
- malwarescore=0 lowpriorityscore=0 impostorscore=0 adultscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2508110000 definitions=firstrun
+X-MS-Office365-Filtering-Correlation-Id: 90c0e73e-5568-4ea6-6530-08dddfd1eea2
+X-SET-LOWER-SCL-SCANNER: YES
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|36860700013|1800799024|376014|82310400026;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?iEJlWC6+B2HrC3H87dEfyZBwtd42IhEBkJ/Q76G4pnb4hwdAj0pCsrbJKGfy?=
+ =?us-ascii?Q?9r3etEOqO8PNfPEAzVQDbI6CF8TAt1UZddsa8h+ArBGLzigDUZdScFbwWqmw?=
+ =?us-ascii?Q?caL9+qJlvK0IPQW6sDMcquobEZJw/RcKbnX4Mu7JeM/U2wVUi90DeWXU39ln?=
+ =?us-ascii?Q?8W1SotMw7OBbEQEjSdsQbCPnaEMnlCw2MFAICSI7Zr3xbs67owkiTZT6wfMB?=
+ =?us-ascii?Q?m7UxHs7pOVmjkpT4bKqpGJAG+B/Ms5v0Hr7Q7Lb0BSNAhJ42Hl7celK0mMhk?=
+ =?us-ascii?Q?TFo0VZDYtSq+MYkmrODPGUeJdWyoDitmTMXMPqWO1JkT77TuEfJ+X39DkRUI?=
+ =?us-ascii?Q?nmn6H1wSKYznH23c0EzMBYrkPRWd5h5GlAsNwRKQX/jGH3wwYbyW84AJBV+/?=
+ =?us-ascii?Q?+Uk4kY5xp2laHf2lrY/DwA3l0WeDCjWNI7QEg1lGO2cideaeNroo69Wnphy7?=
+ =?us-ascii?Q?h1rdn6ZXIivDWLdIys6hCgqcw0lBdJC9fXQrgHnakAvoc1J7FNraJd//ub32?=
+ =?us-ascii?Q?KOHcXc9n3aQ03HWXH3LyGN8savPfAlRUNRYbNzlp65rRW0KZHeXFUahcp73V?=
+ =?us-ascii?Q?yerdbi3eWHgyMaSodrzNrxTuVKyW8sx8nvoAaQE9Nc5heikknXo+ZRPOjr3Y?=
+ =?us-ascii?Q?KEGEVHp8VMBJ9mLaJVVwi7SSSopik63L1+aKSrWf/0ThSRH4lajo2B8eKKdH?=
+ =?us-ascii?Q?EZ+04B1Wgu0qWF/gxBD3/1mj0aUEzleY5JaGhu8bkbZs8UBE+PFQDZezNzqx?=
+ =?us-ascii?Q?CPgwb+j0Ed9XeC9rp/VdKP09u9frg40Rnm9VoxfeZgu6XFPVfQSC2XhAla6Z?=
+ =?us-ascii?Q?0uWvnQ+8NYforb1pGge2AKDWOGrI5rClLolPZABExtEYPQCQPn0fK2FOL8rR?=
+ =?us-ascii?Q?ZSjji9ksCxcN1xy4YZ28bDiJv6BGQ/sl5aEt+r9l4QsZK6zE74sKZPRZCh8b?=
+ =?us-ascii?Q?qyX1A5eM24ac5UXs1JRDybco0mHRRwg/G6o5GnXHFegdY83WqXvkiO5Xv8e2?=
+ =?us-ascii?Q?8A5Qq4SkoENqACZ+ig4ERg2VTU9vUe1QOndcerX1XFBhGCDFAXwG4GnVEfUA?=
+ =?us-ascii?Q?KsMM2WRwhH+o2ZqcBfv6jCDfmy+tfSPlOLP3dF9lR0O2eA3T6e118oKaM464?=
+ =?us-ascii?Q?VBrj9GuzbQhVwlS2ZTAxYjRfGpUxg8Gh8DA/gyZZL85kmNZD67BocOLMBOv/?=
+ =?us-ascii?Q?Iiy+ZUGJX1V7c6yiO4hQJYF08J8zzwcfJcwn/ow/OrL7DxDZLQkmvpVKVtpq?=
+ =?us-ascii?Q?ZTPJ1cbk2jZvkbJXig/e7qua/2+CSpDwLhErKtKAD/+D46curqjIHf4Mx1HH?=
+ =?us-ascii?Q?bhKsTUCw0WCKuf8rL3mHaxsnDMOWs8mI0/vx7nrsadaVPjVhjYEnG0nJZ3ML?=
+ =?us-ascii?Q?Ut/qwL9iAHOLrJhT7w/NswBvh56lASkdaQD1a3B6iozX3uBkMBEN0zGACFR1?=
+ =?us-ascii?Q?pUfsilYtGaMmyocFRni9G34hlYS1bVFI0LNqE/xfTOjqwoUaWTOiN9LcEyeO?=
+ =?us-ascii?Q?RJvbbEIol/nv2ybpnmYmu1X3CyHQJ0WewH4a?=
+X-Forefront-Antispam-Report: 
+	CIP:193.8.40.99;CTRY:CH;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:hexagon.com;PTR:ahersrvdom51.leica-geosystems.com;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: leica-geosystems.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Aug 2025 10:11:30.0613
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 90c0e73e-5568-4ea6-6530-08dddfd1eea2
+X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a;Ip=[193.8.40.99];Helo=[hexagon.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DB5PEPF00014B9A.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR06MB8812
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:51:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119042
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 10:11:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119043
 
-From: Yogita Urade <yogita.urade@windriver.com>
+The env file holds the PKCS#11 uris, which include the pin to access
+the database - in plaintext. Directly create the file (after it has
+been remove) with the proper 'user RW only' permissions, to give only
+the build-user access to this somewhat "security sensitive" file.
 
-Includes fix for CVE-2025-8713, CVE-2025-8714, CVE-2025-8715
+Note that the softhsm/sqlite3.db* is already 0x600.
 
-License-Update: Align organization wording in copyright statement
-
-Changelog:
-https://www.postgresql.org/docs/release/16.10/
-
-Refreshed 0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-for 16.10
-
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
 ---
- ...0003-configure.ac-bypass-autoconf-2.69-version-check.patch | 4 ++--
- .../postgresql/{postgresql_16.9.bb => postgresql_16.10.bb}    | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_16.9.bb => postgresql_16.10.bb} (75%)
+ meta-oe/classes/signing.bbclass | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-index f78904192e..7707d238e7 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
-@@ -13,12 +13,12 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
-  1 file changed, 4 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index d707a0a..8895a3d 100644
-+index 4f25567..b6b1eff 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
-  
-- AC_INIT([PostgreSQL], [16.9], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-+ AC_INIT([PostgreSQL], [16.10], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-  
- -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
- -Untested combinations of 'autoconf' and PostgreSQL versions are not
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_16.9.bb b/meta-oe/recipes-dbs/postgresql/postgresql_16.10.bb
-similarity index 75%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_16.9.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_16.10.bb
-index a1b80a5ad4..b1b8411dc7 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_16.9.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_16.10.bb
-@@ -1,6 +1,6 @@
- require postgresql.inc
- 
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d5dd73e90ee1a572679460ee67233fcc"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=08b6032a749e67f6e3de84ea8e466933"
- 
- SRC_URI += "\
-    file://not-check-libperl.patch \
-@@ -11,6 +11,6 @@ SRC_URI += "\
-    file://0005-postgresql-fix-ptest-failure-of-sysviews.patch \
- "
- 
--SRC_URI[sha256sum] = "07c00fb824df0a0c295f249f44691b86e3266753b380c96f633c3311e10bd005"
-+SRC_URI[sha256sum] = "de8485f4ce9c32e3ddfeef0b7c261eed1cecb54c9bcd170e437ff454cb292b42"
- 
- CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Ddoesn't apply to out configuration of postgresql so we can safely ignore it."
--- 
-2.40.0
+diff --git a/meta-oe/classes/signing.bbclass b/meta-oe/classes/signing.bbcl=
+ass
+index 26d1b592e3..b35184398a 100644
+--- a/meta-oe/classes/signing.bbclass
++++ b/meta-oe/classes/signing.bbclass
+@@ -104,6 +104,7 @@ signing_import_prepare() {
+=20
+     export _SIGNING_ENV_FILE_=3D"${B}/meta-signing.env"
+     rm -f "$_SIGNING_ENV_FILE_"
++    install -m 600 /dev/null "$_SIGNING_ENV_FILE_"
+=20
+     export SOFTHSM2_CONF=3D"${B}/softhsm2.conf"
+     export SOFTHSM2_DIR=3D"${B}/softhsm2.tokens"
+@@ -331,7 +332,7 @@ signing_import_install() {
+     install -d ${D}${localstatedir}/lib/softhsm/tokens/${PN}
+     install -m 600 -t ${D}${localstatedir}/lib/softhsm/tokens/${PN} ${B}/s=
+ofthsm2.tokens/*/*
+     install -d ${D}${localstatedir}/lib/meta-signing.env.d
+-    install -m 644 "${B}/meta-signing.env" ${D}${localstatedir}/lib/meta-s=
+igning.env.d/${PN}
++    install -m 600 "${B}/meta-signing.env" ${D}${localstatedir}/lib/meta-s=
+igning.env.d/${PN}
+ }
+=20
+ signing_prepare() {
+--=20
+2.43.0
 
 
