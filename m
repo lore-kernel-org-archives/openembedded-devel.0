@@ -2,62 +2,62 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B1ACCA0EFE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8ABD0CA0EDC
 	for <webhook@archiver.kernel.org>; Wed, 20 Aug 2025 08:40:09 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.web10.15255.1755679204336650566
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web11.15383.1755679203411207527
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Aug 2025 01:40:07 -0700
+ Wed, 20 Aug 2025 01:40:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=EhCrT7RA;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=qwVy7QLG;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1755679207; x=1787215207;
+  t=1755679203; x=1787215203;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=uJfBn12jZVy/+H1mzM9T1VaIirrWwWchi3+HRCic3oU=;
-  b=EhCrT7RAvNbDuMF1o53xmrtEhkiANsORi/ccMqOMd2nuPrkaGSjNOeav
-   64fKNcOFVG6ElwigWH0OjuZWv+4MCUtcC2HCWScnXd7SrGUyEs55hDA7V
-   PLBNlikJNEKiflp/CgTs9fbsQJjw/wbXvhimWHZd2T2Vy3HQi7u4Rh5P2
-   xLCXKDh0S+3CTy05BTA5n+9Vbmc4SJVL1NH3qMkNHUvne5a4Savf3elE+
-   3d78We2i+mz7fgAf9JuBRoYsQQNjtLXOcGT2D8yDmK1RWmYSI6G98uOvT
-   PM7XfUUP3h0ngWgeC7nibypSEnsUuAW0UA2mDAnL8SH+RtQRJDsC4Uhet
-   A==;
-X-CSE-ConnectionGUID: f0W828FoTFyGwkWFM1gqWg==
-X-CSE-MsgGUID: DAuqfAPRTjKwnzWOSVTUbg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11527"; a="209365720"
+  bh=hiTj3urugWwoAlrwdw0193NfKeT9mYdT9zUG0cDUAaA=;
+  b=qwVy7QLG6kCv+I8bx185yJRjeTwOm3QAKkcvwW4erAx1NG0H9c64MLKE
+   BcgLfHSAE07q1zYy8AgVVrjXZokhcJKqw/g7Twb0IGNHo7G+/npuaTIsr
+   TFOphyow+QVevbG4qB9UFUtfLAe3Eqoz7LhbHbqlahr2rFg8G8AuCufuH
+   Zcm7pn4vR0BNN6N4BEmfU32Ut3BM3e650+PXEGlQdqXuEiYklI6ObEqFF
+   yBKgAsKz+ooMsKRRGoTdNrSfKDUxsCRm5uw/3WIJy4TEJxJa4YszGNEnx
+   /ftMY1jH9FIf5ARdrL4+ywo8rA81z/wtU2mNw+/zWIKn04EvytCMWzCk+
+   w==;
+X-CSE-ConnectionGUID: NjNndnKdTpa/TBLakl87Nw==
+X-CSE-MsgGUID: B24AGdzgRg626kfef5WSaQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11527"; a="198519909"
 X-IronPort-AV: E=Sophos;i="6.17,302,1747666800"; 
-   d="scan'208";a="209365720"
-Received: from unknown (HELO az2uksmgr3.o.css.fujitsu.com) ([52.151.125.128])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Aug 2025 17:40:06 +0900
-Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
+   d="scan'208";a="198519909"
+Received: from unknown (HELO az2nlsmgr1.o.css.fujitsu.com) ([51.138.80.169])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Aug 2025 17:40:02 +0900
+Received: from az2nlsmgm1.o.css.fujitsu.com (unknown [10.150.26.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr3.o.css.fujitsu.com (Postfix) with ESMTPS id 5E8301002B96
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:06 +0000 (UTC)
-Received: from az2uksmom2.o.css.fujitsu.com (az2uksmom2.o.css.fujitsu.com [10.151.22.203])
+	by az2nlsmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id D9A621C00087
+	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:01 +0000 (UTC)
+Received: from az2uksmom4.o.css.fujitsu.com (az2uksmom4.o.css.fujitsu.com [10.151.22.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 0DDE28D65E9
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:06 +0000 (UTC)
+	by az2nlsmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 8DA59C03847
+	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:01 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTPS id 11CAE1400BDC
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:04 +0000 (UTC)
+	by az2uksmom4.o.css.fujitsu.com (Postfix) with ESMTPS id 71EBB40CDC7
+	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:39:59 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 267C31A0073;
-	Wed, 20 Aug 2025 16:40:01 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 7F5961A007E;
+	Wed, 20 Aug 2025 16:39:56 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 21/26] python3-cbor2: upgrade 5.6.5 -> 5.7.0
-Date: Wed, 20 Aug 2025 16:39:40 +0800
-Message-ID: <20250820083945.802-21-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 09/26] libsdl3: upgrade 3.2.18 -> 3.2.20
+Date: Wed, 20 Aug 2025 16:39:28 +0800
+Message-ID: <20250820083945.802-9-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250820083945.802-1-wangmy@fujitsu.com>
 References: <20250820083945.802-1-wangmy@fujitsu.com>
@@ -67,38 +67,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119032
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119021
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-===========
-- Added support for Python 3.14
-- Dropped support for Python 3.8
-- Added support for encoding indefinite containers
-- Added complex number support (tag 43000)
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../python/{python3-cbor2_5.6.5.bb => python3-cbor2_5.7.0.bb}   | 2 +-
+ .../libsdl3/{libsdl3_3.2.18.bb => libsdl3_3.2.20.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cbor2_5.6.5.bb => python3-cbor2_5.7.0.bb} (83%)
+ rename meta-oe/recipes-graphics/libsdl3/{libsdl3_3.2.18.bb => libsdl3_3.2.20.bb} (97%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cbor2_5.6.5.bb b/meta-python/recipes-devtools/python/python3-cbor2_5.7.0.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-cbor2_5.6.5.bb
-rename to meta-python/recipes-devtools/python/python3-cbor2_5.7.0.bb
-index 834bad6865..4fe60c87c9 100644
---- a/meta-python/recipes-devtools/python/python3-cbor2_5.6.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-cbor2_5.7.0.bb
-@@ -3,7 +3,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a79e64179819c7ce293372c059f1dbd8"
- DEPENDS += "python3-setuptools-scm-native"
+diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.18.bb b/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.20.bb
+similarity index 97%
+rename from meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.18.bb
+rename to meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.20.bb
+index 168230e5d8..30e2d42097 100644
+--- a/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.18.bb
++++ b/meta-oe/recipes-graphics/libsdl3/libsdl3_3.2.20.bb
+@@ -19,7 +19,7 @@ SRC_URI = "http://www.libsdl.org/release/SDL3-${PV}.tar.gz"
  
--SRC_URI[sha256sum] = "b682820677ee1dbba45f7da11898d2720f92e06be36acec290867d5ebf3d7e09"
-+SRC_URI[sha256sum] = "3f6d843f4db4d0ec501c46453c22a4fbebb1abfb5b740e1bcab34c615cd7406b"
+ S = "${UNPACKDIR}/SDL3-${PV}"
  
- inherit pypi python_setuptools_build_meta ptest-python-pytest
+-SRC_URI[sha256sum] = "1a775bde924397a8e0c08bfda198926c17be859d0288ad0dec1dea1b2ee04f8f"
++SRC_URI[sha256sum] = "467600ae090dd28616fa37369faf4e3143198ff1da37729b552137e47f751a67"
+ 
+ inherit cmake lib_package binconfig-disabled pkgconfig upstream-version-is-even
  
 -- 
 2.43.0
