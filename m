@@ -1,99 +1,143 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50B4CCA0EFD
-	for <webhook@archiver.kernel.org>; Wed, 20 Aug 2025 08:40:20 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web11.15391.1755679211835707185
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75F15CA0EED
+	for <webhook@archiver.kernel.org>; Wed, 20 Aug 2025 08:46:30 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.15330.1755679580852609673
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Aug 2025 01:40:13 -0700
+ Wed, 20 Aug 2025 01:46:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=duhcLGNu;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1755679212; x=1787215212;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=g8cf04f9EaVDU2Jo0eTLUYRM8RqvW63VaXTwBzRrK5k=;
-  b=duhcLGNukVMRHBod9mgwCmUHb4I9njgfUGQsN4nDIJkhesgfEbpvbEt+
-   PXYjxmFcX0opVCydWSrsQsHcCuRp76RIxJzTb9uDBJqOAogpeC8AmF/eX
-   RewqlT4i6jS6KrL8fwi6smTPBNAgYvdGF9h5PKlyNU+XIjbgXuBNVPpv/
-   iMRMcOK2h3jwlmKSyrmymtU7yuBbCUrxXqE9w1Y3fyYNIZb6u1tsu8RMw
-   Wkbg07y51lc9DKtOlWC0Gm2RwKeHZKLgCFC0p+jyCIyqacH7tSfqd0165
-   kD0VlvEAVkAsgtpVK5Z3EaOZurlXCpo2MDjTOBjRiom/BwQ3bYGdH5USz
-   w==;
-X-CSE-ConnectionGUID: fDpaYFBwQF2nlSRK1mbgmw==
-X-CSE-MsgGUID: GjvRO1dpTeGiQf4ja6hWcA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11527"; a="210584688"
-X-IronPort-AV: E=Sophos;i="6.17,302,1747666800"; 
-   d="scan'208";a="210584688"
-Received: from unknown (HELO az2nlsmgr3.o.css.fujitsu.com) ([51.138.80.169])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Aug 2025 17:40:04 +0900
-Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgr3.o.css.fujitsu.com (Postfix) with ESMTPS id 7D3D51000344
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:04 +0000 (UTC)
-Received: from az2uksmom2.o.css.fujitsu.com (az2uksmom2.o.css.fujitsu.com [10.151.22.203])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id 36ACA1004160
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:04 +0000 (UTC)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(No client certificate requested)
-	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTPS id 2A5221400BD6
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:02 +0000 (UTC)
-Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 330F91A008B;
-	Wed, 20 Aug 2025 16:39:59 +0800 (CST)
-From: Wang Mingyu < wangmy@fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 16/26] python3-anyio: upgrade 4.9.0 -> 4.10.0
-Date: Wed, 20 Aug 2025 16:39:35 +0800
-Message-ID: <20250820083945.802-16-wangmy@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
-In-Reply-To: <20250820083945.802-1-wangmy@fujitsu.com>
-References: <20250820083945.802-1-wangmy@fujitsu.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=YPYPhm83;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=03271322d7=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 57K7oZ1g3274624
+	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:46:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=dFcyDdQ3bwc5+r+eEwjO
+	JtXjyMQg0ZyYycQDjfHtk58=; b=YPYPhm83LGxCHzosny09xikmv6C2biKulrN8
+	SY8n0oc9sInH+z8BXfQL7eACxsHhR+nze6DggfWCwobawiVSGO+FzwjCnQbkLGUL
+	nSlHsoer3jiI4yaM6POqxW5XqYynAs+wBKXomRCZ2UPohQZ6ClHkQtfK4Z/1tmaC
+	5pTV3pdIiMWcZVSerskwkX7y8UTaULwMVYxzSdgR1x9SJLppeb3h+vehQznN8MqZ
+	OL88QAkLMAeI3lEEA2WtrTDE+uVgAdco9eFvTZdfVCxpXMTS71oOFjbZUF3QWXYa
+	Fhy2KhsyXrSnYw6t2FILhO9LjaW/wVALtlDPIFr195rYkeev1w==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48mydq0gxq-6
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:46:19 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.57; Wed, 20 Aug 2025 01:46:03 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH 1/1] postgresql: upgrade 17.5 -> 17.6
+Date: Wed, 20 Aug 2025 14:15:41 +0530
+Message-ID: <20250820084541.2054378-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.11.232.110]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (10.11.224.121) To
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121)
+X-Proofpoint-ORIG-GUID: 6PKYHJFy_XhdUzrToJaT2UolAXXVOttq
+X-Proofpoint-GUID: 6PKYHJFy_XhdUzrToJaT2UolAXXVOttq
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODIwMDA3NiBTYWx0ZWRfX8jWikteC/zAf
+ GGQv+d2JNogEgCcUCrBS/9Yj8iopUaqYoWkdvszWVBDuYEwhgWnLDyJjORo+WCEVBB9xv78FC97
+ FknjqWE8VcDf3edpGzFPWpDb4xnQEQC9BI5pRu9lNOOM8R4fLb7tid0xDY8yWTB50biTecQ2qZ5
+ /EhqdSTmT/C9hlWXQ8dVGqQnDwknmTQFehErKuGtL1mzGriM7sWiZG1Yi+ldGI3XQWLifl0sfyO
+ E+Apn7+7pQQTY9BOnJEj7nQ7wBAPk4/VUhxx9ixtKFufZKlRsgcCuOOKEFB5Qlcj3M83bolpdAC
+ OZsa/JNVdoeD0nFCF+FuO7rbs/iky2vD0i7uNJw2vigBJPXBu+R3EGa68pHe2PmanvbdM4XEvBc
+ oTkgfr2cwN4tROBgH+TsWBJRPMYUQg==
+X-Authority-Analysis: v=2.4 cv=SPoblOvH c=1 sm=1 tr=0 ts=68a58b5b cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=gmxlzscTznEA:10 a=2OwXVqhp2XgA:10 a=epTmVMiNAAAA:8 a=t7CeM3EgAAAA:8
+ a=bAYW-0WZY4zRW3ytb3UA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-20_03,2025-08-20_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 bulkscore=0 clxscore=1015 spamscore=0
+ priorityscore=1501 phishscore=0 suspectscore=0 adultscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2508110000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119039
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:46:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119040
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Yogita Urade <yogita.urade@windriver.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Includes fix for CVE-2025-8713, CVE-2025-8714, CVE-2025-8715
+
+License-Update: Align organization wording in copyright statement
+
+Changelog:
+https://www.postgresql.org/docs/release/17.6/
+
+Refreshed 0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+for 17.6
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- .../python/{python3-anyio_4.9.0.bb => python3-anyio_4.10.0.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-anyio_4.9.0.bb => python3-anyio_4.10.0.bb} (88%)
+ ...03-configure.ac-bypass-autoconf-2.69-version-check.patch | 6 +++---
+ .../postgresql/{postgresql_17.5.bb => postgresql_17.6.bb}   | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_17.5.bb => postgresql_17.6.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-anyio_4.9.0.bb b/meta-python/recipes-devtools/python/python3-anyio_4.10.0.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-anyio_4.9.0.bb
-rename to meta-python/recipes-devtools/python/python3-anyio_4.10.0.bb
-index 9cbe26a6d5..e552fd7eaf 100644
---- a/meta-python/recipes-devtools/python/python3-anyio_4.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-anyio_4.10.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c0a769411d2af7894099e8ff75058c9f"
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+index 4382741da9..95070b98c5 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+@@ -1,4 +1,4 @@
+-From 84febaf9330fe99802f75bcd0606ac7d86c35b25 Mon Sep 17 00:00:00 2001
++From 30b1b37d309f67ba6d58f2197bd917107bc7d56c Mon Sep 17 00:00:00 2001
+ From: Yi Fan Yu <yifan.yu@windriver.com>
+ Date: Fri, 5 Feb 2021 17:15:42 -0500
+ Subject: [PATCH] configure.ac: bypass autoconf 2.69 version check
+@@ -13,12 +13,12 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+  1 file changed, 4 deletions(-)
  
- inherit pypi python_setuptools_build_meta
+ diff --git a/configure.ac b/configure.ac
+-index 493d5cd..f0fa973 100644
++index 642dbde..af37179 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
+  
+- AC_INIT([PostgreSQL], [17.5], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
++ AC_INIT([PostgreSQL], [17.6], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
+  
+ -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
+ -Untested combinations of 'autoconf' and PostgreSQL versions are not
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_17.5.bb b/meta-oe/recipes-dbs/postgresql/postgresql_17.6.bb
+similarity index 76%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_17.5.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_17.6.bb
+index b7fce886f8..9ddb40fefa 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_17.5.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_17.6.bb
+@@ -1,6 +1,6 @@
+ require postgresql.inc
  
--SRC_URI[sha256sum] = "673c0c244e15788651a4ff38710fea9675823028a6f08a5eda409e0c9840a028"
-+SRC_URI[sha256sum] = "3f3fae35c96039744587aa5b8371e7e8e603c0702999535961dd336026973ba6"
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d5dd73e90ee1a572679460ee67233fcc"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=08b6032a749e67f6e3de84ea8e466933"
  
- DEPENDS += " \
- 	python3-setuptools-scm-native \
+ SRC_URI += "\
+    file://not-check-libperl.patch \
+@@ -12,6 +12,6 @@ SRC_URI += "\
+    file://0001-tcl.m4-Recognize-tclsh9.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "fcb7ab38e23b264d1902cb25e6adafb4525a6ebcbd015434aeef9eda80f528d8"
++SRC_URI[sha256sum] = "e0630a3600aea27511715563259ec2111cd5f4353a4b040e0be827f94cd7a8b0"
+ 
+ CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Ddoesn't apply to out configuration of postgresql so we can safely ignore it."
 -- 
-2.43.0
+2.40.0
 
 
