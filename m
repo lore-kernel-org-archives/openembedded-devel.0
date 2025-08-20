@@ -2,62 +2,62 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED275CA0FE9
-	for <webhook@archiver.kernel.org>; Wed, 20 Aug 2025 08:40:09 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.web10.15255.1755679204336650566
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F62CCA0FED
+	for <webhook@archiver.kernel.org>; Wed, 20 Aug 2025 08:40:10 +0000 (UTC)
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web11.15383.1755679203411207527
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Aug 2025 01:40:04 -0700
+ Wed, 20 Aug 2025 01:40:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=L5fOs+rc;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=e6MoqNFi;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1755679204; x=1787215204;
+  t=1755679205; x=1787215205;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=O1pwap9c9OeSmpO9ZB9ff5mqSlIlM/3r4YBHKGtv918=;
-  b=L5fOs+rc9Q2d67HLxd3KG993xEeSW+e4KDKchWu3X7B5oBCrMFsRmMCX
-   ugyf6r1YwrU8YnnWvyhp/QqPLoDf7FzRD4q2iTHKGQXFAjp1QiJ85zKzY
-   Z5bw+6fblKkOYDJ4dHcZSgGYgYy72yb7DvLk1QGTLLUQtw7MUMWFdrLFw
-   yWPLrUEtdRV6QTNI2onoDdhEQocHARLPtAdr7MPUvvkddooanTVfod8ct
-   1p16IsptcFpIgPqjOXyAk7SPSsMnavPmsDO84a0Gh1YaYY9xETaBUfQEf
-   VucEVH8bUxyW+bijMrY+RhTqggWyPoDije6Iym++7AOVbPEKHGAX52Eyn
-   w==;
-X-CSE-ConnectionGUID: 1Zesnw4dQZyb3GpYv+66sA==
-X-CSE-MsgGUID: 6aNInz9FTwunlCg8NlYOoA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11527"; a="209365707"
+  bh=2B3HR4wR8HWtGoGZc2PWiXEhMgMGpl1cj7LeNVpU6EQ=;
+  b=e6MoqNFi3TYOVs08vNxpuL77Nf8FSA9LMQAOw61Qf+jtBiCztqXewQp4
+   mihHAIR9pWC2Xuprv0oEPLnp27GqB2Syhxwb1QewYigcmpfdAuQANj4Hg
+   LLdm7bZ4ML+HAZl4wjZtdCQgQgmfd+nPgu6EixYvGuEVDgxy3CVkcm3yi
+   kNmmz8TiY4fuSkRxl4Ys2DmTpH0qLG/jzaF1qvtNlUglJVP90vLvZHIcz
+   NGCI5fyqGtLLX90fBSozAsXscCMVsO/tYDBx2QiudEIKya1qRBAFe8vVn
+   xq/pMJz8IF9RZ5hZ9RDtE+NudoOA287lNfZ0zgKOyJlUDDjsyXKMlr/St
+   Q==;
+X-CSE-ConnectionGUID: XzpxuVjKQeOcjC7oOyC76g==
+X-CSE-MsgGUID: B0abyoW5T9SekqURUNGqAw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11527"; a="198519917"
 X-IronPort-AV: E=Sophos;i="6.17,302,1747666800"; 
-   d="scan'208";a="209365707"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.128])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Aug 2025 17:40:03 +0900
-Received: from az2uksmgm2.o.css.fujitsu.com (unknown [10.151.22.199])
+   d="scan'208";a="198519917"
+Received: from unknown (HELO az2nlsmgr1.o.css.fujitsu.com) ([51.138.80.169])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Aug 2025 17:40:05 +0900
+Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 91414C00201
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:02 +0000 (UTC)
-Received: from az2uksmom1.o.css.fujitsu.com (az2uksmom1.o.css.fujitsu.com [10.151.22.202])
+	by az2nlsmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id EF8241C00087
+	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:04 +0000 (UTC)
+Received: from az2nlsmom2.o.css.fujitsu.com (az2nlsmom2.o.css.fujitsu.com [10.150.26.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 4DD6E1809176
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:02 +0000 (UTC)
+	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id A991B1803228
+	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:04 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTPS id 48E2C18001E0
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:00 +0000 (UTC)
+	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTPS id 9E62E1803F9E
+	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:02 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 506501A0086;
-	Wed, 20 Aug 2025 16:39:57 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 97D9B1A0071;
+	Wed, 20 Aug 2025 16:39:59 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH 11/26] libtevent: upgrade 0.17.0 -> 0.17.1
-Date: Wed, 20 Aug 2025 16:39:30 +0800
-Message-ID: <20250820083945.802-11-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 17/26] python3-bitarray: upgrade 3.6.0 -> 3.6.1
+Date: Wed, 20 Aug 2025 16:39:36 +0800
+Message-ID: <20250820083945.802-17-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250820083945.802-1-wangmy@fujitsu.com>
 References: <20250820083945.802-1-wangmy@fujitsu.com>
@@ -66,32 +66,39 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119025
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 08:40:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119028
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+===========
+* add development files for statistical tests in 'devel/random/'
+* optimize 'util.sum_indices()'
+* fix RecursionError in 'util.random_k()', see #239
+* add 'devel/test_sum_indices.py'
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libtevent/{libtevent_0.17.0.bb => libtevent_0.17.1.bb}      | 2 +-
+ .../{python3-bitarray_3.6.0.bb => python3-bitarray_3.6.1.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/libtevent/{libtevent_0.17.0.bb => libtevent_0.17.1.bb} (95%)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_3.6.0.bb => python3-bitarray_3.6.1.bb} (81%)
 
-diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.17.0.bb b/meta-networking/recipes-support/libtevent/libtevent_0.17.1.bb
-similarity index 95%
-rename from meta-networking/recipes-support/libtevent/libtevent_0.17.0.bb
-rename to meta-networking/recipes-support/libtevent/libtevent_0.17.1.bb
-index 7ee044d146..3f67b7b842 100644
---- a/meta-networking/recipes-support/libtevent/libtevent_0.17.0.bb
-+++ b/meta-networking/recipes-support/libtevent/libtevent_0.17.1.bb
-@@ -17,7 +17,7 @@ SRC_URI = "https://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_3.6.0.bb b/meta-python/recipes-devtools/python/python3-bitarray_3.6.1.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-bitarray_3.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_3.6.1.bb
+index 83062317e8..5a119f412f 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_3.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_3.6.1.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF-2.0"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=6abe80c028e4ee53045a33ae807c64fd"
  
- LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=47386b7c539bf2706b7ce52dc9341681"
+-SRC_URI[sha256sum] = "20febc849a1f858e6a57a7d47b323fe9e727c579ddd526d317ad8831748a66a8"
++SRC_URI[sha256sum] = "4255bff37b01562b8e6adcf9db256029765985b0790c5ff76bbe1837edcd53ea"
  
--SRC_URI[sha256sum] = "7702fb373b69da2960b86134b6a9ec6fa0b949a01756fec00a4a6a43575c8361"
-+SRC_URI[sha256sum] = "1be2dea737cde25fe06621f84945e63eb71259e0c43e9f8f5da482dab1a7be92"
- 
- inherit pkgconfig ptest waf-samba
+ inherit python_setuptools_build_meta pypi
  
 -- 
 2.43.0
