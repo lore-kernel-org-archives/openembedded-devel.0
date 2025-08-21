@@ -1,110 +1,93 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C3EDCA0EDC
-	for <webhook@archiver.kernel.org>; Wed, 20 Aug 2025 19:00:05 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web11.5389.1755716401083580683
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B22F2CA0EFA
+	for <webhook@archiver.kernel.org>; Thu, 21 Aug 2025 07:13:49 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web11.3565.1755760424000515234
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Aug 2025 12:00:01 -0700
+ Thu, 21 Aug 2025 00:13:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eDRrvN/v;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-45a1b004a31so1377135e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 12:00:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nPODQaAY;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-24457fe9704so6021435ad.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 00:13:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755716399; x=1756321199; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=lmolN0pvP5s93t0WZf7RrMGzVE4AtZBbSi/XkK09dQs=;
-        b=eDRrvN/vk/NSQvfXOQq0GAFr3ujkE5Wm/sV5IZmZCGBkpG5yS+1ESq+pwederR5S6X
-         5x1MBc+ou4B1PMYmUUz+CN1NMoilJ9FUg6KoWO8QeZ7iZe4v0B+g1hKa32XLeHF5z/ZD
-         z8RHV5nYZP634ZBaaJauMwF5/YxRkvEiwE8Hjqa7HCzdQBA1Ls4kFrjZC5i1GpM93fkG
-         msA0+hVQQgtsOP1HcurNMuEwTWyNmzzWNAdmE1WTMAPfwrnrEn8S7aZGUMQ4yEDpAQ0j
-         T9okizcfyoXRSLEIrxZJ6jHqLYAHNpZ+Efs8Ush3fd7nZ7UvdjiKa7lNf3SZoYIARIm9
-         /X6g==
+        d=gmail.com; s=20230601; t=1755760423; x=1756365223; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=oGwjMzkgSpdyo6r++bgFR8PjMeJuAWRb4iSWMXm7UiQ=;
+        b=nPODQaAYr7S9ukfSI+N87/VpYJ2xKASht0DCnNJGjmRCfPVsEypGoHQTniI8ZJmT0s
+         BueenJaWx5GJCBh+1bX1w55GWBF+PcphYTiSqwlclLrHrfNHcUC6dtMhyw7tRgPvd5Uu
+         iKo9ZpmH708CDOK2y2yhnpq9WQ3p0pyGrREEDx+0R7z1/KTzuJhWllwn6XWbCNfPIyvJ
+         c4p3NG/vcA9bc/eRp2/II0I9bcgj3LOwHJH39/aGvFmpPFPyVAV6F/6Zw4HEs+CLMIQl
+         AjptbE+9gm1Nf5IuUj8GelJ6FUCu6V3y+t31icn7L0nGxPkQ/k92IBvmMDw6bcq0w7ia
+         mdcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755716399; x=1756321199;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=lmolN0pvP5s93t0WZf7RrMGzVE4AtZBbSi/XkK09dQs=;
-        b=jDSyGwCDp9Yt7qS0cGQVTXQBtdBNQKS4DgEl2nQxL9zmidw+TmY6fn7b6abkmbhNP3
-         diBCF/ICpuXkY3QiELihoAeY9K5os/2S8MqEX0FlfNNbeAMvcxY8VWqTTzG0HIUmW/xy
-         xGJh2NlDUcbKOIf9Xwq9KsjQNItwxPp1i6DxLEfRLoa4QZB1hj5sBiRPEZIpbd6tBuDi
-         ihJDIRKM1LxMch2MyR8IUGumiIIhvInbFE381JmnplmWe4hsCTvdnqps/WU2jcTVN2Hu
-         A/uil49vYs2cUtRb4FIjyBpO09+jxr+YYilqd6AZiwfbWzJ1k2ETiB8hu/JCb7xwGfHX
-         KIvQ==
-X-Gm-Message-State: AOJu0YwWq6TnrVaM5hirsins3xE4jbWRsi1U5bQNo6Di1RCWQqXeTotG
-	f6pNmItnt1AMvHNYmL5txAq4sSHnRXOkqv2IS49p/fqKICHht0px5I190BTsxQ==
-X-Gm-Gg: ASbGncsh7ZmhBCRNp77fjSAfUv+oivhkgzRYFnMr0yZUmuxwMU/PES6Fj/zgmOIJ9Vp
-	iaLg5ieK3WCaFr33ad1TqtB1fPWRVdVW4QIDEexzqi8YHFiPXW99JFLFG3i6+LX921mVHo+mfyx
-	nO1y30PyfWC6yksvFVjqCxUx43G4t6mDA9s49MhoWhv2cxHth1eZ4eIblqzADEfDW8JfOzgHr4Z
-	YJCwzI4qeXUDqR2ogvZvoJ1WS2iw2fhQqgkYN0cAmViYcHdzELTvni5Y6+cKhSnhEgn3b0fWqJx
-	YDSUE/E/ISDm3BQ93Zl0bC1Il45ppPEEXswn0ko2vgmW0quaHPmV+zVAxoOKW/7i6X2jkLcqit7
-	3h6qT0aXtEGLwdMfGQ83QIxHE+oh2Hztq8Z1UA+YrcNG7AH+wQJilWmvDlBywCZfw3RYB5GdpR5
-	Yplx1UKBQzAdHcA4/OsUmJDI3FOw0k4vLrMhMEHyAkwdKOj1QL
-X-Google-Smtp-Source: AGHT+IGYuBNSxtm50moE555bCc3yw8YWSPEDn4as5zDEEQtGXJIAB8OJiyCPwu3xRAHxcSy5nI6X6g==
-X-Received: by 2002:a5d:5d09:0:b0:3b7:901c:92ee with SMTP id ffacd0b85a97d-3c32eccf05fmr2967255f8f.58.1755716399084;
-        Wed, 20 Aug 2025 11:59:59 -0700 (PDT)
-Received: from localhost.localdomain (2a02-1812-512-2c00-5cba-763c-2ed2-f98a.ip6.access.telenet.be. [2a02:1812:512:2c00:5cba:763c:2ed2:f98a])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45b47c310a6sm45985945e9.8.2025.08.20.11.59.58
+        d=1e100.net; s=20230601; t=1755760423; x=1756365223;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=oGwjMzkgSpdyo6r++bgFR8PjMeJuAWRb4iSWMXm7UiQ=;
+        b=XiliuXdA0trchEvKA2ViIgfxpKAzRKHSiYH6KaG+vh2LTmJVQz+SqSk0Z4slY6Qli6
+         v5ObmIeN8s6l8XfUPLvx2Oda4/NEvcJGDOZqboO0k2MQs6uhkVqw7XbVuwfVLiFZqsym
+         e7qeHEGdPXBX1XxvacvyL4K8mTcjwRc8hQD5aV/585H8c6y4HuKa/CNbUY8UYfw1Y8Kh
+         x6Jw5NWdUrIZZ2P8lmuIQXmgol6+AO6Yp32J4ZzFk7Qh1OFoyoELEoUj3dtwQMciqgYG
+         AiLCFkhK1lAV0/QllXxzMoab2a6h+uiZKpLxk2WEaiXZhwIlPDSbrs+fd3TGdux8QJto
+         +DNQ==
+X-Gm-Message-State: AOJu0YwhdeS/i5SeSIXmSJJJkYwLoY3x+OzzYf7WuKJBaWfPH56V7dvZ
+	kgqeqLo4vjZ2EBG/l8bEksk7//mGALj3SDQ0UdIorawiADzsYHT/joGsXyqjSH6w
+X-Gm-Gg: ASbGnctjYuzZkUypB3H5VBL3Xdp+h3c3DgUwvqLf6h9nDpGEI4NUE4QbQMsO2b38xhf
+	5+HUpaBeeL1yVLhbcQZkMtbISC+P85PX5fKbtvpBz28A+6jVLwqH6B2GvC85hGCk3qlCxxllUBs
+	pI8pOWlLoiOn4CbJtmL2mknUtUZAJMMaV9xQbQgye2EgenJIEcsvlK2n2p3mp/4bmP/fpOHiLAL
+	OxZ9beBWMNQaU3Su7XlwLpd5/yPGRUumO4h0VkVK5DnRiJHaNMd40H7GDbdVFhyG0mXj/rA8Ne7
+	YuFpsVfBiZKTy5P54iqlqmf4Ei0mOQ65OIMceZ6t01Ne3j0NkJh4g5m+/KGFurzsOBeVIvXERoE
+	aVwzYB4jYKX2rWqnLqrCMAw==
+X-Google-Smtp-Source: AGHT+IEoOIn/vTOEFyLpb7+uc0pdhpqpGaPKBD7AOC6jRvKNXHdp18ui6Xm+Cx6xWOSA3pcVXkQ2lA==
+X-Received: by 2002:a17:902:e887:b0:234:8eeb:d834 with SMTP id d9443c01a7336-245fec05df4mr20820015ad.16.1755760423001;
+        Thu, 21 Aug 2025 00:13:43 -0700 (PDT)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::adc2])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-245ed33c5d7sm46464735ad.10.2025.08.21.00.13.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Aug 2025 11:59:58 -0700 (PDT)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+        Thu, 21 Aug 2025 00:13:42 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-oe][PATCH] freeglut: changed SRC_URI to github + added UPSTREAM_CHECK
-Date: Wed, 20 Aug 2025 20:59:54 +0200
-Message-Id: <20250820185954.9559-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.39.5
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/2] re2: Link with libatomic on riscv32
+Date: Thu, 21 Aug 2025 00:13:35 -0700
+Message-ID: <20250821071335.814796-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250821071335.814796-1-raj.khem@gmail.com>
+References: <20250821071335.814796-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Aug 2025 19:00:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119046
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 07:13:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119048
 
-- added HOMEPAGE
-- downloads are now from github
-  "Stable releases are available on our releases page on github, where you can find more information about each release. All releases are also mirrored on the old downloads page on sourceforge."
-  @see: https://freeglut.sourceforge.net/
-- fixed 'devtool check-upgrade-status'
+64-bit builtins for atomics are not provided by compiler
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/re2/re2_2024.03.01.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb b/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-index 069f0f43f6..13f3d111fe 100644
---- a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-+++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-@@ -1,9 +1,10 @@
- DESCRIPTION = "FreeGLUT is a free-software/open-source alternative to the OpenGL \
-                Utility Toolkit (GLUT) library"
-+HOMEPAGE = "https://freeglut.sourceforge.net"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=89c0b58a3e01ce3d8254c9f59e78adfb"
+diff --git a/meta-oe/recipes-support/re2/re2_2024.03.01.bb b/meta-oe/recipes-support/re2/re2_2024.03.01.bb
+index 55a834fa42..5b7b241a25 100644
+--- a/meta-oe/recipes-support/re2/re2_2024.03.01.bb
++++ b/meta-oe/recipes-support/re2/re2_2024.03.01.bb
+@@ -20,6 +20,9 @@ EXTRA_OECMAKE += " \
+ 	-DBUILD_SHARED_LIBS=ON \
+ 	${@bb.utils.contains('PTEST_ENABLED', '1', '-DRE2_BUILD_TESTING=ON', '-DRE2_BUILD_TESTING=OFF', d)} \
+ "
++# | riscv32-yoe-linux-ld.lld: error: undefined reference: __atomic_load_8
++# | >>> referenced by libtesting.so (disallowed by --no-allow-shlib-undefined)
++LDFLAGS:append:riscv32 = " -latomic"
  
--SRC_URI = "https://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
-+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz"
- SRC_URI[sha256sum] = "3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6f3eaec"
- 
- inherit cmake features_check pkgconfig
-@@ -26,6 +27,9 @@ PROVIDES += "mesa-glut"
- 
- DEPENDS = "virtual/libgl libxi"
- 
-+UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
-+UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
-+
- do_install:append() {
-     # Remove buildpaths
-     sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/FreeGLUT/FreeGLUTTargets.cmake
--- 
-2.39.5
-
+ do_install_ptest () {
+     cp -r ${B}/*_test ${D}${PTEST_PATH}
 
