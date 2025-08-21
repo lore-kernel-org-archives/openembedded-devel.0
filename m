@@ -2,62 +2,62 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88176CA0FEE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AECFFCA0FF1
 	for <webhook@archiver.kernel.org>; Thu, 21 Aug 2025 09:00:20 +0000 (UTC)
-Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
- by mx.groups.io with SMTP id smtpd.web10.4682.1755766817231402530
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.web10.4684.1755766819926677313
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Aug 2025 02:00:17 -0700
+ Thu, 21 Aug 2025 02:00:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=A0g1sAur;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=VFjxU0sH;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1755766817; x=1787302817;
+  t=1755766820; x=1787302820;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=xFsD7LxxG1VF4SOQz2f15JZY60i+Ra5kt9BcgzvKrdg=;
-  b=A0g1sAur4hbt+veewAvaacePBw0hr8MFnL92rkodeGA0/6ooV4luVm7w
-   3SwiOQxkq+RuVk3PwyAINPR7mR9KQ0yg+b5mGeWIKyuz8J8X4l53MYetV
-   bF/baN+x0tgc05xmP+IYYQ4KVr/60/JE+q9daJCpV+DBtNeKscMc+1Ugv
-   Ulnr4w0u+TQ26KVghnFHDPySRo5O/0yjo6VqtllC5ygIw6o5/441M9aTR
-   1G9Q2YSTBjlyoiMbT1kXPBolpGYKQbcahc+hZ2GAm/CP3DeyP+ZFR4rap
-   Q1IUMXvZDm4YacNQCDhGM8Sv/5ecz1NBy7CH5rVo+ssIZ9UWcODXTE7ya
+  bh=LL4lxDwNPgQU6OWbGYhsoC1ZXch50EpzTk/3nrPumG0=;
+  b=VFjxU0sHrPBpsdc3aP5RgMRH0QY9wT4d4BYxgW0Ok4h3KlHxHEFUvPNA
+   UGIU18FLhw3QFMiGrGxBswj+31RkAUz5LnrZAsfuGy8YnJZkZWDxJyWnw
+   K3X/TpNvp3RUXPDgZgBxIQ0c9dL0b5dfJm10O94kPBc7qUSG72rc84LlD
+   +eR4H1UPbXfQ8+IZ6pTpeXigqGDahSD20wpV71fWzjduiN9DJrS3t6odO
+   6n1x+ZLb/Rv2v99Qo03JQXl7h+gMvOzQTkOc/tF/hKGuMr0agQ1oKbUUm
+   8aSwnShabFmz+N71g/pFPBnL4ozGCzQvPJG3duNGqh07H6JXr6ZtFXmUe
    Q==;
-X-CSE-ConnectionGUID: wbdKd20iSnOweAtVMtrc9w==
-X-CSE-MsgGUID: h7jvSdKVQImVv/6cep1pGg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11527"; a="198116065"
+X-CSE-ConnectionGUID: zi+JWm1aQd+GcXFnJ21awA==
+X-CSE-MsgGUID: KE0C1G+bSvygEYIe6tAhqg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11527"; a="209487510"
 X-IronPort-AV: E=Sophos;i="6.17,306,1747666800"; 
-   d="scan'208";a="198116065"
-Received: from unknown (HELO az2uksmgr3.o.css.fujitsu.com) ([52.151.125.19])
-  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Aug 2025 18:00:15 +0900
-Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
+   d="scan'208";a="209487510"
+Received: from unknown (HELO az2uksmgr1.o.css.fujitsu.com) ([52.151.125.19])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Aug 2025 18:00:19 +0900
+Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr3.o.css.fujitsu.com (Postfix) with ESMTPS id 649B31002B9D
-	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:15 +0000 (UTC)
-Received: from az2nlsmom3.fujitsu.com (az2nlsmom3.o.css.fujitsu.com [10.150.26.199])
+	by az2uksmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 694A51C1C720
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:18 +0000 (UTC)
+Received: from az2nlsmom1.o.css.fujitsu.com (az2nlsmom1.o.css.fujitsu.com [10.150.26.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 143DDC08A59
-	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:15 +0000 (UTC)
+	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id 23190140B054
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:18 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by az2nlsmom3.fujitsu.com (Postfix) with ESMTPS id 5AE9B10001A7
-	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:12 +0000 (UTC)
+	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTPS id D1958826FE6
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:15 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.161.187])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 02B0D1A008F;
-	Thu, 21 Aug 2025 17:00:07 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id EB5461A0069;
+	Thu, 21 Aug 2025 17:00:11 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 12/21] python3-pymongo: upgrade 4.13.2 -> 4.14.0
-Date: Thu, 21 Aug 2025 16:59:45 +0800
-Message-ID: <20250821085954.2056-12-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 20/21] python3-yamlloader: upgrade 1.5.1 -> 1.5.2
+Date: Thu, 21 Aug 2025 16:59:53 +0800
+Message-ID: <20250821085954.2056-20-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250821085954.2056-1-wangmy@fujitsu.com>
 References: <20250821085954.2056-1-wangmy@fujitsu.com>
@@ -67,29 +67,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119065
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119070
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+ deps: add PyYaml module as runtime requirement
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-pymongo_4.13.2.bb => python3-pymongo_4.14.0.bb}    | 2 +-
+ ...{python3-yamlloader_1.5.1.bb => python3-yamlloader_1.5.2.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pymongo_4.13.2.bb => python3-pymongo_4.14.0.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-yamlloader_1.5.1.bb => python3-yamlloader_1.5.2.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymongo_4.13.2.bb b/meta-python/recipes-devtools/python/python3-pymongo_4.14.0.bb
-similarity index 91%
-rename from meta-python/recipes-devtools/python/python3-pymongo_4.13.2.bb
-rename to meta-python/recipes-devtools/python/python3-pymongo_4.14.0.bb
-index 4a888cbbf2..cc6b64ed38 100644
---- a/meta-python/recipes-devtools/python/python3-pymongo_4.13.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymongo_4.14.0.bb
-@@ -8,7 +8,7 @@ HOMEPAGE = "https://github.com/mongodb/mongo-python-driver"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-python/recipes-devtools/python/python3-yamlloader_1.5.1.bb b/meta-python/recipes-devtools/python/python3-yamlloader_1.5.2.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-yamlloader_1.5.1.bb
+rename to meta-python/recipes-devtools/python/python3-yamlloader_1.5.2.bb
+index 11d7cf96fb..48fadb476e 100644
+--- a/meta-python/recipes-devtools/python/python3-yamlloader_1.5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-yamlloader_1.5.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/Phynix/yamlloader"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=6831ef36faa29329bce2420c5356f97e"
  
--SRC_URI[sha256sum] = "0f64c6469c2362962e6ce97258ae1391abba1566a953a492562d2924b44815c2"
-+SRC_URI[sha256sum] = "15674e3fddce78cf134fc4e55f90abf1608a48430130cd35efdf3802fd47a1d1"
+-SRC_URI[sha256sum] = "8dece19b050acb1c6a8ca14aa30793388f9be154f734b826541f9a1828d41cec"
++SRC_URI[sha256sum] = "c10ac1321a626b1ca8b09d3f3afe9855b818391c59992a76b65e4a2d95eac41b"
  
  inherit pypi python_hatchling
  
