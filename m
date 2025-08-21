@@ -1,126 +1,97 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0D51CA0EFF
-	for <webhook@archiver.kernel.org>; Thu, 21 Aug 2025 11:41:31 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web10.7253.1755776481408303327
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79A5BCA0EEB
+	for <webhook@archiver.kernel.org>; Thu, 21 Aug 2025 15:59:44 +0000 (UTC)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web10.149.1755791973749198143
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Aug 2025 04:41:21 -0700
+ Thu, 21 Aug 2025 08:59:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=WPgkYv3G;
- spf=pass (domain: mvista.com, ip: 209.85.214.177, mailfrom: vanusuri@mvista.com)
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2460757107bso4661725ad.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 04:41:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WGToQZmS;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-afcb78d5e74so176311666b.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 08:59:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1755776480; x=1756381280; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1755791972; x=1756396772; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zQMt/BZSdyNjG9/BlINodz2K2BDZJ3umH5GzPHxBrSg=;
-        b=WPgkYv3G1om+lHz5jB+v3+WmZ2bWxFOKP2WOgTPb5aIfwzy96oFwYK942g/k19dWyC
-         NnmKqAo4MjujkVig7LlftPdVsJn+Ft7n0Tk8WTX3MICDNiAM3rQIQxYD5GfCqRqqFK+A
-         0eN199rRBKHgt+6v4FRP3/eqowEaluwil5y94=
+        bh=fs+oWn4AmN2152yPvnwZfxnS6kaxj8Mfh7S2LNTMlOQ=;
+        b=WGToQZmSbba6o8H6DCEVQQusODJ8dL2+CUd789TNAELbfPvbXFk1VyqyU6pl60Adp1
+         osZUZ9foEqqc65ut+liZCmgYTeTQPvEaWaGZklxKaXa6ZenpShlC51AjCg0JK1mho0LS
+         vczqnojGZgtg03ALZSqqtoMQus7H7JzbNuJtVaJ8TC9e2/sB6HIj3qK9g84EUnYd4dRs
+         9M67wUWMUkAdGCbO1MGtv29obFI2RK4Y2QRFspl6mnl4cznum2Gzx48fQqwEF1GySE2z
+         XBVy0hXfaDrxWxfKLG6udTguY6w8yTCe+AQhxJoP+WFG9J0CChbF5MVb4hHn5XVQjB/r
+         NGyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755776480; x=1756381280;
+        d=1e100.net; s=20230601; t=1755791972; x=1756396772;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=zQMt/BZSdyNjG9/BlINodz2K2BDZJ3umH5GzPHxBrSg=;
-        b=wpVncSHdqWo6RDirSd4G5na75w149ZB9Ppwaij1TTgYYhfIrwgTIWP3v77CjUmlGaN
-         vdLSTs0bR+E2tbpF+Q0QEqre0HcBNeQZLCrKAUNSBPvgz3dhcIWD1E6qsHmd2W4eq4nS
-         Tp/efy0RYqifZAgLb3XIpimA9jcQSXtxO69Y3JQmBKLtXNzybs97RnDhpx9enAT7L3rI
-         RCHZbnne8MhJbOlc8Pc4O4jqBGn+A8JwS5bdTLeo+WD2DgB03aXqqNf+pQx+uNsIAEoW
-         aPoygod3rogKf/tNjS7Fczs846tX9VG4g42x67QEYs5jF15+zIGcIIJj21izM2fEC35E
-         qRXw==
-X-Gm-Message-State: AOJu0YwNLUEWdPKLMT/TL6UOd4D1OomNNWCWS9rfr4DVzs65sGfVcja9
-	gV9npSvb2KD1dAbRpn1OlmeLYYbmwbitCL93yXaBsycnTgRBHqwOroZUrdfP0Ekf71PBdL9z4Ck
-	D0DJp87M=
-X-Gm-Gg: ASbGncvS4tX5Re6m4kk8nEndMKyU5grAHOw52rpy5imCQfR7lJxkwVLTcEbdKHPLxDj
-	nLXDGe6dSpR1XwcMnUqwFh4ajVRombjUUeNEtxgQdu0CxzAGVzsIWtqsH+OqFOmi8pdcVAh8Gh9
-	neQ/NYL8rJh6RrhndZZy1DE8SukIEr5grEwhQNCKIvBnZ9CBJ3+y7TXAobmRzJdXYPqh6ffTmoc
-	hmGLB4DZ7xlz8BxQ89MlAvgWSFClnZVxVJmVEiO9wfmhEl6yqw6k6rxA/ZHGW6CLKcIhqLkUWH0
-	5kFqhvhdXFpolCPUvu9WL+7Gb6/0YrqYQBdDs3KhgHDBBX+7IIebpc44T7VH8+GREcH2Izu7N/W
-	DCa++yxQfXKlQzTQsEP4jKrf624HwcT30JA4o7QDldrU=
-X-Google-Smtp-Source: AGHT+IESfVmNU5wWyv6Ibxa+RUZw5QZH0oDNj+OEyEABMZvmxFoX96dRpL78DMx4dCBr05cVVBwwtA==
-X-Received: by 2002:a17:902:f550:b0:242:bba6:fc85 with SMTP id d9443c01a7336-245ff86991emr30161685ad.56.1755776480305;
-        Thu, 21 Aug 2025 04:41:20 -0700 (PDT)
-Received: from MVIN00020.mvista.com ([49.207.224.56])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-245ed35fc9asm53489285ad.47.2025.08.21.04.41.16
+        bh=fs+oWn4AmN2152yPvnwZfxnS6kaxj8Mfh7S2LNTMlOQ=;
+        b=bqKCLbjhSOzbUC9nzvzDz+mAqxm3ZqVeUhRtbxmKc7gwyMcAKpSxTK4EEswFVKB7Mr
+         oElnqboYXWIOobIaAy1/TFsxFq5bcv8u/fNM8UjD7zLGZRMZdaAWqQeDX1KPLwcEzdPz
+         R0jC3JqYXpQNmbe1pOwRzZarOjez83U3j8X6mTB9juMidAGM+Wl/wfxLjLKgJ6+Z0K1T
+         fvnIzOiDQQ/nZxlMPpOByvKBCxTkqVOjz4XY8CJ9GZY516TnW9DpAmbiWCqqT0DeA8ah
+         c5d8/O5KTlmwx/TvZmQ450PwYKDfjBD0LCfuiIYlGB+O6/OB+TfU/QUazCEe/xtcAih7
+         /cPg==
+X-Gm-Message-State: AOJu0Yx7ez5kENlrxJNw6MJAjJENCuzqxk7j3k9H7wdb6O9WI52PFrOA
+	trT/BQbxuZiuks+VkytWyZHrwhgtR3/O104Xpz0VI4wji6M4wVuZyKeXWHMndQ==
+X-Gm-Gg: ASbGncs1lYnVlWYQBx+0HftLgKbMzsNXZk9WVFlXiQINMkRXO/XCzYTQlXCBtIG5VRI
+	YDCo4dpsPwIxUl475pRiY2wPZRfTlSyaoFlQP2k+GDE1z4MDen5PJsc/Eggv7MoImb6ly43jI0x
+	RTkvx8A5EoS8r55HjOdnUWxVIMLIQ4+J7IbK+fEa6WhsvEOj8WN0KwDr1Kr184CqdSFBD07kRPu
+	EVSYuwY8TS7cxo2gXNGIFQyltRJcj20ErC2xY3DGoDLz6jQZq3X/yX427EcbTOR3Zk+SEb9DHVD
+	lApYwToT3jjD0GiG7YN0M2b/lkID6Ma7BQbJmiX6V6CU03z44tjVW4Cf7He5yIOWacltKNj+oMk
+	KL1IEmUHNYcjTmBNDhpayvG2Ma/SQ+pnG4qCgWFb18fEEix2n7iPuJpBm
+X-Google-Smtp-Source: AGHT+IGwVE9t0njh96P2EgaJyq6sBQaxLvtjc+6ybFRc2UouIUfgk8RT7uHw6cNcfIT+lJ3Llibs/w==
+X-Received: by 2002:a17:907:7f21:b0:ade:7c6:498a with SMTP id a640c23a62f3a-afe079db247mr290741666b.10.1755791971842;
+        Thu, 21 Aug 2025 08:59:31 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-afded478b13sm421812566b.71.2025.08.21.08.59.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Aug 2025 04:41:19 -0700 (PDT)
-From: vanusuri@mvista.com
+        Thu, 21 Aug 2025 08:59:31 -0700 (PDT)
+From: martin.jansa@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][kirkstone][PATCH] postgresql: upgrade 14.18 -> 14.19
-Date: Thu, 21 Aug 2025 17:11:03 +0530
-Message-Id: <20250821114103.82623-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Armin Kuster <akuster808@gmail.com>,
+	Alexandre Truong <alexandre.truong@smile.fr>,
+	Yoann Congal <yoann.congal@smile.fr>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH] hunspell-dictionaries: switch branch from master to main
+Date: Thu, 21 Aug 2025 17:59:26 +0200
+Message-ID: <20250821155926.1312052-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 11:41:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119075
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 15:59:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119076
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+From: Alexandre Truong <alexandre.truong@smile.fr>
 
-Includes fix for CVE-2025-8713, CVE-2025-8714, CVE-2025-8715
+The repository of dictionaries doesn't have a branch named master. So, the
+branch is switched to main.
 
-License-Update: Align organization wording in copyright statement
-
-Changelog:
-https://www.postgresql.org/docs/release/14.19/
-
-0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-refreshed for 14.19
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
+Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...0001-configure.ac-bypass-autoconf-2.69-version-check.patch | 2 +-
- .../postgresql/{postgresql_14.18.bb => postgresql_14.19.bb}   | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_14.18.bb => postgresql_14.19.bb} (71%)
+ meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-index 2396be2df9..2eb1deec07 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-@@ -18,7 +18,7 @@ index bbbb204..0919d2b 100644
- +++ b/configure.ac
- @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
-  
-- AC_INIT([PostgreSQL], [14.18], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-+ AC_INIT([PostgreSQL], [14.19], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-  
- -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
- -Untested combinations of 'autoconf' and PostgreSQL versions are not
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.18.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.19.bb
-similarity index 71%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_14.18.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_14.19.bb
-index c9616c21ff..1d8ab90c25 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_14.18.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.19.bb
-@@ -1,6 +1,6 @@
- require postgresql.inc
+diff --git a/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb b/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
+index 0ec426afb9..12231443a4 100644
+--- a/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
++++ b/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
+@@ -135,7 +135,7 @@ RDEPENDS:${PN} = "hunspell"
  
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d5dd73e90ee1a572679460ee67233fcc"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=08b6032a749e67f6e3de84ea8e466933"
+ PV = "0.0.0+git"
+ SRCREV = "820a65e539e34a3a8c2a855d2450b84745c624ee"
+-SRC_URI = "git://github.com/wooorm/dictionaries.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/wooorm/dictionaries.git;branch=main;protocol=https"
  
- SRC_URI += "\
-    file://not-check-libperl.patch \
-@@ -11,7 +11,7 @@ SRC_URI += "\
-    file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
- "
+ S = "${WORKDIR}/git"
  
--SRC_URI[sha256sum] = "83ab29d6bfc3dc58b2ed3c664114fdfbeb6a0450c4b8d7fa69aee91e3ca14f8e"
-+SRC_URI[sha256sum] = "727e9e334bc1a31940df808259f69fe47a59f6d42174b22ae62d67fe7a01ad80"
- 
- CVE_CHECK_IGNORE += "\
-    CVE-2017-8806 \
--- 
-2.25.1
-
 
