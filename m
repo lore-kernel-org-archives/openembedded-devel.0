@@ -2,62 +2,62 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A8A8CA0FE5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A853CA0EF8
 	for <webhook@archiver.kernel.org>; Thu, 21 Aug 2025 09:00:20 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web11.4724.1755766814711947306
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.web10.4681.1755766815928176690
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 21 Aug 2025 02:00:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=myTrR7EC;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=EHx1RwKR;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1755766815; x=1787302815;
+  t=1755766817; x=1787302817;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=T9nGEn2LT5z+MR6druYzYzjznLJam1Wr1AbWae6WVM4=;
-  b=myTrR7ECZsy6fNG/oSVovaefkSYgOxbsrCaNgENVkNNwi4xI9mwwT9Ua
-   7fUXtUUMMZ8FAIRVppLvcoiWCVYLeoviz4EjarwOOaFwz9eQWctRMITow
-   /MCv6I8sQMRsyTNtqd6LnPHU402TrzOG+n0NKfFj57v/7u18gwCa0psxG
-   TJBxd+1EwPHBgAoEAzMcV3dpaqp6jyjCZHg1nC4OOy8FjBZBPMxycrCC7
-   35+oUFWWkJKqmmJ1tzXNamV4uVsc6ULAj61hfwLeSTtyduCTTqd03OJ9U
-   fQCTAqWHTes8jnewUzbHFWAVGjGwUFO33/G+NoItUb9Gxm1fhu1jt/Vs+
-   Q==;
-X-CSE-ConnectionGUID: mlkGG6k/SvO9g8gycL7eYQ==
-X-CSE-MsgGUID: hGFFoo+rS6urB/B/Xlb3wA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11527"; a="210706590"
+  bh=aVG8o+D4WjJhxG76QEpL4E6i4VhQocUHKkU5kQccYXk=;
+  b=EHx1RwKRPo0QqNpBFUvNNhOf0Fx6WlRZNiDeX5wUNLKpIAZPB7xkj0ac
+   nLOPp9g0FtmJffLKodrSol8cEWa4tVK53AR3VTAzK600raJqAhwcY9QWk
+   1Ynlzj+wR0b01Bis7Pkq+Q5vqNKgyrL+u3Ye8QW4ojIHTyDTaFRsL3wuy
+   8vxq4kYvL84squw89mJWLwBDbDJGRdFd3yZQyOVyWspqqsy8aw7XusxH0
+   dfphwHrU0V7HnYbOKQploEePvrIbHcohV2j2W5mixg7ugYHN3svsJ3HZC
+   aSR812iOt0CkVQlewIiaS2JqU857nPFlgeebHSQlT8KY1G72OIWaqfKBE
+   A==;
+X-CSE-ConnectionGUID: pBMJwxH7TTqTwZ40Jfl3Xg==
+X-CSE-MsgGUID: JjOarD4mQO23nHG/upnbwg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11527"; a="210153567"
 X-IronPort-AV: E=Sophos;i="6.17,306,1747666800"; 
-   d="scan'208";a="210706590"
-Received: from unknown (HELO az2uksmgr1.o.css.fujitsu.com) ([52.151.125.128])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Aug 2025 18:00:15 +0900
+   d="scan'208";a="210153567"
+Received: from unknown (HELO az2uksmgr3.o.css.fujitsu.com) ([52.151.125.128])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Aug 2025 18:00:15 +0900
 Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 3101E1C1C725
-	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:15 +0000 (UTC)
-Received: from az2uksmom1.o.css.fujitsu.com (az2uksmom1.o.css.fujitsu.com [10.151.22.202])
+	by az2uksmgr3.o.css.fujitsu.com (Postfix) with ESMTPS id 3B5FC1002B9D
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:14 +0000 (UTC)
+Received: from az2nlsmom1.o.css.fujitsu.com (az2nlsmom1.o.css.fujitsu.com [10.150.26.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id E0155140B055
-	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:14 +0000 (UTC)
+	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id E9B5B140B05A
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:13 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTPS id C12FE1802E2D
-	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:12 +0000 (UTC)
+	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTPS id 9D32F826FC6
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:11 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.161.187])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id C1E531A006C;
-	Thu, 21 Aug 2025 17:00:08 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 982CA1A008D;
+	Thu, 21 Aug 2025 17:00:07 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 14/21] python3-pytest-sugar: upgrade 1.0.0 -> 1.1.0
-Date: Thu, 21 Aug 2025 16:59:47 +0800
-Message-ID: <20250821085954.2056-14-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 11/21] python3-pymodbus: upgrade 3.10.0 -> 3.11.1
+Date: Thu, 21 Aug 2025 16:59:44 +0800
+Message-ID: <20250821085954.2056-11-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250821085954.2056-1-wangmy@fujitsu.com>
 References: <20250821085954.2056-1-wangmy@fujitsu.com>
@@ -67,37 +67,55 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 21 Aug 2025 09:00:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119061
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119062
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-License-Update: Clarify license as BSD 3-Clause License
+Changelog:
+=============
+- Correct bit handling (each byte is LSB->MSB).
+- read_input_registers docstring change count to regs
+- Add dev_id/tid check in clients
+- Auto debug in case of an error.
+- Remove duplicate log lines.
+- Remove unused callback in ServerRequestHandler
+- test on Python 3.14
+- Validate address in all datastores.
+- Use asyncio.Event to deterministically ensure simulator start
+- Ignore lockfile
+- Link api_changes/changelog to README.
+- Add note about semver.org.
+- Datastore, add typing to set/get.
+- Move exception codes to constants.
+- Move ExceptionResponse to proper file.
+- make base frame signature match subclasses
+- Switch from venv+pip to uv
+- Cleanup CI configuration
+- Simplify code flow for broadcast requests
+- Fix serial_forwarder.py from examples/contrib
+- Remove discord.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...n3-pytest-sugar_1.0.0.bb => python3-pytest-sugar_1.1.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pytest-sugar_1.0.0.bb => python3-pytest-sugar_1.1.0.bb} (81%)
+ .../{python3-pymodbus_3.10.0.bb => python3-pymodbus_3.11.1.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pymodbus_3.10.0.bb => python3-pymodbus_3.11.1.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-sugar_1.0.0.bb b/meta-python/recipes-devtools/python/python3-pytest-sugar_1.1.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-pytest-sugar_1.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-pytest-sugar_1.1.0.bb
-index 9ce29aef7e..d411848545 100644
---- a/meta-python/recipes-devtools/python/python3-pytest-sugar_1.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest-sugar_1.1.0.bb
-@@ -1,10 +1,10 @@
- SUMMARY = "pytest-sugar is a plugin for pytest that changes the default look and feel of pytest (e.g. progressbar, show tests that fail instantly)."
- HOMEPAGE = "https://github.com/Teemu/pytest-sugar"
+diff --git a/meta-python/recipes-devtools/python/python3-pymodbus_3.10.0.bb b/meta-python/recipes-devtools/python/python3-pymodbus_3.11.1.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-pymodbus_3.10.0.bb
+rename to meta-python/recipes-devtools/python/python3-pymodbus_3.11.1.bb
+index 17846ece00..7641c1ac5b 100644
+--- a/meta-python/recipes-devtools/python/python3-pymodbus_3.10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pymodbus_3.11.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/riptideio/pymodbus/"
  LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=dfc31f3b2a6a301239a1ba99b71a9459"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e485b36215d1a038821b3e51bd189197"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=12a490c6cffa2e76a6df8aa1fa29e183"
  
- SRC_URI += "file://run-ptest"
--SRC_URI[sha256sum] = "6422e83258f5b0c04ce7c632176c7732cab5fdb909cb39cca5c9139f81276c0a"
-+SRC_URI[sha256sum] = "53138645cabc311a677bb09c307eab41681a563e498318cd2a0d7cd184837af4"
+-SRC_URI[sha256sum] = "5b7ce71f9da2fabd1f8484de564a7e2c56085e94e3d4ee2a0fbc14c59dfa9da7"
++SRC_URI[sha256sum] = "e738178d0ac5063f095d61be37422ac4105faab19fbacea9eb5a574e8e2b3122"
  
- inherit pypi python_poetry_core ptest-python-pytest
+ inherit pypi python_setuptools_build_meta
  
 -- 
 2.43.0
