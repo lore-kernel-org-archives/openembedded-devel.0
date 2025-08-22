@@ -2,36 +2,36 @@ Return-Path: <youngseok1.jeong@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA7B6CA0EEB
-	for <webhook@archiver.kernel.org>; Fri, 22 Aug 2025 06:26:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC301CA0EEB
+	for <webhook@archiver.kernel.org>; Fri, 22 Aug 2025 06:32:01 +0000 (UTC)
 Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.52])
- by mx.groups.io with SMTP id smtpd.web11.3284.1755843999177907480
+ by mx.groups.io with SMTP id smtpd.web10.3507.1755844314585471115
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Aug 2025 23:26:39 -0700
+ Thu, 21 Aug 2025 23:31:55 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: youngseok1.jeong@lge.com)
-Received: from unknown (HELO lgemrelse6q.lge.com) (156.147.1.121)
-	by 156.147.23.52 with ESMTP; 22 Aug 2025 15:26:37 +0900
-X-Original-SENDERIP: 156.147.1.121
+Received: from unknown (HELO lgeamrelo01.lge.com) (156.147.1.125)
+	by 156.147.23.52 with ESMTP; 22 Aug 2025 15:31:52 +0900
+X-Original-SENDERIP: 156.147.1.125
 X-Original-MAILFROM: youngseok1.jeong@lge.com
 Received: from unknown (HELO ys-server..) (10.177.121.106)
-	by 156.147.1.121 with ESMTP; 22 Aug 2025 15:26:37 +0900
+	by 156.147.1.125 with ESMTP; 22 Aug 2025 15:31:52 +0900
 X-Original-SENDERIP: 10.177.121.106
 X-Original-MAILFROM: youngseok1.jeong@lge.com
 From: youngseok1.jeong@lge.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Youngseok Jeong <youngseok1.jeong@lge.com>
 Subject: [meta-oe][kirkstone][PATCH] json-schema-validator: Remove absolute path in INSTALL_CMAKE_DIR
-Date: Fri, 22 Aug 2025 15:26:35 +0900
-Message-Id: <20250822062635.2936356-1-youngseok1.jeong@lge.com>
+Date: Fri, 22 Aug 2025 15:31:50 +0900
+Message-Id: <20250822063150.2937369-1-youngseok1.jeong@lge.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Aug 2025 06:26:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119084
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Aug 2025 06:32:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119085
 
 From: Youngseok Jeong <youngseok1.jeong@lge.com>
 
@@ -62,7 +62,7 @@ index 0000000000..ec260ed881
 +Subject: [PATCH] Do not use the CMAKE_INSTALL_PREFIX
 +
 +Remove absolute path in INSTALL_CMAKE_DIR for fixing sysroot path issue.
-+This issue is resolved v2.3.0 which is in scarthgap but backport patch
++This issue is resolved v2.2.0 which is in scarthgap but backport patch
 +is not matched well in kirkstone branch.
 +
 +See patch:
