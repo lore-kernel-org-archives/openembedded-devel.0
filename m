@@ -1,122 +1,90 @@
-Return-Path: <marc.ferland@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6E10CA0FE7
-	for <webhook@archiver.kernel.org>; Mon, 25 Aug 2025 13:14:28 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web11.38749.1756127666077126137
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7148CA0EFA
+	for <webhook@archiver.kernel.org>; Mon, 25 Aug 2025 13:18:58 +0000 (UTC)
+Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
+ by mx.groups.io with SMTP id smtpd.web10.38638.1756127937372151816
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Aug 2025 06:14:26 -0700
+ Mon, 25 Aug 2025 06:18:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZehlVQLZ;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: marc.ferland@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-3c79f0a5b8bso1627413f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Aug 2025 06:14:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756127664; x=1756732464; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=O0i0t7sg0zGpAhoLoJWjSAuVcg/eftBR1hiP9ieXGfk=;
-        b=ZehlVQLZaRlLE37kYbO2JhjBRJHFoAoJjJMtrCvz0Mdvg4gs2J9b1Q8fkZRQl6Xrt5
-         9LUrHMaS4t8EavOHJAThsPChnFN2wGrgcx8N2yM8xQjZMd4tIHgDa3BEIC5CIP2SbcQH
-         9+JNAKM4qbUslT6sVvkwiYivAYTjT8nX4rN6t9fGTq6Cy6zXY8z+vFc53lbDL9Qr3W5K
-         r6iF0M+j7W5PUma9PnqnlGhczqeSpOyYFp1EuggSTYnZeIYQNSBFopC0daAfPasfttfi
-         ToWA+Fe1Otvc4VKePif/HzTp3tc6ldaxxc+Q3dbLNhjVxoNviWzslGmqL30z9aGSBeOF
-         IcsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756127664; x=1756732464;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=O0i0t7sg0zGpAhoLoJWjSAuVcg/eftBR1hiP9ieXGfk=;
-        b=m7KRfM0BAl7mJ/2DObXX4aBOimTtbNqWhOpEEymHw58UEng/zqoDePoMRC9LIvF+TN
-         cGSCxP7S9Bh3MNZHYEuB+vze8TK55WltfvcIlV3A8I7RIMu8fQxRaOSbVj0dgGYZ4QTR
-         vw7pwksxBoKhE5FdmJtwscngs2wXJisUQvdlFPwk+9eucWo6vj634HCYNL4tFLPc7eI0
-         i7A1ZaszBrfuOYitZdxroWKfLj+wxG2kC0vNhkl77G+rkeAcMz/wBJDTkUv26Y90WSY/
-         ymqX9d/guxYTfNVdT9peh4emlDTYY7B5ZnU+3rBLo4NDE6kc3T6auxQXlOYhNvZ8hhE3
-         ijLg==
-X-Gm-Message-State: AOJu0YwHW6dsUcl4GolqyyJmkBrjM1cgWF2s3UBX6BSeaCk0rydQVUP+
-	ibnOyOTDBkZdqszHovHoaiTJ1F5X1yZbUzOvlEshyQ6g1fpi4TnnD8iud1DQFw==
-X-Gm-Gg: ASbGncuwkHMO8aXllDWgnNm9PZg+20W/Qv+T9pGjvsWjA1bD0P6j6FzTXNzSFn8a4gE
-	MoGTHtr2fNRnIK6kTHnhF6kcaSb6Gy7fl+cMGRh1yBTWkZwbYPYHyXiG3lnwlWBt8Y1Gsvy3Coi
-	RXlGiFHxitceXl63+k7i3zf8P/L92ES6QjfkepH81t2ablZIigpe8g84h+6GDBUfXaeKRHTl7B8
-	WlBdAZ44zw9G0Cfz2NqtacPLx2pZd2nkIVcAyGtGF6zJe8TcRzlCB8yHIV+1A3feY2CBXWsqLtD
-	8IbEDKc3CSCH1qdocF77LENQ78lN4n5IYLF8e4Y2JH829w35KMt6RJTTM0PyRXBt89X9LvFXad6
-	DroOhfwRJ2JGQJykIjHIgShZlTSp0ddc8rML1ZHkQVVQMbvxcbcLd7eZuhRlytaiXCL99lt40K6
-	MgNRnJxOUgy7YQ3V07DbEBf+qPv4yxt0D6byciI3Gp0j5uBg==
-X-Google-Smtp-Source: AGHT+IGAuhg/53T/f5C91gxv1tzH++K5zNtcotS++1vucalMYi/K0Q3z36+5H5xsoMb6IhXppUWqaA==
-X-Received: by 2002:a05:6000:2404:b0:3b7:9dc1:74a9 with SMTP id ffacd0b85a97d-3c5dd2d7ea7mr10723918f8f.42.1756127663765;
-        Mon, 25 Aug 2025 06:14:23 -0700 (PDT)
-Received: from mfe-desktop.Sonatest.net (ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca. [174.94.156.236])
-        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-3c712178161sm11463373f8f.67.2025.08.25.06.14.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Aug 2025 06:14:23 -0700 (PDT)
-From: marc.ferland@gmail.com
-X-Google-Original-From: marc.ferland@sonatest.com
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=VEVhW7wD;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-202508251318520fe710ea6e8659392f-anv_cf@rts-flowmailer.siemens.com)
+Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 202508251318520fe710ea6e8659392f
+        for <openembedded-devel@lists.openembedded.org>;
+        Mon, 25 Aug 2025 15:18:53 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=u9+bmchX39aNEDaKxY+NhXk0OFpsbP5rXROOPrzDnkc=;
+ b=VEVhW7wDKy9yEY5XdMqEwcoVsy2k5M93vO8zAguWG+i4Fc8c9WHh/roJTsALuSDgX14SWr
+ R+oMkM+Kd1NwkMNdS9iU2To/eD0e9zwIIWmowfSWYNcFg9l1oTj8BmUIjyA2PYJhEudOsgBV
+ EFwAUQNtaYrkv85rQ861l04JBaeD8XV/7wIW0pf5+Jzd+rWDUIWcCvpFMiTaG8xCkuVo3lS2
+ scCq49+l/GcGJA5oo77L7TVq13QlqdY+jodyXoZk0uebZgFxHEJ8i+0KnXw0XQFNR9JKOeZK
+ HCT7uRmKx1I4dSzXa37VXT6r9musZSlo05pBQZCtrSGPO/J5ZZI31s8w==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Marc Ferland <marc.ferland@sonatest.com>
-Subject: [meta-oe][PATCH] freerdp3: add bindir to SYSROOT_DIRS
-Date: Mon, 25 Aug 2025 09:14:18 -0400
-Message-Id: <20250825131418.2741396-1-marc.ferland@sonatest.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-webserver][PATCH 1/3] nginx: upgrade stable 1.26.3 -> 1.28.0
+Date: Mon, 25 Aug 2025 15:18:03 +0200
+Message-Id: <20250825131805.230223-1-peter.marko@siemens.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Aug 2025 13:14:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119095
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Aug 2025 13:18:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119096
 
-From: Marc Ferland <marc.ferland@sonatest.com>
+From: Peter Marko <peter.marko@siemens.com>
 
-This is required in order to build krdp (KDE's remote desktop
-integration).
+2025-04-23
+nginx-1.28.0 stable version has been released, incorporating new
+features and bug fixes from the 1.27.x mainline branch - including
+memory usage and CPU usage optimizations in complex SSL configurations,
+automatic re‑resolution of hostnames in upstream groups, performance
+enhancements in QUIC, OCSP validation of client SSL certificates and
+OCSP stapling support in the stream module, variables support in the
+proxy_limit_rate, fastcgi_limit_rate, scgi_limit_rate, and
+uwsgi_limit_rate directives, the proxy_pass_trailers directive, and
+more.
 
-The do_configure task for krdp expects both 'winpr-makecert3' and
-'winpr-hash3' to be present, failure to do so results in:
+License-Update: copyright years refreshed and removed C-style comments
 
-| CMake Error at /path/to/krdp/6.4.4/recipe-sysroot/usr/lib/cmake/WinPR3/WinPRTargets.cmake:98 (message):
-|   The imported target "winpr-makecert" references the file
-|
-|      "/path/to/krdp/6.4.4/recipe-sysroot/usr/bin/winpr-makecert3"
-|
-|   but this file does not exist.  Possible reasons include:
-|
-|   * The file was deleted, renamed, or moved to another location.
-|
-|   * An install or uninstall procedure did not complete successfully.
-|
-|   * The installation package was faulty and contained
-|
-|      "/path/to/6.4.4/recipe-sysroot/usr/lib/cmake/WinPR3/WinPRTargets.cmake"
-|
-|   but not all the files it references.
-|
-| Call Stack (most recent call first):
-|   /path/to/krdp/6.4.4/recipe-sysroot/usr/lib/cmake/WinPR3/WinPRConfig.cmake:44 (include)
-|   /path/to/krdp/6.4.4/recipe-sysroot-native/usr/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)
-|   /path/to/krdp/6.4.4/recipe-sysroot/usr/lib/cmake/FreeRDP3/FreeRDPConfig.cmake:2 (find_dependency)
-|   CMakeLists.txt:45 (find_package)
-|
-|
-| -- Configuring incomplete, errors occurred!
-
-Signed-off-by: Marc Ferland <marc.ferland@sonatest.com>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb | 6 ------
+ meta-webserver/recipes-httpd/nginx/nginx_1.28.0.bb | 6 ++++++
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+ delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.28.0.bb
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
-index 284f61c137..7f58820eb7 100644
---- a/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
-@@ -60,3 +60,4 @@ do_configure:append() {
- }
- 
- FILES:${PN} += "${datadir}"
-+SYSROOT_DIRS += "${bindir}"
--- 
-2.34.1
-
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb
+deleted file mode 100644
+index 7eab7ecdf5..0000000000
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.26.3.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require nginx.inc
+-
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a6547d7e5628787ee2a9c5a3480eb628"
+-
+-SRC_URI[sha256sum] = "69ee2b237744036e61d24b836668aad3040dda461fe6f570f1787eab570c75aa"
+-
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.28.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.28.0.bb
+new file mode 100644
+index 0000000000..dd585f3714
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.28.0.bb
+@@ -0,0 +1,6 @@
++require nginx.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3dc49537b08b14c8b66ad247bb4c4593"
++
++SRC_URI[sha256sum] = "c6b5c6b086c0df9d3ca3ff5e084c1d0ef909e6038279c71c1c3e985f576ff76a"
++
 
