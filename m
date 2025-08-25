@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D1A2CA0FE7
-	for <webhook@archiver.kernel.org>; Mon, 25 Aug 2025 13:48:59 +0000 (UTC)
-Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by mx.groups.io with SMTP id smtpd.web11.39495.1756129734851660907
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E48ACCA0FE7
+	for <webhook@archiver.kernel.org>; Mon, 25 Aug 2025 13:49:28 +0000 (UTC)
+Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
+ by mx.groups.io with SMTP id smtpd.web10.39332.1756129762640188778
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Aug 2025 06:48:55 -0700
+ Mon, 25 Aug 2025 06:49:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=Dv0PHHlQ;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20250825134851d77cac04efbd72c2d9-i5z7ry@rts-flowmailer.siemens.com)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20250825134851d77cac04efbd72c2d9
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=DCIC/wkd;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-202508251349203d9a6d500cc81afdf4-s3k2zo@rts-flowmailer.siemens.com)
+Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 202508251349203d9a6d500cc81afdf4
         for <openembedded-devel@lists.openembedded.org>;
-        Mon, 25 Aug 2025 15:48:52 +0200
+        Mon, 25 Aug 2025 15:49:20 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=vtC+1ODt+nfqTPcoeb6od5nHag6FqgyWmwdwftegh24=;
- b=Dv0PHHlQXbW2b2dFfQ0punYN4PAE0Y/Wbe3LL3L4dyNMiYZ3CYj8d1XhehH5XTRjZgTDCi
- NUsglfX39zN4qMrIGeLisuTleFPhCQwRvat8dvyayj7+juqQtMomFFx/BmhGVWwXjCm5nC8Z
- w9TuRIGIJx0xLMW7ojOSBM6aUSmQs+yy5OLHCOGvdd13o6lZdX0OBESBQ4vBn8CJmnwL20UJ
- xd8J3GP/tUaHzXENsGm3Qwawl1zdok/O49/yQ/8Pa4ADY1OTzaaC2qxKg/5A/fm3wg4ppaBJ
- B0AI0U1LUAlIJdNQ/4ezw/FceEVZ4YLlegL6CUwPmXOOudDCb54uqjBg==;
+ bh=D6OELjF3pB2ErdDs64sLPIhXRr4jBQQp4XsXGmeQ3t4=;
+ b=DCIC/wkdmf2NxEm3CF1/0ItlVHfeDzOi2I4rRzVc4VT+k9AYEhA8kUSf4OgCBXwK6Y38f1
+ QZD1hFk7Fwjs49JRkAm78lZESQG6ZjaZ7vFwoOVXrkQIP0k11mJDJRhCieyd8V2bgYJP2Imh
+ P6hVTsQnEJpjTW2CyAyUkiM/G8jwN2lxWJqZzFu9TqQdL8hpMBa9pAWIqPVWGutPNtMrW1QO
+ vMk0fU8V6+55o7r6eQXaCfxuboHs8wvijqfbe3Cp39iDohdXhE/E9OOJWIWfQ12ZVDmsNKem
+ VIVOApYMmkOeFIUQSkRn3KLDJbKxxMKlBQm4eA8aSJmUT+g3Gi3X0aiA==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-webserver][kirkstone][PATCH] nginx: patch CVE-2025-53859 in stable
-Date: Mon, 25 Aug 2025 15:48:03 +0200
-Message-Id: <20250825134803.450989-1-peter.marko@siemens.com>
+Subject: [meta-webserver][scarthgap][PATCH] nginx: patch CVE-2025-53859
+Date: Mon, 25 Aug 2025 15:48:29 +0200
+Message-Id: <20250825134829.451218-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -36,8 +36,8 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Aug 2025 13:48:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119099
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Aug 2025 13:49:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119100
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -190,11 +190,11 @@ index 0000000000..6f689938f4
 +     last = p + s->login.len;
 + 
 diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 4e744de270..94cecabd54 100644
+index 926db19443..945be05c6a 100644
 --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
 +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -26,6 +26,7 @@ SRC_URI = " \
-     file://CVE-2023-44487.patch \
+@@ -25,6 +25,7 @@ SRC_URI = " \
+     file://0001-configure-libxslt-conf.patch \
      file://CVE-2024-7347-1.patch \
      file://CVE-2024-7347-2.patch \
 +    file://CVE-2025-53859.patch \
