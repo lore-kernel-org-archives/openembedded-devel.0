@@ -1,103 +1,121 @@
-Return-Path: <Jiaying.Song.CN@windriver.com>
+Return-Path: <marc.ferland@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25793CA0EED
-	for <webhook@archiver.kernel.org>; Mon, 25 Aug 2025 07:48:17 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.33796.1756108089766681445
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6E10CA0FE7
+	for <webhook@archiver.kernel.org>; Mon, 25 Aug 2025 13:14:28 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web11.38749.1756127666077126137
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Aug 2025 00:48:10 -0700
+ Mon, 25 Aug 2025 06:14:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=SvTDoUlE;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=0332d1973f=jiaying.song.cn@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 57P5xdMY2969446
-	for <openembedded-devel@lists.openembedded.org>; Mon, 25 Aug 2025 07:48:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=C6CTMQX029Sl3tY1uELw
-	/i6h+lpmIvnD0WHswTrIor0=; b=SvTDoUlEhXN89y3/558qJ6bqDVAbjjkCWcvL
-	wjHM5pDlBV4GQFEqGJLLxWWtJ4ZR8PbwB4KuiUFpBr+V3wyvsLuBQO35bG1Vm+5J
-	kPYdydsflL9tRQS6ao2jOaBd76eX5rUi956ZvffDdbUs1moXD00LYf95rpWuvXc6
-	XTKkm004W7IoAifrvlkxm2ZxuyZ9V31EcBLgWDWEmjPfjJfL+7gCdCF/FMGMC2LO
-	kWw9ZTPp87X/MIhJqDullTj9vAjyW/AzhFtHDH4TwqXJX46Xnq7owyeLFt6LUF4+
-	Aoy7UNiRkfRVupoAQfoF9PyP5VQfKTP7N/Tvg7m2Kga03980fA==
-Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48q2v19n4r-2
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 25 Aug 2025 07:48:08 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Mon, 25 Aug 2025 00:48:07 -0700
-Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Mon, 25 Aug 2025 00:48:07 -0700
-From: <jiaying.song.cn@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] softhsm: switch source to GitHub repository
-Date: Mon, 25 Aug 2025 15:48:01 +0800
-Message-ID: <20250825074801.2953407-1-jiaying.song.cn@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZehlVQLZ;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: marc.ferland@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-3c79f0a5b8bso1627413f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Aug 2025 06:14:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1756127664; x=1756732464; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=O0i0t7sg0zGpAhoLoJWjSAuVcg/eftBR1hiP9ieXGfk=;
+        b=ZehlVQLZaRlLE37kYbO2JhjBRJHFoAoJjJMtrCvz0Mdvg4gs2J9b1Q8fkZRQl6Xrt5
+         9LUrHMaS4t8EavOHJAThsPChnFN2wGrgcx8N2yM8xQjZMd4tIHgDa3BEIC5CIP2SbcQH
+         9+JNAKM4qbUslT6sVvkwiYivAYTjT8nX4rN6t9fGTq6Cy6zXY8z+vFc53lbDL9Qr3W5K
+         r6iF0M+j7W5PUma9PnqnlGhczqeSpOyYFp1EuggSTYnZeIYQNSBFopC0daAfPasfttfi
+         ToWA+Fe1Otvc4VKePif/HzTp3tc6ldaxxc+Q3dbLNhjVxoNviWzslGmqL30z9aGSBeOF
+         IcsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756127664; x=1756732464;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=O0i0t7sg0zGpAhoLoJWjSAuVcg/eftBR1hiP9ieXGfk=;
+        b=m7KRfM0BAl7mJ/2DObXX4aBOimTtbNqWhOpEEymHw58UEng/zqoDePoMRC9LIvF+TN
+         cGSCxP7S9Bh3MNZHYEuB+vze8TK55WltfvcIlV3A8I7RIMu8fQxRaOSbVj0dgGYZ4QTR
+         vw7pwksxBoKhE5FdmJtwscngs2wXJisUQvdlFPwk+9eucWo6vj634HCYNL4tFLPc7eI0
+         i7A1ZaszBrfuOYitZdxroWKfLj+wxG2kC0vNhkl77G+rkeAcMz/wBJDTkUv26Y90WSY/
+         ymqX9d/guxYTfNVdT9peh4emlDTYY7B5ZnU+3rBLo4NDE6kc3T6auxQXlOYhNvZ8hhE3
+         ijLg==
+X-Gm-Message-State: AOJu0YwHW6dsUcl4GolqyyJmkBrjM1cgWF2s3UBX6BSeaCk0rydQVUP+
+	ibnOyOTDBkZdqszHovHoaiTJ1F5X1yZbUzOvlEshyQ6g1fpi4TnnD8iud1DQFw==
+X-Gm-Gg: ASbGncuwkHMO8aXllDWgnNm9PZg+20W/Qv+T9pGjvsWjA1bD0P6j6FzTXNzSFn8a4gE
+	MoGTHtr2fNRnIK6kTHnhF6kcaSb6Gy7fl+cMGRh1yBTWkZwbYPYHyXiG3lnwlWBt8Y1Gsvy3Coi
+	RXlGiFHxitceXl63+k7i3zf8P/L92ES6QjfkepH81t2ablZIigpe8g84h+6GDBUfXaeKRHTl7B8
+	WlBdAZ44zw9G0Cfz2NqtacPLx2pZd2nkIVcAyGtGF6zJe8TcRzlCB8yHIV+1A3feY2CBXWsqLtD
+	8IbEDKc3CSCH1qdocF77LENQ78lN4n5IYLF8e4Y2JH829w35KMt6RJTTM0PyRXBt89X9LvFXad6
+	DroOhfwRJ2JGQJykIjHIgShZlTSp0ddc8rML1ZHkQVVQMbvxcbcLd7eZuhRlytaiXCL99lt40K6
+	MgNRnJxOUgy7YQ3V07DbEBf+qPv4yxt0D6byciI3Gp0j5uBg==
+X-Google-Smtp-Source: AGHT+IGAuhg/53T/f5C91gxv1tzH++K5zNtcotS++1vucalMYi/K0Q3z36+5H5xsoMb6IhXppUWqaA==
+X-Received: by 2002:a05:6000:2404:b0:3b7:9dc1:74a9 with SMTP id ffacd0b85a97d-3c5dd2d7ea7mr10723918f8f.42.1756127663765;
+        Mon, 25 Aug 2025 06:14:23 -0700 (PDT)
+Received: from mfe-desktop.Sonatest.net (ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca. [174.94.156.236])
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-3c712178161sm11463373f8f.67.2025.08.25.06.14.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 25 Aug 2025 06:14:23 -0700 (PDT)
+From: marc.ferland@gmail.com
+X-Google-Original-From: marc.ferland@sonatest.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Marc Ferland <marc.ferland@sonatest.com>
+Subject: [meta-oe][PATCH] freerdp3: add bindir to SYSROOT_DIRS
+Date: Mon, 25 Aug 2025 09:14:18 -0400
+Message-Id: <20250825131418.2741396-1-marc.ferland@sonatest.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: JnAEGx1l2gL2-EZZ8y5jL78fJcAY7byd
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODI1MDA2OCBTYWx0ZWRfX8oownimmMbP6
- ZNqirmZ1WwfmaVDAc4uol9r08WD+Spb7Vp6DNpULjsyrSfiEV1ioHyH4QEhyObxO323OU61Q8Q+
- 4R4xeo80BUM24kalDei30A6ax7kSr5nz5LIyT8Kdf7onmV7SRQTqzQZKrFk1YNQO94+6mqlm27/
- jJphrrUk9lJLH7VTKUw1ww/Kh6pVcPAtZvov5/7fRSxvNCri7cfoyPaCLSSi0gpP3VDdXXXVsO8
- xrsHL/c62xA2CBUFyNKg/rAxMK2I7YLGMfBd9aijZKlAsG4Fd/CSDBU7nulhPjDxQvk1fKYfm/1
- IAlr3Q332LHkmRoR98tE8eVeZe12gsrSwzNOur7xwmc6o8xqXeQfhMzMT73mZQ=
-X-Authority-Analysis: v=2.4 cv=T5GMT+KQ c=1 sm=1 tr=0 ts=68ac1538 cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=2OwXVqhp2XgA:10 a=TUjdwidjAAAA:8 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8
- a=wPLx-hkjEP7Tmftl22oA:9 a=XBCfRPmKWXHXM36ql9fg:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: JnAEGx1l2gL2-EZZ8y5jL78fJcAY7byd
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-08-25_03,2025-08-20_03,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 bulkscore=0 adultscore=0 impostorscore=0
- malwarescore=0 clxscore=1015 priorityscore=1501 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Aug 2025 07:48:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119094
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Aug 2025 13:14:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119095
 
-From: Jiaying Song <jiaying.song.cn@windriver.com>
+From: Marc Ferland <marc.ferland@sonatest.com>
 
-The original source URL is unavailable, so it has been replaced with the
-official GitHub repository.
+This is required in order to build krdp (KDE's remote desktop
+integration).
 
-Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+The do_configure task for krdp expects both 'winpr-makecert3' and
+'winpr-hash3' to be present, failure to do so results in:
+
+| CMake Error at /path/to/krdp/6.4.4/recipe-sysroot/usr/lib/cmake/WinPR3/WinPRTargets.cmake:98 (message):
+|   The imported target "winpr-makecert" references the file
+|
+|      "/path/to/krdp/6.4.4/recipe-sysroot/usr/bin/winpr-makecert3"
+|
+|   but this file does not exist.  Possible reasons include:
+|
+|   * The file was deleted, renamed, or moved to another location.
+|
+|   * An install or uninstall procedure did not complete successfully.
+|
+|   * The installation package was faulty and contained
+|
+|      "/path/to/6.4.4/recipe-sysroot/usr/lib/cmake/WinPR3/WinPRTargets.cmake"
+|
+|   but not all the files it references.
+|
+| Call Stack (most recent call first):
+|   /path/to/krdp/6.4.4/recipe-sysroot/usr/lib/cmake/WinPR3/WinPRConfig.cmake:44 (include)
+|   /path/to/krdp/6.4.4/recipe-sysroot-native/usr/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)
+|   /path/to/krdp/6.4.4/recipe-sysroot/usr/lib/cmake/FreeRDP3/FreeRDPConfig.cmake:2 (find_dependency)
+|   CMakeLists.txt:45 (find_package)
+|
+|
+| -- Configuring incomplete, errors occurred!
+
+Signed-off-by: Marc Ferland <marc.ferland@sonatest.com>
 ---
- meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb b/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
-index 66f0488792..11a05b8283 100644
---- a/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
-+++ b/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
-@@ -5,11 +5,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ef3f77a3507c3d91e75b9f2bdaee4210"
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
+index 284f61c137..7f58820eb7 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
+@@ -60,3 +60,4 @@ do_configure:append() {
+ }
  
- DEPENDS = "sqlite3"
- 
--SRC_URI = "https://dist.opendnssec.org/source/softhsm-2.6.1.tar.gz \
-+SRC_URI = "git://github.com/softhsm/SoftHSMv2.git;protocol=https;branch=develop \
-            file://0001-avoid-unnecessary-check-for-sqlite3-binary.patch \
-            file://0002-Prevent-accessing-of-global-c-objects-once-they-are-.patch \
- "
--SRC_URI[sha256sum] = "61249473054bcd1811519ef9a989a880a7bdcc36d317c9c25457fc614df475f2"
-+SRCREV = "7f99bedae002f0dd04ceeb8d86d59fc4a68a69a0"
-+S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig siteinfo
- 
+ FILES:${PN} += "${datadir}"
++SYSROOT_DIRS += "${bindir}"
 -- 
 2.34.1
 
