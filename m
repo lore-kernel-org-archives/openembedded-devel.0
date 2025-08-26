@@ -1,582 +1,472 @@
-Return-Path: <andrey.z@gmail.com>
+Return-Path: <guocai.he.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B7B1CA0EFA
-	for <webhook@archiver.kernel.org>; Tue, 26 Aug 2025 08:40:44 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web11.59969.1756197642639688647
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5659CA0EFA
+	for <webhook@archiver.kernel.org>; Tue, 26 Aug 2025 08:42:34 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.59981.1756197746187793482
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Aug 2025 01:40:43 -0700
+ Tue, 26 Aug 2025 01:42:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TPhhviJk;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: andrey.z@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-afcb78fb04cso736712966b.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Aug 2025 01:40:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756197641; x=1756802441; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fVZIEDq8KWIq8yb7dZOp7/Fpjjee+PUqvgZc1cWj0rY=;
-        b=TPhhviJkEXNh5aEBM67XKXPbH8ARzmaaUfO9mDO6uaUDe/3Rf3bfDaRDyEFSU4rwbZ
-         3BxLVFsIaLgBopD9oC0mO8QsmUGNi8ibUCTvJ7fzlLfk0H1ObJPe7BmmgycBtoRYDVL1
-         V3XK5xWVWSAgcCnfAX59DyYt2rb8Xjgtr7xxtHcJIXo37+WmFBw997spsvk3p7MyfsrN
-         WmshYEfn81Mwq1sSJXLVYvBKL4omm9PT5kAYbvKKweSxtPVkgdObEapvS8d72Cy2Yi64
-         ZSDeGxfPWBSUwlvU4bXpz30L0RdU9FgAtrtzHuty+ZqH6U3FWFuimTNkbB+jWvj4erVh
-         B7vw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756197641; x=1756802441;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=fVZIEDq8KWIq8yb7dZOp7/Fpjjee+PUqvgZc1cWj0rY=;
-        b=NpEFnOU0iBdC6P+EwOJHH1HV58FrgxSnHbnB3DwWHKm1ChL96Yo0X5DwhQ69zTGKjO
-         Oai8a94Syh05uDI6EWGzS2yr+7xiJC7f3PbFaCLrg7dShZ2o3QEELNm28U2tEP6s01zF
-         AT5G+uw7eZMGPvBqnR8S6X4H5scgyFxj2VukQJuuxaTf4IaST8/co/LHr1JdWG7OJ4NX
-         eX/DoBykTV9ymbVS77uRVscWImxL70lpfbNe4Mq4TqM1Y3deJNOUVKLcNb+qachVR2pQ
-         Rp506SweDwXRu0neo6E84PfzeAyPYGcuuYg3w/90UziQkrpJcv5/NuUUnxPmcOr/ozeU
-         8ZVQ==
-X-Gm-Message-State: AOJu0YzZeHdsey5Q+e+hFYN+ePnBN+7jJwJKIW8Vzkik8S8Ar6vymUSN
-	HXrsLhCcZm5DwKBJePgk7UQxE5SUOKVDXWIdFoLFW6C0j45u865KrBFOQ+/PetaX
-X-Gm-Gg: ASbGncvlXlPyiGs7PSiCR0Ajau5foa+7ONQWZZIZQZhzhlTG6ezBUlDSsHH5UkOzkUm
-	x6DAtIkLf2iTdNi9RA+KWzlE9ncvYJ23CjaDeiBOpUHkI3xu9HP7aettqQgNkG5WXO41nnn09oO
-	Fi7iIKwp3PafOvA+/ubrWGemm0JYngeKgCfCeiPq5WEPb5HUBqcQsOnVGspUS2cBOb0JXhaC/76
-	A7SR+ZlcDlHCsUXiwwO7Vw6u9+a7J646DzN6RYz7K8KuX5Z3cXpMc9qDbI+ZKEB3t1WE1bV47DQ
-	oXGeSNUrvdOPF6zrQoEjdlkbJhepGaP5YaVn9BF/sQZDB/OW5bkOJGf00P3aO+XTgh8bL11HRuq
-	YMO/SJfn6jtXPxpg1j0ci+m2abkx+waeoPzM6ybsidfQUnIOAhA==
-X-Google-Smtp-Source: AGHT+IFWYeFClAxWD6e3oLPJbEOMypKjBL6dwLx3oPJ7y1VoHlC4m23fgclkRvC7hGHB5trHbHK9eA==
-X-Received: by 2002:a17:907:940a:b0:ae8:4776:fbb1 with SMTP id a640c23a62f3a-afe28fd3a7dmr1610130066b.11.1756197640516;
-        Tue, 26 Aug 2025 01:40:40 -0700 (PDT)
-Received: from GEO-W5CG4492JHD.lgs-net.com ([193.8.40.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-afe7c2c7820sm411903066b.64.2025.08.26.01.40.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Aug 2025 01:40:40 -0700 (PDT)
-From: Andrey Zhizhikin <andrey.z@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=EgipfpdS;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=03334bb704=guocai.he.cn@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 57Q7lxCw1332211
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Aug 2025 08:42:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=NKvD3ESS8SVt0VDDgBXh
+	rXw+Is3KtSPuYwUJNrz1WBE=; b=EgipfpdSer/K8Rqu88i74NByKtjoOMOCr3qg
+	36aXO7H0FrlbUZhlD4+08WGythw2F/PJTQDAFgiw+BN32ONxs0xKav4/iBioMNiy
+	2uLHQhOlySnDZrrU+Y5wMI/35F0EHHN63MnlN+hTfMxhdUJjRfAZsClG2y8NXQEv
+	ioYd8ICkgr36YLr1tWhvJUKFGcFtkYNwnlchZYsUh1oBs21t45DU4zK3ZOLZr7t6
+	1JJpXUBKfRoyCYy49YBgQGlhBGHchw6bXkMu2lnv9P2SwHTH/41aZ308iUzYuIcs
+	BuQz8XVdFrOdRNkg94Hg7xSeXaNhHfGBPKo67dldADpF4Sok4g==
+Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10on2041.outbound.protection.outlook.com [40.107.93.41])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48q2v1aw0q-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Aug 2025 08:42:24 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ot+XZBJYQg4Q+tGCkUkX7r47T+nVNN21c93lNg3QtDOUozGjHEC27Aj1KGHxYkEGRuW2huEYes3DkLNDmPMHGc7Jswgdr5kM2M77yLAQ9Vv0QZAbO4CSDwD2Weu+7OYM3FeqN1/+t3ZSqkznmX+C70UU/2hfJd1+bhcKiZ78TUpN6DK6ks1vHNEYErQGP7JNqPJoJ+qWW4rpXtrhIXcbmvdrkcN5J9CRxqVIvJ6fTdE6TedpqDX1+NvIMGWCQxz+9dr1VUmjhMbcyPwYh3W846nU+bwh9CXqAea2DHM2LKQJGED1Lu+ubZ/5sPMbtS/a0iH7QVApuSYE0sk9qYd+gw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NKvD3ESS8SVt0VDDgBXhrXw+Is3KtSPuYwUJNrz1WBE=;
+ b=tZ261k2QhCrf5osZzvcl50wipt01uO/GH4D5tYcQ6OTuawMHI2FMs/e0xDvAWHo/2Z4X5BX6bsv5+6OG5rWWajP4UbLP9HEYNhEjn0z2UUxeYSW54BLP49MhzCfOo2s/5HGrpFmW1dbaV6sa0Dse8ujmt6Mo8eX5X8O259QX+m8mTdUfnqt8ghqNGo1aEv/VKJDnX1uNNp0T/wfmsdatfH7o8vcWXMLWT6qATPYL+GVbmREA9SQpw9RaQRyj/Kffhs5y3C51kBlfDTY9vno0ihBYELhR64iW7fCQiZMSLHyEUW55LpxVNAGp5BmtamIfqh3wwn0+919NM+TktR+DVA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CO6PR11MB5586.namprd11.prod.outlook.com (2603:10b6:5:35d::21)
+ by DS7PR11MB6272.namprd11.prod.outlook.com (2603:10b6:8:94::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.21; Tue, 26 Aug
+ 2025 08:42:21 +0000
+Received: from CO6PR11MB5586.namprd11.prod.outlook.com
+ ([fe80::813a:3211:c8fd:1f86]) by CO6PR11MB5586.namprd11.prod.outlook.com
+ ([fe80::813a:3211:c8fd:1f86%7]) with mapi id 15.20.9052.014; Tue, 26 Aug 2025
+ 08:42:21 +0000
+From: guocai.he.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Andrey Zhizhikin <andrey.z@gmail.com>
-Subject: [meta-oe][PATCH] libusbgx: upgrade to 0.3.0
-Date: Tue, 26 Aug 2025 10:40:26 +0200
-Message-ID: <20250826084026.133710-1-andrey.z@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [oe][meta-oe][kirkstone][PATCH] libnet: backport patch to remove configure time SOCK_PACKET check
+Date: Tue, 26 Aug 2025 16:42:02 +0800
+Message-Id: <20250826084202.4188308-1-guocai.he.cn@windriver.com>
+X-Mailer: git-send-email 2.25.1
+Content-Type: text/plain; charset=yes
+X-ClientProxiedBy: SI2PR06CA0002.apcprd06.prod.outlook.com
+ (2603:1096:4:186::10) To CO6PR11MB5586.namprd11.prod.outlook.com
+ (2603:10b6:5:35d::21)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO6PR11MB5586:EE_|DS7PR11MB6272:EE_
+X-MS-Office365-Filtering-Correlation-Id: ac351cf3-278e-4255-6eb2-08dde47c78d3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|376014|366016|52116014|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?JB6UJLq4E7Kc/nfrr1cJ3Dg0dcKsd3MdLbR1r+X/NYALJH6wqdv1vrAcTn7g?=
+ =?us-ascii?Q?qg1ZTMxf+xILwxPwIs2ECcHQrUapBvcVHP+ScqokTBcN762BS67otlC7nwMR?=
+ =?us-ascii?Q?tdJCQNKuZFLl8nkhp9L504Ji64+H4xpXPafa/Pdl1fS6XC7YJnw2Cek3qczu?=
+ =?us-ascii?Q?GS60bemzIkdKO95+XCaNrdp2dDSVz87TdpwVguF35mOgpP8Xl2j/PHCwSRn4?=
+ =?us-ascii?Q?gDwQGevSsZ7taB6Rx1+SuMlV8TDkahGhyu+xsR+8i8N+mUu5dCgdZX6qT6Zk?=
+ =?us-ascii?Q?O7fCba1acH77NQBviY41cdm/SRzdR47jInCR/hX/K3vXaJ4pZA3uJj30Y9pH?=
+ =?us-ascii?Q?qrxTs6aenfiGMMgGcPR5ivt8ZRSbIXLufmh4yLVWBHyqb5dbz5PYVguUVBV8?=
+ =?us-ascii?Q?CUcKSDw8uwfYJK5szgHoJwSxe3pjRijpeOpW+9Bn1Nxs2k2A+uanLncPPHaN?=
+ =?us-ascii?Q?M3q/B1OI0OvSF39VEb/njDDWhClMdgdZpyZ/se5PoJ+VZ4Cn6U01YrxoGFDU?=
+ =?us-ascii?Q?+JUw6CFSsohvsDTtnwAf+BWMhMxuF6QdCzvAqzifA53TVoR45zfHBTGh3ldp?=
+ =?us-ascii?Q?m9fuLuFoujL0WlcVsJAGF0M5vRwX5NZHto2ulCBwaq3pQJ0vGl+/r+3UWjKM?=
+ =?us-ascii?Q?E2vjYMG52Ro4ok9EYgSr7EnNnshFnpeMfDECZrewlnJYstqnVM7Tvf/XkY2C?=
+ =?us-ascii?Q?Ey9GaA4Xq55Bjj7/iyfdgTVbjuiGFchigjUDOIVPBthUQknof4CCsTkLOBEJ?=
+ =?us-ascii?Q?Fm7j39kso//oqytXiP1VlspHZT5nY2w9CZVMxOp4xWlA62cO/oRnuq0Vsq11?=
+ =?us-ascii?Q?OqJvaU2JfV0aAVxbbZaPE4Y8j7EXJind/e1YJuapV+CBANYGD56PyMP73vzw?=
+ =?us-ascii?Q?OZDyICd+DJk3jDxClEXjuWHO1NvSeYdY8B7m4PZJy4Cgvvb3xkm0HY78/8gY?=
+ =?us-ascii?Q?Irwg2hwouwfXGXfZRtfktLTQF6utrFdWHXUOJb6D3d2msGAoJsiBhf32MGwY?=
+ =?us-ascii?Q?BW9kXnoaUBFapVwTX0TOS8z3SOOeZsed0/0N/GVed5bR6UyOubOgQW88HNny?=
+ =?us-ascii?Q?1AqMi4mD6ZQth+bVeq93D5qSpidNxa183O8rWbdwsRf27YJYHQIplrz74CuX?=
+ =?us-ascii?Q?s8nHd6BALJZCNV6IeH1qJ4kVIacQ3dqDN8Dk/Vyv2+a8aXQFmx8nM4N2p4qH?=
+ =?us-ascii?Q?cq4gz/GyrkidlPR9H/c0KmQj1E/KKzgTCZegLb1+tOTEOijEMAN/tD4dX53j?=
+ =?us-ascii?Q?U+UuFtBbyn7Rv3BdNNnXva1jdJqUBLWLv838rP3Zl+mdWYFUmUV/+a501WAf?=
+ =?us-ascii?Q?08EWpBs1zm0bNBTyECt86GuuHoW0jh80rxbUtxHz79RXJ9eFSnf0ycA9SXAn?=
+ =?us-ascii?Q?7t6EuPOEqHKgbSi4JyhQZ6vxa9ypWapNNQ7no+t0wSA265R0sOlUbglimGxw?=
+ =?us-ascii?Q?QQokcda/q5I=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5586.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(52116014)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?UWV+oJT+lAPHQzlXbm7mN4jB69V6DSu0zV878QbBx9OW9j7nX81DOfgEq76K?=
+ =?us-ascii?Q?MsKeX/UFEPSkWrakafXPmxzWFTfGXinEV/VomZwjPW2uryh5eG4DAT3b2lTh?=
+ =?us-ascii?Q?5auh0FjUj+fA442XV4nK1s4jYa2ft53PZO565TnZQT5Y+KVhVzH62srtl/Z+?=
+ =?us-ascii?Q?CS411g82imEYcQh9gu5dMwZ5Mn+M+8gNKk+FEW70mTgjNOL35qHuGhACCqz6?=
+ =?us-ascii?Q?K4f0tVBJdnzxzzZxCtYkOr2ls7h9jophNq98xtW1Zx594ieZgSMc2xdDkeK1?=
+ =?us-ascii?Q?ZOtR3VE6Z94yOTHGexogNAZtl5H5eOf8tQXni1jA5o2VJojgPurv6fmCo5qL?=
+ =?us-ascii?Q?LZ5ZsuBr06hHEQpeDTJ1YGuQZJRP7QZrgBPs+ZQLqAaZOBUNup6tlStlbBuj?=
+ =?us-ascii?Q?V2qpeoF0Wi/LZtRvtYyXvylGljGKKEgGD7k2AFLApr1c1GXe71aOyXIpYe+J?=
+ =?us-ascii?Q?F4JywrYO0J43fkMIgvMZIRntLiJzHDYy8iegj27DcIO/TRmgy5m5aEvlmGdj?=
+ =?us-ascii?Q?wrBC5ecDecUSV57lncxLozEeHXmrMZ7zFuXbISqAQxVHuCIQDXvhn3vI+6w8?=
+ =?us-ascii?Q?vkfNGIZ+tOh7X1W51IMq+GPPu72XoCKvWaUFDZm8A1/cB8HDB0Vt+GHKKhjI?=
+ =?us-ascii?Q?8ACLeomehG/9Eduo1ReofPHHF8rZq2s8ob0kjysfuzcLiGLa1XXq+ZImFdBV?=
+ =?us-ascii?Q?2lE1oVt3FOJGySOV2ZHYU35DsQsx+Q+H6OUMdaEdzjDSBykB4hlYw8GF9mop?=
+ =?us-ascii?Q?olauC7vkXbUxdCD+pHAJu2tzA8mymhZhbMA/bqM8YnekhHjOBrtqTezO/7x9?=
+ =?us-ascii?Q?VVJt42Xk8rkPIgBXBJhPoSOJvTds+n/DwHdWxcO5z2mGSt9BzmPwcNk/zZlc?=
+ =?us-ascii?Q?5NESWRT0ClQw2Loid9QaRv86LyXxzglhrTDsblwQGCsixdeXp4JxQiKeFFsw?=
+ =?us-ascii?Q?JNPIaAQEps/XW7QMKPADQA1QZEBOzsog92T/U5mvv1DabBZc2sWQph1edrU8?=
+ =?us-ascii?Q?8T/dl9jai/fSQpDm+of2MNQuYZauuDtWp2NfSpDsUJ2HaE8HohH7VZ1+XkJg?=
+ =?us-ascii?Q?IjfvZxgnvaEvlUSAHpyjD5Flw5AFxGLFJaUcCyBHqVQdOph+Nltf7e37zCzu?=
+ =?us-ascii?Q?4dz7oRuB3FvIN8J93Z+111FP+OHB9V4UiPonnRQyOKEIfa36tpuvezCXSjW4?=
+ =?us-ascii?Q?LqgQZvBMBDRzGBgUR1um+QkML4SP79A6gexwF8NOgHvGiA4qX8910Wg1KSJA?=
+ =?us-ascii?Q?AejKhOKiviKHSO9IpAmmqMKhVNUT0H6Td3U1atyGu8slPS7gDsohesUbacFl?=
+ =?us-ascii?Q?Aqoart7oNdAPwqMzqbFB6VFt8roiUKjqnEYs8ewvvbRgYNlQCdaQSjGKAoCI?=
+ =?us-ascii?Q?YwK3R+QNifzcVmx4ge3IweD/9x5Ip/NxBeX/JcucBdf8Vpgob6EPaXCHrbBs?=
+ =?us-ascii?Q?Q/TaR9ay7RntvOQhs0bYUI8TX/thyr9weFRQSXsngYilYEbIQ78z7eXXz7E/?=
+ =?us-ascii?Q?s7d4HkSamkGZjFEFZa9M4CT5wGYJf37InSDDQPu/+3e1sjRu0QCPI8dPX36q?=
+ =?us-ascii?Q?JSdg2sxrtNyJWB9erBnC4IZ6Kq2i1caJC3Z4cWFMSJXyrK43G4dv3BMPM4hl?=
+ =?us-ascii?Q?eg=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ac351cf3-278e-4255-6eb2-08dde47c78d3
+X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5586.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2025 08:42:21.3649
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2IhOmFqr7ZFupQXfT1g0GQK0RJRzoDdaMAEs1lMx82dTyzCeak7M+bjd9i9y+ql9tVzxgXTr6Fg/yLvDugTpQVKO2NXKQHmbxSzebVgVySQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR11MB6272
+X-Proofpoint-ORIG-GUID: 0A735BMW-sCrbv81eOezZzWYwqt7RMsA
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODI2MDA3NiBTYWx0ZWRfX5aTmH/QEQeVD
+ sEh1dkMHG7pLSpuVGzeR5yJx5pSptOD2nKek4voynG4HmVh46yyFMGyzK7FoReCrNLZRpenlE/N
+ OnjZlsFesxL3fKFOVaDrNAKLpTA8DfB86icBe6mKkJEx6flmZU/VPiche7hfCbA0gPviaCypqZz
+ nbe6q5Xkdl9crQYwicieKtqW/mAJChHn8d7hooZDFToGd+v6ZqkS4EjRmWcnQT8tcaLBKRbAFEJ
+ ffCAu+n+vQI4xuNSgoKszKT1m1/dqCSOMGqwLLoVkG9aLDmsjhEEoAwg7IiLphmDUeHL6vyreEY
+ OixeV1x6jcEymHfpsC2Uu+iIOTn3OD2Fbcf7IzbqAJY3UdsT2VYrD9cfCxWSkI=
+X-Authority-Analysis: v=2.4 cv=T5GMT+KQ c=1 sm=1 tr=0 ts=68ad7370 cx=c_pps
+ a=SqOJu+fA6qNg895n5GWYNQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19
+ a=xqWC_Br6kY4A:10 a=WN52PlUurRMA:10 a=2OwXVqhp2XgA:10 a=NEAV23lmAAAA:8
+ a=t7CeM3EgAAAA:8 a=WQhEN21ruoYlkoZ7464A:9 a=3ZKOabzyN94A:10 a=xE34mhsjmDcA:10
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: 0A735BMW-sCrbv81eOezZzWYwqt7RMsA
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-26_02,2025-08-26_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 bulkscore=0 adultscore=0 impostorscore=0
+ malwarescore=0 clxscore=1015 priorityscore=1501 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 57Q7lxCw1332211
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Aug 2025 08:40:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119112
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Aug 2025 08:42:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119113
 
-libusbgx version 0.3.0 has been released on 27/09/2024 [1].
+From: Guocai He <guocai.he.cn@windriver.com>
 
-Update recipe version to point to `libusbgx-v0.3.0` tag. Drop one patch as it
-is already included in upstream, and refresh pending patch to match upstream.
+Backport [1] to fix the do_configure error like below:
 
-Link: [1]: https://github.com/linux-usb-gadgets/libusbgx/releases/tag/libusbgx-v0.3.0
-Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
+  checking for packet socket (PF_PACKET)... ./pf_packet-test:
+  /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found
+
+[1] https://github.com/libnet/libnet/commit/19979c4541ddcc817c64ea911a309=
+ee71a8cc250
+
+Signed-off-by: Qi Chen <Qi.Chen@windriver.com>
+Signed-off-by: Guocai He <guocai.he.cn@windriver.com>
 ---
- ...-overflow-in-usbg_f_foo_attr_val-pro.patch | 129 +++++++++---------
- ...erface-name-for-NCM-Feature-Descript.patch |  52 -------
- .../recipes-support/libusbgx/libusbgx_git.bb  |   5 +-
- 3 files changed, 70 insertions(+), 116 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libusbgx/libusbgx/0001-libusbgx-Add-interface-name-for-NCM-Feature-Descript.patch
+ ...move-support-for-SOCK_PACKET-sockets.patch | 251 ++++++++++++++++++
+ .../libnet/libnet_1.2-rc3.bb                  |   1 +
+ 2 files changed, 252 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/libnet/libnet/0001-Remov=
+e-support-for-SOCK_PACKET-sockets.patch
 
-diff --git a/meta-oe/recipes-support/libusbgx/libusbgx/0001-fix-stack-buffer-overflow-in-usbg_f_foo_attr_val-pro.patch b/meta-oe/recipes-support/libusbgx/libusbgx/0001-fix-stack-buffer-overflow-in-usbg_f_foo_attr_val-pro.patch
-index 24a2760d11..7d535f42e3 100644
---- a/meta-oe/recipes-support/libusbgx/libusbgx/0001-fix-stack-buffer-overflow-in-usbg_f_foo_attr_val-pro.patch
-+++ b/meta-oe/recipes-support/libusbgx/libusbgx/0001-fix-stack-buffer-overflow-in-usbg_f_foo_attr_val-pro.patch
-@@ -1,4 +1,4 @@
--From 421b366cafdf954b7e1cd2bbb78b55e04d73c082 Mon Sep 17 00:00:00 2001
-+From 3d785ec88d223800dc71a00fb699de34b4b6c883 Mon Sep 17 00:00:00 2001
- From: Wlodzimierz Lipert <wlodzimierz.lipert@gmail.com>
- Date: Mon, 28 Nov 2022 08:29:54 +0100
- Subject: [PATCH] fix: stack-buffer-overflow in usbg_f_foo_attr_val processing.
-@@ -11,19 +11,18 @@ Signed-off-by: Ming Liu <liu.ming50@gmail.com>
- ---
-  include/usbg/function/hid.h  | 28 ++++++++++++----------------
-  include/usbg/function/midi.h | 35 +++++++++++++----------------------
-- include/usbg/function/ms.h   | 30 +++++++++++-------------------
-+ include/usbg/function/ms.h   | 34 +++++++++++++---------------------
-  include/usbg/function/net.h  | 34 ++++++++++++++--------------------
-  include/usbg/function/uac2.h | 29 +++++++++++++----------------
-  include/usbg/usbg_internal.h | 10 +++++-----
-- src/Makefile.am              |  2 +-
-  src/function/ether.c         | 10 +++++-----
-  src/function/hid.c           | 12 ++++++------
-  src/function/midi.c          | 10 +++++-----
-  src/function/ms.c            | 10 +++++-----
-  src/function/uac2.c          | 10 +++++-----
-- src/function/uvc.c           | 10 +++++-----
-+ src/function/uvc.c           | 12 ++++++------
-  src/usbg_common.c            |  2 +-
-- 14 files changed, 101 insertions(+), 131 deletions(-)
-+ 13 files changed, 103 insertions(+), 133 deletions(-)
- 
- diff --git a/include/usbg/function/hid.h b/include/usbg/function/hid.h
- index 3463140..3b3907b 100644
-@@ -202,11 +201,11 @@ index 39df047..b9d9d4f 100644
-  
-  #ifdef __cplusplus
- diff --git a/include/usbg/function/ms.h b/include/usbg/function/ms.h
--index 780464c..f52eb78 100644
-+index 0715d38..b154aa4 100644
- --- a/include/usbg/function/ms.h
- +++ b/include/usbg/function/ms.h
--@@ -56,14 +56,6 @@ union usbg_f_ms_lun_attr_val {
-- 	const char *file;
-+@@ -59,14 +59,6 @@ union usbg_f_ms_lun_attr_val {
-+ 	const char *inquiry_string;
-  };
-  
- -#define USBG_F_MS_LUN_BOOL_TO_ATTR_VAL(WHAT)		\
-@@ -220,7 +219,7 @@ index 780464c..f52eb78 100644
-  /**
-   * @brief Cast from generic function to mass storage function
-   * @param[in] f function to be converted to ms funciton.
--@@ -157,7 +149,7 @@ int usbg_f_ms_get_lun_attr_val(usbg_f_ms *mf, int lun_id,
-+@@ -162,7 +154,7 @@ int usbg_f_ms_get_lun_attr_val(usbg_f_ms *mf, int lun_id,
-   */
-  int usbg_f_ms_set_lun_attr_val(usbg_f_ms *mf, int lun_id,
-  			       enum usbg_f_ms_lun_attr lattr,
-@@ -229,7 +228,7 @@ index 780464c..f52eb78 100644
-  
-  /**
-   * @brief Get the value which determines if lun is visible as a cdrom
--@@ -183,8 +175,8 @@ static inline int usbg_f_ms_get_lun_cdrom(usbg_f_ms *mf, int lun_id,
-+@@ -188,8 +180,8 @@ static inline int usbg_f_ms_get_lun_cdrom(usbg_f_ms *mf, int lun_id,
-  static inline int usbg_f_ms_set_lun_cdrom(usbg_f_ms *mf, int lun_id,
-  					  bool cdrom)
-  {
-@@ -240,7 +239,7 @@ index 780464c..f52eb78 100644
-  }
-  
-  /**
--@@ -209,8 +201,8 @@ static inline int usbg_f_ms_get_lun_ro(usbg_f_ms *mf, int lun_id, bool *ro)
-+@@ -214,8 +206,8 @@ static inline int usbg_f_ms_get_lun_ro(usbg_f_ms *mf, int lun_id, bool *ro)
-   */
-  static inline int usbg_f_ms_set_lun_ro(usbg_f_ms *mf, int lun_id, bool ro)
-  {
-@@ -251,7 +250,7 @@ index 780464c..f52eb78 100644
-  }
-  
-  /**
--@@ -239,8 +231,8 @@ static inline int usbg_f_ms_get_lun_nofua(usbg_f_ms *mf, int lun_id,
-+@@ -244,8 +236,8 @@ static inline int usbg_f_ms_get_lun_nofua(usbg_f_ms *mf, int lun_id,
-  static inline int usbg_f_ms_set_lun_nofua(usbg_f_ms *mf, int lun_id,
-  				bool nofua)
-  {
-@@ -262,7 +261,7 @@ index 780464c..f52eb78 100644
-  }
-  
-  /**
--@@ -267,8 +259,8 @@ static inline int usbg_f_ms_get_lun_removable(usbg_f_ms *mf, int lun_id,
-+@@ -272,8 +264,8 @@ static inline int usbg_f_ms_get_lun_removable(usbg_f_ms *mf, int lun_id,
-  static inline int usbg_f_ms_set_lun_removable(usbg_f_ms *mf, int lun_id,
-  				bool removable)
-  {
-@@ -273,7 +272,7 @@ index 780464c..f52eb78 100644
-  }
-  
-  /**
--@@ -313,8 +305,8 @@ int usbg_f_ms_get_lun_file_s(usbg_f_ms *mf, int lun_id,
-+@@ -318,8 +310,8 @@ int usbg_f_ms_get_lun_file_s(usbg_f_ms *mf, int lun_id,
-  static inline int usbg_f_ms_set_lun_file(usbg_f_ms *mf, int lun_id,
-  			   const char *file)
-  {
-@@ -283,9 +282,20 @@ index 780464c..f52eb78 100644
- +	return usbg_f_ms_set_lun_attr_val(mf, lun_id, USBG_F_MS_LUN_FILE, &val);
-  }
-  
-+ /**
-+@@ -349,8 +341,8 @@ static inline int usbg_f_ms_get_lun_inquiry_string(usbg_f_ms *mf, int lun_id,
-+ static inline int usbg_f_ms_set_lun_inquiry_string(usbg_f_ms *mf, int lun_id,
-+ 			   const char *inquiry_string)
+diff --git a/meta-oe/recipes-connectivity/libnet/libnet/0001-Remove-suppo=
+rt-for-SOCK_PACKET-sockets.patch b/meta-oe/recipes-connectivity/libnet/li=
+bnet/0001-Remove-support-for-SOCK_PACKET-sockets.patch
+new file mode 100644
+index 0000000000..2fc7ecd180
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libnet/libnet/0001-Remove-support-for-=
+SOCK_PACKET-sockets.patch
+@@ -0,0 +1,251 @@
++From dd77c43a9773edb895bfe9074315e83a19cac471 Mon Sep 17 00:00:00 2001
++From: Guocai He <guocai.he.cn@windriver.com>
++Date: Tue, 26 Aug 2025 06:15:41 +0000
++Subject: [PATCH] Remove support for SOCK_PACKET sockets
++MIME-Version: 1.0
++Content-Type: text/plain; charset=3DUTF-8
++Content-Transfer-Encoding: 8bit
++
++The current code has a build-time check to verify that PF_PACKET sockets
++are supported on Linux systems and if not, fallback on SOCK_PACKET socke=
+ts.
++
++The test implementation relies on FTM (Feature Test Macros) to detect
++glibc and its version to include correct headers.
++But, some libc such as the musl libc do not have such macros, making the
++test program compilation fail and libnet fallback on SOCK_PACKET.
++
++Since PF_PACKET support is present in kernel for more than 20 years now,
++the simplest solution and safe choice is to just drop support for
++SOCK_PACKET and assume PF_PACKET is always available on any Linux system.
++
++Signed-off-by: Herv=C3=A9 Boisse <admin@netgeek.ovh>
++
++Upstream-Status: Backport [19979c4541ddcc817c64ea911a309ee71a8cc250]
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++Signed-off-by: Guocai He <guocai.he.cn@windriver.com>
++---
++ acinclude.m4            | 87 -----------------------------------------
++ configure.ac            |  3 --
++ src/libnet_link_linux.c | 19 +--------
++ win32/config.h          |  1 -
++ 4 files changed, 1 insertion(+), 109 deletions(-)
++
++diff --git a/acinclude.m4 b/acinclude.m4
++index 064b582..f8ab967 100644
++--- a/acinclude.m4
+++++ b/acinclude.m4
++@@ -25,93 +25,6 @@ AC_DEFUN([AC_LIBNET_LINUX_PROCFS],
++                   [Define if you have the Linux /proc filesystem.])
++     fi])
++=20
++-dnl
++-dnl Checks to see if this linux kernel has a working PF_PACKET
++-dnl
++-dnl usage:
++-dnl
++-dnl     AC_LIBNET_CHECK_PF_PACKET
++-dnl
++-dnl results:
++-dnl
++-dnl     HAVE_PACKET_SOCKET (DEFINED)
++-dnl
++-
++-AC_DEFUN([AC_LIBNET_CHECK_PF_PACKET],
++-[
++-    AC_MSG_CHECKING(for packet socket (PF_PACKET))
++-    AC_CACHE_VAL(libnet_cv_have_packet_socket,
++-
++-        [
++-    cat > pf_packet-test.c << EOF
++-#include <stdio.h>
++-#include <errno.h>
++-#include <stdlib.h>
++-#include <netinet/in.h>
++-#include <sys/socket.h>
++-#include <features.h>    /* for the glibc version number */
++-#if __GLIBC__ >=3D 2 && __GLIBC_MINOR >=3D 1
++-#include <netpacket/packet.h>
++-#include <net/ethernet.h>     /* the L2 protocols */
++-#else
++-#include <asm/types.h>
++-#include <linux/if_packet.h>
++-#include <linux/if_ether.h>   /* The L2 protocols */
++-#endif
++-=20
++-#ifndef SOL_PACKET
++-#define SOL_PACKET 263
++-#endif  /* SOL_PACKET */
++-=20
++-int
++-main(int argc, char **argv)
++-{
++-    int fd;
++-=20
++-    fd =3D socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
++-    if (fd =3D=3D -1)
++-    {
++-        if (errno =3D=3D EPERM)
++-        {
++-            /* user's UID !=3D 0 */
++-            printf("probably");
++-            exit (EXIT_FAILURE);
++-        }
++-        printf("no");
++-        exit (EXIT_FAILURE);
++-    }
++-    printf("yes");
++-    exit (EXIT_SUCCESS);
++-}
++-EOF
++-    ${CC-cc} -o pf_packet-test $CFLAGS pf_packet-test.c >/dev/null 2>&1
++-
++-    # Oopz 4.3 BSD doesn't have this.  Sorry.
++-    if test ! -x ./pf_packet-test ; then
++-        libnet_cv_have_packet_socket=3Dchoked
++-    else
++-        libnet_cv_have_packet_socket=3D`./pf_packet-test`;
++-    fi
++-    if test $libnet_cv_have_packet_socket =3D choked; then
++-        AC_MSG_RESULT(test program compile choked... assuming no)
++-    elif test $libnet_cv_have_packet_socket =3D yes; then
++-        AC_MSG_RESULT(yes)
++-    elif test $libnet_cv_have_packet_socket =3D probably; then
++-        AC_MSG_RESULT(test program got EPERM... assuming yes)
++-    elif test $libnet_cv_have_packet_socket =3D no; then
++-        AC_MSG_RESULT(no)
++-    fi
++-
++-    rm -f pf_packet-test* core core.pf_packet-test
++-
++-    ])
++-
++-    if test $libnet_cv_have_packet_socket =3D yes -o $libnet_cv_have_pa=
+cket_socket =3D probably; then
++-        AC_DEFINE(HAVE_PACKET_SOCKET, 1,
++-          [Define if we're running on a Linux system with PF_PACKET soc=
+kets.])
++-    fi
++-])
++-
++ dnl
++ dnl Looks for a previous libnet version and attempts to determine which=
+ verion
++ dnl it is.  Version 0.8 was the first version that actually knew intern=
+ally
++diff --git a/configure.ac b/configure.ac
++index 4751f62..ad002b9 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -51,7 +51,6 @@ AC_LIBNET_ENDIAN_CHECK
++ dnl AC_LBL_LIBRARY_NET
++=20
++ AC_SUBST(ENDIANESS)
++-AC_SUBST(HAVE_PACKET_SOCKET)
++ AC_SUBST(ADDITIONAL_LIBS)
++ AC_SUBST(LIBNET_CONFIG_DEFINES)
++ AC_SUBST(LIBNET_CONFIG_LIBS)
++@@ -87,7 +86,6 @@ if test -n "${with_link_layer}"; then
++         snoop) AC_LIBOBJ([libnet_link_snoop]) ;;
++         dlpi)  AC_LIBOBJ([libnet_link_dlpi]) ;;
++         linux) AC_LIBOBJ([libnet_link_linux])
++-	       AC_LIBNET_CHECK_PF_PACKET
++ 	       AC_LIBNET_LINUX_PROCFS ;;
++         none) AC_LIBOBJ([libnet_link_none]) ;;
++         *) AC_MSG_ERROR([Invalid link type "${with_link_layer}"]) ;;
++@@ -115,7 +113,6 @@ elif test "${ac_cv_header_sys_dlpi_h}" =3D "yes" ; t=
+hen
++ elif test "${ac_cv_header_linux_socket_h}" =3D "yes" ; then
++     AC_LIBOBJ([libnet_link_linux])
++     AC_MSG_RESULT(found link layer linux)
++-    AC_LIBNET_CHECK_PF_PACKET
++     AC_LIBNET_LINUX_PROCFS
++ elif test "${cross_compiling}" !=3D "yes" -a -c /dev/bpf0 ; then       =
+    # check again in case not readable
++     AC_LIBOBJ([libnet_link_bpf])
++diff --git a/src/libnet_link_linux.c b/src/libnet_link_linux.c
++index 3c6df3c..1dd2a42 100644
++--- a/src/libnet_link_linux.c
+++++ b/src/libnet_link_linux.c
++@@ -33,13 +33,11 @@
++ #include <netinet/if_ether.h>
++ #include <net/if_arp.h>
++=20
++-#if (HAVE_PACKET_SOCKET)
++ #ifndef SOL_PACKET
++ #define SOL_PACKET 263
++ #endif  /* SOL_PACKET */
++ #include <netpacket/packet.h>
++ #include <net/ethernet.h>     /* the L2 protocols */
++-#endif  /* HAVE_PACKET_SOCKET */
++=20
++ #include "../include/libnet.h"
++=20
++@@ -69,11 +67,8 @@ libnet_open_link(libnet_t *l)
++         return (-1);
++     }=20
++=20
++-#if (HAVE_PACKET_SOCKET)
++     l->fd =3D socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
++-#else
++-    l->fd =3D socket(PF_INET, SOCK_PACKET, htons(ETH_P_ALL));
++-#endif
+++   =20
++     if (l->fd =3D=3D -1)
++     {
++         if (errno =3D=3D EPERM) {
++@@ -177,7 +172,6 @@ libnet_close_link(libnet_t *l)
++ }
++=20
++=20
++-#if (HAVE_PACKET_SOCKET)
++ static int
++ get_iface_index(int fd, const char *device)
 + {
-+-	return usbg_f_ms_set_lun_attr_val(mf, lun_id, USBG_F_MS_LUN_INQUIRY_STRING,
-+-					  USBG_F_MS_LUN_CCHAR_PTR_TO_ATTR_VAL(inquiry_string));
-++	union usbg_f_ms_lun_attr_val val = {.inquiry_string = inquiry_string};
-++	return usbg_f_ms_set_lun_attr_val(mf, lun_id, USBG_F_MS_LUN_INQUIRY_STRING, &val);
++@@ -194,18 +188,12 @@ get_iface_index(int fd, const char *device)
++ =20
++     return ifr.ifr_ifindex;
 + }
-+ 
-  /**
- diff --git a/include/usbg/function/net.h b/include/usbg/function/net.h
--index b0409f1..06cee30 100644
-+index ee33a4d..3d8a77e 100644
- --- a/include/usbg/function/net.h
- +++ b/include/usbg/function/net.h
- @@ -56,12 +56,6 @@ union usbg_f_net_attr_val {
-@@ -341,9 +351,9 @@ index b0409f1..06cee30 100644
-  }
-  
-  /**
--@@ -226,8 +220,8 @@ static inline int usbg_f_net_get_qmult(usbg_f_net *nf, int *qmult)
-+@@ -226,8 +220,8 @@ static inline int usbg_f_net_get_qmult(usbg_f_net *nf, unsigned int *qmult)
-   */
-- static inline int usbg_f_net_set_qmult(usbg_f_net *nf, int qmult)
-+ static inline int usbg_f_net_set_qmult(usbg_f_net *nf, unsigned int qmult)
-  {
- -	return usbg_f_net_set_attr_val(nf, USBG_F_NET_QMULT,
- -				       USBG_F_NET_INT_TO_ATTR_VAL(qmult));
-@@ -386,10 +396,10 @@ index b0409f1..06cee30 100644
-  
-  #ifdef __cplusplus
- diff --git a/include/usbg/function/uac2.h b/include/usbg/function/uac2.h
--index 6fc4d24..80918ef 100644
-+index 09accdc..1f9085b 100644
- --- a/include/usbg/function/uac2.h
- +++ b/include/usbg/function/uac2.h
--@@ -110,9 +110,6 @@ union usbg_f_uac2_attr_val {
-+@@ -112,9 +112,6 @@ union usbg_f_uac2_attr_val {
-  	const char * function_name;
-  };
-  
-@@ -399,7 +409,7 @@ index 6fc4d24..80918ef 100644
-  /**
-   * @brief Cast from generic function to uac2 function
-   * @param[in] f function to be converted to uac2 funciton.
--@@ -172,7 +169,7 @@ int usbg_f_uac2_get_attr_val(usbg_f_uac2 *af, enum usbg_f_uac2_attr attr,
-+@@ -174,7 +171,7 @@ int usbg_f_uac2_get_attr_val(usbg_f_uac2 *af, enum usbg_f_uac2_attr attr,
-   * @return 0 on success usbg_error if error occurred.
-   */
-  int usbg_f_uac2_set_attr_val(usbg_f_uac2 *af, enum usbg_f_uac2_attr attr,
-@@ -408,7 +418,7 @@ index 6fc4d24..80918ef 100644
-  
-  /**
-   * @brief Get the capture channel mask of UAC2 adapter
--@@ -194,8 +191,8 @@ static inline int usbg_f_uac2_get_c_chmask(usbg_f_uac2 *af, int *c_chmask)
-+@@ -196,8 +193,8 @@ static inline int usbg_f_uac2_get_c_chmask(usbg_f_uac2 *af, int *c_chmask)
-   */
-  static inline int usbg_f_uac2_set_c_chmask(usbg_f_uac2 *af, int c_chmask)
-  {
-@@ -419,7 +429,7 @@ index 6fc4d24..80918ef 100644
-  }
-  
-  /**
--@@ -218,8 +215,8 @@ static inline int usbg_f_uac2_get_c_srate(usbg_f_uac2 *af, int *c_srate)
-+@@ -220,8 +217,8 @@ static inline int usbg_f_uac2_get_c_srate(usbg_f_uac2 *af, int *c_srate)
-   */
-  static inline int usbg_f_uac2_set_c_srate(usbg_f_uac2 *af, int c_srate)
-  {
-@@ -430,7 +440,7 @@ index 6fc4d24..80918ef 100644
-  }
-  
-  /**
--@@ -242,8 +239,8 @@ static inline int usbg_f_uac2_get_c_ssize(usbg_f_uac2 *af, int *c_ssize)
-+@@ -244,8 +241,8 @@ static inline int usbg_f_uac2_get_c_ssize(usbg_f_uac2 *af, int *c_ssize)
-   */
-  static inline int usbg_f_uac2_set_c_ssize(usbg_f_uac2 *af, int c_ssize)
-  {
-@@ -441,7 +451,7 @@ index 6fc4d24..80918ef 100644
-  }
-  
-  /**
--@@ -266,8 +263,8 @@ static inline int usbg_f_uac2_get_p_chmask(usbg_f_uac2 *af, int *p_chmask)
-+@@ -268,8 +265,8 @@ static inline int usbg_f_uac2_get_p_chmask(usbg_f_uac2 *af, int *p_chmask)
-   */
-  static inline int usbg_f_uac2_set_p_chmask(usbg_f_uac2 *af, int p_chmask)
-  {
-@@ -452,7 +462,7 @@ index 6fc4d24..80918ef 100644
-  }
-  
-  /**
--@@ -290,8 +287,8 @@ static inline int usbg_f_uac2_get_p_srate(usbg_f_uac2 *af, int *p_srate)
-+@@ -292,8 +289,8 @@ static inline int usbg_f_uac2_get_p_srate(usbg_f_uac2 *af, int *p_srate)
-   */
-  static inline int usbg_f_uac2_set_p_srate(usbg_f_uac2 *af, int p_srate)
-  {
-@@ -463,7 +473,7 @@ index 6fc4d24..80918ef 100644
-  }
-  
-  /**
--@@ -314,8 +311,8 @@ static inline int usbg_f_uac2_get_p_ssize(usbg_f_uac2 *af, int *p_ssize)
-+@@ -316,8 +313,8 @@ static inline int usbg_f_uac2_get_p_ssize(usbg_f_uac2 *af, int *p_ssize)
-   */
-  static inline int usbg_f_uac2_set_p_ssize(usbg_f_uac2 *af, int p_ssize)
-  {
-@@ -475,10 +485,10 @@ index 6fc4d24..80918ef 100644
-  
-  #ifdef __cplusplus
- diff --git a/include/usbg/usbg_internal.h b/include/usbg/usbg_internal.h
--index 1d8dfe2..d6a3e3a 100644
-+index 0b86d11..7025e89 100644
- --- a/include/usbg/usbg_internal.h
- +++ b/include/usbg/usbg_internal.h
--@@ -322,7 +322,7 @@ void usbg_cleanup_function(struct usbg_function *f);
-+@@ -325,7 +325,7 @@ void usbg_cleanup_function(struct usbg_function *f);
-  	}
-  
-  typedef int (*usbg_attr_get_func)(const char *, const char *, const char *, void *);
-@@ -487,7 +497,7 @@ index 1d8dfe2..d6a3e3a 100644
-  
-  static inline int usbg_get_dec(const char *path, const char *name,
-  			   const char *attr, void *val)
--@@ -331,7 +331,7 @@ static inline int usbg_get_dec(const char *path, const char *name,
-+@@ -334,7 +334,7 @@ static inline int usbg_get_dec(const char *path, const char *name,
-  }
-  
-  static inline int usbg_set_dec(const char *path, const char *name,
-@@ -496,7 +506,7 @@ index 1d8dfe2..d6a3e3a 100644
-  {
-  	return usbg_write_dec(path, name, attr, *((int *)val));
-  }
--@@ -343,7 +343,7 @@ static inline int usbg_get_bool(const char *path, const char *name,
-+@@ -346,7 +346,7 @@ static inline int usbg_get_bool(const char *path, const char *name,
-  }
-  
-  static inline int usbg_set_bool(const char *path, const char *name,
-@@ -505,7 +515,7 @@ index 1d8dfe2..d6a3e3a 100644
-  {
-  	return usbg_write_bool(path, name, attr, *((bool *)val));
-  }
--@@ -355,7 +355,7 @@ static inline int usbg_get_string(const char *path, const char *name,
-+@@ -358,7 +358,7 @@ static inline int usbg_get_string(const char *path, const char *name,
-  }
-  
-  static inline int usbg_set_string(const char *path, const char *name,
-@@ -514,7 +524,7 @@ index 1d8dfe2..d6a3e3a 100644
-  {
-  	return usbg_write_string(path, name, attr, *(char **)val);
-  }
--@@ -364,7 +364,7 @@ int usbg_get_ether_addr(const char *path, const char *name, const char *attr,
-+@@ -367,7 +367,7 @@ int usbg_get_ether_addr(const char *path, const char *name, const char *attr,
-  			void *val);
-  
-  int usbg_set_ether_addr(const char *path, const char *name, const char *attr,
-@@ -523,20 +533,8 @@ index 1d8dfe2..d6a3e3a 100644
-  
-  int usbg_get_dev(const char *path, const char *name, const char *attr,
-  		 void *val);
--diff --git a/src/Makefile.am b/src/Makefile.am
--index 634209f..ac97bc8 100644
----- a/src/Makefile.am
--+++ b/src/Makefile.am
--@@ -7,6 +7,6 @@ else
-- libusbgx_la_SOURCES += usbg_schemes_none.c
-- endif
-- libusbgx_la_LDFLAGS = $(LIBCONFIG_LIBS)
---libusbgx_la_LDFLAGS += -version-info 2:0:0
--+libusbgx_la_LDFLAGS += -version-info 3:0:0
-- libusbgx_la_CFLAGS = $(LIBCONFIG_CFLAGS)
-- AM_CPPFLAGS=-I$(top_srcdir)/include/ -I$(top_builddir)/include/usbg
- diff --git a/src/function/ether.c b/src/function/ether.c
--index a9eaf33..a1d20f1 100644
-+index 8745eec..7e6d146 100644
- --- a/src/function/ether.c
- +++ b/src/function/ether.c
- @@ -124,7 +124,7 @@ static int ether_libconfig_import(struct usbg_function *f,
-@@ -575,7 +573,7 @@ index a9eaf33..a1d20f1 100644
-  
-  int usbg_f_net_get_ifname_s(usbg_f_net *nf, char *buf, int len)
- diff --git a/src/function/hid.c b/src/function/hid.c
--index 4d075cf..895c2c6 100644
-+index 024cbc2..909605b 100644
- --- a/src/function/hid.c
- +++ b/src/function/hid.c
- @@ -69,9 +69,9 @@ static int hid_get_report(const char *path, const char *name, const char *attr,
-@@ -623,7 +621,7 @@ index 4d075cf..895c2c6 100644
-  }
-  
- diff --git a/src/function/midi.c b/src/function/midi.c
--index 1cedb97..2318b49 100644
-+index 601d845..6d060f0 100644
- --- a/src/function/midi.c
- +++ b/src/function/midi.c
- @@ -100,7 +100,7 @@ static int midi_libconfig_import(struct usbg_function *f,
-@@ -660,10 +658,10 @@ index 1cedb97..2318b49 100644
-  
-  int usbg_f_midi_get_id_s(usbg_f_midi *mf, char *buf, int len)
- diff --git a/src/function/ms.c b/src/function/ms.c
--index 519b012..5cdd814 100644
-+index 0523830..37ae9de 100644
- --- a/src/function/ms.c
- +++ b/src/function/ms.c
--@@ -207,7 +207,7 @@ static int ms_import_lun_attrs(struct usbg_f_ms *mf, int lun_id,
-+@@ -210,7 +210,7 @@ static int ms_import_lun_attrs(struct usbg_f_ms *mf, int lun_id,
-  		if (ret < 0)
-  			break;
-  
-@@ -672,7 +670,7 @@ index 519b012..5cdd814 100644
-  		if (ret)
-  			break;
-  	}
--@@ -605,8 +605,8 @@ int usbg_f_ms_set_lun_attrs(usbg_f_ms *mf, int lun_id,
-+@@ -608,8 +608,8 @@ int usbg_f_ms_set_lun_attrs(usbg_f_ms *mf, int lun_id,
-  
-  	for (i = USBG_F_MS_LUN_ATTR_MIN; i < USBG_F_MS_LUN_ATTR_MAX; ++i) {
-  		ret = usbg_f_ms_set_lun_attr_val(mf, lun_id, i,
-@@ -683,7 +681,7 @@ index 519b012..5cdd814 100644
-  						+ ms_lun_attr[i].offset));
-  		if (ret)
-  			break;
--@@ -633,7 +633,7 @@ int usbg_f_ms_get_lun_attr_val(usbg_f_ms *mf, int lun_id,
-+@@ -636,7 +636,7 @@ int usbg_f_ms_get_lun_attr_val(usbg_f_ms *mf, int lun_id,
-  
-  int usbg_f_ms_set_lun_attr_val(usbg_f_ms *mf, int lun_id,
-  			       enum usbg_f_ms_lun_attr lattr,
-@@ -692,7 +690,7 @@ index 519b012..5cdd814 100644
-  {
-  	char lpath[USBG_MAX_PATH_LENGTH];
-  	int ret;
--@@ -644,7 +644,7 @@ int usbg_f_ms_set_lun_attr_val(usbg_f_ms *mf, int lun_id,
-+@@ -647,7 +647,7 @@ int usbg_f_ms_set_lun_attr_val(usbg_f_ms *mf, int lun_id,
-  		return USBG_ERROR_PATH_TOO_LONG;
-  
-  	return 	ms_lun_attr[lattr].set(lpath, "",
-@@ -702,7 +700,7 @@ index 519b012..5cdd814 100644
-  
-  int usbg_f_ms_get_lun_file_s(usbg_f_ms *mf, int lun_id,
- diff --git a/src/function/uac2.c b/src/function/uac2.c
--index 9ca8b66..fc06c1d 100644
-+index 5bd26f0..7a469b1 100644
- --- a/src/function/uac2.c
- +++ b/src/function/uac2.c
- @@ -125,7 +125,7 @@ static int uac2_libconfig_import(struct usbg_function *f,
-@@ -737,10 +735,19 @@ index 9ca8b66..fc06c1d 100644
- +				    uac2_attr[attr].name, val);
-  }
- diff --git a/src/function/uvc.c b/src/function/uvc.c
--index f39594b..947b94e 100644
-+index c78edfa..a3562a8 100644
- --- a/src/function/uvc.c
- +++ b/src/function/uvc.c
--@@ -303,7 +303,7 @@ int usbg_f_uvc_get_config_attr_val(usbg_f_uvc *uvcf, enum usbg_f_uvc_config_attr
-+@@ -146,7 +146,7 @@ static inline int usbg_get_guid(const char *path, const char *name,
-+ }
-+ 
-+ static inline int usbg_set_guid(const char *path, const char *name,
-+-			      const char *attr, void *val)
-++			      const char *attr, const void *val)
++-#endif
++-
++=20
++ int
++ libnet_write_link(libnet_t *l, const uint8_t *packet, uint32_t size)
 + {
-+ 	return usbg_write_guid(path, name, attr, *(char **)val);
-+ }
-+@@ -329,7 +329,7 @@ int usbg_f_uvc_get_config_attr_val(usbg_f_uvc *uvcf, enum usbg_f_uvc_config_attr
-  }
-  
-  int usbg_f_uvc_set_config_attr_val(usbg_f_uvc *uvcf, enum usbg_f_uvc_config_attr iattr,
-@@ -749,7 +756,7 @@ index f39594b..947b94e 100644
-  {
-  	char ipath[USBG_MAX_PATH_LENGTH];
-  	int nmb;
--@@ -314,7 +314,7 @@ int usbg_f_uvc_set_config_attr_val(usbg_f_uvc *uvcf, enum usbg_f_uvc_config_attr
-+@@ -340,7 +340,7 @@ int usbg_f_uvc_set_config_attr_val(usbg_f_uvc *uvcf, enum usbg_f_uvc_config_attr
-  		return USBG_ERROR_PATH_TOO_LONG;
-  
-  	return uvc_config_attr[iattr].set(ipath, "",
-@@ -758,7 +765,7 @@ index f39594b..947b94e 100644
-  }
-  
-  int usbg_f_uvc_get_config_attrs(usbg_f_uvc *uvcf, struct usbg_f_uvc_config_attrs *iattrs)
--@@ -341,8 +341,8 @@ int usbg_f_uvc_set_config_attrs(usbg_f_uvc *uvcf, const struct usbg_f_uvc_config
-+@@ -367,8 +367,8 @@ int usbg_f_uvc_set_config_attrs(usbg_f_uvc *uvcf, const struct usbg_f_uvc_config
-  
-  	for (i = USBG_F_UVC_FRAME_ATTR_MIN; i < USBG_F_UVC_FRAME_ATTR_MAX; ++i) {
-  		ret = usbg_f_uvc_set_config_attr_val(uvcf, i,
-@@ -769,7 +776,7 @@ index f39594b..947b94e 100644
-  						+ uvc_config_attr[i].offset));
-  		if (ret)
-  			break;
--@@ -774,7 +774,7 @@ static int uvc_import_config(struct usbg_f_uvc *uvcf, config_setting_t *root)
-+@@ -800,7 +800,7 @@ static int uvc_import_config(struct usbg_f_uvc *uvcf, config_setting_t *root)
-  		if (ret < 0)
-  			break;
-  
-@@ -779,10 +786,10 @@ index f39594b..947b94e 100644
-  			break;
-  	}
- diff --git a/src/usbg_common.c b/src/usbg_common.c
--index 5f7f4e5..7234649 100644
-+index 0a55c2e..0f788ff 100644
- --- a/src/usbg_common.c
- +++ b/src/usbg_common.c
--@@ -337,7 +337,7 @@ int usbg_get_ether_addr(const char *path, const char *name,
-+@@ -391,7 +391,7 @@ int usbg_get_ether_addr(const char *path, const char *name,
-  }
-  
-  int usbg_set_ether_addr(const char *path, const char *name,
-@@ -792,5 +799,5 @@ index 5f7f4e5..7234649 100644
-  	char str_addr[USBG_MAX_STR_LENGTH];
-  
- -- 
--2.42.0
-+2.43.0
- 
-diff --git a/meta-oe/recipes-support/libusbgx/libusbgx/0001-libusbgx-Add-interface-name-for-NCM-Feature-Descript.patch b/meta-oe/recipes-support/libusbgx/libusbgx/0001-libusbgx-Add-interface-name-for-NCM-Feature-Descript.patch
-deleted file mode 100644
-index cc122c844c..0000000000
---- a/meta-oe/recipes-support/libusbgx/libusbgx/0001-libusbgx-Add-interface-name-for-NCM-Feature-Descript.patch
-+++ /dev/null
-@@ -1,52 +0,0 @@
--From 4f3f2ad08e6ca132bd1dd388e02b57223bf4219d Mon Sep 17 00:00:00 2001
--From: Ming Liu <liu.ming50@gmail.com>
--Date: Sun, 11 Dec 2022 14:11:49 +0100
--Subject: [PATCH] libusbgx: Add interface name for NCM Feature Descriptors
--
--In commit: abf422bffca4a4767e7e242c44910dbf5ef7094f
--[
--Author: Stefan Agner <stefan.agner@toradex.com>
--Date:   Tue Jan 24 14:22:25 2017 -0800
--
--    libusbgx: Add interface name for Feature Descriptors
--
--    This adds interface name required for "Feature Descriptors". If
--    specified, we can assume that a Feature Descriptor with the
--    interface name of the specified string is understood by the
--    kernel (e.g. interface.rndis).
--]
--
--it only added Feature Descriptors for RNDIS, NCM also needs that, or
--else it could not be recognized by Windows systems.
--
--Add Feature Descriptors interface name for NCM.
--
--Upstream-Status: Submitted [https://github.com/linux-usb-gadgets/libusbgx/pull/73]
--
--Signed-off-by: Ming Liu <liu.ming50@gmail.com>
-----
-- src/function/ether.c | 6 ++++++
-- 1 file changed, 6 insertions(+)
--
--diff --git a/src/function/ether.c b/src/function/ether.c
--index b1fe1d2..a9eaf33 100644
----- a/src/function/ether.c
--+++ b/src/function/ether.c
--@@ -184,8 +184,14 @@ struct usbg_function_type usbg_f_type_subset = {
-- 	ETHER_FUNCTION_OPTS
-- };
-- 
--+static char *ncm_os_desc_ifnames[] = {
--+	"ncm",
--+	NULL
--+};
--+
-- struct usbg_function_type usbg_f_type_ncm = {
-- 	.name = "ncm",
--+	.os_desc_iname = ncm_os_desc_ifnames,
-- 	ETHER_FUNCTION_OPTS
-- };
-- 
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-index 7b12b911d8..ad8fe0226d 100644
---- a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-+++ b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-@@ -5,12 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
- 
- inherit autotools pkgconfig systemd update-rc.d update-alternatives
- 
--PV = "0.2.0+git"
--SRCREV = "ec0b01c03fdc7893997b7b32ec1c12c6103f62f3"
-+PV = "0.3.0+git"
-+SRCREV = "dbedf16f80c5b4e1807ea4f80cc89d1f15d36f0a"
- SRCBRANCH = "master"
- SRC_URI = " \
-     git://github.com/libusbgx/libusbgx.git;branch=${SRCBRANCH};protocol=https \
--    file://0001-libusbgx-Add-interface-name-for-NCM-Feature-Descript.patch \
-     file://0001-fix-stack-buffer-overflow-in-usbg_f_foo_attr_val-pro.patch \
-     file://gadget-start \
-     file://gadget-stop \
--- 
-2.43.0
++     int c;
++-#if (HAVE_PACKET_SOCKET)
++     struct sockaddr_ll sa;
++-#else
++-    struct sockaddr sa;
++-#endif
++=20
++     if (l =3D=3D NULL)
++     {=20
++@@ -213,7 +201,6 @@ libnet_write_link(libnet_t *l, const uint8_t *packet=
+, uint32_t size)
++     }
++=20
++     memset(&sa, 0, sizeof (sa));
++-#if (HAVE_PACKET_SOCKET)
++     sa.sll_family    =3D AF_PACKET;
++     sa.sll_ifindex   =3D get_iface_index(l->fd, l->device);
++     if (sa.sll_ifindex =3D=3D -1)
++@@ -221,10 +208,6 @@ libnet_write_link(libnet_t *l, const uint8_t *packe=
+t, uint32_t size)
++         return (-1);
++     }
++     sa.sll_protocol  =3D htons(ETH_P_ALL);
++-#else
++-	strncpy(sa.sa_data, l->device, sizeof (sa.sa_data) - 1);
++-    sa.sa_data[sizeof (sa.sa_data) - 1] =3D 0;
++-#endif
++=20
++     c =3D sendto(l->fd, packet, size, 0,
++             (struct sockaddr *)&sa, sizeof (sa));
++diff --git a/win32/config.h b/win32/config.h
++index 926f12f..12e1ee7 100644
++--- a/win32/config.h
+++++ b/win32/config.h
++@@ -11,7 +11,6 @@
++ #undef HAVE_HPUX11
++ #undef HAVE_SOCKADDR_SA_LEN
++ #undef HAVE_DLPI
++-#undef HAVE_PACKET_SOCKET
++ #undef HAVE_STRUCT_IP_CSUM
++ #undef HAVE_LIB_PCAP
++ #undef STUPID_SOLARIS_CHECKSUM_BUG
++--=20
++2.35.5
++
+diff --git a/meta-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb b/meta=
+-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb
+index 785abf66d6..5e35fc3391 100644
+--- a/meta-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb
++++ b/meta-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb
+@@ -10,6 +10,7 @@ PROVIDES =3D "libnet-1.2rc2"
+=20
+ SRC_URI =3D "${SOURCEFORGE_MIRROR}/libnet-dev/${BPN}-${PV}.tar.gz \
+            file://0001-Support-musl-libc-remove-support-for-glibc-2.1.pa=
+tch \
++           file://0001-Remove-support-for-SOCK_PACKET-sockets.patch \
+           "
+=20
+ SRC_URI[md5sum] =3D "f051e6e5bdecddb90f77c701c2ca1804"
+--=20
+2.25.1
 
 
