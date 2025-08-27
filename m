@@ -2,100 +2,91 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C531CA0FF0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D991CA0FED
 	for <webhook@archiver.kernel.org>; Wed, 27 Aug 2025 02:49:09 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web10.6266.1756262945679118433
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web11.6116.1756262943546353436
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Aug 2025 19:49:05 -0700
+ Tue, 26 Aug 2025 19:49:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DBqDEVpc;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2487a60d649so13463065ad.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Aug 2025 19:49:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aaLdkVU0;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-771fa65b0e1so682310b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Aug 2025 19:49:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756262945; x=1756867745; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=HOwdnwSyaAv2L7y9Wp9kELoLmG4tIxvo2xvkpNC/kkU=;
-        b=DBqDEVpc/2d+1eoQxZX6HcPne9V/svhEXlMaBFwmwrPQK/4SQ+6jQFPV/nIn7PJ8AI
-         E/5bCgqA7DftqOwePw9j4kzA+bR4Ypu5Kx9DX2MA+cS6Bx0WfuvZ5wIAOTrU4rptieQA
-         kCMF05FWvrtfEput4KUUFO7hqbszoAFI/22E2ZDtogo57BL9VY2GjMWHkhnFXIj65o0X
-         2OuN+HRtgLS+I7ggeJUd485TIrVWsJWNsu6YFk98FT/6vot/ZUD3komxdeHky3LZ7prf
-         ChMm9rGFdxglPCa3bzJavMZdaNATXQrLV4HNovHASI/YTHEkQxasQ0YXeG2CZMmzD9It
-         8J4g==
+        d=gmail.com; s=20230601; t=1756262943; x=1756867743; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=SFIe/bQeA8cuXdvHFhhgYJ297EFIlo4/Gv0EehNQQ6U=;
+        b=aaLdkVU0T1yDN5CZINrfVo+tAEkDQgcTb8+ra8eJE70Pb2J9eeX963Xb1pS/w0Fsxg
+         ZIC1CBR5hvHjgntRXaEN5XiL+cvxEcQGo7RvLckY44RHLivZsWPKOQpk76bXz0w6wcJA
+         WM0dmx4JBn3cakYxZCMs910+5gbtsKYGAl+NPB7b8O2r9fy9+mGBQ4ryeRFevdCk4L+1
+         IthT1uuVEXV7tgu/TUsRJTPsjl5I4KOGU5jBM5oSuEweotKL8E+51ia+TEId1GHzOVdy
+         mLHT/eOYW+P6PBU46dfskl9rgK176AUiksVgHdeH3HjR2zn1TltmE7swnyUmC/ObRxiN
+         wSvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756262945; x=1756867745;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=HOwdnwSyaAv2L7y9Wp9kELoLmG4tIxvo2xvkpNC/kkU=;
-        b=HkCsfjldxC653+MuAGRo7jfZI+pGGaiFIdv1a8GDVa4miSwQ9wyEa0CIDuu6u2yM9m
-         dvhvCPi276tFHm8gHQR4TVIzrcQDB6GudfGhHOzSMaYEgRjkJl8Jdup9vJVDQlCBkzfU
-         5UNIgE3nYbtaMCMmDzm3kGK3iXaoS9fjGiS+z5oMbo2udwuoWytSHxu1FFycGDvHs24b
-         nEzPqi26cuBVFWrr8quQZagjKX6nhGaWgndW/0ZuTcuuvFW+eUOQv8JaazlcHkTKMVFR
-         dKYLsb/Z7qzPxra76mVkwckg1zdd/1bGVEVfiPvl0lu71Od1mKYr4wYNTcK62/zt0ja/
-         ryng==
-X-Gm-Message-State: AOJu0YxTfndVi9xXiXGSG9Z4xzJiwdAmA2e3+Fr9hTcqP0bXq9sXoVuB
-	c8sHg4xZB0Oo5cVSjf9lItcWMqM2FYyemSqve3JsijaUeoeEHkO5fv8xTdAaKTFD
-X-Gm-Gg: ASbGncvSoKRabL2CmSO7jlaPiQw8ojwl1mJcOz77Jgsb60G2LPJO9EMNSNsVuOajkan
-	seq196pZN34mTfnFAK1rWCrHWTrw8uyUulEVhdOgG9h4RDuAYGmbSXgqu3lAqX9bqz1exLJAf11
-	wcaumyz6N7p7K2LbUKuoIi4zXVmtIi7xZrjQm245cmwBuO9e32vsrv7IdctZdmS9NL/qKIP+tON
-	OeL8nCknpDGL8wN5+ThbryWI/dGYHH+cUsNKdlBdtkBPw/z+WrRHU2byNkAagX9k/TbA08zMD8f
-	nfoiJo4zYX7sy3rgioEdx9EqS3XHnelX4kgI4LggzCfaoUKihCVsszz0z7ZerJmCDcqgs+flXoy
-	5ZZV/0GfNMd+opu5pOVxBLyKeoOn/BrpvCT6ewiMaeA2LNE/uf9ZCpoTtvtMIW1MocAPgwHulBT
-	1/DaGNKJNFb2u5QmkF3uniZC23UdLw5B7RgAu54GnrfMnH9aBx31k=
-X-Google-Smtp-Source: AGHT+IHS8IUCzRV1bjXi59f9HnZv8VAzbVchOrL+zoqm7vJuziAA+2yvutXSKzHc+NJtJNaGL5W+aw==
-X-Received: by 2002:a17:902:d4c8:b0:246:d00f:291b with SMTP id d9443c01a7336-246d00f2ae0mr124318965ad.33.1756262944650;
-        Tue, 26 Aug 2025 19:49:04 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1756262943; x=1756867743;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=SFIe/bQeA8cuXdvHFhhgYJ297EFIlo4/Gv0EehNQQ6U=;
+        b=l3x8iqdEeO7Bts+r1extyYWJp0O0znWm+Se4BBh9DQvpY2X3Zb4+/i0msURlWHGHyn
+         8eOWyMFEaRB1SL+fNDW0e4VLiDWvZ1yc4DLMJUsgB2jytPgC5znQHU4QQhAFhJL3H1r8
+         wCmlyDtFmTcwHjVFZ8a/3zuI6Eg7AXPQkZbhxkMXYRBiYc+ptAq2i7/Xzmq8lYk9G5sl
+         5NOb9NkWMedckVsPvolD23O+MImEyxZCM7ho31fWNKJyDlgguUGFfPY0jWUpfQrcMBB0
+         McK+uiWGFnuQ5hjuEkPFU4N60s4+95u72SO73mnMw94vInZ5LKhsgKnzwEdhWpn4ArRx
+         lRkA==
+X-Gm-Message-State: AOJu0YzLcCwdVqGX9nKeA/rIjXRKMu4Gn6g+kNg3Vah2bSsKdI1o5+Gj
+	IBZHom5UUu1fxuIC0bDHG4uoKiXt7Zefq7/mAsHAayOLO9xPxFaA3wcYntxao1w3
+X-Gm-Gg: ASbGncsqSQYGZ25sHRcdHwAEpMJAUV5eGW7yq4EMe/vUGiCiJHAqShThkFgooE/qUAf
+	xqhMR4SGdwhWQlbphugWqO8kh48BUitTxal5RqUeLrZ0/56l2ApV6A8br2AzetE2pwMM6A1qC9f
+	Ky9FT5FhMEK0Xo0rpQIMmN+t1HQMYm9kkBp3tO0S8cjAx0xJwQ5y88eruaCvlbQyu883COcVSSF
+	q7Ad15iMf4/gdBboHSkbdXIHEXWhtuMrx5WmhzHpS+5gQEqRS+MzmXT52o4cbmB0GVcOAsrES6z
+	Vjq5Xzy3zDhIMAzACaQSvOoOpmbRFgyV82C6GUEQkChU/LKC2zOr6Msr7DvsVs7iWb2QlihQekh
+	Nh/f8YnRxAHpWlmM8Fw0gaO4VO57tBvCHEJVvBYiOc2YfvDLlaq2tpj9zdxR28X8F/1QU7ueKjz
+	XmYrZ+AmWGF9PIUhxh3P+nAxSSb/mClEkZFKtYQrOf41kEJw6fNKQ=
+X-Google-Smtp-Source: AGHT+IEe8INlSDzSwuQ2TQejPSp+xqcJW4cF4ilApGJQGf2zR1CIxytjGoNz7UOrP5MRilWK8UP2+Q==
+X-Received: by 2002:a05:6a20:72a5:b0:23f:fbb1:c21b with SMTP id adf61e73a8af0-24340b5b496mr25353993637.17.1756262942447;
+        Tue, 26 Aug 2025 19:49:02 -0700 (PDT)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::cfd6])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b49cb8b4b98sm10357544a12.19.2025.08.26.19.49.03
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b49cb8b4b98sm10357544a12.19.2025.08.26.19.49.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Aug 2025 19:49:04 -0700 (PDT)
+        Tue, 26 Aug 2025 19:49:01 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] hiredis: Build vendored hdr_histogram fpconv
-Date: Tue, 26 Aug 2025 19:49:00 -0700
-Message-ID: <20250827024900.1318469-3-raj.khem@gmail.com>
+Subject: [meta-filesystem][PATCH 1/3] zfs: Upgrade to 2.2.8 release
+Date: Tue, 26 Aug 2025 19:48:58 -0700
+Message-ID: <20250827024900.1318469-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250827024900.1318469-1-raj.khem@gmail.com>
-References: <20250827024900.1318469-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 27 Aug 2025 02:49:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119122
-
-This fixes a build race which is seen with high parallel builds ( -j 80)
-
-Fixes
-aarch64-yoe-linux-clang: error: no such file or directory: '../deps/hdr_histogram/libhdrhistogram.a'
-aarch64-yoe-linux-clang: error: no such file or directory: '../deps/hdr_histogram/libhdrhistogram.a'
-aarch64-yoe-linux-clang: error: no such file or directory: '../deps/fpconv/libfpconv.a'
-make[1]: *** [Makefile:431: redis-benchmark] Error 1
-make[1]: *** Waiting for unfinished jobs....
-make[1]: *** [Makefile:407: redis-server] Error 1
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119120
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/redis/redis_7.2.10.bb | 2 +-
+ .../recipes-filesystems/zfs/{zfs_2.2.5.bb => zfs_2.2.8.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-filesystems/recipes-filesystems/zfs/{zfs_2.2.5.bb => zfs_2.2.8.bb} (98%)
 
-diff --git a/meta-oe/recipes-extended/redis/redis_7.2.10.bb b/meta-oe/recipes-extended/redis/redis_7.2.10.bb
-index ecdb39c6f3..f15e07191d 100644
---- a/meta-oe/recipes-extended/redis/redis_7.2.10.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.2.10.bb
-@@ -41,7 +41,7 @@ PACKAGECONFIG[systemd] = "USE_SYSTEMD=yes,USE_SYSTEMD=no,systemd"
- EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
+diff --git a/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb b/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.8.bb
+similarity index 98%
+rename from meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb
+rename to meta-filesystems/recipes-filesystems/zfs/zfs_2.2.8.bb
+index cf56cca84c..1fc1457b19 100644
+--- a/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb
++++ b/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.8.bb
+@@ -4,7 +4,7 @@ LICENSE = "CDDL-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7087caaf1dc8a2856585619f4a787faa"
+ HOMEPAGE = "https://github.com/openzfs/zfs"
  
- do_compile:prepend() {
--    oe_runmake -C deps hiredis lua linenoise
-+    oe_runmake -C deps hdr_histogram fpconv hiredis lua linenoise
- }
- 
- do_install() {
+-SRCREV = "33174af15112ed5c53299da2d28e763b0163f428"
++SRCREV = "3e4a3e161c00273303cd9fa9e0dc09ead3499a8a"
+ SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.2-release \
+            file://0001-Define-strndupa-if-it-does-not-exist.patch \
+            file://aaf28a4630af60496c9d33db1d06a7d7d8983422.patch \
 
