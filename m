@@ -2,91 +2,135 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D991CA0FED
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13E55CA0FF2
 	for <webhook@archiver.kernel.org>; Wed, 27 Aug 2025 02:49:09 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web11.6116.1756262943546353436
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web10.6265.1756262945034712980
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Aug 2025 19:49:03 -0700
+ Tue, 26 Aug 2025 19:49:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aaLdkVU0;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-771fa65b0e1so682310b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Aug 2025 19:49:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UBi9mi/c;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-3253f0c8788so5228185a91.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Aug 2025 19:49:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756262943; x=1756867743; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SFIe/bQeA8cuXdvHFhhgYJ297EFIlo4/Gv0EehNQQ6U=;
-        b=aaLdkVU0T1yDN5CZINrfVo+tAEkDQgcTb8+ra8eJE70Pb2J9eeX963Xb1pS/w0Fsxg
-         ZIC1CBR5hvHjgntRXaEN5XiL+cvxEcQGo7RvLckY44RHLivZsWPKOQpk76bXz0w6wcJA
-         WM0dmx4JBn3cakYxZCMs910+5gbtsKYGAl+NPB7b8O2r9fy9+mGBQ4ryeRFevdCk4L+1
-         IthT1uuVEXV7tgu/TUsRJTPsjl5I4KOGU5jBM5oSuEweotKL8E+51ia+TEId1GHzOVdy
-         mLHT/eOYW+P6PBU46dfskl9rgK176AUiksVgHdeH3HjR2zn1TltmE7swnyUmC/ObRxiN
-         wSvA==
+        d=gmail.com; s=20230601; t=1756262944; x=1756867744; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=/rdzX+LQqgdtNJuvUuMMFm2BlU54ywVCUo9G0PxyaGE=;
+        b=UBi9mi/c/RhKCkR+8TRQjrUHKItiuuwIayp8/NWKI7eYaaTp1HXovsClc60JsaF5VA
+         yOc4z/RxEZ3IsoXNwAWdQT2BOcurHT35rHWoN3q898JaY1K+s4CQrwDrNAZndIzSRhFO
+         3/JD7Wrk7cXB6grMRu9H+dwifz9cYAc8jtETDDmc6g5FF4vGj/lsB8nGLyMR6Wgyon2g
+         w6oXc4i82z5vfq+q+6uczkx3QLy9DA3qPuUMc6Jh7vIu0MetVzpTq3GRTQKsW62svUga
+         U0R8bepnxf70PF+KIyKjECVOfkmHqjnbyk0BTP0/U6EBrUWCnc2+/t/Y2qvQASB2OQl9
+         s6Ew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756262943; x=1756867743;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=SFIe/bQeA8cuXdvHFhhgYJ297EFIlo4/Gv0EehNQQ6U=;
-        b=l3x8iqdEeO7Bts+r1extyYWJp0O0znWm+Se4BBh9DQvpY2X3Zb4+/i0msURlWHGHyn
-         8eOWyMFEaRB1SL+fNDW0e4VLiDWvZ1yc4DLMJUsgB2jytPgC5znQHU4QQhAFhJL3H1r8
-         wCmlyDtFmTcwHjVFZ8a/3zuI6Eg7AXPQkZbhxkMXYRBiYc+ptAq2i7/Xzmq8lYk9G5sl
-         5NOb9NkWMedckVsPvolD23O+MImEyxZCM7ho31fWNKJyDlgguUGFfPY0jWUpfQrcMBB0
-         McK+uiWGFnuQ5hjuEkPFU4N60s4+95u72SO73mnMw94vInZ5LKhsgKnzwEdhWpn4ArRx
-         lRkA==
-X-Gm-Message-State: AOJu0YzLcCwdVqGX9nKeA/rIjXRKMu4Gn6g+kNg3Vah2bSsKdI1o5+Gj
-	IBZHom5UUu1fxuIC0bDHG4uoKiXt7Zefq7/mAsHAayOLO9xPxFaA3wcYntxao1w3
-X-Gm-Gg: ASbGncsqSQYGZ25sHRcdHwAEpMJAUV5eGW7yq4EMe/vUGiCiJHAqShThkFgooE/qUAf
-	xqhMR4SGdwhWQlbphugWqO8kh48BUitTxal5RqUeLrZ0/56l2ApV6A8br2AzetE2pwMM6A1qC9f
-	Ky9FT5FhMEK0Xo0rpQIMmN+t1HQMYm9kkBp3tO0S8cjAx0xJwQ5y88eruaCvlbQyu883COcVSSF
-	q7Ad15iMf4/gdBboHSkbdXIHEXWhtuMrx5WmhzHpS+5gQEqRS+MzmXT52o4cbmB0GVcOAsrES6z
-	Vjq5Xzy3zDhIMAzACaQSvOoOpmbRFgyV82C6GUEQkChU/LKC2zOr6Msr7DvsVs7iWb2QlihQekh
-	Nh/f8YnRxAHpWlmM8Fw0gaO4VO57tBvCHEJVvBYiOc2YfvDLlaq2tpj9zdxR28X8F/1QU7ueKjz
-	XmYrZ+AmWGF9PIUhxh3P+nAxSSb/mClEkZFKtYQrOf41kEJw6fNKQ=
-X-Google-Smtp-Source: AGHT+IEe8INlSDzSwuQ2TQejPSp+xqcJW4cF4ilApGJQGf2zR1CIxytjGoNz7UOrP5MRilWK8UP2+Q==
-X-Received: by 2002:a05:6a20:72a5:b0:23f:fbb1:c21b with SMTP id adf61e73a8af0-24340b5b496mr25353993637.17.1756262942447;
-        Tue, 26 Aug 2025 19:49:02 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1756262944; x=1756867744;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=/rdzX+LQqgdtNJuvUuMMFm2BlU54ywVCUo9G0PxyaGE=;
+        b=f+tIrBr/ryRGqw8ezW21FgevN+OczUpgICszUDXuXCMCYi8H4w1Dbw2/Jyb1ageGQP
+         0e8RqWDHf69SHTN4TgXUviO4o+I1M+ZJTQRYnnDXoJBKQXo4Qyew3KWqtapK4t2nb0tR
+         NA/LCCKTrDIvzeLyJSIbVlDlTeku/yHdnIJYGvh4pQbf3pTS0SkB54E2tg6v/573cy3T
+         Wb81k/W0domNAY31K37hfB7qe0eGG+7qJk8rWrtf0/op78eV7dtFCxF/tzPdYDn28BK9
+         TTxCI65ft6zUzQ/Um2ET+rK/ifIpv4Fb9AbIMgsaPs7cO7hhuChJn/lBV+nKwgYCWC8W
+         +Pbg==
+X-Gm-Message-State: AOJu0YyJmqr0rlUvWI2hydGkhnQy+R3FkFsYipC1K25C9uRRbUv2Z3L9
+	ZBIxIqbplYC8gqSZB6BWScHKEOiQHbxQUojJbFXPE63zF1ZwRvsiFlHF+GktizF9
+X-Gm-Gg: ASbGnct3D5gjrPuTbIwqQimAkiu8xsH0szczZhEhja2BQDFi8nX9XvrVtZvuRJjNKZJ
+	VVfPx8xzv1g2MoGiq/JLU2knHCOGmLcmC8Ma1iHv8IK0bHQ1cmeU2Sj86gA+eATvC4qlPClJ6ME
+	irNvrur482eAD3MAe31o6qacJ0lAXx5AYbIbWYuSq2bKD9O/MlwnNs4IyWdpWKQSL1tblmTrUhd
+	Q0uYPUdDrf3gw2ISAByKI4N+3+60KeYyLQnLeQQzFKJEccAG0EoPNL5kQgqEw5XHOiRG6B4OFhb
+	NJv2hwDucfW3g5WPSzJ5sJip5njKsdrLrZ0YIhiU2KX5OcuCKxvQIc7sEgGd3IVfntmqkFz8MY+
+	LkLFo9UG73xKANTJwuKp6/NJnUG5YZbSLYcS5A4ChGdjLvbXq0/YvvfrsC+qlfNKeHr0VIJEWu2
+	jN9MuAuu9AR6qeFpt1FYGpZAVzQvxucCCa5cFHAYCD
+X-Google-Smtp-Source: AGHT+IG80+tuVHLA4hxGl979J8bXsMy3h+X5YKpeHN4cv9n3ojl2JUCFvEU1xkapbWQldhj2BZ8uIQ==
+X-Received: by 2002:a17:90b:2fcd:b0:31f:20d4:9966 with SMTP id 98e67ed59e1d1-32515ec151dmr25100410a91.17.1756262943793;
+        Tue, 26 Aug 2025 19:49:03 -0700 (PDT)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::cfd6])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b49cb8b4b98sm10357544a12.19.2025.08.26.19.49.01
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b49cb8b4b98sm10357544a12.19.2025.08.26.19.49.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Aug 2025 19:49:01 -0700 (PDT)
+        Tue, 26 Aug 2025 19:49:02 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-filesystem][PATCH 1/3] zfs: Upgrade to 2.2.8 release
-Date: Tue, 26 Aug 2025 19:48:58 -0700
-Message-ID: <20250827024900.1318469-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] vboxguestdrivers: Upgrade to 7.2.0
+Date: Tue, 26 Aug 2025 19:48:59 -0700
+Message-ID: <20250827024900.1318469-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250827024900.1318469-1-raj.khem@gmail.com>
+References: <20250827024900.1318469-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 27 Aug 2025 02:49:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119120
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119121
+
+Drop c23 std compile time fix, its already upstream
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-filesystems/zfs/{zfs_2.2.5.bb => zfs_2.2.8.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-filesystems/recipes-filesystems/zfs/{zfs_2.2.5.bb => zfs_2.2.8.bb} (98%)
+ ...x-bool-reserved-word-error-in-gcc-15.patch | 28 -------------------
+ ...rs_7.1.12.bb => vboxguestdrivers_7.2.0.bb} |  4 +--
+ 2 files changed, 1 insertion(+), 31 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-fix-bool-reserved-word-error-in-gcc-15.patch
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.1.12.bb => vboxguestdrivers_7.2.0.bb} (96%)
 
-diff --git a/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb b/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.8.bb
-similarity index 98%
-rename from meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb
-rename to meta-filesystems/recipes-filesystems/zfs/zfs_2.2.8.bb
-index cf56cca84c..1fc1457b19 100644
---- a/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.5.bb
-+++ b/meta-filesystems/recipes-filesystems/zfs/zfs_2.2.8.bb
-@@ -4,7 +4,7 @@ LICENSE = "CDDL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7087caaf1dc8a2856585619f4a787faa"
- HOMEPAGE = "https://github.com/openzfs/zfs"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-fix-bool-reserved-word-error-in-gcc-15.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-fix-bool-reserved-word-error-in-gcc-15.patch
+deleted file mode 100644
+index ec75d5a423..0000000000
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-fix-bool-reserved-word-error-in-gcc-15.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From 76c443dfd209ddbed3ed4102596a568670d4c59f Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 1 May 2025 20:16:11 -0700
+-Subject: [PATCH] fix bool reserved word error in gcc 15
+-
+-gcc-15 switched to -std=c23 by default. https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
+-
+-Upstream-Status: Submitted [https://www.virtualbox.org/pipermail/vbox-dev/2025-May/010316.html]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- vboxsf/include/iprt/types.h | 4 +++-
+- 1 file changed, 3 insertions(+), 1 deletion(-)
+-
+-diff --git a/vboxsf/include/iprt/types.h b/vboxsf/include/iprt/types.h
+-index 3bcc4146..33b46ef6 100644
+---- a/vboxsf/include/iprt/types.h
+-+++ b/vboxsf/include/iprt/types.h
+-@@ -282,7 +282,9 @@ typedef _Bool bool;
+- #   endif
+- #  else
+- #   undef bool /* see above netbsd explanation */
+--typedef _Bool bool;
+-+#   if defined __STDC__ && defined __STDC_VERSION__ && __STDC_VERSION__ <= 201710L
+-+     typedef _Bool bool;
+-+#   endif
+- #  endif
+- # else
+- #  if RT_MSC_PREREQ(RT_MSC_VER_VC120)
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.12.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.0.bb
+similarity index 96%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.12.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.0.bb
+index e80f44833b..31f7b01aae 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.1.12.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.0.bb
+@@ -13,10 +13,8 @@ VBOX_NAME = "VirtualBox-${PV}"
  
--SRCREV = "33174af15112ed5c53299da2d28e763b0163f428"
-+SRCREV = "3e4a3e161c00273303cd9fa9e0dc09ead3499a8a"
- SRC_URI = "git://github.com/openzfs/zfs;protocol=https;branch=zfs-2.2-release \
-            file://0001-Define-strndupa-if-it-does-not-exist.patch \
-            file://aaf28a4630af60496c9d33db1d06a7d7d8983422.patch \
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+     file://Makefile.utils \
+-    file://0001-fix-bool-reserved-word-error-in-gcc-15.patch \
+ "
+-
+-SRC_URI[sha256sum] = "6f9618f39168898134975f51df7c2d6d5129c0aa82b6ae11cf47f920c70df276"
++SRC_URI[sha256sum] = "4f2804ff27848ea772aee6b637bb1e10ee74ec2da117c257413e2d2c4f670ba0"
+ 
+ S ?= "${UNPACKDIR}/vbox_module"
+ S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
 
