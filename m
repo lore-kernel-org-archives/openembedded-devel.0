@@ -1,128 +1,140 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72B10CA0EFF
-	for <webhook@archiver.kernel.org>; Wed, 27 Aug 2025 23:24:30 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.web10.8761.1756337061929148152
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E90FCA0EED
+	for <webhook@archiver.kernel.org>; Thu, 28 Aug 2025 04:55:02 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.13583.1756356892564745779
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Aug 2025 16:24:22 -0700
+ Wed, 27 Aug 2025 21:54:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
-Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
-	by mailout06.t-online.de (Postfix) with SMTP id E89181CB2F;
-	Thu, 28 Aug 2025 01:24:19 +0200 (CEST)
-Received: from [192.168.178.36] ([84.154.165.112]) by fwd71.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1urPV4-3K4VNo0; Thu, 28 Aug 2025 01:24:19 +0200
-Date: Thu, 28 Aug 2025 01:24:13 +0200
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] packagegroup-gnome-desktop is not a desktop
-To: mike.looijmans@topic.nl
-Cc: openembedded-devel@lists.openembedded.org,
-	"Mike Looijmans via lists.openembedded.org"
-	<mike.looijmans=topic.nl@lists.openembedded.org>
-Message-Id: <DCEO1T.WIMW7AB6YK7K3@t-online.de>
-In-Reply-To: <AM8PR04MB777917B82BD9D98FD50CF2E1ED38A@AM8PR04MB7779.eurprd04.prod.outlook.com>
-References: <1b153bce-a66a-45ee-a5c6-963ea6fb1c82.949ef384-8293-46b8-903f-40a477c056ae.13b3af35-2da3-4280-b2c7-1a64bf69f8ab@emailsignatures365.codetwo.com>
-	<AM8PR04MB777917B82BD9D98FD50CF2E1ED38A@AM8PR04MB7779.eurprd04.prod.outlook.com>
-X-Mailer: geary/46.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=S/2lBqCV;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=03356deeff=changqing.li@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 57S4e5sd3151147
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 Aug 2025 21:54:52 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=PPS06212021;
+	 bh=SPqKu1+slyun3stxWcZBcPqqxksHgtERGdvn/UzuWf4=; b=S/2lBqCVyppQ
+	eqmKTqCUc1AsQzFr0YdGGtVw6D0IIa2Km3TehF1cfH6B3rnxz5B/QLQnVmfkLaM7
+	47CezQuGvkadpuc0tiIM9atRDeoFyRjkLz201Azlp6lY5wvSI87/9lF4HaVts4/x
+	U3uuoEwTFGxikZq2gj8NGpc5Q6wHitL7BUjiHMQeFHkdrgoAAn61bb6Q1iR2AhId
+	H+LFbTEskbYCUcgReer/DDnue+Vjrlt9Oe26F8n7Qm9xuAM6uJQIZxkvV6+JTu6T
+	m/tXRpP8sKNFz4h0+tYEKO1Inhuw8miWqEEuXX01finQf1ORbN67UhP16tkTCA5J
+	WxPyxnLcaA==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48q8x25a81-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 Aug 2025 21:54:51 -0700 (PDT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58; Wed, 27 Aug 2025 21:54:51 -0700
+Received: from pek-lpg-core6.wrs.com (10.11.232.110) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
+ 15.1.2507.58 via Frontend Transport; Wed, 27 Aug 2025 21:54:50 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-gnome][PATCH 2/2] libwnck3: fix build failure for lib32-libwnck3
+Date: Thu, 28 Aug 2025 12:54:48 +0800
+Message-ID: <20250828045448.3704256-2-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250828045448.3704256-1-changqing.li@windriver.com>
+References: <20250828045448.3704256-1-changqing.li@windriver.com>
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-G22QGe1h0exYl8ITo7Lu"
-X-TOI-EXPURGATEID: 150726::1756337059-0268990B-33018E5A/0/0 CLEAN NORMAL
-X-TOI-MSGID: 679c4a43-eebe-440c-b393-3270a002c6cf
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: LWSBwElwZ05Eeq3pC1-GPLp70r9UmzcW
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODI4MDAzOSBTYWx0ZWRfXzQMPQIS1BQPl
+ O1zR6IZQwpM37LfKO5r5jpKWG8J5CsQ+qkQZqE8iyHaNHdO5f+Jm/n7gsiAJ9d8GSuHAvBWXyUE
+ 3JOA4zcrbACc3GzMfpzMB2UBd0/xzcfNA9ZJX1MCzuxn36tfdVTGdckPhYnqpYKLgG/SNJTQ8OG
+ OBMAcvn0UXM5KBxW0+HZ7uArOBsOhdujqQVp5ehci+oBDMoX9CaNY9AELExsOXiXtA7TgRHfLXY
+ 5SR4n2LOMl1Pwj/OLoHdb26fWq009O7czqWCk7k2AZd76MvGiyCn+b3rGDbpHGkvvA66RPr1Sfd
+ iINLEwkmBmR9Jpfl+mZiEB00dqgy0sDxZUV6aFbiq85N6VVl4J2b1uzLZSAdB8=
+X-Authority-Analysis: v=2.4 cv=JfW8rVKV c=1 sm=1 tr=0 ts=68afe11c cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=2OwXVqhp2XgA:10 a=t7CeM3EgAAAA:8 a=GNEw3xDRAAAA:8 a=hT18Y9NG75USSpZ8hLEA:9
+ a=FdTzh2GWekK77mhwV6Dw:22 a=Gbt7yw0KH3r5R2uzA50C:22
+X-Proofpoint-GUID: LWSBwElwZ05Eeq3pC1-GPLp70r9UmzcW
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-28_01,2025-08-26_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 suspectscore=0 spamscore=0 phishscore=0 malwarescore=0
+ adultscore=0 bulkscore=0 impostorscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Aug 2025 23:24:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119124
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Aug 2025 04:55:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119126
 
---=-G22QGe1h0exYl8ITo7Lu
-Content-Type: text/plain; charset=us-ascii; format=flowed
+From: Changqing Li <changqing.li@windriver.com>
 
-Hi,
-packagegroup-gnome-desktop should install enough to eventually run 
-'gnome-shell' from a login-shell (if using systemd and wayland)
-I've seen that gdm is not installed in packagegroup-gnome-desktop, so 
-that might be the part of the puzzle that you're missing.
+Refresh patch for fix build issue
 
-On Wed, Aug 27 2025 at 05:54:54 +00:00:00, Mike Looijmans via 
-lists.openembedded.org <mike.looijmans=topic.nl@lists.openembedded.org> 
-wrote:
-> As an alternative to XFCE, I wanted to try and create a Gnome desktop 
-> environment. I ignorantly assumed that "packagegroup-gnome-desktop" 
-> (what's in a name) would create some basic desktop, much like 
-> packagegroup-xfce-extended does.
-> 
-> However, adding that to my image results in all screens remaining 
-> black, even though it creates a 700MB image, it doesn't appear to 
-> have a display manager.
-> 
-> What am I missing?
-> Met vriendelijke groet / kind regards,
-> 
-> Mike Looijmans
-> System Expert
-> 
-> 
-> TOPIC Embedded Products B.V.
-> Materiaalweg 4, 5681 RJ Best
-> The Netherlands
-> 
-> T: +31 (0) 499 33 69 69
-> E: mike.looijmans@topic.nl <mailto:mike.looijmans@topic.nl>
-> W: www.topic.nl <http://www.topic.nl/>
-> 
-> Please consider the environment before printing this e-mail
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119123): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/119123>
-> Mute This Topic: <https://lists.openembedded.org/mt/114913437/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ ...caused-by-OE-core-changes-to-startup.patch | 33 +++++++++++--------
+ 1 file changed, 20 insertions(+), 13 deletions(-)
 
-
---=-G22QGe1h0exYl8ITo7Lu
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>Hi,</div><div><span style="white-space: break-spaces;">packagegroup-gnome-desktop should</span>&nbsp;install enough to eventually run 'gnome-shell' from a login-shell (if using systemd and wayland)</div><div>I've seen that gdm is not installed in&nbsp;<span style="white-space: break-spaces;">packagegroup-gnome-desktop, so that might be the part of the puzzle that you're missing.</span></div></div><div id="geary-quote" dir="auto"><br>On Wed, Aug 27 2025 at 05:54:54 +00:00:00, Mike Looijmans via lists.openembedded.org &lt;mike.looijmans=topic.nl@lists.openembedded.org&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">As an alternative to XFCE, I wanted to try and create a Gnome desktop environment. I ignorantly assumed that "packagegroup-gnome-desktop" (what's in a name) would create some basic desktop, much like packagegroup-xfce-extended does.
-
-However, adding that to my image results in all screens remaining black, even though it creates a 700MB image, it doesn't appear to have a display manager.
-
-What am I missing?
-Met vriendelijke groet / kind regards,
-
-Mike Looijmans
-System Expert
-
-
-TOPIC Embedded Products B.V.
-Materiaalweg 4, 5681 RJ Best
-The Netherlands
-
-T: +31 (0) 499 33 69 69
-E: <a href="mailto:mike.looijmans@topic.nl">mike.looijmans@topic.nl</a>
-W: <a href="http://www.topic.nl">www.topic.nl</a>
-
-Please consider the environment before printing this e-mail
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#119123): <a href="https://lists.openembedded.org/g/openembedded-devel/message/119123">https://lists.openembedded.org/g/openembedded-devel/message/119123</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/114913437/3618223">https://lists.openembedded.org/mt/114913437/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</div></blockquote></div>
---=-G22QGe1h0exYl8ITo7Lu--
+diff --git a/meta-gnome/recipes-gnome/libwnck/files/0001-Fix-build-issue-caused-by-OE-core-changes-to-startup.patch b/meta-gnome/recipes-gnome/libwnck/files/0001-Fix-build-issue-caused-by-OE-core-changes-to-startup.patch
+index 91e23c785b..0328202f1b 100644
+--- a/meta-gnome/recipes-gnome/libwnck/files/0001-Fix-build-issue-caused-by-OE-core-changes-to-startup.patch
++++ b/meta-gnome/recipes-gnome/libwnck/files/0001-Fix-build-issue-caused-by-OE-core-changes-to-startup.patch
+@@ -1,4 +1,4 @@
+-From 1df0f4ae8fd54bc1ae940dfafa701c84d068674d Mon Sep 17 00:00:00 2001
++From fd075074182f756e2872569925f70f5f4e2386c2 Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen@dominion.thruhere.net>
+ Date: Sun, 25 May 2025 12:24:16 +0000
+ Subject: [PATCH] Fix build issue caused by OE-core changes to
+@@ -21,23 +21,30 @@ It is caused by a patch of startup-notification in oe-core which is backported f
+ Upstream-Status: Inappropriate [oe-specific]
+ 
+ Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++
++Refresh the patch
++Don't use explicit type cast to avoid truncation, use long long for tv_sec.
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
+ ---
+- libwnck/tasklist.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
++ libwnck/tasklist.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+ diff --git a/libwnck/tasklist.c b/libwnck/tasklist.c
+-index 7418f89..460e11d 100644
++index 7418f89..f0f30b2 100644
+ --- a/libwnck/tasklist.c
+ +++ b/libwnck/tasklist.c
+-@@ -5031,7 +5031,7 @@ sequence_timeout_callback (void *user_data)
+-       WnckTask *task = WNCK_TASK (tmp->data);
+- 
+-       sn_startup_sequence_get_last_active_time (task->startup_sequence,
+--                                                &tv_sec, &tv_usec);
+-+                                                (time_t *) &tv_sec, &tv_usec);
+- 
+-       elapsed = (now - (tv_sec * G_USEC_PER_SEC + tv_usec)) / 1000.0;
++@@ -5019,7 +5019,8 @@ sequence_timeout_callback (void *user_data)
++   WnckTasklist *tasklist = user_data;
++   GList *tmp;
++   gint64 now;
++-  long tv_sec, tv_usec;
+++  long long tv_sec;
+++  long tv_usec;
++   double elapsed;
+  
++   now = g_get_real_time ();
+ -- 
+-2.33.0
++2.34.1
+ 
+-- 
+2.34.1
 
 
