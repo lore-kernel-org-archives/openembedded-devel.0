@@ -1,154 +1,185 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4245CCA0FFD
-	for <webhook@archiver.kernel.org>; Mon,  1 Sep 2025 06:28:58 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web11.44601.1756708129443319456
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34766CA0FFD
+	for <webhook@archiver.kernel.org>; Mon,  1 Sep 2025 09:53:09 +0000 (UTC)
+Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com [209.85.219.47])
+ by mx.groups.io with SMTP id smtpd.web10.47623.1756720378416576206
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 Aug 2025 23:28:49 -0700
+ Mon, 01 Sep 2025 02:52:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=PYId119h;
- spf=pass (domain: mvista.com, ip: 209.85.214.174, mailfrom: hprajapati@mvista.com)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2445824dc27so35550715ad.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Aug 2025 23:28:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GKuOPjgb;
+ spf=pass (domain: gmail.com, ip: 209.85.219.47, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-qv1-f47.google.com with SMTP id 6a1803df08f44-70df91bdc53so34514936d6.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 02:52:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1756708129; x=1757312929; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IK496re6pIYzphw/mI5UUBCYUlFkOgGtJIS65ZXwp9I=;
-        b=PYId119hddiIwhcES2iR4wiqkf+z18HZfCcqyZ/pBFPa9Ce3O4Vj9dwZPxKsGNQ3xr
-         OpJy9LzE4r1bEsXSuWwnxUjZm557QgOUUS4SOw1tNRoBkg4V7m80KobWsCRNbaN+wuIK
-         48EsHRh3K5JvWuPxiUJvJxq5x1itMgB5hg6uk=
+        d=gmail.com; s=20230601; t=1756720377; x=1757325177; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ofobfzjzJG9J1fdIY8NQbsTuZ8UDXgCKVT+jCg5LOik=;
+        b=GKuOPjgbDZ+pPnHcDY5i4TnVX9XxxBuSRRQ9mzK2ICgXmtwXfdlrWSmnv31pAkIO1N
+         CQc/hjVfugOqPmvannLXpV0qJYc6MQFJ+B/hICaSuIsKBRePnoBRMDSvjHrwupdZKL2T
+         bzHMRlF3QuaQ2HbO12a7wNpodZjudHMGPtA94wm2SdqhTJQyAi9jrkA9iSFbIBUn7tfu
+         rK2TqePCBEv3rrqAoO13uk4M5WFQQ9baj7fGuxCWZNbXmeJIG28Sku3vhLS998YLzBot
+         gvUDTogS176DzOYs3bc90C7NNITNytFDw11ThKnxM0agRl9Qd9AIL3gYI5JbSJipfI+v
+         PqcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756708129; x=1757312929;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=IK496re6pIYzphw/mI5UUBCYUlFkOgGtJIS65ZXwp9I=;
-        b=lfGaw+/lVgkS0P7ynFBih00n8CLbPffp9iEovn9dHqhPIop/EdfGaEZFd7NVNsCSwy
-         e7sNoeD7C5iiDjJ4R1XWiolrErODYcVRMg4CGtU83JD2fNmXqo5EZx/YK93YUId0q1gG
-         j8LyyaNsK/49r3oU4anWl4Hlb+UDUWnQhhBwblbJpDkAqBWsKwBsf896mj8Cc/Nfeerv
-         NhVWFdRbLKIGPis3hfHtGHG65RsEAHUN0oYlnFz+ZSWTYxat/xcaQMZK7eDiqi3lyksl
-         6rv+fO+Uyl1L7d6hyo7Omc1UdlMUX5KwhouZpO5Uemhd1H5qJNMld2vOqMKUWErCMUh4
-         lpcg==
-X-Gm-Message-State: AOJu0YwZzmbxRFbhM2punMfqDFJXGkNxT/Fs6Qp4qDXvtvnauEc58bvM
-	Cf86qh7T+MAeLqUEvQ0M2SWg8ufAY5KeLQlRYCSvLspDIfojlrVA0ZhcI/cOU+C3LELpT6OFt1p
-	/gbq+
-X-Gm-Gg: ASbGncttRQGCp+JTCLdQbH+GMtz3YcKnAPe/GsJKMCwJR1yDMhUzgZFO1YzKLnQZdBp
-	PUlxYR3ovf+PEpSFf4jVVmc9wURPeCojp2A7hNADBcRrOwDQmHfGBPQ0pw1qVkslsVVKgo0HeAK
-	b94cImaOmIu0zb3U7FsZxgJnHMuocwCDXZukESwsnjRvJXTEpdZCdjAj9v3v2EgeH7Ir+9RJ2Un
-	63kHq57+R6nAunNXz9tVZBsIYIWU/tYxm6KhxPtCcI12hbzoxK99oLJCeklDjfI6xm5AMMFqZvD
-	4/cKcNlQxxZ4DfLtlSf7eFjFgIl/jQrsqeeWgrzbVW8ZMRHYCrMUD0/j21/IBIpFiKhfFJp7E8r
-	oaSI2i24J2YzvW2DQc4X/I+Igbuqk5ljMfExS
-X-Google-Smtp-Source: AGHT+IHX3XOdTJ3x57RTl5Alw/WhuvQuz+zNmEwDf6UWYVAmNPc7LbkjcP312Q8h6Pn0UXYB0x6gzA==
-X-Received: by 2002:a17:903:2f0c:b0:244:214f:13b7 with SMTP id d9443c01a7336-24944afb44amr82053965ad.53.1756708128607;
-        Sun, 31 Aug 2025 23:28:48 -0700 (PDT)
-Received: from MVIN00016.mvista.com ([150.129.170.183])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2490359f808sm94772035ad.0.2025.08.31.23.28.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 Aug 2025 23:28:48 -0700 (PDT)
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-oe][kirkstone][PATCH] libssh: fix CVE-2025-4877
-Date: Mon,  1 Sep 2025 11:58:42 +0530
-Message-ID: <20250901062842.215472-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.50.1
+        d=1e100.net; s=20230601; t=1756720377; x=1757325177;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ofobfzjzJG9J1fdIY8NQbsTuZ8UDXgCKVT+jCg5LOik=;
+        b=hPg3GHEvkNXQB468lncgfuUCX00ipodYrFmGlIuur7igqGV1JGC8X7NtmfEmKVvA6b
+         vqHBpF/uV9XR8uxiDA6O58fnUuHmHARHRtqPDCSAb1MNH7iDQK/0lajqv5C9Z9KfuK2W
+         BTeHR2fA1jqU8/BmdwekrOgpkZ9m3U1HtmnQYusNjRYwz5xJnlcLdHK9GrF9WR6paW12
+         TqR2/1RV+osnj0Adf7Zy21fJf0GZGVoYVn7zBMmz/s6PBFen3RhxwhNyHQczRuJqsG+C
+         fVl92T9Uqx+TWfnbk2Ml9tM7Ad9Gn4FxLgt5XxGPwsNPcl95G5xVg9xoF8scRMNfI+8+
+         OTUg==
+X-Gm-Message-State: AOJu0Yyx/QPDqIFq58rrQ0maiyrPfFHa3L72bm/jQsEe+NpktzZLihYa
+	3w16v/KPfWjiZh2HW9YrAmZLOvXB2h3J/Mc86cgIT+8R9PJcCgK8yDWZNqsi938oaWZECNbm01b
+	071P96huHKgyfFlzD7xiVj/RgfDG/GuQ=
+X-Gm-Gg: ASbGncs4cZo4yMPcn6OXujuo651JfUyrM9bk8r7fKKikny5lHQdAikUj9i8wSZV9iaY
+	6xI0wZe85WwN9/rcHKqtufhGT6cmC+csSUieyUZ8wVAA4C8DhzDnAWuVjILf+tPzSDBkU2VA5yo
+	JDDsS6XiXl6R3a0JtMFASkxqqsbthL0D4ubgUOrrKOkVZ5dIfLbQDEV8hp3zl0xxTcuNpq79dSb
+	VIxySYdMONgoeO+y5r+ZwCEwq2u7KV+ilRa/zHSiJ0chkdDirUNzuYVIMgsiQHZa5tRZ9IPJxsQ
+	Xef5ItGquwhiZzAO
+X-Google-Smtp-Source: AGHT+IGmZzgsrlH9uWbApxVySZfOFdTPq612p4AIgDaW/VBNRrqjBnBihSYadMoiAFMSwONrYsjCd8JE2jeF33ygpEg=
+X-Received: by 2002:a05:6214:238d:b0:70f:a67b:a622 with SMTP id
+ 6a1803df08f44-70fac895b6cmr77413036d6.32.1756720377128; Mon, 01 Sep 2025
+ 02:52:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAKv13CLMNx0H0TUmpqH-QOz28N2OV-QsRj2NdR21P+i6scaf4Q@mail.gmail.com>
+In-Reply-To: <CAKv13CLMNx0H0TUmpqH-QOz28N2OV-QsRj2NdR21P+i6scaf4Q@mail.gmail.com>
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Mon, 1 Sep 2025 11:52:44 +0200
+X-Gm-Features: Ac12FXwsIKU86tVFoTqAnfiwOr85mbRcKjdbBSGem0-mfZmMctZQSk9Y5bEzTA0
+Message-ID: <CANNYZj8+Vy2Bz5YjtrAR8F=xYvgBdcr0MG0dy5k-Q5-sXyZXEQ@mail.gmail.com>
+Subject: Re: [oe] Introductions and questions around the world
+To: josephjamesmills@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 06:28:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119153
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 09:53:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119154
 
-Upstream-Status: Backport from https://git.libssh.org/projects/libssh.git/commit/?id=6fd9cc8ce3958092a1aae11f1f2e911b2747732d
+Hello,
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
----
- .../libssh/libssh/CVE-2025-4877.patch         | 57 +++++++++++++++++++
- .../recipes-support/libssh/libssh_0.8.9.bb    |  1 +
- 2 files changed, 58 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-4877.patch
+a recommendation: try to not be all over the place in your emails.
+Send one email per issue, and keep it tight and focused. If you have
+patches and aren't sure about them, push them to a branch somewhere
+where we can take a pre-look, and someone will suggest further steps.
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2025-4877.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2025-4877.patch
-new file mode 100644
-index 0000000000..6866fd2328
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-4877.patch
-@@ -0,0 +1,57 @@
-+From 6fd9cc8ce3958092a1aae11f1f2e911b2747732d Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Tue, 15 Apr 2025 11:41:24 +0200
-+Subject: CVE-2025-4877 base64: Prevent integer overflow and potential OOB
-+
-+Set maximum input to 256MB to have safe margin to the 1GB trigger point
-+for 32b arch.
-+
-+The OOB should not be reachable by any internal code paths as most of
-+the buffers and strings we use as input for this operation already have
-+similar limit and none really allows this much of data.
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
-+(cherry picked from commit 00f09acbec55962839fc7837ef14c56fb8fbaf72)
-+
-+CVE: CVE-2025-4877
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=6fd9cc8ce3958092a1aae11f1f2e911b2747732d]
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ src/base64.c | 13 ++++++++++++-
-+ 1 file changed, 12 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/base64.c b/src/base64.c
-+index 372dc65f..7bb8efb1 100644
-+--- a/src/base64.c
-++++ b/src/base64.c
-+@@ -29,6 +29,9 @@
-+ #include "libssh/priv.h"
-+ #include "libssh/buffer.h"
-+ 
-++/* Do not allow encoding more than 256MB of data */
-++#define BASE64_MAX_INPUT_LEN 256 * 1024 * 1024
-++
-+ static char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-+                          "abcdefghijklmnopqrstuvwxyz"
-+                          "0123456789+/";
-+@@ -269,7 +272,15 @@ static void _bin_to_base64(unsigned char *dest, const unsigned char source[3],
-+ unsigned char *bin_to_base64(const unsigned char *source, int len) {
-+   unsigned char *base64;
-+   unsigned char *ptr;
-+-  int flen = len + (3 - (len % 3)); /* round to upper 3 multiple */
-++  int flen = 0;
-++
-++ /* Set the artificial upper limit for the input. Otherwise on 32b arch, the
-++  * following line could overflow for sizes larger than SIZE_MAX / 4 */
-++  if (len > BASE64_MAX_INPUT_LEN) {
-++      return NULL;
-++  }
-++
-++  flen = len + (3 - (len % 3)); /* round to upper 3 multiple */
-+   flen = (4 * flen) / 3 + 1;
-+ 
-+   base64 = malloc(flen);
-+-- 
-+2.50.1
-+
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-index 67e03c4081..fee711e191 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-@@ -21,6 +21,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
-            file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch \
-            file://run-ptest \
-            file://CVE-2025-5318.patch \
-+           file://CVE-2025-4877.patch \
-           "
- SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
- 
--- 
-2.50.1
+Alex
 
+On Fri, 29 Aug 2025 at 19:33, Joseph Mills via lists.openembedded.org
+<josephjamesmills=3Dgmail.com@lists.openembedded.org> wrote:
+>
+> Hello all,
+> I=E2=80=99m Joseph, I=E2=80=99m an independent consultant.  I just inheri=
+ted an internal distro that historically never built a =E2=80=9Cfull distro=
+,=E2=80=9D and I=E2=80=99m porting it from dunfel & kirkstone to scarthgap.=
+ The client only needs a BSP subset, but in my spare time I=E2=80=99m tryin=
+g to push general fixes back upstream. I have created a package group that =
+doesn't install anything but does build everything in OE.
+>
+> I have found some things when building the clients multilib inteli7 machi=
+ne's. A number of packages are not installed to the correct libdir(/usr/lib=
+ vs /usr/lib64). I have noticed that this mainly affects python modules tha=
+t are going to sites dir(PYTHON_SITEPACKAGES_DIR). see https://github.com/o=
+penembedded/meta-openembedded/pull/990/files
+>
+> Scope / testing
+> SoC families:
+> * Intel: core2, corei7 (multi variants), (about 70K steps)
+> * Atmel: ipac9x25, som9x25, soma5d35, soma5d36(multi variants) (about 45K=
+ steps)
+> * TI: som5728m, som3354  (about 60K steps)
+> * Renesas: somrzg2l (multi variants) (about 70K steps)
+> * Nuvoton: som35d1f(multi variants),  (about 70K steps)
+> * NXP: somimx6(multi variants), somimx8(multi variants) (about 60K steps)
+> * Nvidia: somagx (about 70K steps)
+>
+> Each of the som's have multiple carriers. Lots of device trees :) fun stu=
+ff.
+>
+> Goals: I have 3 massive build servers. One is my own and the other two ar=
+e the clients.
+> serverA: no sstate to dl builds everything from scratch.
+> serverB: shares with other servers and developers.
+>   CACHE_PATH =3D "/srv/yocto/${DISTRO_CODENAME}-${DISTRO_VERSION}/${RELEA=
+SE_TYPE}"
+>   ARCHIVE_PATH ?=3D "${DISTRO_CODENAME}-${DISTRO_VERSION}/${RELEASE_TYPE}=
+/${MACHINE}"
+>   DL_DIR =3D "/srv/yocto/${DISTRO_CODENAME}-${DISTRO_VERSION}/downloads"
+>   SSTATE_DIR =3D "${CACHE_PATH}/sstate-cache"
+>   BUILDHISTORY_DIR =3D "${CACHE_PATH}/buildhistory"
+>   PERSISTENT_DIR =3D "${CACHE_PATH}/cache"
+>   BB_CACHEDIR =3D "${CACHE_PATH}/parser-cache"
+>   CACHE =3D "${CACHE_PATH}/startup-cache"
+> serverC: same as serverB helps with the matrix of the builds.
+>
+> The build system is kas and does(now) have full CI/CD (build, deploy-imag=
+e, deploy-sdk, deploy-ota)
+> Handling of Distro features are handled via the machine's file's and kas.
+>
+> devkit(som+carrier or SBC) code is open source (MIT). I can share KAS man=
+ifests/build logs if helpful.
+>
+> Submission shape
+> Do you prefer I send these as small series by subsystem (e.g., meta-gnome=
+ first, then meta-python, then meta-oe), or one change at a time?
+>
+> Path policy =E2=80=94 For multilib cleanups, is moving empty /usr/lib par=
+ents in do_install:append acceptable when ${libdir} is lib64, or is there a=
+ stronger class-level approach you=E2=80=99d like?
+>
+> I=E2=80=99m new to posting here, so suggestions on etiquette, scope, and =
+preferred structure are welcome.
+>
+> Another thing I am confused about is devshell. My current workflow(advice=
+ appreciated)
+> 1) something does not build. I clean the package/recipe.
+> 2) drop to devshell.
+> 3) if there is no git repo, run.
+>   3.a git init; git add -A; git commit -s -m "Upstream import: ${PN} ${PV=
+} (${SRCREV})"; git tag oe-base
+>   3.b hack hack
+>   3.c git add -p
+>   3.d git commit -s -m "<META_PART> DESC"
+>   3.e git format-patch oe-base --cover-letter --suffix=3D.patch -o ../pat=
+ches
+>   3.f cp ../000..... -> meta-layer/rec..../patch_dir
+> 4) build and see if it passes. if not repeat :(
+>
+> before 3.f is there any way to build in the devshell without having to ex=
+port a bunch of stuff ? In my past in devshell I have only built u-boot and=
+ linux. (ARCH, CROSS_COMPILE etc). It would be nice not to drop in and out =
+of the devshell until the build is fixed. Any advice on internal commands t=
+hat I may be missing would be great.
+>
+> Some more things about the build. I have my own world recipe (it's really=
+ a package group with a lot of rrecomends) I build this but do not ship to =
+any images.
+>
+> I am willing to share any code or whatever that is opensource and does no=
+t harm IP.
+>
+> Thanks for maintaining OE and I look forward to your advice,
+> jmills
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#119140): https://lists.openembedded.org/g/openembedde=
+d-devel/message/119140
+> Mute This Topic: https://lists.openembedded.org/mt/114964946/1686489
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+lex.kanavin@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
