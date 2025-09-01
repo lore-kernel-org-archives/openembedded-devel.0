@@ -1,241 +1,98 @@
-Return-Path: <josephjamesmills@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE2A0CA0FFE
-	for <webhook@archiver.kernel.org>; Sat, 30 Aug 2025 20:14:47 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.web10.17206.1756584883528855274
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13CB0CA0FF2
+	for <webhook@archiver.kernel.org>; Mon,  1 Sep 2025 02:21:37 +0000 (UTC)
+Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
+ by mx.groups.io with SMTP id smtpd.web10.42092.1756693294144511053
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Aug 2025 13:14:43 -0700
+ Sun, 31 Aug 2025 19:21:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MNvm5+g4;
- spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: josephjamesmills@gmail.com)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-61cbe5cef28so6177886a12.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Aug 2025 13:14:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=d1Ky0XLA;
+ spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-71d605c6501so32661087b3.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Aug 2025 19:21:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756584881; x=1757189681; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=aQgyP8l1MDXAgQDd+XzrJDH9ATS8xQxfuRXQbKngag4=;
-        b=MNvm5+g4jR2FodNJPjLjoUs0WoeHv3hhj7MbIj0bJC5G7SwPuAgGK/RVyCPwqbFMUS
-         OJTSXtYNz3WGOQDjNHJ3Ur60poZLBezpZY60KgI6H+a60Hj6bRfFlB+BpPVBYMJ68pPf
-         igy6PEoBfCSa9XKI8mvD9s4SyDB0oHzM5VkUqIbuEQNzQUjYi8BKEaQ/niSEPvwYVyqk
-         oPpIehjltE6+BlZ3u2eY8TM2b9aGVycDkdDVPUMV9mhx5lcW9Js6am399ray8JPuHLI5
-         ZsRevzbo3vDuqRHrsFUob9TBqF2NMYEQUwsfVTQjrUOCn8mF2u3ndyAtJ88EqcOp56ux
-         ms0A==
+        d=gmail.com; s=20230601; t=1756693293; x=1757298093; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0+t95gZRwk/HEtPY4kfBtL9o4t22mG26r23hrVORQGw=;
+        b=d1Ky0XLAxukm98ckFu8376c3/H38OLT8lK617ds9rCYSUFRl3YI77b3RAam8zPj+pR
+         QXPhX1qy2Iu6FqqidJYDIG7lIcTM5ROwfYVFW50tzOYRZd2m6xFEbmUWJ+202TmNwqMG
+         eMxsG1IBqWz/IFdnJC21v8J0kj0EhKdI2kq3Z149l2iPPToMgO4gueHeNQ8DNzXkpseh
+         JErBGzfVQd5ggl0mpacR2EzivQqHnDyOeUuIygkxMtRPBIKeHoz0pZwUPgqRS81Tef51
+         w45Ien6AKxlvBNbqDkJrV6oAlFE/GAoug4RRZu65EJHPBqsHE8w1JziQ8wmgNbcLOQ/Q
+         a8/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756584881; x=1757189681;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=aQgyP8l1MDXAgQDd+XzrJDH9ATS8xQxfuRXQbKngag4=;
-        b=I8dDlwlW70FBmFQhyTFQhQ8PZbcuh2PDceSQNmW0unrwkWcTw0fdKmKtAdt2NkqWS9
-         j8GKYyL44UQQ+WoA3UJ8qCbNTwmptY1aKldwoHRxjqDtlcZesoETd8MvEcvzJfYmDd4A
-         QH6hdFnanvYcLGScyJiPZNqepNhd4NVMVMK+nAIcx2FkQaaLPuvJxj/XNRMwe7OgFPkz
-         cR9IGqbxLAetz4HEyK4+hm64X2i7PUB5vQgs4oaHFq6A0mxtvrr1SfmmnLj+9rpC5v5E
-         bSGmYe5ahjuyIkwffgTo6l9R5Lccy0gGa2LzEeAKI4KJYsHq098EDLRgtyf33+P1MfWz
-         qXMw==
-X-Gm-Message-State: AOJu0Yzzksp/H1qN4y1oWO5HPkBB2PrEkCZzd6R14lUG2SKozKfe8Zag
-	jq+DmvZtucjSprn6bY6huZRFj4PdrwjPay07SwmKjVoqcA2p0tH5nXVIz8qrTcv3CQhrcpbUqHB
-	LfSCzHiRHs8Ok3WV5DtT+zFkAooZT9ms5bRkeIz4=
-X-Gm-Gg: ASbGncsboLiVZLNwO18OxPOd8OT6MAF8Os7SEyY6YR6ULiCLUEBUUvjPdjeBlpL2oOH
-	fnClaBrLo7fmi8T0XhLXI4nSj3CexRxjF7wCOrF4CVMdV3gzS3DkNfWj2ozjWQRsdA30iqKhZin
-	pCXKMMCOeW3VEqwU2ivskC5mTOUmN9C7uWkrLAlp1AvaJiHI7mkH1sP+jwWfsNasSjXayvGqWZD
-	QRbYwUCDfe8L0MD
-X-Google-Smtp-Source: AGHT+IEJ1q5+WI09dgus0Q7WaWnjs+6plo9f3fWneCRHHRtSm9EueDwKlBk5ExIQpvdY/1zJB0UyIU4q6PxhhLSE1zM=
-X-Received: by 2002:a05:6402:46c5:b0:61c:e7c3:923c with SMTP id
- 4fb4d7f45d1cf-61d26d5bdf6mr1982438a12.12.1756584881191; Sat, 30 Aug 2025
- 13:14:41 -0700 (PDT)
-MIME-Version: 1.0
-From: Joseph Mills <josephjamesmills@gmail.com>
-Date: Sat, 30 Aug 2025 15:14:30 -0500
-X-Gm-Features: Ac12FXynmAKqss25dvqYqddwqcx4bf634gQhxI0ij3sPn1LtDFKgCnWcBau6Tco
-Message-ID: <CAKv13C+yecjvKL8OGsRqDas5J6kW--i+8vruei7aH9RwBPSb2A@mail.gmail.com>
-Subject: [BUG] meta-perl: libcapture-tiny-perl-native installs into
- ${D}${STAGING_DIR_NATIVE} so Capture/Tiny.pm never reaches native sysroot
+        d=1e100.net; s=20230601; t=1756693293; x=1757298093;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0+t95gZRwk/HEtPY4kfBtL9o4t22mG26r23hrVORQGw=;
+        b=iKDsFg1hSf7QrGyQ7T3/mvoxEj2qMow2X/l6jWkqovVyCZEnMAbrk8/KVX+4VzuZy7
+         bU0tBaE8oIdtwgMWsL/Lci0icy3cAkir0zGLESl/dA6Zha3eNB6U7HSG4UazYS6nVCwL
+         3AEj5dIOM18E38o1CFh0rbPOOinf3Czqy/+zmvIZfRBmqPYE/oFNDBSpFM54Kew8jrjW
+         gGAUDpRHnf1aFB8iTtKViK9vu+kIcCjeZDYrcQ1kjayNGhviX4sY/KcwuwaGnXEN8rQz
+         U72Yd6/Kc3oRKiiKt3VGaF0MPOElpMVAFG+5d7zFQTheE0GrYCb/lPoMQTvrpjjACj59
+         tYJw==
+X-Gm-Message-State: AOJu0YzrRQzGwxuHzm+2YmdYxeE76APWUJsNI7pRmkJXk73G7dvjBHbH
+	WlFTj3VuSjgSsoXAiwVa+yHdKEWmkjF62/mARNCrG+Fm9NwAkvRM/wCUFiNV2g==
+X-Gm-Gg: ASbGncvDUGfz4TB9WZjxp0/zySE6HRoFeGgWlNpv78EdBUUULYHk7QQv+JS9Rx0mZOm
+	a503s1ibODg8OXOHL8TYL1W6KqYGoWNVc+ilTr/SIZRsp20TofAnp1vwZvbUy0G35ZxPY5ysZEL
+	3y0glRxc0Mem+s83eiQRmBLNjt9nNGn6Cn8J9IWMnPlMJgo3ZWSXsHqxq2D+u3MidTpwTBhIMsB
+	ETi16uN9l1ScG14JvbBNA39xuMeyILvaUoNENuR7acw7+MvEIs0U8SlPNASR87tnCHQKuDuXSNf
+	yJqoQ9E7n7pSNSZ42xP+ECFEv039ATxiz3RsYxkXqViLU6EWoPm8YnBjUzzl1dN8/SQNUi8RShd
+	PebCyQQi/FRjEu58WEOrOFUPT1jjy
+X-Google-Smtp-Source: AGHT+IHdIVLeC1FsVGG9wAZFSZOrP4bZhZ/eiSnF2YxkdZP49V9U1WXoypkjlnGupx4YFM3DYe3Seg==
+X-Received: by 2002:a05:690c:368d:b0:71e:7053:262 with SMTP id 00721157ae682-72276500db1mr74584127b3.26.1756693292647;
+        Sun, 31 Aug 2025 19:21:32 -0700 (PDT)
+Received: from localhost.localdomain ([67.233.61.26])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-7227d92e437sm12026647b3.66.2025.08.31.19.21.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 31 Aug 2025 19:21:32 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000dc82f4063d9ac98b"
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] php: upgrade 8.4.11 -> 8.4.12
+Date: Sun, 31 Aug 2025 22:21:09 -0400
+Message-ID: <20250901022110.562230-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 Aug 2025 20:14:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119150
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 02:21:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119151
 
---000000000000dc82f4063d9ac98b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This is just a bug fix release.
 
-Hi all,
+Changelog: https://www.php.net/ChangeLog-8.php#8.4.12
 
-I=E2=80=99m seeing a native-packaging/sysroot staging issue with
-libcapture-tiny-perl on current meta-perl.
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ meta-oe/recipes-devtools/php/{php_8.4.11.bb => php_8.4.12.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/php/{php_8.4.11.bb => php_8.4.12.bb} (99%)
 
-Environment
-Host: Debian sid (for reproducibility reports)
-Poky: perl-native 5.38.4 (meta/recipes-devtools/perl/perl_5.38.4.bb)
-meta-perl: libcapture-tiny-perl 0.48 (BBCLASSEXTEND =3D "native")
-cpan.bbclass + perlnative.bbclass
+diff --git a/meta-oe/recipes-devtools/php/php_8.4.11.bb b/meta-oe/recipes-devtools/php/php_8.4.12.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_8.4.11.bb
+rename to meta-oe/recipes-devtools/php/php_8.4.12.bb
+index fd41d5f8c0..fbab1b0dda 100644
+--- a/meta-oe/recipes-devtools/php/php_8.4.11.bb
++++ b/meta-oe/recipes-devtools/php/php_8.4.12.bb
+@@ -29,7 +29,7 @@ SRC_URI:append:class-target = " \
+ 
+ S = "${UNPACKDIR}/php-${PV}"
+ 
+-SRC_URI[sha256sum] = "2c39c75b54df89b01195b72ad0ee1fcd490c71db18bc52bcd61fb2ffb57b26fa"
++SRC_URI[sha256sum] = "2ebd5382eb090d603087da649ed21de64b079616bc9a02abbc532b89b17e3468"
+ 
+ CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
+ CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
+-- 
+2.43.0
 
-Symptom (consumer fails to find Capture::Tiny in native sysroot)
-A dependent native build (e.g. libunix-statgrab) dies with:
-
-Can't locate Capture/Tiny.pm in @INC ...
-
-In that consumer=E2=80=99s workdir:
-
-$ find recipe-sysroot-native/usr/lib/perl5 -name Tiny.pm
-# (empty)
-$ find recipe-sysroot/usr/lib/perl5 -name Tiny.pm
-.../vendor_perl/5.38.4/Capture/Tiny.pm   # target variant present
-
-Provider logs (native variant)
-libcapture-tiny-perl-native:do_install writes under an absolute path that
-includes the provider=E2=80=99s recipe-sysroot-native:
-
-NOTE: make -j 32 DESTDIR=3D.../libcapture-tiny-perl-native/0.48/image
-install_vendor
-Installing
-.../image/.../recipe-sysroot-native/usr/lib/perl5/vendor_perl/5.38.4/Captur=
-e/Tiny.pm
-Installing
-.../image/.../recipe-sysroot-native/usr/share/man/man3/Capture::Tiny.3
-
-So the file ends up at:
-${D}${STAGING_DIR_NATIVE}/usr/lib/perl5/vendor_perl/5.38.4/Capture/Tiny.pm
-
-instead of the expected:
-${D}/usr/lib/perl5/vendor_perl/5.38.4/Capture/Tiny.pm
-
-Because do_populate_sysroot stages from ${D}/usr/..., anything under
-${D}${STAGING_DIR_NATIVE}/usr/... is skipped. The provider=E2=80=99s
-recipe-sysroot-native thus lacks Capture/Tiny.pm, and dependents can=E2=80=
-=99t use
-Capture::Tiny.
-
-Configure context
-cpan.bbclass runs:
-
-perl ... Makefile.PL INSTALLDIRS=3Dvendor NO_PERLLOCAL=3D1 NO_PACKLIST=3D1 =
-...
-
-For class-native, perl-native=E2=80=99s Config.pm advertises
-installvendorlib/installvendorarch as absolute paths pointing into the
-provider=E2=80=99s .../recipe-sysroot-native/usr/.... ExtUtils::MakeMaker t=
-hen
-combines those absolutes with DESTDIR=3D${D}, producing the
-${D}${STAGING_DIR_NATIVE}/... install tree shown above.
-
-Minimal reproduction
-bitbake -c cleanall libcapture-tiny-perl-native
-bitbake -c install libcapture-tiny-perl-native
-# Observe absolute path under image/:
-find tmp/work/*-linux/libcapture-tiny-perl-native/*/image -name 'Tiny.pm'
--print
-# Observe absence in staged sysroot:
-bitbake -c populate_sysroot libcapture-tiny-perl-native
-find tmp/work/*-linux/libcapture-tiny-perl-native/*/recipe-sysroot-native
--name 'Tiny.pm' -print
-
-Impact
-Affects *-native CPAN modules that install into vendor_perl. Target builds
-are fine; only native staging is affected. In downstream recipes this
-presents as missing Capture/Tiny.pm (or similar CPAN modules) despite
-correct DEPENDS.
-
-Proposed direction
-For class-native in cpan.bbclass, pass relative vendor install dirs to
-Makefile.PL so DESTDIR=3D${D} lands under ${D}/usr/... (prefix-relative),
-which do_populate_sysroot will stage as usual. For example:
-
-#??? Conceptual sketch for class-native: ???
-Makefile.PL ... \
-  INSTALLVENDORLIB=3D${libdir}/perl5/vendor_perl/${perlver} \
-  INSTALLVENDORARCH=3D${libdir}/perl5/vendor_perl/${perlver}/${perlhostarch=
-}
-
-That would keeps target behavior unchanged, and fixes native staging
-without per-recipe hacks.
-Workaround (recipe-local, for those blocked now) In a
-libcapture-tiny-perl_%.bbappend limited to class-native, forcing relative
-vendor paths at configure time unblocks the build:
-
-EXTRA_CPANFLAGS:append:class-native =3D " \
-    INSTALLVENDORLIB=3D${libdir}/perl5/vendor_perl/${@get_perl_version(d)} =
-\
-
- INSTALLVENDORARCH=3D${libdir}/perl5/vendor_perl/${@get_perl_version(d)}/${=
-@get_perl_hostarch(d)}
-\
-"
-After that, do_install places Capture/Tiny.pm under
-${D}/usr/lib/perl5/vendor_perl/..., and do_populate_sysroot stages it
-correctly.
-
-Happy to provide full logs/workdirs privately if needed. Thanks!
-
-=E2=80=94 Joseph Mills (jmills)
-
---000000000000dc82f4063d9ac98b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi all,<br><br>I=E2=80=99m seeing a native-packaging/sysro=
-ot staging issue with libcapture-tiny-perl on current meta-perl.<br><br>Env=
-ironment<br>Host: Debian sid (for reproducibility reports)<br>Poky: perl-na=
-tive 5.38.4 (meta/recipes-devtools/perl/<a href=3D"http://perl_5.38.4.bb">p=
-erl_5.38.4.bb</a>)<br>meta-perl: libcapture-tiny-perl 0.48 (BBCLASSEXTEND =
-=3D &quot;native&quot;)<br>cpan.bbclass + perlnative.bbclass<br><br>Symptom=
- (consumer fails to find Capture::Tiny in native sysroot)<br>A dependent na=
-tive build (e.g. libunix-statgrab) dies with:<br><br>Can&#39;t locate Captu=
-re/Tiny.pm in @INC ...<br><br>In that consumer=E2=80=99s workdir:<br><br>$ =
-find recipe-sysroot-native/usr/lib/perl5 -name Tiny.pm<br># (empty)<br>$ fi=
-nd recipe-sysroot/usr/lib/perl5 -name Tiny.pm<br>.../vendor_perl/5.38.4/Cap=
-ture/Tiny.pm =C2=A0 # target variant present<br><br>Provider logs (native v=
-ariant)<br>libcapture-tiny-perl-native:do_install writes under an absolute =
-path that includes the provider=E2=80=99s recipe-sysroot-native:<br><br>NOT=
-E: make -j 32 DESTDIR=3D.../libcapture-tiny-perl-native/0.48/image install_=
-vendor<br>Installing .../image/.../recipe-sysroot-native/usr/lib/perl5/vend=
-or_perl/5.38.4/Capture/Tiny.pm<br>Installing .../image/.../recipe-sysroot-n=
-ative/usr/share/man/man3/Capture::Tiny.3<br><br>So the file ends up at:<br>=
-${D}${STAGING_DIR_NATIVE}/usr/lib/perl5/vendor_perl/5.38.4/Capture/Tiny.pm<=
-br><br>instead of the expected:<br>${D}/usr/lib/perl5/vendor_perl/5.38.4/Ca=
-pture/Tiny.pm<br><br>Because do_populate_sysroot stages from ${D}/usr/..., =
-anything under ${D}${STAGING_DIR_NATIVE}/usr/... is skipped. The provider=
-=E2=80=99s recipe-sysroot-native thus lacks Capture/Tiny.pm, and dependents=
- can=E2=80=99t use Capture::Tiny.<br><br>Configure context<br>cpan.bbclass =
-runs:<br><br>perl ... Makefile.PL INSTALLDIRS=3Dvendor NO_PERLLOCAL=3D1 NO_=
-PACKLIST=3D1 ...<br><br>For class-native, perl-native=E2=80=99s Config.pm a=
-dvertises installvendorlib/installvendorarch as absolute paths pointing int=
-o the provider=E2=80=99s .../recipe-sysroot-native/usr/.... ExtUtils::MakeM=
-aker then combines those absolutes with DESTDIR=3D${D}, producing the ${D}$=
-{STAGING_DIR_NATIVE}/... install tree shown above.<br><br>Minimal reproduct=
-ion<br>bitbake -c cleanall libcapture-tiny-perl-native<br>bitbake -c instal=
-l libcapture-tiny-perl-native<br># Observe absolute path under image/:<br>f=
-ind tmp/work/*-linux/libcapture-tiny-perl-native/*/image -name &#39;Tiny.pm=
-&#39; -print<br># Observe absence in staged sysroot:<br>bitbake -c populate=
-_sysroot libcapture-tiny-perl-native<br>find tmp/work/*-linux/libcapture-ti=
-ny-perl-native/*/recipe-sysroot-native -name &#39;Tiny.pm&#39; -print<br><b=
-r>Impact<br>Affects *-native CPAN modules that install into vendor_perl. Ta=
-rget builds are fine; only native staging is affected. In downstream recipe=
-s this presents as missing Capture/Tiny.pm (or similar CPAN modules) despit=
-e correct DEPENDS.<br><br>Proposed direction<br>For class-native in cpan.bb=
-class, pass relative vendor install dirs to Makefile.PL so DESTDIR=3D${D} l=
-ands under ${D}/usr/... (prefix-relative), which do_populate_sysroot will s=
-tage as usual. For example:<br><br>#??? Conceptual sketch for class-native:=
- ???<br>Makefile.PL ... \<br>=C2=A0 INSTALLVENDORLIB=3D${libdir}/perl5/vend=
-or_perl/${perlver} \<br>=C2=A0 INSTALLVENDORARCH=3D${libdir}/perl5/vendor_p=
-erl/${perlver}/${perlhostarch}<br><br>That would keeps target behavior unch=
-anged, and fixes native staging without per-recipe hacks.<br>Workaround (re=
-cipe-local, for those blocked now) In a libcapture-tiny-perl_%.bbappend lim=
-ited to class-native, forcing relative vendor paths at configure time unblo=
-cks the build:<br><br>EXTRA_CPANFLAGS:append:class-native =3D &quot; \<br>=
-=C2=A0 =C2=A0 INSTALLVENDORLIB=3D${libdir}/perl5/vendor_perl/${@get_perl_ve=
-rsion(d)} \<br>=C2=A0 =C2=A0 =C2=A0INSTALLVENDORARCH=3D${libdir}/perl5/vend=
-or_perl/${@get_perl_version(d)}/${@get_perl_hostarch(d)} \<br>&quot;<br>Aft=
-er that, do_install places Capture/Tiny.pm under ${D}/usr/lib/perl5/vendor_=
-perl/..., and do_populate_sysroot stages it correctly.<br><br>Happy to prov=
-ide full logs/workdirs privately if needed. Thanks!<br><br>=E2=80=94 Joseph=
- Mills (jmills)</div>
-
---000000000000dc82f4063d9ac98b--
 
