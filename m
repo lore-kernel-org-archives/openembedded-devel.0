@@ -1,185 +1,103 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34766CA0FFD
-	for <webhook@archiver.kernel.org>; Mon,  1 Sep 2025 09:53:09 +0000 (UTC)
-Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com [209.85.219.47])
- by mx.groups.io with SMTP id smtpd.web10.47623.1756720378416576206
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FB5FCA1005
+	for <webhook@archiver.kernel.org>; Mon,  1 Sep 2025 11:06:29 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web11.48449.1756724786394827159
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Sep 2025 02:52:58 -0700
+ Mon, 01 Sep 2025 04:06:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GKuOPjgb;
- spf=pass (domain: gmail.com, ip: 209.85.219.47, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-qv1-f47.google.com with SMTP id 6a1803df08f44-70df91bdc53so34514936d6.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 02:52:58 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=XrL0/Bnw;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.51, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b0428b537e5so144165466b.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 04:06:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756720377; x=1757325177; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=konsulko.com; s=google; t=1756724785; x=1757329585; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ofobfzjzJG9J1fdIY8NQbsTuZ8UDXgCKVT+jCg5LOik=;
-        b=GKuOPjgbDZ+pPnHcDY5i4TnVX9XxxBuSRRQ9mzK2ICgXmtwXfdlrWSmnv31pAkIO1N
-         CQc/hjVfugOqPmvannLXpV0qJYc6MQFJ+B/hICaSuIsKBRePnoBRMDSvjHrwupdZKL2T
-         bzHMRlF3QuaQ2HbO12a7wNpodZjudHMGPtA94wm2SdqhTJQyAi9jrkA9iSFbIBUn7tfu
-         rK2TqePCBEv3rrqAoO13uk4M5WFQQ9baj7fGuxCWZNbXmeJIG28Sku3vhLS998YLzBot
-         gvUDTogS176DzOYs3bc90C7NNITNytFDw11ThKnxM0agRl9Qd9AIL3gYI5JbSJipfI+v
-         PqcA==
+        bh=eJbxA2/2wczbu+0pjzxZ5s9lhzbJRhK2D+VZe/dpSk8=;
+        b=XrL0/BnwDh56pKZ3vpz8stiTfwNhFI+dthas9hD3V9Fg6Ccnn/gvXOMq9TYMoySsB/
+         2rEqR3d/0HzKqqT1r6JBovjkG44pFt0yaPj9fEW8knVud3fVFFWl1khPv8PJDHFCAPof
+         2aCsWE0ShclV5CEOUnZJukDPs9ne6BGczJt+8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756720377; x=1757325177;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1756724785; x=1757329585;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ofobfzjzJG9J1fdIY8NQbsTuZ8UDXgCKVT+jCg5LOik=;
-        b=hPg3GHEvkNXQB468lncgfuUCX00ipodYrFmGlIuur7igqGV1JGC8X7NtmfEmKVvA6b
-         vqHBpF/uV9XR8uxiDA6O58fnUuHmHARHRtqPDCSAb1MNH7iDQK/0lajqv5C9Z9KfuK2W
-         BTeHR2fA1jqU8/BmdwekrOgpkZ9m3U1HtmnQYusNjRYwz5xJnlcLdHK9GrF9WR6paW12
-         TqR2/1RV+osnj0Adf7Zy21fJf0GZGVoYVn7zBMmz/s6PBFen3RhxwhNyHQczRuJqsG+C
-         fVl92T9Uqx+TWfnbk2Ml9tM7Ad9Gn4FxLgt5XxGPwsNPcl95G5xVg9xoF8scRMNfI+8+
-         OTUg==
-X-Gm-Message-State: AOJu0Yyx/QPDqIFq58rrQ0maiyrPfFHa3L72bm/jQsEe+NpktzZLihYa
-	3w16v/KPfWjiZh2HW9YrAmZLOvXB2h3J/Mc86cgIT+8R9PJcCgK8yDWZNqsi938oaWZECNbm01b
-	071P96huHKgyfFlzD7xiVj/RgfDG/GuQ=
-X-Gm-Gg: ASbGncs4cZo4yMPcn6OXujuo651JfUyrM9bk8r7fKKikny5lHQdAikUj9i8wSZV9iaY
-	6xI0wZe85WwN9/rcHKqtufhGT6cmC+csSUieyUZ8wVAA4C8DhzDnAWuVjILf+tPzSDBkU2VA5yo
-	JDDsS6XiXl6R3a0JtMFASkxqqsbthL0D4ubgUOrrKOkVZ5dIfLbQDEV8hp3zl0xxTcuNpq79dSb
-	VIxySYdMONgoeO+y5r+ZwCEwq2u7KV+ilRa/zHSiJ0chkdDirUNzuYVIMgsiQHZa5tRZ9IPJxsQ
-	Xef5ItGquwhiZzAO
-X-Google-Smtp-Source: AGHT+IGmZzgsrlH9uWbApxVySZfOFdTPq612p4AIgDaW/VBNRrqjBnBihSYadMoiAFMSwONrYsjCd8JE2jeF33ygpEg=
-X-Received: by 2002:a05:6214:238d:b0:70f:a67b:a622 with SMTP id
- 6a1803df08f44-70fac895b6cmr77413036d6.32.1756720377128; Mon, 01 Sep 2025
- 02:52:57 -0700 (PDT)
+        bh=eJbxA2/2wczbu+0pjzxZ5s9lhzbJRhK2D+VZe/dpSk8=;
+        b=VLzCsK0visRow7xxJd7AxWOeBIwMaT1aRW1KnyhersRMIQo5gZJOQ/xMCM7Q6c2zKr
+         SaoVgzIvnMysIakqJyhUk4dHnk2q2jln7M6RqL++CjeRoMwtJu/4+3kWXdCLzYEfJbmG
+         EqBwJGzUq+pdNBQevnCbOnuXK4pqld2jXgS3HgEjclQQgf3t/I84okK21kvOop/Q9YNh
+         j9Vb9qBuH6pCAk85UnHmuTvttlYcMVnGq+VkarETAcvnFfyFutgDyEVuj9wtatutD92W
+         9KGKhcq76jCnY4Qnxd3Sx7NJlxDJnNrY1GYiATeUs1PIM+Rqg34Bh7hKaV6w++y2PVlD
+         Ckhw==
+X-Gm-Message-State: AOJu0Yx4bqnrSv0trojKrhrk54twLBQdg+MoZ6XqDiMfPDC3UzPz6kpk
+	Xo8xDOvOqNs3mdFS0nobKnAxpUS28huHYnhPFQe4O3K+EUrM5R4qnGdH5v2uqh89Lds7wLGvg4H
+	UthiT
+X-Gm-Gg: ASbGncsYy68i3AABsmPc3cI1ldOz2VBLEnUYPkoBvTZlSUNiTUc0Fe/fnWoQptCCOgt
+	5zqyuvk/FARgLhGRD3EJwgkpuYz2TCc0dA7wfz8rcXT0WFRS+W+rXHVSveplCKLPuPBU5lbk7WU
+	TdKg7Xu+Qg502AZPgJdZnNDnTVU/BDhyAptQa16+bw78PO44IgBiowBb1AmGof/GLyQWtmD6zwt
+	kWMLFzAWIRNaY714fhTUMOLrRzNgLyIgwN04TzFjTXFQuzDLUG6Exao7KIJr5nWvNclOvbrImYM
+	qYle6ecEYjrdg6G3+FNYzZk2X+fN22obi2klpi4lZ1iP9rMgw6zY6knOyChaWwb6UbDR0n9XHyc
+	qi8Yb1pig7yo5h79Oq5vdEvegQSOUUR8+PQL35q0CZuIwb0Y=
+X-Google-Smtp-Source: AGHT+IHi+Xr4Sv+P0IicpFA99lZnX0hqMe70bzKJi9Eub0joK2EgCLyxmiWtQbGKvyFvqZ3K/Uc76g==
+X-Received: by 2002:a17:907:80c:b0:af9:a5f8:2f0c with SMTP id a640c23a62f3a-b01d8c9275bmr709346666b.28.1756724784564;
+        Mon, 01 Sep 2025 04:06:24 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-afefcbd9090sm825856166b.69.2025.09.01.04.06.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 01 Sep 2025 04:06:24 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-cucumber-tag-expressions: Add recipe
+Date: Mon,  1 Sep 2025 14:06:19 +0300
+Message-ID: <20250901110620.158572-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.2
+In-Reply-To: <20250901110620.158572-1-leon.anavi@konsulko.com>
+References: <20250901110620.158572-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-References: <CAKv13CLMNx0H0TUmpqH-QOz28N2OV-QsRj2NdR21P+i6scaf4Q@mail.gmail.com>
-In-Reply-To: <CAKv13CLMNx0H0TUmpqH-QOz28N2OV-QsRj2NdR21P+i6scaf4Q@mail.gmail.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Mon, 1 Sep 2025 11:52:44 +0200
-X-Gm-Features: Ac12FXwsIKU86tVFoTqAnfiwOr85mbRcKjdbBSGem0-mfZmMctZQSk9Y5bEzTA0
-Message-ID: <CANNYZj8+Vy2Bz5YjtrAR8F=xYvgBdcr0MG0dy5k-Q5-sXyZXEQ@mail.gmail.com>
-Subject: Re: [oe] Introductions and questions around the world
-To: josephjamesmills@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 09:53:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119154
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 11:06:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119156
 
-Hello,
+Add recipe for cucumber-tag-expressions, release 6.2.0. It provides
+a tag-expression parser and evaluation logic for cucumber/behave.
 
-a recommendation: try to not be all over the place in your emails.
-Send one email per issue, and keep it tight and focused. If you have
-patches and aren't sure about them, push them to a branch somewhere
-where we can take a pre-look, and someone will suggest further steps.
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../python3-cucumber-tag-expressions_6.2.0.bb     | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_6.2.0.bb
 
-Alex
+diff --git a/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_6.2.0.bb b/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_6.2.0.bb
+new file mode 100644
+index 0000000000..6ddc489f8a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_6.2.0.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Cucumber tag expression parser"
++DESCRIPTION = "Provides a tag-expression parser and evaluation logic for cucumber/behave"
++HOMEPAGE = "https://github.com/cucumber/tag-expressions"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=8227180126797a0148f94f483f3e1489"
++
++SRC_URI[sha256sum] = "b60aa2cdbf9ac43e28d9b0e4fd49edf9f09d5d941257d2912f5228f9d166c023"
++
++inherit pypi python_setuptools_build_meta
++
++PYPI_PACKAGE = "cucumber_tag_expressions"
++
++DEPENDS += "\
++    python3-setuptools-scm-native \
++"
+-- 
+2.47.2
 
-On Fri, 29 Aug 2025 at 19:33, Joseph Mills via lists.openembedded.org
-<josephjamesmills=3Dgmail.com@lists.openembedded.org> wrote:
->
-> Hello all,
-> I=E2=80=99m Joseph, I=E2=80=99m an independent consultant.  I just inheri=
-ted an internal distro that historically never built a =E2=80=9Cfull distro=
-,=E2=80=9D and I=E2=80=99m porting it from dunfel & kirkstone to scarthgap.=
- The client only needs a BSP subset, but in my spare time I=E2=80=99m tryin=
-g to push general fixes back upstream. I have created a package group that =
-doesn't install anything but does build everything in OE.
->
-> I have found some things when building the clients multilib inteli7 machi=
-ne's. A number of packages are not installed to the correct libdir(/usr/lib=
- vs /usr/lib64). I have noticed that this mainly affects python modules tha=
-t are going to sites dir(PYTHON_SITEPACKAGES_DIR). see https://github.com/o=
-penembedded/meta-openembedded/pull/990/files
->
-> Scope / testing
-> SoC families:
-> * Intel: core2, corei7 (multi variants), (about 70K steps)
-> * Atmel: ipac9x25, som9x25, soma5d35, soma5d36(multi variants) (about 45K=
- steps)
-> * TI: som5728m, som3354  (about 60K steps)
-> * Renesas: somrzg2l (multi variants) (about 70K steps)
-> * Nuvoton: som35d1f(multi variants),  (about 70K steps)
-> * NXP: somimx6(multi variants), somimx8(multi variants) (about 60K steps)
-> * Nvidia: somagx (about 70K steps)
->
-> Each of the som's have multiple carriers. Lots of device trees :) fun stu=
-ff.
->
-> Goals: I have 3 massive build servers. One is my own and the other two ar=
-e the clients.
-> serverA: no sstate to dl builds everything from scratch.
-> serverB: shares with other servers and developers.
->   CACHE_PATH =3D "/srv/yocto/${DISTRO_CODENAME}-${DISTRO_VERSION}/${RELEA=
-SE_TYPE}"
->   ARCHIVE_PATH ?=3D "${DISTRO_CODENAME}-${DISTRO_VERSION}/${RELEASE_TYPE}=
-/${MACHINE}"
->   DL_DIR =3D "/srv/yocto/${DISTRO_CODENAME}-${DISTRO_VERSION}/downloads"
->   SSTATE_DIR =3D "${CACHE_PATH}/sstate-cache"
->   BUILDHISTORY_DIR =3D "${CACHE_PATH}/buildhistory"
->   PERSISTENT_DIR =3D "${CACHE_PATH}/cache"
->   BB_CACHEDIR =3D "${CACHE_PATH}/parser-cache"
->   CACHE =3D "${CACHE_PATH}/startup-cache"
-> serverC: same as serverB helps with the matrix of the builds.
->
-> The build system is kas and does(now) have full CI/CD (build, deploy-imag=
-e, deploy-sdk, deploy-ota)
-> Handling of Distro features are handled via the machine's file's and kas.
->
-> devkit(som+carrier or SBC) code is open source (MIT). I can share KAS man=
-ifests/build logs if helpful.
->
-> Submission shape
-> Do you prefer I send these as small series by subsystem (e.g., meta-gnome=
- first, then meta-python, then meta-oe), or one change at a time?
->
-> Path policy =E2=80=94 For multilib cleanups, is moving empty /usr/lib par=
-ents in do_install:append acceptable when ${libdir} is lib64, or is there a=
- stronger class-level approach you=E2=80=99d like?
->
-> I=E2=80=99m new to posting here, so suggestions on etiquette, scope, and =
-preferred structure are welcome.
->
-> Another thing I am confused about is devshell. My current workflow(advice=
- appreciated)
-> 1) something does not build. I clean the package/recipe.
-> 2) drop to devshell.
-> 3) if there is no git repo, run.
->   3.a git init; git add -A; git commit -s -m "Upstream import: ${PN} ${PV=
-} (${SRCREV})"; git tag oe-base
->   3.b hack hack
->   3.c git add -p
->   3.d git commit -s -m "<META_PART> DESC"
->   3.e git format-patch oe-base --cover-letter --suffix=3D.patch -o ../pat=
-ches
->   3.f cp ../000..... -> meta-layer/rec..../patch_dir
-> 4) build and see if it passes. if not repeat :(
->
-> before 3.f is there any way to build in the devshell without having to ex=
-port a bunch of stuff ? In my past in devshell I have only built u-boot and=
- linux. (ARCH, CROSS_COMPILE etc). It would be nice not to drop in and out =
-of the devshell until the build is fixed. Any advice on internal commands t=
-hat I may be missing would be great.
->
-> Some more things about the build. I have my own world recipe (it's really=
- a package group with a lot of rrecomends) I build this but do not ship to =
-any images.
->
-> I am willing to share any code or whatever that is opensource and does no=
-t harm IP.
->
-> Thanks for maintaining OE and I look forward to your advice,
-> jmills
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119140): https://lists.openembedded.org/g/openembedde=
-d-devel/message/119140
-> Mute This Topic: https://lists.openembedded.org/mt/114964946/1686489
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-lex.kanavin@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
