@@ -1,99 +1,118 @@
-Return-Path: <philip@balister.org>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBB51CA0FF0
-	for <webhook@archiver.kernel.org>; Mon,  1 Sep 2025 17:22:51 +0000 (UTC)
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
- by mx.groups.io with SMTP id smtpd.web10.54352.1756739391263243255
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A361ACA0FF0
+	for <webhook@archiver.kernel.org>; Mon,  1 Sep 2025 20:15:52 +0000 (UTC)
+Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com [209.85.219.181])
+ by mx.groups.io with SMTP id smtpd.web11.61624.1756757750726349679
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Sep 2025 08:09:51 -0700
+ Mon, 01 Sep 2025 13:15:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MtF87KYZ;
- spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: logan.grosz@gmail.com)
-Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-743814bcca2so3154662a34.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 08:09:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cPZzOIdi;
+ spf=pass (domain: gmail.com, ip: 209.85.219.181, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f181.google.com with SMTP id 3f1490d57ef6-e98a18faa35so2400252276.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 13:15:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756739390; x=1757344190; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9/iTmDXxIxA6C/TDlpSVfobOrhauu4/PP9cupw+SKPE=;
-        b=MtF87KYZeKnPEJ7ahoMcRgBc73sn68Y+XzMeFAtCC0JadvAa+4MyuDVAycupv8PZvR
-         eUGx4OdO7akOR11H8igaUf/pRsb+PNqUqhwrwEkpDXhIi33wVxYf5Id2qGK3ueNR6CUZ
-         wpR/KHWNwPZaARdP82cGLc0YUXLhkgj5mestM0lmLA5cS5GWO6R0ZWz/Y8w3/yOpmVjV
-         roiZ/9T29+7F66CtSxFeXYNqv8dfoDw9c6n1HRRIxHKsKfb/oQhT3g/zs3Y4JykyAlbf
-         eNblXCAh3Gj+E6rHJYSdeCKYHZBp1v8tVf4ZNmq0GShnrOH34GPi/SL0GuQQaj8B6mTu
-         Uzcg==
+        d=gmail.com; s=20230601; t=1756757750; x=1757362550; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=qciephwYes0HhcMKWi+1Ki0hGtNsaV9v5+NkyPFLWKI=;
+        b=cPZzOIdiucc1VgCQkRD81zB0NhxRlelwD8GQYZAzJOSNlLw0K41fV9vtrQVMHbf04o
+         fVQUk2MEey7sGXz9tK2765moZ2EMvkgiZocK+cy1gqN2kuxP0xTXMvMxugGMMm26/AcQ
+         HrMonEedNtcRX0So/MTdzgY0AS4448/yBu9k+wKMxnjiNCSNEusv6PnZS4AWhaUukiUz
+         waPUxIG189qAmaQsbCM4EMHJxpIFBKKtA41EY0FSORuZSuhvCw/oXVHr/Akz3YzCV9jj
+         1txonPXaVv6sn7IzycLBmruL6PNdHY4MCzJTayaTO2iendu3YvFK447sk4PjjIPbIpwS
+         e6wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756739390; x=1757344190;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=9/iTmDXxIxA6C/TDlpSVfobOrhauu4/PP9cupw+SKPE=;
-        b=OHCfxWTluv/yLBQncesj4nJTWyazfFTgGQFuMO+yB76ZGmxyQa52swjNtsbIs/VQq1
-         3YPSE//PCIUU70rTc2+SlhXkIdipKKWn76wN425/+ljxMGzlg6G0A7wdo2gBckADNIia
-         5xjWErvLcVjTAUoXomWKNimxkH8IoLaYUcUwcE7uG/MvJErKq1F+NUJulQLN/3XCrIxO
-         7QmHzcE8pAqEK9aD5nsYXFwZSK4Uph+N7314OWTaYw8A34q21VpYQlBRMef9zXiNQDWo
-         y4yMzHT1NhwrBcVYqiUFuUB53DU30IU4usUH+fZp1bq8YNPPWYBWBKZJ+f3tQWz4eAXg
-         taIg==
-X-Gm-Message-State: AOJu0YzAxB65eDjFMvTD3Tmq+iMWYLC2T9rK1w2cwJwjwuiPczn5w9EG
-	5yxjQJCMmgVVURcVn9g/gDpDrPjgvHTPpKZjeLDAIISaGmRHWukQfl0jbHHapA==
-X-Gm-Gg: ASbGncu8LLTSQOnmYe29HrW8Aor7lwD7LM+BJueDEXqxE/JWkAi+RXfUMMiHt+sNJYK
-	2OCzXAqaw+nRvmL9z5RCFqWQFJqx8J+nRIV20GAZOLE9kdbI3BiepyEJ8RanvztgrtQ1UUmqfV1
-	PGMPacHkjGu5iC9AGYsJELR+zMJrLgOCJ0G08BmTbU/WxFYXCXYuFNdUrHsqqW4aTf/OPqSK48O
-	mwfTUlgVdPbEXNqqq20VaZyNQD10jRMWknGlvFCTBO4hXaOOoNclgoyKRSekWq1UMbrrt+OFCgy
-	kYfBO3iZpmbVQWem5npJ6dgJHY/B8raP0KWtL81TjeD8+7pyEFZeAUnlpvUYSoEXMyv29x8cFYt
-	jF8NsIHTgQLV3EqYhtKiqYYY403cEW3zLSFYV+FyjQR8fvJ78afrpnOaLXPU=
-X-Google-Smtp-Source: AGHT+IG6PPipJuMtgcwW5gNqS6I72usTdl6dkkcnE2fDls8/RXRLZCd2GH+pJSh1A41HcdNMOzeo1A==
-X-Received: by 2002:a05:6830:3342:b0:745:6b27:f8c0 with SMTP id 46e09a7af769-7456b280a3emr2582035a34.5.1756739389946;
-        Mon, 01 Sep 2025 08:09:49 -0700 (PDT)
-Received: from localhost.localdomain ([209.159.212.33])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-745742a4faasm1068477a34.10.2025.09.01.08.09.46
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Mon, 01 Sep 2025 08:09:48 -0700 (PDT)
-From: "Logan Grosz" <logan.grosz@gmail.com>
+        d=1e100.net; s=20230601; t=1756757750; x=1757362550;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=qciephwYes0HhcMKWi+1Ki0hGtNsaV9v5+NkyPFLWKI=;
+        b=lwlI7wtvAQ3QgNeLm+2BbkGxNlYr/0P8/2fH63bzMGpRzUQ2MPVL/C+I6OGsHo2EfK
+         HVnmHclJfzoky9IhSvZ5wwQdC3KtRxXtk+9TUBMlhappEyomt2OoYF+DjACbzrXrpQ/M
+         +wg8C+ZI7ud+m3nfhOYg0NS9gMajfR60/izHRIyBhO8K+NiE5fF63dr38iPmEXE/oQqb
+         TMjCvLRTsDM0uT5B1XLbJcJ6jTOtqDI2keU2ykF9KtT3+XMDp6+GCmXq8bc/Sca24uX0
+         W7VuuM1p675ro74+8xifwRh4j/Truk+neKMNrY/mFoieez2FidtnpvzzgQJnR4fbwIoF
+         qL+A==
+X-Gm-Message-State: AOJu0Yy5shGgRn04YIeWDBS+v56ZbrPukI2SC29NdwOt29cWEOs0QQb2
+	Y82IMimZ9woimQVlECDhzXJfVBTp1o2qU83C6n2ZAv3kn3JJV3CBngAfu7n7ew==
+X-Gm-Gg: ASbGnctrs0Szzzsr/XFLXuYag/eJmTNPHV8A4AMwR6MjWvCoN9unmGyX16dumJ8OOR8
+	xqevbTZZR4YwMRXt/jgB4x0ExQWYR6fiCgSiXi30ltkvou6iKkB9KkHGasVMJVUoJ7+VjLrUBly
+	/MGc4cakfoL/T5AGiZNl5eWUYjsMB0iEbmsNjSc+hEpwbsdKbMwARWiUaYtWM85iTWcFZvsL0hn
+	28X60wtRTxKfKIT3o5PXI/1bycqK+lg3mNXfBnYydYt4JB1Ti2ksyZWgbGuNUkGTIZKDpivhdQw
+	kZC+vMoun9jV7LulWf5fBdp+3E5Yr1LBxpSkv/V3IMeF2/ItKAw2TA5u8NYIJ2VuTNl3K7S/5H3
+	a6koJ/hrdL8UAA/O3tQOdefuD1EUM
+X-Google-Smtp-Source: AGHT+IHN6IwK4xNSQ+lPyByr4okrrtEWW7Qj+ZC1UlAJgMR8YfLGjX3sNIP+sblvKciC/+PU0PvUEg==
+X-Received: by 2002:a05:690c:f8f:b0:721:369e:44e0 with SMTP id 00721157ae682-7227656b070mr92767507b3.43.1756757749067;
+        Mon, 01 Sep 2025 13:15:49 -0700 (PDT)
+Received: from localhost.localdomain ([67.233.61.26])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-7227d8cc1fbsm16901337b3.37.2025.09.01.13.15.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 01 Sep 2025 13:15:48 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] packagegroup-meta-filesystems: fix build issue
-Date: Mon,  1 Sep 2025 09:07:22 -0600
-Message-ID: <20250901150805.97615-2-logan.grosz@gmail.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20250901150805.97615-1-logan.grosz@gmail.com>
-References: <20250901150805.97615-1-logan.grosz@gmail.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-webserver][PATCH] xdebug: upgrade 3.4.2 -> 3.4.5
+Date: Mon,  1 Sep 2025 16:15:22 -0400
+Message-ID: <20250901201522.16275-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 17:22:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119160
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 20:15:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119161
 
-From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+[2025-07-14] — Xdebug 3.4.5
+    Fixed bug #2332: Segmentation fault for code coverage with nested fibers
+    Fixed bug #2356: Reading properties with get hooks may modify property value
 
-The packagegroup has to be arch dependent to address build failure:
-ERROR: packagegroup-meta-filesystems-1.0-r0 do_package_write_rpm: An allarch packagegroup shouldn't depend on packages which are dynamically renamed (fuse to libfuse2)
-ERROR: packagegroup-meta-filesystems-1.0-r0 do_package_write_rpm: An allarch packagegroup shouldn't depend on packages which are dynamically renamed (fuse-dev to libfuse-dev)
+[2025-06-12] — Xdebug 3.4.4
+    Fixed bug #2349: Regression in Xdebug 3.4.3 breaks throwing exceptions in nested generators
+    Fixed bug #2350: Crash when a certain page generates an exception since Xdebug 3.4.3
+    Fixed bug #2352: Crash when using latest Xdebug version when throwing exceptions
+    Fixed bug #2354: The __invoke frame in call stacks don't have the argument name in the trace
 
-Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+[2025-05-14] — Xdebug 3.4.3
+    Fixed bug #2322: Xdebug tries to open debugging connection in destructors during shutdown
+    Fixed bug #2325: Referred chrome browser extension is no longer working
+    Fixed bug #2326: Step debugger finishes if property debugging handler in PHP throws an exception
+    Fixed bug #2331: Segmentation fault with 'invalid' variable names
+    Fixed bug #2339: Trying to throw an exception can cause a zend_mm_heap corrupted error under specific circumstances
+    Fixed bug #2340: Xdebug case sensitivity issues on some files introduced since 3.3.0
+    Fixed bug #2343: Fatal error on virtual property hook step debugging
+    Fixed bug #2348: Xdebug does not resolve breakpoints in property hooks
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../packageconfigs/packagegroup-meta-filesystems.bb              | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-php/xdebug/{xdebug_3.4.2.bb => xdebug_3.4.5.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-php/xdebug/{xdebug_3.4.2.bb => xdebug_3.4.5.bb} (86%)
 
-diff --git a/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb b/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
-index 75591c31fa..1954b5979c 100644
---- a/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
-+++ b/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
-@@ -1,5 +1,6 @@
- SUMMARY = "Meta-filesystem packagegroups"
+diff --git a/meta-webserver/recipes-php/xdebug/xdebug_3.4.2.bb b/meta-webserver/recipes-php/xdebug/xdebug_3.4.5.bb
+similarity index 86%
+rename from meta-webserver/recipes-php/xdebug/xdebug_3.4.2.bb
+rename to meta-webserver/recipes-php/xdebug/xdebug_3.4.5.bb
+index 32a10f75ee..fdde88e44f 100644
+--- a/meta-webserver/recipes-php/xdebug/xdebug_3.4.2.bb
++++ b/meta-webserver/recipes-php/xdebug/xdebug_3.4.5.bb
+@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=afd6ce4aa04fdc346e5b3c6e634bd75c"
  
-+PACKAGE_ARCH = "${TUNE_PKGARCH}"
- inherit packagegroup
+ DEPENDS = "php re2c-native"
  
- PROVIDES = "${PACKAGES}"
+-SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
++SRC_URI = "https://xdebug.org/files/xdebug-${PV}.tgz"
+ 
+-SRC_URI[sha256sum] = "a043888c86e1526ac5ddb220d37ed3a1809e79a16bbb059b9c7e2d2f83b43cc1"
++SRC_URI[sha256sum] = "f58442306ce55fe3b811c31759a247242989164f2a7933f05c8d59b06665b9c9"
+ 
+ UPSTREAM_CHECK_REGEX = "xdebug-(?P<pver>\d+(\.\d+)+)\.tgz"
+ 
 -- 
-2.46.0
+2.43.0
 
 
