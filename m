@@ -2,38 +2,39 @@ Return-Path: <peng.zhang1.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC97ECA1005
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6C86CA1010
 	for <webhook@archiver.kernel.org>; Tue,  2 Sep 2025 07:44:56 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.71718.1756799089459925300
+ by mx.groups.io with SMTP id smtpd.web11.71721.1756799095183341087
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Sep 2025 00:44:49 -0700
+ Tue, 02 Sep 2025 00:44:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Xff9DWmj;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Ftv5aue9;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=134031fe91=peng.zhang1.cn@windriver.com)
 Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5826vWXP1223092
-	for <openembedded-devel@lists.openembedded.org>; Tue, 2 Sep 2025 07:44:48 GMT
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5827isvX1300360;
+	Tue, 2 Sep 2025 07:44:54 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=jA06/e91jaQisd1ptOK0
-	NHFAlQuYiL81VA6OvgRX2Us=; b=Xff9DWmjBVtvWp821xR3i1KxDEivHEoSW5Dr
-	LgYs9hTNRzd73R9AmsTIIvEOM6OsKVxnXbJ9kmWixXHqHGEce4w0cYKA+8oRaSiA
-	FJKEoDCTV+PNPlT2EVJAe7+B3ON5QPZSq1VzICmIHemfEJXHj7fHDYO3gFjIITHV
-	4yFvlGccUuBBRT2mUN/hgKIWRMNJSjPZwbEs3lOQa1OWAaQlbl7aTnvkxrynHKJ8
-	wrbUAliz36FqxFQY+9O1Xl6sZitmIUDPb5IBg+bRhGahsYQV0vwfprISMsLmEfeM
-	pzbTau2nqtg5rFn6wJ/Uzgsn8KajKth68KukwB+2ghnm3y1grQ==
-Received: from nam02-bn1-obe.outbound.protection.outlook.com (mail-bn1nam02on2072.outbound.protection.outlook.com [40.107.212.72])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48ur99tckq-1
+	 h=content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=PPS06212021;
+	 bh=Z9FdEzmgsE/iWUV+IhrtO4ctyGQjbnJBBplFNjJs5AA=; b=Ftv5aue9jMWp
+	Fbl6+i0IComI1P2f7lmwjo8PrrbxHKKtB7l82Y+/QA4gI5FiQJD/Ijzh5+2wJOaW
+	KENyeSXxaOklxppG4CAuauerEUSNgfIkVL5LqAn/PPbr5j/3WHVxri4q+3wPc03s
+	OCIVRcxPpDZ04nOvOvQO3ReqAxrOFGUSlIdpgzO+F5O958pmGOnM8Fc/BxoZbvF8
+	aSD646iT8/68w91tVSw1MPVxJowZ/KYG2LhFiWFWWm8i0yw23o+VMG62Xh+fSlxd
+	kmJ6yHV6UAds8dY0iZIIggl1azGKFAuErbSphsjJS1WH8TLANpJSNshUwP6y8JrD
+	/sDkbDDYRw==
+Received: from nam02-bn1-obe.outbound.protection.outlook.com (mail-bn1nam02on2073.outbound.protection.outlook.com [40.107.212.73])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48ur99tckw-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 07:44:48 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 07:44:54 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HB4H/TDsRNeS128OmWvBulndI+YoB8FERmt7y4m4FJjOgeT2YAFuHwfSCjmFZunO+DW1yiqJomChqtAij9KO0lziNLI0qf1MDj+bByhZp0YFql5PIMvchwO5o7LyEb7qzgUKfk3qPOeHfRwh3P8TuHGD2n4xJQqzfrbIqhJ8s0nT0LwtDrhcsyIlJI2AvIuKebSpiPZZtL3wnHl5RKQiFKqVJAfZeuBcZQYqiClCmnBzvxZ1JTlCidnfomW1Lm+d1EjO0VF70U3rJdGnQRWSiLuJ1+fZBtODRHLtSkxpT44DqvXdjDl7L26m2wOVWcP4zaKafMq5bCOizxbJTKbeQQ==
+ b=wlc269RLKEGit5pJE6M1Z+7JQwR6qIJD7zwk9K7fXy3a7iMcgGN9LSk7wpw0zK8QQKIzRx30eqsrwTo+913Y7q0uk2yUFozLLlqM1DEMd1w25LHJvWzaapnUqL6tlbtuPywSmUWqCSCha9lVC1+e6Pxf26LpJGr/70DvShO4F7/Wqe65teN81kuWtdpXe9FBd3jDQKWT371KmX6mh86Qs0jHzckeXmtny1mx/cg1CjJt8BFs9LCvj1jWw/aYyMwUDmHaJZxwrNTP44lefqoZhtxjEovvrWEe4IMeTCurIJ+Bze3VoVv7YUv6vBeuJW6lKybu4HThJBzxnrteTDQYRw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jA06/e91jaQisd1ptOK0NHFAlQuYiL81VA6OvgRX2Us=;
- b=jMvw9PleDnwmo6nkoLTl0Yg4IUEbkCdwMWDg2IKL1BJYoiF2PtF8mpyJ5MJz4kGWne+3lykQaOOZC67wuhdjLgD2eMUu9eBuyPpe7Wawa2Sbal0R0BQsDKWBpH4jUvY2hQdzT+1zudo1m3sEYNdnd2pSRZsfEy9uQCgfBpL7tx9bSEkAhsLrIXri+fMqYRVlWvNxTScyC6DAovluA8u50ewju1XF0AZT2wvDX7I7ewdFArNdxTbMD/x4Z8DKneFW/15aQckYA/YInbp3SVHtB5MEHtthvsQ/TVq2Y6aME3VW7TUDAWsn42n4PpQFfB9XVe4GJiM6EJP5oFK5kVTGBw==
+ bh=Z9FdEzmgsE/iWUV+IhrtO4ctyGQjbnJBBplFNjJs5AA=;
+ b=th3fo4AKaDNBVn/BCMk9vXsV4nlRWH24DpnJO/3wfQQYgD54fZF2BNanVMyrrrjzas9PUN4uWO+JFfeGaLS4BJ0xyEy2cEG3rP3QmM/PjPvFyCfzdweYvtBovJagmPkWkFqgELMEPRVmxfKzcz1cdEsO+U4dC4UIRhsRmvSEcWAljcxOPfsuSwMdB31rfZybA1bCwsbn/Y24J+duntSK0ZzFuSkl0GJVQFuzzvxsClY99aZIsIy7KQonKd8Ti1kAydOGKCaEM3QIRVzjucrqyopCz1gnyrsFDfLamcu+kc9JKM94zPPrcDiULZP8o9lo27KvEC+UorFMrplVvCaPBg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -41,17 +42,19 @@ Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
  by CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.27; Tue, 2 Sep
- 2025 07:44:46 +0000
+ 2025 07:44:52 +0000
 Received: from CH3PR11MB8562.namprd11.prod.outlook.com
  ([fe80::24c6:f8fc:1afe:179f]) by CH3PR11MB8562.namprd11.prod.outlook.com
  ([fe80::24c6:f8fc:1afe:179f%4]) with mapi id 15.20.9073.026; Tue, 2 Sep 2025
- 07:44:46 +0000
+ 07:44:52 +0000
 From: peng.zhang1.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 1/7] gnuplot: fix CVE-2025-3359
-Date: Tue,  2 Sep 2025 15:44:26 +0800
-Message-ID: <20250902074432.1068537-1-peng.zhang1.cn@windriver.com>
+Subject: [meta-oe][scarthgap][PATCH 6/7] gnuplot: fix CVE-2025-31180
+Date: Tue,  2 Sep 2025 15:44:31 +0800
+Message-ID: <20250902074432.1068537-6-peng.zhang1.cn@windriver.com>
 X-Mailer: git-send-email 2.50.0
+In-Reply-To: <20250902074432.1068537-1-peng.zhang1.cn@windriver.com>
+References: <20250902074432.1068537-1-peng.zhang1.cn@windriver.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: TYCP286CA0222.JPNP286.PROD.OUTLOOK.COM
@@ -60,95 +63,94 @@ X-ClientProxiedBy: TYCP286CA0222.JPNP286.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_
-X-MS-Office365-Filtering-Correlation-Id: f9781031-6e2d-4d0f-b5eb-08dde9f4963b
+X-MS-Office365-Filtering-Correlation-Id: 086a9166-eaa7-4035-a149-08dde9f49a30
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|52116014|376014|1800799024|366016|13003099007|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?5C/KoCj/NTJ978X21vn/VZFmgrxTeaHDy/eDtCDWvGpsQIJ5A6r97mIcVnEw?=
- =?us-ascii?Q?kSEi0jzYhNQbKVHPq2mRlgfFHNfeZyfX8RSvlxKEjacxaYDLFMPHD6sVeAh1?=
- =?us-ascii?Q?W5AF671nsMawD4L75OCH8ZCxsKF7F/0NsknVsB8b82w6q/cZ3lY7C6cs6//E?=
- =?us-ascii?Q?yufyiBuF0bf+hoHEnCzOomzEC56SjdMOD0UMy2kxrEgpO7MKbjZAB6VSQ2Ti?=
- =?us-ascii?Q?yaCOJgcibZc88X7uwFoo2jjTieSc3OXccG764GpjxHfjxwlnVtq8RutKQGuH?=
- =?us-ascii?Q?A7RSIWcC+nAkZkbxbSjgxeqEA+SE+2/Wq1bK2dHdUPzp7xGBWlkZWxOilJID?=
- =?us-ascii?Q?lioVBlNY//zdCCqtesHAkJO5RQ9YZj5b6iVlaiO6I2F5UUguU+fO58Yq+erM?=
- =?us-ascii?Q?YyhGMcTCcYQilVG2d+xBgOmshlzshy6TBt/wntfYuTRl4m7ZWjRCZN9hhKa3?=
- =?us-ascii?Q?ijx5241UTKSQGpL7yJZSnrYDKQtNV+KfBvOxqOkJvlbYPJbbUbaSnquCt7zb?=
- =?us-ascii?Q?7r5yQlX0V+KoTVWOpVmeNL8yru6S8SPl8elzUAyHnlZ4p0euvVyMFyBvgRnP?=
- =?us-ascii?Q?ahULJhOBe0qsSmnmLhyE8F36nkVUBjoVx8SzMolPMqmnVRd7DBlajLp/0hP7?=
- =?us-ascii?Q?EcwTX52Zp+zm6tVv83Sey8qHAG/+LWgUO+U83NTco8wRhEoa0B1YCbjyHt0r?=
- =?us-ascii?Q?691j/kvq/iIJOmLIcn1IW0C7N1pZykqcd3tcSBaLzOpr1uryK+lFZb1nuewg?=
- =?us-ascii?Q?wt8mOOrBuvllEZaD0tU/csp1xnHboBey8WaIBh2yZyLkrUSVYIU/IZR5BsGj?=
- =?us-ascii?Q?H5BJLYR85oxSoOWwJ06J/oc8ld1a/+IIN8pq3SaBaTJTO0EHhOLfT3OWno/x?=
- =?us-ascii?Q?qYC7y4U9upJVJbvWNECvRRo36+Zji+yqKOClnrBNYJYgT/BwK2UptMQCJynp?=
- =?us-ascii?Q?SmyC+JWF58Ks150PoNjJ9rqU9d2smkgGYgTsF/bwFjna1BiMqzrBOCUPOmil?=
- =?us-ascii?Q?HGFWstZsdOMpbAaP/5wHraU1lRnu09GNH8fMU8uyOSmrVd3evRVuwJBrwrkJ?=
- =?us-ascii?Q?INxsy39zazTClK3utY+3WASrRdL6Uq3m31Wt+fsBEu2PLSR5NL9uOcTWPrRh?=
- =?us-ascii?Q?yW3+NX7ezwQh2imR4Lit0kOjGCDasHZbLHDFXIe3JqozJhHRDVSjYUgoLYFN?=
- =?us-ascii?Q?JHM9Rm8o+E5tw3AJ1IEBGaNpcAmWZxxLWOGLcMn+V+isceNr6XcWqClAsVn6?=
- =?us-ascii?Q?vo5xboHCUop3VnTEAaicKNPyIDnMIfXLt/EcObfNoj3wJkARcak9pn1z38it?=
- =?us-ascii?Q?aahh5JvVALFlemJx10kGYV0NJaYn7RQaNIQr70DiLgFrgb2nfhv4X6lDlY52?=
- =?us-ascii?Q?xANChPARoaDWaJgFzaazVs9H7eQesF8raphRUU0uPs6tsJfy7BbNAs6SaURL?=
- =?us-ascii?Q?zbpDZfv64q4=3D?=
+	=?us-ascii?Q?4V8xma+ZGLEiviXh+g1bn0g1/zNtRR0Y0Dm4KUhL0cY8KTGjFaYVlcnyMaUF?=
+ =?us-ascii?Q?wV9QvddVa5PL5H2xt9zAdvDQD7eOM33pymtqILxjFsLIZx8FavrcBpyiYvBP?=
+ =?us-ascii?Q?2aPHH4aJXDDUXuFZANKl9XvPbOnaXXfo+Yfe/b9w+n2BmlXKgTeJj++V4Kb8?=
+ =?us-ascii?Q?Bih4o+EBsx4tZCHy7DnGMtP7eP8aRXRes+OYe2Hhi/AWr2eTbyBHOuXGf5nX?=
+ =?us-ascii?Q?oMz65MAN25cXcm0xYiCKHqQYyeRkObLV4EZFQDpSKOlV97bME9foaMLFORqC?=
+ =?us-ascii?Q?Eo4+7xhKKum2uLSK/XDfoLIIrlwqhoGEddkuit8fzmkTpwaeuR/wnCMlB2VX?=
+ =?us-ascii?Q?0NbE08baS1Pmpg8v+BS0cmWv2qWeCX8w8Xvdr3j9jt0xbE8AzbsiuSErb80A?=
+ =?us-ascii?Q?jvgz82XWi9dkzhdtha246TRTHumxAqYx1/1n2Qj9v+1JIgDKcOYtQhI2/ehF?=
+ =?us-ascii?Q?R8jmBeCr1MI/nKSDJUsRWJ/rBJwujgvmwnLQv7WvIkNyzhX14tx35IYronJt?=
+ =?us-ascii?Q?ZiiOsmJAeTiZyLCfRl5Iz0pPtCcZwMF9uyTX/vG4nxWB46LQb22ko0Apen5I?=
+ =?us-ascii?Q?Pjh1THOqqNP3SH0dI+41chICeSXNsQNZpA7eV85kuQleLuLmre2JB/Y2lUuk?=
+ =?us-ascii?Q?7R4x4k13mHlA0FrYmL6XJoc3CF/kT0adc5frkboE5FdhLxAmG9lfrcHdO226?=
+ =?us-ascii?Q?Klqj1MM6WnTC4ySZ4NpZtE+oHVExZm0RQF65PpNKF/c8DBv6ZIh7+yyeshNg?=
+ =?us-ascii?Q?Rj5fgmYwCPhpV4meWp/W7l7L4fequzfcnNNgjI0f8pXQg0QkNbHHI7jcjP28?=
+ =?us-ascii?Q?r2ATiwxTHmewimbjT9Ev+2ZEW4Ynne75zMvgdVtNJ0Buu6VgClphGnnnxQNb?=
+ =?us-ascii?Q?Nc6lwIO0K+5KmsBOyh020YFItRzlpcxqvKo7NfUoWGnDLMGo9sLftNhIWQzF?=
+ =?us-ascii?Q?rwYVxQr5DiLrW3ruVz6ixCCdXaFHoeMGcAStTVmil3YgtTx+NoT56su6JLll?=
+ =?us-ascii?Q?8j+HsuLCh8I4mx4Pc8wJHTuhJnc+PrxcWqUJGgYJrad45bNW6p56Go9bxHLO?=
+ =?us-ascii?Q?ICTpEWVUhd+kMoRm43f5QumXQQrEhm8QxuzURKgsVld1z/Cn2JUfTTwLBIuv?=
+ =?us-ascii?Q?MwzyKsQ8Etqa1hWZc6Mu3OwxA8KOf4pVKF74i8BGu1++a02i+DuM9k7bGRsC?=
+ =?us-ascii?Q?mlTFvdO5IiMVkHUOu86UJT8gsQFTaO+Wzm7J2Ui1K1q9HIzXu0H1ICk1AXqc?=
+ =?us-ascii?Q?ApO8e9OXCWvqacHK6MuIdmqsp1eRSjpC8e0Jj3QXt5pZnJuWLAoKDEAFxAN5?=
+ =?us-ascii?Q?MYQ+MUbDdEibwQXzElm0OaZZrD7FNmS50DuvS0VvJasS9y8iAR3sjujiIX8k?=
+ =?us-ascii?Q?JMcnXBpFzKI0y15j4nLhLC2hTxs3qF6O0mSDy7kQE/UAuGj15c+33jpEp50j?=
+ =?us-ascii?Q?VoHAh/e3Ui/KVNr/OIiZdeLVQ1a+FUB0?=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(376014)(1800799024)(366016)(13003099007)(38350700014);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?42dpSmUmZl1dhD1wnYaBUrGz7DecraLjx/fP+7TSc+gt8IUoTcnGdGpm/2NE?=
- =?us-ascii?Q?s4U/TqNF3DRXFiPNqgqiKSvVBR7ZrSWVvcyWrFwwU7sIy/uKYYwCYnmksWN4?=
- =?us-ascii?Q?U22cWP5dztKBYXqdfz0CS0gNW9EJwwv4oCsTDWs+oNMCbK3mA2zBb2HRvNOz?=
- =?us-ascii?Q?wPYqkN3wt8if69jEfYRmmWTrtqADu0FmE0CWTdJZiCnkdabsZ/5mgUnR3YrA?=
- =?us-ascii?Q?MugWaxlBuWYJPgcQDeub5qLECThErNnIDBsAuzEzwuJsIOS7OWmJ4cndNKQz?=
- =?us-ascii?Q?EyxDnfampPwogGnZZ2hSfQcoPKDJn7l0PX34ymRR3XJCOySEhPaEk72AlfMW?=
- =?us-ascii?Q?mRMm3iXyBFgzNh+Dd1ffLfp9pDlnwuL+qD8icZMrU8KlcvXrDyRZqkWLDu0g?=
- =?us-ascii?Q?cdtbM8DeUQWDzgtkF+r51wHSqJpMogUHzO/X23KaDsV8XiLUx8LDz0wRjDxC?=
- =?us-ascii?Q?8Qurgs/WnKV+s8fl3Wq4jgZq+kAATU503m8Cy8Kxhog8jmzHesN+2O6YBB5Z?=
- =?us-ascii?Q?jGdaokP3eE7f6MjZqGWKl/AbgJBd3bUY27HjRvgQXkTSBxfKsb5v9cWohSBQ?=
- =?us-ascii?Q?rzBD74iZZYnz079+h+SkBPyyOPneoubT1MFuLl6R3I0nbiqkQdK2fhf2PmDD?=
- =?us-ascii?Q?Toiq4GyhemP3RK6zuFh03RuAaf/QSjWpMEXshiQ4S0uNASjHkbpq0RHlmVUv?=
- =?us-ascii?Q?VwBlGjrILiiJ67IRgx/mJBRWbdYNoUIHaKuzNmIm11oQKWxhZ/RwUz9+5aQQ?=
- =?us-ascii?Q?wuO1olDv86NcU7J8lUrQ+jj9la/fORi6aTGkcgJfl82uXvWJzB9ViEB5o0kr?=
- =?us-ascii?Q?cJROCP3Xn0lt+ReFWFxm9NhLk3GSI1iYymokX9irhFHFJ837yJNDQzzRE1wi?=
- =?us-ascii?Q?7/IhnP+OI8ItAy6/GhiW9XYfmNoYvObvfVmZgnR7B5XKWgcrmW659z0nppF0?=
- =?us-ascii?Q?O7YUr066Mt66kXTL17su821YNn3XabNiJcvvSRSoOQnBOKcddw3nDztXpKmU?=
- =?us-ascii?Q?Cv9Ozj61DEgYcZ5dTaQSKI9iepFG2kapTZEx2eS1h26/5tD5Wv4pZukoCT8H?=
- =?us-ascii?Q?707eJFfa5J5rx7Oj2P5uWxC93nvC0YQZDnuJrLROI7YEunXAVseVwdcmHm4p?=
- =?us-ascii?Q?sEtANd8Kc4VJkKC6VV48YEzr8wP0jtpfleY42H4ECVVUHw8It+RgfwElv/yU?=
- =?us-ascii?Q?9GqvAmSnAd/ih3OEdXTPdm1XJrZzs3+llTWk7mcTenA1zzCfszehrFa2eprf?=
- =?us-ascii?Q?dpuMmEBF0AmCtmfMGfdbXAy7/mb0g9nw4ydaGXbDLyLQHkDCJV8K6Wjw4mr5?=
- =?us-ascii?Q?r8vtIm64/o6vyaWCve7ULWLXFovjs47gefzT3d9sOa2cGQaH+4orK6F3dQBa?=
- =?us-ascii?Q?F4QlNasEWzO2H6ia4ynu6GXUqYibQiiXREd3JX+No7rz+yxZ7Jp0EnHSfINB?=
- =?us-ascii?Q?NKEzd0woE7dADAryC4tYrbQp68Dp4mEy/8arXWnS41jZVJxjBMZJfJslLU1h?=
- =?us-ascii?Q?ANpQpzuzGFZTMTjJMFgmXIRqbZNu+bDXcuvcnZ6uLgKTqIcUKqZcukOt+9WP?=
- =?us-ascii?Q?Wsm35H9VrkMsnTfh/nITCbPP2SuN0de+3XNmRutTb3xR/edmAMKnzUSvJaqE?=
- =?us-ascii?Q?JA=3D=3D?=
+	=?us-ascii?Q?uTyHtlTcq+Fob31t2I9ESxyrQQQKViSKZsQTzzFwROt6NKP5zbgVq0FFliCs?=
+ =?us-ascii?Q?u3KdYCWQdRD+0tv/gBSTwDua71yzYx4iPlbt8AaZEJGkgWSUnUFQ+/69Pf2V?=
+ =?us-ascii?Q?/AdXCvG0uq5IWp8xTYcFPinkhV+Q8pb+hUswRw0sOxG+08bXMj3qdbLKP9AN?=
+ =?us-ascii?Q?hpXJgNxRRpZ5F+Gzv2jACsPYllm4UAEkZZjkD5fw/Kqw9wbRILsCAS3i24PU?=
+ =?us-ascii?Q?QUOjO0PuSVr6jpL2bz0RTsOcBLbuxAvwjF/ZDAcn2FT0CMetbeatB3I1RxMy?=
+ =?us-ascii?Q?9AwhpwikCMNfB8rSMaSqXKruNavo6FYdNZKI6VdPEyYDb/iwsgRJRD7iQ+fn?=
+ =?us-ascii?Q?X6Ke3tt4VHzpzxSqxRqxLPqAeWitp1EbL23e6MyHw9Kd3J7KPqD4AknYHybI?=
+ =?us-ascii?Q?rBZ1x5PwP+Lif+fpkmuQ2N5ReI/Cro/IJWwE6zmGBO9MDrv+AI0VE7LkIR+G?=
+ =?us-ascii?Q?L64dcugLM0DzByCUzYrtAmvNrIgR0I1kmz8RFAcdvZfiJY4rRgD/Jr7A7SHG?=
+ =?us-ascii?Q?BUmPkGvrcr6EI+8PwkcJ55YwBgqT6PT1h7caz5Eo3EIV2QpEMsvfhq1ebuiT?=
+ =?us-ascii?Q?o4R0sfSrmRlUQSsxL4/LMHdZVE2qjraFfpvCBnmUdonrmbgz8g13ylUx9dOV?=
+ =?us-ascii?Q?mrGnaaYdo/lP/5tMuZfB7crf8TZrHTkH78dlIuOVn884vi6PByWCgFpbAb5q?=
+ =?us-ascii?Q?0F40xEFmWYFa8OOkMw5ueroz+LZV0UC6DOCDUaBNh6se85tbArgUufdr3shf?=
+ =?us-ascii?Q?M0+nrp+BvkACvEWcxjegE78/IsmAWON78v5s9silCOmCCWHNGsPbhnggXstv?=
+ =?us-ascii?Q?arPjqmrkjFV/DuBPRneBAQUQePMXvGe2KPc5sEmxDAHYUJh5BN/Sy8wgrOde?=
+ =?us-ascii?Q?qrf6TysE4CFz6HoFqony5afXmJjjSq/DSWqD5PT1ZwvJyW1pa61I0Z+8leWm?=
+ =?us-ascii?Q?w11xxqL3vkjv5m3I7qRm7HsYcVhePTja28NefYgm+oHKePPOZgEKLiZV+Ebl?=
+ =?us-ascii?Q?PIN3+x/bEVtuW1ZwzqcddRzuB6wWCodR95kR9ZyV97zcr3iUkRxY+AiYJx4h?=
+ =?us-ascii?Q?eyv9iAjTSlu/kGEZj13SRn2p+C0QGIZXwD3w55vuQ+Bo9Yu7fKpI5529hh0q?=
+ =?us-ascii?Q?5SB0YKKqjapBvSELqh+JoSUAnimeLkrNDOUzCN6mI4j5oYwZj3tWXScAl73b?=
+ =?us-ascii?Q?UIkF8jH55iHLNfiI7N0troFg6QzbXdC8LGzzAPgHholBzSQufZ3Gbe1S5XEL?=
+ =?us-ascii?Q?CEtCdWxxRDkYMj0j+BidwpDVKn3yiTVJ4ft1s4WUd+dwZ/AFruFHmy0ZfyW4?=
+ =?us-ascii?Q?puaqYkiQgTGXomZ5+tw059bAJCX0o+E5aJ9d37Sh2UGb80G1XjnSpszfVJGM?=
+ =?us-ascii?Q?2oN6stXW/uUq44JwqpY7VuBmjX8DB6qD5gdpAeFb4RjpxOMFJmnS/UkqODf5?=
+ =?us-ascii?Q?WqSpl5o4g1zGtiKvNntAiPw1awCkRReJnonVHowo6SNQoHUKbVnd7pFraYcu?=
+ =?us-ascii?Q?4WyDiZLX4Wp/Zu+bmbptx/V9YHOUp+UMcOBbEk30sUlc/ylg1h60CR/3MYE+?=
+ =?us-ascii?Q?T1wIefhSobFkAuS4QMZydGTBEB6yyFQhm8DpvyOkJYqeRNOBJCO0t3kMOWWE?=
+ =?us-ascii?Q?sw=3D=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f9781031-6e2d-4d0f-b5eb-08dde9f4963b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 086a9166-eaa7-4035-a149-08dde9f49a30
 X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2025 07:44:46.1121
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2025 07:44:52.6922
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: H69d07EgjNEJxg0eJLk3VFKquoc9Sr9iQX00Uy5X+S0Zu/jrGlLWL1r8jyA9sdIjP9/veasxbyz7q6v0daJ2IuIhWFMGD5ADkjWpei2but4=
+X-MS-Exchange-CrossTenant-UserPrincipalName: XPwD7fAeD51asjlqnc45Vjmif3z1v/qDTqwbWr/92yai2R1a9RLsSQEHWB5oOQgZqGBdgYVOcr6KnvZp1q+UEnbqayFdikCCiiSSbPbsBQ4=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR11MB8562
-X-Authority-Analysis: v=2.4 cv=FqYF/3rq c=1 sm=1 tr=0 ts=68b6a070 cx=c_pps
- a=clEwq8AbTxs6UVDo5+t0mQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+X-Authority-Analysis: v=2.4 cv=FqYF/3rq c=1 sm=1 tr=0 ts=68b6a076 cx=c_pps
+ a=N5D11zy+UcSgEGJfZcBmYA==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
  a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19
  a=xqWC_Br6kY4A:10 a=yJojWOMRYYMA:10 a=PYnjg3YJAAAA:8 a=FP58Ms26AAAA:8
- a=efV5ao4sAAAA:8 a=t7CeM3EgAAAA:8 a=-6N0tzXvYAPP5OpoGb4A:9
- a=-Ie3GqMprXkrkPNEQgfm:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: cRTOeKtMb9YTfUQg2vM2RQ5PICOaq3lh
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTAyMDA3NiBTYWx0ZWRfXxuoJJ7aos6E5
- Ed8860t3DfMjttuDhStmNawiMgTtsXDBMUFc/gofBRJlxV7tWOsgsVfUuYYPSTaYZPE7Cbh7Agn
- TdaPo/vBPSDqk4O9CbFeDUOuW/hAwnvVAhjjpoQWNWXli6zDTTPBVohNIU5unXmQCMbD3vLv8vl
- 5M7Z3YuliPKCk51FO7+Jqk5H9kjUrmMBRSQIAMYtW0WaniQC7/tgl639G714era1S9K3MOvZ2tL
- QvW1y9/a92wXK/HREXix0ftdj7TjLBEvpnKBr+4GgVAUXUsD/5FW7+k8F6mnj0Z7FRLGvHF4/Vl
- hWlnwgAsxRCRudReVW0uLCtysp7dBwtliDDoGhBsSgAHZZiPIVsWADVadb9qlo=
-X-Proofpoint-ORIG-GUID: cRTOeKtMb9YTfUQg2vM2RQ5PICOaq3lh
+ a=t7CeM3EgAAAA:8 a=YRJNb4tU5TLenshja7AA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: ROGcTM6e45lDSOChRILJUJrxBakGbjQd
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTAyMDA3NiBTYWx0ZWRfX/K+A9Vz14HSC
+ VhWa6cgQa8BY0kVk26uytkeYodu8v7S5fyUAiRA6XyWn43HkQ7DmjkIXJF2cXnCzStTcX3DD2Qv
+ 0dwti1V5PEhXmxw+WFwJU+UTVFmDtNwD1o7bMJUP8SEWQqTzIt5wB/glkQoLjLs5BalA1Bugj19
+ 3WMu6t6gW8RlSEO+Oh7Mv6RO3CjjMjcusNQQt7O1iPMPTktQChVkMnwWSKig5eVoQY4Ml99cJC7
+ 6AL0E/9epupNvoVi7x7BVf1uZO6u70gs74+t2Mxp8lOPz++g1Z5GhxSMXxSo8vnzlKBNOXEqd57
+ pVw1fG62dQJkn1Nf40rxiacCDN5F6uzVApG1eQi4syoR+17Y5Suh2Ok8cj4Dcw=
+X-Proofpoint-ORIG-GUID: ROGcTM6e45lDSOChRILJUJrxBakGbjQd
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-09-02_02,2025-08-28_01,2025-03-28_01
@@ -161,109 +163,85 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 07:44:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119169
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119174
 
 From: Zhang Peng <peng.zhang1.cn@windriver.com>
 
-CVE-2025-3359:
-A flaw was found in GNUPlot. A segmentation fault via IO_str_init_static_internal
-may jeopardize the environment.
+CVE-2025-31180:
+A flaw was found in gnuplot. The CANVAS_text() function may lead to a
+segmentation fault and cause a system crash.
 
 Reference:
-[https://nvd.nist.gov/vuln/detail/CVE-2025-3359]
+[https://nvd.nist.gov/vuln/detail/CVE-2025-31180]
 
 Upstream patches:
-[https://sourceforge.net/p/gnuplot/gnuplot-main/ci/a5897feadc4be73b0ffd8458556c47117bd24d03/]
+[https://sourceforge.net/p/gnuplot/gnuplot-main/ci/b2343fd02c4fff94957f0151b73daa0a1f7fec49/]
 
 Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 ---
- .../gnuplot/gnuplot/CVE-2025-3359.patch       | 67 +++++++++++++++++++
+ .../gnuplot/gnuplot/CVE-2025-31180.patch      | 43 +++++++++++++++++++
  .../recipes-extended/gnuplot/gnuplot_5.4.3.bb |  1 +
- 2 files changed, 68 insertions(+)
- create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/CVE-2025-3359.patch
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/CVE-2025-31180.patch
 
-diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/CVE-2025-3359.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/CVE-2025-3359.patch
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/CVE-2025-31180.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/CVE-2025-31180.patch
 new file mode 100644
-index 0000000000..d2de00ec6d
+index 0000000000..e444a87128
 --- /dev/null
-+++ b/meta-oe/recipes-extended/gnuplot/gnuplot/CVE-2025-3359.patch
-@@ -0,0 +1,67 @@
-+From 997b4ee68275664b94e0c881ace5121d79c0c29c Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/gnuplot/gnuplot/CVE-2025-31180.patch
+@@ -0,0 +1,43 @@
++From ec0fa6117d8e98918a030e31c2e8df32ab6e4542 Mon Sep 17 00:00:00 2001
 +From: Ethan A Merritt <merritt@u.washington.edu>
-+Date: Tue, 25 Mar 2025 22:51:54 -0700
-+Subject: [PATCH] hpgl: font name parsing overruns the string by one char
++Date: Tue, 14 Jan 2025 21:54:14 -0800
++Subject: [PATCH] canvas:  handle nonlinear x2 or y2 axis with an incomplete
++ definition
 +
-+if no comma is present in the font name.
-+E.g.
-+   set term pcl
-+   set title "Title" font "sans"    # no comma in font name
-+   plot x
++Actually "handle" means "ignore".
++But now it doesn't segfault trying to probe a non-existant link function.
 +
-+Bug 2781
++Bug 2755
 +
-+CVE: CVE-2025-3359
-+Upstream-Status: Backport [https://sourceforge.net/p/gnuplot/gnuplot-main/ci/a5897feadc4be73b0ffd8458556c47117bd24d03/]
++CVE: CVE-2025-31180
++Upstream-Status: Backport [https://sourceforge.net/p/gnuplot/gnuplot-main/ci/b2343fd02c4fff94957f0151b73daa0a1f7fec49/]
 +Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 +---
-+ term/hpgl.trm | 28 +++++++++++-----------------
-+ 1 file changed, 11 insertions(+), 17 deletions(-)
++ term/canvas.trm | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/term/hpgl.trm b/term/hpgl.trm
-+index 04088977d..fdb4c7083 100644
-+--- a/term/hpgl.trm
-++++ b/term/hpgl.trm
-+@@ -1650,28 +1650,22 @@ TERM_PUBLIC int
-+ HPGL2_set_font(const char *font)
-+ {
-+     char name[MAX_ID_LEN + 1];
-+-    int sep;
-+-    int int_size;
-+-    double size;
-++    char *sep;
-++    double size = HPGL2_point_size;
-+ 
-+     if (font == NULL)
-+ 	font = "";
-+ 
-+-    sep = strcspn(font, ",");
-+-    strncpy(name, font, sizeof(name));
-+-
-+-    if (sep < sizeof(name))
-+-	name[sep] = NUL;
-+-
-+-/* determine font size, use default from options if invalid */
-+-    int_size = 0;
-+-    /* FIXME: use strtod instead */
-+-    sscanf(&(font[sep + 1]), "%d", &int_size);
-+-    if (int_size > 0)
-+-	size = int_size;
-+-    else
-+-	size = HPGL2_point_size;
-++    safe_strncpy(name, font, sizeof(name));
-+ 
-++    /* determine font size, use default from options if invalid */
-++    sep = strchr(font, ',');
-++    if (sep) {
-++	double req_size = strtod(sep+1, NULL);
-++	if (req_size > 0)
-++	    size = req_size;
-++	*sep = '\0';
-++    }
-+     return HPGL2_set_font_size(name, size);
-+ }
-+ 
++diff --git a/term/canvas.trm b/term/canvas.trm
++index fee3e5dfa..e796cec0d 100644
++--- a/term/canvas.trm
+++++ b/term/canvas.trm
++@@ -646,7 +646,7 @@ CANVAS_text()
++ 	} else
++ 	    fprintf(gpoutfile, "gnuplot.plot_axis_x2min = \"none\"\n");
++ 	if (axis_array[SECOND_X_AXIS].linked_to_primary
++-	&&  axis_array[FIRST_X_AXIS].link_udf->at) {
+++	&&  axis_array[FIRST_X_AXIS].link_udf && axis_array[FIRST_X_AXIS].link_udf->at) {
++ 	    fprintf(gpoutfile, "gnuplot.x2_mapping = function(x) { return x; };");
++ 	    fprintf(gpoutfile, "  // replace returned value with %s\n",
++ 			axis_array[FIRST_X_AXIS].link_udf->definition);
++@@ -657,7 +657,7 @@ CANVAS_text()
++ 	} else
++ 	    fprintf(gpoutfile, "gnuplot.plot_axis_y2min = \"none\"\n");
++ 	if (axis_array[SECOND_Y_AXIS].linked_to_primary
++-	&&  axis_array[FIRST_Y_AXIS].link_udf->at) {
+++	&&  axis_array[FIRST_Y_AXIS].link_udf && axis_array[FIRST_Y_AXIS].link_udf->at) {
++ 	    fprintf(gpoutfile, "gnuplot.y2_mapping = function(y) { return y; };");
++ 	    fprintf(gpoutfile, "  // replace returned value with %s\n",
++ 			axis_array[FIRST_Y_AXIS].link_udf->definition);
 +-- 
 +2.43.0
 +
 diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
-index fe5e5c067d..eff2ccc98c 100644
+index c05ecd2b95..c2644eaa33 100644
 --- a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
 +++ b/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
-@@ -15,6 +15,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz;name=a
-            http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=qtplot \
-            file://gnuplot.desktop \
-            file://gnuplot.png \
-+           file://CVE-2025-3359.patch \
+@@ -20,6 +20,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz;name=a
+            file://CVE-2025-31177.patch \
+            file://CVE-2025-31178.patch \
+            file://CVE-2025-31179.patch \
++           file://CVE-2025-31180.patch \
             "
  SRC_URI:append:class-target = " \
      file://0002-do-not-build-demos.patch \
