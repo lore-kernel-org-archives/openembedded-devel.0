@@ -1,530 +1,208 @@
-Return-Path: <christian.lindeberg@axis.com>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D27DACA100B
-	for <webhook@archiver.kernel.org>; Tue,  2 Sep 2025 14:30:48 +0000 (UTC)
-Received: from AM0PR02CU008.outbound.protection.outlook.com (AM0PR02CU008.outbound.protection.outlook.com [52.101.72.0])
- by mx.groups.io with SMTP id smtpd.web11.78791.1756823439210694704
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF93ACA1005
+	for <webhook@archiver.kernel.org>; Tue,  2 Sep 2025 14:34:18 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web11.78885.1756823656280193583
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Sep 2025 07:30:39 -0700
+ Tue, 02 Sep 2025 07:34:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=nsWLq8YL;
- spf=pass (domain: axis.com, ip: 52.101.72.0, mailfrom: christian.lindeberg@axis.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CBIbb+A/Qgp6gN+VO4tZou2WG9ML7KmTStZLOljsi55FIAQUhKShc4WW8Pli9NHSB8v/5TkOMYrjlfsd26Y1hqn+BNCI3/rpSyvVeCIK3JIgRNRGFrD1rWGE9MrvQPvxg6MNeNm5nSQGx8pYOqxt9lBGDYOcc779ym+wTtB9HeKc3BnIABP4Wdk/0aWuAXwXCgsJTHDyRgzcx6pyGKYYGq6V18Zkf9GDXDrPPUg6SwNk7PoWE5rT2VvWEnwhaJd9rXge4Brc/b/EZq8BPrzYCqYi4gECDG55AeMr4K6V9Gdx3BCA9xs9ASdpEbQD79zGiQ+rozVXx3Ukk1Q/35KiGQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EGhrEa+7rCEggGzbxOPxOqe5TW+xG8lF5YX69hFspGM=;
- b=FkGx02jpK9qVSwwMpZRR88SzHA0M3L7srE0xWebW/lNlMdDLMJSuiS8eWDHfWLf0kyWIHTUPvvB4qrLn0wiZyfLBk/HErg53MjUq2uLswu23+XaaPEjGIpjgpixMPENOctMkv+DDTjSU1BkHDsuE5wlaDOdHAU+W0SDHWPGFkM3lzY7jcCa2WPQrEg3W46MMliflcXJJ5E7irWtbKXu8Tf9T3us35oQhA23d8PvJBzuXiopule2zusr9SvZr0x6TNBYX5bvq1qnRUcUTpIsv0VtZg0YnITphsytCT+bElbsi75nbhnZH2xAGiuEP3uNsSh48UvlbIxLP+FeRKE1WxA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=axis.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EGhrEa+7rCEggGzbxOPxOqe5TW+xG8lF5YX69hFspGM=;
- b=nsWLq8YLnwVK3TBy9nYiO8hiUygPOPsT1rTC+TydM8N5JNyj37mZ3Vi8o72n1pche1J7XOObf2pXScNqRWM6DF0Uc8NMXGM0/mIusgHEL8ZWO8iYfWQBrWSWy3BpsqmkODz6bAnLvCS2BCO/608ntEW3cf91OkE5Awr/lwr/R2I=
-Received: from AM0PR10CA0038.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:150::18)
- by AM7PR02MB6129.eurprd02.prod.outlook.com (2603:10a6:20b:1aa::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.17; Tue, 2 Sep
- 2025 14:30:32 +0000
-Received: from AMS0EPF000001A7.eurprd05.prod.outlook.com
- (2603:10a6:20b:150:cafe::5f) by AM0PR10CA0038.outlook.office365.com
- (2603:10a6:20b:150::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9073.27 via Frontend Transport; Tue,
- 2 Sep 2025 14:30:32 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
- smtp.mailfrom=axis.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=axis.com;
-Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
- 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=195.60.68.100; helo=mail.axis.com; pr=C
-Received: from mail.axis.com (195.60.68.100) by
- AMS0EPF000001A7.mail.protection.outlook.com (10.167.16.234) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9073.11 via Frontend Transport; Tue, 2 Sep 2025 14:30:32 +0000
-Received: from SE-MAIL21W.axis.com (10.20.40.16) by se-mail01w.axis.com
- (10.20.40.7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Tue, 2 Sep
- 2025 16:30:31 +0200
-Received: from se-mail01w.axis.com (10.20.40.7) by SE-MAIL21W.axis.com
- (10.20.40.16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Tue, 2 Sep
- 2025 16:30:30 +0200
-Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail01w.axis.com
- (10.20.40.7) with Microsoft SMTP Server id 15.1.2507.58 via Frontend
- Transport; Tue, 2 Sep 2025 16:30:30 +0200
-Received: from pc50740-2234.se.axis.com (pc50740-2234.se.axis.com [10.94.131.4])
-	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 8945FF53
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Sep 2025 16:30:30 +0200 (CEST)
-Received: by pc50740-2234.se.axis.com (Postfix, from userid 21184)
-	id 82D1D2426D0D; Tue,  2 Sep 2025 16:30:30 +0200 (CEST)
-From: Christian Lindeberg <christli@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH 2/4] crucible: Update module cache content
-Date: Tue, 2 Sep 2025 16:30:28 +0200
-Message-ID: <20250902143030.139421-3-christli@axis.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250902143030.139421-1-christli@axis.com>
-References: <20250902143030.139421-1-christli@axis.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bgvkvRBA;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2445806df50so41544155ad.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 07:34:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1756823655; x=1757428455; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=ZWwlDRUS04TNVmbbGw9efGkpcTuNUQuuxPDN2IVQe2w=;
+        b=bgvkvRBAKEiryIRER9lFBNJGVVN1l1ULyaJYxyAtdFxw3pGqf6JNwwxgM5e/xcVdue
+         9kxaJyZpofZ38TPcb40kaEpqkaGaL2GpON3JLUpWLKN/E7DOwYgX/soWge13iwwrkIN9
+         Eh2oA60iFBmdgTaOlXhee4omEKCiSBisvO7CPkYMRAURxIHGAtU21atmFJRGR1L9WsX9
+         lKlzC1iXaOQnJei2+eaAtAqxkzuS0D2+R/NtnulMyJ79t7lywvFgBVHjRr+midJ4/YqP
+         8sQNFPMjnPIGFgOVt0ED7VFSeL1Pjpp4Gnlaqd/1CeqQnMfDuB6lYGGpsLjIgFfUrA/G
+         1EfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756823655; x=1757428455;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ZWwlDRUS04TNVmbbGw9efGkpcTuNUQuuxPDN2IVQe2w=;
+        b=TwtlhzqzXZT0p/XN47oSkzPhKs2QaUOth0ky6b2kWz///Jt7euRLZBsp1vOM+sfU0h
+         57KLLPz5fiJI+z4VCPuqqMuXyJA+sWq5xYC+O7verYt633CyFeLSMnAUHn8AQW2QXB/Q
+         r3jZvGo8Yfp9HrKiTa601ywhAm8drN4+VblcWcDz0U2rPG3Ho1S8hJpbwDUXjynQyCZL
+         so16pcZmXUhj4v8aTQ9zCLMALbCBq/7nRCSk7GXa8uP1/PLcphFQHTDcYaHWUTp5mBcW
+         5+9gJ5boHs7wQmsbP/GkjUXueZSjqWk/eravJ7awpKslTwZ9Cbh7VGc5JQK/SYkGEL1w
+         97Gw==
+X-Gm-Message-State: AOJu0YwYwi81WkOS1lrxtVei0xA5eMypnVYECAp8FNKqgeQQqPZbaF9o
+	1q2uUfCKtrGGYqtCulkQJduwPaBufI7KSPq5pmr0pLgh/dTophX+CthATWHX8mEZQlphv2gwx5o
+	i9Enw/WZaEn3Dn+SSIX7n3zu0XZxFRpVb3VHj
+X-Gm-Gg: ASbGnctQsEJfuKrQNH0K98r1oeg5AKOcz1tEr9dWaBO3qcav/xt4X2D8r51k4zA9YMG
+	VRTbWRPOLQk9c0GntZFRzHMr2WVRRThxHJB+lab7UbHr3AAuCySxCxozX5Zdd8rUjMzxVJWLRgr
+	EpyXrrVBIWiMJSUi21f5LiNs8qVj5kqlActwS4rJDnUQweP8ZtzSuay2S4jhSpeGJtMqd4cOFdT
+	blInNhZYcGcdlfRG9brr52j6iLviwgn/hPfm86KebhubSJs3HsXj6tSmoRqUf5PvFEKEw==
+X-Google-Smtp-Source: AGHT+IFgERHyVQTnKw9LBj/iXjBQ0XB6pKp+7kXjBg5s062zdAUx17P7F/gEa8SaArIQZMkuUo2UmeSpOWGIVemH5Ys=
+X-Received: by 2002:a17:902:da85:b0:240:5549:708e with SMTP id
+ d9443c01a7336-24944b402dfmr172335025ad.46.1756823655128; Tue, 02 Sep 2025
+ 07:34:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001A7:EE_|AM7PR02MB6129:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5c6ae55f-4e98-4cbd-957d-08ddea2d45f5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|82310400026|36860700013|376014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?r3d1obp6BnFAXApMldo4UpPI7s3bOHfM6Xnxl9Y0rqR05Cc3TcPYs9BOZS1B?=
- =?us-ascii?Q?vbj92Uo7yGURU86pUQmmSs4rGgUlC7C+9ljg2VinG5wqm176zdJ9+uoahDC3?=
- =?us-ascii?Q?GiLkUQBZAvwOeCPJFxTiBvGq0IA3uxCYfk6A8dTovXosIpQmxIYNtSss5LIn?=
- =?us-ascii?Q?NSaCzE+OJQn6wxxSrkoA7kKJ6R+J7YnpcCOnQYlUEh+ZiN3ae/kSDAs7r8Kg?=
- =?us-ascii?Q?lnqOiDnswBRClb35ooKCEzgNTkGMCJBxOqqJNNna12nhPNFndC4cjdEAwXLe?=
- =?us-ascii?Q?n4ea6k+JurtOeUXDrBZ2xRM/NCs/ZfxQuT0TeOw87MaEKDn4cihy3CGTc8Mm?=
- =?us-ascii?Q?q9McrEEsDX6AuwEs5NU+ZQjyjFe1Z/dapueynqzbRH4dh0ybWa8M5+zmr3ay?=
- =?us-ascii?Q?gR16dMVRJ3NhYlsigXwpbf8+YKjkWmIjzFVkTdi/NvmDWGQDNWV/s9AUMbVV?=
- =?us-ascii?Q?s3tN4TeX7jf+TpKwj6erwOqnxZCFGkTrg/SMS9f/hq8oI0P+XOnzEBMSk4ST?=
- =?us-ascii?Q?ypKKROASQ7OjcYHuVpsyOp0e/o1IS6UBbGEkI7zvCDIukBvi/tCU7Kx50AQ2?=
- =?us-ascii?Q?Busch1zIUEuGK5HK1RtXOQc8+ScBC9bhIiThzRBCGY6qhOFDGh0kp/3k+a9t?=
- =?us-ascii?Q?TV905SmjfmuurEUmA7JdfCJvggUQRt/gd3DaF7P/fNX7RZuyTg7leXZAC4eg?=
- =?us-ascii?Q?VVNSzJVhW6CnZ/6TIryFvTxKL3YoUKpAWbf1tImBaz/Og7dOZAQYMp8c/pgN?=
- =?us-ascii?Q?PnZsbmgBcq17tCWuiC9u7YbDVRP62WxR6iMtEw8HpIanGo0Eu5l8Js2PSO/7?=
- =?us-ascii?Q?Q7ZXY0goikvUyYbgNx2MkxTpcLnBX4exBwZ9ehvsMx4PsQZiue219npUeDF/?=
- =?us-ascii?Q?ZPJ4kpAsrvohpaVNf0HJ8C0cEPudQ9pvvVgDZxY3cfWptmYHhU2+2Pi7qbOF?=
- =?us-ascii?Q?zBMAgHKVEej/EKHhaKFJdE/I0JeorfY4LxTFTMpThgOD+7EBCMU0vsrlP+w4?=
- =?us-ascii?Q?w/JKpZ/00BZJ+RnwM657Mud+0F+JnLOhJ3+6tCHW9zMaS6Sl74Q3GCLDA8nl?=
- =?us-ascii?Q?o35ntoCEH31/4GNFg3iOpkOiBPKzA9hlHQrQlMARXiScRC5bC2tWgdyEwvnP?=
- =?us-ascii?Q?dHbzfNmUtT4kNRAggMfhhs7fvOtS2J3Z4fGpS04PuFgjerFbdEAyqx4m4Sja?=
- =?us-ascii?Q?QwnwxzeaG0YymzNE+ZnotDp7jZqjWash+vd6LajZ8BZCPQYtV0nVP/oHsAti?=
- =?us-ascii?Q?z4yNfmjUPjvRR92Pl3+PL3YKXhZmgL1M/rSkEMOlPQvywcBQUR0y6v1opBsk?=
- =?us-ascii?Q?Jm7fe3dxGNdvosxOdZga+XDXI3OXnAFhhNWg0j2SeWvKuWA+YFy/dYAmb3No?=
- =?us-ascii?Q?R/5ZLXObUlg1fVbDyiuBzs3U0rbqbBdTVI2gpN3MhcVex+UFO/1NUvbH8UR+?=
- =?us-ascii?Q?gUPQfWlIsgdn3gqwEz8+dKqKwCmL2anZslsp41j2dcFXS5JhmpKfyB1Qex3A?=
- =?us-ascii?Q?xl03rhbmRXgt11LO46sf4IZ831x+Gwy8/02Y?=
-X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014);DIR:OUT;SFP:1101;
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2025 14:30:32.4242
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5c6ae55f-4e98-4cbd-957d-08ddea2d45f5
-X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AMS0EPF000001A7.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR02MB6129
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Tue, 2 Sep 2025 07:34:02 -0700
+X-Gm-Features: Ac12FXyp4Y49sIe6T0M7o65SpvmrvlgLj9I9g77puKXYED6YxkKCldMhma8aCzE
+Message-ID: <CAK5yBb8+g5e9OXEmNnbSraRnFYUPEgYLr9gMqRwjPmybUQzGUQ@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="000000000000e5a591063dd261f5"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 14:30:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119183
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 14:34:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119184
 
-From: Christian Lindeberg <christian.lindeberg@axis.com>
+--000000000000e5a591063dd261f5
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The Go module cache content URIs has been regenerated by listing
-dependencies with "${GO_INSTALL}" instead of "${GO_IMPORT}/..." as the
-package patterns.
+All,
 
-Signed-off-by: Christian Lindeberg <christian.lindeberg@axis.com>
----
- .../crucible/crucible-go-mods.inc             | 116 ------------------
- 1 file changed, 116 deletions(-)
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-diff --git a/meta-oe/recipes-support/crucible/crucible-go-mods.inc b/meta-o=
-e/recipes-support/crucible/crucible-go-mods.inc
-index 0123d8c966..6f6594ce21 100644
---- a/meta-oe/recipes-support/crucible/crucible-go-mods.inc
-+++ b/meta-oe/recipes-support/crucible/crucible-go-mods.inc
-@@ -1,155 +1,39 @@
- SRC_URI +=3D "\
-     gomod://cloud.google.com/go;version=3Dv0.111.0;sha256sum=3Df17610c7b09=
-a9582375daa59ec73761b0bd7ad313075710ebfb1c8f4fd63776a \
--    gomod://cloud.google.com/go;version=3Dv0.26.0;mod=3D1;sha256sum=3D2218=
-a34f20b971bc195216d4195f57520a2acbd85de7fc31acfc440266704c11 \
-     gomod://cloud.google.com/go/compute;version=3Dv1.23.3;sha256sum=3D9214=
-cf85837ea8b96bd61e56e297f06d3008b9d1fc81841e79aaad2940f3ed56 \
-     gomod://cloud.google.com/go/compute/metadata;version=3Dv0.2.3;sha256su=
-m=3D292864dbd0b1de37a968e285e949885e573384837d81cd3695be5ce2e2391887 \
-     gomod://cloud.google.com/go/iam;version=3Dv1.1.5;sha256sum=3D7d218318e=
-ef5255587d6db35f2aa9952125881c640f6e04fe76d521c14d5d7f3 \
-     gomod://cloud.google.com/go/kms;version=3Dv1.15.6;sha256sum=3D75e7a21b=
-453cad66aae756e3d0c42a7550c299d62832a0361d6ea6396b4074a9 \
-     gomod://cloud.google.com/go/longrunning;version=3Dv0.5.4;sha256sum=3Da=
-3eb14ee47bfdbca7df05c0011bcd9a86997ae8ef0a12c3a44a340c7e9ce2c0f \
-     gomod://cloud.google.com/go/security;version=3Dv1.15.5;sha256sum=3Df4d=
-d23e113cad47462715d654c95de55c1c890b37cca8c79b47bb5a7c0ec9417 \
--    gomod://github.com/BurntSushi/toml;version=3Dv0.3.1;mod=3D1;sha256sum=
-=3D28021b4180a59c3993607a95b18e230dd0bc6bea5242ffe8ea8bbfb4f4f7b4d7 \
--    gomod://github.com/census-instrumentation/opencensus-proto;version=3Dv=
-0.2.1;mod=3D1;sha256sum=3Ddae64639296402235b55587d14d2640615eb3736fa840e432=
-7d3c15db63cc345 \
--    gomod://github.com/client9/misspell;version=3Dv0.3.4;mod=3D1;sha256sum=
-=3Dd1bc362dddd96fb3a43ed4b92aaab70aa6c7ef5a500d7f09564e3eb24abcf0b8 \
--    gomod://github.com/cncf/udpa/go;version=3Dv0.0.0-20191209042840-269d4d=
-468f6f;mod=3D1;sha256sum=3D05f5d4a77a84be45dedc80ebac5a38ef2fd1c6ff3faedad9=
-c00eb31231181218 \
--    gomod://github.com/davecgh/go-spew;version=3Dv1.1.0;mod=3D1;sha256sum=
-=3Dbcb29393251237b79a17b6c19bf29134f43e8f438c3198988fcd461a1cdf05cc \
--    gomod://github.com/davecgh/go-spew;version=3Dv1.1.1;mod=3D1;sha256sum=
-=3Dbcb29393251237b79a17b6c19bf29134f43e8f438c3198988fcd461a1cdf05cc \
--    gomod://github.com/envoyproxy/go-control-plane;version=3Dv0.9.0;mod=3D=
-1;sha256sum=3D2e0f3c5940c6930bce03f0c8cd1724dd93d4d30c6b1c5ae2ee4e3039f0215=
-c07 \
--    gomod://github.com/envoyproxy/go-control-plane;version=3Dv0.9.1-0.2019=
-1026205805-5f8ba28d4473;mod=3D1;sha256sum=3D2e0f3c5940c6930bce03f0c8cd1724d=
-d93d4d30c6b1c5ae2ee4e3039f0215c07 \
--    gomod://github.com/envoyproxy/go-control-plane;version=3Dv0.9.4;mod=3D=
-1;sha256sum=3D6309f752f7d45b74c97e3f8e0e54fc47e604d965b528e60fa68a46317ecb4=
-4dc \
--    gomod://github.com/envoyproxy/protoc-gen-validate;version=3Dv0.1.0;mod=
-=3D1;sha256sum=3Dc8e2e1bf931ad31ab4a5a32673eff764398fbf9cbc6c31bbf005c7c904=
-fc69aa \
-     gomod://github.com/felixge/httpsnoop;version=3Dv1.0.4;sha256sum=3D75aa=
-471311265e9860df0e523400b4650ed0c1a33262786a421f07226792e494 \
-     gomod://github.com/ghodss/yaml;version=3Dv1.0.0;sha256sum=3Dc3f295d23c=
-02c0b35e4d3b29053586e737cf9642df9615da99c0bda9bbacc624 \
--    gomod://github.com/go-logr/logr;version=3Dv1.2.2;mod=3D1;sha256sum=3D5=
-19b1d6da5eeef675b4a1857d628f05f110a2b8cb3c423b715fea80d0975a518 \
-     gomod://github.com/go-logr/logr;version=3Dv1.4.1;sha256sum=3D27d1c8d41=
-1fd8e42dc6202991d70afa630089700f1d002de5454d6c26f93674c \
-     gomod://github.com/go-logr/stdr;version=3Dv1.2.2;sha256sum=3D9dd6893bf=
-700198485ae699640b49bc1efbc6c73b37cb5792a0476e1fd8f7fef \
--    gomod://github.com/golang/glog;version=3Dv0.0.0-20160126235308-23def4e=
-6c14b;mod=3D1;sha256sum=3D9c9bafc0f52905afaa7164858b3a01a0cc3dc07da23030177=
-ce487f727438958 \
--    gomod://github.com/golang/groupcache;version=3Dv0.0.0-20200121045136-8=
-c9f03a8e57e;mod=3D1;sha256sum=3D5117e2bb86f1cc7cc7489f9f2580fa17b2ef1e3a0a3=
-46bf64ed8063ca7b87663 \
-     gomod://github.com/golang/groupcache;version=3Dv0.0.0-20210331224755-4=
-1bb18bfe9da;sha256sum=3Db27034e8fc013627543e1ad098cfc65329f2896df3da5cf3266=
-cc9166f93f3a5 \
--    gomod://github.com/golang/mock;version=3Dv1.1.1;mod=3D1;sha256sum=3D5c=
-47c4f981ac63d37f1308647a20d75a148eb2a8f9cc0e7531f030afd0b229e0 \
--    gomod://github.com/golang/protobuf;version=3Dv1.2.0;mod=3D1;sha256sum=
-=3Dc0a2031bf277087749d8ccc432449f6b1375787eac8641dd2f930074231aafb4 \
--    gomod://github.com/golang/protobuf;version=3Dv1.3.2;mod=3D1;sha256sum=
-=3Dc0a2031bf277087749d8ccc432449f6b1375787eac8641dd2f930074231aafb4 \
--    gomod://github.com/golang/protobuf;version=3Dv1.4.0;mod=3D1;sha256sum=
-=3D0d092f7aa2877feb9e55aee2668286ebbf7e3d0711b1702d84c9225e4cca73f8 \
--    gomod://github.com/golang/protobuf;version=3Dv1.4.0-rc.1;mod=3D1;sha25=
-6sum=3Deb386ed18bb8d6092974524bd0cda610ad87bee1a4485c9f01bccb713e7dab1e \
--    gomod://github.com/golang/protobuf;version=3Dv1.4.0-rc.1.0.20200221234=
-624-67d41d38c208;mod=3D1;sha256sum=3D78c95913aee9dfebd1e84f8b862e98bb1848d1=
-d3e9f22aaf909c4ef4f7e7293d \
--    gomod://github.com/golang/protobuf;version=3Dv1.4.0-rc.2;mod=3D1;sha25=
-6sum=3De2622048b96cd87173bd9aeb801a1010807a412e89529509e9a5099f1fc69ab4 \
--    gomod://github.com/golang/protobuf;version=3Dv1.4.0-rc.4.0.20200313231=
-945-b860323f09d0;mod=3D1;sha256sum=3D1edf9512236391b88764083bde0391fc498647=
-38432acfdcdd3229572dc71be1 \
--    gomod://github.com/golang/protobuf;version=3Dv1.4.1;mod=3D1;sha256sum=
-=3Db7ebbef0f2166a73c7ab79ec37a01b25206b6327e684e3898ba7cb75ecd6ec00 \
--    gomod://github.com/golang/protobuf;version=3Dv1.4.3;mod=3D1;sha256sum=
-=3D4bf5885d1ebdc6d270958379a741cd3b4f7aca016e874d8e8b1059110dfe9e15 \
--    gomod://github.com/golang/protobuf;version=3Dv1.5.0;mod=3D1;sha256sum=
-=3D738cbb1de96b67a6238ac3b8081cd8b1bfb0daebcf6c9bbe8cbdb6d73baecd19 \
--    gomod://github.com/golang/protobuf;version=3Dv1.5.2;mod=3D1;sha256sum=
-=3D7c8e7610527afd7724c7e8b7e843f132b0db61e8c9dd49dc589d430e8929bcc4 \
-     gomod://github.com/golang/protobuf;version=3Dv1.5.3;sha256sum=3D93bda6=
-e88d4a0a493a98b481de67a10000a755d15f16a800b49a6b96d1bd6f81 \
--    gomod://github.com/google/go-cmp;version=3Dv0.2.0;mod=3D1;sha256sum=3D=
-9c2736ea2c03fb1d94b2a1d496aa1a51726c764f158b9f6cde1d7465fc90f412 \
--    gomod://github.com/google/go-cmp;version=3Dv0.3.0;mod=3D1;sha256sum=3D=
-81df7917c225a9da7604b230d952fa278c60a8832c10d799385d134b05d5b087 \
--    gomod://github.com/google/go-cmp;version=3Dv0.3.1;mod=3D1;sha256sum=3D=
-81df7917c225a9da7604b230d952fa278c60a8832c10d799385d134b05d5b087 \
--    gomod://github.com/google/go-cmp;version=3Dv0.4.0;mod=3D1;sha256sum=3D=
-4036ab5636aa42bd313296cd3bfcb4c88912760c56a9e6655ae422d8767c80da \
--    gomod://github.com/google/go-cmp;version=3Dv0.5.0;mod=3D1;sha256sum=3D=
-4036ab5636aa42bd313296cd3bfcb4c88912760c56a9e6655ae422d8767c80da \
--    gomod://github.com/google/go-cmp;version=3Dv0.5.3;mod=3D1;sha256sum=3D=
-4036ab5636aa42bd313296cd3bfcb4c88912760c56a9e6655ae422d8767c80da \
--    gomod://github.com/google/go-cmp;version=3Dv0.5.5;mod=3D1;sha256sum=3D=
-4036ab5636aa42bd313296cd3bfcb4c88912760c56a9e6655ae422d8767c80da \
-     gomod://github.com/google/s2a-go;version=3Dv0.1.7;sha256sum=3D4392e675=
-b6f0ff0b90f970c0280d63e34b32d077e1f8c0abd1006ad0dbeb2f2e \
--    gomod://github.com/google/uuid;version=3Dv1.1.2;mod=3D1;sha256sum=3D73=
-da47b6338b00a082fd451aa35a3273d3adc09b8e9bba98dab01091e402af6e \
-     gomod://github.com/googleapis/enterprise-certificate-proxy;version=3Dv=
-0.3.2;sha256sum=3D56127cb8bea94f438c4e867f9217bdfc55865282953e54c74eee01957=
-5c1020e \
-     gomod://github.com/googleapis/gax-go/v2;version=3Dv2.12.0;sha256sum=3D=
-10ad5944b8bcce3f2cb9a215a0dda163de5b1f092e61b74a4e162d1eb8f7f7a2 \
--    gomod://github.com/pmezard/go-difflib;version=3Dv1.0.0;mod=3D1;sha256s=
-um=3D74b2e766eb215377864d587badf57e95521f692d2a7860b3c7759093f9c9bec2 \
--    gomod://github.com/prometheus/client_model;version=3Dv0.0.0-2019081215=
-4241-14fe0d1b01d4;mod=3D1;sha256sum=3D8ae247f8b1ced742fbc4aa7ebc6b6c935172e=
-aafa61a2be52ba0bd41286db031 \
-     gomod://github.com/smallstep/pkcs7;version=3Dv0.0.0-20231107075624-be1=
-870d87d13;sha256sum=3D7f8ed17d46a7dbc883d64b95718a1f6b7ec3bac4b598474152370=
-1d20723ad14 \
--    gomod://github.com/stretchr/objx;version=3Dv0.1.0;mod=3D1;sha256sum=3D=
-1350354d52d2287a62336ecc0d56232d4c47699af9bba49c67c2b48254da98f1 \
--    gomod://github.com/stretchr/objx;version=3Dv0.4.0;mod=3D1;sha256sum=3D=
-31b2fdcdee870f0f61bffafafb96220967e5bca08a76a920d574216fc1f91355 \
--    gomod://github.com/stretchr/objx;version=3Dv0.5.0;mod=3D1;sha256sum=3D=
-cb326540efcb1274a6e4e970d7fc9de2e8062f08a058fc296d859025e62e807a \
--    gomod://github.com/stretchr/testify;version=3Dv1.7.1;mod=3D1;sha256sum=
-=3Dfff8168d98e6a07156c454a1b6e925509f3177e96c155516d7f96b4079cca3bf \
--    gomod://github.com/stretchr/testify;version=3Dv1.8.0;mod=3D1;sha256sum=
-=3De076074c1560ad1dda98b8b00fea6308c4b6ccd06ddd088d22db4626ed68f738 \
--    gomod://github.com/stretchr/testify;version=3Dv1.8.1;mod=3D1;sha256sum=
-=3Daf1a5dcb331ace7a3f9fc1b5d7eee9c0bc82b4a2a182fe4cec2add217e2853d6 \
--    gomod://github.com/usbarmory/tamago;version=3Dv0.0.0-20221201111136-9b=
-b9b42304fa;mod=3D1;sha256sum=3D3735262e8a80c900b992a499da1076db95d5ecab3fd5=
-237152e4e78fb28db944 \
--    gomod://github.com/yuin/goldmark;version=3Dv1.4.13;mod=3D1;sha256sum=
-=3Dee7fe4466203a01d3ac19adc134cdec99bc6de71992c28f3dd9a74480bff0603 \
-     gomod://go.opencensus.io;version=3Dv0.24.0;sha256sum=3D203a767d7f8e7c1=
-ebe5588220ad168d1e15b14ae70a636de7ca9a4a88a7e0d0c \
-     gomod://go.opentelemetry.io/contrib/instrumentation/google.golang.org/=
-grpc/otelgrpc;version=3Dv0.47.0;sha256sum=3Defb13c3eb89199b0f677057a238017b=
-06ffceb868ac55f4f649a31309ec0321d \
-     gomod://go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp;=
-version=3Dv0.47.0;sha256sum=3D476b9113a426e31a3802d8371c348ae3334c56acba9fc=
-7228b886096c64647a1 \
-     gomod://go.opentelemetry.io/otel;version=3Dv1.22.0;sha256sum=3D6c02668=
-caef05c8221cf2fb43f4f2943de701f3c4fb69096f2f7da523f1c80d2 \
-     gomod://go.opentelemetry.io/otel/metric;version=3Dv1.22.0;sha256sum=3D=
-deb750b41631365dbda60fb872dc6901f16817e0b2646307fbfeb4eeb391e02f \
-     gomod://go.opentelemetry.io/otel/trace;version=3Dv1.22.0;sha256sum=3Dd=
-63e40f32d614b00bedfa945eae95e2bc5fe867e167cd7dbfe7f90d96fa599d7 \
--    gomod://golang.org/x/crypto;version=3Dv0.0.0-20190308221718-c2843e01d9=
-a2;mod=3D1;sha256sum=3D33ed070a5a66e0960685ac5386440e1b59899e74d8a38a118068=
-5e72a2195ded \
--    gomod://golang.org/x/crypto;version=3Dv0.0.0-20200622213623-75b288015a=
-c9;mod=3D1;sha256sum=3Db2b12d09f81915fbcf4226009e50f9efda8bd3757d2055d8ec07=
-977e65bc6618 \
--    gomod://golang.org/x/crypto;version=3Dv0.0.0-20210921155107-089bfa5675=
-19;mod=3D1;sha256sum=3Dcd6311612a2aa4d0d7e03c41b3aa1fbc2d5f895ab3f61089fab8=
-0bfe9f8f5485 \
-     gomod://golang.org/x/crypto;version=3Dv0.18.0;sha256sum=3D5413479720bb=
-f5183144652805203a3df74800d2f281f611e82d3a7ec15f4325 \
--    gomod://golang.org/x/exp;version=3Dv0.0.0-20190121172915-509febef88a4;=
-mod=3D1;sha256sum=3D9ff1d07ca8c09458450eb5f4076aa0390ef5c7db0c7a942150e8825=
-8a78b5383 \
--    gomod://golang.org/x/lint;version=3Dv0.0.0-20181026193005-c67002cb31c3=
-;mod=3D1;sha256sum=3D169b05225c8e2729727e0679ae3911918dfe1c4b18bed5ee0fae29=
-f9ed77b207 \
--    gomod://golang.org/x/lint;version=3Dv0.0.0-20190227174305-5b3e6a55c961=
-;mod=3D1;sha256sum=3D8e86b5869db58a7659e485b07dbce3beb1170a153631579e50f4cb=
-f544bb1342 \
--    gomod://golang.org/x/lint;version=3Dv0.0.0-20190313153728-d0100b6bd8b3=
-;mod=3D1;sha256sum=3D79df4350b922a8d193782e5600f88280a2b9d41781bfb3760c09bf=
-52ad3023bf \
--    gomod://golang.org/x/mod;version=3Dv0.6.0-dev.0.20220419223038-86c51ed=
-26bb4;mod=3D1;sha256sum=3D42d19023ff8f2eae700bc5495f371ecd998a22d19ba985d0a=
-f5f69900b254083 \
--    gomod://golang.org/x/net;version=3Dv0.0.0-20180724234803-3673e40ba225;=
-mod=3D1;sha256sum=3D3e08f487ddda1851b891df5b1d04bb1a01b84d6d702aa82d9efbccd=
-e0aa7df81 \
--    gomod://golang.org/x/net;version=3Dv0.0.0-20180826012351-8a410e7b638d;=
-mod=3D1;sha256sum=3D3e08f487ddda1851b891df5b1d04bb1a01b84d6d702aa82d9efbccd=
-e0aa7df81 \
--    gomod://golang.org/x/net;version=3Dv0.0.0-20190213061140-3a22650c66bd;=
-mod=3D1;sha256sum=3D3e08f487ddda1851b891df5b1d04bb1a01b84d6d702aa82d9efbccd=
-e0aa7df81 \
--    gomod://golang.org/x/net;version=3Dv0.0.0-20190311183353-d8887717615a;=
-mod=3D1;sha256sum=3Df7046769daac02beb57cbcc481280df59fb403c96fe8262282aba85=
-8c7f7fa4d \
--    gomod://golang.org/x/net;version=3Dv0.0.0-20190404232315-eb5bcb51f2a3;=
-mod=3D1;sha256sum=3Df7046769daac02beb57cbcc481280df59fb403c96fe8262282aba85=
-8c7f7fa4d \
--    gomod://golang.org/x/net;version=3Dv0.0.0-20190620200207-3b0461eec859;=
-mod=3D1;sha256sum=3De6efdaf78a29503f080cf6d2615e289cfb1d9e3ab7d570f53668eca=
-2b4ab41da \
--    gomod://golang.org/x/net;version=3Dv0.0.0-20201110031124-69a78807bb2b;=
-mod=3D1;sha256sum=3D66fc44a0644a506da780f7a22a5d73dd025d44a6e58740b62d27f74=
-d7c3a4948 \
--    gomod://golang.org/x/net;version=3Dv0.0.0-20210226172049-e18ecbb05110;=
-mod=3D1;sha256sum=3Dfef5896d103a0bce5055fdb5e96e830944334792437865347718edc=
-eb633348a \
--    gomod://golang.org/x/net;version=3Dv0.0.0-20220722155237-a158d28d115b;=
-mod=3D1;sha256sum=3Db315c52647d2da2f76e5cdb9d367e1d6727784236a9bffb612192b1=
-9b10a128d \
-     gomod://golang.org/x/net;version=3Dv0.20.0;sha256sum=3D00adca2fa3315d3=
-97ecb886989998f03fefda7b81a0b5ebb3586acef273e0f29 \
--    gomod://golang.org/x/oauth2;version=3Dv0.0.0-20180821212333-d2e6202438=
-be;mod=3D1;sha256sum=3Dcbbb618da87d4f943b54bfd4f4d3a2fff3610298f04fbeeb3db3=
-88cb075f351a \
-     gomod://golang.org/x/oauth2;version=3Dv0.16.0;sha256sum=3Da6597a80e046=
-1877b21bf5bda71423bfdc9e8701128e39c71ec3aa7e190c7ac3 \
--    gomod://golang.org/x/sync;version=3Dv0.0.0-20180314180146-1d60e4601c6f=
-;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225cea52=
-686794161c \
--    gomod://golang.org/x/sync;version=3Dv0.0.0-20181108010431-42b317875d0f=
-;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225cea52=
-686794161c \
--    gomod://golang.org/x/sync;version=3Dv0.0.0-20190423024810-112230192c58=
-;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225cea52=
-686794161c \
--    gomod://golang.org/x/sync;version=3Dv0.0.0-20220722155255-886fb9371eb4=
-;mod=3D1;sha256sum=3D421f6139686d5891f3dc5a563d0995780d3279f65cad4d225cea52=
-686794161c \
-     gomod://golang.org/x/sync;version=3Dv0.6.0;sha256sum=3D7c75175297a3b36=
-8b806bd24c7401629df11dcc655e3c14470058282f101ca6a \
--    gomod://golang.org/x/sys;version=3Dv0.0.0-20180830151530-49385e6e1522;=
-mod=3D1;sha256sum=3D8969115e4a39108848324e79a1bd8a8445230e6e3aaccbe9f8057fb=
-50fffc8c1 \
--    gomod://golang.org/x/sys;version=3Dv0.0.0-20190215142949-d0b11bdaac8a;=
-mod=3D1;sha256sum=3D8969115e4a39108848324e79a1bd8a8445230e6e3aaccbe9f8057fb=
-50fffc8c1 \
--    gomod://golang.org/x/sys;version=3Dv0.0.0-20190412213103-97732733099d;=
-mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431ece4=
-742aec343 \
--    gomod://golang.org/x/sys;version=3Dv0.0.0-20200930185726-fdedc70b468f;=
-mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431ece4=
-742aec343 \
--    gomod://golang.org/x/sys;version=3Dv0.0.0-20201119102817-f84b799fce68;=
-mod=3D1;sha256sum=3D181979e8bd57d2d9e064182da86c9a6111aa69755e888f08431ece4=
-742aec343 \
--    gomod://golang.org/x/sys;version=3Dv0.0.0-20210615035016-665e8c7367d1;=
-mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045bc3b=
-7ce4a5024 \
--    gomod://golang.org/x/sys;version=3Dv0.0.0-20220520151302-bc2c85ada10a;=
-mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045bc3b=
-7ce4a5024 \
--    gomod://golang.org/x/sys;version=3Dv0.0.0-20220722155257-8c9f86f7a55f;=
-mod=3D1;sha256sum=3Df033333096fe198f3151deed93f2deba74e50bbfe7739134045bc3b=
-7ce4a5024 \
-     gomod://golang.org/x/sys;version=3Dv0.16.0;sha256sum=3D0175809134fc12e=
-040ea427e927036692127f2891b72e224e5153da543af604a \
--    gomod://golang.org/x/term;version=3Dv0.0.0-20201126162022-7de9c90e9dd1=
-;mod=3D1;sha256sum=3D4cbab14f7706771b271d995a1b3cc131fe5a246aadc7ee6d1ba6f0=
-bd894781fa \
--    gomod://golang.org/x/term;version=3Dv0.0.0-20210927222741-03fcf44c2211=
-;mod=3D1;sha256sum=3D740794e2914f5cc87e25656c5843222b2c65665821205f45632a04=
-77c8d3f79b \
-     gomod://golang.org/x/text;version=3Dv0.14.0;sha256sum=3Db9814897e0e09c=
-d576a7a013f066c7db537a3d538d2e0f60f0caee9bc1b3f4af \
--    gomod://golang.org/x/text;version=3Dv0.3.0;mod=3D1;sha256sum=3D36879d5=
-86fd8001e84da8787190a11e4f78749e2a81dfe8b9b6931899fff31cf \
--    gomod://golang.org/x/text;version=3Dv0.3.3;mod=3D1;sha256sum=3Dfbb7a88=
-ed140515e790eca7a10ffd319c9786b11c6a6c7e59f80f7fb37bb4542 \
--    gomod://golang.org/x/text;version=3Dv0.3.7;mod=3D1;sha256sum=3Dc45d669=
-089427bc4635d07b185f9b9680332d1c48c75b3c49cb715b81a04a5b0 \
--    gomod://golang.org/x/text;version=3Dv0.3.8;mod=3D1;sha256sum=3D0c06e8d=
-4bc0c4eddce0f9ca01ad87dd9ff74cad7fa8ba166fe97d97d1deb27ae \
-     gomod://golang.org/x/time;version=3Dv0.5.0;sha256sum=3De0e5812d19aed36=
-7f79ac0ae0ce4770b6602c85f5cfb8d59f3f573c7487ea516 \
--    gomod://golang.org/x/tools;version=3Dv0.0.0-20180917221912-90fa682c2a6=
-e;mod=3D1;sha256sum=3Da0e02f0678fe62dc3c4b4bc77fa912c9b70de10fa9f7cf2f7aad0=
-337392b52af \
--    gomod://golang.org/x/tools;version=3Dv0.0.0-20190114222345-bf090417da8=
-b;mod=3D1;sha256sum=3Da0e02f0678fe62dc3c4b4bc77fa912c9b70de10fa9f7cf2f7aad0=
-337392b52af \
--    gomod://golang.org/x/tools;version=3Dv0.0.0-20190226205152-f727befe758=
-c;mod=3D1;sha256sum=3D2503823869125550d3f88bdef72820024fe27b141f44b81fc3b4f=
-59ef78370eb \
--    gomod://golang.org/x/tools;version=3Dv0.0.0-20190311212946-11955173bdd=
-d;mod=3D1;sha256sum=3D029638674bdf4fce7437ebc25cda0c8172674ec534b1d2edeb0b4=
-74c7d618f00 \
--    gomod://golang.org/x/tools;version=3Dv0.0.0-20190524140312-2c0ae700613=
-5;mod=3D1;sha256sum=3D135189df02315d75d62e27551d1accad1db5bd3c1a2a8756f63a6=
-9f73b1b5217 \
--    gomod://golang.org/x/tools;version=3Dv0.0.0-20191119224855-298f0cb1881=
-e;mod=3D1;sha256sum=3D88d479265f886f5e598d76c003d0f257b42dbf1b895d820a12b5a=
-b0b3501aca1 \
--    gomod://golang.org/x/tools;version=3Dv0.1.12;mod=3D1;sha256sum=3D2a8b9=
-365898f0822face65ba089a1353e68a65d342f300ca317cceccde6421f3 \
--    gomod://golang.org/x/xerrors;version=3Dv0.0.0-20190717185122-a985d3407=
-aa7;mod=3D1;sha256sum=3Daa5e3ec9bb7b9f681609efac019d9de1a7ba7719248ff1eaa27=
-e78882db3d7f5 \
--    gomod://golang.org/x/xerrors;version=3Dv0.0.0-20191204190536-9bdfabe68=
-543;mod=3D1;sha256sum=3Daa5e3ec9bb7b9f681609efac019d9de1a7ba7719248ff1eaa27=
-e78882db3d7f5 \
-     gomod://google.golang.org/api;version=3Dv0.160.0;sha256sum=3D3130cdcb9=
-e9ab27b9ee8d2b0b3427b25e948ca2eb5000ab6c8ecea6411396b5c \
--    gomod://google.golang.org/appengine;version=3Dv1.1.0;mod=3D1;sha256sum=
-=3Dd0fb3f328a95259ddeeb7ef934f2abae0327c6a052ff1ab05a2b882178a953b8 \
--    gomod://google.golang.org/appengine;version=3Dv1.4.0;mod=3D1;sha256sum=
-=3Df95b808fed2c6febb23a8d11e92743583b37861584d302349ada5ae02a3874dd \
--    gomod://google.golang.org/appengine;version=3Dv1.6.8;mod=3D1;sha256sum=
-=3Def17709123a95906e09d1318b71489fd455bd6efbf6d404083b3137256df2423 \
--    gomod://google.golang.org/genproto;version=3Dv0.0.0-20180817151627-c66=
-870c02cf8;mod=3D1;sha256sum=3D4379a64312660353b2dadb20fd55d9968674bbc2bbcf0=
-9d50c0aba80111a64b2 \
--    gomod://google.golang.org/genproto;version=3Dv0.0.0-20190819201941-24f=
-a4b261c55;mod=3D1;sha256sum=3D4b8edb9554439c665a29e584eda81870cbb699092227d=
-97ba8fa9641538d541d \
--    gomod://google.golang.org/genproto;version=3Dv0.0.0-20200526211855-cb2=
-7e3aa2013;mod=3D1;sha256sum=3D4ec394d3eca73687d111a3e0e88808b100687302b463b=
-17869bcd026016748bd \
-     gomod://google.golang.org/genproto;version=3Dv0.0.0-20240116215550-a9f=
-a1716bcac;sha256sum=3De65fb3abc11c20b0910c40a3b269b79b06c2cdd6e7efab29a5ea5=
-0f18a62b7f9 \
-     gomod://google.golang.org/genproto/googleapis/api;version=3Dv0.0.0-202=
-40125205218-1f4bbc51befe;sha256sum=3D742068cead896163dbe16785d7e56c45d31335=
-d478ea6d10f9188507531bcb52 \
-     gomod://google.golang.org/genproto/googleapis/rpc;version=3Dv0.0.0-202=
-40116215550-a9fa1716bcac;sha256sum=3D6a1f0ec363ac60b2c41801d1f303306f7a6768=
-ec0ba8efe5b4e9257ff4a91ad5 \
--    gomod://google.golang.org/grpc;version=3Dv1.19.0;mod=3D1;sha256sum=3D7=
-1de2597fd082e882ef08965ba0c3ee19d38f2df25920733cd434cf80a27ac35 \
--    gomod://google.golang.org/grpc;version=3Dv1.23.0;mod=3D1;sha256sum=3D5=
-87c9b854d7f5f0181487c854a24fc4c01982e5641d302ce1d0f3d041951cb8b \
--    gomod://google.golang.org/grpc;version=3Dv1.25.1;mod=3D1;sha256sum=3D3=
-c4690179945744ec5b01279df99be86153fd386d6fa6b8ef9888ace428cb182 \
--    gomod://google.golang.org/grpc;version=3Dv1.27.0;mod=3D1;sha256sum=3D8=
-ad8b97a2a43c2c76572c43a01c469a6e8ec3b049e739a8d3353c9c2ee4cd3d6 \
--    gomod://google.golang.org/grpc;version=3Dv1.33.2;mod=3D1;sha256sum=3D7=
-4c09c930b5587527ec7bedb25986cce9589e76f0676096abad1a03565b3cff2 \
-     gomod://google.golang.org/grpc;version=3Dv1.61.0;sha256sum=3D6971b322a=
-68f83ae2055391e5bd57dfb359e67509961a75229b825d2bd15564d \
--    gomod://google.golang.org/protobuf;version=3Dv0.0.0-20200109180630-ec0=
-0e32a8dfd;mod=3D1;sha256sum=3Da23990efb67ee10bb16d1d1936109cefa4e4262ae3da8=
-d0748efb691614dbb78 \
--    gomod://google.golang.org/protobuf;version=3Dv0.0.0-20200221191635-4d8=
-936d0db64;mod=3D1;sha256sum=3Da6d950dd2a7eb82e51cf459d3f61f614b09d730adb9e8=
-094d5bf96b043f38174 \
--    gomod://google.golang.org/protobuf;version=3Dv0.0.0-20200228230310-ab0=
-ca4ff8a60;mod=3D1;sha256sum=3D3b808d19947fb29e4db24ed5cb88941afc1927f538d80=
-ad6f880ae4664a5d016 \
--    gomod://google.golang.org/protobuf;version=3Dv1.20.1-0.20200309200217-=
-e05f789c0967;mod=3D1;sha256sum=3D420ec9fba7793b96dff1c5ae9983656e72e1c0bd1d=
-14dda2398aec1b294780ff \
--    gomod://google.golang.org/protobuf;version=3Dv1.21.0;mod=3D1;sha256sum=
-=3Da532d488ff1097b330ff2e2929f39ecff8c2fa09dc7650b66ca5430c2d8303fb \
--    gomod://google.golang.org/protobuf;version=3Dv1.22.0;mod=3D1;sha256sum=
-=3D394a49462cbf6dca4dd86f3cf0e8ddcbb9adc9397f73e82fecae54c79e9e4d53 \
--    gomod://google.golang.org/protobuf;version=3Dv1.23.0;mod=3D1;sha256sum=
-=3D394a49462cbf6dca4dd86f3cf0e8ddcbb9adc9397f73e82fecae54c79e9e4d53 \
--    gomod://google.golang.org/protobuf;version=3Dv1.23.1-0.20200526195155-=
-81db48ad09cc;mod=3D1;sha256sum=3D394a49462cbf6dca4dd86f3cf0e8ddcbb9adc9397f=
-73e82fecae54c79e9e4d53 \
--    gomod://google.golang.org/protobuf;version=3Dv1.25.0;mod=3D1;sha256sum=
-=3D6dea80873d2758a81de6d16bcf6a7f45a27f2ad4c047b7b4da1e88481a974903 \
--    gomod://google.golang.org/protobuf;version=3Dv1.26.0;mod=3D1;sha256sum=
-=3D08ec2e20f38efcb651462800069ece4891e252a261007fa9d5a1b157f516ee5f \
--    gomod://google.golang.org/protobuf;version=3Dv1.26.0-rc.1;mod=3D1;sha2=
-56sum=3Db2c4fe1a66ff5be6eb7c0c5388f080d08821c327ac5cf975dee51d8b0fb49e9f \
-     gomod://google.golang.org/protobuf;version=3Dv1.32.0;sha256sum=3Dc2c11=
-7cf29abee8697dabdc69662accf66171bea0efa2749988867ae8ef2362d \
--    gomod://gopkg.in/check.v1;version=3Dv0.0.0-20161208181325-20d25e280405=
-;mod=3D1;sha256sum=3D5c306e0d633cd66a11b40e2e5fbbc6da42110db7d72ea3c1524ceb=
-45ee40c33f \
-     gomod://gopkg.in/yaml.v2;version=3Dv2.4.0;sha256sum=3Dede49e27c4cca6cd=
-d2ec719aed8ea4d363710cceb3d411e7a786fbdec0d391fd \
--    gomod://gopkg.in/yaml.v3;version=3Dv3.0.0-20200313102051-9f266ea9e77c;=
-mod=3D1;sha256sum=3D21579860a20306fcf43b1bd234d1fba319499c77611b71c05f9bf3b=
-a90dab939 \
--    gomod://gopkg.in/yaml.v3;version=3Dv3.0.1;mod=3D1;sha256sum=3D21579860=
-a20306fcf43b1bd234d1fba319499c77611b71c05f9bf3ba90dab939 \
--    gomod://honnef.co/go/tools;version=3Dv0.0.0-20190102054323-c2f93a96b09=
-9;mod=3D1;sha256sum=3Db1c60837ea61335f14df64f3194c3cd92e0f628f6064806718950=
-f0d7a1dbe9e \
--    gomod://honnef.co/go/tools;version=3Dv0.0.0-20190523083050-ea95bdfd59f=
-c;mod=3D1;sha256sum=3Db1c60837ea61335f14df64f3194c3cd92e0f628f6064806718950=
-f0d7a1dbe9e \
- "
---=20
-2.39.5
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
 
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 467
+unassigned or newcomer bugs.
+
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.3=E2=80=9D, =E2=80=9C6.0", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.3" and then =E2=80=9C6.0=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--000000000000e5a591063dd261f5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
+al">All,<br><br>The triage team is starting to try and collect up and class=
+ify bugs which a newcomer to the project would be able to work on in a way =
+which means people can find them. They&#39;re being listed on the triage pa=
+ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
+wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
+e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
+d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
+org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
+illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
+.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
+ea is these bugs should be straight forward for a person to help work on wh=
+o doesn&#39;t have deep experience with the project.  If anyone can help, p=
+lease take ownership of the bug and send patches!  If anyone needs help/adv=
+ice there are people on irc who can likely do so, or some of the more exper=
+ienced contributors will likely be happy to help too.<br><br>Also, the tria=
+ge team meets weekly and does its best to handle the bugs reported into the=
+ Bugzilla. The number of people attending that meeting has fallen, as have =
+the number of people available to help fix bugs. One of the things we hear =
+users report is they don&#39;t know how to help. We (the triage team) are t=
+herefore going to start reporting out the currently 467 unassigned or newco=
+mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
+ and again to help out with these.  Bugs are split into two types, &quot;tr=
+ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
+ents&quot; which are features we&#39;d want to add to the system.  There ar=
+e also roughly four different &quot;priority&quot; classes right now, =E2=
+=80=9C5.3=E2=80=9D, =E2=80=9C6.0&quot;, &quot;5.99&quot; and &quot;Future&q=
+uot;, the more pressing/urgent issues being in &quot;5.3&quot; and then =E2=
+=80=9C6.0=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
+g you would be able to help with either take ownership of the bug, or send =
+me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
+ an e-mail with the bug number you would like and I will assign it to you (=
+please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
+_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
+ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
+s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
+al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
+al,sans-serif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--000000000000e5a591063dd261f5--
 
