@@ -1,132 +1,196 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6027ECA1007
-	for <webhook@archiver.kernel.org>; Tue,  2 Sep 2025 04:54:35 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web11.70004.1756788867260297265
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F58FCA1005
+	for <webhook@archiver.kernel.org>; Tue,  2 Sep 2025 07:08:06 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.web11.71326.1756796878891740836
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Sep 2025 21:54:27 -0700
+ Tue, 02 Sep 2025 00:07:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=h309yFmR;
- spf=pass (domain: mvista.com, ip: 209.85.210.173, mailfrom: vanusuri@mvista.com)
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-77246079bc9so2369358b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Sep 2025 21:54:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BBrGtveX;
+ spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-3d17f24d42fso2060419f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 00:07:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1756788866; x=1757393666; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=s6adkRSu0LD7lnIBOS6rwkQRCOb1JWqnM+UVkLzDPxI=;
-        b=h309yFmRrc+ruQVkMXZVGj8xpf0C7myfbhozi7kFdjK1thI8ewVWsQ0JqDzEsCXUpg
-         pE65n9r8tRJIoRvmOi7ZTT9UTtVudvFqThE8c2u5zVob3PLbjMQ314MXW+UkKcX5vo3o
-         QcLPOrJ88AKlWWzog86tGeJeLdUx1qoYi7FLs=
+        d=gmail.com; s=20230601; t=1756796877; x=1757401677; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=h9A3WIolv70FX9XexMsIMdj1CwRh4U5nRXFPn9gX0v8=;
+        b=BBrGtveXyK9hrMhbWrnobAtU3305hjrKYqX31vJ19UlnGCh7d4yPi5cj7EHyDu7neO
+         /MxQ2yyl7n9L7afiJcdNzqXpXXS145xIkyWEEuDnI45WlGmZXePoh0cs/918zDUO7rB/
+         eJrUBGxJT2BwOdzuj01cdlerTvcAvbliEijSm3YHeDaqapMnMSJkxVyJMGodWBfCLWaH
+         B4353VZrh0eu7CYs3wFUoocTIIo3xu0wLdBHjJQHqI/G9RZNEaFMIFM5Hrq30KRCyH/q
+         K6+D4MqP08XXl64uTCWdkI+qvV6vSVBoMH3UcX/U6khqMjQjer0NTNBceT4YImP8myVX
+         vECw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756788866; x=1757393666;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=s6adkRSu0LD7lnIBOS6rwkQRCOb1JWqnM+UVkLzDPxI=;
-        b=UxOUcn6luHmSOXO8yGlGqXpZR5j9XeUIMOlHd4YDlNhe2xia85hHoQUsjEE2QUcc11
-         hnoSU7FPSbPZ6m2PXQiwAQds0msnh1uHPnJhYrjPM3unwqtO8BH8/P9g8RZE/83mNmvn
-         h++Pm7/WZWb/sFD0TewszDeu6FJpPL60vEWcGzwf0uPhcNs8mxWPU5Mo93eB4QvIq5dV
-         HwEu+kx9hkbuNszKVZamaGFclJuXG1NlpVKlOtKieOSwE7ESU9MYrw3sB9oSWr8L06IT
-         f51GCF6PCcFuwvjycAR7/2Kc+OkLHaF2kH6pIf1Wt/DeeKadsEb2AkQSTl6P8uxqE2Hr
-         zoTg==
-X-Gm-Message-State: AOJu0YwR5qhUzUEWpjbBqV1yJAOsCCTHUQqLkiyFlFEpdRSK3TLQr+rB
-	T3mhvwAMR5jb5FBeESaIEx0z0e3nwpEQHGO9yU5NrWQ0gqOC50axC5SAP/slk6iFFA33WGL6kIL
-	e+aulEmk=
-X-Gm-Gg: ASbGncuNnaIrJK5RkL1KYoctzr8hdf2wcWCpWgqHWc8HnBD0OK3LuvhU3kYaQDqyNje
-	QQvuHRkEFfIU+9O2SyJ2+pt3vjeEoG102DhOBnfYcYXrtNPhrT34FV+v3WvTeAYCZ8QYC/At/e3
-	XCFMc9zMqzz27PMzH5PqQ6n8kiTkVFVUu2K8w2+F4F63dU0+OYOxwGe7lOsIfwql3hHapd7KfVJ
-	jEke57T0ZvT1HJbmyy6RMZ/7zRAI/I9+WgYdg1QWQLRiUwK3DmQ3qb4vRDsCnbuW1CgdMtbUpBo
-	sVs4W3hUp/kX2q4jBh2RjKr0MrVuryAnJ4+RDVmQr+NNxfDyrUP96/Wp/mWX6BDbBvDoEpGO1F8
-	alzRNywHkHPriRk2RMYjszpeswAwz+7y/pK9XOD61XiRN
-X-Google-Smtp-Source: AGHT+IFYgd4Yv32VBy7OUVmXNeoiXKRQOnvE3WgMu9TFcFPMtuz62MIDf34qRDZw0y5XBCjYzIRNPA==
-X-Received: by 2002:a05:6a20:12c7:b0:243:b411:ae53 with SMTP id adf61e73a8af0-243d6dd56acmr13507756637.11.1756788866099;
-        Mon, 01 Sep 2025 21:54:26 -0700 (PDT)
-Received: from MVIN00020.mvista.com ([49.207.193.110])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7722a4beb67sm12167181b3a.65.2025.09.01.21.54.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Sep 2025 21:54:25 -0700 (PDT)
-From: vanusuri@mvista.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][kirkstone][PATCH] openjpeg: Fix CVE-2025-50952
-Date: Tue,  2 Sep 2025 10:24:17 +0530
-Message-Id: <20250902045417.20173-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+        d=1e100.net; s=20230601; t=1756796877; x=1757401677;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=h9A3WIolv70FX9XexMsIMdj1CwRh4U5nRXFPn9gX0v8=;
+        b=GNEH7mcKyF7Kekweb6WBh1rNxdYQjI4jVkGYRDSg67dZyZBaQeS8VaK51cgrO2Ko/J
+         1Iz/sMDcPzgx6HRLKv2QA8gmYqV4GLRwBV3Y/yJI+67cPrMyVqWShjnHNx/5kxTRrUSK
+         qiBinVpLt/na8ihsTgRxVxc1djZa51rwFjGSRMGfFEqnIuu4RMCMCOzYyyIBi+sDgcCi
+         H8dCAWzEUY5YVNda084jLk0kH258joO7srbOjsPyqeUdbMgNO5RPSxMKnCr+HS8jzOz1
+         zjWXm7uOO0RU6fqIrral9tWN7ZiM69ISJ2TaiAyanTPQF9kueSmLTK7H7ZcUm0oKQR54
+         B6EA==
+X-Forwarded-Encrypted: i=1; AJvYcCV38/LCcCUSZhIaqGmfwIKNHOI8ziN5QLe/+jyugspWb/n7eE1+DUZd8pSdludvSUG8xQ9PAHKo8p6PDqw9rBXk3GM=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwB1oFr0nTDlayKAWVQYqaebeYSA0EsIDAf8rIcZA4Mc7tzXmrd
+	nn61INThrJUtCkgsVjVMzztPXvT/byx2q8TW1oxDp6IGLfpJmOQwXADs
+X-Gm-Gg: ASbGncvED8dDYa78wv9Yt0YF1nCwZiVOKvnAoS/N1SG5oP3mIhS1Z5U7vCTxTn3ZaoL
+	fLgdfUYzF1lIz212TIaWL7TpfTcZOwF+ij9kh6vD6ORT997vzjN4foC+QZNComYqlb/udPkIaZp
+	yxlkeF1CJlCaF3m0Y9Ea3Dm/07n056pVYiKaz3/cx4j1Itm0gHS1VaNn0RgROFkUISKTZq+bWtg
+	5Zk7wlpFWzV0P+J3aBMs4ZijfkjamQTZjeLh0qZiEiMS4yHFJo/vT2Ppf8I/9csv1A0RVU6AuWu
+	QDPKo7R78O/mvNA+x8D9ItmeTkiyBixPloEs7heWG3gnG4w6FmnoDDfToWC+g3siaTXRGASGN8E
+	ApplZRHJOGQqHxvSqMHlEo+1aIky1NhR0jv4Ot8P80g==
+X-Google-Smtp-Source: AGHT+IEOBZxgBoOYYsTLr9j3Ac1euXr1Rpi4crsGEb8FwCDrZ8ItK+CF5tSuU6gUaUGbLtqlb+0RKw==
+X-Received: by 2002:a05:6000:2893:b0:3d3:8711:d951 with SMTP id ffacd0b85a97d-3d38711dd3emr7957126f8f.45.1756796877036;
+        Tue, 02 Sep 2025 00:07:57 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-61ded4749aesm4762781a12.32.2025.09.02.00.07.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 02 Sep 2025 00:07:56 -0700 (PDT)
+Message-ID: <b67a40d1-9e2e-46ea-8716-47c885bcf4d7@gmail.com>
+Date: Tue, 2 Sep 2025 09:07:56 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [BUG] meta-perl: libcapture-tiny-perl-native installs into
+ ${D}${STAGING_DIR_NATIVE} so Capture/Tiny.pm never reaches native sysroot
+To: josephjamesmills@gmail.com, openembedded-devel@lists.openembedded.org
+References: <CAKv13C+yecjvKL8OGsRqDas5J6kW--i+8vruei7aH9RwBPSb2A@mail.gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <CAKv13C+yecjvKL8OGsRqDas5J6kW--i+8vruei7aH9RwBPSb2A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 04:54:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119167
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 07:08:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119168
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+On 8/30/25 22:14, Joseph Mills via lists.openembedded.org wrote:
+> Hi all,
+>
+> I’m seeing a native-packaging/sysroot staging issue with
+> libcapture-tiny-perl on current meta-perl.
+>
+> Environment
+> Host: Debian sid (for reproducibility reports)
+> Poky: perl-native 5.38.4 (meta/recipes-devtools/perl/perl_5.38.4.bb
+> <http://perl_5.38.4.bb>)
+> meta-perl: libcapture-tiny-perl 0.48 (BBCLASSEXTEND = "native")
+> cpan.bbclass + perlnative.bbclass
+>
+> Symptom (consumer fails to find Capture::Tiny in native sysroot)
+> A dependent native build (e.g. libunix-statgrab) dies with:
+>
+> Can't locate Capture/Tiny.pm in @INC ...
+>
+> In that consumer’s workdir:
+>
+> $ find recipe-sysroot-native/usr/lib/perl5 -name Tiny.pm
+> # (empty)
+> $ find recipe-sysroot/usr/lib/perl5 -name Tiny.pm
+> .../vendor_perl/5.38.4/Capture/Tiny.pm   # target variant present
+>
+> Provider logs (native variant)
+> libcapture-tiny-perl-native:do_install writes under an absolute path
+> that includes the provider’s recipe-sysroot-native:
+>
+> NOTE: make -j 32 DESTDIR=.../libcapture-tiny-perl-native/0.48/image
+> install_vendor
+> Installing
+> .../image/.../recipe-sysroot-native/usr/lib/perl5/vendor_perl/5.38.4/Capture/Tiny.pm
+> Installing
+> .../image/.../recipe-sysroot-native/usr/share/man/man3/Capture::Tiny.3
+>
+> So the file ends up at:
+> ${D}${STAGING_DIR_NATIVE}/usr/lib/perl5/vendor_perl/5.38.4/Capture/Tiny.pm
+>
+> instead of the expected:
+> ${D}/usr/lib/perl5/vendor_perl/5.38.4/Capture/Tiny.pm
+>
+> Because do_populate_sysroot stages from ${D}/usr/..., anything under
+> ${D}${STAGING_DIR_NATIVE}/usr/... is skipped. The provider’s
+> recipe-sysroot-native thus lacks Capture/Tiny.pm, and dependents can’t
+> use Capture::Tiny.
+>
+> Configure context
+> cpan.bbclass runs:
+>
+> perl ... Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1 ...
+>
+> For class-native, perl-native’s Config.pm advertises
+> installvendorlib/installvendorarch as absolute paths pointing into the
+> provider’s .../recipe-sysroot-native/usr/.... ExtUtils::MakeMaker then
+> combines those absolutes with DESTDIR=${D}, producing the
+> ${D}${STAGING_DIR_NATIVE}/... install tree shown above.
+>
+> Minimal reproduction
+> bitbake -c cleanall libcapture-tiny-perl-native
+> bitbake -c install libcapture-tiny-perl-native
+> # Observe absolute path under image/:
+> find tmp/work/*-linux/libcapture-tiny-perl-native/*/image -name
+> 'Tiny.pm' -print
+> # Observe absence in staged sysroot:
+> bitbake -c populate_sysroot libcapture-tiny-perl-native
+> find
+> tmp/work/*-linux/libcapture-tiny-perl-native/*/recipe-sysroot-native
+> -name 'Tiny.pm' -print
+>
+> Impact
+> Affects *-native CPAN modules that install into vendor_perl. Target
+> builds are fine; only native staging is affected. In downstream
+> recipes this presents as missing Capture/Tiny.pm (or similar CPAN
+> modules) despite correct DEPENDS.
+>
+> Proposed direction
+> For class-native in cpan.bbclass, pass relative vendor install dirs to
+> Makefile.PL so DESTDIR=${D} lands under ${D}/usr/...
+> (prefix-relative), which do_populate_sysroot will stage as usual. For
+> example:
+>
+> #??? Conceptual sketch for class-native: ???
+> Makefile.PL ... \
+>   INSTALLVENDORLIB=${libdir}/perl5/vendor_perl/${perlver} \
+>   INSTALLVENDORARCH=${libdir}/perl5/vendor_perl/${perlver}/${perlhostarch}
 
-Upstream commit:
-https://github.com/uclouvain/openjpeg/commit/d903fbb4ab9ccf9b96c8bc7398fafc0007505a37
+This sounds like an issue in oe-core, not in meta-oe. I'm not a perl
+user, personally I can't really comment on the overall soundness of
+this, but why not prepare a patch and send it to the oe-core mailing list?
 
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
----
- .../openjpeg/openjpeg/CVE-2025-50952.patch    | 32 +++++++++++++++++++
- .../openjpeg/openjpeg_2.4.0.bb                |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2025-50952.patch
-
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2025-50952.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2025-50952.patch
-new file mode 100644
-index 0000000000..6d16b37980
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2025-50952.patch
-@@ -0,0 +1,32 @@
-+From d903fbb4ab9ccf9b96c8bc7398fafc0007505a37 Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Sun, 18 Feb 2024 17:17:00 +0100
-+Subject: [PATCH] opj_dwt_decode_tile(): avoid potential
-+ UndefinedBehaviorSanitizer 'applying zero offset to null pointer' (fixes
-+ #1505)
-+
-+Upstream-Status: Backport [https://github.com/uclouvain/openjpeg/commit/d903fbb4ab9ccf9b96c8bc7398fafc0007505a37]
-+CVE: CVE-2025-50952
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ src/lib/openjp2/dwt.c | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/lib/openjp2/dwt.c b/src/lib/openjp2/dwt.c
-+index 4164ba09..f42c47b6 100644
-+--- a/src/lib/openjp2/dwt.c
-++++ b/src/lib/openjp2/dwt.c
-+@@ -2080,7 +2080,9 @@ static OPJ_BOOL opj_dwt_decode_tile(opj_thread_pool_t* tp,
-+     OPJ_SIZE_T h_mem_size;
-+     int num_threads;
-+ 
-+-    if (numres == 1U) {
-++    /* Not entirely sure for the return code of w == 0 which is triggered per */
-++    /* https://github.com/uclouvain/openjpeg/issues/1505 */
-++    if (numres == 1U || w == 0) {
-+         return OPJ_TRUE;
-+     }
-+     num_threads = opj_thread_pool_get_thread_count(tp);
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
-index feecb957ba..fbfbab7aaf 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb
-@@ -15,6 +15,7 @@ SRC_URI = " \
-     file://0001-sycc422_to_rgb-fix-out-of-bounds-read-accesses-when-.patch \
-     file://0001-opj_j2k_add_tlmarker-validate-that-current-tile-part.patch \
-     file://CVE-2023-39327.patch \
-+    file://CVE-2025-50952.patch \
- "
- SRCREV = "37ac30ceff6640bbab502388c5e0fa0bff23f505"
- S = "${WORKDIR}/git"
--- 
-2.25.1
+>
+> That would keeps target behavior unchanged, and fixes native staging
+> without per-recipe hacks.
+> Workaround (recipe-local, for those blocked now) In a
+> libcapture-tiny-perl_%.bbappend limited to class-native, forcing
+> relative vendor paths at configure time unblocks the build:
+>
+> EXTRA_CPANFLAGS:append:class-native = " \
+>     INSTALLVENDORLIB=${libdir}/perl5/vendor_perl/${@get_perl_version(d)} \
+>    
+>  INSTALLVENDORARCH=${libdir}/perl5/vendor_perl/${@get_perl_version(d)}/${@get_perl_hostarch(d)}
+> \
+> "
+> After that, do_install places Capture/Tiny.pm under
+> ${D}/usr/lib/perl5/vendor_perl/..., and do_populate_sysroot stages it
+> correctly.
+>
+> Happy to provide full logs/workdirs privately if needed. Thanks!
+>
+> — Joseph Mills (jmills)
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#119150): https://lists.openembedded.org/g/openembedded-devel/message/119150
+> Mute This Topic: https://lists.openembedded.org/mt/114982249/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
