@@ -2,105 +2,139 @@ Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB691CA1009
-	for <webhook@archiver.kernel.org>; Wed,  3 Sep 2025 10:00:31 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.8676.1756893628145088539
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B05ABCA1009
+	for <webhook@archiver.kernel.org>; Wed,  3 Sep 2025 10:02:11 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.8701.1756893724011627193
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Sep 2025 03:00:28 -0700
+ Wed, 03 Sep 2025 03:02:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Djhy95ek;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1341063f41=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58353nJW474840
-	for <openembedded-devel@lists.openembedded.org>; Wed, 3 Sep 2025 03:00:27 -0700
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=XclBuSAm;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1341063f41=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5837jkL03674026
+	for <openembedded-devel@lists.openembedded.org>; Wed, 3 Sep 2025 10:02:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=4BhuzbO4vxNQUJm+nlZE
-	jM9j5WC3PtaQ6ks8dIV4t28=; b=Djhy95eknCCR5z+MMGJT82v90D4ENH6AKg4/
-	4vTeure8iUBFfmSkUJGlfgL7OSTYRSGoHFrKEdX/Sv7w7fHzhJRkaMjA6AsM227b
-	uMeHmyrqvi7npYQA94rR6LfCHOYaP2ga+s1/OxCP8rHbG7LpnYBS/9igxCI8f7Tp
-	cNL2utBV2qFN7uflAbiETVXHVhEmF2mjXcpitLNWpFqUjBxgBCvjtN5q2nurjJjX
-	qYmVxP1O3bP/S/ZLA42LeCLklNyTdCR6qEANxnu3w6gDGP3bvm6KbJh1OmfgBy46
-	OpEuFOhWG58QIfLFjkIOMN1KzbtgGmS7FyIATANHoki4IlzChQ==
-Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48uvjyut7a-2
+	:mime-version:subject:to; s=PPS06212021; bh=ISpEAn/SH/8WyIeUULoQ
+	l9KY7cDa4ZiS1Z7VugUWQ7I=; b=XclBuSAmwBhHvq5b61qrcCnixzMfGM6lCy1x
+	v5UFIp/wzJMOq2nFhDFyWgaXoZhJnh+r+3Xlja0V3v3wanhr1Whaohi2fHfZtADf
+	BlwCS8e7CXVbm04dj+ymd6gm28qrAkDCTrQUZ3EVOgTc4pnPoknkwuAV0X8u5S5P
+	5ktze3KGbgZG011YwgINJcWeE+UVCtpDjnWrapyIhnLVtYoWAT1YFSCYUyPUs0uL
+	w+3SqfHpuBEgz0saO4j6xpJbYnwkql5n2pxgeOsGUL9hHNUhR+A6hLYHbCefaDEg
+	b6/XoSaplT9s6LsUWC1ogsSAPm90XqMZ403BBeC7i5Sz5qDAJg==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48ur99ux3e-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 03 Sep 2025 03:00:27 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 03 Sep 2025 10:02:02 +0000 (GMT)
 Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Wed, 3 Sep 2025 03:00:32 -0700
+ 15.1.2507.58; Wed, 3 Sep 2025 03:02:03 -0700
 Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
  ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Wed, 3 Sep 2025 03:00:26 -0700
+ 15.1.2507.58 via Frontend Transport; Wed, 3 Sep 2025 03:02:02 -0700
 From: <archana.polampalli@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-webserver][kirkstone][PATCH 1/1] apache2: upgrade 2.4.62 -> 2.4.65
-Date: Wed, 3 Sep 2025 15:30:11 +0530
-Message-ID: <20250903100011.875581-1-archana.polampalli@windriver.com>
+Subject: [oe][meta-networking][kirkstone][PATCH 1/1] tcpreplay: fix CVE-2023-43279
+Date: Wed, 3 Sep 2025 15:31:48 +0530
+Message-ID: <20250903100148.877618-1-archana.polampalli@windriver.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=K8wiHzWI c=1 sm=1 tr=0 ts=68b811bb cx=c_pps
- a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
- a=qddVy93pNTEA:10 a=yJojWOMRYYMA:10 a=rdg3_GxQAAAA:8 a=t7CeM3EgAAAA:8
- a=IhUYoywTZCXilfiUsGMA:9 a=dYCL7Ul1fIsA:10 a=oa8Jmjjpy-EA:10
- a=4bfGIIMrVqvzAeZ94R2q:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: QVYHJptgtnquw4pTJl7LvioWvS2aXw3n
-X-Proofpoint-ORIG-GUID: QVYHJptgtnquw4pTJl7LvioWvS2aXw3n
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTAzMDA5OSBTYWx0ZWRfX0Q4ITh5F/fbn
- klZYma6tcDINMgd06YlLwA0oOfMS4PXkh9WzKfXMYRUl9KRLvpw0HMkANHwBpDgHAeHSkrp6IBf
- ROySN4yPoEtKqxFEKYPISg5O25ygyzsmio0TkxvANuGJWwyuWcPWoEXgfHHFFOHl6DfSoVMEQS4
- m5LJKToDpQmX2L8f22fe0BNmEwg+XKEhKdF4HCmdYvWpLowi7KyG2Zvu9VhEdCIwI0yEU/VTfxr
- oAAnZKtKleuZlpFjM9lzeJ+UZzJgpqAvkzKM+cYdVHB/RbY7qRdXJdTI5l3/5hVgV7wq2CM81ht
- hA2N0Pl3LL6xK7/geSLR6a7+PneQfpGXE7DSCRk+sEM34JTg+W8l0FohLO8fHA=
+X-Authority-Analysis: v=2.4 cv=FqYF/3rq c=1 sm=1 tr=0 ts=68b8121a cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=yU_jQ1hFIRIA:10 a=yJojWOMRYYMA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8
+ a=pGLkceISAAAA:8 a=x1p9RcrOnns07AYORbwA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: pc7aVw0kJ6E5fGvUOFp9CeEsPe-sjCM0
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTAzMDA5OSBTYWx0ZWRfX+iJ5Xp2xp3c6
+ lZP/VY2+BUQ3ElGiMGYAGBTjmQ4G67qCJR9K6/d8SMvQy2cvcpHEojjp12wJCyK6Z3MKmZCDmlv
+ beVXZKzQeFqSHhXnkwHNQ8SGLgKVeXIp0vDwOzn2sETBY2b8e/qO2HS9kD6ZINlgcMGUkrO8rgB
+ EXFy5I2yWgpU/k4zgg5U6rTEVSKuLWy0vgbGcFjcGLKk5hY7lSrA0aFZgURPYrv+5U4zqGs3pkE
+ IVB1cdJeofoAfGHimhIIoCjxYjHXSs/gB82g1NC0iwgBQmFoD2EOOY0yOa4Iokya3XcSNnR/J/J
+ XP4ooIefCBCNS1Xv+fGYAodOY+rhh/uyntbsaoja++m0PMlgqVfwQbFlao1yGw=
+X-Proofpoint-ORIG-GUID: pc7aVw0kJ6E5fGvUOFp9CeEsPe-sjCM0
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-09-03_05,2025-08-28_01,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 spamscore=0 clxscore=1015 phishscore=0 impostorscore=0
- malwarescore=0 priorityscore=1501 bulkscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
+ clxscore=1015 phishscore=0 spamscore=0 priorityscore=1501 impostorscore=0
+ adultscore=0 suspectscore=0 bulkscore=0 malwarescore=0 classifier=typeunknown
+ authscore=0 authtc= authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Sep 2025 10:00:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119254
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Sep 2025 10:02:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119255
 
 From: Archana Polampalli <archana.polampalli@windriver.com>
 
-This upgrade incorporates the fixes for CVE-2025-53020, CVE-2025-49812,
-CVE-2025-49630, CVE-2025-23048, CVE-2024-47252, CVE-2024-43394,
-CVE-2024-43204, CVE-2024-42516, CVE-2025-54090 and other bugfixes.
-
-Changelog:
-https://www.apachelounge.com/Changelog-2.4.html
+Null Pointer Dereference in mask_cidr6 component at cidr.c in Tcpreplay 4.4.4
+allows attackers to crash the application via crafted tcprewrite command.
 
 Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- .../apache2/{apache2_2.4.62.bb => apache2_2.4.65.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.62.bb => apache2_2.4.65.bb} (99%)
+ .../tcpreplay/tcpreplay/CVE-2023-43279.patch  | 36 +++++++++++++++++++
+ .../tcpreplay/tcpreplay_4.4.4.bb              |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
-index 0e036e7e12..c05304f96a 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
-@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
-            "
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch
+new file mode 100644
+index 0000000000..d26700efde
+--- /dev/null
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch
+@@ -0,0 +1,36 @@
++From 3164a75f2660a5c3537feff9fd8751346cf5ca57 Mon Sep 17 00:00:00 2001
++From: Gabriel Ganne <gabriel.ganne@gmail.com>
++Date: Sun, 21 Jan 2024 09:16:38 +0100
++Subject: [PATCH] add check for empty cidr
++
++This causes tcprewrite to exit with an error instead of crashing.
++
++Fixes: #824
++
++Upstream-Status: Backport [https://github.com/appneta/tcpreplay/commit/a0b6d847f468217b8fd675f788e6eca74a21a90c]
++
++CVE: CVE-2023-43279
++
++Signed-off-by: Gabriel Ganne <gabriel.ganne@gmail.com>
++Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
++---
++ src/common/cidr.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/src/common/cidr.c b/src/common/cidr.c
++index 687fd04..9afbfec 100644
++--- a/src/common/cidr.c
+++++ b/src/common/cidr.c
++@@ -249,6 +249,10 @@ parse_cidr(tcpr_cidr_t **cidrdata, char *cidrin, char *delim)
++     char *network;
++     char *token = NULL;
++
+++    if (cidrin == NULL) {
+++        errx(-1, "%s", "Unable to parse empty CIDR");
+++    }
+++
++     mask_cidr6(&cidrin, delim);
++
++     /* first iteration of input using strtok */
++--
++2.25.1
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
+index 3ece4b78c6..6895c5a539 100644
+--- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
+@@ -11,6 +11,7 @@ SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcprepl
+            file://CVE-2023-4256.patch \
+            file://CVE-2024-22654-0001.patch \
+            file://CVE-2024-22654-0002.patch \
++           file://CVE-2023-43279.patch \
+ "
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "674188e7bf44ced82da8db522da946849e22080d73d16c93f7f4df89e25729ec"
-+SRC_URI[sha256sum] = "58b8be97d9940ec17f7656c0c6b9f41b618aac468b894b534148e3296c53b8b3"
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
+ SRC_URI[sha256sum] = "44f18fb6d3470ecaf77a51b901a119dae16da5be4d4140ffbb2785e37ad6d4bf"
 -- 
 2.40.0
 
