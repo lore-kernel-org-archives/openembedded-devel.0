@@ -2,62 +2,62 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B705CA101F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97A5ACAC584
 	for <webhook@archiver.kernel.org>; Wed,  3 Sep 2025 09:04:00 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.web11.7938.1756890231044712977
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web10.8063.1756890233999112732
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Sep 2025 02:03:52 -0700
+ Wed, 03 Sep 2025 02:03:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=qBlen/a2;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Q9PEBFdw;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1756890231; x=1788426231;
+  t=1756890235; x=1788426235;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=YL0S94mB4B5j6s2q2eEHEgR4kkzeOCzemSIqkC0btFQ=;
-  b=qBlen/a269DtR/e16Dd3SIu5lM25AyHbWQsuVQhK9LpxRnjaZJy01LkJ
-   ypafWHTFaJdvdqzvYvF68mf+YQWAB9EqqqrWvOxUd58nZhh+T7atAox5K
-   u5GufuOoJs9y7+LSR2DCFE+MsAxdk+u9W6rlz7dfVJ9lKFQK2RSdIol7P
-   eD7/0i3FB2RZX6igaJx7JWcWZLadOuSRvf6nmy9IP+SWdFrhjU7aKfhHW
-   ipx59Dd2JHLlHhYaUOHcd02RtGFt/hI7idVd7FRYfgReeZ9ct2mnNFsW3
-   VL2H2tZLGtmq1ujmMWPgTR993zPnd8iC4pa60e+mQdswd8Lsqfw+NWXC+
-   Q==;
-X-CSE-ConnectionGUID: /dCjW+Y2SiC+ZHv6OMO8qA==
-X-CSE-MsgGUID: jXyWRjxlQfOcfwWJwmEnhA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11541"; a="190352777"
+  bh=KHxZQTtylCxqYSX6Rji+a/Ji+arpZGZ6Slyaxz5aiVQ=;
+  b=Q9PEBFdwzVku3lCtygiZH/yV5P8i/oB30izu1ZPNh+y/QEc6QWdHzUFx
+   Xs80KK77v+MdwWEV9h4lo4ySRQFUxgzrvg3Jbw5yuy2KF3w+mkBy+zaUA
+   GlIQyrT46CFotXvvFN/R00X30Fs7OB1yD7OomxSN7s1S4i1CEDK+xO1R+
+   qw9v8wtZnnV2g4/OFsjrm4EStaJhrR+4Pa54erUCLIlMHXkcNP6qjOmuB
+   FPAibB5qQh9fntCwnreJ2wRuTq8jte2t20sZElXbQEdLcsoRatQpvx2ct
+   j52rBF909zpaDv1XJmjO9SbeYEV7mAlt75qH51ejmyzi2AmErNo0xUFJt
+   g==;
+X-CSE-ConnectionGUID: qCj7g2E5RfiR4AHk8h4xhA==
+X-CSE-MsgGUID: V2i2ZbcKTI6JkL1XNnFy8A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11541"; a="190432412"
 X-IronPort-AV: E=Sophos;i="6.18,233,1751209200"; 
-   d="scan'208";a="190352777"
-Received: from unknown (HELO az2nlsmgr2.o.css.fujitsu.com) ([20.61.8.234])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Sep 2025 18:03:50 +0900
+   d="scan'208";a="190432412"
+Received: from unknown (HELO az2nlsmgr1.o.css.fujitsu.com) ([51.138.80.169])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Sep 2025 18:03:54 +0900
 Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr2.o.css.fujitsu.com (Postfix) with ESMTPS id 5479B145D
-	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Sep 2025 09:03:50 +0000 (UTC)
-Received: from az2uksmom2.o.css.fujitsu.com (az2uksmom2.o.css.fujitsu.com [10.151.22.203])
+	by az2nlsmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 3A9021C000BF
+	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Sep 2025 09:03:54 +0000 (UTC)
+Received: from az2nlsmom1.o.css.fujitsu.com (az2nlsmom1.o.css.fujitsu.com [10.150.26.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id 0F8921150726
-	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Sep 2025 09:03:50 +0000 (UTC)
+	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id E9BD61150725
+	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Sep 2025 09:03:53 +0000 (UTC)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTPS id 0203B1400BF4
-	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Sep 2025 09:03:48 +0000 (UTC)
+	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTPS id CD1D18212E9
+	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Sep 2025 09:03:51 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 250341A0073;
-	Wed,  3 Sep 2025 17:03:45 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id C92931A0071;
+	Wed,  3 Sep 2025 17:03:48 +0800 (CST)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 28/56] python3-eventlet: upgrade 0.40.2 -> 0.40.3
-Date: Wed,  3 Sep 2025 17:02:49 +0800
-Message-ID: <20250903090317.2002-28-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 38/56] python3-matplotlib: upgrade 3.10.5 -> 3.10.6
+Date: Wed,  3 Sep 2025 17:02:59 +0800
+Message-ID: <20250903090317.2002-38-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20250903090317.2002-1-wangmy@fujitsu.com>
 References: <20250903090317.2002-1-wangmy@fujitsu.com>
@@ -67,31 +67,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 03 Sep 2025 09:04:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119225
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119234
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-eventlet_0.40.2.bb => python3-eventlet_0.40.3.bb}  | 2 +-
+ ...ython3-matplotlib_3.10.5.bb => python3-matplotlib_3.10.6.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-eventlet_0.40.2.bb => python3-eventlet_0.40.3.bb} (83%)
+ rename meta-python/recipes-devtools/python/{python3-matplotlib_3.10.5.bb => python3-matplotlib_3.10.6.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.40.2.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.40.3.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-eventlet_0.40.2.bb
-rename to meta-python/recipes-devtools/python/python3-eventlet_0.40.3.bb
-index 3c8397c3bd..057b73013a 100644
---- a/meta-python/recipes-devtools/python/python3-eventlet_0.40.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-eventlet_0.40.3.bb
-@@ -5,7 +5,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.10.5.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.10.6.bb
+similarity index 93%
+rename from meta-python/recipes-devtools/python/python3-matplotlib_3.10.5.bb
+rename to meta-python/recipes-devtools/python/python3-matplotlib_3.10.6.bb
+index 6c4d496c02..578a6b9945 100644
+--- a/meta-python/recipes-devtools/python/python3-matplotlib_3.10.5.bb
++++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.10.6.bb
+@@ -22,7 +22,7 @@ SRC_URI += "file://run-ptest \
+             file://0001-Do-not-download-external-dependency-tarballs-via-mes.patch \
+             file://0001-Change-types-for-width-height-to-match-definitions-i.patch \
+             "
+-SRC_URI[sha256sum] = "352ed6ccfb7998a00881692f38b4ca083c691d3e275b4145423704c34c909076"
++SRC_URI[sha256sum] = "ec01b645840dd1996df21ee37f208cd8ba57644779fa20464010638013d3203c"
  
- SRC_URI += "file://d19ad6cc086684ee74db250f5fd35227c98e678a.patch"
--SRC_URI[sha256sum] = "42636c277f761d026905cd0ba0a11edec7600001be401d6ae7e9546559c8d8b0"
-+SRC_URI[sha256sum] = "290852db0065d78cec17a821b78c8a51cafb820a792796a354592ae4d5fceeb0"
- 
- inherit pypi python_hatchling
+ inherit pypi pkgconfig python3targetconfig meson ptest-python-pytest
  
 -- 
 2.43.0
