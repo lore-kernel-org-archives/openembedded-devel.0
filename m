@@ -1,99 +1,107 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 611C1CA1013
-	for <webhook@archiver.kernel.org>; Wed,  3 Sep 2025 09:04:11 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.web10.8064.1756890236702565008
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB691CA1009
+	for <webhook@archiver.kernel.org>; Wed,  3 Sep 2025 10:00:31 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.8676.1756893628145088539
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Sep 2025 02:04:01 -0700
+ Wed, 03 Sep 2025 03:00:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=gwTWMYhB;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1756890241; x=1788426241;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=OIHE+YYIUAC5ocQExgQTbI+rSuF0sxuigC5gsKMLVr4=;
-  b=gwTWMYhB8MEmp4bU4cMS/xliw3edMS2Gwm9yJCPEsx/KwXC3sDKdVOju
-   t1gDgwaW278t8+h88M+NH9N0+pbG87CTIDJFnXMQOALNwTXgCJjNxdDjl
-   rLHw8CZE5SBy4zlpeKLABEnMUcYlmVT6va+fgaNZIsojkpA/eO7lN5WxS
-   1WMM0l32PJABnqxz91F7hGNccnmAIeS82eKW637AGo4Rub0yios9xry75
-   9gTv/bRrWsYW3Mq4iAD5kP+d/VCFyxI3CUg9+QV9JTpSupbaqy6R+7IDw
-   HMDHxWztWblWPuIEJV74zW7tp33ai8oGGFKKiK9RF3dmtjrCn5MBbJ67w
-   Q==;
-X-CSE-ConnectionGUID: U52uUSn5Taaxv6ZV4EASmg==
-X-CSE-MsgGUID: FbXRHO7pSbG+4Xv9Nwkapw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11541"; a="190352807"
-X-IronPort-AV: E=Sophos;i="6.18,233,1751209200"; 
-   d="scan'208";a="190352807"
-Received: from unknown (HELO az2uksmgr1.o.css.fujitsu.com) ([52.151.125.128])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Sep 2025 18:04:00 +0900
-Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id B57611C1C71B
-	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Sep 2025 09:04:00 +0000 (UTC)
-Received: from az2nlsmom4.fujitsu.com (az2nlsmom4.o.css.fujitsu.com [10.150.26.201])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 6D5A88A5C59
-	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Sep 2025 09:04:00 +0000 (UTC)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(No client certificate requested)
-	by az2nlsmom4.fujitsu.com (Postfix) with ESMTPS id 4E7FD2005D22
-	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Sep 2025 09:03:58 +0000 (UTC)
-Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 4B3D91A0086;
-	Wed,  3 Sep 2025 17:03:55 +0800 (CST)
-From: Wang Mingyu < wangmy@fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-webserver] [PATCH 55/56] swagger-ui: upgrade 5.27.1 -> 5.28.0
-Date: Wed,  3 Sep 2025 17:03:16 +0800
-Message-ID: <20250903090317.2002-55-wangmy@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
-In-Reply-To: <20250903090317.2002-1-wangmy@fujitsu.com>
-References: <20250903090317.2002-1-wangmy@fujitsu.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Djhy95ek;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1341063f41=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58353nJW474840
+	for <openembedded-devel@lists.openembedded.org>; Wed, 3 Sep 2025 03:00:27 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=4BhuzbO4vxNQUJm+nlZE
+	jM9j5WC3PtaQ6ks8dIV4t28=; b=Djhy95eknCCR5z+MMGJT82v90D4ENH6AKg4/
+	4vTeure8iUBFfmSkUJGlfgL7OSTYRSGoHFrKEdX/Sv7w7fHzhJRkaMjA6AsM227b
+	uMeHmyrqvi7npYQA94rR6LfCHOYaP2ga+s1/OxCP8rHbG7LpnYBS/9igxCI8f7Tp
+	cNL2utBV2qFN7uflAbiETVXHVhEmF2mjXcpitLNWpFqUjBxgBCvjtN5q2nurjJjX
+	qYmVxP1O3bP/S/ZLA42LeCLklNyTdCR6qEANxnu3w6gDGP3bvm6KbJh1OmfgBy46
+	OpEuFOhWG58QIfLFjkIOMN1KzbtgGmS7FyIATANHoki4IlzChQ==
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 48uvjyut7a-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 03 Sep 2025 03:00:27 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58; Wed, 3 Sep 2025 03:00:32 -0700
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.58 via Frontend Transport; Wed, 3 Sep 2025 03:00:26 -0700
+From: <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-webserver][kirkstone][PATCH 1/1] apache2: upgrade 2.4.62 -> 2.4.65
+Date: Wed, 3 Sep 2025 15:30:11 +0530
+Message-ID: <20250903100011.875581-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=K8wiHzWI c=1 sm=1 tr=0 ts=68b811bb cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=qddVy93pNTEA:10 a=yJojWOMRYYMA:10 a=rdg3_GxQAAAA:8 a=t7CeM3EgAAAA:8
+ a=IhUYoywTZCXilfiUsGMA:9 a=dYCL7Ul1fIsA:10 a=oa8Jmjjpy-EA:10
+ a=4bfGIIMrVqvzAeZ94R2q:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: QVYHJptgtnquw4pTJl7LvioWvS2aXw3n
+X-Proofpoint-ORIG-GUID: QVYHJptgtnquw4pTJl7LvioWvS2aXw3n
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTAzMDA5OSBTYWx0ZWRfX0Q4ITh5F/fbn
+ klZYma6tcDINMgd06YlLwA0oOfMS4PXkh9WzKfXMYRUl9KRLvpw0HMkANHwBpDgHAeHSkrp6IBf
+ ROySN4yPoEtKqxFEKYPISg5O25ygyzsmio0TkxvANuGJWwyuWcPWoEXgfHHFFOHl6DfSoVMEQS4
+ m5LJKToDpQmX2L8f22fe0BNmEwg+XKEhKdF4HCmdYvWpLowi7KyG2Zvu9VhEdCIwI0yEU/VTfxr
+ oAAnZKtKleuZlpFjM9lzeJ+UZzJgpqAvkzKM+cYdVHB/RbY7qRdXJdTI5l3/5hVgV7wq2CM81ht
+ hA2N0Pl3LL6xK7/geSLR6a7+PneQfpGXE7DSCRk+sEM34JTg+W8l0FohLO8fHA=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-03_05,2025-08-28_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 spamscore=0 clxscore=1015 phishscore=0 impostorscore=0
+ malwarescore=0 priorityscore=1501 bulkscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Sep 2025 09:04:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119252
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Sep 2025 10:00:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119254
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Archana Polampalli <archana.polampalli@windriver.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+This upgrade incorporates the fixes for CVE-2025-53020, CVE-2025-49812,
+CVE-2025-49630, CVE-2025-23048, CVE-2024-47252, CVE-2024-43394,
+CVE-2024-43204, CVE-2024-42516, CVE-2025-54090 and other bugfixes.
+
+Changelog:
+https://www.apachelounge.com/Changelog-2.4.html
+
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- .../swagger-ui/{swagger-ui_5.27.1.bb => swagger-ui_5.28.0.bb}   | 2 +-
+ .../apache2/{apache2_2.4.62.bb => apache2_2.4.65.bb}            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.27.1.bb => swagger-ui_5.28.0.bb} (94%)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.62.bb => apache2_2.4.65.bb} (99%)
 
-diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.27.1.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.28.0.bb
-similarity index 94%
-rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.27.1.bb
-rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.28.0.bb
-index f1eb6e4423..e4bee6e8a9 100644
---- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.27.1.bb
-+++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.28.0.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
+similarity index 99%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
+index 0e036e7e12..c05304f96a 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.62.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
+@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
+            "
  
- SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=master;protocol=https;tag=v${PV}"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+-SRC_URI[sha256sum] = "674188e7bf44ced82da8db522da946849e22080d73d16c93f7f4df89e25729ec"
++SRC_URI[sha256sum] = "58b8be97d9940ec17f7656c0c6b9f41b618aac468b894b534148e3296c53b8b3"
  
--SRCREV = "43ed706e9519841e97401cfad83faca564b37eaf"
-+SRCREV = "01e23904eec6075e032e07f3235607b463d9ecf3"
- 
- CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
+ S = "${WORKDIR}/httpd-${PV}"
  
 -- 
-2.43.0
+2.40.0
 
 
