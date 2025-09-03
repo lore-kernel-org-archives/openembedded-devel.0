@@ -1,85 +1,193 @@
-Return-Path: <festevam@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3128ECA1007
-	for <webhook@archiver.kernel.org>; Tue,  2 Sep 2025 18:55:00 +0000 (UTC)
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
- by mx.groups.io with SMTP id smtpd.web10.85681.1756839293922434622
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3B4ACA0FED
+	for <webhook@archiver.kernel.org>; Wed,  3 Sep 2025 02:46:37 +0000 (UTC)
+Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
+ by mx.groups.io with SMTP id smtpd.web11.3360.1756867590936344021
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Sep 2025 11:54:54 -0700
+ Tue, 02 Sep 2025 19:46:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MRVO63uf;
- spf=pass (domain: gmail.com, ip: 209.85.167.49, mailfrom: festevam@gmail.com)
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-55f646b1db8so5545717e87.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 11:54:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=c0MpDObd;
+ spf=pass (domain: gmail.com, ip: 209.85.219.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-yb1-f180.google.com with SMTP id 3f1490d57ef6-e96ee32f86bso5305634276.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 19:46:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756839292; x=1757444092; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1756867590; x=1757472390; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jhrajVTW1arSuIE7fkZ0CU4oK+Hkg9hAR3aOlFFcwJ0=;
-        b=MRVO63ufKzLibBycHyERsj/tnxH67OO8ddPXG1yyolUIvQYTv7TzndUQe4I4Z2Or2X
-         LOwDv3KB2khfaycYVaTro202wmyLGyI+9ilsUP2IcCIjVHVxDpSqkUcTHSGUsJ1bovNn
-         1j5PeTWXM2yVdCzOCsCNmZUFcdMg1d5dk6eK5oyElDU3MK0cSUZFWO2txr1uUK3Sz7Cn
-         gQ6Wx29KpTlj8EgdlE8qPCwkGDsRpSfCGfNG8P1FjeZZAoda38MxqJIEba2spOoZjkNi
-         b2RAocC3xkdZhncmvc1/23xMhxxxaHGDhMSmvTgGK/ExL3VOBXiZVycfaNHBxiiRuprM
-         CsLw==
+        bh=RdUeZlQQoMsCjQFgVtBw6ljb7mErF7uHRPngwJscRc4=;
+        b=c0MpDObdq9ORBs35bjcDze65zORsmMQ/itKDZ2Bq7EPlpTk/N+6fHMTICPRrGFWOkE
+         bRlBZivMajqkn1TVnBBsTXr8E1IqGuFweUWqHdS9xqf3KjZMWkWZZUBr30ivBtUA3WTp
+         g9RVU65LDtuzrCB5+vhkZlKI1hOuqWu/meZ5kV3UTmsXHJxb4kjBsWtl3QUZZhnNJeh4
+         zOL6pHl/ivCKpxz3319czOCgOuTpAdUConh4b17KxVcBnfWaB7V7445nRIwB3NNhYWmA
+         NaGfg5bXHq74LM5I3EiXVfT05N1jY3VNchPDQfQh/2OdX9JbA1nwGYZfiB051yxDP5HM
+         7Dhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756839292; x=1757444092;
+        d=1e100.net; s=20230601; t=1756867590; x=1757472390;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=jhrajVTW1arSuIE7fkZ0CU4oK+Hkg9hAR3aOlFFcwJ0=;
-        b=BjsR29WU2HQ8BfY0dfrznFzqmzAHIJIiF6kr6VYft7D7E/+UKuAI67w1TWUV+n9NQn
-         tdqERR0wsZGfhTix6UBTynlvUbf/ZXsWS3mWhIZHWnxrxEJnXPJ/65z7YgFq0QrFPNQj
-         vo4TuSbZWtWOZHcA3d5kjDIipgc6lunxulyjHV/wI9CD8lSCYHeo0sf/S+KDDzUJ07kY
-         XCEdJUlFu63lBrx9xHGxVvMIaiHNeALHK3opbSBj8VdcMMBVsY6G1Vx5McLRNF8yaSs+
-         GuPJlMe1hAlDXogZTfp6XXqRfNgQQX94nM0xKtL/1PE+JGp4sFPwIB9k9c7ERFXru4P6
-         bxkA==
-X-Gm-Message-State: AOJu0YwnD4JBgJiXnsHs1MlbVKGA5DwVxwXdPNIdetds8KvGVlpwHDXn
-	A3v1u0r8uirTMojVuIPadBvBpIVNPJgPK0tBcxDqfrSsUMv/tp8lTLb5Ocg5x1AIhIdkFAVbuZ0
-	x4WynG3WRjViJEchfwViDRoLXguEc6oQ=
-X-Gm-Gg: ASbGncsKU/vDWjGaaemb/Rra1gXHlTqfWKB1h9rDRPB8hhghzKFl8BMRbxLL3IyorVM
-	VRcmOwi4JdYDlJpfDUvzeKyqi6QHRDESWUCTRokCOxahGFrfN0ZwXWSI35mOP+Li/cdC2XJHnoz
-	QYlJYUU7eCRQvJ1oCl83PQUexkxEcR7Yi2EyOQCSCapZBCZ9VVnmU6IP4/MEoXuYGc1Ts2c/yJg
-	zlDm7rJejmwF6uKDtdZFR4ajFtGTGXcjryFUWAoIuecwDlnKg==
-X-Google-Smtp-Source: AGHT+IFhd99/c6OtOZmrrpH/3Z/rLqW7+IfmlSbgC4YE+/8qDJTnHhU6LPIQxdQHHcKodopixWNPtpAC7mCaHbUFRNg=
-X-Received: by 2002:a05:6512:1053:b0:55f:47a9:af6c with SMTP id
- 2adb3069b0e04-55f708a2d37mr3914425e87.11.1756839291375; Tue, 02 Sep 2025
- 11:54:51 -0700 (PDT)
+        bh=RdUeZlQQoMsCjQFgVtBw6ljb7mErF7uHRPngwJscRc4=;
+        b=b5xc2uvnaXg1+xKXNEiPiBUPHqArzry3U98IpGtiEfrRZ//Q/giArzR4WPZGSlBA3i
+         9Olw8UJw8XXt/s4lXxPPNOydagJuTmwRDOK4ce/44TPFkcB4ZlTVmtaPcPAuiS2Se394
+         Ce0viClC1dVmZaXwob24Kpl1yd6fItQeZryBG3dKNNm54SwgXO5EgkaRasbjOLmkwOF5
+         j73XLTeO0Ad9hn39PIo24W3tE+kxOVES9CYlyn7cr4i3yilQHZmdInFl6TPTEhoC7Eph
+         K7T8Bjy+PEIh+eoqY/0xBpJH06wNqVF6HWVllml9FsNKydHdqEjCKxIthdbKJhm69byG
+         NrsQ==
+X-Gm-Message-State: AOJu0YxEnbAqE3bovkehbCBKam2VGwcfDe36P6dt9FsoI2b/7V1h3+QU
+	kWbQnvO0T9uUOjOsdP/MzZzmL677n+7CNp2XX3RuuU26ps0dkyicK17SbmdOKdUZmGsznLEfG8g
+	iEeaoOKReZXIOsojhun5PPCw0+SIN5tw=
+X-Gm-Gg: ASbGncsOYHwigiRP/wFgCSj4jYfGEllSoNT6j7Lfd+Qwi1dn5CuJ2pEiFe8SyPYVnHS
+	YyMIzJj3jx94n3lG1FZ1k4ebyvmRh06hLG59AkY9kK5oo82NDD/RLrHBmK6UyvvGTJW+WZG3yVb
+	Wa3v94Fz/wN9ImBnX89uJj0o5a+7Gd4DZ5EArW2tVYhFmEOoW+MHTU/421S5WLRlp/MCamEn/6N
+	34pZhCMGP/qgkhPIKkEGm1ZaXxqYLqkcbdaNpNdQbtetE9mYzLM3eBiwZxKWXJv9/V/4XCRjht8
+	4xXcQK7Fvqb58k4b4Ez+grBxdlkSQiAXbvEccL3VKZrqGt4dilPYT0D8vA==
+X-Google-Smtp-Source: AGHT+IFTYkQlSbZDfiLjXPU2d/5O5CcON9otHRsm6gaCEluacYuj/4WTutgi13VDmgJ14tgLEjwy6iLI3yK5GCFEv9A=
+X-Received: by 2002:a05:690c:dcd:b0:721:64ec:bc64 with SMTP id
+ 00721157ae682-722764aca1amr173829957b3.35.1756867589780; Tue, 02 Sep 2025
+ 19:46:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250902180740.263633-1-marek.vasut@mailbox.org>
-In-Reply-To: <20250902180740.263633-1-marek.vasut@mailbox.org>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 2 Sep 2025 15:54:38 -0300
-X-Gm-Features: Ac12FXweSHnSYvUMA7V5fr3306U4L5Dm3cPbYeTxSdiRGTzdkS2bBIy8YSzvtao
-Message-ID: <CAOMZO5C-qzw4h6YKHJCZ3cwz6Y2g_4JvGVj2Td2YHqcyB_PMsg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][RESEND PATCH v2] imx-cst: Replace hard-coded
- linux64 with linux${SITEINFO_BITS}
-To: marek.vasut@mailbox.org
-Cc: openembedded-devel@lists.openembedded.org, 
-	Kelefa Sane <kelefa.sane@smile.fr>, Khem Raj <raj.khem@gmail.com>, 
-	=?UTF-8?Q?Ulrich_=C3=96lmann?= <u.oelmann@pengutronix.de>, 
-	Yoann Congal <yoann.congal@smile.fr>
+References: <20250902143030.139421-1-christli@axis.com> <20250902143030.139421-5-christli@axis.com>
+In-Reply-To: <20250902143030.139421-5-christli@axis.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 2 Sep 2025 19:46:03 -0700
+X-Gm-Features: Ac12FXwxrygiD8h1WSr5gzSmKiggn3s11Off2BtV2Ab4grFCrUR62KWndz8gKy8
+Message-ID: <CAMKF1sqXnXQy+4YN9wk9xKnFNBHkUkcWO7h3gYgVv-e7JMH=oA@mail.gmail.com>
+Subject: Re: [oe] [PATCH 4/4] influxdb: Update module cache content
+To: christian.lindeberg@axis.com
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Sep 2025 18:55:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119187
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Sep 2025 02:46:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119188
 
-On Tue, Sep 2, 2025 at 3:08=E2=80=AFPM Marek Vasut via lists.openembedded.o=
-rg
-<marek.vasut=3Dmailbox.org@lists.openembedded.org> wrote:
+its failing to build on AB -
+https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/3411754/raw_inlin=
+e
+
+On Tue, Sep 2, 2025 at 7:30=E2=80=AFAM Christian Lindeberg via
+lists.openembedded.org
+<christian.lindeberg=3Daxis.com@lists.openembedded.org> wrote:
 >
-> Replace hard-coded linux64 with linux${SITEINFO_BITS}. This way,
-> 32bit machines can also build and use this tool correctly.
+> From: Christian Lindeberg <christian.lindeberg@axis.com>
 >
-> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
-
-Thanks for the fix.
-
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+> The Go module cache content URIs has been regenerated by listing
+> dependencies with "${GO_INSTALL}" instead of "${GO_IMPORT}/..." as the
+> package patterns.
+>
+> Signed-off-by: Christian Lindeberg <christian.lindeberg@axis.com>
+> ---
+>  meta-oe/recipes-dbs/influxdb/influxdb-go-mods.inc | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/meta-oe/recipes-dbs/influxdb/influxdb-go-mods.inc b/meta-oe/=
+recipes-dbs/influxdb/influxdb-go-mods.inc
+> index e191426431..28927580f4 100644
+> --- a/meta-oe/recipes-dbs/influxdb/influxdb-go-mods.inc
+> +++ b/meta-oe/recipes-dbs/influxdb/influxdb-go-mods.inc
+> @@ -119,7 +119,7 @@ SRC_URI +=3D "\
+>      gomod://github.com/kisielk/errcheck;version=3Dv1.5.0;mod=3D1;sha256s=
+um=3D107d26460d41b5322b6911c9b5eb233117421943b3a1453ba99f01c4fdf2f8e8 \
+>      gomod://github.com/kisielk/gotool;version=3Dv1.0.0;mod=3D1;sha256sum=
+=3D77aca7bffc0ec29fc9f088d5962ab3128f405d7b10c7ceb9693ff7a08958955d \
+>      gomod://github.com/klauspost/compress;version=3Dv1.4.0;sha256sum=3D4=
+af2ed530c00d9d09a72af0b4188dac27a38548ebbd953db7f3fb22a7f671a49 \
+> -    gomod://github.com/klauspost/cpuid;version=3Dv0.0.0-20170728055534-a=
+e7887de9fa5;sha256sum=3D7073c12479a7d29db4ddaa4250a029b165fcc43c25987f43525=
+ae9ea3e7ab102 \
+> +    gomod://github.com/klauspost/cpuid;version=3Dv0.0.0-20170728055534-a=
+e7887de9fa5;mod=3D1;sha256sum=3D9b443b5b06355eca91f4e773a4df7d8a3bf0c9abad5=
+ff472d6973e688e6a9392 \
+>      gomod://github.com/klauspost/crc32;version=3Dv0.0.0-20161016154125-c=
+b6bfca970f6;sha256sum=3D6b632853a19f039138f251f94dbbdfdb72809adc3a02da08e43=
+01d3d48275b06 \
+>      gomod://github.com/klauspost/pgzip;version=3Dv1.0.2-0.20170402124221=
+-0bf5dcad4ada;sha256sum=3Ded381fd7fbfbdb0379158426552b772bbaca91d9fee1a112a=
+84d4500da072dd5 \
+>      gomod://github.com/konsorten/go-windows-terminal-sequences;version=
+=3Dv1.0.1;mod=3D1;sha256sum=3D6b69dafd3cf64d7b57e978848a7e271a2be0a04d9a256=
+4dd2556491d27d0a034 \
+> @@ -144,7 +144,7 @@ SRC_URI +=3D "\
+>      gomod://github.com/mwitkow/go-conntrack;version=3Dv0.0.0-20161129095=
+857-cc309e4a2223;mod=3D1;sha256sum=3D3f15a518f37228f2d08c6b43762d43869a5ab8=
+ae7ba3b5124bf961035e71cc18 \
+>      gomod://github.com/opentracing/opentracing-go;version=3Dv1.0.2;mod=
+=3D1;sha256sum=3D5b59c67ddd6e8f240a0008f739d14875c1af800b8e1b23d95c10c8bea4=
+9655d7 \
+>      gomod://github.com/opentracing/opentracing-go;version=3Dv1.0.3-0.201=
+80606204148-bd9c31933947;sha256sum=3D9f713f45fe865453738633a69f35c8279ecb88=
+f130ca2a140a7b44385656f776 \
+> -    gomod://github.com/paulbellamy/ratecounter;version=3Dv0.2.0;sha256su=
+m=3Dfb012856582335cdac02ee17c08692d75d539158a82eda3a26fb8a51d4ef27e6 \
+> +    gomod://github.com/paulbellamy/ratecounter;version=3Dv0.2.0;mod=3D1;=
+sha256sum=3D775c317e0e805101aacf9509f43a700e945f81a5348fd963b4db1a47d7c1b3b=
+d \
+>      gomod://github.com/peterh/liner;version=3Dv1.0.1-0.20180619022028-8c=
+1271fcf47f;sha256sum=3D0d96c450f9c55a8102f4ae7fd8a583ebfaeba23e3939d6b62843=
+06a82a21430f \
+>      gomod://github.com/philhofer/fwd;version=3Dv1.0.0;sha256sum=3Db4e79b=
+1f5fdfe8c44bf6dae3dd593c62862930114411a30968f304084de1d0b3 \
+>      gomod://github.com/pierrec/lz4;version=3Dv2.0.5+incompatible;mod=3D1=
+;sha256sum=3D2a50cf1993308244414372349e500770dde0671ee259159cf305f4b1f84eba=
+e9 \
+> @@ -161,7 +161,7 @@ SRC_URI +=3D "\
+>      gomod://github.com/prometheus/common;version=3Dv0.6.0;sha256sum=3D6f=
+b74cce1a5bd84cf36954493d6157b1bd2231b20ba2587c224df9737b579314 \
+>      gomod://github.com/prometheus/procfs;version=3Dv0.0.0-20181005140218=
+-185b4288413d;mod=3D1;sha256sum=3D52ded709607588200eff4bcfbd61fce32bb0c3f0e=
+fdd32d846e3ea150b196352 \
+>      gomod://github.com/prometheus/procfs;version=3Dv0.0.2;sha256sum=3Dd5=
+e9430b0a3209ccd75569f7c6f9c9fcfc48f554557f44562352adab9c617464 \
+> -    gomod://github.com/retailnext/hllpp;version=3Dv1.0.1-0.2018030801403=
+8-101a6d2f8b52;sha256sum=3D7863938cb01dfe9d4495df3c6608bedceec2d1195da05612=
+f3c1b0e27d37729d \
+> +    gomod://github.com/retailnext/hllpp;version=3Dv1.0.1-0.2018030801403=
+8-101a6d2f8b52;mod=3D1;sha256sum=3D57ec187307e4b0d0457a8a28a6a32f683e4cfa37=
+4d2449fa72838a18b1230e2e \
+>      gomod://github.com/rogpeppe/go-internal;version=3Dv1.3.0;mod=3D1;sha=
+256sum=3D33b55e839b0754283c3eeec1f33e16cc66432dffb8b8a96d24f536d01e51495b \
+>      gomod://github.com/segmentio/kafka-go;version=3Dv0.1.0;mod=3D1;sha25=
+6sum=3D02ca00937516b509446c5eb0bd0a4e613b76388af2a65e58f9669434ca0668b6 \
+>      gomod://github.com/segmentio/kafka-go;version=3Dv0.2.0;sha256sum=3Db=
+2a88eb5b65fbb75dac0ba5e721cd2cb8e39275d1702a0f97e3c4807d78e8b48 \
+> @@ -170,7 +170,7 @@ SRC_URI +=3D "\
+>      gomod://github.com/smartystreets/assertions;version=3Dv0.0.0-2018092=
+7180507-b2de0cb4f26d;mod=3D1;sha256sum=3D75ccd8771f23a04379e7631044c4fb70b4=
+9b27a09650299752ee712f08a6add7 \
+>      gomod://github.com/smartystreets/goconvey;version=3Dv1.6.4;mod=3D1;s=
+ha256sum=3D37e964c8dc1be33116055227dc75838037c5b5cbbe1b7923d6c6270d0eeafd05=
+ \
+>      gomod://github.com/spaolacci/murmur3;version=3Dv0.0.0-20180118202830=
+-f09979ecbc72;mod=3D1;sha256sum=3D55565ffdc59d315a952774815afa98668ab9011e8=
+cc11e35be5243e63a23260d \
+> -    gomod://github.com/spf13/cast;version=3Dv1.3.0;sha256sum=3D001ed519a=
+3ec007e76e639f72bd9560be70497d499acbf1a32ccf32dc4647d91 \
+> +    gomod://github.com/spf13/cast;version=3Dv1.3.0;mod=3D1;sha256sum=3Db=
+98f2c1774e0b7c0c5747531a6a0c6c8c25a37cf397ff05f1971bbdd97d52fae \
+>      gomod://github.com/spf13/cobra;version=3Dv0.0.3;mod=3D1;sha256sum=3D=
+41ec7f1a12f7934ac349ac6b87d99bc43a8ec4405ef968f3bf0bd0a32625d76a \
+>      gomod://github.com/spf13/pflag;version=3Dv1.0.3;mod=3D1;sha256sum=3D=
+c0119b5dfbbf3c0cb02b168ce0fcc19e7edefa73c9844c4609ebcb57f4394d14 \
+>      gomod://github.com/stretchr/objx;version=3Dv0.1.0;mod=3D1;sha256sum=
+=3D1350354d52d2287a62336ecc0d56232d4c47699af9bba49c67c2b48254da98f1 \
+> --
+> 2.39.5
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#119182): https://lists.openembedded.org/g/openembedde=
+d-devel/message/119182
+> Mute This Topic: https://lists.openembedded.org/mt/115027108/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
