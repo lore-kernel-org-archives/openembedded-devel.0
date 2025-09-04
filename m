@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9548CA1016
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7428CA1013
 	for <webhook@archiver.kernel.org>; Thu,  4 Sep 2025 22:13:31 +0000 (UTC)
-Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.web10.7369.1757024008328412647
+Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ by mx.groups.io with SMTP id smtpd.web10.7367.1757024001548939494
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Sep 2025 15:13:28 -0700
+ Thu, 04 Sep 2025 15:13:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=DwQsy2mL;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-20250904221326279d02528d000207dd-_ntv1e@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 20250904221326279d02528d000207dd
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=gWcRer1R;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-256628-2025090422131936f438213600020756-jbcity@rts-flowmailer.siemens.com)
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 2025090422131936f438213600020756
         for <openembedded-devel@lists.openembedded.org>;
-        Fri, 05 Sep 2025 00:13:26 +0200
+        Fri, 05 Sep 2025 00:13:19 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=9t3AGoKUaOUQihgKbw4p0MUE6H5WcUWIhYUvHY5VlWk=;
- b=DwQsy2mLz6ZS1+tsnCUfabgtthAuvnflYWnEKQXsIDLOpn2WiVz3IuGyEsrmPhD5Xmb3CB
- L4Q40hGTAIZYEExbYlmfzYuuF8nDfCXfZlowjiXN+ePd3tm4epGVqFiZcjwB2/ptuU+YEP5O
- nWDNUsFzAxZwf0Mk2mRWDv3ge1QP96E2niIMsyDekLru2hVZ1yIf3zggtDTDtWxzmm9juxAh
- y5vu8L5U08uXw2Gyml8BSZ/kUxaLWDOLhEyrrgnM5+Cb4G2Za0eMoHch34z9itYwJpobYxH2
- BSd9nucuT5bCSLAV9MMuhReYWq83ZRNzquRcsLTFXmEWrCcnjMkt2OoA==;
+ bh=JRWVDjcSC7UdnAanqlF5rvLu/YBZA6Eag3H2qrTER2k=;
+ b=gWcRer1RYPl1lwt3vq+gcddwMtQ8uHUe0gi9lnNSqwfgX7IER/54OyHsuW6/LPnWR2SfVy
+ UhPWR4/4VYNpbPZKBRGwZzRg2aDcF3s6afXopH+8KYtq0CRHwWECBVurbN6p3PZdfJgcK9y0
+ c+yDM6QRZhk5IeMeb+Jx7wAgSfX/N+Iw2NhjC2jcFXY+vSV1Y+VLx1pevHQBlgXBnDlGdzNb
+ cOx/WG91ZaXMQ0yKKT7i45PqUqKD7vZJPk8DcQClz7urvAFfmLMqsvDkhzz9b4zjTrS8Ewja
+ i7nUlMrfKtcbVRzUyqB67LRiCKJpUTBWJFfsxr3YuHkWgZyVDzwRmfdQ==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 09/10] utf8proc: add new recipe with ptest
-Date: Fri,  5 Sep 2025 00:11:38 +0200
-Message-Id: <20250904221139.3131569-9-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH 08/10] poco: enable postgresql support
+Date: Fri,  5 Sep 2025 00:11:37 +0200
+Message-Id: <20250904221139.3131569-8-peter.marko@siemens.com>
 In-Reply-To: <20250904221139.3131569-1-peter.marko@siemens.com>
 References: <20250904221139.3131569-1-peter.marko@siemens.com>
 MIME-Version: 1.0
@@ -39,92 +39,115 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 22:13:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119306
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119305
 
 From: Peter Marko <peter.marko@siemens.com>
 
-It is needed for poco 1.14+
-Ptest runs for less than a second.
+This was added in recent poco versions and this recipe seems to have
+configs for all features.
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../include/ptest-packagelists-meta-oe.inc    |  1 +
- .../utf8proc/utf8proc/run-ptest               | 15 +++++++++
- .../utf8proc/utf8proc_2.10.0.bb               | 33 +++++++++++++++++++
- 3 files changed, 49 insertions(+)
- create mode 100644 meta-oe/recipes-support/utf8proc/utf8proc/run-ptest
- create mode 100644 meta-oe/recipes-support/utf8proc/utf8proc_2.10.0.bb
+ meta-oe/recipes-support/poco/poco/run-ptest | 21 +++++++++++++++++++++
+ meta-oe/recipes-support/poco/poco_1.13.3.bb | 16 +++++++++++-----
+ 2 files changed, 32 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-index d77b97d576..18324ff0d3 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -44,6 +44,7 @@ PTESTS_FAST_META_OE = "\
-     pv \
-     sdbus-c++ \
-     tomlplusplus \
-+    utf8proc \
-     uthash \
-     xmlsec1 \
-     zeromq \
-diff --git a/meta-oe/recipes-support/utf8proc/utf8proc/run-ptest b/meta-oe/recipes-support/utf8proc/utf8proc/run-ptest
-new file mode 100644
-index 0000000000..349e496d68
---- /dev/null
-+++ b/meta-oe/recipes-support/utf8proc/utf8proc/run-ptest
-@@ -0,0 +1,15 @@
-+#!/bin/sh
-+
-+execute_test() {
-+    eval "./$1" && echo "PASS: $1" || echo "FAIL: $1"
+diff --git a/meta-oe/recipes-support/poco/poco/run-ptest b/meta-oe/recipes-support/poco/poco/run-ptest
+index 95fd988e48..5721ca39e4 100644
+--- a/meta-oe/recipes-support/poco/poco/run-ptest
++++ b/meta-oe/recipes-support/poco/poco/run-ptest
+@@ -7,6 +7,25 @@ if ! nslookup secure.appinf.com >/dev/null 2>&1; then
+   echo 'nameserver 8.8.8.8' > /etc/resolv.conf
+ fi
+ 
++setup_test() {
++  case "$1" in
++    "DataPostgreSQL-testrunner")
++      if [ "$2" = "start" ]; then
++        # init database
++        postgresql-setup initdb
++        # do not require authentication for tests
++        mv /var/lib/postgresql/data/pg_hba.conf /var/lib/postgresql/data/pg_hba.conf.backup
++        sed s:ident$:trust: /var/lib/postgresql/data/pg_hba.conf.backup > /var/lib/postgresql/data/pg_hba.conf
++        # start as in combination of posgresql.service and posgresql.init
++        su -l postgres -c 'pg_ctl start -D /var/lib/postgresql/data -s -o "-p 5432" -w -t 300'
++      else
++        su -l postgres -c 'pg_ctl stop -D /var/lib/postgresql/data -s -m fast'
++        mv /var/lib/postgresql/data/pg_hba.conf.backup /var/lib/postgresql/data/pg_hba.conf
++      fi
++      ;;
++  esac
 +}
 +
-+execute_test "case"
-+execute_test "custom"
-+execute_test "iterate"
-+execute_test "misc"
-+execute_test "printproperty"
-+execute_test "valid"
-+execute_test "charwidth"
-+execute_test "graphemetest data/GraphemeBreakTest.txt"
-+execute_test "normtest data/NormalizationTest.txt"
-diff --git a/meta-oe/recipes-support/utf8proc/utf8proc_2.10.0.bb b/meta-oe/recipes-support/utf8proc/utf8proc_2.10.0.bb
-new file mode 100644
-index 0000000000..e42d16b8b7
---- /dev/null
-+++ b/meta-oe/recipes-support/utf8proc/utf8proc_2.10.0.bb
-@@ -0,0 +1,33 @@
-+SUMMARY = "library that provides operations for data in the UTF-8 encoding"
-+DESCRIPTION = "utf8proc is a small, clean C library that provides Unicode \
-+normalization, case-folding, and other operations for data in the UTF-8 \
-+encoding, supporting Unicode version 16.0"
-+HOMEPAGE = "https://juliastrings.github.io/utf8proc/"
-+SECTION = "libs"
-+
-+LICENSE = "MIT & Unicode-3.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=96d5a3ba306e0f24fb289427af484408"
-+
-+SRC_URI = "\
-+    git://github.com/JuliaStrings/utf8proc;protocol=https;branch=master;tag=v${PV} \
-+    file://run-ptest \
-+"
-+
-+inherit cmake ptest
-+
-+EXTRA_OECMAKE = "\
-+    -DBUILD_SHARED_LIBS=ON \
-+    ${@bb.utils.contains('PTEST_ENABLED', '1', '-DBUILD_TESTING=ON -DUTF8PROC_ENABLE_TESTING=ON ', '', d)} \
-+"
-+
-+do_install_ptest() {
-+    # this list and run-ptest needs to be updated on upgrade (the project uses add_test feature)
-+    for t in "case" custom iterate misc printproperty valid charwidth graphemetest normtest; do
-+        install -m 0755 ${B}/$t ${D}${PTEST_PATH}/
-+    done
-+    install -d ${D}${PTEST_PATH}/data
-+    install -m 0644 ${B}/data/GraphemeBreakTest.txt ${D}${PTEST_PATH}/data/
-+    install -m 0644 ${B}/data/NormalizationTest.txt ${D}${PTEST_PATH}/data/
-+}
-+
-+BBCLASSEXTEND = "native"
+ export POCO_BASE=/usr/lib/poco/ptest
+ export LD_LIBRARY_PATH=${POCO_BASE}/bin:${LD_LIBRARY_PATH}
+ i=0
+@@ -14,7 +33,9 @@ while read runner; do
+   oldpath=`pwd` >/dev/null
+   cd bin
+   echo Testing $runner
++  setup_test $runner start
+   ./$runner -ignore $oldpath/cppignore.lnx -all
++  setup_test $runner stop
+   export res$((i++))=$?
+   cd $oldpath >/dev/null
+ done < testrunners
+diff --git a/meta-oe/recipes-support/poco/poco_1.13.3.bb b/meta-oe/recipes-support/poco/poco_1.13.3.bb
+index 6d93ca4b08..c57c207f82 100644
+--- a/meta-oe/recipes-support/poco/poco_1.13.3.bb
++++ b/meta-oe/recipes-support/poco/poco_1.13.3.bb
+@@ -24,7 +24,7 @@ inherit cmake ptest
+ # By default the most commonly used poco components are built
+ # Foundation is built anyway and doesn't need to be listed explicitly
+ # these don't have dependencies outside oe-core
+-PACKAGECONFIG ??= "XML JSON PDF Util Net NetSSL Crypto JWT Data DataSQLite Zip Encodings Prometheus"
++PACKAGECONFIG ??= "XML JSON PDF Util Net NetSSL Crypto JWT Data DataPostgreSQL DataSQLite Zip Encodings Prometheus"
+ # MongoDB does not build for all architectures yet keep in sync with COMPATIBLE_HOST list in mongodb recipe
+ # and mongodb needs meta-python enabled as well
+ PACKAGECONFIG:remove:riscv32 = "MongoDB"
+@@ -32,7 +32,7 @@ PACKAGECONFIG:remove:riscv64 = "MongoDB"
+ PACKAGECONFIG:remove:mipsarch = "MongoDB"
+ PACKAGECONFIG:remove:powerpc = "MongoDB"
+ # Following options have dependencies on recipes which don't have native variant
+-PACKAGECONFIG:remove:class-native = "MongoDB DataODBC"
++PACKAGECONFIG:remove:class-native = "MongoDB DataODBC DataPostgreSQL"
+ 
+ PACKAGECONFIG[XML] = "-DENABLE_XML=ON,-DENABLE_XML=OFF,expat"
+ PACKAGECONFIG[JSON] = "-DENABLE_JSON=ON,-DENABLE_JSON=OFF"
+@@ -43,6 +43,7 @@ PACKAGECONFIG[NetSSL] = "-DENABLE_NETSSL=ON,-DENABLE_NETSSL=OFF,openssl"
+ PACKAGECONFIG[Crypto] = "-DENABLE_CRYPTO=ON,-DENABLE_CRYPTO=OFF,openssl"
+ PACKAGECONFIG[JWT] = "-DENABLE_JWT=ON,-DENABLE_JWT=OFF,openssl"
+ PACKAGECONFIG[Data] = "-DENABLE_DATA=ON,-DENABLE_DATA=OFF"
++PACKAGECONFIG[DataPostgreSQL] = "-DENABLE_DATA_POSTGRESQL=ON,-DENABLE_DATA_POSTGRESQL=OFF,postgresql,postgresql"
+ PACKAGECONFIG[DataSQLite] = "-DENABLE_DATA_SQLITE=ON,-DENABLE_DATA_SQLITE=OFF,sqlite3"
+ PACKAGECONFIG[Zip] = "-DENABLE_ZIP=ON,-DENABLE_ZIP=OFF"
+ PACKAGECONFIG[Encodings] = "-DENABLE_ENCODINGS=ON,-DENABLE_ENCODINGS=OFF"
+@@ -94,6 +95,9 @@ python populate_packages:prepend () {
+ do_install_ptest () {
+        cp -rf ${B}/bin/ ${D}${PTEST_PATH}
+        cp -f ${B}/lib/libCppUnit.so* ${D}${libdir}
++       if ${@bb.utils.contains('PACKAGECONFIG', 'DataPostgreSQL', 'true', 'false', d)}; then
++            cp -f ${B}/lib/libPocoDataTest.so* ${D}${libdir}
++       fi
+        cp -rf ${B}/*/testsuite/data ${D}${PTEST_PATH}/bin/
+        find "${D}${PTEST_PATH}" -executable -exec chrpath -d {} \;
+        rm -f ${D}${PTEST_PATH}/testrunners
+@@ -108,12 +112,14 @@ PACKAGES_DYNAMIC = "poco-.*"
+ # "poco" is a metapackage which pulls in all Poco components
+ ALLOW_EMPTY:${PN} = "1"
+ 
+-# cppunit is only built if tests are enabled
+-PACKAGES =+ "${PN}-cppunit"
++# cppunit and datatest is only built if tests are enabled
++PACKAGES =+ "${PN}-cppunit ${PN}-datatest"
+ FILES:${PN}-cppunit += "${libdir}/libCppUnit.so*"
+ ALLOW_EMPTY:${PN}-cppunit = "1"
++FILES:${PN}-datatest += "${libdir}/libPocoDataTest.so*"
++ALLOW_EMPTY:${PN}-datatest = "1"
+ 
+-RDEPENDS:${PN}-ptest += "${PN}-cppunit"
++RDEPENDS:${PN}-ptest += "${PN}-cppunit ${PN}-datatest"
+ RDEPENDS:${PN}-ptest += "${@bb.utils.contains('PACKAGECONFIG', 'MongoDB', 'mongodb', '', d)}"
+ RDEPENDS:${PN}-ptest += "${@bb.utils.contains('PACKAGECONFIG', 'Redis', 'redis', '', d)}"
+ 
 
