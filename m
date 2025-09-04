@@ -1,380 +1,149 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <michael.opdenacker@rootcommit.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D42DDCA1013
-	for <webhook@archiver.kernel.org>; Thu,  4 Sep 2025 19:04:50 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
- by mx.groups.io with SMTP id smtpd.web11.3020.1757012683953319569
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E00B4CA1012
+	for <webhook@archiver.kernel.org>; Thu,  4 Sep 2025 19:26:30 +0000 (UTC)
+Received: from beige.elm.relay.mailchannels.net (beige.elm.relay.mailchannels.net [23.83.212.16])
+ by mx.groups.io with SMTP id smtpd.web11.3574.1757013990300966263
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Sep 2025 12:04:44 -0700
+ Thu, 04 Sep 2025 12:26:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=inNJFl34;
- spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-b04271cfc3eso178041066b.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 12:04:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757012682; x=1757617482; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=KLaNs8YPHUIMIAyV/NBOt52R2+0pjn09wFsMIJqyz30=;
-        b=inNJFl34gQv7f2qyPTVgLJ+I69o//JCmspFRNhvWCizo3pI6dbpNCiFLYoz/OYIwCL
-         +YGv0R/97FLikWnkp4aYxRvPhEHV4O4JYJW1nDjsDqMzn2kC+qE9C4Z3VC3hGhNh6sXE
-         zL3z/48hafQHw6ApTxIAi+HMMHUl80Bkl1gEiLM/5XxVZ4iJk8dOpIR2hQPrAM2mj3a9
-         njDhJ5oqfKUC92UyF4mVztCQNxISTqDz/kpzv2lYGSRzr8yWNymn+ynD+VSB6Fd0aeai
-         /EwBNfo1Ynl8vU6JaNZ79L4JQLl2SAtgSnUm3x0SuOElIvmMoy8r16oUMwJ1Y0aPvWnY
-         pLUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757012682; x=1757617482;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=KLaNs8YPHUIMIAyV/NBOt52R2+0pjn09wFsMIJqyz30=;
-        b=TmKx9oVDpvi7jSyES8lmCkkZojLZPIxKCgymPocBitwbL3rHEjpMfH8of1FNx/XqXh
-         kQLz61nrxwifwIIveMIka5lC4yMee+C+FAbf3gtke4w4hT+JEsJFQGtF+dnDzeh2nQl8
-         PXh5i/5Mc1chnxMk55CVDcBNhiVZzX76rkaRjpGqs8H4JuOQBBwWQRvildyJAJYLySri
-         OcEtgfhp/kwkZFJfLfapx40sn40L2cjeDhXHv2NbiehIDkuWHidIi7FVnOsOsGW4FoSA
-         EvdolmNMtJrz9wZwfHaBGcCeWo2yEAFdWpVL8gyoqpfqc7LPFuiLXM2MtfcAdyPmg7LL
-         hnWg==
-X-Forwarded-Encrypted: i=1; AJvYcCXaO/cFhxxP2iLP8VkrXHG0IZguiZd1DpF7hDn9R9QmC5bZU00P6hz7qnBLsLwYp9GSf8OW0JlM34OWtdlppAbV1xs=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyRf6WbW7iJeVIlovpNZb4o8pYE+PGkOh7OC2/fM7A363dEHx5M
-	jL4HPgKzj+0OPVjxPdg8MPZY1T7gLdxG+/2HL58fM74Es7GGlC3Bnb8A
-X-Gm-Gg: ASbGncugI0u/N92GvrjvwuuWTXx8hFamGKiYT9Ik6WOh3LrQ/e47WAyPW8xd58ykHBO
-	cPZMc5KwfnLm0Eb20HyaZaYhWdnH8oslHkJ9FAbYX8D6BQIDAOWILfqv+CM6R+QS7uxx3Gjjdc8
-	0cjQi+tVPB1M6/pJdbzd/8TVzzPbiBwocJlHn6FwhIDl9ewOblOWO2swNuE3Z0ZC2Xsja6AqsgX
-	2Kqc50He8Od8bE/kyBprl8ociiHmvfkvkLF7TSg9ZcsfHxVXwy0Mmhb9LeC3bk52mqoRJxZHYv1
-	+cYNkdq6cHtTGTi32IDMDP1tA3sKRDsSRgR9d7yNvwCyeRkXjDFYDqgzpLV5KacuZPCv7jC1FSD
-	81nwJOGUnuyJeg3Rv91mslcePSOiwYnEk7pjEmfZI3Q==
-X-Google-Smtp-Source: AGHT+IFkguBNDpnKrj1iA1PfFFxMgGNX0fpmyCk56nUcgythFBt7/pNBsDhP+WXoJ4ZZiFTpxclgJQ==
-X-Received: by 2002:a17:906:dc90:b0:b04:4ba7:4e0d with SMTP id a640c23a62f3a-b044ba75282mr1161815766b.26.1757012682018;
-        Thu, 04 Sep 2025 12:04:42 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b047373afcesm348521066b.57.2025.09.04.12.04.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 04 Sep 2025 12:04:41 -0700 (PDT)
-Message-ID: <10b93aea-92a8-4d0a-a365-0e3215e892ee@gmail.com>
-Date: Thu, 4 Sep 2025 21:04:41 +0200
+ dkim=pass header.i=@rootcommit.com header.s=hostingermail-a header.b=Cf540A9U;
+ spf=pass (domain: rootcommit.com, ip: 23.83.212.16, mailfrom: michael.opdenacker@rootcommit.com)
+X-Sender-Id: hostingeremailsmtpin|x-authuser|michael.opdenacker@rootcommit.com
+Received: from relay.mailchannels.net (localhost [127.0.0.1])
+	by relay.mailchannels.net (Postfix) with ESMTP id 5F271854BE;
+	Thu,  4 Sep 2025 19:26:29 +0000 (UTC)
+Received: from fr-int-smtpout11.hostinger.io (100-102-90-229.trex-nlb.outbound.svc.cluster.local [100.102.90.229])
+	(Authenticated sender: hostingeremailsmtpin)
+	by relay.mailchannels.net (Postfix) with ESMTPA id 67E7284673;
+	Thu,  4 Sep 2025 19:26:28 +0000 (UTC)
+ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1757013988; a=rsa-sha256;
+	cv=none;
+	b=Oei0Twrp/PsHzRFlO0M6kEga5a+iBbPQUswFRx3ywS0bjwFqZnPnN8y0Ma6Lr9Q2tqTEb/
+	6ua8qrSY9ffeEcmZyNMtUgTff3UPG2FycTYNAuok/5+j/w07Oqz5UmkZMFuZyZJ5COlke8
+	3NVmGkpj3gIkEdgU7PxxpmICqhBnj1iOQU/P1LxAZxr0DN82RM5JU5zYgipxkd8bOpTEz5
+	muPkbTTEfetWEeRwP/PBnTSFNnBBbTKZDOdx17UWuBcUrfdnCI2PGbd53CldyaxOjerAUG
+	lWCMX4XKbgzgGIC1XPYAobZKmC+EEHWxLcrSoTEjLLql8WBd610ZX3I1PgRvVA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mailchannels.net;
+	s=arc-2022; t=1757013988;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:dkim-signature;
+	bh=gXWKLi7k8RrQ3dl+oKaYp4ZaIXaDcp/WKRbomMSLhEs=;
+	b=KP1EEGWRDsD8/eVVlCQ92R8g4P4ZSAl8T1uc0cT7YTxBxiQ7m/fROT/qNqcpipKlTfziUL
+	JCRrijAabejEEOhqjKnSFvtKaAAfIcLdU4xbWp2iLJWR70GVpcYPk45aBTUK98SCDg8aM9
+	NNVPDszkNM5wfRBUKreXtQ1eumXZxzS9GKSGp+rEri5syHMC1xMBZC6e1QPQnlkSzxQ/bq
+	W3sVsnCqF/lBVaSIYrqBLbGUylWx/8fUeUibUY+RX6bl0bXrHzuguqD86eIYOuE1e3S+r1
+	K2mKbA8Y0lob1B6IyWtkQRRpvvOd/gvc0HQySCwVI8fWOQtYkf5CcG/swqctiw==
+ARC-Authentication-Results: i=1;
+	rspamd-8b9589799-8nm74;
+	auth=pass smtp.auth=hostingeremailsmtpin
+ smtp.mailfrom=michael.opdenacker@rootcommit.com
+X-Sender-Id: hostingeremailsmtpin|x-authuser|michael.opdenacker@rootcommit.com
+X-MC-Relay: Neutral
+X-MailChannels-SenderId: 
+ hostingeremailsmtpin|x-authuser|michael.opdenacker@rootcommit.com
+X-MailChannels-Auth-Id: hostingeremailsmtpin
+X-Eight-Cooperative: 51542af52c119a56_1757013989087_403775838
+X-MC-Loop-Signature: 1757013989087:3650258433
+X-MC-Ingress-Time: 1757013989086
+Received: from fr-int-smtpout11.hostinger.io ([UNAVAILABLE]. [148.222.54.47])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
+	by 100.102.90.229 (trex/7.1.3);
+	Thu, 04 Sep 2025 19:26:29 +0000
+Received: from [IPV6:2001:861:4448:6b00:1c5:245b:5c:a19] (unknown [IPv6:2001:861:4448:6b00:1c5:245b:5c:a19])
+	(Authenticated sender: michael.opdenacker@rootcommit.com)
+	by smtp.hostinger.com (smtp.hostinger.com) with ESMTPSA id 4cHqGV1WD9z15Zj;
+	Thu,  4 Sep 2025 19:26:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rootcommit.com;
+	s=hostingermail-a; t=1757013986;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=gXWKLi7k8RrQ3dl+oKaYp4ZaIXaDcp/WKRbomMSLhEs=;
+	b=Cf540A9U8jEEJnNygil95g4nCGaEvvjgnGJ6Sp6aWWoYlLwI41sbp3hIDBfdWBlsylBeNq
+	FZ1uE3cxMgpq9bt2d2PpKvQfgY4LdRyNrteYFEPanWta2CLcIp+Zne1D2MnGVTGCLKoNsU
+	qGqousvf8yqYGB4KgZlPVrx2W4Xp0EzjWsvNq9QpKk+deq/8j6KU9BgU7a0mt/bCgJD27S
+	dFThNSdMeTOD8igwxTMgE+iCBzAYE2vBffmdA65OyzZEPCGlwsbJDlL0JDX5oO+oJUVd69
+	y9XK0B6cfB8TJ/dpLFXhDMsYc3ICBWqJwwOgZqo4opRr28xwoYPO59v/Bw3z4Q==
+Message-ID: <32bb2e07-7b0a-4822-b6c0-794bfda5c97d@rootcommit.com>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][kirkstone][PATCH] json-schema-validator: backport
- v2.2.0
-To: youngseok1.jeong@lge.com, openembedded-devel@lists.openembedded.org
-References: <20250818063802.12680-1-youngseok1.jeong@lge.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250818063802.12680-1-youngseok1.jeong@lge.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Cc: michael.opdenacker@rootcommit.com,
+ openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH] kernel-hardening-checker:
+ backport recipe
+To: skandigraun@gmail.com
+References: <20250819203929.1272607-1-michael.opdenacker@rootcommit.com>
+ <1d47e8eb-0753-47e3-9339-b469f2f141f1@gmail.com>
+ <e37ef122-48fa-4422-890b-22f9ad8e9d33@rootcommit.com>
+ <698ff4df-4420-4f7d-a07c-bc022083ec5f@gmail.com>
+Content-Language: en-US, fr
+From: Michael Opdenacker <michael.opdenacker@rootcommit.com>
+Organization: Root Commit
+In-Reply-To: <698ff4df-4420-4f7d-a07c-bc022083ec5f@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Date: Thu,  4 Sep 2025 19:26:26 +0000 (UTC)
+X-CM-Envelope: MS4xfOo8bwLToCNsAcuLmLXtWkaODc681G4mqRe03PTk8fX3yQUFw22MSiLCkH4WyNheUDKYR6x/I+ivD+mDKWGr4T+v/0u35L/UiZ9MrlQNod3Y9RE2uzAE oDtaZkIa8Sh0HCnYcW/z68vNWqI8LQDrE6RI9cGwLxf+3QyHHGbByyryK8NJxsF7IuKxqylipDXzo64I/0bfULMmkgKlX7+sk4NZfv4hb1P3teDIVaV9UnUH HgbW1/HBfwpSvI08gs4qJrrXhtf5FXXWyWrpqOXJNUa3IkBxDSDFzz0URICWSlR7SamGKjWvakk8iF3X/+lX4vnhYQ/mo/lcXc/KqO8OWg2mklnyfeZjiqgE OYgPELxitU61eDO3m0usjkinQV+yG45rCp+1coP/83M6NBNreEQp7/pogeEOiAE13QskllY7
+X-CM-Analysis: v=2.4 cv=DJTd4DNb c=1 sm=1 tr=0 ts=68b9e7e2 a=moH8wFLobXlosxT6PNuGGw==:617 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=Q4-j1AaZAAAA:8 a=iGHA9ds3AAAA:8 a=d70CFdQeAAAA:8 a=RYqSDLjjAPyGnXIOvnYA:9 a=QEXdDO2ut3YA:10 a=9H3Qd4_ONW2Ztcrla5EB:22 a=nM-MV4yxpKKO9kiQg6Ot:22 a=NcxpMcIZDGm-g932nG_k:22
+X-AuthUser: michael.opdenacker@rootcommit.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 19:04:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119294
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 19:26:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119295
 
-This seems to be a proper release, not only a bugfix one - the author
-also summarizes as "a while bunch of changes".
-I think a targeted patch for the sysroot issue from 
-https://lists.openembedded.org/g/openembedded-devel/message/119084 would
-be better.
+Greetings.
 
-On 8/18/25 08:38, youngseok1.jeong via lists.openembedded.org wrote:
-> From: Youngseok Jeong <youngseok1.jeong@lge.com>
+On 8/20/25 10:28, Gyorgy Sarvari via lists.openembedded.org wrote:
+>> However, this has already been accepted in master
+>> (https://git.openembedded.org/meta-openembedded/commit/?id=5ae3536204ba3764b03647ab75169ee65ca43531)
+>> It's true that meta-oe didn't originally have this recipe, but what's
+>> the harm in sharing with LTS users that could have the same need as
+>> mine? The risk of breaking tests again meta-oe?
+> At the end of the day it's of course the branch maintainer's call if he
+> accepts the extra recipe and the testing and maintenance tasks that come
+> with it, but I don't recall it happening in recent years.
 >
-> The v2.1.0 has issues related sysroot when some recipes DEPENDS it.
-> For details, when CMakeList in some recipes has the line like
-> find_package(nlohmann_json_schema_validator REQUIRED),
-> that issue is occurred.
+> I think it would make precedent - if this recipe is accepted, why
+> wouldn't others be accepted? When does a small addition become an
+> unacceptably risky or big one? Stability is boring - and that's the
+> point. This of course is just the personal opinion of an internet rando
+> (me), and not official in any shape or form.
 >
-> See error log:
-> The imported target "nlohmann_json_schema_validator" references the file
-> "/usr/lib/libnlohmann_json_schema_validator.so.2.1.0"
-> but this file does not exist.
->
-> A patch to fix this sysroot issue exists and was included in v2.2.0:
-> https://github.com/pboettch/json-schema-validator/pull/128/commits/63406ef87f23c55d8a03a0ac6e3149a59edf037e
-> So backporting the 2.2.0 from scarthgap is better way rather than
-> applied that patch to kirkstone.
->
-> Signed-off-by: Youngseok Jeong <youngseok1.jeong@lge.com>
-> ---
->  ...or-Install-off-if-it-finds-it-via-li.patch | 29 ++++++++
->  .../0002-Fix-assumed-signed-char.patch        | 71 +++++++++++++++++++
->  ...003-For-root-value-use-empty-pointer.patch | 41 +++++++++++
->  ...ch => 0004-cmake-Use-GNUInstallDirs.patch} | 23 +++---
->  .../json-schema-validator_2.1.0.bb            | 16 -----
->  .../json-schema-validator_2.2.0.bb            | 19 +++++
->  6 files changed, 170 insertions(+), 29 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0001-Set-Json_validator-Install-off-if-it-finds-it-via-li.patch
->  create mode 100644 meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0002-Fix-assumed-signed-char.patch
->  create mode 100644 meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0003-For-root-value-use-empty-pointer.patch
->  rename meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/{0001-cmake-Use-GNUInstallDirs.patch => 0004-cmake-Use-GNUInstallDirs.patch} (60%)
->  delete mode 100644 meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.1.0.bb
->  create mode 100644 meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb
->
-> diff --git a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0001-Set-Json_validator-Install-off-if-it-finds-it-via-li.patch b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0001-Set-Json_validator-Install-off-if-it-finds-it-via-li.patch
-> new file mode 100644
-> index 0000000000..6e6a4b93e8
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0001-Set-Json_validator-Install-off-if-it-finds-it-via-li.patch
-> @@ -0,0 +1,29 @@
-> +From 35939115142db6cd366ab11b29692a0179338ddf Mon Sep 17 00:00:00 2001
-> +From: Parian Golchin <Parian.Golchin@iris-sensing.com>
-> +Date: Fri, 18 Aug 2023 15:54:25 +0200
-> +Subject: [PATCH 1/3] Set Json_validator Install off if it finds it via linking
-> +
-> +Upstream-Status: Inappropriate [newer version of cmake in main branch]
-> +
-> +Signed-off-by: Parian Golchin <Parian.Golchin@iris-sensing.com>
-> +---
-> + CMakeLists.txt | 3 +++
-> + 1 file changed, 3 insertions(+)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index f636734..9e4587f 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -55,6 +55,9 @@ option(JSON_VALIDATOR_BUILD_EXAMPLES "Build examples" ${JSON_VALIDATOR_IS_TOP_LE
-> + 
-> + if(NOT TARGET nlohmann_json::nlohmann_json)
-> +     find_package(nlohmann_json REQUIRED)
-> ++else()
-> ++    message(STATUS "Found nlohmann_json::nlohmann_json-target - linking with it")
-> ++    set(JSON_VALIDATOR_INSTALL OFF)
-> + endif()
-> + 
-> + target_link_libraries(
-> +-- 
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0002-Fix-assumed-signed-char.patch b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0002-Fix-assumed-signed-char.patch
-> new file mode 100644
-> index 0000000000..1c4b871bb6
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0002-Fix-assumed-signed-char.patch
-> @@ -0,0 +1,71 @@
-> +From 2065015da40cf79dd8ec9e3f186538e17c3b592f Mon Sep 17 00:00:00 2001
-> +From: Robert Joslyn <robert.joslyn@redrectangle.org>
-> +Date: Wed, 30 Nov 2022 13:07:29 -0800
-> +Subject: [PATCH 2/3] Fix assumed signed char
-> +
-> +The code assumes that char is signed, but whether char is signed or
-> +unsigned is implementation defined. On some architectures like PowerPC,
-> +GCC treats char as unsigned resulting in compile errors:
-> +
-> +	smtp-address-validator.cpp:213:1: error: narrowing conversion of '-32' from 'int' to 'char' [-Wnarrowing]
-> +
-> +Fix this by specifying signed char.
-> +
-> +Upstream-Status: Backport [https://github.com/pboettch/json-schema-validator/commit/491ac44026e08f31790f5cacffa62e168bb35e32]
-> +
-> +Signed-off-by: Parian Golchin <Parian.Golchin@iris-sensing.com>
-> +---
-> + src/smtp-address-validator.cpp | 16 ++++++++--------
-> + 1 file changed, 8 insertions(+), 8 deletions(-)
-> +
-> +diff --git a/src/smtp-address-validator.cpp b/src/smtp-address-validator.cpp
-> +index a63ead0..3903b51 100644
-> +--- a/src/smtp-address-validator.cpp
-> ++++ b/src/smtp-address-validator.cpp
-> +@@ -63,7 +63,7 @@ static const short _address_key_offsets[] = {
-> + 	1363, 1365, 1367, 1368, 1370, 1388, 0
-> + };
-> + 
-> +-static const char _address_trans_keys[] = {
-> ++static const signed char _address_trans_keys[] = {
-> + 	-32, -19, -16, -12, 34, 45, 61, 63,
-> + 	-62, -33, -31, -17, -15, -13, 33, 39,
-> + 	42, 43, 47, 57, 65, 90, 94, 126,
-> +@@ -711,7 +711,7 @@ bool is_address(const char* p, const char* pe)
-> + 	{
-> + 		int _klen;
-> + 		unsigned int _trans = 0;
-> +-		const char * _keys;
-> ++		const signed char * _keys;
-> + 		const signed char * _acts;
-> + 		unsigned int _nacts;
-> + 		_resume: {}
-> +@@ -728,9 +728,9 @@ bool is_address(const char* p, const char* pe)
-> + 			
-> + 			_klen = (int)_address_single_lengths[cs];
-> + 			if ( _klen > 0 ) {
-> +-				const char *_lower = _keys;
-> +-				const char *_upper = _keys + _klen - 1;
-> +-				const char *_mid;
-> ++				const signed char *_lower = _keys;
-> ++				const signed char *_upper = _keys + _klen - 1;
-> ++				const signed char *_mid;
-> + 				while ( 1 ) {
-> + 					if ( _upper < _lower ) {
-> + 						_keys += _klen;
-> +@@ -752,9 +752,9 @@ bool is_address(const char* p, const char* pe)
-> + 			
-> + 			_klen = (int)_address_range_lengths[cs];
-> + 			if ( _klen > 0 ) {
-> +-				const char *_lower = _keys;
-> +-				const char *_upper = _keys + (_klen<<1) - 2;
-> +-				const char *_mid;
-> ++				const signed char *_lower = _keys;
-> ++				const signed char *_upper = _keys + (_klen<<1) - 2;
-> ++				const signed char *_mid;
-> + 				while ( 1 ) {
-> + 					if ( _upper < _lower ) {
-> + 						_trans += (unsigned int)_klen;
-> +-- 
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0003-For-root-value-use-empty-pointer.patch b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0003-For-root-value-use-empty-pointer.patch
-> new file mode 100644
-> index 0000000000..eac997ae58
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0003-For-root-value-use-empty-pointer.patch
-> @@ -0,0 +1,41 @@
-> +From fa49c29942763285c51b7d2dea417d9f51e4961f Mon Sep 17 00:00:00 2001
-> +From: Sven Fink <sven.fink@wipotec.com>
-> +Date: Fri, 13 Jan 2023 09:15:42 +0100
-> +Subject: [PATCH 3/3] For root value, use empty pointer
-> +
-> +Upstream-Status: Backport [https://github.com/pboettch/json-schema-validator/commit/59c9d6200bf3cd54b4fc717ec1660c91eddb4d1a]
-> +
-> +Signed-off-by: Parian Golchin <Parian.Golchin@iris-sensing.com>
-> +---
-> + src/json-validator.cpp | 8 ++++++++
-> + 1 file changed, 8 insertions(+)
-> +
-> +diff --git a/src/json-validator.cpp b/src/json-validator.cpp
-> +index 7f34553..3c73d98 100644
-> +--- a/src/json-validator.cpp
-> ++++ b/src/json-validator.cpp
-> +@@ -553,6 +553,9 @@ class type_schema : public schema
-> + 					else_->validate(ptr, instance, patch, e);
-> + 			}
-> + 		}
-> ++		if (instance.is_null()) {
-> ++			patch.add(nlohmann::json::json_pointer{}, default_value_);
-> ++		}
-> + 	}
-> + 
-> + protected:
-> +@@ -1134,6 +1137,11 @@ public:
-> + 			propertyNames_ = schema::make(attr.value(), root, {"propertyNames"}, uris);
-> + 			sch.erase(attr);
-> + 		}
-> ++
-> ++		attr = sch.find("default");
-> ++		if (attr != sch.end()) {
-> ++			set_default_value(*attr);
-> ++		}
-> + 	}
-> + };
-> + 
-> +-- 
-> +2.25.1
-> +
-> diff --git a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0001-cmake-Use-GNUInstallDirs.patch b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0004-cmake-Use-GNUInstallDirs.patch
-> similarity index 60%
-> rename from meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0001-cmake-Use-GNUInstallDirs.patch
-> rename to meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0004-cmake-Use-GNUInstallDirs.patch
-> index 4b1184a394..8199e4f8d4 100644
-> --- a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0001-cmake-Use-GNUInstallDirs.patch
-> +++ b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0004-cmake-Use-GNUInstallDirs.patch
-> @@ -1,4 +1,4 @@
-> -From e0b1ad02c678513412aba95a1b2fb4005c3c0452 Mon Sep 17 00:00:00 2001
-> +From a42d374aa260caec5f683c75d0db322811e51ab9 Mon Sep 17 00:00:00 2001
->  From: Khem Raj <raj.khem@gmail.com>
->  Date: Sat, 19 Mar 2022 22:40:49 -0700
->  Subject: [PATCH] cmake: Use GNUInstallDirs
-> @@ -13,10 +13,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
->   1 file changed, 5 insertions(+), 3 deletions(-)
->  
->  diff --git a/CMakeLists.txt b/CMakeLists.txt
-> -index c4cc218..594dc5f 100644
-> +index 9e4587f..3eff234 100644
->  --- a/CMakeLists.txt
->  +++ b/CMakeLists.txt
-> -@@ -122,11 +122,13 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-> +@@ -93,11 +93,13 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
->       endif()
->   endif()
->   
-> @@ -32,15 +32,12 @@ index c4cc218..594dc5f 100644
->               RUNTIME DESTINATION bin)
->   
->       install(FILES src/nlohmann/json-schema.hpp
-> -@@ -155,7 +157,7 @@ if(JSON_VALIDATOR_INSTALL)
-> -     # Set Up the Project Targets and Config Files for CMake
-> +@@ -129,7 +131,7 @@ endif()
->   
-> -     # Set the install path to the cmake config files
-> --    set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_PREFIX}/lib/cmake/${PROJECT_NAME})
-> -+    set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
-> + if(JSON_VALIDATOR_INSTALL)
-> +     # Set the install path to the cmake config files (Relative, so install works correctly under Hunter as well)
-> +-    set(INSTALL_CMAKE_DIR "lib/cmake/${PROJECT_NAME}")
-> ++    set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
-> +     set(INSTALL_CMAKEDIR_ROOT share/cmake)
->   
-> -     # Create the ConfigVersion file
-> -     include(CMakePackageConfigHelpers) # write_basic_package_version_file
-> --- 
-> -2.35.1
-> -
-> +     # Install Targets
-> diff --git a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.1.0.bb b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.1.0.bb
-> deleted file mode 100644
-> index 00d26d7b34..0000000000
-> --- a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.1.0.bb
-> +++ /dev/null
-> @@ -1,16 +0,0 @@
-> -SUMMARY = "JSON schema validator for JSON for Modern C++"
-> -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=c441d022da1b1663c70181a32225d006"
-> -
-> -SRC_URI = "git://github.com/pboettch/json-schema-validator;branch=master;protocol=https \
-> -           file://0001-cmake-Use-GNUInstallDirs.patch \
-> -          "
-> -SRCREV = "27fc1d094503623dfe39365ba82581507524545c"
-> -
-> -S = "${WORKDIR}/git"
-> -
-> -DEPENDS += "nlohmann-json"
-> -
-> -inherit cmake
-> -EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON -DBUILD_EXAMPLES=OFF -DBUILD_TESTS=OFF"
-> -
-> diff --git a/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb
-> new file mode 100644
-> index 0000000000..02dcdb2696
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/json-schema-validator/json-schema-validator_2.2.0.bb
-> @@ -0,0 +1,19 @@
-> +SUMMARY = "JSON schema validator for JSON for Modern C++"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=c441d022da1b1663c70181a32225d006"
-> +
-> +SRC_URI = "git://github.com/pboettch/json-schema-validator;branch=main;protocol=https \
-> +           file://0001-Set-Json_validator-Install-off-if-it-finds-it-via-li.patch \
-> +           file://0002-Fix-assumed-signed-char.patch \
-> +           file://0003-For-root-value-use-empty-pointer.patch \
-> +           file://0004-cmake-Use-GNUInstallDirs.patch \
-> +           "
-> +
-> +SRCREV = "6b17782d6a5d1dee5d2c4fc5d25ffb1123913431"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +DEPENDS += "nlohmann-json"
-> +
-> +inherit cmake
-> +EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON -DJSON_VALIDATOR_BUILD_TESTS=OFF -DJSON_VALIDATOR_BUILD_EXAMPLES=OFF"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#118991): https://lists.openembedded.org/g/openembedded-devel/message/118991
-> Mute This Topic: https://lists.openembedded.org/mt/114759438/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+>> I'm reading https://wiki.yoctoproject.org/wiki/Stable_Release_and_LTS
+>> ... I guess such a backport qualifies as a "new feature". But does this
+>> really apply to meta-openembedded which is not officially part of the LTS?
+>>
+>> On the other hand, mixin layers are supposed to be for "potentially
+>> invasive changes", which is not the case here.
+>> So, where are such (new) backports supposed to be shared?
+> Such backports usually live in product specific layers (sometimes in
+> other community layers that take up the task of acting like a mixin
+> layer) until the project updates to a release that contains that recipe.
+
+Any further objections to adding this backport to the scarthgap branch 
+of meta-oe?
+
+I guess there is no risk of breaking anything else in meta-oe/scarthgap, 
+but if we don't want to accept exceptions to the rule (even for meta-oe 
+which is not strictly part of the LTS), I'll create my own layer for LTS 
+users who could be interested. I guess meta-security won't be a suitable 
+candidate the upstream recipe is in meta-oe.
+
+Cheers
+Michael.
+
+-- 
+Michael Opdenacker
+Root Commit
+Yocto Project and OpenEmbedded Training course - Learn by doing:
+https://rootcommit.com/training/yocto/
 
 
