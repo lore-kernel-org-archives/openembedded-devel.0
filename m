@@ -2,101 +2,118 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC6D9CA1013
-	for <webhook@archiver.kernel.org>; Thu,  4 Sep 2025 18:44:30 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
- by mx.groups.io with SMTP id smtpd.web11.2513.1757011464001832674
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB0EBCA1012
+	for <webhook@archiver.kernel.org>; Thu,  4 Sep 2025 18:49:40 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.web10.2576.1757011772216519962
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Sep 2025 11:44:24 -0700
+ Thu, 04 Sep 2025 11:49:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iTr0IONH;
- spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-b02c719a117so254667666b.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 11:44:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=L/Ujhmay;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-3d3ff4a4d6fso1090870f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 11:49:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757011462; x=1757616262; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1757011771; x=1757616571; darn=lists.openembedded.org;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Hw4IRhDhyulHiJFR9iloo9frNR83vx7oNAS30pnX9h0=;
-        b=iTr0IONHQVQIUqvpeag9L1OqtMe3Gk+4BJwFEZEdb16GNj3/FQqodA4+UwA0Vr1Myx
-         f3H7BHTuqNZtzry0gcC9gSZxZAluusC9jfXycnzUkX0jkEQd/E/DocL5JyzjhlHIj3ui
-         uEnGX7viSaffgYAs7b3oktvuHrs2ShnJq230gfPEJzyxr49nb8U/BYOgkIYv4RDRqFqr
-         wSRyGkCZMDCRqOBsR0w8jgdU2LsCAjPS0i8f1PsfWt/TWNpgf+ixFFUi2O32wfMQeBZN
-         0Wo06c0zBHvXbLluUcgJfEYREE+wGwGijf3LHxc0Dn9uJoBWHhOLxmJTa6ff6cf3cgJU
-         GRiA==
+        bh=bJPu9DgGuWXZN3Q9dgiE7QKgAExomLTuAj1qZ3Wosig=;
+        b=L/Ujhmay6YlbYlTXED1D10zTVFToTAqUs4LFCMOAapWYoUuv2tFXQ4AXOrEc0TE1nr
+         GAsccijCYzcQSeOIgNlwGzCWu1Srub4NXDPOgsNxOyGawtyiRE0NpIlO0XbgXAMnoPlp
+         /PFIiE5YPuZ/GNJUPIMHw+u7crKrnQu8bCrOExkboqY6BHT5p3s/5Es5rJFLBT2Ii5vd
+         0JjcU7rvFbvfifavvB5EVLZduaDxWuYivgSw64Cm+n6hlHnqZPIlUnbFU8QakFD3V+3X
+         G4GsDQXj20dDffpMai6Im25Py1w9SmsdlXsk0fHBZPLOeiMARSfup1S+od2e49pRIyxE
+         ciog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757011462; x=1757616262;
+        d=1e100.net; s=20230601; t=1757011771; x=1757616571;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Hw4IRhDhyulHiJFR9iloo9frNR83vx7oNAS30pnX9h0=;
-        b=Eb1VQ10NcL05YA4BXvq7/tKkgBHw9UnJub+iZ0TdZaduRc77+HpQiRe3ak8+foaSW2
-         RKeiamdmPbWzdPlyArI6hHmMozyOQCSj6xHqN91BEF1OGLvj+dn5MxbO1wAbqom5P9TB
-         +iSr80MtbklCMW16XCkI/tVb11x05GLeD/TgFAH2Mpa96D13r6TldPlVDqxC/kxEF6gH
-         GXUCdQmiPRhoO5MDdFza1eAR60X2gza2W6YxjPTaFjja4XsjGWuR8PS17ygOMx+AjeUX
-         Vpmx07/A0nnZVfYqyWdzPo+bJCPWOlVYQnZCS5VS4w2OfHJAKTXTboYNqIopGxqfeq1V
-         mTzA==
-X-Forwarded-Encrypted: i=1; AJvYcCUCruJdklmItQCsqmE2XRO923FkkMbI1I2tyByvsBUGiXN+GlSVbQbT8MzMAEYOCHzIf3jC8O0OAT3Z0feMA1+t4SM=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwKSxr9rKHtuqPc6rggsSUspa4c4c+VEQUm6C5ztqQMumyCsG/u
-	6D9TpEVok7LQMbYa9VTlCns9kEo5DXVCdnG+crYWPXPsUgGgaNGW4VDC
-X-Gm-Gg: ASbGncsb7aXAz0haX7K2RfwJhroUQfF2m4EBWvntiXLwVm3oF/ItDpKbp/nOvSQdP7j
-	NBOGKXuTfNDk2/DAFyF03tmJq2f6nj3v2T0RXkVZ9HwN6V44SWOzf8TCVKbnHuzyGSY8wvU4gbE
-	L+jVahuB4xN6EsS8bgnyFt7Lmxwro/Bh3gj4jVMNe+t1sMMvObL/tishww8LIqtZ/9amgRyqcD9
-	qhrM1kdFQv2hMaTFN2bLfNBqT7RVNMoEhXl98Moh24mwTNZw4M5Y+D5O4VBGVyPyMXMLueZ30KI
-	SosyFI6rXFqjr7sLhcq2jzmEVN88kU1XQGgoHISC4vVzxg7Bgw9xTPdKUliTEqcvefoz9DLW4Q0
-	RkNyJOFeuKipql4qrPvdCTvadYt1cbWz9i2LkU/97hg==
-X-Google-Smtp-Source: AGHT+IEePRwD/QwWHkaUMriP8qJP5b2pbXiEKCraFJAKbcHOSGVdLDefNxevtvpAssBEKrKAfonojA==
-X-Received: by 2002:a17:907:3d87:b0:b04:6e26:7351 with SMTP id a640c23a62f3a-b046e267adcmr733025366b.54.1757011462246;
-        Thu, 04 Sep 2025 11:44:22 -0700 (PDT)
+        bh=bJPu9DgGuWXZN3Q9dgiE7QKgAExomLTuAj1qZ3Wosig=;
+        b=XA3TiGp3riGgA5X4+VncHygrEzlxcN+Bh4/bH1dBX6rtvk8IxJX/VMHzAXWL/C13DY
+         8WEsINQJCYpNqvmpsRu8rksYDdEA/v07Hl4uqDZuwxILQfsEPt6t1ztKGQyt77tZgsl5
+         cHdU04EUiEJXg2gqkpFtj8BrifDxgPE8Ljr+8rh2y+GO2Zs13wiBDdbdNkkGP1ivx3p7
+         A5XZoT4I6Ui5FTRQGTjq2+OjIsBe7oqh5GPwx4G7l3YWkogFsPbGrlIPjzOdBd/hGD/8
+         up89ano7MJaVC+Xzeu3FpmaE7mnBtyFRy4oykfK4Vn9s1YHkBArOjiLE2RnCGu/37lRr
+         pOgQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWMwDAAT7qDSwc5BpoF9MdnW8awuhAG4k4HuPkMizPZSDCKfup1jEj1ttbEZfdL6ACEFg/5uyTLC+BggwPp67WLies=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzBtoG+lJNTCM4fC5tDXb3KDb/+uC4tfQqSO/HcCz3o3Ds5x4LR
+	6LIhLBzVVDCFkfqVcmXQnEbxTla+gq7hMaP1PLzGUvP8zEa6xXlpTdnVy8YILhb7
+X-Gm-Gg: ASbGnctdrd03OpxgQxvMyMFIGslubzBelxzfPSbJczFRpo2sFt2iRA3SbONPh6KxxoI
+	PsRf4BXhq6CleQIR4ju8oE14ouzvXb394+pttSZziJkjpBTHsc/LKucCJqK0VShRhkY+fUg2yns
+	jogdAwesZ0CwyOHm0bpdq3veRkdtdOmMMQcOEnlVJ7oIIHfrvwZPV0tM0wgx7r6/XMiJDYQ1ZAE
+	1blq3kKevXGtvP2sg4fNcXpanoYAfhtE2YThYOLgQVx57hmaJsfcWjMTMqS6cZ7a9+wVwuW76of
+	h8VVGwrmkvytR/L8nKFI2J9RcJs+5soc68F9GpxoD5jBrgQz7awV/YZsXp52vK2jR4gljf6a+ie
+	i54lmkw3ov79CqqaIeMHXLp3TV+NicV2UvuqwIkHHBw==
+X-Google-Smtp-Source: AGHT+IFZbcilExgc3JRoRv53xmkWYX2hDT/cOSjmCYTS5SYKC+oIsxPMCvbFZUyz7ahO5nqfX46GEA==
+X-Received: by 2002:a05:6000:1aca:b0:3e0:cea3:f61a with SMTP id ffacd0b85a97d-3e0cea3f852mr2879024f8f.56.1757011770436;
+        Thu, 04 Sep 2025 11:49:30 -0700 (PDT)
 Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b04265165e0sm1124415466b.74.2025.09.04.11.44.21
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3d95df59e50sm13434001f8f.23.2025.09.04.11.49.29
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 04 Sep 2025 11:44:21 -0700 (PDT)
-Message-ID: <c7e46f0d-533b-4ccc-864a-7b156ef93b1e@gmail.com>
-Date: Thu, 4 Sep 2025 20:44:21 +0200
+        Thu, 04 Sep 2025 11:49:30 -0700 (PDT)
+Message-ID: <b1a5780d-6a01-4d3e-b9d0-59634c8273ee@gmail.com>
+Date: Thu, 4 Sep 2025 20:49:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [kirkstone][PATCH] tcpdump: Remove patch fuzz from
- CVE-2024-2397
-To: joerg.sommer@navimatix.de, openembedded-devel@lists.openembedded.org
-References: <129b72ccb76876396959d3024fbe9935f25aa2dc.1753993689.git.joerg.sommer@navimatix.de>
+Subject: Re: [oe] [meta-networking][kirkstone][PATCH 1/1] tcpdump: refresh
+ CVE-2024-2397 patch to remove fuzz warning
+To: Haixiao.Yan.CN@windriver.com, openembedded-devel@lists.openembedded.org
+References: <20250820024527.2917040-1-haixiao.yan.cn@windriver.com>
 Content-Language: en-US
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <129b72ccb76876396959d3024fbe9935f25aa2dc.1753993689.git.joerg.sommer@navimatix.de>
+In-Reply-To: <20250820024527.2917040-1-haixiao.yan.cn@windriver.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 18:44:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119292
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 18:49:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119293
 
-Just a small note: this was a few days earlier submitted also by others:
+Note: This is a duplicate of
 https://lists.openembedded.org/g/openembedded-devel/message/118535
 
-On 7/31/25 22:28, Jörg Sommer via lists.openembedded.org wrote:
-> From: Jörg Sommer <joerg.sommer@navimatix.de>
+On 8/20/25 04:45, Yan, Haixiao (CN) via lists.openembedded.org wrote:
+> From: Haixiao Yan <haixiao.yan.cn@windriver.com>
 >
-> Applying patch CVE-2024-2397.patch
-> patching file print-ppp.c
-> Hunk #1 succeeded at 42 with fuzz 2 (offset 5 lines).
-> Hunk #2 succeeded at 1365 (offset 5 lines).
-> Hunk #3 succeeded at 1372 (offset 5 lines).
-> Hunk #4 succeeded at 1397 (offset 5 lines).
-> Hunk #5 succeeded at 1447 (offset 5 lines).
+> The CVE-2024-2397 patch was applied with fuzz and offset adjustments:
+>   Hunk #1 succeeded at 42 with fuzz 2 (offset 5 lines).
+>   ...
 >
-> Signed-off-by: Jörg Sommer <joerg.sommer@navimatix.de>
+> Refreshed the patch against tcpdump 4.99.4 sources to align context and
+> line numbers.
+>
+> Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
 > ---
->  .../tcpdump/tcpdump/CVE-2024-2397.patch            | 14 +++++++-------
->  1 file changed, 7 insertions(+), 7 deletions(-)
+>  .../tcpdump/tcpdump/CVE-2024-2397.patch       | 26 +++++++++++--------
+>  1 file changed, 15 insertions(+), 11 deletions(-)
 >
 > diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch b/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
-> index 169ec6be70..142b059ea5 100644
+> index 169ec6be7044..a0e7df923734 100644
 > --- a/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
 > +++ b/meta-networking/recipes-support/tcpdump/tcpdump/CVE-2024-2397.patch
-> @@ -33,16 +33,16 @@ diff --git a/print-ppp.c b/print-ppp.c
->  index 2cf06c363..9aed23eb9 100644
+> @@ -1,4 +1,4 @@
+> -From b9811ef5bb1b7d45a90e042f81f3aaf233c8bcb2 Mon Sep 17 00:00:00 2001
+> +From 32a589ec83fa4536353f05df4c0cda05176cfe65 Mon Sep 17 00:00:00 2001
+>  From: Guy Harris <gharris@sonic.net>
+>  Date: Tue, 12 Mar 2024 00:37:23 -0700
+>  Subject: [PATCH] ppp: use the buffer stack for the de-escaping buffer.
+> @@ -24,25 +24,26 @@ routine, in case nd_pop_all_packet_info() didn't restore it.
+>  Upstream-Status: Backport [https://github.com/the-tcpdump-group/tcpdump/commit/b9811ef5bb1b7d45a90e042f81f3aaf233c8bcb2]
+>  CVE: CVE-2024-2397
+>  Signed-off-by: Ashish Sharma <asharma@mvista.com>
+> -
+> +Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
+> +---
+>   print-ppp.c | 31 +++++++++++++++++--------------
+>   print.c     |  8 ++++++--
+>   2 files changed, 23 insertions(+), 16 deletions(-)
+>  
+>  diff --git a/print-ppp.c b/print-ppp.c
+> -index 2cf06c363..9aed23eb9 100644
+> +index aba243ddb6f2..e5ae0646ebae 100644
 >  --- a/print-ppp.c
 >  +++ b/print-ppp.c
 > -@@ -37,6 +37,8 @@
@@ -116,7 +133,7 @@ On 7/31/25 22:28, Jörg Sommer via lists.openembedded.org wrote:
 >   	u_char *b, *t, c;
 >   	const u_char *s;
 >   	u_int i, proto;
-> @@ -50,7 +50,7 @@ index 2cf06c363..9aed23eb9 100644
+> @@ -50,7 +51,7 @@ index 2cf06c363..9aed23eb9 100644
 >   
 >   	if (caplen == 0)
 >   		return;
@@ -125,7 +142,7 @@ On 7/31/25 22:28, Jörg Sommer via lists.openembedded.org wrote:
 >           if (length == 0)
 >                   return;
 >   
-> @@ -65,7 +65,7 @@ index 2cf06c363..9aed23eb9 100644
+> @@ -65,7 +66,7 @@ index 2cf06c363..9aed23eb9 100644
 >   
 >   	/*
 >   	 * Unescape all the data into a temporary, private, buffer.
@@ -134,7 +151,7 @@ On 7/31/25 22:28, Jörg Sommer via lists.openembedded.org wrote:
 >   	}
 >   
 >   	/*
-> @@ -87,7 +87,7 @@ index 2cf06c363..9aed23eb9 100644
+> @@ -87,7 +88,7 @@ index 2cf06c363..9aed23eb9 100644
 >   	length = ND_BYTES_AVAILABLE_AFTER(b);
 >   
 >           /* now lets guess about the payload codepoint format */
@@ -143,11 +160,27 @@ On 7/31/25 22:28, Jörg Sommer via lists.openembedded.org wrote:
 >           }
 >   
 >   cleanup:
+> @@ -104,7 +105,7 @@ index 2cf06c363..9aed23eb9 100644
+>   }
+>   
+>  diff --git a/print.c b/print.c
+> -index b9ba5997d..f20633388 100644
+> +index 9c0ab8622de1..33706b93228d 100644
+>  --- a/print.c
+>  +++ b/print.c
+>  @@ -431,10 +431,14 @@ pretty_print_packet(netdissect_options *ndo, const struct pcap_pkthdr *h,
+> @@ -124,3 +125,6 @@ index b9ba5997d..f20633388 100644
+>   	if (ndo->ndo_Xflag) {
+>   		/*
+>   		 * Print the raw packet data in hex and ASCII.
+> +-- 
+> +2.34.1
+> +
 >
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#118818): https://lists.openembedded.org/g/openembedded-devel/message/118818
-> Mute This Topic: https://lists.openembedded.org/mt/114473441/6084445
+> View/Reply Online (#119010): https://lists.openembedded.org/g/openembedded-devel/message/119010
+> Mute This Topic: https://lists.openembedded.org/mt/114793519/6084445
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
