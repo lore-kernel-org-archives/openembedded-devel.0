@@ -2,63 +2,66 @@ Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A13FBCA1002
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9A21CA1012
 	for <webhook@archiver.kernel.org>; Thu,  4 Sep 2025 10:27:59 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.35852.1756981674966611175
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web10.35855.1756981676693145748
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Sep 2025 03:27:55 -0700
+ Thu, 04 Sep 2025 03:27:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BwQ5rRVP;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: zboszor@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-45cb6180b60so5629455e9.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 03:27:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TyQy0zv3;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: zboszor@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-45b83ae1734so5607985e9.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 03:27:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756981673; x=1757586473; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LLJ2NwxuMMSwMjKEbUMdOYxe6intIJAt/+HHQb7xmmo=;
-        b=BwQ5rRVPWLlDGjHN7sUIAiBVpb5e5YgdC1pwoWmi16X6JIsWAL9IoEHS52J6av/1qT
-         wpsbeQv6e05OfsKVIRTIEAE+iukxeN8DIcwVlBhrBQ11OOXiOOxRo902k8fydDhVFD+9
-         39nn7WtgQ2fc156RDdJEhFWnjAVSBnjnSp8XcPYGasB/0vJcLXXRqfsJBNRtiUF2H0DM
-         o2wnveeIAC3RAh6cjmJgYm5m7W3dydTLVvlge2jlYW55lajP6EksOf4ynu4aAiKF//Ki
-         4P3VZ/ipNqb+csvYApqPOBUOrRAyqRJojz4mgnHmtKcgX0mLasZGYR6m5Rotq8rBg3og
-         itHA==
+        d=gmail.com; s=20230601; t=1756981674; x=1757586474; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=LZ+dqLplbXMhCYndYTSpFQ5ZNwYrRX734CiQEQJ+Rr8=;
+        b=TyQy0zv3/RbSKxIYZtlj9aCO8aSfs5R+xOK1S6laL6kyWdxxwoSCTsqJZOc30M6HXp
+         67hcUG5NAkgM0V1eI2GIc8qRz8P+PuX7n8/Cb4ZmFxRFyNTMcJ/BRbXHHIffPSOGij4M
+         hWMQhAUBJeS8zR8P2rXXlnZPXdR620S4VGes1GJFWoC0yx3E5HJyh6C4wMKaDR5XaF/T
+         8kWvS7iNZ43mfoRH9UJTTNcKrWaZRmiZ/hjyKFgY//01MeiACdxKnHdLy4fwePyAqNb+
+         Qj6OjkygxE6E+upJAj8kCmJN9GkTrk+uGeSPAv39BEHI6h7UUsDYPAAqBNC2iIuxDvFr
+         4p2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756981673; x=1757586473;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=LLJ2NwxuMMSwMjKEbUMdOYxe6intIJAt/+HHQb7xmmo=;
-        b=Nx27A26wroSa1AaNX5Bv8+NNFtrFKy/HO3bMoDDTI/8BiQeJxACEQUO2cNOJWlwbfL
-         BBlXnrouvpyP/AEUmXQYkyX4qb/QAzACniPTJhhnzXqS2pG8T83QivWnz5JHlpRy7UZM
-         /Di9sxACbwQEPa56SeooAzhlCRC6Nz6Cp9dZ1D9kVRwqd8MgUHT5r0Yd9TMyzo/kNWtL
-         oA/s2t7MZRL4M2OJVebMqyX7q5GkGtoaGPLC6CJyouRITVoCUEszvlbZbfEopQUqWp0c
-         ug9CFt7TKz5POsXrG9qO/4gq/UuoUUBauZGxt1tgA0LrFAiXoxszwz6niL8Qrtr9ck/C
-         Xwew==
-X-Gm-Message-State: AOJu0Yx1ZuIxn8M9GevOVCwE8P+oa33TOp/ho403OsudQM+4eZu4f8bw
-	2jyDZJZ0YdejIbWJEzz25IAC6CCzZn6aqSrdAnlda2cWo37mcL88Ab0tzrEXTg==
-X-Gm-Gg: ASbGnctzFd5Nr0FRHPlbIDcLJmIXswk/hftHtf+IipmoMwSWZxw9miiq3qJ+YWNpi/V
-	Xdx7mkXtzGiwN5IkPbjmF/oOIoD5DNTVfhPFhsl/MiAHNj+q+L3YKc15+fyf6w+45Gu7rt5B4/5
-	0dmIPhLrokMbUGNYToOySgwJJHnf9Sk33iVrXp7zHxveDgft09NhsECnJGMywOGO3O5i0lI5Bnd
-	1RnCEHiH0PKzaFHfhWdFLOg7eQA2VcuW0ZeL2dE2m20x3K/ZefxVUCtZmcYdqUFSeKN4wptSKPX
-	fKY0x9FMZRy+K/uRNuVyCAnBjk15ibzg2xTHg3c3U4c8MKrz07bgJw/4TFfcc+TIXt/8Z89HBBA
-	a+pKsMphyekqBH+BW3xtxlW+cuKDJ9J1UllokKQmrOptx
-X-Google-Smtp-Source: AGHT+IGP/dJHz12j2uWXMYExcyTX0vKz2gkG9FX1WDFkJURWihNPkDzy3mD5zxEWDbHsBDeekV02Aw==
-X-Received: by 2002:a05:600c:4ece:b0:45b:97e0:22ad with SMTP id 5b1f17b1804b1-45d5160105bmr33974185e9.24.1756981672955;
-        Thu, 04 Sep 2025 03:27:52 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1756981674; x=1757586474;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=LZ+dqLplbXMhCYndYTSpFQ5ZNwYrRX734CiQEQJ+Rr8=;
+        b=ii+YbtoTrG61Y9oWJIYo2b4oT+zxj5Kw/Si7I2W4LI26TgAMP+W0sMLvNsPLbJKPb/
+         PubchcP1VhGUkleVwcB7mLMvAWEIiYtN17RvQQAmG0vFUEQrofD0qq3x6p8Xp1TL9GzT
+         LBRa6K9Nl121tcVJ2g9qsxRJyD9HDGF3oXyuw93pYQj5O7STU3/Ptmwhoe+TKIX2pMA9
+         KNmuZ6dYip6X8x0oyyH2MEYfYl8tNIto417WhwdeksY3Bx01F2jZJK5+z6OU1VXGW/Fl
+         CDmMRL60JS4E+bhnTotGE51s0ZbM9uv5l9pK8S3pbzWfHiCCLh/M4BYQAMLKXROjdI2F
+         wqHA==
+X-Gm-Message-State: AOJu0Yw1cYnCniKFFRzsdwU59ulUVKjESjMNGEETtY8ZavoETpAWHbRh
+	MlVeymD+Zt5sLhln3B5FFffOSfu3C9ytEWs1Hy+RzkBnTmI3tLPmEldv+7aa2w==
+X-Gm-Gg: ASbGncvqCHdaFfKNuOrQGA3fciIl8/nk4LuiGG1QERInEQm8WZzlAfV1MT9fBDdo6Ge
+	Aff4wzkxxx43+Zf6NBktoVeIV/Jy2LFP0gZM8X917NipIJtdXlkNvmVgn0mgFmFzFEUcxv7+UtG
+	C2+IYHZfPCm7B2/ue2PO4AmMcy88hOj8Y4rZze+zSRG9Z9XmztW4pSYyd2NDCBmJuuAfnUjjXlf
+	ZZ8W1CN/c9sy1cdX/RXgQPH597TVplVCj1zUU7fQ3wKHAQ3tcXmYj8FEyGR0fzwQWK70B+Qbup/
+	pRSPdGYkqAmz2jBCugXrQQQ7eUrS8VQmzbpDHzaho4sjyC+sdC+OBWdWNFQjlTKhXJYzm3cIAj0
+	1LoMds94wHKQ2ljwP9lnkPZquAcgB6xXgFp+r0PbDK46l
+X-Google-Smtp-Source: AGHT+IFew71jkx8fqmCI4xKnJR7I8/WM3aBniRCJuOmUUSw8hEFVeZarEA5Pp04skxOdlZ5X8mItzw==
+X-Received: by 2002:a05:600c:19c6:b0:45c:b580:f795 with SMTP id 5b1f17b1804b1-45cb580f971mr43302915e9.34.1756981674244;
+        Thu, 04 Sep 2025 03:27:54 -0700 (PDT)
 Received: from fedora (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45dd05faa9esm14925335e9.3.2025.09.04.03.27.51
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45dd05faa9esm14925335e9.3.2025.09.04.03.27.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Sep 2025 03:27:52 -0700 (PDT)
+        Thu, 04 Sep 2025 03:27:53 -0700 (PDT)
 From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jan Vermaete <jan.vermaete@gmail.com>,
 	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-python][PATCH 1/5] python3-cfgv: New recipe
-Date: Thu,  4 Sep 2025 12:27:44 +0200
-Message-ID: <20250904102748.602126-1-zboszor@gmail.com>
+Subject: [meta-python][PATCH 2/5] python3-ukkonen: New recipe
+Date: Thu,  4 Sep 2025 12:27:45 +0200
+Message-ID: <20250904102748.602126-2-zboszor@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250904102748.602126-1-zboszor@gmail.com>
+References: <20250904102748.602126-1-zboszor@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -66,30 +69,39 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 10:27:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119279
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119280
 
-It is a dependency of python3-pre-commit.
+It's a dependency of python3-identify.
 
 Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-cfgv_3.4.0.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-cfgv_3.4.0.bb
+ .../python/python3-ukkonen_1.0.1.bb             | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-ukkonen_1.0.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-cfgv_3.4.0.bb b/meta-python/recipes-devtools/python/python3-cfgv_3.4.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-ukkonen_1.0.1.bb b/meta-python/recipes-devtools/python/python3-ukkonen_1.0.1.bb
 new file mode 100644
-index 0000000000..73d5d2567a
+index 0000000000..f1f35ecceb
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-cfgv_3.4.0.bb
-@@ -0,0 +1,8 @@
-+SUMMARY = "Validate configuration and produce human readable error messages."
++++ b/meta-python/recipes-devtools/python/python3-ukkonen_1.0.1.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Implementation of bounded Levenshtein distance (Ukkonen)"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=92844452d544a48a78abc3a862fbd8a4"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=7e49a187324d5a1a6c4ba2b9c3fd4033"
 +
-+PYPI_PACKAGE = "cfgv"
++PYPI_PACKAGE = "ukkonen"
 +
 +inherit pypi setuptools3
-+SRC_URI[sha256sum] = "e52591d4c5f5dead8e0f673fb16db7949d2cfb3f7da4582893288f0ded8fe560"
++SRC_URI[sha256sum] = "976ad9a991c9cb99a7c318695a5f6b46236bbd4c33c5b55273fa241dfca8e0fa"
++
++DEPENDS += " \
++	python3-pip-native \
++	python3-cffi-native \
++"
++
++RDEPENDS:${PN} = " \
++	python3-cffi \
++"
 -- 
 2.51.0
 
