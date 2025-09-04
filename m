@@ -1,149 +1,379 @@
-Return-Path: <michael.opdenacker@rootcommit.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E00B4CA1012
-	for <webhook@archiver.kernel.org>; Thu,  4 Sep 2025 19:26:30 +0000 (UTC)
-Received: from beige.elm.relay.mailchannels.net (beige.elm.relay.mailchannels.net [23.83.212.16])
- by mx.groups.io with SMTP id smtpd.web11.3574.1757013990300966263
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4135CA1013
+	for <webhook@archiver.kernel.org>; Thu,  4 Sep 2025 19:33:50 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web11.3730.1757014423447231539
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Sep 2025 12:26:30 -0700
+ Thu, 04 Sep 2025 12:33:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@rootcommit.com header.s=hostingermail-a header.b=Cf540A9U;
- spf=pass (domain: rootcommit.com, ip: 23.83.212.16, mailfrom: michael.opdenacker@rootcommit.com)
-X-Sender-Id: hostingeremailsmtpin|x-authuser|michael.opdenacker@rootcommit.com
-Received: from relay.mailchannels.net (localhost [127.0.0.1])
-	by relay.mailchannels.net (Postfix) with ESMTP id 5F271854BE;
-	Thu,  4 Sep 2025 19:26:29 +0000 (UTC)
-Received: from fr-int-smtpout11.hostinger.io (100-102-90-229.trex-nlb.outbound.svc.cluster.local [100.102.90.229])
-	(Authenticated sender: hostingeremailsmtpin)
-	by relay.mailchannels.net (Postfix) with ESMTPA id 67E7284673;
-	Thu,  4 Sep 2025 19:26:28 +0000 (UTC)
-ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1757013988; a=rsa-sha256;
-	cv=none;
-	b=Oei0Twrp/PsHzRFlO0M6kEga5a+iBbPQUswFRx3ywS0bjwFqZnPnN8y0Ma6Lr9Q2tqTEb/
-	6ua8qrSY9ffeEcmZyNMtUgTff3UPG2FycTYNAuok/5+j/w07Oqz5UmkZMFuZyZJ5COlke8
-	3NVmGkpj3gIkEdgU7PxxpmICqhBnj1iOQU/P1LxAZxr0DN82RM5JU5zYgipxkd8bOpTEz5
-	muPkbTTEfetWEeRwP/PBnTSFNnBBbTKZDOdx17UWuBcUrfdnCI2PGbd53CldyaxOjerAUG
-	lWCMX4XKbgzgGIC1XPYAobZKmC+EEHWxLcrSoTEjLLql8WBd610ZX3I1PgRvVA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailchannels.net;
-	s=arc-2022; t=1757013988;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:dkim-signature;
-	bh=gXWKLi7k8RrQ3dl+oKaYp4ZaIXaDcp/WKRbomMSLhEs=;
-	b=KP1EEGWRDsD8/eVVlCQ92R8g4P4ZSAl8T1uc0cT7YTxBxiQ7m/fROT/qNqcpipKlTfziUL
-	JCRrijAabejEEOhqjKnSFvtKaAAfIcLdU4xbWp2iLJWR70GVpcYPk45aBTUK98SCDg8aM9
-	NNVPDszkNM5wfRBUKreXtQ1eumXZxzS9GKSGp+rEri5syHMC1xMBZC6e1QPQnlkSzxQ/bq
-	W3sVsnCqF/lBVaSIYrqBLbGUylWx/8fUeUibUY+RX6bl0bXrHzuguqD86eIYOuE1e3S+r1
-	K2mKbA8Y0lob1B6IyWtkQRRpvvOd/gvc0HQySCwVI8fWOQtYkf5CcG/swqctiw==
-ARC-Authentication-Results: i=1;
-	rspamd-8b9589799-8nm74;
-	auth=pass smtp.auth=hostingeremailsmtpin
- smtp.mailfrom=michael.opdenacker@rootcommit.com
-X-Sender-Id: hostingeremailsmtpin|x-authuser|michael.opdenacker@rootcommit.com
-X-MC-Relay: Neutral
-X-MailChannels-SenderId: 
- hostingeremailsmtpin|x-authuser|michael.opdenacker@rootcommit.com
-X-MailChannels-Auth-Id: hostingeremailsmtpin
-X-Eight-Cooperative: 51542af52c119a56_1757013989087_403775838
-X-MC-Loop-Signature: 1757013989087:3650258433
-X-MC-Ingress-Time: 1757013989086
-Received: from fr-int-smtpout11.hostinger.io ([UNAVAILABLE]. [148.222.54.47])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
-	by 100.102.90.229 (trex/7.1.3);
-	Thu, 04 Sep 2025 19:26:29 +0000
-Received: from [IPV6:2001:861:4448:6b00:1c5:245b:5c:a19] (unknown [IPv6:2001:861:4448:6b00:1c5:245b:5c:a19])
-	(Authenticated sender: michael.opdenacker@rootcommit.com)
-	by smtp.hostinger.com (smtp.hostinger.com) with ESMTPSA id 4cHqGV1WD9z15Zj;
-	Thu,  4 Sep 2025 19:26:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rootcommit.com;
-	s=hostingermail-a; t=1757013986;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=gXWKLi7k8RrQ3dl+oKaYp4ZaIXaDcp/WKRbomMSLhEs=;
-	b=Cf540A9U8jEEJnNygil95g4nCGaEvvjgnGJ6Sp6aWWoYlLwI41sbp3hIDBfdWBlsylBeNq
-	FZ1uE3cxMgpq9bt2d2PpKvQfgY4LdRyNrteYFEPanWta2CLcIp+Zne1D2MnGVTGCLKoNsU
-	qGqousvf8yqYGB4KgZlPVrx2W4Xp0EzjWsvNq9QpKk+deq/8j6KU9BgU7a0mt/bCgJD27S
-	dFThNSdMeTOD8igwxTMgE+iCBzAYE2vBffmdA65OyzZEPCGlwsbJDlL0JDX5oO+oJUVd69
-	y9XK0B6cfB8TJ/dpLFXhDMsYc3ICBWqJwwOgZqo4opRr28xwoYPO59v/Bw3z4Q==
-Message-ID: <32bb2e07-7b0a-4822-b6c0-794bfda5c97d@rootcommit.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Lrma88Go;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-b03fa5c5a89so212332966b.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 12:33:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757014422; x=1757619222; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=5FPnEalLXgX0Xrvo0C6SnUt9RvOEMl4FDcs6T3XRwoE=;
+        b=Lrma88GorIXkGSvj6Mdpd46dVV/xOvNCe1gBmzc3AWYs4vs24gENpcBmd4QPDGftxh
+         +P+TeTm0dNw03pBFr5AmKelPrUbR1DKiCMJiilOfhnAoJuNwhIYHvHz3xsLTQRbw/AF1
+         nlQKvqYFdQ14QXNsz+s24xYsOdkbzNYusyinTagKEKADnPYmF+oM+vJGG9/L3Vm9wqvb
+         YRpguZ0aPVjPjUv8kIP2GaatpzMl7RFquzNpOfTbLZrh1gdZtRrXlrV61OrEk0lU/42g
+         OHhQzKv1cB/Vholwj5+rIHpw3S8zbnC9NE5TDOBTZL6LzvUqsDfF3a5yuSHgJl9SVoO2
+         M7Gg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757014422; x=1757619222;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=5FPnEalLXgX0Xrvo0C6SnUt9RvOEMl4FDcs6T3XRwoE=;
+        b=s7sO2f0/I7tns4QFmvIj2AwBB3RB5nHNk715zBl6an0mDa0yilqtuAiBzho1SXdRpq
+         y6imeJve6GlQ/Flui/vqBDCDPdUIzxy6xt2fisPyQMsLEnfFhBfDCWk5OP7om9HgBYdI
+         16gAXvI0TD4RPDdz6QJjWI3xMT/+gvvwN09PmZsC44f1e9Op0IhyNqGtb055qjBDD6e0
+         m5CYuNi+G/7d0UdQWtjJb5gCL0dPXm4iLkCJI1ndCb25+V+p0U2eUiNwRdxBztZf+nHf
+         HEU/jw35TkwM3tAuL9wREGatEe1Ei+eXKeFk+bJuetl51h34KPoaNOcg87GcUlTwtOhJ
+         mHeg==
+X-Forwarded-Encrypted: i=1; AJvYcCU2xzmGY3as2baqztZzPHqZUTAQ7W8eJ+Ssx60iTi6PyO+KqZL/ZzEpl1LxYHZmYxG+68v/F2bTOynCdC/Uhd0fi4k=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwAb5CkAgjUnojOLJCVEQrC7SgiM7N28E99JEwVKhxc9Ff9tFbh
+	xCnMr9DD1QLqAX9Zs2kHTyr7arnkA85aKUC9eKklDlBgYAnqNaK5qRs9
+X-Gm-Gg: ASbGnctWcP5hvkC8aVGjeQbbL1elV89m4mpDViOQeZCvlP8xP8lKZkxbRYM0nR4UAs/
+	nqFq+/qdkfVNBu+Zy7VyAxQn7u9ZkvYVV11vx1SYHVAcIa/P8LkJHDDsR/cbTIr5VZ/CSFcd8AV
+	BM3+YWd6w2PT3P4EkA+mHGwgrQio1Quc1IFXxUlqSuwSIgQxOVVRNpvSiEKd61JWsDPEEdbxBm2
+	A7DltsB4s/jetDtKTdtUX2YpU8k1olvN/FPeneTyS8I2sZvtLs3LRemzEIH7NoCfnqMrFaJi2BW
+	E6Cj/D5rx7pE5Jxf/Acqpnii1++7lzHcHCs732LN5fweD+KIwylgGISKlsjab5bqR/rK8lunIUx
+	yQbdEJHfgyutPXxiJhQIZvWMvOSiP4/s=
+X-Google-Smtp-Source: AGHT+IFtXPZm0ONxtjx9ZVH5Xo9/VoLS/bwKKc1aoDYc7RNaEH11jW6KkX5tOBkmpu64k4rcu1SG9Q==
+X-Received: by 2002:a17:907:a07:b0:afe:dd76:7cd7 with SMTP id a640c23a62f3a-b01d8a266c2mr2024811566b.4.1757014421541;
+        Thu, 04 Sep 2025 12:33:41 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b02a090339esm1376341866b.37.2025.09.04.12.33.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 04 Sep 2025 12:33:41 -0700 (PDT)
+Message-ID: <9d4fbe3f-f7e0-4e2c-a5ea-ce2fe9387d39@gmail.com>
+Date: Thu, 4 Sep 2025 21:33:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Cc: michael.opdenacker@rootcommit.com,
- openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH] kernel-hardening-checker:
- backport recipe
-To: skandigraun@gmail.com
-References: <20250819203929.1272607-1-michael.opdenacker@rootcommit.com>
- <1d47e8eb-0753-47e3-9339-b469f2f141f1@gmail.com>
- <e37ef122-48fa-4422-890b-22f9ad8e9d33@rootcommit.com>
- <698ff4df-4420-4f7d-a07c-bc022083ec5f@gmail.com>
-Content-Language: en-US, fr
-From: Michael Opdenacker <michael.opdenacker@rootcommit.com>
-Organization: Root Commit
-In-Reply-To: <698ff4df-4420-4f7d-a07c-bc022083ec5f@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Date: Thu,  4 Sep 2025 19:26:26 +0000 (UTC)
-X-CM-Envelope: MS4xfOo8bwLToCNsAcuLmLXtWkaODc681G4mqRe03PTk8fX3yQUFw22MSiLCkH4WyNheUDKYR6x/I+ivD+mDKWGr4T+v/0u35L/UiZ9MrlQNod3Y9RE2uzAE oDtaZkIa8Sh0HCnYcW/z68vNWqI8LQDrE6RI9cGwLxf+3QyHHGbByyryK8NJxsF7IuKxqylipDXzo64I/0bfULMmkgKlX7+sk4NZfv4hb1P3teDIVaV9UnUH HgbW1/HBfwpSvI08gs4qJrrXhtf5FXXWyWrpqOXJNUa3IkBxDSDFzz0URICWSlR7SamGKjWvakk8iF3X/+lX4vnhYQ/mo/lcXc/KqO8OWg2mklnyfeZjiqgE OYgPELxitU61eDO3m0usjkinQV+yG45rCp+1coP/83M6NBNreEQp7/pogeEOiAE13QskllY7
-X-CM-Analysis: v=2.4 cv=DJTd4DNb c=1 sm=1 tr=0 ts=68b9e7e2 a=moH8wFLobXlosxT6PNuGGw==:617 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=Q4-j1AaZAAAA:8 a=iGHA9ds3AAAA:8 a=d70CFdQeAAAA:8 a=RYqSDLjjAPyGnXIOvnYA:9 a=QEXdDO2ut3YA:10 a=9H3Qd4_ONW2Ztcrla5EB:22 a=nM-MV4yxpKKO9kiQg6Ot:22 a=NcxpMcIZDGm-g932nG_k:22
-X-AuthUser: michael.opdenacker@rootcommit.com
+Subject: Re: [oe][meta-oe][kirkstone][PATCH] libnet: backport patch to remove
+ configure time SOCK_PACKET check
+To: guocai.he.cn@windriver.com, openembedded-devel@lists.openembedded.org
+References: <20250826084202.4188308-1-guocai.he.cn@windriver.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20250826084202.4188308-1-guocai.he.cn@windriver.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 19:26:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119295
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Sep 2025 19:33:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119296
 
-Greetings.
+A technical note about this patch: the charset seems to be set
+incorrectly, it is set to "yes", which is not a valid value. 
 
-On 8/20/25 10:28, Gyorgy Sarvari via lists.openembedded.org wrote:
->> However, this has already been accepted in master
->> (https://git.openembedded.org/meta-openembedded/commit/?id=5ae3536204ba3764b03647ab75169ee65ca43531)
->> It's true that meta-oe didn't originally have this recipe, but what's
->> the harm in sharing with LTS users that could have the same need as
->> mine? The risk of breaking tests again meta-oe?
-> At the end of the day it's of course the branch maintainer's call if he
-> accepts the extra recipe and the testing and maintenance tasks that come
-> with it, but I don't recall it happening in recent years.
+Though the patch applies, the charset needs to be modified manually
+before git would stop complaining. Could you please check your mail
+client's settings about it?
+
+On 8/26/25 10:42, guocai he via lists.openembedded.org wrote:
+> From: Guocai He <guocai.he.cn@windriver.com>
 >
-> I think it would make precedent - if this recipe is accepted, why
-> wouldn't others be accepted? When does a small addition become an
-> unacceptably risky or big one? Stability is boring - and that's the
-> point. This of course is just the personal opinion of an internet rando
-> (me), and not official in any shape or form.
+> Backport [1] to fix the do_configure error like below:
 >
->> I'm reading https://wiki.yoctoproject.org/wiki/Stable_Release_and_LTS
->> ... I guess such a backport qualifies as a "new feature". But does this
->> really apply to meta-openembedded which is not officially part of the LTS?
->>
->> On the other hand, mixin layers are supposed to be for "potentially
->> invasive changes", which is not the case here.
->> So, where are such (new) backports supposed to be shared?
-> Such backports usually live in product specific layers (sometimes in
-> other community layers that take up the task of acting like a mixin
-> layer) until the project updates to a release that contains that recipe.
-
-Any further objections to adding this backport to the scarthgap branch 
-of meta-oe?
-
-I guess there is no risk of breaking anything else in meta-oe/scarthgap, 
-but if we don't want to accept exceptions to the rule (even for meta-oe 
-which is not strictly part of the LTS), I'll create my own layer for LTS 
-users who could be interested. I guess meta-security won't be a suitable 
-candidate the upstream recipe is in meta-oe.
-
-Cheers
-Michael.
-
--- 
-Michael Opdenacker
-Root Commit
-Yocto Project and OpenEmbedded Training course - Learn by doing:
-https://rootcommit.com/training/yocto/
+>   checking for packet socket (PF_PACKET)... ./pf_packet-test:
+>   /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found
+>
+> [1] https://github.com/libnet/libnet/commit/19979c4541ddcc817c64ea911a309ee71a8cc250
+>
+> Signed-off-by: Qi Chen <Qi.Chen@windriver.com>
+> Signed-off-by: Guocai He <guocai.he.cn@windriver.com>
+> ---
+>  ...move-support-for-SOCK_PACKET-sockets.patch | 251 ++++++++++++++++++
+>  .../libnet/libnet_1.2-rc3.bb                  |   1 +
+>  2 files changed, 252 insertions(+)
+>  create mode 100644 meta-oe/recipes-connectivity/libnet/libnet/0001-Remove-support-for-SOCK_PACKET-sockets.patch
+>
+> diff --git a/meta-oe/recipes-connectivity/libnet/libnet/0001-Remove-support-for-SOCK_PACKET-sockets.patch b/meta-oe/recipes-connectivity/libnet/libnet/0001-Remove-support-for-SOCK_PACKET-sockets.patch
+> new file mode 100644
+> index 0000000000..2fc7ecd180
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/libnet/libnet/0001-Remove-support-for-SOCK_PACKET-sockets.patch
+> @@ -0,0 +1,251 @@
+> +From dd77c43a9773edb895bfe9074315e83a19cac471 Mon Sep 17 00:00:00 2001
+> +From: Guocai He <guocai.he.cn@windriver.com>
+> +Date: Tue, 26 Aug 2025 06:15:41 +0000
+> +Subject: [PATCH] Remove support for SOCK_PACKET sockets
+> +MIME-Version: 1.0
+> +Content-Type: text/plain; charset=UTF-8
+> +Content-Transfer-Encoding: 8bit
+> +
+> +The current code has a build-time check to verify that PF_PACKET sockets
+> +are supported on Linux systems and if not, fallback on SOCK_PACKET sockets.
+> +
+> +The test implementation relies on FTM (Feature Test Macros) to detect
+> +glibc and its version to include correct headers.
+> +But, some libc such as the musl libc do not have such macros, making the
+> +test program compilation fail and libnet fallback on SOCK_PACKET.
+> +
+> +Since PF_PACKET support is present in kernel for more than 20 years now,
+> +the simplest solution and safe choice is to just drop support for
+> +SOCK_PACKET and assume PF_PACKET is always available on any Linux system.
+> +
+> +Signed-off-by: Hervé Boisse <admin@netgeek.ovh>
+> +
+> +Upstream-Status: Backport [19979c4541ddcc817c64ea911a309ee71a8cc250]
+> +
+> +Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> +Signed-off-by: Guocai He <guocai.he.cn@windriver.com>
+> +---
+> + acinclude.m4            | 87 -----------------------------------------
+> + configure.ac            |  3 --
+> + src/libnet_link_linux.c | 19 +--------
+> + win32/config.h          |  1 -
+> + 4 files changed, 1 insertion(+), 109 deletions(-)
+> +
+> +diff --git a/acinclude.m4 b/acinclude.m4
+> +index 064b582..f8ab967 100644
+> +--- a/acinclude.m4
+> ++++ b/acinclude.m4
+> +@@ -25,93 +25,6 @@ AC_DEFUN([AC_LIBNET_LINUX_PROCFS],
+> +                   [Define if you have the Linux /proc filesystem.])
+> +     fi])
+> + 
+> +-dnl
+> +-dnl Checks to see if this linux kernel has a working PF_PACKET
+> +-dnl
+> +-dnl usage:
+> +-dnl
+> +-dnl     AC_LIBNET_CHECK_PF_PACKET
+> +-dnl
+> +-dnl results:
+> +-dnl
+> +-dnl     HAVE_PACKET_SOCKET (DEFINED)
+> +-dnl
+> +-
+> +-AC_DEFUN([AC_LIBNET_CHECK_PF_PACKET],
+> +-[
+> +-    AC_MSG_CHECKING(for packet socket (PF_PACKET))
+> +-    AC_CACHE_VAL(libnet_cv_have_packet_socket,
+> +-
+> +-        [
+> +-    cat > pf_packet-test.c << EOF
+> +-#include <stdio.h>
+> +-#include <errno.h>
+> +-#include <stdlib.h>
+> +-#include <netinet/in.h>
+> +-#include <sys/socket.h>
+> +-#include <features.h>    /* for the glibc version number */
+> +-#if __GLIBC__ >= 2 && __GLIBC_MINOR >= 1
+> +-#include <netpacket/packet.h>
+> +-#include <net/ethernet.h>     /* the L2 protocols */
+> +-#else
+> +-#include <asm/types.h>
+> +-#include <linux/if_packet.h>
+> +-#include <linux/if_ether.h>   /* The L2 protocols */
+> +-#endif
+> +- 
+> +-#ifndef SOL_PACKET
+> +-#define SOL_PACKET 263
+> +-#endif  /* SOL_PACKET */
+> +- 
+> +-int
+> +-main(int argc, char **argv)
+> +-{
+> +-    int fd;
+> +- 
+> +-    fd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+> +-    if (fd == -1)
+> +-    {
+> +-        if (errno == EPERM)
+> +-        {
+> +-            /* user's UID != 0 */
+> +-            printf("probably");
+> +-            exit (EXIT_FAILURE);
+> +-        }
+> +-        printf("no");
+> +-        exit (EXIT_FAILURE);
+> +-    }
+> +-    printf("yes");
+> +-    exit (EXIT_SUCCESS);
+> +-}
+> +-EOF
+> +-    ${CC-cc} -o pf_packet-test $CFLAGS pf_packet-test.c >/dev/null 2>&1
+> +-
+> +-    # Oopz 4.3 BSD doesn't have this.  Sorry.
+> +-    if test ! -x ./pf_packet-test ; then
+> +-        libnet_cv_have_packet_socket=choked
+> +-    else
+> +-        libnet_cv_have_packet_socket=`./pf_packet-test`;
+> +-    fi
+> +-    if test $libnet_cv_have_packet_socket = choked; then
+> +-        AC_MSG_RESULT(test program compile choked... assuming no)
+> +-    elif test $libnet_cv_have_packet_socket = yes; then
+> +-        AC_MSG_RESULT(yes)
+> +-    elif test $libnet_cv_have_packet_socket = probably; then
+> +-        AC_MSG_RESULT(test program got EPERM... assuming yes)
+> +-    elif test $libnet_cv_have_packet_socket = no; then
+> +-        AC_MSG_RESULT(no)
+> +-    fi
+> +-
+> +-    rm -f pf_packet-test* core core.pf_packet-test
+> +-
+> +-    ])
+> +-
+> +-    if test $libnet_cv_have_packet_socket = yes -o $libnet_cv_have_packet_socket = probably; then
+> +-        AC_DEFINE(HAVE_PACKET_SOCKET, 1,
+> +-          [Define if we're running on a Linux system with PF_PACKET sockets.])
+> +-    fi
+> +-])
+> +-
+> + dnl
+> + dnl Looks for a previous libnet version and attempts to determine which verion
+> + dnl it is.  Version 0.8 was the first version that actually knew internally
+> +diff --git a/configure.ac b/configure.ac
+> +index 4751f62..ad002b9 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -51,7 +51,6 @@ AC_LIBNET_ENDIAN_CHECK
+> + dnl AC_LBL_LIBRARY_NET
+> + 
+> + AC_SUBST(ENDIANESS)
+> +-AC_SUBST(HAVE_PACKET_SOCKET)
+> + AC_SUBST(ADDITIONAL_LIBS)
+> + AC_SUBST(LIBNET_CONFIG_DEFINES)
+> + AC_SUBST(LIBNET_CONFIG_LIBS)
+> +@@ -87,7 +86,6 @@ if test -n "${with_link_layer}"; then
+> +         snoop) AC_LIBOBJ([libnet_link_snoop]) ;;
+> +         dlpi)  AC_LIBOBJ([libnet_link_dlpi]) ;;
+> +         linux) AC_LIBOBJ([libnet_link_linux])
+> +-	       AC_LIBNET_CHECK_PF_PACKET
+> + 	       AC_LIBNET_LINUX_PROCFS ;;
+> +         none) AC_LIBOBJ([libnet_link_none]) ;;
+> +         *) AC_MSG_ERROR([Invalid link type "${with_link_layer}"]) ;;
+> +@@ -115,7 +113,6 @@ elif test "${ac_cv_header_sys_dlpi_h}" = "yes" ; then
+> + elif test "${ac_cv_header_linux_socket_h}" = "yes" ; then
+> +     AC_LIBOBJ([libnet_link_linux])
+> +     AC_MSG_RESULT(found link layer linux)
+> +-    AC_LIBNET_CHECK_PF_PACKET
+> +     AC_LIBNET_LINUX_PROCFS
+> + elif test "${cross_compiling}" != "yes" -a -c /dev/bpf0 ; then           # check again in case not readable
+> +     AC_LIBOBJ([libnet_link_bpf])
+> +diff --git a/src/libnet_link_linux.c b/src/libnet_link_linux.c
+> +index 3c6df3c..1dd2a42 100644
+> +--- a/src/libnet_link_linux.c
+> ++++ b/src/libnet_link_linux.c
+> +@@ -33,13 +33,11 @@
+> + #include <netinet/if_ether.h>
+> + #include <net/if_arp.h>
+> + 
+> +-#if (HAVE_PACKET_SOCKET)
+> + #ifndef SOL_PACKET
+> + #define SOL_PACKET 263
+> + #endif  /* SOL_PACKET */
+> + #include <netpacket/packet.h>
+> + #include <net/ethernet.h>     /* the L2 protocols */
+> +-#endif  /* HAVE_PACKET_SOCKET */
+> + 
+> + #include "../include/libnet.h"
+> + 
+> +@@ -69,11 +67,8 @@ libnet_open_link(libnet_t *l)
+> +         return (-1);
+> +     } 
+> + 
+> +-#if (HAVE_PACKET_SOCKET)
+> +     l->fd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+> +-#else
+> +-    l->fd = socket(PF_INET, SOCK_PACKET, htons(ETH_P_ALL));
+> +-#endif
+> ++    
+> +     if (l->fd == -1)
+> +     {
+> +         if (errno == EPERM) {
+> +@@ -177,7 +172,6 @@ libnet_close_link(libnet_t *l)
+> + }
+> + 
+> + 
+> +-#if (HAVE_PACKET_SOCKET)
+> + static int
+> + get_iface_index(int fd, const char *device)
+> + {
+> +@@ -194,18 +188,12 @@ get_iface_index(int fd, const char *device)
+> +  
+> +     return ifr.ifr_ifindex;
+> + }
+> +-#endif
+> +-
+> + 
+> + int
+> + libnet_write_link(libnet_t *l, const uint8_t *packet, uint32_t size)
+> + {
+> +     int c;
+> +-#if (HAVE_PACKET_SOCKET)
+> +     struct sockaddr_ll sa;
+> +-#else
+> +-    struct sockaddr sa;
+> +-#endif
+> + 
+> +     if (l == NULL)
+> +     { 
+> +@@ -213,7 +201,6 @@ libnet_write_link(libnet_t *l, const uint8_t *packet, uint32_t size)
+> +     }
+> + 
+> +     memset(&sa, 0, sizeof (sa));
+> +-#if (HAVE_PACKET_SOCKET)
+> +     sa.sll_family    = AF_PACKET;
+> +     sa.sll_ifindex   = get_iface_index(l->fd, l->device);
+> +     if (sa.sll_ifindex == -1)
+> +@@ -221,10 +208,6 @@ libnet_write_link(libnet_t *l, const uint8_t *packet, uint32_t size)
+> +         return (-1);
+> +     }
+> +     sa.sll_protocol  = htons(ETH_P_ALL);
+> +-#else
+> +-	strncpy(sa.sa_data, l->device, sizeof (sa.sa_data) - 1);
+> +-    sa.sa_data[sizeof (sa.sa_data) - 1] = 0;
+> +-#endif
+> + 
+> +     c = sendto(l->fd, packet, size, 0,
+> +             (struct sockaddr *)&sa, sizeof (sa));
+> +diff --git a/win32/config.h b/win32/config.h
+> +index 926f12f..12e1ee7 100644
+> +--- a/win32/config.h
+> ++++ b/win32/config.h
+> +@@ -11,7 +11,6 @@
+> + #undef HAVE_HPUX11
+> + #undef HAVE_SOCKADDR_SA_LEN
+> + #undef HAVE_DLPI
+> +-#undef HAVE_PACKET_SOCKET
+> + #undef HAVE_STRUCT_IP_CSUM
+> + #undef HAVE_LIB_PCAP
+> + #undef STUPID_SOLARIS_CHECKSUM_BUG
+> +-- 
+> +2.35.5
+> +
+> diff --git a/meta-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb b/meta-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb
+> index 785abf66d6..5e35fc3391 100644
+> --- a/meta-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb
+> +++ b/meta-oe/recipes-connectivity/libnet/libnet_1.2-rc3.bb
+> @@ -10,6 +10,7 @@ PROVIDES = "libnet-1.2rc2"
+>  
+>  SRC_URI = "${SOURCEFORGE_MIRROR}/libnet-dev/${BPN}-${PV}.tar.gz \
+>             file://0001-Support-musl-libc-remove-support-for-glibc-2.1.patch \
+> +           file://0001-Remove-support-for-SOCK_PACKET-sockets.patch \
+>            "
+>  
+>  SRC_URI[md5sum] = "f051e6e5bdecddb90f77c701c2ca1804"
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#119113): https://lists.openembedded.org/g/openembedded-devel/message/119113
+> Mute This Topic: https://lists.openembedded.org/mt/114896655/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
