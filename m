@@ -1,118 +1,88 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30178CA101C
-	for <webhook@archiver.kernel.org>; Sat,  6 Sep 2025 06:47:37 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.2376.1757141250902860047
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11BFFCA1012
+	for <webhook@archiver.kernel.org>; Sat,  6 Sep 2025 06:48:37 +0000 (UTC)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+ by mx.groups.io with SMTP id smtpd.web11.2407.1757141316432782201
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Sep 2025 23:47:32 -0700
+ Fri, 05 Sep 2025 23:48:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout05.t-online.de (Postfix) with SMTP id 8B59310D9
-	for <openembedded-devel@lists.openembedded.org>; Sat,  6 Sep 2025 08:47:28 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([79.219.234.138]) by fwd72.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1uumhm-1tFz0r0; Sat, 6 Sep 2025 08:47:22 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Vf0IybJb;
+ spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-62205eb63f9so2068414a12.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Sep 2025 23:48:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757141314; x=1757746114; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8kwC1nAZCHGHA4Uo9w3h9vBqqtq1+h6kjthFLL4/z1o=;
+        b=Vf0IybJbGp+XDPn/MlVdgglwChk8GYSscDVqi7icN8k0jHwNMRf6Vxeu7WGd/zVvIz
+         Kr29QOUVpskDKME+FD71ZdUY3hR+AzA1Eo1/yjaolgJQREpHmJpoNHXdFSbp0n/6PzU4
+         tMD6y3D3VQQekLgGBs7JL1QGE19y5LLnmSXr6cf2mfThQPSHpG4Wm5rcjKa4BggSvBc2
+         IwuIp9YcCDFJaPHo68qwErktLk1ejTzYoPSBT6bg0crcopVLWEXoQMLn5OX9fdxGdQxI
+         tfRQOgXgpG+hrtLVoSwkfOIm1iOmklq8u7P/tsQhXU5OENQ8MqN3NfrZ6/ysIR63bGqV
+         D4hA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757141314; x=1757746114;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=8kwC1nAZCHGHA4Uo9w3h9vBqqtq1+h6kjthFLL4/z1o=;
+        b=gvg3xMthK3z7ooc0TgFUnfLIs07AzbmHXAutHdM20ZwWU/48oXp9mmudSi/lgoG7uq
+         LUxuq0tbRicli/yLfycBW5O6yHtWOz4b4MZ+ngpYL/6xlZGGeBcYiBOYMIuCVGysTW5m
+         kye++HmZY8xNtAA0quUBhCUqT9CC+qpM8ZkY283boejs5Omt4NkTgarMwM+oU8rakkiz
+         8bLc330GEMTwAFOfMIbqI4UB9st5gttgn2Vy2/ve0Ao3JMgouk8a4/vUOTBVfP9JsgdF
+         oIzxR57IBZBVXg6H9zO+R4oC6M+BuEtSzMcvHkU4Jwo9gP5oPtPLUr6lN4NhTXkqQVgv
+         hxNA==
+X-Gm-Message-State: AOJu0Yw4j05FvWfTJzefcE926aAsFZE4f3FzTxtxR03oe6JD1DbbzZuN
+	oJ6/Tqz/MRYDlwo6pXOmb9fu6AoosiXOXIcC5QOJlhxJt1NsmyFK11eqMO9Vxw==
+X-Gm-Gg: ASbGnctbVBJFX04BLlwUZEprxxg4QuOz50PEryimZ4rzahyEvY4hUIT045s4Zn17mc0
+	Ev7E9RipLDW9bxP5q726y1xngWCP/XlraDnJSbqSEQTecQz8HcBqpmmhAtiLfGZVa1EgulLxh8T
+	td9Y522JPCEpKNz0lUbncIcKxHNY13myzibNErXQLCe2IfyAVlPCFhFVYi+O6294kuUCdMgMrPv
+	bJBHveclKGSEjY3LU0HJAKQB2Cmf3wbM72Una3Hu95VlIG/5MdM/1DjAhq+bndegXj1lTg6Fbqn
+	+L08AcI3gSH62UI1QrJRqnhASxOCbW9bxBwK6c6ikqU/vH1u5biT6DSL4HKW2OTAmvGAMhPQb0Z
+	3TxkE44dMY1Ajr96ZkBcOu2BS3I3Ly9Y=
+X-Google-Smtp-Source: AGHT+IFNMHPsPGv2TK7rqebsyl9wc6jXdrIUCvk5HwjuD4/ZYivMU8fgtxBuCFhsRl6DQCE19sdMrw==
+X-Received: by 2002:a17:906:7956:b0:b04:8d6c:5066 with SMTP id a640c23a62f3a-b04b13fe7eemr118104266b.3.1757141314175;
+        Fri, 05 Sep 2025 23:48:34 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b041800e89esm1534278466b.30.2025.09.05.23.48.33
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 05 Sep 2025 23:48:33 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/3] flatpak: update 1.16.0 -> 1.16.1
-Date: Sat,  6 Sep 2025 08:47:09 +0200
-Message-ID: <20250906064711.1430212-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.50.1
+Subject: [meta-oe][kirkstone][PATCH] hunspell-disctionaries: fix SRC_URI
+Date: Sat,  6 Sep 2025 08:48:33 +0200
+Message-ID: <20250906064833.3944361-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1757141242-D87F79FF-D8108F72/0/0 CLEAN NORMAL
-X-TOI-MSGID: 88ffaa46-6651-436c-b10c-36b5ed1a04c6
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 06 Sep 2025 06:47:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119321
+ <openembedded-devel@lists.openembedded.org>; Sat, 06 Sep 2025 06:48:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119322
 
-1.16.1
+The master branch has been renamed to main.
 
-Enhancements:
-
-    When using parental controls, allow a child account to update existin=
-g apps by default, to ensure that security and bugfix updates can be inst=
-alled. This can be overridden by setting polkit policy rules for the new =
-org.freedesktop.Flatpak.override-parental-controls-update action if neces=
-sary. (#5552)
-    Make systemd scopes easier to match to Flatpak app instances, by usin=
-g the instance ID instead of the top-level process ID in the scope name (=
-#6015)
-    Access to --device=3Ddri now includes /dev/udmabuf (#6158)
-    Improve the error message for an invalid parameter to flatpak-spawn -=
--sandbox-a11y-own-name (#6048)
-    Speed up flatpak prune --dry-run by not calculating potential freed s=
-pace and avoiding operations that would need to hold a lock (#5813, #6121=
-)
-    Speed up flatpak permission-reset by only writing entries that have a=
-ctually changed (#5772)
-    Documentation improvements (#4859, #6066, #6134)
-    Look for TLS certificates at /etc/containers/certs.d when interacting=
- with OCI registries (#5916)
-    Translation updates: bg (#6120), ka (#6176), pl (#6106), pt_BR (#6076=
-, #6188), ro (#6139), ru (#6145), sl (#6054), sv (#6193), tr (#6109)
-    This is the first bugfix release of the Flatpak 1.16 series! Users an=
-d distributions are strongly encouraged to update to this version.
-
-Bug fixes:
-
-    Fix intermittent flatpak-portal crashes by avoiding unnecessary multi=
--threading (#5605)
-    Don't show a confusing confirmation prompt when flatpak remove --unus=
-ed removes autoprune-unless extensions that are no longer needed, such as=
- older Nvidia drivers (#5712, #2718)
-    Don't propagate $PYTHONPYCACHEPREFIX from host into sandbox (#6110)
-    Don't propagate $WAYLAND_DISPLAY, $WAYLAND_SOCKET from host into sand=
-box if access to the Wayland socket has been denied (#3948)
-    When discovering the AT-SPI bus, treat $AT_SPI_BUS_ADDRESS as higher-=
-priority than GetAddress(), more closely matching the behaviour of AT-SPI=
- itself (#6173)
-    Fix a memory leak when installing extra-data (#6069)
-    Don't show fatal transaction errors twice (#3400)
-    Fix the build with -Ddefault_library=3Dstatic (#6119)
-    Fix incorrect error reporting (#6127, #5170)
-    When using FLATPAK_TTY_PROGRESS, terminate OSC escape sequence with s=
-tandard ST sequence instead of xterm-specific BEL (#6092)
-    Include all options in shell completion for flatpak search (#6096)
-
-Internal changes:
-
-    Fix an unclear boolean expression (no functional change) (#5013)
-    Avoid a duplicate redirection in the test suite (#6117)
-    CI updates
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../flatpak/{flatpak_1.16.0.bb =3D> flatpak_1.16.1.bb}            | 2 +-
+ meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/flatpak/{flatpak_1.16.0.bb =3D> flatpak_=
-1.16.1.bb} (97%)
 
-diff --git a/meta-oe/recipes-extended/flatpak/flatpak_1.16.0.bb b/meta-oe=
-/recipes-extended/flatpak/flatpak_1.16.1.bb
-similarity index 97%
-rename from meta-oe/recipes-extended/flatpak/flatpak_1.16.0.bb
-rename to meta-oe/recipes-extended/flatpak/flatpak_1.16.1.bb
-index f99c8ac36a..0d688adf3e 100644
---- a/meta-oe/recipes-extended/flatpak/flatpak_1.16.0.bb
-+++ b/meta-oe/recipes-extended/flatpak/flatpak_1.16.1.bb
-@@ -8,7 +8,7 @@ SRC_URI =3D " \
-     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
- "
-=20
--SRCREV =3D "1440f4faa67ebf69c7559f31d2cab59e6ec6fe2b"
-+SRCREV =3D "b676905d91aa3c4e524ca663784d4cf085c465d7"
-=20
-=20
- inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection py=
-thon3native mime features_check useradd
---=20
-2.50.1
-
+diff --git a/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb b/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
+index 047acf28db..eb444b3ada 100644
+--- a/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
++++ b/meta-oe/recipes-support/hunspell/hunspell-dictionaries.bb
+@@ -135,7 +135,7 @@ RDEPENDS:${PN} = "hunspell"
+ 
+ PV = "0.0.0+git${SRCPV}"
+ SRCREV = "820a65e539e34a3a8c2a855d2450b84745c624ee"
+-SRC_URI = "git://github.com/wooorm/dictionaries.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/wooorm/dictionaries.git;branch=main;protocol=https"
+ 
+ S = "${WORKDIR}/git"
+ 
 
