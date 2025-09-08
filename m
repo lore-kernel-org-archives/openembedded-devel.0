@@ -1,146 +1,120 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <deeratho@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34CE1CA1016
-	for <webhook@archiver.kernel.org>; Mon,  8 Sep 2025 06:35:52 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web10.6314.1757313347418562081
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 697CBCA1016
+	for <webhook@archiver.kernel.org>; Mon,  8 Sep 2025 07:01:22 +0000 (UTC)
+Received: from aer-iport-3.cisco.com (aer-iport-3.cisco.com [173.38.203.53])
+ by mx.groups.io with SMTP id smtpd.web11.6625.1757314878612236668
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Sep 2025 23:35:47 -0700
+ Mon, 08 Sep 2025 00:01:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TfsxaAvS;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2570bf6058aso5006795ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Sep 2025 23:35:47 -0700 (PDT)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=AE95pIT6;
+ spf=pass (domain: cisco.com, ip: 173.38.203.53, mailfrom: deeratho@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757313347; x=1757918147; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3YVPzZ+wOyqFKCGov08W9eAgdPR6wc4a7JYLZZS7vjU=;
-        b=TfsxaAvSkj9zhxwY7OiQDQfTRLyE1K4cauOMwkB0QQ7T6i1geo9sssYXmzcdOti21E
-         XNFbbHTGwSsEETU5ivGjzBdBmBS8juFq0KSnNkbmQ3FG7OcJRguiFwOBh2tyOMWxiq+T
-         tgjBCVMsyUC+YDGjNJ+uhwKEnQuxgpxvTccx5XD++K4Yjh8qaeK508GahEAi+h/Rvajx
-         v2OKyG86n8+/oUCZIO9V5ICP+Q1ugG28KSY7IFgPVeIZyj0Zdz0WJpoev3sW5kLDb+u8
-         w1VvRXvk6UN2rNs7cpm5kGmfoNW8R38uVUvukErOukXbJwUuEXcA8L0ay1M/y9ygd2FU
-         EljQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757313347; x=1757918147;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3YVPzZ+wOyqFKCGov08W9eAgdPR6wc4a7JYLZZS7vjU=;
-        b=E6wPoySI1mB5z2VyitJnPxB5ctzrKUHt8sLqs57IEscbIcZnBAQI9NGXhNee+wRc7L
-         xwSr/cC8+bEHi7RZ5c4UuUZVu7OMs9oZ7IMQdKjA9fiHfhmpHhVdJl1VY1izxN+pZtiG
-         ueTPVn9as0xFe3wBAk9XjhgJXYvnwkW7XcqDLGxx3O6AIKYVfsli7tG2m8DgPSqIUU7T
-         Fnv0XSd7LrPIkZR4/HgwYTgGxE8JlTMhuEBeVcSj7leRfOZmTHz3zZ5nlV+rJrEb7j5N
-         RqU/CcpYt2qaRNSIsSn9NetW08BpKsatE8kc/2OfndVnQ8bNyeMoGxNC6zllNAn7Unf1
-         Jckg==
-X-Gm-Message-State: AOJu0YxX8+roM3z/xo8tSwU5cP7mAFi6CB+Z8mhowAV7AIi1AM1OUbFO
-	nLWzE4IhTiBk/ga4nJb3KR7hhfetPz+trZAKTFo1DoOuqhm0dhIdyDS5m2sxOdSN
-X-Gm-Gg: ASbGncuBRHyudfUiOq3kiBYeBmzkxpd1PxfArUVi3qFI9NWMdBwz0y0ps04JDyOsdPt
-	/4r8x7/ZhAMdsPkgrmfnI2X52LHlXD88TXpqDh2CziKSeZLpLguENR4IEcgBjk1zj4TP4lG+GWd
-	KqFLYOItirBZWY7TCulMXupGRa0pJ30teZwqdhpguJGU1u06dAYBu8u6BD7MDhesDoNywijNfvW
-	+2uj0ePQakeA5OuvpQsRUHjTAzv4XLqClsYDO0meJToAw6PQzFhjqZR6HZis2ew9KOFZqFN3Tah
-	AHGoO9C+axl32W1sOJM7bLcMPpbkQIVZFH8khdKuCDIq+WoprOECLqfRGEOJSaxuRX2osTZ/pth
-	CbN36wLnrPRIOpg1hwv14qErrPRw8gN3j7o/ix+iFQ97ObvwEdBFRpLQzvtiWt97I+yby1fWqMy
-	RxYbrN1OICqB1ZGHun1raBb2480gDya8x+eKY7s+0WdNPXo84nGyPOtrCLAc6n+g==
-X-Google-Smtp-Source: AGHT+IETUO1Omd9OyyZlm90m3g0nzrYSAdWm21n9ROe1rHqDNdiIdVupSZ85MkCH98AzwO1iapV0YQ==
-X-Received: by 2002:a17:903:2288:b0:246:cf6a:f00f with SMTP id d9443c01a7336-25171cb6a56mr124070995ad.31.1757313346446;
-        Sun, 07 Sep 2025 23:35:46 -0700 (PDT)
-Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::fe29])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-24b2daec2dbsm154401055ad.124.2025.09.07.23.35.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Sep 2025 23:35:45 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+  d=cisco.com; i=@cisco.com; l=1328; q=dns/txt;
+  s=iport01; t=1757314878; x=1758524478;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=NwgqFEYsT42tNkveIucWL+8gIy8UIyM4VbClFRmpqIw=;
+  b=AE95pIT69vF8oYGTQMkNsuhiAAeiP/72x7m5HE7j91mFIxtGh9NV4hVW
+   TSZsuFD4e2p2ENj4A9NzbcY4qNcJSV33UXehBYV+5D6wIfEJ2ahaSml6M
+   OV5cf0umWxhAJuuE9e0yclHFp8/IxaUS+WKyUWTXwn7yLJbabzt/hwRye
+   gbgCZw9QXnBwu9tuVVjYY338s2FuLPHcou9EAC+EJKnlCft8hmdZkuqg9
+   It3onQ/162lWQE7FM1s7wIGrHE8DeOUHUdOscckq/P+NUBvHF1N8MI8vX
+   WKD0Cn1zBLN8zJun/adbO1rUY7s6Iq50W0B8gSUDPtN0K2WzEoeIGV1ys
+   Q==;
+X-CSE-ConnectionGUID: 35Wx5WF3T5Kzr74WMvCGQQ==
+X-CSE-MsgGUID: uKN79m+ZRCuC102p1zo/zA==
+X-IPAS-Result: =?us-ascii?q?A0AEAACGfr5o/9FK/pBaGgEBAQEBAQEBAQEDAQEBARIBA?=
+ =?us-ascii?q?QEBAgIBAQEBgX8FAQEBAQsBgkZ6WkJJjHCncoF/DwEBAQ89FAQBAYRBRowqA?=
+ =?us-ascii?q?iY0CQ4BAgQBAQEBAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHBYEOE4ZPDYZdN?=
+ =?us-ascii?q?gEYAS0wXDwIgwIBgnIDEa83giyBAYMoATEFCQJDT9sqgUkBjUxwhHcnGxuBc?=
+ =?us-ascii?q?oR9gQWBXAEBgi2FdwSCIoECFJAxgnyIQEiBHgNZLAFVEw0KCwcFgWMDNQwLL?=
+ =?us-ascii?q?hVuMh2BJ4UNhB4rT4UChGokaw8GgRWDXQaETkADCxgNSBEsNxQbBj5uB5R+g?=
+ =?us-ascii?q?2xRLIEYgRSTJZJMoREKKIN0jB6VORozqmuZBo4IllCEaYFoPIFHCwdwFYMiC?=
+ =?us-ascii?q?UkZD444g2mBf4MctGE7NQI6AgcLAQEDCZNnAQE?=
+IronPort-Data: A9a23:vAZnT60KXNgsYvL2+PbD5YRwkn2cJEfYwER7XKvMYLTBsI5bpzcHm
+ mJMXW+OP/mNMWH1fdojYISwp0IH68fczYdnG1Nu3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yFjmG4E70aNANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXU6
+ bsen+WFYAX4g28sbTpOg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGVxwJLdAn1L1LXEJc7
+ 6NEFxUTRT+6vrfjqF67YrEEasULJcTxeYdasXZ6wHSBXbAtQIvIROPB4towMDUY35wSW6yDO
+ 4xGNXw1NEWojx5nYj/7DLoykeqyj2X/dBVTqUmeouw85G27IAlZi+OxaYSPJoTiqcN9g2W++
+ TPDvFbDKQwxbYTF0WOX9TW+r7qa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
+ 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0UtdKVul/4waXx++Ms0CSB3MPSXhKb9lOWNIKeAHGH
+ 2Shx7vBbQGDepXMIZ5B3t94dQ+PBBU=
+IronPort-HdrOrdr: A9a23:37pa96H+nOFdaCVOpLqE48eALOsnbusQ8zAXPo5KJiC9Ffbo8v
+ xG88576faZslsssRIb6LK90de7IU80nKQdieJ6AV7IZmfbUQWTQL2KlbGSoAEJ30bFh4lgPW
+ AKSdkbNOHN
+X-Talos-CUID: 9a23:2bcj/mFhXTsHuK8xqmI8qXEER/8LKUGA72XKfBOHLHhCZ4SsHAo=
+X-Talos-MUID: =?us-ascii?q?9a23=3Al1gpsgxQYv6Cjci45H2543T35SWaqLmNLh9clNY?=
+ =?us-ascii?q?0geKZHnUoYS/EnjPwUKZyfw=3D=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.18,247,1751241600"; 
+   d="scan'208";a="33416240"
+Received: from aer-l-core-08.cisco.com ([144.254.74.209])
+  by aer-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 08 Sep 2025 07:01:16 +0000
+Received: from bgl-ads-3413.cisco.com (bgl-ads-3413.cisco.com [173.39.60.50])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by aer-l-core-08.cisco.com (Postfix) with ESMTPS id 33E601800019B;
+	Mon,  8 Sep 2025 07:01:16 +0000 (GMT)
+Received: by bgl-ads-3413.cisco.com (Postfix, from userid 1795984)
+	id 89E64CC12B5; Mon,  8 Sep 2025 12:31:14 +0530 (IST)
+From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 1/2] kronosnet: Upgrade to 1.31
-Date: Sun,  7 Sep 2025 23:35:43 -0700
-Message-ID: <20250908063544.2864968-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.51.0
+Cc: vchavda@cisco.com
+Subject: [meta-oe] [scarthgap] [PATCH] protobuf 4.25.8: Mark CVE-2024-7254 as patched
+Date: Mon,  8 Sep 2025 12:31:02 +0530
+Message-Id: <20250908070102.72098-1-deeratho@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Outbound-SMTP-Client: 173.39.60.50, bgl-ads-3413.cisco.com
+X-Outbound-Node: aer-l-core-08.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Sep 2025 06:35:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119330
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Sep 2025 07:01:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119332
 
-Drop Upstreamed patch
+From: Deepak Rathore <deeratho@cisco.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-links.c-Fix-build-with-gcc-12.patch  | 40 -------------------
- .../{kronosnet_1.24.bb => kronosnet_1.31.bb}  |  6 +--
- 2 files changed, 2 insertions(+), 44 deletions(-)
- delete mode 100644 meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch
- rename meta-networking/recipes-extended/kronosnet/{kronosnet_1.24.bb => kronosnet_1.31.bb} (90%)
+Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2024-7254
+Type: Security Fix
+CVE: CVE-2024-7254
+Score: 8.7
+Patch: https://github.com/protocolbuffers/protobuf/commit/850fcce9176e
 
-diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch b/meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch
-deleted file mode 100644
-index d57d0e61b5..0000000000
---- a/meta-networking/recipes-extended/kronosnet/kronosnet/0001-links.c-Fix-build-with-gcc-12.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From a8aac8f3fd8b07fde8f5dc0aa9ece54a46d24425 Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Thu, 9 Jun 2022 16:03:06 +0800
--Subject: [PATCH] links.c: Fix build with gcc-12
--
--Fixes:
--  | /build/tmp-glibc/work/corei7-64-wrs-linux/kronosnet/1.22-r0/recipe-sysroot/usr/include/bits/string_fortified.h:59:10: error: 'link' may be used uninitialized [-Werror=maybe-uninitialized]
--  |    59 |   return __builtin___memset_chk (__dest, __ch, __len,
--  |       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--  |    60 |                                  __glibc_objsize0 (__dest));
--  |       |                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~
--  | ../../git/libknet/links.c: In function 'knet_link_set_config':
--  | ../../git/libknet/links.c:108:27: note: 'link' was declared here
--  |   108 |         struct knet_link *link;
--  |       |                           ^~~~
--  | cc1: all warnings being treated as errors
--
--Upstream-Status: Submitted [https://github.com/kronosnet/kronosnet/pull/382]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- libknet/links.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/libknet/links.c b/libknet/links.c
--index 8cb1621b..0ef42b79 100644
----- a/libknet/links.c
--+++ b/libknet/links.c
--@@ -105,7 +105,7 @@ int knet_link_set_config(knet_handle_t knet_h, knet_node_id_t host_id, uint8_t l
-- {
-- 	int savederrno = 0, err = 0, i, wipelink = 0, link_idx;
-- 	struct knet_host *host, *tmp_host;
---	struct knet_link *link;
--+	struct knet_link *link = NULL;
-- 
-- 	if (!_is_valid_handle(knet_h)) {
-- 		return -1;
---- 
--2.25.1
--
-diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb b/meta-networking/recipes-extended/kronosnet/kronosnet_1.31.bb
-similarity index 90%
-rename from meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb
-rename to meta-networking/recipes-extended/kronosnet/kronosnet_1.31.bb
-index 06b2fa4d2d..d4b76903c4 100644
---- a/meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb
-+++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.31.bb
-@@ -11,10 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING.applications;md5=751419260aa954499f7abaabaa88
- SECTION = "libs"
- DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl lksctp-tools lz4 lzo openssl nss xz zlib zstd"
+Analysis:
+The original fix [1] for CVE-2024-7254 is listed in the NVD security
+tracker (https://nvd.nist.gov/vuln/detail/CVE-2024-7254) and was
+subsequently backported to the v4.25.8 version via commit [2].
+Hence, this CVE is considered patched in the current source.
+
+Reference:
+[1] https://github.com/protocolbuffers/protobuf/commit/cc8b3483a558
+[2] https://github.com/protocolbuffers/protobuf/commit/850fcce9176e (v4.25.8)
+
+Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.8.bb b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.8.bb
+index 949a3b207b..e54dffd2cd 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.8.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.8.bb
+@@ -21,6 +21,8 @@ SRC_URI:append:mipsel:toolchain-clang = " file://0001-Fix-build-on-mips-clang.pa
  
--SRCREV = "f8f80fd7f9b85f2626d2c6452612962ad8efca9e"
--SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1 \
--           file://0001-links.c-Fix-build-with-gcc-12.patch \
--           "
-+SRCREV = "da73f2a1e0ffe2aee15d4f705edf90ee8445e2d4"
-+SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1;tag=v${PV}"
+ S = "${WORKDIR}/git"
  
- UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
++CVE_STATUS[CVE-2024-7254] = "fixed-version: The vulnerability has been addressed and the fix is included in version v4.25.8"
++
+ inherit cmake pkgconfig ptest
  
+ PACKAGECONFIG ??= ""
+-- 
+2.35.6
+
 
