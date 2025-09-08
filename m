@@ -1,92 +1,101 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC874CAC581
-	for <webhook@archiver.kernel.org>; Sun,  7 Sep 2025 12:45:48 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
- by mx.groups.io with SMTP id smtpd.web11.18043.1757249144505725257
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34D19CAC582
+	for <webhook@archiver.kernel.org>; Mon,  8 Sep 2025 06:35:52 +0000 (UTC)
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web11.6343.1757313348532642544
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Sep 2025 05:45:44 -0700
+ Sun, 07 Sep 2025 23:35:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UAVnMwry;
- spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-b046fc9f359so673259366b.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Sep 2025 05:45:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Yg8dFe4S;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-b47173749dbso2685184a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Sep 2025 23:35:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757249143; x=1757853943; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=I0gOPiXo2pkPhOWctU4orGifFHMof/UF6+n/NwV2kFg=;
-        b=UAVnMwryik1LBoDa2eAe+Q0lLCDMhpAQDcitYoMIhDlOBcvSWXnjTWNNaCZ1Kra68s
-         h2LU3vtomLyQc6roduBFegNQR+5FZ/9ju8w08Z8FMrx8fRLLUDsesXvHh3yAhQtEHtRE
-         WPO8AYJDZIq8kldXvvrc91/TrUowtBWO/ZDbyf+UlCGnPkQCSrVgVupM4GcSzTRqA2+g
-         syDxudgrBSuj/BzoDSV+IMokyK81I5dPhXoSV7O7uhwgSae22dO0A4ktTopKRttVgyXj
-         UG6lb3dwVOCT/jdwBMrS+dq6pMA93X+zYvznKI+Z4fEnEqn01JvxLVb2WvXl92Nd8GyD
-         fmTw==
+        d=gmail.com; s=20230601; t=1757313347; x=1757918147; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=88NFRUg8JijN3zRf7YmYLVOGUDjZEgdYsKUKOBgZfOY=;
+        b=Yg8dFe4SiWvrrSwV6cXvxQ+atOiMt5zCzPuUpD2SgvCl3mFdT3tyc23ryvVzVSrvxs
+         /cFFvbpKYqtbObUqae443H4ZB2wD+8vseOQ1q0bWHevsNizIQK1GWDNcmpke498w9Isy
+         Mn3yjb9wgTcLqgsFVJyjo3AGegcoQeHep+88M96L5OnKF0rlAsyq3JsBVUYzjlzoHkF4
+         +CgmXmUsRzmCM94oOJ6HVOneCnwjNVQ39ymn0tc/zj+rJwN/+rRNCTDrhM82LI8/fEK4
+         C0RfJsEIm8ztowO4TiTwAKRm+buymrrH2XbvPkZgSY3qTo7mtXpAUSabnIJS4CAXZRTn
+         nCmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757249143; x=1757853943;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=I0gOPiXo2pkPhOWctU4orGifFHMof/UF6+n/NwV2kFg=;
-        b=h6PdPQnhP2n8Omyt93cnnNgBIvkDDDnzyClkvTdFVoGfQUVVo6bt8mZqSACUq/wQkw
-         z+2Jl0Fe6GkamEoyOa/PmZiIh+uR+sxENgItECAMmAeQgIr3GIvPGcSGfzorwS8aJEVJ
-         EAsNIBwYgX7g3GT1MLD9BDrG41sOEGwCFlYzTReeDcXA1eEMPgfR4+yvhv9XIZt7Za13
-         +dNtwI6NFqmRmZqLLkBD/xFzpAJ5H7qqDPGb3CYxDWNhuRv7j6NvEDrEGWxjCNihrgF4
-         UuWcsIdBeCPzH5rEr/p2glppZJ6+FvxByj1BC3pZxHRR451U48pa8lACuYOk+wzEC881
-         7oTA==
-X-Gm-Message-State: AOJu0Yzq1zDTvDan9ihuX21tXpToc3pHTySflgRYlJNvJew8lOSKLluO
-	tH5rzGSSxMaVKoDCVGyr7DumRveCk1qhF/Bm84KkrTrSUChFzs/OldBxHHDPOA==
-X-Gm-Gg: ASbGncsJ4q0DUwPZYYDKl7+fgtqLOHPU132fvuCYG6XQaQ5Ou8yTVi6NXLosarspAWX
-	sv/VO4ai6uQr5E//tF7ryBpNBw4BoUzlvd6BQ2alfjvsvP5WisrK3/tcfOAawxG8ZazWSJ1pfpE
-	aiZRTn+7k+xiMRO9DpHcdwQ+tmG61E/CYkc1dIpCnuO5obOil9iVxo5F6FTOseJcrQy0QI/fCLc
-	3pF3DtySYBwlQZMZW5qekiCffb3yPv8aPqxovP9gORhyrFDEDkARhq0q9iYh3D+0pX6lQA2toWi
-	kDOecPoCMfu4WX66C7gwWAu6Fg7vAc4Wu3T/iGMP3E6yWPH6f42xgLWQ8qubNW2nNNJzbofi+H/
-	cmDoUwO6yB3tIoSZIeg35VrZB8vH7H0U=
-X-Google-Smtp-Source: AGHT+IFAd0ytJn3HnzVJnEWe3c4AZmGCWwTJIsLU5SZK1fBlS2mB0H+yF2Ss+XwVcd3jOafRxt/9tw==
-X-Received: by 2002:a17:906:6a0c:b0:afe:ea93:ddbb with SMTP id a640c23a62f3a-b04b167cfe1mr384247466b.45.1757249142569;
-        Sun, 07 Sep 2025 05:45:42 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b043d6c2f6asm1517685466b.62.2025.09.07.05.45.41
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1757313347; x=1757918147;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=88NFRUg8JijN3zRf7YmYLVOGUDjZEgdYsKUKOBgZfOY=;
+        b=U11sYTG//+WpCOpfE9w82DPNsg4PU/kFvurIEfMMMxz1N/tWeNcAuXJAvoluNqwie8
+         ph5tDg0bEgMZVgi3g2cM8oEOaLf3OAqdjkSOCboDfv6gWREML5iEkXvEiEL8ug8NWp1W
+         5fZ3edNpqPvCPBY2ZtX8h1o3f91CBnxWR+/q2tKpsHvZD3UVIEq21zF+Cknov/gev8en
+         dIjwxjTxGoQudyO4SfQIjwpMwfgz4A6xHccHzqyjihaN8zK29IIMmUFS7SjRIYkg9zyJ
+         c5oIUP6ejD7JtoeCIi/HsgZP2T5J77MKquMpm4NhJwtqlujKtXt5Z2qCx1CDFTQQzgd5
+         oJMQ==
+X-Gm-Message-State: AOJu0YyFp8WtA5sarKDEDQDZw+3GFtcdCklnFlHF6sERVEcgyejphIjI
+	au7DWh0qZ9xmgKPipSmasFTgC5BdeoGV/JpJYXW9Lia+tZAprS3c6ucaLanvhBKf
+X-Gm-Gg: ASbGnctkK8L9GsF096lzfSaq/ZpVPQaXXa0SfTqUI9JPQxvzRpLc1oWP4NH7JqktzWD
+	CXh2Krn64ArsG5ZEHo3bwewZUyhAfuLy8zEamODGRa36xfJqmFBnpqxyaPBtSWetsmpdGA1aZX8
+	Po5tAto/Q7yNzfSxG1sihIJjzO8y9QNBqjn4ZnOnkXC1wp/JvxWQIOyhm39jQtHfCJ7TCmWhHce
+	wQ+MCPkRCT1TCoSAP5bLD5aK10YS4/EhYNxNYgQNfmLpRxOBBLwk7J4OmccOFAWM5luOWPEVAJx
+	HfRMV9yBlFQYTA6Xxuzh6RXL680O0Wsf0B/6o6VbnPpF8xo7V+P71uZrLRAQ1TkcUcji8OPYhMz
+	cfuzSnTTswTOujbfozDoTO52bgU0ooNQT3mWXnJsIjooojAnh5zIpqefuS2VWPQebmqap2miwHt
+	xjw4ZJKDCj+Oi7nQhxTJVQhCbc/w2sl3HinIM/dyL2Dc+P9gTYcqA=
+X-Google-Smtp-Source: AGHT+IFTESVgPi7UOXnUKka70Kq2JpNpveFSsFSaQUq2amjfQWhrMK2AW/XtqZoo0J6uiP/K6XnaXg==
+X-Received: by 2002:a17:902:d4cb:b0:24a:9105:d020 with SMTP id d9443c01a7336-25172766679mr62525855ad.51.1757313347522;
+        Sun, 07 Sep 2025 23:35:47 -0700 (PDT)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::fe29])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-24b2daec2dbsm154401055ad.124.2025.09.07.23.35.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Sep 2025 05:45:42 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Sun, 07 Sep 2025 23:35:46 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][walnascar][PATCH] gtkwave: Add libtirpc to depends
-Date: Sun,  7 Sep 2025 14:45:41 +0200
-Message-ID: <20250907124541.1067493-1-skandigraun@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-txws: Switch to pypi for fetching
+Date: Sun,  7 Sep 2025 23:35:44 -0700
+Message-ID: <20250908063544.2864968-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250908063544.2864968-1-raj.khem@gmail.com>
+References: <20250908063544.2864968-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 07 Sep 2025 12:45:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119329
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Sep 2025 06:35:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119331
 
-From: Khem Raj <raj.khem@gmail.com>
+This helps build when using shallow clones for git repos by default
 
-It was missing as the recipe is using --with-tirpc
+e.g.
+
+| vcversioner: no VCS could be detected in '/srv/build/yoe/build/tmp/work/cortexa57-yoe-linux/python3-txws/0.9.1/sources/python3-txws-0.9.1' and '/srv/build/yoe/build/tmp/work/cortexa57-yoe-linux/python3-txws/0.9.1/sources/python3-txws-0.9.1/version.txt' isn't present.
+| vcversioner: are you installing from a github tarball?
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
-Adapted for Walnascar
-Signed-off-by: Gyorgy Sarvari <gyorgy.sarvari@gmail.com>
 ---
- meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.121.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-connectivity/python-txws/python3-txws_0.9.1.bb  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.121.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.121.bb
-index 3f94933e6a..55cfc4f353 100644
---- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.121.bb
-+++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.121.bb
-@@ -13,6 +13,7 @@ DEPENDS = " \
-     gperf-native \
-     gtk+3 \
-     gdk-pixbuf \
-+    libtirpc \
-     tcl \
-     tk \
-     bzip2 \
+diff --git a/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb b/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
+index 205775ef63..9299539cef 100644
+--- a/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
++++ b/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
+@@ -11,8 +11,8 @@ RDEPENDS:${PN} += " \
+     python3-twisted \
+ "
+ 
+-SRC_URI = "git://github.com/MostAwesomeDude/txWS.git;branch=master;protocol=https"
+-SRCREV = "88cf6d9b9b685ffa1720644bd53c742afb10a414"
++inherit setuptools3 pypi
+ 
++PYPI_PACKAGE = "txWS"
+ 
+-inherit setuptools3
++SRC_URI[sha256sum] = "cb93086095d04a5d70f53a75053f7df478ff37e972c3637fb55ca4a9e6b94679"
 
