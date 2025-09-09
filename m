@@ -1,314 +1,199 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <SunilKumar.Dora@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2AC6CA1016
-	for <webhook@archiver.kernel.org>; Tue,  9 Sep 2025 00:30:29 +0000 (UTC)
-Received: from mail-yx1-f46.google.com (mail-yx1-f46.google.com [74.125.224.46])
- by mx.groups.io with SMTP id smtpd.web10.548.1757377822807694299
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6A09CA1016
+	for <webhook@archiver.kernel.org>; Tue,  9 Sep 2025 02:52:40 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.3361.1757386350943495317
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Sep 2025 17:30:22 -0700
+ Mon, 08 Sep 2025 19:52:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QQyOjoGi;
- spf=pass (domain: gmail.com, ip: 74.125.224.46, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f46.google.com with SMTP id 956f58d0204a3-5fe42994547so973624d50.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Sep 2025 17:30:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757377822; x=1757982622; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+6fW7oGf3zb1eeecGsPKV769v2AO60bkQFhnOqetMwQ=;
-        b=QQyOjoGiGm6G5tBkczUo1Trn//E2BdHJBIqri0LCWlne56+1AXhwgBzsAR953jWFjR
-         mu2CyqNf/UK53Au0UmulSXyX2PtYdpZYNu9fF3ueFO0yAb1auNdGwM2sBkhIZcjr+bA7
-         Uk7XO9ZzXwLmNU7f3N+b/AShx/CgLzrxavixnS1YTbyyVTcuAuw1p1j0U6l8hUeV+N3B
-         o+UlzmQ5pulD50MCp9UmWAv05RHGCWf5ono+agctjVDgrxoOxX9NkKUOZLiDawlLDfXJ
-         PGI3IcrzV6O4DKkAT/4wXcSzcH0eSKydciTbkSqLu2hBijk4J5C4MQ8JXYfpPUCjFw3i
-         5LjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757377822; x=1757982622;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+6fW7oGf3zb1eeecGsPKV769v2AO60bkQFhnOqetMwQ=;
-        b=dbW1zMLhD56BOIdD1oMPjHn7gBqHcfL2FKHVrCeVTL4kt0UBD2rp50BgyRZXp5i9Dh
-         xVuNymQf0KMOi8McRiZpTTQBz2P87OIHaA//NzBBUCqq6lOwH0TbyQkpUox4VwES1weN
-         STlP9TFX46QcZ8wlBkY3eNdYPvRL7l20BBxiMxDV8gT4msLVn+ooyRyXQbayDky7vJ8S
-         q5VVjsFiEaT95zzsTyZ1UTrEiNZLpWRtkwNirDxtpkxwjNEBnu4mYIChOPI+9e6caD1+
-         Xjr4Hdb/UoTCizZ5Dt8mnLhOIrKJmjNpjZTu6QjdVmamrIpsJOpd/sfeyI7sSfqYfvaj
-         R7Pw==
-X-Gm-Message-State: AOJu0Yzwmwr26KMJFwP4rQImiWQe4CWJSI/F4SN4byHIGHjfUNHA/+3O
-	2qMFNTCf3G5azvIioqTkvD7/3wbJ946T5/11sas4aqlMkcJn8OuEsu0vCJbkog==
-X-Gm-Gg: ASbGncswD6kuOUVUrrGq2KiE9wl89I2D+DUKC5uEy44E+U2M6WW1RKJODC2qDXvAaFe
-	4fR5hcNbzAcZY6hqt6ZhyNl7569jYfsJw3WvAtR0eBTV/GGV9mVY8vFF9eloFm2zJBi8y8WLp67
-	VXBuzN7iFfpO9m81tmCg+tNdI9jJRVuUzwxYCBbQI6nattHOsVX10CINVlV+eDC89bQOMPQHgFs
-	HW1dRUsS7+VUhoHWCz3fgkP97kmH86uDl73Z9vNKW+LGuuekg+7Me/g7L/XczlQTGociWg2d0ka
-	5EIDC5gUR5LFOtIbKFDP1UbqyvdQMUAnKA6ilIFlIbPZo9oWY+0J9OFExskfo/um8f15l0uOaMT
-	PA5oWsj7TaIiF1KwWuLizD8tG/e2Y
-X-Google-Smtp-Source: AGHT+IFenijuVnsVgBYB5AFG2Qszn1PPpvlzaHclrCZEKMvpVcI2/FaLPVA/TXJHR5cgn2lxptDXJA==
-X-Received: by 2002:a05:690e:2550:b0:60a:23e9:5e8b with SMTP id 956f58d0204a3-61034fb910dmr6167174d50.32.1757377821342;
-        Mon, 08 Sep 2025 17:30:21 -0700 (PDT)
-Received: from localhost.localdomain ([67.233.61.26])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-723a82d58b8sm57815607b3.9.2025.09.08.17.30.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Sep 2025 17:30:21 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=AmB9e8dI;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1347883a23=sunilkumar.dora@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5891YbfT936889
+	for <openembedded-devel@lists.openembedded.org>; Mon, 8 Sep 2025 19:52:30 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:message-id:mime-version:subject:to; s=PPS06212021; bh=cDMklApkt
+	4vTjOj1aGFlHh0bgRVCvA4uDfBVpgXib90=; b=AmB9e8dIW+5LFFQSU6+mRc9xe
+	gzqwhXAdN++byAl3ISqUvvI4A8Y6ubpiRsGRB/bdN+HQzhbQvFbI8jV2P6iV1oyi
+	NxD5Jib9oPS6FhCWycoltRo2qq6Jk2lYHmdQLnreC8vOyfj8neigePg/2oTIx43n
+	Fm73bRwcHFsU3DYUKZXj5xLLKy+g3RQSfEznw5B0bqFIrosL6CpCinT35c9Fo9vC
+	U3HuPRXF0qZGrPvoxjsBo+421SRfEJW0WXr7MmJmSkgoTyiMYz4riGIxJlGsMB/h
+	cus0j2MmlM33LiCT2E2WAzTPt+JrZai6XK8i2+cRGRLv1riR0CbgIKULQsjAg==
+Received: from nam12-mw2-obe.outbound.protection.outlook.com (mail-mw2nam12on2047.outbound.protection.outlook.com [40.107.244.47])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 490mfg27vv-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Mon, 08 Sep 2025 19:52:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=g3Vinldvbl4ngZmlrGgVEIRoZc2zPPtoy1VFKdQ0pDaC7UkiP++q5T5yKi7E2OhfM0tuEi9epaEZi3fTi9+2t2TK6mOD2rLGugD2QHtVjERTflVMaNbCs6uhOJQ/0p2x8I36zwcIOtVa6oHQpxp3kp8PpT7gjbjS8apU6zSMRou4yjN1uL5EdNNjOoN9cIPODm6SWFGg91n5Rr3SYN/TGrnDjIaFNAr5TKxVJrUlhex2OiO4ONFjZfBqp6R1JYFnmmBSNYVG2mUNx7QLwOVvga1kBCC6BLdwVB1pRrVhgEqIJhSeIHHV/Tp9s0JWv9cCrrDsSEr7BM66mZj40bIgZA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cDMklApkt4vTjOj1aGFlHh0bgRVCvA4uDfBVpgXib90=;
+ b=sSy3iTzayM3xNnUWg4Ytdu5cZpiZ5/SjR5JIZZzeK7VoXVa/QSl5AwFs3eHb0A3Y/qjAd4V5QrFFl+CZr8kl7UfM999QAaItNxGnGcbdHIIVX/lKRCfGsMelULbZXRd1zHSxD2OrZGzzQ+v1sJlNDdtJPIKtTFYM2vW6MNO6qWwwsqUCxCjB8Gjve00915eTLeA6JWx6mBes6NgY1R1N+54kVp5TiMg5AI3u/p/50wZyuib4RqvXhCF+GCoiuoEBu2xciV16d6fm5+tmtCnkpDfJwxmxeDBDJjXTV2FxEO+a/FXVGyAONd1NVhTkC5PUG8Hfk2b51RR8pIkGRnj84g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB7901.namprd11.prod.outlook.com (2603:10b6:8:f4::20) by
+ PH3PPF307806035.namprd11.prod.outlook.com (2603:10b6:518:1::d13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Tue, 9 Sep
+ 2025 02:52:27 +0000
+Received: from DS0PR11MB7901.namprd11.prod.outlook.com
+ ([fe80::9fa:eb3f:cf26:264d]) by DS0PR11MB7901.namprd11.prod.outlook.com
+ ([fe80::9fa:eb3f:cf26:264d%7]) with mapi id 15.20.9094.021; Tue, 9 Sep 2025
+ 02:52:21 +0000
+From: sunilkumar.dora@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] nmon: Upgrade 16m -> 16n
-Date: Mon,  8 Sep 2025 20:30:02 -0400
-Message-ID: <20250909003002.39929-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
+Cc: raj.khem@gmail.com, sunilkumar.dora@windriver.com,
+        Randy.MacLeod@windriver.com, Sundeep.Kokkonda@windriver.com,
+        Liezhi.Yang@windriver.com, Wentao.Zhang@windriver.com
+Subject: [meta-oe][PATCH] layer.conf: add bpftrace to NON_MULTILIB_RECIPES
+Date: Mon,  8 Sep 2025 19:51:57 -0700
+Message-ID: <20250909025157.21102-1-sunilkumar.dora@windriver.com>
+X-Mailer: git-send-email 2.49.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR13CA0009.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c0::14) To DS0PR11MB7901.namprd11.prod.outlook.com
+ (2603:10b6:8:f4::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB7901:EE_|PH3PPF307806035:EE_
+X-MS-Office365-Filtering-Correlation-Id: 32fef611-d001-4da1-d01e-08ddef4be568
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|376014|52116014|1800799024|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?3+u+B4W3daReX8QFUt90IXtEhPB4oO8ZAuYLmh+4Anqmt7rzeSDPiHlpLEx/?=
+ =?us-ascii?Q?1Y5u6nOSkbEg9GbEWCDxSrw3CmrOSsW4S9ZHv9lh2IlURRCVtJVsc5s+rFxo?=
+ =?us-ascii?Q?MgLDgxKORdC4b3hpGgS8Dw+0UnQgTnPwyrI+JyoZCnL6L6iKPtkHAsAVOdqh?=
+ =?us-ascii?Q?RS+w740zK/5SmGnVEq1nOqSnP8cNVBWWtgrZUIk7Ag+ml8bCRyl/5s7VOE+S?=
+ =?us-ascii?Q?avr7drbIEgC/F8NhKkQyvMvAPOWCY8jYXgLnk/u3hwDSbyfRtXECL+WxUpkx?=
+ =?us-ascii?Q?1wZS6kBmmVwuQ9SLvr0iWhXig5s/5nktXxiVz5vL3UYelgF+NSQGr8uQeTuf?=
+ =?us-ascii?Q?6NAnwpHdSTky2nEGMvwmrBdAV0Z8tkezYSsh/k2GLCJOIEvoPX6kP1vPQbnj?=
+ =?us-ascii?Q?yzxMjz4qL1T/IzmUUOFoAmuTzcZ5BOd9bdtQN9XgcH1sHFqtdVaVquRiegza?=
+ =?us-ascii?Q?YkS7Wz74mG68GPmlD5pW0tWn6E1xeXJehTmN0NIU73qS69i0+0UpiVUanL1j?=
+ =?us-ascii?Q?nW+12RbTO1FCiTKn7xRzPhfNNLZXZwGMKjX5Y6OVl6jfZxuNBHafHNXYLEfq?=
+ =?us-ascii?Q?jvjWnqm5WvCloDEFiQjOZHycaHD3Hv/+eODtb6GlQPyT3X5Nkr8H5kCeT5WF?=
+ =?us-ascii?Q?9jy9yCk0EywdwY/xYvfIVi33TmHJg7+tbIcKEgdGTdOuO0oGxGWXysJoA3HH?=
+ =?us-ascii?Q?pPFFYfBQ49JBIRYp16ecVMESF1oW5VkvLDK+Mo+Kngu9WkDk43f7Rjl3ebRg?=
+ =?us-ascii?Q?xNdd6vkLCfhi4316F+AuR0ZDDRzb0wjywfIP5aO4NNDWwIJBuUAMFjSgOFAN?=
+ =?us-ascii?Q?0cu8ykUPZZE+Hh5bwLf1N6ANVGlhbiSOWy3rHE5HpQfRoLcme8sTMeAcGHkI?=
+ =?us-ascii?Q?CYrseML6YkkyhACzEWNHOHk+5fhNqTvq+STS6omk1GevX6UwKkag7PUZgvS7?=
+ =?us-ascii?Q?ZrkHas1ibfziRv2Sld0SJd3tFHRp6UANLMbcX+ixUdvvmQkzu83hf0SfMZLU?=
+ =?us-ascii?Q?kFkKTMJHCrJg58PXi4nuz0FWIl1wdW+g2jzbcAtaxafDm7nEa2ypEn4mec5k?=
+ =?us-ascii?Q?egrEnbLeLeAtfYevWpHwacsmccxpOMnsHPmWs+Tw7raHf0dKtkJgG11WXefE?=
+ =?us-ascii?Q?pSb8LFZgMD/ZcKaiaf4mvUvEyDX4FKF7IIqwV33F+/Y8pp4Pdbx78zZEeA3d?=
+ =?us-ascii?Q?k8f/OoYSvnkjDUOVT1g6QDUMEh2qJwxlvnuPm+PGcu0PIB35V9WhLGfcpWnE?=
+ =?us-ascii?Q?3Pcda6xn+KZK6+uPGOoCgNrj5c25C1X5LGroLOxajFCvPh8nNoIDUiXYyaUb?=
+ =?us-ascii?Q?ynj0IDdHK117dMiVQzgFgluGvhaKZHstoLfnTrAbZKvgPmvlFDKq3cao2cAQ?=
+ =?us-ascii?Q?9Mx9Dewo3P0XOxWtb/tvYfJKFaSiWxrXGYsDDkOoOAessFwVzC323HxeMvw+?=
+ =?us-ascii?Q?7R+Z5ckgHRfjoWgvjAByUpboKsVQC36kvP4Lay1sU0Vak3e3p9hkcKGII12h?=
+ =?us-ascii?Q?roHoTKEm0nSumbw=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB7901.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?yt6ixCPz9YOHz23PobWcos3KVZX26I7QL3JE09VM3L3czRZyn+B7rmO/GA6I?=
+ =?us-ascii?Q?GbkQyIOQiQ1EtwcESDhDyeUiZj8UA7RWQuzNulYh/VxOWERUxNbsx6NkvVHC?=
+ =?us-ascii?Q?wP9tbPAg7K7DpAcK8UUpsLejbo+GSty5FC7vBoUJQBJmq33sOKoLo3hZouWF?=
+ =?us-ascii?Q?y38yeJZSKvRhF/NdrhUPtfM9nVnvBCe69OwhkZcsTZwLrXBVG5OXL/2Y1VO8?=
+ =?us-ascii?Q?nwrxHDCAqOnesxTcDIuzobjyDns/mK9NKqoDgarXqPFBD8oDWkcS9dd3nsIY?=
+ =?us-ascii?Q?QbP7y+QcyPE8FB+Ui9ooxLQa6hZbKWBBPxj5odWl+AGdFuc3MOx9c6GFAKL6?=
+ =?us-ascii?Q?gBGHTTtTWHwPGJWqfwENBNKJye1/rGEUoa1lfzqJyJXA0fo+kaDcysirAYFb?=
+ =?us-ascii?Q?yXmLeIesrwB+fQorFYmBPg6eMbguF6ca9VEX/BpkAAqY/utirOMiTbIrQ2Zp?=
+ =?us-ascii?Q?By/fNhqGQ9ygxzqqVnEGg5qs46MK5J7UZNhgtX6W15TkwYzLvNv5ZsyRiEua?=
+ =?us-ascii?Q?CnpJESOskEU+HwXoETXjOa+Bf74tF35mqYIODbQ5+F/myQOYGRQ/uBJoKeXj?=
+ =?us-ascii?Q?Oefsqk6QCSv233Jrf7IyErt+c7E2wL9/wkQ/F8q7E31iwhGezCicyk3et7si?=
+ =?us-ascii?Q?z8Dl1kcHrLypqSId1CXqXmrCh4J/IV084xuQb8Rlui8SPbzpMkS7j7nU0g1m?=
+ =?us-ascii?Q?BaLRtzsAva4nNB1+3coCSAtOnO6ulCFANrTFCGkk99eanOglIzWDDFBrO1ut?=
+ =?us-ascii?Q?HpgzG3RFS4LRwP7WKBYm4m2gz7bLVJ1/caVCyb40fH+/Q12yiAXb1u0T404v?=
+ =?us-ascii?Q?FCiUtdaFyRHgoJNmLEQhbHSPAJduoyL3PT1y4HjA2qgzcvbHZtoMlSVgng7m?=
+ =?us-ascii?Q?Z49GJcSjJ1AB03ECUpoAB+Z3Oa5jeIY83Uyp3jLlF50RnjxXBK3oDPw1vKsl?=
+ =?us-ascii?Q?M/JbfBjFPMqSNpOoM3owZo8HAu/OvvtIABfyxmSiMBXSU7cBwsMMjAUvdJ2O?=
+ =?us-ascii?Q?fFZAsvjN8ZuOTWCqVI/l/WPytKgUZoMYv+rRtvYBFHkBlqUufos3vXIeAL/A?=
+ =?us-ascii?Q?EOB/68QUqsdQ9G3STpbzOHMmAI3iRee17BaNv5hSAl2YxSzLMk9lgLv8F7iQ?=
+ =?us-ascii?Q?FiCTmICi5c1FRfn5Y51ICCsnIPBdLB23lWl53OoxiFWyD9NYbGwimpuvTQKa?=
+ =?us-ascii?Q?PGCCfKPudWImDR0qBpLrczUhJvTcAqzjmeMs7QDIPUUZZElGLQMbUIasWMN4?=
+ =?us-ascii?Q?dE/53brEiFExe9cpmrRNcmI9DXKIRH8eAoA3GTw2d8gB63limTEZfNQJey/m?=
+ =?us-ascii?Q?8LTqPeWMHv46JwU9ht1V9T3jjZg8xHwMcJZmsON/SQWmeqYK+lxLFJJ7wUtx?=
+ =?us-ascii?Q?PFGaWaUv/tRyu1CQbuxGwaNyaN0Fj7T0NirDThFa2PDa0r3UxpOsq7KNvTEE?=
+ =?us-ascii?Q?8AJzQVOfsFfRFjjS+sJkiW6FDdcn1DnG55pVPCeL3R36Vpgws4hBP0wN4OLl?=
+ =?us-ascii?Q?mVv71K3zcm4tOUqxvfzcsVAh53xUR8wnBHjyu+7A0nTnJlX/X87BnYXUvqmj?=
+ =?us-ascii?Q?rl+Do2zayM5yQP1uGZdh4Xilirfku0n6B3o7ochNZjnc+zxQMRheJHRikRti?=
+ =?us-ascii?Q?rw=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 32fef611-d001-4da1-d01e-08ddef4be568
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB7901.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2025 02:52:21.0044
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vLb/8xTh7fQYReYeZTEdTvtUZjyzz+F1bPyuHeWaU7dhlLkBkAvrGbaQHethIkVdDHS5goX30DigzyNFdcwXWC0AyWX9pdFWJOUjlelK3ws=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH3PPF307806035
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-GUID: HMmxsUfgdXSc_SHJ9p--BPMERO1KKUvZ
+X-Authority-Analysis: v=2.4 cv=d+v1yQjE c=1 sm=1 tr=0 ts=68bf966e cx=c_pps
+ a=00uhA2iMQE1K7v6Psv3cpQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19
+ a=xqWC_Br6kY4A:10 a=yJojWOMRYYMA:10 a=t7CeM3EgAAAA:8 a=Y7BqFZQdhNh1JCg1PW0A:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTA5MDAyNyBTYWx0ZWRfX1d9qfLMi2XZU
+ 7gZk5kb8Ar0pvBm7g+wQb5RuMCHFSFXdruwQ6mQNxJbBH4MEMYzpT0+Ct8ooy8mz2R4YL0UkFOc
+ Yz8tEqUxI7hQbLWq59RcpmB7uP+S0QvzN1mR4OeGIou2JTxoSss3JICRcAFdgyZ8DZdExECc2oW
+ N8VcOcOYIpnBBpoljH3QW9APioU5TKjjOzE9yRZuAbcSp6Sc3OP4X1d5XiZ/hOdUXOOJtjDbZVh
+ ApaQQlJnrPKJwk4Nu3mx/ufZjy/Y4Zh41ELHT8+1weqU/wCS0IYCRfj7xzgQ2wuZaTnFE6iN5ov
+ rvgVjbkfVXj9rXUvYhV1U6wIJAwJ46CtcyShTpywJLZD9EC5OvqkG35CRwlMTQ=
+X-Proofpoint-ORIG-GUID: jInCl5vkozQRDIVipjC0M6Kk_ZIzsMeP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-08_06,2025-09-08_02,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 adultscore=0 phishscore=0 priorityscore=1501
+ bulkscore=0 impostorscore=0 clxscore=1011 spamscore=0 classifier=typeunknown
+ authscore=0 authtc= authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Sep 2025 00:30:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119339
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Sep 2025 02:52:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119340
 
-refresh patches
+From: Sunil Dora <sunilkumar.dora@windriver.com>
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+bpftrace need line up with kernel architecture type,
+so add it to NON_MULTILIB_RECIPES.
+
+bpftrace must be built with the same architecture (32-bit/64-bit) as the kernel
+to ensure compatibility when tracing kernel functions and using eBPF features.
+
+Signed-off-by: Sunil Dora <sunilkumar.dora@windriver.com>
 ---
- ...ror-format-security-errors-with-mvpr.patch | 71 ++++++++-----------
- ...0001-lmon16g.c-Adjust-system-headers.patch | 21 +++---
- .../nmon/{nmon_16m.bb => nmon_16n.bb}         |  2 +-
- 3 files changed, 40 insertions(+), 54 deletions(-)
- rename meta-oe/recipes-support/nmon/{nmon_16m.bb => nmon_16n.bb} (91%)
+ meta-oe/conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/nmon/nmon/0001-Fix-a-lot-of-Werror-format-security-errors-with-mvpr.patch b/meta-oe/recipes-support/nmon/nmon/0001-Fix-a-lot-of-Werror-format-security-errors-with-mvpr.patch
-index af79efed96..5c1f2de2b5 100644
---- a/meta-oe/recipes-support/nmon/nmon/0001-Fix-a-lot-of-Werror-format-security-errors-with-mvpr.patch
-+++ b/meta-oe/recipes-support/nmon/nmon/0001-Fix-a-lot-of-Werror-format-security-errors-with-mvpr.patch
-@@ -1,7 +1,8 @@
--From eba852316735daec27d4ff11483018ca596312d0 Mon Sep 17 00:00:00 2001
-+From 9908274a3555fe2abb3596d917cecfafcb4fbf7a Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 30 Oct 2021 02:11:49 -0700
- Subject: [PATCH] Fix a lot of -Werror=format-security errors with
-+
-  mvprintw/mvwprintw
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index 5501e4315f..bddfabc219 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -119,7 +119,7 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
  
- In all these places a non-constant is used as a format string which
-@@ -10,14 +11,14 @@ compiler complains about. Fix by using "%s" as format.
- Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- lmon16m.c | 86 +++++++++++++++++++++++++++----------------------------
-- 1 file changed, 43 insertions(+), 43 deletions(-)
-+ lmon16n.c | 88 +++++++++++++++++++++++++++----------------------------
-+ 1 file changed, 44 insertions(+), 44 deletions(-)
+ DEFAULT_TEST_SUITES:pn-meta-oe-ptest-image = " ${PTESTTESTSUITE}"
  
--diff --git a/lmon16m.c b/lmon16m.c
--index 7e46642..1d53367 100644
----- a/lmon16m.c
--+++ b/lmon16m.c
--@@ -5475,20 +5475,20 @@ int main(int argc, char **argv)
-+diff --git a/lmon16n.c b/lmon16n.c
-+index 8a5d35c..cec409a 100644
-+--- a/lmon16n.c
-++++ b/lmon16n.c
-+@@ -5489,20 +5489,20 @@ int main(int argc, char **argv)
-  		    /*
-  		     *mvwprintw(padsmp,2, 0, "CPU  User%%  Sys%% Wait%% Idle|0          |25         |50          |75       100|");
-  		     */
-@@ -45,7 +46,7 @@ index 7e46642..1d53367 100644
-  		    }
-  		    COLOUR wattrset(padsmp, COLOR_PAIR(0));
-  		    mvwprintw(padsmp, 2, 27,
--@@ -5579,8 +5579,8 @@ int main(int argc, char **argv)
-+@@ -5593,8 +5593,8 @@ int main(int argc, char **argv)
-  			/* lparcfg gathered above */
-  			if (lparcfg.smt_mode > 1
-  			    && i % lparcfg.smt_mode == 0) {
-@@ -56,7 +57,7 @@ index 7e46642..1d53367 100644
-  			}
-  #endif
-  
--@@ -5597,7 +5597,7 @@ int main(int argc, char **argv)
-+@@ -5611,7 +5611,7 @@ int main(int argc, char **argv)
-  				    100.0);
-  		    }
-  		}		/* for (i = 0; i < cpus; i++) */
-@@ -65,7 +66,7 @@ index 7e46642..1d53367 100644
-  #ifdef POWER
-  		/* proc_lparcfg called above in previous ifdef
-  		 */
--@@ -5673,7 +5673,7 @@ int main(int argc, char **argv)
-+@@ -5687,7 +5687,7 @@ int main(int argc, char **argv)
-  				 100.0);
-  		    }
-  
-@@ -74,10 +75,10 @@ index 7e46642..1d53367 100644
-  		    i = i + 2;
-  		}		/* if (cpus > 1 || !cursed) */
-  		smp_first_time = 0;
--@@ -5704,16 +5704,16 @@ int main(int argc, char **argv)
-- 		    char *wide10 =
-- 			" 10%%-|                                                                |-10%%";
-- 
-+@@ -5697,17 +5697,17 @@ int main(int argc, char **argv)
-+ 		if (cursed) {
-+ 		    int rows = 0;
-+ 		    BANNER(padwide, "CPU Utilisation Wide View");
- -		    mvwprintw(padwide, 1, 0, wide1);
- -		    mvwprintw(padwide, 2, 0, wide2);
- -		    mvwprintw(padwide, 3, 0, wide3);
-@@ -88,6 +89,7 @@ index 7e46642..1d53367 100644
- -		    mvwprintw(padwide, 8, 0, wide8);
- -		    mvwprintw(padwide, 9, 0, wide9);
- -		    mvwprintw(padwide, 10, 0, wide10);
-+-		    mvwprintw(padwide, 11, 0, wide_1_64);
- +		    mvwprintw(padwide, 1, 0, "%s", wide1);
- +		    mvwprintw(padwide, 2, 0, "%s", wide2);
- +		    mvwprintw(padwide, 3, 0, "%s", wide3);
-@@ -98,10 +100,11 @@ index 7e46642..1d53367 100644
- +		    mvwprintw(padwide, 8, 0, "%s", wide8);
- +		    mvwprintw(padwide, 9, 0, "%s", wide9);
- +		    mvwprintw(padwide, 10, 0, "%s", wide10);
-- 		    mvwprintw(padwide, 11, 0,
-- 			      " CPU +1--------+10-------+20-------+30-------+40-------+50-------+60--+--0%%");
-++		    mvwprintw(padwide, 11, 0, "%s", wide_1_64);
-  		    mvwprintw(padwide, 1, 6, "CPU(s)=%d", cpus);
--@@ -5755,16 +5755,16 @@ int main(int argc, char **argv)
-+ 		    if (wide_first_time) {
-+ 			mvwprintw(padwide, 3, 7,
-+@@ -5747,17 +5747,17 @@ int main(int argc, char **argv)
-  			rows = 12;
-  		    }
-  		    if (cpus > 63) {
-@@ -115,6 +118,7 @@ index 7e46642..1d53367 100644
- -			mvwprintw(padwide, rows + 7, 0, wide8);
- -			mvwprintw(padwide, rows + 8, 0, wide9);
- -			mvwprintw(padwide, rows + 9, 0, wide10);
-+-			mvwprintw(padwide, rows + 10, 0, wide_65_128);
- +			mvwprintw(padwide, rows + 0, 0, "%s", wide1);
- +			mvwprintw(padwide, rows + 1, 0, "%s", wide2);
- +			mvwprintw(padwide, rows + 2, 0, "%s", wide3);
-@@ -125,10 +129,11 @@ index 7e46642..1d53367 100644
- +			mvwprintw(padwide, rows + 7, 0, "%s", wide8);
- +			mvwprintw(padwide, rows + 8, 0, "%s", wide9);
- +			mvwprintw(padwide, rows + 9, 0, "%s", wide10);
-- 			mvwprintw(padwide, rows + 10, 0,
-- 				  " CPU +65---+70-------+80-------+90-------+100------+110------+120-----+--0%%");
-++ 			mvwprintw(padwide, rows + 10, 0, "%s", wide_65_128);
-  			if (wide_first_time) {
--@@ -5813,16 +5813,16 @@ int main(int argc, char **argv)
-+ 			    mvwprintw(padwide, rows + 3, 7,
-+ 				      " Please wait gathering CPU statistics");
-+@@ -5804,17 +5804,17 @@ int main(int argc, char **argv)
-  			rows = 23;
-  		    }
-  		    if (cpus > 127) {
-@@ -142,6 +147,7 @@ index 7e46642..1d53367 100644
- -			mvwprintw(padwide, rows + 7, 0, wide8);
- -			mvwprintw(padwide, rows + 8, 0, wide9);
- -			mvwprintw(padwide, rows + 9, 0, wide10);
-+-			mvwprintw(padwide, rows + 10, 0,wide_129_192);
- +			mvwprintw(padwide, rows + 0, 0, "%s", wide1);
- +			mvwprintw(padwide, rows + 1, 0, "%s", wide2);
- +			mvwprintw(padwide, rows + 2, 0, "%s", wide3);
-@@ -152,24 +158,7 @@ index 7e46642..1d53367 100644
- +			mvwprintw(padwide, rows + 7, 0, "%s", wide8);
- +			mvwprintw(padwide, rows + 8, 0, "%s", wide9);
- +			mvwprintw(padwide, rows + 9, 0, "%s", wide10);
-- 			mvwprintw(padwide, rows + 10, 0,
-- 				  " CPU +129--------+140------+150------+160------+170------+180------+190--0%%");
-++			mvwprintw(padwide, rows + 10, 0, "%s", wide_129_192);
-  			if (wide_first_time) {
--@@ -8274,7 +8274,7 @@ I/F Name Recv=KB/s Trans=KB/s packin packout insize outsize Peak->Recv Trans
-- 			    formatstring =
-- 				"  PID    %%CPU  Size   Res   Res   Res   Res Shared   Faults  Command";
-- 		    }
---		    CURSE mvwprintw(padtop, 1, y, formatstring);
--+		    CURSE mvwprintw(padtop, 1, y, "%s", formatstring);
-- 
-- 		    if (show_args == ARGS_ONLY) {
-- 			formatstring =
--@@ -8294,7 +8294,7 @@ I/F Name Recv=KB/s Trans=KB/s packin packout insize outsize Peak->Recv Trans
-- 			    formatstring =
-- 				"         Used    KB   Set  Text  Data   Lib    KB  Min  Maj ";
-- 		    }
---		    CURSE mvwprintw(padtop, 2, 1, formatstring);
--+		    CURSE mvwprintw(padtop, 2, 1, "%s", formatstring);
-- 		    for (j = 0; j < max_sorted; j++) {
-- 			i = topper[j].index;
-- 			if (!show_all) {
-+ 			    mvwprintw(padwide, rows + 3, 7,
-+ 				      " Please wait gathering CPU statistics");
-diff --git a/meta-oe/recipes-support/nmon/nmon/0001-lmon16g.c-Adjust-system-headers.patch b/meta-oe/recipes-support/nmon/nmon/0001-lmon16g.c-Adjust-system-headers.patch
-index 6721d2b5e5..4a921f2921 100644
---- a/meta-oe/recipes-support/nmon/nmon/0001-lmon16g.c-Adjust-system-headers.patch
-+++ b/meta-oe/recipes-support/nmon/nmon/0001-lmon16g.c-Adjust-system-headers.patch
-@@ -1,4 +1,4 @@
--From d977b5170027926eb97ab9742ddc51d2a5555a34 Mon Sep 17 00:00:00 2001
-+From e5e075af8b235360046eea9dd06e39ed9651b174 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 14 Jul 2017 10:06:49 -0700
- Subject: [PATCH] lmon16g.c: Adjust system headers
-@@ -11,14 +11,14 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
- Upstream-Status: Pending
+-NON_MULTILIB_RECIPES:append = " crash pahole libbpf"
++NON_MULTILIB_RECIPES:append = " crash pahole libbpf bpftrace"
  
-- lmon16m.c | 4 ++--
-+ lmon16n.c | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
- 
--diff --git a/lmon16m.c b/lmon16m.c
--index cb27e09..d2a11c5 100644
----- a/lmon16m.c
--+++ b/lmon16m.c
--@@ -63,7 +63,7 @@ static char *SccsId = "nmon " VERSION;
-+diff --git a/lmon16n.c b/lmon16n.c
-+index 5efd8f8..8a5d35c 100644
-+--- a/lmon16n.c
-++++ b/lmon16n.c
-+@@ -61,7 +61,7 @@ static char *SccsId = "nmon " VERSION;
-  #include <fcntl.h>
-  #include <math.h>
-  #include <time.h>
-@@ -27,7 +27,7 @@ index cb27e09..d2a11c5 100644
-  #include <sys/types.h>
-  #include <sys/stat.h>
-  #include <sys/ioctl.h>
--@@ -71,6 +71,7 @@ static char *SccsId = "nmon " VERSION;
-+@@ -69,6 +69,7 @@ static char *SccsId = "nmon " VERSION;
-  #include <sys/time.h>
-  #include <sys/socket.h>
-  #include <sys/wait.h>
-@@ -35,7 +35,7 @@ index cb27e09..d2a11c5 100644
-  
-  /* Windows moved here so they can be cleared when the screen mode changes */
-  WINDOW *padwelcome = NULL;
--@@ -576,7 +577,6 @@ struct procsinfo {
-+@@ -583,7 +584,6 @@ struct procsinfo {
-  int isroot = 0;
-  
-  #include <mntent.h>
-@@ -43,6 +43,3 @@ index cb27e09..d2a11c5 100644
-  #include <sys/stat.h>
-  #include <sys/statfs.h>
-  #include <net/if.h>
---- 
--2.13.3
--
-diff --git a/meta-oe/recipes-support/nmon/nmon_16m.bb b/meta-oe/recipes-support/nmon/nmon_16n.bb
-similarity index 91%
-rename from meta-oe/recipes-support/nmon/nmon_16m.bb
-rename to meta-oe/recipes-support/nmon/nmon_16n.bb
-index 4e7abb2123..1cf1049259 100644
---- a/meta-oe/recipes-support/nmon/nmon_16m.bb
-+++ b/meta-oe/recipes-support/nmon/nmon_16n.bb
-@@ -11,7 +11,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/nmon/lmon${PV}.c;name=lmon \
-            file://0001-lmon16g.c-Adjust-system-headers.patch \
-            file://0001-Fix-a-lot-of-Werror-format-security-errors-with-mvpr.patch \
-            "
--SRC_URI[lmon.sha256sum] = "2bed4d45fdfdf1d1387ec91e139c04975d5f838e3e0d53c0fe2d803a707e5fc1"
-+SRC_URI[lmon.sha256sum] = "c0012cc2d925dee940c37ceae297abac64ba5a5c30e575e7418b04028613f5f2"
- SRC_URI[doc.sha256sum] = "1f7f83afe62a7210be5e83cd24157adb854c14599efe0b377a7ecca933869278"
- 
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/nmon/files/"
+ NON_MULTILIB_RECIPES:remove:x86 = "libbpf"
+ NON_MULTILIB_RECIPES:remove:x86-64 = "libbpf"
 -- 
-2.43.0
+2.49.0
 
 
