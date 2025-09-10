@@ -1,119 +1,113 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 47037CA0FED
-	for <webhook@archiver.kernel.org>; Tue,  9 Sep 2025 15:34:21 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web11.1475.1757432058079967347
- for <Openembedded-devel@lists.openembedded.org>;
- Tue, 09 Sep 2025 08:34:18 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7153ECAC582
+	for <webhook@archiver.kernel.org>; Wed, 10 Sep 2025 00:31:16 +0000 (UTC)
+Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com [209.85.219.181])
+ by mx.groups.io with SMTP id smtpd.web11.5596.1757464271311284851
+ for <openembedded-devel@lists.openembedded.org>;
+ Tue, 09 Sep 2025 17:31:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WInRgboR;
- spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-624fdf51b44so3542004a12.1
-        for <Openembedded-devel@lists.openembedded.org>; Tue, 09 Sep 2025 08:34:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=as7hYt/b;
+ spf=pass (domain: gmail.com, ip: 209.85.219.181, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f181.google.com with SMTP id 3f1490d57ef6-e96c48e7101so4987601276.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Sep 2025 17:31:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757432056; x=1758036856; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=H4CuMDwAhbH45Jg3u7cx/P8xLCtj9VBRZ03AAtMKCE0=;
-        b=WInRgboRkVhACRev4AJeU/pqPorQ9ZRj87eqr7y+VF4KhT9wHVoqt561xnbCMe1GUK
-         DfbiFkfMgPGtn+dDCaLUSLvgoIVOIKmvMcl4amaE0IP9GzLBenEMRhvRdUn5SK6LDPso
-         nyZmwMkCJ0wi0ATdcqo+8KC2QaPdEKYXLVhAhn5wAs8MMefd0zEOPAzluQaMEtdSTWoy
-         NJjRxToZfCbE0jmMdSpwPPSX5N+WFUbgnwzQPtMp3bqYxdcvhyTTUT/zJU7F6hSJyT5C
-         ZRI7aAHzZkeToriX1KpGosOaQ1l1sntLAKa16p4LuUB9kA9c4hZkvziZ7ZKiDfDIeFg7
-         wJuA==
+        d=gmail.com; s=20230601; t=1757464270; x=1758069070; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=rHQAs5f24MySixsBttasMrX+7t9j0BjdVZJSJxgXZtk=;
+        b=as7hYt/bLoJvf1V0MJmtF8kdgHPghT8MyzBu4RfJ5XBIZUZJjdOCo9MUUvxLgNYAx3
+         m4i/GC1byQ16AnYIMDEEQUtc5HgIM6mJyOW+XmcBO3RK/ut/bCC9G99u1rArJm1wdw2x
+         JPq7rlXVxUkpM63jPRcVTuLZ6KwK9XsPNcibaawI2bbXpJRdAGFK65pLnjlyUVeJOFM3
+         tklcS2n++INdn2RCsrQWoUspNrcLWVjGjHia2c5dE8gQEPqfPmXHtCM3OHW3J9dVG78W
+         o6BChYQJ2UPoEcuelaIENPWbkkLKrn0o8OnT4brBqSAPT76c8LmdvziFbOfpDvjYP3V/
+         n5qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757432056; x=1758036856;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=H4CuMDwAhbH45Jg3u7cx/P8xLCtj9VBRZ03AAtMKCE0=;
-        b=liBZeE7pj2CcHRsK+QLStCB4GVTDXpZTIaE9iw2e+fTSfgeST1LMulCOPu9JP0Iepj
-         ZqyhTkmJkaXmt0c0YDG8JkPLM6NZiQCx7JZML8NNg7iAiGsaNMMuGttdtCwr46H3vR6v
-         ybWQnDwRu4w0cZXWRrhWjjCpnZcL4lL7jBsiUWTKv3N8DupZAFfE/S7YSLlkUnS40t41
-         S/W2FSfnBGKRRIf9eBP7PcQlcHG9JgqIrtnlq3v/DtzKgvj4vQmhXmPHaIKMICO8844R
-         4YgI7XpVkiiZee6qcfdf7+U4xxJe+2QOtu8emaKOvgrCQEKbUSeRGGCAEdwmTV+80akX
-         asAQ==
-X-Forwarded-Encrypted: i=1; AJvYcCV8rahL+TQDy0zbYTC99umTRMcLoEiBBHe3KEAf9B1KeF/S8+4/ZPZhJp8IVySIAwcyZKeXvltDvR28MMploRJxhCs=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yy8tSMvOQZWJevisFqhsqzlsBU5TdUtMZTikx//q0Gdbur4X29r
-	GGWTq5tCYvXfxkaLO9F076EcR1cbFQgL6BsFvL26ZBxKXhrKzhl3VHSO
-X-Gm-Gg: ASbGnctHZcW+woDEf5JuI0CXFrcWdVFfgIxHwrKep9L6JluEVAcWJTM+14lOxwfp1PC
-	gsZ+TGijeVeHLFGzO1E589FuyXeDv1GDkwcbuHfA4nWK7MuDZIDP31xjsUfa4nGCwMs0Hew/N/5
-	MQZmYudZYrkymyqlBq6mPx39ctM8ijJZD17Wm1w+KwHNiYIKv5IQg9LdSQej8jsagkm88Hb1qKi
-	LYIswp3REb9/8A8Os3JR8HsYuqBxFBEiU16EHPsGEdyKOueAFHylNf6ZHlH19xo2ppyb1XsBT+2
-	kwBulrLBu55QMeFGzwWUrIDXkYPENdeUEbNLZSBn8A8U6/sLxb4HhpHOG0BmvRvdmbDbXXVnMQE
-	DEQg5IGfrH3TASurqsJRCozetCkUa3TslSLsWIa7BLw==
-X-Google-Smtp-Source: AGHT+IG/OlwtGXExmUcDuEdP2wqHWHAG6DVkMIErVJ6aIvMvnyG9lHUmR+hW1Vu9V1S6p9K/Tk/5MQ==
-X-Received: by 2002:a17:907:3f21:b0:afc:cc64:86da with SMTP id a640c23a62f3a-b04b14f5015mr1179546866b.26.1757432056246;
-        Tue, 09 Sep 2025 08:34:16 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b078334a852sm6945666b.71.2025.09.09.08.34.15
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 09 Sep 2025 08:34:15 -0700 (PDT)
-Message-ID: <ccec1b2e-b095-4385-96b2-03489a6325a4@gmail.com>
-Date: Tue, 9 Sep 2025 17:34:15 +0200
+        d=1e100.net; s=20230601; t=1757464270; x=1758069070;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=rHQAs5f24MySixsBttasMrX+7t9j0BjdVZJSJxgXZtk=;
+        b=MR9Tnw9Cx5/heg8GkCuUGso6xr7vyCMXrSb+R7QJHVe5axMaKtXI53L1jLEeFQRkpw
+         WvhDx/q9VPjrYnJ0PQu7A/RpiU3ipscZn3k/1PZeq/UseJWRRcbPEeyEjSVUa6SuAdE5
+         X8SLcu6ktE7RC2a622C2n31Gmmhfq2iBzWanCwv+wDirPMpCfjENt+tvCaKdVlxGfvWs
+         kD4XZEko4S9O/sEeG2ffsaz4/ft7bnwEmXgMcNWV5OULTLFWoKCiQbqCMYpJnacrkQOh
+         I4xpmLEA4EUBcSrAim1l2eh6Hj4BNZlZjuZ13aY1DvAOto9jwRV0HNcZ8zU66wZxC4G/
+         gx/Q==
+X-Gm-Message-State: AOJu0YyexStXZhqI7UTBb3cg4NJpf8zLy57lyQOAK131KnW4pDBiSKXK
+	iv1gDX1Q6/9l0L7q4yX6jIYNOE0V9xvmDJi2a7lb0f1Pcf9yH9dsHP8uAQ8Scg==
+X-Gm-Gg: ASbGncta47RsoFcrqYZglvWQbA2wZn+29UB0m8BCxzGzS6nQVoWzCiKQTo08wRCPXBE
+	ho+4vu2y9dAEMmJDF8npR73DA3dFjKSqNReabbRNZDMxC2qL8uwcmAdOGHvAvhYMKMdsXgyW84F
+	pk/vxoQPZIXguXXZ59N6UagPkPBHwfaZz5/X0OmAY6LC32tPV0EfOjBglKagRWmS7XaYj8WHY7O
+	lia3CtA06cMd0J9hYAV7KJF2PYRkGIyYtaYc4282761WQNA2Cn+W0sO+YGAgzXxQ3CN7AaB3N1j
+	BZeBNFL5P1iV+mWZ6WKmTIhATOBEJzIVKBY9gXwZULSU9njWon483ux3iUT+NrXiUdk9g+MsiSH
+	Dl0HTwfj0BRvExNLYSsa+fydh2sk/qYK/sm029jc=
+X-Google-Smtp-Source: AGHT+IHqv9U8279vGmWqUbzEr//1F40IgBBoyceOczfEoQ1QJFFjXHx/eb40Irnve2YRIkvsGZq7aw==
+X-Received: by 2002:a05:690c:3690:b0:71c:1673:7bb7 with SMTP id 00721157ae682-727f2dbeb63mr126293767b3.13.1757464269746;
+        Tue, 09 Sep 2025 17:31:09 -0700 (PDT)
+Received: from localhost.localdomain ([67.233.61.26])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-723a82d6adcsm64978217b3.11.2025.09.09.17.31.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 09 Sep 2025 17:31:09 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-perl][PATCH] libalgorithm-diff-perl: upgrade 1.1903 -> 1.201
+Date: Tue,  9 Sep 2025 20:30:59 -0400
+Message-ID: <20250910003059.36911-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] Stable branch maintainership
-To: raj.khem@gmail.com,
- openembeded-devel <Openembedded-devel@lists.openembedded.org>
-References: <CAMKF1sqhzO979KgHE9BEfbw5xe7NH0GKZji9VHOAy6pn+E9NDQ@mail.gmail.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <CAMKF1sqhzO979KgHE9BEfbw5xe7NH0GKZji9VHOAy6pn+E9NDQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Sep 2025 15:34:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119344
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Sep 2025 00:31:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119345
 
-I would be also interested in trying myself as a stable maintainer,
-unless someone has any strong opinion against it (in which case you
-should speak up).
+License-Change: License appears at a different offset in the file.  Checksum remains the same.
 
+New maintainer.
 
-On 9/8/25 23:47, Khem Raj via lists.openembedded.org wrote:
-> Dear Community members,
->
-> Armin has been doing awesome work in maintaining stable release for
-> meta-openembedded layers for many releases, however his situation has
-> changed such that he is not able to continue the meta-oe stable
-> maintenance.
->
-> We have three branches in maintenance, kirstone, scarthgap and
-> walnascar at the moment and
-> a backlog has been piling up. Several members have raised concerns on
-> mailing lists on pending
-> updates for the stable branches
->
-> I would love to have someone step up to help with the stable
-> maintainers role. Which would
-> be looking for stable branch patches on mailing lists and reviewing
-> them and creating a staging
-> branch ( like contrib/stable/kirkstone-nut etc ), testing and
-> preparing final pull.
->
-> Armin used his own machines to run the CI, we now do have a machine
-> available for OE CI
-> which we should be able to use for the CI loops for these branches if needed.
->
-> Looking forward to hearing from you
->
-> Thank you
-> -Khem
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119335): https://lists.openembedded.org/g/openembedded-devel/message/119335
-> Mute This Topic: https://lists.openembedded.org/mt/115139938/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Changes for version 1.201 - 2020-12-13
+    speed up LCS when $keyGen is undef (RT 101105; thanks, XENU)
+
+Changes for version 1.200 - 2020-09-27
+    new release with no new features, just preparing for a series of bugfix releases
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ ...iff-perl_1.1903.bb => libalgorithm-diff-perl_1.201.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-perl/recipes-perl/libalgorithm/{libalgorithm-diff-perl_1.1903.bb => libalgorithm-diff-perl_1.201.bb} (61%)
+
+diff --git a/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.1903.bb b/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.201.bb
+similarity index 61%
+rename from meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.1903.bb
+rename to meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.201.bb
+index 6d24a6c93b..cd52a5d1b2 100644
+--- a/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.1903.bb
++++ b/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.201.bb
+@@ -7,13 +7,13 @@ program.   It is guaranteed to find the *smallest possible* set of \
+ differences. \
+ "
+ SECTION = "libs"
+-HOMEPAGE = "https://metacpan.org/release/TYEMQ/Algorithm-Diff-1.1901"
++HOMEPAGE = "https://metacpan.org/release/RJBS/Algorithm-Diff-1.201"
+ 
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+-LIC_FILES_CHKSUM = "file://lib/Algorithm/Diff.pm;beginline=1676;endline=1680;md5=f6b2fe8ca06ca6faefa4f265fc494c2c"
++LIC_FILES_CHKSUM = "file://lib/Algorithm/Diff.pm;beginline=1671;endline=1675;md5=f6b2fe8ca06ca6faefa4f265fc494c2c"
+ 
+-SRC_URI = "${CPAN_MIRROR}/authors/id/T/TY/TYEMQ/Algorithm-Diff-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "30e84ac4b31d40b66293f7b1221331c5a50561a39d580d85004d9c1fff991751"
++SRC_URI = "${CPAN_MIRROR}/authors/id/R/RJ/RJBS/Algorithm-Diff-${PV}.tar.gz"
++SRC_URI[sha256sum] = "0022da5982645d9ef0207f3eb9ef63e70e9713ed2340ed7b3850779b0d842a7d"
+ 
+ S = "${UNPACKDIR}/Algorithm-Diff-${PV}"
+ 
+-- 
+2.43.0
 
 
