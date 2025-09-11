@@ -2,60 +2,60 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D9AB8CA1016
-	for <webhook@archiver.kernel.org>; Thu, 11 Sep 2025 12:03:49 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web11.44932.1757592221034351322
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7C27CAC58D
+	for <webhook@archiver.kernel.org>; Thu, 11 Sep 2025 12:05:29 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web10.44860.1757592325031187075
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Sep 2025 05:03:41 -0700
+ Thu, 11 Sep 2025 05:05:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KjiITtMY;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-b04b55d5a2cso109388466b.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Sep 2025 05:03:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Hn+JD4jR;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-b043a33b060so90081366b.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Sep 2025 05:05:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757592219; x=1758197019; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1757592323; x=1758197123; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
         bh=7KHj1D0pYtBf9lsN3wWwox/h4CQXy3SCTWikE1NYT8w=;
-        b=KjiITtMYmKFrsHG60cW3mnMsq++8Li6CTkdGRThV3SjCZfLBypu7HV6d7NEVlALhhr
-         h0GXvrLHOJeqbEHnz9GmN4IHn5mPM1FqRGwalnhM+XoSsDGJWLzna96fCT7x05FDpuxm
-         rAyOi8N2IIRftwiI0A1kovyKqhiDHygWGBWzGsQyS+k8Tgvu9zXkQ3+6efKeUujHnxWK
-         mk0YcJSCzx+beISoT8saLsU6+YcNbuXVbVi8K/R6VB26cs9DEFMrRat4GlVV38Es1RXH
-         DPiTD1QaBbRfAiKci/HHcs6aMFGi56lV7ZmAX3J7pW+MqAPTgtNrXkWQknVqXlq1K2Hg
-         rRMA==
+        b=Hn+JD4jR1Q2zjV/fF7qxUvpKNDaidU5171tiXyc6sfVqO0XbgAao6bU1lItD611+zb
+         SKJ/KvXxtRJdJTSuKRuWGitT8n31P2g5DQPwUvFqsVezp5ugjWLcPAFIq9yFZ0FnST3i
+         SgKyHcDg7m3tcFn8YaLxL1JkAqJe0AzfuAG7OxQosOp6lFk8ei5qLhIEMjyRutXmoA7f
+         YspVhv2hUYKFJpHNd6/M9W5g8cdtx9rEvq39dRAyN4k4UxnGwFAQEMCzjlaVk7OcdMRm
+         aUFFsfrXNrHm2D9EIXxghRBDdAzvI30HqmY0TpY3K6Av1uxw882NlP0ABGAeX1RUvRCn
+         fUZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757592219; x=1758197019;
+        d=1e100.net; s=20230601; t=1757592323; x=1758197123;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
         bh=7KHj1D0pYtBf9lsN3wWwox/h4CQXy3SCTWikE1NYT8w=;
-        b=sogo44fvFU3EckVP65Bd7cUIS/I36FwS5A4ixWPnk9Eyz+kUaCP/sVhDTB6o3ah0eH
-         pIYssUJZOfA0a1PGtl6jv7/r8JPfCI349snj1g6QbSgVFE3z/4nxBRQPqLeg5YWU9Rj1
-         Ews0mz11z1/6GwMfG41WxgUxn9FO5GxhDylzUq1fIYp/wi+02QRNWl2JfzErZpBX/T3K
-         UbkVZvNXOzxQQXe1e1Hoz5dfsTgu7fqs57cSTzV7gm/lIc8LF5jOKM8sZ/kF4d6JBo47
-         UoTPz7MgCN8D5+P205N75aJUc9cXfxOn7fN4LlT7KuJ35Dt4NqrDg1ao9oyCFKDcZIfD
-         x+BQ==
-X-Gm-Message-State: AOJu0Yxy+VVn45pNghBLjcR13MP9N3h0+J3TNhEx8TxaJy+voOEa9VHy
-	h9sUhKH+GBC7AZGA3tShN6zynDrw4M8KU+AOThKeM6tWmSWW0Ol6d5JDAS17+Q==
-X-Gm-Gg: ASbGncss/QPdl1pMWu2/yI36Qi2MCdUe+FATh6yXyfpS5B3iJJMO67y5rPRx0TrLav2
-	A5IXT2Y8aLYAnvNgzD6CcpqCo4cIVJt2ef8ZaY8pa9LfkzpG/h9Ow0SL7ojaMI5yF7kIktTHLZ7
-	b3hasvWEEvyzEhqO7ZWWEPrb5rkP6jKIu4ovuCHVB7bILZWmy+ACCuMdDKHTiyvrXcNhswhvkpV
-	lj+kFkKtQKEHRJSgQtPAauwwZN0BvEmwQ6YSPkO6QOCECfr5yLnVVkcn2/2qHEVs4ATpcSUU3pt
-	sKoeF8e0K2GgL+Nh7z34hf7RYAVA9tZRgKgmpmWRhp4ChAww+mU3VWIoKYKUbA4eMC/z9TDUQgL
-	/IBMU5fFGOX5DalVUYG4wmMsxzOoNKOa+Us5P2mWRgg==
-X-Google-Smtp-Source: AGHT+IEYQFbpjehNe0Y3V0U3D+D8xTallnTIS82kIyK5p724GgZMQ/HGpoGCsYgx1cLjiuxSLZ1enw==
-X-Received: by 2002:a17:907:a48:b0:b04:250d:ee7 with SMTP id a640c23a62f3a-b04b1695e8bmr2032146966b.31.1757592218774;
-        Thu, 11 Sep 2025 05:03:38 -0700 (PDT)
+        b=Js1DrY/vImpxdntBP9jTE9pIPBMOd0HCsfWJyZxi4Dq6UmGk+p3Fvoz4XFsSpggcxD
+         S4TQ4Gn4TTuvz3PKf0stM3Ko3CGwyCBeKLk5fmwdoGcFeyaz2516q6ZLoEcOdtyviPf7
+         YLhiUVzABJ+b0Uai43UaIFsDp8e60WancKY+cV8hav9fT+5T6/9O3EsX8vQ9jS3JDaRQ
+         q9ax2rAzxvvnCgXGKR/New0EES9r8tnO1dgdsmm59321OZLtC5ySDRUOE7jLSRfcS2NN
+         gRVbG6hKkdw/R4N6iwcxQuSl8JfPmSnE8M0GL9SFeNHdmuOIBZTc0zxhyqbOfvCpzrmh
+         GOCg==
+X-Gm-Message-State: AOJu0YwPht2bQZtZzjKK2gW/2l5zLQeN8t9H2BVQywEVvyUeOVGrIfYk
+	GlIg/+AKApjtwOxbZCCsW55XJzdyr2XbntipPR9ih9CthCccxcD+zz92dVp2Yg==
+X-Gm-Gg: ASbGncsGiGoDVxqVJdKwhQWM904MS1f23c6CnASDGXsdJUT04SVYX193Uab7W4LUsKG
+	Vc1TGlg6j7mulkF2ENV+qKnDtzV+rRx7RAqTE7FwyTkP9XjkEaXfxFGX2QqZlkPavuTL0dhCdat
+	aZPNDqmDLOnQSwYHxwU3ahdngv5zzJJlwgeF/NT2zU8e7Qlv6RwgPNEzXAtyX1cAW9S4yQy/FJ9
+	G69zZjtw9FgV1eKAB1rjBw2jQ/vzV3UzvE3XbQrRNgHeb0tikXs6z+B05fg+mf7bkK0OhcRthP3
+	wxvarrv+aLiolcEw9VGaV0vYm4mYzwsR432TDiMkNLCGGpFrBNha9ENkqhg74+oC0ZtIDM4O3QI
+	BexCV2+1119rzsk/5q+04AzUEGhYE22I=
+X-Google-Smtp-Source: AGHT+IG2oDzRVebXPPY/qqfsfFV5nHT0Cbm1zfVxV2et/dpCdgK86CXug1uJvTaetch5u2vDAsFMcQ==
+X-Received: by 2002:a17:906:9fc7:b0:b04:2edd:280b with SMTP id a640c23a62f3a-b04b1687e50mr1965314666b.39.1757592322877;
+        Thu, 11 Sep 2025 05:05:22 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b07b31715fdsm118250366b.49.2025.09.11.05.03.37
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b07b316e2d4sm119057466b.45.2025.09.11.05.05.21
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Sep 2025 05:03:38 -0700 (PDT)
+        Thu, 11 Sep 2025 05:05:22 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] libgdata: fix compiling for 32-bit targets
-Date: Thu, 11 Sep 2025 14:03:31 +0200
-Message-ID: <20250911120337.3472337-1-skandigraun@gmail.com>
+Subject: [meta-gnome][walnascar][PATCH] libgdata: fix compiling for 32-bit targets
+Date: Thu, 11 Sep 2025 14:05:20 +0200
+Message-ID: <20250911120521.3578557-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -63,8 +63,8 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 Sep 2025 12:03:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119367
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 Sep 2025 12:05:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119368
 
 When compiling for 32-bit targets, compilation fails with the following error:
 
