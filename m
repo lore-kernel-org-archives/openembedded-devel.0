@@ -2,120 +2,152 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7C50CAC58D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7165CA1016
 	for <webhook@archiver.kernel.org>; Thu, 11 Sep 2025 07:02:57 +0000 (UTC)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
- by mx.groups.io with SMTP id smtpd.web11.40116.1757574174948243333
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web10.40077.1757574174309397602
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Sep 2025 00:02:55 -0700
+ Thu, 11 Sep 2025 00:02:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ikh9TwsD;
- spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-aff0775410eso279159566b.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Nq1llbAC;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-b0473327e70so56503966b.3
         for <openembedded-devel@lists.openembedded.org>; Thu, 11 Sep 2025 00:02:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1757574173; x=1758178973; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Phhh58DEnybkLIujlZWh5WW5+tqfZSal4nHrB3Iu1s0=;
-        b=ikh9TwsD6t6LYJc7h6XmiIfbtRzkKX4dM1bebQs3bODnqmMXeCFaxMihyMSx9EIVDO
-         BoEKCTM9cAHKc/YW0RWb/MDKf9Qsvtr47y42ieCaAtyBPJn+5Va/6NZHLZJHa8Yf7wDx
-         eI4G0ky/blUfyZS2BlCq6it4ckgRkN1N4e0Bqbyee2IMJmwGKvaQIx4MQ3eAnE9gYLv/
-         oQ63erjlytNnX9J90cAx0+2q/+fhAHRLcDiepIu1Nm8Pvx3bTdSbwBOnpwE/u5LU4a4C
-         yFNfUuJsp/yqZwZqPl8O6EQCK20SUgDixEo4NKk7nYAkoXEjZC3Zy9vctuzo2LkYJ9hQ
-         0VPQ==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=oe5h5Mn3SASn5Fah238fA5FMWvH71GizyCFeAxvOgiU=;
+        b=Nq1llbACQv37YWplLutI22N0hdjos9rO+RFCt774DcPvqoJl2mZzqefVu7BmTP0NnM
+         XJYVLb4T7exT6FP/I9uIxpWARauYcZUFzB5JzUYoTMEu+NEXkzkSIuFvnXJD092/W2Bi
+         cWtwRWtiqNEMARtfH7bSzTrtAz89yeRUVvjJEGtQkrrznqfQEezOKO7MZDlHR7RLRvBi
+         rQRcHKAs6+HNQIK4WCIq01lJbLzVSz/Bnx2awAX4m/iKtjoS0njUcMQJv3HFBSoTzJV0
+         YQULS1TZ7NBj+DAKmigbkJ6j/RXy4yw9xtsOJaDmnuuAXvEz2VcT3B5/uriQF6BoCrIm
+         EwgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1757574173; x=1758178973;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Phhh58DEnybkLIujlZWh5WW5+tqfZSal4nHrB3Iu1s0=;
-        b=aawe0L4LEHuctd4317XzthS4dL41QcxrVwQkntKjeC6TwlMemK0ivXwihViCOoWTAY
-         M4K1Zvsb3nhkqFJe2FeGDhQU+HT3OMyJcOKtAbqE/CusmteIbvHvGPbs6zQwu8QABjiy
-         5bjcdFAN17nJ05K+iOO3dP0AE4hnTGjGhAZuQLYVetZd7bEfmr811ZceRl8NEco3/EAL
-         kyeWWKHOwVR98wACPn+UnJ+xiwsph/rR1fwzezbNvTmsSDEKxbNqhYw87D6ufF8Fxwla
-         6Qd09RpYtgKK/bTe8fxq7pTkyLUn0Q5y/t0XMCIJEuuYezLHIh1+lFacxIHqZnzVRyWE
-         7lMw==
-X-Gm-Message-State: AOJu0YyFC/eJBOXC2CDfv1FDZe96mMTyWOc1ckKHu+6pFK38kAAmJn64
-	fpkqG6NMNQj/mqcDxOq+dD8fCri4D+rIGtgCfOOuo7gSclYrVrS9JUmy5El0lg==
-X-Gm-Gg: ASbGnctuja732Q/6M3Rqr/mnTkkFHBTuA8BW+HLgRduyU5gBHX/57eDyPPqqLl0yinA
-	Pnu5vG0TwdA90YQuD5e0vL1AtJfaaA2N3qho08hVj8nDq0M1rQM5Dg6w6oNRQddbF8IVUgw3PcZ
-	CsDJ/cSth99N4EGrovBpMPqf03501EQWIk7ZreGV/XNlPSmcm8OmaC8RBBFPsTtz5OB1y3kVEXN
-	9AwF/EGBBYDua8K46uUdRUSi6bEpgKsWnHWLTKPJnJp4XKDlDvPKbhJgqYwQVH0OkNBKVMnz8X2
-	LNQ/CGL0jbGDBbn3NBuVDta4cMIADd7fSOtq0zSNvWQtg65LOd2b01bfYjs/k0pMeN4gN1Iyp/Z
-	Asy/h3mtM+OFO73sG8ERG
-X-Google-Smtp-Source: AGHT+IE2JQ29Z/qJVo5aPPgI/u5i9VDbMudNAhaxQmA/PdQas7QemVKQ6cghmVaMwBBkDtsFy1qS0g==
-X-Received: by 2002:a17:907:86a7:b0:afe:8420:1152 with SMTP id a640c23a62f3a-b07a6490897mr218833466b.18.1757574172970;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=oe5h5Mn3SASn5Fah238fA5FMWvH71GizyCFeAxvOgiU=;
+        b=CUi1e5FOyqJ/U7SUueecJ/H3643A8GIy2YI2ByDYagVHBmjdO6tuvdNpDAvLiDE20G
+         UpxPBaeDNQ64DJw3aT3fSO+CSu6PVVt5EIP+KoqeuqWtucYofkfYp19O6wQeiHQ30U3i
+         FKic+KnXS4XC64d/xi864DjOSJci5d+ykf/v0ocpKJqdTJzTHzP5zHHbSXj3gxOklErC
+         n1zezstta0Le753zcR2f2yPWDtiBnWilwHkR6sIgNNBR8yPMcJi4ulEiC6t6t74JBbC7
+         gv19tlW7NKkYZPULyCC6dqPC3kDk7PdFsgjnUvIe87h8SSge5/TrZ7wfogC+9U1uMG8m
+         lFbw==
+X-Gm-Message-State: AOJu0YzHCwymOoul22Tz9LtOO0CseXxPnHzyVaNnDnqkTTOoAnyXBrvA
+	KR1kg4BoZfegqUeE9A7pTlY8wRyvFpjxyaNz7FYRuskPeFPvxUnCzoszkBbyVA==
+X-Gm-Gg: ASbGncvSDngCuZ3SmP7ejBDXEuaX9piY0ZR3B8aoAjY/JBCIQosMriWDtqs9u753MbK
+	Te0g1rNsOfOEpuNv0ij3SsAaDb7eD5vuE3tE0eqqYDtbMlY9L+zVT6vIyesSbj7rENbG+g5xsGk
+	P4/6DbA8tqN+S9mwxy3Tdc6JFwIxpA3Mh+15LlHknpIFRRV5V5+tEAhIxv51Iqm58R8GWMjV1So
+	ryCBWz2ReGky5TjKTPsgJ+7T2Mgj97FzDrIxm1WkCy9dj9fOQLz7BXCb4YgA0oZNZhpsq036mA1
+	6JUlxI+8XDapAlUVi97PIq3+Ae8GR5WgYFVtx9r2l93GviVamu72DFgMW9k7IHyOnBf/WVaCDUd
+	NS8ud5sL0AhdnbR98JVQuLRJ9mKO/JtE=
+X-Google-Smtp-Source: AGHT+IH9Btsn7ol5GwL9ivloVncXAIwIpORbbeEcXi67HYxf4DJg4E0BXloU9aaTvNAfyMwmbh9bFA==
+X-Received: by 2002:a17:906:ae81:b0:b07:88ef:fe1c with SMTP id a640c23a62f3a-b0788f00483mr385205566b.44.1757574172304;
         Thu, 11 Sep 2025 00:02:52 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b07b334ed29sm64547766b.107.2025.09.11.00.02.52
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b07b334ed29sm64547766b.107.2025.09.11.00.02.51
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Sep 2025 00:02:52 -0700 (PDT)
+        Thu, 11 Sep 2025 00:02:51 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][walnascar][PATCH 2/2] libnwck/libnwck3: use time_t to avoid build failure
-Date: Thu, 11 Sep 2025 09:02:51 +0200
-Message-ID: <20250911070251.1112836-2-skandigraun@gmail.com>
+Subject: [meta-gnome][walnascar][PATCH 1/2] libwnck: fix build failure for lib32-libwnck
+Date: Thu, 11 Sep 2025 09:02:50 +0200
+Message-ID: <20250911070251.1112836-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250911070251.1112836-1-skandigraun@gmail.com>
-References: <20250911070251.1112836-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 11 Sep 2025 07:02:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119354
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119353
 
-From: Chen Qi <Qi.Chen@windriver.com>
+From: Changqing Li <changqing.li@windriver.com>
 
-The time_t type varies for 64bit and 32bit. So instead of using
-long long, we should just use time_t. In this way, things build
-for both 64bit and 32bit targets.
+Fix the following compile error:
+../../sources/libwnck-2.31.0/libwnck/tasklist.c:4355:49: error: passing argument 2 of 'sn_startup_sequence_get_last_active_time' from incompatible pointer type [-Wincompatible-pointer-types]
+ 4355 |                                                 &tv_sec, &tv_usec);
+      |                                                 ^~~~~~~
+      |                                                 |
+      |                                                 long int *
+In file included from /build/tmp/work/core2-32-wrsmllib32-linux/lib32-libwnck/2.31.0/lib32-recipe-sysroot/usr/include/startup-notification-1.0/libsn/sn.h:32,
+                 from ../../sources/libwnck-2.31.0/libwnck/private.h:36,
+                 from ../../sources/libwnck-2.31.0/libwnck/tasklist.c:40:
+/build/tmp/work/core2-32-wrsmllib32-linux/lib32-libwnck/2.31.0/lib32-recipe-sysroot/usr/include/startup-notification-1.0/libsn/sn-monitor.h:84:79: note: expected 'time_t *' {aka 'long long int *'} but argument is of type 'long int *'
+   84 |                                                            time_t            *tv_sec,
+      |                                                            ~~~~~~~~~~~~~~~~~~~^~~~~~
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...Fix-build-issue-caused-by-OE-core-changes-to-startup.patch | 4 ++--
- ...001-tasklist.c-fix-Wincompatible-pointer-types-error.patch | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ ...ix-Wincompatible-pointer-types-error.patch | 42 +++++++++++++++++++
+ .../recipes-gnome/libwnck/libwnck_2.31.0.bb   |  2 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/libwnck/files/0001-tasklist.c-fix-Wincompatible-pointer-types-error.patch
 
-diff --git a/meta-gnome/recipes-gnome/libwnck/files/0001-Fix-build-issue-caused-by-OE-core-changes-to-startup.patch b/meta-gnome/recipes-gnome/libwnck/files/0001-Fix-build-issue-caused-by-OE-core-changes-to-startup.patch
-index 0328202f1b..f16f3e1d97 100644
---- a/meta-gnome/recipes-gnome/libwnck/files/0001-Fix-build-issue-caused-by-OE-core-changes-to-startup.patch
-+++ b/meta-gnome/recipes-gnome/libwnck/files/0001-Fix-build-issue-caused-by-OE-core-changes-to-startup.patch
-@@ -23,7 +23,7 @@ Upstream-Status: Inappropriate [oe-specific]
- Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
- 
- Refresh the patch
--Don't use explicit type cast to avoid truncation, use long long for tv_sec.
-+Don't use explicit type cast to avoid truncation, use time_t for tv_sec.
- 
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
- 
-@@ -40,7 +40,7 @@ index 7418f89..f0f30b2 100644
-    GList *tmp;
-    gint64 now;
- -  long tv_sec, tv_usec;
--+  long long tv_sec;
-++  time_t tv_sec;
- +  long tv_usec;
-    double elapsed;
-  
 diff --git a/meta-gnome/recipes-gnome/libwnck/files/0001-tasklist.c-fix-Wincompatible-pointer-types-error.patch b/meta-gnome/recipes-gnome/libwnck/files/0001-tasklist.c-fix-Wincompatible-pointer-types-error.patch
-index 4e23f613aa..d9ca1f0cd9 100644
---- a/meta-gnome/recipes-gnome/libwnck/files/0001-tasklist.c-fix-Wincompatible-pointer-types-error.patch
+new file mode 100644
+index 0000000000..4e23f613aa
+--- /dev/null
 +++ b/meta-gnome/recipes-gnome/libwnck/files/0001-tasklist.c-fix-Wincompatible-pointer-types-error.patch
-@@ -32,7 +32,7 @@ index 4f0c6c4..758fc5f 100644
-    GList *tmp;
-    GTimeVal now;
- -  long tv_sec, tv_usec;
--+  long long tv_sec;
-++  time_t tv_sec;
- +  long tv_usec;
-    double elapsed;
-  
+@@ -0,0 +1,42 @@
++From 01d9add9f9c25442329879d1c3513c68ed14a749 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Thu, 28 Aug 2025 10:29:59 +0800
++Subject: [PATCH] tasklist.c: fix -Wincompatible-pointer-types error
++
++Fix the following compile error:
++../../sources/libwnck-2.31.0/libwnck/tasklist.c:4355:49: error: passing argument 2 of 'sn_startup_sequence_get_last_active_time' from incompatible pointer type [-Wincompatible-pointer-types]
++ 4355 |                                                 &tv_sec, &tv_usec);
++      |                                                 ^~~~~~~
++      |                                                 |
++      |                                                 long int *
++In file included from /build/tmp/work/core2-32-wrsmllib32-linux/lib32-libwnck/2.31.0/lib32-recipe-sysroot/usr/include/startup-notification-1.0/libsn/sn.h:32,
++                 from ../../sources/libwnck-2.31.0/libwnck/private.h:36,
++                 from ../../sources/libwnck-2.31.0/libwnck/tasklist.c:40:
++/build/tmp/work/core2-32-wrsmllib32-linux/lib32-libwnck/2.31.0/lib32-recipe-sysroot/usr/include/startup-notification-1.0/libsn/sn-monitor.h:84:79: note: expected 'time_t *' {aka 'long long int *'} but argument is of type 'long int *'
++   84 |                                                            time_t            *tv_sec,
++      |                                                            ~~~~~~~~~~~~~~~~~~~^~~~~~
++
++Upstream-Status: Inappropriate [ Latest master don't have this code ]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ libwnck/tasklist.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/libwnck/tasklist.c b/libwnck/tasklist.c
++index 4f0c6c4..758fc5f 100644
++--- a/libwnck/tasklist.c
+++++ b/libwnck/tasklist.c
++@@ -4340,7 +4340,8 @@ sequence_timeout_callback (void *user_data)
++   WnckTasklist *tasklist = user_data;
++   GList *tmp;
++   GTimeVal now;
++-  long tv_sec, tv_usec;
+++  long long tv_sec;
+++  long tv_usec;
++   double elapsed;
++ 
++   g_get_current_time (&now);
++-- 
++2.34.1
++
+diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
+index d7f47002f8..5552d2e2b9 100644
+--- a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
++++ b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
+@@ -12,6 +12,8 @@ GNOMEBASEBUILDCLASS = "autotools"
+ inherit gnomebase gobject-introspection features_check gtk-doc
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
++SRC_URI += "file://0001-tasklist.c-fix-Wincompatible-pointer-types-error.patch"
++
+ SRC_URI[archive.md5sum] = "f03e1139296e2a3a92e3b65a3080cd32"
+ SRC_URI[archive.sha256sum] = "83f732d20781fc88b22cdc6aaf2d4f388db6d3d4ff28d1a8fd45be9fb7743a9e"
+ 
 
