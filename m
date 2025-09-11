@@ -1,120 +1,100 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 231D5CA1016
-	for <webhook@archiver.kernel.org>; Thu, 11 Sep 2025 12:53:00 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
- by mx.groups.io with SMTP id smtpd.web11.45959.1757595172780966474
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2EE4CAC58E
+	for <webhook@archiver.kernel.org>; Thu, 11 Sep 2025 18:07:23 +0000 (UTC)
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web11.4501.1757614038215723515
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Sep 2025 05:52:52 -0700
+ Thu, 11 Sep 2025 11:07:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cQ91EiEt;
- spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-724b9ba6e65so4430017b3.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Sep 2025 05:52:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jMAGNMBg;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-afcb7ae6ed0so164155466b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Sep 2025 11:07:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757595172; x=1758199972; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=2t6Q/n2X0kx2OOx0Fhpq1UOveqAhEYOOo5HRAoRnteA=;
-        b=cQ91EiEt4QRJRugMck8kEcURXGRxYGWewC2ga7g0Ygzb2O2OwHEM4b1/qq++5XP4oO
-         xtmxqB/Jpy489K0Y2FFqAaNKj+bWMNnDd8uemK9hFyF+MoZLKPVaNFzIDNmmLTUIVsu3
-         EV2ZAiGcfX/GuB+GM1/y8d3W7B8QZ1QpSBlTIKopAZwMFnvjkVw+t4efU1B76+O0iWCD
-         B6oL9QaQIIvCQKnK+bTBB6rdhGetYitkzYSvA9Gr+GYXud4DkUfzgBBLBI1g7CtKhdA2
-         7XTvoXhbSY8qQLOnJ3IifO09PiDKTc7s+Br95jFfhlcIRJvJkrYi0CJnDO/QfzNc+Ee8
-         +EGA==
+        d=gmail.com; s=20230601; t=1757614036; x=1758218836; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=iL9VciZB3rXWrUK1Bd9HfpFWrKVciUdiagntwcLcNNo=;
+        b=jMAGNMBg38l/HOS7usmccCPurpoBRM54VODBmhfuwiZQVSJgirXflWjhnzzOLO7/XD
+         ducYNt+xvVxERQO4BFqRQskkUXV8he07pEmmupHD7eP6t/lx7kWsepdJyZs9pL6E8Xaw
+         jsgjJEx2iOh20Sk1W29lV/UVn1umZL2vnCa23jK2cmGRgDhxYOI/mLnjONZ+kbVVuNNO
+         KjMChgIQvUlkbaSaqmoLjoR91pqCEXTD93JfSl4v3xpT2jg8Fq4yrvSPQ7ovfo/1SAex
+         d/qDj8vJjMvvnHY+bvYaxcCGh0WhKon6r9icln9Cwn9FYlGSeWPOMijMs8hFgNkh52ph
+         bIZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757595172; x=1758199972;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=2t6Q/n2X0kx2OOx0Fhpq1UOveqAhEYOOo5HRAoRnteA=;
-        b=YnsAivMrd3+lWsPl7erGckycY3RZffhm3eH983Axe6NsZyvkvEp9W53rPdlrcoGgZ5
-         qH74W0MtvFSX1oJhNd1S3RbgYGK/xdaZKYa9TU+QpswhhdjfcoiQ1SWWsITsBrEQBnCD
-         JlN0lJmbwLKM7It1SOYuHzPeIbRuHdzrDOKKr/DqyE8f3dHKvlvtQiODT46BkZMfiGww
-         jLYfv7yd651K0X7QQqW/jDmFs3E18HMmTHrRhrWsUL2/Xmeyg0IlY2xFce6ycQ4LNigv
-         6kjHoTQp/qND0FD1Iwt11sJDGi5hrTPQ6V/0z6pA/gys90ARqp1/ps1fpLQQDzWH2rVS
-         KJrA==
-X-Gm-Message-State: AOJu0YyhqWEmoDAHMT6EibvBtZy+IYvsF7iC5x/5GVO75ayjZxqoBJd7
-	gDGXbjdF/rfgDfjbwTmjGontAeOU1znX8y+L0bqrCXzPoKyiJaV3bbwe7ACX7Q==
-X-Gm-Gg: ASbGncsKVZ+zrbzplkvTaIN7lCAXcn+lowXrTjQ38qXKQyPJ5dLw7oe7I/5FiM/7aOz
-	n/UoxUgLYZSVep5cRDFODBdCG90WKlF5R39jT7PFFdEE/wj1ofNnQeaLfXID/wIZQdqGXyMrjYf
-	Cpfylfw57limaE3bYTaSPJDEoKsMpm5ShCXJxTq43Gufe48W+VemoJ/tZBxAsiROjcSssqNisqJ
-	jjEIe8BoALDFwpf8+zthT9qagoXmYJiTsPFYQfIBepG4Nj3rfceyMXH+GIxXabABvVROPVOBImQ
-	5f+Ux121t9A/vXYhgDsFTG9sUiW8ggjUc+S5x0CWiMu2jcaEisxwzwLOzQvtZ3S4W22Qx6itV7k
-	7CkrOR0CLCnRkr0sF+137Ye0ZTTuv8JuGEF0gYL0=
-X-Google-Smtp-Source: AGHT+IGEKiH2AoGe83PxjCfJild5TyYYxVk1inrzed1DpaEqEDKP3IBbxR+Xf+DWd8rYf3EO2DFvUA==
-X-Received: by 2002:a05:690c:724a:b0:72e:ec1c:8513 with SMTP id 00721157ae682-72eec1caa41mr32037017b3.42.1757595171268;
-        Thu, 11 Sep 2025 05:52:51 -0700 (PDT)
-Received: from localhost.localdomain ([67.233.61.26])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-72f76e166fcsm3146717b3.32.2025.09.11.05.52.50
+        d=1e100.net; s=20230601; t=1757614036; x=1758218836;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=iL9VciZB3rXWrUK1Bd9HfpFWrKVciUdiagntwcLcNNo=;
+        b=i3BCsVCkyGjKIg/lQvVatcn/2DPx7dpM2hghFsKPVXRmyzL9/DB3GisxgZxxi0E70+
+         3cK3Zc275M+oDOBzWQB4gOLinE+uKJlv1Gd22DZOrMayFflsSGHtN8gFxfgs/lf6EvYO
+         o4+7EgEnjQIAr15l5vgDiQBwqGEMaoEM529UQMw8f2KiU1ETCRg03vvTS7jAJF0757Mm
+         1ulw5Qcdj2sLhGykWVibbr0ralUFpTYZirnhxYPqxBNp0H+Vl9q++glYC5oBJNWrdwA1
+         9mUr3Htb791h7nrg4dJqCibGMzVAx+frQPu5g+DVW4y3j7qWfD6dLAy/V55Iuf4Ilzp5
+         F01Q==
+X-Gm-Message-State: AOJu0Yxp25NyiWPs46G+TGqvzciWcIV0oyLFUKfNmeXnhLISvQkSoUpi
+	XC8sKibBFYlaeqo7JzDsQrSejBucyAJZnEkDbnYNcLBEIzReaufhJCUhOUOZdA==
+X-Gm-Gg: ASbGncsTbRNYx9VuEYnjFYMdTT5wkXz2BRxzV3dwfmO2wOIBQk9UUSHvKT4HfhpHb7K
+	OYaFCuX6QSzdBEWXlYQVJfb3Ouufzm3W76sfqE29UvNOGMei1fXzlKsEV6t46ppyDmWZWfgRl1W
+	gcp6yGSzmxvgJ9hVvzCxT/LAwOy8BncrtEyhDMQky8ZOHKWVSwgq0/sdMgJLWO2SIhMTQLbXsWh
+	RltHL9M9RpILcBYxCq7/PzX+2qsFiCKO80Mc2SCfTFhiqjWycJ0/mrJfMU2yRCkLqAyAn61SXRn
+	lVP82uG72o8aabzxj3izMOFnYjv+RQCMarnaXTMlOfg/6Br5lj38N6cfZbf0uR5GNFI+PtLQrjz
+	Ip7m6PjCr3cMYbjFohOgTCTg05KswNps=
+X-Google-Smtp-Source: AGHT+IFa9qhNq24aUcq/itFedT40P3EJhgjbEtLV5ddG83fUZzrKfZG54Dwx5F3+WS7EzVkpPYwlyw==
+X-Received: by 2002:a17:907:d25:b0:b04:c11c:8214 with SMTP id a640c23a62f3a-b07c353ec2bmr8135966b.11.1757614036410;
+        Thu, 11 Sep 2025 11:07:16 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b07b32f21adsm180601466b.82.2025.09.11.11.07.15
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Sep 2025 05:52:50 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Thu, 11 Sep 2025 11:07:15 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-perl][PATCH] libhtml-tagset-perl: upgrade 3.20 -> 3.24
-Date: Thu, 11 Sep 2025 08:52:35 -0400
-Message-ID: <20250911125236.11878-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-oe][PATCH] python3-apt: upgrade 2.5.3 -> 3.0.0
+Date: Thu, 11 Sep 2025 20:07:15 +0200
+Message-ID: <20250911180715.3282747-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 Sep 2025 12:53:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119369
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 Sep 2025 18:07:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119370
 
-License-Update: Now under Artistic License version 2.0
+This version was not tagged for some reason - but the commit message
+makes it clear that this is 3.0.0.
 
-2024-03-11  Andy Lester
-        * Release 3.24
-        No changes in functionality. Only updates metadata for builds.
+Changelog:
+https://salsa.debian.org/apt-team/python-apt/-/blob/main/debian/changelog
 
-2024-03-09  Andy Lester
-        * Release 3.22
-        HTML::Tagset now requires Perl 5.10.1. It might run on earlier
-        Perls but I don't have the infrastructure to test them.
-        Added <ins> and <del> to %isPhraseMarkup (RT #151970)
-        Fixed docs about %isBodyElement calling it %isBodyMarkup
-        (RT #34913, RT #109024, RT #118356)
-        Cleaned up metadata and version requirements.
-        No changes have been made to handle HTML5. That is a bigger issue
-        than "just add the tags to the hashes," because that would change
-        functionality for existing users who are expecting HTML::Tagset to
-        be HTML4.
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...html-tagset-perl_3.20.bb => libhtml-tagset-perl_3.24.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-perl/recipes-perl/libhtml/{libhtml-tagset-perl_3.20.bb => libhtml-tagset-perl_3.24.bb} (72%)
+ .../python/{python3-apt_2.5.3.bb => python3-apt_3.0.0.bb}   | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/python/{python3-apt_2.5.3.bb => python3-apt_3.0.0.bb} (73%)
 
-diff --git a/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb b/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.24.bb
-similarity index 72%
-rename from meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb
-rename to meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.24.bb
-index 519c2ad54c..802fe050da 100644
---- a/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.20.bb
-+++ b/meta-perl/recipes-perl/libhtml/libhtml-tagset-perl_3.24.bb
-@@ -3,12 +3,12 @@ DESCRIPTION = "This module contains several data tables useful in various \
- kinds of HTML parsing operations."
- HOMEPAGE = "https://metacpan.org/release/HTML-Tagset"
- SECTION = "libs"
--LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-+LICENSE = "Artistic-2.0"
+diff --git a/meta-oe/recipes-devtools/python/python3-apt_2.5.3.bb b/meta-oe/recipes-devtools/python/python3-apt_3.0.0.bb
+similarity index 73%
+rename from meta-oe/recipes-devtools/python/python3-apt_2.5.3.bb
+rename to meta-oe/recipes-devtools/python/python3-apt_3.0.0.bb
+index d5c440f413..cba4144eea 100644
+--- a/meta-oe/recipes-devtools/python/python3-apt_2.5.3.bb
++++ b/meta-oe/recipes-devtools/python/python3-apt_3.0.0.bb
+@@ -5,7 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=0636e73ff0215e8d672dc4c32c317bb3 \
  
--LIC_FILES_CHKSUM = "file://README;beginline=62;endline=66;md5=aa91eed6adfe182d2af676954f06a7c9"
-+LIC_FILES_CHKSUM = "file://README.md;beginline=42;endline=46;md5=6e702d3d2c184c6972123c9bef7b29b7"
+ SRC_URI = "git://salsa.debian.org/apt-team/python-apt.git;protocol=https;branch=main"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/P/PE/PETDANCE/HTML-Tagset-${PV}.tar.gz"
--SRC_URI[sha256sum] = "adb17dac9e36cd011f5243881c9739417fd102fce760f8de4e9be4c7131108e2"
-+SRC_URI[sha256sum] = "eb89e145a608ed1f8f141a57472ee5f69e67592a432dcd2e8b1dbb445f2b230b"
+-SRCREV = "3252935b6224b3bd2e2250894b9559b47c61b2e1"
++# this is env var is used by setup.py - if not present, it
++# tries to run dpkg to get this info
++export DEBVER = "${PV}"
++
++SRCREV = "626bf176c1844b63973d39bcceb0202ad36da797"
  
- S = "${UNPACKDIR}/HTML-Tagset-${PV}"
  
--- 
-2.43.0
-
+ inherit setuptools3
 
