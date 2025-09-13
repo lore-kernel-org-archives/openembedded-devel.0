@@ -2,71 +2,70 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06722CAC587
-	for <webhook@archiver.kernel.org>; Sat, 13 Sep 2025 10:22:18 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web11.2535.1757758932926894830
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08702CAC58E
+	for <webhook@archiver.kernel.org>; Sat, 13 Sep 2025 10:25:58 +0000 (UTC)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.web10.2534.1757759149328839759
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Sep 2025 03:22:13 -0700
+ Sat, 13 Sep 2025 03:25:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DyWNIpKh;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b0418f6fc27so466524466b.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Sep 2025 03:22:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=l9ju5+eO;
+ spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-b079c13240eso441484866b.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Sep 2025 03:25:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757758931; x=1758363731; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1757759148; x=1758363948; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=amsaIKI4WmCH8lKYn1E8zNgzCMB/l2sQdI7IX5XBvEI=;
-        b=DyWNIpKhp5CVA4voj+Nruni4WMOBs0O5yn3FQj8Z/7Nr9Y3keIyZTXtmNK5YW03bkR
-         9ZWKbaXt1MzxZkcuZKxlzDdp52P+n5yWKGBrlVOmbq00r92M43UQr7eWLThXb4fAA7Ud
-         QdGYrWm2TIlWRqsJgBbOJ4STv9gvinv8Yp5EIpMDgkukmUgXDaF3it4A/Cen/YZdRO/i
-         5TTmguMx1h7kwd/EQ99BqBaSzdT+pfaIk5EaArrpg2U6pW3m1QaWm5PJ2kCgQAq2ca/y
-         wEQAu3gIyYVo3nzb7pF8AbJBFgSAshdBwGK8f7FTU0jFj9OVaJexbkm19uxW+1I00UNG
-         XBjQ==
+        bh=Y1lP8hIjBYt1H7vaBLsjZHodwhCaTYhC+Of2QnRcuxo=;
+        b=l9ju5+eOr6zjI8aG4AEiARWsQMPERW/jjX1FnODiJczbfL0m46PHqxr5fMC+e66YRG
+         19JPQJ/Lk4iSvRbO3oIPFb+moI5Q7+RY4rkWOdJeQQ9Ly39N4F2A2k6HZ5yFK5AC9Gdd
+         Pb+2vblqYWuafig8hqSy0iPq643mWIYp2pOpDtpbSHzcDRKVqV84IhzWjNKtfgB279kT
+         0KtJhPXJ45UeiP1ud6A9BYj18lz1u5FCmweULVCJGxsQXTzdGLbGknZEHbdUiKrB+KPN
+         Yd9ALVly7dTS8oOLzJlLAZxhdRXWXzNOv8HilGmv0J2EIqDH+ZUTSaDhuM+1XPzYXKjm
+         HVMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757758931; x=1758363731;
+        d=1e100.net; s=20230601; t=1757759148; x=1758363948;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=amsaIKI4WmCH8lKYn1E8zNgzCMB/l2sQdI7IX5XBvEI=;
-        b=i1f5B1WbW7biDpIL9nvvvZFhiMNzOAgATYZqsYYyhEW/yCLAWnPomeeh6/PeH+zqm9
-         AxtfT643eYXDnb9ao2R/guhnJWvjS2/tApunbcYiUUFmSfano6WOuVZ2vUMwREq0sQbh
-         Yx02rbjbL4tg4rp2RYmTbbXhmdeSwPBbj0FSdcG5GQMPlQp7zY0ftc+SXL1dMRDFlooy
-         nwiRKCJRDbY5Ih6mfxEihjQw9DFhPpS5GkTLaZibP4o4+/r/zC6eUMdY2aMvpqDqeUph
-         artD2Rli9ct997GFgW9O73viHV9xSbuPb/L4UhjpUGD41/3tK5paU6HNlmEONqTBTJyB
-         56hQ==
-X-Gm-Message-State: AOJu0Yy7IIrPxgkcOy1wWCdJnmo7qgvWKLjyb/N9f4jJY+AwmNc3c8AP
-	xwpNvryDsWCO9banP+ZDd1CpEosuQzsMjTzA9kasWzb3kfghoNUVUjuTfi9Hdg==
-X-Gm-Gg: ASbGncuY85RGZonzQXPdvMx24KyoukDdeuEFjiSEBVtGhH9bvmex/8ubZjf74QN4bet
-	GhV4g0vfxVmwZoZN5Q4HIW1CkbkBshSIfzIzBu5/nRoceVh4JqLLunYHGc0ldC7M50vf847oaEI
-	ndycJr0OsLAraDBrRdwi8kmoxymlj5AXqSFhZHz/8QQYB1tZesG/5hmhA7Thi9yZIrwB/UnsbOm
-	di3WEqSwQ59PGDnMOXd0LpnZwhRLmKT3xUcjIrYg1yByIWu1AU9+B1n02dAQw7t1ci5/8hL/Qyd
-	AU7hpQbWw32h/smdq2yc/8OPFWG7etFpdsUWjxhiykJWBTa3JRctHhlhHJkMO1OJGbgrZGOc8uI
-	GvD0CWATZ8KfTcRLv8+wr
-X-Google-Smtp-Source: AGHT+IFtIcTh51nrHhF1Jj0xnaQP5wOaLJqFTcgpMaofajXPPH3CKtiNjFEDdSRrAf2qG0p8Y0dbyQ==
-X-Received: by 2002:a17:907:9623:b0:b04:7ef0:9dd6 with SMTP id a640c23a62f3a-b07c3675db7mr584691766b.55.1757758930957;
-        Sat, 13 Sep 2025 03:22:10 -0700 (PDT)
+        bh=Y1lP8hIjBYt1H7vaBLsjZHodwhCaTYhC+Of2QnRcuxo=;
+        b=lEQQK9j01wwAL1+SgErFpbqjrgtPwiprcR2TQUvs1r84fC3i3AP+NGbSIAeRTcLlWq
+         Jri/0bUKU3ZXwY+OmRSvctFB6zFLplyFAVqu3qhbRa0ITiM+E4CLW3OWdTgO9WslzOuz
+         gH+Kze2jl/luG9ilKwD6wYf38/99rybQudGpTDCWxA/4RBoTgR9dyzEQJtnZGLsltSd0
+         6iz4sMnMtgsZVWgAuG1pd9R+nObOU5glwZQ4ubL+Li+gDLG4ycCgc0JwmDdB/szG3Ho1
+         WX8pKVSpXW3M1BRVvleGMTD7kkpkDRCtt3glKGG+fNQA6iVwslBH77+OFDPo2wWK5j3T
+         zmGQ==
+X-Gm-Message-State: AOJu0YwS8+lyB5A4Ea5TG/8oxWnJKj5afIvviCkWbSGFdxsapppmLHuB
+	wxKixurMAQYWgh8jKoEYPSRimr6TrIElCV6jXT+IZzszLSyekCSFPS3yWoG54w==
+X-Gm-Gg: ASbGnctq4jhCud2XnJv1TzPQnMWhQC+QSIxWepSwFo/y4saLEepV/+ba1hud2KefJGJ
+	QJ9Yzgi5fhXOV8ZFPCn32I5ch0C6jYdTjF88lGDNCvICmLaGLYycAnRKf4cbBfBLfPZzqcYmKa/
+	5ek3AApZu81fnGwz8DWyewtYzoDZBM5iNT4oStyjMJfYfbFk2DAMR5vljD5UQCkuWm5l3D/k+sM
+	Wnof1UtNfuX1FLB3YeqKSkq9l3xJlxDRKIRdHty7zsGalxToJDPE2+tKUZw1Xxu+fj32/02fIYB
+	DZhSsVlcW1QmuW6sGJcDzdV8Bl2ZJNRvk3unsDYIjhnKqoel0L/7vy4xTzgQmFwWtAS4ODTGVW+
+	NNdL5/Lc61cYR7h0ydIQEuOcXImikqnk=
+X-Google-Smtp-Source: AGHT+IGpwOA3fcT0wLsIIO9JJHxpdkvMG5clv5+EW5A8T8lTN90X7Xop7/gEvyPq53CwwZyyeat9MA==
+X-Received: by 2002:a17:906:6a10:b0:afe:e4d2:6d6d with SMTP id a640c23a62f3a-b07c35b8bf3mr616946666b.16.1757759147459;
+        Sat, 13 Sep 2025 03:25:47 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b07df92dea6sm148857466b.26.2025.09.13.03.22.09
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-62ec81dfa51sm4636541a12.52.2025.09.13.03.25.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Sep 2025 03:22:09 -0700 (PDT)
+        Sat, 13 Sep 2025 03:25:47 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] ledmon: upgrade 0.97 -> 1.1.0
-Date: Sat, 13 Sep 2025 12:22:08 +0200
-Message-ID: <20250913102208.2110642-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH v2] ledmon: upgrade 0.97 -> 1.1.0
+Date: Sat, 13 Sep 2025 12:25:46 +0200
+Message-ID: <20250913102546.2142093-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 13 Sep 2025 10:22:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119383
+ <openembedded-devel@lists.openembedded.org>; Sat, 13 Sep 2025 10:25:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119384
 
-Dropped 0001-fix-build-with-clang.patch, because it was independently
-submitted to upstream, and it is included in this release.
+Dropped 0001-fix-build-with-clang.patch, because it is included in this release.
 
 This update also fixes building for x86 platform.
 
@@ -75,6 +74,9 @@ https://github.com/intel/ledmon/blob/main/CHANGELOG.md
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
+
+v2: revised commit message, otherwise identical to v1
+
  .../ledmon/0001-fix-build-with-clang.patch    | 90 -------------------
  ...nclude-sys-select.h-and-sys-types.h.patch} | 27 ++----
  .../{ledmon_0.97.bb => ledmon_1.1.0.bb}       |  9 +-
