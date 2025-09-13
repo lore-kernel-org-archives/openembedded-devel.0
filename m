@@ -2,146 +2,262 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE280CAC58E
-	for <webhook@archiver.kernel.org>; Sat, 13 Sep 2025 09:53:07 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web10.2150.1757757184549585509
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06722CAC587
+	for <webhook@archiver.kernel.org>; Sat, 13 Sep 2025 10:22:18 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web11.2535.1757758932926894830
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Sep 2025 02:53:04 -0700
+ Sat, 13 Sep 2025 03:22:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=H4yvQa2W;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-afcb78ead12so345325366b.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Sep 2025 02:53:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DyWNIpKh;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b0418f6fc27so466524466b.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Sep 2025 03:22:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757757183; x=1758361983; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1757758931; x=1758363731; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Wgf/VR9n6oc2Z1on9IhhHCP/lmYVeByuLztUKo64mNE=;
-        b=H4yvQa2WRi45XWBcCP+X/if8CqFovgdfJzJc+EDj3/uea0WsKFZqPYgQm/gd29jhoq
-         iPKkTwvwNkAm21h4vj3VZJHnfS/adjrgPvfCzM8eDAssSN9yQYaMO03F7tX9WQUQl/27
-         YYLJb+ZnqeZ2gaSw0GYXg7/SIrKec/VzUaT0M1/wQKpEtCfxpAD6viYE6dfLDXpJUB7E
-         atV7ppgiL0yx4YvxvRT5tMN34xanVumCgJkAOzW1i5YOlKme8/nT0Jk/Ldr32udJaFxI
-         Z5YQAedL+1Hq3Md6t3Ze+71LpDGs16ix9Zetv9vMoceR3bYnd5X/2OBXbpqnE3VeLf4S
-         3i4A==
+        bh=amsaIKI4WmCH8lKYn1E8zNgzCMB/l2sQdI7IX5XBvEI=;
+        b=DyWNIpKhp5CVA4voj+Nruni4WMOBs0O5yn3FQj8Z/7Nr9Y3keIyZTXtmNK5YW03bkR
+         9ZWKbaXt1MzxZkcuZKxlzDdp52P+n5yWKGBrlVOmbq00r92M43UQr7eWLThXb4fAA7Ud
+         QdGYrWm2TIlWRqsJgBbOJ4STv9gvinv8Yp5EIpMDgkukmUgXDaF3it4A/Cen/YZdRO/i
+         5TTmguMx1h7kwd/EQ99BqBaSzdT+pfaIk5EaArrpg2U6pW3m1QaWm5PJ2kCgQAq2ca/y
+         wEQAu3gIyYVo3nzb7pF8AbJBFgSAshdBwGK8f7FTU0jFj9OVaJexbkm19uxW+1I00UNG
+         XBjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757757183; x=1758361983;
+        d=1e100.net; s=20230601; t=1757758931; x=1758363731;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Wgf/VR9n6oc2Z1on9IhhHCP/lmYVeByuLztUKo64mNE=;
-        b=p8noluyYluL4xzL+2N58Xb5Hv+2rxlx+r31TILgyMJ8frazhL/hZ3mZLFbIyEG+Z1/
-         CXRNwiTRURa3cGahEanercZcRmtt02PEiNN4QS2U4WDq1yukV5dbGgq70rSL11AGOJiZ
-         I6QMsTvv+k7wbIBHz12JXSGYZYuWNuIEaCk0xccbbgrZicTjlbXuHgHZr6GYC+vnNwM+
-         HbV9YmjsDzIUB8WumUOaZ2PWhKoh+hZgdrA1n93hvh6zz10BjxOtQzKsn63CGNzwbzwL
-         qQcxQcjuxczxt6yLZ53fEhQ3z7hmaz/jyra4Lh7lEJm0dpSAWTUV/8nGjeXRnoZzdBNH
-         fdjw==
-X-Gm-Message-State: AOJu0YyE62nkhS8a181AG3b7dx5lejlcINXMfs1ZXPnSEHDT5oqRGe40
-	Y8g9EO/0XRvv5JbY7ZYYz0u5piOUZ60FvXL19y+eqZEBAhmi1U+1siLXATjvvA==
-X-Gm-Gg: ASbGnctgpBYg9sVe2xq/DDPx80iblPbMt2KeBA/DvQCVS65oethTMfyQ4HIIOybmFDf
-	QtjHowgYAl6BG2e3jlSANFH5toMRGzihah8IgS1EylaRhdIxjyGJMzgFkPg4ExGmv7Ewl4CG93E
-	/e4I8GA+TAYPPJRLbc9i95PpdOXB2bNZpwo6pKIYUx5KGD18re2FG9gDLyg7DZ7czGGnqCmeN0Z
-	reM/gy8EN4pNqVPXvH72/UuT/ZOEmJ2NHhvqajUW0QkqbMPbI0e5ZjKY3dQL9BcF9CpW2LZQlU2
-	poGQXE0Dk61EC1F5wED+CnuHINlHM0/4DTAGG2kssTQkWP3wYLtBZcLWfE0o+52ZoGSUYc26Gle
-	UmerdINJaqV9acjEQkLdq
-X-Google-Smtp-Source: AGHT+IF2iwdRTl7GZzjvTJJg98s5MMe88V9TldpF+rGvu0rlMfnq2DJ/iek3OSOdVMdZCzp+26PDbQ==
-X-Received: by 2002:a17:907:3fa1:b0:b04:3dc7:7d80 with SMTP id a640c23a62f3a-b07c357befbmr570391366b.18.1757757182568;
-        Sat, 13 Sep 2025 02:53:02 -0700 (PDT)
+        bh=amsaIKI4WmCH8lKYn1E8zNgzCMB/l2sQdI7IX5XBvEI=;
+        b=i1f5B1WbW7biDpIL9nvvvZFhiMNzOAgATYZqsYYyhEW/yCLAWnPomeeh6/PeH+zqm9
+         AxtfT643eYXDnb9ao2R/guhnJWvjS2/tApunbcYiUUFmSfano6WOuVZ2vUMwREq0sQbh
+         Yx02rbjbL4tg4rp2RYmTbbXhmdeSwPBbj0FSdcG5GQMPlQp7zY0ftc+SXL1dMRDFlooy
+         nwiRKCJRDbY5Ih6mfxEihjQw9DFhPpS5GkTLaZibP4o4+/r/zC6eUMdY2aMvpqDqeUph
+         artD2Rli9ct997GFgW9O73viHV9xSbuPb/L4UhjpUGD41/3tK5paU6HNlmEONqTBTJyB
+         56hQ==
+X-Gm-Message-State: AOJu0Yy7IIrPxgkcOy1wWCdJnmo7qgvWKLjyb/N9f4jJY+AwmNc3c8AP
+	xwpNvryDsWCO9banP+ZDd1CpEosuQzsMjTzA9kasWzb3kfghoNUVUjuTfi9Hdg==
+X-Gm-Gg: ASbGncuY85RGZonzQXPdvMx24KyoukDdeuEFjiSEBVtGhH9bvmex/8ubZjf74QN4bet
+	GhV4g0vfxVmwZoZN5Q4HIW1CkbkBshSIfzIzBu5/nRoceVh4JqLLunYHGc0ldC7M50vf847oaEI
+	ndycJr0OsLAraDBrRdwi8kmoxymlj5AXqSFhZHz/8QQYB1tZesG/5hmhA7Thi9yZIrwB/UnsbOm
+	di3WEqSwQ59PGDnMOXd0LpnZwhRLmKT3xUcjIrYg1yByIWu1AU9+B1n02dAQw7t1ci5/8hL/Qyd
+	AU7hpQbWw32h/smdq2yc/8OPFWG7etFpdsUWjxhiykJWBTa3JRctHhlhHJkMO1OJGbgrZGOc8uI
+	GvD0CWATZ8KfTcRLv8+wr
+X-Google-Smtp-Source: AGHT+IFtIcTh51nrHhF1Jj0xnaQP5wOaLJqFTcgpMaofajXPPH3CKtiNjFEDdSRrAf2qG0p8Y0dbyQ==
+X-Received: by 2002:a17:907:9623:b0:b04:7ef0:9dd6 with SMTP id a640c23a62f3a-b07c3675db7mr584691766b.55.1757758930957;
+        Sat, 13 Sep 2025 03:22:10 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b07b32dd3e4sm535529666b.54.2025.09.13.02.53.01
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b07df92dea6sm148857466b.26.2025.09.13.03.22.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Sep 2025 02:53:02 -0700 (PDT)
+        Sat, 13 Sep 2025 03:22:09 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][walnascar][PATCH] ledmon: fix building on 32-bit x86
-Date: Sat, 13 Sep 2025 11:53:01 +0200
-Message-ID: <20250913095301.2081096-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] ledmon: upgrade 0.97 -> 1.1.0
+Date: Sat, 13 Sep 2025 12:22:08 +0200
+Message-ID: <20250913102208.2110642-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 13 Sep 2025 09:53:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119382
+ <openembedded-devel@lists.openembedded.org>; Sat, 13 Sep 2025 10:22:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119383
 
-Building the recipe on x86 platform fails with the following error:
-| ../../git/src/utils.c: In function 'get_uint64':
-| ../../git/src/utils.c:105:18: error: passing argument 1 of 'str_toul' from incompatible pointer type [-Wincompatible-pointer-types]
-|   105 |         str_toul(&defval, p, NULL, 16);
+Dropped 0001-fix-build-with-clang.patch, because it was independently
+submitted to upstream, and it is included in this release.
 
-Upstream has already changed this function to avoid overflow due to the
-size difference in the pointer - this change backports that patch.
+This update also fixes building for x86 platform.
+
+Changelog:
+https://github.com/intel/ledmon/blob/main/CHANGELOG.md
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../ledmon/ledmon/Correct-get_uint64.patch    | 44 +++++++++++++++++++
- meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb     |  3 +-
- 2 files changed, 46 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/Correct-get_uint64.patch
+ .../ledmon/0001-fix-build-with-clang.patch    | 90 -------------------
+ ...nclude-sys-select.h-and-sys-types.h.patch} | 27 ++----
+ .../{ledmon_0.97.bb => ledmon_1.1.0.bb}       |  9 +-
+ 3 files changed, 13 insertions(+), 113 deletions(-)
+ delete mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch
+ rename meta-oe/recipes-bsp/ledmon/ledmon/{0002-include-sys-select.h-and-sys-types.h.patch => 0001-include-sys-select.h-and-sys-types.h.patch} (56%)
+ rename meta-oe/recipes-bsp/ledmon/{ledmon_0.97.bb => ledmon_1.1.0.bb} (81%)
 
-diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/Correct-get_uint64.patch b/meta-oe/recipes-bsp/ledmon/ledmon/Correct-get_uint64.patch
-new file mode 100644
-index 0000000000..c4d8ff80b8
---- /dev/null
-+++ b/meta-oe/recipes-bsp/ledmon/ledmon/Correct-get_uint64.patch
-@@ -0,0 +1,44 @@
-+From ed747ac3540cb38797f56533f9f51f5627e6b994 Mon Sep 17 00:00:00 2001
-+From: Tony Asleson <tasleson@redhat.com>
-+Date: Wed, 21 Aug 2024 12:27:28 -0500
-+Subject: [PATCH] Correct get_uint64
+diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch b/meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch
+deleted file mode 100644
+index f1e1d6f780..0000000000
+--- a/meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch
++++ /dev/null
+@@ -1,90 +0,0 @@
+-From 28fd86fb4e18af181174176530a80672de4449d2 Mon Sep 17 00:00:00 2001
+-From: alperak <alperyasinak1@gmail.com>
+-Date: Sat, 18 Nov 2023 12:27:17 +0300
+-Subject: [PATCH] fix build with clang
+-
+-struct ibpi2value is a structure which contains 2 unsigned integers.  In
+-a number of cases the code was not initializing a value for the last value
+-in the pair in struct ibpi2value ibpi_to_attention.  This was raised when
+-using clang compiler.
+-
+-vmdssd.c:49:27: error: missing field 'value' initializer
+-[-Werror,-Wmissing-field-initializers]
+-        {LED_IBPI_PATTERN_UNKNOWN}
+-
+-dellssd.c:74:27: error: missing field 'value' initializer
+-[-Werror,-Wmissing-field-initializers]
+-        {LED_IBPI_PATTERN_UNKNOWN}
+-
+-amd_ipmi.c:57:27: error: missing field 'value'
+-initializer [-Werror,-Wmissing-field-initializers]
+-        {LED_IBPI_PATTERN_UNKNOWN}
+-
+-npem.c:76:27: error: missing field 'value'
+-initializer [-Werror,-Wmissing-field-initializers]
+-        {LED_IBPI_PATTERN_UNKNOWN}
+-
+-Upstream-Status: Submitted [https://github.com/intel/ledmon/pull/179]
+-Signed-off-by: alperak <alperyasinak1@gmail.com>
+----
+- src/amd_ipmi.c | 2 +-
+- src/dellssd.c  | 2 +-
+- src/npem.c     | 2 +-
+- src/vmdssd.c   | 2 +-
+- 4 files changed, 4 insertions(+), 4 deletions(-)
+-
+-diff --git a/src/amd_ipmi.c b/src/amd_ipmi.c
+-index 726f77d..ad36e9e 100644
+---- a/src/amd_ipmi.c
+-+++ b/src/amd_ipmi.c
+-@@ -53,7 +53,7 @@ const struct ibpi2value ibpi2amd_ipmi[] = {
+- 	{IBPI_PATTERN_FAILED_ARRAY, 0x45},
+- 	{IBPI_PATTERN_REBUILD, 0x46},
+- 	{IBPI_PATTERN_HOTSPARE, 0x47},
+--	{IBPI_PATTERN_UNKNOWN}
+-+	{IBPI_PATTERN_UNKNOWN, 0}
+- };
+- 
+- #define MG9098_CHIP_ID_REG	0x63
+-diff --git a/src/dellssd.c b/src/dellssd.c
+-index 3c10ec7..7f02ea1 100644
+---- a/src/dellssd.c
+-+++ b/src/dellssd.c
+-@@ -71,7 +71,7 @@ static const struct ibpi2value ibpi2ssd[] = {
+- 	{IBPI_PATTERN_FAILED_DRIVE, BP_FAULT | BP_ONLINE},
+- 	{IBPI_PATTERN_LOCATE, BP_IDENTIFY | BP_ONLINE},
+- 	{IBPI_PATTERN_LOCATE_OFF, BP_ONLINE},
+--	{IBPI_PATTERN_UNKNOWN}
+-+	{IBPI_PATTERN_UNKNOWN, 0}
+- };
+- 
+- #define DELL_OEM_NETFN                      0x30
+-diff --git a/src/npem.c b/src/npem.c
+-index c21276d..3499169 100644
+---- a/src/npem.c
+-+++ b/src/npem.c
+-@@ -72,7 +72,7 @@ const struct ibpi2value ibpi_to_npem_capability[] = {
+- 	{IBPI_PATTERN_FAILED_DRIVE, PCI_NPEM_FAIL_CAP},
+- 	{IBPI_PATTERN_LOCATE, PCI_NPEM_LOCATE_CAP},
+- 	{IBPI_PATTERN_LOCATE_OFF, PCI_NPEM_OK_CAP},
+--	{IBPI_PATTERN_UNKNOWN}
+-+	{IBPI_PATTERN_UNKNOWN, 0}
+- };
+- 
+- static struct pci_access *get_pci_access()
+-diff --git a/src/vmdssd.c b/src/vmdssd.c
+-index 51af591..9c63d90 100644
+---- a/src/vmdssd.c
+-+++ b/src/vmdssd.c
+-@@ -45,7 +45,7 @@ struct ibpi2value ibpi_to_attention[] = {
+- 	{IBPI_PATTERN_REBUILD, ATTENTION_REBUILD},
+- 	{IBPI_PATTERN_LOCATE_OFF, ATTENTION_OFF},
+- 	{IBPI_PATTERN_ONESHOT_NORMAL, ATTENTION_OFF},
+--	{IBPI_PATTERN_UNKNOWN}
+-+	{IBPI_PATTERN_UNKNOWN, 0}
+- };
+- 
+- #define SYSFS_PCIEHP         "/sys/module/pciehp"
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/0002-include-sys-select.h-and-sys-types.h.patch b/meta-oe/recipes-bsp/ledmon/ledmon/0001-include-sys-select.h-and-sys-types.h.patch
+similarity index 56%
+rename from meta-oe/recipes-bsp/ledmon/ledmon/0002-include-sys-select.h-and-sys-types.h.patch
+rename to meta-oe/recipes-bsp/ledmon/ledmon/0001-include-sys-select.h-and-sys-types.h.patch
+index 75bf2b4f5e..833f38a042 100644
+--- a/meta-oe/recipes-bsp/ledmon/ledmon/0002-include-sys-select.h-and-sys-types.h.patch
++++ b/meta-oe/recipes-bsp/ledmon/ledmon/0001-include-sys-select.h-and-sys-types.h.patch
+@@ -9,16 +9,19 @@ sys/types.h is needed for ssize_t
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
-+For large integer values, the existing implementation will be
-+incorrect.
-+
-+The current implementation of converting strings to integer values
-+uses a signed integer for the intermediate conversion and performs
-+a range check. Since any value in an unsigned 64-bit integer is valid,
-+the range check seems unnecessary. To mimic the same code path, we would
-+need a larger integer type.
-+
-+Signed-off-by: Tony Asleson <tasleson@redhat.com>
-+
-+Upstream-Status: Backport [https://github.com/intel/ledmon/commit/ed747ac3540cb38797f56533f9f51f5627e6b994]
++Adapted to latest release - sys/types.h is already included in the project.
 +
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/utils.c | 9 ++++++--
-+ 1 file changed, 7 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/utils.c b/src/utils.c
-+index 86b9593..b87d064 100644
-+--- a/src/utils.c
-++++ b/src/utils.c
-+@@ -102,9 +102,14 @@ uint64_t get_uint64(const char *path, uint64_t defval, const char *name)
-+ 	if (!p)
-+ 		return defval;
-+ 
-+-	str_toul(&defval, p, NULL, 16);
-++	errno = 0;
-++	uint64_t t = strtoull(p, NULL, 16);
-+ 	free(p);
-+-	return defval;
-++
-++	if (errno)
-++		return defval;
-++
-++	return t;
-+ }
-+ 
-+ int get_int(const char *path, int defval, const char *name)
-diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb b/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
-index 88a6e5bb30..23a49a7d1b 100644
+ ---
+  src/dellssd.c | 1 +
+- src/utils.h   | 1 +
+- 2 files changed, 2 insertions(+)
++ 1 file changed, 1 insertion(+)
+ 
+-diff --git a/src/dellssd.c b/src/dellssd.c
++diff --git a/src/lib/dellssd.c b/src/lib/dellssd.c
+ index 7b8d431..e97fe45 100644
+---- a/src/dellssd.c
+-+++ b/src/dellssd.c
+-@@ -27,6 +27,7 @@
++--- a/src/lib/dellssd.c
+++++ b/src/lib/dellssd.c
++@@ -13,6 +13,7 @@
+  #include <unistd.h>
+  
+  #include <sys/ioctl.h>
+@@ -26,18 +29,6 @@ index 7b8d431..e97fe45 100644
+  #include <linux/ipmi.h>
+  
+  #if _HAVE_DMALLOC_H
+-diff --git a/src/utils.h b/src/utils.h
+-index 720447a..c106529 100644
+---- a/src/utils.h
+-+++ b/src/utils.h
+-@@ -21,6 +21,7 @@
+- #define _UTILS_H_INCLUDED_
+- 
+- #include <getopt.h>
+-+#include <sys/types.h>
+- #include "config_file.h"
+- #include "stdlib.h"
+- #include "stdint.h"
+ -- 
+ 2.21.0
+ 
+diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb b/meta-oe/recipes-bsp/ledmon/ledmon_1.1.0.bb
+similarity index 81%
+rename from meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
+rename to meta-oe/recipes-bsp/ledmon/ledmon_1.1.0.bb
+index ff3b29406b..25f638be5d 100644
 --- a/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
-+++ b/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
-@@ -16,7 +16,8 @@ SYSTEMD_SERVICE:${PN} = "ledmon.service"
++++ b/meta-oe/recipes-bsp/ledmon/ledmon_1.1.0.bb
+@@ -8,17 +8,16 @@ HOMEPAGE = "https://github.com/intel/ledmon"
+ LICENSE = "LGPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
  
- SRC_URI = "git://github.com/intel/ledmon;branch=master;protocol=https \
- 	   file://0002-include-sys-select.h-and-sys-types.h.patch \
+-DEPENDS = "sg3-utils udev pciutils"
++DEPENDS = "autoconf-archive-native sg3-utils udev pciutils"
+ 
+ inherit autotools systemd pkgconfig
+ 
+ SYSTEMD_SERVICE:${PN} = "ledmon.service"
+ 
+-SRC_URI = "git://github.com/intel/ledmon;branch=master;protocol=https \
+-	   file://0002-include-sys-select.h-and-sys-types.h.patch \
 -	   file://0001-fix-build-with-clang.patch"
-+	   file://0001-fix-build-with-clang.patch \
-+	   file://Correct-get_uint64.patch"
++SRC_URI = "git://github.com/intel/ledmon;branch=master;protocol=https;tag=v${PV} \
++	   file://0001-include-sys-select.h-and-sys-types.h.patch"
  
- SRCREV = "b0edae14e8660b80ffe0384354038a9f62e2978d"
+-SRCREV = "b0edae14e8660b80ffe0384354038a9f62e2978d"
++SRCREV = "f70201d255b667de00f15880e99732699df6dce0"
  
+ COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
+ COMPATIBLE_HOST:libc-musl = "null"
 
