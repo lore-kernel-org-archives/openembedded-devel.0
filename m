@@ -1,1039 +1,120 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7D47CAC582
-	for <webhook@archiver.kernel.org>; Sun, 14 Sep 2025 06:10:36 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web10.4328.1757830234207053180
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C90FBCAC582
+	for <webhook@archiver.kernel.org>; Sun, 14 Sep 2025 12:45:28 +0000 (UTC)
+Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
+ by mx.groups.io with SMTP id smtpd.web11.8802.1757853922129880889
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Sep 2025 23:10:34 -0700
+ Sun, 14 Sep 2025 05:45:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout08.t-online.de (Postfix) with SMTP id D1066E84E;
-	Sun, 14 Sep 2025 08:10:30 +0200 (CEST)
-Received: from [192.168.178.36] ([84.163.41.171]) by fwd72.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1uxfwQ-23Eh3Q0; Sun, 14 Sep 2025 08:10:26 +0200
-Date: Sun, 14 Sep 2025 08:10:20 +0200
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-gnome][RFC][PATCH 1/2] mozjs: update 128 > 140
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Message-Id: <8HEK2T.LCBU3EWSYQJ13@t-online.de>
-In-Reply-To: <186511276CF969C9.5932@lists.openembedded.org>
-References: <186511276CF969C9.5932@lists.openembedded.org>
-X-Mailer: geary/46.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Vs3ppW8D;
+ spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-72e565bf2feso22718137b3.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Sep 2025 05:45:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757853921; x=1758458721; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=1QRaV/5a8MzFHTyau4dB02BOFuzNvGjc6zt0N6xRMnU=;
+        b=Vs3ppW8DY/hHwAMGoXF0IX1QaZI17OqmNgjtl6o1Iz5FawrGkKXhel/YY9PfkMbX5u
+         dHrDadyP3hTxoil4AJ/1CPKwdG4bjmkR69+jmKZv+xIdD+3mvAxyi+9k60F4Rdw0GBSx
+         bhCcEf1Ebf8TvUDRnbp7rXozWGvI7qaVM193IGkyQCqnUtiJYiIUGr1Zcub84NMnsZet
+         kteoPEvF9oXBf0GA2gFeoouKCXP/DIqItfMtjVI7zZRpmsgIAlUY6IDGwMFr9K8nDeYQ
+         XNVyi784JuH8ZXAIKHNe4BNn06zzxfDcjuvgwQrHn2xebeMipvnyFfrBZsHMLQmBVtAb
+         tgRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757853921; x=1758458721;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=1QRaV/5a8MzFHTyau4dB02BOFuzNvGjc6zt0N6xRMnU=;
+        b=muCJLOYifU6aucg3iQS2knit368F59h/iphZltZ+2AYfr1mGfArASZi9x5lBdJFqaZ
+         FbMoZ8VhRnCZxvsjJxtSiaNFd6ARtLZkeejKpLstApIjv6bzwDj+XlAbbjzSh0ygdj/y
+         A6w4dlLxsfihvC1V7evH6p7zqT8dNuc7Vs10iFHlAkOlri0+yNYnm5mD60qdNwJ4DDtx
+         ydzCEl6YhaI5MjhdoFjnqYm77fXPR3FdIqy4NF93EXRgzFPyp7OGKCgS1/HZOjUalRPK
+         y5bvMvb1VITgbC/n9PbL0sI3B26mGyaYUKmmUG7M4zbKQx/dFIBY/3gsnSoEsv+8YMRJ
+         TZbg==
+X-Gm-Message-State: AOJu0Yz7161bA9W8/FrZgwF2viuh6ruGlJ5TymGDeSh2GsgnodK7+Erm
+	sDuhSuyLn20W39CU4POrLJB21j17x7nZmPQg391Dbwhm9Kx4X4zWXOSDp1FZqTu8
+X-Gm-Gg: ASbGnctljZQv30H3WZi901gDQ/6Nev0suTomhms+Q0csTgrtz5MN6AKodrIfNMeV86s
+	hvZG0bfgzsO/L6z8ULr9oGIKf0llB2Xs8/GGuK/v0NE7o7oC0uv0EH4ODB2oaTp9B24qxhe2NMB
+	X1A9UNsZOkVYq5FrwEZWawgXZQ7uJPSw1I+sLT/4KWfldF/PDwiWxp3SzsiMi8kzaiiXeiBWPBF
+	+C6LU73gauCaaXuEwIWgT8SqudfDnERpI+mEsgVkC/6pFgKiL/a0+RB9WAEiv6opymLb7YViWTD
+	tLzrcYjm6hTGR9+XtM9POSZwdqNj/w+vzjxItLfenizSmaZale4ZDoK84sUcsEpnjlkAjfbRcj4
+	CyYc3EolmLRGqID9PFDRbWdiPyeUVKPdsc57SqE8=
+X-Google-Smtp-Source: AGHT+IFHiTssylxvrS1OZ9yPvpoKaBw5Xn9NurX0jsXiXkiAgiIBgMTN7MzULuVEUMgM28zdURPUKA==
+X-Received: by 2002:a05:690c:4484:b0:71f:eece:bda8 with SMTP id 00721157ae682-73062ab400dmr66717037b3.8.1757853920469;
+        Sun, 14 Sep 2025 05:45:20 -0700 (PDT)
+Received: from localhost.localdomain ([67.233.61.26])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-72f76e1657asm24260847b3.33.2025.09.14.05.45.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 14 Sep 2025 05:45:20 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-perl][PATCH] libcrypt-openssl-rsa-perl: upgrade 0.33 -> 0.34
+Date: Sun, 14 Sep 2025 08:45:06 -0400
+Message-ID: <20250914124506.592617-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-jNcOIuB58qRJ+1uZQPyt"
-X-TOI-EXPURGATEID: 150726::1757830226-D1FF89FF-81559F71/0/0 CLEAN NORMAL
-X-TOI-MSGID: 2fcf320f-87cf-47f6-bf37-b7fc11680ea6
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 14 Sep 2025 06:10:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119391
+ <openembedded-devel@lists.openembedded.org>; Sun, 14 Sep 2025 12:45:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119392
 
---=-jNcOIuB58qRJ+1uZQPyt
-Content-Type: text/plain; charset=us-ascii; format=flowed
+License-Update: Still the same license.  Checksum change due to the change
+  of the physical address of the FSF.
 
-These recipes break gnome 48
+0.34 May 5 2025
+    - Production release.
+0.34_03 May 4 2025
+    - Fix bug in rsa_crypt. Need to pass NULL
+0.34_02 May 4 2025
+    - t/rsa.t needs to tolerate sha1 being disabled on rhel.
+0.34_01 May 3 2025
+    - docs - plaintext = decrypt(cyphertext)
+    - #44 - Fix issue when libz is not linked on AIX
+    - #50 - Correct openssl version may not be found
+    - #52 - Out of memory on openssl 1.1.1w hpux
+    - #47 - Update FSF address and LGPL name in LICENSE
+    - #55 - stop using AutoLoader
+    - #48 - Whirlpool is missing the header
+    - Move github repo to cpan-authors
+    - Fully support openSSL 3.x API
 
-On Sun, Sep 14 2025 at 08:07:57 +02:00:00, Markus Volk via 
-lists.openembedded.org <f_l_k=t-online.de@lists.openembedded.org> wrote:
-> - rework some patches
-> - drop applied patches
-> - add some additional patches from debian
-> - add clang-native dependency since it is available in oe-core
->   and llvm-objdump is needed in more places now
-> 
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> ---
->  ...with-icu-uc-to-fix-build-with-ICU-76.patch | 27 ------------
->  ...nfigure-do-not-look-for-llvm-objdump.patch | 43 
-> -------------------
->  ...001-Cargo.toml-do-not-abort-on-panic.patch |  0
->  .../0001-add-arm-to-list-of-mozinline.patch   |  0
->  ...rewrite-cargo-host-linker-in-python3.patch | 13 +++---
->  ...ix-one-occasionally-reproduced-confi.patch | 19 ++++----
->  ...o-not-try-to-find-a-suitable-upstrea.patch |  0
->  .../0004-use-asm-sgidefs.h.patch              |  0
->  ...ecurity-warning-when-disabling-forma.patch | 21 +++++++++
->  ...nicalizedNaNBits-on-architectures-th.patch | 30 +++++++++++++
->  .../Fix-math_private.h-for-i386-FTBFS.patch   | 29 +++++++++++++
->  .../{mozjs-128 => mozjs-140}/armv5.patch      |  0
->  .../musl-disable-stackwalk.patch              |  0
->  .../{mozjs-128 => mozjs-140}/riscv.patch      | 29 +++++++------
->  .../{mozjs-128 => mozjs-140}/riscv32.patch    |  0
->  ...js-128_128.5.2.bb => mozjs-140_140.2.0.bb} | 11 ++---
->  16 files changed, 118 insertions(+), 104 deletions(-)
->  delete mode 100644 
-> meta-oe/recipes-extended/mozjs/mozjs-128/0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch
->  delete mode 100644 
-> meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch
->  rename meta-oe/recipes-extended/mozjs/{mozjs-128 => 
-> mozjs-140}/0001-Cargo.toml-do-not-abort-on-panic.patch (100%)
->  rename meta-oe/recipes-extended/mozjs/{mozjs-128 => 
-> mozjs-140}/0001-add-arm-to-list-of-mozinline.patch (100%)
->  rename meta-oe/recipes-extended/mozjs/{mozjs-128 => 
-> mozjs-140}/0001-rewrite-cargo-host-linker-in-python3.patch (86%)
->  rename meta-oe/recipes-extended/mozjs/{mozjs-128 => 
-> mozjs-140}/0001-util.configure-fix-one-occasionally-reproduced-confi.patch 
-> (81%)
->  rename meta-oe/recipes-extended/mozjs/{mozjs-128 => 
-> mozjs-140}/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch 
-> (100%)
->  rename meta-oe/recipes-extended/mozjs/{mozjs-128 => 
-> mozjs-140}/0004-use-asm-sgidefs.h.patch (100%)
->  create mode 100644 
-> meta-oe/recipes-extended/mozjs/mozjs-140/Disable-format-security-warning-when-disabling-forma.patch
->  create mode 100644 
-> meta-oe/recipes-extended/mozjs/mozjs-140/Export-js-detail-CanonicalizedNaNBits-on-architectures-th.patch
->  create mode 100644 
-> meta-oe/recipes-extended/mozjs/mozjs-140/Fix-math_private.h-for-i386-FTBFS.patch
->  rename meta-oe/recipes-extended/mozjs/{mozjs-128 => 
-> mozjs-140}/armv5.patch (100%)
->  rename meta-oe/recipes-extended/mozjs/{mozjs-128 => 
-> mozjs-140}/musl-disable-stackwalk.patch (100%)
->  rename meta-oe/recipes-extended/mozjs/{mozjs-128 => 
-> mozjs-140}/riscv.patch (53%)
->  rename meta-oe/recipes-extended/mozjs/{mozjs-128 => 
-> mozjs-140}/riscv32.patch (100%)
->  rename meta-oe/recipes-extended/mozjs/{mozjs-128_128.5.2.bb => 
-> mozjs-140_140.2.0.bb} (88%)
-> 
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch
-> deleted file mode 100644
-> index 4fb7a28eeb..0000000000
-> --- 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch
-> +++ /dev/null
-> @@ -1,27 +0,0 @@
-> -From cbb5cc1022cc27edefc8eabbe21458cac9bda6fb Mon Sep 17 00:00:00 
-> 2001
-> -From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
-> -Date: Sat, 23 Nov 2024 13:28:33 -0800
-> -Subject: [PATCH] Link with icu-uc to fix build with ICU-76
-> -
-> -Fixes
-> -<https://bugzilla.mozilla.org/show_bug.cgi?id=1927380>
-> -
-> -Upstream-Status: Pending
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com 
-> <mailto:raj.khem@gmail.com>>
-> ----
-> - js/moz.configure | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/js/moz.configure b/js/moz.configure
-> -index 593b93acee..2181dca34b 100644
-> ---- a/js/moz.configure
-> -+++ b/js/moz.configure
-> -@@ -1305,7 +1305,7 @@ def 
-> enable_system_icu_option(enable_system_icu):
-> -     return enable_system_icu
-> -
-> -
-> --system_icu = pkg_check_modules("MOZ_ICU", "icu-i18n >= 73.1", 
-> when="--with-system-icu")
-> -+system_icu = pkg_check_modules("MOZ_ICU", "icu-i18n >= 73.1 
-> icu-uc", when="--with-system-icu")
-> -
-> -
-> - @depends(enable_system_icu_option)
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch
-> deleted file mode 100644
-> index 9a82acf77b..0000000000
-> --- 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch
-> +++ /dev/null
-> @@ -1,43 +0,0 @@
-> -From 1a5331f1997788e9a25bbc2b10eb14e2ee418be9 Mon Sep 17 00:00:00 
-> 2001
-> -From: Alexander Kanavin <alex@linutronix.de 
-> <mailto:alex@linutronix.de>>
-> -Date: Fri, 1 Oct 2021 13:01:10 +0200
-> -Subject: [PATCH] moz.configure: do not look for llvm-objdump
-> -
-> -This avoid dragging in a dependency that isn't even needed
-> -for js builds.
-> -
-> -Upstream-Status: Inappropriate [oe-core specific]
-> -Signed-off-by: Alexander Kanavin <alex@linutronix.de 
-> <mailto:alex@linutronix.de>>
-> ----
-> - moz.configure | 18 +++++++++---------
-> - 1 file changed, 9 insertions(+), 9 deletions(-)
-> -
-> -diff --git a/moz.configure b/moz.configure
-> -index 804b9a375a..402e79e3b3 100755
-> ---- a/moz.configure
-> -+++ b/moz.configure
-> -@@ -390,15 +390,15 @@ def plain_llvm_or_prefixed(name, 
-> llvm_name=None):
-> -     return plain_llvm_or_prefixed
-> -
-> -
-> --llvm_objdump = check_prog(
-> --    "LLVM_OBJDUMP",
-> --    llvm_tool("llvm-objdump"),
-> --    what="llvm-objdump",
-> --    when="--enable-compile-environment",
-> --    paths=clang_search_path,
-> --)
-> --
-> --add_old_configure_assignment("LLVM_OBJDUMP", llvm_objdump)
-> -+#llvm_objdump = check_prog(
-> -+#    "LLVM_OBJDUMP",
-> -+#    llvm_tool("llvm-objdump"),
-> -+#    what="llvm-objdump",
-> -+#    when="--enable-compile-environment",
-> -+#    paths=clang_search_path,
-> -+#)
-> -+#
-> -+#add_old_configure_assignment("LLVM_OBJDUMP", llvm_objdump)
-> -
-> -
-> - def validate_readelf(path):
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Cargo.toml-do-not-abort-on-panic.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-Cargo.toml-do-not-abort-on-panic.patch
-> similarity index 100%
-> rename from 
-> meta-oe/recipes-extended/mozjs/mozjs-128/0001-Cargo.toml-do-not-abort-on-panic.patch
-> rename to 
-> meta-oe/recipes-extended/mozjs/mozjs-140/0001-Cargo.toml-do-not-abort-on-panic.patch
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-add-arm-to-list-of-mozinline.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-add-arm-to-list-of-mozinline.patch
-> similarity index 100%
-> rename from 
-> meta-oe/recipes-extended/mozjs/mozjs-128/0001-add-arm-to-list-of-mozinline.patch
-> rename to 
-> meta-oe/recipes-extended/mozjs/mozjs-140/0001-add-arm-to-list-of-mozinline.patch
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-rewrite-cargo-host-linker-in-python3.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-rewrite-cargo-host-linker-in-python3.patch
-> similarity index 86%
-> rename from 
-> meta-oe/recipes-extended/mozjs/mozjs-128/0001-rewrite-cargo-host-linker-in-python3.patch
-> rename to 
-> meta-oe/recipes-extended/mozjs/mozjs-140/0001-rewrite-cargo-host-linker-in-python3.patch
-> index 94e1651b33..b1a0243939 100644
-> --- 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-rewrite-cargo-host-linker-in-python3.patch
-> +++ 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-rewrite-cargo-host-linker-in-python3.patch
-> @@ -18,18 +18,19 @@ rewrite cargo-host-linker in python3
->  Upstream-Status: Inappropriate [oe specific]
-> 
->  Signed-off-by: Changqing Li <changqing.li@windriver.com 
-> <mailto:changqing.li@windriver.com>>
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
->  ---
->   build/cargo-host-linker | 24 +++++++++++++++++++++---
->   1 file changed, 21 insertions(+), 3 deletions(-)
-> 
-> -diff --git a/build/cargo-host-linker b/build/cargo-host-linker
-> +diff --git a/build/cargo-host-linker.bat 
-> b/build/cargo-host-linker.bat
->  index cbd0472bf7..87d43ce9ec 100755
-> ---- a/build/cargo-host-linker
-> -+++ b/build/cargo-host-linker
-> +--- a/build/cargo-host-linker.bat
-> ++++ b/build/cargo-host-linker.bat
->  @@ -1,3 +1,21 @@
-> --#!/bin/sh
-> --# See comment in cargo-linker.
-> --eval ${MOZ_CARGO_WRAP_HOST_LD} ${MOZ_CARGO_WRAP_HOST_LDFLAGS} '"$@"'
-> +-@echo off
-> +-REM See comment in cargo-linker (without extension)
-> +-%MOZ_CARGO_WRAP_HOST_LD% %* %MOZ_CARGO_WRAP_HOST_LDFLAGS%
->  +#!/usr/bin/env python3
->  +
->  +import os,sys
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-util.configure-fix-one-occasionally-reproduced-confi.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
-> similarity index 81%
-> rename from 
-> meta-oe/recipes-extended/mozjs/mozjs-128/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
-> rename to 
-> meta-oe/recipes-extended/mozjs/mozjs-140/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
-> index d53cc2bd41..99b0d28754 100644
-> --- 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
-> +++ 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
-> @@ -28,6 +28,7 @@ It should be another process that deleted this file 
-> by using
->  Upstream-Status: Submitted 
-> [<https://bugzilla.mozilla.org/show_bug.cgi?id=1740667>]
-> 
->  Signed-off-by: Changqing Li <changqing.li@windriver.com 
-> <mailto:changqing.li@windriver.com>>
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
->  ---
->   build/moz.configure/util.configure | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> @@ -36,12 +37,12 @@ diff --git a/build/moz.configure/util.configure 
-> b/build/moz.configure/util.confi
->  index d93b91fcdd..47ab8b92b9 100644
->  --- a/build/moz.configure/util.configure
->  +++ b/build/moz.configure/util.configure
-> -@@ -256,7 +256,7 @@ def try_invoke_compiler(
-> -         "C++": ".cpp",
-> -     }[language]
-> -
-> --    fd, path = mkstemp(prefix="conftest.", suffix=suffix, text=True)
-> -+    fd, path = mkstemp(prefix="try_invoke_compiler_conftest.", 
-> suffix=suffix, text=True)
-> -     try:
-> -         source = source.encode("ascii", "replace")
-> -
-> +@@ -169,7 +169,7 @@
-> + def make_create_temporary_file():
-> +     @contextmanager
-> +     def create_temporary_file(suffix):
-> +-        fd, path = mkstemp(prefix="conftest", suffix=suffix)
-> ++        fd, path = mkstemp(prefix="try_invoke_compiler_conftest.", 
-> suffix=suffix, text=True)
-> +         os.close(fd)
-> +         yield path
-> +         try:
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch
-> similarity index 100%
-> rename from 
-> meta-oe/recipes-extended/mozjs/mozjs-128/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch
-> rename to 
-> meta-oe/recipes-extended/mozjs/mozjs-140/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/0004-use-asm-sgidefs.h.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/0004-use-asm-sgidefs.h.patch
-> similarity index 100%
-> rename from 
-> meta-oe/recipes-extended/mozjs/mozjs-128/0004-use-asm-sgidefs.h.patch
-> rename to 
-> meta-oe/recipes-extended/mozjs/mozjs-140/0004-use-asm-sgidefs.h.patch
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-140/Disable-format-security-warning-when-disabling-forma.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/Disable-format-security-warning-when-disabling-forma.patch
-> new file mode 100644
-> index 0000000000..27b8b71b5d
-> --- /dev/null
-> +++ 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/Disable-format-security-warning-when-disabling-forma.patch
-> @@ -0,0 +1,21 @@
-> +From: Mike Hommey <mh@glandium.org <mailto:mh@glandium.org>>
-> +Date: Wed, 5 Mar 2025 07:16:17 +0900
-> +Subject: Disable format-security warning when disabling format 
-> warning
-> +
-> +Upstream-Status: Pending [Not my work. Taken from debian]
-> +
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> +---
-> + js/src/xsum/moz.build | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/js/src/xsum/moz.build b/js/src/xsum/moz.build
-> +index dc7a4f2..30f64cd 100644
-> +--- a/js/src/xsum/moz.build
-> ++++ b/js/src/xsum/moz.build
-> +@@ -17,4 +17,4 @@ SOURCES += [
-> + ]
-> +
-> + # Suppress warnings in third-party code.
-> +-SOURCES['xsum.cpp'].flags += ['-Wno-implicit-fallthrough', 
-> '-Wno-format', '-Wno-unused-value']
-> ++SOURCES['xsum.cpp'].flags += ['-Wno-implicit-fallthrough', 
-> '-Wno-format', '-Wno-format-security', '-Wno-unused-value']
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-140/Export-js-detail-CanonicalizedNaNBits-on-architectures-th.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/Export-js-detail-CanonicalizedNaNBits-on-architectures-th.patch
-> new file mode 100644
-> index 0000000000..0b90eaf909
-> --- /dev/null
-> +++ 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/Export-js-detail-CanonicalizedNaNBits-on-architectures-th.patch
-> @@ -0,0 +1,30 @@
-> +From: Simon McVittie <smcv@debian.org <mailto:smcv@debian.org>>
-> +Date: Thu, 8 Feb 2024 10:36:53 +0000
-> +Subject: Export js::detail::CanonicalizedNaNBits on architectures 
-> that use it
-> +
-> +Otherwise the inline function JS::CanonicalizeNaN(double), which is
-> +called by gjs, cannot validly refer to it.
-> +
-> +Bug-Debian: <https://bugs.debian.org/1063446>
-> +Signed-off-by: Simon McVittie <smcv@debian.org 
-> <mailto:smcv@debian.org>>
-> +
-> +Upstream-Status: Pending [Not my work. Taken from debian]
-> +
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> +---
-> + js/public/Value.h | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/js/public/Value.h b/js/public/Value.h
-> +index c70d5b6..4bee5bc 100644
-> +--- a/js/public/Value.h
-> ++++ b/js/public/Value.h
-> +@@ -426,7 +426,7 @@ constexpr uint64_t CanonicalizedNaNSignificand = 
-> 0x8000000000000;
-> + #endif
-> +
-> + #if defined(JS_RUNTIME_CANONICAL_NAN)
-> +-extern uint64_t CanonicalizedNaNBits;
-> ++extern JS_PUBLIC_DATA uint64_t CanonicalizedNaNBits;
-> + #else
-> + constexpr uint64_t CanonicalizedNaNBits =
-> +     mozilla::SpecificNaNBits<double, 
-> detail::CanonicalizedNaNSignBit,
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-140/Fix-math_private.h-for-i386-FTBFS.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/Fix-math_private.h-for-i386-FTBFS.patch
-> new file mode 100644
-> index 0000000000..18d53cd068
-> --- /dev/null
-> +++ 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/Fix-math_private.h-for-i386-FTBFS.patch
-> @@ -0,0 +1,29 @@
-> +From: Mike Hommey <mh@glandium.org <mailto:mh@glandium.org>>
-> +Date: Sat, 27 Nov 2021 06:49:44 +0900
-> +Subject: Fix math_private.h for i386 FTBFS
-> +
-> +Origin: firefox-esr packaging, 
-> commit:<https://salsa.debian.org/mozilla-team/firefox/-/commit/fc1e93ab0fd20680006d6e25f301ec47b1969518>
-> +
-> +Upstream-Status: Pending [Not my work. Taken from debian]
-> +
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> +---
-> + modules/fdlibm/src/math_private.h | 4 ++++
-> + 1 file changed, 4 insertions(+)
-> +
-> +diff --git a/modules/fdlibm/src/math_private.h 
-> b/modules/fdlibm/src/math_private.h
-> +index 45f7401..29ca8a8 100644
-> +--- a/modules/fdlibm/src/math_private.h
-> ++++ b/modules/fdlibm/src/math_private.h
-> +@@ -30,7 +30,11 @@
-> +  * Adapted from 
-> <https://github.com/freebsd/freebsd-src/search?q=__double_t>
-> +  */
-> +
-> ++#if defined __FLT_EVAL_METHOD__ && (__FLT_EVAL_METHOD__ == 2)
-> ++typedef long double      __double_t;
-> ++#else
-> + typedef double      __double_t;
-> ++#endif
-> + typedef __double_t  double_t;
-> + typedef float       __float_t;
-> +
-> diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/armv5.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/armv5.patch
-> similarity index 100%
-> rename from meta-oe/recipes-extended/mozjs/mozjs-128/armv5.patch
-> rename to meta-oe/recipes-extended/mozjs/mozjs-140/armv5.patch
-> diff --git 
-> a/meta-oe/recipes-extended/mozjs/mozjs-128/musl-disable-stackwalk.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/musl-disable-stackwalk.patch
-> similarity index 100%
-> rename from 
-> meta-oe/recipes-extended/mozjs/mozjs-128/musl-disable-stackwalk.patch
-> rename to 
-> meta-oe/recipes-extended/mozjs/mozjs-140/musl-disable-stackwalk.patch
-> diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/riscv.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/riscv.patch
-> similarity index 53%
-> rename from meta-oe/recipes-extended/mozjs/mozjs-128/riscv.patch
-> rename to meta-oe/recipes-extended/mozjs/mozjs-140/riscv.patch
-> index cb2dc66525..9967bb75cc 100644
-> --- a/meta-oe/recipes-extended/mozjs/mozjs-128/riscv.patch
-> +++ b/meta-oe/recipes-extended/mozjs/mozjs-140/riscv.patch
-> @@ -4,27 +4,28 @@ Rust uses above for architecture in tuples
-> 
->  Upstream-Status: Pending
->  Signed-off-by: Khem Raj <raj.khem@gmail.com 
-> <mailto:raj.khem@gmail.com>>
-> +Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
->  --- 
-> a/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
->  +++ 
-> b/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
-> -@@ -1327,6 +1327,10 @@ class LinuxCrossCompileToolchainTest(Bas
-> +@@ -1328,6 +1328,8 @@
->           "mips-unknown-linux-gnu": big_endian + {"__mips__": 1},
->           "riscv32-unknown-linux-gnu": little_endian + {"__riscv": 1, 
-> "__riscv_xlen": 32},
->           "riscv64-unknown-linux-gnu": little_endian + {"__riscv": 1, 
-> "__riscv_xlen": 64},
-> -+        "riscv32gc-unknown-linux-gnu": little_endian
-> -+        + {"__riscv": 1, "__riscv_xlen": 32},
-> -+        "riscv64gc-unknown-linux-gnu": little_endian
-> -+        + {"__riscv": 1, "__riscv_xlen": 64},
-> ++        "riscv32gc-unknown-linux-gnu": little_endian + {"__riscv": 
-> 1, "__riscv_xlen": 32},
-> ++        "riscv64gc-unknown-linux-gnu": little_endian + {"__riscv": 
-> 1, "__riscv_xlen": 64},
->           "sh4-unknown-linux-gnu": little_endian + {"__sh__": 1},
->       }
-> 
->  --- a/build/autoconf/config.sub
->  +++ b/build/autoconf/config.sub
-> -@@ -1236,7 +1236,7 @@ case $cpu-$vendor in
-> - 			| powerpc | powerpc64 | powerpc64le | powerpcle | powerpcspe \
-> - 			| pru \
-> - 			| pyramid \
-> --			| riscv | riscv32 | riscv32be | riscv64 | riscv64be \
-> -+			| riscv | riscv32 | riscv32be | riscv32gc | riscv64 | riscv64be 
-> | riscv64gc \
-> - 			| rl78 | romp | rs6000 | rx \
-> - 			| s390 | s390x \
-> - 			| score \
-> +@@ -1396,8 +1396,10 @@
-> + 			| riscv \
-> + 			| riscv32 \
-> + 			| riscv32be \
-> ++			| riscv32gc \
-> + 			| riscv64 \
-> + 			| riscv64be \
-> ++			| riscv64gc \
-> + 			| rl78 \
-> + 			| romp \
-> + 			| rs6000 \
-> diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/riscv32.patch 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140/riscv32.patch
-> similarity index 100%
-> rename from meta-oe/recipes-extended/mozjs/mozjs-128/riscv32.patch
-> rename to meta-oe/recipes-extended/mozjs/mozjs-140/riscv32.patch
-> diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb 
-> b/meta-oe/recipes-extended/mozjs/mozjs-140_140.2.0.bb
-> similarity index 88%
-> rename from meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
-> rename to meta-oe/recipes-extended/mozjs/mozjs-140_140.2.0.bb
-> index ceb81d07e5..e9e1c96921 100644
-> --- a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
-> +++ b/meta-oe/recipes-extended/mozjs/mozjs-140_140.2.0.bb
-> @@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = 
-> "file://LICENSE;md5=dc9b6ecd19a14a54a628edaaf23733bf"
-> 
->  SRC_URI = 
-> "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/firefox-${PV}esr.source.tar.xz 
-> <https://archive.mozilla.org/pub/firefox/releases/$%7BPV%7Desr/source/firefox-$%7BPV%7Desr.source.tar.xz> 
-> \
->             file://0001-Cargo.toml-do-not-abort-on-panic.patch 
-> <file://0001-cargo.toml-do-not-abort-on-panic.patch/> \
-> -           
-> file://0002-moz.configure-do-not-look-for-llvm-objdump.patch 
-> <file://0002-moz.configure-do-not-look-for-llvm-objdump.patch/> \
->             
-> file://0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch 
-> <file://0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch/> 
-> \
->             file://0004-use-asm-sgidefs.h.patch 
-> <file://0004-use-asm-sgidefs.h.patch/> \
->             file://riscv32.patch <file://riscv32.patch/> \
-> @@ -14,19 +13,21 @@ SRC_URI = 
-> "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
->             file://musl-disable-stackwalk.patch 
-> <file://musl-disable-stackwalk.patch/> \
->             file://0001-add-arm-to-list-of-mozinline.patch 
-> <file://0001-add-arm-to-list-of-mozinline.patch/> \
->             file://armv5.patch <file://armv5.patch/> \
-> -           
-> file://0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch 
-> <file://0001-link-with-icu-uc-to-fix-build-with-icu-76.patch/> \
->             file://riscv.patch <file://riscv.patch/> \
-> +           
-> file://Disable-format-security-warning-when-disabling-forma.patch 
-> <file://disable-format-security-warning-when-disabling-forma.patch/> \
-> +           
-> file://Export-js-detail-CanonicalizedNaNBits-on-architectures-th.patch 
-> <file://export-js-detail-canonicalizednanbits-on-architectures-th.patch/> 
-> \
-> +           file://Fix-math_private.h-for-i386-FTBFS.patch 
-> <file://fix-math_private.h-for-i386-ftbfs.patch/> \
->             "
-> -SRC_URI[sha256sum] = 
-> "25d633eb81499cbda44b8c64fa1c1a5879d55024b864ef495d4997154d68358f"
-> +SRC_URI[sha256sum] = 
-> "956dce675c3b706d563caf07ed3ca9af632ab830be710dfd4351da78a0a2ef55"
-> 
-> -UPSTREAM_CHECK_URI = "<https://tracker.debian.org/pkg/mozjs128>"
-> +UPSTREAM_CHECK_URI = "<https://tracker.debian.org/pkg/mozjs140>"
->  UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
-> 
->  S = "${UNPACKDIR}/firefox-${PV}"
-> 
->  inherit pkgconfig perlnative python3native rust cargo
-> 
-> -DEPENDS += "zlib cbindgen-native python3 icu"
-> +DEPENDS += "zlib cbindgen-native python3 icu clang-native"
->  DEPENDS:remove:mipsarch = "icu"
->  DEPENDS:remove:powerpc:toolchain-clang = "icu"
-> 
-> --
-> 2.50.1
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119390): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/119390>
-> Mute This Topic: <https://lists.openembedded.org/mt/115233753/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
-
---=-jNcOIuB58qRJ+1uZQPyt
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>These recipes break gnome 48</div></div><div id="geary-quote" dir="auto"><br>On Sun, Sep 14 2025 at 08:07:57 +02:00:00, Markus Volk via lists.openembedded.org &lt;f_l_k=t-online.de@lists.openembedded.org&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">- rework some patches
-- drop applied patches
-- add some additional patches from debian
-- add clang-native dependency since it is available in oe-core
-  and llvm-objdump is needed in more places now
-
-Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- ...with-icu-uc-to-fix-build-with-ICU-76.patch | 27 ------------
- ...nfigure-do-not-look-for-llvm-objdump.patch | 43 -------------------
- ...001-Cargo.toml-do-not-abort-on-panic.patch |  0
- .../0001-add-arm-to-list-of-mozinline.patch   |  0
- ...rewrite-cargo-host-linker-in-python3.patch | 13 +++---
- ...ix-one-occasionally-reproduced-confi.patch | 19 ++++----
- ...o-not-try-to-find-a-suitable-upstrea.patch |  0
- .../0004-use-asm-sgidefs.h.patch              |  0
- ...ecurity-warning-when-disabling-forma.patch | 21 +++++++++
- ...nicalizedNaNBits-on-architectures-th.patch | 30 +++++++++++++
- .../Fix-math_private.h-for-i386-FTBFS.patch   | 29 +++++++++++++
- .../{mozjs-128 =&gt; mozjs-140}/armv5.patch      |  0
- .../musl-disable-stackwalk.patch              |  0
- .../{mozjs-128 =&gt; mozjs-140}/riscv.patch      | 29 +++++++------
- .../{mozjs-128 =&gt; mozjs-140}/riscv32.patch    |  0
- ...js-128_128.5.2.bb =&gt; mozjs-140_140.2.0.bb} | 11 ++---
- 16 files changed, 118 insertions(+), 104 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/mozjs/mozjs-128/0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch
- delete mode 100644 meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch
- rename meta-oe/recipes-extended/mozjs/{mozjs-128 =&gt; mozjs-140}/0001-Cargo.toml-do-not-abort-on-panic.patch (100%)
- rename meta-oe/recipes-extended/mozjs/{mozjs-128 =&gt; mozjs-140}/0001-add-arm-to-list-of-mozinline.patch (100%)
- rename meta-oe/recipes-extended/mozjs/{mozjs-128 =&gt; mozjs-140}/0001-rewrite-cargo-host-linker-in-python3.patch (86%)
- rename meta-oe/recipes-extended/mozjs/{mozjs-128 =&gt; mozjs-140}/0001-util.configure-fix-one-occasionally-reproduced-confi.patch (81%)
- rename meta-oe/recipes-extended/mozjs/{mozjs-128 =&gt; mozjs-140}/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch (100%)
- rename meta-oe/recipes-extended/mozjs/{mozjs-128 =&gt; mozjs-140}/0004-use-asm-sgidefs.h.patch (100%)
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs-140/Disable-format-security-warning-when-disabling-forma.patch
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs-140/Export-js-detail-CanonicalizedNaNBits-on-architectures-th.patch
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs-140/Fix-math_private.h-for-i386-FTBFS.patch
- rename meta-oe/recipes-extended/mozjs/{mozjs-128 =&gt; mozjs-140}/armv5.patch (100%)
- rename meta-oe/recipes-extended/mozjs/{mozjs-128 =&gt; mozjs-140}/musl-disable-stackwalk.patch (100%)
- rename meta-oe/recipes-extended/mozjs/{mozjs-128 =&gt; mozjs-140}/riscv.patch (53%)
- rename meta-oe/recipes-extended/mozjs/{mozjs-128 =&gt; mozjs-140}/riscv32.patch (100%)
- rename meta-oe/recipes-extended/mozjs/{mozjs-128_128.5.2.bb =&gt; mozjs-140_140.2.0.bb} (88%)
+ ...ssl-rsa-perl_0.33.bb => libcrypt-openssl-rsa-perl_0.34.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-rsa-perl_0.33.bb => libcrypt-openssl-rsa-perl_0.34.bb} (84%)
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch
-deleted file mode 100644
-index 4fb7a28eeb..0000000000
---- a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--From cbb5cc1022cc27edefc8eabbe21458cac9bda6fb Mon Sep 17 00:00:00 2001
--From: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
--Date: Sat, 23 Nov 2024 13:28:33 -0800
--Subject: [PATCH] Link with icu-uc to fix build with ICU-76
--
--Fixes
--<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1927380">https://bugzilla.mozilla.org/show_bug.cgi?id=1927380</a>
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
-----
-- js/moz.configure | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/js/moz.configure b/js/moz.configure
--index 593b93acee..2181dca34b 100644
----- a/js/moz.configure
--+++ b/js/moz.configure
--@@ -1305,7 +1305,7 @@ def enable_system_icu_option(enable_system_icu):
--     return enable_system_icu
-- 
-- 
---system_icu = pkg_check_modules("MOZ_ICU", "icu-i18n &gt;= 73.1", when="--with-system-icu")
--+system_icu = pkg_check_modules("MOZ_ICU", "icu-i18n &gt;= 73.1 icu-uc", when="--with-system-icu")
-- 
-- 
-- @depends(enable_system_icu_option)
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch
-deleted file mode 100644
-index 9a82acf77b..0000000000
---- a/meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 1a5331f1997788e9a25bbc2b10eb14e2ee418be9 Mon Sep 17 00:00:00 2001
--From: Alexander Kanavin &lt;<a href="mailto:alex@linutronix.de">alex@linutronix.de</a>&gt;
--Date: Fri, 1 Oct 2021 13:01:10 +0200
--Subject: [PATCH] moz.configure: do not look for llvm-objdump
--
--This avoid dragging in a dependency that isn't even needed
--for js builds.
--
--Upstream-Status: Inappropriate [oe-core specific]
--Signed-off-by: Alexander Kanavin &lt;<a href="mailto:alex@linutronix.de">alex@linutronix.de</a>&gt;
-----
-- moz.configure | 18 +++++++++---------
-- 1 file changed, 9 insertions(+), 9 deletions(-)
--
--diff --git a/moz.configure b/moz.configure
--index 804b9a375a..402e79e3b3 100755
----- a/moz.configure
--+++ b/moz.configure
--@@ -390,15 +390,15 @@ def plain_llvm_or_prefixed(name, llvm_name=None):
--     return plain_llvm_or_prefixed
-- 
-- 
---llvm_objdump = check_prog(
---    "LLVM_OBJDUMP",
---    llvm_tool("llvm-objdump"),
---    what="llvm-objdump",
---    when="--enable-compile-environment",
---    paths=clang_search_path,
---)
---
---add_old_configure_assignment("LLVM_OBJDUMP", llvm_objdump)
--+#llvm_objdump = check_prog(
--+#    "LLVM_OBJDUMP",
--+#    llvm_tool("llvm-objdump"),
--+#    what="llvm-objdump",
--+#    when="--enable-compile-environment",
--+#    paths=clang_search_path,
--+#)
--+#
--+#add_old_configure_assignment("LLVM_OBJDUMP", llvm_objdump)
-- 
-- 
-- def validate_readelf(path):
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Cargo.toml-do-not-abort-on-panic.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-Cargo.toml-do-not-abort-on-panic.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128/0001-Cargo.toml-do-not-abort-on-panic.patch
-rename to meta-oe/recipes-extended/mozjs/mozjs-140/0001-Cargo.toml-do-not-abort-on-panic.patch
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-add-arm-to-list-of-mozinline.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-add-arm-to-list-of-mozinline.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128/0001-add-arm-to-list-of-mozinline.patch
-rename to meta-oe/recipes-extended/mozjs/mozjs-140/0001-add-arm-to-list-of-mozinline.patch
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-rewrite-cargo-host-linker-in-python3.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-rewrite-cargo-host-linker-in-python3.patch
-similarity index 86%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128/0001-rewrite-cargo-host-linker-in-python3.patch
-rename to meta-oe/recipes-extended/mozjs/mozjs-140/0001-rewrite-cargo-host-linker-in-python3.patch
-index 94e1651b33..b1a0243939 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-rewrite-cargo-host-linker-in-python3.patch
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-rewrite-cargo-host-linker-in-python3.patch
-@@ -18,18 +18,19 @@ rewrite cargo-host-linker in python3
- Upstream-Status: Inappropriate [oe specific]
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.33.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.34.bb
+similarity index 84%
+rename from meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.33.bb
+rename to meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.34.bb
+index 5b81cfa4a3..ffcfa196e8 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.33.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.34.bb
+@@ -2,12 +2,12 @@ SUMMARY = "Crypt Openssl RSA cpan module"
+ SECTION = "libs"
+ HOMEPAGE = "https://metacpan.org/pod/Crypt::OpenSSL::RSA"
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a67ceecc5d9a91a5a0d003ba50c26346"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=399bd4de06d233aa49afa7c47cea8117"
  
- Signed-off-by: Changqing Li &lt;<a href="mailto:changqing.li@windriver.com">changqing.li@windriver.com</a>&gt;
-+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
- ---
-  build/cargo-host-linker | 24 +++++++++++++++++++++---
-  1 file changed, 21 insertions(+), 3 deletions(-)
+ SRC_URI = "${CPAN_MIRROR}/authors/id/T/TO/TODDR/Crypt-OpenSSL-RSA-${PV}.tar.gz \
+ "
  
--diff --git a/build/cargo-host-linker b/build/cargo-host-linker
-+diff --git a/build/cargo-host-linker.bat b/build/cargo-host-linker.bat
- index cbd0472bf7..87d43ce9ec 100755
----- a/build/cargo-host-linker
--+++ b/build/cargo-host-linker
-+--- a/build/cargo-host-linker.bat
-++++ b/build/cargo-host-linker.bat
- @@ -1,3 +1,21 @@
---#!/bin/sh
---# See comment in cargo-linker.
---eval ${MOZ_CARGO_WRAP_HOST_LD} ${MOZ_CARGO_WRAP_HOST_LDFLAGS} '"$@"'
-+-@echo off
-+-REM See comment in cargo-linker (without extension)
-+-%MOZ_CARGO_WRAP_HOST_LD% %* %MOZ_CARGO_WRAP_HOST_LDFLAGS%
- +#!/usr/bin/env python3
- +
- +import os,sys
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-util.configure-fix-one-occasionally-reproduced-confi.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
-similarity index 81%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
-rename to meta-oe/recipes-extended/mozjs/mozjs-140/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
-index d53cc2bd41..99b0d28754 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-140/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
-@@ -28,6 +28,7 @@ It should be another process that deleted this file by using
- Upstream-Status: Submitted [<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1740667">https://bugzilla.mozilla.org/show_bug.cgi?id=1740667</a>]
+-SRC_URI[sha256sum] = "bdbe630f6d6f540325746ad99977272ac8664ff81bd19f0adaba6d6f45efd864"
++SRC_URI[sha256sum] = "368ed198e1fbaebaa2e681d77dbb3c6f0f94e9bacd97b2674759bfaa75bf4a35"
  
- Signed-off-by: Changqing Li &lt;<a href="mailto:changqing.li@windriver.com">changqing.li@windriver.com</a>&gt;
-+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
- ---
-  build/moz.configure/util.configure | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
-@@ -36,12 +37,12 @@ diff --git a/build/moz.configure/util.configure b/build/moz.configure/util.confi
- index d93b91fcdd..47ab8b92b9 100644
- --- a/build/moz.configure/util.configure
- +++ b/build/moz.configure/util.configure
--@@ -256,7 +256,7 @@ def try_invoke_compiler(
--         "C++": ".cpp",
--     }[language]
-- 
---    fd, path = mkstemp(prefix="conftest.", suffix=suffix, text=True)
--+    fd, path = mkstemp(prefix="try_invoke_compiler_conftest.", suffix=suffix, text=True)
--     try:
--         source = source.encode("ascii", "replace")
-- 
-+@@ -169,7 +169,7 @@
-+ def make_create_temporary_file():
-+     @contextmanager
-+     def create_temporary_file(suffix):
-+-        fd, path = mkstemp(prefix="conftest", suffix=suffix)
-++        fd, path = mkstemp(prefix="try_invoke_compiler_conftest.", suffix=suffix, text=True)
-+         os.close(fd)
-+         yield path
-+         try:
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch
-rename to meta-oe/recipes-extended/mozjs/mozjs-140/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0004-use-asm-sgidefs.h.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/0004-use-asm-sgidefs.h.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128/0004-use-asm-sgidefs.h.patch
-rename to meta-oe/recipes-extended/mozjs/mozjs-140/0004-use-asm-sgidefs.h.patch
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-140/Disable-format-security-warning-when-disabling-forma.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/Disable-format-security-warning-when-disabling-forma.patch
-new file mode 100644
-index 0000000000..27b8b71b5d
---- /dev/null
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-140/Disable-format-security-warning-when-disabling-forma.patch
-@@ -0,0 +1,21 @@
-+From: Mike Hommey &lt;<a href="mailto:mh@glandium.org">mh@glandium.org</a>&gt;
-+Date: Wed, 5 Mar 2025 07:16:17 +0900
-+Subject: Disable format-security warning when disabling format warning
-+
-+Upstream-Status: Pending [Not my work. Taken from debian]
-+
-+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
-+---
-+ js/src/xsum/moz.build | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/js/src/xsum/moz.build b/js/src/xsum/moz.build
-+index dc7a4f2..30f64cd 100644
-+--- a/js/src/xsum/moz.build
-++++ b/js/src/xsum/moz.build
-+@@ -17,4 +17,4 @@ SOURCES += [
-+ ]
-+ 
-+ # Suppress warnings in third-party code.
-+-SOURCES['xsum.cpp'].flags += ['-Wno-implicit-fallthrough', '-Wno-format', '-Wno-unused-value']
-++SOURCES['xsum.cpp'].flags += ['-Wno-implicit-fallthrough', '-Wno-format', '-Wno-format-security', '-Wno-unused-value']
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-140/Export-js-detail-CanonicalizedNaNBits-on-architectures-th.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/Export-js-detail-CanonicalizedNaNBits-on-architectures-th.patch
-new file mode 100644
-index 0000000000..0b90eaf909
---- /dev/null
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-140/Export-js-detail-CanonicalizedNaNBits-on-architectures-th.patch
-@@ -0,0 +1,30 @@
-+From: Simon McVittie &lt;<a href="mailto:smcv@debian.org">smcv@debian.org</a>&gt;
-+Date: Thu, 8 Feb 2024 10:36:53 +0000
-+Subject: Export js::detail::CanonicalizedNaNBits on architectures that use it
-+
-+Otherwise the inline function JS::CanonicalizeNaN(double), which is
-+called by gjs, cannot validly refer to it.
-+
-+Bug-Debian: <a href="https://bugs.debian.org/1063446">https://bugs.debian.org/1063446</a>
-+Signed-off-by: Simon McVittie &lt;<a href="mailto:smcv@debian.org">smcv@debian.org</a>&gt;
-+
-+Upstream-Status: Pending [Not my work. Taken from debian]
-+
-+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
-+---
-+ js/public/Value.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/js/public/Value.h b/js/public/Value.h
-+index c70d5b6..4bee5bc 100644
-+--- a/js/public/Value.h
-++++ b/js/public/Value.h
-+@@ -426,7 +426,7 @@ constexpr uint64_t CanonicalizedNaNSignificand = 0x8000000000000;
-+ #endif
-+ 
-+ #if defined(JS_RUNTIME_CANONICAL_NAN)
-+-extern uint64_t CanonicalizedNaNBits;
-++extern JS_PUBLIC_DATA uint64_t CanonicalizedNaNBits;
-+ #else
-+ constexpr uint64_t CanonicalizedNaNBits =
-+     mozilla::SpecificNaNBits&lt;double, detail::CanonicalizedNaNSignBit,
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-140/Fix-math_private.h-for-i386-FTBFS.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/Fix-math_private.h-for-i386-FTBFS.patch
-new file mode 100644
-index 0000000000..18d53cd068
---- /dev/null
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-140/Fix-math_private.h-for-i386-FTBFS.patch
-@@ -0,0 +1,29 @@
-+From: Mike Hommey &lt;<a href="mailto:mh@glandium.org">mh@glandium.org</a>&gt;
-+Date: Sat, 27 Nov 2021 06:49:44 +0900
-+Subject: Fix math_private.h for i386 FTBFS
-+
-+Origin: firefox-esr packaging, commit:<a href="https://salsa.debian.org/mozilla-team/firefox/-/commit/fc1e93ab0fd20680006d6e25f301ec47b1969518">https://salsa.debian.org/mozilla-team/firefox/-/commit/fc1e93ab0fd20680006d6e25f301ec47b1969518</a>
-+
-+Upstream-Status: Pending [Not my work. Taken from debian]
-+
-+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
-+---
-+ modules/fdlibm/src/math_private.h | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/modules/fdlibm/src/math_private.h b/modules/fdlibm/src/math_private.h
-+index 45f7401..29ca8a8 100644
-+--- a/modules/fdlibm/src/math_private.h
-++++ b/modules/fdlibm/src/math_private.h
-+@@ -30,7 +30,11 @@
-+  * Adapted from <a href="https://github.com/freebsd/freebsd-src/search?q=__double_t">https://github.com/freebsd/freebsd-src/search?q=__double_t</a>
-+  */
-+ 
-++#if defined __FLT_EVAL_METHOD__ &amp;&amp; (__FLT_EVAL_METHOD__ == 2)
-++typedef long double      __double_t;
-++#else
-+ typedef double      __double_t;
-++#endif
-+ typedef __double_t  double_t;
-+ typedef float       __float_t;
-+ 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/armv5.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/armv5.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128/armv5.patch
-rename to meta-oe/recipes-extended/mozjs/mozjs-140/armv5.patch
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/musl-disable-stackwalk.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/musl-disable-stackwalk.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128/musl-disable-stackwalk.patch
-rename to meta-oe/recipes-extended/mozjs/mozjs-140/musl-disable-stackwalk.patch
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/riscv.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/riscv.patch
-similarity index 53%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128/riscv.patch
-rename to meta-oe/recipes-extended/mozjs/mozjs-140/riscv.patch
-index cb2dc66525..9967bb75cc 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs-128/riscv.patch
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-140/riscv.patch
-@@ -4,27 +4,28 @@ Rust uses above for architecture in tuples
+ DEPENDS += "libcrypt-openssl-guess-perl-native openssl"
  
- Upstream-Status: Pending
- Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
-+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
- --- a/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
- +++ b/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
--@@ -1327,6 +1327,10 @@ class LinuxCrossCompileToolchainTest(Bas
-+@@ -1328,6 +1328,8 @@
-          "mips-unknown-linux-gnu": big_endian + {"__mips__": 1},
-          "riscv32-unknown-linux-gnu": little_endian + {"__riscv": 1, "__riscv_xlen": 32},
-          "riscv64-unknown-linux-gnu": little_endian + {"__riscv": 1, "__riscv_xlen": 64},
--+        "riscv32gc-unknown-linux-gnu": little_endian
--+        + {"__riscv": 1, "__riscv_xlen": 32},
--+        "riscv64gc-unknown-linux-gnu": little_endian
--+        + {"__riscv": 1, "__riscv_xlen": 64},
-++        "riscv32gc-unknown-linux-gnu": little_endian + {"__riscv": 1, "__riscv_xlen": 32},
-++        "riscv64gc-unknown-linux-gnu": little_endian + {"__riscv": 1, "__riscv_xlen": 64},
-          "sh4-unknown-linux-gnu": little_endian + {"__sh__": 1},
-      }
-  
- --- a/build/autoconf/config.sub
- +++ b/build/autoconf/config.sub
--@@ -1236,7 +1236,7 @@ case $cpu-$vendor in
-- 			| powerpc | powerpc64 | powerpc64le | powerpcle | powerpcspe \
-- 			| pru \
-- 			| pyramid \
---			| riscv | riscv32 | riscv32be | riscv64 | riscv64be \
--+			| riscv | riscv32 | riscv32be | riscv32gc | riscv64 | riscv64be | riscv64gc \
-- 			| rl78 | romp | rs6000 | rx \
-- 			| s390 | s390x \
-- 			| score \
-+@@ -1396,8 +1396,10 @@
-+ 			| riscv \
-+ 			| riscv32 \
-+ 			| riscv32be \
-++			| riscv32gc \
-+ 			| riscv64 \
-+ 			| riscv64be \
-++			| riscv64gc \
-+ 			| rl78 \
-+ 			| romp \
-+ 			| rs6000 \
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/riscv32.patch b/meta-oe/recipes-extended/mozjs/mozjs-140/riscv32.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128/riscv32.patch
-rename to meta-oe/recipes-extended/mozjs/mozjs-140/riscv32.patch
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb b/meta-oe/recipes-extended/mozjs/mozjs-140_140.2.0.bb
-similarity index 88%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
-rename to meta-oe/recipes-extended/mozjs/mozjs-140_140.2.0.bb
-index ceb81d07e5..e9e1c96921 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-140_140.2.0.bb
-@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dc9b6ecd19a14a54a628edaaf23733bf"
- 
- SRC_URI = "<a href="https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/firefox-${PV}esr.source.tar.xz">https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/firefox-${PV}esr.source.tar.xz</a> \
-            <a href="file://0001-Cargo.toml-do-not-abort-on-panic.patch">file://0001-Cargo.toml-do-not-abort-on-panic.patch</a> \
--           <a href="file://0002-moz.configure-do-not-look-for-llvm-objdump.patch">file://0002-moz.configure-do-not-look-for-llvm-objdump.patch</a> \
-            <a href="file://0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch">file://0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch</a> \
-            <a href="file://0004-use-asm-sgidefs.h.patch">file://0004-use-asm-sgidefs.h.patch</a> \
-            <a href="file://riscv32.patch">file://riscv32.patch</a> \
-@@ -14,19 +13,21 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
-            <a href="file://musl-disable-stackwalk.patch">file://musl-disable-stackwalk.patch</a> \
-            <a href="file://0001-add-arm-to-list-of-mozinline.patch">file://0001-add-arm-to-list-of-mozinline.patch</a> \
-            <a href="file://armv5.patch">file://armv5.patch</a> \
--           <a href="file://0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch">file://0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch</a> \
-            <a href="file://riscv.patch">file://riscv.patch</a> \
-+           <a href="file://Disable-format-security-warning-when-disabling-forma.patch">file://Disable-format-security-warning-when-disabling-forma.patch</a> \
-+           <a href="file://Export-js-detail-CanonicalizedNaNBits-on-architectures-th.patch">file://Export-js-detail-CanonicalizedNaNBits-on-architectures-th.patch</a> \
-+           <a href="file://Fix-math_private.h-for-i386-FTBFS.patch">file://Fix-math_private.h-for-i386-FTBFS.patch</a> \
-            "
--SRC_URI[sha256sum] = "25d633eb81499cbda44b8c64fa1c1a5879d55024b864ef495d4997154d68358f"
-+SRC_URI[sha256sum] = "956dce675c3b706d563caf07ed3ca9af632ab830be710dfd4351da78a0a2ef55"
- 
--UPSTREAM_CHECK_URI = "<a href="https://tracker.debian.org/pkg/mozjs128">https://tracker.debian.org/pkg/mozjs128</a>"
-+UPSTREAM_CHECK_URI = "<a href="https://tracker.debian.org/pkg/mozjs140">https://tracker.debian.org/pkg/mozjs140</a>"
- UPSTREAM_CHECK_REGEX = "(?P&lt;pver&gt;\d+(\.\d+)+)"
- 
- S = "${UNPACKDIR}/firefox-${PV}"
- 
- inherit pkgconfig perlnative python3native rust cargo
- 
--DEPENDS += "zlib cbindgen-native python3 icu"
-+DEPENDS += "zlib cbindgen-native python3 icu clang-native"
- DEPENDS:remove:mipsarch = "icu"
- DEPENDS:remove:powerpc:toolchain-clang = "icu"
- 
-<div>-- 
-</div>2.50.1
-
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#119390): <a href="https://lists.openembedded.org/g/openembedded-devel/message/119390">https://lists.openembedded.org/g/openembedded-devel/message/119390</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/115233753/3618223">https://lists.openembedded.org/mt/115233753/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</div></blockquote></div>
---=-jNcOIuB58qRJ+1uZQPyt--
+-- 
+2.43.0
 
 
