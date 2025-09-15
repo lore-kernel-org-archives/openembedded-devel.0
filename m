@@ -1,252 +1,98 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AADF6CAC598
-	for <webhook@archiver.kernel.org>; Mon, 15 Sep 2025 10:54:06 +0000 (UTC)
-Received: from OSPPR02CU001.outbound.protection.outlook.com (OSPPR02CU001.outbound.protection.outlook.com [40.107.159.28])
- by mx.groups.io with SMTP id smtpd.web10.29738.1757933638849846058
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC13BCAC597
+	for <webhook@archiver.kernel.org>; Mon, 15 Sep 2025 10:58:56 +0000 (UTC)
+Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
+ by mx.groups.io with SMTP id smtpd.web11.28897.1757930041288821704
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Sep 2025 03:53:59 -0700
+ Mon, 15 Sep 2025 02:54:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siemens.com header.s=selector2 header.b=FxbMkdRB;
- spf=pass (domain: siemens.com, ip: 40.107.159.28, mailfrom: peter.marko@siemens.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VM+YuXkiLP1uus6LCTppDlQlaC3Onc/2zlTg/fL4HXqHcoSG7CcivHHDDrIeCKBwBjb+HjuZxPX2IVzI8/U1JGm75BKlDMUIYzzRi94eXPv0Crhb1B9vWZyRcu8YyLxb9nHUSYn8756vY4/22GGLU8D96zoY/iYH34RSeGcH2LI4iSX7eJePvLZuDN0owXqkoFdMZGGg/8oM4sd20vZnHYk0fgUJpld5mHgdVCfmLD+qUGarpKobJ+BtSl8T1jcUxjWyhuvOIcYTCwSWRRi0luMAUln3k6GoELr63SlYjyhcI8qSdceDUEaxMbGk0SU5fnBcKHXpNJxN3eHmaodzcw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=emur5VcOIm5WtufuQCxdPe7Y6ta1kLaUl96oaMkbmIw=;
- b=kUaxnxq2FA8YFWtYp+9IclKUldvtOmkSpizAb6QdhQD2jOKOZdRBL/zjOM4vIkqJBk0LWz0QONz2ifdGsaIiMPAq4/XUO+Bai/PP/qunELVxKtadV+GYzMyiXoBNxE/l9A63CfirD9WIit1XUwyywEBoLTWAYq62GOYhKUtyWPcc2LXoBp00Z8LR4wedhjadJvI+c1MMMqHKh4TeTJEl5Z3eqeFucciNJePRr1GyvTFlWMjuxmyJkVlYbAZExvAP6mXEM75ALxj/OrK3ao6vpIf8YoRdiVqXM2I3sMPd1qQrjS/WeDoaNDY/Nk+zmrIydUPPp1u17T3Qjs+g6sqrMQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=emur5VcOIm5WtufuQCxdPe7Y6ta1kLaUl96oaMkbmIw=;
- b=FxbMkdRBZceYodX0rnu2TziK50zTdOF9/WMcZ+la6DQiJrqg8+U81xpDAQEl1Rm9ZHG3nzSHZ6K0/PNzmgRktS6ogv4mXddOKGkyPXcyni89U9a0SOM8oN5aH5aeFHWnbn/vs3f88iFSSIZtIdMTfDjDbHn84pQg+Ue2VhUdC0A15jvOKnXci/1ombySCyzihzns+2kj10yoMts+XwEnyGG75ZJux6h+Sta7NmSHWRTFOhnwysP6nDTtjT0bqKuK2F5THADySY7kSTaf/B4pzpqilTlDv/PGoe2ttFKupotSszoTlAHD7PCP9YCmFxLP8mN1Wg+9PQdR/eUzFBqGxQ==
-Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:479::20)
- by DB9PR10MB5931.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:39b::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.21; Mon, 15 Sep
- 2025 10:53:52 +0000
-Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::6c68:267b:6fd1:d3f2]) by AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::6c68:267b:6fd1:d3f2%6]) with mapi id 15.20.9115.018; Mon, 15 Sep 2025
- 10:53:51 +0000
-From: "Marko, Peter" <Peter.Marko@siemens.com>
-To: jan vermaete <jan.vermaete@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-oe][PATCH 09/10] utf8proc: add new recipe with ptest
-Thread-Topic: [oe] [meta-oe][PATCH 09/10] utf8proc: add new recipe with ptest
-Thread-Index: AQHcHekl9RdrXZrbS0mcP5+v2VgS9bSGabOAgA24N7A=
-Date: Mon, 15 Sep 2025 10:53:51 +0000
-Message-ID: 
- <AS1PR10MB5697405DE0AFC728BBE605BFFD15A@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-References: <20250904221139.3131569-1-peter.marko@siemens.com>
- <20250904221139.3131569-9-peter.marko@siemens.com>
- <CABF_=yi6KqviCqT4MFTKwbLFuBSCNjB0g+ucy+HvvYM0Xp36qw@mail.gmail.com>
-In-Reply-To: 
- <CABF_=yi6KqviCqT4MFTKwbLFuBSCNjB0g+ucy+HvvYM0Xp36qw@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
- MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ActionId=f8b51ea9-1c01-43a7-b65f-c8b98439b3bf;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ContentBits=0;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Enabled=true;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Method=Standard;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Name=restricted;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SetDate=2025-09-15T10:52:45Z;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Tag=10,
- 3, 0, 1;
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS1PR10MB5697:EE_|DB9PR10MB5931:EE_
-x-ms-office365-filtering-correlation-id: 6a2ae3dc-e8af-4e06-d0cb-08ddf4462841
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: 
- BCL:0;ARA:13230040|4022899009|376014|366016|1800799024|38070700021;
-x-microsoft-antispam-message-info: 
- =?utf-8?B?L3piTW5KYTcybDJwNEN6dXpkTGVTWUExNkNsbkxTN1VEaHJ5a05QTFRHZkxO?=
- =?utf-8?B?WWhxN0crU1JKWlFaaFd2ekFaSUc4SjFsb1NZK1g0N2dIa3NpU2IrL1Z4VFdL?=
- =?utf-8?B?MU1zdnhGYURGY1pHd1lYMk1MSXhMWFpRSHZDdTJSQlNOUHhkWGQ0dTgyNDZJ?=
- =?utf-8?B?dGtsTG02amNTVnp4Q3BXVzF0eHBJWTVXTlRDYTM0eXJNZnQxeGowOHlJdi9i?=
- =?utf-8?B?VW5FQ3Y1emxrZUt3QjgxVkdOUHppZnc3VVcxaUk4c0xzc0dSK1RBenUzYlJN?=
- =?utf-8?B?R3RyY1VVU1dYdGI3eHVtU1ZqdGJpSWJjUGtZNjNrQkNQYWEvZkhRSXNuenRt?=
- =?utf-8?B?TWxzZnB1Q2RHeklyZklyUVVxYUg0WnAvVzlsUUlWRTl5TVpER2JZWnk5SHRv?=
- =?utf-8?B?VkJQeWdTcEhNaFBVbUJXTzVlRzVNbnlEZ1QzZlhsSm1CSi95U1JlRjJhSTVj?=
- =?utf-8?B?NUtrODZhcTNScTh6RmhUajNRK0FSM2c4UjVyT3dpN3hFQ0pNaTlzZHhVUmhn?=
- =?utf-8?B?eEF1Q29YU1RGc2J5dGM0K0RYN1RsUmpJMUZtV0QrclBMdXNPWUdQamZPeS9a?=
- =?utf-8?B?OGI5clhqT0tMaVMwdXY4WnlPR1pqUjJTcThOVUNYWUxpd2EvU2duM1RkYlpY?=
- =?utf-8?B?bGFET2J5K3ZZeFZRais3b0VGSzdoZEVaeWpxeTdpdGVucy8wR2JoVmMreTlC?=
- =?utf-8?B?SE50K3V6ZGtIUjErUmFsQVFyZ2hHc0p4THpJQkpWUkpNZ3NVM2k1VnpQZ2Jz?=
- =?utf-8?B?VXZIVGEyR2svQzNJc2J4Yi9Ja0ZNSjNsZytjTkZQak5QZm52Y2hXVitmOHRK?=
- =?utf-8?B?TXN4MWN1YnVSSklHVU1WMm0wWHpsSDJaclN1Um5yRHd6SHdyck8wem9FM2Zp?=
- =?utf-8?B?VHBMMHdJdE1nYXVDT3JVL1RNZ0pOaGxyQ2c5OUd3UkEwUUZ4ODFyLzFVMXc0?=
- =?utf-8?B?aFR3VUx4ZkZ5NkFSVVZaUE1BdTNBUXhoR1pHOGtkRmZNaEdaMGk1UFU5NFJs?=
- =?utf-8?B?WEpUWTBESFVRRjRkKzVoZ3ZKTXVXZHk1ajF3UEw4MEY5OFVqU2FGV2NLYlRr?=
- =?utf-8?B?Zy9kRUx2MUhwMGVOQmk2b0lRbFpLWXFpclBaVjcvbHY4dHZQN2owbXpmK3cv?=
- =?utf-8?B?cDl6a0F5cS9FRkxjQ1Z2S0tqRy90by8vVXcyK1YrVTA4S3N6eGRFd1pTd2Rz?=
- =?utf-8?B?b0FiazE2TDFBUUVaS3JBNFZMMWJNUkNtdWx2K2VnTXhQalZjWHFJaC9xbVpk?=
- =?utf-8?B?bU0yRnpLckwvenlOTFRNdERPNWtDYVp6d3dvOFhQS2VFdWxHVXAxSTNXR3Qy?=
- =?utf-8?B?Z0RkQjJCa0RwMEV4QjNTRkZzbTJCdk9UanlqdkdPUlUyNHg1RkJOOFVReEhU?=
- =?utf-8?B?WUxXQkJZRGZvVm45UmI1UzdiVUx6VmlVYTIvZkdTSXh4TVpiRlBVMnFZR1Fl?=
- =?utf-8?B?dnNrbHI5czQxanJBcFBnVUxSNzhTN1hxU1Nsd1N4T2RCS3FONVNyakhqMHFE?=
- =?utf-8?B?S3QyRC85WGZPRWVCVGxDK0tlUEk2T1JhcEtFUk1DeVM2c1c4Z1FJc1haand1?=
- =?utf-8?B?OExlaHdYKzhLUUtjRU01WDlkV25QOHpYdlBvbXNLaURBRHhvVDJodG5hL3dR?=
- =?utf-8?B?NzA5RS9EZVl3NEZRTnd5SVdFaTBHMnVvSDVwbDFGOWJnS0UycmZSTDJVMld2?=
- =?utf-8?B?Ky9YMmZVU0FPVkVmU3V4REdaY1VBS203L2pEYWt5eExkYU8vZnc1blhGOUNy?=
- =?utf-8?B?VjVmRURsVDZTR3VvaFBrMDlwb21NQjRFeG12OWNkZnpyejJTNUFNbEtZNjhH?=
- =?utf-8?B?VlRSdVVOeEtCdnVlR1FiUGhWaktGa1VlSzMrNzhpTGhSU0RUbHV6dU5EWURa?=
- =?utf-8?B?ZU8rRVQxMm90TU5NUHhqWG5ML2xVaTdkcThtdno1a0xwMlZsejd4Y2c5WTFG?=
- =?utf-8?Q?ZzGfX6T7Rr8=3D?=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(4022899009)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?Y2pFSm8rMnFBWTdWSmxUUFJCSnZCakhURWk1ekhoZDg1Sm4vR2ZaNW85VmZ6?=
- =?utf-8?B?cDhISytUS0VJMyt2YlBHM3NOOUNSK2g5UVdBNmxWVVVXOGZhZ1dSSXFLNDhG?=
- =?utf-8?B?TWNYYjhKQ1RiTWM1cm8xQy9wMVZic09UYURrU3M2cHBCcFpLV2w3SlhjUmh2?=
- =?utf-8?B?MTg2N0JMK2p2NE9hc0srTDZhNjJQbWdGSGphUjJvNGxVY252QVFyTlhsSUR5?=
- =?utf-8?B?b0Z2Q0E2RFNRdlBrYVlLUmFKajB6VlVNOTNDbGtSZTFNK3NMeEZMMW91Q2oy?=
- =?utf-8?B?TDlUbThlUzBNeStxTUZKTkxKVjlWMnhLdXZ3SXBVSlBxQXJqRGhuNnJxLzRJ?=
- =?utf-8?B?ek9zS0JEanU1UGl6d3ZZTEhubW1vYjY5SEcyRDNTYWZvV3JEcVFZS1RZUWFF?=
- =?utf-8?B?UmFNcTVjaG1hUDNKSGZFN3ZmV0ZPT0N5VTdyb1VKbWdDTTlhQVkwZVBzUm5a?=
- =?utf-8?B?VUYzeWxHMXl6b3FNRlpxUGhQSVk5cWdWNThSaWpmVmdwWnNyZGJZUjNRMHFW?=
- =?utf-8?B?MWtGdjJVTkFKZE8rQUdCMkN5b2Nlbk5Zck1Mdm5FcG94WEIrcytsMUhaYzdR?=
- =?utf-8?B?SG81OUZZVnM1UTUvN000b3hLM1dTSmpLc0RmUjdFODJXVEFpZXE5K0srR3F6?=
- =?utf-8?B?eTVrRW1UMlpqVWtTQzdJU2F5QnJwajNQdEtxRjlCamw2dVFrenpQQnBucTVJ?=
- =?utf-8?B?YXl4bHlaOFBFMVRZRzArVmQ2NXhmbFl6S1RERGdWZGVTY3QyMHI4aVhsbnll?=
- =?utf-8?B?bFdpcDBscVJUZjZCdnREK21UeXVHdld3UDBUc3laQjNDMHkzeUJMdFdjYTQx?=
- =?utf-8?B?VmNQRnpUL21OQkVwRWF6ZE80cDU1UkxJSk1RQmNHUFhpR29HL1NUWkc1d2Na?=
- =?utf-8?B?RzZnSHdNc2s4Ry9sb1FDM0dvN1BXWTBaR2VoV09wWkRvWVI0UmJFOURYZnNt?=
- =?utf-8?B?UTV3RklvQmVRYnBZZHdmZGRmb1BrUXVYNUpyOHNGc2hLdmpHVVFHMWZROGpr?=
- =?utf-8?B?QXd0Z0F1RGI1RFpSTE9tVDRBdzJYd2svVzJzZ0JKMlptTUoyb0wrZVUzeWlE?=
- =?utf-8?B?ZE5URHNVbjFlZVIycVdxaFhYNVJUbDEzZEFkVW40ZktrYVl6QlVKc3ZQSERz?=
- =?utf-8?B?a3RRMXBqRlo3YnRyaHMvZHBOTTVKTW5KSnNhNUpMSnBPRmFGOVZ6RVc0Nktt?=
- =?utf-8?B?Zk9XamtTOXhvbW9ZYlkwT1lDeHlZZVZPejRvdUdHYS85a0JhNUZ4MHB2K3dx?=
- =?utf-8?B?UnV0dm1YOU12ZVptY1h2QWF4Y2hDaHYvMUdoUlFYd1QwQXJpeThMck4xdi9R?=
- =?utf-8?B?TUN6Yi9xRWlFMmRnUk1SK0REM3l6QWNmc1FDZDFUSjVSclFtd21BVFl6eVdI?=
- =?utf-8?B?c0Y3cDI3RlAyekpyTUx6T2t4azZDRXVqNDVUOVlFUXp6eDlmbjBTWG9OeURL?=
- =?utf-8?B?ZEZKQ3lxOXNXZ1Z0NkZ3MTc0WFZkL0NpSXNrY3lWVmh5NVNyN0RmdTJORFJL?=
- =?utf-8?B?b0p2T0Jyc0ZsKzRjTng4dGY1dUZqZ0hiR3VrUXhTR1hmQmF3UTJaSUo0WnFG?=
- =?utf-8?B?azljRUdNbEE3UlpkRWZBcVhEdk0zR09tcGtEMlVRMk85Njk0em5TazZNZHNj?=
- =?utf-8?B?ZEk0ck1Eekh2Mkl4cGo1Y3pVV3kwVDFtbEUxNFR3VWpyVVNiMkRlNWIrSVN0?=
- =?utf-8?B?OWNCOUlqNWpsYklPYlp0RHkvWktjRW8xSmRUQThyK3RVZkZ1dWtmQyt1Q1B0?=
- =?utf-8?B?RG1iQTB3YjhOajRyejN0VkZlTGF5azFVcVVCSkdEa0dKOUFlYjFsWnRJWHk3?=
- =?utf-8?B?dFZvV1loazNCSmpDWTZmRG5lQTFwdHdEQTF2SURDWDcwcGhKRE9NKzlqYk9k?=
- =?utf-8?B?ZDFXb2Y3ZnNRQ09XSlp4OWxmUlBwYUxaZC90M1R5QXNJSjE2U2pkUHQxUnJ3?=
- =?utf-8?B?QmNoKzVUYmpPRklGbkYwQkhhL1RYaXJ6K0VJVTBJektJUWg0R0paYVFmbUo0?=
- =?utf-8?B?a1BZK2ZKOSttSTFvbjlQWGM5K1E3RE15Tm5XQVcxZlAzUFpsckdoUjVDZGJk?=
- =?utf-8?B?Tm13bUZiUlVoQTU4L09XR25nejdocy9HbW42eE5nRTB2cTBkaXk2ay9LTHBG?=
- =?utf-8?Q?tcRyu1lwgG/aWQS9819GHlaH1?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=fail reason="dkim: body hash did not verify" header.i=@prolan.hu header.s=mail header.b=b3hKknJL;
+ spf=pass (domain: prolan.hu, ip: 193.68.50.107, mailfrom: csokas.bence@prolan.hu)
+Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain [127.0.0.1])
+	by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id 94370A054D;
+	Mon, 15 Sep 2025 11:53:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:from:from:in-reply-to:message-id:mime-version:references
+	:reply-to:subject:subject:to:to; s=mail; bh=UcOENckNb6ZlgXXSuMjN
+	jDapZbdO8JfiAhZY4SWq+BQ=; b=b3hKknJLxkFPincwiV//FqS7hLd0QPRxxici
+	kIMsHhPHifH33VBbXUotgLE5OS6ZoNfc1oHFeup+4TbWmA8HxfAbUu0b0v5cg1ef
+	CFmnjG6OvMzPchCaXvZ45XSwZmVG+bOpDzj+QsEYxU7CBPYT3XdvfZDVBXsb84b9
+	L5iSoWn6uCARJDbOUKGQ6cXq++lFtC7A95sK7N6nhvAKKJZE+Es2D9pv5sFkegTe
+	40bw8bJiJ5uKeCRzxUKMpINK+VhoKVb0XDMsP7MAXWvKH9ovAiZ+dWGT7ZvEOycq
+	AzZMWOqVcBxcXEpFnmJhoeMt5LUeLh7CUVRtpt9eOgoQzkS7JiEOzDIvnatE1LlV
+	nkl4KcUAIz48TuYTFILWhqZyPY37b4/kmZdaimVnRFE0P3QUJj9TNdbgsQCy9HYy
+	12DKQmf8dTefCnlSf7lE+9iYsTKodSWjTLfvhwp+gNTQs44Dpb9a9+DUnUh/S1G2
+	QC8nWuJU4qWZkr+Cz6+2cBiW2eKcKuk8xjpxiDl32Ki00MdfKiCwcX6u/BOBzRIW
+	FVQkGwb0LsZ4M4a0FBNgIFsbedR+rYfWx7tPzNK7ChInYMi62LW+wd5jx5lJ2KUT
+	vcJ02JFZHYOZWR9cXOhEkQMjjM+M9ulGfeM7TDrK40isRlShOQPF9f3HpX4B2SkY
+	TKo2vOQ=
+From: =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Martin Schwan <m.schwan@phytec.de>, Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Bence=20Cs=C3=B3k=C3=A1s?= <csokas.bence@prolan.hu>
+Subject: [meta-oe][scarthgap][PATCH] linuxptp: Add systemd instance specifier for ptp4l dependency
+Date: Mon, 15 Sep 2025 11:53:11 +0200
+Message-ID: <20250915095310.800122-2-csokas.bence@prolan.hu>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <0e42cad2-4d7b-4adf-9947-c3b431e09a1b@prolan.hu>
+References: <0e42cad2-4d7b-4adf-9947-c3b431e09a1b@prolan.hu>
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6a2ae3dc-e8af-4e06-d0cb-08ddf4462841
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Sep 2025 10:53:51.6242
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jlZYugtgfsk4ZlYEgs83+ATiNV3D3hxWLOoTWZno5qr7YF51ipRWTYbLq8uPGr72qowCQTfmdV8skJKM35QeCw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB5931
+X-ESET-AS: R=OK;S=0;OP=CALC;TIME=1757930036;VERSION=7998;MC=1082431426;ID=39116;TRN=0;CRV=0;IPC=;SP=0;SIPS=0;PI=3;F=0
+X-ESET-Antispam: OK
+X-EsetResult: clean, is OK
+X-EsetId: 37303A2998FD515E627266
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Sep 2025 10:54:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119405
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Sep 2025 10:58:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119406
 
-DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IGphbiB2ZXJtYWV0ZSA8amFu
-LnZlcm1hZXRlQGdtYWlsLmNvbT4NCj4gU2VudDogU2F0dXJkYXksIFNlcHRlbWJlciA2LCAyMDI1
-IDE5OjIyDQo+IFRvOiBNYXJrbywgUGV0ZXIgKEZUIEQgRVUgU0sgQkZTMSkgPFBldGVyLk1hcmtv
-QHNpZW1lbnMuY29tPg0KPiBDYzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmcNCj4gU3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENIIDA5LzEwXSB1dGY4cHJv
-YzogYWRkIG5ldyByZWNpcGUgd2l0aCBwdGVzdA0KPiANCj4gSWYgSSdtIG5vdCBtaXN0YWtlbiB0
-aGUgdXNhZ2Ugb2YgYSB0YWcgaW4gdGhlIGZldGNoZXIgZG9lcyByZXF1aXJlDQo+IG5ldHdvcmsg
-YWNjZXNzLg0KPiBXaGF0J3Mgbm90IGFsd2F5cyB0aGUgY2FzZS4NCj4gVGhpcyBkb2VzIGJyZWFr
-IHRoZSBwYXJzaW5nIGJ5IGJpdGJha2Ugd2hlbiBubyBuZXR3b3JrL0ludGVybmV0IGlzIGF2YWls
-YWJsZS4NCg0KSGVsbG8sIHRoYXQgaXMgdHJ1ZSBmb3Igb2xkZXIgcmVsZWFzZXMuDQpJbiBtYXN0
-ZXIsIHVzaW5nIHRhZyBpcyBwb3NzaWJsZSBhbmQgZXZlbiBlbmNvdXJhZ2VkL3JlcXVpcmVkIHRv
-IHZhbGlkYXRlIHRoYXQgdGhlIGhhc2ggYmVsb25ncyB0byBhIHRhZy4NCg0KUGV0ZXINCg0KPiAN
-Cj4gT24gRnJpLCBTZXAgNSwgMjAyNSBhdCAxMjoxM+KAr0FNIFBldGVyIE1hcmtvIHZpYSBsaXN0
-cy5vcGVuZW1iZWRkZWQub3JnDQo+IDxwZXRlci5tYXJrbz1zaWVtZW5zLmNvbUBsaXN0cy5vcGVu
-ZW1iZWRkZWQub3JnPiB3cm90ZToNCj4gPg0KPiA+IEZyb206IFBldGVyIE1hcmtvIDxwZXRlci5t
-YXJrb0BzaWVtZW5zLmNvbT4NCj4gPg0KPiA+IEl0IGlzIG5lZWRlZCBmb3IgcG9jbyAxLjE0Kw0K
-PiA+IFB0ZXN0IHJ1bnMgZm9yIGxlc3MgdGhhbiBhIHNlY29uZC4NCj4gPg0KPiA+IFNpZ25lZC1v
-ZmYtYnk6IFBldGVyIE1hcmtvIDxwZXRlci5tYXJrb0BzaWVtZW5zLmNvbT4NCj4gPiAtLS0NCj4g
-PiAgLi4uL2luY2x1ZGUvcHRlc3QtcGFja2FnZWxpc3RzLW1ldGEtb2UuaW5jICAgIHwgIDEgKw0K
-PiA+ICAuLi4vdXRmOHByb2MvdXRmOHByb2MvcnVuLXB0ZXN0ICAgICAgICAgICAgICAgfCAxNSAr
-KysrKysrKysNCj4gPiAgLi4uL3V0Zjhwcm9jL3V0Zjhwcm9jXzIuMTAuMC5iYiAgICAgICAgICAg
-ICAgIHwgMzMgKysrKysrKysrKysrKysrKysrKw0KPiA+ICAzIGZpbGVzIGNoYW5nZWQsIDQ5IGlu
-c2VydGlvbnMoKykNCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1zdXBw
-b3J0L3V0Zjhwcm9jL3V0Zjhwcm9jL3J1bi1wdGVzdA0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQg
-bWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvdXRmOHByb2MvdXRmOHByb2NfMi4xMC4wLmJiDQo+ID4N
-Cj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9jb25mL2luY2x1ZGUvcHRlc3QtcGFja2FnZWxpc3Rz
-LW1ldGEtb2UuaW5jIGIvbWV0YS0NCj4gb2UvY29uZi9pbmNsdWRlL3B0ZXN0LXBhY2thZ2VsaXN0
-cy1tZXRhLW9lLmluYw0KPiA+IGluZGV4IGQ3N2I5N2Q1NzYuLjE4MzI0ZmYwZDMgMTAwNjQ0DQo+
-ID4gLS0tIGEvbWV0YS1vZS9jb25mL2luY2x1ZGUvcHRlc3QtcGFja2FnZWxpc3RzLW1ldGEtb2Uu
-aW5jDQo+ID4gKysrIGIvbWV0YS1vZS9jb25mL2luY2x1ZGUvcHRlc3QtcGFja2FnZWxpc3RzLW1l
-dGEtb2UuaW5jDQo+ID4gQEAgLTQ0LDYgKzQ0LDcgQEAgUFRFU1RTX0ZBU1RfTUVUQV9PRSA9ICJc
-DQo+ID4gICAgICBwdiBcDQo+ID4gICAgICBzZGJ1cy1jKysgXA0KPiA+ICAgICAgdG9tbHBsdXNw
-bHVzIFwNCj4gPiArICAgIHV0Zjhwcm9jIFwNCj4gPiAgICAgIHV0aGFzaCBcDQo+ID4gICAgICB4
-bWxzZWMxIFwNCj4gPiAgICAgIHplcm9tcSBcDQo+ID4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVj
-aXBlcy1zdXBwb3J0L3V0Zjhwcm9jL3V0Zjhwcm9jL3J1bi1wdGVzdCBiL21ldGEtDQo+IG9lL3Jl
-Y2lwZXMtc3VwcG9ydC91dGY4cHJvYy91dGY4cHJvYy9ydW4tcHRlc3QNCj4gPiBuZXcgZmlsZSBt
-b2RlIDEwMDY0NA0KPiA+IGluZGV4IDAwMDAwMDAwMDAuLjM0OWU0OTZkNjgNCj4gPiAtLS0gL2Rl
-di9udWxsDQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvdXRmOHByb2MvdXRmOHBy
-b2MvcnVuLXB0ZXN0DQo+ID4gQEAgLTAsMCArMSwxNSBAQA0KPiA+ICsjIS9iaW4vc2gNCj4gPiAr
-DQo+ID4gK2V4ZWN1dGVfdGVzdCgpIHsNCj4gPiArICAgIGV2YWwgIi4vJDEiICYmIGVjaG8gIlBB
-U1M6ICQxIiB8fCBlY2hvICJGQUlMOiAkMSINCj4gPiArfQ0KPiA+ICsNCj4gPiArZXhlY3V0ZV90
-ZXN0ICJjYXNlIg0KPiA+ICtleGVjdXRlX3Rlc3QgImN1c3RvbSINCj4gPiArZXhlY3V0ZV90ZXN0
-ICJpdGVyYXRlIg0KPiA+ICtleGVjdXRlX3Rlc3QgIm1pc2MiDQo+ID4gK2V4ZWN1dGVfdGVzdCAi
-cHJpbnRwcm9wZXJ0eSINCj4gPiArZXhlY3V0ZV90ZXN0ICJ2YWxpZCINCj4gPiArZXhlY3V0ZV90
-ZXN0ICJjaGFyd2lkdGgiDQo+ID4gK2V4ZWN1dGVfdGVzdCAiZ3JhcGhlbWV0ZXN0IGRhdGEvR3Jh
-cGhlbWVCcmVha1Rlc3QudHh0Ig0KPiA+ICtleGVjdXRlX3Rlc3QgIm5vcm10ZXN0IGRhdGEvTm9y
-bWFsaXphdGlvblRlc3QudHh0Ig0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3Vw
-cG9ydC91dGY4cHJvYy91dGY4cHJvY18yLjEwLjAuYmIgYi9tZXRhLQ0KPiBvZS9yZWNpcGVzLXN1
-cHBvcnQvdXRmOHByb2MvdXRmOHByb2NfMi4xMC4wLmJiDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2
-NDQNCj4gPiBpbmRleCAwMDAwMDAwMDAwLi5lNDJkMTZiOGI3DQo+ID4gLS0tIC9kZXYvbnVsbA0K
-PiA+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3V0Zjhwcm9jL3V0Zjhwcm9jXzIuMTAu
-MC5iYg0KPiA+IEBAIC0wLDAgKzEsMzMgQEANCj4gPiArU1VNTUFSWSA9ICJsaWJyYXJ5IHRoYXQg
-cHJvdmlkZXMgb3BlcmF0aW9ucyBmb3IgZGF0YSBpbiB0aGUgVVRGLTggZW5jb2RpbmciDQo+ID4g
-K0RFU0NSSVBUSU9OID0gInV0Zjhwcm9jIGlzIGEgc21hbGwsIGNsZWFuIEMgbGlicmFyeSB0aGF0
-IHByb3ZpZGVzIFVuaWNvZGUgXA0KPiA+ICtub3JtYWxpemF0aW9uLCBjYXNlLWZvbGRpbmcsIGFu
-ZCBvdGhlciBvcGVyYXRpb25zIGZvciBkYXRhIGluIHRoZSBVVEYtOCBcDQo+ID4gK2VuY29kaW5n
-LCBzdXBwb3J0aW5nIFVuaWNvZGUgdmVyc2lvbiAxNi4wIg0KPiA+ICtIT01FUEFHRSA9ICJodHRw
-czovL2p1bGlhc3RyaW5ncy5naXRodWIuaW8vdXRmOHByb2MvIg0KPiA+ICtTRUNUSU9OID0gImxp
-YnMiDQo+ID4gKw0KPiA+ICtMSUNFTlNFID0gIk1JVCAmIFVuaWNvZGUtMy4wIg0KPiA+ICtMSUNf
-RklMRVNfQ0hLU1VNID0NCj4gImZpbGU6Ly9MSUNFTlNFLm1kO21kNT05NmQ1YTNiYTMwNmUwZjI0
-ZmIyODk0MjdhZjQ4NDQwOCINCj4gPiArDQo+ID4gK1NSQ19VUkkgPSAiXA0KPiA+ICsNCj4gZ2l0
-Oi8vZ2l0aHViLmNvbS9KdWxpYVN0cmluZ3MvdXRmOHByb2M7cHJvdG9jb2w9aHR0cHM7YnJhbmNo
-PW1hc3Rlcjt0YWc9diR7UFZ9IFwNCj4gPiArICAgIGZpbGU6Ly9ydW4tcHRlc3QgXA0KPiA+ICsi
-DQo+ID4gKw0KPiA+ICtpbmhlcml0IGNtYWtlIHB0ZXN0DQo+ID4gKw0KPiA+ICtFWFRSQV9PRUNN
-QUtFID0gIlwNCj4gPiArICAgIC1EQlVJTERfU0hBUkVEX0xJQlM9T04gXA0KPiA+ICsgICAgJHtA
-YmIudXRpbHMuY29udGFpbnMoJ1BURVNUX0VOQUJMRUQnLCAnMScsICctREJVSUxEX1RFU1RJTkc9
-T04gLQ0KPiBEVVRGOFBST0NfRU5BQkxFX1RFU1RJTkc9T04gJywgJycsIGQpfSBcDQo+ID4gKyIN
-Cj4gPiArDQo+ID4gK2RvX2luc3RhbGxfcHRlc3QoKSB7DQo+ID4gKyAgICAjIHRoaXMgbGlzdCBh
-bmQgcnVuLXB0ZXN0IG5lZWRzIHRvIGJlIHVwZGF0ZWQgb24gdXBncmFkZSAodGhlIHByb2plY3Qg
-dXNlcw0KPiBhZGRfdGVzdCBmZWF0dXJlKQ0KPiA+ICsgICAgZm9yIHQgaW4gImNhc2UiIGN1c3Rv
-bSBpdGVyYXRlIG1pc2MgcHJpbnRwcm9wZXJ0eSB2YWxpZCBjaGFyd2lkdGgNCj4gZ3JhcGhlbWV0
-ZXN0IG5vcm10ZXN0OyBkbw0KPiA+ICsgICAgICAgIGluc3RhbGwgLW0gMDc1NSAke0J9LyR0ICR7
-RH0ke1BURVNUX1BBVEh9Lw0KPiA+ICsgICAgZG9uZQ0KPiA+ICsgICAgaW5zdGFsbCAtZCAke0R9
-JHtQVEVTVF9QQVRIfS9kYXRhDQo+ID4gKyAgICBpbnN0YWxsIC1tIDA2NDQgJHtCfS9kYXRhL0dy
-YXBoZW1lQnJlYWtUZXN0LnR4dA0KPiAke0R9JHtQVEVTVF9QQVRIfS9kYXRhLw0KPiA+ICsgICAg
-aW5zdGFsbCAtbSAwNjQ0ICR7Qn0vZGF0YS9Ob3JtYWxpemF0aW9uVGVzdC50eHQgJHtEfSR7UFRF
-U1RfUEFUSH0vZGF0YS8NCj4gPiArfQ0KPiA+ICsNCj4gPiArQkJDTEFTU0VYVEVORCA9ICJuYXRp
-dmUiDQo+ID4NCj4gPiAtPS09LT0tPS09LT0tPS09LT0tPS09LQ0KPiA+IExpbmtzOiBZb3UgcmVj
-ZWl2ZSBhbGwgbWVzc2FnZXMgc2VudCB0byB0aGlzIGdyb3VwLg0KPiA+IFZpZXcvUmVwbHkgT25s
-aW5lICgjMTE5MzA2KTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVk
-ZGVkLQ0KPiBkZXZlbC9tZXNzYWdlLzExOTMwNg0KPiA+IE11dGUgVGhpcyBUb3BpYzogaHR0cHM6
-Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL210LzExNTA3MzE1Ni8yMTY3MjMyDQo+ID4gR3JvdXAg
-T3duZXI6IG9wZW5lbWJlZGRlZC1kZXZlbCtvd25lckBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+
-ID4gVW5zdWJzY3JpYmU6IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJl
-ZGRlZC1kZXZlbC91bnN1Yg0KPiBbamFuLnZlcm1hZXRlQGdtYWlsLmNvbV0NCj4gPiAtPS09LT0t
-PS09LT0tPS09LT0tPS09LQ0KPiA+DQo+IA0KPiANCj4gLS0NCj4gSmFuIFZlcm1hZXRlDQo+IOKA
-nFN1Y2Nlc3MgaXMgYSBzZWxmLWNvcnJlY3RpbmcgcGhlbm9tZW5vbS7igJ0gLS0gR2FyeSBIYW1l
-bA0K
+From: Martin Schwan <m.schwan@phytec.de>
+
+Add the instance specifier to the ptp4l dependency for the phc2sys
+service, so the corresponding service is automatically started
+correctly. This fixes the following error messages, when starting the
+phc2sys@... service:
+
+    Failed to restart phc2sys@eth0.service: Unit ptp4l.service not found.
+
+Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 31f0b9d3d51a65b1c3d63eb6520e7ab174a8550c)
+Signed-off-by: Bence Cs=C3=B3k=C3=A1s <csokas.bence@prolan.hu>
+---
+ .../linuxptp/linuxptp/systemd/phc2sys@.service.in             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/systemd/phc2s=
+ys@.service.in b/meta-oe/recipes-connectivity/linuxptp/linuxptp/systemd/p=
+hc2sys@.service.in
+index f66dd2d010..7d1d975ea3 100644
+--- a/meta-oe/recipes-connectivity/linuxptp/linuxptp/systemd/phc2sys@.ser=
+vice.in
++++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/systemd/phc2sys@.ser=
+vice.in
+@@ -1,8 +1,8 @@
+ [Unit]
+ Description=3DSynchronize system clock or PTP hardware clock (PHC)
+ Documentation=3Dman:phc2sys
+-Requires=3Dptp4l.service
+-After=3Dptp4l.service
++Requires=3Dptp4l@%i.service
++After=3Dptp4l@%i.service
+ Before=3Dtime-sync.target
+=20
+ [Service]
+
+base-commit: 205638f9edf8e1aa1fbcf28555625fe56f2701a5
+--=20
+2.43.0
+
+
 
