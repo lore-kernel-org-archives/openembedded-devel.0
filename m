@@ -2,107 +2,145 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42730CAC593
-	for <webhook@archiver.kernel.org>; Mon, 15 Sep 2025 04:26:34 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web10.24924.1757910384572059506
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DBE8CA101F
+	for <webhook@archiver.kernel.org>; Mon, 15 Sep 2025 04:31:44 +0000 (UTC)
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.web11.25107.1757910702574505612
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Sep 2025 21:26:25 -0700
+ Sun, 14 Sep 2025 21:31:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout10.t-online.de (Postfix) with SMTP id D85AE3846D
-	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Sep 2025 06:26:10 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.165.158]) by fwd74.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
+	by mailout04.t-online.de (Postfix) with SMTP id 23413E3E6
+	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Sep 2025 06:31:41 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.165.158]) by fwd71.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1uy0n2-0iOIVu0; Mon, 15 Sep 2025 06:26:08 +0200
+	esmtp id 1uy0sN-0vmTAH0; Mon, 15 Sep 2025 06:31:39 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH 2/2] wireplumber: update 0.5.10 -> 0.5.11
-Date: Mon, 15 Sep 2025 06:26:01 +0200
-Message-ID: <20250915042601.167754-2-f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCH] pipewire-media-session: update 0.4.2 -> 0.4.3
+Date: Mon, 15 Sep 2025 06:31:30 +0200
+Message-ID: <20250915043130.175050-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250915042601.167754-1-f_l_k@t-online.de>
-References: <20250915042601.167754-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1757910368-2B7FD901-3ACC95E3/0/0 CLEAN NORMAL
-X-TOI-MSGID: 33803da0-a6d4-4ec7-895b-812dab3d9627
+X-TOI-EXPURGATEID: 150726::1757910699-6D7F990B-4D2509BF/0/0 CLEAN NORMAL
+X-TOI-MSGID: ca5fb68a-5eba-4fea-9d35-53fbbf648c0e
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Sep 2025 04:26:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119400
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Sep 2025 04:31:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119401
 
-WirePlumber 0.5.11
-~~~~~~~~~~~~~~~~~~
-Additions & Enhancements:
-
-  - Added modem manager module for tracking voice call status and voice c=
-all
-    device profile selection hooks to improve phone call audio routing on
-    mobile devices (!722, !729, #819)
-  - Added MPRIS media player pause functionality that automatically pause=
-s
-    media playback when the audio target (e.g. headphones) is removed (!6=
-99, #764)
-  - Added support for human-readable names and localization of settings i=
-n
-    ``wireplumber.conf`` with ``wpctl`` displaying localized setting desc=
-riptions (!712)
-  - Improved default node selection logic to use both session and route
-    priorities when nodes have equal session priorities (!720)
-  - Increased USB device priority in the ALSA monitor (!719)
-
-Fixes:
-
-  - Fixed multiple Lua runtime issues including type confusion bugs, stac=
-k
-    overflow prevention, and SPA POD array/choice builders (!723, !728)
-  - Fixed proxy object lifecycle management by properly clearing the
-    OWNED_BY_PROXY flag when proxies are destroyed to prevent dangling
-    pointers (!732)
-  - Fixed state-routes handling to prevent saving unavailable routes and
-    eliminate race conditions during profile switching (!730, #762)
-  - Fixed some memory leaks in the script tester and the settings iterato=
-r (!727, !726)
-  - Fixed a potential crash caused by module-loopback destroying itself w=
-hen the
-    pipewire connection is closed (#812)
-  - Fixed profile saving behavior in ``wpctl set-profile`` command (#808)
-  - Fixed GObject introspection closure annotation
+fix includes and compilation
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../{wireplumber_0.5.10.bb =3D> wireplumber_0.5.11.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.5.1=
-0.bb =3D> wireplumber_0.5.11.bb} (99%)
+ .../0001-pass-right-types-to-methods.patch    | 53 -------------------
+ ...4.2.bb =3D> pipewire-media-session_0.4.3.bb} |  6 +--
+ 2 files changed, 2 insertions(+), 57 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire-=
+media-session/0001-pass-right-types-to-methods.patch
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire-media-sessi=
+on_0.4.2.bb =3D> pipewire-media-session_0.4.3.bb} (79%)
 
-diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0=
-.5.10.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5=
-.11.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.=
-5.10.bb
-rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.=
-11.bb
-index 8e50378bfd..665efd95af 100644
---- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.10.b=
-b
-+++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.11.b=
-b
-@@ -10,7 +10,7 @@ DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
-     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
-, "python3-native python3-lxml-native doxygen-native", "", d)} \
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-s=
+ession/0001-pass-right-types-to-methods.patch b/meta-multimedia/recipes-m=
+ultimedia/pipewire/pipewire-media-session/0001-pass-right-types-to-method=
+s.patch
+deleted file mode 100644
+index e7a3e52617..0000000000
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session/=
+0001-pass-right-types-to-methods.patch
++++ /dev/null
+@@ -1,53 +0,0 @@
+-From 97e0d7646c873ea3badfa604b3f084ed6208af97 Mon Sep 17 00:00:00 2001
+-From: Wim Taymans <wtaymans@redhat.com>
+-Date: Tue, 26 Nov 2024 13:37:06 +0100
+-Subject: [PATCH] pass right types to methods
+-
+-
+-Upstream-Status: Backport [https://gitlab.freedesktop.org/pipewire/media=
+-session/-/commit/e6243381cf2b7d0d33707627b4186f5580908752]
+-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+----
+- src/access-flatpak.c | 2 +-
+- src/access-portal.c  | 2 +-
+- src/default-routes.c | 2 +-
+- 3 files changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/src/access-flatpak.c b/src/access-flatpak.c
+-index afe780b2d..dd802d6eb 100644
+---- a/src/access-flatpak.c
+-+++ b/src/access-flatpak.c
+-@@ -114,7 +114,7 @@ static void object_update(void *data)
+- 		pw_log_info("%p: flatpak client %d granted 0x%08x permissions"
+- 				, impl, client->id, perms);
+- 		permissions[0] =3D PW_PERMISSION_INIT(PW_ID_ANY, perms);
+--		pw_client_update_permissions(client->obj->obj.proxy,
+-+		pw_client_update_permissions((struct pw_client*)client->obj->obj.prox=
+y,
+- 				1, permissions);
+- 		client->active =3D true;
+- 	}
+-diff --git a/src/access-portal.c b/src/access-portal.c
+-index 92d95a26b..4e3a9f52a 100644
+---- a/src/access-portal.c
+-+++ b/src/access-portal.c
+-@@ -265,7 +265,7 @@ set_global_permissions(void *data, struct sm_object =
+*object)
+- 		permissions[n_permissions++] =3D
+- 			PW_PERMISSION_INIT(object->id, allowed ? PW_PERM_ALL : 0);
+- 		pw_log_info("%p: object %d allowed:%d", impl, object->id, allowed);
+--		pw_client_update_permissions(client->obj->obj.proxy,
+-+		pw_client_update_permissions((struct pw_client*)client->obj->obj.prox=
+y,
+- 				n_permissions, permissions);
+- 	}
+- 	return 0;
+-diff --git a/src/default-routes.c b/src/default-routes.c
+-index 5a842faf7..86f9e217b 100644
+---- a/src/default-routes.c
+-+++ b/src/default-routes.c
+-@@ -479,7 +479,7 @@ static int restore_route_params(struct device *dev, =
+const char *val, const struc
+- 	if (pw_log_level_enabled(SPA_LOG_LEVEL_DEBUG))
+- 		spa_debug_pod(2, NULL, param);
+-=20
+--	pw_device_set_param((struct pw_node*)dev->obj->obj.proxy,
+-+	pw_device_set_param((struct pw_device*)dev->obj->obj.proxy,
+- 			SPA_PARAM_Route, 0, param);
+-=20
+- 	sm_media_session_schedule_rescan(dev->impl->session);
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-s=
+ession_0.4.2.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire-me=
+dia-session_0.4.3.bb
+similarity index 79%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire-media-se=
+ssion_0.4.2.bb
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire-media-sess=
+ion_0.4.3.bb
+index dde0039584..7616626a6d 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_=
+0.4.2.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire-media-session_=
+0.4.3.bb
+@@ -10,11 +10,9 @@ DEPENDS =3D " \
+ 	dbus \
  "
 =20
--SRCREV =3D "7a4d3177550b6b53fe0a49396da5b07f5353daff"
-+SRCREV =3D "3a785e502642ddb1e91d953e587c7b06444e0b51"
- SRC_URI =3D " \
-     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaste=
-r;protocol=3Dhttps \
-     file://90-OE-disable-session-dbus-dependent-features.lua \
+-SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/media-session.git;pro=
+tocol=3Dhttps;branch=3Dmaster \
+-           file://0001-pass-right-types-to-methods.patch \
+-           "
++SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/media-session.git;pro=
+tocol=3Dhttps;branch=3Dmaster"
+=20
+-SRCREV =3D "80dae7e24bec02b2befe09a72fbac6e2b38ccb5c"
++SRCREV =3D "4ac1d82d26bbf9c6f37c56546d26be5a03f886fa"
+=20
+ inherit meson pkgconfig
+ # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2952
 --=20
 2.50.1
 
