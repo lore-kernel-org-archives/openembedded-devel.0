@@ -1,270 +1,227 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA77FCAC599
-	for <webhook@archiver.kernel.org>; Tue, 16 Sep 2025 10:28:24 +0000 (UTC)
-Received: from GVXPR05CU001.outbound.protection.outlook.com (GVXPR05CU001.outbound.protection.outlook.com [52.101.83.57])
- by mx.groups.io with SMTP id smtpd.web11.16108.1758018498564133718
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 966F0CAC598
+	for <webhook@archiver.kernel.org>; Tue, 16 Sep 2025 12:56:25 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.19136.1758027379940530680
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Sep 2025 03:28:19 -0700
+ Tue, 16 Sep 2025 05:56:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siemens.com header.s=selector2 header.b=QgQq6qOo;
- spf=pass (domain: siemens.com, ip: 52.101.83.57, mailfrom: peter.marko@siemens.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OMjdz1y/vExIh53UQODhg954oUBkoJQbKhmJfTlrW5n28CVFwV3boH4QKNfjesKI5T0U62UcBfpy1fecHlZzNJjXOkNFYf+87qHg6H+P+IF8gXXjpOlor1x1ekgknu6mVB0EHrrkxwtUebKlsHsC5xvytSoZCTgSZ9LiKe3q5Wi4umRjQN0wjuRBdTVwHDG9YkM2pPTACJMBVl5iau9S6ImybHqTBshGZmjCFImJY5XUoY2FeAQIJU5MolqUZgSO70IdMlgSuP559swejHEPFhBaFjwtv93Q/Rt3AjdhRojWTsbv0z+zs06U3TY6LDy9hDqSqIcve32+WeHgOJe6kA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G/23ggo7UXpZVFi6HzgQHC2DizHRbN4zLZf7gvRE9xE=;
- b=w+BiM+jUyGoJKFhId/mZPHavFaJ6b81PUcYXJOxsGWoBa0Yb7KP6FyhD/DunZCIJ0MSaxg7XErH5COT/diE5wtcJKVUoIKl/LJkGfn2Xef8BfdL3iwm7RtfvxwBfPtNKl5V8ioIs/Zzw3zlV4xRT91UN3jpVTKQP88nES5XuhE9R2eBIIrybE7NnOZXdQZ+cR20N9G+sWSnMHqAJ6IPVLwjUSTakXQ6cUWSW33d/noCK81vubV6jkB705sLnpVhzDeAcOLQpQhOpEZ8EwSrrx3sgZP8+IO8gz2NOS/dQmBp9ouXyZGfTOiT0vWr/X0AxY6zpBZn/T1l21Q+vYfik1w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G/23ggo7UXpZVFi6HzgQHC2DizHRbN4zLZf7gvRE9xE=;
- b=QgQq6qOog22j4PorBISmsVZSthR5fA49HkEvfJwMimheKCLtDSlFhFXrmJ8b4JjepftOYoor99geknK6XKYZm96ZHNScjW9lDLc1JFiHjxDlfqBOXaE/WU0gdvg2UzQTz6Sne22qAcrNut99p6YE2lV1D3PKq/iE1rdfe/2XfSQRUpOJWz68iDnyEm0dPCZsyjyejnLYajpD7+jz8uPcLXVwdX7J6zKovLDxBNVeDajgHwQC2ZCBCLR5b8vj26serobXmMZ6cQqiHbafkWB8Cxsyd078gS+ZZHTn50CCeLs+cM8rt0G4iIvY/CCmOqQBzFxybMB6jbCicUmP5Ez6dg==
-Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:479::20)
- by AS2PR10MB6734.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:55e::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.19; Tue, 16 Sep
- 2025 10:28:13 +0000
-Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::6c68:267b:6fd1:d3f2]) by AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::6c68:267b:6fd1:d3f2%6]) with mapi id 15.20.9115.018; Tue, 16 Sep 2025
- 10:28:13 +0000
-From: "Marko, Peter" <Peter.Marko@siemens.com>
-To: Gyorgy Sarvari <skandigraun@gmail.com>, jan vermaete
-	<jan.vermaete@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-oe][PATCH 09/10] utf8proc: add new recipe with ptest
-Thread-Topic: [oe] [meta-oe][PATCH 09/10] utf8proc: add new recipe with ptest
-Thread-Index: AQHcHekl9RdrXZrbS0mcP5+v2VgS9bSGabOAgA24N7CAAXdrAIAAE9+Q
-Date: Tue, 16 Sep 2025 10:28:12 +0000
-Message-ID: 
- <AS1PR10MB5697E6E6EEBAEF6748B1CB13FD14A@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-References: <20250904221139.3131569-1-peter.marko@siemens.com>
- <20250904221139.3131569-9-peter.marko@siemens.com>
- <CABF_=yi6KqviCqT4MFTKwbLFuBSCNjB0g+ucy+HvvYM0Xp36qw@mail.gmail.com>
- <AS1PR10MB5697405DE0AFC728BBE605BFFD15A@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
- <754e2c0a-dc81-4255-b8c0-447c8b350dfd@gmail.com>
-In-Reply-To: <754e2c0a-dc81-4255-b8c0-447c8b350dfd@gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
- MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ActionId=b27dd294-6cdc-4184-a843-51dcb9789d0d;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ContentBits=0;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Enabled=true;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Method=Standard;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Name=restricted;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SetDate=2025-09-16T10:27:33Z;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Tag=10,
- 3, 0, 1;
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS1PR10MB5697:EE_|AS2PR10MB6734:EE_
-x-ms-office365-filtering-correlation-id: ad578252-b416-4375-713e-08ddf50bbd76
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: 
- BCL:0;ARA:13230040|366016|376014|1800799024|4022899009|38070700021;
-x-microsoft-antispam-message-info: 
- =?utf-8?B?YThnNm5rVFVPbms4bHhqb2RJUm9PVms5YkhsSGdJanh5WmkwaDc2enVNS3Uz?=
- =?utf-8?B?d2xCd3FQRmpRREN6OTRuUm1PZVhFendLSURoWkE1VHBPSnNXdzF6cUdPRXk5?=
- =?utf-8?B?UTdaVzhONHFCY1lhcUpaUmRmQTBKNUJ1T2FCL3lqNnNNYlhoVlAxYU1Mdlpx?=
- =?utf-8?B?VWpyMHdiWVY1dytOaENxWnZ5VW0wTnZoV0FqR0dDN08vdzRIemdmcEQwbnJZ?=
- =?utf-8?B?QXU2M1B3dUpPSWF2UzFXVlo3TW4yc2R0dDB0bThLU2dxbGh2b21kTlBmcXVz?=
- =?utf-8?B?SG1hLzhLYlNZbmNyM1pJT1dXOThpUUdFWnVzOXF3UnZyZXNuWXBpamxPK1J1?=
- =?utf-8?B?QnlHWTNSc3J3Qk0rVUM2MHBRMzNpMGpkdFNtS2dvZkFVUTZZbFh0dVZaM0JC?=
- =?utf-8?B?S1NSWEZGRDVwUnp1b1ZXTnk4V2JCMExkTDNxeTFOanRibDZ2Zm1teXRjdWto?=
- =?utf-8?B?MjhYQXdrVTQyNU43NWhubXFtZU91WkRnNThyazl2RHRUMnJLSWU3aStpWEt2?=
- =?utf-8?B?OU9sdlZhUXhVZW9XY3JnaE40VHJkU2hBL3pOdnY4RWdadEFzWG9QaGkyTi8x?=
- =?utf-8?B?bm1MbzVIWHFKeDZrYVBuZGJjelN0czJlb1R0ZWVsem5LU3JodlRXQUxnVkJS?=
- =?utf-8?B?ZXczWlBRek1uMjd4RkFXV0lCR3JrZDFsa2xJZ0NSazFMZ1FwRTN3eXpDeG9o?=
- =?utf-8?B?b0YxUThHclBoQytiSTZnTTRzY0MvL0dPb2ptZGk3OW9jaG5hQlVWdUhlTFRm?=
- =?utf-8?B?YmRvcVR2UlphTGlieDVwbnE1RkFGb3hJTzZJd1h2Z2dtYTl0c01aNWpqWDRP?=
- =?utf-8?B?ZXc3S1o4d3AyWnhrVU1heVBVZlI0Q0tzdTUwRzJFeFJsZmJjNjBselJQejVq?=
- =?utf-8?B?M3F1M2NSd0dSR2J0dmx1ZkNnbnpVS040dE92cXJuMW5HVXM0VWVQOG1JZzB4?=
- =?utf-8?B?VzhDUHlKVHQxZkEzU3d3Q2VMSDdDQ0w4blJHa3A5YzBSU3FIT1ZLYWN5aGhk?=
- =?utf-8?B?OTdvVmR0RmsrV1AyMjBrdERBWnhBTkl4V3dhQjFyK1pUbldFeUpYeVYvVFFH?=
- =?utf-8?B?eTVwQ3ordEpsS1d2MEkrZktRcXVaQ0dTY1l2ZGVqdDFWUTFuNExNZThscEJh?=
- =?utf-8?B?QjBoa1VEVk1WL3hsUE5oQUNvSUt0Y2pnNFN2UnRmT3lnZlZwQ0prbE5oTXhh?=
- =?utf-8?B?TFloZ1Q0dzdLTUo1WUJxdi9HTklFRGd1VFQ4MmMxR1JqQUFIc1NiMkpqREFn?=
- =?utf-8?B?NkNhdDlEMTdFMks4N01ZSmhVUmk4M0RSL0ZVZ04vNjduS3lUY0xmaUVHVWpn?=
- =?utf-8?B?N1R2SmRiRDFlUEVNUkJDUFhhaitHWlY2WE8zaEV3TWJsUFU3WUE0SUtONzQ3?=
- =?utf-8?B?K1k0Y0UxUEsyNTJQUmN5THUzd2pqYjZvUlppVk14UjQ1ekJxQ1M0M3ZTNS81?=
- =?utf-8?B?Z2Urd0JyVWtSZ1hkcnBSM0ZoeTBOWFpuZk1wNG1IVXhKVEhEN0h0VW54Y3I1?=
- =?utf-8?B?UzZiSTJyWTAyQXZyZWNrSTQyUFhlWWdFd0o2R2VoNS9vRHd3OXBBQ1d6Z0xa?=
- =?utf-8?B?NlUvOVNPZmRkK2RwYnJMckNmbGozb1JHL2o2RGEzQ3Qwd3JjUG9oMEdPSFo3?=
- =?utf-8?B?ZGRJMzUzRHVhVENkb1hWVkxEZVBaK1FjSDVOSlhBWEdld0JsZ3REYlNhdU0z?=
- =?utf-8?B?NkZISlpTZGZsaHZGODFPTWNnRWM1ZVJKMzRHUXJzbzh5TjZQajdpbjFzUXQy?=
- =?utf-8?B?clVhMzI0RUhrZjllZzJPamFMMk5FQzRpWHBmaTZ6Nm00VUxqTHJrb2lQdWEw?=
- =?utf-8?B?R1RMVkF6bGIzOTV4bzRNMUczd2trVUpzQ3hvbkxLbXpxZk5PTzlPZ1RidDMz?=
- =?utf-8?B?N1NHK3dSbE1LQ0lSUkhSeUdUS1ZMTnNtT2IwTThmTUZoQXJIY0FXSUxlWVE4?=
- =?utf-8?Q?qh2UuXqcbd0=3D?=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(4022899009)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?RlAzK0JLTXgvWCtRa2hGcWJNL0UxVUFkTEg0d1k5enZjRkh1UUhqSXVMZEti?=
- =?utf-8?B?THlEOGYyMFlNQlVmVDJQWElsdFFRYUN3Zm9TSTBNZFVWMDlaRVlZV3pXTzZa?=
- =?utf-8?B?Q3dGMEs4TjFtdG85Mlo2TTlnaWN0aXU5SXY1czZSYUFUT1lCNmNKNUxPQmt6?=
- =?utf-8?B?d1d0a2doZ1RMUzJEQ1BOVWtHbWJ3SWErVzFDUi9mUytNRGpRYmp6RHVIL0E5?=
- =?utf-8?B?RE1JUE1JNGlYZzdkV2dYdUFtSitHRnpPbnlIRVo1Nk13dkplbm5oTE9XVEtX?=
- =?utf-8?B?T1QrejVZYUV1R2NiQlZvdnNCTmVpNFhuVTZrRWpMeUxSTk44UmZpZmQ3bzBX?=
- =?utf-8?B?OWYvczQralNPVS91eDIxaU1ZVFE2UFVOQXVsbFRsV0lNelJKRUJBODhqNS8r?=
- =?utf-8?B?bHhIQVFYdEY1VUxaQkZNcmR4RTRiZVUyNlZKa2pKdGh6OU1hV05lWmsxWmxk?=
- =?utf-8?B?MjM3UkZyNElvUENPRVhiZnVLdHJXRXRraFVTK3pzVmRZdGRIeklGL1JvaytJ?=
- =?utf-8?B?emtlN2tuYUl6ODNTR3ZEUFBna0hSbjNqVnlncndmYkxCNnBGU0VqbVlueTZP?=
- =?utf-8?B?K0hCNzJpU2xKbmpDcmRPNVp2UWZrNjRFcExxOXQxcjl0ckNvb1JvaE9jN21j?=
- =?utf-8?B?MXZ2WjJwWDJheXdCNTE1S3NkaWtRcW5SQ3pXRyt1VHZBRjRrVG93YlRXMUZa?=
- =?utf-8?B?SE5lNy9DL01kOXFRWndwZlhpZlo5UXlKWWc4eEJHVDFnTTljRWpyVGJkZ0Vm?=
- =?utf-8?B?ZFMweUdrNW9qeU9SdktKd3VxeUhZaVc5UmpGOXh5dHlVQWVGY1NhREp0T3Yy?=
- =?utf-8?B?OVpEQ2VnTkJEb2ZvZHFaTjFsVFgxNW1YK20rckZKVHhRZkk1V1ExRDFBcHhF?=
- =?utf-8?B?S0JuNzlCa1AzelRaL0d1djV2dG14dmFCaUs3RHVXc1Uvd1ViSHh0L2haY25u?=
- =?utf-8?B?VThPYnFmeDByQlFIcjNScmtFd1NtN0EzQ0ErNEVNZ0FEVnFIMTNkQ2JyWFd4?=
- =?utf-8?B?QkJTSldzTVNoa1RFRTBxMFhNOTN3VVVxQVBtOGVGVWhEU1FCYmFQeGxUWkhu?=
- =?utf-8?B?UHV1bnVxZ2ZHTGNyak1HSUlPVG1JMW1ZWDVjL2JHN0pVd3hQUDdtc2dIbWt1?=
- =?utf-8?B?azhzdXRCMVFGMlBEM0tlRFc2RFprazd6aStDWm5sN21PREtNUmhxdWlmRUV3?=
- =?utf-8?B?ejl5RXVPZXdzWXBXNGFQT0NBTUF1cUpjZU8vOEQzQ2pwWm9Sem83ZkcyQlFU?=
- =?utf-8?B?OU9kdDBOTXlXdzZuWHFwVkV0N3lGVVZnMkVKUDI2VTZiNEs3VE1ydnFJcXlx?=
- =?utf-8?B?am9CaWxWSWdPcW5JVk5KdUdLUXhqVEdxbVFsNnBMcHBYVnM0VDBLQXBnSy9N?=
- =?utf-8?B?Qmh5U09OU0NacERIdHVHbzVNRWFEUWlQNU9CRDhIbEdBcHNQc0xWbEd6WUN0?=
- =?utf-8?B?SzRCVEdtL1ZpUE1OSmUxaU8vRTFKR0krc2NHcThNSkcxT09ZNFFNTFlEREZm?=
- =?utf-8?B?bDRqTWlZNzgyVmg1VzNhaGxXcmhVNFY4OTBneVVPUzlIRjh5YVZvckNHWFp0?=
- =?utf-8?B?NVMvRWhJSUVXMVpERCtxWkNkR2k0TXhJSVRjV0gyWm1Fa2t0YkptZ0c4QmM5?=
- =?utf-8?B?akZ4YlpOOHNFeTNGZkptZ01aN3BjbTQ0d2pVNjhnQU9zL25FVlQyU0Ryd0JP?=
- =?utf-8?B?VzAyQWtkMmJ5eWV5RXpOSSs5cG1HTm8wZkxxN3JwbnBiSkRubnhrbUpKUEI4?=
- =?utf-8?B?VkZUOWp3UnBHZEpNOHNqWXJ3b3pnQTg3NXdwKzlRcUtCdWpMTkU4WC9TcW5h?=
- =?utf-8?B?Vk83ZTg5QnZDMHJad2pKSU93WnRMcmRZVUtMZ3BFWEYxaXAvR3ZLbUxpdmEv?=
- =?utf-8?B?cGRLdzBGTHp4YjloaHA2bUtvOHpZbWlaWHk3dFN2ajRvLy9oNjFsTDBoOHcx?=
- =?utf-8?B?UnBXdWJWUWJqalBOZSsrRzdnTzZ3VmJFeWVaa0NGZkJhcUE5YXM1Ui8xTUZE?=
- =?utf-8?B?aFVCL2U3U1FOS01vV2oyMUdwOXMyaFFYS3ZNcTJkdnlObzZBcG84bTltc2I4?=
- =?utf-8?B?bzV1UFJReE9qUlFWcyt4Yi9IblhwS2J6Uit6UlEvUU9RUE05QTlBNGJFTWZC?=
- =?utf-8?Q?sRNLtvhwQF/ue9Xn+vgdl7ddk?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=KUbCUg9R;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1354656811=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58G4eWqY1387408
+	for <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 05:56:19 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=iQRttn0G6wbTW67m4MoV
+	6+HiOb+WFxXGuz/A4ov5vR0=; b=KUbCUg9RuqA1U3SMLrT4fDA4oF/KaRZ7S5bI
+	r7pjxDVgEx7gb5+riKofJ7NDwNxWuvQl6VxjvK7bja/AvmIM5nnc2i2M5uz83dOq
+	PIRGmq4PbVlzJdGbDitcxbRwxoAd2YDNSGHwoGxYzt+PirB0skzhSC7ygWU0K19A
+	sQ1s7CvqSIDQ5V06AFWFBNAO0f2L+R/EuxRoK9nkWYTbDEUAwpuOrIgs1FWg8Vma
+	EaKi59ZFkAR0NynSVqFh3TpR8E5E73F3abl70VgHNXcbc8N7EwT8vuKieN47Ptad
+	kPeBa+gLanMPqPVHF6lWPRnktEFM2x+FSWAMelCuK9dFgPIdIQ==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49584hk0sn-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 05:56:19 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.59; Tue, 16 Sep 2025 05:56:18 -0700
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.59 via Frontend Transport; Tue, 16 Sep 2025 05:56:17 -0700
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-python][kirkstone][PATCH 1/1] python3-twisted: Fix CVE-2024-41810
+Date: Tue, 16 Sep 2025 18:26:00 +0530
+Message-ID: <20250916125600.1274823-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: ad578252-b416-4375-713e-08ddf50bbd76
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Sep 2025 10:28:12.8464
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: r+STT0eHlyQ2J60hWp/pXT/2ZGjTjjnXiQCVruso2mxk6SOgR/fu2QM+A339w2LDz65R+3BVRAovX99+nOt8Wg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB6734
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=Pbj/hjhd c=1 sm=1 tr=0 ts=68c95e73 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=wjU5IotzqukA:10 a=yJojWOMRYYMA:10 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8
+ a=A1X0JdhQAAAA:8 a=PmPdvnPKAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8
+ a=Fh4SmhTExUq_HUniyNMA:9 a=Ft01igJXj0jPiUNu:21 a=L03L2QfmqWoA:10
+ a=1WNtSb5ECZgA:10 a=ZCh4QoaBVut9GMebS46n:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTE2MDEyMCBTYWx0ZWRfX2yP9QxAeJklx
+ zcDaKa8Wk9dW+G2zcX1CnIVwVCc2XR+ahjC2RxGQo0glOPdZERjztXJD/uG4q9mL8hyREqXSz9c
+ ZEwClNSeovU6GbWOyMxWMgcqNFy/qoj4YuMo75eW4MlB4p3wo0ZipjrxXC8lmAFanwIi4fGq/bG
+ bB36V1/2aBnW4itNcjHNGyhrFWLeS3RYYIckUklnEqCpF/VOYMvaGdpZA4nc8vXvnX/rmr9Cm0a
+ kq4NeJ5OVGvtrR68Ea8KCElOGcguhT7fJnpVJVHX0DXquj73GgNYUYuGgGNVjqMw13VlyzI3/bk
+ zAdlZ3gQB/ScGbAZHXjW/3KP+xzPzJBQdtTbuN1XeIzZ2o9hjyXLxwB8CNYgzs=
+X-Proofpoint-GUID: cglQ9UDThVpmQQELQ8fPq1NqyK5j0A2j
+X-Proofpoint-ORIG-GUID: cglQ9UDThVpmQQELQ8fPq1NqyK5j0A2j
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-16_02,2025-09-12_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 impostorscore=0 phishscore=0 malwarescore=0 priorityscore=1501
+ suspectscore=0 adultscore=0 bulkscore=0 spamscore=0 classifier=typeunknown
+ authscore=0 authtc= authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 10:28:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119465
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 12:56:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119466
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogR3lvcmd5IFNhcnZhcmkg
-PHNrYW5kaWdyYXVuQGdtYWlsLmNvbT4NCj4gU2VudDogVHVlc2RheSwgU2VwdGVtYmVyIDE2LCAy
-MDI1IDExOjE2DQo+IFRvOiBNYXJrbywgUGV0ZXIgKEZUIEQgRVUgU0sgQkZTMSkgPFBldGVyLk1h
-cmtvQHNpZW1lbnMuY29tPjsgamFuIHZlcm1hZXRlDQo+IDxqYW4udmVybWFldGVAZ21haWwuY29t
-Pg0KPiBDYzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3Vi
-amVjdDogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENIIDA5LzEwXSB1dGY4cHJvYzogYWRkIG5ldyBy
-ZWNpcGUgd2l0aCBwdGVzdA0KPiANCj4gT24gOS8xNS8yNSAxMjo1MywgUGV0ZXIgTWFya28gdmlh
-IGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcgd3JvdGU6DQo+ID4+IC0tLS0tT3JpZ2luYWwgTWVzc2Fn
-ZS0tLS0tDQo+ID4+IEZyb206IGphbiB2ZXJtYWV0ZSA8amFuLnZlcm1hZXRlQGdtYWlsLmNvbT4N
-Cj4gPj4gU2VudDogU2F0dXJkYXksIFNlcHRlbWJlciA2LCAyMDI1IDE5OjIyDQo+ID4+IFRvOiBN
-YXJrbywgUGV0ZXIgKEZUIEQgRVUgU0sgQkZTMSkgPFBldGVyLk1hcmtvQHNpZW1lbnMuY29tPg0K
-PiA+PiBDYzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPj4g
-U3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENIIDA5LzEwXSB1dGY4cHJvYzogYWRkIG5l
-dyByZWNpcGUgd2l0aCBwdGVzdA0KPiA+Pg0KPiA+PiBJZiBJJ20gbm90IG1pc3Rha2VuIHRoZSB1
-c2FnZSBvZiBhIHRhZyBpbiB0aGUgZmV0Y2hlciBkb2VzIHJlcXVpcmUNCj4gPj4gbmV0d29yayBh
-Y2Nlc3MuDQo+ID4+IFdoYXQncyBub3QgYWx3YXlzIHRoZSBjYXNlLg0KPiA+PiBUaGlzIGRvZXMg
-YnJlYWsgdGhlIHBhcnNpbmcgYnkgYml0YmFrZSB3aGVuIG5vIG5ldHdvcmsvSW50ZXJuZXQgaXMg
-YXZhaWxhYmxlLg0KPiA+IEhlbGxvLCB0aGF0IGlzIHRydWUgZm9yIG9sZGVyIHJlbGVhc2VzLg0K
-PiA+IEluIG1hc3RlciwgdXNpbmcgdGFnIGlzIHBvc3NpYmxlIGFuZCBldmVuIGVuY291cmFnZWQv
-cmVxdWlyZWQgdG8gdmFsaWRhdGUgdGhhdA0KPiB0aGUgaGFzaCBiZWxvbmdzIHRvIGEgdGFnLg0K
-PiA+DQo+IA0KPiBZZXMsIGJ1dCB0aGlzIHBhdGNoIHNlZW1zIHRvIGJlIG1pc3NpbmcgYSByZXZp
-c2lvbiBhbHNvLCBpbiB3aGljaCBjYXNlDQo+IHRoZSBvbGQgYmVoYXZpb3Igc3RheXMuDQoNCk9v
-cHMsIHNvcnJ5IGZvciB0aGF0Lg0KSSdsbCBzZW5kIGEgcGF0Y2ggaW4gdGhlIGV2ZW5pbmcgaWYg
-c29tZW9uZSBkaWRuJ3QgYWxyZWFkeS4NCg0KPiANCj4gPiBQZXRlcg0KPiA+DQo+ID4+IE9uIEZy
-aSwgU2VwIDUsIDIwMjUgYXQgMTI6MTPigK9BTSBQZXRlciBNYXJrbyB2aWEgbGlzdHMub3BlbmVt
-YmVkZGVkLm9yZw0KPiA+PiA8cGV0ZXIubWFya289c2llbWVucy5jb21AbGlzdHMub3BlbmVtYmVk
-ZGVkLm9yZz4gd3JvdGU6DQo+ID4+PiBGcm9tOiBQZXRlciBNYXJrbyA8cGV0ZXIubWFya29Ac2ll
-bWVucy5jb20+DQo+ID4+Pg0KPiA+Pj4gSXQgaXMgbmVlZGVkIGZvciBwb2NvIDEuMTQrDQo+ID4+
-PiBQdGVzdCBydW5zIGZvciBsZXNzIHRoYW4gYSBzZWNvbmQuDQo+ID4+Pg0KPiA+Pj4gU2lnbmVk
-LW9mZi1ieTogUGV0ZXIgTWFya28gPHBldGVyLm1hcmtvQHNpZW1lbnMuY29tPg0KPiA+Pj4gLS0t
-DQo+ID4+PiAgLi4uL2luY2x1ZGUvcHRlc3QtcGFja2FnZWxpc3RzLW1ldGEtb2UuaW5jICAgIHwg
-IDEgKw0KPiA+Pj4gIC4uLi91dGY4cHJvYy91dGY4cHJvYy9ydW4tcHRlc3QgICAgICAgICAgICAg
-ICB8IDE1ICsrKysrKysrKw0KPiA+Pj4gIC4uLi91dGY4cHJvYy91dGY4cHJvY18yLjEwLjAuYmIg
-ICAgICAgICAgICAgICB8IDMzICsrKysrKysrKysrKysrKysrKysNCj4gPj4+ICAzIGZpbGVzIGNo
-YW5nZWQsIDQ5IGluc2VydGlvbnMoKykNCj4gPj4+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1v
-ZS9yZWNpcGVzLXN1cHBvcnQvdXRmOHByb2MvdXRmOHByb2MvcnVuLXB0ZXN0DQo+ID4+PiAgY3Jl
-YXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3V0Zjhwcm9jL3V0Zjhwcm9j
-XzIuMTAuMC5iYg0KPiA+Pj4NCj4gPj4+IGRpZmYgLS1naXQgYS9tZXRhLW9lL2NvbmYvaW5jbHVk
-ZS9wdGVzdC1wYWNrYWdlbGlzdHMtbWV0YS1vZS5pbmMgYi9tZXRhLQ0KPiA+PiBvZS9jb25mL2lu
-Y2x1ZGUvcHRlc3QtcGFja2FnZWxpc3RzLW1ldGEtb2UuaW5jDQo+ID4+PiBpbmRleCBkNzdiOTdk
-NTc2Li4xODMyNGZmMGQzIDEwMDY0NA0KPiA+Pj4gLS0tIGEvbWV0YS1vZS9jb25mL2luY2x1ZGUv
-cHRlc3QtcGFja2FnZWxpc3RzLW1ldGEtb2UuaW5jDQo+ID4+PiArKysgYi9tZXRhLW9lL2NvbmYv
-aW5jbHVkZS9wdGVzdC1wYWNrYWdlbGlzdHMtbWV0YS1vZS5pbmMNCj4gPj4+IEBAIC00NCw2ICs0
-NCw3IEBAIFBURVNUU19GQVNUX01FVEFfT0UgPSAiXA0KPiA+Pj4gICAgICBwdiBcDQo+ID4+PiAg
-ICAgIHNkYnVzLWMrKyBcDQo+ID4+PiAgICAgIHRvbWxwbHVzcGx1cyBcDQo+ID4+PiArICAgIHV0
-Zjhwcm9jIFwNCj4gPj4+ICAgICAgdXRoYXNoIFwNCj4gPj4+ICAgICAgeG1sc2VjMSBcDQo+ID4+
-PiAgICAgIHplcm9tcSBcDQo+ID4+PiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBv
-cnQvdXRmOHByb2MvdXRmOHByb2MvcnVuLXB0ZXN0IGIvbWV0YS0NCj4gPj4gb2UvcmVjaXBlcy1z
-dXBwb3J0L3V0Zjhwcm9jL3V0Zjhwcm9jL3J1bi1wdGVzdA0KPiA+Pj4gbmV3IGZpbGUgbW9kZSAx
-MDA2NDQNCj4gPj4+IGluZGV4IDAwMDAwMDAwMDAuLjM0OWU0OTZkNjgNCj4gPj4+IC0tLSAvZGV2
-L251bGwNCj4gPj4+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3V0Zjhwcm9jL3V0Zjhw
-cm9jL3J1bi1wdGVzdA0KPiA+Pj4gQEAgLTAsMCArMSwxNSBAQA0KPiA+Pj4gKyMhL2Jpbi9zaA0K
-PiA+Pj4gKw0KPiA+Pj4gK2V4ZWN1dGVfdGVzdCgpIHsNCj4gPj4+ICsgICAgZXZhbCAiLi8kMSIg
-JiYgZWNobyAiUEFTUzogJDEiIHx8IGVjaG8gIkZBSUw6ICQxIg0KPiA+Pj4gK30NCj4gPj4+ICsN
-Cj4gPj4+ICtleGVjdXRlX3Rlc3QgImNhc2UiDQo+ID4+PiArZXhlY3V0ZV90ZXN0ICJjdXN0b20i
-DQo+ID4+PiArZXhlY3V0ZV90ZXN0ICJpdGVyYXRlIg0KPiA+Pj4gK2V4ZWN1dGVfdGVzdCAibWlz
-YyINCj4gPj4+ICtleGVjdXRlX3Rlc3QgInByaW50cHJvcGVydHkiDQo+ID4+PiArZXhlY3V0ZV90
-ZXN0ICJ2YWxpZCINCj4gPj4+ICtleGVjdXRlX3Rlc3QgImNoYXJ3aWR0aCINCj4gPj4+ICtleGVj
-dXRlX3Rlc3QgImdyYXBoZW1ldGVzdCBkYXRhL0dyYXBoZW1lQnJlYWtUZXN0LnR4dCINCj4gPj4+
-ICtleGVjdXRlX3Rlc3QgIm5vcm10ZXN0IGRhdGEvTm9ybWFsaXphdGlvblRlc3QudHh0Ig0KPiA+
-Pj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3V0Zjhwcm9jL3V0Zjhwcm9j
-XzIuMTAuMC5iYiBiL21ldGEtDQo+ID4+IG9lL3JlY2lwZXMtc3VwcG9ydC91dGY4cHJvYy91dGY4
-cHJvY18yLjEwLjAuYmINCj4gPj4+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4+PiBpbmRleCAw
-MDAwMDAwMDAwLi5lNDJkMTZiOGI3DQo+ID4+PiAtLS0gL2Rldi9udWxsDQo+ID4+PiArKysgYi9t
-ZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC91dGY4cHJvYy91dGY4cHJvY18yLjEwLjAuYmINCj4gPj4+
-IEBAIC0wLDAgKzEsMzMgQEANCj4gPj4+ICtTVU1NQVJZID0gImxpYnJhcnkgdGhhdCBwcm92aWRl
-cyBvcGVyYXRpb25zIGZvciBkYXRhIGluIHRoZSBVVEYtOA0KPiBlbmNvZGluZyINCj4gPj4+ICtE
-RVNDUklQVElPTiA9ICJ1dGY4cHJvYyBpcyBhIHNtYWxsLCBjbGVhbiBDIGxpYnJhcnkgdGhhdCBw
-cm92aWRlcyBVbmljb2RlIFwNCj4gPj4+ICtub3JtYWxpemF0aW9uLCBjYXNlLWZvbGRpbmcsIGFu
-ZCBvdGhlciBvcGVyYXRpb25zIGZvciBkYXRhIGluIHRoZSBVVEYtOCBcDQo+ID4+PiArZW5jb2Rp
-bmcsIHN1cHBvcnRpbmcgVW5pY29kZSB2ZXJzaW9uIDE2LjAiDQo+ID4+PiArSE9NRVBBR0UgPSAi
-aHR0cHM6Ly9qdWxpYXN0cmluZ3MuZ2l0aHViLmlvL3V0Zjhwcm9jLyINCj4gPj4+ICtTRUNUSU9O
-ID0gImxpYnMiDQo+ID4+PiArDQo+ID4+PiArTElDRU5TRSA9ICJNSVQgJiBVbmljb2RlLTMuMCIN
-Cj4gPj4+ICtMSUNfRklMRVNfQ0hLU1VNID0NCj4gPj4gImZpbGU6Ly9MSUNFTlNFLm1kO21kNT05
-NmQ1YTNiYTMwNmUwZjI0ZmIyODk0MjdhZjQ4NDQwOCINCj4gPj4+ICsNCj4gPj4+ICtTUkNfVVJJ
-ID0gIlwNCj4gPj4+ICsNCj4gPj4NCj4gZ2l0Oi8vZ2l0aHViLmNvbS9KdWxpYVN0cmluZ3MvdXRm
-OHByb2M7cHJvdG9jb2w9aHR0cHM7YnJhbmNoPW1hc3Rlcjt0YWc9diR7UFZ9IFwNCj4gPj4+ICsg
-ICAgZmlsZTovL3J1bi1wdGVzdCBcDQo+ID4+PiArIg0KPiA+Pj4gKw0KPiA+Pj4gK2luaGVyaXQg
-Y21ha2UgcHRlc3QNCj4gPj4+ICsNCj4gPj4+ICtFWFRSQV9PRUNNQUtFID0gIlwNCj4gPj4+ICsg
-ICAgLURCVUlMRF9TSEFSRURfTElCUz1PTiBcDQo+ID4+PiArICAgICR7QGJiLnV0aWxzLmNvbnRh
-aW5zKCdQVEVTVF9FTkFCTEVEJywgJzEnLCAnLURCVUlMRF9URVNUSU5HPU9OIC0NCj4gPj4gRFVU
-RjhQUk9DX0VOQUJMRV9URVNUSU5HPU9OICcsICcnLCBkKX0gXA0KPiA+Pj4gKyINCj4gPj4+ICsN
-Cj4gPj4+ICtkb19pbnN0YWxsX3B0ZXN0KCkgew0KPiA+Pj4gKyAgICAjIHRoaXMgbGlzdCBhbmQg
-cnVuLXB0ZXN0IG5lZWRzIHRvIGJlIHVwZGF0ZWQgb24gdXBncmFkZSAodGhlIHByb2plY3QgdXNl
-cw0KPiA+PiBhZGRfdGVzdCBmZWF0dXJlKQ0KPiA+Pj4gKyAgICBmb3IgdCBpbiAiY2FzZSIgY3Vz
-dG9tIGl0ZXJhdGUgbWlzYyBwcmludHByb3BlcnR5IHZhbGlkIGNoYXJ3aWR0aA0KPiA+PiBncmFw
-aGVtZXRlc3Qgbm9ybXRlc3Q7IGRvDQo+ID4+PiArICAgICAgICBpbnN0YWxsIC1tIDA3NTUgJHtC
-fS8kdCAke0R9JHtQVEVTVF9QQVRIfS8NCj4gPj4+ICsgICAgZG9uZQ0KPiA+Pj4gKyAgICBpbnN0
-YWxsIC1kICR7RH0ke1BURVNUX1BBVEh9L2RhdGENCj4gPj4+ICsgICAgaW5zdGFsbCAtbSAwNjQ0
-ICR7Qn0vZGF0YS9HcmFwaGVtZUJyZWFrVGVzdC50eHQNCj4gPj4gJHtEfSR7UFRFU1RfUEFUSH0v
-ZGF0YS8NCj4gPj4+ICsgICAgaW5zdGFsbCAtbSAwNjQ0ICR7Qn0vZGF0YS9Ob3JtYWxpemF0aW9u
-VGVzdC50eHQgJHtEfSR7UFRFU1RfUEFUSH0vZGF0YS8NCj4gPj4+ICt9DQo+ID4+PiArDQo+ID4+
-PiArQkJDTEFTU0VYVEVORCA9ICJuYXRpdmUiDQo+ID4+Pg0KPiA+Pj4NCj4gPj4+DQo+ID4+DQo+
-ID4+IC0tDQo+ID4+IEphbiBWZXJtYWV0ZQ0KPiA+PiDigJxTdWNjZXNzIGlzIGEgc2VsZi1jb3Jy
-ZWN0aW5nIHBoZW5vbWVub20u4oCdIC0tIEdhcnkgSGFtZWwNCj4gPj4NCj4gPj4gLT0tPS09LT0t
-PS09LT0tPS09LT0tPS0NCj4gPj4gTGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50
-IHRvIHRoaXMgZ3JvdXAuDQo+ID4+IFZpZXcvUmVwbHkgT25saW5lICgjMTE5NDA1KToNCj4gaHR0
-cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2Uv
-MTE5NDA1DQo+ID4+IE11dGUgVGhpcyBUb3BpYzogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQu
-b3JnL210LzExNTA3MzE1Ni82MDg0NDQ1DQo+ID4+IEdyb3VwIE93bmVyOiBvcGVuZW1iZWRkZWQt
-ZGV2ZWwrb3duZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+PiBVbnN1YnNjcmliZTogaHR0
-cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL3Vuc3ViDQo+
-IFtza2FuZGlncmF1bkBnbWFpbC5jb21dDQo+ID4+IC09LT0tPS09LT0tPS09LT0tPS09LT0tDQo+
-ID4+DQoNCg==
+From: Soumya Sambu <soumya.sambu@windriver.com>
+
+Twisted is an event-based framework for internet applications, supporting Python 3.6+.
+The `twisted.web.util.redirectTo` function contains an HTML injection vulnerability.
+If application code allows an attacker to control the redirect URL this vulnerability
+may result in Reflected Cross-Site Scripting (XSS) in the redirect response HTML body.
+This vulnerability is fixed in 24.7.0rc1.
+
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2024-41810
+
+Upstream patch:
+https://github.com/twisted/twisted/commit/046a164f89a0f08d3239ecebd750360f8914df33
+
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+---
+ .../python3-twisted/CVE-2024-41810.patch      | 109 ++++++++++++++++++
+ .../python/python3-twisted_22.2.0.bb          |   3 +-
+ 2 files changed, 111 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41810.patch
+
+diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41810.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41810.patch
+new file mode 100644
+index 0000000000..c0842304dc
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41810.patch
+@@ -0,0 +1,109 @@
++From 046a164f89a0f08d3239ecebd750360f8914df33 Mon Sep 17 00:00:00 2001
++From: Adi Roiban <adiroiban@gmail.com>
++Date: Mon Jul 29 14:28:03 2024 +0100
++Subject: [PATCH] Merge commit from fork
++
++Added HTML output encoding the "URL" parameter of the "redirectTo" function
++
++CVE: CVE-2024-41810
++
++Upstream-Status: Backport [https://github.com/twisted/twisted/commit/046a164f89a0f08d3239ecebd750360f8914df33]
++
++Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
++---
++ src/twisted/web/_template_util.py          |  2 +-
++ src/twisted/web/newsfragments/12263.bugfix |  1 +
++ src/twisted/web/newsfragments/9839.bugfix  |  1 +
++ src/twisted/web/test/test_util.py          | 39 +++++++++++++++++++++-
++ 4 files changed, 41 insertions(+), 2 deletions(-)
++ create mode 100644 src/twisted/web/newsfragments/12263.bugfix
++ create mode 100644 src/twisted/web/newsfragments/9839.bugfix
++
++diff --git a/src/twisted/web/_template_util.py b/src/twisted/web/_template_util.py
++index bd081bd..3fb56e5 100644
++--- a/src/twisted/web/_template_util.py
+++++ b/src/twisted/web/_template_util.py
++@@ -92,7 +92,7 @@ def redirectTo(URL: bytes, request: IRequest) -> bytes:
++     </body>
++ </html>
++ """ % {
++-        b"url": URL
+++        b"url": escape(URL.decode("utf-8")).encode("utf-8")
++     }
++     return content
++ 
++diff --git a/src/twisted/web/newsfragments/12263.bugfix b/src/twisted/web/newsfragments/12263.bugfix
++new file mode 100644
++index 0000000..b3982ca
++--- /dev/null
+++++ b/src/twisted/web/newsfragments/12263.bugfix
++@@ -0,0 +1 @@
+++twisted.web.util.redirectTo now HTML-escapes the provided URL in the fallback response body it returns (GHSA-cf56-g6w6-pqq2). The issue is being tracked with CVE-2024-41810.
++\ No newline at end of file
++diff --git a/src/twisted/web/newsfragments/9839.bugfix b/src/twisted/web/newsfragments/9839.bugfix
++new file mode 100644
++index 0000000..1e2e7f7
++--- /dev/null
+++++ b/src/twisted/web/newsfragments/9839.bugfix
++@@ -0,0 +1 @@
+++twisted.web.util.redirectTo now HTML-escapes the provided URL in the fallback response body it returns (GHSA-cf56-g6w6-pqq2, CVE-2024-41810).
++diff --git a/src/twisted/web/test/test_util.py b/src/twisted/web/test/test_util.py
++index 996b0d0..87282ce 100644
++--- a/src/twisted/web/test/test_util.py
+++++ b/src/twisted/web/test/test_util.py
++@@ -5,7 +5,6 @@
++ Tests for L{twisted.web.util}.
++ """
++ 
++-
++ import gc
++ 
++ from twisted.internet import defer
++@@ -64,6 +63,44 @@ class RedirectToTests(TestCase):
++         targetURL = "http://target.example.com/4321"
++         self.assertRaises(TypeError, redirectTo, targetURL, request)
++ 
+++    def test_legitimateRedirect(self):
+++        """
+++        Legitimate URLs are fully interpolated in the `redirectTo` response body without transformation
+++        """
+++        request = DummyRequest([b""])
+++        html = redirectTo(b"https://twisted.org/", request)
+++        expected = b"""
+++<html>
+++    <head>
+++        <meta http-equiv=\"refresh\" content=\"0;URL=https://twisted.org/\">
+++    </head>
+++    <body bgcolor=\"#FFFFFF\" text=\"#000000\">
+++    <a href=\"https://twisted.org/\">click here</a>
+++    </body>
+++</html>
+++"""
+++        self.assertEqual(html, expected)
+++
+++    def test_maliciousRedirect(self):
+++        """
+++        Malicious URLs are HTML-escaped before interpolating them in the `redirectTo` response body
+++        """
+++        request = DummyRequest([b""])
+++        html = redirectTo(
+++            b'https://twisted.org/"><script>alert(document.location)</script>', request
+++        )
+++        expected = b"""
+++<html>
+++    <head>
+++        <meta http-equiv=\"refresh\" content=\"0;URL=https://twisted.org/&quot;&gt;&lt;script&gt;alert(document.location)&lt;/script&gt;\">
+++    </head>
+++    <body bgcolor=\"#FFFFFF\" text=\"#000000\">
+++    <a href=\"https://twisted.org/&quot;&gt;&lt;script&gt;alert(document.location)&lt;/script&gt;\">click here</a>
+++    </body>
+++</html>
+++"""
+++        self.assertEqual(html, expected)
+++
++ 
++ class ParentRedirectTests(SynchronousTestCase):
++     """
++-- 
++2.40.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb b/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb
+index da83f0123a..ef602890ea 100644
+--- a/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb
+@@ -12,7 +12,8 @@ SRC_URI[sha256sum] = "57f32b1f6838facb8c004c89467840367ad38e9e535f8252091345dba5
+ PYPI_PACKAGE = "Twisted"
+ 
+ SRC_URI += "file://CVE-2024-41671-0001.patch \
+-            file://CVE-2024-41671-0002.patch"
++            file://CVE-2024-41671-0002.patch \
++            file://CVE-2024-41810.patch"
+ 
+ inherit pypi python_setuptools_build_meta
+ 
+-- 
+2.40.0
+
 
