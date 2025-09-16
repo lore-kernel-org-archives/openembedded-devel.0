@@ -2,68 +2,68 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 18B36CAC598
-	for <webhook@archiver.kernel.org>; Tue, 16 Sep 2025 17:03:36 +0000 (UTC)
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.web11.1003.1758042206905280667
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2539FCAC598
+	for <webhook@archiver.kernel.org>; Tue, 16 Sep 2025 17:12:16 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web11.1297.1758042727366320473
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Sep 2025 10:03:27 -0700
+ Tue, 16 Sep 2025 10:12:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RteQeFtT;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-62f6b1fd718so1012284a12.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 10:03:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IrxbsFOy;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b0418f6fc27so976437766b.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 10:12:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758042205; x=1758647005; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758042726; x=1758647526; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
         bh=lyNWeGAcislAvb6ZXac/VpOH8F/96+LqWJtf9Gfm8mg=;
-        b=RteQeFtTCsUljIOhnE82VygT3zGwg2XhSNxjRMCGY3CXP1VZ8sGQuREdUpeX1LXAZa
-         ku5ITIrP9U/lhKLChNPlj8lpdWHlAMUoUeoUqoicEFIYf1gFevg5ScnsqIzFmA61ptiv
-         txf9EdQZZVu4Zrr7p6IfsI3CoBXBD32ImuJ+0XbWtzXLs8T9obGlbI0mliTrPuY/i+yi
-         D4Wxt1X69xh1v1p7uunrCbMsDM2+A4SpeCf3IUGd3g70h39NtIvdFGtdtFVQB/GSH0rA
-         dGiM4Vsudi5Giytk7bBFUI6lUISjXiR+qB3mxNgU89EOHBJ63VoVXh2v7QzGzBgzQeQM
-         bbFg==
+        b=IrxbsFOySTnmBD11CPfLWoX1m8FtRZJG3EGT2YFOrD1k/vbSNPKXTPbgoZ2/Ssrn8I
+         M9w3NyAp425vmb7O1xJkB2rMuMFm1M1cSc20GtZJeT9PioVOIqRigeU0TT3ycXkbzA+L
+         lhwZsCNY2U2nS/w7mIWWzGDfvby3C8KKpYzwx6Y1WudrerzR8GWaQZ1SMhRvYpLne1cE
+         KQa8+4qSxZPJJPwZpStqV0lDooyIfJHvSJ6iba3chSi4zGz/IrfEVywX6yBo/aEIQq5N
+         jqt8ZZ/brMNRhbjw6HpHS0xIVJwsOEle3Kpja3lZIiOO6BH7o/gJ89scGME78+KMi0iB
+         TasA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758042205; x=1758647005;
+        d=1e100.net; s=20230601; t=1758042726; x=1758647526;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
         bh=lyNWeGAcislAvb6ZXac/VpOH8F/96+LqWJtf9Gfm8mg=;
-        b=UZg67Ezl02mH6f8ezJ6WdtIddl75E133VsYfjTRTAL0LkYW0sEkdgXvrI8HYqb7Zrv
-         hnrStWef83a9WGk8v1AI5I5S1L+GO4gdCy4w3byTXlREERm7G/5VXAMpgfoBavZYLuZ7
-         OhmHnBnNSMUbSMnfSr3Rr3hfF8jKtfmCWG3frWzg918b8wHflbkC7hGnyJeZzjSiYrfb
-         TwfLTliTYSq5jJEo9OiV7B1AQ7YCsYDgZ662MkO/RsXlUmexwjDqbSw7OqD0fB2eGC5G
-         Muxe04Yjt0fahu85rdUuHRLV8++B1F+NMkhsQAAqWoR9KpRI87nArPnK95AGK4c18bR0
-         ay/g==
-X-Gm-Message-State: AOJu0YzoQg6N7yLoIwbMAPewVGCExqWgzVdSFQjjktTwU2hHhVnuqN0n
-	yHQPs3F07ede8SZPdcONmHYN2bQAQW+cLdNxreb/Y4CsK8EjyDRI19A2JYvBxLW4
-X-Gm-Gg: ASbGncvQ1tAWQ4lvbH+WZNvHjY4WikTWl4W2tAiApZq2Ux5hwH5aSgbNWlkCySz4iJD
-	5CRf0GhANbFiQhQOLqnxRxfR26ulvPIHtA8IzT5J998ZX8IgFY2QONJCnfLLM3DE5Qw0aOf/TNR
-	p9PliUtSSpaQiFyMTRhEL+5sD13zU80hnpYmZbhOQxpSu8pcy9uP0zg6evBvOlzz/uzB5Qps+j8
-	2ZpsSoiwPPdvl/C0oUjw0blcOF2mX8hFucNbMCNEpMvtT0LXUTs3r4pZ8YvP8GWcGKHzLgvI2Lz
-	r4W62jbktW5J42azUOFll4VHs2GdFxof4bz1Pi9i5NyPPiQyKTgyC3uhq/PpqQx+OXQ453s07KW
-	LL6Bm9Y8mj+cimEgCY4l9
-X-Google-Smtp-Source: AGHT+IFmC+KNm1N6yrGJnTauIwwvnes97g8uqlukhoqaH99eAe8lpMS0NIVe/DLkkCWZqV6xHDn7nw==
-X-Received: by 2002:a05:6402:27c6:b0:62f:4357:53a0 with SMTP id 4fb4d7f45d1cf-62f4357573fmr6309257a12.9.1758042204722;
-        Tue, 16 Sep 2025 10:03:24 -0700 (PDT)
+        b=deG31ok9XxduELEmBhEuasXyPwSveOIa6d5vMmevIxtcywYchabbInByYczgWaEq4l
+         0CI9/NDyij4w1CScti2x5CG/UvBFtewEu1M2oJVC1rpxE1moF5u/egcZNo2o/KlE0NL+
+         QqfC831brDrHRVIO7RaDFtWhMg0t57t/nrAf5IZbMkmoJPnz7D7vhw745nsLhyixmDpd
+         etamP/rPZLRX4Msoi5UlbranCjukNUCVAvCytUlDFOYvdGGjzzfgE9wvdC9g3v8B8v+M
+         sW+F/uCAWItGIqK+g7i1GdmxrS3YmE2ZXUx1utvutx8tLTRVaEeeADWr2eeAcFLlVKrf
+         7J9g==
+X-Gm-Message-State: AOJu0YzQnsgahy6BVVT3/d5VOjyc4Jir9ySEzQ09MeZhdgjimdieXLqa
+	a1zFEi0H0W4P/+IBDSanIfefenGo2yaxqW3AwUQn51Ty91cNRcM5rzUJcerkXstk
+X-Gm-Gg: ASbGncvbrciMLpi1Cn7W34vB3iVsiQbe5NEPX0c37SygL1OE9iVB7imD1Qkykkv7DQu
+	z4EUplcvFOtkSSDJmsF0M81k+Mp4iLsgHsfBd374pqApH2eVB8dPjMTs9/qdwAQ0wwQf05yvZBx
+	GGOxrGqliKHuDIt7htunJnVIm+ZB7knDHsTflMMZ2fNvWY8B6RKkwsC09rzoBKt5E80wpwumtZf
+	2F98FwAZ8zWzDtz/4zbCVJF5xa+tzV/KJGPifVkUK5GWItAPWfi+spAszE3Vsa80leLgFco57uA
+	GvQ3Kyn3MHSGUA9kyjNUpGdW2mZXEUx5XzWxqvPDCvB+CPEY4EiUnWshGBw7I8jcyEl0RDnB1Y2
+	BX+oVi4ho5DMbURrAFFhG
+X-Google-Smtp-Source: AGHT+IEmGF39UUAvQIF5tJefRo3ABRbW3IrA3MVhDUztL4856am83czz+gCW1KvknQcpLbN2vNXAtw==
+X-Received: by 2002:a17:907:9801:b0:afe:6c9b:c828 with SMTP id a640c23a62f3a-b07c37b8165mr1698994366b.61.1758042725365;
+        Tue, 16 Sep 2025 10:12:05 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-62f2f5ec0ffsm5248312a12.46.2025.09.16.10.03.23
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b07b32dd5bfsm1173702466b.63.2025.09.16.10.12.04
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Sep 2025 10:03:24 -0700 (PDT)
+        Tue, 16 Sep 2025 10:12:04 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH][meta-multimedia v2] libcamera: upgrade 0.4.0 -> 0.5.2
-Date: Tue, 16 Sep 2025 19:03:23 +0200
-Message-ID: <20250916170323.2644886-1-skandigraun@gmail.com>
+Subject: [meta-multimedia][PATCH v2] libcamera: upgrade 0.4.0 -> 0.5.2
+Date: Tue, 16 Sep 2025 19:12:03 +0200
+Message-ID: <20250916171203.2645698-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 17:03:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119470
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 17:12:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119471
 
 Dropped 0001-media_device-Add-bool-return-type-to-unlock.patch, because
 the issue has been solved by upstream.
