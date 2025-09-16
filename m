@@ -2,224 +2,292 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5764ECAC599
-	for <webhook@archiver.kernel.org>; Tue, 16 Sep 2025 07:12:42 +0000 (UTC)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
- by mx.groups.io with SMTP id smtpd.web10.13322.1758006761356299709
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54E8ECAC598
+	for <webhook@archiver.kernel.org>; Tue, 16 Sep 2025 07:19:22 +0000 (UTC)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web10.13405.1758007145019692566
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Sep 2025 00:12:41 -0700
+ Tue, 16 Sep 2025 00:19:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Bfa5/MSp;
- spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-62f1987d49fso1444219a12.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 00:12:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=abJUOJ4E;
+ spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-62f2b27a751so2322699a12.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 00:19:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758006760; x=1758611560; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758007143; x=1758611943; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Cr4rGv14gRdG+mRkdMnzo6l682IHN3FxAAmo9KOzSeI=;
-        b=Bfa5/MSp1rEqsZgsLMJU2rbTFnU9vpKRfXJwx5JnomCeUBglTbMPMP5RCpjl9AFQu5
-         yVP+5cqHue0IY2I/IaKv5BfYzLpGEoRUiRcum08jhPqFzBcPkmUw/2oTUkqAmlJGOG6K
-         vciiCk3ey7lYojyUVbkgUErkc2kynrprKnskhMGOdyo/q4/8ADzCnK9sqY+cWf9QaCmd
-         2eI31aanbqDFQrn8qC9lYEkDknnYhnjPWBOcryYZcF9G5WWoZvsrOJBbhaQTp0rrFFwg
-         7Jku4BkXK28LK9FyjtCy05RtiG0uP8ZuWa4NJnamGruFL5fKauvqLBtfKBZ6utUC6SGw
-         q5lQ==
+        bh=LFY1oSLmHHQiQrxI8RO6TnJksMN9I2db5slzBE/pQPA=;
+        b=abJUOJ4ED9JFA7pAxBz50iSXWPGejlqLifxqoopD/xoLR6XBW6f+0id26wXwbRMxNC
+         M4YI3GBXbpmu+p8gvwRq81CfGPIdDFURyfm7ElcUpFIHrbnGKS6U6BUK8lGIJTAaWer6
+         ZJ2yaN5zw4eADQVIoPlPxp3Pv09jn1FFDnlT3A4DSpFy0y9hNSeja/YlxJ7f9fC6qcXe
+         qrWaXHOnNw1LEQ1zEd878MVoDhIItZaIUrn/9+v4wHLg6Y+awJnuie/k4lAzJ2NgAz5g
+         Ina9Ashf8Sy6QbOwS0GsyF3EX6C1zBo42j7UJbqG2oX/IVttAOEaOMR75/7psRRKJ+RI
+         98Sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758006760; x=1758611560;
+        d=1e100.net; s=20230601; t=1758007143; x=1758611943;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Cr4rGv14gRdG+mRkdMnzo6l682IHN3FxAAmo9KOzSeI=;
-        b=RIJ9brAFWt/U+1CAkqjqb9mt4OM23bAKbEyN74Xip94mI1sTUmqKaGmZ/vpefx8Mz6
-         71sm3a7ROdQH7ysu/7sXuBnEsnnUOqXPV0G92eD4wYZEgSFij57vRUGnaaTLX+2GDVqY
-         QefZ3AT3xkJUZcfKFjJmsKNUjdbkd4rc76haS9tCzlEBnJvbB88XbLOT6/xCIfz9o5fZ
-         XgkvTAF3TabjeSGaP+16E4QfhUkwo8NAEpIhXAqk7XN/xS3Ma9gWa7ALHGmDBYHYotWq
-         ii8P+mOom7t1djEzTa7v0nzX/ap05SVHGNnOvA/cmGLM7bZ528cDlWKKJ0UvxBezOaN6
-         FJsg==
-X-Gm-Message-State: AOJu0YwweWh5fO7aUgtLF4liiLzJwlw316Qv5qr59IvkNcuXssQfVpk+
-	KA3YPz3MLwYjR3o1AUu/ide1Oed9JNjmiM2nTGnJPug0l5zA2vVDy58vINFc8A==
-X-Gm-Gg: ASbGncuhGRcmRA8xFG9b9jCPsOc/EbTDv3ChkqaQf/JfLk6z9/A1BVV9O5iA01O9cXb
-	DJGntMTjNCBLsO2qvwDA0I2TByCaOnjuJeSAzzvWeyZuSw3sewc1DWGrxZWMkdV3PrrD/6lQzuV
-	yzw601EbDNpZxaWLjeCbfgHZkxSVmtUSduBCHxq3LHPhIJT8JTuU11Eg/nAJKsB0xK4tTwI9ok1
-	l48PtJ8YRkH5wk/Go7T/XiwWn+5rd7Tw4Ph8OFbvUBCbrf1h7PYf7pfreQoWhmnbom+Skl/TjWc
-	65ak2lZFN58ADlfKAVRKq8LmgcNle+rQ3Y0VHz1GzkeDSQ/27eoPBtjEJgVVeEWi7KgwhDbwJvJ
-	AQrie43oveHXur+/pb+2g
-X-Google-Smtp-Source: AGHT+IEI6CyfNRdnNV51TAP8lN8vhlh6+oXAu+siwmHBr7LyD+4wBaxCN5tJh9DlSE+UThBWNDtMdg==
-X-Received: by 2002:a17:907:3f02:b0:b0c:99b8:8ac5 with SMTP id a640c23a62f3a-b0c99c7cf4cmr867908766b.44.1758006759585;
-        Tue, 16 Sep 2025 00:12:39 -0700 (PDT)
+        bh=LFY1oSLmHHQiQrxI8RO6TnJksMN9I2db5slzBE/pQPA=;
+        b=FK36lLJz2WyHpAFX1HvCvT1V1VgHFoh/12zOzZV5Lh1j2UEsmApCBRzelnAZUOt8uj
+         TObJxOL3kg9ksiv7P/kJlzKetdJKO4bRZClufZ8ZN4zplLHNGdyYeJ9Sx0IEbhzHczUh
+         RkEnmVN2JmJUc1ldR31z9+7lU7bDmebui/LUW71Fq2keln0P8Vu/EypgNQGjXYLEnW9b
+         Xn8QPUYMgjxEoxesrzwEJL/ELRrmaQz0C+cKtoFawoPQiIkVQVcsDfp7P6kL34c2ckF5
+         abWUElAwVq1/EgpjoOKEWI3z0C3d72Emwb2G8OR0KhV29arSbTXDQDtUQ9QNYAklQg4X
+         YJxA==
+X-Gm-Message-State: AOJu0YxJZ/iTb4RW61FUGT6Cg8aUyRUse4LoqDIS9M5ywZbNBvr6re63
+	JRbQ+sHfpvVBqeArjKjIbaux8fRRt9RGwTe2UztGGr6ki45mmy1w4KSKxAMwTg==
+X-Gm-Gg: ASbGnctSiqgCDeIIXhtcUGDQpLB0R/1wMR5oqjE5wxQ0maI76NKHFXQCbPnl42X0hdv
+	fxwXKrIWRT7lLy+JCO6i3hurqWNv+iehyCDMwPw+rVaHo8xV3hS4PNskOShCTJm9boQ09xNTxmU
+	PmuqrUakWxSJRMriW+bgx9H5HhTcwXd2V8aMCayJenpQNX9MMlubbj2iToj0Rfw4XW2E9XODknq
+	l6gWd3wBOj5ofFoNIhaXijqTwAr5AcsD0XSx68brkjnabTepfe1ZtbANgUfCHch3muXioJffMFb
+	prHlC9GhlxiC+nTvIcji7IQvHlLox1Xs05RDW9s5l5HNNdD3/Zim/7wW01fh8rAA8AA9336+l9H
+	15b5SJkdVmZvE5d/y+v7C
+X-Google-Smtp-Source: AGHT+IE6NJHIgHFlnmtf7kxT+codzuNsL/pM3TtwRM2YuYPlyJjQVjr1rLIlf0Fh1F/+y7jrH/U0bw==
+X-Received: by 2002:a17:907:989:b0:b04:6e94:f317 with SMTP id a640c23a62f3a-b07c35fb4c3mr1239219666b.34.1758007142996;
+        Tue, 16 Sep 2025 00:19:02 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b07c7159e6csm880719366b.33.2025.09.16.00.12.38
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b07c28f190fsm915139766b.39.2025.09.16.00.19.01
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Sep 2025 00:12:38 -0700 (PDT)
+        Tue, 16 Sep 2025 00:19:02 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Kirkstone pull request Sep 16th
-Date: Tue, 16 Sep 2025 09:12:38 +0200
-Message-ID: <20250916071238.2263667-1-skandigraun@gmail.com>
+Subject: Walnascar pull request Sep 16th
+Date: Tue, 16 Sep 2025 09:19:00 +0200
+Message-ID: <20250916071900.2264263-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 07:12:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119418
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 07:19:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119419
 
-Please find below a summary of updates for the Kirkstone branch.
+Please find below a summary of updates for the Walnascar branch.
 The changes were tested with a full world build on x86, x86-64, arm and aarch platforms.
 
-The following changes since commit 06fc0278f10d630838d703dde707bbf0e2999873:
+The following changes since commit dca497d728792e3cb655c78455c2d649af312ce8:
 
-  poco: Fix ptests (2025-07-13 14:41:35 -0400)
+  ][PATCH] ufs-utils: fix crash for ufs-utils list_bsg (2025-07-27 14:35:10 -0400)
 
 are available in the Git repository at:
 
-  git://git.openembedded.org/meta-openembedded-contrib stable/kirkstone-nut
+  git://git.openembedded.org/meta-openembedded-contrib stable/walnascar-nut
 
-for you to fetch changes up to 5c138125018fef4b240e62b664a809d19f4b26a5:
+for you to fetch changes up to 80ab58cc404959ae2f0e8b2e68935b3bfd8e8cfe:
 
-  readme: update maintainer (2025-09-16 09:04:49 +0200)
+  readme: update maintainer (2025-09-16 08:37:07 +0200)
 
 ----------------------------------------------------------------
-Archana Polampalli (2):
-      apache2: upgrade 2.4.62 -> 2.4.65
-      tcpreplay: fix CVE-2023-43279
+Bo Sun (1):
+      thin-provisioning-tools: fix bindgen build error with clang on octeontx2
 
-Changqing Li (1):
-      luajit: fix several CVEs
+Changqing Li (2):
+      libwnck3: fix build failure for lib32-libwnck3
+      libwnck: fix build failure for lib32-libwnck
 
-Chen Qi (1):
-      tcprelay: fix a minor cross compilation do_configure issue
+Chen Qi (3):
+      protobuf: upgrade from 5.29.4 to 5.29.5
+      python3-protobuf: upgrade from 5.29.4 to 5.29.5
+      libnwck/libnwck3: use time_t to avoid build failure
 
-Guocai He (3):
-      mariadb: File conflicts for multilib
-      unixodbc: fix odbc.pc file generation
-      libnet: backport patch to remove configure time SOCK_PACKET check
+Gijs Peskens (1):
+      php: fix removal of --with-zlib-dir configure option
 
-Gyorgy Sarvari (3):
-      hunspell-dictionaries: fix SRC_URI
-      geary: don't check iso codes xml at build time
+Gyorgy Sarvari (6):
+      metacity: fix compilation on 32-bit systems
+      pgpool2: fix compiling for 32-bit arches
+      libgdata: fix compiling for 32-bit targets
+      libchamplain: don't compile for 32-bit targets
+      ledmon: fix building on 32-bit x86
       readme: update maintainer
 
-Hitendra Prajapati (2):
-      krb5: fix CVE-2025-3576
-      libssh: fix CVE-2025-4877
+Hitendra Prajapati (1):
+      openjpeg: fix for CVE-2025-54874
 
-Jiaying Song (1):
-      python3-aiohttp: fix CVE-2025-53643 and drop CVE-2024-42367 patch
+Jason Schonberg (6):
+      php: upgrade 8.4.6 -> 8.4.8
+      php: upgrade 8.4.8 -> 8.4.10
+      c-ares: backport a patch for a memory leak
+      pgpool2: upgrade 4.5.1 -> 4.5.2
+      pgpool2: upgrade 4.5.2 -> 4.5.3
+      pgpool2: upgrade 4.5.3 -> 4.5.4
 
-Peter Marko (3):
-      python3-protobuf: patch CVE-2025-4565
+Jef Driesen (1):
+      lcov: Add missing RDEPENDS for nativesdk
+
+Jeroen Hofstee (1):
+      php: sort PACKAGECONFIG options
+
+Jiaying Song (7):
+      v4l-utils: Fix QA and build errors related to _TIME_BITS on 32-bit
+      debootstrap: correct the SRC_URI
+      logcheck: correct the SRC_URI
+      passwdqc: correct the SRC_URI
+      libconfig: switch source to GitHub repository
+      yaffs2-utils: correct the SRC_URI
+      softhsm: switch source to GitHub repository
+
+Jinfeng Wang (1):
+      iperf3: Fix CVE-2025-54349
+
+Khem Raj (2):
+      jq: Add tzdata to ptest rdeps
+      gtkwave: Add libtirpc to depends
+
+Koen Kooi (1):
+      libwnck: update to 43.2 and fix build errors
+
+Marc Ferland (2):
+      freerdp3: add bindir to SYSROOT_DIRS
+      libvncserver: fix generated LibVNCServerTargets.cmake
+
+Martin Jansa (1):
+      libiodbc: use gnu17 and ignore incompatible-pointer-types to allow building with gcc-15
+
+Peter Marko (7):
+      corosync: fix upstream version check
+      corosync: upgrade 3.1.6 -> 3.1.9
+      corosync: patch CVE-2025-30472
+      libbpf: patch CVE-2025-29481
+      fontforge: patch CVE-2024-25081 and CVE-2024-25082
       fcgi: patch CVE-2025-23016
-      nginx: patch CVE-2025-53859 in stable
+      nginx: patch CVE-2025-53859
 
-Sana Kazi (2):
-      tcpdump: Fix patch-fuzz issue
-      imagemagick: Fix patch-fuzz for fix-cipher-leak.patch
+Richard Leitner (1):
+      python3-moteus: upgrade 0.3.88 -> 0.3.89
 
-Vijay Anusuri (2):
-      postgresql: upgrade 14.18 -> 14.19
-      openjpeg: Fix CVE-2025-50952
+Robert Yang (1):
+      CVE-2025-53643.patch: Add CVE ID
 
-Vyacheslav Yurkov (1):
-      packagegroup-meta-filesystems: fix build issue
+Wang Mingyu (3):
+      apache2: upgrade 2.4.63 -> 2.4.64
+      libssh: upgrade 0.11.1 -> 0.11.2
+      jq: upgrade 1.8.0 -> 1.8.1
 
-Wang Mingyu (1):
-      unixodbc: Fix install conflict when enable multilib.
+Yi Zhao (1):
+      valkey: upgrade 8.1.1 -> 8.1.3
+
+Yoann Congal (3):
+      python3-evdev: upgrade 1.9.1 -> 1.9.2
+      python3-evdev: add missing uinput header
+      python3-evdev: add ptest
 
 Yogita Urade (2):
-      poppler: fix CVE-2025-50420
-      poppler: fix CVE-2025-52886
+      poppler: upgrade 25.06.0 -> 25.08.0
+      postgresql: upgrade 17.5 -> 17.6
 
-Youngseok Jeong (1):
-      json-schema-validator: Remove absolute path in INSTALL_CMAKE_DIR
+Zhang Peng (1):
+      wxwidgets: fix CVE-2024-58249
 
- README                                             |    4 +-
- meta-filesystems/README                            |    2 +-
- .../packagegroup-meta-filesystems.bb               |    1 +
- meta-gnome/README                                  |    2 +-
- ...-not-check-for-iso-xml-files-during-build.patch |   31 +
- .../recipes-connectivity/geary/geary_40.0.bb       |    5 +-
- meta-initramfs/README                              |    2 +-
- meta-multimedia/README                             |    2 +-
- meta-networking/README                             |    2 +-
- .../tcpdump/tcpdump/CVE-2024-2397.patch            |   25 +-
- ...c-do-not-run-conftest-in-case-of-cross-co.patch |   50 +
- .../tcpreplay/tcpreplay/CVE-2023-43279.patch       |   36 +
- .../recipes-support/tcpreplay/tcpreplay_4.4.4.bb   |    2 +
- meta-oe/README                                     |    2 +-
- .../krb5/krb5/CVE-2025-3576-01.patch               |  257 ++
- .../krb5/krb5/CVE-2025-3576-02.patch               |  188 +
- .../krb5/krb5/CVE-2025-3576-pre.patch              |   58 +
- meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb   |    3 +
- ...01-Remove-support-for-SOCK_PACKET-sockets.patch |  251 ++
- .../recipes-connectivity/libnet/libnet_1.2-rc3.bb  |    1 +
- meta-oe/recipes-dbs/mysql/mariadb.inc              |    7 +-
- ...ure.ac-bypass-autoconf-2.69-version-check.patch |    2 +-
- .../{postgresql_14.18.bb => postgresql_14.19.bb}   |    4 +-
- .../0002-Do-not-use-the-CMAKE_INSTALL_PREFIX.patch |   45 +
- .../json-schema-validator_2.1.0.bb                 |    1 +
- .../luajit/luajit/CVE-2024-25176.patch             |   32 +
- .../luajit/luajit/CVE-2024-25177.patch             |   44 +
- .../luajit/luajit/CVE-2024-25178-0001.patch        |   28 +
- .../luajit/luajit/CVE-2024-25178-0002.patch        |   49 +
- .../luajit/luajit/CVE-2024-25178-0003.patch        |  163 +
- meta-oe/recipes-devtools/luajit/luajit_git.bb      |    5 +
- .../openjpeg/openjpeg/CVE-2025-50952.patch         |   32 +
- .../recipes-graphics/openjpeg/openjpeg_2.4.0.bb    |    1 +
- .../hunspell/hunspell-dictionaries.bb              |    2 +-
- .../imagemagick/files/fix-cipher-leak.patch        |   51 +-
- .../libssh/libssh/CVE-2025-4877.patch              |   57 +
- meta-oe/recipes-support/libssh/libssh_0.8.9.bb     |    1 +
- .../poppler/poppler/CVE-2025-50420.patch           |   38 +
- .../poppler/poppler/CVE-2025-52886-0001.patch      |  318 ++
- .../poppler/poppler/CVE-2025-52886-0002.patch      |  108 +
- .../poppler/poppler/CVE-2025-52886-0003.patch      | 4219 ++++++++++++++++++++
- .../poppler/poppler/CVE-2025-52886-0004.patch      |   58 +
- meta-oe/recipes-support/poppler/poppler_22.04.0.bb |    5 +
- ...e.am-add-CROSS_LAUNCHER-to-run-odbc_confi.patch |   54 +
- meta-oe/recipes-support/unixodbc/unixodbc_2.3.9.bb |   22 +-
- meta-perl/README                                   |    2 +-
- meta-python/README                                 |    2 +-
- .../python/python3-aiohttp/CVE-2024-42367.patch    |   65 -
- .../python/python3-aiohttp/CVE-2025-53643.patch    |  197 +
- .../python/python3-aiohttp_3.8.6.bb                |    2 +-
- .../python/python3-protobuf/CVE-2025-4565.patch    |  377 ++
- .../python/python3-protobuf_3.20.3.bb              |    2 +
- meta-webserver/README                              |    2 +-
- .../{apache2_2.4.62.bb => apache2_2.4.65.bb}       |    2 +-
- .../recipes-httpd/nginx/files/CVE-2025-53859.patch |  131 +
+ README.md                                          |    2 +-
+ meta-filesystems/README.md                         |    2 +-
+ .../recipes-filesystems/yaffs2/yaffs2-utils_git.bb |    2 +-
+ meta-gnome/README.md                               |    2 +-
+ .../libchamplain/libchamplain_0.12.21.bb           |   11 +
+ .../0001-Drop-usage-of-deprecated-GTimeVal.patch   | 1134 ++++++++++++++++++++
+ .../recipes-gnome/libgdata/libgdata_0.18.1.bb      |    2 +
+ ...ssue-caused-by-OE-core-changes-to-startup.patch |   50 +
+ ...t.c-fix-Wincompatible-pointer-types-error.patch |   42 +
+ .../ef0e40d59c32d7ebeb94d242436e3144cefc174a.patch |   40 +
+ .../libwnck/{libwnck3_43.0.bb => libwnck3_43.2.bb} |    4 +-
+ meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb |    2 +
+ ..._sn_startup_sequence_get_last_active_time.patch |  188 ++++
+ .../recipes-gnome/metacity/metacity_3.52.0.bb      |    3 +-
+ meta-initramfs/README.md                           |    2 +-
+ meta-multimedia/README.md                          |    2 +-
+ meta-networking/README.md                          |    2 +-
+ .../corosync/corosync/CVE-2025-30472.patch         |   69 ++
+ .../{corosync_3.1.6.bb => corosync_3.1.9.bb}       |   17 +-
+ .../0001-fix-compiling-on-32-bit-systems.patch     |   83 ++
+ ...d-math.h-to-ensure-isnan-and-isinf-are-de.patch |   40 +
+ .../pgpool2/{pgpool2_4.5.1.bb => pgpool2_4.5.4.bb} |    6 +-
+ .../thin-provisioning-tools_1.1.0.bb               |    5 +-
+ .../iperf3/iperf3/CVE-2025-54349.patch             |   98 ++
+ meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb    |    1 +
+ .../ledmon/ledmon/Correct-get_uint64.patch         |   44 +
+ meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb          |    3 +-
+ ...ure.ac-bypass-autoconf-2.69-version-check.patch |    6 +-
+ .../{postgresql_17.5.bb => postgresql_17.6.bb}     |    4 +-
+ .../debootstrap/debootstrap_1.0.140.bb             |    2 +-
+ .../jq/{jq_1.8.0.bb => jq_1.8.1.bb}                |    8 +-
+ .../php/{php_8.4.6.bb => php_8.4.10.bb}            |   26 +-
+ .../{protobuf_5.29.4.bb => protobuf_5.29.5.bb}     |    2 +-
+ .../recipes-extended/libconfig/libconfig_1.7.3.bb  |    6 +-
+ .../valkey/valkey/init-valkey-server               |    0
+ .../valkey/{valkey_8.1.1.bb => valkey_8.1.3.bb}    |    4 +-
+ .../wxwidgets/wxwidgets/CVE-2024-58249.patch       |  178 +++
+ .../recipes-extended/wxwidgets/wxwidgets_3.2.6.bb  |    1 +
+ .../fontforge/CVE-2024-25081_CVE-2024-25082.patch  |  181 ++++
+ .../fontforge/fontforge_20230101.bb                |    1 +
+ .../recipes-graphics/gtkwave/gtkwave_3.3.121.bb    |    1 +
+ .../libvncserver/libvncserver_0.9.14.bb            |    4 +-
+ .../openjpeg/openjpeg/CVE-2025-54874.patch         |   44 +
+ .../recipes-graphics/openjpeg/openjpeg_2.5.3.bb    |    1 +
+ .../libbpf/files/CVE-2025-29481.patch              |  102 ++
+ meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb      |    1 +
+ ...3-meson.build-fix-arm-_TIME_BITS-64-error.patch |   38 +
+ .../v4l2apps/v4l-utils_1.28.1.bb                   |    5 +-
+ .../recipes-security/passwdqc/passwdqc_2.0.3.bb    |    2 +-
+ meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb  |    5 +-
+ .../c-ares/c-ares/0001-ares_uri-memory-leak.patch  |   21 +
+ meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb    |    1 +
+ meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb  |    1 +
+ meta-oe/recipes-support/lcov/lcov_1.16.bb          |    6 +
+ .../recipes-support/libiodbc/libiodbc_3.52.16.bb   |    6 +
+ .../libssh/{libssh_0.11.1.bb => libssh_0.11.2.bb}  |    4 +-
+ .../{poppler_25.06.0.bb => poppler_25.08.0.bb}     |    2 +-
+ meta-perl/README.md                                |    2 +-
+ .../recipes-extended/logcheck/logcheck_1.4.3.bb    |    2 +-
+ meta-python/README.md                              |    2 +-
+ .../include/ptest-packagelists-meta-python.inc     |    1 +
+ .../python/python3-aiohttp/CVE-2025-53643.patch    |    2 +
+ ...roducibility-option-for-building-ecodes.c.patch |  116 --
+ ...thon3-evdev_1.9.1.bb => python3-evdev_1.9.2.bb} |    9 +-
+ ...3-moteus_0.3.88.bb => python3-moteus_0.3.89.bb} |    2 +-
+ ...otobuf_5.29.4.bb => python3-protobuf_5.29.5.bb} |    2 +-
+ meta-webserver/README.md                           |    2 +-
+ .../{apache2_2.4.63.bb => apache2_2.4.64.bb}       |    2 +-
+ .../recipes-httpd/nginx/files/CVE-2025-53859.patch |  131 +++
  meta-webserver/recipes-httpd/nginx/nginx.inc       |    1 +
  .../recipes-support/fcgi/fcgi/CVE-2025-23016.patch |   40 +
  meta-webserver/recipes-support/fcgi/fcgi_git.bb    |    1 +
- meta-xfce/README                                   |    2 +-
- 59 files changed, 6974 insertions(+), 122 deletions(-)
- create mode 100644 meta-gnome/recipes-connectivity/geary/geary/0001-meson-Do-not-check-for-iso-xml-files-during-build.patch
- create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/0001-configure.ac-do-not-run-conftest-in-case-of-cross-co.patch
- create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2023-43279.patch
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2025-3576-01.patch
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2025-3576-02.patch
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2025-3576-pre.patch
- create mode 100644 meta-oe/recipes-connectivity/libnet/libnet/0001-Remove-support-for-SOCK_PACKET-sockets.patch
- rename meta-oe/recipes-dbs/postgresql/{postgresql_14.18.bb => postgresql_14.19.bb} (71%)
- create mode 100644 meta-oe/recipes-devtools/json-schema-validator/json-schema-validator/0002-Do-not-use-the-CMAKE_INSTALL_PREFIX.patch
- create mode 100644 meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25176.patch
- create mode 100644 meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25177.patch
- create mode 100644 meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25178-0001.patch
- create mode 100644 meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25178-0002.patch
- create mode 100644 meta-oe/recipes-devtools/luajit/luajit/CVE-2024-25178-0003.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2025-50952.patch
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-4877.patch
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-50420.patch
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0001.patch
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0002.patch
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0003.patch
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-52886-0004.patch
- create mode 100644 meta-oe/recipes-support/unixodbc/files/0001-exe-Makefile.am-add-CROSS_LAUNCHER-to-run-odbc_confi.patch
- delete mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-42367.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-53643.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-protobuf/CVE-2025-4565.patch
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.62.bb => apache2_2.4.65.bb} (99%)
+ meta-xfce/README.md                                |    2 +-
+ 73 files changed, 2643 insertions(+), 193 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/libgdata/libgdata/0001-Drop-usage-of-deprecated-GTimeVal.patch
+ create mode 100644 meta-gnome/recipes-gnome/libwnck/files/0001-Fix-build-issue-caused-by-OE-core-changes-to-startup.patch
+ create mode 100644 meta-gnome/recipes-gnome/libwnck/files/0001-tasklist.c-fix-Wincompatible-pointer-types-error.patch
+ create mode 100644 meta-gnome/recipes-gnome/libwnck/files/ef0e40d59c32d7ebeb94d242436e3144cefc174a.patch
+ rename meta-gnome/recipes-gnome/libwnck/{libwnck3_43.0.bb => libwnck3_43.2.bb} (75%)
+ create mode 100644 meta-gnome/recipes-gnome/metacity/metacity/screen_avoid_sn_startup_sequence_get_last_active_time.patch
+ create mode 100644 meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch
+ rename meta-networking/recipes-extended/corosync/{corosync_3.1.6.bb => corosync_3.1.9.bb} (84%)
+ create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/0001-fix-compiling-on-32-bit-systems.patch
+ create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/0001-snprintf-Add-math.h-to-ensure-isnan-and-isinf-are-de.patch
+ rename meta-networking/recipes-support/pgpool2/{pgpool2_4.5.1.bb => pgpool2_4.5.4.bb} (85%)
+ create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch
+ create mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/Correct-get_uint64.patch
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_17.5.bb => postgresql_17.6.bb} (76%)
+ rename meta-oe/recipes-devtools/jq/{jq_1.8.0.bb => jq_1.8.1.bb} (88%)
+ rename meta-oe/recipes-devtools/php/{php_8.4.6.bb => php_8.4.10.bb} (98%)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_5.29.4.bb => protobuf_5.29.5.bb} (99%)
+ mode change 100755 => 100644 meta-oe/recipes-extended/valkey/valkey/init-valkey-server
+ rename meta-oe/recipes-extended/valkey/{valkey_8.1.1.bb => valkey_8.1.3.bb} (96%)
+ create mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/CVE-2024-58249.patch
+ create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2024-25081_CVE-2024-25082.patch
+ create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2025-54874.patch
+ create mode 100644 meta-oe/recipes-kernel/libbpf/files/CVE-2025-29481.patch
+ create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-meson.build-fix-arm-_TIME_BITS-64-error.patch
+ create mode 100644 meta-oe/recipes-support/c-ares/c-ares/0001-ares_uri-memory-leak.patch
+ rename meta-oe/recipes-support/libssh/{libssh_0.11.1.bb => libssh_0.11.2.bb} (94%)
+ rename meta-oe/recipes-support/poppler/{poppler_25.06.0.bb => poppler_25.08.0.bb} (96%)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-evdev/0001-Add-a-reproducibility-option-for-building-ecodes.c.patch
+ rename meta-python/recipes-devtools/python/{python3-evdev_1.9.1.bb => python3-evdev_1.9.2.bb} (62%)
+ rename meta-python/recipes-devtools/python/{python3-moteus_0.3.88.bb => python3-moteus_0.3.89.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-protobuf_5.29.4.bb => python3-protobuf_5.29.5.bb} (95%)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.63.bb => apache2_2.4.64.bb} (99%)
  create mode 100755 meta-webserver/recipes-httpd/nginx/files/CVE-2025-53859.patch
  create mode 100644 meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016.patch
 
