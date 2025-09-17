@@ -1,352 +1,274 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Sana.Kazi@bmwtechworks.in>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27C99CA0EE8
-	for <webhook@archiver.kernel.org>; Wed, 17 Sep 2025 04:39:40 +0000 (UTC)
-Received: from mail-yx1-f49.google.com (mail-yx1-f49.google.com [74.125.224.49])
- by mx.groups.io with SMTP id smtpd.web10.14914.1758083975035571952
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CE2ECAC598
+	for <webhook@archiver.kernel.org>; Wed, 17 Sep 2025 04:45:20 +0000 (UTC)
+Received: from MA0PR01CU009.outbound.protection.outlook.com (MA0PR01CU009.outbound.protection.outlook.com [52.101.227.92])
+ by mx.groups.io with SMTP id smtpd.web11.15055.1758084313935956258
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Sep 2025 21:39:35 -0700
+ Tue, 16 Sep 2025 21:45:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eo6wUOnm;
- spf=pass (domain: gmail.com, ip: 74.125.224.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f49.google.com with SMTP id 956f58d0204a3-62a35c99b9fso1565409d50.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Sep 2025 21:39:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758083974; x=1758688774; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=n4F6XoVzmwmDWricgkmkL/mUf7MsvPuIivSG21hfwJo=;
-        b=eo6wUOnm5dwPAFQcVl8T1W+PvMdJMsEhY6682jHFwNXCen5Bpc3ob4/0g908HdW3E+
-         lo7hhrLPA21aGi/RQrytFAaeZT35ohNc8QtOL1iOf6rlI+bf49P2mOeZwqqoqaNKV3xO
-         UTjNxRNSEWHKcOlibBxFZf1beTengizflN1l1LBtAajFUgGBoJTK35g9ngK/biKVwELL
-         VJtlw2USd7hVytjwFLfA1hn+fVpFfdd/6a1977rAJID/y9xR+c1E9ZqcxA2nWkqD04et
-         A/RJcpnBPPChljKvzasCLme0A93AyxlU9P1ITUvb/uAKfCYw0M/lBaacK8u3Z4uFUlJY
-         968A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758083974; x=1758688774;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=n4F6XoVzmwmDWricgkmkL/mUf7MsvPuIivSG21hfwJo=;
-        b=khw4NI6OZ5ksSOm3Ule67SdAyevzZEzmGEA18T1Chm3/lMqGnwpjSXPToZHJqV1jEr
-         qJmM2jNt0q0eYeSSnEnMEy0XoODeKxJE1pxAlTt+D3DupjLEVSdfUmhcAvTzm4Q4on6t
-         UZ7J+d7c93zeR9knxqvCqiTqeDNwdAbHyuKrBgbdaQIH0j7GxtAqnuPLP01H4BO4CTqm
-         NSbJxNvsqiNRu0tclK1tfpvd74zqiSLUSU7S4pVJ5bsCWC1du61z8EwF2QfUA9n0jxYa
-         vmIM5sjHHAUSjMhuHW3sGnzJ8yYWgl0FuhCekYAdc3rgleTECJU4IJNfFmUORWHrMa8T
-         65Hg==
-X-Gm-Message-State: AOJu0YxKi/DzsLZvlVYFqdU5Z+CiDehbsbrGjlKpWKvVgJe1Jsln32hT
-	qOqqmAVaXwnFcx6wQuIgPvtbcyW8Pp46xzibrVc1Zwinc++HGWmdEqeaE5hhCI0vgxE6j/5LoQS
-	DP3jdsRAmJRHLWlrOD+A1OTwt9H8EMZE=
-X-Gm-Gg: ASbGncuPJ5QUBKRKPkzwRuSuK1mBsYXIUCpSvmEXizDr9fp4Vd4wToI6DL/e9WaK718
-	0OozXzg9gThEWTUmSLYxUSjNb+bokxSF+Np5AMxshhSLWNYrt3dnaE5BhwJVrlHWqAFZJjU6ASc
-	N4TuOtZHpM9tbkp6oI7pIaVqOJXM9WkM4qbaxjhLT0uxLXMBORZ4dqezbNLA/qM0/WKnzymQcuf
-	rCvTAEopEtHCOiQpBX28UEauLjJ45MBmGwxxJoTTGnocA67/HsBmLU203G67nc7wO5lzptrLB8o
-	k6y14D7RQH2wexJc5+4fD5Jh
-X-Google-Smtp-Source: AGHT+IGnmAH20lUh+P0rYuUNIRj6l9YrrMUCwIC0mAaogSgzqudnHnX0gUogQeGZyNHqgalVsmdLYBY0yx8g4V5lKRA=
-X-Received: by 2002:a53:4c02:0:b0:628:2e16:6566 with SMTP id
- 956f58d0204a3-633b03c4624mr596741d50.0.1758083973959; Tue, 16 Sep 2025
- 21:39:33 -0700 (PDT)
+ dkim=pass header.i=@bmwtechworks.in header.s=selector1 header.b=C0L2xq4U;
+ spf=pass (domain: bmwtechworks.in, ip: 52.101.227.92, mailfrom: sana.kazi@bmwtechworks.in)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=InxSq7GZlwElSFqkAmRL8v2gyOoGHWx8E0rIhsklx6uNPZTuc/eNrhoxDRw8nnw7OYqwht7nf8KL2C9Sctbk8Wwzqnaa06K0ds1uMdHHh/LKv+OBJm/sPgbYb+1LRrR6z7ZUPSJbyDdBLbEYBRuABMK+PzUxRK+VcXOu88pTbaO7s6iJyraHyCuNbSARF/JOlfgvzz/E6X92M6aWWzZrWH9bnP/8TJn64rgCmrvggj9swaUFse5J2Td85UnIeRQKjkct9qpAotvYYwIAJb7pu2pMmrME43GIEQixnyZhf3GPKBwQ8h8I4gu/CYrkpWczFhLhok+yd03C+u5vRfaYQw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=iY+YhH2FMarSyEm6gH7ZY/AB/hcwRmUFY/huv3S3ByE=;
+ b=jjr/Kej4+5uSUCoGW8ZkI1NPJ4KgI/EMvAAV59RnDQKvH0Yrjn1zJYi5A9tVimOegzlnoN9B04HYCp8x7w6hjOVYwsVhTjFnyFDUr3Nv7l2WB5gE9rgVT/3eZU+99tsQcHSu5xRWM+JVLW2eVevOR/3SYWerIp7jym3xKb5gpHswyjW94oB3Izz8KmnwvpjeBXz05DmYpy+cAHo55lope0E3rGcQZb34prJZFOl1Bi6Grbv8hPr/p9Nie0ph8Z/q3RCvFgPqq/rY6iDt16fDTAVbGHHB3lTDVCqbGHo2e8aAfFmC+b+PP7rrC7gnpMTyreDP8fHW/yR/+3vzDwQ8Pw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bmwtechworks.in; dmarc=pass action=none
+ header.from=bmwtechworks.in; dkim=pass header.d=bmwtechworks.in; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmwtechworks.in;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=iY+YhH2FMarSyEm6gH7ZY/AB/hcwRmUFY/huv3S3ByE=;
+ b=C0L2xq4UTUE50toEeX6OogUrbaH+fxULDQBosE3EtjylovDf4kmFILd2q/8swxsg0u83cwMtTIcTjB4BtvPRKo7IKDcIRHAtcvJRiCh6TWeuHM27YgJyfBkixRH/+LVkwcOJP3YosptZi5h483RysV4EbNrFBmyEKC23CsQEImD2df4NCnFWPOpYmobwEZUE3x/qV6oONqnM+8FTllEiWA4vl3/D8xnInMKbVYqlCbsPAkq6vBLRFwS0TBYzkMlMKO7qAUYvDUMapEb4lzpQf2AFLhcYWLeSKh1kRLeqoI8rHBBar+oSf8Dh0sDA/LdKvQYt4HgxSAEOYV82epUJTQ==
+Received: from MA5P287MB4602.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:19a::20)
+ by PN3P287MB0306.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:d4::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9137.13; Wed, 17 Sep
+ 2025 04:45:06 +0000
+Received: from MA5P287MB4602.INDP287.PROD.OUTLOOK.COM
+ ([fe80::478b:23ae:5e3b:de95]) by MA5P287MB4602.INDP287.PROD.OUTLOOK.COM
+ ([fe80::478b:23ae:5e3b:de95%5]) with mapi id 15.20.9115.022; Wed, 17 Sep 2025
+ 04:45:06 +0000
+From: Sana Kazi <Sana.Kazi@bmwtechworks.in>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Clarification on License Identifier for Cryptsetup 2.4.3
+Thread-Topic: Clarification on License Identifier for Cryptsetup 2.4.3
+Thread-Index: AQHcJ4yoL0UcODBu+Uq3PKASIMV7xg==
+Date: Wed, 17 Sep 2025 04:45:06 +0000
+Message-ID: 
+ <MA5P287MB4602030E79E84AAEF6BD0442E917A@MA5P287MB4602.INDP287.PROD.OUTLOOK.COM>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bmwtechworks.in;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: MA5P287MB4602:EE_|PN3P287MB0306:EE_
+x-ms-office365-filtering-correlation-id: a11c6fbf-08cc-44ad-2125-08ddf5a4f96e
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|376014|31052699007|39142699007|1800799024|366016|13003099007|8096899003|38070700021;
+x-microsoft-antispam-message-info: 
+ =?iso-8859-1?Q?EkKqBk8BNKxU8kOb5+QDkmS4K/Ua5+0aiEVA8qB30oenGCeSnUIY8pKLeq?=
+ =?iso-8859-1?Q?ZnEP9U23RqXGh2EfRab1oZ20DoFXapEOJOpF563STaP+bhYRv8XD8d9etW?=
+ =?iso-8859-1?Q?Z/V6e9bpPQj6BDBpwQR7hth197PcGbICQkfoAcP/dsrJX3HXMMnYQpVCoK?=
+ =?iso-8859-1?Q?anPSOtOzK8WB+vykAWZdWVTPKrDh0IFvfpUtRirfAXln/R50Uo1HJAEQ6+?=
+ =?iso-8859-1?Q?e70IUk3g91vAP1lXXEqiP5J/3Y8RlEIPSvpNCzScvz/Y9+3HXEhc/v4nOA?=
+ =?iso-8859-1?Q?rIS2+ivalYTR5S+81VFGj6dX2qQh0+324MSg172R4OeQ6TU4Tc14dO5+IV?=
+ =?iso-8859-1?Q?2c9zB4V65xX1WoU4NPqVWJLiHC+bSXIb7b34DRB3UQcSiKFs/bNjLhhErx?=
+ =?iso-8859-1?Q?3n0gzKpD069fjl8HA/PHWuubgqP7bgYewBes+SHG0T7z0BHGv1ihJtnhJY?=
+ =?iso-8859-1?Q?uU9A6VQ8TQWBzQhnQnvF63as2Yrwis6P3u24pRMhJY9JFjzb2PFx7jZga7?=
+ =?iso-8859-1?Q?e0239z83ZmtvHnD60DEEL8bp2o6M9VoheEg7t7V2BRc/SNwsnmFc4CACYo?=
+ =?iso-8859-1?Q?9r6NmK8OoU5i2i0Tmt28fFlJyM/4CNOgp1XfjQq1/rGWlyza81rcRUdsWR?=
+ =?iso-8859-1?Q?RGbEI+Q4Q+1U3VBFuKmYG4fckqlZMPX+nknRE9fXf4fhRWM50Sw/27djjI?=
+ =?iso-8859-1?Q?PHTLTwMPNbEExkeXT3ZbKsII6nOUpvInh2Ex+uG3p1F6ZYO0OkWGbNlKvc?=
+ =?iso-8859-1?Q?ZmK8b7+ePxi9wGf1WvsBE4dDafMmqRNrvWV1GgUsu8g9+AvTTAxSODv7Rj?=
+ =?iso-8859-1?Q?9NvZ9WyYUAkPHd5oFfbZ1nPesj96JpdidHyq/qYDDm/ZLqhTDbBHXD53px?=
+ =?iso-8859-1?Q?j5hJCAcA8iBvXo2zZeiXxP5tCITrAkSHcPdbTJwDVmb78NlnHN80pS486B?=
+ =?iso-8859-1?Q?ICwBQAGDFlgtzNHmwMSO5fXnNUAfoAc36Thprv9/t21KkEOoGSHjhlAfPw?=
+ =?iso-8859-1?Q?sgP/9bTPXMTQh/LNVUsyIBpGg2zWM0ve6tI3WSbYFjm34CoaPYJAmzOLE2?=
+ =?iso-8859-1?Q?h17YMx0Zm+JU1nldgrGMkRsA0jyyURmvTQYXANnx1XB4qIDOW4kBbZi+d6?=
+ =?iso-8859-1?Q?ceP4BX1mm/GyitHr0CxoSW6ssFeBS8Yis45X5w6uWqfEXhaN1Osiy+PLsD?=
+ =?iso-8859-1?Q?15A8lw8spf6LXWT1M+m5kCv60Tg5GyjWHLAhDhRN+XtMOzvpP9PgFfQ4OB?=
+ =?iso-8859-1?Q?UDe9vM8GyYb6Z0+s/gzP6lefyHLs6X0xnIhWmC3zL0k4UEyBr6OIDdAfJA?=
+ =?iso-8859-1?Q?+401oaVoy6rpREwT5/M8jbDUivvHY4x8l01wUcFgkdB+PXac9P263Ru+Hw?=
+ =?iso-8859-1?Q?O6op4oMcYqZTJYq3QlWaEkHktoDpuRFDTf1865Fzf+78zrGtXGDVSgUZGO?=
+ =?iso-8859-1?Q?v/Mr93V5XHOM9Eb9tcs1gNWU4cZqKnrxoKTFCNSrcAFfyepS6perilVTKE?=
+ =?iso-8859-1?Q?Y=3D?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MA5P287MB4602.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(31052699007)(39142699007)(1800799024)(366016)(13003099007)(8096899003)(38070700021);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?iso-8859-1?Q?V2S5W7yJdIaR5QZbRBIvFLR6Y3KAIHwADXNtGX/VTje+Y9aA4i0HHwYlOB?=
+ =?iso-8859-1?Q?g+eDJr1gmPDbW2vSeLequ4tp1X7TS1S4RH2IvurfNi8W2Dx2jjM8PsfGU/?=
+ =?iso-8859-1?Q?2NG7MyQW+XbmWoFwobL+vwXOeW+QpqQRrccqkZihLpLPkg3/Q4WHYKdABB?=
+ =?iso-8859-1?Q?T6ShG1Qd4o3mXBdrQOzmv0X83A3Mjx2jNVHm883lUgXIWi4/pI/DTBFHAK?=
+ =?iso-8859-1?Q?gEuCONy7qulcXRxPPsS/7OslbYe4CrSSUwACcBc3OAxnXv8sJPVrofqLEM?=
+ =?iso-8859-1?Q?A2666YZKcFFrk4ji5cYFE82vZR0sbzMfM9q1RN2HTTWSasaFdx/3OEfVS0?=
+ =?iso-8859-1?Q?aO4xHpexY7bn5gmSslbQwtNKjNMDQ5WjrT7smAPJoSlmez4/WVnmRGpEQX?=
+ =?iso-8859-1?Q?oUNza/NKONBBQUVEYgscNoq7zwOn6l3eRYVvqIj74JY4GN1bXnZYK9+3DU?=
+ =?iso-8859-1?Q?qEqlVtXFUavJxtnCtcDzeb8kADYbHNDBLX5GwQd9/F9gDyzE4g/L3rOMAJ?=
+ =?iso-8859-1?Q?a1aYp3hWD2YE+XkZcLyffYnTDlpgjjSQeRq3kaU7xYM/Tl7Vc9jjxF7kgC?=
+ =?iso-8859-1?Q?yhHxgZROug27NU25jog0zGtKPgc0GlRIMtOMgxnhliHLhurPxkQJNbo6/C?=
+ =?iso-8859-1?Q?WCuIdzd24jU68OAf1qKtQn0eQG8CmMw6aJCHth6EUQgv+FBI8IJ+zSawQJ?=
+ =?iso-8859-1?Q?smD384u6jLhf++jxCQhFSKa2UALoMkt03YtTmLk9q7JbQIiSsqvLKFsgvt?=
+ =?iso-8859-1?Q?85FYynDAa55nA07uvKtIa9ahCzqQN+20j/SmdPrGDS/9XWPxNeIuQzmrjJ?=
+ =?iso-8859-1?Q?w25btCFjx4liYQcZJ3uzmW/JOrXmn12OFRuxVOGOSNKK3+DXSQg0Y+6pdZ?=
+ =?iso-8859-1?Q?J81E213zX8A1N9Y6DhsV6QISSbsZ6RfVfIhJqMEKrhg/Oi4xMrvmFB0sRJ?=
+ =?iso-8859-1?Q?IcHlXAETsayQ6btJCRIybpvkIoVqH+zmHWON/TvD9wFQECjjn9eAxmDHK3?=
+ =?iso-8859-1?Q?K7+LRNzNtmWFGBKMtVW37SaqXU1WHkdSBivNi8zJz9gSIVVgOOHu8dLbur?=
+ =?iso-8859-1?Q?OVEj7MgT1/uQPKlt4O4OD3RcK7kzNZzl9uV/10BXOH/RSDxYUUexmAol5E?=
+ =?iso-8859-1?Q?wQkLSsevSBYWwSEUa/sufr7mu31OEZpoID4TUV+JPSnsB9DpdUJge/8NMk?=
+ =?iso-8859-1?Q?/WsyXtTzebju3EfVWONgRR3pDwk5ma9GbAkUz6zpS15/n+qX7GFl91JcCK?=
+ =?iso-8859-1?Q?cRggtAZC1OVeYwWVhsy9AffCZvQPl1/wQdShCIg+tw5JLDptgq+MI7s5ij?=
+ =?iso-8859-1?Q?8TeHFQnxuKqCYv6MKJ1d8Wa5TIcbZmGPBuQ0ZlSYDdti7+C/eLwkFiJOzg?=
+ =?iso-8859-1?Q?MvRymcW89gBf2Z7Imq/RXJfQHHEf6fo63xn3wLbeC4e69vrgcTL6pKB0A5?=
+ =?iso-8859-1?Q?G2m1VJsNNLX5LquKtA8Y2xEWs/60T2i43UmSxsaAA1o9d3UO9ZfWq7sgC+?=
+ =?iso-8859-1?Q?4hCg0iGFLqj0yDyyLKBDzVqSil4nCorJJ//1Jr++Z8R5PQ3RjTylXeAMC4?=
+ =?iso-8859-1?Q?hXx00aG1ZSfHUcFovR40xDp5Ddd5xIqL0aMXt+wmIje0K9sFqIMACc7f7Q?=
+ =?iso-8859-1?Q?Yzdhc5aBDK1YQCT3/D7mlZEuX+4/wjLJV5?=
+Content-Type: multipart/alternative;
+	boundary="_000_MA5P287MB4602030E79E84AAEF6BD0442E917AMA5P287MB4602INDP_"
 MIME-Version: 1.0
-References: <20250916071900.2264263-1-skandigraun@gmail.com>
-In-Reply-To: <20250916071900.2264263-1-skandigraun@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 16 Sep 2025 21:39:07 -0700
-X-Gm-Features: AS18NWBrIr2u77yTF_VgT6MfbDfvUdb4oKOygz0j0DZBOJJis-tZ2A7Da90fyGU
-Message-ID: <CAMKF1sowDSPUzqtOtrtwY_CQDp3GYSLj=kV=bwayik1bSCUu6A@mail.gmail.com>
-Subject: Re: [oe] Walnascar pull request Sep 16th
-To: skandigraun@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: bmwtechworks.in
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MA5P287MB4602.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: a11c6fbf-08cc-44ad-2125-08ddf5a4f96e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Sep 2025 04:45:06.4431
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 970fa6fd-1031-4cc6-8c56-488f3c61cd05
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: TUKXxvbMPSBNq3tETz0xPBu6l0GncT7C9BSPVdkZjtJJFH5oStleWjw/HcBo6/ETjaXHJaWpyc505bgs1GJntmUVh5ztOojhpR0GV55Oznk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN3P287MB0306
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 04:39:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119475
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 04:45:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119476
 
-Thanks Gyorgy, merged thanks.
+--_000_MA5P287MB4602030E79E84AAEF6BD0442E917AMA5P287MB4602INDP_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 16, 2025 at 12:19=E2=80=AFAM Gyorgy Sarvari via
-lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
-wrote:
+Hi,
+
+While reviewing the recipe for cryptsetup_2.4.3<https://git.openembedded.or=
+g/meta-openembedded/plain/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.=
+3.bb?h=3Dkirkstone>.bb, I noticed that the license field is currently set t=
+o:
+
+```
+LICENSE =3D "GPL-2.0-with-OpenSSL-exception"
+```
+I wanted to confirm that this aligns with the upstream licensing. As per be=
+low reference, OpenSSL linking exception is to be used with GPL 2.0
+Reference: https://github.com/aboutcode-org/scancode-licensedb/blob/569d72e=
+13e7c8d14a44380f91e80c5a2d4091f8f/docs/openssl-exception-gpl-2.0.yml#L7
+
+To ensure SPDX compliance and clarity, the more precise License would be:
+```
+GPL-2.0-only AND OpenSSL-exception
+```
+Is there any plan to update the license declaration in future releases?
+
+Regards,
+Sana Kazi
+
+--_000_MA5P287MB4602030E79E84AAEF6BD0442E917AMA5P287MB4602INDP_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+Hi,</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+<br>
+</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+While reviewing the recipe for <a id=3D"anchor-77a387f2-d9c4-efb8-e744-e5ae=
+78604c5d" href=3D"https://git.openembedded.org/meta-openembedded/plain/meta=
+-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb?h=3Dkirkstone">
+cryptsetup_2.4.3</a>.bb, I noticed that the license field is currently set =
+to:</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+<br>
+</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+```</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+LICENSE =3D &quot;GPL-2.0-with-OpenSSL-exception&quot;</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+```</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+I wanted to confirm that this aligns with the upstream licensing. As per be=
+low reference, OpenSSL linking exception is to be used with GPL 2.0&nbsp;</=
+div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+Reference: <a href=3D"https://github.com/aboutcode-org/scancode-licensedb/b=
+lob/569d72e13e7c8d14a44380f91e80c5a2d4091f8f/docs/openssl-exception-gpl-2.0=
+.yml#L7">
+https://github.com/aboutcode-org/scancode-licensedb/blob/569d72e13e7c8d14a4=
+4380f91e80c5a2d4091f8f/docs/openssl-exception-gpl-2.0.yml#L7</a>&nbsp;</div=
 >
-> Please find below a summary of updates for the Walnascar branch.
-> The changes were tested with a full world build on x86, x86-64, arm and a=
-arch platforms.
->
-> The following changes since commit dca497d728792e3cb655c78455c2d649af312c=
-e8:
->
->   ][PATCH] ufs-utils: fix crash for ufs-utils list_bsg (2025-07-27 14:35:=
-10 -0400)
->
-> are available in the Git repository at:
->
->   git://git.openembedded.org/meta-openembedded-contrib stable/walnascar-n=
-ut
->
-> for you to fetch changes up to 80ab58cc404959ae2f0e8b2e68935b3bfd8e8cfe:
->
->   readme: update maintainer (2025-09-16 08:37:07 +0200)
->
-> ----------------------------------------------------------------
-> Bo Sun (1):
->       thin-provisioning-tools: fix bindgen build error with clang on octe=
-ontx2
->
-> Changqing Li (2):
->       libwnck3: fix build failure for lib32-libwnck3
->       libwnck: fix build failure for lib32-libwnck
->
-> Chen Qi (3):
->       protobuf: upgrade from 5.29.4 to 5.29.5
->       python3-protobuf: upgrade from 5.29.4 to 5.29.5
->       libnwck/libnwck3: use time_t to avoid build failure
->
-> Gijs Peskens (1):
->       php: fix removal of --with-zlib-dir configure option
->
-> Gyorgy Sarvari (6):
->       metacity: fix compilation on 32-bit systems
->       pgpool2: fix compiling for 32-bit arches
->       libgdata: fix compiling for 32-bit targets
->       libchamplain: don't compile for 32-bit targets
->       ledmon: fix building on 32-bit x86
->       readme: update maintainer
->
-> Hitendra Prajapati (1):
->       openjpeg: fix for CVE-2025-54874
->
-> Jason Schonberg (6):
->       php: upgrade 8.4.6 -> 8.4.8
->       php: upgrade 8.4.8 -> 8.4.10
->       c-ares: backport a patch for a memory leak
->       pgpool2: upgrade 4.5.1 -> 4.5.2
->       pgpool2: upgrade 4.5.2 -> 4.5.3
->       pgpool2: upgrade 4.5.3 -> 4.5.4
->
-> Jef Driesen (1):
->       lcov: Add missing RDEPENDS for nativesdk
->
-> Jeroen Hofstee (1):
->       php: sort PACKAGECONFIG options
->
-> Jiaying Song (7):
->       v4l-utils: Fix QA and build errors related to _TIME_BITS on 32-bit
->       debootstrap: correct the SRC_URI
->       logcheck: correct the SRC_URI
->       passwdqc: correct the SRC_URI
->       libconfig: switch source to GitHub repository
->       yaffs2-utils: correct the SRC_URI
->       softhsm: switch source to GitHub repository
->
-> Jinfeng Wang (1):
->       iperf3: Fix CVE-2025-54349
->
-> Khem Raj (2):
->       jq: Add tzdata to ptest rdeps
->       gtkwave: Add libtirpc to depends
->
-> Koen Kooi (1):
->       libwnck: update to 43.2 and fix build errors
->
-> Marc Ferland (2):
->       freerdp3: add bindir to SYSROOT_DIRS
->       libvncserver: fix generated LibVNCServerTargets.cmake
->
-> Martin Jansa (1):
->       libiodbc: use gnu17 and ignore incompatible-pointer-types to allow =
-building with gcc-15
->
-> Peter Marko (7):
->       corosync: fix upstream version check
->       corosync: upgrade 3.1.6 -> 3.1.9
->       corosync: patch CVE-2025-30472
->       libbpf: patch CVE-2025-29481
->       fontforge: patch CVE-2024-25081 and CVE-2024-25082
->       fcgi: patch CVE-2025-23016
->       nginx: patch CVE-2025-53859
->
-> Richard Leitner (1):
->       python3-moteus: upgrade 0.3.88 -> 0.3.89
->
-> Robert Yang (1):
->       CVE-2025-53643.patch: Add CVE ID
->
-> Wang Mingyu (3):
->       apache2: upgrade 2.4.63 -> 2.4.64
->       libssh: upgrade 0.11.1 -> 0.11.2
->       jq: upgrade 1.8.0 -> 1.8.1
->
-> Yi Zhao (1):
->       valkey: upgrade 8.1.1 -> 8.1.3
->
-> Yoann Congal (3):
->       python3-evdev: upgrade 1.9.1 -> 1.9.2
->       python3-evdev: add missing uinput header
->       python3-evdev: add ptest
->
-> Yogita Urade (2):
->       poppler: upgrade 25.06.0 -> 25.08.0
->       postgresql: upgrade 17.5 -> 17.6
->
-> Zhang Peng (1):
->       wxwidgets: fix CVE-2024-58249
->
->  README.md                                          |    2 +-
->  meta-filesystems/README.md                         |    2 +-
->  .../recipes-filesystems/yaffs2/yaffs2-utils_git.bb |    2 +-
->  meta-gnome/README.md                               |    2 +-
->  .../libchamplain/libchamplain_0.12.21.bb           |   11 +
->  .../0001-Drop-usage-of-deprecated-GTimeVal.patch   | 1134 ++++++++++++++=
-++++++
->  .../recipes-gnome/libgdata/libgdata_0.18.1.bb      |    2 +
->  ...ssue-caused-by-OE-core-changes-to-startup.patch |   50 +
->  ...t.c-fix-Wincompatible-pointer-types-error.patch |   42 +
->  .../ef0e40d59c32d7ebeb94d242436e3144cefc174a.patch |   40 +
->  .../libwnck/{libwnck3_43.0.bb =3D> libwnck3_43.2.bb} |    4 +-
->  meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb |    2 +
->  ..._sn_startup_sequence_get_last_active_time.patch |  188 ++++
->  .../recipes-gnome/metacity/metacity_3.52.0.bb      |    3 +-
->  meta-initramfs/README.md                           |    2 +-
->  meta-multimedia/README.md                          |    2 +-
->  meta-networking/README.md                          |    2 +-
->  .../corosync/corosync/CVE-2025-30472.patch         |   69 ++
->  .../{corosync_3.1.6.bb =3D> corosync_3.1.9.bb}       |   17 +-
->  .../0001-fix-compiling-on-32-bit-systems.patch     |   83 ++
->  ...d-math.h-to-ensure-isnan-and-isinf-are-de.patch |   40 +
->  .../pgpool2/{pgpool2_4.5.1.bb =3D> pgpool2_4.5.4.bb} |    6 +-
->  .../thin-provisioning-tools_1.1.0.bb               |    5 +-
->  .../iperf3/iperf3/CVE-2025-54349.patch             |   98 ++
->  meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb    |    1 +
->  .../ledmon/ledmon/Correct-get_uint64.patch         |   44 +
->  meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb          |    3 +-
->  ...ure.ac-bypass-autoconf-2.69-version-check.patch |    6 +-
->  .../{postgresql_17.5.bb =3D> postgresql_17.6.bb}     |    4 +-
->  .../debootstrap/debootstrap_1.0.140.bb             |    2 +-
->  .../jq/{jq_1.8.0.bb =3D> jq_1.8.1.bb}                |    8 +-
->  .../php/{php_8.4.6.bb =3D> php_8.4.10.bb}            |   26 +-
->  .../{protobuf_5.29.4.bb =3D> protobuf_5.29.5.bb}     |    2 +-
->  .../recipes-extended/libconfig/libconfig_1.7.3.bb  |    6 +-
->  .../valkey/valkey/init-valkey-server               |    0
->  .../valkey/{valkey_8.1.1.bb =3D> valkey_8.1.3.bb}    |    4 +-
->  .../wxwidgets/wxwidgets/CVE-2024-58249.patch       |  178 +++
->  .../recipes-extended/wxwidgets/wxwidgets_3.2.6.bb  |    1 +
->  .../fontforge/CVE-2024-25081_CVE-2024-25082.patch  |  181 ++++
->  .../fontforge/fontforge_20230101.bb                |    1 +
->  .../recipes-graphics/gtkwave/gtkwave_3.3.121.bb    |    1 +
->  .../libvncserver/libvncserver_0.9.14.bb            |    4 +-
->  .../openjpeg/openjpeg/CVE-2025-54874.patch         |   44 +
->  .../recipes-graphics/openjpeg/openjpeg_2.5.3.bb    |    1 +
->  .../libbpf/files/CVE-2025-29481.patch              |  102 ++
->  meta-oe/recipes-kernel/libbpf/libbpf_1.5.0.bb      |    1 +
->  ...3-meson.build-fix-arm-_TIME_BITS-64-error.patch |   38 +
->  .../v4l2apps/v4l-utils_1.28.1.bb                   |    5 +-
->  .../recipes-security/passwdqc/passwdqc_2.0.3.bb    |    2 +-
->  meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb  |    5 +-
->  .../c-ares/c-ares/0001-ares_uri-memory-leak.patch  |   21 +
->  meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb    |    1 +
->  meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb  |    1 +
->  meta-oe/recipes-support/lcov/lcov_1.16.bb          |    6 +
->  .../recipes-support/libiodbc/libiodbc_3.52.16.bb   |    6 +
->  .../libssh/{libssh_0.11.1.bb =3D> libssh_0.11.2.bb}  |    4 +-
->  .../{poppler_25.06.0.bb =3D> poppler_25.08.0.bb}     |    2 +-
->  meta-perl/README.md                                |    2 +-
->  .../recipes-extended/logcheck/logcheck_1.4.3.bb    |    2 +-
->  meta-python/README.md                              |    2 +-
->  .../include/ptest-packagelists-meta-python.inc     |    1 +
->  .../python/python3-aiohttp/CVE-2025-53643.patch    |    2 +
->  ...roducibility-option-for-building-ecodes.c.patch |  116 --
->  ...thon3-evdev_1.9.1.bb =3D> python3-evdev_1.9.2.bb} |    9 +-
->  ...3-moteus_0.3.88.bb =3D> python3-moteus_0.3.89.bb} |    2 +-
->  ...otobuf_5.29.4.bb =3D> python3-protobuf_5.29.5.bb} |    2 +-
->  meta-webserver/README.md                           |    2 +-
->  .../{apache2_2.4.63.bb =3D> apache2_2.4.64.bb}       |    2 +-
->  .../recipes-httpd/nginx/files/CVE-2025-53859.patch |  131 +++
->  meta-webserver/recipes-httpd/nginx/nginx.inc       |    1 +
->  .../recipes-support/fcgi/fcgi/CVE-2025-23016.patch |   40 +
->  meta-webserver/recipes-support/fcgi/fcgi_git.bb    |    1 +
->  meta-xfce/README.md                                |    2 +-
->  73 files changed, 2643 insertions(+), 193 deletions(-)
->  create mode 100644 meta-gnome/recipes-gnome/libgdata/libgdata/0001-Drop-=
-usage-of-deprecated-GTimeVal.patch
->  create mode 100644 meta-gnome/recipes-gnome/libwnck/files/0001-Fix-build=
--issue-caused-by-OE-core-changes-to-startup.patch
->  create mode 100644 meta-gnome/recipes-gnome/libwnck/files/0001-tasklist.=
-c-fix-Wincompatible-pointer-types-error.patch
->  create mode 100644 meta-gnome/recipes-gnome/libwnck/files/ef0e40d59c32d7=
-ebeb94d242436e3144cefc174a.patch
->  rename meta-gnome/recipes-gnome/libwnck/{libwnck3_43.0.bb =3D> libwnck3_=
-43.2.bb} (75%)
->  create mode 100644 meta-gnome/recipes-gnome/metacity/metacity/screen_avo=
-id_sn_startup_sequence_get_last_active_time.patch
->  create mode 100644 meta-networking/recipes-extended/corosync/corosync/CV=
-E-2025-30472.patch
->  rename meta-networking/recipes-extended/corosync/{corosync_3.1.6.bb =3D>=
- corosync_3.1.9.bb} (84%)
->  create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/0001-=
-fix-compiling-on-32-bit-systems.patch
->  create mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/0001-=
-snprintf-Add-math.h-to-ensure-isnan-and-isinf-are-de.patch
->  rename meta-networking/recipes-support/pgpool2/{pgpool2_4.5.1.bb =3D> pg=
-pool2_4.5.4.bb} (85%)
->  create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-5434=
-9.patch
->  create mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/Correct-get_uint64.=
-patch
->  rename meta-oe/recipes-dbs/postgresql/{postgresql_17.5.bb =3D> postgresq=
-l_17.6.bb} (76%)
->  rename meta-oe/recipes-devtools/jq/{jq_1.8.0.bb =3D> jq_1.8.1.bb} (88%)
->  rename meta-oe/recipes-devtools/php/{php_8.4.6.bb =3D> php_8.4.10.bb} (9=
-8%)
->  rename meta-oe/recipes-devtools/protobuf/{protobuf_5.29.4.bb =3D> protob=
-uf_5.29.5.bb} (99%)
->  mode change 100755 =3D> 100644 meta-oe/recipes-extended/valkey/valkey/in=
-it-valkey-server
->  rename meta-oe/recipes-extended/valkey/{valkey_8.1.1.bb =3D> valkey_8.1.=
-3.bb} (96%)
->  create mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/CVE-2024=
--58249.patch
->  create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2024=
--25081_CVE-2024-25082.patch
->  create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2025-5=
-4874.patch
->  create mode 100644 meta-oe/recipes-kernel/libbpf/files/CVE-2025-29481.pa=
-tch
->  create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-me=
-son.build-fix-arm-_TIME_BITS-64-error.patch
->  create mode 100644 meta-oe/recipes-support/c-ares/c-ares/0001-ares_uri-m=
-emory-leak.patch
->  rename meta-oe/recipes-support/libssh/{libssh_0.11.1.bb =3D> libssh_0.11=
-.2.bb} (94%)
->  rename meta-oe/recipes-support/poppler/{poppler_25.06.0.bb =3D> poppler_=
-25.08.0.bb} (96%)
->  delete mode 100644 meta-python/recipes-devtools/python/python3-evdev/000=
-1-Add-a-reproducibility-option-for-building-ecodes.c.patch
->  rename meta-python/recipes-devtools/python/{python3-evdev_1.9.1.bb =3D> =
-python3-evdev_1.9.2.bb} (62%)
->  rename meta-python/recipes-devtools/python/{python3-moteus_0.3.88.bb =3D=
-> python3-moteus_0.3.89.bb} (82%)
->  rename meta-python/recipes-devtools/python/{python3-protobuf_5.29.4.bb =
-=3D> python3-protobuf_5.29.5.bb} (95%)
->  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.63.bb =3D> apac=
-he2_2.4.64.bb} (99%)
->  create mode 100755 meta-webserver/recipes-httpd/nginx/files/CVE-2025-538=
-59.patch
->  create mode 100644 meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-230=
-16.patch
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119419): https://lists.openembedded.org/g/openembedde=
-d-devel/message/119419
-> Mute This Topic: https://lists.openembedded.org/mt/115269320/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+<br>
+</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+To ensure SPDX compliance and clarity, the more precise License would be:</=
+div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+```</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+GPL-2.0-only AND OpenSSL-exception</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+```</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+Is there any plan to update the license declaration in future releases?</di=
+v>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+<br>
+</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+Regards,</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+Sana Kazi</div>
+</body>
+</html>
+
+--_000_MA5P287MB4602030E79E84AAEF6BD0442E917AMA5P287MB4602INDP_--
 
