@@ -1,198 +1,89 @@
-Return-Path: <Jiaying.Song.CN@windriver.com>
+Return-Path: <sebastien.lefevre@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B4D3CAC598
-	for <webhook@archiver.kernel.org>; Wed, 17 Sep 2025 10:15:22 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.19176.1758104114282357850
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5EADCAC59A
+	for <webhook@archiver.kernel.org>; Wed, 17 Sep 2025 12:43:42 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.web10.21703.1758113020146566613
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Sep 2025 03:15:14 -0700
+ Wed, 17 Sep 2025 05:43:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=VBArX87I;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1355d6a474=jiaying.song.cn@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58H7SJJW4018170
-	for <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 10:15:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=so2W5pAs5t7pCxwMOeD3
-	svpy0uWvGHUQtr2IgsW44CQ=; b=VBArX87IQtkMcFf2skI4G4DwZdq1bkW7TtWL
-	PM6ebwZnMrtyZTYthMENhTYDlFbcRQbwygSMtt1Ug66PjXJKOyX0/DnTsLRZ6j9n
-	zprOS+2aNIqNMLw0kpj7HnA/E7KORcPWYogzD/UbCWuGGS8iUhnBD36a9sPUFo6+
-	q081otSwz8E3KRffZh+fP6yOy8wy4Dp4D+AJUvnfMzLDk+BWXRrApBDOngix8IXJ
-	gaP7MPc7X4TxFk7JHLrZx1ORlPVOd+TXpfubHz5bHHFYH82VbuQhMNZqTghRa9NU
-	EO2GK10ShFJQTd34Y9QILqI/l400Wg6OaqTITURXrLH9k90m8A==
-Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 497fwsrg53-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 10:15:13 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.59; Wed, 17 Sep 2025 03:15:11 -0700
-Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.59 via Frontend Transport; Wed, 17 Sep 2025 03:15:11 -0700
-From: <jiaying.song.cn@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] webkitgtk3: fix build failure with DEBUG_BUILD enabled
-Date: Wed, 17 Sep 2025 18:15:10 +0800
-Message-ID: <20250917101510.3147855-1-jiaying.song.cn@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@smile.fr header.s=google header.b=myXw2/PV;
+ spf=pass (domain: smile.fr, ip: 209.85.221.41, mailfrom: sebastien.lefevre@smile.fr)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-3e9c5faa858so3857963f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 05:43:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1758113018; x=1758717818; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=B5BFPG1On15BiZKPBNeqIcYhL43xfl5gynhdxYICBvM=;
+        b=myXw2/PVACIhyaU9sbbVOwbQXcrD0o6TX5BSICLjKDxPOe0r67pwJneJU4AVQFKHXE
+         GaCy8lH/tDe3lqGWfPOoOJufzjTjvGpr7zuUjaIYmG31yYrBxE7Td1UuUywF3EHEN/gZ
+         FRzDnQvo54vQnJgSmdEgSmnjtm6p7lmlYROBU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758113018; x=1758717818;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=B5BFPG1On15BiZKPBNeqIcYhL43xfl5gynhdxYICBvM=;
+        b=ci4PaxQAVXINdJPN1dCGwrEIzb+glVVqWvc3revTTvwKo9jUddbVp3zOVCqKl9sWeF
+         uSgz60DVUa0Ohh/Xj6JuPN0h4vVacZFjwdMUx+GUc5pAZE2sf8TReXL8i7AH1ldMpcRa
+         vxp2wKpfw9JNXeD+B6AkXmRr1F4VkUbJstr0/HjZVQupl4UI/cBKZ5AfBEyw5FF2a9FF
+         mMmk1HHNRYMR4rEY+dN+6PWa5rh4srV0ECyW7ytZhBjobq9Z93yzoCTt6kNATJ1EdGGg
+         onw3+SA3ym4Rcm0wYg320wfi69UExPUUEA9nfzHc5rfZVvftc0j2Ksy/8ggl9O5JnD/c
+         moLQ==
+X-Gm-Message-State: AOJu0YxO42ZMRgFf+S9H8aUgeAkOL6tx1UVimCWbfKKqrG3e12K5fwAp
+	VsZVLen6EJp2voxDwTVKtP/1QhjT+wlHHSpdEJEhSHaSBpOVHVY3JRLrRcLyX2DbkjZIRLrv4qN
+	4d9F0
+X-Gm-Gg: ASbGnct6AKGUwUFq5XZWGfLXxIYO2ZbzWWjQ3ItKgysqJH8pKA0scPE6X6M1hFQ8bqY
+	TXvapW+5lioA5bG9iUCN4CbXiLQgbz2TO2oEXPU83eaNgv7lj+bGiHtZ5+Is+2LlxYVT7C3k7uj
+	GFBMGLxLFq/oURl0+mab4HYuTVIPqjp35mdlwt2KRpX9bnII3ysvOCXv1ODYhI9UWOJ6l/QrbN4
+	2J0uF4/iINEM+Mz8A+EWpdioBu5H5E9UOR1I4/OiDlQAGVHf+AaOXbdfZEeUqRWt1BREGmCeFtG
+	YrVDZb4jy5KQhKe5j32fQaAmJB41leH1UKnBLfultLd3fuH8MIhGN5UjsHe3ss1sNgJrtakW49O
+	XabQ+t5Pq22/71uE8/Bdlh6aLCklLitYiT9Qh8NP55Lk6ckrTrYX6ktqPK1+ufwFLLnnKLvIAFW
+	OxJdhok30HaRSKWs9TKixIJR+u/0skw5agUA==
+X-Google-Smtp-Source: AGHT+IH7KniVCX62nijXrzIJM2jFG6s0qJb293BBWsrl6fD/zXJDdGUzcmqWBiFiLXj3tyd7pgz3Ig==
+X-Received: by 2002:a5d:588e:0:b0:3ec:7ff4:23c5 with SMTP id ffacd0b85a97d-3ecdf9ca2aamr2182973f8f.26.1758113018372;
+        Wed, 17 Sep 2025 05:43:38 -0700 (PDT)
+Received: from FRSMI24-ARGO.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3ea9abd7234sm13138453f8f.59.2025.09.17.05.43.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 17 Sep 2025 05:43:38 -0700 (PDT)
+From: Sebastien LEFEVRE <sebastien.lefevre@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Sebastien LEFEVRE <sebastien.lefevre@smile.fr>
+Subject: [meta-oe][PATCH] utf8proc: Fixes the recipe when built in offline mode
+Date: Wed, 17 Sep 2025 14:43:22 +0200
+Message-ID: <20250917124322.347422-1-sebastien.lefevre@smile.fr>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: vkrCh2BZdNV95sKCdFqCH4rDKCMHFE8Z
-X-Proofpoint-ORIG-GUID: vkrCh2BZdNV95sKCdFqCH4rDKCMHFE8Z
-X-Authority-Analysis: v=2.4 cv=C5zpyRP+ c=1 sm=1 tr=0 ts=68ca8a31 cx=c_pps
- a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
- a=yJojWOMRYYMA:10 a=Q1sTgoEvAAAA:8 a=NEAV23lmAAAA:8 a=LXCGm8LIAAAA:8
- a=t7CeM3EgAAAA:8 a=kDLC1LXfmXpB2qwqggAA:9 a=FkGh3qDytyf094M0uOEt:22
- a=NxI9r9ql2kHpUT0AVVEO:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTE3MDA5OSBTYWx0ZWRfX5quxGxzqTncO
- tmhRD5KKBZHj+9Xiaf25eORTh3MxeHLY50HghlhIGGeNviuRZQx9oYCMSst8sIletSSWOvDK/+s
- 1UAJpKwx032uN0fQvuUcvMto4967cvs13wiUZYfhpLXQK4y3gXEsK84rTNejm980gDC5oAg1piX
- EwlAwelBnpXcf9BNVVnwvf38ZfmmeqqzH2C5LZWjoSh+jNUNJDNS7q8/HVuJ4nlEMueTbtY4yw1
- RrhSrK9S4KrNm8Kg3XwVrvmieWuPJBGl9HOE24FRnqbEeYHKZJgQRforyENKg0bRT3RdGQnRCac
- 8wQdajdSp8+10S+RSy55bC+pq0Ga3gV0wb92b4ir+fJ70JOMa7/6AwH+qXWccQ=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-09-17_01,2025-09-17_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1015 spamscore=0 suspectscore=0 phishscore=0
- adultscore=0 impostorscore=0 bulkscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 10:15:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119480
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 12:43:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119481
 
-From: Jiaying Song <jiaying.song.cn@windriver.com>
+It is necessary to set the revision number to prevent it from being
+fetched from the remote.
+The revision number has been configured relative to release 2.10.0.
 
-It fails to compile webkitgtk when debug build enabled:
-
-| /path_to/tmp/work/core2-64-poky-linux/webkitgtk/2.40.5/webkitgtk-2.40.5/Source/bmalloc/libpas/src/libpas/pas_allocation_result.h:76:1:
-  error: inlining failed in call to 'always_inline' 'pas_allocation_result pas_allocation_result_identity(pas_allocation_result)':
-  function not considered for inlining
-|    76 | pas_allocation_result_identity(pas_allocation_result result)
-|       | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Add a cmake variable WEBKIT_NO_INLINE_HINTS to disable gcc function
-attribute `always_inline` when debug build is enabled.
-
-And adjust indent as well.
-
-Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+Signed-off-by: Sebastien LEFEVRE <sebastien.lefevre@smile.fr>
 ---
- ...able-to-control-macro-__PAS_ALWAYS_I.patch | 74 +++++++++++++++++++
- .../webkitgtk/webkitgtk3_2.48.3.bb            |  2 +
- 2 files changed, 76 insertions(+)
- create mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch
+ meta-oe/recipes-support/utf8proc/utf8proc_2.10.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch
-new file mode 100644
-index 0000000000..b1139b857e
---- /dev/null
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch
-@@ -0,0 +1,74 @@
-+From bbf661310448d430350eb2ad8c5869ace648dcf8 Mon Sep 17 00:00:00 2001
-+From: Kai Kang <kai.kang@windriver.com>
-+Date: Fri, 11 Aug 2023 14:20:48 +0800
-+Subject: [PATCH] Add a variable to control macro
-+ __PAS_ALWAYS_INLINE_BUT_NOT_INLINE
-+ https://bugs.webkit.org/show_bug.cgi?id=260065
-+
-+Reviewed by NOBODY (OOPS!).
-+
-+It fails to compile webkitgtk with option `-Og` of gcc/g++:
-+
-+| In file included from Source/bmalloc/libpas/src/libpas/pas_heap_page_provider.h:30,
-+|                  from Source/bmalloc/libpas/src/libpas/pas_bootstrap_heap_page_provider.h:29,
-+|                  from Source/bmalloc/libpas/src/libpas/pas_large_heap_physical_page_sharing_cache.h:29,
-+|                  from Source/bmalloc/libpas/src/libpas/pas_basic_heap_page_caches.h:29,
-+|                  from Source/bmalloc/libpas/src/libpas/pas_heap_config_utils.h:32,
-+|                  from Source/bmalloc/libpas/src/libpas/bmalloc_heap_config.h:34,
-+|                  from Source/bmalloc/libpas/src/libpas/bmalloc_heap_inlines.h:34,
-+|                  from Source/bmalloc/bmalloc/bmalloc.h:39,
-+|                  from Source/bmalloc/bmalloc/bmalloc.cpp:26:
-+| In function 'pas_allocation_result pas_local_allocator_try_allocate(pas_local_allocator*, size_t, size_t, pas_heap_config, pas_allocator_counts*, pas_allocation_result_filter)',
-+|     inlined from 'pas_allocation_result pas_try_allocate_common_impl_fast(pas_heap_config, pas_allocator_counts*, pas_allocation_result_filter, pas_local_allocator*, size_t, size_t)' at webkitgtk-2.40.2/Source/bmalloc/libpas/src/libpas/pas_try_allocate_common.h:85:46,
-+|     inlined from 'pas_allocation_result bmalloc_try_allocate_with_alignment_impl_impl_fast(pas_local_allocator*, size_t, size_t)' at webkitgtk-2.40.2/Source/bmalloc/libpas/src/libpas/bmalloc_heap_inlines.h:59:1,
-+|     inlined from 'pas_allocation_result pas_try_allocate_intrinsic_impl_casual_case(__pas_heap*, size_t, size_t, pas_intrinsic_heap_support*, pas_heap_config, pas_try_allocate_common_fast, pas_try_allocate_common_slow, pas_intrinsic_heap_designation_mode)' at webkitgtk-2.40.2/Source/bmalloc/libpas/src/libpas/pas_try_allocate_intrinsic.h:167:44,
-+|     inlined from 'pas_allocation_result bmalloc_try_allocate_with_alignment_impl_casual_case(size_t, size_t)' at webkitgtk-2.40.2/Source/bmalloc/libpas/src/libpas/bmalloc_heap_inlines.h:59:1:
-+| webkitgtk-2.40.2/Source/bmalloc/libpas/src/libpas/pas_allocation_result.h:76:1: error: inlining failed in call to 'always_inline' 'pas_allocation_result pas_allocation_result_identity(pas_allocation_result)': function not considered for inlining
-+|    76 | pas_allocation_result_identity(pas_allocation_result result)
-+|       | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Add an variable `WEBKIT_NO_INLINE_HINTS` to control macro
-+__PAS_ALWAYS_INLINE_BUT_NOT_INLINE whether includes function attribute
-+`always_inline`. It could set the variable to make compilation pass when
-+gcc option `-Og` is used.
-+
-+* Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h:
-+* Source/cmake/WebKitCompilerFlags.cmake:
-+
-+Upstream-Status: Submitted [https://github.com/WebKit/WebKit/pull/16601]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
-+---
-+ Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h | 2 +-
-+ Source/cmake/WebKitCompilerFlags.cmake              | 7 +++++++
-+ 2 files changed, 8 insertions(+), 1 deletion(-)
-+
-+diff --git a/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h b/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
-+index 5d5fb38c..a554f700 100644
-+--- a/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
-++++ b/Source/bmalloc/libpas/src/libpas/pas_utils_prefix.h
-+@@ -44,7 +44,7 @@ __PAS_BEGIN_EXTERN_C;
-+ #define __SUSPICIOUS__
-+ #define __BROKEN__
-+ 
-+-#ifdef __OPTIMIZE__
-++#if defined(__OPTIMIZE__) && !defined(WEBKIT_NO_INLINE_HINTS)
-+ #define __PAS_ALWAYS_INLINE_BUT_NOT_INLINE __attribute__((__always_inline__))
-+ #else
-+ #define __PAS_ALWAYS_INLINE_BUT_NOT_INLINE
-+diff --git a/Source/cmake/WebKitCompilerFlags.cmake b/Source/cmake/WebKitCompilerFlags.cmake
-+index f5ec0a55..dfd741e7 100644
-+--- a/Source/cmake/WebKitCompilerFlags.cmake
-++++ b/Source/cmake/WebKitCompilerFlags.cmake
-+@@ -503,3 +503,10 @@ endif ()
-+ 
-+ # FIXME: Enable pre-compiled headers for all ports <https://webkit.org/b/139438>
-+ set(CMAKE_DISABLE_PRECOMPILE_HEADERS ON)
-++
-++# It fails to compile with `gcc -Og`
-++set(WEBKIT_NO_INLINE_HINTS OFF CACHE BOOL "Disable funtion attribute always_inline for WebKit")
-++
-++if (WEBKIT_NO_INLINE_HINTS)
-++    add_definitions(-DWEBKIT_NO_INLINE_HINTS)
-++endif ()
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.3.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.3.bb
-index aa82831b81..b4f7518620 100644
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.3.bb
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.3.bb
-@@ -20,6 +20,7 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
-            file://sys_futex.patch \
-            file://0001-Fix-build-errors-on-RISCV-https-bugs.webkit.org-show.patch \
-            file://fix-ftbfs-riscv64.patch \
-+           file://0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch \
-            "
- SRC_URI[sha256sum] = "d4dc5970f0fc6a529ff7fd67bcbfab2bbb5e91be789b2e9279640b3217a782c3"
+diff --git a/meta-oe/recipes-support/utf8proc/utf8proc_2.10.0.bb b/meta-oe/recipes-support/utf8proc/utf8proc_2.10.0.bb
+index e42d16b8b7..626836bd1c 100644
+--- a/meta-oe/recipes-support/utf8proc/utf8proc_2.10.0.bb
++++ b/meta-oe/recipes-support/utf8proc/utf8proc_2.10.0.bb
+@@ -12,6 +12,7 @@ SRC_URI = "\
+     git://github.com/JuliaStrings/utf8proc;protocol=https;branch=master;tag=v${PV} \
+     file://run-ptest \
+ "
++SRCREV = "a1b99daa2a3393884220264c927a48ba1251a9c6"
  
-@@ -98,6 +99,7 @@ EXTRA_OECMAKE = " \
- 	-DUSE_GTK4=OFF \
- 	${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-DENABLE_INTROSPECTION=ON', '-DENABLE_INTROSPECTION=OFF', d)} \
- 	${@bb.utils.contains('GIDOCGEN_ENABLED', 'True', '-DENABLE_DOCUMENTATION=ON', '-DENABLE_DOCUMENTATION=OFF', d)} \
-+        ${@oe.utils.vartrue('DEBUG_BUILD', '-DWEBKIT_NO_INLINE_HINTS=ON', '-DWEBKIT_NO_INLINE_HINTS=OFFF', d)} \
- 	-DENABLE_MINIBROWSER=ON \
- 	-DCMAKE_EXPORT_COMPILE_COMMANDS=OFF \
- 		"
--- 
-2.34.1
-
+ inherit cmake ptest
+ 
 
