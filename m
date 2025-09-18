@@ -1,84 +1,124 @@
-Return-Path: <festevam@gmail.com>
+Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8525FCAC59A
-	for <webhook@archiver.kernel.org>; Wed, 17 Sep 2025 23:40:57 +0000 (UTC)
-Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com [209.85.208.181])
- by mx.groups.io with SMTP id smtpd.web11.1444.1758152454312453116
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27C53CAC5A8
+	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 01:44:58 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.web10.3792.1758159893967567658
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Sep 2025 16:40:54 -0700
+ Wed, 17 Sep 2025 18:44:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UVoWsyyz;
- spf=pass (domain: gmail.com, ip: 209.85.208.181, mailfrom: festevam@gmail.com)
-Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-35e5eda335dso2454611fa.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 16:40:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758152452; x=1758757252; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=d2NFsM1468Ok2vGmcIKvLA11DTYIHJR+E1oYRTVfCg8=;
-        b=UVoWsyyzWJ9Gbf0nW0QQdzGS1gWy/Ugs2ErUlkuwBsmDmdYwNDm9nZpcqOL3kceLY7
-         aelkGB5sNPaiCWd0usCsEogLavYCjh6yi5SJiewxeacRvilaCKdbNnXcBdHl61ceJ4jw
-         vjKUkwrV8wzs03GyuykcJGz18eId6JSxRh+b8C5N71GWhfG7PwubOAzaJchONPSUFvQs
-         +W04oP8eBV58+4H8+aKQS/vZ042ZkBELRCJDrkvIex0yap0E0QFfYhwngk/2xbjg39Rt
-         dt6drcwHEe3Og+p+SOAkmSffue7nr7+LdDqQdiHzorpmqLRMBxUUBJUxkoa3fXTHIxCy
-         7ZPQ==
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=HzY8d4UU;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58HG25T8019524
+	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 01:44:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=AxyxUcwEX1x
+	rdDxQqGhOB007NGQNl8259WyfkZut8rQ=; b=HzY8d4UUgZpZsN8ycPPrynGnwSZ
+	LR/1X9uxiq9RxW77YDXCFdwCuVkrTBN54Xz1Vx+P1vTF7RikDqB+hkIKCRThQfsU
+	V2ut4D3wex3M4HmQaySnqM5E+k+BSI5gwxdrhRe+dc7RZr2rB9Icz/SFa7sAa/MG
+	2xKWJdVUQRFjUhN5MyWb/b9BMWvZJ/N5ATmag2B2/HE3I847UsHEyN2HDust/zQI
+	GUBoKOtnJIK7QfeiNlgRwUVR3FV+jOo5or6qzEapstudEPZInAFXqdle/9xv2Xn1
+	U7Vcltz0w7UYO2E/FkPcHr43Z0TbcYI9+oQoXmlZ2E1C9c3EgqXQUcTyWIA==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 497fy1vk40-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 01:44:53 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-78e5b6f1296so12686826d6.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 18:44:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758152452; x=1758757252;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1758159892; x=1758764692;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=d2NFsM1468Ok2vGmcIKvLA11DTYIHJR+E1oYRTVfCg8=;
-        b=S06MYWx7wj9PY0fId5CpXPTQqBWkWVr48OnHRaVYgPGLNaKfYqF3rr2c1UP/60Gj/k
-         lFl1cMA0cH7LwzyyzePOmVGtBuasEVolRaRi1xBauky0fP/f4+iCWnr8SVjHhYxW9SCZ
-         itRmF7QQino7AKd+KBRE80OsOfgg0kn4hPohbVebOwFnOZ2/r2oQu64l9Lp3Q6Xd6ABm
-         cywtnkVDulM/r6PB5CDIjfgdNwJIFrXHofU7kbO1BcbsxemSWCpQnX4yOYZ45Kofuoi3
-         XCNKTqCcUQqh+8NP1ze+yWtmxgO0zUFN9ku4wHFUd8uxGoqOVxtotBxjwWYAbWvxGdZ3
-         eHtg==
-X-Forwarded-Encrypted: i=1; AJvYcCU2dd0eqMnnLwSv1rAu1CF9ETQy0vV+5S6tYVD9Ry+iqL1gFjTBMzCiQSEXomN553LcJWWURgltAMDyOGrvJ5CQfuM=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyIdXeR/160uHCfKUIznD+7PWvb/wVTKjE0B9ay+4KyyY7gnE6V
-	RlS82QY18IyHR8MjKY88GeNzOOQVT8r/EfGyiorwo/9VGvIJbzCbJ9Cyl0nwYrr0dNPEPZxIVQQ
-	RVVWWMlHhKPxTZlqiKEi2NIzsI5+cIjs=
-X-Gm-Gg: ASbGncs+iOnODNsw56ZFVuv7bY7zKMhdl5xMoW1nLA3bqbOaO286HawEQtG3llmLtML
-	q1LBGxVto6xfq7vnXPDNkyBhowzYm/YDsaBsA+kf1Y8vAsaDd/zvvskCE35D07cN+577hO9YwyY
-	HGDyIJdF+/8I0XvVH5eu1PhmaI7cftouq+z5f1aGGVuQYZBACP8i1lh0AmJDxVX6mX1YGQOc/u0
-	BGB+NURf8iiHtfepGxiFaSc2WTF7M/jV4wNonL0pR8RyWNxIAC7s6Hd5G0joqaFrpxZ
-X-Google-Smtp-Source: AGHT+IEjSsKSJDVADaZv4k6gRZl0JQjShBjc2PsgJddQja4FwWfzELuBGyEqeQrZz8ZHCtOPAbhryczZzEYho7jpkNQ=
-X-Received: by 2002:a2e:a545:0:b0:336:8809:676b with SMTP id
- 38308e7fff4ca-35f5fe9d7ebmr10872731fa.4.1758152452026; Wed, 17 Sep 2025
- 16:40:52 -0700 (PDT)
+        bh=AxyxUcwEX1xrdDxQqGhOB007NGQNl8259WyfkZut8rQ=;
+        b=I3V3M0C1f/g5KxgQ/ZnGNP9URfxRc4vLmt2n6nj5KBLqW6eWIgRedVpvO1rQuyMO/0
+         o83i6ZiL+H+KjeF21Iqeas+CjIECstTRGR0bC+5MNlqw/oz/U5HdxYocD3AnCnA+SRW4
+         XR6zgPgy6R+kNulCo1BRdU0HmzNF0sxXZL9kMRPFqP3GegvTaGUJ1mtYDJ8f9SiH4XX1
+         WspNgj7NMynbxaq//UXXMkB6t73eFDIM3JGGeEprcc1oIrMGPvwUNnICe7G6jDqyQh9E
+         7DttjGVzANraY5FdxGIeoDoLekPBtXsEMSllX7gQtVti7RFVERqNVVsmPbDTjNwx8Ls0
+         KFTQ==
+X-Gm-Message-State: AOJu0Ywy5kRVlBqbLLGPT2jyY5W7k4QZPh9Fp9vRuxE/Tm3xHCYw68S2
+	yelpO5SOnf4NJljPxz95fcTmwPlhmOvlC0EN+fkEetYkXx0p4KIT1G87xsOmStmF7tJ/KeXv/Fu
+	VCI/2Qo4wcyt05kw8E2Cu5CQIn7Fm75UeB7Ja1AiDNe26imS81Zm7IpkNqWhf+Ta/c8UyUu0vz3
+	KGOZClt6XdgIXs5M+C
+X-Gm-Gg: ASbGncvUiMaD+Ta8tJZbk8ys0FloZHvshuH05ALmjsjjxMM+gbv+6ty/dMrgZf2/U5A
+	5rUx0UdRz8835E7+/nUlnc9lKf1KTtmYkm3ykYe6MVG7Bixv1zEEfH5gIzaZaEzHcJLa/JGnItI
+	yGp10juTak2SkJUCEdmy36nDpA61AsahjFU70U8kxsGbctSSPqmsxTlcUiYfbRbzsHy92ztsR/a
+	IHPCv3aJL/TQOKQ5fRsC7+tVwRrZzhWAj5GT2CJqVGtioOpLAOoAiJfdBVnWRHTizr3gB78TTqe
+	0/aVl848riJssu3jueyxRWnVf7FPJw1PIR71In8SxOPTw8OtC8z3z8dXM6IZbYIyEfXjoyxiDvZ
+	CQXmW1uyRKJ5LXvHGATFITCzjuN2SOKVdJ3RsUY+LYASgxmY0wwdh
+X-Received: by 2002:a05:6214:2683:b0:78d:b474:8e3d with SMTP id 6a1803df08f44-78eccef2413mr54331866d6.16.1758159891906;
+        Wed, 17 Sep 2025 18:44:51 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF6FcZejvLizjesPJMNQQjUDHDmpzGjdRnV7AzwMpVtIh5i0+I7uJY+DcFZSpY9Kp6fAfomHA==
+X-Received: by 2002:a05:6214:2683:b0:78d:b474:8e3d with SMTP id 6a1803df08f44-78eccef2413mr54331666d6.16.1758159891339;
+        Wed, 17 Sep 2025 18:44:51 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a0c3-3a00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a0c3:3a00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-361aa577704sm2283341fa.70.2025.09.17.18.44.47
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 17 Sep 2025 18:44:49 -0700 (PDT)
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH v2 3/6] opencl-cts: depend on virtual/libopencl1 instead of opencl-icd-loader
+Date: Thu, 18 Sep 2025 04:44:39 +0300
+Message-ID: <20250918014442.1436475-3-dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20250918014442.1436475-1-dmitry.baryshkov@oss.qualcomm.com>
+References: <20250918014442.1436475-1-dmitry.baryshkov@oss.qualcomm.com>
 MIME-Version: 1.0
-References: <CAOMZO5CSQZG5=+urHZb9yPK5cV8S=c1EmqecPNQgPjA5qWNwpw@mail.gmail.com>
- <CAMKF1sp6CDY46z+FsgMyZ5feuike_pJeR9S8zLo8+ESBXfcLZw@mail.gmail.com>
-In-Reply-To: <CAMKF1sp6CDY46z+FsgMyZ5feuike_pJeR9S8zLo8+ESBXfcLZw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 17 Sep 2025 20:40:40 -0300
-X-Gm-Features: AS18NWA1j8BW8rCBlRpheiZ5QVNr_y2uFMwsT2XzKuisotiFfO9vpyV54b_T_Lw
-Message-ID: <CAOMZO5ASQmTjr8Om3ZTaN5Q2VLaC9ymxEAAdrATOtHN3n9JsWw@mail.gmail.com>
-Subject: Re: crucible: Recipe update with go module fecher
-To: Khem Raj <raj.khem@gmail.com>
-Cc: christian.lindeberg@axis.com, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: kr1jhA7jqHrHa6JYmPp-5iMPrWu37WO2
+X-Proofpoint-ORIG-GUID: kr1jhA7jqHrHa6JYmPp-5iMPrWu37WO2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTE2MDIwMiBTYWx0ZWRfX+trgfAjSrhID
+ Yum9Nqnlp8H52a60j3aDhxJ5nUceLzMsHczMOKty1W0q1rNdVzhh2b5siet+qBbhKzPsCj1UamP
+ D8OuQ3IxLemCD13fT9oUXldB/mEXyPTelle7prGoX0DgVG7K9ESBQ5mmFLRNo2LcECOvJW+3O6p
+ NVKSZ/vvrOxPxviR5klHUZHNvC3Bx8ORsRLEHG5NAFqLOe7cgrGCMgZbpavwxsLZyRDV2HzhcYa
+ dvU9ZXGo3c+cwhfxnL+Np7Bsk7c3irHFemiyQdcmI635n/rnXSLSE8GUgl7tGbLHHzV0UwZNWu9
+ Aux1baVNFZoBqYLTokjnZsnl/LVk7eFhkEHbywGZL/IR2l16lqaXR9h32k7+Zy0jfBqSwCr++Mt
+ W1ymyUUx
+X-Authority-Analysis: v=2.4 cv=cf7SrmDM c=1 sm=1 tr=0 ts=68cb6415 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=xqWC_Br6kY4A:10 a=yJojWOMRYYMA:10
+ a=EUspDBNiAAAA:8 a=_kBkQeCUpgm54xzEBvIA:9 a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-17_01,2025-09-17_02,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 clxscore=1015 adultscore=0 bulkscore=0 priorityscore=1501
+ spamscore=0 phishscore=0 impostorscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2507300000 definitions=main-2509160202
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 23:40:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119490
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 01:44:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119493
 
-Hi Khem,
+Make OpenCL CTS package depend on the OpenCL virtual package rather than
+the exact implementation.
 
-On Wed, Sep 17, 2025 at 3:51=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
-:
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+---
+ meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> I am not sure devtool support for go mod fetcher is there and working.
-> You can do
+diff --git a/meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb b/meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb
+index 9c6a55691fe2..b0f6575e717c 100644
+--- a/meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb
++++ b/meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+ inherit pkgconfig cmake
+ 
+-DEPENDS += "opencl-headers opencl-icd-loader"
++DEPENDS += "opencl-headers virtual/libopencl1"
+ RDEPENDS:${PN} += "python3-core python3-io"
+ 
+ 
+-- 
+2.47.3
 
-Yes, devtool does not support updating via go mod fetcher, but
-recipetool did the trick.
-
-I have submitted the update; thank you.
 
