@@ -1,102 +1,89 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1C3CCAC59A
-	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 10:27:02 +0000 (UTC)
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web10.10461.1758191214493942709
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE78ECAC59A
+	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 10:39:42 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web10.10664.1758191978414430633
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Sep 2025 03:26:54 -0700
+ Thu, 18 Sep 2025 03:39:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ic/u6C5o;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: zboszor@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-329e1c8e079so685095a91.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 03:26:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ClhN4Uoh;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b04770a25f2so126017466b.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 03:39:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758191213; x=1758796013; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YetxR6FPul53Tq51hRHMzkeJOUr4I0//WRTs5Txpgr8=;
-        b=ic/u6C5o1qODtp5dL0oSbS4nXOD2HfcS8fFyn9N4rRMbr/bOy3xaRBABmo7CUl6p97
-         pABKpY7nacC5UIjBFdYIbPLCzQDE9fGUFw+fym10pnASDgiijYR9NjNG5qhpyDeVNPJC
-         M/XGMTSSr/LDnHLMepVZjQZ+EwQoQFuPeZKMNmPa5LQirf1ZBEtlUQ0g+XWiT5db7tdT
-         YffOWvbjuJVrNo3tD70K6LaDSnAyNRqRRvi8VgMlEB1iljmfeg56ONasPvwiao22O63q
-         A85RRqJeGuCQNFr+R1XLopFCJAp/2IpSeB3uaTA2+1SBHZdWG7bxjhhEA6Jtr1AHjdJV
-         TQEQ==
+        d=gmail.com; s=20230601; t=1758191977; x=1758796777; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=OWT7OVsyRfbowCDGwsqVlMnHOn/M78x+0VssB+GStwM=;
+        b=ClhN4Uoh7cwk7UGoLueLBHhoYVt2YXT98Jiiz/n6XkQoimDXZZwfxfVFNVRQm6/yFv
+         jXFmWrcRZI7yD3VI1XIKmcNHmBiGkRaO0iuWTk3CnUeHF/OjTB11EO9b//iAmruoOOU6
+         DeJGn0vFxUs6asirxgCpjWwYlvZMblaE0EvbKefeVnrDKBASnBz75KG0/iJQkZ+W/Ly7
+         9lJbXho+3rDKY8GD5c48v9w6kQUfdP4dUDrTQL58SZjR5PTdZ/tLEQIVv8B0vd3UnXGo
+         tVM+sEWq3xLWtu761Kit2luIkWjEeyBiRGwGdYKhmV3dtVwmPjt5/6gXs8wuGZ2O562b
+         Hsbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758191213; x=1758796013;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=YetxR6FPul53Tq51hRHMzkeJOUr4I0//WRTs5Txpgr8=;
-        b=Nw5C6W0wDlQZcWRpfteeCqI2rUfsxhK/2pDke/LPjrg3JjRYceRBcNCdYhumYJSUpN
-         EMfC1EShGzBjQ1dIrdUVqVoeTCf7PIApQoX+TKzOEZsOjlBsh+Df8TJND4NfwCys/5lO
-         9tAXuNJigdABnc7NBKGFu0DBZ6wiQF5ffFNBrrtF0zHKaQB3fGMB7ftvzWMVD8MJFUe8
-         xpgMT6lwTTa66KRADx4ZGlbYMomstjaaPGm91P4CMPtdeOuvj0nwhi88kluKiQ/5cEDa
-         kq4obfJbNsG+xOAa4dhiH7E5pjFVEHUp0gn3VF6GMJ2SuZNAk5BO8PRvZkkJmmnfbkMA
-         CeKQ==
-X-Gm-Message-State: AOJu0YzZyRkfa9bMkMduk2Cx7oJeSi1r1Ve58Q5oY8O62wMxi/wkzY1v
-	6iuLUORmv0LtkBA+3dC6E5CoGzRsSUd/BcNussTkWBpu1LqvJRD/5EJ5beKI1g==
-X-Gm-Gg: ASbGnct2MNJYYcAtGn4BRKLkeGbsKdd9m+QchZpi7zy0/2BTZvkQUwwueXkKKGEI32E
-	qtcKxZ0uH0swoo+kjbLG13YFIH1EshFF7pnLgQ+iu84uFEzDFMMJZ69vQcSoEEVL/ojPojfHS1N
-	/S0RJJizIOvzuv7osyenTdG48tKrZX00KzRI+gH5gv4rRv2FGDiAz2XlBDMRsoPv6Apryjjx1uG
-	9uTXXYtB6QBgCP7aBVFy9obmUTKAKJKZt85AfuSRGVdA2MbvCL6juvpcESQQGDhBwK3kjnNe6g0
-	RSESQ0wAza3miW6DVRMSbSEYFwiJoBf9vHBRTDpylEbqkwVPOczwpQebFxqTk8+h/TAl4igrYFd
-	ZP5DPn/vKNM5gI8Kix9oOhXYVf66V7HXpGfp+AXZItnrTft89+Kk7InFLt/u4DjA=
-X-Google-Smtp-Source: AGHT+IEGpgWhokKWA5/7ti71I+nSX4XNr8BbfWC1/IkF8V8tuMp1S12G5SD/TOtrnk+ixIi0TjLusg==
-X-Received: by 2002:a17:90a:d605:b0:32e:a60d:93e2 with SMTP id 98e67ed59e1d1-32ee3f0091amr6326612a91.11.1758191213491;
-        Thu, 18 Sep 2025 03:26:53 -0700 (PDT)
-Received: from fedora (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-330607b03c3sm2104140a91.18.2025.09.18.03.26.50
+        d=1e100.net; s=20230601; t=1758191977; x=1758796777;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=OWT7OVsyRfbowCDGwsqVlMnHOn/M78x+0VssB+GStwM=;
+        b=t5o6q3c/VENm3RQNtSVSi2bfxoJm/rptU8jTup0Gpb4Z33aRN8qqcP20rmc5KVjBYQ
+         HDSvzi4Kpbz9/vRzYdPnL41r5b9FJVuU/ILl9cJzObTplPh39+Jpfps0ekYO9FPKGsLW
+         uwP1na/dkQ+UaJ0GpcBdGnhkKb+1xVVWjcGw4M0pue5owAF4NihCNNMe0pRKZbemgEde
+         6dYrSQb1bv6zXoIpARocp8tldco+dgQgBhaPx1yNIIcnSpwjqsq4TmXgVu7R0WAUDRTD
+         1wf6CV8uCARC4HqkHujFI2XDSvB/viZZGjMdn9vfr0/qeYoQHU7Aq3Ab9S7JJElKfGo2
+         WrMw==
+X-Gm-Message-State: AOJu0YxsXmZjWwwPJ3W3wJIb9SRiznOuVm7rsl+Hg9GyNfsfJJU85MiR
+	AK0GAxZnUtZmc4Y9vDXoJXwNEpHFxMOxWUmwI1B4MANBHWMfgV8NAq8RC1C9nQ==
+X-Gm-Gg: ASbGncsRcA93mjQj+SKU+KLF4QIknM8CqxqlBlv0ZGeOb/pI1fJT5qU2MCNnPQjBjdK
+	QqFTXrOjgesao/csasNMTp7iaRqJZdVGSGZj4KmIa41pO44gi5iiTbW4w9mAhjQ7MJaFTyW1HpM
+	dMmPIr0rMTUwP+1u93mYdxb+6j36MuwN37BZ0rBdnRW9xvuf50Xo3CQbXzBfLG6Ms4/048BuGNq
+	SnvqnJzCKGvRHvyzNr7NZxyfIgmpcE8nlF3+4rcPG6B20WJoPyF2hj42T1reOlQnDjIJgz6KaLL
+	Ey47nwsOj/uB+u1EEH7b+jjfF0egpGxgK48fNgrAESLgLy4+JDZwsl1+P4fuwdFrOSYOsswux3o
+	akrHOK1rCdy51tZLojUzomRcsmL24x+8zaK6lzBU=
+X-Google-Smtp-Source: AGHT+IF6YKH1yr1VL3LVm8VOPP6ZCPV+ELS88eNOuQfNilQHFF0jf9gH6zRrHV4Baz+AFeDP/F6hQw==
+X-Received: by 2002:a17:907:94d1:b0:b07:88aa:255b with SMTP id a640c23a62f3a-b1bb4337559mr620199366b.11.1758191976554;
+        Thu, 18 Sep 2025 03:39:36 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b1fd272064esm164716666b.105.2025.09.18.03.39.35
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Sep 2025 03:26:52 -0700 (PDT)
-From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+        Thu, 18 Sep 2025 03:39:36 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-oe][PATCH] gutenprint: 5.3.5
-Date: Thu, 18 Sep 2025 12:26:42 +0200
-Message-ID: <20250918102642.487522-1-zboszor@gmail.com>
+Subject: [meta-oe][PATCH] pm-qa: update git fetch protocol
+Date: Thu, 18 Sep 2025 12:39:35 +0200
+Message-ID: <20250918103935.175911-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 10:27:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119552
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 10:39:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119553
 
-This fixes an installation error:
+Apparently the git repo in the SRC_URI stopped supporting git
+protocol. Switch to https to be able to fetch the source successfully.
 
-| make[5]: Entering directory '.../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/build/src/cups'
-| chmod 700 .../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/image/usr/libexec/cups/backend/backend_gutenprint
-| chmod: cannot access '.../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/image/usr/libexec/cups/backend/backend_gutenprint': No such file or directory
-
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../gutenprint/{gutenprint_5.3.4.bb => gutenprint_5.3.5.bb}     | 2 +-
+ meta-oe/recipes-test/pm-qa/pm-qa_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-printing/gutenprint/{gutenprint_5.3.4.bb => gutenprint_5.3.5.bb} (96%)
 
-diff --git a/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb b/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
-similarity index 96%
-rename from meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
-rename to meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
-index f90a123293..82953b798c 100644
---- a/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
-+++ b/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
-@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- SRC_URI = "https://downloads.sourceforge.net/gimp-print/${BP}.tar.xz \
-            file://0001-cups-fix-a-build-race-condition-around-empty-directo.patch \
-            "
--SRC_URI[sha256sum] = "db44a701d2b8e6a8931c83cec06c91226be266d23e5c189d20a39dd175f2023b"
-+SRC_URI[sha256sum] = "f5a9f47de28530b1ae2069cfbc647a9a641baeeabe809bb0ef2b3ec5b9668d70"
+diff --git a/meta-oe/recipes-test/pm-qa/pm-qa_git.bb b/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
+index d7e9618985..1574bf0ce9 100644
+--- a/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
++++ b/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
+@@ -11,7 +11,7 @@ BRANCH ?= "master"
+ SRCREV = "05710ec5032be4c8edafb4109d4d908d31243906"
  
- inherit autotools gettext pkgconfig
+ SRC_URI = " \
+-    git://git.linaro.org/power/pm-qa.git;protocol=git;branch=${BRANCH} \
++    git://git.linaro.org/power/pm-qa.git;protocol=https;branch=${BRANCH} \
+     file://0001-fix-build-with-gcc-15-Wincompatible-pointer-types-er.patch \
+ "
  
--- 
-2.51.0
-
 
