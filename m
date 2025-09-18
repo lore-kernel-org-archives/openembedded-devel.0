@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5586CAC59A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E15C1CAC5AD
 	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 11:24:02 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web11.11626.1758194635587813066
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+ by mx.groups.io with SMTP id smtpd.web11.11620.1758194633729376783
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Sep 2025 04:23:55 -0700
+ Thu, 18 Sep 2025 04:23:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ixfVNGFA;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b0787fdb137so125660166b.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 04:23:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Iw34LEIk;
+ spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-b07c2908f3eso124678066b.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 04:23:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758194634; x=1758799434; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758194632; x=1758799432; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=kIVvwa9SeJ1MlaK34NUplwbHfyKPHhZV2n/y8FwQ1oE=;
-        b=ixfVNGFA90Myq4k3BBb7z1pM+kjyMZ8NyEpRuUtIj4vzc0a5/jq3NxVKna7f9HMLlK
-         Sww9G6+Rev7vnMM6Fp3Q5O2qQHMDpoOZMRQXexS82CytweR7i5YTAqDMwuogGbVwScWw
-         eBj7xBky1txDxp1FkX+rjw/lqsbByicMHJNY45EDcrlptDWmsXDjTD1luoe0BO9Qp91F
-         jAZ9ThL9UHau8bbjGK0rvXIonRNg6tpRs5Gtdh/EpyHlihCNa0n7yFIzX5lcZ3RSykKx
-         SlcIfBPqD7Vp3h6gixnJst6oFqmaBs62Gt1TCJnMD9LBl6RpIdbdXpv6BYLHA+94dD29
-         pLIw==
+        bh=MGQcU6l29qSLXQB2t91Pe6iQt1+aajZIYgXNpWttNsw=;
+        b=Iw34LEIksyXsf5XOh01va1Z0gHWF917ZGheagDp/k+TYjM5l9UKQeyVL/1DArEcj7v
+         hUq4RTHr2wq4ro7zkUNUcqS7nNH4WDggFQ0Kpr3E2BjAuS4uP3Ft7mF8UJVjO/U2eAb0
+         2rJMLZQfwYaJr6nVn1jyXk3+nOC87uAAboG/7p1ZhA8orSEt0HQQLqvEHZ1NeLd6QWK5
+         H2V+W7BSW5c1VYuSDBIRlJJDP9uhp6lo4XO0AC9q9eu/78ILhdVQkuL1RGj9hh11z9Gl
+         QYRB1sn+Nn9S0MEkm20q13gId16k7sIC5rwkOyklcQ92RBWBCTo3dQQhEO5I03U4gnHn
+         YC5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758194634; x=1758799434;
+        d=1e100.net; s=20230601; t=1758194632; x=1758799432;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=kIVvwa9SeJ1MlaK34NUplwbHfyKPHhZV2n/y8FwQ1oE=;
-        b=b83jgTQi0H6VJMpjPwGSrerRi3wWe6qd0SuGUgqce1/5qRyr4wRtQyW5g6iFAs4BPi
-         P9Ta3jeYEubnNojKBomv1Orn7RNmyotyAfP/DQIG/iBzULECrqbGpdHuzjpVJ2r9NR0i
-         kjlOomA4+i+4WmAsSndc2TqpgPGQmiDA49kNVCCFGTUJnP0PU6J57AI0is+BJuvTv/HQ
-         yMNbVREXwHpqiUFv9EDaDkXB7FlMYRV1Pf4m7TlSfwFMys1KryjTNix/iqTuadXKNN3F
-         81Gw/fB83mWgIM8EZXjPHx3+ZSc2lEekRo6S4NaOCGP8SX0Ywk2ZWKMNGzd0HIV3rPQx
-         UQTA==
-X-Gm-Message-State: AOJu0YwSPb+8H7CPwQQGi74uSJIaK2A3zLmf+yPTn6rMcDMxb9j/zeqa
-	iVxIdLjBpZqWumdHObBLt0UvT2jnlRorCE63GKKMsWaAgrfOUZWAbp93FwfFkg==
-X-Gm-Gg: ASbGnctPbB+ojN66YeUR9gTS1xuldMsmCQ8vzjGdGMfCmMNlzzdJRMxul45ENdYVe4u
-	YNWr7XTcIojwcX2iuZh6QpHmaRwpAOnXAAGKmYKGFMyG+lxlVuDAIQMs5wbRxHPYl2hjoLRY3UF
-	5Uq7ngi7BUx2QW7g9TGO7MYvOnT8r0Q0kYsv5WY+Tx/iNSN9bxElD1tvMyWR1eJZ0zKqxDDbhfG
-	94q1rK09ZcTrlMczRoIGN73cJw54F1yMleYYvDDoJKjKv/n5ijh+Da9NADVUgqH4wpOwlvotke7
-	Cb3ekNcetPTIxaHG+chs5sSuEqeBQbEEnwLqDhhM+ilbdLLKvMPPsbKTxFGHRzUShzmQo8SbAdU
-	LqjoE/w3V3yIl9dtXN2GGRA/BTW41Y9AViHSDsno=
-X-Google-Smtp-Source: AGHT+IFGXbu5o3n2WmRcfP2asJh6UcI6ctgUwInu84ucA/zdJX3JUJ1yLGBw6BwiqPsUvgO+VcNJMw==
-X-Received: by 2002:a17:907:5c1:b0:b0e:8cd4:e2d3 with SMTP id a640c23a62f3a-b1bba0036f1mr532506966b.19.1758194633859;
-        Thu, 18 Sep 2025 04:23:53 -0700 (PDT)
+        bh=MGQcU6l29qSLXQB2t91Pe6iQt1+aajZIYgXNpWttNsw=;
+        b=VNPtx/AWB/KuXeBRGBe20HvslTJJjgKu8oP4ey1oM2aDeUzGBuq0+isCrjH2d2sHbB
+         Pv+8mtM+9wG598tf3gh7pCC3ShQRPp+N6nW9nResdCeaLx169hMsl8krUw9bybWUGjyX
+         CP2qW5AEXIh2WLBBC+jNUWm9qnnJLv8fxi2HHWay2zIMf+Mg9mws5nYA4DsFbev4+JDt
+         dXtN0lm8M/G3UsJ/Jo/Qa1PVvt9smT/GGX4j66XG71+z+IG4Zr6qfQky2RmU4u2MBH1z
+         CoMOAkEZfYFD588x1SlhqvZH48WHed3DOpg4qSF/kruOPLaw3t+nJjI4BxBjIiRnhqTt
+         zXMQ==
+X-Gm-Message-State: AOJu0YwguHmtszu+hSech4y5hQK2Krb3v+eQFUMFs6sEID20O61vmkrD
+	AQCwMM9D/Utvd2c1zy4BXRwHh8lNzkyPpjsW/h7WxQ1dWiyZvHFmktaOi4HVeQ==
+X-Gm-Gg: ASbGnctlrWO0eKVMr2aaPxVjeoN2W8OzTka8YIj1qwbDV0oSR9YUDUEbKrEiqM78hG5
+	99Z6S+TuwLGvAI+YeuHHA56tbWD/tztxUhxkY7UVlt6DzKa2KlzB6MVLLzeZC3RltqcKZj+6bu1
+	ayAsQTdelsAsZSNirSAoPV6b5ApAu8pPZNP1plwb94CvNdZiopm4Qg9ganAdxxPYsRIIivefeNm
+	fgha8sKNFDzuQnQzc18WVUva2IXuDhg4+85FllkOJahi9lDPgsglRt6sSeyhexyF6ia0wycPvbk
+	u1nxtNhyoGrLAJQRJeTH5A90HnLH+GkSF7MriQHBcVJBE5Ep22ptHN7HG3TgX+dVBbYx/DhbcCl
+	kvd7J++6OaTVKkDwf2XFfZq+aeBsTJ3A/+8dI4eg=
+X-Google-Smtp-Source: AGHT+IFmuF7GYBtT6YQfZDcjj2quy+uK08Z0cWsm2WkPhs9YOAPcjn1+hy58vhmwdKhiD8zO0UlXyw==
+X-Received: by 2002:a17:907:d94:b0:b04:6e60:4df1 with SMTP id a640c23a62f3a-b1bbe403937mr565824866b.53.1758194631956;
+        Thu, 18 Sep 2025 04:23:51 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b1fc75ac5e1sm180410366b.43.2025.09.18.04.23.53
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b1fc75ac5e1sm180410366b.43.2025.09.18.04.23.51
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Sep 2025 04:23:53 -0700 (PDT)
+        Thu, 18 Sep 2025 04:23:51 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 08/10] avro-c: upgrade 1.11.2 -> 1.11.3
-Date: Thu, 18 Sep 2025 13:23:42 +0200
-Message-ID: <20250918112347.1331393-8-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 05/10] augeas: Check for __GLIBC__ to use gnu extention for strerror_r
+Date: Thu, 18 Sep 2025 13:23:39 +0200
+Message-ID: <20250918112347.1331393-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250918112347.1331393-1-skandigraun@gmail.com>
 References: <20250918112347.1331393-1-skandigraun@gmail.com>
@@ -67,37 +67,142 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 11:24:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119567
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119564
 
-From: alperak <alperyasinak1@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Changelog:
+Merge .bb and .inc
 
-* This is a minor release, specifically addressing known issues with the 1.11.2 release, but also contains version bumps and doc fixes.
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e1552304bf3cd1abc403dd8cd1b4ed5cd646c64b)
+(cherry picked from commit aca683fb18c3a62874e6687e36fb4c35a25d0615)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-support/avro/{avro-c_1.11.2.bb => avro-c_1.11.3.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/avro/{avro-c_1.11.2.bb => avro-c_1.11.3.bb} (88%)
+ meta-oe/recipes-support/augeas/augeas.inc     | 33 ------------------
+ ...-__GLIBC__-to-check-for-GNU-extentio.patch | 34 +++++++++++++++++++
+ .../recipes-support/augeas/augeas_1.12.0.bb   | 34 ++++++++++++++++++-
+ 3 files changed, 67 insertions(+), 34 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/augeas/augeas.inc
+ create mode 100644 meta-oe/recipes-support/augeas/augeas/0001-src-internal-Use-__GLIBC__-to-check-for-GNU-extentio.patch
 
-diff --git a/meta-oe/recipes-support/avro/avro-c_1.11.2.bb b/meta-oe/recipes-support/avro/avro-c_1.11.3.bb
-similarity index 88%
-rename from meta-oe/recipes-support/avro/avro-c_1.11.2.bb
-rename to meta-oe/recipes-support/avro/avro-c_1.11.3.bb
-index 9b6a52e2e2..14a3cbe462 100644
---- a/meta-oe/recipes-support/avro/avro-c_1.11.2.bb
-+++ b/meta-oe/recipes-support/avro/avro-c_1.11.3.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6d502b41f76179fc84e536236f359cae"
- DEPENDS = "jansson zlib xz"
+diff --git a/meta-oe/recipes-support/augeas/augeas.inc b/meta-oe/recipes-support/augeas/augeas.inc
+deleted file mode 100644
+index d46f3888bd..0000000000
+--- a/meta-oe/recipes-support/augeas/augeas.inc
++++ /dev/null
+@@ -1,33 +0,0 @@
+-SUMMARY = "Augeas configuration API"
+-HOMEPAGE = "http://augeas.net/"
+-BUGTRACKER = "https://fedorahosted.org/augeas/report/1"
+-
+-LICENSE = "LGPL-2.1-or-later"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=bbb461211a33b134d42ed5ee802b37ff"
+-
+-SRC_URI = "http://download.augeas.net/${BP}.tar.gz \
+-           file://sepbuildfix.patch \
+-          "
+-
+-DEPENDS = "readline libxml2"
+-
+-inherit autotools pkgconfig
+-
+-PACKAGES =+ "${PN}-lenses lib${BPN}"
+-
+-FILES:${PN}-lenses = "${datadir}/augeas/lenses"
+-FILES:lib${BPN} = "${libdir}/lib*${SOLIBS}"
+-
+-RDEPENDS:lib${BPN} += "${PN}-lenses"
+-RRECOMMENDS:lib${BPN} += "${PN}"
+-
+-LEAD_SONAME = "libaugeas.so"
+-
+-do_install:append() {
+-    rm -fr ${D}${datadir}/vim
+-}
+-
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
+-PACKAGECONFIG[selinux] = "--with-selinux,--without-selinux,libselinux"
+-
+-EXTRA_AUTORECONF += "-I ${S}/gnulib/m4"
+diff --git a/meta-oe/recipes-support/augeas/augeas/0001-src-internal-Use-__GLIBC__-to-check-for-GNU-extentio.patch b/meta-oe/recipes-support/augeas/augeas/0001-src-internal-Use-__GLIBC__-to-check-for-GNU-extentio.patch
+new file mode 100644
+index 0000000000..9424be2aa6
+--- /dev/null
++++ b/meta-oe/recipes-support/augeas/augeas/0001-src-internal-Use-__GLIBC__-to-check-for-GNU-extentio.patch
+@@ -0,0 +1,34 @@
++From e5ccf769c2dc7283b56a597fffdb5dc1558e3ce8 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 3 Sep 2022 01:23:28 -0700
++Subject: [PATCH] src/internal: Use __GLIBC__ to check for GNU extention
++ implementation
++
++__USE_GNU is defined by _GNU_SOURCE and configure explicitly sets this
++macro and it does have meaning on musl too, where it may have some level
++of GNU compatibility but strerror_r is not one of them. Therefore we
++have to check for libc implementation for this to be sure.
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/internal.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/internal.c b/src/internal.c
++index ef83b71..fb326fa 100644
++--- a/src/internal.c
+++++ b/src/internal.c
++@@ -431,7 +431,7 @@ char *cleanpath(char *path) {
++ 
++ const char *xstrerror(int errnum, char *buf, size_t len) {
++ #ifdef HAVE_STRERROR_R
++-# ifdef __USE_GNU
+++# ifdef __GLIBC__
++     /* Annoying linux specific API contract */
++     return strerror_r(errnum, buf, len);
++ # else
++-- 
++2.37.3
++
+diff --git a/meta-oe/recipes-support/augeas/augeas_1.12.0.bb b/meta-oe/recipes-support/augeas/augeas_1.12.0.bb
+index d32c4691d2..2c6d4cdc88 100644
+--- a/meta-oe/recipes-support/augeas/augeas_1.12.0.bb
++++ b/meta-oe/recipes-support/augeas/augeas_1.12.0.bb
+@@ -1,4 +1,36 @@
+-require augeas.inc
++SUMMARY = "Augeas configuration API"
++HOMEPAGE = "http://augeas.net/"
++BUGTRACKER = "https://fedorahosted.org/augeas/report/1"
  
- BRANCH = "branch-1.11"
--SRCREV = "44d1c4f221ccc4571a4b4b9edb023ed1e89354b7"
-+SRCREV = "35ff8b997738e4d983871902d47bfb67b3250734"
- SRC_URI = "git://github.com/apache/avro;branch=${BRANCH};protocol=https \
-           "
- 
++LICENSE = "LGPL-2.1-or-later"
++LIC_FILES_CHKSUM = "file://COPYING;md5=bbb461211a33b134d42ed5ee802b37ff"
++
++SRC_URI = "http://download.augeas.net/${BP}.tar.gz \
++           file://sepbuildfix.patch \
++           file://0001-src-internal-Use-__GLIBC__-to-check-for-GNU-extentio.patch \
++          "
+ SRC_URI[md5sum] = "74f1c7b8550f4e728486091f6b907175"
+ SRC_URI[sha256sum] = "321942c9cc32185e2e9cb72d0a70eea106635b50269075aca6714e3ec282cb87"
++
++DEPENDS = "readline libxml2"
++
++inherit autotools pkgconfig
++
++PACKAGES =+ "${PN}-lenses lib${BPN}"
++
++FILES:${PN}-lenses = "${datadir}/augeas/lenses"
++FILES:lib${BPN} = "${libdir}/lib*${SOLIBS}"
++
++RDEPENDS:lib${BPN} += "${PN}-lenses"
++RRECOMMENDS:lib${BPN} += "${PN}"
++
++LEAD_SONAME = "libaugeas.so"
++
++do_install:append() {
++    rm -fr ${D}${datadir}/vim
++}
++
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
++PACKAGECONFIG[selinux] = "--with-selinux,--without-selinux,libselinux"
++
++EXTRA_AUTORECONF += "-I ${S}/gnulib/m4"
 
