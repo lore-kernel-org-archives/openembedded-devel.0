@@ -1,129 +1,103 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC33FCAC59A
-	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 08:47:20 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web11.9264.1758185232572632789
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27D35CAC597
+	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 09:53:41 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web10.9927.1758189220050884009
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Sep 2025 01:47:12 -0700
+ Thu, 18 Sep 2025 02:53:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VuHuVSXT;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-45f2b062b86so3543755e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 01:47:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TxLefggK;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-62fa062a1abso1167920a12.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 02:53:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758185231; x=1758790031; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Sy7yBBPOtdY98NXS8KNusIkDWTGZb9P/0V14Xkwqdkc=;
-        b=VuHuVSXTB+uB9rv96YP+EcaA8QoumxKqeILegMYhw4A3/PuAWD6iYRLyxZTDjxTcQo
-         AAScJDpIGKul6TsWfhXE0H+j9H2dUnARjZZ8p1W7VdZU21wnv5tjATQ6ZyXC6SLgkRHd
-         fvN9xSjDpE/GRns6Nb1fM4IdnO84I2tlGBVUulfMgqDDvU86tAfO7laiFbhEYdtSvBN5
-         fdk/0tX6iQhWRs6L8sJocT24cDmqTPPcqkArvAN8lUEa8AzBNZl8X+pkXVE3s4pde3B+
-         J2RhSV7+SBuWhiSsVECEHpVrFoqGAekcQFPcLlOBM3PBjRqB87Xb1Ybm4kTKM8C9T+3o
-         teqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758185231; x=1758790031;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1758189218; x=1758794018; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Sy7yBBPOtdY98NXS8KNusIkDWTGZb9P/0V14Xkwqdkc=;
-        b=VH62XVLfhq+9sHcEY/GyvZBwWMAS1vkqKIxdvKIqnIKiFGMB2y79Ipm06iUnfLdmXz
-         kOl0go3yeqPnsXUtNqn4f9nIAXemYOdwh+GOU0gwn+M7Hgld9txp3uakUEXSje33ebzs
-         Na9Sj2oTYsMtMVSiYP7I5RRnEbFJOFjrjdJ5D0SjSAg6/VfV1O2ywAMPSYDYIjAj/kwc
-         q++urYMTZkqyVjsOu0GgOX76QAVHVWSCw3jwAtiz7UWtnGYF1VqZTPQKe/QTAjH/WU1Y
-         3jxHEsd3smMVPE4nakO0yyloAgpZKrDOtEi0gV9EQBhwmm0PDr+oizNLtlc06+t6kI99
-         sYSg==
-X-Gm-Message-State: AOJu0Ywh24Jdy7b5q11BTbM1xz17iBQ2bmPrWKuL4D+C8JpF9qEGQWQy
-	N4FkIFAHZRUDqeYvPb3cTnsplgH4prw3wMdCuXuYcyBGqzHZGAIoyyu71FQFWQ==
-X-Gm-Gg: ASbGncvdG2M/LafbEEb0T45mnjhm/LWZtlMw/QD9bn+TiibUwecEhqCLoTgTxYWCd+1
-	+FaBgsUt9f3HO0mhPRrfb38kHtb6A8PJB4ABNyOQcPWd9xCGCDGM04WnrKnyTSzRK2h4P4bmsrr
-	QLqrIR8db7mOD4yz5qYL81MjbUg7ZFghGkCCmtYD0MZvw4PyZHE78Q6AoTLAaPyFg8Ypu7dyGWy
-	1KU+TC5kB8PvG/qcCqqsOoQmZaWJ6DtmH2bwm24BJGeX/5nQCvedInQsCtl5bqDqMLj0H6OO6Ze
-	WvaQU2f1nxmnyKc0L/ihsyLGhkGB5mh4YwbseuPbbQoVHzLpURQKM0NrPOF/i9puR5W5bIn+s0M
-	WTpbmQmJv/i0jDoJ7ygJd5uBYcSUPfFOw/Za1pOr8nfAx3AyuJES0YSQdS9XttUWyskv+fCIhrs
-	0=
-X-Google-Smtp-Source: AGHT+IHowR4yCyIzRC2BY/hLM3xZcqrgsLyhQooRuu34nsp/ssAMG0DUHoy9Nej8PdOajoLc7TDssQ==
-X-Received: by 2002:a05:600c:314e:b0:45d:f7e4:8969 with SMTP id 5b1f17b1804b1-46202bf788fmr45547605e9.4.1758185230634;
-        Thu, 18 Sep 2025 01:47:10 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4613e754140sm70020345e9.21.2025.09.18.01.47.10
+        bh=AFOyBFwNFBla+LpoK0BAx9scG8akeVatqnUT+ZQ9CuQ=;
+        b=TxLefggKeRicbMqZkeKbfoqdcq2UTO66qIMlNAUiaZZRWpiMl52hb4bvBSYAWtKdtm
+         xWUB8sWmlqa/tCGv6y9vDYXl3osVGTpHTPvYrCIuo/qNfHcEUd727j7Z66VWSM1V/sKr
+         ElmwwGvMuu1KrbPWwNeR+/Iz7SOVAbY0Y/qO2V9MIejekSlS6xmKBiRy+UDANjdgiINt
+         WUV1xPqY2tR6TsT7DG2aRltN6FGJ2puD30zZCcPUvDBA877r7IDYeqoDWwl27/O3cjec
+         8/qwc0xDe0N71XUrhZ10jbwkHegHvC4o73KnyHwlF/sC3L/3jrbP2yjoguFSStYQ+PEJ
+         779A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758189218; x=1758794018;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=AFOyBFwNFBla+LpoK0BAx9scG8akeVatqnUT+ZQ9CuQ=;
+        b=eNUM8St+4jw6jXmrXStejQ6Ozr/+QKqIB0xbqT5rChesjp0uwtaJHo2WwrYrzyp9F1
+         ZXMLABaWqAPOVGmKBFQpHSIk8yJACqiBJEDvhjnd3QEchQpTTbE0izoaA2AWUuTxLIkl
+         QTq+3ObRkTYkYuVTFQC5AERBNz6W4aXwBtiVEMznKhuk2Q8XSzhrULkE6frYjPHqnJKZ
+         vvV/EaDfuzkql7SE4l7BMR0LIC9A03yolUX1towrt4gD4Gs/GE5rPZipfJt5uhz10Uo5
+         i+25tbIH7JAdroWjsv2OMZOueKknnEx/wE6aOGbJUFYbx072B7Cq91hyFpxoscKKz5Dk
+         925A==
+X-Gm-Message-State: AOJu0Yxx34JGHLQxF6vY23LkqCaEFekJOCUWNA05pPrhiyRhZqcPFvXR
+	VUX3h6W8oaAevA1qcgEECZ4DnIc6aex4eXlnXvdSfNqFNWwp7QzkRNQz6TJfUg==
+X-Gm-Gg: ASbGnctDNYpJcRfUjY/bZ8Yzk892bxgZ4a40/q7T70h5XWkVUA8Ow7lme+GzG638bSh
+	iIOQun5ian4RBeulujrdUYq+JqkfxYncQ4Huj38J5fYoiGdTNSm+adhnFmzuErGuRX1HUgYkJnn
+	CyJsn5WdIiFkDwrzWdKn6n8Pn/ZrI32e1i81EIGcGwbC9aAFBJtJN7w0pFGpXFLjrNohvc2z/oG
+	ZvHRDgST7BqSO4Govg+IcYEC8GbdGETsUuMyKPCYGoTMPPnq12ym82pZsSacUX+LBahfOHRFKwx
+	RFYucg5QYlIDNjYzcGe129HBWZZd5XIgsuViOmwcQA0u66srNUYha2R/CIjc0gPcEuqFmknZwBl
+	UyBUqKmU8c7ssz1uubUhLKequEOr+yXaj7j/4Rr8=
+X-Google-Smtp-Source: AGHT+IEFr/on0ZTA6ugO8Y+odkHEkRlFO7URWIBRKuVIO0LUEWe6aD0Rh0EHi+gjeqGyCHeoexl9iw==
+X-Received: by 2002:a05:6402:2805:b0:629:8c4d:6a91 with SMTP id 4fb4d7f45d1cf-62f83c32a3amr5149181a12.3.1758189218342;
+        Thu, 18 Sep 2025 02:53:38 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-62fa5d1a89esm1168184a12.16.2025.09.18.02.53.37
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Sep 2025 01:47:10 -0700 (PDT)
-From: martin.jansa@gmail.com
+        Thu, 18 Sep 2025 02:53:38 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: schnitzeltony@gmail.com,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-gnome][meta-xfce][meta-multimedia][PATCH] README.md: Change maintainer from Andreas to Khem for gnome, multimedia, xfce
-Date: Thu, 18 Sep 2025 10:46:58 +0200
-Message-ID: <20250918084701.1428246-1-martin.jansa@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 08/10] cukinia: drop allarch
+Date: Thu, 18 Sep 2025 11:53:30 +0200
+Message-ID: <20250918095332.3369767-8-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250918095332.3369767-1-skandigraun@gmail.com>
+References: <20250918095332.3369767-1-skandigraun@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 08:47:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119541
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 09:53:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119549
 
 From: Martin Jansa <martin.jansa@gmail.com>
 
-Confirmed by Andreas off list.
+* it rdepends on TUNE_PKGARCH libgpiod-tools so it cannot be allarch
+  (or cukinia->libgpiod-tools needs to be added to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS)
 
-Add Khem as he is main maintainer of meta-oe, but surely he would accept any
-help in these areas, don't be shy to step up.
-
-Just add uppercase L in meta-oe README.md for consistency.
+  bitbake-diffsigs \
+    sstate-before/mako/all-webos-linux/cukinia/0.6.2.do_package_write_ipk.sigdata.630262028cb276fdac170d30a265aa72d4249f84a264e11ea676a5ab38f1cacc \
+    sstate-before/qemux86-64/all-webos-linux/cukinia/0.6.2.do_package_write_ipk.sigdata.5d193e43c71f1270d36075be6124bb70585bb682771cff644349c4a7ffd13605
+  Hash for task dependency libgpiod:do_packagedata changed from d3dffb55884b89470065c3eaf046563e2f306706400be396b022a470ceca1916 to 76e47aed399fdbd14db3c4b75ef2b83298322429f111175d4ca4f3f4c67eebf0
 
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 1db563c31023bb64d94d34807547baf1d4f2923c)
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-gnome/README.md      | 2 +-
- meta-multimedia/README.md | 2 +-
- meta-oe/README.md         | 2 +-
- meta-xfce/README.md       | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ meta-oe/recipes-test/cukinia/cukinia_0.6.2.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-gnome/README.md b/meta-gnome/README.md
-index fbb0d72476..5513276dc0 100644
---- a/meta-gnome/README.md
-+++ b/meta-gnome/README.md
-@@ -13,4 +13,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnom
- When sending single patches, please using something like:
- git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-gnome][PATCH'
+diff --git a/meta-oe/recipes-test/cukinia/cukinia_0.6.2.bb b/meta-oe/recipes-test/cukinia/cukinia_0.6.2.bb
+index e4ca142c81..2b5b923e47 100644
+--- a/meta-oe/recipes-test/cukinia/cukinia_0.6.2.bb
++++ b/meta-oe/recipes-test/cukinia/cukinia_0.6.2.bb
+@@ -13,8 +13,6 @@ SRCREV = "a290f2dbb813ce12ba407962655a5d8b57322221"
  
--Layer maintainer: Andreas Müller <schnitzeltony@gmail.com>
-+Layer maintainer: Khem Raj <raj.khem@gmail.com>
-diff --git a/meta-multimedia/README.md b/meta-multimedia/README.md
-index 235c34331b..bda470a6f6 100644
---- a/meta-multimedia/README.md
-+++ b/meta-multimedia/README.md
-@@ -14,4 +14,4 @@ git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-pr
+ S = "${WORKDIR}/git"
  
- You are encouraged to fork the mirror on github https://github.com/openembedded/meta-openembedded to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like GitLab, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
+-inherit allarch
+-
+ RRECOMMENDS:${PN} = "libgpiod-tools"
  
--Layer maintainer: Andreas Müller <schnitzeltony@gmail.com>
-+Layer maintainer: Khem Raj <raj.khem@gmail.com>
-diff --git a/meta-oe/README.md b/meta-oe/README.md
-index c7c14a4507..da6c4cbe79 100644
---- a/meta-oe/README.md
-+++ b/meta-oe/README.md
-@@ -33,4 +33,4 @@ Other services like GitLab, repo.or.cz or self-hosted setups are of course accep
- 'git fetch <remote>' works the same on all of them. We recommend GitHub because it is free, easy
- to use, has been proven to be reliable and has a really good web GUI.
- 
--layer maintainer: Khem Raj <raj.khem@gmail.com>
-+Layer maintainer: Khem Raj <raj.khem@gmail.com>
-diff --git a/meta-xfce/README.md b/meta-xfce/README.md
-index 3d6158628f..0d0077783e 100644
---- a/meta-xfce/README.md
-+++ b/meta-xfce/README.md
-@@ -19,4 +19,4 @@ When sending single patches, please using something like:
- git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-xfce][PATCH'
- 
- Layer maintainer: Kai Kang <kai.kang@windriver.com>
--Layer maintainer: Andreas Müller <schnitzeltony@gmail.com>
-+Layer maintainer: Khem Raj <raj.khem@gmail.com>
+ do_install () {
 
