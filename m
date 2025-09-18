@@ -1,150 +1,149 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1229CAC59A
-	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 03:02:58 +0000 (UTC)
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
- by mx.groups.io with SMTP id smtpd.web11.5175.1758164572476660826
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C58CCAC59F
+	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 03:04:58 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.web10.5088.1758164694156833430
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Sep 2025 20:02:52 -0700
+ Wed, 17 Sep 2025 20:04:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FSAaz/qd;
- spf=pass (domain: gmail.com, ip: 209.85.128.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-71d6051afbfso4392397b3.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 20:02:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758164571; x=1758769371; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=eyHo3xOJiSv7NrDE3M7Jkj4GlxPxgD3XIjh6Tc+B+es=;
-        b=FSAaz/qd5CotIT7iuDyhfoaIzPASxfTC1sfNdq2H5nY+6IGKnVHA73+YwY6YusH71G
-         tOgkTCZfk03xgN1Bbws+QsRBVTpMATKw8hJ1ghydmn0Y0U2swgm771d+qfQ3st6W35tL
-         nTGLt8b9I8QuMS7rHtrsltzqp/m8QBdZxao6VRmBxoNkat+ft5Ikt7Kryl6rcKl9gY66
-         41K6ICmoVenlGrun9DYs+ok2JB+4R5H1CkNhQ6SvuBZurUS98pXoeAprZcjZlYh5ky2R
-         uqpCLYRUFprsLdt78lbpZrBTyChoVtffbR3NWeodwRDkzSZ6nvjhCQ3UoYCMO9vGolX8
-         qr+w==
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=IFiIeMhp;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58HGDlGw014189
+	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 03:04:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=+QqkiqO2s4+oiDPQmTWtZVMMBgU1luupxKR
+	RVjrg3LE=; b=IFiIeMhp7yXzhf+BMk6nGPJhIB95xqdWl4IAAk56pHI62Aaga6E
+	JtCxqNsK8fRZu15L02eU48VaZtbcA9psJcozcufo+ioAakVDRp49iHMDiVXyeR04
+	EeMiLkoHQzo/juE0rWNFtnhDzos9tiEjgDWzEThwetHakecMBEL5Z+2C68fWVV7Q
+	msQDXiBw3IDBlI27Y9rEPIH7ZLM7T7HrNOSDWbF9HZWUyYtYqfZQb56UyKmcJ9J9
+	Ic1gHlg2Uyhi60HCU9QYAYTE9sTPeQl/zojrVqiixMdIUqm//ULKzrrSptCrmOF6
+	q6e04qP91iOTX+aS+vPO7kb1m4iCZxFgQkQ==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 497fxu4qhj-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 03:04:53 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-4b5e178be7eso13491561cf.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Sep 2025 20:04:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758164571; x=1758769371;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=eyHo3xOJiSv7NrDE3M7Jkj4GlxPxgD3XIjh6Tc+B+es=;
-        b=RWsfMyXqP25267X5wClWyC8XrL3ar5jNh9/g3+aPDa31WloDWp1+jrgWN4+XTVWVtP
-         G90Z48UKnongFByFY7Y0mbMg7bjAAC8Zm8lJgGt6XvWpMO0vEFO4doXe4Quc+fIe289D
-         tBruwMkCLmINyoj3YNje0ULeQbI2DOEjw0jPG8Au4njgskCdUB0LkIn4OkrsUlTCzIcL
-         hA60k4oKS3+zOm/7IIESxKbJOJm7XHq0XV3dhqQYBSyb8eyIUi/DTeuYaVOIujuQvPPS
-         ePy04Btedsk2LA4dT/ALx1bjBa2Cor60h9DQp9uK4YWfXCp2nuLWl2S5Vrzz7IEDLwEB
-         6xJQ==
-X-Gm-Message-State: AOJu0Ywhckl2+0mBvOZi61Ls8ROhmWk8uFtqGitNcyBFP7NhkMdwOmN6
-	oqarWbkOouA0D1JdbAAGL2CG/61e6jvBwMGCKUIEYHQVsnu2i4Gz+W4T9r0T2R0oTb2s6RKb1jE
-	4hfNMXUFjiJaZcEcGVuFdQUioOzz90pk=
-X-Gm-Gg: ASbGncuU4CPBePoFGabZ5G1/voTkLqF4ivMsfwvNyxUUJPghOGeW4Jz/zxpVJPVWV42
-	e87x7gwBHWtE+rXXX4HFxF3I9RUkc/um/4E/xvfOgtnfICklwc7h5VAQgbV8+Iu2hI8loA8AX1l
-	wrJi/NkBjfFDvap54WpHmuyxLEH0OGNQ+5vO1ivOWuY2DQ2tSKMqe30SRsYSL7015Ns0bLbKbNf
-	MXftyI2vUnoaQ5d0ckS5N86CEzUZHmnK/0QWuXuaYdZKQNfKMm2i87n3RbuIM3TBdSpMGCbEnCy
-	/cnq06taEy5QlMlGbtcAydNr6Gx8NwMNnJUDYFJfKNc=
-X-Google-Smtp-Source: AGHT+IHQ1JKCONjl57m3kFHwNs2se35o8PX3N58hQSzrou6rJE+tNUNMIqlsXjbzqWI/h5Ja3MgUOMhNVnoOzi/Lsg8=
-X-Received: by 2002:a05:690c:9:b0:738:7758:338 with SMTP id
- 00721157ae682-73890bad0f3mr31263747b3.7.1758164571214; Wed, 17 Sep 2025
- 20:02:51 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1758164692; x=1758769492;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=+QqkiqO2s4+oiDPQmTWtZVMMBgU1luupxKRRVjrg3LE=;
+        b=W/isKPrd+49omPHcybBWld9vKo0HI/GGQ8jgOW9j5ADfhmZkbxiRzbL4Z7GkzLfMOo
+         45Nzjcl6dv+ohdb5qHd4qnT4dacARc8IfpVfZ/SbRfdks5sk3OumTxzTYiqPGkx8830J
+         C9Bib31+uC0DhWq+lnWuUPkFK1RpPfjoyi4FeYbsy9A8N6bkGmRRU9k/UiC4flgDk0AJ
+         wxxK6v6/2fXO4EuHjZGf+rBBXS2RKMJriYWkGabXZED3x0zcvOIBOWEQGQTxZWvPwTqg
+         nDAU10Yy5xp7BS0r5JCaWAZuXmuT7epNzR3W/SoUfUTq+D/ESiAE8irEioEvv19kHMJL
+         JADg==
+X-Gm-Message-State: AOJu0Yzp7md8GKzMtyo0J6MIXRpUTa7o8cmDwWnir5jTX4zov+Xsb1Tw
+	9pniGbBK7Q+ThrxcIHOyI8DUitYJP/gENknu9HqBb9uoSzu6L5H2KcGZb8wNHiYEeXOnuq2WXvf
+	znu4/qMi4b73Y9DTDDrCIpq8ldwLiTAoofDZjkmGasEAnCXT4O3Cl0PTWGfSq00SwHhk1dDU8Rt
+	dWNAOJfu6/zdNfCU9Y
+X-Gm-Gg: ASbGncuGTtRoru2q3pZcIKwykmD9RTOBUI4J+OE84t0aSN2GcdE8HLAIkha663rVRPe
+	B0Inkx2kpSEqPKpCM7S+Yi+2tsAQRnPBWs2/j1FQYruAFbauiZ6zwshVuItBNFlqoNkhr5wiKex
+	RGJsV50FIUOLDM99U4Nf9XITv6uDpI7HHXSLt+L8jFR0iYh7PEmmHG2WYKAnj14menKl9sArDUx
+	kGMlHwyeHUFkZl1sgrpFFYF0xeQaSpUFZAnoddfmZ8XLd6uC1ithEWL7H2D3A76xCB0tzJ0uDoP
+	xp3GX5fQRRz3ahaBOL2Yp2uQNwlRxuKgFXAC8DlczbiyfCqvHyEznzVfR7Xso4l29sjYxFrMQSt
+	JR1zwB80hguTrRZINTZk6x0VC76bxcNXexpu2yLNCmRnqJb9GwCAt
+X-Received: by 2002:a05:622a:5c17:b0:4b3:1c97:57ac with SMTP id d75a77b69052e-4ba6f51a611mr50598371cf.80.1758164692097;
+        Wed, 17 Sep 2025 20:04:52 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEZa6xaMvqaU0b1fXtYJJMGwe93IabP7NBKenqyL4zhWeM5T5v8refl95GdL/MMIgnPeMtG2w==
+X-Received: by 2002:a05:622a:5c17:b0:4b3:1c97:57ac with SMTP id d75a77b69052e-4ba6f51a611mr50598121cf.80.1758164691538;
+        Wed, 17 Sep 2025 20:04:51 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a0c3-3a00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a0c3:3a00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-578a9f13d3asm315572e87.141.2025.09.17.20.04.50
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 17 Sep 2025 20:04:50 -0700 (PDT)
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH v3 1/6] ocl-icd, opencl-icd-loader: drop RPROVIDES for virtual-opencl-icd
+Date: Thu, 18 Sep 2025 06:04:45 +0300
+Message-ID: <20250918030450.1507801-1-dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-References: <20250918014442.1436475-1-dmitry.baryshkov@oss.qualcomm.com>
-In-Reply-To: <20250918014442.1436475-1-dmitry.baryshkov@oss.qualcomm.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 17 Sep 2025 20:02:25 -0700
-X-Gm-Features: AS18NWAbKqjC-qazsYKkekhqB65I_Xcq5CegOFSQLqAT3NWNFC6AC9g7ZwqWBcw
-Message-ID: <CAMKF1sr6v-ohV3LsB+Xot3z0L4woDddx7P9sVrtcDD-K1ko7Xw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2 1/6] ocl-icd, opencl-icd-loader: drop
- RPROVIDES for virtual-opencl-icd
-To: dmitry.baryshkov@oss.qualcomm.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTE2MDIwMiBTYWx0ZWRfXwWINP4LVL35l
+ vSGLbxRzqMnRI2t2uDbMMKMdybu2OXoC2owS6E6Awe4aTj7lAR2ffyUvC+9b1LqGVjY2z7a23qu
+ 6v9ZHt1qf35AJGRV1cmS9O2Dc6HAMbbZi5NC+Caa1cItbPaX9qFsLxhlD1NfS+0qlQ0GVI7FsUz
+ Ni0ClSltF4AppEH1/gfMUdFSaeAygHPrhucAHjSgC514h8JaRdPSkSqzE7IQMVzo6y5qcpA0YEc
+ 9gWITLHipFwhJn55HjGXFBwoJ988xfwHkWvMeLkT2syigi1TD7lvu/dkG6c+XHqBRfRtzKCM8tI
+ IkN9TUr3X+3PFfdBWYZUxz6Al4Pj//w1Y0x9jRNCjhM65ZjU6mxA9pOmvQky+WsVFxbU7gLG61o
+ 4MPp/j28
+X-Proofpoint-ORIG-GUID: NVhYdDq7OC7VG1_pEFdd1gYNCz32fW90
+X-Authority-Analysis: v=2.4 cv=R+UDGcRX c=1 sm=1 tr=0 ts=68cb76d5 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=xqWC_Br6kY4A:10 a=yJojWOMRYYMA:10
+ a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8 a=qe_RU691xxjtq5-8QPkA:9
+ a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-GUID: NVhYdDq7OC7VG1_pEFdd1gYNCz32fW90
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-17_01,2025-09-17_02,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 phishscore=0 adultscore=0 clxscore=1015 priorityscore=1501
+ bulkscore=0 malwarescore=0 suspectscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2507300000 definitions=main-2509160202
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 03:02:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119506
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 03:04:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119507
 
-Hi Dmitry
+These two packages don't provide ICD drivers at runtime. They provide
+the libOpenCL.so.1. Corresponding package is selected at the build time
+via the PROVIDES_virtual/opencl-icd. Drop the useless and incorrect
+RPROVIDES for virtual-opencl-icd.
 
-Thanks for v2, it looks more complete. Sadly, it does not apply for
-me. It will be helpful if you rebase it on master-next and resend
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+---
+ meta-oe/conf/layer.conf                                     | 1 -
+ meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb                | 1 -
+ meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb | 2 --
+ 3 files changed, 4 deletions(-)
 
-Thanks
--Khem
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index bddfabc2195b..2f3da6170e89 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -59,7 +59,6 @@ PREFERRED_PROVIDER_android-tools-conf ?= "android-tools-conf"
+ # Configures whether coreutils or uutils-coreutils is used.
+ PREFERRED_PROVIDER_coreutils = "coreutils"
+ PREFERRED_PROVIDER_virtual/opencl-icd ?= "opencl-icd-loader"
+-PREFERRED_RPROVIDER_virtual-opencl-icd ?= "opencl-icd-loader"
+ PREFERRED_RPROVIDER_virtual-redis ?= "redis"
+ 
+ SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+diff --git a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb b/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
+index 9e32242e3151..b266d6af6d91 100644
+--- a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
++++ b/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
+@@ -14,6 +14,5 @@ inherit autotools
+ 
+ DEPENDS = "ruby-native"
+ PROVIDES = "virtual/opencl-icd"
+-RPROVIDES:${PN} = "virtual-opencl-icd"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb b/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb
+index 2ff9a6ae7ea5..d5337af8e5fb 100644
+--- a/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb
++++ b/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb
+@@ -9,8 +9,6 @@ inherit pkgconfig cmake
+ DEPENDS += "opencl-headers"
+ 
+ PROVIDES = "virtual/opencl-icd"
+-RPROVIDES:${PN} = "virtual-opencl-icd"
+-
+ 
+ SRCREV = "861b68b290e76d08e7241608479c16431f529945"
+ SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https"
+-- 
+2.47.3
 
-
-On Wed, Sep 17, 2025 at 6:44=E2=80=AFPM Dmitry Baryshkov via
-lists.openembedded.org
-<dmitry.baryshkov=3Doss.qualcomm.com@lists.openembedded.org> wrote:
->
-> These two packages don't provide ICD drivers at runtime. They provide
-> the libOpenCL.so.1. Corresponding package is selected at the build time
-> via the PROVIDES_virtual/opencl-icd. Drop the useless and incorrect
-> RPROVIDES for virtual-opencl-icd.
->
-> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> ---
->  meta-oe/conf/layer.conf                                     | 1 -
->  meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb                | 1 -
->  meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb | 2 --
->  3 files changed, 4 deletions(-)
->
-> diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-> index bddfabc2195b..2f3da6170e89 100644
-> --- a/meta-oe/conf/layer.conf
-> +++ b/meta-oe/conf/layer.conf
-> @@ -59,7 +59,6 @@ PREFERRED_PROVIDER_android-tools-conf ?=3D "android-too=
-ls-conf"
->  # Configures whether coreutils or uutils-coreutils is used.
->  PREFERRED_PROVIDER_coreutils =3D "coreutils"
->  PREFERRED_PROVIDER_virtual/opencl-icd ?=3D "opencl-icd-loader"
-> -PREFERRED_RPROVIDER_virtual-opencl-icd ?=3D "opencl-icd-loader"
->  PREFERRED_RPROVIDER_virtual-redis ?=3D "redis"
->
->  SIGGEN_EXCLUDERECIPES_ABISAFE +=3D " \
-> diff --git a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb b/meta-oe/recip=
-es-core/opencl/ocl-icd_2.3.2.bb
-> index 9e32242e3151..b266d6af6d91 100644
-> --- a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
-> +++ b/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
-> @@ -14,6 +14,5 @@ inherit autotools
->
->  DEPENDS =3D "ruby-native"
->  PROVIDES =3D "virtual/opencl-icd"
-> -RPROVIDES:${PN} =3D "virtual-opencl-icd"
->
->  BBCLASSEXTEND =3D "native nativesdk"
-> diff --git a/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb =
-b/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb
-> index 2ff9a6ae7ea5..d5337af8e5fb 100644
-> --- a/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb
-> +++ b/meta-oe/recipes-core/opencl/opencl-icd-loader_2024.05.08.bb
-> @@ -9,8 +9,6 @@ inherit pkgconfig cmake
->  DEPENDS +=3D "opencl-headers"
->
->  PROVIDES =3D "virtual/opencl-icd"
-> -RPROVIDES:${PN} =3D "virtual-opencl-icd"
-> -
->
->  SRCREV =3D "861b68b290e76d08e7241608479c16431f529945"
->  SRC_URI =3D "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=
-=3Dmain;protocol=3Dhttps"
-> --
-> 2.47.3
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119491): https://lists.openembedded.org/g/openembedde=
-d-devel/message/119491
-> Mute This Topic: https://lists.openembedded.org/mt/115303503/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
