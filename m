@@ -1,247 +1,122 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <emailaddress.ashish@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3492FCA1013
-	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 14:17:24 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web11.15574.1758205036575060082
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52973CA1013
+	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 14:42:44 +0000 (UTC)
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.web10.16036.1758206561526893035
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Sep 2025 07:17:16 -0700
+ Thu, 18 Sep 2025 07:42:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=j9ikusrz;
- spf=pass (domain: smile.fr, ip: 209.85.128.54, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-45f2c4c3853so4181115e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 07:17:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VNLOLkmy;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: emailaddress.ashish@gmail.com)
+Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-b4ee87cc81eso957608a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 07:42:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1758205035; x=1758809835; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=iCeRiv1a+8gzxON+DkOYSMdpHwCspMjFxVNFXCLFjok=;
-        b=j9ikusrzt5uT94a26wYfolDClt7IJEq/VwY/NIX++VDhq0pISyeZXqlCiv6G7sl0yN
-         gsX1kQosp2oGKHqbjOi2urbtuM6KLbbbUywr1Y+fB74jiHMOf50C+nEms/SuePwx0+mF
-         SFnTTwPVaL1a+bHDuTJQUt2eLXLtraaBoCzOM=
+        d=gmail.com; s=20230601; t=1758206561; x=1758811361; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=IXsb/NHgjvyGRvyTUNg9Tzrsb+hd2eWyo6FNJNyp8zc=;
+        b=VNLOLkmyf05NQzzsfx3qdpKDJLC4cC8SqsR+W/oyc3ItiR+DNXYrvi6FKvANwBHsC3
+         5s/+KmYHcGKAYuv1GwOBroODMkz6XFgWQXR7XJ45wtAqQ3UgXK4bxy0tuTSxeCR59nuU
+         aRcHaTRecKnmno3I+l5xx4YXvehpEzVRhcoeXAFPfQKXyDni6/KwLPQqrIuTZ9ZP9RSI
+         DPbmC3HFnfkPcgTtNfGtaaAICKMIDnzFz+0S7rrC5KCT44dPkhdaobxIM1lF6FvCMBGB
+         JQRE6Lhj0E6ltoTkMyQlJfAlapC63mXbZj/d6WYZRxVQbvQoVnKftoxhZR/k9fFUpO9E
+         WUCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758205035; x=1758809835;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1758206561; x=1758811361;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=iCeRiv1a+8gzxON+DkOYSMdpHwCspMjFxVNFXCLFjok=;
-        b=VkOcdJ5z1NiTeubWOlFTITbtXev8iaPUcPqF6A+bJiPWS6Y5mgkr+/4nkE0AL4x+eK
-         2878qDXZsdyU9VVdgqTGZDrC2MOVlr8QsY6VeCFG4ECTyarGbijmuy6ANF5COxpc/+3x
-         YIbaakKCeB/lETJXEcFTSZEqXbTFfjAMyNCHIbloXUUxH+9JUZU+ukLtDU0RZKAeg7n5
-         5MKv6zOEkXX+xS3F/FQ53o75LdUopiBQyLRO0GwGVtyQKLek4EqeOR5XLW6qowo74lkp
-         X1VqTeSBPTNm3Tm5nR6m8u2hQBBpCDA4LNCYZlfvjJET+DqBu6i1fRFklCvTt9mEr20n
-         PlLA==
-X-Gm-Message-State: AOJu0YzXUfNnBMNDr1k/kWnnwStPpDu8Ss2c3KlYfDxJ98nsNb2vkA7z
-	YdSKMkQyb9DSAmRDJCzvGNnMsxN+WLTbSpQJEB8BPQ/XNhW3RjwW7y9GhI4GiRur0u7yXaH2q3d
-	P6a6xfMb3+slE1cuRQlESblt6/Y4RX2ycEtpVZT5UJg==
-X-Gm-Gg: ASbGncsrTKgfnz+zDaFY1adwcjC9YPijz2hBSD1e47ub93AWiAw+KcSFsYcyRxaX69n
-	+so/kBpw8hyKdAS3s2WOtO6M0VA7k9gLRPryYvxAE3vE8zrUDK8XJ6Ov9F/Sx1O7nSknq8QyS1t
-	AbrArwQjX5M7xrIUbppmpbyo4S6JQNAsX5e3Z6PptsaGr4VHiqsLLTAHpaIE6/yGG7JG+9OhNYc
-	nYni1NLor/966zGy+DdN/GgEeBaoX7NBiE9UMrWyRfQctKyM8tixjMoGXoq
-X-Google-Smtp-Source: AGHT+IHa8/tk8T6PXOY0wfh6cXuSTh2kdSEOAEEBrt3cp8dVHz0syeNAY+iXX0UiUuSAzIDlUwQCn4XL78RYZjFS3Rc=
-X-Received: by 2002:a05:600c:190f:b0:45c:b5e0:2cf5 with SMTP id
- 5b1f17b1804b1-46205adf583mr64965995e9.24.1758205034712; Thu, 18 Sep 2025
- 07:17:14 -0700 (PDT)
+        bh=IXsb/NHgjvyGRvyTUNg9Tzrsb+hd2eWyo6FNJNyp8zc=;
+        b=GNk1j7DpOTttoO0LzHIdIPuKJYk0nfGPzpNEFRpluonAc+MXk17oCENbPW6to0LCl8
+         KSynfzisrS+Kqxyei16QhRVT7WItO7XBDnItIYa3KSHQboh/FDJDAxnLB7n6IgM7EhoA
+         9hUy7Rzjqlx7SEOegASy/kbOUd0P7upOLczfRADECB1KXw22Ok9XwlY7a+P1+whQn3Bx
+         gJIUK+0/KIwScZpCyRpT2SJif23bjDeaM30jEneYB2pUqecdiGtGTq6KX2AC29KtaVon
+         Tdk3dnKzw46EwiZ+UOFPktOGsi83L0nJSFNmdIUdfRdd4x2OGTTOeO9AJKq6mKvxUK4p
+         /ZnQ==
+X-Gm-Message-State: AOJu0Yx7YGlKhYEEbf7j9qa2/oZMFhFX1Zx6QE5KkUewElQ7m9pyWaNE
+	oXZPS19nCaXaGuZVdsbSmUnbafKIzqfiL4BgDy+tVNH8IW23aQPyBsEbay6jhA==
+X-Gm-Gg: ASbGncs5zNMZ23ghwmXWsNUBLyOrLDX37AYxvkh6XJhAiiWPRzK2b9hOPFfhqV7W+ni
+	l9+Dx8k76e4CT9Gv3mQAGQrEj5ds36C6EwTD60iEBKmQsGuAk5yyY6LgwhBgx6UDbdkU59cB4hW
+	EOyg0+0LSNrGUz0u0wzSuC6Sai8owIm0+06R//9DSkPtDXj9LtGyy187bO92YxelkSnRQXQ8507
+	QJbigktWtvT64IDahh82JwlMFO07+VO/5izZzTpFTcrr7oqAW+dvfs8l2V5/Or2916/HqO94xwS
+	PRPWy5ULChccGIJfVCQOTWyFKElOHFuh9PB9sRJG5sCZyEqf9p+7RtC0gQCHkYpq62JNnJQv3A9
+	cirlJM6ZQMUL/RKexBsCq
+X-Google-Smtp-Source: AGHT+IFyiYlUj0WzIJFVIFJnHBA7NlXk8s/IFJeis9qUb68FW1s05g+UZXOeOKDUYdC31eW6zcpS1A==
+X-Received: by 2002:a17:902:ebc3:b0:269:6c70:ee2 with SMTP id d9443c01a7336-2696c701d0cmr73383975ad.52.1758206558057;
+        Thu, 18 Sep 2025 07:42:38 -0700 (PDT)
+Received: from ashishkumar.. ([2401:4900:1f27:b34:d313:75f4:7791:1cf1])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-269802de57csm28171215ad.66.2025.09.18.07.42.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 18 Sep 2025 07:42:37 -0700 (PDT)
+From: AshishKumar Mishra <emailaddress.ashish@gmail.com>
+X-Google-Original-From: AshishKumar Mishra
+To: openembedded-devel@lists.openembedded.org
+Cc: anuj.mittal@intel.com,
+	AshishKumar Mishra <emailaddress.ashish@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [scarthgap] meta-oe: image: optionally remove RAW image after sparse image creation
+Date: Thu, 18 Sep 2025 20:12:21 +0530
+Message-ID: <20250918144221.2422710-1-emailaddress.ashish@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250918102642.487522-1-zboszor@gmail.com>
-In-Reply-To: <20250918102642.487522-1-zboszor@gmail.com>
-From: Yoann Congal <yoann.congal@smile.fr>
-Date: Thu, 18 Sep 2025 16:16:48 +0200
-X-Gm-Features: AS18NWAEcYcbgpvaIBd97O9uuqrpy8spFAl37ZsQjoiEkWjpBpwPI90YaaVJ8fU
-Message-ID: <CAMSfU+6F0GngYjP=07gUWFo4Tvf=hk=rG6CgAnV16BrK8UuBEg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] gutenprint: 5.3.5
-To: zboszor@gmail.com
-Cc: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Content-Type: multipart/alternative; boundary="000000000000896903063f1402c6"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 14:17:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119576
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 14:42:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119577
 
---000000000000896903063f1402c6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: AshishKumar Mishra <emailaddress.ashish@gmail.com>
 
-Hello,
+When creating sparse images, the RAW image is no longer needed in
+some workflows such as Android and CI pipelines. These RAW images
+can be multi-GB artifacts and consume significant disk space.
 
-Le jeu. 18 sept. 2025 =C3=A0 12:26, Zoltan Boszormenyi via lists.openembedd=
-ed.org
-<zboszor=3Dgmail.com@lists.openembedded.org> a =C3=A9crit :
+This change introduces a configuration option
+`DELETE_RAWIMAGE_AFTER_SPARSE_CMD` which, when set to "1",
+removes the RAW image after sparse image generation.
 
-> This fixes an installation error:
->
-> | make[5]: Entering directory
-> '.../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/build/src/cups'
-> | chmod 700
-> .../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/image/usr/libexec/cups/b=
-ackend/backend_gutenprint
-> | chmod: cannot access
-> '.../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/image/usr/libexec/cups/=
-backend/backend_gutenprint':
-> No such file or directory
->
+This reduces disk usage in builds where sparse images are the
+final deliverables and RAW images are not required.
 
-What makes you say that the 5.3.4->5.3.5 upgrade fix this bug?
-The above error is the one I fixed with the patch
-"0001-cups-fix-a-build-race-condition-around-empty-directo.patch" and this
-patch has not been merged upstream nor the code I touched changed. I did
-not see anything related by quickly reading the NEWS.
-I'd be happy to see this fixed upstream but I'd rather have upstream
-confirmation that they saw/fixed it (a commit, a changelog, ...).
-If that is fixed upstream, then we can drop my patch.
+Default behavior is unchanged: RAW images are kept unless the
+variable is explicitly enabled:
 
-Thanks!
+    DELETE_RAWIMAGE_AFTER_SPARSE_CMD = "1"   # Delete RAW image
+    DELETE_RAWIMAGE_AFTER_SPARSE_CMD = "0"   # Default behavior
 
+(cherry-picked from f5246b7df447ac76ec04c6e5add398862d1c9ccd in master )
 
-> Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.com>
-> ---
->  .../gutenprint/{gutenprint_5.3.4.bb =3D> gutenprint_5.3.5.bb}     | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-printing/gutenprint/{gutenprint_5.3.4.bb =3D>
-> gutenprint_5.3.5.bb} (96%)
->
-> diff --git a/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
-> b/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
-> similarity index 96%
-> rename from meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
-> rename to meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
-> index f90a123293..82953b798c 100644
-> --- a/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
-> +++ b/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
-> @@ -17,7 +17,7 @@ LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3D59530bdf33659b29e73d4adb9f9f6552"
->  SRC_URI =3D "https://downloads.sourceforge.net/gimp-print/${BP}.tar.xz \
->
-> file://0001-cups-fix-a-build-race-condition-around-empty-directo.patch \
->             "
-> -SRC_URI[sha256sum] =3D
-> "db44a701d2b8e6a8931c83cec06c91226be266d23e5c189d20a39dd175f2023b"
-> +SRC_URI[sha256sum] =3D
-> "f5a9f47de28530b1ae2069cfbc647a9a641baeeabe809bb0ef2b3ec5b9668d70"
->
->  inherit autotools gettext pkgconfig
->
-> --
-> 2.51.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119552):
-> https://lists.openembedded.org/g/openembedded-devel/message/119552
-> Mute This Topic: https://lists.openembedded.org/mt/115307539/4316185
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> yoann.congal@smile.fr]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+Signed-off-by: AshishKumar Mishra <emailaddress.ashish@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/classes/image_types_sparse.bbclass | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
---=20
-Yoann Congal
-Smile ECS
+diff --git a/meta-oe/classes/image_types_sparse.bbclass b/meta-oe/classes/image_types_sparse.bbclass
+index d6ea68968e..5416c2a019 100644
+--- a/meta-oe/classes/image_types_sparse.bbclass
++++ b/meta-oe/classes/image_types_sparse.bbclass
+@@ -9,9 +9,15 @@ SPARSE_BLOCK_SIZE ??= "4096"
+ 
+ CONVERSIONTYPES += "sparse"
+ 
++DELETE_RAWIMAGE_AFTER_SPARSE_CMD ??= "0"
++
+ CONVERSION_CMD:sparse = " \
+     truncate --no-create --size=%${SPARSE_BLOCK_SIZE} "${IMAGE_NAME}.${type}"; \
+     img2simg -s "${IMAGE_NAME}.${type}" "${IMAGE_NAME}.${type}.sparse" ${SPARSE_BLOCK_SIZE}; \
++    if [ "${DELETE_RAWIMAGE_AFTER_SPARSE_CMD}" = "1" ]; then \
++        rm -f ${IMAGE_NAME}.${type};\
++        bbwarn "Raw file ${IMAGE_NAME}.${type} removed" ;\
++    fi;\
+  "
+ 
+ CONVERSION_DEPENDS_sparse = "android-tools-native"
+-- 
+2.43.0
 
---000000000000896903063f1402c6
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hello,</div><br><div class=3D"gmail_quote gmail_quote=
-_container"><div dir=3D"ltr" class=3D"gmail_attr">Le=C2=A0jeu. 18 sept. 202=
-5 =C3=A0=C2=A012:26, Zoltan Boszormenyi via <a href=3D"http://lists.openemb=
-edded.org">lists.openembedded.org</a> &lt;zboszor=3D<a href=3D"mailto:gmail=
-.com@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; a =C3=
-=A9crit=C2=A0:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
-px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">T=
-his fixes an installation error:<br>
-<br>
-| make[5]: Entering directory &#39;.../tmp/work/corei7-64-oe-linux/gutenpri=
-nt/5.3.4/build/src/cups&#39;<br>
-| chmod 700 .../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/image/usr/libe=
-xec/cups/backend/backend_gutenprint<br>
-| chmod: cannot access &#39;.../tmp/work/corei7-64-oe-linux/gutenprint/5.3.=
-4/image/usr/libexec/cups/backend/backend_gutenprint&#39;: No such file or d=
-irectory<br></blockquote><div><br></div><div>What makes you say that the 5.=
-3.4-&gt;5.3.5 upgrade fix this bug?</div><div>The above error is the one I =
-fixed with the patch &quot;0001-cups-fix-a-build-race-condition-around-empt=
-y-directo.patch&quot; and this patch has not been merged upstream nor the c=
-ode I touched changed. I did not see anything related by quickly reading th=
-e NEWS.</div><div></div><div>I&#39;d be happy to see this fixed upstream bu=
-t I&#39;d rather have upstream confirmation that they saw/fixed it (a commi=
-t, a changelog, ...).</div><div>If that is fixed upstream, then we can drop=
- my patch.</div><div><br></div><div>Thanks!</div><div>=C2=A0</div><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">
-Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi &lt;<a href=3D"mailto=
-:zboszor@gmail.com" target=3D"_blank">zboszor@gmail.com</a>&gt;<br>
----<br>
-=C2=A0.../gutenprint/{<a href=3D"http://gutenprint_5.3.4.bb" rel=3D"norefer=
-rer" target=3D"_blank">gutenprint_5.3.4.bb</a> =3D&gt; <a href=3D"http://gu=
-tenprint_5.3.5.bb" rel=3D"noreferrer" target=3D"_blank">gutenprint_5.3.5.bb=
-</a>}=C2=A0 =C2=A0 =C2=A0| 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-=C2=A0rename meta-oe/recipes-printing/gutenprint/{<a href=3D"http://gutenpr=
-int_5.3.4.bb" rel=3D"noreferrer" target=3D"_blank">gutenprint_5.3.4.bb</a> =
-=3D&gt; <a href=3D"http://gutenprint_5.3.5.bb" rel=3D"noreferrer" target=3D=
-"_blank">gutenprint_5.3.5.bb</a>} (96%)<br>
-<br>
-diff --git a/meta-oe/recipes-printing/gutenprint/<a href=3D"http://gutenpri=
-nt_5.3.4.bb" rel=3D"noreferrer" target=3D"_blank">gutenprint_5.3.4.bb</a> b=
-/meta-oe/recipes-printing/gutenprint/<a href=3D"http://gutenprint_5.3.5.bb"=
- rel=3D"noreferrer" target=3D"_blank">gutenprint_5.3.5.bb</a><br>
-similarity index 96%<br>
-rename from meta-oe/recipes-printing/gutenprint/<a href=3D"http://gutenprin=
-t_5.3.4.bb" rel=3D"noreferrer" target=3D"_blank">gutenprint_5.3.4.bb</a><br=
->
-rename to meta-oe/recipes-printing/gutenprint/<a href=3D"http://gutenprint_=
-5.3.5.bb" rel=3D"noreferrer" target=3D"_blank">gutenprint_5.3.5.bb</a><br>
-index f90a123293..82953b798c 100644<br>
---- a/meta-oe/recipes-printing/gutenprint/<a href=3D"http://gutenprint_5.3.=
-4.bb" rel=3D"noreferrer" target=3D"_blank">gutenprint_5.3.4.bb</a><br>
-+++ b/meta-oe/recipes-printing/gutenprint/<a href=3D"http://gutenprint_5.3.=
-5.bb" rel=3D"noreferrer" target=3D"_blank">gutenprint_5.3.5.bb</a><br>
-@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D59530bdf3=
-3659b29e73d4adb9f9f6552&quot;<br>
-=C2=A0SRC_URI =3D &quot;<a href=3D"https://downloads.sourceforge.net/gimp-p=
-rint/$%7BBP%7D.tar.xz" rel=3D"noreferrer" target=3D"_blank">https://downloa=
-ds.sourceforge.net/gimp-print/${BP}.tar.xz</a> \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-cups-fix-a-build-race=
--condition-around-empty-directo.patch \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
--SRC_URI[sha256sum] =3D &quot;db44a701d2b8e6a8931c83cec06c91226be266d23e5c1=
-89d20a39dd175f2023b&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;f5a9f47de28530b1ae2069cfbc647a9a641baeeabe809=
-bb0ef2b3ec5b9668d70&quot;<br>
-<br>
-=C2=A0inherit autotools gettext pkgconfig<br>
-<br>
--- <br>
-2.51.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#119552): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/119552" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/119552</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/115307539/431=
-6185" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/115307539/4316185</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:yoann.congal@smile.fr" t=
-arget=3D"_blank">yoann.congal@smile.fr</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div><div><br clear=3D"all"></div><br><span class=3D"gmail_si=
-gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
-iv dir=3D"ltr"><font face=3D"Raleway, regular">Yoann Congal</font><div><fon=
-t face=3D"Raleway, regular">Smile ECS</font></div></div></div></div>
-
---000000000000896903063f1402c6--
 
