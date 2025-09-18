@@ -1,105 +1,126 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 464D5CAC59A
-	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 07:24:30 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web11.8293.1758180263937661627
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 565B2CAC59A
+	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 07:34:30 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.8386.1758180861114414586
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Sep 2025 00:24:24 -0700
+ Thu, 18 Sep 2025 00:34:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cPLWQCaW;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-b042cc3954fso116746366b.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 00:24:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758180262; x=1758785062; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=hfiMQDejz9Yo/kSfo/A4meExVT4lMT04QV7TRMuPgyc=;
-        b=cPLWQCaW0+00fCFPpQXtWA3SSPaErPbesJeoFrvWVUgj0yROPdklBNON/+c4D+OA19
-         OLxyshb6AU0y7RkKxQGhPK1b6+aN66v104C3WxtY+3RVtV8asX/foX9kMKk6YKxzsACI
-         Biwb5N/H5TksTCuV9Wx2mp1Ks0Ov8n4YI4sNumwrQyFfnaqbx97BbT8lUdETv85PRxRU
-         /mJSWi3+Yha+oHvQlN5fORNL7enxeg4/OSs5RVtJob8bAantaQ1mmEg+zspltAtAayFB
-         coRPnkgMmHxaE2M4+rFxI7OfUCDOJXvi/a2psaBCyJPVDl43mSk/wMF7FxVBTA1UqmSU
-         fFXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758180262; x=1758785062;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=hfiMQDejz9Yo/kSfo/A4meExVT4lMT04QV7TRMuPgyc=;
-        b=J0Z6H6vzZE43jB88NuHtFJOivDRpzBIqr3ikt4Dvei9aTa163mB9WjwfAUV3Iv+lNG
-         YyuluA8d1A++XyBECKrtZE1gFwt9us+FN5MAbLeJSXCv8UEAIAAIZMwSmtFdM+azs7KM
-         pCUdrRZcYqMh5peRnEe36T2RCqmR4pp0Ak5oixER6PfD21Ll5x4oJnFbdPVnEA/dXRC0
-         QjSBd1X1DoIoz2AneHEHmXX6lpnrGq9wwE5DsnXexzOmldwetzMz1mqwuBb+VKb/85PT
-         hAoEyIdKLcu8mGdt9PoQgisQKEHbC875zArwvL1Uwwxw0+W07aNQWh4f6fdcpptgMLge
-         WkpQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVNvjfl8+VM28QFUvl6GLcQhtHsckxRnLdT1F5HU0q90Ilze9rrG93E7zKOKDm7Ak3+u5hjuac7+U+5Ki33RggjTME=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YybSWpQUacVokrGJJQlTXZWTIA0F663jp6QAo/hVqw3MJ11xmK2
-	TityPcX3+ECackxs8qY8GN8+ZHm2ih5KSyxF9iStDZzw4WBLfcXnNhHY
-X-Gm-Gg: ASbGncsPj62L6TVqZEZo8ojaFdLemCruJb9sP9KMP1YeNEucLxC7z5HpC4Pv6G2te9Y
-	tvNiGZ8JWvWAp6pRdh5dcDxS3McGSXda2v7aVpeJlvuTHP9iZoOINOmKX4xZcRIYO8HhQh//5OB
-	v3PZOXtSUYrjSlC/Jz4z2hJFW6j6zggiM3kRnnUJLdzUHNruK8sbpP0sLs5NzDTwX/ECSg+4xOQ
-	nKVtcvVPUUDbCOItVbuWxA8A5DUcQxYyMIUk9whnfM1bwmP0NbIfqZZa7zaRIAjEnnMBhfB5WjW
-	ZTHRmeQ3JFC/vPUtX7wQNgOv/l+J6IeobFDBpMfr3i/gGoOQlH2vypShEiBBuI4lQFylGn/Wj6y
-	LJc5PpHbPUtZzZg2vhCTjklmiHztkdXBeldqAY3AgdVPskySIAw==
-X-Google-Smtp-Source: AGHT+IElxlp+EUuiKCKJ3FrqfsmjOtaumuOA2f72V58Q4CnDIyIhdB0c/Id2ep7EkSJ3Z1v9d+busg==
-X-Received: by 2002:a17:906:3b8b:b0:b1d:285d:1550 with SMTP id a640c23a62f3a-b1d285d305fmr404698966b.31.1758180262176;
-        Thu, 18 Sep 2025 00:24:22 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b1fd272061fsm131953366b.98.2025.09.18.00.24.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 18 Sep 2025 00:24:21 -0700 (PDT)
-Message-ID: <2b58a9ce-d94e-4572-ab2d-fee8ebe6b95d@gmail.com>
-Date: Thu, 18 Sep 2025 09:24:21 +0200
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=lvw6J0pF;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=13560e645f=jiaying.song.cn@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58I5cBEw2526535;
+	Thu, 18 Sep 2025 07:34:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=PPS06212021;
+	 bh=qmCB+0wG6w2iP82iU/MLySGDMeICy+91myo032v7dJg=; b=lvw6J0pFbXuY
+	UxS/7ulGSGr8ql657Z9zYRF50yrQlqGmb0PBeMEFToRR5V44+PVED0v6RmTj9jQs
+	wDvso9erf32hyqfuyYbJweaHX/Sru076+s6YmmAECWOgKOSOi2Tor+PXMeQ+SyCK
+	NO6VvRS+2sZK6wPNgCihAS+RiaPQ3xfiWdTVbKA6LZIub/ZNaXxSuYrGVrLYXRPW
+	8ZkldfmIPky8Iryyy4IkSafkPbrM2fbYNlXZcZuROIDuNXFxKMxHRy3ItDLWrV04
+	cApFR2njxo/YB11EV6toixzjJ4WRir2K/UvzNCa9dVdeAKAyxWW+y2RL/ozFZwS1
+	dVUNJXzfbQ==
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 497fwsssb0-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Thu, 18 Sep 2025 07:34:19 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.59; Thu, 18 Sep 2025 00:34:18 -0700
+Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.59 via Frontend Transport; Thu, 18 Sep 2025 00:34:18 -0700
+From: <jiaying.song.cn@windriver.com>
+To: <skandigraun@gmail.com>, <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][walnascar][PATCH 2/2 v3] webkitgtk3: fix do_configure error on beaglebone-yocto
+Date: Thu, 18 Sep 2025 15:34:16 +0800
+Message-ID: <20250918073416.320603-2-jiaying.song.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250918073416.320603-1-jiaying.song.cn@windriver.com>
+References: <20250918073416.320603-1-jiaying.song.cn@windriver.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] Stable branch maintainership
-To: emailaddress.ashish@gmail.com, openembedded-devel@lists.openembedded.org
-References: <CAMKF1spy0PQ3Zpjm9YS-1beTO+Rp2ss7wjQL3+JqGGopvd2z=g@mail.gmail.com>
- <2403.1758179672054956198@lists.openembedded.org>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <2403.1758179672054956198@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: AlEZNYD6mOlDmRGpQs-rOiK6kICIx175
+X-Proofpoint-ORIG-GUID: AlEZNYD6mOlDmRGpQs-rOiK6kICIx175
+X-Authority-Analysis: v=2.4 cv=C5zpyRP+ c=1 sm=1 tr=0 ts=68cbb5fb cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=yJojWOMRYYMA:10 a=NEAV23lmAAAA:8 a=Q1sTgoEvAAAA:8 a=iGHA9ds3AAAA:8
+ a=t7CeM3EgAAAA:8 a=LxHwoYbL2FXGP2J_mhgA:9 a=FkGh3qDytyf094M0uOEt:22
+ a=nM-MV4yxpKKO9kiQg6Ot:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTE4MDA2OCBTYWx0ZWRfXz63j2p7s9lOa
+ 0BFr07z2oQgzl+8lqo1wgxVLUaMhRzG3nhqrsQjItUgdSP0M7AJsM4kSWXddbP/nc/H9S1hKOCK
+ x8+8J8gDSayS8xW9ejX55aXXYxavRFbSHQmrjkT32itj76KX++7FGT4D/plKE6mHzDFv4Ldb0L/
+ 68fr64TsG1szR9mYhngCeVtYvcJDUrK6RtBCYlMnde6eeiPtMgKVvV7duc4wZfQmv0Z6BH/JU2n
+ k/u01oHx9RI8MTc9pxXlrK5QQp6T4dXjUVPPEgsUoDuYaWPZAnK+jUDjTmGKJReugMj5+VC+2r2
+ Gyho3zU8ni6AxYB5TjIZ1tsELD0kXf6h/ttt5IJunXFBXM1Z3aIw5kR+amEoI4=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-17_01,2025-09-18_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 clxscore=1015 spamscore=0 suspectscore=0 phishscore=0
+ adultscore=0 impostorscore=0 bulkscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 07:24:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119535
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 07:34:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119537
 
-On 9/18/25 09:14, Ashish Mishra via lists.openembedded.org wrote:
-> Hi Team / Khem Raj , 
->  
-> I have an patch shared with community
-> https://lists.openembedded.org/g/openembedded-devel/message/119396 
-> If team can have an look
+From: Jiaying Song <jiaying.song.cn@windriver.com>
 
-This patch has been accepted 3 days ago:
-https://git.openembedded.org/meta-openembedded/commit/meta-oe/classes/image_types_sparse.bbclass?id=f5246b7df447ac76ec04c6e5add398862d1c9ccd
+* According to latest comment [1] and the mentioned pull request [2],
+  build an ENABLE(WEBASSEMBLY) && !ENABLE(JIT) configuration is
+  supported, so original issue already fixed in current version, the
+  EXTRA_OECMAKE setting is not needed anymore.
 
-It is rare to get feedback for accepted patches. It is recommended to
-check on the master-next and master branches 2 or 3 days after the
-submission to what's going on.
+* This EXTRA_OECMAKE setting causes following configure error on
+  beaglebone-yocto, remove the setting to let the configure process
+  decide the configuration:
+  CMake Error at Source/cmake/WebKitFeatures.cmake:312 (message):
+  ENABLE_JIT conflicts with ENABLE_C_LOOP.You must disable one or the
+  other.
 
-> I can work on feedback and review comments if any 
-> Sorry if this is wrong thread .
->  
-> Thanks ,
-> Ashish 
->  
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119529): https://lists.openembedded.org/g/openembedded-devel/message/119529
-> Mute This Topic: https://lists.openembedded.org/mt/115139938/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+[YOCTO #15254]
+
+[1] https://github.com/WebKit/WebKit/pull/17447
+[2] https://github.com/WebKit/WebKit/pull/17688
+
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+---
+ .../recipes-support/webkitgtk/webkitgtk3_2.48.1.bb   | 12 ------------
+ 1 file changed, 12 deletions(-)
+
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.1.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.1.bb
+index 9f44dfa924..c4347bb136 100644
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.1.bb
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.1.bb
+@@ -126,18 +126,6 @@ EXTRA_OECMAKE:append:armv4 = " -DENABLE_JIT=OFF "
+ EXTRA_OECMAKE:append:armv5 = " -DENABLE_JIT=OFF "
+ EXTRA_OECMAKE:append:armv6 = " -DENABLE_JIT=OFF "
+ 
+-# And for armv7* don't enable it for softfp, because after:
+-# https://github.com/WebKit/WebKit/commit/a2ec4ef1997d6fafa6ffc607bffb54e76168a918
+-# https://bugs.webkit.org/show_bug.cgi?id=242172
+-# softfp armv7* fails because WEBASSEMBLY is left enabled by default and JIT gets
+-# explicitly disabled causing:
+-# http://errors.yoctoproject.org/Errors/Details/734587/
+-# PR was sent upstream, but the end result is the same both JIT and WEBASSEMBLY disabled
+-# https://github.com/WebKit/WebKit/pull/17447
+-EXTRA_OECMAKE:append:armv7a = " -DENABLE_JIT=${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'ON', 'OFF', d)}"
+-EXTRA_OECMAKE:append:armv7r = " -DENABLE_JIT=${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'ON', 'OFF', d)}"
+-EXTRA_OECMAKE:append:armv7ve = " -DENABLE_JIT=${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'ON', 'OFF', d)}"
+-
+ # JIT does not work on RISCV
+ EXTRA_OECMAKE:append:riscv32 = " -DENABLE_JIT=OFF"
+ 
+-- 
+2.34.1
 
 
