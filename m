@@ -1,107 +1,97 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DBB77CAC5A9
-	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 11:16:02 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web10.11319.1758194156828718606
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC27ECAC5A9
+	for <webhook@archiver.kernel.org>; Thu, 18 Sep 2025 11:23:52 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web11.11616.1758194630136756703
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Sep 2025 04:15:56 -0700
+ Thu, 18 Sep 2025 04:23:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OmqAWrsl;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: zboszor@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-772301f8a4cso1225569b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 04:15:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KJn/CbnQ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b04b55d5a2cso145594866b.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 04:23:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758194156; x=1758798956; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YetxR6FPul53Tq51hRHMzkeJOUr4I0//WRTs5Txpgr8=;
-        b=OmqAWrsl2ifgfLhDhb7LcMzM9W0XBc/epqxv4o0SqJ7BR72brpHFMR1uqAoJ12jBLv
-         RNJsbHL2Z06FZzBNhk2FMPSF1FGlTw7ATHqR8S8Iio2BNBqAh19ouRkgeokLLd5tNfsU
-         6dfGqm6s0JZ1ZEO4hSigomandDIQtlYXAIdqvHdv0qySbckkkfN0ojVImQdTxqvkssf3
-         8S4x7ourdiuw8P60uqem81rIWG8a+tATNom6bwhaMlA5wmVOKRy9uBmRg7LswwWp813M
-         nUJ5sUdIZPsBGLoRhjQyR0MP7LGFRhGri0YaaTHzNrmQAukgC46WXUPcwJIpLv32/CeS
-         HJSg==
+        d=gmail.com; s=20230601; t=1758194628; x=1758799428; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/WNW/Y5Dp6Grro+nZyNsxs4Lu4E5O/fP1FlPP0eW3uE=;
+        b=KJn/CbnQVfDynAW4dj0VgdMUC4hp/tTPyKWtRhzwKfNGlOY7r/nIqYzrCAyg84ZIV0
+         k29RHWiaoKwE8v3Au1IqJdD/o/LkyLP5rXvtr9nC8HTUx7RUmH8ub736awVZrkhBlGkL
+         Rti0C2rWpNLwA19Zkb5Eve7lrhFPX6cfsM+WDyyQRNOQlBcElZYXA8z+gej6JzdJPrQW
+         Evenpwdo9UVwhSY27cTkoLc02BhMYOqcDtz3D10ETBAh51K6nzsy87SqOaXnO6dQfru+
+         M2OVTZprhqgJj4KdXhzaEoLy3TAPIRxisjs5Ro0d3vhe6miJqyjcG/iyci/4SpTr9nd5
+         PXlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758194156; x=1758798956;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YetxR6FPul53Tq51hRHMzkeJOUr4I0//WRTs5Txpgr8=;
-        b=ZCz4bePgV41AYBOG2DifjeXM12Be85jIg3ormMuHy5JSHHAXVoDgRiV6s9hLu3SEVX
-         1rJR1yWfY2MR90BX21HqedqnRR+TKMR77VGnwgQNmiMnMl4SWqd82S1gB+7zDonpR5Mb
-         5ZdLN1Cy/xI2P6gxSj4h9IT8RLz3a16UX/jcezja6faQWT8ZNJrR4bX58fuhd1lnGGbI
-         O8QHYrO9c+dAT6wE7XYtFkWpkNA0j2T043I/urW3z+VBxFRsoxxLlWA6Ik8/FnBDRDgP
-         W8Oyced7oFHdLvdyoQyrQ/uqfpC3a6V0LZNHVueUtreFqbDQrgs5qkEGObqhMJr2J3ip
-         h+bg==
-X-Gm-Message-State: AOJu0Yz7ryxYBS2YVMEnUj598yRTnKf1TPwFTM6HvVdp9ShV/SD05JRY
-	RFlHWZCy9T8jO5bqV/WWk1GA9yUmsYa3rsbO2AIyCadZhsbyLHazZHr89KUh/w==
-X-Gm-Gg: ASbGncvLQPgyWzpG4FobCxrOZiOLmh0NS1gBiTNsvccUqe+spbYb6I7/yx87tcnhPpR
-	k/3BWNCQdV5ZWRRHkLgMZkSJIJ28jfiScUdgQOUPMoPULo7ToIX5XQT+2txvYyobeFZcqoF7gSF
-	782HhejnEOo8mdvHffegwMUwRnA4ewrdc6nqkAUeVmmlrEjIofybP4KMfWG7w36Cv+8T6vtQsFS
-	p5iH0jzaIsK/Kwpk/pFiMJMT8pJt3w9bElEeakeYVNpUCptOiYO5UittmKBVKE7tYHkTmEWJT6R
-	pz8Fn/Tm4KycKD+3QEC4MhF28G20x78VJynU9fLBBpVQ26+vD0K+RVmFN/nQCVHrZt4g8/OiLsG
-	+Jo7Y6eILPurKQLfb8QyuAu5ZQgSIkN3UGONYTucFy3OMfuM+0wTLoClBZHLIdHp0LuOjiy+B9A
-	==
-X-Google-Smtp-Source: AGHT+IFd+25kqOCl8Mtls+rK7tgp3JWT4MMWmusUEIHcNEh4/LJMig2BrxZ8UZh+twKEBDbH/cVbVA==
-X-Received: by 2002:a05:6a20:729b:b0:262:7f60:d757 with SMTP id adf61e73a8af0-27a8ca845d3mr7443149637.11.1758194155831;
-        Thu, 18 Sep 2025 04:15:55 -0700 (PDT)
-Received: from fedora (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3303ffe611csm4070220a91.9.2025.09.18.04.15.52
+        d=1e100.net; s=20230601; t=1758194628; x=1758799428;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=/WNW/Y5Dp6Grro+nZyNsxs4Lu4E5O/fP1FlPP0eW3uE=;
+        b=sUnqleUUS34RY6II7U5/KTpZFWYmiBk7Ira3sVTUw5jWmcRhE25WpYv9r4zA6rGXQ9
+         gLgElqJLN7ZV/UkqjaAzxFiYwFZZNGF/e9aJQLSYh6YPP588q3hFsJpNcze2EHpu+7qk
+         5aw20OJ2TdlEyW1mMelYXLqxbLZ4kjRMPqcBMM+8shA6WyYRwGQC9xzB1Bu5QXDobsyB
+         kBqKacAA7nXkhFTxwJMDD2xEphgvUODHTzYVZwel1EWgzJJ6C6yX0uIOuNfecb0X2k7S
+         Hndm3MOApcdSCuhIav6xgifueq5XgGAjvX1lxgzFdHlVxirjK996ZYhUe904im7HtyD8
+         /WoQ==
+X-Gm-Message-State: AOJu0YywSNVMmqwmWKY3RRByAoq0Iv9C5hjFjbSzfRhRThUvt/MHojUq
+	cgk7dryQUD+lOB4WXZScCjRetcG+DEm3vospmxWtiXUF5g4PGCv4yyHuYxOOzQ==
+X-Gm-Gg: ASbGnct22MF/QxhMxSRhYkH4ygxTW0WWshLsLkwwY026Cw59dl2NHAPQGM3WeAQ4k2T
+	vPBVPQbzdhnE+gzq0Is++VCDgXC/GnaomT7EQ/SYnwCEUr9CWH1eIUvqVj+wjPuWPLsTiBhlnRP
+	2XkfusdeNtVs7W8WlVsxw3vI7wbsjsRd+A4xF2Kko8iSnZLFLL6K2d4Wz6f9Z0jd9M1xUYyWAwo
+	9eheVInwYEmsfBFhYd51GmhPrSES+fF/4+o6d2WOSWmKLKpZtLVQNhUd4TstUf5oM1d/3eH60VB
+	gZDRQ4aNP/pVwd5uLtVTTThVT+mi1fvrEhvE9UI+O+2KQCJYJDBmw7XBhh0rCdrIn3XaEu0vyKS
+	nQSKkBtRlORfUmcrvkScOroZjyAEqt8ue37NYX3k=
+X-Google-Smtp-Source: AGHT+IG0Z2mOuN+50MephklA8he5pWY0a+it/mgCIHKgfnM3KMxxhiuIPeTgMAvgKdQEXMezWM05bQ==
+X-Received: by 2002:a17:906:f58c:b0:b04:11e5:9a8e with SMTP id a640c23a62f3a-b1bbfa2c97cmr671345166b.40.1758194628198;
+        Thu, 18 Sep 2025 04:23:48 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b1fc75ac5e1sm180410366b.43.2025.09.18.04.23.47
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Sep 2025 04:15:55 -0700 (PDT)
-From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+        Thu, 18 Sep 2025 04:23:47 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster808@gmail.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>,
-	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-oe][walnascar][PATCH 2/2] gutenprint: 5.3.5
-Date: Thu, 18 Sep 2025 13:15:42 +0200
-Message-ID: <20250918111542.717014-2-zboszor@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 01/10] fb-test: include UPSTREAM_CHECK_COMMITS to fix UNKNOWN_BROKEN status
+Date: Thu, 18 Sep 2025 13:23:35 +0200
+Message-ID: <20250918112347.1331393-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250918111542.717014-1-zboszor@gmail.com>
-References: <20250918111542.717014-1-zboszor@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 11:16:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119559
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 11:23:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119560
 
-This fixes an installation error:
+From: Alexandre Truong <alexandre.truong@smile.fr>
 
-| make[5]: Entering directory '.../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/build/src/cups'
-| chmod 700 .../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/image/usr/libexec/cups/backend/backend_gutenprint
-| chmod: cannot access '.../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/image/usr/libexec/cups/backend/backend_gutenprint': No such file or directory
+When performing devtool check-upgrade-status, UNKNOWN_BROKEN status appears.
+On the upstream source repository, releases are not identified by tags. So,
+UPSTREAM_CHECK_COMMITS is set to 1, to find the latest upstream update.
 
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
+Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 16688b0f565badadace8732840f0ff01718cc87c)
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../gutenprint/{gutenprint_5.3.4.bb => gutenprint_5.3.5.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-printing/gutenprint/{gutenprint_5.3.4.bb => gutenprint_5.3.5.bb} (96%)
+ meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb b/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
-similarity index 96%
-rename from meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
-rename to meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
-index f90a123293..82953b798c 100644
---- a/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
-+++ b/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
-@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- SRC_URI = "https://downloads.sourceforge.net/gimp-print/${BP}.tar.xz \
-            file://0001-cups-fix-a-build-race-condition-around-empty-directo.patch \
-            "
--SRC_URI[sha256sum] = "db44a701d2b8e6a8931c83cec06c91226be266d23e5c189d20a39dd175f2023b"
-+SRC_URI[sha256sum] = "f5a9f47de28530b1ae2069cfbc647a9a641baeeabe809bb0ef2b3ec5b9668d70"
+diff --git a/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb b/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
+index 6082ea2574..b19bba0156 100644
+--- a/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
++++ b/meta-oe/recipes-test/fbtest/fb-test_1.1.0.bb
+@@ -6,6 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
+ SRCREV = "063ec650960c2d79ac51f5c5f026cb05343a33e2"
+ SRC_URI = "git://github.com//ponty/fb-test-app.git;branch=master;protocol=https"
  
- inherit autotools gettext pkgconfig
++# Upstream repo does not tag
++UPSTREAM_CHECK_COMMITS = "1"
++
+ S = "${WORKDIR}/git"
  
--- 
-2.51.0
-
+ do_install() {
 
