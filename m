@@ -1,176 +1,106 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D309CAC5A5
-	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 04:01:54 +0000 (UTC)
-Received: from mail-yb1-f182.google.com (mail-yb1-f182.google.com [209.85.219.182])
- by mx.groups.io with SMTP id smtpd.web11.7960.1758254512390190797
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A55AECAC5A5
+	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 05:01:24 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.8722.1758258075575616629
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Sep 2025 21:01:52 -0700
+ Thu, 18 Sep 2025 22:01:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Jxckw5PX;
- spf=pass (domain: gmail.com, ip: 209.85.219.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-yb1-f182.google.com with SMTP id 3f1490d57ef6-ea856357c38so420677276.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 21:01:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758254511; x=1758859311; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iU0Y9DjQmBINFZ79I/qe1uM6tdPdB2BYkqIBdVe7sYw=;
-        b=Jxckw5PXiz2XvqZrEvhNFHM2jqcRnCBSYOdGwHbLIUzF2xnUuJxAkS8wMyYDK3j7CU
-         WwN8IHpeU283udF+rCODQ0uTx7NYIFWx5WVBD4GzgVjhD3DoIADvZ2XJMjs1YbbBQINt
-         nlMZFsVS3+pTEeiuKFX6Mexu5t17QylzZl7GFNSPqte+9/sdfs+5CQkv6NKCNkaACqub
-         iVRplFannLqQ9ooyjaaEfKBZh1cLHr0rCvhcq0M1ibcbbxyOmqDvoSQkDNjqUlEnWaHS
-         c1ToMdgxxJ/7Kb4gYiU1P6hG7FYpuZiGfHZRKfj0J8LqmRQiKsJuMAupSFr8u4py+ROa
-         Db5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758254511; x=1758859311;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=iU0Y9DjQmBINFZ79I/qe1uM6tdPdB2BYkqIBdVe7sYw=;
-        b=bVD/8pkYI1Lq+MQMHje6qLKJmVuv7DW1C9p+7vJJiTefLA7rmAWXnBmvZeEh9wheih
-         9UwLG1DjtkTlHd2CBR3CMygMx0/Szyh+cBcyAq/OZxospWvzNM3Jgeandl1wYMv/xazH
-         Yr+z4emvvtZdJISZ/+8J3bhLTztQOEF/h8TEDc+91sUHzlvvy70FCk/nY3+G5bakXbgO
-         PTgYmNFjveIZS6+2FY/VEonR1hmjYScNbi6CaUe4bK4UhStZPgbv+3p25NmP+bh4uOlz
-         Gj0uAtFWNV6FpsRqe2sx5tGMSM/FrrVhLpxvMDNu1uOKCTeImTaVRXJEX3rArcyb5iTl
-         u7YQ==
-X-Gm-Message-State: AOJu0Yyx01VBm4zkPbN1sMBL+hm1nVo/hpa71f9wHkrFjLB9Zxt2b6Co
-	u4YSmPTpGyeVc++XL36Bramv+DU+kpGKD/6uXZcS0W9KvnzBPJmt9bLBDHuxn2pvO1YUN1LZiEc
-	CARBb1trkB5ygZ3C6Onl5Bfmlzjw1FRPu5gXxa0A=
-X-Gm-Gg: ASbGncu8lpi22cHcIFc43+ZT5O1hNDZupSQQZLeLPELd8J/XZSQHipeVrkm8d0Hnab7
-	hQ0/ElZyDCQrxhA93Dg4hQsmS/XE2+i+mrTGAstYHIIAz61zCcD9xugtXr5rYnbI3In94WzApLE
-	RyWYyJQMajUOsF2wwB/E3f9kd0NQ0qfgF43/n7cH5hI+y674pZSPMuDUx92Yt8OdLmLPJA+fBc6
-	lcAwF5un1ruahG0iZikb2Amf3h3bBFoXvb9AxtJMpcoQ/sw0JcbGmRYI2FTqn518UcoZAu7BaMo
-	neCL5YEdfYDwWcgdiaTkXWQ=
-X-Google-Smtp-Source: AGHT+IFuBLQU6oxWDgRrA1AiFqjx2NwfiNCWoayl36MeP4/ILkKcCvI/tg2LGijKjL/moUDAHEGUq7wxpSQ74KvYyCg=
-X-Received: by 2002:a53:daca:0:b0:5fc:53ab:a49c with SMTP id
- 956f58d0204a3-634779e8f2fmr1494726d50.11.1758254511304; Thu, 18 Sep 2025
- 21:01:51 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=QCw5ddm8;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=13574f9d0b=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58J4kw3L1628054
+	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 22:01:15 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=AdwT0gCXI+d/rSaRoBm8
+	WRkBzntXJWjJNQcx0gDBvNw=; b=QCw5ddm8AuQM1t2k6AqeoXFQNWUKCmjjxKYc
+	QpZNwNEAMMMzf0Jf5dzWb9aLLtyHSItWCf+KHGoWHeK4nFqT9p2a5itS+6GxcpY+
+	pCFMhTSv7wPQBui1/BpMLbHF+FhfC6Kx6s/3ZML5KlRRX6v1vEKF/Dk4nfgetG0I
+	SACyruPOqUDF4JzZ8RnsSKLFN3EZQrY5aiSmZSY1f0d9wiXW192fb+hK8funhdQR
+	x7N1cKuuoy3JmtjSw1j4NMtf1nL7rLqzcJJxNYrwNOYUqPkir2yFYJlU39yL7FNI
+	wxdcuWXCY2C0TPG9c1nVJaGcK7LiXqBwzS8fKTi3uBQq22ASTw==
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 498vne85b8-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 22:01:15 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.59; Thu, 18 Sep 2025 22:01:14 -0700
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.59 via Frontend Transport; Thu, 18 Sep 2025 22:01:13 -0700
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] php:  upgrade 8.1.31 -> 8.1.33
+Date: Fri, 19 Sep 2025 10:30:55 +0530
+Message-ID: <20250919050055.155824-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-References: <20250918071548.3934769-1-hongxu.jia@windriver.com> <20250918071548.3934769-2-hongxu.jia@windriver.com>
-In-Reply-To: <20250918071548.3934769-2-hongxu.jia@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 18 Sep 2025 21:01:25 -0700
-X-Gm-Features: AS18NWCJ9PVyPXARHUd57t8B8Bhnrn65p_BTDo6sY4TNI5pNkvRa6aq1ttXEzOA
-Message-ID: <CAMKF1spt3grZYZw3TmZTWQVWCip3kewWNCdxMhhHsY5yANkraA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 2/4] python3-frozenlist: support reproducible
-To: hongxu.jia@eng.windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=FbM3xI+6 c=1 sm=1 tr=0 ts=68cce39b cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=yJojWOMRYYMA:10 a=67BIL_jfAAAA:8 a=t7CeM3EgAAAA:8 a=V5nMA91hrsDdjGmaTXcA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: tkUyfChAxe7ASh3Swq3q018sYOakDKfT
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTE5MDA0MiBTYWx0ZWRfX8L5Was3YmBST
+ Gi2DnCTyyVzNIcYFNYMldszFtHMYzhtlEhm38J3n3HCS9LPiJrpxEUIbaUEM6IYk5uXIe/FY/yu
+ sKl7RIQ9BTb9EC/CO95llUNxzoP+vBc0JYjVusZ+vgdltNK5OawLXihOU5ysiC4TlhRLN5ejzMo
+ 2XOxuE26vzlc3bLgcMRsU3d30ghoCQw7s+fQzmJ/TDjOXm6Na7sT2GdrciDb6F8fA8ajIn6C6dH
+ m8S0GcC6f0kldPky0HbJxHA6SJ9UFNROtiTOZ7OuzhaYikGukMoOqEK6ouli4xrwktftepcpflC
+ D/0TidB7tSAbJNGT0ML1MZLVsXmyxahZIgtOce+QFSUF8CHTG4A8Mx/ornp93I=
+X-Proofpoint-ORIG-GUID: tkUyfChAxe7ASh3Swq3q018sYOakDKfT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-18_03,2025-09-18_02,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 impostorscore=0 malwarescore=0 bulkscore=0 phishscore=0
+ spamscore=0 priorityscore=1501 adultscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 04:01:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119587
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 05:01:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119588
 
-seeing
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-stdio: ERROR: python3-frozenlist-1.7.0-r0 do_package_qa: QA Issue:
-File /usr/src/debug/python3-frozenlist/1.7.0/frozenlist/_frozenlist.cpp
-in package python3-frozenlist-src contains reference to TMPDIR
-[buildpaths]
-stdio: ERROR: python3-frozenlist-1.7.0-r0 do_package_qa: Fatal QA
-errors were found, failing task.
+Includes fix for CVE-2025-1735, CVE-2025-6491, CVE-2025-1220, CVE-2025-1861,
+CVE-2025-1219, CVE-2025-1217, CVE-2025-1734 and CVE-2025-1736.
 
+Changelog:
+https://www.php.net/ChangeLog-8.php#8.1.33
+https://www.php.net/ChangeLog-8.php#8.1.32
 
-See - https://autobuilder.yoctoproject.org/valkyrie/?#/builders/81/builds/9=
-35
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+---
+ meta-oe/recipes-devtools/php/{php_8.1.31.bb => php_8.1.33.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/php/{php_8.1.31.bb => php_8.1.33.bb} (99%)
 
-On Thu, Sep 18, 2025 at 12:16=E2=80=AFAM hongxu via lists.openembedded.org
-<hongxu.jia=3Deng.windriver.com@lists.openembedded.org> wrote:
->
-> In order to make the generated library be reproducible, build wheel
-> in source dir other than tmp dir (/tmp/xxxxxx), then yocto toolchain's
-> option -fdebug-prefix-map could work as expected
->
-> Note: To support reproducible, it also requires oe-core commit [1] to be =
-merged
->
-> [1] https://lists.openembedded.org/g/openembedded-core/message/223604?p=
-=3D%2C%2C%2C20%2C0%2C0%2C0%3A%3ACreated%2C%2C%2C20%2C2%2C0%2C115291386%2Cd%=
-253D3&d=3D3
->
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->  .../files/0001-build-wheel-in-place.patch     | 31 +++++++++++++++++++
->  .../python/python3-frozenlist_1.7.0.bb        |  3 ++
->  2 files changed, 34 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/files/0001-build-=
-wheel-in-place.patch
->
-> diff --git a/meta-python/recipes-devtools/python/files/0001-build-wheel-i=
-n-place.patch b/meta-python/recipes-devtools/python/files/0001-build-wheel-=
-in-place.patch
-> new file mode 100644
-> index 0000000000..84f81da775
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/files/0001-build-wheel-in-place=
-.patch
-> @@ -0,0 +1,31 @@
-> +From 606843ad079d9d0dac1172533d42b5a2327b99ed Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Wed, 17 Sep 2025 15:41:09 +0800
-> +Subject: [PATCH] build wheel in place
-> +
-> +In order to make the generated library be reproducible, build wheel
-> +in source dir other than tmp dir (/tmp/xxxxxx), then yocto toolchain's
-> +option -fdebug-prefix-map could work as expected
-> +
-> +Upstream-Status: Pending
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + packaging/pep517_backend/_backend.py | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/packaging/pep517_backend/_backend.py b/packaging/pep517_bac=
-kend/_backend.py
-> +index 61cad34..d5d839e 100644
-> +--- a/packaging/pep517_backend/_backend.py
-> ++++ b/packaging/pep517_backend/_backend.py
-> +@@ -316,7 +316,7 @@ def build_wheel(
-> +     """
-> +     with maybe_prebuild_c_extensions(
-> +             line_trace_cython_when_unset=3DFalse,
-> +-            build_inplace=3DFalse,
-> ++            build_inplace=3DTrue,
-> +             config_settings=3Dconfig_settings,
-> +     ):
-> +         return _setuptools_build_wheel(
-> +--
-> +2.34.1
-> +
-> diff --git a/meta-python/recipes-devtools/python/python3-frozenlist_1.7.0=
-.bb b/meta-python/recipes-devtools/python/python3-frozenlist_1.7.0.bb
-> index 7d813a026c..d832494c82 100644
-> --- a/meta-python/recipes-devtools/python/python3-frozenlist_1.7.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-frozenlist_1.7.0.bb
-> @@ -7,6 +7,9 @@ SRC_URI[sha256sum] =3D "2e310d81923c2437ea8670467121cc3e9=
-b0f76d3043cc1d2331d56c7fb
->
->  inherit pypi python_setuptools_build_meta cython
->
-> +SRC_URI +=3D " \
-> +    file://0001-build-wheel-in-place.patch \
-> +"
->  DEPENDS +=3D " \
->      python3-expandvars-native \
->  "
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119531): https://lists.openembedded.org/g/openembedde=
-d-devel/message/119531
-> Mute This Topic: https://lists.openembedded.org/mt/115306109/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/recipes-devtools/php/php_8.1.31.bb b/meta-oe/recipes-devtools/php/php_8.1.33.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_8.1.31.bb
+rename to meta-oe/recipes-devtools/php/php_8.1.33.bb
+index 235fec5163..f4928bc3a1 100644
+--- a/meta-oe/recipes-devtools/php/php_8.1.31.bb
++++ b/meta-oe/recipes-devtools/php/php_8.1.33.bb
+@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
+           "
+ 
+ S = "${WORKDIR}/php-${PV}"
+-SRC_URI[sha256sum] = "0b39828b345151caf1b795d9f4b923c9887231776c33076dfc9d90a44390d0dc"
++SRC_URI[sha256sum] = "b6553451841c1a569865d7fdc83024621ee4434cd8fbfeb0a31588ac9c70685f"
+ 
+ CVE_CHECK_IGNORE += "\
+     CVE-2007-2728 \
+-- 
+2.40.0
+
 
