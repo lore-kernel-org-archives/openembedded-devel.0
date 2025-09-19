@@ -1,106 +1,232 @@
-Return-Path: <soumya.sambu@windriver.com>
+Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A55AECAC5A5
-	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 05:01:24 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.8722.1758258075575616629
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6AC4CAC5A5
+	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 05:18:44 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web10.8984.1758259116664486257
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Sep 2025 22:01:15 -0700
+ Thu, 18 Sep 2025 22:18:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=QCw5ddm8;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=13574f9d0b=soumya.sambu@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58J4kw3L1628054
-	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 22:01:15 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=AdwT0gCXI+d/rSaRoBm8
-	WRkBzntXJWjJNQcx0gDBvNw=; b=QCw5ddm8AuQM1t2k6AqeoXFQNWUKCmjjxKYc
-	QpZNwNEAMMMzf0Jf5dzWb9aLLtyHSItWCf+KHGoWHeK4nFqT9p2a5itS+6GxcpY+
-	pCFMhTSv7wPQBui1/BpMLbHF+FhfC6Kx6s/3ZML5KlRRX6v1vEKF/Dk4nfgetG0I
-	SACyruPOqUDF4JzZ8RnsSKLFN3EZQrY5aiSmZSY1f0d9wiXW192fb+hK8funhdQR
-	x7N1cKuuoy3JmtjSw1j4NMtf1nL7rLqzcJJxNYrwNOYUqPkir2yFYJlU39yL7FNI
-	wxdcuWXCY2C0TPG9c1nVJaGcK7LiXqBwzS8fKTi3uBQq22ASTw==
-Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 498vne85b8-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 22:01:15 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.59; Thu, 18 Sep 2025 22:01:14 -0700
-Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.59 via Frontend Transport; Thu, 18 Sep 2025 22:01:13 -0700
-From: ssambu <soumya.sambu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] php:  upgrade 8.1.31 -> 8.1.33
-Date: Fri, 19 Sep 2025 10:30:55 +0530
-Message-ID: <20250919050055.155824-1-soumya.sambu@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FRSUXNHo;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: zboszor@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-76e4fc419a9so1730652b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Sep 2025 22:18:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1758259116; x=1758863916; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=L9g6N0mgRVsp7WsBceFxaUahysI5bpGhKnQGdjEVCe4=;
+        b=FRSUXNHox40s3yB4cZ1KYeoJt0Pm7dFbJkspEYxVY/h6Ifjx3flMkVyDEvNH2H0Ntr
+         r3wdDoanQVAdzJSNz2faeGN8bz+DCIA4fNR01Wa9Hz8VBXKVi1k81DIwBLWZWg/AqYzT
+         uk36d7v/ArdmdFoIt6cp9w+hHvjzCsqQp7a8flqKenfihnttu0CYmNGuTSbkTOy3ym/g
+         dPzmXUpXOUFwVQ+MX9Jzr8dU15r74aVrhM8AHG265RxWDy9s/9y7XV2PA7sHegnHp1Ud
+         nG54AfCKstTCLxnC0v6LLlWXlNzZnVYO5o0EPMN+q7ftKnMd2+nynzj/1C1xD9D4+lTd
+         f76g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758259116; x=1758863916;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=L9g6N0mgRVsp7WsBceFxaUahysI5bpGhKnQGdjEVCe4=;
+        b=iCqvSQPRd2bfh5qe646N6odu8/0Du8aq21/PpsyYAk77e0K3ndd0K9izdlM/GK1gLL
+         62vyXT0hEn/HV/0y/c2QwcYdozC+PWOk1g7jQo+2AAtOVZ2nIgWOJQ98j1rEx7KtcAJj
+         NerPHze27/0pQGfRxiSrOPDEhLqkSN+l5/6cPBafW3+7PvtQrKhSisPMHhZ5fXyu8ocF
+         pIg4b6qOFbSdHdSWrn+PERTaFp7kKi6zObXzCCmIbDemuUao8G3hrzNrqm6x9jDXFQ2a
+         P0jKgFukN+hXg2TNThETPemz4UW99GGG+8TOFcVCmJBQi3k8WD8rmNT3U3eCUoWtD9GI
+         y90g==
+X-Gm-Message-State: AOJu0YwOKJHv/ItsBATB6Y4erjr2NfSejEfUg88wWp99E6uMYxuAUxgk
+	gtYxReUf6mkrBZNsKbDvT2jWp5LVz4CHDaxcm5ALuR3/18gGaiUhnVRW
+X-Gm-Gg: ASbGncuo4pjtR5IJeV2Av0WjWCvXa3h1P6ib4oEpE8XoG7Ya2IODT2vHvn2gbqx7AZo
+	QrMCVvp/Uvj0mXMWgEyOTiYRgNQ0FM25zEohi24W/MHoy6OZiAs9HiuXuCNtlC/pl+EcVyuabcQ
+	LyWjD9SFjgoJ/Hlb6bQbGvgJmyb00pNdbI5i3fUIJKgrvB5VJ9BVPm6t3UyrsDhIFeevZl96nWY
+	rN0LUlkaWPnNl8lspWP4i7yVhdEvM+mwt2SpOlot9vHus9FjN2kffUVAQlDEiKHebmOzV6ekwM9
+	QxktZsLCfDb8xEQBbvdVunver5yh2sKfliZXmpOAm1U9+KJbK6hm5nP3DwMtq+6TF900+cuVRdi
+	Wbf6drrjdEOTZXUTZYTbNttS9m7P3vxuzR9rfF7IcmQmtN58w6URySVm2
+X-Google-Smtp-Source: AGHT+IE/2BYWg+SliabwFcu126cbI3lTw5SuXJGu3HB6ajBtGnRXPRTyIKX3IoBQiHEtkFP3dza61w==
+X-Received: by 2002:a05:6a20:7491:b0:24f:5ac4:664a with SMTP id adf61e73a8af0-292705030ddmr3290193637.46.1758259115960;
+        Thu, 18 Sep 2025 22:18:35 -0700 (PDT)
+Received: from [192.168.2.143] (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33060619253sm4219261a91.4.2025.09.18.22.18.33
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 18 Sep 2025 22:18:35 -0700 (PDT)
+Message-ID: <8527dd9f-37d9-4938-89dc-142bea4654ae@gmail.com>
+Date: Fri, 19 Sep 2025 07:18:29 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] gutenprint: 5.3.5
+To: Yoann Congal <yoann.congal@smile.fr>
+Cc: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
+References: <20250918102642.487522-1-zboszor@gmail.com>
+ <CAMSfU+6F0GngYjP=07gUWFo4Tvf=hk=rG6CgAnV16BrK8UuBEg@mail.gmail.com>
+ <CAMSfU+6tnHY2yyjTRJ9Y+jjCQE8=f-g+V2N_22TK1vBTYZp5GA@mail.gmail.com>
+ <f7ce8c19-fb1e-4a4f-80eb-c41c79aef706@gmail.com>
+ <CAMSfU+5b8ARRgzOtbzP+-VpL2U1eHtngOJVUDnU+Oxq-_AvzOA@mail.gmail.com>
+Content-Language: en-US
+From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
+In-Reply-To: <CAMSfU+5b8ARRgzOtbzP+-VpL2U1eHtngOJVUDnU+Oxq-_AvzOA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=FbM3xI+6 c=1 sm=1 tr=0 ts=68cce39b cx=c_pps
- a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
- a=yJojWOMRYYMA:10 a=67BIL_jfAAAA:8 a=t7CeM3EgAAAA:8 a=V5nMA91hrsDdjGmaTXcA:9
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: tkUyfChAxe7ASh3Swq3q018sYOakDKfT
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTE5MDA0MiBTYWx0ZWRfX8L5Was3YmBST
- Gi2DnCTyyVzNIcYFNYMldszFtHMYzhtlEhm38J3n3HCS9LPiJrpxEUIbaUEM6IYk5uXIe/FY/yu
- sKl7RIQ9BTb9EC/CO95llUNxzoP+vBc0JYjVusZ+vgdltNK5OawLXihOU5ysiC4TlhRLN5ejzMo
- 2XOxuE26vzlc3bLgcMRsU3d30ghoCQw7s+fQzmJ/TDjOXm6Na7sT2GdrciDb6F8fA8ajIn6C6dH
- m8S0GcC6f0kldPky0HbJxHA6SJ9UFNROtiTOZ7OuzhaYikGukMoOqEK6ouli4xrwktftepcpflC
- D/0TidB7tSAbJNGT0ML1MZLVsXmyxahZIgtOce+QFSUF8CHTG4A8Mx/ornp93I=
-X-Proofpoint-ORIG-GUID: tkUyfChAxe7ASh3Swq3q018sYOakDKfT
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-09-18_03,2025-09-18_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 impostorscore=0 malwarescore=0 bulkscore=0 phishscore=0
- spamscore=0 priorityscore=1501 adultscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 05:01:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119588
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 05:18:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119589
 
-From: Soumya Sambu <soumya.sambu@windriver.com>
+2025. 09. 18. 20:41 keltezéssel, Yoann Congal írta:
+>
+>
+> Le jeu. 18 sept. 2025 à 20:22, Böszörményi Zoltán <zboszor@gmail.com> a écrit :
+>
+>     2025. 09. 18. 19:42 keltezéssel, Yoann Congal írta:
+>     >
+>     >
+>     > Le jeu. 18 sept. 2025 à 16:16, Yoann Congal <yoann.congal@smile.fr> a écrit :
+>     >
+>     >     Hello,
+>     >
+>     >     Le jeu. 18 sept. 2025 à 12:26, Zoltan Boszormenyi via lists.openembedded.org
+>     <http://lists.openembedded.org>
+>     >     <http://lists.openembedded.org> <zboszor=gmail.com@lists.openembedded.org> a
+>     écrit :
+>     >
+>     >         This fixes an installation error:
+>     >
+>     >         | make[5]: Entering directory
+>     >  '.../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/build/src/cups'
+>     >         | chmod 700
+>     >
+>      .../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/image/usr/libexec/cups/backend/backend_gutenprint
+>     >         | chmod: cannot access
+>     >
+>      '.../tmp/work/corei7-64-oe-linux/gutenprint/5.3.4/image/usr/libexec/cups/backend/backend_gutenprint':
+>     >         No such file or directory
+>     >
+>     >
+>     >     What makes you say that the 5.3.4->5.3.5 upgrade fix this bug?
+>     >
+>
+>     I got the error with 5.3.4 and it has gone away with 5.3.5.
+>     I admit that I only tried the build once. I will retry tomorrow.
+>
+>
+> This error is a rare intermittent failure. You will most likely not see it but that does 
+> not mean it's fixed (sadly).
 
-Includes fix for CVE-2025-1735, CVE-2025-6491, CVE-2025-1220, CVE-2025-1861,
-CVE-2025-1219, CVE-2025-1217, CVE-2025-1734 and CVE-2025-1736.
+You are right. After "repo sync", I can't reproduce the
+build problem anymore, with neither 5.3.4 nor 5.3.5.
+I haven't noted the layers' commits before, so I can't go back.
 
-Changelog:
-https://www.php.net/ChangeLog-8.php#8.1.33
-https://www.php.net/ChangeLog-8.php#8.1.32
+I tried this sequence a couple of times for both versions
+this morning and neither version failed:
 
-Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
----
- meta-oe/recipes-devtools/php/{php_8.1.31.bb => php_8.1.33.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.1.31.bb => php_8.1.33.bb} (99%)
+bitbake -c clean gutenprint-native gutenprint && \
+bitbake -c cleansstate gutenprint-native gutenprint && \
+bitbake -c install gutenprint
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.1.31.bb b/meta-oe/recipes-devtools/php/php_8.1.33.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.1.31.bb
-rename to meta-oe/recipes-devtools/php/php_8.1.33.bb
-index 235fec5163..f4928bc3a1 100644
---- a/meta-oe/recipes-devtools/php/php_8.1.31.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.1.33.bb
-@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
-           "
- 
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "0b39828b345151caf1b795d9f4b923c9887231776c33076dfc9d90a44390d0dc"
-+SRC_URI[sha256sum] = "b6553451841c1a569865d7fdc83024621ee4434cd8fbfeb0a31588ac9c70685f"
- 
- CVE_CHECK_IGNORE += "\
-     CVE-2007-2728 \
--- 
-2.40.0
+FWIW, the CPU has 16 cores, 32 threads and a HDD stores the build.
+
+> Did the 5.3.4 version on which you saw the problem had my patch?
+
+Yes.
+
+>     >     The above error is the one I fixed with the patch
+>     >  "0001-cups-fix-a-build-race-condition-around-empty-directo.patch" and this patch has
+>     >     not been merged upstream nor the code I touched changed. I did not see anything
+>     >     related by quickly reading the NEWS.
+>     >     I'd be happy to see this fixed upstream but I'd rather have upstream confirmation
+>     >     that they saw/fixed it (a commit, a changelog, ...).
+>     >     If that is fixed upstream, then we can drop my patch.
+>     >
+>     >
+>     > To be clear, I'm not against upgrading. I just don't think the commit message is
+>     correct
+>     > (but could be convinced otherwise).
+>     >
+>     >     Thanks!
+>     >
+>     >         Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+>     >         ---
+>     >          .../gutenprint/{gutenprint_5.3.4.bb <http://gutenprint_5.3.4.bb>
+>     <http://gutenprint_5.3.4.bb> =>
+>     > gutenprint_5.3.5.bb <http://gutenprint_5.3.5.bb> <http://gutenprint_5.3.5.bb>}  
+>      | 2 +-
+>     >          1 file changed, 1 insertion(+), 1 deletion(-)
+>     >          rename meta-oe/recipes-printing/gutenprint/{gutenprint_5.3.4.bb
+>     <http://gutenprint_5.3.4.bb>
+>     >         <http://gutenprint_5.3.4.bb> => gutenprint_5.3.5.bb
+>     <http://gutenprint_5.3.5.bb>
+>     >         <http://gutenprint_5.3.5.bb>} (96%)
+>     >
+>     >         diff --git a/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
+>     <http://gutenprint_5.3.4.bb>
+>     >         <http://gutenprint_5.3.4.bb>
+>     >         b/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
+>     <http://gutenprint_5.3.5.bb>
+>     >         <http://gutenprint_5.3.5.bb>
+>     >         similarity index 96%
+>     >         rename from meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
+>     <http://gutenprint_5.3.4.bb>
+>     >         <http://gutenprint_5.3.4.bb>
+>     >         rename to meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
+>     <http://gutenprint_5.3.5.bb>
+>     >         <http://gutenprint_5.3.5.bb>
+>     >         index f90a123293..82953b798c 100644
+>     >         --- a/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
+>     <http://gutenprint_5.3.4.bb>
+>     >         <http://gutenprint_5.3.4.bb>
+>     >         +++ b/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.5.bb
+>     <http://gutenprint_5.3.5.bb>
+>     >         <http://gutenprint_5.3.5.bb>
+>     >         @@ -17,7 +17,7 @@ LIC_FILES_CHKSUM =
+>     >  "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+>     >          SRC_URI = "https://downloads.sourceforge.net/gimp-print/${BP}.tar.xz
+>     <https://downloads.sourceforge.net/gimp-print/$%7BBP%7D.tar.xz>
+>     >         <https://downloads.sourceforge.net/gimp-print/$%7BBP%7D.tar.xz> \
+>     >  file://0001-cups-fix-a-build-race-condition-around-empty-directo.patch \
+>     >                     "
+>     >         -SRC_URI[sha256sum] =
+>     >  "db44a701d2b8e6a8931c83cec06c91226be266d23e5c189d20a39dd175f2023b"
+>     >         +SRC_URI[sha256sum] =
+>     >  "f5a9f47de28530b1ae2069cfbc647a9a641baeeabe809bb0ef2b3ec5b9668d70"
+>     >
+>     >          inherit autotools gettext pkgconfig
+>     >
+>     >         --
+>     >         2.51.0
+>     >
+>     >
+>     >         -=-=-=-=-=-=-=-=-=-=-=-
+>     >         Links: You receive all messages sent to this group.
+>     >         View/Reply Online (#119552):
+>     > https://lists.openembedded.org/g/openembedded-devel/message/119552
+>     >         Mute This Topic: https://lists.openembedded.org/mt/115307539/4316185
+>     >         Group Owner: openembedded-devel+owner@lists.openembedded.org
+>     <mailto:openembedded-devel%2Bowner@lists.openembedded.org>
+>     >         <mailto:openembedded-devel%2Bowner@lists.openembedded.org
+>     <mailto:openembedded-devel%252Bowner@lists.openembedded.org>>
+>     >         Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub
+>     >         [yoann.congal@smile.fr]
+>     >         -=-=-=-=-=-=-=-=-=-=-=-
+>     >
+>     >
+>     >
+>     >     --
+>     >     Yoann Congal
+>     >     Smile ECS
+>     >
+>     >
+>     >
+>     > --
+>     > Yoann Congal
+>     > Smile ECS
+>
+>
+>
+> -- 
+> Yoann Congal
+> Smile ECS
 
 
