@@ -1,158 +1,109 @@
-Return-Path: <philip@balister.org>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D3F3CAC592
-	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 13:52:07 +0000 (UTC)
-Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
- by mx.groups.io with SMTP id smtpd.web10.17120.1758289836136999231
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A438ACAC5A8
+	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 13:59:37 +0000 (UTC)
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.web10.17317.1758290377078340804
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Sep 2025 06:50:36 -0700
+ Fri, 19 Sep 2025 06:59:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mQzXfSpi;
- spf=pass (domain: gmail.com, ip: 209.85.219.44, mailfrom: nitin.wankhade333@gmail.com)
-Received: by mail-qv1-f44.google.com with SMTP id 6a1803df08f44-7482cb1d520so2570946d6.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 06:50:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jiDcxZsV;
+ spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-62105d21297so3798203a12.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 06:59:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758289835; x=1758894635; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Hai8JI9ac9s91EIiKKD5c2ZuMzgDRCOIMT5duPJ8kkg=;
-        b=mQzXfSpiXnfpHBQKBxtHLD4BTnJa5c1f6oVpEIoVJIMOa3DuSTzCxDIwUvhZw3jmB/
-         b4fU2upCo99ACtZfEDZ1wmVztsJBxLfvGGwnR8LM9EaM3zWSGMi24voJjSIC50FfvOkR
-         vYv1WfjLBeIPpKXRVaN488ZWCcPmnP5mlGBFCvkouAiY6oJUt/46sm+KWzEsZC2ZvGdp
-         B7LLvMAkP9tNOjuH8L41YsVaxOk5GJ6vCJXWLL81E+jt0tA4q1V55vjJWsmpjODcfVql
-         lYx2IhA6YvkyL4QB6qeELHQkrRiHQICMB0CjIpkjuSIn8vfgzQ4l4bfoHMgwPtzgv3b4
-         o4mA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758289835; x=1758894635;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1758290375; x=1758895175; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Hai8JI9ac9s91EIiKKD5c2ZuMzgDRCOIMT5duPJ8kkg=;
-        b=cZ5V20YINxqZ6OXwN45yU6sVb1JLxJwbUr9RHMbGCsm2tZaNgGEzSFXYnmKXa+Y5QG
-         bRJzumOUqmf7f8t+0kAviWJxAVC1GjgYOiRQx0o61MXYkMH08p+D5crkh1KkZaVmtV72
-         /006IPY76NFWD2vMmM7WL/twhOyna/nPEF7mPq8cMq8QW5WLj6tKhSC0tQTKYhpGZ9Pi
-         inszRzxSwQIuuZm8HQxSrQRIDzjPe6poGgz5VwC5L0qhN8jPc8B2wuqoxMN9Cps5TExD
-         RPq/DmxAg7jpygOZ5Ar0JBi5ylt/uQxRW1BMtsKSRLexPjUUmiY2zUGdM9U91zdSY4Ke
-         rE+Q==
-X-Gm-Message-State: AOJu0Yx3zb/PI8zubs76bqXLgdbeev9avFxH2/j2yLxVGJ+UfwmxId+8
-	chQ7gHxhhYeR3ZpGKHT0nvBZ97fzyb54JVCH22vESnzhF6Qk8DUX/DDVPFZraw==
-X-Gm-Gg: ASbGnctTsZTN2syaGkEc8+w9T7QAh9Zr6ueXx6Hic0Ppmq1iy/MhYtwRFNm4SnEIp2t
-	uuDo0hUM+gKkFsc3js+yPLdydNySP6PBz2fwVPFj4HwJdOGR+hCaZN0JTDNvtKzfgIT6SB/uKKA
-	IkyL5ZZEO+nsRshKaPojBBjAHtfnhCLltaUiq1q2BhBa0Ol/QnaAIG4S7/0FeVcyhijhLjm15dH
-	2j0AExaZoIvRdOjs8MABSVZfreI8xL+WzXySVbGdho1R2FKUwYV65Lpc1yUKnswMFuZJhKA0dpr
-	MOxYN7ykDytr7qGzMXu2GqB6u6be/ej6YNAsbgqnKNHPgOdA/R1tDGevl/7o/aWx+kIox11L4ui
-	OVfr5ghPulFxKcTgyfo9eI2D+tw5WMcgpzPR62PiI
-X-Google-Smtp-Source: AGHT+IHk0zTEVgsEbHlfFt4SC0xOuqBdC9rS9NAfEtjBGbypaKb2ShXdc1FteSKpmg4SgmeyV6CNEg==
-X-Received: by 2002:a17:902:dad2:b0:261:83d2:9d9f with SMTP id d9443c01a7336-269ba445fbamr27656555ad.4.1758289406730;
-        Fri, 19 Sep 2025 06:43:26 -0700 (PDT)
-Received: from LL-3324L.kpit.com ([223.233.80.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-269802deb53sm56515915ad.65.2025.09.19.06.43.24
+        bh=V3S74MSnAi4mzfeymciuMKjpSTmhkUs4MINUjoPgZqs=;
+        b=jiDcxZsV7jrO+ZCz0oOBu2lwTkHaHB1uaIBCHrsDfsMiygknkEQxKvEJA/rwadFSRt
+         mnyJRtp6sU+Fw8A0gggynZovevgYCC52RC4SEkDt0Z4dSMEAfNW4UQcqTztYlA4LtTH1
+         nzM7qqHK19cvinzpG1hTW4Hg4y+MJqWObToruTODDl74O84YfLe7+KZk6aQdff/tsmKW
+         0h4Ur7EPml5fNGz8tya3VvTk/GHx9FD/Fw2aFUcXGqpVGnuMuBsbs9knXCSUgNrxF+cE
+         6BYNaOgom+4pyC7iHH5nYKr0MtfRcWXhI/MvkwmJpwLr710mgRJBxgrlkq4Swg8PtZ9K
+         hjGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758290375; x=1758895175;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=V3S74MSnAi4mzfeymciuMKjpSTmhkUs4MINUjoPgZqs=;
+        b=Qs5hXh1geuT+vIS9rzu6OMSDGNvw/PABuVHtgYsgHciGq5i6iOi6+fla06u566cr9d
+         GXZqzH80/UeQrKJ+ALYIxM2YMACBw8Y5XrI07XUDDZ2/VhMVenmO5XCFEcMnHyOXdCLn
+         KF8vNspK/T6FbHcqUVDXV6K+X7bWzNYMgm2QGTxxsyRKdCka8l+5PA4cxM4B5NJou2+M
+         JxwS+IKT3GlGAYfFZY6PjQ+DgEXVUn5/aDXaskQnFNeMJw9G9LyxwurtwMSGW7L0tG7Y
+         AjDMNa5cFubg3vFP/MEVEZEOCAAd56eJzzd6XFYaGs9gFHvAuVjzlGjZyHYhkOo2j9GV
+         9yjQ==
+X-Gm-Message-State: AOJu0Yzevvt1uJP7C+CSYqhvn2t6YBCnCM+jz8dFb+olMKsK2NaVyEmP
+	P0YbOqRIqRwj+HU93LdRtkJ6IfO9nByP6TvkafCEyR6zZ2Fjv+CANjheQq5AxQ==
+X-Gm-Gg: ASbGnctzDS+9/SMf4FNhJWOakBLiKG4wDdTXLTS0a7sFhQ2V/CqhaPhUjqDTfRBMLYq
+	0iYz3lJyNwNiZngZC1URJWaIfIJHTnnYxSG8i8gbu2LFu7QKvdThV+NsQYDHqr+wv5Tx4crV67+
+	3EVx4j+db1kDJ4azkmjH5zvM7f+LIi2LxpNf72wW3XWFGQcr3Jx81CuKafC1bV5jNBMAu+Tx1xU
+	ifJAesf4KpwsVc/CfwSACxuLweJ8nX7po6oqTK8q6NGrvAwIUOxCPWkQFwPAsC+klOKEGD8Krwk
+	93V3JRzoeBNu7AOmOxJjs5rOggIAnAaA+dY4h3ZmLIzf7HmwTNAWxyflX6Yl0pBEFxk1HBMutRA
+	BdQZUb19UUXEIWJLj5zPv
+X-Google-Smtp-Source: AGHT+IELF89FSPz3BQ3IfEnmXbF5KhwM1qeZ1HCj457nwJuOeHpXUaBNrr3o8wUfvnTlganxbuQtDw==
+X-Received: by 2002:a17:907:268b:b0:b24:e000:4339 with SMTP id a640c23a62f3a-b24f5685f12mr285815366b.52.1758290375160;
+        Fri, 19 Sep 2025 06:59:35 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b1fd262993asm442209166b.94.2025.09.19.06.59.34
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Sep 2025 06:43:26 -0700 (PDT)
-From: Nitin Wankhade <nitin.wankhade333@gmail.com>
+        Fri, 19 Sep 2025 06:59:34 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: nitin.wankhade@kpit.com
-Subject: [PATCH] iperf3: Fix CVE-2025-54349
-Date: Fri, 19 Sep 2025 19:14:53 +0530
-Message-Id: <20250919134453.2008042-1-nitin.wankhade333@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Subject: [meta-oe][kirkstone][PATCH 2/9] colord: upgrade 1.4.5 -> 1.4.6
+Date: Fri, 19 Sep 2025 15:59:24 +0200
+Message-ID: <20250919135933.916848-2-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250919135933.916848-1-skandigraun@gmail.com>
+References: <20250919135933.916848-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 13:52:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119597
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 13:59:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119599
 
-From: Nitin Wankhade <nitin.wankhade@kpit.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-This commit fix heap overflow for iperf3 package
+Changelog:
+==========
+Bugfixes:
+ - Add missing copyright notices
+ - Add Spyder X entry
+ - Document where to send patches
+ - Don't use exact floating point comparisons
+ - Drop option for removed reverse engineering tools
+ - Drop references to hughski.com
+ - Fix a small memory leak in sqlite3_exec()
+ - Fix typo in device-removed signal documentation
+ - Make introspection optional in meson
 
-Reference: https://github.com/esnet/iperf/commit/4e5313bab0b9b3fe03513ab54f722c8a3e4b7bdf
-
-Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 706cfeb2504ebec37872e6ee051a5b07385412b7)
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../iperf3/iperf3/CVE-2025-54349.patch        | 55 +++++++++++++++++++
- .../recipes-benchmark/iperf3/iperf3_3.14.bb   |  1 +
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch
+ meta-oe/recipes-support/colord/colord.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch
-new file mode 100644
-index 0000000000..f60267bb57
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch
-@@ -0,0 +1,55 @@
-+Subject: [PATCH] iperf3: Fix CVE-2025-54349
-+CVE: CVE-2025-54349
-+Upstream-Status: Backport [https://github.com/esnet/iperf/commit/4e5313bab0b9b3fe03513ab54f722c8a3e4b7bdf]
-+Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
-+---
-+--- a/src/iperf_auth.c	2025-08-19 12:02:47.706337000 +0530
-++++ b/src/iperf_auth.c	2025-09-15 12:50:47.933400511 +0530
-+@@ -264,7 +264,8 @@
-+ 
-+     keysize = RSA_size(rsa);
-+     rsa_buffer  = OPENSSL_malloc(keysize * 2);
-+-    *plaintext = (unsigned char*)OPENSSL_malloc(keysize);
-++    // Note: +1 for NULL
-++    *plaintext = (unsigned char*)OPENSSL_malloc(keysize + 1);
-+ 
-+     BIO *bioBuff   = BIO_new_mem_buf((void*)encryptedtext, encryptedtext_len);
-+     rsa_buffer_len = BIO_read(bioBuff, rsa_buffer, keysize * 2);
-+@@ -274,7 +275,7 @@
-+     OPENSSL_free(rsa_buffer);
-+     BIO_free(bioBuff);
-+ 
-+-    if (plaintext_len < 0) {
-++    if (plaintext_len <= 0) {
-+       /* We probably shouldn't be printing stuff like this */
-+       fprintf(stderr, "%s\n", ERR_error_string(ERR_get_error(), NULL));
-+     }
-+@@ -320,7 +321,7 @@
-+     int plaintext_len;
-+     plaintext_len = decrypt_rsa_message(encrypted_b64, encrypted_len_b64, private_key, &plaintext);
-+     free(encrypted_b64);
-+-    if (plaintext_len < 0) {
-++    if (plaintext_len <= 0) {
-+         return -1;
-+     }
-+     plaintext[plaintext_len] = '\0';
-+@@ -328,16 +329,19 @@
-+     char *s_username, *s_password;
-+     s_username = (char *) calloc(plaintext_len, sizeof(char));
-+     if (s_username == NULL) {
-++	OPENSSL_free(plaintext);
-+ 	return -1;
-+     }
-+     s_password = (char *) calloc(plaintext_len, sizeof(char));
-+     if (s_password == NULL) {
-++	OPENSSL_free(plaintext);
-+ 	free(s_username);
-+ 	return -1;
-+     }
-+ 
-+     int rc = sscanf((char *) plaintext, auth_text_format, s_username, s_password, &utc_seconds);
-+     if (rc != 3) {
-++	OPENSSL_free(plaintext);
-+ 	free(s_password);
-+ 	free(s_username);
-+ 	return -1;
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
-index d181eb3b02..831e854982 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
-@@ -16,6 +16,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dc6301c8256ceb8f71c9e3c2ae9096b9"
- SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
-            file://0002-Remove-pg-from-profile_CFLAGS.patch \
-            file://0001-configure.ac-check-for-CPP-prog.patch \
-+           file://CVE-2025-54349.patch \
-            "
+diff --git a/meta-oe/recipes-support/colord/colord.inc b/meta-oe/recipes-support/colord/colord.inc
+index 41962cd63c..0ae1a30fe6 100644
+--- a/meta-oe/recipes-support/colord/colord.inc
++++ b/meta-oe/recipes-support/colord/colord.inc
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
+     file://meson.build;beginline=3;endline=3;md5=f42198707d793be58b274d34fd5238c3 \
+ "
  
- SRCREV = "a0be85934144bc04712a6695b14ea6e45c379e1d"
--- 
-2.34.1
-
+-PV = "1.4.5"
++PV = "1.4.6"
+ SRC_URI = "https://www.freedesktop.org/software/colord/releases/${BPN}-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "b774ea443d239f4a2ee1853bd678426e669ddeda413dcb71cea1638c4d6c5e17"
++SRC_URI[sha256sum] = "7407631a27bfe5d1b672e7ae42777001c105d860b7b7392283c8c6300de88e6f"
+ 
 
