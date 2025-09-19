@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8973DCAC59A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AAC69CAC5AC
 	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 13:59:47 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web11.17305.1758290377660546197
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.web10.17322.1758290382105932181
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Sep 2025 06:59:37 -0700
+ Fri, 19 Sep 2025 06:59:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ibUZd6bv;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b264afcc5c5so89216066b.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 06:59:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Vy0+4leV;
+ spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-b07c081660aso376262266b.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 06:59:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758290376; x=1758895176; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758290380; x=1758895180; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=yNX49QwzuXR9REpl5oMeEtT7//XMs6L/4A1+xqijXBs=;
-        b=ibUZd6bvRbLtjqcOWyrfOCa5UGWinpXcJmFWOS5pUIig5qULDaTFXUV4j7q6BjQJ/x
-         g/nkAs4MFLuFYaWvrdGRr1O5BcR6wcyK7J4cOPfChF+n+R+ehEJZmti7Wf5Q2V9IKjeN
-         2z9z/1Pa9eL68q9IcBwDPz/fiFxxnRMi/HCtIKw4Zs/Rfg+pAN1LYwjrEsk3vOuR78Dy
-         ufsDCebuSCyH3b9h1pqrTzRIBCQciWbafv8TdJT/3u+o4rby4c/OcPJeVMiMrmu6UP/V
-         dfCkwHZEQA6JVLlpaz89CUSO869ZGijmTyzfGeaAZIiWjXMZoYYToar4bEIv0eHkskGr
-         lxlw==
+        bh=hb2k6I8x55qqKsiZ8k/dOxPItySuoUkQ8NgLxzzYpZM=;
+        b=Vy0+4leV8N8GHgio3MGM4IMjRdTrcRcv3GR9pinD1JlbMBu2Cz3uoc43uTj7UpIDOO
+         AlMcRIDrxO4XQi5dliLWuPwgwMo92/gcKU/fK1bI9QnibRSHGsC6f61AgBeo8DNdjpvQ
+         FWh/pMhlN6VOytKPis9jZmytNCyE9IWJg5nsj4q4ffXjyae+thcU24CbmKNSdAxVeum/
+         he1SC4T7m70Kxv2YmqQ1l7dV0k2yHQWeVqdQ0Uz4B+zTwpD8JWhBk6BN4nFe0Xiov2mx
+         5vuCcJlLS+boRLnRLkt5k2Y6+DFbssZ32qgp1aqvALXkTCSaOH5GAAt4IfU6wGgvIDAX
+         OLQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758290376; x=1758895176;
+        d=1e100.net; s=20230601; t=1758290380; x=1758895180;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=yNX49QwzuXR9REpl5oMeEtT7//XMs6L/4A1+xqijXBs=;
-        b=ieJnoaqBjaG6KWde51+xNSps8tlduNR7olhMHrtQ+701YH+iCxvQlXiedbsMBEsYAz
-         fPcnqfBNuj+81t+kot2xT522hk5niazE6mfEGlHOx4HTEW89f3ojK32FUrhv82d/4V0h
-         03T/BhJJoeJQ/P5TatQdrdaMpKdjgRuY5UfBCvcBHl37i0XFsLjmdIVHPFO1ZQmu3lU7
-         R2qSZRBSjiq09r+9dtaiXsP7a/GdnKenbP+RrqLfps5MFpMJwqxIp277ZlCY0lgpw7zu
-         GPrLrb+Q3lSRjiG6t0crqK4Q+hCn6y9cYMBrluZc5xcsCismOZ1Ztlg97LfXRlayhe35
-         TD+Q==
-X-Gm-Message-State: AOJu0YxQ7vscStW7M4XtG6oGi5Youfs2DrT++d9IMjNbcPtPz/YEeD3E
-	spyjVPslfe5jCvncxQybox/yzQ0xXXCXwvQO+ErHxJhDudpNGI1kZAv/FyCqqQ==
-X-Gm-Gg: ASbGncslD+07sOOYJpxPMBrDsv/x5neFUS3dvadLauNlaQ5nwW/BIluHltWsXKVsoMm
-	HhmmQaprkbNHtRp8FHbDJML7eZA34cA35obOJ4uDWFgX1lrsDxWSjxiuujfC1RCTnSF97GsNcGJ
-	/LVtB/Vs6LF7xnx3RsOFOsjJfkYQdG0O10qg5uPj/u9HRuvH/g3ceNS5RM3IfPSzhuvGWBXiSs0
-	6fnRxTcZW7T2jJjkCBkWR/4vxZenm1VolYNo2rhXlwDq23Hg9V8UfUCsH52zz/+icc2YdxxkOKq
-	PzxnD8ohK7XdWo/jlF6N5CVjJMTbAluNL4u7pfmDKlWlp8gCimQnnGAP74G+VILznP3d7PFEIk/
-	44V+e5/CJSHEd8wAe8Y7+GtQ2wwBh1Hs=
-X-Google-Smtp-Source: AGHT+IHIUyTPQbTvGrs28x+eF0UHmFOUBLeWCKkVFwiZf9zBtAgxc/gjf8tgXS+YPoiEt6OC9blQow==
-X-Received: by 2002:a17:907:97c2:b0:b21:6dce:785 with SMTP id a640c23a62f3a-b24edd52400mr315826566b.1.1758290375887;
-        Fri, 19 Sep 2025 06:59:35 -0700 (PDT)
+        bh=hb2k6I8x55qqKsiZ8k/dOxPItySuoUkQ8NgLxzzYpZM=;
+        b=AcnvDHDPwwnc7to/5rw6ZwzfiAidnVyOWX+UkL/zZycoxhsx8nwcGS6u8//59cC7Q3
+         yk9UKyT247pm40XFQn4X83MLGs6mUCZyndlrljyzzPpiCVMZAPS4o/C10Ses19KDjR+/
+         VXziIt8rLDYwsLUE76DaKzry1NUKL5/pFZSM1gWLHHuW4suISqGnlOqYxPVwgnSiTQDO
+         U0AONZRnaP/CEfcbrlNeBE4PpbCPByNe7iyFilY1UlJYGKxqAKXWuFHcTcjUoEnVy+z0
+         A5RpZA36LwCCE1XDLpRvlk7wKGziJ6JiS0elDvz3I8/fyw9jaF3/uWQ+DYMcL/LrRxcT
+         t6SA==
+X-Gm-Message-State: AOJu0YyttWhPS6PU1gdsaz9uCOBoHJzIRzkGfceOi9gvCP36V5vDfOWB
+	EpmcqgbhnTIztFPRrtiBph/dpPfCFeWER5q13ke9NBpRKTF4Tdtw2y8k5Uu0wQ==
+X-Gm-Gg: ASbGncvhDxcHoT9UxVIq6T0IDFhCOwXHsllWO5X0po1tuVQrAt9DwAUcTFFBa2+P1Sw
+	H766wBHQCvrurEy73wTW0sGhUmULNYBhhI84qO5mFFmeck6cnTFWTKCUXmdLIuonFX2KY3eU+7+
+	1Gkmu+ZGEKdjzxkruUYb05yy+KmNtYF2QuM8qNUhuFwTMhH1oEUfztcsfw2jJmgi6Y5/joSZVi2
+	40fbADD3s3QVERHBI9D4JYOHZcTBF/NK+jQPp+1KdyVbvv+O3Pj1UEGY8054Yq6UaBl4o1yrG8e
+	ev3a+6SCL6+l6Jdeh0zKm8X99PeVhAtlvxuw1cK5oExTFVpvvmmaY4qPnQ+ln1gOB/SebX1z+Jg
+	gAUlwmaWQeG09OKHsKhb1
+X-Google-Smtp-Source: AGHT+IGw4UDcwHCPwpmX0JNFJcuSVhVEg1WT/HMC6Qz89/+G/uLBoZycORSYKRwizZ5/YYAgsqlYoA==
+X-Received: by 2002:a17:906:7310:b0:b04:858e:c1ee with SMTP id a640c23a62f3a-b24ed886e06mr396608166b.2.1758290380269;
+        Fri, 19 Sep 2025 06:59:40 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b1fd262993asm442209166b.94.2025.09.19.06.59.35
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b1fd262993asm442209166b.94.2025.09.19.06.59.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Sep 2025 06:59:35 -0700 (PDT)
+        Fri, 19 Sep 2025 06:59:39 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 3/9] colord-native: upgrade 1.4.6 -> 1.4.7
-Date: Fri, 19 Sep 2025 15:59:25 +0200
-Message-ID: <20250919135933.916848-3-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 9/9] hddtemp: Add missing prototype for ata_get_powermode in sata.c
+Date: Fri, 19 Sep 2025 15:59:31 +0200
+Message-ID: <20250919135933.916848-9-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250919135933.916848-1-skandigraun@gmail.com>
 References: <20250919135933.916848-1-skandigraun@gmail.com>
@@ -67,78 +67,68 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 13:59:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119600
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119606
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.patch
-refreshed for 1.4.7
-
-Changelog:
-===========
-- Add various hardenings to the systemd service
-- Always close the ICC profile when loading fails
-- Avoid destructing LCMS plugin twice with lcms 2.14
-- Do not make state files executable in tmpfiles.d/colord.conf
-- Fix a double free spotted by Coverity
-- Fix an error check when parsing the DTP94 data
-- Fix a -Wincompatible-pointer-types warning
-- Fix potential crash when reading from broken Huey hardware
-- Set FILE_OFFSET_BITS explicitly
-- Use a 64-bit time_t
-- Use thread context for Gamut Alarm codes
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f016f77796504de03a4148a13383fd9fd5754a73)
+(cherry picked from commit fdb8bc38b1e959006a0a5d98c84c8443c785e49d)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...the-function-cd_icc_create_from_edid-to-avoid-u.patch | 9 +++------
- meta-oe/recipes-support/colord/colord.inc                | 4 ++--
- 2 files changed, 5 insertions(+), 8 deletions(-)
+ ...-Declare-ata_get_powermode-prototype.patch | 33 +++++++++++++++++++
+ .../hddtemp/hddtemp_0.3-beta15.bb             |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hddtemp/hddtemp/0001-sata.c-Declare-ata_get_powermode-prototype.patch
 
-diff --git a/meta-oe/recipes-support/colord/colord-native/0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.patch b/meta-oe/recipes-support/colord/colord-native/0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.patch
-index aae2be8c1e..a120b73114 100644
---- a/meta-oe/recipes-support/colord/colord-native/0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.patch
-+++ b/meta-oe/recipes-support/colord/colord-native/0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.patch
-@@ -1,4 +1,4 @@
--From cbb8f5c05fce1d56ae2e5fa9f57fc49c47bed5ab Mon Sep 17 00:00:00 2001
-+From d16aed3118bee1e0a7d0bc9e0f34c427a405a6d8 Mon Sep 17 00:00:00 2001
- From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
- Date: Sun, 12 May 2019 21:58:02 +0200
- Subject: [PATCH] Move the function cd_icc_create_from_edid to avoid udev
-@@ -89,10 +89,10 @@ index a5e2328..dec509a 100644
- +}
- +
- diff --git a/lib/colord/cd-icc.c b/lib/colord/cd-icc.c
--index 8beec43..398ff7a 100644
-+index 3937d8a..daf6f4d 100644
- --- a/lib/colord/cd-icc.c
- +++ b/lib/colord/cd-icc.c
--@@ -3114,68 +3114,6 @@ cd_icc_create_default (CdIcc *icc, GError **error)
-+@@ -3117,68 +3117,6 @@ cd_icc_create_default (CdIcc *icc, GError **error)
-  	return cd_icc_create_default_full (icc, CD_ICC_LOAD_FLAGS_NONE, error);
-  }
-  
-@@ -161,6 +161,3 @@ index 8beec43..398ff7a 100644
-  /**
-   * cd_icc_create_from_edid:
-   * @icc: A valid #CdIcc
---- 
--2.20.1
--
-diff --git a/meta-oe/recipes-support/colord/colord.inc b/meta-oe/recipes-support/colord/colord.inc
-index 0ae1a30fe6..cafbaaa696 100644
---- a/meta-oe/recipes-support/colord/colord.inc
-+++ b/meta-oe/recipes-support/colord/colord.inc
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
-     file://meson.build;beginline=3;endline=3;md5=f42198707d793be58b274d34fd5238c3 \
+diff --git a/meta-oe/recipes-support/hddtemp/hddtemp/0001-sata.c-Declare-ata_get_powermode-prototype.patch b/meta-oe/recipes-support/hddtemp/hddtemp/0001-sata.c-Declare-ata_get_powermode-prototype.patch
+new file mode 100644
+index 0000000000..5703d3c241
+--- /dev/null
++++ b/meta-oe/recipes-support/hddtemp/hddtemp/0001-sata.c-Declare-ata_get_powermode-prototype.patch
+@@ -0,0 +1,33 @@
++From c5ca31940d1d1889ef2cc6974c18ff24ab406748 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 31 Aug 2022 16:42:23 -0700
++Subject: [PATCH] sata.c: Declare ata_get_powermode prototype
++
++Fixes build warnings/errors
++
++sata.c:127:10: error: call to undeclared function 'ata_get_powermode'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
++|   switch(ata_get_powermode(dsk->fd))
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/sata.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/src/sata.c b/src/sata.c
++index d67621f..4172245 100644
++--- a/src/sata.c
+++++ b/src/sata.c
++@@ -52,7 +52,8 @@
++                 (((u16)(__x) & (u16)0xff00U) >> 8) )); \
++ })
++ 
++- 
+++extern enum e_powermode ata_get_powermode(int device);
+++
++ static int sata_probe(int device) {
++   int bus_num;
++   unsigned char cmd[4] = { WIN_IDENTIFY, 0, 0, 1 };
++-- 
++2.37.3
++
+diff --git a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
+index b4be39feb5..e9d30977fe 100644
+--- a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
++++ b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
+@@ -10,6 +10,7 @@ SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/hddtemp/hddtemp-0.3-beta15.tar.bz2 \
+            file://hddtemp-0.3-beta15-autodetect-717479.patch \
+            file://0001-backtrace-Replace-struct-ucontext-with-ucontext_t.patch \
+            file://0001-configure.ac-Rename-to-configure.ac-and-use-external.patch \
++           file://0001-sata.c-Declare-ata_get_powermode-prototype.patch \
+            file://hddtemp.db \
+            file://init \
  "
- 
--PV = "1.4.6"
-+PV = "1.4.7"
- SRC_URI = "https://www.freedesktop.org/software/colord/releases/${BPN}-${PV}.tar.xz"
--SRC_URI[sha256sum] = "7407631a27bfe5d1b672e7ae42777001c105d860b7b7392283c8c6300de88e6f"
-+SRC_URI[sha256sum] = "de02d9910634ae159547585cec414e450f711c27235453b4f9b38a9f2361a653"
- 
 
