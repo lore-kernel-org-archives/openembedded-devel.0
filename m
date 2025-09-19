@@ -1,145 +1,188 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED3D2CAC5AA
-	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 14:25:37 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web11.17919.1758291931065188051
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20AEDCAC59A
+	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 16:50:20 +0000 (UTC)
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.web10.1326.1758300612139223718
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Sep 2025 07:25:31 -0700
+ Fri, 19 Sep 2025 09:50:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=By4VtnMJ;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-b07e3a77b72so467592866b.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 07:25:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=EVNBW0xP;
+ spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-71d60504bf8so24224157b3.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 09:50:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758291929; x=1758896729; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=KJNk3QiOumQ+FuoOigUI1VfJusgnZXzyngnd4hVBiRQ=;
-        b=By4VtnMJ8gbWXeMDdB4z9DQBkAnF0mU8/YZ8whbjbe3y7jxM4r8/J4sTElSAx/TZk0
-         U295mzqDoLZcbU2x4VNwlSMZEMtyprwt9DDwJ1sZHqi7PtTO5e4qtTUReOyugh10PJ1r
-         Tk3/E9qukl5jywZoHcFfclzkMoLNfrAB1e+XJwCsTVMbFXKTNc1l8sVWQxzXs8IhQ+KQ
-         TzoSiPQA/0HWAKoq4aOCSMc3UXdzqqL+D0haV/9i8fgw0Dp3Pimls3Ba3CN7/7qoCbFl
-         i2A7G7AZdEJTM5XUlBdj/0KAcSbRZ5mSfAD02NJmOXtzN50SHKucYWolE0u8GVO6mDI5
-         Ipkg==
+        d=gmail.com; s=20230601; t=1758300610; x=1758905410; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=pFmW24eV2SUrHYvkJdxbIwHFbKW4ycFhyt2IH81X5EM=;
+        b=EVNBW0xPTuxdtMdkCmVd+D60nBqwEDd1VhS7+sgZpSv34WOmsreFShhuv1kvznrbg6
+         SHYmTGNsMxP9rg4t9DKkM73cOPVsWixW1JwZxyYeDyBS/hIGaDgMoktw5TRpBl0gf7x/
+         r/vgQCKRl9Fx9fKqCdLG+ReAFrhp9i044C5unTQ0sGh2eimYoscBhRkQ9sX5l2kSsuve
+         wSOJ7ICSbjgEcyJulFrTB1xNBXGXweX2tzbnKL8Reww42oSKnn49+Sa+fHbiCvYf2NMt
+         lDjVtqRd9tyimzJtx12SwrSL4MCLUTPH++pUYiOGTO6qFnAJ4yIBGfjOtOTgsSRPEs1r
+         xZ0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758291929; x=1758896729;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=KJNk3QiOumQ+FuoOigUI1VfJusgnZXzyngnd4hVBiRQ=;
-        b=X2ZFhJ4myWCtbJP2aHpKb4wbBTjurqw0SLoUIPyLPYdoMoIVS9DznZdVdTf1IF9EFH
-         rzM6E30N560R4lUurtL3qsyiDJnh153cULTlUu7do84FvyZMZboHWSkrVmj9OztcnyAZ
-         CLuY8OtAyC9tctXeMj7z/oGh7SbtkvSo9kJkMARRM17AxMHcNqUZGGYIwsCNoFvMg2Ef
-         bapuksEMOjrt16GXApbutLNlCPIz6Q3B+k9MZNho9DR3shi19KiRVUydfbzCbS/q3g9M
-         KgJSVkbhvaY3qWiMdz+IT/wlQFweNzVGs5ZvKCWvvuIfiVWoNqOKKERhh9TYG63i1IhR
-         i6Tw==
-X-Gm-Message-State: AOJu0YyPHkOBc11s0H4eyWQ9VWW1RDPEoy79yPINM8LalHP9tgS4s8fd
-	qDIGcJ4xDijEnJ+FDBBVTCI7sVYNkBWnD3j2atixVoVAEc5ehQsBC3ewCTFpZg==
-X-Gm-Gg: ASbGncteNVt0Zi7IsFjCYR6xisZZwmC16+g96yg8c8YbnzqN0Xe0nznT9zDnmmom+W5
-	6GP552dMjpMx/hZ0zKJdZU7zma7zB8Glqji0S/O4gsGDOUVlZUGjeFk/cK5qTMPFl2kUEmeDGca
-	JYfFnSg4pmVDubZRhSGxYe69L64tiJPKKFQ9h5H8375AblF1ujMNzMu9/b1exj+xreNHlcbhTez
-	ijGyJ265igzXbTlAuDpUtfrFCzVtWZBvnFhtNEShisxIzR/4LjGSmOXN2/7vBqPU6thVHa7sEQH
-	UwUolJ+pOwfWT0DKdc8lbIkHYPEFgfN83SiNx0x/21in+as14/v9astkpYzKxO3tsKKOdqbPN8u
-	T1qO1ZvAhnZwVt68x1rg7
-X-Google-Smtp-Source: AGHT+IHtfIgKAmcr7rYybzhvD2f9M48tNz8W9/XCuUVhaZ0cN1Oc3m6RW/8LJh5lCT0rdlTYaOCEEQ==
-X-Received: by 2002:a17:907:1c89:b0:afe:8ae2:a8fe with SMTP id a640c23a62f3a-b2489deef77mr459314966b.14.1758291929056;
-        Fri, 19 Sep 2025 07:25:29 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b264fc79404sm121651566b.10.2025.09.19.07.25.28
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Sep 2025 07:25:28 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] epeg: update to latest revision
-Date: Fri, 19 Sep 2025 16:25:27 +0200
-Message-ID: <20250919142527.975042-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
+        d=1e100.net; s=20230601; t=1758300610; x=1758905410;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=pFmW24eV2SUrHYvkJdxbIwHFbKW4ycFhyt2IH81X5EM=;
+        b=Nmsg4C9HBNYhZ0SdkiD5mQG2GvGAYOQ48rUrizz2Q5Oby56oLCVP8cHjJsszv7KpUD
+         Xe2as9aQkTHfufVyGEQZzvH/3azw9pL7Re/np3l7ierwO7RPGul0Uuu+1DJE2s0gXq4U
+         VVtf6yIOc5NAiO/2Qrxyi9SUC/oX0/DI2wudKGAKdihvnZxbaAHGx8UqUJ0IJBgTN3p6
+         1rBIZ9B9KvbSH1Ws3GdQdnEm31jibnqLtvbqDzdpqUdNyRLaWmsjpWWM9zrNj40FdmzW
+         qI4j/WMX2CYJfJXj7sj/WG624BzUY0he1/HYUZ+vMUouTKCn/t7EA0vdzkLU/mvdHXM0
+         5emg==
+X-Gm-Message-State: AOJu0YzIRDJhE3L0KoQNnBkew6FOEH7YQqB8j9k44W/e33wDyovad4eo
+	wU6JnjsgkAu5dsLCXWjXvEVR1H+rGm7VjwvCAyCCBqpPqXDzcqgSOVq+Ljd8W+pQg8ePBmoSoZZ
+	HZGDkgLcZ8Yr2RZsyTJ53Tq3AojYkY1E3goIL
+X-Gm-Gg: ASbGncs6LrVD4O31JrYtXWOElUY+zDeI2eOE/zQnK4X+ZH+VbVxXHUkRTemcCumDxdP
+	K0Nw4dZL5QWPh2MC9OEdrVxXntzXvD3YUnLKNdtuD3/R3jhlAnFSz+8Rr9RVp/8YA/jk+jPRl49
+	XHGziMGGucmd0Sv1fU95yIbfGc2dPRfII9fFcGvn2VfB0ix3L26bFsHp+7zRuQeSOj6mfvuFAfu
+	3AjFsJC5bTI+M6XifxJQqPfFL9dOVM65X/VrEvRZLtSX1IayaFvyK0pfJ3FZ2DDb4rYN8uebqDY
+	5VGLqeyTTq0+4XpelrBBWiE=
+X-Google-Smtp-Source: AGHT+IGun6VcqgK6oonY4t0FjbuFylu14q884hmzPkXFMrVLaiHDmFAC78PiSr5lVVtqWQNPmVGs+dOxAfJdI46+4v4=
+X-Received: by 2002:a05:690c:64c1:b0:729:5655:3444 with SMTP id
+ 00721157ae682-73d3b0b646cmr37103627b3.25.1758300609962; Fri, 19 Sep 2025
+ 09:50:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250919134453.2008042-1-nitin.wankhade333@gmail.com>
+In-Reply-To: <20250919134453.2008042-1-nitin.wankhade333@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 19 Sep 2025 09:49:43 -0700
+X-Gm-Features: AS18NWDcRkRS4jxZX9cjw3cpxtOPMgKXfd6oD2Go98jz5g2tpU4xM15nBDObCs4
+Message-ID: <CAMKF1spYWiKWA8YDaxaudGjymQ6D5U6Lu=RwMkqLMzZann=qeg@mail.gmail.com>
+Subject: Re: [oe] [PATCH] iperf3: Fix CVE-2025-54349
+To: nitin.wankhade333@gmail.com
+Cc: openembedded-devel@lists.openembedded.org, nitin.wankhade@kpit.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 14:25:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119608
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 16:50:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119609
 
-Dropped patch that has been incorporated into this version.
+On Fri, Sep 19, 2025 at 6:52=E2=80=AFAM Nitin Wankhade via
+lists.openembedded.org
+<nitin.wankhade333=3Dgmail.com@lists.openembedded.org> wrote:
+>
+> From: Nitin Wankhade <nitin.wankhade@kpit.com>
+>
+> This commit fix heap overflow for iperf3 package
+>
+> Reference: https://github.com/esnet/iperf/commit/4e5313bab0b9b3fe03513ab5=
+4f722c8a3e4b7bdf
+>
 
-Shortlog:
-configure: Fix checks for libjpeg and libexif
-parenthesis fix
-minor fix on CMakeLists
-fix to build command line tool with cmake
-fix CMakeLists.txt & Epeg.h so that they work on a WIN32 target
-bug fix: memleak in epeg_close
-add epeg_orientation_set
-add epeg_orientation_get
-add CMakeLists.txt
-Use archive.org link for Sune's blog post
-Fix XMP rotation bug
+Please add the branch name it's intended for as prefix to the subject
+line, so it gets the right attention.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- ...e-Fix-checks-for-libjpeg-and-libexif.patch | 32 -------------------
- meta-oe/recipes-support/epeg/epeg_git.bb      |  7 ++--
- 2 files changed, 2 insertions(+), 37 deletions(-)
- delete mode 100644 meta-oe/recipes-support/epeg/epeg/0001-configure-Fix-checks-for-libjpeg-and-libexif.patch
-
-diff --git a/meta-oe/recipes-support/epeg/epeg/0001-configure-Fix-checks-for-libjpeg-and-libexif.patch b/meta-oe/recipes-support/epeg/epeg/0001-configure-Fix-checks-for-libjpeg-and-libexif.patch
-deleted file mode 100644
-index 1568fe96e1..0000000000
---- a/meta-oe/recipes-support/epeg/epeg/0001-configure-Fix-checks-for-libjpeg-and-libexif.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 4e0c62634b0db6dbad0d41377bb71a8012abd75b Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 1 Sep 2022 12:56:54 -0700
--Subject: [PATCH] configure: Fix checks for libjpeg and libexif
--
--Use the functions from the respective library instead of using main
--function which is not part of library
--
--Upstream-Status: Submitted [https://github.com/mattes/epeg/pull/27]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- configure.ac | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index a4f6ebd..e474b1d 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -31,8 +31,8 @@ AC_SUBST(version_info)
-- dnl AC_CHECK_FUNCS(fmemopen)
-- dnl AC_CHECK_FUNCS(open_memstream)
-- 
---AC_CHECK_LIB([jpeg], [main], [], [echo "libjpeg library not found. Please install it before proceeding"; exit -1])
---AC_CHECK_LIB([exif], [main], [], [echo "libexif library not found. Please install it before proceeding"; exit -1])
--+AC_CHECK_LIB([jpeg], [jpeg_simple_progression], [], [echo "libjpeg library not found. Please install it before proceeding"; exit -1])
--+AC_CHECK_LIB([exif], [exif_data_new_from_file], [], [echo "libexif library not found. Please install it before proceeding"; exit -1])
-- 
-- my_includes=""
-- my_libs="-ljpeg -lexif"
---- 
--2.37.3
--
-diff --git a/meta-oe/recipes-support/epeg/epeg_git.bb b/meta-oe/recipes-support/epeg/epeg_git.bb
-index 63c1455f25..647d82ec53 100644
---- a/meta-oe/recipes-support/epeg/epeg_git.bb
-+++ b/meta-oe/recipes-support/epeg/epeg_git.bb
-@@ -5,10 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e7732a9290ea1e4b034fdc15cf49968d \
-                     file://COPYING-PLAIN;md5=f59cacc08235a546b0c34a5422133035"
- DEPENDS = "jpeg libexif"
- 
--SRC_URI = "git://github.com/mattes/epeg.git;branch=master;protocol=https \
--           file://0001-configure-Fix-checks-for-libjpeg-and-libexif.patch \
--           "
--SRCREV = "9a175cd67eaa61fe45413d8da82da72936567047"
-+SRC_URI = "git://github.com/mattes/epeg.git;branch=master;protocol=https"
-+SRCREV = "17bbae0f0a0b777e5fb01e0d16891e07153a41eb"
- 
- inherit autotools pkgconfig
--
+> Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
+> ---
+>  .../iperf3/iperf3/CVE-2025-54349.patch        | 55 +++++++++++++++++++
+>  .../recipes-benchmark/iperf3/iperf3_3.14.bb   |  1 +
+>  2 files changed, 56 insertions(+)
+>  create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-5434=
+9.patch
+>
+> diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch=
+ b/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch
+> new file mode 100644
+> index 0000000000..f60267bb57
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54349.patch
+> @@ -0,0 +1,55 @@
+> +Subject: [PATCH] iperf3: Fix CVE-2025-54349
+> +CVE: CVE-2025-54349
+> +Upstream-Status: Backport [https://github.com/esnet/iperf/commit/4e5313b=
+ab0b9b3fe03513ab54f722c8a3e4b7bdf]
+> +Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
+> +---
+> +--- a/src/iperf_auth.c 2025-08-19 12:02:47.706337000 +0530
+> ++++ b/src/iperf_auth.c 2025-09-15 12:50:47.933400511 +0530
+> +@@ -264,7 +264,8 @@
+> +
+> +     keysize =3D RSA_size(rsa);
+> +     rsa_buffer  =3D OPENSSL_malloc(keysize * 2);
+> +-    *plaintext =3D (unsigned char*)OPENSSL_malloc(keysize);
+> ++    // Note: +1 for NULL
+> ++    *plaintext =3D (unsigned char*)OPENSSL_malloc(keysize + 1);
+> +
+> +     BIO *bioBuff   =3D BIO_new_mem_buf((void*)encryptedtext, encryptedt=
+ext_len);
+> +     rsa_buffer_len =3D BIO_read(bioBuff, rsa_buffer, keysize * 2);
+> +@@ -274,7 +275,7 @@
+> +     OPENSSL_free(rsa_buffer);
+> +     BIO_free(bioBuff);
+> +
+> +-    if (plaintext_len < 0) {
+> ++    if (plaintext_len <=3D 0) {
+> +       /* We probably shouldn't be printing stuff like this */
+> +       fprintf(stderr, "%s\n", ERR_error_string(ERR_get_error(), NULL));
+> +     }
+> +@@ -320,7 +321,7 @@
+> +     int plaintext_len;
+> +     plaintext_len =3D decrypt_rsa_message(encrypted_b64, encrypted_len_=
+b64, private_key, &plaintext);
+> +     free(encrypted_b64);
+> +-    if (plaintext_len < 0) {
+> ++    if (plaintext_len <=3D 0) {
+> +         return -1;
+> +     }
+> +     plaintext[plaintext_len] =3D '\0';
+> +@@ -328,16 +329,19 @@
+> +     char *s_username, *s_password;
+> +     s_username =3D (char *) calloc(plaintext_len, sizeof(char));
+> +     if (s_username =3D=3D NULL) {
+> ++      OPENSSL_free(plaintext);
+> +       return -1;
+> +     }
+> +     s_password =3D (char *) calloc(plaintext_len, sizeof(char));
+> +     if (s_password =3D=3D NULL) {
+> ++      OPENSSL_free(plaintext);
+> +       free(s_username);
+> +       return -1;
+> +     }
+> +
+> +     int rc =3D sscanf((char *) plaintext, auth_text_format, s_username,=
+ s_password, &utc_seconds);
+> +     if (rc !=3D 3) {
+> ++      OPENSSL_free(plaintext);
+> +       free(s_password);
+> +       free(s_username);
+> +       return -1;
+> diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb b/meta-oe/re=
+cipes-benchmark/iperf3/iperf3_3.14.bb
+> index d181eb3b02..831e854982 100644
+> --- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
+> +++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
+> @@ -16,6 +16,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddc6301c8256c=
+eb8f71c9e3c2ae9096b9"
+>  SRC_URI =3D "git://github.com/esnet/iperf.git;branch=3Dmaster;protocol=
+=3Dhttps \
+>             file://0002-Remove-pg-from-profile_CFLAGS.patch \
+>             file://0001-configure.ac-check-for-CPP-prog.patch \
+> +           file://CVE-2025-54349.patch \
+>             "
+>
+>  SRCREV =3D "a0be85934144bc04712a6695b14ea6e45c379e1d"
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#119597): https://lists.openembedded.org/g/openembedde=
+d-devel/message/119597
+> Mute This Topic: https://lists.openembedded.org/mt/115328076/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
