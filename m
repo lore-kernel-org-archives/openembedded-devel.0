@@ -1,129 +1,122 @@
-Return-Path: <philip@balister.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7337ECAC592
-	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 17:54:10 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web11.17242.1758290229494055559
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0FE7CAC59A
+	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 19:24:50 +0000 (UTC)
+Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
+ by mx.groups.io with SMTP id smtpd.web11.4884.1758309882883380243
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Sep 2025 06:57:09 -0700
+ Fri, 19 Sep 2025 12:24:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Atma1qHG;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: nitin.wankhade333@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2697051902fso3876365ad.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 06:57:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Lc3XCdw4;
+ spf=pass (domain: gmail.com, ip: 74.125.224.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-60f4678ceabso1625720d50.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 12:24:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758290228; x=1758895028; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=iW9Qo8NF5IAaCUaDN97Nw+n7eoz96P6EvGJl8WOlc+A=;
-        b=Atma1qHGuJmPqVm1PpMI6zq+WEjTbgAIkbRqlE+w5tq/2y5+sfiijwmqFRXkmibt3m
-         3rIB7L/SAYJ4+1RJbQe+0r6X3zpFleEzzB9vGgpAA52rMA/ieuqWrtspHsYtEy9w0jkR
-         dwJh+89NwMZhYNNnl+dgx0VK2O8Un7u037462sYc765YiyAaAodnRxWjNT2rxADi6CvV
-         Wi/sybbJSJK3V9XHApteQSHunzJPBYbR5z/VqSbEV7x1/tHfLsYOWBHp48etgZS4wKpD
-         m8dm4Ix7kZckg4VF8yXMGv2HJnmIcEaV8Y23hSBzhP1SieQfLlolExm/me4aHSBMBx9Y
-         OGaw==
+        d=gmail.com; s=20230601; t=1758309882; x=1758914682; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3plmDK4TtlVsvs1heoRQrtJGk6NFILytHuS+lD8xNQY=;
+        b=Lc3XCdw4s/AJDQTcT43gzp3m8weRnHj23MCu/F3vnS/JSIJJQU98qzAFsiFAAviNdS
+         aBiim+BulIChfpCDX75Gpu5jYCW4g2DiRY7u8WlcePUlflaMgYXwZ5ifU+uBGRMH39j+
+         JcBDV0In3Cn119ufaT8gmovzdEu/AVvkG0TEDjJQnR8aXMvANUBthVDjAIuZYsLTgXBM
+         f91h7PjLRQbZLUv5bL0x8ZHnRGcgnGTsuzOZ6fN6hGn2up8Jd2HQOK0WnJ1RpbKKLgLN
+         Z0JT1K7PgQ3vdIChvWTD/58tBRcmE1Fo8D39kO+liuAfFjScLABGmftDJAI++hoH0/fR
+         /sxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758290228; x=1758895028;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=iW9Qo8NF5IAaCUaDN97Nw+n7eoz96P6EvGJl8WOlc+A=;
-        b=rdRmqZT11qFoR1kEVy669AHBFJe564n4i/F+zTUWyJsdzMjNCQs1O9/z/eiUmFn53P
-         Ls8mAZlT20l+Ang0eXZoLaGEpqpPKqkBbJjjIaqCfElOcl8lImg5OB5MCdAgguZn0+uO
-         d1dO+c91C6b8WFaTu0DqMwDly+wFKb9V1Kxcsdkq8ZY0m10xF3jT8oFL/4chrTo+J28e
-         gdCFhu5PmyZMzpcRIOG9yvyyRp+SXFlTjjQzyB0TLiiLMi1LAE8i4FtDVV9q0lb4NlzM
-         jl15EGpN9szXA8DD96zk6+hTm1VDxJyPhCwD2fKruLfiCF09ScBV3aAoX4DVdvmuWm42
-         OiIg==
-X-Gm-Message-State: AOJu0YycUNWkTIAHVa+Fx6phWI3372xNIoFd2sQrAcYVBJoUbeP0MkDE
-	pEy1R8dcaAz76o9nQr7wc5rJds6OTC6xkreZZrmEZadsPoZcsoCDNgPwGUh2uQ==
-X-Gm-Gg: ASbGncvMpSXF+8xXfMgE64j7qhomolNx4NrI0BcoZuLkmJzIDHxp90/jxng/G4MOvRJ
-	Xi25j8WmwzRD4lBNRjzeEjppUTXMdie3rp1/xEhP/+UKpWcwMa+gySCn57lYCPoHHunJbKu8MpN
-	cm6G4R57cft86aDG43X4nzZnrvPe9MQgGjoG/yUUqtyapuM6ofZC2XVGTPyFU5WFxOzMxNW12hN
-	3bWwphSigIK+uQ0wuZWV108qmg7iAqVFqBYponeIcQyKCWhwvlRiWqPOzhPadw80pXDXKPJNkLV
-	LbwoOjU3neOK3O5D/2/HSLYG2eCVgDB8mcl1htetcAXDruHeux2NIIdfVwB6AoaS690XZPuT+TL
-	NT32k67LKDEYf7fYKncA81fjCE7MZ6Jfp8Cu1GuEZ
-X-Google-Smtp-Source: AGHT+IG0sMRDa97lynwbMHio1yEnLLK04wIgqjLc54BJwO/aF6crrYznlSMvwx1+c9x7lcv1WNalBw==
-X-Received: by 2002:a17:903:187:b0:25c:b66e:9c2a with SMTP id d9443c01a7336-269ba517782mr29889245ad.6.1758290228464;
-        Fri, 19 Sep 2025 06:57:08 -0700 (PDT)
-Received: from LL-3324L.kpit.com ([223.233.80.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-269802fe096sm56247555ad.104.2025.09.19.06.57.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Sep 2025 06:57:08 -0700 (PDT)
-From: Nitin Wankhade <nitin.wankhade333@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: nitin.wankhade@kpit.com
-Subject: [PATCH] iperf3: Fix CVE-2025-54350
-Date: Fri, 19 Sep 2025 19:28:56 +0530
-Message-Id: <20250919135856.2015585-1-nitin.wankhade333@gmail.com>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1758309882; x=1758914682;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=3plmDK4TtlVsvs1heoRQrtJGk6NFILytHuS+lD8xNQY=;
+        b=Fm0Zm47KFnU7jmHLL8294TD1g+3A0FjhufAR8wDWx+IlLlYbf9Ic2XZnxUo3ucMvRA
+         iRpORrwQBJqSahg+W3gTTax1Qqh5ErpZI6f5IyJteKw2AHbrOVMlgeBdlzSmZR5sKHTi
+         6nlAHXIWxJQxleUXDSR3mIrYda6SWwvSb/0er09/BGurqehUm8j7r8LyDpc4Oa03oMrP
+         S6Kon5Kjdd6hCVin/1mU6u1jB/w0GytROoeZuq7xGO1IU7r31YqiUfHcQJn+QexivjnL
+         T6KozXlB1atccJivO6TKYVrNGWz1xHm8IjntdUvqzphkNrbn4VRRenYhV2N3LyvETEFw
+         lbDg==
+X-Gm-Message-State: AOJu0Yx6uApEmeZ2oYtwsGTAuM3GgvJ9LCxPtoWcnQcjVYowAnA1Qy8G
+	nosqeeBq50NrcBRi+GGBrh4Lr4MDjsLxO2g719mx6gwzVd73V70Gl/d2CGSqXRG2tsYEn/g8esE
+	JlOwg2aeb74d+FM4xOnt2kupS2K11eoA=
+X-Gm-Gg: ASbGncun645K4Ih2FBLxMKTotRz2I2LuMvSR+0TcRjI8+jURiNniHoJU6gQYQgZ9VGn
+	paJaGZ3mzHZWtUsqSc4vUzEvoMrCncZLfPREia5YCZPnK7f4GHamODs+0WWZ+cWJ/51o1VcCPcs
+	Pqz95dXGFP2pomwgIot5I4ZD/obPFSurfU6kLqc/2pHcEpGSorOV+niDhJp6vXrYAJL82jxK6fi
+	MtrdBqcLJERGdgbW6CLV8186VIEdvWxPWl+VRkhTHLS7p+zFs4Y8l0Lgw1of62ltbQIPXDsdDLu
+	Cql+23ZkEmW3Osg+d13+xCfj
+X-Google-Smtp-Source: AGHT+IFLZVdIj5AkbjglyM8iQcjJbcLC/chF4qdJ2N9J/POd5uey0O5x1Uz0UhXw43T2ab5EylgQMB3uOioT6nJfUCE=
+X-Received: by 2002:a05:690e:1584:10b0:5f4:55cb:80d4 with SMTP id
+ 956f58d0204a3-6347f560dfcmr3325208d50.17.1758309881748; Fri, 19 Sep 2025
+ 12:24:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250918071548.3934769-1-hongxu.jia@windriver.com> <20250918071548.3934769-4-hongxu.jia@windriver.com>
+In-Reply-To: <20250918071548.3934769-4-hongxu.jia@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 19 Sep 2025 12:24:15 -0700
+X-Gm-Features: AS18NWA2ffCbIEnkvVrLybsxLzJ1qua5-WSgc9iaQZYfGKDMpaXdTt-hLAmbR4U
+Message-ID: <CAMKF1sr5AR-aS5yUZ-+zCfB4NiAOwMDbHgCaXv+iiVkf-zf7uA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 4/4] python3-yarl: support reproducible
+To: hongxu.jia@eng.windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 17:54:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119610
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 19:24:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119611
 
-From: Nitin Wankhade <nitin.wankhade@kpit.com>
+On Thu, Sep 18, 2025 at 12:16=E2=80=AFAM hongxu via lists.openembedded.org
+<hongxu.jia=3Deng.windriver.com@lists.openembedded.org> wrote:
+>
+> In order to make the generated library be reproducible, build wheel
+> in source dir other than tmp dir (/tmp/xxxxxx), then yocto toolchain's
+> option -fdebug-prefix-map could work as expected
+>
+> Note: To support reproducible, it also requires oe-core commit [1] to be =
+merged
+>
+> [1] https://lists.openembedded.org/g/openembedded-core/message/223604?p=
+=3D%2C%2C%2C20%2C0%2C0%2C0%3A%3ACreated%2C%2C%2C20%2C2%2C0%2C115291386%2Cd%=
+253D3&d=3D3
+>
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> ---
+>  meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb b=
+/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb
+> index bbf9e3d782..6eedcf0f82 100644
+> --- a/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb
+> @@ -9,6 +9,10 @@ PYPI_PACKAGE =3D "yarl"
+>
+>  inherit pypi ptest-python-pytest python_setuptools_build_meta cython
+>
+> +SRC_URI +=3D " \
+> +    file://0001-build-wheel-in-place.patch \
+> +"
 
-remove assert to prevent crash due to assertion failure
-on malformed authentication attempt
+This patch file is missing.
 
-Reference: https://github.com/esnet/iperf/commit/4eab661da0bbaac04493fa40164e928c6df7934a
-
-Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
----
- .../iperf3/iperf3/CVE-2025-54350.patch        | 25 +++++++++++++++++++
- .../recipes-benchmark/iperf3/iperf3_3.14.bb   |  1 +
- 2 files changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54350.patch
-
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54350.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54350.patch
-new file mode 100644
-index 0000000000..c02d9ec0a3
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54350.patch
-@@ -0,0 +1,25 @@
-+Subject: [PATCH] iperf3: Fix CVE-2025-54350
-+
-+CVE: CVE-2025-54350
-+Upstream-Status: Backport [https://github.com/esnet/iperf/commit/4eab661da0bbaac04493fa40164e928c6df7934a]
-+Comment: Patch is refreshed as per codebase of 3.14
-+Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
-+---
-+--- a/src/iperf_auth.c	2025-08-19 12:02:47.706337000 +0530
-++++ b/src/iperf_auth.c	2025-08-19 13:16:01.653471517 +0530
-+@@ -28,7 +28,6 @@
-+ #include "iperf_config.h"
-+ 
-+ #include <string.h>
-+-#include <assert.h>
-+ #include <time.h>
-+ #include <sys/types.h>
-+ /* FreeBSD needs _WITH_GETLINE to enable the getline() declaration */
-+@@ -150,7 +149,6 @@
-+ 
-+     BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL); //Do not use newlines to flush buffer
-+     *length = BIO_read(bio, *buffer, strlen(b64message));
-+-    assert(*length == decodeLen); //length should equal decodeLen, else something went horribly wrong
-+     BIO_free_all(bio);
-+ 
-+     return (0); //success
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
-index d181eb3b02..41f336a11f 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.14.bb
-@@ -16,6 +16,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dc6301c8256ceb8f71c9e3c2ae9096b9"
- SRC_URI = "git://github.com/esnet/iperf.git;branch=master;protocol=https \
-            file://0002-Remove-pg-from-profile_CFLAGS.patch \
-            file://0001-configure.ac-check-for-CPP-prog.patch \
-+           file://CVE-2025-54350.patch \
-            "
- 
- SRCREV = "a0be85934144bc04712a6695b14ea6e45c379e1d"
--- 
-2.34.1
-
+> +
+>  DEPENDS +=3D " \
+>      python3-expandvars-native \
+>  "
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#119532): https://lists.openembedded.org/g/openembedde=
+d-devel/message/119532
+> Mute This Topic: https://lists.openembedded.org/mt/115306110/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
