@@ -2,139 +2,113 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7467CAC5AA
-	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 13:59:37 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web11.17303.1758290376376948563
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DD9FCAC5AA
+	for <webhook@archiver.kernel.org>; Fri, 19 Sep 2025 13:59:47 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web10.17320.1758290380553801542
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Sep 2025 06:59:36 -0700
+ Fri, 19 Sep 2025 06:59:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Tmu37mkt;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b046f6fb230so408325166b.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 06:59:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gNYtDpaH;
+ spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-62f0702ef0dso6085781a12.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 06:59:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758290375; x=1758895175; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LnTVmg7EkCE0MhPRUldIoIAUfY5yRtQWdmTp6bM/uu4=;
-        b=Tmu37mktQt/0uou0wziEA7X55B6aVnGFmlAbpYp0AYrxFkZkopdhzLWWxKouVfRDNL
-         3qskR+d0n+eqyeHr0L3fSfU4aOWJ5ywFDowGmpC27+rYFuw4IyEo4Xyku6YY1H9wN9A/
-         rnyYENmUllm7OcLr9pSVl0XRa9GugGJ3A/3yrgkPoiE3eWMLgVJM7h0Mf/m97Eaw8cfB
-         XEvCbBDQnL+7+TaYunlRSow5Ff+fyef+8TvLkZDbReD5FXGmpaF8kir3QUabCzsSJ1bN
-         mVjkN/d1WlQgr1OykBYhk1wMK702OrlqVUhnH12xozEP6nBJxkW88n5DhdDMoSceqeQg
-         iyAg==
+        d=gmail.com; s=20230601; t=1758290379; x=1758895179; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=fIxa+2WmBouUoM6rL6uhJ45c5Ut+QjqEG8f266mFxbw=;
+        b=gNYtDpaHLEeS0TBVgCT4TT/GzHwVg0H/qFsozJ7Zb1KjdCUEy6duDEwUDR5eBNjKqW
+         tZcZe6oxJyWzvYN2TPXMBQy1cwUgMb8amvFxLCWZO02p7OKWfnt4l8oMvPcG1lXlMFwb
+         l6IR/32QeDjrxlTF1oNUGp1y11HwNQTTe013o/YTlXqMdM0/xBqiqim/n1OH0v85kq+6
+         AXCJ+XtcI+kjXy2fw9UsY22g+QELKdX3dIM97OmOBiDTRcW+atuHQoNuQb1To09XaDRc
+         OkSwg5S7O2ktzrHODBEGENChEmTD6alTattWhHQMBrmcdFmuQa6o72yli7LQmo4J/wV1
+         CJVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758290375; x=1758895175;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=LnTVmg7EkCE0MhPRUldIoIAUfY5yRtQWdmTp6bM/uu4=;
-        b=FiVaPIRwztaRmcZ/PY2hK/I0J2yH8W/QXHcV9JytatHpajno/tQGStxSWyRjm15G9I
-         OaQZpoUEBfW0IbFxG28Sm+6hEkXaU8J70LP6Qp/L8ZcOlYw3yaXt2x1bjgCQgwwEj+vw
-         viCbOoIYp2NJkZXrEqqEBF69GF1wcfDk5HWyzNQLBKoLexQoAGjq96XkeGZEKJL2VXAF
-         1QO1rvNznvuAN4emE3NwFCZ6Htt3Aa+rHVx2JK+W2lqP4RXXB7YKQse5zpQdYoPl2+sl
-         9fvXdoKuZgAgtW2Jru7wcAHioMgWjB0aEONHEnOM5+zD8f5+EMKyG9dTl+v7aW5AJupH
-         QvxQ==
-X-Gm-Message-State: AOJu0Ywlt/QeREsQIcK4Lyxp6LekeSUTikiGIq/wOUsGH2I6rY+hbnVu
-	douQbrsarAOBDsxXpp5iVGKv2ykoCrvyrBSi+1o0123zAblaXGfYeaxOx5o3nQ==
-X-Gm-Gg: ASbGnctjEwl1xxCU3Y8sElOwOziaakOO3mb/A++F2Y92SmN0n9y8vsxgZticQUB2L7O
-	zALauydHGHHEaiCPHSHaMc22NaVNVSJZSXo1xHAyH3+GjkSzeYlOMUbl3I05T4nm9WCDD0XB5Kc
-	VsbrMOZLu4xNEYn3ltAGXHNryUgENmSe4lA2BA32UTUhYzJYgjoivGokpjHUqpfuf/oZ358mHrN
-	kHR1Wro6WQ6zVjcNVYpwRuQrhbBQtjkX8WbtLYMopDxdjGkXgd7PbcGL4djDJOzgO+OSRksvhzH
-	ySvNVsHuKtZZM9gZNosfrK+Hd2v+ebnnrSNbgCoHskXidFH8P317xvw0lYAxTKopynyK65kxke+
-	AGxoqo7Q0yzhhKCcWt2oE
-X-Google-Smtp-Source: AGHT+IEvO6W8cu+IGeZZwFtt1ibFkgsN8jo0Ef91tHwCgzZadnLadAQ9QbtBqZLx7yrGKvGxqzMCRQ==
-X-Received: by 2002:a17:906:eeca:b0:b04:f5a:8c31 with SMTP id a640c23a62f3a-b24906008ccmr358364866b.32.1758290374404;
-        Fri, 19 Sep 2025 06:59:34 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1758290379; x=1758895179;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=fIxa+2WmBouUoM6rL6uhJ45c5Ut+QjqEG8f266mFxbw=;
+        b=ahShlPFSZbaLxsUHaXjEns/rNUwLl/5VHC1UuwBXCk4SugFlKHTe5Uq55yYuc3E4aa
+         q6YMmn4pueIIVhmIM0mZb6tggxMkd9Kh4DKQt8rYKBcFn0vmpaJbNnZ13wQ5zRlT+tVI
+         OF1tc7B8bdjrMxj4Rz79W/mCnzkwupA2pItGulMiLKr1b5iTfp05awMSzRuzDWrAIWvD
+         WWwToXoLDlZCGYSkDlVJzBGBpQM5dqo5lkGYqdDXmO1l4KBeqPA0blknOry604GPjae9
+         0QeyX8zB89iNj87YIi0ykKi2tNO6UW0xiU+l+u9Jla4WVgMO/L4jlPcuwDJOVaLPzA1t
+         EscA==
+X-Gm-Message-State: AOJu0Yyb0bn2/tR/YgKSmbCP7mWNve6S2DGdU4zgVInp6rh5lGuvAccg
+	nE3FyNk3z4bXrksiNToNCDtB2D/FcpnrWWousZkPLOyJQxzSSyV2r7dGAAjzSw==
+X-Gm-Gg: ASbGncsPuspWQ5xXXqKO9T6Nr5sywHoNTQIstmfaadci6jymRWeIvkMVN8Y3etQFpuT
+	jZ2vKDaWFveExObuvdTk02IVcaSl0ee3/fxPKAz2uI7pSfQu0Yyh5dGORL+AflJSmge35KmG6b/
+	7Djitsl9zMrcQIQAzpQmhvqEsl9cecsQqoxVV0v2YQlzr/qIcckKlO5Gks/Q2HPdLL5rl2a3HtM
+	2xZbDAxJyvnUBKzen7jhemEjS5V9ekC6fSRoet1Xge5VyfKSP7ZbF1gCzDnYS6uo/27nOIJqCAc
+	T4wTo4SdYQa+pMIiJE/kmh4Rdr2UmU20r/I9t69zDBfBdWO+8ws6aPvRLhihRWSeVJJ662eyM5Z
+	gn41hjtWjWR98/dMQKajA
+X-Google-Smtp-Source: AGHT+IFpUtpscIkeFYMlfrA+S/u8vcsb3Y+EAdODC0Yey3G8qUUyyGpO8xDdRLAu9YZa8Lus5X3lVQ==
+X-Received: by 2002:a17:907:86a1:b0:b07:d171:fcd8 with SMTP id a640c23a62f3a-b1fad740e23mr747812566b.27.1758290378835;
+        Fri, 19 Sep 2025 06:59:38 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b1fd262993asm442209166b.94.2025.09.19.06.59.33
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b1fd262993asm442209166b.94.2025.09.19.06.59.38
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Sep 2025 06:59:34 -0700 (PDT)
+        Fri, 19 Sep 2025 06:59:38 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 1/9] cmark: upgrade 0.30.2 -> 0.30.3
-Date: Fri, 19 Sep 2025 15:59:23 +0200
-Message-ID: <20250919135933.916848-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 7/9] fltk: upgrade 1.3.8 -> 1.3.9
+Date: Fri, 19 Sep 2025 15:59:29 +0200
+Message-ID: <20250919135933.916848-7-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250919135933.916848-1-skandigraun@gmail.com>
+References: <20250919135933.916848-1-skandigraun@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 13:59:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119598
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 13:59:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119604
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-Changelog:
-===========
-  * Fix quadratic complexity bug with repeated '![[]()'.
-    Resolves CVE-2023-22486. Add new pathological test.
+Release Notes:
+https://www.fltk.org/articles.php?L1898
 
-  * Allow declarations with no space, as per spec
-
-  * Set 'enumi*' counter correctly in LaTeX output
-
-  * Allow '<!DOCTYPE' to be case-insensitive.
-    existing spec.)
-
-  * Fixed HTML comment scanning. Need to handle this case: '<!--> and -->'.
-    Since the scanner finds the longest match, we had to
-    move some of the logic outside of the scanner.
-
-  * Fix quadratic parsing issue with repeated '<!--' (this was not
-    introduced by the previous fix, and not in a released version of cmark).
-    Resolves CVE-2023-22484. Add new pathological test.
-
-  * Update HTML comment scanner to accord with commonmark/commonmark-spec#713
-
-  * Pathological tests: half the number of repetitions, and the timeout.
-    This reduces the time needed for the pathological tests.
-
-  * Shrink 'struct cmark_node' (#446). The 'internal_offset' member is
-    only used for headings and can be moved to 'struct cmark_heading'.
-    This reduces the size of 'struct cmark_node' from 112 to 104 bytes on
-    64-bit systems.
-
-  * Add '-Wstrict-prototypes' and fix offending functions.
-
-  * Fix quadratic behavior involving 'get_containing_block' (#431).
-    Instead of searching for the containing block, update the tight list
-    status when entering a child of a list item or exiting a list.
-
-  * Fix 'pathological_tests.py'
-    - Use a multiprocessing.Queue to actually get results from spawned
-      tests processes.
-    - Fix the 'allowed_failures' test.
-    - Truncate actual output when printed.
-    - Prepare for testing pathological behavior of the Commonmark renderer.
-
-  * Fix source position bug with backticks
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 69aea3d8f7d84b4214948c0553fe1744f254bbf6)
+(cherry picked from commit 7e124168f9134ab77910f262d3d0b0e49b1c3e4a)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-support/cmark/{cmark_0.30.2.bb => cmark_0.30.3.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/cmark/{cmark_0.30.2.bb => cmark_0.30.3.bb} (89%)
+ meta-oe/recipes-support/fltk/fltk.inc                         | 4 ++--
+ ...Fl_Preferences.cxx-do-not-use-dlopen-in-case-glibc-s.patch | 1 +
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/cmark/cmark_0.30.2.bb b/meta-oe/recipes-support/cmark/cmark_0.30.3.bb
-similarity index 89%
-rename from meta-oe/recipes-support/cmark/cmark_0.30.2.bb
-rename to meta-oe/recipes-support/cmark/cmark_0.30.3.bb
-index 6d6d3e5850..6697dfe07f 100644
---- a/meta-oe/recipes-support/cmark/cmark_0.30.2.bb
-+++ b/meta-oe/recipes-support/cmark/cmark_0.30.3.bb
-@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause & MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=81f9cae6293cc0345a9144b78152ab62"
+diff --git a/meta-oe/recipes-support/fltk/fltk.inc b/meta-oe/recipes-support/fltk/fltk.inc
+index b1bc83578f..0b2921095c 100644
+--- a/meta-oe/recipes-support/fltk/fltk.inc
++++ b/meta-oe/recipes-support/fltk/fltk.inc
+@@ -11,8 +11,8 @@ SRC_URI = " \
+     file://0002-always-build-fluid-and-export-pointers.patch \
+ "
  
- SRC_URI = "git://github.com/commonmark/cmark.git;branch=master;protocol=https"
--SRCREV = "a8da5a2f252b96eca60ae8bada1a9ba059a38401"
-+SRCREV = "5ba25ff40eba44c811f79ab6a792baf945b8307c"
- S = "${WORKDIR}/git"
+-PV = "1.3.8"
+-SRC_URI[sha256sum] = "1d9832409fc08c908c64ab40ad9fd8b0e8af5d203651eb9690b810f41e2f412d"
++PV = "1.3.9"
++SRC_URI[sha256sum] = "103441134915402808fd45424d4061778609437e804334434e946cfd26b196c2"
  
- inherit cmake lib_package
+ inherit cmake pkgconfig
+ 
+diff --git a/meta-oe/recipes-support/fltk/fltk/0001-Fl_Preferences.cxx-do-not-use-dlopen-in-case-glibc-s.patch b/meta-oe/recipes-support/fltk/fltk/0001-Fl_Preferences.cxx-do-not-use-dlopen-in-case-glibc-s.patch
+index e6e68a0cb8..3f18d74c90 100644
+--- a/meta-oe/recipes-support/fltk/fltk/0001-Fl_Preferences.cxx-do-not-use-dlopen-in-case-glibc-s.patch
++++ b/meta-oe/recipes-support/fltk/fltk/0001-Fl_Preferences.cxx-do-not-use-dlopen-in-case-glibc-s.patch
+@@ -16,6 +16,7 @@ Content-Transfer-Encoding: 8bit
+ |                                     ^
+ | src/CMakeFiles/fltk.dir/build.make:1217: recipe for target 'src/CMakeFiles/fltk.dir/Fl_Preferences.cxx.o' failed
+ 
++Upstream-Status: Pending
+ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+ ---
+  src/Fl_Preferences.cxx | 2 +-
 
