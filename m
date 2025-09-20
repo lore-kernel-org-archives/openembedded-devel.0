@@ -2,173 +2,163 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1427ACAC597
-	for <webhook@archiver.kernel.org>; Sat, 20 Sep 2025 05:49:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0244CAC5A0
+	for <webhook@archiver.kernel.org>; Sat, 20 Sep 2025 06:00:40 +0000 (UTC)
 Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
- by mx.groups.io with SMTP id smtpd.web10.4432.1758347375628105115
+ by mx.groups.io with SMTP id smtpd.web11.4637.1758348035069855591
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Sep 2025 22:49:35 -0700
+ Fri, 19 Sep 2025 23:00:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YoscsRl8;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=is4wTjpa;
  spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-330d1565844so1903118fac.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 22:49:35 -0700 (PDT)
+Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-30cce892b7dso1813442fac.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Sep 2025 23:00:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758347375; x=1758952175; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758348034; x=1758952834; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6MPXp6RAHJv+XBFlx7913OB7m+lpVWM9L25A8l5MdE4=;
-        b=YoscsRl84lkBv3yBpcJXEwB9yXhKbALU1K1APOhnHwbEPyHjoCINTg9z3q9oiM1JpQ
-         PoWj9s8OgDBGG/XGW1/+oPhke7czfqM3GFBe6C2mYeJh5wUyFqjIHMHuqq5jNLN0jGrz
-         +B+1gbYbEpXSy3WpY8nDxJZrXS3sXVXAB9VGZCC8Q6i6T1GuO+pAtYdnhaaEfI9XV3oJ
-         yaaVUC0Gbyl+YqOYdjN6o4ob6+jCCfJvWHa7QjInSk33JOwPlfT4wJsKbqL+2oBfBNYL
-         4W6FOnASCxRJoDx7iOQJYOGnJWBss3e1f/OAik+OtGPt4gX+R5mzLdECq5Sa9q4Xbfft
-         h0cA==
+        bh=UtIZFYWtu9+i1bz5he5vRVwf9lj8fZ3jeQQhS+dgp1o=;
+        b=is4wTjpa3LWNJllnV1xZVo8CAvls8OgeEwL/TjDBKxt9RQMj9tQqybCpXDM2csGzx8
+         sQ5TfoEskQjlvuBujFU8BW09TYLLjRXFX3sLJUZEV9ekmFUpRmMv5v+4WDqtARP0vqDa
+         Ed/UVBprSqgQqwpJLz/wHoufQHqI/0qbsJ5kQfFCtTCgR/1fdlu4Behmwuha9N/Zjahi
+         LUz5XNdlu/2N7ZpsMcV/Q6JJFIBrkVimajL2l+WXRsvjxHhN68HNed0SJ74ZduADVAyw
+         q6fN0LDBY6yjgcPAqviHGVB6Uq2kwgbd8KjIw7Xp8fA+4Bj1ZYcYAwBowhiO6hHewk/B
+         bqxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758347375; x=1758952175;
+        d=1e100.net; s=20230601; t=1758348034; x=1758952834;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=6MPXp6RAHJv+XBFlx7913OB7m+lpVWM9L25A8l5MdE4=;
-        b=IZ8u1DWbC7XwWLfZNMiaKq1oPPe8FsSchI+S3IQJ7P+WOLFQvO2Nh5JkYqqblJU0l/
-         5TdfBbij8FRnw2Gc5yND/dIntkPIAi6I5lHTGCkNeSFIgZtsTio5hTCSVwDxy1sCf8sm
-         YUJQJtcBqhmbzqwBNmjngFicEW8cz44SESuJZGymcPtHpCIdJZpcvHi6kexw89L8iFvr
-         bE8VcLHuOvoG09yb/OqrkgRU2RAI7s0iFwpmAh3wjm5xEZC5n97I4hN1LZh/QmpCxTIL
-         NjRquSR0Kz4TLQIVHsJpy5+f0EKGh3CiILQy6RACy4f0TfRfcobKsJUUzB941AVJzrys
-         02SQ==
-X-Gm-Message-State: AOJu0Yyal0EGDZ2xr1oLIiQBSPQZMtiZbPc+qStepOD9BDZ2twIS8B+L
-	LOR6EBNQdhSPgloIYhzHjtW/i6KxgHro0Zk6XM5vjahgSMu9iz1i9Yb/XJvrXF5HhrO7ufvZ2Cs
-	wjcBziCvDmmUu0C5+6LedvkR13O53rDU=
-X-Gm-Gg: ASbGncu2kXJnNnITi3Y8fNZTjWZC9kLlwGM2qv9i+Y1FNrB/K65hawX+zEfyPblhNzJ
-	31LXVFqd6o12RYLfHAanR6X57uCpqonKoftflH4hxCocHFYpZNGfReUGRh8OgnA0VUG2+QX3XX+
-	i+4aSFuKxMbqSjZostyoBP5Lvv5Xm0xdRpewl6ivrbCwqwHBivf112OLH+DlK9y/VbXfXrDgFdQ
-	MvbRetgB5MwGecnpkpH
-X-Google-Smtp-Source: AGHT+IGbhw6cvqe4oG6/VRTeb/f6r1BElUcGamrIvjwVlbpoUlUKQuPmxW/gnvn1EypFMQ7tKD3C/5z++jO0pvDMn4s=
-X-Received: by 2002:a05:6871:a101:b0:30b:ca29:cf8d with SMTP id
- 586e51a60fabf-33bb4412e3emr2936973fac.35.1758347374808; Fri, 19 Sep 2025
- 22:49:34 -0700 (PDT)
+        bh=UtIZFYWtu9+i1bz5he5vRVwf9lj8fZ3jeQQhS+dgp1o=;
+        b=QWkE3WIQ4XRThNEy/ekXbW/zV5Km4KGcFOspxkApU3GfuzPfvyEbUaZ+MNgUfhDiuW
+         7BHe50BvBMyZEZ7sOdvGs4TLjbbp8QPnoHIa8yqKEjQWJ/+H6QK8JnnhOFJCqiFuhRYu
+         or78kQJWCeCYtwWc11pvL4RqGQ/vjHhJkklFxnLfADULI8DWqLnUrvBf9P3V+UZsAnDo
+         9KExsrBmC1Bk4ukNtbk5XjafRMjDI5+Zq2KwQGHT69wYD18YJpwIctJ6n4V5YMEhMl5F
+         Ssbpib84K5ilYEUBe6Y+VUbbEgPQ6lLrk1Ro73QM4uDlkJQJpzTildwwhZrWtnI7tlg/
+         yH2A==
+X-Gm-Message-State: AOJu0Yz7A0WiJnsA2+KjB3GlgBL1guTSfwbpj5t5UngtpcK91XwDtY2j
+	L2StFSYbyCZAPBPUSJrTiZmJjTAXyEswUaMRvrvbxrQow22EP89BKfhacWB9S7mAuyOJygKZ1B/
+	nSlUypvZLqwj7uRinrOf1L+T4pCU8Z/M=
+X-Gm-Gg: ASbGncszBroJzRAK4OnmBhnEWHUJJGR4sJlVLSV7ASpQFcMUO+EeUY2/FHSe1z2vNUe
+	jpceoVNTjVxF3/2MeMfc6fdAfOv/nEUOh7fv/6NKUFyTff0sy3ybOYa+v9HyxjvRftfVVk7tRKT
+	vjIPVuOftD6pX2+NgNK7XZ4tlgz2/+Hlw/dThqo9MiA4Z9Wu1FqdENxOInr6lFbCVwCKfh5/X3d
+	TrAiWDfbw==
+X-Google-Smtp-Source: AGHT+IHPgiEjf4RygfzTabRQ7SpUxBmbK/MtClhd+nHW3zo8SgZ7yR3c+ZUTChOX4hdgEk+S8dbz9KUGdd9NrWHQvME=
+X-Received: by 2002:a05:6871:5884:b0:2ff:a27f:9c67 with SMTP id
+ 586e51a60fabf-33bb4316634mr2969505fac.30.1758348034159; Fri, 19 Sep 2025
+ 23:00:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250919141342.934718-1-skandigraun@gmail.com>
-In-Reply-To: <20250919141342.934718-1-skandigraun@gmail.com>
+References: <20250919113331.2357-1-spushpka@cisco.com>
+In-Reply-To: <20250919113331.2357-1-spushpka@cisco.com>
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Sat, 20 Sep 2025 17:49:23 +1200
-X-Gm-Features: AS18NWDpp_y8Osk0eaJydNmEU0Cl_OLGfDB1g8JrQIpN6zHnHfpf7zg0DOI4XxQ
-Message-ID: <CADySD0EYbcRrPWrh4HcaGmf5dzdxed6c17JDoY1-icTZDi7rJw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] daemonize: update to latest revision
-To: skandigraun@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
+Date: Sat, 20 Sep 2025 18:00:23 +1200
+X-Gm-Features: AS18NWA44ix7huTonP8ZBm2AQBKKpABVBdUGe5FvMjomBd1YfNjAlzWYZptnxPk
+Message-ID: <CADySD0EYS=JhDU8VUH_LEbkiTY0pHcz=CtymDG=0wzVWGYaQAQ@mail.gmail.com>
+Subject: Re: [oe] [meta-openembedded] [scarthgap] [PATCH] cjson 1.7.18: Fix CVE-2025-57052
+To: spushpka@cisco.com
+Cc: openembedded-devel@lists.openembedded.org, vchavda@cisco.com, 
+	deeratho@cisco.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 20 Sep 2025 05:49:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119617
+ <openembedded-devel@lists.openembedded.org>; Sat, 20 Sep 2025 06:00:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119618
 
-Please also submit this patch for walnascar, kirkstone and scarthgap
-branches as well.
+Please send this patch for kirkstone and walnascar branch as well
 
-On Sat, Sep 20, 2025 at 2:13=E2=80=AFAM Gyorgy Sarvari via
-lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
+On Fri, Sep 19, 2025 at 11:33=E2=80=AFPM Shubham Pushpkar via
+lists.openembedded.org <spushpka=3Dcisco.com@lists.openembedded.org>
 wrote:
 >
-> Drop a patch that has been incorporated into this version.
+> Upstream Repository: https://github.com/DaveGamble/cJSON.git
 >
-> (That is also the changelog - the only change is the accepted patch)
+> Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2025-57052
+> Type: Security Fix
+> CVE: CVE-2025-57052
+> Score: 9.8
+> Patch: https://github.com/DaveGamble/cJSON/commit/74e1ff4994aa
 >
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> Signed-off-by: Shubham Pushpkar <spushpka@cisco.com>
 > ---
->  ...-many-arguments-to-function-write-er.patch | 46 -------------------
->  .../daemonize/daemonize_git.bb                |  3 +-
->  2 files changed, 1 insertion(+), 48 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/daemonize/daemonize/0001-fix-=
-getopt.c-too-many-arguments-to-function-write-er.patch
+>  .../cjson/cjson/CVE-2025-57052.patch          | 33 +++++++++++++++++++
+>  .../recipes-devtools/cjson/cjson_1.7.18.bb    |  1 +
+>  2 files changed, 34 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/cjson/cjson/CVE-2025-57052.p=
+atch
 >
-> diff --git a/meta-oe/recipes-support/daemonize/daemonize/0001-fix-getopt.=
-c-too-many-arguments-to-function-write-er.patch b/meta-oe/recipes-support/d=
-aemonize/daemonize/0001-fix-getopt.c-too-many-arguments-to-function-write-e=
-r.patch
-> deleted file mode 100644
-> index 3a79dba682..0000000000
-> --- a/meta-oe/recipes-support/daemonize/daemonize/0001-fix-getopt.c-too-m=
-any-arguments-to-function-write-er.patch
-> +++ /dev/null
-> @@ -1,46 +0,0 @@
-> -From c47fdcc0a900aea93b1967c20db42743171ab1ac Mon Sep 17 00:00:00 2001
-> -From: "mark.yang" <mark.yang@lge.com>
-> -Date: Thu, 27 Mar 2025 16:46:42 +0900
-> -Subject: [PATCH] fix getopt.c too many arguments to function 'write' err=
-or in
-> - gcc-15.0.1
-> -
-> -In the original code, write() was declared as 'extern int write();',
-> -which is interpreted as a function taking no parameters.
-> -This caused errors when actually calling it with 3 parameters.
-> -The current fix to declare it as 'extern int write(int, const void *, un=
-signed);'
-> -is the correct solution.
-> -This properly defines the write function to accept 3 parameters.
-> -
-> -../git/getopt.c: In function 'x_getopt':
-> -../git/getopt.c:51:16: error: too many arguments to function 'write'; ex=
-pected 0, have 3
-> -   51 |         (void) write(2, argv[0], (unsigned)strlen(argv[0]));\
-> -      |                ^~~~~ ~
-> -../git/getopt.c:78:17: note: in expansion of macro 'ERR'
-> -   78 |                 ERR(": illegal option -- ", c);
-> -      |                 ^~~
-> -../git/getopt.c:48:20: note: declared here
-> -   48 |         extern int write();\
-> -      |                    ^~~~~
-> -
-> -Upstream-Status: Submitted [https://github.com/bmc/daemonize/pull/37]
-> -Signed-off-by: mark.yang <mark.yang@lge.com>
-> ----
-> - getopt.c | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/getopt.c b/getopt.c
-> -index 3f37c55..f298da7 100644
-> ---- a/getopt.c
-> -+++ b/getopt.c
-> -@@ -45,7 +45,7 @@
-> - #include <string.h>
-> -
-> - #define ERR(s, c)     if(x_opterr){\
-> --      extern int write();\
-> -+      extern int write(int, const void *, unsigned);\
-> -       char errbuf[2];\
-> -       errbuf[0] =3D c; errbuf[1] =3D '\n';\
-> -       (void) write(2, argv[0], (unsigned)strlen(argv[0]));\
-> ---
-> -2.34.1
-> -
-> diff --git a/meta-oe/recipes-support/daemonize/daemonize_git.bb b/meta-oe=
-/recipes-support/daemonize/daemonize_git.bb
-> index bae04ca7a3..fef237e882 100644
-> --- a/meta-oe/recipes-support/daemonize/daemonize_git.bb
-> +++ b/meta-oe/recipes-support/daemonize/daemonize_git.bb
-> @@ -6,10 +6,9 @@ PV =3D "1.7.8"
+> diff --git a/meta-oe/recipes-devtools/cjson/cjson/CVE-2025-57052.patch b/=
+meta-oe/recipes-devtools/cjson/cjson/CVE-2025-57052.patch
+> new file mode 100644
+> index 0000000000..ed3d4a7eba
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/cjson/cjson/CVE-2025-57052.patch
+> @@ -0,0 +1,33 @@
+> +From e53a1413304382d562176bed91609e00b4fcf87e Mon Sep 17 00:00:00 2001
+> +From: Lee <peteralfredlee@gmail.com>
+> +Date: Fri, 5 Sep 2025 14:53:20 +0800
+> +Subject: [PATCH] fix the incorrect check in decode_array_index_from_poin=
+ter
+> + (#957)
+> +
+> +this fixes CVE-2025-57052
+> +
+> +CVE: CVE-2025-57052
+> +Upstream-Status: Backport [https://github.com/DaveGamble/cJSON/commit/74=
+e1ff4994aa]
+> +
+> +(cherry picked from commit 74e1ff4994aa4139126967f6d289b675b4b36fef)
+> +Signed-off-by: Shubham Pushpkar <spushpka@cisco.com>
+> +---
+> + cJSON_Utils.c | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/cJSON_Utils.c b/cJSON_Utils.c
+> +index 63651df..8fa24f8 100644
+> +--- a/cJSON_Utils.c
+> ++++ b/cJSON_Utils.c
+> +@@ -282,7 +282,7 @@ static cJSON_bool decode_array_index_from_pointer(co=
+nst unsigned char * const po
+> +         return 0;
+> +     }
+> +
+> +-    for (position =3D 0; (pointer[position] >=3D '0') && (pointer[0] <=
+=3D '9'); position++)
+> ++    for (position =3D 0; (pointer[position] >=3D '0') && (pointer[posit=
+ion] <=3D '9'); position++)
+> +     {
+> +         parsed_index =3D (10 * parsed_index) + (size_t)(pointer[positio=
+n] - '0');
+> +
+> +--
+> +2.44.1
+> +
+> diff --git a/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb b/meta-oe/rec=
+ipes-devtools/cjson/cjson_1.7.18.bb
+> index bdeab3055c..67d536cf24 100644
+> --- a/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
+> +++ b/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
+> @@ -6,6 +6,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D218947f77e8cb8=
+e2fa02918dc41c50d0"
 >
->  inherit autotools
+>  SRC_URI =3D "git://github.com/DaveGamble/cJSON.git;branch=3Dmaster;proto=
+col=3Dhttps \
+>             file://run-ptest \
+> +           file://CVE-2025-57052.patch \
+>           "
+>  SRCREV =3D "acc76239bee01d8e9c858ae2cab296704e52d916"
 >
-> -SRCREV =3D "18869a797dab12bf1c917ba3b4782fef484c407c"
-> +SRCREV =3D "58237626e6999e68b9583ed1b4b08136f118f68c"
->  SRC_URI =3D " \
->      git://github.com/bmc/daemonize.git;branch=3Dmaster;protocol=3Dhttps =
-\
-> -    file://0001-fix-getopt.c-too-many-arguments-to-function-write-er.pat=
-ch \
->  "
->
+> --
+> 2.35.6
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#119607): https://lists.openembedded.org/g/openembedde=
-d-devel/message/119607
-> Mute This Topic: https://lists.openembedded.org/mt/115328462/3619737
+> View/Reply Online (#119593): https://lists.openembedded.org/g/openembedde=
+d-devel/message/119593
+> Mute This Topic: https://lists.openembedded.org/mt/115326142/3619737
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
 nkur.tyagi85@gmail.com]
