@@ -2,98 +2,101 @@ Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0F28CAC5A5
-	for <webhook@archiver.kernel.org>; Sat, 20 Sep 2025 20:04:45 +0000 (UTC)
-Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com [209.85.219.175])
- by mx.groups.io with SMTP id smtpd.web10.16667.1758398683894643285
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98577CAC5A7
+	for <webhook@archiver.kernel.org>; Sat, 20 Sep 2025 20:04:55 +0000 (UTC)
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
+ by mx.groups.io with SMTP id smtpd.web10.16671.1758398694860168216
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Sep 2025 13:04:44 -0700
+ Sat, 20 Sep 2025 13:04:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kDpqIxfa;
- spf=pass (domain: gmail.com, ip: 209.85.219.175, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-ea5c1e394a8so2270324276.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Sep 2025 13:04:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iM269XwC;
+ spf=pass (domain: gmail.com, ip: 209.85.219.177, mailfrom: schonm@gmail.com)
+Received: by mail-yb1-f177.google.com with SMTP id 3f1490d57ef6-e951dfcbc5bso3213727276.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Sep 2025 13:04:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758398683; x=1759003483; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=d8CwIG2I6Y+R1AZx6VVgNx8non0dAl3IDvvgywGA3iE=;
-        b=kDpqIxfaE1RhgJrFER9gImFcO/VkbfW+B4Li2P2Yk10O5Z1Mue2OVlkG4sCzYJvWNS
-         Ruub17WV5enUvAlagNZ7U8HoukA0E8YnMDzRb9HMq2keqTZbB47K6xoSIzYUYrBSVcVS
-         qc3MJbsHo5U/rtIKoLm/BXsZybr0RynJ2jIbgPvIRe6DJuJaYSDKM8YA+Yz5OJxEQ7xo
-         ajb/XTYgQKF3k1aB9ihPYgQo2qVebTgK7q4z4TZTcLPQd2e1jl8Qgcm9DxzJpE4HoRPB
-         wogu2/lsR2biC2+Y6LqLXra3/Ls2PJP1kftRtm9k8Zi2ooBpgAL/TSetKxQpZNExakbr
-         hdAg==
+        d=gmail.com; s=20230601; t=1758398694; x=1759003494; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=FC18eAMQ5u65jcVe61zGGA5+jD3hE8pZEUo6/bFB8uM=;
+        b=iM269XwCYpI3w07SN5Q+RzVq7CzJStRBiLkeHXlxYJOPufeZTgMIOu/Cr4DCMWi5DQ
+         hHspIX3g3SGIkqQbqzgf6RzoaVot8o6Byqusg1UX265KXGG0D30rpsO1pE0idWeY6NMK
+         6jwL6lDyX88xjL8dRrXRZbk8X8SVGetcloN0bXpjGW7MYhGvlpUhH7Ok4UhYZ/sEobr6
+         EvmlDVyLGw6nO74hsFuckF7hBMK9wOks2PLfpTiLRf3Oa4h4t9H7OScOzweFkM2WLs30
+         AqqEeI/SePNrD8qK8/9yfsIx+n9rspXi2hp6MYUSmvFweiLRWmqhSP05XMiKdSMcCR8/
+         qLIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758398683; x=1759003483;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=d8CwIG2I6Y+R1AZx6VVgNx8non0dAl3IDvvgywGA3iE=;
-        b=HJVFVfEISR1D9u0HRJ5eFX5ZuQNj89U3MIhHH/Z+4+3MKfMhn6wn8PYvovrAA3MzZK
-         6jmUx7cEUbXOCyyYkriwAbBDCzXEbHRFYf+aXYiEcJuTLPdrccpnVL48Ere8YzsHjdZ9
-         496sMxBUepbeKG1EbWULPkjqli7pB91TgTeB/3RQIYCzhfKv6k7S8rO9SPcJSFawaN4V
-         ISFIMxTjHt5cEMooLOXntcGkdy+tUDs5/gIswasKump7HFLOEqAR17l0efMmePW9JU66
-         6tei/+tPUxmAlYnO++fSJouPj0rUab4QjbLtXQObrqm6ox4VQ5CAtHb/gyxeydZ95DTV
-         gVxA==
-X-Gm-Message-State: AOJu0YwiMfSgvgTAmOY/2RYn3hgdoq0pH7ll9XmzrUA/0XgQCQqZpSqM
-	tjB8bEMq2dOKPxCDWOjgzKDiGvCR1seJZX1JYGWJR67I122auIzg79pfuorD78qI
-X-Gm-Gg: ASbGncv9bqzF8QpbCvEK9Jl53t0WSWn7LmqJgBqmUuaOS2MGZ8viIGTndx0fag1dQXA
-	OkeehkIkjL/k1tn3AQ2aewRoDeIeoaR7/3A1O6hD/Jg9srWxYbXvNYZ9fGB3fWprSq3lCqSNvon
-	6RTPPH6evUMtC2WorRO99DGPNMc3VGQJlMz78NJvgGcBckTp22FCNd97RffkoJPTirS+J+rT+H6
-	j5mqziVDAvDxchX5ed0xe//SpFt/BJ8hjYixWGRV7VMG/81zqsDba5egxLgFzRavOY4B4Vlu6VF
-	jpkXDEUCftS1tHVKcLeZEPNaJW0ZPcpt6FDOQGit0473UfUXznTMJbxxnrkx1TXt8H7hY+j3Hfm
-	UpEyDcvaEfyM/x+Oq0+i+sLXB5kWn
-X-Google-Smtp-Source: AGHT+IH9eow0w2FQbH6zQgvm+iSeX8QbqmZZuJhPp0WxaSCiprCkHnC7M3RUkSozgXtes34FkueP1Q==
-X-Received: by 2002:a05:690c:2603:b0:734:f858:b1e7 with SMTP id 00721157ae682-73d3ce7a14emr75343577b3.27.1758398682339;
-        Sat, 20 Sep 2025 13:04:42 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1758398694; x=1759003494;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=FC18eAMQ5u65jcVe61zGGA5+jD3hE8pZEUo6/bFB8uM=;
+        b=npOZHb5Ckg5FS+Zv9rkYWuahQqdIK2Zt4fhCZD2w48/CQA5SZhKhClkm6XYbl6qopn
+         YYVulAL0jfl8ydDoBz/fHm9zn47kR5iarGh/ka2yMGantxTpXek40Rxr+0p18NaC3vVL
+         NcH6Ff331xblVNUleh6DYdtAIOxWDARU7A+dc/QFiuB1hqXYi+EQlMlynzPdaWf82T0r
+         KPMfLJKCZomezzRn7l+cq5bRMg+QQCJa9GnamQyxxOtNAcUWy4EY3Ejh2qdD19A+3hyt
+         vDL6lFn+OXPyi4con+IJ6x3ulsOs71TvkvdCP8bnP6Jrdk8QnDwZ/CZG1t/ZjEgyPgUW
+         qjAw==
+X-Gm-Message-State: AOJu0YwxsaJw6e36srQIhyTJc6kO1A0kvqGKpi97SU7kut3dmGJcuq3G
+	AQytXytHznAAM7siR9h3ppHaSiIOaz86ASCCLbLcGX35CkxiTuA3zHUO47putGaN
+X-Gm-Gg: ASbGnctK16NG930d8mrZv/hT0h5QfKA+OYVSyUwj0F5WA1rgdNVptMsKoEDzzdRsW49
+	Xppjz0GMu3oHuOEo/wybsI/4kGReEKKlogjYPmcR9W3sYkv2mmnfUNCoPQYsMs31xKwF64jXVpC
+	lI7HQJgcAq7HmpRtZCxhA+87Mibro36er5dDlYIqhZFYXY44Hn2DBdWd9lol5hoc/en9RUBW8gY
+	oYpCf3JazallHIfPmq+ypZU/F6g13l29P+D9LEDROx4UGlwEpk3HBzg2A1Y8O5Jpi+BKbcnGeVt
+	Xy2Xm2bkQO0SUVbhP5XQpohucZXHie8JweiZALCRbmB46WY/uzYagawM1V+jSm3p/eYbP7K+sgy
+	kTZgGbN3CqHTuSsvvGC4GaVFRx0kv
+X-Google-Smtp-Source: AGHT+IHguWhaQ3CmBja6escDO4a9hH4yUY8oZpJpQwpd8K16O9Iu5e3d2c4MNfhj8NqSI1+YOAm6VA==
+X-Received: by 2002:a05:690c:22c3:b0:739:61a2:ce9d with SMTP id 00721157ae682-73d1f5abe6amr63968757b3.7.1758398693319;
+        Sat, 20 Sep 2025 13:04:53 -0700 (PDT)
 Received: from localhost.localdomain ([67.233.61.26])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7468da56970sm5713487b3.17.2025.09.20.13.04.41
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-7468da56970sm5713487b3.17.2025.09.20.13.04.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 20 Sep 2025 13:04:41 -0700 (PDT)
+        Sat, 20 Sep 2025 13:04:52 -0700 (PDT)
 From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-perl][PATCH 1/2] libconfig-autoconf-perl: upgrade 0.319 -> 0.320
-Date: Sat, 20 Sep 2025 16:04:34 -0400
-Message-ID: <20250920200435.14135-1-schonm@gmail.com>
+Subject: [meta-perl][PATCH 2/2] libcyrpt-openssl-rsa-perl: upgrade 0.34 -> 0.35
+Date: Sat, 20 Sep 2025 16:04:35 -0400
+Message-ID: <20250920200435.14135-2-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250920200435.14135-1-schonm@gmail.com>
+References: <20250920200435.14135-1-schonm@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 20 Sep 2025 20:04:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119623
+ <openembedded-devel@lists.openembedded.org>; Sat, 20 Sep 2025 20:04:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119624
 
- Changes for version 0.320 - 2021-06-25
-    fix check_prog to not find directories (RT#132993), thanks RJBS for reporting it again!
+Changelog: https://metacpan.org/dist/Crypt-OpenSSL-RSA/changes
+
+0.35 May 7 2025
+    - Disable PKCS#1 v1.5 padding. It's not practical to mitigate marvin attacks so we will instead disable this and require alternatives to address the issue.
+      - Resolves #42 - CVE-2024-2467.
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- ...utoconf-perl_0.319.bb => libconfig-autoconf-perl_0.320.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libconfig/{libconfig-autoconf-perl_0.319.bb => libconfig-autoconf-perl_0.320.bb} (89%)
+ ...enssl-rsa-perl_0.34.bb => libcrypt-openssl-rsa-perl_0.35.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-rsa-perl_0.34.bb => libcrypt-openssl-rsa-perl_0.35.bb} (91%)
 
-diff --git a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.320.bb
-similarity index 89%
-rename from meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb
-rename to meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.320.bb
-index 086b2ff32e..d8ca2ae247 100644
---- a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb
-+++ b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.320.bb
-@@ -14,9 +14,9 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
- file://${COMMON_LICENSE_DIR}/GPL-1.0-or-later;md5=30c0b8a5048cc2f4be5ff15ef0d8cf61"
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.34.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.35.bb
+similarity index 91%
+rename from meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.34.bb
+rename to meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.35.bb
+index ffcfa196e8..2e383a83e1 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.34.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.35.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=399bd4de06d233aa49afa7c47cea8117"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/T/TO/TODDR/Crypt-OpenSSL-RSA-${PV}.tar.gz \
+ "
  
--SRC_URI = "${CPAN_MIRROR}/authors/id/R/RE/REHSACK/Config-AutoConf-${PV}.tar.gz"
-+SRC_URI = "${CPAN_MIRROR}/authors/id/A/AM/AMBS/Config-AutoConf-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "368ed198e1fbaebaa2e681d77dbb3c6f0f94e9bacd97b2674759bfaa75bf4a35"
++SRC_URI[sha256sum] = "5eebd55ac071634c864a8e78f5cfafbaaf43cf84c04323a09b71dd76bf025cc2"
  
--SRC_URI[sha256sum] = "304f66cc2653264c0fe127d21669e86d3d18cd72f2574d8f5131beec31a0a33e"
-+SRC_URI[sha256sum] = "bb57a958ef49d3f7162276dae14a7bd5af43fd1d8513231af35d665459454023"
- RDEPENDS:${PN} += "libcapture-tiny-perl"
- RDEPENDS:${PN} += "perl-module-base"
- RDEPENDS:${PN} += "perl-module-carp"
+ DEPENDS += "libcrypt-openssl-guess-perl-native openssl"
+ 
 -- 
 2.43.0
 
