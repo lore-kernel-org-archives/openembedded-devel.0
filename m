@@ -2,31 +2,31 @@ Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17793CAC592
-	for <webhook@archiver.kernel.org>; Sat, 20 Sep 2025 00:01:09 +0000 (UTC)
-Subject: Re: [meta-python][PATCH 3/4] python3-propcache: support reproducible
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDC5FCAC59A
+	for <webhook@archiver.kernel.org>; Sat, 20 Sep 2025 00:01:18 +0000 (UTC)
+Subject: Re: [meta-python][PATCH 4/4] python3-yarl: support reproducible
 To: openembedded-devel@lists.openembedded.org
 From: "hongxu" <hongxu.jia@eng.windriver.com>
 X-Originating-Location: US (128.224.246.2)
 X-Originating-Platform: Linux Chrome 140
 User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Date: Fri, 19 Sep 2025 17:01:03 -0700
-References: <CAMKF1sqJm2aZsrinVihyfHnZ74D1JznhzhGYqanZkwobLJBZpA@mail.gmail.com>
-In-Reply-To: <CAMKF1sqJm2aZsrinVihyfHnZ74D1JznhzhGYqanZkwobLJBZpA@mail.gmail.com>
-Message-ID: <19647.1758326463539423995@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="aJ72sJtoVyBsmipYfcS8"
+Date: Fri, 19 Sep 2025 17:01:17 -0700
+References: <CAMKF1sr5AR-aS5yUZ-+zCfB4NiAOwMDbHgCaXv+iiVkf-zf7uA@mail.gmail.com>
+In-Reply-To: <CAMKF1sr5AR-aS5yUZ-+zCfB4NiAOwMDbHgCaXv+iiVkf-zf7uA@mail.gmail.com>
+Message-ID: <19647.1758326477831173958@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="WYb2XGn7rppyZri3wjae"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 20 Sep 2025 00:01:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119613
+ <openembedded-devel@lists.openembedded.org>; Sat, 20 Sep 2025 00:01:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119614
 
---aJ72sJtoVyBsmipYfcS8
+--WYb2XGn7rppyZri3wjae
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 19, 2025 at 12:25 PM, Khem Raj wrote:
+On Fri, Sep 19, 2025 at 12:24 PM, Khem Raj wrote:
 
 >=20
 >=20
@@ -34,7 +34,7 @@ On Fri, Sep 19, 2025 at 12:25 PM, Khem Raj wrote:
 >> + file://0001-build-wheel-in-place.patch \
 >> +"
 >=20
-> This patch file is missing
+> This patch file is missing.
 
 The patch locates in meta-python/recipes-devtools/python/files/0001-build-w=
 heel-in-place.patch
@@ -52,20 +52,19 @@ oducible [1]
 >> +
 >> DEPENDS +=3D " \
 >> python3-expandvars-native \
->> "
 >=20
 >
 
---aJ72sJtoVyBsmipYfcS8
+--WYb2XGn7rppyZri3wjae
 Content-Type: text/html; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div>On Fri, Sep 19, 2025 at 12:25 PM, Khem Raj wrote:</div>
+<div>On Fri, Sep 19, 2025 at 12:24 PM, Khem Raj wrote:</div>
 <div>
 <blockquote>
 <blockquote>+SRC_URI +=3D " \<br />+ file://0001-build-wheel-in-place.patch=
  \<br />+"</blockquote>
-This patch file is missing</blockquote>
+This patch file is missing.</blockquote>
 <h4 style=3D"box-sizing: border-box; font-family: system-ui, 'Segoe UI', Ro=
 boto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, =
 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji=
@@ -109,10 +108,10 @@ a></div>
 <div>//Hongxu</div>
 <br />
 <blockquote>
-<blockquote>+<br />DEPENDS +=3D " \<br />python3-expandvars-native \<br />"=
-</blockquote>
+<blockquote>+<br />DEPENDS +=3D " \<br />python3-expandvars-native \</block=
+quote>
 </blockquote>
 </div>
 
---aJ72sJtoVyBsmipYfcS8--
+--WYb2XGn7rppyZri3wjae--
 
