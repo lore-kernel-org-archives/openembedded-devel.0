@@ -1,159 +1,155 @@
-Return-Path: <philip@balister.org>
+Return-Path: <spushpka@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01527CAC5A8
-	for <webhook@archiver.kernel.org>; Sun, 21 Sep 2025 11:43:30 +0000 (UTC)
-Received: from alln-iport-6.cisco.com (alln-iport-6.cisco.com [173.37.142.93])
- by mx.groups.io with SMTP id smtpd.web10.24598.1758437579338480991
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 01D8CCAC59A
+	for <webhook@archiver.kernel.org>; Sun, 21 Sep 2025 14:50:12 +0000 (UTC)
+Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
+ by mx.groups.io with SMTP id smtpd.web11.30529.1758466205668996818
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Sep 2025 23:52:59 -0700
+ Sun, 21 Sep 2025 07:50:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=E24zVkiC;
- spf=pass (domain: cisco.com, ip: 173.37.142.93, mailfrom: adongare@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=XEtoThop;
+ spf=pass (domain: cisco.com, ip: 173.37.142.91, mailfrom: spushpka@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=2700; q=dns/txt;
-  s=iport01; t=1758437579; x=1759647179;
+  d=cisco.com; i=@cisco.com; l=2489; q=dns/txt;
+  s=iport01; t=1758466205; x=1759675805;
   h=from:to:cc:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=y3CpBCvLwfi2VfGd6KmkHcgoY4q2jVALOEwMf3ZPp7w=;
-  b=E24zVkiCv+UMqB25eqX9ee/qzb8i4UpzZ9NhfovfAbzAAXtJk6pQsmQv
-   YCWfxjbkZfSzbhakF+bkyW4tGqDEe1+7NTz6eiAdXrvzDGrqaTVUbw6kg
-   5L29/IOz/u50GQkdEZBGGRnR0kzsN9aCNCEl07kHoBpp9c6OpFXIoS1x2
-   yJQ4tG+utrjmB7/YNLE8k6McXNPBhsCJJIY5csngVwwt8k6k6jLHcMlJI
-   UJoiuxgPZ+WYU5oB/XoYZjTaMZ76h4aT9HGPfiNw5fsfodtaWRJSZ4p1x
-   f8ego6wAo/mzsYCYzcVAtbW08AnLnQh2I4EnMGIlMrMD/vSeHFMfMHe59
-   A==;
-X-CSE-ConnectionGUID: VplwznPJSs6ih/0Lmbb5Dg==
-X-CSE-MsgGUID: +ZsibL7CRyu4kUqjHjfNGQ==
-X-IPAS-Result: =?us-ascii?q?A0ANAABLoM9o/5EQJK1aGwEBAQEBAQEBBQEBARIBAQEDA?=
- =?us-ascii?q?wEBAYF/BgEBAQsBgkZ7WUNJjHCJVZ4dgX8PAQEBDz0UBAEBhQeMPwImNAkOA?=
- =?us-ascii?q?QIEAQEBAQMCAwEBAQEBAQEBAQEBCwEBBQEBAQIBBwWBDhOGTw2GWgECASoLA?=
- =?us-ascii?q?RgBLSwDAQJaIyGDAgGCcgMRtS2BeTOBAYMoATEFCQJDT9sqgUkBjUxvAYR3J?=
- =?us-ascii?q?xsbgXKBFYE7gi2BBYFcAQMYghOFdwSCIoECFJAxfYFeNIliSIEeA1ksAVUTD?=
- =?us-ascii?q?QoLBwWBYwM1DAsuFW4yHYEng2GBKoQeK0+FAoRrJGsPBoEVg1sGhzFAAwsYD?=
- =?us-ascii?q?UgRLDcUGwY+bgeWJoMygQ4BK4IUGBGTFAmSRoE1n1kKKIN0jB6VORozqmuZB?=
- =?us-ascii?q?o4IllCEaYFoPIFHCwdwFYMiCUkZD444hWiDFMIuJjICOgIHCwEBAwmTZwEB?=
-IronPort-Data: A9a23:NE0Bn65qjNXyIzFkS497rQxRtGnGchMFZxGqfqrLsTDasY5as4F+v
- jBOWG+COf2DNGanft11ad7i908F78KDz9RkSVdqrng0Zn8b8sCt6fZ1gavT04J+CuWZESqLO
- u1HMoGowPgcFyGa/lH3dOG49xGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
- 5Wr86UzBHf/g2QpajNOs/rYwP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
- +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
- jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eA5Uc5fRxOUN17
- qIZKHdVShWJjb+az+fuIgVsrpxLwMjDNYcbvDRkiDreF/tjGcCFSKTR7tge1zA17ixMNa+BP
- IxCN3w2MlKZP0An1lQ/UPrSmM+hin75fDRCpXqepLE85C7YywkZPL3FbYeLJI3VHZwJ9qqej
- iH05GXzJk4xDs2ClTm463CMhOHpshquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
- 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO+Q+7AfIzu/f5ByUQzBUCDVAc9ch8sQxQFTGy
- 2O0oj8gPhQ32JX9dJ5X3u78Qe+aUcTNEVI/WA==
-IronPort-HdrOrdr: A9a23:MxEBa63nQ8iwtnXgsDi5pAqjBLkkLtp133Aq2lEZdPWaSKOlfq
- eV7ZEmPHDP6Qr5NEtMpTniAtjjfZq/z/5ICOAqVN/INjUO01HHEGgN1+ffKkXbak7DHio379
- YGT0C4Y+eAaWRHsQ==
-X-Talos-CUID: 9a23:yfpMgmE/AeDLCZHVqmJZ7EoLCMYdUEbGknbQZBecDGxjFZGaHAo=
-X-Talos-MUID: 9a23:j5i9JQuJFjGAOE52g82nxwN5Nc1MvI+UGV1RkqgfuemGOwpfAmLI
+  bh=y8MXrkMUR5omYWqT8rrLS85IX4xCq5JvFW2BQ/dp+O4=;
+  b=XEtoThoppvSrV5hDnbDMNlGpWJZxlQp3TshPUzBwIKlK2Gwukd6XFAPn
+   oKtUF1/kk+1CszwZ1S6S9/7TdJRc8SWYfY7Rc+gwAwneXhUdPtm2qzeCo
+   207ALY9SfcbZi088QLoVyoE1rj8WG2vxRDJZwZeGN/o9Orrq0VvF4dnam
+   /2+LKGbOi3EVQV5cKy3QNbp6Sv6Ef4HejmgFUga/kP7sxoSV5VrSSbchU
+   9CeuzSuSp3H1oHZ7WWqiE2zAgNDZ2OtldIWohf/Zw0PUwOaRAHrmSSouM
+   D5Ymgfb/lXXhhnk4OcIfO90FNlUZ//rx7qW0RKmjWW4fxGZ8hvyCdt/Lc
+   w==;
+X-CSE-ConnectionGUID: Qqj5nq62Ro+gaKwFLLAYbw==
+X-CSE-MsgGUID: L7AXpnC/SZagvr/kcXI7dg==
+X-IPAS-Result: =?us-ascii?q?A0ADAAC9D9Bo/5UQJK1aGQEBAQEBAQEBAQEBAQEBAQEBA?=
+ =?us-ascii?q?RIBAQEBAQEBAQEBAQGBfwQBAQEBAQsBgkZ7WUNJjHCIaWyLZxCSJoF/DwEBA?=
+ =?us-ascii?q?Q89FAQBAYUHjD8CJjQJDgECBAEBAQEDAgMBAQEBAQEBAQEBAQsBAQUBAQECA?=
+ =?us-ascii?q?QcFgQ4Thk8NhloBAgE1ARgBLSwDAQJPCyMhgwIBgjoDNQMRBrU9giyBAYMoA?=
+ =?us-ascii?q?T8CQ0/YQg1ugW2BSQGIMYUbbwGEdycbgUlEglCCLYEFgRpCAQGBJ4EGhXcEg?=
+ =?us-ascii?q?yQUi3+EMH2BXjGJYkiBHgNZLAFVEw0KCwcFgWMDNQwLLhVuMh2BJ4NhgSqEH?=
+ =?us-ascii?q?itPhQKEayRrDwaBFYNbBoExhX1AAwsYDUgRLDcUGwY+bgeWJIMxAYENASuCL?=
+ =?us-ascii?q?JMlE5I8oB1xhCaMHo89hXwaM4VbpRALmHuLNYJThAmRXmmEaYFoPIFHCwdNI?=
+ =?us-ascii?q?xWDIglJGQ+OLgoLg16Bf8VDJjICOgIHCwEBAwmRaoF9AQE?=
+IronPort-Data: A9a23:RLXmO6I9km8aBGkqFE+RgJQlxSXFcZb7ZxGr2PjKsXjdYENS3jdWm
+ zcfUG6FPPmNZGryfNF3O9yzpBgF7Z/UytBkTVQd+CA2RRqmiyZq6fd1j6vUF3nPRiEWZBs/t
+ 63yUvGZcoZsCCWa/073WlTYhSEU/bmSQbbhA/LzNCl0RAt1IA8skhsLd9QR2uaEuvDnRVrd0
+ T/Oi5eHYgL9imQtajt8B5+r8XuDgtyj4Fv0gXRmDRx7lAe2v2UYCpsZOZawIxPQKqFIHvS3T
+ vr017qw+GXU5X8FUrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRuukoPD8fwXG8M49m/c3+d/
+ /0W3XC4YV9B0qQhA43xWTEAe811FfUuFLMqvRFTvOTLp3AqfUcAzN1XFUNrO5RGoNxwQm5H1
+ uM2DBQkXxqc0rfeLLKTEoGAh+wqKM3teYdasXZ6wHSAV7AtQIvIROPB4towMDUY358VW62AI
+ ZNHL2MzPXwsYDUXUrsTIIkmgfyonnr2WzZZs1mS46Ew5gA/ySQsjeezbICKI4DiqcN9uhmxl
+ nrA1CPCMBgVKsbYyjG10y2gibqa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
+ 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0Ut5UFag+rQqK0KeRulzfDWkfRTkHY9sj3CMreQEXO
+ payt4uBLVRSXHe9FRpxKp/8QeuOBBUo
+IronPort-HdrOrdr: A9a23:rp5yJq9tjTGe2g1zpmtuk+DTI+orL9Y04lQ7vn2ZhyY7TiX+rb
+ HKoB11737JYVoqNU3I+urwWpVoP0m9yXcd2+B4Vt2ftWLd1ldAQrsP0WKb+UyCJ8U7ndQtsp
+ uJtMNFebnNMWQ=
+X-Talos-CUID: 9a23:VjMbn25Xbg9eOpFZHtsszVcWR8Y8LCfnyzTfKmynJ0JNYYyfVgrF
+X-Talos-MUID: =?us-ascii?q?9a23=3AGXR0WA0ypr3GgVyvla5P9AnyAjUjx/uHOFgLutI?=
+ =?us-ascii?q?9icCLKzY3ODytrWu7Tdpy?=
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.18,282,1751241600"; 
-   d="scan'208";a="556697014"
-Received: from alln-l-core-08.cisco.com ([173.36.16.145])
-  by alln-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 21 Sep 2025 06:52:58 +0000
-Received: from sjc-ads-10055.cisco.com (sjc-ads-10055.cisco.com [10.30.210.59])
+X-IronPort-AV: E=Sophos;i="6.18,283,1751241600"; 
+   d="scan'208";a="557642714"
+Received: from alln-l-core-12.cisco.com ([173.36.16.149])
+  by alln-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 21 Sep 2025 14:50:04 +0000
+Received: from sjc-ads-6702.cisco.com (sjc-ads-6702.cisco.com [10.30.217.17])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by alln-l-core-08.cisco.com (Postfix) with ESMTPS id 52E7818000743;
-	Sun, 21 Sep 2025 06:52:58 +0000 (GMT)
-Received: by sjc-ads-10055.cisco.com (Postfix, from userid 1870532)
-	id E7BFACC1288; Sat, 20 Sep 2025 23:52:57 -0700 (PDT)
-From: "Anil Dongare -X (adongare - E INFOCHIPS PRIVATE LIMITED at Cisco)" <adongare@cisco.com>
+	by alln-l-core-12.cisco.com (Postfix) with ESMTPS id 5C56D18004734;
+	Sun, 21 Sep 2025 14:50:03 +0000 (GMT)
+Received: by sjc-ads-6702.cisco.com (Postfix, from userid 1839047)
+	id EBDBCC57B1B; Sun, 21 Sep 2025 07:50:01 -0700 (PDT)
+From: Shubham Pushpkar <spushpka@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: vchavda@cisco.com,
-	deeratho@cisco.com,
-	Anil Dongare <adongare@cisco.com>
-Subject: [meta-openembedded] [scarthgap] [PATCH 1/2] libssh 0.10.6: Fix CVE-2025-5987
-Date: Sat, 20 Sep 2025 23:52:52 -0700
-Message-ID: <20250921065254.3548083-1-adongare@cisco.com>
-X-Mailer: git-send-email 2.44.1
+	deeratho@cisco.com
+Subject: [meta-openembedded] [walnascar] [PATCH] cjson 1.7.18: Fix CVE-2025-57052
+Date: Sun, 21 Sep 2025 07:50:00 -0700
+Message-Id: <20250921145000.21144-1-spushpka@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
-X-Outbound-SMTP-Client: 10.30.210.59, sjc-ads-10055.cisco.com
-X-Outbound-Node: alln-l-core-08.cisco.com
 Content-Transfer-Encoding: 8bit
+X-Outbound-SMTP-Client: 10.30.217.17, sjc-ads-6702.cisco.com
+X-Outbound-Node: alln-l-core-12.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 21 Sep 2025 11:43:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119626
+ <openembedded-devel@lists.openembedded.org>; Sun, 21 Sep 2025 14:50:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119628
 
-From: Anil Dongare <adongare@cisco.com>
+Upstream Repository: https://github.com/DaveGamble/cJSON.git
 
-Upstream Repository: https://git.libssh.org/projects/libssh.git/
-
-Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2025-5987
+Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2025-57052
 Type: Security Fix
-CVE: CVE-2025-5987
-Score: 5
-Patch: https://git.libssh.org/projects/libssh.git/commit/?id=90b4845e0c98
+CVE: CVE-2025-57052
+Score: 9.8
+Patch: https://github.com/DaveGamble/cJSON/commit/74e1ff4994aa
 
-Signed-off-by: Anil Dongare <adongare@cisco.com>
+Signed-off-by: Shubham Pushpkar <spushpka@cisco.com>
 ---
- .../libssh/libssh/CVE-2025-5987.patch         | 36 +++++++++++++++++++
- .../recipes-support/libssh/libssh_0.10.6.bb   |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-5987.patch
+ .../cjson/cjson/CVE-2025-57052.patch          | 33 +++++++++++++++++++
+ .../recipes-devtools/cjson/cjson_1.7.18.bb    |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/cjson/cjson/CVE-2025-57052.patch
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2025-5987.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2025-5987.patch
+diff --git a/meta-oe/recipes-devtools/cjson/cjson/CVE-2025-57052.patch b/meta-oe/recipes-devtools/cjson/cjson/CVE-2025-57052.patch
 new file mode 100644
-index 0000000000..1df2d85dc6
+index 0000000000..ed3d4a7eba
 --- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-5987.patch
-@@ -0,0 +1,36 @@
-+From 6da35fadb8af6ec6fec7f01c2054e10caf233d77 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Tue, 6 May 2025 22:51:41 +0200
-+Subject: [PATCH] CVE-2025-5987 libcrypto: Correctly detect failures of chacha
-+ initialization
++++ b/meta-oe/recipes-devtools/cjson/cjson/CVE-2025-57052.patch
+@@ -0,0 +1,33 @@
++From e53a1413304382d562176bed91609e00b4fcf87e Mon Sep 17 00:00:00 2001
++From: Lee <peteralfredlee@gmail.com>
++Date: Fri, 5 Sep 2025 14:53:20 +0800
++Subject: [PATCH] fix the incorrect check in decode_array_index_from_pointer
++ (#957)
 +
-+CVE: CVE-2025-5987
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=90b4845e0c98]
++this fixes CVE-2025-57052
 +
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
-+(cherry picked from commit 90b4845e0c98574bbf7bea9e97796695f064bf57)
-+Signed-off-by: Anil Dongare <adongare@cisco.com>
++CVE: CVE-2025-57052
++Upstream-Status: Backport [https://github.com/DaveGamble/cJSON/commit/74e1ff4994aa]
++
++(cherry picked from commit 74e1ff4994aa4139126967f6d289b675b4b36fef)
++Signed-off-by: Shubham Pushpkar <spushpka@cisco.com>
 +---
-+ src/libcrypto.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ cJSON_Utils.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/libcrypto.c b/src/libcrypto.c
-+index 4f945d90..911b3630 100644
-+--- a/src/libcrypto.c
-++++ b/src/libcrypto.c
-+@@ -777,9 +777,9 @@ chacha20_poly1305_set_key(struct ssh_cipher_struct *cipher,
-+         SSH_LOG(SSH_LOG_WARNING, "EVP_CIPHER_CTX_new failed");
-+         goto out;
++diff --git a/cJSON_Utils.c b/cJSON_Utils.c
++index 63651df..8fa24f8 100644
++--- a/cJSON_Utils.c
+++++ b/cJSON_Utils.c
++@@ -282,7 +282,7 @@ static cJSON_bool decode_array_index_from_pointer(const unsigned char * const po
++         return 0;
 +     }
-+-    ret = EVP_EncryptInit_ex(ctx->header_evp, EVP_chacha20(), NULL,
-++    rv = EVP_EncryptInit_ex(ctx->header_evp, EVP_chacha20(), NULL,
-+                              u8key + CHACHA20_KEYLEN, NULL);
-+-    if (ret != 1) {
-++    if (rv != 1) {
-+         SSH_LOG(SSH_LOG_WARNING, "EVP_CipherInit failed");
-+         goto out;
-+     }
++ 
++-    for (position = 0; (pointer[position] >= '0') && (pointer[0] <= '9'); position++)
+++    for (position = 0; (pointer[position] >= '0') && (pointer[position] <= '9'); position++)
++     {
++         parsed_index = (10 * parsed_index) + (size_t)(pointer[position] - '0');
++ 
 +-- 
-+2.43.5
++2.44.1
 +
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-index 48cb47d4c0..dc8904fada 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-@@ -14,6 +14,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
-            file://CVE-2025-5351.patch \
-            file://CVE-2025-5372.patch \
-            file://CVE-2025-4877.patch \
-+           file://CVE-2025-5987.patch \
-           "
- SRCREV = "10e09e273f69e149389b3e0e5d44b8c221c2e7f6"
+diff --git a/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb b/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
+index bdeab3055c..67d536cf24 100644
+--- a/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
++++ b/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0"
+ 
+ SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https \
+            file://run-ptest \
++           file://CVE-2025-57052.patch \
+          "
+ SRCREV = "acc76239bee01d8e9c858ae2cab296704e52d916"
  
 -- 
-2.44.1
+2.35.6
 
 
