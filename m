@@ -1,99 +1,93 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <t.f.g.geelen@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7F54CAC5A7
-	for <webhook@archiver.kernel.org>; Sun, 21 Sep 2025 17:37:02 +0000 (UTC)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
- by mx.groups.io with SMTP id smtpd.web11.33725.1758476217607990235
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1306CAC59A
+	for <webhook@archiver.kernel.org>; Sun, 21 Sep 2025 19:46:23 +0000 (UTC)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+ by mx.groups.io with SMTP id smtpd.web11.35828.1758483980310522471
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 21 Sep 2025 10:36:57 -0700
+ Sun, 21 Sep 2025 12:46:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jqmSwZmr;
- spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-71d5fb5e34cso35631457b3.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 21 Sep 2025 10:36:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nWznPctS;
+ spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: t.f.g.geelen@gmail.com)
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-b04770a25f2so606052866b.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 21 Sep 2025 12:46:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758476216; x=1759081016; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0WHs2hDmsl4oYA+UFOi5vdU/HcPVkh4xNdtMCZYxHok=;
-        b=jqmSwZmrizWsMU8h0qEqZI48FUafAGCXM7ALYrwoTh2G0EvbaubSOw2XWCTPoKx5vM
-         DBdZEsvB+cvGibwpShI2VyTIklR1qk0+dVCmzJBSaJrZsfwSJvcQfurZeque9uLGBfS5
-         RbEMs+3j1dcAynkDvuum0BYCtzn3JRaIFp9FgKGrjKWIRV1j9pACiZF0GOjLeOhAqRqi
-         /Ioqm6epCUHR71kTiUqdRgiXs3TYhEmrkImuJEmkdcUMKj3P5uqWIXPXgsTzuQF4XXfW
-         KFsJAMjqZjy3llHBrINKanX+pPKY+98WVOQ0twc3nxmiIXvaxOjCJa8C0wVEuZXWpGlh
-         gc4Q==
+        d=gmail.com; s=20230601; t=1758483978; x=1759088778; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=X7BYVB3YPHuwIbWeQkLF9aMz0tpkSuEpdwp2ROLTtLk=;
+        b=nWznPctS3nua8op54PNW5YpZXhIJVS9dov4P61+rjxFDU2+vk4I7CV5F+hPWFQ57bg
+         2JvT+XVEY/TIkzmgtgyzLrR+0EF4TzrXhEHfF2d+k3WQeYOvPiPTCaqbbofmQKkoB9XY
+         WGrus/rj1vsDCyG8OB1MVP7fnma6mWIoWG7z0b7wIvP9R+8Hbox24nQaw9FCdkFeC6rV
+         VDmXlPXHdO+wBqYG9zAYt3RYxjt7QmCM8f6gqe0nQqCl46BvpGmjmeDM9HPip/9stZcI
+         Vyr90AaftqZeuQA4JG8C+jaZ+IefBU3q8O+8MJRoyHW9HJAAYCdZQ7yGhjC7nMPjaCPI
+         viuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758476216; x=1759081016;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0WHs2hDmsl4oYA+UFOi5vdU/HcPVkh4xNdtMCZYxHok=;
-        b=ZjKz7s7iRPXQc6QZFQzDIBT1WY/8XnvW5B12I2Cu3rfXLYfjIRPpZ8kad+VU80Ldl/
-         17OgQiuJm2xmeZNNgM6tlWgzaVJluCN7H0fa1DPDvHOF9HQ0jcvQn5x+NEqMcRJIGK6p
-         pQkuOxSgkHKfZxpyyoDJIKrcd134YtAUWHv8gBTZci8ZANnwS4NhYfjpoQCYuLTEs1m1
-         FunzzUhnsoG65A88ecSFIxX4mGdChO4pLN/ktzS3WPuVAJ0JZ/mHEdHLfVpGKwcN1xYo
-         zVL8j4FYHdkOCtM+GSg3jSOUlxw3gx3PYtdxQk2lbmx2ASwXtrC+lLPjaMTPt83EHFOG
-         KZoQ==
-X-Gm-Message-State: AOJu0YzqiVY8c1ACZCKDaaNbDr5qhC+q79GVcNw+opwlRYFCo/6JNbbt
-	iNegFwK4bWGRtmIiM7HfmwdcecVQBzpiBMFH3m/ncnxXct+1etCj5J+nz7W6KmFO
-X-Gm-Gg: ASbGncumGu/KBT6c/XFr3gjOO3m8awzIAVzebysq2tA6cDSwAlQ+pzqMwSmEXs+KZj6
-	CCdfFyCEd7tFv38BBR6UND9VSULIsvecMCc+evtJWjXAuRizMh4ooAWHcwfadsCwJUzri0kdnWx
-	z2YC7jrII5DWTmPWhfAVwVE7fDWDAgtY2Lty+Cxryk+QzlNkCi2c7VqPC98t9UdnYCYb/aboiBC
-	OASDavRYVUzUINQv6AQmiMUNtwUtTd3OdrXqh5m9CdOXySUes8rudKhqT9qK/jf3v67IEgoN6N3
-	swLccVB4uSCKcMHl4X2RkaplL9UJ8ZkXR0cA7i5iFVus8uYTCXQUmEZgiKOKmQzikgbC+UEDc2D
-	Evj9hXuVjS1KRvlQi0f/r9Ic/Ck+s
-X-Google-Smtp-Source: AGHT+IE+dPpbYWFES4NJ9RL0Vrrd6ZGYxeNJH2t0e/5Zlo7/nn5OHaoiV0I+YFnn4U4Z7FNzabRw/A==
-X-Received: by 2002:a05:690c:490e:b0:73b:2207:2a57 with SMTP id 00721157ae682-73cc6830bc2mr96034067b3.8.1758476216176;
-        Sun, 21 Sep 2025 10:36:56 -0700 (PDT)
-Received: from localhost.localdomain ([67.233.61.26])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-633bccd8fb9sm3445909d50.3.2025.09.21.10.36.55
+        d=1e100.net; s=20230601; t=1758483978; x=1759088778;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=X7BYVB3YPHuwIbWeQkLF9aMz0tpkSuEpdwp2ROLTtLk=;
+        b=Rlwo8HNXFudQFirwZvg92tkGdAIIkHKO0k/xWxiXMb+60ygoN03A7rDyGL/xqjmS7+
+         zSIzxPY18N62pLNg5Sdbq8yD1hzWVIjENXtNsKwYEugRxru/W5pvpvz5iSq2nLRr/0Ux
+         bysanT4/+WEVPTZWMDfAB7cXX6oY0oXj9GPoHjV9LRiuG6lrZHYZ9OKcyiBw7qhRTU+/
+         tv7Aj9j4DcgzRImwjwiOKKt+93B8NUmE6Fk86sQIe7B9BJhSWccU5GpP/LmiCPFgbqT5
+         1zP0K7yiHZ4w4HRlj7/LrQ1N5CQp7G+VfMDf8dG4ifOfad8jmhPaJCsveEB7Lf+m77gV
+         6jRg==
+X-Gm-Message-State: AOJu0YwBjsF9A1PmQY/gSoG/bGRONJOBDP5UE23cgwM/pQ1mDi5Iwf+N
+	TFS2EQkhWMFLxBn1HMq+v04wVNNxgB1jG2L3SrBRBpXzjuwA/BGxPnB/W309gjN6
+X-Gm-Gg: ASbGncvpRElMC81tnPRkWjyHWR7kGXy01bant5izEHJ2wzYwfPIQhiKlJI8tRMjd8ns
+	VVYvBroxLea7QAIxR15V3tygN7IHinVobqRxAy90JNlDjnT2omyRWJk/cjUKnya/ribPigeWc3v
+	q9x7CGxXxIu6Vp2x5ikyKvfHtcPOekmSQEE8kAECZ1ynky0FKHrK+5gRcknSWucC912Fnj7IJlB
+	98C2shdInwzUVTwOAuyFY7jaHR8llypHRmAvQWdN6hG0B2H5aHxmou4Jj6bvya6+E7asliTXMO7
+	JrX5ysusDdGTKT2L/Lxe/hPelkyklSGJDvRQ0LEffg9tk3Lu0ufnFPwY5hBO20vVXWKL14z44Db
+	KtA3nFYJHPHf+sfUr+aTRPlPMFOHE2kbDbH+zNfjcw2B21WnMxzmc/KNaAaEh7QiR0fZoMQa7aq
+	XVHQOW2kgD2gcc3/b4ZnsHPB5DjPSHiiV8fvtvX58aPR8=
+X-Google-Smtp-Source: AGHT+IF9+ogqYpMtYffEFpPZ0rJN2Zjxd2brIdeBSoO6/bU+drknDTIHtTH87nOwK1dfA5fMTeo/4A==
+X-Received: by 2002:a17:907:97c7:b0:b04:8358:26fe with SMTP id a640c23a62f3a-b24f32c9141mr1086742266b.34.1758483978126;
+        Sun, 21 Sep 2025 12:46:18 -0700 (PDT)
+Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b29abf51da3sm315549566b.75.2025.09.21.12.46.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 21 Sep 2025 10:36:55 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Sun, 21 Sep 2025 12:46:17 -0700 (PDT)
+From: Tom Geelen <t.f.g.geelen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH 2/2] thunar: upgrade 4.20.3 -> 4.20.5
-Date: Sun, 21 Sep 2025 13:36:40 -0400
-Message-ID: <20250921173640.707116-2-schonm@gmail.com>
+Cc: Tom Geelen <t.f.g.geelen@gmail.com>
+Subject: [meta-python][PATCH 1/5] python3-aiohue: 4.7.4 -> 4.7.5
+Date: Sun, 21 Sep 2025 21:45:59 +0200
+Message-ID: <20250921194602.1207268-2-t.f.g.geelen@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250921173640.707116-1-schonm@gmail.com>
-References: <20250921173640.707116-1-schonm@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 21 Sep 2025 17:37:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119632
+ <openembedded-devel@lists.openembedded.org>; Sun, 21 Sep 2025 19:46:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119633
 
-Changelog: https://gitlab.xfce.org/xfce/thunar/-/tags/thunar-4.20.5
-Changelog: https://gitlab.xfce.org/xfce/thunar/-/tags/thunar-4.20.4
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../recipes-xfce/thunar/{thunar_4.20.3.bb => thunar_4.20.5.bb}  | 2 +-
+ .../python/{python3-aiohue_4.7.4.bb => python3-aiohue_4.7.5.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/thunar/{thunar_4.20.3.bb => thunar_4.20.5.bb} (93%)
+ rename meta-python/recipes-devtools/python/{python3-aiohue_4.7.4.bb => python3-aiohue_4.7.5.bb} (81%)
 
-diff --git a/meta-xfce/recipes-xfce/thunar/thunar_4.20.3.bb b/meta-xfce/recipes-xfce/thunar/thunar_4.20.5.bb
-similarity index 93%
-rename from meta-xfce/recipes-xfce/thunar/thunar_4.20.3.bb
-rename to meta-xfce/recipes-xfce/thunar/thunar_4.20.5.bb
-index c5a800bb02..e72eb8b33f 100644
---- a/meta-xfce/recipes-xfce/thunar/thunar_4.20.3.bb
-+++ b/meta-xfce/recipes-xfce/thunar/thunar_4.20.5.bb
-@@ -11,7 +11,7 @@ inherit xfce gobject-introspection features_check mime-xdg perlnative gtk-doc
- # cairo would at least needed to be built with xlib.
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+diff --git a/meta-python/recipes-devtools/python/python3-aiohue_4.7.4.bb b/meta-python/recipes-devtools/python/python3-aiohue_4.7.5.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-aiohue_4.7.4.bb
+rename to meta-python/recipes-devtools/python/python3-aiohue_4.7.5.bb
+index 45d23408a1..23354152be 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohue_4.7.4.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohue_4.7.5.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dab31a1d28183826937f4b152143a33f"
  
--SRC_URI[sha256sum] = "fe1908b396298e6515a90fa9ddaec0db8b684e4b3d7773118e21561baf8f9639"
-+SRC_URI[sha256sum] = "da299babd233a079a443e527fa38cba3899b6131ef056593de9451178d812f2a"
+-SRC_URI[sha256sum] = "0764d934c0d198e450364bc47e87025108aef07b5280602890e9be2972d85a91"
++SRC_URI[sha256sum] = "77d7ee467c41bb0c3e00f4e2e533ba65f58a29147ed7df407f84cd4595d2d20c"
  
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
- PACKAGECONFIG[pcre] = "--enable-pcre2,--disable-pcre2,libpcre2"
+ inherit pypi python_setuptools_build_meta
+ 
 -- 
 2.43.0
 
