@@ -1,103 +1,136 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98577CAC5A7
-	for <webhook@archiver.kernel.org>; Sat, 20 Sep 2025 20:04:55 +0000 (UTC)
-Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
- by mx.groups.io with SMTP id smtpd.web10.16671.1758398694860168216
- for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Sep 2025 13:04:54 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iM269XwC;
- spf=pass (domain: gmail.com, ip: 209.85.219.177, mailfrom: schonm@gmail.com)
-Received: by mail-yb1-f177.google.com with SMTP id 3f1490d57ef6-e951dfcbc5bso3213727276.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Sep 2025 13:04:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758398694; x=1759003494; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FC18eAMQ5u65jcVe61zGGA5+jD3hE8pZEUo6/bFB8uM=;
-        b=iM269XwCYpI3w07SN5Q+RzVq7CzJStRBiLkeHXlxYJOPufeZTgMIOu/Cr4DCMWi5DQ
-         hHspIX3g3SGIkqQbqzgf6RzoaVot8o6Byqusg1UX265KXGG0D30rpsO1pE0idWeY6NMK
-         6jwL6lDyX88xjL8dRrXRZbk8X8SVGetcloN0bXpjGW7MYhGvlpUhH7Ok4UhYZ/sEobr6
-         EvmlDVyLGw6nO74hsFuckF7hBMK9wOks2PLfpTiLRf3Oa4h4t9H7OScOzweFkM2WLs30
-         AqqEeI/SePNrD8qK8/9yfsIx+n9rspXi2hp6MYUSmvFweiLRWmqhSP05XMiKdSMcCR8/
-         qLIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758398694; x=1759003494;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=FC18eAMQ5u65jcVe61zGGA5+jD3hE8pZEUo6/bFB8uM=;
-        b=npOZHb5Ckg5FS+Zv9rkYWuahQqdIK2Zt4fhCZD2w48/CQA5SZhKhClkm6XYbl6qopn
-         YYVulAL0jfl8ydDoBz/fHm9zn47kR5iarGh/ka2yMGantxTpXek40Rxr+0p18NaC3vVL
-         NcH6Ff331xblVNUleh6DYdtAIOxWDARU7A+dc/QFiuB1hqXYi+EQlMlynzPdaWf82T0r
-         KPMfLJKCZomezzRn7l+cq5bRMg+QQCJa9GnamQyxxOtNAcUWy4EY3Ejh2qdD19A+3hyt
-         vDL6lFn+OXPyi4con+IJ6x3ulsOs71TvkvdCP8bnP6Jrdk8QnDwZ/CZG1t/ZjEgyPgUW
-         qjAw==
-X-Gm-Message-State: AOJu0YwxsaJw6e36srQIhyTJc6kO1A0kvqGKpi97SU7kut3dmGJcuq3G
-	AQytXytHznAAM7siR9h3ppHaSiIOaz86ASCCLbLcGX35CkxiTuA3zHUO47putGaN
-X-Gm-Gg: ASbGnctK16NG930d8mrZv/hT0h5QfKA+OYVSyUwj0F5WA1rgdNVptMsKoEDzzdRsW49
-	Xppjz0GMu3oHuOEo/wybsI/4kGReEKKlogjYPmcR9W3sYkv2mmnfUNCoPQYsMs31xKwF64jXVpC
-	lI7HQJgcAq7HmpRtZCxhA+87Mibro36er5dDlYIqhZFYXY44Hn2DBdWd9lol5hoc/en9RUBW8gY
-	oYpCf3JazallHIfPmq+ypZU/F6g13l29P+D9LEDROx4UGlwEpk3HBzg2A1Y8O5Jpi+BKbcnGeVt
-	Xy2Xm2bkQO0SUVbhP5XQpohucZXHie8JweiZALCRbmB46WY/uzYagawM1V+jSm3p/eYbP7K+sgy
-	kTZgGbN3CqHTuSsvvGC4GaVFRx0kv
-X-Google-Smtp-Source: AGHT+IHguWhaQ3CmBja6escDO4a9hH4yUY8oZpJpQwpd8K16O9Iu5e3d2c4MNfhj8NqSI1+YOAm6VA==
-X-Received: by 2002:a05:690c:22c3:b0:739:61a2:ce9d with SMTP id 00721157ae682-73d1f5abe6amr63968757b3.7.1758398693319;
-        Sat, 20 Sep 2025 13:04:53 -0700 (PDT)
-Received: from localhost.localdomain ([67.233.61.26])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7468da56970sm5713487b3.17.2025.09.20.13.04.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 20 Sep 2025 13:04:52 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1A22CAC5A7
+	for <webhook@archiver.kernel.org>; Sun, 21 Sep 2025 02:34:27 +0000 (UTC)
+Subject: Re: [meta-python][PATCH 2/4] python3-frozenlist: support reproducible
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-perl][PATCH 2/2] libcyrpt-openssl-rsa-perl: upgrade 0.34 -> 0.35
-Date: Sat, 20 Sep 2025 16:04:35 -0400
-Message-ID: <20250920200435.14135-2-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250920200435.14135-1-schonm@gmail.com>
-References: <20250920200435.14135-1-schonm@gmail.com>
+From: "hongxu" <hongxu.jia@eng.windriver.com>
+X-Originating-Location: US (128.224.246.2)
+X-Originating-Platform: Linux Chrome 140
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Sat, 20 Sep 2025 19:34:26 -0700
+References: <CAMKF1spt3grZYZw3TmZTWQVWCip3kewWNCdxMhhHsY5yANkraA@mail.gmail.com>
+In-Reply-To: <CAMKF1spt3grZYZw3TmZTWQVWCip3kewWNCdxMhhHsY5yANkraA@mail.gmail.com>
+Message-ID: <19647.1758422066781943331@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="XSPjK1yHrPPcdkA5RxO1"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 20 Sep 2025 20:04:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119624
+ <openembedded-devel@lists.openembedded.org>; Sun, 21 Sep 2025 02:34:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119625
 
-Changelog: https://metacpan.org/dist/Crypt-OpenSSL-RSA/changes
+--XSPjK1yHrPPcdkA5RxO1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-0.35 May 7 2025
-    - Disable PKCS#1 v1.5 padding. It's not practical to mitigate marvin attacks so we will instead disable this and require alternatives to address the issue.
-      - Resolves #42 - CVE-2024-2467.
+On Thu, Sep 18, 2025 at 09:01 PM, Khem Raj wrote:
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- ...enssl-rsa-perl_0.34.bb => libcrypt-openssl-rsa-perl_0.35.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-rsa-perl_0.34.bb => libcrypt-openssl-rsa-perl_0.35.bb} (91%)
+>=20
+> seeing
+>=20
+> stdio: ERROR: python3-frozenlist-1.7.0-r0 do_package_qa: QA Issue:
+> File /usr/src/debug/python3-frozenlist/1.7.0/frozenlist/_frozenlist.cpp
+> in package python3-frozenlist-src contains reference to TMPDIR
+> [buildpaths]
+> stdio: ERROR: python3-frozenlist-1.7.0-r0 do_package_qa: Fatal QA
+> errors were found, failing task.
+>=20
+>=20
+> See - https://autobuilder.yoctoproject.org/valkyrie/?#/builders/81/builds=
+/935
+> ( https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/935 =
+)
 
-diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.34.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.35.bb
-similarity index 91%
-rename from meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.34.bb
-rename to meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.35.bb
-index ffcfa196e8..2e383a83e1 100644
---- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.34.bb
-+++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.35.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=399bd4de06d233aa49afa7c47cea8117"
- SRC_URI = "${CPAN_MIRROR}/authors/id/T/TO/TODDR/Crypt-OpenSSL-RSA-${PV}.tar.gz \
- "
- 
--SRC_URI[sha256sum] = "368ed198e1fbaebaa2e681d77dbb3c6f0f94e9bacd97b2674759bfaa75bf4a35"
-+SRC_URI[sha256sum] = "5eebd55ac071634c864a8e78f5cfafbaaf43cf84c04323a09b71dd76bf025cc2"
- 
- DEPENDS += "libcrypt-openssl-guess-perl-native openssl"
- 
--- 
-2.43.0
+As I mentioned in the commit message, it also requires oe-core commit [1] t=
+o be merged, otherwise the issue you met
 
+[1] https://lists.openembedded.org/g/openembedded-core/message/223604?p=3D%=
+2C%2C%2C20%2C0%2C0%2C0%3A%3ACreated%2C%2C%2C20%2C2%2C0%2C115291386%2Cd%253D=
+3&d=3D3
+
+//Hongxu
+
+>=20
+> On Thu, Sep 18, 2025 at 12:16=E2=80=AFAM hongxu via lists.openembedded.or=
+g
+> <hongxu.jia=3Deng.windriver.com@...> wrote:
+
+--XSPjK1yHrPPcdkA5RxO1
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>On Thu, Sep 18, 2025 at 09:01 PM, Khem Raj wrote:</div>
+<div>
+<blockquote>seeing<br /><br />stdio: ERROR: python3-frozenlist-1.7.0-r0 do_=
+package_qa: QA Issue:<br />File /usr/src/debug/python3-frozenlist/1.7.0/fro=
+zenlist/_frozenlist.cpp<br />in package python3-frozenlist-src contains ref=
+erence to TMPDIR<br />[buildpaths]<br />stdio: ERROR: python3-frozenlist-1.=
+7.0-r0 do_package_qa: Fatal QA<br />errors were found, failing task.<br /><=
+br /><br />See - <a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#=
+/builders/81/builds/935" target=3D"_blank" rel=3D"noopener">https://autobui=
+lder.yoctoproject.org/valkyrie/?#/builders/81/builds/935</a></blockquote>
+<span style=3D"color: #333333; font-family: system-ui, 'Segoe UI', Roboto, =
+'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple=
+ Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; fon=
+t-size: 16px; font-style: normal; font-variant-ligatures: normal; font-vari=
+ant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; tex=
+t-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spa=
+cing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; backgroun=
+d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
+: initial; text-decoration-color: initial; display: inline !important; floa=
+t: none;">As I mentioned in the commit message, it also requires oe-core co=
+mmit [1] to be merged, otherwise the issue you met</span><br style=3D"box-s=
+izing: border-box; overflow-wrap: break-word !important; color: #333333; fo=
+nt-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'L=
+iberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', =
+'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal;=
+ font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 40=
+0; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px;=
+ text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-wi=
+dth: 0px; white-space: pre-wrap; background-color: #ffffff; text-decoration=
+-thickness: initial; text-decoration-style: initial; text-decoration-color:=
+ initial;" /><br style=3D"box-sizing: border-box; overflow-wrap: break-word=
+ !important; color: #333333; font-family: system-ui, 'Segoe UI', Roboto, 'H=
+elvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple C=
+olor Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-=
+size: 16px; font-style: normal; font-variant-ligatures: normal; font-varian=
+t-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-=
+align: start; text-indent: 0px; text-transform: none; widows: 2; word-spaci=
+ng: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-=
+color: #ffffff; text-decoration-thickness: initial; text-decoration-style: =
+initial; text-decoration-color: initial;" /><span style=3D"color: #333333; =
+font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', =
+'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'=
+, 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: norma=
+l; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: =
+400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0p=
+x; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-=
+width: 0px; white-space: pre-wrap; background-color: #ffffff; text-decorati=
+on-thickness: initial; text-decoration-style: initial; text-decoration-colo=
+r: initial; display: inline !important; float: none;">[1] </span><a style=
+=3D"box-sizing: border-box; background-color: #ffffff; color: #2f6fa7; text=
+-decoration: none; overflow-wrap: break-word !important; font-family: syste=
+m-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans',=
+ Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol=
+', 'Noto Color Emoji'; font-size: 16px; font-style: normal; font-variant-li=
+gatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacin=
+g: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform:=
+ none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-=
+space: pre-wrap;" href=3D"https://lists.openembedded.org/g/openembedded-cor=
+e/message/223604?p=3D%2C%2C%2C20%2C0%2C0%2C0%3A%3ACreated%2C%2C%2C20%2C2%2C=
+0%2C115291386%2Cd%253D3&amp;d=3D3" target=3D"_blank" rel=3D"noopener">https=
+://lists.openembedded.org/g/openembedded-core/message/223604?p=3D%2C%2C%2C2=
+0%2C0%2C0%2C0%3A%3ACreated%2C%2C%2C20%2C2%2C0%2C115291386%2Cd%253D3&amp;d=
+=3D3</a></div>
+<div>&nbsp;</div>
+<div>//Hongxu<br />
+<blockquote>On Thu, Sep 18, 2025 at 12:16=E2=80=AFAM hongxu via lists.opene=
+mbedded.org<br />&lt;hongxu.jia=3Deng.windriver.com@...&gt; wrote:</blockqu=
+ote>
+</div>
+
+--XSPjK1yHrPPcdkA5RxO1--
 
