@@ -2,47 +2,47 @@ Return-Path: <anuj.mittal@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B62BFCAC5B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C65AACAC5B4
 	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 11:58:12 +0000 (UTC)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
  by mx.groups.io with SMTP id smtpd.web11.15019.1758628660267361449
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Sep 2025 04:58:08 -0700
+ Tue, 23 Sep 2025 04:58:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=ZglyFD5s;
+ dkim=pass header.i=@intel.com header.s=Intel header.b=WDhJQGI2;
  spf=pass (domain: intel.com, ip: 198.175.65.21, mailfrom: anuj.mittal@intel.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1758628689; x=1790164689;
+  t=1758628691; x=1790164691;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=cLKNdSDU93zQA9d41V+noXqoVtbqjldZIgAOO16X76c=;
-  b=ZglyFD5sr/PvoMZTUGhCj//NVQAQP+Z0df/Je+2I69ZPMgi4WN7uWDTG
-   MrAe53VL0yBNjaVoPn7oJjwP4JKjRioO32UX4E4T9cnA5Je0En2B0u8X4
-   i0VzKpWFsOY0vtbqbD6Je43l+mZN42STov/9q7Bp56yjfVyUc7c9jOW9U
-   EexAuozMaJxSuFTFZ6xodSeU22thdS5YoGToXiiInEhEiA9HPf9pJLo8g
-   FErc/oc4gU846HWnR5OXOFYDslW7Oi0Vw3YErZxL6QWhIV/ha70+HvmKO
-   NvSASX+qSE7/e8WnbekrEL4abp9BSHYeZ4FGNQp2FBFsAtOT5SBYXJxoS
-   A==;
-X-CSE-ConnectionGUID: hNq1wYu0QAWNWBFSMMAQQw==
-X-CSE-MsgGUID: UtRrzzIQQTCmW8ZumpgVaA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="60821812"
+  bh=gvu06v2lvBKnQGgvTQY4x0Sd1y6Aimvggje1AFS3bH0=;
+  b=WDhJQGI2VVNbTglKByKkt0+qEWJNYN8MwweUE3wne7znXFFAd5jk0ZGl
+   WOK8oq4lOVBPsd6TjcMrx7IukNhb68TIIet9WEtSTbtdpAQuLVp4Zj/pY
+   S/Ysm0/o/OiUB5WGlZrym1K3ZYBexCctq20swPJ9QYTovX8fz65DXaF/e
+   EFaPM+UzruvHXtBj0eYDxwaz08tf3bn9Red5+vjSAnw6u3GKjotAP+2K3
+   RyvY7Mi5SqkR/OUm5cCwGx6HRJMcGP2j+/xEnOuPsTcINcl7rLDnGBcfd
+   uHl77VDUphGq5B5yGzma3fu/iPOA2i8GtnePmHmsrnmiynNicSU+liles
+   Q==;
+X-CSE-ConnectionGUID: arG70yVATA6qE9rykKDZDA==
+X-CSE-MsgGUID: fob4K+7TSmOpcdpqf3V1cw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="60821817"
 X-IronPort-AV: E=Sophos;i="6.17,312,1747724400"; 
-   d="scan'208";a="60821812"
+   d="scan'208";a="60821817"
 Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:58:08 -0700
-X-CSE-ConnectionGUID: qxCZh5cERtmrlKdmwJqN/Q==
-X-CSE-MsgGUID: CuIVCYJWTqG64RRyk7HdgA==
+  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:58:11 -0700
+X-CSE-ConnectionGUID: 0JagsspgTkqNb6yL0J5UwQ==
+X-CSE-MsgGUID: cqRc18d6QbmhWvZbXbDNag==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.18,287,1751266800"; 
-   d="scan'208";a="175875238"
+   d="scan'208";a="175875242"
 Received: from anmitta2-mobl4.gar.corp.intel.com (HELO anmitta2-mobl4.intel.com) ([10.247.118.223])
-  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:58:07 -0700
+  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:58:10 -0700
 From: Anuj Mittal <anuj.mittal@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [scarthgap][PATCH 18/24] libvncserver: fix generated LibVNCServerTargets.cmake
-Date: Tue, 23 Sep 2025 19:57:21 +0800
-Message-ID: <a05db3fd5c75e1b7df7a65422c04650d7fc7f178.1758626365.git.anuj.mittal@intel.com>
+Subject: [scarthgap][PATCH 20/24] geoip: fix do_fetch error
+Date: Tue, 23 Sep 2025 19:57:23 +0800
+Message-ID: <371879bee73e7b69ebc704257094359be8d339b5.1758626365.git.anuj.mittal@intel.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <cover.1758626365.git.anuj.mittal@intel.com>
 References: <cover.1758626365.git.anuj.mittal@intel.com>
@@ -52,60 +52,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:58:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119707
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119709
 
-From: Marc Ferland <marc.ferland@sonatest.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-The currently generated LibVNCServerTargets.cmake will include the
-following 'set_target_properties':
+Change the SRC_URI to the correct value due to the following error:
+ERROR: geoip-1.6.12-r0 do_fetch: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'http://sources.openembedded.org/GeoIP.dat.20181205.gz;apply=no;name=GeoIP-dat;')
 
-    set_target_properties(LibVNCServer::vncclient PROPERTIES
-      INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-      INTERFACE_LINK_LIBRARIES "systemd;/usr/lib/libz.so;/usr/lib/liblzo2.so;/usr/lib/libjpeg.so;/usr/lib/libgcrypt.so;/usr/lib/libgnutls.so"
-    )
-
-INTERFACE_LINK_LIBRARIES here points to absolute paths which hardcodes
-the library paths. From CMake doc [1]:
-
-    Note that it is not advisable to populate the INTERFACE_LINK_LIBRARIES
-    of a target with absolute paths to dependencies. That would hard-code
-    into installed packages the library file paths for dependencies as
-    found on the machine the package was made on.
-
-This breaks krfb build (kde desktop sharing server) since CMake cannot
-find these libraries. Removing the absolute paths solves the issue.
-
-Note: I also added a 'inherit pkgconfig' since libvncserver uses it to
-detect libsystemd presence.
-
-1: https://cmake.org/cmake/help/latest/prop_tgt/INTERFACE_LINK_LIBRARIES.html
-
-Signed-off-by: Marc Ferland <marc.ferland@sonatest.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 215694286716cf83bf9e52c5e61b4cbc861098fc)
+(cherry picked from commit aadc2ac9dc49dfb5a2066401f22e7b553b324313)
 Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
 ---
- meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.14.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-support/geoip/geoip_1.6.12.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.14.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.14.bb
-index ce01593b8b..6f271ee0d3 100644
---- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.14.bb
-+++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.14.bb
-@@ -42,7 +42,7 @@ PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
- PACKAGE_BEFORE_PN = "libvncclient"
- FILES:libvncclient = "${libdir}/libvncclient.*"
+diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+index 429cd69d6d..12599f97de 100644
+--- a/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
++++ b/meta-networking/recipes-support/geoip/geoip_1.6.12.bb
+@@ -11,10 +11,10 @@ SECTION = "libdevel"
+ GEOIP_DATABASE_VERSION = "20181205"
  
--inherit cmake
-+inherit cmake pkgconfig
- 
- SRC_URI = "git://github.com/LibVNC/libvncserver;branch=master;protocol=https"
- SRCREV = "10e9eb75f73e973725dc75c373de5d89807af028"
-@@ -52,5 +52,5 @@ S = "${WORKDIR}/git"
- EXTRA_OECMAKE = "-DMAKE_INSTALL_LIBDIR=${libdir}"
- 
- do_install:append() {
--    sed -i -e 's|${STAGING_DIR_HOST}||g' ${D}${libdir}/cmake/LibVNCServer/LibVNCServerTargets.cmake
-+    sed -i -e 's|${STAGING_DIR_HOST}${libdir}/||g' ${D}${libdir}/cmake/LibVNCServer/LibVNCServerTargets.cmake
- }
+ SRC_URI = "git://github.com/maxmind/geoip-api-c.git;branch=main;protocol=https \
+-           http://sources.openembedded.org/GeoIP.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIP-dat; \
+-           http://sources.openembedded.org/GeoIPv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIPv6-dat; \
+-           http://sources.openembedded.org/GeoLiteCity.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCity-dat; \
+-           http://sources.openembedded.org/GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCityv6-dat; \
++           https://downloads.yoctoproject.org/mirror/sources/GeoIP.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIP-dat; \
++           https://downloads.yoctoproject.org/mirror/sources/GeoIPv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoIPv6-dat; \
++           https://downloads.yoctoproject.org/mirror/sources/GeoLiteCity.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCity-dat; \
++           https://downloads.yoctoproject.org/mirror/sources/GeoLiteCityv6.dat.${GEOIP_DATABASE_VERSION}.gz;apply=no;name=GeoLiteCityv6-dat; \
+            file://run-ptest \
+ "
+ SRCREV = "4b526e7331ca1d692b74a0509ddcc725622ed31a"
 
