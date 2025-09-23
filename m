@@ -2,196 +2,192 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D601CAC5AC
-	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 18:06:52 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web11.4449.1758650806308146850
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F1C7CAC5AC
+	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 18:46:32 +0000 (UTC)
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.web11.5423.1758653189632830298
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Sep 2025 11:06:46 -0700
+ Tue, 23 Sep 2025 11:46:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=f+jQH/6w;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b03fa5c5a89so864457466b.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:06:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Lz3BcD4D;
+ spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-b2e168f0a75so346557666b.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:46:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758650805; x=1759255605; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=EPDosY/SctMG1RNB8n9JrumrZnlJvs2vF5li9r5JfUc=;
-        b=f+jQH/6wnWIm8366u7wS7YXOT2CzWKd1ycNOQ/J/QPMRa8tC7K2s73LxqZaiJrEglO
-         LnXSPYJRDFg5hHWaKfjJ23SuOuLdZPZ/cln8jQzAYfmS/QNfGMhihSSRI4uIQMKYnxAi
-         jSm6EMAXoAA9f8bOe37t/elk4zdjtY69Xv1nI66ja3qJbuwz1cuYCvsfWOlLXm8R+k6l
-         7cVYKizEfUQryi94BVVVPz6UAjtqyt0Zixu38bYlhS2/rOEgbC7fas2KKJIdC9rlCagM
-         ZEvNs4/WfUxXq5cZtX9WkncszGLOYbuu/9Ipq2QXP+Jr3ukKKnwh8z9AJoA8MYgZFmKB
-         VLiw==
+        d=gmail.com; s=20230601; t=1758653188; x=1759257988; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=GxGtxJ3dTGlsnfkLcv6MrQR8pmQTry3snJl0suS5eqs=;
+        b=Lz3BcD4D1m3rdxgRUhb9wXl6STpR+6p/4XBKIm5CLmVyZssEAtzDzS1fLX0gMoFWf+
+         hz4y1KvAb4MhG2FEB02C6YpEOCdFId/BumRVmV7OtnIJ1AG6KiyUAjaSukOp6gaWNQkT
+         ZC5+JkQ/bkI8RN2wFzSIcQlNUwfw0UhlA0q9yG1S9EnyzsvT3D4B5MVpYkLN2h52fPkW
+         3RsKD3eKIQCGlf4kHfrV7vpXpuJAET6nsSFRe4O5+HrJij6EBj7xMi8cxrTLc5umfs0m
+         yVj1MG15KwnTOB7JYHszqvPn8ccO24EMrPFtLbAGkGdfAxrzFlvhPZsV00q/kRLRWqYd
+         nLlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758650805; x=1759255605;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=EPDosY/SctMG1RNB8n9JrumrZnlJvs2vF5li9r5JfUc=;
-        b=SrgsfovDy0HxFaPiKcrCqjpiRITgCKZK9+7Y3FtYGADQjOXDNL1ywpm++anxYbxufU
-         uh7/qL3Z2BPPmLQ4YS4eVc7gflVO43326tT0Mq+xITJUtInAOxZ9tgQKiwJHhzlz8K0d
-         Igk4349cQcM6Viq9qzEOzYt6GdYq5lzUwsu1jfP45omQInoyFSi91Wtn5pUCq829Rkvr
-         SGWMrpyuefkRhaFcJXuigyrlyYsU724aD9VkZytlrufGI9EqR3tWymy5QEveut2E9xUi
-         1UYKPaFKn5koQ3FgXVF0PkLriAxx/Wn/RSnJuu5v7y8jM7F9fA4B3FF36olKMwlo2yn8
-         nI1w==
-X-Gm-Message-State: AOJu0YzUjj1AaMYwwCpcVdC+/Aviw5YLWBcTjH9FvR31//ArLnsrLpAj
-	N6HHR3cqOnqC4CTSC1GkqUXm0IwtpL4JFnq08EwXpt8W1VeqRkx1Bk52N1EDaPZS
-X-Gm-Gg: ASbGnctHqS/Ljq2T+Q8fzq5Bg2SUvUAhQZ5CIvmonQoZnehN6qdZJmId33S0LBAKAm2
-	7JB235in3zsZWHQql40H3ae4irBkUDfl+njgyPKmyROrX0LZHfVnOvx6/9HsmMsVSi1aQAf9o+u
-	OeN41etjBbo8bUso4foyJJpYdrSikZjhkh+VW4ao3u0hIA2KQ0xAnjGooFYjeEd7fRUeymsaSEJ
-	CwUU1kh6eIO3zMdIyFEfn5cN1chtyhuTxtU/y/O7d+EJomDvAtSmPzWZ/oHSrDhdHwfnzkGfNMx
-	fmw57fDTGkyhUPeDSG/seJzcumD2nS7yrLJm/4r/JC9b32pr1/E1wd4qGDiP/MKW1t97etLm3kD
-	Uycw5Unjr0nDgl1VWssfN
-X-Google-Smtp-Source: AGHT+IGCMDgKmlk2WyhX/MFctw9YUqnCQ+5VDLdWULXu8rmIDuACb8elTUYg6+WhfosUSiw4UulLSQ==
-X-Received: by 2002:a17:907:7216:b0:af9:414d:9c2 with SMTP id a640c23a62f3a-b3026c84fbfmr387160666b.3.1758650804574;
-        Tue, 23 Sep 2025 11:06:44 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b28be3fa38bsm826714866b.46.2025.09.23.11.06.43
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 11:06:44 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][walnascar][PATCH 3/3] readme: update maintainer
-Date: Tue, 23 Sep 2025 20:06:41 +0200
-Message-ID: <20250923180641.2307188-3-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250923180641.2307188-1-skandigraun@gmail.com>
-References: <20250923180641.2307188-1-skandigraun@gmail.com>
+        d=1e100.net; s=20230601; t=1758653188; x=1759257988;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=GxGtxJ3dTGlsnfkLcv6MrQR8pmQTry3snJl0suS5eqs=;
+        b=Q0qHmCgiIrOIOBPRndWDv/+dbXcFvmOOd323EIxr0aqpJsIIXIA+ySLtCFeEar61E9
+         D5tC8JZzf7XASK0L5jKuNqADSscJCUsmRSvs5e4hqPB/PfFTUs3dEwQtJV2IU3ljEVsp
+         bUS5WJHRteMMOVA3SxxbhoCvPUy/g+JO4xuLG706sZDxjxrM7Wd4UYLGLIVMVp4rPOB6
+         DH3XjZaGcuBWGbHn7I3HzkavXeQ2oAj55UNUsUgAb9vsu0py4H4EBEJU9d5p1ZJ+Y+lB
+         p1hDuyXYI0huTSqE4ZMZ4TOda+HtMeRCo88ZDA/8tKObdYu2S1RafaK90jDGvUtiZldp
+         U2YA==
+X-Gm-Message-State: AOJu0YyKPK0dT5DU3Wh324a/2GmvmsSyX2J4F5dc23FmNCEmc79aYSAQ
+	nAq/99q5Jf6wXaMGvaoagnWeEB5iy+i/ya9bATN8NCQ3TiEWucusc08fxMXMVGBY
+X-Gm-Gg: ASbGncv0NQRGxbFm1+ohrWvhObecCPDvqhMY05dsviQb3GGgia0CJT4k3l1gg0a/H4F
+	9QJVVy7tU1K5jx8cTvJ28mcJcg7MLO0cfyJ5IBTkS8bF1qPeMV0BFp9UQYNTghurMb2oiSHoONl
+	JMQflS3c8Bh0KW1Pfubkd9yJ0ec02Nx37dLFJpXN1yEjfG+gpfHEOMn7wiT14/wnOGu2fF2Vj4M
+	1IxzRwHLBlQ9SAvj+tn9TkOe2te/GwspsUTJ5+xrAErojD3zmPvNLAjibgqgzpg2HsB9tJ36MG/
+	pCfhjhzE/EUUnTw/kiLp7OqXhVJTQxlf/sCD5gBRWKXE3ON3yoozS30M/Ri1JniAhFAxAPK0tzs
+	bfeCG9rKvSNcv+W34DukjMbpFd6oMvIU=
+X-Google-Smtp-Source: AGHT+IEmCpTkNbKkT5O1Cyy4Hj+klTDvENUXeGLm5bu/p6UWPp9DUkpMrV99N9Sl3lGUtYV3PaQrmg==
+X-Received: by 2002:a17:907:72ca:b0:b04:315c:8760 with SMTP id a640c23a62f3a-b302b50c083mr356575566b.50.1758653187860;
+        Tue, 23 Sep 2025 11:46:27 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b293fa077desm788578266b.55.2025.09.23.11.46.27
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 23 Sep 2025 11:46:27 -0700 (PDT)
+Message-ID: <30ed57d9-43e3-420b-a8c8-92bdbba0ea3a@gmail.com>
+Date: Tue, 23 Sep 2025 20:46:26 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][kirkstone][PATCH 00/22] Cherry-picks from Master
+ Batch A
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20250923110636.3413021-1-skandigraun@gmail.com>
+ <CAMKF1sr241qM_Nwuf3V6jSQ__6SH-iNQqK1uWf9p5A9a04K_cA@mail.gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <CAMKF1sr241qM_Nwuf3V6jSQ__6SH-iNQqK1uWf9p5A9a04K_cA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 18:06:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119731
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 18:46:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119732
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- README.md                  | 1 +
- meta-filesystems/README.md | 1 +
- meta-gnome/README.md       | 1 +
- meta-initramfs/README.md   | 1 +
- meta-multimedia/README.md  | 1 +
- meta-networking/README.md  | 2 +-
- meta-perl/README.md        | 3 ++-
- meta-python/README.md      | 1 +
- meta-webserver/README.md   | 1 +
- meta-xfce/README.md        | 1 +
- 10 files changed, 11 insertions(+), 2 deletions(-)
+On 9/23/25 19:51, Khem Raj wrote:
+> The version updates can be a bit dicey, since they may change API
+> behavior that can break existing apps at runtime, its tedious and hard
+> to look at every change that got into that release
+> I am hoping we have done due diligence here. Overall, it looks fine to
+> me. Please combine all of the proposed fixed into a single PR for
+> final merge.
 
-diff --git a/README.md b/README.md
-index 24021b2664..dd2a826292 100644
---- a/README.md
-+++ b/README.md
-@@ -1,6 +1,7 @@
- Collection of layers for the OE-core universe
- 
- Main layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
-+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
- 
- This repository is a collection of layers to suppliment OE-Core
- with additional packages, Each layer have designated maintainer
-diff --git a/meta-filesystems/README.md b/meta-filesystems/README.md
-index 57437280e3..0f3760850f 100644
---- a/meta-filesystems/README.md
-+++ b/meta-filesystems/README.md
-@@ -25,6 +25,7 @@ OpenEmbedded development mailing list (openembedded-devel@lists.openembedded.org
- with '[meta-filesystems][walnascar]' in the subject.
- 
- Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
-+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
- 
- When sending single patches, please use something like:
- 
-diff --git a/meta-gnome/README.md b/meta-gnome/README.md
-index b97be0ed55..ddaafff2a3 100644
---- a/meta-gnome/README.md
-+++ b/meta-gnome/README.md
-@@ -14,3 +14,4 @@ When sending single patches, please using something like:
- git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-gnome][walnascar][PATCH'
- 
- Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
-+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-initramfs/README.md b/meta-initramfs/README.md
-index 5f70177e95..221b355db6 100644
---- a/meta-initramfs/README.md
-+++ b/meta-initramfs/README.md
-@@ -25,6 +25,7 @@ When sending single patches, please using something like:
- git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-initramfs][walnascar][PATCH'
- 
- Stable layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
-+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
- 
- 
- License
-diff --git a/meta-multimedia/README.md b/meta-multimedia/README.md
-index aba8a31979..05baeb7b82 100644
---- a/meta-multimedia/README.md
-+++ b/meta-multimedia/README.md
-@@ -15,3 +15,4 @@ git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-pr
- You are encouraged to fork the mirror on github https://github.com/openembedded/meta-openembedded to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like GitLab, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
- 
- Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
-+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-networking/README.md b/meta-networking/README.md
-index 893d50f714..7ea19499d6 100644
---- a/meta-networking/README.md
-+++ b/meta-networking/README.md
-@@ -33,7 +33,7 @@ branch: walnascar
- Maintenance
- -----------
- Stable Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
--
-+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
- 
- Please see the MAINTAINERS file for information on contacting the
- maintainers of this layer, as well as instructions for submitting patches. 
-diff --git a/meta-perl/README.md b/meta-perl/README.md
-index 709a4201de..b85988fea5 100644
---- a/meta-perl/README.md
-+++ b/meta-perl/README.md
-@@ -79,7 +79,8 @@ When sending single patches, please using something like:
- git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-perl][walnascar][PATCH'
- 
- Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
--    
-+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>    
-+
- 
- License
- -------
-diff --git a/meta-python/README.md b/meta-python/README.md
-index 3ec72b6ea7..2ae4d8b344 100644
---- a/meta-python/README.md
-+++ b/meta-python/README.md
-@@ -37,3 +37,4 @@ Maintenance
- -------------------------
- 
- Layer maintainers: Gyorgy Sarvari <skandigraun@gmail.com>
-+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-webserver/README.md b/meta-webserver/README.md
-index 39192181f2..ea085b0cde 100644
---- a/meta-webserver/README.md
-+++ b/meta-webserver/README.md
-@@ -56,6 +56,7 @@ When sending single patches, please using something like:
- git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-webserver][walnascar][PATCH'
- 
- Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
-+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
- 
- 
- License
-diff --git a/meta-xfce/README.md b/meta-xfce/README.md
-index 4c532c46a5..45f4062194 100644
---- a/meta-xfce/README.md
-+++ b/meta-xfce/README.md
-@@ -19,3 +19,4 @@ When sending single patches, please using something like:
- git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-xfce][walnascar][PATCH'
- 
- Layer maintainer: Gyorgy Sarvari <skandigraun@gmail.com>
-+Layer maintainer emeritus: Armin Kuster <akuster808@gmail.com>
+I do what I can, and do spend a considerable amount of time consciously
+evaluating the version bumps, and also try to be conservative - but I'm
+human too. And the number of changes that I'd like to add is not small,
+because I feel that many parts are more outdated than they could be,
+while adhering to the rules and expectations of LTS and stable branches.
+
+However I definitely share some of your concerns - and with a lot of
+commits, there is a chance for accidental mistakes, despite my intentions.
+Would that be maybe better if the version updates would be spread out
+more over time, over months? Like I could send the IMO non-controversial
+cherry-picks as one batch (SRC_URI, dependency fixes, obvious typos and
+the like), and then send maybe 20 or so version updates/stable branch
+from master per 2 weeks, or per merge window.
+
+(I'm also open for alternative suggestions, from the whole ML too. I'm
+also open for feedback if this is actually not deemed to be beneficial.)
+
+> On Tue, Sep 23, 2025 at 4:06 AM Gyorgy Sarvari via
+> lists.openembedded.org <skandigraun=gmail.com@lists.openembedded.org>
+> wrote:
+>> This is batch A of cherry picks from master branch, that I deem to be useful and
+>> appropriate to be in Kirkstone branch.
+>>
+>> These include assorted recipe fixes (SRC_URI, LICENSE, typo fixes), and recipe
+>> version updates. With recipe updates I have spent effort to ensure that they
+>> contain only bugfixes - I did go through all the change logs and/or the commit logs,
+>> and I did skip commits that introduced some backwards incompatible changes.
+>>
+>> This batch has so far survived a "bitbake world" build for arm, aarch64, x86 and x86-64.
+>>
+>> Even though I tried to be careful with my cherry picks, your review and comments
+>> would be very appreciated.
+>>
+>> Thank you.
+>>
+>> P.S: I plan to send similar batches (consisting of ~20 patches), once a day, for
+>> the next couple of days.
+>>
+>> --
+>>
+>> Changqing Li (1):
+>>   libtimezonemap: correct package version
+>>
+>> Gyorgy Sarvari (1):
+>>   fatresize: set correct LICENSE
+>>
+>> Kai Kang (1):
+>>   libtimezonemap: rename downloaded file name
+>>
+>> Khem Raj (2):
+>>   faenza-icon-theme: Switch to a valid download  location for SRC_URI
+>>   libtimezonemap: Point to a working SRC_URI
+>>
+>> Mingli Yu (6):
+>>   libnma: add opengl to REQUIRED_DISTRO_FEATURES
+>>   network-manager-applet: add opengl to REQUIRED_DISTRO_FEATURES
+>>   gnome-bluetooth: add opengl to REQUIRED_DISTRO_FEATURES
+>>   gnome-desktop: add opengl to REQUIRED_DISTRO_FEATURES
+>>   gtksourceview5: add opengl to REQUIRED_DISTRO_FEATURES
+>>   evince: add opengl to REQUIRED_DISTRO_FEATURES
+>>
+>> Wang Mingyu (4):
+>>   sshfs-fuse: upgrade 3.7.2 -> 3.7.3
+>>   evolution-data-server: upgrade 3.44.1 -> 3.44.2
+>>   gjs: upgrade 1.72.1 -> 1.72.2
+>>   gnome-bluetooth: upgrade 42.2 -> 42.3
+>>
+>> Yi Zhao (2):
+>>   yaffs2-utils: update SRC_URI
+>>   evince: fix typo for RRECOMMENDS
+>>
+>> wangmy (5):
+>>   evolution-data-server: upgrade 3.44.0 -> 3.44.1
+>>   gjs: upgrade 1.72.0 -> 1.72.1
+>>   gnome-bluetooth: upgrade 42.0 -> 42.1
+>>   gnome-bluetooth: upgrade 42.1 -> 42.2
+>>   evince: upgrade 42.2 -> 42.3
+>>
+>>  ...shfs-fuse_3.7.2.bb => sshfs-fuse_3.7.3.bb} |  2 +-
+>>  .../yaffs2/yaffs2-utils_git.bb                |  3 +-
+>>  .../fatresize/fatresize_1.1.0.bb              |  2 +-
+>>  .../libnma/libnma_1.8.38.bb                   |  2 +-
+>>  .../network-manager-applet_1.26.0.bb          |  2 +-
+>>  .../evince/{evince_42.2.bb => evince_42.3.bb} |  8 +++--
+>>  .../evolution-data-server.inc                 |  4 +--
+>>  .../faenza-icon-theme_1.3.bb                  |  3 +-
+>>  .../gjs/{gjs_1.72.0.bb => gjs_1.72.2.bb}      |  2 +-
+>>  ...etooth_42.0.bb => gnome-bluetooth_42.3.bb} |  4 +--
+>>  .../gnome-desktop/gnome-desktop_42.0.bb       |  2 +-
+>>  .../gtksourceview/gtksourceview5_5.4.1.bb     |  1 +
+>>  ...001-configure.ac-correct-the-version.patch | 29 +++++++++++++++++++
+>>  .../libtimezonemap/libtimezonemap_0.4.6.bb    |  4 +--
+>>  14 files changed, 49 insertions(+), 19 deletions(-)
+>>  rename meta-filesystems/recipes-filesystems/sshfs-fuse/{sshfs-fuse_3.7.2.bb => sshfs-fuse_3.7.3.bb} (93%)
+>>  rename meta-gnome/recipes-gnome/evince/{evince_42.2.bb => evince_42.3.bb} (80%)
+>>  rename meta-gnome/recipes-gnome/gjs/{gjs_1.72.0.bb => gjs_1.72.2.bb} (92%)
+>>  rename meta-gnome/recipes-gnome/gnome-bluetooth/{gnome-bluetooth_42.0.bb => gnome-bluetooth_42.3.bb} (87%)
+>>  create mode 100644 meta-gnome/recipes-gnome/libtimezonemap/files/0001-configure.ac-correct-the-version.patch
+>>
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#119664): https://lists.openembedded.org/g/openembedded-devel/message/119664
+>> Mute This Topic: https://lists.openembedded.org/mt/115391835/1997914
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
+
 
