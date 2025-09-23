@@ -2,70 +2,74 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E6AECAC5B1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B180CAC5A5
 	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 18:06:52 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.web10.4476.1758650805107371957
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.web11.4448.1758650805614321628
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 23 Sep 2025 11:06:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gOkeuZA0;
- spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-b2d92b52149so421855466b.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:06:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Mu33gow0;
+ spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-afcb78ead12so897795366b.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:06:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758650803; x=1759255603; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+fwFRbNY+UxBJnH7TI7JX2lCcn7kYPuPzvk7BYOTbkg=;
-        b=gOkeuZA04NEAyrVQ6kTtS6eQpQuiePbM8Z4JeborV9cSa0v+th/lkrLB+Bbv5wPZ/H
-         OoTyU71xBLkHvRCvSqo10kGpR/yOjyLMqQSuU+zey5kG7qsdoDzAOjEhEDrKgwsRMEUz
-         qm85lqZ4YisRxIlxQBOyshSom58i/7WXRYeAhS5uTIxF5n4afnjVVhD3ZssKaLn5vCHe
-         xuzyKdNhYTx7TPgNPpsKR6rF8w39VQ+2LAbPfW0eZuL6B2tHD9KCnX74pf1MCk98YlNP
-         gwR35u+n2LHfsyFArptrS/tVzepbvJN4PqSlNoRriyyKHNRplxCBFp7LV/Skl0gPgYGl
-         bzBA==
+        d=gmail.com; s=20230601; t=1758650804; x=1759255604; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=sB7/MYNi8mo/N7hIM1RbTWSLdL0q8w2rPAvPTR4k+7A=;
+        b=Mu33gow0X5FTIKT1dZfPIzcMXzg54N1eWsZalSlsifhfrF7zHnabBgrMVbkukdiwiv
+         eaLerUtS2Ft8tO3vQgRoldHfAXOBsG1C0OZ+mJ88hYpJza0mJAeFii2WgLC1eLl0EXzI
+         qERZEo/qyBAChuRt6krwv6YtkZOYapNPULaO3VQGFVQb4WFE9Op2g5TRJ4hi7vaHCPQU
+         y/QTC6qzrxP6Mo6Kx1ELmcN5BmS8MYu2mjb71pPiyIHZnZ6Ardm/Iy7vIEI1bRQlSE3i
+         eQj05X0uaiFZQkgzFaxe9jZlEMLbhsNPbYTfPfjYD/lZ3EIiM8LWJ9UFhwE03KZDYykx
+         UwYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758650803; x=1759255603;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=+fwFRbNY+UxBJnH7TI7JX2lCcn7kYPuPzvk7BYOTbkg=;
-        b=iXulqge6lRPzsKWk57KRl3iJAs7GPD0BzNHgwDhw/7mfYxZTV9CTtsxQTRp+aqBGoS
-         XjoL5c3aNnnbXhesxsNbxt0TxIxiMwx1KdcwXF48f2FKhxLg7f+rIJG3zkw6NmcKe6WA
-         5twXVvVBBBZais5iT+MmJTtQZMdkUvCFQNPRGz4BBVcALQLdnpWJJu+avvN9QkSOubOS
-         Ejt2cqwGJlecdvpx1oPClV0ABDP/63ABh3SxLY3YRiFziZOLQl+LQx1FdLrtYRhPzyC5
-         cbJxggZqq3D5Ci4exg1TN2mybb2yyBxcdyq6eMnMcjRb/tZy+HoPIirWfMVJyLMh24Jk
-         CI/Q==
-X-Gm-Message-State: AOJu0Yy0Mbbf9dBPl429dp7R5lTSTDR9EgbQXj5m5flYu24ILxb/kpqh
-	KqxYqqHHPJ0EbBg1+LD5RAu45ymiNiqDbmA0FE9L0e0ptevzk2xF2gLabdKO+Cs5
-X-Gm-Gg: ASbGncvJ4I+oSUbuZtpqjPae066olh3p3vQjyTlH0OzbMOAAqALhJSzvjHZVctrN9ak
-	pv84kVAwxBDHDlaHlE7ocpvyCVcsIqwiINvS7mB72c4rMTyx6sxs0IRvTDQaLsgFI2AJtkos424
-	NE6jl9ZKVy6GehYGMP/AzSpUIiUHiiLVFDdl6qck/TK7eM4q4talCjGuBIwBuhSfb/cOd2c/oa9
-	D/4uLAxk08LHAILXQXg4FrPJ7HDH30moCf+oLSXryrpbm/2w4Nakbyi0klExt9C6e58O6fFDjsd
-	JmTzCuGVwtE19pEH1GYrrXuH7IvtD0sXU+yffBi6ZgvJkHBDgyQOYMFVrap5G1nm5ODQONWCW0h
-	jJA5Sr4n9n2TrbtK6pwveZ1GBr+wcoeMyP0nmIyA=
-X-Google-Smtp-Source: AGHT+IEyxWgEBWB7OIjzZT4msqgh5C6ss6YAGaoA32OBF2ukiGd4WEURIIM3k4deTLEJxRAtfUeyMQ==
-X-Received: by 2002:a17:907:86a4:b0:b29:b4ac:d2a8 with SMTP id a640c23a62f3a-b302b80a63bmr360489866b.57.1758650803153;
+        d=1e100.net; s=20230601; t=1758650804; x=1759255604;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=sB7/MYNi8mo/N7hIM1RbTWSLdL0q8w2rPAvPTR4k+7A=;
+        b=UA0gTiVOJ7sN0GnfK9bwxf5VfsoIAZ6vgoB7hh8fOLZWtoNxfkQw6gdUbNPtOnJHd1
+         am9PboW91YuZm2azw99S0Lz2jXACxqvVZ8FeaqiJb4EFSRfp9VCF4dV5OtPGkMANXEOS
+         CtGFxjy17vObd1tlaXmdm8n/cJ+CU9fJjEoHyV3/3zPRXIA5LaEEr7eEdWRQUPneV5IS
+         Yv0KQAiLXRk6qM/9xmUOXLrVykdCimDs+7Mah4x/LDmOiiCiybu0BkLnxpxkHYqG6zWQ
+         EcOmTWLsbHEOIwxFTocuscDxKa+7Cbif30PPcVWo2BOCK03oK/ISaagrBCLTDlXF4EHn
+         7vQg==
+X-Gm-Message-State: AOJu0YztBMxfLOHixY88JkUO+jmbfJCj8D4pW4VFhVCzRv7eLd+gUAoE
+	8scfDnlJpukcK118zpnhh/Cb+PPIKAoJwoK4FvdmeKrqbna/IiS9rWdq6ipIhfbs
+X-Gm-Gg: ASbGncvZTdu0KCDAnbDoBU/5UToz7vahM2hqMFvJGH5Sgrtd0egRl+BHlutDG3sLOXc
+	DCzUTO7qc65okVcH5iY3gdCtDqy9lbTfkZztimeaLnZcmC0F9N3k4/n2tIEHjuPlmlrjGFBVQvb
+	ik3Dulbz13rnrs6DCTKbMEImwJqcMs46X+VU8s5pCRw6cADh/vmzjxwTUN6VipmjejOnYhZdlhp
+	V+OESwMA4bJ/HDgYgUiwPSHYaqBV1NEuu+tevV2HB+c5pRq/C6pmS4bzBvEdTUblY3t8TLXlxrS
+	09xfQaNpUcPaiKnMB7MErn9REGEPUU1dqnO9P6eKj81HdhKVYmD4p3KR4wxa4hYdgDqyesPzc10
+	L8bRIxpwInaAeJ+YXrZ54
+X-Google-Smtp-Source: AGHT+IGHg4do+FpOYzApSJxwJz7+h/iU1YSuHgn05pGbcC7zS+EeQnGJ9Z81eS0468cpibAnWwW9qg==
+X-Received: by 2002:a17:906:c10a:b0:b04:4046:db6b with SMTP id a640c23a62f3a-b302b712d2amr315840566b.45.1758650803890;
         Tue, 23 Sep 2025 11:06:43 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b28be3fa38bsm826714866b.46.2025.09.23.11.06.42
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b28be3fa38bsm826714866b.46.2025.09.23.11.06.43
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 11:06:42 -0700 (PDT)
+        Tue, 23 Sep 2025 11:06:43 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][walnascar][PATCH 1/3] tokyocabinet: switch to working SRC_URI
-Date: Tue, 23 Sep 2025 20:06:39 +0200
-Message-ID: <20250923180641.2307188-1-skandigraun@gmail.com>
+Subject: [meta-oe][walnascar][PATCH 2/3] tokyocabinet: fix license
+Date: Tue, 23 Sep 2025 20:06:40 +0200
+Message-ID: <20250923180641.2307188-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250923180641.2307188-1-skandigraun@gmail.com>
+References: <20250923180641.2307188-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 18:06:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119729
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119730
 
-The original source seems to be long gone.
+The application is distributed under the LGPL license, not GPL.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
@@ -73,16 +77,16 @@ Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb b/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb
-index 75f68ab5f5..a7c10128b3 100644
+index a7c10128b3..d0ed6013f7 100644
 --- a/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb
 +++ b/meta-oe/recipes-support/tokyocabinet/tokyocabinet_1.4.48.bb
-@@ -15,7 +15,7 @@ HOMEPAGE = "http://fallabs.com/tokyocabinet/"
- LICENSE = "GPL-2.0-only"
+@@ -12,7 +12,7 @@ Records are organized in hash table, B+ tree, or fixed-length array."
+ 
+ HOMEPAGE = "http://fallabs.com/tokyocabinet/"
+ 
+-LICENSE = "GPL-2.0-only"
++LICENSE = "LGPL-2.1-only"
  LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
  
--SRC_URI = "http://fallabs.com/tokyocabinet/${BP}.tar.gz \
-+SRC_URI = "${DEBIAN_MIRROR}/main/t/${BPN}/${BPN}_${PV}.orig.tar.gz \
-            file://remove-hard-coded-include-and-lib-paths.patch \
-            file://0001-configure-Fix-check-functions-for-AC_CHECK_LIB-test.patch \
- "
+ SRC_URI = "${DEBIAN_MIRROR}/main/t/${BPN}/${BPN}_${PV}.orig.tar.gz \
 
