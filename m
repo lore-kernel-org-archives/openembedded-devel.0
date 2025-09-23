@@ -2,198 +2,117 @@ Return-Path: <anuj.mittal@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AA1ECAC5A7
-	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 11:57:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E131CAC5B0
+	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 11:57:52 +0000 (UTC)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
  by mx.groups.io with SMTP id smtpd.web11.15019.1758628660267361449
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Sep 2025 04:57:40 -0700
+ Tue, 23 Sep 2025 04:57:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=X0x3eCaJ;
+ dkim=pass header.i=@intel.com header.s=Intel header.b=U2fUo6XL;
  spf=pass (domain: intel.com, ip: 198.175.65.21, mailfrom: anuj.mittal@intel.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1758628661; x=1790164661;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=MU9iWRailDd2Vri9ZE53upkE3orMmaJhKZIg8be0fvo=;
-  b=X0x3eCaJAMe1XTPkszDo9ZUuOUjsdYVEkQcuLalC50fLpnb6TGOhHlf/
-   ZzvLE35aMdzWYl1hzQqCg/c0enYUP4RE80+djqXbo4a1CwD//T7KLCwTQ
-   7abhM84mRM0ADj/cWZMtgBtHcvs8Z9AWrAEo1naAyhWLrBfud2Ot/11ZR
-   JXJEfTcRk4LnQsiPr+NA2ZZ1R1Bie8/8t/0JB1ozrw+MxHNI0il9dDiUU
-   JQ1g0GH/dcSInef3JnHLqS6PhARHuh8mW+CLeBT3V+y1mJQwyT7DRwujj
-   oTuTZfPbfYImrZfxT24f1feYD5hj918MAnH1lRGKtu9jVTj6Fs5Lc1UTk
-   w==;
-X-CSE-ConnectionGUID: Jzm2X238SzaKtQ4zzJIbTg==
-X-CSE-MsgGUID: b0LIvaHoTjOAicj7gXX0lQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="60821775"
+  t=1758628666; x=1790164666;
+  h=from:to:subject:date:message-id:in-reply-to:references:
+   mime-version:content-transfer-encoding;
+  bh=lgNunmlrimhOW5oeFQQmWuYeuSyYqp1fpi2hh+kJbY8=;
+  b=U2fUo6XL3/Zgc5EUZpozWoaKD3BqOlxp0wv3EtjV+AHqkqA127J7R44Y
+   Str287PzyVhhFNZag4b2armTB9U/ztdWuaFAkD+8aSjacHG58wFzsPAJO
+   c+AfkpbtTtcEQq/nAIEoUZWF9kOkia9bZchTr5YWpHMd/3zJ5KqDpFonI
+   fft1xiqAcQ3lAK8uTIOquuPVPzrBa81s7HHUjjqfx/3K7UnTcPmjSlk7p
+   WxXZCjITgbuSoys3rmXl6vT0AgULmWyO6sSG5ViXyIDpGrxVfwV0D5Cki
+   FqJ4vTFZPN/byH30q3j3UOJCYHmQiJtrUelMFUwA75xbdwC9liyKzn71f
+   g==;
+X-CSE-ConnectionGUID: nJXpCJS8Qk6aUAwbNpO+2w==
+X-CSE-MsgGUID: bkiuLtusRdWocAot7ZZvFA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="60821778"
 X-IronPort-AV: E=Sophos;i="6.17,312,1747724400"; 
-   d="scan'208";a="60821775"
+   d="scan'208";a="60821778"
 Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:57:40 -0700
-X-CSE-ConnectionGUID: QxQN54czS1GEeA6bjK1IsQ==
-X-CSE-MsgGUID: AFgUNtwnSgWS+MOBmxi1qA==
+  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:57:46 -0700
+X-CSE-ConnectionGUID: 8ebPkiwqTv2CEALwU1r6VQ==
+X-CSE-MsgGUID: 2a1jdbNAQguhZClrc2AwUA==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.18,287,1751266800"; 
-   d="scan'208";a="175875122"
+   d="scan'208";a="175875127"
 Received: from anmitta2-mobl4.gar.corp.intel.com (HELO anmitta2-mobl4.intel.com) ([10.247.118.223])
-  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:57:39 -0700
+  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:57:45 -0700
 From: Anuj Mittal <anuj.mittal@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [scarthgap][PATCH 00/24] Scarthgap pull request
-Date: Tue, 23 Sep 2025 19:57:03 +0800
-Message-ID: <cover.1758626365.git.anuj.mittal@intel.com>
+Subject: [scarthgap][PATCH 03/24] nodejs: fix build with gcc-15 on host
+Date: Tue, 23 Sep 2025 19:57:06 +0800
+Message-ID: <db93848ead8c679acd6f778029aa66ecfeb16071.1758626365.git.anuj.mittal@intel.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <cover.1758626365.git.anuj.mittal@intel.com>
+References: <cover.1758626365.git.anuj.mittal@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:57:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119689
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:57:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119692
 
-Please consider merging these changes for scarthgap. Tested with
-autobuilder and locally with qemux86-64 and qemuarm64:
+From: Martin Jansa <martin.jansa@gmail.com>
 
-https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/944
-
-The following changes since commit b9fb6556a3c8a3e477dce334205b658cb79ad501:
-
-  protobuf 4.25.8: Mark CVE-2024-7254 as patched (2025-09-12 08:15:13 +0800)
-
-are available in the Git repository at:
-
-  https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
-  https://git.openembedded.org/meta-openembedded-contrib/log/?h=anujm/scarthgap
-
-Anil Dongare (1):
-  libssh 0.10.6: Fix CVE-2025-8114
-
-Archana Polampalli (1):
-  apache2: upgrade 2.4.64 - 2.4.65
-
-AshishKumar Mishra (1):
-  meta-oe: image: optionally remove RAW image after sparse image
-    creation
-
-Divya Chellam (2):
-  libssh: fix CVE-2025-4878
-  libssh: fix CVE-2025-5987
-
-Gyorgy Sarvari (1):
-  mod-dnssd: update SRC_URI
-
-Haixiao Yan (1):
-  python3-posix-ipc: fix runtime error
-
-Hitendra Prajapati (1):
-  openjpeg: fix for CVE-2025-54874
-
-Jef Driesen (1):
-  lcov: Add missing RDEPENDS for nativesdk
-
-Jeroen Knoops (1):
-  nng: Rename default branch of github.com:nanomsg/nng.git
-
-Khem Raj (2):
-  gtkwave: Add libtirpc to depends
-  ssmping: Use debian mirror for SRC_URI
-
-Marc Ferland (1):
-  libvncserver: fix generated LibVNCServerTargets.cmake
-
-Martin Jansa (1):
-  nodejs: fix build with gcc-15 on host
-
-Peter Marko (2):
-  fontforge: patch CVE-2024-25081 and CVE-2024-25082
-  fcgi: patch CVE-2025-23016
-
-Shubham Pushpkar (1):
-  cjson 1.7.18: Fix CVE-2025-57052
-
-Wang Mingyu (2):
-  geoip: fix do_fetch error
-  rp-pppoe: update SRC_URI
-
-Yi Zhao (1):
-  wxwidgets: upgrade 3.2.1 -> 3.2.6
-
-Yoann Congal (1):
-  gutenprint: fix a build race-condition
-
-Zhang Peng (2):
-  iperf3: fix CVE-2025-54350
-  wxwidgets: fix CVE-2024-58249
-
-Zoltán Böszörményi (1):
-  gutenprint: 5.3.5
-
- .../recipes-connectivity/nanomsg/nng_1.7.3.bb |    2 +-
- .../rp-pppoe/rp-pppoe_3.15.bb                 |    2 +-
- .../recipes-support/geoip/geoip_1.6.12.bb     |    8 +-
- .../recipes-support/ssmping/ssmping_0.9.1.bb  |    3 +-
- meta-oe/classes/image_types_sparse.bbclass    |    6 +
- .../iperf3/iperf3/CVE-2025-54350.patch        |   39 +
- .../recipes-benchmark/iperf3/iperf3_3.18.bb   |    1 +
- .../cjson/cjson/CVE-2025-57052.patch          |   33 +
- .../recipes-devtools/cjson/cjson_1.7.18.bb    |    1 +
- .../0001-src-fix-build-with-GCC-15.patch      |   33 +
- .../recipes-devtools/nodejs/nodejs_20.18.2.bb |    1 +
- ...using-glibc-specific-defines-on-musl.patch |   26 -
- ...able-cross-magic-it-does-not-work-fo.patch |    8 +-
- ...tch => 0002-fix-libdir-for-multilib.patch} |   35 +-
- ...003-create-links-with-relative-path.patch} |   22 +-
- ...-not-append-system-name-to-lib-name.patch} |   12 +-
- ...5-wx-config-fix-libdir-for-multilib.patch} |   29 +-
- ...-l.patch => 0006-Fix-locale-on-musl.patch} |   18 +-
- ...E_LARGEFILE_SUPPORT-to-1-explicitly.patch} |    9 +-
- .../wxwidgets/wxwidgets/CVE-2024-58249.patch  |  178 ++
- ...{wxwidgets_3.2.1.bb => wxwidgets_3.2.6.bb} |   18 +-
- .../CVE-2024-25081_CVE-2024-25082.patch       |  181 ++
- .../fontforge/fontforge_20230101.bb           |    1 +
- .../gtkwave/gtkwave_3.3.119.bb                |    1 +
- .../libvncserver/libvncserver_0.9.14.bb       |    4 +-
- .../openjpeg/openjpeg/CVE-2025-54874.patch    |   44 +
- .../openjpeg/openjpeg_2.5.3.bb                |    1 +
- ...-race-condition-around-empty-directo.patch |   60 +
- ...utenprint_5.3.4.bb => gutenprint_5.3.5.bb} |    6 +-
- meta-oe/recipes-support/lcov/lcov_1.16.bb     |    6 +
- .../libssh/libssh/CVE-2025-4878-0001.patch    | 2552 +++++++++++++++++
- .../libssh/libssh/CVE-2025-4878-0002.patch    |   34 +
- .../libssh/libssh/CVE-2025-5987.patch         |   37 +
- .../libssh/libssh/CVE-2025-8114.patch         |   49 +
- .../recipes-support/libssh/libssh_0.10.6.bb   |    4 +
- ...ndle-runtime-errors-and-return-None-.patch |   47 +
- .../python/python3-posix-ipc_1.2.0.bb         |    1 +
- .../recipes-httpd/apache-mod/mod-dnssd_0.6.bb |    2 +-
- .../{apache2_2.4.64.bb => apache2_2.4.65.bb}  |    2 +-
- .../fcgi/fcgi/CVE-2025-23016.patch            |   40 +
- .../recipes-support/fcgi/fcgi_git.bb          |    1 +
- 41 files changed, 3467 insertions(+), 90 deletions(-)
- create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54350.patch
- create mode 100644 meta-oe/recipes-devtools/cjson/cjson/CVE-2025-57052.patch
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+---
+ .../0001-src-fix-build-with-GCC-15.patch      | 33 +++++++++++++++++++
+ .../recipes-devtools/nodejs/nodejs_20.18.2.bb |  1 +
+ 2 files changed, 34 insertions(+)
  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-src-fix-build-with-GCC-15.patch
- delete mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/0001-locale-Avoid-using-glibc-specific-defines-on-musl.patch
- rename meta-oe/recipes-extended/wxwidgets/wxwidgets/{fix-libdir-for-multilib.patch => 0002-fix-libdir-for-multilib.patch} (82%)
- rename meta-oe/recipes-extended/wxwidgets/wxwidgets/{create-links-with-relative-path.patch => 0003-create-links-with-relative-path.patch} (72%)
- rename meta-oe/recipes-extended/wxwidgets/wxwidgets/{not-append-system-name-to-lib-name.patch => 0004-don-not-append-system-name-to-lib-name.patch} (73%)
- rename meta-oe/recipes-extended/wxwidgets/wxwidgets/{wx-config-fix-libdir-for-multilib.patch => 0005-wx-config-fix-libdir-for-multilib.patch} (74%)
- rename meta-oe/recipes-extended/wxwidgets/wxwidgets/{musl-locale-l.patch => 0006-Fix-locale-on-musl.patch} (70%)
- rename meta-oe/recipes-extended/wxwidgets/wxwidgets/{0001-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch => 0007-Set-HAVE_LARGEFILE_SUPPORT-to-1-explicitly.patch} (83%)
- create mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets/CVE-2024-58249.patch
- rename meta-oe/recipes-extended/wxwidgets/{wxwidgets_3.2.1.bb => wxwidgets_3.2.6.bb} (89%)
- create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2024-25081_CVE-2024-25082.patch
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2025-54874.patch
- create mode 100644 meta-oe/recipes-printing/gutenprint/gutenprint/0001-cups-fix-a-build-race-condition-around-empty-directo.patch
- rename meta-oe/recipes-printing/gutenprint/{gutenprint_5.3.4.bb => gutenprint_5.3.5.bb} (91%)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-4878-0001.patch
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-4878-0002.patch
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-5987.patch
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-8114.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-posix-ipc/0004-build_support-handle-runtime-errors-and-return-None-.patch
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.64.bb => apache2_2.4.65.bb} (99%)
- create mode 100644 meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016.patch
 
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-src-fix-build-with-GCC-15.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-src-fix-build-with-GCC-15.patch
+new file mode 100644
+index 0000000000..9d09f4f482
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-src-fix-build-with-GCC-15.patch
+@@ -0,0 +1,33 @@
++From bade7a1866618b9e46358b839fe5fdf16b1db2be Mon Sep 17 00:00:00 2001
++From: tjuhaszrh <tjuhasz@redhat.com>
++Date: Sat, 25 Jan 2025 10:34:54 +0100
++Subject: [PATCH] src: fix build with GCC 15
++
++Added cstdint to worker_inspector as on more recent version of gcc
++the build was failing due to changes to libstdc++ and the removal
++of transitive includes.
++
++PR-URL: https://github.com/nodejs/node/pull/56740
++Fixes: https://github.com/nodejs/node/issues/56731
++Reviewed-By: Antoine du Hamel <duhamelantoine1995@gmail.com>
++Reviewed-By: Chengzhong Wu <legendecas@gmail.com>
++Reviewed-By: Richard Lau <rlau@redhat.com>
++Reviewed-By: James M Snell <jasnell@gmail.com>
++
++Upstream-Status: Backport [https://github.com/nodejs/node/commit/bade7a1866618b9e46358b839fe5fdf16b1db2be]
++---
++ src/inspector/worker_inspector.h | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/inspector/worker_inspector.h b/src/inspector/worker_inspector.h
++index d3254d5aa0ebe4..24403bb1704c40 100644
++--- a/src/inspector/worker_inspector.h
+++++ b/src/inspector/worker_inspector.h
++@@ -5,6 +5,7 @@
++ #error("This header can only be used when inspector is enabled")
++ #endif
++ 
+++#include <cstdint>
++ #include <memory>
++ #include <string>
++ #include <unordered_map>
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
+index bef62f88eb..8af90e782a 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
+@@ -27,6 +27,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://libatomic.patch \
+            file://182d9c05e78.patch \
+            file://zlib-fix-pointer-alignment.patch \
++           file://0001-src-fix-build-with-GCC-15.patch \
+            file://run-ptest \
+            "
+ SRC_URI:append:class-target = " \
 
