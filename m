@@ -2,47 +2,47 @@ Return-Path: <anuj.mittal@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AB95CAC5A7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E414CAC5B3
 	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 11:57:52 +0000 (UTC)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
  by mx.groups.io with SMTP id smtpd.web11.15019.1758628660267361449
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Sep 2025 04:57:44 -0700
+ Tue, 23 Sep 2025 04:57:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=M+bzEifa;
+ dkim=pass header.i=@intel.com header.s=Intel header.b=OlA4+FhB;
  spf=pass (domain: intel.com, ip: 198.175.65.21, mailfrom: anuj.mittal@intel.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1758628665; x=1790164665;
+  t=1758628669; x=1790164669;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=VYoqVT4u0ExckCOF8KXv7+FdGTR1DEQD+IIYxyXAHv8=;
-  b=M+bzEifa4zHQAnjgXnIVHkEOizhssJ4n/M1uazHqEspivmqgTpdsq6Gl
-   Xizs62E2G0Y3BKolwTuA+BZckoIFWRCiAOz0sTEirWDyXau/ZFsWlPS7f
-   aiYOHzMnIYztLTDZYtlmCFEI3wehokh9iSExmd4S5N4l2VsszpvXCF/6T
-   sFCDpOgKPnphYBiUi8c+1oGl4iM6cCtMkj5Noqdreui8y9fDCbSVntYF8
-   bZNAqWHjL0Ap8zPcTv8FtW4R2UcONp2CurF0DRjhbGEgq+3uHpr+iEDap
-   RN3MORM3MmIJnLXI0ueKDQuV/TT8O/mNsVHWYOWX+32OeMQWaoYrQ5LG/
-   g==;
-X-CSE-ConnectionGUID: j05V/HaKS02sUn3fa5lSmA==
-X-CSE-MsgGUID: 826gE+w7Q4G3cpUbQCe7yQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="60821777"
+  bh=QBk1K7H2xV87CbfJAQT0tm8edZxJfqIVl1BU6enHiso=;
+  b=OlA4+FhBh+RTA/DpkmHQiguRMHQZvZe3q4vRse9qvUcPOtcZlQunDr7I
+   SxaHEZtc3e9wKkCoBBq8XFtV+eTKn5d8AUIn1t/QabGpX5H/GV7XOVPUG
+   G0dzFa112O+Hxx7lkmc4w2VSqi4pbp2cyJP+KOfgDpRjO87jMYj/SxZ3N
+   NQlosQ3hG2rGi38eNKuTRcph98ezIa/XY3lcvCMNlxdEHl1uCYMqrNdwZ
+   Ul0+2TLOeXg4YZmQB+HIV05e9G5eeqTDBIB8Bh5gabVAWyryojzxv2Aia
+   01YYQ9et8x79hXgwqWX24YJ7ah8gj3LLLjrD1rjv9bNeVLa1V2ZqInQY6
+   Q==;
+X-CSE-ConnectionGUID: EaqsVweAQ+a3nnjnwddDuw==
+X-CSE-MsgGUID: EYrO1ph1SLer8KL0EKJCMw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="60821780"
 X-IronPort-AV: E=Sophos;i="6.17,312,1747724400"; 
-   d="scan'208";a="60821777"
+   d="scan'208";a="60821780"
 Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:57:44 -0700
-X-CSE-ConnectionGUID: AIdW1BD3TI2s3XJMvhtIKA==
-X-CSE-MsgGUID: hm17l6gbRfCF3WdhsM8BTQ==
+  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:57:49 -0700
+X-CSE-ConnectionGUID: rgP8a1hpTIit3cRQGlE0ZQ==
+X-CSE-MsgGUID: Z6JMeDiWRFiPp48jPuOR+A==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.18,287,1751266800"; 
-   d="scan'208";a="175875125"
+   d="scan'208";a="175875129"
 Received: from anmitta2-mobl4.gar.corp.intel.com (HELO anmitta2-mobl4.intel.com) ([10.247.118.223])
-  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:57:43 -0700
+  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 04:57:48 -0700
 From: Anuj Mittal <anuj.mittal@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [scarthgap][PATCH 02/24] libssh: fix CVE-2025-5987
-Date: Tue, 23 Sep 2025 19:57:05 +0800
-Message-ID: <3702195a7ebb1947c8dfc9bba1196d6b42ae6253.1758626365.git.anuj.mittal@intel.com>
+Subject: [scarthgap][PATCH 05/24] python3-posix-ipc: fix runtime error
+Date: Tue, 23 Sep 2025 19:57:08 +0800
+Message-ID: <40db628f58f6d786bbc24cf8438c17f223eb65d7.1758626365.git.anuj.mittal@intel.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <cover.1758626365.git.anuj.mittal@intel.com>
 References: <cover.1758626365.git.anuj.mittal@intel.com>
@@ -52,86 +52,84 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:57:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119691
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119694
 
-From: Divya Chellam <divya.chellam@windriver.com>
+From: Haixiao Yan <haixiao.yan.cn@windriver.com>
 
-A flaw was found in libssh when using the ChaCha20 cipher with the
-OpenSSL library. If an attacker manages to exhaust the heap space,
-this error is not detected and may lead to libssh using a partially
-initialized cipher context. This occurs because the OpenSSL error
-code returned aliases with the SSH_OK code, resulting in libssh not
-properly detecting the error returned by the OpenSSL library.
-This issue can lead to undefined behavior, including compromised
-data confidentiality and integrity or crashes.
+Fix follow runtime error: ./build_support/src/sniff_mq_prio_max:
+/lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by
+./build_support/src/sniff_mq_prio_max)
 
-Reference:
-https://security-tracker.debian.org/tracker/CVE-2025-5987
-
-Upstream-patch:
-https://git.libssh.org/projects/libssh.git/commit/?h=stable-0.11&id=90b4845e0c98574bbf7bea9e97796695f064bf57
-
-Signed-off-by: Divya Chellam <divya.chellam@windriver.com>
+Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
 ---
- .../libssh/libssh/CVE-2025-5987.patch         | 37 +++++++++++++++++++
- .../recipes-support/libssh/libssh_0.10.6.bb   |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-5987.patch
+ ...ndle-runtime-errors-and-return-None-.patch | 47 +++++++++++++++++++
+ .../python/python3-posix-ipc_1.2.0.bb         |  1 +
+ 2 files changed, 48 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-posix-ipc/0004-build_support-handle-runtime-errors-and-return-None-.patch
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2025-5987.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2025-5987.patch
+diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc/0004-build_support-handle-runtime-errors-and-return-None-.patch b/meta-python/recipes-devtools/python/python3-posix-ipc/0004-build_support-handle-runtime-errors-and-return-None-.patch
 new file mode 100644
-index 0000000000..08395e0e7d
+index 0000000000..e84345a397
 --- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-5987.patch
-@@ -0,0 +1,37 @@
-+From 90b4845e0c98574bbf7bea9e97796695f064bf57 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Tue, 6 May 2025 22:51:41 +0200
-+Subject: [PATCH] CVE-2025-5987 libcrypto: Correctly detect failures of chacha
-+ initialization
++++ b/meta-python/recipes-devtools/python/python3-posix-ipc/0004-build_support-handle-runtime-errors-and-return-None-.patch
+@@ -0,0 +1,47 @@
++From b079074048bc33b206b21f73fecb8173cf8adaf0 Mon Sep 17 00:00:00 2001
++From: Haixiao Yan <haixiao.yan.cn@windriver.com>
++Date: Mon, 15 Sep 2025 21:15:45 +0800
++Subject: [PATCH] build_support: handle runtime errors and return None for
++ invalid max_priority
 +
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
++When cross-compiling, test binaries may fail to execute on the host system if
++the target toolchain was built against a newer glibc version than what is
++available on the host.
 +
-+CVE: CVE-2025-5987
++For example, on Ubuntu 20.04 the following error occurs:
 +
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=90b4845e0c98574bbf7bea9e97796695f064bf57]
++./build_support/src/sniff_mq_prio_max: /lib/x86_64-linux-gnu/libc.so.6: version
++`GLIBC_2.34' not found (required by ./build_support/src/sniff_mq_prio_max)
 +
-+Signed-off-by: Divya Chellam <divya.chellam@windriver.com>
++This change ensures that such runtime errors are gracefully handled, and
++max_priority is set to None when the test binary cannot be executed.
++
++Upstream-Status: Pending
++
++Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
 +---
-+ src/libcrypto.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ build_support/discover_system_info.py | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/libcrypto.c b/src/libcrypto.c
-+index 76e067d3..69a850de 100644
-+--- a/src/libcrypto.c
-++++ b/src/libcrypto.c
-+@@ -771,9 +771,9 @@ chacha20_poly1305_set_key(struct ssh_cipher_struct *cipher,
-+         SSH_LOG(SSH_LOG_WARNING, "EVP_CIPHER_CTX_new failed");
-+         goto out;
-+     }
-+-    ret = EVP_EncryptInit_ex(ctx->header_evp, EVP_chacha20(), NULL,
-++    rv = EVP_EncryptInit_ex(ctx->header_evp, EVP_chacha20(), NULL,
-+                              u8key + CHACHA20_KEYLEN, NULL);
-+-    if (ret != 1) {
-++    if (rv != 1) {
-+         SSH_LOG(SSH_LOG_WARNING, "EVP_CipherInit failed");
-+         goto out;
-+     }
++diff --git a/build_support/discover_system_info.py b/build_support/discover_system_info.py
++index f6e6c8cbe6ba..4fec48b5529d 100644
++--- a/build_support/discover_system_info.py
+++++ b/build_support/discover_system_info.py
++@@ -75,8 +75,12 @@ def compile_and_run(filename, linker_options=""):
++     if does_build_succeed(filename, linker_options=""):
++         try:
++             s = subprocess.Popen(["./build_support/src/%s" % filename[:-2]],
++-                                 stdout=subprocess.PIPE).communicate()[0]
++-            return s.strip().decode()
+++                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+++            stdout, stderr = s.communicate()
+++            if s.returncode != 0:
+++                # runtime error
+++                return None
+++            return stdout.strip().decode()
++         except Exception:
++             # execution resulted in an error
++             return None
 +-- 
-+2.40.0
++2.25.1
 +
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-index 6932da5175..bf91e69bc8 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-@@ -16,6 +16,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
-            file://CVE-2025-4877.patch \
-            file://CVE-2025-4878-0001.patch \
-            file://CVE-2025-4878-0002.patch \
-+           file://CVE-2025-5987.patch \
-           "
- SRCREV = "10e09e273f69e149389b3e0e5d44b8c221c2e7f6"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb b/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
+index 8147e4108b..cad1403813 100644
+--- a/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-posix-ipc_1.2.0.bb
+@@ -12,5 +12,6 @@ SRC_URI += " \
+     file://0001-build_support-use-source-filename-instead-of-foo-for.patch \
+     file://0002-build_support-handle-empty-max_priority-value-as-Non.patch \
+     file://0003-build_support-use-does_build_succeed-in-compile_and_.patch \
++    file://0004-build_support-handle-runtime-errors-and-return-None-.patch \
+ "
+ inherit pypi python_setuptools_build_meta
 
