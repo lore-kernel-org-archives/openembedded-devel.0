@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5416CAC5B2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE9CDCAC5A7
 	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 11:07:01 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web11.14131.1758625613675956426
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.web10.14112.1758625613041624181
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 23 Sep 2025 04:06:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=env9jt/v;
- spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-b29ebf9478bso350691266b.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 04:06:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iKKoAUBb;
+ spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-b2b4096539fso341230766b.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 04:06:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758625612; x=1759230412; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758625611; x=1759230411; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=LpeX4yqR7wnTfhJKoBCXcruDA2HRkTSImEw905MJin0=;
-        b=env9jt/vL697GOHJ7SjPpd8qxKIpVEvtnAs7Cf/5649EnF1Wlx4y73+hDRyuGPyDpQ
-         jayifAAkvD0RUt3cJnawum0dedRXobg9S7KUQO8oWmhH7LlPqW0MrHtW+KnGUTP6vVRY
-         XyHoiY9V6/wIESrpNJCA3pDy2L2/oA3FvRzfTrQjXK2QYxOJTiyN1gDISMLe85j8Ya7c
-         ht47bYXeRsX2Ri6uYdfZHfiUVpVVbEGQbam1gXpeQnRH1Sr2JQNfz+Ng8hTG5aVq1aZT
-         jM6RiA0f+7jRYsn42AH6zOrbZAR14syZ+jheuZ/c+VUcCvhX1jP3qy9RpN2xyPm3u3v8
-         WJyQ==
+        bh=CZKClGMa2dO/QM/Id63K3U9O0qndxrnMiq0C04KlDOE=;
+        b=iKKoAUBbuIWMQynEsS2gsIO3cotbVAtEkLzTfXTjZ9hU9ka1VqdHX3GUrAP27w1/UO
+         wNHqLOTGH08bEIPsg67Ub97NcC7ZCuF8rcUnCoO4f4MAxlVMIKK2b6glw53phbHDWaQd
+         LvQ1mn0sBpjXoxBr9PK4ZUPpBjBxqHiQqvbe3TDGM1t+RaDX1DsS8MoL/nC7CZaltRvN
+         xM3rak667942pnQXyAeR5n4hq69QkBan8xqrKN94xI5c6g2t43OLMlpkZo6mR+0Okdeh
+         Km7wpV079TUIjvrO0WEC6RuPSNPHcoRJideqe8oEBy+lS1KOhYfo/oafx+O0K6tSrp+n
+         a25w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758625612; x=1759230412;
+        d=1e100.net; s=20230601; t=1758625611; x=1759230411;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=LpeX4yqR7wnTfhJKoBCXcruDA2HRkTSImEw905MJin0=;
-        b=mjtt4yjLiWDjmFWHrZnj7g79CwXZ6BN0JFCCD+Sf9BLkyVfB7PHtAW+vgH76NnzH7J
-         tfa8+yfnTIZFAWPeomJfokUQKcasV94iROUQ2HMPltbRg52p6HrZzy0V5Di/fS8//FeT
-         wX8bA9kaOQ5I3xdxDBoc5a3wCjn/fCDevigggJEpneIIP80hQtFEMKHdX/nD0NlIq68A
-         kit14lF+CIOgXY5+aPhMQ89TxfWgWDvnFSlWO2yGuXa7QRzYis6u4WLTPrxUjOnC0ySM
-         AFDbaeUU1tPFeBmCKCWgMrN8+fsawUF3flCOXatg6t42QkutpUuxY2Ig8AHxpITQWjyf
-         728Q==
-X-Gm-Message-State: AOJu0YzSy8qeRFTmD4en7MsuNkoVkkPzA7TTr2epcAB64tsZQL5dYMK5
-	oeamwkSTE2O4rVMS4/6uEyG11bPxqEQdRwfmIWBIvZdRkq/FnGklzcptaBoq1g==
-X-Gm-Gg: ASbGnculA8oLysQ3htcu4woI8gwrrGHjHrTyJeEk4auf17qvG2xVwgArSGI5mq1d64U
-	/etkKwvP1DcSd0Ki/VCX7FNU+ScXMxZi7BNpwxdbgdxejpiFj4rCicjhztH8vkjh+yBQ8/jEUxk
-	ITQQwYaLY3ekHm0l95yD5B/1kdUcFm/AWR0C+KwWwGfUJzlH1yGJNu+TpfGKIgDTYID/DrVBCIs
-	LuvxeWDh9nXEIoxuKaiL7IyH8m3+vHWqeANi/LFPwVkCgwYHkG1VTYLI+AFLYKsuVhPoM3kqDxf
-	jZGbrS/rNhPMNRO1Gxum8vSgv2ThOuACpwR84G90v05m0Z0HR4RURGVGuPy//TByCMkoFiXC7aD
-	aaAGwYXmu7vKao6rv9I7+
-X-Google-Smtp-Source: AGHT+IEreMbISmTFlMCQFBJ5zau8h0k3/oLBUZqiVcMB4VtZOh8dRlfbQYn3C84osUSUb/WN+EyeFg==
-X-Received: by 2002:a17:906:9f8d:b0:b09:d915:1416 with SMTP id a640c23a62f3a-b302b0246a1mr212232866b.54.1758625611882;
+        bh=CZKClGMa2dO/QM/Id63K3U9O0qndxrnMiq0C04KlDOE=;
+        b=O+Xo/oIXQgKi+1jl5xtk9SSCTBZjgp6/qbPquJHrQUQ/elU9RKjakfUfx1S27/8aV4
+         PWrmtpFLmhsCrOSLcDwfnFM9JsiaG0r7I2r6r5J865U1zUSddSooXXHABcBTRuIN9nS5
+         S3tEwNSNU3FmxCaZAAawoiXyisKN3Y0w6Eakt4CcOGUlssI7P2qDuynxQCGcLbY8AsFY
+         wWpGaAJKPYywEehBmjpJTfpqPTzjR0LodeP/mGJjSLsRBesJ9WKhCYWK1SEu6tlIoo8H
+         85D9zThLG+7Qlso6U2jpsfteWNlVQTHK5IcuTuhGRtfJ7sRHtwg5LFY3Q4hB+20CA8ce
+         quuA==
+X-Gm-Message-State: AOJu0Yx6qX3+kiNRuGZnXj+tyIMu6UPnKdS52P+uQ7fdgwK0UroSrtJh
+	ZieD3NZfjXKm43Un59dNakSF4NBvOsmE+qpxSfyMVDBbIElRDxf8tUR7ZxpAtQ==
+X-Gm-Gg: ASbGncsAXO2MX371dTBgNAGsbX1d8RjSJij/MbjZJsUyqBuITcNRthggexB0+9xXH7n
+	oAovuKDxYOBjjIcWEEyfBv9vFWeAopyQoFxfA6H1/eghYp8VOuwTE0nrCHAbYUyRvKGpTdp0+UU
+	GABI+jBK6hpiKfRrRkuCVqn7o02ud1ZCxZbYhAvYBIbLD5K632xycDW1q5kASeyKoEDmtN6x+QX
+	Hqet3krKglLNzGLn6pLaFZouypRkjP8aiefNvrEvijs9qtnKj44eK3FdkfS4+afqoqkweWzAhOS
+	QMb2m+pLz1t27OEsrf9LZRDi4RRlFtTk6Kh/DZEp6CBWPMCs4+XgI2EQ97ZpUE4sM5Gk4qqcRKl
+	cSFljEBsXCVSU8Xy/5oY9
+X-Google-Smtp-Source: AGHT+IGB9spouQ2Jknx7jXOVlqNQi24J5CH/1JAZGYAv2qtit/liDvHk2VO5F9cIyAVv7AoYqhN6Jg==
+X-Received: by 2002:a17:907:3e1c:b0:b2e:f8df:f5c9 with SMTP id a640c23a62f3a-b3018a6ce5dmr211803266b.6.1758625611281;
         Tue, 23 Sep 2025 04:06:51 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b293fa07816sm709263166b.50.2025.09.23.04.06.51
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b293fa07816sm709263166b.50.2025.09.23.04.06.50
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 04:06:51 -0700 (PDT)
+        Tue, 23 Sep 2025 04:06:50 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 22/22] evince: add opengl to REQUIRED_DISTRO_FEATURES
-Date: Tue, 23 Sep 2025 13:06:36 +0200
-Message-ID: <20250923110636.3413021-23-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 21/22] evince: upgrade 42.2 -> 42.3
+Date: Tue, 23 Sep 2025 13:06:35 +0200
+Message-ID: <20250923110636.3413021-22-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250923110636.3413021-1-skandigraun@gmail.com>
 References: <20250923110636.3413021-1-skandigraun@gmail.com>
@@ -67,40 +67,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:07:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119686
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119685
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: wangmy <wangmy@fujitsu.com>
 
-Add opengl to REQUIRED_DISTRO_FEATURES if x11 is enabled in DISTRO_FEATURES
-as it needs gnome-desktop when x11 enabled.
+Changelog:
+==========
+shell:
+  * Disconnect signal handler to prevent invalid read
 
-Fixes:
-  ERROR: Nothing PROVIDES 'gnome-desktop' (but /build/layers/meta-openembedded/meta-gnome/recipes-gnome/evince/evince_42.3.bb DEPENDS on or otherwise requires it)
-  gnome-desktop was skipped: missing required distro feature 'opengl' (not in DISTRO_FEATURES)
-  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'evince', 'gnome-desktop']
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 82fc8c534ee62095df3bb0d382c9db3e6bee5bb1)
+(cherry picked from commit 1b59a88df5ac37a286e3bc7b0c2ed8fd7868e06e)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-gnome/recipes-gnome/evince/evince_42.3.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ .../recipes-gnome/evince/{evince_42.2.bb => evince_42.3.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/evince/{evince_42.2.bb => evince_42.3.bb} (92%)
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince_42.3.bb b/meta-gnome/recipes-gnome/evince/evince_42.3.bb
-index 0c97f75e90..5f35d5b33b 100644
---- a/meta-gnome/recipes-gnome/evince/evince_42.3.bb
+diff --git a/meta-gnome/recipes-gnome/evince/evince_42.2.bb b/meta-gnome/recipes-gnome/evince/evince_42.3.bb
+similarity index 92%
+rename from meta-gnome/recipes-gnome/evince/evince_42.2.bb
+rename to meta-gnome/recipes-gnome/evince/evince_42.3.bb
+index b84674fa98..0c97f75e90 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_42.2.bb
 +++ b/meta-gnome/recipes-gnome/evince/evince_42.3.bb
-@@ -19,7 +19,9 @@ DEPENDS = " \
- 
- GNOMEBASEBUILDCLASS = "meson"
- 
--inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection gettext mime-xdg gtk-doc
-+inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection gettext mime-xdg gtk-doc features_check
-+
-+REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'opengl', '', d)}"
- 
+@@ -24,7 +24,7 @@ inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection g
  def gnome_verdir(v):
      return oe.utils.trim_version(v, 1)
+ 
+-SRC_URI[archive.sha256sum] = "ff7f81f308cf8d4956ed97fb724a7e49448c214beeab998812ef9efbb38df8ae"
++SRC_URI[archive.sha256sum] = "49aecf845c946c96db17ba89d75c8002c5ae8963f504a9b0626d12675914645e"
+ 
+ GTKDOC_MESON_OPTION = "gtk_doc"
+ 
 
