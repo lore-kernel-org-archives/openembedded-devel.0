@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BA6ACAC5B2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 329DDCAC5B0
 	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 11:06:51 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web11.14124.1758625607022816364
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web11.14126.1758625608963684360
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Sep 2025 04:06:47 -0700
+ Tue, 23 Sep 2025 04:06:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SWCOqLkL;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b2b4096539fso341214666b.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 04:06:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=B1fL02Kr;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-b2e66a300cbso301355766b.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 04:06:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758625605; x=1759230405; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758625607; x=1759230407; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=gwwc5mU9yJla6qFoc2al3v0UCTet52CEJjmbsIqVA5c=;
-        b=SWCOqLkLsZYlp9pqZBwE+VVHcsmzFjB8DBK2CbJwnh4RxTUyYWDFp/R+6qHFrF4m78
-         /tl1fRpLNjLtEv3nQB/u/z8c1wTSFywP4hHmisf+0eYRh+FVjboJ+lgaY5e4oRvxKo1e
-         y7E7mjNt0U09sFRHCXbFyNhdTW3TI3VOfCd/C+OavDwH+ZVXbyjxBYZKbXzrwr9Eudyf
-         J9vPRiO+/Bsjzg6hkf+wIWj159vx9gghlNsZjuD/l8glFfptAEOrhExA8broSRJROMmL
-         AOBYbRVsRCJjPUOt7m/7HRWOU/X0w/6ibrbqLQSjqSzTjkcrcPS+c/BDb6U4qyPo6xsf
-         g3kw==
+        bh=XjPmQ50PuEld4YJdz+btLObmQrEUPOb/PZT2fqIuXdk=;
+        b=B1fL02KrPQXNwLMNe1PXd3NiKkFqEZ/+Iflkq/3J782hvQRmG6nEvAhJTIHUhStdsx
+         q/TBqqbXkmktJAy02/mGdOFFRQUaFrGShT1QsdtX5GDHqanNE7AfdMa5OL/7hPoYmSdA
+         1gdrwHLGm1jEnIRVP0hq+eSLw4aB04qY82VgXSS2CHv+8rRPiTnHDgYb1jpaC96vqd4O
+         y3+oWcW04X0IrmKiNE+20EACp2ZBB3dmAmR1/NyigZjn1Tq9KHGFRVb24r8rNC1dJyJj
+         xjCxdxkTxg1gsK1L4w7SXWWh7lvS1L2kRUgKlBYkVR2qz2j4k6HaxcGRagwZemjOBdFV
+         42hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758625605; x=1759230405;
+        d=1e100.net; s=20230601; t=1758625607; x=1759230407;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=gwwc5mU9yJla6qFoc2al3v0UCTet52CEJjmbsIqVA5c=;
-        b=lpoI39HFeyCsJxE0ggNqrSEP2uAEaDCIFK8bNyqGc0rGWMA3dmPxA3A8QCVIOJIcFy
-         vcZeV62KqwlHuu0cmSupz2k3J5Pb2LenH3hLuUvOYJy5/u6TxkpzP8wPJC2DWpLsd9mq
-         GTug4wxMUHNvN0Ma0MowAgJWrkTHRlwSJF6+bgYYd+NAx+bjqo6T+ed8duhe3UJbisBf
-         0XbCdRrh/RdwAUlZCa6fG5BeMbXsNHR4sFJXksA4DRHZ5IgNnIekQWeMOM/lO6Nd1NRc
-         MEoGhtlgFgWPw36S4HTtDAlfOvtzlnfeeC8tMLguTk+nI5F0AGIiryJCk9esoq3gfVWA
-         lGcw==
-X-Gm-Message-State: AOJu0YwwmJvzi8cYzeSqo5bs5eWVwcLva7NRTf9vLN61S0z/kmHU40fv
-	1xUOtL+rzQ1pmgiU2uHDZjvATclMftlvzHCH9+EvQh3QmZ1yCZcGrNGFZFhXdg==
-X-Gm-Gg: ASbGncsHyfn660EaqrOCt3YasgO6PfTa4O+RJB3qeC8IFt/igRvhEa2avu1UTQ4+192
-	c8m9nNZhVczt+vk8mu8YEwKOQ9trPVTvV3k2G0S7LYBhvXRKYDdtzN+TTQw4DDb/Sdzy9dulYnD
-	cwxgMo+UmXjF8jXxsfNaf3kq8gOinGOH639LHt9cBXrai2oDzejvfmuJu0InYsfBwFtubMN/DUK
-	xae25lyb4RuwoPihMZ98ov/zh34jorD4XeKV8udAQPFGSMnSUTx0kjso/Dgrg+UKYebIgudGP3/
-	ET4DOPy+fRBlqPqRg2cdjT8L1U1Eu4ZbN+dcEhtRX9g9c+rxTVEbxo3wczSiS0pZmb1IDyNguD2
-	BfDSh7RJwy0QHx1Vy9L1c
-X-Google-Smtp-Source: AGHT+IGSx/08Tp/d1pkcmWpzJ9dZon/ciRaW4ZUVDi+7d/KgMtNbqm0OZKVKg8DrnLSRsaggs4dCeQ==
-X-Received: by 2002:a17:907:3e1c:b0:b2e:f8df:f5c9 with SMTP id a640c23a62f3a-b3018a6ce5dmr211774766b.6.1758625605317;
-        Tue, 23 Sep 2025 04:06:45 -0700 (PDT)
+        bh=XjPmQ50PuEld4YJdz+btLObmQrEUPOb/PZT2fqIuXdk=;
+        b=rO1hzFhOXVdgFvQEeZrFkZVhpIVxbDmtduyni4C8d1Hz9Hw7/MGiYUuj0j8K15wQVt
+         EWWm8my8Evu0NxsQcRurkFNOlkFwuNl4CItGv5CGm/7iX8WQQUf3iqzvYEGi8UNtLMaA
+         IjtZgemfBceqrvFEj7TUKRfOIgKLyvv4tHOSbFw8cmdZlEXX06lK8I4KK/lLyTe0KPYk
+         ihPw0+0xS6JFcsjjDx2bYJ3IF/Bb9BtuPsy+afWaW8LLzEPHFKdNe7U94Xh3DxIfvC3c
+         8hT/k2dZDBvakndiZ3J5F8yaB0pbbtuzxO8MwkDdQJMFYaJ85aJTJzCA7blqXdwC5lcL
+         Xyxg==
+X-Gm-Message-State: AOJu0YxrwUW5aDI2IHRIE0TvYwNm+NzfLm6CVAZzu5L7WChmHXzbRZuH
+	FvBc6xlKXttAtrxtZiYpqu4d+POuNlQhk8CHjvllnmWI5gD8JTHe0qLHZgfnaA==
+X-Gm-Gg: ASbGncv+ketg9PMyYqGghJNDjkRa5r6038MbSiS82FLgD3Dnvg290boHNsP0ua8/EuF
+	sjjetUuHiMsOGlLWw9Njzd0DbU9gl+lmuOgeG6FpciCfeb+lZqgpojuioT1UAiMcGyCbnvE0EiT
+	/Y2br0h7idVKwig7soFocX1dNrcGA7JD6eiD6xMSiPFbC/XsLD9ZgXUlhBylnRm/TfB5zcbCfws
+	scfhdYIfJRK71szlKNMQtK0orD9R1afoVWVFbXfKJp21V/gNkpRXXoPF/7rn9sm0vdtV7E7NQsl
+	9IwrkUpdLy2G5uo5WMn2fE0kjJ/p0/PR+yBoXP2ESxtqaV+mwMIBSfMlhhFEaP+pj79Ljdyf58U
+	V+BXepQ2BjeM56PpAKUCF
+X-Google-Smtp-Source: AGHT+IEz0u1T8dMUxBu/XYUGGWJaeMaR/orhQgJ2Z59lNeZmk64grtj2WJWibCHKxRjGOMz6MNwLCg==
+X-Received: by 2002:a17:907:9618:b0:b07:c715:31 with SMTP id a640c23a62f3a-b302dc64158mr199872866b.65.1758625607178;
+        Tue, 23 Sep 2025 04:06:47 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b293fa07816sm709263166b.50.2025.09.23.04.06.44
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b293fa07816sm709263166b.50.2025.09.23.04.06.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 04:06:44 -0700 (PDT)
+        Tue, 23 Sep 2025 04:06:46 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 12/22] gnome-bluetooth: upgrade 42.0 -> 42.1
-Date: Tue, 23 Sep 2025 13:06:26 +0200
-Message-ID: <20250923110636.3413021-13-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 15/22] gnome-desktop: add opengl to REQUIRED_DISTRO_FEATURES
+Date: Tue, 23 Sep 2025 13:06:29 +0200
+Message-ID: <20250923110636.3413021-16-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250923110636.3413021-1-skandigraun@gmail.com>
 References: <20250923110636.3413021-1-skandigraun@gmail.com>
@@ -67,36 +67,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:06:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119676
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119679
 
-From: wangmy <wangmy@fujitsu.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-This version fixes the display of devices with '&' in their names, and contains
-updated translations.
+Fixes:
+  ERROR: Nothing PROVIDES 'gtk4' (but /build/layers/meta-openembedded/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_42.0.bb DEPENDS on or otherwise requires it)
+  gtk4 was skipped: missing required distro feature 'opengl' (not in DISTRO_FEATURES)
+  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
+  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'evince', 'gnome-desktop', 'gtk4']
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 2687e9dbec14776ab4a1a6747cdfd12316767311)
+(cherry picked from commit 681bd57755004f25831ca456ee9e0177bb5fedea)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{gnome-bluetooth_42.0.bb => gnome-bluetooth_42.1.bb}        | 2 +-
+ meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_42.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gnome-bluetooth/{gnome-bluetooth_42.0.bb => gnome-bluetooth_42.1.bb} (91%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.0.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.1.bb
-similarity index 91%
-rename from meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.0.bb
-rename to meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.1.bb
-index f2dd99761a..7f6cf84dd6 100644
---- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.1.bb
-@@ -26,7 +26,7 @@ inherit features_check gnomebase gtk-icon-cache gtk-doc gobject-introspection
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_42.0.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_42.0.bb
+index aae927a70b..6eeaed0e1f 100644
+--- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_42.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_42.0.bb
+@@ -10,7 +10,7 @@ GNOMEBASEBUILDCLASS = "meson"
  
- REQUIRED_DISTRO_FEATURES = "x11 opengl"
+ inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspection features_check gtk-doc
  
--SRC_URI[archive.sha256sum] = "3d1e2720673bc9a242619dc5d231fd6e776c18a49da29f43cdc433055adb0170"
-+SRC_URI[archive.sha256sum] = "d9fe5d673f27a40a86a9e23d93cb99367e7b06df51872e8ac5ecc9938e55b5eb"
+-REQUIRED_DISTRO_FEATURES = "x11"
++REQUIRED_DISTRO_FEATURES = "x11 opengl"
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
  
- BT_PULSE_PACKS = " \
-     pulseaudio-lib-bluez5-util \
 
