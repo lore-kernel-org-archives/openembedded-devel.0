@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AFA5CAC5BC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A63ABCAC5BD
 	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 11:06:51 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web11.14122.1758625605706470712
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web10.14108.1758625606389399399
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 23 Sep 2025 04:06:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=M5RMsFQk;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b2ee3c13aa4so208200366b.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 04:06:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lJdRz6l1;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-b07e3a77b72so941226466b.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 04:06:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758625604; x=1759230404; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758625605; x=1759230405; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=XEsGX9TOYm36g/lK2Cp3y/CWQ8g196oob4/U1imQDVc=;
-        b=M5RMsFQkiUrpgc4axEr7Um+KTN64lX3OB0OIcb0IQz8airFh+UBQ2B4DY89qvTBE9t
-         K/55RSo2HvPABso/HvV+EXFFJNPG4M8SH3t4VflD3kje97d1ymaql18pF99VWwmEgDRz
-         Cpmqw69Gs7x7e6YGC2wHk3Z59j8HIXyEGPVRRZrHoetS17sZuhrXGMUXDY/te5kT77FU
-         dVSLhjgDrHLIHjh5T0cqrI6ZcUu2efT7lZpgq2nkTG3s4ODb3uLXASSXGqP+mteljiH3
-         kSvpFu6hUGJswOpFfgoQJP6wOOEIj8SV4F7xTtpxAJGkavRRk6lXA3PkjJ3Xt1Qo8nCX
-         sDPA==
+        bh=z3Ys8bJdiv2pmQLLcIE3qNof2HfymxzK2T8MALgtHpE=;
+        b=lJdRz6l1eMwNk9rQPTo1q0M+ua67OEyGB/njCETfGrGqAP6xviCX/yZfTtCl/OD0Pt
+         evuv0CNMNhmNieHpoK5fYO9RmmWLaiaPmN/sl1c2yhRgUBe5J4gKR7yGKtyG3Hd2Ybih
+         C6AvK4OqHao+I5UlfsAspU3vNgAzIIOJHqlpPgv6LYYYol2twgfxMNjQ45NaUOTE0kPy
+         pmOtCh6eQEeI/zR+0kaP9poTN0s5TvEii+6nS+UWOfUntRx/DGgVDuynEwrOE4R+9VjL
+         D9+U4oX4F+Wusz9b8oPffD+FRmxAL8KR92c0KDK0lw7MVDGcigL3IZxgl4bYYO69mKVg
+         zTpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758625604; x=1759230404;
+        d=1e100.net; s=20230601; t=1758625605; x=1759230405;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=XEsGX9TOYm36g/lK2Cp3y/CWQ8g196oob4/U1imQDVc=;
-        b=CJjt1iIqTaWglZAdbtPuhCPzAG98HKy+you3btYjymcWlyclx3H/eqsCqPwUHC8ZXI
-         vRWQJtIe2D7Olk6/OJYpt4ourqBUtZwVBAST265OlIVrvKu4chRet2kfxW6RV5IMCMqq
-         NAIxbZIJmDuYlfqREhcygzqqw6U2+SGhbQRixSoVEG1GksrYfrChuQnZUx+/WBA0Gb96
-         GSHfNE+9IHR57Y7lZQ1PJccuhkfGCV8v+jP6ipvVz3vhh3Ekb/Me8AD+xKi4ABSabXpp
-         OblKCS+y/249tWunHc+HEPgkChWuuarRsYiCM44F+FirU4+2oM/OxntkB/Tv3oGMP0zo
-         c17g==
-X-Gm-Message-State: AOJu0YyExglk4vs6S+kNyu+xIxSGINfIppKwgKn2RY9Ggw++qX8EoLje
-	ebMKM9fA9Ni/vWecpwrSrKFUXp5VA9p7JRPeCDQr7v5EbOti3RIETje+g4CbVQ==
-X-Gm-Gg: ASbGncvHSYJ9q7gmEc4HzpHWrgDtubXCkbQYnVSo64WLj0n76Ym0x/2hj0C+wUlwb/n
-	JEHyOugirE1VgWtmiLbRh/6R3EbTFDkkHNS2BDM4GU/SPZhnPSzaTB5L7w6Q0sAA4anWe7rrUOF
-	Kvo1iY9yoG7kmZrXMeHyjWJRff5pw9dKf07epcNTmaxaLWlpUN6dnqhO0WwAVpKAhs/QbX/Kaxn
-	3k11pmKuLwNhsDuqY2xoRKZiMBe8GL6NYr2Ih7TW7NZpozFmqdta22mcKTez/QaR+h8r1YVofTV
-	Tkj4ofP7YlwxdVjN2yuvav5vicKwyIvOozzVrryCUyMjA+fij5ARGvkG3CyMsIg46G23Sh7Ppv1
-	ermpo2qizazd4Xejx0Z3D
-X-Google-Smtp-Source: AGHT+IH74PXPBKRwTaeV1tXU9pZJIsRFz5thpDKspMiuTOdTKFCMD5v4TXMO1BFxYVuLxCTYs7zr1Q==
-X-Received: by 2002:a17:907:2da6:b0:af9:eace:8a52 with SMTP id a640c23a62f3a-b302ba11b03mr220094566b.50.1758625603987;
-        Tue, 23 Sep 2025 04:06:43 -0700 (PDT)
+        bh=z3Ys8bJdiv2pmQLLcIE3qNof2HfymxzK2T8MALgtHpE=;
+        b=Zx/HExxY5AtQex7SquB7D2aJTzjSHGCNnaUJFbngOuBirKaE0nuuL1EwLrJ27wCUkU
+         0t1aYkYm0U880aMKDpuorUC+Sxmsmq19WQZmJ7IV526sqM+CDMsDS093Vy03VIIb2Lpq
+         kcW6ioqgBaJkNlA4yxlKPU+PFdeP64UvZMrorxZddO8XTpp+H1rOYie1R8YZqx8p1ahy
+         a5GCcIpRoIOqJl80WPPb71qlEIwIwSRq/cqiMKKttzt2zQN/GZGlkJOPoeyjJhj1/DfB
+         qbAUYQ5MtxfIW4CsAPumjhfe3eY4ruGecLyOYOtl8hTWtUjln8N/fQ+qHWtcyGEkpjLS
+         1Puw==
+X-Gm-Message-State: AOJu0YwWxp0GqIaO3h5xmwH6a1XvbiDHrl6tTDQm6zttXMhzwUtlynCf
+	le+sUwdNPGHOeVUYfRhA2WC8SxFSjZ85iMLIywZhnuIhgcyH3zltGctdLw6pPg==
+X-Gm-Gg: ASbGncveJ8JXEO+Uj6q8eWZzd8A+iY3MzlfTZ2jJoDAA38xMw9pzbo7Q7Ooh4UTA7Sb
+	jFRQFphqiGaMBrJLIQbWgwbUmqIBB0GArpP1iiED0vo3Z6RhoNo/UnIpr1iFT69raTtCsOoxM91
+	wqAay+vlz4IBDf+cpTSbYTOeJtdIIoNhozXUm1/ldwFWXyvl4rCVEYgxtItlbcW5rExqC1x73VS
+	sx169Set4zjx6uDTimVzvNJ+NXh395i4S28QFBQpSfz9hPjG45SrETeuurNzsnnbDcMneA6LSOZ
+	lPfLmJO7KlyeZNsT8yZEYQtvRlJ1UqLwE2qt8pPZy70hn1xD69OAEY1P2rc7uLsfsJA+VbdeWfH
+	ISBXPodcNZoJsEeyDp65N
+X-Google-Smtp-Source: AGHT+IGThAbc5CiGfJ7xog/19+JuS4a7foHe6WzC28+yIzE+KRg0nSQ6XdrOy2xvpdiENof1IqN4UQ==
+X-Received: by 2002:a17:907:9488:b0:b23:20e7:b480 with SMTP id a640c23a62f3a-b301c94a680mr249165966b.18.1758625604608;
+        Tue, 23 Sep 2025 04:06:44 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b293fa07816sm709263166b.50.2025.09.23.04.06.43
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b293fa07816sm709263166b.50.2025.09.23.04.06.44
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 04:06:43 -0700 (PDT)
+        Tue, 23 Sep 2025 04:06:44 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 10/22] gjs: upgrade 1.72.1 -> 1.72.2
-Date: Tue, 23 Sep 2025 13:06:24 +0200
-Message-ID: <20250923110636.3413021-11-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 11/22] gnome-bluetooth: add opengl to REQUIRED_DISTRO_FEATURES
+Date: Tue, 23 Sep 2025 13:06:25 +0200
+Message-ID: <20250923110636.3413021-12-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250923110636.3413021-1-skandigraun@gmail.com>
 References: <20250923110636.3413021-1-skandigraun@gmail.com>
@@ -67,41 +67,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:06:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119674
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119675
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Changelog:
-==========
-- Various fixes ported from the development branch.
+Fixes:
+  ERROR: Nothing PROVIDES 'gtk4-native' (but /build/layers/meta-openembedded/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.4.bb DEPENDS on or otherwise requires it)
+  gtk4-native was skipped: missing required distro feature 'opengl' (not in DISTRO_FEATURES)
+  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
+  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'gnome-bluetooth', 'gtk4-native']
 
-- Closed bugs and merge requests:
-  * gi/arg-cache.cpp: Fix building on Visual Studio
-  * doc: Reflect support for constructor with GObject
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 757dedbc811bf3f09e259353a943effd1ae16733)
+(cherry picked from commit 06fbe76348f801d28785d8898c79c6c93ec33490)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-gnome/recipes-gnome/gjs/{gjs_1.72.1.bb => gjs_1.72.2.bb} | 2 +-
+ .../recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.0.bb       | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gjs/{gjs_1.72.1.bb => gjs_1.72.2.bb} (92%)
 
-diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.72.1.bb b/meta-gnome/recipes-gnome/gjs/gjs_1.72.2.bb
-similarity index 92%
-rename from meta-gnome/recipes-gnome/gjs/gjs_1.72.1.bb
-rename to meta-gnome/recipes-gnome/gjs/gjs_1.72.2.bb
-index 355894073d..3170341560 100644
---- a/meta-gnome/recipes-gnome/gjs/gjs_1.72.1.bb
-+++ b/meta-gnome/recipes-gnome/gjs/gjs_1.72.2.bb
-@@ -8,7 +8,7 @@ DEPENDS = "mozjs-91 cairo"
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.0.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.0.bb
+index 36fe9cf215..f2dd99761a 100644
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.0.bb
+@@ -24,7 +24,7 @@ GTKIC_VERSION = "4"
  
- inherit gnomebase gsettings gobject-introspection vala gettext features_check upstream-version-is-even pkgconfig
+ inherit features_check gnomebase gtk-icon-cache gtk-doc gobject-introspection
  
--SRC_URI[archive.sha256sum] = "17c0b1ec3f096671ff8bfaba6e4bbf14198c7013c604bfd677a9858da079c0ab"
-+SRC_URI[archive.sha256sum] = "ddee379bdc5a7d303a5d894be2b281beb8ac54508604e7d3f20781a869da3977"
- SRC_URI += " \
-     file://0001-Support-cross-builds-a-bit-better.patch \
-     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch \
+-REQUIRED_DISTRO_FEATURES = "x11"
++REQUIRED_DISTRO_FEATURES = "x11 opengl"
+ 
+ SRC_URI[archive.sha256sum] = "3d1e2720673bc9a242619dc5d231fd6e776c18a49da29f43cdc433055adb0170"
+ 
 
