@@ -1,96 +1,97 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A54AACAC5A7
-	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 10:18:00 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web10.13354.1758622672953079442
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2CE0CAC5B1
+	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 10:39:50 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web11.10494.1758608743887327074
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Sep 2025 03:17:53 -0700
+ Mon, 22 Sep 2025 23:25:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NdgufTfl;
- spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-b30f8d14b9cso45206766b.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 03:17:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Zoogpt9s;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: nitin.wankhade333@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-267fad019d4so11431435ad.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Sep 2025 23:25:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758622671; x=1759227471; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=2XjAgHBB3OZoyr939AHYjWoagonZYhuu89E9BlMZ1Wo=;
-        b=NdgufTflOue7SbblmpKDRTQIozdnCXRnqPdS8Lat+Qoa0VrlQ8btbtyo71jWMiWwdQ
-         h7arwFFdMnauCUjLRtEDz1U8GTcuaEh4008j0vtE1H1LbrUwc0L7e2rrD/DzQmoIedBm
-         wfdfco5aVUuPUVSL8+DaZWlLSwo2WrSTjW+MedXqp6024c8iLkTQoKcGPHnzBPtU6XVz
-         Ycu3C8kQDoZkh+YmROWglIWNDBiMLgfcxz5w7BJpKKFhdIvBnD6A5I/IljU6mi08HjQv
-         mqg8JPP5Rt06yKWraHm3Y5MEZQ6jJRxGccC3OOssgTSX0T2NLaH9nwFogMjeYNZFvmbf
-         VEXw==
+        d=gmail.com; s=20230601; t=1758608743; x=1759213543; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=dgg/V0X6MtW19un9O84ubajnpkvOaq8Q7jvx/76Dntk=;
+        b=Zoogpt9ssBdIOTf/ouwhbCIFzLQHB1L57V4Qa96js3lFlzo2+swl4SVZP2TQcA5qpL
+         eamc9e6XZtwOeIySxSPwfv6HXqhRa8GoAJQ+VcY9GwpwumFmg6mi74K+6oCGoWgnlvPO
+         1E06GOk9iGPVq+liJOzTrhdz9Ej+u2uSn1kmJ+T4D9xgu0TDAa9hnRsoF3CHOdLQpdeZ
+         Rz3GVm0vQ4ubV1+4hvllSux0ct1DI70njT9SQhB/uD/+LM727kLdI6XpcHQodEQUVfmC
+         9hIbj1u3wwX7K30pj/Yl/Fn7JD3cKYJUny9CPw8oxXXeYPTuoFxus5waVHlwR1Libyn6
+         yScw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758622671; x=1759227471;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=2XjAgHBB3OZoyr939AHYjWoagonZYhuu89E9BlMZ1Wo=;
-        b=R6Pf3ESXIK1UJNBJ8N5KZ0Wg3WpslUHA2mH8V+yhzrLA/WmRUFJLqZt5JUaMMsfii5
-         x+GJzdBYZAMhYS7P7yf0BprwwDWW8jDv8qPQH4sjH1mx96XXX2vgKzYVSBhv1nlKW0/n
-         OfdgqLoZaf8utxdB9P7DP1chClRqyMd0nc30cI1W1JeUgepoFp+a6YkyoSsrYVZ2VTez
-         BqF7tr9QEo9akjbyf6doHCPP/SBcBVmckQpUUFYSADOq00i8plEM3o1yK8A34WCIwMef
-         wsVwno7zj5k/c4kVjJ0sB4ZZNV35kZwnpT1316/RNoGEh+DXvw6wZNQ0rYLxmhDJaXRg
-         5H/g==
-X-Gm-Message-State: AOJu0YzkrujdbTvOZj8jqiCD+r4KyMoDKhUCDVcafeyATVKOqSfM4LLi
-	Z/3ugNccv8UOsBdgYoIc8s5XsYbgtvcYZqpaRbXtZVFRDacXzUxua0S/KcDIHg==
-X-Gm-Gg: ASbGncvsxNZfW4SXMYJ+P4aweh0e8NLOTWh6gXrYhR2DaivF7AUYOEkMIhqXyJmSbI0
-	lO17UrV/7rXHZUQbjEFfilQB/jt7lY+QKNByLhKPbmQHnUlIEjMSlcI/abPo3L943hu+5wlKtnD
-	yQ4e+YfOajIjcUM6JO91nOMR8i2/IWak35J56OJ7/00pE55gjrfRo+hFoX0yUMsJlLD982dQYr4
-	xLNnqCWke4zasPoWTrJ9KAgEEneYJpSV2uOdL9AtkHthFd76aA3qG5PhJm95GrVZF0D3oJ8ZvT4
-	0HwnmuLAFpl/9Kdoo0t894YKXCPIjkXUJIQPdFHg7gcsfFo9HmkMANtxs3REkHV8ot2WIsmvRb6
-	FIwrjJe+CJmq71ALP8hPe
-X-Google-Smtp-Source: AGHT+IFSlIEtsA2oXSW2NX8ewlhYK5cDFbR1iMDVNihAh5cJYqS9t+AFFxJURbkWvV3oImxW2BmW1g==
-X-Received: by 2002:a17:907:2d2b:b0:b0c:fdb7:4df5 with SMTP id a640c23a62f3a-b302726c426mr220178266b.18.1758622670940;
-        Tue, 23 Sep 2025 03:17:50 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b26847b9f37sm944940666b.18.2025.09.23.03.17.50
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1758608743; x=1759213543;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=dgg/V0X6MtW19un9O84ubajnpkvOaq8Q7jvx/76Dntk=;
+        b=e7mZB/c2ETwYFCUmbtew5kGqBVPTE2q7UgggqbfkZg061FkpSlLNJNWfQ276ZA77EE
+         uIKJat4xeIPuc66G8ZLHUWL/netzBE+ifWLthtxDY9bMhs0hFBmmgCxZoa+YASdByMch
+         dC5KdBoAEld28MDX/n0tDDzCbwoisFhgcJOy6PX3alSH8RoQZzNPCf+6SDUr2yAwQPnB
+         yw+UKrDsS1uoUdTG31Co2sJ7UA0uCMFP/stqUh7bsNBdlr2xj0wPILs3rsvvwWo7WsRU
+         vtiPmBpRa4ThJdEKoOxCfpFScgEPh43EFHjkSOCsX/AuFqVNbkaFrrqBe/UJ6HB4z6JD
+         q9Dw==
+X-Gm-Message-State: AOJu0YywsdRufmbyWt7NALqnlglWLG7yFPJy7mJlTYXBkqQm3UVxzM6t
+	JVftiTwi+Av631qgiseYPQphzVye+4UFUG2t6V1FCEqQkoaeM3qWOVObHP93cA==
+X-Gm-Gg: ASbGncuCaor8/PSLEPi6BBfGMivuugDYZVdpDXFOIj040QHKXpyhFb27OOPfwNOTS2a
+	ssaR1O4iDekZbmsHOOFb8RIQvvaYP9+io95hh4hWaipIt8bAAJQxJU9DmqHg42GRLcD8GM7H9eP
+	opim0xs47ggUZulnk2soI82UdsOhawGpWtqcRSX5aQJozeQ5FXLxbmL58Y9L5tD/LrFQDXK3IOd
+	w/eZS1oOFEcOLFdAJ8cwP/f0knBThBTWvSVJFKqci7PMj1D7ZFzO1EtIQMyAZ6hGtZYLkwUiWIs
+	OUbbsxdBYt0OD9pBgEVnWEBlreoJjKI4+cvODIVmABEkoqOAvgsSGn8VeI8CvsPDG4gRMpWsgQi
+	qO5QcGTGtLOcwl70yvTnXC26p1IVfXV0CHlvCx/DU830=
+X-Google-Smtp-Source: AGHT+IFY1+Z1r2zy3BfQNxjizds3leAHIqsPGNpq9bCEo00z0HGdmLosqMc1Odmi+IZfKM+4GaNmAQ==
+X-Received: by 2002:a05:6a21:3390:b0:262:77e0:819d with SMTP id adf61e73a8af0-2d0098303d6mr1297779637.3.1758608742799;
+        Mon, 22 Sep 2025 23:25:42 -0700 (PDT)
+Received: from LL-3324L.kpit.com ([2401:4900:1c45:4aaf:f702:9ced:7f9b:68e6])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b54ff35aa47sm13838034a12.5.2025.09.22.23.25.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 03:17:50 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Mon, 22 Sep 2025 23:25:42 -0700 (PDT)
+From: Nitin Wankhade <nitin.wankhade333@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH] krb5: fix packaging with ldap PACKAGECONFIG
-Date: Tue, 23 Sep 2025 12:17:49 +0200
-Message-ID: <20250923101749.2832920-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
+Cc: sana.kazi@bmwtechworks.in,
+	Sana Kazi <Sana.Kazi@bmwtechworks.in>
+Subject: [meta-oe][scarthgap][PATCH] protobuf: Remove embedded runpath
+Date: Tue, 23 Sep 2025 11:57:15 +0530
+Message-Id: <20250923062715.2563476-1-nitin.wankhade333@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 10:18:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119657
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 10:39:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119660
 
-In case ldap PACKAGECONFIG is enabled, poackaging fails with the following error:
+From: Sana Kazi <Sana.Kazi@bmwtechworks.in>
 
-ERROR: krb5-1.17.2-r0 do_package: QA Issue: krb5: Files/directories were installed but not shipped in any package:
-  /usr/lib/libkdb_ldap.so.1.0
-  /usr/lib/libkdb_ldap.so.1
+Remove the runpath embedded in libprotobuf.so.25.8.0 by setting
+DCMAKE_SKIP_INSTALL_RPATH=ON. The embedded runpath can easily
+enable an attacker to get malicious code executed if there is
+some issue with the file permissions at the specified location.
 
-Fix it by adding the file to the krb5-kdc-ldap package (the same that
-Debian also uses to ship this file).
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Sana Kazi <Sana.Kazi@bmwtechworks.in>
 ---
- meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-devtools/protobuf/protobuf_4.25.8.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
-index 99ba9eaa9c..d889855649 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
-@@ -163,7 +163,8 @@ FILES:${PN}-kdc = "${libdir}/krb5/plugins/kdb/db2.so \
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.8.bb b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.8.bb
+index e54dffd2cd..51f9b8c255 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_4.25.8.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.25.8.bb
+@@ -37,6 +37,7 @@ EXTRA_OECMAKE += "\
+     -Dprotobuf_BUILD_TESTS=OFF \
+     -Dprotobuf_BUILD_EXAMPLES=OFF \
+     -Dprotobuf_ABSL_PROVIDER="package" \
++    -DCMAKE_SKIP_INSTALL_RPATH=ON \
+ "
  
- FILES:${PN}-kdc-ldap = "${libdir}/krb5/libkdb_ldap${SOLIBS} \
-                         ${libdir}/krb5/plugins/kdb/kldap.so \
--                        ${sbindir}/kdb5_ldap_util"
-+                        ${sbindir}/kdb5_ldap_util \
-+                        ${libdir}/libkdb_ldap${SOLIBS}"
- 
- FILES:${PN}-kpropd = "${sbindir}/kpropd"
- FILES:${PN}-otp = "${libdir}/krb5/plugins/preauth/otp.so"
+ TEST_SRC_DIR = "examples"
+-- 
+2.34.1
+
 
