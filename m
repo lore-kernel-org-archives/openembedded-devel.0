@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 861DBCAC5B9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1DC4CAC5BE
 	for <webhook@archiver.kernel.org>; Tue, 23 Sep 2025 11:06:51 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web11.14121.1758625604335663355
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web10.14110.1758625610984283504
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Sep 2025 04:06:44 -0700
+ Tue, 23 Sep 2025 04:06:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cnvCNg7d;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-b30ead58e0cso63065866b.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 04:06:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Mh8kVdrp;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-b29e8a3e453so381796166b.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 04:06:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758625603; x=1759230403; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758625609; x=1759230409; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Fj6WmeTlA7eYaV8rom4+hs1bNJtlZ2B3z7dvAsRH/T4=;
-        b=cnvCNg7ditU82+Qn24b9qH17mIXp1dleupCx/aKM33V+3iQV9i7tJPlvwbqhQFKapF
-         vdnLTOfJtGmX7kRIpw8sGve2QH/OMTQFTapLJaQ0px4gmk7SgSjuuVYE0+kv8LQTspue
-         YnaBGmsV45YL1CqXy/Scu9TVpSVZCG9upAdQ6d5H6Mf4NySkWs4sy03bzINi8OBpVeLO
-         POQDEa0UhnKAz3/S55T2n5rsD6KnHm2M1uehGDuC3wKOwq2Ex7v/NijEUvNMhQXfaW7l
-         U8dbz0SWeyZuX1gz/RDcXlRR6DWw+EIQwu1uHnJWURqzxkomL9JsKJr8Pk9svo10Am9N
-         nE/g==
+        bh=7UAdmmhR1C4cxhjqwdbJTZN1L6eZo/ph37/i0W5iP14=;
+        b=Mh8kVdrpIU5gUboNWNNl/iV87jKRTj2ZqsUoqEU7YFGe0dVrivt6x2dMvOp6B0NI9c
+         +oN66Ur71a1QdeYT3mgldzfJmCajeMQ1qr1wGCuQUv7Lmk9ZpApKw93qviNF2g/RMuZL
+         tXeP+ES3l/LDp7gTdbGjE4fJe7sFIBB5GwlGrSZju+WPF6uok636kcCKry5lCQcbs1u+
+         Nmhmd3lj88LemxojCHob8eH43st6xyXV2ub0vCk2Ml5BVctdslhO66rX1S/m5pyqbza6
+         F2kctnvI3v2ilk7wprqnj+aQxFUOs4Btl6Oo/rAfQKz+a8HODFJ43Zw/ewV22dW4EJqY
+         Nz1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758625603; x=1759230403;
+        d=1e100.net; s=20230601; t=1758625609; x=1759230409;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Fj6WmeTlA7eYaV8rom4+hs1bNJtlZ2B3z7dvAsRH/T4=;
-        b=rczAlq9DZLuAF/kyUWjOD4X1D5tLqvhAHWuIn1BKYJytnPLmlCji+4PpJ1y4YWehlf
-         GQS4J9ibKevwQDBul6vuRwIeLufYJOMNujCeCNjeBS84hGxj5ZwJ5aQVaazVZArgIGrk
-         VpEM0gQpUEB1wB6FrI387SP02MkB2ggcqZh7dsmIvnDCRvWUk0oUQLCKGjJY3e1wfqX9
-         qTbEoh9zz0lBcK5rWzW2awJ7iclUhCrp+o6AbEI28AtfhqubfJickxjwDvSEyauLOFcE
-         i7XkCLP6u7/6ds1BvUvKnSTevzCqzCp/htAD1LMX2Va8vjSftPd+M0n4YXOtjxsosS0e
-         UTuA==
-X-Gm-Message-State: AOJu0YymGveaKPRL7+D6daBDCuWSf4ighu5I2b9/FFacIzGKselvyody
-	pwQsQz+gXTfuniAYLNXFNnE/MkDG/7EylCxIAg4elyWOmnpKV/ddJLVsC2h52w==
-X-Gm-Gg: ASbGncsQulo79qJYr6d4zmDvOTewmfKh0lZ2MUxhQzCYGs1bGmJhW4gHzXIuYqXgWLh
-	7qQHeA3rQunPgLBo1FGyYlo7b9XTkEZ+2vpDmOgqJU+vyNH/Zfa80NXfFwIxdpk7htEcS8L9cZ6
-	fwYhDiAhOU/7h8MesAeLe2wcCiynPeca0IflPRAHHB4bdIN9jHKTE4+ULqzP6ToVBEfx0BGSW1l
-	xSFZPvIrySMEAdPHBcyb0V+kdfs2AWQ9qgQlG0rWQ1WeOZBIYNLZFGlr6cw7zQfXtKg9sK+gp7q
-	OSXNbKZURvWWEKwiwN00bBVHqa5wx49+ivE2TE5fBMcHgafJk0Axgx/Sh7KJgJafxgfuoArG5xq
-	cmhuI91T8Us4SlCwGVTTn
-X-Google-Smtp-Source: AGHT+IEMG1XaRY1ghRzvMbJ/yBLEvTmAIcpy98Axfsgy1CzPCuvuNr/P5wHp80EjshqK/VABJeWDEw==
-X-Received: by 2002:a17:907:72ce:b0:b04:aadd:b8d7 with SMTP id a640c23a62f3a-b30261c096bmr205946966b.13.1758625602658;
-        Tue, 23 Sep 2025 04:06:42 -0700 (PDT)
+        bh=7UAdmmhR1C4cxhjqwdbJTZN1L6eZo/ph37/i0W5iP14=;
+        b=EiB/HkeLOdQ0leJI6olG7LnJGC+oBsfTHAplh2N6Q940O6L4rui4pUFr7ZwkkSOv9I
+         eEIvhr0bOkkDqB9zpl+zOj/LCA4mpzdK8FysH4HVGiGoXBaEC0CBcVkf5DVfye8Pu93S
+         z2WK27Ejw6m8hzUxxvGn8LUxkt81ZagtNy26vimWKB8C4QRM3WlBULLTsaAdqP1hAPNB
+         hd7YpoDmpI5h6eA1YkjLwfHLUIIuc/pgeQmbWb/4Ts2RdIr/ReNVtI/B9qKSFIEsXK1X
+         c3LlMTlFSkoB8uARz/DcNhcfs+zfULmBtfM58tjle95Zkucwh6eA9K/dUjgbdZ/DpeHl
+         tgkw==
+X-Gm-Message-State: AOJu0YwglA0PHJJupPe4SOMFo9AhvMEmBkgARydJmjGPpBgOxhm9UVHc
+	Pa0NJu0nzES8/p2OVLsXuW9sTa4CIR8+ccYhg8/NEDsqT9J0HwTb2hpb+k0MdQ==
+X-Gm-Gg: ASbGncu5la3ptzQZmdcvdJ/TviWUqH0fw3N/k8OAoE/quI37tTfSVaL6UlHXHD+TVnM
+	N9cMxkKQ8JRzMRRPLJbpZupmagreowHJ4ZsRC17WuCmXig+vU10+QCggX4ptoDornjVGwUtWVfW
+	xSAyjPUfwDqtwYA650Cw45LIY0O/TOtEbo/zAFmFU1UrkeqgK1uQiTGeJfffCLhj/AQ830pWSAl
+	yVWjcm+m//bkGEv+f3DHUu2e2dM9WVuLEHV4gFBOtPyQAdT8p7tZzS2B03tYtNuMPsxuZP4K6Zx
+	XL6xePZpfWTksBYAFoQwvgLSjWWWbPmRlMW60etoNatIXqjuy0c/glJ6lJMYLgY7yQdroyURuS9
+	+rCshpmL1fW5RdhcNSV7b
+X-Google-Smtp-Source: AGHT+IHeKLhttwKYgrYlHN2eB9mw7ZQILLqgzmW3+SWeHRe14a4sx8HOpNzYhSD2Mh64kImyVuPpCQ==
+X-Received: by 2002:a17:907:9404:b0:b04:67f3:890f with SMTP id a640c23a62f3a-b302ac28ca6mr213744966b.33.1758625609245;
+        Tue, 23 Sep 2025 04:06:49 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b293fa07816sm709263166b.50.2025.09.23.04.06.42
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b293fa07816sm709263166b.50.2025.09.23.04.06.48
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 04:06:42 -0700 (PDT)
+        Tue, 23 Sep 2025 04:06:48 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 08/22] faenza-icon-theme: Switch to a valid download  location for SRC_URI
-Date: Tue, 23 Sep 2025 13:06:22 +0200
-Message-ID: <20250923110636.3413021-9-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 18/22] libtimezonemap: rename downloaded file name
+Date: Tue, 23 Sep 2025 13:06:32 +0200
+Message-ID: <20250923110636.3413021-19-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250923110636.3413021-1-skandigraun@gmail.com>
 References: <20250923110636.3413021-1-skandigraun@gmail.com>
@@ -67,29 +67,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 Sep 2025 11:06:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119672
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119682
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Kai Kang <kai.kang@windriver.com>
 
+Add parameter 'downloadfilename' to SRC_URI to keep the downloaded file
+name as same as before.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d0e061bc72cd776aba847dac564af3c7e8384a5e)
+(cherry picked from commit 556b85216342b10510ac8230471e450086851a84)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb b/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
-index 5ed3375eb0..12d344bff5 100644
---- a/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
-+++ b/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
-@@ -8,8 +8,7 @@ inherit allarch gtk-icon-cache
+diff --git a/meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb b/meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb
+index 00d66b418a..bafe7af040 100644
+--- a/meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb
++++ b/meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.6.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/lib"
+ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
- S = "${WORKDIR}"
+-SRC_URI = "${DEBIAN_MIRROR}/main/libt/${BPN}/${BPN}_${PV}.orig.tar.gz"
++SRC_URI = "${DEBIAN_MIRROR}/main/libt/${BPN}/${BPN}_${PV}.orig.tar.gz;downloadfilename=${BP}.tar.gz"
+ SRC_URI[sha256sum] = "0d634cc2476d8f57d1ee1864bd4f442180ae4bf040a9ae4bf73b66bbd85d7195"
  
--SRC_URI = "http://faenza-icon-theme.googlecode.com/files/${BPN}_${PV}.zip"
--SRC_URI[md5sum] = "e9bd6106d13017ce06d24b586259ae9c"
-+SRC_URI = "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/${BPN}/${BPN}_${PV}.zip"
- SRC_URI[sha256sum] = "d4486fda0413f8a81a87e0dd2329f50f2a8a7cb4147b48cf147f0160add8174a"
- 
- do_install() {
+ DEPENDS = "gtk+3 gdk-pixbuf libsoup-2.4 json-glib gnome-common-native"
 
