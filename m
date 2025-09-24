@@ -1,80 +1,86 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 74161CAC5A5
-	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 19:04:10 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web10.22521.1758740649502739214
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7576CCAC5A5
+	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 19:06:20 +0000 (UTC)
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
+ by mx.groups.io with SMTP id smtpd.web11.22650.1758740770959332734
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 12:04:09 -0700
+ Wed, 24 Sep 2025 12:06:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fllEp+1K;
- spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-b3194020e86so29399866b.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 12:04:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=guwM4L7c;
+ spf=pass (domain: gmail.com, ip: 209.85.219.177, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-yb1-f177.google.com with SMTP id 3f1490d57ef6-ea3dbcc5410so158707276.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 12:06:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758740648; x=1759345448; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=7+RTuW4hFZdy470n7hOHlZcTubNWGLtbOE3Rc2NcNBY=;
-        b=fllEp+1K4JHabdYtNJ+wVGOkbS7eNDhJogTETvIG90mpl+IKbdanduT/2tC/k8o0Bw
-         vKEWZVi6PdztLZdPQO58//8FcYSLTes4e1EfXk6mjQTGqnytyAZ97z/9pBBmNa3G30fN
-         /9mupTets1UUb/8bxSgITHNav2S1lGw0fE6N8LsUpQvZqnQESYtWf5BKvenZ4C+hEflg
-         ZuF9yNl4jd5ny3OoOQt6IGqPpk77wth8cGL1pdIZTPHrET+vBxTYloMLiY4Acq6LJPc5
-         cSrmejNOXsOssbA7h1O0kL2p0Z/PBqq0Aaz1Yg7yJDFL69kft67ovY/JJVtCS7LEm85d
-         U+NQ==
+        d=gmail.com; s=20230601; t=1758740770; x=1759345570; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=BvgubJKr3f5cubSXIalyqvUiHbpbbTMP3tyjsld8XjY=;
+        b=guwM4L7c3DCRDgvsvGjPqQ3RmDzOpjGsb706gaf09G4POgAVgg1jwFqijAr0yyNsU9
+         dBRSja0SiVP5PfT9H0k6xOdE8c+1TWgosNpxuLSXBbfEXw8qLJLUW6roTTf1Lw2sVkNv
+         5gRi20zEx4zqs/3B9hULoI+AxlOXMBy2EMVhJjBdziWOlqpmyual0OAgPBFEd0yYQdKc
+         j6Xftjpb8Y1IO6NnbKIZVtb+uZkCTa6eBg7WIXObdzLCLNFgqJIvoKie7EYq32BbPhVR
+         mkbAF3nU/WHjzQ9WO23Hqgm5nfg7NTDpx2OFr4HGl3xXzMM3+T74KpWf7l3kRzZTePEX
+         87vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758740648; x=1759345448;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=7+RTuW4hFZdy470n7hOHlZcTubNWGLtbOE3Rc2NcNBY=;
-        b=VA1RaniXqKWzcXeYUzCZElpQ2wJPxZVbF+9VDvG8W4jFG6KZRh9LnHhTQQXSQzFBqN
-         6c/nrH0oBf44UAMdrtmOSOzJWSeMLpqC84vu2k0baXfG7dUUH+vaGXME1dmUDEx3KOVK
-         kWGaWbSg+Bxzz3gKR8SZbJzoNz3HncVownwNh7+XMaGoKmspj42f0qT/3n4+vtzpCQIZ
-         cJqbu1zxIe3luzattzdbZ9+Q8DBNkW0B6JJ11nVCg0At8FlPcuMraADtmdmvHGRXDwXj
-         OKZfhfT76LFj+xmIbgPXDc2TnQ3BAMYjBwxtU8TBsC25vwNnl+3uAURSzWEMNlIWxgRm
-         XQnw==
-X-Forwarded-Encrypted: i=1; AJvYcCWwojNt/OqY7TIlDhAU+wa4M0wCrfL0Oaw9ez1SZ+DLP2HVaFcmiGwQqUUX+b+Q/65Tm+e7Ux/PEbpui4txdUJqbJ4=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzhIaVuorPQypYduLnrinfvHzcwJv00CLOT80YSZctbojjjeRJp
-	Kcy2zM3NcMR0YaM7/9PknwyyOwMvfP0IdfPnZBIYen8dLbfcYd0jy0K1
-X-Gm-Gg: ASbGnctKVtEJ/1tG2sxUGBoXw05efWrXFLGV7xxcg230LbjcatOE113wUxB4fTBx6Gg
-	cwEqqviDzwh+QYLKYJrNESsHjUwrUzjW4788HnZlgUUP05RgRdJdmV6NuTsxdNilwdkqdOamRGa
-	echVXVKD0MtHjQTCf4fivc7dcjItnfrVFbFUHpEYOlnqm+6swrqSYWSt0WtPAaU/DuMaxSu8wXT
-	kWugkrV+EeJUNpiP941clgdApcFNtliWQr13jN89VA0NC89wGb8odr547BEK/JQxF4PhUlXwx/C
-	YtqMsqamRvnObIc4Elym7YjhNJDQTGVb6jQULLY+NcoM4e3FUUdcTQYiVLddu0zAvIZ4WzXA3bf
-	Srx+OC3Vq6BzyGrWH2Ah/rfajEzzqr9k=
-X-Google-Smtp-Source: AGHT+IEXWHB+R9oV1Cfy2Y+Q6R6/rkKf0nEkfClcnqtSP/6kNGG9A4vJuqUmj5TF3PIuyh/MyRlZqQ==
-X-Received: by 2002:a17:906:dc91:b0:b04:7880:3e8c with SMTP id a640c23a62f3a-b34bbbd9accmr80174666b.38.1758740647796;
-        Wed, 24 Sep 2025 12:04:07 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-62fa5f4173csm13555938a12.49.2025.09.24.12.04.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 24 Sep 2025 12:04:06 -0700 (PDT)
-Message-ID: <074adbe8-13f2-4d67-b804-2730da9ebd11@gmail.com>
-Date: Wed, 24 Sep 2025 21:04:05 +0200
+        d=1e100.net; s=20230601; t=1758740770; x=1759345570;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=BvgubJKr3f5cubSXIalyqvUiHbpbbTMP3tyjsld8XjY=;
+        b=c7F57xImG61+tgc1OVia4wH1FVkVxSBy82pSds32KZhLwGkST5vxINlkz09n/4xB3v
+         BNCBae+Ualz/A1/BJh07FoMncRtjTcF8HGn9geHZs4IcdE9HMt63NEGTI/CpFgsVw5PK
+         DkbgIQAY6I8YRstCYMQJW5wGV3zwDdvmQRk+K4WRctblc0+t/ZvF+zCtpISl63Ln5iIf
+         f5PnlTOUgUlLcIl/wlUQLUpwFv5mReOE0KVNjumrHBMAVkI8HVeEbyqgXfP8nf4Y9Eow
+         1OajzXH2mtkQAppZkfA0DOzdQ09tS12eI1/PcjWiN4S7hppyFWCJGyLaeEYut+u57Uv2
+         v6/Q==
+X-Gm-Message-State: AOJu0YxjyFE+Dk2JuHz/QSy06sfJWoLpVLssnLhm5iUIAK84P3hUfYfW
+	C2WzmhQJFBvthckEz4fwhTNZJ/m4+3v4G+x+i2yCC+GNPmvyPgWwgKtxsZUDMypEG9NJ+VXtfR0
+	DfqEvg+VQTNJj1EcL7B5W8va4Ba1AtiI=
+X-Gm-Gg: ASbGncsqpkW4q2dNoSHkwp5R8uTg0agwymL9n+Af/2LDdvH+ZXNOu1SUu2DAlBXCkjB
+	Y3IuElJqrjkHfNmKhgxEo2f6j/y5G4pZO01R7Hp8/lxEB0/w1AHNwzHuO0QmejJe/iyBcVQhTUN
+	sKwf7lPQU8Nipa3+TJEP2RxfTUNLQ1HmDHMcQShQreeAbcKbcA/uTj+GAdC2tvWqR+zxeFU0K8K
+	UgtFq01mJ3xDWl3O74+YuJNCsCrknwMhovW2c7d5g0jnEgp9P8=
+X-Google-Smtp-Source: AGHT+IEkrAWGM+3cl1kfBoqn6ofwrPWBVkc5e4f1q6T/pKsAkq+jW7ceYpIwPILOoP8MRX2/msexbA7Q5IZhTu/R//I=
+X-Received: by 2002:a05:6902:120d:b0:eb3:805e:1154 with SMTP id
+ 3f1490d57ef6-eb3805e18c3mr769468276.20.1758740769955; Wed, 24 Sep 2025
+ 12:06:09 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python][PATCH] python3-pyproj: added native +
- nativesdk
-To: jan.vermaete@gmail.com, openembedded-devel@lists.openembedded.org
-References: <20250924185113.40093-1-jan.vermaete@gmail.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250924185113.40093-1-jan.vermaete@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250924185113.40093-1-jan.vermaete@gmail.com> <074adbe8-13f2-4d67-b804-2730da9ebd11@gmail.com>
+In-Reply-To: <074adbe8-13f2-4d67-b804-2730da9ebd11@gmail.com>
+From: jan vermaete <jan.vermaete@gmail.com>
+Date: Wed, 24 Sep 2025 21:05:59 +0200
+X-Gm-Features: AS18NWDZ69PWyP4JgaVV0asofwefc2OIJZlOH-2BI7UE3EJdxr5P64tYCiKM6pw
+Message-ID: <CABF_=yjAHVnPJyNTxQ82WE8brf3Tsk2zGits2SmTty2K4ty=Ow@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-pyproj: added native + nativesdk
+To: Gyorgy Sarvari <skandigraun@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 19:04:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119833
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 19:06:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119834
 
-On 9/24/25 20:51, Jan Vermaete via lists.openembedded.org wrote:
-> +HOMEPAGE = "https://pyproj4.github.io/pyproj/stable/index.htm"
+Sorry, yy build server isn't connect to the internet. But still my mistake.
+I will added it to v2
+Thanks
 
-Typo: a lower case "L" is missing from the end - in this state it's 404
+On Wed, Sep 24, 2025 at 9:04=E2=80=AFPM Gyorgy Sarvari <skandigraun@gmail.c=
+om> wrote:
+>
+> On 9/24/25 20:51, Jan Vermaete via lists.openembedded.org wrote:
+> > +HOMEPAGE =3D "https://pyproj4.github.io/pyproj/stable/index.htm"
+>
+> Typo: a lower case "L" is missing from the end - in this state it's 404
+>
 
+
+--=20
+Jan Vermaete
+=E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
 
