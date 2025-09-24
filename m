@@ -1,125 +1,97 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 506C0CAC5AE
-	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 18:20:10 +0000 (UTC)
-Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com [209.85.219.173])
- by mx.groups.io with SMTP id smtpd.web11.21590.1758738009901565185
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82D4BCAC5AE
+	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 18:51:30 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.web10.22224.1758739881222412631
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 11:20:10 -0700
+ Wed, 24 Sep 2025 11:51:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LL/DKXD/;
- spf=pass (domain: gmail.com, ip: 209.85.219.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-yb1-f173.google.com with SMTP id 3f1490d57ef6-e96c48e7101so133717276.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 11:20:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AfFSgjt6;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-45dd513f4ecso745465e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 11:51:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758738009; x=1759342809; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YHGYmAwkFB4bIUmHTO/yubF6YOd/qzBd3M9pbpLwHV8=;
-        b=LL/DKXD/glJGqMr05CsRlW+ol8AlEbx9fjnaB+tOQoePpC/HEdsKQlw6YFHhcX3ZxT
-         hvhhJp4xE7dl8OZtof2yakN2MfKbIrilDBFSi0yFGo/KCaUy1eb02sxC0ag75ppaF/W+
-         x0iXP/t4HBDqaSBe1E1obejabcYZ6wo2TwD6smioYWPsWzt0An0qDr98mTPB//BSQvl7
-         SepV4ytEGk6e6h3YJXACACBIv+7CJpTkxD+bscpSa8SHRQIBqdPMOUYR+rpdeDzAranX
-         GJTTj0mn37wVPZbDFZJvqTg9myxni1N62xErCxqwy7D0C3fBwHXVmbPC4A16lEnQGJF4
-         ZM+g==
+        d=gmail.com; s=20230601; t=1758739879; x=1759344679; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=sh2ictKk4+5T4mH1D6j+5V0LAmMFqYc3YecOZPMpGXU=;
+        b=AfFSgjt6r3lPJ03yyRcXWZ2YSnIm2JB69HykBYg/eeGej7zU2REfxFZwHGrPXvABKl
+         qIHxBYgcYmXdAuH6GnRyxliAIa/d0EJ1zOl0f++eEIt35X455Q5Uz4k74JnB1SYk/8+b
+         OWFQZjVa72TeDy1cre7mckxXhrQtgAm+GvoBEMh+AzukPAHng+D58km/ZBBnN8he3AK+
+         meq7iGhWWOJDxFrwA3kssfVDWLxZlqMjfqABnFE1YvCASVP4b92LEArAaDY30iVJM5vd
+         EfY2PwOxTLHbUvefx1ZscsNLbVfdBwIE6unrh55XO921WSxm4VkbGDZZlAwCIjNW4X+H
+         RbEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758738009; x=1759342809;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YHGYmAwkFB4bIUmHTO/yubF6YOd/qzBd3M9pbpLwHV8=;
-        b=MBqyS/TxmRjlUc1b6wTDhyhbfLzL3/7YeRWmh6PMHocz6bXs42mAybFQsmJHz2dAVa
-         9XQVetImxQG10q82Cxj7Xeu0AKRXhnlagRycDfUQZg07g/wRGfaMIHvKJ7Wq7DcIuFF+
-         pv0amfDQ4HGe46u4M1I+nocpyLCkuk6SwJ/ujf2kuHjkPBtcqBGPb7a69mdMTTy5jM7i
-         k26sNNsbKRB5suZu+gzjNouN94VRwavQr1fg3V1cNwaCe39zYqGMtZiwig47xUf+3pPx
-         TJP1cmjlgF/G0NUzr01hLU3tUW17jQ5kgOirZK73ieTQzxNz/Sny2zVe0tU47qpLfFLf
-         vtqQ==
-X-Gm-Message-State: AOJu0YwZb0IIEIlhgFzbIbkGMv+nGv5X8ewWBjg/Iw2gJL6FZGkC4JoA
-	uW0bfvTGkOsRB4RrJKeQlLCBf9cNovwdJz5etEUSYlNwcDmMN2Lb5Baj2bEDsO0Pf6iGd3/WNwj
-	LgCVcNQdh6amCilIVBxtwvWC9zhGUlIg=
-X-Gm-Gg: ASbGncvS/NTkKjjpM5zMmvGADqeLeRzXGux+6TzD2I0R01+xqSQKk5/otivPi0u4Nym
-	YV0bcL6X70In+NT+Wszs4+Ugz5EPLRKyWanHM1gTXvNXZ8LtKWQK4MQih7eYvYL9mNORrfU2W6J
-	RtOUaaCOFnuu9Lk1K631DhmPRl3mwUyoH8FA0xoEcnlIq59Q1OI8DU7P3akiNQxvw6Phvg7lfu+
-	1fX1YdQZfkfYbmihzaN4RMdInpBCbvnNcHeqZMWjpcSh6oLAAFJ8rKMgtiZ55qZuxrpm8QC2nOe
-	x35Y9sYBKvjoaaV9yM2VuAs=
-X-Google-Smtp-Source: AGHT+IETnJuTkbl4O4gdJpI/b16Jj3yrubjgl6eS18M8q5a0RazybztZL8QsUK0XnRSdVqKuh5+AsEGxXuT/VsU3bXE=
-X-Received: by 2002:a05:6902:6b09:b0:e96:f737:774 with SMTP id
- 3f1490d57ef6-eb37fc109f1mr943103276.18.1758738008824; Wed, 24 Sep 2025
- 11:20:08 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1758739879; x=1759344679;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=sh2ictKk4+5T4mH1D6j+5V0LAmMFqYc3YecOZPMpGXU=;
+        b=fRBuJhLg4P++tfXWRSXxqwmmSnd89BmJ3YQkLmzOpkV/Y532NE65QZAzDWYzCLnva6
+         7JNn1kgyQx1Y3PImgKUWwe7kompkiV2YWmIlFXvgKct45XJH10Ia3MBXRJuKm1BKGe07
+         iIfGCa2u8wNgBa+v6ZEPckEH6HuEdp1e48Z2MnVx/Jbd2TUin1xF0lnNEUpLn6aHorQm
+         TnobfbLLAx/G6fkxS9cYr5AlrsZGYGjJ4z5vbEux6oLE3A3Dp2EduwNF4crUyq/69EdE
+         TsWR+izZsUPMGJ/UbLf6Jj0kkD8R0O1mQD8aLJdiURpfwOl9vannjV8MnsExEnB2Ns8E
+         2ZxA==
+X-Gm-Message-State: AOJu0YysEF+92SisDnTpMXM+vMIdjKaPu91UlJrEIMU3dKD2amyksYpT
+	C1HFTdxqDDcB0576zuH48nNk8sTwt9vNT27zFLc6OtknhvI0azfLRgzsiuuc+A==
+X-Gm-Gg: ASbGncu3w0ZoE6gmperYBdVwSjEB4Q1q7N2xX6UwTSh3A9WOAojUaWdBnQtgHwM3Jh6
+	kcMyTfvl1VSZw1dcFGQ3Fdev4pDFwf+oIn5nw5rJEr9xp6uJbYK3JmzFl1+hsS/9o1PjmEGC6ss
+	/oUAfkoqk+v89wBOO2sb8q011LOFp1bgHCQnaTwrP6QVRVwxK9nUuKoND2a/odvIsl5Q3a0+fev
+	QR3B+tYU7ZjzqobbUXSjW7xyTfo3KeWEfQNnX5pP9h9ffBmC+XBkiflfroFh1wwZWnwb0xbYdVC
+	HvLBEI5dTbMjaX+/z1RhxeIotfBTCz4+ika48IoTVQGiJFvnd8lyV2BymdbSKbjSz5InZDIIZEf
+	hPPq66zV5INh+ceInx5CohMa4zRs1pxtZA70FG1DXwmq4Qok4fVx3EUhB23zMq+TnWWJVTDa8JT
+	hV9StwkEmYMcXVldvSCqFmcNwk6rPkT6yGVx3NfJZQqhZCvCTe
+X-Google-Smtp-Source: AGHT+IHDqriGkzJzHDJdYmg3u6xqTtTmdDhwwyuHUJ/fg5fM5NlpDtTkE8SwalCgaS9ZINjq4IzZug==
+X-Received: by 2002:a05:600c:45cf:b0:45f:2c7c:c1ed with SMTP id 5b1f17b1804b1-46e3299eee3mr7835165e9.2.1758739878899;
+        Wed, 24 Sep 2025 11:51:18 -0700 (PDT)
+Received: from localhost.localdomain (2a02-1812-512-2c00-5cba-763c-2ed2-f98a.ip6.access.telenet.be. [2a02:1812:512:2c00:5cba:763c:2ed2:f98a])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-46e32b4db71sm3122865e9.1.2025.09.24.11.51.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 24 Sep 2025 11:51:18 -0700 (PDT)
+From: Jan Vermaete <jan.vermaete@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-python][PATCH] python3-pyproj: added native + nativesdk
+Date: Wed, 24 Sep 2025 20:51:13 +0200
+Message-ID: <20250924185113.40093-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-References: <20250924122839.4184719-1-skandigraun@gmail.com> <20250924122839.4184719-2-skandigraun@gmail.com>
-In-Reply-To: <20250924122839.4184719-2-skandigraun@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 24 Sep 2025 11:19:41 -0700
-X-Gm-Features: AS18NWCbTBgs_K_eQLJsIqVNXVMTITnKH2BvEJb7fDlxYs5Ue91v9RHZuuiej7c
-Message-ID: <CAMKF1soKbOp3+p=+P9oPwL-2am4Fz3YBB5yNvd+Q+=B2Ka6+5g@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][kirkstone][PATCH 01/20] gedit: upgrade 42.0 -> 42.1
-To: skandigraun@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 18:20:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119828
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 18:51:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119829
 
-this sets looks ok to me, Another question I have is we need to keep
-an eye on scarthgap as well and ensure that versions in kirkstone are
-not newer for a longer time. Folks upgrading from kirkstone to
-scarthgap will have adverse experience.
++ homepage added
 
-On Wed, Sep 24, 2025 at 5:28=E2=80=AFAM Gyorgy Sarvari via
-lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
-wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> Changelog:
-> Translation updates.
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit e0462bfb13d571e8ee55b5cff2d0fca7aee98393)
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ---
->  meta-gnome/recipes-gnome/gedit/{gedit_42.0.bb =3D> gedit_42.1.bb} | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-gnome/recipes-gnome/gedit/{gedit_42.0.bb =3D> gedit_42.1.bb}=
- (91%)
->
-> diff --git a/meta-gnome/recipes-gnome/gedit/gedit_42.0.bb b/meta-gnome/re=
-cipes-gnome/gedit/gedit_42.1.bb
-> similarity index 91%
-> rename from meta-gnome/recipes-gnome/gedit/gedit_42.0.bb
-> rename to meta-gnome/recipes-gnome/gedit/gedit_42.1.bb
-> index 5bb5525d53..e2bbf1889f 100644
-> --- a/meta-gnome/recipes-gnome/gedit/gedit_42.0.bb
-> +++ b/meta-gnome/recipes-gnome/gedit/gedit_42.1.bb
-> @@ -21,7 +21,7 @@ inherit gnomebase gsettings itstool gnome-help gobject-=
-introspection gtk-doc val
->  def gnome_verdir(v):
->      return oe.utils.trim_version(v, 1)
->
-> -SRC_URI[archive.sha256sum] =3D "a87991f42961eb4f6abcdbaabb784760c23aeaee=
-fae6363d3e21a61e9c458437"
-> +SRC_URI[archive.sha256sum] =3D "7f1fd43df5110d4c37de6541993f41f0fbc3efc7=
-90900e92053479ba069920e9"
->
->  # gobject-introspection is mandatory and cannot be configured
->  # x11 is needed for tepl and gtksourceview4
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119804): https://lists.openembedded.org/g/openembedde=
-d-devel/message/119804
-> Mute This Topic: https://lists.openembedded.org/mt/115410718/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+---
+ meta-python/recipes-devtools/python/python3-pyproj_3.7.2.bb | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/meta-python/recipes-devtools/python/python3-pyproj_3.7.2.bb b/meta-python/recipes-devtools/python/python3-pyproj_3.7.2.bb
+index b7e6646c97..8546d1e8ea 100644
+--- a/meta-python/recipes-devtools/python/python3-pyproj_3.7.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyproj_3.7.2.bb
+@@ -1,5 +1,6 @@
+ SUMMARY = "Python interface to PROJ (cartographic projections and coordinate transformations library)"
+ LICENSE = "MIT"
++HOMEPAGE = "https://pyproj4.github.io/pyproj/stable/index.htm"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3f3574263859ef2dc9bd7817d51adbaa"
+ 
+ inherit pypi python_setuptools_build_meta cython
+@@ -21,3 +22,5 @@ RDEPENDS:${PN} = " \
+ export PROJ_INCDIR = "${STAGING_INCDIR}"
+ export PROJ_LIBDIR = "${STAGING_LIBDIR}"
+ export PROJ_DIR = "${STAGING_BINDIR_NATIVE}/.."
++
++BBCLASSEXTEND =+ "native nativesdk"
+-- 
+2.47.3
+
 
