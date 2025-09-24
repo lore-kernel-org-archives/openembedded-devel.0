@@ -1,80 +1,97 @@
-Return-Path: <mikko.rapeli@linaro.org>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA242CAC5A7
-	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 08:07:34 +0000 (UTC)
-Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com [209.85.208.170])
- by mx.groups.io with SMTP id smtpd.web10.7404.1758701250628718487
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4168ECAC5A5
+	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 09:00:45 +0000 (UTC)
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web11.8224.1758704438635832559
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 01:07:31 -0700
+ Wed, 24 Sep 2025 02:00:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=o0eIkxot;
- spf=pass (domain: linaro.org, ip: 209.85.208.170, mailfrom: mikko.rapeli@linaro.org)
-Received: by mail-lj1-f170.google.com with SMTP id 38308e7fff4ca-368348d30e0so33339221fa.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 01:07:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1758701249; x=1759306049; darn=lists.openembedded.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=aL8rqdZZRFWI/tk59I6CZ6n0N2XRZN73y4dR0JZRIMo=;
-        b=o0eIkxotZ9KF/TD1BUZ6YuCmZjHrqCv14sLgORBiPyVuAYw7KujvTnyhsIOPV/I+6F
-         aPF8Yn9QQAwo+KziSY9ZtUpNTaRM8k85h4qzD/YYxvkr2rt0jsUeD7VtxOluGuHw0mx8
-         n9iNlOvRTVDcFaX5bVKmYJcNmj7vsKvXTemPu+8yF4i3oKKR3FbbJf0Eue/SaxghlZ5X
-         T3EkX0TQwNppfwri/cZgNZn3ZsMBk49MwSsxkKTP43ZUUehvQqjZcfrSX0gGPSweaMhs
-         V3FvbOgMlntR0gyxCKmAepdjNuoUilwaGZ9SaircLpSFoG6sFUB2stz57fgvowzzSaBv
-         g3Tg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758701249; x=1759306049;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=aL8rqdZZRFWI/tk59I6CZ6n0N2XRZN73y4dR0JZRIMo=;
-        b=wxU28aPcSL7XbgCj3CSSg8PDNZpXM9FKfEpcgmCp3HqvmAsTrDpcM+bHzS59M4kmEy
-         oFVaZFOWeZ+9V1L3XbCxjWwlDeXC4pavTcCC/A2RVh9KMsU+SE/YkUuy+9NBfLc50m81
-         aao+JOF5n36tN33vST88W5G9E4oQoBIIWSQXulgvPA95QeHig77QfNUG4Cw0fZqzqHV7
-         jBIx25/lJS5ndFmhXKdm0pQi15XO5+BbvgphiSC/IAdQOQgJZkIPmkwv3YowEzF9DEBq
-         0Jxyp9USMX+lo5lERDnEA/h81zCxeMsqKYmo3109wRDuHZ595QY90TSWUKBkbyqH3R/r
-         CWLw==
-X-Gm-Message-State: AOJu0Yx8r0QYpiruvv4f14pmetAY6N1W7QLp7bSHAo4UY/WWPWG1Ve0u
-	I+AlSkvArftJnAiLJjf2AsAr9yEje8mS3A5uCAIIw1nc/7iLHLnIbXfBfu2oRkUBu2Q=
-X-Gm-Gg: ASbGncuoGVN+7zQSOn0EgtM/K+eMuul9G2upQRJjGilgMD4SHFuVYnWfsXJ0iwOsxpS
-	EPiSNWZpIMmo1z3vlxTBjF2AJMkSwMSWDanhleB9wtb0eeF9YpAjHK6iryherA42Z7Jhy6eFiZn
-	xHr6fOt/LGZeQW+4ddv6U5kBoTSZun5pkbdwTArpsn0toVJVtuAk0igaGAQcfEsWJ6bgqEe3I6+
-	cya+Fp4jEfJnwGsbkVCqtbcueiCL/qAwzpewOl/Y17RXrRh/Kwq/CjGq4BVZz843VJMZA2rqpwX
-	5Zk9eJCX3UlKtACGx/2v6P0726ux2n4NIVLjabmrNd16pSgIygisw7lvpye6v99DcHWmBvgpmY5
-	P+S6hD+hnaJmAMuogOIBTpqC79fvYwlWajqdDoJxS7ylkCzwwSh84xPNf
-X-Google-Smtp-Source: AGHT+IFHlIIizoJ+yqtLpI473mhcRnBQ701E/3ctMN/p05rSwTuPakxEhyKEuw02q/FlN9KE1FfibQ==
-X-Received: by 2002:a05:651c:20db:20b0:360:7f42:a99f with SMTP id 38308e7fff4ca-36d16bf79b4mr15355911fa.22.1758701248715;
-        Wed, 24 Sep 2025 01:07:28 -0700 (PDT)
-Received: from nuoska (87-100-249-247.bb.dnainternet.fi. [87.100.249.247])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-361a8f564a3sm42623761fa.41.2025.09.24.01.07.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Sep 2025 01:07:28 -0700 (PDT)
-Date: Wed, 24 Sep 2025 11:07:26 +0300
-From: Mikko Rapeli <mikko.rapeli@linaro.org>
-To: ankur.tyagi85@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe][meta-oe][walnascar][PATCH 0/6] cherry-picks from master
- branch
-Message-ID: <aNOmviT5mxV1tTKU@nuoska>
-References: <20250924075643.2047506-1-ankur.tyagi85@gmail.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=JlYj+GrZ;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1758704438; x=1790240438;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=7fp6RCgcOYHxMcJ3pKy6OArvrS9xwO0NlVKqYaOYvbo=;
+  b=JlYj+GrZydnBWA2XNaCIcN5LjfLZ6FMaSBnx61Zgz3Goj55ivDnlkgtU
+   Nohla9QR0YeXIpiSMeZgJDf0atNMnmpLT+rWj1pqSW0Wif2ZwAIcOX/sc
+   iduPzGfXSdQ9cmVtpOGLHBwoyCkdqt+8zff4tId7HuzW9OwOqXP5XjAaB
+   4c/3HF1Vj5yZ9DmRUVdp097vQubl5UkGQhtSPkt6BnPFHG8bVytXB1zuL
+   EreglZT6/u1n/5tOD/gRGM3yA0gmO3Az8qDoUD3qAunb7EtHa9j5cPPEX
+   FADy+uJY7+ZRXJSzsX7QWBqM+lC9sMRGHDDK+V6Fz5VvNQTZC1UK19oPR
+   Q==;
+X-CSE-ConnectionGUID: BnxqXUsdQ8+Ucmx2UPml4A==
+X-CSE-MsgGUID: iRK0Wt9sRWiwu0/XAHPyxw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11561"; a="202273831"
+X-IronPort-AV: E=Sophos;i="6.18,290,1751209200"; 
+   d="scan'208";a="202273831"
+Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.128])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Sep 2025 18:00:37 +0900
+Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id DED56C00219
+	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 09:00:36 +0000 (UTC)
+Received: from az2uksmom4.o.css.fujitsu.com (az2uksmom4.o.css.fujitsu.com [10.151.22.204])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 9C376C02456
+	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 09:00:36 +0000 (UTC)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
+	(No client certificate requested)
+	by az2uksmom4.o.css.fujitsu.com (Postfix) with ESMTPS id 1DB4B402604;
+	Wed, 24 Sep 2025 09:00:35 +0000 (UTC)
+Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 332311A0069;
+	Wed, 24 Sep 2025 17:00:32 +0800 (CST)
+From: Wang Mingyu < wangmy@fujitsu.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 01/29] btop: upgrade 1.4.4 -> 1.4.5
+Date: Wed, 24 Sep 2025 17:00:01 +0800
+Message-ID: <20250924090029.1786-1-wangmy@fujitsu.com>
+X-Mailer: git-send-email 2.49.0.windows.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250924075643.2047506-1-ankur.tyagi85@gmail.com>
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 08:07:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119763
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 09:00:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119764
 
-Hi,
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Please take "fwupd: set vendor_ids_dir" from master branch
-as well to fix build issues with fwupd.
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ meta-oe/recipes-support/btop/{btop_1.4.4.bb => btop_1.4.5.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/btop/{btop_1.4.4.bb => btop_1.4.5.bb} (93%)
 
-Cheers,
+diff --git a/meta-oe/recipes-support/btop/btop_1.4.4.bb b/meta-oe/recipes-support/btop/btop_1.4.5.bb
+similarity index 93%
+rename from meta-oe/recipes-support/btop/btop_1.4.4.bb
+rename to meta-oe/recipes-support/btop/btop_1.4.5.bb
+index 2d187c18a8..0455da384b 100644
+--- a/meta-oe/recipes-support/btop/btop_1.4.4.bb
++++ b/meta-oe/recipes-support/btop/btop_1.4.5.bb
+@@ -6,7 +6,7 @@ SECTION = "console/utils"
+ 
+ SRC_URI = "git://github.com/aristocratos/btop.git;protocol=https;branch=main;tag=v${PV} \
+            "
+-SRCREV = "0f398abd64febfbc5f2115be3156682f47308f48"
++SRCREV = "a1099d075fa914452366b28c67ff171e21a1f02e"
+ 
+ 
+ inherit cmake
+-- 
+2.43.0
 
--Mikko
 
