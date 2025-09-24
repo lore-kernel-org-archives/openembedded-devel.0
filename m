@@ -1,111 +1,150 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 07783CAC5A5
-	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 20:22:51 +0000 (UTC)
-Received: from mail-io1-f42.google.com (mail-io1-f42.google.com [209.85.166.42])
- by mx.groups.io with SMTP id smtpd.web10.24373.1758745367207652525
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9777CAC5BA
+	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 20:26:40 +0000 (UTC)
+Received: from OSPPR02CU001.outbound.protection.outlook.com (OSPPR02CU001.outbound.protection.outlook.com [40.107.159.11])
+ by mx.groups.io with SMTP id smtpd.web10.24483.1758745592239616650
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 13:22:47 -0700
+ Wed, 24 Sep 2025 13:26:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eCLmrYq7;
- spf=pass (domain: gmail.com, ip: 209.85.166.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-io1-f42.google.com with SMTP id ca18e2360f4ac-889b846c314so13088639f.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 13:22:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758745366; x=1759350166; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=dsibLesPgNWU7qg5fMr1ofsp46H4lIGqs0KpjX80pfI=;
-        b=eCLmrYq7dS9igGCgLTbwstTvyzSXNXIUS8A7isEn/puAEaJH8/OTah0S6BfE5tGMb9
-         NcHpryyMSuqEMYNHNxZ7YblaflkyH3lgkHPo6DJMNclLVM2YUabZ7CbSsKiUcdwnE2/v
-         HqRPYCH/B/wxluAugTxJVPl65g2Lm4qSuJwmLgz7RrLwVByqOPjO3Vea9SoBJNnwbgEA
-         huduKeS3rZcuCM01LIoCQugextYBXuh9jvFccyuhn0cjPQV/3XUebHcyRE9wDWnxdrbs
-         IbW6F4pTQXxt7c2fnfYgXcfx40N3f/XqaJK9q1xHe+rYVkhrWfYlWktng7X7xunx/eRQ
-         yX9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758745366; x=1759350166;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=dsibLesPgNWU7qg5fMr1ofsp46H4lIGqs0KpjX80pfI=;
-        b=R1A2DTFbOdbCz9zJVfcS2OzOA06IC6fcWrT4qkLe7mFIppMZh1db7k2cIg/BNQiQ1t
-         9eBYPC32SgbRR21UhBZ3tCtSJnDasfftML8US8JgNXVJgs5xvfoQV+Y2nyecZ6aDYkfu
-         zeH2uE8Mc6845Ch7Wx3aUncwup3qxCOSuc6qIMyhfY2TxhlfvpzS+nl6zueveYX6d1m5
-         /zckaUajsj9u7eWHKazRkeaPHNDsoVHBhSLdCUz91WZidF8XElftc14NaT67ygkWzqf+
-         DEl5A2927I+KQC/KBmXWaYzdBNJHGF/sxFcCN+sqV45bDlu7x5BL8MMEJ0uyPhO4coFs
-         FNUg==
-X-Forwarded-Encrypted: i=1; AJvYcCUdB2JROdBvA4ULnL65PbEY2MxsEnI0iDCL4t5RVVl97FJBzDXGiZ0NSYoHdv8+pDL1fQNIldxlClqzR2nrPwmMiYw=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yyjsyx55q9frbp7qw6Hmosf73yu4Y9agcP/Knduv+Dheji+J+id
-	K0bsUHCO0H39tIT2mzAk1jp+r0O+xUBzvZjUygAp756nxrazjAdgRfA4
-X-Gm-Gg: ASbGncuepyf3Q771wb1TNvkwIgNen9UD6RrftgsPUVMIyNUvj2cFv+lZ1qPj9JHBUjR
-	0T9usaigFLfWRtB4neU32o+oCtaBowDhFQhoA2d4Dis4rbca3PmZJk3QJagaiZrNpVRD5YaOLAp
-	9esdNV2sJfCKVYRNCZ7XjCxsnfqIgg7n0HsWNxNAAxJbLBwrEK7Cv3LvgStnVxqjMc2bZUTmvAY
-	ko7LjE7fhF8F/WJo9XT/PfGS+euw1YLhViNn4RJK/a4mYzaEF+uInj/l3p8/YU8KBxzNSFO3SDX
-	ohPzo5Sbgh4A+9Fu+xX95YqLvP2ZUogly5QcxArLqelc/JWiRfskPeqgr9kOZa62ktZ5BA76b2v
-	GEx7tP1qhGyfCfF8l7JaW7SdbiYmX1d6T5ON/6SOYquKws6bDsR4vCzAUjftCtM5vZMel38vbme
-	V69r45i7RnEMMi7ZUw3ptnHKb3mpaeWsd2gDzeCCBIAxU6ghOe5ArNPaGr1YZosyi0aNXGWGNtp
-	+N8VKLeNOz0CA1eim8HNcpjnXq9GxY=
-X-Google-Smtp-Source: AGHT+IH5g+ebCvB0C+D7eEOkjkhv7eirnHCrdTrWIZK+HZlf2vKAF35iNQfJ2Vy0brP/uE22pgwiJg==
-X-Received: by 2002:a05:6602:160e:b0:86d:9ec7:267e with SMTP id ca18e2360f4ac-90150945249mr183748939f.4.1758745366357;
-        Wed, 24 Sep 2025 13:22:46 -0700 (PDT)
-Received: from ?IPV6:2601:646:8201:fd20:289b:c5dd:de6c:a09f? ([2601:646:8201:fd20:289b:c5dd:de6c:a09f])
-        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-56a65463b89sm66056173.24.2025.09.24.13.22.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 24 Sep 2025 13:22:45 -0700 (PDT)
-Message-ID: <3b73ef9c-29eb-46dc-bf50-e1a9da9fa620@gmail.com>
-Date: Wed, 24 Sep 2025 13:22:44 -0700
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=S4m19UUE;
+ spf=pass (domain: axis.com, ip: 40.107.159.11, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=INHlVLXWuSdeRWG7EPIGcx+AvJihofQlPFz024xyDGtWmUWw1sLYfq5HVbCIWEeR0/9inOlWxfFOpzJNr+ZXdBoFt2YtrzvT1ETDCfBeuSLUTbGFciuGpIgb9kasNHjkVeAu4BWHG7bIfuQBKufbRd5K/4I7ETKtb51mfU27xb0GL8LHl/Wkey1XG6AQ5cim4pn4E4Kfe8DhydGGJs+rgphPYrAjzzzg3sMnlYuanrmxsTGRDuMJUH4jRMhnYIDws9ZBwlSsxd8mkqx02bgMtwiV9Uy64XMT4ydygUMo+AkF/t6LG8IDsZvLEOWEayCPzCkJyzisK1bwYwf535DzWQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=54HNf+gsv5GfpujLKSNiQEkkAw6uJo9tGmHIhFu1QZw=;
+ b=BWbqID/yrJuBTjCgJtBkMo6iFZK4DT9zUQUuBvV5PUvy6yBWcBW8ZSJwAxqD9cG8Y6aKO0mitb6Tsr4Gx7hzZHQsw3ArC/n973bTGxs6mwaT5bP8b/iFY6Bhyn5BhLuYIOlfYMAo/SL5voX/qN3nESQztM3fxP2retFtevUdTheYOWh0k3a4ywhEEnZlstboLMxJfkk0M9au9d7AQwdRtSHzOCL4Y6RQwrRqCD5agZKC4AGse9NmHa+rdNjp56g1jUMHmA5/RDcs0KsK3MYLPKmbE1285xrOdepjak8k60kTgPCmlgpemJzvUmHHwulQCgxA3JZq6L/ngsqoh/zaKA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=axis.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=54HNf+gsv5GfpujLKSNiQEkkAw6uJo9tGmHIhFu1QZw=;
+ b=S4m19UUEHh86A2rfnJsBPufKgSNR3moS+UlujSKwgKQLYf9uh9aB/VIwpNsVxC5zzPpkZilpA4ybAxxU1uKjRSMsfjJE7t3xnNy2TP60jY8zqKag/trxypAB0u+/AKdQ5FXQIDOipLXOyfugQZ259EqHH6FtMp5VWdTqNsIHerA=
+Received: from DUZP191CA0051.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:4fa::28)
+ by AM9PR02MB6977.eurprd02.prod.outlook.com (2603:10a6:20b:26c::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9137.19; Wed, 24 Sep
+ 2025 20:26:28 +0000
+Received: from DU2PEPF00028D04.eurprd03.prod.outlook.com
+ (2603:10a6:10:4fa:cafe::d7) by DUZP191CA0051.outlook.office365.com
+ (2603:10a6:10:4fa::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9137.22 via Frontend Transport; Wed,
+ 24 Sep 2025 20:26:28 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
+ smtp.mailfrom=axis.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=axis.com;
+Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
+ 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
+ client-ip=195.60.68.100; helo=mail.axis.com; pr=C
+Received: from mail.axis.com (195.60.68.100) by
+ DU2PEPF00028D04.mail.protection.outlook.com (10.167.242.164) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.9160.9 via Frontend Transport; Wed, 24 Sep 2025 20:26:28 +0000
+Received: from SE-MAIL21W.axis.com (10.20.40.16) by se-mail02w.axis.com
+ (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Wed, 24 Sep
+ 2025 22:26:28 +0200
+Received: from se-mail01w.axis.com (10.20.40.7) by SE-MAIL21W.axis.com
+ (10.20.40.16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Wed, 24 Sep
+ 2025 22:26:28 +0200
+Received: from se-intmail02x.se.axis.com (10.4.0.28) by se-mail01w.axis.com
+ (10.20.40.7) with Microsoft SMTP Server id 15.1.2507.58 via Frontend
+ Transport; Wed, 24 Sep 2025 22:26:28 +0200
+Received: from pc56063-2339.se.axis.com (pc56063-2339.se.axis.com [10.92.3.2])
+	by se-intmail02x.se.axis.com (Postfix) with ESMTP id 06F712E45
+	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 22:26:28 +0200 (CEST)
+Received: by pc56063-2339.se.axis.com (Postfix, from userid 14323)
+	id 292C51202B4; Wed, 24 Sep 2025 22:26:27 +0200 (CEST)
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] dbus-broker: Add a runtime dependency on dbus-tools
+Date: Wed, 24 Sep 2025 22:26:22 +0200
+Message-ID: <20250924202622.612504-1-pkj@axis.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-perl] [PATCH 10/29] libmime-types-perl: upgrade 2.28
- -> 2.29
-To: skandigraun@gmail.com, wangmy@fujitsu.com,
- openembedded-devel@lists.openembedded.org
-References: <20250924090029.1786-1-wangmy@fujitsu.com>
- <20250924090029.1786-10-wangmy@fujitsu.com>
- <e437bbea-1399-495e-9c4e-bd11353b5934@gmail.com>
-Content-Language: en-US
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <e437bbea-1399-495e-9c4e-bd11353b5934@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D04:EE_|AM9PR02MB6977:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7f699352-21fb-4ad1-4ee3-08ddfba8a44f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|82310400026|36860700013|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?BX/+H6md5w3n8MV5FCFJC9Pd2rHlpA2VUsz8fr76ih8gdBboz3eJGzbghoSe?=
+ =?us-ascii?Q?kRIXvKQ6rTnHyYLv+5dAO3jsT8LxSciUNfqlC2OS7TuyJ1c7ZH5QUKoBRVYO?=
+ =?us-ascii?Q?5s8p1/e0pcSaiy7BEt5vtOVGKp8HfXSHm/ZLovnQgWZBimCqIAusoDKYRZj3?=
+ =?us-ascii?Q?HXs7Gh7Y5mw/kwL0Wiofu0jMXnTM3NEX+bXB9STM/tDLkSsWkx2LbGPkxMdW?=
+ =?us-ascii?Q?WuG/W30+FsUb9Xx919qH9cOmmj78FDz7fnAB3zUZd4MnWn9+cO3hFkf4rEqi?=
+ =?us-ascii?Q?5+NYWOMDzixdg9FUJKLxvPM3F6UmgMk5RaPgXoczYnukdG1k3lbv6wqgxNr0?=
+ =?us-ascii?Q?eK31+vGpbFft47r9Y3BB8jtuzfTVTx+CCc813hNvKSefk1KOd3mWeLxgNDKD?=
+ =?us-ascii?Q?N3KGe2bMUaqxmZzp66L44Jv34gl4lHeKXhQA4EgfkBnZqoaj7T5WNToPOtEQ?=
+ =?us-ascii?Q?nOt+0Des9fDKR3j5OddHjbc6MwRtvitgE3dm2GHpoSWfBx1EjUeo+f4O3XTy?=
+ =?us-ascii?Q?KC1ZES5Joa3T9ifQI+FZdLlUeV6EePFXSvFrje3TsUwf4jZpmMh/hTVjCsHF?=
+ =?us-ascii?Q?RsuSSR8AnGUTa9seGSDj0m1tOKiILPOkZw2QhS8u8EB0wKCxp9fOTFyp6oFw?=
+ =?us-ascii?Q?oUMoAMhkr7dt0frk6jaZYrgAHy+KU/fNsyMw9yPnQd0IAAGEO63SJxReuAiX?=
+ =?us-ascii?Q?iD5TfjFpQleAUiewzhkpxEbtr8ajqh1GvqURX0/x/TZxSvgJTU0cOqlwGMhd?=
+ =?us-ascii?Q?hfOm/LtPSlJeYK4Cdnt5ADINwkRUMyxRfCZawcD2lNSVKf/aeuqCK16vNXsX?=
+ =?us-ascii?Q?DkJdyCB43CSEZHNskQeFzMehf4NL36ufGEacHk6kEU8zeq+zrAj4J68OZ++X?=
+ =?us-ascii?Q?2cRLbxtF3cjptjbvJqxc4frBgK5g3oPpA5QpMwO/tq7wD0JusIhNAvd+3rxx?=
+ =?us-ascii?Q?YTrf0pYN8XArbzMqyzL9bR6LYupwXS0y03+CJmil5tj7KXAkEYZ3vHeL+bPe?=
+ =?us-ascii?Q?jSrhQZnqOlthOm3jpddPNi9N56VHmgATHhCU21mM/sSl7vaqnaYUB36UYdah?=
+ =?us-ascii?Q?aEkteJcLbe+piN2Y/6fE1KeAldrLweM4JA6aQs7PnGM0piQ5ybbwTzpnlhuQ?=
+ =?us-ascii?Q?zg8JhiwJn7tC4Lixsb2WOZRvOm+xh3OuoSswG4XZJei9oFwIbG807MFO1IpY?=
+ =?us-ascii?Q?/q4VGkcwORUPlLANJB+iab/HGFbGEeYqHXahJEPhSjiG46xtLo6/fT+FuW2C?=
+ =?us-ascii?Q?jShZXuS0+8Du5iSFXflMlFwtM6n6qgj3OHdHnV/hw3YxiF9ANv3xXFR3yMcK?=
+ =?us-ascii?Q?oTijGId4/rUmuOaNi9K0GgBVzrDWUCBJc3WYBUIp4uRJ2SSo4iyxFW1xuEan?=
+ =?us-ascii?Q?NkpFzpHJ3KJtOvuIKkXg4HH9/vdT7cgMkTE783vZzwE3bO7xjP8Tir5CxxpK?=
+ =?us-ascii?Q?T1wdhosjk0+Tde/lvnR8DITzVUWSuyRlZayvTmOaWS/NjpPmw7TL1L4I+ECU?=
+ =?us-ascii?Q?K2dWsE0nFBuKWLAd7fp/BarKP81MAfik7BCj?=
+X-Forefront-Antispam-Report: 
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2025 20:26:28.5672
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7f699352-21fb-4ad1-4ee3-08ddfba8a44f
+X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DU2PEPF00028D04.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR02MB6977
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 20:22:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119841
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 20:26:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119842
 
+This matches dbus' runtime dependencies and is needed for the
+dbus-broker package to be a drop-in replacement for the dbus package.
 
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ meta-oe/recipes-core/dbus/dbus-broker_36.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On 9/24/25 6:06 AM, Gyorgy Sarvari via lists.openembedded.org wrote:
-> On 9/24/25 11:00, wangmy via lists.openembedded.org wrote:
->> From: Wang Mingyu <wangmy@fujitsu.com>
->>
->> License-Update: add following flags to section build_requires
->>    Test::More: '1'
->>    Test::Pod: '1'
-> <snip>
->> -LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=963ce28228347875ace682de56eef8e8"
->> +LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=d3b01c1228de75a9de9ee0bfb6e0dcf3"
->>   
-> The license hasn't changed, but rather the license declaration has
-> shifted from line 11 to line 13.
-> 
-> Prev: https://metacpan.org/release/MARKOV/MIME-Types-2.28/source/META.yml
-> Cur: https://metacpan.org/release/MARKOV/MIME-Types-2.29/source/META.yml
-> 
-
-good catch ! Please respin a v2 of this patch alone.>
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119825): https://lists.openembedded.org/g/openembedded-devel/message/119825
-> Mute This Topic: https://lists.openembedded.org/mt/115408774/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker_36.bb b/meta-oe/recipes-=
+core/dbus/dbus-broker_36.bb
+index 8c8f2d2469..8959927a92 100644
+--- a/meta-oe/recipes-core/dbus/dbus-broker_36.bb
++++ b/meta-oe/recipes-core/dbus/dbus-broker_36.bb
+@@ -31,7 +31,7 @@ do_install:append() {
+ }
+=20
+ RCONFLICTS:${PN} =3D "dbus"
+-RDEPENDS:${PN} +=3D "dbus-common"
++RDEPENDS:${PN} +=3D "dbus-common dbus-tools"
+=20
+ FILES:${PN} +=3D "${nonarch_libdir}/systemd/catalog"
+ FILES:${PN} +=3D "${systemd_system_unitdir}"
 
