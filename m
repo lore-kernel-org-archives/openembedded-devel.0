@@ -2,101 +2,140 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C42F2CAC5B5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEE1ACAC5A5
 	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 12:28:47 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.web10.11301.1758716923704250098
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+ by mx.groups.io with SMTP id smtpd.web11.11192.1758716922800683362
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 05:28:44 -0700
+ Wed, 24 Sep 2025 05:28:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=glwoB0D+;
- spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-62fb48315ddso9705250a12.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 05:28:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hm+EJp80;
+ spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-62f4a8dfadcso8184758a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 05:28:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758716922; x=1759321722; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=8JmSQWON5JturgKr95Bfs6LLaiMC/oGv9dMzmH/wIi8=;
-        b=glwoB0D+YsEj0fBXrb9jAYqpsmrpgxN2oS36O+SNhDkxTV41+6wIS9ZVckXkhS0v6R
-         oUPU0FuueolZyD/TtmOk5aJvoyfou4I9//dUU1gLPhV6tzztUxkqBilJBYcPW+J5Ipcr
-         cTOToMCmsLKto7iZ+PbZRUaZmvdVHm9YBpx9mE3j2bdq9or3jtGtSfR4QScpfE2MQ1mg
-         eUomKOTAqXundE0tmPHS2DTtjEEIDv+RCnnu+KdpF7ILPhu4BF5t+fJ5TwRol8154m1X
-         vIecRJOUvckypY9JFvp48OC5C/JAEGEk1jiAfhPwhznNBwmgeD/QE9fbO0+VEOdJHTFS
-         269A==
+        d=gmail.com; s=20230601; t=1758716921; x=1759321721; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ei1r098+0rYgnMez3mUNch8qiN0KASBWxhwNztkb0q0=;
+        b=hm+EJp80A+j2bpoMe4WcIGOB3A/AEjpUqF6w1gSMx+aMslEK+M5SOVU7m0xROY3glq
+         6BS5gg1ki5hEZbIkzLQ6Hjs8qUDPsd5zitCgyUxJ6g2BAquisXv1AJ3gNCwowRS7p59/
+         7lhyP0aA/5+p4/RCHUJKolSdSlZmYbbmeT9j6bTjfmBp1aR/UvKRyWm90E4AXPAtlYYf
+         C0TqPjgHaiBzqb06HFEXzbpVLahMg0eGF2G5WV7PRuA1kRC8sWHIZ7fL9jXCVeNqi/4V
+         dl87z4uDy2cOGFIeE7nDZVzIsSyZRQDu9gT0kPocwSwerQCZ3Ilt0FVLGv3MT0U0t9tw
+         TOYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758716922; x=1759321722;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=8JmSQWON5JturgKr95Bfs6LLaiMC/oGv9dMzmH/wIi8=;
-        b=anflpPD6eAiB9WNm+mefe8GeIAegZRWJ7eAdxf3jztM05V2gz9uQxrSQ2AC2XOaa01
-         x6n01p10R+a7eAImyLGLryfzWzWN5RahEuKszzG8G7Acn9CtqC3yvtrQ4ODZujbiK25w
-         hr3rDwjeBxCv6sC0U1+Xob785zPTv1Loi/7y2MDrr7KsPEIZkfdfGAuzSAbyVUA0oFab
-         Gaca+CMPZK6GOgly9UPabTuB4aT/d8btvIbcO/UhA4tFRQ9xIyHjUmRDiswn9gbOhN/W
-         cTrkiRoSoKXYW/nKxr0VGuU9sHwwypGfUSnEJo7zi9U3f6ceRF9t2npXitFR+253ybag
-         GEVQ==
-X-Gm-Message-State: AOJu0YzgXN1IUSMFbda3E5LY8s7NB7+hHNR5hHp2r5RC2dPAExq2f0pD
-	VE2vGbNhlkjlNF/We0aWboC0KNMMAezPksWfn0KhhTHleh9IQgU/F4KtmshYBA==
-X-Gm-Gg: ASbGncsLMswmhjRctN1Tqui8SknweQ1Ujcxc5dVgLNaqnrHC+9yJXHGB5FKN/vS5Rx2
-	015lceY/2sjpQo4Xa9o4c+5ZDEC5gDR7otMbjf1IVVK4hztj7Jd25pTwfF/fKOSoKbQ/lA1aq8s
-	99x9zAsvXAzxFVHCb0jyLg4BLg0njVOJ3VZqySJq2U1zZPcjJ9XzMfMu+oOLlU1uAKGJddxLdNX
-	uGY6Odjgv+7/Y7f1ksgbnMkuUvBDWEZ3mT8veV3ff54C58wqtD1JrNNDVSbAPCBE8NQ8O9Ab5iZ
-	yD9I9f4FAa6di09rghPujpnNApI1D93re0vk4vXZP47IqKHp3E7q45+wYuXfm0SJ0cwKf4LSBqA
-	ur7NC+EHb7HCnX0U1i8jv
-X-Google-Smtp-Source: AGHT+IE53Ymbq+aArYqbJiP9R1JODetClEJkToPQmZsV6CPhcMJ9xeWdgsa0qchH20lWnPfK7raiGQ==
-X-Received: by 2002:a05:6402:520a:b0:633:8c43:eff8 with SMTP id 4fb4d7f45d1cf-63467a15e4cmr5271981a12.36.1758716921952;
-        Wed, 24 Sep 2025 05:28:41 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1758716921; x=1759321721;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ei1r098+0rYgnMez3mUNch8qiN0KASBWxhwNztkb0q0=;
+        b=bSRQIE1RrMWyQZxrI2go3svhd8MV4eEjzx6dyhTpj3yeWyXIrTgKxS9DItrKsu7Lt2
+         hoRnVUbVZRpnDtrMbbhM9UlolbvnlMSbj5zrN7G8US82cTYzeTEle6OOLeDhvuFvXGAp
+         M00rEPguFNEeErQdFq7SxE5B7/SA0v/brcEjgkL/NbQxMgiq8sXRanIxqPnx2URzqskk
+         QNg/vMcxQYUdc5MXiQL+6WjX56lbXz7E/tjH1gXp5Q8Jm3mlVFZxYKITG6qhoLww1hYf
+         QAvCA5kZt8XN62kgh9pRz5N2HDtfZJLXF5ZwQIk++u4RKHmOtl1NssVHL/VUKTnI2ehi
+         G2fg==
+X-Gm-Message-State: AOJu0YwEaIxj06LgQd/4icwFWWY4WxdK2ysHBJ/z+3wwd/KIzMdSW2x1
+	/uHZoV93BBuRZtT8JBx+qG+XC/1UBxKjKwSFFzp6Dxss08y8ZciNNSOHLfkyxg==
+X-Gm-Gg: ASbGncsKirotaq+MnzAacrrxyZ/aNH9j10YAqO4r6IBeS+LK/ZB/WS3Rkd9jT9DYprb
+	WQARYU4uJAKq+uCxD3kxxq0msS9tL3dyIVCNf0yQX3gZmbp/PV4OgBrRe1/2XPKqYQRpJQRUE41
+	HUaVnmFQqyrwE9dSyVOP1uhIol5ygWQUlaf1yzSSbb/kUaFP9UUIs4R9fqoS7m9lP3xOEh32PEa
+	u/huo8iA9+l5eSreY+1CG1xj6ZIOB4aMswHDGrLEjqVG+Pqf/3R2xoHpywGZ6gpn+qyrqUTfxVx
+	Vt1G0aoU2kArNqtaS+Yx+0pxoGsNsXTFK9/ZTuoKd/0vqFjGJXAon+5WR5L+16CCZSucsv6Aj3Z
+	c34ystDUjtq3DX4nb7+nQ
+X-Google-Smtp-Source: AGHT+IEd21URPGs7rwaC9xvnHQRywYrP1wnqcJBsYLfj/FdeIx6iMgDzM5JK55nleaw0DO02tGMHJg==
+X-Received: by 2002:a05:6402:34c4:b0:62f:521f:c174 with SMTP id 4fb4d7f45d1cf-63466e7839bmr5253327a12.0.1758716920758;
+        Wed, 24 Sep 2025 05:28:40 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63469f30772sm3024835a12.22.2025.09.24.05.28.40
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63469f30772sm3024835a12.22.2025.09.24.05.28.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Sep 2025 05:28:41 -0700 (PDT)
+        Wed, 24 Sep 2025 05:28:39 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][kirkstone][PATCH 01/20] gedit: upgrade 42.0 -> 42.1
-Date: Wed, 24 Sep 2025 14:28:19 +0200
-Message-ID: <20250924122839.4184719-2-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 00/20] Cherry-picks from Master Batch B
+Date: Wed, 24 Sep 2025 14:28:18 +0200
+Message-ID: <20250924122839.4184719-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250924122839.4184719-1-skandigraun@gmail.com>
-References: <20250924122839.4184719-1-skandigraun@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 12:28:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119804
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119803
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+This is my second batch of cherry picks from master branch, that I deem to be useful and 
+appropriate to be in Kirkstone branch.
 
-Changelog:
-Translation updates.
+These include assorted recipe fixes (REQUIRED_DISTRO_FEATURES, DEPENDS...), and recipe 
+version updates. With recipe updates I have spent effort to ensure that they 
+contain only bugfixes - I did go through all the change logs and/or the commit logs,
+and I did skip commits that introduced some backwards incompatible changes.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e0462bfb13d571e8ee55b5cff2d0fca7aee98393)
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+This batch has so far survived a "bitbake world" build for arm, aarch64, x86 and x86-64.
+
+Even though I tried to be careful with my cherry picks, your review and comments 
+would be much appreciated.
+
+Thank you.
+
 ---
- meta-gnome/recipes-gnome/gedit/{gedit_42.0.bb => gedit_42.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gedit/{gedit_42.0.bb => gedit_42.1.bb} (91%)
 
-diff --git a/meta-gnome/recipes-gnome/gedit/gedit_42.0.bb b/meta-gnome/recipes-gnome/gedit/gedit_42.1.bb
-similarity index 91%
-rename from meta-gnome/recipes-gnome/gedit/gedit_42.0.bb
-rename to meta-gnome/recipes-gnome/gedit/gedit_42.1.bb
-index 5bb5525d53..e2bbf1889f 100644
---- a/meta-gnome/recipes-gnome/gedit/gedit_42.0.bb
-+++ b/meta-gnome/recipes-gnome/gedit/gedit_42.1.bb
-@@ -21,7 +21,7 @@ inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc val
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
- 
--SRC_URI[archive.sha256sum] = "a87991f42961eb4f6abcdbaabb784760c23aeaeefae6363d3e21a61e9c458437"
-+SRC_URI[archive.sha256sum] = "7f1fd43df5110d4c37de6541993f41f0fbc3efc790900e92053479ba069920e9"
- 
- # gobject-introspection is mandatory and cannot be configured
- # x11 is needed for tepl and gtksourceview4
+Alex Stewart (2):
+  gvfs: stylize DEPENDS
+  gvfs: obviate the ssh-client requirement for gvfs
+
+Markus Volk (2):
+  gvfs: fix polkit homedir
+  gvfs: fix dependencies
+
+Mingli Yu (4):
+  gnome-calculator: add opengl to REQUIRED_DISTRO_FEATURES
+  gnome-calendar: add opengl to REQUIRED_DISTRO_FEATURES
+  gnome-font-viewer: add opengl to REQUIRED_DISTRO_FEATURES
+  nautilus: add opengl to REQUIRED_DISTRO_FEATURES
+
+Wang Mingyu (4):
+  gedit: upgrade 42.0 -> 42.1
+  gvfs: upgrade 1.50.2 -> 1.50.3
+  gvfs: upgrade 1.50.3 -> 1.50.4
+  tracker: upgrade 3.3.2 -> 3.3.3
+
+wangmy (5):
+  gedit: upgrade 42.1 -> 42.2
+  gnome-calculator: upgrade 42.0 -> 42.2
+  gnome-commander: upgrade 1.14.2 -> 1.14.3
+  gnome-text-editor: upgrade 42.1 -> 42.2
+  gvfs: upgrade 1.50.0 -> 1.50.2
+
+zhengrq.fnst (2):
+  gnome-text-editor: upgrade 42.0 -> 42.1
+  yelp: upgrade 42.1 -> 42.2
+
+zhengrq.fnst@fujitsu.com (1):
+  yelp-tools: upgrade 42.0 -> 42.1
+
+ .../gedit/{gedit_42.0.bb => gedit_42.2.bb}    |  2 +-
+ ...lator_42.0.bb => gnome-calculator_42.2.bb} |  4 ++--
+ .../gnome-calendar/gnome-calendar_42.0.bb     |  2 +-
+ ...er_1.14.2.bb => gnome-commander_1.14.3.bb} |  2 +-
+ .../gnome-font-viewer_42.0.bb                 |  2 +-
+ ...itor_42.0.bb => gnome-text-editor_42.2.bb} |  2 +-
+ .../gvfs/{gvfs_1.50.0.bb => gvfs_1.50.4.bb}   | 22 +++++++++++++------
+ .../recipes-gnome/nautilus/nautilus_42.1.1.bb |  2 +-
+ .../{tracker_3.3.2.bb => tracker_3.3.3.bb}    |  2 +-
+ ...{yelp-tools_42.0.bb => yelp-tools_42.1.bb} |  2 +-
+ .../yelp/{yelp_42.1.bb => yelp_42.2.bb}       |  2 +-
+ 11 files changed, 26 insertions(+), 18 deletions(-)
+ rename meta-gnome/recipes-gnome/gedit/{gedit_42.0.bb => gedit_42.2.bb} (91%)
+ rename meta-gnome/recipes-gnome/gnome-calculator/{gnome-calculator_42.0.bb => gnome-calculator_42.2.bb} (83%)
+ rename meta-gnome/recipes-gnome/gnome-commander/{gnome-commander_1.14.2.bb => gnome-commander_1.14.3.bb} (87%)
+ rename meta-gnome/recipes-gnome/gnome-text-editor/{gnome-text-editor_42.0.bb => gnome-text-editor_42.2.bb} (84%)
+ rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.50.0.bb => gvfs_1.50.4.bb} (87%)
+ rename meta-gnome/recipes-gnome/tracker/{tracker_3.3.2.bb => tracker_3.3.3.bb} (93%)
+ rename meta-gnome/recipes-gnome/yelp/{yelp-tools_42.0.bb => yelp-tools_42.1.bb} (83%)
+ rename meta-gnome/recipes-gnome/yelp/{yelp_42.1.bb => yelp_42.2.bb} (88%)
+
 
