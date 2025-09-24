@@ -2,121 +2,153 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DBD45CAC5A7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DBD7FCAC5B2
 	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 07:57:04 +0000 (UTC)
-Received: from mail-il1-f170.google.com (mail-il1-f170.google.com [209.85.166.170])
- by mx.groups.io with SMTP id smtpd.web11.7176.1758700612215787046
+Received: from mail-il1-f173.google.com (mail-il1-f173.google.com [209.85.166.173])
+ by mx.groups.io with SMTP id smtpd.web10.7283.1758700621815507720
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 00:56:52 -0700
+ Wed, 24 Sep 2025 00:57:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kovSsuJ3;
- spf=pass (domain: gmail.com, ip: 209.85.166.170, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-il1-f170.google.com with SMTP id e9e14a558f8ab-4248746aabfso25629525ab.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 00:56:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AosH6/0W;
+ spf=pass (domain: gmail.com, ip: 209.85.166.173, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-il1-f173.google.com with SMTP id e9e14a558f8ab-4248c9a64f7so4329875ab.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 00:57:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758700611; x=1759305411; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=9v9IAieALYLgLCm/zSQmM01VlnjjvqBVug6gstz18/c=;
-        b=kovSsuJ3F0VBAz3/w8qmFFjmXhksZecOAtjP7/lpcANnUJc2WfmB7OH5RvP6S/pnR3
-         C/urGb7dt/2f6vAuwAFlMMDkRMwQI/47CYR5bW+DCBiYhTC3JPRLmEPY1hmO8VQ4jZCo
-         qkx+dwtqcI9wKZE6eeUaz3qF6pyD47BOdP0a70qV2/fmDdt29DvKPewZxp9LXDGtu5KR
-         zdMuMEr0atkevVc1WZjrvPN4+4RUixlx9tZ0ekIP/Ks1wcdAtUfbSYnHTurm5Ovjz5Yo
-         RLN5/qerbJ43KkNkqEtTp+NcMlDcm3H3DB2UdRxkmJKE76exnLHfDCycjqwAx+gQHLdO
-         LkJg==
+        d=gmail.com; s=20230601; t=1758700621; x=1759305421; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=g9tiVRQVknczAoRMHQiUG0hW+BKVEmZhc7S/5ruDyok=;
+        b=AosH6/0WPESk3ldH0kvNUdrwPehojsDhFLTf+a92GkLAYVyIGan8NXs/rMrIrMLsf3
+         KnZIs6s7RmW+ghIg1LPDq8Y6rvx3oU4RFNRCTWKeMs+fPFaR7RdnehW8fBFnMDALHPmC
+         APwO4zfBNIuYzj/GFYhm8OhSSMPh9JC15j+a3fV9F9txM11qHqZ527DCsgmPw0/yAZpm
+         ZI6MkJZlkAVOuYfBti6yclTTgv7QaJhaX/yGrVEKBVnQUlpKis6oGkg8tY7MW3wJwsZO
+         dYCLLwbDz6WtlpV+1odJum9/2fpRLSFQ5mjyBK9WSYRqsR3VRSaex82XFDSHRPHRk2Op
+         Kl/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758700611; x=1759305411;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9v9IAieALYLgLCm/zSQmM01VlnjjvqBVug6gstz18/c=;
-        b=Nd7es5zc8d7mxZc/oEq8iH8G/KpM+ON5Omvu9XgXFyg46peueK2tQgd9ixotzg2Slw
-         Ur9FbZG4yQLa9dgdXoykBKH1jzqw67cvngv8/VC9ocmShyvVZmeJMCu1JkY9VDwOQ6BN
-         HdvOei2Cn8nJgoD0CuW1No5YJDpZn+kbov48DFJWNh3g1va5Qs6R3h7LVb1I7pvnIp+N
-         QF7EmDSbtHg92hXDfJHf8VABOH3zK3kcXo4vxiqkLtj9/5Acmb9joVQecONX0/bQgWFL
-         CUM6EvFMe8/rJfoIKm9l9sp5/I2UEScTf82rPL0i4ds3gcFaGRsvVaxcmd7BQZRPIPCR
-         E/MQ==
-X-Gm-Message-State: AOJu0YzscNuJdwt39w0bgEoZl5TFopposLkyFxWN2VrmAPg3dT6gJCtK
-	StnLMYmD8/oET5hHLDLTR1/ios/ofNhD5/2NPiLWd4Pi1fnPF6w5PsWdBHn7Sg==
-X-Gm-Gg: ASbGncsKYBLGLCi7ENDaujDi3NieuKwuLzwGUFU3S3oSe4+aHOB3jTeV0FbDPn62/Pt
-	POJNutuiq5LdQKWYMSXYm4NzqS8ZTbOYoJGLiRBD2ak20OfXln0j+QbYAJINRYo0HZajy6sRjHI
-	rWMTIqfuq1MgbudSo+Qote4yR0+XkIqX8C/ahS+Q7kO4F4Qre1mA01ErFI82vkY+jqsz76YfunT
-	6krBzyGysadbsv2vSCuDlQZtAbbAvciJcbkTNVDP5aiYkyUsO2WjHgNFxHdzRlC41V4E7kaqrVV
-	pm9gWTU2XxwQQoM5edmh37dA/Arr9fyX3kX982SndcC8fDESuYUdWWlpAyPls1dwJaRx/zmgD1s
-	wGhyK2RYoBRkhi6E3+UhDwQocqyjyqJiqfRfRM0aCslaWiwGfluLFqVeAkzaWcgU=
-X-Google-Smtp-Source: AGHT+IH6FAqcU/Kj5aHIshf6Z0f1PDHbmmPS522rVFfxyYbi4dfXuO+qn0G+P6GR6SjPghfHOpLw1w==
-X-Received: by 2002:a05:6e02:4518:20b0:425:8a71:b3eb with SMTP id e9e14a558f8ab-4258a71b44emr47782855ab.4.1758700610625;
-        Wed, 24 Sep 2025 00:56:50 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1758700621; x=1759305421;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=g9tiVRQVknczAoRMHQiUG0hW+BKVEmZhc7S/5ruDyok=;
+        b=P7T4AVRTuSlBc/JzXPjFy2ztpJHA3G2Y13QpkE+m74mCcLcdhAHwhyehcjA+FDdhVN
+         uLKT/UyNRmsxoJFBHdxSd7i0SzzJ2RgbGCAi2nER+S6tugRvKd6e7MwNgy0QP5SyXnQH
+         3DCXleKPv1ixHpoUa/s51EFJlB5c5qMJCh/L8GSDWsUlE0ZNv8SZJbnUPt0AzhCn8B3e
+         2W6Df2eCAPmU1U5qWaI95sYNw3C27OsdEEPZgwdmL6+loBd8qdTXxcFmjuND7K82eBDA
+         3TPgn5LUHf702/u1tgwhzJp7/rRLf+p71jvy217u6T7ZHbf2zJDZGFLr81xF3MqIIrH5
+         FrwA==
+X-Gm-Message-State: AOJu0Yz3mORmzwgr6wHP17TPYzG8ayE0ZmboF6PCDX0ASuM4eEpQCToC
+	ThKQqq8BCKPMN017iv1Dt79k+Pfsfkqy4DlcIMh8K32u0BpbNzmuaF9lCfuWfw==
+X-Gm-Gg: ASbGncuwbLWXo8bEkS6gOuNz5yN2hFlJa04e/nbPj2bOP+rtEs3OhkJ3cccjpNErRd1
+	e4q5FuztIJinFtjWyMU/efkO+G72EXmdid2ebzvLzWL7vGaXe/YEHA9vvSuXNGjtLwH1l1DJ6Nj
+	6jnXqo1bcWaCB1sFiuZvXVT2td270sWoPEw5PyyM7EznwhWiIeinepjWefNDfRDL6DNYtjPTyCz
+	/6didXnCQGWPiXf43AN+0nK8XPOKmBfROHcmvVYMigTtmP4YUrlnBA6AaQEJne5Xgoe4+modUS5
+	aAL4ZHq6l4VqkPy0Ku0GcrBS78Q6k15l4o4EV1mfBlX5Ild8pMS49plGWRGYWCJgiLT4ubwGim+
+	W0kYHND6Aor9uVPeLj92omCAv+cSMqgKlPsK0LJgkPrRo+Zl8lBQRX/nDjGyVmKs=
+X-Google-Smtp-Source: AGHT+IG3fNuF0kxJfppdv8FPD/J/AAR5e++Peo4VGY3bh2Uczw08wF6Ee4um9E++GsyXDSUQzmnO/w==
+X-Received: by 2002:a05:6e02:3982:b0:424:52b:add8 with SMTP id e9e14a558f8ab-4258d8588a8mr26672245ab.3.1758700620725;
+        Wed, 24 Sep 2025 00:57:00 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([147.161.216.253])
-        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-55dba4465f4sm3203576173.37.2025.09.24.00.56.49
+        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-55dba4465f4sm3203576173.37.2025.09.24.00.56.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Sep 2025 00:56:50 -0700 (PDT)
+        Wed, 24 Sep 2025 00:57:00 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][walnascar][PATCH 0/6] cherry-picks from master branch
-Date: Wed, 24 Sep 2025 19:56:37 +1200
-Message-ID: <20250924075643.2047506-1-ankur.tyagi85@gmail.com>
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][walnascar][PATCH 2/6] flashrom: upgrade 1.5.1 -> 1.6.0
+Date: Wed, 24 Sep 2025 19:56:39 +1200
+Message-ID: <20250924075643.2047506-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250924075643.2047506-1-ankur.tyagi85@gmail.com>
+References: <20250924075643.2047506-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 07:57:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119755
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119757
 
-Trying to keep recipes in the walnascar branch updated with useful fixes
-from the master branch.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-I intend to submit patch series for each sub-folder, this series is for
-the recipes inside "meta-oe/recipes-bsp".
+0002-meson-Add-options-pciutils-ftdi-usb.patch
+refreshed for 1.6.0
 
-I have tried to carefully review the change logs and commit logs while updating
-recipe versions.
-
-Did basic validation by building against qemux86-64 and qemuarm64
-machine targets.
-
-Changqing Li (1):
-  lsscsi: upgrade to version 0.32
-
-Gyorgy Sarvari (1):
-  ledmon: upgrade 0.97 -> 1.1.0
-
-Mikko Rapeli (2):
-  fwupd: update to 2.0.12
-  fwupd-efi: update from 1.6 to 1.7
-
-Wang Mingyu (2):
-  bolt: upgrade 0.9.6 -> 0.9.10
-  flashrom: upgrade 1.5.1 -> 1.6.0
-
- .../bolt/{bolt_0.9.6.bb => bolt_0.9.10.bb}    |   2 +-
- ...-meson-Add-options-pciutils-ftdi-usb.patch |  17 ++-
- .../{flashrom_1.5.1.bb => flashrom_1.6.0.bb}  |   2 +-
- ..._binary.py-Use-env-to-detect-python3.patch |  23 ---
- .../{fwupd-efi_1.6.bb => fwupd-efi_1.7.bb}    |   5 +-
- ...certs.py-use-usr-bin-env-for-python3.patch |  28 ++++
- ...-reduce-lzma-compression-level-from-.patch |  47 ++++++
- meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb     | 134 ------------------
- meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb     |  93 ++++++++++++
- .../ledmon/0001-fix-build-with-clang.patch    |  90 ------------
- ...nclude-sys-select.h-and-sys-types.h.patch} |  27 ++--
- .../{ledmon_0.97.bb => ledmon_1.1.0.bb}       |  10 +-
- .../lsscsi/{lsscsi_030.bb => lsscsi_0.32.bb}  |   6 +-
- 13 files changed, 197 insertions(+), 287 deletions(-)
- rename meta-oe/recipes-bsp/bolt/{bolt_0.9.6.bb => bolt_0.9.10.bb} (92%)
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit d03d56c13e3245933bf2308276deefe03279b4cd)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+---
+ ...02-meson-Add-options-pciutils-ftdi-usb.patch | 17 ++++++++---------
+ .../{flashrom_1.5.1.bb => flashrom_1.6.0.bb}    |  2 +-
+ 2 files changed, 9 insertions(+), 10 deletions(-)
  rename meta-oe/recipes-bsp/flashrom/{flashrom_1.5.1.bb => flashrom_1.6.0.bb} (89%)
- delete mode 100644 meta-oe/recipes-bsp/fwupd/fwupd-efi/0001-efi-generate_binary.py-Use-env-to-detect-python3.patch
- rename meta-oe/recipes-bsp/fwupd/{fwupd-efi_1.6.bb => fwupd-efi_1.7.bb} (90%)
- create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/0001-build-certs.py-use-usr-bin-env-for-python3.patch
- create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/0001-fu-lzma-common.c-reduce-lzma-compression-level-from-.patch
- delete mode 100644 meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb
- create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb
- delete mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch
- rename meta-oe/recipes-bsp/ledmon/ledmon/{0002-include-sys-select.h-and-sys-types.h.patch => 0001-include-sys-select.h-and-sys-types.h.patch} (56%)
- rename meta-oe/recipes-bsp/ledmon/{ledmon_0.97.bb => ledmon_1.1.0.bb} (79%)
- rename meta-oe/recipes-bsp/lsscsi/{lsscsi_030.bb => lsscsi_0.32.bb} (63%)
 
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch
+index 8dfed855b4..b1dd5d0773 100644
+--- a/meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch
++++ b/meta-oe/recipes-bsp/flashrom/flashrom/0002-meson-Add-options-pciutils-ftdi-usb.patch
+@@ -1,7 +1,7 @@
+-From 3ea99c117aa4c7a3502c93e4e4df50b3623e46c3 Mon Sep 17 00:00:00 2001
++From 5cf5fc64c6aab35b89b8cf7f69b84b6f5100d7a6 Mon Sep 17 00:00:00 2001
+ From: Patrick Rudolph <patrick.rudolph@9elements.com>
+ Date: Tue, 15 Oct 2024 10:42:05 +0200
+-Subject: [PATCH 2/2] meson: Add options pciutils, ftdi, usb
++Subject: [PATCH] meson: Add options pciutils, ftdi, usb
+ 
+ The options have been dropped in favor of an array option called programmer.
+ Since this doesn't integrate well into yocto add back the old options.
+@@ -16,10 +16,10 @@ Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+  2 files changed, 6 insertions(+), 3 deletions(-)
+ 
+ diff --git a/meson.build b/meson.build
+-index 6c8d3d3..61b794d 100644
++index 35feb33..b5bb722 100644
+ --- a/meson.build
+ +++ b/meson.build
+-@@ -150,9 +150,9 @@ systems_serial     = [ 'linux', 'openbsd', 'freebsd', 'dragonfly', 'netbsd', 'da
++@@ -140,9 +140,9 @@ systems_serial     = [ 'linux', 'openbsd', 'freebsd', 'dragonfly', 'netbsd', 'da
+  
+  cpus_port_io = [ 'x86', 'x86_64' ]
+  
+@@ -33,10 +33,10 @@ index 6c8d3d3..61b794d 100644
+  group_serial = get_option('programmer').contains('group_serial')
+  group_jlink  = get_option('programmer').contains('group_jlink')
+ diff --git a/meson_options.txt b/meson_options.txt
+-index 87456a9..570b152 100644
++index 2829cd1..0e9d769 100644
+ --- a/meson_options.txt
+ +++ b/meson_options.txt
+-@@ -24,4 +24,7 @@ option('ni845x_search_path', type : 'string', value : 'C:\Program Files (x86)\Na
++@@ -26,6 +26,9 @@ option('ni845x_search_path', type : 'string', value : 'C:\Program Files (x86)\Na
+  option('delay_minimum_sleep_us', type : 'integer', min : 0, value : 100,
+         description : 'Minimum time in microseconds to suspend execution for (rather than polling) when a delay is required.'
+                     + ' Larger values may perform better on machines with low timer resolution, at the cost of increased power.')
+@@ -44,6 +44,5 @@ index 87456a9..570b152 100644
+ +option('usb', type : 'boolean', value : false, description : 'Select programmer group usb')
+ +option('ftdi', type : 'boolean', value : false, description : 'Select programmer group ftdi')
+  option('rpmc', type : 'feature', value : 'auto', description : 'Support for Replay Protected Monotonic Counter (RPMC) commands as specified by JESD260')
+--- 
+-2.43.0
+-
++ option('log_message_length_limit', type : 'integer', min : 64, max : 1024, value : 256,
++        description : 'Log message length limit for v2 logging API')
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.5.1.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.6.0.bb
+similarity index 89%
+rename from meta-oe/recipes-bsp/flashrom/flashrom_1.5.1.bb
+rename to meta-oe/recipes-bsp/flashrom/flashrom_1.6.0.bb
+index 9a8e81bae3..4f07da79c6 100644
+--- a/meta-oe/recipes-bsp/flashrom/flashrom_1.5.1.bb
++++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.6.0.bb
+@@ -7,7 +7,7 @@ SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.xz \
+            file://0002-meson-Add-options-pciutils-ftdi-usb.patch \
+            "
+ 
+-SRC_URI[sha256sum] = "1f934b076ed49eace203655ec249fc7861a6b8e87fe4aef732e47b6e485b6293"
++SRC_URI[sha256sum] = "8b9db3987df9b5fc81e70189d017905dd5f6be1e1410347f22687ab6d4c94423"
+ 
+ S = "${WORKDIR}/flashrom-v${PV}"
+ 
 
