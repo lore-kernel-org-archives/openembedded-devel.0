@@ -1,141 +1,108 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 326C1CAC5AE
-	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 20:55:31 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web11.25605.1758747323902457664
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47E17CAC5A5
+	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 21:09:51 +0000 (UTC)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web10.25829.1758748183343804755
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 13:55:24 -0700
+ Wed, 24 Sep 2025 14:09:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PDjcx4CE;
- spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-62105d21297so458657a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 13:55:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XEWyxtGg;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-72ce9790acdso3834877b3.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 14:09:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758747322; x=1759352122; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=okZGnzH9fB5wqSEMAqhN7Rs1LXlJ7ZVIcKdprM4540w=;
-        b=PDjcx4CEck7JV3UAM7EgLgLRau8P47ASJQ3x0+u837e9AtdzcPeCIy9V7pA5vZjAkn
-         75qgp/83kLuFZZWD5LEA/1r7y4EyTXUZbFVngw38i58i9JMhDIHnpfEhC7xkIFL7mqZs
-         igehUh70UnyIgz6SP9rEeDSfFu8s6haLFMsF4V6RbcEBKBYeBB5UN8H3rUH21JiQpKC3
-         MBssQAaui6l7hZs3O12YA8eE4XFgU6MkJy2R9FkWzInZRhz+wVmWxQt4t4c3qq0/g6AQ
-         Y2GMOU65hOn7CB+0rHmejiiuj/STF6eBNVL2+Mk41Q2Ma2f+ysoCW8imoa9E/LXyvpfs
-         /JXQ==
+        d=gmail.com; s=20230601; t=1758748182; x=1759352982; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=2Df07PnUCGRciJXMqrx5zMnC6UYhno3dkQzcZECJJYc=;
+        b=XEWyxtGgM1CltBIvxAW2KMA/FtZHksi/9MR56Npz9CI3t+MmqXii6kpLUSmhIiNHe8
+         oNQSaphtB4Xpa64O1TJOK6dTgvuKj2U8wRcHPFHYZ4WYj0qlPT3eZRM2BkswjHVmFHKb
+         afNxTYQK9zXBev8Cym4AMoMd86IZuEyAvyQBUGFyR2OSeIB0ayk1cqOv66gZAG0DVZIT
+         EXXNhfFZHKV4KjgzUS1WJIcWTmrLOPShMbK/ekuW+LE7HS+Fess4NMfq04qEhfL0b3CY
+         qwtO2KrgjhijJHhhY59IQC04EjolxrmIjmkO+z+TB+/X0QHKKdgdjfk9CWjoUyPIq0fV
+         oOhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758747322; x=1759352122;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=okZGnzH9fB5wqSEMAqhN7Rs1LXlJ7ZVIcKdprM4540w=;
-        b=QCi/sE3Xt3NS5EC6//Y8jjxjqNDOXuvl5Rr2vs3wHsdGjDgYIf2yBPGUA0melwDuqK
-         V5U3cZ1dBtSZ8zUUUhfOCC/kH7gPaw4DBKrDQWbKNVAUAaiPcv5+6QLJ4tbM1MFcd6ha
-         UfiW7ZN/2/x4wGaWX+wKGl9skFFZMkuPpDxbFa3EvJKnKPVE493T/DMNtRe2sngmva6q
-         0CBDajH8mDYLPZMvsHVr6L+7GP+XPSBgKwUOqNtDfrtYByJJFNUqJp1ekfZSGIRym8Ym
-         QcpVa5XX/vodff23/rLxr781uT1f+9sr9oJyIbGq46r+jDvbq1yCal5gVlpyOnL9iVmY
-         7Ddg==
-X-Gm-Message-State: AOJu0Yy7+Qo2xHecDckzMQef7SPGcNukEnWOJUcTDImS79K6Rig+6Q9M
-	X6tQRIj3khP9phPc/nXTUYuzkLy4P4eDTQk4BUUiz4iWXpt7CRlYZjS17szEU1du
-X-Gm-Gg: ASbGncuhzWsRRlm1BYo4t8m+FdHiDSP6noCWmRNjD9FEEmSIvGTu+nBoxZWK6vGftnB
-	qm4AXnVY4nUgOR5cHVZdozOdLHpKHncm9FY1yiLm+hRQsvv5LUxobfl/7+F1mmcUl72l1COIOLX
-	SVpQgonKJeNSXclKL1FxNa1SmShM65ddKfB6PfI98Ao0zNFyCcGDMfU44DN8/3dQft9qmWMmVIq
-	nkW4uqZdkUhvvFP92yY3SsnCtVomzIXPu8/udPqCURZLeFSE8YvWfHWkVP8SEEGX6EKmzWwtvYQ
-	KXay1RGlrAySTw8O1oiSh30RBH+M4eMoIfR/MP7x/Lu2umDpRQeJPidl2xinbNx60/43wvvhmhP
-	r/E3o1ER4KRNChxtuTaDq
-X-Google-Smtp-Source: AGHT+IHA56pXnBLG8DOpeCSZputPJ4rM1opE0z8osQB8x7QgYts60qCGl7Om5JA+GG3yyaOWAcL+Gw==
-X-Received: by 2002:a17:907:86a6:b0:b28:6440:a85c with SMTP id a640c23a62f3a-b34bc9720a6mr110754866b.50.1758747322052;
-        Wed, 24 Sep 2025 13:55:22 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b35446f76a9sm14021766b.60.2025.09.24.13.55.20
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1758748182; x=1759352982;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=2Df07PnUCGRciJXMqrx5zMnC6UYhno3dkQzcZECJJYc=;
+        b=SnREKVONplzzhslcIAzCHYmvaEcH7K719oMUvRFFbVniJR+BWyHjCzk+QlS9VIOQXq
+         VN90LNCXQDofoaTu/5hWl1RrT1S4CQ0zTDIhzK3sdAarlkuwMXBMc57IpqPZk+L3mUrS
+         U/byfqfIV7lVJ0TUuipIi388lzBpwd6x2NvITtTy52c26iwXx8AojPMd1BhyuWigDNt6
+         RjjNfukIGubcTmxPJDEpBc5DpHkvrRgWvCwCc3xP8bjlWELqJD95l3ocJ8SbuzQtq193
+         rDlw8Rj4NJrfZtcNed1tlBO116CQ2+5aEi4XyispkRqU8VDmXFnmo54o9jNhES7GkAR2
+         llaw==
+X-Gm-Message-State: AOJu0Yzs84Qk+mQj9XakUYXA1PNYpSQpSXdqcRRbDDrdH8cAeFf7nQtS
+	mjkMi5w86w774I/vyPPRBHUxi5YecAOM4SREImg6NKZb55e3mMindoD6yVl0CKQK
+X-Gm-Gg: ASbGncvWQInmrTFb55IMOANwafOEYGxiIN5Dya7yZp94iVF5rAheyZeB5eKtW989QQe
+	VZ4Cjr2TxUiwS3rQVxFJICS9jqrXfgyiubQgvxY/2sf8APCer2TJtc+pIf3TeCSzzx5EBJA3zMd
+	hgESrmYlXgPpFRoIYVVYpzHKuvmzob8aZ1asEfQCvqEcfnWrSUtjESCIodi1D10n/ne5yowMNgD
+	/rtOR6YV0dbLnOMJFqIUbt0h52cU4gVB+6PM6QE43t96YYbXKYTPiZB7GTtQxwtOX5C937F8JM+
+	0r94CyUszC1gW9rK7Lf+SNg/FQK99eqIvREPAaRdiYkM0zj5POgR2Eo7ZdpaTNDOH33kG3mu9EM
+	BEEIQdw6LoFa0sf/iaiAMpM+UoV1z
+X-Google-Smtp-Source: AGHT+IG3isLTxK0TtHTyU1Ea4VIMt9NoPdEG2VPKc3cvC22mdNMOBrlPfMM/K0Yy3AQuNt9cvq3P9g==
+X-Received: by 2002:a05:690c:6087:b0:727:4967:3880 with SMTP id 00721157ae682-763ecfd7802mr13072197b3.0.1758748181726;
+        Wed, 24 Sep 2025 14:09:41 -0700 (PDT)
+Received: from localhost.localdomain ([67.233.61.26])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-765c96af656sm7737b3.73.2025.09.24.14.09.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Sep 2025 13:55:21 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Wed, 24 Sep 2025 14:09:41 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] znc: upgrade 1.8.2 -> 1.10.1
-Date: Wed, 24 Sep 2025 22:55:20 +0200
-Message-ID: <20250924205520.133070-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] nodejs: upgrade 22.19.0 -> 22.20.0
+Date: Wed, 24 Sep 2025 17:09:30 -0400
+Message-ID: <20250924210930.1465859-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 20:55:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119844
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 21:09:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119845
 
-The project has switched to cmake since the last update.
+Chagelog: https://github.com/nodejs/node/releases/tag/v22.20.0
 
-The changelog is long, but there is a link:
-https://github.com/znc/znc/blob/master/ChangeLog.md
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-networking/recipes-irc/znc/znc_1.10.1.bb | 22 ++++++++++++++++
- meta-networking/recipes-irc/znc/znc_1.8.2.bb  | 26 -------------------
- 2 files changed, 22 insertions(+), 26 deletions(-)
- create mode 100644 meta-networking/recipes-irc/znc/znc_1.10.1.bb
- delete mode 100644 meta-networking/recipes-irc/znc/znc_1.8.2.bb
+ .../oe-npm-cache                                                | 0
+ ...oe-cache-native_22.19.bb => nodejs-oe-cache-native_22.20.bb} | 0
+ .../nodejs/{nodejs_22.19.0.bb => nodejs_22.20.0.bb}             | 2 +-
+ 3 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.19 => nodejs-oe-cache-22.20}/oe-npm-cache (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.19.bb => nodejs-oe-cache-native_22.20.bb} (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_22.19.0.bb => nodejs_22.20.0.bb} (98%)
 
-diff --git a/meta-networking/recipes-irc/znc/znc_1.10.1.bb b/meta-networking/recipes-irc/znc/znc_1.10.1.bb
-new file mode 100644
-index 0000000000..4477068bba
---- /dev/null
-+++ b/meta-networking/recipes-irc/znc/znc_1.10.1.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "ZNC, an advanced IRC bouncer"
-+SECTION = "net"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+
-+DEPENDS = "zlib"
-+SRC_URI = "gitsm://github.com/znc/znc.git;branch=master;protocol=https;tag=${BP}"
-+
-+SRCREV = "29694fd26f5e9ec46731ee13bf66224181984966"
-+
-+inherit cmake pkgconfig
-+
-+PACKAGECONFIG ??= "openssl zlib icu ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
-+PACKAGECONFIG[ipv6] = "-DWANT_IPV6=YES, -DWANT_IPV6=NO"
-+PACKAGECONFIG[openssl] = "-DWANT_OPENSSL=YES, -DWANT_OPENSSL=NO, openssl"
-+PACKAGECONFIG[zlib] = "-DWANT_ZLIB=YES, -DWANT_ZLIB=NO"
-+PACKAGECONFIG[icu] = "-DWANT_ICU=YES, -DWANT_ICU=NO, icu"
-+PACKAGECONFIG[i18n] = "-DWANT_I18N=YES, -DWANT_I18N=NO, boost gettext-native"
-+
-+do_install:append() {
-+	sed -i -e 's|${DEBUG_PREFIX_MAP}||g; s|--sysroot=${STAGING_DIR_TARGET}||g; s|${STAGING_BINDIR_NATIVE}||g' ${D}${libdir}/pkgconfig/*.pc
-+}
-diff --git a/meta-networking/recipes-irc/znc/znc_1.8.2.bb b/meta-networking/recipes-irc/znc/znc_1.8.2.bb
-deleted file mode 100644
-index 7356115d53..0000000000
---- a/meta-networking/recipes-irc/znc/znc_1.8.2.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--SUMMARY = "ZNC, an advanced IRC bouncer"
--SECTION = "net"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
--
--DEPENDS = "openssl zlib icu"
--
--SRC_URI = "gitsm://github.com/znc/znc.git;branch=master;protocol=https"
--
--SRCREV = "bf253640d33d03331310778e001fb6f5aba2989e"
--
--
--inherit autotools-brokensep pkgconfig
--
--PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
--PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
--
--# ZNC has a custom autogen.sh that states that this command is needed *and* expected to fail
--do_configure:prepend() {
--    automake --add-missing || true
--}
--
--do_install:append() {
--    sed -i -e 's|${DEBUG_PREFIX_MAP}||g; s|--sysroot=${STAGING_DIR_TARGET}||g' ${D}${libdir}/pkgconfig/*.pc
--    sed -i -e 's|${DEBUG_PREFIX_MAP}||g; s|--sysroot=${STAGING_DIR_TARGET}||g' ${D}${bindir}/znc-buildmod
--}
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.19/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.20/oe-npm-cache
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.19/oe-npm-cache
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.20/oe-npm-cache
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.19.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.20.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.19.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.20.bb
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.19.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.20.0.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_22.19.0.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_22.20.0.bb
+index c638228c34..acbe9442da 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_22.19.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.20.0.bb
+@@ -39,7 +39,7 @@ SRC_URI:append:class-target = " \
+ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] = "0272acfce50ce9ad060288321b1092719a7f19966f81419835410c59c09daa46"
++SRC_URI[sha256sum] = "ff7a6a6e8a1312af5875e40058351c4f890d28ab64c32f12b2cc199afa22002d"
+ 
+ S = "${UNPACKDIR}/node-v${PV}"
+ 
+-- 
+2.43.0
+
 
