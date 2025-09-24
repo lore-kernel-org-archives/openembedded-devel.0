@@ -1,91 +1,193 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98FC7CAC5A5
-	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 13:06:48 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web10.12482.1758719193160044614
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16951CAC5A5
+	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 17:52:20 +0000 (UTC)
+Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
+ by mx.groups.io with SMTP id smtpd.web10.20812.1758736330787136317
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 06:06:33 -0700
+ Wed, 24 Sep 2025 10:52:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kq1fsn/l;
- spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-62fc14af3fbso11420352a12.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 06:06:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mstXHWPz;
+ spf=pass (domain: gmail.com, ip: 209.85.210.53, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-74526ca79c2so33449a34.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 10:52:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758719191; x=1759323991; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=7+RFpeNr763PRbbGhNOjSRbqixQpUpJkLMAooqgTw7A=;
-        b=kq1fsn/lXtUv/RbasCgv404yxp5/IA4CSt1v6KTzXycNZ/KkfEONtdt/JGMTwXFHIo
-         AvxxECj1TGPGYZV1vdbGoTyt21x6Vc3YV38rTCEjw3ETs2c822eR1NBcaYRYpcAOt8ih
-         xNwanHZEbFTMAknA2030f72cemnq3Nc/NpxVTfaBOIHGT3MzhLaYEJ4p8QQTfORaXrtq
-         84kpqk67KiJkblQyxMcDXeWTjgguvx79shiRxTyfQIJvlTanZe8GYNU56umGHQlFTmSp
-         OZ01hPof0Xc+Ri3HkFdeyNizGigouuDyFLNwh7auH3xAZYxM8uNOJednRdrXzPgADLhK
-         LPJw==
+        d=gmail.com; s=20230601; t=1758736330; x=1759341130; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=G77xleC2Z1o9zrlwnHW/0NZQuItLDIh6AvrkNnHpRvU=;
+        b=mstXHWPz3CRse5S0aD75TRv8oGEQ3CsathbWE4Q4/frSQPcq9PI9gpB5RI5Ba/vNgv
+         +oZCzsqM0n24XzeJB5kEI6HatmBJIvgkyoVLWmguGQLkJqs6NfrVjqVfrs5kvrlAVFZE
+         IhQksQZaVlH8ibtUe7TMBiZOVdzo+Vj//+5jt7AB0irS7Abs1VVQLzAjgjMMlKIpod8x
+         sfWZ7sJk54VP0IAKPVItlBIJxFQt1wuBYbkVXrulyWK8feh5lWtrIhIfMxU3MJGzKBm6
+         NSH/cIkho3W+roZ7X9cZwtEuAIZadcSw47uPRAxXOcETAHiOgpxa2bom1wRQZ47CcHKP
+         poBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758719191; x=1759323991;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=7+RFpeNr763PRbbGhNOjSRbqixQpUpJkLMAooqgTw7A=;
-        b=f9UVKY1x+FZ2bLcMYSwRKi9+DZqAZtQXdDW3YXdz7Bl1NsxQWfl52hdI828fCIMX26
-         mWXoy6lJzLGoFQopMNECe6KQxSMRebyqcHN1f/gxUIK0YJTcr29BQ8KVZcPRs2Tnftz1
-         3ezwzT/75XrAjPtvZqCBO3cirbYUGJwU3MXxj9sraqKUUhLRcM++Cjxa3cqlq+pVIIv/
-         Qd+HFJTDQhcGKYnlcK4hQ5k/EKBz0Jl07OrKryP6CCXf8WICs7P8UP2L7RmL5DFUL7cr
-         CSdE3rUQJOO+5eJUoBEfuvPgk/emkIx2TOcYswn5hW1oDB7ntpWjf0VJNkEZ14Nflz1A
-         EQDw==
-X-Forwarded-Encrypted: i=1; AJvYcCWIl5OeyOv7keuGE8DLRXb4BgqMYviYb6Vh2J+KBOA88oXLxTT/bqyaMx3DF1d6wm5PJKbyILu0Nee+u21WPqgOE9w=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwsWH/4Qlq0Uck7TIlVTfOtXF0n4VqD9npfnRm+LUcL+VdgwiuQ
-	okYerVNsytX/cTYqmxuhpKj9WSwVhn2PHqCY6f42a1ymCjAKjbR+3EDa
-X-Gm-Gg: ASbGncutGxOMY/8uB73IzCqOqMuUYNHZ19qvc1EtMiFolyT1XueyZu6/xVSmH1YIIiI
-	527P9QAO3QpmE39YXrqVXz7N9arqlpxNHlBFi5TRyLBPTLB//LjlbbK1nosoEOFLLGNY5Q5fB2h
-	2Wn4uOTB7Z9YU7o6q+lZm0YxG1C3J8nnlSNDGjf/o7U+4KiVKWPqFI/7776jct1JrpFCpMAzs80
-	qFPwWVPD7d3HkqC0oqZMM3yuVYRICkniUl1vu8CMNw1RzrbWkZE8r/Zkio7ViW/U2uUmsDz+Uwf
-	HghgLPLxTGrAKdcHo7TCRyB35NjqzzL2Rn3ZxAj9v/9sSyoMHN43hBYVMWzTdhtnBrEwmUCE/fo
-	ZLfLvb8u6e7MkkhLGWNWR99/xWAzceVw=
-X-Google-Smtp-Source: AGHT+IE72bj0yoyN5/xKVecWTaAdLmU9w/bvyKHY7Uu0p2NtvEXJGcygSNI49u2DlEbmIfVCpqux/A==
-X-Received: by 2002:a05:6402:52d8:b0:634:54fa:f729 with SMTP id 4fb4d7f45d1cf-634677e9681mr5482629a12.21.1758719191426;
-        Wed, 24 Sep 2025 06:06:31 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-62fa5f28511sm12570321a12.40.2025.09.24.06.06.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 24 Sep 2025 06:06:30 -0700 (PDT)
-Message-ID: <e437bbea-1399-495e-9c4e-bd11353b5934@gmail.com>
-Date: Wed, 24 Sep 2025 15:06:29 +0200
+        d=1e100.net; s=20230601; t=1758736330; x=1759341130;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=G77xleC2Z1o9zrlwnHW/0NZQuItLDIh6AvrkNnHpRvU=;
+        b=Jnw4iwQ/UxYm2HzsqCnEu88h1/0VD4hpNh7sUby8NFjyupgkgneNV3pZmrwuKLbAL6
+         oA/1ZSZ9GlaL5ad8E6Nx4kVYltHOwfZdN9TUSYHZ4ZtCV5+5U1L1VfNbsykEZaERzisS
+         mDb+PF6s2pP3QwUSBC5XO5w49YOiFjhUvJH27mL1B4MvSICH5QQjJvWIH8ejI5EWf4it
+         y84uqy1847AW5max+FvUyb/Qe4O01EBpwbIB2qpR3284ooNhw8d6ae+cj7/1GYU3KYKe
+         QKeKR8jbQsz7tOkY/Hyq0JfQpfuH0p7WSafPar+9QpcTh0N1abPlvFbBT1CHaUhP4Zbf
+         Grrg==
+X-Gm-Message-State: AOJu0YwU8Oti5MTj0OMWMtLHiAeukOekVeo/mJusgny+ZwI7kzJHUc0E
+	C0hP1z0OjNgHSuyIShRlhNQ1RY0sOlph3JN4xoJODAHzm41QvbggXwFMmYBos7PbyNL5/f/t0yB
+	a6+qTkErdmPhe05vlQmgfw7Dyba1/Alg=
+X-Gm-Gg: ASbGncsQoWHwQpIqEAwNt9C0WgU6iQ6Y026ygcEULajkgzvrtmqO4sShky07qtdWY+d
+	0C+Geof+l40X9Hebz381CPWIxHNWx/8u1tZ0OucYhMxzB+EHfp3QU40aojvJSzKpgp9ljENA/Du
+	ZmUboZiORr6qajTvjYCZsaLW8K533tPBCmDNVgx3V70/F2Ju0FJUsfggQ5GCQhZ4VMrhNsNMHjT
+	B8Bfx/qVg==
+X-Google-Smtp-Source: AGHT+IHqnR6/vu4cXgpqP116jzfid55UP8+WGI3jUfXxsbB1LV/i0h2K+1cSwSiPkt6BkLa7N4YBJOl9onceMtG7YPE=
+X-Received: by 2002:a05:6808:1487:b0:438:1f1b:dd22 with SMTP id
+ 5614622812f47-43f4cf30f83mr437602b6e.23.1758736329767; Wed, 24 Sep 2025
+ 10:52:09 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-perl] [PATCH 10/29] libmime-types-perl: upgrade 2.28
- -> 2.29
-To: wangmy@fujitsu.com, openembedded-devel@lists.openembedded.org
-References: <20250924090029.1786-1-wangmy@fujitsu.com>
- <20250924090029.1786-10-wangmy@fujitsu.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250924090029.1786-10-wangmy@fujitsu.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250924075643.2047506-1-ankur.tyagi85@gmail.com>
+ <d09b1bc7-3c18-47f8-a7eb-3cc6e88b5bb1@windriver.com> <CADySD0EG7dt841cwvcbd5BLyBh39Yq81kn2XBRb_2qjkyJvaFA@mail.gmail.com>
+ <1555c67c61416e1d242c8e79e48018be008cc0bf.camel@intel.com>
+In-Reply-To: <1555c67c61416e1d242c8e79e48018be008cc0bf.camel@intel.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Thu, 25 Sep 2025 05:51:57 +1200
+X-Gm-Features: AS18NWBfsU1zm3E6wCMBo9Of7-YYye17_neaAD9JC_wQv7-3-VZ5IYchhzCpZck
+Message-ID: <CADySD0HRX57aQadbJyUVuDyu6tSwAs6MA0vgrutshk+5A=Mhyg@mail.gmail.com>
+Subject: Re: [oe][meta-oe][walnascar][PATCH 0/6] cherry-picks from master branch
+To: anuj.mittal@intel.com
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 13:06:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119825
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 17:52:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119826
 
-On 9/24/25 11:00, wangmy via lists.openembedded.org wrote:
-> From: Wang Mingyu <wangmy@fujitsu.com>
+On Thu, Sep 25, 2025 at 12:37=E2=80=AFAM Anuj Mittal via
+lists.openembedded.org <anuj.mittal=3Dintel.com@lists.openembedded.org>
+wrote:
 >
-> License-Update: add following flags to section build_requires
->   Test::More: '1'
->   Test::Pod: '1'
-<snip>
-> -LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=963ce28228347875ace682de56eef8e8"
-> +LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=d3b01c1228de75a9de9ee0bfb6e0dcf3"
->  
-The license hasn't changed, but rather the license declaration has
-shifted from line 11 to line 13.
+> On Wed, 2025-09-24 at 21:30 +1200, Ankur Tyagi via
+> lists.openembedded.org wrote:
+> > On Wed, Sep 24, 2025 at 8:02=E2=80=AFPM ChenQi <Qi.Chen@windriver.com> =
+wrote:
+> > >
+> > > There are a few major version upgrades in this series.
+> > >
+> >
+> > Correct but I found no concern from the respective changelog.
+> > But if you (and others) think it can cause any issue then please let
+> > me know
+> > and I'll do some more validation otherwise drop that patch.
+>
+> General guidelines and things to look out for:
+>
+> https://wiki.yoctoproject.org/wiki/Stable_Release_and_LTS#Stable/LTS_Patc=
+h_Acceptance_Policies
+>
 
-Prev: https://metacpan.org/release/MARKOV/MIME-Types-2.28/source/META.yml
-Cur: https://metacpan.org/release/MARKOV/MIME-Types-2.29/source/META.yml
+Thank you Anuj
+
+>
+> >
+> > > Regards,
+> > > Qi
+> >
+> > cheers
+> > Ankur
+> >
+> > >
+> > > On 9/24/25 15:56, Ankur Tyagi via lists.openembedded.org wrote:
+> > > > Trying to keep recipes in the walnascar branch updated with
+> > > > useful fixes
+> > > > from the master branch.
+> > > >
+> > > > I intend to submit patch series for each sub-folder, this series
+> > > > is for
+> > > > the recipes inside "meta-oe/recipes-bsp".
+> > > >
+> > > > I have tried to carefully review the change logs and commit logs
+> > > > while updating
+> > > > recipe versions.
+> > > >
+> > > > Did basic validation by building against qemux86-64 and qemuarm64
+> > > > machine targets.
+> > > >
+> > > > Changqing Li (1):
+> > > >    lsscsi: upgrade to version 0.32
+> > > >
+> > > > Gyorgy Sarvari (1):
+> > > >    ledmon: upgrade 0.97 -> 1.1.0
+> > > >
+> > > > Mikko Rapeli (2):
+> > > >    fwupd: update to 2.0.12
+> > > >    fwupd-efi: update from 1.6 to 1.7
+> > > >
+> > > > Wang Mingyu (2):
+> > > >    bolt: upgrade 0.9.6 -> 0.9.10
+> > > >    flashrom: upgrade 1.5.1 -> 1.6.0
+> > > >
+> > > >   .../bolt/{bolt_0.9.6.bb =3D> bolt_0.9.10.bb}    |   2 +-
+> > > >   ...-meson-Add-options-pciutils-ftdi-usb.patch |  17 ++-
+> > > >   .../{flashrom_1.5.1.bb =3D> flashrom_1.6.0.bb}  |   2 +-
+> > > >   ..._binary.py-Use-env-to-detect-python3.patch |  23 ---
+> > > >   .../{fwupd-efi_1.6.bb =3D> fwupd-efi_1.7.bb}    |   5 +-
+> > > >   ...certs.py-use-usr-bin-env-for-python3.patch |  28 ++++
+> > > >   ...-reduce-lzma-compression-level-from-.patch |  47 ++++++
+> > > >   meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb     | 134 -----------
+> > > > -------
+> > > >   meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb     |  93
+> > > > ++++++++++++
+> > > >   .../ledmon/0001-fix-build-with-clang.patch    |  90 -----------
+> > > > -
+> > > >   ...nclude-sys-select.h-and-sys-types.h.patch} |  27 ++--
+> > > >   .../{ledmon_0.97.bb =3D> ledmon_1.1.0.bb}       |  10 +-
+> > > >   .../lsscsi/{lsscsi_030.bb =3D> lsscsi_0.32.bb}  |   6 +-
+> > > >   13 files changed, 197 insertions(+), 287 deletions(-)
+> > > >   rename meta-oe/recipes-bsp/bolt/{bolt_0.9.6.bb =3D>
+> > > > bolt_0.9.10.bb} (92%)
+> > > >   rename meta-oe/recipes-bsp/flashrom/{flashrom_1.5.1.bb =3D>
+> > > > flashrom_1.6.0.bb} (89%)
+> > > >   delete mode 100644 meta-oe/recipes-bsp/fwupd/fwupd-efi/0001-
+> > > > efi-generate_binary.py-Use-env-to-detect-python3.patch
+> > > >   rename meta-oe/recipes-bsp/fwupd/{fwupd-efi_1.6.bb =3D> fwupd-
+> > > > efi_1.7.bb} (90%)
+> > > >   create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/0001-build-
+> > > > certs.py-use-usr-bin-env-for-python3.patch
+> > > >   create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/0001-fu-
+> > > > lzma-common.c-reduce-lzma-compression-level-from-.patch
+> > > >   delete mode 100644 meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb
+> > > >   create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb
+> > > >   delete mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-
+> > > > build-with-clang.patch
+> > > >   rename meta-oe/recipes-bsp/ledmon/ledmon/{0002-include-sys-
+> > > > select.h-and-sys-types.h.patch =3D> 0001-include-sys-select.h-and-
+> > > > sys-types.h.patch} (56%)
+> > > >   rename meta-oe/recipes-bsp/ledmon/{ledmon_0.97.bb =3D>
+> > > > ledmon_1.1.0.bb} (79%)
+> > > >   rename meta-oe/recipes-bsp/lsscsi/{lsscsi_030.bb =3D>
+> > > > lsscsi_0.32.bb} (63%)
+> > > >
+> > > >
+> > > >
+> > > >
+> > >
+> >
+> >
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#119824): https://lists.openembedded.org/g/openembedde=
+d-devel/message/119824
+> Mute This Topic: https://lists.openembedded.org/mt/115408371/3619737
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nkur.tyagi85@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
