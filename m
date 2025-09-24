@@ -1,287 +1,197 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <SunilKumar.Dora@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB7AECAC5B0
-	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 10:22:36 +0000 (UTC)
-Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
- by mx.groups.io with SMTP id smtpd.web11.9234.1758709353611917644
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE626CAC5A5
+	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 10:34:36 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.9405.1758710069720496910
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 03:22:33 -0700
+ Wed, 24 Sep 2025 03:34:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gVhql/6u;
- spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-62fd0d29e2bso8049233a12.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 03:22:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758709352; x=1759314152; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=v1bXIi9YXBJ66/PJZLlxfr8/O5CkrjXu4+x0wYDnZxs=;
-        b=gVhql/6uC2bcHdls7Qwgfc/EVSHG11lzcHtZq/7JcNw+Phn2ruE9CQLAqB76C0ipoK
-         O9auy1NnJQ9SAcP0GmgmSf4xWexhiQ7LjQqLEz97mW1YwofGWH6Kdd3dZey5sS0bvnHF
-         FnarksYyfojPEKPgiZVsEoCPglOp6Nf7/cXLnAQljc2d9adG2Mg3T+8+z2BtD7OXGCyP
-         /ko8gBC8UhCwXJJ70ozfU8bbbT4ipLdKkDuRmRpI58PTn30uccv/NvBDZoXscPL04eeT
-         h9FSM7RAwGXjue1Eu2KMMfJH5nC9TKTjiD3cO6ws3+9sWf3XYYlA2fw9a1qeRpy79eKp
-         zJPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758709352; x=1759314152;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=v1bXIi9YXBJ66/PJZLlxfr8/O5CkrjXu4+x0wYDnZxs=;
-        b=TV9TjcVqaysbR21aOFvoT6GdlaAQaxoezWxKf4QvPSqQppYjr9iftOMH2+WOuYnqaI
-         G52HvtZ1mLHY2z9+fM9hH72TW1V13ObTOIBGEoEFgiQC/eES0bHqXs4V7LUnph22u1X8
-         QxH4l0/xYXhs/T7y8jKTOusv4kRo8H7LDl3hJi9JXlaCEjBWPr05IGP1Njbm684XPgka
-         wBXd8iP7ULis5mL0ndTdC8HAcRxdjP/nxcVLkQcNb0gLIPRumfGyZH1DHQ7mgQrr/W3w
-         ERp1DhVtP76oPJJsTlXVEaeE9+5mKARSXfkNs4m/ZuwQx+wdlbVdTVK82AIC/uFp/Jrd
-         /goQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVh3QCRApT53u6jKS3VhzKe4LdtMTLzX8P0TtqAWW3w9FNr+UgzY+ulSXdLfYI4yASRHMs0gGy0uXhDrOdALfLnxi4=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyUp1RDTZc6XmOEFCsMnVgTQm4hUhVMAYvCLI593G0lYAhgt3Uu
-	shZAat1mzzeeCT81zEzd2mSTuz/7epa7IeRY0lWubaKGbPyFWXORdmXL
-X-Gm-Gg: ASbGncvWJ7D0QGbdW05WZG2BcHivrgk5lbuBuGXaNSf96Z96c7GZamYRphMs6KQrBo0
-	e18FmE+mHf9JABLoCIXY24zMjZO290IPSYN4vKTzLY7HsZLM9eyY2xPpc15H7JLNQU0ia8b5fxS
-	NRsvW5IPLNMY+poG/IT89rvTMrLH8Wqla1FzaxeXggWT13ZvwGVQJ+lqIXTmJ7XELwDGRtuH4/6
-	pGJKumymVqFEXGCKYMJkHxfXngm+w1ebLoRzlHsWb4LLHBgoos4UAe/YYLclbrRKzXqXSFP0SvB
-	neD4acpSnqnBda6Y007OOU8UluLsKCEguXzSAao0Pf2OB6Dxpe9T5xZw+Cdun6/zOrimCZ82Zu4
-	s7HYMx2qvNilFRvgatrnn48fuHIMfE/4=
-X-Google-Smtp-Source: AGHT+IFYEVTKTgmcvz8ZVaElJSHR5E+yGGhPUOwWaky0L3ozeJiHxrBw2a6BUZoKZrDTn84cjkVPVA==
-X-Received: by 2002:a05:6402:5046:b0:626:8e29:8d42 with SMTP id 4fb4d7f45d1cf-63467a1a9cbmr4595475a12.37.1758709351467;
-        Wed, 24 Sep 2025 03:22:31 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-633148d2df3sm6843715a12.30.2025.09.24.03.22.30
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 24 Sep 2025 03:22:30 -0700 (PDT)
-Message-ID: <2dbed234-0810-49d1-b7f1-570f9cfc9882@gmail.com>
-Date: Wed, 24 Sep 2025 12:22:30 +0200
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=HuMcAX/v;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1362e8e79a=sunilkumar.dora@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58O9tvf31303017
+	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 03:34:29 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:message-id:mime-version:subject:to; s=PPS06212021; bh=L0NYBjd9w
+	sYwsR1+Tj1eKoDjBgU+N1J7FU7tBgkPP84=; b=HuMcAX/vPTIM83hRyjYjo4uSZ
+	taUxFPNA+1Lt9bVMZnAIY1NYk4uf7oopRpg/vuOKXOUeck8KVvVDfpW/9wYKuNhF
+	f0zdIP603jBfCf1Qs2vo5TMUiHbKckf1qlIE51q3u6iiR+eST1jhTipMO5PBXfaa
+	llviHMLxeFzd7Ihz8L4XngVaOjhjWXVioQwi7gKDvVAuzTZN98Hmqyk6PN81F1N3
+	nIIk7pXTVxBG9ZtjKE4wS92HG1RZ0wl3esezNDpsZTM0YxREi+Y705WXLOO9BA/f
+	Xe5ZNknPC+jD+YNsMJN9HSatBQF2FpGG4md13cr/t9lZdZQuCdvY7hbgBZphQ==
+Received: from mw6pr02cu001.outbound.protection.outlook.com (mail-westus2azon11012028.outbound.protection.outlook.com [52.101.48.28])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 499qj2vjq2-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Wed, 24 Sep 2025 03:34:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=gi4SZnezdagf6hGbUhXw5a+9Rkbh+JQQCAb1UOYFIr5yGCVt21XDKoxyY2inG7Mfym2VmRY4vI3MRnrfkQzu3wfrir9CcDUNjvQChWLoSh4ujNi8jO7LNUA9ySMG9Q/ypzq+qfrSO5qyw0AHMXRxROFUSUc16Mvp0lzJvDXA3ydvkcLsn0pcR/WoyqGTw24iO+iB322dprjbDcqACZ7FchEYHKW1Iw8b0qIMbq5w+poCUDvn9DhLRnWlMF9c1QzU0kpNI1qxQ+SH7Ja4soTfBEMNdIYQzwCHakZBRS/sJZqfuXrbvk1IBy45CarjnzshxCQTGkm2slfS+l/p/RqPUA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=L0NYBjd9wsYwsR1+Tj1eKoDjBgU+N1J7FU7tBgkPP84=;
+ b=la0oDmxN2EI7823gwY9AcykxwPyLvC3Xdjpv9he/Dlm8zbI/QcX7m0udLy58CLiBAD6d3k3+ufqYRXOdvK5NO1/m1rO+YHw1kMJEt27vD/EGyn9h2/0Oz11vlmu7RyLunTuYja6qrFdm6XARllggGHfav4AW7jWUFEYrG06ar+/RgwAm2NCnRUfSoEqokUp9tsRN85cFha4kw3pL0bEW43HBUZpazi6UbY0Zzdrl0r3dNQieugGeAGuDPN8xpW9go0d1FfE2ulZ5qc79uKxOJeiykgPOPENWMDIYpF1jt664ksxbBW84/wIv8IuFzSOyYAcPewD1FxUAgTmFhYPYtQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB7901.namprd11.prod.outlook.com (2603:10b6:8:f4::20) by
+ IA1PR11MB7869.namprd11.prod.outlook.com (2603:10b6:208:3f6::7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9137.19; Wed, 24 Sep 2025 10:34:25 +0000
+Received: from DS0PR11MB7901.namprd11.prod.outlook.com
+ ([fe80::9fa:eb3f:cf26:264d]) by DS0PR11MB7901.namprd11.prod.outlook.com
+ ([fe80::9fa:eb3f:cf26:264d%7]) with mapi id 15.20.9137.018; Wed, 24 Sep 2025
+ 10:34:25 +0000
+From: sunilkumar.dora@windriver.com
+To: openembedded-devel@lists.openembedded.org
+Cc: skandigraun@gmail.com, Sundeep.Kokkonda@windriver.com, raj.khem@gmail.com
+Subject: [meta-oe][walnascar][PATCH] layer.conf: add bpftrace to NON_MULTILIB_RECIPES
+Date: Wed, 24 Sep 2025 03:34:06 -0700
+Message-ID: <20250924103406.4152290-1-sunilkumar.dora@windriver.com>
+X-Mailer: git-send-email 2.49.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR13CA0221.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c1::16) To DS0PR11MB7901.namprd11.prod.outlook.com
+ (2603:10b6:8:f4::20)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe][meta-oe][walnascar][PATCH 5/6] ledmon: upgrade 0.97 -> 1.1.0
-To: Ankur Tyagi <ankur.tyagi85@gmail.com>,
- openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-References: <20250924075643.2047506-1-ankur.tyagi85@gmail.com>
- <20250924075643.2047506-6-ankur.tyagi85@gmail.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250924075643.2047506-6-ankur.tyagi85@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB7901:EE_|IA1PR11MB7869:EE_
+X-MS-Office365-Filtering-Correlation-Id: 27b64e4d-6005-4398-5ed1-08ddfb55ee67
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|376014|52116014|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?jgtztYVapmxxciYs74MMtxKBgcdZaKtx3Pew6/hXGoORKDHIBxFkBaFKMqFB?=
+ =?us-ascii?Q?kQsfW++Opb7MH6sKi9x4vk1LP54HDsqqeZp5Pqzfu/3IixE+Y0vNp0rS/oOJ?=
+ =?us-ascii?Q?L1UB5flSWNS7d8wsh9yKjAkoMztC7WNyjO3u5dNJ9C9ABLv262EtiSRl0hpg?=
+ =?us-ascii?Q?1d/ErOMCrR2z6ZhUkPLakn6q1czNul0Ta7ChAx923F879TeJT918NcLhFFxu?=
+ =?us-ascii?Q?OGh6JxKVLpnJtrVByWNPlW8vTOBqFdZcAg3Mpeb7tB2f0wAs5pXO1u4jfN0t?=
+ =?us-ascii?Q?OT8AKm+jx3imYWub1zV0oWvW2KukaF3E2XtDSsceCOzwVO2IvkRZ/SlQUojX?=
+ =?us-ascii?Q?+yaPafmcxN++IjoJUBR/7UN/HTiMzGcbQdrqNqyvAz+MqAIvWdCZzpf2MVRk?=
+ =?us-ascii?Q?/5jX8YDSytsGmFRigyPrDPyT3TygkNvQnQLdKMWFRdc1PLe47a9BVjcgEdkG?=
+ =?us-ascii?Q?iCbyOCFTDUtkY5dfocg7ZoxeTjFM30mb6qfGCXlZ9rrIujrIVcklvPVL1wHr?=
+ =?us-ascii?Q?PWQqPYF6zbqDR3KdGbTFcr7mDLoWMn+Syzkb5FCsQtTfwR6NWJUSpHgK7mnT?=
+ =?us-ascii?Q?AN+tQ97fexjzQkr1zl30yX6wH0mdbrRrZ9/auCadbFI5tLxbgHRPFX3jeLK5?=
+ =?us-ascii?Q?m4rYZsf8gix9oOf/G7fulQIPssDU+jSJbTfqTSMqZmF/ZzE0zYtUlJEr/Rnr?=
+ =?us-ascii?Q?Mrbnh4UhdB99INQAsy6GyO6QkndXu5pQLyMuY84xmjHBkrF0Dj8rj337zjAQ?=
+ =?us-ascii?Q?j58UkUpaOUb52cS51BeErYRj3mvjGaHDVwtUwF/UaTLKQ2RqV0S8Az9oet/v?=
+ =?us-ascii?Q?+KR0EgM0S094BODda+wzeCalgIhiVkpdv+T6oVPqRiZ0W1ho/1y8klBTC3vO?=
+ =?us-ascii?Q?PfrkmXSvit6T8J3wroFlTO6J2QKbqjNhYx5nl40LT6LqRONcNCbj2Xt/HuDm?=
+ =?us-ascii?Q?HezC5QBKWTNXhTZ5cpozvZJDMBBx4yjq5CjVNmh+HRU58cxru2VoMahGqecr?=
+ =?us-ascii?Q?CJEn2PMQgS+z4lCX9jh+iT9wB84/b7S6uJNJcaQmJg24PxsQI4z3wZqlPmX4?=
+ =?us-ascii?Q?j+S3Es1XH9FIgMfi5d1wHt+Ns/TfPDvEynbv+yb1c7gVqn6Py5axsGxocrhU?=
+ =?us-ascii?Q?ivOh7m/MqWoykzEBYGazfCnaQSog3P3QNI6gUCnuwDiMAU3D8BNzT4mHRkpU?=
+ =?us-ascii?Q?pKHctfrovLP98xBL3WiJIUC22eydxvLuqf6QP4EsJgp5dfexJkGya080N3bJ?=
+ =?us-ascii?Q?0p41UBgKRChfEwdYS7KLRnEOmFcvHsKav0EB7+pr6YvZCQ4OB1SiF70eCVPO?=
+ =?us-ascii?Q?TBwsyARYEvQ3Ev4HgFubTGVbfidxtuUlV6jXZ7ctDTuJVwERY2mMDiJyOnjx?=
+ =?us-ascii?Q?S7wGJAdpwmYlk4RgHdz6iuXTGYycRXl57wlpR7zxkoxTXc8KjC78O0gc1+Pn?=
+ =?us-ascii?Q?4I/8XLKVGzSbv9+Kjh7n1Kd+me93ASghbFSfjOK1a8v0EbNAMyF8Bw=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB7901.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(52116014)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?07xDmoCLxN7uytX/NO9aEaCUo1Z4AYnk5QWpziPkwzp545kIl2bBtnY0DnL7?=
+ =?us-ascii?Q?kr81VAKxYnA6xe7x//5rTxLm1k2Ia3MDZQAVFicp9UyFMj7vqw3zjoOMSPwa?=
+ =?us-ascii?Q?5Jg7PdjmLEuAM6c1qz/M4TPPnXDMCSRBVqEjkaxLsOwj/4rcS+K0H9kHzXFX?=
+ =?us-ascii?Q?kPoXKf7YvsLk2tn6VNcAMvwyL7FmF8219zkQOpF/0sjFOjhfxKgH4PmApDLG?=
+ =?us-ascii?Q?f2/I832n1witcJn/QzpGcFu4DcU9PiMl3kj+Wd+OVBHrWt33P656oDeqGRda?=
+ =?us-ascii?Q?bAbguyzRLN1grlvw7IL9yf8pZ1vgO46/yyqMR94/X176jLXxk/Wl1VulTmIq?=
+ =?us-ascii?Q?Rm2kcswd3ehnztLNWiYKU5Mkaw6qYUHhQQ6sNae47Tg7ectj/DhYiMxksnWf?=
+ =?us-ascii?Q?M+eyWPJVSLrXHhawb/adxStrHkHYjKOkk0zKWc6eRJUY40LcSZwAfEFF+AXQ?=
+ =?us-ascii?Q?LTQBq7rt5XX2oJTyF7zeBW4T+5qBZ0qDpKoB6DP0hJcI+bY3/rvQB2OHR5fV?=
+ =?us-ascii?Q?eaZ9DdcYgLIz9J2GkI7wPJc/67cRFUigK36xSGRQqH9eYlm7CHeRFf2yx+4A?=
+ =?us-ascii?Q?ZJyzihG5AAFJnLXNcXIaGFFLmZLPcp44W0WtdckYlE8hnHmu5/atKjML4GuQ?=
+ =?us-ascii?Q?bDB52CXhqvcGzw5K/DDCao12ey5rPpp8ss5UEqBMbjx2aHEE4/L7qY+emgk8?=
+ =?us-ascii?Q?W0MnNCVtiI1e+YuqKzEBEmGGalO/LdUXH9X3ZI5yy9RamOxluWe8uGm9I/cO?=
+ =?us-ascii?Q?7XiEZfItMXw+mT8sOqa0ZzJ+cWZaJJ72TXkO8MerRLEqY+kMJ3QYqNsvPM9w?=
+ =?us-ascii?Q?+BSV1umAswPFi4BsHgFJsSZW9556jeeiOdDEBP0g4iWmiY0Qvw3s/Odtf+tn?=
+ =?us-ascii?Q?cAX/97E3ry+COXqwSlUezOt6cuN9CBRaPLHFlcm/5oRDR+q3ZQbEQStvCOjs?=
+ =?us-ascii?Q?CKKX5A+/1NqHRlmdfu85D1Nc+CMbbbnoZPp4dRS9Cz2iRwrpwQ5ijNiaZ+BS?=
+ =?us-ascii?Q?EdI589MHIOht7fsLyuBD6hKCwggfauuLXsrJBgINZZuctIR7+a2sej/vtTeC?=
+ =?us-ascii?Q?9gIlVfk5eWNcl2O4s+aF5DQKYW0emzZNAjnWaTZD0NivAdHqZRzQ0qNrJpNb?=
+ =?us-ascii?Q?Oi155VbMBoywqx/Qv0OZDWzLnDy90OVc4CZwws9WVGbaCTrerWEmXNrDE/gk?=
+ =?us-ascii?Q?HcUWq9HYiUoMQB/96L/pBV1DfAsE9el2wOHQpzKM3Dx0VFlImePnRvEHr3dy?=
+ =?us-ascii?Q?QAoWJwGfcUNhvBYJWkhsaViDfonGmx6283EzbS2yGaQMRnfC+/zyTQqVqR1b?=
+ =?us-ascii?Q?zgVF+EIAWKQjlgJ3Dta/Wvbw3ZZjcReML8ir8aIHPb05i6j3ZhQ7OnspmYT4?=
+ =?us-ascii?Q?S6C8ubVviJqG3AG9HJT7gPeh7yqWTFz0FqjomMRTWB6CKLGFT/IMtgXV5r/a?=
+ =?us-ascii?Q?0LQjBlGINDzX+m1BvN4vcYPp0FSJEkKrG8hwA04WeYT6d81QoXninaQEAD/X?=
+ =?us-ascii?Q?infcSewAt930aNMDlY2ZNNdOxWAcg127nCAaGd/5j3O+0dxNIGgj96h7REIb?=
+ =?us-ascii?Q?3C/XJr12CTcuo8gLFunwZ1DKSiJ3eOCMiECbfpoip4mMccT3UB/R4uG87dWL?=
+ =?us-ascii?Q?rQ=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27b64e4d-6005-4398-5ed1-08ddfb55ee67
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB7901.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2025 10:34:24.9502
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mSvr3kCx2FN8Gc3AZ/dorWUcQvQl2OKaIinRYipeiMq9Gx+rzrUvEbrSNF6j0icbQzb8LRmv8WfwOoT2wDwDXNKG8403ggNhONBomY+T4l8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB7869
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTI0MDA5MSBTYWx0ZWRfX+X7krUnirZ8V
+ 4OenYdp6KuDD6zgBH23UJc51yrEdUaer1ts+PspqQiiD1uKA51Ax3ovt3TOUWd4jKK4Hzx6q0kH
+ 1tcwaNSKCeA4CAuYp0LLvbMsr60Id8Ro6p5+iQHlSrGnYT5TtPAfJqkGCbGLKBkxOXcTqyhot9o
+ hMX9EUSV1bHEbcKex1b82I7gXk2acyu9izM24C91qvNSkKKbKErOrxocf2wrMB29eYOo2FdUle6
+ dOoHj7hVHEnrohuBAGircNuMVKQeyrlHpX+M6W0bm02mZPiMr0F1/uAQ7P6pnIID/+RgajYyGi6
+ WBB+h8qAXQXkicCkUjQVO3+ogE+fWvVaISoMeUx8SLHdUgn6avpX1Onjyz8ta0=
+X-Authority-Analysis: v=2.4 cv=btpMBFai c=1 sm=1 tr=0 ts=68d3c935 cx=c_pps
+ a=4FhRDsKUqNVV+vA+egT0Jw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19
+ a=xqWC_Br6kY4A:10 a=yJojWOMRYYMA:10 a=t7CeM3EgAAAA:8 a=ToliOdm6Xv3mqA58rcUA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: f_66hT4_y7pC3-4evZf27Tc8r2FoHp29
+X-Proofpoint-ORIG-GUID: haSJ0J_G3sG9lEstBWtOHnvgnbaFEnO8
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-24_03,2025-09-22_05,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 bulkscore=0 malwarescore=0 clxscore=1015
+ phishscore=0 suspectscore=0 adultscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2507300000 definitions=firstrun
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 10:22:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119799
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 10:34:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119800
 
-This update does some api refactoring[1] - at least one library function
-is removed and another has a different return type. This version bump
-looks too big for stable branch - if it fixes something important, a
-separate patch would be better IMO.
+From: Sunil Dora <sunilkumar.dora@windriver.com>
 
-[1]:
-https://github.com/intel/ledmon/commit/fec14ba294307eb98798941d5e3ca04ff2a501fb
+bpftrace need line up with kernel architecture type,
+so add it to NON_MULTILIB_RECIPES.
 
-On 9/24/25 09:56, Ankur Tyagi wrote:
-> From: Gyorgy Sarvari <skandigraun@gmail.com>
->
-> Dropped 0001-fix-build-with-clang.patch, because it is included in this release.
->
-> This update also fixes building for x86 platform.
->
-> Changelog:
-> https://github.com/intel/ledmon/blob/main/CHANGELOG.md
->
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit 219f5c96cc744c73b732ddfb7c62d0448aa565ae)
-> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> ---
->  .../ledmon/0001-fix-build-with-clang.patch    | 90 -------------------
->  ...nclude-sys-select.h-and-sys-types.h.patch} | 27 ++----
->  .../{ledmon_0.97.bb => ledmon_1.1.0.bb}       | 10 +--
->  3 files changed, 13 insertions(+), 114 deletions(-)
->  delete mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch
->  rename meta-oe/recipes-bsp/ledmon/ledmon/{0002-include-sys-select.h-and-sys-types.h.patch => 0001-include-sys-select.h-and-sys-types.h.patch} (56%)
->  rename meta-oe/recipes-bsp/ledmon/{ledmon_0.97.bb => ledmon_1.1.0.bb} (79%)
->
-> diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch b/meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch
-> deleted file mode 100644
-> index f1e1d6f780..0000000000
-> --- a/meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch
-> +++ /dev/null
-> @@ -1,90 +0,0 @@
-> -From 28fd86fb4e18af181174176530a80672de4449d2 Mon Sep 17 00:00:00 2001
-> -From: alperak <alperyasinak1@gmail.com>
-> -Date: Sat, 18 Nov 2023 12:27:17 +0300
-> -Subject: [PATCH] fix build with clang
-> -
-> -struct ibpi2value is a structure which contains 2 unsigned integers.  In
-> -a number of cases the code was not initializing a value for the last value
-> -in the pair in struct ibpi2value ibpi_to_attention.  This was raised when
-> -using clang compiler.
-> -
-> -vmdssd.c:49:27: error: missing field 'value' initializer
-> -[-Werror,-Wmissing-field-initializers]
-> -        {LED_IBPI_PATTERN_UNKNOWN}
-> -
-> -dellssd.c:74:27: error: missing field 'value' initializer
-> -[-Werror,-Wmissing-field-initializers]
-> -        {LED_IBPI_PATTERN_UNKNOWN}
-> -
-> -amd_ipmi.c:57:27: error: missing field 'value'
-> -initializer [-Werror,-Wmissing-field-initializers]
-> -        {LED_IBPI_PATTERN_UNKNOWN}
-> -
-> -npem.c:76:27: error: missing field 'value'
-> -initializer [-Werror,-Wmissing-field-initializers]
-> -        {LED_IBPI_PATTERN_UNKNOWN}
-> -
-> -Upstream-Status: Submitted [https://github.com/intel/ledmon/pull/179]
-> -Signed-off-by: alperak <alperyasinak1@gmail.com>
-> ----
-> - src/amd_ipmi.c | 2 +-
-> - src/dellssd.c  | 2 +-
-> - src/npem.c     | 2 +-
-> - src/vmdssd.c   | 2 +-
-> - 4 files changed, 4 insertions(+), 4 deletions(-)
-> -
-> -diff --git a/src/amd_ipmi.c b/src/amd_ipmi.c
-> -index 726f77d..ad36e9e 100644
-> ---- a/src/amd_ipmi.c
-> -+++ b/src/amd_ipmi.c
-> -@@ -53,7 +53,7 @@ const struct ibpi2value ibpi2amd_ipmi[] = {
-> - 	{IBPI_PATTERN_FAILED_ARRAY, 0x45},
-> - 	{IBPI_PATTERN_REBUILD, 0x46},
-> - 	{IBPI_PATTERN_HOTSPARE, 0x47},
-> --	{IBPI_PATTERN_UNKNOWN}
-> -+	{IBPI_PATTERN_UNKNOWN, 0}
-> - };
-> - 
-> - #define MG9098_CHIP_ID_REG	0x63
-> -diff --git a/src/dellssd.c b/src/dellssd.c
-> -index 3c10ec7..7f02ea1 100644
-> ---- a/src/dellssd.c
-> -+++ b/src/dellssd.c
-> -@@ -71,7 +71,7 @@ static const struct ibpi2value ibpi2ssd[] = {
-> - 	{IBPI_PATTERN_FAILED_DRIVE, BP_FAULT | BP_ONLINE},
-> - 	{IBPI_PATTERN_LOCATE, BP_IDENTIFY | BP_ONLINE},
-> - 	{IBPI_PATTERN_LOCATE_OFF, BP_ONLINE},
-> --	{IBPI_PATTERN_UNKNOWN}
-> -+	{IBPI_PATTERN_UNKNOWN, 0}
-> - };
-> - 
-> - #define DELL_OEM_NETFN                      0x30
-> -diff --git a/src/npem.c b/src/npem.c
-> -index c21276d..3499169 100644
-> ---- a/src/npem.c
-> -+++ b/src/npem.c
-> -@@ -72,7 +72,7 @@ const struct ibpi2value ibpi_to_npem_capability[] = {
-> - 	{IBPI_PATTERN_FAILED_DRIVE, PCI_NPEM_FAIL_CAP},
-> - 	{IBPI_PATTERN_LOCATE, PCI_NPEM_LOCATE_CAP},
-> - 	{IBPI_PATTERN_LOCATE_OFF, PCI_NPEM_OK_CAP},
-> --	{IBPI_PATTERN_UNKNOWN}
-> -+	{IBPI_PATTERN_UNKNOWN, 0}
-> - };
-> - 
-> - static struct pci_access *get_pci_access()
-> -diff --git a/src/vmdssd.c b/src/vmdssd.c
-> -index 51af591..9c63d90 100644
-> ---- a/src/vmdssd.c
-> -+++ b/src/vmdssd.c
-> -@@ -45,7 +45,7 @@ struct ibpi2value ibpi_to_attention[] = {
-> - 	{IBPI_PATTERN_REBUILD, ATTENTION_REBUILD},
-> - 	{IBPI_PATTERN_LOCATE_OFF, ATTENTION_OFF},
-> - 	{IBPI_PATTERN_ONESHOT_NORMAL, ATTENTION_OFF},
-> --	{IBPI_PATTERN_UNKNOWN}
-> -+	{IBPI_PATTERN_UNKNOWN, 0}
-> - };
-> - 
-> - #define SYSFS_PCIEHP         "/sys/module/pciehp"
-> --- 
-> -2.25.1
-> -
-> diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/0002-include-sys-select.h-and-sys-types.h.patch b/meta-oe/recipes-bsp/ledmon/ledmon/0001-include-sys-select.h-and-sys-types.h.patch
-> similarity index 56%
-> rename from meta-oe/recipes-bsp/ledmon/ledmon/0002-include-sys-select.h-and-sys-types.h.patch
-> rename to meta-oe/recipes-bsp/ledmon/ledmon/0001-include-sys-select.h-and-sys-types.h.patch
-> index 75bf2b4f5e..833f38a042 100644
-> --- a/meta-oe/recipes-bsp/ledmon/ledmon/0002-include-sys-select.h-and-sys-types.h.patch
-> +++ b/meta-oe/recipes-bsp/ledmon/ledmon/0001-include-sys-select.h-and-sys-types.h.patch
-> @@ -9,16 +9,19 @@ sys/types.h is needed for ssize_t
->  Upstream-Status: Pending
->  
->  Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +
-> +Adapted to latest release - sys/types.h is already included in the project.
-> +
-> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
->  ---
->   src/dellssd.c | 1 +
-> - src/utils.h   | 1 +
-> - 2 files changed, 2 insertions(+)
-> + 1 file changed, 1 insertion(+)
->  
-> -diff --git a/src/dellssd.c b/src/dellssd.c
-> +diff --git a/src/lib/dellssd.c b/src/lib/dellssd.c
->  index 7b8d431..e97fe45 100644
-> ---- a/src/dellssd.c
-> -+++ b/src/dellssd.c
-> -@@ -27,6 +27,7 @@
-> +--- a/src/lib/dellssd.c
-> ++++ b/src/lib/dellssd.c
-> +@@ -13,6 +13,7 @@
->   #include <unistd.h>
->   
->   #include <sys/ioctl.h>
-> @@ -26,18 +29,6 @@ index 7b8d431..e97fe45 100644
->   #include <linux/ipmi.h>
->   
->   #if _HAVE_DMALLOC_H
-> -diff --git a/src/utils.h b/src/utils.h
-> -index 720447a..c106529 100644
-> ---- a/src/utils.h
-> -+++ b/src/utils.h
-> -@@ -21,6 +21,7 @@
-> - #define _UTILS_H_INCLUDED_
-> - 
-> - #include <getopt.h>
-> -+#include <sys/types.h>
-> - #include "config_file.h"
-> - #include "stdlib.h"
-> - #include "stdint.h"
->  -- 
->  2.21.0
->  
-> diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb b/meta-oe/recipes-bsp/ledmon/ledmon_1.1.0.bb
-> similarity index 79%
-> rename from meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
-> rename to meta-oe/recipes-bsp/ledmon/ledmon_1.1.0.bb
-> index 23a49a7d1b..eba5428856 100644
-> --- a/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
-> +++ b/meta-oe/recipes-bsp/ledmon/ledmon_1.1.0.bb
-> @@ -8,18 +8,16 @@ HOMEPAGE = "https://github.com/intel/ledmon"
->  LICENSE = "LGPL-2.0-only"
->  LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
->  
-> -DEPENDS = "sg3-utils udev pciutils"
-> +DEPENDS = "autoconf-archive-native sg3-utils udev pciutils"
->  
->  inherit autotools systemd pkgconfig
->  
->  SYSTEMD_SERVICE:${PN} = "ledmon.service"
->  
-> -SRC_URI = "git://github.com/intel/ledmon;branch=master;protocol=https \
-> -	   file://0002-include-sys-select.h-and-sys-types.h.patch \
-> -	   file://0001-fix-build-with-clang.patch \
-> -	   file://Correct-get_uint64.patch"
-> +SRC_URI = "git://github.com/intel/ledmon;branch=master;protocol=https;tag=v${PV} \
-> +	   file://0001-include-sys-select.h-and-sys-types.h.patch"
->  
-> -SRCREV = "b0edae14e8660b80ffe0384354038a9f62e2978d"
-> +SRCREV = "f70201d255b667de00f15880e99732699df6dce0"
->  
->  COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
->  COMPATIBLE_HOST:libc-musl = "null"
+bpftrace must be built with the same architecture (32-bit/64-bit) as the kernel
+to ensure compatibility when tracing kernel functions and using eBPF features.
+
+(cherry-picked from f8498f26991fbd8ea996dcf7c63d1c79e9c034a7 in master )
+
+Signed-off-by: Sunil Dora <sunilkumar.dora@windriver.com>
+---
+ meta-oe/conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index 2f4b9c4027..98d32c2fbf 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -119,7 +119,7 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+ 
+ DEFAULT_TEST_SUITES:pn-meta-oe-ptest-image = " ${PTESTTESTSUITE}"
+ 
+-NON_MULTILIB_RECIPES:append = " crash pahole libbpf"
++NON_MULTILIB_RECIPES:append = " crash pahole libbpf bpftrace"
+ 
+ NON_MULTILIB_RECIPES:remove:x86 = "libbpf"
+ NON_MULTILIB_RECIPES:remove:x86-64 = "libbpf"
+-- 
+2.49.0
 
 
