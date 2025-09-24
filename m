@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20F39CAC5A5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3103CCAC5B8
 	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 12:29:08 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web11.11202.1758716938936398502
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web11.11203.1758716939783043595
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 05:28:59 -0700
+ Wed, 24 Sep 2025 05:29:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mFsL+yGV;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-62fca216e4aso2004813a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 05:28:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UuGuZKBE;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-62fc2d92d34so10011391a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 05:28:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758716937; x=1759321737; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758716938; x=1759321738; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=CxO3r3dRXkTwBCtC5ORc8H9xPPjXJXEDM/dblxYxwqU=;
-        b=mFsL+yGVDrq9pA/XPYNEx0FGOsy9DJe6mu4EAMVcY3BJ50LSLMtum5jSuCglvVRf6F
-         FzZ3qXrgk/tzt9SnrkwR8RsCY6D6U3x5e7zIc31k84fFal93h5mcqN2elyP6DjlZeUaj
-         r0mKy4MXPnFh4hcH1VzJ6M0eXPNxOCxKltslWKCEOkwkbgTAM3jw6LVA6L4+JU1wuu2+
-         guDKuZ5f9y0PVfzyUsWvXh+ER9qq2B+UsZt9Y4G4yOkxoWxXrL2PwhS3RGJ8g0pCSUa/
-         Rmym/EEd8BBPPpE/8Pe/95tpigSif6BeTueHpTjrrdD5Bt25zcNP0kUZzfGiiySL6Hy8
-         HQYw==
+        bh=fTvJ7+7alBh/pUd5dtUYhzx4QVw8NyuvyAejGmNxRuA=;
+        b=UuGuZKBEabLI/m+qey3KanyXFlsPNHMqbHRcCNVzxPevQUpLIZcTvx4P2EIoRQlQfA
+         0wuKr0oBArzzGJf75jEY5v7u10fXVCPO8uuChcwlh7rxRq+ESA3zQbxafEFEAdW9nERj
+         Ob55i8K0XXUhPXyWOsr96SdgXdBLZhBxkrX2Lku1Vsqak43ybHvKwWUzpYTJuEiOncLW
+         tKFJLJ7mbBZuqw012raC3wFQpr/VWZbPDahjlSXqYxRBrCA/CeIjasvy1bYrM6nmRTMR
+         k6SJPcTHAXjJ5tOzJYPXD8QK6qmap3duSd45IWT7bBzWfL6q4AxNXAQloo3b0ITEPLHh
+         qXJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758716937; x=1759321737;
+        d=1e100.net; s=20230601; t=1758716938; x=1759321738;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=CxO3r3dRXkTwBCtC5ORc8H9xPPjXJXEDM/dblxYxwqU=;
-        b=fTRSw/glu+tbb5MvfjV6XBpt2jM99AxH2Fisr0Zbu3xuN/7iqJYWUgCoQLEygDJ5PI
-         XEbdOEqVNjlaZN4MF8NRfCMd/hiyHl5E824hEvMRb6dND7Po7bgVI/KEuHpOEizD7+ql
-         LBLj+HEaQh6jX8gR9eTPhluw6sljXROPZFzTwdzo25raiB3FaK0KmKRLTlF7tdCtNcdV
-         0nSVeVEBv68Wb2UCF1ZgVZZc92rb9oDzUL6OosBZp+NL6IIge9meu+xKVp6WwJIX1BgI
-         oxo3lB9xIXV6PkdNWqMd/Gz+5fzZvxK0/0CUvpQNKTXbPZHomm3kJhX+g1wlxtrIvMlM
-         pXyA==
-X-Gm-Message-State: AOJu0Yw7zizQY9sgbSG011VJyo6TkjzTPaWH+A6eeCdAUNn5cbMMCpm7
-	rXwCEP1uVjcKGPvHYC1jJqnBoOCOQdHdgZapBLdtuKbYiHzbdLtzgz99Vv5qcg==
-X-Gm-Gg: ASbGncsZUiQ79UEaFuzlErzRu8ws0qEX4J/nDnzahqnCR3WEwfHRCvGNQxD65YjRyc0
-	FxFiVIu8wrGegedvEqn8/fSkiWvgc3MEdHAQXXg9DHzEtUjpSuPTsZUbtqsekiviPALy9P31stX
-	OTRdHwcZPsTLvDhukUyuGeB4gbeReEqWrOQ4kFaSACX1wOhf4kCK//KLCNxCgkTbKflKBfnB1ja
-	5jtAiyMXCeAtjyDQ1T5YBeiSujv27UFqd81syjGG04nlXejSX+z5LijMyedAXt2sG3/lpg7oiNS
-	JJ9Kbi1BfhaRAJA+0i/YCtlQB6m1pX302wElnA8h7+/8t5UCw8YFvO0Pi4xw+pgrb2GT1i1WMpg
-	hgw1rUci3TSjjEPsyK0zp
-X-Google-Smtp-Source: AGHT+IG5r5R4pA8mEkEBCcyJDFntvn2h4zsYaXG4qUerNu9aW4uwpbMuBp8oPje75z4LUd1EJhM9sQ==
-X-Received: by 2002:a05:6402:2742:b0:621:e63d:307b with SMTP id 4fb4d7f45d1cf-634836d5bd5mr2298735a12.0.1758716937151;
-        Wed, 24 Sep 2025 05:28:57 -0700 (PDT)
+        bh=fTvJ7+7alBh/pUd5dtUYhzx4QVw8NyuvyAejGmNxRuA=;
+        b=eq8GW7wIyGM4qURtv8CG5N8AYpN+ESn6blOyOqYIE6UmJbULI/YILXNb+BNR1neXVF
+         cyIyLOr0xAbGbBABi72tZpWxELoArj67nd2NMoUEi/pU/POeVPC30BP/x1RKKKfr8Sfo
+         1WimlJ7VkMrVYL9NwA2nI+prY+8YQv/4GX0q3Bv4Se6oq8kvI+1mRtJpo2fV4R8Kl8qX
+         uL+04edsdbUp4VY036ZIwkYvonYV8wjf0lLsC9E+q+Ek3HomelNKGcdB98Yyxj5u4i9G
+         iijPwlP01tSbZiJVj3mt6BWATDF939tE9MEmIKBr3nUJfJVJ0McUdN02AufxzqbW8vBR
+         hVYg==
+X-Gm-Message-State: AOJu0YxexwtId7IXGpkLKpKQdLhb7Sg32HQFjD0nVbesvJQOdp0ozYsj
+	H68cHeZ63XS4khoO8kE7ziZ8qJ6QwJ1irU82+RERGPExvhuMnxVbNexJa2zHOw==
+X-Gm-Gg: ASbGncvzBqaRWKvyeCQehf2wOMg1oiUpUsfWXrTtW3veqwk9Ywk/UT1dErhvVCEudHA
+	POSznJb+fFS7RwGmam+V67BE8u89B+bU6ZDj812AIsUbR8d1mVLJLrv7e1swiug5LA8PIuNPgp4
+	DrM1MaEnh59jOYy2wqbA+NhK6wpx9YgK2lWTXXOXTdSZFmBBvfi+GQEy/0lUiFdsQQNbB0zSHNS
+	WmY8nJU05nE/w/xvZBfF2EHevVvitYpgQjo2r4LA6bOzLkA8wPdmidAaGT5Y2zNRZs3UGjCP41u
+	tGrr1/3O1QqMiLpdRrb8MUCJJhbBkIAJSATsCVjGqQ/QV5LdhZXIBDizciXNSQtq4O8qhD5jGDL
+	BgSAcAgXmPMRfs5ic+9p1
+X-Google-Smtp-Source: AGHT+IFnG9DndDZB5itX7wa0sRiAZE9I9JM2gO/+Q4/E77asLtjQ8acJ3DiaBq+akQO50MzJRxO1nQ==
+X-Received: by 2002:a05:6402:46d2:b0:633:d65a:af0e with SMTP id 4fb4d7f45d1cf-63467821b26mr5957363a12.28.1758716938034;
+        Wed, 24 Sep 2025 05:28:58 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63469f30772sm3024835a12.22.2025.09.24.05.28.56
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63469f30772sm3024835a12.22.2025.09.24.05.28.57
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Sep 2025 05:28:56 -0700 (PDT)
+        Wed, 24 Sep 2025 05:28:57 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][kirkstone][PATCH 12/20] gvfs: fix polkit homedir
-Date: Wed, 24 Sep 2025 14:28:30 +0200
-Message-ID: <20250924122839.4184719-13-skandigraun@gmail.com>
+Subject: [meta-gnome][kirkstone][PATCH 13/20] gvfs: fix dependencies
+Date: Wed, 24 Sep 2025 14:28:31 +0200
+Message-ID: <20250924122839.4184719-14-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250924122839.4184719-1-skandigraun@gmail.com>
 References: <20250924122839.4184719-1-skandigraun@gmail.com>
@@ -67,39 +67,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 12:29:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119815
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119816
 
 From: Markus Volk <f_l_k@t-online.de>
 
-- remove double slashes
-
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c6168d98ed4b672f959c48f7abecce2d33bce327)
+(cherry picked from commit 216b7002ccc6e861de0d267468b4e1ba22cde86a)
+
+Adapted for Kirkstone.
+
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-gnome/recipes-gnome/gvfs/gvfs_1.50.2.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-gnome/recipes-gnome/gvfs/gvfs_1.50.2.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.2.bb
-index 73b9bd3b09..9d1303e2e4 100644
+index 9d1303e2e4..686e0ab4e0 100644
 --- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.2.bb
 +++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.2.bb
-@@ -77,13 +77,13 @@ PACKAGECONFIG[fuse] = "-Dfuse=true, -Dfuse=false, fuse3"
- PACKAGECONFIG[cdda] = "-Dcdda=true, -Dcdda=false, libcdio-paranoia"
+@@ -12,6 +12,7 @@ DEPENDS += "\
+     gsettings-desktop-schemas \
+     libgudev \
+     libsecret \
++    libxml2 \
+     shadow-native \
+ "
  
- USERADD_PACKAGES = "${PN}"
--USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/${BPN}-1 polkitd"
-+USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 polkitd"
- 
- do_install:append() {
-     if ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'true', 'false', d)}; then
-         # Fix up permissions on polkit rules.d to work with rpm4 constraints
--        chmod 700 ${D}/${datadir}/polkit-1/rules.d
--        chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
-+        chmod 700 ${D}${datadir}/polkit-1/rules.d
-+        chown polkitd:root ${D}${datadir}/polkit-1/rules.d
-     fi
- 
-     # After rebuilds (not from scracth) it can happen that the executables in
+@@ -63,7 +64,7 @@ PACKAGECONFIG[afc] = "-Dafc=true, -Dafc=false, libimobiledevice libplist"
+ PACKAGECONFIG[archive] = "-Darchive=true, -Darchive=false, libarchive"
+ PACKAGECONFIG[dnssd] = "-Ddnssd=true, -Ddnssd=false, avahi"
+ PACKAGECONFIG[gcr] = "-Dgcr=true, -Dgcr=false, gcr"
+-PACKAGECONFIG[http] = "-Dhttp=true, -Dhttp=false, libsoup-2.4"
++PACKAGECONFIG[http] = "-Dhttp=true, -Dhttp=false, libsoup-3.0"
+ PACKAGECONFIG[libmtp] = "-Dmtp=true, -Dmtp=false, libmtp"
+ PACKAGECONFIG[logind] = "-Dlogind=true, -Dlogind=false, systemd"
+ PACKAGECONFIG[libgphoto2] = "-Dgphoto2=true, -Dgphoto2=false, libgphoto2"
 
