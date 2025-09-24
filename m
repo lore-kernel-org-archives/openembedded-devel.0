@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14447CAC5B7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13EBACAC5B6
 	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 12:29:08 +0000 (UTC)
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
- by mx.groups.io with SMTP id smtpd.web11.11209.1758716944329758398
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web11.11211.1758716946636675299
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 05:29:04 -0700
+ Wed, 24 Sep 2025 05:29:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XJ2Vd6M9;
- spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-62ec5f750f7so11370818a12.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 05:29:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lga6PSb/;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-b2e0513433bso455762266b.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 05:29:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758716943; x=1759321743; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758716945; x=1759321745; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=U33dN7pdCNPAP5kbk1lfDZwuUhURal9BkxVllnuvaTc=;
-        b=XJ2Vd6M9vUxWb15k8gtN6AlN/uxIMPd3koTEMt9AcHJYcz/Av100RhS17o7TtY1/hh
-         gForv/0GgcUljgvghVslSV0E842xQZdWdZ7PP3sYw6rbKFntcKH/Fx4R2S0fsSnvZ7l3
-         0nAtnYPnKdA0cTzT6l2ZHrWeE8MRW4u+jR2zZ7g70cxxsCESc926dT2CTeXK440cJUEK
-         s3Gxn9IksPkl6sEGV8cN3b7AQf9LLd3bGkTqhWZosQn9B/VWDquq0GMdAWEEiGgs74Bq
-         GKZylO+Rov8QG7XLbiCWWbWjosDiWe+X0Kbni543SQRscuORn5Q6QXQ+9Ud4z6ehlDPF
-         oH5A==
+        bh=vX3MO+ydUOgMivwnt01nysVpe0kLPPwrMCJevvYm3yA=;
+        b=lga6PSb/yqtAdmy2dEJClZGSf06ddL0EYw8pIm4mjj0dL6pHzkkP93TjigdNsw0Dmz
+         y2MwMMpGNXEqNqikoutrVt3tHoXdyPEDESsFoB29h6aSrNdkyO/ysIHUTV+i/loU5al+
+         dbHrPf/49T+HBxlBtD0tDA/3uNFUxxH9DpQXGNBukft/thTmhRO+ArRAkkp+OWrP2U0v
+         qH+y47dDvYOZuVrLdai8LoHenlQtFNAd1d6K3MfkIfFNa1mDVzJdPO9qeuqcRh1NKJ6z
+         GH4tTZMcqdH1+GPhiW2bKsmcz7hXBV7pJUtEmQJDyEkKjuM86yewoN4vSpNPcJOW06gM
+         WeGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758716943; x=1759321743;
+        d=1e100.net; s=20230601; t=1758716945; x=1759321745;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=U33dN7pdCNPAP5kbk1lfDZwuUhURal9BkxVllnuvaTc=;
-        b=UpErkVvZXzKk5n+r+JTmZXSnw/eBwBuSjg7dfxJHkY7+MVqTfiSMr/ETt/DqaBkPFV
-         W48ncAbr9/qyVNwDoD1hSmg4vl/oBzYPehhGGa8A/CfiT2bJGkYpFSzQn9dyc+ZcKff5
-         442m0Ed4NfQp54O8hetplgAhEVRRRWkWJzMyO1Bx++3LuQ+c9OZ3x+eCpT1CzlzikzZ7
-         yhCLKInAHApRQEazIEXRVyIjNtCj2BbZnUa1IXL2Hlz3jUVyZuYFNv4nf4uTKgl4aCLs
-         6xv4JG4/JltkGoKZqk8l8NiZcWm1OEtgvq/mM76PxC+FYt0ligVsXIqXsu3UWnqVvOT+
-         4dkQ==
-X-Gm-Message-State: AOJu0Yyp9WtNGWn+SEsGXHD3O9NjksHfze/fQlYlBXvxlYdPIZ+OrkPj
-	ayogleDVwEqRRQBz2+mbldkJXbscN9VHnJ5EXrxhn9RqEQRQK6o9g5lKF5uckQ==
-X-Gm-Gg: ASbGncvT4R6iisN4j6XszPQ6SMfAnGkMZOxtP9qRijZu5kW2SuQ5O2JgF4LK86ghFQZ
-	wJwliU3pbVLQ6RMFhGXxeF8H6/jz5LW6MHFp5FoGa9MNncJC99TEjWTlD+yNH75v97bLE2BKb10
-	PKXkYvKwLIGjce6IlDgAApTGyxbSqjJEf5aJ0P33pYszuJ3IUwxATajhzjWgnlFsgp5wSWBaNaQ
-	mCEVRfj6tWJssHYwznXZsVEhe0Ymhk9JrDBtLor41pa2hoJ9tdr68uC8YeYg902blR9p33/Zcxf
-	ioB1CbRFdmf5XAmp7sOwXe45EOLI0vYWAggeJYDB8xKfQwkGVi41qFI1Cg6qRfFIRRDD7edm/SH
-	jiYz/D+Sth7aX0UfbPfJK
-X-Google-Smtp-Source: AGHT+IEMqDhsJk3SoFNuEWRkanoVIRittqB8fJTK0B/KFaBWNmD84b6Z6zisNh9XDIud88MsYfSjGg==
-X-Received: by 2002:a05:6402:2554:b0:633:bb72:da49 with SMTP id 4fb4d7f45d1cf-634677799dfmr5621456a12.9.1758716942558;
-        Wed, 24 Sep 2025 05:29:02 -0700 (PDT)
+        bh=vX3MO+ydUOgMivwnt01nysVpe0kLPPwrMCJevvYm3yA=;
+        b=maT9yG5SXAKyHF+g0i5BEvImbVjRzFh2BBwgexSIqQf3OpIq57E36ZkPfpv/BTFVAs
+         eNGTAi/rp6KjIQhQBl2CHq/PaDqw0rHnKP3PgoFtQj3/bsQBhVr+Fu+bRB7RPxRGoME/
+         TTO0ZBr0NxaH8tZZTzWGvAzmq4qbj6Z0G840I34z7YB9rqDnZFlwu7drAm/Zo+QoYNek
+         hM0WOyIXG+j2W8ho+qXZvN/0E4l3uwgaqFZ2ZphlENAl5e/RgIZPeu1Xz3SFoj2UXJhf
+         CAy/0W+vk4jLlUFS8mSJy1JBU41cgr43uA1nEp8a5ej4D37fKfLlsgIIbNZLcLB422e/
+         vuHg==
+X-Gm-Message-State: AOJu0YxR7222+puizp9aM5gmuPR5xpQQ8nSQN9k8UFfhmw3pPfpBh7ym
+	GmtdjH8QmjLYW4zKFkgEG9vDygehr6XdGdal3cNMKXimYDtk7PeIQoIOwP3f3g==
+X-Gm-Gg: ASbGncsIgBLSlnNFq1iiPIAyBeRGWOi7t5G9qjFdem7RwXsE+tIf+HlbiRexMoxW/P3
+	yJUxwn29OpcZDLymCLMGAi+zGNEm3rBmtKbDn5z5jnj1erCoIXewvEKgYr0q46E/d8kKmmm+Ysb
+	nrQvC/T8gunkB3bP1A0cFa4rqIoLoDnUY7Gyyu8uNXLl/Zd5D8ha6WeG5YLaGXHqFGTTwCasiHm
+	7o5uGUp1V0ciAlG0ASoFicr5UJr5p/J7LgDwIQGvQp868GLwSngKVCg07zDc1bpv/gfpmwgrEQQ
+	p3utaO3Hw5LjFH41IfJ2746q1KmDrdd/q6XlQfwlpbTjeLNM3rinrJlth7XHt/pJlMCRhFtBJpC
+	zyLkaHFRzuUrBScwrwPNL
+X-Google-Smtp-Source: AGHT+IGgxeR2HK351ZU9X04h2fptDgizLc/awJAakf2pAKepFJFW/H8QjhKliuTjXmyXGKnqqvdD8g==
+X-Received: by 2002:a17:906:8f03:b0:b33:a2ef:c7 with SMTP id a640c23a62f3a-b33a2fe4809mr152904266b.55.1758716944961;
+        Wed, 24 Sep 2025 05:29:04 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63469f30772sm3024835a12.22.2025.09.24.05.29.01
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63469f30772sm3024835a12.22.2025.09.24.05.29.03
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Sep 2025 05:29:01 -0700 (PDT)
+        Wed, 24 Sep 2025 05:29:04 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][kirkstone][PATCH 17/20] nautilus: add opengl to REQUIRED_DISTRO_FEATURES
-Date: Wed, 24 Sep 2025 14:28:35 +0200
-Message-ID: <20250924122839.4184719-18-skandigraun@gmail.com>
+Subject: [meta-gnome][kirkstone][PATCH 19/20] yelp: upgrade 42.1 -> 42.2
+Date: Wed, 24 Sep 2025 14:28:37 +0200
+Message-ID: <20250924122839.4184719-20-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250924122839.4184719-1-skandigraun@gmail.com>
 References: <20250924122839.4184719-1-skandigraun@gmail.com>
@@ -67,35 +67,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 12:29:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119820
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119822
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: "zhengrq.fnst" <zhengrq.fnst@fujitsu.com>
 
-Fixes:
-  ERROR: Nothing PROVIDES 'gnome-desktop' (but /build/layers/meta-openembedded/meta-gnome/recipes-gnome/nautilus/nautilus_42.2.bb DEPENDS on or otherwise requires it)
-  gnome-desktop was skipped: missing required distro feature 'opengl' (not in DISTRO_FEATURES)
-  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'nautilus', 'gnome-desktop']
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit dd10f8edaae118f8fc1e51c89efb006826a40769)
+(cherry picked from commit bfa889276382370324532438dfc9962c0fb2bf05)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-gnome/recipes-gnome/nautilus/nautilus_42.1.1.bb | 2 +-
+ meta-gnome/recipes-gnome/yelp/{yelp_42.1.bb => yelp_42.2.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/yelp/{yelp_42.1.bb => yelp_42.2.bb} (88%)
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_42.1.1.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_42.1.1.bb
-index 6d942204f6..a36ccec472 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_42.1.1.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_42.1.1.bb
-@@ -23,7 +23,7 @@ def gnome_verdir(v):
+diff --git a/meta-gnome/recipes-gnome/yelp/yelp_42.1.bb b/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb
+similarity index 88%
+rename from meta-gnome/recipes-gnome/yelp/yelp_42.1.bb
+rename to meta-gnome/recipes-gnome/yelp/yelp_42.2.bb
+index ab8b9c37ba..fe3b1105c4 100644
+--- a/meta-gnome/recipes-gnome/yelp/yelp_42.1.bb
++++ b/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb
+@@ -9,7 +9,7 @@ inherit gnomebase itstool autotools-brokensep gsettings gettext gtk-doc features
+ # for webkitgtk
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- SRC_URI[archive.sha256sum] = "8519d4565e842aa3d31d0fe39b21d48ac54edc0f0658fe1d8ea2da4e704c1b66"
+-SRC_URI[archive.sha256sum] = "25b1146ab8549888a5a8da067f63b470b0f0f800b6ae889cacd114d01d713b41"
++SRC_URI[archive.sha256sum] = "a2c5fd0787a9089c722cc66bd0f85cdf7088d870e7b6cc85799f8e5bff9eac4b"
  
--REQUIRED_DISTRO_FEATURES = "x11"
-+REQUIRED_DISTRO_FEATURES = "x11 opengl"
- 
- EXTRA_OEMESON += " \
-     -Dtests=none \
+ DEPENDS += " \
+     libxml2-native \
 
