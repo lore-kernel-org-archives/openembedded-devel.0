@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5444CAC5B3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DFBCBCAC5B6
 	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 12:28:47 +0000 (UTC)
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.web11.11193.1758716925034546195
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+ by mx.groups.io with SMTP id smtpd.web10.11303.1758716925907464730
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 05:28:45 -0700
+ Wed, 24 Sep 2025 05:28:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cSbzh6eK;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-631787faf35so7733850a12.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 05:28:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ljOh05UP;
+ spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-62fbc90e6f6so9724845a12.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 05:28:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758716923; x=1759321723; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758716924; x=1759321724; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=+tpWR2/xY6rfurGJHIpO9hUF3fK6yZuW7pWvoe9l/8Q=;
-        b=cSbzh6eKbreqHiD70i0/CgnePZJFcTEA0xUh9lsKLxZm43TkGIQuWIiRbeczigwveZ
-         gVdDsDmSro2wElDX6WSk1UxrnC1HkqhVJFSowk3mDJCyNiMiBeAVE6OLhFiDHfWsN3+G
-         I9R8d58aasg4w4IyXfN7D6VEyAtqkjM8UPkGd1tHhk9GeqvxVe1WqI2m3eL8bj58ysPj
-         eLXfnnwGSVtG/jT/iQHBYSat80lAi6KCfvpzp0YYRWNlmhguVZhYj5lyzwzjVqzlO5wO
-         1Fi2vIEd2/HGm2mo37nGlcv/FsNypbHK4aso4/4uOn2HiApS1YvZbhu6jr9CHrvhXvS/
-         541g==
+        bh=CLVkc/iOxrn64G+n26KDoC3978cfrTmTYh82V8YTy8o=;
+        b=ljOh05UPXNmraUWbbO6SJp2VHjchA+7+KWGxFcqSU2zcGDy8vUK1Ken5SNahcBDlIv
+         DggKLoFeaZRCvWS1FV1lZ4JWYNZ1F12UQClSdeJYeY4/fxqUDyU1wdNzKVxuLSKFiIZu
+         gwOjOEHA9E2ro/x26eJP8t0cjckY7//RvwJ2oGrq7M4WgvHEzRrNCZARDg3b5V4QIEj0
+         UZPoeVR3LuwZz0itk/0aGHB1EKAf0pP7k9mjGTQtXluX8Mwvq64Lxt5vmffNIzRQZocM
+         YKBogbejH00uQo59ZOhYMt67CncCIfRs9+se6RIA5iwLVD4iTNuodhMbXdhDk14Vxiyv
+         CozQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758716923; x=1759321723;
+        d=1e100.net; s=20230601; t=1758716924; x=1759321724;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=+tpWR2/xY6rfurGJHIpO9hUF3fK6yZuW7pWvoe9l/8Q=;
-        b=E/qy9z9l2IFl74dMudNgdlCnkU+bzvGNe/D5zve0XJrjk/cKua1z3qrH0298eyd7IP
-         OgTV6hEKl1rdM7VF2/LYOfpXwar2cCL0rzNM9dEL785wTBduQGSYsKYkXHshznULEd+w
-         qOG1+6ElqIA5lavY9+h7RNMsgyOE+WiJkiB7WyO5rQUTlDCi8UkFD8L8yEt3kFl2PLug
-         tNekmvRK/u8R1kQ2kixQbvk0ubceTpmi3nBoW2Ao0VSHQbVffDkmmqIvY3wbQnODjRkk
-         YXJGhZjOcicFeKbpJ+LhXOol9SCbHbllBZw1Ce+Mq3QXy1K/C6vEPAf6Rum4ouYZPOoX
-         2TrQ==
-X-Gm-Message-State: AOJu0YztJa/p16IUnbt6eMhFhT+5RC5yl4GghaC5jxtu/n6PT/B0QXui
-	AC8d29RBlinf8SRchLp3Xs+VXWVWSVvgg9yEeACRJeg/sjAYirAb/bnTm++4aQ==
-X-Gm-Gg: ASbGncuHpy051ucOlPj/yaFEXBpZczoBMNSj/IMA5VNYPS+rNyDjPkMrKogGdX3nyXz
-	fegbLz9lQBiU3KQ2nTsMvH+PbZIyAVm8ffcURR9JmBTAwl8JUWND4Busbo75W8OYZ5Fx/kE5DVN
-	IGMMCfutf/QYhbqBQ1tzHZb8fc914CiFa3b5NZ6SI1zQ7oID6aRHFV8uiSw8RMChcgInaXHP/OM
-	S8N+P/UebZKTAzTquZTZFIOlGB71Us0mcs+joyzMj1pGflEkHnqwOarROeVK2k3BwBNbpuEnlte
-	sWyBWaQOVtvcAl6VYtubO7YO2sDZ8x2HUZ3IWtrKW+TXVwRjJdF7q2Q5fKx5Z11hGHaCvGVIvck
-	FO97zcF3gp1Kw+lKr1dw9
-X-Google-Smtp-Source: AGHT+IHIVDcTSK9VcqWGkuCZkRjB9+EnXvsWeXq/M1mdOFCXv6ETUX3qOdGvvKSNCXle69ET9uaSdA==
-X-Received: by 2002:a05:6402:44c6:b0:62f:4b68:bfae with SMTP id 4fb4d7f45d1cf-63467806cc0mr4703166a12.31.1758716923214;
-        Wed, 24 Sep 2025 05:28:43 -0700 (PDT)
+        bh=CLVkc/iOxrn64G+n26KDoC3978cfrTmTYh82V8YTy8o=;
+        b=uzOHTJD7l5VOBRNUO3VBHS3QO4EbRVkEtcQuCUy8Q79f0HsCkwfdyDBJAt3GQMus7i
+         ph2zw65+tyTXsMwbxlrBcBm0/2ibntNJ/DajaW2+afXS6fZdNwMI7BMvlByPjkYZmi1w
+         cxrvOQPvKUbHNKKLqRImzzIo7wgz5oRVFRfWGsP0/Cn5kpKkg5lh2JeHAvG+lg5q/ePF
+         eL4fLYgyU3xeFrbvZB/5SU4Xa1Rph+CoyRlYH6jxZU04pKvD7+Qgyp9TjnBdh7JEOV94
+         Mmn/yhStcLieGwETktB69bLayGOsTUV7fc6K+oJRcc0zItarBHChVuMzFuQk1iD5310Z
+         3uQQ==
+X-Gm-Message-State: AOJu0Ywn9wKPGTmNklstC5VN9g6EwmiR/2dlvSwGaBu3MyjhR6FRciLz
+	M9K3ZOuCZksbXXsDFsBBSFFH/nkVO/Pu6LALUKHEp2GQQ5LD71kZfGjp+BfzCg==
+X-Gm-Gg: ASbGncutp9xPjRnTjG0avC8N5TjhCkQ1e2yxvtlFnd+6H0qQs9R4gXkxWwmJaRVV4Wu
+	RqTCiSpcNJPPESUHEGnIEQvTuzf0jVotD/9nKTDDKvTp+Qr8EtTUSPbkBMCJmEKoIwTrpmcK9GL
+	m/s7+Kg7zXglTiR7PnM4wiul59JSOSEa48IVeCuzuavGwm/dNqcj8dOv047JfVK23ad+Yr3P8Na
+	2FPsrHZoQxzp7V51bOeRuNoltwOy8lp4sKgE6RDvo83NBjFi+kn58NTfnuxMn69dZx5Nd9ip7ap
+	6OVvDYhCEr8rkQuopmXU7ozU8S1zimQxsG8UUZZWPFKsB/IXLMlPnduJkSYKcTexVY+6z0UWEd3
+	E2CMnGzS9bym2p0G0qgDH4ve2x3O42bY=
+X-Google-Smtp-Source: AGHT+IH5TM/DDWyZBJsIlbtzmwu1aWqLExIpXLXBBxMcB9PVD701KGLP3/uYdpLFP+SR5+u8Mo3V6g==
+X-Received: by 2002:a05:6402:40c2:b0:631:f57c:c32d with SMTP id 4fb4d7f45d1cf-63466e7957amr5675192a12.0.1758716924175;
+        Wed, 24 Sep 2025 05:28:44 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63469f30772sm3024835a12.22.2025.09.24.05.28.42
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63469f30772sm3024835a12.22.2025.09.24.05.28.43
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Sep 2025 05:28:42 -0700 (PDT)
+        Wed, 24 Sep 2025 05:28:43 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][kirkstone][PATCH 02/20] gedit: upgrade 42.1 -> 42.2
-Date: Wed, 24 Sep 2025 14:28:20 +0200
-Message-ID: <20250924122839.4184719-3-skandigraun@gmail.com>
+Subject: [meta-gnome][kirkstone][PATCH 03/20] gnome-calculator: upgrade 42.0 -> 42.2
+Date: Wed, 24 Sep 2025 14:28:21 +0200
+Message-ID: <20250924122839.4184719-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250924122839.4184719-1-skandigraun@gmail.com>
 References: <20250924122839.4184719-1-skandigraun@gmail.com>
@@ -67,38 +67,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 12:28:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119805
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119806
 
 From: wangmy <wangmy@fujitsu.com>
 
 Changelog:
 ==========
-* Fix bug: text cut off at the bottom in certain situations.
-* Translation updates.
+ * Updated translations
+ * Fixed incorrect history with bits toggling #281
+ * Fixed crash when typing in variable popover #282
+ * Fixed incorrect libxml usage #283
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f550d1fe6a149b88f610b1a57493aa0d3a77693f)
+(cherry picked from commit d9d207bb44da6dc2c33b8880e46d5f501b1e2c16)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-gnome/recipes-gnome/gedit/{gedit_42.1.bb => gedit_42.2.bb} | 2 +-
+ .../{gnome-calculator_42.0.bb => gnome-calculator_42.2.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gedit/{gedit_42.1.bb => gedit_42.2.bb} (91%)
+ rename meta-gnome/recipes-gnome/gnome-calculator/{gnome-calculator_42.0.bb => gnome-calculator_42.2.bb} (88%)
 
-diff --git a/meta-gnome/recipes-gnome/gedit/gedit_42.1.bb b/meta-gnome/recipes-gnome/gedit/gedit_42.2.bb
-similarity index 91%
-rename from meta-gnome/recipes-gnome/gedit/gedit_42.1.bb
-rename to meta-gnome/recipes-gnome/gedit/gedit_42.2.bb
-index e2bbf1889f..e022b9ddf9 100644
---- a/meta-gnome/recipes-gnome/gedit/gedit_42.1.bb
-+++ b/meta-gnome/recipes-gnome/gedit/gedit_42.2.bb
-@@ -21,7 +21,7 @@ inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc val
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
+diff --git a/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_42.0.bb b/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_42.2.bb
+similarity index 88%
+rename from meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_42.0.bb
+rename to meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_42.2.bb
+index 80cc38c615..31513a5f61 100644
+--- a/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_42.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_42.2.bb
+@@ -28,7 +28,7 @@ def gnome_verdir(v):
  
--SRC_URI[archive.sha256sum] = "7f1fd43df5110d4c37de6541993f41f0fbc3efc790900e92053479ba069920e9"
-+SRC_URI[archive.sha256sum] = "3c6229111f0ac066ae44964920791d1265f5bbb56b0bd949a69b7b1261fc8fca"
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- # gobject-introspection is mandatory and cannot be configured
- # x11 is needed for tepl and gtksourceview4
+-SRC_URI[archive.sha256sum] = "a535a14ebea58e691a4b5a085256aed060a2c3f07384ac3a3d01832332a27e4a"
++SRC_URI[archive.sha256sum] = "33dab1bca43658d66520958b0f674cb0ad3185cfd30c12e459e7f69481c5c6a0"
+ 
+ FILES:${PN} += " \
+     ${datadir}/dbus-1 \
 
