@@ -1,158 +1,167 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C270CAC5A5
-	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 09:11:36 +0000 (UTC)
-Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
- by mx.groups.io with SMTP id smtpd.web11.8354.1758705086487688804
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7938FCAC5A5
+	for <webhook@archiver.kernel.org>; Wed, 24 Sep 2025 09:30:16 +0000 (UTC)
+Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
+ by mx.groups.io with SMTP id smtpd.web10.8723.1758706214970394716
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 02:11:26 -0700
+ Wed, 24 Sep 2025 02:30:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bSD75VDO;
- spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-62fc89cd68bso10430730a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 02:11:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SGDTj/eh;
+ spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-31d6b8be249so6078288fac.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 02:30:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758705085; x=1759309885; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ArvxitSHwP5RbvAVg7pKgnYJTlJ2UaIJwqiBein7Tno=;
-        b=bSD75VDOwzIfioEVCHP1KGpTaBIuO5wlanOrfaxLLGeXWBsOcx+DJJX6YQlP7fGU9C
-         iRnstw5+JmCkeIz+4S8fM0ka52c1MQpTxIu9xbw30NhmR3piZLvuFt3HniV9ZblBBo4m
-         FnPN5ZeKKNQwlG1HXuZ3XvRQ4ljsGHiaAm0dFxibDvMr87Yq3LcQ+2ZFBwQkkOMNNeUP
-         x7FzH2G1ZWSr9pZlkImNTzMpCWnGGQNyPNabWP79mTSa8STfFG756LTuuFaW+Xg9TSlD
-         dxpWv9pS3VUsNEORIVolBTVZxH/8xLctbnE4ZtwGPJK/HUB30DOFIJjd+2CZRprpypVt
-         TX8Q==
+        d=gmail.com; s=20230601; t=1758706214; x=1759311014; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=O8k+5ZU8AqmEI9CGyUrF8NB7Z7ol/JebW19rJ/D7hls=;
+        b=SGDTj/ehQyxGWwgva/ZaGZ67gFdglbId1fZ9zM6HK9e0eH9jQOS5uJLbmMmyoZHSyx
+         xQFxYK2uWMsuMhMFAnfRRkxZsCqvMPc53ilok5VhL3wvShjvQYizyinH98Gv0rqUaA1R
+         7o1BIEVMC+e80V0JPV/4GGJ9uppyu+CeHA2Kee2AMHn9ExYm1HvOOmsVZ7P06nSr1iB/
+         wih447tyYpAWv1OntIeYLr89/6HdM4bQ2Aer8uxGOg2069oGRLC4G6Nt7DQMSI9kxzcP
+         D4lqVSkE81+0+bqS+MNQ5OixpJ1B6my5ugbMpNOhIMmqNoWmL0egCQg9lTgawXZ3j4Y4
+         6SfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758705085; x=1759309885;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ArvxitSHwP5RbvAVg7pKgnYJTlJ2UaIJwqiBein7Tno=;
-        b=gvfll8FPQ0N2DpbyyHFPtkEAblwqG3j0tNIH96W/cOtvb7h94+SwABdeNIB9xl87hJ
-         MZvVdstOsC7AoLeywzL5NPvpTYPRgqQKU/40KVX/wA+iQgmA1bPQTtu6fOf907e+N+c0
-         jBrc05Kh5xAzP/Iv/4Sv7/C8myqx62cTSVsBLai7alxIZKTRgbg+xV+8W8dQZuMUVB+J
-         4euXITyz/MbB6zS5gIJyP+xCsEq6ieHSYjl9dmyHIohGKVkNLsQA9xh70fL0z4PZsNbs
-         ePIANVhsKV+qqlOLJSpgXLunXGlH8T6VPOEeLjK4ttG4mxMjiprFor1el5MOsNbtZv0W
-         lXTg==
-X-Gm-Message-State: AOJu0YwTZ9J4Sdu/ZvO10fSVbzpuBEmbXSvix1s943j/k1PBtmwbb8CS
-	StDnUfbNwfCiXjo3tViiECosaOtSV9Xk+5CpAcDFiTjQ85ICTHlCOQ1HO3xVsLbf
-X-Gm-Gg: ASbGncuvtL7p6Ra2tTCPPACodBX7KZ1aED8lbNGOwuNgHeJEjJFofyL+8V4fmRUztI4
-	fy0bFtcPm0RhJV4lIS9W0i5LpKtXn5g7f4Ud5s4QV3W0oamvLgiVg1mObJBmOnf/HV7kB7OnAor
-	DmUagj5b5LEFRXsKbMVhmu6T8TKnUubgcU1Qub9D20RWCnwkUdE2zHjugzRoXTF8JQOiDvtDnjt
-	3YCGoG6YYokQNNFk8HDS4H7hx+zGgFN/nEBnjYzuOEpTs2HL6NLcnB1PFz36Au7JK5DNpbSp8b8
-	kMf3w4nyWgeBJWRuzwLzhbZY6tvwZ79sFTW2dpP3a1pMsITyR0bIvlG7Nzck1tZicVZhZFv64R6
-	PlBtq80VUc8hx2ipMxriB
-X-Google-Smtp-Source: AGHT+IFXGBgdN699UsfwEgFwW/pbrGhG7NuNS+SfspDtPL+mkro5C04AMhFcqOfmF0AeHsEbAgr/jg==
-X-Received: by 2002:a05:6402:234b:b0:62f:64b0:9cc2 with SMTP id 4fb4d7f45d1cf-634677b6e57mr5460067a12.16.1758705084452;
-        Wed, 24 Sep 2025 02:11:24 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-62fa5f2b4d3sm12599012a12.42.2025.09.24.02.11.22
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Sep 2025 02:11:23 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] keepalived: upgrade 2.3.2 -> 2.3.4
-Date: Wed, 24 Sep 2025 11:11:22 +0200
-Message-ID: <20250924091122.3888855-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
+        d=1e100.net; s=20230601; t=1758706214; x=1759311014;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=O8k+5ZU8AqmEI9CGyUrF8NB7Z7ol/JebW19rJ/D7hls=;
+        b=VuKW8Hb7EgnaCdOle/4miZVEkP8DfdqmsEp4UQuXJlWjrhdGMqYNrdueRkeS5cHqV1
+         uK523dyfNNJsotthe0HYb3aFKFILupqzLOy1i8yPU17w8vgGBRBY3d2RVTeLpBUHNtZb
+         F79evFDsPax6Ph5GNmbgBrBHDmNOuBEyFJ/jsLY/s4zUNBRErr49m84va+jioFV/fd9T
+         G7PvTCDOH3TP9seMIhES0KzQ+Le/BSwVUx0TLSQlUUqvxxFvVYmyw8wgLlVlK1PoJgkY
+         pmTrS2FScz0ySwDQQ3IgI5hkj4KBkZZY7MsBDtqhaRvDRKcOQq8Acqlnbc+ftMPNsAEz
+         0QsA==
+X-Gm-Message-State: AOJu0YykGwxrj/9kEPMoF1CizM7xXN79YzS+JJGMgfFc8HA2b8vHQa6n
+	KMP5dJDKMfVNBG/XHKQ50a0NrYRDah4byWw6kFqF9+QNlwK3gwcI8BJWVmYmEFseDb4R+e8jrNe
+	2ZSqBzUsdD4B8dOjciVhAhEHVSEN+qXVLmg==
+X-Gm-Gg: ASbGncvT3A4Ie6jXIyaxCEwi/YNxhapEJI0THP02hTvoRv2Ym/ul4hH8dWVJZcRPr+P
+	F44iBJAjQVukUCO4hImkJoFGYm7PQcT0iry21cxIDmW1/frnwE61evMSC9x1MzlIYv8e7BxpbUA
+	I07iZYKXNzJtweA3VIy81gi4Nc6B8XjHUGcViOqvGlCXaRMm3LCjpJKhW8HU4LUUVXMI8TNtkoP
+	PJ4Om5ARA==
+X-Google-Smtp-Source: AGHT+IFBD5o1aHtKMFQAAVoYndj2w3+wk9PZobSdX/t2IfvspSxJdg525eIu3y2jdrac11Oa/fMrsjkyFfJqAneknKU=
+X-Received: by 2002:a05:6808:6c93:b0:438:3def:446a with SMTP id
+ 5614622812f47-43f2d48d60dmr3831229b6e.45.1758706214033; Wed, 24 Sep 2025
+ 02:30:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250924075643.2047506-1-ankur.tyagi85@gmail.com> <d09b1bc7-3c18-47f8-a7eb-3cc6e88b5bb1@windriver.com>
+In-Reply-To: <d09b1bc7-3c18-47f8-a7eb-3cc6e88b5bb1@windriver.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Wed, 24 Sep 2025 21:30:02 +1200
+X-Gm-Features: AS18NWC1dHE5OJtfkzmnhg7vdJvrDlYW88jfbb6r136ybS2TyEmsJiGnDaH7IfY
+Message-ID: <CADySD0EG7dt841cwvcbd5BLyBh39Yq81kn2XBRb_2qjkyJvaFA@mail.gmail.com>
+Subject: Re: [oe][meta-oe][walnascar][PATCH 0/6] cherry-picks from master branch
+To: ChenQi <Qi.Chen@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 09:11:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119794
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 09:30:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119795
 
-0001-vrrp-Don-t-include-linux-if_ether.h-if-not-needed.patch is included
-in this release, so drop the patch.
+On Wed, Sep 24, 2025 at 8:02=E2=80=AFPM ChenQi <Qi.Chen@windriver.com> wrot=
+e:
+>
+> There are a few major version upgrades in this series.
+>
 
-Many changes and updates, easier to look in the changelogs themselves
-rather than pasting here:
-https://www.keepalived.org/release-notes/Release-2.3.3.html
-https://www.keepalived.org/release-notes/Release-2.3.4.html
+Correct but I found no concern from the respective changelog.
+But if you (and others) think it can cause any issue then please let me kno=
+w
+and I'll do some more validation otherwise drop that patch.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- ...not-emit-compiler-flags-into-object-.patch |  4 +--
- ...clude-linux-if_ether.h-if-not-needed.patch | 34 -------------------
- ...eepalived_2.3.2.bb => keepalived_2.3.4.bb} |  3 +-
- 3 files changed, 3 insertions(+), 38 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/keepalived/keepalived/0001-vrrp-Don-t-include-linux-if_ether.h-if-not-needed.patch
- rename meta-networking/recipes-daemons/keepalived/{keepalived_2.3.2.bb => keepalived_2.3.4.bb} (93%)
+> Regards,
+> Qi
 
-diff --git a/meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch b/meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch
-index e44e2035c2..92be7510d4 100644
---- a/meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch
-+++ b/meta-networking/recipes-daemons/keepalived/keepalived/0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch
-@@ -15,8 +15,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- --- a/configure.ac
- +++ b/configure.ac
--@@ -1013,8 +1013,7 @@ if test "$enable_hardening" != no; then
-- 	  "-Wp,-D_FORTIFY_SOURCE=$FORTIFY_SOURCE" \
-+@@ -1066,8 +1066,7 @@ if test "$enable_hardening" != no; then
-+ 	  "-Wformat -Werror=format-security" \
-  	  "-fexceptions" \
-  	  "-fstack-protector-strong" \
- -	  "--param=ssp-buffer-size=4" \
-diff --git a/meta-networking/recipes-daemons/keepalived/keepalived/0001-vrrp-Don-t-include-linux-if_ether.h-if-not-needed.patch b/meta-networking/recipes-daemons/keepalived/keepalived/0001-vrrp-Don-t-include-linux-if_ether.h-if-not-needed.patch
-deleted file mode 100644
-index f6a38668ee..0000000000
---- a/meta-networking/recipes-daemons/keepalived/keepalived/0001-vrrp-Don-t-include-linux-if_ether.h-if-not-needed.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From f129c588f7c8a66e595d8ae96a43d585018e79cd Mon Sep 17 00:00:00 2001
--From: Quentin Armitage <quentin@armitage.org.uk>
--Date: Thu, 7 Nov 2024 11:09:43 +0000
--Subject: [PATCH] vrrp: Don't include <linux/if_ether.h> if not needed
+cheers
+Ankur
+
+>
+> On 9/24/25 15:56, Ankur Tyagi via lists.openembedded.org wrote:
+> > Trying to keep recipes in the walnascar branch updated with useful fixe=
+s
+> > from the master branch.
+> >
+> > I intend to submit patch series for each sub-folder, this series is for
+> > the recipes inside "meta-oe/recipes-bsp".
+> >
+> > I have tried to carefully review the change logs and commit logs while =
+updating
+> > recipe versions.
+> >
+> > Did basic validation by building against qemux86-64 and qemuarm64
+> > machine targets.
+> >
+> > Changqing Li (1):
+> >    lsscsi: upgrade to version 0.32
+> >
+> > Gyorgy Sarvari (1):
+> >    ledmon: upgrade 0.97 -> 1.1.0
+> >
+> > Mikko Rapeli (2):
+> >    fwupd: update to 2.0.12
+> >    fwupd-efi: update from 1.6 to 1.7
+> >
+> > Wang Mingyu (2):
+> >    bolt: upgrade 0.9.6 -> 0.9.10
+> >    flashrom: upgrade 1.5.1 -> 1.6.0
+> >
+> >   .../bolt/{bolt_0.9.6.bb =3D> bolt_0.9.10.bb}    |   2 +-
+> >   ...-meson-Add-options-pciutils-ftdi-usb.patch |  17 ++-
+> >   .../{flashrom_1.5.1.bb =3D> flashrom_1.6.0.bb}  |   2 +-
+> >   ..._binary.py-Use-env-to-detect-python3.patch |  23 ---
+> >   .../{fwupd-efi_1.6.bb =3D> fwupd-efi_1.7.bb}    |   5 +-
+> >   ...certs.py-use-usr-bin-env-for-python3.patch |  28 ++++
+> >   ...-reduce-lzma-compression-level-from-.patch |  47 ++++++
+> >   meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb     | 134 -----------------=
 -
--The musl headers do not allow including both <linux/if_ether.h> and
--<net/ethernet.h> since they both define struct ethhdr.
--
--It is likely that we do not need to include <linux/if_ether.h> at all
--since with both glibc and musl including  <net/ethernet.h> is sufficient,
--but removing <linux/if_ether.h> is for another day.
--
--Upstream-Status: Backport [https://github.com/acassen/keepalived/commit/f129c588f7c8a66e595d8ae96a43d585018e79cd]
--Signed-off-by: Quentin Armitage <quentin@armitage.org.uk>
-----
-- keepalived/vrrp/vrrp.c | 4 +++-
-- 1 file changed, 3 insertions(+), 1 deletion(-)
--
--diff --git a/keepalived/vrrp/vrrp.c b/keepalived/vrrp/vrrp.c
--index 96b2c4c8..4b06e387 100644
----- a/keepalived/vrrp/vrrp.c
--+++ b/keepalived/vrrp/vrrp.c
--@@ -40,8 +40,10 @@
-- #include <netinet/ip6.h>
-- #include <stdint.h>
-- #include <net/if_arp.h>
---#include <linux/if_ether.h>
-- #include <net/ethernet.h>
--+#if !defined ETH_HLEN || !defined ETH_ZLEN
--+#include <linux/if_ether.h>		/* This may not be needed at all - try removing and see if any issues raised */
--+#endif
-- #ifdef _NETWORK_TIMESTAMP_
-- #include <linux/net_tstamp.h>
-- #endif
-diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_2.3.2.bb b/meta-networking/recipes-daemons/keepalived/keepalived_2.3.4.bb
-similarity index 93%
-rename from meta-networking/recipes-daemons/keepalived/keepalived_2.3.2.bb
-rename to meta-networking/recipes-daemons/keepalived/keepalived_2.3.4.bb
-index 6fb4886b96..be0f915b47 100644
---- a/meta-networking/recipes-daemons/keepalived/keepalived_2.3.2.bb
-+++ b/meta-networking/recipes-daemons/keepalived/keepalived_2.3.4.bb
-@@ -12,9 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz \
-            file://0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch \
--           file://0001-vrrp-Don-t-include-linux-if_ether.h-if-not-needed.patch \
-            "
--SRC_URI[sha256sum] = "77f4a22e5a23fa8e49b8916acdfb584c864e72905a2f1de2a7f62ed40a896160"
-+SRC_URI[sha256sum] = "6afd95ddb7d3e0d3b8b8e5b3a489144131b61a01b06d29e883d0c44acc8a36bf"
- UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
- 
- DEPENDS = "libnfnetlink openssl"
+> >   meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb     |  93 ++++++++++++
+> >   .../ledmon/0001-fix-build-with-clang.patch    |  90 ------------
+> >   ...nclude-sys-select.h-and-sys-types.h.patch} |  27 ++--
+> >   .../{ledmon_0.97.bb =3D> ledmon_1.1.0.bb}       |  10 +-
+> >   .../lsscsi/{lsscsi_030.bb =3D> lsscsi_0.32.bb}  |   6 +-
+> >   13 files changed, 197 insertions(+), 287 deletions(-)
+> >   rename meta-oe/recipes-bsp/bolt/{bolt_0.9.6.bb =3D> bolt_0.9.10.bb} (=
+92%)
+> >   rename meta-oe/recipes-bsp/flashrom/{flashrom_1.5.1.bb =3D> flashrom_=
+1.6.0.bb} (89%)
+> >   delete mode 100644 meta-oe/recipes-bsp/fwupd/fwupd-efi/0001-efi-gener=
+ate_binary.py-Use-env-to-detect-python3.patch
+> >   rename meta-oe/recipes-bsp/fwupd/{fwupd-efi_1.6.bb =3D> fwupd-efi_1.7=
+.bb} (90%)
+> >   create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/0001-build-certs.p=
+y-use-usr-bin-env-for-python3.patch
+> >   create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd/0001-fu-lzma-commo=
+n.c-reduce-lzma-compression-level-from-.patch
+> >   delete mode 100644 meta-oe/recipes-bsp/fwupd/fwupd_1.9.25.bb
+> >   create mode 100644 meta-oe/recipes-bsp/fwupd/fwupd_2.0.12.bb
+> >   delete mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-w=
+ith-clang.patch
+> >   rename meta-oe/recipes-bsp/ledmon/ledmon/{0002-include-sys-select.h-a=
+nd-sys-types.h.patch =3D> 0001-include-sys-select.h-and-sys-types.h.patch} =
+(56%)
+> >   rename meta-oe/recipes-bsp/ledmon/{ledmon_0.97.bb =3D> ledmon_1.1.0.b=
+b} (79%)
+> >   rename meta-oe/recipes-bsp/lsscsi/{lsscsi_030.bb =3D> lsscsi_0.32.bb}=
+ (63%)
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#119755): https://lists.openembedded.org/g/openembed=
+ded-devel/message/119755
+> > Mute This Topic: https://lists.openembedded.org/mt/115408371/7304865
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[Qi.Chen@eng.windriver.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
 
