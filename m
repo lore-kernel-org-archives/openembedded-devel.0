@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95B27CAC5B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4F45CAC5B5
 	for <webhook@archiver.kernel.org>; Thu, 25 Sep 2025 12:04:09 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web11.9943.1758801839643872966
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web10.9715.1758801842498488126
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Sep 2025 05:03:59 -0700
+ Thu, 25 Sep 2025 05:04:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ELCdy3vZ;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-b35f6f43351so90013866b.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 05:03:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=A2nE8f2m;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-62fbfeb097eso1599768a12.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 05:04:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758801838; x=1759406638; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758801841; x=1759406641; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=szDFRfcAOIagM7X/ao50/k7Bh9AaFtQ8csdjE5QIm7I=;
-        b=ELCdy3vZdLwEUmUFvjmJfCsQyNvDiTbiz8deDKCobuUrgN2QA0nrPATs34wkLCMDAk
-         bA/2C9thZctOLQEtRK91pUJnIds0a3qtOKy9H7XG7hU/TFUe8E2qTEN2x38VubLuEf5x
-         lEIa7GpAN2pTYWJbP53nExMtQm5FMAcHAz02q7LLvzKWbueU/Y8dnnlX8DFgtx6IfsrW
-         1+8Hlz3ShWWkSGuS0eRSg2+2BsqhdpKk/JFCxCDaMqg7WNy+4O8OBa+bVvWRsiGuKKVt
-         yqSQfyPwhkKChovclpbkS94C8kR2gec4vHJBFLYPnY1hesGKUiF/9GqJKsWtBDrK1l7x
-         JkoA==
+        bh=tRPUWNqZ84aVcwObVY8gFNN714mfdpGQwTkNueAXueU=;
+        b=A2nE8f2mF5UPoydo1XDiiZ9Hz1/OTNQIqkU0l+l2Qrn066wd2eZlpi57y0VeMTnicD
+         d8VObEJLCe0K1LxOMPjK6uStIKktaukxwcvjyoITsh5XddI2pWF0vZQ5ZiTr8IIk/Ms8
+         9I9PWRvn+RDrZo4ErlmOeOavVDFcBHeGayQCudGNReWrnO12a818HG14zAznJeRXp9rL
+         KPk2MBqKHgdrxdYeE1bfeq4q6JdwjjsWMvcz+X+MPRr7NLnp0lUJAzbuQ4MfzmkQfGey
+         PLJNC5Yi8ugYK3ZkyxZzIDQ3eGEUa2mqoBmLsKYk4XWzcmlyMsoJoQWH6z/MH3ikmSmw
+         ScbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758801838; x=1759406638;
+        d=1e100.net; s=20230601; t=1758801841; x=1759406641;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=szDFRfcAOIagM7X/ao50/k7Bh9AaFtQ8csdjE5QIm7I=;
-        b=tapIcftnI+TUY6U+rN2aZHpQtz3hjCbBFFRygryVCYamWGa8eahWwC2rhz6uFTWOPU
-         6H32dKoIuL9WhM6JQwlYjGWGyUJhmqryAA5nC8CGYoNJyhuC4pvvQuuMG2/9s4NivXoh
-         n0jAlYG9RdaTDk0KqJiZui7cQK2/Ffq6aVheWWq1dyqRJ9njRrRalvueWTNaRBtHt2V1
-         s8uTRckfVqEZQQB1rBe+ZNgvX8JHs0tsDCShPDcguij6/drWhHgWipbffUNMEKH049o1
-         1EeJ5VOUYX+IsTnvxbfKSJKpYyzeWsN2+RuP0NdEvvr8xHDTO18aaeMXxW21j3a45IAJ
-         kpVQ==
-X-Gm-Message-State: AOJu0Ywej96TR3DcoPAUpfssvfv4+dSoFVnLJfwSFitcpoiymezdo5+Y
-	jS2nW+ozsGAHgzTqNQR9D5Wm49TF72jhI0hFQ60mgvfQV46kGcuv9IKoz5GdxTSv
-X-Gm-Gg: ASbGncsMWQ65ZLFV42cRU5ZZfO8S0v7ekdG5e2birc//FAjC9hiBswafcjiIuqDpsbi
-	FitmpYxfJg4G9iF7UI3XeapmmpsqJNNcAcW/0IwYF4wvpK/PE3ic/xB0dR49WS3hE6ikU0v4zEz
-	aDlTn+o5W69XYCXfoRUeQm/DSq99/OoQFcX23u7TOgTqA3BnPG7+4FBCg8a4hFS5oFrA6Wd48B1
-	Bor8uiEaIMyJcsyl7xlV69cbBn4jKYqgZhCYi1/fPZPrEd7PuyilBVUQHyaBtKyVY83kOoUfXHR
-	XgjQEjjmFRNXGFIpNGwZsLdU0+woijcRcdO4S4OY+rcSyF6/QnR1I2iVyMv/KhI+tT+XPCgB7mA
-	YOqgOXxa0h9ejNNHkEdTh
-X-Google-Smtp-Source: AGHT+IHW1oNefRC4m/njJ6IsbH0ICn1oBDIsx69Ot+Vb0rHA0h2HNFgkmvIAm4F3M6/e2Eb6XMb++Q==
-X-Received: by 2002:a17:907:3fa9:b0:b2b:a56f:5424 with SMTP id a640c23a62f3a-b34b644af52mr343925866b.4.1758801837876;
-        Thu, 25 Sep 2025 05:03:57 -0700 (PDT)
+        bh=tRPUWNqZ84aVcwObVY8gFNN714mfdpGQwTkNueAXueU=;
+        b=tWuudVAfgdx66jijM0CdVYNVKkicF+BZr4+rGgQfN1CeoAtwtiR/XBR5yJpqz0qvkB
+         8cjVGnvwMQp34kOPVKpxLU+hzpwqDdtRBxPBfKB8YsRu8JZ+C+70LShRRY8PGJW6BC/o
+         uyPPyRnSnoqyoHYuSSAnTx5EaZC53Cj2b94gcD4nicEaJKRZpmoHsSvxZQsLoYdLn58Y
+         Fzxj+3xi/YPCaFjQV3efCCKntIZ7+iHiFwRqYDJIf9xYAn0pqBwOmqUFnk7mJfOeu6YQ
+         q4TSNoMlijjf6HnZE7CVKr9rlK3FZP3LeZOV7UsXhGe8R1E7jnOSqvc220LLVIrHWS8p
+         Lo2g==
+X-Gm-Message-State: AOJu0YzIOjq4a4fDns+V1vM5B870h/jAu7P4cZqmE7MFEfHD86HTqW/R
+	7BBpqf1RsD76Nphryl7xAYyTQB5GBw/E8CPiLJClbkHiVzb3RGH/vYWSz6PR7sHg
+X-Gm-Gg: ASbGncsFE8TYhwy9EH89DMZLCpTbmpdJrI3ahizzmVDQtzPnTC+SJzZyZJE6R8gdu57
+	TAG5zhkbloJwD6bRImpkgaR+h77PFDUtmDF1khaUVJ02tYyGtDei0W46V//DFCs52x/DqI83vvi
+	xL9abBVxb3b5GaUbPsFT4OVQB2UXL57dBSGB2lJkPU2hu43YXHcAMcvpvCFk3r2uuzcqFJ0nSCo
+	Y0XBcnBxs7b7dGvmuMcHUGRhiiHz/I4GY8A+5HWRjic+ik07xVQKh72nNQiYsNAfBJfekahKNml
+	wLkbFHw2Pp7OL988nO/RfYVOf4kWS/GUyLCZm9NsiE7KAGDS3y41sJHB1rgmZMRgSn934zabT62
+	P/QjubEeTvffziGvnzEnPgQLkLsoSOJDC1GMxDWjRAMG+6S7ynA==
+X-Google-Smtp-Source: AGHT+IFD2OHyofKM7ds/mWxDG8qRNQjkZNB08J6hCNUphPthIS9TdRiN//ADrIzpupIHrRUdvhblpQ==
+X-Received: by 2002:a17:906:7954:b0:b07:e212:4bf0 with SMTP id a640c23a62f3a-b34b73f3982mr381930666b.20.1758801840343;
+        Thu, 25 Sep 2025 05:04:00 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3545a98e54sm153761266b.97.2025.09.25.05.03.57
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3545a98e54sm153761266b.97.2025.09.25.05.03.59
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Sep 2025 05:03:57 -0700 (PDT)
+        Thu, 25 Sep 2025 05:03:59 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH 18/21] autossh: Correct the license information
-Date: Thu, 25 Sep 2025 14:03:30 +0200
-Message-ID: <20250925120334.1670367-19-skandigraun@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH 21/21] dhcp-relay: Pass cross configure flags to bind build
+Date: Thu, 25 Sep 2025 14:03:33 +0200
+Message-ID: <20250925120334.1670367-22-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250925120334.1670367-1-skandigraun@gmail.com>
 References: <20250925120334.1670367-1-skandigraun@gmail.com>
@@ -67,37 +67,44 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 12:04:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119878
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119881
 
-From: Peter Kjellerstedt <pkj@axis.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Correct "startline=" to "beginline=" in LIC_FILES_CHKSUM so that the
-correct lines from autossh.c and daemon.h are used. Also remove
-autossh.spec from LIC_FILES_CHKSUM as it doesn't really contain any
-license information.
+This ensures that host tools like 'gen' are built for build host and not
+target. internal bind build supplies its own options to configuring it,
+where it does not pass --host option and as a result it does not deduce
+it to be a cross compile and hence these variables are not set property
+inside bind build
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Fixes
+| ./gen: /usr/lib/libc.so.6: version `GLIBC_2.38' not found (required by ./gen)
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 506b6c94119c431edb57ccb22456837734970516)
+(cherry picked from commit d57c4655623a7271dc93cfb741ffdbf1b511a5c2)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ .../recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb      | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb b/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
-index 3dc304b23c..de7e2d3e01 100644
---- a/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
-+++ b/meta-networking/recipes-connectivity/autossh/autossh_1.4g.bb
-@@ -2,9 +2,8 @@ DESCRIPTION = "autossh is a program to start a copy of ssh and monitor it, resta
- HOMEPAGE = "https://www.harding.motd.ca/autossh/"
+diff --git a/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb
+index d36646c0d7..e5f7e0334f 100644
+--- a/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb
++++ b/meta-networking/recipes-connectivity/dhcp/dhcp-relay_4.4.3p1.bb
+@@ -34,7 +34,14 @@ SYSTEMD_AUTO_ENABLE:${PN} = "disable"
+ CFLAGS += "-D_GNU_SOURCE -fcommon"
+ LDFLAGS:append = " -pthread"
  
- LICENSE = "BSD-1-Clause & BSD-4-Clause"
--LIC_FILES_CHKSUM = "file://autossh.spec;md5=80a6701134723fd3420e733b46a0eb97 \
--                    file://autossh.c;md5=76c37acd40ac45050a4ced145b1e2707;startline=7;endline=23 \
--                    file://daemon.h;md5=6bbeaac616b9bc8de7b40049004f4289;startline=7;endline=39"
-+LIC_FILES_CHKSUM = "file://autossh.c;beginline=7;endline=22;md5=9ae0c9b04856148d77984ef58536732b \
-+                    file://daemon.h;beginline=7;endline=36;md5=839bb7bf781ff48da4a3fec2a62a1a47"
- 
- SRC_URI = "https://www.harding.motd.ca/autossh/${BP}.tgz"
- SRC_URI[md5sum] = "2b804bc1bf6d2f2afaa526d02df7c0a2"
+-EXTRA_OECONF = "--enable-paranoia \
++BIND_EXTRA_CONFIG = "\
++        --build=${BUILD_SYS} \
++        --host=${HOST_SYS} \
++        --target=${TARGET_SYS} \
++"
++
++EXTRA_OECONF = "--with-bind-extra-config="${BIND_EXTRA_CONFIG}" \
++                --enable-paranoia \
+                 --disable-static \
+                 --enable-libtool \
+                 --with-randomdev=/dev/random \
 
