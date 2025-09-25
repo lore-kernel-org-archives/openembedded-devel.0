@@ -2,107 +2,117 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E42DCCAC5AA
-	for <webhook@archiver.kernel.org>; Thu, 25 Sep 2025 06:21:26 +0000 (UTC)
-Received: from mail-il1-f177.google.com (mail-il1-f177.google.com [209.85.166.177])
- by mx.groups.io with SMTP id smtpd.web10.4900.1758781282879140548
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D29BECAC5AA
+	for <webhook@archiver.kernel.org>; Thu, 25 Sep 2025 06:21:36 +0000 (UTC)
+Received: from mail-il1-f176.google.com (mail-il1-f176.google.com [209.85.166.176])
+ by mx.groups.io with SMTP id smtpd.web10.4905.1758781287594978761
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 23:21:22 -0700
+ Wed, 24 Sep 2025 23:21:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GH3Rxyeo;
- spf=pass (domain: gmail.com, ip: 209.85.166.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-il1-f177.google.com with SMTP id e9e14a558f8ab-42521ca36d6so2778555ab.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 23:21:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gGU2G4VW;
+ spf=pass (domain: gmail.com, ip: 209.85.166.176, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-il1-f176.google.com with SMTP id e9e14a558f8ab-42575d46250so5484845ab.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 23:21:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758781282; x=1759386082; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=MG5+R5qiLAOnQ+jPPqdc9tL3IrYFtKD9rg0U9PFVAnU=;
-        b=GH3RxyeorHfk9aoqOpzbQxYl2E03hlcBFXXMrYZ8UgAWWN+s8zjy7Z5BE6NsYOh8ut
-         zcrV23gIQcz+5jfut9duQwjmIst67oC1ijP4zdqmuzMqQnaCVUtb7jHw/cQ46ao9KO62
-         SHtVP6yMnD8KF9GIIzJf4IgXy0Jo6meOGJUgO57BegX82MByLDKuNfryZdJrd/X9bkNX
-         2x/eLmm7jbxOounvkJBg5+kbvZlHs0uhLo6+AdEtL9NcnckPj14LbAVYIzWxSq1tMaV/
-         ZVqec85UfQrEZi7bd9vsjtjwIgUdM76dETzlgvNlsvtuaQy6Uhvsow4uxxeyNJABhXEa
-         BbpA==
+        d=gmail.com; s=20230601; t=1758781286; x=1759386086; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4tY7VD/2JQlrmgOiLl/D+sK3zVPwk3nfYeMyZlHpvE8=;
+        b=gGU2G4VWpmizAJC6ooKjjkfP7iSY6D1xlplLZRy3AwHjzbUAXgqb2ChiuFeLmI1CJe
+         s/jAo9C1jF14MHOjoV22aSpTjqv6dQBDkwfqb+u6+QBbo+jg7//TSgwVJWsKWd2o1vLn
+         mKYMCkey0mA/KQk9pFm0FMAf0SVdaBue6RqydSFn24EiYUgq3OwqZI1YyvTOupt9LTxN
+         LNeYB1fc7/XhhM0In93kiJrdRBIV4ATQHo2wtijATBcIzlxzT1uvBcFN1x3+bTvP/rcV
+         F1yHodBohOxp+k8aj1mEdPf8dxj9OP1Eetv1bfKWPXhjbNMwlt9dLEHEmc0tax6NXrYJ
+         xlrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758781282; x=1759386082;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=MG5+R5qiLAOnQ+jPPqdc9tL3IrYFtKD9rg0U9PFVAnU=;
-        b=vm34wxY61/VkaAM2oYItiy2Llljjf8K0Al+myKATWPtKyGm+DMhVKhz1PAXNAZtx3p
-         T1szaO3eCwo2YPBI32X3nmIjyLhUawa1EmOZioliiuAPY7GincomjMwEC6HnO9/8QL4J
-         u64vqP9dJP95AbT3hrDaH5xw5Ft5pEXNLAs0+9HUa8E5HqxrU6GPqnB+ABVL+ejuFd+1
-         phf+Cn90/kGsf7uL4y5ppRszcmhaHVHRKIzl63UTeAXHkWxwvSqmb5EZtVY1cYZys25M
-         qJ5ZjNCs3knw/y7w2QoYqmTNzYlPeve+t520YOzTFooGLarY1FS6w37JGVRf08fGMxZR
-         pjpA==
-X-Gm-Message-State: AOJu0YzHtn46VxKlUldE1GXjyp++JNGca53GCJyTZIt0nVnNT32wzU74
-	kCPKZgljOecBnXy5OdKor1JJ+H6mjeYUDIop4oL8dENXsphAjI0BgQ5qpt2GcQ==
-X-Gm-Gg: ASbGncv6xIjv4KGL7ybduzYk/um00ELligPjMpiMXC4qahFuNOtQEHv4tKZdC7i89y/
-	YI27kKymZShveZZ1Dt49YZfvHz4+PlgmFJuzlEa/J3aml0lLmbJ997sZGmuYjhxMlHzRijLsOrs
-	oU79YHWZjNR/V6iVAMT+suZKlzU9IBOnIwEEK2jvLFcHPZpgUTFcb2Jay+VKpJvEpuWTxNkwAUD
-	QbeqZU3EzsPbl4CwQYZgDanlFJfK547peHqLvP0ThvYRJPezCSWq3Cy71uvq5q4//50PRUD+sr/
-	QO3JOuU2VjORjjfY/gTvbRZxnDMDKHESSLZwmHpTibFqh5heSrI7Z7KLcyiVNiK+tN7+0Ix3Tq7
-	ASFXDKlzc3BoFWfezUcBcaSZF2PMGukZFRvDMh0b5KUpeei/hXx/3
-X-Google-Smtp-Source: AGHT+IG7Wp6eOTeIAAESh9xhX4NMF+1OS5lVGx97mwj4AFpbZp1wZARz0OaBaq8gCXJn2gMxPQchkg==
-X-Received: by 2002:a05:6e02:2701:b0:425:6f0b:a1e6 with SMTP id e9e14a558f8ab-425955fafa3mr30386275ab.13.1758781281372;
-        Wed, 24 Sep 2025 23:21:21 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1758781286; x=1759386086;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=4tY7VD/2JQlrmgOiLl/D+sK3zVPwk3nfYeMyZlHpvE8=;
+        b=qCMGOFvTTFx719R3gmwnDKScoavkr3xqgfkpvsF70Q1wAexT3w/Jrv/RdvWmKcJhOR
+         vmhaKdzIOVwcoFEvr/uXmzFYmp7GZ72XhAKOTVJ1vm0QYFriG1KmMNg0MiqQWfk/GjlD
+         r6lT644tyB8zCu/ede8VGvyzn5c25cp8jHWiJ88b9dz9ckDTrrfZrdqdUp0j9N4OeZuA
+         vRDuY+wph+JV/8YL/03BuBEul04cISGoowEf/+9kUrBlsFoqM7MSe6NxpUmYco3Gcmzr
+         XZJyoyuxGwgAO4OMzn9+/JMXQG5cxkNZgVilH1Ya18oRjUmavGFQM/LA3srTFtz/cVuG
+         cRUw==
+X-Gm-Message-State: AOJu0Yy34CE4zSINmJwPle0EpyIiZpQcjeGPAzp4uZ38VnV19cGKdP3m
+	N0MjyEJQ6H8XjtDjvDmH9nMxPSVzEKOO47shWSF3ZunfRKYk8uY3Z9W1ynv7Kg==
+X-Gm-Gg: ASbGncuiRvKoV0VJRA8dHNB3Jk80Vjhmo0JkpEX5CKVcjAF5wP9Z5SLkBspetrgBuTy
+	SYr43zMM0+THy11pc7adJmbgJSwq0Ea4rf6EK2oS2MIkfRSMs+qOZh0dZih4zi8wq7KJYehZ1l4
+	VEE9m6vcQ1/A1Ja/jhZBNN6VljUeXuHIoZBosZ6PxiNIAFcuZFoeIWzU6h9tJzxAHWeDW1+UEJ5
+	rB0bLgf3iQs8OYd1VlOch/ge5963y/Oj0dhQ+GP5dsns0p+iu/tdC51TkgndSgqn/oFU2Ebj+Ws
+	RmWVG5yZphBgyEtQFHxUVt/IPXLb1Lr23MjH9YCi0AhR/QLyG8XWsvXOBzr1VtbfErBh6GbWAVc
+	fnkCXH2wshlb7wBkpu1+Fcv6+ze+76zPGc+TmDx8oznX3CGcJQ8Ve
+X-Google-Smtp-Source: AGHT+IFfpAISr+cl2OlCms6i7F2q6H9qFTuwXK6TPdcp8lKNHvRH67xAt033hfHzTIOYxoN5XO8bog==
+X-Received: by 2002:a05:6e02:1a09:b0:425:84b6:a7ff with SMTP id e9e14a558f8ab-425955ed620mr38647075ab.6.1758781286545;
+        Wed, 24 Sep 2025 23:21:26 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([147.161.216.253])
-        by smtp.gmail.com with ESMTPSA id e9e14a558f8ab-425c016c6d8sm5560055ab.38.2025.09.24.23.21.19
+        by smtp.gmail.com with ESMTPSA id e9e14a558f8ab-425c016c6d8sm5560055ab.38.2025.09.24.23.21.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Sep 2025 23:21:20 -0700 (PDT)
+        Wed, 24 Sep 2025 23:21:26 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][walnascar][PATCH v2 0/3] cherry-picks from master branch
-Date: Thu, 25 Sep 2025 18:21:08 +1200
-Message-ID: <20250925062111.240262-1-ankur.tyagi85@gmail.com>
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][walnascar][PATCH v2 1/3] bolt: upgrade 0.9.6 -> 0.9.10
+Date: Thu, 25 Sep 2025 18:21:09 +1200
+Message-ID: <20250925062111.240262-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250925062111.240262-1-ankur.tyagi85@gmail.com>
+References: <20250925062111.240262-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 06:21:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119849
+ <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 06:21:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119850
 
-Trying to keep recipes in the walnascar branch updated with useful fixes
-from the master branch.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-I intend to submit patch series for each sub-folder, this series is for
-the recipes inside "meta-oe/recipes-bsp".
+Changelog:
+============
+- Fix bolt exits when opening an empty version file
+- Fix failure on integration test due to the change of the latest pygobject
+- Several CI improvements and fixes.
+- Fixed memory leak in boltctl
+- The unused codes were removed from daemon
+- Fixed a NULL syspath variable causes SIGSEGV
+- A new NHI for REMBRANDT.
+- CI fixes.
+- Don't install an empty DB directory.
+- Fixed: Determine the string length before writing file.
+- Fixed: Free on error to prevent resource leak.
+- Add a 'nopcie' security level since some devices report 'nopcie' when Thunderbolt
+  is disabled through BIOS setting.
+- Markdown lint styling is used for documents.
 
-I have tried to carefully review the change logs and commit logs while updating
-recipe versions.
-
-Did basic validation by building against qemux86-64 and qemuarm64
-machine targets.
-
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 98969e3b441183ae8bb0c30258cbe5377c18d979)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
-changes in v2:
-
-- Dropped following patches
- - flashrom: upgrade 1.5.1 -> 1.6.0
- - fwupd: update to 2.0.12
- - ledmon: upgrade 0.97 -> 1.1.0
-
-Changqing Li (1):
-  lsscsi: upgrade to version 0.32
-
-Mikko Rapeli (1):
-  fwupd-efi: update from 1.6 to 1.7
-
-Wang Mingyu (1):
-  bolt: upgrade 0.9.6 -> 0.9.10
-
- .../bolt/{bolt_0.9.6.bb => bolt_0.9.10.bb}    |  2 +-
- ..._binary.py-Use-env-to-detect-python3.patch | 23 -------------------
- .../{fwupd-efi_1.6.bb => fwupd-efi_1.7.bb}    |  5 ++--
- .../lsscsi/{lsscsi_030.bb => lsscsi_0.32.bb}  |  6 +++--
- 4 files changed, 7 insertions(+), 29 deletions(-)
+ meta-oe/recipes-bsp/bolt/{bolt_0.9.6.bb => bolt_0.9.10.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
  rename meta-oe/recipes-bsp/bolt/{bolt_0.9.6.bb => bolt_0.9.10.bb} (92%)
- delete mode 100644 meta-oe/recipes-bsp/fwupd/fwupd-efi/0001-efi-generate_binary.py-Use-env-to-detect-python3.patch
- rename meta-oe/recipes-bsp/fwupd/{fwupd-efi_1.6.bb => fwupd-efi_1.7.bb} (90%)
- rename meta-oe/recipes-bsp/lsscsi/{lsscsi_030.bb => lsscsi_0.32.bb} (63%)
 
+diff --git a/meta-oe/recipes-bsp/bolt/bolt_0.9.6.bb b/meta-oe/recipes-bsp/bolt/bolt_0.9.10.bb
+similarity index 92%
+rename from meta-oe/recipes-bsp/bolt/bolt_0.9.6.bb
+rename to meta-oe/recipes-bsp/bolt/bolt_0.9.10.bb
+index c278a0982a..2e7237bd8b 100644
+--- a/meta-oe/recipes-bsp/bolt/bolt_0.9.6.bb
++++ b/meta-oe/recipes-bsp/bolt/bolt_0.9.10.bb
+@@ -8,7 +8,7 @@ DEPENDS = "udev polkit dbus"
+ REQUIRED_DISTRO_FEATURES = "polkit"
+ 
+ SRC_URI = "git://gitlab.freedesktop.org/bolt/bolt.git;protocol=https;branch=master"
+-SRCREV = "f03c50b22ae3fda26711ddabd91e2c5dd8103478"
++SRCREV = "c0d4cb2f4399e86417907a37c0d8ef3bb9fb406f"
+ 
+ S = "${WORKDIR}/git"
+ 
 
