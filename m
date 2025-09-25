@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29D3CCAC5A5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 449CFCAC5A7
 	for <webhook@archiver.kernel.org>; Thu, 25 Sep 2025 12:03:59 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web11.9936.1758801829171278927
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web11.9941.1758801836064350508
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Sep 2025 05:03:49 -0700
+ Thu, 25 Sep 2025 05:03:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=O0bq0/jL;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-63053019880so1805239a12.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 05:03:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YmNo82Y/;
+ spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-b3164978f11so161153066b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 05:03:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758801827; x=1759406627; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758801834; x=1759406634; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=AGRagbAfyLT0/v68GJVoiorswhH40qN6o8DzVShm92c=;
-        b=O0bq0/jLafln8iYPvNtUsm5qEdzS2RNUVTmHdqd3jddISg2kLoBxlR29CuwUhQKQE6
-         cVv02WW+5qBkK+PUrKYgwAAqQP9+13ply1aypJAB/91WUbXGzRom1WLKoSEs4q8CM2dp
-         VOqvguuL32arIh7pDvW2yaBoey1AJ3jVQts3TYc54SJXwhorPasPw2jsTDD4dOSotcQ9
-         9wde+pA6c0VkHT8+jFJenvaa+gtwdT8wLtGkW0E3paMqQayOUU8oaRVZWC2DLhp3gRWn
-         DYojjQzyLjDbIAGrrv8kjb6GHHT7lGQCBDKam6auXDXdQq/O4DT4SbmUvkYGkju+p04+
-         Gf/w==
+        bh=OUVRYH5Zlfu9OxKpI9afBzEp+APA97W7JkD8c92l/a8=;
+        b=YmNo82Y/MGAwRPR1Xu3oetiagWKVi6SIp974+7gRmbrBHdFaHcNfcdIA67obUvC4to
+         8GJWLSfuO4C0L+QFFbl38qdRvstNd3KYZl62eFTchmQY2jAR8KclcefpYCvOzen+nqcQ
+         CqudhFxhEalXPMCCnPxnMe5z+9TF3k1vukXiEq7YfyljWA0jM36eY+KXg17ynUinUwTu
+         HWGQ04jDllAv52IWNcxukhZzDfP05iYBCbKtlOt/2SfTTWBH+MzBeZMjZCI1pBAPBJGQ
+         1d7531fq4Uq0ooYZNUASpR8ralDD0SchpORiEb6r1gigunEhLUTL9WkFQ5hP45XPlcvf
+         pGqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758801827; x=1759406627;
+        d=1e100.net; s=20230601; t=1758801834; x=1759406634;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=AGRagbAfyLT0/v68GJVoiorswhH40qN6o8DzVShm92c=;
-        b=mfzEHCsawesNqLW+cvWdqnEFXXatYC+ZxYmPAqMkMZxL+VtHm4WedZqLI2g4lYd0+R
-         UCYp6bVzxqn7/sJnIP8m20JbTejqNWrVMg7resCsCBtD2Iv0RaMMfyyvh8Emhrs4DwWC
-         M2QtVXCsgAHxQ0wYhpRZbjEi6322eEjk4rwLE2ZSz3rBueX6sxhFFxyJ+8V6QcCEESHy
-         dMdhBnVaS8EkDvvwCk3/n46VKBy0/wlvMEZusG1RKsooMhRRimh2ZN8VTjB4MzdL/v45
-         6m2catpeeNTKzx9sfbGkHPt/Kv2SfOMf1bs64YrhkzsFnnHz0xSMmEg88gzvfd+NhXQt
-         G2lw==
-X-Gm-Message-State: AOJu0YyqNhzsXngBx3so6ga1ACj2BHaP90I7cfAy3ZiZyvoGw2c/oNyJ
-	4SgNXpQXjdWABav/XZn/Ln19Ye1sdn//YulZuVqgLcse+41TXjv0FUO7pGg0MyRM
-X-Gm-Gg: ASbGnctqZG9NAC+9JifgadMaU1yFIraF9338TbprvmagYciBZHWrpJzwe6HvgYy8/O5
-	Jn5K6lV21Mx2BR7IyYk9v7K9MdfqRUEH3znJrNn5g23W4+mirS8Wvr5qooW2CGBzR4y4fvJWd34
-	WYlPf+bagtEnkH2AOQ2SU+Vq3IvN7r2Rcqh3s35/i3e8hbjNbiH78h/WOD9lwnYJIRCCrepooml
-	Dd5hGq0lS9P1CKQRop2NkAhJtCcLal+/1wd/3Ql7gH7cZHUEoS11+OJjfG6arDYE7tBgAKICSov
-	McRXroj8SHfnmSvYvdSw3XFVoGlKHktUTCU0PjKDSvpkMRqAp9gHwFGMQNIiqYHRcnxEi0GNAc9
-	J9ncLXQ7ENw87krqL9E/z
-X-Google-Smtp-Source: AGHT+IF/eHlGf6D/8Yh54rqwE4crgQDzHuTwlUZI2xwgG3k/My2REzXcUWxt2Fvi91epGgFNTGuBZw==
-X-Received: by 2002:a17:907:9495:b0:b2b:613e:b675 with SMTP id a640c23a62f3a-b34be1007f2mr334490766b.49.1758801827358;
-        Thu, 25 Sep 2025 05:03:47 -0700 (PDT)
+        bh=OUVRYH5Zlfu9OxKpI9afBzEp+APA97W7JkD8c92l/a8=;
+        b=f/BQ1n/wZzuexrNKkFVoIv0k5Zze45JK1Rf600ZHzNdorWO3TX04h21C0ugXCBA/ir
+         nvxuuze/m1rGTO5TLCrJcRUhGgV1V3xnSg8qlYekD5Xmy/EW6pHydGYmWycRlNuxbrgh
+         BrUk9mvVBw4z496+HwoN3X6XDd96ZwkbsE8re049I3ECdqmnkQv0FPLTrc0ZEN1QH+Yj
+         p0PV/Ul5z3H8y/ZumBXfXB/U909aRL3SNdldRjAuA4WJm/2nrR+l++gAereXPF+Y6tN9
+         sIy9flrfHQZzcbh8YIOePpWRT3UsBOmdyjAH8+Lqmj0Bjf7UWdPPV22YzqF+gQb/YzTO
+         lYlA==
+X-Gm-Message-State: AOJu0YxjKBEf6wCV/l9V4FcHlDWiNTomoeUMq6zUTq0mLGcH4WbBruiw
+	Ty23nPfcznHjjvaArw9DyJ62WlijRDXTJIYbuusXpMIJRJqAOdowNz//7jIx0m2F
+X-Gm-Gg: ASbGnct6GKariN4R7ysIOfVrBZsxSVp4JqgieHyekhIhX/8zUneEZP2pxLN7Bc3+kRo
+	aVT4PoUF34xlL3hMl2EAkb81nwzQu+QnAj2zFSXmeg/OmCWLLFgVFB0BNG8qR9GKh6e6FSoIPRI
+	aa7ofgRtZcSRqGq00d/QaeXkqi8q3ysBYJ+H6Edp2On/ViHWwnyAwY+TYJ7J/2YrTOC8zOTFt2/
+	A6v1pOhaFvuRpJQa2RdjQkD47g3BPKOmNQXAGIRnGkwX2JS/h2QMl8yTf59qI+4s8GRzNE+c6fd
+	FHqSoBTlsZiXD1RhWBT5ksmgfWgTLauimrk5PLGARsQCqfR/x1hvtbkvihw0EjBpTAUG1lwmit6
+	vL27ehiLAMjOtInFzdfdr
+X-Google-Smtp-Source: AGHT+IHu+YhE/z+RMYFihkpRC8KjglrMmmY5NxjoRjIQKc4IEhMdQ4LS6QLkN0rjE3G1E1wvsnPKyA==
+X-Received: by 2002:a17:907:7f0f:b0:aff:16eb:8b09 with SMTP id a640c23a62f3a-b34b6449b22mr318073866b.5.1758801834189;
+        Thu, 25 Sep 2025 05:03:54 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3545a98e54sm153761266b.97.2025.09.25.05.03.44
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3545a98e54sm153761266b.97.2025.09.25.05.03.53
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Sep 2025 05:03:45 -0700 (PDT)
+        Thu, 25 Sep 2025 05:03:53 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][kirkstone][PATCH 05/21] keybinder: set correct license
-Date: Thu, 25 Sep 2025 14:03:17 +0200
-Message-ID: <20250925120334.1670367-6-skandigraun@gmail.com>
+Subject: [meta-multimedia][kirkstone][PATCH 13/21] opencore-amr: upgrade 0.1.3 -> 0.1.6
+Date: Thu, 25 Sep 2025 14:03:25 +0200
+Message-ID: <20250925120334.1670367-14-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250925120334.1670367-1-skandigraun@gmail.com>
 References: <20250925120334.1670367-1-skandigraun@gmail.com>
@@ -67,29 +67,52 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 12:03:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119865
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119873
 
-This package uses MIT license, which is very similar to X11, except that
-X11 license has an advertisement clause, which is missing from the MIT.
+From: alperak <alperyasinak1@gmail.com>
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Changelog:
+
+0.1.6
+ - Fixed an infinite loop when decoding some AMR-NB samples
+ - Fixed noise spikes when decoding non-voice frames for both AMR-NB and AMR-WB
+
+0.1.5
+ - Fix an autotools issue with cross compiling from the 0.1.4 release
+
+0.1.4
+ - Autotools cleanups
+ - Fixes for SID/DTX in the AMR-WB decoder, fixes for handling of bad
+   frames in both AMR-WB and AMR-NB
+
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d2b5523333b762c32e70de36237e2d8e93096189)
+(cherry picked from commit 55274f650e304074783d171a406454748b2d456e)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-gnome/recipes-support/keybinder/keybinder_3.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../{opencore-amr_0.1.3.bb => opencore-amr_0.1.6.bb}        | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-multimedia/recipes-multimedia/opencore-amr/{opencore-amr_0.1.3.bb => opencore-amr_0.1.6.bb} (59%)
 
-diff --git a/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb b/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
-index 971ad90f9c..d46fb6fe50 100644
---- a/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
-+++ b/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "keybinder is a library for registering global key bindings, for gtk-based applications."
- HOMEPAGE = "https://github.com/engla/keybinder"
--LICENSE = "X11"
-+LICENSE = "MIT"
- SECTION = "devel/lib"
- DEPENDS = "gtk+3 gobject-introspection-native \
-            gtk+ \
+diff --git a/meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.1.3.bb b/meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.1.6.bb
+similarity index 59%
+rename from meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.1.3.bb
+rename to meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.1.6.bb
+index ab5813ebe9..be7977308b 100644
+--- a/meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.1.3.bb
++++ b/meta-multimedia/recipes-multimedia/opencore-amr/opencore-amr_0.1.6.bb
+@@ -4,10 +4,10 @@ SECTION = "libs"
+ 
+ LICENSE = "Apache-2.0"
+ LICENSE_FLAGS = "commercial"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=dd2c2486aca02190153cf399e508c7e7"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=dd2c2486aca02190153cf399e508c7e7"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/opencore-amr/${BP}.tar.gz"
+-SRC_URI[md5sum] = "09d2c5dfb43a9f6e9fec8b1ae678e725"
+-SRC_URI[sha256sum] = "106bf811c1f36444d7671d8fd2589f8b2e0cca58a2c764da62ffc4a070595385"
++SRC_URI[md5sum] = "03de025060a4f16c4c44218f65e13e95"
++SRC_URI[sha256sum] = "483eb4061088e2b34b358e47540b5d495a96cd468e361050fae615b1809dc4a1"
+ 
+ inherit autotools
 
