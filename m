@@ -1,131 +1,248 @@
-Return-Path: <emailaddress.ashish@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DF83CAC5B1
-	for <webhook@archiver.kernel.org>; Thu, 25 Sep 2025 17:30:24 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web11.2987.1758821421401094801
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FF26CAC5B5
+	for <webhook@archiver.kernel.org>; Thu, 25 Sep 2025 21:15:46 +0000 (UTC)
+Received: from mail-oo1-f48.google.com (mail-oo1-f48.google.com [209.85.161.48])
+ by mx.groups.io with SMTP id smtpd.web11.2541.1758834942472242852
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Sep 2025 10:30:21 -0700
+ Thu, 25 Sep 2025 14:15:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dA/MCrWu;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: emailaddress.ashish@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-27ee55fa1c0so6792495ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 10:30:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=M0klelzT;
+ spf=pass (domain: gmail.com, ip: 209.85.161.48, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oo1-f48.google.com with SMTP id 006d021491bc7-63f03676bdcso3177eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 14:15:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758821420; x=1759426220; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1758834942; x=1759439742; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=dKmPvWQ1fz9A/RU0T+MchF3JGILRM3fhErNtsIGSF/w=;
-        b=dA/MCrWu6DkV2pDpHECBIP2p3QORu7LrFZynjOO25y1tuVsnLjHW2diKfe9H5sCdqe
-         T8Dd04aUUtdC5OsLq++CK3jmoAIrVlUwBDzXa15oZrUrIO7i7iJV2Z8iNwVXyEcmBfsH
-         /tpmQZX5OuUHLPr9NsNpn6/b9umEOBkyVv23rGh/ZuGvSRqSfud0P8kX3rydkrKde2D0
-         9k3YWUenHbAi5Y2A3eL6EJd7TYCgerGMWUme7gEYAUTw6eEZnumGT3PrzxbPSDPN6Uxs
-         WtPHfx3AV8FwK6ESUWX75t4M+jp8fIDquLdbpJlY3+7S1Nf/1gP/7gnPdnNtyrKYC7PX
-         J9dw==
+        bh=HZz0NQlsxLo8GC00HHhKHAOsh3NAHsZOEFmlvHNcOyI=;
+        b=M0klelzTebrj23mrDoCGxt47wSdc+gFzOfW+oDr6wC+mZ4Rd5d8uMPeM5pGsIJSwkU
+         d8UjWGWKKvAMM2w1gRC/ooW2KvveEdei0qpp87FuTeNE/FC6oO2xQ8ZwSZkqSJ6an71a
+         JR1d0Yg+4hzVlmrjjV004CvjPoUbe5bWbXmZfp/sdeeO9t2Tf1d+pgUoieV0xPM3zVqP
+         IwUe0rqKgOH+9O1XvPO72D1X6VwvVLl9g/AQZ+Rhg/lRpDNbIsw7YIBwH/E0/1cLjjSN
+         A4CZRdVeSubJ4Tumnlqnk5AjmPLZ7+dMuXsm+tZXV5Y3cLHmrQkQYctphxQMLxuHtuxp
+         l2mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758821420; x=1759426220;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1758834942; x=1759439742;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=dKmPvWQ1fz9A/RU0T+MchF3JGILRM3fhErNtsIGSF/w=;
-        b=F2YvmMGjCJYXo/Q8qyMbi2kOPMUGpBD0DqarACYo6JYhHok1H0K97uOI2MMGP8Cemg
-         q45b2GHhEr0njBi/65G81pw791d9vJcVe/9PHBzu6lVmW8OgyRpf1WKkQ/gZE3ejhycX
-         ganvUsO5yxJ4sENu3SWU+T80IRtow7aAuyHyn/VskrIIvX4+lckgWLUeRgpOQ5XGorvu
-         EkpzuEEaMCZO8V6WLK+QzAD/9jWcoiF26b7mTupRNnL2K7eqqX2jmVg4ip+CpVMN/qxk
-         /V12+rS236uLDqUEO+MrGYYGmidRHInfy5Bsmlqh7V1Z/wkbD+BK9dxW2cJSPnvaso+U
-         Emlg==
-X-Gm-Message-State: AOJu0Ywhcj22ZQiVZ/L5iQqDU8Ky7RTs/BfZGnNG1N1sa32AOfX5CPNV
-	cBdvmL1fwwubINy+ayfauHNLXZyQ7OeY3phwLddLNQhfYw/UyF3qVSpCzxYp6g==
-X-Gm-Gg: ASbGnctcQAvgbOQ5F98lPVP6O+eZLJ7JlJLlBV37L3iqY6gsQ1x42iDb17OjnmQqCFO
-	XLrdNkNv2TFXSW01+hWhaIOPeUtOAwvA3aUx+MeUnn5zi8MkDncwBU608GhDCuNqj8GSzQj5t1N
-	V3BE/7fq78FivmNdtrQko5rhxqIumwWrabt+2YgBlrMkZD9b0aJyDJGa9SKzQumMdrS9zzF2XNU
-	nzG1PgmzqIwGHbek91H9pz9cQtsiNOLOo+RjGUslaHFuadAxQs8CMsMhOVicd89MyC+m9qBNRL1
-	mt6Zz1lgcVCgrGcj1zCxtcfPQHIXueR408dsF5yByuvWz1PDMqMruz/VEjeYfNV0j1PWwsOwwGs
-	hqVw=
-X-Google-Smtp-Source: AGHT+IFBsPu8sojmqFAlpDGk5noG4KCPVfrvhVBkccv2GUkaYGKcDhJhnTn7vMMB8FeECHZWIfTCVw==
-X-Received: by 2002:a17:902:db03:b0:25c:43f7:7e40 with SMTP id d9443c01a7336-27ed6beb88bmr43151105ad.10.1758821419312;
-        Thu, 25 Sep 2025 10:30:19 -0700 (PDT)
-Received: from ashishkumar.. ([2401:4900:1f27:d4bf:fcd3:666c:cf48:c8d9])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-27ed6adcac9sm30129475ad.148.2025.09.25.10.30.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Sep 2025 10:30:19 -0700 (PDT)
-From: AshishKumar Mishra <emailaddress.ashish@gmail.com>
-X-Google-Original-From: AshishKumar Mishra
-To: openembedded-devel@lists.openembedded.org
-Cc: skandigraun@gmail.com,
-	AshishKumar Mishra <emailaddress.ashish@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [kirkstone][PATCH] 3/3] image_types_sparse: backport optionally remove RAW image
-Date: Thu, 25 Sep 2025 22:59:31 +0530
-Message-ID: <20250925172931.64046-3-emailaddress.ashish@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250925172931.64046-1-emailaddress.ashish@gmail.com>
-References: <20250925172931.64046-1-emailaddress.ashish@gmail.com>
+        bh=HZz0NQlsxLo8GC00HHhKHAOsh3NAHsZOEFmlvHNcOyI=;
+        b=oQKBeBvM6iYDJzOCzuwZXQasL+3LtQ8pQsW8Cs9JY030Oly+r/CdV2E3QGhTonWRoV
+         yFttXyDJVbQUg4GYDTPlJZLHQtvLQJYNr3q+Pwoxg2MRxGyMoXO1gxPx3hXQkPvb96vI
+         YSl6a8u0HZgyJV1zlP377uDCkSwKk3fZSlO1YrmFlPlimJkkCro/4ooDYDfV9kR9DtqS
+         bdgSdmSBAqWoDxJv4sLX8hO/rYMel9KE0HQj+201FgOTC6Sx7a43/GMRl1yLTr/trj6r
+         BWjf88VKfgA5u7OwO7ETzSKchfAEGMudbXguCr0I5HqSIHJd++mRgdENF5seG+6v+WYw
+         I1fQ==
+X-Gm-Message-State: AOJu0YyKkQaYfWldqEc9kuZ2spn3smgQE5veyvI5zTmEiUDBz61l5QTY
+	4tItGPkl+SWzLD+XcuR7H8mLVEOxOmUkCGg6ISDGAb1KenT3+8vpEsHD36w2GEOYj99W4okpx4Q
+	bRiBnXR5ks8Wqg4GzQbZ+ljB8abFoEf4=
+X-Gm-Gg: ASbGncs/2E7TUcB5WRafioDIO0XQB6aXCPVquCdKvBgiBv3udmak1YBIXF4q/E5SZNn
+	kep+LZQOVxQNWSCHFDyEBtslRP8TeHZaACW94of/3wcMNihjkFycMLc990plugaJDu0LMJruJq9
+	5GaBPncRPNmAfBkp2y90f+CxEkw7TGjwV1SbBjPN3AYxlNRHO95ngusadUqPqJWbDt7Ewd0bVEn
+	Ok8Tce1Rw==
+X-Google-Smtp-Source: AGHT+IGZ2QmZGPRdh2XU9Gc1V0AepcNzHlIHFuczE/EPQ5X0ZUtExEYBYzVIvnH28C6LMrachcgozcUkLrJ0rmZGa3U=
+X-Received: by 2002:a05:6820:2218:b0:621:d7c1:cbc1 with SMTP id
+ 006d021491bc7-63a392dcbafmr2435640eaf.2.1758834941650; Thu, 25 Sep 2025
+ 14:15:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250925062111.240262-1-ankur.tyagi85@gmail.com>
+ <20250925062111.240262-4-ankur.tyagi85@gmail.com> <2971ce3b-81fb-465f-bf32-b38053e98eb3@gmail.com>
+In-Reply-To: <2971ce3b-81fb-465f-bf32-b38053e98eb3@gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Fri, 26 Sep 2025 09:15:30 +1200
+X-Gm-Features: AS18NWBMEUjYHlRo7LfsKQveVs0pWspfV2XP3XQCESuiGlppDxtxF853tGIaPWE
+Message-ID: <CADySD0E9HkrtC+KDJc3cJfYGx1RLOwOgvyaVjveH=Ddbqi5bdA@mail.gmail.com>
+Subject: Re: [oe][meta-oe][walnascar][PATCH v2 3/3] lsscsi: upgrade to version 0.32
+To: Gyorgy Sarvari <skandigraun@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, 
+	Changqing Li <changqing.li@windriver.com>, Khem Raj <raj.khem@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 17:30:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119885
+ <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 21:15:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119886
 
-From: AshishKumar Mishra <emailaddress.ashish@gmail.com>
+On Fri, Sep 26, 2025 at 1:33=E2=80=AFAM Gyorgy Sarvari <skandigraun@gmail.c=
+om> wrote:
+>
+> I dunno. This recipe is a bit of a mess, at least regarding the
+> application's versioning habits and the recipe's history due to this.
+>
+> The changelog definitely looks suitable enough. And interestingly
+> Kirkstone has a newer version - which has been reverted later in master
+> (which revert was later reverted once again, to have the latest
+> version), and that old version got into Walnascar.
+>
+> But here is the real problem: this version goes backwards[1] (at least
+> as far as Bitbake is concerned) - and I have seen people being unhappy
+> about this. I wonder if maybe in master it would be better to give this
+> recipe a PE...
+>
+> [1]:
+> https://gist.github.com/OldManYellsAtCloud/f3e26c13bd68118f8e586803e9b3a8=
+d4
+> - this was copied from buildhistory.bbclass and from bb.utils module
+>
 
-When creating sparse images, the RAW image is no longer needed in
-some workflows such as Android and CI pipelines. These RAW images
-can be multi-GB artifacts and consume significant disk space.
+very good catch, I was able to reproduce that by replicating upgrade
+from lsscsi_030.bb -> lsscsi_0.32.bb
 
-This change introduces a configuration option
-`DELETE_RAWIMAGE_AFTER_SPARSE_CMD` which, when set to "1",
-removes the RAW image after sparse image generation.
+$ bitbake -c cleansstate lsscsi
+...
+$ bitbake -e lsscsi | grep "^PV=3D"
+PV=3D"030"
+$ bitbake lsscsi
+...
+meta-oe
+meta-python
+meta-networking
+meta-gnome
+meta-filesystems
+meta-initramfs
+meta-multimedia
+meta-perl
+meta-webserver
+meta-xfce            =3D "walnascar:80ab58cc404959ae2f0e8b2e68935b3bfd8e8cf=
+e"
 
-This reduces disk usage in builds where sparse images are the
-final deliverables and RAW images are not required.
+Sstate summary: Wanted 83 Local 73 Mirrors 1 Missed 9 Current 191 (89%
+match, 96% complete)#######################################################=
+#############
+               | ETA:  0:00:00
+Initialising tasks: 100%
+|##########################################################################=
+###########################################################################=
+|
+Time: 0:00:03
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 834 tasks of which 816 didn't need to
+be rerun and all succeeded.
 
-Default behavior is unchanged: RAW images are kept unless the
-variable is explicitly enabled:
+<=3D checkout dev branch =3D>
+$ bitbake -e lsscsi | grep "^PV=3D"
+PV=3D"0.32"
+$ bitbake lsscsi
+...
+meta-oe
+meta-python
+meta-networking
+meta-gnome
+meta-filesystems
+meta-initramfs
+meta-multimedia
+meta-perl
+meta-webserver
+meta-xfce            =3D
+"lsscsi-walnascar:2aaa71377618350d2af8fafc51dcd4fb403ed554"
 
-This change corresponds to upstream  f5246b7df447ac76ec04c6e5add398862d1c9ccd
+Sstate summary: Wanted 83 Local 83 Mirrors 0 Missed 0 Current 191
+(100% match, 100%
+complete)##################################################################
+               | ETA:  0:00:00
+Initialising tasks: 100%
+|##########################################################################=
+###########################################################################=
+|
+Time: 0:00:01
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 834 tasks of which 833 didn't need to
+be rerun and all succeeded.
 
-    DELETE_RAWIMAGE_AFTER_SPARSE_CMD = "1"   # Delete RAW image
-    DELETE_RAWIMAGE_AFTER_SPARSE_CMD = "0"   # Default behavior
+<=3D bump PE =3D>
+$ bitbake -e lsscsi | grep "^PE=3D"
+PE=3D"1"
+$ bitbake lsscsi
+...
+meta-oe
+meta-python
+meta-networking
+meta-gnome
+meta-filesystems
+meta-initramfs
+meta-multimedia
+meta-perl
+meta-webserver
+meta-xfce            =3D
+"lsscsi-walnascar:2aaa71377618350d2af8fafc51dcd4fb403ed554"
 
-Signed-off-by: AshishKumar Mishra <emailaddress.ashish@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: AshishKumar Mishra <emailaddress.ashish@gmail.com>
----
- meta-oe/classes/image_types_sparse.bbclass | 14 +++++++++++---
- 1 file changed, 11 insertions(+), 3 deletions(-)
+Sstate summary: Wanted 81 Local 74 Mirrors 0 Missed 7 Current 193 (91%
+match, 97% complete)#######################################################=
+#############
+               | ETA:  0:00:00
+Removing 5 stale sstate objects for arch core2-64: 100%
+|##########################################################################=
+############################################|
+Time: 0:00:00
+Removing 1 stale sstate objects for arch qemux86_64: 100%
+|##########################################################################=
+##########################################|
+Time: 0:00:00
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 834 tasks of which 818 didn't need to
+be rerun and all succeeded.
 
-diff --git a/meta-oe/classes/image_types_sparse.bbclass b/meta-oe/classes/image_types_sparse.bbclass
-index 8668739fd9..81dba96305 100644
---- a/meta-oe/classes/image_types_sparse.bbclass
-+++ b/meta-oe/classes/image_types_sparse.bbclass
-@@ -8,9 +8,17 @@ inherit image_types
- SPARSE_BLOCK_SIZE ??= "4096"
- 
- CONVERSIONTYPES += "sparse"
-+
-+DELETE_RAWIMAGE_AFTER_SPARSE_CMD ??= "0"
-+
- CONVERSION_CMD:sparse = " \
--    INPUT="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}" && \
--    truncate --no-create --size=%${SPARSE_BLOCK_SIZE} "$INPUT" && \
--    img2simg -s "$INPUT" "$INPUT.sparse" ${SPARSE_BLOCK_SIZE} \
-+    INPUT=${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type} && \
-+    truncate --no-create --size=%${SPARSE_BLOCK_SIZE} $INPUT && \
-+    img2simg $INPUT $INPUT.sparse && \
-+    if [ ${DELETE_RAWIMAGE_AFTER_SPARSE_CMD} = 1 ]; then \
-+        rm -f $INPUT; \
-+        bbwarn 'Raw file $INPUT removed'; \
-+    fi \
- "
-+
- CONVERSION_DEPENDS_sparse = "android-tools-native"
--- 
-2.43.0
 
+I will send patches for master and walnascar.
+
+> On 9/25/25 08:21, Ankur Tyagi via lists.openembedded.org wrote:
+> > From: Changqing Li <changqing.li@windriver.com>
+> >
+> > Upstream changelogs:
+> > https://sg.danny.cz/scsi/lsscsi.ChangeLog
+> >
+> > Changes in this commit are referenced from 51e410a84eaa9742ea8881435925=
+a242fb5529cd.
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > (cherry picked from commit 51e410a84eaa9742ea8881435925a242fb5529cd)
+> > Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> > ---
+> >  .../recipes-bsp/lsscsi/{lsscsi_030.bb =3D> lsscsi_0.32.bb}    | 6 ++++=
+--
+> >  1 file changed, 4 insertions(+), 2 deletions(-)
+> >  rename meta-oe/recipes-bsp/lsscsi/{lsscsi_030.bb =3D> lsscsi_0.32.bb} =
+(63%)
+> >
+> > diff --git a/meta-oe/recipes-bsp/lsscsi/lsscsi_030.bb b/meta-oe/recipes=
+-bsp/lsscsi/lsscsi_0.32.bb
+> > similarity index 63%
+> > rename from meta-oe/recipes-bsp/lsscsi/lsscsi_030.bb
+> > rename to meta-oe/recipes-bsp/lsscsi/lsscsi_0.32.bb
+> > index 63b94e9d6e..127be8fbfa 100644
+> > --- a/meta-oe/recipes-bsp/lsscsi/lsscsi_030.bb
+> > +++ b/meta-oe/recipes-bsp/lsscsi/lsscsi_0.32.bb
+> > @@ -6,8 +6,10 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0636e73ff02=
+15e8d672dc4c32c317bb3"
+> >
+> >  SRC_URI =3D "http://sg.danny.cz/scsi/${BP}.tgz"
+> >
+> > -SRC_URI[sha256sum] =3D "619a2187405f02c5f57682f3478bffc75326803cd08839=
+e39d434250c5518b15"
+> > +SRC_URI[sha256sum] =3D "0a800e9e94dca2ab702d65d72777ae8cae078e3d74d0bc=
+bed64ba0849e8029a1"
+> >
+> >  inherit autotools
+> >
+> > -S =3D "${WORKDIR}/lsscsi-${PV}r154"
+> > +S =3D "${WORKDIR}/lsscsi-${PV}"
+> > +
+> > +UPSTREAM_CHECK_REGEX =3D "lsscsi-(?P<pver>\d+(\.\d+)+)\.tgz"
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#119852): https://lists.openembedded.org/g/openembed=
+ded-devel/message/119852
+> > Mute This Topic: https://lists.openembedded.org/mt/115426052/6084445
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[skandigraun@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
 
