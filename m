@@ -1,105 +1,108 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A1F0CAC5A5
-	for <webhook@archiver.kernel.org>; Thu, 25 Sep 2025 02:12:35 +0000 (UTC)
-Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
- by mx.groups.io with SMTP id smtpd.web11.1901.1758766347224984476
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E42DCCAC5AA
+	for <webhook@archiver.kernel.org>; Thu, 25 Sep 2025 06:21:26 +0000 (UTC)
+Received: from mail-il1-f177.google.com (mail-il1-f177.google.com [209.85.166.177])
+ by mx.groups.io with SMTP id smtpd.web10.4900.1758781282879140548
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Sep 2025 19:12:27 -0700
+ Wed, 24 Sep 2025 23:21:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=pqiTvRcw;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1758766347; x=1790302347;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=11VgwDTZEy0/WIADgkBJynjJHYY39bETy1T4xebrJtU=;
-  b=pqiTvRcw2ZKwJ0Xl31Uu499X1ixUCT8priVtmJT9CABUcx/wpy+7lQPx
-   ZPh5RgfQB5x1m+n0W6ImSVBNEek80qg426nI71vWev7+LIqvhNnueVSLk
-   7hPSLCZYxfuKnkX6ZomqtNHg5Mgj3LDUbgvgaOwN2exYw+5ywHfpDJWyG
-   53CRAHdem+GJtk3kgmqlpdLwDcOnd+s4uFjmtZppbFvzjMksOGxT7bCte
-   o/teHq/5JhZssuVgy8cusbnI61ZzUWwO869ww9gQiyXkfnkrearuM7IFB
-   +DOpfqNi0od4q+k1BYZVijbhJk8qn2ABXaSv+pf/wXT+Bpsg4tcxc4xKv
-   Q==;
-X-CSE-ConnectionGUID: dy+XQeWsRryxrvzhWwWvNQ==
-X-CSE-MsgGUID: o5JkMhABRkGsGEJqFUGrrw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11563"; a="201790202"
-X-IronPort-AV: E=Sophos;i="6.18,291,1751209200"; 
-   d="scan'208";a="201790202"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.19])
-  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2025 11:12:25 +0900
-Received: from az2uksmgm2.o.css.fujitsu.com (unknown [10.151.22.199])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 6B43DC00425
-	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 02:12:25 +0000 (UTC)
-Received: from az2nlsmom3.fujitsu.com (az2nlsmom3.o.css.fujitsu.com [10.150.26.199])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 1E4E418029C6
-	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 02:12:25 +0000 (UTC)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(No client certificate requested)
-	by az2nlsmom3.fujitsu.com (Postfix) with ESMTPS id 636D8101C8C6;
-	Thu, 25 Sep 2025 02:12:23 +0000 (UTC)
-Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 5FEA41A0074;
-	Thu, 25 Sep 2025 10:12:20 +0800 (CST)
-From: Wang Mingyu < wangmy@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GH3Rxyeo;
+ spf=pass (domain: gmail.com, ip: 209.85.166.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-il1-f177.google.com with SMTP id e9e14a558f8ab-42521ca36d6so2778555ab.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Sep 2025 23:21:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1758781282; x=1759386082; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=MG5+R5qiLAOnQ+jPPqdc9tL3IrYFtKD9rg0U9PFVAnU=;
+        b=GH3RxyeorHfk9aoqOpzbQxYl2E03hlcBFXXMrYZ8UgAWWN+s8zjy7Z5BE6NsYOh8ut
+         zcrV23gIQcz+5jfut9duQwjmIst67oC1ijP4zdqmuzMqQnaCVUtb7jHw/cQ46ao9KO62
+         SHtVP6yMnD8KF9GIIzJf4IgXy0Jo6meOGJUgO57BegX82MByLDKuNfryZdJrd/X9bkNX
+         2x/eLmm7jbxOounvkJBg5+kbvZlHs0uhLo6+AdEtL9NcnckPj14LbAVYIzWxSq1tMaV/
+         ZVqec85UfQrEZi7bd9vsjtjwIgUdM76dETzlgvNlsvtuaQy6Uhvsow4uxxeyNJABhXEa
+         BbpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758781282; x=1759386082;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=MG5+R5qiLAOnQ+jPPqdc9tL3IrYFtKD9rg0U9PFVAnU=;
+        b=vm34wxY61/VkaAM2oYItiy2Llljjf8K0Al+myKATWPtKyGm+DMhVKhz1PAXNAZtx3p
+         T1szaO3eCwo2YPBI32X3nmIjyLhUawa1EmOZioliiuAPY7GincomjMwEC6HnO9/8QL4J
+         u64vqP9dJP95AbT3hrDaH5xw5Ft5pEXNLAs0+9HUa8E5HqxrU6GPqnB+ABVL+ejuFd+1
+         phf+Cn90/kGsf7uL4y5ppRszcmhaHVHRKIzl63UTeAXHkWxwvSqmb5EZtVY1cYZys25M
+         qJ5ZjNCs3knw/y7w2QoYqmTNzYlPeve+t520YOzTFooGLarY1FS6w37JGVRf08fGMxZR
+         pjpA==
+X-Gm-Message-State: AOJu0YzHtn46VxKlUldE1GXjyp++JNGca53GCJyTZIt0nVnNT32wzU74
+	kCPKZgljOecBnXy5OdKor1JJ+H6mjeYUDIop4oL8dENXsphAjI0BgQ5qpt2GcQ==
+X-Gm-Gg: ASbGncv6xIjv4KGL7ybduzYk/um00ELligPjMpiMXC4qahFuNOtQEHv4tKZdC7i89y/
+	YI27kKymZShveZZ1Dt49YZfvHz4+PlgmFJuzlEa/J3aml0lLmbJ997sZGmuYjhxMlHzRijLsOrs
+	oU79YHWZjNR/V6iVAMT+suZKlzU9IBOnIwEEK2jvLFcHPZpgUTFcb2Jay+VKpJvEpuWTxNkwAUD
+	QbeqZU3EzsPbl4CwQYZgDanlFJfK547peHqLvP0ThvYRJPezCSWq3Cy71uvq5q4//50PRUD+sr/
+	QO3JOuU2VjORjjfY/gTvbRZxnDMDKHESSLZwmHpTibFqh5heSrI7Z7KLcyiVNiK+tN7+0Ix3Tq7
+	ASFXDKlzc3BoFWfezUcBcaSZF2PMGukZFRvDMh0b5KUpeei/hXx/3
+X-Google-Smtp-Source: AGHT+IG7Wp6eOTeIAAESh9xhX4NMF+1OS5lVGx97mwj4AFpbZp1wZARz0OaBaq8gCXJn2gMxPQchkg==
+X-Received: by 2002:a05:6e02:2701:b0:425:6f0b:a1e6 with SMTP id e9e14a558f8ab-425955fafa3mr30386275ab.13.1758781281372;
+        Wed, 24 Sep 2025 23:21:21 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.brunswick.com ([147.161.216.253])
+        by smtp.gmail.com with ESMTPSA id e9e14a558f8ab-425c016c6d8sm5560055ab.38.2025.09.24.23.21.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 24 Sep 2025 23:21:20 -0700 (PDT)
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH v2] libmime-types-perl: upgrade 2.28 -> 2.29
-Date: Thu, 25 Sep 2025 10:12:17 +0800
-Message-ID: <20250925021218.491-1-wangmy@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][walnascar][PATCH v2 0/3] cherry-picks from master branch
+Date: Thu, 25 Sep 2025 18:21:08 +1200
+Message-ID: <20250925062111.240262-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 02:12:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119848
+ <openembedded-devel@lists.openembedded.org>; Thu, 25 Sep 2025 06:21:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119849
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Trying to keep recipes in the walnascar branch updated with useful fixes
+from the master branch.
 
-License-Update: the license declaration has shifted from line 11 to line 13.
+I intend to submit patch series for each sub-folder, this series is for
+the recipes inside "meta-oe/recipes-bsp".
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+I have tried to carefully review the change logs and commit logs while updating
+recipe versions.
+
+Did basic validation by building against qemux86-64 and qemuarm64
+machine targets.
+
 ---
- ...{libmime-types-perl_2.28.bb => libmime-types-perl_2.29.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libmime/{libmime-types-perl_2.28.bb => libmime-types-perl_2.29.bb} (88%)
+changes in v2:
 
-diff --git a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.28.bb b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.29.bb
-similarity index 88%
-rename from meta-perl/recipes-perl/libmime/libmime-types-perl_2.28.bb
-rename to meta-perl/recipes-perl/libmime/libmime-types-perl_2.29.bb
-index 043e1549af..512c068d13 100644
---- a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.28.bb
-+++ b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.29.bb
-@@ -9,12 +9,12 @@ HOMEPAGE = "https://metacpan.org/release/MARKOV/MIME-Types-2.27"
- SECTION = "libraries"
- 
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
--LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=963ce28228347875ace682de56eef8e8"
-+LIC_FILES_CHKSUM = "file://META.yml;beginline=13;endline=13;md5=963ce28228347875ace682de56eef8e8"
- 
- SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MARKOV/MIME-Types-${PV}.tar.gz \
-            file://run-ptest \
-           "
--SRC_URI[sha256sum] = "7099cb5133401acc92d8fb0fd398cac682140be0680e7dfcb4aaf40315a2dfca"
-+SRC_URI[sha256sum] = "4a6d4ec9b3aa0df2f935d4d74f7dc809fd523d508cd0e9966b5b257c02c03414"
- 
- S = "${UNPACKDIR}/MIME-Types-${PV}"
- 
--- 
-2.43.0
+- Dropped following patches
+ - flashrom: upgrade 1.5.1 -> 1.6.0
+ - fwupd: update to 2.0.12
+ - ledmon: upgrade 0.97 -> 1.1.0
+
+Changqing Li (1):
+  lsscsi: upgrade to version 0.32
+
+Mikko Rapeli (1):
+  fwupd-efi: update from 1.6 to 1.7
+
+Wang Mingyu (1):
+  bolt: upgrade 0.9.6 -> 0.9.10
+
+ .../bolt/{bolt_0.9.6.bb => bolt_0.9.10.bb}    |  2 +-
+ ..._binary.py-Use-env-to-detect-python3.patch | 23 -------------------
+ .../{fwupd-efi_1.6.bb => fwupd-efi_1.7.bb}    |  5 ++--
+ .../lsscsi/{lsscsi_030.bb => lsscsi_0.32.bb}  |  6 +++--
+ 4 files changed, 7 insertions(+), 29 deletions(-)
+ rename meta-oe/recipes-bsp/bolt/{bolt_0.9.6.bb => bolt_0.9.10.bb} (92%)
+ delete mode 100644 meta-oe/recipes-bsp/fwupd/fwupd-efi/0001-efi-generate_binary.py-Use-env-to-detect-python3.patch
+ rename meta-oe/recipes-bsp/fwupd/{fwupd-efi_1.6.bb => fwupd-efi_1.7.bb} (90%)
+ rename meta-oe/recipes-bsp/lsscsi/{lsscsi_030.bb => lsscsi_0.32.bb} (63%)
 
 
