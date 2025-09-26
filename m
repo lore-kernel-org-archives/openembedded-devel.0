@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB184CCA472
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACF55CCA474
 	for <webhook@archiver.kernel.org>; Fri, 26 Sep 2025 14:19:42 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web11.18529.1758896375430305594
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web11.18527.1758896373700690238
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Sep 2025 07:19:35 -0700
+ Fri, 26 Sep 2025 07:19:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MTf6vmxP;
- spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-63486ff378cso4657980a12.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 07:19:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TS/5G+1M;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-b3727611d76so238966166b.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 07:19:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758896374; x=1759501174; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758896372; x=1759501172; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=PBjpkjsQcu6jebcUXvo+jTkQniQT9Xr5m2kEDKOYtlc=;
-        b=MTf6vmxPfgFPwa0gKLOzLK8RIXh+rENtVj1cGmp9FLqvKJ1+8Zer3JF+Yl9sjZfdRU
-         p0sFIpgi5mo7d+HAY7RrkUoabIZHEL8PyjoVPf2xCtfDrB6rRYS6i9TAD9KAy3Dxd2lh
-         JUT/4Xrp/qveoI3pn3qClkxreoFTzLrcVfCYodz1U4LD8dxkjSGxyv00kggGqMJ7k9cX
-         6LkLVUxEsmHTGq+yV8UG05J8xzmAMn38hLHzERF/4LoDyzSf12Qjc/k28utlWE0fahT0
-         EPgvpnvR4644lX/mAlkyE+7svYAx4D0Pv1Vd1lhGqzvY1sg55Rb/JsN4sdhtBpqGK6oa
-         6GWQ==
+        bh=2BiDdvDh696H1EROsuhiAcmAmJRlyFMt+wJpJWWJ+HA=;
+        b=TS/5G+1MuFTl45qtNbYreullHihVMIky7luDywGM6KwIfgYQShAGSSDbOZNhzRFTig
+         FfhgvM9g4d3frK+mLUcZ4bQJaykjEmi1lTrDRlIzwiYcR7co1vkO2S5/RLqJ+POToGsn
+         +emZZtVxUXOriuKMSnDiTYx/2q7Q0rj24zw0ds55QCkuU7zWK+Xbb8gt5pxnYQDBzKoa
+         Epp0r/xYglqypDm6AGxZzQ4kT5zl2qy1o70T2i630WMcnYRuRccTS0Mi6lbVbcHl33Kq
+         BC08YGNnKtQIU9mJVrlyeIWW/yahTfWfzOFl48JBJenkZMkgfN+lTiV53/8SHjwF3MWR
+         35hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758896374; x=1759501174;
+        d=1e100.net; s=20230601; t=1758896372; x=1759501172;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=PBjpkjsQcu6jebcUXvo+jTkQniQT9Xr5m2kEDKOYtlc=;
-        b=Cr+uc/PdL+Z2GiKrp4NQWacEFB5Hl73KYGcxpU63sN3wrSdeeZUOtdUKG51UWnhGjZ
-         gpmo3ThodK3R2n/xjah+Vwr1XGw0Vd/jy7D+bVvJJedh7xtzpDG8NoiPPdyE60Hv460w
-         hpeVK6s38vZUmHkOk80sA952e+JU+673vDbBUokg0P1j8hexTOodoLBAd/73Bq+vrEPn
-         +AgwPP0Dl2QMqv+f1PxdULPP1ovIbDPCfUMVvvfEvfz57IGB12t5plJY2RC7PBYVO/V2
-         Fq1E2anZe8A8MYK9c3VQFdtcRzCJpADmc+RbNtWoej8GJKKYn44MAYsAmihMOHXP8t/H
-         xZdg==
-X-Gm-Message-State: AOJu0YwxKHYjnLs008WUV51wrQh/hXjLmpLUsji67HOLnApJNLtlawTX
-	DwvtHUtm+kvSiPbvkHiDY9hwbbdIQuCJST/vXQWl35L4ArlQQgcjSkEzYc1vnQ==
-X-Gm-Gg: ASbGnctq3lSO/xfzybNEY0gBu0DIXXKU8eGs/Pxa7gHm4fbT/SKM58BCPGr5jzZLK6g
-	mDKA0r9Muz/cxiWqDcxlEpASuvlIidrGUNkePythoc9OOdbou/hbaL40iK92trx1CiXmWpGNYLX
-	aGMsZAHv21HGF1YoYuvqxEy5iEEUAngfov4jboUb3xuKGGrothnIrf9k4rjjHX/goaNZan5g1dt
-	UdOlc5LzG0p4GBCCfwJl955enEZfGn/HWTPlGGz7DONKeIDvYSp3edQUqZG2OZ9csevld2fBDAi
-	0pBAD6UmmDtaJpsd722RvsfJA3oCgJno79JA9hj3glm76yC7i7bjEcB1rwZHCIebrvKZwq4ew4E
-	l4wlJn5JQEHIx97wxgo8R
-X-Google-Smtp-Source: AGHT+IGd26TSHAZs3lt2nrCNXEcuRHIGrcLzTl+My8c5aQTeIsfLPreW9Olccn3L03ODsBZJ53bHOQ==
-X-Received: by 2002:a05:6402:46ce:b0:61f:eb87:fde7 with SMTP id 4fb4d7f45d1cf-634a3339439mr6110695a12.17.1758896373639;
-        Fri, 26 Sep 2025 07:19:33 -0700 (PDT)
+        bh=2BiDdvDh696H1EROsuhiAcmAmJRlyFMt+wJpJWWJ+HA=;
+        b=LxrW9QbDLWpcCM4eN6OikrmpbxHp4OOngxzICfP7rRqyaj+3tRO2xSP38C8yoL7ulx
+         DerHnCXUqF4On7JDVn9jJtEb+/JKnD61BSUc0UMlzG7JwRMA/71Yb0Bq9WNc6jwYVCoW
+         yRCWUxTemiRWYcWfoxINOtdI2BA1O9X+hNOZtkW2IBBfrLOZ8WpFbUuOA5R01fHMMeBP
+         1TPKA9tw3NryBhkamvTZmjTvzDROCyP1qLZVRWkPGvEWBDWAcx5xBMv7G8idoYzxWi85
+         ensRCkANabMqU7uk3adq6LZB5vOQ2m9JcGK8/3nRA7BQgOrhyI3Yi2PHT1714cWKVzcG
+         719g==
+X-Gm-Message-State: AOJu0Yw0gmLPo66EMjeduyENDz0RYW41ZBsYVF4/hFxM3jK9tT3cz2yO
+	o/INx7AffaCZkCceiKPOMKbLwDclqz//MH6LyBUc+7DJzy+t8HtOSuhZC5GA8A==
+X-Gm-Gg: ASbGncvgZWlH2G5AnzNmGjNvEnoL4YpcZ+V3+CnPA5DzKXELZpzLfYyaRQQMasbGlKE
+	HJHwrtTs4cxcopaB7e+eKH1bPz9zgoPpkOL+LyotZLsHmLExcjYnG84p68UiWa2PTV9HzUYxlUV
+	b7uVF7tL4N40Xqmb6DW32gpcb0d1RWMSo1LOlW3Iv5LAFBuwPk3DRhBeZ/qyf4LKDE+IclYdLXF
+	YBS3CArxARJaS24bJv5jfGb7hBCrZyb3L/Bdrei/SizHPWt9l8K8vMW7BA9AT4KcrozHd3TNP++
+	CsdpLNZ//hn6JYonMMMNfm2IQBDmrpm62SlVypKiqoVmHOc0MNjMztT7T3oP0iameaHj5NUbZ+y
+	Oh7oKFLbpZXIinU8cTIkG
+X-Google-Smtp-Source: AGHT+IFlyTaKDbqMY9bwPXp8+ixJd1EFl3ImVH6lZ/OHXSDWgTE/bD6otfi1oZsNYe7hX1/Zur74SA==
+X-Received: by 2002:a17:907:970c:b0:b2b:c145:ab9a with SMTP id a640c23a62f3a-b34bfa52b03mr839316166b.60.1758896371620;
+        Fri, 26 Sep 2025 07:19:31 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634a3ae321csm3001028a12.24.2025.09.26.07.19.33
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634a3ae321csm3001028a12.24.2025.09.26.07.19.31
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 26 Sep 2025 07:19:33 -0700 (PDT)
+        Fri, 26 Sep 2025 07:19:31 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH 14/20] znc: fix LICENSE value, clean up SRC_URI
-Date: Fri, 26 Sep 2025 16:19:13 +0200
-Message-ID: <20250926141919.2010846-15-skandigraun@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH 11/20] libnftnl: upgrade 1.2.4 -> 1.2.5
+Date: Fri, 26 Sep 2025 16:19:10 +0200
+Message-ID: <20250926141919.2010846-12-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250926141919.2010846-1-skandigraun@gmail.com>
 References: <20250926141919.2010846-1-skandigraun@gmail.com>
@@ -67,46 +67,66 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 14:19:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119923
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119920
 
-1. Set the correct LICENSE value
+From: Yi Zhao <yi.zhao@windriver.com>
 
-2. Csocket is a submodule of the main znc project. Instead of
-cloning it separately in a subfolder, just let the gitsm fetcher
-to fetch the correct revisions, at the correct place.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6a8d205e5c8e7c637eacbe91986c5f8c9145c6ff)
+(cherry picked from commit e9df01df3db8fd67102e53c6a424bc0128100573)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-networking/recipes-irc/znc/znc_1.8.2.bb | 12 +++---------
- 1 file changed, 3 insertions(+), 9 deletions(-)
+ .../libnftnl/0001-configure.ac-Add-serial-tests.patch     | 8 ++++----
+ .../libnftnl/{libnftnl_1.2.4.bb => libnftnl_1.2.5.bb}     | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+ rename meta-networking/recipes-filter/libnftnl/{libnftnl_1.2.4.bb => libnftnl_1.2.5.bb} (95%)
 
-diff --git a/meta-networking/recipes-irc/znc/znc_1.8.2.bb b/meta-networking/recipes-irc/znc/znc_1.8.2.bb
-index 1517384eca..a50431982e 100644
---- a/meta-networking/recipes-irc/znc/znc_1.8.2.bb
-+++ b/meta-networking/recipes-irc/znc/znc_1.8.2.bb
-@@ -1,19 +1,13 @@
- SUMMARY = "ZNC, an advanced IRC bouncer"
- SECTION = "net"
--LICENSE = "GPL-2.0-only"
-+LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-networking/recipes-filter/libnftnl/libnftnl/0001-configure.ac-Add-serial-tests.patch b/meta-networking/recipes-filter/libnftnl/libnftnl/0001-configure.ac-Add-serial-tests.patch
+index 049ad2d39a..abeca6579c 100644
+--- a/meta-networking/recipes-filter/libnftnl/libnftnl/0001-configure.ac-Add-serial-tests.patch
++++ b/meta-networking/recipes-filter/libnftnl/libnftnl/0001-configure.ac-Add-serial-tests.patch
+@@ -1,4 +1,4 @@
+-From 1cb59c1fed33607e4fb2bee9144ce45276e9cc96 Mon Sep 17 00:00:00 2001
++From 801a4dd42449fb5f09fb9cb99714ed137278ca24 Mon Sep 17 00:00:00 2001
+ From: Trevor Gamblin <trevor.gamblin@windriver.com>
+ Date: Tue, 14 Dec 2021 12:31:12 -0500
+ Subject: [PATCH] configure.ac: Add serial-tests
+@@ -14,13 +14,13 @@ Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+  1 file changed, 3 insertions(+), 1 deletion(-)
  
- DEPENDS = "openssl zlib icu"
+ diff --git a/configure.ac b/configure.ac
+-index 8e68035..2704214 100644
++index d5c6bd0..d90048e 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -8,7 +8,9 @@ AC_CONFIG_HEADERS([config.h])
+  m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
+  
+- AM_INIT_AUTOMAKE([-Wall foreign tar-pax no-dist-gzip dist-bzip2
++ AM_INIT_AUTOMAKE([-Wall foreign tar-pax no-dist-gzip dist-xz
+ -	1.6 subdir-objects])
+ +	1.6 subdir-objects serial-tests])
+ +
+@@ -29,5 +29,5 @@ index 8e68035..2704214 100644
+  dnl kernel style compile messages
+  m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+ -- 
+-2.33.1
++2.25.1
  
--SRC_URI = "git://github.com/znc/znc.git;name=znc;branch=master;protocol=https \
--           git://github.com/jimloco/Csocket.git;destsuffix=git/third_party/Csocket;name=Csocket;branch=master;protocol=https \
--          "
--SRCREV_znc = "bf253640d33d03331310778e001fb6f5aba2989e"
--SRCREV_Csocket = "e8d9e0bb248c521c2c7fa01e1c6a116d929c41b4"
-+SRC_URI = "gitsm://github.com/znc/znc.git;branch=master;protocol=https"
- 
--# This constructs a composite revision based on multiple SRCREV's.
--#
--SRCREV_FORMAT = "znc_Csocket"
-+SRCREV = "bf253640d33d03331310778e001fb6f5aba2989e"
+diff --git a/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.4.bb b/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.5.bb
+similarity index 95%
+rename from meta-networking/recipes-filter/libnftnl/libnftnl_1.2.4.bb
+rename to meta-networking/recipes-filter/libnftnl/libnftnl_1.2.5.bb
+index ede35e7624..380a33064b 100644
+--- a/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.4.bb
++++ b/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.5.bb
+@@ -7,7 +7,7 @@ SRC_URI = "git://git.netfilter.org/libnftnl;branch=master \
+            file://0001-configure.ac-Add-serial-tests.patch \
+            file://run-ptest \
+            "
+-SRCREV = "141cc997755dd91e94dd64c5497f2a23bd9a894c"
++SRCREV = "c62bef65fef638452b4ed1893c2451fc253ca7ca"
  
  S = "${WORKDIR}/git"
  
