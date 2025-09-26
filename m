@@ -1,97 +1,97 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73BDFCAC5BB
-	for <webhook@archiver.kernel.org>; Fri, 26 Sep 2025 21:07:50 +0000 (UTC)
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com [209.85.128.65])
- by mx.groups.io with SMTP id smtpd.web10.1978.1758920861558126617
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A85CCAC5B8
+	for <webhook@archiver.kernel.org>; Fri, 26 Sep 2025 21:08:40 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web11.2077.1758920911086005458
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Sep 2025 14:07:42 -0700
+ Fri, 26 Sep 2025 14:08:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=YDKy8Xyf;
- spf=pass (domain: smile.fr, ip: 209.85.128.65, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f65.google.com with SMTP id 5b1f17b1804b1-46e37d10f3eso16677225e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 14:07:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GAtDJewA;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b30ead58e0cso476548166b.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 14:08:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1758920860; x=1759525660; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=oHT2A8ulMcYrQ6zpCj8/3Q8+eB9ChXTDwg0grDokFzw=;
-        b=YDKy8Xyf1yrhDNRIABzljv+JovRLW0gTSifOwZNU1cxj0T5qqll4CURwJy4qkb3voC
-         CDmiMkfch6QgbFtfWfV/dFpqkfYYYGrwWGMEwyLDnXUa/SB0DlbLu1jhfBXYW1mP4g9m
-         vr7QWXLZBXWpvh11xV4NteufKPVQy8sbMK7Fw=
+        d=gmail.com; s=20230601; t=1758920909; x=1759525709; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=76GMHj1SMdAvyL5wmbo2iagIhdCvYxV3GRBgFzZFDIU=;
+        b=GAtDJewAAxwYhVLG2xuBJ9+MLdedBNKO7r2wmEE50cjNpUVc9dvzQ3+qBDD/K9gBWz
+         vL/VG791GvlJ19FewIEMSumew4t0azJGECpgADwYFq9/6yaPajnP7fIEqYzZA6fRV5yX
+         nRPJU9mym8FIy1r02ZxSiH13+Ja8mUa/XaTcBzm+8EiaYDKldmdLIN3JXvEF9uOd3Ol/
+         KYGyK9GG+YV7wCvbkJg6la5MmQ6N23Av3LuZWLPlwEcAq1P4QLTL8txub+0YPLxDwyWu
+         S7AP/qhz/D1MMqlB2GYpvnOKnRvAnQHkBzzhPbT2zU5qp5Fbc+h50EBfTWMRWZcf55vC
+         EDEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758920860; x=1759525660;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=oHT2A8ulMcYrQ6zpCj8/3Q8+eB9ChXTDwg0grDokFzw=;
-        b=w+vi1pUxcwbVR8oL7oUseyZMR+cLmyvVfdBCda4WF+GZFgwsJl5IwZtLfZlGtWU3KW
-         IRUDNGbav+8UaRgL9yqLm5DQwWULDQ4E0fmrGrqMehzWztebw2dzxJMJlQrcRBP6jOg7
-         e5qvmDCq/jXvuNnSLhcidLBw8cTW3AMoPAQxXh3RxOxOPbMPBWLPQxPeWQCm3fBGiY5E
-         SNud6NyuaVjyD6k/GqupBigbvYSXC84a26FlaSU77SWtVoqsnrNtSyqi8uW1U+H+7E/H
-         f9gg8sifsgLXfijEn2jEkW6z+5QPkX0jzhrrRapV6JO/4D/cw6kuhN1S8qTu/KeX2ZzC
-         +Mtg==
-X-Gm-Message-State: AOJu0Yzw/8Gd9HLXmSEFGLz6jvkusC0jnM544+BPhduyauPeTQgBVpJ+
-	jd3wYu4ebLlueDtHTgOcMCc38PbLbCNF8Vu0PfvnFYoMmHEDjcaHnmr7f6ML2fsfJxqcyTrQNff
-	H4UyGZhGo0g==
-X-Gm-Gg: ASbGncsJ7OTygmCbatvZaqn6nfeL+qtIB7YVyxLdZtH5zsaf9+4ZOqVDZ9rEVYhzzRF
-	W8BVlLFct3S8BgHIV1kWoyYxe//7+gnefAaKvXJnNWUlE2h5OSTcrNRojyAAsPfJE3GKBGQD3Ux
-	/xWBPgviwjxjTYrmF150L/tU6XtNddXFKJoHRn6qlCER0Cl0G7FO27Jhz8/rcp3VUam1U0cZ/hx
-	kt9/wR5/j/Qv97M5/thDwOG/zqPOa+7l2YMJUOpwZl8oW6z0NYdOW7NVOTljcgmuq+DpU/1/3S8
-	l+uY+Zo6UPb2XS7U4ye0LgcvKruydKmzLZGizyl84aRubGH3/S0NL7ibpIyhiS0vOOgaAM94DQj
-	1HD+Hj5VPVujU/4igqXKASMB1E0wgjBhUOv7h7zPGWsGyMt/Ks9N6OYYdiUEPTE82px80Eucu/4
-	BoPcvygIuAnevq+5m1ByZdJTSQuejUEg==
-X-Google-Smtp-Source: AGHT+IE5hSJd1HAay1NmqrDJIJCtBpdLUcYGQlzaIGtj0EKqCALSTZhZKndkYdbxXiWcT3zaVYl2hg==
-X-Received: by 2002:a05:600c:4743:b0:459:d451:3364 with SMTP id 5b1f17b1804b1-46e329eb11cmr88044795e9.24.1758920859564;
-        Fri, 26 Sep 2025 14:07:39 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.home (2a01cb001331aa0017b58d8bf04048c3.ipv6.abo.wanadoo.fr. [2a01:cb00:1331:aa00:17b5:8d8b:f040:48c3])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-46e33be3268sm87094165e9.11.2025.09.26.14.07.39
+        d=1e100.net; s=20230601; t=1758920909; x=1759525709;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=76GMHj1SMdAvyL5wmbo2iagIhdCvYxV3GRBgFzZFDIU=;
+        b=CUoulFzP2mPRtkKBYxSJiT/klz6cnbLlJhNT7NNp4K+vpz91uzunLyUr53dwPKZhur
+         3ghExGkl5z+p4y+Rb40/573st3fxlpCXEx9hr7EVHR6UJA6ZQ8rdMmq6TxXGbKNR4MB7
+         PA6+UMXtFi6sGOTfxQrzuv0NkrTEWkKBrcMMGasa6hKZw5yFrPOvBFf2GI8NbatJeLD3
+         2iB80Fdr/91ZQFMS5bGSaUZ59fsCRhE/zntEa1xG66DlyOQIgUPXk8X80KJAwkW1/27X
+         a/dYXFMYpz8LLaS/hRujnREYiYqlm2HOaJMeCip8MEXigzm8aQ333JxQecvhQaoadXjp
+         4ETQ==
+X-Gm-Message-State: AOJu0YyDHkUGRMuznU39lAK2Ts0qs3UmvXp/FOcL9XKrRho8/rUxGiZt
+	cK6aRCufSMYpyJrA4ipWrEDS6Jr2IRBvFaKRRjlzp9V1QL6PfNIHvfu6fbuKAA==
+X-Gm-Gg: ASbGnct7kfdCpQwMdDo7GibbHU19GPn6vjnZJdMWX5DzL5lNv+Ouwb9/XsnLwep3KQl
+	L6yZ6oJwhjFdIH6KNwjuq76Y7t2Q+V6sSORmdMQZCRY07KKkAJTzQLB0YCJ4CSi4vL97SFLLrFu
+	zEjzc58tVlW3+kbIo5rCqtx+q6bImVelt7ez1GMYcrysjgC+RlHV2gehbnDT/QTedVmvsGHyNdp
+	JOr8lXaprWylZByil3JVn0/5bvTn6yqZutrcdg1Ck/hIJGgGE/VZ42oOYeHOxdr4EVVcKJh5PUw
+	ykqGYRRsEc3n1UHgdZNal/rU8Itp8AV8xiXdSMtT3h50Hh+SCOrEzT0jHABiF6H0VO0MS1kSf+7
+	4xSXEKcyQKsj2RtHp8qwc
+X-Google-Smtp-Source: AGHT+IFNv6dt63r9yl8a5X1q+zTBZyV6Fo+CpG6X2cyhVLMvx4kcMFKM1DBm0V1rvKUkXMi2wuf6kw==
+X-Received: by 2002:a17:907:3f0d:b0:b31:31b8:dacd with SMTP id a640c23a62f3a-b34b74ee10fmr1032246966b.17.1758920909343;
+        Fri, 26 Sep 2025 14:08:29 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b35446f6904sm423607766b.66.2025.09.26.14.08.28
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 26 Sep 2025 14:07:39 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
+        Fri, 26 Sep 2025 14:08:28 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH] packagegroup-meta-oe: only add clinfo if DISTRO_FEATURES has opencl
-Date: Fri, 26 Sep 2025 23:07:19 +0200
-Message-Id: <20250926210719.636314-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.5
+Subject: [meta-oe][scarthgap][PATCH] mosh: set working SRC_URI
+Date: Fri, 26 Sep 2025 23:08:28 +0200
+Message-ID: <20250926210828.169854-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 21:07:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119942
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 21:08:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119943
 
-From: Yoann Congal <yoann.congal@smile.fr>
+The project switched to storing their releases on Github, and
+the original links stopped working.
 
-Since commit f65ae714d885 ("opencl: make use of the 'opencl'
-DISTRO_FEATURE"), clinfo has a feature check on "opencl". Only add it to
-its meta-oe package groups if the opencl is in DISTRO_FEATURES.
-
-Fixes this warning (as seen on AB[0]):
-stdio: WARNING: Nothing RPROVIDES 'clinfo' (but [...]/packagegroup-meta-oe.bb RDEPENDS on or otherwise requires it)
-
-[0]: https://autobuilder.yoctoproject.org/valkyrie/#/builders/82/builds/453/steps/12/logs/warnings
-
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-connectivity/mosh/mosh_1.4.0.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 8bc74b2f4c..eee4e096a9 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -712,7 +712,7 @@ RDEPENDS:packagegroup-meta-oe-support = "\
-     c-ares \
-     ccid \
-     ckermit \
--    clinfo \
-+    ${@bb.utils.contains("DISTRO_FEATURES", "opencl", "clinfo", "", d)} \
-     cmark \
-     ${@bb.utils.contains("DISTRO_FEATURES", "polkit gobject-introspection-data", "colord", "", d)} \
-     consolation \
+diff --git a/meta-oe/recipes-connectivity/mosh/mosh_1.4.0.bb b/meta-oe/recipes-connectivity/mosh/mosh_1.4.0.bb
+index 693ec12d3c..62fb5444a4 100644
+--- a/meta-oe/recipes-connectivity/mosh/mosh_1.4.0.bb
++++ b/meta-oe/recipes-connectivity/mosh/mosh_1.4.0.bb
+@@ -14,13 +14,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ DEPENDS = "protobuf-native protobuf ncurses zlib libio-pty-perl openssl libutempter abseil-cpp"
+ 
+-SRC_URI = "https://mosh.org/${BP}.tar.gz \
++GITHUB_BASE_URI = "https://github.com/mobile-shell/${BPN}/releases/"
++SRC_URI = "${GITHUB_BASE_URI}download/${BP}/${BP}.tar.gz \
+            file://0001-configure.ac-add-support-of-protobuf-4.22.x.patch \
+            "
+ 
+ SRC_URI[sha256sum] = "872e4b134e5df29c8933dff12350785054d2fd2839b5ae6b5587b14db1465ddd"
+ 
+-inherit autotools pkgconfig
++inherit autotools pkgconfig github-releases
+ 
+ PACKAGE_BEFORE_PN += "${PN}-server"
+ FILES:${PN}-server = "${bindir}/mosh-server"
 
