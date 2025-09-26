@@ -2,29 +2,30 @@ Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 017D6CAC5B8
-	for <webhook@archiver.kernel.org>; Fri, 26 Sep 2025 08:11:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04E1CCAC5AE
+	for <webhook@archiver.kernel.org>; Fri, 26 Sep 2025 08:11:20 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.12468.1758874271329717688
+ by mx.groups.io with SMTP id smtpd.web10.12469.1758874271762209012
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 26 Sep 2025 01:11:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=ZBaRMsbW;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=E20IprEA;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1364979e65=hongxu.jia@windriver.com)
 Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58Q69rT01767034
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58Q69rT11767034
 	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 08:11:10 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=Dv9EKKGSawaPr3cSgJEE
-	VqDGTXTeRvh4uRySpqR4xbY=; b=ZBaRMsbW6yXC3iCPOCma+9o3yb+DLBm+KjhO
-	GJ9RDKabAn4nJm8SR0HXDaSjQC2xHPCbVuh5pqS7kMznjKtDwppES9HRG1Wyvi+N
-	iboCa7+Sn2FEgsBMvvBMSqxlhjh38J043Vo2NZ94qgF4NAAOBZV/q91t1Z4mFtjQ
-	RgQ27mSRBYmyaOAbl7A7QBoH+2PKCfm0JxXhnawOdfYE8PrQ0xB15fSNEUAMiODB
-	glNnCoAjaFXHpLMYax07P0jeIrPz4wLFbSczVPpaAh41fBWMgVQHkFkc8NDniKyx
-	DXAPOP1d/ekOJ7bQnP7I1n9kIGmPr53bU5B1VEeDqcpZOSMXqg==
+	 h=content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=PPS06212021;
+	 bh=1oldRp/jApuZNzERyCjeIjdjc8JId/s27AlMDKcWc0w=; b=E20IprEAFaw7
+	RFXWSqtCVWaNcNAC0h2h1SfDxsU2FLFa01IFQTfj0dnPJfZYn90dUnlkU6MIaeCG
+	6nJRYJuTdMCHtJu6x4XFkDqfFaBua/pM74bwlYpkISshomrpRefDNbMAHdvQQp3r
+	kphrBlIqG7mXxfSzW88EY++ZDXDy+0/Zoq0H//aRaqLo8ubr8JMz9sKDcuy59TT7
+	IwgJj8kWeUaa2VzWXeEEgk5mvMVWO9kOKRXBmTt/4GWGAjoWhxKfzq1s28HZ+YQM
+	cJRqlI7juAyCixqUn5HP39ENV2Di52nkYyt+jkaUcb2uRHXTuE1XMGUQ9DwTMAWW
+	qL/dW7iRdw==
 Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49dbsm8j1h-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49dbsm8j1h-2
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 08:11:10 +0000 (GMT)
 Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
@@ -33,29 +34,31 @@ Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
  15.1.2507.59; Fri, 26 Sep 2025 01:10:28 -0700
 Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
  ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.59 via Frontend Transport; Fri, 26 Sep 2025 01:10:27 -0700
+ 15.1.2507.59 via Frontend Transport; Fri, 26 Sep 2025 01:10:28 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH 1/3] python3-mlcommons-loadgen: support reproducibility
-Date: Fri, 26 Sep 2025 16:10:24 +0800
-Message-ID: <20250926081026.3104475-1-hongxu.jia@windriver.com>
+Subject: [meta-python][PATCH 2/3] python3-pandas: fix reproducibility issue
+Date: Fri, 26 Sep 2025 16:10:25 +0800
+Message-ID: <20250926081026.3104475-2-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250926081026.3104475-1-hongxu.jia@windriver.com>
+References: <20250926081026.3104475-1-hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-GUID: tkz8bUSZPOqxBZW9hUf3nnTtETO8k-9B
+X-Proofpoint-GUID: Ni3aKG-UdFEqbwfeQRniQGoksanXTHZq
 X-Authority-Analysis: v=2.4 cv=TJhIilla c=1 sm=1 tr=0 ts=68d64a9e cx=c_pps
  a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
- a=yJojWOMRYYMA:10 a=SsMK-6ewAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8
- a=y3uUKTl_r5acGo3yIGgA:9 a=49hUO6naoDravHwzbBTq:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: tkz8bUSZPOqxBZW9hUf3nnTtETO8k-9B
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTI2MDA3NCBTYWx0ZWRfX4cuPV8i3X4BA
- HJ7YjgMnB0XeqZQoViqysaO6z8FwmkTv2JPSdwvgK5MzT+baDWXGyTmWhVc+6QSkQuc9SBUhk4M
- MTUa2QVfcEcKUs1F1RBZnSYEUmS2Wxx2AF/bJ4Yfm8uijkQ5ORZ38Ps62fswHyxUkjDq+A6BVdW
- qOBh9RL4a7WEcB5Z04UgyQlvh9oCbOeXxH0LeHKQsWKYvL2wZGjqWpt09jrsJR5pA/zwQLZIOAT
- Ojl86B4PGFAWVpZi+Myz3ZxxTBaqW7OjjL40m+PBlslClf/HgZJiqoJKRlY1575dhvuJjG7hBT8
- J/tYMJhxOoxvxaZa8pgcHrKpCco5r5iUTncRsUaO5uNXFwiIGkmnYmNwB5ukmXJ8+5LDEp7/WVD
- E/0G1JGe5WFMsNew7528BrK1P6wtbg==
+ a=yJojWOMRYYMA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=zIdP9HlweL3MVMreXwYA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: Ni3aKG-UdFEqbwfeQRniQGoksanXTHZq
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTI2MDA3NCBTYWx0ZWRfX/jZuTBrZxyld
+ TAvNtAwC5z5IanFzpxF1oaKYPhwRtnkBfTHvdLiXTt/JvreIBxUkBQgZBdxsCDeQgV2xKfIiz4h
+ WjzROMGYo9m6xjEH8bdlmijy25Im2btg4Z094ZeZhqGyNzBZcnhDiWOBKw0wIlul5UvfIEZL2yz
+ E/KVMnDll9BjspOYFqwj/vNI8Im8Cbo8GqDh0T/kZQT3a8s311xL/5M5fSJsrv7a8BdvOF+l/Jp
+ 3Y3SlziAjEXkElkiNleYvoeaSbFD4sBKpCCvFIY4py05U21bNP9sIWmp4WPgW9G2/UwoqgMI3qZ
+ MLLACccY0ZZNs+UKPbeofwiFRdya+DJS5dcUQ7N9SspIZ9ufcJyTdYRwQiTTM1RiasD+sPpm+6s
+ Dofhq4VxdmV6AJJ3G/1FMy0OE5YceA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-09-26_02,2025-09-26_01,2025-03-28_01
@@ -68,84 +71,91 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 08:11:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119895
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 08:11:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119896
 
-Implement the SOURCE_DATE_EPOCH specification[1] for reproducible
-builds. If SOURCE_DATE_EPOCH is set, use it as timestamp instead of the
-current time.
+The type of new_value is either `npy_timedelta' or `int64_t'
+In build/pandas/_libs/tslibs/timedeltas.cpython-313-x86_64-linux-gnu.so.p/pandas/_libs/tslibs/timedeltas.pyx.c
+..
+npy_timedelta __pyx_v_new_value;
+...
 
-[1] https://reproducible-builds.org/specs/source-date-epoch/
+In build/pandas/_libs/tslibs/timedeltas.cpython-313-x86_64-linux-gnu.so.p/pandas/_libs/tslibs/timedeltas.pyx.c
+...
+__pyx_t_5numpy_int64_t __pyx_v_new_value;
+...
+
+Explicitly define it as int64_t to assure the generated source is
+reproducibility between builds
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../files/source-date-epoch.patch             | 41 +++++++++++++++++++
- .../python3-mlcommons-loadgen_5.1.0.bb        |  4 ++
- 2 files changed, 45 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python3-mlcommons-loadgen/files/source-date-epoch.patch
+ .../0001-fix-reproducibility-issue.patch      | 43 +++++++++++++++++++
+ .../python/python3-pandas_2.2.3.bb            |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pandas/0001-fix-reproducibility-issue.patch
 
-diff --git a/meta-python/recipes-devtools/python3-mlcommons-loadgen/files/source-date-epoch.patch b/meta-python/recipes-devtools/python3-mlcommons-loadgen/files/source-date-epoch.patch
+diff --git a/meta-python/recipes-devtools/python/python3-pandas/0001-fix-reproducibility-issue.patch b/meta-python/recipes-devtools/python/python3-pandas/0001-fix-reproducibility-issue.patch
 new file mode 100644
-index 0000000000..32e529d483
+index 0000000000..deadacafa9
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python3-mlcommons-loadgen/files/source-date-epoch.patch
-@@ -0,0 +1,41 @@
-+From dd7925397b84c2a327cd4594edba9f7ca5acef61 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-pandas/0001-fix-reproducibility-issue.patch
+@@ -0,0 +1,43 @@
++From 80274cd3a0746ddc5421643dd40d47bdf3c6a68c Mon Sep 17 00:00:00 2001
 +From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Fri, 26 Sep 2025 14:02:23 +0800
-+Subject: [PATCH] Honor the SOURCE_DATE_EPOCH variable
++Date: Fri, 26 Sep 2025 15:47:53 +0800
++Subject: [PATCH] fix reproducibility issue
 +
-+Implement the SOURCE_DATE_EPOCH specification[1] for reproducible
-+builds. If SOURCE_DATE_EPOCH is set, use it as timestamp instead of the
-+current time.
++The type of new_value is either `npy_timedelta' or `int64_t'
++In build/pandas/_libs/tslibs/timedeltas.cpython-313-x86_64-linux-gnu.so.p/pandas/_libs/tslibs/timedeltas.pyx.c
++..
++npy_timedelta __pyx_v_new_value;
++...
 +
-+[1] https://reproducible-builds.org/specs/source-date-epoch/
++In build/pandas/_libs/tslibs/timedeltas.cpython-313-x86_64-linux-gnu.so.p/pandas/_libs/tslibs/timedeltas.pyx.c
++...
++__pyx_t_5numpy_int64_t __pyx_v_new_value;
++...
 +
-+Upstream-Status: Submitted [https://github.com/mlcommons/inference/pull/2345]
++Explicitly define it as int64_t to assure the generated source is
++reproducibility between builds
++
++Upstream-Status: Submitted [https://github.com/pandas-dev/pandas/pull/62459]
 +
 +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +---
-+ version_generator.py | 9 +++++++--
-+ 1 file changed, 7 insertions(+), 2 deletions(-)
++ pandas/_libs/tslibs/timedeltas.pyx | 3 +++
++ 1 file changed, 3 insertions(+)
 +
-+diff --git a/version_generator.py b/version_generator.py
-+index 2e75243..5202da9 100644
-+--- a/version_generator.py
-++++ b/version_generator.py
-+@@ -110,8 +110,13 @@ def generate_loadgen_version_definitions(cc_filename, loadgen_root):
-+     # Write the version into the function definition
-+     ofile.write(func_def("Version", f"\"{version_contents}\""))
++diff --git a/pandas/_libs/tslibs/timedeltas.pyx b/pandas/_libs/tslibs/timedeltas.pyx
++index f6c69cf..34ac9e7 100644
++--- a/pandas/_libs/tslibs/timedeltas.pyx
+++++ b/pandas/_libs/tslibs/timedeltas.pyx
++@@ -1820,6 +1820,9 @@ class Timedelta(_Timedelta):
 + 
-+-    date_time_now_local = datetime.datetime.now().isoformat()
-+-    date_time_now_utc = datetime.datetime.utcnow().isoformat()
-++    if os.environ.get('SOURCE_DATE_EPOCH', False):
-++        source_date_epoch = int(os.environ['SOURCE_DATE_EPOCH'])
-++        date_time_now_local = datetime.datetime.fromtimestamp(source_date_epoch).isoformat()
-++        date_time_now_utc = datetime.datetime.fromtimestamp(source_date_epoch, tz=datetime.timezone.utc).isoformat()
-++    else:
-++        date_time_now_local = datetime.datetime.now().isoformat()
-++        date_time_now_utc = datetime.datetime.utcnow().isoformat()
-+     ofile.write(func_def("BuildDateLocal", '"' + date_time_now_local + '"'))
-+     ofile.write(func_def("BuildDateUtc", '"' + date_time_now_utc + '"'))
++         disallow_ambiguous_unit(unit)
 + 
+++        cdef:
+++            int64_t new_value;
+++
++         # GH 30543 if pd.Timedelta already passed, return it
++         # check that only value is passed
++         if isinstance(value, _Timedelta):
 +-- 
 +2.34.1
 +
-diff --git a/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_5.1.0.bb b/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_5.1.0.bb
-index abc47172c1..7bb2e9d4dd 100644
---- a/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_5.1.0.bb
-+++ b/meta-python/recipes-devtools/python3-mlcommons-loadgen/python3-mlcommons-loadgen_5.1.0.bb
-@@ -14,6 +14,10 @@ DEPENDS = "python3-pybind11-native"
+diff --git a/meta-python/recipes-devtools/python/python3-pandas_2.2.3.bb b/meta-python/recipes-devtools/python/python3-pandas_2.2.3.bb
+index f1df026c5c..60cc01800f 100644
+--- a/meta-python/recipes-devtools/python/python3-pandas_2.2.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pandas_2.2.3.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cb819092901ddb13a7d0a4f5e05f098a"
  
- inherit setuptools3 pypi
+ SRC_URI += " \
+             file://0001-pyproject.toml-don-t-pin-dependency-versions.patch \
++            file://0001-fix-reproducibility-issue.patch \
+             "
  
-+SRC_URI += " \
-+    file://source-date-epoch.patch \
-+"
-+
- PYPI_PACKAGE = "mlcommons_loadgen"
- UPSTREAM_CHECK_PYPI_PACKAGE = "mlcommons_loadgen"
- 
+ SRC_URI:append:class-target = " file://0001-BLD-add-option-to-specify-numpy-header-location.patch "
 -- 
 2.34.1
 
