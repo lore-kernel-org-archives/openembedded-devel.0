@@ -2,157 +2,153 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F691CAC5B9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29A32CAC5BE
 	for <webhook@archiver.kernel.org>; Fri, 26 Sep 2025 14:19:32 +0000 (UTC)
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.web10.18542.1758896363807752525
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.web11.18524.1758896370591157300
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Sep 2025 07:19:24 -0700
+ Fri, 26 Sep 2025 07:19:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cTPby7aS;
- spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-62fc28843ecso2926405a12.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 07:19:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iWFIuEet;
+ spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-62fca01f0d9so4185857a12.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 07:19:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758896362; x=1759501162; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=n1uMcYkQ5+jBv/AAhtaNenmEtIAyw24ySoko5oCR/3I=;
-        b=cTPby7aSaM8l+VujItd6UR3NJOokBBpzu06whTFV/DooFQPyR0C6JJyFs77k8zeufS
-         qarpEtXxgGwpD6YzVkDtZlupe61qr69ppj84Kq9F3VJ+XkibsaV4mtdzCKxD6jZdB+cn
-         u6BAVrYVCbixDr/qdDJIFHknaXlDA39YA/g9tMYlvux+LnmI6O6lun0gWjSngT68Y6xu
-         hdgtByG/0tohofJH1x+LnMsYkjF/3PQF9kl1UF9hClMZ0FFgf4u5U8hsaHfzMb+oXUrU
-         Ilc9CXml6/cw+MzGuAnnigYkofjAzgeFzoRf5s6lq8TNhbEOKz+/U05x7PWVZ28jzYnx
-         XDXg==
+        d=gmail.com; s=20230601; t=1758896369; x=1759501169; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=k8Qb2SA8akqMH8yneCA9wva7blPcpRBetYH9IcXw5sQ=;
+        b=iWFIuEetFUETFYkp68EsWTn9hVIdYX4As2rLxsrCe9fFeyajG8b8mCQX6/h1LeqsVI
+         u6nfNc4rYAd0JUQq6Q8Ebz2XBzjrbhVeYQnLhfrVc17iu3C4kBqckpqPBvbHbw5wZDZv
+         IuxWSFe2IihlbXsGw+1hDWZwKTPderHM9uBVCPjaHTETdkvzGHO8DwEdgTGBDtR5ZFi5
+         BvfX60gxInhwCUfZYYKgDpX6ptAKd7x9CsCGHjUpuSkU2cmqxFOCa7EwE86AgbzGI5PD
+         23Jc3H12sgPYGPsBk1rOKUUl3TxYOa8MU7NVDUv08t+/HR+8STj5mswEEoGQ7T7BRLS9
+         jqNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758896362; x=1759501162;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=n1uMcYkQ5+jBv/AAhtaNenmEtIAyw24ySoko5oCR/3I=;
-        b=nsIfjYRO28RnfnVfv1DMQm9AUwbnC6uu0s6XMGUuE+SdCg39fX16H65THwPo6Wr3VG
-         W7r1p9UK/3ZUDuzbflqBDEtpuXY0ez3701XXh42eZHUhw2Vp7oWSdPUfGkeJiK7QeX9m
-         9jNICSUzmsjSby5VWZevyM+qbLJsivS0n2jBnhCioUZXW06hsPpI+y/gP8alNms+KX6I
-         Zyrn/NZi/b3eZZrjfXTdovFtM0FKgTOUHpi/tzD7b+IXzVIUIa6kDEPPcXhayHBIkqaN
-         VOHvXnsysT9OKhuPJlcStCspZFsAS3jF0b7K8HeDIPERTEFgIm+zdLkKlaMEEf8FWHit
-         INhw==
-X-Gm-Message-State: AOJu0YwcDKzVyI+SqRLHY15+RkEp0pOq8MX3/DdKaTSuZqw28uMOp5TV
-	bre9cQ9+FkTdaPDT9wPkPTkCh2DILXZdjOV1tqCkucX5fmAWgfNqRe98yF/Seg==
-X-Gm-Gg: ASbGncswMePqxAkk8meu44tcRd1IRg9MHq2iPX6o7eXfEKRApF8l+VHjxkO9C89KxXy
-	Pr/iEu+Fqhx6RWuHVPKX9RsPqqg5WGyVJU3Qtx5FDeqHuhEj/anKTkZKmlCbXxuYqGwiR9QOyIB
-	WxUJCd2OE0MmYAgpoovdZxD5asq9oukiYIXRqq5lJSOSjbsElOlMLxcV5mQ3HhMEG9BWOE73q0d
-	1UunjC/J84BV+hlAdYu9LMymsOFuPP2xu9EJ69WiD+o492hZnTYAM699iY6mcQszE4cmUDaUFon
-	kWVq3Qw43IyI/E9kre/eyTIOuRB67sIAUVKGt/Oz/ZU9Q4nIx1YaTJNrMCoYDHqPJxKe2AHd0ei
-	oTL6B6B9qLliTzP0xLOKk
-X-Google-Smtp-Source: AGHT+IHSUXVq+wqOhdioyylGZyoy25u5TJNpJLJVgRA+L/0VoKM//OPcYVqZ1IH2j4RhOlBafbGd0Q==
-X-Received: by 2002:a05:6402:5191:b0:631:d76b:4c3 with SMTP id 4fb4d7f45d1cf-6349fa7e694mr6693370a12.19.1758896361801;
-        Fri, 26 Sep 2025 07:19:21 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1758896369; x=1759501169;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=k8Qb2SA8akqMH8yneCA9wva7blPcpRBetYH9IcXw5sQ=;
+        b=e5ub/+RlUQKq9GgVBxdRLWkoMmw2nyJD8Tq2aM57G2B1Gx6lqUy4MbvQ4AyYUDfVPL
+         VfhqxVsuuN2AX2bOMgjhSFK5zzZqlympzFkWTpdhrzCHlb+M6LQ4H0j5vuxv1MZL88ir
+         mtz0ktFvm/xryHzh4zSY0WM5M3MpDZrL4UezhMo6GM+lNrh0tqysHKSovr9IPn0PTpgu
+         C9NAsyShF4V9gDpJupfXo/BuL1c+RDu+QfWtw6VRIGG29Y8v57A+qQaP5X8pfX66+DNv
+         V92xVbDNKYEGd6OCTK1UTqGy8Jq+0MQ2KNdhs4pHDeFJ3HnDIXsZ/kX13JkHToicSKZL
+         5LBA==
+X-Gm-Message-State: AOJu0Yzk06gdhAPqvavOKHCgSfsjV3bA3KjrUTu8w+GHvGdWQrE9ThWm
+	bDhmztzi7hF2edZR2cfZ1MasnE7xIDy7aLW0gxmRv5RAA7GVeDs/H4VfqOwCyw==
+X-Gm-Gg: ASbGncsQm2UNXcDAcMYyjmihmP1/Tyz0VjFyw0+safcgRcruI7QDruGe7BQppyf2GL7
+	VF3aWkuiGTKtX5xaJYUteXDy250Yk5Kx0mRNseUEaY7BQtw4ZBVXOP91jazFcoPQnG6Sq+83XMB
+	H4ZubRqSqlzCDe9DkduMiMRNU21mBuoccDBwTFfjKM41RhFKdy+dG1uJHE3qrBVa/so8E71rBfm
+	htwZvzQYXL2rROLrxgtSI5OculYVuMxraH3v3OMlW5QD3CSAvQeGjLOoPUKwnylY587uxkwq+xR
+	BJIdcaGJQpJyC0XaFHS9vaxTifPe8KDxb9q75wEcyErpcBqFa9TcFaN/9Ls9aER1xY72A+0E3OL
+	Hq1bmHcsHueRTv0EiehFc
+X-Google-Smtp-Source: AGHT+IE21LQWG1wOB96gPfTQ+R5fOALoVh9uHCZt0/iF3dm8umj+yOF/6cAMhQat9dAGDiGZl6jW1g==
+X-Received: by 2002:a05:6402:3458:b0:633:2031:6de3 with SMTP id 4fb4d7f45d1cf-6349f6d69b5mr5550010a12.0.1758896368759;
+        Fri, 26 Sep 2025 07:19:28 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634a3ae321csm3001028a12.24.2025.09.26.07.19.20
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634a3ae321csm3001028a12.24.2025.09.26.07.19.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 26 Sep 2025 07:19:20 -0700 (PDT)
+        Fri, 26 Sep 2025 07:19:28 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 00/20] Cherry-picks from Master Batch D
-Date: Fri, 26 Sep 2025 16:18:59 +0200
-Message-ID: <20250926141919.2010846-1-skandigraun@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH 07/20] pure-ftpd: upgrade 1.0.51 -> 1.0.52
+Date: Fri, 26 Sep 2025 16:19:06 +0200
+Message-ID: <20250926141919.2010846-8-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250926141919.2010846-1-skandigraun@gmail.com>
+References: <20250926141919.2010846-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 14:19:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119909
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119916
 
-This is my fourth batch of cherry picks from master branch, that I'd like to propose
-to include in the Kirkstone branch.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-This is once again an assorted mix of patches: half of generic fixes (outdated SRC_URI,
-LICENSE correction...) or minor recipe version updates which I tried to verify as good as I could
-by reviewing the commits and patch changes.
+nostrip.patch
+refreshed for 1.0.52
 
-This batch has been build-tested with a world build on arm, aarch64, x86 and x86-64 platforms.
+License-Update: Copyright year updated to 2024
 
-Your feedback is much appreciated.
+Changelog:
+==========
+ - The QUIT command is now accepted during a transfer.
+ - The server can be built with --with-minimal again.
+ - Fixed an out of bounds read in the MLSD command.
+ - Larger mmap()ed pages are used on aarch64.
+ - Improved compatibility with HPUX
+ - Improved OpenSSL API compatibility
+ - Improved compatibility with OpenWall Linux
+ - Improved compatibility with Netfilter
 
-Thank you.
-
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit fac6357f60463b80cfa2e348804a587f343481ff)
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
-Bergin, Peter (1):
-  freediameter: fix typo and old overide syntax
+ .../recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch      | 7 +++----
+ .../pure-ftpd/{pure-ftpd_1.0.51.bb => pure-ftpd_1.0.52.bb} | 4 ++--
+ 2 files changed, 5 insertions(+), 6 deletions(-)
+ rename meta-networking/recipes-daemons/pure-ftpd/{pure-ftpd_1.0.51.bb => pure-ftpd_1.0.52.bb} (81%)
 
-Gianfranco Costamagna (1):
-  mosquitto: bump to 2.0.22
-
-Gyorgy Sarvari (1):
-  znc: fix LICENSE value, clean up SRC_URI
-
-Jim Broadus (1):
-  networkmanager: fix iptables and nft paths
-
-Khem Raj (4):
-  nfacct: Update SRC_URI to point to valid URL
-  openflow: Include sys/stat.h for fchmod
-  openflow: Switch SRC_URI to github mirror
-  radiusclient-ng: Point SRC_URI to archive.ubuntu.com
-
-Louis Rannou (1):
-  mosquitto: bump to 2.0.21
-
-Philippe Coval (1):
-  ot-br-posix: Add dep to ipset as used by firewall
-
-Randy MacLeod (1):
-  ncftp: Upgrade to 3.2.7
-
-Wang Mingyu (3):
-  pure-ftpd: upgrade 1.0.51 -> 1.0.52
-  libnftnl: upgrade 1.2.3 -> 1.2.4
-  libnftnl: upgrade 1.2.5 -> 1.2.6
-
-Yi Zhao (3):
-  libnftnl: upgrade 1.2.2 -> 1.2.3
-  libnftnl: upgrade 1.2.4 -> 1.2.5
-  devecot: set dovecot.conf file mode with chmod
-
-alperak (1):
-  adcli: use https protocol for fetching
-
-wangmy (2):
-  pure-ftpd: upgrade 1.0.50 -> 1.0.51
-  libnftnl: upgrade 1.2.1 -> 1.2.2
-
- .../recipes-connectivity/adcli/adcli_0.9.0.bb |   2 +-
- .../mosquitto/files/2895.patch                |  17 +-
- ...osquitto_2.0.20.bb => mosquitto_2.0.22.bb} |   2 +-
- .../networkmanager/networkmanager_1.36.2.bb   |   2 +
- .../openthread/ot-br-posix_git.bb             |   2 +-
- .../ncftp/ncftp/ncftp-3.2.5-gcc10.patch       |  83 ---
- .../ncftp/{ncftp_3.2.6.bb => ncftp_3.2.7.bb}  |   8 +-
- ...-usr-local-includes-from-configure.a.patch |  15 +-
- .../pure-ftpd/pure-ftpd/nostrip.patch         |   7 +-
- ...ure-ftpd_1.0.50.bb => pure-ftpd_1.0.52.bb} |   4 +-
- ...cal-function-as-one-of-printf-family.patch | 650 ------------------
- .../0001-configure.ac-Add-serial-tests.patch  |   8 +-
- .../{libnftnl_1.2.1.bb => libnftnl_1.2.6.bb}  |  10 +-
- .../recipes-filter/nfacct/nfacct_1.0.2.bb     |   8 +-
- meta-networking/recipes-irc/znc/znc_1.8.2.bb  |  12 +-
- .../freediameter/freediameter_1.4.0.bb        |   2 +-
- .../recipes-protocols/openflow/openflow.inc   |   2 +-
- ...ify-export-dynamic-directly-to-linke.patch |  30 +
- ...t-util-Include-sys-stat.h-for-fchmod.patch |  23 +
- .../openflow/openflow_git.bb                  |   7 +-
- .../radiusclient-ng/radiusclient-ng_0.5.6.bb  |   3 +-
- .../recipes-support/dovecot/dovecot_2.3.14.bb |   3 +-
- 22 files changed, 112 insertions(+), 788 deletions(-)
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.20.bb => mosquitto_2.0.22.bb} (97%)
- delete mode 100644 meta-networking/recipes-daemons/ncftp/ncftp/ncftp-3.2.5-gcc10.patch
- rename meta-networking/recipes-daemons/ncftp/{ncftp_3.2.6.bb => ncftp_3.2.7.bb} (80%)
- rename meta-networking/recipes-daemons/pure-ftpd/{pure-ftpd_1.0.50.bb => pure-ftpd_1.0.52.bb} (81%)
- delete mode 100644 meta-networking/recipes-filter/libnftnl/libnftnl/0001-avoid-naming-local-function-as-one-of-printf-family.patch
- rename meta-networking/recipes-filter/libnftnl/{libnftnl_1.2.1.bb => libnftnl_1.2.6.bb} (89%)
- create mode 100644 meta-networking/recipes-protocols/openflow/openflow/0001-Makefile.am-Specify-export-dynamic-directly-to-linke.patch
- create mode 100644 meta-networking/recipes-protocols/openflow/openflow/0001-socket-util-Include-sys-stat.h-for-fchmod.patch
-
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
+index 32d714f6f4..90244cf096 100644
+--- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd/nostrip.patch
+@@ -1,4 +1,4 @@
+-From 79fd22c0def26eba130db98e312bb00fec32ac0a Mon Sep 17 00:00:00 2001
++From ed60c2ad3a7ed9762fcb6a304c7f60544606baef Mon Sep 17 00:00:00 2001
+ From: Tudor Florea <tudor.florea@enea.com>
+ Date: Tue, 4 Aug 2015 03:07:01 +0200
+ Subject: [PATCH] Don't mess with CFLAGS and LDFLAGS when --with-minimal is
+@@ -10,16 +10,15 @@ Upstream-Status: Inappropriate [config]
+ 
+ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+ Signed-off-by: Tudor Florea <tudor.florea@enea.com>
+-
+ ---
+  configure.ac | 2 --
+  1 file changed, 2 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 695ce68..0f28b55 100644
++index e578b2b..3874124 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -414,8 +414,6 @@ AC_ARG_WITH(minimal,
++@@ -415,8 +415,6 @@ AC_ARG_WITH(minimal,
+      AC_DEFINE(NO_FTP_USERS)
+      AC_DEFINE(WITHOUT_ASCII)    
+      AC_DEFINE(BORING_MODE)
+diff --git a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.51.bb b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.52.bb
+similarity index 81%
+rename from meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.51.bb
+rename to meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.52.bb
+index 6f03f73db5..1ce3c468b7 100644
+--- a/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.51.bb
++++ b/meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.52.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Pure-FTPd is a free (BSD license), secure, production-quality and
+ HOMEPAGE = "http://www.pureftpd.org/project/pure-ftpd"
+ SECTION = "net"
+ LICENSE = "0BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=194bc994ad6bbd4ff5a021082fe52156"
++LIC_FILES_CHKSUM = "file://COPYING;md5=5138d4a8a877b32de6a78cf7e9e99c25"
+ 
+ DEPENDS = "libcap virtual/crypt"
+ 
+@@ -11,7 +11,7 @@ SRC_URI = "http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${PV}.t
+            file://0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch \
+            file://nostrip.patch \
+ "
+-SRC_URI[sha256sum] = "4160f66b76615eea2397eac4ea3f0a146b7928207b79bc4cc2f99ad7b7bd9513"
++SRC_URI[sha256sum] = "1126f3a95856d08889ff89703cb1aa9ec9924d939d154e96904c920f05dc3c74"
+ 
+ inherit autotools
+ 
 
