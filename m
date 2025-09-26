@@ -2,97 +2,95 @@ Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 138FACAC5AE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 152C5CAC5AC
 	for <webhook@archiver.kernel.org>; Fri, 26 Sep 2025 08:20:00 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.12564.1758874799168995510
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.12563.1758874798251894768
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Sep 2025 01:19:59 -0700
+ Fri, 26 Sep 2025 01:19:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=SPJO21ta;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1364979e65=hongxu.jia@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58Q6ucD11966008
-	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 01:19:58 -0700
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Tn20KrdK;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1364979e65=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58Q4FkZ31581083
+	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 08:19:57 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=8PhqhMKsVfz8ZAny+Styk3cP8jNLS5YimEvUNmWw/Jg=; b=SPJO21taE8QW
-	BZkdQ3DJXO681Zv0RpB9T1UcBhLo8F9A5BXY4dSWKnc5+osTp7e0YryCHoyS00lp
-	Nk1hxv3jdnzKnH5kvIlFRe4jBNoB+faTSb+eTxlkWZJ7Ia0+6KA5uuD96l+5zcqv
-	mxQx5B+1iW6D1sjhFP1qQiJktyZ4RLvgXbnBoUIaXUp8pOVF0TbqjlTl2XKAwa2g
-	p6jByCJ+c6fk+4/kGZyORoQ0RCGJ11uq/G/8lmBwK+EFPDFZeZwxa5Zk+osH8DY5
-	esj5baJVdgmUEDYeN+enkqmlYGUlp77gY9i7brU4zxHBxikdA9GrHNA457hvG/Us
-	EITFFkBRWg==
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=xh+9lKbTtw9sdAyLTF6M
+	/NvwaxJ4mGlWFotdERlYn0o=; b=Tn20KrdKUgFrbr65m57telRnRH7UjPwRJDP+
+	3f0Hr1FhIlZ3geAj3usdlxZJTTRKSExAxhuJGsdoPskKQaB13fDReCnp2zbYlES5
+	0nI9F7LyxI6bWmgFy3m4Ml3ljcf48EKKNcQdC48xFptSErrgeqdH+KOmMyLPS5vM
+	gWLxowAKMQnv0F5PItP9F0c3bfZ4rd06rItNWjc+8aJae+wa5SOHb3rhtaYL7/XJ
+	6B0t+AasIDjoEITp670i+vbjIU4V/BT+CPx6OrjO11Q2EoBGQSqeub9LFNe1Kqyq
+	sKSFv/xjxEFkcZDHawsv72KRHwoQJ5h4LQI5ezTmKVLWk89jFQ==
 Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49dbsh0jg9-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49dbsm8jdh-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 01:19:58 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 08:19:57 +0000 (GMT)
 Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
  ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.59; Fri, 26 Sep 2025 01:19:17 -0700
+ 15.1.2507.59; Fri, 26 Sep 2025 01:19:15 -0700
 Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
  ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.59 via Frontend Transport; Fri, 26 Sep 2025 01:19:16 -0700
+ 15.1.2507.59 via Frontend Transport; Fri, 26 Sep 2025 01:19:15 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH v4 3/6] python3-yarl: support reproducibility
-Date: Fri, 26 Sep 2025 16:19:11 +0800
-Message-ID: <20250926081914.3127272-3-hongxu.jia@windriver.com>
+Subject: [meta-python][PATCH v4 1/6] python3-frozenlist: support reproducibility
+Date: Fri, 26 Sep 2025 16:19:09 +0800
+Message-ID: <20250926081914.3127272-1-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250926081914.3127272-1-hongxu.jia@windriver.com>
-References: <20250926081914.3127272-1-hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=ebUwvrEH c=1 sm=1 tr=0 ts=68d64cae cx=c_pps
+X-Proofpoint-GUID: kPG6IiCJnzTWLXuIfJI2tkfCrSP9lhAa
+X-Authority-Analysis: v=2.4 cv=TJhIilla c=1 sm=1 tr=0 ts=68d64cad cx=c_pps
  a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
  a=yJojWOMRYYMA:10 a=Q4-j1AaZAAAA:8 a=t7CeM3EgAAAA:8 a=BbirK1CDs2gZwnygIKIA:9
  a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: RYvUP3FWhzRzAUsnw6ndvnVRgI6-_qHf
-X-Proofpoint-GUID: RYvUP3FWhzRzAUsnw6ndvnVRgI6-_qHf
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTI2MDA3NiBTYWx0ZWRfX5q/l+09VwBc7
- S654mq5hOvcDZn3ZguCqjyuVojIrKaUXj3SOG+CYBF5IQUNsKTpb50pUxiUywTeZAsg/7p9ogk7
- YTEw6QpYwu4DCx5wpjzV5buTgmQNxDh0Hk2LREjtuAcmGo+oO9LR/02JVe2LpwSfV+6w6zxjds8
- 3ngU0JhqFByAu5h9+Vex+4f6HHGtBsQP93Krzfe8Fpdnvu3vc7Sg8PBcvE53W2VvjJrk7tYOP1y
- kFaE0+ejrjHUfDJDxYNpcEFArg2zprx1SjA+M8SpY4nEbWAjb3u/Ks4/cU1abTumy5lV+/PbSOZ
- fuOiUDlzI7uBSZJdzZXmIChRp58x4ejGhzWJUyWkh9hdM2JPascY/mR2fd5WCrlvHPVXyC7CMFQ
- 1u6F5CbijOsgS/zcpEmWuRFnD5Ly0Q==
+X-Proofpoint-ORIG-GUID: kPG6IiCJnzTWLXuIfJI2tkfCrSP9lhAa
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTI2MDA3NiBTYWx0ZWRfX7/lX0qZElxnK
+ UO9P/HLxhzAeu/V4LjU5pKREA6hivS0w9imqNPakFsDoeVMn24KUAqF1JNh+Ke+WdmMGHk7J/ig
+ sKOC+Y9NoyZldxnI65RxMGGXxx24cB8YOM4iJzlQL+B/tIQ3fj3E3fXQddqJUMwgC2o5fCF7A65
+ sY3UoZY/QqLyC+RshDN6y7/xVG+08gDCNf/jmyQK6N6C9pfKW7pN2YJdZT20Tu80QeDfnDWSBjh
+ 4zp6pTuVrEY0YewgVT6RfAWaAaaO2YXH9CSr4Scx96VToSzphF5bbdd7gMTsoyljjhBGrWrWiHP
+ N2TZTG7+dpnXwSlF6xE5VYFGhcEdwLWzbWKkX51Cyz9CHkv3O/wZ5CSzDYg63vr5iPUB2IP2lzz
+ SWiqE7L0ihbVtFKMIdUkw7hFqfk07w==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-09-26_02,2025-09-26_01,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 malwarescore=0 lowpriorityscore=0 suspectscore=0 spamscore=0
- priorityscore=1501 impostorscore=0 phishscore=0 clxscore=1015 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2509150000 definitions=main-2509260076
+ adultscore=0 malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0
+ priorityscore=1501 lowpriorityscore=0 clxscore=1015 impostorscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2509150000
+ definitions=main-2509260076
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 08:20:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119901
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119899
 
 In order to make the generated library be reproducible, build wheel
 in source dir other than tmp dir (/tmp/xxxxxx), then yocto toolchain's
 option -fdebug-prefix-map could work as expected
 
-Note: To support reproducible, it also requires oe-core commit [1] to be merged
+Note: To support reproducibility, it also requires oe-core commit [1] to be merged
 
 [1] https://git.openembedded.org/openembedded-core/commit/?id=61d98d12eca1c7bdf3b7387a820c83d3b8fad965
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
  .../0001-build-wheel-in-place.patch           | 31 +++++++++++++++++++
- .../python/python3-yarl_1.20.1.bb             |  4 +++
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-place.patch
+ .../python/python3-frozenlist_1.7.0.bb        |  3 ++
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-frozenlist/0001-build-wheel-in-place.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-place.patch b/meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-place.patch
+diff --git a/meta-python/recipes-devtools/python/python3-frozenlist/0001-build-wheel-in-place.patch b/meta-python/recipes-devtools/python/python3-frozenlist/0001-build-wheel-in-place.patch
 new file mode 100644
 index 0000000000..84f81da775
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-place.patch
++++ b/meta-python/recipes-devtools/python/python3-frozenlist/0001-build-wheel-in-place.patch
 @@ -0,0 +1,31 @@
 +From 606843ad079d9d0dac1172533d42b5a2327b99ed Mon Sep 17 00:00:00 2001
 +From: Hongxu Jia <hongxu.jia@windriver.com>
@@ -125,18 +123,17 @@ index 0000000000..84f81da775
 +-- 
 +2.34.1
 +
-diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb b/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb
-index bbf9e3d782..6eedcf0f82 100644
---- a/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb
-@@ -9,6 +9,10 @@ PYPI_PACKAGE = "yarl"
+diff --git a/meta-python/recipes-devtools/python/python3-frozenlist_1.7.0.bb b/meta-python/recipes-devtools/python/python3-frozenlist_1.7.0.bb
+index 7d813a026c..d832494c82 100644
+--- a/meta-python/recipes-devtools/python/python3-frozenlist_1.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-frozenlist_1.7.0.bb
+@@ -7,6 +7,9 @@ SRC_URI[sha256sum] = "2e310d81923c2437ea8670467121cc3e9b0f76d3043cc1d2331d56c7fb
  
- inherit pypi ptest-python-pytest python_setuptools_build_meta cython
+ inherit pypi python_setuptools_build_meta cython
  
 +SRC_URI += " \
 +    file://0001-build-wheel-in-place.patch \
 +"
-+
  DEPENDS += " \
      python3-expandvars-native \
  "
