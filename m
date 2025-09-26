@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D450CCA471
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BCB64CCA475
 	for <webhook@archiver.kernel.org>; Fri, 26 Sep 2025 14:19:42 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.web10.18552.1758896377190767679
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+ by mx.groups.io with SMTP id smtpd.web10.18551.1758896374160263667
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Sep 2025 07:19:37 -0700
+ Fri, 26 Sep 2025 07:19:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Hxvqf8Nh;
- spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-62fa062a1abso3363915a12.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 07:19:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ry7pmrcm;
+ spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-6318855a83fso3999956a12.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 07:19:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758896375; x=1759501175; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758896372; x=1759501172; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=F+OCmkJQgCkSFtPsFWUvaVqugFHDABVXbiBGkzLkcdc=;
-        b=Hxvqf8Nh4hNM6gR8M8O+2EZGwUjljKn0r03voU+adzj4H29VoVQ7XcTnZbNgRpPo5L
-         IKM7Civ02SxwHzVp+CWlwWEFb/UWMaVb9IgJeavLVNEBK8jc6cgy6YcYWk8LZhYDsRWH
-         wF5ouhKcnJ8mOMsmWaRwWt8E3H3ODJh6T07O+nxIEN4uqZEvfSqvDFiWH59JMt2V6rxs
-         E3gmt0a7/gfE+w8K+TV3pWavc/A8R6lulJpqRRUsgTDJhitGTFunNb/SqaGg71EW2BCd
-         raAfXumdf0tKz4VCUmwGsWQZL4wH5lb5tQ3qClilmU/UM8V+2NfmSc4YM9tyu1p+/Gu/
-         N/dQ==
+        bh=6Z0HXt+kNYvMpFFU0GJ0+pWfaTESo/UBw3SW5zvELNM=;
+        b=Ry7pmrcm80a4xIz0tlinbwmzMCe+kHnvl/B5c7be+XdjJPOiW5SUbikoFVhl7oeP3R
+         YdDkOzYyZThDAu7K4iappy4z87Blv2RUkhZGmcBb/ShhHauqBAzPqG06dA6WX26oAMMv
+         oOzpEKJlCUUsRBmUzOhuaE5zas5TyN0hL1UQo6NqoOmNcbC+fUid/XHR/DKbxeTciZkz
+         WPSlBl5Tyv0Uxe7OU1Pcy73uFp8TksojHvpPK7sz4FuNRbC2LwlZwyEYp/MQh3f5g8xh
+         fkvwP8c6bUIMBEDz75btJpOBXrdYq3TTAgTB4t0D1Bt7p7XdvEFYzI20wuba0at4pHPI
+         uCXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758896375; x=1759501175;
+        d=1e100.net; s=20230601; t=1758896372; x=1759501172;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=F+OCmkJQgCkSFtPsFWUvaVqugFHDABVXbiBGkzLkcdc=;
-        b=gBejIabZJugZrtMCqV+TDp8A6fysLbO+/gQFs1XtrKcdWOaSca9XnOM3N47RCRCp7z
-         LGxkwR9CD+QD/kutJA2Yb4Rx3FVDMKIAqPLG8dAHO3jr77VGTqrBRlpOIRRiz0X8scfp
-         pPd9T6bN6zDJ5eHGriyOx8lYyIqt41zjZJU8ykMaMSDimgaUUPfReuia86EG2MbGou8/
-         gco6PVeewKsIZDDNaSnl7Pf8OFj7cQOlKsioVA1irA4RdrlUL3GHXSvxhv0lSb+r7Ypw
-         thwKen4T7n9yLRcqPJ21xjTOVrrZyDfncotiqah0qG9McFf0S4V0qoK+QU35+wloFbq+
-         pMKw==
-X-Gm-Message-State: AOJu0YwPYTGTfYT2koCj9EouhiY11JfiyjPQ1BV/1jQ62Y+4m/ICy6Pq
-	Aro5aevFNj3QrdYzEKdeaKkHRG+yE+Yv3ooE2tY+aoY9nmTrR35EGfpfM9rezw==
-X-Gm-Gg: ASbGncsFPIK1xGw13Fl/M3+inWOKDOFpZQitnjPqau6KleY8V8/6e4i9T8p/ElzgQbJ
-	4fq3SgIb0cHYbXq+XVioiVzCVaToZwgMgBVlaPdWl3nLAYn6kA2yh10XF+1HDSpeIo9EnJC9WxJ
-	GOcU6sSbzk/8VlPi/z4HKPvt2L1zQ74yh+BX9x7PAxPIvRZ0XGN9bWcbZXj6eBog/WIBNbyuIC9
-	gI+n/bbYHohH/vcB20n2UZXIovNIElJvxs3qdrakNShPK1dAhm5OrAy64lGH4enZGBhuBMQtIww
-	EgQBLGxggH7ZhrZZQhEwsEBF+6/qTg2X6lYmqzUVabuMamO6awCNTZcV8UMzybjn6FvKxQPuZR0
-	1y5Q2LlGBRLkFBaHY8G01BTv8zM+zH1A=
-X-Google-Smtp-Source: AGHT+IE4AApJHKELKgSV0WNYuwgQFVFDHE9AeT0ONvLKv3gHwR6ENc7Js2MnbKtJdYZEwvbIgSHBSA==
-X-Received: by 2002:a05:6402:40ca:b0:634:c005:c862 with SMTP id 4fb4d7f45d1cf-634c005cademr1967025a12.29.1758896375278;
-        Fri, 26 Sep 2025 07:19:35 -0700 (PDT)
+        bh=6Z0HXt+kNYvMpFFU0GJ0+pWfaTESo/UBw3SW5zvELNM=;
+        b=CY/v/+3juWscksSAjSksqgRtPpBmX//86ZZA1pEm5jXI57xn7XQwwY2TLIp9OQieGI
+         U8AHfHRO0lkKbQSxs/djzYGpWBY7YJizUsbtTsSJk81VCxu+XlHt+6syDgbzdxrv5CBp
+         hlSmyTp6KGpLqLwL6EmBHOpljr8h5qPdpgKE/9x+MpeNcji65UsOAMUWiEr7HHtSm3ZN
+         DPgDGiDzA8Hj1w1NzGO+87oRUAPJmUy59mv9RbbAsz5AKohNj2HKvWi0mlUn7UcDD2Hn
+         tlBHKFfgvfvDsotwNcbWj7LDYhdAGSpsnJtXXTJmeHuhzGGZlE3EaUy44U+QgNeQeTsG
+         Te0A==
+X-Gm-Message-State: AOJu0YznQsNWh6C/ujEgAMeybYkHiYeYTzxtnLQMFJQ+ZY/wuc3jtaun
+	SBF0bXi7Qk/HGU4MnP5mgH3EXcw+eW7AIR9Dj8Qgga7uG1tnoaLlJyRlWBvJZw==
+X-Gm-Gg: ASbGnct9DLEvpKHP36xnUZD5y3lwN5nNuar/UiU7uX8/uzENs//xUEzGelKROul0FkH
+	OfSLtUf/2QOzP3tEsybq5cmJGnqZLLYnlQFSEpVbuyv1NeJh5731z+jGoH/AyLGMObCSgzxyzGY
+	YnmiH7jz49obb4hpCEIeqF7IGTGXrhZxHgRr+cAfHBcWVobJG3m7avdwRk96eFLf7ArgK60/QnV
+	CUZBkOVCXJldpeqhb/ePmfVZ141XMo3df9kjEhceAdU9iNVAsTDmLsiZltGnyPB+lj77A6tKVTE
+	m+vBelpvEHbHHdFPotHfjCQUrbrqsmKo2VRnaNKr3M33c0XnqEvvBS+uq/6N9uzI3AjUXrxJ0Nh
+	DB1XNPYfrKFkAYf0yWvhzfnRs7xdY1rs=
+X-Google-Smtp-Source: AGHT+IFXeo3mekw491MSJe62lgFoJ9uXFLHAxRndd3jyCvxRMyQQANfzkvYe7q+zrLAxFMv+7I4d7g==
+X-Received: by 2002:a05:6402:8c2:b0:634:5db4:8fab with SMTP id 4fb4d7f45d1cf-6349f9cc0eamr5080120a12.6.1758896372330;
+        Fri, 26 Sep 2025 07:19:32 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634a3ae321csm3001028a12.24.2025.09.26.07.19.33
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634a3ae321csm3001028a12.24.2025.09.26.07.19.31
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 26 Sep 2025 07:19:33 -0700 (PDT)
+        Fri, 26 Sep 2025 07:19:31 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH 15/20] freediameter: fix typo and old overide syntax
-Date: Fri, 26 Sep 2025 16:19:14 +0200
-Message-ID: <20250926141919.2010846-16-skandigraun@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH 12/20] libnftnl: upgrade 1.2.5 -> 1.2.6
+Date: Fri, 26 Sep 2025 16:19:11 +0200
+Message-ID: <20250926141919.2010846-13-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250926141919.2010846-1-skandigraun@gmail.com>
 References: <20250926141919.2010846-1-skandigraun@gmail.com>
@@ -67,34 +67,39 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 14:19:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119924
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119921
 
-From: "Bergin, Peter" <peter.bergin@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-A typo that probably caused a left over from override syntax conversion.
+Changelog:
+=========
+tests: nft-rule-test: Add test cases to improve code coverage
+tests: nft-table-test: fix typo	shixuantong
+expr: meta: introduce broute meta expression
 
-    INITSCRIPT_PARAMS$_${PN} --> INITSCRIPT_PARAMS:${PN}
-
-Signed-off-by: Peter Bergin <peter.bergin@windriver.com>
-Signed-off-by: Peter Bergin <peter@berginkonsult.se>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 77f031776ec9c9edb18e7323b17b697f5c52d5f5)
+(cherry picked from commit d35850759791685892b02a5794cfe16cb8e920f7)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-protocols/freediameter/freediameter_1.4.0.bb        | 2 +-
+ .../libnftnl/{libnftnl_1.2.5.bb => libnftnl_1.2.6.bb}           | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-filter/libnftnl/{libnftnl_1.2.5.bb => libnftnl_1.2.6.bb} (95%)
 
-diff --git a/meta-networking/recipes-protocols/freediameter/freediameter_1.4.0.bb b/meta-networking/recipes-protocols/freediameter/freediameter_1.4.0.bb
-index aceb379ee7..8c4b419361 100644
---- a/meta-networking/recipes-protocols/freediameter/freediameter_1.4.0.bb
-+++ b/meta-networking/recipes-protocols/freediameter/freediameter_1.4.0.bb
-@@ -127,7 +127,7 @@ RDEPENDS:${PN}-ptest = "cmake"
+diff --git a/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.5.bb b/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.6.bb
+similarity index 95%
+rename from meta-networking/recipes-filter/libnftnl/libnftnl_1.2.5.bb
+rename to meta-networking/recipes-filter/libnftnl/libnftnl_1.2.6.bb
+index 380a33064b..841a7267b8 100644
+--- a/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.5.bb
++++ b/meta-networking/recipes-filter/libnftnl/libnftnl_1.2.6.bb
+@@ -7,7 +7,7 @@ SRC_URI = "git://git.netfilter.org/libnftnl;branch=master \
+            file://0001-configure.ac-Add-serial-tests.patch \
+            file://run-ptest \
+            "
+-SRCREV = "c62bef65fef638452b4ed1893c2451fc253ca7ca"
++SRCREV = "83dd4dc316b4189d16ead54cd30bfc89e5160cfd"
  
- INITSCRIPT_PACKAGES = "${PN}"
- INITSCRIPT_NAME:${PN} = "${BPN}"
--INITSCRIPT_PARAMS$_${PN} = "start 30 . stop 70 0 1 2 3 4 5 6 ."
-+INITSCRIPT_PARAMS:${PN} = "start 30 . stop 70 0 1 2 3 4 5 6 ."
+ S = "${WORKDIR}/git"
  
- SYSTEMD_SERVICE:${PN} = "freediameter.service"
- SYSTEMD_AUTO_ENABLE = "disable"
 
