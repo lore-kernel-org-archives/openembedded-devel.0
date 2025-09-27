@@ -2,40 +2,40 @@ Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D78CFCAC5BE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6319CAC5BB
 	for <webhook@archiver.kernel.org>; Sat, 27 Sep 2025 02:47:54 +0000 (UTC)
-Received: from AM0PR02CU008.outbound.protection.outlook.com (AM0PR02CU008.outbound.protection.outlook.com [52.101.72.26])
- by mx.groups.io with SMTP id smtpd.web10.4678.1758941271322590508
+Received: from AM0PR83CU005.outbound.protection.outlook.com (AM0PR83CU005.outbound.protection.outlook.com [52.101.69.61])
+ by mx.groups.io with SMTP id smtpd.web10.4677.1758941271122697183
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 26 Sep 2025 19:47:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=GwXYVyxi;
- spf=pass (domain: axis.com, ip: 52.101.72.26, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=FkxZ2FHO;
+ spf=pass (domain: axis.com, ip: 52.101.69.61, mailfrom: peter.kjellerstedt@axis.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LSO9Or1s7/AS7v1wzdvLhossjyznVBtUbsUY+xo8sjv/qXOiUX4oQo3QxzfKRfxa0Q8bwGzx6thHFQSspa0O/knpf9/DAxI9Yyz3n2qQrjfh/5gC/2LNLSwR/qrxk9Fq6T3EySgP47PzRIt7C9CtIf1kfBqnKYrgPlehtmykd9orGnYLd+ZWbpKfysv4SIkxVla9EuWkk4CFuOC3tQpSJOilMkmJFe4B64cz1YG3sAvgNnElU2h6fjqQYrj2/lO/zsZ47Y9oW8m5f/m0Ki1R17yHui8pW6qFy3y0WCSOMQ90vHb8zUuO+yOKE64BF5Nf5MWv5dSx/JzRXt9JMnus0g==
+ b=DXDf5NrdRAb7ujtma9/szZFuVvch3TH+QeZgJoegZ6gUEoMJV+NW68Yr6Spy51ZTvZE5WO6CjT+WDBGrD1qWCV2DL7cUEwHg18jGG3OTc2QQfCPHatLp2djyCioe2PdnbJB944oNuc0IrS7NBxT/Xu97cNmkyQOljezXrnOrenG3qQ2nakKCAX/+syGI1QHyt5fkRxgsfKS+txFgRocIUzUVIzdS6zYUSx/rIAekUHCjGc8WaO6ITFwk2SO/Hhw44OAmapF2E0zazX0HOgmhg/d/x9dwPDoG154NZAQ9C1eoBazbHW0KmmoOlPE9VGPdZwzcqWgUcnJozDpudzBNCw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JP4rdAqCFal7tMU3hDKK/zhn5cQbneiujoPfvqN02Ao=;
- b=LctoaplQ62Mr6dtwkg2r87FIdkqdlDNK0GTxIiwxSr0qXDbmzi1CWNjeZt9OM7dO0WZtdTLrM6y4p1Ncw6A43YgdrDcV56+PYaZeV5ZnCJ9R+Wm/UJLYTlImpYWJ2Sd8Kf/kUUM6hJs16wVR/hTJG0GyNdOvvsAhfyb+zh5F9JVHvP08xk2TrSuE54jjS3WL7Wv4UdHIuyxyhUbKZgU2SRxjZgKXfiuxxh89SCELoGcpU9JtBsH9n2r1MWEgQoP3shY4ATgiMW7f70zNNLJTzvAYoXEslr2spas22X8Ds/VZVaws9LuASvkm+VEiZh15X8ONu7P4/paNXtojGq/w6g==
+ bh=oCZRG1YUh3kWsIF62+pkHr/FfXu21CXiwaIqUBPtUdI=;
+ b=r41RZ2Vk4O/u0l0mM51fpVigTMq8aRYa2QxAySF9he1ss+uOBZLqz9BLfPs5kXyieLeB/F0NrPS8Cd4+gH6PtHdudl9kBwC1fYIn/7jioegNxwVlBuoB9wLCP7AMMUZ04HqdCy0Gq4GCQRMH98GLJSsGGk00HQPrASot2lJEJXeVtuN/ItJjciKQ0rd4Z5UP1V1u+DfN9F2tVc2walxKO/TGbZNRA3BSnw/58ywU9ztR9gs+IjxiISf0BmZyyoRtbdD7pxRaptkpIvkIXq3lo0AKM3RbpDGCUohTZqpk0jJ+dzE0moVpZok0jKddz2Jk0kYeJGE0tykLaglqKFnpJA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
  smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
  header.from=axis.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JP4rdAqCFal7tMU3hDKK/zhn5cQbneiujoPfvqN02Ao=;
- b=GwXYVyxix5GY8ml+H243ucoBV8AF0fYMtYDM+ez59P4+ZjeP7o6jcoJgNuzSzNAjfcnlqBih2jD/Tzw3DudQxMHHt4qx2IrR0+kAfgjBpIJhmpqK4+DW+li8zmQUTDdeS0hvaJVSMNi/7657S50vZZyz+IlDaLLmWObQTj57HKo=
-Received: from CWLP123CA0132.GBRP123.PROD.OUTLOOK.COM (2603:10a6:401:87::24)
- by VI1PR02MB6431.eurprd02.prod.outlook.com (2603:10a6:800:196::7) with
+ bh=oCZRG1YUh3kWsIF62+pkHr/FfXu21CXiwaIqUBPtUdI=;
+ b=FkxZ2FHO9R9nTf8KKUFKdhQy5PT5KsDUTkDEdlFN8CzYmX5dfqAeXYimq+w85mFWQrx82kHbgb+IHSkrvArkBLk4sLrdzj/gC/Q+B34VMy+UwuIFA+4WFrtu9tkJM9JeYfpv6YAiFpKHDCofsZnrbpfuSRcxEfnsnTlnzYOnPq8=
+Received: from CWLP123CA0144.GBRP123.PROD.OUTLOOK.COM (2603:10a6:401:87::36)
+ by PA1PR02MB11618.eurprd02.prod.outlook.com (2603:10a6:102:558::16) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.11; Sat, 27 Sep
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.14; Sat, 27 Sep
  2025 02:47:46 +0000
 Received: from AMS1EPF00000048.eurprd04.prod.outlook.com
- (2603:10a6:401:87:cafe::3d) by CWLP123CA0132.outlook.office365.com
- (2603:10a6:401:87::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9160.13 via Frontend Transport; Sat,
- 27 Sep 2025 02:47:45 +0000
+ (2603:10a6:401:87:cafe::97) by CWLP123CA0144.outlook.office365.com
+ (2603:10a6:401:87::36) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9160.14 via Frontend Transport; Sat,
+ 27 Sep 2025 02:47:46 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
  smtp.mailfrom=axis.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=axis.com;
@@ -45,107 +45,123 @@ Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
 Received: from mail.axis.com (195.60.68.100) by
  AMS1EPF00000048.mail.protection.outlook.com (10.167.16.132) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9160.9 via Frontend Transport; Sat, 27 Sep 2025 02:47:45 +0000
-Received: from se-mail02w.axis.com (10.20.40.8) by se-mail02w.axis.com
+ 15.20.9160.9 via Frontend Transport; Sat, 27 Sep 2025 02:47:46 +0000
+Received: from SE-MAIL21W.axis.com (10.20.40.16) by se-mail02w.axis.com
  (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Sat, 27 Sep
  2025 04:47:45 +0200
-Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail02w.axis.com
- (10.20.40.8) with Microsoft SMTP Server id 15.1.2507.58 via Frontend
- Transport; Sat, 27 Sep 2025 04:47:44 +0200
+Received: from se-mail01w.axis.com (10.20.40.7) by SE-MAIL21W.axis.com
+ (10.20.40.16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Sat, 27 Sep
+ 2025 04:47:45 +0200
+Received: from se-intmail02x.se.axis.com (10.4.0.28) by se-mail01w.axis.com
+ (10.20.40.7) with Microsoft SMTP Server id 15.1.2507.58 via Frontend
+ Transport; Sat, 27 Sep 2025 04:47:45 +0200
 Received: from pc56063-2339.se.axis.com (pc56063-2339.se.axis.com [10.92.3.2])
-	by se-intmail01x.se.axis.com (Postfix) with ESMTP id F182D17D
+	by se-intmail02x.se.axis.com (Postfix) with ESMTP id F186084C
 	for <openembedded-devel@lists.openembedded.org>; Sat, 27 Sep 2025 04:47:44 +0200 (CEST)
 Received: by pc56063-2339.se.axis.com (Postfix, from userid 14323)
-	id 0FC141203FD; Sat, 27 Sep 2025 04:47:44 +0200 (CEST)
+	id 129DD12014E; Sat, 27 Sep 2025 04:47:44 +0200 (CEST)
 From: Peter Kjellerstedt <pkj@axis.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH 1/2] glog: Support building for native
-Date: Sat, 27 Sep 2025 04:47:41 +0200
-Message-ID: <20250927024742.1485096-1-pkj@axis.com>
+Subject: [meta-oe][PATCH 2/2] opencv: Support building for native
+Date: Sat, 27 Sep 2025 04:47:42 +0200
+Message-ID: <20250927024742.1485096-2-pkj@axis.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250927024742.1485096-1-pkj@axis.com>
+References: <20250927024742.1485096-1-pkj@axis.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF00000048:EE_|VI1PR02MB6431:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4dd88966-15c2-453a-fef1-08ddfd703cba
+X-MS-TrafficTypeDiagnostic: AMS1EPF00000048:EE_|PA1PR02MB11618:EE_
+X-MS-Office365-Filtering-Correlation-Id: e3e1c6b9-4e7d-4b71-8345-08ddfd703d6c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|36860700013|1800799024|376014|82310400026;
+	BCL:0;ARA:13230040|82310400026|36860700013|1800799024|376014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?nofuBiVrJ6BaBwg9ze6UFHi262C8qb+SLXQ/UC/O1fYxZa8mBUNHatOx/xjP?=
- =?us-ascii?Q?GtzKEWIP7flsFoOgDcnH2eHZHBvEn0u2NmPulaj1rvnuaD1bKAHYxpP4Ih9s?=
- =?us-ascii?Q?MafsXTz6FBZBvI97FPVQmMZrlmzoUgZIzCZ+9bdvhiO+F+yoCuQhIJG9vC45?=
- =?us-ascii?Q?2fjp40gHPEdBwSAB6Q7m92+j4qLxDJ2PViOdBFL5u/rAgtkIrnHXIf5fqm5a?=
- =?us-ascii?Q?o9btDBjJ5ox9NwCHsumvW7Y8jWO9DqMAQW0me7orj+bUwN71outfwTdgRK0E?=
- =?us-ascii?Q?tN4owgpTgRQ8SjZ5iGKPWoTJ4SuAoKkmNLDAJxkGGFE17aB8SoSYbODhN6ri?=
- =?us-ascii?Q?mX/Bm+6uxj4n3WKbxvQMQFD4c4C6t3rv9IJrAzVTc36hbhxqhXBYt2lmnpCi?=
- =?us-ascii?Q?jz5LLyNPyzweY1iPfnPeEJe2eu8EjRjBLqfGr7k6RkhuBSLx6qMzsSz5BynI?=
- =?us-ascii?Q?DYUvtXLFjV/XTi68xxAhY2/PD5iW0/nobzQYJT7ctfiJpUnhYvyFVQKDRV4u?=
- =?us-ascii?Q?6jFHlADZKw3YdtgyEyvFu4aK1UCQk4x28QJOyg99FhhqHfXMT6PQwzx7XSk8?=
- =?us-ascii?Q?BrT8a+2whfgTvGoESeEZEdjZtFjiTeknqyTvdP7gQWTFfMPMbtenj+vsaITT?=
- =?us-ascii?Q?PpTO1LswFh5v9/5Jl5xDdN4zB5vBcPb0O5IRVLMhO4RLMpPULKCpdl5tFNAD?=
- =?us-ascii?Q?svDpG3zH4LkreVZGOciNms0QjIpRdyZXYXf+Oe+TPKa+hB8SQpn4vmwNEZiM?=
- =?us-ascii?Q?WtuMvy0CEG0acRU63MQhLUbAa1T0QsokxD766RtBCFAHJuVzh0ihg7tulI0x?=
- =?us-ascii?Q?msRAsWPr4PD9XWkTmu33E//VwR2Ggor+Cc+gRuJuL//iu+OIiXRDym27lJPJ?=
- =?us-ascii?Q?w1KedGHaLiYGiLxGvuTiInnwKUrGbeO1Nq18x53q418iYepcSLK3dRcyMRqb?=
- =?us-ascii?Q?8PVo58+eZ/D6fIMhj+A/rEa4B9yI0EOrry5xiROp1TeEwJ1RCaOcpaCSqA2D?=
- =?us-ascii?Q?7q848oEooHOQmvapkkU4BDFw6GnaPPuR0s6lPSncMO4Kl1+CjzGpWMgQGjfr?=
- =?us-ascii?Q?qduCTDNXYRk9N21Zx4HE6Oe9TvlBocus+O1jLSH71M1xXVXfzgD66DG+KXNq?=
- =?us-ascii?Q?hU7crvrIfvUnDPys2lPDcTyXXeTy22coI39ADWdvvqKeDO8W8XTaIf/E3l3E?=
- =?us-ascii?Q?i8VBYH+XO4m55DHTVCrtay27Sx+LidCxqAGxM7ddg3l3uR4LrVcxf67Lb64H?=
- =?us-ascii?Q?F704gwEVKclrRoJNrDuYl5d6ZX+Lor3HJzIE45ScZfa2uqRRlGwdyr/V7+7u?=
- =?us-ascii?Q?oIJHHJnQRvDPpCY+6ZAMtJt+1Wnj3qRYZ8jMPKbOdBa8d8vnl7X0m17gyHsl?=
- =?us-ascii?Q?CR/9JnAjrR9ZCnrih0NWbRMGRYjYdQDyYT44ryN92n8Pr/Sngn3oYQK5uiXT?=
- =?us-ascii?Q?Td1B5vdjlQyzlaHvRDsPJ4u5ftZbAEsEe3uz9SSabPmLgrE2cl5CMNCA0/wU?=
- =?us-ascii?Q?orIDsHOmUUC1UICB46HYjLtqhH0hu4asJv3g/Be6tigTWABjYPDTY1SOJ3+r?=
- =?us-ascii?Q?RtemC1TG7PtEL2q/eY8=3D?=
+	=?us-ascii?Q?9HQX161L5LVFHcQArUSyORoLOjHMkfPUR4x/UAP9wm8F1zBs7txd+GsOQrcL?=
+ =?us-ascii?Q?Yl690qrl3hYsFFMskloFCsrCagyfQGdik2FASQrgY3Tk+nNdUcxp3qh7EDYB?=
+ =?us-ascii?Q?Sj9ocmTzah7a+gXmpzwg2dbQC/c0c9CVR7fNngfLLn/JM4n/96llLINrZAFs?=
+ =?us-ascii?Q?+8Q0j7PZaLd+6q2N7Uc9Y096QLxvE6Ckg2cR5DX+FYH2yTyLXRmRbM5TTlnO?=
+ =?us-ascii?Q?JxmEljy69lsR65aIIjx7qURs7eOam9Ld+a/giHJBbWCVY4bXSvwfvUH0wF+E?=
+ =?us-ascii?Q?eA4idu9xhWvUfkZsMuYVerMhv5LaZCqu4gRW/LahSa9tTcLsSfZtiFudXiWt?=
+ =?us-ascii?Q?LYbP3GqRNOM55fDIWnYyqI8Ak875nMgNF03yn/2jBclr1Q+UolMDnfThZJ4J?=
+ =?us-ascii?Q?mQuu3RE2Nm9kJVBoC7KTors9Vk46OAiI3rgqU0QhEr1eygTohuCTkiUIk79q?=
+ =?us-ascii?Q?bfhzG5IqpXBCc8lDehNF9vkdcJ0aElHyU/esFIl2yODiErWZ+iSFKncPz1ri?=
+ =?us-ascii?Q?Sy/PzYhjrEybqY5OfURyrokrXw1VJ11H5jPQl3/JryaLuh2RoMVHIO4ZGlTd?=
+ =?us-ascii?Q?rBVIG08e3Iw4/eKL9W8hXmDNxnXbNiwpa/gIm+3peYgti5X020Dioppbe3UR?=
+ =?us-ascii?Q?a7tcGBSUFasDSi6lQHX5kp6Jii+fmqwiKS02/82UdRq6lDwbgfEhSZCMTuCG?=
+ =?us-ascii?Q?z3p1pL4Q9XDPiIRAsEapQUAmbrQ43JEes0HTR5nFop/9YfM5b5HfLH9RFO+d?=
+ =?us-ascii?Q?6YI0hRENJoqZ1Qt0NKer+Sg18YeIqJAKRyj3jmlTyPOdIwAQIpl03f6XGcM5?=
+ =?us-ascii?Q?6Zq/0gMYrBN2bqYrN/6TSbUVfK5GMDYMPj4AdR4w5OGbUC1s8poa/FvmUpJm?=
+ =?us-ascii?Q?SivbkUiU3LXudlGwUazt6AZ/l3G8dmM+glECy0GflVx7+6e5usIHymJIQ9Kl?=
+ =?us-ascii?Q?4w7vHHBZq5/6vOlOaPvNytqnhxHzL6Mgyg5st6L6wsW4KO3YcsvYG6MiOQoJ?=
+ =?us-ascii?Q?DaRhm0EEqzTxmjLY8D5FGmzzGiYyusxc1kWXj5TLEOf4ZCxupl3kOtXJO9n9?=
+ =?us-ascii?Q?f0kaPnE2HO0ukwYuL8KNfyIDmBfzPQTc4CvUFPAerrgVh9NCveDgVhNn4ary?=
+ =?us-ascii?Q?1LhSTS4vd7YRGh3LMjGQNn8YbtT1ewLNE4w0NuzFdcEXqJPZdazol6I1KGsj?=
+ =?us-ascii?Q?7LY/nWxxuJptShGvDc3lI78ZK1XJxYGO4U+gQ5KXwl8aw0pkGC2ujLGSdktY?=
+ =?us-ascii?Q?vCKtRI75zhL7vsbsqJHdbw3foSawv0WX/HMMOLF+5r8lZLV4mSI/heiCMyYw?=
+ =?us-ascii?Q?ExvC8CogTvRWPnJ7p9nwxFPJS8wRf/cSGXHedFz4/3yyljSfvF5Qrr2Q2bR6?=
+ =?us-ascii?Q?bhqZJ1PykSSzbg32JKPgmc3M8cyeq0FH2EZqdFElmELMRDNFqRNLPBMazFe+?=
+ =?us-ascii?Q?LX8O2gu0B/V7Ek+WbcRvOKLhdL4y38OyXdq/Yz0dTNhYeSerPkphIjlyvBfi?=
+ =?us-ascii?Q?QB3djsQlAcZqjIf+PTBwyhOFNfMFtwWI5Mtcj1HTR6PkeVCrxcuEi1ZUX2uT?=
+ =?us-ascii?Q?Vzx/Uqo1XP3TJp16QXw=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026);DIR:OUT;SFP:1101;
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2025 02:47:45.3109
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2025 02:47:46.4744
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4dd88966-15c2-453a-fef1-08ddfd703cba
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3e1c6b9-4e7d-4b71-8345-08ddfd703d6c
 X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
 	AMS1EPF00000048.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR02MB6431
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR02MB11618
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 27 Sep 2025 02:47:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119948
-
-This is needed to build opencv-native.
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119949
 
 Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- meta-oe/recipes-support/glog/glog_0.7.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/opencv/opencv_4.12.0.bb | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-support/glog/glog_0.7.1.bb b/meta-oe/recipes-s=
-upport/glog/glog_0.7.1.bb
-index 570d9a7e5f..6a649325a0 100644
---- a/meta-oe/recipes-support/glog/glog_0.7.1.bb
-+++ b/meta-oe/recipes-support/glog/glog_0.7.1.bb
-@@ -12,7 +12,6 @@ SRC_URI =3D " \
-=20
- SRCREV =3D "7b134a5c82c0c0b5698bb6bf7a835b230c5638e4"
-=20
--
- inherit cmake
-=20
- PACKAGECONFIG ?=3D "shared unwind 64bit-atomics"
-@@ -39,3 +38,5 @@ do_configure:append() {
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb b/meta-oe/reci=
+pes-support/opencv/opencv_4.12.0.bb
+index d1ab87b06f..27499caa92 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
+@@ -200,11 +200,6 @@ do_install:append() {
+         mv ${D}/usr/lib/* ${D}/${libdir}/
+         rm -rf ${D}/usr/lib
+     fi
+-    # remove build host path to improve reproducibility
+-    if [ -f ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake ]; then
+-        sed -e 's@${STAGING_DIR_HOST}@@g' \
+-            -i ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake
+-    fi
+     # remove setup_vars_opencv4.sh as its content is confusing and useless
+     if [ -f ${D}${bindir}/setup_vars_opencv4.sh ]; then
+         rm -rf ${D}${bindir}/setup_vars_opencv4.sh
+@@ -222,3 +217,13 @@ do_install:append() {
+         mv ${D}/${bindir}/shape ${D}/${bindir}/opencv_shape
+     fi
  }
-=20
- FILES:${PN}-dev +=3D "${datadir}/${BPN}/cmake"
++
++do_install:append:class-target() {
++    # remove build host path to improve reproducibility
++    if [ -f ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake ]; then
++        sed -e 's@${STAGING_DIR_HOST}@@g' \
++            -i ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake
++    fi
++}
 +
 +BBCLASSEXTEND =3D "native"
 
