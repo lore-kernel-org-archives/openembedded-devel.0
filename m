@@ -1,338 +1,151 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 187EFCAC5B8
-	for <webhook@archiver.kernel.org>; Sat, 27 Sep 2025 00:36:34 +0000 (UTC)
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.web11.3078.1758933392158443060
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D78CFCAC5BE
+	for <webhook@archiver.kernel.org>; Sat, 27 Sep 2025 02:47:54 +0000 (UTC)
+Received: from AM0PR02CU008.outbound.protection.outlook.com (AM0PR02CU008.outbound.protection.outlook.com [52.101.72.26])
+ by mx.groups.io with SMTP id smtpd.web10.4678.1758941271322590508
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Sep 2025 17:36:32 -0700
+ Fri, 26 Sep 2025 19:47:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CTbcVVGc;
- spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: ticotimo@gmail.com)
-Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-57db15eeb11so3411300e87.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Sep 2025 17:36:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758933390; x=1759538190; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=FyM0N4lvhO8eeGgwjBv6qD1tYkZPaQnlQM/GVwqPK5w=;
-        b=CTbcVVGcAJzM0tQ8C7w6k+fXagDF6XLx2FO8XUKRVh1daL1rdmylufdatV746oGu/6
-         6Ey16Uz0v8APWl4s/laQ9yhyGA+CU0+ekkyQ4HH0oeX5gWRBs5EdnVZ8gxlfVrSnI9H7
-         vyhiP1DOxRnaujN4DOqmmR0FUEzbeGVUnv7z/W9dByn3Gf6lYqqfRGOT7GhGigH2oFps
-         FFLa02ol6M4DBPBlRt1z/1vLYmEFMikj+PukGc2kbevaeSciGQWNKWDJvDABLa7YGb1b
-         k70nMWpr6p8ID/0bVSkooPzYJ20Lqjf0KyFacs4+ccRagertcvHO9NkWh0l361+4ePqM
-         1nXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758933390; x=1759538190;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=FyM0N4lvhO8eeGgwjBv6qD1tYkZPaQnlQM/GVwqPK5w=;
-        b=PBH5tCHhXbwU1D2SNzSbyh9z83M4FUthRBijrs2rkW2vDrQSERftxLl+LoRHCPxG0i
-         RWQKAkM18yeJ8+i9gD20DBUn3esCYiKuEqipAl4GE5S4R9dmh+auVWXOxYgnfJBiTxG+
-         CKbfkKOdIc+3DA9VNF3tpS6UwuyYWKNTa2A5Ap9mz8aa2DniUMfOEuZYj6g7Wq7jk2eq
-         m4wLOcfRuLlpVEuGLUIWuYPaqYDdfQoYLm9RY0V1V6yEMUs3+iYx1WimJKCc7j2NAhlp
-         YNRSTEgClLB0NRXgs0mX+ewJIzAwblbXfAJ0H8ApOVYvqnmykEAbekAoyOdkW0aSWeNl
-         mH0Q==
-X-Forwarded-Encrypted: i=1; AJvYcCVjk/WFKXfg3uuxLsqbvKgj0BOGyxWDFfc1DvsJIBQdqDJOXij3fHhRja3g1ThYNYnMtieiLhvQjXWHf6N70atITLQ=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyURGnOvpmK9NSfdnaG4tWSFsEWdJE8ndJ33Nvi9f/T15ENS6pk
-	iMQZtZ9k5CkrzuNep7qFec4Px8xmQhBNRgwfg7sYXAMNwDl8YJHzC40mCcJl0NYvucZFkBwo1s0
-	ZsCNvmARAFkyJuxwLSXcXl4nIqcywhb4=
-X-Gm-Gg: ASbGncuKjU+hn0zPNt1xagwXK5o4XYgu4rr187/wB6rk45KKXVitb8gtE64WkgKIPJF
-	s35r1m39wQL9jU3cy6ASXi+oQEhli/VSBZUoTkN/M0AxtoiMWn/qhj9zxtJdmzMOoHu/CazcTY9
-	MOQLfKc2fNTqLqa73fe3DqDQPzUZI3GZtO0fFjSS0MB3hQhZrZjxbF+zd9M6Kgr8K+UTi1dTnoe
-	envPeSsQtZKne/Zh8KXLzjqYEBnPwZMHnOgitij
-X-Google-Smtp-Source: AGHT+IEMysQfGw7a5KOhg7tKFHoaM0hXZY6B9a1717K7RGUxzuf0yD18YOU3uO+bpIRLVK0cuPqGE15wkDlbCQqAsMY=
-X-Received: by 2002:a05:6512:2249:b0:55f:4ac2:a597 with SMTP id
- 2adb3069b0e04-582d092daa7mr3032987e87.7.1758933389894; Fri, 26 Sep 2025
- 17:36:29 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=GwXYVyxi;
+ spf=pass (domain: axis.com, ip: 52.101.72.26, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LSO9Or1s7/AS7v1wzdvLhossjyznVBtUbsUY+xo8sjv/qXOiUX4oQo3QxzfKRfxa0Q8bwGzx6thHFQSspa0O/knpf9/DAxI9Yyz3n2qQrjfh/5gC/2LNLSwR/qrxk9Fq6T3EySgP47PzRIt7C9CtIf1kfBqnKYrgPlehtmykd9orGnYLd+ZWbpKfysv4SIkxVla9EuWkk4CFuOC3tQpSJOilMkmJFe4B64cz1YG3sAvgNnElU2h6fjqQYrj2/lO/zsZ47Y9oW8m5f/m0Ki1R17yHui8pW6qFy3y0WCSOMQ90vHb8zUuO+yOKE64BF5Nf5MWv5dSx/JzRXt9JMnus0g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=JP4rdAqCFal7tMU3hDKK/zhn5cQbneiujoPfvqN02Ao=;
+ b=LctoaplQ62Mr6dtwkg2r87FIdkqdlDNK0GTxIiwxSr0qXDbmzi1CWNjeZt9OM7dO0WZtdTLrM6y4p1Ncw6A43YgdrDcV56+PYaZeV5ZnCJ9R+Wm/UJLYTlImpYWJ2Sd8Kf/kUUM6hJs16wVR/hTJG0GyNdOvvsAhfyb+zh5F9JVHvP08xk2TrSuE54jjS3WL7Wv4UdHIuyxyhUbKZgU2SRxjZgKXfiuxxh89SCELoGcpU9JtBsH9n2r1MWEgQoP3shY4ATgiMW7f70zNNLJTzvAYoXEslr2spas22X8Ds/VZVaws9LuASvkm+VEiZh15X8ONu7P4/paNXtojGq/w6g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=axis.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=JP4rdAqCFal7tMU3hDKK/zhn5cQbneiujoPfvqN02Ao=;
+ b=GwXYVyxix5GY8ml+H243ucoBV8AF0fYMtYDM+ez59P4+ZjeP7o6jcoJgNuzSzNAjfcnlqBih2jD/Tzw3DudQxMHHt4qx2IrR0+kAfgjBpIJhmpqK4+DW+li8zmQUTDdeS0hvaJVSMNi/7657S50vZZyz+IlDaLLmWObQTj57HKo=
+Received: from CWLP123CA0132.GBRP123.PROD.OUTLOOK.COM (2603:10a6:401:87::24)
+ by VI1PR02MB6431.eurprd02.prod.outlook.com (2603:10a6:800:196::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.11; Sat, 27 Sep
+ 2025 02:47:46 +0000
+Received: from AMS1EPF00000048.eurprd04.prod.outlook.com
+ (2603:10a6:401:87:cafe::3d) by CWLP123CA0132.outlook.office365.com
+ (2603:10a6:401:87::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9160.13 via Frontend Transport; Sat,
+ 27 Sep 2025 02:47:45 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
+ smtp.mailfrom=axis.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=axis.com;
+Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
+ 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
+ client-ip=195.60.68.100; helo=mail.axis.com; pr=C
+Received: from mail.axis.com (195.60.68.100) by
+ AMS1EPF00000048.mail.protection.outlook.com (10.167.16.132) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.9160.9 via Frontend Transport; Sat, 27 Sep 2025 02:47:45 +0000
+Received: from se-mail02w.axis.com (10.20.40.8) by se-mail02w.axis.com
+ (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Sat, 27 Sep
+ 2025 04:47:45 +0200
+Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail02w.axis.com
+ (10.20.40.8) with Microsoft SMTP Server id 15.1.2507.58 via Frontend
+ Transport; Sat, 27 Sep 2025 04:47:44 +0200
+Received: from pc56063-2339.se.axis.com (pc56063-2339.se.axis.com [10.92.3.2])
+	by se-intmail01x.se.axis.com (Postfix) with ESMTP id F182D17D
+	for <openembedded-devel@lists.openembedded.org>; Sat, 27 Sep 2025 04:47:44 +0200 (CEST)
+Received: by pc56063-2339.se.axis.com (Postfix, from userid 14323)
+	id 0FC141203FD; Sat, 27 Sep 2025 04:47:44 +0200 (CEST)
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH 1/2] glog: Support building for native
+Date: Sat, 27 Sep 2025 04:47:41 +0200
+Message-ID: <20250927024742.1485096-1-pkj@axis.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250926081914.3127272-1-hongxu.jia@windriver.com>
- <20250926081914.3127272-3-hongxu.jia@windriver.com> <daffd0b4-b729-4db7-b120-f79a832789d7@gmail.com>
-In-Reply-To: <daffd0b4-b729-4db7-b120-f79a832789d7@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Fri, 26 Sep 2025 17:36:18 -0700
-X-Gm-Features: AS18NWDJtwCXlw0QZiGvP-uzJC1auVd8gLjV9ARDOr8YQFFa6zaKzLIDGgG_4PU
-Message-ID: <CANx9H-BeOtDTnUSHTiCjXtDRRTC5N5818pZajpLLdU=ZmwQ_EQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH v4 3/6] python3-yarl: support reproducibility
-To: raj.khem@gmail.com
-Cc: hongxu.jia@eng.windriver.com, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000e3682c063fbd97c9"
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS1EPF00000048:EE_|VI1PR02MB6431:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4dd88966-15c2-453a-fef1-08ddfd703cba
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|36860700013|1800799024|376014|82310400026;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?nofuBiVrJ6BaBwg9ze6UFHi262C8qb+SLXQ/UC/O1fYxZa8mBUNHatOx/xjP?=
+ =?us-ascii?Q?GtzKEWIP7flsFoOgDcnH2eHZHBvEn0u2NmPulaj1rvnuaD1bKAHYxpP4Ih9s?=
+ =?us-ascii?Q?MafsXTz6FBZBvI97FPVQmMZrlmzoUgZIzCZ+9bdvhiO+F+yoCuQhIJG9vC45?=
+ =?us-ascii?Q?2fjp40gHPEdBwSAB6Q7m92+j4qLxDJ2PViOdBFL5u/rAgtkIrnHXIf5fqm5a?=
+ =?us-ascii?Q?o9btDBjJ5ox9NwCHsumvW7Y8jWO9DqMAQW0me7orj+bUwN71outfwTdgRK0E?=
+ =?us-ascii?Q?tN4owgpTgRQ8SjZ5iGKPWoTJ4SuAoKkmNLDAJxkGGFE17aB8SoSYbODhN6ri?=
+ =?us-ascii?Q?mX/Bm+6uxj4n3WKbxvQMQFD4c4C6t3rv9IJrAzVTc36hbhxqhXBYt2lmnpCi?=
+ =?us-ascii?Q?jz5LLyNPyzweY1iPfnPeEJe2eu8EjRjBLqfGr7k6RkhuBSLx6qMzsSz5BynI?=
+ =?us-ascii?Q?DYUvtXLFjV/XTi68xxAhY2/PD5iW0/nobzQYJT7ctfiJpUnhYvyFVQKDRV4u?=
+ =?us-ascii?Q?6jFHlADZKw3YdtgyEyvFu4aK1UCQk4x28QJOyg99FhhqHfXMT6PQwzx7XSk8?=
+ =?us-ascii?Q?BrT8a+2whfgTvGoESeEZEdjZtFjiTeknqyTvdP7gQWTFfMPMbtenj+vsaITT?=
+ =?us-ascii?Q?PpTO1LswFh5v9/5Jl5xDdN4zB5vBcPb0O5IRVLMhO4RLMpPULKCpdl5tFNAD?=
+ =?us-ascii?Q?svDpG3zH4LkreVZGOciNms0QjIpRdyZXYXf+Oe+TPKa+hB8SQpn4vmwNEZiM?=
+ =?us-ascii?Q?WtuMvy0CEG0acRU63MQhLUbAa1T0QsokxD766RtBCFAHJuVzh0ihg7tulI0x?=
+ =?us-ascii?Q?msRAsWPr4PD9XWkTmu33E//VwR2Ggor+Cc+gRuJuL//iu+OIiXRDym27lJPJ?=
+ =?us-ascii?Q?w1KedGHaLiYGiLxGvuTiInnwKUrGbeO1Nq18x53q418iYepcSLK3dRcyMRqb?=
+ =?us-ascii?Q?8PVo58+eZ/D6fIMhj+A/rEa4B9yI0EOrry5xiROp1TeEwJ1RCaOcpaCSqA2D?=
+ =?us-ascii?Q?7q848oEooHOQmvapkkU4BDFw6GnaPPuR0s6lPSncMO4Kl1+CjzGpWMgQGjfr?=
+ =?us-ascii?Q?qduCTDNXYRk9N21Zx4HE6Oe9TvlBocus+O1jLSH71M1xXVXfzgD66DG+KXNq?=
+ =?us-ascii?Q?hU7crvrIfvUnDPys2lPDcTyXXeTy22coI39ADWdvvqKeDO8W8XTaIf/E3l3E?=
+ =?us-ascii?Q?i8VBYH+XO4m55DHTVCrtay27Sx+LidCxqAGxM7ddg3l3uR4LrVcxf67Lb64H?=
+ =?us-ascii?Q?F704gwEVKclrRoJNrDuYl5d6ZX+Lor3HJzIE45ScZfa2uqRRlGwdyr/V7+7u?=
+ =?us-ascii?Q?oIJHHJnQRvDPpCY+6ZAMtJt+1Wnj3qRYZ8jMPKbOdBa8d8vnl7X0m17gyHsl?=
+ =?us-ascii?Q?CR/9JnAjrR9ZCnrih0NWbRMGRYjYdQDyYT44ryN92n8Pr/Sngn3oYQK5uiXT?=
+ =?us-ascii?Q?Td1B5vdjlQyzlaHvRDsPJ4u5ftZbAEsEe3uz9SSabPmLgrE2cl5CMNCA0/wU?=
+ =?us-ascii?Q?orIDsHOmUUC1UICB46HYjLtqhH0hu4asJv3g/Be6tigTWABjYPDTY1SOJ3+r?=
+ =?us-ascii?Q?RtemC1TG7PtEL2q/eY8=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026);DIR:OUT;SFP:1101;
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2025 02:47:45.3109
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4dd88966-15c2-453a-fef1-08ddfd703cba
+X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	AMS1EPF00000048.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR02MB6431
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 27 Sep 2025 00:36:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119947
+ <openembedded-devel@lists.openembedded.org>; Sat, 27 Sep 2025 02:47:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119948
 
---000000000000e3682c063fbd97c9
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This is needed to build opencv-native.
 
-On Fri, Sep 26, 2025 at 10:12=E2=80=AFAM Khem Raj via lists.openembedded.or=
-g
-<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ meta-oe/recipes-support/glog/glog_0.7.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
->
->
-> On 9/26/25 1:19 AM, hongxu via lists.openembedded.org wrote:
-> > In order to make the generated library be reproducible, build wheel
-> > in source dir other than tmp dir (/tmp/xxxxxx), then yocto toolchain's
-> > option -fdebug-prefix-map could work as expected
-> >
-> > Note: To support reproducible, it also requires oe-core commit [1] to b=
-e
-> merged
-> >
-> > [1]
-> https://git.openembedded.org/openembedded-core/commit/?id=3D61d98d12eca1c=
-7bdf3b7387a820c83d3b8fad965
-> >
-> > Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> > ---
-> >   .../0001-build-wheel-in-place.patch           | 31 ++++++++++++++++++=
+diff --git a/meta-oe/recipes-support/glog/glog_0.7.1.bb b/meta-oe/recipes-s=
+upport/glog/glog_0.7.1.bb
+index 570d9a7e5f..6a649325a0 100644
+--- a/meta-oe/recipes-support/glog/glog_0.7.1.bb
++++ b/meta-oe/recipes-support/glog/glog_0.7.1.bb
+@@ -12,7 +12,6 @@ SRC_URI =3D " \
+=20
+ SRCREV =3D "7b134a5c82c0c0b5698bb6bf7a835b230c5638e4"
+=20
+-
+ inherit cmake
+=20
+ PACKAGECONFIG ?=3D "shared unwind 64bit-atomics"
+@@ -39,3 +38,5 @@ do_configure:append() {
+ }
+=20
+ FILES:${PN}-dev +=3D "${datadir}/${BPN}/cmake"
 +
-> >   .../python/python3-yarl_1.20.1.bb             |  4 +++
-> >   2 files changed, 35 insertions(+)
-> >   create mode 100644
-> meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-plac=
-e.patch
-> >
-> > diff --git
-> a/meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-pl=
-ace.patch
-> b/meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-pl=
-ace.patch
-> > new file mode 100644
-> > index 0000000000..84f81da775
-> > --- /dev/null
-> > +++
-> b/meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-pl=
-ace.patch
-> > @@ -0,0 +1,31 @@
-> > +From 606843ad079d9d0dac1172533d42b5a2327b99ed Mon Sep 17 00:00:00 2001
-> > +From: Hongxu Jia <hongxu.jia@windriver.com>
-> > +Date: Wed, 17 Sep 2025 15:41:09 +0800
-> > +Subject: [PATCH] build wheel in place
-> > +
-> > +In order to make the generated library be reproducible, build wheel
-> > +in source dir other than tmp dir (/tmp/xxxxxx), then yocto toolchain's
-> > +option -fdebug-prefix-map could work as expected
-> > +
-> > +Upstream-Status: Pending
->
-> same here, please submit it upstream
-
-
-Agreed. See my comments in the other thread. Pending is just another way of
-saying =E2=80=9Cnever=E2=80=9D.
-
->
->
-> > +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> > +---
-> > + packaging/pep517_backend/_backend.py | 2 +-
-> > + 1 file changed, 1 insertion(+), 1 deletion(-)
-> > +
-> > +diff --git a/packaging/pep517_backend/_backend.py
-> b/packaging/pep517_backend/_backend.py
-> > +index 61cad34..d5d839e 100644
-> > +--- a/packaging/pep517_backend/_backend.py
-> > ++++ b/packaging/pep517_backend/_backend.py
-> > +@@ -316,7 +316,7 @@ def build_wheel(
-> > +     """
-> > +     with maybe_prebuild_c_extensions(
-> > +             line_trace_cython_when_unset=3DFalse,
-> > +-            build_inplace=3DFalse,
-> > ++            build_inplace=3DTrue,
-> > +             config_settings=3Dconfig_settings,
-> > +     ):
-> > +         return _setuptools_build_wheel(
-> > +--
-> > +2.34.1
-> > +
-> > diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb
-> b/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb
-> > index bbf9e3d782..6eedcf0f82 100644
-> > --- a/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb
-> > +++ b/meta-python/recipes-devtools/python/python3-yarl_1.20.1.bb
-> > @@ -9,6 +9,10 @@ PYPI_PACKAGE =3D "yarl"
-> >
-> >   inherit pypi ptest-python-pytest python_setuptools_build_meta cython
-> >
-> > +SRC_URI +=3D " \
-> > +    file://0001-build-wheel-in-place.patch \
-> > +"
-> > +
-> >   DEPENDS +=3D " \
-> >       python3-expandvars-native \
-> >   "
-> >
-> >
-> >
-> >
-> >
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119936):
-> https://lists.openembedded.org/g/openembedded-devel/message/119936
-> Mute This Topic: https://lists.openembedded.org/mt/115445262/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000e3682c063fbd97c9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
-iv dir=3D"ltr" class=3D"gmail_attr">On Fri, Sep 26, 2025 at 10:12=E2=80=AFA=
-M Khem Raj via <a href=3D"http://lists.openembedded.org">lists.openembedded=
-.org</a> &lt;raj.khem=3D<a href=3D"mailto:gmail.com@lists.openembedded.org"=
->gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;bo=
-rder-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)">=
-<br>
-<br>
-On 9/26/25 1:19 AM, hongxu via <a href=3D"http://lists.openembedded.org" re=
-l=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> wrote:<br>
-&gt; In order to make the generated library be reproducible, build wheel<br=
->
-&gt; in source dir other than tmp dir (/tmp/xxxxxx), then yocto toolchain&#=
-39;s<br>
-&gt; option -fdebug-prefix-map could work as expected<br>
-&gt; <br>
-&gt; Note: To support reproducible, it also requires oe-core commit [1] to =
-be merged<br>
-&gt; <br>
-&gt; [1] <a href=3D"https://git.openembedded.org/openembedded-core/commit/?=
-id=3D61d98d12eca1c7bdf3b7387a820c83d3b8fad965" rel=3D"noreferrer" target=3D=
-"_blank">https://git.openembedded.org/openembedded-core/commit/?id=3D61d98d=
-12eca1c7bdf3b7387a820c83d3b8fad965</a><br>
-&gt; <br>
-&gt; Signed-off-by: Hongxu Jia &lt;<a href=3D"mailto:hongxu.jia@windriver.c=
-om" target=3D"_blank">hongxu.jia@windriver.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0.../0001-build-wheel-in-place.patch=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0| 31 +++++++++++++++++++<br>
-&gt;=C2=A0 =C2=A0.../python/<a href=3D"http://python3-yarl_1.20.1.bb" rel=
-=3D"noreferrer" target=3D"_blank">python3-yarl_1.20.1.bb</a>=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 4 +++<br>
-&gt;=C2=A0 =C2=A02 files changed, 35 insertions(+)<br>
-&gt;=C2=A0 =C2=A0create mode 100644 meta-python/recipes-devtools/python/pyt=
-hon3-yarl/0001-build-wheel-in-place.patch<br>
-&gt; <br>
-&gt; diff --git a/meta-python/recipes-devtools/python/python3-yarl/0001-bui=
-ld-wheel-in-place.patch b/meta-python/recipes-devtools/python/python3-yarl/=
-0001-build-wheel-in-place.patch<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..84f81da775<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-python/recipes-devtools/python/python3-yarl/0001-build-whee=
-l-in-place.patch<br>
-&gt; @@ -0,0 +1,31 @@<br>
-&gt; +From 606843ad079d9d0dac1172533d42b5a2327b99ed Mon Sep 17 00:00:00 200=
-1<br>
-&gt; +From: Hongxu Jia &lt;<a href=3D"mailto:hongxu.jia@windriver.com" targ=
-et=3D"_blank">hongxu.jia@windriver.com</a>&gt;<br>
-&gt; +Date: Wed, 17 Sep 2025 15:41:09 +0800<br>
-&gt; +Subject: [PATCH] build wheel in place<br>
-&gt; +<br>
-&gt; +In order to make the generated library be reproducible, build wheel<b=
-r>
-&gt; +in source dir other than tmp dir (/tmp/xxxxxx), then yocto toolchain&=
-#39;s<br>
-&gt; +option -fdebug-prefix-map could work as expected<br>
-&gt; +<br>
-&gt; +Upstream-Status: Pending<br>
-<br>
-same here, please submit it upstream</blockquote><div dir=3D"auto"><br></di=
-v><div dir=3D"auto">Agreed. See my comments in the other thread. Pending is=
- just another way of saying =E2=80=9Cnever=E2=80=9D.</div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;bo=
-rder-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)" =
-dir=3D"auto"><br>
-<br>
-&gt; +Signed-off-by: Hongxu Jia &lt;<a href=3D"mailto:hongxu.jia@windriver.=
-com" target=3D"_blank">hongxu.jia@windriver.com</a>&gt;<br>
-&gt; +---<br>
-&gt; + packaging/pep517_backend/_backend.py | 2 +-<br>
-&gt; + 1 file changed, 1 insertion(+), 1 deletion(-)<br>
-&gt; +<br>
-&gt; +diff --git a/packaging/pep517_backend/_backend.py b/packaging/pep517_=
-backend/_backend.py<br>
-&gt; +index 61cad34..d5d839e 100644<br>
-&gt; +--- a/packaging/pep517_backend/_backend.py<br>
-&gt; ++++ b/packaging/pep517_backend/_backend.py<br>
-&gt; +@@ -316,7 +316,7 @@ def build_wheel(<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0&quot;&quot;&quot;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0with maybe_prebuild_c_extensions(<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0line_trace_cython_whe=
-n_unset=3DFalse,<br>
-&gt; +-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 build_inplace=3DFalse,<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 build_inplace=3DTrue,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0config_settings=3Dcon=
-fig_settings,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0):<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return _setuptools_build_wheel(<br>
-&gt; +--<br>
-&gt; +2.34.1<br>
-&gt; +<br>
-&gt; diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://pyt=
-hon3-yarl_1.20.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-yarl_1.20=
-.1.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-y=
-arl_1.20.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-yarl_1.20.1.bb<=
-/a><br>
-&gt; index bbf9e3d782..6eedcf0f82 100644<br>
-&gt; --- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-ya=
-rl_1.20.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-yarl_1.20.1.bb</=
-a><br>
-&gt; +++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-ya=
-rl_1.20.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-yarl_1.20.1.bb</=
-a><br>
-&gt; @@ -9,6 +9,10 @@ PYPI_PACKAGE =3D &quot;yarl&quot;<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0inherit pypi ptest-python-pytest python_setuptools_build_m=
-eta cython<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; +SRC_URI +=3D &quot; \<br>
-&gt; +=C2=A0 =C2=A0 file://0001-build-wheel-in-place.patch \<br>
-&gt; +&quot;<br>
-&gt; +<br>
-&gt;=C2=A0 =C2=A0DEPENDS +=3D &quot; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0python3-expandvars-native \<br>
-&gt;=C2=A0 =C2=A0&quot;<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#119936): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/119936" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/119936</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/115445262/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/115445262/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000e3682c063fbd97c9--
++BBCLASSEXTEND =3D "native"
 
