@@ -2,292 +2,229 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BCC22CAC5B9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BADE1CAC5B0
 	for <webhook@archiver.kernel.org>; Sat, 27 Sep 2025 10:27:27 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web10.8970.1758968844921431637
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web10.8968.1758968844100485165
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 27 Sep 2025 03:27:25 -0700
+ Sat, 27 Sep 2025 03:27:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=EHHe0Gmm;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b00a9989633so584305366b.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 27 Sep 2025 03:27:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jVtvh1eE;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-b2e66a2fb63so548039466b.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 27 Sep 2025 03:27:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758968843; x=1759573643; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1758968842; x=1759573642; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=g0UrzBjkQC9rXvdWpcdkb7lAAiD98o/PaqrZQqxHPH4=;
-        b=EHHe0Gmmdx+wHRYR8M7jxgBwfcOhnKztcmrG9/glHPaOXbid06DFh4do2iOsW3lJHI
-         qIWVIpYT8xEwtgQsH/pSisI8X+w6dQbKxW0pMn+M8Pj+hcNYEBh+Ld50Y7A/6rojOEnV
-         ugzlMVc4SYX3ppX0dA+n5AfTqr+XqK/m7MpW2pW1/fPL5O/BSP/QNf2MPQK7hDdshr+Q
-         FUmLk31XbOpxrKgx3CJsGIFQVOb30blPA8eRjLGvgalF7nA8xBQ4Jvuw14ciT5F3yT7T
-         QKTiORRswAwBjySFrb6j5wYeq8yoFUPE+OeZzvnhqhCBRY6K2FAVHk5J/igEykgAQ898
-         /Otw==
+        bh=JpozTK4lPaaU6OXpnFaNDk2uUPmT7nzFx4dNrwaXi0Y=;
+        b=jVtvh1eEJosfZ81E15MxuZPemweRU7XIV64xJYrjG1NMqqpMN/zGM3EpJeWGza/l75
+         /bN7WYC7xLfn5syjh5XhIFw0QBbdBLTJ509wN9fXe4ihN+Mnvy/2l7uAGl260IHxCn1w
+         FHM8+VghZP2smY8ccfGexjqMU1aP3wHqU85CA90fR6/NbSOuiIgpXrPwxKwWEMWRxClf
+         z0iMrg1uOx9axsl8KHg2aHD/HVcwTfWDa0x4nCEP3oR3fKsMnkHJBabfYkDF/Cz8UG03
+         gB/b+JXv7TgSMA9P0hVZJ6zCfUH9iPzJ9hv8TDtlk+/7KXuo72lrrCcY/vBe9ZS8Kcrb
+         e2Ew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758968843; x=1759573643;
+        d=1e100.net; s=20230601; t=1758968842; x=1759573642;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=g0UrzBjkQC9rXvdWpcdkb7lAAiD98o/PaqrZQqxHPH4=;
-        b=K7/Pahz8fFnj3jnulGLMIO1ezE/ZgV/QctCQ3wsRiL5JF4y240x1aFofLAWJypRIhZ
-         Oq9stPfzmVwwgzXkX+Wch3cyyFbRIPEX3o7yn9rJkuNye7VD5kfPm8hGvm5at9DMNMRA
-         2iqiVIbdLGANwiKsuPDzOLyLsoDxZnvEzTGPBH+D6gpBxtYxrNgUThqyJE+MvVzQgNgz
-         0V2ujUjSGltNogmEubnIA5HVzPoWlDVbklJebgQm3ABR8PDlgiQJhn7TlH8oWLTEBRo1
-         T5q7iSOJHkcCsrZJikRQQs+CuGtK7tGpelEJrmhOGpUHnRnrSZ048lW/BdBOxpN23ifM
-         yx9A==
-X-Gm-Message-State: AOJu0YzPm2wJD8sXo68+DiABX4jrT3RrkstZT0JYlg9y17z6KWl2DDQ6
-	LeNZyx11mepxjbljmkLiC+pYyw7tPm0bG8Sye9+BqGGNqdrddNrY8EC+n6STrg==
-X-Gm-Gg: ASbGncvZcAS3i6rwRBrMuWdMcXWXM8dMdVTZiBYMnDiTTuq2yyvkDsqsPfF96V/kmyA
-	hrFz/WZ6VvcnXVV4owSZUG9BYZDKG5XEUWbqqcoNmytXFja39HKBquAYm5KLj31kbthiDII/8q7
-	06lqW7VFrDoxo27nlbZrRMsNGBK+HNq3dOuTShWKo6lADrZ6lpS4hlivijaG0LfIk83nD/1XB6p
-	PNMfwfzmB6HRS3s7bcx4zobISOgBjkWOP6vzBfuUzOVevNtv0dH0pv3sNFdaf2bG9LpM/OUZAW8
-	d6GUAKNAhBUTodnMy1ouCem1wF6A/I6PulEvbgPEnlGw9zAH6w1Z6el/Cr40/L3wqXyPivm+Wkf
-	IZquAXbmpHA7pjp460TwiMhCyZ75xbFi/SG0Lq8Q=
-X-Google-Smtp-Source: AGHT+IHAf2re27rKha31ZLCBKhoRpT/z8Xtpygm27vrDN2yNiGy8IGK2VVBGUZooNn75x/Wubm85VQ==
-X-Received: by 2002:a17:907:846:b0:b0e:83e7:f6e1 with SMTP id a640c23a62f3a-b354af9e239mr1163962566b.15.1758968843007;
-        Sat, 27 Sep 2025 03:27:23 -0700 (PDT)
+        bh=JpozTK4lPaaU6OXpnFaNDk2uUPmT7nzFx4dNrwaXi0Y=;
+        b=pQbaNF6ckclYI6St88wAIUrNC1IKUWWqjXEfvkP+fIOKSnX4IEO7QkBqJETuHoYtaB
+         TSznTlEBhBz4EaBiLThVgMVU2YIjh4ekARRV0Ogj0YIWDMzmF6zQI/xCJbgwEcLS0aRZ
+         PDMzSRnjZEJ1b/VHyr2YmjjjdEHvMaMjLNvMDKSr9lalqR+JiLzM8JHN1kKeH8ja2tco
+         c2sKNo0JuC5KJDmbc4yUTZ2BYFKh6pj/R7tEF6L9w9NzPGE/PtczaZghhJekFJ8ZCScy
+         Z5ifIPcVOBOxzxau6AXkYjFvKu04jgtlKhF6YpftNmvT7/ai/NKG5xeC9Vu+sB29ebfj
+         RmkQ==
+X-Gm-Message-State: AOJu0YxxBfu7XxLxM0LBMV+qf8MOkXUdCanFRpUixIzV6jvSWlWe9gr4
+	muMJZB9XU+j+XX+SY58AvMMSlK5jqufj4j42HPnuAT+q16bYS1rJW2YoNe/teg==
+X-Gm-Gg: ASbGncs0KqyXeNw3FBij6UZ0Sd8CRiMf62mApPPfpg8HukSzgyW3M6jMTw1160h9y9N
+	egspg1cBgpJOvJaqsCOHaOGjUxUSXhJORSOp3XEX66V75SqVaHqbvMnHOhHUHP+pw6P7NYInRl3
+	1v1nz5l7DJicWPnzwFtEjTMzfa6cPqjdHU31lCWuJwrZXF/6Un7wUIUnxZtM2/OqO9ROxLHbEBu
+	zKsBLzKKQJ/JDoDDfPIlhs8yL4FLLjpoV827HKJrnTV2jDiYFkMB+yDTh6kdGFWdM4r4CgXoXDE
+	LzAt92lQjz9sNmAdHn/mx9RPg538eTomFz/r80IapSx/AsfiDIL5J8rsNRYWKDz9c8f2GDT3Qye
+	jsAkAa4OzQOf4G7AItH9O9JqKaisw70Y=
+X-Google-Smtp-Source: AGHT+IGU5GVK41rw5e6cHQ9QGHZrH5zdxoA/SzqAwfwMu+wZjFtkkP6C4YTfsRBf8eOiKZlceqSm0Q==
+X-Received: by 2002:a17:907:9444:b0:b04:6cf7:75cd with SMTP id a640c23a62f3a-b34bc974012mr1192400766b.54.1758968842217;
+        Sat, 27 Sep 2025 03:27:22 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b353f586161sm530286966b.36.2025.09.27.03.27.22
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b353f586161sm530286966b.36.2025.09.27.03.27.21
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 27 Sep 2025 03:27:22 -0700 (PDT)
+        Sat, 27 Sep 2025 03:27:21 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 3/3] indent: upgrade 2.2.12 -> 2.2.13
-Date: Sat, 27 Sep 2025 12:27:19 +0200
-Message-ID: <20250927102720.318735-3-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 2/3] indent: fix CVE-2024-0911
+Date: Sat, 27 Sep 2025 12:27:18 +0200
+Message-ID: <20250927102720.318735-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250927102720.318735-1-skandigraun@gmail.com>
 References: <20250927102720.318735-1-skandigraun@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 27 Sep 2025 10:27:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119981
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119979
 
-Drop 0001-Fix-builds-with-recent-gettext.patch - it built fine for me without it.
+From: hongxu <hongxu.jia@eng.windriver.com>
 
-Building requires full makeinfo, not only a lite version, so switched the texinfo
-class to texinfo-replacement-native dependency.
+Backport a fix from upstream to resolve CVE-2024-0911
 
-Changelog:
-- Fix buffer overflows and use after free bugs
-- Recognize binary integer literals
-- New and updated translations, thanks to our translators:
-  - Updated translations:
-      Catalan, Croatian, French, Galician, German, Greek, Hungarian,
-      Indonesian, Italian, Romanian, Serbian, Spanish, Turkish, Ukrainian
-  -  New translation: Portuguese
+  https://git.savannah.gnu.org/git/indent.git feb2b646e6c3a05018e132515c5eda98ca13d50d
 
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+(cherry picked from commit 26ef6a9c2da06b7de4116c483f9197fd4cf2a4cb)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...ap-buffer-underread-in-set_buf_break.patch |  4 +--
- .../0001-Fix-builds-with-recent-gettext.patch | 32 -------------------
- ...01-Makefile.am-remove-regression-dir.patch | 11 +++----
- .../0001-Remove-dead-paren_level-code.patch   | 27 +++++++---------
- .../indent/indent/CVE-2023-40305_0001.patch   |  8 ++---
- .../{indent_2.2.12.bb => indent_2.2.13.bb}    |  7 ++--
- 6 files changed, 25 insertions(+), 64 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/indent/indent/0001-Fix-builds-with-recent-gettext.patch
- rename meta-oe/recipes-extended/indent/{indent_2.2.12.bb => indent_2.2.13.bb} (83%)
+ ...ap-buffer-underread-in-set_buf_break.patch | 123 ++++++++++++++++++
+ .../recipes-extended/indent/indent_2.2.12.bb  |   1 +
+ 2 files changed, 124 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/indent/indent/0001-Fix-a-heap-buffer-underread-in-set_buf_break.patch
 
 diff --git a/meta-oe/recipes-extended/indent/indent/0001-Fix-a-heap-buffer-underread-in-set_buf_break.patch b/meta-oe/recipes-extended/indent/indent/0001-Fix-a-heap-buffer-underread-in-set_buf_break.patch
-index 9938b6ebed..49adf84aa7 100644
---- a/meta-oe/recipes-extended/indent/indent/0001-Fix-a-heap-buffer-underread-in-set_buf_break.patch
+new file mode 100644
+index 0000000000..9938b6ebed
+--- /dev/null
 +++ b/meta-oe/recipes-extended/indent/indent/0001-Fix-a-heap-buffer-underread-in-set_buf_break.patch
-@@ -76,10 +76,10 @@ diff --git a/regression/TEST b/regression/TEST
- index a76c112..0888a18 100755
- --- a/regression/TEST
- +++ b/regression/TEST
--@@ -38,7 +38,7 @@ BUGS="case-label.c one-line-1.c one-line-2.c one-line-3.c \
-+@@ -40,7 +40,7 @@
-          macro.c enum.c elif.c nested.c wrapped-string.c minus_predecrement.c \
-          bug-gnu-33364.c float-constant-suffix.c block-comments.c \
--         no-forced-nl-in-block-init.c hexadecimal_float.c \
-+         no-forced-nl-in-block-init.c hexadecimal_float.c binary-constant.c \
- -        comment-heap-overread.c"
- +        comment-heap-overread.c comment-parent-heap-underread.c"
-  
-diff --git a/meta-oe/recipes-extended/indent/indent/0001-Fix-builds-with-recent-gettext.patch b/meta-oe/recipes-extended/indent/indent/0001-Fix-builds-with-recent-gettext.patch
-deleted file mode 100644
-index e9dadace02..0000000000
---- a/meta-oe/recipes-extended/indent/indent/0001-Fix-builds-with-recent-gettext.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 3349812de0598ca7722e0b7c7b7e5d48bd79bea9 Mon Sep 17 00:00:00 2001
--From: Alexander Kanavin <alex.kanavin@gmail.com>
--Date: Fri, 20 Dec 2019 14:01:18 +0100
--Subject: [PATCH] Fix builds with recent gettext
--
--Upstream-Status: Pending
--Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-----
-- Makefile.am | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -1,7 +1,7 @@
-- ## Process this file with automake to produce Makefile.in
-- AUTOMAKE_OPTIONS = no-texinfo.tex
-- 
---SUBDIRS = intl src doc po man
--+SUBDIRS = src po man
-- 
-- BUILT_SOURCES = 
-- 
----- a/configure.ac
--+++ b/configure.ac
--@@ -58,7 +58,6 @@ fi
-- AC_HEADER_DIRENT
-- 
-- AC_OUTPUT([ 
---   intl/Makefile
--    po/Makefile.in
--    Makefile
--    src/Makefile
-diff --git a/meta-oe/recipes-extended/indent/indent/0001-Makefile.am-remove-regression-dir.patch b/meta-oe/recipes-extended/indent/indent/0001-Makefile.am-remove-regression-dir.patch
-index 357d77d835..e4e0ac590c 100644
---- a/meta-oe/recipes-extended/indent/indent/0001-Makefile.am-remove-regression-dir.patch
-+++ b/meta-oe/recipes-extended/indent/indent/0001-Makefile.am-remove-regression-dir.patch
-@@ -47,13 +47,13 @@ index ba37a42..548fea7 100644
-  ## Process this file with automake to produce Makefile.in
-  AUTOMAKE_OPTIONS = no-texinfo.tex
-  
---SUBDIRS = intl src doc po man regression
--+SUBDIRS = intl src doc po man
-+-SUBDIRS = src doc po man regression
-++SUBDIRS = src doc po man
-  
-  BUILT_SOURCES = 
-  
--@@ -13,8 +13,7 @@ EXTRA_DIST = 	README.md \
-- 		aclocal/UTIMBUF.m4 \
-+@@ -13,8 +13,7 @@
-+ 		m4/UTIMBUF.m4 \
-  		miscel/Makefile.mingw32 \
-  		miscel/README.vc++ \
- -		bootstrap \
-@@ -62,6 +62,3 @@ index ba37a42..548fea7 100644
-  
-  DISTCLEANFILES=config/config.cache config/config.log config.h
-  
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-extended/indent/indent/0001-Remove-dead-paren_level-code.patch b/meta-oe/recipes-extended/indent/indent/0001-Remove-dead-paren_level-code.patch
-index 5a474cf0fc..3c7856e571 100644
---- a/meta-oe/recipes-extended/indent/indent/0001-Remove-dead-paren_level-code.patch
-+++ b/meta-oe/recipes-extended/indent/indent/0001-Remove-dead-paren_level-code.patch
-@@ -18,14 +18,10 @@ diff --git a/src/output.c b/src/output.c
- index ee01bcc..5b92167 100644
- --- a/src/output.c
- +++ b/src/output.c
--@@ -798,37 +798,6 @@ static int dump_line_label(void)
--    return cur_col;
-- }
-+@@ -802,37 +802,6 @@
-+  *
-+  */
-  
---/**
--- *
--- */
---
- -static int count_parens(
- -    const char * string)
- -{
-@@ -53,10 +49,14 @@ index ee01bcc..5b92167 100644
- -    return paren_level;
- -}
- -
-- /**
--  *
--  */
--@@ -840,8 +809,6 @@ static void dump_line_code(
-+-/**
-+- *
-+- */
-+-
-+ static void dump_line_code(
-+     int     * pcur_col,
-+     int     * pnot_truncated,
-+@@ -840,8 +809,6 @@
-      BOOLEAN * pbreak_line,
-      int       target_col_break)
-  {
-@@ -65,7 +65,7 @@ index ee01bcc..5b92167 100644
-     if (s_code != e_code)
-     {                       /* print code section, if any */
-        int i;
--@@ -928,8 +895,6 @@ static void dump_line_code(
-+@@ -928,8 +895,6 @@
-  
-           *pcur_col = count_columns (*pcur_col, s_code, NULL_CHAR);
-  
-@@ -74,6 +74,3 @@ index ee01bcc..5b92167 100644
-           s_code[buf_break->offset] = c;
-  
-           *pnot_truncated = 0;
---- 
--2.31.1
--
-diff --git a/meta-oe/recipes-extended/indent/indent/CVE-2023-40305_0001.patch b/meta-oe/recipes-extended/indent/indent/CVE-2023-40305_0001.patch
-index 367202e3c5..ae48271732 100644
---- a/meta-oe/recipes-extended/indent/indent/CVE-2023-40305_0001.patch
-+++ b/meta-oe/recipes-extended/indent/indent/CVE-2023-40305_0001.patch
-@@ -74,14 +74,14 @@ diff --git a/regression/TEST b/regression/TEST
- index 56f41d9..a7a6747 100755
- --- a/regression/TEST
- +++ b/regression/TEST
--@@ -37,7 +37,8 @@ BUGS="case-label.c one-line-1.c one-line-2.c one-line-3.c \
-+@@ -39,7 +39,8 @@
-          one-line-4.c struct-decl.c sizeof-in-while.c line-break-comment.c \
-          macro.c enum.c elif.c nested.c wrapped-string.c minus_predecrement.c \
-          bug-gnu-33364.c float-constant-suffix.c block-comments.c \
---        no-forced-nl-in-block-init.c hexadecimal_float.c"
--+        no-forced-nl-in-block-init.c hexadecimal_float.c \
-+-        no-forced-nl-in-block-init.c hexadecimal_float.c binary-constant.c"
-++        no-forced-nl-in-block-init.c hexadecimal_float.c binary-constant.c \
- +        comment-heap-overread.c"
--
+@@ -0,0 +1,123 @@
++From ec3ce4dce7f0bc6f15e8a29eeb3776359e0750fb Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Petr=20P=C3=ADsa=C5=99?= <ppisar@redhat.com>
++Date: Fri, 22 Nov 2024 17:27:21 +0800
++Subject: [PATCH] Fix a heap buffer underread in set_buf_break()
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++If an opening parenthesis follows a comment with a text, a read from
++an invalid address happens in set_buf_break():
++
++    $ printf '/*a*/()' | valgrind -- ./src/indent - -o /dev/null
++    ==28887== Memcheck, a memory error detector
++    ==28887== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
++    ==28887== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
++    ==28887== Command: ./src/indent - -o /dev/null
++    ==28887==
++    ==28887== Invalid read of size 2
++    ==28887==    at 0x409989: set_buf_break (output.c:319)
++    ==28887==    by 0x401FE7: indent_main_loop (indent.c:640)
++    ==28887==    by 0x4022A7: indent (indent.c:759)
++    ==28887==    by 0x40294E: indent_single_file (indent.c:1004)
++    ==28887==    by 0x402A1C: indent_all (indent.c:1042)
++    ==28887==    by 0x402BD0: main (indent.c:1123)
++    ==28887==  Address 0x4a5facc is 4 bytes before a block of size 16 alloc'd
++    ==28887==    at 0x4849E60: calloc (vg_replace_malloc.c:1595)
++    ==28887==    by 0x408B61: xmalloc (globs.c:42)
++    ==28887==    by 0x40765E: init_parser (parse.c:73)
++    ==28887==    by 0x402B1F: main (indent.c:1101)
++
++It happens when checking an indentation level of the outer scope by indexing
++parser_state_tos->paren_indents[]:
++
++    level = parser_state_tos->p_l_follow;
++    [...]
++    /* Did we just parse a bracket that will be put on the next line
++     * by this line break? */
++    if ((*token == '(') || (*token == '['))
++        --level;    /* then don't take it into account */
++    [...]
++    if (level == 0) {
++    } else {
++→       if (parser_state_tos->paren_indents[level - 1] < 0) {...}
++    }
++
++The cause is a special case for moving opening parentheses and
++brackets to a next line. If parser_state_tos->p_l_follow is zero
++(like in the reproducer), the index evaluates to -2 and goes out of
++range of the paren_indents array.
++
++This patch simply prevents from decreasing the index under zero when
++formating the code. Maybe it leaves some piece of code unformated, but
++it's safe.
++
++I checked all places where p_l_follow is set (it is only in
++handletoken.c) and they corretly prevent from decrasing it under
++zero. That keeps set_buf_break() in output.c as the culprit.
++
++<https://lists.gnu.org/archive/html/bug-indent/2024-01/msg00000.html>
++
++Signed-off-by: Petr Písař <ppisar@redhat.com>
++
++CVE: CVE-2024-0911
++Upstream-Status: Backport [feb2b646e6c3a05018e132515c5eda98ca13d50d
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ regression/TEST                                     | 2 +-
++ regression/input/comment-parent-heap-underread.c    | 3 +++
++ regression/standard/comment-parent-heap-underread.c | 5 +++++
++ src/output.c                                        | 2 +-
++ 4 files changed, 10 insertions(+), 2 deletions(-)
++ create mode 100644 regression/input/comment-parent-heap-underread.c
++ create mode 100644 regression/standard/comment-parent-heap-underread.c
++
++diff --git a/regression/TEST b/regression/TEST
++index a76c112..0888a18 100755
++--- a/regression/TEST
+++++ b/regression/TEST
++@@ -38,7 +38,7 @@ BUGS="case-label.c one-line-1.c one-line-2.c one-line-3.c \
++         macro.c enum.c elif.c nested.c wrapped-string.c minus_predecrement.c \
++         bug-gnu-33364.c float-constant-suffix.c block-comments.c \
++         no-forced-nl-in-block-init.c hexadecimal_float.c \
++-        comment-heap-overread.c"
+++        comment-heap-overread.c comment-parent-heap-underread.c"
 + 
-  INDENTSRC="args.c backup.h backup.c dirent_def.h globs.c indent.h \
-          indent.c indent_globs.h io.c lexi.c memcpy.c parse.c pr_comment.c \
- diff --git a/regression/input/comment-heap-overread.c b/regression/input/comment-heap-overread.c
-diff --git a/meta-oe/recipes-extended/indent/indent_2.2.12.bb b/meta-oe/recipes-extended/indent/indent_2.2.13.bb
-similarity index 83%
-rename from meta-oe/recipes-extended/indent/indent_2.2.12.bb
-rename to meta-oe/recipes-extended/indent/indent_2.2.13.bb
-index 000abe4447..f9d5025a65 100644
++ INDENTSRC="args.c backup.h backup.c dirent_def.h globs.c indent.h \
++         indent.c indent_globs.h io.c lexi.c memcpy.c parse.c pr_comment.c \
++diff --git a/regression/input/comment-parent-heap-underread.c b/regression/input/comment-parent-heap-underread.c
++new file mode 100644
++index 0000000..68e13cf
++--- /dev/null
+++++ b/regression/input/comment-parent-heap-underread.c
++@@ -0,0 +1,3 @@
+++void foo(void) {
+++/*a*/(1);
+++}
++diff --git a/regression/standard/comment-parent-heap-underread.c b/regression/standard/comment-parent-heap-underread.c
++new file mode 100644
++index 0000000..9a1c6e3
++--- /dev/null
+++++ b/regression/standard/comment-parent-heap-underread.c
++@@ -0,0 +1,5 @@
+++void
+++foo (void)
+++{
+++/*a*/ (1);
+++}
++diff --git a/src/output.c b/src/output.c
++index 5b92167..b8a4961 100644
++--- a/src/output.c
+++++ b/src/output.c
++@@ -290,7 +290,7 @@ void set_buf_break (
++     /* Did we just parse a bracket that will be put on the next line
++      * by this line break? */
++ 
++-    if ((*token == '(') || (*token == '['))
+++    if (level > 0 && ((*token == '(') || (*token == '[')))
++     {
++         --level;                        /* then don't take it into account */
++     }
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-extended/indent/indent_2.2.12.bb b/meta-oe/recipes-extended/indent/indent_2.2.12.bb
+index 2326f47b44..000abe4447 100644
 --- a/meta-oe/recipes-extended/indent/indent_2.2.12.bb
-+++ b/meta-oe/recipes-extended/indent/indent_2.2.13.bb
-@@ -10,20 +10,19 @@ you want a program to format your code."
- LICENSE = "GPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--DEPENDS = "virtual/gettext"
-+DEPENDS = "virtual/gettext texinfo-replacement-native"
- 
- SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://0001-src-indent.c-correct-the-check-for-locale.h.patch \
-            file://0001-Makefile.am-remove-regression-dir.patch \
--           file://0001-Fix-builds-with-recent-gettext.patch \
++++ b/meta-oe/recipes-extended/indent/indent_2.2.12.bb
+@@ -19,6 +19,7 @@ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
             file://0001-Remove-dead-paren_level-code.patch \
             file://CVE-2023-40305_0001.patch \
             file://CVE-2023-40305_0002.patch \
-            file://0001-Fix-a-heap-buffer-underread-in-set_buf_break.patch \
++           file://0001-Fix-a-heap-buffer-underread-in-set_buf_break.patch \
             "
--SRC_URI[sha256sum] = "e77d68c0211515459b8812118d606812e300097cfac0b4e9fb3472664263bb8b"
-+SRC_URI[sha256sum] = "9e64634fc4ce6797b204bcb8897ce14fdd0ab48ca57696f78767c59cae578095"
- 
--inherit autotools gettext texinfo
-+inherit autotools gettext
- 
- CFLAGS:append:class-native = " -Wno-error=unused-value"
+ SRC_URI[sha256sum] = "e77d68c0211515459b8812118d606812e300097cfac0b4e9fb3472664263bb8b"
  
 
