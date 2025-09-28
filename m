@@ -1,147 +1,222 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54527CAC5BD
-	for <webhook@archiver.kernel.org>; Sat, 27 Sep 2025 21:09:41 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web10.20996.1759007376863171742
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC120CAC5B0
+	for <webhook@archiver.kernel.org>; Sun, 28 Sep 2025 01:00:22 +0000 (UTC)
+Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com [209.85.210.43])
+ by mx.groups.io with SMTP id smtpd.web10.24263.1759021213558881073
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 27 Sep 2025 14:09:37 -0700
+ Sat, 27 Sep 2025 18:00:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ccbmbMq+;
- spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-636255b92c9so900064a12.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 27 Sep 2025 14:09:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QPmDQb2X;
+ spf=pass (domain: gmail.com, ip: 209.85.210.43, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-ot1-f43.google.com with SMTP id 46e09a7af769-7a76561c291so2061586a34.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 27 Sep 2025 18:00:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759007375; x=1759612175; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YpcFl0hACrXBqqynRUn3Rmvixwlh59lsVl/It59FRzs=;
-        b=ccbmbMq+RWIxf0qAObq5gD9MsVUK6T8Ffs/KcQ1A+0imhiKbJRQCc6zY9P61VRwPyj
-         IqwivGhRS/N8C0N72jcgvIIJy6ryfdi0aJFBDL+NGuXvAHFTMWVyFioQFrVSCBZz74Gg
-         StuRLRHq6GRwdORnMVi+EtWNdni80sdCUIorxpWqJSXrDkXoub47Wa4P0WOLJPIJMJkK
-         X5BGy3D+m727YDzxL8Z54zMKZpdRYGjEz0pYpYqTjJKLW2FgQqQ5F4mwlvIA4kQhissV
-         DbiNyIrecs4UF19PfwNlhUFc8B4Sn1jnKYdUc53UoUOijapLDbVUyrPHlYlGkCRTAhEV
-         xi8w==
+        d=gmail.com; s=20230601; t=1759021213; x=1759626013; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XVRBHReWxVStDNbu8YoQ5hX9ObxUf7F/A6AFsO7yyQw=;
+        b=QPmDQb2XnLtkjuiJgck8ekRpKvVhbd7RQR1bWHH4+WwnIb57SZibeZ9rRgDoH6TyPO
+         uxOEHWkfkVE6v0bjkI933WufXZirgh/26u0DOntpy4hD2x/KU9tIj+wItaBZBkti58il
+         A8ylUWLyMHgMemE2Up3wNdFkTpqHyxuyCA9xlX1VoY6mBjGtbbi/bnSyLwtBQvqP7yPO
+         dX2YJHXUbm2t5yHO7hM0KTlYrSMCC/udfeD8WBOP1FFEGCNzQCXvMk1g/cr5lrzL2TcQ
+         ETLB8GIBuj2ryf4d/CzH3aYnIy3a6JernoHlDQbJmVKaw/FwJ5M8rAdHEyWUBAngsdX4
+         b3JQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759007375; x=1759612175;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=YpcFl0hACrXBqqynRUn3Rmvixwlh59lsVl/It59FRzs=;
-        b=rlVQglXmvZbhvKHbuae4jlTnmuH/0L+P7fe7YpsbSGl/L3V9hAxpTvlzrNhfoYXHrE
-         4Gr03Fw8fKoxjLTdd26kW1rc0ID1/Erbs2yM9un0//wKcAbh18Ql/gxr/8nshVbQ1R49
-         fqaZiGTTZkuoeiUaGZVKIurl5uLphSEbJZ4ue6urcRObMlRCG/CZSWTH+0IhtIqiI14X
-         E9qIDPgcIhQRuXQhx5/pN3P3r78yrNzN8PjptemNYYkMwgk2y35Qni88NUxHgoCVTZMH
-         Qd02O4w5zoByL5uWa1SN0DMr2ZCqbBYunckmSxP57i4cB1CM6nJXPjqjG2qNalXFtQbB
-         MihA==
-X-Gm-Message-State: AOJu0YwaTShu7EdhDiYDYD0h7+5Tx7VcN2MhdVqjFGdMPdCABpeLMynf
-	NdABCNouugJDe8rkHRAcTmahCNo/PUhWLAWuTorEJsDT0koZZyuhhSN4gW0VPQ==
-X-Gm-Gg: ASbGncsfI5D2kdrHI04FfS1XvOJokf1PxFhKGNiGLwGCKb51kj2c0Qbv5tGklIK7tKG
-	uJCIBO6suP1+wqhpq4vlLWpzgYGA4XPF++DJJx9q0eHizAqFK6wAaXGTKLXMyQZEToPBjs5I8Uf
-	BQGAb9zznXn3JAG3yWHh/D8uz9yi2OYRrWECRzJsQI2wodB8prTmK6qPX8WHDq/j7iQIxRs9PFZ
-	2PF+qxrFVCc1zDfZCUE///JxQMS0lIBxEBWUyKMuFlMnL5vhgEJBVP+ur2ieTEqXse+dmt816ol
-	FxrnZBosdcNr4uZ9T+I9yjIFz79S1jSeA5q8L/JV/5xPPhv9iZz9w52v1V1mzyGjKKLkDBblkxl
-	Kp77zxLDt5J9O1TbH7JVx9MP57J+PwF0=
-X-Google-Smtp-Source: AGHT+IFP9lKOE4w47GE8/n3P4tmeKV0ChCQzXdb5GtHkOylb7/ZDa9huGYFK4cc5B+8UpaYueaDRlQ==
-X-Received: by 2002:a05:6402:1659:b0:62f:1e7a:f842 with SMTP id 4fb4d7f45d1cf-6349fa91f2bmr9007013a12.27.1759007374888;
-        Sat, 27 Sep 2025 14:09:34 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634bffdf857sm2803796a12.16.2025.09.27.14.09.34
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 27 Sep 2025 14:09:34 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] redis-plus-plus: upgrade 1.3.14 -> 1.3.15
-Date: Sat, 27 Sep 2025 23:09:33 +0200
-Message-ID: <20250927210933.3868073-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
+        d=1e100.net; s=20230601; t=1759021213; x=1759626013;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=XVRBHReWxVStDNbu8YoQ5hX9ObxUf7F/A6AFsO7yyQw=;
+        b=Fo2I7pdEwVSIdKQZC87QCyU/79m7RSP4V0JYy2X3CldFtVwsPIkJJhsCVm2bFSEaRi
+         /QiXnglYwwvyZujOGzGJGMe7cyw++FD3/1KJvc8Faj1iw3WOIv+WHuT6cuN/YjaMocPr
+         ZrPumPyMnQw+lpP2jRBxraQ3e/CBZQoqoJLmWU4wZraeH/wOhlzb7wVQ5hy+dRl1Lxp3
+         CyOkY+aD4O4HMz/Od/EJjtDLnhVjSVPU2IOs9EDoh6G1hISbrxQHSfkSZtA6pjUe3oYR
+         dPwtGeR2OR5ugFWzokKNhmWWyxLRdHgaPUB8VJfAq06zMmLVKiO4A2GNacBl3UucwH1Q
+         dQtQ==
+X-Gm-Message-State: AOJu0YzEioqq7TuphO4EoXiVzPJZOFXMWdFFoyMcsGXMHqxX38m8gy/v
+	mh8rSe7LQctjY4arVy6VIzlL6HowIq5uel3WQf1FQDHOhjKTIZhRS5rJX64r2Q5kWnM0WwT+6DU
+	ON6sw3g29qLD3cMYg2Q3+bBrWQ3TzZo8=
+X-Gm-Gg: ASbGncs3t5ae6VYQTbSD+zU0wfGF0lCXOnhpFgYvDZKazmKVTHB+uEsOduUmDDDPkQo
+	yewtcw8rK65Ii8JJNk1PW4K9kh9r//2ZNZ81oh/tWIPJ3zp7I++7qrhuAttbaeIxaJ4SRq8XhEt
+	opuZTQGjhwg881U1QRehcTxE+CXhWjhT79BzDT/vLAAhOsX9dR5qhj+l1XQ41ADH8lmtYQD0dP7
+	IRLWsh/
+X-Google-Smtp-Source: AGHT+IHXoEOHEWnmIPDLKefQJ4mRvfp4wGOtTnP6Sd+b318PbAmoYlBmbIDPXiWsCr76LpiqA5F6zLjuVkTH8hkpU84=
+X-Received: by 2002:a05:6808:f88:b0:439:b9b4:2d77 with SMTP id
+ 5614622812f47-43f4ce618camr5589223b6e.34.1759021212626; Sat, 27 Sep 2025
+ 18:00:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250927063216.1865627-1-ankur.tyagi85@gmail.com> <b882b222-eeaa-4f10-997a-2d281f09e4d6@gmail.com>
+In-Reply-To: <b882b222-eeaa-4f10-997a-2d281f09e4d6@gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Sun, 28 Sep 2025 14:00:00 +1300
+X-Gm-Features: AS18NWDBCcct73f8gSbUYPrpxlHP4pJnlL8xggk99nMwJThs4-9PWl5jA-YO3bI
+Message-ID: <CADySD0EppQKCAP-m2d2Wq838c-rqCpSca6JzzfnHMAwkqj3okw@mail.gmail.com>
+Subject: Re: [oe][meta-oe][walnascar][PATCH 00/21] Trying to keep recipes in
+ the walnascar branch updated with useful fixes from the master branch.
+To: Gyorgy Sarvari <skandigraun@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 27 Sep 2025 21:09:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119995
+ <openembedded-devel@lists.openembedded.org>; Sun, 28 Sep 2025 01:00:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/119996
 
-Drop 0001-update-cmake_minimum_required-to-3.5.patch, because it is
-included in this release.
+On Sun, Sep 28, 2025 at 6:53=E2=80=AFAM Gyorgy Sarvari <skandigraun@gmail.c=
+om> wrote:
+>
+> I have notes about two patches:
+>
+> 02/21: I wouldn't change defconfig in a stable branch.
 
-Add back 0001-CMakeLists.txt-fix-substitution-for-static-libs.patch
-to SRC_URI, because it was removed accidentally during a previous
-update.
+The base version of hostapd is unchanged and I thought these defconfig
+changes will be a good improvement.
+But understand this is a change in behavior.
 
-Changelog:
-- Support cmake FetchContent feature
-- Support more hash commands
-- Make variant parser more efficient
-- Fix event loop crash: avoid closing handle opened by hiredis
+If we decide to keep this change then I will also include the
+following as well in v2 otherwise drop it.
+https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-conne=
+ctivity/hostapd?id=3Dc9922073e4fab54b5b743947b68bda75dc72b064
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- ...update-cmake_minimum_required-to-3.5.patch | 34 -------------------
- ...us_1.3.14.bb => redis-plus-plus_1.3.15.bb} |  4 +--
- 2 files changed, 2 insertions(+), 36 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/redis-plus-plus/files/0001-update-cmake_minimum_required-to-3.5.patch
- rename meta-oe/recipes-extended/redis-plus-plus/{redis-plus-plus_1.3.14.bb => redis-plus-plus_1.3.15.bb} (87%)
+> 17/21: Despite the semver-like versioning, this looks like a full
+> fledged feature release, with over a 1.3k commits and a long list of new
+> features and changes.
+>
 
-diff --git a/meta-oe/recipes-extended/redis-plus-plus/files/0001-update-cmake_minimum_required-to-3.5.patch b/meta-oe/recipes-extended/redis-plus-plus/files/0001-update-cmake_minimum_required-to-3.5.patch
-deleted file mode 100644
-index 02093573ce..0000000000
---- a/meta-oe/recipes-extended/redis-plus-plus/files/0001-update-cmake_minimum_required-to-3.5.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From e30d4c4c557568b01d5adce9df2714de8d3921c2 Mon Sep 17 00:00:00 2001
--From: sewenew <sewe.code@gmail.com>
--Date: Tue, 15 Apr 2025 22:57:08 +0800
--Subject: [PATCH] update cmake_minimum_required to 3.5
--
--Signed-off-by: Moritz Haase <Moritz.Haase@bmw.de>
--Upstream-Status: Backport [e30d4c4c557568b01d5adce9df2714de8d3921c2]
-----
-- CMakeLists.txt      | 2 +-
-- test/CMakeLists.txt | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index e0a8cf4..9c742f9 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -1,4 +1,4 @@
---cmake_minimum_required(VERSION 3.1)
--+cmake_minimum_required(VERSION 3.5)
-- 
-- function(GET_VERSION VERSION_PART VERSION_NUM)
--     set(VERSION_REGEX "^const int VERSION_${VERSION_PART} = (.+);$")
--diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
--index 3423956..88aa079 100644
----- a/test/CMakeLists.txt
--+++ b/test/CMakeLists.txt
--@@ -1,6 +1,6 @@
-- project(test_redis++)
-- 
---cmake_minimum_required(VERSION 3.1)
--+cmake_minimum_required(VERSION 3.5)
-- 
-- set(REDIS_PLUS_PLUS_TEST_SOURCES src/sw/redis++/test_main.cpp)
-- 
-diff --git a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.14.bb b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.15.bb
-similarity index 87%
-rename from meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.14.bb
-rename to meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.15.bb
-index 19e68edea8..1f4b05cbac 100644
---- a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.14.bb
-+++ b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.15.bb
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
- DEPENDS += "hiredis"
- 
- SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https;tag=${PV} \
--           file://0001-update-cmake_minimum_required-to-3.5.patch"
--SRCREV = "b13fcead60bdc03f9771da25715bb134be89aa2f"
-+           file://0001-CMakeLists.txt-fix-substitution-for-static-libs.patch"
-+SRCREV = "a63ac43bf192772910b52e27cd2b42a6098a0071"
- 
- 
- inherit cmake
+It was not intended to be included, I need to fix my workflow. Sorry for th=
+at.
+
+> Otherwise I plan to test the rest (assuming no other objections arise),
+> thanks a lot.
+>
+
+Thanks for the review, I have another batch ready but will wait for
+this batch to be validated first.
+
+> On 9/27/25 08:31, Ankur Tyagi via lists.openembedded.org wrote:
+> > I have tried to carefully review the change logs and commit logs while =
+updating
+> > recipe versions.
+> >
+> > Did basic validation by building against qemux86-64 and qemuarm64
+> > machine targets.
+> >
+> > Ankur Tyagi (1):
+> >   lsscsi: fix versioning
+> >
+> > Changqing Li (1):
+> >   pahole: fix a Segmentation fault error
+> >
+> > Jason Schonberg (1):
+> >   Remove the use of http://ftp.gnome.org/pub/gnome
+> >
+> > Jeroen Hofstee (1):
+> >   php: ignore CVE-2024-3566
+> >
+> > Khem Raj (2):
+> >   tomlplusplus: Fix test failures with clang/libcxx
+> >   safec: Pass Qunused-arguments when using clang
+> >
+> > Leon Anavi (1):
+> >   ssd1306: Update to newer version
+> >
+> > Miaoqing Pan (1):
+> >   hostapd: enable 802.11be, SAE-PK, OWE, SuiteB, ACS, and MBO support
+> >
+> > Nitin Wankhade (1):
+> >   iperf3: Fix CVE-2025-54350
+> >
+> > Peace Lee (1):
+> >   guider: Upgrade 3.9.8 -> 3.9.9
+> >
+> > Peter Kjellerstedt (1):
+> >   hostapd: Backport a patch to build SAE-PK correctly
+> >
+> > Wang Mingyu (9):
+> >   gensio: upgrade 2.8.7 -> 2.8.15
+> >   libimobiledevice-glue: upgrade 1.3.1 -> 1.3.2
+> >   ser2net: upgrade 4.6.4 -> 4.6.5
+> >   mm-common: upgrade 1.0.6 -> 1.0.7
+> >   valijson: upgrade 1.0.4 -> 1.0.5
+> >   valijson: upgrade 1.0.5 -> 1.0.6
+> >   tk: upgrade 9.0.1 -> 9.0.2
+> >   sexpect: upgrade 2.3.14 -> 2.3.15
+> >   iptraf-ng: upgrade 1.2.1 -> 1.2.2
+> >
+> > Yi Zhao (1):
+> >   tk8: upgrade 8.6.15 -> 8.6.17
+> >
+> >  .../iperf3/iperf3/CVE-2025-54350.patch        | 24 +++++++++
+> >  .../recipes-benchmark/iperf3/iperf3_3.18.bb   |  3 +-
+> >  meta-oe/recipes-bsp/lsscsi/lsscsi_030.bb      |  2 +
+> >  .../{gensio_2.8.7.bb =3D> gensio_2.8.15.bb}     |  4 +-
+> >  ...e64-for-hostapd-CONFIG_SAE_PK-builds.patch | 40 ++++++++++++++
+> >  .../hostapd/hostapd/defconfig                 | 28 ++++++++++
+> >  .../hostapd/hostapd_2.11.bb                   |  1 +
+> >  ....3.1.bb =3D> libimobiledevice-glue_1.3.2.bb} |  2 +-
+> >  .../{ser2net_4.6.4.bb =3D> ser2net_4.6.5.bb}    |  2 +-
+> >  .../libsigc++-2.0/libsigc++-2.0_2.12.1.bb     |  2 +-
+> >  .../libsigc++-2.0/libsigc++-3_3.6.0.bb        |  2 +-
+> >  ...{mm-common_1.0.6.bb =3D> mm-common_1.0.7.bb} |  4 +-
+> >  .../proxy-libintl/proxy-libintl_20100902.bb   |  4 +-
+> >  meta-oe/recipes-core/safec/safec_3.7.1.bb     |  3 ++
+> >  .../recipes-devtools/glade/glade_3.36.0.bb    |  2 +-
+> >  .../{guider_3.9.8.bb =3D> guider_3.9.9.bb}      |  8 +--
+> >  ...{iptraf-ng_1.2.1.bb =3D> iptraf-ng_1.2.2.bb} |  4 +-
+> >  ...r-Fix-elf_functions-cleanup-on-error.patch | 54 +++++++++++++++++++
+> >  .../recipes-devtools/pahole/pahole_1.29.bb    |  3 +-
+> >  meta-oe/recipes-devtools/php/php_8.4.10.bb    |  1 +
+> >  .../{sexpect_2.3.14.bb =3D> sexpect_2.3.15.bb}  |  4 +-
+> >  .../recipes-devtools/ssd1306/ssd1306_git.bb   |  2 +-
+> >  .../tcltk/{tk8_8.6.15.bb =3D> tk8_8.6.17.bb}    |  2 +-
+> >  .../tcltk/{tk_9.0.1.bb =3D> tk_9.0.2.bb}        |  2 +-
+> >  .../tomlplusplus/tomlplusplus_git.bb          |  4 ++
+> >  .../{valijson_1.0.4.bb =3D> valijson_1.0.6.bb}  |  4 +-
+> >  .../gnome-themes/gnome-themes-extra_3.28.bb   |  2 +-
+> >  meta-oe/recipes-gnome/gtk+/gtk+_2.24.33.bb    |  2 +-
+> >  28 files changed, 187 insertions(+), 28 deletions(-)
+> >  create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54=
+350.patch
+> >  rename meta-oe/recipes-connectivity/gensio/{gensio_2.8.7.bb =3D> gensi=
+o_2.8.15.bb} (92%)
+> >  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0001-I=
+nclude-base64-for-hostapd-CONFIG_SAE_PK-builds.patch
+> >  rename meta-oe/recipes-connectivity/libimobiledevice-glue/{libimobiled=
+evice-glue_1.3.1.bb =3D> libimobiledevice-glue_1.3.2.bb} (89%)
+> >  rename meta-oe/recipes-connectivity/ser2net/{ser2net_4.6.4.bb =3D> ser=
+2net_4.6.5.bb} (91%)
+> >  rename meta-oe/recipes-core/mm-common/{mm-common_1.0.6.bb =3D> mm-comm=
+on_1.0.7.bb} (78%)
+> >  rename meta-oe/recipes-devtools/guider/{guider_3.9.8.bb =3D> guider_3.=
+9.9.bb} (75%)
+> >  rename meta-oe/recipes-devtools/iptraf/{iptraf-ng_1.2.1.bb =3D> iptraf=
+-ng_1.2.2.bb} (89%)
+> >  create mode 100644 meta-oe/recipes-devtools/pahole/files/0001-btf_enco=
+der-Fix-elf_functions-cleanup-on-error.patch
+> >  rename meta-oe/recipes-devtools/sexpect/{sexpect_2.3.14.bb =3D> sexpec=
+t_2.3.15.bb} (82%)
+> >  rename meta-oe/recipes-devtools/tcltk/{tk8_8.6.15.bb =3D> tk8_8.6.17.b=
+b} (97%)
+> >  rename meta-oe/recipes-devtools/tcltk/{tk_9.0.1.bb =3D> tk_9.0.2.bb} (=
+97%)
+> >  rename meta-oe/recipes-devtools/valijson/{valijson_1.0.4.bb =3D> valij=
+son_1.0.6.bb} (90%)
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#119954): https://lists.openembedded.org/g/openembed=
+ded-devel/message/119954
+> > Mute This Topic: https://lists.openembedded.org/mt/115461658/6084445
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[skandigraun@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
 
