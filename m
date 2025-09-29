@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 031AFCCA476
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15085CCD180
 	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 13:04:46 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web10.53206.1759151077264548641
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web11.52852.1759151080072066023
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Sep 2025 06:04:37 -0700
+ Mon, 29 Sep 2025 06:04:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CuCOER2E;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b0418f6fc27so657022666b.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 06:04:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ShJlQiNp;
+ spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-62fbfeb097eso6648135a12.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 06:04:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759151076; x=1759755876; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759151078; x=1759755878; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=rZFS5OdgTXFDtNA3COQHNY1Zu6nq943V0xHsAaumRXU=;
-        b=CuCOER2Ea1JU8mXRVb2C81yNWlft/94nK2Moiw8h0nPPNNlouBwCwhO4emq7V9yOB/
-         BYd3F5escEuK+fdKqeujdMhETreOOtHKR4pbkR7lX1SCFsGAqdydICcPV0xWgy5Ew1cX
-         0TLwK2M46c4mjdZ23vo7PDYuqkzUEKzLF8rBipgsETvEE5wjk7C3HqHHD+JHLuh+N6Bu
-         +f1dSGEVDS2FeAwNLULcJq9+V9PKeZMjxVWtBem3IDxN6k9ZuCGOSH0E83vWTy1F4tRo
-         tIH1gmmA0XYe7VZIb6ADgNeFdvODx55TwOrnkb6sdIucTpddLRNq9rBmhCBeDw7NDfcB
-         rkTg==
+        bh=7uXc+arddhr2M7Pnje/HcwBzSuBf20jz4kJUEpoAt4I=;
+        b=ShJlQiNpoLwIAwg/3wYTwensb9G0cGNKw87Wl2AmkDJ7OvO3K/eN4GCkmYNkj43M6Q
+         H0smLgsHUp9bRgolEbXdsAL7iVDow4WCyJbuseHyTty9x4X4E9UdFTujzMUJVzi+D7tJ
+         iBvNjfzUWpAnftb2RC46yYIpYPOkPPJYCvrmUQp/+Ge1wArjNDto07euGDKA4v2y/4YJ
+         6GobU9tenn/vB15UKZZt4iwMElx3PLj/Jsvb+3pHDcey1ggqJMam/FkFhYW7SOsgm0pl
+         VyzyWsgmGMWouvsnzy0SY9NgBI7O3yA6wSpYS1UmHBON0h1wtE/ifKr6xoKoRLMeie6H
+         CsfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759151076; x=1759755876;
+        d=1e100.net; s=20230601; t=1759151078; x=1759755878;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=rZFS5OdgTXFDtNA3COQHNY1Zu6nq943V0xHsAaumRXU=;
-        b=HdWv6ZUa6emNjWcQregCTLbVJ9qrYHsnsLmZo5h0mY+ycboDxefmHk68jojP8TRSe0
-         axTMSMFijvTWiV4X2gJrRsDKA4PL4bOujN8hHCbnId0+lGMP/abGu4LCzgaGqJofiq9m
-         B5qWyZvLz99/8GUKmUyFLz8APv808I4au847S1lIXinlPEWrh3EUbeHrhLaO1sDLP4XR
-         zfBBBewrIdYz7R/hoBIO73+3CCfJWd3N1DwLU7bpxeD/lj3CfNnokwyQbVFEV9bExl6L
-         6ljMwLU/q/03Oo6pGqD3mLN3wiTemFOzgURYFItgNQHCdcrMLTtDVZy6DnuOb8/Lp24E
-         7hBQ==
-X-Gm-Message-State: AOJu0Yz+RVzCLZxCH1rd/FwDcc9N31xw1YYYhhDqr2FDdOLml3hoV15D
-	Gt7Hs5QZpZIypfDrOYdWeSgoUxJ+CXteNUb0uIE8zYobpieeNrEstiyjoktF+A==
-X-Gm-Gg: ASbGncvdfJyXoSe79Ou5CHnN8lbBAaSU5deNsSb1jEGek0iHxJAhEcHyevW1MMkXo+m
-	TcNeVfCL2NI7jzIOXWgzRAKUOHwKVN9wNC40JSD8sD/BQc+JSVr8XD09b1wQUbs3MvuBjFJ/GRX
-	P20/ZFubEWvvrjoVhnVEkKg8PmhSS8OW6gyB9cMw6uoxaNMOlxlBT7AJZMZIND8BtXY4qbKHjGW
-	hr6nszfMKXQyydyoWZfXOzh6HRKmn7qv9oZuT2HvmBHyhzo9lTMM9l++onyJuyI6bVizPTG1u+1
-	3Z7Fk6KXxFropbgV4bXyMJlcN1CKZ5pxQOvFerjWcswNzZF5PMKkuHQqoPYoZwMYV4W8BiGWV92
-	CvKX7lb5BDQ8PclrDWkXr
-X-Google-Smtp-Source: AGHT+IFR1/2Ut5KrQdE2hlbby55ygnI9xcqpo+0YhlBVuycCqq7F3gSxQhNg4PJXvCVtqhCCvfztVw==
-X-Received: by 2002:a17:907:72c4:b0:b07:c714:f3ca with SMTP id a640c23a62f3a-b34bcd59520mr1739770566b.50.1759151075419;
-        Mon, 29 Sep 2025 06:04:35 -0700 (PDT)
+        bh=7uXc+arddhr2M7Pnje/HcwBzSuBf20jz4kJUEpoAt4I=;
+        b=MzgiVDRxXAzZQlYizHuUcyK+9JAxvZy7TUNu/Za4ao6tbaLqsYFKBXj+fFdI6iSQPW
+         NcNNvH84yzSOzjs2T8bR8By5vCPZ3bc+IPEjIDIeYekUZCyEsgBdMrxDbCrE1n8nF4nH
+         3PuDytNaADyzro6PtEakHMB+Ci+qqXcx6nsILQaLvu7Pwa1FOlfTy2LtnQ4Pawb6dXID
+         aUXN/GfJ3XX09GUiX3+fZ+t4Bvlm0MglB4RozOxb8EDL0n/GBkO3yfOhWzbJqtSd4ufX
+         dUSTm81DtWya7JUfYAnspIy4bsYGlSMmHIUi5mFbW+sRlQnCO0CbP3LqgnAPgMqNiNEn
+         wMRw==
+X-Gm-Message-State: AOJu0YzB3OeK/AvMrDd8zpFaRSqOpznad+fGB1eOXE6nKpeKicxUmxaW
+	ZiZV1wrePX8FhHA3HSUoXaekLS8tfUmWMWKvhqqJfQughISbsXmTh1AfcPC2HQ==
+X-Gm-Gg: ASbGnctouOPcleSWvTb16MbeZz2jDk2FZsZklRSJLcdWURzH3PDpHj4o8xBMjBAgk07
+	zKnHBXucV2IMCPAqg3E8baOtYOzuv6BRKNDOn8xVjZyIzQe6chu4ZpaaacHuGCi0UqcPUaH8MzM
+	FOKHMYkEkhNiV4XLGt71QYlKwSYTLIyfMeuAOaIkpkInAjaCOhXUk9p1T6+Xco2Ed48cI6LRQ6H
+	Ik1x3RGZlOHHUdMLiZV0AgOFdHzar9tmfmqzC2DFUL31Xesi4JgzT6qyykBSxAuYvUwYN7bbbA0
+	Adt8Xg3FgWoEgrjSc/6hfft8lq+p5ePTlB4PsIts3/HztglW37kyqmNq0Zj1alhZC4aFzg7nvF9
+	aNctBolms2VFfwb/bDUS1c0p/Q9/JoBU=
+X-Google-Smtp-Source: AGHT+IGgzMd5523CooaZZmk33u0jPGm6f8170GVLxqvbyQPpsMlRZiDzgGqCTo6AdEJlpfBJ68l+1g==
+X-Received: by 2002:a17:907:3f1d:b0:b41:1657:2b15 with SMTP id a640c23a62f3a-b4116573892mr70896866b.6.1759151078248;
+        Mon, 29 Sep 2025 06:04:38 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3cbd81bcfdsm335426166b.82.2025.09.29.06.04.34
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3cbd81bcfdsm335426166b.82.2025.09.29.06.04.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Sep 2025 06:04:34 -0700 (PDT)
+        Mon, 29 Sep 2025 06:04:37 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH 09/22] cifs-utils: upgrade 6.14 -> 6.15
-Date: Mon, 29 Sep 2025 15:04:12 +0200
-Message-ID: <20250929130425.2912077-10-skandigraun@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH 12/22] uftp: upgrade 5.0.1 -> 5.0.2
+Date: Mon, 29 Sep 2025 15:04:15 +0200
+Message-ID: <20250929130425.2912077-13-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250929130425.2912077-1-skandigraun@gmail.com>
 References: <20250929130425.2912077-1-skandigraun@gmail.com>
@@ -67,145 +67,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 13:04:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120022
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120025
 
-From: wangmy <wangmy@fujitsu.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+Changelog:
+=========
+-Fixed bug that caused crash when a CLIENT_KEY arrived out of order
+-Fixed option handling on Windows when an argument is missing
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 88ea7fc012f3edcb7ee7b22330826d285f0319b7)
-
-Adapted to Kirkstone.
-
+(cherry picked from commit 93a5628ae660bf6aa3cfdc9e0032088e4df8a0c5)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...{cifs-utils_6.14.bb => cifs-utils_6.15.bb} |  7 +--
- .../cifs/files/CVE-2022-27239.patch           | 40 ----------------
- .../cifs/files/CVE-2022-29869.patch           | 48 -------------------
- 3 files changed, 2 insertions(+), 93 deletions(-)
- rename meta-networking/recipes-support/cifs/{cifs-utils_6.14.bb => cifs-utils_6.15.bb} (90%)
- delete mode 100644 meta-networking/recipes-support/cifs/files/CVE-2022-27239.patch
- delete mode 100644 meta-networking/recipes-support/cifs/files/CVE-2022-29869.patch
+ .../recipes-support/uftp/{uftp_5.0.1.bb => uftp_5.0.2.bb}       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/uftp/{uftp_5.0.1.bb => uftp_5.0.2.bb} (84%)
 
-diff --git a/meta-networking/recipes-support/cifs/cifs-utils_6.14.bb b/meta-networking/recipes-support/cifs/cifs-utils_6.15.bb
-similarity index 90%
-rename from meta-networking/recipes-support/cifs/cifs-utils_6.14.bb
-rename to meta-networking/recipes-support/cifs/cifs-utils_6.15.bb
-index 516e467ee4..a009a26cc2 100644
---- a/meta-networking/recipes-support/cifs/cifs-utils_6.14.bb
-+++ b/meta-networking/recipes-support/cifs/cifs-utils_6.15.bb
-@@ -4,11 +4,8 @@ SECTION = "otherosfs"
- LICENSE = "GPL-3.0-only & LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-networking/recipes-support/uftp/uftp_5.0.1.bb b/meta-networking/recipes-support/uftp/uftp_5.0.2.bb
+similarity index 84%
+rename from meta-networking/recipes-support/uftp/uftp_5.0.1.bb
+rename to meta-networking/recipes-support/uftp/uftp_5.0.2.bb
+index 6d5cf4b628..ca2a8ce676 100644
+--- a/meta-networking/recipes-support/uftp/uftp_5.0.1.bb
++++ b/meta-networking/recipes-support/uftp/uftp_5.0.2.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/uftp-multicast/files/source-tar/"
  
--SRCREV = "8c06dce7d596e478c20bc54bdcec87ad97f80a1b"
--SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master \
--           file://CVE-2022-27239.patch \
--           file://CVE-2022-29869.patch \
--"
-+SRCREV = "58ca03f183b375cb723097a241bc2fc2254dab21"
-+SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/uftp-multicast/source-tar/uftp-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "f0435fbc8e9ffa125e05600cb6c7fc933d7d587f5bae41b257267be4f2ce0e61"
++SRC_URI[sha256sum] = "57c12a6ae59942535fb5e620381aedeb17d50009ee71f236427ce237a46c0b14"
  
- S = "${WORKDIR}/git"
- DEPENDS += "libtalloc"
-diff --git a/meta-networking/recipes-support/cifs/files/CVE-2022-27239.patch b/meta-networking/recipes-support/cifs/files/CVE-2022-27239.patch
-deleted file mode 100644
-index 77f6745abe..0000000000
---- a/meta-networking/recipes-support/cifs/files/CVE-2022-27239.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From 007c07fd91b6d42f8bd45187cf78ebb06801139d Mon Sep 17 00:00:00 2001
--From: Jeffrey Bencteux <jbe@improsec.com>
--Date: Thu, 17 Mar 2022 12:58:52 -0400
--Subject: [PATCH] CVE-2022-27239: mount.cifs: fix length check for ip option
-- parsing
--
--Previous check was true whatever the length of the input string was,
--leading to a buffer overflow in the subsequent strcpy call.
--
--Bug: https://bugzilla.samba.org/show_bug.cgi?id=15025
--
--Signed-off-by: Jeffrey Bencteux <jbe@improsec.com>
--Reviewed-by: David Disseldorp <ddiss@suse.de>
--
--Upstream-Status: Backport [ https://git.samba.org/?p=cifs-utils.git;a=commit;h=007c07fd91b6d42f8bd45187cf78ebb06801139d]
--CVE: CVE-2022-27239
--Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
-----
-- mount.cifs.c | 5 +++--
-- 1 file changed, 3 insertions(+), 2 deletions(-)
--
--diff --git a/mount.cifs.c b/mount.cifs.c
--index 84274c9..3a6b449 100644
----- a/mount.cifs.c
--+++ b/mount.cifs.c
--@@ -926,9 +926,10 @@ parse_options(const char *data, struct parsed_mount_info *parsed_info)
-- 			if (!value || !*value) {
-- 				fprintf(stderr,
-- 					"target ip address argument missing\n");
---			} else if (strnlen(value, MAX_ADDRESS_LEN) <=
--+			} else if (strnlen(value, MAX_ADDRESS_LEN) <
-- 				MAX_ADDRESS_LEN) {
---				strcpy(parsed_info->addrlist, value);
--+				strlcpy(parsed_info->addrlist, value,
--+					MAX_ADDRESS_LEN);
-- 				if (parsed_info->verboseflag)
-- 					fprintf(stderr,
-- 						"ip address %s override specified\n",
---- 
--2.34.1
-diff --git a/meta-networking/recipes-support/cifs/files/CVE-2022-29869.patch b/meta-networking/recipes-support/cifs/files/CVE-2022-29869.patch
-deleted file mode 100644
-index f0c3f37dec..0000000000
---- a/meta-networking/recipes-support/cifs/files/CVE-2022-29869.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--From 8acc963a2e7e9d63fe1f2e7f73f5a03f83d9c379 Mon Sep 17 00:00:00 2001
--From: Jeffrey Bencteux <jbe@improsec.com>
--Date: Sat, 19 Mar 2022 13:41:15 -0400
--Subject: [PATCH] mount.cifs: fix verbose messages on option parsing
--
--When verbose logging is enabled, invalid credentials file lines may be
--dumped to stderr. This may lead to information disclosure in particular
--conditions when the credentials file given is sensitive and contains '='
--signs.
--
--Bug: https://bugzilla.samba.org/show_bug.cgi?id=15026
--
--Signed-off-by: Jeffrey Bencteux <jbe@improsec.com>
--Reviewed-by: David Disseldorp <ddiss@suse.de>
--
--Upstream-Status: Backport [https://git.samba.org/?p=cifs-utils.git;a=commit;h=8acc963a2e7e9d63fe1f2e7f73f5a03f83d9c379]
--CVE: CVE-2022-29869
--Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
-----
-- mount.cifs.c | 6 +-----
-- 1 file changed, 1 insertion(+), 5 deletions(-)
--
--diff --git a/mount.cifs.c b/mount.cifs.c
--index 3a6b449..2278995 100644
----- a/mount.cifs.c
--+++ b/mount.cifs.c
--@@ -628,17 +628,13 @@ static int open_cred_file(char *file_name,
-- 				goto return_i;
-- 			break;
-- 		case CRED_DOM:
---			if (parsed_info->verboseflag)
---				fprintf(stderr, "domain=%s\n",
---					temp_val);
-- 			strlcpy(parsed_info->domain, temp_val,
-- 				sizeof(parsed_info->domain));
-- 			break;
-- 		case CRED_UNPARSEABLE:
-- 			if (parsed_info->verboseflag)
-- 				fprintf(stderr, "Credential formatted "
---					"incorrectly: %s\n",
---					temp_val ? temp_val : "(null)");
--+					"incorrectly\n");
-- 			break;
-- 		}
-- 	}
---- 
--2.34.1
--
+ DEPENDS = "openssl"
+ 
 
