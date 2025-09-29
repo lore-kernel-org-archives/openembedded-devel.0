@@ -2,136 +2,118 @@ Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2DE2CAC5B5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A40B5CAC5BC
 	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 02:40:41 +0000 (UTC)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.web10.45261.1759113635928108213
+ by mx.groups.io with SMTP id smtpd.web10.45260.1759113632418664534
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Sep 2025 19:40:36 -0700
+ Sun, 28 Sep 2025 19:40:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=B/2EOGFK;
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=FMXjF/zA;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58SLkwBx015845
-	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 02:40:35 GMT
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58SNDqE8019481
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 02:40:31 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=VzJsWR+TnKo
-	Ctwcl90pdeLMM+feCmGeKf1NrahxamJE=; b=B/2EOGFK5IuIYxTewHjmdI6zyEI
-	SojGeKd+RTxQSsZEiNb28DBRMTgNvJ5vNaYDUqyrta/KrHF9Y7dMyfOQZBWOZ7gx
-	3KqtNQg0vInQGZZNAFKNc1K8YLG6dyqox2f0LG4vnxEfVBVt/AFasZb/+b4kiM7N
-	thnJ7tXCwYI54ZIeMQarAOv/65W7ojQosSFDMGSa9+DKbG5DsgXt3K4+pN2wjQiX
-	V4DaKheoQQgjMrTgyDB/U2wYSbB2/awdy4bs5VrfR8ejpHPQw1O0NjUHBBNclL07
-	Hoaj7/MR1TNen8aKiI6F8GMYBkDmoCovyuYOiyq9WzgJln+nwrMd3RNhhpQ==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 49e7gxkmsw-1
+	content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=OrZf+1OOO+x8MACiaDJFQaHn2Y+WBBEdmFP
+	Dg1vUK58=; b=FMXjF/zAwATlmL2zSwmIRB2yK2/nVB+AxnoL+8vUMEZXzCBmOar
+	HCMEGtdWDl32L+Hx/YLlZqPRJin3osXny76EPs8GwQ+gw8GoOVgk40ySSZC4QlTe
+	bn8yKwSHIo+vOvU1zB7+OVFqr2zB2gBnwTt7qnc2UqCEtc7RXaLdD1O/8ANeTPEV
+	EhKnlwwvsGBM+1NOwZMD21cZAX086krKIPjR61U1Ma+7O2LyqqUs/bDqzVJ/VYLr
+	xc2JhCG0csUBKDxTN+Smfl8X9arX0ucUzyWMgUnSbs+qaTuW9MJivNIBF+zWV/l6
+	PqdQOcnfupBCft25mKAoLwMqApk6K5wBeEA==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 49e8a5umwu-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 02:40:34 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-4de5fe839aeso64828751cf.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Sep 2025 19:40:34 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 02:40:31 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-4de36c623f6so60977171cf.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Sep 2025 19:40:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759113634; x=1759718434;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VzJsWR+TnKoCtwcl90pdeLMM+feCmGeKf1NrahxamJE=;
-        b=NYvzPRViUet+rU0m3YIfbUW5lmjU11xc9hr0Nsh99apJQqf7kFs2ZqlaB5CJ79JU5b
-         BCCDVWKWsAjcXJseLoK/4S74IRJnwDatVsFXnG2RjeHa+HnAJ80ikXD0+vM1VwUsEfKX
-         1jI/xodU4Ar9XiPpirgRh1Ms2UjN8qYIp6I3YTrMlxolCPTcLYGVtZstxz2HHYQmQuN+
-         did193gzu1ubxxV0+ohfyNHvfPs968tbwxA6UqEDRbmRbKMlp4xpNbfWLEhJhMkvsKDL
-         WV4JrENmNVdeQQTmhGu8SRZrnAL0g/XgvQ+7ODpvZPGmZKyOS5gpuIkBV557KyV4Twmm
-         QZwg==
-X-Gm-Message-State: AOJu0Yx4SoVNUFkqqRnvbNotf3DZkmLbLzHTs8Io9v7SriWHtCwbxTwq
-	B7a6kzn8YwxHgIsH1QQVkCjZ+C7AjmMDmP1F/neLGelpu+QE9STgXI/mKvRmsNZqI/hn6GsNMcp
-	dLYXSG87UHTiKDAURo/EjuF6dgUxv0hq+2Pax6MAHmfHAUoBLEH9H7RcRK5AroTz/3c1zHyesp2
-	GEs6rzxP/GdCuwd7Sf2a6lgg==
-X-Gm-Gg: ASbGncs8ctBTZZc9lOZrteTXxcbsLzU9OU2oYLZqIdweXW9K+AhW0G73amWRXJN3zuV
-	Syem+PCsxkrV+o6Gvixxbe4o8vOyq1P1U00N5UUH2Xkhxqy/9lqteBmeWINIYztpQtugP6+VSvS
-	ioFhPOTrY88ZHn17M2UEIjCGzQz2OrpAJrmdPO933v+Q9KSbFK94oXBcmldfCSy3Mz3GdKe8ged
-	LnKbVfKiyeiLj1XPS0bwlxQFMtYizM8K+PotEDjen6MTaOxdGiwgefQVeZ+zWr0O1QjLsA4P4HI
-	5zSIY6VYue03eoJTJZ5OSxNwcY3Q0vtFmET/ILsV4UzmDqYOmQpJPX2FLRPDy6wS8yyd981llCt
-	cLVKWSQTwZedhrB90MPAaj8hHNoJeWkxVBuaFMfxL6OYGPPBy1XAv
-X-Received: by 2002:ac8:7d8e:0:b0:4d0:7fc9:5c6 with SMTP id d75a77b69052e-4da4b42cbfcmr194801531cf.50.1759113633822;
-        Sun, 28 Sep 2025 19:40:33 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEmJIaZTWlqIHmi8NNzHGWyWmSnQivywilXTNPCCiIxpG+k7Qh0p7i4Qw+2eVSNVisp/zrPIg==
-X-Received: by 2002:ac8:7d8e:0:b0:4d0:7fc9:5c6 with SMTP id d75a77b69052e-4da4b42cbfcmr194801401cf.50.1759113633232;
-        Sun, 28 Sep 2025 19:40:33 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1759113630; x=1759718430;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=OrZf+1OOO+x8MACiaDJFQaHn2Y+WBBEdmFPDg1vUK58=;
+        b=C683blWWhiCnVNPejC6N89HV4YGEfDWB7/7WzP8AjgA8Z9+EQUZSwRKwXdXBj9wsQd
+         d3REv44IP2jb1XXl8KyHXwpHCum/9Do4f6M1EJ/7uKoJ62z9kH7pEqJiMEUP89PR5ni2
+         Yz9ER3dJB+dA/mIJGwyyWvPZ7I68+X+dtbnxzbTT1EMuVt5x0ikr/sqRP4aiTTCAYuxv
+         fNI197U3Zjh9PXrOqzX1iIcoNramSLTQTZoRZmPWfTr6oKmAUapV81fr10TZm4yt7aVc
+         itZy96keZ5wh9CwSrmhNKoipZ83jGh1a7r9ubc1Wuynh5x+ZjHIzGky7gGlrkK7ghRgE
+         XeVA==
+X-Gm-Message-State: AOJu0YwA2Jtk28OHXvONO1MYNIhEfaehRgl7YuleRe5ZneOI0uWABjCw
+	4PQ2UTxCjGKTSWIMAWkdGPEAOOfGit6UnKBbzV/TtuECVlHcwGfmXvknZ7Xlj1QYCWJOSVLTj4o
+	Xv0pT4jgSjvkEZkv+veoFcLwIk96QvXsb2QEJN4QOBJVRFBZ5FqirA5xFzFCEMydQ+bL7aQfkdk
+	iV8pYv14Qre/N8PwsmTwbmFA==
+X-Gm-Gg: ASbGncuD2fydJJmLtsznBCWwQMbTea/WZaDahtu606TRc2lBDARa+8JkpdP8BKTOppX
+	G9k9qv3Y1O0OfL4GiZSD05v+iefyRs3O680P4ABclCU10PyqMdfO7tQMPhh223XFxYtjtRYQC8B
+	AKpgVvEHxDMzzQvo2rqkvVDIQB75m6Kj1YhoKIZX/zQWXKsZrPmAZdvZh+zeXiR03MsEtQKbgl0
+	ONembIP94X9vPm5t3L6uf4AcxTQ8P3hrr8uh/7Np3eNRO+65+3nmm4m+3BoMlJaoQdyXrtAAcUM
+	j5qyM/TvEGM0B9+9ibTcpvcPJXy4i7Nus72vum/l+XsVm+nYFE151au/K6lK+tJ6xxNjlOV4Qqv
+	GGeqginc/us+RbkP4AmEW4UjjfdPlyzcwytHNn60zRFqU8U6+ip8S
+X-Received: by 2002:ac8:5852:0:b0:4be:9bd8:96f0 with SMTP id d75a77b69052e-4da4cd47641mr194856841cf.71.1759113630342;
+        Sun, 28 Sep 2025 19:40:30 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEMBzYBvTHhVnk1GjxIE1+UVF5EWxax2lefCGWWSfnKN4njH/qCoyfhNHBquZyLnhkh7iYGLw==
+X-Received: by 2002:ac8:5852:0:b0:4be:9bd8:96f0 with SMTP id d75a77b69052e-4da4cd47641mr194856651cf.71.1759113629723;
+        Sun, 28 Sep 2025 19:40:29 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a0c3-3a00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a0c3:3a00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5882275f1fcsm306591e87.98.2025.09.28.19.40.29
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5882275f1fcsm306591e87.98.2025.09.28.19.40.25
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Sep 2025 19:40:31 -0700 (PDT)
+        Sun, 28 Sep 2025 19:40:27 -0700 (PDT)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] opencl-cts: build GL, GL ES and Vulkan interoperability tests
-Date: Mon, 29 Sep 2025 05:40:24 +0300
-Message-ID: <20250929024025.3210337-2-dmitry.baryshkov@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 1/2] opencl-cts: build SPIR-V files for the spirv-new test
+Date: Mon, 29 Sep 2025 05:40:23 +0300
+Message-ID: <20250929024025.3210337-1-dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20250929024025.3210337-1-dmitry.baryshkov@oss.qualcomm.com>
-References: <20250929024025.3210337-1-dmitry.baryshkov@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: xkOjS75HNNGUcU5rQMNrllza9vu1CCW2
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTI3MDAyNSBTYWx0ZWRfX0X1nChCqVTES
- 89qWciKfibWq/RxkQ2knJx47eUgiFDt+PshlZJeuLh1yyRrPOUDOAqUxThcWugyqxYceQ1PvQfy
- H6DBxV8rsxxXg6esIgseZWttuRrwSFqAYNEfMu3ADN9h8upLFwfhUTsKq6dyqCpIYG82j/pkEgr
- 3QXl68R+FPW4vKxsPV7iJiYI3yIL5+8ESjpQK6SpTnDn00gpJmna8VE0svRLL6dY2D/RHdcJqie
- EQatuXZnNf3UCiscby8ijot4hsZBrBYhRc/lTAGO6n38a5b9gYhG9oAjK29mRFoUarjkENPJxIf
- 0hmjxwha4CVk13AUNo4z8S4cOecBehBfRLV2GUZTITHfcZ5p1UC/T0I35gd0EH0t+7YkLkik8fD
- d4T4Ueq8eb/Hzt9GpJgAPYRk8Ae76w==
-X-Proofpoint-GUID: xkOjS75HNNGUcU5rQMNrllza9vu1CCW2
-X-Authority-Analysis: v=2.4 cv=dP6rWeZb c=1 sm=1 tr=0 ts=68d9f1a3 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=yJojWOMRYYMA:10
- a=EUspDBNiAAAA:8 a=zPFEKynZ1-hjiTKKqzcA:9 a=kacYvNCVWA4VmyqE58fU:22
+X-Authority-Analysis: v=2.4 cv=RZKdyltv c=1 sm=1 tr=0 ts=68d9f19f cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=xqWC_Br6kY4A:10 a=yJojWOMRYYMA:10
+ a=EUspDBNiAAAA:8 a=eI8iLtjY0aaPX4BExaMA:9 a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-GUID: fNeHs640E7jaeqxMo449gJtQ_HR_3CU9
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTI3MDAzMyBTYWx0ZWRfX2Y9frgOIs4+4
+ H7+3FZVpd0wNslyV9lH42n9Ekpe1frXsgErHAUuJiPzVrxz4Ghp7OyXQSCYhp1MOUhKY4eC7fRB
+ PyDodbZEtvYb/xh2iSaBFieXS8kEq2OrCiv4xacB9HS6kwHEsxbGlchbqJbQQU7hY5XRD+v3YWk
+ gcPB22hubfhcjrUKOpRfDWb9Zk2acsABxpcf1AAOdejCz0iO4mLFi7PLnEe6s3IG8Ux85QvFKtI
+ 9S+D+P/HF6GgDUogS3VVf7/dYS8W8gLLqG4EsMEvKEE0xE1aa274H+qsGN3wm0WHxJnC192JBuO
+ QoiwvPhTbwC1OcNt/4z/vOcyNYHC7PU1kK9odd9uQQj1ZfvYTR6oq5u/JRwZB3Z1Re3upYzJ3dJ
+ v1Eti3HVjrcoi2kCPYh18CU8jVu7hw==
+X-Proofpoint-ORIG-GUID: fNeHs640E7jaeqxMo449gJtQ_HR_3CU9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-09-29_01,2025-09-26_01,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 priorityscore=1501 spamscore=0
- malwarescore=0 bulkscore=0 impostorscore=0 phishscore=0 suspectscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2509150000
- definitions=main-2509270025
+ clxscore=1015 malwarescore=0 priorityscore=1501 adultscore=0 phishscore=0
+ impostorscore=0 spamscore=0 bulkscore=0 lowpriorityscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2509150000 definitions=main-2509270033
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 02:40:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120005
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120004
 
-Follow DISTRO_FEATURES and build optional GL, GL ES and Vulkan
-interoperability tests.
+Pull in spirv-tools-native package in order to build SPIR-V files for
+the spirv-new test.
 
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb b/meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb
-index ebf83d1a1a2d..fe1d6075e27b 100644
+index 62b59ace138f..ebf83d1a1a2d 100644
 --- a/meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb
 +++ b/meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb
-@@ -18,6 +18,14 @@ SRCREV = "e96edaef8b582c2412a2aab4b82f5c88af88617d"
+@@ -7,7 +7,7 @@ inherit pkgconfig cmake features_check
  
- EXTRA_OECMAKE:append = " -DENABLE_WERROR=OFF -DCL_INCLUDE_DIR=${STAGING_INCDIR} -DCL_LIB_DIR=${STAGING_LIBDIR} -DOPENCL_LIBRARIES=OpenCL"
+ REQUIRED_DISTRO_FEATURES = "opencl"
  
-+PACKAGECONFIG = " \
-+	${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl gles', '', d)} \
-+	${@bb.utils.filter('DISTRO_FEATURES', 'vulkan', d)} \
-+"
-+PACKAGECONFIG[opengl] = "-DGL_IS_SUPPORTED=ON,-DGL_IS_SUPPORTED=OFF,virtual/libgl glew freeglut"
-+PACKAGECONFIG[gles] = "-DGLES_IS_SUPPORTED=ON,-DGLES_IS_SUPPORTED=OFF,virtual/egl virtual/libgles2"
-+PACKAGECONFIG[vulkan] = "-DVULKAN_IS_SUPPORTED=ON,-DVULKAN_IS_SUPPORTED=OFF,vulkan-headers glslang-native"
-+
- SECURITY_STRINGFORMAT:remove = "-Werror=format-security"
+-DEPENDS += "opencl-headers virtual/libopencl1"
++DEPENDS += "opencl-headers virtual/libopencl1 spirv-tools-native"
+ RDEPENDS:${PN} += "python3-core python3-io"
  
- do_install() {
-@@ -25,6 +33,7 @@ do_install() {
-         cp -r ${B}/test_conformance/* ${D}${bindir}/opencl_test_conformance
-         sed -i 's:/usr/bin/python:/usr/bin/python3:g' ${D}${bindir}/opencl_test_conformance/run_conformance.py
- 	 find "${D}${bindir}/opencl_test_conformance" -name cmake_install.cmake -type f -delete
-+        find "${D}${bindir}/opencl_test_conformance" -name libvulkan_wrapper.a -type f -delete
-         find "${D}${bindir}/opencl_test_conformance" -name CMakeFiles -type d -exec rm -rf "{}" \; -depth
- }
  
 -- 
 2.47.3
