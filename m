@@ -1,100 +1,152 @@
-Return-Path: <kekiefer@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3011ACAC5B9
-	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 19:02:04 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.web11.6524.1759172514519993243
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD1A4CAC5B9
+	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 23:24:45 +0000 (UTC)
+Received: from mail-io1-f46.google.com (mail-io1-f46.google.com [209.85.166.46])
+ by mx.groups.io with SMTP id smtpd.web11.12600.1759188276508369045
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Sep 2025 12:01:54 -0700
+ Mon, 29 Sep 2025 16:24:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=G5QMGWP6;
- spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: kekiefer@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-71d60504bf8so54503547b3.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 12:01:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XwPF6xQ9;
+ spf=pass (domain: gmail.com, ip: 209.85.166.46, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-io1-f46.google.com with SMTP id ca18e2360f4ac-9194a0241aaso122891239f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 16:24:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759172513; x=1759777313; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759188275; x=1759793075; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pxgq2RmlBQG+CYHOpy1fTECVQznSLyuSNHfc7GEfbR0=;
-        b=G5QMGWP6dxdmcusr6nKMzozGYE7+woeX5lB7N5Ge+XNDVwhYv1XQvUFnK43aFi3yis
-         hvJvgBkmfyIbRpUj7NGivD0Vh989M41SYHa3vvxMtUrcHYRrZIAOLM0S6IxgZhQFAA2X
-         P83nsTssp1Ny5ar4Th1KFnm2sKQ6P34GSBxxKnvb3sOzyBo4q/WCjvPaqde9EygQzbiZ
-         i2LMLzkbvfF7O1Nhg08nuEq3bXSmswEhQbJkeRxBL5CgFUsmSRrxbW3c6BJTaNa6pEWx
-         KW9sI2bCivgYYK2DJNSi2GZEHoMO9UzFOREolh7j/2L74wPnRxyfDs69Ocr0g2SFNeEI
-         bPAQ==
+        bh=EnZbw18pSrpPlX2aEb8XHtFQVgE7PhKZdskV9yRwhEI=;
+        b=XwPF6xQ9tErMZFS+AjgfyehXWngIOhxy1xKXUdF9OlgMa4pHxNdxijxA+k7nYr6ooK
+         zGGZbtdPdb7lk4hj5apgxpNHxgd0m4ZWRrzuGlTfkghhCjDqBMIzA9c1Gn+lMtGC1Ol/
+         IduZapVwGRUHMqx6Bzin/Yz4D7HM5yAVdxjnNR42sBXedzJapkFbwl1O/MDnGWu2sPfm
+         eAQ/4CthB0fLBF4WNL1bPkhLrV1DpUCQZvdLUSl8hQzMseH1YEMpis9Rk4G6LwASdRbN
+         nBo3e8Qn4ccb+vFshZkdzc+Wa64C57C+W+4N56uUyO8xQW9Dkm3olucs8te+43A/MU8+
+         Pbxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759172513; x=1759777313;
+        d=1e100.net; s=20230601; t=1759188275; x=1759793075;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=pxgq2RmlBQG+CYHOpy1fTECVQznSLyuSNHfc7GEfbR0=;
-        b=meLzJrnwxZVWMMnRD5wcdMXHnHMAAOZ6pzUk9vkCkbxUKeknqIbAdoxWnYXCW7+hOl
-         k21Jdwcfsqw7gbBqv7wS6nfDCW9eSLKN0NCWvFm9OP46CMDAhqRMXzauxKCtsVlCJALc
-         PPmhPrzjjT9Uobxiixve9m81LbEKCmjKRI0iJNscvgxmk6wEa8KrlY/+luMXKIGVnQHQ
-         iFZ2qPtCCEHQiZIry/YD3SWFX9kRm5oW6eGBKhIVIl83HLtKQC/q9W3fW2NP68bRpLG9
-         Po1G6jOucgAi/TPKy9rVya65U2U0J06t/epMkbqFQcZgQ+eZe2FxLGN0BTisem4yMsdI
-         MJXA==
-X-Gm-Message-State: AOJu0YxTQJcHiiB2Xt9nR7S5+9z6jZNPvzQO7odTveFQ7Ewm2zovYjDp
-	BeDfSK4EG9JRuN835KC1Mbq3AXKqoH5bPcDAocR8ZjbmWux3cQ01tDWNbgPenRgh
-X-Gm-Gg: ASbGncu/dZlZB/dHm+BTAIAE4bj1q4k7/hNmeRdIKDHD0SNeE80ELBzwGAWAvqJsw3m
-	RGYOkTkqQRNAne0JEj6uPPu7Nk+LV7fbxdXyFEOD3aczc0KSwPe8nBJbyXJcnY50eZaNcr/6WHL
-	xqq3V8TcBWbXEROCtZQee5obeEsamCx2nWncq2ZI/3eSSiHWxnkxf0kXkD9uECDXG4MPSadI7zd
-	lda4kqdLR+L/e9oYWDTr3eaiWdgAQq8rgswzewqBnKM6UT12sCwRwpjtTBxtf30gICCSEEn8ZaV
-	gajOy76JZpv7ZsQ1/RKdS/i3kP8x0JJuNnvsBd2rJ1BZGLFbrcdisvmema8ItPOi0a6wxAS2bAx
-	x6Yq16+JSVzOc67y8rza1bNZ34ah3+PB06NXmAlRHhfmN5ah62xpWu3E=
-X-Google-Smtp-Source: AGHT+IE020anzSzvwbK2pW5VIHrBQra/sKuAW2S9ykgfYU5C7vw3HCDVRKCzKTgEhpS4aarvUpfSSQ==
-X-Received: by 2002:a05:690c:4a07:b0:775:c1ef:cffc with SMTP id 00721157ae682-775c1efd160mr95433417b3.28.1759172513000;
-        Mon, 29 Sep 2025 12:01:53 -0700 (PDT)
-Received: from localhost.localdomain ([47.176.190.50])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-765c7da8385sm30675057b3.60.2025.09.29.12.01.51
+        bh=EnZbw18pSrpPlX2aEb8XHtFQVgE7PhKZdskV9yRwhEI=;
+        b=RxWNMeA6czt8m1G3itwNWRuMLWbRNDye+IGIwJV4CvlTNIqP95kqWYmAaimvFP/r14
+         FiExG20q0AhtIibEa9LbtlvRYkm76dUiacSKpTtBm6Rb7FkRRLAQ68kHYiv7uuyB9Hd2
+         elCHIg0ZOsPMeg3uT4wAOudh4DzL6xt4zwzpglcov+GvSN1BbsO8MTScKCV5DqkTFFdx
+         Ie4sKxfrs9GnmoFjewOVXDmc9EaMoGe/chjGDoyYKWC6xI/fX2yfpS6SWRz6R96y7Sy5
+         5PI/DICj6qUDhJYz1mO0Arn0H0hn6eFYu5UAYpYkcLyCX5sdOc8b5xr8cParnlNVnsLk
+         YOWQ==
+X-Gm-Message-State: AOJu0Yz9ct+LPX8g0uspUrLgJFvrdPmWOb8Eb/XSG0w/qKgQlpVgT0ny
+	zCWT6xY8L7Nw1Dg0vHDRRvWApkmddY3PgsJ14lt5gasyEiBXnkLMTmCZq+oS/Ezn
+X-Gm-Gg: ASbGncvRWS0HcYtDuVYucim+qgp382XiiRVDy/K+3i750DhkVFu3IsmcBI8G1Z+r2yf
+	fRto1w/06W8IPhVtHRUoHJxnHqElyRYSWHif3yjktoGwKIT2pNA4vmnEAYG60T7fsdS1sPrdyVq
+	HA4JNAsJzdRR7fCAC5UKVq6Tc9pxAwTBVsi0TB45raOeUgZklqfcokn9IC2DyOLkomBVfEiytDB
+	aciu1KOHW+yWlzFAnTYhaX35Z75iQ1McQp2GJkZ2dv+nlK+rRPz/VBDfzmLehXrsef9osvxEMRj
+	9KjuDB8dobeTXhtcjt7DoI7BQg2dkMy+aET7klmoprotZ/YZfIL27pssf9aTbfGs4T58I9Bhm3k
+	qqs7JUg6MNe16P3ukfH21nDyriVxmmiyGc29Ex/DBsxsOh7RlB24N9XeqY6pMAw==
+X-Google-Smtp-Source: AGHT+IEiSnm4uYVTcu+CUv1viFmrvTzJs9MVjn+Kk4ICXl67s4Nfheq9MtzbhVK5/SBMVO23LM2qvA==
+X-Received: by 2002:a05:6e02:1547:b0:426:2f95:3190 with SMTP id e9e14a558f8ab-4262f953c8bmr214790285ab.21.1759188275408;
+        Mon, 29 Sep 2025 16:24:35 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.brunswick.com ([147.161.217.10])
+        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-56a6a5ade67sm5244088173.60.2025.09.29.16.24.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Sep 2025 12:01:52 -0700 (PDT)
-From: kekiefer@gmail.com
-To: openembedded-devel@lists.openembedded.org,
-	steve@sakoman.com
-Cc: Grygorii Tertychnyi <grembeter@gmail.com>,
+        Mon, 29 Sep 2025 16:24:35 -0700 (PDT)
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Louis Rannou <louis.rannou@non.se.com>,
 	Khem Raj <raj.khem@gmail.com>,
-	Kurt Kiefer <kekiefer@gmail.com>
-Subject: [meta-oe,scarthgap][PATCH] libusbgx: fix gadget-stop install
-Date: Mon, 29 Sep 2025 12:01:46 -0700
-Message-Id: <20250929190146.1706318-1-kekiefer@gmail.com>
-X-Mailer: git-send-email 2.34.1
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][walnascar][PATCH 1/2] mosquitto: bump to 2.0.21
+Date: Tue, 30 Sep 2025 12:24:26 +1300
+Message-ID: <20250929232427.950644-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 19:02:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120045
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 23:24:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120046
 
-From: Grygorii Tertychnyi <grembeter@gmail.com>
+From: Louis Rannou <louis.rannou@non.se.com>
 
-It was by mistake installed gadget-start instead.
+Upgrade to mosquitto 2.0.21. Update the patch status for issue 2895 and create a
+new patch for an issue introduced in 2.0.19 which causes connections to get down
+when the clock is changed.
 
-Signed-off-by: Grygorii Tertychnyi <grembeter@gmail.com>
+Signed-off-by: Louis Rannou <louis.rannou@non.se.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit b8e970395ef84b16e955f6bcd0ff4c866ecef447)
-Signed-off-by: Kurt Kiefer <kekiefer@gmail.com>
+(cherry picked from commit 2a27eacee2dc066365e32bafa66c666bcd93b3ca)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-support/libusbgx/libusbgx_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../mosquitto/files/2895.patch                |  2 +-
+ .../mosquitto/files/3238.patch                | 25 +++++++++++++++++++
+ ...osquitto_2.0.20.bb => mosquitto_2.0.21.bb} |  3 ++-
+ 3 files changed, 28 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/3238.patch
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.20.bb => mosquitto_2.0.21.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-index a20ff4eeab..7e88be00a4 100644
---- a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-+++ b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-@@ -40,7 +40,7 @@ INHIBIT_UPDATERCD_BBCLASS = "${@bb.utils.contains('PACKAGECONFIG', 'examples', '
- do_install:append() {
-     install -Dm 0755 ${WORKDIR}/gadget-start ${D}${bindir}/gadget-start
-     sed -i -e 's,/usr/bin,${bindir},g' -e 's,/etc,${sysconfdir},g' ${D}${bindir}/gadget-start
--    install -m 0755 ${WORKDIR}/gadget-start ${D}${bindir}/gadget-stop
-+    install -m 0755 ${WORKDIR}/gadget-stop ${D}${bindir}/gadget-stop
-     sed -i -e 's,/usr/bin,${bindir},g' -e 's,/etc,${sysconfdir},g' ${D}${bindir}/gadget-stop
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+index 853f881754..4c39a290b0 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
++++ b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+@@ -5,7 +5,7 @@ Subject: [PATCH] Mosquitto now waits for network-online when starting
  
-     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--- 
-2.34.1
-
+ See: https://github.com/eclipse/mosquitto/issues/2878
+ ---
+-Upstream-Status: Pending
++Upstream-Status: Submitted [https://github.com/eclipse-mosquitto/mosquitto/pull/2895]
+ 
+  service/systemd/mosquitto.service.simple | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/3238.patch b/meta-networking/recipes-connectivity/mosquitto/files/3238.patch
+new file mode 100644
+index 0000000000..89795f4cd9
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mosquitto/files/3238.patch
+@@ -0,0 +1,25 @@
++From 2cb8129793b54de7c68efe1a4a8e91c788077a8e Mon Sep 17 00:00:00 2001
++From: "Roger A. Light" <roger@atchoo.org>
++Date: Thu, 1 May 2025 11:58:23 +0100
++Subject: [PATCH] Fix incorrect reference clock being selected on startup on
++ Linux.
++
++Closes #3238. Thanks to Eric Guin and karlri.
++Closes #3168.
++---
++Upstream-Status: Backport 2.0.22
++ src/mosquitto.c | 1 +
++ 2 files changed, 3 insertions(+)
++
++diff --git a/src/mosquitto.c b/src/mosquitto.c
++index ff83ef3da..2aea55237 100644
++--- a/src/mosquitto.c
+++++ b/src/mosquitto.c
++@@ -465,6 +465,7 @@ int main(int argc, char *argv[])
++ #endif
++ 	struct mosquitto *ctxt, *ctxt_tmp;
++ 
+++	mosquitto_time_init();
++ #if defined(WIN32) || defined(__CYGWIN__)
++ 	if(argc == 2){
++ 		if(!strcmp(argv[1], "run")){
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
+similarity index 96%
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
+index 75aaf7cf38..dcbcbadd59 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
+@@ -17,9 +17,10 @@ DEPENDS = "uthash cjson"
+ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://mosquitto.init \
+            file://2895.patch \
++           file://3238.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "ebd07d89d2a446a7f74100ad51272e4a8bf300b61634a7812e19f068f2759de8"
++SRC_URI[sha256sum] = "7ad5e84caeb8d2bb6ed0c04614b2a7042def961af82d87f688ba33db857b899d"
+ 
+ inherit systemd update-rc.d useradd cmake pkgconfig
+ 
 
