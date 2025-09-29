@@ -2,151 +2,144 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD1A4CAC5B9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB252CAC5B0
 	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 23:24:45 +0000 (UTC)
-Received: from mail-io1-f46.google.com (mail-io1-f46.google.com [209.85.166.46])
- by mx.groups.io with SMTP id smtpd.web11.12600.1759188276508369045
+Received: from mail-io1-f45.google.com (mail-io1-f45.google.com [209.85.166.45])
+ by mx.groups.io with SMTP id smtpd.web10.12900.1759188280471349858
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Sep 2025 16:24:36 -0700
+ Mon, 29 Sep 2025 16:24:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XwPF6xQ9;
- spf=pass (domain: gmail.com, ip: 209.85.166.46, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-io1-f46.google.com with SMTP id ca18e2360f4ac-9194a0241aaso122891239f.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 16:24:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mbt88iyj;
+ spf=pass (domain: gmail.com, ip: 209.85.166.45, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-io1-f45.google.com with SMTP id ca18e2360f4ac-8d593793af1so208503739f.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 16:24:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759188275; x=1759793075; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=EnZbw18pSrpPlX2aEb8XHtFQVgE7PhKZdskV9yRwhEI=;
-        b=XwPF6xQ9tErMZFS+AjgfyehXWngIOhxy1xKXUdF9OlgMa4pHxNdxijxA+k7nYr6ooK
-         zGGZbtdPdb7lk4hj5apgxpNHxgd0m4ZWRrzuGlTfkghhCjDqBMIzA9c1Gn+lMtGC1Ol/
-         IduZapVwGRUHMqx6Bzin/Yz4D7HM5yAVdxjnNR42sBXedzJapkFbwl1O/MDnGWu2sPfm
-         eAQ/4CthB0fLBF4WNL1bPkhLrV1DpUCQZvdLUSl8hQzMseH1YEMpis9Rk4G6LwASdRbN
-         nBo3e8Qn4ccb+vFshZkdzc+Wa64C57C+W+4N56uUyO8xQW9Dkm3olucs8te+43A/MU8+
-         Pbxw==
+        d=gmail.com; s=20230601; t=1759188279; x=1759793079; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=vGeYTFuNuwS84PuYmDAv5iIH78GbGUFBv98mvksW/oQ=;
+        b=mbt88iyj/yJB4MWu97SzWz6wvcdeDOJ1ARhkcNMVPWa61e3OAsrtwI/OL1dGv2ZDLi
+         t38s5j0LdrDSzFibfByb5JFKg9R8xhyKHUVQZye5l6KoSTcLzDiFQay0bcM3QAm2Sfrs
+         kHkP38dPde7R+0L+wQb+TY48bw/dIFTsKBq5oexnZmW/54hlSogEOpjjG0ukBayZV2TB
+         mWQcdoIO+ZWRqx4okhcCJ4TdyiMy5rnznVzN1/Rpv+AXmTheToUUX5lr6C+kcXwK+oNN
+         vDL7+4nlrEezr6v74sfQUMdYX38JIOQaSh/DlA3pHHZRTfIj1SkdHEk3YQMYg2YMO3ts
+         +1tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759188275; x=1759793075;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=EnZbw18pSrpPlX2aEb8XHtFQVgE7PhKZdskV9yRwhEI=;
-        b=RxWNMeA6czt8m1G3itwNWRuMLWbRNDye+IGIwJV4CvlTNIqP95kqWYmAaimvFP/r14
-         FiExG20q0AhtIibEa9LbtlvRYkm76dUiacSKpTtBm6Rb7FkRRLAQ68kHYiv7uuyB9Hd2
-         elCHIg0ZOsPMeg3uT4wAOudh4DzL6xt4zwzpglcov+GvSN1BbsO8MTScKCV5DqkTFFdx
-         Ie4sKxfrs9GnmoFjewOVXDmc9EaMoGe/chjGDoyYKWC6xI/fX2yfpS6SWRz6R96y7Sy5
-         5PI/DICj6qUDhJYz1mO0Arn0H0hn6eFYu5UAYpYkcLyCX5sdOc8b5xr8cParnlNVnsLk
-         YOWQ==
-X-Gm-Message-State: AOJu0Yz9ct+LPX8g0uspUrLgJFvrdPmWOb8Eb/XSG0w/qKgQlpVgT0ny
-	zCWT6xY8L7Nw1Dg0vHDRRvWApkmddY3PgsJ14lt5gasyEiBXnkLMTmCZq+oS/Ezn
-X-Gm-Gg: ASbGncvRWS0HcYtDuVYucim+qgp382XiiRVDy/K+3i750DhkVFu3IsmcBI8G1Z+r2yf
-	fRto1w/06W8IPhVtHRUoHJxnHqElyRYSWHif3yjktoGwKIT2pNA4vmnEAYG60T7fsdS1sPrdyVq
-	HA4JNAsJzdRR7fCAC5UKVq6Tc9pxAwTBVsi0TB45raOeUgZklqfcokn9IC2DyOLkomBVfEiytDB
-	aciu1KOHW+yWlzFAnTYhaX35Z75iQ1McQp2GJkZ2dv+nlK+rRPz/VBDfzmLehXrsef9osvxEMRj
-	9KjuDB8dobeTXhtcjt7DoI7BQg2dkMy+aET7klmoprotZ/YZfIL27pssf9aTbfGs4T58I9Bhm3k
-	qqs7JUg6MNe16P3ukfH21nDyriVxmmiyGc29Ex/DBsxsOh7RlB24N9XeqY6pMAw==
-X-Google-Smtp-Source: AGHT+IEiSnm4uYVTcu+CUv1viFmrvTzJs9MVjn+Kk4ICXl67s4Nfheq9MtzbhVK5/SBMVO23LM2qvA==
-X-Received: by 2002:a05:6e02:1547:b0:426:2f95:3190 with SMTP id e9e14a558f8ab-4262f953c8bmr214790285ab.21.1759188275408;
-        Mon, 29 Sep 2025 16:24:35 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1759188279; x=1759793079;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=vGeYTFuNuwS84PuYmDAv5iIH78GbGUFBv98mvksW/oQ=;
+        b=EAOx4/HY+1UISl1mYU+clh6DV6wLZf6g6E2NiNJhSt9Q2Hn2e9IGJJWVchq0xwiq4A
+         xZbL7O/CzxMqSkySye6w3nTAH3hQcyNi6z7iWFkttBI8iDdZvNY5x2V0YOZ1Dj0mQU1k
+         cXKfKFe9qQ1aNbPgg59T2D7ze1/o6gfFTgGk0g7dn3IYxk28NcXj8Qgn8Yz/w9jXmMNe
+         lXX7aMHOK75x1wkQLdQcF4sRmbClEz9JqeO5ELO/KCdoWaAQmZe7pnoA8SMog43M7E92
+         iMH2iz2F7lUlfZQPsI0DK+bF1RpPoRbrGFzO7TnF9qm0pig/auZKU9sVAJ/fJL3CtBac
+         fxkQ==
+X-Gm-Message-State: AOJu0YxFt3h6yi7cPgk6XCSrv5b/qKpgJqPEWOxza8AAu4WRcjVYyLoM
+	TiXAxqOH+xe4C1NfvPNUGZW5TLtZABqJo8iTmm9ZNq9Hegpx1gMCK/AgdWnpRdLE
+X-Gm-Gg: ASbGncu+S4T8giY2889R0hd0dzoYLTBDwiocNjDQG80947UJcAB7BgZvnR3BgnUjNJO
+	1YwEIK3OrvfZgRN07HMcT0uPtuvQL66qFjBtU/vPaKLDUNOP8F0rcespyrOhpqwTdQI71bCDuSI
+	fUDvaZ74Zz672QzuE2GKTpsF6w6LK4BGmb4AqsDgL4gvo6lAju99fUulo+YPolKAjEBYxMTJH9H
+	WVowoLUJx41sNOM8OqvVwduO6tKEeHDYMFMSDeZ+uDpdJKVvCF2dldH63lulplYW4VXNLh+OzFF
+	AUFKD/GX8hfgymK30qnDRbXz8zPi0aZDqM95/fF+NTpMvnQhUzNfLq8tmCvZacr7RZnak3dpkw7
+	ooWQWN6CFdthhO3wN1TZFQQ9Kft3a99qyDmzTRPi2DJwYCMard9tL44FxDhA5AQ==
+X-Google-Smtp-Source: AGHT+IFkNWp4DMavtNnzliqHsohdh5B7jc0Nkw/2JWKp+5VyI3s/cbknBGJyb3s4mHGFqzdYd8Ak0A==
+X-Received: by 2002:a05:6602:2754:b0:917:664e:c00b with SMTP id ca18e2360f4ac-930b0de69c8mr293399039f.9.1759188279428;
+        Mon, 29 Sep 2025 16:24:39 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([147.161.217.10])
-        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-56a6a5ade67sm5244088173.60.2025.09.29.16.24.33
+        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-56a6a5ade67sm5244088173.60.2025.09.29.16.24.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Sep 2025 16:24:35 -0700 (PDT)
+        Mon, 29 Sep 2025 16:24:39 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Louis Rannou <louis.rannou@non.se.com>,
+Cc: Liu Yiding <liuyd.fnst@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][walnascar][PATCH 1/2] mosquitto: bump to 2.0.21
-Date: Tue, 30 Sep 2025 12:24:26 +1300
-Message-ID: <20250929232427.950644-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][walnascar][PATCH 2/2] freeradius: Fix service start error
+Date: Tue, 30 Sep 2025 12:24:27 +1300
+Message-ID: <20250929232427.950644-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250929232427.950644-1-ankur.tyagi85@gmail.com>
+References: <20250929232427.950644-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 23:24:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120046
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120047
 
-From: Louis Rannou <louis.rannou@non.se.com>
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
 
-Upgrade to mosquitto 2.0.21. Update the patch status for issue 2895 and create a
-new patch for an issue introduced in 2.0.19 which causes connections to get down
-when the clock is changed.
+Following error occurred while starting this service.
+ Error: tls: (TLS) Failed reading certificate file "/etc/raddb/certs/server.pem"
+ Error: tls: (TLS) error:03000072:digital envelope routines::decode error
+ Error: tls: (TLS) error:0A00018F:SSL routines::ee key too small
+ Error: rlm_eap_tls: Failed initializing SSL context
+ Error: rlm_eap (EAP): Failed to initialise rlm_eap_tls
+ Error: /etc/raddb/mods-enabled/eap[14]: Instantiation failed for module "eap"
 
-Signed-off-by: Louis Rannou <louis.rannou@non.se.com>
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 2a27eacee2dc066365e32bafa66c666bcd93b3ca)
+(cherry picked from commit 97376e916ef75c5bf823fcedbfdee6f03af15f96)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../mosquitto/files/2895.patch                |  2 +-
- .../mosquitto/files/3238.patch                | 25 +++++++++++++++++++
- ...osquitto_2.0.20.bb => mosquitto_2.0.21.bb} |  3 ++-
- 3 files changed, 28 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/3238.patch
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.20.bb => mosquitto_2.0.21.bb} (96%)
+ .../files/0018-Fix-Service-start-error.patch  | 33 +++++++++++++++++++
+ .../freeradius/freeradius_3.2.7.bb            |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0018-Fix-Service-start-error.patch
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
-index 853f881754..4c39a290b0 100644
---- a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
-+++ b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
-@@ -5,7 +5,7 @@ Subject: [PATCH] Mosquitto now waits for network-online when starting
- 
- See: https://github.com/eclipse/mosquitto/issues/2878
- ---
--Upstream-Status: Pending
-+Upstream-Status: Submitted [https://github.com/eclipse-mosquitto/mosquitto/pull/2895]
- 
-  service/systemd/mosquitto.service.simple | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/3238.patch b/meta-networking/recipes-connectivity/mosquitto/files/3238.patch
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0018-Fix-Service-start-error.patch b/meta-networking/recipes-connectivity/freeradius/files/0018-Fix-Service-start-error.patch
 new file mode 100644
-index 0000000000..89795f4cd9
+index 0000000000..f1ec181bc1
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/mosquitto/files/3238.patch
-@@ -0,0 +1,25 @@
-+From 2cb8129793b54de7c68efe1a4a8e91c788077a8e Mon Sep 17 00:00:00 2001
-+From: "Roger A. Light" <roger@atchoo.org>
-+Date: Thu, 1 May 2025 11:58:23 +0100
-+Subject: [PATCH] Fix incorrect reference clock being selected on startup on
-+ Linux.
++++ b/meta-networking/recipes-connectivity/freeradius/files/0018-Fix-Service-start-error.patch
+@@ -0,0 +1,33 @@
++From e97ffc1f820beff12bb8084e6337168a1cd27540 Mon Sep 17 00:00:00 2001
++From: Liu Yiding <liuyd.fnst@fujitsu.com>
++Date: Sat, 20 Sep 2025 06:50:17 +0000
++Subject: [PATCH] Fix Service start error
 +
-+Closes #3238. Thanks to Eric Guin and karlri.
-+Closes #3168.
++change "fips=no" to "-fips"
++based on discussions with the OpenSSL developers in
++https://github.com/FreeRADIUS/freeradius-server/issues/5631
++
++Upstream-Status: Backport
++https://github.com/FreeRADIUS/freeradius-server/commit/59e262f1134fef8d53d15ae963885a08c9ea8315
++
++Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 +---
-+Upstream-Status: Backport 2.0.22
-+ src/mosquitto.c | 1 +
-+ 2 files changed, 3 insertions(+)
++ src/main/tls.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/mosquitto.c b/src/mosquitto.c
-+index ff83ef3da..2aea55237 100644
-+--- a/src/mosquitto.c
-++++ b/src/mosquitto.c
-+@@ -465,6 +465,7 @@ int main(int argc, char *argv[])
-+ #endif
-+ 	struct mosquitto *ctxt, *ctxt_tmp;
++diff --git a/src/main/tls.c b/src/main/tls.c
++index 2a348eb9bb..02a4c24f70 100644
++--- a/src/main/tls.c
+++++ b/src/main/tls.c
++@@ -3644,7 +3644,7 @@ int tls_global_init(TLS_UNUSED bool spawn_flag, TLS_UNUSED bool check)
++ 	CONF_modules_load_file(NULL, NULL, 0);
 + 
-++	mosquitto_time_init();
-+ #if defined(WIN32) || defined(__CYGWIN__)
-+ 	if(argc == 2){
-+ 		if(!strcmp(argv[1], "run")){
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
-similarity index 96%
-rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb
-rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
-index 75aaf7cf38..dcbcbadd59 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
-@@ -17,9 +17,10 @@ DEPENDS = "uthash cjson"
- SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
-            file://mosquitto.init \
-            file://2895.patch \
-+           file://3238.patch \
++ #if OPENSSL_VERSION_NUMBER >= 0x30000000L
++-	EVP_set_default_properties(NULL, "fips=no");
+++	EVP_set_default_properties(NULL, "-fips");
++ #endif
++ 
++ 	/*
++-- 
++2.43.0
++
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb
+index 5abdd97594..99d7d908bb 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb
+@@ -35,6 +35,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;lfs=0
+     file://0015-bootstrap-check-commands-of-openssl-exist.patch \
+     file://0016-version.c-don-t-print-build-flags.patch \
+     file://0017-Add-acinclude.m4-to-include-required-macros.patch \
++    file://0018-Fix-Service-start-error.patch \
  "
  
--SRC_URI[sha256sum] = "ebd07d89d2a446a7f74100ad51272e4a8bf300b61634a7812e19f068f2759de8"
-+SRC_URI[sha256sum] = "7ad5e84caeb8d2bb6ed0c04614b2a7042def961af82d87f688ba33db857b899d"
- 
- inherit systemd update-rc.d useradd cmake pkgconfig
- 
+ raddbdir = "${sysconfdir}/${MLPREFIX}raddb"
 
