@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D813CCCA46F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1E4BCCA475
 	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 13:04:45 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.web11.52849.1759151076244636623
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web10.53209.1759151079238861051
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Sep 2025 06:04:36 -0700
+ Mon, 29 Sep 2025 06:04:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JUl+oLsh;
- spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-634cef434beso3958783a12.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 06:04:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Imx28yY7;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-afcb7322da8so901095366b.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 06:04:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759151075; x=1759755875; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759151077; x=1759755877; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Ti+jnRDZ5+wma8uw9O0FXsaNtC6H96rs50RrSa6vdv4=;
-        b=JUl+oLsh+8N66LrnWmHqL8rQAEqTkZZc9sASav3NZuh8mwOT++HajtbKMH1niZqWxm
-         Mid2ea8ylyfzDJ3itUAwILyM9LFr8RdMIPPW6zpFRdPa3cy2sfJN5No4/DZC8cA+6tWZ
-         +oEcSjJ1YY3AEDtMgGRpkpE5MLEdoMZO7e7owa5M6GR0TrRDNJQ5ILjdM+t3uQz4oC4e
-         lCAiwoZ21xTTtTTaS/GMlESaS55Ha2Fvv0WzkOKmGcSl7lpxzVTQtoqlukrVdP8T2cvo
-         AiRUGzC565J3ZoncJCUitUth2RTcGRmSK4XJPPPBrw5pF9RAsSW8utwfvgjrUubkznzv
-         85hQ==
+        bh=Mp62psH3zfBM+QBVKw0HPkuAASM2nxNQ+CIVWj3HGCA=;
+        b=Imx28yY7xMa5xPXYfYbnyFv2Dfvuj/4dXWUNKxZY+42AitNlXbxxGIwkM+0VkNCDdt
+         twF527qMuDvkMc314Yl/4sFso56MqtbApf/kzxk0Y1iI6gplcbKOKA1BWnpp/SmhnXWo
+         zvbMwgztiNHlcpE+zFSw7DgY0sO408/TIDcy53nGeuH9DoMF7VY0bxStcpV7dLYy/9mt
+         Gz7U9L6uY6J4VlNDQ6ePZEjKNvhDnDH23FIWprXPUg1ZM/AD9VOmnZW6jAbrjOF7US0u
+         braMBexIP2lQMc5OI/PgVh3pg7ddR79L8mBth8nqVYm3jBmaJ51EapI3S3e0cS5eMnlj
+         IeMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759151075; x=1759755875;
+        d=1e100.net; s=20230601; t=1759151077; x=1759755877;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Ti+jnRDZ5+wma8uw9O0FXsaNtC6H96rs50RrSa6vdv4=;
-        b=TKh+oAhhrEtU8R6dcbtDJxrOUmsfOtyV9TVWtTiRWjUcNefZyOthDINHwLwEGiXO+m
-         LvYcpuyadKQGa/G739NBL5fsHqv+s8XPDigcU677My6fhNurDyzVdphclvkm+HRDOW51
-         Xkhy4/JIrnKpCzIfzzdQSuePLKTknUBTeH7ZA/DsAKeexlLCraz73w6VGTL4HweaAtxq
-         lVEGrS6ovcPWq3Z3F8ONHvPzzEpMl+zYRsze6rkW7WAepQuBaqJ/7nQN2ruuI2sPWYph
-         f1SuU3hL0uBEgCOJ8OWG9j22qNcZgb5t7/xCIptcWNfjpiWSC3TwSViojS2VoWGttfxD
-         WbkA==
-X-Gm-Message-State: AOJu0YwHilTpeorWP2JVTWzCCxNz9ynolwBV9Ow2oOOjj0lq4vhjGwnG
-	upryFw/z+QOShRodyKV9m+y9lVsV+qcv3mtUT0Nqm0mDvyrzlft6HjoFltOlvQ==
-X-Gm-Gg: ASbGncvWPlXEaQv9mdxtSTD3qmytCHRAGTINuVsJkJfMwcbNGO+7Eq84dg2iAxSGT46
-	t3Iu00hbBk0XgRg+hNFhgdLAQPN4okThbw/HPnKFPyTsaYUaNZ924DKT3zoFrdP46PKM8cAS1vO
-	DzxYn3CHthlobP789wCnTSrNpw3FvC+s+nHXifBTmvFT6CHkh5R0QLX6liRrDI6JBGJyPPEyFtg
-	oqO4g9jKWLhb/r9zmtzniHRa90PNnyR/zog11Dde0dHkd2b/4/mbBLWlHmxPDFoPYn3Op6j+Slc
-	S0+YYlnYvp64hCwQKAketsqPTpwGTIf8iaIV8FgZOc+wOAe9YSqIa5eQA3t7a/5UXoDZ5mJM7RG
-	m4KCDCyvZZOh/fKd7tinlTpI7yjX3Mp8=
-X-Google-Smtp-Source: AGHT+IFzZ0wG4yYT8v/sb4hVal7K1c7o9OaRx28GkfZ0l3Y6s+6/8ui1IabErNv5ZagtAAD5qBPHAA==
-X-Received: by 2002:a17:907:1809:b0:b27:edf1:f638 with SMTP id a640c23a62f3a-b413963a6d2mr51752466b.23.1759151074469;
-        Mon, 29 Sep 2025 06:04:34 -0700 (PDT)
+        bh=Mp62psH3zfBM+QBVKw0HPkuAASM2nxNQ+CIVWj3HGCA=;
+        b=gIJSzMwVBUskBUXOhuKgArxopdkz6yr4xfG5hp1dDa+0lF18GC6Zd2vyUmx9iFY73Q
+         2lSkxetL0ImaKJAuF9+kVvSuCO+jsz3e1Ml/Kx+S20Ab+SLNV/qlwTdSeNOdUHtZwnLM
+         W6Co85gRpLB7Z3pgv9FFrWgVGkOuaj0rVZF6GVI5lOqX91Kb5LPL9cWWz8gQemhYrjVj
+         hjTFeJh+ipJ++P4VdmNK7sLngW3mNGeyPSM6A0bmCANu78zP63ylBk+DWzcrifJAddWx
+         m4z//THtx2U7+fahiHLfPGox8wraeYqvES94UuGjk2tMScOuvhdrIBw7/kOhJcpiWPJ7
+         UM4w==
+X-Gm-Message-State: AOJu0YyvfjXUD88no7EniJFnE0Jq3AMdeW0iL9778PsS06CMKodaqpUT
+	UX47pj2slS+rjW2uk1Z40o7YZ5VRXZ9QDTlyxKAglMfJpwMD6Qnyok0AWP2iBw==
+X-Gm-Gg: ASbGncsrAJSICsRtgHfpOb7dvDN2W9ytc/WQhCv030VO6AmgISQk99eIfcEH9KwfGZA
+	ik7dQKkR6dLM00L9JG8mJm5knuNzvG1PFCF4E/JGNklTf+EM+dorOW6S59MjkAlmpCQeLaNXNaR
+	e9/Lyc8b2XHGjtvAmyJY/ZR0azU87e0SxibtL/8BL6tljG+gMx0aFhzfgDGMiDZUTxTa/aZqS+d
+	IzR/r2vZz5pgQF31p13YVBKjsZ6XSsMpqkbn9d8fvwhvT/Ycxzx/FG87KAf8hBRZigmuTqesbIV
+	vCajlmXxCB91VlkCjlUWXFs/P4Apgbw0KY3iYQ/eqPlQiQ5ApUOALbR+a1apBQ/eMlV3Os0/xh+
+	lEilxa7G4ifOEk3qnZrre/wprTz93q84=
+X-Google-Smtp-Source: AGHT+IHnqd8p+uMj4XYV5rFgRi9DR04i2yFw8lp/nwvSFB6FRefNMl5fFY8q5nhzP48BIf7xvd5KkA==
+X-Received: by 2002:a17:906:6a23:b0:b24:a0e5:eb47 with SMTP id a640c23a62f3a-b34bd440ed6mr1706479266b.36.1759151077379;
+        Mon, 29 Sep 2025 06:04:37 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3cbd81bcfdsm335426166b.82.2025.09.29.06.04.33
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3cbd81bcfdsm335426166b.82.2025.09.29.06.04.36
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Sep 2025 06:04:34 -0700 (PDT)
+        Mon, 29 Sep 2025 06:04:36 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH 08/22] tnftp: switch the SRC_URI to https
-Date: Mon, 29 Sep 2025 15:04:11 +0200
-Message-ID: <20250929130425.2912077-9-skandigraun@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH 11/22] uftp: upgrade 5.0 -> 5.0.1
+Date: Mon, 29 Sep 2025 15:04:14 +0200
+Message-ID: <20250929130425.2912077-12-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250929130425.2912077-1-skandigraun@gmail.com>
 References: <20250929130425.2912077-1-skandigraun@gmail.com>
@@ -67,29 +67,46 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 13:04:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120021
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120024
 
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Changelog:
+==========
+-On very low speed transfers (<10Kbps) sessions would time out due to a very
+  large interpacket transmission interval.  Fixed by putting a lower limit
+  on the advertised GRTT of of the interpacket transmission interval.
+-Sending of ABORT messages on early shutdown would sometimes fail due to
+  OpenSSL cleanup functions running before application cleanup.  Changed the
+  ordering of atexit() handlers to ensure OpenSSL cleanup happens last.
+-Fixed missing timestamp update when clients read CONG_CTRL messages
+-Fix to GRTT handling on server to ensure it doesn't fall below minumim.
+-Fixed bypassed checking of existing files on client for backup
+-Various logging fixes
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 8f4dc754cf2a01905211a89980f7a492c33b71a8)
+(cherry picked from commit 0a58426ed073d48533276688445df3777776886b)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-networking/recipes-support/tnftp/tnftp_20210827.bb | 2 +-
+ .../recipes-support/uftp/{uftp_5.0.bb => uftp_5.0.1.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/uftp/{uftp_5.0.bb => uftp_5.0.1.bb} (84%)
 
-diff --git a/meta-networking/recipes-support/tnftp/tnftp_20210827.bb b/meta-networking/recipes-support/tnftp/tnftp_20210827.bb
-index 8c5892668d..9b1b25f152 100644
---- a/meta-networking/recipes-support/tnftp/tnftp_20210827.bb
-+++ b/meta-networking/recipes-support/tnftp/tnftp_20210827.bb
-@@ -14,7 +14,7 @@ LICENSE = "BSD-4-Clause"
+diff --git a/meta-networking/recipes-support/uftp/uftp_5.0.bb b/meta-networking/recipes-support/uftp/uftp_5.0.1.bb
+similarity index 84%
+rename from meta-networking/recipes-support/uftp/uftp_5.0.bb
+rename to meta-networking/recipes-support/uftp/uftp_5.0.1.bb
+index 301e0fa607..6d5cf4b628 100644
+--- a/meta-networking/recipes-support/uftp/uftp_5.0.bb
++++ b/meta-networking/recipes-support/uftp/uftp_5.0.1.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/uftp-multicast/files/source-tar/"
  
- DEPENDS = "ncurses"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/uftp-multicast/source-tar/uftp-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "562f71ea5a24b615eb491f5744bad01e9c2e58244c1d6252d5ae98d320d308e0"
++SRC_URI[sha256sum] = "f0435fbc8e9ffa125e05600cb6c7fc933d7d587f5bae41b257267be4f2ce0e61"
  
--SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/tnftp/${BPN}-${PV}.tar.gz \
-+SRC_URI = "https://ftp.netbsd.org/pub/NetBSD/misc/tnftp/${BPN}-${PV}.tar.gz \
-            file://0001-libedit-Include-missing-header-stdc-predef.h.patch \
- "
+ DEPENDS = "openssl"
  
 
