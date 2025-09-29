@@ -2,62 +2,61 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48EE8CAC5B0
-	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 16:55:43 +0000 (UTC)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
- by mx.groups.io with SMTP id smtpd.web11.3338.1759164933564272009
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66E84CAC5B0
+	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 17:02:13 +0000 (UTC)
+Received: from mail-yx1-f51.google.com (mail-yx1-f51.google.com [74.125.224.51])
+ by mx.groups.io with SMTP id smtpd.web10.3701.1759165332888366551
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Sep 2025 09:55:33 -0700
+ Mon, 29 Sep 2025 10:02:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WKgzpzUr;
- spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-71d71bcab69so45758567b3.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 09:55:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Rm+aJi2k;
+ spf=pass (domain: gmail.com, ip: 74.125.224.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f51.google.com with SMTP id 956f58d0204a3-6360397e8c7so5134394d50.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 10:02:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759164933; x=1759769733; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759165332; x=1759770132; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GcDk4rUJqAz0yICNPKaUfRSeQ100fO6zPc1tmSo7ZRc=;
-        b=WKgzpzUrMOsUXq8m+iDFa7oRnC3cHIm+3i8qVczbzUJXJC6F3rgdmLRNOM8CeY399n
-         tMrufwj4uUrUIMDAo944uL1emWQRHvly2UZuY4k98iI/gKfnKVjQs1DdDZtPvtSPWCUR
-         n+x3G5CgjMudTA2lruy2hgT5Eof3cdS8STV8gamYnCUi7T/pRz3hhLQDEAIKhtSSPBkC
-         YYT8GpbHkfIdK++Pz5wz/3q6tb8dv9x51/e0HD2f1w7ECk0jKBFojyjsqBz2j8OIO9QO
-         heg1VTG/Vkm5enQBG0Ier4Y8qhR3Gu13VnN3cd55/S5JhwMfTtckwJqo/Av5pss/hYkb
-         4+3Q==
+        bh=HVC1GF6kl1aoWD2lZ91Pswj4cUdTa1Vb9ZYToDhff90=;
+        b=Rm+aJi2kJdfRzw89mlEMoEjHNHSDOy1KppNWT1xF6INXrn+n7SuQ2M2opXzR2lkO8z
+         QmzVV+5T6aNazhnK4g1j1vLUjdcoX2p6W8vEMzo0UNlG9PSSBdTKonbXR18pCuQJubAh
+         TzH5hwz11KVPuufHnqsLERoRqL1SsjTOK57+RqDG83EgjRmysoWs1IptTxOeiJSqZzKe
+         QGNv0TRG+hadZfQbvxS2+SojtngCtnB11EUHYc43I/vblS3KGhQcq1YHseOP4M48QAKi
+         fTEPD+Wlchn6DODqNjaMGUN1DQHwFyccsTwtb25wKCYBqXtNwSYpxAVdxoZ9jYx2kImQ
+         +thA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759164933; x=1759769733;
+        d=1e100.net; s=20230601; t=1759165332; x=1759770132;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=GcDk4rUJqAz0yICNPKaUfRSeQ100fO6zPc1tmSo7ZRc=;
-        b=HBSj7EcDoXa9EsCPP3p+BfQ6a6H9ZFLcUG2acNp6OeDvT8b35F7e+SP5xv+0Uf6BMQ
-         nwBnc7Ha5QONGhk6zLUXZFvu4PkBQ7J6w1i/r5+VKF7F3qJTYZi/4hGwsl+ZY6trRJL2
-         R1hMOUvTO3BXBshBmdUPKbZVU8yXpFtCj9GseW/CJNlw2VHr1cu0ALkEerqrtgjSuOLw
-         K8nFCZO72JF84YUcmJ0G04+i/wCuQ8BwvD0c/E/4szmUGKe3wsCiU6TqRpWviTgaQSuI
-         bh4DYWtYlwj6f6t+KMxPwnp1CaLrEDNeU9zDPJBJtev1pdaDnTP9xcuLPiEk5M9rn6Cp
-         y0pQ==
-X-Gm-Message-State: AOJu0YwALTIpbI/TamOg7my0L/rG+VFHG1LpYw7FXKMIraiRe90nRCG4
-	+B7XikgADnByV/sOShZmRVfqgxZX4qwZxb01ck1yqZN0ga820A8Ho4dK+yyhqCEgDv5syJbhbMD
-	GehpiJc2SYyqxP9tePCWRYe/eW308wO69Bcs/
-X-Gm-Gg: ASbGncvOszEclLuShQY/WUZOTKNLEXdXYqTQpL1TLme7GyxC6yUfrUUVZKLyGAnXUYP
-	ilz+0gJ2v6PHYmyeQ2UMsxukGycJK5TKC1M5GziIpYIUY8B9S4oovc2lWbcDFKl5yVBphJ55+2J
-	aVr+GlurjmtwhcrULV7r0KE2THm8mFNFbwGavU8XStzzc53eC3lq46WEaVrj/Rr6S6lob667B3r
-	UG3XKAe3I7griCHduH9X1Gsq6xODMDtQBjNlYiXsM/yPPr+BleNgFrXY/101i1MTe0+4cVeE4xH
-	mwpxy/aFDvVraIpbbXeCsr6McAxo+dF7lUDRSAlf6mtC5nJ45BXwyktnbwaws67/HiNA
-X-Google-Smtp-Source: AGHT+IEy8yxX1OwmhJGnwuMsR3adpWuqx1d8hnj5IqWuRpHH4lFonOAdcZHfWVXeWs3rOqq5NiNEExEYbBFujNuxjrI=
-X-Received: by 2002:a53:c202:0:b0:635:4ed0:5723 with SMTP id
- 956f58d0204a3-6361a83517amr15718792d50.39.1759164932624; Mon, 29 Sep 2025
- 09:55:32 -0700 (PDT)
+        bh=HVC1GF6kl1aoWD2lZ91Pswj4cUdTa1Vb9ZYToDhff90=;
+        b=hlTBwPUmA2njXjq5TVoWnXwSOuvv3txyQkVGS6rVX0OXdJ5+lVVRaDhsx39W7SndPb
+         3k4gRqpGOoaZxY+0T4i/YElnipHzZLOutSOWaVDmLT+5LZj8tsRSe8bqCC++NgjC6nbR
+         7UD7ONQ1QL43gCHr43byVZxWi/yzfHbNjbx07WR4ggr77CPi1y9McYvN5dQE+iJ5wQOk
+         0FmTLS2woWLKFtno4nITMIoA7JYja9h0tKIMYM3Xl8WzLxGR//d7IkKM2vg82Rcp8nK4
+         6zZ+cSmbLWQUXDOpp3nCccJ9FEpEIfh88gf0kbqR77JrZndKX/G9D3r74M4iBZd9GMqT
+         Rpxw==
+X-Gm-Message-State: AOJu0YwjxcHSk0PJI1jH7jZAYrT7E+gPYGjENHwojMvtkt2MdRpG7r+y
+	NM9vrdnonq7wGp3+DN1eJvg9Gf+EzjTKt3vviJ/bW/cpF0uENO0idn3jO3Y+jbw6xpaSqWuifn4
+	el2QfeMbhpG3H+zdnbZ933CQGgExpZYfMeE9r
+X-Gm-Gg: ASbGncuyyBkdgjsBtOB7pYCE/UG+4i5FOoWl4TTaEikFymno7ZcKsSsb/rLasUnp3Ev
+	1GScA1dn1qDeKCj55xZ5wkeUQatdgrCUnWW+3+leT+7Kzd/xHhoPDIgo5b36JdsaPu4dtgSt3mG
+	t63SGBOsIrFwLGtPdD2B+6LOBN2qXteW6RWLADRm/8RMH3xvuUI+cS85yO+uozVmUyFfpi2bsi3
+	NYBHipo1MLMzI5/N5+N6N9C8Bvo+Sto56K3phkXUuEXTty+7bnIzn7MUXCBerF416a0SMZdsy8V
+	6osRC6hohvFG46+NYgZatcIbA25fy7VyDmglncrPdlkoSAIAkM+/6BGlrg==
+X-Google-Smtp-Source: AGHT+IFscjHaLeFy/dKn9sWpptLfQiO0Pd0sucsKoQgDMvKY8sMRWCNqeJ1SSubxIeUNgIIXUpmvhbnlB229dSWH2nc=
+X-Received: by 2002:a05:690e:4341:b0:62c:f19f:794d with SMTP id
+ 956f58d0204a3-6361a833c7emr15965956d50.36.1759165330045; Mon, 29 Sep 2025
+ 10:02:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250929130425.2912077-1-skandigraun@gmail.com> <20250929130425.2912077-3-skandigraun@gmail.com>
-In-Reply-To: <20250929130425.2912077-3-skandigraun@gmail.com>
+References: <20250929130425.2912077-1-skandigraun@gmail.com> <20250929130425.2912077-17-skandigraun@gmail.com>
+In-Reply-To: <20250929130425.2912077-17-skandigraun@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 29 Sep 2025 09:55:05 -0700
-X-Gm-Features: AS18NWBBr4yNsNpT2rCcrqvALDLNVCqynCaz6B-DzHPt8jpbmiRmf53qdBsH3BU
-Message-ID: <CAMKF1sqK_wGaW0P6uy1b+OQ24dU6nQWcYjP2DmWr_CSEtWzcAw@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][kirkstone][PATCH 02/22] lksctp-tools:
- upgrade 1.0.19 -> 1.0.20
+Date: Mon, 29 Sep 2025 10:01:43 -0700
+X-Gm-Features: AS18NWD2Z_hhmrKcURpnJNCq8n1QGByEkv2gENFaqWUI7i0Q1YWFZ7k9GQP28-k
+Message-ID: <CAMKF1srcdO5qpYewHLUNEAE-odDrcwUO0mzAiziaK66S4+Gp7Q@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][kirkstone][PATCH 16/22] iwd: upgrade 1.26 -> 1.27
 To: skandigraun@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
@@ -65,90 +64,60 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 16:55:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120039
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 17:02:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120040
 
-On Mon, Sep 29, 2025 at 6:05=E2=80=AFAM Gyorgy Sarvari via
+is this only bugfix release ?
+
+On Mon, Sep 29, 2025 at 6:06=E2=80=AFAM Gyorgy Sarvari via
 lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
 wrote:
 >
-> From: Yi Zhao <yi.zhao@windriver.com>
+> From: wangmy <wangmy@fujitsu.com>
 >
-> ChangeLog:
-> https://github.com/sctp/lksctp-tools/blob/v1.0.20/ChangeLog
+> Changelog:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>  Fix issue with hidden networks on connection error.
+>  Fix issue with directed roams if already trying to roam.
+>  Fix issue with checking for connected in FT frame event.
 >
-> Drop redundant variables LK_REL, SOLIBVERSION and SOLIBMAJORVERSION in
-> recipe.
->
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit 162039c327f065d87730565b18fdc3986844a065)
->
-> Adapted to Kirkstone.
->
+> (cherry picked from commit 9f359e3eb01cc0b1511569573062c40909db3ef6)
 > Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 > ---
->  ...lksctp-tools_1.0.19.bb =3D> lksctp-tools_1.0.20.bb} | 12 +++---------
->  1 file changed, 3 insertions(+), 9 deletions(-)
->  rename meta-networking/recipes-support/lksctp-tools/{lksctp-tools_1.0.19=
-.bb =3D> lksctp-tools_1.0.20.bb} (80%)
+>  meta-oe/recipes-connectivity/iwd/{iwd_1.26.bb =3D> iwd_1.27.bb} | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-connectivity/iwd/{iwd_1.26.bb =3D> iwd_1.27.bb} (=
+94%)
 >
-> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.=
-0.19.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.20.=
-bb
-> similarity index 80%
-> rename from meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0=
-.19.bb
-> rename to meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.2=
-0.bb
-> index 4a9d2f54d9..51d9605624 100644
-> --- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.19.bb
-> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.20.bb
-> @@ -8,10 +8,9 @@ LIC_FILES_CHKSUM =3D " \
->      file://COPYING;md5=3D0c56db0143f4f80c369ee3af7425af6e \
->  "
+> diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.26.bb b/meta-oe/recip=
+es-connectivity/iwd/iwd_1.27.bb
+> similarity index 94%
+> rename from meta-oe/recipes-connectivity/iwd/iwd_1.26.bb
+> rename to meta-oe/recipes-connectivity/iwd/iwd_1.27.bb
+> index 6248850413..dc29bc3fd5 100644
+> --- a/meta-oe/recipes-connectivity/iwd/iwd_1.26.bb
+> +++ b/meta-oe/recipes-connectivity/iwd/iwd_1.27.bb
+> @@ -8,7 +8,7 @@ DEPENDS =3D "ell"
+>  SRC_URI =3D "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar=
+.xz \
+>             file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-fo=
+r-e.patch \
+>             "
+> -SRC_URI[sha256sum] =3D "0ff4541c2b7f14ec010c3cbd1f02350f1b58cb0c103412db=
+22550e90d8040d6b"
+> +SRC_URI[sha256sum] =3D "013b4a0a79629c20d915954fc3b5d0620ef6e0d6065db3c3=
+42f4b3f9111f46ec"
 >
-> -SRCREV =3D "05b50d379ff0037de4957bb2a1befcce88b70225"
-> +SRCREV =3D "311fcdeb5cb41612d4be66b16f0f2ad6675a6af8"
+>  inherit autotools manpages pkgconfig python3native systemd
 >
->  PV .=3D "+git${SRCPV}"
-> -LK_REL =3D "1.0.19"
->
->  SRC_URI =3D " \
->      git://github.com/sctp/lksctp-tools.git;branch=3Dmaster;protocol=3Dht=
-tps \
-> @@ -34,19 +33,14 @@ do_install_ptest () {
->      done
->  }
->
-> -SOLIBVERSION=3D"${LK_REL}"
-> -SOLIBMAJORVERSION=3D"1"
-> -
->  PACKAGES =3D+ "${PN}-withsctp ${PN}-utils"
->
->  FILES:${PN} =3D " \
-> -    ${libdir}/libsctp.so.${SOLIBVERSION} \
-> -    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
-> +    ${libdir}/libsctp.so.* \
-
-do the versioned shared libs still follow same conventions as prior release=
- ?
-
->  "
->
->  FILES:${PN}-withsctp =3D " \
-> -    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBVERSION} \
-> -    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
-> +    ${libdir}/lksctp-tools/libwithsctp.so.* \
->  "
->
->  FILES:${PN}-dev +=3D " \
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#120015): https://lists.openembedded.org/g/openembedde=
-d-devel/message/120015
-> Mute This Topic: https://lists.openembedded.org/mt/115494436/1997914
+> View/Reply Online (#120029): https://lists.openembedded.org/g/openembedde=
+d-devel/message/120029
+> Mute This Topic: https://lists.openembedded.org/mt/115494451/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
