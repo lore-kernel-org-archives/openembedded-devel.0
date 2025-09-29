@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0C7ACAC5B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD4AECCA470
 	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 13:04:45 +0000 (UTC)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
- by mx.groups.io with SMTP id smtpd.web11.52856.1759151084210927144
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web11.52855.1759151082585142443
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Sep 2025 06:04:44 -0700
+ Mon, 29 Sep 2025 06:04:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cGqySA+M;
- spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-b2ef8e00becso493525966b.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 06:04:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jlm1txpX;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-62f24b7be4fso8287921a12.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 06:04:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759151082; x=1759755882; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759151081; x=1759755881; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=P5BpWLwLc/nxA3fX/qrx6G6h5VqUiWedWpqNCxm7JH0=;
-        b=cGqySA+M+f+Gp5P4/9jXic+lORJ9JvnmyrN3qfoAFAUT52ZcoynxLTt21Z1RuB+YuL
-         l3XdD5hUNw4uLmcXiKn8W+sU4AjStVu849YHRcU4TR6nNHPYcWEwXxeZWbouKCTuzDB0
-         RKyzsgl4vNjbS5uflp4JQiBOTSv00061xz0lKWsQGdAmpzKUFmXpC2Qe4pCxYXdStQSq
-         sUH98/GOrPup6QzM6gV/CNIujxTgj9uY7OEJp21Rb+BEXW84fGxeE9wguJ1CLQG2bkX2
-         HUDQ7/jBPLC106zsfWAJWIiNqkRu8ndxXlzosgGnVrZeFYYR3z2ChJz/57D7Ktzut5mb
-         MpyQ==
+        bh=CRlfgFVlHe6tn4vn/imKZf2idnusLeze8LYffEvwN1s=;
+        b=jlm1txpXrgrIQW8vZNodw6x7fdowRuxbg8UKytgcVXmCEGoJPm0JuGpvgw2UXXpCc9
+         /fJp2ZHQL8cZl9TkmYSzfGM61kZWoEnF7J0uKuCP/RKySk5s1JqWH6ICL+MHxvcu8crU
+         fM3+V2tTiLdtP1SagfDYc4Hp8RvMHDDUNRVPzwdhqbYff8VVDy+9h8M7Iq/I3uF+Dh97
+         SB4XtggLCxLYGR4BvnMPgXBFGJIJAcWrp4KJLU8cDJFGeAnv5w2BJBHnwBucEHt3cG5w
+         bRMEdCBIwN7UNYJz+rjabiudAh4G9NqHviuczHVuF99mI5DxZ0JkImObw0Dhe+j1RNrh
+         1OSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759151082; x=1759755882;
+        d=1e100.net; s=20230601; t=1759151081; x=1759755881;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=P5BpWLwLc/nxA3fX/qrx6G6h5VqUiWedWpqNCxm7JH0=;
-        b=ZFNWeOcWEki7ZEMS3he0nooUyaroP97PMIgPgSplVm4KCafkm7X459+I5XhAHaFKid
-         yynhOGSaKUKEg8zDv6rKWb0YjBJV5rfR9mvFymWAsxFCcXkVFlTLQL/JZr0vBlIH6dhE
-         DcKaZV14lkN328yjML0GX/5eMIt1iB8rtIXGroliiPwQfFDPgD648116mMSkQXdDPH/+
-         rqpe3tc6B+cf1QxCKfGSAVogVfE2bNsmgTqFNEZ0JcUoAS+0Z4DtPw1HsEs2W6A0RXri
-         rLDn6ccIa3A3oVzW2R6M4Vkvg4p8DIYWxiVKzbLmtZfnUxNLnRNZ6EmTtyCr/sbKqu2E
-         pfZw==
-X-Gm-Message-State: AOJu0YzPRmDoW03pq7citsaYfU/TtH9Acl3F+jKbbAMhJ9PUii/ev1vw
-	DzR/FJwACeDqTAxfqzoynflrsSiEewEMtCH0QhK1UhebmXBMqGn18OTiGItQFg==
-X-Gm-Gg: ASbGncs8TwXhMPPN7yraoGDE5u2Ggy8/NBd6AxsvG/fCOFJ5i6TvHaLJbnxsV0taMaZ
-	cigLkDJAiBczFCw7FxAYMp0MoHG5jR1+Mppxr4Ivg169No7z4c+ZIa9ALHkYBl4shOAt5XCNqiK
-	2R+hy8egC/rBvkR92kyn3zNJWujRdcLTGQi0XPP7tFSVnmkhvYk9COuYNzAN8zfXiUT8/dTnpHr
-	f+09Yy7O/pTD+SFgkYgflGoLU0MTlqDgolFjR2LAq3eJNtSnD8GO68o3gbDle9L1bMclWb6WyOp
-	Jr1CMQHYLBm3kedb/AjH0uwT8PcL6x4dEEOrlIT/mGe7CeNYU4LS4C/FasH1bIXdHP0hiBceWQ9
-	IqP9ySte0dznfc5IgnsvT
-X-Google-Smtp-Source: AGHT+IHpdAmhnnG6FuZZDo2FCu+1DitnCUyMkJIt70RVThVYsJjLEkRy2R4/JnjCQTKvuvD+nrvD9A==
-X-Received: by 2002:a17:906:391:b0:b3e:151b:849e with SMTP id a640c23a62f3a-b3e151b86d4mr370244466b.10.1759151082397;
-        Mon, 29 Sep 2025 06:04:42 -0700 (PDT)
+        bh=CRlfgFVlHe6tn4vn/imKZf2idnusLeze8LYffEvwN1s=;
+        b=fiEzSoKTMJ5D3+/bay/H/2vyrpXPD2NLDRMrs8DiOhOp9aLK907d7yRx0UURYNnCYW
+         yLVzKGWKv8DhEcnZb6SG5rtpk4hfAs3Bz8+pNC6Yh53WDrjZnhvsZoEJqZdcyzXsBkdi
+         M/obgVgjeYeUFRA1yqM9rJz7Ehec95x3t1+Ivk4rtqt/N7bjkJ1mOylpL7/dZQRhgrb2
+         WKjYTZ00uoj2DVo0ZjJmCI6DUEHxPFlMe0+Bchjo0rl1lOrpi7t539kUvndbVw5g8d3t
+         IvpQKPXMRZrjhngY4Xx7aGTBhM3jLcqxSd9DMHXh2Fv2fT7Cf78FbnUNmsYUmHWDBlcM
+         d5Qw==
+X-Gm-Message-State: AOJu0YzsM7HMGrHj1+Kpf/DhDS7U8lACaG7T2w30M1daAHnSksw7BrnM
+	VGkUtDs9sw955rqgCZG5rXQXDXnw6liGGuEX3i7aylVWDw1gFgAOXpliF0xhIw==
+X-Gm-Gg: ASbGncvjG4PPZ84bNlTk9zxQw+xzE3w+EvL8GjfcTfvK87Uro3+LVfHpDkXarD77GZW
+	uTyicDeMVnMKLNY9jSgrmVIpGG1fZF4ZbYkGXDcbLOYgUxRRtFPic8ztdDKxBf/Qkm2S4zZbsSb
+	u+vHWAiyQeth49th5scvsxxqMrCbP+p+HXYINFdMpLaorU/BUKo01nk/Qp0jhoTSq9UiCg5wyHa
+	l71y36q4EC7PhbqEh0u7JvGxgPnQGufQeGFDhPbhqN3Xl7DiZyTHLvJfGXIbO8r7FcP15hjpHlQ
+	WZm0eb9xfEqFf2nHhWGGCt/+5OEUaupW35WmtjLpgDCynN/rRtEtR/hiiP1N5665Npcu1b7L63T
+	cl7FFDGY3obqpOK2Hvy6Q
+X-Google-Smtp-Source: AGHT+IH5MwtTvYMsXqV4LPiuqnq6ijJwLoXC7crGibElabh3sdDlgALqGdswFAsRJ62omMCU0vs6kA==
+X-Received: by 2002:a17:907:3c96:b0:b04:563f:e120 with SMTP id a640c23a62f3a-b34bc96e73cmr1957871666b.53.1759151080708;
+        Mon, 29 Sep 2025 06:04:40 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3cbd81bcfdsm335426166b.82.2025.09.29.06.04.41
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3cbd81bcfdsm335426166b.82.2025.09.29.06.04.40
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Sep 2025 06:04:41 -0700 (PDT)
+        Mon, 29 Sep 2025 06:04:40 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 17/22] debootstrap: Update SRC_URI to point to valid URL
-Date: Mon, 29 Sep 2025 15:04:20 +0200
-Message-ID: <20250929130425.2912077-18-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 15/22] flashrom: upgrade 1.2 -> 1.2.1
+Date: Mon, 29 Sep 2025 15:04:18 +0200
+Message-ID: <20250929130425.2912077-16-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250929130425.2912077-1-skandigraun@gmail.com>
 References: <20250929130425.2912077-1-skandigraun@gmail.com>
@@ -67,31 +67,95 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 13:04:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120030
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120028
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
+0001-typecast-enum-conversions-explicitly.patc
+removed since it's included in 1.2.1
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 2db438f241b966ed8a0d26f52c2fc2fe395cdcc7)
+(cherry picked from commit d8e50a9507da7441b1694b025df17b0c8484d44d)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ ...typecast-enum-conversions-explicitly.patch | 45 -------------------
+ .../{flashrom_1.2.bb => flashrom_1.2.1.bb}    |  4 +-
+ 2 files changed, 1 insertion(+), 48 deletions(-)
+ delete mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
+ rename meta-oe/recipes-bsp/flashrom/{flashrom_1.2.bb => flashrom_1.2.1.bb} (79%)
 
-diff --git a/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb b/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-index b2a204403e..3e59af8e2e 100644
---- a/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-+++ b/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-@@ -4,10 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
+deleted file mode 100644
+index f2302dbcc3..0000000000
+--- a/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
++++ /dev/null
+@@ -1,45 +0,0 @@
+-Upstream-Status: Backport
+-Signed-off-by: Ross Burton <ross.burton@arm.com>
+-
+-From 3a0c1966e4c66f91e6e8551e906b6db38002acb4 Mon Sep 17 00:00:00 2001
+-From: Angel Pons <th3fanbus@gmail.com>
+-Date: Wed, 27 May 2020 12:15:51 +0200
+-Subject: [PATCH] libflashrom.c: Use casts on enum conversions
+-
+-This allows flashrom to build with GCC 10.
+-
+-Change-Id: I2166cdf3681452631ef8e980face2924e9a6c81a
+-Signed-off-by: Angel Pons <th3fanbus@gmail.com>
+-Reviewed-on: https://review.coreboot.org/c/flashrom/+/41775
+-Tested-by: build bot (Jenkins) <no-reply@coreboot.org>
+-Reviewed-by: HAOUAS Elyes <ehaouas@noos.fr>
+----
+- libflashrom.c | 6 ++++--
+- 1 file changed, 4 insertions(+), 2 deletions(-)
+-
+-diff --git a/libflashrom.c b/libflashrom.c
+-index ab7e364..c20d9c7 100644
+---- a/libflashrom.c
+-+++ b/libflashrom.c
+-@@ -188,7 +188,8 @@ struct flashrom_board_info *flashrom_supported_boards(void)
+- 		for (; i < boards_known_size; ++i) {
+- 			supported_boards[i].vendor = binfo[i].vendor;
+- 			supported_boards[i].name = binfo[i].name;
+--			supported_boards[i].working = binfo[i].working;
+-+			supported_boards[i].working =
+-+				(enum flashrom_test_state) binfo[i].working;
+- 		}
+- 	} else {
+- 		msg_gerr("Memory allocation error!\n");
+-@@ -226,7 +227,8 @@ struct flashrom_chipset_info *flashrom_supported_chipsets(void)
+- 			supported_chipsets[i].chipset = chipset[i].device_name;
+- 			supported_chipsets[i].vendor_id = chipset[i].vendor_id;
+- 			supported_chipsets[i].chipset_id = chipset[i].device_id;
+--			supported_chipsets[i].status = chipset[i].status;
+-+			supported_chipsets[i].status =
+-+				(enum flashrom_test_state) chipset[i].status;
+- 	  }
+- 	} else {
+- 		msg_gerr("Memory allocation error!\n");
+--- 
+-2.25.1
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb
+similarity index 79%
+rename from meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
+rename to meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb
+index bdc3ca084c..b2592d294b 100644
+--- a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
++++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.1.bb
+@@ -4,13 +4,11 @@ HOMEPAGE = "http://flashrom.org"
  
- DEPENDS = "gtk+ dbus-glib dbus-glib-native imagemagick openobex bluez5"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.bz2 \
+-           file://0001-typecast-enum-conversions-explicitly.patch \
+            file://meson-fixes.patch \
+            file://0001-flashrom-Mark-RISCV-as-non-memory-mapped-I-O-archite.patch \
+            file://0001-hwaccess-use-__asm__-as-is-done-elsewhere.patch \
+            "
+-SRC_URI[md5sum] = "7f8e4b87087eb12ecee0fcc5445b4956"
+-SRC_URI[sha256sum] = "e1f8d95881f5a4365dfe58776ce821dfcee0f138f75d0f44f8a3cd032d9ea42b"
++SRC_URI[sha256sum] = "89a7ff5beb08c89b8795bbd253a51b9453547a864c31793302296b56bbc56d65"
  
--SRC_URI = "http://tadas.dailyda.com/software/obex-data-server-${PV}.tar.gz \
-+SRC_URI = "https://ftp.osuosl.org/pub/blfs/conglomeration/${BPN}/obex-data-server-${PV}.tar.gz \
-            file://obex-data-server-0.4.6-build-fixes-1.patch \
- "
--SRC_URI[md5sum] = "961ca5db6fe9c97024e133cc6203cc4d"
- SRC_URI[sha256sum] = "b399465ddbd6d0217abedd9411d9d74a820effa0a6a142adc448268d3920094f"
+ S = "${WORKDIR}/flashrom-v${PV}"
  
- inherit features_check autotools-brokensep pkgconfig
 
