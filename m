@@ -1,110 +1,103 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <Divya.Chellam@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EAFECCAC5B5
-	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 06:12:52 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web11.47328.1759126364140827290
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4359BCAC5B5
+	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 10:27:34 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.50427.1759141648070397576
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Sep 2025 23:12:44 -0700
+ Mon, 29 Sep 2025 03:27:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PEdo4Bu4;
- spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-634c01ca9dcso4123274a12.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Sep 2025 23:12:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759126362; x=1759731162; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=btLbyeQp+5a2X6OqsHey/f69pKggAL/djOGTihwBPoA=;
-        b=PEdo4Bu4Gu9T99r+9TWKrhK02+rT+/JwGZDWpJOJZMHgYFPhpoKmPtDvIgP5eonX+m
-         lbrZ02toESYctcwp9wm+uJvZglH/roOVcbewDnbzUJm8+YGDNMF+JhkTBNXwPCvm/qPw
-         bhxKF+kqLxJFA8zsOAUM/CjE96ou8ZkcqBTY5ThszP8NVvgWjmCPxqnvm5WGX02L9tRO
-         z6vgJ17rbqMHM1IzTJU1y37yC2YwLG5B81hr2ujc2Zw2kbV+Dxo0wzf2mn2lsVYZrHHJ
-         QbHU3FBkkmIs1KDJw36D3MtW16yWxMU1AFr0oilsc+Cpcm7Ps1yQm2IQHfPuCbQ1sf31
-         BLww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759126362; x=1759731162;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=btLbyeQp+5a2X6OqsHey/f69pKggAL/djOGTihwBPoA=;
-        b=gMB+3kTRuJpjSqTyPklnDYKG0EGiLTwohV4+RIza52TLhF6uiO95RHizp6c7bxOv35
-         4aMbuje0YtJNv0Xf250kpevrkw7aEAfNYSKDLwVZ7HF5Fy3LHhttsXOdNsla3WJwgUw2
-         oaExYeBw2IboKEsov1wUQyYLY4JYP6GhZoM+F0VOOcz76zJWQjtvIub77HFgnxT6U+3G
-         y9EvsBNnm4Dnj74wuhUuGd+6ibzqnLU4xdQjT8V+qHzF7IsxcV4ZZpIISBnPI3OiC5SI
-         LuQDnyXrkZ89M2BMyLtkeJxOP8nv3XD/sPsiDxgeWznJABt0gB6lxjwUWHRgEgTR3ddS
-         eo5g==
-X-Forwarded-Encrypted: i=1; AJvYcCUbuq8/pUbupstz74RD4cr1Focr/FuB+sFw/n1Vi/QIuOCOa3fdfUKNKqySVg5axnbtYNkQleIRVh7utKbwv5MYN8o=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwS/bZhDgCLc5ftLU0R09HidcFzZL22YHAzeELtzXStFra9/lmm
-	b2HOUVLmxGfxSzF7rnn1CUApCCSDzu07pQJT3VC6fBL+uqlcAjfGKrz8
-X-Gm-Gg: ASbGnctHkhEu0vwC0X6sYJdoCgqYngV/UxHaQBUIwfSGkY5bAw83gFh5qLKbxLnw3X0
-	qidR4Ns0G66hvNByK1UgRXEtgm960ilApxXBPe2G26SMjmiHeBzWNmgB84WlpfoW2pZbEM4mVjP
-	zD8SkHtwYQHSql3lR+Fm7bb2vge6mP2yVi2TGXoorzTmAkho8JT4ldgx8YIKRoPi362h8xMcsRw
-	jaiDZktVsunvAbKhFZTZZWRxhGHFszuC9JXw9oTJjMyocdW8wLCQXFrmB3t8EoHXyy2aqGQmaos
-	JX7wlaPIgWUkOYwWS4PlKxp0/CEt/Gn3zfZGw+ivh5Yv19bw1pIDYRVMqjig1rzVDU+GOpO0Ar7
-	RJ6bvgCibxTWU/UKNNAr9TrSLBWR77fc=
-X-Google-Smtp-Source: AGHT+IGkRrLm+ORFEJu93aA2RJ2O4c0oK/ow0ru0hgVkBXw3HDkP9hEcBKwtebVZ9ngzZi23oQONbw==
-X-Received: by 2002:a17:907:3d4c:b0:b0d:ee43:d762 with SMTP id a640c23a62f3a-b34b9f5b4c4mr1692250166b.4.1759126362026;
-        Sun, 28 Sep 2025 23:12:42 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3b7a8045acsm355260966b.107.2025.09.28.23.12.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 28 Sep 2025 23:12:41 -0700 (PDT)
-Message-ID: <033e8b0a-73a1-40b5-993e-d65ea4935af4@gmail.com>
-Date: Mon, 29 Sep 2025 08:12:39 +0200
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Ej+e6T67;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=23676e31a5=divya.chellam@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58T3invY3797487
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 10:27:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=4OKCRkFHvu3hdQNPfP2b
+	pcVR0v1h3SipydZIp3eoHjc=; b=Ej+e6T670QyTUCvahG/ZcLguzUwXYgOVCi6P
+	228OlgKUfblXDnt38F4Ln4O0Fm+OnjNyzwvqQIsrSrUfEMSGISAIT6m2ufeeGO/w
+	LEMqY5gjoc1KEh6tr3vaubzZYMkOxh6RxszCwFvO9D73dh7HGPaOQbT51687F3BX
+	gVRYvvvZjvsd6ci8fdMomvK55SWZflDOpk/+fGEqTOO5q9ULwPU0fZ+Vpzp8XCPc
+	0lNSkkAZX8xpUs6C1Z0tuZY44VlghTJQZptTqgZBbCjFZL48FzNKHLwGkvnqpDOT
+	QDNp1Fn6cRmXHFVkHwH+4zedFWtx1L7fLw6KW9eiGI5cIRwtKg==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49e6w7hste-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 10:27:27 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.59; Mon, 29 Sep 2025 03:27:25 -0700
+From: dchellam <divya.chellam@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][walnascar][PATCH 1/1] libssh: upgrade 0.11.2 -> 0.11.3
+Date: Mon, 29 Sep 2025 15:56:56 +0530
+Message-ID: <20250929102656.152693-1-divya.chellam@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [kirkstone][PATCH] 3/3] image_types_sparse: backport
- optionally remove RAW image
-To: emailaddress.ashish@gmail.com, openembedded-devel@lists.openembedded.org
-References: <20250925172931.64046-3-emailaddress.ashish@gmail.com>
- <12545.1759121256328337971@lists.openembedded.org>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <12545.1759121256328337971@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.11.232.110]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (10.11.224.121) To
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121)
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTI5MDEwMSBTYWx0ZWRfX32pkh6aGwTrO
+ i3w4s+9Mv8utbDHRPTqvuRX7rAxhqguulbQm877lwRzARLEUlzQsFx2luyd8S1gy1mbxpbWt6V1
+ 7sgGwcqAgBG82AiYwGH/7zCPrRnUpusslKbQjA03aG6nmIcGb9HAPJNo0ekNNA1i/XxAsNWkZ5C
+ a/293SjZXtYb9dRUkRIP2AexlULC0k4YQM6LlNDVQpXKDl639JmYkqjjtErLVDsSxi/f7D9ApsY
+ IrKNYRwIE/2y1DWWXo5WVel+DSjp9mu11tH1d5ncOcKKbD2pxrk4+yWXVoXSJmUY3HY1qCmdwry
+ 5pCUxqF5CByePoHnoupWxDb8Fes2FQ7DsLn/z7/Kbyne7Cu1qU7K+dpvIxy3jilLN3tu6EntrQB
+ C3OAEvmjQ1xvBf46MBfxkroKEU0uZg==
+X-Authority-Analysis: v=2.4 cv=Lc0xKzfi c=1 sm=1 tr=0 ts=68da5f0f cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=gmxlzscTznEA:10 a=yJojWOMRYYMA:10 a=omOdbC7AAAAA:8 a=pGLkceISAAAA:8
+ a=t7CeM3EgAAAA:8 a=nar8ntqeAAAA:8 a=225xbqsVfsR3lOmwoz4A:9
+ a=FdTzh2GWekK77mhwV6Dw:22 a=RptMqvEBejqe73AKBt4K:22
+X-Proofpoint-ORIG-GUID: bVlYj-Oa3awtXyYiFaptdE9Jh45Tp3Qp
+X-Proofpoint-GUID: bVlYj-Oa3awtXyYiFaptdE9Jh45Tp3Qp
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-29_04,2025-09-29_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 phishscore=0 bulkscore=0 adultscore=0 priorityscore=1501
+ impostorscore=0 spamscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2509150000 definitions=main-2509290101
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 06:12:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120011
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 10:27:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120012
 
-Your patches are not forgotten, but stable branches are not
-rolling-branches.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-As a non-official reference, you can check this repository:
-https://git.openembedded.org/meta-openembedded-contrib/log/?h=stable/kirkstone-nut
-This is where I stage the patches for testing for the next kirkstone
-pull request - though it is a fluid branch and changes relatively often,
-it is the best indicator I can offer you at this moment about what can
-be expected. Most probably this will be merged into the final branch.
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Divya Chellam <divya.chellam@windriver.com>
+---
+ .../libssh/{libssh_0.11.2.bb => libssh_0.11.3.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libssh/{libssh_0.11.2.bb => libssh_0.11.3.bb} (96%)
 
-This repo/branch is not canonical. I use it now, but might change in the
-future.
-
-On 9/29/25 06:47, Ashish Mishra via lists.openembedded.org wrote:
-> @ Gyorgy Sarvari  :
->
-> Good Morning .
-> Please do consider this patch for merge in Kirkstone 
-> If any suggestion / feedback on this , feel free to share .
-> Will work on it accordingly
-> Have shared the 3 patch changes for same 
->  
-> Thanks ,
-> Ashish 
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#120007): https://lists.openembedded.org/g/openembedded-devel/message/120007
-> Mute This Topic: https://lists.openembedded.org/mt/115434756/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+diff --git a/meta-oe/recipes-support/libssh/libssh_0.11.2.bb b/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
+similarity index 96%
+rename from meta-oe/recipes-support/libssh/libssh_0.11.2.bb
+rename to meta-oe/recipes-support/libssh/libssh_0.11.3.bb
+index 5baaa49949..13533082e8 100644
+--- a/meta-oe/recipes-support/libssh/libssh_0.11.2.bb
++++ b/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
+@@ -13,7 +13,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
+ 
+ SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused-variable-flag.patch"
+ 
+-SRCREV = "dff6c0821ed54f6fbf5b755af43f54cbb723b1b1"
++SRCREV = "301d0e16dfa8a5cac1cff956b6880ca90eb82864"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.40.0
 
 
