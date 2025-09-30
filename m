@@ -2,228 +2,131 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA349CCA470
-	for <webhook@archiver.kernel.org>; Tue, 30 Sep 2025 20:25:21 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web10.1024.1759263921128446550
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C08A0CCA470
+	for <webhook@archiver.kernel.org>; Tue, 30 Sep 2025 20:34:36 +0000 (UTC)
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.web10.203.1759264474337998051
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Sep 2025 13:25:21 -0700
+ Tue, 30 Sep 2025 13:34:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NN8JpsyT;
- spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-62105d21297so12703265a12.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 13:25:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AJ1GqibI;
+ spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-63163a6556bso330560a12.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 13:34:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759263919; x=1759868719; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759264473; x=1759869273; darn=lists.openembedded.org;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=WpVEEtc/szz9aaacVz4mdr5Zlxuogt1NpOgieX0djR0=;
-        b=NN8JpsyTQFHpfRqohN+wdLIii1eSxRPuPl5lvLNakWL/41YNzrCuky/63BJu2lf8vs
-         LaYz3kduQG1HADDGQ7COdFvJCzofiUFwrhGI5/HSd6ItDlR+7i37Bf9+ddLhCE5CM/E+
-         z34KHzx8bNYjjCSqQnNTid0Vg6UxaQUIrMe8KcABz33mZIzBsqSQnnIdeicfE5J3lnQK
-         KzVuEessRtW3fi7WcKeFTC2gZ0OooO8Nmu9Ei0U29nnnKZ+DbX+DzmhMF7bpd3sQR5rK
-         gzPKFj+n3g+7sR2EQK5WUJsXICw11FASLFccFqYTfT3RB8OBLnBKNQeS9oa310PO9D0d
-         Xhyw==
+        bh=bidewaRowMWZ3pdOqXd3jvX4gxp10ayAKiPOtWv5tss=;
+        b=AJ1GqibIMdsXtRD73xgIBrFkUe56qwPEVyNQ964ft7dI02NwVhcX9QEi6BpHQKPdnx
+         pTY/1TGsIt+/bKawdBjL57wctg835dpka6kkBjEzFgBDH3LqvtW3YuzLDQuncGyEYPrJ
+         Fi25MBur46x79mEiLVQA+hGHCkq/efAnICy7RrK+A1ATDf1j0VCNEfyh2qPd/kTjPy9D
+         jq0aBKunf+FinEXWvNTmPGHoTy8NLuUA+OYdgh3e0NB/xn+Ex+nTl7203GOx3+lEfxMg
+         85+NXbnxqjREOZDTlzxBnOaI7BMolB3sJd4Q5GCuyYhDDfzQmmBxYqzbSFeRLNKZqUsx
+         5kSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759263919; x=1759868719;
+        d=1e100.net; s=20230601; t=1759264473; x=1759869273;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=WpVEEtc/szz9aaacVz4mdr5Zlxuogt1NpOgieX0djR0=;
-        b=XwNAfxzRnM/9g0bkCPoUoTh9l3BZEoWvh9Rsc3+7z9C1lCE8aFarUhxhMEQJ56wfiC
-         W1wbMCFAsneJn4TLMHolzM4ONUiJrMcsZT8cqj3cdvD1cdMFaw4fLHXbiSNd0u3B9xtK
-         1dE2AiU9PFBF27dDJloWEihiAG77nP0aDqMth4v5slI5ncbNnILX5JM7hSTM77WT9ONl
-         wO2OpfgNqV61bW+1yYFKj2HNXW0lxcDMs//6Hd7R7nfs4PEdaHp46LnNtJ+9jDhAooxt
-         cJgdI6RspP8MOrIDOEOqSh8qAWmAP0FRXU8GgVEPnpvmS1cfcAxHaPZrmojZmG7e9DWh
-         6qPQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUbXelSHK4MFQM0lJGvFpKsUpMhT2zvxi7OW9gXFsuUDjk5LGyA2x6YWGZpp5nQ4wiiHaQ0XrtCSb+7RxAq6oPCaqg=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyCDw505gBjbuv2eXmUw+E3ECKlmsDgE3hRSGYUIH7ZdPMN/zgm
-	tsTPDGp881lDLJ8EeXyxuDBh9W5vJ8W1CCkJBeKKjJ+R0Xu+KRjMJC+m
-X-Gm-Gg: ASbGncvEp5LvThS72qN9pQTGl2FtLdJvceun2fRwAxqSAdbjR4PhZ8+3OkhpG63F24u
-	CYtMM2gA184+Ich1sTYb89so1glO1yKNiTgciLU9HIhGtuL8YYbU76hPcRkkNBCtNJ25ZYT3Gaf
-	EGU9RxSYL96/TWpEO4STFFFdA/YXSBbULLiKbKbtzV8/H7/D0FmNRACd6xdf9Y5k+sATLmwil7z
-	CzzSLJTAzVBANUstq3mP+9GDn/iF6Tt/IUEzzzZHr2LDPbWrDeu+qZLYGUCEaLdEunGbREOXydl
-	mj4ABmwBuDOw4WURJDM73BFPXJg4qbuy3yR+Rzr0AL7pidZaPuOL08tMwjeyC4+PfKWVLa4qp0f
-	L3nFTt2XUQfkSZ7RhE8F/FvihEKe4uZg42qcP9mhk0MBNx0ouGGnXVGw=
-X-Google-Smtp-Source: AGHT+IEjOQdcvI9klvMPUNQvjspSUl1AHCeOXtkYJFY1qwgBZEm9IxahqV6WdB2uH0oFn66xaopa0A==
-X-Received: by 2002:a17:906:4fcd:b0:b2c:dc13:89e3 with SMTP id a640c23a62f3a-b46e9e458d3mr96008966b.59.1759263919177;
-        Tue, 30 Sep 2025 13:25:19 -0700 (PDT)
+        bh=bidewaRowMWZ3pdOqXd3jvX4gxp10ayAKiPOtWv5tss=;
+        b=HunqWXkK7RKx2bk6favOnnaSZb/+ai4OwPvmMH6UmamJSkKEkGsVMz8CqxFs9CmTLj
+         kw6ZYeYJWt3nxe895SJPv0q+cMjq/xg+s/vKxNk1Xb4WbEyqIfFPf8ljozJ+21bethLK
+         1lQF6WMvCnw6cCPwf3xPIkOUuQ8fWwxQGjc1TMOaUVc1WAgK7yPT2h+mIlmi3qSknIBE
+         hszwF3c34/6cw08lZ/sVM902u8Le+5cz4tKlhikq3P//QKhQzW85/Japraq6dX5wu+U/
+         JzA2W6Hp+Ge7UdsO+sW4tdH5omnql33WygdJb8C8rWV9aytaMRaVRP24rfyNq8nQ5Gsi
+         KbMw==
+X-Forwarded-Encrypted: i=1; AJvYcCWsbRo1vCtwpztj694+HOfm41eaFOAeX9E2bvm9Jt/OkZCXjP6/33/8X4i3VgcgqxUIf8wv6u2L85RA+SNPqzoznFs=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwlrBCwn5MEQXbfBHxhpLPHhOkNycLXwOr02TrIHEyfO4O+UKco
+	X7ZdKSL8aOkwnBDY7AC2zFZ8q33jn2Ciib4pu90/7z0lrfTfOJkXM7RXGtDfhg==
+X-Gm-Gg: ASbGncsZ5s5bGZCRt4JNpFx+SaLWl+u6+vDi1n9j28dsEvM4/RqrHAZKMfmpotlgReT
+	UdIuUSd8lONBgSwxOn95ALlttSePVahva35hjXcWX2T6CrcXdigoity4JrlaTSr9WUkEoc1cVe4
+	rCpUMcfuzjAnt7bhc+gd8GEhN+IkI5EorO5RzUrTWmnXhVAQRyxCbx5F3Tw3l8KpaqrVOKZjF4M
+	JKEqb7Gj0wYPIPTjXeG36jLJ2wW+ppw21Uxp0VTPopRCIZuN/8nzfjz04qZZQf8T6aSzkVU6nmi
+	hYJzfb9JDNpCQ/PKvFkB9HwpR/vVKU0f3WHNFhvdPUpmE848Jyq9s0Iy/PHBC/ac6gKpQlLX2Dy
+	ChJc0ew4ZHFMCErJMVu1MEqzbks/r6b4dKoMde2TARLvaO+F++NB/XPHgs05xP3VU6w==
+X-Google-Smtp-Source: AGHT+IGxToUEYoV1rTEtj1vVz1e7hKwvnEoDylib3qcE8qXdLeY+Osy2Cmc4kiJ2/Jodn5fYzJP+kA==
+X-Received: by 2002:a17:907:948f:b0:b30:2f6b:448f with SMTP id a640c23a62f3a-b46e6816e14mr110410766b.25.1759264472578;
+        Tue, 30 Sep 2025 13:34:32 -0700 (PDT)
 Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3545a9978bsm1241134666b.95.2025.09.30.13.25.18
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b353efa494esm1212645266b.25.2025.09.30.13.34.31
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 30 Sep 2025 13:25:18 -0700 (PDT)
-Message-ID: <344744b7-3ae9-4dda-89cb-c3660141aaac@gmail.com>
-Date: Tue, 30 Sep 2025 22:25:17 +0200
+        Tue, 30 Sep 2025 13:34:32 -0700 (PDT)
+Message-ID: <88b381ac-b03a-4cab-be24-56bf4ad190a9@gmail.com>
+Date: Tue, 30 Sep 2025 22:34:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe][meta-oe][walnascar][PATCH 01/22] zlog: upgrade 1.2.16 ->
- 1.2.18
-To: Ankur Tyagi <ankur.tyagi85@gmail.com>,
- openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
+Subject: Re: [oe][meta-oe][walnascar][PATCH 10/22] freeglut: changed SRC_URI
+ to github + added UPSTREAM_CHECK
+To: ankur.tyagi85@gmail.com, openembedded-devel@lists.openembedded.org
+Cc: Jan Vermaete <jan.vermaete@gmail.com>, Khem Raj <raj.khem@gmail.com>
 References: <20250930091841.1693131-1-ankur.tyagi85@gmail.com>
- <20250930091841.1693131-2-ankur.tyagi85@gmail.com>
+ <20250930091841.1693131-11-ankur.tyagi85@gmail.com>
 Content-Language: en-US
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250930091841.1693131-2-ankur.tyagi85@gmail.com>
+In-Reply-To: <20250930091841.1693131-11-ankur.tyagi85@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 20:25:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120084
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 20:34:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120085
 
-I am not able to accept relicensed updates in stable branches.
-If you could send that CVE patch separately, that would be nice
-though... (if you have time for that)
+If the SRC_URI is not dead, I would just leave this as it is in Walnascar.
 
-On 9/30/25 11:18, Ankur Tyagi wrote:
-> From: Gyorgy Sarvari <skandigraun@gmail.com>
+On 9/30/25 11:18, Ankur Tyagi via lists.openembedded.org wrote:
+> From: Jan Vermaete <jan.vermaete@gmail.com>
 >
-> Switched to cmake. Added a backported patch to be able to use
-> the latest version of cmake.
+> - added HOMEPAGE
+> - downloads are now from github
+>   "Stable releases are available on our releases page on github, where you can find more information about each release. All releases are also mirrored on the old downloads page on sourceforge."
+>   @see: https://freeglut.sourceforge.net/
+> - fixed 'devtool check-upgrade-status'
 >
-> Also, add a new patch to avoid overwritingg all the CFLAGS set by Yocto,
-> which helps with avoiding the inclusion of TMPDIR in the generated files.
->
-> License-Update: License changed to Apache2:
-> https://github.com/HardySimpson/zlog/commit/1a7b1a6fb956b92a4079ccc91f30da21f34ca063
->
-> Changelog:
-> 1.2.18:
-> - patched severe vulnerability CVE-2024-22857
-> - restructured build system
->
-> 1.2.17:
-> - Change Lience to Apache 2.0, for more people
->
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit 8891ca87488384c0ab65b5d77c1278187080753d)
+> (cherry picked from commit 6afcc7939e74023b06fc8655f4120647e4907f8c)
 > Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 > ---
->  ...01-Don-t-overwrite-systemwide-cflags.patch | 31 +++++++++++++++++++
->  .../files/upgrade_cmake_minimum_version.patch | 25 +++++++++++++++
->  meta-oe/recipes-extended/zlog/zlog_1.2.16.bb  | 17 ----------
->  meta-oe/recipes-extended/zlog/zlog_1.2.18.bb  | 14 +++++++++
->  4 files changed, 70 insertions(+), 17 deletions(-)
->  create mode 100644 meta-oe/recipes-extended/zlog/files/0001-Don-t-overwrite-systemwide-cflags.patch
->  create mode 100644 meta-oe/recipes-extended/zlog/files/upgrade_cmake_minimum_version.patch
->  delete mode 100644 meta-oe/recipes-extended/zlog/zlog_1.2.16.bb
->  create mode 100644 meta-oe/recipes-extended/zlog/zlog_1.2.18.bb
+>  meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
 >
-> diff --git a/meta-oe/recipes-extended/zlog/files/0001-Don-t-overwrite-systemwide-cflags.patch b/meta-oe/recipes-extended/zlog/files/0001-Don-t-overwrite-systemwide-cflags.patch
-> new file mode 100644
-> index 0000000000..f09f517b98
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/zlog/files/0001-Don-t-overwrite-systemwide-cflags.patch
-> @@ -0,0 +1,31 @@
-> +From ee35b6507993e79fc594e3b7ad50174e33e68daa Mon Sep 17 00:00:00 2001
-> +From: Gyorgy Sarvari <skandigraun@gmail.com>
-> +Date: Wed, 24 Sep 2025 11:22:29 +0200
-> +Subject: [PATCH] Don't overwrite systemwide cflags
+> diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb b/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
+> index 2cd00b0349..b3a103054f 100644
+> --- a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
+> +++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
+> @@ -1,9 +1,10 @@
+>  DESCRIPTION = "FreeGLUT is a free-software/open-source alternative to the OpenGL \
+>                 Utility Toolkit (GLUT) library"
+> +HOMEPAGE = "https://freeglut.sourceforge.net"
+>  LICENSE = "MIT"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=89c0b58a3e01ce3d8254c9f59e78adfb"
+>  
+> -SRC_URI = "https://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
+> +SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz"
+>  SRC_URI[sha256sum] = "3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6f3eaec"
+>  
+>  inherit cmake features_check pkgconfig
+> @@ -24,6 +25,9 @@ PROVIDES += "mesa-glut"
+>  
+>  DEPENDS = "virtual/libgl libxi"
+>  
+> +UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
+> +UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 > +
-> +Instead of overriding the cflags from the system, just append to them.
-> +
-> +Upstream-Status: Submitted [https://github.com/HardySimpson/zlog/pull/306]
-> +
-> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> +---
-> + CMakeLists.txt | 6 +++---
-> + 1 file changed, 3 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index 8981934..f2bd574 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -33,9 +33,9 @@ SET(ZLOG_SO_VERSION ${CPACK_PACKAGE_VERSION_MAJOR})
-> + message(STATUS "platform : ${CMAKE_SYSTEM}")
-> + 
-> + add_definitions("-g -Wall -Wstrict-prototypes")
-> +-set(CMAKE_C_FLAGS "-std=c99 -pedantic -D_DEFAULT_SOURCE")
-> +-set(CMAKE_C_FLAGS_DEBUG "-ggdb3 -DDEBUG")
-> +-set(CMAKE_C_FLAGS_RELEASE "-O2")
-> ++set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -pedantic -D_DEFAULT_SOURCE")
-> ++set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -ggdb3 -DDEBUG")
-> ++set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2")
-> + 
-> + if (WIN32)
-> +     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DWINVER=0x0500 -D_WIN32_WINNT=0x0500 ")
-> diff --git a/meta-oe/recipes-extended/zlog/files/upgrade_cmake_minimum_version.patch b/meta-oe/recipes-extended/zlog/files/upgrade_cmake_minimum_version.patch
-> new file mode 100644
-> index 0000000000..9d02066d57
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/zlog/files/upgrade_cmake_minimum_version.patch
-> @@ -0,0 +1,25 @@
-> +From 3715879775f725260aeda14f94887bbc7a007e29 Mon Sep 17 00:00:00 2001
-> +From: haydenZhou <mfkhao2009@outlook.com>
-> +Date: Sun, 8 Jun 2025 10:45:05 +0800
-> +Subject: [PATCH] upgrade cmake minimum version
-> +
-> +Upstream-Status: Backport [https://github.com/HardySimpson/zlog/commit/3715879775f725260aeda14f94887bbc7a007e29]
-> +
-> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> +---
-> + CMakeLists.txt | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index 5ddaf8d..31a1553 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -14,7 +14,7 @@
-> + # limitations under the License.
-> + #/
-> + 
-> +-cmake_minimum_required(VERSION 2.8.5)
-> ++cmake_minimum_required(VERSION 3.12)
-> + 
-> + message(STATUS "path : ${CMAKE_FIND_ROOT_PATH}")
-> + project(zlog)
-> diff --git a/meta-oe/recipes-extended/zlog/zlog_1.2.16.bb b/meta-oe/recipes-extended/zlog/zlog_1.2.16.bb
-> deleted file mode 100644
-> index b75802f09f..0000000000
-> --- a/meta-oe/recipes-extended/zlog/zlog_1.2.16.bb
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -DESCRIPTION = "Zlog is a pure C logging library"
-> -HOMEPAGE = "https://github.com/HardySimpson/zlog"
-> -LICENSE = "LGPL-2.1-only"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
-> -
-> -SRCREV = "dc2c284664757fce6ef8f96f8b3ab667a53ef489"
-> -SRC_URI = "git://github.com/HardySimpson/zlog;branch=master;protocol=https"
-> -
-> -S = "${WORKDIR}/git"
-> -
-> -inherit pkgconfig
-> -
-> -EXTRA_OEMAKE = "CC='${CC}' LD='${LD}' LIBRARY_PATH=${baselib}"
-> -
-> -do_install() {
-> -    oe_runmake install PREFIX=${D}${exec_prefix} INSTALL=install
-> -}
-> diff --git a/meta-oe/recipes-extended/zlog/zlog_1.2.18.bb b/meta-oe/recipes-extended/zlog/zlog_1.2.18.bb
-> new file mode 100644
-> index 0000000000..268f022b51
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/zlog/zlog_1.2.18.bb
-> @@ -0,0 +1,14 @@
-> +DESCRIPTION = "Zlog is a pure C logging library"
-> +HOMEPAGE = "https://github.com/HardySimpson/zlog"
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
-> +
-> +SRC_URI = "git://github.com/HardySimpson/zlog;branch=master;protocol=https;tag=${PV} \
-> +           file://upgrade_cmake_minimum_version.patch \
-> +           file://0001-Don-t-overwrite-systemwide-cflags.patch"
-> +SRCREV = "7fe61ca6265516e9327a51fc394b2adb126c2ef3"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit cmake
-> +
+>  do_install:append() {
+>      # Remove buildpaths
+>      sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/FreeGLUT/FreeGLUTTargets.cmake
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#120062): https://lists.openembedded.org/g/openembedded-devel/message/120062
+> Mute This Topic: https://lists.openembedded.org/mt/115510966/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
