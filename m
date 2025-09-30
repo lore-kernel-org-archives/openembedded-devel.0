@@ -2,66 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CF5FCAC5B8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CF9DCAC5BD
 	for <webhook@archiver.kernel.org>; Tue, 30 Sep 2025 09:19:29 +0000 (UTC)
-Received: from mail-io1-f48.google.com (mail-io1-f48.google.com [209.85.166.48])
- by mx.groups.io with SMTP id smtpd.web10.21065.1759223960163553062
+Received: from mail-il1-f179.google.com (mail-il1-f179.google.com [209.85.166.179])
+ by mx.groups.io with SMTP id smtpd.web11.21005.1759223965045779338
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Sep 2025 02:19:20 -0700
+ Tue, 30 Sep 2025 02:19:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=B01MxUtu;
- spf=pass (domain: gmail.com, ip: 209.85.166.48, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-io1-f48.google.com with SMTP id ca18e2360f4ac-92c4adc8bfeso130687339f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 02:19:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hyuuvWnL;
+ spf=pass (domain: gmail.com, ip: 209.85.166.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-il1-f179.google.com with SMTP id e9e14a558f8ab-42861442e8eso15942425ab.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 02:19:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759223959; x=1759828759; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759223964; x=1759828764; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=L97+zHaS2pgSDqaYOtzRGGzSjhCfhKG1ihdqIejS4Q0=;
-        b=B01MxUtu3H/kxwu3YkzQjmtDSJmfaD1hRJDPnfP+WNJaXqZ2XS55QMGwwHw+jKnMYh
-         0FblfTxfGJPzHIlMJ1mTeORTEbRoRdDMfULvAniLuS1/WetB/h26ztpBmD5BTImodt8z
-         bvkW+18eo7a6qFBJ6x85KOcazOnHrCqzFDn1XZs0/EoMaPNTPLYUw53h4+kI0GshT3j2
-         lIcd0PYNLav7qRLwo3/KBF8Pe3ShA480QW/OueaGGSoUZWUhMrEj9pYR+U5quEqpa3FV
-         2azm/udcHnYrU2pVlXsRWJ5EDjStzIMQqhQNuGueX5WhjMcFP61QRSfSWPKn2uUhuuv/
-         0msQ==
+        bh=58JSmOiFh3qJhvBQypw/LZ5y23yY0eyqO/40nEdR1/c=;
+        b=hyuuvWnLIQBKqyw3jGdCo3dfThhPAIQoH9EfaNYPN6l+dJwzyNhFtbCQHIpSb+OnUS
+         Kv2F3LHfd6FCNacAvdKkk+Jv7tSWzzqlR2BSaq5BhxCBNl+5r+MJ0VxOKoer7MEsHZkG
+         3825uMUKrQy34QiM2USepkKCMrQ0pJxS+vu/Uosn2PKbkJsvFQJy8y6kKSsxIyG65u4P
+         Nrflq0TRLR16YJigScy2a8gbMnU9ZVBs0CgiGS80DLNhV1OJ3qNmwR0BkXbY28tw++0X
+         Im7Sy4iR98z8xxC5lXWXJ6UdVAJjghILhueZMLsQL58M3RkEwdLULI0omDxCw8nKW71n
+         dTJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759223959; x=1759828759;
+        d=1e100.net; s=20230601; t=1759223964; x=1759828764;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=L97+zHaS2pgSDqaYOtzRGGzSjhCfhKG1ihdqIejS4Q0=;
-        b=ijzopG76ciz1jmxeLsZohpmQm8H8tG0kWee51xf2PkEWpHXn2LJbSLm+m3JT6XhkuI
-         TSt9VGEaJ/uAiEaGyturj0cQpz5SZEFbBRm3SaZFIQajEtrv3tI5aEsMKB1CXeBf1M+z
-         sQvtcwotpGm4/dMkQlOKjkf8GiARVu/NL2KY37AUeywxy9ZzcoRChhuao1uQCBYMYqh8
-         mtk7tCW6igf6/bc1IZ/B3K/TiIVmPGdyKJZc9zXjQi3Tw+Zfgub7FgmUHsvXgUm0aJTc
-         wrYtlUlQodNeG/qUTL5bPENTc/GyW28cOpLSoXqWqtbTpR6W02sR7JvXhyLMAQ2wtJiE
-         khYA==
-X-Gm-Message-State: AOJu0YzNnuwJRifBVsGLY9StsXTMOoTEIhQychV6eHVUvPYCstUd3Si9
-	CM8RNK9ZxObo2bt0Pm7eNGD44/u3Zj4lPE6oL2ngizbz5u6c3WwqeYheDe9COgD7
-X-Gm-Gg: ASbGncsXgmDdQJTwMmuXfHfM5kiGYD0/L+y552iy6uY2lRGsRkllWm+QF+VO4x5fLHP
-	6Ec1RaATo/didKwzKOdZlVOUgwgY/sp2IEGdpjqMDnmLu65i31vKODf0CpXn+Mao1N1Mf6tqOKq
-	TSpa8ULVriDSwhGh56WeqACSzXiFE2cIVru5gp9qtpM6q9nkf9atl8EkOzW09o8IekEEeDmx+/4
-	NDqvDGP3qgLfWw1i5pr00z85kdMP08kbvK888m3BRQwu9v+eux3Z1WsfoNhylJyhR4/V9adVfTd
-	TaFhbTio44KAMeiTVm3YttHYk2DHZOZY/JoZeELyMB8eDNBx5YGbQgIf1eEcnjT6dOFlZKCfNLg
-	FpivPlYrvsDI8vrl6AMxo53uiKoaskwxIJGxl0EDTGeCXjZduSq3/fEaHuY5YFeKODUe7yWgVII
-	rZ6ymA7KdMEg==
-X-Google-Smtp-Source: AGHT+IGc5QHVQEVPmEQyXthEwI5rg9ahgaVJn/iEbeRnkZtmChxGWsIfmr8kunk+s07POXHSnGGnAA==
-X-Received: by 2002:a05:6602:140d:b0:92a:29fd:e9c0 with SMTP id ca18e2360f4ac-92c80aa8498mr750887439f.15.1759223959166;
-        Tue, 30 Sep 2025 02:19:19 -0700 (PDT)
+        bh=58JSmOiFh3qJhvBQypw/LZ5y23yY0eyqO/40nEdR1/c=;
+        b=QkvdiMcjlaMlvV9+XZEaE24YUaxRgXf9cqd2Y4H6+YRmXv1qyQpxu1GrVK24FMXWRe
+         gQ3oVT6QYt+OYZu1KR2VXz34Vfry9LnfY7dx13mjbB4urDEMWyhvgwfZN+B3zUs4+VJp
+         fMHf+wCJWfe47LmvUbAnDGdx5s8mDsmOFjZU1nNxs9lxKSAXluzpyq9/RxwatgHk71Nt
+         AlvavLAe0dhv0zXkncabT3qFOXpK1ZHz9iZR+Qcct8cl7dUFsWo9/bizX0buaOboBZJl
+         KrrKXHRV2N7P5LuhMoaFEkD6iknouoeShItRMRfQzqCh1t3ndVxvyTkPb7JzFHbDBihB
+         WzXw==
+X-Gm-Message-State: AOJu0Yz2jPhnWFttLtV7TsPdh4pApO6nhbwUyTL9NHLOTxC6sWBBk8Zh
+	WhJ3Y5nZ05XOpxp3EfbnQXd0PUYO1XWQvEts6T7NGuHo5yZ6TFwQmfY9wiSAfpGR
+X-Gm-Gg: ASbGncuJeEeE2XvNAHelFYAwNufQwZqyjQr86AOVmfcRz5ibHJ9o08MOO9JVZ6JLohH
+	wFgbhu3YLlZwy7aATAVlKn4iaTznl/vKS5QyFuYp/fD48QzO99Y53V66uA6CX4p9NzNPnazMBFq
+	1mlljqN+caiLeLM/VoqgTUg7r3ulVX3z/9zqIVO8+H/NVwnTH+GuL1mtxpg/NPzgAtp00Qphjy4
+	hAUHHVQ8Xqx6TvJfxqgCWHNVx5Tk6Gxz8DaFcqVSR4bT3xmY2llI3zpUu8T7vZvGi/wDSTqRkVd
+	3b4meSfBC4Dmp1KaeTCYZ/dpSn5767s6GIaI2VqjeWwJxHxIcV9QHITUlcvvTc7yLpeAKcr3//d
+	myOANDTlCfAKL35t7G4n02Sla9MTL+cq3zsdL/JD5KgjnLUZBQrwK2pS4keKZSthJzAA0Gm0zpZ
+	k=
+X-Google-Smtp-Source: AGHT+IFyK7YMagrblBsRJxXy/qHM3ZJE90O8NUdSx0i+acQVDiln3EKYMKhi3nHlQnLMQ1ujRDUsXw==
+X-Received: by 2002:a05:6e02:1fc3:b0:413:d5e2:b751 with SMTP id e9e14a558f8ab-425955fcbb6mr285401965ab.6.1759223964069;
+        Tue, 30 Sep 2025 02:19:24 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.brunswick.com ([147.161.217.10])
-        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-5742a4afbc3sm1837064173.2.2025.09.30.02.19.16
+        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-5742a4afbc3sm1837064173.2.2025.09.30.02.19.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Sep 2025 02:19:18 -0700 (PDT)
+        Tue, 30 Sep 2025 02:19:23 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Nylon Chen <nylon.chen@sifive.com>,
-	Joao Marcos Costa <joaomarcos.costa@bootlin.com>,
+Cc: Yoann Congal <yoann.congal@smile.fr>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][walnascar][PATCH 12/22] kernel-selftest: handle missing -64.h headers
-Date: Tue, 30 Sep 2025 22:18:31 +1300
-Message-ID: <20250930091841.1693131-13-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][walnascar][PATCH 14/22] gutenprint: fix a build race-condition
+Date: Tue, 30 Sep 2025 22:18:33 +1300
+Message-ID: <20250930091841.1693131-15-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250930091841.1693131-1-ankur.tyagi85@gmail.com>
 References: <20250930091841.1693131-1-ankur.tyagi85@gmail.com>
@@ -71,43 +70,110 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 09:19:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120064
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120066
 
-From: Nylon Chen <nylon.chen@sifive.com>
+From: Yoann Congal <yoann.congal@smile.fr>
 
-Some toolchains ship only bits/*.h without the -64.h suffix,
-causing the recipe to fail. Add a fallback to use *.h if
-*-64.h is not found, and warn if neither exists.
+Gutenprint install hooks run in parallel but depend on each other. This
+is a race condition and might trigger a build failure (e.g on AB [0]):
+| chmod 700 $WORKDIR/image/usr/libexec/cups/backend/backend_gutenprint
+| chmod: cannot access '$WORKDIR/image/usr/libexec/cups/backend/backend_gutenprint': Not a directory
+| make[5]: *** [Makefile:2166: install-exec-hook] Error 1
 
-Signed-off-by: Nylon Chen <nylon.chen@sifive.com>
-Signed-off-by: Joao Marcos Costa <joaomarcos.costa@bootlin.com>
+Fixes this by adding an explicit dependency between the dependent
+targets.
+
+[0]: https://autobuilder.yoctoproject.org/valkyrie/#/builders/87/builds/46/steps/33/logs/stdio
+
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 9472f4a728b4ec228605e387de32697312e8e549)
+(cherry picked from commit 1c3a75acc03aa31ca013e5e3f4341ddd9ee9e667)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../recipes-kernel/kernel-selftest/kernel-selftest.bb | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ ...-race-condition-around-empty-directo.patch | 60 +++++++++++++++++++
+ .../gutenprint/gutenprint_5.3.4.bb            |  4 +-
+ 2 files changed, 63 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-printing/gutenprint/gutenprint/0001-cups-fix-a-build-race-condition-around-empty-directo.patch
 
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-index fed3fa81ad..432ca5c383 100644
---- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-@@ -89,7 +89,16 @@ either install it and add it to HOSTTOOLS, or add clang-native from meta-clang t
-     install -Dm 0644 ${STAGING_KERNEL_BUILDDIR}/.config ${S}/include/config/auto.conf
-     if [ "${SITEINFO_BITS}" != "32" ]; then
-         for f in long-double endianness floatn struct_rwlock; do
--            cp ${RECIPE_SYSROOT}${includedir}/bits/$f-64.h ${S}/bits/$f-32.h
-+            src_base="${RECIPE_SYSROOT}${includedir}/bits/${f}"
-+            if [ -f "${src_base}-64.h" ]; then
-+                src="${src_base}-64.h"
-+            elif [ -f "${src_base}.h" ]; then
-+                src="${src_base}.h"
-+            else
-+                bbwarn "Missing header for bits/${f}{-64,.h} under ${RECIPE_SYSROOT}${includedir}/bits skipped"
-+                continue
-+            fi
-+            install -m 0644 "${src}" "${S}/bits/${f}-32.h"
-         done
-     fi
-     oe_runmake -C ${S} headers
+diff --git a/meta-oe/recipes-printing/gutenprint/gutenprint/0001-cups-fix-a-build-race-condition-around-empty-directo.patch b/meta-oe/recipes-printing/gutenprint/gutenprint/0001-cups-fix-a-build-race-condition-around-empty-directo.patch
+new file mode 100644
+index 0000000000..758acfe6be
+--- /dev/null
++++ b/meta-oe/recipes-printing/gutenprint/gutenprint/0001-cups-fix-a-build-race-condition-around-empty-directo.patch
+@@ -0,0 +1,60 @@
++From e3b0952fe936f90cfda9cbed368fae2143b72089 Mon Sep 17 00:00:00 2001
++From: Yoann Congal <yoann.congal@smile.fr>
++Date: Thu, 3 Jul 2025 15:27:04 +0200
++Subject: [PATCH] cups: fix a build race-condition around empty directories
++ removal
++
++In automake, install-exec and install-data happen in parallel.
++install-exec installs executables and install-data finishes with
++install-data-hook that removes empty directories. If install-data-hook
++happen before install-exec finishes, it might remove a directory while
++it is used by the install process and make it fail.
++
++Fix this by adding an explicit dependency between install-data-hook and
++install-exec.
++
++For example, here is the log of such a failure:
++| make  install-data-hook
++|  hosttools/mkdir -p 'image/usr/libexec/cups/backend'
++| make[5]: Entering directory '$WORKDIR/build/src/cups'
++| Expect a number of "rmdir: Directory not empty" warnings
++|   /bin/bash ../../libtool   --mode=install $HOSTTOOLS/install -c backend_gutenprint '$WORKDIR/image/usr/libexec/cups/backend'
++ # Start of the install process (from install-exec)
++| These messages are harmless and should be ignored.
++...
++| rmdir $WORKDIR/image/usr/libexec/cups/backend
++ # empty /usr/libexec/cups/backend is removed (from install-data-hook)
++...
++| libtool: install: $HOSTTOOLS/install -c backend_gutenprint $WORKDIR/image/usr/libexec/cups/backend
++ # install in a non-existing directory: backend_gutenprint is installed
++ # as /usr/libexec/cups/backend (this is now a file instead of a
++ # directory)
++| make  install-exec-hook
++| make[5]: Entering directory '$WORKDIR/build/src/cups'
++| chmod 700 $WORKDIR/image/usr/libexec/cups/backend/backend_gutenprint
++| chmod: cannot access '$WORKDIR/image/usr/libexec/cups/backend/backend_gutenprint': Not a directory
++ # chmod fails because /usr/libexec/cups/backend is a file and not a
++ # directory
++| make[5]: *** [Makefile:2166: install-exec-hook] Error 1
++
++Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
++Upstream-Status: Submitted [https://sourceforge.net/p/gimp-print/mailman/gimp-print-devel/thread/20250703164244.1120340-1-yoann.congal%40smile.fr/#msg59202153]
++---
++ src/cups/Makefile.am | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/src/cups/Makefile.am b/src/cups/Makefile.am
++index 7928ee3..fe45c92 100644
++--- a/src/cups/Makefile.am
+++++ b/src/cups/Makefile.am
++@@ -206,8 +206,9 @@ uninstall-local: $(INSTALL_DATA_LOCAL_DEPS) $(INSTALL_BLACKLIST)
++ 	$(RM) -f "$(DESTDIR)$(cupsdata_blacklistdir)/net.sf.gimp-print.usb-quirks"
++ 	$(RM) -f "$(DESTDIR)$(pkglibdir)/backend/gutenprint$(GUTENPRINT_MAJOR_VERSION)$(GUTENPRINT_MINOR_VERSION)+usb"
++ 
++-install-data-hook:
+++install-data-hook: install-exec
++ # Remove unused directories in install tree
+++# Note: it removes "exec" directories, so it must happen after install-exec.
++ 	-@echo 'Expect a number of "rmdir: Directory not empty" warnings'
++ 	-@echo 'These messages are harmless and should be ignored.'
++ 	-rmdir $(DESTDIR)$(cups_modeldir)
+diff --git a/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb b/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
+index 5263890239..f90a123293 100644
+--- a/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
++++ b/meta-oe/recipes-printing/gutenprint/gutenprint_5.3.4.bb
+@@ -14,7 +14,9 @@ HOMEPAGE = "http://gimp-print.sourceforge.net/"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+-SRC_URI = "https://downloads.sourceforge.net/gimp-print/${BP}.tar.xz"
++SRC_URI = "https://downloads.sourceforge.net/gimp-print/${BP}.tar.xz \
++           file://0001-cups-fix-a-build-race-condition-around-empty-directo.patch \
++           "
+ SRC_URI[sha256sum] = "db44a701d2b8e6a8931c83cec06c91226be266d23e5c189d20a39dd175f2023b"
+ 
+ inherit autotools gettext pkgconfig
 
