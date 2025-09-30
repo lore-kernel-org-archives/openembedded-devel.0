@@ -1,283 +1,168 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99F6CCCA470
-	for <webhook@archiver.kernel.org>; Tue, 30 Sep 2025 10:05:59 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web10.21934.1759226753176046922
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 239E1CCA468
+	for <webhook@archiver.kernel.org>; Tue, 30 Sep 2025 10:25:00 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.20906.1759223380811881646
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Sep 2025 03:05:53 -0700
+ Tue, 30 Sep 2025 02:09:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y13OF4/p;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-b457d93c155so68228766b.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 03:05:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759226751; x=1759831551; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=6eCNbzadSZDdpSWDPMUG2RpzdStRScm6DcSHoXkTbMI=;
-        b=Y13OF4/p55W/0STzoCvP3F98QsoM0Emk1rS7DpsTbghtSTSy++3/7Xyr1SufYK179v
-         NDbB0FnkeQTriDH1AXPMr6v5hFcZx1FwTggLLmfsnFRrsMXP3t/4XEWWiJhqEv1LfuMT
-         WFjgkg5LvXgT8+bJ+r72/nS4yk+2oALPMgMs2WZe5ykpQtDNt+cQFVojrmLuOFY6YEgU
-         JNs4eFNVzheYL+l/b9x3nwTIsQ40wOYI+AbMJCq/RqCsqI+63P06z8nC6iPKWVFKu4zn
-         uaWaKZREGRIXmZj4aN9Z4WXi5ftVuyCk+xs6ERAMwJNACnkMcBs8psv2P/XgocOwwZfk
-         NtGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759226751; x=1759831551;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=6eCNbzadSZDdpSWDPMUG2RpzdStRScm6DcSHoXkTbMI=;
-        b=GSCEwjJDXaJOPSfwkAeEub0cNpULiJXBxPDoZTdRwCfd49xudBWGVPeHE418rV6012
-         qNqaolz5TBWl7t5q/N8jYefS9OCp2GUq7Pjk2jVWYzNETUVKPBalhSSfHShhLS3tLnDF
-         xb6mtByZqbHqGOUO/ZXCZ8elOZ9z3r40Dn5sh+jnE2CFkBXJBX5O0ZnBA2btnQa121+E
-         nYYfgqjsEszCwKP3Se/3DxNS/6EUUjpk/7HYneTzNAsfG72Th66JUXEcBlYNXY5Rj5gG
-         Mc/evKJWZqXFpTPy/5f4ldl8j4XivcYGWt+AJD6SvKw35qCPhUBmqW4AxMt0XKyGwags
-         zzbQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVD5m8GWj52vHMGx1AqRDqD5gJpdBITLkD1Au9Ns91Sfr2YaRXz5ehH4uLDNmw0yGfuvELmAXfL1Fw6E5VVruIoqFE=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yw46dJdagBeUzzpwIyj9SFuSiegxyeoxUSO0Bvh2ERMxculRqdZ
-	556/aEU2whb/YaMH6yyOid5WSt50AkIA7r0Zbm0EdWwqis1f62ScukWQAxq7+A==
-X-Gm-Gg: ASbGncs49gGZmFNlUhvX0YiPiypyeETKQE4Ezgq5A4c5+82eRu/IZ22VONtzJdzgDDk
-	DKr0zOJHQnoZdDpcsCk0qE7CSQLTNyR2rAm+uV9SNYFZTn7mN5UgBDYMRcphO/yScQIa62ysgyQ
-	+CezdEL99aaTMI1tp3VutGuBvtaLy0DlRJJpC37no9b3BgDWO55SIEH8wLlRTg7PMJ+ukqO1JZL
-	fhXyEnPJamK096iyQ3FnShGsdMvTbcYPgcTb2ZW9j0hrKgSbFspVuufnMp8VLJ0+rn9FUOkbxlR
-	48KSL6qSXwSA7izzzCqWNo5muCW34pT3ikQ/10smQoX88aRP2jm68gd/3DoB7KuqXA/q0pCZ664
-	ZTqVXB9ImKAPijBsCLU99+wbzb9c9ORRrp9REzpPJdEgyPLwsPiTHG48B0a9TkrPb3g==
-X-Google-Smtp-Source: AGHT+IFJuswNV1zK725qKKFo8WDlQl5NFu8ovgpuSh0tQGEK4tOZsw2ufu0NBnGysa2mimNuCkrPYQ==
-X-Received: by 2002:a17:906:794d:b0:b3c:bd91:28a4 with SMTP id a640c23a62f3a-b3cbd912be8mr1005637666b.28.1759226750911;
-        Tue, 30 Sep 2025 03:05:50 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b432788d967sm134317766b.66.2025.09.30.03.05.49
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 30 Sep 2025 03:05:50 -0700 (PDT)
-Message-ID: <7121a8c5-1148-45dd-80b3-38558b4070ed@gmail.com>
-Date: Tue, 30 Sep 2025 12:05:49 +0200
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=WagwYopX;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2368f9697a=saravanan.kadambathursubramaniyam@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 58U5KdxW1814299
+	for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 02:09:40 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=GjnQ3El0KVO6+XQKO2/S
+	qBAtXLvbSKF4NYnouwsmIf4=; b=WagwYopX0mFgV2yZBv5H7/Z+bmlsMl7IUnMj
+	KP72Q/w/dPe5dn1Dv6xAT9hzoHsGciOuYaqr3/v0+FEsEp5hm3WXSC5adGatmIOx
+	mO0gj+GrSG8bx/NWvD45HwOQyENabkpfwxtXdiEZoXPP4bXn1z2ECDNuLE4uFGQ6
+	E22ttoZZ0xOG236NssBFgvXW1gAiY+uCnf6t+3Z4GwS4ICcPdLMZzD+LEXgEd8ND
+	bsTkaT0AD6c5UFTeT8fUucf+merUX8Hing0kipsoHWNwawWXOKoJ2BjIh+U8zhIb
+	8dkgXjEFxw+0QQJFnvelMVyXMLKN6wnG95L1a7hp/gUfy+3BTQ==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49efegaucv-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 02:09:40 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.59; Tue, 30 Sep 2025 02:09:39 -0700
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.59 via Frontend Transport; Tue, 30 Sep 2025 02:09:38 -0700
+From: "Kadambathur Subramaniyam, Saravanan" <saravanan.kadambathursubramaniyam@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][master][walnascar][PATCH 1/1] udisks2: upgrade 2.10.1 -> 2.10.2
+Date: Tue, 30 Sep 2025 14:39:37 +0530
+Message-ID: <20250930090938.1286816-1-saravanan.kadambathursubramaniyam@windriver.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe][meta-oe][scarthgap][PATCH 1/1] Revert "mariadb: upgrade
- 10.11.9 -> 10.11.12"
-To: Yogita.Urade@windriver.com, openembedded-devel@lists.openembedded.org
-References: <20250926105137.3980107-1-yogita.urade@windriver.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20250926105137.3980107-1-yogita.urade@windriver.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: Bp4RI8F1PQmeaPGmi-qmu6tv9HcJGp90
+X-Authority-Analysis: v=2.4 cv=aKr9aL9m c=1 sm=1 tr=0 ts=68db9e54 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=BUH1krOO9SQA:10 a=yJojWOMRYYMA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8
+ a=20KFwNOVAAAA:8 a=GWcqYlTyHeRk2dHaoGYA:9 a=FdTzh2GWekK77mhwV6Dw:22
+ a=6_D5ljFcL1GZDUJyZucp:22
+X-Proofpoint-GUID: Bp4RI8F1PQmeaPGmi-qmu6tv9HcJGp90
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTMwMDA4MSBTYWx0ZWRfX06jXpHI6HnK2
+ Rc0Z4XM/aWSyynxQ58nFrvAQ6pm8GVGal0LIZWI/J0ZiU7rWK8y3WjBOE30XSQYqoJGfylnusxR
+ xDKOSpmh6No3UVVRQATqE9irJvR3xO7XWJuq1Ycs0kvJJwiZyAoa2VsefbqmgaiY0/ipJzErK/v
+ +ctOwCMS6LpJI+bP5jiQGUD5vOzvD1r6ZGDoDGCfmdMF/vIEBVE2YSXJBj3UY09NluX5rXhLTe0
+ UdR2wrdjgFNX87w/Imcs8hoychP1Yfl6PQckD/Se+374vBpOfi1hvHYeIASM/M63eJ7xVFZ5O4W
+ 570pLQV/GSZHUh1SlNwr1M800Ug3lg3JgiR1hF6UoexaIULH+o6uUgPkbOoaR00DnVenbDcj+Qu
+ 8yVacLgkKJ6tO4ov6DcWyUWit3Exgg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-30_01,2025-09-29_04,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 priorityscore=1501 adultscore=0 lowpriorityscore=0
+ clxscore=1011 impostorscore=0 bulkscore=0 phishscore=0 suspectscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2509150000
+ definitions=main-2509300081
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 10:05:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120077
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 10:25:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120078
 
-On 9/26/25 12:51, Urade, Yogita via lists.openembedded.org wrote:
-> From: Yogita Urade <yogita.urade@windriver.com>
->
-> This reverts commit 7b57b8f1069f29981623ee30c6dd24b7781ed958.
->
-> This upgradation causes timeout issue to start the mysqld services.
+This patch addresses below CVE's:
+CVE-2025-6019
+CVE-2025-8067
 
-Could you please give some info, how to reproduce this issue? Does it
-need anything special?
-I think it would be better to bisect the issue and try to find the
-solution (if possible) rather than going backwards.
+Changelog:
+https://github.com/storaged-project/udisks/releases
 
->
-> Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-> ---
->  ..._10.11.12.bb => mariadb-native_10.11.9.bb} |  0
->  meta-oe/recipes-dbs/mysql/mariadb.inc         |  4 +-
->  ...-missing-includes-cstdint-and-cstdio.patch | 43 ++++++++++++-------
->  .../recipes-dbs/mysql/mariadb/mm_malloc.patch | 13 ++++++
->  .../mysql/mariadb/ppc-remove-glibc-dep.patch  | 43 +++++++++++++++++++
->  ...mariadb_10.11.12.bb => mariadb_10.11.9.bb} |  0
->  6 files changed, 87 insertions(+), 16 deletions(-)
->  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.11.12.bb => mariadb-native_10.11.9.bb} (100%)
->  create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch
->  create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
->  rename meta-oe/recipes-dbs/mysql/{mariadb_10.11.12.bb => mariadb_10.11.9.bb} (100%)
->
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.12.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.9.bb
-> similarity index 100%
-> rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.11.12.bb
-> rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.11.9.bb
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-> index 6e7c01a775..abcf0b3cda 100644
-> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-> @@ -17,13 +17,15 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
->             file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
->             file://0001-aio_linux-Check-if-syscall-exists-before-using-it.patch \
->             file://ssize_t.patch \
-> +           file://mm_malloc.patch \
->             file://sys_futex.patch \
->             file://cross-compiling.patch \
->             file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
->             file://lfs64.patch \
->             file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
->            "
-> -SRC_URI[sha256sum] = "d61f23090cfc14f43e8a27c2d3ce7f80247e74481bb26a2d3a6308b8d194e167"
-> +SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
-> +SRC_URI[sha256sum] = "0a00180864cd016187c986faab8010de23a117b9a75f91d6456421f894e48d20"
->  
->  UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
->  
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
-> index fa580d039a..7fc2377f19 100644
-> --- a/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
-> @@ -11,14 +11,27 @@ Upstream-Status: Pending
->  Signed-off-by: Khem Raj <raj.khem@gmail.com>
->  Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
->  ---
-> - storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h  | 1 +
-> - .../rocksdb/rocksdb/table/block_based/data_block_hash_index.h   | 1 +
-> - storage/rocksdb/rocksdb/util/slice.cc                           | 2 +-
-> - storage/rocksdb/rocksdb/util/string_util.h                      | 1 +
-> - 4 files changed, 4 insertions(+), 1 deletion(-)
-> + .../rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h   | 1 +
-> + storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h   | 1 +
-> + .../rocksdb/rocksdb/table/block_based/data_block_hash_index.h    | 1 +
-> + storage/rocksdb/rocksdb/util/slice.cc                            | 1 +
-> + storage/rocksdb/rocksdb/util/string_util.h                       | 1 +
-> + 5 files changed, 5 insertions(+)
->  
-> +diff --git a/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h b/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
-> +index 963c1d8e..73487edd 100644
-> +--- a/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
-> ++++ b/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
-> +@@ -5,6 +5,7 @@
-> +
-> + #pragma once
-> +
-> ++#include <cstdint>
-> + #include "rocksdb/rocksdb_namespace.h"
-> +
-> + struct CompactionIterationStats {
->  diff --git a/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h b/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
-> -index 7fb9d489..f7b4e6f0 100644
-> +index c7f93b4c..3c2ab805 100644
->  --- a/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
->  +++ b/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
->  @@ -8,6 +8,7 @@
-> @@ -42,20 +55,20 @@ index f356395f..32152217 100644
->   #include <vector>
->   
->  diff --git a/storage/rocksdb/rocksdb/util/slice.cc b/storage/rocksdb/rocksdb/util/slice.cc
-> -index 3c3656de..b18d7f5d 100644
-> +index 6db11cc9..c26b6a21 100644
->  --- a/storage/rocksdb/rocksdb/util/slice.cc
->  +++ b/storage/rocksdb/rocksdb/util/slice.cc
-> -@@ -12,7 +12,7 @@
-> - #include <stdio.h>
-> +@@ -8,6 +8,7 @@
-> + // found in the LICENSE file. See the AUTHORS file for names of contributors.
->   
->   #include <algorithm>
-> --
->  +#include <cstdint>
-> - #include "rocksdb/convenience.h"
->   #include "rocksdb/slice_transform.h"
-> - #include "rocksdb/utilities/object_registry.h"
-> -diff --git a/storage/rocksdb/rocksdb/util/string_util.h b/storage/rocksdb/rocksdb/util/string_util.h
-> -index 7794dbb0..b480177e 100644
-> + #include "rocksdb/slice.h"
-> + #include "util/string_util.h"
-> +
-> +diff --git a/util/string_util.h b/util/string_util.h
-> +index 55d106fff02..11178fd1d7b 100644
->  --- a/storage/rocksdb/rocksdb/util/string_util.h
->  +++ b/storage/rocksdb/rocksdb/util/string_util.h
->  @@ -6,6 +6,7 @@
-> @@ -67,5 +80,5 @@ index 7794dbb0..b480177e 100644
->   #include <string>
->   #include <unordered_map>
->  -- 
-> -2.40.0
-> +2.25.1
->  
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch b/meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch
-> new file mode 100644
-> index 0000000000..56ed480d33
-> --- /dev/null
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch
-> @@ -0,0 +1,13 @@
-> +Upstream-Status: Pending
-> +
-> +--- a/storage/rocksdb/rocksdb/port/jemalloc_helper.h
-> ++++ b/storage/rocksdb/rocksdb/port/jemalloc_helper.h
-> +@@ -5,7 +5,7 @@
-> +
-> + #pragma once
-> +
-> +-#if defined(__clang__)
-> ++#if defined(__clang__) && defined(__GLIBC__)
-> + // glibc's `posix_memalign()` declaration specifies `throw()` while clang's
-> + // declaration does not. There is a hack in clang to make its re-declaration
-> + // compatible with glibc's if they are declared consecutively. That hack breaks
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
-> new file mode 100644
-> index 0000000000..3787b74ad1
-> --- /dev/null
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
-> @@ -0,0 +1,43 @@
-> +Upstream-Status: Pending
-> +
-> +Remove glibc specific function dependencies
-> +
-> +Sourced from: https://git.alpinelinux.org/aports/tree/main/mariadb/ppc-remove-glibc-dep.patch
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +
-> +diff --git a/include/my_cpu.h b/include/my_cpu.h
-> +index f2e26fca..94599b74 100644
-> +--- a/include/my_cpu.h
-> ++++ b/include/my_cpu.h
-> +@@ -24,17 +24,16 @@
-> + */
-> +
-> + #ifdef _ARCH_PWR8
-> +-#include <sys/platform/ppc.h>
-> + /* Very low priority */
-> +-#define HMT_very_low() __ppc_set_ppr_very_low()
-> ++#define HMT_very_low() asm volatile("or 31,31,31")
-> + /* Low priority */
-> +-#define HMT_low() __ppc_set_ppr_low()
-> ++#define HMT_low() asm volatile ("or 1,1,1")
-> + /* Medium low priority */
-> +-#define HMT_medium_low() __ppc_set_ppr_med_low()
-> ++#define HMT_medium_low() asm volatile ("or 6,6,6")
-> + /* Medium priority */
-> +-#define HMT_medium() __ppc_set_ppr_med()
-> ++#define HMT_medium() asm volatile ("or 2,2,2")
-> + /* Medium high priority */
-> +-#define HMT_medium_high() __ppc_set_ppr_med_high()
-> ++#define HMT_medium_high() asm volatile("or 5,5,5")
-> + /* High priority */
-> + #define HMT_high() asm volatile("or 3,3,3")
-> + #else
-> +@@ -72,7 +71,7 @@ static inline void MY_RELAX_CPU(void)
-> +   __asm__ __volatile__ ("pause");
-> + #endif
-> + #elif defined(_ARCH_PWR8)
-> +-  __ppc_get_timebase();
-> ++  __builtin_ppc_get_timebase();
-> + #elif defined __GNUC__ && (defined __arm__ || defined __aarch64__)
-> +   /* Mainly, prevent the compiler from optimizing away delay loops */
-> +   __asm__ __volatile__ ("":::"memory");
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.11.12.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.11.9.bb
-> similarity index 100%
-> rename from meta-oe/recipes-dbs/mysql/mariadb_10.11.12.bb
-> rename to meta-oe/recipes-dbs/mysql/mariadb_10.11.9.bb
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#119905): https://lists.openembedded.org/g/openembedded-devel/message/119905
-> Mute This Topic: https://lists.openembedded.org/mt/115446396/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
+---
+ .../udisks/udisks2/CVE-2025-6019.patch        | 51 -------------------
+ .../{udisks2_2.10.1.bb => udisks2_2.10.2.bb}  |  3 +-
+ 2 files changed, 1 insertion(+), 53 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
+ rename meta-oe/recipes-support/udisks/{udisks2_2.10.1.bb => udisks2_2.10.2.bb} (95%)
+
+diff --git a/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch b/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
+deleted file mode 100644
+index 2e94c8497f..0000000000
+--- a/meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+-From d0d04a381036b79df91616552706d515639bb762 Mon Sep 17 00:00:00 2001
+-From: Tomas Bzatek <tbzatek@redhat.com>
+-Date: Wed, 4 Jun 2025 15:26:46 +0200
+-Subject: [PATCH] udiskslinuxfilesystemhelpers: Mount private mounts with
+- 'nodev,nosuid'
+-
+-The private mount done in take_filesystem_ownership() should always
+-default to 'nodev,nosuid' for security and 'errors=remount-ro' for
+-selected filesystem types to handle an corrupted filesystem. This is
+-consistent with mount options calculation for regular mounts.
+-
+-CVE: CVE-2025-6019
+-Upstream-Status: Backport [ https://github.com/storaged-project/udisks/commit/5e7277debea926370e587408517560afe87d28c9 ]
+-
+-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+----
+- src/udiskslinuxfilesystemhelpers.c | 10 +++++++++-
+- 1 file changed, 9 insertions(+), 1 deletion(-)
+-
+-diff --git a/src/udiskslinuxfilesystemhelpers.c b/src/udiskslinuxfilesystemhelpers.c
+-index 7c5fc037..9eb7742c 100644
+---- a/src/udiskslinuxfilesystemhelpers.c
+-+++ b/src/udiskslinuxfilesystemhelpers.c
+-@@ -123,6 +123,7 @@ take_filesystem_ownership (const gchar  *device,
+- 
+- {
+-   gchar *mountpoint = NULL;
+-+  const gchar *mount_opts;
+-   GError *local_error = NULL;
+-   gboolean unmount = FALSE;
+-   gboolean success = TRUE;
+-@@ -151,8 +152,15 @@ take_filesystem_ownership (const gchar  *device,
+-               goto out;
+-             }
+- 
+-+          mount_opts = "nodev,nosuid";
+-+          if (g_strcmp0 (fstype, "ext2") == 0 ||
+-+              g_strcmp0 (fstype, "ext3") == 0 ||
+-+              g_strcmp0 (fstype, "ext4") == 0 ||
+-+              g_strcmp0 (fstype, "jfs") == 0)
+-+            mount_opts = "nodev,nosuid,errors=remount-ro";
+-+
+-           /* TODO: mount to a private mount namespace */
+--          if (!bd_fs_mount (device, mountpoint, fstype, NULL, NULL, &local_error))
+-+          if (!bd_fs_mount (device, mountpoint, fstype, mount_opts, NULL, &local_error))
+-             {
+-               g_set_error (error, UDISKS_ERROR, UDISKS_ERROR_FAILED,
+-                            "Cannot mount %s at %s: %s",
+--- 
+-2.34.1
+-
+diff --git a/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb b/meta-oe/recipes-support/udisks/udisks2_2.10.2.bb
+similarity index 95%
+rename from meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
+rename to meta-oe/recipes-support/udisks/udisks2_2.10.2.bb
+index cc0c19ec8e..081b315b9b 100644
+--- a/meta-oe/recipes-support/udisks/udisks2_2.10.1.bb
++++ b/meta-oe/recipes-support/udisks/udisks2_2.10.2.bb
+@@ -20,9 +20,8 @@ RDEPENDS:${PN} = "acl"
+ SRC_URI = " \
+ 	git://github.com/storaged-project/udisks.git;branch=2.10.x-branch;protocol=https \
+ 	file://0001-Makefile.am-Dont-include-buildpath.patch \
+-    file://CVE-2025-6019.patch \
+ "
+-SRCREV = "18c9faf089e306ad6f3f51f5cb887a6b9aa08350"
++SRCREV = "bc623acf9e7488dc105e4b00069d57e303e2616b"
+ 
+ CVE_PRODUCT = "udisks"
+ 
+-- 
+2.48.1
 
 
