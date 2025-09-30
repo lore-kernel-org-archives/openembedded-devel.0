@@ -1,85 +1,102 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8A24CAC5B9
-	for <webhook@archiver.kernel.org>; Tue, 30 Sep 2025 08:23:38 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.web10.20385.1759220609571493954
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16E61CAC5B8
+	for <webhook@archiver.kernel.org>; Tue, 30 Sep 2025 09:18:59 +0000 (UTC)
+Received: from mail-io1-f53.google.com (mail-io1-f53.google.com [209.85.166.53])
+ by mx.groups.io with SMTP id smtpd.web10.21057.1759223935033800590
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Sep 2025 01:23:30 -0700
+ Tue, 30 Sep 2025 02:18:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ElbcVOny;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1759220609; x=1790756609;
-  h=from:to:subject:date:message-id;
-  bh=JhwP7nzwwoQn/lUXVOLA2Zva1d58Nt+3WuM83IXZK8c=;
-  b=ElbcVOnyTyff/cz8TnVB0tcPKu4iJHJNERaM8u76bnrU54Cb0VAEywAA
-   p/DEU5QPujNBBc4EoBAUQUT5OOrlw8vY+DT2/vd+EZ36Ama0CXJWKIoll
-   Qo8uD8ncp60///CDVMrv50/VyNsIa10Tz55RHmYI/tgfbf9fLe7IX+HVj
-   3HIlIb1UeHIDiJqVCCinUeepDiLKEnRMgkwLig4LN2J5It5Y6m0KN3QSW
-   lRba4A81GstjMV/s/hXNgB8R1d7vZQXCUT3pA4pXDkq6TBPv4cRIxTvcl
-   eM24lYc3gJradYzAWWYV4BFictnJ+5SPI/S+ubJrfNADZ2hn88moJDp2m
-   Q==;
-X-CSE-ConnectionGUID: IIvNDlqpSZCLoQklaAEFTQ==
-X-CSE-MsgGUID: eXLNGkigRdSdptwtwIXX3g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11568"; a="214341880"
-X-IronPort-AV: E=Sophos;i="6.18,303,1751209200"; 
-   d="scan'208";a="214341880"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.19])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Sep 2025 17:23:28 +0900
-Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id D6C92C0023A
-	for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 08:23:27 +0000 (UTC)
-Received: from az2nlsmom1.o.css.fujitsu.com (az2nlsmom1.o.css.fujitsu.com [10.150.26.198])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 919508DB0C5
-	for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 08:23:27 +0000 (UTC)
-Received: from zhengrq-VirtualBox.g08.fujitsu.local (unknown [10.167.135.148])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id B282B82ADB6
-	for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 08:23:25 +0000 (UTC)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=M+4eWr8D;
+ spf=pass (domain: gmail.com, ip: 209.85.166.53, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-io1-f53.google.com with SMTP id ca18e2360f4ac-9194a0241aaso140213339f.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 02:18:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1759223934; x=1759828734; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=eqEVaSu9/Ahj2M5PHlQjOAEtq7RCC6e/NRH5TRIX+KU=;
+        b=M+4eWr8Dyod5Jow89bKsJLEJDvm9eqkSKlbyYdn/Z6mrah3CYLdxUeSTwzZNyOI6Z2
+         +EEKEV9eb1AfdmkLv6hKjxepHwcbPyfVvMDlzox79xS5XvLYYrArkN7kJgsOls0mq/bS
+         6jecHAu51kKP5hWzHjTMXsbdop3hFwOaIDrH6F1xChLWOQ2HH4+NK9LKT3xG0og/v/7D
+         Duu33x4mxcI31nh9p/TJ9bPMQlPTSsWhwQNx7Qgdy4cJczBJq8RCU/QREMzN5k34wtqR
+         pQJ7lxhKVmS6HHH0GItEcrVK9TilcXMkAV1l9SKxrKr2ekCVomF+s3I/+OocJawslQ4c
+         CM2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1759223934; x=1759828734;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=eqEVaSu9/Ahj2M5PHlQjOAEtq7RCC6e/NRH5TRIX+KU=;
+        b=ZzrDjdtTR/wwM38Or0pWLVYqaQPoxwOD+gNiO45ezvChiwg0GnBS4UsXbqbNOlB39c
+         AJAMi8LjMEARSowXAo/nXD2ciBJEQymaxzZMTiY7WXIhcBYewVper+taYw0NqITqb3ni
+         CWvk4fDv5sRYLLTnLqhLm39VVjLMw+OZIX9nwd53rCu+7MegCkGDjhJW5LtImfCM+e4S
+         wodU2H1BKqIZTa8i1aTfAF8W9Xdtsj82IwNcgrgEwmpJYGJkdsM4GwMmCCMbtRFH16g9
+         LGN47Nj7Wqhm5VvrNrBkzKtiWH10c2qF1o1hKJ5HS/NJNF5viBeErLm3zfpyiKm7kdmA
+         Dm0A==
+X-Gm-Message-State: AOJu0YzepW+jIfksuupupj4AukI4jbfs4WPDHLUD9fSw9bnSW/QuwKxV
+	986OUfU4sNuQcdPF7ZbWWfsR+3EG5WnNmVP9SYOlzy/bWtdiOIZKGKzdOY+JkFCG
+X-Gm-Gg: ASbGncu8HAX2yqrMzQocJ4DarG+IPiDqOIcEC6mpNz40q+5vdBh0j+N816HjP9zTdTa
+	YAXk8F2YvY6kS1sXOIoDxzvkyUo4ts2Qnln7+yOp7Klul2hQmlTUXN6UuxZxx8o4Rni6cv03pAn
+	51xO7on3URc+RtYqjGUyyjqCJRQDjbV8w8q/654APrE3T2B8z5xW8filSAfxukQPti/5+aaQI3x
+	XIagvSIhpWGHnZ+LpREGNpth55GjeEUZ2uOM5MT4cRXdAdOu7txV6Oj/SD4jZZk1BGVRnDd6Gl+
+	wx/oK7ZgX7bsGm2IKQff0CJk45jfuBgw4VagZjrjqPjM/CnYpPLddTStjJHoiVM8kLOz9OIZDDM
+	zS3EfhTOWS12Ekata63uY7X7j0NRKSPqTEbolmQcYIkMmNQGnDzP91LJJ4o2oFq25V7jou5XXEL
+	4=
+X-Google-Smtp-Source: AGHT+IGgFoHqurz0EDP4x25xdsswZjG/S4/u/k+X0klKQ/H16ytjDg0DnJOGM8vqf0Rv0YJtU1rQOw==
+X-Received: by 2002:a05:6e02:3c83:b0:426:c373:25db with SMTP id e9e14a558f8ab-426c3732a86mr237144495ab.4.1759223934046;
+        Tue, 30 Sep 2025 02:18:54 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.brunswick.com ([147.161.217.10])
+        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-5742a4afbc3sm1837064173.2.2025.09.30.02.18.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 30 Sep 2025 02:18:53 -0700 (PDT)
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH] dracut: Fix the multi-lib config
-Date: Tue, 30 Sep 2025 16:23:17 +0800
-Message-Id: <20250930082317.2314-1-liuyd.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.17.1
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][walnascar][PATCH 02/22] parallel: upgrade 20250322 -> 20250422
+Date: Tue, 30 Sep 2025 22:18:21 +1300
+Message-ID: <20250930091841.1693131-3-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250930091841.1693131-1-ankur.tyagi85@gmail.com>
+References: <20250930091841.1693131-1-ankur.tyagi85@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 08:23:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120051
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 09:18:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120054
 
-When enabling multi-lib,following error occured:
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-| install: cannot create regular file 'build-dir/build-yocto/tmp/work/aarch64-ubinux-linux/dracut/108/image/usr/lib64/dracut/dracut.conf.d/': No such file or directory
-
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit dd4e71817df9ba6dbf1797689bd4e3da063d249c)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-initramfs/recipes-devtools/dracut/dracut_108.bb | 2 +-
+ .../parallel/{parallel_20250322.bb => parallel_20250422.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/parallel/{parallel_20250322.bb => parallel_20250422.bb} (93%)
 
-diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_108.bb b/meta-initramfs/recipes-devtools/dracut/dracut_108.bb
-index 5c95abbf29..276f301daf 100644
---- a/meta-initramfs/recipes-devtools/dracut/dracut_108.bb
-+++ b/meta-initramfs/recipes-devtools/dracut/dracut_108.bb
-@@ -76,7 +76,7 @@ systemdsystemconfdir=${sysconfdir}/systemd/system
- systemduser=${systemd_user_unitdir}
- systemduserconfdir=${sysconfdir}/systemd/user
- EOF
--        install -m 0644 ${B}/${DISTRO}.conf ${D}${libdir}/dracut/dracut.conf.d/
-+        install -m 0644 ${B}/${DISTRO}.conf ${D}${nonarch_libdir}/dracut/dracut.conf.d/
-     fi
- }
+diff --git a/meta-oe/recipes-extended/parallel/parallel_20250322.bb b/meta-oe/recipes-extended/parallel/parallel_20250422.bb
+similarity index 93%
+rename from meta-oe/recipes-extended/parallel/parallel_20250322.bb
+rename to meta-oe/recipes-extended/parallel/parallel_20250422.bb
+index 8767f2946b..88d1cf040b 100644
+--- a/meta-oe/recipes-extended/parallel/parallel_20250322.bb
++++ b/meta-oe/recipes-extended/parallel/parallel_20250422.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
+ "
  
--- 
-2.43.0
-
+ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.bz2"
+-SRC_URI[sha256sum] = "c82896e779b18c2a157527f32f35de9a6d984f8b8ebad2b41dbc78c33adbaabe"
++SRC_URI[sha256sum] = "10f0a7b7fbed87edcbd63a403fdc0ee1a1f86c241a3605f33162b4b9aff248dd"
+ 
+ inherit autotools bash-completion
+ 
 
