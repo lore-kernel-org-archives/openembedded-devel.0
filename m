@@ -1,134 +1,313 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A062CCA470
-	for <webhook@archiver.kernel.org>; Tue, 30 Sep 2025 17:21:06 +0000 (UTC)
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.web11.1215.1759252863802267543
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2D8CCAC5B8
+	for <webhook@archiver.kernel.org>; Tue, 30 Sep 2025 18:44:09 +0000 (UTC)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web11.1517.1759257842548451705
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Sep 2025 10:21:03 -0700
+ Tue, 30 Sep 2025 11:44:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=W3Tnc5dX;
- spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-71d60501806so68858167b3.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 10:21:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eE52DDF7;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-634a3327ff7so11657650a12.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 11:44:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759252863; x=1759857663; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=98Ya9SnbKlqgTd7W1xC13L8jXgzT+iO/1h2/nYqNJOI=;
-        b=W3Tnc5dXU1JL40NnOVRG0UxgfBTnrJ01OMt3rky3CstgZptOlJAL7ZAHB3nmY4a94a
-         lPF3OPjYfD5tWt0MpI0OoOhPzg66PtYbdXbYb4MAiqut+adPGWl8vU7rekwBNG5bq5bY
-         ImNA+atdx6cChWULFU7jQI27fNl3PINS05meMCypgZrQzq1Hj/PLX/VMPsYpf1+TVqOn
-         6/G14SDu/8M14xcOS4qCNUmZo3g/UOzqpw7d5OdX+i38hY0rp2kguEzWZ2aB5JneZWrI
-         ytturU7AbtCsR23ILlo4Ugrj3UX/yp9jEIBzYAMnj2m2E9uYAww2G7uZydaAnSBRYqZr
-         mC1A==
+        d=gmail.com; s=20230601; t=1759257841; x=1759862641; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=ihfD76JZI3T4fwHtP1fQPkh/NIBPnAkB9QYOVPpPdzU=;
+        b=eE52DDF7nuc8I2bj3ERG+ZEEh2KEXPyKyH0s12CeyhkB7vn89HAiNixJo1woBmVF7b
+         BlVg/EbzHsk8rMXFNptnNWqpWHOzObcOVTZehefNEumOR3QMZyVR+YNwtCVo0ZjbhkvV
+         QZgkKsU25wye3TaO0BYSZvvipRSRBd8YFU3504cV1R0A7MfLxyNTOC3Nv2OK/thPzqbo
+         iXAwagN9K5pcL0gkTeLpegnLK6GttH3fScolKr0R7MsCGD5uX9fLu4OitjeVWccrBWjo
+         H7qQ+DbNT6wN8+a5WdrC31xjp4QFuCOqFe7c021Dlw9Yns/CihOETl8xchcqsvdeU/HN
+         b64w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759252863; x=1759857663;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=98Ya9SnbKlqgTd7W1xC13L8jXgzT+iO/1h2/nYqNJOI=;
-        b=BhUdfGeuueXqGkKbHn3UAM0VHJZCrOWoCwF9Av225MsUFOu8/h+PafZDeMWSUdco6W
-         ZhN/5crsSStPS+NdWhNLZAzg0iayDtSWdWC8yHWCUG+5Rw0apPmvSzxF8ZAIla4+g46X
-         5w9LSnXiCrdXDosjiFZKbn6OXhoiR5L6f0Tt/nwnVHbFkieWQ0fV7SK3/Pe2IW4oY7AB
-         fmucsGT6YmkczgI8mUUavUmy2ZbzBfvKyLs+nx/UIpqSn0oV2W+hq1V/x/c36QAzeOex
-         aVy10dM9cuXQ8foGpxAXoAJV3eh8mQPRbmHVGSZSTd0L3wfVZ38r5Ef5sNDenf6IlZIk
-         Dsrg==
-X-Gm-Message-State: AOJu0Yz/6lFO81qgjTLsVCeREJm3EoZhJBRNepope4Kh6m+o7TgjkeWJ
-	7wr8yI2sSyrbIF23TB09ZmcFBe088yniYtSbjEpbNYYif3FeymfKCU/4wZReOXgq
-X-Gm-Gg: ASbGncuinMsJMy4v9qmmzwqeKpBvLujQDzc7Gw9RlRr5u/iOGG7SMkq18yIzWqJEOjT
-	1m/nKVdz+Ik+76sA+IOyOQ9NiUtKix0kCNr6SCVPBLuF4nOMSZoGaAbeqFL+wJj+e2XzG8jjZND
-	muBzg/5Rcf2bdGKAAe4qi5c7DCY1hT9My6kIAoUC9N5SvLiYXw9VlCTXVh6uZX3tv5l/KR+1pt4
-	hjT1QvFNL70a/nHYxeenWG/gJeh1ihU9Vwf6ndYQ4sU2NZLYJrk84MORwC+g4mAau5BQs63KbLI
-	iOfFl4aAgstLuhbFsgu4tWB/SiZGP95PnySHyPwJWdSqJiNbcnqLVY+6SUJuNfZxTMdf6IPLDcu
-	bzX9/M8+IIMdf7MBUA0z04CB1vKbE9Ixh59swHu8iz8h9dLbYLLac
-X-Google-Smtp-Source: AGHT+IGl2mIA0lpuDtY1+d8ETSOFCVf6sgOEp0f/lQ85EKLYDUZu2ujdVnQIM4Na9G/boxHvNG4XNA==
-X-Received: by 2002:a05:690c:700b:b0:76a:557b:2666 with SMTP id 00721157ae682-77f6f391664mr5141197b3.49.1759252861897;
-        Tue, 30 Sep 2025 10:21:01 -0700 (PDT)
-Received: from localhost.localdomain ([67.233.61.26])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-765bd407b9asm39066247b3.24.2025.09.30.10.21.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Sep 2025 10:21:01 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] neon: upgrade 0.33.0 -> 0.34.2
-Date: Tue, 30 Sep 2025 13:20:49 -0400
-Message-ID: <20250930172050.520798-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1759257841; x=1759862641;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ihfD76JZI3T4fwHtP1fQPkh/NIBPnAkB9QYOVPpPdzU=;
+        b=vWZQC/hmLXVHEooT4yHstlIwu23VUn7/ROh42y2YmqRh/r5gefMAetGFekCc5D9nD2
+         QfltCvbCWZywga8VVy9HWilatMbcHw1WlCUduliJu3B7PHaMv1t4TUK3mk+hZknToxpF
+         AtqXoVb/VP18aQBFjnBYZ/KOX1o2BIMYVnx4g609uDBmXU1JG7f7ma3NyKHzQnq3iEwr
+         ol4PN7llQzsA6xt+20zQqyo9xk1WjkqLFeNuAMc2s/9dPUUGLZQArb/Td/OISAQlCW2j
+         lCAAyb8kcmHEEsGRbTJDrjNRBAPvVTU+q8/xIsgSWkeuWnWmUGxgK0SMWwUmQsUoMzhD
+         2Beg==
+X-Forwarded-Encrypted: i=1; AJvYcCW5yn5+eL0ChQV5RQ+d5rz4OASEjwpOaAeUElzPATs77EM8XeOoMK5zbkwM7nh+Y69dt8T5eh2dRRd4ON3uUYhzOSg=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YznsocqqRCtO1KqZqPPyvuuobDU+WV9doqktp5Yx36q5jmoNal0
+	V1mjnxW6W0F6rqzX9QtXrfzA7oYAe2Le1l/Cam8uFwTYPxCAKWdeiXt1W92WcQ==
+X-Gm-Gg: ASbGnctLZ70PjGg+PNMiikGkBgaZZHz1nSECPyHIX4ifXXhpeOTs+/XFu8kc+uDL0gv
+	/wTg5YCjahdg3okU1BKgMNoenV7Vt5Mm1IY5NNIFbDuXLcpG+lVXhpYbQ7PQhzwtQJyVEy5yrLZ
+	3INT678viNKRrlFTNocfuiJ7oEe3EEprGbSFCX2oDo+8hign8Qy4NgmNC/U/C1ASfkVvx4HE9jn
+	hchQa8q6NCUuUcU5eYdxLYOreyi18nTVg5ytxdxF2n9NkPAGQY1v6DZX5dbOPItqB7+8MNBHmAA
+	BA4mJphJBeR41lLyuTV8BGJBMEie7rhTB2n1h+S4BL/n8iw0d06NYYMCy9+4m0wYjXkmDdVwU5v
+	wFrvybzZ3y9CvAOToG6xv5lM013GoSExIgAlx3a/fLVgj5H3mfXJvjjU=
+X-Google-Smtp-Source: AGHT+IH3ZDn3XXwupGt5V0fIK013wWbxht1r9T/+US25V0VJ7sqJwOM1AA14c03zJFqo9NnrxOeHMQ==
+X-Received: by 2002:a05:6402:a148:b0:626:8e29:8d42 with SMTP id 4fb4d7f45d1cf-63678cdcea2mr708245a12.37.1759257840479;
+        Tue, 30 Sep 2025 11:44:00 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634c1ca9ac9sm8034931a12.38.2025.09.30.11.43.58
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 30 Sep 2025 11:43:59 -0700 (PDT)
+Message-ID: <49a8e14c-d4b7-4523-b4a5-22ccd2f3059f@gmail.com>
+Date: Tue, 30 Sep 2025 20:43:58 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-oe][scarthgap][PATCH 1/1] Revert "mariadb: upgrade
+ 10.11.9 -> 10.11.12"
+To: "Urade, Yogita" <yogita.urade@windriver.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20250926105137.3980107-1-yogita.urade@windriver.com>
+ <7121a8c5-1148-45dd-80b3-38558b4070ed@gmail.com>
+ <d6b18dfd-8f93-4256-a182-d5ce828ce321@windriver.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <d6b18dfd-8f93-4256-a182-d5ce828ce321@windriver.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 17:21:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120081
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 18:44:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120082
 
-Changes in release 0.34.2 (neon-0.34.2.tar.gz), 15th April 2025
+On 9/30/25 12:20, Urade, Yogita wrote:
+>
+>
+> On 30-09-2025 15:35, Gyorgy Sarvari wrote:
+>> CAUTION: This email comes from a non Wind River email account!
+>> Do not click links or open attachments unless you recognize the sender and know the content is safe.
+>>
+>> On 9/26/25 12:51, Urade, Yogita via lists.openembedded.org wrote:
+>>> From: Yogita Urade <yogita.urade@windriver.com>
+>>>
+>>> This reverts commit 7b57b8f1069f29981623ee30c6dd24b7781ed958.
+>>>
+>>> This upgradation causes timeout issue to start the mysqld services.
+>> Could you please give some info, how to reproduce this issue? Does it
+>> need anything special?
+>> I think it would be better to bisect the issue and try to find the
+>> solution (if possible) rather than going backwards.
+> To reproduce this issue, added following parameters in local.conf:
+> DISTRO_FEATURES:append = " systemd usrmerge"
+> DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
+> VIRTUAL-RUNTIME_init_manager = "systemd"
+> VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
+>
+> After booting to image ran the following command:
+> root@qemux86-64:~# systemctl start mysqld
+>  Job for mysqld.service failed because a timeout was exceeded.
+>  See "systemctl status mysqld.service" and "journalctl -xeu
+> mysqld.service" for details. 
+>
+> Kindly let me know if you have any suggestions to fix this.
 
-    Fix regression in NTLM auth in 0.34.0 (issue #190).
-    Add docs for ne_ssl_proto_name, ne_ssl_protovers, ne_get_request_target.
+It seems that a colleague of yours has ran into this issue some time
+ago: https://jira.mariadb.org/browse/MDEV-36051 - and at the first sight
+I think the observations made about the contradictory comments about
+stack-growing direction are correct.
 
-Changes in release 0.34.1 (neon-0.34.1.tar.gz), 14th April 2025
+Try to add "-DSTACK_DIRECTION=-1" to EXTRA_OECMAKE, and give it a test
+(maybe with some data and queries also). Since AFAIK Yocto is not too
+widely used on SPARC and HP-UX (where the value of this macro should be
+different), I think it could be just added to the recipe, if it works.
 
-    Fix regression in 207 parsing of elements which omit a reason-phrase (issue #188).
-    Fix ne_move() to submit lock tokens for the parent collection of a source resource locked with depth: 0.
 
-Changes in release 0.34.0 (neon-0.34.0.tar.gz), 23rd November 2024
-
-    Interface changes:
-        API and ABI backwards-compatible with 0.27.x and later
-        NE_SESSFLAG_SSLv2 is now ignored
-
-    New interfaces and features:
-        ne_request.h: add ne_get_response_location(), add ne_get_request_target()
-        ne_redirect.h: adds relative URI resolution per RFC 9110
-        ne_socket.h: add ne_iaddr_set_scope(), ne_iaddr_get_scope(), ne_sock_getproto()
-        ne_session.h: add NE_SESSFLAG_STRICT session flag
-        ne_session.h: ne_session_create() now accepts scoped IPv6 link-local literal addresses following the RFC 6874 syntax;
-        ne_session.h: add ne_ssl_set_protovers() to configure TLS protocol version ranges
-        ne_utils.h: add NE_FEATURE_GSSAPI, NE_FEATURE_LIBPXY feature flags
-        ne_ssl.h: add ne_ssl_proto_name()
-        HTTP strictness/compliance updated for RFC 9110/9112; notably stricter in parsing header field line, chunked transfer-coding, status-line.
-
-    Bug fixes:
-        auth: the ‘realm’ string passed to credentials callback is now cleaned of non-printable characters.
-    Documentation & header updates for RFC 9110/9112.
-    New NE_MINIMUM_VERSION() autoconf macro for better version handling.
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- .../recipes-support/neon/{neon_0.33.0.bb => neon_0.34.2.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/neon/{neon_0.33.0.bb => neon_0.34.2.bb} (93%)
-
-diff --git a/meta-oe/recipes-support/neon/neon_0.33.0.bb b/meta-oe/recipes-support/neon/neon_0.34.2.bb
-similarity index 93%
-rename from meta-oe/recipes-support/neon/neon_0.33.0.bb
-rename to meta-oe/recipes-support/neon/neon_0.34.2.bb
-index 0ab6d25f53..738b029a29 100644
---- a/meta-oe/recipes-support/neon/neon_0.33.0.bb
-+++ b/meta-oe/recipes-support/neon/neon_0.34.2.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "An HTTP and WebDAV client library with a C interface"
--HOMEPAGE = "http://www.webdav.org/neon/"
-+HOMEPAGE = "https://notroj.github.io/neon/"
- SECTION = "libs"
- LICENSE = "LGPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://src/COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a \
-@@ -11,7 +11,7 @@ SRC_URI = "https://notroj.github.io/neon/neon-${PV}.tar.gz \
-            file://run-ptest \
-            "
- 
--SRC_URI[sha256sum] = "659a5cc9cea05e6e7864094f1e13a77abbbdbab452f04d751a8c16a9447cf4b8"
-+SRC_URI[sha256sum] = "f98ce3c74300be05eddf05dccbdca498b14d40c289f773195dd1a559cffa5856"
- 
- inherit autotools-brokensep binconfig-disabled lib_package pkgconfig ptest gettext
- 
--- 
-2.43.0
+> ../Yogita
+>>> Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+>>> ---
+>>>  ..._10.11.12.bb => mariadb-native_10.11.9.bb} |  0
+>>>  meta-oe/recipes-dbs/mysql/mariadb.inc         |  4 +-
+>>>  ...-missing-includes-cstdint-and-cstdio.patch | 43 ++++++++++++-------
+>>>  .../recipes-dbs/mysql/mariadb/mm_malloc.patch | 13 ++++++
+>>>  .../mysql/mariadb/ppc-remove-glibc-dep.patch  | 43 +++++++++++++++++++
+>>>  ...mariadb_10.11.12.bb => mariadb_10.11.9.bb} |  0
+>>>  6 files changed, 87 insertions(+), 16 deletions(-)
+>>>  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.11.12.bb => mariadb-native_10.11.9.bb} (100%)
+>>>  create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch
+>>>  create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
+>>>  rename meta-oe/recipes-dbs/mysql/{mariadb_10.11.12.bb => mariadb_10.11.9.bb} (100%)
+>>>
+>>> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.12.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.9.bb
+>>> similarity index 100%
+>>> rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.11.12.bb
+>>> rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.11.9.bb
+>>> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+>>> index 6e7c01a775..abcf0b3cda 100644
+>>> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
+>>> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+>>> @@ -17,13 +17,15 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+>>> file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.patch \
+>>> file://0001-aio_linux-Check-if-syscall-exists-before-using-it.patch
+>>> \ file://ssize_t.patch \ + file://mm_malloc.patch \
+>>> file://sys_futex.patch \ file://cross-compiling.patch \
+>>> file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
+>>> file://lfs64.patch \
+>>> file://0001-Add-missing-includes-cstdint-and-cstdio.patch \ "
+>>> -SRC_URI[sha256sum] = "d61f23090cfc14f43e8a27c2d3ce7f80247e74481bb26a2d3a6308b8d194e167"
+>>> +SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
+>>> +SRC_URI[sha256sum] = "0a00180864cd016187c986faab8010de23a117b9a75f91d6456421f894e48d20"
+>>>
+>>>  UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+>>>
+>>> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
+>>> index fa580d039a..7fc2377f19 100644
+>>> --- a/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
+>>> +++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch
+>>> @@ -11,14 +11,27 @@ Upstream-Status: Pending
+>>>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>>  Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>>>  ---
+>>> - storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h  | 1 +
+>>> - .../rocksdb/rocksdb/table/block_based/data_block_hash_index.h   | 1 +
+>>> - storage/rocksdb/rocksdb/util/slice.cc                           | 2 +-
+>>> - storage/rocksdb/rocksdb/util/string_util.h                      | 1 +
+>>> - 4 files changed, 4 insertions(+), 1 deletion(-)
+>>> + .../rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h   | 1 +
+>>> + storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h   | 1 +
+>>> + .../rocksdb/rocksdb/table/block_based/data_block_hash_index.h    | 1 +
+>>> + storage/rocksdb/rocksdb/util/slice.cc                            | 1 +
+>>> + storage/rocksdb/rocksdb/util/string_util.h                       | 1 +
+>>> + 5 files changed, 5 insertions(+)
+>>>
+>>> +diff --git a/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h b/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
+>>> +index 963c1d8e..73487edd 100644
+>>> +--- a/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
+>>> ++++ b/storage/rocksdb/rocksdb/db/compaction/compaction_iteration_stats.h
+>>> +@@ -5,6 +5,7 @@
+>>> +
+>>> + #pragma once
+>>> +
+>>> ++#include <cstdint>
+>>> + #include "rocksdb/rocksdb_namespace.h"
+>>> +
+>>> + struct CompactionIterationStats {
+>>>  diff --git a/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h b/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
+>>> -index 7fb9d489..f7b4e6f0 100644
+>>> +index c7f93b4c..3c2ab805 100644
+>>>  --- a/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
+>>>  +++ b/storage/rocksdb/rocksdb/include/rocksdb/utilities/checkpoint.h
+>>>  @@ -8,6 +8,7 @@
+>>> @@ -42,20 +55,20 @@ index f356395f..32152217 100644
+>>>   #include <vector>
+>>>
+>>>  diff --git a/storage/rocksdb/rocksdb/util/slice.cc b/storage/rocksdb/rocksdb/util/slice.cc
+>>> -index 3c3656de..b18d7f5d 100644
+>>> +index 6db11cc9..c26b6a21 100644
+>>>  --- a/storage/rocksdb/rocksdb/util/slice.cc
+>>>  +++ b/storage/rocksdb/rocksdb/util/slice.cc
+>>> -@@ -12,7 +12,7 @@
+>>> - #include <stdio.h>
+>>> +@@ -8,6 +8,7 @@
+>>> + // found in the LICENSE file. See the AUTHORS file for names of contributors.
+>>>
+>>>   #include <algorithm>
+>>> --
+>>>  +#include <cstdint>
+>>> - #include "rocksdb/convenience.h"
+>>>   #include "rocksdb/slice_transform.h"
+>>> - #include "rocksdb/utilities/object_registry.h"
+>>> -diff --git a/storage/rocksdb/rocksdb/util/string_util.h b/storage/rocksdb/rocksdb/util/string_util.h
+>>> -index 7794dbb0..b480177e 100644
+>>> + #include "rocksdb/slice.h"
+>>> + #include "util/string_util.h"
+>>> +
+>>> +diff --git a/util/string_util.h b/util/string_util.h
+>>> +index 55d106fff02..11178fd1d7b 100644
+>>>  --- a/storage/rocksdb/rocksdb/util/string_util.h
+>>>  +++ b/storage/rocksdb/rocksdb/util/string_util.h
+>>>  @@ -6,6 +6,7 @@
+>>> @@ -67,5 +80,5 @@ index 7794dbb0..b480177e 100644
+>>>   #include <string>
+>>>   #include <unordered_map>
+>>>  --
+>>> -2.40.0
+>>> +2.25.1
+>>>
+>>> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch b/meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch
+>>> new file mode 100644
+>>> index 0000000000..56ed480d33
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-dbs/mysql/mariadb/mm_malloc.patch
+>>> @@ -0,0 +1,13 @@
+>>> +Upstream-Status: Pending
+>>> +
+>>> +--- a/storage/rocksdb/rocksdb/port/jemalloc_helper.h
+>>> ++++ b/storage/rocksdb/rocksdb/port/jemalloc_helper.h
+>>> +@@ -5,7 +5,7 @@
+>>> +
+>>> + #pragma once
+>>> +
+>>> +-#if defined(__clang__)
+>>> ++#if defined(__clang__) && defined(__GLIBC__)
+>>> + // glibc's `posix_memalign()` declaration specifies `throw()` while clang's
+>>> + // declaration does not. There is a hack in clang to make its re-declaration
+>>> + // compatible with glibc's if they are declared consecutively. That hack breaks
+>>> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
+>>> new file mode 100644
+>>> index 0000000000..3787b74ad1
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-dbs/mysql/mariadb/ppc-remove-glibc-dep.patch
+>>> @@ -0,0 +1,43 @@
+>>> +Upstream-Status: Pending
+>>> +
+>>> +Remove glibc specific function dependencies
+>>> +
+>>> +Sourced from: https://git.alpinelinux.org/aports/tree/main/mariadb/ppc-remove-glibc-dep.patch
+>>> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>> +
+>>> +diff --git a/include/my_cpu.h b/include/my_cpu.h
+>>> +index f2e26fca..94599b74 100644
+>>> +--- a/include/my_cpu.h
+>>> ++++ b/include/my_cpu.h
+>>> +@@ -24,17 +24,16 @@
+>>> + */
+>>> +
+>>> + #ifdef _ARCH_PWR8
+>>> +-#include <sys/platform/ppc.h>
+>>> + /* Very low priority */
+>>> +-#define HMT_very_low() __ppc_set_ppr_very_low()
+>>> ++#define HMT_very_low() asm volatile("or 31,31,31")
+>>> + /* Low priority */
+>>> +-#define HMT_low() __ppc_set_ppr_low()
+>>> ++#define HMT_low() asm volatile ("or 1,1,1")
+>>> + /* Medium low priority */
+>>> +-#define HMT_medium_low() __ppc_set_ppr_med_low()
+>>> ++#define HMT_medium_low() asm volatile ("or 6,6,6")
+>>> + /* Medium priority */
+>>> +-#define HMT_medium() __ppc_set_ppr_med()
+>>> ++#define HMT_medium() asm volatile ("or 2,2,2")
+>>> + /* Medium high priority */
+>>> +-#define HMT_medium_high() __ppc_set_ppr_med_high()
+>>> ++#define HMT_medium_high() asm volatile("or 5,5,5")
+>>> + /* High priority */
+>>> + #define HMT_high() asm volatile("or 3,3,3")
+>>> + #else
+>>> +@@ -72,7 +71,7 @@ static inline void MY_RELAX_CPU(void)
+>>> +   __asm__ __volatile__ ("pause");
+>>> + #endif
+>>> + #elif defined(_ARCH_PWR8)
+>>> +-  __ppc_get_timebase();
+>>> ++  __builtin_ppc_get_timebase();
+>>> + #elif defined __GNUC__ && (defined __arm__ || defined __aarch64__)
+>>> +   /* Mainly, prevent the compiler from optimizing away delay loops */
+>>> +   __asm__ __volatile__ ("":::"memory");
+>>> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.11.12.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.11.9.bb
+>>> similarity index 100%
+>>> rename from meta-oe/recipes-dbs/mysql/mariadb_10.11.12.bb
+>>> rename to meta-oe/recipes-dbs/mysql/mariadb_10.11.9.bb
+>>>
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>> Links: You receive all messages sent to this group.
+>>> View/Reply Online (#119905): https://lists.openembedded.org/g/openembedded-devel/message/119905
+>>> Mute This Topic: https://lists.openembedded.org/mt/115446396/6084445
+>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>>
 
 
