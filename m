@@ -1,145 +1,229 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB252CAC5B0
-	for <webhook@archiver.kernel.org>; Mon, 29 Sep 2025 23:24:45 +0000 (UTC)
-Received: from mail-io1-f45.google.com (mail-io1-f45.google.com [209.85.166.45])
- by mx.groups.io with SMTP id smtpd.web10.12900.1759188280471349858
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 565BDCAC5B8
+	for <webhook@archiver.kernel.org>; Tue, 30 Sep 2025 04:13:27 +0000 (UTC)
+Received: from mail-yx1-f47.google.com (mail-yx1-f47.google.com [74.125.224.47])
+ by mx.groups.io with SMTP id smtpd.web10.17582.1759205605251537178
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Sep 2025 16:24:40 -0700
+ Mon, 29 Sep 2025 21:13:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mbt88iyj;
- spf=pass (domain: gmail.com, ip: 209.85.166.45, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-io1-f45.google.com with SMTP id ca18e2360f4ac-8d593793af1so208503739f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 16:24:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bGCV54xF;
+ spf=pass (domain: gmail.com, ip: 74.125.224.47, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f47.google.com with SMTP id 956f58d0204a3-637dc2292cfso2631956d50.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 21:13:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759188279; x=1759793079; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vGeYTFuNuwS84PuYmDAv5iIH78GbGUFBv98mvksW/oQ=;
-        b=mbt88iyj/yJB4MWu97SzWz6wvcdeDOJ1ARhkcNMVPWa61e3OAsrtwI/OL1dGv2ZDLi
-         t38s5j0LdrDSzFibfByb5JFKg9R8xhyKHUVQZye5l6KoSTcLzDiFQay0bcM3QAm2Sfrs
-         kHkP38dPde7R+0L+wQb+TY48bw/dIFTsKBq5oexnZmW/54hlSogEOpjjG0ukBayZV2TB
-         mWQcdoIO+ZWRqx4okhcCJ4TdyiMy5rnznVzN1/Rpv+AXmTheToUUX5lr6C+kcXwK+oNN
-         vDL7+4nlrEezr6v74sfQUMdYX38JIOQaSh/DlA3pHHZRTfIj1SkdHEk3YQMYg2YMO3ts
-         +1tg==
+        d=gmail.com; s=20230601; t=1759205604; x=1759810404; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ye8qTrTFD0fPeV5SK72cStah4DjHuL4XROLwYgkkiPo=;
+        b=bGCV54xF24pDebH+8YbUXktl1/ZHeYWiNy5feOmOMY9pjiTeiyFlRuPcj5Qr6U+wDk
+         a7hZLBhiWUhgB3GId/I3EMw1tjNsILBfBo6ZLAr/G9SvHJydoDNErSepHR6ROKglZT28
+         oPPSJSNMDgG9FwLQ2F7WZVbgUw5IYeJZrhrW2XGuYBrhtxnJVq2cdOVGkECRD47Y05eL
+         D5CumyJYjSdmQ1Jeh0DEYIULPCptbeFc6IZo+vcTEC3WHQZ7BAfuC/E3naSyhXcHAVo/
+         C7HkyEekxkyUaDbmfHZ74qTX8x3YCOB2pCdiObQgROxIi+XVEZWqkbRFiVlpCxrXwyB+
+         B4BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759188279; x=1759793079;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=vGeYTFuNuwS84PuYmDAv5iIH78GbGUFBv98mvksW/oQ=;
-        b=EAOx4/HY+1UISl1mYU+clh6DV6wLZf6g6E2NiNJhSt9Q2Hn2e9IGJJWVchq0xwiq4A
-         xZbL7O/CzxMqSkySye6w3nTAH3hQcyNi6z7iWFkttBI8iDdZvNY5x2V0YOZ1Dj0mQU1k
-         cXKfKFe9qQ1aNbPgg59T2D7ze1/o6gfFTgGk0g7dn3IYxk28NcXj8Qgn8Yz/w9jXmMNe
-         lXX7aMHOK75x1wkQLdQcF4sRmbClEz9JqeO5ELO/KCdoWaAQmZe7pnoA8SMog43M7E92
-         iMH2iz2F7lUlfZQPsI0DK+bF1RpPoRbrGFzO7TnF9qm0pig/auZKU9sVAJ/fJL3CtBac
-         fxkQ==
-X-Gm-Message-State: AOJu0YxFt3h6yi7cPgk6XCSrv5b/qKpgJqPEWOxza8AAu4WRcjVYyLoM
-	TiXAxqOH+xe4C1NfvPNUGZW5TLtZABqJo8iTmm9ZNq9Hegpx1gMCK/AgdWnpRdLE
-X-Gm-Gg: ASbGncu+S4T8giY2889R0hd0dzoYLTBDwiocNjDQG80947UJcAB7BgZvnR3BgnUjNJO
-	1YwEIK3OrvfZgRN07HMcT0uPtuvQL66qFjBtU/vPaKLDUNOP8F0rcespyrOhpqwTdQI71bCDuSI
-	fUDvaZ74Zz672QzuE2GKTpsF6w6LK4BGmb4AqsDgL4gvo6lAju99fUulo+YPolKAjEBYxMTJH9H
-	WVowoLUJx41sNOM8OqvVwduO6tKEeHDYMFMSDeZ+uDpdJKVvCF2dldH63lulplYW4VXNLh+OzFF
-	AUFKD/GX8hfgymK30qnDRbXz8zPi0aZDqM95/fF+NTpMvnQhUzNfLq8tmCvZacr7RZnak3dpkw7
-	ooWQWN6CFdthhO3wN1TZFQQ9Kft3a99qyDmzTRPi2DJwYCMard9tL44FxDhA5AQ==
-X-Google-Smtp-Source: AGHT+IFkNWp4DMavtNnzliqHsohdh5B7jc0Nkw/2JWKp+5VyI3s/cbknBGJyb3s4mHGFqzdYd8Ak0A==
-X-Received: by 2002:a05:6602:2754:b0:917:664e:c00b with SMTP id ca18e2360f4ac-930b0de69c8mr293399039f.9.1759188279428;
-        Mon, 29 Sep 2025 16:24:39 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.brunswick.com ([147.161.217.10])
-        by smtp.gmail.com with ESMTPSA id 8926c6da1cb9f-56a6a5ade67sm5244088173.60.2025.09.29.16.24.37
+        d=1e100.net; s=20230601; t=1759205604; x=1759810404;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Ye8qTrTFD0fPeV5SK72cStah4DjHuL4XROLwYgkkiPo=;
+        b=oMH8AJK7WBFyQvVnUmps7qT3xhq7i8XJcS0wTBpvPDvu7r9hns4E9m3bkIWZCPlJB7
+         WIKm3aeV+cNLWeusoT0uBZme1Wb9G00i1rA/vSd3X6Z491BKov3cVP4NqqgAl+W6Y3Qz
+         i9GJ/VwNvCkEixRIxwZ/FC1StojcgPQhHEaqubGg+1wIDDBZVMTrN25QE5KQBrJK33gw
+         H6n4OiD5pE/H7VOLp+hZOl2tyw+XdrqlXXf23xhiX9Ib2pJ1hLsK5kfnnCpwurAGay3Y
+         ftQaXCQugEGjD6eUVA/iRSHsYLzfzwVtUdizk4GTIgw7TvwHC3+ufSVfGJ7UEa2nz5F9
+         GCqA==
+X-Gm-Message-State: AOJu0YwS3YnM1sUF1b2BJV9/u1E5O4qb3edTWEEUDajCpggGYNYS2SbF
+	IX5NOB+KST24pCZL1IbTDOrhzCf0HWj8Ih7FZUBr3mpWl20IUs1SiGrTC40lxte7
+X-Gm-Gg: ASbGnctVJgOl305vIDE98pn2dG7cSCFL79v3/jl2elZ5sd4eCBLAfwoFGn3qywrMIIw
+	vXp2X9B7fpmnGmN+fL0uZVeLPz2Ksv5wVN0KO7miLxHzp8VK9r+woJy4J59jLagYEkwYSPIXs40
+	sOMR/FyRO4bIe3lfY9QaQ4RGuJaoQ/W3g/xiF0R69FNOu3mXRfEDuQn3wmsWf4pcPPyMYLTbS+R
+	WxZgqO7SN6CrSI9MhGT5Id8lOov2+wNJm5NgXSsLVo4M8eBARJFkdBLCYSvzFRunytE3pYSBVAz
+	Su9oTg+Z0ufKxBbnpkOMm9CWHVthY7J6KeYTUApc76e0HulsKcSZ+abpC+24qavh4yhivCWZB/G
+	Bl3DqzqVk/uSy0jdfDc9ApGXjJhB90wm/yIJh/pj3GK2u9lD/onIL
+X-Google-Smtp-Source: AGHT+IFkFxS8IT4LT+255tFd30NGB323mMNEjOSTlsOQR+s+XHQNRZ7eZNKX2S0+6bHk9GQwqmnPSw==
+X-Received: by 2002:a53:b086:0:b0:636:d286:4833 with SMTP id 956f58d0204a3-636d286509dmr12800594d50.6.1759205603582;
+        Mon, 29 Sep 2025 21:13:23 -0700 (PDT)
+Received: from localhost.localdomain ([67.233.61.26])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-765be76d928sm33771587b3.31.2025.09.29.21.13.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Sep 2025 16:24:39 -0700 (PDT)
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+        Mon, 29 Sep 2025 21:13:23 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Liu Yiding <liuyd.fnst@fujitsu.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][walnascar][PATCH 2/2] freeradius: Fix service start error
-Date: Tue, 30 Sep 2025 12:24:27 +1300
-Message-ID: <20250929232427.950644-2-ankur.tyagi85@gmail.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] webkitgtk3: add patch to fix qemuarm
+Date: Tue, 30 Sep 2025 00:12:14 -0400
+Message-ID: <20250930041240.41969-1-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250929232427.950644-1-ankur.tyagi85@gmail.com>
-References: <20250929232427.950644-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Sep 2025 23:24:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120047
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Sep 2025 04:13:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120048
 
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
+The patch here is backported from webkitgtk 2.50 and allows
+32 bit arm to successfully build (qemuarm)
 
-Following error occurred while starting this service.
- Error: tls: (TLS) Failed reading certificate file "/etc/raddb/certs/server.pem"
- Error: tls: (TLS) error:03000072:digital envelope routines::decode error
- Error: tls: (TLS) error:0A00018F:SSL routines::ee key too small
- Error: rlm_eap_tls: Failed initializing SSL context
- Error: rlm_eap (EAP): Failed to initialise rlm_eap_tls
- Error: /etc/raddb/mods-enabled/eap[14]: Instantiation failed for module "eap"
-
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 97376e916ef75c5bf823fcedbfdee6f03af15f96)
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../files/0018-Fix-Service-start-error.patch  | 33 +++++++++++++++++++
- .../freeradius/freeradius_3.2.7.bb            |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0018-Fix-Service-start-error.patch
+ .../webkitgtk3/0001-Fix-32bit-arm.patch       | 128 ++++++++++++++++++
+ .../webkitgtk/webkitgtk3_2.48.7.bb            |   1 +
+ 2 files changed, 129 insertions(+)
+ create mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-32bit-arm.patch
 
-diff --git a/meta-networking/recipes-connectivity/freeradius/files/0018-Fix-Service-start-error.patch b/meta-networking/recipes-connectivity/freeradius/files/0018-Fix-Service-start-error.patch
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-32bit-arm.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-32bit-arm.patch
 new file mode 100644
-index 0000000000..f1ec181bc1
+index 0000000000..fadef2a01b
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/freeradius/files/0018-Fix-Service-start-error.patch
-@@ -0,0 +1,33 @@
-+From e97ffc1f820beff12bb8084e6337168a1cd27540 Mon Sep 17 00:00:00 2001
-+From: Liu Yiding <liuyd.fnst@fujitsu.com>
-+Date: Sat, 20 Sep 2025 06:50:17 +0000
-+Subject: [PATCH] Fix Service start error
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-32bit-arm.patch
+@@ -0,0 +1,128 @@
++From 014b9dad4ec5c432410254c0d0cab7d20b1f31d7 Mon Sep 17 00:00:00 2001
++From: Jason Schonberg <schonm@gmail.com>
++Date: Mon, 29 Sep 2025 14:34:48 -0400
++Subject: [PATCH] From: amaxcz <amaxcz@gmail.com> Date: Fri, 19 Sep 2025
++ 11:55:30 +0000 Subject: [PATCH] JSC: fix op_instanceof handler for 32-bit
++ C-loop build MIME-Version: 1.0 Content-Type: text/plain; charset=UTF-8
++ Content-Transfer-Encoding: 8bit
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+change "fips=no" to "-fips"
-+based on discussions with the OpenSSL developers in
-+https://github.com/FreeRADIUS/freeradius-server/issues/5631
++JSC: fix op_instanceof handler for 32-bit C-loop build
 +
-+Upstream-Status: Backport
-+https://github.com/FreeRADIUS/freeradius-server/commit/59e262f1134fef8d53d15ae963885a08c9ea8315
++Fixes missing 'op_instanceof' handler in LowLevelInterpreter32_64.asm
++which breaks 32‑bit builds.
 +
-+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
++* No ChangeLog (raw external patch).
++
++Upstream-Status: Backport [https://bugs.webkit.org/show_bug.cgi?id=299166]
++
++Signed-off-by: Jason Schonberg <schonm@gmail.com>
 +---
-+ src/main/tls.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ .../llint/LowLevelInterpreter32_64.asm        | 95 ++++++++++++++++++-
++ 1 file changed, 94 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/main/tls.c b/src/main/tls.c
-+index 2a348eb9bb..02a4c24f70 100644
-+--- a/src/main/tls.c
-++++ b/src/main/tls.c
-+@@ -3644,7 +3644,7 @@ int tls_global_init(TLS_UNUSED bool spawn_flag, TLS_UNUSED bool check)
-+ 	CONF_modules_load_file(NULL, NULL, 0);
++diff --git a/Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm b/Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm
++index 0d7c92bb..0b81cc1a 100644
++--- a/Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm
+++++ b/Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm
++@@ -3437,4 +3437,97 @@ slowPathOp(enumerator_has_own_property)
++ slowPathOp(mod)
 + 
-+ #if OPENSSL_VERSION_NUMBER >= 0x30000000L
-+-	EVP_set_default_properties(NULL, "fips=no");
-++	EVP_set_default_properties(NULL, "-fips");
-+ #endif
-+ 
-+ 	/*
-+-- 
-+2.43.0
-+
-diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb
-index 5abdd97594..99d7d908bb 100644
---- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb
-+++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.7.bb
-@@ -35,6 +35,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;lfs=0
-     file://0015-bootstrap-check-commands-of-openssl-exist.patch \
-     file://0016-version.c-don-t-print-build-flags.patch \
-     file://0017-Add-acinclude.m4-to-include-required-macros.patch \
-+    file://0018-Fix-Service-start-error.patch \
- "
++ llintSlowPathOp(has_structure_with_flags)
++-llintSlowPathOp(instanceof)
+++
+++llintOpWithMetadata(op_instanceof, OpInstanceof, macro (size, get, dispatch, metadata, return)
+++
+++    macro getAndLoadConstantOrVariable(fieldName, tagReg, payloadReg)
+++        get(fieldName, t5)
+++        loadConstantOrVariable(size, t5, tagReg, payloadReg)
+++    end
+++
+++    macro isObject(field, falseLabel)
+++        getAndLoadConstantOrVariable(field, t0, t1)
+++        bineq t0, CellTag, falseLabel
+++        bbneq JSCell::m_type[t1], ObjectType, falseLabel
+++    end
+++
+++    macro overridesHasInstance(hasInstanceField, constructorField, trueLabel)
+++        getAndLoadConstantOrVariable(hasInstanceField, t0, t1)
+++        bineq t0, CellTag, trueLabel
+++        loadp CodeBlock[cfr], t2
+++        loadp CodeBlock::m_globalObject[t2], t2
+++        loadp JSGlobalObject::m_functionProtoHasInstanceSymbolFunction[t2], t2
+++        bpneq t1, t2, trueLabel
+++
+++        get(constructorField, t5)
+++        loadConstantOrVariablePayload(size, t5, CellTag, t1, trueLabel)
+++        btbz JSCell::m_flags[t1], ImplementsDefaultHasInstance, trueLabel
+++    end
+++
+++    macro storeValue(tagReg, payloadReg, fieldName)
+++        move tagReg, t0
+++        move payloadReg, t1
+++        get(fieldName, t5)
+++        storei t0, TagOffset[cfr, t5, 8]
+++        storei t1, PayloadOffset[cfr, t5, 8]
+++    end
+++
+++.getHasInstance:
+++    isObject(m_constructor, .throwStaticError)
+++    get(m_constructor, t5)
+++    metadata(t2, t6)
+++    loadConstantOrVariablePayload(size, t5, CellTag, t3, .getHasInstanceSlow)
+++    performGetByIDHelper(OpInstanceof, m_hasInstanceModeMetadata, m_hasInstanceValueProfile, .getHasInstanceSlow, size,
+++        macro (resultTag, resultPayload)
+++            storeValue(resultTag, resultPayload, m_hasInstanceOrPrototype)
+++            jmp .getPrototype
+++        end)
+++    jmp .getPrototype
+++
+++.getHasInstanceSlow:
+++    callSlowPath(_llint_slow_path_get_hasInstance_from_instanceof)
+++    branchIfException(_llint_throw_from_slow_path_trampoline)
+++    jmp .getPrototype
+++
+++.getHasInstanceInlinedGetterOSRReturnPoint:
+++    # This path is taken when exiting to the LLInt from an inlined getter for Symbol.hasInstance.
+++    getterSetterOSRExitReturnPoint(op_instanceof, size)
+++    valueProfile(size, OpInstanceof, m_hasInstanceValueProfile, r1, r0, t2)
+++    storeValue(r1, r0, m_hasInstanceOrPrototype)
+++
+++.getPrototype:
+++    overridesHasInstance(m_hasInstanceOrPrototype, m_constructor, .instanceofCustom)
+++    isObject(m_value, .false)
+++    get(m_constructor, t5)
+++    metadata(t2, t6)
+++    loadConstantOrVariablePayload(size, t5, CellTag, t3, .getPrototypeSlow)
+++    performGetByIDHelper(OpInstanceof, m_prototypeModeMetadata, m_prototypeValueProfile, .getPrototypeSlow, size,
+++        macro (resultTag, resultPayload)
+++            storeValue(resultTag, resultPayload, m_hasInstanceOrPrototype)
+++            jmp .instanceof
+++        end)
+++    jmp .instanceof
+++
+++.getPrototypeSlow:
+++    callSlowPath(_llint_slow_path_get_prototype_from_instanceof)
+++    branchIfException(_llint_throw_from_slow_path_trampoline)
+++    jmp .instanceof
+++
+++.instanceof:
+++    callSlowPath(_llint_slow_path_instanceof_from_instanceof)
+++    dispatch()
+++
+++.throwStaticError:
+++    callSlowPath(_slow_path_throw_static_error_from_instanceof)
+++    dispatch()
+++
+++.instanceofCustom:
+++    callSlowPath(_slow_path_instanceof_custom_from_instanceof)
+++    dispatch()
+++
+++.false:
+++    get(m_dst, t5)
+++    storei BooleanTag, TagOffset[cfr, t5, 8]
+++    storei 0, PayloadOffset[cfr, t5, 8]
+++    dispatch()
+++end)
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.7.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.7.bb
+index 6c105e7bb1..118592d42b 100644
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.7.bb
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.7.bb
+@@ -21,6 +21,7 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
+            file://0001-Fix-build-errors-on-RISCV-https-bugs.webkit.org-show.patch \
+            file://fix-ftbfs-riscv64.patch \
+            file://0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch \
++           file://0001-Fix-32bit-arm.patch \
+            "
+ SRC_URI[sha256sum] = "2c62aebb608e09f930a539f3623a5cc8023b5068029f42a208f45f9124da6e30"
  
- raddbdir = "${sysconfdir}/${MLPREFIX}raddb"
+-- 
+2.43.0
+
 
