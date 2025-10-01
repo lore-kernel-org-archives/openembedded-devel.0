@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E05BCCCD182
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0611CCD184
 	for <webhook@archiver.kernel.org>; Wed,  1 Oct 2025 13:52:57 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web11.18617.1759326777176658925
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web11.18609.1759326770991205415
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Oct 2025 06:52:57 -0700
+ Wed, 01 Oct 2025 06:52:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RWcQsj76;
- spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-61a8c134533so13685185a12.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 06:52:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VPK2+PJ4;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-634cdb5ed4bso2013688a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 06:52:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759326775; x=1759931575; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759326769; x=1759931569; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=6DtCwZwplBaKk/D7NyC5MBQKKj8Hih06T5C75Egpyuw=;
-        b=RWcQsj760CmAp5ioaDdVKNYGD7HkRS1rld6p8yxqB0T0KDEH6HvbKKu11fRnH7kkO4
-         cpIkR25tTLiQvVaSlQegqlTc81MqVLsJxnPCAvNwog+mhOJ5TxbomEj+DzshAzbEJilH
-         tFzE5GcsUA8TZzqHhyudC0BVCyx/DzHW/1Ugd3UB/lAnIz8kgP12WyID4RJzmUyJnk+J
-         cPkNRaK0FGVLrEVuwA0ERSGzF+TeJI8jJH3BZXxE1o9LiyL/CnqPUHNeql20gGz6J4qb
-         e9D4D9TmxqX9KpyA8BW9eBQvu1MnkhXK85As3S+ZZM3hUMyEaB6dFEFq37uCRQftGQUC
-         zZSw==
+        bh=yVscwQPame66xWfvo1txVNajsFJcofbqGmTmBmpe8oM=;
+        b=VPK2+PJ4oBotD8n8X0FC2rgpiYL9p4gsliIuL1BmM/4f+I/euoIyrR7nMYGH0M5xz6
+         n/GKayhkt+btiBJbBtpxSqVBODu7KaF8WcAzQdFT+3LU8MCtLxyJDR4ZEjzSaoW+5Xlw
+         CaJAG0tDKwJ9ntf2UVDdq3h4FtUgI82+KPRPP/CFyi93CoB6AjR9PKWBZYDjvrnrw+zr
+         xnYFZRvv4ukIVzdNF7u9/8Rvti3toynKljgWiJhyN/EdsJEfB8CwCyhKqjylLLtViMt8
+         XI6P6upDeX9USvy8JJZOqiRcbLwEqu0xsZPjhYNG4LtsePPBc52jboE/EE7KdtHAIEaF
+         cTSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759326775; x=1759931575;
+        d=1e100.net; s=20230601; t=1759326769; x=1759931569;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=6DtCwZwplBaKk/D7NyC5MBQKKj8Hih06T5C75Egpyuw=;
-        b=fcuo8AG5gN+lC9dwKDMCMQEKuLmV6XE2hOmlVverUIfJXoWS0YI0QepLnaPLT7m4/7
-         XfiU6chDrRDKq6VIgLuuyu8nR8PpYh4FNdk5TFtwWvpkMBCvokLJJudJxpKfV1gBdtxB
-         lxvwDqgWYDv4PWzEyhOE1L2qSdSO2wXgQh1QLdyg9b+LVt2TWOSQ4CdWNKvezQHG6hCa
-         mQNj0sPuO/qo57pPQRCqaLtfJtfQ6l3ZQHvjWGCAn4eV0NPf3wfo2QEC6fZlr3MLysmB
-         myaBUimbmXrOCFJi67ciWGvzjvVVOHxdLs5/N5Z/k2IkM6MAdJgvL5VrDguVHz8zKv7b
-         Xshw==
-X-Gm-Message-State: AOJu0YzFwxPlR4Ft4TFiR6GmIzcZaZmRj9SQgHdO9GaXAO4TchOef088
-	EO4V9xy24PDKe9u7PPMZ21M5+EZJNqa4tg6oSdpcWkFDYFaBQoPXCdVXH7ssLQ==
-X-Gm-Gg: ASbGncv97nGRfpvMVZSUCvmfpDQ268mhiOkfpUgujxjr1+Pd/Kwnwu/dzGkdpFcf7V3
-	oqIsUPUDhvWwB+Hzk3qxPK3CpPpWaG0whFZqZnYhWwh85Bv3QCu7ITB6frywy3epTafxIZpE64b
-	V7zQlzA8fpwKdF80ckrN1FUwQXz5sALyRuqfF4bX2tfTo8DNMUe81PfTIut2IC+M4sn/Ot1Owos
-	jpXYqhexUIkDcsDj+LhK4HYrDnhL+1E7rCKNxrVuxNxyt0P55VM5BlEW3mUY0qkg9EuBYKvCPCS
-	9hF6xm08tnWyVNNLVxPCvRMX34n19Q9d0U/xgUD244pXRK9rHpN5c93YleC6vaeJW8+bU9w0sEu
-	bAsG3fhgmyr8z5QIVgrmBuwLwMCVZwI9Cvpcg1XCbEwp2
-X-Google-Smtp-Source: AGHT+IFWD5gaIqB3WOOP47gEMKs+5YX8Am4lPjLMxS6l5by/zXTmIzz+FS6ozYCPVsnhrsmwB2jd6w==
-X-Received: by 2002:a05:6402:40d4:b0:62f:19e6:401d with SMTP id 4fb4d7f45d1cf-63678c0d4d5mr4178296a12.7.1759326775481;
-        Wed, 01 Oct 2025 06:52:55 -0700 (PDT)
+        bh=yVscwQPame66xWfvo1txVNajsFJcofbqGmTmBmpe8oM=;
+        b=qgw1+9wEGT5gBblWBOOznhkK5NqMrhmhpQnaF1ycNt5Snx0MOHGrkIHE3ao/sTQfXU
+         luEIn7YrFuz5brNDV/oPDNr++bQVccIDBWK/O9h4qptEigavovb1lrOud0etU1nWZDhe
+         oS68+cEKVJMcm8/Fv7oMPDqdXrc1vwKMqza5aRUDXEjr0JurbYimPrZJZFRC0oDYyYvj
+         Tpi1WvlhuusAShegjwhA3C+6bD5I+o1niXl9F4UWtsKZGdFpwRMoCwuyypRElCjhehRW
+         ssxoTNl4NuXsOWAzFcuFfjtMVWTi6B7+psBZJrRezhCop6B4u9Xm0SxUEFnkHItskJjI
+         Vjgw==
+X-Gm-Message-State: AOJu0YwDs8oxkcogTMBWBbBW9/F2E83isJgOYxKNkzKPZK54hUwqeFcp
+	SI7SADVrPNtFCKyU4fP7I0MCxGO/do106sD32bIJlIKmHY1hEvsl1xvu9nF9Yg==
+X-Gm-Gg: ASbGncuCPY0dAyU1y1pSZv6S+bs59pYlB7Za6y70+fpjCYpMz7/J7HAxrgYdX2Ws+iD
+	HzhYtr2jPOmiKzp0TyedjvCz9HzGsnrBAh8VL5yM/4nCTYk7ROv6jkicZsh5artoaR7JwqexTlp
+	lsuDqLt512BEXeTISCIWrif1kKaG0clLmOwCNuns16LrWR1pfGRUmx1pZdBSUJ3y/0oP2PQDW+l
+	KyrV/jcj3BCejZyzcJdbTVcHs20jIZVNOma6x5TQlDIkIXniHmyknydPqpYKP0rDTjnu3j3m/UQ
+	f2bfvUN1Ydu4JoPUbqDf+30HBPweqpUIfY8loLaSJCFSa0v4lCbOkmSg9b1n9ztyASPCTsuc8Z7
+	fhXhCl4YH9s7Nap6TLUezdu61HyjD7Zc2MNrkMfdTDH1I2nX7z1A/eu4=
+X-Google-Smtp-Source: AGHT+IF4r+F2iT1x9G+oyBKMo6kPCDBo/QtnOHHIzD8LworJp+IE46xxASAvh7iSbsP5g9I17Q/w9A==
+X-Received: by 2002:a05:6402:5212:b0:634:cd66:9cdd with SMTP id 4fb4d7f45d1cf-63678bb89c2mr4408705a12.10.1759326769207;
+        Wed, 01 Oct 2025 06:52:49 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634a3629badsm11507823a12.9.2025.10.01.06.52.53
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634a3629badsm11507823a12.9.2025.10.01.06.52.48
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Oct 2025 06:52:53 -0700 (PDT)
+        Wed, 01 Oct 2025 06:52:48 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 13/25] minicoredumper: correct the sysvinit service file attribute
-Date: Wed,  1 Oct 2025 15:52:31 +0200
-Message-ID: <20251001135243.1490753-14-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 06/25] p8platform: unbreak do_populate_sdk
+Date: Wed,  1 Oct 2025 15:52:24 +0200
+Message-ID: <20251001135243.1490753-7-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251001135243.1490753-1-skandigraun@gmail.com>
 References: <20251001135243.1490753-1-skandigraun@gmail.com>
@@ -67,34 +67,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 13:52:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120128
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120120
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Markus Volk <f_l_k@t-online.de>
 
-Add the execute attribute for sysvinit service file to fix the
-below error:
-  $ service minicoredumper status
-  minicoredumper: unrecognized service
+Error:
+ Problem: package libcec-dev-6.0.2-r0.corei7_64 requires p8platform-dev, but none of the providers can be installed
+  - conflicting requests
+  - nothing provides p8platform = 2.1.0.1-r0 needed by p8platform-dev-2.1.0.1-r0.corei7_64
+(try to add '--skip-broken' to skip uninstallable packages)
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d477cbb5267f39846d129f27d0f6a7f2b001db7b)
+(cherry picked from commit 03a1a24618e7366235af76ea58514442669f0a76)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/p8platform/p8platform_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-index 0b934ee2d8..76b1d73fe6 100644
---- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-+++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.1.bb
-@@ -37,7 +37,7 @@ do_install:append() {
-     install -d ${D}${systemd_system_unitdir}
-     install -m 0644 ${WORKDIR}/minicoredumper.service ${D}${systemd_system_unitdir}
-     install -d ${D}${sysconfdir}/init.d
--    install -m 0644 ${WORKDIR}/minicoredumper.init ${D}${sysconfdir}/init.d/minicoredumper
-+    install -m 0755 ${WORKDIR}/minicoredumper.init ${D}${sysconfdir}/init.d/minicoredumper
+diff --git a/meta-oe/recipes-extended/p8platform/p8platform_git.bb b/meta-oe/recipes-extended/p8platform/p8platform_git.bb
+index 8a06990574..1307f6dc4a 100644
+--- a/meta-oe/recipes-extended/p8platform/p8platform_git.bb
++++ b/meta-oe/recipes-extended/p8platform/p8platform_git.bb
+@@ -17,3 +17,5 @@ inherit cmake pkgconfig
+ EXTRA_OECMAKE += "-DCMAKE_INSTALL_LIBDIR=${libdir} -DCMAKE_INSTALL_LIBDIR_NOARCH=${libdir}"
  
-     # correct path of minicoredumper
-     sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g ${D}${sysconfdir}/init.d/minicoredumper
+ FILES:${PN}-dev += "${libdir}/p8-platform"
++
++RDEPENDS:${PN}-dev = ""
 
