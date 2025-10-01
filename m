@@ -1,226 +1,136 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60CBACCA470
-	for <webhook@archiver.kernel.org>; Wed,  1 Oct 2025 18:01:07 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.web10.4067.1759341660166011800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D38B1CAC5BB
+	for <webhook@archiver.kernel.org>; Wed,  1 Oct 2025 23:24:58 +0000 (UTC)
+Received: from mail-yx1-f53.google.com (mail-yx1-f53.google.com [74.125.224.53])
+ by mx.groups.io with SMTP id smtpd.web11.244.1759361091535162910
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Oct 2025 11:01:00 -0700
+ Wed, 01 Oct 2025 16:24:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
-	by mailout07.t-online.de (Postfix) with SMTP id CE1A1E813
-	for <openembedded-devel@lists.openembedded.org>; Wed,  1 Oct 2025 20:00:57 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.168.197]) by fwd79.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1v418J-1IYEFt0; Wed, 1 Oct 2025 20:00:55 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] rygel: update 44.1 -> 45.0
-Date: Wed,  1 Oct 2025 20:00:49 +0200
-Message-ID: <20251001180049.499855-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.51.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=faVUkTJk;
+ spf=pass (domain: gmail.com, ip: 74.125.224.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f53.google.com with SMTP id 956f58d0204a3-635401a8f5aso506980d50.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 16:24:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1759361091; x=1759965891; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UwDG/L6xR8s0Xv6+SSoQPhjEHMybNL4TMlR0HSBGrTM=;
+        b=faVUkTJkF5y6sh4z5BdbcXoX37PF1h3r4zuIVeZya7TlXbeGAkOXGyP+QYWhedQRBv
+         FGXGvruZemXIdUUEC88a95kOutzMBhPr1hVqbR8JG0i9kmc/rNGokoleeB5ZzrNfEWiX
+         5hk9QwvLacYBxqK+0e9YCpepzIR9BV3Z1/725/NOsmEWCsUE/5jPi7aoUYp5DcCWZvQ/
+         jvp6x/C90MIH4Y78zKy2oQcaw9Eg8EvkWhQPPLAk2NHPtRyRfk6yXJ5X0xDThnNnfxdl
+         27ioMfYDtSPdOUdmxrBn5+ceavhjznJpsKdq6+lfc5Z16W9gdbTIi2vYVBz8KL6NDmdI
+         oxJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1759361091; x=1759965891;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=UwDG/L6xR8s0Xv6+SSoQPhjEHMybNL4TMlR0HSBGrTM=;
+        b=X52GxomSxA1ssG9F+tYA3cKoRewVO1L2x34btvGFco9gXbd3werh+l0KXDfRmy9o/b
+         80PscFpY+9YyhFhzGPxN/cW5srMjjqRgiRQHxkq50OE6D/KMCCoaiYS6FbURYck6clX/
+         wTeqd4zc3siKc2Sg0xR6bPbLiXp7MsRVCzwrvEkykhWk8enPCt1qbC4P1A/U9T+H+TfM
+         JxMzacGvnhh5hDQHgV+QWLgFCBKKASlj5jfZTCMwUvabriVUxTLXAFMQXNSgGAIzOGGV
+         nx/uh6VUzF9nQgUHold0hcd6NN7pMrRtC9ofMAxD5L5uiOmDa2wztODoH6IjHomBb7mh
+         Pj1A==
+X-Gm-Message-State: AOJu0YzTQQPdtJPutZu+kbXJ06hI9JY0BGCVRTgT+HSmvJ7J88TP5yy5
+	/JIKAi3QhH5dEfxKROoAQeDz42k3juaqN0tCepfF+nrKwGhVSbeyhs9VhIKz2DsNpPXlSFiuFRr
+	YejkPCq6Zzum96PjVi5QzFt3LaGawrww=
+X-Gm-Gg: ASbGnctLYrMDhpit085gC92fwKni8hXKJBeZCo6WovPE0S2/ARX2CMy6t2aaztbh2+z
+	NL1J0+WAFOdUX+DC6X5enLcRsll6zZMwsOYa1qSiUCgqteZ4w9NDPPX1KjQA+juojs14ng6lcBx
+	5aYLsqAoeQ2DSVQzLKUUbEaNpyXTH1gx5bnsxQe50NbyUXbukmnNXV1zgONT3anP/gjLzRu5JSn
+	hh/F1mMsnrLvJn08631aIgoBRI9Hv3ENRy5bOhCfNbCbiRQ8gAr5Jzleo3et9mlZPedCRiC5dyB
+	d5K+q2T1bgz89G2gu8vpB2sErqA+/8iHm5RFuQ07JhEPXbJ7wylICVXneX5/YCozVnns5FnUutk
+	0XqThnBvNg0dx1Buv
+X-Google-Smtp-Source: AGHT+IGsFltKCzvR7i/Wf9J3KwKggAbcbxSauuVem8vwsa0cKxvQShzS7pYO14s3IMhwGsjAUAX7chZY8i31GEUDvlY=
+X-Received: by 2002:a53:e017:0:b0:615:7d8f:66ed with SMTP id
+ 956f58d0204a3-63b6feba0b7mr5763919d50.17.1759361090566; Wed, 01 Oct 2025
+ 16:24:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1759341655-3E7FBA33-0169D01C/0/0 CLEAN NORMAL
-X-TOI-MSGID: af1f93f3-9f7a-4412-ae44-5984422d724e
+References: <20251001062339.74011-1-f_l_k@t-online.de>
+In-Reply-To: <20251001062339.74011-1-f_l_k@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 1 Oct 2025 16:24:24 -0700
+X-Gm-Features: AS18NWBTBQAkqkKzK9TeKi84dNpNTHnW4rGXnddX0nR2wtDgJPOtsPXGn-MaHY4
+Message-ID: <CAMKF1sr2ks3j3RzogOdsYOS6Dk6wyaNqcCqsfhOG0DYAgOFoLQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/2] telepathy-mission-control: add recipe
+To: f_l_k@t-online.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 18:01:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120144
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 23:24:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120145
 
-- adjust PACKAGECONFIG for gtk and localsearch
+On Tue, Sep 30, 2025 at 11:23=E2=80=AFPM Markus Volk via
+lists.openembedded.org <f_l_k=3Dt-online.de@lists.openembedded.org>
+wrote:
+>
+> 'telepathy-mission-control' is an account manager as requested by the 'fo=
+lks' telepathy
+> backend at runtime.
+>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  .../telepathy/telepathy-mission-control_5.16.6.bb  | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>  create mode 100644 meta-oe/recipes-connectivity/telepathy/telepathy-miss=
+ion-control_5.16.6.bb
 
-45 (stable)
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Its being added to meta-oe but it needs networkmanager and
+networkmanager is in meta-networking. So layer compat check fails
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/963/step=
+s/12/logs/stdio
 
-Translation updates
-
-All contributors to this release:
- - Alan Mortensen <alanmortensen.am@gmail.com>
- - Anders Jonsson <anders.jonsson@norsjovallen.se>
- - Antonio Marin <gnmer.6qxyg@slmail.me>
- - Asier Saratsua Garmendia <asiersarasua@ni.eus>
- - Aurimas Aurimas =C4=8Cernius <aurisc4@gmail.com>
- - Bal=C3=A1zs =C3=9Ar <balazs@urbalazs.hu>
- - Changwoo Ryu <cwryu@debian.org>
- - Daniel Mustieles <daniel.mustieles@gmail.com>
- - Daniel Rusek <mail@asciiwolf.com>
- - Ekaterine Papava <papava.e@gtu.ge>
- - Hugo Carvalho <hugokarvalho@hotmail.com>
- - Jordi Mas i Hernandez <jmas@softcatala.org>
- - Juliano de Souza Camargo <julianosc@protonmail.com>
- - Nathan Follens <nfollens@gnome.org>
- - Quentin PAG=C3=88S <pages_quentin@hotmail.com>
- - Yuri Chornoivan <yurchor@ukr.net>
-
-Added/updated translations:
- - po/ca.po, courtesy of Jordi Mas i Hernandez
- - po/cs.po, courtesy of Daniel Rusek
- - po/da.po, courtesy of Alan Mortensen
- - po/es.po, courtesy of Daniel Mustieles
- - po/eu.po, courtesy of Asier Saratsua Garmendia
- - po/hu.po, courtesy of Bal=C3=A1zs =C3=9Ar
- - po/ka.po, courtesy of Ekaterine Papava
- - po/ko.po, courtesy of Changwoo Ryu
- - po/lt.po, courtesy of Aurimas Aurimas =C4=8Cernius
- - po/nl.po, courtesy of Nathan Follens
- - po/oc.po, courtesy of Quentin PAG=C3=88S
- - po/pt_BR.po, courtesy of Juliano de Souza Camargo
- - po/pt.po, courtesy of Hugo Carvalho
- - po/ro.po, courtesy of Antonio Marin
- - po/sv.po, courtesy of Anders Jonsson
- - po/uk.po, courtesy of Yuri Chornoivan
-
-45.rc (unstable)
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-LocalSearch:
- - Fix file upload
-
-All contributors to this release:
- - Danial Behzadi <dani.behzi@ubuntu.com>
- - Jens Georg <mail@jensge.org>
- - Yaron Shahrabani <sh.yaron@gmail.com>
- - luming zh <lumingzh@qq.com>
- - Fran Di=C3=A9guez <frandieguez@gnome.org>
- - Piotr Dr=C4=85g <piotrdrag@gmail.com>
- - Artur S0 <arturios05@bk.ru>
-
-Added/updated translations:
- - fa.po, courtesy of Danial Behzadi
- - gl.po, courtesy of Fran Dieguez
- - he.po, courtesy of Yaron Shahrabani
- - pl.po, courtesy of Piotr Dr=C4=85g
- - ru.po, courtesy of Artur So
- - zh_CN.po, courtesy of lumingzh
-
-45.beta (unstable)
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-LocalSearch:
- - Fix UPnP container contents after store update
- - Fix graph names
-
-Bugs fixed in this release:
- - https://gitlab.gnome.org/GNOME/rygel/issues/110
-
-All contributors to this release:
- - Jens Georg <mail@jensge.org>
- - Emin Tufan =C3=87etin <etcetin@gmail.com>
-
-Added/updated translations:
- - tr.po, courtesy of Emin Tufan =C3=87etin
-
-45.alpha (unstable)
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-Major changes:
- - Port UI parts to GTK4
- - Drop support for Tracker 3
- - Add support for LocalSearch
-
-Presets:
- - Fix OpenH264 preset config
- - Add more presets for other codecs
-
-Transcoding:
- - Remove WMV decoder from list of default-enabled transcoders
-
-Server:
- - Support .ssa subtitles
-
-Bugs fixed in this release:
- - https://gitlab.gnome.org/GNOME/rygel/issues/240
- - https://gitlab.gnome.org/GNOME/rygel/issues/241
- - https://gitlab.gnome.org/GNOME/rygel/issues/242
-
-All contributors to this release:
- - Jens Georg <mail@jensge.org>
- - Pawan Chitrakar <chautari@gmail.com>
- - Vasil Pupkin <3abac@3a.by>
- - Yuki Okushi <yokushi@gnome.org>
- - Martin <miles@filmsi.net>
- - Piotr Dr=C4=85g <piotrdrag@gmail.com>
- - Baxrom Raxmatov <magdiyevbahrom@gmail.com>
-
-Added/updated translations:
- - be.po, courtesy of Yuras Shumovich
- - ja.po, courtesy of Yuki Okushi
- - ne.po, courtesy of Pawan Chitrakar
- - sl.po, courtesy of Martin Srebotnjak
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../rygel/{rygel_0.44.1.bb =3D> rygel_45.0.bb}           | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
- rename meta-multimedia/recipes-connectivity/rygel/{rygel_0.44.1.bb =3D> =
-rygel_45.0.bb} (91%)
-
-diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.44.1.bb b=
-/meta-multimedia/recipes-connectivity/rygel/rygel_45.0.bb
-similarity index 91%
-rename from meta-multimedia/recipes-connectivity/rygel/rygel_0.44.1.bb
-rename to meta-multimedia/recipes-connectivity/rygel/rygel_45.0.bb
-index 6423d51a31..a5574c6b82 100644
---- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.44.1.bb
-+++ b/meta-multimedia/recipes-connectivity/rygel/rygel_45.0.bb
-@@ -20,13 +20,13 @@ inherit gnomebase features_check vala gobject-introsp=
-ection gettext systemd
- # gobject-introspection is mandatory for libmediaart-2.0 and cannot be c=
-onfigured
- REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data x11"
-=20
--SRC_URI[archive.sha256sum] =3D "7b2c631b842408da27a54242f8082aba49bd1ca0=
-2041e79e1eefba0c7009a87b"
-+SRC_URI[archive.sha256sum] =3D "82667b902fc0672e64cf91eb727a70137a8fdfe7=
-a3d9a4c158b0f4b1fc700882"
-=20
- GIR_MESON_ENABLE_FLAG =3D 'enabled'
- GIR_MESON_DISABLE_FLAG =3D 'disabled'
-=20
- EXTRA_OEMESON =3D "-Dengines=3Dgstreamer -Dplugins=3D${@strip_comma('${R=
-YGEL_PLUGINS}')}"
--PACKAGECONFIG:append =3D "${@bb.utils.contains("DISTRO_FEATURES", "x11",=
- " gtk+3", "", d)}"
-+PACKAGECONFIG:append =3D "${@bb.utils.contains("DISTRO_FEATURES", "x11 o=
-pengl", " gtk4", "", d)}"
-=20
- PACKAGECONFIG ?=3D "external mpris ruih gst-launch media-export"
-=20
-@@ -35,8 +35,8 @@ PACKAGECONFIG[mpris] =3D ""
- PACKAGECONFIG[ruih] =3D ""
- PACKAGECONFIG[media-export] =3D ""
- PACKAGECONFIG[gst-launch] =3D ""
--PACKAGECONFIG[tracker3] =3D ""
--PACKAGECONFIG[gtk+3] =3D ",-Dgtk=3Ddisabled,gtk+3"
-+PACKAGECONFIG[localsearch] =3D ""
-+PACKAGECONFIG[gtk4] =3D "-Dgtk=3Denabled,-Dgtk=3Ddisabled,gtk4"
-=20
- RYGEL_PLUGINS =3D ""
- RYGEL_PLUGINS:append =3D "${@bb.utils.contains('PACKAGECONFIG', 'externa=
-l', ',external', '', d)}"
-@@ -44,7 +44,7 @@ RYGEL_PLUGINS:append =3D "${@bb.utils.contains('PACKAGE=
-CONFIG', 'mpris', ',mpris',
- RYGEL_PLUGINS:append =3D "${@bb.utils.contains('PACKAGECONFIG', 'ruih', =
-',ruih', '', d)}"
- RYGEL_PLUGINS:append =3D "${@bb.utils.contains('PACKAGECONFIG', 'gst-lau=
-nch', ',gst-launch', '', d)}"
- RYGEL_PLUGINS:append =3D "${@bb.utils.contains('PACKAGECONFIG', 'media-e=
-xport', ',media-export', '', d)}"
--RYGEL_PLUGINS:append =3D "${@bb.utils.contains('PACKAGECONFIG', 'tracker=
-3', ',tracker3', '', d)}"
-+RYGEL_PLUGINS:append =3D "${@bb.utils.contains('PACKAGECONFIG', 'localse=
-arch', ',localsearch', '', d)}"
- RYGEL_PLUGINS:append =3D "${@bb.utils.contains('PACKAGECONFIG', 'playbin=
-', ',playbin', '', d)}"
-=20
- LIBV =3D "2.8"
---=20
-2.51.0
-
+perhaps put it in a dynamic layer in
+meta-oe/dynamic-layers/networking-layer or just directly in
+meta-networking.
+>
+> diff --git a/meta-oe/recipes-connectivity/telepathy/telepathy-mission-con=
+trol_5.16.6.bb b/meta-oe/recipes-connectivity/telepathy/telepathy-mission-c=
+ontrol_5.16.6.bb
+> new file mode 100644
+> index 0000000000..c6ff3abe9f
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/telepathy/telepathy-mission-control_5.=
+16.6.bb
+> @@ -0,0 +1,14 @@
+> +SUMMARY =3D "Telepathy Mission Control 5 is an account manager and chann=
+el dispatcher for the Telepathy framework"
+> +HOMEPAGE =3D "http://telepathy.freedesktop.org/wiki/"
+> +LICENSE =3D "LGPL-2.1-only"
+> +
+> +DEPENDS =3D "telepathy-glib dbus networkmanager dbus-native dbus-glib"
+> +
+> +SRC_URI =3D "http://telepathy.freedesktop.org/releases/telepathy-mission=
+-control/${BP}.tar.gz"
+> +SRC_URI[sha256sum] =3D "2df8ae3995e919a7670e01aa3568215ef0777e34961ace1c=
+ac1c6477cb297a45"
+> +
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd8045f3b8f929c1cb29a1e3fd737b=
+499"
+> +
+> +inherit autotools pkgconfig gtk-doc
+> +
+> +FILES:${PN} +=3D "${datadir}/dbus-1 ${datadir}/glib-2.0"
+> --
+> 2.51.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#120087): https://lists.openembedded.org/g/openembedde=
+d-devel/message/120087
+> Mute This Topic: https://lists.openembedded.org/mt/115528296/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
