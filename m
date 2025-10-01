@@ -2,63 +2,63 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B930ECAC5BB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB41CCCA472
 	for <webhook@archiver.kernel.org>; Wed,  1 Oct 2025 13:42:37 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web11.17133.1759323902784802810
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web10.17066.1759323963592894041
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Oct 2025 06:05:03 -0700
+ Wed, 01 Oct 2025 06:06:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dAfcm3HY;
- spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: joao.raul.434@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-3f2cf786abeso5052014f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 06:05:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=C6v40GmN;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: joao.raul.434@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-46e430494ccso34098115e9.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 06:06:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759323901; x=1759928701; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759323962; x=1759928762; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=KJYiOskZ3zxlBjkyE4n5bVT1kjaFpfwlR+D9zMqMFms=;
-        b=dAfcm3HYSUzz9LmDWNMkzCT0LdfoX9nxFV52O2f7tTypyyyN/wBe+xGLKRf6+WKQTC
-         GNfcYpOxp4a2uQBCilQxd34j8lBBRgz8B0ksZsnCF+M1YGQsZW1mJRRxzMSwsy6FpMms
-         ElwHl9EPctUvLt7wNWM89W5AiwsmH3HJboFMmay42Zdm77bYbgfmEveA1Rbgi9+7J7oN
-         z5LpjaQl8ITyX7XqUlcTFp6JUwvgjoGIthxEIAb8BKxp5+OWy+po9l9aMogc4parP5y6
-         0HLZLeGc/Ub14a1wYhEvXTfiLmJOUuEyHLBxE7+ka7DCennA260IQWteYhzoxQu0dAgv
-         TO7w==
+        bh=cUVIxDaxSVLEuZHiy7XE0DLCXKR28V1M/C7syxjPOGw=;
+        b=C6v40GmNjyI9Kh5OOK41nkaKGcyzHU0IVBSxoTfFmEYQtcud6eD6w7w+cC4StAwphk
+         11qVj8XcL1xFQ0+aS6rIvH07x8+2LVdIhmUNGTHGvx/3E3ooYn0Q8ZhhCV1MWM0wrnwx
+         EI1hPv03XoJHZdriA8HdZqMlApJWEnqn71J0o87AqVAAce338RtC1MVBI/slMyy/s6fT
+         TBnabxER0U8kOakCYG+eFvQLkAnbCYNLk7hQJ1x+GsTMrFin8ZDGpbxVxDu2hLo0Q/ht
+         XQE3LRqLryLnaueR69Rblo56SnNM4MTlrzHiLq0ozjs/A5OHsm9JAWqBf7445ptD0sMr
+         Ef8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759323901; x=1759928701;
+        d=1e100.net; s=20230601; t=1759323962; x=1759928762;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=KJYiOskZ3zxlBjkyE4n5bVT1kjaFpfwlR+D9zMqMFms=;
-        b=bXXva7PX8V9LIiq2QbrxKwwWkRVCt8YG69BJp1Jsh8sCB75YFUlHud3qioD0VKK4yg
-         NXBuOmztaMvlivcQbJNR2T1pbnVgxHNpPGWZKpKiQlkjpAQwvPii1JzTPQCTxtaCRgxs
-         hKoPzdcn/t6c1JZE/9zy0ItuwHAcftcO+J4hJaamKu/d9TKvNwSWiNJM3x90DuCFOLkP
-         f1Q9+ye7yKpS2GIu53pYnHTS9N7tnx0sy2i6fONx8oYBJyYEYf9pMuLYo8awgsuOPTU8
-         GMcIIos+RnivAS13wvFBM6lK1m8qorj1wmyiFLZRcAYyxb7kOCQNMtBJoNxbh2kc+GTF
-         zleg==
-X-Gm-Message-State: AOJu0YwPenCJObUmSHND1JQnpb7oZfuz5xmlCnX9EKZn012Ifa7USkdJ
-	/oKryHk5i3m7tF14+8xhqoa2U8997jnVUM120LS0jhKg9RkoTsYbYy8Pe/5uM/1q
-X-Gm-Gg: ASbGncszYf7Ap1QRaN5LvqC/2r+eN6m+3KET7rHZbecBuhRgbp2bmfOeqZACIOVxuee
-	mNFK5hOu+w6rFKF8ofyDrZONubwP9zy4OgaW10V67enWejxKTIha0yr0ew4HEq4I0jnFwT20Hhs
-	8Yu9rghIB4l2qGE5FgNK69ZqtQCA3R6KK8N/SZ3WAum8OiDaJzx15WMkJ6t2Ou3JkCrLCx9rHrE
-	2wn9WP1freUU9w2SNx3lV/+Jva2ExJKgvFMF1fKTjIHNhEMvaHTII7S/zP1Lp0tdOnDVYh3LI7h
-	vwu93AAG7ardlJ5cqQ/tSCHE8TSvYuMRGLdsN7+NUBgYoDZROJR1unc+DTJ3q1GP0DRVnG6HC3+
-	fwbYZMC0wBFXzzHNyLlHd/yOM8L/9KCS8ChxsJ61Fg1i1MaYBjo8lNIWCt19yVSz4vbbvAD6c8C
-	X+8ayret9uzEcZGlMZ635FhuDpTLTr/4vEvAMTfWnTWcorcw==
-X-Google-Smtp-Source: AGHT+IE9o6vihTPEAhIvfOAZap8sJzcd6F1yVY/rukoly/lfuyNB5tWK2SWBQ0iEU0zYbH6PUHtBxw==
-X-Received: by 2002:a05:6000:2408:b0:414:6fe6:8f97 with SMTP id ffacd0b85a97d-42557824f29mr2663069f8f.38.1759323900660;
-        Wed, 01 Oct 2025 06:05:00 -0700 (PDT)
+        bh=cUVIxDaxSVLEuZHiy7XE0DLCXKR28V1M/C7syxjPOGw=;
+        b=kTEP/+xkhP8LoLn1OeiX4I2lp1lmxj71ulFtbsu2SeWFyaGNVf6XE6qeBEZ+BlXTqh
+         V8/isRXCqCUdx8Wwe1sALtPtYHzKZky0ik2qwde3JGseBSS9+x6pYAq+6963k5LpOBgK
+         XBZRd4djg5tEmzgGJasiXHAHJa4gFiDZW5Iyl06hIZmo6zRNIANV2oBEuEE/km4ztiBn
+         rI1U8hzEA08uOVF8Q6ZDbXL/SjTgLovNxb/Jano6zTe7z5OrH5vlvP7j1mXuihe4Fud2
+         jcYHWFCxl3bzqaqSCakp0PhrX5mfq5tAqs2ckJhQfohuRTxHBIMRH7AzpsLFUsZOOSHF
+         s/UA==
+X-Gm-Message-State: AOJu0YxGIWZD5bXykRAKMpmso4rudQwx0QEPgZg/XGepp1VmSHQKTrLO
+	6dBMmbRgDTlH8IwJaS1rO9TzCO2veXsgIju3UgGQdOERT7hCKfvUGgMOMSA/xk2N
+X-Gm-Gg: ASbGncvufqiP4MvHFWnjETGahQzZErNign41Jrl0+8TaJ1MAecIo6P5OjuPLXDaIEPo
+	nW1Z6lJRLLJgh62JWFpLQ2CsAxJNkMuneLGmOTtU5aaX/wkQnAyP1WsMXQvoqwj9lWh6zq8eCCf
+	PQiGZMht43Kvw2luhmtVvUe3OAP68y6cPYnzErkBAP0cfIUh/u5mEvQdGee1j+uzN5oxBerNlQn
+	JLYtj64fjIQzuLyoHfBy3gokIRVrogO8fmBXPKFLdzDzNpkoOCmKEPdmPRY0IHndKBaHkER3cpB
+	ycP7D6jpIpr4mHE9HizeFs27wCn/PIOwNQ5gCBnJBD5DI6rumu0ewZNQtO1odCZWDGCycs62tY3
+	J+uliihRuWFeNUjAzIP1OFVT/2Un3SPZN0sF2Di+sTdghrDwGboz6fZR3frCkgAeQOA+5PF/Qwh
+	5i19JtolNFtbFbS677/TkzzgHbCjeh81JE9h0M19gLJx/AlQ==
+X-Google-Smtp-Source: AGHT+IF5jpma3/8L9Yb45M2O2QOkLSwhLtlyXPAQY8hvCUElXLEP/mt9PQ6PswcLZ4r6TlW3VXgO7g==
+X-Received: by 2002:a05:600c:1da3:b0:46d:d6f0:76d8 with SMTP id 5b1f17b1804b1-46e61293b8dmr30637205e9.35.1759323961373;
+        Wed, 01 Oct 2025 06:06:01 -0700 (PDT)
 Received: from RD-8dhlsmLpT3bz.corp.hbkworld.com (89-181-200-223.net.novis.pt. [89.181.200.223])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-40fb9e1b665sm26971703f8f.27.2025.10.01.06.04.59
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-46e619a8ae2sm37345405e9.15.2025.10.01.06.06.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Oct 2025 06:05:00 -0700 (PDT)
+        Wed, 01 Oct 2025 06:06:00 -0700 (PDT)
 From: "=?UTF-8?q?Lima=2C=20Jo=C3=A3o?=" <joao.raul.434@gmail.com>
 X-Google-Original-From: =?UTF-8?q?Lima=2C=20Jo=C3=A3o?= <joao.lima@hbkworld.com>
 To: openembedded-devel@lists.openembedded.org,
 	raj.khem@gmail.com,
 	joao.lima@hbkworld.com
-Subject: [meta-oe][PATCH 0/3] openocd: Add dmem support and update dependencies
-Date: Wed,  1 Oct 2025 14:04:52 +0100
-Message-ID: <20251001130452.542-1-joao.lima@hbkworld.com>
+Subject: [meta-oe][PATCH 3/3] openocd: enable dmem and jimtcl
+Date: Wed,  1 Oct 2025 14:05:53 +0100
+Message-ID: <20251001130553.686-1-joao.lima@hbkworld.com>
 X-Mailer: git-send-email 2.51.0.windows.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -66,46 +66,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 13:42:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120109
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120112
 
 From: Joao Lima <joao.lima@hbkworld.com>
 
-This patch series updates OpenOCD to support direct memory access (dmem)
-via SWD emulation for Texas Instruments AM64x and J784s4 platforms.
-
-Changes include:
-1. Version bumps:
-   - openocd: 91bd431 -> 66ea461
-   - jimtcl: fcbb449 -> f160866
-   - libjaylink: 9aa7a59 -> 0d23921
-
-2. Platform support patches:
-   - Add SWD native configuration files for AM64x and J784s4 boards
-   - Configure DMEM access parameters in ti_k3.cfg for direct memory operations
-   - Set up DAPBUS debugger and emulated AP descriptions
-
-3. Build configuration:
+Build configuration:
    - Enable dmem adapter driver (--enable-dmem)
    - Enable internal jimtcl (--enable-internal-jimtcl)
    - Add both features to default PACKAGECONFIG
 
-This enables self-hosted debug configurations where OpenOCD runs on one of
-the CPUs inside the SoC.
+Signed-off-by: Joao Lima <joao.lima@hbkworld.com>
+---
+ meta-oe/recipes-devtools/openocd/openocd_git.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Upstream-Status: Submitted
-- http://openocd.zylin.com/#/c/9020/
-- http://openocd.zylin.com/#/c/9021/
-
-Joao Lima (3):
-  openocd: bump the openocd, jimtcl versions
-  openocd: add dmem support to am64xx and j784s4 platforms
-  openocd: enable dmem and jimtcl
-
- ...wd_native.cfg-Add-support-for-direct.patch | 77 +++++++++++++++++++
- ....cfg-Add-support-for-direct-memory-a.patch | 65 ++++++++++++++++
- .../recipes-devtools/openocd/openocd_git.bb   | 13 +++-
- 3 files changed, 151 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch
- create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch
-
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+index 846d2f62c5..b39ca5c244 100644
+--- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -55,7 +55,10 @@ FILES:${PN} = " \
+ 
+ PACKAGECONFIG[sysfsgpio] = "--enable-sysfsgpio,--disable-sysfsgpio"
+ PACKAGECONFIG[remote-bitbang] = "--enable-remote-bitbang,--disable-remote-bitbang"
+-PACKAGECONFIG ??= "sysfsgpio remote-bitbang"
++PACKAGECONFIG[dmem] = "--enable-dmem"
++PACKAGECONFIG[jimtcl] = "--enable-internal-jimtcl"
++
++PACKAGECONFIG ??= "sysfsgpio remote-bitbang dmem jimtcl"
+ 
+ # Can't be built with ccache
+ CCACHE_DISABLE = "1"
 
