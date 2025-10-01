@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC1CDCCA472
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CCFCCCCD180
 	for <webhook@archiver.kernel.org>; Wed,  1 Oct 2025 13:52:57 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web11.18615.1759326775364093473
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
+ by mx.groups.io with SMTP id smtpd.web10.18460.1759326774614842701
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Oct 2025 06:52:55 -0700
+ Wed, 01 Oct 2025 06:52:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kEKvv40F;
- spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-6366d48d8ccso2099618a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 06:52:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BL/rbDf1;
+ spf=pass (domain: gmail.com, ip: 209.85.208.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-634cdb5ed4bso2013858a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 06:52:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759326774; x=1759931574; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759326773; x=1759931573; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=keARwMpNniqUg0/15ks8TA1e6Y2jbPpngOoLZ4km4Lc=;
-        b=kEKvv40Fk78k2pEXCz2s/7oH+hVZOh+CGQUPG1k8ynLPRcU1Ap0jtK4TaRYeUj16Va
-         0OUnTiWy6nTImc/qm1LVBhJiqe6F8tX7vzjaEN3SO2B+m+rsdwJKbq6LVHCnef4FbZrQ
-         enTKmLiombdfr0K3E0+lH7WoAPSv1K3CKXsWxUc9WeTj//mvPwjEg6+WzyWHeSTkA1Tb
-         isnz3S013aD3Tb7lRsbuNN4aAknsBf6LjL//9m1lr28vlMBvzH8DDZa9ufR4VENn9WJ6
-         /Ec81pTjRG2S5w0KSq1h/fQRZBAvWdgW91e1OMvPLYss7igx99nTibanskIWvi/e9cQE
-         SzAA==
+        bh=1Y7k+kGQCYucw6IVUvK8DXLZqcnHUCB99yOY7upVQDA=;
+        b=BL/rbDf1VKmVYVT1IoBCacEv/+oWi8hIT1kE2aCiC/nbY06o4To4yLH+E7KV2AoauL
+         EQX5xUw8nZurxCugk51PfS16TJpxvyDfhCo6rkzL97/deCWZVR5pP9KFBD2edmlSRIia
+         u9B1RbhGT+bfPUzTBY2+R1sT9LDyiRMF6j8l7B0zeL8xHyjWTAg53oRPy4kr1GHbFvBJ
+         x8q66m50RLmgivCk4wwzJ4yyBn7DRQHr8VMavnT1R+MospotTHmKfAX+ZfVS6U/koG6z
+         4jJkONCmqahX025FLar0U9G8s+yYXuBMRVaTI5fkViNybulkMniSCr2Cf7l7aj1lwfZh
+         BRaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759326774; x=1759931574;
+        d=1e100.net; s=20230601; t=1759326773; x=1759931573;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=keARwMpNniqUg0/15ks8TA1e6Y2jbPpngOoLZ4km4Lc=;
-        b=TZkLJCXXeDvDciSXT6C/fHyhVIWVz+TczeUXSqO/1o7Ueq866PVht9T7B5+kArWWKN
-         fWEueCx2rGjlv7Iy0dGpjRzL8cWQ6XFaKZvagcx3VjclmDYltQJf8lSYymaEyqIeGox4
-         o1GCCQx8O9k/XPZK2u3Dtl48/8Z7CO4xreW3ofppMVUYCoUu3F2y4akUvXOL5cvq3Qr1
-         rryAxXuFEAS9Py3zABfKzEVpSiSIslVppXl1PbanJgupgxYqOTyvsdrvVqzyVresi2jK
-         BQ7Jk27KrwU2POiiVllxoMQx0aR/bGjDiF+aPEskcdFeEEb7V9Y3KwoeeJyknALKlWCt
-         85nQ==
-X-Gm-Message-State: AOJu0YxuHE5VfhJIjPrF7gFPQylPPskeDE7/P3e7ls+Utm74bUf89kiZ
-	Dg6fQ3QqsK27DEo+nZiKhm8pSce/xJn9KONbnjKojwNM7LNqNsfR3aAZkkRwSw==
-X-Gm-Gg: ASbGncvUzgwATDaqpZCJY7sVcA5u9DqsN9x2A2akIJySHxWpi4eVVvEJ9YtLZ8/4+xG
-	WLoc9MGbe7tTnjAPJQyD7H6rLPUwr1kyA4vFjyIA3IGOMYLNASz+Gt9XteG1dvuTqq9x3zRgG5C
-	fLW2okybtQxgG3WGx3eihWQYx7vi92pH+0oy1jqOFTHfCRl28TxcHvu5g4Px2yev9uq8Tg4Ebvo
-	7r0SN7PtbMiWzK2B/L6c0evmJFrlnDcJUBbP6kKmanuG8Bu1RaaSK6XifAn9XK78AqJ4nZn35nm
-	s8RkRLhUnSSEIEXEEkUPUWs1UKQuR/ZU5+P7/O6pAJtwn8W88HdHSRRk23D2U2/nJPM+SmqiO01
-	A0vvUPvyA1TJLMyF2md8Ge3cyuRhmchfXdAgwC11ulR++
-X-Google-Smtp-Source: AGHT+IHHdAMM36A0Fp6mIUY79aBTGRGxc4GUibeWHagW3gRVaKHgajvFp6ZPXA1LC0bAOEiNTcwGKQ==
-X-Received: by 2002:a05:6402:1e95:b0:631:b058:bef0 with SMTP id 4fb4d7f45d1cf-63678c7df79mr3837132a12.32.1759326773580;
-        Wed, 01 Oct 2025 06:52:53 -0700 (PDT)
+        bh=1Y7k+kGQCYucw6IVUvK8DXLZqcnHUCB99yOY7upVQDA=;
+        b=jPatCJpiYgABPe4EOuaceKZ1OLyErsDIhWBi5fJDwdswNaBP/cETBQrQ1Vs4esT32g
+         Umh5ZPEivF7O04m+7b3buohczzUYdv63tCZfLR1pu5LVbdl0eWFLXFWFcPcIZPgzf5VZ
+         sn1J5e2ReMpoJQqU5ybVBnqLfEZXL+P84g2uu5EqqHV0Fjkv5/BMM8wpoTl2re6NH4kx
+         YOH2ogYmVE4R2AIYY2fQ5D/QCuKhpcHsJqhfP4mwDU9iXIYjUfkPLK+G1646db8u2ZUN
+         ivW16V/eczyVacmB/0/CxLi2n4j5MxLvuiMeX+ztM6opdzCAZF9z4N+j1ObFPM4r5ov/
+         7teg==
+X-Gm-Message-State: AOJu0Yx7Cl9zO9wVMKcX288ph53M4G27UHoSuTjMChXD2OA4vfWXIDHp
+	xHg6B/dJtoAfWEMWDPlc2drf0MYsjlSd5t+6uOs68IjQgp++GgtIrF3vhC9ukA==
+X-Gm-Gg: ASbGnctLyqPTriGvbBNgD9sx2vMlVIeHUmz1Ho3OZVB/l+oJYc9bcV5Tg0pqdHpFPa8
+	3QY08/8RiK3rf8kbp1dvo22wWGQBCj4ujvsMdFORpt966dwYm5qJxtYznwjwkv4VNYVxozqPpeT
+	IlG79+dgJ6iqTRKxxQJNlSXJPqk1v9M1mVrEWirZ/ps8k5q8439vxo7OK3Yw8aQ8exfGnWFUZFl
+	e6QblxSlDp9Sp3OAg4f9/zcUdYp7aFOL4bXEwgt712lym8djaW03OopCIlV6boFsTv5oLXgWdAM
+	Pjw6Ya8X+lHW9cXdsykgK/esiDov/62ryRPy5SMEYDmH6lllzUp1gD7Xab5QfEtP0lvuyb2CEPr
+	KlC9/WKJ0qNR3/Jt2/AiW5kurAXh/ToFof8LQcPlu50u5
+X-Google-Smtp-Source: AGHT+IHoatFxWHnfBkVHLV08TIeiBglVVrEbU9DcPLKndEF3VV8XOADXOkSDfGLbA/JVIsBJt4pY+w==
+X-Received: by 2002:a05:6402:274c:b0:634:544b:a740 with SMTP id 4fb4d7f45d1cf-63678c56e05mr4503887a12.22.1759326772909;
+        Wed, 01 Oct 2025 06:52:52 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634a3629badsm11507823a12.9.2025.10.01.06.52.52
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Oct 2025 06:52:53 -0700 (PDT)
+        Wed, 01 Oct 2025 06:52:52 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 12/25] x11vnc: Fix CVE-2020-29074
-Date: Wed,  1 Oct 2025 15:52:30 +0200
-Message-ID: <20251001135243.1490753-13-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 11/25] openbox: fix crash on alt+tab with fullscreen app
+Date: Wed,  1 Oct 2025 15:52:29 +0200
+Message-ID: <20251001135243.1490753-12-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251001135243.1490753-1-skandigraun@gmail.com>
 References: <20251001135243.1490753-1-skandigraun@gmail.com>
@@ -67,63 +67,99 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 13:52:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120127
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120126
 
-From: Lee Chee Yang <chee.yang.lee@intel.com>
+From: Alexandre Videgrain <alexandre.videgrain@smile.fr>
 
-Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
+Apply an openbox patch to openbox recipe to fix crashes on alt+tab with
+fullscreen app.
+
+Github issue: https://github.com/openembedded/meta-openembedded/issues/837
+
+Signed-off-by: Alexandre Videgrain <alexandre.videgrain@smile.fr>
+Suggested-by: Ludovic Jozeau <ludovic.jozeau@smile.fr>
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit dbdea59838054f9c908533d486cf3c0c2897c791)
+(cherry picked from commit 85132c16210d1bdf83e8be5b3da4f430ce7b4b91)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../x11vnc/files/CVE-2020-29074.patch         | 27 +++++++++++++++++++
- .../recipes-graphics/x11vnc/x11vnc_0.9.16.bb  |  1 +
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/x11vnc/files/CVE-2020-29074.patch
+ ...traversal-issue-in-client_calc_layer.patch | 56 +++++++++++++++++++
+ .../recipes-graphics/openbox/openbox_3.6.1.bb |  1 +
+ 2 files changed, 57 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/openbox/files/0001-Fix-list-traversal-issue-in-client_calc_layer.patch
 
-diff --git a/meta-oe/recipes-graphics/x11vnc/files/CVE-2020-29074.patch b/meta-oe/recipes-graphics/x11vnc/files/CVE-2020-29074.patch
+diff --git a/meta-oe/recipes-graphics/openbox/files/0001-Fix-list-traversal-issue-in-client_calc_layer.patch b/meta-oe/recipes-graphics/openbox/files/0001-Fix-list-traversal-issue-in-client_calc_layer.patch
 new file mode 100644
-index 0000000000..fbdb9123cc
+index 0000000000..8bc2b80f68
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/x11vnc/files/CVE-2020-29074.patch
-@@ -0,0 +1,27 @@
-+CVE: CVE-2020-29074
-+Upstream-Status: Backport [https://github.com/LibVNC/x11vnc/commit/69eeb9f7baa14ca03b16c9de821f9876def7a36a ]
-+Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
++++ b/meta-oe/recipes-graphics/openbox/files/0001-Fix-list-traversal-issue-in-client_calc_layer.patch
+@@ -0,0 +1,56 @@
++From d41128e5a1002af41c976c8860f8299cfcd3cd72 Mon Sep 17 00:00:00 2001
++From: pldubouilh <pldubouilh@gmail.com>
++Date: Fri, 17 Mar 2023 18:23:47 +0100
++Subject: [PATCH] Fix list traversal issue in client_calc_layer
 +
++The calls to client_calc_layer_internal can modify stacking_list, which
++can cause us to follow dangling ->next pointers (either by the pointer
++itself already being freed, or it pointing to a freed area). Avoid this
++by copying the list first, the goal is to visit every client in the list
++once so this should be fine.
 +
-+From 69eeb9f7baa14ca03b16c9de821f9876def7a36a Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Gu=C3=A9nal=20DAVALAN?= <guenal.davalan@uca.fr>
-+Date: Wed, 18 Nov 2020 08:40:45 +0100
-+Subject: [PATCH] scan: limit access to shared memory segments to current user
-+
++Upstream-Status: Backport [http://git.openbox.org/?p=mikachu/openbox.git;a=commit;h=d41128e5a1002af41c976c8860f8299cfcd3cd72]
++Signed-off-by: Alexandre Videgrain <alexandre.videgrain@smile.fr>
 +---
-+ src/scan.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ openbox/client.c | 9 +++++++--
++ 1 file changed, 7 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/scan.c b/src/scan.c
-+index 43e00d20..12994d52 100644
-+--- a/src/scan.c
-++++ b/src/scan.c
-+@@ -320,7 +320,7 @@ static int shm_create(XShmSegmentInfo *shm, XImage **ximg_ptr, int w, int h,
++diff --git a/openbox/client.c b/openbox/client.c
++index 7168b240..b8264587 100644
++--- a/openbox/client.c
+++++ b/openbox/client.c
++@@ -2742,9 +2742,12 @@ static void client_calc_layer_internal(ObClient *self)
++ void client_calc_layer(ObClient *self)
++ {
++     GList *it;
+++    /* the client_calc_layer_internal calls below modify stacking_list,
+++       so we have to make a copy to iterate over */
+++    GList *list = g_list_copy(stacking_list);
 + 
-+ #if HAVE_XSHM
-+ 	shm->shmid = shmget(IPC_PRIVATE,
-+-	    xim->bytes_per_line * xim->height, IPC_CREAT | 0777);
-++	    xim->bytes_per_line * xim->height, IPC_CREAT | 0600);
++     /* skip over stuff above fullscreen layer */
++-    for (it = stacking_list; it; it = g_list_next(it))
+++    for (it = list; it; it = g_list_next(it))
++         if (window_layer(it->data) <= OB_STACKING_LAYER_FULLSCREEN) break;
 + 
-+ 	if (shm->shmid == -1) {
-+ 		rfbErr("shmget(%s) failed.\n", name);
-diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
-index 5f7c0beb66..be9ef3cbaa 100644
---- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
-+++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
-@@ -12,6 +12,7 @@ PV .= "+git${SRCPV}"
++     /* find the windows in the fullscreen layer, and mark them not-visited */
++@@ -2757,7 +2760,7 @@ void client_calc_layer(ObClient *self)
++     client_calc_layer_internal(self);
++ 
++     /* skip over stuff above fullscreen layer */
++-    for (it = stacking_list; it; it = g_list_next(it))
+++    for (it = list; it; it = g_list_next(it))
++         if (window_layer(it->data) <= OB_STACKING_LAYER_FULLSCREEN) break;
++ 
++     /* now recalc any windows in the fullscreen layer which have not
++@@ -2768,6 +2771,8 @@ void client_calc_layer(ObClient *self)
++                  !WINDOW_AS_CLIENT(it->data)->visited)
++             client_calc_layer_internal(it->data);
++     }
+++
+++    g_list_free(it);
++ }
++ 
++ gboolean client_should_show(ObClient *self)
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
+index 4c97c03978..26fc7c3650 100644
+--- a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
++++ b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
+@@ -8,6 +8,7 @@ SRC_URI = " \
+     http://icculus.org/openbox/releases/openbox-${PV}.tar.gz \
+     file://0001-Makefile.am-avoid-race-when-creating-autostart-direc.patch \
+     file://0001-openbox-xdg-autostart-convert-to-python3.patch \
++    file://0001-Fix-list-traversal-issue-in-client_calc_layer.patch \
+ "
  
- SRC_URI = "git://github.com/LibVNC/x11vnc;branch=master;protocol=https \
-            file://starting-fix.patch \
-+           file://CVE-2020-29074.patch \
-            "
- S = "${WORKDIR}/git"
- 
+ SRC_URI[md5sum] = "b72794996c6a3ad94634727b95f9d204"
 
