@@ -1,256 +1,112 @@
-Return-Path: <philip@balister.org>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AC37CCA470
-	for <webhook@archiver.kernel.org>; Wed,  1 Oct 2025 13:03:12 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web11.17053.1759323698248670013
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79E9CCAC5BB
+	for <webhook@archiver.kernel.org>; Wed,  1 Oct 2025 13:25:42 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web11.17705.1759325139622732661
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Oct 2025 06:01:38 -0700
+ Wed, 01 Oct 2025 06:25:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=h1IQ1LfA;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: joao.raul.434@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-46e2e363118so69042775e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 06:01:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NDW1tMRL;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b3d5088259eso601693366b.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 06:25:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759323697; x=1759928497; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=GnR/9GLFCMdQv1cUqzM4QFVhxyHwZKCQZ7byKLM7E90=;
-        b=h1IQ1LfAZi3oQHIGiZTWdO0c2UbPackDfw3OrpLgUMfSSlBxvUfbE7ypdpPU2ieQ9S
-         dfUjrvw3HodxtFDwNyzA0OQQIBHXii51SySMoAJoqHsZBXR0QmqgkinNO73UhGdlTu6d
-         zuzDGggf6eP0TBi6x/E57pVfrXw9BgkWfoy02PtRqzi5yl8Kna937mS18wsFwDhbci3l
-         N9cfZdMxfUz1/M6NmTTqX8qIIIADXllhLpN5+xPqQFBYqurz3LT65RejxyvAxRmN8FHa
-         P/PKpmpYM4vZ8QgWFgPKVOvKRqrJiluFkjNFQojxwAdC6wQ0iKeu/259xJpb/wVch+tB
-         O6lA==
+        d=gmail.com; s=20230601; t=1759325138; x=1759929938; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=LalV4CuwCI1dIq5196VMwAB6Xf/APXPmogBtSlXrEeU=;
+        b=NDW1tMRLnqzEtVsDw5OgUCLED0VskIuiZxAth9cmLvQVdsYmWVv8/R/ZbcMJr8sjNI
+         cmn57hTFqgdXDmWKd5gAIj5VM4ENusx1p1MHSBSpI0M0EFRXg1dE/lZzpYnYuczToabj
+         dlOLEIS2oEzn9QzzoAqA5MEeBMw3OaZo4v/f0kmRKjtmiXNWu0f9boCtLYQQ6P+PzKI1
+         MDAxxpQ0ep5duMbaBOq0pvTVonwMU/fYqTCFJvpLDGsoyvCUUyLF4JUyMJbeasEccpyD
+         CoOICHDK4f9Qycpu3VXhI5QhCyNcx5ePi7DMqAPpUdPVf/x/dMtaRe8rMo0oHUGNvim6
+         nh2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759323697; x=1759928497;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=GnR/9GLFCMdQv1cUqzM4QFVhxyHwZKCQZ7byKLM7E90=;
-        b=BaUeq3QKL9FlnqNKTVDUvXHKnISP4mQtoMF5P+dOk/x9dYFBAWU0qweT6Nn/jyzEJT
-         cDDU+9TX2cbtJv3Vy26B4kHG60veEzAdbQ7yGpuKx0nxvf5U8JUG7+kxamrpHMBZeSnP
-         h+Dee3ggPUclxQx7Vj8jIxH0lxTWZSsjrQuGQmm/+7mQnSYefJDb0bU60pPAEQm6YZQ4
-         KZed+B73isS0Ec/9DbKnhiwzMiJ/xMgGVQMhWpcHP57s8Cp4yRi90NRPkDvuU2E29JAR
-         WTJmXRQ8Of5o1DRVKtZffmuVwxQDrryfwb0uu5zU53K6sethbtGNEQEZM8FYDF8kVVCG
-         ojbQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW/DzLyt42Lq88Q3XCM7MsrNtq4Vo77HMDSEhresye6UUzr0qq4Glfkje+BxBJp6PSFtulkWxiqzsCpOaXoMV3JgrY=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwQHvLlKHAReiUQBLzam+BBNnbQELbZz556zk3VlFvIwxD6f+Ux
-	yQDxaBDKa2Qnem9PWmZVm559JrAzWWbhAcowyk8V71e1t/JneTKUbVcJ
-X-Gm-Gg: ASbGncsykLoGR43/gKMVBo4S7ASNG/Fqka6QjTSI0957KuahGjXonG7eilGg/TaOBvu
-	9nB3Y4AbBveh8hzAiHL5Lb1SsDqqDpj9tJ8GjPTc1O1NgNrGMoTyGFbWk8GZb/hGre/jk7mchwp
-	J2HZ66+FbD4aebKXDmcaaIexwiyVmbjmmVy8iXVGQRnYWobsXA2rR/qNKDyb3RepB7jtJZ/Pzhl
-	jmvsTVNRdSk1o5LuZroKSXN2aEbps+JLIpR3aNKMnz2erq1lTbhKnwi4g502OQ6aNG8jyEAksQC
-	AA6v4qJ1Q+6NgQTxwrEHBb7bXFaXkIeEVqK76JaBeLnSYzUp+4Lngxe/WKMnQHq7fXixk3mIh2o
-	9kf2LGtRqTgHfsMwW7jHIQa+lsXbIP9Lrgb3uyhYMi4mch6AVILtVgGymoDYwJ4kcX0Qu2DtFnr
-	xaMzwogkxbsZO/bXgib6fPGbgZKxb154PPi0S4E/blPLlsVw==
-X-Google-Smtp-Source: AGHT+IHmcErybvyTLQbBpiFkqjp4I4Kdl+7HIVbQJ7XyPXMxvoocTm45eoeXg7gucxiDoTopb2lKIg==
-X-Received: by 2002:a05:600c:a118:b0:46e:3f75:da49 with SMTP id 5b1f17b1804b1-46e613dd423mr20566945e9.37.1759323694750;
-        Wed, 01 Oct 2025 06:01:34 -0700 (PDT)
-Received: from RD-8dhlsmLpT3bz.corp.hbkworld.com (89-181-200-223.net.novis.pt. [89.181.200.223])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-46e5b633afdsm35865545e9.2.2025.10.01.06.01.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Oct 2025 06:01:33 -0700 (PDT)
-From: "=?UTF-8?q?Lima=2C=20Jo=C3=A3o?=" <joao.raul.434@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Lima=2C=20Jo=C3=A3o?= <joao.lima@hbkworld.com>
-To: joao.lima@hbkworld.com,
-	openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com
-Subject: [meta-oe][PATCH 2/3] openocd: add dmem support to am64xx and j784s4 platforms
-Date: Wed,  1 Oct 2025 14:01:29 +0100
-Message-ID: <20251001130129.1638-1-joao.lima@hbkworld.com>
-X-Mailer: git-send-email 2.51.0.windows.1
+        d=1e100.net; s=20230601; t=1759325138; x=1759929938;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=LalV4CuwCI1dIq5196VMwAB6Xf/APXPmogBtSlXrEeU=;
+        b=u2HNNjjtVf+YY4G3TEIfjvVyloKJaTsFFkd56qIIhwKQ4ntEiFY4FLuOjc4Rqz1zN4
+         zmuOFZSuPEunOcnxZJt9XwMNaGro3+gF09PjI/BupRCNwiV6X1iUEee8Gl/sayUijrkx
+         hGTmOXoAegd0Xu44VcTZ9V1ZRs1CceFITFkkALFzrypWzPJtbRf5qgxcbBcTOrATtxNh
+         nWTrHAYoUZbo/uSiblkWsf26BpWAAo16IExZv9QESGRmosOpY+k1+KPQmW89hVsN97hB
+         M2qh8DootA4R6z7VSBJ/f5FqJHZ+2sNoJYIAniD8gk20ZXu9O+BP4GsieCU4MPPkWuL4
+         6FUg==
+X-Forwarded-Encrypted: i=1; AJvYcCVuLOhHHAjYNGIpfBiEMiqRpWRuUr5CcefuShVIMqnIY4x72C30Xiaxwj8Dcidk4neZ1m86Y45kW9Hy8xxxnv9PzTE=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwYH6USv/wRRhqWE32lwamHswYhBdbh/EmUGYjvA2wv+wzKPdFv
+	xrxnMM0VeoMbDNoTA/VnFY46t5XkevNaFq6D2JQTXuUkdlwCJQ/g9Eyt
+X-Gm-Gg: ASbGnctai6DGUsL1ayFK63DlwNo7oQ+YhRNvk+mVIGugMyii2FIMX4sZbxaO0C2a/kz
+	jUytWNDbUaCGLUn66zDXIyQnz8BOrcV+ayQxWArWneMTdeXvKefubRPblwBzlaHhXtwZtOZb++L
+	/4iHRhUhCSjEwzVPztDuHfVvLWF1QtJMQp0BkN9Ixhtn9YoobCF2QkLTTJEx/Z16ho1SBNHJGPi
+	8iMoBbzNQNDrKwD3Vr8mBELS6Y2F9hq57yKQE8eIcGSWdwdVHQxQiEFTBdTDPOmMWnqGnsyvTkw
+	KawDQw+KPvNi1aM/3mll0LVqT1fOLQGmWDArY6HhmJAr/9YKNkn7iYEHMsIq+kowqzBY4c3xRxV
+	XiKBqXb/ZyojgkKSoQ6zic6/qMiZfp0qUkbKls75fPy7N4HWo5GeFHBc=
+X-Google-Smtp-Source: AGHT+IGa5yYjw7MUBuRK8fvw2jjP0zQTbA3J/IaPN5kzVh5duGZpXLmwY6fucPJZkx7nNUXQ+r+uXQ==
+X-Received: by 2002:a17:907:9447:b0:b46:9a2d:9ef with SMTP id a640c23a62f3a-b46e6a08184mr420784566b.63.1759325137682;
+        Wed, 01 Oct 2025 06:25:37 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b3545a98d7fsm1377416366b.100.2025.10.01.06.25.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 01 Oct 2025 06:25:37 -0700 (PDT)
+Message-ID: <a5530b60-d03c-4c7e-a465-f0ebb24295b9@gmail.com>
+Date: Wed, 1 Oct 2025 15:25:36 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [kirkstone][PATCH] 1/2] systemd: backport fix for handle USE_NLS
+ from master
+To: AshishKumar Mishra <emailaddress.ashish@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20250926164850.40701-1-emailaddress.ashish@gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20250926164850.40701-1-emailaddress.ashish@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 13:03:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120105
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 13:25:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120107
 
-From: Joao Lima <joao.lima@hbkworld.com>
+Note that systemd is in oe-core, and I am not able to apply it - the
+correct mailing list for this would be
+openembedded-core@lists.openembedded.org
 
-Platform support patches:
-   - Add SWD native configuration files for AM64x and J784s4 boards
-   - Configure DMEM access parameters in ti_k3.cfg for direct memory operations
-   - Set up DAPBUS debugger and emulated AP descriptions
+On 9/26/25 18:48, AshishKumar Mishra wrote:
+> From: AshishKumar Mishra <emailaddress.ashish@gmail.com>
+>
+> Do not build translations when NLS is disabled.
+> (From OE-Core rev: 83795ef6c3fa12a863cd20b7ec1a2607606987b6)
+>
+> This change corresponds to upstream d848b454e64ffbd642590b4bbc378619e1547ad3
+> from master .
+> Since the systemd version are different between master & kirkstone
+> applied the patch manually
+>
+> Signed-off-by: Philip Lorenz <philip.lorenz@bmw.de>
+> Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> Signed-off-by: AshishKumar Mishra <emailaddress.ashish@gmail.com>
+> ---
+>  meta/recipes-core/systemd/systemd_250.14.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta/recipes-core/systemd/systemd_250.14.bb b/meta/recipes-core/systemd/systemd_250.14.bb
+> index 66d20a46fd..087c0035eb 100644
+> --- a/meta/recipes-core/systemd/systemd_250.14.bb
+> +++ b/meta/recipes-core/systemd/systemd_250.14.bb
+> @@ -235,6 +235,7 @@ EXTRA_OEMESON += "-Dnobody-user=nobody \
+>                    -Dmode=release \
+>                    -Dsystem-alloc-uid-min=101 \
+>                    -Dsystem-uid-max=999 \
+> +                  -Dtranslations=${@'false' if d.getVar('USE_NLS') == 'no' else 'true'} \
+>                    -Dsystem-alloc-gid-min=101 \
+>                    -Dsystem-gid-max=999 \
+>                    "
 
-Signed-off-by: Joao Lima <joao.lima@hbkworld.com>
----
- ...wd_native.cfg-Add-support-for-direct.patch | 77 +++++++++++++++++++
- ....cfg-Add-support-for-direct-memory-a.patch | 65 ++++++++++++++++
- .../recipes-devtools/openocd/openocd_git.bb   |  2 +
- 3 files changed, 144 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch
- create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch
-
-diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch
-new file mode 100644
-index 0000000000..8a3b72321f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/openocd/openocd/0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch
-@@ -0,0 +1,77 @@
-+From 5c55d79ecfecc4a1b5a5ebcf649227ca1e1bf38e Mon Sep 17 00:00:00 2001
-+From: Joao Lima <joao.lima@hbkworld.com>
-+Date: Tue, 30 Sep 2025 12:13:04 +0000
-+Subject: [PATCH 1/2] tcl/board/ti_*_swd_native.cfg: Add support for direct
-+ memory access via SW
-+
-+Add support for SWD emulation as a transport method for
-+direct memory operations of boards TI AM64x and TI J784s4
-+
-+Upstream-Status: Submitted [http://openocd.zylin.com/#/c/9020/]
-+
-+Change-Id: I17fe9b2bef5c58886625bfdb88d92645ba4d7da7
-+Signed-off-by: Joao Lima <joao.lima@hbkworld.com>
-+---
-+ tcl/board/ti_am64xx_swd_native.cfg | 23 +++++++++++++++++++++++
-+ tcl/board/ti_j784s4_swd_native.cfg | 22 ++++++++++++++++++++++
-+ 2 files changed, 45 insertions(+)
-+ create mode 100644 tcl/board/ti_am64xx_swd_native.cfg
-+ create mode 100644 tcl/board/ti_j784s4_swd_native.cfg
-+
-+diff --git a/tcl/board/ti_am64xx_swd_native.cfg b/tcl/board/ti_am64xx_swd_native.cfg
-+new file mode 100644
-+index 000000000..d3727149e
-+--- /dev/null
-++++ b/tcl/board/ti_am64xx_swd_native.cfg
-+@@ -0,0 +1,23 @@
-++# SPDX-License-Identifier: GPL-2.0-or-later
-++# Copyright (C) 2022-2023 Texas Instruments Incorporated - http://www.ti.com/
-++#
-++# Texas Instruments am642
-++# Link: https://www.ti.com/product/AM642
-++#
-++# This configuration file is used as a self hosted debug configuration that
-++# works on every AM642 platform based on firewall configuration permitted
-++# in the system.
-++#
-++# In this system openOCD runs on one of the CPUs inside AM625 and provides
-++# network ports that can then be used to debug the microcontrollers on the
-++# SoC - either self hosted IDE OR remotely.
-++
-++# We are using dmem, which uses dapdirect_swd transport
-++adapter driver dmem
-++transport select swd
-++
-++if { ![info exists SOC] } {
-++	set SOC am642
-++}
-++
-++source [find target/ti_k3.cfg]
-+diff --git a/tcl/board/ti_j784s4_swd_native.cfg b/tcl/board/ti_j784s4_swd_native.cfg
-+new file mode 100644
-+index 000000000..13b2ac3b8
-+--- /dev/null
-++++ b/tcl/board/ti_j784s4_swd_native.cfg
-+@@ -0,0 +1,22 @@
-++# SPDX-License-Identifier: GPL-2.0-or-later
-++# Copyright (C) 2022-2023 Texas Instruments Incorporated - http://www.ti.com/
-++#
-++# Texas Instruments TDA4VM/J721E
-++# Link: https://www.ti.com/product/TDA4VM
-++#
-++# This configuration file is used as a self hosted debug configuration that
-++# works on every TDA4VM platform based on firewall configuration permitted
-++# in the system.
-++#
-++# In this system openOCD runs on one of the CPUs inside TDA4VM and provides
-++# network ports that can then be used to debug the microcontrollers on the
-++# SoC - either self hosted IDE OR remotely.
-++
-++# We are using dmem, which uses dapdirect_swd transport
-++adapter driver dmem
-++transport select swd
-++
-++if { ![info exists SOC] } {
-++        set SOC j784s4
-++}
-++source [find target/ti_k3.cfg]
-diff --git a/meta-oe/recipes-devtools/openocd/openocd/0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch b/meta-oe/recipes-devtools/openocd/openocd/0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch
-new file mode 100644
-index 0000000000..c879696ef5
---- /dev/null
-+++ b/meta-oe/recipes-devtools/openocd/openocd/0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch
-@@ -0,0 +1,65 @@
-+From 39bc4461642eaaf993d0a6cf772d51cdde8c0ae8 Mon Sep 17 00:00:00 2001
-+From: Joao Lima <joao.lima@hbkworld.com>
-+Date: Tue, 30 Sep 2025 12:13:30 +0000
-+Subject: [PATCH 2/2] tcl/target/ti_k3.cfg: Add support for direct memory
-+ access via SWD
-+
-+Adds support for direct memory access via SWD emulation for AM64x and
-+J784s4 boards, configuring addresses and parameters required for
-+direct memory operations.
-+
-+Upstream-Status: Submitted [http://openocd.zylin.com/#/c/9021/]
-+
-+Change-Id: Iebc16612b3990b2ef19ddc4143b66ab1bcbfe0f3
-+Signed-off-by: Joao Lima <joao.lima@hbkworld.com>
-+---
-+ tcl/target/ti_k3.cfg | 22 +++++++++++++++++++++-
-+ 1 file changed, 21 insertions(+), 1 deletion(-)
-+
-+diff --git a/tcl/target/ti_k3.cfg b/tcl/target/ti_k3.cfg
-+index 0dee74e5e..6b0ac2e52 100644
-+--- a/tcl/target/ti_k3.cfg
-++++ b/tcl/target/ti_k3.cfg
-+@@ -176,6 +176,16 @@ switch $_soc {
-+ 			# Uses the same JTAG ID
-+ 			set _armv8_cores 0
-+ 		}
-++
-++		# Setup DMEM access descriptions
-++		# DAPBUS (Debugger) description
-++		set _dmem_base_address 0x740002000
-++		set _dmem_ap_address_offset 0x100
-++		set _dmem_max_aps 10
-++		# Emulated AP description
-++		set _dmem_emu_base_address 0x760000000
-++		set _dmem_emu_base_address_map_to 0x1d500000
-++		set _dmem_emu_ap_list 1
-+ 	}
-+ 	am625 {
-+ 		set _K3_DAP_TAPID 0x0bb7e02f
-+@@ -333,7 +343,7 @@ switch $_soc {
-+ 		set ARMV8_CTIBASE {0x90420000 0x90520000 0x90620000 0x90720000
-+                            0x90820000 0x90920000 0x90a20000 0x90b20000}
-+ 
-+-		# J721s2 has 4 clusters of 2 R5 cores each.
-++		# J784s4 has 4 clusters of 2 R5 cores each.
-+ 		set _r5_cores 8
-+ 		set R5_DBGBASE {0x9d010000 0x9d012000
-+                         0x9d410000 0x9d412000
-+@@ -348,6 +358,16 @@ switch $_soc {
-+                       main1_r5.0 main1_r5.1
-+                       main2_r5.0 main2_r5.1}
-+ 
-++		# Setup DMEM access descriptions
-++		# DAPBUS (Debugger) description
-++		set _dmem_base_address 0x4c40002000
-++		set _dmem_ap_address_offset 0x100
-++		set _dmem_max_aps 8
-++		# Emulated AP description
-++		set _dmem_emu_base_address 0x4c60000000
-++		set _dmem_emu_base_address_map_to 0x1d600000
-++		set _dmem_emu_ap_list 1
-++
-+ 		# sysctrl CTI base
-+ 		set CM3_CTIBASE {0x20001000}
-+ 		# Sysctrl power-ap unlock offsets
-diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-index 2c07273940..846d2f62c5 100644
---- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-+++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-@@ -9,6 +9,8 @@ SRC_URI = " \
-     git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl;branch=master \
-     git://github.com/msteveb/jimtcl.git;protocol=https;destsuffix=git/jimtcl;name=jimtcl;branch=master \
-     git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink;branch=master \
-+    file://0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch \
-+    file://0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch \
- "
- 
- SRCREV_FORMAT = "openocd"
 
