@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87442CCD185
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90FCECCD187
 	for <webhook@archiver.kernel.org>; Wed,  1 Oct 2025 13:53:08 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web11.18620.1759326778852223145
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.web10.18471.1759326784487222444
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Oct 2025 06:52:59 -0700
+ Wed, 01 Oct 2025 06:53:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m+PP8g5Y;
- spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-62ec5f750f7so10793760a12.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 06:52:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y8W6JzTn;
+ spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-62fc28843ecso9991973a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 06:53:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759326777; x=1759931577; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759326783; x=1759931583; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=qc5SNt9LTSp0SweB5u91IARqXHqFBBuijhc9lvnv7DU=;
-        b=m+PP8g5YAr8dk/2oxNOiz39B51WNqCZ+ZXoOsRh7YWCWrW5cpCZN3dv0Sgfl6I+3M9
-         ivVlofiLBa/5ISq7nu+hQ6q4+4Etu0K2Ogh/C6XiuWue509VCRuqPY+Lq1ikmx6ggF8m
-         MHtuMOh1p6zpHi5Y5iKDoVGHvsDTDl6/EG2eKddSrnkKG43HmOmCud3yZUvL+Ys7qSFz
-         bbYzuMGgs6kb3A33kEhJAdxp05kBxlhhb2vc4hH+nLgKmfq+BSliLI3RQ1DF6Pl6mU1X
-         Q8tP53s4zT+RaaeVRIVZM0oi5t6RGu/BCgqfIPO100Ie4I1XXfh+llNcPC1DylC1BC7X
-         L6FQ==
+        bh=F1fvKm4ZF74kddNblvPqfnZQCNSBkewBC7A0tNU7DJM=;
+        b=Y8W6JzTnNDUYmGkJ3tvidf63hzlQ9uukzgLz6uDOuKLi3IyWar2gcgE63L5aT690dt
+         V1BR1dFvBf4Mw6t8F/3bdx9kWi7jS/Wz5vSeqAbEa1eRXCca4RX2tbbUAnDgFP3ew2K7
+         jb/c4JisgkpGBzgAGdxRwHB85FgPOaV7kiFs/NbONvJ0azBFWbdfoYjxJLKJ0D1Z6H+0
+         L8Rxwgzqc/sSi1kBfiGFRoungs3Po4ZkXzKO1o+hq9L8tkUgRnytumtDLi3jUxOyVR3p
+         /WGzX5hlUaZlbM7rCLH0BBGrDFyY9a8JamJwa58eCRNgR45vybYZoW5bvCy+Ss5jyFtA
+         hkrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759326777; x=1759931577;
+        d=1e100.net; s=20230601; t=1759326783; x=1759931583;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=qc5SNt9LTSp0SweB5u91IARqXHqFBBuijhc9lvnv7DU=;
-        b=LruJ9QIVskbhUb1kIcmVGM6FFHMk+tsqgysGYZA4QJJsvQWzVWpxH3PdQXl+RuoKJe
-         L90Gc+8+c3w9P9AYKT+iZd9c2JPPihs4OjELLdjbpntzOuqoT1XL/Q9GykBKKTqgqFY4
-         3wEV6KE56HK5ZboGqd9pOD4xUrFI1N448TgpCN0hOpWFvRzJbsoHZ5jibCgXPJvzFR+w
-         NIu3q4ZJYN2otQf/ceSHNa9PazI2KOGnEVSoCIhFA2NNz8S4lV0YWCtZPNe+fK9A0sVb
-         TM5XNEeanc0s+iZ/tKrFxz8a9tVpN9b7mOo+baTc0Lz0UUUXfRhK9Pu8HGmn/ij3fbY7
-         ZHXA==
-X-Gm-Message-State: AOJu0YzGu94o/0hYOA6540aqpKgPYBCGlmvFH6paG2ZL63LK2D05QIoL
-	BVmh2uiKkjDqQlJI5Ea8IgfUVVl4FETWr506ZRY1l85/R0oC/grR/hIxfFecZQ==
-X-Gm-Gg: ASbGncvMBIsogN9xLPlvnKtaYFK6gI564zv6zBkxuHkcMfEVUpjD2PPUu/XAojWwG18
-	Qpy42zlZ95/BXO7l+q4n5UODwbevkGo6QWosiSf7vTgj3sw61e48r22G1o1xb/9hoKDlzRPjSZI
-	GOxleHfFonAKQ+NZoaayqte70EhTEy8di0LqxZrEzPsPiPo3pcWMJlybVQ9DelIKYPqiJyTD5mg
-	wy2K5AS5cKzk1xPsKu2kfM4HUqXgx1bW3JPKFPawoA0JvkoxhOi/4xJyAf3lRl8I9rH0nr3szv5
-	KlRSCf7B9f0Wwa8kfUmwgoN7VZ6mc1PTDNdxvHq9RhNTLA8hJ4kCIGcVJs79hPFk+IhO3GuJdBB
-	kfQQ56GRpzCln0Dc86wX7APMZkyx9A7ioIrjCzZejGNs5
-X-Google-Smtp-Source: AGHT+IEko+JOF1n2q0Fy8z5h9eN3u1KNxVO3rzqb2usPO9Gnf0Nd8yMcjDGN1dUs8KEEXeZqtLcFfQ==
-X-Received: by 2002:a05:6402:1ec9:b0:636:740:e4f8 with SMTP id 4fb4d7f45d1cf-63678c4d390mr4152580a12.18.1759326777069;
-        Wed, 01 Oct 2025 06:52:57 -0700 (PDT)
+        bh=F1fvKm4ZF74kddNblvPqfnZQCNSBkewBC7A0tNU7DJM=;
+        b=K9llJz1xb5Tb+OKcsu66NCTG76PTOIji33Is6sTYM+vaFDxi6vPRYl/cTjX5G2mJWJ
+         F/ciruZ1oiMQHvrJ/RProTFoiM+SZ0D22XAv53Pqj45pXoaVqQ9aWCylZC14s/rtd8oi
+         /cb8/4Cl+z1PMH1MFVq0pn7vFZItyxs1tQI/ZTkhZnNtFv72EvzcbOcQx7ALnHA+sKBd
+         e8ZDB3vvrw2PnqBUzyjmdHvFfFd8sQHoEt8ho2HHkMtUfi95THgdq4LXS0shBOH3QX5b
+         hvk8hUL+Xuq1CUoxdX2ZbTXF7AzCDsHlnxurSbFjSYXzsHkmf6AQ1jCkKzW4cUVedMOI
+         brXg==
+X-Gm-Message-State: AOJu0YzuEeqB1Gs8ry4LvUIdNRZKZBMe25diQHlX9w1TNk7EVx9ycOfP
+	1DJihCDdBAS6SMo6nJEwjGQm2Cny/EPdAWPpZBo9wl60f8N4sffIOghe3tvFAg==
+X-Gm-Gg: ASbGnctUvXWcVsjTIFKF2t6AZvTGJj4jH4wpw0Mbye5nxTPzsvuHofgQocp4+Z8d2ps
+	GvG2H6pPindVzSs3EXbggEDdxuHF86sysmkstyIipZgB8Sl0gdnF7igJ3A7/Yh+A4qVKaJ/ivRW
+	ye7n4MUELP9EQMTJiH6cTv5jdpgKF4PHwgDucyG7KkDdxNzo8SU5tApDTU0HTwWLgl9Gx/A2WGZ
+	FqzZLKSaqxnaPX8wMTKIAghTSVU93puSVyC2zhFlQVz7vsGJo/HAvz+5vMC2Mmjo26tvlIeSwlX
+	efC7EAsOJgCn5IyI9bYx8UsFPJI2GeLvKEmGVIoJtGqiMavklp5NsG/DRcCoWhuZcttrT6OlsI2
+	TPmu7IBZtHjS28rEGjYcqcZ+ikcUqLD1PgkYS6Z/efA6X
+X-Google-Smtp-Source: AGHT+IGzspw7IUpcuIIn8Xfwa/c7OEh0hwQELBKxCOEaHaAh6RQbDAR7Hi2PelUx2nTdCSsrz2CPYQ==
+X-Received: by 2002:a05:6402:1149:b0:636:24da:490b with SMTP id 4fb4d7f45d1cf-63678cff0f6mr3202900a12.33.1759326782565;
+        Wed, 01 Oct 2025 06:53:02 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634a3629badsm11507823a12.9.2025.10.01.06.52.56
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-634a3629badsm11507823a12.9.2025.10.01.06.53.01
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Oct 2025 06:52:56 -0700 (PDT)
+        Wed, 01 Oct 2025 06:53:02 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 15/25] audiofile: patch CVE-2017-6829
-Date: Wed,  1 Oct 2025 15:52:33 +0200
-Message-ID: <20251001135243.1490753-16-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 22/25] libmad: patch CVE-2017-8372 and CVE-2017-8373
+Date: Wed,  1 Oct 2025 15:52:40 +0200
+Message-ID: <20251001135243.1490753-23-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251001135243.1490753-1-skandigraun@gmail.com>
 References: <20251001135243.1490753-1-skandigraun@gmail.com>
@@ -67,82 +67,871 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 13:53:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120130
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120137
 
 From: Peter Marko <peter.marko@siemens.com>
 
-Use patch from buildroot:
-https://github.com/buildroot/buildroot/commit/434890df2a7c131b40fec1c49e6239972ab299d2
+Pick patch [1] from Debian based on [2].
+
+[1] https://salsa.debian.org/multimedia-team/libmad/-/raw/debian/0.15.1b-11/debian/patches/length-check.patch?ref_type=tags
+[2] https://security-tracker.debian.org/tracker/CVE-2017-8374
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f29fbaa4650201a059c65572947ed8faa991fcd8)
+(cherry picked from commit 60eb0214e71c5f761d450bcc484b57df6955bd09)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../audiofile/audiofile_0.3.6.bb              |  1 +
- ...ues-to-fix-index-overflow-in-IMA.cpp.patch | 43 +++++++++++++++++++
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch
+ .../libmad/libmad/CVE-2017-8374.patch         | 830 ++++++++++++++++++
+ .../libmad/libmad_0.15.1b.bb                  |   1 +
+ 2 files changed, 831 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/libmad/libmad/CVE-2017-8374.patch
 
-diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-index 89604f71a0..ec162154b6 100644
---- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-+++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-@@ -14,6 +14,7 @@ SRC_URI = " \
-     file://0002-fix-build-on-gcc6.patch \
-     file://0003-fix-CVE-2015-7747.patch \
-     file://0004-Always-check-the-number-of-coefficients.patch \
-+    file://0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch \
- "
- SRC_URI[md5sum] = "235dde14742317328f0109e9866a8008"
- SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782"
-diff --git a/meta-oe/recipes-multimedia/audiofile/files/0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch b/meta-oe/recipes-multimedia/audiofile/files/0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch
+diff --git a/meta-oe/recipes-multimedia/libmad/libmad/CVE-2017-8374.patch b/meta-oe/recipes-multimedia/libmad/libmad/CVE-2017-8374.patch
 new file mode 100644
-index 0000000000..00bb7e597e
+index 0000000000..69a7153f07
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/audiofile/files/0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch
-@@ -0,0 +1,43 @@
-+From 25eb00ce913452c2e614548d7df93070bf0d066f Mon Sep 17 00:00:00 2001
-+From: Antonio Larrosa <larrosa@kde.org>
-+Date: Mon, 6 Mar 2017 18:02:31 +0100
-+Subject: [PATCH] clamp index values to fix index overflow in IMA.cpp
++++ b/meta-oe/recipes-multimedia/libmad/libmad/CVE-2017-8374.patch
+@@ -0,0 +1,830 @@
++From 05de6e0ddc2c911b725955d2af331ffd76aa8186 Mon Sep 17 00:00:00 2001
++From: Kurt Roeckx <kurt@roeckx.be>
++Date: Sun, 28 Jan 2018 19:26:36 +0100
++Subject: [PATCH] Check the size before reading with mad_bit_read
 +
-+This fixes #33
-+(also reported at https://bugzilla.opensuse.org/show_bug.cgi?id=1026981
-+and https://blogs.gentoo.org/ago/2017/02/20/audiofile-global-buffer-overflow-in-decodesample-ima-cpp/)
++There are various cases where it attemps to read past the end of the buffer
++using mad_bit_read(). Most functions didn't even know the size of the buffer
++they were reading from.
 +
-+Signed-off-by: Peter Korsgaard <peter@korsgaard.com>
++Source: https://salsa.debian.org/multimedia-team/libmad/-/raw/debian/0.15.1b-11/debian/patches/length-check.patch?ref_type=tags
 +
-+CVE: CVE-2017-6829
-+Upstream-Status: Inactive-Upstream [lastrelease: 2013]
++CVE: CVE-2017-8374
++Upstream-Status: Inactive-Upstream [lastrelease: 2018]
 +Signed-off-by: Peter Marko <peter.marko@siemens.com>
 +---
-+ libaudiofile/modules/IMA.cpp | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ bit.c     |   3 +
++ frame.c   |  20 +++++-
++ layer12.c | 112 +++++++++++++++++++++++++++---
++ layer3.c  | 198 ++++++++++++++++++++++++++++++++++++++----------------
++ 4 files changed, 262 insertions(+), 71 deletions(-)
 +
-+diff --git a/libaudiofile/modules/IMA.cpp b/libaudiofile/modules/IMA.cpp
-+index 7476d44..df4aad6 100644
-+--- a/libaudiofile/modules/IMA.cpp
-++++ b/libaudiofile/modules/IMA.cpp
-+@@ -169,7 +169,7 @@ int IMA::decodeBlockWAVE(const uint8_t *encoded, int16_t *decoded)
-+ 		if (encoded[1] & 0x80)
-+ 			m_adpcmState[c].previousValue -= 0x10000;
++diff --git a/bit.c b/bit.c
++index c2bfb24..39ef50b 100644
++--- a/bit.c
+++++ b/bit.c
++@@ -138,6 +138,9 @@ unsigned long mad_bit_read(struct mad_bitptr *bitptr, unsigned int len)
++ {
++   register unsigned long value;
 + 
-+-		m_adpcmState[c].index = encoded[2];
-++		m_adpcmState[c].index = clamp(encoded[2], 0, 88);
+++  if (len == 0)
+++    return 0;
+++
++   if (bitptr->left == CHAR_BIT)
++     bitptr->cache = *bitptr->byte;
 + 
-+ 		*decoded++ = m_adpcmState[c].previousValue;
++diff --git a/frame.c b/frame.c
++index 0cb3d0f..4b3aea8 100644
++--- a/frame.c
+++++ b/frame.c
++@@ -120,11 +120,18 @@ static
++ int decode_header(struct mad_header *header, struct mad_stream *stream)
++ {
++   unsigned int index;
+++  struct mad_bitptr bufend_ptr;
 + 
-+@@ -210,7 +210,7 @@ int IMA::decodeBlockQT(const uint8_t *encoded, int16_t *decoded)
-+ 			predictor -= 0x10000;
++   header->flags        = 0;
++   header->private_bits = 0;
 + 
-+ 		state.previousValue = clamp(predictor, MIN_INT16, MAX_INT16);
-+-		state.index = encoded[1] & 0x7f;
-++		state.index = clamp(encoded[1] & 0x7f, 0, 88);
-+ 		encoded += 2;
+++  mad_bit_init(&bufend_ptr, stream->bufend);
+++
++   /* header() */
+++  if (mad_bit_length(&stream->ptr, &bufend_ptr) < 32) {
+++    stream->error = MAD_ERROR_BUFLEN;
+++    return -1;
+++  }
 + 
-+ 		for (int n=0; n<m_framesPerPacket; n+=2)
-+-- 
-+2.11.0
-+
++   /* syncword */
++   mad_bit_skip(&stream->ptr, 11);
++@@ -225,8 +232,13 @@ int decode_header(struct mad_header *header, struct mad_stream *stream)
++   /* error_check() */
++ 
++   /* crc_check */
++-  if (header->flags & MAD_FLAG_PROTECTION)
+++  if (header->flags & MAD_FLAG_PROTECTION) {
+++    if (mad_bit_length(&stream->ptr, &bufend_ptr) < 16) {
+++      stream->error = MAD_ERROR_BUFLEN;
+++      return -1;
+++    }
++     header->crc_target = mad_bit_read(&stream->ptr, 16);
+++  }
++ 
++   return 0;
++ }
++@@ -338,7 +350,7 @@ int mad_header_decode(struct mad_header *header, struct mad_stream *stream)
++       stream->error = MAD_ERROR_BUFLEN;
++       goto fail;
++     }
++-    else if (!(ptr[0] == 0xff && (ptr[1] & 0xe0) == 0xe0)) {
+++    else if ((end - ptr >= 2) && !(ptr[0] == 0xff && (ptr[1] & 0xe0) == 0xe0)) {
++       /* mark point where frame sync word was expected */
++       stream->this_frame = ptr;
++       stream->next_frame = ptr + 1;
++@@ -361,6 +373,8 @@ int mad_header_decode(struct mad_header *header, struct mad_stream *stream)
++     ptr = mad_bit_nextbyte(&stream->ptr);
++   }
++ 
+++  stream->error = MAD_ERROR_NONE;
+++
++   /* begin processing */
++   stream->this_frame = ptr;
++   stream->next_frame = ptr + 1;  /* possibly bogus sync word */
++@@ -413,7 +427,7 @@ int mad_header_decode(struct mad_header *header, struct mad_stream *stream)
++     /* check that a valid frame header follows this frame */
++ 
++     ptr = stream->next_frame;
++-    if (!(ptr[0] == 0xff && (ptr[1] & 0xe0) == 0xe0)) {
+++    if ((end - ptr >= 2) && !(ptr[0] == 0xff && (ptr[1] & 0xe0) == 0xe0)) {
++       ptr = stream->next_frame = stream->this_frame + 1;
++       goto sync;
++     }
++diff --git a/layer12.c b/layer12.c
++index 6981f9c..b6f4a2f 100644
++--- a/layer12.c
+++++ b/layer12.c
++@@ -72,10 +72,18 @@ mad_fixed_t const linear_table[14] = {
++  * DESCRIPTION:	decode one requantized Layer I sample from a bitstream
++  */
++ static
++-mad_fixed_t I_sample(struct mad_bitptr *ptr, unsigned int nb)
+++mad_fixed_t I_sample(struct mad_bitptr *ptr, unsigned int nb, struct mad_stream *stream)
++ {
++   mad_fixed_t sample;
+++  struct mad_bitptr frameend_ptr;
++ 
+++  mad_bit_init(&frameend_ptr, stream->next_frame);
+++
+++  if (mad_bit_length(ptr, &frameend_ptr) < nb) {
+++    stream->error = MAD_ERROR_LOSTSYNC;
+++    stream->sync = 0;
+++    return 0;
+++  }
++   sample = mad_bit_read(ptr, nb);
++ 
++   /* invert most significant bit, extend sign, then scale to fixed format */
++@@ -106,6 +114,10 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
++   struct mad_header *header = &frame->header;
++   unsigned int nch, bound, ch, s, sb, nb;
++   unsigned char allocation[2][32], scalefactor[2][32];
+++  struct mad_bitptr bufend_ptr, frameend_ptr;
+++
+++  mad_bit_init(&bufend_ptr, stream->bufend);
+++  mad_bit_init(&frameend_ptr, stream->next_frame);
++ 
++   nch = MAD_NCHANNELS(header);
++ 
++@@ -118,6 +130,11 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
++   /* check CRC word */
++ 
++   if (header->flags & MAD_FLAG_PROTECTION) {
+++    if (mad_bit_length(&stream->ptr, &bufend_ptr)
+++		< 4 * (bound * nch + (32 - bound))) {
+++      stream->error = MAD_ERROR_BADCRC;
+++      return -1;
+++    }
++     header->crc_check =
++       mad_bit_crc(stream->ptr, 4 * (bound * nch + (32 - bound)),
++ 		  header->crc_check);
++@@ -133,6 +150,11 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
++ 
++   for (sb = 0; sb < bound; ++sb) {
++     for (ch = 0; ch < nch; ++ch) {
+++      if (mad_bit_length(&stream->ptr, &frameend_ptr) < 4) {
+++	stream->error = MAD_ERROR_LOSTSYNC;
+++	stream->sync = 0;
+++	return -1;
+++      }
++       nb = mad_bit_read(&stream->ptr, 4);
++ 
++       if (nb == 15) {
++@@ -145,6 +167,11 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
++   }
++ 
++   for (sb = bound; sb < 32; ++sb) {
+++    if (mad_bit_length(&stream->ptr, &frameend_ptr) < 4) {
+++      stream->error = MAD_ERROR_LOSTSYNC;
+++      stream->sync = 0;
+++      return -1;
+++    }
++     nb = mad_bit_read(&stream->ptr, 4);
++ 
++     if (nb == 15) {
++@@ -161,6 +188,11 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
++   for (sb = 0; sb < 32; ++sb) {
++     for (ch = 0; ch < nch; ++ch) {
++       if (allocation[ch][sb]) {
+++        if (mad_bit_length(&stream->ptr, &frameend_ptr) < 6) {
+++	  stream->error = MAD_ERROR_LOSTSYNC;
+++	  stream->sync = 0;
+++	  return -1;
+++	}
++ 	scalefactor[ch][sb] = mad_bit_read(&stream->ptr, 6);
++ 
++ # if defined(OPT_STRICT)
++@@ -185,8 +217,10 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
++       for (ch = 0; ch < nch; ++ch) {
++ 	nb = allocation[ch][sb];
++ 	frame->sbsample[ch][s][sb] = nb ?
++-	  mad_f_mul(I_sample(&stream->ptr, nb),
+++	  mad_f_mul(I_sample(&stream->ptr, nb, stream),
++ 		    sf_table[scalefactor[ch][sb]]) : 0;
+++	if (stream->error != 0)
+++	  return -1;
++       }
++     }
++ 
++@@ -194,7 +228,14 @@ int mad_layer_I(struct mad_stream *stream, struct mad_frame *frame)
++       if ((nb = allocation[0][sb])) {
++ 	mad_fixed_t sample;
++ 
++-	sample = I_sample(&stream->ptr, nb);
+++	if (mad_bit_length(&stream->ptr, &frameend_ptr) < nb) {
+++	  stream->error = MAD_ERROR_LOSTSYNC;
+++	  stream->sync = 0;
+++          return -1;
+++	}
+++	sample = I_sample(&stream->ptr, nb, stream);
+++        if (stream->error != 0)
+++	  return -1;
++ 
++ 	for (ch = 0; ch < nch; ++ch) {
++ 	  frame->sbsample[ch][s][sb] =
++@@ -280,13 +321,21 @@ struct quantclass {
++ static
++ void II_samples(struct mad_bitptr *ptr,
++ 		struct quantclass const *quantclass,
++-		mad_fixed_t output[3])
+++		mad_fixed_t output[3], struct mad_stream *stream)
++ {
++   unsigned int nb, s, sample[3];
+++  struct mad_bitptr frameend_ptr;
+++
+++  mad_bit_init(&frameend_ptr, stream->next_frame);
++ 
++   if ((nb = quantclass->group)) {
++     unsigned int c, nlevels;
++ 
+++    if (mad_bit_length(ptr, &frameend_ptr) < quantclass->bits) {
+++      stream->error = MAD_ERROR_LOSTSYNC;
+++      stream->sync = 0;
+++      return;
+++    }
++     /* degrouping */
++     c = mad_bit_read(ptr, quantclass->bits);
++     nlevels = quantclass->nlevels;
++@@ -299,8 +348,14 @@ void II_samples(struct mad_bitptr *ptr,
++   else {
++     nb = quantclass->bits;
++ 
++-    for (s = 0; s < 3; ++s)
+++    for (s = 0; s < 3; ++s) {
+++      if (mad_bit_length(ptr, &frameend_ptr) < nb) {
+++	stream->error = MAD_ERROR_LOSTSYNC;
+++	stream->sync = 0;
+++	return;
+++      }
++       sample[s] = mad_bit_read(ptr, nb);
+++    }
++   }
++ 
++   for (s = 0; s < 3; ++s) {
++@@ -336,6 +391,9 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
++   unsigned char const *offsets;
++   unsigned char allocation[2][32], scfsi[2][32], scalefactor[2][32][3];
++   mad_fixed_t samples[3];
+++  struct mad_bitptr frameend_ptr;
+++
+++  mad_bit_init(&frameend_ptr, stream->next_frame);
++ 
++   nch = MAD_NCHANNELS(header);
++ 
++@@ -402,13 +460,24 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
++   for (sb = 0; sb < bound; ++sb) {
++     nbal = bitalloc_table[offsets[sb]].nbal;
++ 
++-    for (ch = 0; ch < nch; ++ch)
+++    for (ch = 0; ch < nch; ++ch) {
+++      if (mad_bit_length(&stream->ptr, &frameend_ptr) < nbal) {
+++	stream->error = MAD_ERROR_LOSTSYNC;
+++	stream->sync = 0;
+++	return -1;
+++      }
++       allocation[ch][sb] = mad_bit_read(&stream->ptr, nbal);
+++    }
++   }
++ 
++   for (sb = bound; sb < sblimit; ++sb) {
++     nbal = bitalloc_table[offsets[sb]].nbal;
++ 
+++    if (mad_bit_length(&stream->ptr, &frameend_ptr) < nbal) {
+++      stream->error = MAD_ERROR_LOSTSYNC;
+++      stream->sync = 0;
+++      return -1;
+++    }
++     allocation[0][sb] =
++     allocation[1][sb] = mad_bit_read(&stream->ptr, nbal);
++   }
++@@ -417,8 +486,14 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
++ 
++   for (sb = 0; sb < sblimit; ++sb) {
++     for (ch = 0; ch < nch; ++ch) {
++-      if (allocation[ch][sb])
+++      if (allocation[ch][sb]) {
+++	if (mad_bit_length(&stream->ptr, &frameend_ptr) < 2) {
+++	  stream->error = MAD_ERROR_LOSTSYNC;
+++	  stream->sync = 0;
+++	  return -1;
+++	}
++ 	scfsi[ch][sb] = mad_bit_read(&stream->ptr, 2);
+++      }
++     }
++   }
++ 
++@@ -441,6 +516,11 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
++   for (sb = 0; sb < sblimit; ++sb) {
++     for (ch = 0; ch < nch; ++ch) {
++       if (allocation[ch][sb]) {
+++	if (mad_bit_length(&stream->ptr, &frameend_ptr) < 6) {
+++	  stream->error = MAD_ERROR_LOSTSYNC;
+++	  stream->sync = 0;
+++	  return -1;
+++	}
++ 	scalefactor[ch][sb][0] = mad_bit_read(&stream->ptr, 6);
++ 
++ 	switch (scfsi[ch][sb]) {
++@@ -451,11 +531,21 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
++ 	  break;
++ 
++ 	case 0:
+++	  if (mad_bit_length(&stream->ptr, &frameend_ptr) < 6) {
+++	    stream->error = MAD_ERROR_LOSTSYNC;
+++	    stream->sync = 0;
+++	    return -1;
+++	  }
++ 	  scalefactor[ch][sb][1] = mad_bit_read(&stream->ptr, 6);
++ 	  /* fall through */
++ 
++ 	case 1:
++ 	case 3:
+++	  if (mad_bit_length(&stream->ptr, &frameend_ptr) < 6) {
+++	    stream->error = MAD_ERROR_LOSTSYNC;
+++	    stream->sync = 0;
+++	    return -1;
+++	  }
++ 	  scalefactor[ch][sb][2] = mad_bit_read(&stream->ptr, 6);
++ 	}
++ 
++@@ -487,7 +577,9 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
++ 	if ((index = allocation[ch][sb])) {
++ 	  index = offset_table[bitalloc_table[offsets[sb]].offset][index - 1];
++ 
++-	  II_samples(&stream->ptr, &qc_table[index], samples);
+++	  II_samples(&stream->ptr, &qc_table[index], samples, stream);
+++	  if (stream->error != 0)
+++            return -1;
++ 
++ 	  for (s = 0; s < 3; ++s) {
++ 	    frame->sbsample[ch][3 * gr + s][sb] =
++@@ -505,7 +597,9 @@ int mad_layer_II(struct mad_stream *stream, struct mad_frame *frame)
++       if ((index = allocation[0][sb])) {
++ 	index = offset_table[bitalloc_table[offsets[sb]].offset][index - 1];
++ 
++-	II_samples(&stream->ptr, &qc_table[index], samples);
+++	II_samples(&stream->ptr, &qc_table[index], samples, stream);
+++	if (stream->error != 0)
+++          return -1;
++ 
++ 	for (ch = 0; ch < nch; ++ch) {
++ 	  for (s = 0; s < 3; ++s) {
++diff --git a/layer3.c b/layer3.c
++index 7dc4ca6..59a81ed 100644
++--- a/layer3.c
+++++ b/layer3.c
++@@ -598,7 +598,8 @@ enum mad_error III_sideinfo(struct mad_bitptr *ptr, unsigned int nch,
++ static
++ unsigned int III_scalefactors_lsf(struct mad_bitptr *ptr,
++ 				  struct channel *channel,
++-				  struct channel *gr1ch, int mode_extension)
+++				  struct channel *gr1ch, int mode_extension,
+++				  unsigned int bits_left, unsigned int *part2_length)
++ {
++   struct mad_bitptr start;
++   unsigned int scalefac_compress, index, slen[4], part, n, i;
++@@ -644,8 +645,12 @@ unsigned int III_scalefactors_lsf(struct mad_bitptr *ptr,
++ 
++     n = 0;
++     for (part = 0; part < 4; ++part) {
++-      for (i = 0; i < nsfb[part]; ++i)
+++      for (i = 0; i < nsfb[part]; ++i) {
+++	if (bits_left < slen[part])
+++	  return MAD_ERROR_BADSCFSI;
++ 	channel->scalefac[n++] = mad_bit_read(ptr, slen[part]);
+++	bits_left -= slen[part];
+++      }
++     }
++ 
++     while (n < 39)
++@@ -690,7 +695,10 @@ unsigned int III_scalefactors_lsf(struct mad_bitptr *ptr,
++       max = (1 << slen[part]) - 1;
++ 
++       for (i = 0; i < nsfb[part]; ++i) {
+++	if (bits_left < slen[part])
+++	  return MAD_ERROR_BADSCFSI;
++ 	is_pos = mad_bit_read(ptr, slen[part]);
+++	bits_left -= slen[part];
++ 
++ 	channel->scalefac[n] = is_pos;
++ 	gr1ch->scalefac[n++] = (is_pos == max);
++@@ -703,7 +711,8 @@ unsigned int III_scalefactors_lsf(struct mad_bitptr *ptr,
++     }
++   }
++ 
++-  return mad_bit_length(&start, ptr);
+++  *part2_length = mad_bit_length(&start, ptr);
+++  return MAD_ERROR_NONE;
++ }
++ 
++ /*
++@@ -712,7 +721,8 @@ unsigned int III_scalefactors_lsf(struct mad_bitptr *ptr,
++  */
++ static
++ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
++-			      struct channel const *gr0ch, unsigned int scfsi)
+++			      struct channel const *gr0ch, unsigned int scfsi,
+++			      unsigned int bits_left, unsigned int *part2_length)
++ {
++   struct mad_bitptr start;
++   unsigned int slen1, slen2, sfbi;
++@@ -728,12 +738,20 @@ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
++     sfbi = 0;
++ 
++     nsfb = (channel->flags & mixed_block_flag) ? 8 + 3 * 3 : 6 * 3;
++-    while (nsfb--)
+++    while (nsfb--) {
+++      if (bits_left < slen1)
+++	return MAD_ERROR_BADSCFSI;
++       channel->scalefac[sfbi++] = mad_bit_read(ptr, slen1);
+++      bits_left -= slen1;
+++    }
++ 
++     nsfb = 6 * 3;
++-    while (nsfb--)
+++    while (nsfb--) {
+++      if (bits_left < slen2)
+++	return MAD_ERROR_BADSCFSI;
++       channel->scalefac[sfbi++] = mad_bit_read(ptr, slen2);
+++      bits_left -= slen2;
+++    }
++ 
++     nsfb = 1 * 3;
++     while (nsfb--)
++@@ -745,8 +763,12 @@ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
++ 	channel->scalefac[sfbi] = gr0ch->scalefac[sfbi];
++     }
++     else {
++-      for (sfbi = 0; sfbi < 6; ++sfbi)
+++      for (sfbi = 0; sfbi < 6; ++sfbi) {
+++	if (bits_left < slen1)
+++	  return MAD_ERROR_BADSCFSI;
++ 	channel->scalefac[sfbi] = mad_bit_read(ptr, slen1);
+++	bits_left -= slen1;
+++      }
++     }
++ 
++     if (scfsi & 0x4) {
++@@ -754,8 +776,12 @@ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
++ 	channel->scalefac[sfbi] = gr0ch->scalefac[sfbi];
++     }
++     else {
++-      for (sfbi = 6; sfbi < 11; ++sfbi)
+++      for (sfbi = 6; sfbi < 11; ++sfbi) {
+++	if (bits_left < slen1)
+++	  return MAD_ERROR_BADSCFSI;
++ 	channel->scalefac[sfbi] = mad_bit_read(ptr, slen1);
+++	bits_left -= slen1;
+++      }
++     }
++ 
++     if (scfsi & 0x2) {
++@@ -763,8 +789,12 @@ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
++ 	channel->scalefac[sfbi] = gr0ch->scalefac[sfbi];
++     }
++     else {
++-      for (sfbi = 11; sfbi < 16; ++sfbi)
+++      for (sfbi = 11; sfbi < 16; ++sfbi) {
+++	if (bits_left < slen2)
+++	  return MAD_ERROR_BADSCFSI;
++ 	channel->scalefac[sfbi] = mad_bit_read(ptr, slen2);
+++	bits_left -= slen2;
+++      }
++     }
++ 
++     if (scfsi & 0x1) {
++@@ -772,14 +802,19 @@ unsigned int III_scalefactors(struct mad_bitptr *ptr, struct channel *channel,
++ 	channel->scalefac[sfbi] = gr0ch->scalefac[sfbi];
++     }
++     else {
++-      for (sfbi = 16; sfbi < 21; ++sfbi)
+++      for (sfbi = 16; sfbi < 21; ++sfbi) {
+++	if (bits_left < slen2)
+++	  return MAD_ERROR_BADSCFSI;
++ 	channel->scalefac[sfbi] = mad_bit_read(ptr, slen2);
+++	bits_left -= slen2;
+++      }
++     }
++ 
++     channel->scalefac[21] = 0;
++   }
++ 
++-  return mad_bit_length(&start, ptr);
+++  *part2_length = mad_bit_length(&start, ptr);
+++  return MAD_ERROR_NONE;
++ }
++ 
++ /*
++@@ -933,19 +968,17 @@ static
++ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 			      struct channel *channel,
++ 			      unsigned char const *sfbwidth,
++-			      unsigned int part2_length)
+++			      signed int part3_length)
++ {
++   signed int exponents[39], exp;
++   signed int const *expptr;
++   struct mad_bitptr peek;
++-  signed int bits_left, cachesz;
+++  signed int bits_left, cachesz, fakebits;
++   register mad_fixed_t *xrptr;
++   mad_fixed_t const *sfbound;
++   register unsigned long bitcache;
++ 
++-  bits_left = (signed) channel->part2_3_length - (signed) part2_length;
++-  if (bits_left < 0)
++-    return MAD_ERROR_BADPART3LEN;
+++  bits_left = part3_length;
++ 
++   III_exponents(channel, sfbwidth, exponents);
++ 
++@@ -956,8 +989,12 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++   cachesz  = mad_bit_bitsleft(&peek);
++   cachesz += ((32 - 1 - 24) + (24 - cachesz)) & ~7;
++ 
+++  if (bits_left < cachesz) {
+++    cachesz = bits_left;
+++  }
++   bitcache   = mad_bit_read(&peek, cachesz);
++   bits_left -= cachesz;
+++  fakebits = 0;
++ 
++   xrptr = &xr[0];
++ 
++@@ -986,7 +1023,7 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 
++     big_values = channel->big_values;
++ 
++-    while (big_values-- && cachesz + bits_left > 0) {
+++    while (big_values-- && cachesz + bits_left - fakebits > 0) {
++       union huffpair const *pair;
++       unsigned int clumpsz, value;
++       register mad_fixed_t requantized;
++@@ -1023,10 +1060,19 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 	unsigned int bits;
++ 
++ 	bits       = ((32 - 1 - 21) + (21 - cachesz)) & ~7;
+++	if (bits_left < bits) {
+++	  bits = bits_left;
+++	}
++ 	bitcache   = (bitcache << bits) | mad_bit_read(&peek, bits);
++ 	cachesz   += bits;
++ 	bits_left -= bits;
++       }
+++      if (cachesz < 21) {
+++	unsigned int bits = 21 - cachesz;
+++	bitcache <<= bits;
+++	cachesz += bits;
+++	fakebits += bits;
+++      }
++ 
++       /* hcod (0..19) */
++ 
++@@ -1041,6 +1087,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++       }
++ 
++       cachesz -= pair->value.hlen;
+++      if (cachesz < fakebits)
+++	return MAD_ERROR_BADHUFFDATA;
++ 
++       if (linbits) {
++ 	/* x (0..14) */
++@@ -1054,10 +1102,15 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 
++ 	case 15:
++ 	  if (cachesz < linbits + 2) {
++-	    bitcache   = (bitcache << 16) | mad_bit_read(&peek, 16);
++-	    cachesz   += 16;
++-	    bits_left -= 16;
+++	    unsigned int bits = 16;
+++	    if (bits_left < 16)
+++	      bits = bits_left;
+++	    bitcache   = (bitcache << bits) | mad_bit_read(&peek, bits);
+++	    cachesz   += bits;
+++	    bits_left -= bits;
++ 	  }
+++	  if (cachesz - fakebits < linbits)
+++	    return MAD_ERROR_BADHUFFDATA;
++ 
++ 	  value += MASK(bitcache, cachesz, linbits);
++ 	  cachesz -= linbits;
++@@ -1074,6 +1127,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 	  }
++ 
++ 	x_final:
+++	  if (cachesz - fakebits < 1)
+++	    return MAD_ERROR_BADHUFFDATA;
++ 	  xrptr[0] = MASK1BIT(bitcache, cachesz--) ?
++ 	    -requantized : requantized;
++ 	}
++@@ -1089,10 +1144,15 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 
++ 	case 15:
++ 	  if (cachesz < linbits + 1) {
++-	    bitcache   = (bitcache << 16) | mad_bit_read(&peek, 16);
++-	    cachesz   += 16;
++-	    bits_left -= 16;
+++	    unsigned int bits = 16;
+++	    if (bits_left < 16)
+++	      bits = bits_left;
+++	    bitcache   = (bitcache << bits) | mad_bit_read(&peek, bits);
+++	    cachesz   += bits;
+++	    bits_left -= bits;
++ 	  }
+++	  if (cachesz - fakebits < linbits)
+++	    return MAD_ERROR_BADHUFFDATA;
++ 
++ 	  value += MASK(bitcache, cachesz, linbits);
++ 	  cachesz -= linbits;
++@@ -1109,6 +1169,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 	  }
++ 
++ 	y_final:
+++	  if (cachesz - fakebits < 1)
+++	    return MAD_ERROR_BADHUFFDATA;
++ 	  xrptr[1] = MASK1BIT(bitcache, cachesz--) ?
++ 	    -requantized : requantized;
++ 	}
++@@ -1128,6 +1190,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 	    requantized = reqcache[value] = III_requantize(value, exp);
++ 	  }
++ 
+++	  if (cachesz - fakebits < 1)
+++	    return MAD_ERROR_BADHUFFDATA;
++ 	  xrptr[0] = MASK1BIT(bitcache, cachesz--) ?
++ 	    -requantized : requantized;
++ 	}
++@@ -1146,6 +1210,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 	    requantized = reqcache[value] = III_requantize(value, exp);
++ 	  }
++ 
+++	  if (cachesz - fakebits < 1)
+++	    return MAD_ERROR_BADHUFFDATA;
++ 	  xrptr[1] = MASK1BIT(bitcache, cachesz--) ?
++ 	    -requantized : requantized;
++ 	}
++@@ -1155,9 +1221,6 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++     }
++   }
++ 
++-  if (cachesz + bits_left < 0)
++-    return MAD_ERROR_BADHUFFDATA;  /* big_values overrun */
++-
++   /* count1 */
++   {
++     union huffquad const *table;
++@@ -1167,15 +1230,24 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 
++     requantized = III_requantize(1, exp);
++ 
++-    while (cachesz + bits_left > 0 && xrptr <= &xr[572]) {
+++    while (cachesz + bits_left - fakebits > 0 && xrptr <= &xr[572]) {
++       union huffquad const *quad;
++ 
++       /* hcod (1..6) */
++ 
++       if (cachesz < 10) {
++-	bitcache   = (bitcache << 16) | mad_bit_read(&peek, 16);
++-	cachesz   += 16;
++-	bits_left -= 16;
+++	unsigned int bits = 16;
+++	if (bits_left < 16)
+++	  bits = bits_left;
+++	bitcache   = (bitcache << bits) | mad_bit_read(&peek, bits);
+++	cachesz   += bits;
+++	bits_left -= bits;
+++      }
+++      if (cachesz < 10) {
+++	unsigned int bits = 10 - cachesz;
+++	bitcache <<= bits;
+++	cachesz += bits;
+++	fakebits += bits;
++       }
++ 
++       quad = &table[MASK(bitcache, cachesz, 4)];
++@@ -1188,6 +1260,11 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 		      MASK(bitcache, cachesz, quad->ptr.bits)];
++       }
++ 
+++      if (cachesz - fakebits < quad->value.hlen + quad->value.v
+++        + quad->value.w + quad->value.x + quad->value.y)
+++	/* We don't have enough bits to read one more entry, consider them
+++	 * stuffing bits. */
+++	break;
++       cachesz -= quad->value.hlen;
++ 
++       if (xrptr == sfbound) {
++@@ -1236,22 +1313,8 @@ enum mad_error III_huffdecode(struct mad_bitptr *ptr, mad_fixed_t xr[576],
++ 
++       xrptr += 2;
++     }
++-
++-    if (cachesz + bits_left < 0) {
++-# if 0 && defined(DEBUG)
++-      fprintf(stderr, "huffman count1 overrun (%d bits)\n",
++-	      -(cachesz + bits_left));
++-# endif
++-
++-      /* technically the bitstream is misformatted, but apparently
++-	 some encoders are just a bit sloppy with stuffing bits */
++-
++-      xrptr -= 4;
++-    }
++   }
++ 
++-  assert(-bits_left <= MAD_BUFFER_GUARD * CHAR_BIT);
++-
++ # if 0 && defined(DEBUG)
++   if (bits_left < 0)
++     fprintf(stderr, "read %d bits too many\n", -bits_left);
++@@ -2348,10 +2411,11 @@ void III_freqinver(mad_fixed_t sample[18][32], unsigned int sb)
++  */
++ static
++ enum mad_error III_decode(struct mad_bitptr *ptr, struct mad_frame *frame,
++-			  struct sideinfo *si, unsigned int nch)
+++			  struct sideinfo *si, unsigned int nch, unsigned int md_len)
++ {
++   struct mad_header *header = &frame->header;
++   unsigned int sfreqi, ngr, gr;
+++  int bits_left = md_len * CHAR_BIT;
++ 
++   {
++     unsigned int sfreq;
++@@ -2383,6 +2447,7 @@ enum mad_error III_decode(struct mad_bitptr *ptr, struct mad_frame *frame,
++     for (ch = 0; ch < nch; ++ch) {
++       struct channel *channel = &granule->ch[ch];
++       unsigned int part2_length;
+++      unsigned int part3_length;
++ 
++       sfbwidth[ch] = sfbwidth_table[sfreqi].l;
++       if (channel->block_type == 2) {
++@@ -2391,18 +2456,30 @@ enum mad_error III_decode(struct mad_bitptr *ptr, struct mad_frame *frame,
++       }
++ 
++       if (header->flags & MAD_FLAG_LSF_EXT) {
++-	part2_length = III_scalefactors_lsf(ptr, channel,
+++	error = III_scalefactors_lsf(ptr, channel,
++ 					    ch == 0 ? 0 : &si->gr[1].ch[1],
++-					    header->mode_extension);
+++					    header->mode_extension, bits_left, &part2_length);
++       }
++       else {
++-	part2_length = III_scalefactors(ptr, channel, &si->gr[0].ch[ch],
++-					gr == 0 ? 0 : si->scfsi[ch]);
+++	error = III_scalefactors(ptr, channel, &si->gr[0].ch[ch],
+++					gr == 0 ? 0 : si->scfsi[ch], bits_left, &part2_length);
++       }
+++      if (error)
+++        return error;
++ 
++-      error = III_huffdecode(ptr, xr[ch], channel, sfbwidth[ch], part2_length);
+++      bits_left -= part2_length;
+++
+++      if (part2_length > channel->part2_3_length)
+++        return MAD_ERROR_BADPART3LEN;
+++
+++      part3_length = channel->part2_3_length - part2_length;
+++      if (part3_length > bits_left)
+++        return MAD_ERROR_BADPART3LEN;
+++
+++      error = III_huffdecode(ptr, xr[ch], channel, sfbwidth[ch], part3_length);
++       if (error)
++ 	return error;
+++      bits_left -= part3_length;
++     }
++ 
++     /* joint stereo processing */
++@@ -2519,11 +2596,13 @@ int mad_layer_III(struct mad_stream *stream, struct mad_frame *frame)
++   unsigned int nch, priv_bitlen, next_md_begin = 0;
++   unsigned int si_len, data_bitlen, md_len;
++   unsigned int frame_space, frame_used, frame_free;
++-  struct mad_bitptr ptr;
+++  struct mad_bitptr ptr, bufend_ptr;
++   struct sideinfo si;
++   enum mad_error error;
++   int result = 0;
++ 
+++  mad_bit_init(&bufend_ptr, stream->bufend);
+++
++   /* allocate Layer III dynamic structures */
++ 
++   if (stream->main_data == 0) {
++@@ -2587,14 +2666,15 @@ int mad_layer_III(struct mad_stream *stream, struct mad_frame *frame)
++     unsigned long header;
++ 
++     mad_bit_init(&peek, stream->next_frame);
+++    if (mad_bit_length(&peek, &bufend_ptr) >= 57) {
+++      header = mad_bit_read(&peek, 32);
+++      if ((header & 0xffe60000L) /* syncword | layer */ == 0xffe20000L) {
+++        if (!(header & 0x00010000L))  /* protection_bit */
+++	  mad_bit_skip(&peek, 16);  /* crc_check */
++ 
++-    header = mad_bit_read(&peek, 32);
++-    if ((header & 0xffe60000L) /* syncword | layer */ == 0xffe20000L) {
++-      if (!(header & 0x00010000L))  /* protection_bit */
++-	mad_bit_skip(&peek, 16);  /* crc_check */
++-
++-      next_md_begin =
++-	mad_bit_read(&peek, (header & 0x00080000L) /* ID */ ? 9 : 8);
+++        next_md_begin =
+++	  mad_bit_read(&peek, (header & 0x00080000L) /* ID */ ? 9 : 8);
+++      }
++     }
++ 
++     mad_bit_finish(&peek);
++@@ -2653,7 +2733,7 @@ int mad_layer_III(struct mad_stream *stream, struct mad_frame *frame)
++   /* decode main_data */
++ 
++   if (result == 0) {
++-    error = III_decode(&ptr, frame, &si, nch);
+++    error = III_decode(&ptr, frame, &si, nch, md_len);
++     if (error) {
++       stream->error = error;
++       result = -1;
+diff --git a/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb b/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
+index a710af1acc..33fb26cd8c 100644
+--- a/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
++++ b/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
+@@ -17,6 +17,7 @@ SRC_URI = "https://downloads.sourceforge.net/mad/libmad-${PV}.tar.gz \
+     file://obsolete_automake_macros.patch \
+     file://automake-foreign.patch \
+     file://CVE-2017-8372_CVE-2017-8373.patch \
++    file://CVE-2017-8374.patch \
+ "
+ SRC_URI:append:toolchain-clang = " file://0004-Remove-clang-unsupported-compiler-flags.patch "
+ 
 
