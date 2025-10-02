@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FE56CAC5B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FE98CCA471
 	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 12:59:47 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web10.7552.1759409979619388206
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web11.7962.1759409976923218031
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Oct 2025 05:59:39 -0700
+ Thu, 02 Oct 2025 05:59:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fXhlKIQ2;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-b403bb7843eso223014066b.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YE2Ip4ig;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b4539dddd99so205528766b.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759409978; x=1760014778; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759409975; x=1760014775; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=kG9gKcEpGCzg1EhPRmWAcZbs+bcXvAHBSf6c//C+b0Y=;
-        b=fXhlKIQ2lub9b9MLcCwCsrqCMNSgN88Iel3//XVYX54eMDyNbWFubwcqziYWNTEBKy
-         XYbqe9vmwxcCDF1l/1xgb3IM63T0N1VTa8tRYAGLI4yjRCdw1CDu3l5dlSjU7nZPb2zi
-         7AgTIODr3NKeeMk4sfRSsRojnWIjR/FTK9KfKigaLVOCs+dif+rZIjyX8QDViPYTYO3T
-         f7wXU8byuBNVIY5SlarrGq+6DMAjaOkv4x3VO/V+LSyv+yAJ95LS0o0i3tL5BZzsin/K
-         rdyRH58ZoNplsblY3GzpTpTzIlpwslPVhJ39uwjOkhTs/rGLTOU/pYeiDsrTYqOeN/3V
-         Hc7A==
+        bh=bIeheDGakJIuTvKKke5If7uckE4w23E/THcMy1oFlSY=;
+        b=YE2Ip4ig/ID+Pn5PFNNeN6CLo7rXuTWTiY6+ZlHvnoBjk3wa9gz5MHwNh+NPxLs78Q
+         zTTJivudxs6enUW/JMjHkx3AdHWf5G/29FMp/IVQrG/U9q68+jbqKH9VPv94opHT8GDy
+         EDGP89kyL4rS/cArERqWZxMN0HW5lxGrFLonp668lmWPdioj+xcES384/3uJ5Nwpt3Ps
+         Y0Ptywj6ztvP4OoCsf9T3ODT3iCX5yojjC/4dfdNatopHpFpXmaVwlAmsGYwZ6pxRR+Q
+         xa8a+KX3eKncy9B85CsjJDlbj32cEHn8Ym1/p7x1tYunHoFLt3GHleprXx88v9TbYZSg
+         qIHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759409978; x=1760014778;
+        d=1e100.net; s=20230601; t=1759409975; x=1760014775;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=kG9gKcEpGCzg1EhPRmWAcZbs+bcXvAHBSf6c//C+b0Y=;
-        b=qg8jWRcefVEHcNxvIwfYlPnQYk/qrG7T9aZsF/zIpclubXfpipK8ZN2v3hysetz+cu
-         yExz66kHyp88K9+FnpsRidd+zQYllFXGue4EaKIeoGjEAyA1TuQrP8YRn7Tb+ERAuKBp
-         XPXZ8BOkmaYErPVvWjL+0EC/FjDS9RPLsdmrYUUOUxTK+csLz5SbrXH+vG6qekJ9x3Si
-         yeXVMFX2urqyUCXBdhBKNBG15tWTh9gJKGKt3kO3qw+jzYa+pH2EiqFitWSTw9euXxJ4
-         eBdBWfta4o0bd6dZOHif2sUtCFdtv/8WgyozqvDLhwLln9MCBfYSnIjiElXY4q85Gpg0
-         /tAg==
-X-Gm-Message-State: AOJu0Ywd0Vj6ujxv4BL36C/kyzNw8gQkvlRt2D205fJDcP0lauvabP8o
-	H6VLAGoFFcwHgKRM9QQYLigv6KfJ7/wvmEflKE15dViL1SjxR+7PKznUUXVLBQ==
-X-Gm-Gg: ASbGncu7Hx4h3EyGUu90IzoHVlkaYjCbK1YioRhPJ2cUv4o6fBoq8MaKF3RO59LbKNC
-	3w5V7UVOL83u42kSeRWm/cC1t9UnH7a5nIUlgdctG0kalgd7ksBCw/OzMV0gpbGXzQJGjaUBU+S
-	N6OK/yckVDdKKuMyqe+cqwqRbixbhOdy/0CiPk/9901Jd2qmy6fEKcDITqzQm3jP0kZwhvo+O1z
-	8IUpSAoftpVwiAWv7b84DDqIdpUtwidka3WMV41ms/TEyJCzr3JlXhQT4mSS1MeUjRtEpbNJ9d9
-	epRheIfsLMp51qNXV4LZCGWiV6Pv4nba0DxDeSTnCLzczfjaIn0J4R9cjkLubVTKJrfeDVUk3bg
-	8ob7RVrM36sUs9UbXKONQ42gnHYqQkG/kipKhkWdhIT8M
-X-Google-Smtp-Source: AGHT+IEfaA6dJAaTKuuiiAV9gb6aamdM6xV4BJMjV1PpTQriSbQtOeFHOOpUjr5mZUg/Bm1uesGARg==
-X-Received: by 2002:a17:907:2684:b0:afe:d590:b6af with SMTP id a640c23a62f3a-b46e5358be8mr943768666b.20.1759409977908;
-        Thu, 02 Oct 2025 05:59:37 -0700 (PDT)
+        bh=bIeheDGakJIuTvKKke5If7uckE4w23E/THcMy1oFlSY=;
+        b=GzVY65vHvwm3QkYwTp5wcKA00EiRfzAPdjCC18Kiv4Lg8sJWcrngCQHnl8TPmJ6Ya8
+         +UYXnS44s63/82oPRtENqDwFb+o516oNmXWmTDyvWy56StwcryfOrpQ6NQ4UQSwl/8+c
+         2SrztB44m8edMxXHhL8xs3fW2iT/9B+Z42UGNehmBD20wWz6ojj64ZmoLTQhoZOBJZ5j
+         RmLslpM+BNBrFWCRM5sOZQgrvPYenJY2josl4gWpUOWlYIOiWEvdpWYHY/4yVFjtDlAS
+         1T5KIRUhU+CeZ82SoZw1dEJ2aYgZRsfjjQ3b1AP2N6QcL0g4VNvcLDqM/Hdsmyx+WCEr
+         Am7Q==
+X-Gm-Message-State: AOJu0YxCN6JYQPNS+947ZnsOwffmRChDP7+jjJmCJQfybFQw1IkId/sc
+	bHM/2sHIrayjsasZMlxvYb6WyNEOqaLn6fs4JkaPsdNlisBcAbU02JgwzSndAA==
+X-Gm-Gg: ASbGnctMLUvg7QGMwRYeSAcVefL8aRkrPtCXnHDN69t3DsT+cmE5mjoOJcjCrotiyWx
+	9rSSOLmPB/7Ry/F5l0ErH3xox/SMLJJQSesCywX2szJmXIwrpjr2PGucx1RkqMhCXbiwgl+DlsI
+	626+SfmwXXiCSh4n1/1GmqS9Em440GRAKD2hO0Cb1qqwLmNAQS9aHAPIaD43kN9bfSXCfqYR3Eb
+	RpoDyHEimBhSxpGOt5zG91sj82X1gtmDpMnl2cR1gJQGB0KzvsY1E1nGmlCPD7l0ct0UJ/b21Fp
+	uouL1K/0/IWgznrMd2cqwhoWsvVn/8/oAk8X1KISi/XIEnfcLdU8VGqiTv42rehEWO1ZBEQvm8m
+	0dZ1rHMGzD99m45nwf/0QZn+/W0UZ+mbOpfz0KQUe1yHlACcv+IZpv/s=
+X-Google-Smtp-Source: AGHT+IHWWUmzZNLqPcYmvQXoqG/aZfRx9U15LL4buGElU7m0rYcm78vBwnunZr9DmqU+pDOlp/wAKg==
+X-Received: by 2002:a17:906:c107:b0:b3a:7af8:c4a2 with SMTP id a640c23a62f3a-b46e2623a1amr996655566b.10.1759409975070;
+        Thu, 02 Oct 2025 05:59:35 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.37
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.34
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Oct 2025 05:59:37 -0700 (PDT)
+        Thu, 02 Oct 2025 05:59:34 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 14/26] lcov: Fix Perl Path
-Date: Thu,  2 Oct 2025 14:59:14 +0200
-Message-ID: <20251002125926.2624522-15-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 10/26] procmail: Update status for CVE-1999-0475
+Date: Thu,  2 Oct 2025 14:59:10 +0200
+Message-ID: <20251002125926.2624522-11-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251002125926.2624522-1-skandigraun@gmail.com>
 References: <20251002125926.2624522-1-skandigraun@gmail.com>
@@ -67,33 +67,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 12:59:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120183
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120179
 
-From: Alex Yao <alexyao1@meraki.com>
+From: Ninette Adhikari <ninette@thehoodiefirm.com>
 
-Fixes an issue where lcov is using the system Perl rather than the yocto
-provided Perl. This causes packages to not be found during runtime such
-as PerlIO::gzip.
+Current version 3.22 is not affected by the issue.
+Affected versions: Up to (excl.) 3.2.1
 
-Signed-off-by: Alex Yao <alexyao1@meraki.com>
+Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e66ae31c9522a6acf42720edb7623a93407a983a)
+(cherry picked from commit 30e6d975e8d7567b40cbdfd22e89bc1a7e1a9c86)
+
+Adapted to Kirkstone
+
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-support/lcov/lcov_1.14.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/procmail/procmail_3.22.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-support/lcov/lcov_1.14.bb b/meta-oe/recipes-support/lcov/lcov_1.14.bb
-index 47062cca52..f18c7b18eb 100755
---- a/meta-oe/recipes-support/lcov/lcov_1.14.bb
-+++ b/meta-oe/recipes-support/lcov/lcov_1.14.bb
-@@ -59,7 +59,7 @@ SRC_URI[md5sum] = "0220d01753469f83921f8f41ae5054c1"
- SRC_URI[sha256sum] = "14995699187440e0ae4da57fe3a64adc0a3c5cf14feab971f8db38fb7d8f071a"
- 
- do_install() {
--    oe_runmake install PREFIX=${D}${prefix} CFG_DIR=${D}${sysconfdir}
-+    oe_runmake install PREFIX=${D}${prefix} CFG_DIR=${D}${sysconfdir} LCOV_PERL_PATH="/usr/bin/env perl"
+diff --git a/meta-oe/recipes-support/procmail/procmail_3.22.bb b/meta-oe/recipes-support/procmail/procmail_3.22.bb
+index ba268de0a5..2e2735d192 100644
+--- a/meta-oe/recipes-support/procmail/procmail_3.22.bb
++++ b/meta-oe/recipes-support/procmail/procmail_3.22.bb
+@@ -43,3 +43,6 @@ do_install() {
+     oe_runmake -i BASENAME=${D}/usr MANDIR=${D}${mandir} install
+     install -m 0644 debian/mailstat.1 ${D}${mandir}/man1
  }
- 
- BBCLASSEXTEND = "native nativesdk"
++
++#fixed-version: No action required. The current version (3.22) is not affected by the CVE.
++CVE_CHECK_IGNORE += "CVE-1999-0475"
 
