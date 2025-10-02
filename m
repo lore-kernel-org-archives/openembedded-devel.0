@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC101CCD183
-	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 12:59:36 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web10.7548.1759409974767729390
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 121AECCD185
+	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 12:59:37 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web11.7958.1759409970475083209
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Oct 2025 05:59:35 -0700
+ Thu, 02 Oct 2025 05:59:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m90P+HUC;
- spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-62fc0b7bf62so1598443a12.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lHnzFAW+;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b403bb7843eso222975466b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759409973; x=1760014773; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759409969; x=1760014769; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=MQztPCfL76Pr8AMScoCBn3pCtb2KsS5VnDwYYrRQ2qo=;
-        b=m90P+HUCjcmmKpIfgC45D7bN2Kh+bgOHOJPK6KhG159SUHTies1HT3YLFC1hg++F0O
-         QKYL0RDiUzPRnw+NVkmKOKmXSC/VipK0USfMbrFVYG3CEr43xD8xSjsjq8iptq37Fch+
-         /eoSw+vpkh1MK9di0denDubH97tzf9HY9aZVnsG5RDU6vQ0+EdyeqGYEX5Lx38g/Bed0
-         SLoEmBIbv47TqaHI+JSYa92jINbU3JX5v1TCPix40a3MSaQKTQ3gO5sXzwUGRwBcrKS+
-         FSKYrS+l3Tx6suA8RzM/P5O17IriQs2zwmCfPGSIywi9VkheKEwpoOJBHEtiXVZWFQFl
-         4oxg==
+        bh=KBVMXA0svvTeG4AWNNef2Mmd74CIX6nbyDvXTSDwRCE=;
+        b=lHnzFAW+DOWAy3781y0MbaiH1Fh0k/RrrXFlbhi6FcK69g8bknREP9F0Ro0qv0YviW
+         Yxp6RLqCvR1q71vsfSN7RGaVhxiNHhOnYPtB7ysNqNOV0k0cJGfJj5Ox2AaUl1NVbGRY
+         r7tVjmISx87WCrh70GV84+NfUBl656ZBo3I+kv7eYcBkbPG7s7hBbzWk4bTlYAfXakTI
+         F2ZFkmoJ1kwB/+UqdS6nHONz68Ww2SHU0KAl71bo6sX+CgaTYr2SuZZdEpGbs3ZSI5fF
+         E7fN5XOLBiO8G6X/KoE6e0KadBrwH0c7BgEILpZWDjcXHIOU1fJqetIhyKFE8ROGorNC
+         nmDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759409973; x=1760014773;
+        d=1e100.net; s=20230601; t=1759409969; x=1760014769;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=MQztPCfL76Pr8AMScoCBn3pCtb2KsS5VnDwYYrRQ2qo=;
-        b=kHMmNP+z7pe+pRt02v8rhaASRqoWPAGYv8Ig8AEwJq0CleBanp7DeqDjkSmm9KG5sl
-         ulpO/jWuLvYK5tFohnjmCS6yFH6qMWGtzlbCw1f6Ub2YLKmwm51ngEPWqP4/DZgVxjSl
-         TAID2RX6ks3KZvwpcsETnoJ349EoqJjc7bUSqWwkxRhoTHNbbJqpwAWj+Fvu+BNR3NAU
-         QXPhLpuGwi8iLKpu6pS+GOtI0vSPMKJ+3Axlqdao8kjmTw1T5JgtczJlXMQ89xFhjqqq
-         rE4gwFO4HuF0QDYMxpv9ArG/QjlLU5heBgKIPxcSCcx30R7GIi/MA2WlOAzff2Pmjjj/
-         Gp3g==
-X-Gm-Message-State: AOJu0YyQyakqd6bjLwvexEb5dUYfPc5kifrEZBMY449IPFUSMgEA7GpG
-	UqYTCxoh5isuAwyOWpLMskFgSDKBPuw+qGjcG0iMMKHiy4MIbHnkX2ayhBSEMg==
-X-Gm-Gg: ASbGncvd+XMIcdw1JyueTcWfGHoHmOhLQISRNNBWJDRuFJ21A+jNprlOmmy2W6hKvjU
-	Oy/BzHcK0NxTynWz9Qxtgs33lad5fZN3OuZSAzZV3s6k4GqAamdVyi9AABGxhnUh6JQTV7vIKBj
-	rsUKVHnfPmG67cv6wbAFUvrYPUccRdxhwC8can1ikYPV/Ucz22YSjQPTciINhsojXICmPaZ+ZqB
-	qtuezwzh+YVbbonbf4/t4ZLliajHETN8jtTYc9MJslDFUmaEcOaAC/gjeXJC6xvFsjFpM9V+4YF
-	8Dr5355jB5SQ/XtjKMTMOAcTWSmPmLzM3nPD03qrfH1IKyAKa2+S1oSPRWD9dB2mOOFVWsQa778
-	PtuTuJfqBtMdguSL+/D3zuUFu+22aJBRM8ka+NeKcLd+IPPxjQDgL+z4=
-X-Google-Smtp-Source: AGHT+IEbYuAucXQMEi4chjbJv7cm6BywoB4VPtrdMjSfu5mFbdX9hlc8Gde6UIqs7xBdiz+hmXd71g==
-X-Received: by 2002:a17:907:9485:b0:b3d:98fa:b3fa with SMTP id a640c23a62f3a-b46e8f7ddbcmr819460766b.50.1759409972964;
-        Thu, 02 Oct 2025 05:59:32 -0700 (PDT)
+        bh=KBVMXA0svvTeG4AWNNef2Mmd74CIX6nbyDvXTSDwRCE=;
+        b=pMINyXQQDadc+23xZzErnnm+LJZd45n49hocFE+m6jq+AMvNRP85v5jMqJjKZKcfHq
+         4oVgOuilIwtkRJzFSOy3KQaZUyk9fo2vkKWzy0PX/jRbYf+YNRLUm6ZXod5HzpqcONEu
+         fILY/Ne67GHURLORNLSF7i27SBE7aB2RFjSJBhl3CBbxZBxFk3w7wi7F9gZlXmdpvRQP
+         rOtAg//gsH+f+Wl9ufbUAUjIOJtBsz5EnnXE0OGw8KICv7v3BQnH8Z3M5kki+YtRh7Jq
+         JenNVDDwhJsjkH2vKBIsg/IwfCnhGi0JpHzcKNLC2uwwM4VWaxoDoNo/x+YXvSB9ITuC
+         L0dw==
+X-Gm-Message-State: AOJu0YwWktAGkeFhps8L6z6yJrSojhX8Gur+3nGgwwg76QoOt8NFUO88
+	0LB35RJ91eEV05CZSn+xe8JSOiBpK66gNaNJQvnP+WjbcAV41Pb1ZKoOPRg0Mw==
+X-Gm-Gg: ASbGncvJR/7f/ABeunpQQ1B5GlfcchizIVNb6DVtcxs3vwkVbNyd4LKX3q8DwSz20k3
+	fFUY+8eLg6gMwvgU60YeE3n69ciqyEceqw3N5K2HWZVFxSQbW743s6f99YWvMiyGJmA3rZIleQg
+	99O/NE7IjYAdBkXSNbH1W2IpqEc9KRnfORyGbXryXRlWlVv2L/hFG/EtSUwibQzYCXB51QwyMRX
+	zlXDYD9TGUf8b3VET5lCMm+m6gMXk8anBhZJHElEcpAZrH4qlNwl8X0V97er2+KIpAWzHAylujT
+	TRdXImcZWGCGTpN8/90ZXSJEs2iSLTmG8UKxniuDwgAGxmSLLMlXFnz35z69NGjTuC/mo4muZ0L
+	MUjbVsWhtwximuAaFb5CT380u6Qr1WLbI68CXmJAznEyH
+X-Google-Smtp-Source: AGHT+IHP2mCaC03y4PPO8ki96fQpMkt4BVOC8V7ujHUfMcBF5nLqB4Axeu1s4N6dD/NyJUUsa/1hzg==
+X-Received: by 2002:a17:907:7287:b0:b3f:1028:a866 with SMTP id a640c23a62f3a-b46e516296dmr847435266b.15.1759409968757;
+        Thu, 02 Oct 2025 05:59:28 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.32
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Oct 2025 05:59:32 -0700 (PDT)
+        Thu, 02 Oct 2025 05:59:28 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 07/26] multipath-tools: Use https for github
-Date: Thu,  2 Oct 2025 14:59:07 +0200
-Message-ID: <20251002125926.2624522-8-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 01/26] dash: correct licence
+Date: Thu,  2 Oct 2025 14:59:01 +0200
+Message-ID: <20251002125926.2624522-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251002125926.2624522-1-skandigraun@gmail.com>
 References: <20251002125926.2624522-1-skandigraun@gmail.com>
@@ -66,35 +66,35 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 12:59:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120176
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 12:59:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120170
 
-From: Fabio Estevam <festevam@denx.de>
+From: Dan McGregor <dan.mcgregor@usask.ca>
 
-Per convert-srcuri.py script, github repos should be accessed
-via https.
+According to its copyright file, dash is only BSD-3-Clause. It has
+a build time tool from bash that's under the GPL, but only the
+tool's output is used, not the tool itself. So all compiled artefacts
+in dash appear to share the same licence.
 
-Change it accordingly.
-
-Signed-off-by: Fabio Estevam <festevam@denx.de>
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 4cef1e68ea59510d85b778e11179a2dac47c658b)
+(cherry picked from commit 8eba35f8b03659ffd73aceb52b6e78da8661a6dd)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-support/multipath-tools/multipath-tools_0.8.4.bb    | 2 +-
+ meta-oe/recipes-shells/dash/dash_0.5.11.5.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-index 0d51263f66..ee26cb742d 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.8.4.bb
-@@ -29,7 +29,7 @@ DEPENDS = "libdevmapper \
+diff --git a/meta-oe/recipes-shells/dash/dash_0.5.11.5.bb b/meta-oe/recipes-shells/dash/dash_0.5.11.5.bb
+index ad3672f3e4..3674052311 100644
+--- a/meta-oe/recipes-shells/dash/dash_0.5.11.5.bb
++++ b/meta-oe/recipes-shells/dash/dash_0.5.11.5.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Small and fast POSIX-compliant shell"
+ HOMEPAGE = "http://gondor.apana.org.au/~herbert/dash/"
+ SECTION = "System Environment/Shells"
  
- LICENSE = "GPL-2.0-only"
+-LICENSE = "BSD-3-Clause & GPL-2.0-or-later"
++LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b5262b4a1a1bff72b48e935531976d2e"
  
--SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=http;branch=master \
-+SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=master \
-            file://multipathd.oe \
-            file://multipath.conf.example \
-            file://0021-RH-fixup-udev-rules-for-redhat.patch \
+ inherit autotools update-alternatives
 
