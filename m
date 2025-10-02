@@ -1,207 +1,466 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A666CCA471
-	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 10:49:06 +0000 (UTC)
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.web11.5819.1759402138223231530
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E6FDCAC5B0
+	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 11:50:26 +0000 (UTC)
+Received: from AM0PR02CU008.outbound.protection.outlook.com (AM0PR02CU008.outbound.protection.outlook.com [52.101.72.62])
+ by mx.groups.io with SMTP id smtpd.web10.3240.1759390309863473508
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Oct 2025 03:48:58 -0700
+ Thu, 02 Oct 2025 00:31:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XQ57823V;
- spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: zboszor@gmail.com)
-Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-3306b83ebdaso926373a91.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 03:48:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759402137; x=1760006937; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4xqScypscYYOEBxwBj3wNqmME2xN9VE/i3R5suijJe4=;
-        b=XQ57823VNOfXwmQihhihLqZuTtGk465zFxb2pxx4w1HZbhBg9VhiKXPTlDVVAYc0oF
-         zxzZdjK6A5KxMLlfjF9/UfhiNCurAgTcONBya350zlvISMP1D2Bgp1mi8154dfKlbgs9
-         kYckwAaBIe4AfQp7cySSUY//7GWzsDptbamR9m0GgX6n1RF06Z5qLy+FeFYBydNQI9Nu
-         3lhNqWBfEQEULzURIOLnmxVAH9mxaUkObozpOzjGEPOPahLatV8kxFM1o//lJ9OB9a+8
-         cuUCwUuaZIkfTYJX4gB5OOB+FPgqB3STquw4+SRXpyEIuOPHvcTvAfZ2fsjtWghKGg0r
-         bHxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759402137; x=1760006937;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4xqScypscYYOEBxwBj3wNqmME2xN9VE/i3R5suijJe4=;
-        b=F5JNEZZM982bH30MCO7JBTV9bOTJCl9KxwEjZAiHvclxPTJ4lwI7+RgP+4WyjGkw9t
-         9dhBwLjuS3t/tCFlE9+779R2B24nQmgKmZvBSNURRKT+vVLIcGLPPmGSrX3BJ6qEiwzA
-         fXIBLO+HPK3D0MOWWbXmjOUi5ocatqwt23KZgLip3d1oGf/sXtLPsNYOQG8FzZzeYoQn
-         mgYjxc0e+duqqFnFGxa5gu6cjdxr7tmtQnFADEXNSziUmjfMyCXy1kpjB5vYIblHzzPL
-         9Ybk4hVihSccZyunQCERan5Kkcq6izRKK66mM5fEU/V93hldcFafIlbVbrhfgX9nO8OO
-         1dnQ==
-X-Gm-Message-State: AOJu0Yyc3kJTz4ZgB07+TJX5HTUkVFViNa6JrN9zJH5UK0ycAz6QFGfu
-	bjXb7Q0tZ0Q6svyjodZl17ve5m9RtMvbYxLbVhIuFMN7qK0EIWHcoVBYVd+Tbuwn
-X-Gm-Gg: ASbGncsDf/1G/OC8c2q/Eh95YQvX9jiMaPh4I7+t4XiDNCM+pBE00iADFtQ5bE0Uz0s
-	6uEruUcna2PzJJ/NjqruYnBsuFdZDuUC1EUIvM4IjONcoe5dbo0nrnML0AJfEFvJTzH7WVL7Lhn
-	ZxmzN9A7Ls51uQMnL8oqtCryWOY0JWXdqbJsRWLhKmXcW69kjwkGOVRQGG3S846+ygTYTAz7uAp
-	DKWDDn2bnMh2JjZut8X3LOCKjQQvN2RuE2i8fZ2AXSuRgaaEZf74YUNRK8E74CFP3talr/amEVL
-	+G67tBW1EB26rcfTq9WGdMijtIxntRwO/Ug4BmCgmo+9PwiBqGE4N4q9mf5smlTfVYazXFFYQJd
-	+eLchKRGxbVncuJTcXAntiBNv8AP9pn4aOI6/PL9zedCX5YS1wQofL5Z6uh/tnUUrQScFxJTbNB
-	RbMbs=
-X-Google-Smtp-Source: AGHT+IF3sZMbxTG/6vah97qOXKEhqOVVKThY99nl4dxgdDxF7C46LySNgYixV+DMMgMgzfObfQLJLw==
-X-Received: by 2002:a17:90b:38c6:b0:327:ba77:a47 with SMTP id 98e67ed59e1d1-339a6e9ac24mr8819718a91.15.1759402136982;
-        Thu, 02 Oct 2025 03:48:56 -0700 (PDT)
-Received: from fedora (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-339a6ebdac1sm4803568a91.9.2025.10.02.03.48.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Oct 2025 03:48:56 -0700 (PDT)
-From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-oe][PATCH v2 1/2] mariadb: Fix a crash in my_convert()
-Date: Thu,  2 Oct 2025 12:48:46 +0200
-Message-ID: <20251002104847.1472184-1-zboszor@gmail.com>
-X-Mailer: git-send-email 2.51.0
+ dkim=pass header.i=@hbkworld.com header.s=selector1 header.b=YiR5EthR;
+ spf=pass (domain: hbkworld.com, ip: 52.101.72.62, mailfrom: joao.lima@hbkworld.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xlxN8tLpOhRtxeMsxbkWfV6/fCAaNKgo7gNSzLe8/OPkn9bxIrCzgC3H1SJk3iUxUrvE2LDRzOhgA3jrAz4r/oBv7bEclThEEJx22gbmTasSAvrrDk91ooTyje3NF8cVD7V4mg0rMDt/Pk8rr8ajvGGi/K10ZtQ69oryk173Gcr6ghcALMmrmZbAC7pH5COKWLpqW/I0Uao9GH3DSB4/xbsGEYiERT4jpE9K67GNqpHcEy82EGH10+bI8+ANa88RrsCaMkVxzrHOr9b4o+lMqDQBMgTsgf2WlsYntoD3yBcCg4CwG2Z4a19WLe8Yzg8oEeYFrjcM7TRXEhKVlBjiDw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Yst1mR6iIdmhMkfk6w9MSMMMD6lfDDfR2LE58NOHJNc=;
+ b=GfF9hCXjpZLu/ZAldT/uxE6NmjDMlBVPk8dCtV3LZCUpf8WYpkFKpYzVNa8HB+xzJ6pesbQfm5KZCLwQwT60Hc7i1mmyihHUuuAgdkACjpoCqTU65z9vligiBMLj85unQyyIX/HyWHwGT53DLnIVyuUUeNS/zdsGhX/wURgiQo/33Yq/7Wm5855Y7+A0beEnMnocoQCpO0MSNTdKSOFdscMjAW0pc5xhTLmHuFnAHIMoeb58/FAYvDtc0CYFqSu0c+WY3nN2G4VMz7bKUDNlWyvbrW6tk1MbqsGdlEQYv3MrBV9zwguKQsyZe5KbLnQ/AKPzE/ZgflfrMv0o//1pKw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=hbkworld.com; dmarc=pass action=none header.from=hbkworld.com;
+ dkim=pass header.d=hbkworld.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hbkworld.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Yst1mR6iIdmhMkfk6w9MSMMMD6lfDDfR2LE58NOHJNc=;
+ b=YiR5EthR1VSjoDk5eekMDxZqo6YRbCB4Q2TeckHAd6tAw2HxTu+5A1LnU1RNS+mU7m6zbSZlrikYaIqgAPChyiqfxIo3jodETNtLaNdBcqlCfBett3agZkw8ZM/EngbbNJv7obGGvg9YqTzs2bbs6/aR7KPqsHwHQAGc5v6BA/OYr+9d08SBzhSUNSfZyd9rHYDRaYIGl3i5gT9SpXk4Ya0hTqcMTUwLZyUlUOpS0p/ra3GmS+YpgJ3NxWRKRUmeioaxnjiosbkl0D/2xs05REDQazqW0eYJt8tmQYC4r89tC7Re/pKPzD0kLCMzEztYJF6jZZyX6EidItgFDal7dA==
+Received: from DB3PR09MB6202.eurprd09.prod.outlook.com (2603:10a6:10:43a::13)
+ by VI0PR09MB8480.eurprd09.prod.outlook.com (2603:10a6:800:2ed::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.18; Thu, 2 Oct
+ 2025 07:17:00 +0000
+Received: from DB3PR09MB6202.eurprd09.prod.outlook.com
+ ([fe80::ce00:c6f4:8427:f779]) by DB3PR09MB6202.eurprd09.prod.outlook.com
+ ([fe80::ce00:c6f4:8427:f779%6]) with mapi id 15.20.9160.017; Thu, 2 Oct 2025
+ 07:17:00 +0000
+From: =?iso-8859-1?Q?Jo=E3o_Lima?= <joao.lima@hbkworld.com>
+To: Khem Raj <raj.khem@gmail.com>, =?iso-8859-1?Q?Lima=2C_Jo=E3o?=
+	<joao.raul.434@gmail.com>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 0/3] openocd: Add dmem support and update dependencies
+Thread-Topic: EXTERNAL: Re: [meta-oe][PATCH 0/3] openocd: Add dmem support and
+ update dependencies
+Thread-Index: AQHcMu/k+L0B6Fm/TUO8TH6vh9cKOrSucilB
+Date: Thu, 2 Oct 2025 07:17:00 +0000
+Message-ID: 
+ <DB3PR09MB6202132CD2CF6FEBFB54A99C9AE7A@DB3PR09MB6202.eurprd09.prod.outlook.com>
+References: <20251001130452.542-1-joao.lima@hbkworld.com>
+ <a799cdbe-54b5-484e-84e2-4a847236aa3d@gmail.com>
+In-Reply-To: <a799cdbe-54b5-484e-84e2-4a847236aa3d@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ MSIP_Label_9208be00-d674-40fd-8399-cd3587f85bc0_Enabled=True;MSIP_Label_9208be00-d674-40fd-8399-cd3587f85bc0_SiteId=6cce74a3-3975-45e0-9893-b072988b30b6;MSIP_Label_9208be00-d674-40fd-8399-cd3587f85bc0_SetDate=2025-10-02T07:17:00.088Z;MSIP_Label_9208be00-d674-40fd-8399-cd3587f85bc0_Name=Unrestricted;MSIP_Label_9208be00-d674-40fd-8399-cd3587f85bc0_ContentBits=1;MSIP_Label_9208be00-d674-40fd-8399-cd3587f85bc0_Method=Privileged;
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=hbkworld.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB3PR09MB6202:EE_|VI0PR09MB8480:EE_
+x-ms-office365-filtering-correlation-id: 42b31622-4a27-429b-3cb8-08de0183ae12
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|31052699007|39142699007|366016|1800799024|376014|38070700021|13003099007|7053199007|8096899003;
+x-microsoft-antispam-message-info: 
+ =?iso-8859-1?Q?PsNuzcEKz9zfKOrDIujcET4geWOQcgQbZTQmsEp38J+GxB32ecsMhkzI1C?=
+ =?iso-8859-1?Q?7mlrQhW8M0qy376oikRxFkmvcf8GzziavvqC/Y+pzsdJrS0RWItN8vqZsq?=
+ =?iso-8859-1?Q?RnynpWsGDdv3tbVKZUtisohoQ795UE+HVNJ8RVwt+ra3qZDjorCLFwwvMM?=
+ =?iso-8859-1?Q?WvLcBD3Tjow97drV9TWTtlr9VQwNuFJA98bv07Z9XkW+z7xLAmyFPh2pzm?=
+ =?iso-8859-1?Q?2MYfSbi6bnrmcQu4YY2wlZ7E4NjKvgeiWcbTrucWEnrBTWHJ8FsQ10n42C?=
+ =?iso-8859-1?Q?UTo2LpyaAsGW1TdDvz947HWMqK0QM8UoAyBkUHxxkfTSBMt2RnXjcZPpzU?=
+ =?iso-8859-1?Q?3hEcf9AA6Amm+SigZHWXKq7g8itL1BE1qW5Rab/qTkTO95u/fLN1sLjcPY?=
+ =?iso-8859-1?Q?gUOowxr5McG79Ig3h2Ifsg5++QCam1mIEo8GQzaOSqEM/Aa64y/mhLpTzL?=
+ =?iso-8859-1?Q?3ttUslA8i1lIoRbEGcRpk66mdWwaH2RZeZd21ho1x/WSxqkrRi/bj6zx9N?=
+ =?iso-8859-1?Q?tyNB4jMo1FMJ9aQlRUxzHPoE49uqf3KpS3uK7VFcxigGC1LaTpXadEg0LF?=
+ =?iso-8859-1?Q?aJMIo0kzTcRnCffLSB7zPIyEGf8ACujvsDq1BIZ8X0NEfXbTbwZfQm9J64?=
+ =?iso-8859-1?Q?qfMVS3jBjxzZicnG4gboZbiQRxLsPC63/H6PzuFGc0KvaRlSDlDr5rvBSM?=
+ =?iso-8859-1?Q?w2KPOR9K+kyhJULLrKKSf8heCBwfJyf9BFyPHiFeLD7O33dfxBMIxPmj58?=
+ =?iso-8859-1?Q?xxcyuTncKT24wvkyJy+7c+jz2YpwxUBR0pb0LRp+e++cp8uxXu3g+vH1kE?=
+ =?iso-8859-1?Q?Y4JhpjYsWnL7657WH1tDJGhhOsH7amkM6ApD3soZ7awzsMGAUB7HSySroI?=
+ =?iso-8859-1?Q?ty4AlAmbwQZVvwlXQPjGT48nt9CnSUxqgvJK1WbnLEZRLafrZZX6nY6MRu?=
+ =?iso-8859-1?Q?ljtZid3tS25aWtGX687uldwYDCtCzRahslG+krnAOnutRd+6u/7JPyABnw?=
+ =?iso-8859-1?Q?neRNm8hqScT1QWcXoFZNilxf7pfg7yeGj+s/DUt04Jg0ZJSmpSuiQGAzgG?=
+ =?iso-8859-1?Q?R6obFxJE64zbLp7eUMtJq1ZwBgGl/Ckbd5EQ1baFnd/tDo5HWErMaXkk20?=
+ =?iso-8859-1?Q?LSfI/aqy6XsLSFNUHthUOkAs81sQ3zjAKile2gwr862DzscOs1uLm5wQWP?=
+ =?iso-8859-1?Q?BWICSi14hwtURpxfG0RKige4JXoxrq/KvYh/vhhWulwRr6rRqmOdCY8YcI?=
+ =?iso-8859-1?Q?8m+9q5cHl74bFKtBnijJcSNKqDk45mKEaAgE4ehnMtbcgXyB96mNA2Lhcn?=
+ =?iso-8859-1?Q?vQZnQ8nyRBUmE0aa4wCImVNsxhsHxph8RhDWslkNygsjgfVPJ4ckRdSXBT?=
+ =?iso-8859-1?Q?o7DbifniGMyJNP2yAXIkV54wF7GcTtqTkTf8rOr4BbCB/GLrPUNkZQuSfR?=
+ =?iso-8859-1?Q?sZZkPBS00VJ9FHeAbPNatBC5UK9gbCxfiOMoynfS7znq/nfdExaABo+QY0?=
+ =?iso-8859-1?Q?us+T7A5X2il6a8cdQJte/cv2pqELjy1onbV3L6wJYHdA=3D=3D?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB3PR09MB6202.eurprd09.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(31052699007)(39142699007)(366016)(1800799024)(376014)(38070700021)(13003099007)(7053199007)(8096899003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?iso-8859-1?Q?HrnV5Y7uGbdSQU3uFgmrEfkhuyNKaOKzC2xgEVN5UfI+VWuSu9GtSotP8d?=
+ =?iso-8859-1?Q?lfxs6JyNcrKAPbWn/SWgdLdreediS+ZI6DIiUfmiX9/VwIR1AFCSH9CVno?=
+ =?iso-8859-1?Q?AfUk4hza66/a+6CcQcqBlSVa8p9N/dHpbCL/4Y6SMi3wxMQo6Er23t7N9O?=
+ =?iso-8859-1?Q?HOFZAh7EcyJmX0NuboReXSRI2dNWTsyFl/hPwugn9/6aYuh53HKrXIgvd8?=
+ =?iso-8859-1?Q?sZbU1Bq01qdImC+v84jVDkPooTYnuaWEFTXhxD5psZY1vYp2uO/u1eLJIH?=
+ =?iso-8859-1?Q?FclD0TNttHOqOVzu2jcMelLNlmSiU+Z3d+wwDrIS19ZBm3FOgGydoJmy5k?=
+ =?iso-8859-1?Q?gVfw0/u2iahtFlSGfaWhrmjKPnaXVZr7Y14OW9xdHrvdlzTGjfGjO5gf5t?=
+ =?iso-8859-1?Q?3rlIZULl6yUyo0kMX+e0uirxTc4neHBm6Ok31SzDPuKFKSVRNhvjpflaUM?=
+ =?iso-8859-1?Q?izwlKQGxQ2NDTHHzjCnQqXOOFIhw5KH2M4bMyHZXLlpxf4nqpCsyjlBGcS?=
+ =?iso-8859-1?Q?1J0sb8FqWFEIzAjAFW/RGx4M77Zo7+WAsDUtI8jKtr7q+JfcyIJGYY96Y/?=
+ =?iso-8859-1?Q?/a3gxsHMoMy+58Zw8Ma8i5wI81Qg7r2FXYGFC/KBVDhC5srxJNiH08v0NS?=
+ =?iso-8859-1?Q?atRXs7PEerOWE96fUxQoqvSBZZnO7ylVgMvHZT9JLbFuch0fTUoUbsfjJN?=
+ =?iso-8859-1?Q?YlZNxxF1gftRDZVLAQjAZ7Z+xiww9UgMJRz+8sOPBtI4IykfRxxjj4tHt6?=
+ =?iso-8859-1?Q?U0NOL/QiApPas1M+S041755hNX/PtOKGxEp9UF9nyYiTr1yYOsEyd2Kt0l?=
+ =?iso-8859-1?Q?jNdtrNt0Kgduu78nraE7GZA0ODX8xMAk/RiJuExq39e/IRJAw9A9Amrwf4?=
+ =?iso-8859-1?Q?VhfrFUrciCUG2Ghn3ccWfK0VbhglS6ZmyB0W5QKQF68dsY5o5b3aWbfokH?=
+ =?iso-8859-1?Q?0TmnwZMkZGg1AVtPm58GViWMZQlQHTe5N70OKIniktJH+M2dlMfmM40IC2?=
+ =?iso-8859-1?Q?JbsLH2kty/1tJPFT/SvHKH/UeBqqx/Y5eif76xyf3cBrjTkHL54UtYXmPY?=
+ =?iso-8859-1?Q?kTWdP8BZM8PH5W4P43CfslR+ZithpEoBeDetZU4P3Lo2pB7bjFUSlRVv9B?=
+ =?iso-8859-1?Q?sWqRv0+TFuQHq9Gtu82v2iRwiwa32fm5HariqXffbJTrWxh1hYWCpWLe68?=
+ =?iso-8859-1?Q?Ismg6z3xnrQ5SjmmnYkVIen3U/1hmciOxUqSRfFrOeanLg+Wx75sCUKYOu?=
+ =?iso-8859-1?Q?M+2E0M60yLcPhbPMI2lqkCpkDGC/btjEdj/QWZwS6LeTMKbpAyUQXO8dm9?=
+ =?iso-8859-1?Q?MNqyA6uYrdIaIrZ0V0WJ/FGtJ+8vH7sGUhWtBK+mlO1RjlSGkYkIZlweq/?=
+ =?iso-8859-1?Q?qaAMqqnE734xlKyN5l/HhGvTJgTphpQt6B+0OmTiGA99gFHtgmPTmyjvbl?=
+ =?iso-8859-1?Q?LsqWNbbdZVXp1vF5qYSjw8xxBD4wjiYF3cre90x/9Qr4SkUmKvSDvBGgIw?=
+ =?iso-8859-1?Q?NP1WvpiBA+lfReYa7wjaVTufEyD6hMbAmBIJaUWWdrqlVADdlmrXcw1l85?=
+ =?iso-8859-1?Q?DECuiNIFFLLeHR5yNv/Q8QvmxzCPh506ZePCgQP1uhDBqUyaXlNAkea9dG?=
+ =?iso-8859-1?Q?lr2rmZ814SVUWmvA2stHEHBwOMofNKqu8G?=
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: hbkworld.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB3PR09MB6202.eurprd09.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 42b31622-4a27-429b-3cb8-08de0183ae12
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Oct 2025 07:17:00.5786
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 6cce74a3-3975-45e0-9893-b072988b30b6
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ySAVnx/fAaAWdoBUJ7eVM2o2+6K6PPASN2nyKdPrHtJdYh471O4S754KeHhCtlylijoaJl4ejozQGlIj4i4XkYKaZLu5zupOuFik/WX20U0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR09MB8480
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_DB3PR09MB6202132CD2CF6FEBFB54A99C9AE7ADB3PR09MB6202eurp_"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 10:49:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120166
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 11:50:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120168
 
-In some cases (most notably when running mysqldump),
-the server crashes in the my_convert() function, in
-a code protected by
+--_000_DB3PR09MB6202132CD2CF6FEBFB54A99C9AE7ADB3PR09MB6202eurp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-  #if defined(__i386__) || defined(__x86_64__)
-  ...
-  #endif
+Thanks for the feedback.
 
-The crash does not happen with the generic code.
-Remove the x86[-64] specific optimization.
+I'm currently working on top of:
+URI:    https://git.openembedded.org/meta-openembedded
+Branch: scarthgap
+Commit: e8fd97d86af86cdcc5a6eb3f301cbaf6a2084943
 
-This change was endorsed in
-https://jira.mariadb.org/browse/MDEV-37786
+Should I rebase my patch series on top of the latest master (or master-next=
+) branch, even though I'm targeting the scarthgap branch?
+As this is my first submission to the project, I want to ensure I'm followi=
+ng the correct process.
 
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
----
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
- ...move-x86-specific-loop-in-my_convert.patch | 93 +++++++++++++++++++
- 2 files changed, 94 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-specific-loop-in-my_convert.patch
+Thanks for the submission tip.
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 13e55ebacd..67dd687c02 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -24,6 +24,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
-            file://0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch \
-            file://riscv32.patch \
-+           file://0001-Remove-x86-specific-loop-in-my_convert.patch \
-           "
- SRC_URI[sha256sum] = "1b26c0bb2d025dbfac3b9852d2b7eafda56a171b67ac2e27831ec0414fb7df07"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-specific-loop-in-my_convert.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-specific-loop-in-my_convert.patch
-new file mode 100644
-index 0000000000..afcf4fe843
---- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-specific-loop-in-my_convert.patch
-@@ -0,0 +1,93 @@
-+From 79d2a95391abc133e86688696ae21628b7035b2d Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?=
-+ <zboszor@gmail.com>
-+Date: Wed, 1 Oct 2025 09:29:04 +0200
-+Subject: [PATCH] Remove x86 specific loop in my_convert()
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+mysqldump/mariadb-dump crashes with this backtrace:
-+
-+| (gdb) bt
-+| #0  my_convert (to=<optimized out>, to_length=160, to_cs=0x55b5740fbda0 <my_charset_utf8mb4_general_ci>, from=<optimized out>, from_length=40,
-+|     from_cs=0x55b57408bda0 <my_charset_utf8mb3_unicode_ci>, errors=0x7f950c35cd6c) at /usr/src/debug/mariadb/11.8.3/strings/ctype.c:1256
-+| #1  0x000055b572d9f4a0 in copy_and_convert (to=0x7f94fc00c9db "Configuratiogicate_log\020automagicate_log\017is_done_message\017is_done_message",
-+|     to_length=<optimized out>, to_cs=<optimized out>, from=0x7f94fc059f37 "Configuration downloading from portal...", from_length=40, from_cs=<optimized out>,
-+|     errors=0x7f950c35cd6c) at /usr/src/debug/mariadb/11.8.3/sql/sql_string.h:53
-+| #2  Protocol::net_store_data_cs (this=0x7f94fc001260, from=0x7f94fc059f37 "Configuration downloading from portal...", length=40, from_cs=<optimized out>,
-+|     to_cs=<optimized out>) at /usr/src/debug/mariadb/11.8.3/sql/protocol.cc:114
-+| #3  0x000055b572da103f in Protocol::send_result_set_row (this=this@entry=0x7f94fc001260, row_items=row_items@entry=0x7f94fc013418)
-+|     at /usr/src/debug/mariadb/11.8.3/sql/protocol.cc:1359
-+| #4  0x000055b572e19442 in select_send::send_data (this=0x7f94fc014f78, items=...) at /usr/src/debug/mariadb/11.8.3/sql/sql_class.cc:3294
-+| #5  0x000055b572ef7c69 in select_result_sink::send_data_with_check (u=<optimized out>, sent=<optimized out>, this=<optimized out>, items=...)
-+|     at /usr/src/debug/mariadb/11.8.3/sql/sql_class.h:6264
-+| #6  select_result_sink::send_data_with_check (this=<optimized out>, items=..., u=<optimized out>, sent=<optimized out>)
-+|     at /usr/src/debug/mariadb/11.8.3/sql/sql_class.h:6254
-+| #7  end_send (join=<optimized out>, join_tab=<optimized out>, end_of_records=<optimized out>) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:25629
-+| #8  0x000055b572ec38b6 in evaluate_join_record (join=join@entry=0x7f94fc014fa0, join_tab=join_tab@entry=0x7f94fc016940, error=error@entry=0)
-+|     at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:24523
-+| #9  0x000055b572edcbf2 in sub_select (join=0x7f94fc014fa0, join_tab=0x7f94fc016940, end_of_records=<optimized out>)
-+|     at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:24290
-+| #10 0x000055b572f119c6 in do_select (join=0x7f94fc014fa0, procedure=<optimized out>) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:23801
-+| #11 JOIN::exec_inner (this=this@entry=0x7f94fc014fa0) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:5071
-+| #12 0x000055b572f11d43 in JOIN::exec (this=this@entry=0x7f94fc014fa0) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:4859
-+| #13 0x000055b572f0ffe6 in mysql_select (thd=thd@entry=0x7f94fc000cd8, tables=0x7f94fc013f38, fields=..., conds=0x0, og_num=0, order=0x0, group=0x0, having=0x0,
-+|     proc_param=0x0, select_options=551922436864, result=0x7f94fc014f78, unit=0x7f94fc005038, select_lex=0x7f94fc013160)
-+|     at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:5387
-+| #14 0x000055b572f107dd in handle_select (thd=thd@entry=0x7f94fc000cd8, lex=lex@entry=0x7f94fc004f58, result=result@entry=0x7f94fc014f78,
-+|     setup_tables_done_option=setup_tables_done_option@entry=0) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:633
-+| #15 0x000055b572e77d9e in execute_sqlcom_select (thd=thd@entry=0x7f94fc000cd8, all_tables=0x7f94fc013f38) at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:6190
-+| #16 0x000055b572e877be in mysql_execute_command (thd=thd@entry=0x7f94fc000cd8, is_called_from_prepared_stmt=is_called_from_prepared_stmt@entry=false)
-+|     at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:3975
-+| #17 0x000055b572e88e03 in mysql_parse (thd=0x7f94fc000cd8, rawbuf=<optimized out>, length=<optimized out>, parser_state=<optimized out>)
-+|     at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:7905
-+| #18 0x000055b572e8b2a1 in dispatch_command (command=command@entry=COM_QUERY, thd=thd@entry=0x7f94fc000cd8, packet=packet@entry=0x7f94fc0088a9 "",
-+|     packet_length=packet_length@entry=152, blocking=blocking@entry=true) at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:1903
-+| #19 0x000055b572e8cf7c in do_command (thd=thd@entry=0x7f94fc000cd8, blocking=blocking@entry=true) at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:1416
-+| #20 0x000055b572fcfc0d in do_handle_one_connection (connect=<optimized out>, put_in_cache=true) at /usr/src/debug/mariadb/11.8.3/sql/sql_connect.cc:1415
-+| #21 0x000055b572fcffc5 in handle_one_connection (arg=arg@entry=0x55b57943cbd8) at /usr/src/debug/mariadb/11.8.3/sql/sql_connect.cc:1327
-+| #22 0x000055b573382440 in pfs_spawn_thread (arg=0x55b5795eb598) at /usr/src/debug/mariadb/11.8.3/storage/perfschema/pfs.cc:2198
-+| #23 0x00007f952e8571dd in start_thread (arg=<optimized out>) at pthread_create.c:448
-+| #24 0x00007f952e8d318c in __GI___clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:78
-+
-+See also:
-+https://jira.mariadb.org/browse/MDEV-37786
-+https://jira.mariadb.org/browse/MDEV-37148
-+
-+Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
-+Upstream-Status: Inappropriate [oe specific]
-+---
-+ strings/ctype.c | 16 ----------------
-+ 1 file changed, 16 deletions(-)
-+
-+diff --git a/strings/ctype.c b/strings/ctype.c
-+index 629514e5e9c..d7e788c693b 100644
-+--- a/strings/ctype.c
-++++ b/strings/ctype.c
-+@@ -1243,22 +1243,6 @@ my_convert(char *to, uint32 to_length, CHARSET_INFO *to_cs,
-+ 
-+   length= length2= MY_MIN(to_length, from_length);
-+ 
-+-#if defined(__i386__) || defined(__x86_64__)
-+-  /*
-+-    Special loop for i386, it allows to refer to a
-+-    non-aligned memory block as UINT32, which makes
-+-    it possible to copy four bytes at once. This
-+-    gives about 10% performance improvement comparing
-+-    to byte-by-byte loop.
-+-  */
-+-  for ( ; length >= 4; length-= 4, from+= 4, to+= 4)
-+-  {
-+-    if ((*(uint32*)from) & 0x80808080)
-+-      break;
-+-    *((uint32*) to)= *((const uint32*) from);
-+-  }
-+-#endif /* __i386__ */
-+-
-+   for (; ; *to++= *from++, length--)
-+   {
-+     if (!length)
-+-- 
-+2.51.0
-+
--- 
-2.51.0
 
+Cumprimentos /Kind regards
+
+
+
+Jo=E3o Lima
+
+Embedded Software Developer, Genesis High Speed
+
+UNRESTRICTED
+________________________________
+From: Khem Raj <raj.khem@gmail.com>
+Sent: Wednesday, October 1, 2025 5:22 PM
+To: Lima, Jo=E3o <joao.raul.434@gmail.com>; openembedded-devel@lists.openem=
+bedded.org <openembedded-devel@lists.openembedded.org>; Jo=E3o Lima <joao.l=
+ima@hbkworld.com>
+Subject: EXTERNAL: Re: [meta-oe][PATCH 0/3] openocd: Add dmem support and u=
+pdate dependencies
+
+CAUTION! External Email. Do not click links or open attachments unless you =
+recognize the sender and are sure the content is safe.
+If you think this is a phishing email, please report it by using the "Phish=
+ Alert Report" button in Outlook.
+
+On 10/1/25 6:04 AM, Lima, Jo=E3o wrote:
+> From: Joao Lima <joao.lima@hbkworld.com>
+>
+> This patch series updates OpenOCD to support direct memory access (dmem)
+> via SWD emulation for Texas Instruments AM64x and J784s4 platforms.
+>
+> Changes include:
+> 1. Version bumps:
+>     - openocd: 91bd431 -> 66ea461
+>     - jimtcl: fcbb449 -> f160866
+>     - libjaylink: 9aa7a59 -> 0d23921
+>
+> 2. Platform support patches:
+>     - Add SWD native configuration files for AM64x and J784s4 boards
+>     - Configure DMEM access parameters in ti_k3.cfg for direct memory ope=
+rations
+>     - Set up DAPBUS debugger and emulated AP descriptions
+>
+> 3. Build configuration:
+>     - Enable dmem adapter driver (--enable-dmem)
+>     - Enable internal jimtcl (--enable-internal-jimtcl)
+>     - Add both features to default PACKAGECONFIG
+>
+> This enables self-hosted debug configurations where OpenOCD runs on one o=
+f
+> the CPUs inside the SoC.
+>
+> Upstream-Status: Submitted
+> - https://eur01.safelinks.protection.outlook.com/?url=3Dhttp%3A%2F%2Fopen=
+ocd.zylin.com%2F%23%2Fc%2F9020%2F&data=3D05%7C02%7Cjoao.lima%40hbkworld.com=
+%7C0be1393f749b4b3a254d08de0106cb07%7C6cce74a3397545e09893b072988b30b6%7C0%=
+7C0%7C638949326829662188%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIl=
+YiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C80000%=
+7C%7C%7C&sdata=3Dmr0knEMNTixqKo20WB6sAP3w0Os3PC%2FHaEMGG%2F3SDjw%3D&reserve=
+d=3D0<http://openocd.zylin.com/#/c/9020/>
+> - https://eur01.safelinks.protection.outlook.com/?url=3Dhttp%3A%2F%2Fopen=
+ocd.zylin.com%2F%23%2Fc%2F9021%2F&data=3D05%7C02%7Cjoao.lima%40hbkworld.com=
+%7C0be1393f749b4b3a254d08de0106cb07%7C6cce74a3397545e09893b072988b30b6%7C0%=
+7C0%7C638949326829712748%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIl=
+YiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C80000%=
+7C%7C%7C&sdata=3D%2F%2Fc%2BmSu3HrA%2F2IWn9jqFAo4x2bNR54ABpO0mSZEZ%2FCM%3D&r=
+eserved=3D0<http://openocd.zylin.com/#/c/9021/>
+>
+> Joao Lima (3):
+>    openocd: bump the openocd, jimtcl versions
+>    openocd: add dmem support to am64xx and j784s4 platforms
+>    openocd: enable dmem and jimtcl
+>
+>   ...wd_native.cfg-Add-support-for-direct.patch | 77 +++++++++++++++++++
+>   ....cfg-Add-support-for-direct-memory-a.patch | 65 ++++++++++++++++
+>   .../recipes-devtools/openocd/openocd_git.bb   | 13 +++-
+>   3 files changed, 151 insertions(+), 4 deletions(-)
+>   create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-tcl-bo=
+ard-ti_-_swd_native.cfg-Add-support-for-direct.patch
+>   create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0002-tcl-ta=
+rget-ti_k3.cfg-Add-support-for-direct-memory-a.patch
+>
+
+
+Thanks for the patchset, Please rebase it on latest master branch or
+master-next branch and resend. While resending send the whole series
+together with git send-email *.patch or something so tools like
+patchwork and lore can record this as a series.
+
+HBK FiberSensing S.A. NIF: 506807312 Registered office: Via Jos=E9 R=E9gio,=
+ 256, 4485-860, Vilar do Pinheiro, Portugal. Esta mensagem e eventuais anex=
+os s=E3o confidenciais e destinados exclusivamente ao(s) destinat=E1rio(s) =
+indicado(s). Se recebeu esta mensagem por engano, por favor notifique o rem=
+etente e elimine-a de imediato. =C9 proibida a divulga=E7=E3o, c=F3pia ou u=
+tiliza=E7=E3o n=E3o autorizada do seu conte=FAdo. This message and any atta=
+chments are confidential and intended solely for the designated recipient(s=
+). If you have received this message in error, please notify the sender and=
+ delete it immediately. Unauthorized disclosure, copying, or use of its con=
+tents is prohibited.
+
+--_000_DB3PR09MB6202132CD2CF6FEBFB54A99C9AE7ADB3PR09MB6202eurp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+Thanks for the feedback.</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+<br>
+</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+I'm currently working on top of:</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+URI: &nbsp; &nbsp;https://git.openembedded.org/meta-openembedded &nbsp;</di=
+v>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+Branch: scarthgap &nbsp;</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+Commit: e8fd97d86af86cdcc5a6eb3f301cbaf6a2084943</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+<br>
+</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+Should I rebase my patch series on top of the latest master (or master-next=
+) branch, even though I'm targeting the scarthgap branch?</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+As this is my first submission to the project, I want to ensure I'm followi=
+ng the correct process.<br>
+<br>
+</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+Thanks for the submission tip.</div>
+<div class=3D"elementToProof" id=3D"Signature">
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+<br>
+</div>
+<p style=3D"margin: 0cm; font-family: Calibri, sans-serif; font-size: 11pt;=
+" class=3D"elementToProof">
+<span style=3D"font-family: Arial, sans-serif; font-size: 9pt; color: black=
+;">Cumprimentos
+<i>/</i>Kind regards&nbsp;</span></p>
+<p style=3D"margin: 0cm; font-family: Calibri, sans-serif; font-size: 11pt;=
+" class=3D"elementToProof">
+<span style=3D"font-family: Arial, sans-serif; font-size: 9pt; color: black=
+;"><b>&nbsp;</b></span></p>
+<p style=3D"margin: 0cm; font-family: Calibri, sans-serif; font-size: 11pt;=
+" class=3D"elementToProof">
+<span style=3D"font-family: Arial, sans-serif; font-size: 9pt; color: black=
+;"><b>Jo=E3o Lima</b>&nbsp;</span></p>
+<p style=3D"margin: 0cm; font-family: Calibri, sans-serif; font-size: 11pt;=
+" class=3D"elementToProof">
+<span style=3D"font-family: Arial, sans-serif; font-size: 9pt; color: black=
+;">Embedded Software Developer, Genesis High Speed&nbsp;</span></p>
+<div class=3D"elementToProof"><br>
+</div>
+<div style=3D"text-align: center; margin-left: 5pt; font-family: Calibri; f=
+ont-size: 7pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+UNRESTRICTED</div>
+</div>
+<div id=3D"appendonsend"></div>
+<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
+<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
+yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> Khem Raj &lt;raj.khem=
+@gmail.com&gt;<br>
+<b>Sent:</b> Wednesday, October 1, 2025 5:22 PM<br>
+<b>To:</b> Lima, Jo=E3o &lt;joao.raul.434@gmail.com&gt;; openembedded-devel=
+@lists.openembedded.org &lt;openembedded-devel@lists.openembedded.org&gt;; =
+Jo=E3o Lima &lt;joao.lima@hbkworld.com&gt;<br>
+<b>Subject:</b> EXTERNAL: Re: [meta-oe][PATCH 0/3] openocd: Add dmem suppor=
+t and update dependencies</font>
+<div>&nbsp;</div>
+</div>
+<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
+">
+<div class=3D"PlainText">CAUTION! External Email. Do not click links or ope=
+n attachments unless you recognize the sender and are sure the content is s=
+afe.<br>
+If you think this is a phishing email, please report it by using the &quot;=
+Phish Alert Report&quot; button in Outlook.<br>
+<br>
+On 10/1/25 6:04 AM, Lima, Jo=E3o wrote:<br>
+&gt; From: Joao Lima &lt;joao.lima@hbkworld.com&gt;<br>
+&gt;<br>
+&gt; This patch series updates OpenOCD to support direct memory access (dme=
+m)<br>
+&gt; via SWD emulation for Texas Instruments AM64x and J784s4 platforms.<br=
+>
+&gt;<br>
+&gt; Changes include:<br>
+&gt; 1. Version bumps:<br>
+&gt;&nbsp;&nbsp;&nbsp;&nbsp; - openocd: 91bd431 -&gt; 66ea461<br>
+&gt;&nbsp;&nbsp;&nbsp;&nbsp; - jimtcl: fcbb449 -&gt; f160866<br>
+&gt;&nbsp;&nbsp;&nbsp;&nbsp; - libjaylink: 9aa7a59 -&gt; 0d23921<br>
+&gt;<br>
+&gt; 2. Platform support patches:<br>
+&gt;&nbsp;&nbsp;&nbsp;&nbsp; - Add SWD native configuration files for AM64x=
+ and J784s4 boards<br>
+&gt;&nbsp;&nbsp;&nbsp;&nbsp; - Configure DMEM access parameters in ti_k3.cf=
+g for direct memory operations<br>
+&gt;&nbsp;&nbsp;&nbsp;&nbsp; - Set up DAPBUS debugger and emulated AP descr=
+iptions<br>
+&gt;<br>
+&gt; 3. Build configuration:<br>
+&gt;&nbsp;&nbsp;&nbsp;&nbsp; - Enable dmem adapter driver (--enable-dmem)<b=
+r>
+&gt;&nbsp;&nbsp;&nbsp;&nbsp; - Enable internal jimtcl (--enable-internal-ji=
+mtcl)<br>
+&gt;&nbsp;&nbsp;&nbsp;&nbsp; - Add both features to default PACKAGECONFIG<b=
+r>
+&gt;<br>
+&gt; This enables self-hosted debug configurations where OpenOCD runs on on=
+e of<br>
+&gt; the CPUs inside the SoC.<br>
+&gt;<br>
+&gt; Upstream-Status: Submitted<br>
+&gt; - <a href=3D"http://openocd.zylin.com/#/c/9020/">https://eur01.safelin=
+ks.protection.outlook.com/?url=3Dhttp%3A%2F%2Fopenocd.zylin.com%2F%23%2Fc%2=
+F9020%2F&amp;data=3D05%7C02%7Cjoao.lima%40hbkworld.com%7C0be1393f749b4b3a25=
+4d08de0106cb07%7C6cce74a3397545e09893b072988b30b6%7C0%7C0%7C638949326829662=
+188%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlA=
+iOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C80000%7C%7C%7C&amp;sdata=3D=
+mr0knEMNTixqKo20WB6sAP3w0Os3PC%2FHaEMGG%2F3SDjw%3D&amp;reserved=3D0</a><br>
+&gt; - <a href=3D"http://openocd.zylin.com/#/c/9021/">https://eur01.safelin=
+ks.protection.outlook.com/?url=3Dhttp%3A%2F%2Fopenocd.zylin.com%2F%23%2Fc%2=
+F9021%2F&amp;data=3D05%7C02%7Cjoao.lima%40hbkworld.com%7C0be1393f749b4b3a25=
+4d08de0106cb07%7C6cce74a3397545e09893b072988b30b6%7C0%7C0%7C638949326829712=
+748%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlA=
+iOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C80000%7C%7C%7C&amp;sdata=3D=
+%2F%2Fc%2BmSu3HrA%2F2IWn9jqFAo4x2bNR54ABpO0mSZEZ%2FCM%3D&amp;reserved=3D0</=
+a><br>
+&gt;<br>
+&gt; Joao Lima (3):<br>
+&gt;&nbsp;&nbsp;&nbsp; openocd: bump the openocd, jimtcl versions<br>
+&gt;&nbsp;&nbsp;&nbsp; openocd: add dmem support to am64xx and j784s4 platf=
+orms<br>
+&gt;&nbsp;&nbsp;&nbsp; openocd: enable dmem and jimtcl<br>
+&gt;<br>
+&gt;&nbsp;&nbsp; ...wd_native.cfg-Add-support-for-direct.patch | 77 +++++++=
+++++++++++++<br>
+&gt;&nbsp;&nbsp; ....cfg-Add-support-for-direct-memory-a.patch | 65 +++++++=
++++++++++<br>
+&gt;&nbsp;&nbsp; .../recipes-devtools/openocd/openocd_git.bb&nbsp;&nbsp; | =
+13 +++-<br>
+&gt;&nbsp;&nbsp; 3 files changed, 151 insertions(+), 4 deletions(-)<br>
+&gt;&nbsp;&nbsp; create mode 100644 meta-oe/recipes-devtools/openocd/openoc=
+d/0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch<br>
+&gt;&nbsp;&nbsp; create mode 100644 meta-oe/recipes-devtools/openocd/openoc=
+d/0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch<br>
+&gt;<br>
+<br>
+<br>
+Thanks for the patchset, Please rebase it on latest master branch or<br>
+master-next branch and resend. While resending send the whole series<br>
+together with git send-email *.patch or something so tools like<br>
+patchwork and lore can record this as a series.<br>
+</div>
+</span></font></div>
+<br>
+HBK FiberSensing S.A. NIF: 506807312 Registered office: Via Jos=E9 R=E9gio,=
+ 256, 4485-860, Vilar do Pinheiro, Portugal. Esta mensagem e eventuais anex=
+os s=E3o confidenciais e destinados exclusivamente ao(s) destinat=E1rio(s) =
+indicado(s). Se recebeu esta mensagem por
+ engano, por favor notifique o remetente e elimine-a de imediato. =C9 proib=
+ida a divulga=E7=E3o, c=F3pia ou utiliza=E7=E3o n=E3o autorizada do seu con=
+te=FAdo. This message and any attachments are confidential and intended sol=
+ely for the designated recipient(s). If you have
+ received this message in error, please notify the sender and delete it imm=
+ediately. Unauthorized disclosure, copying, or use of its contents is prohi=
+bited.
+</body>
+</html>
+
+--_000_DB3PR09MB6202132CD2CF6FEBFB54A99C9AE7ADB3PR09MB6202eurp_--
 
