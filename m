@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9C7ECCD18E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8A8FCCD18C
 	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 12:59:47 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
- by mx.groups.io with SMTP id smtpd.web10.7551.1759409978998108487
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web11.7971.1759409986921779718
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Oct 2025 05:59:39 -0700
+ Thu, 02 Oct 2025 05:59:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SRYB6t8H;
- spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-b40f11a1027so190843966b.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aQb58qcI;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b3b3a6f4dd4so193744366b.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759409977; x=1760014777; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759409985; x=1760014785; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=djUglwClFpxCwZjm/4OZ+U4V23H7sy8vLy2dj+AkPKY=;
-        b=SRYB6t8H9vN9NpKUvSv+89eT54Z9jqbZggu0MVREP5nV7U9Zg7bHMlhk9beA6rBSg1
-         KfJ0jPjWhvhPAIYJt3Z+qzoC3QBnOAOxNcDS6m0kJBAxJOynw3nyUeNoX9xncJNB27f+
-         lWP3f25jJJaQj0JL5cSo12ZXoNxQCEJL1UsuuCBmDUQ9tGSKj7+bXGaAflzQl5lT7IA/
-         /ZrmOwtwaA22lWLl3iwTL74DhrJASCeJtmOXG6Z2ANvk+qbpn8KHnIakkra8GVc2uU/f
-         rwAXkAXeMKNUylc6RbK9JIK2PdmtLD73JRn2hSLfAgC/T1a2Q0PHGHMLMhiKXEpBUHGl
-         Z8fg==
+        bh=AeWDvbgAEuXwj8VuxAsgtyW0BVgvwnc5hQdSPr7CqwE=;
+        b=aQb58qcIhBML31de+CphP/+eEuiu0yN0EpGyl+izGTBBCOCssj3yDlv46ifteq1n+/
+         Zx1afaQYLzvR1/ro78mFH3bYcvJd9KedoC+KwtZXKEdCtP2R+b4zMPyBTpOss+jfRgZ/
+         E38LyETB9OuGbaj+aQNuPbDba9TDw1qEN9bO4jzY3l0kJ1L4QrnpThy0osey8/P6DBHd
+         IvWpaV0CQ+cOVHdFefSpqyriakVSqNsa+mcHjSOVd/ok2fX9pFhPq1SJ92T5pVSFYPLC
+         6iW3lK0Orx5/wHVqiBg5jghu5+tOFFQImo+FDLXxGFy9MIYNSpJBS5UBu0aG4xQc7XQz
+         I69w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759409977; x=1760014777;
+        d=1e100.net; s=20230601; t=1759409985; x=1760014785;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=djUglwClFpxCwZjm/4OZ+U4V23H7sy8vLy2dj+AkPKY=;
-        b=chPjK2ygcsuv47WjoqdLEKiTRiZUeYGBA1ilvtv2fHJavVZzFvKgMHKh1wFrywtI5m
-         rU08mQbv4F9CF8sissCKO59f4r+K2Fw7Y+657ZKx6EFwwj6E8Rl2Q7yLMim7lqI1mH1H
-         a5oMYxElkGIprw6VVJj/EwsAPeLASfIdrB3RC26cwXm7XzsWkPFZ0moYpVWMxR2RSWHl
-         JUSTIHVH9+r0T/FFzeL3v2WuEzO8MuvlqaTNOJtFdJWkhGmXPV1dQjx7EabHxocaQs2p
-         5zB20GPbRDgqGAealXEjCTbHGPJKPRXLLxtEabnimTid4eiqSW6O/4YtszmIgbfwz32g
-         dzbw==
-X-Gm-Message-State: AOJu0Yx90ZG3YKs9Fy+HGChMxE8e4Y8FpXVbLRYWozZqYlZtNWy3TN5F
-	1GzD6uOeUuO8Ms6mQW5Ut4poeMr4fOGzb+PYDYYLgCvUIbGAfqFJmKhLIKs09Q==
-X-Gm-Gg: ASbGncsp/+FEPeou0ZBWxwJXB3XLVud9ckWxBYrCmOKJi+S+nIUBPXRqBLYpmvK6KCK
-	7O4Bl5WgDiQ8tkOnKI0LnaIDsiYZ1D91GRCs5w2J4eet49kkSCACA0CnithNSZ6PWyuvrXMrQqc
-	lJ35vWcofBHlxWxwHqdTfynyE7/nyPo5p1nD1gn5Rqxtrj6BubGK9O3NOzjZ1Km2QRpo01Ov3i1
-	v+wK7fX3ujhkN83IlVB+H+YUA3gN7lcGi4NT4a1zX1Cso37QefK/kYxs0XMnB5rL2qFHlWHmmsj
-	SHmkAnwMb3CeXNOyGrlc+L6cM+s1q7Rg3g5CdPfz6Yg+GxINXR3JTkocn2MAPgQlT3X7jOH8/1K
-	GZAJxE4SjJwUOIU5+ARJnYPF3zQ6+pNtH7vVXHhwxI82v
-X-Google-Smtp-Source: AGHT+IER3Yp30rLsz5pDSlV2D+WibG/LF0/+wCysG4Hx3syUVo7jfibgFRF7e7EOlDaECDDb1Df2Tg==
-X-Received: by 2002:a17:907:7ba1:b0:b3c:4ebc:85dc with SMTP id a640c23a62f3a-b46e4b8f008mr943519466b.11.1759409977248;
-        Thu, 02 Oct 2025 05:59:37 -0700 (PDT)
+        bh=AeWDvbgAEuXwj8VuxAsgtyW0BVgvwnc5hQdSPr7CqwE=;
+        b=Uc66Q4RznYyVd14v7VbhW3KcVRg0O3sCFJbDl//sn+aNZdgn4MQB0X0bjWInGQpZg9
+         ToEGcUxGP8rjHpswyQ9ScBmR9uR6fM1ZBDvzQg8hF6bnTPVBGYPF8NwWz95fQfV4afW/
+         boK3qU7wq6eU0dZgAkzT7txWQchdBPh/5uYkj4WEwCmojepEpa1mEdzQ9rmk1hKT2BKS
+         Dd6fa+Iq1+4U+GrMjfzo5b/gf/PsIRrz+21uWb7Anepgxud0tLrM/DO9FXmNKi4ekDzM
+         nMIvjCpIfnchtZyF5EUnqwygueUlrpVNC3XqjA7lrgFCg1bi881BYbaP5ataNuKKZ/go
+         I7Ww==
+X-Gm-Message-State: AOJu0YwZ/01tQLA2WFj4dzCHHsXELg7oNP/KzW7+5QcHjNICCeBqZRqh
+	8EucTZGkrubrQ1t662Jef/OtwR1GUhECsFnBE36etLbLskWWyPRRDiesKHl3ng==
+X-Gm-Gg: ASbGncsnaRquWvf4Vi21/g2EKK0C1s6tvNMPu3u6a0Mg5CoDOoZGGGZEzwqu6I4ekaC
+	qAlJdNWtEL1xxvF00mIfcY8jYCIh2PgIxvgD4AnJ5W7zXHcyB/67qV72zlwA89lwsPW8wSiotoC
+	lj04yZ//jgPDb1quZbmALFAkFsVxDxGrj+/zlrIa/HS7zLt6iRy+u4d+FasjnsATOEiYB2qa5D7
+	rQNosj2X4MMv0Z/WUEeTP3Krb+SYZdOKOl8klPVEO3BLUJzaQiLJLbRh6Wy60pZgXSH5RPNqJXl
+	HxuzVGqEHD9JaX4Hf4h6tiyr5531HPfH0xkII77l15WQA7WlHjy5FoALmi15R/iFA/kmhndsFND
+	uegTPLeTURcb7ql/EPutapsfvnz5eVpLEOXu/3E+zVfzJWpblMf2EtcQ=
+X-Google-Smtp-Source: AGHT+IH8iRYmw1PNKxF6N9OcLzWkiBLFsqIdadiyHErjVoWlvY7s5KRbrcYGN2kPlk/Sh0n6AwDZIw==
+X-Received: by 2002:a17:907:96a2:b0:b44:b01a:7b45 with SMTP id a640c23a62f3a-b46e9765465mr945556666b.55.1759409985143;
+        Thu, 02 Oct 2025 05:59:45 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.36
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.44
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Oct 2025 05:59:36 -0700 (PDT)
+        Thu, 02 Oct 2025 05:59:44 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 13/26] synergy: patch CVE-2020-15117
-Date: Thu,  2 Oct 2025 14:59:13 +0200
-Message-ID: <20251002125926.2624522-14-skandigraun@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 24/26] python3-pyparted: add missing run-time dependencies
+Date: Thu,  2 Oct 2025 14:59:24 +0200
+Message-ID: <20251002125926.2624522-25-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251002125926.2624522-1-skandigraun@gmail.com>
 References: <20251002125926.2624522-1-skandigraun@gmail.com>
@@ -67,92 +67,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 12:59:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120182
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120193
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Pick commit based on [1].
+Add missing RDEPENDS for this package.
 
-Note that the pick is node from deskflow, which is open-source successor
-of synergy.
-If anyone uses thie recipe, it should be switched.
-
-[1] https://github.com/deskflow/deskflow/security/advisories/GHSA-chfm-333q-gfpp
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit db283053d096cf77df8e4444ce91e5d882f8850c)
+(cherry picked from commit 9249052f98dde632173cbad95c7e6a3cd5e42651)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../synergy/synergy/CVE-2020-15117.patch      | 48 +++++++++++++++++++
- .../recipes-support/synergy/synergy_git.bb    |  1 +
- 2 files changed, 49 insertions(+)
- create mode 100644 meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch
+ .../python-pyparted/python3-pyparted_3.12.0.bb               | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch b/meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch
-new file mode 100644
-index 0000000000..4ad2a45275
---- /dev/null
-+++ b/meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch
-@@ -0,0 +1,48 @@
-+From 79efdb7c617b809e1a2daf17441d7a30f7046aa5 Mon Sep 17 00:00:00 2001
-+From: Jnewbon <48688400+Jnewbon@users.noreply.github.com>
-+Date: Tue, 14 Jul 2020 13:14:40 +0100
-+Subject: [PATCH] Merge pull request from GHSA-chfm-333q-gfpp
-+
-+Attempts to fis DoS to servers with less then 4GB memory
-+
-+CVE: CVE-2020-15117
-+Upstream-Status: Backport [https://github.com/deskflow/deskflow/commit/0a97c2be0da2d0df25cb86dfd642429e7a8bea39]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ src/lib/synergy/ProtocolUtil.cpp | 13 ++++++++++++-
-+ 1 file changed, 12 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/lib/synergy/ProtocolUtil.cpp b/src/lib/synergy/ProtocolUtil.cpp
-+index d9f5dc324..7d2c37ff8 100644
-+--- a/src/lib/synergy/ProtocolUtil.cpp
-++++ b/src/lib/synergy/ProtocolUtil.cpp
-+@@ -61,6 +61,9 @@ ProtocolUtil::readf(synergy::IStream* stream, const char* fmt, ...)
-+     catch (XIO&) {
-+         result = false;
-+     }
-++    catch (std::bad_alloc & exception) {
-++        result = false;
-++    }
-+     va_end(args);
-+     return result;
-+ }
-+@@ -216,7 +219,15 @@ ProtocolUtil::vreadf(synergy::IStream* stream, const char* fmt, va_list args)
-+                 // allocate a buffer to read the data
-+                 UInt8* sBuffer = buffer;
-+                 if (!useFixed) {
-+-                    sBuffer = new UInt8[len];
-++                    try{
-++                        sBuffer = new UInt8[len];
-++                    }
-++                    catch (std::bad_alloc & exception) {
-++                        // Added try catch due to GHSA-chfm-333q-gfpp
-++                        LOG((CLOG_ERR "ALLOC: Unable to allocate memory %d bytes", len));
-++                        LOG((CLOG_DEBUG "bad_alloc detected: Do you have enough free memory?"));
-++                        throw exception;
-++                    }
-+                 }
-+ 
-+                 // read the data
-+-- 
-+2.30.2
-+
-diff --git a/meta-oe/recipes-support/synergy/synergy_git.bb b/meta-oe/recipes-support/synergy/synergy_git.bb
-index f2e7a91618..97891a6c86 100644
---- a/meta-oe/recipes-support/synergy/synergy_git.bb
-+++ b/meta-oe/recipes-support/synergy/synergy_git.bb
-@@ -10,6 +10,7 @@ DEPENDS = "virtual/libx11 libxtst libxinerama curl openssl"
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.12.0.bb b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.12.0.bb
+index 9dd362766d..7a0d3987d2 100644
+--- a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.12.0.bb
++++ b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.12.0.bb
+@@ -17,7 +17,10 @@ DEPENDS += "parted"
  
- SRC_URI = "git://github.com/symless/synergy-core;protocol=https;nobranch=1"
-+SRC_URI += "file://CVE-2020-15117.patch"
+ RDEPENDS:${PN}:class-target += " \
+     parted (>= 2.3) \
+-    python3-stringold python3-codecs python3-math \
++    python3-codecs \
++    python3-math \
++    python3-numbers \
++    python3-stringold \
+ "
+ RDEPENDS:${PN}:class-native = ""
  
- # Version 1.10.1-stable
- SRCREV ?= "1b4c076127687aceac931d269e898beaac1cad9f"
 
