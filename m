@@ -1,94 +1,244 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AF96CAC5B8
-	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 04:42:34 +0000 (UTC)
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
- by mx.groups.io with SMTP id smtpd.web11.1585.1759380145754189820
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A58FCAC5B0
+	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 04:59:54 +0000 (UTC)
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.web11.1767.1759381191617983318
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Oct 2025 21:42:25 -0700
+ Wed, 01 Oct 2025 21:59:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JghjC22D;
- spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-72ce9790ab3so7765607b3.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 21:42:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Gy0opSkY;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: zboszor@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-b551b040930so385250a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Oct 2025 21:59:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759380145; x=1759984945; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=oqRQV+B8vvGO5hSKjBFAoKSYQZPu9ww1k9P4hdMia7I=;
-        b=JghjC22DdCzYjnfaet43V1cx5JbZ7Ge/dcTbN6vizVHhPa158l5FgWtG6xknPgr2cU
-         CShAqcfaUyNRdugaII3bP1THLfI4OgxL+7OBewGBSPg44YAyK5VFVocwRvmrVxQMhMsF
-         XHshVgEDKJVFTpWMN/k/OpAFmYKPJh/eUEUmXkFtDyi24+BMCj4crUFeJgNpN574H2hC
-         fi/BgGilEkp4PgWQg2xolWNayALb0dmTvFA6DyB89wXsP5gVgIqv0+5BP5w18BoJmFrP
-         wVD0jBSYCJP3IFI7zex599eTbqcsJTcWeJ542Kt5SOF8Z/Ut3oOJwRuVwIIeSQq5ZKm3
-         1/9Q==
+        d=gmail.com; s=20230601; t=1759381191; x=1759985991; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=gajuyVU4zV9ZOQTXrmpkzEI5HQH74omR4ucFUxaR/UA=;
+        b=Gy0opSkYNlAXhj2oZKc1JPRoz4ffjk2A2Y7q5EWymzLhpUEpirD3UWorVt8u/250jY
+         4bTPfMzKUWzh+cDUY3cSnJlS62Q3glw8zbe1vIy6pHCFKjobY9NKpEeFF9VrkC3qG6Ji
+         oPQdsFZHcJ5VgKlNyvncC9LFsvpVlRdS1IQOt9hreyo6ad3gHkvDxsOdSJJAEU7r/D/s
+         6XekRBRpeSMK+yDxrFJYLGNfcb63LyCTmLXAcTQog8pYeXEpB/AEChUcTFHmr3TtD4UF
+         l3Ip/XUSeRdv6YR2w7OnQMjLrGM3DM12UDfFvSszTC1aNc1d42vuJf3QQECSSI4jdohw
+         4Y2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759380145; x=1759984945;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=oqRQV+B8vvGO5hSKjBFAoKSYQZPu9ww1k9P4hdMia7I=;
-        b=DW6Dhj4jIW5Fwq+GAm4eOGWnqZBIf/uto9wkMA+7uk+f5zefQk1NElaaWPDfRV5d5o
-         HVevXK4qK9r9zWrRjgunVD99AW2q2DEEt4iwyM6fILF+PQa+UB6Ivjm09w9B0vfuoTyq
-         XYas3JE0IJgWUBBEbCYgZVoKt0TomY5psdpaVdXRv2J5oUi110QA2RqyImE1yT3RUbg4
-         veVaswCXfE2ddW/ke8peVu7ci8a5rw9BaYU0hdUKLoAdZFLe4JgU4Twc34kO06dPfFY+
-         iKYunFyzsFGprYGEKBc2nfYcHC0DZTlg5naDoL12q2m9JO0cn/am36QYOXmmuZ8bhjmU
-         kB0g==
-X-Gm-Message-State: AOJu0YxfCtWEuzMZLlu9W5j0vOS2CHlMhsh7r7kPdqqqP1ffh+FfP8Js
-	Q9gAxLmqhBRIL3p/eI1/0uQ36nSl4GNS/5mraPA4ucx87TURUA7/lxcaBtHHlcf4
-X-Gm-Gg: ASbGnctX3/52yWBqmafyTb1L5/7nXe5CnF7oXSL7VPMdr8iELKuae0S083L+/cw1wsP
-	hEjs64pQfZgeBcoPi0sNkDWihxhxe9N2Tnzwj1kjZDDZJwA2HbolA/G6+ha8BTtU1owVZOonVNj
-	4OhA5CiGNPgOiyzm1XTMzjkuRYargXubV17Bb4ivj+ksKoFmMJhSyhdbDjX6/H8RcMO90CEPe++
-	AwCBBYDhazbOK/DmOHOpqIHdihjZcEtw1H8JuIwxtDfJldiKz5cQouW/AQRp0XbS0yOX9hJ2lje
-	8GIQABeXQSoGFwLbh5YmGp6ffLTeO2HbfX8GrXkH3a5FUnWHF9z316MSHI1K55JRRm+3SQvALcn
-	WJDCupPbCK9irxzi/qa4CJI/XcKWVyWGalmcfrXzLdaAHgQFqnSPh
-X-Google-Smtp-Source: AGHT+IHbeOBIqppR2y+W/uHryGf+vvOrU1yO5lsgqtbHdWmqxeZz5tNxd/7Tw+ZnChtazosOuyIsnA==
-X-Received: by 2002:a05:690c:a0a7:10b0:744:21d9:f5c3 with SMTP id 00721157ae682-77f6f346fb3mr67231607b3.28.1759380144369;
-        Wed, 01 Oct 2025 21:42:24 -0700 (PDT)
-Received: from localhost.localdomain ([67.233.61.26])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-77f81c35c4csm5245207b3.25.2025.10.01.21.42.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Oct 2025 21:42:24 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] nspr: upgrade 4.36 -> 4.37
-Date: Thu,  2 Oct 2025 00:42:17 -0400
-Message-ID: <20251002044217.13563-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1759381191; x=1759985991;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=gajuyVU4zV9ZOQTXrmpkzEI5HQH74omR4ucFUxaR/UA=;
+        b=Bm1skjouvWZzg2OwSBHSnxD/QlvG84LJrORUMB4DqymVeCRL4tAxVfhES7C3UAZHFh
+         DZJ3uXEjJTA7EAfJCKk0XUGDJh0T06MDd3B7FWQ6Le27Ug3mq7rHddoylH5OfqDUiZEX
+         oJwId9CmbCIUnhweGy6yE3HHZRF4mtJYgJR3y8M83iKn70VKoS5vk21ZF+yLjMtvzrSX
+         0yMpcvhRzVYlaIGkO9MFh+K7m2m84DGXLlfi1OS2qwQlGddJ0QExFv3Liowif6sTluvq
+         MEspSZVRbUUciwX8kRiYkYPStjhEohkgtkCFR6VOblSYs4jZ9yony65VqPxFt7/IZeIy
+         euLg==
+X-Gm-Message-State: AOJu0YxR/uK2F9V7HsRraAV+gZj+soAj+VTan0bN+BnzA1eRRgeqrmyx
+	SnFc/AIQmHkZcHd8AZL3Jg4M5++Zgm2u9K1rET+445GrjZOLp8FgQcW6
+X-Gm-Gg: ASbGncupsdxsttxCzOFh/np87+QVRekCE/c6YQd95POd+es72zp+uv+bC1x8INiXo7d
+	awuXz9SGB4+kAzaFVD0JBtqICoYbvLq0dl9u+SoQU+knIFNetTHwCJmG2h8hKZgN5pOwIjet8qB
+	zEm6LBWoW4qzuUtaAxu9VOgbfzWBl5P1iWYcgXKjShZuTkhbJEePD0Q/jDryfcLsshBZlyNb9ka
+	lDkQzlghAP5axRDSWv8aqSpDn4LRwT9Hzw1NoEbBL1B9XYbhULap4DgB7Ad9TmUjn2B3LCwWT+6
+	K59AA3VQRLZ30DD6bALYBc0uE/Jo7bMM+LbNd6dkDYWTALw6RK0OaKbI6027+HnCEaxOmCUT8RG
+	nToOhFG0eTXw/o9UqNqkPVcnVGMUP6/KzfgAiuXWc4qvYBkNhs1uzsyUInRJzoROMxqmU0dfXI5
+	Pm/vkQ
+X-Google-Smtp-Source: AGHT+IE5Vq5yfd6EvZqLHDQUYM8eajgc9Q4QyyaQGgaJySapiTiGhoYmM0VFTwyiBJ1p4+InAo3Osw==
+X-Received: by 2002:a17:902:c952:b0:24e:e5c9:ecf7 with SMTP id d9443c01a7336-28e7f48a272mr78953505ad.34.1759381190684;
+        Wed, 01 Oct 2025 21:59:50 -0700 (PDT)
+Received: from [192.168.2.143] (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-28e8d110d00sm12649475ad.4.2025.10.01.21.59.48
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 01 Oct 2025 21:59:50 -0700 (PDT)
+Message-ID: <627836e9-66b1-4ab3-a694-263f4c94eef9@gmail.com>
+Date: Thu, 2 Oct 2025 06:59:45 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-oe][PATCH 1/2] mariadb: Fix a crash in my_convert()
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20251001081804.422541-1-zboszor@gmail.com>
+ <CAMKF1sqUtWKuxE8gEEwZEx+_2Z5y==tAceCwpnR1Abw18qN3bQ@mail.gmail.com>
+ <813ed6ab-356e-4378-9186-2c06b98f3399@gmail.com>
+ <CAMKF1so5GUbhtjKgfWT-6no8_CDbjBhFjYbj32YcRsbaRndhcQ@mail.gmail.com>
+Content-Language: en-US
+From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
+In-Reply-To: <CAMKF1so5GUbhtjKgfWT-6no8_CDbjBhFjYbj32YcRsbaRndhcQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 04:42:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120156
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 04:59:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120157
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- meta-oe/recipes-support/nspr/{nspr_4.36.bb => nspr_4.37.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/nspr/{nspr_4.36.bb => nspr_4.37.bb} (98%)
+2025. 10. 02. 6:28 keltezéssel, Khem Raj írta:
+> On Wed, Oct 1, 2025 at 9:13 PM Böszörményi Zoltán <zboszor@gmail.com> wrote:
+>> 2025. 10. 01. 18:53 keltezéssel, Khem Raj írta:
+>>> On Wed, Oct 1, 2025 at 1:18 AM Zoltán Böszörményi <zboszor@gmail.com> wrote:
+>>>> In some cases (most notably when running mysqldump),
+>>>> the server crashes in the my_convert() function, in
+>>>> a code protected by
+>>>>
+>>>>     #if defined(__i386__) || defined(__x86_64__)
+>>>>     ...
+>>>>     #endif
+>>>>
+>>>> The crash does not happen with the generic code.
+>>>> Remove the x86[-64] specific optimization.
+>>>>
+>>>> Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+>>>> ---
+>>>>    meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
+>>>>    ...move-x86-specific-loop-in-my_convert.patch | 89 +++++++++++++++++++
+>>>>    2 files changed, 90 insertions(+)
+>>>>    create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-specific-loop-in-my_convert.patch
+>>>>
+>>>> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+>>>> index 13e55ebacd..67dd687c02 100644
+>>>> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
+>>>> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+>>>> @@ -24,6 +24,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+>>>>               file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+>>>>               file://0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch \
+>>>>               file://riscv32.patch \
+>>>> +           file://0001-Remove-x86-specific-loop-in-my_convert.patch \
+>>>>              "
+>>>>    SRC_URI[sha256sum] = "1b26c0bb2d025dbfac3b9852d2b7eafda56a171b67ac2e27831ec0414fb7df07"
+>>>>
+>>>> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-specific-loop-in-my_convert.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-specific-loop-in-my_convert.patch
+>>>> new file mode 100644
+>>>> index 0000000000..26ba08865a
+>>>> --- /dev/null
+>>>> +++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-specific-loop-in-my_convert.patch
+>>>> @@ -0,0 +1,89 @@
+>>>> +From 79d2a95391abc133e86688696ae21628b7035b2d Mon Sep 17 00:00:00 2001
+>>>> +From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?=
+>>>> + <zboszor@gmail.com>
+>>>> +Date: Wed, 1 Oct 2025 09:29:04 +0200
+>>>> +Subject: [PATCH] Remove x86 specific loop in my_convert()
+>>>> +MIME-Version: 1.0
+>>>> +Content-Type: text/plain; charset=UTF-8
+>>>> +Content-Transfer-Encoding: 8bit
+>>>> +
+>>>> +mysqldump/mariadb-dump crashes with this backtrace:
+>>>> +
+>>>> +| (gdb) bt
+>>>> +| #0  my_convert (to=<optimized out>, to_length=160, to_cs=0x55b5740fbda0 <my_charset_utf8mb4_general_ci>, from=<optimized out>, from_length=40,
+>>>> +|     from_cs=0x55b57408bda0 <my_charset_utf8mb3_unicode_ci>, errors=0x7f950c35cd6c) at /usr/src/debug/mariadb/11.8.3/strings/ctype.c:1256
+>>>> +| #1  0x000055b572d9f4a0 in copy_and_convert (to=0x7f94fc00c9db "Configuratiogicate_log\020automagicate_log\017is_done_message\017is_done_message",
+>>>> +|     to_length=<optimized out>, to_cs=<optimized out>, from=0x7f94fc059f37 "Configuration downloading from portal...", from_length=40, from_cs=<optimized out>,
+>>>> +|     errors=0x7f950c35cd6c) at /usr/src/debug/mariadb/11.8.3/sql/sql_string.h:53
+>>>> +| #2  Protocol::net_store_data_cs (this=0x7f94fc001260, from=0x7f94fc059f37 "Configuration downloading from portal...", length=40, from_cs=<optimized out>,
+>>>> +|     to_cs=<optimized out>) at /usr/src/debug/mariadb/11.8.3/sql/protocol.cc:114
+>>>> +| #3  0x000055b572da103f in Protocol::send_result_set_row (this=this@entry=0x7f94fc001260, row_items=row_items@entry=0x7f94fc013418)
+>>>> +|     at /usr/src/debug/mariadb/11.8.3/sql/protocol.cc:1359
+>>>> +| #4  0x000055b572e19442 in select_send::send_data (this=0x7f94fc014f78, items=...) at /usr/src/debug/mariadb/11.8.3/sql/sql_class.cc:3294
+>>>> +| #5  0x000055b572ef7c69 in select_result_sink::send_data_with_check (u=<optimized out>, sent=<optimized out>, this=<optimized out>, items=...)
+>>>> +|     at /usr/src/debug/mariadb/11.8.3/sql/sql_class.h:6264
+>>>> +| #6  select_result_sink::send_data_with_check (this=<optimized out>, items=..., u=<optimized out>, sent=<optimized out>)
+>>>> +|     at /usr/src/debug/mariadb/11.8.3/sql/sql_class.h:6254
+>>>> +| #7  end_send (join=<optimized out>, join_tab=<optimized out>, end_of_records=<optimized out>) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:25629
+>>>> +| #8  0x000055b572ec38b6 in evaluate_join_record (join=join@entry=0x7f94fc014fa0, join_tab=join_tab@entry=0x7f94fc016940, error=error@entry=0)
+>>>> +|     at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:24523
+>>>> +| #9  0x000055b572edcbf2 in sub_select (join=0x7f94fc014fa0, join_tab=0x7f94fc016940, end_of_records=<optimized out>)
+>>>> +|     at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:24290
+>>>> +| #10 0x000055b572f119c6 in do_select (join=0x7f94fc014fa0, procedure=<optimized out>) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:23801
+>>>> +| #11 JOIN::exec_inner (this=this@entry=0x7f94fc014fa0) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:5071
+>>>> +| #12 0x000055b572f11d43 in JOIN::exec (this=this@entry=0x7f94fc014fa0) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:4859
+>>>> +| #13 0x000055b572f0ffe6 in mysql_select (thd=thd@entry=0x7f94fc000cd8, tables=0x7f94fc013f38, fields=..., conds=0x0, og_num=0, order=0x0, group=0x0, having=0x0,
+>>>> +|     proc_param=0x0, select_options=551922436864, result=0x7f94fc014f78, unit=0x7f94fc005038, select_lex=0x7f94fc013160)
+>>>> +|     at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:5387
+>>>> +| #14 0x000055b572f107dd in handle_select (thd=thd@entry=0x7f94fc000cd8, lex=lex@entry=0x7f94fc004f58, result=result@entry=0x7f94fc014f78,
+>>>> +|     setup_tables_done_option=setup_tables_done_option@entry=0) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:633
+>>>> +| #15 0x000055b572e77d9e in execute_sqlcom_select (thd=thd@entry=0x7f94fc000cd8, all_tables=0x7f94fc013f38) at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:6190
+>>>> +| #16 0x000055b572e877be in mysql_execute_command (thd=thd@entry=0x7f94fc000cd8, is_called_from_prepared_stmt=is_called_from_prepared_stmt@entry=false)
+>>>> +|     at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:3975
+>>>> +| #17 0x000055b572e88e03 in mysql_parse (thd=0x7f94fc000cd8, rawbuf=<optimized out>, length=<optimized out>, parser_state=<optimized out>)
+>>>> +|     at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:7905
+>>>> +| #18 0x000055b572e8b2a1 in dispatch_command (command=command@entry=COM_QUERY, thd=thd@entry=0x7f94fc000cd8, packet=packet@entry=0x7f94fc0088a9 "",
+>>>> +|     packet_length=packet_length@entry=152, blocking=blocking@entry=true) at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:1903
+>>>> +| #19 0x000055b572e8cf7c in do_command (thd=thd@entry=0x7f94fc000cd8, blocking=blocking@entry=true) at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:1416
+>>>> +| #20 0x000055b572fcfc0d in do_handle_one_connection (connect=<optimized out>, put_in_cache=true) at /usr/src/debug/mariadb/11.8.3/sql/sql_connect.cc:1415
+>>>> +| #21 0x000055b572fcffc5 in handle_one_connection (arg=arg@entry=0x55b57943cbd8) at /usr/src/debug/mariadb/11.8.3/sql/sql_connect.cc:1327
+>>>> +| #22 0x000055b573382440 in pfs_spawn_thread (arg=0x55b5795eb598) at /usr/src/debug/mariadb/11.8.3/storage/perfschema/pfs.cc:2198
+>>>> +| #23 0x00007f952e8571dd in start_thread (arg=<optimized out>) at pthread_create.c:448
+>>>> +| #24 0x00007f952e8d318c in __GI___clone3 () at ../sysdeps/unix/sysv/linux/x86_64/clone3.S:78
+>>>> +
+>>>> +Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+>>>> +Upstream-Status: Inappropriate [oe specific]
+>>> This seems to be not OE specific, how does it manifest just in OE ?
+>> No idea.
+>>
+>> According to the backtrace, it's a crash in the conversion from
+>> utf8mb3 to utf8mb4. As such, it may be an unaligned access,
+>> likely brought forth by GCC 15. A better fix may be to check
+>> the pointer value alignment and only run the optimized code
+>> if data pointed by both pointers have 4 byte alignment.
+>>
+>> FWIW, we have a special upgrade procedure on several oe builds
+>> to carry over crucial data, including the database which may
+>> have been created with an old database version using the
+>> "utf8" charset, which defaulted to "utf8mb3" in MariaDB
+>> a few releases ago. IIRC, that default has changed, or just
+>> the recommendation was that "utf8mb4" should be used explicitly.
+>>
+>> I am using meta-intel and MACHINE="intel-corei7-64" for a long time.
+>>
+>> The crash can be _randomly_ reproduced with oe master and
+>> MariaDB 11.4.6, 11.4.8 and 11.8.3 LTS versions but the
+>> "special loop for i386" code is also in the 10.11.x and we haven't
+>> seen a crash with older Yocto versions. ¯\_(ツ)_/¯
+> Well, it will result in performance regression in character conversion routines
+> for x86. while it is making things work this definitely should be
+> informed upstream
 
-diff --git a/meta-oe/recipes-support/nspr/nspr_4.36.bb b/meta-oe/recipes-support/nspr/nspr_4.37.bb
-similarity index 98%
-rename from meta-oe/recipes-support/nspr/nspr_4.36.bb
-rename to meta-oe/recipes-support/nspr/nspr_4.37.bb
-index c129362539..1f7c11a145 100644
---- a/meta-oe/recipes-support/nspr/nspr_4.36.bb
-+++ b/meta-oe/recipes-support/nspr/nspr_4.37.bb
-@@ -23,7 +23,7 @@ CACHED_CONFIGUREVARS:append:libc-musl = " CFLAGS='${CFLAGS} -D_PR_POLL_AVAILABLE
- UPSTREAM_CHECK_URI = "http://ftp.mozilla.org/pub/nspr/releases/"
- UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+)/"
- 
--SRC_URI[sha256sum] = "55dec317f1401cd2e5dba844d340b930ab7547f818179a4002bce62e6f1c6895"
-+SRC_URI[sha256sum] = "5f9344ed0e31855bd38f88b33c9d9ab94f70ce547ef3213e488d1520f61840fa"
- 
- CVE_PRODUCT = "netscape_portable_runtime"
- 
--- 
-2.43.0
+https://jira.mariadb.org/browse/MDEV-37786
+
+> On OE side, can you check if DEFAULTTUNE has changed between working and
+> non-working builds ?
+
+I will check that.
+
+>>>> +---
+>>>> + strings/ctype.c | 16 ----------------
+>>>> + 1 file changed, 16 deletions(-)
+>>>> +
+>>>> +diff --git a/strings/ctype.c b/strings/ctype.c
+>>>> +index 629514e5e9c..d7e788c693b 100644
+>>>> +--- a/strings/ctype.c
+>>>> ++++ b/strings/ctype.c
+>>>> +@@ -1243,22 +1243,6 @@ my_convert(char *to, uint32 to_length, CHARSET_INFO *to_cs,
+>>>> +
+>>>> +   length= length2= MY_MIN(to_length, from_length);
+>>>> +
+>>>> +-#if defined(__i386__) || defined(__x86_64__)
+>>>> +-  /*
+>>>> +-    Special loop for i386, it allows to refer to a
+>>>> +-    non-aligned memory block as UINT32, which makes
+>>>> +-    it possible to copy four bytes at once. This
+>>>> +-    gives about 10% performance improvement comparing
+>>>> +-    to byte-by-byte loop.
+>>>> +-  */
+>>>> +-  for ( ; length >= 4; length-= 4, from+= 4, to+= 4)
+>>>> +-  {
+>>>> +-    if ((*(uint32*)from) & 0x80808080)
+>>>> +-      break;
+>>>> +-    *((uint32*) to)= *((const uint32*) from);
+>>>> +-  }
+>>>> +-#endif /* __i386__ */
+>>>> +-
+>>>> +   for (; ; *to++= *from++, length--)
+>>>> +   {
+>>>> +     if (!length)
+>>>> +--
+>>>> +2.51.0
+>>>> +
+>>>> --
+>>>> 2.51.0
+>>>>
 
 
