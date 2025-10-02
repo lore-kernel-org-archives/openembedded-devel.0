@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CE83CCD18A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9C7ECCD18E
 	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 12:59:47 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web10.7554.1759409982694127997
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web10.7551.1759409978998108487
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Oct 2025 05:59:43 -0700
+ Thu, 02 Oct 2025 05:59:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZuVtAk5G;
- spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-b3d50882cc2so203867766b.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SRYB6t8H;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-b40f11a1027so190843966b.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759409981; x=1760014781; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759409977; x=1760014777; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=e4woAQ33+Jk+/ioZK1tzPIkn6ZlDGn41NiHN2juXQP8=;
-        b=ZuVtAk5GQNvUn5mw5D7K00/U+mcIe5X13N9/jmjThwb180XN85qEykY2shD3bRwCRZ
-         hMDXMntXbxsbbHoJZB9fZuanXHlklXqiEhaNzaXomYBKofdDzK67ZoZSMLh/IJWVvu+6
-         4Uu6xGGPWLFPbUxZTva6Wr0J4WJS+2uug0kRinut5Sw2HPVW9VGYdLivvcN3PV0YhUHD
-         RmmHw7SwQ15eU4xkAzTpOddTz7e0ZovzaYka5QhU+yDk2ztzZ+2Clix6sg5yIvug+hXu
-         /qgznmTtDxFltygKeIZOmMq2tswE8sDWTPhQIG/LUeuEipPidLhb+nuOfek8Suowa5lz
-         oDAg==
+        bh=djUglwClFpxCwZjm/4OZ+U4V23H7sy8vLy2dj+AkPKY=;
+        b=SRYB6t8H9vN9NpKUvSv+89eT54Z9jqbZggu0MVREP5nV7U9Zg7bHMlhk9beA6rBSg1
+         KfJ0jPjWhvhPAIYJt3Z+qzoC3QBnOAOxNcDS6m0kJBAxJOynw3nyUeNoX9xncJNB27f+
+         lWP3f25jJJaQj0JL5cSo12ZXoNxQCEJL1UsuuCBmDUQ9tGSKj7+bXGaAflzQl5lT7IA/
+         /ZrmOwtwaA22lWLl3iwTL74DhrJASCeJtmOXG6Z2ANvk+qbpn8KHnIakkra8GVc2uU/f
+         rwAXkAXeMKNUylc6RbK9JIK2PdmtLD73JRn2hSLfAgC/T1a2Q0PHGHMLMhiKXEpBUHGl
+         Z8fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759409981; x=1760014781;
+        d=1e100.net; s=20230601; t=1759409977; x=1760014777;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=e4woAQ33+Jk+/ioZK1tzPIkn6ZlDGn41NiHN2juXQP8=;
-        b=IvgqEjGjl0OApo2KIuNYLkyTumJBDvCvNqhPC81ciYEyIFKFSs3XRU97ANPscPsY87
-         RYKaUjqo5K7cm/3eyWiTp4TooebJzh6E3/RE4vemhN+5KcG1YmcIU7o/3MXdEjWXnNwb
-         42EejfNeaKsDEMUzvdosxt3M9+tKoXb6NRnJkG/grwx644eSC+179FIsCEs3PRb3F2tB
-         mQZyrtNT5hRizXrU9GrawIw+BWhAmUcfCUlxniY5tFh/72KZHsh4EaxyR8ncLDCxcwQt
-         JYgszFXCrVdOmAXsIKIn1ArVX1JVzYitiKjSwjaRaXAfk18NOsyMKfMW9dxS3ozXCq/v
-         EYIw==
-X-Gm-Message-State: AOJu0YySdLRACPUW3++nnLg1Z3RuWOMjhlHRBle+J3Je7gQmlB1hoYRf
-	J7JYTFFjPSPnPNV91ssQoyq05hMHdOismmrLCj2m7qMneACAiW5+iq/EA9mL5w==
-X-Gm-Gg: ASbGnctuCBITYHCR2eOq1G1YX+QIRh1ry4CZcb8lMY8o52pePKBtF29HMjSn1ViKgiF
-	wE5BOmN0kBdN3pYeOZiB7HnXezGEKOeEuPMYpMI3lbTiRTcSWmr4TW7njoNi8e++5z0lEHM+nMu
-	shQK5zFKTHJksTC2YNu0qF7WPMMHlD2IFlOIWfSwvyVNh0wg3lX0FeIEaIrO5Fj07SpCj021h3W
-	fSeX/mCZ8/GhzVhdWlhnKyEMvV0KARlvcajlGn6vemudo3Xpx2AGoD1hybFyVimHs+LJDn++8Ed
-	pTIM50WMPoddmhN5MnnX2Yy8w8xzeNlvO38KMYPnxxwuBn31RAll1hfqS6l3xDkSs0mxdomRBDE
-	qFfSuPwmPj2nU94VggHnGPud+LhvrP7brSD8WNf7SSzLd
-X-Google-Smtp-Source: AGHT+IHOnHv859GP5pnTwyHiWaEJKSZkGj90TkiiveJernFgOa6BMHws+taB2+YXUOXJCdRu3oOpRA==
-X-Received: by 2002:a17:907:3f9e:b0:b3c:82d5:211c with SMTP id a640c23a62f3a-b46e5d3b5famr925543466b.27.1759409980859;
-        Thu, 02 Oct 2025 05:59:40 -0700 (PDT)
+        bh=djUglwClFpxCwZjm/4OZ+U4V23H7sy8vLy2dj+AkPKY=;
+        b=chPjK2ygcsuv47WjoqdLEKiTRiZUeYGBA1ilvtv2fHJavVZzFvKgMHKh1wFrywtI5m
+         rU08mQbv4F9CF8sissCKO59f4r+K2Fw7Y+657ZKx6EFwwj6E8Rl2Q7yLMim7lqI1mH1H
+         a5oMYxElkGIprw6VVJj/EwsAPeLASfIdrB3RC26cwXm7XzsWkPFZ0moYpVWMxR2RSWHl
+         JUSTIHVH9+r0T/FFzeL3v2WuEzO8MuvlqaTNOJtFdJWkhGmXPV1dQjx7EabHxocaQs2p
+         5zB20GPbRDgqGAealXEjCTbHGPJKPRXLLxtEabnimTid4eiqSW6O/4YtszmIgbfwz32g
+         dzbw==
+X-Gm-Message-State: AOJu0Yx90ZG3YKs9Fy+HGChMxE8e4Y8FpXVbLRYWozZqYlZtNWy3TN5F
+	1GzD6uOeUuO8Ms6mQW5Ut4poeMr4fOGzb+PYDYYLgCvUIbGAfqFJmKhLIKs09Q==
+X-Gm-Gg: ASbGncsp/+FEPeou0ZBWxwJXB3XLVud9ckWxBYrCmOKJi+S+nIUBPXRqBLYpmvK6KCK
+	7O4Bl5WgDiQ8tkOnKI0LnaIDsiYZ1D91GRCs5w2J4eet49kkSCACA0CnithNSZ6PWyuvrXMrQqc
+	lJ35vWcofBHlxWxwHqdTfynyE7/nyPo5p1nD1gn5Rqxtrj6BubGK9O3NOzjZ1Km2QRpo01Ov3i1
+	v+wK7fX3ujhkN83IlVB+H+YUA3gN7lcGi4NT4a1zX1Cso37QefK/kYxs0XMnB5rL2qFHlWHmmsj
+	SHmkAnwMb3CeXNOyGrlc+L6cM+s1q7Rg3g5CdPfz6Yg+GxINXR3JTkocn2MAPgQlT3X7jOH8/1K
+	GZAJxE4SjJwUOIU5+ARJnYPF3zQ6+pNtH7vVXHhwxI82v
+X-Google-Smtp-Source: AGHT+IER3Yp30rLsz5pDSlV2D+WibG/LF0/+wCysG4Hx3syUVo7jfibgFRF7e7EOlDaECDDb1Df2Tg==
+X-Received: by 2002:a17:907:7ba1:b0:b3c:4ebc:85dc with SMTP id a640c23a62f3a-b46e4b8f008mr943519466b.11.1759409977248;
+        Thu, 02 Oct 2025 05:59:37 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.40
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.36
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Oct 2025 05:59:40 -0700 (PDT)
+        Thu, 02 Oct 2025 05:59:36 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-perl][kirkstone][PATCH 18/26] libcrypt-openssl-guess-perl: fix syntax for PROVIDES
-Date: Thu,  2 Oct 2025 14:59:18 +0200
-Message-ID: <20251002125926.2624522-19-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 13/26] synergy: patch CVE-2020-15117
+Date: Thu,  2 Oct 2025 14:59:13 +0200
+Message-ID: <20251002125926.2624522-14-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251002125926.2624522-1-skandigraun@gmail.com>
 References: <20251002125926.2624522-1-skandigraun@gmail.com>
@@ -67,31 +67,92 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 12:59:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120187
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120182
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: Peter Marko <peter.marko@siemens.com>
 
-PROVIDES_${PN} -> PROVIDES
+Pick commit based on [1].
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Note that the pick is node from deskflow, which is open-source successor
+of synergy.
+If anyone uses thie recipe, it should be switched.
+
+[1] https://github.com/deskflow/deskflow/security/advisories/GHSA-chfm-333q-gfpp
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 9d543525642a4369f60b9d3ea721e55d0a605fce)
+(cherry picked from commit db283053d096cf77df8e4444ce91e5d882f8850c)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../synergy/synergy/CVE-2020-15117.patch      | 48 +++++++++++++++++++
+ .../recipes-support/synergy/synergy_git.bb    |  1 +
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch
 
-diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb
-index 3f004bb2ec..d64fc296e2 100644
---- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb
-+++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess-perl_0.15.bb
-@@ -29,7 +29,7 @@ inherit cpan ptest-perl
- BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch b/meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch
+new file mode 100644
+index 0000000000..4ad2a45275
+--- /dev/null
++++ b/meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch
+@@ -0,0 +1,48 @@
++From 79efdb7c617b809e1a2daf17441d7a30f7046aa5 Mon Sep 17 00:00:00 2001
++From: Jnewbon <48688400+Jnewbon@users.noreply.github.com>
++Date: Tue, 14 Jul 2020 13:14:40 +0100
++Subject: [PATCH] Merge pull request from GHSA-chfm-333q-gfpp
++
++Attempts to fis DoS to servers with less then 4GB memory
++
++CVE: CVE-2020-15117
++Upstream-Status: Backport [https://github.com/deskflow/deskflow/commit/0a97c2be0da2d0df25cb86dfd642429e7a8bea39]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/lib/synergy/ProtocolUtil.cpp | 13 ++++++++++++-
++ 1 file changed, 12 insertions(+), 1 deletion(-)
++
++diff --git a/src/lib/synergy/ProtocolUtil.cpp b/src/lib/synergy/ProtocolUtil.cpp
++index d9f5dc324..7d2c37ff8 100644
++--- a/src/lib/synergy/ProtocolUtil.cpp
+++++ b/src/lib/synergy/ProtocolUtil.cpp
++@@ -61,6 +61,9 @@ ProtocolUtil::readf(synergy::IStream* stream, const char* fmt, ...)
++     catch (XIO&) {
++         result = false;
++     }
+++    catch (std::bad_alloc & exception) {
+++        result = false;
+++    }
++     va_end(args);
++     return result;
++ }
++@@ -216,7 +219,15 @@ ProtocolUtil::vreadf(synergy::IStream* stream, const char* fmt, va_list args)
++                 // allocate a buffer to read the data
++                 UInt8* sBuffer = buffer;
++                 if (!useFixed) {
++-                    sBuffer = new UInt8[len];
+++                    try{
+++                        sBuffer = new UInt8[len];
+++                    }
+++                    catch (std::bad_alloc & exception) {
+++                        // Added try catch due to GHSA-chfm-333q-gfpp
+++                        LOG((CLOG_ERR "ALLOC: Unable to allocate memory %d bytes", len));
+++                        LOG((CLOG_DEBUG "bad_alloc detected: Do you have enough free memory?"));
+++                        throw exception;
+++                    }
++                 }
++ 
++                 // read the data
++-- 
++2.30.2
++
+diff --git a/meta-oe/recipes-support/synergy/synergy_git.bb b/meta-oe/recipes-support/synergy/synergy_git.bb
+index f2e7a91618..97891a6c86 100644
+--- a/meta-oe/recipes-support/synergy/synergy_git.bb
++++ b/meta-oe/recipes-support/synergy/synergy_git.bb
+@@ -10,6 +10,7 @@ DEPENDS = "virtual/libx11 libxtst libxinerama curl openssl"
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- # for backwards compatibility
--PROVIDES_${PN} += "libcrypt-openssl-guess"
-+PROVIDES += "libcrypt-openssl-guess"
+ SRC_URI = "git://github.com/symless/synergy-core;protocol=https;nobranch=1"
++SRC_URI += "file://CVE-2020-15117.patch"
  
- RDEPENDS:${PN}-ptest += "\
-     perl-module-test-more \
+ # Version 1.10.1-stable
+ SRCREV ?= "1b4c076127687aceac931d269e898beaac1cad9f"
 
