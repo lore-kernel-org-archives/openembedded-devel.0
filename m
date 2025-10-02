@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C223CCD184
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B843CAC5B8
 	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 12:59:47 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web10.7556.1759409985485937856
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+ by mx.groups.io with SMTP id smtpd.web11.7970.1759409986227354509
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Oct 2025 05:59:45 -0700
+ Thu, 02 Oct 2025 05:59:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ep9NETPI;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-b403bb7843eso223038466b.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NI8KWboo;
+ spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-637dbabdb32so1740242a12.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1759409984; x=1760014784; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=/DbA2Yg6W5BgQCeGglHmm1vUAL7j4OlbmLraET34eRo=;
-        b=ep9NETPIs7KY4izS9PzNDYozd88XdnmDKGG51NbNqO164sPk3hKNRNQ+fPb/TbEeKe
-         Zr0ZVoXPuOxMM6hYlg2xbwhBoDHlY3RPdiE5cePv1yuSGTntd8kROvZueNKAp/MS+Z79
-         UXEn5XvAV1i46uxw9T55XfzADt8R6QVLsFrkIxllYdTJOPQVedmqss1wPQ2yAcWIAzRE
-         EqPbkfaHJwK/mU9iyorAthIi515rKFZRRKcKy2INVpUb0Mfns8ZNQZSA4XcvEbJoGSg9
-         2zScY4HL79ov/tLIxLCCc6/JmSSolJM+vt7eQTo9Gv+RWf4VoiYLIQjb3J5C+0SJs9sH
-         ThFQ==
+        bh=IyHxt0nwy6JYROADTaD/AJRF5Ij8hLK1yRBTT0khH8k=;
+        b=NI8KWboo04MXDhw7F4F1yNkGKwFglB7wFyGZ0h8stRUD93btammn762eLGDDeSuQ8R
+         px8YYyx1u0tt2h4npb6FfLBsZrKm3Igco4pHuuEBYTylUBICfviYycYEVOUqaEJASIKd
+         o640HjWiJ9gThkYnQL8oUbPZyYUT4a8MRJHpQsWCh2nOH6OZe/3GW5JtZtUdMgVzKeXn
+         bQnMx7lh/CD3zCDvq4yFfZ8L1CsfGxibxSw2tAfVfhosTdnsPdi4oHVsOtiRPWzP/NdE
+         dhwFf/f+8aB7DrSmMlBD0MGTz1Rwa230c/C26S9Fo5xMcJz97UajszY33/s0MBPZ1C/Q
+         ePGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1759409984; x=1760014784;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=/DbA2Yg6W5BgQCeGglHmm1vUAL7j4OlbmLraET34eRo=;
-        b=lCYurmoShxcR4K9RHcs9uJtJ8KwKR1jBPcCSmhD6u1b9VMsI6yjPrX3v9sKn4tfs6W
-         jvwetvrKdhxDNh8ZsSYo6YZQj6cAFNLvE9nVjZZIIoMGgkxpN9QuFL1szpOAQPewczMU
-         czw6YlqeKId1GhdgGPFqvW9+chO1EFOc0u5lHeoM0Q8jY3XTGjptLyuPH5i2j6rf402e
-         DDDV21u04trP/+r+FzcVv3+T0LW1C9je3lYyr+FYWUaunOLnak6XfaerCUiHiN8TBb9q
-         jQMUVHebzZcBM8Yuw+JyG/rQdctxUrIl5UkdvoFTPvdTL1oS+4/HuyExi+gj4ChkStgG
-         LvLw==
-X-Gm-Message-State: AOJu0YwaDlmI3UXuCXck6wQ7XC1VAVCKZm4u/sPZ0/XudoP6ZkHsgUj4
-	Ky7sX1srb2jWSyE4VrVYTz/wz3wwl0PtXjhu574zYFNXEF3hnsgARSGpbnEYhg==
-X-Gm-Gg: ASbGncv3jPXaXr5WG+/CgTxTBws6xrGPadiWcUrBVYXGa/NbJDxCe6gHYuhxcB1NM0g
-	he/t8qhce9YDV6F13h+aNMnrl21mx0+EREttiWoaMVyYGEahbl6vUQWkSx/KxZBGSzOTYTahZSi
-	U4QFZUqQGW0zlJx9mvrtTrP0kleN29+ThilThqijR7WCEUl9eLjCApw1I1sll3Rn7tnNJk3otZg
-	pmF+hPeX52iLXFthoMQR7oqUMxiL5mhgqmWhs6uEVEEhv/qhEYo+jPnCTqNtqiD+LvRYkHLRjoA
-	TLykEwryMLsUyQ32taBttcgbcPNvl5y8jyerABBgEau2Sxkjwsnz4eooY3d8v4fbDXC7vSdAqJd
-	Lmf0VZByr3WEAplQPEPihq2yvtqNKtuZVsxeIA3LHA6Pn7Qond053Kq0=
-X-Google-Smtp-Source: AGHT+IGW8VV+P8mhX1zEFcDtox565tDI6EpYfGQpI8Qr1QjTqNuKKTZEQv4+SZpPnxj0nwASO7Ooag==
-X-Received: by 2002:a17:907:7e9a:b0:b3d:30d8:b8a0 with SMTP id a640c23a62f3a-b46e9571897mr849720566b.52.1759409983736;
-        Thu, 02 Oct 2025 05:59:43 -0700 (PDT)
+        bh=IyHxt0nwy6JYROADTaD/AJRF5Ij8hLK1yRBTT0khH8k=;
+        b=Zez6jePwWxY/PNLC/7guvQgw10VtXSijBw9DV0dVvkq9IGEdHKjOxW5UzHSfavY8zP
+         NPRappa4EKPYwVWFoG/UE1J2/ujbv9qpVjBW4nVv1K1aVFqc7K5Stii9oO9k3LFOvvBu
+         AwfpV2W1q8AJDbfW+yl3yDytU/H9wf49EOpDmOp4abzlb0xBb9vWOzYugKaC5Y28CfZu
+         T3iZpkWg5tIwrotpGTfc8h5lZyxB4fnPHwCTMRJe0ZgUu1PVoOY0FMP+jcw74jqeGtFU
+         0Q6tSdAWqfOuGGrx5seuAJ/syoCVxC15kSy772Vm1rEFQrprZmbckkkjK98j8HdDKFw3
+         DmcQ==
+X-Gm-Message-State: AOJu0YzIgNp4FWlWAUYKpAA8on9EIeGwOarTY4CXlk7Ztr3MT/MwMHYv
+	0TmNSNZnFGHuANh+Y4+QfT3axqQ0DszVgA4GpqaViIk9oMsy7Qbg9jGjWUWghw==
+X-Gm-Gg: ASbGncv9dSWvs6DQtHFDPcmeNZ8mdUQ/LPPkZ4j1JMLifkOfi68JDcHQBrRntM+T0gL
+	+3HwkUx87Jh5EE+aTLHL+OUNRh/EVBcnD3NQOpyMcjGsg+FchsyszvRcsCKs+QoRPXYA7eapBl+
+	P7CV1EPLDqCX/3TAXus5tmWVgrCNT9tHR3M6n+cuwYLNaZB1bDreZ0fLoTX9egVCXcVF5drloq6
+	+WqB6tSyc99SePV58wO9eHNM1VlMMyeoIIk4NMdi2MLgw+/9hbP+yBmSNhjsXZeNayiS/DhtmPu
+	emQts0OdH4DhkTiyvgyNFJA3FotPqni9bk53ydbO3Vtt3rp+s47CpPcY//X+K/8pE9yri8l5Nin
+	CcKUKvHmLb93keYLA9gIQTqFG+7Vyx+XWouDSHyrn+9OZunYqSIqvoEwZucTXGSHH1Q==
+X-Google-Smtp-Source: AGHT+IHFjN/yiLy4RwDugl/hbc9v4hzDTH2r+LcwH6z1F4153+yM8bSwr/CUeoN9CN7mcfWxw0e2Dg==
+X-Received: by 2002:a17:907:9494:b0:b3e:c99b:c78a with SMTP id a640c23a62f3a-b46eafcc2d1mr967933666b.54.1759409984420;
+        Thu, 02 Oct 2025 05:59:44 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.43
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Oct 2025 05:59:43 -0700 (PDT)
+        Thu, 02 Oct 2025 05:59:44 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH 22/26] python3-hpack: add missing run-time dependencies
-Date: Thu,  2 Oct 2025 14:59:22 +0200
-Message-ID: <20251002125926.2624522-23-skandigraun@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 23/26] python3-thrift: add missing run-time dependencies
+Date: Thu,  2 Oct 2025 14:59:23 +0200
+Message-ID: <20251002125926.2624522-24-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251002125926.2624522-1-skandigraun@gmail.com>
 References: <20251002125926.2624522-1-skandigraun@gmail.com>
@@ -67,7 +67,7 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 12:59:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120191
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120192
 
 From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
@@ -75,20 +75,22 @@ Add missing RDEPENDS for this package.
 
 Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 1659a00086a360f64129fb28eaaf3066ae7589d6)
+(cherry picked from commit e015b0e996aa0e442cc4e64a4ff21ae717f0ee24)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-connectivity/python-hpack/python3-hpack_4.0.0.bb    | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb  | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-connectivity/python-hpack/python3-hpack_4.0.0.bb b/meta-python/recipes-connectivity/python-hpack/python3-hpack_4.0.0.bb
-index afba98e4b3..0297cb8c27 100644
---- a/meta-python/recipes-connectivity/python-hpack/python3-hpack_4.0.0.bb
-+++ b/meta-python/recipes-connectivity/python-hpack/python3-hpack_4.0.0.bb
-@@ -8,3 +8,5 @@ SRC_URI[md5sum] = "27e01514ef06dc9fa0798d3dcb7de47c"
- SRC_URI[sha256sum] = "fc41de0c63e687ebffde81187a948221294896f6bdc0ae2312708df339430095"
+diff --git a/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb
+index 6eb896d1d2..f720537e70 100644
+--- a/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb
++++ b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb
+@@ -11,6 +11,7 @@ PYPI_SRC_URI:append = ";downloadfilename=${BP}.${PYPI_PACKAGE_EXT}"
  
- inherit pypi setuptools3
-+
-+RDEPENDS:${PN} += "${PYTHON_PN}-logging"
+ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-logging \
++    ${PYTHON_PN}-scons \
+     ${PYTHON_PN}-six \
+     ${PYTHON_PN}-stringold \
+     ${PYTHON_PN}-threading \
 
