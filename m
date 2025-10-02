@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A773FCCA471
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7705CAC5B0
 	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 12:59:57 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web11.7973.1759409988157942693
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web10.7557.1759409988893148749
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Oct 2025 05:59:48 -0700
+ Thu, 02 Oct 2025 05:59:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jdF798Hw;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-b3e9d633b78so215571266b.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=esqg/1Li;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b3e44f22f15so139260166b.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759409986; x=1760014786; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759409987; x=1760014787; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=5LLs6LdoMNjN6EobDvPqcVmhwEyfT1Rj3zkS3grlLOk=;
-        b=jdF798Hwmo16LkgPzLLlS0vLT35mviozzmfFtoGG29jjFMIZ0EOSJyIJTJziRsLwuQ
-         zxgpZdI8HkqWuxTPcs+Jm+pilDItsa1J5GlJYuDNLBn0f8+fbmaTwdRFhZ0g1E72vK6M
-         ar6msSzJo1Sk9M9tCL1UoIPxSVPANT9E0ZdybQ6dNfnZCm5dtdoDGWCRtmJvbZYk+t3B
-         +RU+c6dfmYflYOT3i8lfYovtvmK3YyEUbQ/1qMKxek6rfzSyIcZJ/CGAdPHBvaF11+1i
-         LqiJ6PnmoDp+MP20d9JjOThkVjpiXMAnBBgj2Y94vzUV3Arh1Po4NS6mY4+mo4q5urje
-         TnPw==
+        bh=ihfARbXOEOHAMOM8xT/KKw57wdpSnoRGNmn19j8Vz/0=;
+        b=esqg/1LiVToB6ax5twBuwLgAb8eZ9KDOtG2QQIgGh7jq6o3z8U14GjAdu5TC0xunE0
+         pq9CvMgxl6o1Y5mFuudyE4/2ZfIYlcrACGgYqTG71F9m9Nwzu719Hd4eacvxcKGqCdAt
+         0+kyDonXd4w90W3n1UoOtKv9HD/2ZqOGms4g5TyN0VdS3WXGvZ1Va3nJkbuw9g+iMAJ+
+         BvfzRk451LVNmhAYiwnZ72xwz9NSYryunK83mS3n+Lo3OF075cfi36XBloYjdY4lAMZb
+         zNGpr2o6D5fdqjfRuPAdcX11K/xOv5TlinrgWAmWOI+7Iv3YSzHM2cX0AXfaZUS6Sedi
+         wn3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759409986; x=1760014786;
+        d=1e100.net; s=20230601; t=1759409987; x=1760014787;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=5LLs6LdoMNjN6EobDvPqcVmhwEyfT1Rj3zkS3grlLOk=;
-        b=bhORuwVu+AY7XYAiYExqioZRN/WPbTYKxkrVwC6Da0Ibu/++qMOgaUBZq8hnbg/FJZ
-         wX2r1tGvz6zHqZcJuc2hXfR601ZU97NYRR5i45meD7bjwKnCP7w+LmSWFsY4z2SCBcbw
-         K99yByTbuym9V2Ad5Zf7jVcf8bTf8vpdEO4YiI1tcbs/LwYBCG672pYal8J+CJolzOjp
-         BMfXvVymh03Dmk9pKeYggXFLtfRN6DohttWOYi0LR9+exgCYbYixhx6Ah//hFAGMNsru
-         02LaOP6CPjbTOBo05GZyv7qTQ8W2rhmOisLf1H/O6cr5TrGLqxQ3lX3WnguciH+FeztT
-         EsJA==
-X-Gm-Message-State: AOJu0YwYLE2L43/x4/fiIM2wX6MAKnj2bSxRTM6iN0qSKZ1HSefUTxS1
-	plwG1Ytm+Ld0/hYN7f719lUoxBDH0SA7zc+fPXIktOinkKhq82ffeLh9uSi7Ow==
-X-Gm-Gg: ASbGncutP9T9xwWSr+gb4NnebRRAvZCtp6067I9s+yS6KYBQ+w0bH1qWID6nvjnGo0t
-	6PxekWaupoHrorIR/K5dnf3GkVOw+waPBeM/KWB6vBn67zWjXGLMu+eQITtnX5dtyStr+qIcQkV
-	bF/re0z+vkwDW+CkaDZtgk8xBhc518heQ+dwRzq7UR+h/nIBUsOHeGibYWQSdObgxLpk3w5StyB
-	4HOyQ+bLX12nWx8ZgFbvlKsluUL/Z0WyTwIT09zH/ZjHc3w8e8JE1sfQYHdIzTYAcvp1vAXXdRh
-	LWfLx7b9sq9ZYPhCv+4HZRZbPA1fo2mTtszdNeM2K5gPkj0vRBOk2fBupuQy7M9vcdMB2kYuXYp
-	l+r7W5uacSdBlMCN1vPuN/DbbR1B28D5AYvXCQqKdQJuqM6KiXX7g+pU=
-X-Google-Smtp-Source: AGHT+IHRvSTkL15Vwqjxkd3kT7AY6msRfUWKiopXKMZ284A8f8bQPhph3QXliW2oc0fky2BZmyhCkQ==
-X-Received: by 2002:a17:906:6a0c:b0:b41:8ad3:1b5c with SMTP id a640c23a62f3a-b485a069197mr456911366b.13.1759409986396;
-        Thu, 02 Oct 2025 05:59:46 -0700 (PDT)
+        bh=ihfARbXOEOHAMOM8xT/KKw57wdpSnoRGNmn19j8Vz/0=;
+        b=bDBSvMg+3suRHbdxXmRc78c9wOH1iIfedqEwEqR6HxjBLVvG1egOj4Nsme6Z52zBX1
+         uYLRfIgZwXERWtjJQe1Tlq2VR9viY/wF+TG5QJvRqIvoqzHLAW9ke157l2bf+HcBHWu+
+         Le3mxrC1W4Wcl+xbMfeuHjCJoKE4A1kfuR7d123oTuACfqT61mSHV23jMxOQOcf8hLEl
+         s9UDRTZFc3e5t2qd0rCEvFIlWFR/NtTaqpbDHtgpUwc+5i7/pEupGQc8klqzXeT/YPFr
+         DMeL155aYg1m0gqpLVG5L82MOGPcQRy8IEpZmIhDujnEBJfsUKYnV5iYak0xGsb+7Cq+
+         dAhg==
+X-Gm-Message-State: AOJu0YxODPpKcQn3D22+QqeXsELj1SxfoC9ZMwYnfBlAsH0SEjN4g4Kl
+	sse3b7VuCzvGDDqqwaaeX9kCKUCqTIW7nFULo4maELWB0zsmfZsK2444Tj6zeg==
+X-Gm-Gg: ASbGncsQiaBv36Yhzx6j9uqHDVWGY4ObmSp5y1ar4+lOE+bPZRQ0GsuseUykbbRa+nN
+	6eUqdxIkUZmycIM0DrcHGtvnNyt5calDbHXLR5rJdFVcVNVoCpcT3GeYDBJhlyVwV0cD5039fyp
+	8iHlOVCWJ0X6ggzyWtdADGYpaFspakiXqBS0MZu+XTXUSLNZxR/q6daebxYSeYNvMpf5hSwyige
+	A6NpPa/qGYGLs2qFNnvsBlS9d/sthi/CJeP/l+uAMu2iZBG1qLy5l7OrwLA1EKBzxdqHTE38ekC
+	fHq02XgeCiEx1/nYCLQ/3/ToRTbJQqooOq0/HJh9kcgDgh/hB6kfeJygk9Eev2IMOc9bnF64kq/
+	mzdoxNJKBbiwmgY7WkznqPI/QSkcYngXpI0eQJ/h/w/7tZrDblGuEQwM=
+X-Google-Smtp-Source: AGHT+IFZvVHv8K/7ikyvLRZe9MXzcc2raGoCoqj/I5WZ1y+/9ArT1rB23HoX/v/kMkuXFBI/SdEoMw==
+X-Received: by 2002:a17:906:c156:b0:b28:f64f:2fdb with SMTP id a640c23a62f3a-b46e2626cccmr856584366b.4.1759409987120;
+        Thu, 02 Oct 2025 05:59:47 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.45
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Thu, 02 Oct 2025 05:59:46 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH 25/26] python3-send2trash: add missing run-time dependencies
-Date: Thu,  2 Oct 2025 14:59:25 +0200
-Message-ID: <20251002125926.2624522-26-skandigraun@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 26/26] xfce4-sensors-plugin: correct netcat PACKAGECONFIG
+Date: Thu,  2 Oct 2025 14:59:26 +0200
+Message-ID: <20251002125926.2624522-27-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251002125926.2624522-1-skandigraun@gmail.com>
 References: <20251002125926.2624522-1-skandigraun@gmail.com>
@@ -67,28 +67,43 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 12:59:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120194
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120195
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+In case netcat PACKAGECONFIG is enabled, do_configure fails
+with the following error message:
 
-Add missing RDEPENDS for this package.
+| configure: error: hddtemp isn't queryable via netcat (use --disable-pathchecks to disable this check)
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+hddtemp service keeps a TCP port open to query the sensor data.
+In case netcat is enabled for this recipe, the configure script
+will search for the netcat binary, and will try to query this
+hddtemp port, as a sanity check. This check is performed
+independently from the hddtemp PACKAGECONFIG. Since hddtemp
+isn't running in the build environment (probably) and
+network connection is also disabled, this check fails.
+
+To avoid this problem, add the extra config argument suggested by the
+error message.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e7430b5874ae68c02a4cc0ecdbe76b62446c67c6)
+(cherry picked from commit b16f9c6f046fa6275d1afa7ee60acc8d85849163)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-extended/send2trash/python3-send2trash_1.8.0.bb     | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.0.bb b/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.0.bb
-index 963351a2e2..d8f23c1c79 100644
---- a/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.0.bb
-+++ b/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.0.bb
-@@ -7,3 +7,5 @@ inherit pypi setuptools3
- SRC_URI[sha256sum] = "d2c24762fd3759860a0aff155e45871447ea58d2be6bdd39b5c8f966a0c99c2d"
+diff --git a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.3.bb b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.3.bb
+index 142f98eef1..4c44af4410 100644
+--- a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.3.bb
++++ b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.4.3.bb
+@@ -20,7 +20,7 @@ do_configure:prepend() {
+ PACKAGECONFIG ??= "libnotify"
+ PACKAGECONFIG[libsensors] = "--enable-libsensors,--disable-libsensors, lmsensors"
+ PACKAGECONFIG[hddtemp]    = "--enable-hddtemp,--disable-hddtemp, hddtemp"
+-PACKAGECONFIG[netcat]     = "--enable-netcat,--disable-netcat, netcat"
++PACKAGECONFIG[netcat]     = "--enable-netcat --disable-pathchecks,--disable-netcat, netcat"
+ PACKAGECONFIG[libnotify]  = "--enable-notification,--disable-notification, libnotify"
  
- PYPI_PACKAGE = "Send2Trash"
-+
-+RDEPENDS:${PN} += "${PYTHON_PN}-datetime"
+ FILES_SOLIBSDEV = "${libdir}/xfce4/modules/lib*${SOLIBSDEV}"
 
