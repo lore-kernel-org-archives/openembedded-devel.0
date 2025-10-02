@@ -2,135 +2,198 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19759CAC5B0
-	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 12:59:37 +0000 (UTC)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
- by mx.groups.io with SMTP id smtpd.web10.7547.1759409974036909902
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9AA2CAC5B8
+	for <webhook@archiver.kernel.org>; Thu,  2 Oct 2025 12:59:36 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web10.7542.1759409970162492810
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Oct 2025 05:59:34 -0700
+ Thu, 02 Oct 2025 05:59:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LkXh6NEQ;
- spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-6364eb32535so1814876a12.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=c4FE9Wel;
+ spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-6364eb32535so1814768a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 05:59:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759409972; x=1760014772; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=qZvv48Px9o/DMmplii7NhMuBO9sdnFKQgervs0iBYj4=;
-        b=LkXh6NEQZ+1XRLtlpHfhtI9YoiBUJFUZRq0wgfgWnZzesLmCROMO7m3q28JKmd1C3d
-         hqmgIHd9H2y1q6WkCDQa2vfLIupw5UiCc18nTqKl0iabkAw4CkYKR+1c6Kv5/8PrbQ7g
-         991xV0TymCCd6t2QSCRQUbOyfJCbhgC34sgiKW01J6f74b4GrSnqgUqa8+K8DRFz2MUb
-         nyS+KWjJaYUDZ4RhM8+iisbMADKsJZFXqcFbIQSS7evVg6SAXif0UHrUVdPLRXNDTLbk
-         BhoHTUzBXfizl+deHuMjYpUySiUpau9MgQB6vhfXgkPZAdPasiQ08fWF5jJjdoml2naI
-         xS1w==
+        d=gmail.com; s=20230601; t=1759409968; x=1760014768; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=wZ5qMfX6Z914egkJ+fc+qRsh/IXG01xofzjxwGsgjWc=;
+        b=c4FE9WelwDt5NNBUEbLnSTR5lI2kwOCF2kMI1ByQfGom9t/ChY2jSg5gT82bS8bCXY
+         oZZundSzCkd2yzMQcnF5RljuhF/fye+v6m5QyTzAUf4N7m9CRY0ddzoPoE120BDheQM/
+         I+3XIW74tI80uwaZNiRqF4ZaWOxdDiIB6unFmbTRoH7/8SCS3pu+IPKIhTN/YOADlgi0
+         OOJ+pfd7Ot3+YlYXjYyvwFFTtbY/PHoPod1lJPI14wD9p74TkY8AUCIcVHTuGHHc3ply
+         9CFw3T9hwvdnZtSuMSmucaDArFKewLdBU3YwoOhH4y9hjnzHWpAJXs61NxtMWiW5MNTr
+         bxkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759409972; x=1760014772;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=qZvv48Px9o/DMmplii7NhMuBO9sdnFKQgervs0iBYj4=;
-        b=iaIvUkH2IcW06rP7r4lmQi2U0i5oqa62tCU0AxzvF/mJVbGrXjF0Jpjh6T9ZdAPYAd
-         6qx+SiPE5FKbRmtUhnpaPGWeBDQGMhkWvkLtAEg6uzsp1hDeyCK0Di8VKrt12oqpCPlP
-         phpZ9YpiOyHWbo5bo3/Po+xZhD+jfCQ6rnKg5k/7v8K3WkQYbMDc2Dibwv/2pgBmqmrp
-         ia0jzDFgrTtYUAn64FkCB67FoQhhVD8OFaVaQbtIsII6+9mNIA/6P1G3q81ZBLQrgYmO
-         jbZHMBrKqvyucSoVmUkezQB4Zk2EW8eCVlgo8Y3VcQXJ6dOOfW/D5bHIa3D1MF6B6107
-         mAjg==
-X-Gm-Message-State: AOJu0Yw+GSAuy1k84U66I8nA+wU0djGrgZ9OdrWPuLFBmrjrGFxt27ut
-	+2RzCofWraJ49hkQufbIY9bwk7y10KubY+XcPf+aDDZyzvKqOxooEyZaxhNXvA==
-X-Gm-Gg: ASbGncshYGdUAGecWKEuY+LQ+TwM0hfhOyGHfu/r253NDzIXRSzCM+qTC3NmVDGCfsq
-	6wiZ4wUwXbwuvnc3LgA/iWUNQNQJZAZ3/ge/MWpQ5rMbhvY1VQZx8/FD2Bak/xdrEmxUQLaxFY1
-	t1Zsk6t111Cxgga4bfpers+NCjHGutZ0XzWc67XRkPjY2Wr/AbMWR4zMa/sL/QnOYRYjY7ix2fH
-	//AtwNGHqax5On0P0ivt+ebW+MLIkXowBI5u5K2CKNtYcBnOM6mBriK1Qe408i6Wt63Xupm9C4b
-	sFVOsr30IEOiNlilduoKM7Qi4fxAwV2rM8YkYn/8WugAlggNCibiKzlGEjtHCPJ8uWVQt1qmBfk
-	T35gQ/8xRJ8hubW7jWcRBqdudBvNCZ9wCgkyvs3thr9TkA9E4DO3TWJwHlwNklDML+g==
-X-Google-Smtp-Source: AGHT+IGsQuAn+rv3RX/rgMzifreNS7Hrt3z7q35GCNzpkR0yw/F3jMug8hul7ElYI2lUYOWebuJfGw==
-X-Received: by 2002:a17:907:7212:b0:b43:b7ec:b891 with SMTP id a640c23a62f3a-b46e3ae19e4mr903184566b.28.1759409972316;
-        Thu, 02 Oct 2025 05:59:32 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1759409968; x=1760014768;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=wZ5qMfX6Z914egkJ+fc+qRsh/IXG01xofzjxwGsgjWc=;
+        b=gzrF6Gge2YA+vThuJ+P9gzM7z2rJXPt9iNq0e6YgdJmcuibit9F572+L+gXaPQJ1bq
+         0eAWcJeZLpQcrrkYUE98Tm3J9C/+veh9ZpLTaC2LsBLFI8hxZKtf5JQL+JO+TfNYuHGl
+         j9k3FpECo+6/r/cYc/r6b8fjeGmFPod0jvt4sWUBGEHX6JLCwd5desVvdar8SJthvPJf
+         RxuomPktOdEVq8ShA9zJaU8ffDtZfhudkoIeu1ri5udVhSL+R6XntY2NuQdFw+XrATPv
+         XSnhpTM2Q51dOElXJR+3NklvoltdsbQLvoOxOdk5FyoL6/o/HlHDTeHNhdgC80xVrYsV
+         wM9w==
+X-Gm-Message-State: AOJu0Yz4e/tykHD+x6Ib6LGHYq5WEHRQLG2/gwNoF3GvJbelSEUCcUL8
+	hNY43XH+YJfhBOafbk0DHWt8uhfaHjTeJYNHo7R+rUcBN8xA/hUTfCu9aLuZzQ==
+X-Gm-Gg: ASbGncvyM9iAdH/MK7auFBof9CNYnNRjTMWtpHxgz/OZ5Gu89LPMssWQBTz16U9Homp
+	+GaO89XpzxMY110itf+dkTdU9u/02uyj/sr4Wz6GN8U+ZDdNeRGjk8poW87UHD3hPm4qhfAgD/G
+	qefJ+uomCcsB0N3lUv+HITEn2ET1XML0+kFc72CmjsFRmYJCmeCMhycxOth+lxxggOq8iw16uri
+	t03RgLyZ1LaeWyhzGi/ScNZKcKxVBJzAqhr0VEpZJkZ2k5rO3NBWUQN4dynKMgdIAwW3ocTc499
+	CEM8k2ge4ibCrTQzFtyanmb/pazkHPISvQGmW5l+GM6U7dALmMrCNn2OflMUMTvZvpcPiGs7xAD
+	OgEx/QrCDKsDPuvv2PBv5oty40xfEbc0MnjYIVpInb/pKyKAYni0R6wbF+BYFu+PRJg==
+X-Google-Smtp-Source: AGHT+IGjqq1a8oO21yMXSTMb855U5pwEPz5lAhNYt9R0LYh19gHw3m9XWhu+vwmfOHXllAtCuNHf1w==
+X-Received: by 2002:a17:907:3cca:b0:b42:9689:cabf with SMTP id a640c23a62f3a-b46e632d934mr832210566b.38.1759409968062;
+        Thu, 02 Oct 2025 05:59:28 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.31
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b03sm194127166b.84.2025.10.02.05.59.27
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Oct 2025 05:59:31 -0700 (PDT)
+        Thu, 02 Oct 2025 05:59:27 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 06/26] libtinyxml: patch CVE-2023-34194
-Date: Thu,  2 Oct 2025 14:59:06 +0200
-Message-ID: <20251002125926.2624522-7-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 00/26] Cherry-picks from Master Batch G
+Date: Thu,  2 Oct 2025 14:59:00 +0200
+Message-ID: <20251002125926.2624522-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251002125926.2624522-1-skandigraun@gmail.com>
-References: <20251002125926.2624522-1-skandigraun@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 12:59:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120175
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Oct 2025 12:59:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120169
 
-From: Peter Marko <peter.marko@siemens.com>
+This is the last batch I intend to pick for Kirkstone for the time being.
 
-Take patch from Debian:
-https://salsa.debian.org/debian/tinyxml/-/commit/2366e1f23d059d4c20c43c54176b6bd78d6a83fc
+This batch contains once again mostly CVE fixes and various recipe corrections
+(SRC_URI, RDEPENDS...).
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f4a6966bf0cc48ee7fa83c64c2eec2c4fbf91eb4)
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+A world build has succeeded with these patches for arm, aarch64, x86 and x86-64
+platforms.
+
+Please let me know any thoughts you have about this.
+
 ---
- .../libtinyxml/CVE-2023-34194.patch           | 31 +++++++++++++++++++
- .../libtinyxml/libtinyxml_2.6.2.bb            |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-support/libtinyxml/libtinyxml/CVE-2023-34194.patch
 
-diff --git a/meta-oe/recipes-support/libtinyxml/libtinyxml/CVE-2023-34194.patch b/meta-oe/recipes-support/libtinyxml/libtinyxml/CVE-2023-34194.patch
-new file mode 100644
-index 0000000000..a94806daad
---- /dev/null
-+++ b/meta-oe/recipes-support/libtinyxml/libtinyxml/CVE-2023-34194.patch
-@@ -0,0 +1,31 @@
-+From: Guilhem Moulin <guilhem@debian.org>
-+Date: Sat, 30 Dec 2023 14:15:54 +0100
-+Subject: Avoid reachable assertion via crafted XML document with a '\0'
-+ located after whitespace
-+
-+Bug: https://www.forescout.com/resources/sierra21-vulnerabilities
-+Bug-Debian: https://bugs.debian.org/1059315
-+Bug-Debian: https://security-tracker.debian.org/tracker/CVE-2023-34194
-+
-+CVE: CVE-2023-34194
-+Upstream-Status: Inactive-Upstream [lastrelease: 2011]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ tinyxmlparser.cpp | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/tinyxmlparser.cpp b/tinyxmlparser.cpp
-+index 8aa0dfa..1601962 100644
-+--- a/tinyxmlparser.cpp
-++++ b/tinyxmlparser.cpp
-+@@ -1606,6 +1606,10 @@ const char* TiXmlDeclaration::Parse( const char* p, TiXmlParsingData* data, TiXm
-+ 		}
-+ 
-+ 		p = SkipWhiteSpace( p, _encoding );
-++		if ( !p || !*p )
-++		{
-++			break;
-++		}
-+ 		if ( StringEqual( p, "version", true, _encoding ) )
-+ 		{
-+ 			TiXmlAttribute attrib;
-diff --git a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-index 96c765299b..9480249167 100644
---- a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-+++ b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-@@ -12,6 +12,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/tinyxml/tinyxml_${@'${PV}'.replace('.', '_')}.t
-            file://enforce-use-stl.patch \
-            file://entity-encoding.patch \
-            file://CVE-2021-42260.patch \
-+           file://CVE-2023-34194.patch \
- "
- SRC_URI[md5sum] = "c1b864c96804a10526540c664ade67f0"
- SRC_URI[sha256sum] = "15bdfdcec58a7da30adc87ac2b078e4417dbe5392f3afb719f9ba6d062645593"
+Alex Yao (1):
+  lcov: Fix Perl Path
+
+Bartosz Golaszewski (6):
+  python3-gsocketpool: add missing run-time dependencies
+  python3-txws: add missing run-time dependencies
+  python3-hpack: add missing run-time dependencies
+  python3-thrift: add missing run-time dependencies
+  python3-pyparted: add missing run-time dependencies
+  python3-send2trash: add missing run-time dependencies
+
+Benjamin Szőke (1):
+  tree: fix broken links
+
+Dan McGregor (1):
+  dash: correct licence
+
+Fabio Estevam (1):
+  multipath-tools: Use https for github
+
+Gyorgy Sarvari (2):
+  liboop: set correct LICENSE
+  xfce4-sensors-plugin: correct netcat PACKAGECONFIG
+
+Julian Haller (1):
+  openct: Fix typo in SUMMARY variable
+
+Katariina Lounento (1):
+  libtar: patch CVEs
+
+Marcus Flyckt (1):
+  python3-pyconnman: Add 'future' runtime dependency
+
+Martin Jansa (1):
+  ne10: append +git instead of gitr+
+
+Ninette Adhikari (1):
+  procmail: Update status for CVE-1999-0475
+
+Peter Kjellerstedt (1):
+  libjs-jquery-icheck: Correct LIC_FILES_CHKSUM
+
+Peter Marko (5):
+  libtinyxml: patch CVE-2021-42260
+  libtinyxml: patch CVE-2023-34194
+  procmail: patch CVE-2014-3618
+  procmail: patch CVE-2017-16844.
+  synergy: patch CVE-2020-15117
+
+Tim Orling (1):
+  span-lite: do not inherit ptest
+
+Wang Mingyu (1):
+  smarty: upgrade 4.1.0 -> 4.1.1
+
+Yi Zhao (1):
+  libcrypt-openssl-guess-perl: fix syntax for PROVIDES
+
+ meta-oe/recipes-shells/dash/dash_0.5.11.5.bb  |   2 +-
+ meta-oe/recipes-support/lcov/lcov_1.14.bb     |   2 +-
+ .../libjs/libjs-jquery-icheck_1.0.3.bb        |   2 +-
+ .../recipes-support/liboop/liboop_1.0.1.bb    |   2 +-
+ ...-missing-prototype-compiler-warnings.patch |  53 ++++++
+ ...ix-invalid-memory-de-reference-issue.patch |  44 +++++
+ ...escriptor-leaks-reported-by-cppcheck.patch | 101 +++++++++++
+ ...0006-fix-memleak-on-tar_open-failure.patch |  26 +++
+ ...ix-memleaks-in-libtar-sample-program.patch | 119 +++++++++++++
+ ...ng-a-static-buffer-in-th_get_pathnam.patch |  89 ++++++++++
+ ...-for-NULL-before-freeing-th_pathname.patch |  30 ++++
+ ...-stdlib.h-for-malloc-in-lib-decode.c.patch |  26 +++
+ ...amming-mistakes-detected-by-static-a.patch | 100 +++++++++++
+ .../libtar/files/CVE-2013-4420.patch          | 160 ++++++++++++++++++
+ ...-33640-CVE-2021-33645-CVE-2021-33646.patch |  42 +++++
+ .../files/CVE-2021-33643-CVE-2021-33644.patch |  52 ++++++
+ .../recipes-support/libtar/libtar_1.2.20.bb   |  12 ++
+ .../libtinyxml/CVE-2021-42260.patch           |  27 +++
+ .../libtinyxml/CVE-2023-34194.patch           |  31 ++++
+ .../libtinyxml/libtinyxml_2.6.2.bb            |   5 +-
+ .../multipath-tools/multipath-tools_0.8.4.bb  |   2 +-
+ meta-oe/recipes-support/ne10/ne10_1.2.1.bb    |   2 +-
+ .../recipes-support/openct/openct_0.6.20.bb   |   2 +-
+ .../procmail/procmail/CVE-2014-3618.patch     |  29 ++++
+ .../procmail/procmail/CVE-2017-16844.patch    |  20 +++
+ .../recipes-support/procmail/procmail_3.22.bb |   8 +-
+ .../{smarty_4.1.0.bb => smarty_4.1.1.bb}      |   2 +-
+ .../span-lite/span-lite_0.10.3.bb             |   1 -
+ .../synergy/synergy/CVE-2020-15117.patch      |  48 ++++++
+ .../recipes-support/synergy/synergy_git.bb    |   1 +
+ meta-oe/recipes-support/tree/tree_2.0.2.bb    |   4 +-
+ .../libcrypt-openssl-guess-perl_0.15.bb       |   2 +-
+ .../python3-gsocketpool_0.1.6.bb              |   3 +-
+ .../python-hpack/python3-hpack_4.0.0.bb       |   2 +
+ .../python3-pyconnman_0.2.0.bb                |   2 +-
+ .../python-thrift/python3-thrift_0.16.0.bb    |   1 +
+ .../python-txws/python3-txws_0.9.1.bb         |   5 +
+ .../python3-pyparted_3.12.0.bb                |   5 +-
+ .../send2trash/python3-send2trash_1.8.0.bb    |   2 +
+ .../sensors/xfce4-sensors-plugin_1.4.3.bb     |   2 +-
+ 40 files changed, 1050 insertions(+), 18 deletions(-)
+ create mode 100644 meta-oe/recipes-support/libtar/files/0003-Fix-missing-prototype-compiler-warnings.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/0004-Fix-invalid-memory-de-reference-issue.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/0005-fix-file-descriptor-leaks-reported-by-cppcheck.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/0006-fix-memleak-on-tar_open-failure.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/0007-fix-memleaks-in-libtar-sample-program.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/0008-decode-avoid-using-a-static-buffer-in-th_get_pathnam.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/0009-Check-for-NULL-before-freeing-th_pathname.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/0010-Added-stdlib.h-for-malloc-in-lib-decode.c.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/0011-libtar-fix-programming-mistakes-detected-by-static-a.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/CVE-2013-4420.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/CVE-2021-33640-CVE-2021-33645-CVE-2021-33646.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/CVE-2021-33643-CVE-2021-33644.patch
+ create mode 100644 meta-oe/recipes-support/libtinyxml/libtinyxml/CVE-2021-42260.patch
+ create mode 100644 meta-oe/recipes-support/libtinyxml/libtinyxml/CVE-2023-34194.patch
+ create mode 100644 meta-oe/recipes-support/procmail/procmail/CVE-2014-3618.patch
+ create mode 100644 meta-oe/recipes-support/procmail/procmail/CVE-2017-16844.patch
+ rename meta-oe/recipes-support/smarty/{smarty_4.1.0.bb => smarty_4.1.1.bb} (94%)
+ create mode 100644 meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch
+
 
