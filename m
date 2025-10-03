@@ -1,109 +1,100 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82EABCCA470
-	for <webhook@archiver.kernel.org>; Fri,  3 Oct 2025 06:56:38 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.2022.1759474593695533172
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE12BCCA471
+	for <webhook@archiver.kernel.org>; Fri,  3 Oct 2025 10:19:09 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web10.3806.1759484991327320255
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Oct 2025 23:56:34 -0700
+ Fri, 03 Oct 2025 02:49:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Excub8v2;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2371044919=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5936Q9Xb1453681
-	for <openembedded-devel@lists.openembedded.org>; Fri, 3 Oct 2025 06:56:32 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=ef/ExjuWL89YeWujWHkX
-	x7fq+gAC/SeNad+or8W2LNM=; b=Excub8v2uF8nXtmg0+VtZ3LU8xf2a5s1BlNB
-	owd2apVHs0MvpljiBWb1UbQoFlvoSassX9u4sGbXDieAwSum93cHuPbipO5Okk/T
-	+65cIWYBlDvgNcJwpzgyh1btoHDYup775hFCZyId4dytiTRe60JNzDkzjUVbNmWM
-	z84RF2sFxglutgoBe+ekEueH03YQxxirw+CJiFcV2dOmE7TFGDAkBoV9fDF4qs++
-	fYf/xLDC6zYRrSj0z1/vpIgqwKrKdQNqJUA/wsZCU07pQceO6uyUSnVyANsSOJkV
-	p2RhRQaAcBguuD1+C7AvU2qEvNs7ERt0FJsnsn7pN4aJkdHJCQ==
-Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49e6w7qfb5-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 03 Oct 2025 06:56:32 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.59; Thu, 2 Oct 2025 23:56:28 -0700
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 1/1] mariadb: fix failure for starting of mysqld.service
-Date: Fri, 3 Oct 2025 12:26:09 +0530
-Message-ID: <20251003065609.499113-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NXF40NQm;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: joao.raul.434@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-b3dbf11fa9eso373065466b.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Oct 2025 02:49:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1759484989; x=1760089789; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0zef8akI6u4y56IQCQWI04K7n8J1NQv20d2UyPEEQwU=;
+        b=NXF40NQmwS0VFmsa3pPnTx95or9zmXOWdYiVoRzTTVpjZzacGdHLnkdpU7alY3zGp6
+         xmoh44pVoOFIeXFeWyh5fw0r2hnHOeit615XY7Ja7C8zRmldXnTPTNxRnw5qGPtczuxy
+         7JBm0BcE4QYCZDMTFZYX0q3bwe/yh8BAa3ssZXQMDtQrw48yPm//gR2adgNWSo8DnOHX
+         Kpo6cADpiYU68L5mJpF3XYR6/vW3H5cNkE5UPim3tHw/3uggmASWTBnbOD11VDBTWI5c
+         5YbQi4lPt/R3mNPHjwTjuT4Y2JZHuN1jifpERvXgBZ6ca87LTaUmYX74VnQYQW7PKfJ6
+         IcUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1759484989; x=1760089789;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0zef8akI6u4y56IQCQWI04K7n8J1NQv20d2UyPEEQwU=;
+        b=sFnxfv2clPPKPue5mzYLq66egLk5C9OeAGtlB+Cey1IAFfGYEjyR4fQwit9wtKfLWf
+         uaAnSy+OaQECRsYA1a1GKvCWbP9jhL6bcZ8JZkuab/uGkWVGH8Sw7Tv9aWXinj88hXhj
+         KRWlhuUzoUEW4sayeIZrU9TRXIC1p010v7fLOfl/HvzIj54CKwwu8Tw3/4sqbNVqfH4R
+         c/PPmPqsaS68FNNHv0LLfZauAkpN16m3PqMHm3FFrDX1Mp+j+f6BoFVz7n8plx0k9tW3
+         lh1yUEzZEc+nWLc1IBB/uQ4u21djoZupcQD0yf440XwdSezoxdELu1ieizSEiFAD3O+n
+         Rm3g==
+X-Forwarded-Encrypted: i=1; AJvYcCXCEPZbWOTXzjPpAHUkHZef+BjdTnPsUgfNUgupvhWA30vfu9W7v6nfKsbUHChV2JZ+aeU5/agDh9KOBqDnM/lvRCo=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yylawvcw56d5i88v0mwCT6L/bxXjVSLkZWfcTIbE5GXxUWynCD3
+	qQPlaf2qq8PQOgBTlbVWRT4jQGR9IxL7ah/dubv6BAduoflGzy8ZNe0KHffULneG
+X-Gm-Gg: ASbGncuw+Ivg2xt1HFElieIubqLd8hx3FkcMQ8nLwxBurPTlHnauQlmwqa/mopmLUKe
+	UxiCxPV0mm+IlPFLwa/T7wcYjV8g/7GcMlo95RbV6qsTVGnG4rKwaEsFVxNvN1Uz8HinWpsF+Ij
+	FprOX+C9mtimbZ27FIkY5Hzkg+V+IX8Nd0MIm64CIwQgjDkBDpXBFBIctVBHYT0aix+wIvH4Lrp
+	IrU1sd5QHN6oQANs6g1/D1Fty3dm0GT32ZT6YITdyTmqibYMWtGeD8/l3+nHjg9xoAVHVQ+0qYz
+	KRWte79AZbqE1hlyoWmRfv3lLPl8MhCgwBqi2yW6LcuJRDRepHKZGJAx5rTulTjQemn8CM/5pfS
+	rcqeURgQxwrpShv9nVPICB14JeDkOJ48wut8jqBIx80DMpaclGB67z8zbC+/WzT0lsG5ZK9cKsx
+	N/W7zzQupD48ieZh0S0BuDV3oDPkkqy7MCq3k4ZJVjJbjwuYYCNNLB2O6I
+X-Google-Smtp-Source: AGHT+IH71FtzmJKwj/bkGe33ITW//s7pakuqkZX0POlzr67hioQAXIerFU++Ixv2x1QbGhBAwRxhtQ==
+X-Received: by 2002:a05:600c:548a:b0:46e:50ce:a353 with SMTP id 5b1f17b1804b1-46e71105742mr17386735e9.14.1759484517360;
+        Fri, 03 Oct 2025 02:41:57 -0700 (PDT)
+Received: from RD-8dhlsmLpT3bz.corp.hbkworld.com (89-181-200-223.net.novis.pt. [89.181.200.223])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-46e61a4161bsm128962275e9.16.2025.10.03.02.41.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 03 Oct 2025 02:41:56 -0700 (PDT)
+From: "=?UTF-8?q?Lima=2C=20Jo=C3=A3o?=" <joao.raul.434@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Lima=2C=20Jo=C3=A3o?= <joao.lima@hbkworld.com>
+To: joao.lima@hbkworld.com,
+	openembedded-devel@lists.openembedded.org
+Cc: raj.khem@gmail.com
+Subject: [meta-oe][PATCH 0/2] Add SWD and dmem support for AM64x and J784s4 in OpenOCD
+Date: Fri,  3 Oct 2025 10:41:34 +0100
+Message-ID: <20251003094137.2046-1-joao.lima@hbkworld.com>
+X-Mailer: git-send-email 2.51.0.windows.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.11.232.110]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) To
- ala-exchng01.corp.ad.wrs.com (10.11.224.121)
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDAzMDA1MyBTYWx0ZWRfXymWaKnmHrPig
- m+g3n3+srErdIp/yhS4KWXYMxQ4b8qMhZv3de6PCE2L9Tt5d4r5mo18t4zrW8JQgKuE/Quubde8
- cUdas1YJ0oouAlPNvk/9LjK96H5ysaG8jDAw0X3o/kpUppQ3WY7ugG/4R79NLbtgLA42wNt5dat
- gJZ5XYiZ3T+h1lyeGIhMeveXscMEc+owoPvLGfw7Oc2iY7RTAWUMOSZ9ikmVzW4F6qBOrl69azQ
- y6MU2nxnBdSG+SEOjzUPkQTwkn2oXcZTMDQoV9Jh6xuHBZ2WSLrFPLj8KH6sGz99Nc8NPdcRH4K
- f8rhtxQisJtf0vWWxqtRMQ06OXELNmBAWb+jwPcAG25D7ZChv2Uwr8xtkLvszzaWWRvZhhvW7SU
- t7xmggtsxragrs4mep2z/xzmmmeeuA==
-X-Authority-Analysis: v=2.4 cv=Lc0xKzfi c=1 sm=1 tr=0 ts=68df73a0 cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=gmxlzscTznEA:10 a=x6icFKpwvdMA:10 a=hkEv4HZQAAAA:8 a=t7CeM3EgAAAA:8
- a=SlJAyGScpOzhRhXERX0A:9 a=NA03pvyaApPJG5valX87:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: mTa4zFZo3_D9bBuGDtXKu4AJ2MKu0IXo
-X-Proofpoint-GUID: mTa4zFZo3_D9bBuGDtXKu4AJ2MKu0IXo
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-10-03_01,2025-10-02_03,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 bulkscore=0 adultscore=0 priorityscore=1501
- impostorscore=0 spamscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2509150000 definitions=main-2510030053
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Oct 2025 06:56:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120210
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Oct 2025 10:19:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120213
 
-From: Yogita Urade <yogita.urade@windriver.com>
+From: Joao Lima <joao.lima@hbkworld.com>
 
-It fails to start mysqld.services:
+This patch series updates OpenOCD to support direct memory access (dmem)
+via SWD emulation for Texas Instruments AM64x and J784s4 platforms.
 
-root@qemux86-64:~# systemctl start mysqld
-Job for mysqld.service failed because a timeout was exceeded.
-See "systemctl status mysqld.service" and "journalctl -xeu mysqld.service" for details.
+Changes include:
+1. Version bumps:
+   - openocd: 91bd431 -> 66ea461
+   - jimtcl: fcbb449 -> f160866
+   - libjaylink: 9aa7a59 -> 0d23921
 
-In the source code, STACK_DIRECTION is already set:
-cmake/os/WindowsCache.cmake
-192:SET(STACK_DIRECTION -1 CACHE INTERNAL "")
-so no need to add in EXTRA_OECMAKE removed from recipe file.
+2. Platform support patches:
+   - Add SWD native configuration files for AM64x and J784s4 boards
+   - Configure DMEM access parameters in ti_k3.cfg for direct memory operations
+   - Set up DAPBUS debugger and emulated AP descriptions
 
-Reference:
-https://jira.mariadb.org/browse/MDEV-36051
+Joao Lima (2):
+  openocd: bump the openocd, jimtcl versions
+  openocd: add dmem support to am64xx and j784s4 platforms
 
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
----
- meta-oe/recipes-dbs/mysql/mariadb.inc | 1 -
- 1 file changed, 1 deletion(-)
-
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 6e7c01a775..f0cec75568 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -95,7 +95,6 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
-                  -DINSTALL_SYSCONFDIR:PATH=${sysconfdir} \
-                  -DMYSQL_DATADIR:PATH=/var/mysql \
-                  -DCAT_EXECUTABLE=`which cat` \
--                 -DSTACK_DIRECTION=1 \
-                  -DHAVE_SYSTEM_LIBFMT_EXITCODE=0 \
-                  -DCMAKE_AR:FILEPATH=${AR}"
- 
--- 
-2.40.0
+ ...wd_native.cfg-Add-support-for-direct.patch | 77 +++++++++++++++++++
+ ....cfg-Add-support-for-direct-memory-a.patch | 65 ++++++++++++++++
+ .../recipes-devtools/openocd/openocd_git.bb   |  8 +-
+ 3 files changed, 147 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch
+ create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch
 
 
