@@ -1,132 +1,96 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68CC8CCA471
-	for <webhook@archiver.kernel.org>; Fri,  3 Oct 2025 16:42:33 +0000 (UTC)
-Received: from mail-yx1-f51.google.com (mail-yx1-f51.google.com [74.125.224.51])
- by mx.groups.io with SMTP id smtpd.web10.753.1759509745592388372
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59CA5CCA471
+	for <webhook@archiver.kernel.org>; Fri,  3 Oct 2025 17:30:02 +0000 (UTC)
+Received: from mail-yx1-f50.google.com (mail-yx1-f50.google.com [74.125.224.50])
+ by mx.groups.io with SMTP id smtpd.web10.159.1759512597576884580
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Oct 2025 09:42:25 -0700
+ Fri, 03 Oct 2025 10:29:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gASXdQCK;
- spf=pass (domain: gmail.com, ip: 74.125.224.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f51.google.com with SMTP id 956f58d0204a3-6354af028c6so2394411d50.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Oct 2025 09:42:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XBzzQ5z4;
+ spf=pass (domain: gmail.com, ip: 74.125.224.50, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f50.google.com with SMTP id 956f58d0204a3-633bca5451cso2689599d50.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Oct 2025 10:29:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759509745; x=1760114545; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dVanvkgBzFYebMRtQ8rNGj9wPcvOgIfsAWkjMENZwWM=;
-        b=gASXdQCKCPi7Tig1QFF7SHOu+wD+sTCmGqLm2Hf08/hN9XUH3OQNOfS63tspJz1hwg
-         on90vhGa00vnlP42lDyghNT1ZT238v5W+18vsSIN8mb+zqoTwZhaO7Q0OjBlU0VEt8TI
-         yLxwVMHZwmSRIZ9vA71etwFH0439l1x6EbnBoVjZmD0HEJCX9u8iyyJiu2TOBSzlqIev
-         vuPixVMphsR6xa2wgXOojXHGKuyaWyPlZwn7bkLYWLA9BIxXQA9FSZe2IF7p6PVAv+3J
-         xdhnOV0hA3BcFKb1JSJRqTC4PyJTVU3pa3lX0drwWWiSadtsrizn9II9jr/xl7IQOwBW
-         7iTA==
+        d=gmail.com; s=20230601; t=1759512596; x=1760117396; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=yI/EFsjXhJ08H6lcPA/VrPhRD2ZsGZIa9I8MsQHu4dA=;
+        b=XBzzQ5z4QoTl5XhHaWLavaBsAojB07WZDORQYh9wNWHOGTj9ju3z28c9PY9M1QFiJy
+         BkLGza1m1EPxf6C5xJbofl7bvaCX04YQ4mUcNBf72chBEFuVwIZQuSEfwkGwaiMTOL4H
+         VvKiAS/ddgGY7O1Bw2c9rH76RUCwJh7gJx3qluwZ0oy3r1ahKmV3R+pwZXbst19eotdu
+         LiUiUvOnsvBRsFSPvMCj9tI9W2rvymsG1sFgeZUXGYshkFDlcVIfQuN5uZkw+QiHEfTf
+         yual2MTP4TU2OA6vbbKbQepxwu77MOmwjK1UXU+RFD1jULzjB8hFUpw8TpxNOWVvMoGp
+         riqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759509745; x=1760114545;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=dVanvkgBzFYebMRtQ8rNGj9wPcvOgIfsAWkjMENZwWM=;
-        b=oiI5AFn057CIUWFiYQ881y5H4gZssrPpHoUN4JNqXxnLpARubf7ZsW6EsJyW07vUxx
-         uVHsJbl4ThkFFCtwar4z8tGqsqS4imAu5CQkN3vy3aAM5fuBhLQVWe8Alv9wUeFI3AjQ
-         hr1EsncNqFx/zITzzamltL9xLnTR/FcostmkridjcQ/EytL/j8HBgZzZRjBvNibJjXZ2
-         dsRvkBfF5ZmUe2S5Wi29NH5V1LhXlndmzZQLsm8LQvAzDrO7Uek3jC1boFolx7D6tLZF
-         NiqjQ5nKwbUtnC1rBVy20RNtHSxxkQUMpy8T9SZj86/xRsptCzVTjfMhIwYUn/W2ixCn
-         bzSQ==
-X-Gm-Message-State: AOJu0YxUMmxqRjgKShCcJEA+xjD1nPxS7fHv3mnQDHLlLerpr9BF4BdY
-	luCGx5mjAqRYqKZYU0UxWLlilOzCOHG8vFgY0Q4raFQon7Fj7iGMZbZGapzCOcx+jEoBb7OOvAw
-	QjS5JIZMrusdvKdLAZvNpqLxaPErujQAh7VBd/Ps=
-X-Gm-Gg: ASbGnctCmw6f7k8ggV4G8Sboc3R/VT3a9uqABGfIuf4XvDNCphAdpHDaSCMKDhJJn1U
-	NSYHyOilbEQWh9QEMLKJWFWHT/Xj4Q46NhVMfGUgO7WrP4Lou5kJUupq5Zfspsws0PiAWc+Cp44
-	iQHu9rAAb5yGavgQofrr2KN9zou/ufTRerF7qhgi2J7grjptovyytEOLeX+dbsEaW2t82S0aawc
-	yo2mRB4Pe5XsWRaJXF0Sy9KOfCr3xJRpbPMrN9zOT78Rg741QCIaNYqGt6VOw9uaEgZ20civtIs
-	82gk8owiCQHUNakk9zcWAYRnFfudVjhAVzFw7VMvEIWWql2tKP+Ui3+4OOuCqt/moCvLUtqLU3L
-	VwzI2
-X-Google-Smtp-Source: AGHT+IE4XOrwLj0XI9cQNeWEIk0iKetCQrmOxesg/yqPW6o/h6bRMoRZQX9WVES5CQhRtC5ajk7usCvJttwwcjj/Rd8=
-X-Received: by 2002:a05:690e:38f:b0:629:acb6:d8a with SMTP id
- 956f58d0204a3-63b9a0ee4a7mr2629305d50.26.1759509744477; Fri, 03 Oct 2025
- 09:42:24 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1759512596; x=1760117396;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yI/EFsjXhJ08H6lcPA/VrPhRD2ZsGZIa9I8MsQHu4dA=;
+        b=Cv8ZRMgTb4VWrU+zhZRVo4jop3/sPyhmZqvaN13whf3mrCTU6wDJwTJp4MUscCPslX
+         mkv8FTY2PWlx8PKYqvc5/T2yFkDePvuYJ0kwua+eu9M8onuqv04EBWlxMlGODnANb0Db
+         65tDD7sRJw9ZMZHR/wzVhPjSr+ulQpK2ym1vxsrDIm1r8ZBsaTIq2Z0FvOFOntDMVxwn
+         y4ls/IbU5kDJ4YYyGqW2yNbkvuHlyhZflPhy1QzX2k+wwSus/d/txNmLNd9b406iM7UU
+         qhq35CxXM7vTHmkHMmWj9KEpcuc7p7p71iVN2aHm1IhTSsoLr4K8TbLc9jzn3fl79rzm
+         4Knw==
+X-Gm-Message-State: AOJu0Yyu3Z1ICM46WbiQGbcSqkhr52hScHcEu77B0ug9vqK9lu+yXdsm
+	/4PYlgzanZF+5L9Ie9IS95pbOAaffBCc835QbPp5mBjGl9NBrO+sOnG7wbJo4fFV
+X-Gm-Gg: ASbGncuA5xXAABjBuyztDrPXgucnRzjdO2poHZ4WMT1oPrw/bKb/CeIDS0avLSwxL5n
+	PLmozWtl+blOLtjuzq4sCk46pP43RS1GvIek05IlCsgfiNDfUDx4Fpwkc0bPXyehfQ122IQPpG1
+	+BYeNwaLkMadzkWh8AsknZNflGBiJCK0daV8XoVTEYOevXWYDvR3Qq2Q9S7QWiptAquSdN4q9SU
+	72IMriQnzT2dWXafO2dxoNnNQoooa9NFgqieuQ59DZUsKQOklHl514Hs1d7OW1nT+gxEfwNgFqg
+	/fqmzfWG4KB4WGDVYqF/tFU86bGWzl1GBgH+jG8Gg453QQokAX+r+dTbtGiHJfTs7Gw6UW3JZsQ
+	Xh8fe2tT0wLOU8kBbteZ/0hPMqu6QCuSKG1FXDaBJNxKa9tkFzOBOPokie6HlR6c=
+X-Google-Smtp-Source: AGHT+IGT/s21zYavtDLPwJorLEfzyuLMcHTpbPrvcEMogDZ1WV/9pxz2ZXcR+4kVdrpVICxrE0LCSg==
+X-Received: by 2002:a53:8613:0:b0:636:19c8:278e with SMTP id 956f58d0204a3-63b9a0776e5mr2825845d50.14.1759512596080;
+        Fri, 03 Oct 2025 10:29:56 -0700 (PDT)
+Received: from localhost.localdomain ([67.233.61.26])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-63b846a7ab0sm1874678d50.25.2025.10.03.10.29.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 03 Oct 2025 10:29:55 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] usbids: upgrade 2025.04.01 -> 2025.09.15
+Date: Fri,  3 Oct 2025 13:29:38 -0400
+Message-ID: <20251003172938.19123-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20251003065609.499113-1-yogita.urade@windriver.com>
-In-Reply-To: <20251003065609.499113-1-yogita.urade@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 3 Oct 2025 09:41:58 -0700
-X-Gm-Features: AS18NWD8KJJiv6r9gyAEc-EDPQTE88eWDxBbvfRatL49Xw94Z8z7YY1jx_oJUto
-Message-ID: <CAMKF1sqh+wgARdmhOUmrypQ2QYhwHajpjez7XODK5gUcrGzwjg@mail.gmail.com>
-Subject: Re: [oe][meta-oe][scarthgap][PATCH 1/1] mariadb: fix failure for
- starting of mysqld.service
-To: Yogita.Urade@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Oct 2025 16:42:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120221
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Oct 2025 17:30:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120222
 
-On Thu, Oct 2, 2025 at 11:56=E2=80=AFPM Urade, Yogita via
-lists.openembedded.org
-<Yogita.Urade=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Yogita Urade <yogita.urade@windriver.com>
->
-> It fails to start mysqld.services:
->
-> root@qemux86-64:~# systemctl start mysqld
-> Job for mysqld.service failed because a timeout was exceeded.
-> See "systemctl status mysqld.service" and "journalctl -xeu mysqld.service=
-" for details.
->
-> In the source code, STACK_DIRECTION is already set:
-> cmake/os/WindowsCache.cmake
-> 192:SET(STACK_DIRECTION -1 CACHE INTERNAL "")
-> so no need to add in EXTRA_OECMAKE removed from recipe file.
->
-> Reference:
-> https://jira.mariadb.org/browse/MDEV-36051
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ .../usbids/{usbids_2025.04.01.bb => usbids_2025.09.15.bb}     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/usbids/{usbids_2025.04.01.bb => usbids_2025.09.15.bb} (83%)
 
-It is fixed in master via
-https://git.openembedded.org/meta-openembedded/commit/?id=3Dcdd8b41d6e3b20c=
-a562df49aa0710f07a6218f20
-please cherry-pick the same to release branches, it maintains the tree
-history well.
+diff --git a/meta-oe/recipes-support/usbids/usbids_2025.04.01.bb b/meta-oe/recipes-support/usbids/usbids_2025.09.15.bb
+similarity index 83%
+rename from meta-oe/recipes-support/usbids/usbids_2025.04.01.bb
+rename to meta-oe/recipes-support/usbids/usbids_2025.09.15.bb
+index aa884419f8..925a8ddda9 100644
+--- a/meta-oe/recipes-support/usbids/usbids_2025.04.01.bb
++++ b/meta-oe/recipes-support/usbids/usbids_2025.09.15.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
+ 
+ SRC_URI = "git://github.com/usbids/usbids.git;branch=master;protocol=https"
+ 
+-# April 1, 2025
+-SRCREV = "635738b64eb52d376c5d1756c265de67236c8934"
++# September 15, 2025
++SRCREV = "18b3055a9819a341ac2ff957f0b92f564d0d5d6e"
+ 
+ 
+ do_install() {
+-- 
+2.43.0
 
->
-> Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-> ---
->  meta-oe/recipes-dbs/mysql/mariadb.inc | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/=
-mysql/mariadb.inc
-> index 6e7c01a775..f0cec75568 100644
-> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-> @@ -95,7 +95,6 @@ EXTRA_OECMAKE =3D "-DWITH_EMBEDDED_SERVER=3DON \
->                   -DINSTALL_SYSCONFDIR:PATH=3D${sysconfdir} \
->                   -DMYSQL_DATADIR:PATH=3D/var/mysql \
->                   -DCAT_EXECUTABLE=3D`which cat` \
-> -                 -DSTACK_DIRECTION=3D1 \
->                   -DHAVE_SYSTEM_LIBFMT_EXITCODE=3D0 \
->                   -DCMAKE_AR:FILEPATH=3D${AR}"
->
-> --
-> 2.40.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#120210): https://lists.openembedded.org/g/openembedde=
-d-devel/message/120210
-> Mute This Topic: https://lists.openembedded.org/mt/115566143/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
