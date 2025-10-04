@@ -2,90 +2,136 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B10C3CAC5BB
-	for <webhook@archiver.kernel.org>; Sat,  4 Oct 2025 18:30:28 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web11.14838.1759602626979470831
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF20ECAC5BB
+	for <webhook@archiver.kernel.org>; Sat,  4 Oct 2025 18:39:38 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+ by mx.groups.io with SMTP id smtpd.web10.15029.1759603172126228024
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Oct 2025 11:30:27 -0700
+ Sat, 04 Oct 2025 11:39:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=j+UldLo0;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-b3e234fcd4bso576939766b.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 11:30:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=M9zyNVf0;
+ spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-631df7b2dffso7896058a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 11:39:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759602625; x=1760207425; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759603170; x=1760207970; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=UJbvCCC3/S675MD/F7mEof0rnIpfaN21/wFgth05+Ug=;
-        b=j+UldLo0TCHvyis0zf0z3hpkBsJ9QLv3f4k79e7/fGm+fZqYAoW8WA0yosaXbGQ0K1
-         Vxp8ly4nn824gHVzd3QgltHS19Yy3JVb8c88+ReNwifeEfXH1QIXPNgh5Ri7jqANTXXp
-         mSvNUYEyJxIFGCZKBWL5Y3faE58Fdb4VX7QQuspnOK8auB9jF6wOGNhDu9ntg9h66mzU
-         Yfc04OapUV2IsSTxb9tTZge65SCxCl02YmrSXmmlq79Ujl4vyT4J7yDx6/fsQfLr20LC
-         e4wPzYX4J2Payix6KBqLbc6GLODr1Cew73hwi2V4TvSkn3Q3jdGkCuUrZFg1l8fNgNmr
-         Mlcw==
+        bh=pCfnlKaya8+N54tm3zyLhAkXMfHrb2JIY2kenHMU1rQ=;
+        b=M9zyNVf0Gmd8hSSkXKWL6kuWBOB3peyxyMYLDMIAWCCmFmU6itu8RLoAluQu2pVPUG
+         hJGduj2MvmImcjQlWDJka5WNsdlSYnZCpiGbBccqwiZlt+RLwbXmj/6WPT4TZhBHFDR4
+         QyeMnqwlyKTVcKdG2cjl/5kK+lGN0nihCvKlJjpvjVdRRjMsSAI7D27SeTFAo0G+E1B4
+         MMH1LUPl7Cyf4ycfyGCj9jl/MXL/dMoiKBFHeFKaAhqE6bvA5FTS8eXpVj6COq4/lNxk
+         Q6n+so0eG/nAuejGzgdm+3wJ1qUSFNJiw6epsiFBYJPRUKUrZowpIzPUpPhdWYAIeMwV
+         Hwig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759602625; x=1760207425;
+        d=1e100.net; s=20230601; t=1759603170; x=1760207970;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=UJbvCCC3/S675MD/F7mEof0rnIpfaN21/wFgth05+Ug=;
-        b=SiA4BuypTUon8cGtfAGU6WKi+BvLcQSJSusqKszPG5z46SunC4FVljrgd3X4q3BUKf
-         H3s2YdIqcS3C07LavzOFfiuzjpZWOl5NtiFFF8sCJXWxIGb1ANWkEAzf8r7gwK8to3vM
-         q5/X9GYoajFp2jlY09hLQ8gelxYlEV0gjAG1nJ/hS3w65dYyhjzklqKH6xQuJS2nuNuR
-         OkaVx+4s5L1aoQ0QyqqfAJovUN8M8oY5bziHENoYQL6EIun2jRTlFn423ObUaqJZwkap
-         BhcIYUKChWLY8BAhVC1ijj2h4TB9PvB5gWToPMNrox8Q/QvKCccakGdzlLO76J4mqjou
-         +sWQ==
-X-Gm-Message-State: AOJu0YxumzPp1/qqkkTZJAvz0S2Q4rKUBEpzT5lHVVjAHgdiBDuwrKYg
-	K0p56M7Na9+MKdsZDr3+TSh6lsx6z2fLkoi+w/KGIU4VhIbn2qOG7UC2fNtNOg==
-X-Gm-Gg: ASbGncukAAPcT6xpBKc3dLVCzA6TPOTe94xCeNSOzlmpRxL6balIVp4yj3sKDMM5Ce8
-	pBiyykA1ONHtRI5zOGbojz4pHqjeHGjCWyAZGokwS22wwBNKkETbD5WPm4rIfANIYV99I2XSj2C
-	65Js3rRFu9YVN/ScFb7LlDjzpHQ8qvZbhowJ+o36bTR2l1NNkzyfNBpG49CokcB162iL6RGSDcS
-	V05X5/hzbKDuAQu/t6F1xwviVXQcow4Ka96kqswCrKEv/qzHiFNwBATJOaem7pLj3Isx6U2g8h6
-	pKdyVMxzXZuK5UXa9reb4FWSLbP2LXMJbxZzvBKL1QaJ3Fnd6u1NUtaqeoQYblRihziihQJqn7f
-	BZ1BpJHNQ0ZV9o+g+R/FoORp3g6MmsUzqWpCzmZgylYm2ieaJSBhu6yA=
-X-Google-Smtp-Source: AGHT+IFVOPWLC+z5VZY4WIID+BMYxlaT6y9yk1tKyXh9YUut/dgnhxaz0zC4mzsM8/dM0t4XCwOWqA==
-X-Received: by 2002:a17:907:7208:b0:b1d:285c:e0ef with SMTP id a640c23a62f3a-b49c1f5356fmr924456566b.26.1759602624969;
-        Sat, 04 Oct 2025 11:30:24 -0700 (PDT)
+        bh=pCfnlKaya8+N54tm3zyLhAkXMfHrb2JIY2kenHMU1rQ=;
+        b=jlR1Rdxsg6LHWbPW0LVCCgZZxb8Rax9QN4inaLEdh1zGYN3bj20qzIL/onqSSaHVVH
+         x5JaQuz/crtoM973qLAgY+v7ew0mqw6VKrGNiC+37v1PidT8teNIZQHUY9s0mI8blQZn
+         LPiN+UDiEWZPLu7k4ZJ8WnBf+V7uI0FYR+35AFXWXPe48EYaQbsEhEwv8EZQ/0/TVGIE
+         yQ3dCgnqBUBb5qMcsLb543mS9WjFbG9//tenkyzLstQuo4gum3gTNvx0d8au7mjhcsWa
+         TUu34S/zxQ3vFcoOCbMw694LWHTpc7oy+bmvCHFuJBdyKoE60zvzbz9vQyGfGQUrsx/H
+         NGCA==
+X-Gm-Message-State: AOJu0Yx32Ca6vawz6tqxsbxsTOLis5sCsvm51qWdRzcnm8B636dSTvGz
+	+di8rWGB3LlfDEb9/Um2EyJXTYvW1YVpSigbkCYNqIxV5pHjMkkgFE5ExCtEyQ==
+X-Gm-Gg: ASbGncsX4dCR/JJlD45IkCnXjzY6/IZE6jVgxXWXPCym39Mwy/DjQlOpA2m3BiA6UjG
+	Xif6m+P5h+rAznFeOWlNaigcN6Gt6NONbGmz4JRTIs1vNxtUNATDU1l7fLvxPTOcgZbzzlol9VX
+	rDfcw7ZKYY3rlgRye+SQvXizNou4GvVcAoUEx+fAv/wN/2p66y/wp1cJZUExTeKhsYME08zalif
+	3R2c8gRDXy39WJe5IG0REvNfduXpup77yUxcgqlVPddkZVLIDR/i3nwz6QhVZ79hU0Br7V/n/QJ
+	snapynF/mxilLKcl/ij+BuZ5Nzi6vox4PGhhA21tYqI57FUOARqhOHgc7x+0+F2M+ndWAQczjI2
+	nUdSWjl/rpXmwB6sXlp8i+rK8/bUbFD45l5k7uarw5MbaHOg1gZhyTjQ=
+X-Google-Smtp-Source: AGHT+IHZwRK7A6ytXXYcY50dI+UoNGayOYuad8rZwx3zhBTmMMqKyNeZgcNW++qvftFA4zF4CDmjcA==
+X-Received: by 2002:a05:6402:5252:b0:62e:ebb4:e6e0 with SMTP id 4fb4d7f45d1cf-638fcb674ebmr8577319a12.1.1759603170331;
+        Sat, 04 Oct 2025 11:39:30 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4865986505sm729449966b.23.2025.10.04.11.30.24
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6394ba637fasm4022507a12.33.2025.10.04.11.39.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Oct 2025 11:30:24 -0700 (PDT)
+        Sat, 04 Oct 2025 11:39:28 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-webserver][PATCH] apache2: ignore CVE-2025-3891
-Date: Sat,  4 Oct 2025 20:30:23 +0200
-Message-ID: <20251004183023.2787339-1-skandigraun@gmail.com>
+Subject: [meta-webserver][walnascar][PATCH] apache2: patch CVE-2025-54090
+Date: Sat,  4 Oct 2025 20:39:28 +0200
+Message-ID: <20251004183928.2967614-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 18:30:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120234
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 18:39:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120235
 
-The vulnerability was reported against mod_auth_openidc, which module
-is a 3rd party one, and not part of the apache2 source distribution.
+https://nvd.nist.gov/vuln/detail/CVE-2025-54090
 
-The affected module is not part of the meta-oe universe currently,
-so ignore the CVE.
+A bug in Apache HTTP Server 2.4.64 results in all "RewriteCond expr ..." tests evaluating as "true".
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../apache2/apache2/CVE-2025-54090.patch      | 40 +++++++++++++++++++
+ .../recipes-httpd/apache2/apache2_2.4.64.bb   |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2025-54090.patch
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
-index fef1f5ecec..58b324795e 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.65.bb
-@@ -48,6 +48,7 @@ CVE_STATUS[CVE-2007-6422] = "cpe-incorrect: The current version is not affected
- CVE_STATUS[CVE-2007-6423] = "cpe-incorrect: The current version is not affected by the CVE which affects versions from 2.2.x to 2.2.7-dev"
- CVE_STATUS[CVE-2008-2168] = "cpe-incorrect: The current version is not affected by the CVE which affects versions up to 2.2.6 (excl.)"
- CVE_STATUS[CVE-2010-0425] = "not-applicable-platform: The current version is not affected. It only applies for Windows."
-+CVE_STATUS[CVE-2025-3891] = "cpe-incorrect: The CVE is for a 3rd party module, which is not part of the Apache source distribution"
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2025-54090.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2025-54090.patch
+new file mode 100644
+index 0000000000..54ae450a5f
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2025-54090.patch
+@@ -0,0 +1,40 @@
++From 8abb3d06b23975705ebcf4bf4476464fd0b9bd0b Mon Sep 17 00:00:00 2001
++From: Eric Covener <covener@apache.org>
++Date: Mon, 21 Jul 2025 11:12:44 +0000
++Subject: [PATCH] fix `rewritecond expr` regression in 2.4.64
++
++  *) SECURITY: CVE-2025-54090: Apache HTTP Server: 'RewriteCond expr'
++     always evaluates to true in 2.4.64 (cve.mitre.org)
++     A bug in Apache HTTP Server 2.4.64 results in all "RewriteCond
++     expr ..." tests evaluating as "true".
++     Users are recommended to upgrade to version 2.4.65, which fixes
++     the issue.
++
++
++Reviewed By: covener, ylavic, gbechis, jorton
++
++git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1927361 13f79535-47bb-0310-9956-ffa450edef68
++
++CVE: CVE-2025-54090
++Upstream-Status: Backport [https://github.com/apache/httpd/commit/8abb3d06b23975705ebcf4bf4476464fd0b9bd0b]
++
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ modules/mappers/mod_rewrite.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/modules/mappers/mod_rewrite.c b/modules/mappers/mod_rewrite.c
++index f9fcd61400f..ae0ceda0508 100644
++--- a/modules/mappers/mod_rewrite.c
+++++ b/modules/mappers/mod_rewrite.c
++@@ -4276,8 +4276,9 @@ static cond_return_type apply_rewrite_cond(rewritecond_entry *p, rewrite_ctx *ct
++                 rc = COND_RC_NOMATCH;
++             }
++             else {
++-                rc = COND_RC_MATCH;
+++                rc = (rc > 0) ? COND_RC_MATCH : COND_RC_NOMATCH;
++             }
+++
++             /* update briRC backref info */
++             if (rc && !(p->flags & CONDFLAG_NOTMATCH)) {
++                 ctx->briRC.source = source;
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.64.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.64.bb
+index 5830568746..b2cfcebc49 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.64.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.64.bb
+@@ -16,6 +16,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
+            file://0008-Fix-perl-install-directory-to-usr-bin.patch \
+            file://0009-support-apxs.in-force-destdir-to-be-empty-string.patch \
+            file://0001-make_exports.awk-not-expose-the-path.patch \
++           file://CVE-2025-54090.patch \
+           "
  
- SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
- 
+ SRC_URI:append:class-target = " \
 
