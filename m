@@ -2,68 +2,68 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 31ECBCAC5B0
-	for <webhook@archiver.kernel.org>; Sat,  4 Oct 2025 19:52:39 +0000 (UTC)
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
- by mx.groups.io with SMTP id smtpd.web10.16302.1759607555864154665
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34B74CAC5BB
+	for <webhook@archiver.kernel.org>; Sat,  4 Oct 2025 19:58:49 +0000 (UTC)
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+ by mx.groups.io with SMTP id smtpd.web11.16340.1759607923872529411
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Oct 2025 12:52:36 -0700
+ Sat, 04 Oct 2025 12:58:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m1rn8otI;
- spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-62fc2d92d34so7047986a12.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 12:52:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=l8RaFXOs;
+ spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-62ecd3c21d3so6289051a12.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 12:58:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759607554; x=1760212354; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759607922; x=1760212722; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=vzl9pwpGFSQNUI/E/DFDZ3FsAsYIO+y3wqSUAiCcd3E=;
-        b=m1rn8otIbjlQTkEgzF4RHzXIA+YR0ItfAAGYtjW1mGiz0Anp4XTuTyOJGKrl7zKgF1
-         V2PlCdMunYWaG2hx2xBSkujIzLYGwXQvyGUVeQcVDUL9cAVLhgeajbO6eNz3DfG3aE/X
-         8GX88hBkqoALmArGqMQBCBq4t2ayhgUWf150qRBCMRHZE75QjTqHzgAnFU23//6tkxhH
-         2owlqUanVTppEqiNCzhg8u6rptrX9FD0BgW/frTKiZvqqxKR8CiTVVb2DXaATrmRB1ZP
-         9FPVWxezJqyeTLw0QIjPpsOG8WtcpG0eUVgfGeozomm2cQdE+T5yZRsvTc1aKQZAdfyi
-         BRaA==
+        bh=5VT7yS3y4cOeUtTv0KifEuUgVa0ClvgBKFhOlxvmgVQ=;
+        b=l8RaFXOsHDCxk/jtjpwRMPjvCDLbmdVvpDvRHZ2olSoHhegIWFJ2ZLt3cjdu2n8NM2
+         kvq2eJNwEdHVa9wYZJ25pamrjKX+E34JaSzecyYRGunVpaisi4K/ocNqTLXxbWCyKfZk
+         TGwAeo+5rIt9+8jxTuoe6MO7l8Si/cxF2gF07fFgdlYEBLka42AjUVB5YIycGeZyqQfT
+         /2Wa6o1BBPOmTf/nEykhaSmXCHtWFK2H/wOyaPuvoNHa0xxs+pODz/0ZoexqEBhAmY6H
+         ErWCbi+jTo2tQyYBqzk9iSXCeVhGSYjzAjE1amZWKl0tYB1LRDoitKxOsu3ErOcTjCSh
+         K2MQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759607554; x=1760212354;
+        d=1e100.net; s=20230601; t=1759607922; x=1760212722;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=vzl9pwpGFSQNUI/E/DFDZ3FsAsYIO+y3wqSUAiCcd3E=;
-        b=RLtSKpZmUFbCJ7J2YWnVcK8QpHfTUAwW0s/YCqWD912xxsX9ZICRa51gQfEHrq2A7f
-         Za7UG94cTPLg/VsXuErLs3vYjuYusRs7wXnl7sM5oY6WygVRs+UKal3YVDz4NpoNgfKw
-         Y6CTsrCmA01sLYtOfXNZo6HQ9j3ax+hL4RWXdJThcvlw6u42ZU8cvoZo8p1DGY0kZV0+
-         StO5v8KfEvbyJgOFi8EpGZSulRuu9V4dVt9G6MJWTOsN/yJhB9ko9Hp1mgetBwnvOW0z
-         cncSA1/x1hh+wmyet+H2AH1V+ERYzP3PydDVp9Mkl3HPxmO5CvKHwzfUU7nkfLHTWWXA
-         mkHw==
-X-Gm-Message-State: AOJu0YzFTglT3lHRo4AgJtXaIKr2zo+NWF1HSoSaU7teqjXf51UfFUIV
-	mQYy6P6VjOmpTGv1VuxC2iIsKZg0BR1RRVrPVbQliQ+9LgHQOR/FyP9vn4bboA==
-X-Gm-Gg: ASbGnctl19nuNOvdobZi+znJl8krBa6RBpFsu14WpiIjyDvsNAp/2qEnkEQCKWEP2bg
-	R9Ww8eaU6RSJEt2RH8iy2gYaoHvpPyMx58PRNPvW2zTbZULdWbRd/xtB2LYQfINUVnhcjCruBo2
-	a9/z/2r+3ixQC+ByP3idVFdT3rC5WisG4Y6mX4DTF3oC3UZ/F71LeeSOKjLV+41KWNRexIwnwzZ
-	/nNVXZ3RTgtvjHIPc57ZbzvGe+TugnaFeAFUBuolTR5rEo7OTuuO2TcZgJ4aePXLdFJWkl97CNm
-	9y2MFYTao6EghouxXSdYor5yq82WKLEwc59R21p5LCQtGZhJjHhGn62MbTWHPPIMK4sryp6ZJN9
-	Y0qx9upX7+X30C1rivdcYOHcJVc9RFuPLi4pPrfaCoY1J
-X-Google-Smtp-Source: AGHT+IFgaG97u9xghOMCyAioQb+qbG3LDAiu5jebjudlbLoSkX3Nl0q3vJTWTCYC5iytFGb2Q0luoA==
-X-Received: by 2002:a17:906:c14f:b0:b30:ed1f:894c with SMTP id a640c23a62f3a-b49c3f77bd6mr945621366b.43.1759607553970;
-        Sat, 04 Oct 2025 12:52:33 -0700 (PDT)
+        bh=5VT7yS3y4cOeUtTv0KifEuUgVa0ClvgBKFhOlxvmgVQ=;
+        b=b/0j28Qbj1u1G1HKJsux23j2efSfhwwKUMjWUxYUodkEo5tXzyO+i7hFGTJrCIu03d
+         EPhVSkGenrCm2kJ1Eq3lgzlILDSrYJ7MT1kfOtfGnjpzUwgMIpykbXwUy8BEoeSP4o3J
+         ZPGheKBEtOmPPzN4D+HrhsmVm3HRFmDUzOgLMgJRVEhZQ4WV0BfO3vH53e+4dkFCHCKj
+         kYnQLCMbo2cOOqHN4/qBIn8imDwQOeCF2jxHHP2dQMRZqcSE2BT9Yi8Ac65ea9/At3CK
+         GSwVyhhNbU9lp6S3uNOZs2ZzOqw0YPRXz8CuH2s6KR7uW+mHVApy5liJn3GlB4Dceomx
+         1KmQ==
+X-Gm-Message-State: AOJu0Yxr2xBo3jnLKTtQ8IWDlgrJKzY3q3vuzr0c1NDKRBSsZ2P5xBha
+	n00kRABrzOOMRkdcoOSD+oU0TXwq5y24mPRI99KZhmGgeCad26dfVuHWVmk7oA==
+X-Gm-Gg: ASbGncvck/9Yu9JT2yth1eks1W7khQ8cuviGsO4TwaHf01KGI4BaIhteRtJeogV6/Iq
+	XmVjy5EGqoOMcWzHhOZ53KbLDi3wMN0GeLRBM3z8KFRdN6QHN3nyrk8c4ySPwqSH+UJF2OPUseo
+	dBvM03ps+7c/KvBUrg5Mc/kXpr8KPRGosmhznXIIoU9Mymt0ug5ogwLqvXKBLYt23GEL8k+P3ey
+	OcfJiMfj5WF3MTbiAOhGzCmCfsi1IOEpRwHhlVKhg+bntBkbKtP3rdjlLSC0qaowIISoPAqYPR/
+	x2IHNyHqf9fmvzyGer+j2GBnAcNfrPYNwCDo8x4JrMiSUlrq8iBCZ9yoOAHOW7uePQK3uJ3SA4S
+	drSowv2kvzdAlv5TLH99WneJ2pZuFX6PMZRYlhv8eo2Y1
+X-Google-Smtp-Source: AGHT+IGj42mqy/iEvIKUu3jRPc+rqdSgYnxotL22HJWOhSuwD8p6KAWVIBVl06/8LKMxku3O6YmlCw==
+X-Received: by 2002:a17:907:96a9:b0:b2d:d73:de59 with SMTP id a640c23a62f3a-b49c1280aa4mr897822866b.9.1759607922174;
+        Sat, 04 Oct 2025 12:58:42 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4869c4e5d8sm740349566b.82.2025.10.04.12.52.33
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4865f741f1sm751839866b.39.2025.10.04.12.58.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Oct 2025 12:52:33 -0700 (PDT)
+        Sat, 04 Oct 2025 12:58:41 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][walnascar][PATCH] civetweb: patch CVE-2025-55763
-Date: Sat,  4 Oct 2025 21:52:32 +0200
-Message-ID: <20251004195232.3638956-1-skandigraun@gmail.com>
+Subject: [meta-networking][scarthgap][PATCH] civetweb: patch CVE-2025-55763
+Date: Sat,  4 Oct 2025 21:58:41 +0200
+Message-ID: <20251004195841.3642844-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 19:52:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120239
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 19:58:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120240
 
 Details: https://nvd.nist.gov/vuln/detail/CVE-2025-55763
 
@@ -78,11 +78,11 @@ Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 
 diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Fix-heap-overflow-in-directory-URI-slash-redirection.patch b/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Fix-heap-overflow-in-directory-URI-slash-redirection.patch
 new file mode 100644
-index 0000000000..713e806643
+index 0000000000..667cb9c2f0
 --- /dev/null
 +++ b/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Fix-heap-overflow-in-directory-URI-slash-redirection.patch
 @@ -0,0 +1,57 @@
-+From e9cfe6edaa82fd9e2e010c8f1ff4df9ba093a56e Mon Sep 17 00:00:00 2001
++From e5e639d42a94b2585fe5123cb123963c6f04c3f5 Mon Sep 17 00:00:00 2001
 +From: krispybyte <krispybyte@proton.me>
 +Date: Sat, 21 Jun 2025 23:33:50 +0300
 +Subject: [PATCH] Fix heap overflow in directory URI slash redirection
@@ -140,7 +140,7 @@ index 0000000000..713e806643
 + 			mg_free(new_path);
 + 		}
 diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
-index 4b08a44813..cfb6926866 100644
+index f5a699d5be..a546efca7b 100644
 --- a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
 +++ b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
 @@ -8,6 +8,7 @@ SRCREV = "d7ba35bbb649209c66e582d5a0244ba988a15159"
