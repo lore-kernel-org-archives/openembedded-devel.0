@@ -2,136 +2,156 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF20ECAC5BB
-	for <webhook@archiver.kernel.org>; Sat,  4 Oct 2025 18:39:38 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web10.15029.1759603172126228024
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6092CAC5B0
+	for <webhook@archiver.kernel.org>; Sat,  4 Oct 2025 19:02:18 +0000 (UTC)
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+ by mx.groups.io with SMTP id smtpd.web10.15429.1759604529789179477
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Oct 2025 11:39:32 -0700
+ Sat, 04 Oct 2025 12:02:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=M9zyNVf0;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-631df7b2dffso7896058a12.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 11:39:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IyeeUiOR;
+ spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-63163a6556bso7747588a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 12:02:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759603170; x=1760207970; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759604528; x=1760209328; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pCfnlKaya8+N54tm3zyLhAkXMfHrb2JIY2kenHMU1rQ=;
-        b=M9zyNVf0Gmd8hSSkXKWL6kuWBOB3peyxyMYLDMIAWCCmFmU6itu8RLoAluQu2pVPUG
-         hJGduj2MvmImcjQlWDJka5WNsdlSYnZCpiGbBccqwiZlt+RLwbXmj/6WPT4TZhBHFDR4
-         QyeMnqwlyKTVcKdG2cjl/5kK+lGN0nihCvKlJjpvjVdRRjMsSAI7D27SeTFAo0G+E1B4
-         MMH1LUPl7Cyf4ycfyGCj9jl/MXL/dMoiKBFHeFKaAhqE6bvA5FTS8eXpVj6COq4/lNxk
-         Q6n+so0eG/nAuejGzgdm+3wJ1qUSFNJiw6epsiFBYJPRUKUrZowpIzPUpPhdWYAIeMwV
-         Hwig==
+        bh=tV9vpG1X6070o0wzXGtrg6IFBD1gcPYBKdSsnVjDJ1Q=;
+        b=IyeeUiORGnfnuF6y/B0rVXuvQ6mhQHfw5i1inBAq41wRnDAaS6q0Ep/wbc4tzT/qcb
+         WdbBOnsKN7oEkQl43Hm62J8ChKSUgem6jeriLKkzoP/U04Xc31XybstODoXeoQBjDF3o
+         ZWyA0dHTwVo+85nKbu8qxL5Mwnp0TSXkWq8VI2BP5VS7FVVHI1YPUBgGxbL8ckrLG2dt
+         mOi2oVqk2HhYbSBQkuzr/WyGNOs/SZgvabdi8llry9oPlh72U9eW7FZV+qzqMOEgB4yN
+         chLVbUKkv5yGIrPnG560pyNE/RUg1jT8Lq1NbA9zq/5zwMAmDS/433g6zNN/IM59m+a2
+         wLhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759603170; x=1760207970;
+        d=1e100.net; s=20230601; t=1759604528; x=1760209328;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=pCfnlKaya8+N54tm3zyLhAkXMfHrb2JIY2kenHMU1rQ=;
-        b=jlR1Rdxsg6LHWbPW0LVCCgZZxb8Rax9QN4inaLEdh1zGYN3bj20qzIL/onqSSaHVVH
-         x5JaQuz/crtoM973qLAgY+v7ew0mqw6VKrGNiC+37v1PidT8teNIZQHUY9s0mI8blQZn
-         LPiN+UDiEWZPLu7k4ZJ8WnBf+V7uI0FYR+35AFXWXPe48EYaQbsEhEwv8EZQ/0/TVGIE
-         yQ3dCgnqBUBb5qMcsLb543mS9WjFbG9//tenkyzLstQuo4gum3gTNvx0d8au7mjhcsWa
-         TUu34S/zxQ3vFcoOCbMw694LWHTpc7oy+bmvCHFuJBdyKoE60zvzbz9vQyGfGQUrsx/H
-         NGCA==
-X-Gm-Message-State: AOJu0Yx32Ca6vawz6tqxsbxsTOLis5sCsvm51qWdRzcnm8B636dSTvGz
-	+di8rWGB3LlfDEb9/Um2EyJXTYvW1YVpSigbkCYNqIxV5pHjMkkgFE5ExCtEyQ==
-X-Gm-Gg: ASbGncsX4dCR/JJlD45IkCnXjzY6/IZE6jVgxXWXPCym39Mwy/DjQlOpA2m3BiA6UjG
-	Xif6m+P5h+rAznFeOWlNaigcN6Gt6NONbGmz4JRTIs1vNxtUNATDU1l7fLvxPTOcgZbzzlol9VX
-	rDfcw7ZKYY3rlgRye+SQvXizNou4GvVcAoUEx+fAv/wN/2p66y/wp1cJZUExTeKhsYME08zalif
-	3R2c8gRDXy39WJe5IG0REvNfduXpup77yUxcgqlVPddkZVLIDR/i3nwz6QhVZ79hU0Br7V/n/QJ
-	snapynF/mxilLKcl/ij+BuZ5Nzi6vox4PGhhA21tYqI57FUOARqhOHgc7x+0+F2M+ndWAQczjI2
-	nUdSWjl/rpXmwB6sXlp8i+rK8/bUbFD45l5k7uarw5MbaHOg1gZhyTjQ=
-X-Google-Smtp-Source: AGHT+IHZwRK7A6ytXXYcY50dI+UoNGayOYuad8rZwx3zhBTmMMqKyNeZgcNW++qvftFA4zF4CDmjcA==
-X-Received: by 2002:a05:6402:5252:b0:62e:ebb4:e6e0 with SMTP id 4fb4d7f45d1cf-638fcb674ebmr8577319a12.1.1759603170331;
-        Sat, 04 Oct 2025 11:39:30 -0700 (PDT)
+        bh=tV9vpG1X6070o0wzXGtrg6IFBD1gcPYBKdSsnVjDJ1Q=;
+        b=l/CuK7DTzV58faJ+CuR4MJQsiPu/LuC8kH237f5hjqwX+Bw8JwHvHgu/wQV8PGTLMA
+         7ekWoYYz3ehiWRzYVS0g0r6anJ/Zbnksg/nO6P30WoAERVjZ0EzmYwTcsiu2tHTmBCrA
+         TYTrgqYz2+mGHk4aZzeKf4913am/IC29oSTrN2ln7KN49LbharwXVTLoyJZM0TMsKKAk
+         75c/IQJ1ABXai1VqqENg3HTmoPwuF9Skrl0/BRMQkGCyRYoN69FwoJb3ZN7f1dHOKZq/
+         tawcy715W9dz7JVXVOUE4BalZVzWL11x5UGadiio7a7eQT0diBcw1WlgROrMiHVv0H+8
+         5QMw==
+X-Gm-Message-State: AOJu0YxUmQ1ou0m1/vwLBita6blQ/vKt6w6ITQ83BHBzR15QTM6Hkf/V
+	FGGGCB/wQjzidN8iywQVr9k5wUgU63ycwcAchI4UFQRzMW02fAbaJB0HMbn5Gg==
+X-Gm-Gg: ASbGncs6ucf6Ocrb6DsmS95rvjhWsK3+JuTQdK8r3UcZVLNqK44XUjuYQo5DoYeghbN
+	absF7WZL19dxBRLHlVlWioYKqu9hQp2ejmih8R5CTzlbcCFbV4087LIpjx6F+tKJe9t8Pj2T9vA
+	pDP02tA6wUxVMrbW5LMFNfXVodNI8KkzlmJL4T/+UxSXuCExVl7b/g9+mU5KbwSHvwRJfCQLAlX
+	pLiej+pSQZcpTA8XrYXstFX96NIvPQZrlCbB7ocds7aCXrBZS/hCvefisfX1IyFCP5jUTtrmihN
+	liSVsBPH8Jfvro3BGoSiGz8xCMiuw3+RdiV6KDJmGKUtJVqP8S3rqmHpXoE7EUeWpg2TtqoCT8u
+	f5jA+OYHyRgWI0cDdLtjCHwmUTZcnwtrasEh8mWeCQSNl
+X-Google-Smtp-Source: AGHT+IECopqbxFlHMeYEKXGDy87lZ0gOoZO3CkvlT8TkyFQSI68iCss6l3hxBI4Ot3tnJs6xE+hF0A==
+X-Received: by 2002:a05:6402:274c:b0:62a:a4f0:7e4f with SMTP id 4fb4d7f45d1cf-63939c233a8mr8417733a12.29.1759604527866;
+        Sat, 04 Oct 2025 12:02:07 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6394ba637fasm4022507a12.33.2025.10.04.11.39.28
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-637881011e9sm6523307a12.25.2025.10.04.12.02.06
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Oct 2025 11:39:28 -0700 (PDT)
+        Sat, 04 Oct 2025 12:02:06 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-webserver][walnascar][PATCH] apache2: patch CVE-2025-54090
-Date: Sat,  4 Oct 2025 20:39:28 +0200
-Message-ID: <20251004183928.2967614-1-skandigraun@gmail.com>
+Subject: [meta-networking][PATCH] civetweb: patch CVE-2025-55763
+Date: Sat,  4 Oct 2025 21:02:05 +0200
+Message-ID: <20251004190205.3200208-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 18:39:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120235
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Oct 2025 19:02:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120236
 
-https://nvd.nist.gov/vuln/detail/CVE-2025-54090
+https://nvd.nist.gov/vuln/detail/CVE-2025-55763
 
-A bug in Apache HTTP Server 2.4.64 results in all "RewriteCond expr ..." tests evaluating as "true".
+Though the original PR has 2 commits, the second one is just
+about minor code-cosmetics.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../apache2/apache2/CVE-2025-54090.patch      | 40 +++++++++++++++++++
- .../recipes-httpd/apache2/apache2_2.4.64.bb   |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2025-54090.patch
+ .../civetweb/civetweb/CVE-2025-55763.patch    | 59 +++++++++++++++++++
+ .../civetweb/civetweb_1.16.bb                 |  1 +
+ 2 files changed, 60 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/civetweb/civetweb/CVE-2025-55763.patch
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2025-54090.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2025-54090.patch
+diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb/CVE-2025-55763.patch b/meta-networking/recipes-connectivity/civetweb/civetweb/CVE-2025-55763.patch
 new file mode 100644
-index 0000000000..54ae450a5f
+index 0000000000..9840a66029
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2025-54090.patch
-@@ -0,0 +1,40 @@
-+From 8abb3d06b23975705ebcf4bf4476464fd0b9bd0b Mon Sep 17 00:00:00 2001
-+From: Eric Covener <covener@apache.org>
-+Date: Mon, 21 Jul 2025 11:12:44 +0000
-+Subject: [PATCH] fix `rewritecond expr` regression in 2.4.64
++++ b/meta-networking/recipes-connectivity/civetweb/civetweb/CVE-2025-55763.patch
+@@ -0,0 +1,59 @@
++From 76e222bcb77ba8452e5da4e82ae6cecd499c25e0 Mon Sep 17 00:00:00 2001
++From: krispybyte <krispybyte@proton.me>
++Date: Sat, 21 Jun 2025 23:33:50 +0300
++Subject: Fix heap overflow in directory URI slash redirection
 +
-+  *) SECURITY: CVE-2025-54090: Apache HTTP Server: 'RewriteCond expr'
-+     always evaluates to true in 2.4.64 (cve.mitre.org)
-+     A bug in Apache HTTP Server 2.4.64 results in all "RewriteCond
-+     expr ..." tests evaluating as "true".
-+     Users are recommended to upgrade to version 2.4.65, which fixes
-+     the issue.
++CVE: CVE-2025-55763
 +
++Upstream-Status: Backport [https://github.com/civetweb/civetweb/commit/c584455624d9a9f6ec72839f61dd3cdb9d8435ba]
 +
-+Reviewed By: covener, ylavic, gbechis, jorton
++Signed-off-by: Gyorgy Sarvari <skandigraun@mail.com>
 +
-+git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1927361 13f79535-47bb-0310-9956-ffa450edef68
-+
-+CVE: CVE-2025-54090
-+Upstream-Status: Backport [https://github.com/apache/httpd/commit/8abb3d06b23975705ebcf4bf4476464fd0b9bd0b]
-+
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ modules/mappers/mod_rewrite.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
++ src/civetweb.c | 23 ++++++++++++++++++-----
++ 1 file changed, 18 insertions(+), 5 deletions(-)
 +
-+diff --git a/modules/mappers/mod_rewrite.c b/modules/mappers/mod_rewrite.c
-+index f9fcd61400f..ae0ceda0508 100644
-+--- a/modules/mappers/mod_rewrite.c
-++++ b/modules/mappers/mod_rewrite.c
-+@@ -4276,8 +4276,9 @@ static cond_return_type apply_rewrite_cond(rewritecond_entry *p, rewrite_ctx *ct
-+                 rc = COND_RC_NOMATCH;
-+             }
-+             else {
-+-                rc = COND_RC_MATCH;
-++                rc = (rc > 0) ? COND_RC_MATCH : COND_RC_NOMATCH;
-+             }
++diff --git a/src/civetweb.c b/src/civetweb.c
++index bbc9aa8be..e969c939f 100644
++--- a/src/civetweb.c
+++++ b/src/civetweb.c
++@@ -15579,7 +15579,6 @@ handle_request(struct mg_connection *conn)
++ 	/* 12. Directory uris should end with a slash */
++ 	if (file.stat.is_directory && ((uri_len = (int)strlen(ri->local_uri)) > 0)
++ 	    && (ri->local_uri[uri_len - 1] != '/')) {
++-
++ 		/* Path + server root */
++ 		size_t buflen = UTF8_PATH_MAX * 2 + 2;
++ 		char *new_path;
++@@ -15592,12 +15591,26 @@ handle_request(struct mg_connection *conn)
++ 			mg_send_http_error(conn, 500, "out or memory");
++ 		} else {
++ 			mg_get_request_link(conn, new_path, buflen - 1);
++-			strcat(new_path, "/");
 ++
-+             /* update briRC backref info */
-+             if (rc && !(p->flags & CONDFLAG_NOTMATCH)) {
-+                 ctx->briRC.source = source;
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.64.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.64.bb
-index 5830568746..b2cfcebc49 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.64.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.64.bb
-@@ -16,6 +16,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
-            file://0008-Fix-perl-install-directory-to-usr-bin.patch \
-            file://0009-support-apxs.in-force-destdir-to-be-empty-string.patch \
-            file://0001-make_exports.awk-not-expose-the-path.patch \
-+           file://CVE-2025-54090.patch \
-           "
+++			size_t len = strlen(new_path);
+++			if (len + 1 < buflen) {
+++				new_path[len] = '/';
+++				new_path[len + 1] = '\0';
+++				len += 1;
+++			}
+++
++ 			if (ri->query_string) {
++-				/* Append ? and query string */
++-				strcat(new_path, "?");
++-				strcat(new_path, ri->query_string);
+++				if (len + 1 < buflen) {
+++					new_path[len] = '?';
+++					new_path[len + 1] = '\0';
+++					len += 1;
+++				}
+++
+++				/* Append with size of space left for query string + null terminator */
+++				size_t max_append = buflen - len - 1;
+++				strncat(new_path, ri->query_string, max_append);
++ 			}
+++
++ 			mg_send_http_redirect(conn, new_path, 301);
++ 			mg_free(new_path);
++ 		}
++
+diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
+index bbf284474c..97d90dab13 100644
+--- a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
++++ b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
+@@ -8,6 +8,7 @@ SRCREV = "5864b55a94f4b5238155cbf2baec707f0fa2ba6d"
+ PV .= "+git"
+ SRC_URI = "git://github.com/civetweb/civetweb.git;branch=master;protocol=https \
+            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
++           file://CVE-2025-55763.patch \
+            "
  
- SRC_URI:append:class-target = " \
+ 
 
