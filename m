@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4C3ECCD185
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9061ACAC5B8
 	for <webhook@archiver.kernel.org>; Sun,  5 Oct 2025 13:58:40 +0000 (UTC)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
- by mx.groups.io with SMTP id smtpd.web11.11019.1759672718509051839
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web11.11018.1759672717551691881
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Oct 2025 06:58:38 -0700
+ Sun, 05 Oct 2025 06:58:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CMkU+Hs4;
- spf=pass (domain: gmail.com, ip: 209.85.208.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-62fca01f0d9so7989289a12.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 06:58:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Kh2Rm2I5;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-b3da3b34950so417074766b.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 06:58:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759672717; x=1760277517; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759672716; x=1760277516; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=dtfQ5bJeyUzT+g9g8IPPcnTYbiw69PzlzJDbyFGSRCU=;
-        b=CMkU+Hs4xSg8xwjtzR1rqcbp5/hTlQhVs2WJuhuwxiyLOZ2hraiRVEQhg/mkE2uvM0
-         2R3zVk19hfDrOgdvuH5P+ApHxM/J+Xf5Lh3jmLp/Yc3BXLTC0EMkYgtzIY3Pj0W2oK3j
-         5kCcMvVlHnodndEmMtVuqRFGk7MKNxv8SsJpUiweIACjIQPBgASyRfnkuDmcMAxVE3xd
-         C1hj6xZ48C5/+fjKoj7IwpmDYpuxuPgTJT2KRDkt1FxvY4tBepRsGNUVYbym2iMD0GcT
-         Z/CVSUovrJ3uVT7yfjG67+rpXu86F9UA0coAtIS2203Lici5KbXaILBqJDdyFgNmwSL9
-         LD8g==
+        bh=WyitT6psPA30khZ/5NKp5iq8ceiojO5PGBAfDTK+arw=;
+        b=Kh2Rm2I5APw/1numxQWkQQrBdFVNffcafr+IRT0gkcuh0CUvztsGI6XiiPDeA/Bnok
+         wPDcYbmwlewDBKvvDVfRYByvjW+5HYa2msxM2QVAHXQVV6dOishPthpa1aE01YD7LZg/
+         Y/ptM8bykDoNbsj4e/f912G84kIlGdZluhmtNNkIC3AUnY8RakylqYjqxuL3lTY/aMjI
+         KBIrs19haAiK0mlxlaangjyzT8rtouXjMr/1KNKLB0LZ+TPBErO6SksjZHx9jBGkg1SC
+         teoSwlNbnuWG5/5c5j4WkhyW1pRmsoryy8oDsJ8jZVx9d0hVCsF1UdIaiEqIpOAL9h+d
+         oyvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759672717; x=1760277517;
+        d=1e100.net; s=20230601; t=1759672716; x=1760277516;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=dtfQ5bJeyUzT+g9g8IPPcnTYbiw69PzlzJDbyFGSRCU=;
-        b=ldQVh4tN70rZZf14lFtayNO9aA/nnVSPn4f1F1IPmwd0NrWiTHuXlP49P30nJUXYNW
-         39UL/DWHZaFcbWJ3igbhkI/FlQjKKNmCFysHJwxYM6AL22ulxHy/7KRKMfYXjoHLT0do
-         V8Ygnr0T6Imq9k6zfYg1PLyVa98JJkIMYI93N/fc/YNMCAhWv2Z0KwLcgi2ZEx7rMAQo
-         L7Wly2EDI8vzW6mlK623eCjgJYBrZO46rgwrR39Dt3sRoZYWMhUb05bhr+mZlSyryjaO
-         GjtMlkabLh6KMq/myNOTLYnJgTFFlLU6eCotTptPV5T9a/I61jd1Aixfop3Gd85ivZef
-         Au1A==
-X-Gm-Message-State: AOJu0YwHIoQJRmVv/0KLDSXcQ9WoV74uBW1SgUx393Q/ww34eMy/DFRh
-	iiE8649rrsIU6MO9IIgjiOQZPZFol4z+b/wdHQJfNzjJ4Ekyum8gNP4v+oSMcg==
-X-Gm-Gg: ASbGncvu8NRnkB3X3p93K0Bsqbf/s/9aPPmA8za4nzKf2egtWRocaPLoktaVjrEwT/A
-	uNaiPPb3apJmPRBtGuXq2/xF5ovFgfZkRUdlz0DiPqY12sH4a5XWaMzhxWAWAC65vo6DyRdeZTS
-	DCLWJ9gvDc95Tlus40AH1ThmV16vF5DynuV5SfMYwJLagV88THz/YcuosqSB4jrwwqukX0XXTO/
-	qFOQwYlwO6ayMaOJ8G3s8agWupgsH2KU3aZsxbs28DmN6ECHnpb+1BiSS9uw+cBEVUASnsW9S1Y
-	LBu7PKuHqkJYqj5M0TyGBWY09bUpQubnbB4qCoMixu98YFarcbAY+kZiT87B5fwTzaJUO7tku5i
-	myguB29w5yzbJcxVXCufWttUweLPnave55A96fXEAOVA5RtwnoFgraEE=
-X-Google-Smtp-Source: AGHT+IG7LhdL+ZFCpOTWU6tVGuodsI2LyVgwEuJ4CNvOnmfgHTw3aWyVofs3JfwRc9SVE0sHukcLow==
-X-Received: by 2002:a17:907:2683:b0:afe:b92b:28e9 with SMTP id a640c23a62f3a-b49c4cde1c8mr1213586966b.49.1759672716455;
-        Sun, 05 Oct 2025 06:58:36 -0700 (PDT)
+        bh=WyitT6psPA30khZ/5NKp5iq8ceiojO5PGBAfDTK+arw=;
+        b=X0wkQZcZPhZLcPvGmwmQEzhzxoJWlZIHcepjNfWxypW7UCVxXf2UVhlMgGV0nqAZ7k
+         0mWFoEId2lXHiFeJcTL027Iq5oR3WqWpQ8//FiePGxAAbyGzmHImfsCU/+ZaD8odBzh3
+         QDBjjoFdnsdAfm53KFXl/ccRTJztnQ6Bo2ESJ9GXgllpIVFp9wGrP1b52SuRs4ZxZPsH
+         JBejr6FnGAHTmXVb7/DPlbd1NI/5TPkzHUB3UB5fwGc3Oc6+QSQMGxMf1j5hH2EhuR11
+         kLGbzXZIOuh4v2HQD7NUK57UaBwd/d9vrUH0aW36oj0fuu7+C2R9sPKbZcoBU0EKY5VJ
+         vctw==
+X-Gm-Message-State: AOJu0YwyRgeFHS5omQ1LL4/3AfgNQE7hFhZNPhtLQ8SoPn9Exp27/036
+	6QMPqU1oe1AsZ5rBaYjKXJ+zY8XJi77/VHik0x4lkeMziESHRBisQJ9cHAiN2g==
+X-Gm-Gg: ASbGncvQS+TcEuIbobFomHmqDU68IJIjACSVx2dI+gMs2OITKZBm7Qqj4YG9Nk6RZ/B
+	OB/+xX2SPwBTmxtiJdbMpR+ATKJNKN7l1yiYUuAPXUne1s2Bgl48DDuHi7WZBCqorDAYtFLwusE
+	Vx4HVqXYl5TMqYVirsCAQDa+YGbyaZUmFMxV3USLOaoEtcZOg0NKll4j0ypiAmSIyWMWrKUi8s8
+	MY588IvA+5Cz8N0TRb0qS96fg1p8y9Rf5FS4Ic/ATF+JEtSrbKgSBrTLecFgcdeA5DPmEJQ+n75
+	ORcqNdYfLUfmg8iFe+1m5NLWKvPqBaF3oJw/zVH7X5ZjIHcP2w+2Q5W7t/p7q7UU9jmrGyMtdUV
+	BjO//4lR/5mp8DNc7E05Wj2OW+NSfGL+Gbp8EoROgR36te+l5KyILRQI=
+X-Google-Smtp-Source: AGHT+IH1ywQ1pWEvdzjLqot+Lp2UEsXM2M3dMuQE9+7RelziPZ/RbTMWhbFDA59GCxfy6dsNQP5XMA==
+X-Received: by 2002:a17:906:eb0e:b0:b4b:4692:6927 with SMTP id a640c23a62f3a-b4b46926941mr535291666b.23.1759672715794;
+        Sun, 05 Oct 2025 06:58:35 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4869c4f314sm909200166b.69.2025.10.05.06.58.35
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Oct 2025 06:58:36 -0700 (PDT)
+        Sun, 05 Oct 2025 06:58:35 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 3/5] audiofile: fix multiple CVEs
-Date: Sun,  5 Oct 2025 15:58:31 +0200
-Message-ID: <20251005135833.879336-3-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 2/5] audiofile: patch CVE-2017-6829
+Date: Sun,  5 Oct 2025 15:58:30 +0200
+Message-ID: <20251005135833.879336-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251005135833.879336-1-skandigraun@gmail.com>
 References: <20251005135833.879336-1-skandigraun@gmail.com>
@@ -67,119 +67,81 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 13:58:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120253
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120252
 
 From: Peter Marko <peter.marko@siemens.com>
 
-CVE-2017-6830 / CVE-2017-6834 / CVE-2017-6836 / CVE-2017-6838
-
 Use patch from buildroot:
-https://github.com/buildroot/buildroot/commit/4a1a8277bba490d227f413e218138e39f1fe1203
+https://github.com/buildroot/buildroot/commit/434890df2a7c131b40fec1c49e6239972ab299d2
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 75f2bd2b3b145d8282db9926d8212c6d81bde99e)
+(cherry picked from commit f29fbaa4650201a059c65572947ed8faa991fcd8)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
  .../audiofile/audiofile_0.3.6.bb              |  1 +
- ...multiplication-overflow-in-sfconvert.patch | 79 +++++++++++++++++++
- 2 files changed, 80 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0006-Check-for-multiplication-overflow-in-sfconvert.patch
+ ...ues-to-fix-index-overflow-in-IMA.cpp.patch | 43 +++++++++++++++++++
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch
 
 diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-index a48bed2a3b..8aebe88f26 100644
+index 7654c073f4..a48bed2a3b 100644
 --- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
 +++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-@@ -15,6 +15,7 @@ SRC_URI = " \
+@@ -14,6 +14,7 @@ SRC_URI = " \
+     file://0002-fix-build-on-gcc6.patch \
      file://0003-fix-CVE-2015-7747.patch \
      file://0004-Always-check-the-number-of-coefficients.patch \
-     file://0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch \
-+    file://0006-Check-for-multiplication-overflow-in-sfconvert.patch \
++    file://0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch \
  "
  SRC_URI[md5sum] = "235dde14742317328f0109e9866a8008"
  SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782"
-diff --git a/meta-oe/recipes-multimedia/audiofile/files/0006-Check-for-multiplication-overflow-in-sfconvert.patch b/meta-oe/recipes-multimedia/audiofile/files/0006-Check-for-multiplication-overflow-in-sfconvert.patch
+diff --git a/meta-oe/recipes-multimedia/audiofile/files/0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch b/meta-oe/recipes-multimedia/audiofile/files/0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch
 new file mode 100644
-index 0000000000..ec21b09f30
+index 0000000000..00bb7e597e
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/audiofile/files/0006-Check-for-multiplication-overflow-in-sfconvert.patch
-@@ -0,0 +1,79 @@
-+From 7d65f89defb092b63bcbc5d98349fb222ca73b3c Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-multimedia/audiofile/files/0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch
+@@ -0,0 +1,43 @@
++From 25eb00ce913452c2e614548d7df93070bf0d066f Mon Sep 17 00:00:00 2001
 +From: Antonio Larrosa <larrosa@kde.org>
-+Date: Mon, 6 Mar 2017 13:54:52 +0100
-+Subject: [PATCH] Check for multiplication overflow in sfconvert
++Date: Mon, 6 Mar 2017 18:02:31 +0100
++Subject: [PATCH] clamp index values to fix index overflow in IMA.cpp
 +
-+Checks that a multiplication doesn't overflow when
-+calculating the buffer size, and if it overflows,
-+reduce the buffer size instead of failing.
-+
-+This fixes the 00192-audiofile-signintoverflow-sfconvert case
-+in #41
++This fixes #33
++(also reported at https://bugzilla.opensuse.org/show_bug.cgi?id=1026981
++and https://blogs.gentoo.org/ago/2017/02/20/audiofile-global-buffer-overflow-in-decodesample-ima-cpp/)
 +
 +Signed-off-by: Peter Korsgaard <peter@korsgaard.com>
 +
-+CVE: CVE-2017-6830
-+CVE: CVE-2017-6834
-+CVE: CVE-2017-6836
-+CVE: CVE-2017-6838
++CVE: CVE-2017-6829
 +Upstream-Status: Inactive-Upstream [lastrelease: 2013]
 +Signed-off-by: Peter Marko <peter.marko@siemens.com>
 +---
-+ sfcommands/sfconvert.c | 34 ++++++++++++++++++++++++++++++++--
-+ 1 file changed, 32 insertions(+), 2 deletions(-)
++ libaudiofile/modules/IMA.cpp | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/sfcommands/sfconvert.c b/sfcommands/sfconvert.c
-+index 80a1bc4..970a3e4 100644
-+--- a/sfcommands/sfconvert.c
-++++ b/sfcommands/sfconvert.c
-+@@ -45,6 +45,33 @@ void printusage (void);
-+ void usageerror (void);
-+ bool copyaudiodata (AFfilehandle infile, AFfilehandle outfile, int trackid);
++diff --git a/libaudiofile/modules/IMA.cpp b/libaudiofile/modules/IMA.cpp
++index 7476d44..df4aad6 100644
++--- a/libaudiofile/modules/IMA.cpp
+++++ b/libaudiofile/modules/IMA.cpp
++@@ -169,7 +169,7 @@ int IMA::decodeBlockWAVE(const uint8_t *encoded, int16_t *decoded)
++ 		if (encoded[1] & 0x80)
++ 			m_adpcmState[c].previousValue -= 0x10000;
 + 
-++int firstBitSet(int x)
-++{
-++        int position=0;
-++        while (x!=0)
-++        {
-++                x>>=1;
-++                ++position;
-++        }
-++        return position;
-++}
-++
-++#ifndef __has_builtin
-++#define __has_builtin(x) 0
-++#endif
-++
-++int multiplyCheckOverflow(int a, int b, int *result)
-++{
-++#if (defined __GNUC__ && __GNUC__ >= 5) || ( __clang__ && __has_builtin(__builtin_mul_overflow))
-++	return __builtin_mul_overflow(a, b, result);
-++#else
-++	if (firstBitSet(a)+firstBitSet(b)>31) // int is signed, so we can't use 32 bits
-++		return true;
-++	*result = a * b;
-++	return false;
-++#endif
-++}
-++
-+ int main (int argc, char **argv)
-+ {
-+ 	if (argc == 2)
-+@@ -323,8 +350,11 @@ bool copyaudiodata (AFfilehandle infile, AFfilehandle outfile, int trackid)
-+ {
-+ 	int frameSize = afGetVirtualFrameSize(infile, trackid, 1);
++-		m_adpcmState[c].index = encoded[2];
+++		m_adpcmState[c].index = clamp(encoded[2], 0, 88);
 + 
-+-	const int kBufferFrameCount = 65536;
-+-	void *buffer = malloc(kBufferFrameCount * frameSize);
-++	int kBufferFrameCount = 65536;
-++	int bufferSize;
-++	while (multiplyCheckOverflow(kBufferFrameCount, frameSize, &bufferSize))
-++		kBufferFrameCount /= 2;
-++	void *buffer = malloc(bufferSize);
++ 		*decoded++ = m_adpcmState[c].previousValue;
 + 
-+ 	AFframecount totalFrames = afGetFrameCount(infile, AF_DEFAULT_TRACK);
-+ 	AFframecount totalFramesWritten = 0;
++@@ -210,7 +210,7 @@ int IMA::decodeBlockQT(const uint8_t *encoded, int16_t *decoded)
++ 			predictor -= 0x10000;
++ 
++ 		state.previousValue = clamp(predictor, MIN_INT16, MAX_INT16);
++-		state.index = encoded[1] & 0x7f;
+++		state.index = clamp(encoded[1] & 0x7f, 0, 88);
++ 		encoded += 2;
++ 
++ 		for (int n=0; n<m_framesPerPacket; n+=2)
 +-- 
 +2.11.0
 +
