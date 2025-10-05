@@ -2,68 +2,68 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73352CAC5BB
-	for <webhook@archiver.kernel.org>; Sun,  5 Oct 2025 10:29:29 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web11.8107.1759660167531205083
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79CE9CAC5BB
+	for <webhook@archiver.kernel.org>; Sun,  5 Oct 2025 10:33:19 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web11.8160.1759660396357898348
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Oct 2025 03:29:27 -0700
+ Sun, 05 Oct 2025 03:33:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=A93javjA;
- spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-637a2543127so6958317a12.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 03:29:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=V2mW0SZj;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b48d8deafaeso784791566b.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 03:33:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759660166; x=1760264966; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759660395; x=1760265195; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Vvi8FZn49MIr2eyYfH5EE7YArFLn/CI+in/GfCnDmKs=;
-        b=A93javjAj3xWpVNjzedOqrDaWOFOWrH/3Vs7l/Fg77dRLznquP+otf6ReYrTZiLbuW
-         9Nax2iqqW8tyJqmsupKoNOjc7Pa6CnokBdbk1UN+onJRyYiREAIM+oltN7E+8KycHihk
-         d9O5+vAhOFsADrbm/z8Fh6z1bw1PYPOWCb6aJFHURYkwMoUaAgB3RVgadDTnYvfy/J/c
-         J6UDnViMY21tbYJG5mmf3Sd9pKAvdn1OFNmXzcck2Sq7UL+PfRpPO4IasEOAByF357SP
-         g4oiVh+wQ3nhvskqNZk+xc/6QDk9pmYuvI69tm4EJmewmK2un3QUMmNJcpxF21gNNR+a
-         2aJg==
+        bh=M1AkATbYUUCz0YOEKJn0R65DIKtwVQli80vFmmUmzoc=;
+        b=V2mW0SZjLRIFlqIc0MK1PJSQTOER0jFfTM4etOPiuEuUSa4iRQzAXwS/TxBATlUeAa
+         hGLanL7p0JGeoV2ProBDuL355gLwF1kJ8UqCOwWwrUYXsyIc/+uW5irWIkoZ5X11pN38
+         Cri5T9ozEzNlCzZBIZSMdmSCvPFfmbx4/j6rx74PYjL8jAhH9z4BArHpWmd1vkU9XOI3
+         Co0WroiePvNf/j85flF9ZLiwjBu/AneEag9dWMm7XEV5ZRBP914bfZJsxKzb8fJD1Eze
+         pdnqpWbP9UIrOyO+1W0ZszFMcloKfxNUYShc5wIQY+36qfCpzUcYJ14v4Map2vqx58nJ
+         dQTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759660166; x=1760264966;
+        d=1e100.net; s=20230601; t=1759660395; x=1760265195;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Vvi8FZn49MIr2eyYfH5EE7YArFLn/CI+in/GfCnDmKs=;
-        b=hH4OOPy1CLyJP1Jh/SsTmZbyGkUwiBKG1GfPXb8itKVAkmoxK3tMht1TjN8C3/aG8D
-         Cf1Gb8xtrzeRn1mPWdGyylNVHno3ybn8IGzig1FDrb7/GB8XqDJPPmFogr540BbS54rX
-         1LaA9yVQz6tz/VyAdKa0l+neN9xNBbbzwEJOnHYumoM68/cpL5vJmtVjeVbO8ZBmnRcE
-         7DiL0eY9mXpaTzQr51WyZdbPzlMd7+H+1tKITxadNE/vUdJC959DOfNDQapFUzBRQFY1
-         cP9nBhYi54xqGxKS7orkd9vmlYtTgxFofC8GUz6pIxOw5ash49A6JjjDARtvkTKWIfE2
-         jzng==
-X-Gm-Message-State: AOJu0YyD7lg7Oy6fcdQuVBXEqwypFAuLXkNX5aWomJjlLLuNyHHFWcjz
-	dAXMyQ4m5AfXY5Hq1u47McWNtbImVhrF+wjYovmqqvF0gjI5yw6TVGaBuBWmzg==
-X-Gm-Gg: ASbGncsW/xUzA/afxvdKsSoYxNMHxJWqSHza4xmuE1j/Ap3MDSSYxxpCxB0BWaFtGf+
-	o/S+E9nuRrF4HnxtEaDrSxMK3CxQlAFZM9pwcKSIB82KS2PotRzlE0rttG//2YsIGRBZ3fvW0Vf
-	4eEtsYhtOArfhVVpiiYI/MM1u73U1Z1Q6NtzZIv1YVwIP9TngDqgr8HWycXLh3WkH6qMeQNEto5
-	QG5OH8lIwxHZmp84rAaCBpxamJ1WAv6BNfngvISreAsyWaxt0ZosV+Qudzo7n0Q6lfsJj4IXobq
-	jvVdJApihUJ6djy98tCtZnAVEZ7D3Tzklok4uFeugmW90hvXUpUIcMG1fkg+d2JSx0MAD7muiLt
-	RsLXO08fGWFlFxZk54wiRRU0v1912VW0O6b8h4vlrTAovENy0H7LpLI4=
-X-Google-Smtp-Source: AGHT+IFtEhS7UXw1QM/2GrnI0rlB+WOxZKUVIXR3/1LrR4bvlf8hfDo3az4kHWWpcQZo7XaplOZchQ==
-X-Received: by 2002:a05:6402:42d6:b0:62f:5992:a64a with SMTP id 4fb4d7f45d1cf-639348f1287mr10302738a12.13.1759660165572;
-        Sun, 05 Oct 2025 03:29:25 -0700 (PDT)
+        bh=M1AkATbYUUCz0YOEKJn0R65DIKtwVQli80vFmmUmzoc=;
+        b=VdLzFvsaBcaniMmLalHDUaQOLUgSvIW8Z3gEhcRdRfybD1hu1MJtnZsybDNrerxxjA
+         h7eFHUWO0+DwZxaPsnKJp4WYxq+1z8xUe0U5Gb2wtuhBmuIgwK6PKbHsQmYt5zZfj/PB
+         nbWhWQ6dqvUlzyMNbnjU0+UHGTdAA0kFenvsqgvtwzYCMRhoo+F3PusEMbKEuR0ts4IC
+         KDUry8qqMH8CMJ1FN4Bb0S07dgASXYOw2k5784LehSNdvrGyxJwhshl9Og6o8JoZAAtq
+         T09umpZFMp8dy43uEU1LC7gZMBuAGqpaut/I/f3n6smw2jqajolfbm7eczTesXxOWaG8
+         g3+g==
+X-Gm-Message-State: AOJu0Yy4FHSrBK8j10IsOyfKVmzUimlYhR38ELvhqrsatrPuNrD6/ENE
+	YYsIEEVBxsqkygdRtmz0p5/4VjI8uMX1WG9/MoiDBxRf1nN1oVB7VGlWICPisw==
+X-Gm-Gg: ASbGncuJqaTJi7grchjcK6eMBSs942oD/O7VQ1rPrIYjgmhQ+whDE/vU6NNkMCGi+K1
+	ir3W937t/xijQBriinl2ZEt3t2eIKqvvn/kvy+iSE5qB4HzQRxe+ZteY3Rc17d7YZ5UX6K1htJN
+	xzJwdFMzXgNYnMnqzdm/JJTo59XUA8doUnJ917cNCrQhFoaW/ebhGY+Xg+7PuVFBzyMJQeEu3Mn
+	7B/UpZrDe5kCtGBwzT/UZJN331sxCj+5GXECWGFI+AGCt5chIa1KGt6UsObzTOhv0eBwQy5H69O
+	yMA+zTVCC0qouDUl6birOjSdsonNP5YLWvsw2md8AzOd2wfdmZtMO+dBXhi5bDTLYEGDUHcJg98
+	fh0IK2TFzvmUwajIw1KGCsoCEkUQH8dN//Ptjw2M66Paf1EcYPmSPZJGWs4forKIJtw==
+X-Google-Smtp-Source: AGHT+IGmfVGkao9QVVa311R14w55IJ/gzz6zkJoVmMsfMlm/KqwZjjB33+kCW81AmAlmaTxgeX/LZA==
+X-Received: by 2002:a17:907:868c:b0:b3d:d6be:4cbc with SMTP id a640c23a62f3a-b49c3449f39mr1085607366b.24.1759660394480;
+        Sun, 05 Oct 2025 03:33:14 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6378811236csm7837862a12.42.2025.10.05.03.29.23
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4865a83f5fsm886151466b.32.2025.10.05.03.33.13
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Oct 2025 03:29:24 -0700 (PDT)
+        Sun, 05 Oct 2025 03:33:14 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][walnascar][PATCH] dovecot: patch CVE-2022-30550
-Date: Sun,  5 Oct 2025 12:29:23 +0200
-Message-ID: <20251005102923.1753645-1-skandigraun@gmail.com>
+Subject: [meta-networking][scarthgap][PATCH] dovecot: patch CVE-2022-30550
+Date: Sun,  5 Oct 2025 12:33:13 +0200
+Message-ID: <20251005103313.1792781-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 10:29:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120243
+ <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 10:33:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120244
 
 Details: https://nvd.nist.gov/vuln/detail/CVE-2022-30550
 
@@ -71,18 +71,18 @@ Pick the commit referenced in https://www.openwall.com/lists/oss-security/2022/0
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...g-passdbs-with-identical-driver-args.patch | 136 ++++++++++++++++++
- .../dovecot/dovecot_2.3.21.1.bb               |   1 +
- 2 files changed, 137 insertions(+)
+ ...g-passdbs-with-identical-driver-args.patch | 137 ++++++++++++++++++
+ .../recipes-support/dovecot/dovecot_2.3.21.bb |   1 +
+ 2 files changed, 138 insertions(+)
  create mode 100644 meta-networking/recipes-support/dovecot/dovecot/0001-auth-Fix-handling-passdbs-with-identical-driver-args.patch
 
 diff --git a/meta-networking/recipes-support/dovecot/dovecot/0001-auth-Fix-handling-passdbs-with-identical-driver-args.patch b/meta-networking/recipes-support/dovecot/dovecot/0001-auth-Fix-handling-passdbs-with-identical-driver-args.patch
 new file mode 100644
-index 0000000000..81a098966c
+index 0000000000..2adbee491e
 --- /dev/null
 +++ b/meta-networking/recipes-support/dovecot/dovecot/0001-auth-Fix-handling-passdbs-with-identical-driver-args.patch
-@@ -0,0 +1,136 @@
-+From 140a2643f1241c60848e3502db89e3e08703d85f Mon Sep 17 00:00:00 2001
+@@ -0,0 +1,137 @@
++From 30be738858f6e0b314717ea7ceb24fee165ce642 Mon Sep 17 00:00:00 2001
 +From: Timo Sirainen <timo.sirainen@open-xchange.com>
 +Date: Mon, 9 May 2022 15:23:33 +0300
 +Subject: [PATCH] auth: Fix handling passdbs with identical driver/args but
@@ -99,6 +99,7 @@ index 0000000000..81a098966c
 +CVE: CVE-2022-30550
 +
 +Upstream-Status: Backport [https://github.com/dovecot/core/commit/7bad6a24160e34bce8f10e73dbbf9e5fbbcd1904]
++
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
 + src/auth/auth-request.c |  6 +++---
@@ -218,16 +219,16 @@ index 0000000000..81a098966c
 + 
 + 	/* If blocking is set to TRUE, use child processes to access
 + 	   this passdb. */
-diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.3.21.1.bb b/meta-networking/recipes-support/dovecot/dovecot_2.3.21.1.bb
-index 3177cdb1d7..34d4deb7a2 100644
---- a/meta-networking/recipes-support/dovecot/dovecot_2.3.21.1.bb
-+++ b/meta-networking/recipes-support/dovecot/dovecot_2.3.21.1.bb
-@@ -12,6 +12,7 @@ SRC_URI = "http://dovecot.org/releases/2.3/dovecot-${PV}.tar.gz \
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.3.21.bb b/meta-networking/recipes-support/dovecot/dovecot_2.3.21.bb
+index 17fbd789b6..c626f26457 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.3.21.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.3.21.bb
+@@ -11,6 +11,7 @@ SRC_URI = "http://dovecot.org/releases/2.3/dovecot-${PV}.tar.gz \
+            file://dovecot.socket \
             file://0001-not-check-pandoc.patch \
             file://0001-m4-Check-for-libunwind-instead-of-libunwind-generic.patch \
-            file://1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830.patch \
 +           file://0001-auth-Fix-handling-passdbs-with-identical-driver-args.patch \
             "
- SRC_URI[sha256sum] = "2d90a178c4297611088bf7daae5492a3bc3d5ab6328c3a032eb425d2c249097e"
+ SRC_URI[sha256sum] = "05b11093a71c237c2ef309ad587510721cc93bbee6828251549fc1586c36502d"
  
 
