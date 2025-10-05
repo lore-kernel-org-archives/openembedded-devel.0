@@ -2,325 +2,843 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 305D5CAC5BB
-	for <webhook@archiver.kernel.org>; Sun,  5 Oct 2025 12:39:00 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web10.9648.1759667930397102130
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 585FCCAC5B8
+	for <webhook@archiver.kernel.org>; Sun,  5 Oct 2025 13:06:20 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web10.10118.1759669574535489288
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Oct 2025 05:38:50 -0700
+ Sun, 05 Oct 2025 06:06:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=i1uOPtqe;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-afcb7a16441so642447166b.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 05:38:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=O4t1+ltg;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-637e74e9104so3490685a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 06:06:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759667929; x=1760272729; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759669573; x=1760274373; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jqDJxMaM14Yp41cJzJOHyw8S5AeKwebi090BHHk5WdM=;
-        b=i1uOPtqeFAiIujWZB1WRWmDU85QFVJMk6CMVW3IHhbj5TyjHDseC6BcJTtJY/0s0Nx
-         KIv9A3Lo8D69kneHMTB6WzxLUYdxYGfl9EYqhwLr9Uxxlto6SDBJAsEDbCEen4+tXBMt
-         lvdtlk+DKj1AciXw3zFF2m7DNIABr6Az1JHNain0yBoFI2QkuNkxBanUjshK0LynM9zv
-         cEKV6m+0UW6fWtwy3LlkiSLSmGf7dyqYRuku8IwcCByxj4Uu6LhZ0ZTv09ZCguSYIr+a
-         p4Lhs3tQfYDFzEK2IVzJJ66e2ZG3HfcO2bEV1sFvcTPESMuWE+mZdRKbeMEcUQDUTGrc
-         uBrw==
+        bh=6xfJWf9EbOaXH6FlUKurYhNsREcW77K131xetEBPTbE=;
+        b=O4t1+ltgmtlyYI6ZCzY0sIVvJKkDXQkfqYJ9VHjN9xLmiNjXoaehJY2sm61597InqL
+         DNO/PzQUR41KjZUwsazTgbWZnYgc7xb0BUCJf5je/KkQwq+QRpNfMwx1Ri2xwKeYbl54
+         MjAgWt954t5T86TcKZqe9DPGSZVS4a+7bI32AMvcqBXaf4VFPfP4gYDY/qFMiXAyLsZE
+         0c4ssR02TaAigNj6UnfEJ//zS2AvxRXsAc0eixAYLO3lYuflyO6B+25J+jUBQpIm4gBG
+         VIEw4yXMYrhTH+V3i6ukzfw15kfMaXQnGUaX7jCW4d2N5C/WTxmLcP8srFrbLzq8+/In
+         vDpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759667929; x=1760272729;
+        d=1e100.net; s=20230601; t=1759669573; x=1760274373;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=jqDJxMaM14Yp41cJzJOHyw8S5AeKwebi090BHHk5WdM=;
-        b=YkF4DKN1wmmClO1nFqfp1rV5GjQm0ylW2Lfo3LXdo1zQqP4JmdhGon+CBZUQXpQOxI
-         x1h2o8cK/iqk+rRK1UulUq+XoI15f+2nNyo8XhPJUCG1z5zVlB3lx418Ilpe2sGxR/zl
-         8y+OBg3kHE0KRcATVdeHMPROIPGdoITQwoUfRTizjDr8FXXNq9A/CNdYYyFu1lJzhJcQ
-         qiPLCf1S67Cw/rxbtK3tiQhIOjnmKWvVSAbJGZj0Y8DkuZnAvJHvXoAGUrbTgKTje//j
-         ks9ePLhJcloE1fLBwIkAkBpgrAb00qCIua0bIm9eq51AlKJtdw7s8WvN2OylsvTkGr+J
-         Xt4A==
-X-Gm-Message-State: AOJu0YyITr5/wO/y3ALEnRIZ/fAiJDGCWGWtH9v5WGPiwu55zSU4NsRh
-	DI/IKJXbI/8Nw0vT9qxFZqPA8e3O1MjoQVD9Cw63C7RgPzfAX7OUeS6yE6YYcA==
-X-Gm-Gg: ASbGncuBa7zCBKqMCZp/BTGrvPxsUN40o1daYU4JTpreT+UYl8+vwN10DRLplNvyjPP
-	p7RRL2Bofdew77LWuVOmXC5HYZZhp3ixYVlHFlOu/ZvJNCHKP5l0u+DT4IOW6jH/5Si6msrz219
-	XhoPyb79Ka5yfCRF1/hnz0D+mz5pVYT2xRhEQXUd1Rb0Lu9l4Zts3nfmrd1p16foNYHOIBCqPIo
-	nLr8f2nNVC12sOgikja8Jpegx1UAfb6vjSh1allaq7T0o/EiCGfOPhpR/O3h7NKPZw/jWAjXdGm
-	t1ZEy14oZUo+H1TNYSR0AYJnbO3ZNdfNzEO0qMAAD+MF+tTUp7GGcVbnu+wJe7Fic5bNWZ11Of5
-	dgWO8OD1si2zyo2pXPg7Z/WMB9TlHZPGm1U6QiYCslskC
-X-Google-Smtp-Source: AGHT+IFp/atTyNyySlaFruP0o51d1tjPhQKxA9b7R0OZ1GRkYoIQrMK6HopC8D5YZIFw+S3kg+G6Xg==
-X-Received: by 2002:a17:906:9f85:b0:b40:2873:a61a with SMTP id a640c23a62f3a-b49c1a766ddmr1039361266b.6.1759667928467;
-        Sun, 05 Oct 2025 05:38:48 -0700 (PDT)
+        bh=6xfJWf9EbOaXH6FlUKurYhNsREcW77K131xetEBPTbE=;
+        b=xLgnfRcCJhYiLV9OirLn+kZ7TIWhGq3Z8YJEqPNkg9MglI7T8lWBjLyiq3G2mJJkv0
+         /w4zeoINLw4U3lbHTtIZNTce1kV1K6bO/sp2qQnhU0mbQcoGodJCdKLN+Fan/2/BiI1X
+         U1kyRRLg9U832rVSRZUkWTxcKNIt2CLM2yRU+rt3+6ssorFdD9JtbH8WeS8u7skO97uz
+         nphg3GoDOV31lqV2FD1K6O6LtgEp1sDUVtc9u4JeLYMdfaW419QuunckFyp5sJTjf8op
+         AhngUHY28P9pSrCiuSUxut6FIEvfb61lKc3FWRSD3XVQIutPPB1Bj5G+7bSTyhRHgLHb
+         vV/w==
+X-Gm-Message-State: AOJu0YwdfXUvaEXftTfS6YlIulPdz4uVm9hxh0TrbBSnpsbC2qa6j1kb
+	rc494VimfBZBWqgvS5NF6fScAhx3g/RCw+YR2HWCcKrFfMxQ63kdzcR6aAZBXg==
+X-Gm-Gg: ASbGncuWcku896faigxINSZ5ExpDQBqpSzOwCDnIapwmlj7cjRFaS1LZIKisjcdxTKD
+	apYgxuGuJibZPTTmgm8En2N/n79d1BKfsKe/TDyoxot8U9+MaxeuayGV4ftiIx/8nwg3nN1hznJ
+	QQg1jiClEmIo64lrCM4k1YS3aPVM/MAI7g8F21Eb03aceQNT/z1NKjJhhV6fFO0ll4gFQ+95iaA
+	r2+Xgr6kcy2ivOrfhTC7fbS5w8zCS3t3K7lrx8tiqAyjdML1aN2dmPbxe/PV+YZhUADXwoJBhwT
+	udzKbteKknfcamJuZEBkdzGVuCyfo+I26aY3DsszFGMh2/Vv9a6HALoWILfT9doUTcK0QxrnT2D
+	l5br55rRyLoWrGyGZm+/AbqzgfNE3w2Yq0JCqT/ecv4ieMPBD2hfuWYc=
+X-Google-Smtp-Source: AGHT+IFXjdVXywO9bp24y8f9gTBDLb9od1DbwyXPp9BNnQCDd3bedIXd1wb/iWEUbJDZv8DO8zy+fQ==
+X-Received: by 2002:a17:907:7f13:b0:b3b:d167:944a with SMTP id a640c23a62f3a-b49c3255f5emr1269077366b.57.1759669572157;
+        Sun, 05 Oct 2025 06:06:12 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486970b37bsm920315366b.53.2025.10.05.05.38.47
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4865e7c47fsm915639966b.37.2025.10.05.06.06.11
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Oct 2025 05:38:48 -0700 (PDT)
+        Sun, 05 Oct 2025 06:06:11 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH] botan: patch CVE-2022-43705
-Date: Sun,  5 Oct 2025 14:38:47 +0200
-Message-ID: <20251005123847.447828-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] botan: patch CVE-2024-39312
+Date: Sun,  5 Oct 2025 15:06:10 +0200
+Message-ID: <20251005130611.615842-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 12:39:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120247
+ <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 13:06:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120248
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2022-43705
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-39312
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...Store_In_Memory-c-tor-that-takes-a-v.patch |  31 +++++
- ...es-can-sign-their-own-OCSP-responses.patch |  36 ++++++
- ...dation-of-authority-of-delegation-re.patch | 106 ++++++++++++++++++
- .../botan/botan/0004-review-comments.patch    |  28 +++++
- meta-oe/recipes-crypto/botan/botan_2.19.1.bb  |   7 +-
- 5 files changed, 207 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-crypto/botan/botan/0001-add-Certificate_Store_In_Memory-c-tor-that-takes-a-v.patch
- create mode 100644 meta-oe/recipes-crypto/botan/botan/0002-FIX-intermediates-can-sign-their-own-OCSP-responses.patch
- create mode 100644 meta-oe/recipes-crypto/botan/botan/0003-FIX-missing-validation-of-authority-of-delegation-re.patch
- create mode 100644 meta-oe/recipes-crypto/botan/botan/0004-review-comments.patch
+ ...Address-various-name-constraint-bugs.patch | 749 ++++++++++++++++++
+ meta-oe/recipes-crypto/botan/botan_2.19.1.bb  |   1 +
+ 2 files changed, 750 insertions(+)
+ create mode 100644 meta-oe/recipes-crypto/botan/botan/0001-Address-various-name-constraint-bugs.patch
 
-diff --git a/meta-oe/recipes-crypto/botan/botan/0001-add-Certificate_Store_In_Memory-c-tor-that-takes-a-v.patch b/meta-oe/recipes-crypto/botan/botan/0001-add-Certificate_Store_In_Memory-c-tor-that-takes-a-v.patch
+diff --git a/meta-oe/recipes-crypto/botan/botan/0001-Address-various-name-constraint-bugs.patch b/meta-oe/recipes-crypto/botan/botan/0001-Address-various-name-constraint-bugs.patch
 new file mode 100644
-index 0000000000..6917015a6e
+index 0000000000..e9abdaedb3
 --- /dev/null
-+++ b/meta-oe/recipes-crypto/botan/botan/0001-add-Certificate_Store_In_Memory-c-tor-that-takes-a-v.patch
-@@ -0,0 +1,31 @@
-+From 6eb071078e35a6a29e3a27fb91d9449b25f1bbcc Mon Sep 17 00:00:00 2001
-+From: Rene Meusel <rene.meusel@rohde-schwarz.com>
-+Date: Wed, 21 Sep 2022 14:00:26 +0200
-+Subject: [PATCH] add Certificate_Store_In_Memory c'tor that takes a vector of
-+ certs
++++ b/meta-oe/recipes-crypto/botan/botan/0001-Address-various-name-constraint-bugs.patch
+@@ -0,0 +1,749 @@
++From 6c39cdf1aa7efccb5dbeaf859fddf06500b78aa8 Mon Sep 17 00:00:00 2001
++From: Jack Lloyd <jack@randombit.net>
++Date: Sun, 7 Jul 2024 05:02:48 -0400
++Subject: [PATCH] Address various name constraint bugs
 +
-+CVE: CVE-2022-43705
-+Upstream-Status: Backport [https://github.com/randombit/botan/commit/5d8d9fbf75c8b814ea609161bee525d520f5cb57]
++CVE: CVE-2024-39312
++Upstream-Status: Backport [https://github.com/randombit/botan/commit/68338f5912534c74469f7f4e6e22b37aa5159952]
 +
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/lib/x509/certstor.h | 6 ++++++
-+ 1 file changed, 6 insertions(+)
++ src/lib/x509/asn1_alt_name.cpp     |   4 +
++ src/lib/x509/name_constraint.cpp   | 313 ++++++++++++++++++++++++++++-
++ src/lib/x509/pkix_types.h          |  37 +++-
++ src/lib/x509/x509_ext.cpp          |  80 +++-----
++ src/lib/x509/x509cert.cpp          |  30 ++-
++ src/python/botan2.py               |   2 +
++ src/scripts/test_python.py         |   3 -
++ src/tests/test_name_constraint.cpp |  10 +-
++ 8 files changed, 401 insertions(+), 78 deletions(-)
 +
-+diff --git a/src/lib/x509/certstor.h b/src/lib/x509/certstor.h
-+index 6901589..165c414 100644
-+--- a/src/lib/x509/certstor.h
-++++ b/src/lib/x509/certstor.h
-+@@ -95,6 +95,12 @@ class BOTAN_PUBLIC_API(2,0) Certificate_Store_In_Memory final : public Certifica
++diff --git a/src/lib/x509/asn1_alt_name.cpp b/src/lib/x509/asn1_alt_name.cpp
++index a347a31..574b9fb 100644
++--- a/src/lib/x509/asn1_alt_name.cpp
+++++ b/src/lib/x509/asn1_alt_name.cpp
++@@ -257,6 +257,10 @@ void AlternativeName::decode_from(BER_Decoder& source)
++             const uint32_t ip = load_be<uint32_t>(obj.bits(), 0);
++             add_attribute("IP", ipv4_to_string(ip));
++             }
+++         else if(obj.length() != 16)
+++            {
+++            throw Decoding_Error("Invalid length for IP address SAN");
+++            }
++          }
++ 
++       }
++diff --git a/src/lib/x509/name_constraint.cpp b/src/lib/x509/name_constraint.cpp
++index c904572..632bc8c 100644
++--- a/src/lib/x509/name_constraint.cpp
+++++ b/src/lib/x509/name_constraint.cpp
++@@ -163,31 +163,48 @@ GeneralName::MatchResult GeneralName::matches(const X509_Certificate& cert) cons
++ 
++ bool GeneralName::matches_dns(const std::string& nam) const
++    {
++-   if(nam.size() == name().size())
+++   const std::string constraint = tolower_string(name());
+++   const std::string issued = tolower_string(nam);
+++
+++   if(nam.size() == constraint.size())
++       {
++-      return tolower_string(nam) == tolower_string(name());
+++      return issued == constraint;
++       }
++-   else if(name().size() > nam.size())
+++   else if(constraint.size() > nam.size())
++       {
++       // The constraint is longer than the issued name: not possibly a match
++       return false;
++       }
++-   else // name.size() < nam.size()
+++   else
++       {
++-      // constr is suffix of nam
++-      const std::string constr = name().front() == '.' ? name() : "." + name();
++-      const std::string substr = nam.substr(nam.size() - constr.size(), constr.size());
++-      return tolower_string(constr) == tolower_string(substr);
+++      if(constraint.empty()) {
+++         return true;
+++      }
+++
+++      std::string substr = issued.substr(nam.size() - constraint.size(), constraint.size());
+++
+++      if(constraint.front() == '.') {
+++         return substr == constraint;
+++      } else if(substr[0] == '.') {
+++         return substr.substr(1) == constraint;
+++      } else {
+++         return substr == constraint && issued[issued.size() - constraint.size() - 1] == '.';
++       }
++    }
+++}
++ 
++ bool GeneralName::matches_dn(const std::string& nam) const
++    {
++    std::stringstream ss(nam);
++-   std::stringstream tt(name());
++-   X509_DN nam_dn, my_dn;
++-
+++   X509_DN nam_dn;
++    ss >> nam_dn;
+++   return matches_dn_obj(nam_dn);
+++   }
+++
+++bool GeneralName::matches_dn_obj(const X509_DN& nam_dn) const
+++   {
+++   std::stringstream tt(name());
+++   X509_DN my_dn;
++    tt >> my_dn;
++ 
++    auto attr = nam_dn.get_attributes();
++@@ -270,4 +287,278 @@ std::ostream& operator<<(std::ostream& os, const GeneralSubtree& gs)
++    os << gs.minimum() << "," << gs.maximum() << "," << gs.base();
++    return os;
++    }
+++
+++NameConstraints::NameConstraints(std::vector<GeneralSubtree>&& permitted_subtrees,
+++                                 std::vector<GeneralSubtree>&& excluded_subtrees) :
+++   m_permitted_subtrees(permitted_subtrees), m_excluded_subtrees(excluded_subtrees)
+++   {
+++   for(const auto& c : m_permitted_subtrees)
+++      {
+++      m_permitted_name_types.insert(c.base().type());
+++      }
+++   for(const auto& c : m_excluded_subtrees)
+++      {
+++      m_excluded_name_types.insert(c.base().type());
+++      }
+++   }
+++
+++namespace {
+++
+++bool looks_like_ipv4(const std::string& s)
+++   {
+++   try
+++     {
+++     // ignores return value
+++     string_to_ipv4(s);
+++     return true;
+++     }
+++   catch(...)
+++      {
+++      return false;
+++      }
+++   }
+++
+++}
+++
+++bool NameConstraints::is_permitted(const X509_Certificate& cert, bool reject_unknown) const {
+++   if(permitted().empty()) {
+++      return true;
+++   }
+++
+++   const auto& alt_name = cert.subject_alt_name();
+++
+++   if(reject_unknown) {
+++      if(m_permitted_name_types.find("URI") != m_permitted_name_types.end() && !alt_name.get_attribute("URI").empty()) {
+++         return false;
+++      }
+++      if(m_permitted_name_types.find("RFC822") != m_permitted_name_types.end() && !alt_name.get_attribute("RFC822").empty()) {
+++         return false;
+++      }
+++   }
+++
+++   auto is_permitted_dn = [&](const X509_DN& dn) {
+++      // If no restrictions, then immediate accept
+++      if(m_permitted_name_types.find("DN") == m_permitted_name_types.end()) {
+++         return true;
+++      }
+++
+++      if(dn.empty()) {
+++         return true;
+++      }
+++
+++      for(const auto& c : m_permitted_subtrees) {
+++         if(c.base().type() == "DN" && c.base().matches_dn_obj(dn)) {
+++            return true;
+++         }
+++      }
+++
+++      // There is at least one permitted name and we didn't match
+++      return false;
+++   };
+++
+++   auto is_permitted_dns_name = [&](const std::string& name) {
+++      if(name.empty() || name[0] == '.') {
+++         return false;
+++      }
+++
+++      // If no restrictions, then immediate accept
+++      if(m_permitted_name_types.find("DNS") == m_permitted_name_types.end()) {
+++         return true;
+++      }
+++
+++      for(const auto& c : m_permitted_subtrees) {
+++         if(c.base().type() == "DNS" && c.base().matches_dns(name)) {
+++            return true;
+++         }
+++      }
+++
+++      // There is at least one permitted name and we didn't match
+++      return false;
+++   };
+++
+++   auto is_permitted_ipv4 = [&](const std::string& ipv4) {
+++      // If no restrictions, then immediate accept
+++      if(m_permitted_name_types.find("IP") == m_permitted_name_types.end()) {
+++         return true;
+++      }
+++
+++      for(const auto& c : m_permitted_subtrees) {
+++         if(c.base().type() == "IP" && c.base().matches_ip(ipv4)) {
+++            return true;
+++         }
+++      }
+++
+++      // There is at least one permitted name and we didn't match
+++      return false;
+++   };
+++
+++   if(!is_permitted_dn(cert.subject_dn())) {
+++      return false;
+++   }
+++
+++   if(!is_permitted_dn(alt_name.dn()))
+++      {
+++      return false;
+++      }
+++
+++   for(const auto& alt_dns : alt_name.get_attribute("DNS")) {
+++      if(!is_permitted_dns_name(alt_dns)) {
+++         return false;
+++      }
+++   }
+++
+++   for(const auto& alt_ipv4 : alt_name.get_attribute("IP")) {
+++      if(!is_permitted_ipv4(alt_ipv4)) {
+++         return false;
+++      }
+++   }
+++
+++   if(!alt_name.has_items())
+++      {
+++      for(const auto& cn : cert.subject_info("Name"))
+++         {
+++         if(cn.find(".") != std::string::npos)
+++            {
+++            if(looks_like_ipv4(cn))
+++               {
+++               if(!is_permitted_ipv4(cn))
+++                  {
+++                  return false;
+++                  }
+++               }
+++            else
+++               {
+++               if(!is_permitted_dns_name(cn))
+++                  {
+++                  return false;
+++                  }
+++               }
+++            }
+++         }
+++      }
+++
+++   // We didn't encounter a name that doesn't have a matching constraint
+++   return true;
++ }
+++
+++bool NameConstraints::is_excluded(const X509_Certificate& cert, bool reject_unknown) const {
+++   if(excluded().empty()) {
+++      return false;
+++   }
+++
+++   const auto& alt_name = cert.subject_alt_name();
+++
+++   if(reject_unknown) {
+++      if(m_excluded_name_types.find("URI") != m_excluded_name_types.end() && !alt_name.get_attribute("URI").empty()) {
+++         return false;
+++      }
+++      if(m_excluded_name_types.find("RFC822") != m_excluded_name_types.end() && !alt_name.get_attribute("RFC822").empty()) {
+++         return false;
+++      }
+++   }
+++
+++   auto is_excluded_dn = [&](const X509_DN& dn) {
+++      // If no restrictions, then immediate accept
+++      if(m_excluded_name_types.find("DN") == m_excluded_name_types.end()) {
+++         return false;
+++      }
+++
+++      if(dn.empty()) {
+++         return false;
+++      }
+++
+++      for(const auto& c : m_excluded_subtrees) {
+++         if(c.base().type() == "DN" && c.base().matches_dn_obj(dn)) {
+++            return true;
+++         }
+++      }
+++
+++      // There is at least one excluded name and we didn't match
+++      return false;
+++   };
+++
+++   auto is_excluded_dns_name = [&](const std::string& name) {
+++      if(name.empty() || name[0] == '.') {
+++         return true;
+++      }
+++
+++      // If no restrictions, then immediate accept
+++      if(m_excluded_name_types.find("DNS") == m_excluded_name_types.end()) {
+++         return false;
+++      }
+++
+++      for(const auto& c : m_excluded_subtrees) {
+++         if(c.base().type() == "DNS" && c.base().matches_dns(name)) {
+++            return true;
+++         }
+++      }
+++
+++      // There is at least one excluded name and we didn't match
+++      return false;
+++   };
+++
+++   auto is_excluded_ipv4 = [&](const std::string& ipv4) {
+++      // If no restrictions, then immediate accept
+++      if(m_excluded_name_types.find("IP") == m_excluded_name_types.end()) {
+++         return false;
+++      }
+++
+++      for(const auto& c : m_excluded_subtrees) {
+++         if(c.base().type() == "IP" && c.base().matches_ip(ipv4)) {
+++            return true;
+++         }
+++      }
+++
+++      // There is at least one excluded name and we didn't match
+++      return false;
+++   };
+++
+++   if(is_excluded_dn(cert.subject_dn())) {
+++      return true;
+++   }
+++
+++   if(is_excluded_dn(alt_name.dn())) {
+++      return true;
+++   }
+++
+++   for(const auto& alt_dns : alt_name.get_attribute("DNS")) {
+++      if(is_excluded_dns_name(alt_dns)) {
+++         return true;
+++      }
+++   }
+++
+++   for(const auto& alt_ipv4 : alt_name.get_attribute("IP")) {
+++      if(is_excluded_ipv4(alt_ipv4)) {
+++         return true;
+++      }
+++   }
+++
+++   if(!alt_name.has_items())
+++      {
+++      for(const auto& cn : cert.subject_info("Name"))
+++         {
+++         if(cn.find(".") != std::string::npos)
+++            {
+++            if(looks_like_ipv4(cn))
+++               {
+++               if(is_excluded_ipv4(cn))
+++                  {
+++                  return true;
+++                  }
+++               }
+++            else
+++               {
+++               if(is_excluded_dns_name(cn))
+++                  {
+++                  return true;
+++                  }
+++               }
+++            }
+++         }
+++      }
+++
+++   // We didn't encounter a name that matched any prohibited name
+++   return false;
+++}
+++
+++}  // namespace Botan
++diff --git a/src/lib/x509/pkix_types.h b/src/lib/x509/pkix_types.h
++index 9831219..0b85887 100644
++--- a/src/lib/x509/pkix_types.h
+++++ b/src/lib/x509/pkix_types.h
++@@ -191,6 +191,9 @@ class BOTAN_PUBLIC_API(2,0) Attribute final : public ASN1_Object
++ * Handles parsing GeneralName types in their BER and canonical string
++ * encoding. Allows matching GeneralNames against each other using
++ * the rules laid out in the RFC 5280, sec. 4.2.1.10 (Name Contraints).
+++*
+++* This entire class is deprecated and will be removed in a future
+++* major release
++ */
++ class BOTAN_PUBLIC_API(2,0) GeneralName final : public ASN1_Object
++    {
++@@ -213,6 +216,7 @@ class BOTAN_PUBLIC_API(2,0) GeneralName final : public ASN1_Object
++       * Creates a new GeneralName for its string format.
++       * @param str type and name, colon-separated, e.g., "DNS:google.com"
 +       */
-+       explicit Certificate_Store_In_Memory(const X509_Certificate& cert);
+++      BOTAN_DEPRECATED("Deprecated no replacement")
++       GeneralName(const std::string& str);
++ 
++       void encode_into(DER_Encoder&) const override;
++@@ -234,15 +238,17 @@ class BOTAN_PUBLIC_API(2,0) GeneralName final : public ASN1_Object
++       * @param cert certificate to be matched
++       * @return the match result
++       */
+++      BOTAN_DEPRECATED("Deprecated no replacement")
++       MatchResult matches(const X509_Certificate& cert) const;
++ 
++-   private:
++-      std::string m_type;
++-      std::string m_name;
++-
++       bool matches_dns(const std::string&) const;
++       bool matches_dn(const std::string&) const;
+++      bool matches_dn_obj(const X509_DN& dn) const;
++       bool matches_ip(const std::string&) const;
+++
+++   private:
+++      std::string m_type;
+++      std::string m_name;
++    };
++ 
++ std::ostream& operator<<(std::ostream& os, const GeneralName& gn);
++@@ -253,6 +259,9 @@ std::ostream& operator<<(std::ostream& os, const GeneralName& gn);
++ * The Name Constraint extension adds a minimum and maximum path
++ * length to a GeneralName to form a constraint. The length limits
++ * are currently unused.
+++*
+++* This entire class is deprecated and will be removed in a future
+++* major release
++ */
++ class BOTAN_PUBLIC_API(2,0) GeneralSubtree final : public ASN1_Object
++    {
++@@ -260,6 +269,7 @@ class BOTAN_PUBLIC_API(2,0) GeneralSubtree final : public ASN1_Object
++       /**
++       * Creates an empty name constraint.
++       */
+++      BOTAN_DEPRECATED("Deprecated no replacement")
++       GeneralSubtree() : m_base(), m_minimum(0), m_maximum(std::numeric_limits<std::size_t>::max())
++       {}
++ 
++@@ -269,6 +279,7 @@ class BOTAN_PUBLIC_API(2,0) GeneralSubtree final : public ASN1_Object
++       * @param min minimum path length
++       * @param max maximum path length
++       */
+++      BOTAN_DEPRECATED("Deprecated no replacement")
++       GeneralSubtree(const GeneralName& base, size_t min, size_t max)
++       : m_base(base), m_minimum(min), m_maximum(max)
++       {}
++@@ -277,6 +288,7 @@ class BOTAN_PUBLIC_API(2,0) GeneralSubtree final : public ASN1_Object
++       * Creates a new name constraint for its string format.
++       * @param str name constraint
++       */
+++      BOTAN_DEPRECATED("Deprecated no replacement")
++       GeneralSubtree(const std::string& str);
++ 
++       void encode_into(DER_Encoder&) const override;
++@@ -325,9 +337,7 @@ class BOTAN_PUBLIC_API(2,0) NameConstraints final
++       * @param excluded_subtrees names for which the certificate is not permitted
++       */
++       NameConstraints(std::vector<GeneralSubtree>&& permitted_subtrees,
++-                    std::vector<GeneralSubtree>&& excluded_subtrees)
++-      : m_permitted_subtrees(permitted_subtrees), m_excluded_subtrees(excluded_subtrees)
++-      {}
+++                      std::vector<GeneralSubtree>&& excluded_subtrees);
++ 
++       /**
++       * @return permitted names
++@@ -339,9 +349,22 @@ class BOTAN_PUBLIC_API(2,0) NameConstraints final
++       */
++       const std::vector<GeneralSubtree>& excluded() const { return m_excluded_subtrees; }
 + 
 ++      /**
-++      * Adds given certificate list to the store.
+++      * Return true if all of the names in the certificate are permitted
 ++      */
-++      explicit Certificate_Store_In_Memory(std::vector<std::shared_ptr<const X509_Certificate>> certs)
-++         : m_certs(std::move(certs)) {}
+++      bool is_permitted(const X509_Certificate& cert, bool reject_unknown) const;
 ++
-+       /**
-+       * Create an empty store.
-+       */
-diff --git a/meta-oe/recipes-crypto/botan/botan/0002-FIX-intermediates-can-sign-their-own-OCSP-responses.patch b/meta-oe/recipes-crypto/botan/botan/0002-FIX-intermediates-can-sign-their-own-OCSP-responses.patch
-new file mode 100644
-index 0000000000..f41ee6bd98
---- /dev/null
-+++ b/meta-oe/recipes-crypto/botan/botan/0002-FIX-intermediates-can-sign-their-own-OCSP-responses.patch
-@@ -0,0 +1,36 @@
-+From 48947029f72e2091dfbaaa5e3576d98eb7d6c34e Mon Sep 17 00:00:00 2001
-+From: Rene Meusel <rene.meusel@rohde-schwarz.com>
-+Date: Tue, 20 Sep 2022 17:20:52 +0200
-+Subject: [PATCH] FIX: intermediates can sign their own OCSP responses
-+
-+Before it was possible that intermediates signed their
-+own OCSP responses. I.e a compromised intermediate
-+certificate allowed the attacker to sign OCSP responses
-+for this very certificate.
-+
-+CVE: CVE-2022-43705
-+Upstream-Status: Backport [https://github.com/randombit/botan/commit/1829ef9d89614da1eacdf511356bdf98a970f5f5]
-+
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/lib/x509/x509path.cpp | 7 ++++++-
-+ 1 file changed, 6 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/lib/x509/x509path.cpp b/src/lib/x509/x509path.cpp
-+index b5cdc27..37de6d8 100644
-+--- a/src/lib/x509/x509path.cpp
-++++ b/src/lib/x509/x509path.cpp
-+@@ -234,7 +234,12 @@ PKIX::check_ocsp(const std::vector<std::shared_ptr<const X509_Certificate>>& cer
-+          {
-+          try
-+             {
-+-            Certificate_Status_Code ocsp_signature_status = ocsp_responses.at(i)->check_signature(trusted_certstores, cert_path);
-++            // When verifying intermediate certificates we need to truncate the
-++            // cert_path so that the intermediate under investigation becomes the
-++            // last certificate in the chain.
-++            auto ocsp_cert_path = cert_path;
-++            ocsp_cert_path.erase(ocsp_cert_path.begin(), ocsp_cert_path.begin()+i);
-++            Certificate_Status_Code ocsp_signature_status = ocsp_responses.at(i)->check_signature(trusted_certstores, ocsp_cert_path);
+++      /**
+++      * Return true if any of the names in the certificate are excluded
+++      */
+++      bool is_excluded(const X509_Certificate& cert, bool reject_unknown) const;
+++
++    private:
++       std::vector<GeneralSubtree> m_permitted_subtrees;
++       std::vector<GeneralSubtree> m_excluded_subtrees;
+++
+++      std::set<std::string> m_permitted_name_types;
+++      std::set<std::string> m_excluded_name_types;
++    };
 + 
-+             if(ocsp_signature_status == Certificate_Status_Code::OCSP_SIGNATURE_OK)
-+                {
-diff --git a/meta-oe/recipes-crypto/botan/botan/0003-FIX-missing-validation-of-authority-of-delegation-re.patch b/meta-oe/recipes-crypto/botan/botan/0003-FIX-missing-validation-of-authority-of-delegation-re.patch
-new file mode 100644
-index 0000000000..aab3775a8e
---- /dev/null
-+++ b/meta-oe/recipes-crypto/botan/botan/0003-FIX-missing-validation-of-authority-of-delegation-re.patch
-@@ -0,0 +1,106 @@
-+From 3f8c9705168518c9b436c23e6d13796d683e5391 Mon Sep 17 00:00:00 2001
-+From: Rene Meusel <rene.meusel@rohde-schwarz.com>
-+Date: Wed, 21 Sep 2022 14:14:02 +0200
-+Subject: [PATCH] FIX: missing validation of authority of delegation responder
-+ cert
-+
-+When a responder does not sign their responses with the same CA that
-+issued the certificate in question, they typically add their
-+'delegation certificate' as a stapled certificate path to the response.
-+So far, these delegation certificates were not checked for their
-+legitimate authority to sign responses for the CA.
-+
-+CVE: CVE-2022-43705
-+Upstream-Status: Backport [https://github.com/randombit/botan/commit/991b0159282781f2d5c06ff42a9ff00ee563e96b]
-+
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/lib/x509/ocsp.cpp | 68 ++++++++++++++++++++++++++++++++++++++++++-
-+ 1 file changed, 67 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/lib/x509/ocsp.cpp b/src/lib/x509/ocsp.cpp
-+index 1ca8232..fc952f6 100644
-+--- a/src/lib/x509/ocsp.cpp
-++++ b/src/lib/x509/ocsp.cpp
-+@@ -241,7 +241,6 @@ Certificate_Status_Code Response::check_signature(const std::vector<Certificate_
++ /**
++diff --git a/src/lib/x509/x509_ext.cpp b/src/lib/x509/x509_ext.cpp
++index e81e15c..51bc517 100644
++--- a/src/lib/x509/x509_ext.cpp
+++++ b/src/lib/x509/x509_ext.cpp
++@@ -601,27 +601,27 @@ void Name_Constraints::decode_inner(const std::vector<uint8_t>& in)
++    {
++    std::vector<GeneralSubtree> permit, exclude;
++    BER_Decoder ber(in);
++-   BER_Decoder ext = ber.start_cons(SEQUENCE);
++-   BER_Object per = ext.get_next_object();
+++   BER_Decoder inner = ber.start_cons(SEQUENCE);
+++   BER_Object per = inner.get_next_object();
++ 
++-   ext.push_back(per);
+++   inner.push_back(per);
++    if(per.is_a(0, ASN1_Tag(CONSTRUCTED | CONTEXT_SPECIFIC)))
 +       {
-+       for(size_t i = 0; i < m_certs.size(); ++i)
-+          {
-+-         // Check all CA certificates in the (assumed validated) EE cert path
-+          if(!m_signer_name.empty() && m_certs[i].subject_dn() == m_signer_name)
-+             {
-+             signing_cert = std::make_shared<const X509_Certificate>(m_certs[i]);
-+@@ -254,6 +253,73 @@ Certificate_Status_Code Response::check_signature(const std::vector<Certificate_
-+             break;
-+             }
++-      ext.decode_list(permit,ASN1_Tag(0),ASN1_Tag(CONSTRUCTED | CONTEXT_SPECIFIC));
+++      inner.decode_list(permit,ASN1_Tag(0),ASN1_Tag(CONSTRUCTED | CONTEXT_SPECIFIC));
++       if(permit.empty())
++          throw Encoding_Error("Empty Name Contraint list");
++       }
++ 
++-   BER_Object exc = ext.get_next_object();
++-   ext.push_back(exc);
++-   if(per.is_a(1, ASN1_Tag(CONSTRUCTED | CONTEXT_SPECIFIC)))
+++   BER_Object exc = inner.get_next_object();
+++   inner.push_back(exc);
+++   if(exc.is_a(1, ASN1_Tag(CONSTRUCTED | CONTEXT_SPECIFIC)))
++       {
++-      ext.decode_list(exclude,ASN1_Tag(1),ASN1_Tag(CONSTRUCTED | CONTEXT_SPECIFIC));
+++      inner.decode_list(exclude,ASN1_Tag(1),ASN1_Tag(CONSTRUCTED | CONTEXT_SPECIFIC));
++       if(exclude.empty())
++          throw Encoding_Error("Empty Name Contraint list");
++       }
++ 
++-   ext.end_cons();
+++   inner.end_cons();
++ 
++    if(permit.empty() && exclude.empty())
++       throw Encoding_Error("Empty Name Contraint extension");
++@@ -650,11 +650,17 @@ void Name_Constraints::contents_to(Data_Store& subject, Data_Store&) const
++       }
++    }
++ 
++-void Name_Constraints::validate(const X509_Certificate& subject, const X509_Certificate& issuer,
+++void Name_Constraints::validate(const X509_Certificate& subject, const X509_Certificate& /*issuer*/,
++       const std::vector<std::shared_ptr<const X509_Certificate>>& cert_path,
++       std::vector<std::set<Certificate_Status_Code>>& cert_status,
++       size_t pos)
++    {
+++   // This is much smaller limit than in Botan3 because here name constraint checks
+++   // are much more expensive due to optimizations which would be difficult to
+++   // backport here.
+++   const size_t MAX_NC_COMPARES = (1 << 12);
+++   const size_t total_constraints = m_name_constraints.permitted().size() + m_name_constraints.excluded().size();
+++
++    if(!m_name_constraints.permitted().empty() || !m_name_constraints.excluded().empty())
++       {
++       if(!subject.is_CA_cert())
++@@ -663,54 +669,34 @@ void Name_Constraints::validate(const X509_Certificate& subject, const X509_Cert
 +          }
++ 
++       const bool issuer_name_constraint_critical =
++-         issuer.is_critical("X509v3.NameConstraints");
+++         subject.is_critical("X509v3.NameConstraints");
++ 
++       // Check that all subordinate certs pass the name constraint
++       for(size_t j = 0; j < pos; ++j)
++          {
++-         bool permitted = m_name_constraints.permitted().empty();
++-         bool failed = false;
+++         const auto& cert = cert_path.at(j);
++ 
++-         for(auto c: m_name_constraints.permitted())
++-            {
++-            switch(c.base().matches(*cert_path.at(j)))
++-               {
++-               case GeneralName::MatchResult::NotFound:
++-               case GeneralName::MatchResult::All:
++-                  permitted = true;
++-                  break;
++-               case GeneralName::MatchResult::UnknownType:
++-                  failed = issuer_name_constraint_critical;
++-                  permitted = true;
++-                  break;
++-               default:
++-                  break;
++-               }
++-            }
+++         const size_t total_names =
+++            cert->subject_dn().dn_info().size() +
+++            cert->subject_alt_name().get_attributes().size();
++ 
++-         for(auto c: m_name_constraints.excluded())
++-            {
++-            switch(c.base().matches(*cert_path.at(j)))
++-               {
++-               case GeneralName::MatchResult::All:
++-               case GeneralName::MatchResult::Some:
++-                  failed = true;
++-                  break;
++-               case GeneralName::MatchResult::UnknownType:
++-                  failed = issuer_name_constraint_critical;
++-                  break;
++-               default:
++-                  break;
++-               }
++-            }
+++         if(total_names * total_constraints >= MAX_NC_COMPARES) {
+++            cert_status.at(j).insert(Certificate_Status_Code::NAME_CONSTRAINT_ERROR);
+++            continue;
+++         }
++ 
++-         if(failed || !permitted)
++-            {
+++         if(!m_name_constraints.is_permitted(*cert, issuer_name_constraint_critical)) {
++             cert_status.at(j).insert(Certificate_Status_Code::NAME_CONSTRAINT_ERROR);
++-            }
+++            continue;
+++         }
 ++
-++      // RFC 6960 4.2.2.2
-++      //    OCSP signing delegation SHALL be designated by the inclusion of
-++      //    id-kp-OCSPSigning in an extended key usage certificate extension
-++      //    included in the OCSP response signer's certificate. This certificate
-++      //    MUST be issued directly by the CA that is identified in the request.
-++      //
-++      //    The CA SHOULD use the same issuing key to issue a delegation
-++      //    certificate as that used to sign the certificate being checked for
-++      //    revocation.  Systems relying on OCSP responses MUST recognize a
-++      //    delegation certificate as being issued by the CA that issued the
-++      //    certificate in question only if the delegation certificate and the
-++      //    certificate being checked for revocation were signed by the same key.
-++      //
-++      // I.e. it is safe to assume that the certificate's issuer also signed the
-++      // responder's certificate.
-++      //
-++      // Note: The 'SHOULD' in the second paragraph above allows for backward
-++      //       compatibility to RFC 2560 that is "strongly discouraged". This
-++      //       implementation explicitly _does not_ implement this backward
-++      //       compatibility.
-++      if(signing_cert)
+++         if(m_name_constraints.is_excluded(*cert, issuer_name_constraint_critical)) {
+++            cert_status.at(j).insert(Certificate_Status_Code::NAME_CONSTRAINT_ERROR);
+++            continue;
++          }
++       }
++    }
+++}
++ 
++ namespace {
++ 
++diff --git a/src/lib/x509/x509cert.cpp b/src/lib/x509/x509cert.cpp
++index 55f279c..fd1bb4c 100644
++--- a/src/lib/x509/x509cert.cpp
+++++ b/src/lib/x509/x509cert.cpp
++@@ -17,6 +17,7 @@
++ #include <botan/oids.h>
++ #include <botan/hash.h>
++ #include <botan/hex.h>
+++#include <botan/internal/stl_util.h>
++ #include <algorithm>
++ #include <sstream>
++ 
++@@ -788,16 +789,35 @@ bool X509_Certificate::matches_dns_name(const std::string& name) const
++    if(name.empty())
++       return false;
++ 
++-   std::vector<std::string> issued_names = subject_info("DNS");
+++   bool is_ipv4 = false;
++ 
++-   // Fall back to CN only if no DNS names are set (RFC 6125 sec 6.4.4)
++-   if(issued_names.empty())
+++   try {
+++      string_to_ipv4(name);
+++      is_ipv4 = true;
+++      }
+++   catch(...) {}
+++
+++   std::vector<std::string> issued_names;
+++
+++   if(subject_alt_name().has_items()) {
+++      issued_names = subject_alt_name().get_attribute(is_ipv4 ? "IP" : "DNS");
+++   } else if(is_ipv4 == false) {
+++      // Use CN only if no SAN is included
++       issued_names = subject_info("Name");
+++   }
++ 
++    for(size_t i = 0; i != issued_names.size(); ++i)
++       {
++-      if(host_wildcard_match(issued_names[i], name))
++-         return true;
+++      if(is_ipv4)
 ++         {
-++         const auto issuer =
-++            Certificate_Store_In_Memory(ee_cert_path)
-++               .find_cert(signing_cert->issuer_dn(), signing_cert->authority_key_id());
-++
-++         // User did not provide the certificate path to verify the delegation
-++         if(!issuer)
-++            {
-++            return Certificate_Status_Code::OCSP_ISSUER_NOT_FOUND;
-++            }
-++
-++         if(!issuer->is_CA_cert())
-++            {
-++            return Certificate_Status_Code::OCSP_ISSUER_NOT_FOUND;
-++            }
-++
-++         // Sub-optimal fix for a vulnerability found in Botan 2.19.2 and older.
-++         //
-++         // This certificate validation is incomplete. Missing checks:
-++         //  * validity check against the reference time
-++         //  * revocation status check of the responder certificate
-++         //  * certificate extension validations
-++         //  * ... potentially more
-++         //
-++         // A more comprehensive validation will be introduced with Botan 3.0
-++         try
-++            {
-++            const auto issuer_pubkey = issuer->load_subject_public_key();
-++            const auto sig = signing_cert->verify_signature(*issuer_pubkey);
-++
-++            if(sig != Certificate_Status_Code::VERIFIED)
-++               {
-++               return Certificate_Status_Code::OCSP_SIGNATURE_ERROR;
-++               }
-++
-++            if(!signing_cert->has_ex_constraint(OID::from_string("PKIX.OCSPSigning")))
-++               {
-++               return Certificate_Status_Code::OCSP_RESPONSE_MISSING_KEYUSAGE;
-++               }
-++            }
-++         catch(const Exception& ex)
-++            {
-++            return Certificate_Status_Code::OCSP_SIGNATURE_ERROR;
-++            }
+++         if(issued_names[i] == name)
+++            return true;
+++         }
+++      else
+++         {
+++         if(host_wildcard_match(issued_names[i], name))
+++            return true;
 ++         }
 +       }
 + 
-+    if(!signing_cert)
-diff --git a/meta-oe/recipes-crypto/botan/botan/0004-review-comments.patch b/meta-oe/recipes-crypto/botan/botan/0004-review-comments.patch
-new file mode 100644
-index 0000000000..5fed88df9e
---- /dev/null
-+++ b/meta-oe/recipes-crypto/botan/botan/0004-review-comments.patch
-@@ -0,0 +1,28 @@
-+From 18e7dc2e81429e1ac4e69cbe0b530bf707d38d94 Mon Sep 17 00:00:00 2001
-+From: Rene Meusel <rene.meusel@rohde-schwarz.com>
-+Date: Thu, 3 Nov 2022 09:27:20 +0100
-+Subject: [PATCH] review comments
-+
-+CVE: CVE-2022-43705
-+Upstream-Status: Backport [https://github.com/randombit/botan/commit/a33689613127f319c0047fb96f092de16e7cb350]
-+
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/lib/x509/x509path.cpp    |  3 +--
-+ src/tests/test_x509_path.cpp | 12 +++++-------
-+ 2 files changed, 6 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/lib/x509/x509path.cpp b/src/lib/x509/x509path.cpp
-+index 37de6d8..6f3159a 100644
-+--- a/src/lib/x509/x509path.cpp
-++++ b/src/lib/x509/x509path.cpp
-+@@ -237,8 +237,7 @@ PKIX::check_ocsp(const std::vector<std::shared_ptr<const X509_Certificate>>& cer
-+             // When verifying intermediate certificates we need to truncate the
-+             // cert_path so that the intermediate under investigation becomes the
-+             // last certificate in the chain.
-+-            auto ocsp_cert_path = cert_path;
-+-            ocsp_cert_path.erase(ocsp_cert_path.begin(), ocsp_cert_path.begin()+i);
-++            std::vector<std::shared_ptr<const X509_Certificate>> ocsp_cert_path(cert_path.begin() + i, cert_path.end());
-+             Certificate_Status_Code ocsp_signature_status = ocsp_responses.at(i)->check_signature(trusted_certstores, ocsp_cert_path);
++    return false;
++diff --git a/src/python/botan2.py b/src/python/botan2.py
++index 6ae1bd6..f424303 100755
++--- a/src/python/botan2.py
+++++ b/src/python/botan2.py
++@@ -1285,6 +1285,7 @@ def _load_buf_or_file(filename, buf, file_fn, buf_fn):
++ #
++ class X509Cert(object): # pylint: disable=invalid-name
++     def __init__(self, filename=None, buf=None):
+++        self.__obj = c_void_p(0)
++         self.__obj = _load_buf_or_file(filename, buf, _DLL.botan_x509_cert_load_file, _DLL.botan_x509_cert_load)
 + 
-+             if(ocsp_signature_status == Certificate_Status_Code::OCSP_SIGNATURE_OK)
++     def __del__(self):
++@@ -1464,6 +1465,7 @@ class X509Cert(object): # pylint: disable=invalid-name
++ #
++ class X509CRL(object):
++     def __init__(self, filename=None, buf=None):
+++        self.__obj = c_void_p(0)
++         self.__obj = _load_buf_or_file(filename, buf, _DLL.botan_x509_crl_load_file, _DLL.botan_x509_crl_load)
++ 
++     def __del__(self):
++diff --git a/src/scripts/test_python.py b/src/scripts/test_python.py
++index 2202c0e..c45b9f1 100644
++--- a/src/scripts/test_python.py
+++++ b/src/scripts/test_python.py
++@@ -474,9 +474,6 @@ ofvkP1EDmpx50fHLawIDAQAB
++         self.assertEqual(cert.issuer_dn('Organizational Unit', 0), 'bsi')
++         self.assertEqual(cert.issuer_dn('Country', 0), 'DE')
++ 
++-        self.assertTrue(cert.hostname_match('csca-germany'))
++-        self.assertFalse(cert.hostname_match('csca-slovakia'))
++-
++         self.assertEqual(cert.not_before(), 1184858838)
++         self.assertEqual(cert.not_after(), 1831907880)
++ 
++diff --git a/src/tests/test_name_constraint.cpp b/src/tests/test_name_constraint.cpp
++index d99e967..7e08641 100644
++--- a/src/tests/test_name_constraint.cpp
+++++ b/src/tests/test_name_constraint.cpp
++@@ -29,17 +29,17 @@ class Name_Constraint_Tests final : public Test
++             std::make_tuple(
++                "Root_Email_Name_Constraint.crt",
++                "Invalid_Email_Name_Constraint.crt",
++-               "Invalid Email Name Constraint",
+++               "",
++                "Certificate does not pass name constraint"),
++             std::make_tuple(
++                "Root_DN_Name_Constraint.crt",
++                "Invalid_DN_Name_Constraint.crt",
++-               "Invalid DN Name Constraint",
+++               "",
++                "Certificate does not pass name constraint"),
++             std::make_tuple(
++                "Root_DN_Name_Constraint.crt",
++                "Valid_DN_Name_Constraint.crt",
++-               "Valid DN Name Constraint",
+++               "",
++                "Verified"),
++             std::make_tuple(
++                "Root_DNS_Name_Constraint.crt",
++@@ -49,12 +49,12 @@ class Name_Constraint_Tests final : public Test
++             std::make_tuple(
++                "Root_IP_Name_Constraint.crt",
++                "Valid_IP_Name_Constraint.crt",
++-               "Valid IP Name Constraint",
+++               "",
++                "Verified"),
++             std::make_tuple(
++                "Root_IP_Name_Constraint.crt",
++                "Invalid_IP_Name_Constraint.crt",
++-               "Invalid IP Name Constraint",
+++               "",
++                "Certificate does not pass name constraint"),
++             };
++          std::vector<Test::Result> results;
 diff --git a/meta-oe/recipes-crypto/botan/botan_2.19.1.bb b/meta-oe/recipes-crypto/botan/botan_2.19.1.bb
-index 4b072fc5dc..6477da4dbf 100644
+index 6477da4dbf..71e805b655 100644
 --- a/meta-oe/recipes-crypto/botan/botan_2.19.1.bb
 +++ b/meta-oe/recipes-crypto/botan/botan_2.19.1.bb
-@@ -4,7 +4,12 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://license.txt;md5=f4ce98476c07c34e1793daa036960fad"
- SECTION = "libs"
- 
--SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
-+SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
-+           file://0001-add-Certificate_Store_In_Memory-c-tor-that-takes-a-v.patch \
-+           file://0002-FIX-intermediates-can-sign-their-own-OCSP-responses.patch \
-+           file://0003-FIX-missing-validation-of-authority-of-delegation-re.patch \
-+           file://0004-review-comments.patch \
-+           "
+@@ -9,6 +9,7 @@ SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
+            file://0002-FIX-intermediates-can-sign-their-own-OCSP-responses.patch \
+            file://0003-FIX-missing-validation-of-authority-of-delegation-re.patch \
+            file://0004-review-comments.patch \
++           file://0001-Address-various-name-constraint-bugs.patch \
+            "
  SRC_URI[sha256sum] = "e26e00cfefda64082afdd540d3c537924f645d6a674afed2cd171005deff5560"
  
- S = "${WORKDIR}/Botan-${PV}"
 
