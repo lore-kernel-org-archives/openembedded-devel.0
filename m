@@ -2,146 +2,229 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93FF7CCA470
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94B75CCA476
 	for <webhook@archiver.kernel.org>; Sun,  5 Oct 2025 13:58:40 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web10.10963.1759672717067447121
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web10.10965.1759672719647375504
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Oct 2025 06:58:37 -0700
+ Sun, 05 Oct 2025 06:58:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mkFdSa94;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-b3ee18913c0so622279566b.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 06:58:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VmPH2Uci;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-afcb7322da8so854210766b.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 06:58:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759672715; x=1760277515; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=dWLu+S/DZTCqT9ml2YWJnobsWuW0OeT93nD9juwMA1Y=;
-        b=mkFdSa94AL3sbUT4UWdHE6bzMjUtJZYOVyBMKDX4IjvkkOaqRM1SK+oQcCZ0gt42C4
-         VbdX+cg211f2x73MAmvcUUqvZgeGUWiqXvkZg5gyFeAUcDOEhvo7otDN5+En00eGF1DM
-         vvuRQwq6oMus0eHycmoDW+TtMTkL1otAyI/mf7Oa2RMZrC0ka4XxIuCrpnsjqNon1M1w
-         Ll84IC7TeppV0azVqlSiN/xcOErMu6fV8zNeYAKPWj3lisf5jWVO3kAXDCsA9RkcpmXd
-         TyY2o1Fmn2IRo2Q/srDbWbbQpRRgsm++KrPmvcWdiZNkz9uXPxAAZbVgfME9SJPdceUa
-         Y6bw==
+        d=gmail.com; s=20230601; t=1759672718; x=1760277518; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=upcKTTjWwBcVUIsLUehA7F/Ff05jkzpogNkUYUHRS8I=;
+        b=VmPH2UciiDSP7njBEwrLdYHsNnc5w2fL66h0FObj6tZ5PUaQAPDkDQAA9d5YgqWfHj
+         YuYHPre8AOI/YR/wb88g7YzMxNh8BOSgDe9fA07YeKudX1J3qn02h4we9qjQZU4Y8Uxl
+         8f9QUpVgm8h3G2Hd2jq3anLnxdCb8Q81EfTlteWR+2nR0aij3hSvrSvbPd6ssuAUKKrg
+         xJFW7CQxr01C0J6Y1QRPLTsHIfT0zz+aPSLjDBLpbyvFnBWvNJ+5IfCd7FolX+bw+xyD
+         Y+baNM93ItWAfxf384cz+1BQku/VWl64n1tX8H1QgSRzCQPcIjn14OsaFQHq2PUQZH9x
+         WHvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759672715; x=1760277515;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=dWLu+S/DZTCqT9ml2YWJnobsWuW0OeT93nD9juwMA1Y=;
-        b=pLKo2xXUKJ6Vk8XkgqV2yTQOXz4GX4ImWBBeMWyHz+Prn+owMUdn/tFx7PIkMuKHMl
-         EVJLBHzMR8VYIuWQ0wkXwvVtjYmLxksRJfLd0sDbElaSPa1sPpATv7MUG52IZ0tyASvT
-         rQqAaTeCX8OILJ1z4PT6xiBsND0i4yJEdL9oaTApDvRypmnNIUavM7Xb7kJc1mcNX4Z3
-         7dOHDVupNblXvI33VvY0E8CXpMCOinUs6P7MZFKpsmjLCBX5DfMgloWKqjQVxVRK/Cwi
-         U4HgW9tiSO8cEICDeV2tp1X98tFnMto1nZxSoyzRExoOwdjMM34D5xGZbKds0ycId84A
-         Jnow==
-X-Gm-Message-State: AOJu0Yyj208QjQoOyVDsECjh1yfqPL6j4tCjxtuzLcIxWgFImiUr9FR6
-	rX/dev52kIsrpHlBa9RBcZAP+fi76ySaJoROQZ30VyioWUe3HKfHNaDqaxBC7w==
-X-Gm-Gg: ASbGncul9j/CZh/TK6+XcgwMI9e/ObWj0uNfR2PkAkYdPCOI8RPxajSfTL0Ecrd4mHm
-	cVtnYBeSUdZPnGhigH/F5Yso3R41pyUAw9x2QFIHCZZlFLla5cLk9Au5l3ZY+40RhV4R4XzXLNs
-	Iju1DLTLssdp89BAR+zaPscyAZ6g03LkF+d7QJ4TuCNA4VfPf7bDEsEJiAEwNkgoU3/t3U1+z3i
-	VHxYcHXirjtJwZMY6WEtQaPQluVBRdM52xpLMNEcaujv9+GRFDC4gYC58oTNxGxZWIB8TWMY0bx
-	LaIyt/qD1OHeOE5VuHhpko+dBANkxO6x3cPnHa7oskQ7SifoQP1T691eLH3PvqpkqPiiGDZ40iX
-	01sQ9a//xWByQNOrGMc0wWK+P0VtI/DPaEFlJ8+pVV149wCs10YjTBF8=
-X-Google-Smtp-Source: AGHT+IH5ceTY13ZwKcGDlwFtwt14IGWSmKHYIevB8XZumsRHR7q3xTEPwla5fbJ4PpfxLM4XMVmV5Q==
-X-Received: by 2002:a17:907:6e9e:b0:b3c:f0f2:842f with SMTP id a640c23a62f3a-b49c3936513mr1155741366b.49.1759672715111;
-        Sun, 05 Oct 2025 06:58:35 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1759672718; x=1760277518;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=upcKTTjWwBcVUIsLUehA7F/Ff05jkzpogNkUYUHRS8I=;
+        b=Wq1SeXCT4avVIirANrPiPvebop4G39kBxgoQFqeiwAdOi0dcmgP5ghWJeEYcWFE2Yx
+         aRgBorqk2f2CClroV5wn+a1yC634hIGgBhEoTyIGQB5zZmQoGu6Q53Xat5G6Sz/q9UXT
+         fo29A91AaMOOr4+TERBMcjUMukx4k5q44R+dXMYsFGe+WenWrXsQwNLytD7OTj1AIts+
+         d9yPCW8Zk/dpk9Z4l37BliVt1rMy3OjMbOI4CyT6aLVzOD/cPMEA5OZdFetdQbkOubXn
+         0aNB78h9dLol8l2vT3p71KZQ5OsdWNb9Ov+LXf/oi2KfZinOynOIDs4mA5Ys8g3EARRh
+         QnAg==
+X-Gm-Message-State: AOJu0YwCbyp2guYnkYzwYm5Ehy9gHtk8RMzgKw2YdDqW5qyJx9n3TjTB
+	BpQx2RurV2g8LZhDA03PC+1uvBURi9vv8CqKlJaC30V74bn1FUGFL9Bh9Wm1kg==
+X-Gm-Gg: ASbGncvtqTN9wHk0h8fz/heaMa//si01v238R62rx5rt9n5cyYplgIZNQj27rzDb8HH
+	S1+DL1dURxjomvatqgthzcMkYq5c05g3/V3v0TM+O7YDZ59MG4rdUEZLh+AsOK7aL/zkxvRh02H
+	gt5HfzqYQnCJFZp0HbZQaU08Efk0yydRUa/WkLUbrPD/bbTzBlXJO2pGrxKFXRTD8tVMsxfG5BQ
+	WmMveMvRvRifvhYZhHjgwjg9xMXKnBUE5IoO1sUj1T2bF62C2xkz1esLMwHZUeIQ9K3y1O/0f6a
+	OplnNWlQBbAvBB3GvN0oCffncZ7z0ehlN2BCYSRjvnnjSuhRGNCbUzMGdp3MZcEeEr2+n92yXpn
+	qmKGK9WG/8gOcPScm1iWPop0VEu1wXLoyRm8oeqzFTOIjU/KFCK28UvI=
+X-Google-Smtp-Source: AGHT+IH1CZM55j3A2XTM2SaK1R3WDrIzO8t3DibuWzqwWvqVB0TYZytBZlRsllhOi8tJU0DTfQCuiw==
+X-Received: by 2002:a17:907:6ea7:b0:b44:f9fe:913a with SMTP id a640c23a62f3a-b49c439b49emr1037716266b.65.1759672717841;
+        Sun, 05 Oct 2025 06:58:37 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4869c4f314sm909200166b.69.2025.10.05.06.58.34
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4869c4f314sm909200166b.69.2025.10.05.06.58.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Oct 2025 06:58:34 -0700 (PDT)
+        Sun, 05 Oct 2025 06:58:37 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 1/5] audiofile: fix multiple CVEs
-Date: Sun,  5 Oct 2025 15:58:29 +0200
-Message-ID: <20251005135833.879336-1-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 5/5] audiofile: patch CVE-2017-6839
+Date: Sun,  5 Oct 2025 15:58:33 +0200
+Message-ID: <20251005135833.879336-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251005135833.879336-1-skandigraun@gmail.com>
+References: <20251005135833.879336-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 13:58:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120251
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120255
 
 From: Peter Marko <peter.marko@siemens.com>
 
-CVE-2017-6827 / CVE-2017-6828 / CVE-2017-6832 / CVE-2017-6833 / CVE-2017-6835 / CVE-2017-6837
-
 Use patch from buildroot:
-https://github.com/buildroot/buildroot/commit/cc00bde57fc20d11f8fa4e8ec5f193c091714c55
+https://github.com/buildroot/buildroot/commit/844a7c6281eb442881330a5d36d5a0719f2870bf
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 634cbcb91c3ab7154e0cda707663a1e4aa500f4a)
+(cherry picked from commit 88faae83b2b0e68827c457f4f348f7d7868f5258)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../audiofile/audiofile_0.3.6.bb              |  1 +
- ...ays-check-the-number-of-coefficients.patch | 45 +++++++++++++++++++
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0004-Always-check-the-number-of-coefficients.patch
+ .../audiofile/audiofile_0.3.6.bb              |   1 +
+ ...lication-overflow-in-MSADPCM-decodeS.patch | 126 ++++++++++++++++++
+ 2 files changed, 127 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0008-Check-for-multiplication-overflow-in-MSADPCM-decodeS.patch
 
 diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-index a09f84381e..7654c073f4 100644
+index 3d0ce3bfbc..d10c7a8b49 100644
 --- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
 +++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-@@ -13,6 +13,7 @@ SRC_URI = " \
-     file://0001-fix-negative-shift-constants.patch \
-     file://0002-fix-build-on-gcc6.patch \
-     file://0003-fix-CVE-2015-7747.patch \
-+    file://0004-Always-check-the-number-of-coefficients.patch \
+@@ -17,6 +17,7 @@ SRC_URI = " \
+     file://0005-clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch \
+     file://0006-Check-for-multiplication-overflow-in-sfconvert.patch \
+     file://0007-Actually-fail-when-error-occurs-in-parseFormat.patch \
++    file://0008-Check-for-multiplication-overflow-in-MSADPCM-decodeS.patch \
  "
  SRC_URI[md5sum] = "235dde14742317328f0109e9866a8008"
  SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782"
-diff --git a/meta-oe/recipes-multimedia/audiofile/files/0004-Always-check-the-number-of-coefficients.patch b/meta-oe/recipes-multimedia/audiofile/files/0004-Always-check-the-number-of-coefficients.patch
+diff --git a/meta-oe/recipes-multimedia/audiofile/files/0008-Check-for-multiplication-overflow-in-MSADPCM-decodeS.patch b/meta-oe/recipes-multimedia/audiofile/files/0008-Check-for-multiplication-overflow-in-MSADPCM-decodeS.patch
 new file mode 100644
-index 0000000000..282f4c01b9
+index 0000000000..857ed78c59
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/audiofile/files/0004-Always-check-the-number-of-coefficients.patch
-@@ -0,0 +1,45 @@
-+From c48e4c6503f7dabd41f11d4c9c7b7f8960e7f2c0 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-multimedia/audiofile/files/0008-Check-for-multiplication-overflow-in-MSADPCM-decodeS.patch
+@@ -0,0 +1,126 @@
++From beacc44eb8cdf6d58717ec1a5103c5141f1b37f9 Mon Sep 17 00:00:00 2001
 +From: Antonio Larrosa <larrosa@kde.org>
-+Date: Mon, 6 Mar 2017 12:51:22 +0100
-+Subject: [PATCH] Always check the number of coefficients
++Date: Mon, 6 Mar 2017 13:43:53 +0100
++Subject: [PATCH] Check for multiplication overflow in MSADPCM decodeSample
 +
-+When building the library with NDEBUG, asserts are eliminated
-+so it's better to always check that the number of coefficients
-+is inside the array range.
++Check for multiplication overflow (using __builtin_mul_overflow
++if available) in MSADPCM.cpp decodeSample and return an empty
++decoded block if an error occurs.
 +
-+This fixes the 00191-audiofile-indexoob issue in #41
++This fixes the 00193-audiofile-signintoverflow-MSADPCM case of #41
 +
 +Signed-off-by: Peter Korsgaard <peter@korsgaard.com>
 +
-+CVE: CVE-2017-6827
-+CVE: CVE-2017-6828
-+CVE: CVE-2017-6832
-+CVE: CVE-2017-6833
-+CVE: CVE-2017-6835
-+CVE: CVE-2017-6837
++CVE: CVE-2017-6839
 +Upstream-Status: Inactive-Upstream [lastrelease: 2013]
 +Signed-off-by: Peter Marko <peter.marko@siemens.com>
 +---
-+ libaudiofile/WAVE.cpp | 6 ++++++
-+ 1 file changed, 6 insertions(+)
++ libaudiofile/modules/BlockCodec.cpp |  5 ++--
++ libaudiofile/modules/MSADPCM.cpp    | 47 +++++++++++++++++++++++++++++++++----
++ 2 files changed, 46 insertions(+), 6 deletions(-)
 +
-+diff --git a/libaudiofile/WAVE.cpp b/libaudiofile/WAVE.cpp
-+index 0e81cf7..61f9541 100644
-+--- a/libaudiofile/WAVE.cpp
-++++ b/libaudiofile/WAVE.cpp
-+@@ -281,6 +281,12 @@ status WAVEFile::parseFormat(const Tag &id, uint32_t size)
++diff --git a/libaudiofile/modules/BlockCodec.cpp b/libaudiofile/modules/BlockCodec.cpp
++index 45925e8..4731be1 100644
++--- a/libaudiofile/modules/BlockCodec.cpp
+++++ b/libaudiofile/modules/BlockCodec.cpp
++@@ -52,8 +52,9 @@ void BlockCodec::runPull()
++ 	// Decompress into m_outChunk.
++ 	for (int i=0; i<blocksRead; i++)
++ 	{
++-		decodeBlock(static_cast<const uint8_t *>(m_inChunk->buffer) + i * m_bytesPerPacket,
++-			static_cast<int16_t *>(m_outChunk->buffer) + i * m_framesPerPacket * m_track->f.channelCount);
+++		if (decodeBlock(static_cast<const uint8_t *>(m_inChunk->buffer) + i * m_bytesPerPacket,
+++			static_cast<int16_t *>(m_outChunk->buffer) + i * m_framesPerPacket * m_track->f.channelCount)==0)
+++			break;
 + 
-+ 			/* numCoefficients should be at least 7. */
-+ 			assert(numCoefficients >= 7 && numCoefficients <= 255);
-++			if (numCoefficients < 7 || numCoefficients > 255)
-++			{
-++				_af_error(AF_BAD_HEADER,
-++						"Bad number of coefficients");
-++				return AF_FAIL;
-++			}
++ 		framesRead += m_framesPerPacket;
++ 	}
++diff --git a/libaudiofile/modules/MSADPCM.cpp b/libaudiofile/modules/MSADPCM.cpp
++index 8ea3c85..ef9c38c 100644
++--- a/libaudiofile/modules/MSADPCM.cpp
+++++ b/libaudiofile/modules/MSADPCM.cpp
++@@ -101,24 +101,60 @@ static const int16_t adaptationTable[] =
++ 	768, 614, 512, 409, 307, 230, 230, 230
++ };
 + 
-+ 			m_msadpcmNumCoefficients = numCoefficients;
+++int firstBitSet(int x)
+++{
+++        int position=0;
+++        while (x!=0)
+++        {
+++                x>>=1;
+++                ++position;
+++        }
+++        return position;
+++}
+++
+++#ifndef __has_builtin
+++#define __has_builtin(x) 0
+++#endif
+++
+++int multiplyCheckOverflow(int a, int b, int *result)
+++{
+++#if (defined __GNUC__ && __GNUC__ >= 5) || ( __clang__ && __has_builtin(__builtin_mul_overflow))
+++	return __builtin_mul_overflow(a, b, result);
+++#else
+++	if (firstBitSet(a)+firstBitSet(b)>31) // int is signed, so we can't use 32 bits
+++		return true;
+++	*result = a * b;
+++	return false;
+++#endif
+++}
+++
+++
++ // Compute a linear PCM value from the given differential coded value.
++ static int16_t decodeSample(ms_adpcm_state &state,
++-	uint8_t code, const int16_t *coefficient)
+++	uint8_t code, const int16_t *coefficient, bool *ok=NULL)
++ {
++ 	int linearSample = (state.sample1 * coefficient[0] +
++ 		state.sample2 * coefficient[1]) >> 8;
+++	int delta;
 + 
++ 	linearSample += ((code & 0x08) ? (code - 0x10) : code) * state.delta;
++ 
++ 	linearSample = clamp(linearSample, MIN_INT16, MAX_INT16);
++ 
++-	int delta = (state.delta * adaptationTable[code]) >> 8;
+++	if (multiplyCheckOverflow(state.delta, adaptationTable[code], &delta))
+++	{
+++                if (ok) *ok=false;
+++		_af_error(AF_BAD_COMPRESSION, "Error decoding sample");
+++		return 0;
+++	}
+++	delta >>= 8;
++ 	if (delta < 16)
++ 		delta = 16;
++ 
++ 	state.delta = delta;
++ 	state.sample2 = state.sample1;
++ 	state.sample1 = linearSample;
+++	if (ok) *ok=true;
++ 
++ 	return static_cast<int16_t>(linearSample);
++ }
++@@ -212,13 +248,16 @@ int MSADPCM::decodeBlock(const uint8_t *encoded, int16_t *decoded)
++ 	{
++ 		uint8_t code;
++ 		int16_t newSample;
+++		bool ok;
++ 
++ 		code = *encoded >> 4;
++-		newSample = decodeSample(*state[0], code, coefficient[0]);
+++		newSample = decodeSample(*state[0], code, coefficient[0], &ok);
+++		if (!ok) return 0;
++ 		*decoded++ = newSample;
++ 
++ 		code = *encoded & 0x0f;
++-		newSample = decodeSample(*state[1], code, coefficient[1]);
+++		newSample = decodeSample(*state[1], code, coefficient[1], &ok);
+++		if (!ok) return 0;
++ 		*decoded++ = newSample;
++ 
++ 		encoded++;
 +-- 
 +2.11.0
 +
