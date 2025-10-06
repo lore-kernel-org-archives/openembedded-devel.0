@@ -1,361 +1,404 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EB8DCCA470
-	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 18:34:40 +0000 (UTC)
-Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
- by mx.groups.io with SMTP id smtpd.web11.3180.1759775671818150376
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2F1CCAC5B8
+	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 19:27:57 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web10.1136.1759778873228984096
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Oct 2025 11:34:31 -0700
+ Mon, 06 Oct 2025 12:27:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GyVRyWxd;
- spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-633c1b740c5so6019198d50.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 11:34:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FCyJIN3M;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-634cef434beso11072042a12.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 12:27:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759775671; x=1760380471; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3xIRBG9s6v1zSCjPb+1025rPHtKCvqLt2cgfWbXISVI=;
-        b=GyVRyWxdCUMXa0IE3XSFAZwZt5YYiotMKzsgTqSDJ203LPptxAUFqSrCXCcuRc5B/m
-         EgxT5dfFSh6DYRiZpX61eq4acCupmjZU+K3ihiJNZYBEZNa+WDcoLx0EpNyiQgfhn7tJ
-         fX72ofQ8gHsN+u0qlNQ++qOAiAViUi1zkLwKhuq29Mo9KNJ7ycriqA+KkCCzocBfym+o
-         hCH+lmj+cyuie3xi98t0gaSVPEPNBjj16pW8MzrdZB0K6LvYVf5ZlFVuze+OA1bf0HBq
-         bndCIaNTrybe/u51GYWsAZwqy/BfY0B4qAeldAK51HaNnvH9/lvBRcQwptwLHmE9eg83
-         UBeA==
+        d=gmail.com; s=20230601; t=1759778871; x=1760383671; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=r3/ZU3S5XM55igQ2onnagd6Ddpk33W/Q1UNsNzLLpfg=;
+        b=FCyJIN3Mb6GiJyqkPv1Ub2TJ0UzTsHSeyhKRIHJGxfhzLL0ThU+PjTDPx4Wg/Ca+7I
+         NBGhh55MHqCuzJoepEBSZMaRFd4KXwgIwuEsxq6kbop9JkgL48AWKnfGOdi+Kycr6OBK
+         +hYqt225CrKJawj2LxqbqaUSUze9GcW/D5AeyNj2iABQGnlySGQxd5oRY3y3pV3FX0Q5
+         v74Pwz+qf7fucuBrRdoZUAAK6KCGShb8dVHbCFeUTtyYAnwDpxRuHikllMdUS0kMI+cs
+         KU38aWcecpdb7WhpFj0kotu43dF4i/hmeFGM+pvIG7hjz2z0SCh3g44H1hI8hextTVaQ
+         WBcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759775671; x=1760380471;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3xIRBG9s6v1zSCjPb+1025rPHtKCvqLt2cgfWbXISVI=;
-        b=F1YVIQLfH3rJkHJgFhQiESXXhbuxnGHYF4uvdbzhpvpILNHcmjXHZXGBf/M1cymSMc
-         eX84LsHErJONsQ6COuQ3cFyvgE7SipyIGgu1yrw3U6dKiyvPlCL2qbgdwjy1uBdJIADI
-         3N7zL49/NYinHD8yAV4l5XJqw1R4Bac31CUAjuqo+N2GlcqaKDIaD8l5s7RRjI3nmK5N
-         FfLQWAA2J+3DJaGn62F7PwIn2i3r5U5vZTSpnIS866nOJQEmTpDmE4pe0p9scPrVqpk6
-         zEZaKE39n3reKX4ukzpCLrtmYcgn2ZtwiOuO8tunoETEzcLyNQKQSgbD7FXKFnIKjV+u
-         +pag==
-X-Gm-Message-State: AOJu0YxIf4cctHXeNf9oaIR1jKFsV7ji0hsdN7jAU/1FJtvSMIp4N4eG
-	fbo9QYe8RT/BdBcTQxXkKS6NpXj0V0jRd2ROXhmBYgxnLxaN/vfEHupzsUGir9NrtoagELCEEUO
-	HfTeR/b9BGmMz5lB1+aOOtAH1NS5a7FfqzTtA4F0=
-X-Gm-Gg: ASbGncvuto2gQBQsx2vTPNooCpuwTFTTmehL/B7Cfz+q9KA55z8ofA+8EwHPz3cNK99
-	rhF16yvt+hXyhbadMap+WAPsqCTbPWu2j4UYm5A2Ewnqv46XKsr6DcJLCJEko5b2a4fDhzZ2woN
-	yvm+j0x4SRzM3WapfyONYxAHh6Ln1p9EQlIwzPocXXmxkFyNJnmO3799YI41P+6Q8vPWjMmMeSO
-	3c5UQFs+/siYd5qG4lgbGimYH+WBO1PsKBjNC7js6fb3BdSAsCz812F5f72eGAxqDTGqpejdDgB
-	qeRb3vyeGNQovN5oRM4PYu5ABmUCSJaKTHq22OsnEHUmgDhRkbYI0mgASgspsCvMtIyhWoW/3B6
-	4PKKWmw==
-X-Google-Smtp-Source: AGHT+IENXg16Dw+kSAwGJXMg71V96Q79nIV21jYg7b7Ny4+ATXIDCx0VImL6S+vO8Mbo18RqZrQHg0IijBp5vtcZYRY=
-X-Received: by 2002:a53:a10f:0:b0:633:a95e:ef08 with SMTP id
- 956f58d0204a3-63b9a05f5e8mr10225388d50.5.1759775670788; Mon, 06 Oct 2025
- 11:34:30 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1759778871; x=1760383671;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=r3/ZU3S5XM55igQ2onnagd6Ddpk33W/Q1UNsNzLLpfg=;
+        b=cxqRMiyKUg7PeaMue4zwL/vwmHXhLhzaaYTGHpFkQxL8KIOG2/bmiVDIeVACmu5Pzc
+         a+u4U3HC3OaqkVyzEstDF1w790/0YM/Lk5O+OHrHikrzAKQluXQ/hB/kAdccipzQJEjY
+         BZ67mBv8NOMwgEerOYfptE1UIC2UNSbfjJtEX6nfPejSlce65u4h8IB+vmcsC3NpsIaJ
+         AeFmtPaM9PuXDkEQKwfJKBXj0sFT2xCAd82g4/vGqb3ubfGPNfgoD3FYrtupwLVbgnCL
+         K36RM1q0DkC6ODDuz119OGnl+azlD02oDljlqInTLCQlD9eWJOWP8Hg/P4fNbcna0BOq
+         v8+g==
+X-Gm-Message-State: AOJu0YzKHqnG9QIdfayV+u5Ebf/vJJhM4PHHgxHDBVlMTqGoltk4jme2
+	3F8LNjDsn8ZVMFw5y2m/x5guwqaHh9dl2DzTT6rMyUkXuINpc6gHJfiG
+X-Gm-Gg: ASbGncuz7LTvORsV5oK+W2Y688T0XHoqnmZ2MJLyUcLPWauVJGgBgWbUk8oxmSv2Yv3
+	ZTaIsFxklg4qQhvSFExKImy6YqoZn2Mr6ZDcd9KuqDUANNXXpAu3DDbEgp7wgR2vQocMm9TtspD
+	Z0htweqKZQL45WBSjZ1MLmxj7ILkeUVDV5xxymaFCYc5Iqhr3fDH3UzF9hxMAe3YCcfy3Sr0kfY
+	r0E+R3M6z2fIr4s/X981JpYCE6eVrNnoCYeH4WYLXzc2ytyKTQ0zKNTjvaOSKdKXP3i7OZ+jcFG
+	St3J67OA/emJ649ZM6HYWTgvYvV2TrB3KqgYgP0Lc37MXEU08RaPuWr6pc+A2tFpfbjreKLTDuZ
+	KJyUd8DKmpgizg0PFyhHW1rfQ2tGsah4vyDsXC5A+3dIZl55T1CUQZD4=
+X-Google-Smtp-Source: AGHT+IG92MXuikGWzc6CkmtfOP3knNVtfT+iXsRUOBPdvLaRPj3tarYJkF+sFyhQHE/w1llr2SRXCA==
+X-Received: by 2002:a17:907:d7ca:b0:b3d:a295:5445 with SMTP id a640c23a62f3a-b4f4116a343mr108639566b.13.1759778870826;
+        Mon, 06 Oct 2025 12:27:50 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4f3c7e057dsm43704466b.88.2025.10.06.12.27.50
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 06 Oct 2025 12:27:50 -0700 (PDT)
+Message-ID: <4db17819-299d-4c9a-89b7-bbe6cea34703@gmail.com>
+Date: Mon, 6 Oct 2025 21:27:49 +0200
 MIME-Version: 1.0
-References: <20251005101311.1483435-1-skandigraun@gmail.com>
-In-Reply-To: <20251005101311.1483435-1-skandigraun@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 6 Oct 2025 11:34:02 -0700
-X-Gm-Features: AS18NWAX4d_n2LDoUECB5wJR52f1oz2w6yuGnySDyCCA-79rfPB0kYwdAF9OgEs
-Message-ID: <CAMKF1sqgoCoZFFO9FWTmzAjECgsk7hCMdhNzZQXcTRzzkjk41A@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] dovecot: upgrade 2.3.21.1 -> 2.4.1-4
-To: skandigraun@gmail.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] gnuplot: upgrade 5.4.3 -> 6.0.3
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20251006162126.4190341-1-skandigraun@gmail.com>
+ <CAMKF1spQsaHm-cqx2o1kzPet7WECU=88=-5cQBBb1hZAs=vq9A@mail.gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <CAMKF1spQsaHm-cqx2o1kzPet7WECU=88=-5cQBBb1hZAs=vq9A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 18:34:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120310
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 19:27:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120311
 
-fails to build on musl
-https://errors.yoctoproject.org/Errors/Details/884664/
+On 10/6/25 20:33, Khem Raj wrote:
+> seeing this
+>
+> https://errors.yoctoproject.org/Errors/Details/884667/
+> https://errors.yoctoproject.org/Errors/Details/884665/
+> https://errors.yoctoproject.org/Errors/Details/884663/
 
-On Sun, Oct 5, 2025 at 3:13=E2=80=AFAM Gyorgy Sarvari via
-lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
-wrote:
+Hmmm... I'm not sure why I didn't see this in my initial testing...
+But v2 should arrive in a few moments.
+
 >
-> Remove obsolete CVE_STATUS variable: CVE-2016-4983 is marked for v2.3.
->
-> Drop 0001-not-check-pandoc.patch because it became obsolete, pandoc is
-> not used anymore.
-> Drop 1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830.patch, because it is
-> included in this release.
->
-> Changelog:
-> 2.4: https://github.com/dovecot/core/releases/tag/2.4.0
-> 2.4.1: https://github.com/dovecot/core/releases/tag/2.4.1
->
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ---
->  ...vert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch | 59 ++++---------------
->  ...bunwind-instead-of-libunwind-generic.patch | 21 +++----
->  .../dovecot/0001-not-check-pandoc.patch       | 28 ---------
->  ...5b54a408d12fce0c94ab0bbaedbb5ef69830.patch | 24 --------
->  ...dovecot_2.3.21.1.bb =3D> dovecot_2.4.1-4.bb} | 14 ++---
->  5 files changed, 29 insertions(+), 117 deletions(-)
->  delete mode 100644 meta-networking/recipes-support/dovecot/dovecot/0001-=
-not-check-pandoc.patch
->  delete mode 100644 meta-networking/recipes-support/dovecot/dovecot/1ccd5=
-b54a408d12fce0c94ab0bbaedbb5ef69830.patch
->  rename meta-networking/recipes-support/dovecot/{dovecot_2.3.21.1.bb =3D>=
- dovecot_2.4.1-4.bb} (81%)
->
-> diff --git a/meta-networking/recipes-support/dovecot/dovecot/0001-configu=
-re.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch b/meta-networking/recip=
-es-support/dovecot/dovecot/0001-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_L=
-INK-state.patch
-> index 4fcfa48b99..abcf727a3b 100644
-> --- a/meta-networking/recipes-support/dovecot/dovecot/0001-configure.ac-c=
-onvert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch
-> +++ b/meta-networking/recipes-support/dovecot/dovecot/0001-configure.ac-c=
-onvert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch
-> @@ -16,58 +16,25 @@ Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
->   m4/ioloop.m4 | 9 +++------
->   2 files changed, 5 insertions(+), 10 deletions(-)
->
-> -diff --git a/m4/glibc.m4 b/m4/glibc.m4
-> -index 5d722aa..ce088d3 100644
-> ---- a/m4/glibc.m4
-> -+++ b/m4/glibc.m4
-> -@@ -17,7 +17,7 @@ AC_DEFUN([DOVECOT_GLIBC], [
-> +--- ./m4/glibc.m4      2025-10-04 22:42:24.336965366 +0200
-> ++++ ./m4/glibc.m4      2025-10-04 22:47:30.578745494 +0200
-> +@@ -2,7 +2,7 @@
->     dnl * Old glibcs have broken posix_fallocate(). Make sure not to use =
-it.
->     dnl * It may also be broken in AIX.
->     AC_CACHE_CHECK([whether posix_fallocate() works],i_cv_posix_fallocate=
-_works,[
-> --    AC_TRY_RUN([
-> -+    AC_TRY_LINK([
-> +-    AC_RUN_IFELSE([AC_LANG_PROGRAM([[
-> ++    AC_LINK_IFELSE([AC_LANG_PROGRAM([[
->         #define _XOPEN_SOURCE 600
->         #include <stdio.h>
->         #include <stdlib.h>
-> -@@ -26,7 +26,7 @@ AC_DEFUN([DOVECOT_GLIBC], [
-> -       #if defined(__GLIBC__) && (__GLIBC__ < 2 || __GLIBC_MINOR__ < 7)
-> -         possibly broken posix_fallocate
-> -       #endif
-> --      int main() {
-> -+      ], [
-> -         int fd =3D creat("conftest.temp", 0600);
-> -         int ret;
-> -         if (fd =3D=3D -1) {
-> -@@ -35,8 +35,6 @@ AC_DEFUN([DOVECOT_GLIBC], [
-> -         }
-> -         ret =3D posix_fallocate(fd, 1024, 1024) < 0 ? 1 : 0;
-> -         unlink("conftest.temp");
-> --        return ret;
-> --      }
-> -     ], [
-> -       i_cv_posix_fallocate_works=3Dyes
-> -     ], [
-> -diff --git a/m4/ioloop.m4 b/m4/ioloop.m4
-> -index 0f7dde0..f40fd62 100644
-> ---- a/m4/ioloop.m4
-> -+++ b/m4/ioloop.m4
-> -@@ -4,13 +4,10 @@ AC_DEFUN([DOVECOT_IOLOOP], [
-> +--- ./m4/ioloop.m4.orig        2025-10-04 22:47:44.656705137 +0200
-> ++++ ./m4/ioloop.m4     2025-10-04 22:48:32.379618966 +0200
-> +@@ -4,7 +4,7 @@
->
-> -   if test "$ioloop" =3D "best" || test "$ioloop" =3D "epoll"; then
-> +   AS_IF([test "$ioloop" =3D "best" || test "$ioloop" =3D "epoll"], [
->       AC_CACHE_CHECK([whether we can use epoll],i_cv_epoll_works,[
-> --      AC_TRY_RUN([
-> -+      AC_TRY_LINK([
-> +-      AC_RUN_IFELSE([AC_LANG_PROGRAM([[
-> ++      AC_LINK_IFELSE([AC_LANG_PROGRAM([[
->           #include <sys/epoll.h>
-> --
-> --        int main()
-> --        {
-> --      return epoll_create(5) < 1;
-> --        }
-> -+      ], [
-> -+      epoll_create(5) < 1;
-> -       ], [
-> -         i_cv_epoll_works=3Dyes
-> -       ], [
-> ---
-> -2.25.1
-> -
-> +       ]], [[
-> +         return epoll_create(5) < 1;
-> diff --git a/meta-networking/recipes-support/dovecot/dovecot/0001-m4-Chec=
-k-for-libunwind-instead-of-libunwind-generic.patch b/meta-networking/recipe=
-s-support/dovecot/dovecot/0001-m4-Check-for-libunwind-instead-of-libunwind-=
-generic.patch
-> index ec7a26a329..697fc02193 100644
-> --- a/meta-networking/recipes-support/dovecot/dovecot/0001-m4-Check-for-l=
-ibunwind-instead-of-libunwind-generic.patch
-> +++ b/meta-networking/recipes-support/dovecot/dovecot/0001-m4-Check-for-l=
-ibunwind-instead-of-libunwind-generic.patch
-> @@ -14,17 +14,14 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
->
->  diff --git a/m4/want_unwind.m4 b/m4/want_unwind.m4
->  index cadb62b..5517314 100644
-> ---- a/m4/want_unwind.m4
-> -+++ b/m4/want_unwind.m4
-> -@@ -2,7 +2,7 @@ AC_DEFUN([DOVECOT_WANT_UNWIND], [
-> +--- ./m4/want_unwind.m4        2025-10-04 22:57:09.371034202 +0200
-> ++++ ./m4/want_unwind.m4        2025-10-04 22:57:30.954794164 +0200
-> +@@ -2,7 +2,7 @@
->     have_libunwind=3Dno
-> +
->     AS_IF([test "$want_libunwind" !=3D "no"], [
-> -     PKG_CHECK_EXISTS([libunwind], [
-> --      PKG_CHECK_MODULES([LIBUNWIND], [libunwind-generic],[
-> -+      PKG_CHECK_MODULES([LIBUNWIND], [libunwind],[
-> -         have_libunwind=3Dyes
-> -       AC_DEFINE([HAVE_LIBUNWIND],,[Define this if you have libunwind])
-> -       ])
-> ---
-> -2.31.1
-> -
-> +-    PKG_CHECK_MODULES([LIBUNWIND], [libunwind-generic], [have_libunwind=
-=3Dyes], [
-> ++    PKG_CHECK_MODULES([LIBUNWIND], [libunwind], [have_libunwind=3Dyes],=
- [
-> +       have_libunwind=3Dno
-> +
-> +       AS_IF([test "$want_libunwind" =3D "yes"], [
-> diff --git a/meta-networking/recipes-support/dovecot/dovecot/0001-not-che=
-ck-pandoc.patch b/meta-networking/recipes-support/dovecot/dovecot/0001-not-=
-check-pandoc.patch
-> deleted file mode 100644
-> index af69c82f0f..0000000000
-> --- a/meta-networking/recipes-support/dovecot/dovecot/0001-not-check-pand=
-oc.patch
-> +++ /dev/null
-> @@ -1,28 +0,0 @@
-> -From 8c7d143ff28441c8b74b0f518dd2281239aede3d Mon Sep 17 00:00:00 2001
-> -From: Wang Mingyu <wangmy@cn.fujitsu.com>
-> -Date: Fri, 15 Jan 2021 11:10:22 +0900
-> -Subject: [PATCH] not check pandoc
-> -
-> -Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
-> ----
-> -Upstream-Status: Pending
-> -
-> - m4/dovecot.m4 | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/m4/dovecot.m4 b/m4/dovecot.m4
-> -index 2b5d895..ece8489 100644
-> ---- a/m4/dovecot.m4
-> -+++ b/m4/dovecot.m4
-> -@@ -447,7 +447,7 @@ AC_DEFUN([DC_PANDOC], [
-> -   dnl Optional tool for making documentation
-> -   AC_CHECK_PROGS(PANDOC, [pandoc], [true])
-> -
-> --  AS_IF([test "$PANDOC" =3D "true"], [
-> -+  AS_IF([test "$PANDOC" =3D "false"], [
-> -    AS_IF([test ! -e README], [
-> -      AC_MSG_ERROR([Cannot produce documentation without pandoc - disabl=
-e with PANDOC=3Dfalse ./configure])
-> -    ])
-> ---
-> -2.25.1
-> -
-> diff --git a/meta-networking/recipes-support/dovecot/dovecot/1ccd5b54a408=
-d12fce0c94ab0bbaedbb5ef69830.patch b/meta-networking/recipes-support/doveco=
-t/dovecot/1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830.patch
-> deleted file mode 100644
-> index 0765d963c1..0000000000
-> --- a/meta-networking/recipes-support/dovecot/dovecot/1ccd5b54a408d12fce0=
-c94ab0bbaedbb5ef69830.patch
-> +++ /dev/null
-> @@ -1,24 +0,0 @@
-> -From 1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830 Mon Sep 17 00:00:00 2001
-> -From: fundawang <fundawang@yeah.net>
-> -Date: Sun, 27 Oct 2024 22:11:21 +0800
-> -Subject: [PATCH] configure: Explicitly check for icu-uc
-> -
-> -Ensure we link against libicu-uc when it's split in v76.
-> -
-> -Upstream-Status: Backport [https://github.com/dovecot/core/commit/1ccd5b=
-54a408d12fce0c94ab0bbaedbb5ef69830]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - m4/want_icu.m4 | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> ---- a/m4/want_icu.m4
-> -+++ b/m4/want_icu.m4
-> -@@ -1,7 +1,7 @@
-> - AC_DEFUN([DOVECOT_WANT_ICU], [
-> -   if test "$want_icu" !=3D "no"; then
-> -     if test "$PKG_CONFIG" !=3D "" && $PKG_CONFIG --exists icu-i18n 2>/d=
-ev/null; then
-> --      PKG_CHECK_MODULES(LIBICU, icu-i18n)
-> -+      PKG_CHECK_MODULES(LIBICU, [icu-i18n icu-uc])
-> -       have_icu=3Dyes
-> -       AC_DEFINE(HAVE_LIBICU,, [Define if you want ICU normalization sup=
-port for FTS])
-> -     elif test "$want_icu" =3D "yes"; then
-> diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.3.21.1.bb =
-b/meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb
-> similarity index 81%
-> rename from meta-networking/recipes-support/dovecot/dovecot_2.3.21.1.bb
-> rename to meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb
-> index 3177cdb1d7..aaa2d8a1a1 100644
-> --- a/meta-networking/recipes-support/dovecot/dovecot_2.3.21.1.bb
-> +++ b/meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb
-> @@ -1,19 +1,21 @@
->  SUMMARY =3D "Dovecot is an open source IMAP and POP3 email server"
->  HOMEPAGE =3D "https://www.dovecot.org/"
-> -DESCRIPTION =3D "Dovecot is an open source IMAP and POP3 email server fo=
-r Linux/UNIX-like systems, written with security primarily in mind. Dovecot=
- is an excellent choice for both small and large installations. It's fast, =
-simple to set up, requires no special administration and it uses very littl=
-e memory."
-> +DESCRIPTION =3D "Dovecot is an open source IMAP and POP3 email \
-> +server for Linux/UNIX-like systems, written with security primarily \
-> +in mind. Dovecot is an excellent choice for both small and large \
-> +installations. It's fast, simple to set up, requires no special \
-> +administration and it uses very little memory."
->  SECTION =3D "mail"
->  LICENSE =3D "LGPL-2.1-only & MIT"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2956560272e5b31d9d64f03111732=
-048"
->
-> -SRC_URI =3D "http://dovecot.org/releases/2.3/dovecot-${PV}.tar.gz \
-> +SRC_URI =3D "http://dovecot.org/releases/2.4/dovecot-${PV}.tar.gz \
->             file://0001-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-st=
-ate.patch \
->             file://dovecot.service \
->             file://dovecot.socket \
-> -           file://0001-not-check-pandoc.patch \
->             file://0001-m4-Check-for-libunwind-instead-of-libunwind-gener=
-ic.patch \
-> -           file://1ccd5b54a408d12fce0c94ab0bbaedbb5ef69830.patch \
->             "
-> -SRC_URI[sha256sum] =3D "2d90a178c4297611088bf7daae5492a3bc3d5ab6328c3a03=
-2eb425d2c249097e"
-> +SRC_URI[sha256sum] =3D "fb188603f419ed7aaa07794a8692098c3ec2660bb9c67d0e=
-fe24948cbb32ae00"
->
->  DEPENDS =3D "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
->  CFLAGS +=3D "-I${STAGING_INCDIR}/tirpc"
-> @@ -72,5 +74,3 @@ FILES:${PN} +=3D "${libdir}/dovecot/*plugin.so \
->  FILES:${PN}-staticdev +=3D "${libdir}/dovecot/*/*.a"
->  FILES:${PN}-dev +=3D "${libdir}/dovecot/libdovecot*.so"
->  FILES:${PN}-dbg +=3D "${libdir}/dovecot/*/.debug"
-> -
-> -CVE_STATUS[CVE-2016-4983] =3D "not-applicable-platform: Affects only pos=
-tinstall script on specific distribution."
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#120242): https://lists.openembedded.org/g/openembedde=
-d-devel/message/120242
-> Mute This Topic: https://lists.openembedded.org/mt/115598694/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+> On Mon, Oct 6, 2025 at 9:21 AM Gyorgy Sarvari via
+> lists.openembedded.org <skandigraun=gmail.com@lists.openembedded.org>
+> wrote:
+>> This upgrade includes fixes for the following vulnerabilities:
+>> CVE-2025-31176
+>> CVE-2025-31178
+>> CVE-2025-31179
+>> CVE-2025-31180
+>> CVE-2025-31181
+>>
+>> This release supports qt4, qt5 and qt6 (the last one is new in this release).
+>> There are 2 qt PACKAGECONFIGs now: qt5 and qt6 - they are mutually exclusive.
+>>
+>> Since it is being touched, also fix lua PACKAGECONFIG, which requires lua-native
+>> at build time.
+>>
+>> Changelog:
+>> http://gnuplot.info/ReleaseNotes_6_0_3.html
+>>
+>> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+>> ---
+>>  .../0003-Use-native-tools-to-build-docs.patch | 66 +++++++++----------
+>>  ...ion-to-find-qt5-and-qt6-native-tools.patch | 64 ++++++++++++++++++
+>>  ...gure-option-to-find-qt5-native-tools.patch | 42 ------------
+>>  .../{gnuplot_5.4.3.bb => gnuplot_6.0.3.bb}    | 11 ++--
+>>  4 files changed, 102 insertions(+), 81 deletions(-)
+>>  create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch
+>>  delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-native-tools.patch
+>>  rename meta-oe/recipes-extended/gnuplot/{gnuplot_5.4.3.bb => gnuplot_6.0.3.bb} (77%)
+>>
+>> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/0003-Use-native-tools-to-build-docs.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/0003-Use-native-tools-to-build-docs.patch
+>> index 7a7e550349..736dff13e1 100644
+>> --- a/meta-oe/recipes-extended/gnuplot/gnuplot/0003-Use-native-tools-to-build-docs.patch
+>> +++ b/meta-oe/recipes-extended/gnuplot/gnuplot/0003-Use-native-tools-to-build-docs.patch
+>> @@ -23,29 +23,26 @@ diff --git a/docs/Makefile.am b/docs/Makefile.am
+>>  index b20918a..47406eb 100644
+>>  --- a/docs/Makefile.am
+>>  +++ b/docs/Makefile.am
+>> -@@ -156,7 +156,7 @@ gnuplot-groff.ps: gnuplot.ms $(srcdir)/titlepag.ms
+>> +@@ -175,7 +175,7 @@
+>> +       $(AM_V_GEN) touch $@
+>>
+>> - ### doc2xxx dependencies
+>> - gnuplot.ms: doc2ms$(EXEEXT) $(srcdir)/gnuplot.doc
+>> --      $(AM_V_GEN) ./doc2ms$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.ms "$(srcdir)/titlepag.ms"
+>> -+      $(AM_V_GEN) doc2ms$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.ms "$(srcdir)/titlepag.ms"
+>> -
+>> - doc2ms_SOURCES = doc2ms.c termdoc.c
+>> - doc2ms_CPPFLAGS = -DALL_TERM_DOC $(AM_CPPFLAGS)
+>> -@@ -177,10 +177,10 @@ pdf_figures: $(GNUPLOT_EXE) $(srcdir)/plotstyles.gnu
+>> -       $(AM_V_GEN)touch $@
+>> -
+>> - figures.tex: allterm.h doc2tex$(EXEEXT) $(srcdir)/gnuplot.doc
+>> + gnuplot.tex: allterm.h doc2tex$(EXEEXT) $(srcdir)/gnuplot.doc
+>>  -      $(AM_V_GEN)./doc2tex$(EXEEXT) -figures $(srcdir)/gnuplot.doc $@
+>>  +      $(AM_V_GEN) doc2tex$(EXEEXT) -figures $(srcdir)/gnuplot.doc $@
+>>
+>> - nofigures.tex: allterm.h doc2tex$(EXEEXT) $(srcdir)/gnuplot.doc
+>> --      $(AM_V_GEN)./doc2tex$(EXEEXT) $(srcdir)/gnuplot.doc $@
+>> -+      $(AM_V_GEN) doc2tex$(EXEEXT) $(srcdir)/gnuplot.doc $@
+>> -
+>> - pdf: gnuplot.pdf
+>> - pdf_nofig: nofigures.pdf
+>> -@@ -260,7 +260,7 @@ gnuplot.ps: gnuplot.dvi
+>> + pdf: pdf_figures
+>> +       $(MAKE) gnuplot.pdf
+>> +@@ -255,7 +255,7 @@
+>> +
+>> + gnuplot-ja.pdf: gnuplot-ja.doc title-ja.tex pdf_figures allterm-ja.h doc2tex$(EXEEXT)
+>> +       iconv -f EUC-JP -t UTF-8 gnuplot-ja.doc > ja.doc
+>> +-      ./doc2tex$(EXEEXT) -figures -japanese ja.doc | sed 's/titlepag.tex/title-ja.tex/' > gnuplot-ja.tex
+>> ++      doc2tex$(EXEEXT) -figures -japanese ja.doc | sed 's/titlepag.tex/title-ja.tex/' > gnuplot-ja.tex
+>> +       lualatex gnuplot-ja
+>> +       lualatex gnuplot-ja
+>> +       makeindex gnuplot-ja
+>> +
+>> +@@ -268,7 +268,7 @@ gnuplot.ps: gnuplot.dvi
+>>   hlp: gnuplot.hlp
+>>
+>>   gnuplot.hlp: doc2hlp$(EXEEXT) $(srcdir)/gnuplot.doc
+>> @@ -54,7 +51,7 @@ index b20918a..47406eb 100644
+>>
+>>   doc2hlp_SOURCES = doc2hlp.c termdoc.c
+>>
+>> -@@ -268,14 +268,14 @@ doc2hlp_SOURCES = doc2hlp.c termdoc.c
+>> +@@ -276,14 +276,14 @@ doc2hlp_SOURCES = doc2hlp.c termdoc.c
+>>   gih: gnuplot.gih
+>>
+>>   gnuplot.gih: doc2gih$(EXEEXT) $(srcdir)/gnuplot.doc
+>> @@ -71,7 +68,7 @@ index b20918a..47406eb 100644
+>>
+>>   alldoc2gih_SOURCES = doc2gih.c termdoc.c
+>>   alldoc2gih_CPPFLAGS = -DALL_TERM_DOC $(AM_CPPFLAGS)
+>> -@@ -290,7 +290,7 @@ $(srcdir)/windows/wgnuplot.hhk
+>> +@@ -298,7 +298,7 @@ $(srcdir)/windows/wgnuplot.hhk
+>>   wxhelp/wgnuplot.hhc wxhelp/wgnuplot.hhk wxhelp/*.html windows/*.png
+>>
+>>   wxhelp/wgnuplot.html: doc2wxhtml$(EXEEXT) $(srcdir)/gnuplot.doc
+>> @@ -80,7 +77,16 @@ index b20918a..47406eb 100644
+>>
+>>   doc2wxhtml_SOURCES = windows/doc2html.c termdoc.c xref.c allterm.h
+>>   doc2wxhtml_CPPFLAGS = -DALL_TERM_DOC -DWXHELP -I../src $(AM_CPPFLAGS)
+>> -@@ -340,7 +340,7 @@ install-info: gnuplot.info
+>> +@@ -318,7 +318,7 @@
+>> +       $(AM_V_at) [ -d html ] || mkdir -p html
+>> +       $(AM_V_at) rm -f html/Overview.html html/Plotting_Styles.html html/Commands.html html/Terminals.html
+>> +       $(AM_V_at) rm -f html/NewFeatures.html
+>> +-      $(AM_V_GEN)./doc2web$(EXEEXT) $(srcdir)/gnuplot.doc html
+>> ++      $(AM_V_GEN) doc2web$(EXEEXT) $(srcdir)/gnuplot.doc html
+>> +       $(AM_V_GEN) sort -k 3 html/index.hhk > html/index.html
+>> +
+>> + svg_figures: $(GNUPLOT_EXE) $(srcdir)/plotstyles.gnu
+>> +@@ -372,7 +372,7 @@ install-info: gnuplot.info
+>>   ipf: gnuplot.ipf
+>>
+>>   gnuplot.ipf: doc2ipf$(EXEEXT) $(srcdir)/gnuplot.doc
+>> @@ -89,7 +95,7 @@ index b20918a..47406eb 100644
+>>
+>>   doc2ipf_SOURCES = doc2ipf.c termdoc.c xref.c
+>>
+>> -@@ -348,7 +348,7 @@ doc2ipf_SOURCES = doc2ipf.c termdoc.c xref.c
+>> +@@ -380,7 +380,7 @@ doc2ipf_SOURCES = doc2ipf.c termdoc.c xref.c
+>>   rtf: gnuplot.rtf
+>>
+>>   gnuplot.rtf: doc2rtf$(EXEEXT) $(srcdir)/gnuplot.doc
+>> @@ -98,22 +104,12 @@ index b20918a..47406eb 100644
+>>
+>>   doc2rtf_SOURCES = doc2rtf.c termdoc.c xref.c
+>>
+>> -@@ -356,13 +356,13 @@ doc2rtf_SOURCES = doc2rtf.c termdoc.c xref.c
+>> - rnh: gnuplot.rnh
+>> -
+>> - gnuplot.rnh: doc2rnh$(EXEEXT) $(srcdir)/gnuplot.doc
+>> --      $(AM_V_GEN) ./doc2rnh$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.rnh
+>> -+      $(AM_V_GEN) doc2rnh$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.rnh
+>> -
+>> - doc2rnh_SOURCES = doc2rnh.c termdoc.c
+>> +@@ -386,7 +386,7 @@
+>>
+>>   # this is how to check the gnuplot.doc file
+>>   check-local: checkdoc$(EXEEXT)
+>>  -      $(AM_V_at)./checkdoc$(EXEEXT) < $(srcdir)/gnuplot.doc; \
+>>  +      $(AM_V_at)checkdoc$(EXEEXT) < $(srcdir)/gnuplot.doc; \
+>>         if test $$? -eq 0; then \
+>> -         echo "PASS: gnuplot.doc"; \
+>> +          echo "PASS: gnuplot.doc"; \
+>>         else \
+>> ---
+>> -2.14.3
+>> -
+>> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch
+>> new file mode 100644
+>> index 0000000000..50c0785df0
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch
+>> @@ -0,0 +1,64 @@
+>> +From 577e21622475fa29fd471149cf2380c53fdbfcbd Mon Sep 17 00:00:00 2001
+>> +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+>> +Date: Tue, 6 Mar 2018 22:26:48 +0100
+>> +Subject: [PATCH] Add configure option to find qt5 native tools
+>> +MIME-Version: 1.0
+>> +Content-Type: text/plain; charset=UTF-8
+>> +Content-Transfer-Encoding: 8bit
+>> +
+>> +Pkg-config checks for target locations. With these qt5 tools as uic/moc..
+>> +cannot be used.
+>> +
+>> +Upstream-Status: Inappropriate [embedded specific]
+>> +
+>> +Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+>> +---
+>> + configure.ac | 6 +++++-
+>> + 1 file changed, 5 insertions(+), 1 deletion(-)
+>> +
+>> +diff --git a/configure.ac b/configure.ac
+>> +index cdd831a..fdd192b 100644
+>> +--- a/configure.ac
+>> ++++ b/configure.ac
+>> +@@ -1061,11 +1061,15 @@
+>> +   if test "x${with_qt}" != "xqt4"; then
+>> +     pkg_failed="not_tried"
+>> +     if test "x${with_qt}" != "xqt5"; then
+>> ++     AC_ARG_WITH(qt6nativesysroot,
+>> ++       AC_HELP_STRING([--with-qt6nativesysroot=PATH], [prepend path - for native qt6 tools]),
+>> ++      [QT6NATIVESYSROOT="$withval"], [QT6NATIVESYSROOT=""])
+>> ++
+>> +       AC_MSG_CHECKING([Checking for Qt6 support libraries])
+>> +       PKG_CHECK_MODULES_NOFAIL(QT, [Qt6Core Qt6Gui Qt6Network Qt6Svg Qt6PrintSupport Qt6Widgets Qt6Core5Compat])
+>> +     fi
+>> +     if test $pkg_failed = no; then
+>> +-      QT6LOC=`$PKG_CONFIG --variable=libexecdir Qt6Core`
+>> ++      QT6LOC=${QT6NATIVESYSROOT}`$PKG_CONFIG --variable=libexecdir Qt6Core`
+>> +       if test "x${QT6LOC}" != "x"; then
+>> +           UIC=${QT6LOC}/uic
+>> +           MOC=${QT6LOC}/moc
+>> +@@ -1075,7 +1079,7 @@
+>> +           MOC=moc-qt6
+>> +           RCC=rcc-qt6
+>> +       fi
+>> +-      QT6BIN=`$PKG_CONFIG --variable=bindir Qt6Core`
+>> ++      QT6BIN=${QT6NATIVESYSROOT}`$PKG_CONFIG --variable=bindir Qt6Core`
+>> +       if test "x${QT6BIN}" != "x"; then
+>> +           LRELEASE=${QT6BIN}/lrelease
+>> +       elif test "x${LRELEASE}" = "x"; then
+>> +@@ -1086,10 +1090,14 @@
+>> +       AC_MSG_RESULT([The Qt terminal will use Qt6.])
+>> +       QTVER="6"
+>> +     else
+>> ++     AC_ARG_WITH(qt5nativesysroot,
+>> ++       AC_HELP_STRING([--with-qt5nativesysroot=PATH], [prepend path - for native qt5 tools]),
+>> ++       [QT5NATIVESYSROOT="$withval"], [QT5NATIVESYSROOT=""])
+>> ++
+>> +       AC_MSG_CHECKING([Checking for Qt5 support libraries])
+>> +       PKG_CHECK_MODULES_NOFAIL(QT, [Qt5Core Qt5Gui Qt5Network Qt5Svg Qt5PrintSupport])
+>> +       if test $pkg_failed = no; then
+>> +-        QT5LOC=`$PKG_CONFIG --variable=host_bins Qt5Core`
+>> ++        QT5LOC=${QT5NATIVESYSROOT}`$PKG_CONFIG --variable=host_bins Qt5Core`
+>> +         if test "x${QT5LOC}" != "x"; then
+>> +           UIC=${QT5LOC}/uic
+>> +           MOC=${QT5LOC}/moc
+>> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-native-tools.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-native-tools.patch
+>> deleted file mode 100644
+>> index 7ed9e761f2..0000000000
+>> --- a/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-native-tools.patch
+>> +++ /dev/null
+>> @@ -1,42 +0,0 @@
+>> -From 577e21622475fa29fd471149cf2380c53fdbfcbd Mon Sep 17 00:00:00 2001
+>> -From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+>> -Date: Tue, 6 Mar 2018 22:26:48 +0100
+>> -Subject: [PATCH] Add configure option to find qt5 native tools
+>> -MIME-Version: 1.0
+>> -Content-Type: text/plain; charset=UTF-8
+>> -Content-Transfer-Encoding: 8bit
+>> -
+>> -Pkg-config checks for target locations. With these qt5 tools as uic/moc..
+>> -cannot be used.
+>> -
+>> -Upstream-Status: Inappropriate [embedded specific]
+>> -
+>> -Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+>> ----
+>> - configure.ac | 6 +++++-
+>> - 1 file changed, 5 insertions(+), 1 deletion(-)
+>> -
+>> -diff --git a/configure.ac b/configure.ac
+>> -index cdd831a..fdd192b 100644
+>> ---- a/configure.ac
+>> -+++ b/configure.ac
+>> -@@ -1133,11 +1133,15 @@ if test "${enable_qt}" = yes ; then
+>> -   else
+>> -     try_qt4=yes
+>> -   fi
+>> -+  AC_ARG_WITH(qt5nativesysroot,
+>> -+    AC_HELP_STRING([--with-qt5nativesysroot=PATH], [prepend path - for native qt5 tools]),
+>> -+    [QT5NATIVESYSROOT="$withval"], [QT5NATIVESYSROOT=""])
+>> -+
+>> -   if test "x${with_qt}" != "xqt4"; then
+>> -     PKG_CHECK_MODULES_NOFAIL(QT, [Qt5Core Qt5Gui Qt5Network Qt5Svg Qt5PrintSupport])
+>> -     if test $pkg_failed = no; then
+>> -       try_qt4=no
+>> --      QT5LOC=`$PKG_CONFIG --variable=host_bins Qt5Core`
+>> -+      QT5LOC=${QT5NATIVESYSROOT}`$PKG_CONFIG --variable=host_bins Qt5Core`
+>> -       if test "x${QT5LOC}" != "x"; then
+>> -         UIC=${QT5LOC}/uic
+>> -         MOC=${QT5LOC}/moc
+>> ---
+>> -2.14.3
+>> -
+>> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_6.0.3.bb
+>> similarity index 77%
+>> rename from meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
+>> rename to meta-oe/recipes-extended/gnuplot/gnuplot_6.0.3.bb
+>> index 679b1a7e98..35c83fd23e 100644
+>> --- a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
+>> +++ b/meta-oe/recipes-extended/gnuplot/gnuplot_6.0.3.bb
+>> @@ -18,10 +18,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz;name=a
+>>  SRC_URI:append:class-target = " \
+>>      file://0002-do-not-build-demos.patch \
+>>      file://0003-Use-native-tools-to-build-docs.patch \
+>> -    file://0004-Add-configure-option-to-find-qt5-native-tools.patch \
+>> +    file://0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch \
+>>  "
+>>
+>> -SRC_URI[archive.sha256sum] = "51f89bbab90f96d3543f95235368d188eb1e26eda296912256abcd3535bd4d84"
+>> +SRC_URI[archive.sha256sum] = "ec52e3af8c4083d4538152b3f13db47f6d29929a3f6ecec5365c834e77f251ab"
+>>  SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
+>>
+>>  # for building docs (they deserve it) we need *doc2* tools native
+>> @@ -39,14 +39,17 @@ do_install:class-native() {
+>>
+>>  PACKAGECONFIG ??= "cairo ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+>>  PACKAGECONFIG[cairo] = "--with-cairo,--without-cairo,cairo pango"
+>> -PACKAGECONFIG[lua] = "--with-lua,--without-lua,lua"
+>> -PACKAGECONFIG[qt5] = "--with-qt --with-qt5nativesysroot=${STAGING_DIR_NATIVE},--without-qt,qtbase-native qtbase qtsvg qttools-native"
+>> +PACKAGECONFIG[lua] = "--with-lua,--without-lua,lua lua-native"
+>> +# qt5 requires meta-qt5 layer, qt6 requires meta-qt6 layer
+>> +PACKAGECONFIG[qt5] = "--with-qt=qt5 --with-qt5nativesysroot=${STAGING_DIR_NATIVE},,qtbase-native qtbase qtsvg qttools-native,,,qt6"
+>> +PACKAGECONFIG[qt6] = "--with-qt --with-qt6nativesysroot=${STAGING_DIR_NATIVE},,qtbase-native qtbase qtsvg qttools-native qt5compat,,,qt5"
+>>  PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11"
+>>
+>>  EXTRA_OECONF = " \
+>>      --with-readline=${STAGING_LIBDIR}/.. \
+>>      --disable-wxwidgets \
+>>      --without-libcerf \
+>> +    ${@bb.utils.contains_any('PACKAGECONFIG', 'qt5 qt6', '', '--without-qt', d)} \
+>>  "
+>>
+>>  do_compile:prepend() {
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#120303): https://lists.openembedded.org/g/openembedded-devel/message/120303
+>> Mute This Topic: https://lists.openembedded.org/mt/115620128/1997914
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
+
 
