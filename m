@@ -2,62 +2,62 @@ Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9246CCA470
-	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 01:48:34 +0000 (UTC)
-Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
- by mx.groups.io with SMTP id smtpd.web10.23901.1759715313031575083
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 004BACAC5BB
+	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 01:48:44 +0000 (UTC)
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
+ by mx.groups.io with SMTP id smtpd.web11.24008.1759715316438652341
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Oct 2025 18:48:33 -0700
+ Sun, 05 Oct 2025 18:48:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YGZvmA9L;
- spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-72e565bf2f0so48784047b3.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 18:48:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Nxb87s9t;
+ spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-74f6974175dso49854187b3.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 18:48:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759715312; x=1760320112; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759715315; x=1760320115; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xxSircv12ziL17ycGed2BC7biFpB7JjSSq1QMvomy/A=;
-        b=YGZvmA9L0k7OQI1OjEyBAqSGy4qd4Lm6mGFUOKerIevOgQiYGNQGqJwoBQ6J4s3Vwv
-         gFnFQWNh/Fj7GRszR85tGSo/HVM61Q9Vk126V+eFnIX9nYbYnop6Yq2MGCrrjD97hG9M
-         owNs9AFglwYCKELFsA9bZ7TCOLNvo2FXrxfX0jchnxnK6DLdYe+taCmiML6+Fj+8RkiS
-         jeX8pxFEVvqDLcInzEIvjCQRmoTAzPKBIQ2bu5KOLMjS4vHzQm0WPocgBz65/i4X5B80
-         9qtpF7V/IvDqqrV/yjRKQN8iLqQ/KHnXliN2UBTQ+q/aN2A/+oURN90qGnx3SYzNDSpX
-         g8RA==
+        bh=HYKd5YBIImoMcY2oGsQr9BeMyn75dVOF1GqC+d7uw1E=;
+        b=Nxb87s9tHM2fHTh1fldgwwg8ZNJNb3Puooj7c2ERetAIn1o48zGhIePh/6aeJpImFH
+         6SXIrQGZopJbdoS1NHO8Lnx/Qn3rtdjfIdsgHPRfBdcWtA9rQiRAYPjS9zb3mmUmVkcv
+         VWGAvvLUojQi5WfrBI9LieKs1XOdMlb6v5NOu9fCR6yWJa/2yfqmroIYwau1lfv26apS
+         RMJwnGiMR1MzFTnY0P8B2h1XRx1Y4frZ3/qz34ALAJlFo9/73lwYMVdk5szIt9pVmK51
+         17uaVZ3OtiSIvXhsd8/i8c1hksyQcPM45f0nfvQHYTHhfKMOv91lRiu5ClnkGTmnNvy6
+         NbPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759715312; x=1760320112;
+        d=1e100.net; s=20230601; t=1759715315; x=1760320115;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=xxSircv12ziL17ycGed2BC7biFpB7JjSSq1QMvomy/A=;
-        b=n/Ue3DsQtuqqtQxZ2RIxhEj8ZuWnb1jB4rTEF9/JIAeFwrOD/QRKCx374FzTiZPA8K
-         sTNIYmAwSW71FEpg9Pd70+kP46a+ujp/7VHDECjH53PeH+fGg/+lIa806wD5JFUFsyG3
-         dDIpBsQ4Pv0PD7qQulcEvsTANebizxtcXm4hQiL1VYj0hhpm2a/58kHL+k17h1ktxxs3
-         X/dA9W3rtqT5zwBfNHVJ467A9j8VIy/IupwynVKwpt9aJ0YqIRYZn56XuIw8yW05eJ4Z
-         Ef6BaCSy3Ok04mT7fc7JrQMnQKb/adjhYsU+SktGzTd+QM/KhIFkEPSNjKpHrwDOHgP/
-         +VCQ==
-X-Gm-Message-State: AOJu0Yyr9Wgh3TxkKnbvQMDuxGRthtbQqXo82OanYO9VQ/JEVasO5brM
-	TDK4ifFx6CSRSNDFPMJE45PwD33X4mTMBxsSs1jXFOzp8kDYT3G9tOIMl8pa4tY7
-X-Gm-Gg: ASbGncsPfWF5JpY9Xwx4f1rC0aeRe5WdBdyHlQcqPuZ/mKRVN2LLZZncEZPyY9gZ6G3
-	9LV9TRdoWegsPWCYJq9jmtfEpJko1qgElI1D8VOuXJhyvCyd49/B0SWmKRdGnjrFmHifNreCoG7
-	+3kYOUF21kcCr2Gt0K8FCK0kiygPZ4HaPVUVjC7djqfjK2G1lFsbmvQUyIYNCGIi+lrwOAFYqHL
-	ERkE4HawyEmh9mDwUVNBbYEJVvVxo03w4pzSMO4m1w4sRrU39FAjNCjleOzvdKorPY6/vSFs2kN
-	oKX161/Xlajk9+21QM4HCcUnD9tFsH0kGyZ2WmH6nov4JG9CSnqbP9dJeP8DJe17CNsHcgJSgC6
-	rEdrU2Hz3NlMQULtBOQ3h2VXYbbTj+YVPWf/Irr47OIZwAI9VUFSw
-X-Google-Smtp-Source: AGHT+IHiO2sy8jKvdopVhQ9M7CEeSo2XNTrAnDV0ior/XidXTsJmJ6oZX/ddJYAVHL44itN5Rgo6ow==
-X-Received: by 2002:a05:690c:83:b0:75e:a8a9:8e7 with SMTP id 00721157ae682-77f9470af45mr137431797b3.47.1759715311673;
-        Sun, 05 Oct 2025 18:48:31 -0700 (PDT)
+        bh=HYKd5YBIImoMcY2oGsQr9BeMyn75dVOF1GqC+d7uw1E=;
+        b=oH7LNJhQsSm70AUrO+1M6UFWj+F/2plsaP1XUb70ej1842GJKshwRA/91reIx8gOXH
+         Njzp/HlTBkUGyMojjHl7ldGRsphwM5brWSqpN9NhsrHQ27HbrKNGx4jz8Da1N+FS/1Hz
+         BxDadJ1Y2jqZiPxExtBh7Wz5RUobdC2xEpR7RLgP9R1s4QzSE/KeK1leR19SBGoIBexE
+         xPNyKs5ojDB4QT5IaPGBtb96ymZbjNoUJkBZI01CBU68QDEHDR+a21p+h7tq/nTqMqMA
+         OuCA8FtW5okm85Rn0hPIX54+tDIt5h/1Xw/J+flLifXriGLMX7ikVRdQifgN/haUU62L
+         4LYQ==
+X-Gm-Message-State: AOJu0YzV51ZZ+DF4M0VRYL2sWUa6R7DI4tov9WM3xHM3sCEG7Y0GU8tk
+	j55JzuqR3jInAJALPyrIbOya03rOmQ2XfSaw7ImPF7amBL/wEPQVD/4HAxiUd9Sf
+X-Gm-Gg: ASbGncvglYx1Vv05q6QahlNx2SRJibmNZAn1TGy5HfG/Ay9lXpcaNFZLt3UjdnYQ9t9
+	4+J/1hLfecH3e+lUTF9sEvD3PUhFjERo1LY5MEuXTAc174e+lfR+vRZY/PNCkXyYhChnY0j9TrK
+	QvY8lasSuAz+olRPAbFTLkl9z76AgpiP+tfXDCVm3Vpl4QiSCWr+QfdGeqzywkVuS5wlTCAN2wd
+	mYgU3sgiBj3bRGqGbLUo/vtdaDYhVs4dXc9+Bto3FF0VGXn5g3bG+3aMIhw01RKuo8K7Pim9t6Y
+	GN3NWrer7og3p6A/HFevrt3rB+yxptpFxwJ/uaLNOMifdDjlKJts1kVA9EY34cGZco8gt/j1Q15
+	LAXEbS+QThsIYnVaTgYyKLJvaJov6OCouzCAio9UR8Cm9F+fOnz8h
+X-Google-Smtp-Source: AGHT+IEnYtsFgDo9ICb1gSd882GnkiGtqnZwJAP4q1XkedfkLQxh02K2YisO8ORKyFf05B/AqHaygQ==
+X-Received: by 2002:a05:690c:7649:b0:77f:b23e:b587 with SMTP id 00721157ae682-77fb23f32eemr53518687b3.45.1759715315102;
+        Sun, 05 Oct 2025 18:48:35 -0700 (PDT)
 Received: from localhost.localdomain ([67.233.61.26])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-77f81aad051sm39177337b3.0.2025.10.05.18.48.31
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-77f81aad051sm39177337b3.0.2025.10.05.18.48.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Oct 2025 18:48:31 -0700 (PDT)
+        Sun, 05 Oct 2025 18:48:34 -0700 (PDT)
 From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH 09/10] xfce4-mailwatch-plugin: upgrade 1.3.2 -> 1.4.0
-Date: Sun,  5 Oct 2025 21:47:26 -0400
-Message-ID: <20251006014727.58960-9-schonm@gmail.com>
+Subject: [meta-xfce][PATCH 10/10] xfce4-mount-plugin: upgrade 1.1.5 -> 1.2.0
+Date: Sun,  5 Oct 2025 21:47:27 -0400
+Message-ID: <20251006014727.58960-10-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251006014727.58960-1-schonm@gmail.com>
 References: <20251006014727.58960-1-schonm@gmail.com>
@@ -66,39 +66,90 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 01:48:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120266
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 01:48:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120267
 
-Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-mailwatch-plugin/-/tags/xfce4-mailwatch-plugin-1.4.0
+License-Change: checksum change reflectes the change of address of the Free Software Foundation.
+
+Patch updated with new offsets where appropariate.
+
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-mount-plugin/-/tags/xfce4-mount-plugin-1.2.0
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-mount-plugin/-/tags/xfce4-mount-plugin-1.1.7
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-mount-plugin/-/tags/xfce4-mount-plugin-1.1.6
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- ...lwatch-plugin_1.3.2.bb => xfce4-mailwatch-plugin_1.4.0.bb} | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-xfce/recipes-panel-plugins/mailwatch/{xfce4-mailwatch-plugin_1.3.2.bb => xfce4-mailwatch-plugin_1.4.0.bb} (78%)
+ ...0001-check-for-fstab.h-during-configure.patch | 16 +++++++---------
+ ...ugin_1.1.5.bb => xfce4-mount-plugin_1.2.0.bb} |  6 ++++--
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/mount/{xfce4-mount-plugin_1.1.5.bb => xfce4-mount-plugin_1.2.0.bb} (59%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.2.bb b/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.4.0.bb
-similarity index 78%
-rename from meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.2.bb
-rename to meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.4.0.bb
-index 9ac375999f..b30b359f79 100644
---- a/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.4.0.bb
-@@ -3,11 +3,13 @@ HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-mailwatch-plugin/start"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
-+XFCE_COMPRESS_TYPE = "xz"
+diff --git a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
+index 64f06cebb5..f0435238ac 100644
+--- a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
++++ b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
+@@ -23,16 +23,14 @@ diff --git a/configure.ac b/configure.ac
+ index 375e64a..590b7ad 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -65,6 +65,9 @@ dnl param.h is part of libc6 on Linux, but important for old-style Unix and espe
+- AC_CHECK_HEADERS([sys/param.h])
+- AC_CHECK_HEADERS([sys/mount.h])
+- 
++@@ -36,4 +36,7 @@ 
++ AC_PROG_INSTALL
 +
+ +dnl make musl happy
+ +AC_CHECK_HEADERS([fstab.h])
+ +
+- dnl Add -traditional to output variable CC if using the GNU C compiler and ioctl does not work properly without -traditional. That usually happens when the fixed header files have not been installed on an old system. Leave here commented out to comment in if some older *NIX systems might require it as was recently written on the ML.
+- dnl AC_PROG_GCC_TRADITIONAL
+- 
++ dnl Initialize libtool
++ LT_PREREQ([2.2.6])
+ diff --git a/panel-plugin/devices.c b/panel-plugin/devices.c
+ index 797b079..d29df56 100644
+ --- a/panel-plugin/devices.c
+@@ -47,7 +45,7 @@ index 797b079..d29df56 100644
+  #include <glib.h>
+  #include <stdio.h>
+  #include <stdlib.h>
+-@@ -468,11 +470,12 @@ disks_new (gboolean include_NFSs, gboolean *showed_fstab_dialog, gint length)
++@@ -467,11 +469,12 @@ disks_new (gboolean include_NFSs, gboolean *showed_fstab_dialog, gint length)
+  {
+      GPtrArray * pdisks; /* to be returned */
+      t_disk * pdisk;
+@@ -61,7 +59,7 @@ index 797b079..d29df56 100644
+      /* open fstab */
+      if (setfsent()!=1)
+      {
+-@@ -526,7 +529,20 @@ disks_new (gboolean include_NFSs, gboolean *showed_fstab_dialog, gint length)
++@@ -529,7 +532,20 @@ disks_new (gboolean include_NFSs, gboolean *showed_fstab_dialog, gint length)
+      } /* end for */
+  
+      endfsent(); /* close file */
+diff --git a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.2.0.bb
+similarity index 59%
+rename from meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb
+rename to meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.2.0.bb
+index f11e41f9bd..073b7cf86a 100644
+--- a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.5.bb
++++ b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.2.0.bb
+@@ -2,10 +2,12 @@ SUMMARY = "Mount/umount utility for the xfce panel"
+ HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-mount-plugin/start"
+ SECTION = "x11/application"
+ LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++XFCE_COMPRESS_TYPE = "xz"
+ 
  inherit xfce-panel-plugin
  
- DEPENDS += "gnutls"
+ SRC_URI += "file://0001-check-for-fstab.h-during-configure.patch"
  
--SRC_URI[sha256sum] = "c4783f1533891cd2e0c34066da859864dce45a23caa6015b58cb9fa9d65a7e44"
-+SRC_URI[sha256sum] = "5c211025db1096663fa6b8cc41213464a6d71f24e76326499d857ff81ea3861f"
- 
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+-SRC_URI[sha256sum] = "584cd954929e542b3da0ff8d69e0325d8838dc39e7b32a509d1074ce3bb58ec2"
++SRC_URI[sha256sum] = "adef71a83078e7dc45997e57411f8c43080a0204159a8b8db2ade0a9877e7b4c"
 -- 
 2.43.0
 
