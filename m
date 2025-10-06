@@ -2,87 +2,114 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C1C8CAC5B8
-	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 17:51:20 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web11.2163.1759773072136567284
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64F89CAC5B8
+	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 18:03:40 +0000 (UTC)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web11.2462.1759773819818709556
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Oct 2025 10:51:12 -0700
+ Mon, 06 Oct 2025 11:03:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dOKIsfd3;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b472842981fso707981566b.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 10:51:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=EIjPspRW;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-6398ff5fbd3so2984165a12.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 11:03:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759773070; x=1760377870; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759773818; x=1760378618; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=iHUraFcalCHi7Jd/1eQa6eyo02Zl6wqZjtCdn/yGnXc=;
-        b=dOKIsfd3ndSGc1y+RjFxATKNggKoQjPvZjrbFNxdM4JxLFB44QhViyoOQSLMIdU7NW
-         O94fx4MSgVTiWXhAIIwC7zf5JWptHoXqKvvEFnyqyudsflaNZYZE0LgAc8GNrZvBoJq2
-         C5nROm2Gze2hgRNLe6JZFn0DnQFQicyn7FRhE6wME8yjMriFtWFIqH1193oayjXgg2Yz
-         OiN+WP1U+xOiebEhRMkuIwWCXu2SQFhoMavgEDSF5/QBqD5JJYzuR8LhMusL5llg98S0
-         seWV/JJbwjplrnzSn7Y1kBNhk7zpQXueMGQ8AX1t46x+sEi4e3bhXvqEBHujhEBEsAJu
-         4zuA==
+        bh=b2c86Hs2yN30kLymYtsvlyh0saUk1EbftskSJ7d8TRI=;
+        b=EIjPspRWWdojMqpXddoA8G/JDoMI2VwCexZVX+MYPmz04dIQz/4uSueUJr+uz7jZGB
+         6QC8Uuqe1fhOSCNhbuGblvPZUyRDqAbhGA+vxFdXJdatSXzgLXXkoHzGrE74WPAUmlW3
+         bUJwKbDuxyNV9jrVQXbqwgpsMUPPaNtgFnGEZot1uGtkIeYc+6cQk2Y6h0GJZmm1mupP
+         5/u+GO7Q/J2ln/85q+NlicuL/5qighFdqX324AdiM+prJdkvqI8xTpclpED/NgNgk7wy
+         UuyAYuITSxHk01tUdUf+uHIqdr7pz1OYq2EXdfYdIOZSfjixsprg0mwvZLGV1G1jdjAj
+         +o8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759773070; x=1760377870;
+        d=1e100.net; s=20230601; t=1759773818; x=1760378618;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=iHUraFcalCHi7Jd/1eQa6eyo02Zl6wqZjtCdn/yGnXc=;
-        b=NJEfCVp+ut5zNmrOIvHXc+KjVpHRoHfRrlSEN4QS++Vy0iw0ihTwNjvbKyM5gPItw8
-         YiHybzLYhTF9Fd0batIo2NjJOI5z4KRrMW5T9Ks3g+tL8aYDenQvjM+lyfYAFXWBYEPr
-         58kezE6yNN7XmMOeS5KWJe/5twVmZbfs9VE1hqAEz28jSRM3v1Gw8+WJKdA/5apl8z7X
-         uKvrGvAs2H5HumF90M+Mfxsx9iYCIdn9NZvuiJef1nCv8dnL7BXKjrYA8HhgB7svN9AZ
-         em/4OUtqTD7aeqfJeBldn41zjWa7g7ZaLD+N2ix2XvppJIr78Mgz+RIkVZKtBsviqhXo
-         Cyig==
-X-Gm-Message-State: AOJu0YyGt1APncq4gHjvGRJcR1h7WYh/ixSPqOuFoxWnw2RjotB5ei3C
-	K2PewUHqR2nfY9oWp+3ZpVsBDvkObegY8/Kso4Jfob7Aj5ULpS8pdNQVY62lww==
-X-Gm-Gg: ASbGncs1UgoCFyBQJAe7g0/byus6rFs4WyX1YILY449C3WLTFBNekKLFI06lANV140Q
-	w28jGy9ne4lnfveLAdHaOBEe4GXXTJZqchyPE5X7RK6DyycdlDlwba8gmpViyj9jipoKELIY6F6
-	V5A2ufRgJTkMuW+8Nu5m2K53+X8lmmIJSHShOFa5VkX8+TQO5Eyh1NjJXuZkLNXAxRU9vpiO6OO
-	Wkv/6Cc1mwLdKASTmuTICz+7AdTYV3/XtXk/4qa+5Vzq19mX5x1XRzbu4kNfrKq4IW77TgJNJKQ
-	XJ1WRVt/Dp+zNstCJWixywM4zm5OYPRP8k/pZSUlNu4wY00/X4rzVuVCHEKSV8OZIcI6x0wFgxI
-	5KkpnY4lU9y+rVcBWWQ3L2IvIVffRwCh3SdBUsAvN8Na6
-X-Google-Smtp-Source: AGHT+IGs789OQhnDdVvv+SOcSdz8DMjHeHzhwVH1uqMeryKvQr8n8LK9DXZ0TzDhqA00h4l5nYMbfA==
-X-Received: by 2002:a17:907:a08a:b0:b42:9689:cabf with SMTP id a640c23a62f3a-b49c344758emr1632698766b.38.1759773070271;
-        Mon, 06 Oct 2025 10:51:10 -0700 (PDT)
+        bh=b2c86Hs2yN30kLymYtsvlyh0saUk1EbftskSJ7d8TRI=;
+        b=cvT8BB+90oCC4qmkfIMAJ0SnOhRIGzC6OG67Ip8dOfkyjxXLxxCM6ytLADv2CWBbDY
+         Rkke2Eb3EDWqAy35m4XF58yOUhznnYA7BsEpgKwfMgHHFayMSRhV4fvCZietW7pbh8vf
+         zkUYLoAO7PFSiEHfvqLqa5fQoj/Nqx9TgimgPlp6fx0aqS8jaP4PNfqh7CX/ToZUxtBd
+         kd/o/br+qmAI6qS5Dx6Jz5BsIuP7sgbphGdVjUgiXxMRiiIlFhVjULIv/xFNuBwrT+LS
+         FUeUj9PAVdcCY1wYGKbC8cCu5+djMHs4cpNwMDi8LVKWJY52KoerKlj2JkL/rZX/ggBt
+         pbwQ==
+X-Gm-Message-State: AOJu0YxsnlT145KSfPiv0eelBtC0SaDjPCZZgG4xZO562x17vzK2e5pR
+	vNNHkrm1QG0ZQZwx6eZOXz7BsN6260X6FpNt6b4/yi2CC/XZqjmTV271MVEq6Q==
+X-Gm-Gg: ASbGncutrFpB/9j9KeWIAl507gP1xbwGXzbmJJLKGMB500oY+lKbDEmgIiXN688CQyx
+	9bSBjowcS3GJVhlNZUGBsuix9p8Xa/+XZEOTU1HYGlTkbNxAhjbvTd2sipHifDRUOW4rIOrdfsn
+	cBi79s/XYOHCWgog59ybNXzIMWtvcum/jCmMtPZy4OffDFmDnGkP/56NUDtq0tsQDrYmpS2SKIl
+	znMKHsdWJaYgvfx8w0HEno6vrNXFE2QosKTvCDniqk2aH300V9oWi85azyCUqwrgNjwLCkAR5pv
+	OzRHGnZhKq1AcBCzwqDh9eOo20I+bohsoRDo6xsyD6dvtqzPNI+ojpRCx+PZZL6X+ySEUUa9G+s
+	dL/1eellFi4pgXsLCGFDiGkxcEI0ONgivievg68BaBQluCvAJ6j8/cUU=
+X-Google-Smtp-Source: AGHT+IENMpgho3CHIBY0zkbgG5rkCOoR22uqDehEBPux5ZOiylB6kBz8HTO6C5y3ciDnzn1Pvjv0aQ==
+X-Received: by 2002:a05:6402:788:b0:636:7b44:f793 with SMTP id 4fb4d7f45d1cf-63939c42c3dmr10699442a12.36.1759773817897;
+        Mon, 06 Oct 2025 11:03:37 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4869c4dea9sm1214628466b.73.2025.10.06.10.51.09
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63788110080sm10738342a12.34.2025.10.06.11.03.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Oct 2025 10:51:09 -0700 (PDT)
+        Mon, 06 Oct 2025 11:03:37 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] iperf2: ignore irrelevant CVEs
-Date: Mon,  6 Oct 2025 19:51:09 +0200
-Message-ID: <20251006175109.3793898-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] jasper: upgrade 4.2.4 -> 4.2.8
+Date: Mon,  6 Oct 2025 20:03:36 +0200
+Message-ID: <20251006180336.4158312-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 17:51:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120306
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 18:03:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120307
 
-These CVEs are for iperf3 - which is a similar application in its goals (and name),
-but an independent project from this, and the projects are independent implementations
-also, they share no common code.
+The upgrade contains fixes for the following vulenrabilities:
+CVE-2025-8835, CVE-2025-8836, CVE-2025-8837
+
+Changelog:
+4.2.8:
+Fixed a bug in the JPC decoder that could cause bad memory accesses
+if the debug level is set sufficiently high.
+
+4.2.7:
+Added some missing range checking on several coding parameters in the
+JPC encoder.
+
+4.2.6:
+Added a check for a missing color component in the jas_image_chclrspc
+function.
+
+Fixed a minor build problem related to the use of -Wstrict-prototypes
+with Clang.
+
+4.2.5:
+Made a change to a configuration header file in order to avoid
+undesirable compiler warnings when JasPer is used in C++ code
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../jasper/{jasper_4.2.4.bb => jasper_4.2.8.bb}               | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename meta-oe/recipes-graphics/jasper/{jasper_4.2.4.bb => jasper_4.2.8.bb} (81%)
 
-diff --git a/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb b/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
-index 3d965dac00..d31f4ed634 100644
---- a/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
-+++ b/meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb
-@@ -20,3 +20,6 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+diff --git a/meta-oe/recipes-graphics/jasper/jasper_4.2.4.bb b/meta-oe/recipes-graphics/jasper/jasper_4.2.8.bb
+similarity index 81%
+rename from meta-oe/recipes-graphics/jasper/jasper_4.2.4.bb
+rename to meta-oe/recipes-graphics/jasper/jasper_4.2.8.bb
+index 4796a85190..dd3cf3fdb6 100644
+--- a/meta-oe/recipes-graphics/jasper/jasper_4.2.4.bb
++++ b/meta-oe/recipes-graphics/jasper/jasper_4.2.8.bb
+@@ -4,9 +4,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a80440d1d8f17d041c71c7271d6e06eb"
  
- CVE_PRODUCT = "iperf_project:iperf"
-+CVE_STATUS[CVE-2025-54349] = "cpe-incorrect: the vulnerability is in iperf3, which is a different project"
-+CVE_STATUS[CVE-2025-54350] = "cpe-incorrect: the vulnerability is in iperf3, which is a different project"
-+CVE_STATUS[CVE-2025-54351] = "cpe-incorrect: the vulnerability is in iperf3, which is a different project"
+ SRC_URI = "https://github.com/jasper-software/${BPN}/releases/download/version-${PV}/${BP}.tar.gz"
+-SRC_URI[sha256sum] = "6a597613d8d84c500b5b83bf0eec06cd3707c23d19957f70354ac2394c9914e7"
+-
+-CVE_STATUS[CVE-2015-8751] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
++SRC_URI[sha256sum] = "98058a94fbff57ec6e31dcaec37290589de0ba6f47c966f92654681a56c71fae"
+ 
+ inherit cmake multilib_header
+ 
 
