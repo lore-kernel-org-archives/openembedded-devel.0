@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8364CCD182
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C541DCCD184
 	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 12:11:28 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web10.32347.1759752684531553271
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web10.32348.1759752685196381677
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Oct 2025 05:11:24 -0700
+ Mon, 06 Oct 2025 05:11:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IBG2mfjW;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-b4539dddd99so638929766b.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ep5FKCpd;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-b3b27b50090so889676466b.0
         for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 05:11:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1759752683; x=1760357483; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=LOd8X4hlWb+B6JSU8cMmw8AMqnopnWgR2K0eL9huOOs=;
-        b=IBG2mfjWxINpu/pj8NqwTSoqVytRC/qhbXBKsUMTQMUc3DfMXeKa9oC+io80rQyZ0Z
-         udWBm25PAqDoXOnB1fZglytl6WNAlboj8lRr+SC/KYM6a+26c2SF1IvrRIoTNFVudtSs
-         4/hh4k5yQ3xZdn4U83sapdn9hqztYti2mpN95aOinyVN+lB/HiXkl3tfW+KGgJ4+qWx+
-         7cuqCMA6W/C+AhD6BT7mc6SJMJwvJISMtR23g6RZRju8/spU4MWf/UBilsUG37MZr0hZ
-         s6MPSSSz0UJ/A41v+lk8Hqqtm2INzEZBl0gp623srdC1gSXYbssQCS2XfJUy82CbmEgI
-         Gzmg==
+        bh=QYZVxGlTl0+DSff4UNw9iceKwlDH97VKpf3mwiOA6a0=;
+        b=ep5FKCpd9rkCm4GqUCI7rR4O5pOoEwG+82nGCidVHLWCBKnb5nhl06xOhTotbhm90l
+         YtjH+IuHHgYi5m5wcfSGU/NqzPkbdpm9JPu1eCrozKqQbNF1J85wj+6IOa6/GYKpv55n
+         utnHqXphTOoAGcnoSlijTo8CQndvHCbwe2qdiNEjctcvsVlrRWJAcH7TshOKrfjkSewM
+         okB7zXUhqxjXps5bHKZGsZuBHFBATrt7XWLv5650TTxbPbqjXINt8iKSiYoTN+FwoTVb
+         aWIWjxwwarS2yKaTxTvwz6VT28/ayY07SD+MfSh8QBKHRI9ByyZzOjoCJlwEwWFyiQnU
+         zTDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1759752683; x=1760357483;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=LOd8X4hlWb+B6JSU8cMmw8AMqnopnWgR2K0eL9huOOs=;
-        b=oRattByYePMMT3mJyGUOFKQpsgtBhA021kXTeDvnqqLEch0PXYtnkhWZOge62KYmjz
-         jXaBTsrkl1ChmaD6dg5HXUQHPMoSFOEJMe5ZaltIYXtcfWHKZ5zNpKIYIenHSnRSGkfR
-         lJwz/zaiI/s8bhB/yOBk6Bo7R5Ou/EKeBtHOz6oSkj9/Snwz+GoXcbgFn8w1OoBaGL3N
-         DReDUyJcmKzVye5YhMlecAAUJ+Fi0WwhRH1qYEfSPj0ACkuxDjxn/WIIpuID0xzotGVf
-         ngHoFG09O5DsnObYkpScfsEoUWN1eg5RCYKncRqi7Pebegz0qgJQa1mxjWwf3Wtqrabg
-         A0XA==
-X-Gm-Message-State: AOJu0Yxoh1i/DavTxWcKaYvHOz7wcpUD1u335c+aXNLdN7wYUKmehke9
-	optW0mBh2Oq3gdYAzPMfRVj8VzwCdCjFnnSagWmJsA/2cTozLRqN1pMd9tZKGA==
-X-Gm-Gg: ASbGncv4LR+8YPleEZQ7+xV581DVszl49MXc9bvOF6b8sPWCuKmi4lHI8K30CpBFwdS
-	1a1uqt904L0AeeoHMuaxvDB1Ir1NZWnYduitiRT9/Wn/GuC4rVgrWwWVaOcoH/AqaH39MF8H0UB
-	vE3RIoO7b0RSgqHFY+hJx58R2X3L/eh1XzJ10TPmKDf5ZDh/vGiTSWiFlqmpQDT4+ZDnK1VGHxl
-	3e0xjv1GPxDvLj457hf3NEewdLTO4l+4/YvaqujX01VHCJsW8HIn2UTiC+eUo0f8IYAq/K7m8ec
-	CDM9XiiRa1kI/Ab70lIxoIbZAxlbjHgeUoMNeLwodp8CQ9RIrdg2JohWN7vyeZL8trLg9OMg4Kp
-	CWu4VfRvCqGfLIpTKDmdou1PsUhGD0gx5WpHPQH0HYG1K
-X-Google-Smtp-Source: AGHT+IHmfT+8T1uqlIlSlzPSOfSVECkxf3DRbodiOAqJ8uNN5M/EIdiuXnUBGNAJC0UVqYt+KRKcfQ==
-X-Received: by 2002:a17:907:7f23:b0:b40:e7ee:b5ec with SMTP id a640c23a62f3a-b49c3255f48mr1481874166b.59.1759752682671;
-        Mon, 06 Oct 2025 05:11:22 -0700 (PDT)
+        bh=QYZVxGlTl0+DSff4UNw9iceKwlDH97VKpf3mwiOA6a0=;
+        b=Dcb5vAjy7EeNgzLtBIFI8j8D3m0U62kCEuTVfF3tXw3D9uXQNitqYnoBBvnBgJBGws
+         YwK10mWxZDpl8/f1l2Fq5fac4pdsE+dEq+RIIWvcw6yWe4VgE+xhIq0BL2YGXtZ07BT5
+         qWuz6VKxNRqJBPsViUs6q9zgpSXRLHAcrcmvhoh4ZgRy1vYR8OgtSIbVWIBL9THQjC1r
+         pA/OTOOFl8AWLPXOyL+nkfLGNyDglvzWcCeN9z1bfQHbvGFCgTFbkfFulCvq7MI3p+B3
+         y8XkYuKEPVYFwOT+WuOFt5hsIoiAL8C62J3bS+8MC0o87oVD4HuKljiDvb3b9wWc5+zy
+         LA3w==
+X-Gm-Message-State: AOJu0Yx8b4PC5bEcYnuxEa6LFcn0nFrCiQZ0KD6GdbRCJXpL8lWUj0p1
+	AXBjHEgOYdqCQl9oBUcZEpGChqKWN/QmabJ10ZjtW2vajNKhdNLjTMn+DvyJfw==
+X-Gm-Gg: ASbGnctHx6xs+ZK1d/OcIOzCmSMxKXfTj9xGz12xMeZMco0lgxhKz/BpwpIdpXYIydQ
+	Yo+QBAFHnGfIC3C13/mGPRrTUUaRYGpCk8XcvsyvLPLZxxPBncJ3zfvD20wHierPD4cns0y+wXu
+	hdSqkJ+LtZx59lDQhfDoiRHcc8qqZR366UhXlpSPfku0EK9XOkPQ+ahrbY8c/F6/pMeB+zJpjaj
+	icmiKJwQ5ohNCK0jZzO0azF2xKxW6BRz6xb7L59Z99SXAq/qiiLsHbLhfF9xZiHS1uKkn/t9uAg
+	yI5e4LQiqtufXYjA0z1K+xIs9KAJFhbbKnFlJnJlzGCjvFmoWl6xG2WFdNNRuUt6ivVkEqdukYu
+	RJ06THHdSRk5FSH/9v8NB5NK7sgnKkLV9S13uAssEAtmtjqfdL5e3bZ4=
+X-Google-Smtp-Source: AGHT+IEUzonsba6f/bIERCQ/UmVaRy26giurwzazZTJGuDSBeqGMfGFqH6II/Acxw5N8DsD2BmoIcA==
+X-Received: by 2002:a17:907:da6:b0:b3e:d492:d7b8 with SMTP id a640c23a62f3a-b49c45addbfmr1543593266b.64.1759752683367;
+        Mon, 06 Oct 2025 05:11:23 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4869c4fd9esm1134367966b.76.2025.10.06.05.11.21
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4869c4fd9esm1134367966b.76.2025.10.06.05.11.22
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 06 Oct 2025 05:11:22 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 2/5] emacs: patch CVE-2024-30203
-Date: Mon,  6 Oct 2025 14:11:17 +0200
-Message-ID: <20251006121120.533142-2-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 3/5] emacs: patch CVE-2024-30204
+Date: Mon,  6 Oct 2025 14:11:18 +0200
+Message-ID: <20251006121120.533142-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251006121120.533142-1-skandigraun@gmail.com>
 References: <20251006121120.533142-1-skandigraun@gmail.com>
@@ -67,62 +67,95 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 12:11:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120286
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120287
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2024-30203
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-30204
 
-Pick the patch mentioned in the description.
+Pick the patch that's mentioned in the description.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
  meta-oe/recipes-support/emacs/emacs_29.1.bb   |  1 +
- ...w.el-mm-display-inline-fontify-Mark-.patch | 27 +++++++++++++++++++
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch
+ ...w-Add-protection-when-untrusted-cont.patch | 60 +++++++++++++++++++
+ 2 files changed, 61 insertions(+)
+ create mode 100644 meta-oe/recipes-support/emacs/files/0001-org-latex-preview-Add-protection-when-untrusted-cont.patch
 
 diff --git a/meta-oe/recipes-support/emacs/emacs_29.1.bb b/meta-oe/recipes-support/emacs/emacs_29.1.bb
-index 3701e17025..c5318db96e 100644
+index c5318db96e..c4ae7be6d8 100644
 --- a/meta-oe/recipes-support/emacs/emacs_29.1.bb
 +++ b/meta-oe/recipes-support/emacs/emacs_29.1.bb
-@@ -10,6 +10,7 @@ SRC_URI:append:class-target = " \
-     file://use-emacs-native-tools-for-cross-compiling.patch \
+@@ -11,6 +11,7 @@ SRC_URI:append:class-target = " \
      file://avoid-running-host-binaries-for-sanity.patch \
      file://0001-org-macro-set-templates-Prevent-code-evaluation.patch \
-+    file://0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch \
+     file://0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch \
++    file://0001-org-latex-preview-Add-protection-when-untrusted-cont.patch \
  "
  
  SRC_URI[sha256sum] = "d2f881a5cc231e2f5a03e86f4584b0438f83edd7598a09d24a21bd8d003e2e01"
-diff --git a/meta-oe/recipes-support/emacs/files/0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch b/meta-oe/recipes-support/emacs/files/0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch
+diff --git a/meta-oe/recipes-support/emacs/files/0001-org-latex-preview-Add-protection-when-untrusted-cont.patch b/meta-oe/recipes-support/emacs/files/0001-org-latex-preview-Add-protection-when-untrusted-cont.patch
 new file mode 100644
-index 0000000000..d951bf4205
+index 0000000000..085bc31c17
 --- /dev/null
-+++ b/meta-oe/recipes-support/emacs/files/0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch
-@@ -0,0 +1,27 @@
-+From 0e7fe7809daa123921faa0bd088931cf8ddfd705 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/emacs/files/0001-org-latex-preview-Add-protection-when-untrusted-cont.patch
+@@ -0,0 +1,60 @@
++From c5cc03c196306372e53700553e0fb5135f6105e6 Mon Sep 17 00:00:00 2001
 +From: Ihor Radchenko <yantar92@posteo.net>
-+Date: Tue, 20 Feb 2024 12:44:30 +0300
-+Subject: [PATCH] * lisp/gnus/mm-view.el (mm-display-inline-fontify): Mark
-+ contents untrusted.
++Date: Tue, 20 Feb 2024 12:47:24 +0300
++Subject: [PATCH] org-latex-preview: Add protection when `untrusted-content' is
++ non-nil
 +
-+CVE: CVE-2024-30203
++* lisp/org/org.el (org--latex-preview-when-risky): New variable
++controlling how to handle LaTeX previews in Org files from untrusted
++origin.
++(org-latex-preview): Consult `org--latex-preview-when-risky' before
++generating previews.
 +
-+Upstream-Status: Backport [https://cgit.git.savannah.gnu.org/cgit/emacs.git/commit/?h=emacs-29&id=937b9042ad7426acdcca33e3d931d8f495bdd804]
++This patch adds a layer of protection when LaTeX preview is requested
++for an email attachment, where `untrusted-content' is set to non-nil.
 +
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++CVE: CVE-2024-30204
++
++Upstream-Status: Backport [https://cgit.git.savannah.gnu.org/cgit/emacs.git/commit/?h=emacs-29&id=6f9ea396f49cbe38c2173e0a72ba6af3e03b271c]
++Signed-off-by: Gyorgy Sarvari
 +---
-+ lisp/gnus/mm-view.el | 1 +
-+ 1 file changed, 1 insertion(+)
++ lisp/org/org.el | 19 +++++++++++++++++++
++ 1 file changed, 19 insertions(+)
 +
-+diff --git a/lisp/gnus/mm-view.el b/lisp/gnus/mm-view.el
-+index 2c40735..e24f3f3 100644
-+--- a/lisp/gnus/mm-view.el
-++++ b/lisp/gnus/mm-view.el
-+@@ -504,6 +504,7 @@ If MODE is not set, try to find mode automatically."
-+ 	  (setq coding-system (mm-find-buffer-file-coding-system)))
-+ 	(setq text (buffer-string))))
-+     (with-temp-buffer
-++      (setq untrusted-content t)
-+       (insert (cond ((eq charset 'gnus-decoded)
-+ 		     (with-current-buffer (mm-handle-buffer handle)
-+ 		       (buffer-string)))
++diff --git a/lisp/org/org.el b/lisp/org/org.el
++index d3e14fe..ab58978 100644
++--- a/lisp/org/org.el
+++++ b/lisp/org/org.el
++@@ -1140,6 +1140,24 @@ the following lines anywhere in the buffer:
++   :package-version '(Org . "8.0")
++   :type 'boolean)
++ 
+++(defvar untrusted-content) ; defined in files.el
+++(defvar org--latex-preview-when-risky nil
+++  "If non-nil, enable LaTeX preview in Org buffers from unsafe source.
+++
+++Some specially designed LaTeX code may generate huge pdf or log files
+++that may exhaust disk space.
+++
+++This variable controls how to handle LaTeX preview when rendering LaTeX
+++fragments that originate from incoming email messages.  It has no effect
+++when Org mode is unable to determine the origin of the Org buffer.
+++
+++An Org buffer is considered to be from unsafe source when the
+++variable `untrusted-content' has a non-nil value in the buffer.
+++
+++If this variable is non-nil, LaTeX previews are rendered unconditionally.
+++
+++This variable may be renamed or changed in the future.")
+++
++ (defcustom org-insert-mode-line-in-empty-file nil
++   "Non-nil means insert the first line setting Org mode in empty files.
++ When the function `org-mode' is called interactively in an empty file, this
++@@ -15687,6 +15705,7 @@ fragments in the buffer."
++   (interactive "P")
++   (cond
++    ((not (display-graphic-p)) nil)
+++   ((and untrusted-content (not org--latex-preview-when-risky)) nil)
++    ;; Clear whole buffer.
++    ((equal arg '(64))
++     (org-clear-latex-preview (point-min) (point-max))
 
