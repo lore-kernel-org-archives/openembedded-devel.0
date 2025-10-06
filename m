@@ -1,126 +1,150 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12532CCA471
-	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 04:58:06 +0000 (UTC)
-Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
- by mx.groups.io with SMTP id smtpd.web10.26267.1759726680219171453
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 663F1CCA470
+	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 05:50:36 +0000 (UTC)
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web11.27034.1759729827120566888
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Oct 2025 21:58:00 -0700
+ Sun, 05 Oct 2025 22:50:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KwAQBnx7;
- spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-71d5fb5e34cso60234777b3.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 21:58:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=f89ofFEe;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: zboszor@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-780fc3b181aso2415617b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 22:50:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759726679; x=1760331479; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3FPgpovGKRK6mHDk0yEk9vbGZ5HC/w8gm3QXhfX10lg=;
-        b=KwAQBnx7nVyohCfcgs2Tg2B5416kvmCbKZR61iwAcciS2ZIFdQaFQPLduPu4qa/zea
-         feYa0qtCI2ZnZ0JEO6Vz/EkjigrYjerZz5YPkcN43jouBWgpVruVlROB0vXlRTR+p/XD
-         skdpLha9wB19SzVOJXtEHNU4FMKjcQmoLpCDsSWzxTeqFwManJNbzDdKEvfT+pnLx+HV
-         KuHKPOpNiDHQ01YTjjE5gDvPVG4uVxnc1XTG+KXIDir1enbjlAoHpOP+f8LbIaC/qAuG
-         AwFcn5IWIxXkz8goVQIVHP0e6NwhLSLQ/uIxO14K+dv1byn3xGLjgxCCC0LyrFIPmNd2
-         hGHw==
+        d=gmail.com; s=20230601; t=1759729826; x=1760334626; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=LKFqSBpFx9kkf3gHGoCm1SwhiarQ4gizneo5ddIKGVE=;
+        b=f89ofFEesA880jmVf+NVv10VhXMGVV30uJAVtsCUxBZPBKIA5cydsWAVjiVmdTiLnT
+         Qu0ek3RlhzOJXBbTv9aQ0g5ti4t6mlPTUrQnKRK+o8pq0UTb5TnRHhTCuj5+lrKFd+wi
+         J1BcUbBGZ1DRjNk3snvqw20OCSyd9Yu7/hprst6bHUQ1TNcZ6fdQdi5TQ0w03cmp6L5H
+         uhmiYXXv5fEJYifw1kphusx73fgmIgy+YBMnwbo7LGxBqz7IAqb/jAgPpy57w4MVTePU
+         2TXa4mZitxAFsnqdlRcf1AtMkb+eubAgkWvWx5Cq5xTp/whvewN8LTz6xO5/vIg0RKPg
+         1ttw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759726679; x=1760331479;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3FPgpovGKRK6mHDk0yEk9vbGZ5HC/w8gm3QXhfX10lg=;
-        b=w11ehwAqvYUtOVDDikiEQ9Kg9DhSBsNQr+4ALeC4lbU6w+y2EuTojG2zxxCHp2Kf1i
-         6tww4TKhLbyZeK7CEkfy6MwQhigCMyJWMc6XIGzV86EIAJpiBlkO6z4vg9aBPTqVAXyf
-         w3DaV/DmPDkawSzLfxhpb/aZ2a4uC/q1/eUFB+7pdFeSsDhJGsYdfruFL+GCLqHsLpjh
-         rVI7dk033qK3kb647F2YR4DE7BjiqHigxCMJAbMWQqjxMiTqNtALB/Ja6NiJgTs107mL
-         e+J0rziLRf8F3NPzpn1rSssq//nvyjun4TeAfnXPeGawB7okyhZpqwNcVKFGa/tFR7kU
-         XE3g==
-X-Gm-Message-State: AOJu0YwXltE7sH4yNSIHDT2rt/8XIZ27PWNlkooJpbDNk0shjIkNMS0K
-	8CX92rh6eiHvNjvEyxC1mTdTxQ5B4EcEANlDPO6YUG2MWF3Z83xztxWbvX6oJRWf7aSEijpBcym
-	qsemL0SwD9DIKWNtqNiprVDv4pdu0uzo=
-X-Gm-Gg: ASbGncvSHXM99N+Yy433jYkkWJfWmJfa89Hx2OnJLwmm+ZPZKArLXkNRK3E9HtFNICi
-	tRZCwD6wSrO3k+FzRJt6LXxKTG/EZRs12ZeuMVO5TZrq0Y34ok348ceMjPNUobU9/AgDPR1GbG2
-	MEPSIDmPvdrWExoTRwJKAV2LX2hxeko9lQCZ+dJpNBJxsRygeW3fJ0evNBAOaT57968xZQVp8uk
-	mylBcivljHvloDd5fvZ+YbO0O2Ymedyq45+NoxpM19jhnQ2UBQ2AUf+9OOZxtCLhf2N7H6HQo4S
-	m/mibTkZ7rBp9fnzs8Y6n1SsMi/mPjyY30+K+quudafvMr8AZRdmTClAkAwZHD4=
-X-Google-Smtp-Source: AGHT+IFniyUCwi1gr1qJ49tHtzn30wgwlQ+J7eoXb9OFzmSoCSuOlOwYHWztvquf4lEWCkEd4BHudb2CBS7cQtzGInU=
-X-Received: by 2002:a53:db12:0:b0:635:4ed0:5720 with SMTP id
- 956f58d0204a3-63b9966f63cmr9154406d50.24.1759726679149; Sun, 05 Oct 2025
- 21:57:59 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1759729826; x=1760334626;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=LKFqSBpFx9kkf3gHGoCm1SwhiarQ4gizneo5ddIKGVE=;
+        b=soZwQ6u6nWqLIXnFHt1JiNBKgNffarEdXK+hH7+cNKwAUVVrmDAiSkHLGkhUpt9Bqo
+         bNYmF/SeD92yjdv56jw7Uyo1D3hGRXbnMkSPuA5t7vj0KeIA+iVrvCaCAJHgjqSjrVmp
+         /R7nOqIO/49XFWL/V0qYbEAB4jOHtBN4UcTun4ABu6IHxYxU+aJCO428kF7de7X29B2i
+         39TVaDYax+w7RK6kefFqEX/ph10Gk/gg7IgCwgJS5JWQGyd/THLZDBDmV7uIlJKrISh0
+         H/sIbpVmiaqJopAyHigYRGa+ztGCe+GVOZBkmIXHhydRI0xznR2N9rNftV0RVkhp5hI+
+         ZvGQ==
+X-Gm-Message-State: AOJu0YyYuMmFnqfOLLVejyESbq5jkXtV+aG1+e1Hw+6nZi2artgBvoy5
+	XeE1st7jSbh5lqA+slbufh3AKQE5BzJW9eE+ijXY17ir77lfNha6eGBvRgip4Jzz
+X-Gm-Gg: ASbGncuL6XUONsSjLvHkqdSwK9la7j0/L59nZ8NSV9q51NlY5kWhAH0HEj6eO5k1f4z
+	4V+nZAn9cj75HvDA9sDDZOKB725wZVRp320fM/a8dL/bLqk1mjPzCqfdt5aUg2ei22HnlkbhVcX
+	On0KhOCXjH43cH37wXSeHz3ba0GIvBKeVz5eZUlZZSeMNqdF0d1qKVuzSYgVi3lfCXgACfvc24u
+	qEf8jR6hWk45GWXYL6Fe/h4iGRhJpO6rp8GSjD4dR4Y9esyAkv8ElKwP0Vf3oKIWRCG7J/i7I5C
+	fZW0LYxs/jAjzTkkRKpyqCQKrBjN2+P3H1rai1Dtv+NHhJJfaJS9ppv4NeWb346lH9ja+aajftY
+	8pbh8IuXu2o8SBh5RYcHYLGILLjo3b+3eKPz7IJMaGKUeEJznhWuwcnJFqVVMIhmpRK2EoZ8GDX
+	1We5U=
+X-Google-Smtp-Source: AGHT+IHvpZl/ulcjGXncVSiQ1oMQB6fOaaAGchOesZLNRZyHzATZ8RyhSdx44MoYugWcdCd5GNZyVA==
+X-Received: by 2002:a05:6a00:b86:b0:781:1b5a:95b2 with SMTP id d2e1a72fcca58-78c98cc3212mr13476368b3a.28.1759729826033;
+        Sun, 05 Oct 2025 22:50:26 -0700 (PDT)
+Received: from fedora (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-78b01fb1a9fsm11287981b3a.20.2025.10.05.22.50.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 05 Oct 2025 22:50:25 -0700 (PDT)
+From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Tim moto-timo Orling <TicoTimo@gmail.com>,
+	Derek Straka <derek@asterius.io>,
+	Khem Raj <raj.khem@gmail.com>,
+	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+Subject: [meta-python][PATCH v2] python3-odfpy: New recipe for version 1.4.1
+Date: Mon,  6 Oct 2025 07:50:16 +0200
+Message-ID: <20251006055016.578983-1-zboszor@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20251006035312.563935-1-zboszor@gmail.com>
-In-Reply-To: <20251006035312.563935-1-zboszor@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 5 Oct 2025 21:57:32 -0700
-X-Gm-Features: AS18NWDZT6MLmsl__Mcilu_TeLlUYa8A5PD_ouCVUuMN7QsTD93sV9Nx_Y7W5vo
-Message-ID: <CAMKF1spsp9bJj+GqFL65XCGMwqQmyVgvQQVTY5e5UMGzoHFzLw@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-odfpy: New recipe for version 1.4.1
-To: zboszor@gmail.com
-Cc: openembedded-devel@lists.openembedded.org, 
-	Tim moto-timo Orling <TicoTimo@gmail.com>, Derek Straka <derek@asterius.io>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 04:58:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120271
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 05:50:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120272
 
-is there unit tests with this package ? if so I would love to have it
-added along with recipe as well.
+It's an optional dependency for pandas to provide ODS reader
+and writer support. It complements spreadsheet support along
+with python3-xlrd and python3-openpyxl, both of which are
+part of meta-python already.
 
-On Sun, Oct 5, 2025 at 8:53=E2=80=AFPM Zoltan Boszormenyi via
-lists.openembedded.org <zboszor=3Dgmail.com@lists.openembedded.org>
-wrote:
->
-> It's an optional dependency for pandas to provide ODS reader
-> and writer support. It complements spreadsheet support along
-> with python3-xlrd and python3-openpyxl, both of which are
-> part of meta-python already.
->
-> Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.com>
-> ---
->  .../recipes-devtools/python/python3-odfpy_1.4.1.bb  | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-odfpy_1.4=
-.1.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb b=
-/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb
-> new file mode 100644
-> index 0000000000..1b943e535e
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY =3D "Python API and tools to manipulate OpenDocument files"
-> +LICENSE =3D "Apache-2.0 | (GPL-2.0-or-later & LGPL-2.0-or-later)"
-> +LIC_FILES_CHKSUM =3D " \
-> +       file://APACHE-LICENSE-2.0.txt;md5=3D3b83ef96387f14655fc854ddc3c6b=
-d57 \
-> +       file://GPL-LICENSE-2.txt;md5=3D751419260aa954499f7abaabaa882bbe \
-> +"
-> +
-> +PYPI_PACKAGE =3D "odfpy"
-> +
-> +inherit pypi setuptools3
-> +SRC_URI[sha256sum] =3D "db766a6e59c5103212f3cc92ec8dd50a0f3a02790233ed0b=
-52148b70d3c438ec"
-> +
-> +RDEPENDS:${PN} =3D "python3-defusedxml"
-> --
-> 2.51.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#120268): https://lists.openembedded.org/g/openembedde=
-d-devel/message/120268
-> Mute This Topic: https://lists.openembedded.org/mt/115612512/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+---
+v2: Add ptest and DESCRIPTION
+
+ .../python/python3-odfpy/run-ptest            |  3 ++
+ .../python/python3-odfpy_1.4.1.bb             | 43 +++++++++++++++++++
+ 2 files changed, 46 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-odfpy/run-ptest
+ create mode 100644 meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb
+
+diff --git a/meta-python/recipes-devtools/python/python3-odfpy/run-ptest b/meta-python/recipes-devtools/python/python3-odfpy/run-ptest
+new file mode 100644
+index 0000000000..5cec711696
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-odfpy/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
++
++pytest
+diff --git a/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb b/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb
+new file mode 100644
+index 0000000000..9b470f11ac
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb
+@@ -0,0 +1,43 @@
++SUMMARY = "Python API and tools to manipulate OpenDocument files"
++DESCRIPTION = "Odfpy is a library to read and write OpenDocument v. 1.2 \
++files. The main focus has been to prevent the programmer from creating \
++invalid documents. It has checks that raise an exception if the programmer \
++adds an invalid element, adds an attribute unknown to the grammar, forgets \
++to add a required attribute or adds text to an element that doesn’t allow it. \
++\
++These checks and the API itself were generated from the RelaxNG schema, and \
++then hand-edited. Therefore the API is complete and can handle all ODF \
++constructions. \
++\
++In addition to the API, there are a few scripts: \
++    csv2odf - Create OpenDocument spreadsheet from comma separated values \
++    mailodf - Email ODF file as HTML archive \
++    odf2xhtml - Convert ODF to (X)HTML \
++    odf2mht - Convert ODF to HTML archive \
++    odf2xml - Create OpenDocument XML file from OD? package \
++    odfimgimport - Import external images \
++    odflint - Check ODF file for problems \
++    odfmeta - List or change the metadata of an ODF file \
++    odfoutline - Show outline of OpenDocument \
++    odfuserfield - List or change the user-field declarations in an ODF file \
++    xml2odf - Create OD? package from OpenDocument in XML form \
++\
++The source code is at https://github.com/eea/odfpy \
++\
++Visit https://github.com/eea/odfpy/wiki for documentation and examples. \
++\
++The code at https://joinup.ec.europa.eu/software/odfpy/home is obsolete."
++LICENSE = "Apache-2.0 | (GPL-2.0-or-later & LGPL-2.0-or-later)"
++LIC_FILES_CHKSUM = " \
++	file://APACHE-LICENSE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57 \
++	file://GPL-LICENSE-2.txt;md5=751419260aa954499f7abaabaa882bbe \
++"
++
++PYPI_PACKAGE = "odfpy"
++
++inherit pypi ptest-python-pytest setuptools3
++SRC_URI[sha256sum] = "db766a6e59c5103212f3cc92ec8dd50a0f3a02790233ed0b52148b70d3c438ec"
++
++SRC_URI += "file://run-ptest"
++
++RDEPENDS:${PN} = "python3-defusedxml"
+-- 
+2.51.0
+
 
