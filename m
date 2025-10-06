@@ -1,106 +1,100 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6EABCCA471
-	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 03:53:25 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.web11.25547.1759722802074372307
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4DEACCA471
+	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 04:04:45 +0000 (UTC)
+Received: from mail-yx1-f52.google.com (mail-yx1-f52.google.com [74.125.224.52])
+ by mx.groups.io with SMTP id smtpd.web11.25744.1759723477817444293
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Oct 2025 20:53:22 -0700
+ Sun, 05 Oct 2025 21:04:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gctoEsPf;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: zboszor@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-781ea2cee3fso4106566b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 20:53:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WSeTTPJu;
+ spf=pass (domain: gmail.com, ip: 74.125.224.52, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f52.google.com with SMTP id 956f58d0204a3-6353f2937f3so5032354d50.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 21:04:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759722801; x=1760327601; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759723477; x=1760328277; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1Ay18uDRvqAurfTB1AxynkXFwbAjTxKqpEZmDfcAxQQ=;
-        b=gctoEsPfpEyLj03ANnQhubtb5i7luVIFSFGuT1Cht+B76wgy1yqGx5Le5sULmonMP/
-         5AhEL2pBjnTxLSx8BzucTgHkV3NqDInebNQ8bKyAn3dScZpmqjHaeGMkt4IXad4KFesO
-         sL/+mtnHx81dVqN5b4utfJYodNtiCdLRpjV/BkJHntT/pUvCXRxXpSyOZ9AkKzralaRy
-         UQAiAoj5FdueOWKKweMTDdc4Jl3iUdMLyS5IoXibnryJokigg7oMEh012PMi+9cpIMuD
-         hbPJi0ZvSIAdWNuGx80eQO7VNANsOEdFrMmCg50yW1TCByON4JNAD2sKeUu93lIlygXT
-         AOzA==
+        bh=V9I56X2eYSTS5yKH+r9TZ38kICBLOLG5CpP0Qc5cnEo=;
+        b=WSeTTPJuRVs71DLW2QGa3EVhqnfUhOzNObfK1HSFOpl0HuvQ6yhyziqHvKDPpZBRLm
+         Lms2Dmkizen5UpsRjfM9s30dg9XRuObVEjURLRHAtHoY0+5RLNasrm/SqepGHiuK3BwE
+         MrsXqMSn9tNN1XHPPjhUYzS21VbaEKXe7XvKzVE4AeFh9q76wDkLZ8Z34qj+WGxWC0NI
+         d0PuPRZjF3zlqodKOD6+YNb4TFqPG/7+9+l4bjIprdo1pOzz7d+PGxdsCQ765cWWfjp6
+         LlbcxRsQBOpW+68h0dic06jH1c/AVZBhq4JmvpbJOiCMY4MR1NPUlb0YM1ZmJUgo3P6u
+         Cozw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759722801; x=1760327601;
+        d=1e100.net; s=20230601; t=1759723477; x=1760328277;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=1Ay18uDRvqAurfTB1AxynkXFwbAjTxKqpEZmDfcAxQQ=;
-        b=k/l9PkHq1bs2ASJWfLMDn/kx4lMMrnaMSYm+SiovhYUh4Kwe2yFsKnL6JnEAz4THZq
-         ZFS1eNPJfXuipLbMpUxPfLmtl9onfZlYkC661p+PPdIud3j+Y7reI7EZX8pQ5nuURjk4
-         sLzZo3GbDBd1c02WoDb1yOhSdTE9tsHBRE7OVXu5Pqav0Rhnqfs7djxhv/mUdAGt/bog
-         D55o1I8MmjUtLwKr0yveCvPiTGZ2drXlUzub8chSCibqoFbIsGWqsrcnWaB3NMMG40L4
-         /uiIr64xZb+SLBnaQRZF8hb1lBfryaI5tNcIo5youCmT1LoCdi3TfckfTxrH+K8MSoGO
-         vgIw==
-X-Gm-Message-State: AOJu0YzB3NOd/jidDtjBm1tGWf0Sn2HK/8EviIWyMNSM0cebXp4qIGkd
-	aL4yhuwmuYoWmv8jdZpK1XwmzGpgIKZeoJK5JwJOhWR1aamvQ8dnC5iPQRbg4qPD
-X-Gm-Gg: ASbGncuNAtBJMo5thDt1xz1nV6Oiv3Rigs5hV7Qp7c/qDESzPhBl14GLTPA5a7YW9yo
-	lCt0WxeuDuTOUcN5tadOeGoWk5UYqOo3KUZycEwE3TEMyiV3mS7SxiNr0xz/jknrQa8q/wdIFS+
-	ur3+nlrbdoL75gpunhBUrTCMH68sG2kacL6rU02BhJdFuVGX6NsO3ICO0h6SFaYgt3TYJb7TW64
-	a4N3Zm0RtKq0RmAeR3+ZkGtUN6ko4ugrxux4Ma9oBPiBfCj9IprO/CeXU1RsuJ/svvfdMSK8/Xm
-	v70Jp6DeL6FaHk964FCZNZrS6Z7VaePrdEb3247DCQtLx2WZ+9t1T1K/fRWeXSUMfDAo39fLWAv
-	U7iT7Z5q4OxUTMsgzIuc12rl5upokgBlCuWFQ8VMdF/uf06Cw0qNs0XymwoS2PszK5e3bjhQyxF
-	u4ohw=
-X-Google-Smtp-Source: AGHT+IH0MXAcbtxoN5HCzVPjzAAOX+OShR3lhdIjNuPcN6NMyIMXeEO9N3iYYKUP0c1zKWo/1B4M8Q==
-X-Received: by 2002:a05:6a00:3998:b0:782:ec0f:d273 with SMTP id d2e1a72fcca58-78c98a4e0demr13972153b3a.1.1759722801067;
-        Sun, 05 Oct 2025 20:53:21 -0700 (PDT)
-Received: from fedora (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-78b01f9cbb4sm11075213b3a.10.2025.10.05.20.53.17
+        bh=V9I56X2eYSTS5yKH+r9TZ38kICBLOLG5CpP0Qc5cnEo=;
+        b=Hu5dtzAAS9svXiNqn4j+cyJp4gWks9I6dSxFxIqBwgmbZfYRAVKPBDHRbruczCYxOa
+         sB3mFFaUTYxiR5w99UFaetSw5UiMcYJ4cmAOvahig26xekr5/LvXqIBGIScs7vhMZkU2
+         k3OLwWWunf2P5mw8verwucLvgIwqs+E0c7jxhlcAc1CQrOfhT1WMlyLGNpKqGax3RDNK
+         LBkwNpVr6fwPZn5Y2BfdPj1fp3Yd+GTnGshLaMBf+D5CgjlZM/+c7v3gWYkB/LGyuCwM
+         YKppA7BW8E080sAGErK8LmTs8yxEg0NgDN0bHZTz+zTZNrvO4lW6aLOgzQabiQwwdTDD
+         V5BA==
+X-Gm-Message-State: AOJu0Yy5djPxUMYh6+HR4DIYotxOv4yZzAsP1TXw2XzgTUo+QKcW8AKZ
+	pJdIXBfAHl6+ym51J/NZK8AzB+3h1qVE6qCV+ajY2chO/uSg0ye7UqTST85Xt73t
+X-Gm-Gg: ASbGncsOPyJasoG+cZnCgOPo53L1H5mvK1iQJd5SsLXpd0pOOWjmQw3sj32npagt265
+	4FU1d1SAGDh93iP3E1th9QRuycgYePwxN/3Eund5oWHP/7IbEZULXG8RB34rxxgbn5K0Gd4oIuV
+	V4wJCNszDiDiKt1zsgWn/zDjdd1f60kEli6cOMJB2IELqB23VxUPxozBF5x+grnUr5sz8WPmnVI
+	kEqbujBSg6OcUfoNsu07V2zYzm5Q70Gt/6N720yKscV9QwUakjmPLhoV7h1mY6mvJw8zxkr40GK
+	d/PeddSrFGua7u4GmRMVmo7ytrlQ1q41288uvf4CfVdJlVI9VS17pYRhxlTpYHCXbrvuo2Ar74x
+	AG62ehKo6dLNYMvJGwkz/9obXIIZ+DPeJqgd8rFA98it+D8ScMZ/S
+X-Google-Smtp-Source: AGHT+IGXVb8MncNYXmGZJJVpmJr3jKj9OjENR/1aY3+ir+OTE9l1qpfGHjauK5UzAOBlhk3cfjw5ow==
+X-Received: by 2002:a53:c711:0:b0:630:8fd5:4cd9 with SMTP id 956f58d0204a3-63b9a0f1893mr8042942d50.36.1759723476349;
+        Sun, 05 Oct 2025 21:04:36 -0700 (PDT)
+Received: from localhost.localdomain ([67.233.61.26])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-63b846a7b95sm4036889d50.24.2025.10.05.21.04.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Oct 2025 20:53:20 -0700 (PDT)
-From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+        Sun, 05 Oct 2025 21:04:36 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tim moto-timo Orling <TicoTimo@gmail.com>,
-	Derek Straka <derek@asterius.io>,
-	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-python][PATCH] python3-odfpy: New recipe for version 1.4.1
-Date: Mon,  6 Oct 2025 05:53:12 +0200
-Message-ID: <20251006035312.563935-1-zboszor@gmail.com>
-X-Mailer: git-send-email 2.51.0
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-xfce][PATCH v2 05/10] yxfce4-diskperf-plugin: upgrade 2.7.0 -> 2.8.0
+Date: Mon,  6 Oct 2025 00:03:56 -0400
+Message-ID: <20251006040401.83905-5-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 03:53:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120268
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 04:04:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120269
 
-It's an optional dependency for pandas to provide ODS reader
-and writer support. It complements spreadsheet support along
-with python3-xlrd and python3-openpyxl, both of which are
-part of meta-python already.
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-diskperf-plugin/-/tags/xfce4-diskperf-plugin-2.8.0
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-diskperf-plugin/-/tags/xfce4-diskperf-plugin-2.7.1
 
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../recipes-devtools/python/python3-odfpy_1.4.1.bb  | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb
+ ...kperf-plugin_2.7.0.bb => xfce4-diskperf-plugin_2.8.0.bb} | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/diskperf/{xfce4-diskperf-plugin_2.7.0.bb => xfce4-diskperf-plugin_2.8.0.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb b/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb
-new file mode 100644
-index 0000000000..1b943e535e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "Python API and tools to manipulate OpenDocument files"
-+LICENSE = "Apache-2.0 | (GPL-2.0-or-later & LGPL-2.0-or-later)"
-+LIC_FILES_CHKSUM = " \
-+	file://APACHE-LICENSE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-+	file://GPL-LICENSE-2.txt;md5=751419260aa954499f7abaabaa882bbe \
-+"
+diff --git a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.8.0.bb
+similarity index 66%
+rename from meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb
+rename to meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.8.0.bb
+index 583aa9a006..a6972727f2 100644
+--- a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb
++++ b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.8.0.bb
+@@ -3,7 +3,9 @@ HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-diskperf-plugin/start"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d3e627798d6a60bece47aa8b3532e1f1"
+ 
++XFCE_COMPRESS_TYPE = "xz"
 +
-+PYPI_PACKAGE = "odfpy"
-+
-+inherit pypi setuptools3
-+SRC_URI[sha256sum] = "db766a6e59c5103212f3cc92ec8dd50a0f3a02790233ed0b52148b70d3c438ec"
-+
-+RDEPENDS:${PN} = "python3-defusedxml"
+ inherit xfce-panel-plugin
+ 
+-SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
+-SRC_URI[sha256sum] = "5909a65341a6af4d7ff3c7bb87aeac91c763f69b43ae9dc4a10668ac226fecc9"
++SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
++SRC_URI[sha256sum] = "3833920a3a4a81b3c676c4fab6dd178f4a222d66f316a0783a9149a0153b7fb6"
 -- 
-2.51.0
+2.43.0
 
 
