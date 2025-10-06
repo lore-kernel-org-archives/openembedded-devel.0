@@ -1,88 +1,99 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A085ECCA471
-	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 14:14:19 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.web10.34851.1759760050971563921
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 157EECAC5B8
+	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 15:52:00 +0000 (UTC)
+Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
+ by mx.groups.io with SMTP id smtpd.web10.37389.1759765919426926518
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Oct 2025 07:14:11 -0700
+ Mon, 06 Oct 2025 08:51:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KmwX2c4D;
- spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-636de696e18so7667473a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 07:14:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=j/UWeMEw;
+ spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-71d60501806so56603507b3.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 08:51:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759760049; x=1760364849; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fYC7ZwiBiqZ1soI5r8a0RK6h0/EIh7GTrpt1B2qD65M=;
-        b=KmwX2c4D3my4jdG6s9/LVclzKMRduDTOhek+kjPNqH6te7dIJZ+Z1Tjp3NAxLra7W+
-         XMxnh17WBkDsHX2yz1Xb1EurOXYK+TSB9uiAku7uitCsnMcY+r1qz5sIPxcjSoFypJMw
-         F3cMZnJBgeEysbKaieigV5ow7GVl7mGKi6/Mixaf8p8BZS/J414XmjD+Dj9LFy7HfS6S
-         jgeFI2ph/vtgo+Sizl7AYJSK0KmoEQp9o3C0PZvxNjKEpep19Z3ROj/n6NcQsQrThM76
-         ZCNm7m61A2tEB8aoppFNYvJpXHa5rIjcwXLw4+becoDCICGFlfyBPQGntKFLtWtkw/Iu
-         UdJw==
+        d=gmail.com; s=20230601; t=1759765918; x=1760370718; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nh1zMLoec0Ehxr0eB34G//efTn+Tf4f6Sde2Sre8oec=;
+        b=j/UWeMEwt0JOPjQoh1vK3oBhhk4p1QKq7iNSj6p77K3yeVtz1vmSctal5nLeJ6RRBu
+         0iD40g7r7+HDfD+wNPkV1DxMLozU70aVJR3OdBYeew2miyjGBiLdXzSw4CYdLJZxn0UZ
+         1rSW0XLIeJnin4+0LlOzz9yH3QSLlRmSjbl4oOrjotIJFbE7qOIyalmEQMcSl80RKrY3
+         KiCVCdP+a77YUNn26cBJ+DTfFkS5A6I2iEYX3X+9tkgDQXTlSbNmx9KNIKh4KVt0o4sb
+         YzalDkmaw5OMPZ7rWGTtmX4PgXWqq3Iaur9mKhQ8XyxQmbM/1TELv3IRfDzXykp73xJ6
+         /c9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759760049; x=1760364849;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=fYC7ZwiBiqZ1soI5r8a0RK6h0/EIh7GTrpt1B2qD65M=;
-        b=aFItt6dOvcyK4vV9hatwElUEFd1X/+8u0YsTHx3V7tNAp1sipN0T6PPgub8EhSMtjN
-         3ic3IN/7QG5RL8NZzGQY+KvR8p3zyGL9kt39WL7f8Fcc2QK9/j4vtgCgCn2mFAJKsqtO
-         7cj99yIgM/qEkm4pXWTyXeRj2r54780pSzfFOjojvZH3Bkoi7mQltBX+nN44PxOtGoiR
-         ANQlSdd2940oR3kEISM9z+BiKI5LT/AVmc8Hwcb2PUx4oXdbqzBQPr3z/6MKDTYHJ2fA
-         Kk0+uYYJUk+ix7HsXZCTqzPhjhCYzdBt+UDJKZ0hxt+BK4K7mGHB6S/CNdvA+8bzKfSg
-         gRqg==
-X-Gm-Message-State: AOJu0YzdQwoLfMgIFkTjXmv4kpXaDlUbj8S3b7jws4eR1j9cc/vf/l4e
-	sHS4qWpTqWWg6CNriYGSVOhGNe/bNiwi1dYmE59tKsz1CEPgMgr8J2hjjZUMeQ==
-X-Gm-Gg: ASbGncsfTj86usFaGp1uWEAr/GIcCdEaG53dUnEBLrCyyOmcB3HMYv+gQNd5nd2uOl6
-	rHV4RRRtaRk6xo6SSqCuaXS19fcCghEETTAAkPggLrwKW2PvsyEy/vsxN7KHOHpjMdGsEM4Lj3d
-	ACwhkXY3VcyAAkbBV9qibeZ1eH3kUjWW+ddtZODwVP596Pms9FgbFxXaIJmjAZjvGPdAvVGT+Nn
-	aFOYLkjQtyIhNXUJyMuASb+blroqj8iX99vFGZOeNgXqSQm0R77SFCfsAUKtK4bTa0jqhngaYfg
-	/JxdmO44GjFb0eWAZOz10bQEHm3kHchzO2UlHCxL/MLnZAbRL/PxhzCWwU/KqY61gZTj2cOPh+S
-	3tCdrbjx/sca0U/LJ8ubxejmAVruH+Z7SJlDnYizAq8vwb7N82WDYr9U=
-X-Google-Smtp-Source: AGHT+IGUCFFwGBFYqit8piM7O04o4dibydceryPEUQfcjHuwMRPts9mEETra4CvoLF7EDTg7kd62nA==
-X-Received: by 2002:a17:907:26c8:b0:b3d:98fa:b3fe with SMTP id a640c23a62f3a-b49c344524cmr1564218166b.63.1759760048984;
-        Mon, 06 Oct 2025 07:14:08 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4865a83e3dsm1139432066b.29.2025.10.06.07.14.08
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1759765918; x=1760370718;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=nh1zMLoec0Ehxr0eB34G//efTn+Tf4f6Sde2Sre8oec=;
+        b=nANVUldTUwphTfa8s5PxYc3gJ50cLyd11Pww29ZiNqxmbc5FeYWUWWMqAfTEn3h2qB
+         EDlw4RybDekl057CO267FXYQG/I40CIdZgIMsi+dfFuvv/lx1VxKqQHT0jXhHKwQgfSo
+         LulcjCj79uTkGAbwuqCFeiE/juxUAYyqgi6uedZYh5rGzFqrukSBoWjjyrRIjpomS/5z
+         jbVzWanXUh4GAkmvY6CNhAJv1S+VDw8OqdIIFF0hP1miqwFUXi7ANcjIhRuXH2BPCahp
+         chjN4ywG7bnxuovZjQseXwDq39V7vA50DSJP2aFYE+1DScrclo2gKAqlTWKC/WbdsQuJ
+         HVqw==
+X-Gm-Message-State: AOJu0Yy2FVxy5aGu8zJXEVGTfeccatf5KoKeQFrsePmkJ9SDk5hQmpSw
+	tj6IpW9aTlWU25tEsHLkm0590PmTb6SRb+vCbRS9Dn6Ur9mTOUgYuFRSjN4ydRYk
+X-Gm-Gg: ASbGncscQ0IchH2hw2SI8i1V6zwTr987AImKHc1RspTdt6PnAfDuLCofwbMDhQjMCBC
+	VABsFkpYsaSeQhrpCEB2FrPYCchYybbcPSDzEgw7pXTsPbqV7bpJa7DCKaWuSuQzu6NCfgC/5sl
+	7KG1fpdsYIp5bnq+EW00gRFm7ENdIGkl3lGkIlzKEaI+icX82V0l94lm2r/iaaWFyAtbtwgDrX2
+	tWb7u5OlgJlzseqHrzH6XLS+v5yz65zX9xsyBDfRJHIS2DUaMG8Xu0vhKkCkk/hFy5Tz9gTXpi0
+	zMIJkxuv2uqFK+lx/wPENtTJ0Y1ReL4Zsrp71WgovSFLlcl3T1hoEVxdGhPGjm1+Gpr1X/juCv9
+	+PSEd2/eS+oy3AdNkLEQZG8SDSVvLXOD3IUDEohJXzv7MvNN94M18dwpnl0ku+uE=
+X-Google-Smtp-Source: AGHT+IG74SThiYNXbKyZcPeDi8KYppRE2Qouwg2axs+dMEpEq8erlp7Xy/FslgHdZ83eW+lTWJ/QwQ==
+X-Received: by 2002:a05:690c:4508:b0:77f:77fe:fb33 with SMTP id 00721157ae682-77f945ffe51mr154285347b3.17.1759765917992;
+        Mon, 06 Oct 2025 08:51:57 -0700 (PDT)
+Received: from localhost.localdomain ([67.233.61.26])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-77f81c34d7esm44294397b3.21.2025.10.06.08.51.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Oct 2025 07:14:08 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Mon, 06 Oct 2025 08:51:57 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] gimp: ignore CVE-2025-8672
-Date: Mon,  6 Oct 2025 16:14:07 +0200
-Message-ID: <20251006141407.2477930-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-xfce][PATCH 01/10] xfce4-netload-plugin: upgrade 1.4.2 -> 1.5.0
+Date: Mon,  6 Oct 2025 11:51:37 -0400
+Message-ID: <20251006155146.416335-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 14:14:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120291
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 15:52:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120292
 
-The vulnerability only affects MacOS: https://nvd.nist.gov/vuln/detail/CVE-2025-8672
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-netload-plugin/-/tags/xfce4-netload-plugin-1.5.0
 
-While touching it, also remove an outdated CVE_STATUS, which has been reported against
-a very old version of the application.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-gnome/recipes-gimp/gimp/gimp_3.0.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...etload-plugin_1.4.2.bb => xfce4-netload-plugin_1.5.0.bb} | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/netload/{xfce4-netload-plugin_1.4.2.bb => xfce4-netload-plugin_1.5.0.bb} (66%)
 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.4.bb b/meta-gnome/recipes-gimp/gimp/gimp_3.0.4.bb
-index 414f9c5203..b04fab67ef 100644
---- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.4.bb
-+++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.4.bb
-@@ -133,4 +133,4 @@ FILES:${PN} += "${datadir}/metainfo"
+diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.2.bb b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.5.0.bb
+similarity index 66%
+rename from meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.2.bb
+rename to meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.5.0.bb
+index 3c113290fd..d54e3b1bd1 100644
+--- a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.2.bb
++++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.5.0.bb
+@@ -3,7 +3,9 @@ HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-netload-plugin/start"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2b6065ae7d3696cdad6869dd8627a9fe"
  
- RDEPENDS:${PN} = "mypaint-brushes-1.0 glib-networking python3-pygobject"
++XFCE_COMPRESS_TYPE = "xz"
++
+ inherit xfce-panel-plugin
  
--CVE_STATUS[CVE-2007-3741] = "not-applicable-platform: This only applies for Mandriva Linux"
-+CVE_STATUS[CVE-2025-8672] = "not-applicable-config: the vulnerability only affects MacOS"
+-SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
+-SRC_URI[sha256sum] = "a2041338408b2670f8debe57fcec6af539f704659eba853943c1524936ebabeb"
++SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
++SRC_URI[sha256sum] = "a868be8f73e8396c2d61903d46646993c5130d16ded71ddb5da9088abf7cb7ba"
+-- 
+2.43.0
+
 
