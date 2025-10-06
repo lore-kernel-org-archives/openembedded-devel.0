@@ -2,63 +2,62 @@ Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 207F6CCD182
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13323CAC5B8
 	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 15:52:20 +0000 (UTC)
-Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
- by mx.groups.io with SMTP id smtpd.web10.37403.1759765938986250279
+Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
+ by mx.groups.io with SMTP id smtpd.web10.37401.1759765931995563238
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Oct 2025 08:52:19 -0700
+ Mon, 06 Oct 2025 08:52:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dyywPQvF;
- spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-71d60110772so51640967b3.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 08:52:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SBYEFrOA;
+ spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-71d71bcab6fso51711097b3.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 08:52:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759765938; x=1760370738; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759765931; x=1760370731; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0HQ672EiOjeN8ph14FZZKZ2KDzNgYpepYazoSb/rFLs=;
-        b=dyywPQvF9+S53Rps3vcTxAbqVOO6kuM4J/+qXto262S+Lcr/XR/rpvLcnoc4bORMxo
-         waeAO7sAsS2GEUouY+Wk8KBFhCCax+i9xhCLky99Az1vWMuZ2FKo8qUIqIAZE/K2QGMM
-         MYC29mN29KSrYgj0xXKo+iup64+IajAa2HB5cTaOmEmCaAhenpj471ZUHQ6gLzs/fyh3
-         LNTQ3vkJxsTEsYW0uLfMlBjhPhfKN89j/k2GIsSqDPZcd+xjcVc/P5FELkR0vXA3RJ7x
-         m4W5O3JlgQk35n3oCstG0pYlcZ7DB9o1Xv/3EMyTxOg2S1R9qiVJOZ/VLbN9CSYsXhWK
-         7D1Q==
+        bh=9LkxXQL3NGTVqFmfmj6mE+/yQDYsV8BWHOIGqP24FlU=;
+        b=SBYEFrOAh58WzniJCf0qQjsN1BT3ON3VthJEOGEvnqENGaHVjNecy8WEpyf+4VOusq
+         u0YsSYhBSbNzAa0ETpizL74oPJ2Bwlk6BpJJU86A0brckpPU7rKVARJ7xU91GOd3ifRh
+         IsY7VS0UDwzw1j9fjwIRZeyrN9L5nTBhoNPPUKKGheH1n+QYHC6sytre5BQvPEh8IU3L
+         wGD/0qAmMEVj1Ks6xUhIh4xnwd+lcjVXWm9uGD137Wz8GIpMFRBaUpLnrPS46xyCwj14
+         /m7iJ/D1atkwmwmKZbv8JgRQNG0mQ3QyQX3PDoxGcd3qlxIYLO1QdoFQkQzpoQgPZB+h
+         nrFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759765938; x=1760370738;
+        d=1e100.net; s=20230601; t=1759765931; x=1760370731;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=0HQ672EiOjeN8ph14FZZKZ2KDzNgYpepYazoSb/rFLs=;
-        b=LElp+LDCYbg28Y+t0HU/hMF6PFFMvMbGrafpzJH8UvAUBsTp550rWDjY7s9NSgMUJ9
-         uBN7NQ8o8pC1uU/ONE7keEPeky9ISFeh63VHGvXHLTt2yjAHF7faDUgfpnJdJelj+iW5
-         MTixE9x7+ykPw5rcdgHbxAho9O9e5pguSBjRrKW7Y0Q5m9PguwxlNsgFsIbgmSiqFxTv
-         bbCPBwRB0qY3j7YsPvM3sYJ81eq8KvX5qV6/0GJWoHXkxo8E8LwNTPlPFSL/ZOCW2+G5
-         10HSe/3ZGts/i03rIXfpqhwIkYDsfZ9wWPGF1OldMpuzqhVlCOU3JFIxeCFlwfeZluQf
-         xs2A==
-X-Gm-Message-State: AOJu0YyNS5R71xpwdiZUmC+ln+TqLsVp1oNpyP6uZiKEWmgBU8hBCkA7
-	YkXkAnd1bVxFmGLiOv5jI/Wb7fG+U3ZdzEtrFrCcI9T5MJcKMchQ9IZHBMtmvcW9
-X-Gm-Gg: ASbGncvpjExDLJKguCiLtI2PbCliGvuIaN/0cnm4RTArr0uaic7ISfVp/GtvZ1XGryH
-	oh1nEeGnX8TX8sICaT0sjAoKWxClXBbzjW9kO7erdAtyo1Mu2peRcPD4aONespEI8PtXv/Amc2t
-	p3xqTWDBImtCfY4S2J5Rq+p0FY/jNliwQBrgWAe+virdSLiRuHwkF4+5E5p7tRiutFYCNK0CLmM
-	VAWqjQU7xY1fEMMAizWR8eGQb9A92/yVXtPUMG0p5o+3b5E5jzaMUZtiXrtYsXePsDl8jStehlp
-	JaJDYKicXWfsHu/mYmV1f2plxh0KVHbqjrbG982hG26IOAP3IXazJEFGA6rpfTeIpoB2c3cvdzt
-	zyx6hHdxFujD4AdI+V6jHdVgRJXhz7UwnvZseJR0wSOB9YF3ZaqwLOnvlz+4pO1m3eQE4rwdURA
-	==
-X-Google-Smtp-Source: AGHT+IFlbK8B6x+5pZ4PbTjAJaGGqJojnBifvtNnPCmscFqQxp9rTFz5ajDiJ/lfa7B2LWsZNmjAWA==
-X-Received: by 2002:a05:690c:a87:b0:77f:772e:6229 with SMTP id 00721157ae682-77f945930a4mr245766287b3.1.1759765937459;
-        Mon, 06 Oct 2025 08:52:17 -0700 (PDT)
+        bh=9LkxXQL3NGTVqFmfmj6mE+/yQDYsV8BWHOIGqP24FlU=;
+        b=INLbC2dB2aV/3UsoEVebY9uAob/8mKmBgIxXL9S/1XyrL78eGU5LmLK4PqZOuwY2ca
+         BscLiZTIgI4s76GKOPvSPU4DJH3H1gWVylttuFceATjpE/mf4JvxKjt0EECrdxIwhA/2
+         I3FeVXjDU5G3kpV/uSiKezojpdckzbWTgMgK9zEhZyE7vVXhAZMxUEU33sBQ/rI/p6Xp
+         dr/qexUPVnv946yH0D9PMDHWxSH42m9pj0juIv0yXfIL32/qKaSklwxjlNy7H6kuPg+o
+         QabzhNr2ibJiT9wkpch6+jsfckAypUvoVjGDXDsBdhcTb3jKrlFqIYzGzoYwDT+79sMp
+         Kqqw==
+X-Gm-Message-State: AOJu0Yz9p4I5aBz6f49E49ze30xeMoYdEspMJ9HhIMdxPoAlO2TMG03P
+	7trF5QMSwWi4QNhzdj/qRo3waHE5HLyS+rD1ktaRvnmPFFWQDQlCQJN9hlybvZhL
+X-Gm-Gg: ASbGncsK2YDCsAZWqymH3rSabFBP7UTk3WlMeNlWTdgk+sqkCPAI1YKEeHkVV/r73nU
+	Y8lcpuQbB/ju5ze7aeOaqBKZrWQCoMSrxv06ERyQvKcnh66PCzaicqBi3IB5IpZA+d24j5fSiuY
+	3Y8y2XgxAukSY5xQlnCY6NeAjlS1YtmRgjtrMruPvHQ5Xmgn7pHDL1op45rMqA0u92aVtWqaCpd
+	1SsgYrYarPtt4sofwTVv5+hSGvBB/550UJgCmVyxEZ5Axli1h9rMyTpeSggQCEQaayU3kZaQ74k
+	8Mdg5x7kmcCvLPhCt2GG/9THMUvoTpkLGaBAcIeEqCGTWlbEeBMDficDdOafs10SR/r2cbDeMXG
+	xJx3OdpOxk0WtgHKVIP1qQejo45f9v6Yy/+2Z6I1PiCu/5e6kPAb+
+X-Google-Smtp-Source: AGHT+IHmiV9WbacAKQXjB6SF7qm+N1MWaLLBnCPEi28d5MBoptvwAXKjs3WDud4a3zo6Zm0KX38YwQ==
+X-Received: by 2002:a05:690c:d91:b0:770:bb4:85ef with SMTP id 00721157ae682-77f94630799mr184521907b3.33.1759765930511;
+        Mon, 06 Oct 2025 08:52:10 -0700 (PDT)
 Received: from localhost.localdomain ([67.233.61.26])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-77f81c34d7esm44294397b3.21.2025.10.06.08.52.16
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-77f81c34d7esm44294397b3.21.2025.10.06.08.52.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Oct 2025 08:52:17 -0700 (PDT)
+        Mon, 06 Oct 2025 08:52:10 -0700 (PDT)
 From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH 09/10] xfce4-wavelan-plugin: upgrade 0.6.3 -> 0.7.0
-Date: Mon,  6 Oct 2025 11:51:45 -0400
-Message-ID: <20251006155146.416335-9-schonm@gmail.com>
+Subject: [meta-xfce][PATCH 06/10] xfce4-time-out-plugin: upgrade 1.1.4 -> 1.2.0
+Date: Mon,  6 Oct 2025 11:51:42 -0400
+Message-ID: <20251006155146.416335-6-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251006155146.416335-1-schonm@gmail.com>
 References: <20251006155146.416335-1-schonm@gmail.com>
@@ -68,34 +67,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 15:52:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120300
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120297
 
-Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-wavelan-plugin/-/tags/xfce4-wavelan-plugin-0.7.0
-Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-wavelan-plugin/-/tags/xfce4-wavelan-plugin-0.6.4
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-time-out-plugin/-/tags/xfce4-time-out-plugin-1.2.0
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- ...-wavelan-plugin_0.6.3.bb => xfce4-wavelan-plugin_0.7.0.bb} | 4 +++-
+ ...ime-out-plugin_1.1.4.bb => xfce4-time-out-plugin_1.2.0.bb} | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-xfce/recipes-panel-plugins/wavelan/{xfce4-wavelan-plugin_0.6.3.bb => xfce4-wavelan-plugin_0.7.0.bb} (70%)
+ rename meta-xfce/recipes-panel-plugins/time-out/{xfce4-time-out-plugin_1.1.4.bb => xfce4-time-out-plugin_1.2.0.bb} (72%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb b/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.7.0.bb
-similarity index 70%
-rename from meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb
-rename to meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.7.0.bb
-index 64e7ea6a18..d6c9da7041 100644
---- a/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.6.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/wavelan/xfce4-wavelan-plugin_0.7.0.bb
-@@ -3,6 +3,8 @@ HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-wavelan-plugin/start"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e1e5872df9c5cf1a23f16493d9104920"
+diff --git a/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.1.4.bb b/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.2.0.bb
+similarity index 72%
+rename from meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.1.4.bb
+rename to meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.2.0.bb
+index f68b051e4f..c700ef4a9d 100644
+--- a/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.1.4.bb
++++ b/meta-xfce/recipes-panel-plugins/time-out/xfce4-time-out-plugin_1.2.0.bb
+@@ -4,6 +4,8 @@ SECTION = "x11/application"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
 +XFCE_COMPRESS_TYPE = "xz"
 +
  inherit xfce-panel-plugin
  
--SRC_URI[sha256sum] = "61c0c2f56cb70872d403b770dd76349df9ff24c0dbe905ee1b4f913c34d8f72b"
-+SRC_URI[sha256sum] = "5fdce1e1b0d29d0a258dca86bab9d4edcbc12098134b92e00ea1502086a49116"
+-SRC_URI[sha256sum] = "b6b708900d7fd0cc3d8a045514962db94b60d959c266049aa2cff768fc381726"
++SRC_URI[sha256sum] = "e344d9f82a8acd23d44e7cf9b2efe9599ffff856d9ba1a9be0e67b022c0d2eb2"
 -- 
 2.43.0
 
