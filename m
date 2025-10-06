@@ -1,150 +1,139 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 663F1CCA470
-	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 05:50:36 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web11.27034.1759729827120566888
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97F44CAC5B8
+	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 09:54:07 +0000 (UTC)
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+ by mx.groups.io with SMTP id smtpd.web11.30468.1759744446334888812
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Oct 2025 22:50:27 -0700
+ Mon, 06 Oct 2025 02:54:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=f89ofFEe;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: zboszor@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-780fc3b181aso2415617b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Oct 2025 22:50:27 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=hCl52cep;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-62fa062a1abso8847720a12.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 02:54:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759729826; x=1760334626; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LKFqSBpFx9kkf3gHGoCm1SwhiarQ4gizneo5ddIKGVE=;
-        b=f89ofFEesA880jmVf+NVv10VhXMGVV30uJAVtsCUxBZPBKIA5cydsWAVjiVmdTiLnT
-         Qu0ek3RlhzOJXBbTv9aQ0g5ti4t6mlPTUrQnKRK+o8pq0UTb5TnRHhTCuj5+lrKFd+wi
-         J1BcUbBGZ1DRjNk3snvqw20OCSyd9Yu7/hprst6bHUQ1TNcZ6fdQdi5TQ0w03cmp6L5H
-         uhmiYXXv5fEJYifw1kphusx73fgmIgy+YBMnwbo7LGxBqz7IAqb/jAgPpy57w4MVTePU
-         2TXa4mZitxAFsnqdlRcf1AtMkb+eubAgkWvWx5Cq5xTp/whvewN8LTz6xO5/vIg0RKPg
-         1ttw==
+        d=konsulko.com; s=google; t=1759744444; x=1760349244; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=CoxzuJGxxQO3KKY/HFQh1P7+RJ32nfEsAOFU754qbOk=;
+        b=hCl52cepqQsfVnJNCT0KEpFYKN4J74QqyIVS6Mu33pbbXR7ocF+yhhVsUifH4WY4WT
+         5LE00T9NEqX/UX8zUdWhVGTMrDv6ke1WnIP8ZHkzKjiyS7UDG3s1DDW6650M4iYAw+1K
+         wUk+/Fjdp27+p6LKlxgklR2BqWUReGEiKB5ts=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759729826; x=1760334626;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=LKFqSBpFx9kkf3gHGoCm1SwhiarQ4gizneo5ddIKGVE=;
-        b=soZwQ6u6nWqLIXnFHt1JiNBKgNffarEdXK+hH7+cNKwAUVVrmDAiSkHLGkhUpt9Bqo
-         bNYmF/SeD92yjdv56jw7Uyo1D3hGRXbnMkSPuA5t7vj0KeIA+iVrvCaCAJHgjqSjrVmp
-         /R7nOqIO/49XFWL/V0qYbEAB4jOHtBN4UcTun4ABu6IHxYxU+aJCO428kF7de7X29B2i
-         39TVaDYax+w7RK6kefFqEX/ph10Gk/gg7IgCwgJS5JWQGyd/THLZDBDmV7uIlJKrISh0
-         H/sIbpVmiaqJopAyHigYRGa+ztGCe+GVOZBkmIXHhydRI0xznR2N9rNftV0RVkhp5hI+
-         ZvGQ==
-X-Gm-Message-State: AOJu0YyYuMmFnqfOLLVejyESbq5jkXtV+aG1+e1Hw+6nZi2artgBvoy5
-	XeE1st7jSbh5lqA+slbufh3AKQE5BzJW9eE+ijXY17ir77lfNha6eGBvRgip4Jzz
-X-Gm-Gg: ASbGncuL6XUONsSjLvHkqdSwK9la7j0/L59nZ8NSV9q51NlY5kWhAH0HEj6eO5k1f4z
-	4V+nZAn9cj75HvDA9sDDZOKB725wZVRp320fM/a8dL/bLqk1mjPzCqfdt5aUg2ei22HnlkbhVcX
-	On0KhOCXjH43cH37wXSeHz3ba0GIvBKeVz5eZUlZZSeMNqdF0d1qKVuzSYgVi3lfCXgACfvc24u
-	qEf8jR6hWk45GWXYL6Fe/h4iGRhJpO6rp8GSjD4dR4Y9esyAkv8ElKwP0Vf3oKIWRCG7J/i7I5C
-	fZW0LYxs/jAjzTkkRKpyqCQKrBjN2+P3H1rai1Dtv+NHhJJfaJS9ppv4NeWb346lH9ja+aajftY
-	8pbh8IuXu2o8SBh5RYcHYLGILLjo3b+3eKPz7IJMaGKUeEJznhWuwcnJFqVVMIhmpRK2EoZ8GDX
-	1We5U=
-X-Google-Smtp-Source: AGHT+IHvpZl/ulcjGXncVSiQ1oMQB6fOaaAGchOesZLNRZyHzATZ8RyhSdx44MoYugWcdCd5GNZyVA==
-X-Received: by 2002:a05:6a00:b86:b0:781:1b5a:95b2 with SMTP id d2e1a72fcca58-78c98cc3212mr13476368b3a.28.1759729826033;
-        Sun, 05 Oct 2025 22:50:26 -0700 (PDT)
-Received: from fedora (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-78b01fb1a9fsm11287981b3a.20.2025.10.05.22.50.22
+        d=1e100.net; s=20230601; t=1759744444; x=1760349244;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=CoxzuJGxxQO3KKY/HFQh1P7+RJ32nfEsAOFU754qbOk=;
+        b=XeClF8Zd0EWzTrd1Ra3QpsIzEBNtt6x1qB5CiNRbHXhcw3CtLM/Vl5OjD1yZj+lGAB
+         wUn9/hXOLdEbVZ7gHeePBwkQLiTkh+PrjZOcCO62EV0NHWYMnSk1rSerS6cmwbp9oOWR
+         3hgU/eTIA/+4YAmMKRvlFKOZnBxdJ7RLs8G8O/cfxCWYdacfxDJjAMhF08EzUx1At15c
+         zwC5YiCMhJ4JhGaOyTjS8AG4dGYj7iOigHKKk/sXw+dLJvHoG7mvC8AUgL0ZVybAbRI7
+         Bfc1vknmC4pFuHVQ1kZ1cbc3dVPL1fMRfCXeRWMxqb01PPkKh2rH+qpRssdL8ULT/ZPl
+         L8rg==
+X-Gm-Message-State: AOJu0Yy7DZRMCPjKS2crnVh3vXaZ843qszRrQ9YLQrtBLXKmtQxhfPeG
+	Xeb7KF1N53pSz9oFHwkuhLV92f4Ftj1jVY+Zd9eRm6V85ukxUY/Yp9Gv3iUsgilv4b5tC6PCnqn
+	KtBBf
+X-Gm-Gg: ASbGncumv/zKkYfIfpqfQdHAVq9kg6mQiFJMnwwDT4o3/MzeeY2Ys6gNYIMKq+EEQ2e
+	ROsEnOqKJYiqei4syNlJ2r1lRRj4Lg43Oxd9tvGmYcAnX5DnhdVsNy3FkH2S+nit/Jlu+WizzaZ
+	9tcm1unjPdJLXZFD8lcutLr4RsHEnLTv1CekS8Wc2KN1KoCPhK/Y0qvnMsofoo32MyuSkCEb0Qi
+	yw7EqwXNe3gctbVESYcuimsC4c2I+YlV5zZiufIYzkM1CnCfMrk2mpjjnRna6ESS3ZhzKqoblBh
+	LKV4wi1hgzbLTWo4ShTvfaxbpBV1vgoDd4kfvfn0w5MFFU7GB1bVIADlRugtV/M+Epudz2CFB7K
+	tJ5tN1/kaY4b4nXo3sX02dEJyb+p3dxHrlQTeqSUe1FDLPjxBAPUlyXFYNDZX
+X-Google-Smtp-Source: AGHT+IFfnxGRIpppg8KqEu33u1BWt8FtMxlU01NO90J5yIgcs7v4lJeIYMF6oeqzmgLJoZQEwcSmPQ==
+X-Received: by 2002:a17:907:868c:b0:afe:87bd:da59 with SMTP id a640c23a62f3a-b49c34474abmr1364601766b.42.1759744444453;
+        Mon, 06 Oct 2025 02:54:04 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486606dc84sm1094493466b.45.2025.10.06.02.54.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Oct 2025 22:50:25 -0700 (PDT)
-From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+        Mon, 06 Oct 2025 02:54:04 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tim moto-timo Orling <TicoTimo@gmail.com>,
-	Derek Straka <derek@asterius.io>,
-	Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-python][PATCH v2] python3-odfpy: New recipe for version 1.4.1
-Date: Mon,  6 Oct 2025 07:50:16 +0200
-Message-ID: <20251006055016.578983-1-zboszor@gmail.com>
-X-Mailer: git-send-email 2.51.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 4/4] python3-pint: Upgrade 0.24.4 -> 0.25
+Date: Mon,  6 Oct 2025 12:53:58 +0300
+Message-ID: <20251006095358.532479-4-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20251006095358.532479-1-leon.anavi@konsulko.com>
+References: <20251006095358.532479-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 05:50:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120272
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 09:54:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120276
 
-It's an optional dependency for pandas to provide ODS reader
-and writer support. It complements spreadsheet support along
-with python3-xlrd and python3-openpyxl, both of which are
-part of meta-python already.
+Upgrade to release 0.25:
 
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+- Bump minimum Python version to 3.11
+- Upgrade code to Python 3.11
+- Move to pixi/uv/ruff
+- Refactor compat to make it easier to test
+- Implemented several pixi environment and tasks to simplify
+  development
+- Add docs to the functions in pint.testing
+- Fix round function returning float instead of int
+- Fix return type of PlainQuantity.to
+- Update constants to CODATA 2022 recommended values
+- Fixed issue with .to_compact and Magnitudes with uncertainties
+  / Quantities with units
+- Fixed issue in unit conversion which led to loss of precision
+  when using decimal
+- Add conductivity dimension
+- Add absorbance unit and dimension
+- Add membrane filtration flux and permeability dimensionality,
+  and shorthand "LMH"
+- Fix find_shortest_path to use breadth first search
+- Fix typo in pyproject.toml: rename AS_MIP to HAS_MIP so that
+  MIP support is correctly detected
+- Fix handling of extra arguments in conversion with enabled
+  contexts
+- Fix swapped left and right arguments in interp
+- Fix formatted scientific notation bug in Python 3.13
+- Fix ability to add dB units, and to add dB (dimensionless) to
+  referenced dB units, such as dBm or dBW
+- Improve pressure unit definitions in default definition file
+- Avoid and document known issues with MIP during install, testing
+  and runtime
+- Fix issue with Dask by restricting its version to < 2025.3.0
+- Skip false xfail tests linked to a known numpy issue
+- Improve Contributing documentation
+- Add Quantity.to_unprefixed` and `ito_unprefixed methods that
+  remove SI prefixes without converting to base units
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
-v2: Add ptest and DESCRIPTION
+ .../python/{python3-pint_0.24.4.bb => python3-pint_0.25.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pint_0.24.4.bb => python3-pint_0.25.bb} (73%)
 
- .../python/python3-odfpy/run-ptest            |  3 ++
- .../python/python3-odfpy_1.4.1.bb             | 43 +++++++++++++++++++
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-odfpy/run-ptest
- create mode 100644 meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb
-
-diff --git a/meta-python/recipes-devtools/python/python3-odfpy/run-ptest b/meta-python/recipes-devtools/python/python3-odfpy/run-ptest
-new file mode 100644
-index 0000000000..5cec711696
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-odfpy/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+pytest
-diff --git a/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb b/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb
-new file mode 100644
-index 0000000000..9b470f11ac
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-odfpy_1.4.1.bb
-@@ -0,0 +1,43 @@
-+SUMMARY = "Python API and tools to manipulate OpenDocument files"
-+DESCRIPTION = "Odfpy is a library to read and write OpenDocument v. 1.2 \
-+files. The main focus has been to prevent the programmer from creating \
-+invalid documents. It has checks that raise an exception if the programmer \
-+adds an invalid element, adds an attribute unknown to the grammar, forgets \
-+to add a required attribute or adds text to an element that doesn’t allow it. \
-+\
-+These checks and the API itself were generated from the RelaxNG schema, and \
-+then hand-edited. Therefore the API is complete and can handle all ODF \
-+constructions. \
-+\
-+In addition to the API, there are a few scripts: \
-+    csv2odf - Create OpenDocument spreadsheet from comma separated values \
-+    mailodf - Email ODF file as HTML archive \
-+    odf2xhtml - Convert ODF to (X)HTML \
-+    odf2mht - Convert ODF to HTML archive \
-+    odf2xml - Create OpenDocument XML file from OD? package \
-+    odfimgimport - Import external images \
-+    odflint - Check ODF file for problems \
-+    odfmeta - List or change the metadata of an ODF file \
-+    odfoutline - Show outline of OpenDocument \
-+    odfuserfield - List or change the user-field declarations in an ODF file \
-+    xml2odf - Create OD? package from OpenDocument in XML form \
-+\
-+The source code is at https://github.com/eea/odfpy \
-+\
-+Visit https://github.com/eea/odfpy/wiki for documentation and examples. \
-+\
-+The code at https://joinup.ec.europa.eu/software/odfpy/home is obsolete."
-+LICENSE = "Apache-2.0 | (GPL-2.0-or-later & LGPL-2.0-or-later)"
-+LIC_FILES_CHKSUM = " \
-+	file://APACHE-LICENSE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-+	file://GPL-LICENSE-2.txt;md5=751419260aa954499f7abaabaa882bbe \
-+"
-+
-+PYPI_PACKAGE = "odfpy"
-+
-+inherit pypi ptest-python-pytest setuptools3
-+SRC_URI[sha256sum] = "db766a6e59c5103212f3cc92ec8dd50a0f3a02790233ed0b52148b70d3c438ec"
-+
-+SRC_URI += "file://run-ptest"
-+
-+RDEPENDS:${PN} = "python3-defusedxml"
+diff --git a/meta-python/recipes-devtools/python/python3-pint_0.24.4.bb b/meta-python/recipes-devtools/python/python3-pint_0.25.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-pint_0.24.4.bb
+rename to meta-python/recipes-devtools/python/python3-pint_0.25.bb
+index 1bf62ca729..c85805e1f4 100644
+--- a/meta-python/recipes-devtools/python/python3-pint_0.24.4.bb
++++ b/meta-python/recipes-devtools/python/python3-pint_0.25.bb
+@@ -6,11 +6,11 @@ SECTION = "devel/python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bccf824202692270a1e0829a62e3f47b"
+ 
+-inherit pypi ptest-python-pytest python_setuptools_build_meta
++inherit pypi python_hatchling ptest-python-pytest python_setuptools_build_meta
+ 
+-SRC_URI[sha256sum] = "35275439b574837a6cd3020a5a4a73645eb125ce4152a73a2f126bf164b91b80"
++SRC_URI[sha256sum] = "22911a30d682ee0540d656571c19a7b1806ce00b2be88a16f67218108b7b8cc2"
+ 
+-DEPENDS += "python3-setuptools-scm-native"
++DEPENDS += "python3-setuptools-scm-native python3-hatch-vcs-native"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
 -- 
-2.51.0
+2.47.3
 
 
