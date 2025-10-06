@@ -1,144 +1,144 @@
-Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 40C32CAC5B8
-	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 11:08:18 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.web10.31347.1759748892811560219
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 854BACCA471
+	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 12:06:38 +0000 (UTC)
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.web10.32263.1759752393658066695
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Oct 2025 04:08:13 -0700
+ Mon, 06 Oct 2025 05:06:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=eNdJBdCD;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59607BVo013320
-	for <openembedded-devel@lists.openembedded.org>; Mon, 6 Oct 2025 11:08:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=38pS3a7Ig7a4IcKV2OSVAjiGDObjSDoJI34
-	eJLBsFYs=; b=eNdJBdCDsnK1iNMlxD0bUxqZMZSajECUT5zsWW15R1LWyefBxCF
-	n9ap4ImomfBO6wcggVOpmb/dbPxqE2CkCMdLo71bhfARYQYoWQse6qnOCwWbi7JZ
-	k8NedBLIhmPreOMCsKImQ3oT1kmxKrzu5nOscvcLRi26WYht7uyvTbzTkdE7zNw4
-	FxiiZScLzR+3XoCCiTp2Ditoa5SnWEQgo+vQg1EGcP7mHHfhp9PPdTdrokIyZsl9
-	O4MlgnnO7J7vZ/vED2VexZMuJicejLza/b29XSZm1LtoKif1AbDkHsk3HK6+M5qX
-	YmC/QjViZ+/n0l+XGwapsN3tbnT4ZMaulEQ==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 49jtwgkr24-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 11:08:11 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-4e576157d54so74803341cf.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 04:08:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BlHwzUG3;
+ spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-b41870fef44so957781366b.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 05:06:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1759752392; x=1760357192; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=eDMkUpeDUpl2LGuEqmMZ+Wkl88uwo8Gvw7NRf+GG3+A=;
+        b=BlHwzUG3LH8twRslgsbkFvDKsdp2wr4aOt1ANiMRttSvkylF9QcP8Bx0zOJub2XQe3
+         eiZJpV7+Z+A2+rN3dv1jOLJcEnAW9VTNmceAJk6pnTbYVO5oVe1YMKdtQrXP4JYv1fHw
+         elpOb7o0qSR7InD+2g05FXks3VEgq1tAvdyZ5i9w7G+9kLffkN/m+jcnNEF9al9XZidc
+         pIWTdrU4CMIkrSyzLPc9ExqB55NgIV12BwIHoj34rFUYMB+06Qj5WME59y3ewVZRQWJC
+         xlBeHGeAhBLHPGG11JVEyRL17gnMPLfYBRGzAMWWUo5Bnh/iqBAKZa+x645IXZsJ186+
+         kzvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759748890; x=1760353690;
+        d=1e100.net; s=20230601; t=1759752392; x=1760357192;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=38pS3a7Ig7a4IcKV2OSVAjiGDObjSDoJI34eJLBsFYs=;
-        b=m3Sr6RV7iOk14uNbycU5GtXH7vBePBIT6mKgThsPLIoqxG1F8jG2uBqm/t002vGqnL
-         MnhOofWYokPibU+KZk3xwdzxKiyG1vKpjhu6GiMl+Sr9gnR8KUdR8p6HiwK581dozJtk
-         asjVRYEFCwzMaNEVDdb4cGLr0b4cpChj0U9k3kGItoQBHUgIFH8M+mLhadfU3iIlq4PF
-         hTr+EWIrlK7kJ/ySq4eG5jeAW+mbk+lyDPEeb9KDxCYYh0qH1TEC67sI8FhMK9EAkTJR
-         4SO6XE/tUcsOk/iHTUao7JqmKwJ8skSSx4cIiSOqyHHFOukEk0D14Wm12yNPZYLBzXR7
-         5eyA==
-X-Gm-Message-State: AOJu0Yx7/yxyqYojPtb7mZzbe0TPJJDssVRenprBIWlqeWvu/XRg3Zh0
-	6f3nBMO9YkGLbHx7TEL8fTKYSRAOzT1J6wXH6hcYqH6TSo0YT5cRuIGoSTs/DeIRisJ8ovjrRT0
-	nNOuTQx/uzsxWowVGnreaeaawaGSCVw84qwCr5/aTtu34jE9ktm60zEsNK8QY0QXMnX56Y2h4Xb
-	HsGaxeX47Xn7AFQ8EX
-X-Gm-Gg: ASbGnctwQ16XsrC3WyHDNU6EPKM1n6uud1/ZsdMwGizFLV23Dle+oVnOeOLyrIRKgy+
-	UpOrbAipGy3egL1E+mVYdz9oGcyAWzLu/7ql7rtvDeLn/9ghgwmOoxCPJfT3SQSZWlJVCIX4fsg
-	yAvg6YOzhSliMZ+Uqj4W92puJypulxjQwCCsM7nid9bUG4hsypYReVdTq/jpcu96Nld3I8AvuAk
-	wPzbunz0tmtrMufg4XcawasNZW7h8X863X1hWfXwYOvxpfWTh19MfDLdRRqEtHJ6VXapMY/OVpG
-	0QOAkCKCV6/i5hqZAy0NPfXMHHv4Of+p3i/KkE8lGttT1HLnUWkM5HESKC6Ru+/7xFaJIkHofnX
-	OCZ77jV6R19Jry+eGGZ1LNvIrEENyVsqdCvW1MzUpJGII3NbqdtV6I/1UaA==
-X-Received: by 2002:ac8:5796:0:b0:4b2:d865:3e5b with SMTP id d75a77b69052e-4e576af45d4mr141514291cf.68.1759748890153;
-        Mon, 06 Oct 2025 04:08:10 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG1YOFhms2LGj1K6LARvPFGETQ4bVN9uxAYDQn/FBhDtXJXYFHH5GFP2TjVLCyxoqjtDUftsQ==
-X-Received: by 2002:ac8:5796:0:b0:4b2:d865:3e5b with SMTP id d75a77b69052e-4e576af45d4mr141513861cf.68.1759748889611;
-        Mon, 06 Oct 2025 04:08:09 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a0c3-3a00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a0c3:3a00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-58b0118d22bsm4936083e87.85.2025.10.06.04.08.08
+        bh=eDMkUpeDUpl2LGuEqmMZ+Wkl88uwo8Gvw7NRf+GG3+A=;
+        b=vJ2vTjmhFkZd+QmXoib51z/o2RtrhMwIQAAHMFpS5buYyafbPmkeydnCSr72qu0uMH
+         lvnS7z9fG4WbwWrN11yLyIGYtYKEIgDMsJ5OCoa9ntdPBfNxLY5L9QzQNEOz6bXjL57S
+         FFiQGfPW+0z8bV3+9lOC+ffd+yk7UNY7ljGJ5dSCKELotaqAXBKUc0aZRYkg9Kwkd3QQ
+         CWU/6SzstVa7DkbNEO5II5wFkMDQlPjZ+7cwtbBRRD/A4EhH4vYRCt6SXMqRdJ6VnXBB
+         H0NtaKCs7LPcuo6XvArwWLqDgdR45yitsGsI20ZUAK5WmADBZzc8Gky4T8AJQfwz5HSQ
+         BZCw==
+X-Gm-Message-State: AOJu0YxUCtskg4N9kLYxo6wy4zsPEvpDOBPhl8h70bIhLZo1y69AnQYs
+	5B04JTpExQF6zmXW/8WX1WMT46TJLTVxNtgAWCnNNc85qgHqHq88QGYGGdC2Yw==
+X-Gm-Gg: ASbGncu0Ie24ipTvYbfVZhXYSp4sUhwnPhj9vW+70hSHXMs2RWdObMgyxMK2Pj53LRL
+	PjEY1xrxetGzz/Hwu9GjHQGvNUtPUQP8IoRYBwxmKl/y7yOKc4HQmS4khQZYjRmVr/bi+ZGLPPW
+	3nyQfKBjsqDX9XYcuUGmt1GXkqE1PXUzqQ7VSNm6ZdqRXWyb6hTqbfbQXIZ+YdOarnggpnBEj7Q
+	tv4JIKSL/LRV4rWAS4nuQ9+5ogX9OQRQiys4yhCbxVekvPcgyudwUf1zIkva4cIdLV79beUUIXG
+	4mP67w/NkK1gqzMSIp4LKsbFXOJvq6tGeOe+uB/xQdC+UFssHCiSQbOzgeQmAW/042Y+i0nqDYN
+	j6JWE0X2Dh97gb6jwl4YXtbdhhtdY94T4Rtqu2OJ386qX
+X-Google-Smtp-Source: AGHT+IEXO2dNbbu0LUxcRoUKpZ4XJzS0SW61eowtRrKcf2brB35W3hqyaxhWI/Qor/YM3Wox/w51vw==
+X-Received: by 2002:a17:907:868f:b0:b40:2134:a877 with SMTP id a640c23a62f3a-b49c4292adcmr1488700666b.59.1759752391629;
+        Mon, 06 Oct 2025 05:06:31 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63788110219sm9949748a12.37.2025.10.06.05.06.30
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Oct 2025 04:08:08 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+        Mon, 06 Oct 2025 05:06:31 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] opencl-benchmark: package NVIDIA OpenCL benchmark
-Date: Mon,  6 Oct 2025 14:08:07 +0300
-Message-ID: <20251006110808.2880301-1-dmitry.baryshkov@oss.qualcomm.com>
-X-Mailer: git-send-email 2.47.3
+Subject: [PATCH][walnascar 1/5] emacs: patch CVE-2024-30202
+Date: Mon,  6 Oct 2025 14:06:26 +0200
+Message-ID: <20251006120630.414259-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDA0MDAxOSBTYWx0ZWRfX1DMEvwnZZS3D
- YeDNLP+VRcp9mk0br3fhRLAkxTRwTzZonvT2wIJeem9BOiWPeVwkQ2ZOp7MXap5zYsnMKvhZ9nc
- Ju0v365rt1V95cvEBMDGS1JzeLi7si57JCwKgkBvegf+pRm92NIi4IQF8G//NhIht3KqFsjvD8k
- HQZS7WHpSIfImFhtn79HtzMKO4ELqmVz/wx4eZww6uhXjeDsgljeEtxHZjWyPJ4jEp3jrq3KJ6C
- bq9DWp3cmhEZjT5E8xDCJDk23yeFKV1x2cGPSRTxiY726qKl3m1m5Ia/ftqVk2lqSA7EtYjWQHU
- /me+UU2Zf1M5m+SfHLUSYtPs11j0FmpSEQ9TUoZyYBK1uEVc4Ls5jlRgLQ/qele8aZtRsn2drpP
- CvWK2Vy+HMaXFMnxkZKWNi1QUAckkA==
-X-Authority-Analysis: v=2.4 cv=B6O0EetM c=1 sm=1 tr=0 ts=68e3a31b cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=x6icFKpwvdMA:10
- a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=Twxob6C6j_Ruj8NmyfsA:9
- a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-GUID: 7nl7iYhj8G17Lfvut4INsm5UFjinH-_5
-X-Proofpoint-ORIG-GUID: 7nl7iYhj8G17Lfvut4INsm5UFjinH-_5
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-10-06_04,2025-10-02_03,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 lowpriorityscore=0 adultscore=0
- impostorscore=0 spamscore=0 bulkscore=0 phishscore=0 malwarescore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2509150000
- definitions=main-2510040019
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 11:08:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120277
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 12:06:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120278
 
-Add recipe to build a small OpenCL benchmark program to measure peak
-GPU/CPU performance.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-30202
 
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Backport the patch mentioned in the details of the link.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../opencl-benchmark/opencl-benchmark_1.9.bb  | 27 +++++++++++++++++++
- 1 file changed, 27 insertions(+)
- create mode 100644 meta-oe/recipes-core/opencl-benchmark/opencl-benchmark_1.9.bb
+ meta-oe/recipes-support/emacs/emacs_29.1.bb   |  1 +
+ ...et-templates-Prevent-code-evaluation.patch | 47 +++++++++++++++++++
+ 2 files changed, 48 insertions(+)
+ create mode 100644 meta-oe/recipes-support/emacs/files/0001-org-macro-set-templates-Prevent-code-evaluation.patch
 
-diff --git a/meta-oe/recipes-core/opencl-benchmark/opencl-benchmark_1.9.bb b/meta-oe/recipes-core/opencl-benchmark/opencl-benchmark_1.9.bb
+diff --git a/meta-oe/recipes-support/emacs/emacs_29.1.bb b/meta-oe/recipes-support/emacs/emacs_29.1.bb
+index 5cbe4551c0..3701e17025 100644
+--- a/meta-oe/recipes-support/emacs/emacs_29.1.bb
++++ b/meta-oe/recipes-support/emacs/emacs_29.1.bb
+@@ -9,6 +9,7 @@ SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz \
+ SRC_URI:append:class-target = " \
+     file://use-emacs-native-tools-for-cross-compiling.patch \
+     file://avoid-running-host-binaries-for-sanity.patch \
++    file://0001-org-macro-set-templates-Prevent-code-evaluation.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "d2f881a5cc231e2f5a03e86f4584b0438f83edd7598a09d24a21bd8d003e2e01"
+diff --git a/meta-oe/recipes-support/emacs/files/0001-org-macro-set-templates-Prevent-code-evaluation.patch b/meta-oe/recipes-support/emacs/files/0001-org-macro-set-templates-Prevent-code-evaluation.patch
 new file mode 100644
-index 000000000000..e0a9f332415c
+index 0000000000..c88843da59
 --- /dev/null
-+++ b/meta-oe/recipes-core/opencl-benchmark/opencl-benchmark_1.9.bb
-@@ -0,0 +1,27 @@
-+SUMMARY = "a small OpenCL benchmark program to measure peak GPU/CPU performance"
-+DESCRIPTION = "A small program, allowing to benchmark OpenCL performans using GPU or CPU drivers."
-+HOMEPAGE = "https://github.com/ProjectPhysX/OpenCL-Benchmark"
++++ b/meta-oe/recipes-support/emacs/files/0001-org-macro-set-templates-Prevent-code-evaluation.patch
+@@ -0,0 +1,47 @@
++From 7b1f10c152e69a32155c0291b9c8e83a8e28ebff Mon Sep 17 00:00:00 2001
++From: Ihor Radchenko <yantar92@posteo.net>
++Date: Tue, 20 Feb 2024 12:19:46 +0300
++Subject: [PATCH] org-macro--set-templates: Prevent code evaluation
 +
-+SRC_URI = "git://github.com/ProjectPhysX/OpenCL-Benchmark;protocol=https;branch=master;tag=v${PV}"
-+SRCREV = "3b669592e21e1deaa025b83953d85e41545dd949"
++* lisp/org/org-macro.el (org-macro--set-templates): Get rid of any
++risk to evaluate code when `org-macro--set-templates' is called as a
++part of major mode initialization.  This way, no code evaluation is
++ever triggered when user merely opens the file or when
++`mm-display-org-inline' invokes Org major mode to fontify mime part
++preview in email messages.
 +
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=f7884ffa0d4385c62b5d649de8c4c8da"
++CVE: CVE-2024-30202
 +
-+inherit features_check
++Upstream-Status: Backport [https://cgit.git.savannah.gnu.org/cgit/emacs.git/commit/?h=emacs-29&id=befa9fcaae29a6c9a283ba371c3c5234c7f644eb]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ lisp/org/org-macro.el | 9 ++++++++-
++ 1 file changed, 8 insertions(+), 1 deletion(-)
 +
-+REQUIRED_DISTRO_FEATURES = "opencl"
-+
-+DEPENDS = "opencl-clhpp virtual/libopencl1"
-+
-+# There is no Makefile, duplicate what make.sh is doing, while also enabling OE
-+# build flags and building and linking against normal CL headers / lib
-+do_compile() {
-+    ${CXX} ${CPPFLAGS} ${CXXFLAGS} ${LDFLAGS} -std=c++17 -pthread \
-+        ${S}/src/*.cpp -o ${B}/OpenCL-Benchmark -lOpenCL
-+}
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m 0755 ${B}/OpenCL-Benchmark ${D}${bindir}
-+}
--- 
-2.47.3
-
++diff --git a/lisp/org/org-macro.el b/lisp/org/org-macro.el
++index 481e431..a3b5c6e 100644
++--- a/lisp/org/org-macro.el
+++++ b/lisp/org/org-macro.el
++@@ -109,6 +109,13 @@ previous one, unless VALUE is nil.  Return the updated list."
++   (let ((new-templates nil))
++     (pcase-dolist (`(,name . ,value) templates)
++       (let ((old-definition (assoc name new-templates)))
+++        ;; This code can be evaluated unconditionally, as a part of
+++        ;; loading Org mode.  We *must not* evaluate any code present
+++        ;; inside the Org buffer while loading.  Org buffers may come
+++        ;; from various sources, like received email messages from
+++        ;; potentially malicious senders.  Org mode might be used to
+++        ;; preview such messages and no code evaluation from inside the
+++        ;; received Org text should ever happen without user consent.
++         (when (and (stringp value) (string-match-p "\\`(eval\\>" value))
++           ;; Pre-process the evaluation form for faster macro expansion.
++           (let* ((args (org-macro--makeargs value))
++@@ -121,7 +128,7 @@ previous one, unless VALUE is nil.  Return the updated list."
++ 		      (cadr (read value))
++ 		    (error
++                      (user-error "Invalid definition for macro %S" name)))))
++-	    (setq value (eval (macroexpand-all `(lambda ,args ,body)) t))))
+++	    (setq value `(lambda ,args ,body))))
++         (cond ((and value old-definition) (setcdr old-definition value))
++ 	      (old-definition)
++ 	      (t (push (cons name (or value "")) new-templates)))))
 
