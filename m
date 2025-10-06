@@ -2,138 +2,101 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10B1CCCA470
-	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 20:18:48 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
- by mx.groups.io with SMTP id smtpd.web11.2378.1759781918440770214
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20999CCA470
+	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 20:29:08 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+ by mx.groups.io with SMTP id smtpd.web10.2672.1759782545995633195
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Oct 2025 13:18:38 -0700
+ Mon, 06 Oct 2025 13:29:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=afbTS7KO;
- spf=pass (domain: gmail.com, ip: 209.85.208.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-63163a6556bso11939080a12.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 13:18:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=N07y8sB3;
+ spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-6395172532fso7036620a12.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 13:29:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759781917; x=1760386717; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759782544; x=1760387344; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yCAR4D6aK0DrtoxJmraRvbzYA2tVavFpTS9w/axtNVI=;
-        b=afbTS7KOWwwlcvWiMDJqGm7eEw5Bq5JZhwhh6TeEY+OdWXDDiWuzK1gMepN8M0RX/K
-         XIGW57o0WHHmqnBHOQ8Ax+1k6wqdgVF/kNgoUaTmps/EPGFmy+6v4ejo5CaDEOKe5pvR
-         XLpdwoIyFTpKOXZZnKcNwy5QDuhdLgHNi3nvP6pr/qxFmV2zJV/FBaL/6YzgcE1lEcZp
-         DLyURovXUrQt3r4acsEmJ/iq706YAAahBqV189kH6Ga8LOqknxvdRx1HlPQi0l/6c9rq
-         50eIld1wAVE45u5a8jvZ9eggYnzVA897ctiUTz16ndRHnEONPhCAmS2A5f0LTs/GZMto
-         NCSg==
+        bh=7N45C8DKyyOPICZ/Y1GwI/AYodAptBhF/otLA5MtxOQ=;
+        b=N07y8sB3RiWzQ5ttGisMec9qaWi0GRzoNFrRw/xqvQG6ObJYFnnoPi0+dS9b09GPwb
+         2nHsn242LH40WzIw7dy+UasJrsuz+lqBdVG+Bl8VB0S0lgP+r94AyaWqzBBhMQDxptHj
+         CyQoiANGsCLVJbFZ7USjsM8q7JQUpyWXgDo2E//Dba3r7TfSrMpsiJu3Or5XyJLqMStE
+         0WZ1A6/lN44aI8Ym5TVN/yMjmXFdzrWFbmSGc5yKGLGOxE6m4s7IvaB4OHxfbGSZSVFo
+         n2lxt/N2a9wgvhdDOvhkxq1ScRpQYsPnhitiz9NLPmwVnR47Ed76/EOPec5hjeQ+XPvu
+         5gsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759781917; x=1760386717;
+        d=1e100.net; s=20230601; t=1759782544; x=1760387344;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=yCAR4D6aK0DrtoxJmraRvbzYA2tVavFpTS9w/axtNVI=;
-        b=vVhillXLcOaZ0gCGcBXQ0FkfkfNE7dFCF3Vv/lbDUUKDBgqxj+n1bPls3yhx4dc1+L
-         5Vnit7tslMW9jGKv2BJebbbmAYxEB8mPjsCnr34E2T2LUSHUEXaSXQ1+TqMvWCuVOaYh
-         0hE78afEA4P/sp364nLQPJt4Br8UcAMx3vVe+ScCD2P7BtWcinvuRMUTVzGqHTIkmYLM
-         jGj8uHZM40vMV/Xd6cHyNeeJIp+1mSLhMKYBiW5boHivKQSorwcrvwFBP5gh6SLaN8Zq
-         UpPKWn7++fHjHKJMX5RVp33vr8TSH2pbbUA+8cq4jA+dxS84VL2D2KdYSqRbHksbsSPC
-         4ngQ==
-X-Gm-Message-State: AOJu0YzEHlqPjLQfj0rATSF9lQqcdDgm795fltEtLIgNN9k+F0XdBnXS
-	TKgJD3It7eRQ0kDgPIHkEhmdzhMubZQKu1xZPgL9PHmAkUtwu1MHX7jxV33Pag==
-X-Gm-Gg: ASbGncvObx/JisP+gyV6GGPUhwqljUhGWRYfe9yZxhyxVCczdj7uVhWiYRhdcVzyAlO
-	7N7lvAq/v8XIOrdqw+GuC3Lw0sR9CL22kyjbnswZbq+N+PtfVnTbYOf7NZxHUnZ5S3AuL5gGgQL
-	XJu11fjIiZRoQdht2/ub2EdYFAhS883o/4qVp0w+p5mvLLKXBE41V3Nu9j4nr+E/y6VOvC4LfsZ
-	U7P5B4t0LLfd2OPONDsCytiSNO8gKRznZ/9ubGBEWSx1HTISZbUYsdXdRMD1lQRz+UQtV+axVo2
-	FkXcuO91w5H0VfMN1Q+nk0EOhbhNbBUOu9xrJuM0GIvLB/IgS0ZIQMJIrL7khrv8nT4wD81P1cH
-	m+qkGTIdfjhIzzvb+ENxwy5uR8Q4ig9xzQCDFHnQ6kvLgaYCRIURgJgE=
-X-Google-Smtp-Source: AGHT+IGLSzsCXTjMQMR95gpT6oWiixM56BAIblmssHej+KWE7c75M2VQFKQ4kgTpaT868W/R5/SNFA==
-X-Received: by 2002:a05:6402:3548:b0:631:e73a:e9e9 with SMTP id 4fb4d7f45d1cf-63939c29df2mr16018250a12.35.1759781916365;
-        Mon, 06 Oct 2025 13:18:36 -0700 (PDT)
+        bh=7N45C8DKyyOPICZ/Y1GwI/AYodAptBhF/otLA5MtxOQ=;
+        b=BSTY1AJIrMgT+t5BwXdKcNbW9BKE6rS8CsbWwuVKSha/wjvfHrXK17q1sutfosCRjt
+         DvGQQs6lKuXJwzgMuQK5GJVr45A38GwY/0PYH7uVf5WstU645+VkRUHD/abMkhPFCR1h
+         dwtJVp6Fw2hs69XjitRE1MF3LXJG16TUYZ8COatY9WukTap8A7RiC7SDuArDlm2JrpI8
+         aQatazS7cPkvAwtftyPOeuFmB8OOKTBcchFF99rm0dIR/gzmBPWMtxcIfAgCiierbjZn
+         j8AS82xQRUZ395e2N6NRJVWqiPh3gN8n+QuiMWYRctPZ1U3addttZZP6z4ATDnUm9xaB
+         Pwog==
+X-Gm-Message-State: AOJu0YyRubheJKUXjC3/RdlaBlOxepzpuJ62WnE2iFukUrkf2ZA/LPrI
+	oeAG9lQmfDVRnVXZhMZXXWJf0LxPnp6XfvzSQXAVyXN2NE5S/7d5jYy0e6a5Hg==
+X-Gm-Gg: ASbGnctb0mgkgsR6Je1r38va52H/G6QVIzCZZ38i7s4OLMz3Qys8pGFYirmYFWfi0kR
+	XXseBqnH046Zldj0WgbYjZPxtrl96SeWJJBEx9NV+2UnhX1kEBhDz+UMTS1BcHfqp2Re+2SL/zQ
+	q9PUaJb2KT5n1Exqi4Fl/Zph5GcsTpgnx6Z1x46bsA1ZhQrgzWACUg2Zgu8qoCXQnU0pF9ImYWR
+	Dupfh4O7MAjfK9WMYNl6rCSIGnTKc3FlSGHR3OqaFy6N4PJ9x38omkYY3tyJwX0/N5M/kHM+aQL
+	B3mISeUEwBF5VVHQOVdLmIv4qQHPPHHd7l5f34xxDQkpSjj3YEfdfUP/R3LQFEyL27dAqysV5on
+	6XzlXBl+4BRa+S5kwIghChLj0LqPVGsvKTn+Xj1+7+YFf
+X-Google-Smtp-Source: AGHT+IFQazyF1P7FLa/KZvUV8vOZegy+MdQctVc3moS4mNwxzkcqC9VFK0ZNEmWkokUruEH70HeTew==
+X-Received: by 2002:a05:6402:786:b0:634:c4b4:e627 with SMTP id 4fb4d7f45d1cf-63939c26104mr11071346a12.29.1759782544048;
+        Mon, 06 Oct 2025 13:29:04 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63788100129sm10916410a12.24.2025.10.06.13.18.35
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-637881000e8sm10953838a12.32.2025.10.06.13.29.03
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Oct 2025 13:18:35 -0700 (PDT)
+        Mon, 06 Oct 2025 13:29:03 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] tinyproxy: upgrade 1.11.1 -> 1.11.2
-Date: Mon,  6 Oct 2025 22:18:35 +0200
-Message-ID: <20251006201835.2015012-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] redis: upgrade 6.2.18 -> 6.2.20
+Date: Mon,  6 Oct 2025 22:29:02 +0200
+Message-ID: <20251006202902.2137866-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 20:18:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120314
-
-This upgrade contains fixes for CVE-2023-49606 and CVE-2022-40468.
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 20:29:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120315
 
 Changelog:
-https://github.com/tinyproxy/tinyproxy/compare/1.11.1...1.11.2
+
+6.2.19:
+(CVE-2025-32023) Fix out-of-bounds write in HyperLogLog commands
+(CVE-2025-48367) Retry accepting other connections even if the accepted connection reports an error
+
+6.2.20:
+(CVE-2025-49844) A Lua script may lead to remote code execution
+(CVE-2025-46817) A Lua script may lead to integer overflow and potential RCE
+(CVE-2025-46818) A Lua script can be executed in the context of another user
+(CVE-2025-46819) LUA out-of-bound read
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../tinyproxy/tinyproxy/CVE-2022-40468.patch  | 33 -------------------
- ...inyproxy_1.11.1.bb => tinyproxy_1.11.2.bb} |  3 +-
- 2 files changed, 1 insertion(+), 35 deletions(-)
- delete mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
- rename meta-networking/recipes-support/tinyproxy/{tinyproxy_1.11.1.bb => tinyproxy_1.11.2.bb} (90%)
+ .../recipes-extended/redis/{redis_6.2.18.bb => redis_6.2.20.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/redis/{redis_6.2.18.bb => redis_6.2.20.bb} (96%)
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
-deleted file mode 100644
-index 4e2157ca75..0000000000
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2022-40468.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From 3764b8551463b900b5b4e3ec0cd9bb9182191cb7 Mon Sep 17 00:00:00 2001
--From: rofl0r <rofl0r@users.noreply.github.com>
--Date: Thu, 8 Sep 2022 15:18:04 +0000
--Subject: [PATCH] prevent junk from showing up in error page in invalid
-- requests
--
--fixes #457
--
--https://github.com/tinyproxy/tinyproxy/commit/3764b8551463b900b5b4e3ec0cd9bb9182191cb7
--Upstream-Status: Backport
--CVE: CVE-2022-40468
--Signed-off-by: Chee Yang Lee <chee.yang.lee@intel.com>
-----
-- src/reqs.c | 4 ++++
-- 1 file changed, 4 insertions(+)
--
--diff --git a/src/reqs.c b/src/reqs.c
--index bce69819..45db118d 100644
----- a/src/reqs.c
--+++ b/src/reqs.c
--@@ -343,8 +343,12 @@ static struct request_s *process_request (struct conn_s *connptr,
--                 goto fail;
--         }
-- 
--+        /* zero-terminate the strings so they don't contain junk in error page */
--+        request->method[0] = url[0] = request->protocol[0] = 0;
--+
--         ret = sscanf (connptr->request_line, "%[^ ] %[^ ] %[^ ]",
--                       request->method, url, request->protocol);
--+
--         if (ret == 2 && !strcasecmp (request->method, "GET")) {
--                 request->protocol[0] = 0;
-- 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.2.bb
-similarity index 90%
-rename from meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-rename to meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.2.bb
-index 4f52ee2ba6..5b8e9dcd7a 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.2.bb
-@@ -7,10 +7,9 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
-            file://disable-documentation.patch \
-            file://tinyproxy.service \
-            file://tinyproxy.conf \
--           file://CVE-2022-40468.patch \
-            "
+diff --git a/meta-oe/recipes-extended/redis/redis_6.2.18.bb b/meta-oe/recipes-extended/redis/redis_6.2.20.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/redis/redis_6.2.18.bb
+rename to meta-oe/recipes-extended/redis/redis_6.2.20.bb
+index 171c6640f2..f2e6175462 100644
+--- a/meta-oe/recipes-extended/redis/redis_6.2.18.bb
++++ b/meta-oe/recipes-extended/redis/redis_6.2.20.bb
+@@ -18,7 +18,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+           "
  
--SRC_URI[sha256sum] = "1574acf7ba83c703a89e98bb2758a4ed9fda456f092624b33cfcf0ce2d3b2047"
-+SRC_URI[sha256sum] = "2c8fe5496f2c642bfd189020504ab98d74b9edbafcdb94d9f108e157b5bdf96d"
+-SRC_URI[sha256sum] = "470c75bac73d7390be4dd66479c6f29e86371c5d380ce0c7efb4ba2bbda3612d"
++SRC_URI[sha256sum] = "7f8b8a7aed53c445a877adf9e3743cdd323518524170135a58c0702f2dba6ef4"
  
- UPSTREAM_CHECK_URI = "https://github.com/tinyproxy/tinyproxy/releases"
+ inherit update-rc.d systemd useradd
  
 
