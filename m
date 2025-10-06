@@ -1,116 +1,374 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3AB23CAC5B8
-	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 15:56:30 +0000 (UTC)
-Received: from mail-yx1-f42.google.com (mail-yx1-f42.google.com [74.125.224.42])
- by mx.groups.io with SMTP id smtpd.web10.37508.1759766184962206422
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA6C1CCA471
+	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 16:21:31 +0000 (UTC)
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web11.542.1759767689899971658
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Oct 2025 08:56:25 -0700
+ Mon, 06 Oct 2025 09:21:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Req4/kLz;
- spf=pass (domain: gmail.com, ip: 74.125.224.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-633b87e7b9fso4745369d50.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 08:56:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QWCgNz6R;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-b3c2db014easo653143366b.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 09:21:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759766184; x=1760370984; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zJjE3M7HvGukZkIdwx867aq9KwkwAhUTuMkOb4rNKxw=;
-        b=Req4/kLzKKgDdamODzFAgIno468uav37hP1WcprMmO2AuW7KpUai/0wxhcvf4Mioku
-         NGiO5a2ifAPPdDpLpfdLBCzCReISwzd6E6pCXkTIJPu8ZibHt/Dh86TjqnA02sX4oHhC
-         PTD4WP5cS9mL6O7Tmmg4FK+p7OKUtXd/HFoMS1JvsNHw3dYtz6lq9WubfAVHbNLLhPPm
-         BUdYDYmP5rWvIquaW4PVadDo0eTSPVhI2rzUKmKXINuKGXzwU5K6DNLXUj4vRsHM1Jzi
-         OiREwgeVrQiFCZmyLGtQAW3SZNeLh5+ODTAFQIa6gQFQi7iaXagykAYokA/DzBBzESV4
-         iUQQ==
+        d=gmail.com; s=20230601; t=1759767688; x=1760372488; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8Oj0BgzNQUldfLcTbw/jZyqJlvOxTHoZ0EmcSFr6Nh0=;
+        b=QWCgNz6RQkLuqH1yip7StMyGwxvasxXXL5+QkwuQlZHNKe0jlhoxb37RBC8N1BJPeT
+         qgmxPvdYa5lKmkH6kjVpUfpBbFW+1vN0fKQscpvaWhYojz5LT1KP53EBzFV2y8wqzUNT
+         EH4jQbZPJwHcioek4KXDd1YQclTvgk2yWHiHZyDvSouuZtEeuMnn34miQy0sEhBViPyU
+         gZhwNpXRwm/Px+mMW+aUvNRnQZF9V+SllvVbawnh997pkpZVtZkpG7zLGn8axB1an+Fr
+         Y9prYwOBeVhutGz7FVJ5hKZhxxZYR3JLww1/CuUHZWfqUjdSX5lUG0SYuLVh/DvDPCIz
+         H6cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759766184; x=1760370984;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=zJjE3M7HvGukZkIdwx867aq9KwkwAhUTuMkOb4rNKxw=;
-        b=k4cL/K2YjTCeaqp0uVLQoZ5knaWlxxCz8aw1G+y1woAxvEPbRSj0dlhPHnRf0OQTws
-         3ZNUdkIo4Y/9oBKzMPuL+koQtjyi1yCx8ZrqSgYHn8MVqvjby+0SeROUQKlPQZcTm+3L
-         Z0mzbi7g+5txBXY6+NL3Stl1GWCQJJ1ml0C9teOqbeswXmkMWdm/thYAfCo9jAncV4NO
-         RXxEWnHw4cWyZi2wsTIJTNf9LkCVhovmnKtxECNp0mN5BbrbCYgSgJIduXB+CVN0+Zcq
-         RxXyEG0E147KSm9BNGl3/saVSC60OUf7hjmiVIeqje+bDwXeMrhffj3AOoaw4VWPYyyn
-         utow==
-X-Gm-Message-State: AOJu0YzE2I2Yms2RDp9KkH5b1kIa8CZWhQYZ5s7Dj8NkvKppcR4Uy+Rw
-	v7tvBWu68zlluzMP+ONTqyDQB/Eg1aJl0JXSPPlAbKyLOGg+OxAI/Z1a1GlAuCbXISxuq6AHrUu
-	jMoxeP0O/E1OUXaNmZVTbCWARBV7+qMTaQfXqifk=
-X-Gm-Gg: ASbGncsvenz5qKyvDgY4ijuO3wa6NBLLd3v4KRAqB9MAsxn+HELdzZLaBnTWdJaVJ76
-	fnsaPGDFwzgi70aQ1b+xpl38v4g8f/H1cEB69q+fSvVTNgOvb6VlSnKOiJ/tw2JKjdux88P3j9t
-	Ut7mPjC7h8ewjgFRRll7lY0f8o14ZS0gP63BXpBbENAqmg+75Ur3SgD9iNGMNGK4QiRFxH5GMR1
-	Qr1gf0dtfNmX91sE3WvfVOEo2zAtl3S8taTKE/VIaEaRZZqNBll5UolusA3MPqgT3Wf810SkAoh
-	q6a5UN8PAfcyqbjJjECoP0VZ4xGMXjQgurUseqWCL/RDLiWNGXQLX73iCNfV85l9LzG5WF8BwRN
-	9IIZqcJegJ/PrlGEQ
-X-Google-Smtp-Source: AGHT+IESewRahx5MdA56PUGEYk87oHb4Fp25vc49IvkhIiOVlf91s/BNxMbiP317WFuL62ZFss42/duN7eZXeNAdaj0=
-X-Received: by 2002:a53:4203:0:b0:632:eae9:5cfb with SMTP id
- 956f58d0204a3-63b9a0eccdfmr8344030d50.29.1759766183896; Mon, 06 Oct 2025
- 08:56:23 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1759767688; x=1760372488;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=8Oj0BgzNQUldfLcTbw/jZyqJlvOxTHoZ0EmcSFr6Nh0=;
+        b=dCG+bvxfGzn9Fv+V14qWSIQ6hpgB7u/1e2WlruP2lT7NPzyr8B74kgSufOXVtbEfV/
+         BLYwrxBJsE2qULzt4UTN44tkQYXCw/g81h7S5KJNkwffAfhabia5nEhS13nLjNfwPXYD
+         kiY2R48lE34hCacAGMo3jBH23CYmYf8urJMU+SSEtbZI4pgY7rEpTK/rpmGtDHNZgJly
+         GeSUHsVFJnHaZOMaHM7tCOB5Ll0nJUgm02ulGXyEBBaRnUZrsUFayLT2k8X75Lu7EMP6
+         98oh/nH6w6OJ1EhlKlmCK7IQYMX1lnLRV2JiFJZgO3RpI2d4ugtfSeD7bRWBqOjUjH5e
+         oagA==
+X-Gm-Message-State: AOJu0YyQC7l9lcFr4oBsuFjQyka79wcRkcVJZrU+CJpVnehMmCXEIhYd
+	eWZkZrPgVKYU4of3KQn5oVaIqkiU+Q4pPcFVuW1x7X1u8SNtWEC7+eHYV3HlBw==
+X-Gm-Gg: ASbGncseFIobzRokAWODtGnVYAMAJy9TDhCjqMUV3WMNqF7iFEab7hNhRhyvzg/1u+h
+	7D5vHnypf2UkM+ZrZDzmUgt+W13dgVkbC1eCT/NpIfNCBsy5s29v0t8vBdQX8EGF7TR5XX1BMnB
+	C7kfbU1yYbpwWATmTQFwnB9WEFDPtZJJjKpPeQgul/LaBekr2uw1blcnbV1Uz89EwdPwoz5HiMN
+	uhTDjOGLAeGwZLeLzh0T47cJXQV2m/taK+u/r6DsIGHJEvYyyeCC1umy7qTckETHPjbMAtcU0Ga
+	betQXW8agJbONDvvx51aso9IdRCy9s671vNEgqG2t56tfkIagO56g6Wo9dGT8Wo0OVr2vxmQa44
+	cIeqdS5NUoDtjQHMO187v+RqJO+Rv7u98m7xOPlQkWXTnEu72C2dDX2k=
+X-Google-Smtp-Source: AGHT+IEt+DZqcDf83dLq2JJbVNm+fBVCmB5sePsliYFNV/YzslBP52yRqNuYI0+yrb+5eksZ7ibm4A==
+X-Received: by 2002:a17:907:7244:b0:b3a:7af8:c4a2 with SMTP id a640c23a62f3a-b49c038f719mr1801302566b.10.1759767687966;
+        Mon, 06 Oct 2025 09:21:27 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4865f7420asm1167974266b.43.2025.10.06.09.21.27
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 06 Oct 2025 09:21:27 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] gnuplot: upgrade 5.4.3 -> 6.0.3
+Date: Mon,  6 Oct 2025 18:21:25 +0200
+Message-ID: <20251006162126.4190341-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20251003100049.1695-1-joao.lima@hbkworld.com> <20251003100049.1695-2-joao.lima@hbkworld.com>
-In-Reply-To: <20251003100049.1695-2-joao.lima@hbkworld.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 6 Oct 2025 08:55:57 -0700
-X-Gm-Features: AS18NWC_SsxstDf8gcDg2OOqzASAa5IrjKUHE7pIZIESpfK5jdRXiPazUrE0SHY
-Message-ID: <CAMKF1sp77Rzw-75wG3tMOLV_ANOGgTwK5XQGdVucPY1_Jt33ow@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH 1/2] openocd: bump the openocd, jimtcl versions
-To: =?UTF-8?B?TGltYSwgSm/Do28=?= <joao.raul.434@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, joao.lima@hbkworld.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 15:56:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120302
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 16:21:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120303
 
-This fails to fetch see
-https://errors.yoctoproject.org/Errors/Details/884640/
+This upgrade includes fixes for the following vulnerabilities:
+CVE-2025-31176
+CVE-2025-31178
+CVE-2025-31179
+CVE-2025-31180
+CVE-2025-31181
 
-maybe using GH mirror - https://github.com/openocd-org/openocd
-using
+This release supports qt4, qt5 and qt6 (the last one is new in this release).
+There are 2 qt PACKAGECONFIGs now: qt5 and qt6 - they are mutually exclusive.
 
-MIRRORS +=3D "http://repo.or.cz/openocd.git/
-https://github.com/openocd-org/openocd \n"
+Since it is being touched, also fix lua PACKAGECONFIG, which requires lua-native
+at build time.
 
-might be good to have for fall back.
+Changelog:
+http://gnuplot.info/ReleaseNotes_6_0_3.html
 
-On Fri, Oct 3, 2025 at 3:02=E2=80=AFAM Lima, Jo=C3=A3o <joao.raul.434@gmail=
-.com> wrote:
->
-> From: Joao Lima <joao.lima@hbkworld.com>
->
-> Version bumps:
->    - openocd: 91bd431 -> 66ea461
->    - jimtcl: fcbb449 -> f160866
->    - libjaylink: 9aa7a59 -> 0d23921
->
-> Signed-off-by: Joao Lima <joao.lima@hbkworld.com>
-> ---
->  meta-oe/recipes-devtools/openocd/openocd_git.bb | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/re=
-cipes-devtools/openocd/openocd_git.bb
-> index 3bbe33ca1d..3b7705c41d 100644
-> --- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> +++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> @@ -13,10 +13,10 @@ SRC_URI =3D " \
->  "
->
->  SRCREV_FORMAT =3D "openocd"
-> -SRCREV_openocd =3D "91bd4313444c5a949ce49d88ab487608df7d6c37"
-> +SRCREV_openocd =3D "66ea461846a3a4a96687c9287c3f61ae8ce0b775"
->  SRCREV_git2cl =3D "8373c9f74993e218a08819cbcdbab3f3564bbeba"
-> -SRCREV_jimtcl =3D "fcbb4499a6b46ef69e7a95da53e30796e20817f0"
-> -SRCREV_libjaylink =3D "9aa7a5957c07bb6e862fc1a6d3153d109c7407e4"
-> +SRCREV_jimtcl =3D "f160866171457474f7c4d6ccda70f9b77524407e"
-> +SRCREV_libjaylink =3D "0d23921a05d5d427332a142d154c213d0c306eb1"
->
->  PV =3D "0.12+git"
->
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../0003-Use-native-tools-to-build-docs.patch | 66 +++++++++----------
+ ...ion-to-find-qt5-and-qt6-native-tools.patch | 64 ++++++++++++++++++
+ ...gure-option-to-find-qt5-native-tools.patch | 42 ------------
+ .../{gnuplot_5.4.3.bb => gnuplot_6.0.3.bb}    | 11 ++--
+ 4 files changed, 102 insertions(+), 81 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch
+ delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-native-tools.patch
+ rename meta-oe/recipes-extended/gnuplot/{gnuplot_5.4.3.bb => gnuplot_6.0.3.bb} (77%)
+
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/0003-Use-native-tools-to-build-docs.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/0003-Use-native-tools-to-build-docs.patch
+index 7a7e550349..736dff13e1 100644
+--- a/meta-oe/recipes-extended/gnuplot/gnuplot/0003-Use-native-tools-to-build-docs.patch
++++ b/meta-oe/recipes-extended/gnuplot/gnuplot/0003-Use-native-tools-to-build-docs.patch
+@@ -23,29 +23,26 @@ diff --git a/docs/Makefile.am b/docs/Makefile.am
+ index b20918a..47406eb 100644
+ --- a/docs/Makefile.am
+ +++ b/docs/Makefile.am
+-@@ -156,7 +156,7 @@ gnuplot-groff.ps: gnuplot.ms $(srcdir)/titlepag.ms
++@@ -175,7 +175,7 @@
++ 	$(AM_V_GEN) touch $@
+  
+- ### doc2xxx dependencies
+- gnuplot.ms: doc2ms$(EXEEXT) $(srcdir)/gnuplot.doc
+--	$(AM_V_GEN) ./doc2ms$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.ms "$(srcdir)/titlepag.ms"
+-+	$(AM_V_GEN) doc2ms$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.ms "$(srcdir)/titlepag.ms"
+- 
+- doc2ms_SOURCES = doc2ms.c termdoc.c
+- doc2ms_CPPFLAGS = -DALL_TERM_DOC $(AM_CPPFLAGS)
+-@@ -177,10 +177,10 @@ pdf_figures: $(GNUPLOT_EXE) $(srcdir)/plotstyles.gnu
+- 	$(AM_V_GEN)touch $@
+- 
+- figures.tex: allterm.h doc2tex$(EXEEXT) $(srcdir)/gnuplot.doc
++ gnuplot.tex: allterm.h doc2tex$(EXEEXT) $(srcdir)/gnuplot.doc
+ -	$(AM_V_GEN)./doc2tex$(EXEEXT) -figures $(srcdir)/gnuplot.doc $@
+ +	$(AM_V_GEN) doc2tex$(EXEEXT) -figures $(srcdir)/gnuplot.doc $@
+  
+- nofigures.tex: allterm.h doc2tex$(EXEEXT) $(srcdir)/gnuplot.doc
+--	$(AM_V_GEN)./doc2tex$(EXEEXT) $(srcdir)/gnuplot.doc $@
+-+	$(AM_V_GEN) doc2tex$(EXEEXT) $(srcdir)/gnuplot.doc $@
+- 
+- pdf: gnuplot.pdf
+- pdf_nofig: nofigures.pdf
+-@@ -260,7 +260,7 @@ gnuplot.ps: gnuplot.dvi
++ pdf: pdf_figures
++ 	$(MAKE) gnuplot.pdf
++@@ -255,7 +255,7 @@
++
++ gnuplot-ja.pdf: gnuplot-ja.doc title-ja.tex pdf_figures allterm-ja.h doc2tex$(EXEEXT)
++ 	iconv -f EUC-JP -t UTF-8 gnuplot-ja.doc > ja.doc
++-	./doc2tex$(EXEEXT) -figures -japanese ja.doc | sed 's/titlepag.tex/title-ja.tex/' > gnuplot-ja.tex
+++	doc2tex$(EXEEXT) -figures -japanese ja.doc | sed 's/titlepag.tex/title-ja.tex/' > gnuplot-ja.tex
++ 	lualatex gnuplot-ja
++ 	lualatex gnuplot-ja
++ 	makeindex gnuplot-ja
++
++@@ -268,7 +268,7 @@ gnuplot.ps: gnuplot.dvi
+  hlp: gnuplot.hlp
+  
+  gnuplot.hlp: doc2hlp$(EXEEXT) $(srcdir)/gnuplot.doc
+@@ -54,7 +51,7 @@ index b20918a..47406eb 100644
+  
+  doc2hlp_SOURCES = doc2hlp.c termdoc.c
+  
+-@@ -268,14 +268,14 @@ doc2hlp_SOURCES = doc2hlp.c termdoc.c
++@@ -276,14 +276,14 @@ doc2hlp_SOURCES = doc2hlp.c termdoc.c
+  gih: gnuplot.gih
+  
+  gnuplot.gih: doc2gih$(EXEEXT) $(srcdir)/gnuplot.doc
+@@ -71,7 +68,7 @@ index b20918a..47406eb 100644
+  
+  alldoc2gih_SOURCES = doc2gih.c termdoc.c
+  alldoc2gih_CPPFLAGS = -DALL_TERM_DOC $(AM_CPPFLAGS)
+-@@ -290,7 +290,7 @@ $(srcdir)/windows/wgnuplot.hhk
++@@ -298,7 +298,7 @@ $(srcdir)/windows/wgnuplot.hhk
+  wxhelp/wgnuplot.hhc wxhelp/wgnuplot.hhk wxhelp/*.html windows/*.png
+  
+  wxhelp/wgnuplot.html: doc2wxhtml$(EXEEXT) $(srcdir)/gnuplot.doc 
+@@ -80,7 +77,16 @@ index b20918a..47406eb 100644
+  
+  doc2wxhtml_SOURCES = windows/doc2html.c termdoc.c xref.c allterm.h
+  doc2wxhtml_CPPFLAGS = -DALL_TERM_DOC -DWXHELP -I../src $(AM_CPPFLAGS)
+-@@ -340,7 +340,7 @@ install-info: gnuplot.info
++@@ -318,7 +318,7 @@
++ 	$(AM_V_at) [ -d html ] || mkdir -p html
++ 	$(AM_V_at) rm -f html/Overview.html html/Plotting_Styles.html html/Commands.html html/Terminals.html
++ 	$(AM_V_at) rm -f html/NewFeatures.html
++-	$(AM_V_GEN)./doc2web$(EXEEXT) $(srcdir)/gnuplot.doc html
+++	$(AM_V_GEN) doc2web$(EXEEXT) $(srcdir)/gnuplot.doc html
++ 	$(AM_V_GEN) sort -k 3 html/index.hhk > html/index.html
++ 
++ svg_figures: $(GNUPLOT_EXE) $(srcdir)/plotstyles.gnu
++@@ -372,7 +372,7 @@ install-info: gnuplot.info
+  ipf: gnuplot.ipf
+  
+  gnuplot.ipf: doc2ipf$(EXEEXT) $(srcdir)/gnuplot.doc
+@@ -89,7 +95,7 @@ index b20918a..47406eb 100644
+  
+  doc2ipf_SOURCES = doc2ipf.c termdoc.c xref.c
+  
+-@@ -348,7 +348,7 @@ doc2ipf_SOURCES = doc2ipf.c termdoc.c xref.c
++@@ -380,7 +380,7 @@ doc2ipf_SOURCES = doc2ipf.c termdoc.c xref.c
+  rtf: gnuplot.rtf
+  
+  gnuplot.rtf: doc2rtf$(EXEEXT) $(srcdir)/gnuplot.doc
+@@ -98,22 +104,12 @@ index b20918a..47406eb 100644
+  
+  doc2rtf_SOURCES = doc2rtf.c termdoc.c xref.c
+  
+-@@ -356,13 +356,13 @@ doc2rtf_SOURCES = doc2rtf.c termdoc.c xref.c
+- rnh: gnuplot.rnh
+- 
+- gnuplot.rnh: doc2rnh$(EXEEXT) $(srcdir)/gnuplot.doc
+--	$(AM_V_GEN) ./doc2rnh$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.rnh
+-+	$(AM_V_GEN) doc2rnh$(EXEEXT) $(srcdir)/gnuplot.doc gnuplot.rnh
+- 
+- doc2rnh_SOURCES = doc2rnh.c termdoc.c
++@@ -386,7 +386,7 @@
+  
+  # this is how to check the gnuplot.doc file
+  check-local: checkdoc$(EXEEXT)
+ -	$(AM_V_at)./checkdoc$(EXEEXT) < $(srcdir)/gnuplot.doc; \
+ +	$(AM_V_at)checkdoc$(EXEEXT) < $(srcdir)/gnuplot.doc; \
+  	if test $$? -eq 0; then \
+- 	  echo "PASS: gnuplot.doc"; \
++          echo "PASS: gnuplot.doc"; \
+  	else \
+--- 
+-2.14.3
+-
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch
+new file mode 100644
+index 0000000000..50c0785df0
+--- /dev/null
++++ b/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch
+@@ -0,0 +1,64 @@
++From 577e21622475fa29fd471149cf2380c53fdbfcbd Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
++Date: Tue, 6 Mar 2018 22:26:48 +0100
++Subject: [PATCH] Add configure option to find qt5 native tools
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Pkg-config checks for target locations. With these qt5 tools as uic/moc..
++cannot be used.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
++---
++ configure.ac | 6 +++++-
++ 1 file changed, 5 insertions(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index cdd831a..fdd192b 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -1061,11 +1061,15 @@
++   if test "x${with_qt}" != "xqt4"; then
++     pkg_failed="not_tried"
++     if test "x${with_qt}" != "xqt5"; then
+++     AC_ARG_WITH(qt6nativesysroot,
+++       AC_HELP_STRING([--with-qt6nativesysroot=PATH], [prepend path - for native qt6 tools]),
+++      [QT6NATIVESYSROOT="$withval"], [QT6NATIVESYSROOT=""])
+++
++       AC_MSG_CHECKING([Checking for Qt6 support libraries])
++       PKG_CHECK_MODULES_NOFAIL(QT, [Qt6Core Qt6Gui Qt6Network Qt6Svg Qt6PrintSupport Qt6Widgets Qt6Core5Compat])
++     fi
++     if test $pkg_failed = no; then
++-      QT6LOC=`$PKG_CONFIG --variable=libexecdir Qt6Core`
+++      QT6LOC=${QT6NATIVESYSROOT}`$PKG_CONFIG --variable=libexecdir Qt6Core`
++       if test "x${QT6LOC}" != "x"; then
++           UIC=${QT6LOC}/uic
++           MOC=${QT6LOC}/moc
++@@ -1075,7 +1079,7 @@
++           MOC=moc-qt6
++           RCC=rcc-qt6
++       fi
++-      QT6BIN=`$PKG_CONFIG --variable=bindir Qt6Core`
+++      QT6BIN=${QT6NATIVESYSROOT}`$PKG_CONFIG --variable=bindir Qt6Core`
++       if test "x${QT6BIN}" != "x"; then
++           LRELEASE=${QT6BIN}/lrelease
++       elif test "x${LRELEASE}" = "x"; then
++@@ -1086,10 +1090,14 @@
++       AC_MSG_RESULT([The Qt terminal will use Qt6.])
++       QTVER="6"
++     else
+++     AC_ARG_WITH(qt5nativesysroot,
+++       AC_HELP_STRING([--with-qt5nativesysroot=PATH], [prepend path - for native qt5 tools]),
+++       [QT5NATIVESYSROOT="$withval"], [QT5NATIVESYSROOT=""])
+++
++       AC_MSG_CHECKING([Checking for Qt5 support libraries])
++       PKG_CHECK_MODULES_NOFAIL(QT, [Qt5Core Qt5Gui Qt5Network Qt5Svg Qt5PrintSupport])
++       if test $pkg_failed = no; then
++-        QT5LOC=`$PKG_CONFIG --variable=host_bins Qt5Core`
+++        QT5LOC=${QT5NATIVESYSROOT}`$PKG_CONFIG --variable=host_bins Qt5Core`
++         if test "x${QT5LOC}" != "x"; then
++           UIC=${QT5LOC}/uic
++           MOC=${QT5LOC}/moc
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-native-tools.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-native-tools.patch
+deleted file mode 100644
+index 7ed9e761f2..0000000000
+--- a/meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-native-tools.patch
++++ /dev/null
+@@ -1,42 +0,0 @@
+-From 577e21622475fa29fd471149cf2380c53fdbfcbd Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+-Date: Tue, 6 Mar 2018 22:26:48 +0100
+-Subject: [PATCH] Add configure option to find qt5 native tools
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-Pkg-config checks for target locations. With these qt5 tools as uic/moc..
+-cannot be used.
+-
+-Upstream-Status: Inappropriate [embedded specific]
+-
+-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+----
+- configure.ac | 6 +++++-
+- 1 file changed, 5 insertions(+), 1 deletion(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index cdd831a..fdd192b 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -1133,11 +1133,15 @@ if test "${enable_qt}" = yes ; then
+-   else
+-     try_qt4=yes
+-   fi
+-+  AC_ARG_WITH(qt5nativesysroot,
+-+    AC_HELP_STRING([--with-qt5nativesysroot=PATH], [prepend path - for native qt5 tools]),
+-+    [QT5NATIVESYSROOT="$withval"], [QT5NATIVESYSROOT=""])
+-+
+-   if test "x${with_qt}" != "xqt4"; then
+-     PKG_CHECK_MODULES_NOFAIL(QT, [Qt5Core Qt5Gui Qt5Network Qt5Svg Qt5PrintSupport])
+-     if test $pkg_failed = no; then
+-       try_qt4=no
+--      QT5LOC=`$PKG_CONFIG --variable=host_bins Qt5Core`
+-+      QT5LOC=${QT5NATIVESYSROOT}`$PKG_CONFIG --variable=host_bins Qt5Core`
+-       if test "x${QT5LOC}" != "x"; then
+-         UIC=${QT5LOC}/uic
+-         MOC=${QT5LOC}/moc
+--- 
+-2.14.3
+-
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_6.0.3.bb
+similarity index 77%
+rename from meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
+rename to meta-oe/recipes-extended/gnuplot/gnuplot_6.0.3.bb
+index 679b1a7e98..35c83fd23e 100644
+--- a/meta-oe/recipes-extended/gnuplot/gnuplot_5.4.3.bb
++++ b/meta-oe/recipes-extended/gnuplot/gnuplot_6.0.3.bb
+@@ -18,10 +18,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz;name=a
+ SRC_URI:append:class-target = " \
+     file://0002-do-not-build-demos.patch \
+     file://0003-Use-native-tools-to-build-docs.patch \
+-    file://0004-Add-configure-option-to-find-qt5-native-tools.patch \
++    file://0004-Add-configure-option-to-find-qt5-and-qt6-native-tools.patch \
+ "
+ 
+-SRC_URI[archive.sha256sum] = "51f89bbab90f96d3543f95235368d188eb1e26eda296912256abcd3535bd4d84"
++SRC_URI[archive.sha256sum] = "ec52e3af8c4083d4538152b3f13db47f6d29929a3f6ecec5365c834e77f251ab"
+ SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
+ 
+ # for building docs (they deserve it) we need *doc2* tools native
+@@ -39,14 +39,17 @@ do_install:class-native() {
+ 
+ PACKAGECONFIG ??= "cairo ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+ PACKAGECONFIG[cairo] = "--with-cairo,--without-cairo,cairo pango"
+-PACKAGECONFIG[lua] = "--with-lua,--without-lua,lua"
+-PACKAGECONFIG[qt5] = "--with-qt --with-qt5nativesysroot=${STAGING_DIR_NATIVE},--without-qt,qtbase-native qtbase qtsvg qttools-native"
++PACKAGECONFIG[lua] = "--with-lua,--without-lua,lua lua-native"
++# qt5 requires meta-qt5 layer, qt6 requires meta-qt6 layer
++PACKAGECONFIG[qt5] = "--with-qt=qt5 --with-qt5nativesysroot=${STAGING_DIR_NATIVE},,qtbase-native qtbase qtsvg qttools-native,,,qt6"
++PACKAGECONFIG[qt6] = "--with-qt --with-qt6nativesysroot=${STAGING_DIR_NATIVE},,qtbase-native qtbase qtsvg qttools-native qt5compat,,,qt5"
+ PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11"
+ 
+ EXTRA_OECONF = " \
+     --with-readline=${STAGING_LIBDIR}/.. \
+     --disable-wxwidgets \
+     --without-libcerf \
++    ${@bb.utils.contains_any('PACKAGECONFIG', 'qt5 qt6', '', '--without-qt', d)} \
+ "
+ 
+ do_compile:prepend() {
 
