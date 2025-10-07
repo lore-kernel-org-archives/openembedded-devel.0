@@ -1,150 +1,116 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D8F2CCA470
-	for <webhook@archiver.kernel.org>; Mon,  6 Oct 2025 20:35:58 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web11.2748.1759782949709421223
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07339CCA470
+	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 04:46:21 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.11675.1759812377524833479
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Oct 2025 13:35:50 -0700
+ Mon, 06 Oct 2025 21:46:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m4iCBVi4;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-b3d50882cc2so1029558966b.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 13:35:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759782948; x=1760387748; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=b51yxWgCxgyAIperDlXOJYUPOu+PobmgNwy9V+alvfQ=;
-        b=m4iCBVi4aavXJMS8ryP5g1figB4dDLp4xTuYYqnNCUBP5X+Uh6H6vtdyiY78wugcbM
-         uIWvcJy5tI5FKfW1Gxqtu/5bgI/+h0ash1ME9+2exCHBtXtUoIJkQw5S80CP79aJrDxK
-         bx4X/uxvjTTJrzIV9rj+MAG6ueNmobkTzsMz/lbeMcKkoOkZmAsYcDMe07o5cDnn+HBT
-         xl2FgQ1ILqTbmB8H8Rv9FmzlH/RjKq6W+DyodFi0wWGZ0I18v0f6TNLFRyXL1ZR/7ncs
-         vaqiGhVkbIp5pDevrj9joJBKu5ljXtexV0euhSSFZ89SvcOwxvjRBhj4FXyrwt21pcXE
-         fiPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759782948; x=1760387748;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=b51yxWgCxgyAIperDlXOJYUPOu+PobmgNwy9V+alvfQ=;
-        b=VWlTN+ZhNWYz9OVurh60Q9qWA3OvNddSBltTQpmK5HKvUR3QjtOuDB6aNZe5XoZZD3
-         sC7Rc2izkmpUDUrZwQ+tcivND2Ajb3B2WWx2bcGKYOT6hMLj+c07D3dWpNN3pzc+36qi
-         4+rAa7ZoGe2WqBKQVtpi2oGgKEqLTCbjehu5puFFnpnLndPt2fN0F1lrzQGycnaHfsMA
-         v50eSQpHFbLyIuPmMn7EjjP1K2L3uX851jQtXwMWoWNUP8HmoyB9PfGXVPVL047DznZy
-         Xd/33XdftzQQPOt4ZKsaKpUxvjtcQPn3nKmDSV9pCcJWzwT4Sjl5M908Hkj4RLbl9J0Q
-         8loA==
-X-Gm-Message-State: AOJu0YwI6ck7yzzCvXXJS7YBRuaMykYanlroUVei62D9gAkTtHiOyKee
-	ut8zFAJTT+fYy1TwP1lzNFXtieZHDgoAuPwTxoqAtrUqoIl2CCL8RaIeOF5tvA==
-X-Gm-Gg: ASbGncu2y3MjIfuLqM/teLj/EALZ2E0in9CgWntDbBCRJ+KA/DoNQd/keaKGt/RHjX0
-	74DuFnHQfTtIvn6S1LZZov5wazVa8LG5ty/Xm9PRCr/j3duIr9fVyIW12azMNJdzr6zZOtAhOCw
-	T54Wf+NOHUJDojoIdifj+oRw3ck9W33c3ZYa2i0BAwWD7LzUfB+ZiqfSqv1qMLUltkgHf/Zu/8G
-	MCodh4stjnDgJ1VodwyZ0tWewECYbuM7xcgVErbhnUOGQ8ZyfLWIPn0kncK9XWFVWwcOU0j6DvS
-	uS0OvnLUJQgNvdZIHyJZmxQeVvvneclpZw6VT/rRB5X5c1BKdYwUx8RWXB47VFP1n3XxnUuYIVq
-	3m4EOPPLrCSXkyh9Fd4kvBPDTLYlP1JCGPyTxfgoyXNm7
-X-Google-Smtp-Source: AGHT+IHXiBd6Ftod8faxM6Xjia66X+l+yfTj33mylJZg5j1rexWxCc3urWkIzy28M8SGj/Pq2lG87g==
-X-Received: by 2002:a17:907:2d1f:b0:b3f:cc6d:e0a8 with SMTP id a640c23a62f3a-b49c304d343mr1902327566b.17.1759782947781;
-        Mon, 06 Oct 2025 13:35:47 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b48652a9bd7sm1236570166b.3.2025.10.06.13.35.47
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Oct 2025 13:35:47 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] redis: upgrade 7.2.10 -> 7.2.11
-Date: Mon,  6 Oct 2025 22:35:46 +0200
-Message-ID: <20251006203546.2189796-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=tCFt5FGV;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2375c254ad=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5974ISH32180209
+	for <openembedded-devel@lists.openembedded.org>; Tue, 7 Oct 2025 04:46:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=PPS06212021;
+	 bh=n+DkszJfdgM8moWYzWXa9rsLihPeYDG/Pf2Ptkw/RN4=; b=tCFt5FGV5dvX
+	2ppkAYezh4afShTZXcJnLoGJ4w4MzaQAf6ooO8kpExwnDhcXMjhbtg9fbHsjqM3w
+	aT1Cs/p9G3CVrFHoWsIdp+Ny3dw+VvwirKtpafUXF9FxhmcpqKLOoMKQMjhkd37+
+	5vpNlnIutbDOvxA0XTWKbUZE/AqzCDx0cMy8mcUTw1NW2ov5FRvyswNnTbpW+z6I
+	T4Z8tjLdQp8sfP0cXmdNtPEaKzzjc4gT5O1A2/8HMGDKbOJPhX29Up1Nf6PBlupx
+	b8EUU9MA+SJeNzwLiSSry/GZIgzsaxt9s/sIb94f0pcFhZOwJqGOKlqZmVuvFkI9
+	P6YEKJdjXA==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49jtj3aghx-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 04:46:16 +0000 (GMT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.59; Mon, 6 Oct 2025 21:46:15 -0700
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
+ 15.1.2507.59 via Frontend Transport; Mon, 6 Oct 2025 21:46:14 -0700
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-python][PATCH 2/2] python3-django: upgrade 4.2.20 -> 4.2.24
+Date: Tue, 7 Oct 2025 10:16:08 +0530
+Message-ID: <20251007044608.1006175-2-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20251007044608.1006175-1-soumya.sambu@windriver.com>
+References: <20251007044608.1006175-1-soumya.sambu@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: aSrksa6W_zu6wJ_MGSeYW00xU6cak7zg
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDA3MDAzNSBTYWx0ZWRfX+j+U8Id4Za+r
+ 46MdldeiwNUO/XFHAoFzUAElKDZPQfdfSDtlJGFZ1VXyxF94IrOqwNLpzonWM6HqAKJ1A6KFSgi
+ gjDtJTtTXrLFV7ph5dS+m2P8A3pu9Jzcj1xcwxv2p8yZFgoWvDfaNGlH8941leqwSe5PwR42X8S
+ +YFjshHVGWoFACpIvFwJVtpvEilpfDfaN5jZl422RI51MtSx0GbH33O/MGhqkfelHDQckBbeoKS
+ +KFs453HZXJxhTHf7Daln20qnhaGW34sV9cD5wiYhhjvozJOp8bHzc4NfugN2fTMzK8NJjeGpCd
+ sYkHYmUP/faBLSi4dc8xh6GRx43kBPcFBAbMB3iFup24uNJU+1QO7rMVp6uMDcGIEuOH2ZDB551
+ K0dPwg08X8rIzPVmMmBc+4orQQUIVg==
+X-Proofpoint-ORIG-GUID: aSrksa6W_zu6wJ_MGSeYW00xU6cak7zg
+X-Authority-Analysis: v=2.4 cv=CqCys34D c=1 sm=1 tr=0 ts=68e49b18 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=x6icFKpwvdMA:10 a=ArP49Si0AAAA:8 a=t7CeM3EgAAAA:8 a=T0gi9wxAe-xEIBN8uhIA:9
+ a=glZLBWN_5F3qvmUqPDV8:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-06_07,2025-10-06_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 spamscore=0 phishscore=0 bulkscore=0
+ adultscore=0 clxscore=1015 priorityscore=1501 impostorscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2509150000 definitions=main-2510070035
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Oct 2025 20:35:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120316
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 04:46:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120318
 
-Changelog:
-(CVE-2025-49844) A Lua script may lead to remote code execution
-(CVE-2025-46817) A Lua script may lead to integer overflow and potential RCE
-(CVE-2025-46818) A Lua script can be executed in the context of another user
-(CVE-2025-46819) LUA out-of-bound read
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Release Notes:
+https://docs.djangoproject.com/en/dev/releases/4.2.24/
+https://docs.djangoproject.com/en/dev/releases/4.2.23/
+https://docs.djangoproject.com/en/dev/releases/4.2.22/
+https://docs.djangoproject.com/en/dev/releases/4.2.21/
+
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
 ---
- .../0001-hiredis-use-default-CC-if-it-is-set.patch              | 0
- ...2-lua-update-Makefile-to-use-environment-build-setting.patch | 0
- .../0003-hack-to-force-use-of-libc-malloc.patch                 | 0
- .../0004-src-Do-not-reset-FINAL_LIBS.patch                      | 0
- ...05-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch | 0
- .../0006-Define-correct-gregs-for-RISCV32.patch                 | 0
- .../redis/{redis-7.2.10 => redis-7.2.11}/init-redis-server      | 0
- .../redis/{redis-7.2.10 => redis-7.2.11}/redis.conf             | 0
- .../redis/{redis-7.2.10 => redis-7.2.11}/redis.service          | 0
- .../recipes-extended/redis/{redis_7.2.10.bb => redis_7.2.11.bb} | 2 +-
- 10 files changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/{redis-7.2.10 => redis-7.2.11}/0001-hiredis-use-default-CC-if-it-is-set.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.10 => redis-7.2.11}/0002-lua-update-Makefile-to-use-environment-build-setting.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.10 => redis-7.2.11}/0003-hack-to-force-use-of-libc-malloc.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.10 => redis-7.2.11}/0004-src-Do-not-reset-FINAL_LIBS.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.10 => redis-7.2.11}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.10 => redis-7.2.11}/0006-Define-correct-gregs-for-RISCV32.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.10 => redis-7.2.11}/init-redis-server (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.10 => redis-7.2.11}/redis.conf (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.10 => redis-7.2.11}/redis.service (100%)
- rename meta-oe/recipes-extended/redis/{redis_7.2.10.bb => redis_7.2.11.bb} (96%)
+ .../{python3-django_4.2.20.bb => python3-django_4.2.24.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-django_4.2.20.bb => python3-django_4.2.24.bb} (62%)
 
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.10/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis-7.2.11/0001-hiredis-use-default-CC-if-it-is-set.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.10/0001-hiredis-use-default-CC-if-it-is-set.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.11/0001-hiredis-use-default-CC-if-it-is-set.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.10/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis-7.2.11/0002-lua-update-Makefile-to-use-environment-build-setting.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.10/0002-lua-update-Makefile-to-use-environment-build-setting.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.11/0002-lua-update-Makefile-to-use-environment-build-setting.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.10/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis-7.2.11/0003-hack-to-force-use-of-libc-malloc.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.10/0003-hack-to-force-use-of-libc-malloc.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.11/0003-hack-to-force-use-of-libc-malloc.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.10/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis-7.2.11/0004-src-Do-not-reset-FINAL_LIBS.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.10/0004-src-Do-not-reset-FINAL_LIBS.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.11/0004-src-Do-not-reset-FINAL_LIBS.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.10/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis-7.2.11/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.10/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.11/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.10/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis-7.2.11/0006-Define-correct-gregs-for-RISCV32.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.10/0006-Define-correct-gregs-for-RISCV32.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.11/0006-Define-correct-gregs-for-RISCV32.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.10/init-redis-server b/meta-oe/recipes-extended/redis/redis-7.2.11/init-redis-server
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.10/init-redis-server
-rename to meta-oe/recipes-extended/redis/redis-7.2.11/init-redis-server
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.10/redis.conf b/meta-oe/recipes-extended/redis/redis-7.2.11/redis.conf
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.10/redis.conf
-rename to meta-oe/recipes-extended/redis/redis-7.2.11/redis.conf
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.10/redis.service b/meta-oe/recipes-extended/redis/redis-7.2.11/redis.service
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.10/redis.service
-rename to meta-oe/recipes-extended/redis/redis-7.2.11/redis.service
-diff --git a/meta-oe/recipes-extended/redis/redis_7.2.10.bb b/meta-oe/recipes-extended/redis/redis_7.2.11.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/redis/redis_7.2.10.bb
-rename to meta-oe/recipes-extended/redis/redis_7.2.11.bb
-index f15e07191d..5aea249133 100644
---- a/meta-oe/recipes-extended/redis/redis_7.2.10.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.2.11.bb
-@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-           "
--SRC_URI[sha256sum] = "e576ad54bc53770649c556933ecd555b975e3dac422e46356102436a437b43c7"
-+SRC_URI[sha256sum] = "2f9886eca68d30114ad6a01da65631f8007d802fd3e6c9fac711251e6390323d"
+diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb b/meta-python/recipes-devtools/python/python3-django_4.2.24.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python3-django_4.2.20.bb
+rename to meta-python/recipes-devtools/python/python3-django_4.2.24.bb
+index 8644b282c6..286d757733 100644
+--- a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
++++ b/meta-python/recipes-devtools/python/python3-django_4.2.24.bb
+@@ -1,7 +1,7 @@
+ require python3-django.inc
+ inherit python_setuptools_build_meta
  
- RPROVIDES:${PN} = "virtual-redis"
+-SRC_URI[sha256sum] = "92bac5b4432a64532abb73b2ac27203f485e40225d2640a7fbef2b62b876e789"
++SRC_URI[sha256sum] = "40cd7d3f53bc6cd1902eadce23c337e97200888df41e4a73b42d682f23e71d80"
  
+ RDEPENDS:${PN} += "\
+     python3-sqlparse \
+@@ -10,5 +10,5 @@ RDEPENDS:${PN} += "\
+ 
+ # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
+ # default. To build the 4.x branch, 
+-# PREFERRED_VERSION_python3-django = "4.2.20" can be added to local.conf
++# PREFERRED_VERSION_python3-django = "4.2.%" can be added to local.conf
+ DEFAULT_PREFERENCE = "-1"
+-- 
+2.40.0
+
 
