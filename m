@@ -1,135 +1,107 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D13FBCCA470
-	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 10:02:12 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web10.14881.1759831323810729621
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42DA4CCA470
+	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 11:10:23 +0000 (UTC)
+Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
+ by mx.groups.io with SMTP id smtpd.web10.15633.1759834820752280539
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Oct 2025 03:02:04 -0700
+ Tue, 07 Oct 2025 04:00:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VwlD/h44;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-afcb78ead12so1088549666b.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 03:02:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y35M5I+W;
+ spf=pass (domain: gmail.com, ip: 209.85.167.51, mailfrom: joao.raul.434@gmail.com)
+Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-57a292a3a4bso1154518e87.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 04:00:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759831322; x=1760436122; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :to:from:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=k8CjG3BeoiPP5Z0CWJ4SU6T+uRMnT5Ol7W3Amls5dKI=;
-        b=VwlD/h442AUdRGxak9n7ZTEPC7mwcPO4WTI/g1xKzXHjfGcAbWv6VChpoRHDGRBCwp
-         6AFH0yBnnA0y+UfmsjkdUhX9wk+qutYqcxiD8ll5F0WzsKwX7US6wfKqIqwIU4VcGbHb
-         2z95QheH+nlQ1KhbkO4ea52MOu8qpGLhv+hYUhqp0RZBMgo1mEq5qWzYJfJZpmOIDTI8
-         mdUI3HtPBnDdrD21GCbEkIKSPQSZtKL6G2HmNcX6BO2IGqNfaxWFR/J/4+roQfpF24WG
-         veREEEuDU8Xd8K/2ROmODE6xozRzVV/yKCduObatL/3Z3WWzpEzSVAWMC/IdrgXCYcTt
-         5yqQ==
+        d=gmail.com; s=20230601; t=1759834818; x=1760439618; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Iwb/HbnwzE5TgmJ5/wf40ncfLtJl41+p/ryuB8gP2tw=;
+        b=Y35M5I+W+r5HORx80ZrXiePkhPObn25eeC3+14/tEYDczYanbYJD07HGQWWK28kIY1
+         lPBnJA+zNwwxPUwUdNEZIpRMoqMOgD99hqkpX9fA0XpqK1gqcE7V2D/jxOvIlsa7zcsH
+         qPyqWd1AXBUJl1yaAp0rXZX3U1JaHvXd6kX8/fLVMhyg/9a0MSBF1i1zM0WlbWwC4m4L
+         ShoYbL3sp3dG7mY6v64rm1zxvavap7uhGG/3pXY8LErMF4McTziw9lw0FzE+xYz+qTNZ
+         k1QC64+JlnClgmHFIxPK9+DUr6F22KSNrYCuZ0rNjSUlUXjjOzScEEW5NAhiSyxBO1OJ
+         SWKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759831322; x=1760436122;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :to:from:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=k8CjG3BeoiPP5Z0CWJ4SU6T+uRMnT5Ol7W3Amls5dKI=;
-        b=nJXOEVFrpNCPbfMHi+E9RbMblnZJI1tP/DcbvVdfnM9Gr9sXdxTHi3jNmbOd8NorNI
-         eBXRztm2uSkqErhTG10C5W04xVLsWjI5mybHBj0PFXvzJZjneZ1tYVtJ5F6dP5dy6OIA
-         RnYMznt7C14Zn87GTlhg9uOByAyzyLMVQL32vBgtpYCP5iIKmUCAXwDSKeGM7wgNnB15
-         Jh5Qv4OHX8/7mkOgryHGRrc8F3gdhBlUkj6i/tvXty28wL1WQZuyNKx1pGLdnrSKum1M
-         +qfxf88deJaTSzAkXJdL3HJJcOSiUmht+1R3vQFTyqVh3lzw9uZIbbJGNzJBz9ooH1i4
-         GeTA==
-X-Gm-Message-State: AOJu0YzLUgBvVrmIXiKNYgkpUo8bGbp1setiVHXPXbjYIrGxGHpjVsDW
-	p3s8BXOhWlTo46pQK/DHPRJNQaKZeDGgtyQiIR8uIAG2UQo8bwq3AklDvAG7gw==
-X-Gm-Gg: ASbGncuOlDpJYhM56TNW0HMgckhWHtDPPAw2YrZa0yI6ME8BOetVabgQ1c/J0J/ceYI
-	X2EpSsQmLsixVf69KdTlCcAqRLu7i6Rljj+GuzW8pI9PUAoDlSgCjRC471FFYrO4dbmwVnA43dk
-	R4F/TdRbwNhr3frAIveMmpmWluTZMyjKPsLL93aCiyqvvEPFPXBGeWrOPPtdlQSAg5EY7W3nxpb
-	OSH91P7AC+PWg/oCWumKJ5w0exuKz+BgEsS59KtHUK7F1Bbi7ENQg2cholwTx6h1pY0g6J11YSf
-	WSxRr2IRa0DLfs9ubPT3MasAzyoYqQ3pgMFJmzQNHBX/em1sBqzbX6Ca7vcuPoQuOrfnm7J0Ngz
-	nrHZaS5mQ+6CtXXdfJRr3tYQNl7ng7NHBU4Gu1s9bxmkmKTYAm8Zy7O8=
-X-Google-Smtp-Source: AGHT+IEhqA/SeR6RhA4gv3rOwO4pDY+2ujyOSwgIdw+gvk80IHefP2ISqRzsLe0Nd1aaS9H2KmqO2w==
-X-Received: by 2002:a17:907:97d3:b0:b04:67f3:890f with SMTP id a640c23a62f3a-b49c3d753d4mr2139785566b.33.1759831321708;
-        Tue, 07 Oct 2025 03:02:01 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4fd7112dd8sm91819066b.30.2025.10.07.03.02.00
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 07 Oct 2025 03:02:01 -0700 (PDT)
-Message-ID: <ca6757a1-4ec2-47f4-91ae-40ca5ecf06c3@gmail.com>
-Date: Tue, 7 Oct 2025 12:02:00 +0200
+        d=1e100.net; s=20230601; t=1759834818; x=1760439618;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Iwb/HbnwzE5TgmJ5/wf40ncfLtJl41+p/ryuB8gP2tw=;
+        b=SBFLLMcuBR0ykz9qCbGoG25PAltQnx7RH0qzQzt53rAr786BZmFC701fqKZaB/priA
+         lU102hF1yTDbOGeJgokC5QFxV0O2TWQo2dSayk6eoK/dqQPFrKTRUp42U8scBBF3NCBN
+         ZtC3yxhWrXf7GrXfxJxbA4/wGup4WTZJ9uq4JhjgjVsKyMjFRRPohiszh+npsc1jQ1oO
+         WkXWUKCPF7tpezkUS1rXzCzcAwa1pGTs9h3Ff3+inVaEW26QZMBO9gsQch03D19V+a1y
+         Y9RMheKl8+jlUg1z5EM4IjzNWt2pujT3bpBY+mQQk8GqkI+RLYO7ZgbVbbZbAii+PBx2
+         7wRw==
+X-Gm-Message-State: AOJu0YxYkuIkLTcPTTsODOsFZ15V/aXajqwdsa309323aFdIgFeh9qSj
+	NPq35qZJ9Q5sckopYNgaWRVWgMEGQzhJQBeFA1vGlMj8RW40rxtATfVbOay68lp/s/Y=
+X-Gm-Gg: ASbGncvZKvSvM9O1ClGA5nYfhb1UgS5HCj3L7NZKSiaBnaF3c+fDgFLmpUeDWepbaDZ
+	CIFnqWwNxc17+KIVr0oZuh/+TijmgEavPq3axQqBypdqx1GYr+mS7sXLzyP/G/39SU2o7UR5mRz
+	4ZnPtHut4Lc2caXhsLeYnWUkIWrSYesuwXjQeLGC7Jc2/n9hMvMeZVdA91ra1Zr0d1qE8HgvmLF
+	feF3OpeYq5DZKgOO/Uqzvi/W7AzkuHZ/Gvvxh63VSg7+cFOKGdXFUYQ0gQ7UJfNQQyX/lGyAbl2
+	wbuWQOE4Kikqk3HO2qngRlAfeJbd1gi8e3nFyTxfwlb8+WMU6cQ6zvdKZ63xk4+ZPQwmfyXR1DR
+	lel1Dy675reiriP4QIg35eWycvqQpUYfL4lbGg2CT2vaxNINTIcp/XU+MAXNp4IJeYYlHzk1Is6
+	xtStfgDyDyRTPiWWO/ZtqFDch/NCf2BLkyjkPx6bzQ+/jeHw==
+X-Google-Smtp-Source: AGHT+IFbYlyu5HAttkChHYhRaxibKbyqo48mpg1QvGhoKjpTmy4gS4spS+dN12FUDcuUtU+gqq38XQ==
+X-Received: by 2002:a05:600c:698c:b0:46e:36f8:1eb7 with SMTP id 5b1f17b1804b1-46e71124219mr107431345e9.10.1759834455091;
+        Tue, 07 Oct 2025 03:54:15 -0700 (PDT)
+Received: from RD-8dhlsmLpT3bz.corp.hbkworld.com (89-181-200-223.net.novis.pt. [89.181.200.223])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-46e723593d8sm225159795e9.11.2025.10.07.03.54.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 07 Oct 2025 03:54:14 -0700 (PDT)
+From: "=?UTF-8?q?Lima=2C=20Jo=C3=A3o?=" <joao.raul.434@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Lima=2C=20Jo=C3=A3o?= <joao.lima@hbkworld.com>
+To: openembedded-devel@lists.openembedded.org,
+	raj.khem@gmail.com
+Cc: joao.lima@hbkworld.com,
+	ivitro@gmail.com,
+	joao.raul.434@gmail.com
+Subject: [meta-oe][PATCH v2 1/3] openocd: bump the openocd, jimtcl versions
+Date: Tue,  7 Oct 2025 11:53:47 +0100
+Message-ID: <20251007105350.1237-2-joao.lima@hbkworld.com>
+X-Mailer: git-send-email 2.51.0.windows.1
+In-Reply-To: <20251007105350.1237-1-joao.lima@hbkworld.com>
+References: <20251007105350.1237-1-joao.lima@hbkworld.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-oe][PATCH 1/2] python3-django: upgrade 4.2.20 -> 4.2.25
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-References: <20251007095900.57445-1-skandigraun@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20251007095900.57445-1-skandigraun@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 10:02:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120331
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 11:10:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120332
 
-Ooops, I just noticed that django update was sent by someone else too
-just a few hours ago. Feel free to ignore mine.
+From: Joao Lima <joao.lima@hbkworld.com>
 
-On 10/7/25 11:58, Gyorgy Sarvari wrote:
-> The pypi package was renamed from Django to django, so the custom name
-> is not required anymore.
->
-> This upgrade contains fix for CVE-2025-32873, CVE-2025-48432 and CVE-2025-59682.
->
-> Changelog:
-> https://github.com/django/django/blob/main/docs/releases/4.2.21.txt
-> https://github.com/django/django/blob/main/docs/releases/4.2.22.txt
-> https://github.com/django/django/blob/main/docs/releases/4.2.23.txt
-> https://github.com/django/django/blob/main/docs/releases/4.2.24.txt
-> https://github.com/django/django/blob/main/docs/releases/4.2.25.txt
->
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ---
->  meta-python/recipes-devtools/python/python3-django.inc        | 3 ---
->  .../{python3-django_4.2.20.bb => python3-django_4.2.25.bb}    | 4 ++--
->  2 files changed, 2 insertions(+), 5 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-django_4.2.20.bb => python3-django_4.2.25.bb} (64%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-django.inc b/meta-python/recipes-devtools/python/python3-django.inc
-> index cde32be477..57756024fe 100644
-> --- a/meta-python/recipes-devtools/python/python3-django.inc
-> +++ b/meta-python/recipes-devtools/python/python3-django.inc
-> @@ -3,9 +3,6 @@ HOMEPAGE = "https://www.djangoproject.com/"
->  LICENSE = "BSD-3-Clause"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
->  
-> -PYPI_PACKAGE = "Django"
-> -UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
-> -
->  inherit pypi
->  
->  FILES:${PN} += "${datadir}/django"
-> diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb b/meta-python/recipes-devtools/python/python3-django_4.2.25.bb
-> similarity index 64%
-> rename from meta-python/recipes-devtools/python/python3-django_4.2.20.bb
-> rename to meta-python/recipes-devtools/python/python3-django_4.2.25.bb
-> index 8644b282c6..a6bdc26336 100644
-> --- a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
-> +++ b/meta-python/recipes-devtools/python/python3-django_4.2.25.bb
-> @@ -1,7 +1,7 @@
->  require python3-django.inc
->  inherit python_setuptools_build_meta
->  
-> -SRC_URI[sha256sum] = "92bac5b4432a64532abb73b2ac27203f485e40225d2640a7fbef2b62b876e789"
-> +SRC_URI[sha256sum] = "2391ab3d78191caaae2c963c19fd70b99e9751008da22a0adcc667c5a4f8d311"
->  
->  RDEPENDS:${PN} += "\
->      python3-sqlparse \
-> @@ -10,5 +10,5 @@ RDEPENDS:${PN} += "\
->  
->  # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
->  # default. To build the 4.x branch, 
-> -# PREFERRED_VERSION_python3-django = "4.2.20" can be added to local.conf
-> +# PREFERRED_VERSION_python3-django = "4.2.25" can be added to local.conf
->  DEFAULT_PREFERENCE = "-1"
+Version bumps:
+   - openocd: 91bd431 -> 66ea461
+   - jimtcl: fcbb449 -> f160866
+   - libjaylink: 9aa7a59 -> 0d23921
 
+Signed-off-by: Joao Lima <joao.lima@hbkworld.com>
+---
+ meta-oe/recipes-devtools/openocd/openocd_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+index 3bbe33ca1d..3b7705c41d 100644
+--- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -13,10 +13,10 @@ SRC_URI = " \
+ "
+ 
+ SRCREV_FORMAT = "openocd"
+-SRCREV_openocd = "91bd4313444c5a949ce49d88ab487608df7d6c37"
++SRCREV_openocd = "66ea461846a3a4a96687c9287c3f61ae8ce0b775"
+ SRCREV_git2cl = "8373c9f74993e218a08819cbcdbab3f3564bbeba"
+-SRCREV_jimtcl = "fcbb4499a6b46ef69e7a95da53e30796e20817f0"
+-SRCREV_libjaylink = "9aa7a5957c07bb6e862fc1a6d3153d109c7407e4"
++SRCREV_jimtcl = "f160866171457474f7c4d6ccda70f9b77524407e"
++SRCREV_libjaylink = "0d23921a05d5d427332a142d154c213d0c306eb1"
+ 
+ PV = "0.12+git"
+ 
 
