@@ -2,119 +2,135 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E01F9CCA476
-	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 15:06:14 +0000 (UTC)
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.web11.21337.1759849565919262412
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D83CCCCA470
+	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 15:16:14 +0000 (UTC)
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web10.21440.1759850171744069542
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Oct 2025 08:06:06 -0700
+ Tue, 07 Oct 2025 08:16:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=j0U+My1r;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-62fa062a1abso11976893a12.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 08:06:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SMifI8RA;
+ spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-b4f323cf89bso241273366b.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 08:16:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759849564; x=1760454364; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759850170; x=1760454970; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=eBNQ9nlM3l7ZZx6ehmlTOtCF3Gq/Ze2D0wutGNajFmA=;
-        b=j0U+My1ry6jxnSIMJXETFJq9U00NsOlAxw5cj1XzLiKIGTDvdpm9ijh/HX8jPrwTfC
-         y35P1CoVno+mnQeuLZ3Xx+25vwhQsBmRXUbwzWMzXxgitJPdB08maQDLRO2d+VKjF2uO
-         qUF9bzciQo4pHqOZUhzkTXjH4S+RJYBD3SROygNGzjH/ON2vyMcW9LC48gUuI9Uy3wYz
-         iDpltAIcvXyVA++Bgoddanl8SQkqLc/o26ypa7WgSc4Ptf1VgGr2rFArUcOqHdCcRjF5
-         /Z29yD5U0wlRz+Hy3Qb0gM87kXG/TrNZBTmVkd++S60HE0Lb/ry0/i1yY1hd6PiyIUWy
-         NQGg==
+        bh=8CAlJ50upmQPfnnjNcJ2pk3TxIPtMhZ6E7ERYt9XbUY=;
+        b=SMifI8RA+gk5RP/jhaO/cEMOgOgvr3fcFYiBsDvz8ylcKCXrHokf7oKF+u741kJCmr
+         uP54E7LDZ2mr037wHANhwQYLp2W36gy5OzptruG8mpiVy30TMbEHimzzk1nW3o6+Dxdb
+         HEJMp5Gi2TBbEJYVrGMtr/UasOVCIWKRuNONzWZc/Fjh3zoIwotDaIRE/LpWY4exC76M
+         j1eA3rOeW2yK2JTZVVn6wNgcvPLCllZ+Oo4iXqQ90OmVXQf2WzFkwjthc1sOlABVs3qL
+         rrKxjx2dojfKmZ9vsAlvvto65ifkAIuM+p0Sc1pNYgTywvKto8I9hNlyKCVyGvvllnvb
+         EwZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759849564; x=1760454364;
+        d=1e100.net; s=20230601; t=1759850170; x=1760454970;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=eBNQ9nlM3l7ZZx6ehmlTOtCF3Gq/Ze2D0wutGNajFmA=;
-        b=qio/CStS6s99O0jSV/mcZQYvX0pDgM51PIIxaDQUE6azgctA+Fo9jRGdG5Egdmv7l1
-         3L52rp0WYLohVlK+foU3/2FQi4w93/Onvss2iCbCZGVOS+W1m/SBHVULj0cbfkIo24Zh
-         3zvZ6NrRDakDmNB1dkh3VKYUhUEoogcLsVuvO89Vurp3HqN60it5ikR819l9RxNKO70b
-         kve99mKu81yTMYKDTwtBrXJYF7V8F5GCxubVIYioALmjn3bwUORsB2t4uRUHPu1rO8wr
-         bHVonrvLHAH90O8NZCYBLTEsIG4Y5n1zbNTUQpbFw8GoxEPX23l4s0a58u1E8m/duL7j
-         aO1A==
-X-Gm-Message-State: AOJu0YxjQgOz8Rt9N1gVc9QpK5yQecQnisviPIsbmf0JB9OcuQwT1bcH
-	sdBhB5QtyVHUkrS/j5our4r7+NO4mapYi04N15rhFhGaiV8EpLKwT4Qla1scxg==
-X-Gm-Gg: ASbGnctBnzPTDJi/H5XpcbntaRInjrb2+LEZoSNXSW6Mz9vYohFi06yv6N6swDWYhlb
-	TR7UV6Kna++MdNpNMPRDDxGDHnajWdi/jUdd2l3MwqXdqbtmyjdk0WAPXM+JFzyWhUoubzchSsa
-	UJfUACU1Nlrcbode4p0zWV+0LIaXRjPsKXYIewF7lafhCQoyak8CCQGLWwB2E4Y1kSNJ5DuL3hS
-	KR7bKixRSevqC2VyVSYQvBFYr4zEoSLfbQ6WwJ2A/Ph7p6hlQFQCvspFFx39Ip+WuxMKDjzu2Cf
-	ZPRoUr0+18MwWCVu1u4HsZ3X6TbUFO7YndQLvZbr1b7Tm2kqUa8QNVUyFJMFw9rPVURv4WQ/fXH
-	fP+W5ZkWLec6g/+VFXNRG+Te/Lwp9cLiKF2vBVfrM6x5J
-X-Google-Smtp-Source: AGHT+IFF/RvLX3qt0fCGqaDgqqVnbDtDfFc7C1pI5y2sSWGIso+fTriplv3CG087quwAWUNQPXFDug==
-X-Received: by 2002:a17:907:da2:b0:b3d:530:9f07 with SMTP id a640c23a62f3a-b49c1280685mr2172596966b.11.1759849563734;
-        Tue, 07 Oct 2025 08:06:03 -0700 (PDT)
+        bh=8CAlJ50upmQPfnnjNcJ2pk3TxIPtMhZ6E7ERYt9XbUY=;
+        b=DHWrOQTfEwN4aXV/vtNUUJOMANSB7t7F0iyHE/P97FF1X0AM+iqUpgTls9w9eXo0TP
+         TmWGK8y/fd8rqSp8EIBmP2xiHbJ2tlRi2ZgmlfmqUFEvBeAgSoD1vUJdAaAPU0p9sG1A
+         wnbj7RZN68KlzFnEH/vQSi80wxZ6jarhhDwlFC8DScRpadR40EJk9hF3N/xnEONR6RVB
+         xcEClJHtNcJN7EPHn5ubMqyBvCnIafeOX+a6sB30yPMLgM9Y4vYOjVXUk0DzxUEXrZLE
+         lcTEHsJsvBmeEKUJhKwlmXG/ztmMNZCUeaA/CLiNsmAt6Zdb/V232Zmj37gpL5SfKtsi
+         kTMA==
+X-Gm-Message-State: AOJu0Yzj31heT5XAW7uTucBum6yaBgs8heSR7D6MFtcrmyxHLeFBBWwn
+	THLpfADu9vjbWEnMefpFDHwhirBIa/ysLsoXuYdgPNpm46bfEX1mjPTtUa82xw==
+X-Gm-Gg: ASbGncvOvgLrDYy4IeBLOQ1figZpAGC7Z1UYXWr3QcWVJr8McFTqRTqodojpC9HYzG9
+	rdK5kVHwDy7gdp4ZvuzYEempJBHYHAn4NdvG9Cz1m/jpSwDS9hPhPcq8qlZ4hWcKev4jXsJ8OB2
+	Rl5h53uzmuQ/WgEdItlEnz/kxFGUIrN2hgfcvtcVK8nRYxrPUMQHIJSyXe6TL8a9WSraSjdHGoV
+	bx3XdlZwccNVdUmjoFzm9kAF5yGOUOxFXQkHxvihgxv++iGC7J9JkF1S0X32g+cLtcooI3ey4UP
+	ILH07H0nCloCuOgXiLahabK0osvAC8655NQvTTq9zCXwsNj750PYD/Aj/aO+S3T/R02KZYi7AVX
+	m+ctW4aChYnaSyGgHMvK1wJ7N9V0Q+BQoFAx6anvS1wBu
+X-Google-Smtp-Source: AGHT+IHXqBTOJAp4NRI4QThfzVD2uWnVOFHV08h68Oaa31pSSMbYYp6c51JPsH4o2wscx5sRCYZzzw==
+X-Received: by 2002:a17:907:3daa:b0:b40:5dac:ed3f with SMTP id a640c23a62f3a-b50a9d59a8cmr966b.7.1759850169604;
+        Tue, 07 Oct 2025 08:16:09 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a174a6dsm1420322366b.90.2025.10.07.08.06.03
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b48652aa035sm1379392666b.15.2025.10.07.08.16.08
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Oct 2025 08:06:03 -0700 (PDT)
+        Tue, 07 Oct 2025 08:16:09 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libraw: upgrade 0.21.2 -> 0.21.4
-Date: Tue,  7 Oct 2025 17:06:02 +0200
-Message-ID: <20251007150602.4120778-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] libppd: upgrade 2.0.0 -> 2.1.1
+Date: Tue,  7 Oct 2025 17:16:08 +0200
+Message-ID: <20251007151608.57170-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 15:06:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120339
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 15:16:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120340
 
-This upgrade contains fixes for the following vulnerabilities:
-CVE-2025-43961, CVE-2025-43962, CVE-2025-43963 and CVE-2025-43964
-
-Also drop two old CVE_STATUS entries which are not needed anymore,
-because the database has been updated with correct info.
+This upgrade contains a fix for CVE-2024-47175.
 
 Changelog:
-https://github.com/LibRaw/LibRaw/blob/master/Changelog.txt
+
+2.1.1:
+-pdftops: Use Poppler for a few old Epson laser printers This
+ works around documents being printed off-centre, shifted towards
+ the top right. Affected are printers using epsoneplijs:
+ EPL-5700L, EPL-5800L, EPL-5900L, EPL-6100L, EPL-6200L.
+-Fixed bugs discovered by static analyzer OpenScanHub Possible
+ buffer overflows, uninitialized memory, format string issues
+ and resource leaks, ...
+-Fix crash bugs in ppdLoadAttributes() When parsing the
+ "*cupsFilter(2): ..." lines in the PPD file use memmove() instead
+ of strcpy() as the latter does not support handling overlapping
+ memory portions and do not move running pointer beyond the end
+ of the input string.
+
+2.1.0:
+-Prevent PPD generation based on invalid IPP response Overtaken
+ from CUPS 2.x: Validate IPP attributes in PPD generator, refactor
+ make-and-model code, PPDize preset and template names, quote PPD
+ localized strings. Fixes CVE-2024-47175.
+
+2.1b:
+-Added support for libcups3 (libcups of CUPS 3.x) With these changes
+ libcupsfilters can be built either with libcups2 (libcups of CUPS 2.x)
+ or libcups3 (libcups of CUPS 3.x).
+-Prefer PDF again in PPDs for driverless printers PDF works better with
+ finishing, especially combinations of multiple copies, collation, and
+ stapling/binding.
+-Use 0.5mm as tolerance when comparing page sizes For the PWG two page
+ sizes are considered the same when the dimensions differ no more than
+ 0.5 mm, libppd used too tight tolerances.
+-PPD generator: Check for required attributes when choosing input format
+ Check for PCLm and PWG the minimum of attributes which we require
+ during PPD generation.
+-ppdLoadAttributes(): Improve check whether parameters are integer
+-ppdLoadAttributes(): Fix crash when page size could not get determined
+-Fix crash if there is no page size for "Custom"
+-Fix crash when incoming *ptr is NULL
+-libcups2 compatibility: Use proper CUPS array callback function types
+ Fixed CUPS array function call in libcups2 compatibility layer
+-Build system: Fix failure to correctly link to zlib Look up zlib
+ properly with pkg-config
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-support/libraw/libraw_0.21.2.bb | 13 -------------
- meta-oe/recipes-support/libraw/libraw_0.21.4.bb | 10 ++++++++++
- 2 files changed, 10 insertions(+), 13 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libraw/libraw_0.21.2.bb
- create mode 100644 meta-oe/recipes-support/libraw/libraw_0.21.4.bb
+ .../recipes-printing/cups/{libppd_2.0.0.bb => libppd_2.1.1.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-printing/cups/{libppd_2.0.0.bb => libppd_2.1.1.bb} (82%)
 
-diff --git a/meta-oe/recipes-support/libraw/libraw_0.21.2.bb b/meta-oe/recipes-support/libraw/libraw_0.21.2.bb
-deleted file mode 100644
-index 01425c6db0..0000000000
---- a/meta-oe/recipes-support/libraw/libraw_0.21.2.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--SUMMARY = "raw image decoder"
--LICENSE = "LGPL-2.1-only | CDDL-1.0"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1501ae0aa3c8544e63f08d6f7bf88a6f"
--
--SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=0.21-stable;protocol=https"
--SRCREV = "1ef70158d7fde1ced6aaddb0b9443c32a7121d3d"
--
--inherit autotools pkgconfig
--
--DEPENDS = "jpeg jasper lcms"
--
--CVE_STATUS[CVE-2020-22628] = "cpe-incorrect: The current version (0.21.2) is not affected by the CVE which affects versions earlier than 0.21.2"
--CVE_STATUS[CVE-2023-1729] = "cpe-incorrect: The current version (0.21.2) is not affected by the CVE which affects versions earlier than 0.21.2"
-diff --git a/meta-oe/recipes-support/libraw/libraw_0.21.4.bb b/meta-oe/recipes-support/libraw/libraw_0.21.4.bb
-new file mode 100644
-index 0000000000..ef0a0255d9
---- /dev/null
-+++ b/meta-oe/recipes-support/libraw/libraw_0.21.4.bb
-@@ -0,0 +1,10 @@
-+SUMMARY = "raw image decoder"
-+LICENSE = "LGPL-2.1-only | CDDL-1.0"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1501ae0aa3c8544e63f08d6f7bf88a6f"
-+
-+SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=0.21-stable;protocol=https;tag=${PV}"
-+SRCREV = "9646d776c7c61976080a8f2be67928df0750493e"
-+
-+inherit autotools pkgconfig
-+
-+DEPENDS = "jpeg jasper lcms"
+diff --git a/meta-oe/recipes-printing/cups/libppd_2.0.0.bb b/meta-oe/recipes-printing/cups/libppd_2.1.1.bb
+similarity index 82%
+rename from meta-oe/recipes-printing/cups/libppd_2.0.0.bb
+rename to meta-oe/recipes-printing/cups/libppd_2.1.1.bb
+index 99b1f6e730..1b7d2be844 100644
+--- a/meta-oe/recipes-printing/cups/libppd_2.0.0.bb
++++ b/meta-oe/recipes-printing/cups/libppd_2.1.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c1fca671047153ce6825c4ab06f2ab49"
+ DEPENDS = "libcupsfilters"
+ 
+ SRC_URI = "https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "882d3c659a336e91559de8f3c76fc26197fe6e5539d9b484a596e29a5a4e0bc8"
++SRC_URI[sha256sum] = "3fa341cc03964046d2bf6b161d80c1b4b2e20609f38d860bcaa11cb70c1285e4"
+ 
+ inherit autotools gettext pkgconfig github-releases
+ 
 
