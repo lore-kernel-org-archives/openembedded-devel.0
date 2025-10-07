@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F2ECCCD183
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22F23CCD186
 	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 19:49:47 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.web11.28495.1759866580780507046
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web11.28497.1759866584468063906
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Oct 2025 12:49:41 -0700
+ Tue, 07 Oct 2025 12:49:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cOKRtn9F;
- spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-637dbabdb32so13312194a12.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 12:49:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=T6EMWuXg;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-afcb7ae6ed0so1124321966b.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 12:49:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759866579; x=1760471379; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759866583; x=1760471383; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=p2FREANwLidpn7+PSN9yZoyMwbI1yUpTjqYcNzADboU=;
-        b=cOKRtn9FCCxqLMPsJDqyCutbbsescUqqJ/lys+TX7L9pMcNTDYtJQbVCXtvkYAdirE
-         DW1/jl+pFKSIu6F+rzrB2xSbBShLwtA8Ibe/f4Ff/DhI+Y08adg0qGlIlV8hAXmeIZ6c
-         fW/YDeIuWybilQVTNCFxKlRVOt1HrtHgM7C5b0OJHdgQZJ/ooVja6sNerXaypdVmZw6z
-         QAv0XC43JZVP0zxlyYSSgDFhe1kjRbZmHYoM4vVKVzFRDWc58byT+HegZH0/+ae3qbVC
-         M9hFGvp6OACONdImkI7p/oCpom0oqzMsA6UM0yqcNUM1weY6wpCXVSq0k5JxDuKQA5Wq
-         UhgA==
+        bh=31Mgxso2MDjz+gJ7X+9WkOJXQtJ1g/9wdPLRiQ/GmPQ=;
+        b=T6EMWuXgts/mBAh6VzpcbKb32hX2biB8uPW6Fh07LZZLU0j2QF+TizKjiO4qlCzIJj
+         e28WWJbgMtQ5DxSZFm72LNQVHf27nqRzheZqvvEpBIkY4p2Lss8Qg5au2WxM9+PfafYe
+         zGgpAR/uvCZJPAYwMeR1n/YRbQ4nss4TfCAabF0dS6kLn81GZkXoYeZHIW6PPNwOnTL7
+         4JqmVIrGZRWrDd57maspysW9pl9FZKCDNHaXkZLYomzD4kllizqk9qHh4gxp22vH3pN6
+         qku2b/LjJT+U9fsIeA7Et0921iYu6/OXhKMS82XdRSPcASKo77Z9DEaj3N66EX1/1ek3
+         BMZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759866579; x=1760471379;
+        d=1e100.net; s=20230601; t=1759866583; x=1760471383;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=p2FREANwLidpn7+PSN9yZoyMwbI1yUpTjqYcNzADboU=;
-        b=kwu3aPF4bYGu3pz6F4D/qXk0TNwjlLjYZu09XRhgfC43LHGRkOZbut3wfIolZoKw1D
-         1vaM/EefVl5jAXoKNUQPSrWtGUFUDfZu2To1Q6CRVmhFQ14tyBNzXrg5lolEr95WLnwQ
-         9rIIT95uX5BQs5KiWUwyBpA1kg9hRqVbqqUO/fY95MJmkvvjv3wq9OroDXmaUQW7QGTw
-         +CAzrvostiZEeROZKaBaVixgPlNkznevIeGw3PpZjAguq/c7nVaru0MzqD1Guad4GQRg
-         9qXWj6XRyGqrTWG16mTFgTq7Xp092wbTpm27vYpcKxxr9qKB7WbwoyV3KCN2TwuRqAbl
-         iiBg==
-X-Gm-Message-State: AOJu0YwBqf4lInr+2oUsPp4YOENWkM57dLDOy9stW+i0soaaGcx8toM8
-	lIN/yokw6xXzMqgRrZf3+l6DcPa6J/8MZPeTujj+W0NMo9KgG1PIbBe70t8fcg==
-X-Gm-Gg: ASbGnctZzScqWhyBV6+QEA8IP4glAFEU4ivpWA7M2MVyV13rufO316oiKgkeW53d/T4
-	u0kSl/XYw+9DANBnKabRZgedgWjm6I+3ra/Z+clOCoXTFL/q+RJJ7jq2b6ZtxDP3UJQ0Bf/7Yju
-	uQM3WGpCx5WOVko26aHbl8JHJ4ydusDWFWGLQkbUa+rPHOmXdCa210FqEOBV2d+GKvdat6gTR1z
-	B/xXx7VkBN8Y8rOE/iX/0E44ChVOTvuX31eWXqQYE6c0dkN7QYK/MzcKntQrcp3xDOQ1cxZKnVX
-	nds9scjNM3ZnbmQSDAa3i0FCbtrn6zlRX0xrNcVg9/CcINK7xuwIgtRQGle2kb0DttyvKjBH7vF
-	MDFs4csRtks/LlqvcdsPh/eJcUbz21sD1ut6BqNrWyxtZ
-X-Google-Smtp-Source: AGHT+IFBGDfJZeRd97XNPhuDjXqaKWpg3JU2rEJWW1POz2jPXfxmx+JahyY+KlxUnQK/YrQq/ISTwg==
-X-Received: by 2002:a05:6402:50d1:b0:631:b058:bef0 with SMTP id 4fb4d7f45d1cf-639d5c52eddmr619927a12.32.1759866578996;
-        Tue, 07 Oct 2025 12:49:38 -0700 (PDT)
+        bh=31Mgxso2MDjz+gJ7X+9WkOJXQtJ1g/9wdPLRiQ/GmPQ=;
+        b=Jg1i+UEjJDQeFEcPBt3qb9Q9DwzIltlBBCD03WciwvOy3J9p608CpY/K+1LHVUIScq
+         dpY6uKiJzaQM56KBYFgKOIHP1j6Yl6Z+DvReEgLXDiCF81A2pH381j3s4v+Rd068XwZL
+         62pXW8u9YPzwMy9tkx3HzJbu0ZoUKyslH9jO0+ZXclXHPFgO1ickfQtFt9LbZbkbs+Kj
+         faqK+VQBH21A8vkWkoIbsRYip9CWY5juOwtwkFgZRBrdo3tWmf+YUkqhuD2pnfX05PWz
+         IwwuXfljTdYvj4BguHHBMnFZe3oMsLfvwiMUvypV4IY4JmPgi3SWVtro187QhdHnNFWL
+         1FPA==
+X-Gm-Message-State: AOJu0YwlV8o8JvbyOoq/7beX70/TTb1DoqPIikObAG1rhXsx1vl5btL7
+	c/+gwhOEszygP2sHcY67jxfEt+a2UCFpgDh020fPDIhPsiZDGyMTKIL+/9i/pw==
+X-Gm-Gg: ASbGncs9jY5AFgjs+NBplHWgvtiVQ4fsC1GAdjHhqemvuMKdhurnnuiNQI6sbwR++er
+	yOR0cPBQN2VJhxTyU75cFasgb20evoD8US9IAVfdr6RQeHauboghS/hJdab583d1qx6Zsv7ptlC
+	zjKaatjonr002psQtIGY6fRHmGCZgkxVmlzr/6xTBEAdQtghH5V+BaEF2cMF5lcZmmKKun0qDbF
+	WqwqXyVILYBGbNJSS8uZIVgQ1J/GzvNkFIzyt6dVVsHzDsrMk1gvqskCAzUisItysZWliPMGezn
+	358YyhYqi4iJH56aADnYw3Y/qzxxuzmDxIEhMao7KnKSBa893EfCeNP6lmh0qEqnfab+ZUjPiWR
+	Z+3vZAxOf36p+XXy/rEuRPPqM6xAbm6Plj9TusVYYW5xg
+X-Google-Smtp-Source: AGHT+IEgsa4znYqWbxHev1vkV8nKwOh9J51BQBKztLZQzJ/4ptsBXHoC+hqubye64/02pvbfh/NS6w==
+X-Received: by 2002:a17:907:6d25:b0:b40:52:19c2 with SMTP id a640c23a62f3a-b50aaa9c937mr94559666b.20.1759866582502;
+        Tue, 07 Oct 2025 12:49:42 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6378810112bsm12961955a12.26.2025.10.07.12.49.37
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6378810112bsm12961955a12.26.2025.10.07.12.49.40
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Oct 2025 12:49:37 -0700 (PDT)
+        Tue, 07 Oct 2025 12:49:41 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][walnascar][PATCH 2/4] redis: patch CVE-2025-27151
-Date: Tue,  7 Oct 2025 21:49:34 +0200
-Message-ID: <20251007194936.146845-2-skandigraun@gmail.com>
+Subject: [meta-oe][walnascar][PATCH 4/4] redis: patch CVE-2025-48367
+Date: Tue,  7 Oct 2025 21:49:36 +0200
+Message-ID: <20251007194936.146845-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251007194936.146845-1-skandigraun@gmail.com>
 References: <20251007194936.146845-1-skandigraun@gmail.com>
@@ -67,120 +67,279 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 19:49:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120347
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120349
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-27151
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-48367
 
 Backport the patch mentioned in the details.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...AOF-file-name-in-redis-check-aof-CVE.patch | 34 +++++++++++++++++++
- .../redis/redis/0001-CVE-2025-27151.patch     | 31 +++++++++++++++++
- .../recipes-extended/redis/redis_6.2.18.bb    |  1 +
- meta-oe/recipes-extended/redis/redis_7.2.8.bb |  1 +
- 4 files changed, 67 insertions(+)
- create mode 100644 meta-oe/recipes-extended/redis/redis-7.2.8/0001-Check-length-of-AOF-file-name-in-redis-check-aof-CVE.patch
- create mode 100644 meta-oe/recipes-extended/redis/redis/0001-CVE-2025-27151.patch
+ ...n-if-accepted-connection-reports-an-.patch | 117 ++++++++++++++++++
+ ...n-if-accepted-connection-reports-an-.patch | 107 ++++++++++++++++
+ .../recipes-extended/redis/redis_6.2.18.bb    |   1 +
+ meta-oe/recipes-extended/redis/redis_7.2.8.bb |   1 +
+ 4 files changed, 226 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/redis/redis-7.2.8/0001-Retry-accept-even-if-accepted-connection-reports-an-.patch
+ create mode 100644 meta-oe/recipes-extended/redis/redis/0001-Retry-accept-even-if-accepted-connection-reports-an-.patch
 
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.8/0001-Check-length-of-AOF-file-name-in-redis-check-aof-CVE.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0001-Check-length-of-AOF-file-name-in-redis-check-aof-CVE.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.8/0001-Retry-accept-even-if-accepted-connection-reports-an-.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0001-Retry-accept-even-if-accepted-connection-reports-an-.patch
 new file mode 100644
-index 0000000000..159f8341b2
+index 0000000000..8017345913
 --- /dev/null
-+++ b/meta-oe/recipes-extended/redis/redis-7.2.8/0001-Check-length-of-AOF-file-name-in-redis-check-aof-CVE.patch
-@@ -0,0 +1,34 @@
-+From 1b71849d83940971b95b7c576cdfbc9ff60d48b2 Mon Sep 17 00:00:00 2001
-+From: YaacovHazan <yaacov.hazan@redis.com>
-+Date: Tue, 27 May 2025 10:23:27 +0300
-+Subject: [PATCH] Check length of AOF file name in redis-check-aof
-+ (CVE-2025-27151)
++++ b/meta-oe/recipes-extended/redis/redis-7.2.8/0001-Retry-accept-even-if-accepted-connection-reports-an-.patch
+@@ -0,0 +1,117 @@
++From 05524dbadb1acc3d8d75905108fea39cdf43832c Mon Sep 17 00:00:00 2001
++From: Ozan Tezcan <ozantezcan@gmail.com>
++Date: Wed, 14 May 2025 11:02:30 +0300
++Subject: [PATCH] Retry accept() even if accepted connection reports an error
++ (CVE-2025-48367)
 +
-+Ensure that the length of the input file name does not exceed PATH_MAX
++In case of accept4() returns an error, we should check errno value and
++decide if we should retry accept4() without waiting next event loop iteration.
 +
-+CVE: CVE-2025-27151
-+
-+Upstream-Status: Backport [https://github.com/redis/redis/commit/d0eeee6e31f0fefb510007a8cfdf5dce729a8be9]
++CVE: CVE-2025-48367
++Upstream-Status: Backport [https://github.com/redis/redis/commit/c76d6182096cbe10bd3a1dc41095b5ab422e6a74]
 +
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/redis-check-aof.c | 6 ++++++
-+ 1 file changed, 6 insertions(+)
++ src/anet.c    | 24 ++++++++++++++++++++++++
++ src/anet.h    |  1 +
++ src/cluster.c |  2 ++
++ src/socket.c  |  2 ++
++ src/tls.c     |  2 ++
++ src/unix.c    |  2 ++
++ 6 files changed, 33 insertions(+)
 +
-+diff --git a/src/redis-check-aof.c b/src/redis-check-aof.c
-+index e28126d..5b3ee2a 100644
-+--- a/src/redis-check-aof.c
-++++ b/src/redis-check-aof.c
-+@@ -547,6 +547,12 @@ int redis_check_aof_main(int argc, char **argv) {
-+         goto invalid_args;
-+     }
-+ 
-++    /* Check if filepath is longer than PATH_MAX */
-++    if (strlen(filepath) > PATH_MAX) {
-++        printf("Error: filepath is too long (exceeds PATH_MAX)\n");
-++        goto invalid_args;
-++    }
++diff --git a/src/anet.c b/src/anet.c
++index 64824a2..6c539d5 100644
++--- a/src/anet.c
+++++ b/src/anet.c
++@@ -704,3 +704,27 @@ int anetIsFifo(char *filepath) {
++     if (stat(filepath, &sb) == -1) return 0;
++     return S_ISFIFO(sb.st_mode);
++ }
 ++
-+     /* In the glibc implementation dirname may modify their argument. */
-+     memcpy(temp_filepath, filepath, strlen(filepath) + 1);
-+     dirpath = dirname(temp_filepath);
-diff --git a/meta-oe/recipes-extended/redis/redis/0001-CVE-2025-27151.patch b/meta-oe/recipes-extended/redis/redis/0001-CVE-2025-27151.patch
+++/* This function must be called after accept4() fails. It returns 1 if 'err'
+++ * indicates accepted connection faced an error, and it's okay to continue
+++ * accepting next connection by calling accept4() again. Other errors either
+++ * indicate programming errors, e.g. calling accept() on a closed fd or indicate
+++ * a resource limit has been reached, e.g. -EMFILE, open fd limit has been
+++ * reached. In the latter case, caller might wait until resources are available.
+++ * See accept4() documentation for details. */
+++int anetAcceptFailureNeedsRetry(int err) {
+++    if (err == ECONNABORTED)
+++        return 1;
+++
+++#if defined(__linux__)
+++    /* For details, see 'Error Handling' section on
+++     * https://man7.org/linux/man-pages/man2/accept.2.html */
+++    if (err == ENETDOWN || err == EPROTO || err == ENOPROTOOPT ||
+++        err == EHOSTDOWN || err == ENONET || err == EHOSTUNREACH ||
+++        err == EOPNOTSUPP || err == ENETUNREACH)
+++    {
+++        return 1;
+++    }
+++#endif
+++    return 0;
+++}
++diff --git a/src/anet.h b/src/anet.h
++index b13c14f..2319039 100644
++--- a/src/anet.h
+++++ b/src/anet.h
++@@ -71,5 +71,6 @@ int anetPipe(int fds[2], int read_flags, int write_flags);
++ int anetSetSockMarkId(char *err, int fd, uint32_t id);
++ int anetGetError(int fd);
++ int anetIsFifo(char *filepath);
+++int anetAcceptFailureNeedsRetry(int err);
++ 
++ #endif
++diff --git a/src/cluster.c b/src/cluster.c
++index 765958a..2130ffd 100644
++--- a/src/cluster.c
+++++ b/src/cluster.c
++@@ -1309,6 +1309,8 @@ void clusterAcceptHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
++     while(max--) {
++         cfd = anetTcpAccept(server.neterr, fd, cip, sizeof(cip), &cport);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_VERBOSE,
++                     "Error accepting cluster node: %s", server.neterr);
++diff --git a/src/socket.c b/src/socket.c
++index dad8e93..09d87bc 100644
++--- a/src/socket.c
+++++ b/src/socket.c
++@@ -318,6 +318,8 @@ static void connSocketAcceptHandler(aeEventLoop *el, int fd, void *privdata, int
++     while(max--) {
++         cfd = anetTcpAccept(server.neterr, fd, cip, sizeof(cip), &cport);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_WARNING,
++                     "Accepting client connection: %s", server.neterr);
++diff --git a/src/tls.c b/src/tls.c
++index e709c99..9a66e81 100644
++--- a/src/tls.c
+++++ b/src/tls.c
++@@ -774,6 +774,8 @@ static void tlsAcceptHandler(aeEventLoop *el, int fd, void *privdata, int mask)
++     while(max--) {
++         cfd = anetTcpAccept(server.neterr, fd, cip, sizeof(cip), &cport);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_WARNING,
++                     "Accepting client connection: %s", server.neterr);
++diff --git a/src/unix.c b/src/unix.c
++index bd146d0..8fdefe4 100644
++--- a/src/unix.c
+++++ b/src/unix.c
++@@ -100,6 +100,8 @@ static void connUnixAcceptHandler(aeEventLoop *el, int fd, void *privdata, int m
++     while(max--) {
++         cfd = anetUnixAccept(server.neterr, fd);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_WARNING,
++                     "Accepting client connection: %s", server.neterr);
+diff --git a/meta-oe/recipes-extended/redis/redis/0001-Retry-accept-even-if-accepted-connection-reports-an-.patch b/meta-oe/recipes-extended/redis/redis/0001-Retry-accept-even-if-accepted-connection-reports-an-.patch
 new file mode 100644
-index 0000000000..dd2ce977a7
+index 0000000000..e16ad07e3e
 --- /dev/null
-+++ b/meta-oe/recipes-extended/redis/redis/0001-CVE-2025-27151.patch
-@@ -0,0 +1,31 @@
-+From 96f00cb60cb6e73c66375264227872053385bea2 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Tue, 7 Oct 2025 21:26:55 +0200
-+Subject: [PATCH] CVE-2025-27151
++++ b/meta-oe/recipes-extended/redis/redis/0001-Retry-accept-even-if-accepted-connection-reports-an-.patch
+@@ -0,0 +1,107 @@
++From 5cb320f03b7d619499d2d69f4371096b5d6a9bdf Mon Sep 17 00:00:00 2001
++From: Ozan Tezcan <ozantezcan@gmail.com>
++Date: Wed, 14 May 2025 11:02:30 +0300
++Subject: [PATCH] Retry accept() even if accepted connection reports an error
++ (CVE-2025-48367)
 +
-+Ensure that the length of the input file name does not exceed PATH_MAX
++In case of accept4() returns an error, we should check errno value and
++decide if we should retry accept4() without waiting next event loop iteration.
 +
-+CVE: CVE-2025-27151
-+Upstream-Status: Backport [https://github.com/redis/redis/commit/d0eeee6e31f0fefb510007a8cfdf5dce729a8be9]
++CVE: CVE-2025-48367
++Upstream-Status: Backport [https://github.com/redis/redis/commit/0fe67435935cc5724ff6eb9c4ca4120c58a15765]
 +
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/redis-check-aof.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
++ src/anet.c       | 24 ++++++++++++++++++++++++
++ src/anet.h       |  2 +-
++ src/cluster.c    |  2 ++
++ src/networking.c |  6 ++++++
++ 4 files changed, 33 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/redis-check-aof.c b/src/redis-check-aof.c
-+index 1507e0a..f7dd5cb 100644
-+--- a/src/redis-check-aof.c
-++++ b/src/redis-check-aof.c
-+@@ -164,6 +164,11 @@ int redis_check_aof_main(int argc, char **argv) {
-+         exit(1);
-+     }
-+ 
-++    if (strlen(filename) > PATH_MAX) {
-++        printf("Error: filename is too long (exceeds PATH_MAX)\n");
-++        exit(1);
-++    }
++diff --git a/src/anet.c b/src/anet.c
++index 91f6171..2e42fc5 100644
++--- a/src/anet.c
+++++ b/src/anet.c
++@@ -594,3 +594,27 @@ int anetFormatFdAddr(int fd, char *buf, size_t buf_len, int fd_to_str_type) {
++     anetFdToString(fd,ip,sizeof(ip),&port,fd_to_str_type);
++     return anetFormatAddr(buf, buf_len, ip, port);
++ }
 ++
-+     FILE *fp = fopen(filename,"r+");
-+     if (fp == NULL) {
-+         printf("Cannot open file: %s\n", filename);
+++/* This function must be called after accept4() fails. It returns 1 if 'err'
+++ * indicates accepted connection faced an error, and it's okay to continue
+++ * accepting next connection by calling accept4() again. Other errors either
+++ * indicate programming errors, e.g. calling accept() on a closed fd or indicate
+++ * a resource limit has been reached, e.g. -EMFILE, open fd limit has been
+++ * reached. In the latter case, caller might wait until resources are available.
+++ * See accept4() documentation for details. */
+++int anetAcceptFailureNeedsRetry(int err) {
+++    if (err == ECONNABORTED)
+++        return 1;
+++
+++#if defined(__linux__)
+++    /* For details, see 'Error Handling' section on
+++     * https://man7.org/linux/man-pages/man2/accept.2.html */
+++    if (err == ENETDOWN || err == EPROTO || err == ENOPROTOOPT ||
+++        err == EHOSTDOWN || err == ENONET || err == EHOSTUNREACH ||
+++        err == EOPNOTSUPP || err == ENETUNREACH)
+++    {
+++        return 1;
+++    }
+++#endif
+++    return 0;
+++}
++diff --git a/src/anet.h b/src/anet.h
++index 2a685cc..adedaf3 100644
++--- a/src/anet.h
+++++ b/src/anet.h
++@@ -72,5 +72,5 @@ int anetFdToString(int fd, char *ip, size_t ip_len, int *port, int fd_to_str_typ
++ int anetKeepAlive(char *err, int fd, int interval);
++ int anetFormatAddr(char *fmt, size_t fmt_len, char *ip, int port);
++ int anetFormatFdAddr(int fd, char *buf, size_t buf_len, int fd_to_str_type);
++-
+++int anetAcceptFailureNeedsRetry(int err);
++ #endif
++diff --git a/src/cluster.c b/src/cluster.c
++index 8807fe2..030897c 100644
++--- a/src/cluster.c
+++++ b/src/cluster.c
++@@ -691,6 +691,8 @@ void clusterAcceptHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
++     while(max--) {
++         cfd = anetTcpAccept(server.neterr, fd, cip, sizeof(cip), &cport);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_VERBOSE,
++                     "Error accepting cluster node: %s", server.neterr);
++diff --git a/src/networking.c b/src/networking.c
++index 11891d3..2598a58 100644
++--- a/src/networking.c
+++++ b/src/networking.c
++@@ -1190,6 +1190,8 @@ void acceptTcpHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
++     while(max--) {
++         cfd = anetTcpAccept(server.neterr, fd, cip, sizeof(cip), &cport);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_WARNING,
++                     "Accepting client connection: %s", server.neterr);
++@@ -1211,6 +1213,8 @@ void acceptTLSHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
++     while(max--) {
++         cfd = anetTcpAccept(server.neterr, fd, cip, sizeof(cip), &cport);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_WARNING,
++                     "Accepting client connection: %s", server.neterr);
++@@ -1231,6 +1235,8 @@ void acceptUnixHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
++     while(max--) {
++         cfd = anetUnixAccept(server.neterr, fd);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_WARNING,
++                     "Accepting client connection: %s", server.neterr);
 diff --git a/meta-oe/recipes-extended/redis/redis_6.2.18.bb b/meta-oe/recipes-extended/redis/redis_6.2.18.bb
-index 13344beae4..179701bbf8 100644
+index 9ce476e14e..5e3b8d4430 100644
 --- a/meta-oe/recipes-extended/redis/redis_6.2.18.bb
 +++ b/meta-oe/recipes-extended/redis/redis_6.2.18.bb
-@@ -16,6 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://0004-src-Do-not-reset-FINAL_LIBS.patch \
-            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
+@@ -18,6 +18,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
             file://0006-Define-correct-gregs-for-RISCV32.patch \
-+           file://0001-CVE-2025-27151.patch \
+            file://0001-CVE-2025-27151.patch \
+            file://0001-Fix-out-of-bounds-write-in-hyperloglog-commands-CVE-.patch \
++           file://0001-Retry-accept-even-if-accepted-connection-reports-an-.patch \
            "
  
  SRC_URI[sha256sum] = "470c75bac73d7390be4dd66479c6f29e86371c5d380ce0c7efb4ba2bbda3612d"
 diff --git a/meta-oe/recipes-extended/redis/redis_7.2.8.bb b/meta-oe/recipes-extended/redis/redis_7.2.8.bb
-index 38d8e5ffe9..fe811dcc7e 100644
+index f5ea3eaf5b..22f48afd17 100644
 --- a/meta-oe/recipes-extended/redis/redis_7.2.8.bb
 +++ b/meta-oe/recipes-extended/redis/redis_7.2.8.bb
-@@ -16,6 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://0004-src-Do-not-reset-FINAL_LIBS.patch \
-            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
+@@ -18,6 +18,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
             file://0006-Define-correct-gregs-for-RISCV32.patch \
-+           file://0001-Check-length-of-AOF-file-name-in-redis-check-aof-CVE.patch \
+            file://0001-Check-length-of-AOF-file-name-in-redis-check-aof-CVE.patch \
+            file://0001-Fix-out-of-bounds-write-in-hyperloglog-commands-CVE-.patch \
++           file://0001-Retry-accept-even-if-accepted-connection-reports-an-.patch \
            "
  
  SRC_URI[sha256sum] = "6be4fdfcdb2e5ac91454438246d00842d2671f792673390e742dfcaf1bf01574"
