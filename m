@@ -1,260 +1,208 @@
-Return-Path: <philip@balister.org>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 538A2CCD185
-	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 11:10:23 +0000 (UTC)
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
- by mx.groups.io with SMTP id smtpd.web10.15652.1759834864519349545
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A82ECCA476
+	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 14:29:04 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web10.20163.1759847339574740514
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Oct 2025 04:01:04 -0700
+ Tue, 07 Oct 2025 07:28:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PWkgobzS;
- spf=pass (domain: gmail.com, ip: 209.85.208.169, mailfrom: joao.raul.434@gmail.com)
-Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-362e291924aso49075381fa.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 04:01:04 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UDijLDNy;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-27eceb38eb1so66176395ad.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 07:28:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759834862; x=1760439662; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=N8U0aQ15vLgPkSwqXeS1zGBEbhREg29oNvbIZxzJXAo=;
-        b=PWkgobzS0zkRR9dx2b/+1Ekisk8WRFdh40Cz3ZHdOYJGH989Rpj0Yk3XuYb6gFi4vA
-         KoW057quinRFBBSzh5knhjUw+28zsjksJy+rCs9oBiCmKlNuA6xs45mGsHH7oo4QqeI3
-         CtviIXrP9fLueTYKWhJvi+8bdn35jwRVfEl9Dewzrqg+UfdRIfv9kuVwopGqUdRheAx6
-         Qzdx/aESb0UgvfjEQmNsqeVfkurrPO3tG9+IOLO2KJDjwnzVQACwnIZOOaQKdTGo/SVI
-         9agCn8Jp85VbFckql541VEhudhUvxkPDm8eEEJAHeNoWtpGW0CYU/on11gkFY2cNnEvc
-         2XbA==
+        d=gmail.com; s=20230601; t=1759847339; x=1760452139; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=HOnM77IlCdY/Q8yI8ppOFxIeMsPhy6NGXF3iRkAGlHY=;
+        b=UDijLDNysh2b6DNetxOJksxCnrw/FeCHFsh8Mjo4z5YT+7cJH7b7dA805LGVV4bP8i
+         Iznmrx8bQ4ogI4B8tVlhIgfE79TSjN3LbtSZzqnPB13MriBEuOq+UIRYpp/YwN59kq7z
+         Rc//Uxc+GQTe6sYUd/7op4tiRp+5/UWo+FsiFGWFof0UkPxA79/qNyvDexR0tY2sOptD
+         JYM+DR4TsqLgCIujJQOo6pOccBf/iUJWvrbjZ4w0qzI+k4wRzupTAhvEXGWHugKdddQz
+         6mrpgm/fZKzxmpTZZ4o3/58YSJxrkJJrTr/PTCZ5y8FME1AQFINtczMz5c8aG9APUmxE
+         ILBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759834862; x=1760439662;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=N8U0aQ15vLgPkSwqXeS1zGBEbhREg29oNvbIZxzJXAo=;
-        b=X1K9PtEpzZQpcFMiRiIG6iEZwXX5OXmaUm78bdnrNelAS9QNmnU+WGng8zXDlfd9OS
-         FCjk3xcRTMfuTcpMuXdjYFeooX0rkNlQic9Rb5VJuCqCUYhFD8RC8bOS2slBoErCLOc1
-         tppvandZqBuZJWSbeah7TeA3x7CWfj79vFgi7eE7c1cHydRvlNfuw5Sclnt/O5ZOTILB
-         JM05EhxMK/i1IB3P66w4Kn7UJT5GWcQPWJUt1tWcrvoz32znWAPdcM1RaqzbKOnZ34Oo
-         OGVn4GhpwTydf7tNfKQDOu9SgLvW/m1oZX8fwLuheH8zV9wYo5kb78sgkl5UOQ9110ou
-         bkPw==
-X-Gm-Message-State: AOJu0YwdQ1tjTYrMh2izZfF06gnUsmsz48sCFXPmqB5R7SyX8ICQ87VO
-	z2DbI1L7wy45lsvkW0Wpvk3/Q5AUb3YJARoJNBJwX1xr42J50/l0dm+8+E2t4HxuG3o=
-X-Gm-Gg: ASbGnct1rXFrY4M80E5oI8/DqSTrQHf8JsJ47FIYSRRaTzbkro3qmd2bKhXA6vo6MJf
-	U3yn/qtNit+U2k+gKd8PWw3wK/tdtg+Bkjpi3BX98Be72+zymGv239mhomkVZWSRqq42n4IepaT
-	QmH5l4Kzn3dXQmgQmzZ9QsL4mWGZFv7QiHf721m2MJ/Sa70u+XxK7LrYoXsw1pdlwx2nYCf7/hU
-	+e7CZVSDouu7aE0/HgQ4FrdOBZMZ0op2V6VWD8NaIS+0Ay2QbR82kVY3NkhGwg9PaAET8K9FosL
-	6xyBnqiOTYpIJtGZEzlirjBqvBA48qvfF0gOdBfLbM7nGFHNAwkgF/0VwigxekEV+DPPg3pJX+z
-	/lYhn1IvyTNfdMA+1hC6/IFCF/OR5NUbh6rFqBOP/epDSSmacZSBYhqPOquG9mBNfioEZGluACo
-	mSnrD//8FDqvW9JtbyDQHlgFm6QHB2ZbJrJ6rOc94vUx7VrQ==
-X-Google-Smtp-Source: AGHT+IFvjGVrBcmMW/humuY/66rGKL9yczy+6/NS1lBiXnQFX+x7M8cQ4ZvznlvOspb/XcZkn7sxUg==
-X-Received: by 2002:a05:600c:1f8e:b0:46e:1cc6:25f7 with SMTP id 5b1f17b1804b1-46e711022d1mr108498375e9.9.1759834456187;
-        Tue, 07 Oct 2025 03:54:16 -0700 (PDT)
-Received: from RD-8dhlsmLpT3bz.corp.hbkworld.com (89-181-200-223.net.novis.pt. [89.181.200.223])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-46e723593d8sm225159795e9.11.2025.10.07.03.54.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Oct 2025 03:54:15 -0700 (PDT)
-From: "=?UTF-8?q?Lima=2C=20Jo=C3=A3o?=" <joao.raul.434@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Lima=2C=20Jo=C3=A3o?= <joao.lima@hbkworld.com>
-To: openembedded-devel@lists.openembedded.org,
-	raj.khem@gmail.com
-Cc: joao.lima@hbkworld.com,
-	ivitro@gmail.com,
-	joao.raul.434@gmail.com
-Subject: [meta-oe][PATCH v2 2/3] openocd: add dmem support to am64xx and j784s4 platforms
-Date: Tue,  7 Oct 2025 11:53:48 +0100
-Message-ID: <20251007105350.1237-3-joao.lima@hbkworld.com>
-X-Mailer: git-send-email 2.51.0.windows.1
-In-Reply-To: <20251007105350.1237-1-joao.lima@hbkworld.com>
-References: <20251007105350.1237-1-joao.lima@hbkworld.com>
+        d=1e100.net; s=20230601; t=1759847339; x=1760452139;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=HOnM77IlCdY/Q8yI8ppOFxIeMsPhy6NGXF3iRkAGlHY=;
+        b=dTVpRMunHKU5jovKI38KSKbSG8zBAH/RmNPqXjPz4N0X/vxwumg0uiR9kpLxDGbJB4
+         cNQxqGqgyOHx0144NHlNbgrQyihELpKfDO6gtKU9WBni8NrTzvMXkuRWcwV1Kwk8PX5s
+         eq8GI4PLAKayUgTsHssT6PoBq1o0wjYIV5qWR444AkN6GJ1KVULtDT7/e6rh2GThAVWT
+         oxRJ96zLP6G8XRzt4oTZ5huximYIiM2GGj1mt00MIVF82HG6JHAOMAVb9VEh8BlJ4DX/
+         AJH2TmyIqKF6DK35s0yLIq8yFFp/2nT09q5t2BXD39+D+lSraCrSt/T129qjXUumq+hE
+         N8qQ==
+X-Gm-Message-State: AOJu0Yw6jVmZShbEpNvfx2LlBJECFQh+ndeldAil7dW4KZHRV+yBnxm8
+	x0fdDbY4uauglccGA6HXaPpOaHo29ivn1H6YadmtS3c2zPES1stZxEQxVVdQv+3njZ2/mES4dgQ
+	CBbJkfgyWlZoXVnDwHIxinhMArGJ4WLesNaZR
+X-Gm-Gg: ASbGnct25WaOmvvZ0t4t0OGihsPdXoiqpA+Ibdvn90ao5+XYy3D3CvDRyL31uq9EBBJ
+	Bm21mLTYF7oZLMDklPPTh1FXtVrUbcqYJM2HobuxP63RKZ09TFQjqyOIZAidU+tDJtEzrLfPfPR
+	mkPbjZ3LRzUc7vVOpfnRwGVEjqzQhA+ij92tDZLKddXZnbn4PsMzwTrCLaevTIkJNzYZMOGT+7E
+	jFeQ9/jA0s/fbPWrzKm3Pyw5sS53TByPVTL2YR0/C2xCr0QhjTd4wYjg0d6WUfTvp5BPDLF2NwO
+X-Google-Smtp-Source: AGHT+IGmzCjOWFeOdDw7heNBC3cNuhihr/eQQrrPnU38VPu0NfJ3WE6r5XOyH4A739gWEj+28s7O0TH2y84SSypcf54=
+X-Received: by 2002:a17:903:40d1:b0:27e:f16f:618b with SMTP id
+ d9443c01a7336-28e9a55c07fmr216890835ad.24.1759847338587; Tue, 07 Oct 2025
+ 07:28:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Tue, 7 Oct 2025 07:28:45 -0700
+X-Gm-Features: AS18NWBCVEVBowqPUeHyf5AYqZ79_wnC9ytIiD-nDhcb8lp2ooVTq4vbSetOW3s
+Message-ID: <CAK5yBb9gb6SY1u_kZ3r9=fUhGXzc9D7A=-vO=t15q-ojH8N61w@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="00000000000079b9c0064092638f"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 11:10:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120334
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 14:29:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120336
 
-From: Joao Lima <joao.lima@hbkworld.com>
+--00000000000079b9c0064092638f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Platform support patches:
-   - Add SWD native configuration files for AM64x and J784s4 boards
-   - Configure DMEM access parameters in ti_k3.cfg for direct memory operations
-   - Set up DAPBUS debugger and emulated AP descriptions
+All,
 
-Signed-off-by: Joao Lima <joao.lima@hbkworld.com>
----
- ...wd_native.cfg-Add-support-for-direct.patch | 77 +++++++++++++++++++
- ....cfg-Add-support-for-direct-memory-a.patch | 65 ++++++++++++++++
- .../recipes-devtools/openocd/openocd_git.bb   |  2 +
- 3 files changed, 144 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch
- create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch
-new file mode 100644
-index 0000000000..8a3b72321f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/openocd/openocd/0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch
-@@ -0,0 +1,77 @@
-+From 5c55d79ecfecc4a1b5a5ebcf649227ca1e1bf38e Mon Sep 17 00:00:00 2001
-+From: Joao Lima <joao.lima@hbkworld.com>
-+Date: Tue, 30 Sep 2025 12:13:04 +0000
-+Subject: [PATCH 1/2] tcl/board/ti_*_swd_native.cfg: Add support for direct
-+ memory access via SW
-+
-+Add support for SWD emulation as a transport method for
-+direct memory operations of boards TI AM64x and TI J784s4
-+
-+Upstream-Status: Submitted [http://openocd.zylin.com/#/c/9020/]
-+
-+Change-Id: I17fe9b2bef5c58886625bfdb88d92645ba4d7da7
-+Signed-off-by: Joao Lima <joao.lima@hbkworld.com>
-+---
-+ tcl/board/ti_am64xx_swd_native.cfg | 23 +++++++++++++++++++++++
-+ tcl/board/ti_j784s4_swd_native.cfg | 22 ++++++++++++++++++++++
-+ 2 files changed, 45 insertions(+)
-+ create mode 100644 tcl/board/ti_am64xx_swd_native.cfg
-+ create mode 100644 tcl/board/ti_j784s4_swd_native.cfg
-+
-+diff --git a/tcl/board/ti_am64xx_swd_native.cfg b/tcl/board/ti_am64xx_swd_native.cfg
-+new file mode 100644
-+index 000000000..d3727149e
-+--- /dev/null
-++++ b/tcl/board/ti_am64xx_swd_native.cfg
-+@@ -0,0 +1,23 @@
-++# SPDX-License-Identifier: GPL-2.0-or-later
-++# Copyright (C) 2022-2023 Texas Instruments Incorporated - http://www.ti.com/
-++#
-++# Texas Instruments am642
-++# Link: https://www.ti.com/product/AM642
-++#
-++# This configuration file is used as a self hosted debug configuration that
-++# works on every AM642 platform based on firewall configuration permitted
-++# in the system.
-++#
-++# In this system openOCD runs on one of the CPUs inside AM625 and provides
-++# network ports that can then be used to debug the microcontrollers on the
-++# SoC - either self hosted IDE OR remotely.
-++
-++# We are using dmem, which uses dapdirect_swd transport
-++adapter driver dmem
-++transport select swd
-++
-++if { ![info exists SOC] } {
-++	set SOC am642
-++}
-++
-++source [find target/ti_k3.cfg]
-+diff --git a/tcl/board/ti_j784s4_swd_native.cfg b/tcl/board/ti_j784s4_swd_native.cfg
-+new file mode 100644
-+index 000000000..13b2ac3b8
-+--- /dev/null
-++++ b/tcl/board/ti_j784s4_swd_native.cfg
-+@@ -0,0 +1,22 @@
-++# SPDX-License-Identifier: GPL-2.0-or-later
-++# Copyright (C) 2022-2023 Texas Instruments Incorporated - http://www.ti.com/
-++#
-++# Texas Instruments TDA4VM/J721E
-++# Link: https://www.ti.com/product/TDA4VM
-++#
-++# This configuration file is used as a self hosted debug configuration that
-++# works on every TDA4VM platform based on firewall configuration permitted
-++# in the system.
-++#
-++# In this system openOCD runs on one of the CPUs inside TDA4VM and provides
-++# network ports that can then be used to debug the microcontrollers on the
-++# SoC - either self hosted IDE OR remotely.
-++
-++# We are using dmem, which uses dapdirect_swd transport
-++adapter driver dmem
-++transport select swd
-++
-++if { ![info exists SOC] } {
-++        set SOC j784s4
-++}
-++source [find target/ti_k3.cfg]
-diff --git a/meta-oe/recipes-devtools/openocd/openocd/0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch b/meta-oe/recipes-devtools/openocd/openocd/0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch
-new file mode 100644
-index 0000000000..c879696ef5
---- /dev/null
-+++ b/meta-oe/recipes-devtools/openocd/openocd/0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch
-@@ -0,0 +1,65 @@
-+From 39bc4461642eaaf993d0a6cf772d51cdde8c0ae8 Mon Sep 17 00:00:00 2001
-+From: Joao Lima <joao.lima@hbkworld.com>
-+Date: Tue, 30 Sep 2025 12:13:30 +0000
-+Subject: [PATCH 2/2] tcl/target/ti_k3.cfg: Add support for direct memory
-+ access via SWD
-+
-+Adds support for direct memory access via SWD emulation for AM64x and
-+J784s4 boards, configuring addresses and parameters required for
-+direct memory operations.
-+
-+Upstream-Status: Submitted [http://openocd.zylin.com/#/c/9021/]
-+
-+Change-Id: Iebc16612b3990b2ef19ddc4143b66ab1bcbfe0f3
-+Signed-off-by: Joao Lima <joao.lima@hbkworld.com>
-+---
-+ tcl/target/ti_k3.cfg | 22 +++++++++++++++++++++-
-+ 1 file changed, 21 insertions(+), 1 deletion(-)
-+
-+diff --git a/tcl/target/ti_k3.cfg b/tcl/target/ti_k3.cfg
-+index 0dee74e5e..6b0ac2e52 100644
-+--- a/tcl/target/ti_k3.cfg
-++++ b/tcl/target/ti_k3.cfg
-+@@ -176,6 +176,16 @@ switch $_soc {
-+ 			# Uses the same JTAG ID
-+ 			set _armv8_cores 0
-+ 		}
-++
-++		# Setup DMEM access descriptions
-++		# DAPBUS (Debugger) description
-++		set _dmem_base_address 0x740002000
-++		set _dmem_ap_address_offset 0x100
-++		set _dmem_max_aps 10
-++		# Emulated AP description
-++		set _dmem_emu_base_address 0x760000000
-++		set _dmem_emu_base_address_map_to 0x1d500000
-++		set _dmem_emu_ap_list 1
-+ 	}
-+ 	am625 {
-+ 		set _K3_DAP_TAPID 0x0bb7e02f
-+@@ -333,7 +343,7 @@ switch $_soc {
-+ 		set ARMV8_CTIBASE {0x90420000 0x90520000 0x90620000 0x90720000
-+                            0x90820000 0x90920000 0x90a20000 0x90b20000}
-+ 
-+-		# J721s2 has 4 clusters of 2 R5 cores each.
-++		# J784s4 has 4 clusters of 2 R5 cores each.
-+ 		set _r5_cores 8
-+ 		set R5_DBGBASE {0x9d010000 0x9d012000
-+                         0x9d410000 0x9d412000
-+@@ -348,6 +358,16 @@ switch $_soc {
-+                       main1_r5.0 main1_r5.1
-+                       main2_r5.0 main2_r5.1}
-+ 
-++		# Setup DMEM access descriptions
-++		# DAPBUS (Debugger) description
-++		set _dmem_base_address 0x4c40002000
-++		set _dmem_ap_address_offset 0x100
-++		set _dmem_max_aps 8
-++		# Emulated AP description
-++		set _dmem_emu_base_address 0x4c60000000
-++		set _dmem_emu_base_address_map_to 0x1d600000
-++		set _dmem_emu_ap_list 1
-++
-+ 		# sysctrl CTI base
-+ 		set CM3_CTIBASE {0x20001000}
-+ 		# Sysctrl power-ap unlock offsets
-diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-index 3b7705c41d..ce1389b060 100644
---- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-+++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-@@ -10,6 +10,8 @@ SRC_URI = " \
-     git://github.com/msteveb/jimtcl.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/jimtcl;name=jimtcl;branch=master \
-     git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src/jtag/drivers/libjaylink;name=libjaylink;branch=master \
-     file://0001-Makefile.am-Use-SOURCE_DATE_EPOCH-environment-variab.patch \
-+    file://0001-tcl-board-ti_-_swd_native.cfg-Add-support-for-direct.patch \
-+    file://0002-tcl-target-ti_k3.cfg-Add-support-for-direct-memory-a.patch \
- "
- 
- SRCREV_FORMAT = "openocd"
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
+
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 466
+unassigned or newcomer bugs.
+
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.3=E2=80=9D, =E2=80=9C6.0", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.3" and then =E2=80=9C6.0=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--00000000000079b9c0064092638f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
+al">All,<br><br>The triage team is starting to try and collect up and class=
+ify bugs which a newcomer to the project would be able to work on in a way =
+which means people can find them. They&#39;re being listed on the triage pa=
+ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
+wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
+e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
+d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
+org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
+illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
+.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
+ea is these bugs should be straight forward for a person to help work on wh=
+o doesn&#39;t have deep experience with the project.  If anyone can help, p=
+lease take ownership of the bug and send patches!  If anyone needs help/adv=
+ice there are people on irc who can likely do so, or some of the more exper=
+ienced contributors will likely be happy to help too.<br><br>Also, the tria=
+ge team meets weekly and does its best to handle the bugs reported into the=
+ Bugzilla. The number of people attending that meeting has fallen, as have =
+the number of people available to help fix bugs. One of the things we hear =
+users report is they don&#39;t know how to help. We (the triage team) are t=
+herefore going to start reporting out the currently 466 unassigned or newco=
+mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
+ and again to help out with these.  Bugs are split into two types, &quot;tr=
+ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
+ents&quot; which are features we&#39;d want to add to the system.  There ar=
+e also roughly four different &quot;priority&quot; classes right now, =E2=
+=80=9C5.3=E2=80=9D, =E2=80=9C6.0&quot;, &quot;5.99&quot; and &quot;Future&q=
+uot;, the more pressing/urgent issues being in &quot;5.3&quot; and then =E2=
+=80=9C6.0=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
+g you would be able to help with either take ownership of the bug, or send =
+me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
+ an e-mail with the bug number you would like and I will assign it to you (=
+please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
+_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
+ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
+s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
+al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
+al,sans-serif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--00000000000079b9c0064092638f--
 
