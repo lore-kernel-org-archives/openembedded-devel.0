@@ -2,91 +2,119 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6E5ECCA476
-	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 14:51:54 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web10.20791.1759848708257787797
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E01F9CCA476
+	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 15:06:14 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web11.21337.1759849565919262412
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Oct 2025 07:51:48 -0700
+ Tue, 07 Oct 2025 08:06:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cX6tiK9C;
- spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-63163a6556bso13859375a12.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 07:51:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=j0U+My1r;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-62fa062a1abso11976893a12.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 08:06:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759848706; x=1760453506; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759849564; x=1760454364; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=O5+Cvt8pdTMK/2xApO66yBlBee8vF2Njpw68JcU1Dyo=;
-        b=cX6tiK9CA0lqzmvHdOgwIXm/zvGiGzZLFN/A5lEhjQSqdLVK/vUHgTuKeMK/0ew6eQ
-         1gMhPnjfV5IkKJYq7Sxd7lzn/KmE2jWdyn/MfFr8+LqHdZu5I8ctGTJa1XJGFy6PQ9Id
-         jepuQPWJc2KrA0jNT5yiF23zSuI6gYSdtO4eqByF+ixEebxxigllomGepN69oMpM/yyQ
-         Fzbe7+U0f6/vZsu5Ko1ZxUJuEvAlJfohIwae2511CO+cwvBByXYpJnrS45/p5HL60OS/
-         tjRdrIO5tmKF5pAmjivUAH1ieFs7zRBY+8BCNVodIR2c/2NQCIrLEfBUJcnqFBBLRRVx
-         wxZw==
+        bh=eBNQ9nlM3l7ZZx6ehmlTOtCF3Gq/Ze2D0wutGNajFmA=;
+        b=j0U+My1ry6jxnSIMJXETFJq9U00NsOlAxw5cj1XzLiKIGTDvdpm9ijh/HX8jPrwTfC
+         y35P1CoVno+mnQeuLZ3Xx+25vwhQsBmRXUbwzWMzXxgitJPdB08maQDLRO2d+VKjF2uO
+         qUF9bzciQo4pHqOZUhzkTXjH4S+RJYBD3SROygNGzjH/ON2vyMcW9LC48gUuI9Uy3wYz
+         iDpltAIcvXyVA++Bgoddanl8SQkqLc/o26ypa7WgSc4Ptf1VgGr2rFArUcOqHdCcRjF5
+         /Z29yD5U0wlRz+Hy3Qb0gM87kXG/TrNZBTmVkd++S60HE0Lb/ry0/i1yY1hd6PiyIUWy
+         NQGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759848706; x=1760453506;
+        d=1e100.net; s=20230601; t=1759849564; x=1760454364;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=O5+Cvt8pdTMK/2xApO66yBlBee8vF2Njpw68JcU1Dyo=;
-        b=htiwSM0PnKxetV0AW/QUqrgmeP+T+4ghZzFe3OrB5OF7aTb5zaQsNEKAFTnuEl8q7X
-         /qA0j9drz0YMYrf4g2ZEYH4tHRlbEP2b0UYmuXjbl8DDrp5TzgRpJXN4S0fTx1PBlfnH
-         zbAhE09LNXUV8ZCDddq0Pxu5beQ6G7leJA8Md5K1zErp/zhyjS87SrkfDT/03Ov5Hh1D
-         qwhMTC9AzdWN0PsQuI0MEcK4lcoMakAmUmhieJvJ7J/7Tyc6FDZYfrELiUZnvLIPZTMq
-         w513lQGtCgpISdUUIMpPwRxSr0RUdPV4EEfZGRNY4eP7JBIvQ7m+aJzjr72/NaGPHm+P
-         15lQ==
-X-Gm-Message-State: AOJu0YzPCOV3lisPYrceCXLZQxAd5b9wh9EvdiEjHlTBKOmkFIaKGFWM
-	8+c/V9C3QuUBJS7Uv9HYrdPcn54u7d750NcpKEhHP/zCGqOhO/CBje8snKgNnA==
-X-Gm-Gg: ASbGncviuO6+x3v0K4aIBl9MX1VXH48CNNmhP4GpdeJUmU0Cf1QGbFtbe1jp5YDzJ2N
-	C8YTx570rtIwCZ6G8TMAHBpMo+ze9j6MHiAv7Kp/NzwgyB7hbgcfRMUjximicMhc+RbU31GByVC
-	2VRudNUY0HHU8xq9ktwYWAWb/4AiEhOkLfcDNDvf2+ZJbjz3KqFY1G2HgRbxC1OryuRUA6C7Fg0
-	Lj8P+H4ZpJTwWauAGWR+Fw0wOkiexeSAeQ0vyyAy462MTfeukIdUIbo9ww8z3PEWNv4vGYGGAvV
-	Ml5U8D6xbLPpxUIBCLkECD5+VlsipM7iRlNxdMrO8pAZz5pnwPVoMk+avAYeR2RmTemu4x0h5Tj
-	Js0VqUibyOIo7CyZaCltBWqWMQIbjZ0gdIc3FF9MhguQs
-X-Google-Smtp-Source: AGHT+IHpUFYkbWs/pCX1cMp2ZMRqoRijZknuOy1td+USZEJCRZ9q8Y+Ezb5L6IbLn6onHYL8Sy2+Mg==
-X-Received: by 2002:a17:906:6a1f:b0:b30:2f6b:448f with SMTP id a640c23a62f3a-b49c1f5c878mr2391833866b.25.1759848706405;
-        Tue, 07 Oct 2025 07:51:46 -0700 (PDT)
+        bh=eBNQ9nlM3l7ZZx6ehmlTOtCF3Gq/Ze2D0wutGNajFmA=;
+        b=qio/CStS6s99O0jSV/mcZQYvX0pDgM51PIIxaDQUE6azgctA+Fo9jRGdG5Egdmv7l1
+         3L52rp0WYLohVlK+foU3/2FQi4w93/Onvss2iCbCZGVOS+W1m/SBHVULj0cbfkIo24Zh
+         3zvZ6NrRDakDmNB1dkh3VKYUhUEoogcLsVuvO89Vurp3HqN60it5ikR819l9RxNKO70b
+         kve99mKu81yTMYKDTwtBrXJYF7V8F5GCxubVIYioALmjn3bwUORsB2t4uRUHPu1rO8wr
+         bHVonrvLHAH90O8NZCYBLTEsIG4Y5n1zbNTUQpbFw8GoxEPX23l4s0a58u1E8m/duL7j
+         aO1A==
+X-Gm-Message-State: AOJu0YxjQgOz8Rt9N1gVc9QpK5yQecQnisviPIsbmf0JB9OcuQwT1bcH
+	sdBhB5QtyVHUkrS/j5our4r7+NO4mapYi04N15rhFhGaiV8EpLKwT4Qla1scxg==
+X-Gm-Gg: ASbGnctBnzPTDJi/H5XpcbntaRInjrb2+LEZoSNXSW6Mz9vYohFi06yv6N6swDWYhlb
+	TR7UV6Kna++MdNpNMPRDDxGDHnajWdi/jUdd2l3MwqXdqbtmyjdk0WAPXM+JFzyWhUoubzchSsa
+	UJfUACU1Nlrcbode4p0zWV+0LIaXRjPsKXYIewF7lafhCQoyak8CCQGLWwB2E4Y1kSNJ5DuL3hS
+	KR7bKixRSevqC2VyVSYQvBFYr4zEoSLfbQ6WwJ2A/Ph7p6hlQFQCvspFFx39Ip+WuxMKDjzu2Cf
+	ZPRoUr0+18MwWCVu1u4HsZ3X6TbUFO7YndQLvZbr1b7Tm2kqUa8QNVUyFJMFw9rPVURv4WQ/fXH
+	fP+W5ZkWLec6g/+VFXNRG+Te/Lwp9cLiKF2vBVfrM6x5J
+X-Google-Smtp-Source: AGHT+IFF/RvLX3qt0fCGqaDgqqVnbDtDfFc7C1pI5y2sSWGIso+fTriplv3CG087quwAWUNQPXFDug==
+X-Received: by 2002:a17:907:da2:b0:b3d:530:9f07 with SMTP id a640c23a62f3a-b49c1280685mr2172596966b.11.1759849563734;
+        Tue, 07 Oct 2025 08:06:03 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486970b2ffsm1437148566b.47.2025.10.07.07.51.45
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a174a6dsm1420322366b.90.2025.10.07.08.06.03
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Oct 2025 07:51:46 -0700 (PDT)
+        Tue, 07 Oct 2025 08:06:03 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] luajit: ignore CVE-2024-2517{6,7,8}
-Date: Tue,  7 Oct 2025 16:51:45 +0200
-Message-ID: <20251007145145.4100132-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] libraw: upgrade 0.21.2 -> 0.21.4
+Date: Tue,  7 Oct 2025 17:06:02 +0200
+Message-ID: <20251007150602.4120778-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 14:51:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120338
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 15:06:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120339
 
-All 3 CVEs are fixed in the currently used revision.
+This upgrade contains fixes for the following vulnerabilities:
+CVE-2025-43961, CVE-2025-43962, CVE-2025-43963 and CVE-2025-43964
 
-Fixes:
-CVE-2024-25176: https://github.com/LuaJIT/LuaJIT/commit/343ce0edaf3906a62022936175b2f5410024cbfc
-CVE-2024-25177: https://github.com/LuaJIT/LuaJIT/commit/85b4fed0b0353dd78c8c875c2f562d522a2b310f
-CVE-2024-25178: https://github.com/LuaJIT/LuaJIT/commit/defe61a56751a0db5f00ff3ab7b8f45436ba74c8
+Also drop two old CVE_STATUS entries which are not needed anymore,
+because the database has been updated with correct info.
+
+Changelog:
+https://github.com/LibRaw/LibRaw/blob/master/Changelog.txt
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-devtools/luajit/luajit_git.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/recipes-support/libraw/libraw_0.21.2.bb | 13 -------------
+ meta-oe/recipes-support/libraw/libraw_0.21.4.bb | 10 ++++++++++
+ 2 files changed, 10 insertions(+), 13 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/libraw/libraw_0.21.2.bb
+ create mode 100644 meta-oe/recipes-support/libraw/libraw_0.21.4.bb
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_git.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-index f4a1345ab2..9df5fca0e6 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_git.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-@@ -95,3 +95,7 @@ COMPATIBLE_HOST:powerpc64 = "null"
- COMPATIBLE_HOST:powerpc64le = "null"
- COMPATIBLE_HOST:riscv64 = "null"
- COMPATIBLE_HOST:riscv32 = "null"
+diff --git a/meta-oe/recipes-support/libraw/libraw_0.21.2.bb b/meta-oe/recipes-support/libraw/libraw_0.21.2.bb
+deleted file mode 100644
+index 01425c6db0..0000000000
+--- a/meta-oe/recipes-support/libraw/libraw_0.21.2.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-SUMMARY = "raw image decoder"
+-LICENSE = "LGPL-2.1-only | CDDL-1.0"
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1501ae0aa3c8544e63f08d6f7bf88a6f"
+-
+-SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=0.21-stable;protocol=https"
+-SRCREV = "1ef70158d7fde1ced6aaddb0b9443c32a7121d3d"
+-
+-inherit autotools pkgconfig
+-
+-DEPENDS = "jpeg jasper lcms"
+-
+-CVE_STATUS[CVE-2020-22628] = "cpe-incorrect: The current version (0.21.2) is not affected by the CVE which affects versions earlier than 0.21.2"
+-CVE_STATUS[CVE-2023-1729] = "cpe-incorrect: The current version (0.21.2) is not affected by the CVE which affects versions earlier than 0.21.2"
+diff --git a/meta-oe/recipes-support/libraw/libraw_0.21.4.bb b/meta-oe/recipes-support/libraw/libraw_0.21.4.bb
+new file mode 100644
+index 0000000000..ef0a0255d9
+--- /dev/null
++++ b/meta-oe/recipes-support/libraw/libraw_0.21.4.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "raw image decoder"
++LICENSE = "LGPL-2.1-only | CDDL-1.0"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1501ae0aa3c8544e63f08d6f7bf88a6f"
 +
-+CVE_STATUS[CVE-2024-25176] = "fixed-version: The used revision contains the fix already."
-+CVE_STATUS[CVE-2024-25177] = "fixed-version: The used revision contains the fix already."
-+CVE_STATUS[CVE-2024-25178] = "fixed-version: The used revision contains the fix already."
++SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=0.21-stable;protocol=https;tag=${PV}"
++SRCREV = "9646d776c7c61976080a8f2be67928df0750493e"
++
++inherit autotools pkgconfig
++
++DEPENDS = "jpeg jasper lcms"
 
