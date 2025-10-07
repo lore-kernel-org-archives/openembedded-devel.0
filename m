@@ -2,133 +2,157 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83CD9CCA476
-	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 18:06:06 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
- by mx.groups.io with SMTP id smtpd.web11.25967.1759860362207637736
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7F95CCA470
+	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 18:35:16 +0000 (UTC)
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+ by mx.groups.io with SMTP id smtpd.web10.26518.1759862113532222354
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Oct 2025 11:06:02 -0700
+ Tue, 07 Oct 2025 11:35:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QN8ihLn4;
- spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-b456d2dc440so1049873066b.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 11:06:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YPYbBt0+;
+ spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-b3d50882cc2so1243003866b.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 11:35:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759860360; x=1760465160; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759862112; x=1760466912; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QfQduxZ5QwVorjUm5whQkmBz7HZ/61EDNl8OlmDpEvk=;
-        b=QN8ihLn4TJTbh9IvrzEHzWlJzG+eNWww4kfqWbWn9vBJjTgL0LWEC611wThyesoqBa
-         OrzaGjYAh9sQ5j+iwr2fW8k+TDNU2BnalIJEgdSgkLTS6HW2191xFvnq4va5gg34i0Qj
-         Dw6DcnpyDJMi7gujD3eB0HcjJ4oHjU5HInzOZhWkneMdZaKAt4/hDWYT/XHI1OvNKJ43
-         Z3iZMAEDfVVTqL40zMAmQ04H9ZueAheEMHs5Vu4A9ugHh0TnP0+YTcQA3SV6Yr1jdcS/
-         9mqunqgVA73EaJcj8gGvfqYbT6t+xYUMGCYInvPXaCZ1oa/dT24+lplhbA+OqiCikW+9
-         NbBg==
+        bh=3lPyYUT7qROE6nMtyYgMhzbV1ecEInM6eDLrChfGArg=;
+        b=YPYbBt0+0YY6oe76mev5feEyDL2wuWksCG+6dalyLeeLQR8tUpP1wE1FdENIFxxQUW
+         jBE2bib37FyehQtwYqfS2jNYBW9/qjPSOq2CNdAm+7NwQ+HfnENbRIP0wQNGJYV8cdqL
+         f20bNBwGnCvLwRhzVl4Yk8wxvbZS1xtgcwau3CdWgGCki/2LEE9QqMdEzYdbMumdVpqA
+         6LNj7t4ar2Fg8hWno97l8S03WaK9qG5H3S5NrJ262Eck4RJwZ1xU4oty/KjxY3aOPnh5
+         J8SQadCtaz/zXOIFRMPuT/ktWUDZ2gyB+V6+bokonndzOpl+Tn2L5D1EhheYWt4jj8Fl
+         D0BQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759860360; x=1760465160;
+        d=1e100.net; s=20230601; t=1759862112; x=1760466912;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=QfQduxZ5QwVorjUm5whQkmBz7HZ/61EDNl8OlmDpEvk=;
-        b=M1Ef7HAa/mzCR1Kf8haVIUFnHr4BIXcPRoJU5+REbsQD9SWvL731HnZoCx0/LSpQBM
-         ra//yTyNF6h6pvn22mKCx4syIc80CrNUIYU/hb5lM40XOtVO7n8Emx+tChVjxVcmBvcX
-         pm6ko6Iibzje7JkybKAYDLA2tZB8SBgZDMSGovVT7nzMonX1ud+LXpIUM/aZeLxwT4YL
-         Tjtw7GNx9VWPbPK9nWvMEigObAcCQ79nTSLQ0LZb38jwaS665SIbrulCiRs0GZorU629
-         zdYEXLtbT0Ve//f/f882NBWQ5r6JY0Gx+yK3A1kGPrA6936OQLpjaxitXZbuifi2VBIA
-         atKA==
-X-Gm-Message-State: AOJu0YyR9zpf8ZGBqSb1eP4xnCBjdLvznESIcZpzdLNSQei+nmMubBan
-	zt5NFtJOkL5X8AhIeboSKdTPYKJb4NXET6KM6fL7OiOcZfAd7G8CQ8ZCDjSIJA==
-X-Gm-Gg: ASbGncuJtjG1nVeLhMup2wIxXnR4Lyd0WJITB2xchvJvpjXSmt6kKjJFO0XVBHpXc5y
-	OM8eQFcMjgUkib9fX4j0dm/4qKtjrZ+2soEl+893bkc+T/HYMQmo2fjAhe3LNQ+hjPKmrY/RYHF
-	1QTE4dVSShPQUMTJNRAaoW7Gr1phei3RYECiMrj5MhoK/pDniXqmqFrcp8xK8DRw1zeAidOW3Kv
-	IboJXVciqH/nvuMteydiXum8oS/TaICftpfP2rJg3v49d34T99WD7vKUewNDdRgVixPTzicU6G9
-	O0BlzpA9izmqrGLMd6L1AmjFLmEhq4JJ218wBo9PwfdNZOH58l1Ytm4gUSOFg6bM6tABQgbcBW4
-	ALEtvNdRlNs50u3LtPTlHOdi5VGygY71F0u33AJ8EgYp3
-X-Google-Smtp-Source: AGHT+IGJunwvtOTc2E20gJedSVsNlYh0C3rxrAKRN8CcYQBxx22ltb/MQg+DeO9QAluhIy6mH+1oXw==
-X-Received: by 2002:a17:907:2d0d:b0:b3d:6fff:9a0e with SMTP id a640c23a62f3a-b50ac2d792bmr68630366b.53.1759860359917;
-        Tue, 07 Oct 2025 11:05:59 -0700 (PDT)
+        bh=3lPyYUT7qROE6nMtyYgMhzbV1ecEInM6eDLrChfGArg=;
+        b=XcTmfEoTHmTmkNu0LFUM0w2I9EdwYyCBf4rmY3ULPuidsMUkJhb7aUMUWpDZVlRC/V
+         miRRa99OpwqgOlxM8soKI4FV2vESc5XPoZsFqiCnFLybKyS0YpYotBUD9RFQ3CkyjDrp
+         PA80O2XapqK6Ixf/IB9z9iiCKTMY9Fu2iOpCiguOFpNYRo2zocw8Maus6mCK9QJ6x6iB
+         4zsosGY9lOiboNCO7pROU0gBwnLVxUz3Z6k5oOFVGN6xYhwh/ExpdHA2g/KrBxR7vRPb
+         7bcd66g23Yq9ZJ4Zz2CgEfv5c/3uhzSeq/qOS7iJlx/XjTpx7ykgpleANVNtUpEIbLBV
+         RZ+Q==
+X-Gm-Message-State: AOJu0Yys8x1IBSrVCoTIomjI6SPzZ5gJnACgaixwl33Ujw2WRIkxkPHJ
+	UED62L/jPR9NHCnflrHHZdqkUQhKo0QiHQZDQqvzQEflPjQDgemraDzkwTo+3g==
+X-Gm-Gg: ASbGncstl009Xw0fyDEFJSPXFjpa97udahFYHfQQPgIhIuFwe1KkBYwmxljlWR7YH0p
+	R1C5enxU8HbaR6PDqR5i6d/kNvIYQxnRx28vugCmyhqDR4rpWHc1Eiw09ohC07cx1nfYdL/ZrBE
+	HienC6MUu+yGvSw1yx4VDnyCqdQ9U746X0HrgESba0WJZnravnHs1xJfwMw6I0ZAAUSRQwXXc8r
+	f2MOqNdS5duVy/UoCPMG845RwstRVPyLjj+zHW/8fXhiGudBvCa7OTvC8Xm9LCQxxmaJkJGsZmN
+	EsALmpaXd2rV/UYKv8+BFb1gmJP4i/H6HSkFE2MA/jl/+3oK8oC7len9Z6OtItU6DAyMrN5I60W
+	+fsAH9YotEdcox5Mv4hfDIMZQMbk9GYLEPG2wBn+Sb7/k
+X-Google-Smtp-Source: AGHT+IF5xEBWS85vA4ysnrb/k4oebafRYHkYKxN6bTslVg9fp4b6XK8dEHNg73WF8IwLnC+a7UmLoQ==
+X-Received: by 2002:a17:907:d1d:b0:b3e:109c:6377 with SMTP id a640c23a62f3a-b50ac0cc054mr65446766b.35.1759862111541;
+        Tue, 07 Oct 2025 11:35:11 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b48652a9ea1sm1441076766b.16.2025.10.07.11.05.59
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a177c9csm1468891866b.89.2025.10.07.11.35.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Oct 2025 11:05:59 -0700 (PDT)
+        Tue, 07 Oct 2025 11:35:11 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libcupsfilters: upgrade 2.0.0 -> 2.1.1
-Date: Tue,  7 Oct 2025 20:05:58 +0200
-Message-ID: <20251007180558.97431-1-skandigraun@gmail.com>
+Subject: [meta-networking][walnascar][PATCH] wireshark: patch CVE-2025-5601
+Date: Tue,  7 Oct 2025 20:35:10 +0200
+Message-ID: <20251007183510.125424-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 18:06:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120343
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 18:35:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120344
 
-This contains a fix for CVE-2024-47076
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-5601
 
-Changelog: https://github.com/OpenPrinting/libcupsfilters/blob/2.1.1/CHANGES.md
+Backport the patch from the Gitlab issue linked in the details.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...t-false-instead-of-throw-from-c-17-onward.patch | 14 +++++++-------
- ...upsfilters_2.0.0.bb => libcupsfilters_2.1.1.bb} |  2 +-
- 2 files changed, 8 insertions(+), 8 deletions(-)
- rename meta-oe/recipes-printing/cups/{libcupsfilters_2.0.0.bb => libcupsfilters_2.1.1.bb} (86%)
+ ...low-fence-to-go-beyond-column-size-w.patch | 61 +++++++++++++++++++
+ .../wireshark/wireshark_4.2.11.bb             |  1 +
+ 2 files changed, 62 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/files/0001-column-Do-not-allow-fence-to-go-beyond-column-size-w.patch
 
-diff --git a/meta-oe/recipes-printing/cups/libcupsfilters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch b/meta-oe/recipes-printing/cups/libcupsfilters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch
-index 72bbf10a14..0e0eb731a5 100644
---- a/meta-oe/recipes-printing/cups/libcupsfilters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch
-+++ b/meta-oe/recipes-printing/cups/libcupsfilters/0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch
-@@ -9,7 +9,7 @@ throw(whatever) with noexcept(false).
+diff --git a/meta-networking/recipes-support/wireshark/files/0001-column-Do-not-allow-fence-to-go-beyond-column-size-w.patch b/meta-networking/recipes-support/wireshark/files/0001-column-Do-not-allow-fence-to-go-beyond-column-size-w.patch
+new file mode 100644
+index 0000000000..0dbb0c2aa6
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/files/0001-column-Do-not-allow-fence-to-go-beyond-column-size-w.patch
+@@ -0,0 +1,61 @@
++From ab395bb857bef8f06ed60eb6a4e091785c38dced Mon Sep 17 00:00:00 2001
++From: John Thacker <johnthacker@gmail.com>
++Date: Sat, 26 Apr 2025 10:01:19 +0000
++Subject: [PATCH] column: Do not allow fence to go beyond column size when
++ prepending
++
++When moving the fence location forward when prepending, ensure
++that it does not go past the end of the buffer.
++
++Also get rid of unnecessary branching and strlen calls.
++
++Fix #20509
++
++(cherry picked from commit 53213086304caa3dfbdd7dc39c2668a3aea1a5c0)
++
++CVE: CVE-2025-5601
++Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/merge_requests/19684/diffs?commit_id=8c186dbb381cf51064fa8dbff7953468d5ae394c]
++
++Co-authored-by: John Thacker <johnthacker@gmail.com>
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ epan/column-utils.c | 19 ++++++++++++-------
++ 1 file changed, 12 insertions(+), 7 deletions(-)
++
++diff --git a/epan/column-utils.c b/epan/column-utils.c
++index 5e5b298..4ebd2b1 100644
++--- a/epan/column-utils.c
+++++ b/epan/column-utils.c
++@@ -646,8 +646,13 @@ col_prepend_fstr(column_info *cinfo, const gint el, const gchar *format, ...)
++       /*
++        * Move the fence, unless it's at the beginning of the string.
++        */
++-      if (col_item->col_fence > 0)
++-        col_item->col_fence += (int) strlen(col_item->col_buf);
+++      if (col_item->col_fence > 0) {
+++        /* pos >= strlen if truncation occurred; this saves on a strlen
+++         * call and prevents adding a single byte character later if a
+++         * a multibyte character was truncated (good). */
+++        col_item->col_fence += (int) pos;
+++        col_item->col_fence = MIN((int)(max_len - 1), col_item->col_fence);
+++      }
++ 
++       /*
++        * Append the original data.
++@@ -699,11 +704,11 @@ col_prepend_fence_fstr(column_info *cinfo, const gint el, const gchar *format, .
++        * Move the fence if it exists, else create a new fence at the
++        * end of the prepended data.
++        */
++-      if (col_item->col_fence > 0) {
++-        col_item->col_fence += (int) strlen(col_item->col_buf);
++-      } else {
++-        col_item->col_fence = (int) strlen(col_item->col_buf);
++-      }
+++      /* pos >= strlen if truncation occurred; this saves on a strlen
+++       * call and prevents adding a single byte character later if a
+++       * a multibyte character was truncated (good). */
+++      col_item->col_fence += (int) pos;
+++      col_item->col_fence = MIN((int)(max_len - 1), col_item->col_fence);
++       /*
++        * Append the original data.
++        */
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb b/meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb
+index 62aec8f732..d0bc92ff05 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_4.2.11.bb
+@@ -13,6 +13,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
+            file://0002-flex-Remove-line-directives.patch \
+            file://0004-lemon-Remove-line-directives.patch \
+            file://0001-UseLemon.cmake-do-not-use-lemon-data-from-the-host.patch \
++           file://0001-column-Do-not-allow-fence-to-go-beyond-column-size-w.patch \
+            "
  
- [1] https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0003r5.html
- 
--Upstream-Status: Submitted [https://github.com/OpenPrinting/cups-filters/pull/505]
-+Upstream-Status: Backport [https://github.com/OpenPrinting/cups-filters/commit/2076627d33477212f21352ad39e9d305adb63af3]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  filter/pdftoraster.cxx | 4 ++++
-@@ -17,11 +17,15 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- diff --git a/cupsfilters/pdftoraster.cxx b/cupsfilters/pdftoraster.cxx
- index e8af184fb..e91e22459 100755
--@@ -2198,7 +2198,11 @@
-+@@ -2199,11 +2199,11 @@
-  // For compatibility with g++ >= 4.7 compilers _GLIBCXX_THROW
-  // should be used as a guard, otherwise use traditional definition
-  #ifndef _GLIBCXX_THROW
---#define _GLIBCXX_THROW throw
-+-#  if __cplusplus >= 201103L
-+-#    define _GLIBCXX_THROW(_EXC)
-+-#  else
-+-#    define _GLIBCXX_THROW(_EXC) throw(_EXC)
-+-#  endif
- +#if __cplusplus < 201703L
- +#define _GLIBCXX_THROW throw
- +#else
-@@ -30,7 +34,3 @@ index e8af184fb..e91e22459 100755
-  #endif
-  
-  void * operator new(size_t size) _GLIBCXX_THROW (std::bad_alloc)
--
---- 
--2.39.1
--
-diff --git a/meta-oe/recipes-printing/cups/libcupsfilters_2.0.0.bb b/meta-oe/recipes-printing/cups/libcupsfilters_2.1.1.bb
-similarity index 86%
-rename from meta-oe/recipes-printing/cups/libcupsfilters_2.0.0.bb
-rename to meta-oe/recipes-printing/cups/libcupsfilters_2.1.1.bb
-index 7f7174d940..51d8c4f18b 100644
---- a/meta-oe/recipes-printing/cups/libcupsfilters_2.0.0.bb
-+++ b/meta-oe/recipes-printing/cups/libcupsfilters_2.1.1.bb
-@@ -9,7 +9,7 @@ SRC_URI = " \
- 	https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz \
- 	file://0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch \
- "
--SRC_URI[sha256sum] = "542f2bfbc58136a4743c11dc8c86cee03c9aca705612654e36ac34aa0d9aa601"
-+SRC_URI[sha256sum] = "6c303e36cfde05a6c88fb940c62b6a18e7cdbfb91f077733ebc98f104925ce36"
- 
- inherit autotools gettext pkgconfig github-releases
- 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src/all-versions"
 
