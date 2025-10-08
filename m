@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EC08CCA470
-	for <webhook@archiver.kernel.org>; Wed,  8 Oct 2025 20:59:19 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
- by mx.groups.io with SMTP id smtpd.web10.2618.1759957157989050899
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 63B5BCCD184
+	for <webhook@archiver.kernel.org>; Wed,  8 Oct 2025 20:59:29 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web11.2603.1759957159280446816
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Oct 2025 13:59:18 -0700
+ Wed, 08 Oct 2025 13:59:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Po1mf7eY;
- spf=pass (domain: gmail.com, ip: 209.85.208.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-62fc89cd68bso457612a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 13:59:17 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lIO6rNsE;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-b3da3b34950so36736366b.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 13:59:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759957156; x=1760561956; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759957158; x=1760561958; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=UK2KWD91EXtWHGPErN7wSJ8AC241uBSp648TVGK7GEQ=;
-        b=Po1mf7eYs/MEUznUMkf/CVXV+lmArcbsX//BR+TXOpjk9UsZZzHUn4qtENyNxF+itH
-         w5HEU2oLhIDtECiFUH8WxQ7somtFRyqZ75VyngFGvguqh0v5FdShzX+l37OzRL3XWTjk
-         YQI2QwCYPRptQrRLXM+cUmjtYXfWUzXcQpw1jFQJZjm9TBWxF9RN5JxTUQWZKkYHWIvx
-         KTX/OiVC+Q2vJv+eRFXrq//qTRDkZ0WDO0XLFHY0y85eHcP/7bnYfG0yDnWd13AL+t/T
-         mXlfuPu72oJ8k9LR7rdiaF1QsRSRXnJRVHXQRkUDiSNjrGpFYTulFwYDGy0eILjNmqsl
-         iJsQ==
+        bh=ZSD0SaIiLvXNAEBBn9NLNSZokrlyy4eimkh607zOq4w=;
+        b=lIO6rNsEGZK5PWbpTB9BoVvkf3M1riDYr6IqEtIa/3uv+Mw3f8AEmo7ykvDOjaZw4z
+         zGTvZaiQFXUu6vCNbfIAAGraFB/I0cNIq9wh4Ce/fuZOwbp6xH9UX3GTWWn3eUJMQvQo
+         j0SBKQkPNONWubzJCY85HY5OulH3NoOyI3dk/+km8uVACwTgJmF9kbfDyo+1j67x4ltG
+         enTp5ZM26Nx+SMlkYWPg0fNRo7AmN8oRK+LNtYgpvP1V/eAVdXf93CLboec7Vl2Ee5MF
+         20+G1RPcducAnHD9E6Y/4rl5Zn8C2tmschGCV8y7QZe9R2673W0/+pegZZoDfkAYOmH4
+         6s+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759957156; x=1760561956;
+        d=1e100.net; s=20230601; t=1759957158; x=1760561958;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=UK2KWD91EXtWHGPErN7wSJ8AC241uBSp648TVGK7GEQ=;
-        b=sZOqVCDOPMBAWFWaN8kA4koRPlfbKtMjxGx0eQJ09M43zml/HKc9wwTCdbXPi1lezH
-         8yiPkOx4S1gH5hfqPO9ujVJyPe0FPGe3jU7HPGQNZoHOJgA9YN5EbAaz96hzYAW0NuSF
-         tTs6/mllYw1tSgYBSyD5uqwIHF3okIaPW8HF/maO5q6UruEoQeNPZQoShyeRr+TY8qrW
-         AC0BoxO/Q65ZyxAXIVsFhy52YjmeKI6J/EL2ZrhcQfhOHkAzDQUt0V6gsJS3r4zTKn7L
-         62cCjgQegDEUURptV5tAc4np39WpYN5ACTihiGLVlkjJznlgmBPHSTKivI4c0h0JONnR
-         blWA==
-X-Gm-Message-State: AOJu0Yw85wf2f25cCeykJMM+MZfpOAEhYrSzfG/P3BL2OQMgoMkEWWVd
-	uhqyB9UcTa0Vti+YFJM0P8THd+jXMhQhLaV6GKhVgbpCnoa5LwXcl5+V39eKZyzg
-X-Gm-Gg: ASbGncttWz3ycJCEASgijFQcS2ePIhpJDe0tNAnpSC4pHIOLKgTow0ewsgfloS1WD+U
-	q81XdrtsMKo/0JvS4DxeO9QuqMtvMuiNHxPtdG9boVaLRyKYkLTCrVnXG4NslBWU2MSWKFCXgp3
-	PtsMCX0bXNTUZO06YAirXbxf/CTco4FfBpriX6+PMm7l9WKJz6cSZcyg5nm+8UBrEYTWaMbMgpe
-	k35OmmpFB6lGz9Nq+qefanJBvlTP4waz5AOf5BFqRM2pN6/ea2E5IWW7hYaIA53HJCbw+ZvSIgR
-	ZZv/2xvHliBzINHaUdGRWPWri83F5bhtQ9PcEVs1bWF4j87YXFho+ZnQ2Q1oXwMk+oFO6Jdn7SH
-	NsEZHZSg90WVNZuxR8C29JVYoe/JUR6Ng9TLrjt5IaBdb
-X-Google-Smtp-Source: AGHT+IFYQ0+TiM2z7C5FXC9UhfBDDL6Kq/wzz7W/3fVh1OyIHa2SHbvCluTVNRPtTT39YuYyPGdFgQ==
-X-Received: by 2002:a17:906:6a25:b0:b3c:717a:71fd with SMTP id a640c23a62f3a-b50ac5d07fdmr560352766b.62.1759957156176;
-        Wed, 08 Oct 2025 13:59:16 -0700 (PDT)
+        bh=ZSD0SaIiLvXNAEBBn9NLNSZokrlyy4eimkh607zOq4w=;
+        b=Go6VM+a6oAw4a4TO+AAaJJTQguid0cQFqRLejkYDy0SPQl7Yj4ia3Z5jniTOb6m7Lo
+         yv11yaVronpMR4/zwIKoaXGPNQnBdeJkoCRbrLqoaANvUuzQOBPvALUx67hs6KnmR125
+         9fntYfleZMoDNWEkPI7I6bLDom88Nun7WANrl4R2HX0td8kinpQQ8bJmKUaSVrOsUw/7
+         pY5IryLs2JKF5zk737F1hfeAMLsRWwTCeYQwToblf031ngGbKPmVLi1RwbffUGeILLmB
+         G3koxxLt3CxvYe/wCdIbSBpIcPlrZC5AIyF61moHmoYjoE1NqEV+NjRlB69ZfwuGPvvH
+         kyEw==
+X-Gm-Message-State: AOJu0YyFWXeShKJ/pwCiurVLfPyetPaWjAsTCILJSIbcme4diOP/H7ns
+	D8l9Gw74Fsld5mWRqgBDL4Q6oAJ/2FoDP0jhiUIqB9mEdqVqGPkGP6F9QF8FiiFk
+X-Gm-Gg: ASbGncsFMD0gsmasiY3WMyiAvub2Qfw7PmfPd+zamacFQCwCyfmkrCJHdLcv64hDD3y
+	E0j52dBFE07MV6Cv7UO4D1/uWjSgMmyKH/VcOzYsgjgi99BiNCI5jspUXVrxJJiRdvHE3z6Oa8D
+	Sj5gf+7eqhJp6nDu2gWOrhy1fHNxE9cTsCCmLfmW7X6eKcEeJ+/e/BTe8veuspYRhFO5WNhXD0z
+	VokFGzo78aQ8C0thwDmPcuJCVsqpfcbLmCLBsMTx5pC+js43pXy3eh1xelg5DFjZycnIR/SdXDL
+	Q9DLyxlovjkQAeaaRSsTllWrj4ITJJ8Bu1mY8nAiUg8ZXiNaqkbfdGPUBqeYPhufe6990iQ3lV3
+	zc/3Or4XFAtv1Z7F/U7+5luFwxO0Xi7CF8TheR1VujJy3Zm4kLjvCjIE=
+X-Google-Smtp-Source: AGHT+IHPHCQJ8SY6iTzKE/vf7EHfVHMU75Od43C1onBkuPNam7h63YqBRfeTTMy/bfCCypGyaCLPXA==
+X-Received: by 2002:a17:906:284e:b0:b40:101d:cbc2 with SMTP id a640c23a62f3a-b50abaa44bcmr420785966b.37.1759957157514;
+        Wed, 08 Oct 2025 13:59:17 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b4csm1740511166b.86.2025.10.08.13.59.15
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b486a173b4csm1740511166b.86.2025.10.08.13.59.16
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Oct 2025 13:59:15 -0700 (PDT)
+        Wed, 08 Oct 2025 13:59:17 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][walnascar][PATCH 02/11] imagemagick: patch CVE-2025-53015
-Date: Wed,  8 Oct 2025 22:59:05 +0200
-Message-ID: <20251008205914.598660-2-skandigraun@gmail.com>
+Subject: [meta-oe][walnascar][PATCH 04/11] imagemagick: patch CVE-2025-53101
+Date: Wed,  8 Oct 2025 22:59:07 +0200
+Message-ID: <20251008205914.598660-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251008205914.598660-1-skandigraun@gmail.com>
 References: <20251008205914.598660-1-skandigraun@gmail.com>
@@ -66,116 +66,87 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 20:59:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120385
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 20:59:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120387
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-53015
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-53101
 
-Pick the patches that are mentioned in the relevant github advisory.
+Pick the patch mentioned in the details of the above link.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...ks-to-make-sure-we-don-t-get-stuck-i.patch | 48 +++++++++++++++++++
- .../0002-Added-missing-return.patch           | 24 ++++++++++
- .../imagemagick/imagemagick_7.1.1-43.bb       |  2 +
- 3 files changed, 74 insertions(+)
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-Added-extra-checks-to-make-sure-we-don-t-get-stuck-i.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0002-Added-missing-return.patch
+ ...-ImageMagick-ImageMagick-security-ad.patch | 52 +++++++++++++++++++
+ .../imagemagick/imagemagick_7.1.1-43.bb       |  1 +
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-https-github.com-ImageMagick-ImageMagick-security-ad.patch
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/0001-Added-extra-checks-to-make-sure-we-don-t-get-stuck-i.patch b/meta-oe/recipes-support/imagemagick/imagemagick/0001-Added-extra-checks-to-make-sure-we-don-t-get-stuck-i.patch
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/0001-https-github.com-ImageMagick-ImageMagick-security-ad.patch b/meta-oe/recipes-support/imagemagick/imagemagick/0001-https-github.com-ImageMagick-ImageMagick-security-ad.patch
 new file mode 100644
-index 0000000000..6c15f43134
+index 0000000000..48c3fff35c
 --- /dev/null
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick/0001-Added-extra-checks-to-make-sure-we-don-t-get-stuck-i.patch
-@@ -0,0 +1,48 @@
-+From aae092a403bc79933c081c6be1be1315cb231de9 Mon Sep 17 00:00:00 2001
-+From: Dirk Lemstra <dirk@lemstra.org>
-+Date: Fri, 2 May 2025 18:33:17 +0200
-+Subject: [PATCH] Added extra checks to make sure we don't get stuck in the
-+ while loop.
++++ b/meta-oe/recipes-support/imagemagick/imagemagick/0001-https-github.com-ImageMagick-ImageMagick-security-ad.patch
+@@ -0,0 +1,52 @@
++From 0afb803b504b572f3dc654ac4e39e5bd8df7ee03 Mon Sep 17 00:00:00 2001
++From: Cristy <urban-warrior@imagemagick.org>
++Date: Fri, 27 Jun 2025 20:02:12 -0400
++Subject: [PATCH] 
++ https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-qh3h-j545-h8c9
 +
-+CVE: CVE-2025-53015
-+Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/229fa96a988a21d78318bbca61245a6ed1ee33a0]
++CVE: CVE-2025-53101
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/66dc8f51c11b0ae1f1cdeacd381c3e9a4de69774]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ MagickCore/image-private.h |  1 +
-+ MagickCore/profile.c       | 11 +++++++++++
-+ 2 files changed, 12 insertions(+)
++ MagickCore/image.c | 11 +++++------
++ 1 file changed, 5 insertions(+), 6 deletions(-)
 +
-+diff --git a/MagickCore/image-private.h b/MagickCore/image-private.h
-+index aa48b3cb5..a7cd99ccb 100644
-+--- a/MagickCore/image-private.h
-++++ b/MagickCore/image-private.h
-+@@ -52,6 +52,7 @@ extern "C" {
-+ #define MAGICK_SIZE_MAX  (SIZE_MAX)
-+ #define MAGICK_SSIZE_MAX  (SSIZE_MAX)
-+ #define MAGICK_SSIZE_MIN  (-SSIZE_MAX-1)
-++#define MAGICK_ULONG_MAX  (ULONG_MAX)
-+ #define MatteColor  "#bdbdbd"  /* gray */
-+ #define MatteColorRGBA  ScaleShortToQuantum(0xbdbd),\
-+   ScaleShortToQuantum(0xbdbd),ScaleShortToQuantum(0xbdbd),OpaqueAlpha
-+diff --git a/MagickCore/profile.c b/MagickCore/profile.c
-+index 7eea1d32f..85c180118 100644
-+--- a/MagickCore/profile.c
-++++ b/MagickCore/profile.c
-+@@ -2571,6 +2571,17 @@ static void GetXmpNumeratorAndDenominator(double value,
-+   *denominator=1;
-+   if (value <= MagickEpsilon)
-+     return;
-++  if (value > (double) MAGICK_ULONG_MAX)
-++    {
-++      *numerator = MAGICK_ULONG_MAX;
-++      *denominator = 1;
-++      return;
-++    }
-++  if (floor(value) == value)
-++    {
-++      *numerator = (unsigned long) value;
-++      *denominator = 1;
-++    }
-+   *numerator=1;
-+   df=1.0;
-+   while(fabs(df - value) > MagickEpsilon)
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/0002-Added-missing-return.patch b/meta-oe/recipes-support/imagemagick/imagemagick/0002-Added-missing-return.patch
-new file mode 100644
-index 0000000000..def4fc881f
---- /dev/null
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick/0002-Added-missing-return.patch
-@@ -0,0 +1,24 @@
-+From a574c6ffa818e91772a3bd37649f552b62cd416e Mon Sep 17 00:00:00 2001
-+From: Dirk Lemstra <dirk@lemstra.org>
-+Date: Mon, 12 May 2025 22:23:48 +0200
-+Subject: [PATCH] Added missing return.
-+
-+CVE: CVE-2025-53015
-+Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/38631605e6ab744548a561797472cf8648bcfe26]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ MagickCore/profile.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/MagickCore/profile.c b/MagickCore/profile.c
-+index 85c180118..a68e54f14 100644
-+--- a/MagickCore/profile.c
-++++ b/MagickCore/profile.c
-+@@ -2581,6 +2581,7 @@ static void GetXmpNumeratorAndDenominator(double value,
++diff --git a/MagickCore/image.c b/MagickCore/image.c
++index 03a5972d0..abca0a9ae 100644
++--- a/MagickCore/image.c
+++++ b/MagickCore/image.c
++@@ -1665,7 +1665,6 @@ MagickExport size_t InterpretImageFilename(const ImageInfo *image_info,
++     canonical;
++ 
++   ssize_t
++-    field_width,
++     offset;
++ 
++   canonical=MagickFalse;
++@@ -1681,21 +1680,21 @@ MagickExport size_t InterpretImageFilename(const ImageInfo *image_info,
++         p++;
++         continue;
++       }
++-    field_width=0;
++-    if (*q == '0')
++-      field_width=(ssize_t) strtol(q,&q,10);
++     switch (*q)
 +     {
-+       *numerator = (unsigned long) value;
-+       *denominator = 1;
-++      return;
-+     }
-+   *numerator=1;
-+   df=1.0;
++       case 'd':
++       case 'o':
++       case 'x':
++       {
+++        ssize_t count;
++         q++;
++         c=(*q);
++         *q='\0';
++-        (void) FormatLocaleString(filename+(p-format-offset),(size_t)
+++        count=FormatLocaleString(filename+(p-format-offset),(size_t)
++           (MagickPathExtent-(p-format-offset)),p,value);
++-        offset+=(4-field_width);
+++        if ((count <= 0) || (count > (MagickPathExtent-(p-format-offset))))
+++          return(0);
+++        offset+=(ssize_t) ((q-p)-count);
++         *q=c;
++         (void) ConcatenateMagickString(filename,q,MagickPathExtent);
++         canonical=MagickTrue;
 diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-43.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-43.bb
-index 56f60716ba..64e81170bf 100644
+index 2f77a777a3..b4990fd5a3 100644
 --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-43.bb
 +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1-43.bb
-@@ -14,6 +14,8 @@ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>([0-9][\.|_|-]?)+)"
- 
- SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
-            file://0001-Correct-out-of-bounds-read-of-a-single-byte.patch \
-+           file://0001-Added-extra-checks-to-make-sure-we-don-t-get-stuck-i.patch \
-+           file://0002-Added-missing-return.patch \
+@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
+            file://0001-Added-extra-checks-to-make-sure-we-don-t-get-stuck-i.patch \
+            file://0002-Added-missing-return.patch \
+            file://0001-Fixed-memory-leak-when-entering-StreamImage-multiple.patch \
++           file://0001-https-github.com-ImageMagick-ImageMagick-security-ad.patch \
             "
  SRCREV = "a2d96f40e707ba54b57e7d98c3277d3ea6611ace"
  
