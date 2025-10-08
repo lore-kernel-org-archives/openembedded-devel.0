@@ -1,130 +1,163 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44275CCA470
-	for <webhook@archiver.kernel.org>; Wed,  8 Oct 2025 09:36:34 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web11.11778.1759916176232936808
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBAF9CAC5BB
+	for <webhook@archiver.kernel.org>; Wed,  8 Oct 2025 10:48:34 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.12733.1759920514582007606
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Oct 2025 02:36:16 -0700
+ Wed, 08 Oct 2025 03:48:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=F66Hs4Fh;
- spf=pass (domain: konsulko.com, ip: 209.85.218.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b463f986f80so1167108066b.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 02:36:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1759916174; x=1760520974; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QxOzKWosUIGqrykEUPkdQEkd5KChyBRCHBQSldeIEaE=;
-        b=F66Hs4FhsdOQVPBT2KQZ4q5oCyaVHr6WokJ20uEzZxJkyZyXiMM3sMIM3abc63YKod
-         lA4Y0UCd003FbqdV31/hBYjubHr7911FmnaY4+/ImOxcrNH6vy8pS46SxUI14x5YwJLe
-         7vabsNbFY3KEDLMdWFWKPMKO1smH67CqfmZHU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759916174; x=1760520974;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=QxOzKWosUIGqrykEUPkdQEkd5KChyBRCHBQSldeIEaE=;
-        b=BZvGSMKoPk5YnxljSFxXbxMwbdLEWcUnAr5BZpxbOJBn28Pq7jsTYaJcHLXMi77iVi
-         ObGnumFqaZAWAguOnxwR3aPWzxD/PSmN37nk9kISMqiY2Tl1Vk4wRs2q5AsndOxiAEFC
-         m0xTBQTYhCIbaEzhaPnV2924eLWZ1p6b4d8jtGn44tD8zO5WjsdCNN5TqhxnYKCj0BYN
-         XMZr8zcztW9xl4Bp0rRHG1j9kKZ8VpYhPPXwIDOqRDPt4oUjFoTHA62NwiVeLF8KuamP
-         EjmW8cQli49iLXjM0p/gZwiZagyA/Z95+4lct07dDMoW5+2q+4tel9T6dWmXlbnmEw+t
-         Mylg==
-X-Gm-Message-State: AOJu0Yy2DWW5m+wg0eYM0sD74oZZwWQlfKcFBgJVj2+1R4DrISUPwoF/
-	RqkcUnam56C0vu4oha1Xi7rDzLXZmGO1rN9f60GcueE9nnUtf9e+AHLdXRB7MVhCxWVJZ6N7T01
-	+XxBO
-X-Gm-Gg: ASbGncutoKCAI2uo6cdIno+6+tYQOktzfUyJBTiWeV835UE83KAOlEb5WPVnF1sGlEw
-	FJe+c+o6uqX1O1fzaD7R2kk0XUw5hN6QtRPecyjDUEtGB570X9VMjBoYbY9fCefkcQx71PHvkSi
-	3qBX1dNU3Xrgg7STutHydZ8KdRMQsH55xOY9rn+Ke1/QchPVG8fmSj2uEBQfz6L4mu/6Jc/iw9+
-	jKV99l0a4lZh2nND+bzYw3kJO1cH78D3jhVIslrifud8gucqhzstbGVG7t3OeFYHgIV/g/bGy17
-	nIU2bbx5/GJ8AwDZC2hfJ7wYi63IuAL/g72Ar0mcjLMOIhpTl1hr+z1qW2wqLy2XoNkEPh9AyIf
-	ItcdUyg9/XoQ9hLnBGOq1Jxbbc9G7Jfq4KjbrYN7XZ0++tOrpdARutBa8SVWw
-X-Google-Smtp-Source: AGHT+IGixAf2nwMXkH7EOQ0mtch+5yq+LAm+BhAAGn2P112UsVu/cMeA+cXb8FVmMs2VbsJKyryRhw==
-X-Received: by 2002:a17:907:d86:b0:b49:5103:c0b4 with SMTP id a640c23a62f3a-b50ac5d07f2mr327626766b.56.1759916173303;
-        Wed, 08 Oct 2025 02:36:13 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4865f74002sm1640078866b.42.2025.10.08.02.36.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Oct 2025 02:36:12 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-dbus-fast: Upgrade 2.44.1 -> 2.44.5
-Date: Wed,  8 Oct 2025 12:36:07 +0300
-Message-ID: <20251008093609.2094597-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=tJoVNNyk;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2376c8384e=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 598743JB1213964
+	for <openembedded-devel@lists.openembedded.org>; Wed, 8 Oct 2025 03:48:34 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=2XIQff66j4rFWIhDYqa2
+	HAwS2/as4BF2Aw0+mcCnaM8=; b=tJoVNNyk3mHKxa+gBaCJ7hSV/U1O4PxKWwQR
+	/TQj57TVtOW3M8Xy2sE04YVx/B8XhmGc57heZm7nnCfYj5E4o/zpMFA/CEtwTA8v
+	1E7oFZdul0BQbSaefx8jAnXcXe4EfhBe1uyNNcdrvIGy5pboFg0XDoF0InSywadd
+	1skz24KVpcLTDxjCq/k9z2mMJrnBa5o9OeNhQvDtEhequhTjaTxGRsPH3kRoGkBb
+	1a28T0PLig+rCfPBKaX9Mj5Brf8KM1F9Cypbl+h3MY5l7EShO2hfo2aTLhaI1MML
+	eVa2Y61HJYqGXzWn1OV1zDvzOUW2FkQ3LZWbf192Pdbq+66AFw==
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49jxuwm6u9-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 03:48:34 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.59; Wed, 8 Oct 2025 03:48:33 -0700
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.59 via Frontend Transport; Wed, 8 Oct 2025 03:48:32 -0700
+From: <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-networking][kirkstone][PATCH 1/2] tcpreplay: fix CVE-2025-9157
+Date: Wed, 8 Oct 2025 16:18:29 +0530
+Message-ID: <20251008104830.3386465-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=UMLQ3Sfy c=1 sm=1 tr=0 ts=68e64182 cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=yU_jQ1hFIRIA:10 a=x6icFKpwvdMA:10 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8
+ a=Q-fNiiVtAAAA:8 a=WMhP2GBcfH-h0f0TsrQA:9 a=FdTzh2GWekK77mhwV6Dw:22
+ a=6_D5ljFcL1GZDUJyZucp:22
+X-Proofpoint-ORIG-GUID: IO3aOipOCcW21bb9lEL-ki-8hxD0-XRl
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDA4MDA3NCBTYWx0ZWRfXxY/mYypP4i6t
+ Cd+Bg/idI+Nt2A5BiAtCGfpx3htua0gyFJyetfm/uK8xeOrAG45geWnO4gROSIe7s8BJ89ZW2d5
+ Sm6EFW8dtTUIdCuqgI1lowIpxMpS+hlC8uZZuq1aDOmjM8bCmb0ujTWfhXnLam3ujzMNiRSCwbr
+ d1QYe2OKOLu75DuhBaOwOQvpzqF00fDqVa4rKHKiMxERQqf8wiJ2URsZt1Ivf3QkN5geWZD73id
+ ulU2LxQPdjV2raO0v3tVN87T/g9MgO4QPQ0FJdFSkeMUch9yfcKmgIps0h8vs7W6Ew2RH2WcGdF
+ JN0ix9oqK+UHmH+gHnl37o/gGOz89TBMDl1+gGo2rP2WIK4POvDevIowJkS5dosqPCK6olbCBxL
+ uuBgPIaIeZLcj5aSM8M2yTfYCrAxGQ==
+X-Proofpoint-GUID: IO3aOipOCcW21bb9lEL-ki-8hxD0-XRl
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-08_03,2025-10-06_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 suspectscore=0 lowpriorityscore=0 malwarescore=0
+ adultscore=0 spamscore=0 clxscore=1015 bulkscore=0 impostorscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2509150000
+ definitions=main-2510080074
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 09:36:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120358
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 10:48:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120361
 
-Upgrade to release 2.44.5:
+From: Archana Polampalli <archana.polampalli@windriver.com>
 
-- fix: cibuildwheel sha
-- Improve unmarshall performance for SignatureType
-- Simplify code to unmarshall arrays
+A vulnerability was determined in appneta tcpreplay up to 4.5.2-beta2.
+The impacted element is the function untrunc_packet of the file
+src/tcpedit/edit_packet.c of the component tcprewrite. Executing
+manipulation can lead to use after free. It is possible to launch
+the attack on the local host. The exploit has been publicly disclosed
+and may be utilized. This patch is called 73008f261f1cdf7a1087dc8759115242696d35da.
+Applying a patch is advised to resolve this issue.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- ...ject.toml-Remove-upper-version-constraint-for-C.patch | 9 +++++----
- ...3-dbus-fast_2.44.1.bb => python3-dbus-fast_2.44.5.bb} | 2 +-
- 2 files changed, 6 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-dbus-fast_2.44.1.bb => python3-dbus-fast_2.44.5.bb} (85%)
+ .../tcpreplay/tcpreplay/CVE-2025-9157.patch   | 44 +++++++++++++++++++
+ .../tcpreplay/tcpreplay_4.4.4.bb              |  3 +-
+ 2 files changed, 46 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2025-9157.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-dbus-fast/0001-pyproject.toml-Remove-upper-version-constraint-for-C.patch b/meta-python/recipes-devtools/python/python3-dbus-fast/0001-pyproject.toml-Remove-upper-version-constraint-for-C.patch
-index fb8f4df4a6..5366627abf 100644
---- a/meta-python/recipes-devtools/python/python3-dbus-fast/0001-pyproject.toml-Remove-upper-version-constraint-for-C.patch
-+++ b/meta-python/recipes-devtools/python/python3-dbus-fast/0001-pyproject.toml-Remove-upper-version-constraint-for-C.patch
-@@ -5,6 +5,7 @@ Subject: [PATCH] pyproject.toml: Remove upper version constraint for Cython
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2025-9157.patch b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2025-9157.patch
+new file mode 100644
+index 0000000000..e52ec0dffc
+--- /dev/null
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2025-9157.patch
+@@ -0,0 +1,44 @@
++From 73008f261f1cdf7a1087dc8759115242696d35da Mon Sep 17 00:00:00 2001
++From: Fred Klassen <fred.klassen@broadcom.com>
++Date: Mon, 18 Aug 2025 18:35:16 -0700
++Subject: [PATCH] Bug #970 tcprewrite: --fixlen: do not use realloc
++
++No need to realloc if buffer is already proven to be big enough.
++
++CVE: CVE-2025-9157
++
++Upstream-Status: Backport [https://github.com/appneta/tcpreplay/commit/73008f261f1cdf7a1087dc8759115242696d35da]
++
++Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
++---
++ src/tcpedit/edit_packet.c | 1 -
++ src/tcprewrite.c          | 2 ++
++ 2 files changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/src/tcpedit/edit_packet.c b/src/tcpedit/edit_packet.c
++index 1025ff9..f9ade8f 100644
++--- a/src/tcpedit/edit_packet.c
+++++ b/src/tcpedit/edit_packet.c
++@@ -558,7 +558,6 @@ untrunc_packet(tcpedit_t *tcpedit,
++          * which seems like a corrupted pcap
++          */
++         if (pkthdr->len > pkthdr->caplen) {
++-            packet = safe_realloc(packet, pkthdr->len + PACKET_HEADROOM);
++             memset(packet + pkthdr->caplen, '\0', pkthdr->len - pkthdr->caplen);
++             pkthdr->caplen = pkthdr->len;
++         } else if (pkthdr->len < pkthdr->caplen) {
++diff --git a/src/tcprewrite.c b/src/tcprewrite.c
++index c9aa52c..ee05a26 100644
++--- a/src/tcprewrite.c
+++++ b/src/tcprewrite.c
++@@ -270,6 +270,8 @@ rewrite_packets(tcpedit_t *tcpedit_ctx, pcap_t *pin, pcap_dumper_t *pout)
++
++         if (pkthdr.caplen > MAX_SNAPLEN)
++             errx(-1, "Frame too big, caplen %d exceeds %d", pkthdr.caplen, MAX_SNAPLEN);
+++        if (pkthdr.len > MAX_SNAPLEN)
+++            errx(-1, "Frame too big, len %d exceeds %d", pkthdr.len, MAX_SNAPLEN);
++         /*
++          * copy over the packet so we can pad it out if necessary and
++          * because pcap_next() returns a const ptr
++--
++2.40.0
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
+index 064a60fccc..c2edd29524 100644
+--- a/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.4.4.bb
+@@ -8,11 +8,12 @@ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=10f0474a2f0e5dccfca20f69d6598ad8"
  
- Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
- ---
-  pyproject.toml | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
-@@ -14,14 +15,14 @@ index e22ea42..f670d3d 100644
- --- a/pyproject.toml
- +++ b/pyproject.toml
- @@ -50,7 +50,7 @@ pytest-cov = ">=3,<7"
-- pytest-asyncio = ">=0.19,<0.27"
-+ pytest-asyncio = ">=0.19,<1.3"
-  pycairo = "^1.21.0"
-  PyGObject = {version = ">=3.50,<3.51", python = "<4"}
---Cython = ">=3,<3.1.0"
-+-Cython = ">=3,<3.2.0"
- +Cython = ">=3"
-- setuptools = ">=65.4.1,<79.0.0"
-+ setuptools = ">=65.4.1,<81.0.0"
-  pytest-timeout = "^2.1.0"
-- pytest-codspeed = "^3.1.1"
-+ pytest-codspeed = ">=3.1.1,<5.0.0"
- @@ -104,7 +104,7 @@ module = "docs.*"
-  ignore_errors = true
-  
-diff --git a/meta-python/recipes-devtools/python/python3-dbus-fast_2.44.1.bb b/meta-python/recipes-devtools/python/python3-dbus-fast_2.44.5.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-dbus-fast_2.44.1.bb
-rename to meta-python/recipes-devtools/python/python3-dbus-fast_2.44.5.bb
-index f827d21bb2..4f21ec379e 100644
---- a/meta-python/recipes-devtools/python/python3-dbus-fast_2.44.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-dbus-fast_2.44.5.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=729e372b5ea0168438e4fd4a00a04947"
+ SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz \
++           file://0001-configure.ac-do-not-run-conftest-in-case-of-cross-co.patch \
+            file://CVE-2023-4256.patch \
+            file://CVE-2024-22654-0001.patch \
+            file://CVE-2024-22654-0002.patch \
+            file://CVE-2023-43279.patch \
+-           file://0001-configure.ac-do-not-run-conftest-in-case-of-cross-co.patch \
++           file://CVE-2025-9157.patch \
+ "
  
- SRC_URI += "file://0001-pyproject.toml-Remove-upper-version-constraint-for-C.patch"
--SRC_URI[sha256sum] = "b027e96c39ed5622bb54d811dcdbbe9d9d6edec3454808a85a1ceb1867d9e25c"
-+SRC_URI[sha256sum] = "e9d738e3898e2d505d7f2d5d21949bd705d7cd3d7240dda5481bb1c5fd5e3da8"
- 
- PYPI_PACKAGE = "dbus_fast"
- UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+ SRC_URI[sha256sum] = "44f18fb6d3470ecaf77a51b901a119dae16da5be4d4140ffbb2785e37ad6d4bf"
 -- 
-2.47.3
+2.40.0
 
 
