@@ -2,120 +2,281 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E10F1CCA470
-	for <webhook@archiver.kernel.org>; Tue,  7 Oct 2025 21:58:19 +0000 (UTC)
-Received: from mail-yx1-f52.google.com (mail-yx1-f52.google.com [74.125.224.52])
- by mx.groups.io with SMTP id smtpd.web11.2179.1759874297003916988
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1B27CCA476
+	for <webhook@archiver.kernel.org>; Wed,  8 Oct 2025 00:34:10 +0000 (UTC)
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+ by mx.groups.io with SMTP id smtpd.web10.5179.1759883645101903523
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Oct 2025 14:58:17 -0700
+ Tue, 07 Oct 2025 17:34:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fTDIqVFJ;
- spf=pass (domain: gmail.com, ip: 74.125.224.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f52.google.com with SMTP id 956f58d0204a3-63bbf5f77daso4489263d50.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 14:58:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Gd2xMY6g;
+ spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-77fac63ba26so47403987b3.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 17:34:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759874296; x=1760479096; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759883644; x=1760488444; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=MiFdcdhXX7WQ7o7QTMyxjURR8uP+1ZDmHocaHKa26OY=;
-        b=fTDIqVFJJgguUMDYz2o/h02m64tpKzFtssYsRXKdOZzuqlOdTQdksWBnEj/X+6k1ce
-         qaANLpOTwbo6HOSV7N/tHpFyirkaN981ZhNTSgqhcc8jOJ1CA7M7Y+sukk4w4axlGbmK
-         h6IhJ8P12WJ3+8XmlR2RFebYqYQvrUl9IPkBEUUN6jSF4RaUe2jKawFCy9gOAgCIW2sC
-         zj3jenP6Y5rOwltG1unzBcQzofZVl3fHxPsQYL+9uHaeaqueLCLOigSuIMI1nDsZJz8A
-         WPYcdgfDs7/opqD5xNTvl7wy+hcjdSgJjHHG3CAoLxMlosntjELkD6O4SMccGHBBbPVg
-         X3LQ==
+        bh=A0bEnRAKTituyGU+cRKSYf+lCowd/7UeZf5Jv6B38SA=;
+        b=Gd2xMY6gssd49X/4IAthAzwPKowCacJOAjYcgXiUynd52AR22M9zJhdfo8etrvYreW
+         cUbVs+K0ShdSp89eKDA7L/wZeuvOFF1UFeiqVd+jDPusXEDyqCVYWVQj09z41CTyVdSN
+         nH5varJwR2HM48UtLepSjIE03jgx4vqleScqvicnLq4oAgRUkvvPn9f8hgXkOzMSDRr8
+         3H32Ss8h9wEnh6zxPrveiBP7wlqmHAC8VhnaFOw6BeoMtEiKdKHG8KT+s/WjFGFhFRud
+         TlCPGupkMJ7Az/sy1xzPazMB6v9ow069vHF/Z3VmvloFqrLSb4rq0HZH29B6tS7pLjiy
+         /ekQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759874296; x=1760479096;
+        d=1e100.net; s=20230601; t=1759883644; x=1760488444;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=MiFdcdhXX7WQ7o7QTMyxjURR8uP+1ZDmHocaHKa26OY=;
-        b=veRRGXFKjgsvo1wXCqdGwIEdRhsDkM09ywid+VkQehSren9SgtI7PBaCIjP90KvaXR
-         fLEGTZt4BqH4iGrYExfk014kk0euwTrXLIuz+IkaD9h9V0s+d4emGl0/ye1tz7bfvuXc
-         vo4D4sGizPPuaAoWRfxKv9ouzpb07UcCq99lp5X50JwfpAZ06j5oXLlRPOFpZugjXbBc
-         ZBHvl2CDucnm32zTxcYj8CWXYTR4UCyECD2O+sVutd7U1VzTtRz6uNxbxLHBGvJ1H/Gj
-         wdp6qQC04LF7SjGcft1N7NnbrTAoiGxY5XBgg6ZORrrkKhQFfDKSEPfb+7KV+UEFaumK
-         85ww==
-X-Gm-Message-State: AOJu0YzhiV/p4vjnCtAg/EyWnNgU1jyfEUSgiWVZDpEO/MahR362mTKP
-	v1JaRUhzFeFT1c9IfNAcndAEMNewbbbexDX6Gs3Ph6/Ni0oYN7L0BGhc2jyEsOQqc/60knxekIT
-	m0wcIYsXiEYhoxUraEztzghwgOFxy/jA=
-X-Gm-Gg: ASbGncupAoaUdQaPux64Y0/HGlUPPs51uNXnKci95y4vBw13fHW05xk3s6paMnCiXCL
-	xyVHIEov2kaxH93Ydu55jypOgYmZpIprslU+zLkK35KgP9k47oVPSWSEUQnYnQ/MWgTDNv2WqPq
-	be/w4lqNRvBcDVaeo/Q+Dk0CC2w3pP78j6RwLVVx4cafUygfhQ1eh4fNV70POeO3s9GSZb2c6Rx
-	jg7OtUs2sDGfMXXY4LOQy5igCZVH9JF3hg1EQ5lBen9LggVJQBU/j3S4r8XUMDehR4VId5i7tlE
-	H6ryefaKt6FBHBFoXNraeO4AQaNBfP+PVbGQssbjGty2GxQRXBgM4NKzslG6R7rR3pkjeUATXKz
-	27yFM2Q==
-X-Google-Smtp-Source: AGHT+IFrjcNqQQLbcfAuD5+uvqirTqsjO5LEVK8pw+rGQKwCfX9cxVCBhg371S18JlnSN30LtoNpYnTCAnxsoLgkajc=
-X-Received: by 2002:a05:690e:15c7:b0:636:5e6:cac1 with SMTP id
- 956f58d0204a3-63ccb7fb22cmr890368d50.4.1759874296093; Tue, 07 Oct 2025
- 14:58:16 -0700 (PDT)
+        bh=A0bEnRAKTituyGU+cRKSYf+lCowd/7UeZf5Jv6B38SA=;
+        b=SE8z0BzYOy2/ZRNavtBQx8twgmwQbMyizPZuIjOZAFEVpdcHETraPTTY5xM+k/iqcf
+         rmtcbyxywKavJElbynHi2s7ocoroXcMljzsBvQUoQhVY/O1DmVzmWoI9m627QFB0+hPZ
+         IwVao0MyGPiqYphwfAHMD53gegx14Z/+KZotZ86NETWQOU6oe8LrILM/VPxNvoVEI0u0
+         3rEJs+iGuSnotVNujt/AcIjRy9RXlMTcYSc8hKecSUmmLxQh9C8zK+wBmvwoVODmJsvm
+         OP5eQG6clzeaadQjyO/SDcm1zdj3U4Up8iJoQIMBN5KspPQF3ocDV11Q4zg2Y+cFUB6b
+         NRFg==
+X-Gm-Message-State: AOJu0YyBMOMVtbQdo0U8j0vAiP3pF4S+k5nT+YQOPIjLHq4snN4I5s5S
+	x83a+b5IxhaFFb1X3aiw9/RVJrcspzrV3iGmjVNuDiL3t1xIctmJZGz9JJgeD52uSIT4dCbNYPo
+	xb/Wk17NE1ILGeZqUoAcrSGhgoPUDCfY=
+X-Gm-Gg: ASbGncsV6bySTYdrr8SdcNYcRfQ8zaomUd5ojVSsxvwkE/pTnTv/KpfM4pUK/1SWkZt
+	H7/34pJEx91CiaRP5ej5TcmC+nGqbeCuxZg7O+8w0OUPJa/zkxvxqu1aYLbq6hgs/UhWyVi5plG
+	iXGulXikfTu1Zfl7hU7WN7+sSw8G7nRxlhMaaoX1tVNIDvV/9eogN0TIDsQj/7n+CnHt2gKAha3
+	XbD50hh6/+3rvsmK1f8fhwvs+JheQwcQxsyK8rAx6uMFYNU1Pi1rAUkEOt/3QacCLXDm/ACtTUg
+	sbVkB1IyyNsFNrpzG1csvaWuEVuELu7ikr/ECxuPmU1CUeJQT0oUad5rAREtBOSc2gTIa9nmcGc
+	MGqAPgidpAOVgy0Vu
+X-Google-Smtp-Source: AGHT+IFBZnXMjGLpTORpKV+UFSiDZO/M4+U7lPH7ZMtJB7Xf2SwfTGJuO6hU2FeE3aRt6Ca5prSNW/rOLiJYXNUT6Z0=
+X-Received: by 2002:a53:b6cd:0:b0:636:d4ab:a507 with SMTP id
+ 956f58d0204a3-63ccb85e07emr1176411d50.16.1759883643909; Tue, 07 Oct 2025
+ 17:34:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251007105350.1237-1-joao.lima@hbkworld.com> <20251007105350.1237-2-joao.lima@hbkworld.com>
-In-Reply-To: <20251007105350.1237-2-joao.lima@hbkworld.com>
+References: <20251005184547.1851183-1-skandigraun@gmail.com>
+In-Reply-To: <20251005184547.1851183-1-skandigraun@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 7 Oct 2025 14:57:50 -0700
-X-Gm-Features: AS18NWCeXaJU5VtLNvNuM_zYHeG2A85MCcCiIwkbPTa5U4vNnyAkCxakCGeRsrs
-Message-ID: <CAMKF1srm31ry7unszz67F=i7UhN-6a=xi+jP4DJ=3U-pFeLd_w@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v2 1/3] openocd: bump the openocd, jimtcl versions
-To: =?UTF-8?B?TGltYSwgSm/Do28=?= <joao.raul.434@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, joao.lima@hbkworld.com, 
-	ivitro@gmail.com
+Date: Tue, 7 Oct 2025 17:33:37 -0700
+X-Gm-Features: AS18NWBrByi0n8mmDFHzbxll1X8ZrBMed2vtnB3__uaQNNA3sKQ__Oai2ioRIh4
+Message-ID: <CAMKF1spc0u3pkgnA80QxKuW+kzi+EZmVphhkJ0o3P6Sm2o4A9w@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] emacs: upgrade 29.1 -> 30.2
+To: skandigraun@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 21:58:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120352
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 00:34:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120353
 
-How did you test it ?
-I am seeing patching errors
+I am seeing some fetching issues on Autobuilders -
+https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/3761119/raw_inlin=
+e
+Is there a mirror we need ?
 
-NOTE: Applying patch
-'0001-Makefile.am-Use-SOURCE_DATE_EPOCH-environment-variab.patch'
-(sources/meta-openembedded/meta-oe/recipes-devtools/openocd/openocd/0001-Ma=
-kefile.
-   =E2=86=AA am-Use-SOURCE_DATE_EPOCH-environment-variab.patch)
-   ERROR: Applying patch
-'0001-Makefile.am-Use-SOURCE_DATE_EPOCH-environment-variab.patch' on
-target directory
-'/home/kraj200/yoe/build/tmp/work/x86-64-v3-yoe-linux-musl/
-   =E2=86=AA openocd/0.12+git/sources/openocd-0.12+git'
-
-
-On Tue, Oct 7, 2025 at 3:54=E2=80=AFAM Lima, Jo=C3=A3o <joao.raul.434@gmail=
-.com> wrote:
+On Sun, Oct 5, 2025 at 11:45=E2=80=AFAM Gyorgy Sarvari via
+lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
+wrote:
 >
-> From: Joao Lima <joao.lima@hbkworld.com>
+> Added a new patch to avoid unexporting some environment variables that ar=
+e set
+> by the recipe explicitly, to avoid the following build error:
 >
-> Version bumps:
->    - openocd: 91bd431 -> 66ea461
->    - jimtcl: fcbb449 -> f160866
->    - libjaylink: 9aa7a59 -> 0d23921
+> | Loading env...
+> | 'bootstrap-emacs' -batch --no-site-file --no-site-lisp -batch -l ja-dic=
+-cnv \
+> |   -f batch-skkdic-convert -dir "../../sources/emacs-29.2/leim/../lisp/l=
+eim/ja-dic" --no-reduction "../../sources/emacs-29.2/leim/SKK-DIC/SKK-JISYO=
+.L"
+> <...>
+> | Error: <RECIP_SYSROOT_NATIVE>/usr/share/emacs/29.2/etc/charsets: No suc=
+h file or directory
 >
-> Signed-off-by: Joao Lima <joao.lima@hbkworld.com>
+> Changelogs:
+> 29.2 - 29.4: https://github.com/emacs-mirror/emacs/blob/master/etc/NEWS.2=
+9
+> 30.1 - 30.2: https://github.com/emacs-mirror/emacs/blob/master/etc/NEWS.3=
+0
+>
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 > ---
->  meta-oe/recipes-devtools/openocd/openocd_git.bb | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  .../emacs/{emacs_29.1.bb =3D> emacs_30.2.bb}    |  3 ++-
+>  ...oid-running-host-binaries-for-sanity.patch |  7 ++++---
+>  .../files/leim_dont-unexport-EMACSDATA.patch  | 19 +++++++++++++++++++
+>  ...acs-native-tools-for-cross-compiling.patch | 19 +++++++------------
+>  4 files changed, 32 insertions(+), 16 deletions(-)
+>  rename meta-oe/recipes-support/emacs/{emacs_29.1.bb =3D> emacs_30.2.bb} =
+(99%)
+>  create mode 100644 meta-oe/recipes-support/emacs/files/leim_dont-unexpor=
+t-EMACSDATA.patch
 >
-> diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/re=
-cipes-devtools/openocd/openocd_git.bb
-> index 3bbe33ca1d..3b7705c41d 100644
-> --- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> +++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> @@ -13,10 +13,10 @@ SRC_URI =3D " \
+> diff --git a/meta-oe/recipes-support/emacs/emacs_29.1.bb b/meta-oe/recipe=
+s-support/emacs/emacs_30.2.bb
+> similarity index 99%
+> rename from meta-oe/recipes-support/emacs/emacs_29.1.bb
+> rename to meta-oe/recipes-support/emacs/emacs_30.2.bb
+> index 5cbe4551c0..6f9b8a485c 100644
+> --- a/meta-oe/recipes-support/emacs/emacs_29.1.bb
+> +++ b/meta-oe/recipes-support/emacs/emacs_30.2.bb
+> @@ -9,9 +9,10 @@ SRC_URI =3D "https://ftp.gnu.org/pub/gnu/emacs/emacs-${P=
+V}.tar.xz \
+>  SRC_URI:append:class-target =3D " \
+>      file://use-emacs-native-tools-for-cross-compiling.patch \
+>      file://avoid-running-host-binaries-for-sanity.patch \
+> +    file://leim_dont-unexport-EMACSDATA.patch \
 >  "
 >
->  SRCREV_FORMAT =3D "openocd"
-> -SRCREV_openocd =3D "91bd4313444c5a949ce49d88ab487608df7d6c37"
-> +SRCREV_openocd =3D "66ea461846a3a4a96687c9287c3f61ae8ce0b775"
->  SRCREV_git2cl =3D "8373c9f74993e218a08819cbcdbab3f3564bbeba"
-> -SRCREV_jimtcl =3D "fcbb4499a6b46ef69e7a95da53e30796e20817f0"
-> -SRCREV_libjaylink =3D "9aa7a5957c07bb6e862fc1a6d3153d109c7407e4"
-> +SRCREV_jimtcl =3D "f160866171457474f7c4d6ccda70f9b77524407e"
-> +SRCREV_libjaylink =3D "0d23921a05d5d427332a142d154c213d0c306eb1"
+> -SRC_URI[sha256sum] =3D "d2f881a5cc231e2f5a03e86f4584b0438f83edd7598a09d2=
+4a21bd8d003e2e01"
+> +SRC_URI[sha256sum] =3D "b3f36f18a6dd2715713370166257de2fae01f9d38cfe878c=
+ed9b1e6ded5befd9"
 >
->  PV =3D "0.12+git"
+>  CVE_STATUS[CVE-2007-6109] =3D "fixed-version: The CPE in the NVD databas=
+e doesn't reflect correctly the vulnerable versions."
+>
+> diff --git a/meta-oe/recipes-support/emacs/files/avoid-running-host-binar=
+ies-for-sanity.patch b/meta-oe/recipes-support/emacs/files/avoid-running-ho=
+st-binaries-for-sanity.patch
+> index 719ee4bce9..bd23358f2a 100644
+> --- a/meta-oe/recipes-support/emacs/files/avoid-running-host-binaries-for=
+-sanity.patch
+> +++ b/meta-oe/recipes-support/emacs/files/avoid-running-host-binaries-for=
+-sanity.patch
+> @@ -12,14 +12,14 @@ Index: emacs-29.1/Makefile.in
+>  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>  --- emacs-29.1.orig/Makefile.in
+>  +++ emacs-29.1/Makefile.in
+> -@@ -416,19 +416,10 @@ advice-on-failure:
+> +@@ -420,19 +420,11 @@
+>         @exit ${exit-status}
+>
+>   sanity-check:
+>  -      @[ -f .no-advice-on-failure ] && exit 0; true
+> --      @v=3D$$(src/emacs${EXEEXT} --batch --eval \
+> +-      @v=3D`src/emacs${EXEEXT} --batch -Q --eval \
+>  -        '(progn (defun f (n) (if (=3D 0 n) 1 (* n (f (- n 1))))) (princ=
+ (f 10)))' \
+> --        2> /dev/null); \
+> +-        2> /dev/null`; \
+>  -      [ "X$$v" =3D "X3628800" ] && exit 0; \
+>  -      echo >&2 '***'; \
+>  -      echo >&2 '*** '"\"make ${make-target}\" succeeded, but Emacs is n=
+ot functional."; \
+> @@ -33,6 +33,7 @@ Index: emacs-29.1/Makefile.in
+>  +# this is not going to work since it was (probably) built for a differe=
+nt architecture.
+>  +# Avoid calling target binaries from the host and simply assume our bui=
+ld artifacts work.
+>  +      exit 0
+> ++
+>
+>   .PHONY: all ${SUBDIR} blessmail epaths-force epaths-force-w32 epaths-fo=
+rce-ns-self-contained etc-emacsver
+>
+> diff --git a/meta-oe/recipes-support/emacs/files/leim_dont-unexport-EMACS=
+DATA.patch b/meta-oe/recipes-support/emacs/files/leim_dont-unexport-EMACSDA=
+TA.patch
+> new file mode 100644
+> index 0000000000..81dd2bde40
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/emacs/files/leim_dont-unexport-EMACSDATA.pa=
+tch
+> @@ -0,0 +1,19 @@
+> +Upstream unexports some environment variables to avoid contamination,
+> +however OE sets these variables specifically to help the build in the
+> +recipe, and they should not be unexported.
+> +
+> +Upstream-Status: Inappropriate [oe-specific]
+> +
+> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> +
+> +--- ./leim/Makefile.in.orig    2025-10-05 20:22:56.062508393 +0200
+> ++++ ./leim/Makefile.in 2025-10-05 20:23:05.581046818 +0200
+> +@@ -42,7 +42,7 @@
+> + -include ${top_builddir}/src/verbose.mk
+> +
+> + # Prevent any settings in the user environment causing problems.
+> +-unexport EMACSDATA EMACSDOC EMACSLOADPATH EMACSPATH
+> ++# unexport EMACSDATA EMACSDOC EMACSLOADPATH EMACSPATH
+> +
+> + # Which Emacs to use to convert TIT files to Emacs Lisp files,
+> + # and generate the file leim-list.el.
+> diff --git a/meta-oe/recipes-support/emacs/files/use-emacs-native-tools-f=
+or-cross-compiling.patch b/meta-oe/recipes-support/emacs/files/use-emacs-na=
+tive-tools-for-cross-compiling.patch
+> index df5e4bd258..a1b6ea6ddf 100644
+> --- a/meta-oe/recipes-support/emacs/files/use-emacs-native-tools-for-cros=
+s-compiling.patch
+> +++ b/meta-oe/recipes-support/emacs/files/use-emacs-native-tools-for-cros=
+s-compiling.patch
+> @@ -18,12 +18,7 @@ Index: emacs-29.1/src/Makefile.in
+>  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>  --- emacs-29.1.orig/src/Makefile.in
+>  +++ emacs-29.1/src/Makefile.in
+> -@@ -1,3 +1,4 @@
+> -+
+> - ### @configure_input@
+> -
+> - # Copyright (C) 1985, 1987-1988, 1993-1995, 1999-2023 Free Software
+> -@@ -508,7 +509,7 @@ ifeq ($(CHECK_STRUCTS),true)
+> +@@ -542,7 +542,7 @@ ifeq ($(CHECK_STRUCTS),true)
+>   pdumper.o: dmpstruct.h
+>   endif
+>   dmpstruct.h: $(srcdir)/dmpstruct.awk
+> @@ -32,17 +27,17 @@ Index: emacs-29.1/src/Makefile.in
+>         $(AM_V_GEN)POSIXLY_CORRECT=3D1 awk -f $(srcdir)/dmpstruct.awk \
+>                 $(dmpstruct_headers) > $@
+>
+> -@@ -610,8 +611,7 @@ SYSTEM_TYPE =3D @SYSTEM_TYPE@
+> +@@ -651,8 +651,7 @@
+>   ## Strictly speaking, emacs does not depend directly on all of $lisp,
+>   ## since not all pieces are used on all platforms.  But DOC depends
+>   ## on all of $lisp, and emacs depends on DOC, so it is ok to use $lisp =
+here.
+>  -emacs$(EXEEXT): temacs$(EXEEXT) \
+> --                lisp.mk $(etc)/DOC $(lisp) \
+> -+emacs$(EXEEXT): lisp.mk $(etc)/DOC $(lisp) \
+> +-                $(abs_top_builddir)/src/lisp.mk $(etc)/DOC $(lisp) \
+> ++emacs$(EXEEXT): $(abs_top_builddir)/src/lisp.mk $(etc)/DOC $(lisp) \
+>                   $(lispsource)/international/charprop.el ${charsets}
+>   ifeq ($(SYSTEM_TYPE),cygwin)
+>         find ${top_builddir} -name '*.eln' | rebase -v -O -T -
+> -@@ -654,7 +654,7 @@ endif
+> +@@ -695,7 +695,7 @@ endif
+>   $(etc)/DOC: $(libsrc)/make-docfile$(EXEEXT) $(doc_obj)
+>         $(AM_V_GEN)$(MKDIR_P) $(etc)
+>         $(AM_V_at)rm -f $(etc)/DOC
+> @@ -51,7 +46,7 @@ Index: emacs-29.1/src/Makefile.in
+>           $(SOME_MACHINE_OBJECTS) $(doc_obj) > $(etc)/DOC
+>
+>   $(libsrc)/make-docfile$(EXEEXT) $(libsrc)/make-fingerprint$(EXEEXT): \
+> -@@ -671,7 +671,7 @@ buildobj.h: Makefile
+> +@@ -712,7 +712,7 @@ buildobj.h: Makefile
+>   GLOBAL_SOURCES =3D $(base_obj:.o=3D.c) $(NS_OBJC_OBJ:.o=3D.m)
+>
+>   gl-stamp: $(libsrc)/make-docfile$(EXEEXT) $(GLOBAL_SOURCES)
+> @@ -60,7 +55,7 @@ Index: emacs-29.1/src/Makefile.in
+>         $(AM_V_at)$(top_srcdir)/build-aux/move-if-change globals.tmp glob=
+als.h
+>         $(AM_V_at)echo timestamp > $@
+>
+> -@@ -685,7 +685,7 @@ $(LIBEGNU_ARCHIVE): $(config_h)
+> +@@ -726,7 +726,7 @@ $(LIBEGNU_ARCHIVE): $(config_h)
+>         $(MAKE) -C $(dir $@) all
+>
+>   ifeq ($(HAVE_PDUMPER),yes)
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#120256): https://lists.openembedded.org/g/openembedde=
+d-devel/message/120256
+> Mute This Topic: https://lists.openembedded.org/mt/115605456/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
