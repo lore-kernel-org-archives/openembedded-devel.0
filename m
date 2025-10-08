@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCA61CAC5BB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DEE6ACCD186
 	for <webhook@archiver.kernel.org>; Wed,  8 Oct 2025 14:48:04 +0000 (UTC)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
- by mx.groups.io with SMTP id smtpd.web11.657.1759934881592870127
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web11.656.1759934880924156831
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 08 Oct 2025 07:48:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=e7YBKGem;
- spf=pass (domain: gmail.com, ip: 209.85.208.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-6399328ff1fso6430957a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 07:48:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JqTzs9j5;
+ spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-6349e3578adso13873674a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 07:48:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759934880; x=1760539680; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1759934879; x=1760539679; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=c3PAiq/r0jiWU4EcaWLleSY2WgTXeqKMzsjNCmzyK2k=;
-        b=e7YBKGemvCrg81GybZN98aTE5NfAN5w4FplpcSA4gu1FEPy050ruI2vyYBFhAT0m04
-         Ild6ofq0MgFTrEkZIAWs78tryBgOcAK1+B1JaHCkyHA2CQVBQuVgtawCRkOVYTeOl348
-         YxzypSpcjx5df6A2e8GbYNWxXSAR4mltUVzNoetHz/OlwpokwH5f7+6Ex0FGwVwBY84r
-         0vwijS2lF0t+PBfdxs7CNEi3USFUd+IbRbirc4dvJA0Kq8Q9Pp88eSCwLOqMmjddCxbs
-         TWTKqZgQo2iicsawvBnFjO4dGMCaybplEiQqDHc10R8dDcuaXlK+desf/Thqv6Zc8mYd
-         kbLw==
+        bh=PnaeYiQmxqD2HS1kZ3olbvx4Xsuz3RZpB3Sd10w9elE=;
+        b=JqTzs9j5DgM3q7lmZtJGri+l+7AlCp+ao9ZdwvlMJodZhBEqFMJVO4b5yWNKWEwdS2
+         hYLvS1321k7hKA8tDi3Z1P+OU8ElmohXrxHk4aMC9Nw9ZQYxIbpdRv0JoBZltZX87VN4
+         xxhf18MkyOB5s/0bL+wOWH+Tw7oU23uJNdombipwF6wNlIHsMBeEh4ZwWyNRQkMMq82l
+         ITtkKvl0h+qHo6j5ObcBkUVViN4wloy0TzaSbNl5WhPMBPcQ2BrAPdP5NrRdRm3lVaws
+         BzBlwNQwh/zW9UGXOY/5sOSZ0i2AMkt2vXbZ9SOkoHEoGwiTFmf3TCkYCOTQjbjBt8sT
+         3OJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759934880; x=1760539680;
+        d=1e100.net; s=20230601; t=1759934879; x=1760539679;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=c3PAiq/r0jiWU4EcaWLleSY2WgTXeqKMzsjNCmzyK2k=;
-        b=r3y1l8gFB2Io2+SDX03qqIx79cDwh1tp+9I8qS0/yo4gv4S2PsjFim4BKwhCWTuHVu
-         Yp9lPrcwzt5cVsyH151rZw6cl3jSMes+0ifdQPFmOp6/630qUbfY7yE3s2jITkMpxFxR
-         9hW4bUudYZHZn36JnHlkzSg9pkrPtN9uyl3RJ6uOSDt7DFtEo8ySZhdV5Wky+GfEPWeI
-         3sQDm8kZN1KGJU1Vqkep/a+uvtRu5+Ot+vuLu14+jPtmh7qYsgIo7et9bnbPpV5J8Qxk
-         fEkUUa0jvusGukzIHbFAIpD0pp0zgnA0Ha6lxuElytPLYvjf3wMdHIhBRrn4hSYc+3c5
-         XAcw==
-X-Gm-Message-State: AOJu0Yyn9dAkrM9eh35+dVczCo3xl0XAE82mgmBmlq9tsfPbtzuIPduJ
-	cmH0Nzr6lJdRIznKZhJe1IAVOhbojtaKyjX2CRXcya+oKpL2LW7aTurBCnW+f14a
-X-Gm-Gg: ASbGncvjtE1Om9J0PwvBNMAWW2nd952Kr8ZW6GAHQt3BBiAgS8MrSsMA0kEEhCy6PIs
-	6vmUkwsLKUhykA7JhG+P+PZELfD7+8Fvbs3utG1Y5z3gS+VXljcPL7j1jJQzniTfXfvFo+cydle
-	+udv6JVjMhh8W2oRWLeb/rd6t6dPJw+i4efQQhUzddzo7zAQxZjbpLeu7vVzA1XbuHe/JIbURaj
-	DLYPpAsfaLOsBDaMqlbuh0/NbesfZmVlUpzOUUtwK+m6aGYwdcr68YUPiuGIBQwD+y7WBqKVcmN
-	UxjeoB225AA2ecOzLb6lDeMORVhXSBgKARNhXIWMxer/zCRjoJSgVldlN8CzgZO6I+xjWNYBzYw
-	MUr0o3N+IoG8Ff0b9no3peQ3zCuh9em17J1Ev0Mrdf4Bx
-X-Google-Smtp-Source: AGHT+IFZ7QLOlDQIIL6bEI6PLXgkHPb2nNZ6q5uEEnoj++79J+M6PfR+a2IjN+9OSpSw0zEr2Mg6qQ==
-X-Received: by 2002:a17:907:3e0e:b0:b45:27e0:7f35 with SMTP id a640c23a62f3a-b50ac7d4807mr437792766b.46.1759934879844;
+        bh=PnaeYiQmxqD2HS1kZ3olbvx4Xsuz3RZpB3Sd10w9elE=;
+        b=rpkhegnMruUz/QSq1UHXStfyKOGSuyk9rh+RwtZtxwYB6ZYuMB5deB2tS2gGCpT9xU
+         WQYcDKrveKGi68ydehH4VqW617wksd5RnNtm696THBjjCWhHShS2SLUn6BC1Y2SGEqr1
+         eNqvwQkpSoArNbO60VudPkl9WQds1KsqG4z1nXsuYz9mzAkBnaWvYccl6Up8Ikz1Jhos
+         7cZV2NEIaCw6pyczRwJKm5JVqyIRjWv3OQNmVCjihX2ZvTfj/nmcZPRCPPjlqrVvMNWi
+         FgC9wZKo8U+3HSmyLPFrw+XiWvq2HrcAPGJNSzZP/d2vpm2BYdybLjXEUDwpQHewEeJe
+         V+oQ==
+X-Gm-Message-State: AOJu0YzaE/dZD4lTCy2AHma5lHubeLBrBPUbH9Ly+dihRbNiHMP7g5EH
+	eGoJ6yJYp2J3DRJRalnqtZqD6y6dszfDWE9etwRzwsUlgAKmM5Gu/CcbnsvKngEM
+X-Gm-Gg: ASbGncsudv5GAkZD8Die0Krt9ai+CoTW2Gg67/0BEJvXZnP1MAKnlTtHMaPZ+/MprRf
+	peRfA9pRdc+wM7VM3h9qpBpMdguLVUsLvC4PxFbnNWZkOruBSnQAzqqPeNxdpvEqVmzyx9TDgLO
+	sUAULlVduoLzXtyHPAZdTdxadDg7HFB18ooQLlkjd2+zM5CFUrrS8ke43ivAM3lIl/bmLgdLJWO
+	M+1NEBl/7Dv9MQKhsaXBoDV9hXNKypOrFugiUtDej2uJDjUJlX/FsnFotv1QfgGMt/TqF2s6v+R
+	mr5TL/UxgDpxPfPbmNZKpj5fSod8EtbHb5Qt/LdL4rI5sk4ruphrq4l9n3wgrxAcWoUZHhoBcvx
+	fHy09Jxc4SZg3uERcqdBd92OvsixJJQG9fiNcnP6vokVm
+X-Google-Smtp-Source: AGHT+IHVCztKHFMM8GijfKc8igkD/z3+h/9HM0v0O8MRmdlbSgo7cAPIMge0WtyINEEeNLzuqTWiGg==
+X-Received: by 2002:a17:907:3f14:b0:b07:e3a8:5194 with SMTP id a640c23a62f3a-b50aa48e3c9mr436881966b.22.1759934879201;
         Wed, 08 Oct 2025 07:47:59 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4865a83e3dsm1637724366b.29.2025.10.08.07.47.59
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4865a83e3dsm1637724366b.29.2025.10.08.07.47.58
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Oct 2025 07:47:59 -0700 (PDT)
+        Wed, 08 Oct 2025 07:47:58 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][walnascar][PATCH 3/3] exiv2: patch CVE-2025-55304
-Date: Wed,  8 Oct 2025 16:47:57 +0200
-Message-ID: <20251008144757.411347-3-skandigraun@gmail.com>
+Subject: [meta-oe][walnascar][PATCH 2/3] exiv2: patch CVE-2025-54080
+Date: Wed,  8 Oct 2025 16:47:56 +0200
+Message-ID: <20251008144757.411347-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251008144757.411347-1-skandigraun@gmail.com>
 References: <20251008144757.411347-1-skandigraun@gmail.com>
@@ -67,130 +67,111 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 14:48:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120368
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120367
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-55304
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-54080
 
-Backport patch mentioned in the details of the vulnerability.
+Backport the patch mentioned in the details.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...ppendIccProfile-to-fix-quadratic-per.patch | 96 +++++++++++++++++++
+ .../exiv2/exiv2/0001-CVE-2025-54080-fix.patch | 77 +++++++++++++++++++
  meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb |  1 +
- 2 files changed, 97 insertions(+)
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch
+ 2 files changed, 78 insertions(+)
+ create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-CVE-2025-54080-fix.patch
 
-diff --git a/meta-oe/recipes-support/exiv2/exiv2/0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch b/meta-oe/recipes-support/exiv2/exiv2/0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch
+diff --git a/meta-oe/recipes-support/exiv2/exiv2/0001-CVE-2025-54080-fix.patch b/meta-oe/recipes-support/exiv2/exiv2/0001-CVE-2025-54080-fix.patch
 new file mode 100644
-index 0000000000..a0399c539b
+index 0000000000..6a4c80f8a8
 --- /dev/null
-+++ b/meta-oe/recipes-support/exiv2/exiv2/0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch
-@@ -0,0 +1,96 @@
-+From 14a862213873b3f81941721a5972853fd269ca63 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/exiv2/exiv2/0001-CVE-2025-54080-fix.patch
+@@ -0,0 +1,77 @@
++From 6a0c63f1362dac8badfad5d2dcc55fb4ff04fc60 Mon Sep 17 00:00:00 2001
 +From: Kevin Backhouse <kevinbackhouse@github.com>
-+Date: Fri, 15 Aug 2025 12:08:49 +0100
-+Subject: [PATCH] Add new method appendIccProfile to fix quadratic performance
-+ issue.
++Date: Tue, 29 Jul 2025 18:58:46 +0100
++Subject: [PATCH] CVE-2025-54080 fix
 +
-+Upstream-Status: Backport [https://github.com/Exiv2/exiv2/pull/3345/commits/e5bf22e0cebeabeb2ffd40678344467a271be12d]
-+CVE: CVE-2025-55304
++Upstream-Status: Backport [https://github.com/Exiv2/exiv2/commit/e737332427711f15bcdc4e903203d6b7493eaec0]
++CVE: CVE-2025-54080
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ include/exiv2/image.hpp | 10 ++++++++++
-+ src/image.cpp           | 29 +++++++++++++++++++++--------
-+ src/jpgimage.cpp        |  7 +------
-+ 3 files changed, 32 insertions(+), 14 deletions(-)
++ src/epsimage.cpp | 40 +++++++++++-----------------------------
++ 1 file changed, 11 insertions(+), 29 deletions(-)
 +
-+diff --git a/include/exiv2/image.hpp b/include/exiv2/image.hpp
-+index 629a8a4fd..072016013 100644
-+--- a/include/exiv2/image.hpp
-++++ b/include/exiv2/image.hpp
-+@@ -191,6 +191,16 @@ class EXIV2API Image {
-+     @param bTestValid - tests that iccProfile contains credible data
-+    */
-+   virtual void setIccProfile(DataBuf&& iccProfile, bool bTestValid = true);
-++  /*!
-++    @brief Append more bytes to the iccProfile.
-++    @param iccProfile DataBuf containing profile (binary)
-++    @param bTestValid - tests that iccProfile contains credible data
-++   */
-++  virtual void appendIccProfile(const uint8_t* bytes, size_t size, bool bTestValid);
-++  /*!
-++    @brief Throw an exception if the size at the beginning of the iccProfile isn't correct.
-++   */
-++  virtual void checkIccProfile();
-+   /*!
-+     @brief Erase iccProfile. the profile is not removed from
-+         the actual image until the writeMetadata() method is called.
-+diff --git a/src/image.cpp b/src/image.cpp
-+index f06660cf7..eb6b3eb0a 100644
-+--- a/src/image.cpp
-++++ b/src/image.cpp
-+@@ -625,16 +625,29 @@ void Image::setComment(const std::string& comment) {
-+ }
++diff --git a/src/epsimage.cpp b/src/epsimage.cpp
++index 2e2241b69..bb4aa3303 100644
++--- a/src/epsimage.cpp
+++++ b/src/epsimage.cpp
++@@ -241,6 +241,8 @@ void readWriteEpsMetadata(BasicIo& io, std::string& xmpPacket, NativePreviewList
++   uint32_t posTiff = 0;
++   uint32_t sizeTiff = 0;
 + 
-+ void Image::setIccProfile(Exiv2::DataBuf&& iccProfile, bool bTestValid) {
-++  iccProfile_ = std::move(iccProfile);
-+   if (bTestValid) {
-+-    if (iccProfile.size() < sizeof(long)) {
-+-      throw Error(ErrorCode::kerInvalidIccProfile);
-+-    }
-+-    const size_t size = iccProfile.read_uint32(0, bigEndian);
-+-    if (size != iccProfile.size()) {
-+-      throw Error(ErrorCode::kerInvalidIccProfile);
-+-    }
-++    checkIccProfile();
-++  }
-++}
+++  ErrorCode errcode = write ? ErrorCode::kerImageWriteFailed : ErrorCode::kerFailedToReadImageData;
 ++
-++void Image::appendIccProfile(const uint8_t* bytes, size_t size, bool bTestValid) {
-++  const size_t start = iccProfile_.size();
-++  iccProfile_.resize(Safe::add(start, size));
-++  memcpy(iccProfile_.data(start), bytes, size);
-++  if (bTestValid) {
-++    checkIccProfile();
-++  }
-++}
++   // check for DOS EPS
++   const bool dosEps =
++       (size >= dosEpsSignature.size() && memcmp(data, dosEpsSignature.data(), dosEpsSignature.size()) == 0);
++@@ -248,12 +250,8 @@ void readWriteEpsMetadata(BasicIo& io, std::string& xmpPacket, NativePreviewList
++ #ifdef DEBUG
++     EXV_DEBUG << "readWriteEpsMetadata: Found DOS EPS signature\n";
++ #endif
++-    if (size < 30) {
++-#ifndef SUPPRESS_WARNINGS
++-      EXV_WARNING << "Premature end of file after DOS EPS signature.\n";
++-#endif
++-      throw Error(write ? ErrorCode::kerImageWriteFailed : ErrorCode::kerFailedToReadImageData);
++-    }
 ++
-++void Image::checkIccProfile() {
-++  if (iccProfile_.size() < sizeof(long)) {
-++    throw Error(ErrorCode::kerInvalidIccProfile);
-++  }
-++  const size_t size = iccProfile_.read_uint32(0, bigEndian);
-++  if (size != iccProfile_.size()) {
-++    throw Error(ErrorCode::kerInvalidIccProfile);
+++    enforce(size >= 30, errcode);
++     posEps = getULong(data + 4, littleEndian);
++     posEndEps = getULong(data + 8, littleEndian) + posEps;
++     posWmf = getULong(data + 12, littleEndian);
++@@ -285,29 +283,13 @@ void readWriteEpsMetadata(BasicIo& io, std::string& xmpPacket, NativePreviewList
++       if (write)
++         throw Error(ErrorCode::kerImageWriteFailed);
++     }
++-    if (posEps < 30 || posEndEps > size) {
++-#ifndef SUPPRESS_WARNINGS
++-      EXV_WARNING << "DOS EPS file has invalid position (" << posEps << ") or size (" << (posEndEps - posEps)
++-                  << ") for EPS section.\n";
++-#endif
++-      throw Error(write ? ErrorCode::kerImageWriteFailed : ErrorCode::kerFailedToReadImageData);
++-    }
++-    if (sizeWmf != 0 && (posWmf < 30 || posWmf + sizeWmf > size)) {
++-#ifndef SUPPRESS_WARNINGS
++-      EXV_WARNING << "DOS EPS file has invalid position (" << posWmf << ") or size (" << sizeWmf
++-                  << ") for WMF section.\n";
++-#endif
++-      if (write)
++-        throw Error(ErrorCode::kerImageWriteFailed);
++-    }
++-    if (sizeTiff != 0 && (posTiff < 30 || posTiff + sizeTiff > size)) {
++-#ifndef SUPPRESS_WARNINGS
++-      EXV_WARNING << "DOS EPS file has invalid position (" << posTiff << ") or size (" << sizeTiff
++-                  << ") for TIFF section.\n";
++-#endif
++-      if (write)
++-        throw Error(ErrorCode::kerImageWriteFailed);
++-    }
+++    enforce(30 <= posEps, errcode);
+++    enforce(sizeWmf == 0 || 30 <= posWmf, errcode);
+++    enforce(sizeTiff == 0 || 30 <= posTiff, errcode);
+++
+++    enforce(posEps <= posEndEps && posEndEps <= size, errcode);
+++    enforce(posWmf <= size && sizeWmf <= size - posWmf, errcode);
+++    enforce(posTiff <= size && sizeTiff <= size - posTiff, errcode);
 +   }
-+-  iccProfile_ = std::move(iccProfile);
-+ }
 + 
-+ void Image::clearIccProfile() {
-+diff --git a/src/jpgimage.cpp b/src/jpgimage.cpp
-+index 34187dc63..2c29135ae 100644
-+--- a/src/jpgimage.cpp
-++++ b/src/jpgimage.cpp
-+@@ -268,12 +268,7 @@ void JpegBase::readMetadata() {
-+         icc_size = s;
-+       }
-+ 
-+-      DataBuf profile(Safe::add(iccProfile_.size(), icc_size));
-+-      if (!iccProfile_.empty()) {
-+-        std::copy(iccProfile_.begin(), iccProfile_.end(), profile.begin());
-+-      }
-+-      std::copy_n(buf.c_data(2 + 14), icc_size, profile.data() + iccProfile_.size());
-+-      setIccProfile(std::move(profile), chunk == chunks);
-++      appendIccProfile(buf.c_data(2 + 14), icc_size, chunk == chunks);
-+     } else if (pixelHeight_ == 0 && inRange2(marker, sof0_, sof3_, sof5_, sof15_)) {
-+       // We hit a SOFn (start-of-frame) marker
-+       if (size < 8) {
++   // check first line
 diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb b/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
-index 947d13208d..db32398b4f 100644
+index 81e9954c1d..947d13208d 100644
 --- a/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
 +++ b/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
-@@ -7,6 +7,7 @@ DEPENDS = "zlib expat brotli libinih"
+@@ -6,6 +6,7 @@ DEPENDS = "zlib expat brotli libinih"
+ 
  SRC_URI = "git://github.com/Exiv2/exiv2.git;protocol=https;branch=0.28.x \
             file://0001-Revert-fix-copy-constructors.patch \
-            file://0001-CVE-2025-54080-fix.patch \
-+           file://0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch \
++           file://0001-CVE-2025-54080-fix.patch \
             "
  SRCREV = "a6a79ef064f131ffd03c110acce2d3edb84ffa2e"
  S = "${WORKDIR}/git"
