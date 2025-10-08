@@ -1,127 +1,251 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7B3DCAC5BB
-	for <webhook@archiver.kernel.org>; Wed,  8 Oct 2025 03:32:41 +0000 (UTC)
-Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
- by mx.groups.io with SMTP id smtpd.web10.7876.1759894357957285293
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E12FCAC5BB
+	for <webhook@archiver.kernel.org>; Wed,  8 Oct 2025 07:48:13 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web10.10592.1759909690112434000
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Oct 2025 20:32:38 -0700
+ Wed, 08 Oct 2025 00:48:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eukNqvML;
- spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-6348447d5easo7122994d50.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Oct 2025 20:32:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ao39993n;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-62fca01f0d9so1676390a12.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 00:48:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1759894357; x=1760499157; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=F5OUfHSve4YMRb/QvY4oCQHfvvnvdiOxZVcwgOFSg70=;
-        b=eukNqvMLEBy5oTOq+Ru5iZMD2m2JxdkgPrR53UGi5fdYl295rhBAEqOwo+LelytaL7
-         wcpp4i71sD5Jdv9hTGcKZ/Jxc+egy+vAuYRR/ggEWLi/C16TZ24z3uw0LBl2+SdzCREV
-         iHiDQhAdNkbr5BR1KOuqjPlUsn2E6DKTDolidjJ4GB9lrXftUuct4mDnhFaM9VRYQ/gR
-         UuLRPX8/k7w2idZOgiGoQOnuI2b1Q9uB/ANbXR5hvcqIo5J5s+iqymgLuu4HxM5y7105
-         MMElp9xb/yWEQ495fNA3fbxouLqqMr3L5NaJ5i5VUNoEkissQRMpqkJ2q+4Ik2f0Mi48
-         7ITA==
+        d=gmail.com; s=20230601; t=1759909688; x=1760514488; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ghfNKlDYg3vwkLRVF8p4Uz3vfKH3+IhF7X2GjuStULQ=;
+        b=Ao39993nlEs7BZz3MOcrA6EUTP0Vczi3eeEHKr40of/R9t50kVcpIHOA9XN2MbgIiJ
+         aTySHosoIxx8LG0/zYDiMSMNKgPxkPEU0OZTmUuTFDvllRthKHXQlRF75U90kWTJ2DGs
+         Uua4vCCjRuGwsqMchrQ+9Zc1cLPbhw8cvgKRcaIsZnVy8McibgW47gp8CEsRFZYGXAbP
+         ENO1vS6Yt887ukUudRifp1tTVLPyk2TgRUmEUqMkeqOJafAo/KVK07g6JTyT9IeYkhPf
+         hIK1p3DY+iG3UHdisQuNknP28NiY/fDE1KQn/2lO9jpEH8mWnOJ2/GCu2Gy1oMLGEhsc
+         jkWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759894357; x=1760499157;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=F5OUfHSve4YMRb/QvY4oCQHfvvnvdiOxZVcwgOFSg70=;
-        b=j+ASamHyog/D6A0/P7tITdaDtndlEJxkdB6lrUGl0e7djjMCwooCqPBjfJWa0pQkM/
-         nKpy8UQG2AjYJaTBsTsysoD6L5KA/FWkkU6Ma1OcOaL4Q5tZX1gPvAR4P9HlY5gR8fmU
-         dySwMlyrDu4SeNXtrI5dltzJwb72Vh3b6ZeKmE8ehX2NdboxozKBPFzK/5PdjyBZ42BT
-         4+Duo7HFbBsTChr42zOOnhB1Hd8mfGt+89MMRTQdYOx8tgUUb+s47AhIuzqkIK1EgLOW
-         SNYAnNYamHY9t/65e12adtJNrLevommbEk6e2FfzUxMa3DNxXp/QbBrvevfmpHetsNE7
-         URpw==
-X-Gm-Message-State: AOJu0YxyVBwtugXZzv3Sytma30uy2AyTGO8IYy1QG3DXwVN5lTnI8BqC
-	ueUAySK8ZHNFwPkf1qjsVL3iF0j4XipdF8rceEAWkOXNq1Epu9ksPIkiIJPCD2UcEHxUiQo8Dsk
-	P+IPXWZWxrp3eAjfxetEG1j8nTZva8CY=
-X-Gm-Gg: ASbGncsuKP0/C4T7jaod+85Aaf4s6nYS71+nT/FmfKPjjX666EEy21bP682xXh6NN33
-	gd2KRSOW91RZHY1rPvUNXJ51GDJzKNPbj+02MtUYKfj+xgyeSac5x8r7gmKp0S1YBzIfbFXSjhJ
-	dq+/vspskDxWYOsjWZUVhjWjaLAL9+wX9UBIEqKE++yiIZ+1tojgGaZyFRjg7U8dxskCvVlSetq
-	a7mRb8m9rtmdGBu2HVGo0UgwVOsFFEZZUsQpCfllzJxsPdKpHpgFuUOz3mkw4malOOQSoSkmacn
-	6LAMggTU9x0VCraxSPkSiwupN+wYgfIUlYEQOeofLXQ4mBhubrE=
-X-Google-Smtp-Source: AGHT+IHs8kffU9rA7mRMRJ6Ab3yYG8HJ7lEYaZaUrQmJ8dMhESgpN0IKTI2spn2W8Dk5F3+Lv1vj+qdQP5NcPA2GM9A=
-X-Received: by 2002:a53:4209:0:b0:638:53e9:baaa with SMTP id
- 956f58d0204a3-63ccb962cfcmr1489592d50.49.1759894357029; Tue, 07 Oct 2025
- 20:32:37 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1759909688; x=1760514488;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ghfNKlDYg3vwkLRVF8p4Uz3vfKH3+IhF7X2GjuStULQ=;
+        b=NRdT+SS3+8HYcTWMBAySCRnSPkbUn+T7tuLpgPHL0RcM9kSGAOblIJHmSjVWwuvugV
+         hNiHaNoLJikErdsWVATvvDdIcoxFQ1xna+YmV7yGtYRmvQtvz9lyKF28Pgkp5nQ+IJPM
+         dXGHl7X13MpeQllH6ki2znibNMdN3ePM9VJEAc0m4YPSYC3JrFuenLTCSHZSU8hgHEax
+         yR8b+FkCJHgTTJACXe205+1uzsWJFdRY3dh6wEVFZoTN5RPThOLzmeKj6F2KDtBETp3T
+         d8X75QW96ciYYrDimI3/bES8AY8X0/lPdok8FtdDhYHpGJGXny7ozkLlQ13EhhupF/8S
+         VDEQ==
+X-Gm-Message-State: AOJu0YzdiV0Cgjk2IDLoF7x/msgv6/K2xaDvbfHbDh7qEr/SmkKNymrU
+	pvgVbpMh9QA7mecmucShjfllUSGMLr+fi6eHozkK79RfE1abXlRgZHdq
+X-Gm-Gg: ASbGnctZ0ew2wxu/MNDa9BZuMfq/YTu4509U2lGrCH5ni6s6KMllRxX6tjg4EaMHjx2
+	L4B+W210e5sdhvDEhJ25HrJ3cHJuBmi94+Z15i2+RRVocg1dLpehlDijq98vR8tYcKRr78boOpV
+	rpq9M5dgpZK9ej6sc/RkrXt/p89V9z8zqiF8F+OAkSUvGYBUe2lU39PFKxFxeY+bcbI58sdhEIq
+	mNnKruCHrJGcIMzDMcRL9iN3JgK+EwgtyScVic/DMCBVhHuRQn9Jcstkq1YmwIZJXGShPNu3Yti
+	6BeYQ5ft6w1MQ/FAGizqwW1CBDUax/DUuXvOdr6ThwfnFRT/j14RWojpd7enRkuET4sMY19yUxU
+	G3SLIHMuWJ5aEJrVf8Y123omgsoE61RAxmvOVgNzL21eb46h6cwZTWFAH0i0M5dVXNg==
+X-Google-Smtp-Source: AGHT+IHtSx7HjkEHxRK/iX9SbNm6ftd1o4Xyqu6Z4yvbFUfFt9QtQqmHLkIb4cq3S/gsZ6Bz8XN2BA==
+X-Received: by 2002:a05:6402:d0d:b0:633:7017:fcc1 with SMTP id 4fb4d7f45d1cf-639d5b8c2e9mr2312584a12.14.1759909688080;
+        Wed, 08 Oct 2025 00:48:08 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6376b3b6927sm14281649a12.14.2025.10.08.00.48.07
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 08 Oct 2025 00:48:07 -0700 (PDT)
+Message-ID: <601cccab-8a1e-47b0-b066-62a8873f3e49@gmail.com>
+Date: Wed, 8 Oct 2025 09:48:06 +0200
 MIME-Version: 1.0
-References: <20251007105350.1237-1-joao.lima@hbkworld.com> <20251007105350.1237-2-joao.lima@hbkworld.com>
- <CAMKF1srm31ry7unszz67F=i7UhN-6a=xi+jP4DJ=3U-pFeLd_w@mail.gmail.com>
-In-Reply-To: <CAMKF1srm31ry7unszz67F=i7UhN-6a=xi+jP4DJ=3U-pFeLd_w@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 7 Oct 2025 20:32:10 -0700
-X-Gm-Features: AS18NWDL9BGFOzF3KMCrA8_LmzG8m9YSGvdu1NMTDxycHr8BY3pVvtLKqVox93w
-Message-ID: <CAMKF1soHwesEkmQ8h+XsROBy6nqhVJ9d-ROyPfRLk_SAHk3JOw@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v2 1/3] openocd: bump the openocd, jimtcl versions
-To: =?UTF-8?B?TGltYSwgSm/Do28=?= <joao.raul.434@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, joao.lima@hbkworld.com, 
-	ivitro@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] emacs: upgrade 29.1 -> 30.2
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20251005184547.1851183-1-skandigraun@gmail.com>
+ <CAMKF1spc0u3pkgnA80QxKuW+kzi+EZmVphhkJ0o3P6Sm2o4A9w@mail.gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <CAMKF1spc0u3pkgnA80QxKuW+kzi+EZmVphhkJ0o3P6Sm2o4A9w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 03:32:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120355
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 07:48:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120356
 
-Once I remove the patch it fails to configure thats next problem see -
-https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/3764711/raw_inlin=
-e
+On 10/8/25 02:33, Khem Raj wrote:
+> I am seeing some fetching issues on Autobuilders -
+> https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/3761119/raw_inline
+> Is there a mirror we need ?
 
-On Tue, Oct 7, 2025 at 2:57=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote:
->
-> How did you test it ?
-> I am seeing patching errors
->
-> NOTE: Applying patch
-> '0001-Makefile.am-Use-SOURCE_DATE_EPOCH-environment-variab.patch'
-> (sources/meta-openembedded/meta-oe/recipes-devtools/openocd/openocd/0001-=
-Makefile.
->    =E2=86=AA am-Use-SOURCE_DATE_EPOCH-environment-variab.patch)
->    ERROR: Applying patch
-> '0001-Makefile.am-Use-SOURCE_DATE_EPOCH-environment-variab.patch' on
-> target directory
-> '/home/kraj200/yoe/build/tmp/work/x86-64-v3-yoe-linux-musl/
->    =E2=86=AA openocd/0.12+git/sources/openocd-0.12+git'
->
->
-> On Tue, Oct 7, 2025 at 3:54=E2=80=AFAM Lima, Jo=C3=A3o <joao.raul.434@gma=
-il.com> wrote:
-> >
-> > From: Joao Lima <joao.lima@hbkworld.com>
-> >
-> > Version bumps:
-> >    - openocd: 91bd431 -> 66ea461
-> >    - jimtcl: fcbb449 -> f160866
-> >    - libjaylink: 9aa7a59 -> 0d23921
-> >
-> > Signed-off-by: Joao Lima <joao.lima@hbkworld.com>
-> > ---
-> >  meta-oe/recipes-devtools/openocd/openocd_git.bb | 6 +++---
-> >  1 file changed, 3 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/=
-recipes-devtools/openocd/openocd_git.bb
-> > index 3bbe33ca1d..3b7705c41d 100644
-> > --- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> > +++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> > @@ -13,10 +13,10 @@ SRC_URI =3D " \
-> >  "
-> >
-> >  SRCREV_FORMAT =3D "openocd"
-> > -SRCREV_openocd =3D "91bd4313444c5a949ce49d88ab487608df7d6c37"
-> > +SRCREV_openocd =3D "66ea461846a3a4a96687c9287c3f61ae8ce0b775"
-> >  SRCREV_git2cl =3D "8373c9f74993e218a08819cbcdbab3f3564bbeba"
-> > -SRCREV_jimtcl =3D "fcbb4499a6b46ef69e7a95da53e30796e20817f0"
-> > -SRCREV_libjaylink =3D "9aa7a5957c07bb6e862fc1a6d3153d109c7407e4"
-> > +SRCREV_jimtcl =3D "f160866171457474f7c4d6ccda70f9b77524407e"
-> > +SRCREV_libjaylink =3D "0d23921a05d5d427332a142d154c213d0c306eb1"
-> >
-> >  PV =3D "0.12+git"
-> >
+Yeah, their main server seems to be quite strained in the past few
+weeks. Thanks for fixing it.
+
+> On Sun, Oct 5, 2025 at 11:45 AM Gyorgy Sarvari via
+> lists.openembedded.org <skandigraun=gmail.com@lists.openembedded.org>
+> wrote:
+>> Added a new patch to avoid unexporting some environment variables that are set
+>> by the recipe explicitly, to avoid the following build error:
+>>
+>> | Loading env...
+>> | 'bootstrap-emacs' -batch --no-site-file --no-site-lisp -batch -l ja-dic-cnv \
+>> |   -f batch-skkdic-convert -dir "../../sources/emacs-29.2/leim/../lisp/leim/ja-dic" --no-reduction "../../sources/emacs-29.2/leim/SKK-DIC/SKK-JISYO.L"
+>> <...>
+>> | Error: <RECIP_SYSROOT_NATIVE>/usr/share/emacs/29.2/etc/charsets: No such file or directory
+>>
+>> Changelogs:
+>> 29.2 - 29.4: https://github.com/emacs-mirror/emacs/blob/master/etc/NEWS.29
+>> 30.1 - 30.2: https://github.com/emacs-mirror/emacs/blob/master/etc/NEWS.30
+>>
+>> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+>> ---
+>>  .../emacs/{emacs_29.1.bb => emacs_30.2.bb}    |  3 ++-
+>>  ...oid-running-host-binaries-for-sanity.patch |  7 ++++---
+>>  .../files/leim_dont-unexport-EMACSDATA.patch  | 19 +++++++++++++++++++
+>>  ...acs-native-tools-for-cross-compiling.patch | 19 +++++++------------
+>>  4 files changed, 32 insertions(+), 16 deletions(-)
+>>  rename meta-oe/recipes-support/emacs/{emacs_29.1.bb => emacs_30.2.bb} (99%)
+>>  create mode 100644 meta-oe/recipes-support/emacs/files/leim_dont-unexport-EMACSDATA.patch
+>>
+>> diff --git a/meta-oe/recipes-support/emacs/emacs_29.1.bb b/meta-oe/recipes-support/emacs/emacs_30.2.bb
+>> similarity index 99%
+>> rename from meta-oe/recipes-support/emacs/emacs_29.1.bb
+>> rename to meta-oe/recipes-support/emacs/emacs_30.2.bb
+>> index 5cbe4551c0..6f9b8a485c 100644
+>> --- a/meta-oe/recipes-support/emacs/emacs_29.1.bb
+>> +++ b/meta-oe/recipes-support/emacs/emacs_30.2.bb
+>> @@ -9,9 +9,10 @@ SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz \
+>>  SRC_URI:append:class-target = " \
+>>      file://use-emacs-native-tools-for-cross-compiling.patch \
+>>      file://avoid-running-host-binaries-for-sanity.patch \
+>> +    file://leim_dont-unexport-EMACSDATA.patch \
+>>  "
+>>
+>> -SRC_URI[sha256sum] = "d2f881a5cc231e2f5a03e86f4584b0438f83edd7598a09d24a21bd8d003e2e01"
+>> +SRC_URI[sha256sum] = "b3f36f18a6dd2715713370166257de2fae01f9d38cfe878ced9b1e6ded5befd9"
+>>
+>>  CVE_STATUS[CVE-2007-6109] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
+>>
+>> diff --git a/meta-oe/recipes-support/emacs/files/avoid-running-host-binaries-for-sanity.patch b/meta-oe/recipes-support/emacs/files/avoid-running-host-binaries-for-sanity.patch
+>> index 719ee4bce9..bd23358f2a 100644
+>> --- a/meta-oe/recipes-support/emacs/files/avoid-running-host-binaries-for-sanity.patch
+>> +++ b/meta-oe/recipes-support/emacs/files/avoid-running-host-binaries-for-sanity.patch
+>> @@ -12,14 +12,14 @@ Index: emacs-29.1/Makefile.in
+>>  ===================================================================
+>>  --- emacs-29.1.orig/Makefile.in
+>>  +++ emacs-29.1/Makefile.in
+>> -@@ -416,19 +416,10 @@ advice-on-failure:
+>> +@@ -420,19 +420,11 @@
+>>         @exit ${exit-status}
+>>
+>>   sanity-check:
+>>  -      @[ -f .no-advice-on-failure ] && exit 0; true
+>> --      @v=$$(src/emacs${EXEEXT} --batch --eval \
+>> +-      @v=`src/emacs${EXEEXT} --batch -Q --eval \
+>>  -        '(progn (defun f (n) (if (= 0 n) 1 (* n (f (- n 1))))) (princ (f 10)))' \
+>> --        2> /dev/null); \
+>> +-        2> /dev/null`; \
+>>  -      [ "X$$v" = "X3628800" ] && exit 0; \
+>>  -      echo >&2 '***'; \
+>>  -      echo >&2 '*** '"\"make ${make-target}\" succeeded, but Emacs is not functional."; \
+>> @@ -33,6 +33,7 @@ Index: emacs-29.1/Makefile.in
+>>  +# this is not going to work since it was (probably) built for a different architecture.
+>>  +# Avoid calling target binaries from the host and simply assume our build artifacts work.
+>>  +      exit 0
+>> ++
+>>
+>>   .PHONY: all ${SUBDIR} blessmail epaths-force epaths-force-w32 epaths-force-ns-self-contained etc-emacsver
+>>
+>> diff --git a/meta-oe/recipes-support/emacs/files/leim_dont-unexport-EMACSDATA.patch b/meta-oe/recipes-support/emacs/files/leim_dont-unexport-EMACSDATA.patch
+>> new file mode 100644
+>> index 0000000000..81dd2bde40
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-support/emacs/files/leim_dont-unexport-EMACSDATA.patch
+>> @@ -0,0 +1,19 @@
+>> +Upstream unexports some environment variables to avoid contamination,
+>> +however OE sets these variables specifically to help the build in the
+>> +recipe, and they should not be unexported.
+>> +
+>> +Upstream-Status: Inappropriate [oe-specific]
+>> +
+>> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+>> +
+>> +--- ./leim/Makefile.in.orig    2025-10-05 20:22:56.062508393 +0200
+>> ++++ ./leim/Makefile.in 2025-10-05 20:23:05.581046818 +0200
+>> +@@ -42,7 +42,7 @@
+>> + -include ${top_builddir}/src/verbose.mk
+>> +
+>> + # Prevent any settings in the user environment causing problems.
+>> +-unexport EMACSDATA EMACSDOC EMACSLOADPATH EMACSPATH
+>> ++# unexport EMACSDATA EMACSDOC EMACSLOADPATH EMACSPATH
+>> +
+>> + # Which Emacs to use to convert TIT files to Emacs Lisp files,
+>> + # and generate the file leim-list.el.
+>> diff --git a/meta-oe/recipes-support/emacs/files/use-emacs-native-tools-for-cross-compiling.patch b/meta-oe/recipes-support/emacs/files/use-emacs-native-tools-for-cross-compiling.patch
+>> index df5e4bd258..a1b6ea6ddf 100644
+>> --- a/meta-oe/recipes-support/emacs/files/use-emacs-native-tools-for-cross-compiling.patch
+>> +++ b/meta-oe/recipes-support/emacs/files/use-emacs-native-tools-for-cross-compiling.patch
+>> @@ -18,12 +18,7 @@ Index: emacs-29.1/src/Makefile.in
+>>  ===================================================================
+>>  --- emacs-29.1.orig/src/Makefile.in
+>>  +++ emacs-29.1/src/Makefile.in
+>> -@@ -1,3 +1,4 @@
+>> -+
+>> - ### @configure_input@
+>> -
+>> - # Copyright (C) 1985, 1987-1988, 1993-1995, 1999-2023 Free Software
+>> -@@ -508,7 +509,7 @@ ifeq ($(CHECK_STRUCTS),true)
+>> +@@ -542,7 +542,7 @@ ifeq ($(CHECK_STRUCTS),true)
+>>   pdumper.o: dmpstruct.h
+>>   endif
+>>   dmpstruct.h: $(srcdir)/dmpstruct.awk
+>> @@ -32,17 +27,17 @@ Index: emacs-29.1/src/Makefile.in
+>>         $(AM_V_GEN)POSIXLY_CORRECT=1 awk -f $(srcdir)/dmpstruct.awk \
+>>                 $(dmpstruct_headers) > $@
+>>
+>> -@@ -610,8 +611,7 @@ SYSTEM_TYPE = @SYSTEM_TYPE@
+>> +@@ -651,8 +651,7 @@
+>>   ## Strictly speaking, emacs does not depend directly on all of $lisp,
+>>   ## since not all pieces are used on all platforms.  But DOC depends
+>>   ## on all of $lisp, and emacs depends on DOC, so it is ok to use $lisp here.
+>>  -emacs$(EXEEXT): temacs$(EXEEXT) \
+>> --                lisp.mk $(etc)/DOC $(lisp) \
+>> -+emacs$(EXEEXT): lisp.mk $(etc)/DOC $(lisp) \
+>> +-                $(abs_top_builddir)/src/lisp.mk $(etc)/DOC $(lisp) \
+>> ++emacs$(EXEEXT): $(abs_top_builddir)/src/lisp.mk $(etc)/DOC $(lisp) \
+>>                   $(lispsource)/international/charprop.el ${charsets}
+>>   ifeq ($(SYSTEM_TYPE),cygwin)
+>>         find ${top_builddir} -name '*.eln' | rebase -v -O -T -
+>> -@@ -654,7 +654,7 @@ endif
+>> +@@ -695,7 +695,7 @@ endif
+>>   $(etc)/DOC: $(libsrc)/make-docfile$(EXEEXT) $(doc_obj)
+>>         $(AM_V_GEN)$(MKDIR_P) $(etc)
+>>         $(AM_V_at)rm -f $(etc)/DOC
+>> @@ -51,7 +46,7 @@ Index: emacs-29.1/src/Makefile.in
+>>           $(SOME_MACHINE_OBJECTS) $(doc_obj) > $(etc)/DOC
+>>
+>>   $(libsrc)/make-docfile$(EXEEXT) $(libsrc)/make-fingerprint$(EXEEXT): \
+>> -@@ -671,7 +671,7 @@ buildobj.h: Makefile
+>> +@@ -712,7 +712,7 @@ buildobj.h: Makefile
+>>   GLOBAL_SOURCES = $(base_obj:.o=.c) $(NS_OBJC_OBJ:.o=.m)
+>>
+>>   gl-stamp: $(libsrc)/make-docfile$(EXEEXT) $(GLOBAL_SOURCES)
+>> @@ -60,7 +55,7 @@ Index: emacs-29.1/src/Makefile.in
+>>         $(AM_V_at)$(top_srcdir)/build-aux/move-if-change globals.tmp globals.h
+>>         $(AM_V_at)echo timestamp > $@
+>>
+>> -@@ -685,7 +685,7 @@ $(LIBEGNU_ARCHIVE): $(config_h)
+>> +@@ -726,7 +726,7 @@ $(LIBEGNU_ARCHIVE): $(config_h)
+>>         $(MAKE) -C $(dir $@) all
+>>
+>>   ifeq ($(HAVE_PDUMPER),yes)
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#120256): https://lists.openembedded.org/g/openembedded-devel/message/120256
+>> Mute This Topic: https://lists.openembedded.org/mt/115605456/1997914
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
+
 
