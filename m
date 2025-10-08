@@ -1,238 +1,242 @@
-Return-Path: <rajeshkumar.ramasamy@windriver.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4891CCAC5BB
-	for <webhook@archiver.kernel.org>; Wed,  8 Oct 2025 17:52:53 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.560.1759945967323323650
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD100CAC5BB
+	for <webhook@archiver.kernel.org>; Wed,  8 Oct 2025 18:48:13 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web11.1882.1759949283828703702
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Oct 2025 10:52:47 -0700
+ Wed, 08 Oct 2025 11:48:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=qxeqljQE;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=23769bf0b3=rajeshkumar.ramasamy@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 598Cu3h01854309
-	for <openembedded-devel@lists.openembedded.org>; Wed, 8 Oct 2025 17:52:46 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=PQkgT15Rd29UOKFyJXSB
-	sPpMIu3dqUPLfxuFsDu0vyE=; b=qxeqljQErtopqN5RAXJoKxiVgcMDilnQ21Zl
-	kRvQBkpcret3jv9A1nR4P7sGHnsRvmw8cvICnjxC+780tTPT3k7FSmkXfcFLvziI
-	pjv8/Ou0DjqQOZvukjVJJYNAIjYxNIUxFTGKfe1/gtnKZpEymXrA/zZTRDKGogal
-	MiPYQvdSzdP6gk672n26Bz5CGFZkAeD/MOfZNb4w2MRS7ko/ZRpHIu/wjWmB5Jb2
-	hpH4ePG7lT0QwYwzqH/5+JDfOeM3yONYsGjkd52A9UwCTQHdHcpI9/2qLmTQJyNZ
-	LjpdiJWG2Chyasim/dQ6dmjFMSaBpREEeyDp/YuV6NjNULWFDw==
-Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49jrxgvvv1-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 17:52:46 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.59; Wed, 8 Oct 2025 10:52:44 -0700
-From: Rajeshkumar Ramasamy <rajeshkumar.ramasamy@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-networking][kirkstone][PATCH  1/1] open-vm-tools: fix CVE-2025-41244
-Date: Wed, 8 Oct 2025 23:22:30 +0530
-Message-ID: <20251008175230.2757048-1-rajeshkumar.ramasamy@windriver.com>
-X-Mailer: git-send-email 2.48.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LbRK2o+b;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-6394938e0ecso218640a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 11:48:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1759949282; x=1760554082; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=E4X68o5eNMcWvtXeIzmgSy0r+KKDW7gQhZ9f72RQkDs=;
+        b=LbRK2o+b5j/kWyXC5BNk5KGSJmFlOYm0zUsYFCt5t5gZkkwILBxU2dMnjskOuyk5Tz
+         WpmYNTRey3zr3Z+2DlxpW654COugmbUHK7NIDjYSKIIs8rvkTbqDxpeeDt93Q3NzJzSl
+         o0QF2VQe9wav9W1OeNIqapN/ZU+q07arUNC1daQ+a0Yo5TSC9tmFiNoMuXsMNPEMkFmY
+         HLvcM/iZOX3WxWh68ZrbeZCLMsyLBanryQJ0RyDjnf/gQ0/O0kobjjmXXsm3+Qt8w/s9
+         9H+JqL9IduBFQJNBX3mD4us7leeWASigWp0kArPE0Rr5UUU2gPcVhtfiIaSVvVC38VTr
+         WSrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1759949282; x=1760554082;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=E4X68o5eNMcWvtXeIzmgSy0r+KKDW7gQhZ9f72RQkDs=;
+        b=u2ECcGowNHBOcLBTCgx6znPzghx4IZOIBT9MptJ2tAhA1fDiOFn4O/bo1my7VMq/W1
+         cJZGhxe7jUSojt8Ub3/eZbI7oA1r+3t9deNxQ2XGPgCuZZYb7JHFHhiyJDaKuy0xubEk
+         /Qq+vfrTcpeG31dkWV3cHiq717IZuTGntTNte9Oi1MOiDYrHvbOWVI1qHGjxy0vnWhUh
+         9Uq98j/dPKHvZl0EPAb1hWlxCI7MixflgFnApuCgzFq0f9TfRzMvTkRfhNCKWKdzDbaZ
+         02TJVvMk59C5y7Z2aZV4otKcPUUTBMly8LnNa8QW3qUhhPUdj8i1o0jO7SCxgMjUyf+E
+         n9Gw==
+X-Gm-Message-State: AOJu0YzqnQl+3NPPM6J0LaRtK3XMOvvLAjw1etKBEYwMy/i5LlXptjUa
+	jRlZ/EqI9lBTOkV1cbQcIT4sTrwjLCO2JjBC6a0cOUIh93Hlh8uvYXx2
+X-Gm-Gg: ASbGncv0qa4nT0dEsdYUGXJfwZjNz5mOvxMdQ65Z9HP2ON9Sgrylt/fLnRILLH+fAsS
+	ir8sKTEoCLImvOTBbyKDhwxsaa/89R/OblW+cJpAORrSszf8uSmWutuoDfnceLDVHaeAb2X2+Ac
+	bKBI/MusTlkjN4YTYhuQ8jtIdD/HTop2o2fgaGTuT2mpYKjV2SKcXpbxrdB0fy8bi8M19spLby1
+	KDPXS5Igzhg7bLs3eUEB3m8x+ygmaOX8zf9MoQn47r/plT0Dvfet+3tqBjyfnCO8AMqtRDQEIfi
+	ZcLqPs0QOe5DwG8ZslfxkQwNOWY94nlw3CIQaIBYk97iKGWKgILX63VxrItEdmzcX5x1jAAzetO
+	YG/CCHkCK7KvDoRcLptu4E3decYiYCl2l4Ntg9VaWsqihtBwskLSQJVY=
+X-Google-Smtp-Source: AGHT+IHWqpjonYH4WdJZRLDjnhPB8ZtlkF/2Jsiy7MuN5HWOsFPt343Oy4xZ3C4LAhe9YU9j+DFeIw==
+X-Received: by 2002:a17:906:ef02:b0:b2a:10a3:7113 with SMTP id a640c23a62f3a-b50ab27f33amr495743966b.29.1759949281750;
+        Wed, 08 Oct 2025 11:48:01 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b4869c4f93esm1727960766b.83.2025.10.08.11.48.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 08 Oct 2025 11:48:01 -0700 (PDT)
+Message-ID: <f2c615a4-2559-42f4-8e79-883629e65a9e@gmail.com>
+Date: Wed, 8 Oct 2025 20:48:00 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-networking][PATCH] libiec61850: upgrade 1.5.3 -> 1.6.1
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20251007174858.87288-1-skandigraun@gmail.com>
+ <CAMKF1sp1koMAGbD4fthXFfvKRBu04-cppJhw8-kOQ9-WZbWxGg@mail.gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <CAMKF1sp1koMAGbD4fthXFfvKRBu04-cppJhw8-kOQ9-WZbWxGg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.11.232.110]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) To
- ala-exchng01.corp.ad.wrs.com (10.11.224.121)
-X-Proofpoint-GUID: V-_Ik_Lv8QUxboxzywUUe_85O-hBa1HX
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDA4MDEyNSBTYWx0ZWRfXzQLP6XITdWig
- EAQxmj/f0+H0vsgMgVpStDgDpbDrCqk7l7hMRg12ZiuXp6iEIWipdvLoNL4yeDCFi7Bx3QzeqVN
- Ht9ufvHwgCCClnLPBrd7l8uA5MplJqiLQdYJlPM0TuwNHQ7QgM0HvXwwz1baGFyOUpL+dnjP2NH
- qgVCWhkla2TNXae5Yp+vKX3tGU4hWZTNmMMp2PvNA/6Wx+8LI2zebYCrYdgm15YAm3bsHGXL64I
- EHeIiBNGgkwTZ3ENfUvoD7BhFa3AkZR2pyWMxPzdnoV64QD3qtgyXt8+aDSgXXMSTcQo68xF68F
- xXDKE7yGz6jQTFq64i3TYOGoO4bU0kacv6SXbmhMdC/CgS80ljY1a+5p42VLzz3LZeyxhAsO6u2
- i/4HOpIn/XP5YSqUk59Jg8ddQKUXsw==
-X-Proofpoint-ORIG-GUID: V-_Ik_Lv8QUxboxzywUUe_85O-hBa1HX
-X-Authority-Analysis: v=2.4 cv=ari/yCZV c=1 sm=1 tr=0 ts=68e6a4ee cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=yU_jQ1hFIRIA:10 a=gmxlzscTznEA:10 a=x6icFKpwvdMA:10 a=PYnjg3YJAAAA:8
- a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=Q-fNiiVtAAAA:8 a=Z9gm-2EgdLpnPDHb2IcA:9
- a=FdTzh2GWekK77mhwV6Dw:22 a=6_D5ljFcL1GZDUJyZucp:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-10-08_05,2025-10-06_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 bulkscore=0 clxscore=1015 malwarescore=0
- spamscore=0 lowpriorityscore=0 impostorscore=0 phishscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2509150000 definitions=main-2510080125
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 17:52:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120377
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Oct 2025 18:48:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120378
 
-VMware Aria Operations and VMware Tools contain a local privilege
-escalation vulnerability. A malicious local actor with non-administrative
-privileges having access to a VM with VMware Tools installed and managed
-by Aria Operations with SDMP enabled may exploit this vulnerability
-to escalate privileges to root on the same VM.
+On 10/8/25 17:53, Khem Raj wrote:
+> seeing failures on qemux86
+>
+> https://errors.yoctoproject.org/Errors/Details/884900/
+>
+> qemuarm
+>
+> https://errors.yoctoproject.org/Errors/Details/884889/
+>
+> I think it is related to target being 32bit.
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2025-41244
+Right, the cmake's findPython returns python from
+${RECIPE_SYSROOT_NATIVE} instead of ${RECIPE_SYSROOT}... will look if I
+can solve it more elegantly than just patching the include path to the
+correct one.
 
-Upstream-patch:
-https://github.com/vmware/open-vm-tools/commit/7ed196cf01f8acd09011815a605b6733894b8aab
-
-Signed-off-by: Rajeshkumar Ramasamy <rajeshkumar.ramasamy@windriver.com>
----
- .../open-vm-tools/CVE-2025-41244.patch        | 124 ++++++++++++++++++
- .../open-vm-tools/open-vm-tools_11.3.5.bb     |   1 +
- 2 files changed, 125 insertions(+)
- create mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-41244.patch
-
-diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-41244.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-41244.patch
-new file mode 100644
-index 0000000000..ad1ff93365
---- /dev/null
-+++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-41244.patch
-@@ -0,0 +1,124 @@
-+From 7ed196cf01f8acd09011815a605b6733894b8aab Mon Sep 17 00:00:00 2001
-+From: Kruti Pendharkar <kp025370@broadcom.com>
-+Date: Mon, 29 Sep 2025 01:02:40 -0700
-+Subject: [PATCH] Address CVE-2025-41244 - Disable (default) the execution of
-+ the SDMP get-versions.sh script.
-+
-+With the Linux SDMP get-versions.sh script disabled, version information
-+of installed services will not be made available to VMware Aria
-+
-+CVE: CVE-2025-41244
-+
-+Upstream-Status: Backport [https://github.com/vmware/open-vm-tools/commit/7ed196cf01f8acd09011815a605b6733894b8aab]
-+
-+Signed-off-by: Rajeshkumar Ramasamy <rajeshkumar.ramasamy@windriver.com>
-+---
-+ .../serviceDiscovery/serviceDiscovery.c       | 38 ++++++++++++++++---
-+ 1 file changed, 32 insertions(+), 6 deletions(-)
-+
-+diff --git a/open-vm-tools/services/plugins/serviceDiscovery/serviceDiscovery.c b/open-vm-tools/services/plugins/serviceDiscovery/serviceDiscovery.c
-+index de8901741..329f87e15 100644
-+--- a/open-vm-tools/services/plugins/serviceDiscovery/serviceDiscovery.c
-++++ b/open-vm-tools/services/plugins/serviceDiscovery/serviceDiscovery.c
-+@@ -1,5 +1,6 @@
-+ /*********************************************************
-+- * Copyright (C) 2020 VMware, Inc. All rights reserved.
-++ * Copyright (c) 2020-2025 Broadcom. All Rights Reserved.
-++ * The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
-+  *
-+  * This program is free software; you can redistribute it and/or modify it
-+  * under the terms of the GNU Lesser General Public License as published
-+@@ -107,6 +108,12 @@ VM_EMBED_VERSION(VMTOOLSD_VERSION_STRING);
-+  */
-+ #define SERVICE_DISCOVERY_RPC_WAIT_TIME 100
-+
-++/*
-++ * Defines the configuration to enable/disable version obtaining logic
-++ */
-++#define CONFNAME_SERVICEDISCOVERY_VERSION_CHECK "version-check-enabled"
-++#define SERVICE_DISCOVERY_CONF_DEFAULT_VERSION_CHECK FALSE
-++
-+ /*
-+  * Maximum number of keys that can be deleted by one operation
-+  */
-+@@ -845,24 +852,27 @@ ServiceDiscoveryServerShutdown(gpointer src,
-+  *
-+  * Construct final paths of the scripts that will be used for execution.
-+  *
-+- *****************************************************************************
-++ * @param[in] versionCheckEnabled  TRUE to include the SERVICE_DISCOVERY_KEY_VERSIONS
-++ *                                 entry; FALSE to skip it (derived from config).
-++ * *****************************************************************************
-+  */
-+
-+ static void
-+-ConstructScriptPaths(void)
-++ConstructScriptPaths(Bool versionCheckEnabled)
-+ {
-+    int i;
-+    gchar *scriptInstallDir;
-+ #if !defined(OPEN_VM_TOOLS)
-+    gchar *toolsInstallDir;
-+ #endif
-++   int insertIndex = 0;
-+
-+    if (gFullPaths != NULL) {
-+       return;
-+    }
-+
-+    gFullPaths = g_array_sized_new(FALSE, TRUE, sizeof(KeyNameValue),
-+-                                  ARRAYSIZE(gKeyScripts));
-++                                  ARRAYSIZE(gKeyScripts) - (versionCheckEnabled ? 0u : 1u));
-+
-+ #if defined(OPEN_VM_TOOLS)
-+    scriptInstallDir = Util_SafeStrdup(VMTOOLS_SERVICE_DISCOVERY_SCRIPTS);
-+@@ -874,6 +884,15 @@ ConstructScriptPaths(void)
-+ #endif
-+
-+    for (i = 0; i < ARRAYSIZE(gKeyScripts); ++i) {
-++      /*
-++       * Skip adding if:
-++       * 1. Version check is disabled, AND
-++       * 2. The keyName matches SERVICE_DISCOVERY_KEY_VERSIONS
-++       */
-++      if (!versionCheckEnabled &&
-++         g_strcmp0(gKeyScripts[i].keyName, SERVICE_DISCOVERY_KEY_VERSIONS) == 0) {
-++         continue;
-++      }
-+       KeyNameValue tmp;
-+       tmp.keyName = g_strdup_printf("%s", gKeyScripts[i].keyName);
-+ #if defined(_WIN32)
-+@@ -883,7 +902,8 @@ ConstructScriptPaths(void)
-+       tmp.val = g_strdup_printf("%s%s%s", scriptInstallDir, DIRSEPS,
-+                                 gKeyScripts[i].val);
-+ #endif
-+-      g_array_insert_val(gFullPaths, i, tmp);
-++      g_array_insert_val(gFullPaths, insertIndex, tmp);
-++      insertIndex++;
-+    }
-+
-+    g_free(scriptInstallDir);
-+@@ -951,14 +971,20 @@ ToolsOnLoad(ToolsAppCtx *ctx)
-+          }
-+       };
-+       gboolean disabled;
-++      Bool versionCheckEnabled;
-+
-+       regData.regs = VMTools_WrapArray(regs,
-+                                        sizeof *regs,
-+                                        ARRAYSIZE(regs));
-++      versionCheckEnabled = VMTools_ConfigGetBoolean(
-++         ctx->config,
-++         CONFGROUPNAME_SERVICEDISCOVERY,
-++         CONFNAME_SERVICEDISCOVERY_VERSION_CHECK,
-++         SERVICE_DISCOVERY_CONF_DEFAULT_VERSION_CHECK);
-+       /*
-+        * Append scripts absolute paths based on installation dirs.
-+        */
-+-      ConstructScriptPaths();
-++      ConstructScriptPaths(versionCheckEnabled);
-+
-+       disabled =
-+          VMTools_ConfigGetBoolean(ctx->config,
-+--
-+2.40.0
-diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-index b58b3ddb90..0e671b6557 100644
---- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-+++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-@@ -50,6 +50,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=maste
-            file://CVE-2023-34058.patch;patchdir=.. \
-            file://CVE-2023-34059.patch;patchdir=.. \
-            file://CVE-2025-22247.patch;patchdir=.. \
-+           file://CVE-2025-41244.patch;patchdir=.. \
-            "
- 
- UPSTREAM_CHECK_GITTAGREGEX = "stable-(?P<pver>\d+(\.\d+)+)"
--- 
-2.48.1
+>
+> On Tue, Oct 7, 2025 at 10:49 AM Gyorgy Sarvari via
+> lists.openembedded.org <skandigraun=gmail.com@lists.openembedded.org>
+> wrote:
+>> This update contains a fix for CVE-2024-26529, CVE-2024-45970 and CVE-2024-45971
+>>
+>> Changelog: https://github.com/mz-automation/libiec61850/blob/v1.6/CHANGELOG
+>>
+>> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+>> ---
+>>  ...MAKE_INSTALL_LIBDIR-from-GNUInstallD.patch | 24 +++++++-----
+>>  ...-break-CMAKE_INSTALL_PATH-by-trying-.patch | 39 -------------------
+>>  ...iec61850_1.5.3.bb => libiec61850_1.6.1.bb} | 10 ++---
+>>  3 files changed, 20 insertions(+), 53 deletions(-)
+>>  delete mode 100644 meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch
+>>  rename meta-networking/recipes-connectivity/libiec61850/{libiec61850_1.5.3.bb => libiec61850_1.6.1.bb} (77%)
+>>
+>> diff --git a/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch b/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch
+>> index e778e8158b..a33a6248a7 100644
+>> --- a/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch
+>> +++ b/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch
+>> @@ -7,7 +7,7 @@ Subject: [PATCH] pyiec61850: Use CMAKE_INSTALL_LIBDIR from GNUInstallDirs in
+>>  This ensures that it gets installed in platform specified system libdir
+>>  all platforms do not use /usr/lib as assumed here e.g. ppc64 uses lib64
+>>
+>> -Upstream-Status: Submitted [https://github.com/mz-automation/libiec61850/pull/376]
+>> +Upstream-Status: Denied [https://github.com/mz-automation/libiec61850/pull/376 - closed without a word]
+>>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>  ---
+>>   pyiec61850/CMakeLists.txt | 6 ++++--
+>> @@ -15,15 +15,21 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>
+>>  --- a/pyiec61850/CMakeLists.txt
+>>  +++ b/pyiec61850/CMakeLists.txt
+>> -@@ -31,7 +31,9 @@ endif()
+>> +@@ -31,14 +31,9 @@ swig_add_library(pyiec61850
+>>
+>> - swig_link_libraries(iec61850 ${PYTHON_LIBRARIES} ${LIBS})
+>> + swig_link_libraries(pyiec61850 ${LIBS})
+>>
+>> --install(FILES ${CMAKE_CURRENT_BINARY_DIR}/iec61850.py DESTINATION /usr/lib/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages)
+>> --install(TARGETS _iec61850 LIBRARY DESTINATION /usr/lib/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages)
+>> +-# Finding python modules install path
+>> +-execute_process(
+>> +-      COMMAND ${Python_EXECUTABLE} -c
+>> +-      "from sysconfig import get_path; import sys; sys.stdout.write(get_path('platlib'))"
+>> +-      OUTPUT_VARIABLE PYTHON_SITE_DIR
+>> +-)
+>>  +include(GNUInstallDirs)
+>> -+
+>> -+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/iec61850.py DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages)
+>> -+install(TARGETS _iec61850 LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}//python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages)
+>>
+>> - add_test(test_pyiec61850 ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/test_pyiec61850.py)
+>> +-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pyiec61850.py DESTINATION ${PYTHON_SITE_DIR})
+>> +-install(TARGETS pyiec61850 LIBRARY DESTINATION ${PYTHON_SITE_DIR})
+>> ++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pyiec61850.py DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/python${PYTHON_BASEVERSION}/site-packages)
+>> ++install(TARGETS pyiec61850 LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/python${PYTHON_BASEVERSION}/site-packages)
+>> +
+>> + add_test(test_pyiec61850 ${Python_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/test_pyiec61850.py)
+>> diff --git a/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch b/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch
+>> deleted file mode 100644
+>> index 3f0490cb80..0000000000
+>> --- a/meta-networking/recipes-connectivity/libiec61850/files/0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch
+>> +++ /dev/null
+>> @@ -1,39 +0,0 @@
+>> -From d4ddfc7a350011b7944ed8d6bca80f164dfd1387 Mon Sep 17 00:00:00 2001
+>> -From: Romain Naour <romain.naour@smile.fr>
+>> -Date: Fri, 10 Jul 2020 17:08:34 +0200
+>> -Subject: [PATCH] pyiec61850: don't break CMAKE_INSTALL_PATH by trying to find
+>> - python modules install path (site-packages)
+>> -
+>> -https://stackoverflow.com/questions/1242904/finding-python-site-packages-directory-with-cmake
+>> -
+>> -Signed-off-by: Romain Naour <romain.naour@smile.fr>
+>> ----
+>> -Upstream-Status: Pending
+>> -
+>> - pyiec61850/CMakeLists.txt | 11 ++---------
+>> - 1 file changed, 2 insertions(+), 9 deletions(-)
+>> -
+>> -diff --git a/pyiec61850/CMakeLists.txt b/pyiec61850/CMakeLists.txt
+>> -index 159ef4b..d1732a1 100644
+>> ---- a/pyiec61850/CMakeLists.txt
+>> -+++ b/pyiec61850/CMakeLists.txt
+>> -@@ -31,14 +31,7 @@ endif()
+>> -
+>> - swig_link_libraries(iec61850 ${PYTHON_LIBRARIES} ${LIBS})
+>> -
+>> --# Finding python modules install path
+>> --execute_process(
+>> --      COMMAND ${PYTHON_EXECUTABLE} -c
+>> --      "from distutils.sysconfig import get_python_lib; import sys; sys.stdout.write(get_python_lib())"
+>> --      OUTPUT_VARIABLE PYTHON_SITE_DIR
+>> --)
+>> --
+>> --install(FILES ${CMAKE_CURRENT_BINARY_DIR}/iec61850.py DESTINATION ${PYTHON_SITE_DIR})
+>> --install(TARGETS _iec61850 LIBRARY DESTINATION ${PYTHON_SITE_DIR})
+>> -+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/iec61850.py DESTINATION /usr/lib/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages)
+>> -+install(TARGETS _iec61850 LIBRARY DESTINATION /usr/lib/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages)
+>> -
+>> - add_test(test_pyiec61850 ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/test_pyiec61850.py)
+>> ---
+>> -2.31.1
+>> -
+>> diff --git a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.3.bb b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.6.1.bb
+>> similarity index 77%
+>> rename from meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.3.bb
+>> rename to meta-networking/recipes-connectivity/libiec61850/libiec61850_1.6.1.bb
+>> index cfded66e41..eb9ab9b4fe 100644
+>> --- a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.3.bb
+>> +++ b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.6.1.bb
+>> @@ -13,10 +13,9 @@ SECTION = "console/network"
+>>  LICENSE = "GPL-3.0-only"
+>>  LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+>>  DEPENDS = "swig-native python3"
+>> -SRCREV = "6f557c490f0b46ab5d7ef1b01bb3bc9fab3f442f"
+>> +SRCREV = "a13961110b8238d2d8ea577c1fb7592ba3017ad8"
+>>
+>> -SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5;protocol=https \
+>> -           file://0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch \
+>> +SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.6;protocol=https;tag=v${PV} \
+>>             file://0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch \
+>>  "
+>>
+>> @@ -26,12 +25,13 @@ inherit cmake pkgconfig python3-dir python3native siteinfo
+>>  EXTRA_OECMAKE = " \
+>>      -DBUILD_EXAMPLES=OFF \
+>>      -DBUILD_PYTHON_BINDINGS=ON \
+>> +    -DPYTHON_BASEVERSION=${PYTHON_BASEVERSION} \
+>>  "
+>>
+>>  RDEPENDS:${PN}-python = " python3-core "
+>>  RDEPENDS:${PN} = " python3-core "
+>>
+>>  FILES:${PN} += " \
+>> -    ${PYTHON_SITEPACKAGES_DIR}/iec61850.py \
+>> -    ${PYTHON_SITEPACKAGES_DIR}/_iec61850.so \
+>> +    ${PYTHON_SITEPACKAGES_DIR}/pyiec61850.py \
+>> +    ${PYTHON_SITEPACKAGES_DIR}/_pyiec61850.so \
+>>  "
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#120342): https://lists.openembedded.org/g/openembedded-devel/message/120342
+>> Mute This Topic: https://lists.openembedded.org/mt/115640790/1997914
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
 
 
