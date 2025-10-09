@@ -2,68 +2,68 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C8ADCCD183
-	for <webhook@archiver.kernel.org>; Thu,  9 Oct 2025 19:00:39 +0000 (UTC)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
- by mx.groups.io with SMTP id smtpd.web11.8525.1760036429735200922
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47681CCD183
+	for <webhook@archiver.kernel.org>; Thu,  9 Oct 2025 19:06:09 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+ by mx.groups.io with SMTP id smtpd.web10.8691.1760036759250809633
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Oct 2025 12:00:30 -0700
+ Thu, 09 Oct 2025 12:05:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ATC2xQtU;
- spf=pass (domain: gmail.com, ip: 209.85.208.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-631df7b2dffso3197618a12.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 12:00:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kNSwVWCr;
+ spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-6394b4ff908so2427851a12.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 12:05:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760036428; x=1760641228; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760036758; x=1760641558; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hNrIw5hRtBZspuvrL+1Yp8J4PwnNOkpNm1Y9VuU9PJQ=;
-        b=ATC2xQtUh0zJbLAifqpY5kpwc6iGOzyG7uhsbpOMlfqZFwL7KkiRZrsf5YVD/lUa4M
-         yOuDMExh4nrFILrvSBKi9f6l4O0vYreLMnurjoAsY+E4SoEao0TCk8jG87enQSYU9mVQ
-         seyMHD0hPW+c9OjoM7Lbfzoitvz8gmAsgABsYKhaaFgCQoDAd4CX4lD5Dq2aqnnMvyrC
-         vpKWsMEZTXfN+wHiqLJ9EQPtAfP95f5HsQlknn7JahLV9/HFsVwzOvzXS/D5y2v2MkLD
-         xMkCOPM1iIp445t6/C0Tb3/el5DepRWSn7qqP4oYX4OmysxOBO2kyQ9cMRxOdLuUB8dW
-         sxbg==
+        bh=rpPFSg6ssXK0QxXAhqD6/rW7W8DYcr+BXrk/JdOMeGE=;
+        b=kNSwVWCrLU7/cqTRUjEo9SA672IckJiYIIvzmhu6eI1xJrSakFSe1beQFqQ38gtVp0
+         OV2JgULgxM5YzQPjWthX4aLWBJWZf99APPOHypkuY0WNnDporXHOnztN3rjWo77jcRFA
+         4g0ZyjMBqIiJbA44EVWJ5ivUYlYtS/Pwvqsz9d2EoHeEXvnG5uBVmhLl+b6Tsc9GdBT3
+         zVC6v6WNB9h9lcZrGKfXDaMN/whgNCATY2ow0YglzqGwBGeyyN2h+IijWC0B0NfhkPaJ
+         EfF6SyFKSvwJPWXmVUCqOjv66eNtzWsrZN/64TQ5513EPptbAhDeV3rkQcbNJFFu6Qb+
+         Bxqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760036428; x=1760641228;
+        d=1e100.net; s=20230601; t=1760036758; x=1760641558;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=hNrIw5hRtBZspuvrL+1Yp8J4PwnNOkpNm1Y9VuU9PJQ=;
-        b=TIdCbbdUdbRJc4p8npOAagati+zlSXIn4Hv1/JyvjEgtXwnk3fzJHEzUFABDXWNb0Q
-         yopc96i3lHHaQtj5jDolSl/ryrdmSkzps9E8azVoJVhkUiCMLu1dZpxJIdt0ob5vW/lH
-         VJuyhMdwA0vP/lwpaQVvsQcHWI9HqUxGHmYXZT47xn89CFPHtfYYzUOg+HQ1BCkMQfmZ
-         l2+N5jV29VSfjvhoJ3fUIXFpLQLKCotKe8ZXOtxpl9fyarsY+noCoXL+BWzySycv7wuO
-         c3wTbh/jY0FqXRxr6SUKjYUSb4kLf8leHA8+aN1DFdU+9ARL9EmB6KO01rUNoJVQxq5w
-         ts2g==
-X-Gm-Message-State: AOJu0Yz3p256lLIN3/ZbGOny2pXjlFhx5rjcLsGuNiD+R1aLNiVivKmS
-	c4Y1Rrl1MsqNU4jFdvDwXqmyg0Ba5Rzr1wzcL4UYlIgSq+sztJCyPCsytqW+gw==
-X-Gm-Gg: ASbGnctJmlmil6R7p5reZroPODttt8J+PIfaR8BXj1BXTODSXLYBimoZcs6L9zgOy0m
-	gZkr5nZEOd07TIFBIjEGpmV0uhKk8fv+YwOFzFofBSM0Vq/ugCclmBzZ+e7WZHpSnpbgmwh3Mcu
-	cZek4VMvzYgybW4K9k17flIlTyoiPb2V5R5piuuN15UW4UsounzJyYEf/snWJs5CkUJqBmapPag
-	ZhDA6yh4pIyXMIoBrbgfIxkUOf3jXZvuzdFPXAZ2G+lfzDkDr791qKp0YGEiW78csUZEQsXP2CP
-	Ys5S6FSSUBAh/x2zHBobSFeZJ0zuilwwhH3ypi8b34qtr8VlNg4f5pd3XAWA3lT1NfinffZmTti
-	usTlXJ+ZXOylpzCI8W8lLGzz7QlSOZ7WOnuLA5V/LAHmkCqBvtqf5thE=
-X-Google-Smtp-Source: AGHT+IGss3o1/331Aso38gSFE/jtDV/vzmf/4mpFvcKpn22OsAKDX1ravXrtApXtOYlWesx4ce5JsQ==
-X-Received: by 2002:a05:6402:26d3:b0:639:e580:6341 with SMTP id 4fb4d7f45d1cf-639e58069b6mr6663219a12.8.1760036427850;
-        Thu, 09 Oct 2025 12:00:27 -0700 (PDT)
+        bh=rpPFSg6ssXK0QxXAhqD6/rW7W8DYcr+BXrk/JdOMeGE=;
+        b=bRG2zjpsnxxMUwJWg5o53wdYy4ccvd2+xMRfwZ57FdaO3OiLFC2tWirXDs0vBUPhB7
+         JZJb/nyf8ictXV6NNGz7CW8uq3Tfmstqb7cffZ27ohnRBlSuihcz5SLZaDfk3Z3dt7Tq
+         vT3GbGTBK2KTBzdQ1c0nAjCOd2ImyDM7nrCEH3rpjbehd4D9p/O1Wid3Q3QSpkrNSrTj
+         SzuHfJurkTRjzkEPqneEtlq/5WbAWIojYbYycZ9nyD9AMJDPJv2KGlzupQTKn1fOJohU
+         m0yYHu2eIrb6ZYo8cKi2fh7k+r6+nr8C0wBnyFCO04vOrvOb7PPup8A3DMGeQC9puedm
+         tH4Q==
+X-Gm-Message-State: AOJu0YyfczFC4DKIdt39q7NnCZLj55Rqp5MhiKnqy5sMMG1PyDMMviof
+	hHFKyL8cNBoSEkxs6m596IZqpXRt3bab3pFAIdWaR4KfHmht45xPBzqILLAx1Q==
+X-Gm-Gg: ASbGncsPsA5Js74y9XDKDUY8Dr5KapjjH9PqwRobil/tZNw/WnbhVACQn1VMde9qGgG
+	U8o2Vhhp9FYxNA9pvBFMh1Y/KVimJumD9Q9arDTZ1J05I2ZIoGAaiT2pWJowhcLJ5EEbt6EkQ+2
+	XAxm9KQrNvmlp3o7d/z1pgbEFtMks5CMojrTWeJprkp/iDgV9+nIk5R4NBvyw8mJ/hnrKWN8+B4
+	tvFgolY+EUwe8LT9anZ+ygzT4jeA5mYulxy9h9N/vsCrrTzfv3mweVBdFXnSY8bIhtFIDgItIIM
+	bZh2q4lmoUEr/mvETSlkfugtKTR9hZOWniMs9U/KKvo028GpXg5KELKrdesZdtB+iZ+ZBt3eupX
+	w4u6sAaZcmcyybdTWjw/xdabgk/cKxYVUvm+1z5PCWuWjqM9mctKBYfZsZVH766PyXQ==
+X-Google-Smtp-Source: AGHT+IHiIOEjnN0sH1z0Mtx1A/5TXpeOGBp4SiwAAgz8zUJgrjuUewQhi6LHG4CDEOff/gWUmIYG0g==
+X-Received: by 2002:a05:6402:848:b0:637:8faa:9e0a with SMTP id 4fb4d7f45d1cf-639d5c5a3d4mr7713304a12.30.1760036757484;
+        Thu, 09 Oct 2025 12:05:57 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63a5c323423sm356821a12.42.2025.10.09.12.00.27
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63a5235e924sm407511a12.3.2025.10.09.12.05.56
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Oct 2025 12:00:27 -0700 (PDT)
+        Thu, 09 Oct 2025 12:05:57 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][walnascar][PATCH] libavif: patch CVE-2025-48174
-Date: Thu,  9 Oct 2025 21:00:26 +0200
-Message-ID: <20251009190026.1548202-1-skandigraun@gmail.com>
+Subject: [meta-multimedia][scarthgap][PATCH] libavif: patch CVE-2025-48174
+Date: Thu,  9 Oct 2025 21:05:56 +0200
+Message-ID: <20251009190556.1552672-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 19:00:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120448
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 19:06:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120449
 
 Details: https://nvd.nist.gov/vuln/detail/CVE-2025-48174
 
@@ -78,11 +78,11 @@ Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 
 diff --git a/meta-multimedia/recipes-multimedia/libavif/libavif/0001-Add-integer-overflow-check-to-makeRoom.patch b/meta-multimedia/recipes-multimedia/libavif/libavif/0001-Add-integer-overflow-check-to-makeRoom.patch
 new file mode 100644
-index 0000000000..13cfb9339a
+index 0000000000..7d16cefa49
 --- /dev/null
 +++ b/meta-multimedia/recipes-multimedia/libavif/libavif/0001-Add-integer-overflow-check-to-makeRoom.patch
 @@ -0,0 +1,27 @@
-+From b6fc69afc6e1156455c70ebd2227b82fc4f1769f Mon Sep 17 00:00:00 2001
++From 240256b05f9ff4c6d0afbcd6d4c9059037227e56 Mon Sep 17 00:00:00 2001
 +From: Gyorgy Sarvari <skandigraun@gmail.com>
 +Date: Thu, 9 Oct 2025 20:50:57 +0200
 +Subject: [PATCH] Add integer overflow check to makeRoom.
