@@ -2,163 +2,126 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1FEBCCD183
-	for <webhook@archiver.kernel.org>; Thu,  9 Oct 2025 18:10:18 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web11.7442.1760033411870285604
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C8ADCCD183
+	for <webhook@archiver.kernel.org>; Thu,  9 Oct 2025 19:00:39 +0000 (UTC)
+Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
+ by mx.groups.io with SMTP id smtpd.web11.8525.1760036429735200922
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Oct 2025 11:10:12 -0700
+ Thu, 09 Oct 2025 12:00:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kKRfDgta;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b3e7cc84b82so244963766b.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 11:10:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ATC2xQtU;
+ spf=pass (domain: gmail.com, ip: 209.85.208.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-631df7b2dffso3197618a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 12:00:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760033410; x=1760638210; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=I7aYAwONVWJpmUmTrCkudeISe1pfxDJjPHrNM2GuJiA=;
-        b=kKRfDgtaPfHTCJ5xOln8NAvTRt0vbxAj0hiKvJh6mWuZB2KP5Emmxa1BkmJmrbr90H
-         GykIWcs47z3Q+nHvqDV4wmNFqmaaXywWWnYzQuXW6UmMFCxwuj2rVLZjy95UYNrJFpzE
-         vF6Clwrwh8TkP9bvnOFAeISZG5kTDH/V6fpbbO5jHGSrqw/8cK3K3PMa2VEv4UaMoYTt
-         VWOsVLeciuLo2RxPRch+6VGqNhe4CQPv3aM2k62utl4lhWDXz4gJRO53PkDtYMw1zzYD
-         SwCofi1uhisR392/GIrR6t71iux4L+jrOH6t280BdZwofDMFICNhChAeJ8FiZPrpvxbY
-         /BzQ==
+        d=gmail.com; s=20230601; t=1760036428; x=1760641228; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=hNrIw5hRtBZspuvrL+1Yp8J4PwnNOkpNm1Y9VuU9PJQ=;
+        b=ATC2xQtUh0zJbLAifqpY5kpwc6iGOzyG7uhsbpOMlfqZFwL7KkiRZrsf5YVD/lUa4M
+         yOuDMExh4nrFILrvSBKi9f6l4O0vYreLMnurjoAsY+E4SoEao0TCk8jG87enQSYU9mVQ
+         seyMHD0hPW+c9OjoM7Lbfzoitvz8gmAsgABsYKhaaFgCQoDAd4CX4lD5Dq2aqnnMvyrC
+         vpKWsMEZTXfN+wHiqLJ9EQPtAfP95f5HsQlknn7JahLV9/HFsVwzOvzXS/D5y2v2MkLD
+         xMkCOPM1iIp445t6/C0Tb3/el5DepRWSn7qqP4oYX4OmysxOBO2kyQ9cMRxOdLuUB8dW
+         sxbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760033410; x=1760638210;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=I7aYAwONVWJpmUmTrCkudeISe1pfxDJjPHrNM2GuJiA=;
-        b=kb0hCS8acqy7h9BTdPTDnI/ey+rA8CQ7q3N/NsHsthvVF2teOSW7xXAnj6+j/oGyCW
-         v0Z8ab9ATQ3cKap3E3IJOMxhImWY58CiQaTtBhLOxguj+LznHL7wwI5DKGbECXzdYyiC
-         lPR6Y5colQuZjLhPljL+l+adjNrRDAzEgfCFI/8QQMXdjG3SfLGqlSjmH1Ih5YkikVyn
-         Eetm1OEUdV4s4gOx1+aeuQCjEJUNkvKUCs2XXwoUBkxi4r1skvW9OqLo+Qt483LxZuCl
-         27wpHyN8pn9t1b5Ppju8QuVJWy15GVo7VCMD44T0I6bXya0IxFW+UawdLqqS/tPDzMOa
-         2BWw==
-X-Gm-Message-State: AOJu0YzpFoGzKBhebR4vxylgn0Wl1YRFRpldgSWemOXT0QfItBfv38GF
-	8d+sEmaEPj5as1GAtVrDo7B3HZqL2Vna4LDvoxQdERWEwKHY0Ze0HC3e50ew6w==
-X-Gm-Gg: ASbGncsqjc+LdaAjMyrK+qaZdJNtDAegtfrTyg2mdpF59B9y7rnh1HZxGCbm6mtiBgG
-	8iAZKrqVieQ2SXhkpGDLdHK4q8FUVi2nqbOOYlRLBhshlQbNN1GTxqfGgblDv8f9X1vJhDxESoH
-	gc49uovTU7YfRI5ZTWv2laOEFKLpxMjq1v6k+itj5zHscXhhY67/9abOmhOoSiV2zzCDXYYzv3E
-	uVtp1C0oN0wgfrJ5pre2hwo32BnRk2QtN60l8wrBT6pz7FYfm52hSs95IfvdblIt41COfIUQ8TT
-	pS6hvuyOXkcKVFxl/CGnDOH8+OoIgJb2IylebpbDpzcOmp0TGljB1HWr6nMTD5gkvgzeNZnAm/R
-	WuPXOL3vjFUhShrS651ALYhTkqlezl/VhrNrmv3ldu+sc
-X-Google-Smtp-Source: AGHT+IF8+ji3l6dwMbMSa3cXUq3cHbDvmANUUN0/nfhbOQC6QS9UcDsJ/ErtfdcExESkLwx01dJJCQ==
-X-Received: by 2002:a17:906:c1d1:b0:b50:b508:d0e9 with SMTP id a640c23a62f3a-b50b508d6d1mr698182966b.46.1760033410045;
-        Thu, 09 Oct 2025 11:10:10 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1760036428; x=1760641228;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=hNrIw5hRtBZspuvrL+1Yp8J4PwnNOkpNm1Y9VuU9PJQ=;
+        b=TIdCbbdUdbRJc4p8npOAagati+zlSXIn4Hv1/JyvjEgtXwnk3fzJHEzUFABDXWNb0Q
+         yopc96i3lHHaQtj5jDolSl/ryrdmSkzps9E8azVoJVhkUiCMLu1dZpxJIdt0ob5vW/lH
+         VJuyhMdwA0vP/lwpaQVvsQcHWI9HqUxGHmYXZT47xn89CFPHtfYYzUOg+HQ1BCkMQfmZ
+         l2+N5jV29VSfjvhoJ3fUIXFpLQLKCotKe8ZXOtxpl9fyarsY+noCoXL+BWzySycv7wuO
+         c3wTbh/jY0FqXRxr6SUKjYUSb4kLf8leHA8+aN1DFdU+9ARL9EmB6KO01rUNoJVQxq5w
+         ts2g==
+X-Gm-Message-State: AOJu0Yz3p256lLIN3/ZbGOny2pXjlFhx5rjcLsGuNiD+R1aLNiVivKmS
+	c4Y1Rrl1MsqNU4jFdvDwXqmyg0Ba5Rzr1wzcL4UYlIgSq+sztJCyPCsytqW+gw==
+X-Gm-Gg: ASbGnctJmlmil6R7p5reZroPODttt8J+PIfaR8BXj1BXTODSXLYBimoZcs6L9zgOy0m
+	gZkr5nZEOd07TIFBIjEGpmV0uhKk8fv+YwOFzFofBSM0Vq/ugCclmBzZ+e7WZHpSnpbgmwh3Mcu
+	cZek4VMvzYgybW4K9k17flIlTyoiPb2V5R5piuuN15UW4UsounzJyYEf/snWJs5CkUJqBmapPag
+	ZhDA6yh4pIyXMIoBrbgfIxkUOf3jXZvuzdFPXAZ2G+lfzDkDr791qKp0YGEiW78csUZEQsXP2CP
+	Ys5S6FSSUBAh/x2zHBobSFeZJ0zuilwwhH3ypi8b34qtr8VlNg4f5pd3XAWA3lT1NfinffZmTti
+	usTlXJ+ZXOylpzCI8W8lLGzz7QlSOZ7WOnuLA5V/LAHmkCqBvtqf5thE=
+X-Google-Smtp-Source: AGHT+IGss3o1/331Aso38gSFE/jtDV/vzmf/4mpFvcKpn22OsAKDX1ravXrtApXtOYlWesx4ce5JsQ==
+X-Received: by 2002:a05:6402:26d3:b0:639:e580:6341 with SMTP id 4fb4d7f45d1cf-639e58069b6mr6663219a12.8.1760036427850;
+        Thu, 09 Oct 2025 12:00:27 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b55d900ccf1sm26784966b.63.2025.10.09.11.10.09
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-63a5c323423sm356821a12.42.2025.10.09.12.00.27
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Oct 2025 11:10:09 -0700 (PDT)
+        Thu, 09 Oct 2025 12:00:27 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][walnascar][PATCH 3/3] jasper: patch CVE-2025-8837
-Date: Thu,  9 Oct 2025 20:10:07 +0200
-Message-ID: <20251009181007.1538218-3-skandigraun@gmail.com>
+Subject: [meta-multimedia][walnascar][PATCH] libavif: patch CVE-2025-48174
+Date: Thu,  9 Oct 2025 21:00:26 +0200
+Message-ID: <20251009190026.1548202-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251009181007.1538218-1-skandigraun@gmail.com>
-References: <20251009181007.1538218-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 18:10:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120447
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 19:00:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120448
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-8837
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-48174
 
-Pick the patch from the details of the above link.
+Backport the pull request mentioned in the details of the CVE.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../jasper/jasper/0001-Fixes-402-403.patch    | 63 +++++++++++++++++++
- .../recipes-graphics/jasper/jasper_4.2.4.bb   |  1 +
- 2 files changed, 64 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/jasper/jasper/0001-Fixes-402-403.patch
+ ...d-integer-overflow-check-to-makeRoom.patch | 27 +++++++++++++++++++
+ .../libavif/libavif_1.0.1.bb                  |  4 ++-
+ 2 files changed, 30 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/libavif/libavif/0001-Add-integer-overflow-check-to-makeRoom.patch
 
-diff --git a/meta-oe/recipes-graphics/jasper/jasper/0001-Fixes-402-403.patch b/meta-oe/recipes-graphics/jasper/jasper/0001-Fixes-402-403.patch
+diff --git a/meta-multimedia/recipes-multimedia/libavif/libavif/0001-Add-integer-overflow-check-to-makeRoom.patch b/meta-multimedia/recipes-multimedia/libavif/libavif/0001-Add-integer-overflow-check-to-makeRoom.patch
 new file mode 100644
-index 0000000000..f5773d877b
+index 0000000000..13cfb9339a
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/jasper/jasper/0001-Fixes-402-403.patch
-@@ -0,0 +1,63 @@
-+From 97c4d21cbe1936797bd8530669525287ee75f2c6 Mon Sep 17 00:00:00 2001
-+From: Michael Adams <mdadams@ece.uvic.ca>
-+Date: Tue, 5 Aug 2025 20:46:48 -0700
-+Subject: [PATCH] Fixes #402, #403.
++++ b/meta-multimedia/recipes-multimedia/libavif/libavif/0001-Add-integer-overflow-check-to-makeRoom.patch
+@@ -0,0 +1,27 @@
++From b6fc69afc6e1156455c70ebd2227b82fc4f1769f Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Thu, 9 Oct 2025 20:50:57 +0200
++Subject: [PATCH] Add integer overflow check to makeRoom.
 +
-+JPEG-2000 (JPC) Decoder:
-+- Added the setting of several pointers to null in some cleanup code
-+  after the pointed-to memory was freed.  This pointer nulling is not
-+  needed normally, but it is needed when certain debugging logs are
-+  enabled (so that the debug code understands that the memory associated
-+  with the aforementioned pointers has been freed).
-+
-+CVE: CVE-2025-8837
-+Upstream-Status: Backport [https://github.com/jasper-software/jasper/commit/8308060d3fbc1da10353ac8a95c8ea60eba9c25a]
++CVE: CVE-2025-48174
++Upstream-Status: Backport [https://github.com/AOMediaCodec/libavif/pull/2768]
 +
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/libjasper/jpc/jpc_dec.c |  13 ++++++++-----
-+ 1 file changed, 8 insertions(+), 5 deletions(-)
++ src/stream.c | 3 +++
++ 1 file changed, 3 insertions(+)
 +
-+diff --git a/src/libjasper/jpc/jpc_dec.c b/src/libjasper/jpc/jpc_dec.c
-+index 125a29b..7e44f05 100644
-+--- a/src/libjasper/jpc/jpc_dec.c
-++++ b/src/libjasper/jpc/jpc_dec.c
-+@@ -1136,23 +1136,23 @@ static int jpc_dec_tilefini(jpc_dec_t *dec, jpc_dec_tile_t *tile)
-+ 
-+ 	if (tile->cp) {
-+ 		jpc_dec_cp_destroy(tile->cp);
-+-		//tile->cp = 0;
-++		tile->cp = 0;
-+ 	}
-+ 	if (tile->tcomps) {
-+ 		jas_free(tile->tcomps);
-+-		//tile->tcomps = 0;
-++		tile->tcomps = 0;
-+ 	}
-+ 	if (tile->pi) {
-+ 		jpc_pi_destroy(tile->pi);
-+-		//tile->pi = 0;
-++		tile->pi = 0;
-+ 	}
-+ 	if (tile->pkthdrstream) {
-+ 		jas_stream_close(tile->pkthdrstream);
-+-		//tile->pkthdrstream = 0;
-++		tile->pkthdrstream = 0;
-+ 	}
-+ 	if (tile->pptstab) {
-+ 		jpc_ppxstab_destroy(tile->pptstab);
-+-		//tile->pptstab = 0;
-++		tile->pptstab = 0;
-+ 	}
-+ 
-+ 	tile->state = JPC_TILE_DONE;
-+@@ -2288,6 +2288,9 @@ static int jpc_dec_dump(const jpc_dec_t *dec)
-+ 	const jpc_dec_tile_t *tile;
-+ 	for (tileno = 0, tile = dec->tiles; tileno < dec->numtiles;
-+ 	  ++tileno, ++tile) {
-++		if (!tile->tcomps) {
-++			continue;
-++		}
-+ 		assert(!dec->numcomps || tile->tcomps);
-+ 		unsigned compno;
-+ 		const jpc_dec_tcomp_t *tcomp;
-diff --git a/meta-oe/recipes-graphics/jasper/jasper_4.2.4.bb b/meta-oe/recipes-graphics/jasper/jasper_4.2.4.bb
-index b3048d0adb..786df17606 100644
---- a/meta-oe/recipes-graphics/jasper/jasper_4.2.4.bb
-+++ b/meta-oe/recipes-graphics/jasper/jasper_4.2.4.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a80440d1d8f17d041c71c7271d6e06eb"
- SRC_URI = "https://github.com/jasper-software/${BPN}/releases/download/version-${PV}/${BP}.tar.gz \
-            file://0001-Fixes-400.patch \
-            file://0001-Fixes-401.patch \
-+           file://0001-Fixes-402-403.patch \
-            "
- SRC_URI[sha256sum] = "6a597613d8d84c500b5b83bf0eec06cd3707c23d19957f70354ac2394c9914e7"
++diff --git a/src/stream.c b/src/stream.c
++index c85ca31b..b38c93c6 100644
++--- a/src/stream.c
+++++ b/src/stream.c
++@@ -319,6 +319,9 @@ avifBool avifROStreamReadAndEnforceVersion(avifROStream * stream, uint8_t enforc
++ #define AVIF_STREAM_BUFFER_INCREMENT (1024 * 1024)
++ static avifResult makeRoom(avifRWStream * stream, size_t size)
++ {
+++    if (size > SIZE_MAX - stream->offset) {
+++        return AVIF_RESULT_OUT_OF_MEMORY;
+++    }
++     size_t neededSize = stream->offset + size;
++     size_t newSize = stream->raw->size;
++     while (newSize < neededSize) {
+diff --git a/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb b/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb
+index 885758b6a4..fa1c166eef 100644
+--- a/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb
++++ b/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb
+@@ -4,7 +4,9 @@ SECTION = "libs"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c528b75b07425b5c1d2e34de98c397b5"
  
+-SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=v1.0.x"
++SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=v1.0.x \
++           file://0001-Add-integer-overflow-check-to-makeRoom.patch \
++           "
+ 
+ S = "${WORKDIR}/git"
+ SRCREV = "d1c26facaf5a8a97919ceee06814d05d10e25622"
 
