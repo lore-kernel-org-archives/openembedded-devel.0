@@ -1,357 +1,89 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A85BCCD185
-	for <webhook@archiver.kernel.org>; Thu,  9 Oct 2025 13:26:07 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.web11.82.1760016363266556556
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74E98CCD184
+	for <webhook@archiver.kernel.org>; Thu,  9 Oct 2025 16:43:08 +0000 (UTC)
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web10.5258.1760028181126622977
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Oct 2025 06:26:03 -0700
+ Thu, 09 Oct 2025 09:43:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=E3t1MRdu;
- spf=pass (domain: mvista.com, ip: 209.85.216.45, mailfrom: vanusuri@mvista.com)
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-3324523dfb2so996436a91.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 06:26:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NG6vCLwd;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-7841da939deso1111427b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 09:43:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1760016362; x=1760621162; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760028180; x=1760632980; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=DWcYqoTb+7+p0+n2hD2AAML17XfEf1CQxtkyCoRynxA=;
-        b=E3t1MRduRR8sC/JX3fKBL1RxwCWOkGIyZeFlL8IR/pkIihO8NQ82TRuDCUmXrwhffm
-         ojCO3fLFp6AVPmmPqesJTXQHk+OGxom1XzS/gbHuwH0V4LsAvbBVqx1rv8L7qydIjt/D
-         XHwmVMRWr/e0/i9TH89wJdq8+YkNal1Fxwwng=
+        bh=PbD3onODfnT5ThLf/hAX6ERHLsK2P9Du0X/32t4j6LQ=;
+        b=NG6vCLwdXiN/dp/xow8vAaPy9Vp3f8APBj5OriX464GZAV+41XPU9aytWL8Ok08pMH
+         vA9z4StNd0YbDONd7l1tHqV7j8wcbnoyLB2OuzMHD7ZhfxJMYQJJwMU/T/w5yDn7YizV
+         IzXa2BBNYpAAo8EgIrVNfMYq1IgAhqLNGpCYTFTH5HkB/mT2YCa0erHDhQoA/6r+z8cc
+         y03HMX06eJduSCHjHAdmlPP3+8C5Z67mEszHhAVp4MESifXvj6ZkCCuQICCEkgMw+SQ1
+         mG54opvmP1nZQD6ut9sElcwX9qUuC6Jfank6FPMrGxm772er+bVkdbTa9uSb979FdB/w
+         wtUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760016362; x=1760621162;
+        d=1e100.net; s=20230601; t=1760028180; x=1760632980;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=DWcYqoTb+7+p0+n2hD2AAML17XfEf1CQxtkyCoRynxA=;
-        b=F+dRwqxREYx7ACWfjeuAaXg9N8Ca8KyoCGtQcPgLzld/XTqGKAEkJeqBLJcRL1fCJ+
-         YXFtqdC/pmVLYGgJYpEBqLePsOopKrL2zytVT9ktEZ/Qvg0+153Px1EvIwFqiVBryqFW
-         xZ38oAFuhPSw0Jz4ohzz0ChRV5kMu9OnOu7FDGvdLcJ2T4O+MDFr1LdoAId9kdoI3KOf
-         UaJGgsuQRUlGfHNxlCWDGREdQJpgL0zNE6OidFebMKpOKHLzI3bN3HhDyPdtKfFHxC2R
-         Do5gf3IYY0TxMSZfG5VjauaFaUjwKrBDtk+fKjwQbeQX2QugWJLrxfmVEd0rRbh+SnqH
-         V6HA==
-X-Gm-Message-State: AOJu0Ywpwz28J4WOkiA4Epz34fTwZ0/XeixX6ywIg+OcrO5ARkMLx6kG
-	0ijvaoqI0Neg9+LvbCFHpFAYwx8RwM38T0jRf5Wsb271W5O+4puQ1Ww8AJazvw72/W3HpT8CNuW
-	8sXhxNYo=
-X-Gm-Gg: ASbGncvPT/DAYviE0X94IQl+o9+DZCQnaYLRytv+RNazMWc8HgDq7TEusURXJ7Ff1Zw
-	RuXXRT2u88/yCfdlDr5eCKbuZ4YDPoSEAxdx9BH1NxmIrY8To83xbTEZn0JyBpoX9Cl3785mVMs
-	GS7yPg3OrwapFMwmbnEex3wWMOM7uvdedcNsUEwNj/uMBC3Xlf0A62c6Wd9JQnaVOy3qkWkCEQ2
-	24y7mtqeNeCGr6DQClYGOljC4eEy8Cm9Eox8cc4h8SzHOUB7phTvZBsrvpHEO4Z5wVoUZvgZ/i2
-	BY4H9W2+5c+ILvLMMolVSrPeLVKLp7mO9C5jXONSbI42B0JMYGCpG9ItlDvVOoaJX3YB2+5Y1kg
-	+GGNczhKS+3uEEewYGauHY+kZABlRdgJr5ocKWe9/SEf3H7vHNayCfF7W8uPukQ==
-X-Google-Smtp-Source: AGHT+IF6jYmKBrhAZhHMX719gh91NfH/tKL/HL22omKrf4mC0CY8Xt/ZeT7sstjuxtaTk1Y04GHzhQ==
-X-Received: by 2002:a17:90b:4a0f:b0:32e:3f93:69e2 with SMTP id 98e67ed59e1d1-33b5114967fmr8933431a91.13.1760016361860;
-        Thu, 09 Oct 2025 06:26:01 -0700 (PDT)
-Received: from localhost.localdomain ([2401:4900:8fce:7e18:e276:786d:1d4f:aef7])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33b510ff9a8sm7074730a91.8.2025.10.09.06.25.59
+        bh=PbD3onODfnT5ThLf/hAX6ERHLsK2P9Du0X/32t4j6LQ=;
+        b=WFqxaa2tN6ffUH2X9m4pWh8jCVUls36f0zf/fy8tb7CqN9IGrxhA1lwMYeeXe0lM8N
+         hSnz6dmIPvvQeReYkLJ5U32KSHTlyeSq4gqO958g/nROUP2SbV9COKxkHYPIEswjM26A
+         LJZZkOcpFAGF3+v9cQqf8Z3a8/3f0uqWTMJVYL5j8Rzs5IlrGv4MMB2QnjkN5kDRa/11
+         0nFnevDhyroV27iN9magdAasvGMZrdCqlkGQ1zc143LxtqktfXTYgn3k2ziJMmTcvL1k
+         pDqFhJn+DODbW9e8pFS1+kyKAP0kE6U4zWvqz3FiO2hssWgWhzUHpn1VSXXUar+PVBAa
+         Jaow==
+X-Gm-Message-State: AOJu0YyAzoPT4H4EAsJObxEJRk0F2SxWFObAX0Lv5OooErpLDWhR89ir
+	BdXrVwpU6JIq/AIAryeLe8iTezlVY0/t0ds03CmJJT5rjyqtJSRZeI2vBzgNEnMa
+X-Gm-Gg: ASbGncvpqZbINU6YWMecrpWDPvMLoBW5eoFddlsHANB24ryltIQlwg4lQnq3Gfbc1I/
+	Z1zCTmqxhYv1BqrwA0xabgcXWECGOiKhFcTyfZ68uXLUKEPRoOz0gx4he1qxqX+y1KaLVBmAw+C
+	tqql0wDBH5uRdesZSgx7VZ6a5e7eaLwrBeWA1H3w+sjwVBMDiPf1whHvfRw1H/xTiYyQ4jCO1uh
+	8q/0GdUFIiEbv5x8HzDgUKqTw0RX+YLBR6ORVR3NQQfuVFdhoSEpx3PaKLz/3IjTyC910+WCsJx
+	fuWVCCm87eyaofSSVjiwdeMxeXd48JlJkbCs5aS3quwVkdGeT+NYWjtkqZ9SMLuO376K2Um1wM1
+	yf3GVckjkQB13igqiy5HkHeAbT+F0aLD0TWdjd+DHcfp3U8I=
+X-Google-Smtp-Source: AGHT+IEdMssl77RpiPtLvJpiAM25JERClv6HPMpP41kHHR1/SDdopamyGpN9CFYpwAdqFC87t5ZTDQ==
+X-Received: by 2002:a05:6a20:728a:b0:2b5:9c2:c579 with SMTP id adf61e73a8af0-32da84ea53amr10763057637.54.1760028180148;
+        Thu, 09 Oct 2025 09:43:00 -0700 (PDT)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::4a63])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7992d9992ddsm177363b3a.80.2025.10.09.09.42.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Oct 2025 06:26:01 -0700 (PDT)
-From: vanusuri@mvista.com
+        Thu, 09 Oct 2025 09:42:59 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][scarthgap][PATCH] libssh: Fix CVE-2025-8277
-Date: Thu,  9 Oct 2025 18:55:43 +0530
-Message-Id: <20251009132543.1680755-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] pm-qa: Do not hardcode PATCHTOOL
+Date: Thu,  9 Oct 2025 09:42:57 -0700
+Message-ID: <20251009164257.251971-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 13:26:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120432
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 16:43:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120433
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+It seems to work fine with quilt as well.
 
-Upstream-Commits:
-https://git.libssh.org/projects/libssh.git/commit/?h=stable-0.11&id=87db2659ec608a977a63eea529f17b9168388d73
-&
-https://git.libssh.org/projects/libssh.git/commit/?h=stable-0.11&id=266174a6d36687b65cf90174f06af90b8b27c65f
-&
-https://git.libssh.org/projects/libssh.git/commit/?h=stable-0.11&id=8e4d67aa9eda455bfad9ac610e54b7a548d0aa08
-& https://git.libssh.org/projects/libssh.git/commit/?h=stable-0.11&id=1c763e29d138db87665e98983f468d2dd0f286c1
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libssh/libssh/CVE-2025-8277-1.patch       | 40 +++++++++
- .../libssh/libssh/CVE-2025-8277-2.patch       | 89 +++++++++++++++++++
- .../libssh/libssh/CVE-2025-8277-3.patch       | 48 ++++++++++
- .../libssh/libssh/CVE-2025-8277-4.patch       | 48 ++++++++++
- .../recipes-support/libssh/libssh_0.10.6.bb   |  4 +
- 5 files changed, 229 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-1.patch
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-2.patch
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-3.patch
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-4.patch
+ meta-oe/recipes-test/pm-qa/pm-qa_git.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-1.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-1.patch
-new file mode 100644
-index 0000000000..7155618271
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-1.patch
-@@ -0,0 +1,40 @@
-+From 87db2659ec608a977a63eea529f17b9168388d73 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Tue, 5 Aug 2025 18:42:31 +0200
-+Subject: CVE-2025-8277: packet: Adjust packet filter to work when DH-GEX is
-+ guessed wrongly
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
-+(cherry picked from commit 4310a696f2d632c6742678077d703d9b9ff3bc0e)
-+
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?h=stable-0.11&id=87db2659ec608a977a63eea529f17b9168388d73]
-+CVE: CVE-2025-8277
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ src/packet.c | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/packet.c b/src/packet.c
-+index f15aa2ad..f54b3158 100644
-+--- a/src/packet.c
-++++ b/src/packet.c
-+@@ -294,6 +294,7 @@ static enum ssh_packet_filter_result_e ssh_packet_incoming_filter(ssh_session se
-+          *   or session_state == SSH_SESSION_STATE_INITIAL_KEX
-+          * - dh_handshake_state == DH_STATE_INIT
-+          *   or dh_handshake_state == DH_STATE_INIT_SENT (re-exchange)
-++         *   or dh_handshake_state == DH_STATE_REQUEST_SENT (dh-gex)
-+          *   or dh_handshake_state == DH_STATE_FINISHED (re-exchange)
-+          *
-+          * Transitions:
-+@@ -313,6 +314,7 @@ static enum ssh_packet_filter_result_e ssh_packet_incoming_filter(ssh_session se
-+ 
-+         if ((session->dh_handshake_state != DH_STATE_INIT) &&
-+             (session->dh_handshake_state != DH_STATE_INIT_SENT) &&
-++            (session->dh_handshake_state != DH_STATE_REQUEST_SENT) &&
-+             (session->dh_handshake_state != DH_STATE_FINISHED))
-+         {
-+             rc = SSH_PACKET_DENIED;
-+-- 
-+cgit v1.2.3
-+
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-2.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-2.patch
-new file mode 100644
-index 0000000000..3b57aadbdd
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-2.patch
-@@ -0,0 +1,89 @@
-+From 266174a6d36687b65cf90174f06af90b8b27c65f Mon Sep 17 00:00:00 2001
-+From: Francesco Rollo <eferollo@gmail.com>
-+Date: Thu, 24 Jul 2025 16:30:07 +0300
-+Subject: [PATCH] CVE-2025-8277: Fix memory leak of unused ephemeral key pair
-+ after client's wrong KEX guess
-+
-+Signed-off-by: Francesco Rollo <eferollo@gmail.com>
-+Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
-+(cherry picked from commit ccff22d3787c1355b3f0dcd09fe54d90acc55bf1)
-+
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?h=stable-0.11&id=266174a6d36687b65cf90174f06af90b8b27c65f]
-+CVE: CVE-2025-8277
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ src/dh_crypto.c       | 5 +++++
-+ src/dh_key.c          | 5 +++++
-+ src/ecdh_gcrypt.c     | 6 ++++++
-+ src/ecdh_mbedcrypto.c | 6 ++++++
-+ 4 files changed, 22 insertions(+)
-+
-+diff --git a/src/dh_crypto.c b/src/dh_crypto.c
-+index 4dd9b507..cedfbc81 100644
-+--- a/src/dh_crypto.c
-++++ b/src/dh_crypto.c
-+@@ -407,6 +407,11 @@ int ssh_dh_init_common(struct ssh_crypto_struct *crypto)
-+     struct dh_ctx *ctx = NULL;
-+     int rc;
-+ 
-++    /* Cleanup any previously allocated dh_ctx */
-++    if (crypto->dh_ctx != NULL) {
-++        ssh_dh_cleanup(crypto);
-++    }
-++
-+     ctx = calloc(1, sizeof(*ctx));
-+     if (ctx == NULL) {
-+         return SSH_ERROR;
-+diff --git a/src/dh_key.c b/src/dh_key.c
-+index 20d24a31..d9743ceb 100644
-+--- a/src/dh_key.c
-++++ b/src/dh_key.c
-+@@ -237,6 +237,11 @@ int ssh_dh_init_common(struct ssh_crypto_struct *crypto)
-+     struct dh_ctx *ctx = NULL;
-+     int rc;
-+ 
-++    /* Cleanup any previously allocated dh_ctx */
-++    if (crypto->dh_ctx != NULL) {
-++        ssh_dh_cleanup(crypto);
-++    }
-++
-+     ctx = calloc(1, sizeof(*ctx));
-+     if (ctx == NULL) {
-+         return SSH_ERROR;
-+diff --git a/src/ecdh_gcrypt.c b/src/ecdh_gcrypt.c
-+index 73fcd50f..b8d983c1 100644
-+--- a/src/ecdh_gcrypt.c
-++++ b/src/ecdh_gcrypt.c
-+@@ -101,6 +101,12 @@ int ssh_client_ecdh_init(ssh_session session)
-+         goto out;
-+     }
-+ 
-++    /* Free any previously allocated privkey */
-++    if (session->next_crypto->ecdh_privkey != NULL) {
-++        gcry_sexp_release(session->next_crypto->ecdh_privkey);
-++        session->next_crypto->ecdh_privkey = NULL;
-++    }
-++
-+     session->next_crypto->ecdh_privkey = key;
-+     key = NULL;
-+     session->next_crypto->ecdh_client_pubkey = client_pubkey;
-+diff --git a/src/ecdh_mbedcrypto.c b/src/ecdh_mbedcrypto.c
-+index dda73922..6074b93d 100644
-+--- a/src/ecdh_mbedcrypto.c
-++++ b/src/ecdh_mbedcrypto.c
-+@@ -70,6 +70,12 @@ int ssh_client_ecdh_init(ssh_session session)
-+         return SSH_ERROR;
-+     }
-+ 
-++    /* Free any previously allocated privkey */
-++    if (session->next_crypto->ecdh_privkey != NULL) {
-++        mbedtls_ecp_keypair_free(session->next_crypto->ecdh_privkey);
-++        SAFE_FREE(session->next_crypto->ecdh_privkey);
-++    }
-++
-+     session->next_crypto->ecdh_privkey = malloc(sizeof(mbedtls_ecp_keypair));
-+     if (session->next_crypto->ecdh_privkey == NULL) {
-+         return SSH_ERROR;
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-3.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-3.patch
-new file mode 100644
-index 0000000000..41848b1f0a
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-3.patch
-@@ -0,0 +1,48 @@
-+From 8e4d67aa9eda455bfad9ac610e54b7a548d0aa08 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Wed, 6 Aug 2025 11:10:38 +0200
-+Subject: [PATCH] CVE-2025-8277: ecdh: Free previously allocated pubkeys
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
-+(cherry picked from commit c9d95ab0c7a52b231bcec09afbea71944ed0d852)
-+
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?h=stable-0.11&id=8e4d67aa9eda455bfad9ac610e54b7a548d0aa08]
-+CVE: CVE-2025-8277
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ src/ecdh_crypto.c | 1 +
-+ src/ecdh_gcrypt.c | 3 ++-
-+ 2 files changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/ecdh_crypto.c b/src/ecdh_crypto.c
-+index 069b1372..4a029db3 100644
-+--- a/src/ecdh_crypto.c
-++++ b/src/ecdh_crypto.c
-+@@ -220,6 +220,7 @@ int ssh_client_ecdh_init(ssh_session session){
-+   }
-+ 
-+   session->next_crypto->ecdh_privkey = key;
-++  ssh_string_free(session->next_crypto->ecdh_client_pubkey);
-+   session->next_crypto->ecdh_client_pubkey = client_pubkey;
-+ 
-+   /* register the packet callbacks */
-+diff --git a/src/ecdh_gcrypt.c b/src/ecdh_gcrypt.c
-+index b8d983c1..662497e3 100644
-+--- a/src/ecdh_gcrypt.c
-++++ b/src/ecdh_gcrypt.c
-+@@ -106,9 +106,10 @@ int ssh_client_ecdh_init(ssh_session session)
-+         gcry_sexp_release(session->next_crypto->ecdh_privkey);
-+         session->next_crypto->ecdh_privkey = NULL;
-+     }
-+-
-+     session->next_crypto->ecdh_privkey = key;
-+     key = NULL;
-++
-++    SSH_STRING_FREE(session->next_crypto->ecdh_client_pubkey);
-+     session->next_crypto->ecdh_client_pubkey = client_pubkey;
-+     client_pubkey = NULL;
-+ 
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-4.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-4.patch
-new file mode 100644
-index 0000000000..d5b43c4d0b
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-4.patch
-@@ -0,0 +1,48 @@
-+From 1c763e29d138db87665e98983f468d2dd0f286c1 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Wed, 6 Aug 2025 15:32:56 +0200
-+Subject: [PATCH] CVE-2025-8277: mbedtls: Avoid leaking ecdh keys
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
-+(cherry picked from commit ffed80f8c078122990a4eba2b275facd56dd43e0)
-+
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?h=stable-0.11&id=1c763e29d138db87665e98983f468d2dd0f286c1]
-+CVE: CVE-2025-8277
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ src/ecdh_mbedcrypto.c | 1 +
-+ src/wrapper.c         | 5 ++++-
-+ 2 files changed, 5 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/ecdh_mbedcrypto.c b/src/ecdh_mbedcrypto.c
-+index 6074b93d..351aa655 100644
-+--- a/src/ecdh_mbedcrypto.c
-++++ b/src/ecdh_mbedcrypto.c
-+@@ -116,6 +116,7 @@ int ssh_client_ecdh_init(ssh_session session)
-+         goto out;
-+     }
-+ 
-++    SSH_STRING_FREE(session->next_crypto->ecdh_client_pubkey);
-+     session->next_crypto->ecdh_client_pubkey = client_pubkey;
-+     client_pubkey = NULL;
-+ 
-+diff --git a/src/wrapper.c b/src/wrapper.c
-+index 43bf2137..0397f96d 100644
-+--- a/src/wrapper.c
-++++ b/src/wrapper.c
-+@@ -193,7 +193,10 @@ void crypto_free(struct ssh_crypto_struct *crypto)
-+ #endif
-+         crypto->ecdh_privkey = NULL;
-+     }
-+-#endif
-++#elif defined HAVE_LIBMBEDCRYPTO
-++    mbedtls_ecp_keypair_free(crypto->ecdh_privkey);
-++    SAFE_FREE(crypto->ecdh_privkey);
-++#endif /* HAVE_LIBGCRYPT */
-+     SAFE_FREE(crypto->dh_server_signature);
-+     if (crypto->session_id != NULL) {
-+         explicit_bzero(crypto->session_id, crypto->session_id_len);
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-index 602e01fce6..de37719b09 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-@@ -18,6 +18,10 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
-            file://CVE-2025-4878-0002.patch \
-            file://CVE-2025-5987.patch \
-            file://CVE-2025-8114.patch \
-+           file://CVE-2025-8277-1.patch \
-+           file://CVE-2025-8277-2.patch \
-+           file://CVE-2025-8277-3.patch \
-+           file://CVE-2025-8277-4.patch \
-           "
- SRCREV = "10e09e273f69e149389b3e0e5d44b8c221c2e7f6"
+diff --git a/meta-oe/recipes-test/pm-qa/pm-qa_git.bb b/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
+index 1574bf0ce9..f792415037 100644
+--- a/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
++++ b/meta-oe/recipes-test/pm-qa/pm-qa_git.bb
+@@ -18,8 +18,6 @@ SRC_URI = " \
  
--- 
-2.25.1
-
+ CFLAGS += "-pthread"
+ 
+-PATCHTOOL = "git"
+-
+ do_compile () {
+     # Find all the .c files in this project and build them.
+     for x in `find . -name "*.c"`
 
