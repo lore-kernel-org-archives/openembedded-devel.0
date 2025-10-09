@@ -2,95 +2,101 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2444CCD187
-	for <webhook@archiver.kernel.org>; Thu,  9 Oct 2025 08:14:05 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web11.6823.1759997644324185546
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8E54CCD188
+	for <webhook@archiver.kernel.org>; Thu,  9 Oct 2025 08:14:15 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web11.6825.1759997646582558949
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Oct 2025 01:14:04 -0700
+ Thu, 09 Oct 2025 01:14:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=nHPFUSrp;
- spf=pass (domain: konsulko.com, ip: 209.85.218.45, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-b463f986f80so143636266b.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 01:14:04 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=e6icovK8;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.41, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-afcb7ae6ed0so96233666b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 01:14:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1759997642; x=1760602442; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5o5Uy6KQ8uAjF/LlpQJ5iYXKVFe7P6+TNJAeQAW54UM=;
-        b=nHPFUSrpx5u422qqV6eEjZT56agwoou+31nixGSNRLfUOpoZ3S8FQbv6gdLWirG+ku
-         CPqt3vVltVGVZ3QraLyK0StgA24ZPeicvRjbKgQoFdBT7APBJkd67JA0HLn1TiZZT+OK
-         Ma0a/Tw3BYopmghRqq84RsMknPds2xAftMidk=
+        d=konsulko.com; s=google; t=1759997645; x=1760602445; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hfy5o0K8Jq2aS9im/73fut/TRp0AI2HGjVO4bn487FY=;
+        b=e6icovK8O8xdmxjYZf2w5t4tx3SqmD0RvX12vDJLYq80AQ6cHgNNWrQVEwxCclW+Mm
+         RUnUI4bnM66wncDBNPpgdwSapSJprPuzwJLGcRdELe3MBh8Jk97eFsAkfOKTlxzu8yk1
+         wCo4fqcfFdwhJwUBu8hqZRKigcW97mFBD5iyc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759997642; x=1760602442;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=5o5Uy6KQ8uAjF/LlpQJ5iYXKVFe7P6+TNJAeQAW54UM=;
-        b=l8NgUtbGhJ8X1bbinBovjrcCJM/V7pYeQZAyP45zMyF4W5zPOnOfvG1h58llNld7Jp
-         atF7HYBTtA6fu05vuzroAoFugXRkrdkdeYQ5p9MK0WQgs5W4IIOgknJq5jg9eH+I944z
-         pDjUdLPIMpQPp2T6GvKbEvTYlVeOBLS8hf3GqVyDmCM4nQIOasRwDiw9BWLLV6qXbr1d
-         f457UqdwVoC/nYuqjaT3kzSfImDK2BdMQaFN7EHYrdgeb1gMA+azLqL6yl2/g0bfgGWX
-         e3mgdcN5YbUO9gIBAK1voR3OWFQ6rmHjYhBoNO89QMlV37btyVQ/M6rCIQ1c1EE/FF/e
-         0EWQ==
-X-Gm-Message-State: AOJu0Yw+sycHN7OSk0xd+nZ95rhRrIKvBVgqD3HXOo+l4MiN6vq1AhCa
-	wD5JIKN2jnGWaxb5gOJ40pIM7cZItyNEY/pjVXvCrmjNw/oA+TQdKF6ZA5HL0ky3/lupHSwftlM
-	HnUNx
-X-Gm-Gg: ASbGncv5Caed6TG9m6b6o7V0KPu0pcRpsf3sfpaDAM75yzd1csyQYCAZamWpTVXxBcP
-	R47oYRBuO9XjpDG+J1Nk/IahWDjRjhGH85HQT5fyoGhumXhPphf+8Aj/GOPmJl2AAqP693VS+dp
-	/mpnT76aUfEKgH3WW+4RN/FleFQ9oeKmKCWAIz+TN9XweApfTuT5c6KVlGdN5MsfXUJjeyP3n87
-	N2V4gdNPpvkB4cXEatwv6gpB0TH7SaRKKw8eV3LGdyU9UfGizzTvTmKS6nP7oEBjVqifQvLl1Fc
-	q8aekavjRLKFa41+hyD4CHUY5MZeFX4H6FN+PI0J2c+1a2eW0nF8bidkQud6sIOyuNBzoeg92C5
-	GyVIPxeMYgql8NWsziWW1SxmLEibdX5yVlKgD46oGOQlKlxHRDue+0Z2lG0RCudVbROBg38A=
-X-Google-Smtp-Source: AGHT+IG37T8DeYu1NV/P6zz72pCG2G0Nun9xqtHHxbtAt+TwPbONi6JBi2BqqvkvqVsxxISVqjbTaw==
-X-Received: by 2002:a17:906:794f:b0:b3a:a16e:3db8 with SMTP id a640c23a62f3a-b50aa38733cmr670966766b.20.1759997642115;
-        Thu, 09 Oct 2025 01:14:02 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1759997645; x=1760602445;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=hfy5o0K8Jq2aS9im/73fut/TRp0AI2HGjVO4bn487FY=;
+        b=hnn9cUvv5bVAE4cKopcWtcOv5xDQfG7+v8u40qoX8cC/UlpSyGIvdXka4n7dHufOwa
+         LCTxabPbKCzYnGKn5JM8JwBCxJ7A75l+9hb0utKY1E5Jt/u7roqr/J3k8/irzVfYDIwG
+         WhX6rgIjGFyslqhMzlYHC7BrrNeAZbCZLvEqqKo9/ZpSY7tRB5SDrX7o1T1CJ1+ci+pA
+         zxeAVHohVyh1sL9/f4irH7qwQ10ofdxl9gkqAFPsxmrkf8MsH/8X7ihCF8G4zBPlBKRs
+         mqSb2RBDbnQR5rgO/XPISQ5e+pfQxhGzowlkP/hEiD/7qEiNGCKz+vrbMxGLsDGPO2+v
+         Cm5A==
+X-Gm-Message-State: AOJu0Yzd3E9jsNFajsuUKTy75ls9lFIm2Zvilgu1wZVOQ1xrJpWWhR3Q
+	GSHYJGLJ+PGj5BezaE1hpjYwXid7nYqi7d5U0Vc1/3FmdjZy5gSry7Y1AapbNokLGSS0cVYwMlK
+	MKzQo
+X-Gm-Gg: ASbGncuRspBTu2N63Qhc4r0HH4vj2veVlLgtOykNBuy+K8QH8a4kTuRVttRpFZ0CWs6
+	8dHKR+kKba9AB36ou4bhvU6ZWnoc1Rj04t6wrIpWHcc9YlJfSSI9lhVccIFZ+aZsHbTembNkAmS
+	ulRdB4xSr675LNzeafdJzmXidp3VuGCx/LmKPUjkZuthWA94alvbnD+Omm9bC898LmsvpDhq40m
+	mO6kMpqpZWRsRQg7iyN1CEyhlHPC9RdSrPw8tt2ibZPJTIEOPZSAp5n0mbODWQzLfenI+qUA2G2
+	Z3Zu2SgSeQXmdasO2gXtSIgDrbegcB4pZqFHbPFp70IuiQZxFPraez69xu3rpDHfcwkNTRDdt10
+	MTdqPs/mjBb096YHhfFu4JWT3GVtJkqJEsrOZVpsfg63p3qG7MXBsBK4n+CLH
+X-Google-Smtp-Source: AGHT+IFk92XaGpTI4U7CCoTw/tO8/ZtLbj0JiXavRyitzSUg6CWNm/QUOklAqwXRPc7ri/s/Z4hX3A==
+X-Received: by 2002:a17:906:4789:b0:b3e:f028:2d57 with SMTP id a640c23a62f3a-b50acc3132amr777511766b.57.1759997644084;
+        Thu, 09 Oct 2025 01:14:04 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b48652ad839sm1844874266b.1.2025.10.09.01.14.00
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b48652ad839sm1844874266b.1.2025.10.09.01.14.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Oct 2025 01:14:01 -0700 (PDT)
+        Thu, 09 Oct 2025 01:14:03 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/5] python3-whitenoise: Upgrade 6.9.0 -> 6.11.0
-Date: Thu,  9 Oct 2025 11:13:53 +0300
-Message-ID: <20251009081357.3446410-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-msgpack: Upgrade 1.1.1 -> 1.1.2
+Date: Thu,  9 Oct 2025 11:13:55 +0300
+Message-ID: <20251009081357.3446410-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20251009081357.3446410-1-leon.anavi@konsulko.com>
+References: <20251009081357.3446410-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 08:14:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120422
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 08:14:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120424
 
-Upgrade to release 6.11.0:
+Upgrade to release 1.1.2:
 
-- Support Django 6.0.
-- Support Python 3.14.
+- Update Cython to v3.1.4
+- Update cibuildwheel to v3.2.0
+- Drop Python 3.8
+- Add Python 3.14
+- Add windows-arm
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...python3-whitenoise_6.9.0.bb => python3-whitenoise_6.11.0.bb} | 2 +-
+ .../{python3-msgpack_1.1.1.bb => python3-msgpack_1.1.2.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-whitenoise_6.9.0.bb => python3-whitenoise_6.11.0.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-msgpack_1.1.1.bb => python3-msgpack_1.1.2.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-whitenoise_6.9.0.bb b/meta-python/recipes-devtools/python/python3-whitenoise_6.11.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-whitenoise_6.9.0.bb
-rename to meta-python/recipes-devtools/python/python3-whitenoise_6.11.0.bb
-index 5a6b495040..142c10aa83 100644
---- a/meta-python/recipes-devtools/python/python3-whitenoise_6.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-whitenoise_6.11.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=aba4901cc64e401cea5a267eac2a2e1e"
+diff --git a/meta-python/recipes-devtools/python/python3-msgpack_1.1.1.bb b/meta-python/recipes-devtools/python/python3-msgpack_1.1.2.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-msgpack_1.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-msgpack_1.1.2.bb
+index 6704829f7d..85ec93695d 100644
+--- a/meta-python/recipes-devtools/python/python3-msgpack_1.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-msgpack_1.1.2.bb
+@@ -6,7 +6,7 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest
  
- PYPI_PACKAGE = "whitenoise"
+ PTEST_PYTEST_DIR = "test"
  
--SRC_URI[sha256sum] = "8c4a7c9d384694990c26f3047e118c691557481d624f069b7f7752a2f735d609"
-+SRC_URI[sha256sum] = "0f5bfce6061ae6611cd9396a8231e088722e4fc67bc13a111be74c738d99375f"
+-SRC_URI[sha256sum] = "77b79ce34a2bdab2594f490c8e80dd62a02d650b91a75159a63ec413b8d104cd"
++SRC_URI[sha256sum] = "3b60763c1373dd60f398488069bcdc703cd08a711477b5d480eecc9f9626f47e"
  
- inherit pypi python_setuptools_build_meta
- 
+ RDEPENDS:${PN}:class-target += "\
+     python3-io \
 -- 
 2.47.3
 
