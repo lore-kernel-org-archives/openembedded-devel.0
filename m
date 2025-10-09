@@ -2,61 +2,60 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3B24CCD187
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BEEC3CCD18A
 	for <webhook@archiver.kernel.org>; Thu,  9 Oct 2025 08:14:15 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
- by mx.groups.io with SMTP id smtpd.web11.6826.1759997646724082139
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web11.6827.1759997647705116619
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Oct 2025 01:14:07 -0700
+ Thu, 09 Oct 2025 01:14:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Itt4Q0St;
- spf=pass (domain: konsulko.com, ip: 209.85.218.50, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-afcb7ae31caso108934166b.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 01:14:06 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=Dpwqr67l;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.52, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-639e1e8c8c8so1277354a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 01:14:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1759997645; x=1760602445; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1759997646; x=1760602446; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4qY0TW8cIlp3onZeV10/N5F/efX4oIUHLzL1yqHtkbw=;
-        b=Itt4Q0StTsieiuN5+jJxPOEjcTa9ZBPQKKazCG0de8+QF1e/aFvDFT11UYRAUHpSm2
-         nqqcGMhi+r+bNuIXyKuxFzkVRVtm8EOxQzVo7c31TURkGC9nz2DQrR5m0wng2iWZfyeQ
-         OiPFp0bKjOKmlzaIDG8G0HiIJiTAp31JJ59Uo=
+        bh=OiD9q55gPWwM0hLVC67mlkE6A5zYm16EyR6T4Ey7M0U=;
+        b=Dpwqr67lqHWQOcvS66YHhEOAVRfDyoD1sKVK3lVdnzbXiMk7R5WG44QRMDsjenA0E0
+         xv9V35P41otFvws7kBRlGkq4vchyX0Oz1a+XJ+n671Rzx0ydN7ChkFa5VvyyzxCNvtXs
+         qr9wNYX4AhTrxv+FiohsLOpUAQpvPG2GgcnHw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759997645; x=1760602445;
+        d=1e100.net; s=20230601; t=1759997646; x=1760602446;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4qY0TW8cIlp3onZeV10/N5F/efX4oIUHLzL1yqHtkbw=;
-        b=UxKGZPmP7/433oQKnvPsOUNc6RL1Oty+906oBBEEofO9JB0nPCeMCEuELr2IENAocN
-         JdId/66xaOg6ofH9i7c3TjrDcA1ysitkL+rNcqS+qyp/LpmuuAUgkpcAZjUE29G9Genl
-         n+MUrJshSVpErmH7JefAI55YKfFsqkhs4WEgPPD8XUR7QHK/CzAMKLuXNHccIPjfRn5u
-         uc0oXHWL3MdsEIpA1hi383Q7tp9d+5m7btmqHfb3tpWto9t94Xq3cjRyeJC9h2HlJZPb
-         Z213GcDQ1LNLmu9zSx0AWqlvenQHd4ZsC1PwKquz1lYe/FNoCTee31t2bXsqUrcKczFX
-         WDDg==
-X-Gm-Message-State: AOJu0YzDa2i2bQe8/LUR6fAy/g4ZaBbXMKCvU3w6ItJnlVS4eEn6PluJ
-	MAByiQx35bLZAi/S6QxGZU4zT0dCbbnXSHWf1Fp2opa2hRW5ETMj3DoZWq3fLDlx8hRk30fJKUM
-	BcTxL
-X-Gm-Gg: ASbGnctcG34dZ9AcmvZSd9mJJLRi4J4q3gyuUCAdj2qV7kZbsTwu/cItHnEzouwX/ic
-	j+R4cv6muG6+p0jve/plWwsnmAr8Qsr5qfvT7CxeRVBR5P06oyvdGpAnSYS/b0Jp5PB7zLH4ZvZ
-	ePF0LdFabx/x8EK+rnrCDbZNWKVuAgt2mI6+7aUcJbdGTS2+HDCmacGRW1ee0PBm1hw/0bQeAaU
-	aM6bVE77qUhkrX5At4wAh6xzJWsIkZZzWCYUaBNYhWrgaTZPAhUJh3KWz83kZ9ontwMd5+TB6uB
-	ejNYxPoy0INiwCgyMjZ6h9FuhZMwAF1K8G2pWCfZsqLf7OTPXO+V+Z2WXU86b7KTx4H8idI2Ukt
-	iii6in6fZ5BPAgON2Xl6hxvQIRM77zpbCDQcTifcRkd85IVLYw8lSNsW3COTy/popH/cP6pK5es
-	vwWgfbVQ==
-X-Google-Smtp-Source: AGHT+IG0Co7Gjy+H+yTMEgO90vbQQ6wXJG+y7QD4ScRFMT7aQuz2EWzJNGwAMofS4IcGkO1R8fYagw==
-X-Received: by 2002:a17:907:68a2:b0:b54:858e:736f with SMTP id a640c23a62f3a-b54858e73a1mr204112066b.36.1759997644804;
-        Thu, 09 Oct 2025 01:14:04 -0700 (PDT)
+        bh=OiD9q55gPWwM0hLVC67mlkE6A5zYm16EyR6T4Ey7M0U=;
+        b=ayAEblgJCGJahlMR6AKTlElFShpBw+ewWGXVb3m7VM79K3jslUCdPOoiqBL0B20Tcr
+         oGLr9pfirTwBHwLeWYwT8CVrZapgiAWj3AWdR9ImqRBqUQpNloAtZXvRpKnL4clLbeJz
+         51Gr/wCAss4mmbySo44SKQLbDp83Syof2xnlLiTajbb1XVVbH2cO/dXBfE1iKa2F3o7J
+         fQJZfdBJlvnMlifcu6GhJGOXIIrYEkorepsWjJbo1hxbwblxuEK9moKLR97GxzyNp85x
+         lwDFVBaZdGnINJ7q0UU+7qZ3N1slwLHoogbt1RCpTKZWx8daT7MpcUoBPwosLOnVQYlo
+         CeAA==
+X-Gm-Message-State: AOJu0Yw4avlyofn1CEhR6QFz4iHTgCKllgjr7glZ/PsbiOOhbE6UlpQx
+	imcTZsLOzkahDDFEkRoGXcC+lzj5Bx9zyFqr11v/ox6TstGL/+qNxUSqSeXvtkHnXWaM6vZQbxe
+	qmgfa
+X-Gm-Gg: ASbGnctDtltmZEoL1Y7k6E6AL0SYWnM5m1y9i6fxlOsYUwdGBmvuWJHUWCeXdm36FPw
+	PvfIWdupR14hu75kLZnxABo5irZ1VrTqarNV/bwgEE6UqxY43qHLg+Cwhoag9OY34ZVLEEIBJvO
+	VF1GJ4JhHJ88Z1u5Sm47tKyAin3TMgfNanCkMhdmBWBcSYIbOOStcwRZzPOtGa/zUrYLmpmXe1s
+	C7HSeCUWLO9BT7q+1YgKiMqpqNwZPEVbuuv8zLNqyfFRcTUuh2idqTAs5bO3nlb/47d8+uW796z
+	hgrkNXTlp1K2+nO2ePPByP8GNK7WKvu/OB/lSLlGwv7I6nkNJInfSijDgJSdHH4z5jsUyz/Lzuo
+	/Dqgh3INfzqBusVOCl/V1wSp0zRfJ80+tGZmrq6wyVJTgxiV3aUQs4XcOkNMS
+X-Google-Smtp-Source: AGHT+IHo5UrCrmDKS1JTOfba2X7mQtxIUKcG4B36Oxfg4SbSJVGQqpUQ6zvDftICiCr55zuFacfAxg==
+X-Received: by 2002:a17:907:c12:b0:b44:f9fe:913a with SMTP id a640c23a62f3a-b50acb0e584mr636978766b.65.1759997645724;
+        Thu, 09 Oct 2025 01:14:05 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
         by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b48652ad839sm1844874266b.1.2025.10.09.01.14.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Oct 2025 01:14:04 -0700 (PDT)
+        Thu, 09 Oct 2025 01:14:05 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-awesomeversion: Upgrade 25.5.0 -> 25.8.0
-Date: Thu,  9 Oct 2025 11:13:56 +0300
-Message-ID: <20251009081357.3446410-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 5/5] python3-telnetlib3: Upgrade 2.0.4 -> 2.0.8
+Date: Thu,  9 Oct 2025 11:13:57 +0300
+Message-ID: <20251009081357.3446410-5-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251009081357.3446410-1-leon.anavi@konsulko.com>
 References: <20251009081357.3446410-1-leon.anavi@konsulko.com>
@@ -66,42 +65,42 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 08:14:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120425
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120426
 
-Upgrade to release 25.8.0:
+Upgrade to release 2.0.8:
 
-- Refactor AwesomeVersion comparison methods and optimize regex
-  patterns for performance
-- Refactor AwesomeVersion comparison methods for improved
-  validation and strategy handling
-- Replace poetry with uv
-- Update pr template
-- Fix compound modifier comparison
+- bugfix: object has no attribute '_extra'
+
+License-Update: telnetlib.py and telnetlib3/tests/test_telnetlib.py
+derived from Python 3.12 so a note about PYTHON SOFTWARE FOUNDATION
+LICENSE VERSION 2 has been added to the LICENSE.txt. The license of
+this package remains ISC.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...someversion_25.5.0.bb => python3-awesomeversion_25.8.0.bb} | 4 ++--
+ ...ython3-telnetlib3_2.0.4.bb => python3-telnetlib3_2.0.8.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-awesomeversion_25.5.0.bb => python3-awesomeversion_25.8.0.bb} (73%)
+ rename meta-python/recipes-devtools/python/{python3-telnetlib3_2.0.4.bb => python3-telnetlib3_2.0.8.bb} (58%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-awesomeversion_25.5.0.bb b/meta-python/recipes-devtools/python/python3-awesomeversion_25.8.0.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python3-awesomeversion_25.5.0.bb
-rename to meta-python/recipes-devtools/python/python3-awesomeversion_25.8.0.bb
-index ae600a48b6..338ba7e97a 100644
---- a/meta-python/recipes-devtools/python/python3-awesomeversion_25.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-awesomeversion_25.8.0.bb
-@@ -4,8 +4,8 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENCE.md;md5=92622b5a8e216099be741d78328bae5d"
+diff --git a/meta-python/recipes-devtools/python/python3-telnetlib3_2.0.4.bb b/meta-python/recipes-devtools/python/python3-telnetlib3_2.0.8.bb
+similarity index 58%
+rename from meta-python/recipes-devtools/python/python3-telnetlib3_2.0.4.bb
+rename to meta-python/recipes-devtools/python/python3-telnetlib3_2.0.8.bb
+index e359e2d88b..46f72b8f08 100644
+--- a/meta-python/recipes-devtools/python/python3-telnetlib3_2.0.4.bb
++++ b/meta-python/recipes-devtools/python/python3-telnetlib3_2.0.8.bb
+@@ -1,9 +1,9 @@
+ SUMMARY = "Telnet server and client library based on asyncio"
+ HOMEPAGE = "https://github.com/jquast/telnetlib3"
+ LICENSE = "ISC"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fc2166986ad8169d334a342e0d8db8e0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b2cbfe1ec99d8830fa20d62c8f21d0e8"
  
--SRC_URI[sha256sum] = "d64c9f3579d2f60a5aa506a9dd0b38a74ab5f45e04800f943a547c1102280f31"
-+SRC_URI[sha256sum] = "e6cd08c90292a11f30b8de401863dcde7bc66a671d8173f9066ebd15d9310453"
+-SRC_URI[sha256sum] = "dbcbc16456a0e03a62431be7cfefff00515ab2f4ce2afbaf0d3a0e51a98c948d"
++SRC_URI[sha256sum] = "08a2a7a3a6790f89617442b7d491da8b531d87706fffd6a33eeff57ac440b752"
  
- RDEPENDS:${PN} += "python3-profile python3-logging"
+ PYPI_PACKAGE = "telnetlib3"
  
--inherit pypi python_poetry_core
-+inherit pypi python_hatchling python_poetry_core
 -- 
 2.47.3
 
