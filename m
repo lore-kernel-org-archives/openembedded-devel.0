@@ -1,132 +1,101 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D948ACAC5BB
-	for <webhook@archiver.kernel.org>; Fri, 10 Oct 2025 04:26:53 +0000 (UTC)
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web10.1243.1760070406662623931
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB81BCCA476
+	for <webhook@archiver.kernel.org>; Fri, 10 Oct 2025 04:44:13 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web10.1510.1760071438781771874
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Oct 2025 21:26:46 -0700
+ Thu, 09 Oct 2025 21:43:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=gngahgll;
- spf=pass (domain: mvista.com, ip: 209.85.210.171, mailfrom: vanusuri@mvista.com)
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-77f5d497692so2134559b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 21:26:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TKeLc4hf;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b4c89df6145so253891866b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 21:43:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1760070405; x=1760675205; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=od/lURtTLjshECf6ilgsKuS/Drt5zrc7LdyuidBQcRs=;
-        b=gngahgllT37Q/a/jRxMpwsp9XYY9NwkJpQ0a2eZXS0KU9Mpm/xD6XABwoyKDnxLrgF
-         2bRkDybrKQSvpIbrllemqq4szuEKtxQANpO8s+Q/YqSjA0HwI5O4HGiaZsZ+TSG13bPf
-         neiqluHspS3HuUELSb7/gnx3I5xsJJewNYqy4=
+        d=gmail.com; s=20230601; t=1760071437; x=1760676237; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=1D4nmrJYb92drFBXb4crvel+R3hF8iJRAYJYs8WUsig=;
+        b=TKeLc4hfcVNgXMZ+c/eyw+OFWSTCBnqDEwK2ToZ5vfnk3A3QmK8vER3fVwyVQ+/nBN
+         oTo2AS0WsyPB8cTVI11N/6ZK2ESBghXnQ/90MO0NAaSyhJWDja+2OoUcBdknQvcG0JM2
+         id7uUc2XVaMwc9pVih0iEUpc1HIP50T3GOCKmrqWsrQ8LyDmJsDgDcasZWjKcNvxWdT3
+         4s/KKGd0G48JlN4KE5iFpIcuJjK2OpI2picXo3VHC4PlUyC5TWCLpHI4ETcI5+CGbl4y
+         wlPBU+CRjXiSgFd5XfcFbGKDfTR8yNImWQg9ATDwHUuBho2RqKboYpUMXGCbsS9bHT+8
+         3b1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760070405; x=1760675205;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=od/lURtTLjshECf6ilgsKuS/Drt5zrc7LdyuidBQcRs=;
-        b=skdXYqg4+HVcrXbWGjyFFlUVol3D5cLl2Lg8xWXBYbnfNkiXV4cU7hMT+/328b7hSV
-         XbYFwHPMSFpi6/5+7grfiS40gm3nLwdS7K3I2+CzNJzmkVIGZ8MlGvDC6zL4jdJX2hru
-         vsihfGtmbU3jM+B8NzQ9MeKUgbrycrjPe6MUyIwVNocf02AtSebdg4DyjpWRg9yFEj4f
-         m1qBUU/ErSxoxf/edymuAATC5UuFOAmOKcvEMR281yKyoWScY2B6AoxYyLDKvNCXbu0J
-         52/+J/GywNzk4kTJoOxtPC/yV+yMeS30aWuioSlXr4WWsw9Owwt8iuoNsrovZ7ByDONg
-         FNPQ==
-X-Gm-Message-State: AOJu0YychcTssQhYywkormLLlLb6UhpfHMJnh/nnp1VSjcwA4G301ZC+
-	WmOh1nHtL5DTQ7iVl5xmccXOJJKS+W9MAV5JTEONgMDmOvQb9GLYH/Ay4yvyFDCXWuRE4ySYrxd
-	B72i2wCI=
-X-Gm-Gg: ASbGncsxhhO5b2VoFZWXgxwiKcpwqd3kKd8uor7Y0n57zsykaMAPp/wvNRdfU3dwB2r
-	neEmDHV3VmTkpn4jPaxm4MBPjPT7KJz9I9nMNfI27zwp3jH5Hlm31nePFnd9uRS3ij9XM6eEarx
-	NMQPr6ltDBSb/tVU33fna9iMbcYw6TddXqJ1+xVtLo5EUB0U2+0ZZ2cjgrSubXk7p5asSlCyXPk
-	wvNkQD040gegmjCLToCx4F3PYrWz2fPxrSJIBuQZSDz1qs1XY6XP/S8DwL0E4s2VqH4KZfovmcK
-	FQ4mETRMoPJxsCYfPDR6SFhETo3YvkGirSFOIcb7IWXX9bd1PaJzQLOT1NOmPECjcTHgXQfzzwy
-	T3oz7Wqt+8rptcWNZTDxEfswYNf5WFVXu1lMoKwyWtoNpAL8x8GAaqB2P
-X-Google-Smtp-Source: AGHT+IGXi1UdEnPCR6o/sOVM3HRnNj/dI4t0/NX6BpyoQR/gD+HKld+ucRKWKwIMPuJN4KVcTNUtBQ==
-X-Received: by 2002:a05:6a00:c8c:b0:781:19e1:c4c8 with SMTP id d2e1a72fcca58-793858fb48amr10479627b3a.9.1760070405336;
-        Thu, 09 Oct 2025 21:26:45 -0700 (PDT)
-Received: from localhost.localdomain ([2401:4900:8fce:7e18:2b21:4b99:f746:367b])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7992b63d90asm1393471b3a.24.2025.10.09.21.26.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Oct 2025 21:26:44 -0700 (PDT)
-From: vanusuri@mvista.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][scarthgap][PATCH] poppler: Fix CVE-2025-43718
-Date: Fri, 10 Oct 2025 09:56:36 +0530
-Message-Id: <20251010042636.104137-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+        d=1e100.net; s=20230601; t=1760071437; x=1760676237;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=1D4nmrJYb92drFBXb4crvel+R3hF8iJRAYJYs8WUsig=;
+        b=Di9HIkovMaHuPJJ1PberNCB28+tl1YQsUHeD3FxykcK7J17Yceld5l0BfFt76/9SjV
+         JG2j8Og6w88mLEoPLJTRiaIVhJmJF9P7vYxDO2cYnNsWNJXLNzR6USXDfHk2z8ZmKhvC
+         uJWuzdb5XxMWe8kEZmHKJAHBeXwOAmZl/KfIpZOhEKFPZG7E3tSS7wKzmPT5VWFY9Dlx
+         2Jf1gVzwAQcg1rBqyJ6wYe4H7as2W37POjXDuuQyvSpzpJxb+uHg93gvqUXPrMUAlxyc
+         1at9nrXXDRla9vuzfKz1q4Lx2pjh0yal2bvbcVvmUC4af09I3u/luz4nINH3ERPM2ZDy
+         REQw==
+X-Forwarded-Encrypted: i=1; AJvYcCX5gUaCHBX2U9NsQkkMFour31NC7b/tAb3uvuXC1gzKb202ocjWXZHNXTv9Dl8cThU8PZbjptmIflYNxSm0i3ekzIc=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzkSwEbV9VX0LupYDJChNWoyZbhgmaPLITr4pFIF/CtL6p/OpQU
+	mSTP8Tj8rsHrAVXPUvla8/TvcwFik1ZGqg9TG63MrX9SddhLfaVpxv+l
+X-Gm-Gg: ASbGncvunqm9GhKuH0A1ZUDWp/EQ9Mehehv9N90rq3FateZVBTKsQmNtSfUCkp1jKOr
+	8e2t4FarIIBMFedbHSye2rNgzGeUtUSwAG6vvsT7h+EyQYmhZ/VBEnGYO9Xx/zEcfgxAaTsz1en
+	Je5uvhLymgA8nbqM7MDkoUsFD+znLLBPKBdFYFf3ZXUFOIaqwcjbrByPdKnnUZav8vgrF0G+eA9
+	n0R8LsFkVn6s2ipxQjXhLwYXUclc9P0C+DLDsbrc7gkwfS6KwKZiGsQFKcPynhzRILY9bogdZKe
+	sVR+tkI5zpz3dl3QwbfRUI+52MK1xcKG260UDwqHeLdYpLpcdiZpca/NXDAyULLtY5ZOEWRnpXx
+	yWpQGb8lgtVvPul0Dv4ChgbJ8WcE9dX/SyGgtiHffcG+mXQ2Rkg==
+X-Google-Smtp-Source: AGHT+IFVrF9qGcfftbYncEW06iy5XAiMiQ3hOwDBsJ3zPsZrl7mbgW3RSnEXaUEwNr4bpkWERC7kyg==
+X-Received: by 2002:a17:907:2d8c:b0:b32:2b60:ee2 with SMTP id a640c23a62f3a-b50ac1c46d7mr1042737066b.41.1760071436973;
+        Thu, 09 Oct 2025 21:43:56 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b55d2a76499sm142021466b.0.2025.10.09.21.43.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 09 Oct 2025 21:43:56 -0700 (PDT)
+Message-ID: <abae9f0b-e1c6-4258-9c99-5efc9a8ce736@gmail.com>
+Date: Fri, 10 Oct 2025 06:43:55 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] Last call for Walnascar patches
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
+ "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+References: <6822ecae-ec76-4cc2-84d1-b2aa7efe0698@gmail.com>
+ <DB5PR02MB102138E2023F0AF2403B2ECAAEFEEA@DB5PR02MB10213.eurprd02.prod.outlook.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <DB5PR02MB102138E2023F0AF2403B2ECAAEFEEA@DB5PR02MB10213.eurprd02.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 04:26:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120470
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 04:44:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120471
 
-From: Vijay Anusuri <vanusuri@mvista.com>
 
-Upstream patch: https://gitlab.freedesktop.org/poppler/poppler/-/commit/f54b815672117c250420787c8c006de98e8c7408
-
-Reference: https://ubuntu.com/security/CVE-2025-43718
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
----
- .../poppler/poppler/CVE-2025-43718.patch      | 31 +++++++++++++++++++
- .../poppler/poppler_23.04.0.bb                |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch
-
-diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch
-new file mode 100644
-index 0000000000..dd3b9c8306
---- /dev/null
-+++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch
-@@ -0,0 +1,31 @@
-+From f54b815672117c250420787c8c006de98e8c7408 Mon Sep 17 00:00:00 2001
-+From: Albert Astals Cid <aacid@kde.org>
-+Date: Wed, 26 Mar 2025 11:26:32 +0100
-+Subject: [PATCH] Make sure regex doesn't stack overflow by limiting it
-+
-+Happens with very long pdfsubver strings when compiled with
-+-fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -flto=auto
-+
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/f54b815672117c250420787c8c006de98e8c7408]
-+CVE: CVE-2025-43718
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ poppler/PDFDoc.cc | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/poppler/PDFDoc.cc b/poppler/PDFDoc.cc
-+index a7c2e24..a779def 100644
-+--- a/poppler/PDFDoc.cc
-++++ b/poppler/PDFDoc.cc
-+@@ -482,7 +482,7 @@ static PDFSubtypePart pdfPartFromString(PDFSubtype subtype, const std::string &p
-+ 
-+ static PDFSubtypeConformance pdfConformanceFromString(const std::string &pdfsubver)
-+ {
-+-    const std::regex regex("PDF/(?:A|X|VT|E|UA)-[[:digit:]]([[:alpha:]]+)");
-++    const std::regex regex("PDF/(?:A|X|VT|E|UA)-[[:digit:]]([[:alpha:]]{1,3})");
-+     std::smatch match;
-+     PDFSubtypeConformance pdfConf = subtypeConfNone;
-+ 
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-index 7a6666936e..c7287f42c5 100644
---- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
-@@ -19,6 +19,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://CVE-2025-52886-0001.patch \
-            file://CVE-2025-52886-0002.patch \
-            file://CVE-2025-50420.patch \
-+           file://CVE-2025-43718.patch \
-            "
- SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
- 
--- 
-2.25.1
+On 10/9/25 23:43, Peter Kjellerstedt wrote:
+>> -----Original Message-----
+>> From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.openembedded.org> On Behalf Of Gyorgy Sarvari via lists.openembedded.org
+>> Sent: den 9 oktober 2025 19:09
+>> To: openembedded-devel@lists.openembedded.org
+>> Subject: [oe] Last call for Walnascar patches
+>>
+>> Hello,
+>>
+>> The last merge for Walnascar branch of meta-oe is planned soon - I
+>> intend to submit the PR early next week.
+>>
+>> If there is something you would like to get into it still, please send
+>> it by the end of Friday, tomorrow.
+>>
+>> Thank you.
+> Where can we see what you have staged for Walnascar?
+>
+> //Peter
+>
+Here:
+https://git.openembedded.org/meta-openembedded-contrib/log/?h=stable/walnascar-nut
 
 
