@@ -1,419 +1,103 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE2B2CAC5BB
-	for <webhook@archiver.kernel.org>; Fri, 10 Oct 2025 10:22:35 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web11.5987.1760091751988540931
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EBFD0CCA476
+	for <webhook@archiver.kernel.org>; Fri, 10 Oct 2025 10:31:15 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.5851.1760092269109437173
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Oct 2025 03:22:32 -0700
+ Fri, 10 Oct 2025 03:31:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=csYXaeTI;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-b07d4d24d09so350107166b.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 03:22:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760091750; x=1760696550; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=KWOePHEYkukp3C/nxsEOtR48+LdnjYxFzUqCMldQdSk=;
-        b=csYXaeTISp4zhGZNqf0hnnRnIuQhCutLMDadzhgUIauMGCSiaBUXcEA09GsmCZp5E/
-         iU5eqRtGrromsItH8SiNh/2P4Lby38O+1wPi+hDUJqJvkxlj3Ugl8xh6rokKTESYzXsb
-         pHylBDX6xI8zvhkaxVQX3z2SYTNxyodnc7Ipy+aMhs8VSt/ZrunA/W3mDNzhHtHlzz3w
-         LiL/gJC1BAgcP0F/auQQxhc+wmTZ2sKrI2a4WIfvVGoTC5lwZFrKqH2DtUyI9NzVuWiD
-         Hqhb7VuUQsOVKGAIGPceIn1XB6SUcPBCJS6tJjKJEbJHYpY2CtsGvpk9l8enEVcSy0MI
-         hwVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760091750; x=1760696550;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=KWOePHEYkukp3C/nxsEOtR48+LdnjYxFzUqCMldQdSk=;
-        b=bqdQtD/+/qTNEKm2hIBywgVhKMNE4y3AfdSbvdtAHrzFWCb4zFxI6quQf9j4HWbp0E
-         7ToN9fP+Af0PzSYbtlUkAxJumoBRoiOKAy0Fm+BGMQhpj6U4nhjpSgCITzM1AhPxgD1R
-         MerawxOKnMYwsXHQkcVfrWRHT3lRs+lvzX8KI12llmTvwgxqZpN5Ym7HX6NIbhdt+DpQ
-         RuzPhCsKjNTbN5x2f7eYqdVdCX3g3iUGAzgfg7GEN/eDsOsJcEPz2r4PDjdbEJcr1tyj
-         /uh3GV1PIlxdUfKFj+npH8s4vkuzvClYJrCAGla3Q7lWT3b/tUVMLK/c+xj55iLm6T6G
-         fSXQ==
-X-Gm-Message-State: AOJu0YziLyBtkeIbLHFHS7crSmoFtGgU3OLYsQ8IDQeYSycj+NXUvice
-	4TgeCurQRQ2XZ9mIcJ6g36iLqVfjxZtxv1+UvViEiTh7izYtxdmHfa/2
-X-Gm-Gg: ASbGncsGa7MN7hBl0oytZ7Jmsm4oO/N+t0ueKPZG3WsyZ8hWSgu1DEaTLxZRa83/H7w
-	y5UBFJ3Qy0aR7SXQ9DXLwLj6mowv9j/4ISv1iAco5mXSgQU4iPKK6zDqeYobajj0UuvLI4WEaPn
-	mZ2nDsuxkNZhW3Y1szwX6OncFx3AT7aNlWGdq61YdrlGMFDDQ9Nyx50JzsXeFgRHpXVFa5yI7/w
-	4mgAN5u4AwXke0RJWIqFISd9lVz4AUqc9eaRp8bB5jRHVLV5ckfkelOp51Z/9ttuVmpvJDCObcT
-	i4YtjtjhC6JdJAUWWHnJ+RP8iOTz586wK708PzS1HIlVSceIyR7LVY/jpCIaMacSikq9NtataIV
-	iao09UiWwfYecW4cmvsQInb6DIRhIa/Giu1+PsfhvCXCnZVnM1g==
-X-Google-Smtp-Source: AGHT+IELeKmN1ROAPkS69YoRnRBucPe98mULZZt2vsNV0IsyonFSx8gSYI+46IoHQ2zw3oDipjCjOA==
-X-Received: by 2002:a17:907:9449:b0:b47:de64:df26 with SMTP id a640c23a62f3a-b50ac1c0c04mr1122223466b.35.1760091749952;
-        Fri, 10 Oct 2025 03:22:29 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b55d5cac043sm199408966b.13.2025.10.10.03.22.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 10 Oct 2025 03:22:29 -0700 (PDT)
-Message-ID: <6b68f3e8-4dc8-47e1-8ad7-05ce2157adb0@gmail.com>
-Date: Fri, 10 Oct 2025 12:22:28 +0200
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=OTbw2gNi;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2378ccb1a6=changqing.li@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59A9KBFo1414195
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 03:31:08 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=WzTebZPme1KAmOR6f2+8
+	Cx3squTxVmBdSDaFqAdu8Qw=; b=OTbw2gNi1bv8rdi1o5Wn36laAnTGrHqkaHU4
+	jhnKVPTjvScokuD6ubYjS6Hw0Hn0HeI7731Zc6F+3g3q46K0+YRA48tU25uT2Zht
+	KcGf8hxUfBxg/mfvO2HAGm9oOMM0v0QRwBBJGwXgTOaBgSHQbTMyiR3zJRYDSXpH
+	nvhs1ox61mivt113oiES6hEODF+pPhjprZi68DXYifPRfA9mP253TG/xyUQ45+1H
+	S7Q8anVW9Q3Py7N4EeJB9m1Ixi14sV6A6uU/P748I0jUOlQ7lPMtNGLO8Vkk+TUc
+	ra6Abl3xFK2QKE7BKbfXr/GK3WolHZM+4S6CQ0b9LWKVbeFzbg==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49nx2ua0mx-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 03:31:08 -0700 (PDT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.59; Fri, 10 Oct 2025 03:31:07 -0700
+Received: from pek-lpg-core6.wrs.com (10.11.232.110) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
+ 15.1.2507.59 via Frontend Transport; Fri, 10 Oct 2025 03:31:07 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] cdrkit: fix reproducibility issue
+Date: Fri, 10 Oct 2025 18:31:06 +0800
+Message-ID: <20251010103106.2808487-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe][meta-oe][walnascar][PATCH 4/4] hdf5: patch CVE-2025-6269
-To: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20251009225931.3902783-1-ankur.tyagi85@gmail.com>
- <20251009225931.3902783-4-ankur.tyagi85@gmail.com>
- <1ef692b1-cf4d-4e38-8993-c9792b363d28@gmail.com>
- <CADySD0FmOiKqGfBWPQe78+UFyqNLtEmj0m85HZ_zHbVKN4GmkQ@mail.gmail.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <CADySD0FmOiKqGfBWPQe78+UFyqNLtEmj0m85HZ_zHbVKN4GmkQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDEwMDA2MSBTYWx0ZWRfX3QZ2f4LgXab5
+ 0L9UCEqul5dDj5OBRkowcFMTG0C2EEr30TYA729wqi+7Fyl7Ev/Y81ym6d740nJHMbcNtCFrEsz
+ IILyM0CYrmJfnMaBqgLkcQ6bD9O/5rdtf/qzGh3R7i0RYECZMGesj61tA3sYSsXoZuIE0RRi8YP
+ FG8dxVSOMXFfd1ErD723TIPpyOjsbeCf5inxXdIYTMX4Vzs5ycXyzViRDHehau05zYsa9t3Xj0G
+ kQgABVoO19ggMuAh9BNMTq1FtHvJKiIOBa1Csf85BxKHC/YX2JrgdODiCwPRiETWdied7Uxv9hr
+ dLyxWyD5CNMdBmrpy3EN1tMNO0NeJ7kgKNrSq+m/ZOwtcXdq5/wq6A6IzegSo8IXGU5jzGzZ3hs
+ jCpHr1P7XRMLz0dntoKT+rDmUBZjYQ==
+X-Authority-Analysis: v=2.4 cv=ZMnaWH7b c=1 sm=1 tr=0 ts=68e8e06c cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=x6icFKpwvdMA:10 a=t7CeM3EgAAAA:8 a=GCL6OueXA7Dzrn8mMJcA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: fo0qvDbjrYy5-7ADh6ppyOTi7RnRfMga
+X-Proofpoint-ORIG-GUID: fo0qvDbjrYy5-7ADh6ppyOTi7RnRfMga
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-10_02,2025-10-06_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 impostorscore=0 phishscore=0 spamscore=0 lowpriorityscore=0
+ adultscore=0 clxscore=1015 priorityscore=1501 bulkscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510020000 definitions=main-2510100061
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 10:22:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120474
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 10:31:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120475
 
-On 10/10/25 11:03, Ankur Tyagi wrote:
-> On Fri, Oct 10, 2025 at 9:22 PM Gyorgy Sarvari <skandigraun@gmail.com> wrote:
->> Is OSV-2023-77 a prerequisite for the mentioned CVE? Or is it just a bonus?
->>
-> H5C__decode_cache_image_header() signature was changed as part of OSV
-> fix which was needed to cherry-pick CVE fix.
-> Although I could have worked around that but decided to keep OSV fix.
+From: Changqing Li <changqing.li@windriver.com>
 
-Gotcha, thanks for the clarification.
+Normally CMake uses the build tree for the RPATH when building
+executables etc on systems that use RPATH.  This will make the buildpath
+included in the binaries and not reproducible, so disable RPATHs.
 
->> On 10/10/25 00:59, Ankur Tyagi via lists.openembedded.org wrote:
->>> Details https://nvd.nist.gov/vuln/detail/CVE-2025-6269
->>>
->>> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
->>> ---
->>>  .../0004-CVE-2025-6269-OSV-2023-77.patch      | 294 ++++++++++++++++++
->>>  meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |   1 +
->>>  2 files changed, 295 insertions(+)
->>>  create mode 100644 meta-oe/recipes-support/hdf5/files/0004-CVE-2025-6269-OSV-2023-77.patch
->>>
->>> diff --git a/meta-oe/recipes-support/hdf5/files/0004-CVE-2025-6269-OSV-2023-77.patch b/meta-oe/recipes-support/hdf5/files/0004-CVE-2025-6269-OSV-2023-77.patch
->>> new file mode 100644
->>> index 0000000000..4f155559bc
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-support/hdf5/files/0004-CVE-2025-6269-OSV-2023-77.patch
->>> @@ -0,0 +1,294 @@
->>> +From dfbbcfa5e8038813c99bc8bc1aa4926335c11df1 Mon Sep 17 00:00:00 2001
->>> +From: aled-ua <bugbuster.cc@gmail.com>
->>> +Date: Wed, 15 Jan 2025 15:02:25 -0600
->>> +Subject: [PATCH] CVE-2025-6269 OSV-2023-77
->>> +
->>> +The GitHub issue #5579 included several security vulnerabilities in function
->>> +H5C__reconstruct_cache_entry().
->>> +
->>> +This PR addressed them by:
->>> +- adding buffer size argument to the function
->>> +- adding buffer overflow checks
->>> +- adding input validations
->>> +- releasing allocated resource on failure
->>> +
->>> +These changes addressed the crashes reported.  However, there is a skiplist
->>> +crash during the unwinding process that has to be investigated.
->>> +
->>> +CVE: CVE-2025-6269
->>> +Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/7f27ba8c3a8483c3d7e5e2cb21fefb2c7563422d]
->>> +Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/3914bb7f7ec7105d8bfbeb3aebd92e867cff5b70]
->>> +
->>> +(cherry picked from commit 7f27ba8c3a8483c3d7e5e2cb21fefb2c7563422d)
->>> +(cherry picked from commit 3914bb7f7ec7105d8bfbeb3aebd92e867cff5b70)
->>> +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
->>> +---
->>> + src/H5Cimage.c | 95 ++++++++++++++++++++++++++++++++++++++------------
->>> + src/H5Ocont.c  |  5 +--
->>> + 2 files changed, 76 insertions(+), 24 deletions(-)
->>> +
->>> +diff --git a/src/H5Cimage.c b/src/H5Cimage.c
->>> +index ec1af78..b97be22 100644
->>> +--- a/src/H5Cimage.c
->>> ++++ b/src/H5Cimage.c
->>> +@@ -118,7 +118,8 @@ do {                                                       \
->>> + /* Helper routines */
->>> + static size_t H5C__cache_image_block_entry_header_size(const H5F_t *f);
->>> + static size_t H5C__cache_image_block_header_size(const H5F_t *f);
->>> +-static herr_t H5C__decode_cache_image_header(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **buf);
->>> ++static herr_t H5C__decode_cache_image_header(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **buf,
->>> ++                                             size_t buf_size);
->>> + #ifndef NDEBUG /* only used in assertions */
->>> + static herr_t H5C__decode_cache_image_entry(const H5F_t *f, const H5C_t *cache_ptr, const uint8_t **buf,
->>> +                                             unsigned entry_num);
->>> +@@ -131,7 +132,8 @@ static void   H5C__prep_for_file_close__compute_fd_heights_real(H5C_cache_entry_
->>> + static herr_t H5C__prep_for_file_close__setup_image_entries_array(H5C_t *cache_ptr);
->>> + static herr_t H5C__prep_for_file_close__scan_entries(const H5F_t *f, H5C_t *cache_ptr);
->>> + static herr_t H5C__reconstruct_cache_contents(H5F_t *f, H5C_t *cache_ptr);
->>> +-static H5C_cache_entry_t *H5C__reconstruct_cache_entry(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **buf);
->>> ++static H5C_cache_entry_t *H5C__reconstruct_cache_entry(const H5F_t *f, H5C_t *cache_ptr, hsize_t *buf_size,
->>> ++                                                       const uint8_t **buf);
->>> + static herr_t             H5C__write_cache_image_superblock_msg(H5F_t *f, bool create);
->>> + static herr_t             H5C__read_cache_image(H5F_t *f, H5C_t *cache_ptr);
->>> + static herr_t             H5C__write_cache_image(H5F_t *f, const H5C_t *cache_ptr);
->>> +@@ -299,7 +301,7 @@ H5C__construct_cache_image_buffer(H5F_t *f, H5C_t *cache_ptr)
->>> +         /* needed for sanity checks */
->>> +         fake_cache_ptr->image_len = cache_ptr->image_len;
->>> +         q                         = (const uint8_t *)cache_ptr->image_buffer;
->>> +-        status                    = H5C__decode_cache_image_header(f, fake_cache_ptr, &q);
->>> ++        status = H5C__decode_cache_image_header(f, fake_cache_ptr, &q, cache_ptr->image_len + 1);
->>> +         assert(status >= 0);
->>> +
->>> +         assert(NULL != p);
->>> +@@ -1269,7 +1271,7 @@ H5C__cache_image_block_header_size(const H5F_t *f)
->>> +  *-------------------------------------------------------------------------
->>> +  */
->>> + static herr_t
->>> +-H5C__decode_cache_image_header(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **buf)
->>> ++H5C__decode_cache_image_header(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **buf, size_t buf_size)
->>> + {
->>> +     uint8_t        version;
->>> +     uint8_t        flags;
->>> +@@ -1289,6 +1291,10 @@ H5C__decode_cache_image_header(const H5F_t *f, H5C_t *cache_ptr, const uint8_t *
->>> +     /* Point to buffer to decode */
->>> +     p = *buf;
->>> +
->>> ++    /* Ensure buffer has enough data for signature comparison */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, H5C__MDCI_BLOCK_SIGNATURE_LEN, *buf + buf_size - 1))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, FAIL, "Insufficient buffer size for signature");
->>> ++
->>> +     /* Check signature */
->>> +     if (memcmp(p, H5C__MDCI_BLOCK_SIGNATURE, (size_t)H5C__MDCI_BLOCK_SIGNATURE_LEN) != 0)
->>> +         HGOTO_ERROR(H5E_CACHE, H5E_BADVALUE, FAIL, "Bad metadata cache image header signature");
->>> +@@ -2372,6 +2378,7 @@ H5C__reconstruct_cache_contents(H5F_t *f, H5C_t *cache_ptr)
->>> + {
->>> +     H5C_cache_entry_t *pf_entry_ptr;        /* Pointer to prefetched entry */
->>> +     H5C_cache_entry_t *parent_ptr;          /* Pointer to parent of prefetched entry */
->>> ++    hsize_t            image_len;           /* Image length */
->>> +     const uint8_t     *p;                   /* Pointer into image buffer */
->>> +     unsigned           u, v;                /* Local index variable */
->>> +     herr_t             ret_value = SUCCEED; /* Return value */
->>> +@@ -2387,10 +2394,11 @@ H5C__reconstruct_cache_contents(H5F_t *f, H5C_t *cache_ptr)
->>> +     assert(cache_ptr->image_len > 0);
->>> +
->>> +     /* Decode metadata cache image header */
->>> +-    p = (uint8_t *)cache_ptr->image_buffer;
->>> +-    if (H5C__decode_cache_image_header(f, cache_ptr, &p) < 0)
->>> ++    p         = (uint8_t *)cache_ptr->image_buffer;
->>> ++    image_len = cache_ptr->image_len;
->>> ++    if (H5C__decode_cache_image_header(f, cache_ptr, &p, image_len + 1) < 0)
->>> +         HGOTO_ERROR(H5E_CACHE, H5E_CANTDECODE, FAIL, "cache image header decode failed");
->>> +-    assert((size_t)(p - (uint8_t *)cache_ptr->image_buffer) < cache_ptr->image_len);
->>> ++    assert((size_t)(p - (uint8_t *)cache_ptr->image_buffer) < image_len);
->>> +
->>> +     /* The image_data_len and # of entries should be defined now */
->>> +     assert(cache_ptr->image_data_len > 0);
->>> +@@ -2402,7 +2410,7 @@ H5C__reconstruct_cache_contents(H5F_t *f, H5C_t *cache_ptr)
->>> +         /* Create the prefetched entry described by the ith
->>> +          * entry in cache_ptr->image_entrise.
->>> +          */
->>> +-        if (NULL == (pf_entry_ptr = H5C__reconstruct_cache_entry(f, cache_ptr, &p)))
->>> ++        if (NULL == (pf_entry_ptr = H5C__reconstruct_cache_entry(f, cache_ptr, &image_len, &p)))
->>> +             HGOTO_ERROR(H5E_CACHE, H5E_SYSTEM, FAIL, "reconstruction of cache entry failed");
->>> +
->>> +         /* Note that we make no checks on available cache space before
->>> +@@ -2558,19 +2566,21 @@ done:
->>> +  *-------------------------------------------------------------------------
->>> +  */
->>> + static H5C_cache_entry_t *
->>> +-H5C__reconstruct_cache_entry(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **buf)
->>> ++H5C__reconstruct_cache_entry(const H5F_t *f, H5C_t *cache_ptr, hsize_t *buf_size, const uint8_t **buf)
->>> + {
->>> +     H5C_cache_entry_t *pf_entry_ptr = NULL; /* Reconstructed cache entry */
->>> +     uint8_t            flags        = 0;
->>> +     bool               is_dirty     = false;
->>> ++    haddr_t            eoa;
->>> ++    bool               is_fd_parent = false;
->>> + #ifndef NDEBUG /* only used in assertions */
->>> +-    bool in_lru       = false;
->>> +-    bool is_fd_parent = false;
->>> +-    bool is_fd_child  = false;
->>> ++    bool in_lru      = false;
->>> ++    bool is_fd_child = false;
->>> + #endif
->>> +-    const uint8_t     *p;
->>> +     bool               file_is_rw;
->>> +-    H5C_cache_entry_t *ret_value = NULL; /* Return value */
->>> ++    const uint8_t     *p;
->>> ++    const uint8_t     *p_end     = *buf + *buf_size - 1; /* Pointer to last valid byte in buffer */
->>> ++    H5C_cache_entry_t *ret_value = NULL;                 /* Return value */
->>> +
->>> +     FUNC_ENTER_PACKAGE
->>> +
->>> +@@ -2590,9 +2600,15 @@ H5C__reconstruct_cache_entry(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **b
->>> +     p = *buf;
->>> +
->>> +     /* Decode type id */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, 1, p_end))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     pf_entry_ptr->prefetch_type_id = *p++;
->>> ++    if (pf_entry_ptr->prefetch_type_id < H5AC_BT_ID || pf_entry_ptr->prefetch_type_id >= H5AC_NTYPES)
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_BADVALUE, NULL, "type id is out of valid range");
->>> +
->>> +     /* Decode flags */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, 1, p_end))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     flags = *p++;
->>> +     if (flags & H5C__MDCI_ENTRY_DIRTY_FLAG)
->>> +         is_dirty = true;
->>> +@@ -2620,19 +2636,31 @@ H5C__reconstruct_cache_entry(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **b
->>> +     pf_entry_ptr->is_dirty = (is_dirty && file_is_rw);
->>> +
->>> +     /* Decode ring */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, 1, p_end))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     pf_entry_ptr->ring = *p++;
->>> +-    assert(pf_entry_ptr->ring > (uint8_t)(H5C_RING_UNDEFINED));
->>> +-    assert(pf_entry_ptr->ring < (uint8_t)(H5C_RING_NTYPES));
->>> ++    if (pf_entry_ptr->ring >= (uint8_t)(H5C_RING_NTYPES))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_BADVALUE, NULL, "ring is out of valid range");
->>> +
->>> +     /* Decode age */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, 1, p_end))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     pf_entry_ptr->age = *p++;
->>> ++    if (pf_entry_ptr->age > H5AC__CACHE_IMAGE__ENTRY_AGEOUT__MAX)
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_BADVALUE, NULL, "entry age is out of policy range");
->>> +
->>> +     /* Decode dependency child count */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, 2, p_end))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     UINT16DECODE(p, pf_entry_ptr->fd_child_count);
->>> +-    assert((is_fd_parent && pf_entry_ptr->fd_child_count > 0) ||
->>> +-           (!is_fd_parent && pf_entry_ptr->fd_child_count == 0));
->>> ++    if (is_fd_parent && pf_entry_ptr->fd_child_count <= 0)
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_BADVALUE, NULL, "parent entry has no children");
->>> ++    else if (!is_fd_parent && pf_entry_ptr->fd_child_count != 0)
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_BADVALUE, NULL, "non-parent entry has children");
->>> +
->>> +     /* Decode dirty dependency child count */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, 2, p_end))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     UINT16DECODE(p, pf_entry_ptr->fd_dirty_child_count);
->>> +     if (!file_is_rw)
->>> +         pf_entry_ptr->fd_dirty_child_count = 0;
->>> +@@ -2640,20 +2668,32 @@ H5C__reconstruct_cache_entry(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **b
->>> +         HGOTO_ERROR(H5E_CACHE, H5E_BADVALUE, NULL, "invalid dirty flush dependency child count");
->>> +
->>> +     /* Decode dependency parent count */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, 2, p_end))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     UINT16DECODE(p, pf_entry_ptr->fd_parent_count);
->>> +     assert((is_fd_child && pf_entry_ptr->fd_parent_count > 0) ||
->>> +            (!is_fd_child && pf_entry_ptr->fd_parent_count == 0));
->>> +
->>> +     /* Decode index in LRU */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, 4, p_end))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     INT32DECODE(p, pf_entry_ptr->lru_rank);
->>> +     assert((in_lru && pf_entry_ptr->lru_rank >= 0) || (!in_lru && pf_entry_ptr->lru_rank == -1));
->>> +
->>> +     /* Decode entry offset */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, H5F_SIZEOF_ADDR(f), p_end))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     H5F_addr_decode(f, &p, &pf_entry_ptr->addr);
->>> +-    if (!H5_addr_defined(pf_entry_ptr->addr))
->>> +-        HGOTO_ERROR(H5E_CACHE, H5E_BADVALUE, NULL, "invalid entry offset");
->>> ++
->>> ++    /* Validate address range */
->>> ++    eoa = H5F_get_eoa(f, H5FD_MEM_DEFAULT);
->>> ++    if (!H5_addr_defined(pf_entry_ptr->addr) || H5_addr_overflow(pf_entry_ptr->addr, pf_entry_ptr->size) ||
->>> ++        H5_addr_ge(pf_entry_ptr->addr + pf_entry_ptr->size, eoa))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_BADVALUE, NULL, "invalid entry address range");
->>> +
->>> +     /* Decode entry length */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, H5F_SIZEOF_SIZE(f), p_end))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     H5F_DECODE_LENGTH(f, p, pf_entry_ptr->size);
->>> +     if (pf_entry_ptr->size == 0)
->>> +         HGOTO_ERROR(H5E_CACHE, H5E_BADVALUE, NULL, "invalid entry size");
->>> +@@ -2674,6 +2714,9 @@ H5C__reconstruct_cache_entry(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **b
->>> +                         "memory allocation failed for fd parent addrs buffer");
->>> +
->>> +         for (u = 0; u < pf_entry_ptr->fd_parent_count; u++) {
->>> ++
->>> ++            if (H5_IS_BUFFER_OVERFLOW(p, H5F_SIZEOF_ADDR(f), p_end))
->>> ++                HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +             H5F_addr_decode(f, &p, &(pf_entry_ptr->fd_parent_addrs[u]));
->>> +             if (!H5_addr_defined(pf_entry_ptr->fd_parent_addrs[u]))
->>> +                 HGOTO_ERROR(H5E_CACHE, H5E_BADVALUE, NULL, "invalid flush dependency parent offset");
->>> +@@ -2689,6 +2732,8 @@ H5C__reconstruct_cache_entry(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **b
->>> + #endif /* H5C_DO_MEMORY_SANITY_CHECKS */
->>> +
->>> +     /* Copy the entry image from the cache image block */
->>> ++    if (H5_IS_BUFFER_OVERFLOW(p, pf_entry_ptr->size, p_end))
->>> ++        HGOTO_ERROR(H5E_CACHE, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     H5MM_memcpy(pf_entry_ptr->image_ptr, p, pf_entry_ptr->size);
->>> +     p += pf_entry_ptr->size;
->>> +
->>> +@@ -2703,14 +2748,20 @@ H5C__reconstruct_cache_entry(const H5F_t *f, H5C_t *cache_ptr, const uint8_t **b
->>> +     /* Sanity checks */
->>> +     assert(pf_entry_ptr->size > 0 && pf_entry_ptr->size < H5C_MAX_ENTRY_SIZE);
->>> +
->>> +-    /* Update buffer pointer */
->>> ++    /* Update buffer pointer and buffer len */
->>> ++    *buf_size -= (hsize_t)(p - *buf);
->>> +     *buf = p;
->>> +
->>> +     ret_value = pf_entry_ptr;
->>> +
->>> + done:
->>> +-    if (NULL == ret_value && pf_entry_ptr)
->>> ++    if (NULL == ret_value && pf_entry_ptr) {
->>> ++        if (pf_entry_ptr->image_ptr)
->>> ++            H5MM_xfree(pf_entry_ptr->image_ptr);
->>> ++        if (pf_entry_ptr->fd_parent_count > 0 && pf_entry_ptr->fd_parent_addrs)
->>> ++            H5MM_xfree(pf_entry_ptr->fd_parent_addrs);
->>> +         pf_entry_ptr = H5FL_FREE(H5C_cache_entry_t, pf_entry_ptr);
->>> ++    }
->>> +
->>> +     FUNC_LEAVE_NOAPI(ret_value)
->>> + } /* H5C__reconstruct_cache_entry() */
->>> +diff --git a/src/H5Ocont.c b/src/H5Ocont.c
->>> +index 621095a..180b115 100644
->>> +--- a/src/H5Ocont.c
->>> ++++ b/src/H5Ocont.c
->>> +@@ -93,6 +93,9 @@ H5O__cont_decode(H5F_t *f, H5O_t H5_ATTR_UNUSED *open_oh, unsigned H5_ATTR_UNUSE
->>> +         HGOTO_ERROR(H5E_OHDR, H5E_NOSPACE, NULL, "memory allocation failed");
->>> +
->>> +     /* Decode */
->>> ++
->>> ++    cont->chunkno = 0;
->>> ++
->>> +     if (H5_IS_BUFFER_OVERFLOW(p, H5F_sizeof_addr(f), p_end))
->>> +         HGOTO_ERROR(H5E_OHDR, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     H5F_addr_decode(f, &p, &(cont->addr));
->>> +@@ -101,8 +104,6 @@ H5O__cont_decode(H5F_t *f, H5O_t H5_ATTR_UNUSED *open_oh, unsigned H5_ATTR_UNUSE
->>> +         HGOTO_ERROR(H5E_OHDR, H5E_OVERFLOW, NULL, "ran off end of input buffer while decoding");
->>> +     H5F_DECODE_LENGTH(f, p, cont->size);
->>> +
->>> +-    cont->chunkno = 0;
->>> +-
->>> +     /* Set return value */
->>> +     ret_value = cont;
->>> +
->>> diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
->>> index 540c8459ea..6d2d439460 100644
->>> --- a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
->>> +++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
->>> @@ -18,6 +18,7 @@ SRC_URI = " \
->>>      file://0001-CVE-2025-2923.patch \
->>>      file://0002-CVE-2025-2924.patch \
->>>      file://0003-CVE-2025-2925.patch \
->>> +    file://0004-CVE-2025-6269-OSV-2023-77.patch \
->>>  "
->>>  SRC_URI[sha256sum] = "019ac451d9e1cf89c0482ba2a06f07a46166caf23f60fea5ef3c37724a318e03"
->>>
->>>
->>> -=-=-=-=-=-=-=-=-=-=-=-
->>> Links: You receive all messages sent to this group.
->>> View/Reply Online (#120458): https://lists.openembedded.org/g/openembedded-devel/message/120458
->>> Mute This Topic: https://lists.openembedded.org/mt/115680895/6084445
->>> Group Owner: openembedded-devel+owner@lists.openembedded.org
->>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
->>> -=-=-=-=-=-=-=-=-=-=-=-
->>>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
+index 16b15f745e..80b5cd527e 100644
+--- a/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
++++ b/meta-oe/recipes-multimedia/cdrkit/cdrkit_1.1.11.bb
+@@ -24,8 +24,10 @@ SRC_URI[sha256sum] = "d1c030756ecc182defee9fe885638c1785d35a2c2a297b4604c0e0dcc7
+ inherit cmake
+ 
+ DEPENDS = "libcap file bzip2"
+-RDEPENDS:dirsplit = "perl"
+ 
++EXTRA_OECMAKE = "-DCMAKE_SKIP_BUILD_RPATH=ON"
++
++RDEPENDS:dirsplit = "perl"
+ RDEPENDS:${PN}-dev = ""
+ 
+ PACKAGES =+ "dirsplit genisoimage icedax wodim"
+-- 
+2.34.1
 
 
