@@ -2,71 +2,68 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60FCCCCD185
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61007CCD18D
 	for <webhook@archiver.kernel.org>; Fri, 10 Oct 2025 17:47:42 +0000 (UTC)
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com [209.85.128.65])
- by mx.groups.io with SMTP id smtpd.web10.11228.1760109533498912659
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com [209.85.128.67])
+ by mx.groups.io with SMTP id smtpd.web10.11213.1760109476597971027
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Oct 2025 08:18:53 -0700
+ Fri, 10 Oct 2025 08:17:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=EDdjdOB3;
- spf=pass (domain: smile.fr, ip: 209.85.128.65, mailfrom: corentin.guillevic@smile.fr)
-Received: by mail-wm1-f65.google.com with SMTP id 5b1f17b1804b1-46e61ebddd6so22940265e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 08:18:53 -0700 (PDT)
+ dkim=pass header.i=@smile.fr header.s=google header.b=plf2srUV;
+ spf=pass (domain: smile.fr, ip: 209.85.128.67, mailfrom: corentin.guillevic@smile.fr)
+Received: by mail-wm1-f67.google.com with SMTP id 5b1f17b1804b1-46e326e4e99so16433465e9.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 08:17:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1760109532; x=1760714332; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
+        d=smile.fr; s=google; t=1760109475; x=1760714275; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=+bnK+whqHeHOBV1DMZVf9fOmFUOImbhhWemsLWVPZuw=;
-        b=EDdjdOB3n4TinMK1ANEauF/G8jy+m8svFESo1AVJU/VOEotvUBZMKOydkVvtOoa2T6
-         1rVrEfI1P8teFGOSTPiKp48aZBWQXTinv6NUhyrdvObLMpodaQ1Mcuoerb/cT13rozs6
-         Rgecou5VNaey0D4vKIxkg2Oc87zRok12FPzVM=
+        b=plf2srUVR8a5uWQcnwq+DfU9WuyKYucO+Xi7REagRqBvA3uXQJyv03nyo+tsf5sSPG
+         lOV1s5MO5kQm3x+SpT8E+JhigowuR05alLGUjnY4iFEW3SZy8F9uV7GmkrNEc/f456qt
+         QyocxtJixKXa8dRu6RcmpWHr1lukkKYdC8/nk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760109532; x=1760714332;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
+        d=1e100.net; s=20230601; t=1760109475; x=1760714275;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
         bh=+bnK+whqHeHOBV1DMZVf9fOmFUOImbhhWemsLWVPZuw=;
-        b=Nx19HcVmSvbsz5dqdqLnFHkRoI33QmVA4KcFlMCIXKK9V3t8FAP8FOYlCu+rOwahoz
-         PCrrrIg9ZyxY+pwUNn+Whc7ANmIkYYHYrTvEsQdUAzeLH/xNE2cw2lxwHckkSQYARFcq
-         w/tIiAH4RhQa4nAqAqu5dUeMepdMOPSv+29NfUYHNHbEK6CtkANlQeM4k6Gb+D+VRYdj
-         v5c1GmeNIBuJuaEEfYw1zWAYBHHQ1LtJOTe2b1oGcqw7GGmpgV5J15iSKlk0ZJXXOo2E
-         fOgAGFHaYhuRVwKOURs5HoJSkZBgFOUta0spl5b1u7+tnqafE3QuzbrvqKQKpgFfLKJ/
-         yVkg==
-X-Gm-Message-State: AOJu0YwN7WtDmXDD9UW4OF+8VvrMA6MPKxYRbbT4FVBZK7Lf83LVOG5k
-	JT5K93XttHVUo2YMJfYN1RkaMnmNeSp6qyuvUht96IZ/eet+T3Wq5rkjTfJwMxgUtYmqrTXbw7d
-	47cn7PEUjmL+s
-X-Gm-Gg: ASbGncsMEMsQt1V5U2u9Nb7W+47vRun6dn5V+4nH9tDMj31UkyVWx1Dt8nOUY0NzdhO
-	dlhDnLhnTBQSbtu+Ie3AxIc9ffrBCjeEnQEC9bOBzFunntxK1oxrEQBpp19gmpvihdVYG9Bbz2r
-	i6B5AanN3LDtDfygLip7YPhdQq5AxkdpbpR1Z0AgzvRPTzfeBHXiy25IM3Fy+6ItfyUCjVQV96a
-	FGbCuDB+/By2gIGksRI1NLbjHIjYQd3DrPeXL1sww1W9UK6dVTS9RpFUc2kYTPJKJPasRp/dFT1
-	AFkxLlkyDleEP+XJW56L/KSiZJTWvtwMXTUpgEXibRVoAncPXjGtP3CM3wWzt9aZp3Ci+2YiKvW
-	OcGu9a+zdYhfnlWdPVXYQpm/BzOqUKryE1efkVnj4Id1euSWY+ou45O7gXjvwDknptwbWR5G233
-	I1B5bXl5XogAuYVYJ0nX1gS04C/puODaxURGGMz1fxSWCeYho7+UcZfTh9
-X-Google-Smtp-Source: AGHT+IGXoYp0YaoAsMSfMdqSt6v/u9sCAmBrp5oTbwxwN7wz3oMSOMkE0EG2DAwPjoiUUx1c11VWfQ==
-X-Received: by 2002:a05:600c:c110:b0:46f:b42e:e3a0 with SMTP id 5b1f17b1804b1-46fb42ee4d2mr26295005e9.41.1760109531791;
-        Fri, 10 Oct 2025 08:18:51 -0700 (PDT)
+        b=k0YtNb4EyBlwYqTpcyNTrhfZkp4q2qVhNKbpOx4O2Q+gegsF7D3uHuK2rrXLehXBN1
+         R1fBFQQUvdVDdpI6pkts+K8i3DoHrYBf2kg5y8lYjLNzi0prAVqLoL4zymF+JXF0mNDX
+         b52oFI6sOySrcB9hLY4MxJXnaHOFABZHKcE1n0bPkto8R+/w3UH10V7CN4AOPpoQuD+F
+         zIuNyl++AKEiJFXT6F3vixMizvQBun8Rh/iOZ9Q0b+PwHg9NFF9rujfHfYIWLN7eTmEd
+         tTp4m9u0mwK79rwVqq0UYdGfDYgD92mVdlx6dAtDsNdNJkWSiEs3ZOeSEQRcEk68Skze
+         Y9pw==
+X-Gm-Message-State: AOJu0YxjDiXBGSwyfBdCT2D60twUTtCE5/7Gcuus/mFV4b1zgZj87Q8F
+	1dyLXGVISlHgZ1BkIc4LUph4xgBYQHVr5mhNtAp4vmE4iDFhyXj3FW3meJbBrAEv8c0DxORR2Ib
+	ivKZRQ+CpWlx4
+X-Gm-Gg: ASbGncu0eces4GIhcTizqyuW3dQ0Cj8imgIBsN0FwufKWbfJTUZap6K0WBsdeEF55x1
+	kixdIGs+UVykWJ7S7PBeItgQ42Kr15Y4Y98h2pSA2TTGaioPTcqZsRp1ykYwiJp8sjLE4HRVJMx
+	Dp/rM5m0qxwOn1r3TOy3Nnjt17YZVW97EI44sSyEWA1Z1jMdXFcZqZ9ODoKt5uFvz79tPTNesao
+	FIrtBTgQLSD4ZDMcdm0ZIj2tVw+W56VRIfDXO9ioMwBq/lDdN7DHeoKRxEyUsxTIL5bVF3ZzlDg
+	94Z3F1y7xgGVTt0Wx2w4JK5XKA/15fStom6ram+8tjnf8HbYSS7Mija+gaCXnqXi7vKsZj7NHLU
+	gRsxW69auFi3Ydm1zD2sch26rerYbpHkFfQZ8gZWYl1xZPKuZolOab+XqWPhEhKtTACsvjo5t7h
+	dLfyDmWW5uRpQM0ozpSLNfA+2jliZYJdw29fHswtXWkYJzxA==
+X-Google-Smtp-Source: AGHT+IGM/7Q4UoDd85pkZJumvzj4HSXq10yNyjJy19m97ZGgpbggxjxNJihNsHMvV1bVO7R/ov6PQA==
+X-Received: by 2002:a5d:588c:0:b0:3f4:5bda:2710 with SMTP id ffacd0b85a97d-425829b0578mr10242526f8f.9.1760109474892;
+        Fri, 10 Oct 2025 08:17:54 -0700 (PDT)
 Received: from heaven.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-426ce57d404sm4828730f8f.3.2025.10.10.08.18.51
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-426ce57d404sm4828730f8f.3.2025.10.10.08.17.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Oct 2025 08:18:51 -0700 (PDT)
+        Fri, 10 Oct 2025 08:17:54 -0700 (PDT)
 From: "Corentin Guillevic" <corentin.guillevic@smile.fr>
 To: openembedded-devel@lists.openembedded.org
 Cc: Corentin Guillevic <corentin.guillevic@smile.fr>
-Subject: [meta-oe][PATCH] libblockdev: improve reproducibility
-Date: Fri, 10 Oct 2025 17:17:52 +0200
-Message-ID: <20251010151752.779032-2-corentin.guillevic@smile.fr>
+Subject: [PATCH] libblockdev: improve reproducibility
+Date: Fri, 10 Oct 2025 17:17:51 +0200
+Message-ID: <20251010151752.779032-1-corentin.guillevic@smile.fr>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20251010151752.779032-1-corentin.guillevic@smile.fr>
-References: <20251010151752.779032-1-corentin.guillevic@smile.fr>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 17:47:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120484
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120483
 
 The --with-smart option behind the feature "smart" relies on the drivedb.h
 header, provided by smartmontools package (/usr/share/smartmontools/drivedb.h).
