@@ -1,155 +1,132 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3054CAC5BB
-	for <webhook@archiver.kernel.org>; Fri, 10 Oct 2025 04:24:33 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web11.1325.1760070266518490310
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D948ACAC5BB
+	for <webhook@archiver.kernel.org>; Fri, 10 Oct 2025 04:26:53 +0000 (UTC)
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web10.1243.1760070406662623931
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Oct 2025 21:24:26 -0700
+ Thu, 09 Oct 2025 21:26:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ExsN/NRD;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-782e93932ffso1532094b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 21:24:26 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=gngahgll;
+ spf=pass (domain: mvista.com, ip: 209.85.210.171, mailfrom: vanusuri@mvista.com)
+Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-77f5d497692so2134559b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Oct 2025 21:26:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760070266; x=1760675066; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1760070405; x=1760675205; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Fkh6gxPLJO2kxuZp4gfxRwpklCldZ4TyzkM1zye8I44=;
-        b=ExsN/NRDRp+3kQ3hnLuvLegKwHOiLdRdnT/8z+OXLKt8SXWGm+l/qQik+CtPXM5HDu
-         fBulWB25EFsSQsh6dYOVS4kQTU+VGkzIOuR8DAZQxnto8bZWjW/TZnGN1noy/NXpN5dC
-         8PNoSK0NuQS/v5EdZnBsACleipMCKecYkZL4HSSvgA2j6ILTvhHgn6TqycntkXMLW6dL
-         Btg2IkSTUj7WJHo5c+TcnbF/SflBgPPKJL+mZutpy4awkBfM/RUk4J6aBP0mMNLl82xS
-         DtjgtknIcwU2WS8cWi5Wzd+xEIQHkeNZsmtwAvW3IWkTMbelPSG6kZBiUlf09C1QJTpy
-         Hlvg==
+        bh=od/lURtTLjshECf6ilgsKuS/Drt5zrc7LdyuidBQcRs=;
+        b=gngahgllT37Q/a/jRxMpwsp9XYY9NwkJpQ0a2eZXS0KU9Mpm/xD6XABwoyKDnxLrgF
+         2bRkDybrKQSvpIbrllemqq4szuEKtxQANpO8s+Q/YqSjA0HwI5O4HGiaZsZ+TSG13bPf
+         neiqluHspS3HuUELSb7/gnx3I5xsJJewNYqy4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760070266; x=1760675066;
+        d=1e100.net; s=20230601; t=1760070405; x=1760675205;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Fkh6gxPLJO2kxuZp4gfxRwpklCldZ4TyzkM1zye8I44=;
-        b=PbeVa7Ua9BkyY+QcpgnvGTop2wQHW6Q1wTq2Lprf3DI9Yvd9DOvbCBZlkaK3b3s+R/
-         hWU0km5Kclm9SkpWspr3osbSejspAegnxKJxbhMb8yq7A0Y1BfQoNCykv5g8yOlDatzS
-         qVrfneeQxfYsTtKsirqwxTWHOby38zO7zHgf2DiMtMQC4qpYablyamL9zmvwt4FG4Z3p
-         RsNktPok3vEZN09fqgVK+oxoPGCuD6vhawtkwo4FcuYyP4q7WIMztOg4MCrVs3utOQkc
-         AaXsorY4FLc14bCkwm5CuqyPsItqM0mmyoR346CVDCs98RVCTgdMjLu4KWtpc497+/YS
-         rC0A==
-X-Gm-Message-State: AOJu0Yw2h6IyF1cY2UJ0xndUhUP7cCDMMKnlj7gf297efc/RflE2h+Xh
-	i46Ksp8zdKUsspQ07JFn4QJe+1xsBh9ZE4uPaXAPviyBdDXf3EnpH6bhk9ZXLA==
-X-Gm-Gg: ASbGncsbIXyfhOQ72DUjuVuAeK3dtllCFeChERaIDIksWgeHRLdLVUr9L3rpsT+bfy3
-	WH9DMER+EV5q1ooDPq7cDR0U61GNW71R/498pp+BqzlLTPI3x2QdiMwdZp+iIqv5zsgJJK3Ltym
-	Rp7aXiVWIdPx6cVRYKs2pLmq2Kr8yMnQZI4Q9RNKFUK+2/UON3iNu/OKRJNAmN+aVv+yplgQhii
-	Pcev36V+m1qfPraL+r1A7JGmWyg68CMIB1rGHCLouBYEPe2oHdTh35Tj+U9RDbbqJqUP8O1VcTI
-	k1MbAbsc9ytmkEWBfj2qJXx6jugcHXpyTa5QsKpeKNLanwWBBQhx0JOo2796kHDnRWNkP7PJDix
-	iJXxrL0HTe1US5+NdrVsBP40hWR7OHq6TcBp1EQZ5OqMEzhCG+htWntfrcVkZ+UIzmw==
-X-Google-Smtp-Source: AGHT+IFoZ/l+UFpRM5ZCsSopViW/KvUpSDD+ezlsWXhoSzHb3tUOrLXh7lQRzq3XqzKjay4gQ1rA1g==
-X-Received: by 2002:a05:6a20:244c:b0:2fa:516e:26c7 with SMTP id adf61e73a8af0-32da81303dcmr12587987637.18.1760070265557;
-        Thu, 09 Oct 2025 21:24:25 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b678de09cb3sm1207876a12.18.2025.10.09.21.24.23
+        bh=od/lURtTLjshECf6ilgsKuS/Drt5zrc7LdyuidBQcRs=;
+        b=skdXYqg4+HVcrXbWGjyFFlUVol3D5cLl2Lg8xWXBYbnfNkiXV4cU7hMT+/328b7hSV
+         XbYFwHPMSFpi6/5+7grfiS40gm3nLwdS7K3I2+CzNJzmkVIGZ8MlGvDC6zL4jdJX2hru
+         vsihfGtmbU3jM+B8NzQ9MeKUgbrycrjPe6MUyIwVNocf02AtSebdg4DyjpWRg9yFEj4f
+         m1qBUU/ErSxoxf/edymuAATC5UuFOAmOKcvEMR281yKyoWScY2B6AoxYyLDKvNCXbu0J
+         52/+J/GywNzk4kTJoOxtPC/yV+yMeS30aWuioSlXr4WWsw9Owwt8iuoNsrovZ7ByDONg
+         FNPQ==
+X-Gm-Message-State: AOJu0YychcTssQhYywkormLLlLb6UhpfHMJnh/nnp1VSjcwA4G301ZC+
+	WmOh1nHtL5DTQ7iVl5xmccXOJJKS+W9MAV5JTEONgMDmOvQb9GLYH/Ay4yvyFDCXWuRE4ySYrxd
+	B72i2wCI=
+X-Gm-Gg: ASbGncsxhhO5b2VoFZWXgxwiKcpwqd3kKd8uor7Y0n57zsykaMAPp/wvNRdfU3dwB2r
+	neEmDHV3VmTkpn4jPaxm4MBPjPT7KJz9I9nMNfI27zwp3jH5Hlm31nePFnd9uRS3ij9XM6eEarx
+	NMQPr6ltDBSb/tVU33fna9iMbcYw6TddXqJ1+xVtLo5EUB0U2+0ZZ2cjgrSubXk7p5asSlCyXPk
+	wvNkQD040gegmjCLToCx4F3PYrWz2fPxrSJIBuQZSDz1qs1XY6XP/S8DwL0E4s2VqH4KZfovmcK
+	FQ4mETRMoPJxsCYfPDR6SFhETo3YvkGirSFOIcb7IWXX9bd1PaJzQLOT1NOmPECjcTHgXQfzzwy
+	T3oz7Wqt+8rptcWNZTDxEfswYNf5WFVXu1lMoKwyWtoNpAL8x8GAaqB2P
+X-Google-Smtp-Source: AGHT+IGXi1UdEnPCR6o/sOVM3HRnNj/dI4t0/NX6BpyoQR/gD+HKld+ucRKWKwIMPuJN4KVcTNUtBQ==
+X-Received: by 2002:a05:6a00:c8c:b0:781:19e1:c4c8 with SMTP id d2e1a72fcca58-793858fb48amr10479627b3a.9.1760070405336;
+        Thu, 09 Oct 2025 21:26:45 -0700 (PDT)
+Received: from localhost.localdomain ([2401:4900:8fce:7e18:2b21:4b99:f746:367b])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7992b63d90asm1393471b3a.24.2025.10.09.21.26.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Oct 2025 21:24:25 -0700 (PDT)
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+        Thu, 09 Oct 2025 21:26:44 -0700 (PDT)
+From: vanusuri@mvista.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][walnascar][PATCH] tinyproxy: patch CVE-2023-49606
-Date: Fri, 10 Oct 2025 17:24:18 +1300
-Message-ID: <20251010042418.70073-1-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-oe][scarthgap][PATCH] poppler: Fix CVE-2025-43718
+Date: Fri, 10 Oct 2025 09:56:36 +0530
+Message-Id: <20251010042636.104137-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 04:24:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120469
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 04:26:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120470
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2023-49606
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Upstream patch: https://gitlab.freedesktop.org/poppler/poppler/-/commit/f54b815672117c250420787c8c006de98e8c7408
+
+Reference: https://ubuntu.com/security/CVE-2025-43718
+
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- .../tinyproxy/0001-CVE-2023-49606.patch       | 59 +++++++++++++++++++
- .../tinyproxy/tinyproxy_1.11.1.bb             |  1 +
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/0001-CVE-2023-49606.patch
+ .../poppler/poppler/CVE-2025-43718.patch      | 31 +++++++++++++++++++
+ .../poppler/poppler_23.04.0.bb                |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/0001-CVE-2023-49606.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/0001-CVE-2023-49606.patch
+diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch
 new file mode 100644
-index 0000000000..dd10d2cd33
+index 0000000000..dd3b9c8306
 --- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/0001-CVE-2023-49606.patch
-@@ -0,0 +1,59 @@
-+From 982a46347c5939e08ad659858b1ac32361d7ffb8 Mon Sep 17 00:00:00 2001
-+From: rofl0r <rofl0r@users.noreply.github.com>
-+Date: Sun, 5 May 2024 10:37:29 +0000
-+Subject: [PATCH] CVE-2023-49606
++++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch
+@@ -0,0 +1,31 @@
++From f54b815672117c250420787c8c006de98e8c7408 Mon Sep 17 00:00:00 2001
++From: Albert Astals Cid <aacid@kde.org>
++Date: Wed, 26 Mar 2025 11:26:32 +0100
++Subject: [PATCH] Make sure regex doesn't stack overflow by limiting it
 +
-+fix potential UAF in header handling
++Happens with very long pdfsubver strings when compiled with
++-fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -flto=auto
 +
-+https://talosintelligence.com/vulnerability_reports/TALOS-2023-1889
-+
-+this bug was brought to my attention today by the debian tinyproxy
-+package maintainer. the above link states that the issue was known
-+since last year and that maintainers have been contacted, but if
-+that is even true then it probably was done via a private email
-+to a potentially outdated email address of one of the maintainers,
-+not through the channels described clearly on the tinyproxy homepage:
-+
-+> Feel free to report a new bug or suggest features via github issues.
-+> Tinyproxy developers hang out in #tinyproxy on irc.libera.chat.
-+
-+no github issue was filed, and nobody mentioned a vulnerability on
-+the mentioned IRC chat. if the issue had been reported on github or
-+IRC, the bug would have been fixed within a day.
-+
-+CVE: CVE-2023-49606
-+Upstream-Status: Backport [https://github.com/tinyproxy/tinyproxy/commit/12a8484265f7b00591293da492bb3c9987001956]
-+
-+(cherry picked from commit 12a8484265f7b00591293da492bb3c9987001956)
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/f54b815672117c250420787c8c006de98e8c7408]
++CVE: CVE-2025-43718
++Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 +---
-+ src/reqs.c | 9 +++++++--
-+ 1 file changed, 7 insertions(+), 2 deletions(-)
++ poppler/PDFDoc.cc | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/reqs.c b/src/reqs.c
-+index b865190..705ce11 100644
-+--- a/src/reqs.c
-++++ b/src/reqs.c
-+@@ -779,7 +779,7 @@ static int remove_connection_headers (orderedmap hashofheaders)
-+         char *data;
-+         char *ptr;
-+         ssize_t len;
-+-        int i;
-++        int i,j,df;
++diff --git a/poppler/PDFDoc.cc b/poppler/PDFDoc.cc
++index a7c2e24..a779def 100644
++--- a/poppler/PDFDoc.cc
+++++ b/poppler/PDFDoc.cc
++@@ -482,7 +482,7 @@ static PDFSubtypePart pdfPartFromString(PDFSubtype subtype, const std::string &p
 + 
-+         for (i = 0; i != (sizeof (headers) / sizeof (char *)); ++i) {
-+                 /* Look for the connection header.  If it's not found, return. */
-+@@ -804,7 +804,12 @@ static int remove_connection_headers (orderedmap hashofheaders)
-+                  */
-+                 ptr = data;
-+                 while (ptr < data + len) {
-+-                        orderedmap_remove (hashofheaders, ptr);
-++                        df = 0;
-++                        /* check that ptr isn't one of headers to prevent
-++                           double-free (CVE-2023-49606) */
-++                        for (j = 0; j != (sizeof (headers) / sizeof (char *)); ++j)
-++                                if(!strcasecmp(ptr, headers[j])) df = 1;
-++                        if (!df) orderedmap_remove (hashofheaders, ptr);
++ static PDFSubtypeConformance pdfConformanceFromString(const std::string &pdfsubver)
++ {
++-    const std::regex regex("PDF/(?:A|X|VT|E|UA)-[[:digit:]]([[:alpha:]]+)");
+++    const std::regex regex("PDF/(?:A|X|VT|E|UA)-[[:digit:]]([[:alpha:]]{1,3})");
++     std::smatch match;
++     PDFSubtypeConformance pdfConf = subtypeConfNone;
 + 
-+                         /* Advance ptr to the next token */
-+                         ptr += strlen (ptr) + 1;
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-index 4f52ee2ba6..d0232dc636 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-@@ -8,6 +8,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
-            file://tinyproxy.service \
-            file://tinyproxy.conf \
-            file://CVE-2022-40468.patch \
-+           file://0001-CVE-2023-49606.patch \
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+index 7a6666936e..c7287f42c5 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+@@ -19,6 +19,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://CVE-2025-52886-0001.patch \
+            file://CVE-2025-52886-0002.patch \
+            file://CVE-2025-50420.patch \
++           file://CVE-2025-43718.patch \
             "
+ SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
  
- SRC_URI[sha256sum] = "1574acf7ba83c703a89e98bb2758a4ed9fda456f092624b33cfcf0ce2d3b2047"
+-- 
+2.25.1
+
 
