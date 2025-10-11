@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3BA8CCD18E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C93B8CCD184
 	for <webhook@archiver.kernel.org>; Sat, 11 Oct 2025 18:13:44 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web10.5220.1760206422991536274
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.web11.5327.1760206423674628561
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Oct 2025 11:13:43 -0700
+ Sat, 11 Oct 2025 11:13:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ajZiEfGy;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b4c89df6145so500878966b.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 11:13:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=l2JLq74z;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-b40f11a1027so539913166b.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 11:13:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760206421; x=1760811221; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760206422; x=1760811222; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=C8rXraw0/GJaftEuGCQyJFkXR0D0mua3aBvduYMk99Q=;
-        b=ajZiEfGyBApTykxoqZKK62VEJkPKEjku1TL1ICPIHt7C1BkPGZDB7dvGRZFwLHqMa6
-         SlMZ3+/TFGgNkMXVMtx64SwMQRaMuQr8clH4ePvRyvPGEh3vVcEEKUYUZwzMaqz72men
-         RPNvWKmQywlkfouuNreM9pa2jCMGjakEPiTiTi2nLuzRXiEoIUplNoIV1zj1ALzUamHb
-         QAgfo2xSRniYWyT4aZl3F6FHyMKW1Opq2CiTVV2ARIbAgmGHtmwVvCvN9RtcM2eXhyRA
-         HXz6wn6FmNNPebVucv9XQ5XHDZKoh7zmD5zaEpSqrFZpvho9r1QZM0Kd9q8jFQ7gLdy1
-         FmsQ==
+        bh=tMEDUmOZ15AdXvdv72jCMyaFFpRF2buocSwgSsxUMzA=;
+        b=l2JLq74z2PaRTsZ272Zp0XiHHHwgm2zGCxV6pjvaxi//t3Hog3Lrmbia9qGsCm4Gt3
+         g02SQiDamHQmmpIUqH2RzEPtjn68/jFRUcN0xDX2vILEIWL1kIpoISQwKAAFTDrImCSe
+         C8wi4KXq8YMYuiE2RomurL0cXZQMcC3F6i+TZDiSMts8E2c4ye4S5pr71wVFmiHSuR8O
+         O9fiVQ7V3rqhvHPbkS4Itz7AbNdnfz0Fshxka/kWntZZbrG6hnFyKIUs8QPdh76xrx80
+         oF1eNKz4vEogf9+pKPu+sw+YHYZjRCxZeNCxRiQNIBy6AsatSY2ZkKT5vFr5DFNPC3CI
+         +FpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760206421; x=1760811221;
+        d=1e100.net; s=20230601; t=1760206422; x=1760811222;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=C8rXraw0/GJaftEuGCQyJFkXR0D0mua3aBvduYMk99Q=;
-        b=XvZCkt4KGlHfcwt15k02oWbGBCurSjrF+ivnKRBEjJC1+bs5cXo+0I976AK7eaIlq5
-         5cARqNes5ik6lTN1I4f2yUe+gnYRnwgEZrwL6Cf8wIFvSeax/1U//Hj3/2eJkUz4DHXL
-         IVkiCy3XkHuQH9ErCRWzBgavOujYzDgNa0hOhOyRGl7n1KRCS3Rbfc/TCBgLk9E0iZDR
-         zCshjz5Q00hA8xb8ImfU0PHrwq8a/eOAlLwY2HvIdOHCCw5VupWTNr81HxF9WD0NpTOg
-         6d2p6s1DM1l4Nhu8LvboU0QacyVKy26/W9SuaDCDdu+1Q/QIu8MnCVGU0tHV+6GEAqEi
-         uobw==
-X-Gm-Message-State: AOJu0Ywotoiapg0m/YRObAXHipOnnLidwAtvrlWKcdBaA8RCE8gunwNR
-	8VJU0hAo+K1i8scChiXJZ3Wi1bJRtjGwrmEGhyIb/WaLK9UfRwqNtRVAra5pVw==
-X-Gm-Gg: ASbGncttIh5PYysbEMv265++js+/P/emCqrly5YNKq1mF29jhj9tQ9V4nk11jRGhBtQ
-	ci66hqFVyv7mTAYNDF3/VlCh2yQoO/Tp34L4gWc9L6nE8Q3nultyPy8LgoWwzs+NcPoAKczBJhI
-	OrspSA1JQ5wQmPPdAfRIqW583paaXh/V/ZZAZn+eKltcHb//tzlcu6H0hAm7+PwDuve4WC9Gu+4
-	ewMsJpXop/JJEQZD+G25gD6/pVpb3gdlp4KGJTxvogVH41XLoAW8WcoMQO2S8e1NkamVNYps1Da
-	yJfNprvv9zPyP5DFgppl1jx5rq5ypsyl6+2ZLNuINyETZzH7n8s0gpwwfeJnzubVCJ6tjdL8vj6
-	YPzssvyc3Pobt1Fe4MYIjrOXw2Wpe7U7Deh3Bo5o=
-X-Google-Smtp-Source: AGHT+IFTgYO9b0Rd6dKZdjkqmKDS/e3eLT2iB7xJzs8D9l9xr/UrXhLYgpLHhkHktu8qow7fihN4lg==
-X-Received: by 2002:a17:907:d06:b0:b2d:830a:8c09 with SMTP id a640c23a62f3a-b50ac6d0efamr1438992466b.44.1760206421280;
+        bh=tMEDUmOZ15AdXvdv72jCMyaFFpRF2buocSwgSsxUMzA=;
+        b=j2D52jNrja4Gjva0knDxdrO2MBYriN+kdU1AGjOJjgzkOEAoEAGJ2RmXMswLz4qUK0
+         AEUokEXLBE/3U/OT/QCi4s+z+xWZutx/3a7DGtFbtutdr7cmvPiiSUN3ALh3rcN1DRxp
+         ukOsr3m+zNLvy8GrXTBeEybPXK7teh+y4wSdJ5WST57fls1IxrUjOozwsTho/I19fP+S
+         lqtlKEoRDD26ff4meD8D5qmUrv/CA0kWuyF7ig02Vs56Oa6fjN7+JPbLqkZ1oEQWMzBh
+         fvlmdnFp9HMFsWlShIjWreaPAPplG7YQkNjChlgq1kbk299eUdX98pJrOUl3ussIlL5w
+         RkGA==
+X-Gm-Message-State: AOJu0YwkBhrEYunHvDkmNOM0pCtUZIFg/ZPlRufWx9QdRaDKBR18kBqa
+	hOIQALiOE0SOiDpPtT5v1rTRDZf6yv7Ll1vnsHjdDMMPeTaZ6qWfdqKkX4cdLA==
+X-Gm-Gg: ASbGnctkhx9euO103KGqpzGZs8owX8lVeXHYEN7PeAToeSeZHifBjSXEGuUMRp8WGFy
+	UFHp3Ypy0YdwummiWSQ12Y+3n12HzT0DFlOr34CMMN4vF8DTN/FGyp4oIdDc18BAe9Vr5zmotgA
+	8Q2EOtKLo31JKI1J12jAxe5P1DPjs5FsaT5H5vL4PrOiL3i4QjGDV6p+f+V0tkmN1KL/lM5uzxn
+	WDnr9A/0CKmuIkVBmTPCOWeQeIrXcCDawAsXuc6Q+Wzjz2Wj9icuwGMgEHz4HMI/fbBfPif+Ra6
+	wICnPuccPoRPM1qAGUCO8Tya1W0iPhbtTVwXI0pfAUzuQ5veUO+KcpKrCbbUZPr2V80agEsLdvF
+	eI7Kx/9yOO1aodnLDdl+KuHI0ozpF1KmwJfX6pRv+Wea1IXcSVQ==
+X-Google-Smtp-Source: AGHT+IGJ3nnayflylc+QMGTzniQYUcky+l+tVjD8Ohnk5/6cScdl/mTh2OLtp/8XRh2ops3+KG9aQQ==
+X-Received: by 2002:a17:907:7e96:b0:b3d:d6be:4cbe with SMTP id a640c23a62f3a-b50aa8a9063mr1857016266b.18.1760206421924;
         Sat, 11 Oct 2025 11:13:41 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b55d5cad8adsm547156166b.7.2025.10.11.11.13.40
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b55d5cad8adsm547156166b.7.2025.10.11.11.13.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Oct 2025 11:13:40 -0700 (PDT)
+        Sat, 11 Oct 2025 11:13:41 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 02/10] freerdp3: patch CVE-2024-32040
-Date: Sat, 11 Oct 2025 20:13:31 +0200
-Message-ID: <20251011181339.2127670-2-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 03/10] freerdp3: patch CVE-2024-32458
+Date: Sat, 11 Oct 2025 20:13:32 +0200
+Message-ID: <20251011181339.2127670-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251011181339.2127670-1-skandigraun@gmail.com>
 References: <20251011181339.2127670-1-skandigraun@gmail.com>
@@ -67,63 +67,153 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 18:13:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120501
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120502
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2024-32040
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-32458
 
-Pick the patch that is marked to resolve the related github advisory.
+Pick the commit that is marked to resolve the related github advisory.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../freerdp/freerdp3/CVE-2024-32040.patch     | 29 +++++++++++++++++++
- .../recipes-support/freerdp/freerdp3_3.4.0.bb |  1 +
- 2 files changed, 30 insertions(+)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32040.patch
+ .../freerdp/freerdp3/CVE-2024-32458.patch     | 119 ++++++++++++++++++
+ .../recipes-support/freerdp/freerdp3_3.4.0.bb |   1 +
+ 2 files changed, 120 insertions(+)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32458.patch
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32040.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32040.patch
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32458.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32458.patch
 new file mode 100644
-index 0000000000..10b89e577f
+index 0000000000..a9b51221d4
 --- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32040.patch
-@@ -0,0 +1,29 @@
-+From f29088d17903aa8e58073b9811dc8a72f94cf4fb Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32458.patch
+@@ -0,0 +1,119 @@
++From 3033c4d69afbb23f577cf6962314613ef96782fd Mon Sep 17 00:00:00 2001
 +From: akallabeth <akallabeth@posteo.net>
-+Date: Tue, 16 Apr 2024 08:26:37 +0200
-+Subject: [PATCH] fix missing check
++Date: Tue, 16 Apr 2024 08:42:52 +0200
++Subject: [PATCH] fix missing input length checks
 +
-+in nsc_rle_decode abort if there are more bytes to be read then there
-+are left.
-+
-+CVE: CVE-2024-32040
-+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/d58cbc96aced4d082abf92b41a415a891c7ea309]
++CVE: CVE-2024-32458
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/9da3f236985207378abe64bc401cecd8566e4542]
 +
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ libfreerdp/codec/nsc.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ libfreerdp/codec/planar.c | 54 +++++++++++++++++++++++++++++----------
++ 1 file changed, 40 insertions(+), 14 deletions(-)
 +
-+diff --git a/libfreerdp/codec/nsc.c b/libfreerdp/codec/nsc.c
-+index 049b541f1..c2d92e48c 100644
-+--- a/libfreerdp/codec/nsc.c
-++++ b/libfreerdp/codec/nsc.c
-+@@ -160,7 +160,7 @@ static BOOL nsc_rle_decode(const BYTE* in, size_t inSize, BYTE* out, UINT32 outS
-+ 				len |= ((UINT32)(*in++)) << 24U;
++diff --git a/libfreerdp/codec/planar.c b/libfreerdp/codec/planar.c
++index 0ec086269..4b51a023e 100644
++--- a/libfreerdp/codec/planar.c
+++++ b/libfreerdp/codec/planar.c
++@@ -788,18 +788,26 @@ BOOL planar_decompress(BITMAP_PLANAR_CONTEXT* planar, const BYTE* pSrcData, UINT
++ 		rawHeights[3] = nSrcHeight;
++ 	}
++ 
+++	const size_t diff = srcp - pSrcData;
+++	if (SrcSize < diff)
+++	{
+++		WLog_ERR(TAG, "Size mismatch %" PRIu32 " < %" PRIuz, SrcSize, diff);
+++		return FALSE;
+++	}
+++
++ 	if (!rle) /* RAW */
++ 	{
+++
++ 		UINT32 base = planeSize * 3;
++ 		if (cs)
++ 			base = planeSize + planeSize / 2;
++ 
++ 		if (alpha)
++ 		{
++-			if ((SrcSize - (srcp - pSrcData)) < (planeSize + base))
+++			if ((SrcSize - diff) < (planeSize + base))
++ 			{
++-				WLog_ERR(TAG, "Alpha plane size mismatch %" PRIu32 " < %" PRIu32,
++-				         SrcSize - (srcp - pSrcData), (planeSize + base));
+++				WLog_ERR(TAG, "Alpha plane size mismatch %" PRIuz " < %" PRIu32, SrcSize - diff,
+++				         (planeSize + base));
++ 				return FALSE;
 + 			}
 + 
-+-			if (outSize < len)
-++			if ((outSize < len) || (left < len))
++@@ -817,10 +825,9 @@ BOOL planar_decompress(BITMAP_PLANAR_CONTEXT* planar, const BYTE* pSrcData, UINT
++ 		}
++ 		else
++ 		{
++-			if ((SrcSize - (srcp - pSrcData)) < base)
+++			if ((SrcSize - diff) < base)
++ 			{
++-				WLog_ERR(TAG, "plane size mismatch %" PRIu32 " < %" PRIu32,
++-				         SrcSize - (srcp - pSrcData), base);
+++				WLog_ERR(TAG, "plane size mismatch %" PRIu32 " < %" PRIu32, SrcSize - diff, base);
 + 				return FALSE;
++ 			}
 + 
-+ 			outSize -= len;
++@@ -841,8 +848,8 @@ BOOL planar_decompress(BITMAP_PLANAR_CONTEXT* planar, const BYTE* pSrcData, UINT
++ 		if (alpha)
++ 		{
++ 			planes[3] = srcp;
++-			rleSizes[3] = planar_skip_plane_rle(planes[3], SrcSize - (planes[3] - pSrcData),
++-			                                    rawWidths[3], rawHeights[3]); /* AlphaPlane */
+++			rleSizes[3] = planar_skip_plane_rle(planes[3], SrcSize - diff, rawWidths[3],
+++			                                    rawHeights[3]); /* AlphaPlane */
++ 
++ 			if (rleSizes[3] < 0)
++ 				return FALSE;
++@@ -852,22 +859,41 @@ BOOL planar_decompress(BITMAP_PLANAR_CONTEXT* planar, const BYTE* pSrcData, UINT
++ 		else
++ 			planes[0] = srcp;
++ 
++-		rleSizes[0] = planar_skip_plane_rle(planes[0], SrcSize - (planes[0] - pSrcData),
++-		                                    rawWidths[0], rawHeights[0]); /* RedPlane */
+++		const size_t diff0 = (planes[0] - pSrcData);
+++		if (SrcSize < diff0)
+++		{
+++			WLog_ERR(TAG, "Size mismatch %" PRIu32 " < %" PRIuz, SrcSize, diff0);
+++			return FALSE;
+++		}
+++		rleSizes[0] = planar_skip_plane_rle(planes[0], SrcSize - diff0, rawWidths[0],
+++		                                    rawHeights[0]); /* RedPlane */
++ 
++ 		if (rleSizes[0] < 0)
++ 			return FALSE;
++ 
++ 		planes[1] = planes[0] + rleSizes[0];
++-		rleSizes[1] = planar_skip_plane_rle(planes[1], SrcSize - (planes[1] - pSrcData),
++-		                                    rawWidths[1], rawHeights[1]); /* GreenPlane */
+++
+++		const size_t diff1 = (planes[1] - pSrcData);
+++		if (SrcSize < diff1)
+++		{
+++			WLog_ERR(TAG, "Size mismatch %" PRIu32 " < %" PRIuz, SrcSize, diff1);
+++			return FALSE;
+++		}
+++		rleSizes[1] = planar_skip_plane_rle(planes[1], SrcSize - diff1, rawWidths[1],
+++		                                    rawHeights[1]); /* GreenPlane */
++ 
++ 		if (rleSizes[1] < 1)
++ 			return FALSE;
++ 
++ 		planes[2] = planes[1] + rleSizes[1];
++-		rleSizes[2] = planar_skip_plane_rle(planes[2], SrcSize - (planes[2] - pSrcData),
++-		                                    rawWidths[2], rawHeights[2]); /* BluePlane */
+++		const size_t diff2 = (planes[2] - pSrcData);
+++		if (SrcSize < diff2)
+++		{
+++			WLog_ERR(TAG, "Size mismatch %" PRIu32 " < %" PRIuz, SrcSize, diff);
+++			return FALSE;
+++		}
+++		rleSizes[2] = planar_skip_plane_rle(planes[2], SrcSize - diff2, rawWidths[2],
+++		                                    rawHeights[2]); /* BluePlane */
++ 
++ 		if (rleSizes[2] < 1)
++ 			return FALSE;
 diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
-index b07d7d139b..19ba893724 100644
+index 19ba893724..8d41063811 100644
 --- a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
 +++ b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
-@@ -10,6 +10,7 @@ inherit pkgconfig cmake
- SRCREV = "708f3764897e06297469a7b0507b3c9ecc041ad7"
+@@ -11,6 +11,7 @@ SRCREV = "708f3764897e06297469a7b0507b3c9ecc041ad7"
  SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https \
             file://CVE-2024-32039.patch \
-+           file://CVE-2024-32040.patch \
+            file://CVE-2024-32040.patch \
++           file://CVE-2024-32458.patch \
             "
  
  S = "${WORKDIR}/git"
