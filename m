@@ -2,168 +2,99 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54817CCD187
-	for <webhook@archiver.kernel.org>; Sat, 11 Oct 2025 03:04:41 +0000 (UTC)
-Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
- by mx.groups.io with SMTP id smtpd.web11.4327.1760151878592571296
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 592F7CCD183
+	for <webhook@archiver.kernel.org>; Sat, 11 Oct 2025 06:20:52 +0000 (UTC)
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+ by mx.groups.io with SMTP id smtpd.web11.6175.1760163650649213512
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Oct 2025 20:04:38 -0700
+ Fri, 10 Oct 2025 23:20:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ePBG2jK4;
- spf=pass (domain: gmail.com, ip: 74.125.224.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-63470a6f339so2652294d50.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 20:04:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TVDhweeR;
+ spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-27c369f898fso36438375ad.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Oct 2025 23:20:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760151878; x=1760756678; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=KvCOTrV3ncl2WsTOKvYZ6jjwM/tfvcXNEX97BtoNIBA=;
-        b=ePBG2jK4MVpYY+5hx12SU675vLBQwsZpV6qVg0fVA/mzh3vtVSM35MUVpPEVP/xjw7
-         qETIWbErSkX37BTWG7lxXu5nQgvJOcDPR+zoQmlucQUmMVxsTGyRShwxgyXM8nixhmhk
-         zk7oLgT0FPlpZiscD0ith/W5AVS7AhmoPrKtcsDyctzHEvhYDP7vm/Nr0ZQe1j5uGgYh
-         UnaK0ERAPCwAZfN6puV3MYdEdm7vYTyEIQN49TUqXcTiv8lrFVNo8EfNK9twYeyKFZej
-         eitwgTJ5ijCAXwUK0TdSsMbAXkb/mCC1LTznJp9KnHvcYKoY0jrnPYekkp51ngqPml6M
-         GaBg==
+        d=gmail.com; s=20230601; t=1760163650; x=1760768450; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Z/u8/+hqn0Hn32aFb6K0yvQLR/SVwMz9xm6Pd+yXTXE=;
+        b=TVDhweeR+3AMt+FBEkmXP6RqzpUCDzAOcKnrg4UjaK9cpjUSwjz/4Oa+qWLksPmTdf
+         IrWigNWtRtxMM5O2ljX5CSFFUq1X9uyOI/VXaCFZ3fY3ntL1mxu2diioyHbnH68HQsQK
+         2LIaSlGTsMIyzTyBV7DaswDiMsRs1d4HAVMPwm7jl0EDpeEYi471bZq81WkWzA2eaGIy
+         qJZUo5pRuAzfT6mJjiT53UcfS1uJTpdKV379DCAwRD3l0Pu+rFYrredG6j4weL14ayBD
+         IktYE6Ivu7JW7hMlGi3pLUTh9JX/6DXapv945cHD6UrAM9QyannZ4PgkGK/emosfwJD/
+         V87w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760151878; x=1760756678;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=KvCOTrV3ncl2WsTOKvYZ6jjwM/tfvcXNEX97BtoNIBA=;
-        b=EddqZTBhzBBq0CaXXf3zDvy2AxxzdkQ3KiydBjx62Czhy8WviJSsgXHBGozwe+PVVD
-         XB0ufEyCpAPTY6Eq/t61Y7DZ8ayBN/VJvBkqjUBWkwb5bZ4e21/x41aKFcBckLoDpd/f
-         SqP6Qfeho7gwqvgwQVPMjQ4atoJz2dhnTp2B7ITw8Jt1vfWNIzAJZYVfr3lLVsCka4Ef
-         SnWhd6wT1IFnb+d7agZcEqW6bOJiC0QSELxCErZ6jbVcXw4DU0PLA5rQftwMHZHOi0uV
-         PgkpJpuG5s9JEfvEzRqwhMsanigYAL1TN3K8IqLas66tsZgAqYXhFupwaS2XL39SoShV
-         im+A==
-X-Gm-Message-State: AOJu0YxK4KbhgfpBCZjJ6a10ml8l/dV/m3pj9JIf/xmgQxPOljNMLZmm
-	nLSc+nNavSPwcXj6REYNV0dEq+2gWq4d3eiXhI/Wep8BWaGrmzkbw53jipLmQM7OJAqzvsHyu66
-	46cQDfzPY62ziRvVaiDIUgQASl5T8FN8=
-X-Gm-Gg: ASbGnctBL1bczJwLK0PfJ9XH2hm73ZK575v6efplzKd0Alp/qJrvYffRiEfi748dzjj
-	jg1W7HwDwihPYz/hsonNJ15KsN/UQESYfBeiFQo5jLrFedXGW7Uqh13YGcK0HpSJRQ2KW0wffja
-	phOotkUPToz/FH38Ev7F5NorCQpMfI26OYPHJaBoTiXndSXBjxL6KlrtZPXP2AOqsZIk1v+1wZ4
-	THw1rc5byq63XOHmzIje4cwCnqpNoWE6pfy00v2
-X-Google-Smtp-Source: AGHT+IE4Vfbcb4oq10Ut41ZMLGcnEcuh7XXPaMEevvkC+R5ElTkshz6SAhBpiLO2gvRGKpBOArzRACeBfGn5CnhohqI=
-X-Received: by 2002:a05:690c:688d:b0:764:b3c2:826a with SMTP id
- 00721157ae682-780e1559023mr248491507b3.16.1760151877600; Fri, 10 Oct 2025
- 20:04:37 -0700 (PDT)
-MIME-Version: 1.0
-References: <186D1A99E7CAB2E7.15959@lists.openembedded.org>
- <186D4D2D26934862.13356@lists.openembedded.org> <3fb55984-0078-468f-8908-e91ccb23a4de@windriver.com>
-In-Reply-To: <3fb55984-0078-468f-8908-e91ccb23a4de@windriver.com>
+        d=1e100.net; s=20230601; t=1760163650; x=1760768450;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Z/u8/+hqn0Hn32aFb6K0yvQLR/SVwMz9xm6Pd+yXTXE=;
+        b=tNghucBm6gI1y8904yiLeZhJAbsmnWYJw5acah12DEeXN9u2lc3aUYQSklgNA4zoI4
+         rNSUEDYz/O72tlBhlKHUMtTuQyKMzlyyn7Lo+HNtcI1htgK2Pal043jWCRVt/cZXLUgA
+         J2SRdhuSVp+Pligd8GLrpxSUteU4neQmBz/S//BPmw7qE8noa8ozJeIKSCBgvCS2uLkL
+         z/lRDJdWx8zJ5H1vh1xDCR9CT8rjr8x1qjH1kna+a26Nhvk0oqE3bxC07ly7UlGTSZHK
+         tKQ/HnKiJUvq55kH9dkHZbrHXe+D5hMV5Sq7p2odksDmKyVREpKHURhZbByw4PhePfgP
+         oqMg==
+X-Gm-Message-State: AOJu0YxvHpgyQSufRSICiJRJ3hNl74v2JI2Mawep8qtzOHTN/eK3oDsR
+	e0tsmCpDHOC8oOkTt63Yd1iIT/W6ThDCQVeuOaOv+xAP3w1ut3Zfb++nWDbSIcCI
+X-Gm-Gg: ASbGncttILPbvYpEExznOF9nJ/avuj0YVa3tE5sqEx4BHvg231bNIsGfwLfZT0KXobM
+	qxkyNYXOJfGFYsdg/f897WtVyXGFYFV+38+aiY3RLPJRzetoH86aOPq9l7zsvKFzjbNc3UKgN+o
+	t0QvGokj/g3NDJc/2UyJ05FPs6a+s4LEYfSDVsNW6Yw3sBicA7+xtwW3YgeQQ8FQA3gHrfHnPWg
+	lEINv0DqkN4tZV+wKinCsUvSxDTZ9KPMetnNTVZNElVuIZrpqnC8b2awFcVlJdjka0sJXEGPsOe
+	EX+5xkQZd/8CVu0OzLW83g1tyteUs1aL2sYbAij4O/FLWflnu1sfqq5zs2aCHQFH+Br09ESuNK9
+	U81MRBA/gK2Uf9FcYrvHrXqic5VPtNnAydiJ4qGDgWQ==
+X-Google-Smtp-Source: AGHT+IGciFAOujdsdw10J922DulUoKlxOL391cAMZ4OLgZhjUrJ/kpr2Ja0DVsjEiPNdqU0No5xnvg==
+X-Received: by 2002:a17:903:a90:b0:27e:f201:ec90 with SMTP id d9443c01a7336-29027264d78mr191230315ad.25.1760163649677;
+        Fri, 10 Oct 2025 23:20:49 -0700 (PDT)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::4a63])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034f39a4fsm74959645ad.106.2025.10.10.23.20.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 10 Oct 2025 23:20:49 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 10 Oct 2025 20:04:11 -0700
-X-Gm-Features: AS18NWDfjtk8Wnrl1JF3gbFPviNjchEJUtzuUA72RtvOiLp7sRVfPDJC7ZRYzr8
-Message-ID: <CAMKF1souUxpU1-F=od3V92G0FSUg7e_hqiEnyEKYMjUj7NzLAA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH V2] doxygen: fix reproducibility issue of doxygen-src
-To: Changqing Li <changqing.li@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] abseil-cpp: Upgrade to 20250814.1 release
+Date: Fri, 10 Oct 2025 23:20:47 -0700
+Message-ID: <20251011062047.1483273-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.51.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 03:04:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120490
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 06:20:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120491
 
-On Fri, Oct 10, 2025 at 7:04=E2=80=AFPM Changqing Li <changqing.li@windrive=
-r.com> wrote:
->
-> Hi, Khem
->
-> I do 2 changes for this patch,  and I noticed this patch is on master-nex=
-t, could you please help to update it, sorry to bother  you.
->
+Use tarball instead of git fetcher
 
-Thanks for the note, I have taken v2.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../{abseil-cpp_20250512.1.bb => abseil-cpp_20250814.1.bb}  | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-devtools/abseil-cpp/{abseil-cpp_20250512.1.bb => abseil-cpp_20250814.1.bb} (90%)
 
-> Changes in V2:
->
-> * Add space before #ifndef to avoid it is taken as comment, and missed in=
- commit message
->
-> * Remove doxygen-src from OEQA_REPRODUCIBLE_EXCLUDED_PACKAGES
->
-> Thanks
->
-> Changqing
->
-> On 10/11/25 09:58, Changqing Li via lists.openembedded.org wrote:
->
-> From: Changqing Li <changqing.li@windriver.com>
->
-> [ snip of CMakeLists.txt ]
-> BISON_TARGET(constexp
->              ${CMAKE_CURRENT_LIST_DIR}/constexp.y
->              ${GENERATED_SRC}/ce_parse.cpp
->              COMPILE_FLAGS "${YACC_FLAGS}")
-> [ end of snip ]
->
-> bison embeds full paths in its generated headers, eg:
-> bison -o /full/build/path/generated/example.cpp ...
-> The header will include:
->  #ifndef YY_FULL_BUILD_PATH_GENERATED_MSCGEN_LANGUAGE_HPP_INCLUDED
->  #define YY_FULL_BUILD_PATH_GENERATED_MSCGEN_LANGUAGE_HPP_INCLUDED
->
-> This make doxygen-src not reproducible, fix by replacing full build path
->
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->  meta-oe/conf/layer.conf                            |  1 -
->  meta-oe/recipes-devtools/doxygen/doxygen_1.14.0.bb | 10 ++++++++++
->  2 files changed, 10 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-> index 5b9ceb424e..56aea73b15 100644
-> --- a/meta-oe/conf/layer.conf
-> +++ b/meta-oe/conf/layer.conf
-> @@ -138,7 +138,6 @@ OEQA_REPRODUCIBLE_EXCLUDED_PACKAGES +=3D " \
->      dhrystone-src \
->      directfb \
->      directfb-dbg \
-> -    doxygen-src \
->      edid-decode \
->      edid-decode-dbg \
->      editorconfig-core-c-dev \
-> diff --git a/meta-oe/recipes-devtools/doxygen/doxygen_1.14.0.bb b/meta-oe=
-/recipes-devtools/doxygen/doxygen_1.14.0.bb
-> index 512a63549e..73594fc09f 100644
-> --- a/meta-oe/recipes-devtools/doxygen/doxygen_1.14.0.bb
-> +++ b/meta-oe/recipes-devtools/doxygen/doxygen_1.14.0.bb
-> @@ -22,4 +22,14 @@ EXTRA_OECMAKE +=3D "\
->      -DBISON_TARGET_ARG_COMPILE_FLAGS=3D'--no-lines' \
->  "
->
-> +do_install:append() {
-> +    sed -i -e 's;^#ifndef.*GENERATED_SRC_MSCGEN_LANGUAGE_HPP_INCLUDED$;#=
-ifndef GENERATED_SRC_MSCGEN_LANGUAGE_HPP_INCLUDED;g' ${B}/generated_src/msc=
-gen_language.hpp
-> +    sed -i -e 's;^# define.*GENERATED_SRC_MSCGEN_LANGUAGE_HPP_INCLUDED$;=
-# define GENERATED_SRC_MSCGEN_LANGUAGE_HPP_INCLUDED;g' ${B}/generated_src/m=
-scgen_language.hpp
-> +    sed -i -e 's;^#endif.*GENERATED_SRC_MSCGEN_LANGUAGE_HPP_INCLUDED.*$;=
-#endif;g' ${B}/generated_src/mscgen_language.hpp
-> +
-> +    sed -i -e 's;^#ifndef.*GENERATED_SRC_CE_PARSE_HPP_INCLUDED$;#ifndef =
-GENERATED_SRC_CE_PARSE_HPP_INCLUDED;g' ${B}/generated_src/ce_parse.hpp
-> +    sed -i -e 's;^# define.*GENERATED_SRC_CE_PARSE_HPP_INCLUDED$;# defin=
-e GENERATED_SRC_CE_PARSE_HPP_INCLUDED;g' ${B}/generated_src/ce_parse.hpp
-> +    sed -i -e 's;^#endif.*GENERATED_SRC_CE_PARSE_HPP_INCLUDED.*$;#endif;=
-g' ${B}/generated_src/ce_parse.hpp
-> +}
-> +
->  BBCLASSEXTEND =3D "native nativesdk"
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#120487): https://lists.openembedded.org/g/openembedde=
-d-devel/message/120487
-> Mute This Topic: https://lists.openembedded.org/mt/115699816/3616873
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [c=
-hangqing.li@windriver.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250512.1.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250814.1.bb
+similarity index 90%
+rename from meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250512.1.bb
+rename to meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250814.1.bb
+index d4e616a733..1504dacb00 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250512.1.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250814.1.bb
+@@ -7,13 +7,11 @@ SECTION = "libs"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
+ 
+-SRCREV = "76bb24329e8bf5f39704eb10d21b9a80befa7c81"
+-BRANCH = "lts_2025_05_12"
+-SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
++SRC_URI = "https://github.com/abseil/${BPN}/releases/download/${PV}/${BP}.tar.gz \
+            file://0001-absl-always-use-asm-sgidefs.h.patch \
+            file://0002-abseil-ppc-fixes.patch \
+            "
+-
++SRC_URI[sha256sum] = "1692f77d1739bacf3f94337188b78583cf09bab7e420d2dc6c5605a4f86785a1"
+ 
+ inherit cmake
+ 
 
