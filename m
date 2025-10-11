@@ -1,220 +1,713 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D95B3CCA476
-	for <webhook@archiver.kernel.org>; Sat, 11 Oct 2025 20:26:45 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web10.7259.1760214405145128492
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD878CCA476
+	for <webhook@archiver.kernel.org>; Sat, 11 Oct 2025 22:39:06 +0000 (UTC)
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.web10.9280.1760222344570367545
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Oct 2025 13:26:45 -0700
+ Sat, 11 Oct 2025 15:39:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TVx+nPFp;
- spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-b4c89df6145so509596766b.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 13:26:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WgEwO3J9;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-78af743c232so2853466b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 15:39:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760214403; x=1760819203; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=rTmK1Tz89nRdIXr/Xsy7Yblq+dpowLpcbkbMDltuqfc=;
-        b=TVx+nPFpahZWGkC8bXwmpUFRXGMC3omPD/9TIxL4MGHi2E2Oo31I3FL+bwfuNdjxn3
-         67/cIBw2clfVjdF9UeUEATbe6aIP4eFqMo+TQJRMJVKdWyqkHICvldgJVfP78QMXotEL
-         tlkrfLabsSEHQ27d0cxcHXiZcu3tFwIGnhzMSeu4LeULqMjrzBf2KXeEIaduoHqhwRpj
-         2s1i/wxeiY/o7+gi8BkSmcnbpcrKDw0NFR1Ds+qdLoiB2pOYlU6Kke0MtptyZlBr4DLZ
-         s2CU6E8HLxSGw5bYDqMKOhxP8NNNEky2obiwizwHoB2UmUQvursYdWlPh6CjzCU9QGYi
-         vpUg==
+        d=gmail.com; s=20230601; t=1760222344; x=1760827144; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=KD/5Gg+JfxNGyOQfP+qAdzm9iNEkFeeoOqilS2AsN+4=;
+        b=WgEwO3J9eDJ5wsoBmYULRX0B3fZXJis3RPw397UFXo5SZduJRk9/i1gfltZJRcZCEf
+         JjSxeM34IgRcHv6lBSSLgnGYItAXa9ozzvGZxQW97aa7XB6WxqZQiDAS+YRCvqS8Ff8p
+         N1Cc/Oc2lxGeTJBayR5CoBZTXI27xOJ8Mtj+he2j0BulEvQIjkFjePzDItZgs2vFB3Sy
+         FNOJP5iCeDygDASzZI28waSniu1Ughhgc+aS3esatwdjunIwrPRhynTWHdvMzSWlzKht
+         3FKYlbK/3qGCMFWfbQYDwQNPO1G8WuPfjTKC9P0UbAaMJgs/gtPzUFmof+cZs0rfHLoG
+         EQ2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760214403; x=1760819203;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=rTmK1Tz89nRdIXr/Xsy7Yblq+dpowLpcbkbMDltuqfc=;
-        b=F+blAB/4RMdHOAHZM/A5AAYm/OerrfjQyDgHYzcl/HcobBkkNly+GotnReCQ7WVs0g
-         saFKFFnhHpJ76UZI0XmOkOW8Dq4VSdvbaefozliPm09Nzd20uCTg5PIjA489xtV40sZf
-         UyITkaSak2fKIhbDazANMPmJmuGOeraEfabD0XzbsF41iwP2blkwR1z4g3VLF49mkh5n
-         H33JWMn5ARwaq317CYhAeHMPvKK6HvuMAFRL4HWMJrj1v1Jam1vpCoayEIZlJeUitWwq
-         c38uLhj9wN2n1rKeou/TKBuDuxToOqUjm7Kc1JJQ5FAxyW6xRdVoU0Sa4n7+Kg1Luje8
-         5Lmg==
-X-Gm-Message-State: AOJu0YzAdLh0LOJsQ4DwI/361mqXDFaRmoJ+F6n271g1LqnfhKaDN6oi
-	/EpKxRSoMxMeGFHmZN9MTM/gVFMUPVVPs1ajbz+2Qmfg7nnfODV6ahUSUandMw==
-X-Gm-Gg: ASbGnctdhPO2jKtk0gLEDqyHk+UrgzimcENFCNsArMxkLhBe0Xtt7s8MkdM9aeWtVbr
-	IGEE5vwCN9s1Ocwglj1UjQa0gmbPZZxiIQYuOh5sFEeiE4wIUg1HANfGm9eswOVslaqHvAHfhlt
-	W0SAmNn5geG0Y3t8cwpNW+4WUJc/6YQRqkjhtsZ5Td2Kvz6bdrRPryicXnEHTyvQMFe8f5I22dg
-	tnW2eo2Pg/813pTLtON+U+TuseP4FY1wld7+r6X4NIlkaPQCE3sGRWD49rFD7RXZehx3Hkz+Rzi
-	yaJJzrGG8GLtN4+aHF9gLVnL3fJ2fzX3+YXG8vZUwmebtEp5EZxBv9zWny2EWH16QRq8iCMKOWi
-	x1wpRiyAW3ZpahbUEJaekVKa42QWwQm6yA7W1QtTbbH3H4DFPehfVgg0lH6h5
-X-Google-Smtp-Source: AGHT+IEarD1k8QglA1+S2g9fBX21M51feM8I/kxi0IOBD9rRmwjPBgsQAhWIiafuCGpiUTibvF6c3g==
-X-Received: by 2002:a17:906:6944:b0:b57:2b82:732b with SMTP id a640c23a62f3a-b572b82d41emr353003966b.54.1760214403135;
-        Sat, 11 Oct 2025 13:26:43 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b55d65ccfe0sm551892266b.25.2025.10.11.13.26.42
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1760222344; x=1760827144;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=KD/5Gg+JfxNGyOQfP+qAdzm9iNEkFeeoOqilS2AsN+4=;
+        b=oGnlsOmceyabju8nl0OdTWrkr0JfgnfG9x3gWGNyHVKZPdTwnIsNqDmvM0tvhG8iJr
+         3D1zVxW6fnBGrx5gRj/4hGhpUvY+0Mj2iC4N7CJBvKEMYE7oLlQRHhnUPtAnf9doRTeC
+         8V+U8wnMMGoC/PfdNepFVptkegF5MTDyyysmjSscISG8SImztcMvzBqo1rXidsagCxwp
+         BbdJreBekQyNR5s8lGkX7LBVsb6slObDsUW021/+XQngNFx/zKr9xLCThrn8Z9emRKTW
+         jhW1lCOTtRcnAVHV1SSG272vTdDXO4Sf23l1Kpg4MNkmegxdgGk3yS8hjuxRdgw5bjHk
+         zosw==
+X-Gm-Message-State: AOJu0Yw2WAeT9DenLpKI10Ur3L1v5bGrsvgT4cGNZYbnalGFYnicn8C9
+	QXAfeXNLA5LwWihmSX7DVyj9dJsSEfZ6PusJ6mRUQQxFl1BR8nbv+XL4B5aUeDgN
+X-Gm-Gg: ASbGncsVJGoAMNkIduOi2bSW+XBXLfAvx5IMxtkrBWiW3bvxZHEuvvlJC19iEDepmyU
+	UWFdAUba1eHsZs9dQ4Exdkr34nEZP22CgaL0j3WC2S0ICYHOx5ag++G3VnsNlmA+LvwvmehFiH4
+	/JVyLtZClFmBuaioHYos8NmqXx8tkXzgDVNBIxpXIFgeg0BXOGyLPLFJWRuFNXFpnuB/zmugj2b
+	tYcE6AtJMpH0GcilWTSDGof2wfrarPhR+C6QoDx5PFNLmqUF+jei9sUVuZX5kfkYSCWhdXmo6C7
+	99aoLdD+LTNpJeDl0HMG6i390J89VkI5b3eAlDNCD/8kS38gC0rTri8+N3bTMkwKmoA6eOZIlNI
+	zGqLulaBRAzQkvbdnUvQSLt9StgosKXeVSDjbr0c12w==
+X-Google-Smtp-Source: AGHT+IGfun9rVM8F+nEprodZXsYkeQuv7cS/6eneJ5l3Ruu9JtqTTY0Ff7GjuCTLNXmu0ZH54CZePg==
+X-Received: by 2002:a05:6a20:939e:b0:24d:301a:79d0 with SMTP id adf61e73a8af0-32da83db599mr22661465637.38.1760222343389;
+        Sat, 11 Oct 2025 15:39:03 -0700 (PDT)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::4a63])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33b61a392cdsm7574152a91.7.2025.10.11.15.39.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Oct 2025 13:26:42 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Sat, 11 Oct 2025 15:39:02 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] frr: upgrade 10.3 -> 10.4.1
-Date: Sat, 11 Oct 2025 22:26:42 +0200
-Message-ID: <20251011202642.2097864-1-skandigraun@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH] webrtc-audio-processing-2: Fix build with abseil-cpp 202508
+Date: Sat, 11 Oct 2025 15:39:00 -0700
+Message-ID: <20251011223900.1907272-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 20:26:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120510
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 22:39:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120511
 
-Drop the "datacenter" PACKAGECONFIG, because it became obsolete:
-"The --enable-datacenter compile time option is deprecated.  Please modify the init script to pass -F datacenter to the daemons instead."
-
-Note: grpc PACKAGECONFIG seems to be broken (it was broken in the previous version also).
-At the first sight it looks that the application's Makefile enforces c++11 standard,
-but abseil (which is a dependency of grpc) requires at least c++17.
-
-Changelog:
-10.4.1:
-- bgpd: initialize local variable
-- ospfd: Use after free cleanup of lsa
-- vtysh: copy config from file should actually apply
-- Revert PR #18358: BGP evpn testing and bug fixes related to non default EVPN backbone
-- topotests: improve embedded RP test reliability
-- lib, zebra: mark singleton nexthops inactive/active on link state changes for wecmp
-- bgpd: LL next-hop capabilty fixes
-- eigrp: validate hello packets and tlvs better
-- bgpd: Fix compilation error in bgpd module: Update TP_ARGS for bgp
-- bgpd: Ensure addpath does not withdraw selected route in some situations
-- bgpd: [GR] fixed selectionDeferralTimer to display select_defer_time val
-- bgpd: LL next-hop capabilty fixes (round 2)
-- lib: compute link-state zapi message size
-- zebra: Fix buffer overflows found by fuzzing.
-
-10.4:
-- BGP BFD Strict-Mode
-- BGP Link-Local Next Hop Capability [draft-ietf-idr-linklocal-capability]
-- BGP Transparent mode
-- BGP Next Hop Dependent Characteristics Attribute [draft-ietf-idr-entropy-label]
-- IGMP and MLD group/source limits
-- PIM dense and sparse-dense mode support [RFC3973]
-- IGMPv2/MLDv1 immediate leave
-- v4-via-v6 nexthop support for static routes
-- Timeout for vtysh
-- Discover PREF64 in Router Advertisements [RFC8781]
-
-10.3.2:
-- bgpd: correct no form commands
-- bgpd: fix to show exist/non-exist-map in 'show run' properly
-- redhat: make FRR RPM build to work on RedHat 10
-- build: check for libunwind.h, not unwind.h
-- bgpd: use AS4B format for BGP loc-rib messages.
-- bgpd: fix for the validity and the presence of prefixes in the BGP VPN table.
-- bgpd: Force adj-rib-out updates if MRAI is kicked in
-- zebra: Provide SID value when sending SRv6 SID release notify message
-- bgpd: Fix crash when fetching statistics for bgp instance
-- nhrpd: fix crash when accessing invalid memory zone
-- zebra: Initialize RB tree for router tables
-- zebra: fix null pointer dereference in zebra_evpn_sync_neigh_del
-- zebra: fix stale NHG in kernel
-- bgpd: Fix incorrect stripping of transitive extended communities
-- lib: Fix no on-match goto NUM command
-- bgpd: Fix extended community check for IP non-transitive type
-- bgpd: Fix DEREF_OF_NULL.EX.COND in bgp_updgrp_packet
-- lib: revert addition of vtysh_flush() call in vty_out()
-- bgpd: Extract link bandwidth value from extcommunity before using for WCMP
-- Use ipv4 class E addresses (240.0.0.0/4) as connected routes by default
-- bfdd: Set bfd.LocalDiag when transitioning to AdminDown
-- zebra: clean up a json object leak
-- bgpd: Do not try to reuse freed route-maps
-- lib: fix routemap crash
-- bgpd: initialize local variable
-- ospfd: Use after free cleanup of lsa
-- vtysh: copy config from file should actually apply
-- bgpd : Fix compilation error in bgpd module: Update TP_ARGS for bgp
-- bgpd: Ensure addpath does not withdraw selected route in some situations
-- lib, zebra: mark singleton nexthops inactive/active on link state changes for wecmp
-- eigrp: validate hello packets and tlvs better
-- bgpd: [GR] fixed selectionDeferralTimer to display select_defer_time val
-
-10.3.1:
-- Check valid babel port
-- Fix incorrect type assignment in parse_request_subtlv
-- Fix `set evpn gateway-ip ipv[46]` route-map
-- Fix bmp heap use after free on non connected session
-- Fix evpn attributes being dropped on input
-- Fix holdtime not working properly when busy
-- Fix leaked memory when showing some bgp routes
-- Fixed crash upon bgp network import-check command
-- On shutdown free up memory leak found by topotest
-- Prevent crash when issuing a show rpki connections
-- Remove unused defines from bgp_label.h
-- Retain the routes if we do a clear with n-bit set for graceful-restart
-- Set the label for mp_unreach_nlri 0x800000 instead of 0x000000
-- Treat the peer as not active due to bfd down only if established
-- Fix incorrect bestpath reasoning in some situations
-- Fix show bgp vpn rd json
-- Add total path count for bgp net in json output
-- Fix import all adj-rib-in and loc-rib after bmp connects
-- On shutdown prefix/access list memory was being leaked
-- Fix srv6_sid memory leak
-- Free up leaked prefix-list memory on shutdown
-- Create vrf if needed
-- Return duplicate ipv6 prefix-list entry test
-- Return duplicate prefix-list entry test
-- Add hop count validation before forwarding in nhrp_peer_recv()
-- Disable and delete ospfv3 areas that no longer have interfaces or configuration.
-- Fix lsa memory leaks related to graceful restart
-- Fix crash when ospf client connects before doing 'router ospf'
-- Fix for crash during networking restart
-- Fix memory leak on shutdown
-- Initialize gm proxy to false
-- Make docs and rpki optional for rpm package build
-- Make sure zeromq is always disabled
-- Revert - Add option to build pkg without docs and rpki support
-- Add Workaround for inet_ntop replacement which breaks rpms
-- Avoid requesting srv6 sid from zebra when loc and sid block dont match
-- Add more tests to bgp_rpki_topo1 test
-- Add nb test binary to .gitignore
-- Add route-map evpn set gateway-ip topotest
-- Check if routes are marked as stale and retained with n-bit for gr
-- Fix typo when configuring delayopen timer
-- Fix wait times in test_ospf6_gr_topo1 topotest
-- Use label 0x800000 instead of 0x000000 for bmp tests
-- Use little-endian order for libyang api
-- Fix reload script for srv6 locators and formats
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-protocols/frr/{frr_10.3.bb => frr_10.4.1.bb}     | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-protocols/frr/{frr_10.3.bb => frr_10.4.1.bb} (97%)
+ .../webrtc-audio-processing-2/60.patch        | 619 ++++++++++++++++++
+ .../webrtc-audio-processing-2_2.1.bb          |   1 +
+ 2 files changed, 620 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2/60.patch
 
-diff --git a/meta-networking/recipes-protocols/frr/frr_10.3.bb b/meta-networking/recipes-protocols/frr/frr_10.4.1.bb
-similarity index 97%
-rename from meta-networking/recipes-protocols/frr/frr_10.3.bb
-rename to meta-networking/recipes-protocols/frr/frr_10.4.1.bb
-index f0f3f34ab3..ce455ab8bf 100644
---- a/meta-networking/recipes-protocols/frr/frr_10.3.bb
-+++ b/meta-networking/recipes-protocols/frr/frr_10.4.1.bb
-@@ -10,11 +10,11 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
-                     file://doc/licenses/LGPL-2.1;md5=4fbd65380cdd255951079008b364516c"
- 
- 
--SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.3 \
-+SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.4;tag=frr-${PV} \
-            file://frr.pam \
-            "
- 
--SRCREV = "85cf1ed576deed121751e16a64970f8a652a9e1e"
-+SRCREV = "88f5c06cbc1cc4d62e1cba3e7791f5cea4179ba5"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
- 
-@@ -39,7 +39,6 @@ PACKAGECONFIG[zeromq] = "--enable-zeromq,--disable-zeromq,zeromq"
- PACKAGECONFIG[protobuf] = "--enable-protobuf,--disable-protobuf,protobuf-c-native protobuf-c"
- PACKAGECONFIG[capabilities] = "--enable-capabilities,--disable-capabilities,libcap"
- PACKAGECONFIG[cumulus] = "--enable-cumulus,--disable-cumulus"
--PACKAGECONFIG[datacenter] = "--enable-datacenter,--disable-datacenter"
- PACKAGECONFIG[ospfclient] = "--enable-ospfapi --enable-ospfclient,--disable-ospfapi --disable-ospfclient"
- 
- EXTRA_OECONF:class-native = "--enable-clippy-only"
+diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2/60.patch b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2/60.patch
+new file mode 100644
+index 0000000000..5a4c154060
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2/60.patch
+@@ -0,0 +1,619 @@
++From c8896801dfbfe03b56f85c1533abc077ff74a533 Mon Sep 17 00:00:00 2001
++From: Reilly Brogan <reilly@reillybrogan.com>
++Date: Tue, 19 Aug 2025 14:47:03 -0500
++Subject: [PATCH 1/2] Fix build with abseil-cpp 202508
++
++Upstream-Status: Submitted [https://gitlab.freedesktop.org/pulseaudio/webrtc-audio-processing/-/merge_requests/60]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ webrtc/api/audio/audio_processing.h           | 12 +++++++++
++ webrtc/api/make_ref_counted.h                 | 13 ++++++++++
++ webrtc/api/scoped_refptr.h                    | 15 +++++++++++
++ .../aec_dump/aec_dump_factory.h               | 15 +++++++++++
++ .../aec_dump/null_aec_dump_factory.cc         | 25 +++++++++++++++++++
++ .../audio_processing/audio_processing_impl.cc |  9 +++++++
++ .../audio_processing/audio_processing_impl.h  |  9 +++++++
++ 7 files changed, 98 insertions(+)
++
++diff --git a/webrtc/api/audio/audio_processing.h b/webrtc/api/audio/audio_processing.h
++index dca75f2..4580ba9 100644
++--- a/webrtc/api/audio/audio_processing.h
+++++ b/webrtc/api/audio/audio_processing.h
++@@ -28,6 +28,7 @@
++ #include <string>
++ #include <utility>
++ 
+++#include "absl/base/config.h"
++ #include "absl/base/nullability.h"
++ #include "absl/strings/string_view.h"
++ #include "api/array_view.h"
++@@ -632,6 +633,7 @@ class RTC_EXPORT AudioProcessing : public RefCountInterface {
++   // return value of true indicates that the file has been
++   // sucessfully opened, while a value of false indicates that
++   // opening the file failed.
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++   virtual bool CreateAndAttachAecDump(
++       absl::string_view file_name,
++       int64_t max_log_size_bytes,
++@@ -640,6 +642,16 @@ class RTC_EXPORT AudioProcessing : public RefCountInterface {
++       absl::Nonnull<FILE*> handle,
++       int64_t max_log_size_bytes,
++       absl::Nonnull<TaskQueueBase*> worker_queue) = 0;
+++#else
+++  virtual bool CreateAndAttachAecDump(absl::string_view file_name,
+++                                      int64_t max_log_size_bytes,
+++                                      TaskQueueBase* absl_nonnull
+++                                          worker_queue) = 0;
+++  virtual bool CreateAndAttachAecDump(FILE* absl_nonnull handle,
+++                                      int64_t max_log_size_bytes,
+++                                      TaskQueueBase* absl_nonnull
+++                                          worker_queue) = 0;
+++#endif
++ 
++   // TODO(webrtc:5298) Deprecated variant.
++   // Attaches provided webrtc::AecDump for recording debugging
++diff --git a/webrtc/api/make_ref_counted.h b/webrtc/api/make_ref_counted.h
++index b5f4e99..080023a 100644
++--- a/webrtc/api/make_ref_counted.h
+++++ b/webrtc/api/make_ref_counted.h
++@@ -13,6 +13,7 @@
++ #include <type_traits>
++ #include <utility>
++ 
+++#include "absl/base/config.h"
++ #include "absl/base/nullability.h"
++ #include "api/ref_count.h"
++ #include "api/scoped_refptr.h"
++@@ -86,7 +87,11 @@ template <
++     typename std::enable_if<std::is_convertible_v<T*, RefCountInterface*> &&
++                                 std::is_abstract_v<T>,
++                             T>::type* = nullptr>
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++ absl::Nonnull<scoped_refptr<T>> make_ref_counted(Args&&... args) {
+++#else
+++absl_nonnull scoped_refptr<T> make_ref_counted(Args&&... args) {
+++#endif
++   return scoped_refptr<T>(new RefCountedObject<T>(std::forward<Args>(args)...));
++ }
++ 
++@@ -99,7 +104,11 @@ template <
++         !std::is_convertible_v<T*, RefCountInterface*> &&
++             webrtc_make_ref_counted_internal::HasAddRefAndRelease<T>::value,
++         T>::type* = nullptr>
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++ absl::Nonnull<scoped_refptr<T>> make_ref_counted(Args&&... args) {
+++#else
+++absl_nonnull scoped_refptr<T> make_ref_counted(Args&&... args) {
+++#endif
++   return scoped_refptr<T>(new T(std::forward<Args>(args)...));
++ }
++ 
++@@ -113,7 +122,11 @@ template <
++             !webrtc_make_ref_counted_internal::HasAddRefAndRelease<T>::value,
++ 
++         T>::type* = nullptr>
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++ absl::Nonnull<scoped_refptr<FinalRefCountedObject<T>>> make_ref_counted(
+++#else
+++absl_nonnull scoped_refptr<FinalRefCountedObject<T>> make_ref_counted(
+++#endif
++     Args&&... args) {
++   return scoped_refptr<FinalRefCountedObject<T>>(
++       new FinalRefCountedObject<T>(std::forward<Args>(args)...));
++diff --git a/webrtc/api/scoped_refptr.h b/webrtc/api/scoped_refptr.h
++index c6fb560..8c441ff 100644
++--- a/webrtc/api/scoped_refptr.h
+++++ b/webrtc/api/scoped_refptr.h
++@@ -66,6 +66,7 @@
++ #include <cstddef>
++ #include <utility>
++ 
+++#include "absl/base/config.h"
++ #include "absl/base/nullability.h"
++ 
++ namespace webrtc {
++@@ -73,13 +74,19 @@ namespace webrtc {
++ template <class T>
++ class ABSL_NULLABILITY_COMPATIBLE scoped_refptr {
++  public:
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++   using absl_nullability_compatible = void;
+++#endif
++   using element_type = T;
++ 
++   scoped_refptr() : ptr_(nullptr) {}
++   scoped_refptr(std::nullptr_t) : ptr_(nullptr) {}  // NOLINT(runtime/explicit)
++ 
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++   explicit scoped_refptr(absl::Nullable<T*> p) : ptr_(p) {
+++#else
+++  explicit scoped_refptr(T* absl_nullable p) : ptr_(p) {
+++#endif
++     if (ptr_)
++       ptr_->AddRef();
++   }
++@@ -122,7 +129,11 @@ class ABSL_NULLABILITY_COMPATIBLE scoped_refptr {
++     return retVal;
++   }
++ 
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++   scoped_refptr<T>& operator=(absl::Nullable<T*> p) {
+++#else
+++  scoped_refptr<T>& operator=(T* absl_nullable p) {
+++#endif
++     // AddRef first so that self assignment should work
++     if (p)
++       p->AddRef();
++@@ -152,7 +163,11 @@ class ABSL_NULLABILITY_COMPATIBLE scoped_refptr {
++     return *this;
++   }
++ 
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++   void swap(absl::Nonnull<T**> pp) noexcept {
+++#else
+++  void swap(T** absl_nonnull pp) noexcept {
+++#endif
++     T* p = ptr_;
++     ptr_ = *pp;
++     *pp = p;
++diff --git a/webrtc/modules/audio_processing/aec_dump/aec_dump_factory.h b/webrtc/modules/audio_processing/aec_dump/aec_dump_factory.h
++index 0d258a9..14d8b39 100644
++--- a/webrtc/modules/audio_processing/aec_dump/aec_dump_factory.h
+++++ b/webrtc/modules/audio_processing/aec_dump/aec_dump_factory.h
++@@ -29,6 +29,7 @@ class RTC_EXPORT AecDumpFactory {
++   // The AecDump takes responsibility for `handle` and closes it in the
++   // destructor. A non-null return value indicates that the file has been
++   // sucessfully opened.
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++   static absl::Nullable<std::unique_ptr<AecDump>> Create(
++       FileWrapper file,
++       int64_t max_log_size_bytes,
++@@ -41,6 +42,20 @@ class RTC_EXPORT AecDumpFactory {
++       absl::Nonnull<FILE*> handle,
++       int64_t max_log_size_bytes,
++       absl::Nonnull<TaskQueueBase*> worker_queue);
+++#else
+++  static absl_nullable std::unique_ptr<AecDump> Create(
+++      FileWrapper file,
+++      int64_t max_log_size_bytes,
+++      TaskQueueBase* absl_nonnull worker_queue);
+++  static absl_nullable std::unique_ptr<AecDump> Create(
+++      absl::string_view file_name,
+++      int64_t max_log_size_bytes,
+++      TaskQueueBase* absl_nonnull worker_queue);
+++  static absl_nullable std::unique_ptr<AecDump> Create(
+++      FILE* absl_nonnull handle,
+++      int64_t max_log_size_bytes,
+++      TaskQueueBase* absl_nonnull worker_queue);
+++#endif
++ };
++ 
++ }  // namespace webrtc
++diff --git a/webrtc/modules/audio_processing/aec_dump/null_aec_dump_factory.cc b/webrtc/modules/audio_processing/aec_dump/null_aec_dump_factory.cc
++index 63929af..658bcee 100644
++--- a/webrtc/modules/audio_processing/aec_dump/null_aec_dump_factory.cc
+++++ b/webrtc/modules/audio_processing/aec_dump/null_aec_dump_factory.cc
++@@ -16,6 +16,7 @@
++ 
++ namespace webrtc {
++ 
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++ absl::Nullable<std::unique_ptr<AecDump>> AecDumpFactory::Create(
++     FileWrapper file,
++     int64_t max_log_size_bytes,
++@@ -37,3 +38,27 @@ absl::Nullable<std::unique_ptr<AecDump>> AecDumpFactory::Create(
++   return nullptr;
++ }
++ }  // namespace webrtc
+++#else
+++absl_nullable std::unique_ptr<AecDump> AecDumpFactory::Create(
+++    FileWrapper file,
+++    int64_t max_log_size_bytes,
+++    TaskQueueBase* absl_nonnull worker_queue) {
+++  return nullptr;
+++}
+++
+++absl_nullable std::unique_ptr<AecDump> AecDumpFactory::Create(
+++    absl::string_view file_name,
+++    int64_t max_log_size_bytes,
+++    TaskQueueBase* absl_nonnull worker_queue) {
+++  return nullptr;
+++}
+++
+++absl_nullable std::unique_ptr<AecDump> AecDumpFactory::Create(
+++    FILE* absl_nonnull handle,
+++    int64_t max_log_size_bytes,
+++    TaskQueueBase* absl_nonnull worker_queue) {
+++  return nullptr;
+++}
+++}  // namespace webrtc
+++
+++#endif
++diff --git a/webrtc/modules/audio_processing/audio_processing_impl.cc b/webrtc/modules/audio_processing/audio_processing_impl.cc
++index a1cba51..1dfe26d 100644
++--- a/webrtc/modules/audio_processing/audio_processing_impl.cc
+++++ b/webrtc/modules/audio_processing/audio_processing_impl.cc
++@@ -19,6 +19,7 @@
++ #include <type_traits>
++ #include <utility>
++ 
+++#include "absl/base/config.h"
++ #include "absl/base/nullability.h"
++ #include "absl/strings/match.h"
++ #include "absl/strings/string_view.h"
++@@ -1787,7 +1788,11 @@ void AudioProcessingImpl::UpdateRecommendedInputVolumeLocked() {
++ bool AudioProcessingImpl::CreateAndAttachAecDump(
++     absl::string_view file_name,
++     int64_t max_log_size_bytes,
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++     absl::Nonnull<TaskQueueBase*> worker_queue) {
+++#else
+++    TaskQueueBase* absl_nonnull worker_queue) {
+++#endif
++   std::unique_ptr<AecDump> aec_dump =
++       AecDumpFactory::Create(file_name, max_log_size_bytes, worker_queue);
++   if (!aec_dump) {
++@@ -1801,7 +1806,11 @@ bool AudioProcessingImpl::CreateAndAttachAecDump(
++ bool AudioProcessingImpl::CreateAndAttachAecDump(
++     FILE* handle,
++     int64_t max_log_size_bytes,
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++     absl::Nonnull<TaskQueueBase*> worker_queue) {
+++#else
+++    TaskQueueBase* absl_nonnull worker_queue) {
+++#endif
++   std::unique_ptr<AecDump> aec_dump =
++       AecDumpFactory::Create(handle, max_log_size_bytes, worker_queue);
++   if (!aec_dump) {
++diff --git a/webrtc/modules/audio_processing/audio_processing_impl.h b/webrtc/modules/audio_processing/audio_processing_impl.h
++index ecdc055..51a2bfb 100644
++--- a/webrtc/modules/audio_processing/audio_processing_impl.h
+++++ b/webrtc/modules/audio_processing/audio_processing_impl.h
++@@ -20,6 +20,7 @@
++ #include <string>
++ #include <vector>
++ 
+++#include "absl/base/config.h"
++ #include "absl/base/nullability.h"
++ #include "absl/strings/string_view.h"
++ #include "api/array_view.h"
++@@ -74,11 +75,19 @@ class AudioProcessingImpl : public AudioProcessing {
++   bool CreateAndAttachAecDump(
++       absl::string_view file_name,
++       int64_t max_log_size_bytes,
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++       absl::Nonnull<TaskQueueBase*> worker_queue) override;
+++#else
+++      TaskQueueBase* absl_nonnull worker_queue) override;
+++#endif
++   bool CreateAndAttachAecDump(
++       FILE* handle,
++       int64_t max_log_size_bytes,
+++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
++       absl::Nonnull<TaskQueueBase*> worker_queue) override;
+++#else
+++      TaskQueueBase* absl_nonnull worker_queue) override;
+++#endif
++   // TODO(webrtc:5298) Deprecated variant.
++   void AttachAecDump(std::unique_ptr<AecDump> aec_dump) override;
++   void DetachAecDump() override;
++-- 
++GitLab
++
++
++From bc838790eeb6066d30f019c2a3516bd2b824a5c8 Mon Sep 17 00:00:00 2001
++From: Reilly Brogan <reilly@reillybrogan.com>
++Date: Tue, 19 Aug 2025 15:25:51 -0500
++Subject: [PATCH 2/2] patches: Track abseil-cpp 202508 support patch
++
++---
++ ...001-Fix-build-with-abseil-cpp-202508.patch | 297 ++++++++++++++++++
++ 1 file changed, 297 insertions(+)
++ create mode 100644 patches/0001-Fix-build-with-abseil-cpp-202508.patch
++
++diff --git a/patches/0001-Fix-build-with-abseil-cpp-202508.patch b/patches/0001-Fix-build-with-abseil-cpp-202508.patch
++new file mode 100644
++index 0000000..06c3794
++--- /dev/null
+++++ b/patches/0001-Fix-build-with-abseil-cpp-202508.patch
++@@ -0,0 +1,297 @@
+++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+++From: Reilly Brogan <reilly@reillybrogan.com>
+++Date: Tue, 19 Aug 2025 14:47:03 -0500
+++Subject: [PATCH] Fix build with abseil-cpp 202508
+++
+++---
+++ webrtc/api/audio/audio_processing.h           | 12 +++++++++
+++ webrtc/api/make_ref_counted.h                 | 13 ++++++++++
+++ webrtc/api/scoped_refptr.h                    | 15 +++++++++++
+++ .../aec_dump/aec_dump_factory.h               | 15 +++++++++++
+++ .../aec_dump/null_aec_dump_factory.cc         | 25 +++++++++++++++++++
+++ .../audio_processing/audio_processing_impl.cc |  9 +++++++
+++ .../audio_processing/audio_processing_impl.h  |  9 +++++++
+++ 7 files changed, 98 insertions(+)
+++
+++diff --git a/webrtc/api/audio/audio_processing.h b/webrtc/api/audio/audio_processing.h
+++index dca75f2..4580ba9 100644
+++--- a/webrtc/api/audio/audio_processing.h
++++++ b/webrtc/api/audio/audio_processing.h
+++@@ -28,6 +28,7 @@
+++ #include <string>
+++ #include <utility>
+++ 
++++#include "absl/base/config.h"
+++ #include "absl/base/nullability.h"
+++ #include "absl/strings/string_view.h"
+++ #include "api/array_view.h"
+++@@ -632,6 +633,7 @@ class RTC_EXPORT AudioProcessing : public RefCountInterface {
+++   // return value of true indicates that the file has been
+++   // sucessfully opened, while a value of false indicates that
+++   // opening the file failed.
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++   virtual bool CreateAndAttachAecDump(
+++       absl::string_view file_name,
+++       int64_t max_log_size_bytes,
+++@@ -640,6 +642,16 @@ class RTC_EXPORT AudioProcessing : public RefCountInterface {
+++       absl::Nonnull<FILE*> handle,
+++       int64_t max_log_size_bytes,
+++       absl::Nonnull<TaskQueueBase*> worker_queue) = 0;
++++#else
++++  virtual bool CreateAndAttachAecDump(absl::string_view file_name,
++++                                      int64_t max_log_size_bytes,
++++                                      TaskQueueBase* absl_nonnull
++++                                          worker_queue) = 0;
++++  virtual bool CreateAndAttachAecDump(FILE* absl_nonnull handle,
++++                                      int64_t max_log_size_bytes,
++++                                      TaskQueueBase* absl_nonnull
++++                                          worker_queue) = 0;
++++#endif
+++ 
+++   // TODO(webrtc:5298) Deprecated variant.
+++   // Attaches provided webrtc::AecDump for recording debugging
+++diff --git a/webrtc/api/make_ref_counted.h b/webrtc/api/make_ref_counted.h
+++index b5f4e99..080023a 100644
+++--- a/webrtc/api/make_ref_counted.h
++++++ b/webrtc/api/make_ref_counted.h
+++@@ -13,6 +13,7 @@
+++ #include <type_traits>
+++ #include <utility>
+++ 
++++#include "absl/base/config.h"
+++ #include "absl/base/nullability.h"
+++ #include "api/ref_count.h"
+++ #include "api/scoped_refptr.h"
+++@@ -86,7 +87,11 @@ template <
+++     typename std::enable_if<std::is_convertible_v<T*, RefCountInterface*> &&
+++                                 std::is_abstract_v<T>,
+++                             T>::type* = nullptr>
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++ absl::Nonnull<scoped_refptr<T>> make_ref_counted(Args&&... args) {
++++#else
++++absl_nonnull scoped_refptr<T> make_ref_counted(Args&&... args) {
++++#endif
+++   return scoped_refptr<T>(new RefCountedObject<T>(std::forward<Args>(args)...));
+++ }
+++ 
+++@@ -99,7 +104,11 @@ template <
+++         !std::is_convertible_v<T*, RefCountInterface*> &&
+++             webrtc_make_ref_counted_internal::HasAddRefAndRelease<T>::value,
+++         T>::type* = nullptr>
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++ absl::Nonnull<scoped_refptr<T>> make_ref_counted(Args&&... args) {
++++#else
++++absl_nonnull scoped_refptr<T> make_ref_counted(Args&&... args) {
++++#endif
+++   return scoped_refptr<T>(new T(std::forward<Args>(args)...));
+++ }
+++ 
+++@@ -113,7 +122,11 @@ template <
+++             !webrtc_make_ref_counted_internal::HasAddRefAndRelease<T>::value,
+++ 
+++         T>::type* = nullptr>
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++ absl::Nonnull<scoped_refptr<FinalRefCountedObject<T>>> make_ref_counted(
++++#else
++++absl_nonnull scoped_refptr<FinalRefCountedObject<T>> make_ref_counted(
++++#endif
+++     Args&&... args) {
+++   return scoped_refptr<FinalRefCountedObject<T>>(
+++       new FinalRefCountedObject<T>(std::forward<Args>(args)...));
+++diff --git a/webrtc/api/scoped_refptr.h b/webrtc/api/scoped_refptr.h
+++index c6fb560..8c441ff 100644
+++--- a/webrtc/api/scoped_refptr.h
++++++ b/webrtc/api/scoped_refptr.h
+++@@ -66,6 +66,7 @@
+++ #include <cstddef>
+++ #include <utility>
+++ 
++++#include "absl/base/config.h"
+++ #include "absl/base/nullability.h"
+++ 
+++ namespace webrtc {
+++@@ -73,13 +74,19 @@ namespace webrtc {
+++ template <class T>
+++ class ABSL_NULLABILITY_COMPATIBLE scoped_refptr {
+++  public:
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++   using absl_nullability_compatible = void;
++++#endif
+++   using element_type = T;
+++ 
+++   scoped_refptr() : ptr_(nullptr) {}
+++   scoped_refptr(std::nullptr_t) : ptr_(nullptr) {}  // NOLINT(runtime/explicit)
+++ 
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++   explicit scoped_refptr(absl::Nullable<T*> p) : ptr_(p) {
++++#else
++++  explicit scoped_refptr(T* absl_nullable p) : ptr_(p) {
++++#endif
+++     if (ptr_)
+++       ptr_->AddRef();
+++   }
+++@@ -122,7 +129,11 @@ class ABSL_NULLABILITY_COMPATIBLE scoped_refptr {
+++     return retVal;
+++   }
+++ 
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++   scoped_refptr<T>& operator=(absl::Nullable<T*> p) {
++++#else
++++  scoped_refptr<T>& operator=(T* absl_nullable p) {
++++#endif
+++     // AddRef first so that self assignment should work
+++     if (p)
+++       p->AddRef();
+++@@ -152,7 +163,11 @@ class ABSL_NULLABILITY_COMPATIBLE scoped_refptr {
+++     return *this;
+++   }
+++ 
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++   void swap(absl::Nonnull<T**> pp) noexcept {
++++#else
++++  void swap(T** absl_nonnull pp) noexcept {
++++#endif
+++     T* p = ptr_;
+++     ptr_ = *pp;
+++     *pp = p;
+++diff --git a/webrtc/modules/audio_processing/aec_dump/aec_dump_factory.h b/webrtc/modules/audio_processing/aec_dump/aec_dump_factory.h
+++index 0d258a9..14d8b39 100644
+++--- a/webrtc/modules/audio_processing/aec_dump/aec_dump_factory.h
++++++ b/webrtc/modules/audio_processing/aec_dump/aec_dump_factory.h
+++@@ -29,6 +29,7 @@ class RTC_EXPORT AecDumpFactory {
+++   // The AecDump takes responsibility for `handle` and closes it in the
+++   // destructor. A non-null return value indicates that the file has been
+++   // sucessfully opened.
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++   static absl::Nullable<std::unique_ptr<AecDump>> Create(
+++       FileWrapper file,
+++       int64_t max_log_size_bytes,
+++@@ -41,6 +42,20 @@ class RTC_EXPORT AecDumpFactory {
+++       absl::Nonnull<FILE*> handle,
+++       int64_t max_log_size_bytes,
+++       absl::Nonnull<TaskQueueBase*> worker_queue);
++++#else
++++  static absl_nullable std::unique_ptr<AecDump> Create(
++++      FileWrapper file,
++++      int64_t max_log_size_bytes,
++++      TaskQueueBase* absl_nonnull worker_queue);
++++  static absl_nullable std::unique_ptr<AecDump> Create(
++++      absl::string_view file_name,
++++      int64_t max_log_size_bytes,
++++      TaskQueueBase* absl_nonnull worker_queue);
++++  static absl_nullable std::unique_ptr<AecDump> Create(
++++      FILE* absl_nonnull handle,
++++      int64_t max_log_size_bytes,
++++      TaskQueueBase* absl_nonnull worker_queue);
++++#endif
+++ };
+++ 
+++ }  // namespace webrtc
+++diff --git a/webrtc/modules/audio_processing/aec_dump/null_aec_dump_factory.cc b/webrtc/modules/audio_processing/aec_dump/null_aec_dump_factory.cc
+++index 63929af..658bcee 100644
+++--- a/webrtc/modules/audio_processing/aec_dump/null_aec_dump_factory.cc
++++++ b/webrtc/modules/audio_processing/aec_dump/null_aec_dump_factory.cc
+++@@ -16,6 +16,7 @@
+++ 
+++ namespace webrtc {
+++ 
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++ absl::Nullable<std::unique_ptr<AecDump>> AecDumpFactory::Create(
+++     FileWrapper file,
+++     int64_t max_log_size_bytes,
+++@@ -37,3 +38,27 @@ absl::Nullable<std::unique_ptr<AecDump>> AecDumpFactory::Create(
+++   return nullptr;
+++ }
+++ }  // namespace webrtc
++++#else
++++absl_nullable std::unique_ptr<AecDump> AecDumpFactory::Create(
++++    FileWrapper file,
++++    int64_t max_log_size_bytes,
++++    TaskQueueBase* absl_nonnull worker_queue) {
++++  return nullptr;
++++}
++++
++++absl_nullable std::unique_ptr<AecDump> AecDumpFactory::Create(
++++    absl::string_view file_name,
++++    int64_t max_log_size_bytes,
++++    TaskQueueBase* absl_nonnull worker_queue) {
++++  return nullptr;
++++}
++++
++++absl_nullable std::unique_ptr<AecDump> AecDumpFactory::Create(
++++    FILE* absl_nonnull handle,
++++    int64_t max_log_size_bytes,
++++    TaskQueueBase* absl_nonnull worker_queue) {
++++  return nullptr;
++++}
++++}  // namespace webrtc
++++
++++#endif
+++diff --git a/webrtc/modules/audio_processing/audio_processing_impl.cc b/webrtc/modules/audio_processing/audio_processing_impl.cc
+++index a1cba51..1dfe26d 100644
+++--- a/webrtc/modules/audio_processing/audio_processing_impl.cc
++++++ b/webrtc/modules/audio_processing/audio_processing_impl.cc
+++@@ -19,6 +19,7 @@
+++ #include <type_traits>
+++ #include <utility>
+++ 
++++#include "absl/base/config.h"
+++ #include "absl/base/nullability.h"
+++ #include "absl/strings/match.h"
+++ #include "absl/strings/string_view.h"
+++@@ -1787,7 +1788,11 @@ void AudioProcessingImpl::UpdateRecommendedInputVolumeLocked() {
+++ bool AudioProcessingImpl::CreateAndAttachAecDump(
+++     absl::string_view file_name,
+++     int64_t max_log_size_bytes,
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++     absl::Nonnull<TaskQueueBase*> worker_queue) {
++++#else
++++    TaskQueueBase* absl_nonnull worker_queue) {
++++#endif
+++   std::unique_ptr<AecDump> aec_dump =
+++       AecDumpFactory::Create(file_name, max_log_size_bytes, worker_queue);
+++   if (!aec_dump) {
+++@@ -1801,7 +1806,11 @@ bool AudioProcessingImpl::CreateAndAttachAecDump(
+++ bool AudioProcessingImpl::CreateAndAttachAecDump(
+++     FILE* handle,
+++     int64_t max_log_size_bytes,
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++     absl::Nonnull<TaskQueueBase*> worker_queue) {
++++#else
++++    TaskQueueBase* absl_nonnull worker_queue) {
++++#endif
+++   std::unique_ptr<AecDump> aec_dump =
+++       AecDumpFactory::Create(handle, max_log_size_bytes, worker_queue);
+++   if (!aec_dump) {
+++diff --git a/webrtc/modules/audio_processing/audio_processing_impl.h b/webrtc/modules/audio_processing/audio_processing_impl.h
+++index ecdc055..51a2bfb 100644
+++--- a/webrtc/modules/audio_processing/audio_processing_impl.h
++++++ b/webrtc/modules/audio_processing/audio_processing_impl.h
+++@@ -20,6 +20,7 @@
+++ #include <string>
+++ #include <vector>
+++ 
++++#include "absl/base/config.h"
+++ #include "absl/base/nullability.h"
+++ #include "absl/strings/string_view.h"
+++ #include "api/array_view.h"
+++@@ -74,11 +75,19 @@ class AudioProcessingImpl : public AudioProcessing {
+++   bool CreateAndAttachAecDump(
+++       absl::string_view file_name,
+++       int64_t max_log_size_bytes,
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++       absl::Nonnull<TaskQueueBase*> worker_queue) override;
++++#else
++++      TaskQueueBase* absl_nonnull worker_queue) override;
++++#endif
+++   bool CreateAndAttachAecDump(
+++       FILE* handle,
+++       int64_t max_log_size_bytes,
++++#if defined(ABSL_LTS_RELEASE_VERSION) && ABSL_LTS_RELEASE_VERSION < 20250512
+++       absl::Nonnull<TaskQueueBase*> worker_queue) override;
++++#else
++++      TaskQueueBase* absl_nonnull worker_queue) override;
++++#endif
+++   // TODO(webrtc:5298) Deprecated variant.
+++   void AttachAecDump(std::unique_ptr<AecDump> aec_dump) override;
+++   void DetachAecDump() override;
++-- 
++GitLab
++
+diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb
+index 9aab57a089..4d076630aa 100644
+--- a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb
++++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing-2_2.1.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=da08a38a32a340c5d91e13ee86a118f2"
+ SRC_URI = " \
+     http://freedesktop.org/software/pulseaudio/webrtc-audio-processing/webrtc-audio-processing-${PV}.tar.xz \
+     file://e9c78dc4712fa6362b0c839ad57b6b46dce1ba83.patch \
++    file://60.patch \
+ "
+ SRC_URI[sha256sum] = "ae9302824b2038d394f10213cab05312c564a038434269f11dbf68f511f9f9fe"
+ S = "${UNPACKDIR}/webrtc-audio-processing-${PV}"
 
