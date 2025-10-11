@@ -2,50 +2,52 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7160CCD18A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3BA8CCD18E
 	for <webhook@archiver.kernel.org>; Sat, 11 Oct 2025 18:13:44 +0000 (UTC)
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.web11.5326.1760206422745264152
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web10.5220.1760206422991536274
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 11 Oct 2025 11:13:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CzTVxoJD;
- spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-636de696e18so6246080a12.3
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ajZiEfGy;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b4c89df6145so500878966b.3
         for <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 11:13:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1760206421; x=1760811221; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5Kma03ci1gnaoYZv/i1ILq6/ORxpCt0wERO0Pjs0p54=;
-        b=CzTVxoJDboexKnPiXlD9z96mKNqj5W9eS/xlAuUvJJYpKaCVYoK8A5xgO08b6wrZia
-         QwZIDKFzGiz5iQQGBrmJZwMCG6o3xpwHiGe+JuLq2ngR5/3HLOpg0hg4+EI+pBY6khhj
-         EybTtJ32RIT9RCrsPzFHmFETrGwalSTDbyUoH9ShEVhuQKl6hoUQcazzLiT/xHx2PkX0
-         umjPYLVs/askMXBYgeKmybz2P2wBXvzyg+cwmbj+l2kiL7jBLji/4NJpMTea+okH6g7N
-         HmPYfJ5FBSBa6W2904T8TkhiV3w5+G4Nd8/o8jySZIIzXwUTC0BDmLZSSb1Rs7uyUA/q
-         PrPQ==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=C8rXraw0/GJaftEuGCQyJFkXR0D0mua3aBvduYMk99Q=;
+        b=ajZiEfGyBApTykxoqZKK62VEJkPKEjku1TL1ICPIHt7C1BkPGZDB7dvGRZFwLHqMa6
+         SlMZ3+/TFGgNkMXVMtx64SwMQRaMuQr8clH4ePvRyvPGEh3vVcEEKUYUZwzMaqz72men
+         RPNvWKmQywlkfouuNreM9pa2jCMGjakEPiTiTi2nLuzRXiEoIUplNoIV1zj1ALzUamHb
+         QAgfo2xSRniYWyT4aZl3F6FHyMKW1Opq2CiTVV2ARIbAgmGHtmwVvCvN9RtcM2eXhyRA
+         HXz6wn6FmNNPebVucv9XQ5XHDZKoh7zmD5zaEpSqrFZpvho9r1QZM0Kd9q8jFQ7gLdy1
+         FmsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1760206421; x=1760811221;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=5Kma03ci1gnaoYZv/i1ILq6/ORxpCt0wERO0Pjs0p54=;
-        b=I3HJAZSM+cV+FKr2zlJEbDNAXu2a51w+ciz24pMBHpkvuEP+pki9aMvyCT7vpnMiiB
-         gHOKH1OLhu/MgXd7TByIbuscOvoEiLZXaAlxEebpBV+COHFtJ0KdYUOoRsKye2AfqeOq
-         9EYyirKzQEYAu0Z8GocAGbCJBisEtYItSCsscB6yn09nDVdLOg3WAJxx9QKmNfL41dNo
-         l1pdoP5kzG4esA3n5sbx8yU9tzTAYp/i+exk2xl9QjT77rBAnSIh9Q4vq6PGIFMrlZhs
-         cTW+hP94sYh0HdBXFojOsyTqAVAjpiOsaxDo1E1By0yaEyku8jpW7QmVIHb6fTPqyOxK
-         Ks/Q==
-X-Gm-Message-State: AOJu0Yxdz4S0dhgdI8ltfCgiacIx2dqQyez98b/EMllDe5cPnDOQIIJN
-	/k/lP7omib/JJMZXGSsKlv6VnFvjCxJZwC24ZmUIOOYtymKE7pULbK8JPsWIqg==
-X-Gm-Gg: ASbGncs7giAyKB5kkQuRPTV5/LGMoe+UQtcfC9t3UPS1I8A1UdhfhMerBVFVRRo8Zkh
-	zSTrWRKfxnCjeXtdE6ZOoqJpKnUnZRnvoSxrz/WJ35PGEdIHLj8GqYSlIUR/UnMC8+Ir8xdTvWA
-	G/fJ3HabxcWqzXAs+XaRaj6pSMu1VV5GYvE9hzH0keCxcJpyWFfT3AOWpdgIkzIN1qWyx72/lEA
-	8w4YWIVUWIYR/L5b1XD0uffhF1RKBvg1yf3eGN5YJFSUmcYR5wVriHwaJp4MRqDf8o0uV/wUJdH
-	y5joEhINmMNKwxHBsj+0BOyrlZ83PpCf+Soe+ez36UlbqQFMItb5dK7sOOfeX/3MLvG9ILrMIaZ
-	79dqxUsBHPspeftSWj/zg7vK9VXHqXgW3rZz/aB8=
-X-Google-Smtp-Source: AGHT+IFBujcQ5huZZjB3AjIUGlmPJfB3ZNTkFa1iwPNMayI4+jD4gG9BLeOlWvFnVSBZnX4uar9pvA==
-X-Received: by 2002:a17:906:6a14:b0:b3a:7af8:c4a2 with SMTP id a640c23a62f3a-b50a9c5df86mr1784407566b.10.1760206420672;
-        Sat, 11 Oct 2025 11:13:40 -0700 (PDT)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=C8rXraw0/GJaftEuGCQyJFkXR0D0mua3aBvduYMk99Q=;
+        b=XvZCkt4KGlHfcwt15k02oWbGBCurSjrF+ivnKRBEjJC1+bs5cXo+0I976AK7eaIlq5
+         5cARqNes5ik6lTN1I4f2yUe+gnYRnwgEZrwL6Cf8wIFvSeax/1U//Hj3/2eJkUz4DHXL
+         IVkiCy3XkHuQH9ErCRWzBgavOujYzDgNa0hOhOyRGl7n1KRCS3Rbfc/TCBgLk9E0iZDR
+         zCshjz5Q00hA8xb8ImfU0PHrwq8a/eOAlLwY2HvIdOHCCw5VupWTNr81HxF9WD0NpTOg
+         6d2p6s1DM1l4Nhu8LvboU0QacyVKy26/W9SuaDCDdu+1Q/QIu8MnCVGU0tHV+6GEAqEi
+         uobw==
+X-Gm-Message-State: AOJu0Ywotoiapg0m/YRObAXHipOnnLidwAtvrlWKcdBaA8RCE8gunwNR
+	8VJU0hAo+K1i8scChiXJZ3Wi1bJRtjGwrmEGhyIb/WaLK9UfRwqNtRVAra5pVw==
+X-Gm-Gg: ASbGncttIh5PYysbEMv265++js+/P/emCqrly5YNKq1mF29jhj9tQ9V4nk11jRGhBtQ
+	ci66hqFVyv7mTAYNDF3/VlCh2yQoO/Tp34L4gWc9L6nE8Q3nultyPy8LgoWwzs+NcPoAKczBJhI
+	OrspSA1JQ5wQmPPdAfRIqW583paaXh/V/ZZAZn+eKltcHb//tzlcu6H0hAm7+PwDuve4WC9Gu+4
+	ewMsJpXop/JJEQZD+G25gD6/pVpb3gdlp4KGJTxvogVH41XLoAW8WcoMQO2S8e1NkamVNYps1Da
+	yJfNprvv9zPyP5DFgppl1jx5rq5ypsyl6+2ZLNuINyETZzH7n8s0gpwwfeJnzubVCJ6tjdL8vj6
+	YPzssvyc3Pobt1Fe4MYIjrOXw2Wpe7U7Deh3Bo5o=
+X-Google-Smtp-Source: AGHT+IFTgYO9b0Rd6dKZdjkqmKDS/e3eLT2iB7xJzs8D9l9xr/UrXhLYgpLHhkHktu8qow7fihN4lg==
+X-Received: by 2002:a17:907:d06:b0:b2d:830a:8c09 with SMTP id a640c23a62f3a-b50ac6d0efamr1438992466b.44.1760206421280;
+        Sat, 11 Oct 2025 11:13:41 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b55d5cad8adsm547156166b.7.2025.10.11.11.13.40
         for <openembedded-devel@lists.openembedded.org>
@@ -53,118 +55,76 @@ Received: from desktop ([51.154.145.205])
         Sat, 11 Oct 2025 11:13:40 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 01/10] freerdp3: patch CVE-2024-32039 and CVE-2024-32041
-Date: Sat, 11 Oct 2025 20:13:30 +0200
-Message-ID: <20251011181339.2127670-1-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 02/10] freerdp3: patch CVE-2024-32040
+Date: Sat, 11 Oct 2025 20:13:31 +0200
+Message-ID: <20251011181339.2127670-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251011181339.2127670-1-skandigraun@gmail.com>
+References: <20251011181339.2127670-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 18:13:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120500
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120501
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2024-32039
-https://nvd.nist.gov/vuln/detail/CVE-2024-32041
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-32040
 
-Pick the patch that is marked as fixing the related github advisory.
-The same commit fixes both vulnerabilities.
+Pick the patch that is marked to resolve the related github advisory.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../freerdp/freerdp3/CVE-2024-32039.patch     | 68 +++++++++++++++++++
- .../recipes-support/freerdp/freerdp3_3.4.0.bb |  4 +-
- 2 files changed, 71 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32039.patch
+ .../freerdp/freerdp3/CVE-2024-32040.patch     | 29 +++++++++++++++++++
+ .../recipes-support/freerdp/freerdp3_3.4.0.bb |  1 +
+ 2 files changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32040.patch
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32039.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32039.patch
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32040.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32040.patch
 new file mode 100644
-index 0000000000..f553228350
+index 0000000000..10b89e577f
 --- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32039.patch
-@@ -0,0 +1,68 @@
-+From bcaac313a07865cf05176c9d07ec1ca0670b2b61 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32040.patch
+@@ -0,0 +1,29 @@
++From f29088d17903aa8e58073b9811dc8a72f94cf4fb Mon Sep 17 00:00:00 2001
 +From: akallabeth <akallabeth@posteo.net>
-+Date: Tue, 16 Apr 2024 08:35:05 +0200
-+Subject: [PATCH] fix integer overflow
++Date: Tue, 16 Apr 2024 08:26:37 +0200
++Subject: [PATCH] fix missing check
 +
-+reorder check to prevent possible integer overflow
++in nsc_rle_decode abort if there are more bytes to be read then there
++are left.
 +
-+CVE: CVE-2024-32039 CVE-2024-32041
-+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/1208f23bc967be01cae42ca448a36f4f3d0cb7d8]
++CVE: CVE-2024-32040
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/d58cbc96aced4d082abf92b41a415a891c7ea309]
 +
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ libfreerdp/codec/clear.c |  2 +-
-+ libfreerdp/codec/zgfx.c  | 14 +++++++++-----
-+ 2 files changed, 10 insertions(+), 6 deletions(-)
++ libfreerdp/codec/nsc.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/libfreerdp/codec/clear.c b/libfreerdp/codec/clear.c
-+index 5c009d8e9..512aeae20 100644
-+--- a/libfreerdp/codec/clear.c
-++++ b/libfreerdp/codec/clear.c
-+@@ -409,7 +409,7 @@ static BOOL clear_decompress_residual_data(CLEAR_CONTEXT* clear, wStream* s,
++diff --git a/libfreerdp/codec/nsc.c b/libfreerdp/codec/nsc.c
++index 049b541f1..c2d92e48c 100644
++--- a/libfreerdp/codec/nsc.c
+++++ b/libfreerdp/codec/nsc.c
++@@ -160,7 +160,7 @@ static BOOL nsc_rle_decode(const BYTE* in, size_t inSize, BYTE* out, UINT32 outS
++ 				len |= ((UINT32)(*in++)) << 24U;
 + 			}
-+ 		}
 + 
-+-		if ((pixelIndex + runLengthFactor) > pixelCount)
-++		if ((pixelIndex >= pixelCount) || (runLengthFactor > (pixelCount - pixelIndex)))
-+ 		{
-+ 			WLog_ERR(TAG,
-+ 			         "pixelIndex %" PRIu32 " + runLengthFactor %" PRIu32 " > pixelCount %" PRIu32
-+diff --git a/libfreerdp/codec/zgfx.c b/libfreerdp/codec/zgfx.c
-+index 881823ab3..b7ee27511 100644
-+--- a/libfreerdp/codec/zgfx.c
-++++ b/libfreerdp/codec/zgfx.c
-+@@ -227,7 +227,10 @@ static BOOL zgfx_decompress_segment(ZGFX_CONTEXT* zgfx, wStream* stream, size_t
-+ 	BYTE* pbSegment = NULL;
-+ 	size_t cbSegment = 0;
++-			if (outSize < len)
+++			if ((outSize < len) || (left < len))
++ 				return FALSE;
 + 
-+-	if (!zgfx || !stream || (segmentSize < 2))
-++	WINPR_ASSERT(zgfx);
-++	WINPR_ASSERT(stream);
-++
-++	if (segmentSize < 2)
-+ 		return FALSE;
-+ 
-+ 	cbSegment = segmentSize - 1;
-+@@ -346,8 +349,9 @@ static BOOL zgfx_decompress_segment(ZGFX_CONTEXT* zgfx, wStream* stream, size_t
-+ 
-+ 						if (count > sizeof(zgfx->OutputBuffer) - zgfx->OutputCount)
-+ 							return FALSE;
-+-
-+-						if (count > zgfx->cBitsRemaining / 8)
-++						else if (count > zgfx->cBitsRemaining / 8)
-++							return FALSE;
-++						else if (zgfx->pbInputCurrent + count > zgfx->pbInputEnd)
-+ 							return FALSE;
-+ 
-+ 						CopyMemory(&(zgfx->OutputBuffer[zgfx->OutputCount]), zgfx->pbInputCurrent,
-+@@ -386,8 +390,8 @@ int zgfx_decompress(ZGFX_CONTEXT* zgfx, const BYTE* pSrcData, UINT32 SrcSize, BY
-+ 	wStream sbuffer = { 0 };
-+ 	wStream* stream = Stream_StaticConstInit(&sbuffer, pSrcData, SrcSize);
-+ 
-+-	if (!stream)
-+-		return -1;
-++	WINPR_ASSERT(zgfx);
-++	WINPR_ASSERT(stream);
-+ 
-+ 	if (!Stream_CheckAndLogRequiredLength(TAG, stream, 1))
-+ 		goto fail;
++ 			outSize -= len;
 diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
-index f29b9afbee..b07d7d139b 100644
+index b07d7d139b..19ba893724 100644
 --- a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
 +++ b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
-@@ -8,7 +8,9 @@ DEPENDS = "openssl libusb1 uriparser cairo icu pkcs11-helper zlib jpeg"
- inherit pkgconfig cmake
- 
+@@ -10,6 +10,7 @@ inherit pkgconfig cmake
  SRCREV = "708f3764897e06297469a7b0507b3c9ecc041ad7"
--SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https \
-+           file://CVE-2024-32039.patch \
-+           "
+ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https \
+            file://CVE-2024-32039.patch \
++           file://CVE-2024-32040.patch \
+            "
  
  S = "${WORKDIR}/git"
- 
 
