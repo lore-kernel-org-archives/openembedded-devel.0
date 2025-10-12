@@ -1,250 +1,213 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B34FDCCA476
-	for <webhook@archiver.kernel.org>; Sat, 11 Oct 2025 22:53:26 +0000 (UTC)
-Received: from mail-yx1-f51.google.com (mail-yx1-f51.google.com [74.125.224.51])
- by mx.groups.io with SMTP id smtpd.web10.9449.1760223200013775994
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27B36CCA476
+	for <webhook@archiver.kernel.org>; Sun, 12 Oct 2025 00:21:27 +0000 (UTC)
+Received: from mail-oo1-f53.google.com (mail-oo1-f53.google.com [209.85.161.53])
+ by mx.groups.io with SMTP id smtpd.web11.10706.1760228479263682152
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Oct 2025 15:53:20 -0700
+ Sat, 11 Oct 2025 17:21:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NyTw/riV;
- spf=pass (domain: gmail.com, ip: 74.125.224.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f51.google.com with SMTP id 956f58d0204a3-63470a6f339so3060525d50.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 15:53:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=k34xysAs;
+ spf=pass (domain: gmail.com, ip: 209.85.161.53, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oo1-f53.google.com with SMTP id 006d021491bc7-63af096d4e2so1098598eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 17:21:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760223199; x=1760827999; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760228478; x=1760833278; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=XhEV7EkUyntOdd8qeKQnjnG5HA1oevoU5H2X2Pe8bxM=;
-        b=NyTw/riVwAAcjdujnD9uulMw3cHD/27veRh3ZUoAtsh7AtdNfcDn6fglc5L7QZ9tNY
-         JHkwFhC4BA7aWIUZOxpFuUHVqA1UTz31bzc9aCw1cnv3M5WHo72YJXQYTkC1Uhuni84S
-         48jjarzu0S+EwIz1dIUpD24MeRnQHKI55RnNewBPeNlTnQFfoPvwx4M1qiUzBFSb/RMg
-         9R+ftDBqhAypGSvOtZjQGbHv0rceB91X3EI/UKgaqZOEqJqdeBFlz0eOdqeaCMKpWOd4
-         YnbOdIgGW+oFgCXjjoBHcZCbLlu2f+TS+3xTq4ZApG23QvxdLaaEbR0Zr+4nlt2QJ8+Z
-         Buvw==
+        bh=fRfEb0uM8nwmyHY19Q4zO3MJLKsKYSnSHD2pilzMQc4=;
+        b=k34xysAsINVX05lEYkc65eVsCERYXjKWirQspEPmhFfeTOb4W9HpnOVTgRBS261aHq
+         nBfyzpYUewjJazL4RR4QURx1Wwqgkq0lAufGxSM6bPLpmRhiQJQ7r/k7ML9GWGjeho+J
+         HhFoxxk8k6pIpX1YR9eEHZVid7nITqrNXghrfPIcRtBmBuFs96D28/rKIO//SLY1coW+
+         jLOjXdVas1B73noUP1CWUYMC18GpZKXoitIGvuiQ5cCH0u1Nk3wmBjVPhOAVPoOdo47i
+         T1WAAzqn8Sn8Cu1cVefcmAHTYaM4rvMmdwYc0FTmSp47xYeZZKN9jiB1S0StI+nM1/2A
+         wYuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760223199; x=1760827999;
+        d=1e100.net; s=20230601; t=1760228478; x=1760833278;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=XhEV7EkUyntOdd8qeKQnjnG5HA1oevoU5H2X2Pe8bxM=;
-        b=Ga1n38hsXfX+7i6w+exZIDzkvTjdCdvhysyBWVOLUa1kbnrbp6/OXje0sCVuD63GC/
-         HxW0U1W+XDivkN8PXsDxElDJBnSbJqYW00ZaM0NxrbaQFVtlXFssACTl6pyYRZT8c7R9
-         SjJ4/L3j0glO7llOjonnLPgc7AfP+w4QfLhGuJI6W7NA9BaH0hsGy1Hwxq6EVmFF0AYc
-         NNmbveV/zFfv3WRCDxs9uJwXaDof0bUo4Xui28Msg6zk85JIEDR1XYE2JNDZdI5nsaxP
-         gEAOGQRCNqSAjuLXPTgNh6KgZUriaR3q38dQRCyrdvTBM6ZTf6fNA+9sBqtO89gDzuAq
-         WsSg==
-X-Gm-Message-State: AOJu0YySYMhrwWUSBhtaX2QzT6RHUmQ+pejs0yXK23GyJ3DjEfnU/YlR
-	JzXxbhQfSJ+0hh09QqFaC/sA4ZotoR5INlknyKhaKPoddbEG0psYrK/tB300XbP3fXUT3PogPd5
-	1l3TCZwM2wqDjXzKiFtgmTM4RoXlLA+c=
-X-Gm-Gg: ASbGncsEmg4uFx8dR9IdPDt5jiabRO4l69NFuK/aCpdbWgJ5i8ICEPOeD+O8Qj/m8Lk
-	trZLSUXR0dQpvNjXXxYg/ay5TM989zoSCBIcuvRrmBuEqPwKZ4X0boarhRhC9vsXhyP1ZxtYM8D
-	awF/9D4C30ywyYvd48fafWYVDvBX9jolbqd1MKBlg0yVzR4XbK+qGozIDr6q8n3Pcz0jMOscEQS
-	O9H9Y/NrP6anc4Nc+AzGHycEEk7w8gMxWFnGa2Ay+LVgyT/LNVpqaGnVm0=
-X-Google-Smtp-Source: AGHT+IHUE64r4rp+reucK58Au9/8mp+gd636G7QqWd4vX5Ami+OS5aYllevnOLdzUlgEg7PM92PAd6MJ4DXMMfI36UY=
-X-Received: by 2002:a05:690c:f0f:b0:77a:4d7c:ef61 with SMTP id
- 00721157ae682-780e170c37cmr278197167b3.50.1760223198969; Sat, 11 Oct 2025
- 15:53:18 -0700 (PDT)
+        bh=fRfEb0uM8nwmyHY19Q4zO3MJLKsKYSnSHD2pilzMQc4=;
+        b=N8s+GBRMfk9pXaNOej/9SS3AW2mwirD2B1ZIkYn8mpKpUpRty+jl7sfotAqLZeN76o
+         ilSZjl+WQMTXi+KSfQ4zANA7foEC+cIVkjFIEiR59g+cR/2J2kGvjG/8+Ibur3PNRXCu
+         RKu+erajIC5fbquHzcRX2sRMNlobYEmEc/BZ//i2EUpgWPWOLkeZ3MMISA/GTgFLedhN
+         5CbfAaw2mWjwOgIbPA1/QqmHqAe3Oo9UiQmC20rRs+FI9/1ed/GMi9D2U7BLMdVe2h58
+         641FfEoiPMn/8E2dJgvxXs/LyAnFLBjIqhI1wPzKw3fWGpTEfbWnw+TGpnuXdBBO4QrM
+         qwxA==
+X-Gm-Message-State: AOJu0Yx571Ozxj498oRNd6y+v05YGZ28xOOulYWqnUmdRTOAOFE6z43S
+	Au3FmMG7rktcyUX6TTtAlRBiSFQXNTbjOKs+7/9aaVvRg51pT7wFZOX8XF2/DhinrsnQ2Mlki+H
+	8YmKlvhDXmrA33uFcRyJs015a5w7GUBI=
+X-Gm-Gg: ASbGnct1DGVq68LUzX/2WAZmSOLgNYFpEQcSvHRIzeZTawkXdCiLYHJww2oWRRmVc3a
+	EMNVwInDqdTW5qBiWMFUdkmiOz2Mwbhyd5lYPZrZKRfdYX714KQxClaF+5EkRNmeVpN8xZ6g2kr
+	u2C536SRP5WrrC4tOvEabDVdn/gz5OYDu9Ar4nOi2M0xKnSxzLVSmJ7FUdZqsBEcMjrTABNnlqr
+	7UQUWVgMTn4HDWYzDX7W45m/L5CfPnDhWT/E0g=
+X-Google-Smtp-Source: AGHT+IGecviIdtouIcAk9wMz7pwUoS+NIGPZNprf+dc3zgsJIvpZNXEch95UzPguc7q+GNLjo/wl3kb8BmMrfdjkKno=
+X-Received: by 2002:a05:6871:81c9:20b0:3c8:f3bb:92c7 with SMTP id
+ 586e51a60fabf-3c8f3bb9b8amr940850fac.15.1760228478121; Sat, 11 Oct 2025
+ 17:21:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251002104847.1472184-1-zboszor@gmail.com> <20251002104847.1472184-2-zboszor@gmail.com>
-In-Reply-To: <20251002104847.1472184-2-zboszor@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 11 Oct 2025 15:52:52 -0700
-X-Gm-Features: AS18NWD_w5iEV865LBPkdjFt7K-XbZj0vx7CtnvBSKCoaOTcp_NqR7ItnXG9_yU
-Message-ID: <CAMKF1srYE1q8L=PU-oPKQW75WBSS3Khj9=Cw3QpAiNt0thzpvg@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v2 2/2] mariadb: 11.4.8
-To: =?UTF-8?B?Wm9sdMOhbiBCw7ZzesO2cm3DqW55aQ==?= <zboszor@gmail.com>
+References: <186D05F9B6EAD54A.4971@lists.openembedded.org>
+In-Reply-To: <186D05F9B6EAD54A.4971@lists.openembedded.org>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Sun, 12 Oct 2025 13:21:07 +1300
+X-Gm-Features: AS18NWDP09dUCF6aWcwCD18nwpyIFTTRWTricLwdxqgD9lkkhfhQ_cpWystzsZI
+Message-ID: <CADySD0HydQahM2DqRq39k4RbGye3Quh0w2S83-LLr0MxsujZQA@mail.gmail.com>
+Subject: Re: [oe][meta-oe][walnascar][PATCH 1/3] exiv2: patch CVE-2025-26623
+To: ankur.tyagi85@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 22:53:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120512
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 Oct 2025 00:21:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120513
 
-Its failing to compile for qemuriscv32 with following errors
+Please ignore this series as I missed earlier submission via
+https://lists.openembedded.org/g/openembedded-devel/message/120366
 
-/home/kraj200/yoe/build/tmp/work/riscv32imafdc-yoe-linux-musl/mariadb/11.4.=
-8/sources/mariadb-11.4.8/tpool/aio_libaio.cc:61:20:
-error: use of undeclared identifier '
-   =E2=86=AA __NR_io_getevents'; did you mean 'io_getevents'?
-   |    61 |   int ret=3D syscall(__NR_io_getevents, reinterpret_cast<long>=
-(ctx),
-   |       |                    ^~~~~~~~~~~~~~~~~
-
-On Thu, Oct 2, 2025 at 3:49=E2=80=AFAM Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9n=
-yi <zboszor@gmail.com> wrote:
+On Fri, Oct 10, 2025 at 5:13=E2=80=AFPM Ankur Tyagi via lists.openembedded.=
+org
+<ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
 >
-> 11.4.7 fixes a huge performance drop from 11.4.5 to 11.4.6.
-> https://mariadb.com/docs/release-notes/community-server/mariadb-11-4-seri=
-es/mariadb-11.4.7-release-notes
+> Details https://nvd.nist.gov/vuln/detail/CVE-2025-26623
 >
-> 11.4.8 fixes several crash problems and other issues.
-> https://mariadb.com/docs/release-notes/community-server/mariadb-11-4-seri=
-es/mariadb-11.4.8-release-notes
->
-> Removed 0001-aio_linux-Check-if-syscall-exists-before-using-it.patch
-> which is not applicable anymore, the code was rewritten.
->
-> Adapted 0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-> to fix fuzz.
->
-> Add libxml2-native to DEPENDS in mariadb-native to fix the
-> do_configure failure with the new version.
->
-> Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.com>
+> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 > ---
->  ...ive_11.4.6.bb =3D> mariadb-native_11.4.8.bb} |  2 +-
->  meta-oe/recipes-dbs/mysql/mariadb.inc         |  3 +-
->  ...ck-if-syscall-exists-before-using-it.patch | 40 -------------------
->  ...Lists.txt-fix-gen_lex_hash-not-found.patch |  6 +--
->  .../{mariadb_11.4.6.bb =3D> mariadb_11.4.8.bb}  |  0
->  5 files changed, 5 insertions(+), 46 deletions(-)
->  rename meta-oe/recipes-dbs/mysql/{mariadb-native_11.4.6.bb =3D> mariadb-=
-native_11.4.8.bb} (92%)
->  delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Chec=
-k-if-syscall-exists-before-using-it.patch
->  rename meta-oe/recipes-dbs/mysql/{mariadb_11.4.6.bb =3D> mariadb_11.4.8.=
-bb} (100%)
+>  .../exiv2/exiv2/0001-CVE-2025-26623.patch     | 86 +++++++++++++++++++
+>  meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb |  5 +-
+>  2 files changed, 90 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-CVE-2025-266=
+23.patch
 >
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_11.4.6.bb b/meta-oe=
-/recipes-dbs/mysql/mariadb-native_11.4.8.bb
-> similarity index 92%
-> rename from meta-oe/recipes-dbs/mysql/mariadb-native_11.4.6.bb
-> rename to meta-oe/recipes-dbs/mysql/mariadb-native_11.4.8.bb
-> index 578357b480..ff48dcd806 100644
-> --- a/meta-oe/recipes-dbs/mysql/mariadb-native_11.4.6.bb
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb-native_11.4.8.bb
-> @@ -3,7 +3,7 @@ inherit native
+> diff --git a/meta-oe/recipes-support/exiv2/exiv2/0001-CVE-2025-26623.patc=
+h b/meta-oe/recipes-support/exiv2/exiv2/0001-CVE-2025-26623.patch
+> new file mode 100644
+> index 0000000000..db561ed96b
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/exiv2/exiv2/0001-CVE-2025-26623.patch
+> @@ -0,0 +1,86 @@
+> +From 943fbd9c688a10037ccb42bf7c4b20be76df1119 Mon Sep 17 00:00:00 2001
+> +From: Rosen Penev <rosenp@gmail.com>
+> +Date: Mon, 17 Feb 2025 16:34:40 -0800
+> +Subject: [PATCH] CVE-2025-26623
+> +
+> +Revert "fix copy constructors"
+> +
+> +This reverts commit afb2d998fe62f7e829e93e62506bf9968117c9c5.
+> +
+> +This commit is wrong and ends up resulting in use after frees because of
+> +C pointers. The proper solution is shared_ptr instead of C pointers but
+> +that's a lot more involved than reverting this.
+> +
+> +CVE: CVE-2025-26623
+> +Upstream-Status: Backport [https://github.com/Exiv2/exiv2/commit/facce62=
+8f3622764e91a8161f89ade8cb34bc120]
+> +
+> +Signed-off-by: Rosen Penev <rosenp@gmail.com>
+> +(cherry picked from commit ebff8b48820b96c786cfddbf0bebb395cb1317d7)
+> +(cherry picked from commit facce628f3622764e91a8161f89ade8cb34bc120)
+> +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> +---
+> + src/tiffcomposite_int.cpp | 19 +++++++++++++++++++
+> + src/tiffcomposite_int.hpp |  6 +++---
+> + 2 files changed, 22 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/src/tiffcomposite_int.cpp b/src/tiffcomposite_int.cpp
+> +index 95ce450c7..3e6e93d5c 100644
+> +--- a/src/tiffcomposite_int.cpp
+> ++++ b/src/tiffcomposite_int.cpp
+> +@@ -127,6 +127,25 @@ TiffEntryBase::TiffEntryBase(const TiffEntryBase& r=
+hs) :
+> +     storage_(rhs.storage_) {
+> + }
+> +
+> ++TiffDirectory::TiffDirectory(const TiffDirectory& rhs) : TiffComponent(=
+rhs), hasNext_(rhs.hasNext_) {
+> ++}
+> ++
+> ++TiffSubIfd::TiffSubIfd(const TiffSubIfd& rhs) : TiffEntryBase(rhs), new=
+Group_(rhs.newGroup_) {
+> ++}
+> ++
+> ++TiffBinaryArray::TiffBinaryArray(const TiffBinaryArray& rhs) :
+> ++    TiffEntryBase(rhs),
+> ++    cfgSelFct_(rhs.cfgSelFct_),
+> ++    arraySet_(rhs.arraySet_),
+> ++    arrayCfg_(rhs.arrayCfg_),
+> ++    arrayDef_(rhs.arrayDef_),
+> ++    defSize_(rhs.defSize_),
+> ++    setSize_(rhs.setSize_),
+> ++    origData_(rhs.origData_),
+> ++    origSize_(rhs.origSize_),
+> ++    pRoot_(rhs.pRoot_) {
+> ++}
+> ++
+> + TiffComponent::UniquePtr TiffComponent::clone() const {
+> +   return UniquePtr(doClone());
+> + }
+> +diff --git a/src/tiffcomposite_int.hpp b/src/tiffcomposite_int.hpp
+> +index 4506a4dca..307e0bd9e 100644
+> +--- a/src/tiffcomposite_int.hpp
+> ++++ b/src/tiffcomposite_int.hpp
+> +@@ -851,7 +851,7 @@ class TiffDirectory : public TiffComponent {
+> +   //! @name Protected Creators
+> +   //@{
+> +   //! Copy constructor (used to implement clone()).
+> +-  TiffDirectory(const TiffDirectory&) =3D default;
+> ++  TiffDirectory(const TiffDirectory& rhs);
+> +   //@}
+> +
+> +   //! @name Protected Manipulators
+> +@@ -944,7 +944,7 @@ class TiffSubIfd : public TiffEntryBase {
+> +   //! @name Protected Creators
+> +   //@{
+> +   //! Copy constructor (used to implement clone()).
+> +-  TiffSubIfd(const TiffSubIfd&) =3D default;
+> ++  TiffSubIfd(const TiffSubIfd& rhs);
+> +   TiffSubIfd& operator=3D(const TiffSubIfd&) =3D delete;
+> +   //@}
+> +
+> +@@ -1346,7 +1346,7 @@ class TiffBinaryArray : public TiffEntryBase {
+> +   //! @name Protected Creators
+> +   //@{
+> +   //! Copy constructor (used to implement clone()).
+> +-  TiffBinaryArray(const TiffBinaryArray&) =3D default;
+> ++  TiffBinaryArray(const TiffBinaryArray& rhs);
+> +   //@}
+> +
+> +   //! @name Protected Manipulators
+> diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb b/meta-oe/reci=
+pes-support/exiv2/exiv2_0.28.3.bb
+> index 3e33ab7953..4986415a6b 100644
+> --- a/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
+> +++ b/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
+> @@ -4,7 +4,10 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D625f055f41728=
+f84a8d7938acc35bdc2"
 >
->  PROVIDES +=3D "mysql5-native"
->  DEPENDS =3D "ncurses-native zlib-native bison-native libpcre2-native \
-> -gnutls-native fmt-native \
-> +libxml2-native gnutls-native fmt-native \
->  "
+>  DEPENDS =3D "zlib expat brotli libinih"
 >
->  RDEPENDS:${PN} =3D ""
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/=
-mysql/mariadb.inc
-> index 67dd687c02..53a24d14bc 100644
-> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-> @@ -15,7 +15,6 @@ SRC_URI =3D "https://archive.mariadb.org/${BP}/source/$=
-{BP}.tar.gz \
->             file://fix-arm-atomic.patch \
->             file://0001-Fix-library-LZ4-lookup.patch \
->             file://0001-innobase-Define-__NR_futex-if-it-does-not-exist.p=
-atch \
-> -           file://0001-aio_linux-Check-if-syscall-exists-before-using-it=
-.patch \
->             file://ssize_t.patch \
->             file://sys_futex.patch \
->             file://cross-compiling.patch \
-> @@ -26,7 +25,7 @@ SRC_URI =3D "https://archive.mariadb.org/${BP}/source/$=
-{BP}.tar.gz \
->             file://riscv32.patch \
->             file://0001-Remove-x86-specific-loop-in-my_convert.patch \
->            "
-> -SRC_URI[sha256sum] =3D "1b26c0bb2d025dbfac3b9852d2b7eafda56a171b67ac2e27=
-831ec0414fb7df07"
-> +SRC_URI[sha256sum] =3D "52fa4dca2c5f80afc1667d523a27c06176d98532298a6b0c=
-31ed73505f49e15c"
+> -SRC_URI =3D "git://github.com/Exiv2/exiv2.git;protocol=3Dhttps;branch=3D=
+0.28.x"
+> +SRC_URI =3D " \
+> +    git://github.com/Exiv2/exiv2.git;protocol=3Dhttps;branch=3D0.28.x \
+> +    file://0001-CVE-2025-26623.patch \
+> +"
+>  SRCREV =3D "a6a79ef064f131ffd03c110acce2d3edb84ffa2e"
+>  S =3D "${WORKDIR}/git"
 >
->  UPSTREAM_CHECK_URI =3D "https://github.com/MariaDB/server/tags"
 >
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-sy=
-scall-exists-before-using-it.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001=
--aio_linux-Check-if-syscall-exists-before-using-it.patch
-> deleted file mode 100644
-> index eddfdaaf77..0000000000
-> --- a/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-e=
-xists-before-using-it.patch
-> +++ /dev/null
-> @@ -1,40 +0,0 @@
-> -From f9f019049a9bb09471e8303d4510afae07f225c8 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Wed, 18 Aug 2021 06:49:25 +0000
-> -Subject: [PATCH] aio_linux: Check if syscall exists before using it
-> -
-> -Return -ENOSYS if not implememented, fixes build on arches like RISCV32
-> -Fixes
-> -tpool/aio_linux.cc:63:20: error: '__NR_io_getevents' was not declared in=
- this scope; did you mean 'io_getevents'?
-> -   63 |   int ret=3D syscall(__NR_io_getevents, reinterpret_cast<long>(c=
-tx),
-> -      |                    ^~~~~~~~~~~~~~~~~
-> -      |                    io_getevents
-> -
-> -Upstream-Status: Pending
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - tpool/aio_linux.cc | 4 ++++
-> - 1 file changed, 4 insertions(+)
-> -
-> -diff --git a/tpool/aio_linux.cc b/tpool/aio_linux.cc
-> -index 507c6b92..a6adf1af 100644
-> ---- a/tpool/aio_linux.cc
-> -+++ b/tpool/aio_linux.cc
-> -@@ -59,6 +59,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Bos=
-ton, MA 02111 - 1301 USA*/
-> - */
-> - static int my_getevents(io_context_t ctx, long min_nr, long nr, io_even=
-t *ev)
-> - {
-> -+#ifdef __NR_io_getevents
-> -   int saved_errno=3D errno;
-> -   int ret=3D syscall(__NR_io_getevents, reinterpret_cast<long>(ctx),
-> -                    min_nr, nr, ev, 0);
-> -@@ -68,6 +69,9 @@ static int my_getevents(io_context_t ctx, long min_nr,=
- long nr, io_event *ev)
-> -     errno=3D saved_errno;
-> -   }
-> -   return ret;
-> -+#else
-> -+  return -ENOSYS;
-> -+#endif
-> - }
-> -
-> -
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fi=
-x-gen_lex_hash-not-found.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-sql=
--CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-> index 1475bb1a51..7c73699b08 100644
-> --- a/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_l=
-ex_hash-not-found.patch
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_l=
-ex_hash-not-found.patch
-> @@ -18,8 +18,8 @@ diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
->  index 0195555e..507136cb 100644
->  --- a/sql/CMakeLists.txt
->  +++ b/sql/CMakeLists.txt
-> -@@ -64,11 +64,18 @@ ${CMAKE_BINARY_DIR}/sql
-> - ${CMAKE_SOURCE_DIR}/tpool
-> +@@ -63,11 +63,18 @@
-> + ${CMAKE_BINARY_DIR}/sql
->   )
->
->  -ADD_CUSTOM_COMMAND(
-> @@ -41,7 +41,7 @@ index 0195555e..507136cb 100644
->
->   FIND_PACKAGE(BISON 2.4)
->
-> -@@ -405,11 +412,18 @@ IF(NOT CMAKE_CROSSCOMPILING OR DEFINED CMAKE_CROSS=
-COMPILING_EMULATOR)
-> +@@ -405,11 +412,18 @@
->     ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc)
->   ENDIF()
->
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_11.4.6.bb b/meta-oe/recipe=
-s-dbs/mysql/mariadb_11.4.8.bb
-> similarity index 100%
-> rename from meta-oe/recipes-dbs/mysql/mariadb_11.4.6.bb
-> rename to meta-oe/recipes-dbs/mysql/mariadb_11.4.8.bb
-> --
-> 2.51.0
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#120466): https://lists.openembedded.org/g/openembedde=
+d-devel/message/120466
+> Mute This Topic: https://lists.openembedded.org/mt/115655086/3619737
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nkur.tyagi85@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
