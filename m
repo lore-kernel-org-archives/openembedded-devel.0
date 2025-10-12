@@ -2,115 +2,117 @@ Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42136CCD184
-	for <webhook@archiver.kernel.org>; Sun, 12 Oct 2025 18:36:03 +0000 (UTC)
-Received: from mail-yx1-f53.google.com (mail-yx1-f53.google.com [74.125.224.53])
- by mx.groups.io with SMTP id smtpd.web10.24039.1760294154463076314
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70F9ECCD187
+	for <webhook@archiver.kernel.org>; Sun, 12 Oct 2025 19:04:23 +0000 (UTC)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.web10.24598.1760295861483506432
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Oct 2025 11:35:54 -0700
+ Sun, 12 Oct 2025 12:04:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=c6aZ6rTt;
- spf=pass (domain: gmail.com, ip: 74.125.224.53, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f53.google.com with SMTP id 956f58d0204a3-63bc1aeb427so3523698d50.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Oct 2025 11:35:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=F/fe0Aav;
+ spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-71d60504788so31942027b3.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Oct 2025 12:04:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760294153; x=1760898953; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760295860; x=1760900660; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=D/gE6ql8zegXgIJlUwPWBN5r46Ix/ogIA7LXFCFpEik=;
-        b=c6aZ6rTtzzqBarIqcwR1PmmhFap5RjpDo3C2oKKNZrKY1zXFaYsGTm0+rDiY3C+VRq
-         2KWXqn8JRs8W6+jTGb9SbfajESiR7uZbOD0b+PMbtX86oELzpgI1EAQvsYs7IHq8qlmW
-         LOlkwJPqNqO60nJKMtFx/Tz6yMxfjsfRVNbmQWwewU6/4inaroI5zQGTGIA4QG+KWWmV
-         sAQjqU1pMzQk+CKq39Iwtjl6X28iAFuL4zsbY2WVaRgae890tl/4z60aT22lvdnqx93J
-         BjZLWJE0AG/832Jz90cLuN1PiyIru3wMm5Hft7VF/6z8qDknbfTJAvh5zrX4hiKugN8A
-         b9rQ==
+        bh=v8S7EVpuMMxg+QxGzMIBmMRtYT5o4FPZsNe6NAbAVAM=;
+        b=F/fe0AavXZuappWqQZ5YW0WgQvJPN6f9SCKo6q/bOfh/solveyG0k5BawTKc7rWwX3
+         fKmwCW2VJ4g3QqMgLaPz62SgXbJeGfUND2+bqwejv2a1LLxC2m/di/Hsk3+GB3DqQyAn
+         U0RWM84vVa2S0kRa9DONO34LhJqoqnPlVRMIkff/U+oaVZJFgDV/XzS/PZcRPNSOYlqW
+         Cgz1QCfjH5AgesWPxEr8+TPLSVFkfNhqabkEB60NmQdP/OU+TwpC+7soEklZ3OzR42rB
+         FZ9BrbUCNRs6LN/LlJfE09Ad6cQR9h3lXOGF8QXujbeHA2MRIa2R1HLO7ZYOaHn6K4OX
+         JZXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760294153; x=1760898953;
+        d=1e100.net; s=20230601; t=1760295860; x=1760900660;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=D/gE6ql8zegXgIJlUwPWBN5r46Ix/ogIA7LXFCFpEik=;
-        b=KRqWJtJ0d8k07pLooloXZsWnhXuJrIbj1K1+y0sfql9lgxxCxwPFUrbvx0uA2S6GkR
-         ut1hkE8RXEb/NAarvQtaflcEPub2HYIPnyNDUFqPRi4p8CvnzcWgKsh0GnA1xKxEUJl5
-         DHnDcU1u6/sPm+xSFWCyFHDh5yTRqwHWqCUCNOjk8MxqzFWOxtdYSFUu1YSfOfTIQDoq
-         wzar/KIyvondrRoGf7pSP/ID1rYAAMOBCo4uEQU7gxauqIGj1osV72n5qF03wkwQ4X/c
-         50yb5fJJKb/SDD3PcIROtIL64H5Pkp3dFPxVHcid/zPoLDhKjpxnt09JvjCmq7i+t7bm
-         RPaQ==
-X-Gm-Message-State: AOJu0Yy8g42NE6M1LsHWAyb4cqGxK1jCDyEJFDw7rjWfdjEmD8YgGRfu
-	3GL9tgPqwSFZbaNf4JNaVIchoL4J6m22xbneD7EsQLAmWWKEzHo6liKIf6OF3z0U
-X-Gm-Gg: ASbGncufPxvck7IrCAv7/aD0tr9VO8qieGuGN80bBSc8JkPWSEoAIfLuuzcC3LBlSQ4
-	VYdWGU3XZGRte9oiiPhqIb6AUbuvbLMF51+luDn4TR8EW/qz3rXqnyEvXjF8Uvh3gR9Ql4wYk/o
-	zORxxO+0OE2N68sSHKPYnY74yaVIV8YvEM2UWqeo/XFTwPVLRiofWQUUQBDQjFwV0384QBPapjY
-	68C1gmeZ6TK3B2nXCsDHq2SJkvEx19eBAcRdkAMFWc3ScrvXzTwswPbOJE2ZIhzcXDyM7eIeKd5
-	4Qij/3m/xXQTqctcJDQownH0H3TxftdXlyLSE3Bq8ynxw7cMxrhMttV5XcJpFUBsENMXuOeOCiV
-	fvwgNCU/Hok2ojF6VApOGRxYlx3gPuY2k1Olkr7+D+wKPe76Zu4uQdWTyE68cYa8DjKkZUzPcxx
-	BiCokhN5DBNQ==
-X-Google-Smtp-Source: AGHT+IHasSK2JsHmvvk9jMh5tv+BZvinP0VZc+taPlaA7jXvesiHQE3mMxz+cL96oIHkZLkq8OnhtQ==
-X-Received: by 2002:a05:690e:2549:b0:635:4ece:20a2 with SMTP id 956f58d0204a3-63ccb8f48d5mr15609737d50.39.1760294152995;
-        Sun, 12 Oct 2025 11:35:52 -0700 (PDT)
+        bh=v8S7EVpuMMxg+QxGzMIBmMRtYT5o4FPZsNe6NAbAVAM=;
+        b=Qv0Gml9eL9LtZV3fFUAL9k/0ieMG2HLThAtBTwHp28H3PoxR7eWkL89e9q0L3B97wC
+         ZJ8wnrej+riWCp51xY2EiZ5I4RbORwkHYcYu3qce0+nayGLe83GvOp2Rt4No6Uj5P6D0
+         QN3cLb6xmm/4xK7UQz6B7I2ANViEuJ83epaQ6J02fyOtvPZyMfAcBTdGPPKvV171+dVF
+         u4WAzUPr1lDqy/OH421t0BO00/kc+gv6fzWDBApVkmLKoWvREDWaOC1O3fT8sasTADLo
+         5ZfLsW85ktBRjLzrV+JcHbAknqRTPjsq9+oJ35Z9fHgVO7EP6awPoKhAQJacCJ14ucli
+         LVnQ==
+X-Gm-Message-State: AOJu0YzDUh5aaR60T0QrSuVOChnVd5yWok5MmdYMV3o3Pcx12lgWtqyH
+	ICkOGkCSf4HUoOCBuDcaTGpgOMnoWyvOXTeiXNB1MvNmHaHUIBI6OkaZz69fNT5s
+X-Gm-Gg: ASbGnctUYwAEnnNZIOcMdUL0Ba2zY4AfLOOow/IiEk+BZ010ZWcQezEa/pO/58a8Xs6
+	22U9AhY1voVp2q0Mfdn3HRx+3Bzww+xPD/bH/myqI30BUWGD3eb/9mKgJ6Y2qNb10dxV67QtdNV
+	ntPzRJq+zveZP/wTkwsEUvJzImriYzmmOOSI3wersR9PHwLnW0WfHfrQxhSrXpyfG/PTg+W20OS
+	rlieyV43w++pUufYRDXwLYltxZlPMhVxp1bw3ATjXQqRbhLdCr3FdEzTSqOrf55inJmaFXanoCf
+	oLuc8ncjL71CVnhlN1NslCozzp//kKk4tehxafQvkizeisyc8xfY7T9GwuQxDnAJhfJyNsxfzqu
+	EzzRzBdmvLVtzJtvoPWGqjjvICwmLyX2DL59+ollipJHYLfzbhAXN+2Q5oqQWh0x+pWLdQnLakl
+	Q=
+X-Google-Smtp-Source: AGHT+IHs7AjL983PJPzyPcSdAdUF6BbdQeYKeYLbk+WQEkQ7whhQeep8rFP87kdPlmwVqC+P+VN2vA==
+X-Received: by 2002:a05:690c:dcb:b0:734:c88d:4b30 with SMTP id 00721157ae682-780e170b0cbmr337264727b3.49.1760295860017;
+        Sun, 12 Oct 2025 12:04:20 -0700 (PDT)
 Received: from localhost.localdomain (71-208-12-94.ftmy.qwest.net. [71.208.12.94])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7810724444bsm20912227b3.43.2025.10.12.11.35.52
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-63cd95e462fsm3395937d50.25.2025.10.12.12.04.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Oct 2025 11:35:52 -0700 (PDT)
+        Sun, 12 Oct 2025 12:04:19 -0700 (PDT)
 From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] nss: upgrade 3.116 -> 3.117
-Date: Sun, 12 Oct 2025 14:34:46 -0400
-Message-ID: <20251012183447.97493-1-schonm@gmail.com>
+Subject: [meta-perl][PATCH] libhtml-tree-perl: upgrade 5.04 -> 5.05
+Date: Sun, 12 Oct 2025 15:04:10 -0400
+Message-ID: <20251012190410.102003-1-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 12 Oct 2025 18:36:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120521
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 Oct 2025 19:04:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120522
 
-Update homepage to location where it is being redirected.
+License-Update: change offset because README file got longer.  Checksum is unchanged.
 
-Changelog: https://firefox-source-docs.mozilla.org/security/nss/releases/nss_3_117.html
+5.05      2017-04-26
+    [FIXES]
+    * Revert Dist::Zilla Removal
+      - https://github.com/jfearn/HTML-Tree/issues/7
+      - Vendor note: It should be simpler to compare 5.03 and 5.05
+        than to compare 5.04 and 5.05, or 5.03 and 5.05.
+      - Fixes RT#12230: Undeclared dep on Test::Fatal
+        - https://rt.cpan.org/Ticket/Display.html?id=121230
+    * Proper fix for '.' in @INC
+      - https://rt.cpan.org/Ticket/Display.html?id=120521
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-support/nss/{nss_3.116.bb => nss_3.117.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/nss/{nss_3.116.bb => nss_3.117.bb} (97%)
+ ...ibhtml-tree-perl_5.04.bb => libhtml-tree-perl_5.05.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-perl/recipes-perl/libhtml/{libhtml-tree-perl_5.04.bb => libhtml-tree-perl_5.05.bb} (78%)
 
-diff --git a/meta-oe/recipes-support/nss/nss_3.116.bb b/meta-oe/recipes-support/nss/nss_3.117.bb
-similarity index 97%
-rename from meta-oe/recipes-support/nss/nss_3.116.bb
-rename to meta-oe/recipes-support/nss/nss_3.117.bb
-index cc115c4329..5e81441219 100644
---- a/meta-oe/recipes-support/nss/nss_3.116.bb
-+++ b/meta-oe/recipes-support/nss/nss_3.117.bb
-@@ -5,7 +5,7 @@ security-enabled client and server applications. \
- Applications built with NSS can support SSL v2 and v3, \
- TLS, PKCS 5, PKCS 7, PKCS 11, PKCS 12, S/MIME, X.509 \
- v3 certificates, and other security standards."
--HOMEPAGE = "http://www.mozilla.org/projects/security/pki/nss/"
-+HOMEPAGE = "https://firefox-source-docs.mozilla.org/security/nss/index.html"
+diff --git a/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.04.bb b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.05.bb
+similarity index 78%
+rename from meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.04.bb
+rename to meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.05.bb
+index 59bab0c748..332eabb153 100644
+--- a/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.04.bb
++++ b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.05.bb
+@@ -6,15 +6,15 @@ libwww-perl distribution, but are now unbundled in order to facilitate \
+ a separate development track."
  SECTION = "libs"
  
- DEPENDS = "sqlite3 nspr zlib nss-native"
-@@ -20,7 +20,7 @@ LIC_FILES_CHKSUM = "file://nss/COPYING;md5=3b1e88e1b9c0b5a4b2881d46cce06a18 \
+-HOMEPAGE = "https://metacpan.org/release/JFEARN/HTML-Tree-5.04/source/README"
++HOMEPAGE = "https://metacpan.org/release/KENTNL/HTML-Tree-5.05/source/README"
  
- VERSION_DIR = "${@d.getVar('BP').upper().replace('-', '_').replace('.', '_') + '_RTM'}"
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+-LIC_FILES_CHKSUM = "file://README;beginline=74;endline=91;md5=260d31d31370658947ae050eef27aca9"
++LIC_FILES_CHKSUM = "file://README;beginline=88;endline=105;md5=260d31d31370658947ae050eef27aca9"
  
--SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
-+SRC_URI = "https://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
-            file://nss.pc.in \
-            file://blank-cert9.db \
-            file://blank-key4.db \
-@@ -33,7 +33,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/$
-            file://0006-Fix-nss-multilib-build-on-openSUSE-11.x-32bit.patch \
-            file://0007-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
-            "
--SRC_URI[sha256sum] = "3938611de4ad1e3b71f27f3cd5ea717a5b5f83bffc9cd427e6d929dc67f2bb73"
-+SRC_URI[sha256sum] = "5786b523a2f2e9295ed10d711960d2e33cd620bb80d6288443eda43553a51996"
+-SRC_URI = "${CPAN_MIRROR}/authors/id/J/JF/JFEARN/HTML-Tree-${PV}.tar.gz \
++SRC_URI = "${CPAN_MIRROR}/authors/id/K/KE/KENTNL/HTML-Tree-${PV}.tar.gz \
+            file://bin-htmltree-fix-shebang.patch \
+ "
+-SRC_URI[sha256sum] = "1959ea2f7a9f1491903238d3a2cbef3a8e9aaaa75963f7114dbf54dca791b7be"
++SRC_URI[sha256sum] = "9c0461e9058d4d1bf1dca353bb1266cf99c99c8adabd9d3ca97d2bc4a5e8bd0f"
  
- UPSTREAM_CHECK_URI = "https://ftp.mozilla.org/pub/security/nss/releases/"
- UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>\d+(\_\d+)+)"
+ S = "${UNPACKDIR}/HTML-Tree-${PV}"
+ 
 -- 
 2.43.0
 
