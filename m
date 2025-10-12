@@ -2,275 +2,381 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79597CCA476
-	for <webhook@archiver.kernel.org>; Sun, 12 Oct 2025 01:22:37 +0000 (UTC)
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.web10.11274.1760232155207762147
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EF4DCCA476
+	for <webhook@archiver.kernel.org>; Sun, 12 Oct 2025 01:22:47 +0000 (UTC)
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web11.11416.1760232158753764303
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Oct 2025 18:22:35 -0700
+ Sat, 11 Oct 2025 18:22:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Rf/Kdw7y;
- spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-b5a631b9c82so1951969a12.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 18:22:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hzLmzcU5;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-28a5b8b12a1so29436335ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Oct 2025 18:22:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760232154; x=1760836954; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IEcFa+ZK7Fgqy6l3Fc48j/EpX+XGQjmv1PEedUNKod0=;
-        b=Rf/Kdw7y8NUvNmPZgYl7EQoMRSd/jcpj7QqWUEgQ07N2R1FbMT5/1TaPXmrLo8hwbn
-         3J4GmmjP2TuC6HX6wwci9LAFe6mKzkKEIaan8DvKxij7UnPaHcERnnmweOONzs03pAMN
-         x+D3eozbACGck8+FO9B3XQRq/vmEtT8ACGCuRfbtS2Pi4+wF3ZaadE/fUZxzHlGdTYS0
-         RvwePIYYP+7KosH1QROAC/oj2u1QiB534Drwd8tlXKqewwM42tsUiQK7Bstp97oSIWs/
-         zS4mooZVCqIOIx34Z7RaqpHnFvI1NpCKRNXdPDQB1sFfGCX6oUwrN1LOgUwvqGUk91N0
-         JNWg==
+        d=gmail.com; s=20230601; t=1760232158; x=1760836958; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+7iY1oC0/xAy7XKcKQR/1Y3eHduXB2Wz1FXODgw1avs=;
+        b=hzLmzcU55NCLrfIbtvuPI+ofOnOKcua84fvWv91qr0JnN8mOBTvftAgemcIJTwpENm
+         C+pnay0BKDR3//M+FXeT3+Cd1ujkXvzgoeKBNtMbRJOzu58lnYaPRcbtYbVCx6gSfMyc
+         jxRGtElSc2GqqiF8gQ3/s/SnNwl1XHnh+JmfcGLtAS1q2ZSMdQJ4VW4MYYFpZLD5NsSc
+         uv+mpdjDSeUWhaW5MrPM1gzDJK3v4QbP/qLb7TcoZ4bS1XTWxLRZoo0XVj0zegz2luRG
+         Njs2FvsFQ9Zns758y1xcfIJtkVH+d/Pa+eZiog6HuZmO7CGLgja9aDijRcMt3SCqigDp
+         gX6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760232154; x=1760836954;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=IEcFa+ZK7Fgqy6l3Fc48j/EpX+XGQjmv1PEedUNKod0=;
-        b=Gxu9p7Dr4J/qKwU9OnxrJpMngK4HW/Nsx2SsEq1v/3ak43rtHoEnGtJyTfFRz58Lra
-         2ozoqm6quuUGh8yMjkRUY7CbbOElwki1+kFO26cmqq4LLN73niyY3orpcD8wFNewdYbw
-         u5dQt3XlZaK/N5BCg4BatLFjqWqKA8hcfTG1PoTtoazbHTyXbyuB3LALmISdgEO82oF/
-         rIQrlAvA0WlHhOqTrwAdChWtIX+9Mi7FAxVvRvpObVtv0M+IugxX0QlVwzCCv/gawBLT
-         uXSmwD6jqkEuoekB4C3/7pWeox5a8QFletD7MCqkNiW177hq/gQOIUlFFZtbm/0WCngC
-         Kx5A==
-X-Gm-Message-State: AOJu0YzN9H66/kz4eZtcu0dEbsKYVNtWNsOZVxEmEpAgW+mf7Opm98SR
-	wrQ0Bkk5YPPAbP4d1YsCrjJhFecYNOoQ4B5TDYRVj/L4pduKBsXHXZFbpr3bog==
-X-Gm-Gg: ASbGncvVsyOMALbJr4tkT3lKyxQBmBKNYabPLtiwMCAAahDYF7Pu8iTo8OLVSt1+UTD
-	PHQCYWyDBsEu4cuM75ME0rjBuzOp51DyuzLzJFnz54w/iNmsAF5aygE0BDac1jQrbltzrQV9hK1
-	PKPVOWy4J8Cse2NvP1QD6WXmfDh8672UrQFup5dqKCEjGzXuc5UCTCfoQuifuc+yQLkceC3nKfQ
-	QHGV+DFe86dB4NrAsXq8oU6s9XyEdbCn4Ka4NnEfJFm4eyQ55+9AJxTX3ZVwBoI7ijWviFrqV79
-	i8TkxkGU08bZV6uCD0L8WqushQjYayfXGpsri7Yx6rXzahay7HwNwB+TPiSjliRCfsDyhjsoifT
-	ojL8VqCzeD/ZrqaQADwFD67PIOG0173cK5imEhZB2iI4tnLYsE6Dj43ya9DHJe5AjVz1feXM=
-X-Google-Smtp-Source: AGHT+IELa8ZkgkW0g8BDd1lWmMBps6dLe+P1PwYBeQscafgiJPV8H75P9GI3dqEL6pGN+4bz/mDPjQ==
-X-Received: by 2002:a17:903:2a8e:b0:24e:e5c9:ecf7 with SMTP id d9443c01a7336-290272b536emr221984405ad.34.1760232154203;
-        Sat, 11 Oct 2025 18:22:34 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1760232158; x=1760836958;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=+7iY1oC0/xAy7XKcKQR/1Y3eHduXB2Wz1FXODgw1avs=;
+        b=eNFrNh9JrA/FrRiPr73fJMZDUsfPX5Gne70eELzLYQLiMO0B+d9bXZwswH478E/XSB
+         fgWbG2SilOm3lpcy9ug4D2n97tfh5x3QC2wS4IRhz6wHkS9y5sM0L7pkMNUuRGZT1F0U
+         W1tNCN6csfWlOkB5wgnIxorSOexzLcuaCwbBl2ciy8c+7/mORyruAusJ+0zywvElu7F1
+         192Y+jT97UQ5OHuAer7drBZQDGVSjXIxe9K7ywObnfwUZ0SH0BUZT0r2YTCGKXH+LvH9
+         qgrCTU6/s7u+xVqScjUCYTqLy4m+hPdPJESs2e7vuJ4m333aRI5bPjglv7d49+l7eUO0
+         fSiA==
+X-Gm-Message-State: AOJu0YyIeUktEfWph8UiQvDMhs1pbw+PVC8mj5vQQreUkj2GxjjYNEvH
+	haM9CBixUVrECGNXMDWos0oVn+iDWjRxzEuc/lb0ZXF3E4q5wu9uZctFUv5l6A==
+X-Gm-Gg: ASbGncuqks7yT49OHWQCJk5BP4CBBc3TWrkTfW0faiMBbB+XgVqhx32L4c36uhlYDQM
+	7lCg4sOkTFxU4R9H3SlonS5aX1H6xZQ3vosaCrc6qPYTB25n+YPb1o5xV3qVByDa8kyYhggPPXq
+	m+PaxvQIfFIhmR4uMXdCsBmU3fqavQiKLeR2atP3ox89w/knGS/D4Z4vCZxXRK8x2cDi4/wYjo5
+	uwiRrhTpEROA5i0cyMJW9WXvwSnIwQXgVXFaj9fWsplEXgVqtRxhU2KojO7XgcGwR/REhl0NKQ2
+	p+xts4Rzgv1x+kmSZKgV7WJPIAtexzsdYSjpLAaUpCtCwSNYVLXov6qDDHX/l3xpCZMt/lTCHQ2
+	f8IX9WGrjv/+jZhQ6dk6D+k+fwVJjkwBta1UvckRVuMiamdgaw+KTEXRUZW/d1R3CfEkDWVc=
+X-Google-Smtp-Source: AGHT+IHBX5wwaLokKekfuXtLk0Hid0lTX4woI2veYGYNy/PGIkPfN81/6/oYkyXJ8pW6HlaW5yGV1Q==
+X-Received: by 2002:a17:903:1b44:b0:279:a5bb:54e2 with SMTP id d9443c01a7336-29027379a7dmr205121225ad.20.1760232157854;
+        Sat, 11 Oct 2025 18:22:37 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034f362fasm94541355ad.97.2025.10.11.18.22.32
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034f362fasm94541355ad.97.2025.10.11.18.22.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Oct 2025 18:22:33 -0700 (PDT)
+        Sat, 11 Oct 2025 18:22:37 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 X-Google-Original-From: Ankur Tyagi <ankur.tyagi@navicogroup.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][walnascar][PATCH] python3-django: patch CVE-2025-59681
-Date: Sun, 12 Oct 2025 14:22:25 +1300
-Message-ID: <20251012012226.3314502-1-ankur.tyagi@navicogroup.com>
+Subject: [oe][meta-oe][walnascar][PATCH] redis: patch CVE-2025-49844
+Date: Sun, 12 Oct 2025 14:22:26 +1300
+Message-ID: <20251012012226.3314502-2-ankur.tyagi@navicogroup.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251012012226.3314502-1-ankur.tyagi@navicogroup.com>
+References: <20251012012226.3314502-1-ankur.tyagi@navicogroup.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 12 Oct 2025 01:22:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120516
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 Oct 2025 01:22:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120517
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Discovered in v4.2 but not in v5.0
+Details https://nvd.nist.gov/vuln/detail/CVE-2025-49844
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2025-59681
+Also refreshed patches for v6.2.18
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../0001-CVE-2025-59681.patch                 | 174 ++++++++++++++++++
- .../python/python3-django_4.2.20.bb           |   2 +
- 2 files changed, 176 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/0001-CVE-2025-59681.patch
+ ...-hiredis-use-default-CC-if-it-is-set.patch |  2 +-
+ ...ile-to-use-environment-build-setting.patch |  2 +-
+ ...003-hack-to-force-use-of-libc-malloc.patch |  4 +-
+ .../0004-src-Do-not-reset-FINAL_LIBS.patch    |  6 +--
+ ...RCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch |  2 +-
+ ...006-Define-correct-gregs-for-RISCV32.patch |  2 +-
+ ...pt-may-lead-to-remote-code-execution.patch | 37 +++++++++++++++++++
+ ...-hiredis-use-default-CC-if-it-is-set.patch |  2 +-
+ ...ile-to-use-environment-build-setting.patch |  2 +-
+ ...003-hack-to-force-use-of-libc-malloc.patch |  4 +-
+ .../0004-src-Do-not-reset-FINAL_LIBS.patch    |  4 +-
+ ...RCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch |  2 +-
+ ...006-Define-correct-gregs-for-RISCV32.patch |  6 +--
+ ...pt-may-lead-to-remote-code-execution.patch | 37 +++++++++++++++++++
+ .../recipes-extended/redis/redis_6.2.18.bb    |  1 +
+ meta-oe/recipes-extended/redis/redis_7.2.8.bb |  1 +
+ 16 files changed, 95 insertions(+), 19 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/redis/redis-7.2.8/0007-Lua-script-may-lead-to-remote-code-execution.patch
+ create mode 100644 meta-oe/recipes-extended/redis/redis/0007-Lua-script-may-lead-to-remote-code-execution.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.20/0001-CVE-2025-59681.patch b/meta-python/recipes-devtools/python/python3-django-4.2.20/0001-CVE-2025-59681.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.8/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0001-hiredis-use-default-CC-if-it-is-set.patch
+index 63bf403412..6458830902 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.8/0001-hiredis-use-default-CC-if-it-is-set.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.8/0001-hiredis-use-default-CC-if-it-is-set.patch
+@@ -1,4 +1,4 @@
+-From af4fc632c03b2a68be4206b4896f27fc4bb865ae Mon Sep 17 00:00:00 2001
++From dd6c0b5b0570cefda981d35fe9100cb52c112b79 Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Fri, 8 Feb 2013 17:39:52 -0600
+ Subject: [PATCH] hiredis: use default CC if it is set
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.8/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+index 46330f5064..7cb5bb294c 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.8/0002-lua-update-Makefile-to-use-environment-build-setting.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.8/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+@@ -1,4 +1,4 @@
+-From 45ae5eb5c3482054073e06ab1a78e0aa9b96447f Mon Sep 17 00:00:00 2001
++From b6dadc6b094b7537bc7c4ae1ac598ffeca4c7cd6 Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Fri, 8 Feb 2013 20:22:19 -0600
+ Subject: [PATCH] lua: update Makefile to use environment build settings
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.8/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0003-hack-to-force-use-of-libc-malloc.patch
+index 1f97f9783d..ba8aa64b3e 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.8/0003-hack-to-force-use-of-libc-malloc.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.8/0003-hack-to-force-use-of-libc-malloc.patch
+@@ -1,4 +1,4 @@
+-From 7a98e3ac480413ce7db3a5edd5dc70458b921b29 Mon Sep 17 00:00:00 2001
++From 4cbd78f802be21e9673e1592965c0a40916c1691 Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Wed, 6 Feb 2013 20:51:02 -0600
+ Subject: [PATCH] hack to force use of libc malloc
+@@ -20,7 +20,7 @@ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+  1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+ diff --git a/src/Makefile b/src/Makefile
+-index ecbd275..39decee 100644
++index 6a87909..b8e0d44 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+ @@ -13,7 +13,8 @@
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.8/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0004-src-Do-not-reset-FINAL_LIBS.patch
+index 974cf5169f..69a2152574 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.8/0004-src-Do-not-reset-FINAL_LIBS.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.8/0004-src-Do-not-reset-FINAL_LIBS.patch
+@@ -1,4 +1,4 @@
+-From 50fc46a12f6cf97e7b927d3ea29eecc9ebdea34d Mon Sep 17 00:00:00 2001
++From 6566cc4b3278c8cef57d7dc3c4f7ca06e2e46102 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Tue, 10 Sep 2019 20:04:26 -0700
+ Subject: [PATCH] src: Do not reset FINAL_LIBS
+@@ -16,10 +16,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/src/Makefile b/src/Makefile
+-index 39decee..f5efe82 100644
++index b8e0d44..3a68fa6 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+-@@ -119,7 +119,7 @@ endif
++@@ -122,7 +122,7 @@ endif
+  
+  FINAL_CFLAGS=$(STD) $(WARN) $(OPT) $(DEBUG) $(CFLAGS) $(REDIS_CFLAGS)
+  FINAL_LDFLAGS=$(LDFLAGS) $(REDIS_LDFLAGS) $(DEBUG)
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.8/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+index 8e5f30993b..26da277960 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.8/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.8/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+@@ -1,4 +1,4 @@
+-From acd832d76002a1916b3128ac05bc0296425aea6d Mon Sep 17 00:00:00 2001
++From e4cbb3e6844c8753afafc0e36fdc38313e525642 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sat, 21 Dec 2019 12:09:51 -0800
+ Subject: [PATCH] Define _GNU_SOURCE to get PTHREAD_MUTEX_INITIALIZER
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.8/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0006-Define-correct-gregs-for-RISCV32.patch
+index 7009048171..fb1f5380b3 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.8/0006-Define-correct-gregs-for-RISCV32.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.2.8/0006-Define-correct-gregs-for-RISCV32.patch
+@@ -1,4 +1,4 @@
+-From dd3ecb07bbf80b986b8f2c656ea11d1346e212f6 Mon Sep 17 00:00:00 2001
++From b626206e156d245484689762b87f6a71cbd775b4 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Mon, 26 Oct 2020 21:32:22 -0700
+ Subject: [PATCH] Define correct gregs for RISCV32
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.8/0007-Lua-script-may-lead-to-remote-code-execution.patch b/meta-oe/recipes-extended/redis/redis-7.2.8/0007-Lua-script-may-lead-to-remote-code-execution.patch
 new file mode 100644
-index 0000000000..19f6f7a15c
+index 0000000000..fc6da9483d
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-4.2.20/0001-CVE-2025-59681.patch
-@@ -0,0 +1,174 @@
-+From a475c3872c9955fda54442cf795a1048c91e7672 Mon Sep 17 00:00:00 2001
-+From: Mariusz Felisiak <felisiak.mariusz@gmail.com>
-+Date: Wed, 10 Sep 2025 09:53:52 +0200
-+Subject: [PATCH] CVE-2025-59681
++++ b/meta-oe/recipes-extended/redis/redis-7.2.8/0007-Lua-script-may-lead-to-remote-code-execution.patch
+@@ -0,0 +1,37 @@
++From a631c8341ce635c32edf7dc5ba6144bde33d4527 Mon Sep 17 00:00:00 2001
++From: Mincho Paskalev <minchopaskal@gmail.com>
++Date: Mon, 23 Jun 2025 11:41:37 +0300
++Subject: [PATCH] Lua script may lead to remote code execution
 +
-+[4.2.x] Fixed CVE-2025-59681 -- Protected QuerySet.annotate(), alias(), aggregate(), and extra() against SQL injection in column aliases on MySQL/MariaDB.
++CVE: CVE-2025-49844
++Upstream-Status: Backport [https://github.com/redis/redis/commit/d5728cb5795c966c5b5b1e0f0ac576a7e69af539]
 +
-+Thanks sw0rd1ight for the report.
-+
-+Follow up to 93cae5cb2f9a4ef1514cf1a41f714fef08005200.
-+
-+Backport of 41b43c74bda19753c757036673ea9db74acf494a from main.
-+
-+CVE: CVE-2025-59681
-+Upstream-Status: Backport [https://github.com/django/django/commit/38d9ef8c7b5cb6ef51b933e51a20e0e0063f33d5]
-+(cherry picked from commit 38d9ef8c7b5cb6ef51b933e51a20e0e0063f33d5)
++(cherry picked from commit d5728cb5795c966c5b5b1e0f0ac576a7e69af539)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ django/db/models/sql/query.py             |  8 +++---
-+ tests/aggregation/tests.py                |  4 +--
-+ tests/annotations/tests.py                | 33 ++++++++++++++++++-----
-+ tests/expressions/test_queryset_values.py |  8 +++---
-+ tests/queries/tests.py                    |  4 +--
-+ 5 files changed, 38 insertions(+), 19 deletions(-)
++ deps/lua/src/lparser.c | 6 +++++-
++ 1 file changed, 5 insertions(+), 1 deletion(-)
 +
-+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
-+index e68fd9efb7..f5a433b8a7 100644
-+--- a/django/db/models/sql/query.py
-++++ b/django/db/models/sql/query.py
-+@@ -46,9 +46,9 @@ from django.utils.tree import Node
-+ 
-+ __all__ = ["Query", "RawQuery"]
-+ 
-+-# Quotation marks ('"`[]), whitespace characters, semicolons, or inline
-++# Quotation marks ('"`[]), whitespace characters, semicolons, hashes, or inline
-+ # SQL comments are forbidden in column aliases.
-+-FORBIDDEN_ALIAS_PATTERN = _lazy_re_compile(r"['`\"\]\[;\s]|--|/\*|\*/")
-++FORBIDDEN_ALIAS_PATTERN = _lazy_re_compile(r"['`\"\]\[;\s]|#|--|/\*|\*/")
-+ 
-+ # Inspired from
-+ # https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS
-+@@ -1123,8 +1123,8 @@ class Query(BaseExpression):
-+     def check_alias(self, alias):
-+         if FORBIDDEN_ALIAS_PATTERN.search(alias):
-+             raise ValueError(
-+-                "Column aliases cannot contain whitespace characters, quotation marks, "
-+-                "semicolons, or SQL comments."
-++                "Column aliases cannot contain whitespace characters, hashes, "
-++                "quotation marks, semicolons, or SQL comments."
-+             )
-+ 
-+     def add_annotation(self, annotation, alias, select=True):
-+diff --git a/tests/aggregation/tests.py b/tests/aggregation/tests.py
-+index 48266d9774..277c0507f7 100644
-+--- a/tests/aggregation/tests.py
-++++ b/tests/aggregation/tests.py
-+@@ -2090,8 +2090,8 @@ class AggregateTestCase(TestCase):
-+     def test_alias_sql_injection(self):
-+         crafted_alias = """injected_name" from "aggregation_author"; --"""
-+         msg = (
-+-            "Column aliases cannot contain whitespace characters, quotation marks, "
-+-            "semicolons, or SQL comments."
-++            "Column aliases cannot contain whitespace characters, hashes, quotation "
-++            "marks, semicolons, or SQL comments."
-+         )
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Author.objects.aggregate(**{crafted_alias: Avg("age")})
-+diff --git a/tests/annotations/tests.py b/tests/annotations/tests.py
-+index e0cdbf1e0b..22fdf742f8 100644
-+--- a/tests/annotations/tests.py
-++++ b/tests/annotations/tests.py
-+@@ -1115,12 +1115,21 @@ class NonAggregateAnnotationTestCase(TestCase):
-+     def test_alias_sql_injection(self):
-+         crafted_alias = """injected_name" from "annotations_book"; --"""
-+         msg = (
-+-            "Column aliases cannot contain whitespace characters, quotation marks, "
-+-            "semicolons, or SQL comments."
-++            "Column aliases cannot contain whitespace characters, hashes, quotation  "
-++            "marks, semicolons, or SQL comments."
-+         )
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Book.objects.annotate(**{crafted_alias: Value(1)})
-+ 
-++    def test_alias_filtered_relation_sql_injection(self):
-++        crafted_alias = """injected_name" from "annotations_book"; --"""
-++        msg = (
-++            "Column aliases cannot contain whitespace characters, hashes, quotation "
-++            "marks, semicolons, or SQL comments."
-++        )
-++        with self.assertRaisesMessage(ValueError, msg):
-++            Book.objects.annotate(**{crafted_alias: FilteredRelation("author")})
-++
-+     def test_alias_forbidden_chars(self):
-+         tests = [
-+             'al"ias',
-+@@ -1133,13 +1142,14 @@ class NonAggregateAnnotationTestCase(TestCase):
-+             "ali/*as",
-+             "alias*/",
-+             "alias;",
-+-            # [] are used by MSSQL.
-++            # [] and # are used by MSSQL.
-+             "alias[",
-+             "alias]",
-++            "ali#as",
-+         ]
-+         msg = (
-+-            "Column aliases cannot contain whitespace characters, quotation marks, "
-+-            "semicolons, or SQL comments."
-++            "Column aliases cannot contain whitespace characters, hashes, quotation "
-++            "marks, semicolons, or SQL comments."
-+         )
-+         for crafted_alias in tests:
-+             with self.subTest(crafted_alias):
-+@@ -1413,8 +1423,17 @@ class AliasTests(TestCase):
-+     def test_alias_sql_injection(self):
-+         crafted_alias = """injected_name" from "annotations_book"; --"""
-+         msg = (
-+-            "Column aliases cannot contain whitespace characters, quotation marks, "
-+-            "semicolons, or SQL comments."
-++            "Column aliases cannot contain whitespace characters, hashes, quotation "
-++            "marks, semicolons, or SQL comments."
-+         )
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Book.objects.alias(**{crafted_alias: Value(1)})
-++
-++    def test_alias_filtered_relation_sql_injection(self):
-++        crafted_alias = """injected_name" from "annotations_book"; --"""
-++        msg = (
-++            "Column aliases cannot contain whitespace characters, hashes, quotation "
-++            "marks, semicolons, or SQL comments."
-++        )
-++        with self.assertRaisesMessage(ValueError, msg):
-++            Book.objects.alias(**{crafted_alias: FilteredRelation("authors")})
-+diff --git a/tests/expressions/test_queryset_values.py b/tests/expressions/test_queryset_values.py
-+index 47bd1358de..080ee06183 100644
-+--- a/tests/expressions/test_queryset_values.py
-++++ b/tests/expressions/test_queryset_values.py
-+@@ -37,8 +37,8 @@ class ValuesExpressionsTests(TestCase):
-+     def test_values_expression_alias_sql_injection(self):
-+         crafted_alias = """injected_name" from "expressions_company"; --"""
-+         msg = (
-+-            "Column aliases cannot contain whitespace characters, quotation marks, "
-+-            "semicolons, or SQL comments."
-++            "Column aliases cannot contain whitespace characters, hashes, quotation "
-++            "marks, semicolons, or SQL comments."
-+         )
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Company.objects.values(**{crafted_alias: F("ceo__salary")})
-+@@ -47,8 +47,8 @@ class ValuesExpressionsTests(TestCase):
-+     def test_values_expression_alias_sql_injection_json_field(self):
-+         crafted_alias = """injected_name" from "expressions_company"; --"""
-+         msg = (
-+-            "Column aliases cannot contain whitespace characters, quotation marks, "
-+-            "semicolons, or SQL comments."
-++            "Column aliases cannot contain whitespace characters, hashes, quotation "
-++            "marks, semicolons, or SQL comments."
-+         )
-+         with self.assertRaisesMessage(ValueError, msg):
-+             JSONFieldModel.objects.values(f"data__{crafted_alias}")
-+diff --git a/tests/queries/tests.py b/tests/queries/tests.py
-+index a6a2b252eb..b8488fef75 100644
-+--- a/tests/queries/tests.py
-++++ b/tests/queries/tests.py
-+@@ -1943,8 +1943,8 @@ class Queries5Tests(TestCase):
-+     def test_extra_select_alias_sql_injection(self):
-+         crafted_alias = """injected_name" from "queries_note"; --"""
-+         msg = (
-+-            "Column aliases cannot contain whitespace characters, quotation marks, "
-+-            "semicolons, or SQL comments."
-++            "Column aliases cannot contain whitespace characters, hashes, quotation "
-++            "marks, semicolons, or SQL comments."
-+         )
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Note.objects.extra(select={crafted_alias: "1"})
-diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb b/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
-index 8644b282c6..3f1e24d9be 100644
---- a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
-@@ -1,6 +1,8 @@
- require python3-django.inc
- inherit python_setuptools_build_meta
++diff --git a/deps/lua/src/lparser.c b/deps/lua/src/lparser.c
++index dda7488..ee7d90c 100644
++--- a/deps/lua/src/lparser.c
+++++ b/deps/lua/src/lparser.c
++@@ -384,13 +384,17 @@ Proto *luaY_parser (lua_State *L, ZIO *z, Mbuffer *buff, const char *name) {
++   struct LexState lexstate;
++   struct FuncState funcstate;
++   lexstate.buff = buff;
++-  luaX_setinput(L, &lexstate, z, luaS_new(L, name));
+++  TString *tname = luaS_new(L, name);
+++  setsvalue2s(L, L->top, tname);
+++  incr_top(L);
+++  luaX_setinput(L, &lexstate, z, tname);
++   open_func(&lexstate, &funcstate);
++   funcstate.f->is_vararg = VARARG_ISVARARG;  /* main func. is always vararg */
++   luaX_next(&lexstate);  /* read first token */
++   chunk(&lexstate);
++   check(&lexstate, TK_EOS);
++   close_func(&lexstate);
+++  --L->top;
++   lua_assert(funcstate.prev == NULL);
++   lua_assert(funcstate.f->nups == 0);
++   lua_assert(lexstate.fs == NULL);
+diff --git a/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
+index 51a6e9c957..72d899485e 100644
+--- a/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
++++ b/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
+@@ -1,4 +1,4 @@
+-From 67990f216f2fbbc8a6699c700dfc089aa617905f Mon Sep 17 00:00:00 2001
++From 947efa7c62e4451f3893dab31457249993f9fcf0 Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Fri, 8 Feb 2013 17:39:52 -0600
+ Subject: [PATCH] hiredis: use default CC if it is set
+diff --git a/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+index 17b533669b..56b5d5e7a1 100644
+--- a/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
++++ b/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+@@ -1,4 +1,4 @@
+-From ef989aab052510bfda32b2b325a5f80b76c42677 Mon Sep 17 00:00:00 2001
++From 7d6127170dac332b5f14e53510d3c35f8c81a677 Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Fri, 8 Feb 2013 20:22:19 -0600
+ Subject: [PATCH] lua: update Makefile to use environment build settings
+diff --git a/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
+index f1021eef6c..7e8c9bda80 100644
+--- a/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
++++ b/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
+@@ -1,4 +1,4 @@
+-From b9586abcb803747301f6cc4ff93c7642bef693ea Mon Sep 17 00:00:00 2001
++From 98f33d1b49c4ff1378a90f1b67b44c2a2bcbe6d1 Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Wed, 6 Feb 2013 20:51:02 -0600
+ Subject: [PATCH] hack to force use of libc malloc
+@@ -20,7 +20,7 @@ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+  1 file changed, 2 insertions(+), 1 deletion(-)
  
-+SRC_URI += "file://0001-CVE-2025-59681.patch"
+ diff --git a/src/Makefile b/src/Makefile
+-index 7d75c83..35dd314 100644
++index 49335f0..5af2b48 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+ @@ -13,7 +13,8 @@
+diff --git a/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
+index 958106e261..c0285c9627 100644
+--- a/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
++++ b/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
+@@ -1,4 +1,4 @@
+-From a4d87aca1c00c53b386ee7490223971e00873add Mon Sep 17 00:00:00 2001
++From ac93222e7b5e93aa187fc1ca1b9f160b5e29c80c Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Tue, 10 Sep 2019 20:04:26 -0700
+ Subject: [PATCH] src: Do not reset FINAL_LIBS
+@@ -16,7 +16,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/src/Makefile b/src/Makefile
+-index 35dd314..3770f96 100644
++index 5af2b48..071798d 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+ @@ -93,7 +93,7 @@ endif
+diff --git a/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+index d73c66c9d0..e543f46550 100644
+--- a/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
++++ b/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+@@ -1,4 +1,4 @@
+-From 2e6311c9c7cd85bf63eab8fe92c08ec1ec01b6fc Mon Sep 17 00:00:00 2001
++From 4c9751247fc7273965790ea70d5073667de7f63d Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sat, 21 Dec 2019 12:09:51 -0800
+ Subject: [PATCH] Define _GNU_SOURCE to get PTHREAD_MUTEX_INITIALIZER
+diff --git a/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
+index bb3f5c607e..c17519b493 100644
+--- a/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
++++ b/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
+@@ -1,4 +1,4 @@
+-From 6149911f7a6fbaef3ed418408e2b501fa9479ffa Mon Sep 17 00:00:00 2001
++From ed5af1f409b4fce1bf9e88c478a6287d149be77c Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Mon, 26 Oct 2020 21:32:22 -0700
+ Subject: [PATCH] Define correct gregs for RISCV32
+@@ -7,8 +7,8 @@ Upstream-Status: Pending
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+-Updated patch for 6.2.1
+-Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
++Updated patch for 6.2.8
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+  src/debug.c | 26 ++++++++++++++++++++++++--
+  1 file changed, 24 insertions(+), 2 deletions(-)
+diff --git a/meta-oe/recipes-extended/redis/redis/0007-Lua-script-may-lead-to-remote-code-execution.patch b/meta-oe/recipes-extended/redis/redis/0007-Lua-script-may-lead-to-remote-code-execution.patch
+new file mode 100644
+index 0000000000..9527d27805
+--- /dev/null
++++ b/meta-oe/recipes-extended/redis/redis/0007-Lua-script-may-lead-to-remote-code-execution.patch
+@@ -0,0 +1,37 @@
++From ab3294e02e06dd1e9b6cac232b8bf4482497a8c1 Mon Sep 17 00:00:00 2001
++From: Mincho Paskalev <minchopaskal@gmail.com>
++Date: Mon, 23 Jun 2025 11:41:37 +0300
++Subject: [PATCH] Lua script may lead to remote code execution
 +
- SRC_URI[sha256sum] = "92bac5b4432a64532abb73b2ac27203f485e40225d2640a7fbef2b62b876e789"
++CVE: CVE-2025-49844
++Upstream-Status: Backport [https://github.com/redis/redis/commit/d5728cb5795c966c5b5b1e0f0ac576a7e69af539]
++
++(cherry picked from commit d5728cb5795c966c5b5b1e0f0ac576a7e69af539)
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ deps/lua/src/lparser.c | 6 +++++-
++ 1 file changed, 5 insertions(+), 1 deletion(-)
++
++diff --git a/deps/lua/src/lparser.c b/deps/lua/src/lparser.c
++index dda7488..ee7d90c 100644
++--- a/deps/lua/src/lparser.c
+++++ b/deps/lua/src/lparser.c
++@@ -384,13 +384,17 @@ Proto *luaY_parser (lua_State *L, ZIO *z, Mbuffer *buff, const char *name) {
++   struct LexState lexstate;
++   struct FuncState funcstate;
++   lexstate.buff = buff;
++-  luaX_setinput(L, &lexstate, z, luaS_new(L, name));
+++  TString *tname = luaS_new(L, name);
+++  setsvalue2s(L, L->top, tname);
+++  incr_top(L);
+++  luaX_setinput(L, &lexstate, z, tname);
++   open_func(&lexstate, &funcstate);
++   funcstate.f->is_vararg = VARARG_ISVARARG;  /* main func. is always vararg */
++   luaX_next(&lexstate);  /* read first token */
++   chunk(&lexstate);
++   check(&lexstate, TK_EOS);
++   close_func(&lexstate);
+++  --L->top;
++   lua_assert(funcstate.prev == NULL);
++   lua_assert(funcstate.f->nups == 0);
++   lua_assert(lexstate.fs == NULL);
+diff --git a/meta-oe/recipes-extended/redis/redis_6.2.18.bb b/meta-oe/recipes-extended/redis/redis_6.2.18.bb
+index 171c6640f2..7c572e2ff1 100644
+--- a/meta-oe/recipes-extended/redis/redis_6.2.18.bb
++++ b/meta-oe/recipes-extended/redis/redis_6.2.18.bb
+@@ -16,6 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0004-src-Do-not-reset-FINAL_LIBS.patch \
+            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
++           file://0007-Lua-script-may-lead-to-remote-code-execution.patch \
+           "
  
- RDEPENDS:${PN} += "\
+ SRC_URI[sha256sum] = "470c75bac73d7390be4dd66479c6f29e86371c5d380ce0c7efb4ba2bbda3612d"
+diff --git a/meta-oe/recipes-extended/redis/redis_7.2.8.bb b/meta-oe/recipes-extended/redis/redis_7.2.8.bb
+index 3c4d84085b..48d9efc73a 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.2.8.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.2.8.bb
+@@ -16,6 +16,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0004-src-Do-not-reset-FINAL_LIBS.patch \
+            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
++           file://0007-Lua-script-may-lead-to-remote-code-execution.patch \
+           "
+ 
+ SRC_URI[sha256sum] = "6be4fdfcdb2e5ac91454438246d00842d2671f792673390e742dfcaf1bf01574"
 
