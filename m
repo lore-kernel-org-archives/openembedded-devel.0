@@ -2,65 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DA3BCCD190
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 548ECCCD18E
 	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 20:39:29 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web11.6659.1760474361339869810
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web11.6677.1760474365849079697
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 13:39:21 -0700
+ Tue, 14 Oct 2025 13:39:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XFNZmYEp;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-781ea2cee3fso5588104b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:39:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cJnuYgZ6;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-780fc3b181aso3476638b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:39:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760474360; x=1761079160; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760474365; x=1761079165; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=e3dErGWZhUilwr6e6fZ2g5gPmNT9iqC8kjiHGvft6Ug=;
-        b=XFNZmYEpqQ+LFV4KfgxE/3aH96TTHxiEJzZ3lZe3LAR6TTjlN9HxYHJjgGVJS3mVPM
-         5LtKk4xC7dObbe3M7m9HDgSSobzvMLhxng6OER5CQoKZRobJKjnmJmBuzeTvoGj3RI0I
-         wbqIcCgcmGwcy0ulReP6WN4Bb7Roro0l6tkVLbdUx3fSLJFAmUcexW9GKb+1/dEMYG0N
-         ME5eLcCwvwAgossBaVdgw3TMF1wAKeRkcm0jcVey06IVEHqxfmTj4kxUZ+ilIv+gB1b+
-         JT0/iAOP+4wdXxch0iCHUOtvc1643SUx+kNAdjJH8+24VpmAFJYzkrzz8/uJ6xTcIRIl
-         TAHw==
+        bh=Q95GyYUnAjW6T8UQwPbCosN6A9n6Vql2qJbaRpCzDzk=;
+        b=cJnuYgZ65WJeaebnSD5s4OE7eJ6Uz5Y6mTrQEuhs0xd/HBTkFdDYsoddNcPPtRXu2E
+         juXhqNRjyGPHMa8IZQTITEFCSpF2X9k/PjP4ZwkyjUAJ0o/yEYspJZv+5y1zIrIgmdhC
+         lrgdFwTbr1Xfp8G2L+Uj2/809hsVV+6ixmgozMxPC6nwXfZGHTcKbYYqgKWovKXSKHb1
+         gsiFYG5k3qCZ6heElhWOJi0VJGpL+IC7gzJq7dC7p1HualEQ7iI5/BjVTCvd8xHPxb0Z
+         /QUXdlZ3DgIdUFogx0je8Rb5MMcMZ4Cg3ya1TdzDimlu7cSY+RGURFQm3vuqBsEe0282
+         6o4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760474360; x=1761079160;
+        d=1e100.net; s=20230601; t=1760474365; x=1761079165;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=e3dErGWZhUilwr6e6fZ2g5gPmNT9iqC8kjiHGvft6Ug=;
-        b=qITlSUbg4tsRXEyf2u4e9yRzvs3owdv4YPWXqNj1vI9HySViYvJ/C3tnif4UwHnetK
-         bYNCU/1HdKOxkWaXKbrL+UN4siBeJPVtXbfxftoRApBPzZDoZi0B+mNCcZhfxtZ4W4PS
-         imnVtqKnBrmOXsJWhSkxdQfOksfjo+jBnPq4gGFIR/Hn60rvSk7VJYm8PZiLM2tIxvJs
-         Jbj7Z+zAHoEW45sny54bhiqPH0eZ9PiG4iIOlye+KUv1KormhR8JsCaBwgbvWgf/KDtS
-         cqvobimGy31l1RaixljIhVazzdUvINqsdAiRnVLsrgVkvOts9+2jflwKkA5eszfCAl0U
-         GOEg==
-X-Gm-Message-State: AOJu0YxDzGvsFI8Iv0gdh6daf3FrLhkrSYLnqkUIpIwcSDYPr1ihi6As
-	RtYTk3WyfLo48wJpAm0k/Ym/WCnuulYTEl09Bsdo+6JJD4AqmcUTsQG4BbI6MA==
-X-Gm-Gg: ASbGnctUbLJiiDq/O7AGhgPfGoKItiZBX0f66csgJZJq73Pbyjjz0vKt8UwJSyfssyr
-	oHUjnyNFnDYd08zvfoE6OzA1I3ldCDHYDKwyy1CVSzOPZX/FB3Y/iX/TKyPADqnsshV+yTl3MEG
-	ZKXrhy8c1LlCWvONwdLqTec21lA3mckOPl38vn26mN60fgjG60sJkcWp5BYMJx+auaClR3FCO1b
-	Kwi2MZZg+adsIFk7q/YUDYJI02f0cywlvDd5dEhaWT5JLjP6clvSQeN4I+DpnBDg3uutsx4SinL
-	+6pHCebM50baoF8SYWs5bOtmND+S9gOFS8cQYVp1lpmr2AFfEtwJEijhSGAXB6p8jv2EqZ54SVd
-	JMb1cMi5Tsq9C7b7LcNnhKPMny6+VfIsqDFwjPPcMtMq6erQNEJW2+44=
-X-Google-Smtp-Source: AGHT+IGfaYcWS+YJFFUxfg4zRHDBJeotMagKOkbhE3WOWbMxfUSvdGRknAyhyZ4SxgeGUisqx6XlJg==
-X-Received: by 2002:a05:6a00:4fca:b0:78a:f6be:74d9 with SMTP id d2e1a72fcca58-793876375c2mr29374351b3a.26.1760474360536;
-        Tue, 14 Oct 2025 13:39:20 -0700 (PDT)
+        bh=Q95GyYUnAjW6T8UQwPbCosN6A9n6Vql2qJbaRpCzDzk=;
+        b=uEruWKjnpFYAMD6i0r02B+NZiL/iZb+NvAkwj1lOGEbQSE5uZoJQtBxw+3JXYquqAY
+         WRGzUYMWs5hcIs0pQVKH1q8FSWQtxm5QadeJ3jzPnBrxh+XqSrc/HMdYTILW9BNgtryI
+         5ig6E5nGswMU7VYE5YSUj9/PJJMwt4eq4ctSFmhynyz1yCpyNxcSZnu3BWg86BxPYdZN
+         haIyHArXlp/ALAeC7t8DwjdlAqmDR/MSRHlu8Wd0ye2CS2GuNL2pgCI0vg0h0EbR5uhA
+         NT0mQBvv7QeQVlH/O4uRpz80pp4dPiybPBSdYdG9ny3XQ3O/6GeNB9DK2jiwK8N6BnmI
+         Cjlw==
+X-Gm-Message-State: AOJu0Yyb3g964HjaoSC6bLJ626DREjHqnapuZdwdytau5ihCXMOkXdZ/
+	VZUdaRySMFebO1XiAguisMpSMSFmBU9yvwnzRAe6uVvKFaijpmkUdp4ytrlpaw==
+X-Gm-Gg: ASbGnctFO0aKA4wbrdbUc26qAJtUVvKPHE3sOdtD6s3NWkxfvWGlW+ozyv/jF9hJ3Kg
+	/TffqMw+GF+1g+txZD9JL+h80zRKpMvVKk2qFIfAUWw4CzXT1zZWTZTurDMnDd0l2C+nXKFqLxi
+	BIFgNJGtLvcDYW5T7+440PdtmYVOBt6bxV8fDvofiri/aMlsXLPtV+NXQ2uhzXJFbAUPra/ASiI
+	ZGgMg3GDic1jo4O5BPMD33ysEjROxem7YXMLgDYUROZfcO8521gWp1zEoSj5jmrSMOBEZ9suC7q
+	WYzBlDRMPWgrAc9eaJSBfUYvVkGyAkGoYC/QikPvOc4jbw4W7Bqp6sIXFYNiOupkrMuObj+QhFw
+	yO31OWsoJkQBvEserIYMXSb3mkLOBlZ22+iVTt0AEKGRKdLlykNTq9Eg8znjvOQBEaQ==
+X-Google-Smtp-Source: AGHT+IFa1hJpQymbVr5YVajAVBZWHGMDoY/n+4vgWUKdc6z9vQ1Stj4ynQ5/xuL4bjDjiiPxZip7PQ==
+X-Received: by 2002:a05:6a00:21d5:b0:781:1b5a:95b2 with SMTP id d2e1a72fcca58-79387a212afmr34056441b3a.28.1760474364971;
+        Tue, 14 Oct 2025 13:39:24 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7992b733355sm16009495b3a.26.2025.10.14.13.39.17
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7992b733355sm16009495b3a.26.2025.10.14.13.39.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Oct 2025 13:39:20 -0700 (PDT)
+        Tue, 14 Oct 2025 13:39:24 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Gyorgy Sarvari <skandigraun@gmail.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][scarthgap][PATCH 4/6] corosync: patch CVE-2025-30472
-Date: Wed, 15 Oct 2025 09:38:59 +1300
-Message-ID: <20251014203901.1479326-4-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][scarthgap][PATCH 6/6] frr: patch CVE-2024-44070
+Date: Wed, 15 Oct 2025 09:39:01 +1300
+Message-ID: <20251014203901.1479326-6-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251014203901.1479326-1-ankur.tyagi85@gmail.com>
 References: <20251014203901.1479326-1-ankur.tyagi85@gmail.com>
@@ -70,112 +67,87 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 20:39:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120629
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120631
 
-From: Peter Marko <peter.marko@siemens.com>
+Details https://nvd.nist.gov/vuln/detail/CVE-2024-44070
 
-Pick commit from [1] mentioned in [2] from [3]
-
-[1] https://github.com/corosync/corosync/issues/778
-[2] https://github.com/corosync/corosync/pull/779
-[3] https://nvd.nist.gov/vuln/detail/CVE-2025-30472
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-(cherry picked from commit eab04e462009f938fcaefefdde5e67cc94c525e8)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../corosync/corosync/CVE-2025-30472.patch    | 69 +++++++++++++++++++
- .../corosync/corosync_3.1.9.bb                |  1 +
- 2 files changed, 70 insertions(+)
- create mode 100644 meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch
+ .../frr/frr/CVE-2024-44070.patch              | 54 +++++++++++++++++++
+ .../recipes-protocols/frr/frr_9.1.bb          |  1 +
+ 2 files changed, 55 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2024-44070.patch
 
-diff --git a/meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch b/meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2024-44070.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2024-44070.patch
 new file mode 100644
-index 0000000000..9b36dbe3fb
+index 0000000000..87bd16efa6
 --- /dev/null
-+++ b/meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch
-@@ -0,0 +1,69 @@
-+From 7839990f9cdf34e55435ed90109e82709032466a Mon Sep 17 00:00:00 2001
-+From: Jan Friesse <jfriesse@redhat.com>
-+Date: Mon, 24 Mar 2025 12:05:08 +0100
-+Subject: [PATCH] totemsrp: Check size of orf_token msg
++++ b/meta-networking/recipes-protocols/frr/frr/CVE-2024-44070.patch
+@@ -0,0 +1,54 @@
++From 335dc7f0421dc5b59a50795f21f28bd92ed4ef12 Mon Sep 17 00:00:00 2001
++From: Donatas Abraitis <donatas@opensourcerouting.org>
++Date: Wed, 31 Jul 2024 08:35:14 +0300
++Subject: [PATCH] bgpd: Check the actual remaining stream length before taking
++ TLV value
 +
-+orf_token message is stored into preallocated array on endian convert
-+so carefully crafted malicious message can lead to crash of corosync.
++```
++    0 0xb50b9f898028 in __sanitizer_print_stack_trace (/home/ubuntu/frr-public/frr_public_private-libfuzzer/bgpd/.libs/bgpd+0x368028) (BuildId: 3292703ed7958b20076550c967f879db8dc27ca7)
++    1 0xb50b9f7ed8e4 in fuzzer::PrintStackTrace() (/home/ubuntu/frr-public/frr_public_private-libfuzzer/bgpd/.libs/bgpd+0x2bd8e4) (BuildId: 3292703ed7958b20076550c967f879db8dc27ca7)
++    2 0xb50b9f7d4d9c in fuzzer::Fuzzer::CrashCallback() (/home/ubuntu/frr-public/frr_public_private-libfuzzer/bgpd/.libs/bgpd+0x2a4d9c) (BuildId: 3292703ed7958b20076550c967f879db8dc27ca7)
++    3 0xe0d12d7469cc  (linux-vdso.so.1+0x9cc) (BuildId: 1a77697e9d723fe22246cfd7641b140c427b7e11)
++    4 0xe0d12c88f1fc in __pthread_kill_implementation nptl/pthread_kill.c:43:17
++    5 0xe0d12c84a678 in gsignal signal/../sysdeps/posix/raise.c:26:13
++    6 0xe0d12c83712c in abort stdlib/abort.c:79:7
++    7 0xe0d12d214724 in _zlog_assert_failed /home/ubuntu/frr-public/frr_public_private-libfuzzer/lib/zlog.c:789:2
++    8 0xe0d12d1285e4 in stream_get /home/ubuntu/frr-public/frr_public_private-libfuzzer/lib/stream.c:324:3
++    9 0xb50b9f8e47c4 in bgp_attr_encap /home/ubuntu/frr-public/frr_public_private-libfuzzer/bgpd/bgp_attr.c:2758:3
++    10 0xb50b9f8dcd38 in bgp_attr_parse /home/ubuntu/frr-public/frr_public_private-libfuzzer/bgpd/bgp_attr.c:3783:10
++    11 0xb50b9faf74b4 in bgp_update_receive /home/ubuntu/frr-public/frr_public_private-libfuzzer/bgpd/bgp_packet.c:2383:20
++    12 0xb50b9faf1dcc in bgp_process_packet /home/ubuntu/frr-public/frr_public_private-libfuzzer/bgpd/bgp_packet.c:4075:11
++    13 0xb50b9f8c90d0 in LLVMFuzzerTestOneInput /home/ubuntu/frr-public/frr_public_private-libfuzzer/bgpd/bgp_main.c:582:3
++```
 +
-+Solution is to check message size beforehand.
++CVE: CVE-2024-44070
++Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/21cd931a5f9303e12104c72ce31ca383c0c57514]
 +
-+Signed-off-by: Jan Friesse <jfriesse@redhat.com>
-+Reviewed-by: Christine Caulfield <ccaulfie@redhat.com>
-+
-+CVE: CVE-2025-30472
-+Upstream-Status: Backport [https://github.com/corosync/corosync/commits/7839990f9cdf34e55435ed90109e82709032466a]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
++Reported-by: Iggy Frankovic <iggyfran@amazon.com>
++Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
++(cherry picked from commit 0998b38e4d61179441f90dd7e7fd6a3a8b7bd8c5)
++(cherry picked from commit 21cd931a5f9303e12104c72ce31ca383c0c57514)
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ exec/totemsrp.c | 18 +++++++++++++++++-
-+ 1 file changed, 17 insertions(+), 1 deletion(-)
++ bgpd/bgp_attr.c | 8 ++++++++
++ 1 file changed, 8 insertions(+)
 +
-+diff --git a/exec/totemsrp.c b/exec/totemsrp.c
-+index 962d0e2a..364528ce 100644
-+--- a/exec/totemsrp.c
-++++ b/exec/totemsrp.c
-+@@ -3679,12 +3679,20 @@ static int check_orf_token_sanity(
-+ 	const struct totemsrp_instance *instance,
-+ 	const void *msg,
-+ 	size_t msg_len,
-++	size_t max_msg_len,
-+ 	int endian_conversion_needed)
-+ {
-+ 	int rtr_entries;
-+ 	const struct orf_token *token = (const struct orf_token *)msg;
-+ 	size_t required_len;
++diff --git a/bgpd/bgp_attr.c b/bgpd/bgp_attr.c
++index 797f05d606..cc63251cc8 100644
++--- a/bgpd/bgp_attr.c
+++++ b/bgpd/bgp_attr.c
++@@ -2718,6 +2718,14 @@ static int bgp_attr_encap(struct bgp_attr_parser_args *args)
++ 						  args->total);
++ 		}
 + 
-++	if (msg_len > max_msg_len) {
-++		log_printf (instance->totemsrp_log_level_security,
-++		    "Received orf_token message is too long...  ignoring.");
+++		if (STREAM_READABLE(BGP_INPUT(peer)) < sublength) {
+++			zlog_err("Tunnel Encap attribute sub-tlv length %d exceeds remaining stream length %zu",
+++				 sublength, STREAM_READABLE(BGP_INPUT(peer)));
+++			return bgp_attr_malformed(args,
+++						  BGP_NOTIFY_UPDATE_OPT_ATTR_ERR,
+++						  args->total);
+++		}
 ++
-++		return (-1);
-++	}
-++
-+ 	if (msg_len < sizeof(struct orf_token)) {
-+ 		log_printf (instance->totemsrp_log_level_security,
-+ 		    "Received orf_token message is too short...  ignoring.");
-+@@ -3698,6 +3706,13 @@ static int check_orf_token_sanity(
-+ 		rtr_entries = token->rtr_list_entries;
-+ 	}
-+ 
-++	if (rtr_entries > RETRANSMIT_ENTRIES_MAX) {
-++		log_printf (instance->totemsrp_log_level_security,
-++		    "Received orf_token message rtr_entries is corrupted...  ignoring.");
-++
-++		return (-1);
-++	}
-++
-+ 	required_len = sizeof(struct orf_token) + rtr_entries * sizeof(struct rtr_item);
-+ 	if (msg_len < required_len) {
-+ 		log_printf (instance->totemsrp_log_level_security,
-+@@ -3868,7 +3883,8 @@ static int message_handler_orf_token (
-+ 	    "Time since last token %0.4f ms", tv_diff / (float)QB_TIME_NS_IN_MSEC);
-+ #endif
-+ 
-+-	if (check_orf_token_sanity(instance, msg, msg_len, endian_conversion_needed) == -1) {
-++	if (check_orf_token_sanity(instance, msg, msg_len, sizeof(token_storage),
-++	    endian_conversion_needed) == -1) {
-+ 		return (0);
-+ 	}
-+ 
-diff --git a/meta-networking/recipes-extended/corosync/corosync_3.1.9.bb b/meta-networking/recipes-extended/corosync/corosync_3.1.9.bb
-index b4e0f1c7db..cd9feb5da5 100644
---- a/meta-networking/recipes-extended/corosync/corosync_3.1.9.bb
-+++ b/meta-networking/recipes-extended/corosync/corosync_3.1.9.bb
-@@ -9,6 +9,7 @@ inherit autotools pkgconfig systemd github-releases
++ 		/* alloc and copy sub-tlv */
++ 		/* TBD make sure these are freed when attributes are released */
++ 		tlv = XCALLOC(MTYPE_ENCAP_TLV,
+diff --git a/meta-networking/recipes-protocols/frr/frr_9.1.bb b/meta-networking/recipes-protocols/frr/frr_9.1.bb
+index 7c1691259d..ce9876c79f 100644
+--- a/meta-networking/recipes-protocols/frr/frr_9.1.bb
++++ b/meta-networking/recipes-protocols/frr/frr_9.1.bb
+@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/9.1 \
+            file://CVE-2024-31951.patch \
+            file://CVE-2024-31948.patch \
+            file://CVE-2024-31949.patch \
++           file://CVE-2024-44070.patch \
+            "
  
- SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/${BP}.tar.gz \
-            file://corosync.conf \
-+           file://CVE-2025-30472.patch \
-           "
- SRC_URI[sha256sum] = "203354bbddee1a97b3c50a076eae89c635f406dd674ccaefc94bb9092acd9535"
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ SRCREV = "ca2d6f0f1e000951224a18973cc1827f7f5215b5"
 
