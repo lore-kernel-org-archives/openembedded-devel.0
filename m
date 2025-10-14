@@ -2,152 +2,137 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1355CCD192
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1294CCD196
 	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 14:55:40 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web11.18808.1760453732974176881
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web10.18752.1760453735335492755
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 07:55:33 -0700
+ Tue, 14 Oct 2025 07:55:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TnZWCFTk;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-426ed6f4db5so552096f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 07:55:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Zx1pNiPU;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-3ece1102998so3504133f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 07:55:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760453731; x=1761058531; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=AmeQlha5DEZWJZaGPO9QGkvbyimrObPkcjpkRXHj4YA=;
-        b=TnZWCFTkTgIuodH9w1IedNnsOy/bp0LhdkGclAF1oiipd/FE8BXKjb9TRiHAWAwVnV
-         ZyIdgPJ0qbJ8jfD55OkxHEU2AqYjuf/TgA5++MvFHFKW6reaUKme394K4xgQxksLK474
-         FjJs9MLlVJg+xCHk9JVzc5Zd36jDDLv4lRTUO+VGsMuNwD8t6R3nPdLKZ3uizLj0MDKq
-         e7BqI8ucjqKhqa1+HxFl4ZIGitp83SY2SkGvC+LC5QOLeCjCdO7IHQh+nlMGzzKfWhF/
-         FmMQATiyKABVvr0YIdwZOOHhb/FIUyL8enBPsQWj0/kpV36xCgoOODQVz4j0N+/5AkhL
-         blhg==
+        d=gmail.com; s=20230601; t=1760453734; x=1761058534; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=IXS5Y5aiGj5ZQ6Yg1FkiGNLuGzpCB1cI0l55FXHAuIA=;
+        b=Zx1pNiPUADTRvjguGM+4GYJLUkitQIRwDHavmXhses4wiT1kZariYhL30lbaT404Gu
+         yv0F+UJlw05HAlpqk7e6J/4ZVjGjxPINg61TtG97Aq5lUnKReAMgQZ4di/MS4qju65uw
+         7juxZRTxYeSf0nGw8ibSv8i4NoWMB2RGvXMypiwszgapOBDuHcpOtLaWa8yWRzqs/zTr
+         tZVBVX7+cpbby/Q0XoH6iGD2oL3JzTUgQIInmgBdMo8bBseA1HsJv75ocDaI6l80Ejpc
+         XeFhskjh1N/i9biDIV4UEnBIZmDabqJST3u7I32jca89l1eBrXHddblowVUyYc+405FI
+         hIKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760453731; x=1761058531;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=AmeQlha5DEZWJZaGPO9QGkvbyimrObPkcjpkRXHj4YA=;
-        b=Xrtivzh67XkHjKCzQQwTKiZzwQ2AzYXR2uWhWAOwpugDrE85V6p/eqQoCNP2O+bxtg
-         8e1EWT0KvrLK+oB+IDBPfWOUt2G+RE/stVbnScvol922BeEckVlYZ9wt6WdyYyWiZG99
-         +af2oyJoZq4zf4mbwoF/kYKa+NK+9i5aqBjo5fSECRkuN25uEhRElWGMYw3kXewBK6Hp
-         PNcrET7iXQbBISNbG6hnqA4AmvDfqVyg8rwypB2LPjctkdsfsIla447w2ixaZAuHF+mH
-         s56GSLHUbt0k4cs95nhbLOy1RpmrcaUT00ujG+HzWIY4VJpgJSwojMlqWiDUXL8nfh56
-         sOJg==
-X-Gm-Message-State: AOJu0YwoanHt8Xj4pdZdPnvespUMBBDT92Ve17aloC+BqKFT+NxmhPJz
-	VUdbUydedtzDfdXS8UFZ/V/kqFiasEMraZ41DJEaIM00k+qNs+Uy5R9RY7aAXA==
-X-Gm-Gg: ASbGncsQqnJHMLslQ7graXpnr3LRexxm35CVP9M/KlDFOkmw/3umi3TCNu2AW6ArQKn
-	EOQd/1lMGkxlufOQcJBxvnWE1OTotLZT9USQyQMGGXbod1COx81AmZySSiqwdyjnso9aM149kSn
-	U2noaGCIuXj4+HQvnnz0L/zh3uwchBXUmYXv6k4g2b9QGmdbMS4j0vUMYuwpbxfHDnozMv7N+uT
-	AzXkPYqiqrhL4Onz8/tNLUxMP9d5NxkahUL6VrRunIwQPmOlxS+F9LO3/wexxF240nCPPGqQNzy
-	a29kDC83XCjsCgdr8gUyM1EGexbCsL/KfJrvraqiFAQYPQMzbjXnwf9VR8gboId41nCB4dMheVJ
-	EJNVz9xSl1gcyCwdCEVe5+0YbWdUF1R6NjcVe7+Q=
-X-Google-Smtp-Source: AGHT+IE9ZpAy3ru8EjkhjmMWUw5BPMKoKCgl8EI7psrj5qv6uSarwKiI+D8qVhJb8RLj+SBsy7vnXA==
-X-Received: by 2002:a05:6000:24c4:b0:3f4:ad3f:7c35 with SMTP id ffacd0b85a97d-42582a0534bmr16108720f8f.27.1760453731055;
-        Tue, 14 Oct 2025 07:55:31 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1760453734; x=1761058534;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=IXS5Y5aiGj5ZQ6Yg1FkiGNLuGzpCB1cI0l55FXHAuIA=;
+        b=LZl5WITZjsvTyrjf4fqKchkWDyrmdXWlI+0TnP5UP8GuEgxaehyWQH/V6egDrhFsFo
+         5iGOOAInVrrZ20232n68MrRe6rXt8qn9nnh/sQo6nhxbzQuxj+i50MjHD0+mu1tRQHDu
+         JxkbjEhTDfHBFF7KxbWuT0n9K/HESkDUylLK7sXK0SBiYOFVUFlWqcC6ZOrbWIM4JbFy
+         ELcNUCxwrZzZkyhzEyqf9JagFB4gpSOyOOWQCY0OGdLc49TQTush7cD58psrODhoHeho
+         Goo+j1xB114JFJeEc4ACLrvbs7wi+fE3Z4Rtr5yrQfwN2AhdO4UycQ21F7RImf/V5pk+
+         E7Rw==
+X-Gm-Message-State: AOJu0YzvHZ9g2NqM0d8+FGw6zfCK//WaPUtevm+QpWmNLVVvWLNzXAlo
+	GKfloge3d0km3qSD+buTqhfQohZiVoqLRARaVe2RM5hOx/4AvWE4Ce9QsLJrTQ==
+X-Gm-Gg: ASbGncvrvqbgQi/r/6f7oDjlCLL8cFhEWiugDJpJlZDHiAx6x4IcQpSmrRyXKoWAW5L
+	mscPZKuW7tM1CT2Q+Zn17+vjp5qEf+ZlNUYrrVFWjkaydkIhWFr96lvgTJZi/TVMRU0GSe7K17F
+	0RmSHGwEzdJNNDKq8J2XlfmDGzpONUA2/hbA45wppIg6NumIGvv7lI/wLtYrwJVGHPKdWj8xsFt
+	YondknKWwD+K1QfIy4gn9DlkILGmpYY9KXjOS16IYR4ylqcW+Sseaf1OZ6Dab9c83i2AGt2v1PK
+	EAMVGWhg+ezpNM/l/u9cFNI9kgwsmB5DzLbM3urasMWdSGkxxsbUkgNPzrQWgDpJVv4XdKGWF/V
+	2E9MH2BMePH3BSgEcZf91yAMD+pKmh3mUcZFytpk=
+X-Google-Smtp-Source: AGHT+IHklQMFDEd0dMb2n+XNCvVlKPcfFa8q0JxdU2Fm4/b1QMv5knXBQ2qIRYuJ3jgnyekE4sXHqQ==
+X-Received: by 2002:a5d:5f93:0:b0:3e7:4893:f9be with SMTP id ffacd0b85a97d-42666abb485mr14896071f8f.12.1760453733653;
+        Tue, 14 Oct 2025 07:55:33 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-426ce5cf790sm23263564f8f.28.2025.10.14.07.55.30
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-426ce5cf790sm23263564f8f.28.2025.10.14.07.55.32
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Oct 2025 07:55:30 -0700 (PDT)
+        Tue, 14 Oct 2025 07:55:33 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/6] hdf5: patch CVE-2025-2153
-Date: Tue, 14 Oct 2025 16:55:24 +0200
-Message-ID: <20251014145529.1078084-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 4/6] hdf5: patch CVE-2025-2924
+Date: Tue, 14 Oct 2025 16:55:27 +0200
+Message-ID: <20251014145529.1078084-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251014145529.1078084-1-skandigraun@gmail.com>
+References: <20251014145529.1078084-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 14:55:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120612
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120615
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-2153
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-2924
 
-Pick the patch that resolved the issue from the nvd report.
+Pick the patch that is marked to resolve the issue linked in the
+nvd report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../files/0001-Fix-CVE-2025-2153-5795.patch   | 47 +++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_1.14.6.bb   | 10 ++--
- 2 files changed, 52 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-support/hdf5/files/0001-Fix-CVE-2025-2153-5795.patch
+ .../files/0001-Fix-CVE-2025-2924-5814.patch   | 36 +++++++++++++++++++
+ meta-oe/recipes-support/hdf5/hdf5_1.14.6.bb   |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hdf5/files/0001-Fix-CVE-2025-2924-5814.patch
 
-diff --git a/meta-oe/recipes-support/hdf5/files/0001-Fix-CVE-2025-2153-5795.patch b/meta-oe/recipes-support/hdf5/files/0001-Fix-CVE-2025-2153-5795.patch
+diff --git a/meta-oe/recipes-support/hdf5/files/0001-Fix-CVE-2025-2924-5814.patch b/meta-oe/recipes-support/hdf5/files/0001-Fix-CVE-2025-2924-5814.patch
 new file mode 100644
-index 0000000000..4b31718dea
+index 0000000000..a86b5a491b
 --- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/0001-Fix-CVE-2025-2153-5795.patch
-@@ -0,0 +1,47 @@
-+From 183c8aeb601a02a38dd6815bcb651a7317b1b647 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/hdf5/files/0001-Fix-CVE-2025-2924-5814.patch
+@@ -0,0 +1,36 @@
++From f76c5adea55edec75680fdd7365cc97abc112d0e Mon Sep 17 00:00:00 2001
 +From: Glenn Song <43005495+glennsong09@users.noreply.github.com>
-+Date: Thu, 9 Oct 2025 07:51:49 -0500
-+Subject: [PATCH] Fix CVE-2025-2153 (#5795)
++Date: Mon, 15 Sep 2025 07:56:54 -0500
++Subject: [PATCH] Fix CVE-2025-2924 (#5814)
 +
-+This PR fixes #5329. Previously, the message flags field was able to be modified such that a message that is not sharable according to the share_flags field in H5O_msg_class_t could be treated as sharable. A check has been added to make sure messages that are not sharable can't be modified so that they indicate they can be shared.
-+
-+The bug was first reproduced using the fuzzer and the POC file from #5329. With this change, the heap based buffer overflow no longer occurs.
-+
-+CVE: CVE-2025-2153
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/38954615fc079538aa45d48097625a6d76aceef0]
++CVE: CVE-2025-2924
++Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/0a57195ca67d278f1cf7d01566c121048e337a59]
 +
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/H5Ocache.c   | 4 ++--
-+ src/H5Omessage.c | 3 +++
-+ 2 files changed, 5 insertions(+), 2 deletions(-)
++ src/H5HLcache.c | 5 +++++
++ 1 file changed, 5 insertions(+)
 +
-+diff --git a/src/H5Ocache.c b/src/H5Ocache.c
-+index 87f321c..12c30cf 100644
-+--- a/src/H5Ocache.c
-++++ b/src/H5Ocache.c
-+@@ -1399,8 +1399,8 @@ H5O__chunk_deserialize(H5O_t *oh, haddr_t addr, size_t chunk_size, const uint8_t
-+             else {
-+                 /* Check for message of unshareable class marked as "shareable"
-+                  */
-+-                if ((flags & H5O_MSG_FLAG_SHAREABLE) && H5O_msg_class_g[id] &&
-+-                    !(H5O_msg_class_g[id]->share_flags & H5O_SHARE_IS_SHARABLE))
-++                if (((flags & H5O_MSG_FLAG_SHARED) || (flags & H5O_MSG_FLAG_SHAREABLE)) &&
-++                    H5O_msg_class_g[id] && !(H5O_msg_class_g[id]->share_flags & H5O_SHARE_IS_SHARABLE))
-+                     HGOTO_ERROR(H5E_OHDR, H5E_CANTLOAD, FAIL,
-+                                 "message of unshareable class flagged as shareable");
++diff --git a/src/H5HLcache.c b/src/H5HLcache.c
++index d0836fe..7f412d2 100644
++--- a/src/H5HLcache.c
+++++ b/src/H5HLcache.c
++@@ -225,6 +225,7 @@ H5HL__fl_deserialize(H5HL_t *heap)
++     /* check arguments */
++     assert(heap);
++     assert(!heap->freelist);
+++    HDcompile_assert(sizeof(hsize_t) == sizeof(uint64_t));
 + 
-+diff --git a/src/H5Omessage.c b/src/H5Omessage.c
-+index 7190e46..fb9006c 100644
-+--- a/src/H5Omessage.c
-++++ b/src/H5Omessage.c
-+@@ -354,6 +354,9 @@ H5O__msg_write_real(H5F_t *f, H5O_t *oh, const H5O_msg_class_t *type, unsigned m
-+          */
-+         assert(!(mesg_flags & H5O_MSG_FLAG_DONTSHARE));
++     /* Build free list */
++     free_block = heap->free_block;
++@@ -232,6 +233,10 @@ H5HL__fl_deserialize(H5HL_t *heap)
++         const uint8_t *image; /* Pointer into image buffer */
 + 
-++        /* Sanity check to see if the type is not sharable */
-++        assert(type->share_flags & H5O_SHARE_IS_SHARABLE);
++         /* Sanity check */
 ++
-+         /* Remove the old message from the SOHM index */
-+         /* (It would be more efficient to try to share the message first, then
-+          *      delete it (avoiding thrashing the index in the case the ref.
+++        if (free_block > UINT64_MAX - (2 * heap->sizeof_size))
+++            HGOTO_ERROR(H5E_HEAP, H5E_BADRANGE, FAIL, "decoded heap block address overflow");
+++
++         if ((free_block + (2 * heap->sizeof_size)) > heap->dblk_size)
++             HGOTO_ERROR(H5E_HEAP, H5E_BADRANGE, FAIL, "bad heap free list");
++ 
 diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.14.6.bb b/meta-oe/recipes-support/hdf5/hdf5_1.14.6.bb
-index 974007a3e9..345598c8f2 100644
+index 9327c8cc91..39326d3072 100644
 --- a/meta-oe/recipes-support/hdf5/hdf5_1.14.6.bb
 +++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.6.bb
-@@ -11,11 +11,11 @@ inherit cmake siteinfo qemu multilib_header multilib_script
- 
- DEPENDS += "qemu-native zlib"
- 
--SRC_URI = " \
--    https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_6/downloads/${BPN}-${PV}.tar.gz \
--    file://0002-Remove-suffix-shared-from-shared-library-name.patch \
--    file://0001-cmake-remove-build-flags.patch \
--"
-+SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_6/downloads/${BPN}-${PV}.tar.gz \
-+           file://0002-Remove-suffix-shared-from-shared-library-name.patch \
-+           file://0001-cmake-remove-build-flags.patch \
-+           file://0001-Fix-CVE-2025-2153-5795.patch \
-+           "
+@@ -17,6 +17,7 @@ SRC_URI = "https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_6/downloads/${
+            file://0001-Fix-CVE-2025-2153-5795.patch \
+            file://0001-Fix-CVE-2025-2310-5872.patch \
+            file://0001-Refix-of-the-attempts-in-PR-5209-5722.patch \
++           file://0001-Fix-CVE-2025-2924-5814.patch \
+            "
  SRC_URI[sha256sum] = "e4defbac30f50d64e1556374aa49e574417c9e72c6b1de7a4ff88c4b1bea6e9b"
  
- FILES:${PN} += "${libdir}/libhdf5.settings ${datadir}/*"
 
