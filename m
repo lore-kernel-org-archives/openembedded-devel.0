@@ -1,143 +1,114 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <marc.ferland@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48E1ECCD193
-	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 17:17:58 +0000 (UTC)
-Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
- by mx.groups.io with SMTP id smtpd.web10.1857.1760462276894195331
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E40CCCD193
+	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 17:43:48 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web10.2469.1760463823848019252
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 10:17:57 -0700
+ Tue, 14 Oct 2025 10:43:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eM2TIBnp;
- spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-633b45fad1aso5415290d50.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 10:17:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TMlO1z/F;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: marc.ferland@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-46e326e4e99so749435e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 10:43:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760462276; x=1761067076; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=x4oD4q6eW1hvLoMsOV2BSfWcRBIz5mXH2+WS3rGZbdo=;
-        b=eM2TIBnpSyFjSDo9Z6Qaj++kGYjQ/t3RulsMun0uzkFyoBzA0bgOTlJD8pM177fPIh
-         vBPe2J+aA2ZlzF6GdcWbymvYkN9aK/iNyjg7wBDg5fnB2yiSvl2TUUO8nYgvxJIap1Jz
-         EQEX6ZdXdQ7cdR7n47zMCDKnUAwidV5zzshYhoaBC+vQp5RJi2u72aHj4B5GM1An91eX
-         TKrlsX8FvGF5OZmEGZnTugxjvmxmfePus+0UglsgeP8fTw12/XUDAxLFJ90ybtlqmtSh
-         dxkhWU4KsKF/9cwuMLVcJdn4/4qwMZk6VncTyBb4dSNy0DYZvatLErduZwMF0rT+4GQF
-         5N9A==
+        d=gmail.com; s=20230601; t=1760463822; x=1761068622; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8vClIf7kvvKH6Py+Li0BZtbq9AcNbhjimaS3cv2SJQ0=;
+        b=TMlO1z/FMTFoLUYwlIqIqQYVZ1C3EIcBGn89aqyXO583wiwzyfmkfl0B4VfD77Nysn
+         jFRDA1gufhRG1V1gKF/lkBSLv9paPHD0j3c/yCachpMN/vWprdqcEcHGUS6cPKEB9kQ3
+         uYVt+5udoUdBLZ71Ump2G/nxTBXMEL4cuuVtEe5EieHDGWto9lxglimzf3Q+QHrZ4o8A
+         g5LSFSOXDStQiR3kkKtLib8pfDhX3yRC+Ys5OR46N2JVhVMUNr+ZJwOCjZGsv1wFpAra
+         cijBqU4I3azRV7gycocP9y9+bGSQyaYbXJqVne4MVHw98Xk7iYD6MWzAvq0ARTCIEjzi
+         9ORA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760462276; x=1761067076;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=x4oD4q6eW1hvLoMsOV2BSfWcRBIz5mXH2+WS3rGZbdo=;
-        b=hsnP2Ft329MeDAOE0vsIcRnsv6GNOHK1vu68PkU84OWMQ4oWUI1qE2HbUx3vzGwffY
-         LIJEva/QUXJrx78nTR1bihyhjPpiQmzOBBCZ0SX+Qs8e3VmC4qzBiFjSMnsWIJl5/y6a
-         jmapDKp/lF/ag51ImpXailSAFc6hTxmbDuQQo8gTePo/nAB7XlS9sknEOokTNEZRE6al
-         pSguYxzYBm9033aZSsFKZPKhH6Yc7KHvrGFIBaI/jvYC7sfgKYzvyG5pj/Hu/pfhJC9V
-         PX5oqZUdgbXGiyBu6F0Q36jEYg2e9bkRxRl5Sw4DYoIfoZsAltOQYzb1LiPrJPeITmJD
-         3iRA==
-X-Forwarded-Encrypted: i=1; AJvYcCWO0fGLflXYUB9Wv3aCMAMIOfuouoXCpF1BSwk62UjdTE70O9NfLnQ+gdsNL3+V1rLmUcgYUMF1326E71CZdywEjuE=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yxs2kENrrY1hEy1tX4qyTUn6wsHEtqltwRqN3ib4UiTSVS89WQN
-	sOPBB3HDp0nx7x66OfZAM7w2cOj7GmVKPBQdeEPqezDMuy1dbO1soj8Vh19Tb9kXhvo3dB3duzB
-	Fi9zth+AgqHg48sbryto16wc/lm1J6I4=
-X-Gm-Gg: ASbGnct0vyHeS9dY3HQY9K7ttuupqigt59icsgpN6lZY6mb4b3Q2suvxFe65yC0v/Q2
-	Nm467NLmNPkbRR5y+P2GpzQGprFUI5m8gLufhQ6Lbnx1oLFJCQiIRSlGzjzgYpkCEWGeOrtnf9k
-	5VzUpbNxU/LWhEDEp+g0QaHONtuIxkvyC6UWtuj5+wM0fP9rTP+BprtVizZ4E5xwexsNoP47Sll
-	blbfD2TqZpWdpVPXadcV86gPrjL09WeBYnp42eukV04DVH0l9KIWomOYg==
-X-Google-Smtp-Source: AGHT+IGB763tpbI1QjKiNpnQXSR1jmTOqo8qX5Wt4GNW1D0eguT5KUlYa+rL3hvG9m5rSIgj3/rYdrRGuBGvPUpwx0Y=
-X-Received: by 2002:a05:690e:4344:b0:636:d4ac:7324 with SMTP id
- 956f58d0204a3-63ccb9674a1mr18408842d50.48.1760462275939; Tue, 14 Oct 2025
- 10:17:55 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1760463822; x=1761068622;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=8vClIf7kvvKH6Py+Li0BZtbq9AcNbhjimaS3cv2SJQ0=;
+        b=HdEdRNDcCWIR3cljWu9jrpo1PF9IRpw1Cu6JUEz/mSmtFB0vDdwSsPxgVF2JmNSqEM
+         WC4Af3q8Qk+BlqfljKrYNhyYgOjKlCNS3CfC6wdh6chd0jGgEoRhGyuvq3qFTPVbY3KE
+         rLepFE26EbZuBTuqlSFzX+DviHabE/4t1OGbtkzQRtq7rfB06d4yhiOwQy6dMYJo9lyx
+         0dOrqEVpv+WISx1w6OjGrFRAPSADPlnK1lRq5MePzoVerjpHjXJ0WkIodzJDNzNfAIQl
+         5pWGlZI30volF3Fwo9qEl3hEZ/WjC2RzzQ74B/njKxAb8crsIGXpKzKp5XBYYlAWATrV
+         R06A==
+X-Gm-Message-State: AOJu0YwF7xml0m+XZSMjVLMiQQKgDJRzlSgohvh8CoY7EvqCBxy24BwB
+	mVqeJk+uttQWFE//qiT64IbWoqSxzduUf9/9m6lD+Y0OdgDKdv/A4LFj1f1Oig==
+X-Gm-Gg: ASbGncvEvXiecWstXGJVYWzbCCZqbVaOOsskSY4kIJKnnMYZCxAOr4Qehb0ssQaP5YE
+	cDc5msPR+Y2WQlWcMym+aVKdeJu/uJE0s80YsaVJcIa4v7SdhHjwXBdwRmez/quhJJ9MANbKExM
+	Hn/islEU4IpYjLGPiZa4NsHRAUTVnzMqo7PPUOEXqMcSeyoBkn/JU8NMPDDlYwIQ4ChubWV9UfO
+	Z0vYW62TtG6SH7XYjxwNVsELgpwBwaLhf3smEUt4vopgUkq6DKYuHzk3nwQck5WOY5DXoa52Qjb
+	cgyM1cqK2ljaoCL/jNy468/ialEgN7pY0Hmx3Q/Nj/VrqREV9Xwq7eWUgtwflea0pDz9f6mKXmT
+	Y6Vc7ZNwlbc2fVf/hWWMOO5c9UZPEqaj9u2ZfeyfHjHCTC55SGD4D1MgfeoZTxD8CvaikViDqCl
+	OjRvDjmq3IQF29PNzGX6VBw/7bVf2FVDllfNBTui2FPI+iNny2qWVNIyS+nFsnHRqY
+X-Google-Smtp-Source: AGHT+IFwof4BZlUz4BGUUmcC13jssrVhLD0tSppmU8p1wQeeddX7Gmeod1PePjuqmesvp/XBqHsGGA==
+X-Received: by 2002:a05:600c:4713:b0:46e:5302:7751 with SMTP id 5b1f17b1804b1-46fa9ebe22emr172501305e9.9.1760463821816;
+        Tue, 14 Oct 2025 10:43:41 -0700 (PDT)
+Received: from mfe-desktop.Sonatest.net (ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca. [174.94.156.236])
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-426ce5e83e1sm24821591f8f.51.2025.10.14.10.43.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 14 Oct 2025 10:43:41 -0700 (PDT)
+From: marc.ferland@gmail.com
+X-Google-Original-From: marc.ferland@sonatest.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Marc Ferland <marc.ferland@sonatest.com>
+Subject: [meta-oe][PATCHv2] upower: upgrade 1.90.6 -> 1.90.10
+Date: Tue, 14 Oct 2025 13:43:37 -0400
+Message-Id: <20251014174337.642569-1-marc.ferland@sonatest.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20251014091927.493-1-wangmy@fujitsu.com> <20251014091927.493-40-wangmy@fujitsu.com>
- <CAO5Uq5T+nfCGFeO+G4-QdJbbkONf6Y6vvrc6UpwfTYAxusbDog@mail.gmail.com>
-In-Reply-To: <CAO5Uq5T+nfCGFeO+G4-QdJbbkONf6Y6vvrc6UpwfTYAxusbDog@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 14 Oct 2025 10:17:29 -0700
-X-Gm-Features: AS18NWAYXPEmvGNC6tANrjgQxQiT8F4sfH2efznjBQCNewYIczJ7OI8-RTpXumY
-Message-ID: <CAMKF1sqHtKJLZpKJQ6AeMf0AcONSnM=Qkh2mYOLJ3T3oDDE4qw@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH 40/44] python3-zeroconf: upgrade
- 0.147.2 -> 1.0.0
-To: alex.kiernan@gmail.com
-Cc: wangmy@fujitsu.com, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 17:17:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120620
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 17:43:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120621
 
-On Tue, Oct 14, 2025 at 2:33=E2=80=AFAM Alex Kiernan via
-lists.openembedded.org <alex.kiernan=3Dgmail.com@lists.openembedded.org>
-wrote:
->
-> On Tue, Oct 14, 2025 at 10:21=E2=80=AFAM wangmy via lists.openembedded.or=
-g
-> <wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
-> >
-> > From: Wang Mingyu <wangmy@fujitsu.com>
-> >
-> > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> > ---
->
-> I believe this major version bump was unintentional:
->
-> https://pypi.org/project/zeroconf/#history
->
-> "This release was YANKED as the major version bump was not intended."
->
-yeah good catch, I wonder if the upgrade helper gets tripped with such yank=
-s.
+From: Marc Ferland <marc.ferland@sonatest.com>
 
-> >  .../{python3-zeroconf_0.147.2.bb =3D> python3-zeroconf_1.0.0.bb}  | 2 =
-+-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >  rename meta-python/recipes-devtools/python/{python3-zeroconf_0.147.2.b=
-b =3D> python3-zeroconf_1.0.0.bb} (81%)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.147=
-.2.bb b/meta-python/recipes-devtools/python/python3-zeroconf_1.0.0.bb
-> > similarity index 81%
-> > rename from meta-python/recipes-devtools/python/python3-zeroconf_0.147.=
-2.bb
-> > rename to meta-python/recipes-devtools/python/python3-zeroconf_1.0.0.bb
-> > index 31d671ceca..9d23e8a8fb 100644
-> > --- a/meta-python/recipes-devtools/python/python3-zeroconf_0.147.2.bb
-> > +++ b/meta-python/recipes-devtools/python/python3-zeroconf_1.0.0.bb
-> > @@ -3,7 +3,7 @@ HOMEPAGE =3D "https://github.com/jstasiak/python-zeroco=
-nf"
-> >  LICENSE =3D "LGPL-2.1-or-later"
-> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9fe712b1bc27c5c4e9ecd7f31d2=
-08900"
-> >
-> > -SRC_URI[sha256sum] =3D "2f91e2544433acfa928c8dbaea7af8bf0644e069046107=
-99d6b762fd599d81bd"
-> > +SRC_URI[sha256sum] =3D "3834ccf45c1e12cae78707ce691b20969e78aead28ae93=
-9b158b7d08c4195ac9"
-> >
-> >  inherit pypi python_poetry_core cython
-> >
-> > --
-> > 2.43.0
-> >
-> >
-> >
-> >
->
->
-> --
-> Alex Kiernan
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#120602): https://lists.openembedded.org/g/openembedde=
-d-devel/message/120602
-> Mute This Topic: https://lists.openembedded.org/mt/115749717/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Update to latest release and add support for zsh completions.
+
+Signed-off-by: Marc Ferland <marc.ferland@sonatest.com>
+---
+ .../upower/{upower_1.90.6.bb => upower_1.90.10.bb}            | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-support/upower/{upower_1.90.6.bb => upower_1.90.10.bb} (91%)
+
+diff --git a/meta-oe/recipes-support/upower/upower_1.90.6.bb b/meta-oe/recipes-support/upower/upower_1.90.10.bb
+similarity index 91%
+rename from meta-oe/recipes-support/upower/upower_1.90.6.bb
+rename to meta-oe/recipes-support/upower/upower_1.90.10.bb
+index d2f58d5b22..a7effcd7de 100644
+--- a/meta-oe/recipes-support/upower/upower_1.90.6.bb
++++ b/meta-oe/recipes-support/upower/upower_1.90.10.bb
+@@ -12,7 +12,7 @@ DEPENDS = " \
+ "
+ 
+ SRC_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/archive/v${PV}/${BPN}-v${PV}.tar.bz2"
+-SRC_URI[sha256sum] = "aed4e42a21307512ad236ad58d7ee4e0196670c8524a168a0edccdc32964ea0c"
++SRC_URI[sha256sum] = "c1baf418b685ffe4150c8a75c04da0cec70323fe094b5b257b287eea564d3f56"
+ S = "${UNPACKDIR}/${BPN}-v${PV}"
+ 
+ UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/tags"
+@@ -40,11 +40,13 @@ SYSTEMD_AUTO_ENABLE = "disable"
+ 
+ RDEPENDS:${PN} += "${VIRTUAL-RUNTIME_dbus}"
+ RRECOMMENDS:${PN} += "pm-utils"
++PACKAGES += "${PN}-zsh-completion"
+ FILES:${PN} += " \
+     ${datadir}/dbus-1/ \
+     ${datadir}/polkit-1/ \
+     ${base_libdir}/udev/* \
+ "
++FILES:${PN}-zsh-completion = "${datadir}/zsh"
+ 
+ do_install:append() {
+     # remove integration tests scripts
+-- 
+2.34.1
+
 
