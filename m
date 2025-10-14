@@ -1,129 +1,149 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08E61CCD184
-	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 09:33:09 +0000 (UTC)
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
- by mx.groups.io with SMTP id smtpd.web10.11153.1760434382808277662
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4194ACCD18E
+	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 10:07:39 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.11771.1760436451520700046
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 02:33:03 -0700
+ Tue, 14 Oct 2025 03:07:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hD7Hz60L;
- spf=pass (domain: gmail.com, ip: 209.85.167.41, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-57a960fe78fso5787545e87.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 02:33:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760434381; x=1761039181; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vfnAogDY8DF2ipNZ1foWrfFhQgdXbPDSBep7Q9t6rbM=;
-        b=hD7Hz60LJIO/THmErpvDV1W+mT0QcnlUQSCK8EcQodGD+7LAJ+da/485HH2Owgmnjv
-         s/HgTyrzWvauPOF4ZrcsSP8WNWyPfpRkAn97E62tmb9aDpalK6vF9YuPw/+e9fnzFwpf
-         sJrYFTB90mr3mvD81kBQAsuImkFc0Go1iOJpvFIYN70CDgsGJEuW/ukPrbX0TxEyxgNL
-         ZYHOLmpnt3Mo2sYYfoX4Rz/E4TW2R+6aj91BT5s1Aj5mahmEKaJbclfuyPwJp4CoMapo
-         dmuQH5DebFP66hWU1DwIcMbyl5692qd5Fh+aukq33LEqb5UrG5KBIzq3L2m2OOVFk2Sr
-         ArRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760434381; x=1761039181;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=vfnAogDY8DF2ipNZ1foWrfFhQgdXbPDSBep7Q9t6rbM=;
-        b=xHOVpkVYv3TpAjfPBdSR77Ih61rURCxFRWRx/IIgO3LHeTeAx/xxTth/F8Nn/nTiQF
-         zd8r9qZzKpIILfuwoM5MwxV9ZTzzL1yXmi/5c2DFMo9gifrmhDaINPa/JHhI3y3Qe/ZR
-         Z+WhMBOzKyaZItZbbQf748mPMq6n9lJWjrm7N9+TA1rrfqb1AWBZyGcbh4d1RUbyQhzs
-         DFB5UGGmIbgK6boS2FLBaFmPjw2Awg44N7TjQ2VVGWouu3dgbeje0Co9ZHclAdh30nxS
-         8y+VmjPC+7iVsl6zV/kKSKGYd8VlSe0Gg6koLJNfG8V685I+e4RzrcjfAsiitF1Itr7F
-         vdHA==
-X-Gm-Message-State: AOJu0Yy8oY7r5+bmnHP02MBrM7Qlsudz8sDuOA4+y2aPS6lJAMOWN2X9
-	Ro3TcJqTHxeOWC6bFPmrk0zCzAW7yMjkshnPkKzPvZpzogIDy2HlTpZAmE3zDuy5CSLOdsZ/4bp
-	g0WC3tKi1cOyHgJywsXdqKHD7FwPk0C4=
-X-Gm-Gg: ASbGncs+MbusA+PrrSiCXBX6ip/ss8M8EfABPAkp7zlwdu5Z2C/bxQiUVIfPf5dJm4D
-	sg6l9iaoghFmYcDiFWYW5R8Hq4ZOT9sLS/Mt7SRhgDJ+tnn6wY9RogBywmRRCRd9ca+AEmfDgI1
-	rv0elvuLjGjhOC0nsKansuagkUEn5zdlFc68PQZ+5/6Sg+j8GxB2RIz7O/Is1uZvidGsyrksQ7u
-	XraX9lnBWxr00xWU7n7SbfzgD102PS/DGM=
-X-Google-Smtp-Source: AGHT+IG2S0hIhQb9VMPm8RcPk0P19xZatqEQS9Ijuhpvl5QMKCj5qydhRD1wiZSnjiL/LeaCnbbFfxpxAV3YM7rJaDk=
-X-Received: by 2002:a05:6512:3b8f:b0:562:d04d:fa07 with SMTP id
- 2adb3069b0e04-5906dd51e03mr7799475e87.32.1760434380669; Tue, 14 Oct 2025
- 02:33:00 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=EtQBV29g;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=238229c306=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59E0qfe81587834
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 03:07:31 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=nw4pRgCp/hcPtWC0W6Mm
+	tXGtBhrQFluALL2n7cUFJxw=; b=EtQBV29gS9OxOXGXoWuW0cr7aO31yI/DObfP
+	idQt2Rqk+3MMsAKi8w86pbss77PKCvqNyihOq82iG5FFROQT0dE4LXVluBRIpNmM
+	TZcDHTkg18Z217jO6QrvfyXUxifbwhVvSrhOKCPYekHw/xCT/EQe4LgOPF9bN9dm
+	QXQlE9rn/ikupKhp0M5RNH0BiWOy07Df533avTp18K2Bj3UKSqz51CGaWo3A1+SR
+	KvAcziJpO9GQcULbucBS6H8MnCCGNxvBoR5r52zq7MYBfxQm6Z3OghH8G+7+si93
+	59/HNHBrPzdDeR51ea+jfLD/QFhBcS4AyWa4sPVapETvX9tL0g==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49qprdtnum-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 03:07:30 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.59; Tue, 14 Oct 2025 03:07:29 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] poppler: fix CVE-2025-43718
+Date: Tue, 14 Oct 2025 15:37:05 +0530
+Message-ID: <20251014100705.3102077-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-References: <20251014091927.493-1-wangmy@fujitsu.com> <20251014091927.493-40-wangmy@fujitsu.com>
-In-Reply-To: <20251014091927.493-40-wangmy@fujitsu.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Tue, 14 Oct 2025 10:32:49 +0100
-X-Gm-Features: AS18NWCxy6mF16cIf0VXn_PDnMKQIIyDp4UfEmVLDQWnfL-X3YTG1cWxBFOTlCU
-Message-ID: <CAO5Uq5T+nfCGFeO+G4-QdJbbkONf6Y6vvrc6UpwfTYAxusbDog@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH 40/44] python3-zeroconf: upgrade
- 0.147.2 -> 1.0.0
-To: wangmy@fujitsu.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.11.232.110]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (10.11.224.121) To
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121)
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDE0MDA3OSBTYWx0ZWRfX9oMFIiUYH1C4
+ Q8pNRJ0IHOeuxEWuLLJplcrKEcK2RQGKlOEsc1FrXrn3HAhYuzxQ7cSfoCXiZh6dIn68IrqU98a
+ ltni7uCbRseDyhhv9a8wNFOsowbU4mUhVZStTp4aIfLL92vxHzY9k+ot0gjkZ7oTVz+rj6pJ6rm
+ f5NpsuZKijYOZOwSk4wX42H9IINGWI7c4j+Nh2EMKf9PZ+WllzqqEG4fcFts55697O4pa6DwTD6
+ ns4rmWuElWmNGWL9O3CFDyKpqpUViy+/HZ7rrthchuMBSpaBF1fXM35PNYl8sdF/rBGtxLm7ixj
+ Iotfwf28Pu4Psq5Xb7sz9UzvFRaj5ATJ9Hwjet3+VVsWdoeHyWnckKwwATYTCfZzxTgQ9x53mpq
+ tv340z6lSylMwi77x8jKWcUQzGkNYQ==
+X-Proofpoint-GUID: cX_-52ym0lBe6uzOZqHnkgelw18eGidl
+X-Authority-Analysis: v=2.4 cv=JaKxbEKV c=1 sm=1 tr=0 ts=68ee20e3 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=gmxlzscTznEA:10 a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=PYnjg3YJAAAA:8 a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8 a=3fyaaF4VAAAA:8
+ a=lxw-dE6-Go_C1IIk8boA:9 a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: cX_-52ym0lBe6uzOZqHnkgelw18eGidl
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-14_02,2025-10-13_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 adultscore=0 phishscore=0 clxscore=1015
+ suspectscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510020000
+ definitions=main-2510140079
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 09:33:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120602
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 10:07:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120603
 
-On Tue, Oct 14, 2025 at 10:21=E2=80=AFAM wangmy via lists.openembedded.org
-<wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
+From: Yogita Urade <yogita.urade@windriver.com>
 
-I believe this major version bump was unintentional:
+Poppler 24.06.1 through 25.x before 25.04.0 allows stack consumption
+and a SIGSEGV via deeply nested structures within the metadata (such
+as GTS_PDFEVersion) of a PDF document, e.g., a regular expression for
+a long pdfsubver string. This occurs in Dict::lookup, Catalog::getMetadata,
+and associated functions in PDFDoc, with deep recursion in the regex
+executor (std::__detail::_Executor).
 
-https://pypi.org/project/zeroconf/#history
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2025-43718
 
-"This release was YANKED as the major version bump was not intended."
+Upstream patch:
+https://gitlab.freedesktop.org/poppler/poppler/-/commit/f54b815672117c250420787c8c006de98e8c7408
 
->  .../{python3-zeroconf_0.147.2.bb =3D> python3-zeroconf_1.0.0.bb}  | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-zeroconf_0.147.2.bb =
-=3D> python3-zeroconf_1.0.0.bb} (81%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.147.2=
-.bb b/meta-python/recipes-devtools/python/python3-zeroconf_1.0.0.bb
-> similarity index 81%
-> rename from meta-python/recipes-devtools/python/python3-zeroconf_0.147.2.=
-bb
-> rename to meta-python/recipes-devtools/python/python3-zeroconf_1.0.0.bb
-> index 31d671ceca..9d23e8a8fb 100644
-> --- a/meta-python/recipes-devtools/python/python3-zeroconf_0.147.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-zeroconf_1.0.0.bb
-> @@ -3,7 +3,7 @@ HOMEPAGE =3D "https://github.com/jstasiak/python-zeroconf=
-"
->  LICENSE =3D "LGPL-2.1-or-later"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9fe712b1bc27c5c4e9ecd7f31d208=
-900"
->
-> -SRC_URI[sha256sum] =3D "2f91e2544433acfa928c8dbaea7af8bf0644e06904610799=
-d6b762fd599d81bd"
-> +SRC_URI[sha256sum] =3D "3834ccf45c1e12cae78707ce691b20969e78aead28ae939b=
-158b7d08c4195ac9"
->
->  inherit pypi python_poetry_core cython
->
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#120597): https://lists.openembedded.org/g/openembedde=
-d-devel/message/120597
-> Mute This Topic: https://lists.openembedded.org/mt/115749717/3618097
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-lex.kiernan@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+---
+ .../poppler/poppler/CVE-2025-43718.patch      | 31 +++++++++++++++++++
+ .../poppler/poppler_22.04.0.bb                |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch
 
+diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch
+new file mode 100644
+index 0000000000..5a1368885c
+--- /dev/null
++++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch
+@@ -0,0 +1,31 @@
++From f54b815672117c250420787c8c006de98e8c7408 Mon Sep 17 00:00:00 2001
++From: Albert Astals Cid <aacid@kde.org>
++Date: Wed, 26 Mar 2025 11:26:32 +0100
++Subject: [PATCH] Make sure regex doesn't stack overflow by limiting it
++
++Happens with very long pdfsubver strings when compiled with
++-fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -flto=auto
++
++CVE: CVE-2025-43718
++Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/f54b815672117c250420787c8c006de98e8c7408]
++
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
++---
++ poppler/PDFDoc.cc | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/poppler/PDFDoc.cc b/poppler/PDFDoc.cc
++index abf6bb6..976bd78 100644
++--- a/poppler/PDFDoc.cc
+++++ b/poppler/PDFDoc.cc
++@@ -478,7 +478,7 @@ static PDFSubtypePart pdfPartFromString(PDFSubtype subtype, const std::string &p
++
++ static PDFSubtypeConformance pdfConformanceFromString(const std::string &pdfsubver)
++ {
++-    const std::regex regex("PDF/(?:A|X|VT|E|UA)-[[:digit:]]([[:alpha:]]+)");
+++    const std::regex regex("PDF/(?:A|X|VT|E|UA)-[[:digit:]]([[:alpha:]]{1,3})");
++     std::smatch match;
++     PDFSubtypeConformance pdfConf = subtypeConfNone;
++
++--
++2.40.0
+diff --git a/meta-oe/recipes-support/poppler/poppler_22.04.0.bb b/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
+index c624164560..0c4efab918 100644
+--- a/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_22.04.0.bb
+@@ -19,6 +19,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://CVE-2025-52886-0002.patch \
+            file://CVE-2025-52886-0003.patch \
+            file://CVE-2025-52886-0004.patch \
++           file://CVE-2025-43718.patch \
+            "
+ SRC_URI[sha256sum] = "813fb4b90e7bda63df53205c548602bae728887a60f4048aae4dbd9b1927deff"
+ 
+-- 
+2.40.0
 
---=20
-Alex Kiernan
 
