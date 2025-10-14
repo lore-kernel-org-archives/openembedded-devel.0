@@ -2,63 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B55D0CCD195
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9294CCD196
 	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 20:54:46 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.326.1760475282180778166
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.web11.376.1760475284753829432
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 13:54:42 -0700
+ Tue, 14 Oct 2025 13:54:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jluXLaRL;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-279e2554b6fso43359995ad.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:54:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DGJpKBDS;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-2698384978dso41076855ad.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:54:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760475281; x=1761080081; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760475284; x=1761080084; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vbBadCOgCowt0UekIjc77ddK4E30Ff5pYfVWp+JuqxU=;
-        b=jluXLaRLj6ZHk+hWGDp0+2lEVnvK17AKINOOabU5UksIDUXNNhE80HvJmTw/o60pYT
-         AQu5+0NXZHtC3+SZcZWoVniQtVfGWUgdCnR2gnu1HfEzMKlCTYTIxeBpxsAgSo/WCM1x
-         w9rsqFCEBt3L2VZDbf/fnY7kmGxM+zUYhRWX8wp4NDhE21QGwtT4/5fkhUGzcxTWcAO2
-         Yij0xyTd80XhYXbm+VXjqv3FmvxbcwFLFUo8Bv37jQHsSY6N7NjBP2bf7UBf+xFuWnmF
-         LQb0z9T1emrje0t63q5mmYa3lUXrzh+qmJoUxXe0UhH1BtW+8CRZSp7TXtetU2lxZvYp
-         jIhA==
+        bh=V1H/ipdKeGjytMyN0hl/+I6wr3SIrllewKisFWn7BRs=;
+        b=DGJpKBDSb2ctpillQr2DUfKACOgVmJXoYcokaYththX1IsZX8vkj78mr6FDBbX2pFf
+         EeN9HgpsnfSwDpGoPVNBSfDmmDqK4g8T/irFL4R40nY9cOsa5hSrY2u3KUz9POwT4UXy
+         /PucTwp9vGhXkhID6pXXwW5KsW7CX05AUDGpTNRHMNOFSHgEQfCmb+uF0B0oXQjJHKwv
+         oKD8Ux//e8wQXyYrM2bN8FVlOzCuYaECPuItI3Mv1kq1qGQ7UBCaql/hRUFGY+zterth
+         xwjLHIHqhJg3KRkauNY2jb1L2KpiUMA/s5KltEcDojYdWruJO/RjcctcJ0tLvupi3xIM
+         8Uvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760475281; x=1761080081;
+        d=1e100.net; s=20230601; t=1760475284; x=1761080084;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=vbBadCOgCowt0UekIjc77ddK4E30Ff5pYfVWp+JuqxU=;
-        b=LKCKGHEYaN+yi1uFef1tfbdJB27B/ydzL5SHPSzJmC+zTKBfUCet+PWlhUUvCW+gVG
-         Dp3y48qSpzI2omJFBDG0Sg5wal4v2KdzP+GnqyJ08649axAKQwhofi5JgNB0AefY8yE3
-         faMMdEB3EtAXU/BcYnjO0Odbsu+2zO8wpT2X5VtmS7XPIxtMzbGzZhSTCbZOr3mbOwDP
-         lxsJJbMq2Fc0d20D9yAl7ehC5YWGhVlxKLxFhqY1tD2G4PoumwKqkyv1jxx4W/YBePp5
-         oCQ3yNV11faa/u1AKopeEy9p9CAwB2YI0Es8m62YpPJhdrGHsJ+joaUjrwkGmXWShOzt
-         dANA==
-X-Gm-Message-State: AOJu0Yxb/ADnm/px30R2fQ3yfMS4foNkdacbJWR7vw3olcc1wdbeb/fw
-	P6n6Wewa8/7lp5dHqxzYkKbu/dO5B4gFmjhkH6+0teGj/qXRYF//vxyNfaa6wg==
-X-Gm-Gg: ASbGnctXV3jcCyr6w2CYxkUWDlwYq1RCk27VyGK3FRlTc+buyA0F8MiH9BqIDY4dCd6
-	deXqghFavH7GjweVEgnY65sQ3SMDZGaXt9cvAwNH0+G2x4ET0N0IrnAHhafFNZ4Cj5bDOCSfErC
-	qCjp9szDC76Lnuk4PYhb1Hy3Y2jWGHzpCri4O49dEJiGsHpLoNmQXbcPiqsyPd6cwe/JSUQ68iJ
-	2wIUDmN6ZJaoGnCdv4Mg5Viw2i4/lKJL0iQpwuLArMaFPfCstiqqMH6Jwt9Rr3vh1iCglDK6CPy
-	trZeE2yNuWIevDw9vCppmABxZaGa7CHWjqHu3nJAx1kEEgNDTB0pw+ZqM+8TR+5WS+HB3L20vb0
-	mlibnchp+dF9iRD5PAdfDQwegCQqjczm0n5W0RPNXHPc6IYL/zZbdnyfTnIdyrdSzOA==
-X-Google-Smtp-Source: AGHT+IEwEYFcRK1Fx2jQ2srltj2UqxYKmz0AZq4MB+HmTPtaT+kpCsDGjaiNQKP8A5LMU+IpVZJpfw==
-X-Received: by 2002:a17:902:e952:b0:27e:f018:d2fb with SMTP id d9443c01a7336-2902735667emr334807295ad.6.1760475281460;
-        Tue, 14 Oct 2025 13:54:41 -0700 (PDT)
+        bh=V1H/ipdKeGjytMyN0hl/+I6wr3SIrllewKisFWn7BRs=;
+        b=acz+bJa4TxOzoC6919uyS1bUL5LGiRt6Ldf24pltTCIcxsDi7fgQRyc+As+y5VqJLo
+         hR2Q7nGHnPYUkWnaRna/tG3VZ90OzAyFOMz0mjWjRQ7e4GaCRCc8opUVkaBWgcTFq1WF
+         HzvvyeNJHGCY43J6MoRtIEMRTOz5aaWyq5tO3j+Up+TZ7estRoHYPLvl/Qy8+TToimIZ
+         8P4AjFx2cbN3ip9ZjQ0thhqoqhln0AuZSfGH0Dnthw7P8J1CCvvHZ7uhcKG1pRZ+tSV5
+         OR4hZeQHHkHR1R9fwxPvdRvHZnt/Jwb9kSpUM2Komcf4/H/P92tUOC13bGCHzknaBUiV
+         C6RA==
+X-Gm-Message-State: AOJu0YytND+FbB2rl7Zb68rXEwehWjjQcWp/5v8MO5eQ+GzCdeDQqrOY
+	a5yhwd/uw1jQBelzeEJ0RYGW4L9tp8leiQZ/44GeSf107hDZyAJvhA4x/fbgog==
+X-Gm-Gg: ASbGncvDEE1mnuEO+TI9wLA4N4OfTGoo7ii7Pul1q4NwjySbUG0InD2GRhmZO+ya3Ax
+	z/ls5WMMS6z82IyfD8BTU6mA0hmM/9pvrn9HZLrkBqnS/NMsp4icL+JNUZq/qRFal0BCzwQZpZW
+	nWepmm+WQyrbazTEt+XtCO04XhL2MgETJhm+8t+17pzeOm3ps1qj510t+lCbbxYasdsMSHQuCzZ
+	YQUAaj9hPvEqsA2kqe9nclGNIzV6u5uFIqEFMgEG7OcsE1FNeSt4zJgxd4Og6ehU6otR3dCMRwu
+	saz24oMqEHAjUa8NV0oXK2Gh8H52Wkvn9iZpi6ybUqaHo7/IIouhK5XpfO+U2bKfKasFH3WHRrv
+	yRt6Vl7HhZ7viYk2ImaGnVovipjLSoEHOq3SdKB0ZvCJQWCPwstGFpcU=
+X-Google-Smtp-Source: AGHT+IGJahdaroHgEGP9KLMXnza0uj/6wd3ro4iXr5Zb8Wws44F45kpNRR2R+Xwv6avAi7E+esiRgQ==
+X-Received: by 2002:a17:903:8cd:b0:269:8d85:2249 with SMTP id d9443c01a7336-29027240d03mr281852325ad.22.1760475284023;
+        Tue, 14 Oct 2025 13:54:44 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034dea083sm174952475ad.24.2025.10.14.13.54.39
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034dea083sm174952475ad.24.2025.10.14.13.54.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Oct 2025 13:54:41 -0700 (PDT)
+        Tue, 14 Oct 2025 13:54:43 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
+Cc: Peter Marko <peter.marko@siemens.com>,
+	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 14/18] exiv2: patch CVE-2025-55304
-Date: Wed, 15 Oct 2025 09:53:57 +1300
-Message-ID: <20251014205402.1487867-14-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 15/18] gattlib: mark CVE-2019-6498 as fixed
+Date: Wed, 15 Oct 2025 09:53:58 +1300
+Message-ID: <20251014205402.1487867-15-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251014205402.1487867-1-ankur.tyagi85@gmail.com>
 References: <20251014205402.1487867-1-ankur.tyagi85@gmail.com>
@@ -68,135 +69,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 20:54:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120647
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120648
 
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+From: Peter Marko <peter.marko@siemens.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-55304
+Our hash does not point to exact tag and CVE patch is already in.
 
-Backport patch mentioned in the details of the vulnerability.
+We use: 33a8a275928b186381bb0aea0f9778e330e57ec3
+Fix: https://github.com/labapart/gattlib/commit/60b813a770e42fdb0e85c1d2da7a55327784b8d6
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-(cherry picked from commit f47fdfd73090c996f4edf9c7921bc07bbdffd908)
+git describe --tags --match=v0.2 33a8a275928b186381bb0aea0f9778e330e57ec3 60b813a770e42fdb0e85c1d2da7a55327784b8d6
+v0.2-262-g33a8a27
+v0.2-85-g60b813a
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit e5a12d52522f10026570a5c48d6662a5359c4887)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...ppendIccProfile-to-fix-quadratic-per.patch | 96 +++++++++++++++++++
- meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb |  1 +
- 2 files changed, 97 insertions(+)
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch
+ meta-oe/recipes-connectivity/gattlib/gattlib_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/exiv2/exiv2/0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch b/meta-oe/recipes-support/exiv2/exiv2/0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch
-new file mode 100644
-index 0000000000..a0399c539b
---- /dev/null
-+++ b/meta-oe/recipes-support/exiv2/exiv2/0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch
-@@ -0,0 +1,96 @@
-+From 14a862213873b3f81941721a5972853fd269ca63 Mon Sep 17 00:00:00 2001
-+From: Kevin Backhouse <kevinbackhouse@github.com>
-+Date: Fri, 15 Aug 2025 12:08:49 +0100
-+Subject: [PATCH] Add new method appendIccProfile to fix quadratic performance
-+ issue.
-+
-+Upstream-Status: Backport [https://github.com/Exiv2/exiv2/pull/3345/commits/e5bf22e0cebeabeb2ffd40678344467a271be12d]
-+CVE: CVE-2025-55304
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ include/exiv2/image.hpp | 10 ++++++++++
-+ src/image.cpp           | 29 +++++++++++++++++++++--------
-+ src/jpgimage.cpp        |  7 +------
-+ 3 files changed, 32 insertions(+), 14 deletions(-)
-+
-+diff --git a/include/exiv2/image.hpp b/include/exiv2/image.hpp
-+index 629a8a4fd..072016013 100644
-+--- a/include/exiv2/image.hpp
-++++ b/include/exiv2/image.hpp
-+@@ -191,6 +191,16 @@ class EXIV2API Image {
-+     @param bTestValid - tests that iccProfile contains credible data
-+    */
-+   virtual void setIccProfile(DataBuf&& iccProfile, bool bTestValid = true);
-++  /*!
-++    @brief Append more bytes to the iccProfile.
-++    @param iccProfile DataBuf containing profile (binary)
-++    @param bTestValid - tests that iccProfile contains credible data
-++   */
-++  virtual void appendIccProfile(const uint8_t* bytes, size_t size, bool bTestValid);
-++  /*!
-++    @brief Throw an exception if the size at the beginning of the iccProfile isn't correct.
-++   */
-++  virtual void checkIccProfile();
-+   /*!
-+     @brief Erase iccProfile. the profile is not removed from
-+         the actual image until the writeMetadata() method is called.
-+diff --git a/src/image.cpp b/src/image.cpp
-+index f06660cf7..eb6b3eb0a 100644
-+--- a/src/image.cpp
-++++ b/src/image.cpp
-+@@ -625,16 +625,29 @@ void Image::setComment(const std::string& comment) {
-+ }
-+ 
-+ void Image::setIccProfile(Exiv2::DataBuf&& iccProfile, bool bTestValid) {
-++  iccProfile_ = std::move(iccProfile);
-+   if (bTestValid) {
-+-    if (iccProfile.size() < sizeof(long)) {
-+-      throw Error(ErrorCode::kerInvalidIccProfile);
-+-    }
-+-    const size_t size = iccProfile.read_uint32(0, bigEndian);
-+-    if (size != iccProfile.size()) {
-+-      throw Error(ErrorCode::kerInvalidIccProfile);
-+-    }
-++    checkIccProfile();
-++  }
-++}
-++
-++void Image::appendIccProfile(const uint8_t* bytes, size_t size, bool bTestValid) {
-++  const size_t start = iccProfile_.size();
-++  iccProfile_.resize(Safe::add(start, size));
-++  memcpy(iccProfile_.data(start), bytes, size);
-++  if (bTestValid) {
-++    checkIccProfile();
-++  }
-++}
-++
-++void Image::checkIccProfile() {
-++  if (iccProfile_.size() < sizeof(long)) {
-++    throw Error(ErrorCode::kerInvalidIccProfile);
-++  }
-++  const size_t size = iccProfile_.read_uint32(0, bigEndian);
-++  if (size != iccProfile_.size()) {
-++    throw Error(ErrorCode::kerInvalidIccProfile);
-+   }
-+-  iccProfile_ = std::move(iccProfile);
-+ }
-+ 
-+ void Image::clearIccProfile() {
-+diff --git a/src/jpgimage.cpp b/src/jpgimage.cpp
-+index 34187dc63..2c29135ae 100644
-+--- a/src/jpgimage.cpp
-++++ b/src/jpgimage.cpp
-+@@ -268,12 +268,7 @@ void JpegBase::readMetadata() {
-+         icc_size = s;
-+       }
-+ 
-+-      DataBuf profile(Safe::add(iccProfile_.size(), icc_size));
-+-      if (!iccProfile_.empty()) {
-+-        std::copy(iccProfile_.begin(), iccProfile_.end(), profile.begin());
-+-      }
-+-      std::copy_n(buf.c_data(2 + 14), icc_size, profile.data() + iccProfile_.size());
-+-      setIccProfile(std::move(profile), chunk == chunks);
-++      appendIccProfile(buf.c_data(2 + 14), icc_size, chunk == chunks);
-+     } else if (pixelHeight_ == 0 && inRange2(marker, sof0_, sof3_, sof5_, sof15_)) {
-+       // We hit a SOFn (start-of-frame) marker
-+       if (size < 8) {
-diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb b/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
-index 947d13208d..db32398b4f 100644
---- a/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
-+++ b/meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb
-@@ -7,6 +7,7 @@ DEPENDS = "zlib expat brotli libinih"
- SRC_URI = "git://github.com/Exiv2/exiv2.git;protocol=https;branch=0.28.x \
-            file://0001-Revert-fix-copy-constructors.patch \
-            file://0001-CVE-2025-54080-fix.patch \
-+           file://0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch \
-            "
- SRCREV = "a6a79ef064f131ffd03c110acce2d3edb84ffa2e"
+diff --git a/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb b/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
+index 7ad28d594d..0841dc2596 100644
+--- a/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
++++ b/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
+@@ -17,6 +17,8 @@ SRCREV = "33a8a275928b186381bb0aea0f9778e330e57ec3"
+ 
  S = "${WORKDIR}/git"
+ 
++CVE_STATUS[CVE-2019-6498] = "fixed-version: patch is already included in sources"
++
+ PACKAGECONFIG[examples] = "-DGATTLIB_BUILD_EXAMPLES=ON,-DGATTLIB_BUILD_EXAMPLES=OFF"
+ 
+ # Set this to force use of DBus API if Bluez version is older than 5.42
 
