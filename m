@@ -2,169 +2,707 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A77B7CCD18E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACFB7CCD195
 	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 20:54:16 +0000 (UTC)
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web10.310.1760475255904882054
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web11.350.1760475253826696983
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 13:54:16 -0700
+ Tue, 14 Oct 2025 13:54:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DWL1RUT/;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-782023ca359so5926112b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:54:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ndK1yy5S;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-26c209802c0so57417585ad.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:54:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760475255; x=1761080055; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760475253; x=1761080053; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Z49fD9FWj0dDkLy5BiLkXDPG/f0qusOHTxWfpEkr4FY=;
-        b=DWL1RUT/aY3DuTC+urNoQXfL7RJQ/gBIVfrejJQYCp0XYPQQin1YiGN2u/oqmStyg4
-         PsvbmOjfKbOCdy2eroWxxLbLiAApRosH1UlYWQWYYTecb1B8MingwoYtgp0IBVhNizn7
-         xgBuJYVrOzf/8hd947lBw/U/czhkXYG1plwsJ7scRc4ajDkSmciCtICSVFqZ3cH+D8F0
-         ATI63DahHSY5zqHeTaYMnrnob5X6fz91g3CzS9Z/DUCU+TLCP8g3Vz6Bwewpg0IvIdmi
-         LbhjbSUCoVQPs70CPSHojUjKT6chz30l4uabIl0TZmqCFL7sNIzYPgJy9BXqgfyB1voJ
-         Dg8w==
+        bh=6rx7t4NzcdExBiTrvoiUq7jOVrojlWBkoXsAZ5mPTlg=;
+        b=ndK1yy5SQt7bVcx6LDbRFEPEkIrogaceskq1rAcKhY5j4LIWV0LDPEoz0CisbQBkT1
+         zDkYJspaPwcMNnb+rX1W1FhgiJfnXOVwXHKuJZLD0cQTkcB7ZVd0ZtdQ8b2OrUX9n3L5
+         pqA2/cLmTsCJDEcgeVolgWwpSZT6l969qBi/YhZIq5PsD3MXLBKDPcUf1YF0MH9nnmrL
+         qj/Nq2AA0FHAo0yLuuZ8WgqEgJivQue72VhwAzlY8wsorDifqycX2J6lpH9xInQhadlT
+         z/xs2Mh9DNESqrDELAIculL+jd/Ef1u9kjZeR+JommtEEZY2w4x4a+73Hd3IGF/MFNxl
+         gtKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760475255; x=1761080055;
+        d=1e100.net; s=20230601; t=1760475253; x=1761080053;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Z49fD9FWj0dDkLy5BiLkXDPG/f0qusOHTxWfpEkr4FY=;
-        b=ComDbjx+8IaQwU1/nRvk+vghCfIBoNOxd7tP1ROOEIkz4shvc+Rvde2UCvjLbO9jIp
-         Z6JUeWQ/DnlH98kfP6T06cqlrrQyUGG33kq4KjtTUARlXsOqpL4UqmFgnle7Y48d7LmO
-         jwUDNBGi+0VmUrEfsyBrJCOcjjHnX4DMvQEgK3j+7mQQ3wR4Ymkfexzrw53EGI+z1JQA
-         GfdA8FusF1b/anuXbqikEEJ93TlGHLineGgDxDS3SPDhzT0tBwI6K6twaBicdYJYRRYP
-         YtMkVaFV6t16Ki3KC3XTDNZfIKFZGg2Kk422VgeG8iQ+rCVAWl0uEyXkOE/QToxa1Mig
-         a8jA==
-X-Gm-Message-State: AOJu0YylRhzF0RfMDTa7q4HjLDU7azdYcQsKtUMLrzTb3z6rt/PkLgjk
-	Qx/n0QXpvKPzVdg4zfeGyDVWuBVvBdqtn3V+yaMqAbedXhWVAV9vP8TUvNoyQg==
-X-Gm-Gg: ASbGnctqYmLb6HZGJ4XwJcW4LLMiCTXmUT56xXC69hqGugx9gfMFjcefAtsKO6N2hm3
-	Bv4EihvImKe15WC52NUYMQEFGtqB2gNzNeiWg7Jm3ndZBIDTHTjFa/W+wjucqZQ3FBV2A5KT3rs
-	Cm5vUkyPJfivnfvKejf3znrQh51T8VLLJqVgcPfwk/m4RxGwPpkG5kLxyICgJKkdMb5P4WAjcHX
-	uEnTeS7j4am1A0QHlxqv4MrSXTPbrbuWhw17OAK7loaBbC6Ix8G9adZIolNSreEHEjRsU/RuUUt
-	iI/aal7BAEODa+AbDNaKq7dLPTxaNfqKzQBGRceC1AlP1ewSi0MHt6jklwoXF8O9xPuxQconB+e
-	LOAAuDhqzTNV1+aRSKrKe9ncdy2m1eP1Md+T6kJPcuEQvsU/QoSnw9RM=
-X-Google-Smtp-Source: AGHT+IHjzlLsUPM64VUtuHMmJZGV7Osg70uaiOw/FH52l6fxTZYXdYsYDKEzc3fyfdFd9phWyZU02g==
-X-Received: by 2002:a17:903:9cb:b0:261:1abb:e302 with SMTP id d9443c01a7336-29027373d8bmr306940135ad.14.1760475255114;
-        Tue, 14 Oct 2025 13:54:15 -0700 (PDT)
+        bh=6rx7t4NzcdExBiTrvoiUq7jOVrojlWBkoXsAZ5mPTlg=;
+        b=GHbEnCfsox22qdwKnpCPKdkn7loXTXgG2CSnQ7IibtfcdLsP4J4JMxxYeZuAnsr9gG
+         EgfM8zPr9dxtKJtQ8qk8n31dEfDoCFShhGfOGeec7/7Td94gJcmAmF9w9xZhoHr/bE1o
+         2VTNinFdnuZ6Z3/Cs3Wk4XCsQf0DiaNYRIdc/SZCYNAIkk80B+2TtIwnakBeiseZeDY5
+         9qJaFqzZuML+JnJo0TM3KnI2Vc0PbpPi7NxL0ltDPDuqEShihHTda2WLzoFbFTw6mOCx
+         BhOgosCf5P7B3zNT1MaNxVBk6deZZz2Xqp0tqucO7YbtCtLrAxKwFfAmIDTbJt6Iufe7
+         LK9g==
+X-Gm-Message-State: AOJu0Yy9LGGrse87VHqPeBeY7xN0ahVgoSHMquvQ5Xi3A8Eoa1+aq72B
+	7GLmorPqxwOKPkdrJThCnLTuuhI0Y7ABiwVSTTasddCFyMifPnWB2Xlg/mj8Qg==
+X-Gm-Gg: ASbGncsrmKR6Ak1R+QHVwkgGTtYIe41SSk5c7RN5dRzKNkNsqNaDq9sR6uYIZYcjg6b
+	p6sI3/3rFW9pDRSdnYFZF5Pvy1WhOoIjxd9KG1WIIPscPpVC79ULPp+Q579+ZwwFkqSYn+fCl6t
+	jj6P9o+LGlWEpVGbio2VnV7/S01opPzxOqdO4khSKlK71g3LNXLfbcalpCvhaIpide793+mZzrq
+	9ykMfPivak+RjZ+a63Ex7xRNdaAOAsaaQeYuWBRDkpD/5ihjdoaZ4Zt1eMemYdPhvS275HrKD14
+	6+TIlAFJpCSpX9ZctTYgqP62qOyKyK3L82odE4oQufEEdNakiDXSc+3SU2vudAEFBJot5DZBdI3
+	uaN0Rag6tiynckMpUCVSlGpj2iZ9sR18vYQQHGyZi1OQbx/PMp6V9IslrKev/E0ZRyA==
+X-Google-Smtp-Source: AGHT+IH7snUtMCGQmNoTH0PY2BQRe3gVUzim5hzpXG3Xi+Ett5nK6s4JFhk2PPxsiqAvW0+6DFa2xQ==
+X-Received: by 2002:a17:903:4b04:b0:267:f7bc:673c with SMTP id d9443c01a7336-29027402c47mr304503365ad.44.1760475252623;
+        Tue, 14 Oct 2025 13:54:12 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034dea083sm174952475ad.24.2025.10.14.13.54.13
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034dea083sm174952475ad.24.2025.10.14.13.54.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Oct 2025 13:54:14 -0700 (PDT)
+        Tue, 14 Oct 2025 13:54:12 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 03/18] hdf5: patch CVE-2025-2923
-Date: Wed, 15 Oct 2025 09:53:46 +1300
-Message-ID: <20251014205402.1487867-3-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 02/18] libppd: patch CVE-2024-47175
+Date: Wed, 15 Oct 2025 09:53:45 +1300
+Message-ID: <20251014205402.1487867-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251014205402.1487867-1-ankur.tyagi85@gmail.com>
 References: <20251014205402.1487867-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 20:54:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120636
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120635
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2025-2923
+Details https://nvd.nist.gov/vuln/detail/CVE-2024-47175
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-(cherry picked from commit 01238545d8f0ac9aabc271538d0ca5ccd9f3d9f4)
+(cherry picked from commit 07330a98cf93806b7a4e0170a541b94962ff3960)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../hdf5/files/0001-CVE-2025-2923.patch       | 67 +++++++++++++++++++
- meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |  1 +
- 2 files changed, 68 insertions(+)
- create mode 100644 meta-oe/recipes-support/hdf5/files/0001-CVE-2025-2923.patch
+ .../cups/libppd/0001-CVE-2024-47175.patch     | 600 ++++++++++++++++++
+ meta-oe/recipes-printing/cups/libppd_2.0.0.bb |   5 +-
+ 2 files changed, 604 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-printing/cups/libppd/0001-CVE-2024-47175.patch
 
-diff --git a/meta-oe/recipes-support/hdf5/files/0001-CVE-2025-2923.patch b/meta-oe/recipes-support/hdf5/files/0001-CVE-2025-2923.patch
+diff --git a/meta-oe/recipes-printing/cups/libppd/0001-CVE-2024-47175.patch b/meta-oe/recipes-printing/cups/libppd/0001-CVE-2024-47175.patch
 new file mode 100644
-index 0000000000..ffaade2503
+index 0000000000..ba9cc683af
 --- /dev/null
-+++ b/meta-oe/recipes-support/hdf5/files/0001-CVE-2025-2923.patch
-@@ -0,0 +1,67 @@
-+From 951ebdce0098dac1042d5e9650e655c6c1f92904 Mon Sep 17 00:00:00 2001
-+From: jhendersonHDF <jhenderson@hdfgroup.org>
-+Date: Fri, 26 Sep 2025 13:13:10 -0500
-+Subject: [PATCH] CVE-2025-2923
++++ b/meta-oe/recipes-printing/cups/libppd/0001-CVE-2024-47175.patch
+@@ -0,0 +1,600 @@
++From 67a96c1e81bf219a5eefb81b513cf1f44d1a3700 Mon Sep 17 00:00:00 2001
++From: Zdenek Dohnal <zdohnal@redhat.com>
++Date: Thu, 26 Sep 2024 23:12:14 +0200
++Subject: [PATCH] CVE-2024-47175
 +
-+Fix issue with handling of corrupted object header continuation messages (#5829)
++Prevent PPD generation based on invalid IPP response
 +
-+An HDF5 file could be specifically constructed such that an object
-+header contained a corrupted continuation message which pointed
-+back to itself. This eventually resulted in an internal buffer being
-+allocated with too small of a size, leading to a heap buffer overflow
-+when encoding an object header message into it. This has been fixed
-+by checking the expected number of deserialized object header chunks
-+against the actual value as chunks are being deserialized.
++Author: Mike Sweet
++Minor fixes: Zdenek Dohnal
 +
-+Fixes CVE-2025-6816, CVE-2025-6856, CVE-2025-2923
++CVE: CVE-2024-47175
++Upstream-Status: Backport [https://github.com/OpenPrinting/libppd/commit/d681747ebf12602cb426725eb8ce2753211e2477]
 +
-+CVE: CVE-2025-2923
-+Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/29c847a43db0cdc85b01cafa5a7613ea73932675]
-+
-+(cherry picked from commit 29c847a43db0cdc85b01cafa5a7613ea73932675)
++(cherry picked from commit d681747ebf12602cb426725eb8ce2753211e2477)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/H5Oint.c | 17 +++++++++++------
-+ 1 file changed, 11 insertions(+), 6 deletions(-)
++ ppd/ppd-cache.c     |  17 ++-
++ ppd/ppd-generator.c | 257 ++++++++++++++++++++++++++++----------------
++ 2 files changed, 176 insertions(+), 98 deletions(-)
 +
-+diff --git a/src/H5Oint.c b/src/H5Oint.c
-+index 022ee43..a5e0072 100644
-+--- a/src/H5Oint.c
-++++ b/src/H5Oint.c
-+@@ -1013,10 +1013,9 @@ H5O_protect(const H5O_loc_t *loc, unsigned prot_flags, bool pin_all_chunks)
-+          */
-+         curr_msg = 0;
-+         while (curr_msg < cont_msg_info.nmsgs) {
-+-            H5O_chunk_proxy_t *chk_proxy; /* Proxy for chunk, to bring it into memory */
-+-#ifndef NDEBUG
-+-            size_t chkcnt = oh->nchunks; /* Count of chunks (for sanity checking) */
-+-#endif                                   /* NDEBUG */
-++            H5O_chunk_proxy_t *chk_proxy;            /* Proxy for chunk, to bring it into memory */
-++            unsigned           chunkno;              /* Chunk number for chunk proxy */
-++            size_t             chkcnt = oh->nchunks; /* Count of chunks (for sanity checking) */
++diff --git a/ppd/ppd-cache.c b/ppd/ppd-cache.c
++index 5aa617c1..747c9ad5 100644
++--- a/ppd/ppd-cache.c
+++++ b/ppd/ppd-cache.c
++@@ -1,6 +1,7 @@
++ //
++ // PPD cache implementation for libppd.
++ //
+++// Copyright © 2024 by OpenPrinting
++ // Copyright © 2010-2019 by Apple Inc.
++ //
++ // Licensed under Apache License v2.0.  See the file "LICENSE" for more
++@@ -3413,7 +3414,7 @@ ppdCacheGetBin(
 + 
-+             /* Bring the chunk into the cache */
-+             /* (which adds to the object header) */
-+@@ -1029,14 +1028,20 @@ H5O_protect(const H5O_loc_t *loc, unsigned prot_flags, bool pin_all_chunks)
-+ 
-+             /* Sanity check */
-+             assert(chk_proxy->oh == oh);
-+-            assert(chk_proxy->chunkno == chkcnt);
-+-            assert(oh->nchunks == (chkcnt + 1));
++   //
++   // Range check input...
++- 
 ++
-++            chunkno = chk_proxy->chunkno;
 + 
-+             /* Release the chunk from the cache */
-+             if (H5AC_unprotect(loc->file, H5AC_OHDR_CHK, cont_msg_info.msgs[curr_msg].addr, chk_proxy,
-+                                H5AC__NO_FLAGS_SET) < 0)
-+                 HGOTO_ERROR(H5E_OHDR, H5E_CANTUNPROTECT, NULL, "unable to release object header chunk");
++   if (!pc || !output_bin)
++     return (NULL);
++@@ -3914,7 +3915,7 @@ ppdCacheGetPageSize(
++       {
++ 	//
++ 	// Check not only the base size (like "A4") but also variants (like
++-        // "A4.Borderless"). We check only the margins and orientation but do 
+++        // "A4.Borderless"). We check only the margins and orientation but do
++ 	// not re-check the size.
++ 	//
 + 
-++            if (chunkno != chkcnt)
-++                HGOTO_ERROR(H5E_OHDR, H5E_BADVALUE, NULL, "incorrect chunk number for object header chunk");
-++            if (oh->nchunks != (chkcnt + 1))
-++                HGOTO_ERROR(H5E_OHDR, H5E_BADVALUE, NULL,
-++                            "incorrect number of chunks after deserializing object header chunk");
++@@ -4711,7 +4712,7 @@ ppdPwgPpdizeName(const char *ipp,	// I - IPP keyword
++ 	*end;				// End of name buffer
++ 
++ 
++-  if (!ipp)
+++  if (!ipp || !_ppd_isalnum(*ipp))
++   {
++     *name = '\0';
++     return;
++@@ -4721,13 +4722,19 @@ ppdPwgPpdizeName(const char *ipp,	// I - IPP keyword
++ 
++   for (ptr = name + 1, end = name + namesize - 1; *ipp && ptr < end;)
++   {
++-    if (*ipp == '-' && _ppd_isalnum(ipp[1]))
+++    if (*ipp == '-' && isalnum(ipp[1]))
++     {
++       ipp ++;
++       *ptr++ = (char)toupper(*ipp++ & 255);
++     }
++-    else
+++    else if (*ipp == '_' || *ipp == '.' || *ipp == '-' || isalnum(*ipp))
+++    {
++       *ptr++ = *ipp++;
+++    }
+++    else
+++    {
+++      ipp ++;
+++    }
++   }
++ 
++   *ptr = '\0';
++diff --git a/ppd/ppd-generator.c b/ppd/ppd-generator.c
++index a815030b..011e086e 100644
++--- a/ppd/ppd-generator.c
+++++ b/ppd/ppd-generator.c
++@@ -1,15 +1,16 @@
++ //
++ //   PWG Raster/Apple Raster/PCLm/PDF/IPP legacy PPD generator for libppd.
++ //
++-//   Copyright 2016-2019 by Till Kamppeter.
++-//   Copyright 2017-2019 by Sahil Arora.
++-//   Copyright 2018-2019 by Deepak Patankar.
+++//   Copyright © 2024 by OpenPrinting
+++//   Copyright © 2016-2019 by Till Kamppeter.
+++//   Copyright © 2017-2019 by Sahil Arora.
+++//   Copyright © 2018-2019 by Deepak Patankar.
++ //
++ //   The PPD generator is based on the PPD generator for the CUPS
++ //   "lpadmin -m everywhere" functionality in the cups/ppd-cache.c
++ //   file. The copyright of this file is:
++ //
++-//   Copyright 2010-2016 by Apple Inc.
+++//   Copyright © 2010-2016 by Apple Inc.
++ //
++ //   Licensed under Apache License v2.0.  See the file "LICENSE" for more
++ //   information.
++@@ -51,6 +52,7 @@
++ 
++ static int	http_connect(http_t **http, const char *url, char *resource,
++ 			     size_t ressize);
+++static void	ppd_put_string(cups_file_t *fp, cups_lang_t *lang, const char *ppd_option, const char *ppd_choice, const char *pwg_msgid);
++ 
++ 
++ //
++@@ -60,7 +62,7 @@ static int	http_connect(http_t **http, const char *url, char *resource,
++ // than CUPS 2.2.x. We have also an additional test and development
++ // platform for this code. Taken from cups/ppd-cache.c,
++ // cups/string-private.h, cups/string.c.
++-// 
+++//
++ // The advantage of PPD generation instead of working with System V
++ // interface scripts is that the print dialogs of the clients do not
++ // need to ask the printer for its options via IPP. So we have access
++@@ -124,7 +126,7 @@ char ppdgenerator_msg[1024];
++ //                           IPP 1.x legacy)
++ //
++ 
++-char *                                             // O - PPD filename or NULL 
+++char *                                             // O - PPD filename or NULL
++                                                    //     on error
++ ppdCreatePPDFromIPP(char         *buffer,          // I - Filename buffer
++ 		    size_t       bufsize,          // I - Size of filename
++@@ -175,7 +177,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 		     cups_array_t *conflicts,       // I - Array of
++ 						    //     constraints
++ 		     cups_array_t *sizes,           // I - Media sizes we've
++-						    //     added 
+++						    //     added
++ 		     char*        default_pagesize, // I - Default page size
++ 		     const char   *default_cluster_color, // I - cluster def
++ 						    //     color (if cluster's
++@@ -187,6 +189,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 		     size_t       status_msg_size)  // I - Size of status
++ 						    //     message buffer
++ {
+++  cups_lang_t		*lang;		// Localization language
++   cups_file_t		*fp;		// PPD file
++   cups_array_t		*printer_sizes;	// Media sizes we've added
++   cups_size_t		*size;		// Current media size
++@@ -199,9 +202,10 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++   ipp_t			*media_col,	// Media collection
++ 			*media_size;	// Media size collection
++   char			make[256],	// Make and model
++-			*model,		// Model name
+++			*mptr,		// Pointer into make and model
++ 			ppdname[PPD_MAX_NAME];
++ 		    			// PPD keyword
+++  const char		*model;		// Model name
++   int			i, j,		// Looping vars
++ 			count = 0,	// Number of values
++ 			bottom,		// Largest bottom margin
++@@ -283,6 +287,68 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++     return (NULL);
++   }
++ 
+++  //
+++  // Get a sanitized make and model...
+++  //
 ++
-+             /* Advance to next continuation message */
-+             curr_msg++;
-+         } /* end while */
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-index f34e5f183d..4305826b22 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-@@ -15,6 +15,7 @@ SRC_URI = " \
-     https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.14/hdf5-1.14.4/src/${BPN}-${PV}.tar.gz \
-     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
-     file://0001-cmake-remove-build-flags.patch \
-+    file://0001-CVE-2025-2923.patch \
- "
- SRC_URI[sha256sum] = "019ac451d9e1cf89c0482ba2a06f07a46166caf23f60fea5ef3c37724a318e03"
+++  if ((attr = ippFindAttribute(supported, "printer-make-and-model", IPP_TAG_TEXT)) != NULL && ippValidateAttribute(attr))
+++  {
+++    // Sanitize the model name to only contain PPD-safe characters.
+++    strlcpy(make, ippGetString(attr, 0, NULL), sizeof(make));
+++
+++    for (mptr = make; *mptr; mptr ++)
+++    {
+++      if (*mptr < ' ' || *mptr >= 127 || *mptr == '\"')
+++      {
+++        // Truncate the make and model on the first bad character...
+++	*mptr = '\0';
+++	break;
+++      }
+++    }
+++
+++    while (mptr > make)
+++    {
+++      // Strip trailing whitespace...
+++      mptr --;
+++      if (*mptr == ' ')
+++	*mptr = '\0';
+++    }
+++
+++    if (!make[0])
+++    {
+++      // Use a default make and model if nothing remains...
+++      strlcpy(make, "Unknown", sizeof(make));
+++    }
+++  }
+++  else
+++  {
+++    // Use a default make and model...
+++    strlcpy(make, "Unknown", sizeof(make));
+++  }
+++
+++  if (!strncasecmp(make, "Hewlett Packard ", 16) || !strncasecmp(make, "Hewlett-Packard ", 16))
+++  {
+++    // Normalize HP printer make and model...
+++    model = make + 16;
+++    strlcpy(make, "HP", sizeof(make));
+++
+++    if (!strncasecmp(model, "HP ", 3))
+++      model += 3;
+++  }
+++  else if ((mptr = strchr(make, ' ')) != NULL)
+++  {
+++    // Separate "MAKE MODEL"...
+++    while (*mptr && *mptr == ' ')
+++      *mptr++ = '\0';
+++
+++    model = mptr;
+++  }
+++  else
+++  {
+++    // No separate model name...
+++    model = "Printer";
+++  }
+++
++   //
++   // Standard stuff for PPD file...
++   //
++@@ -311,25 +377,6 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++     }
++   }
++ 
++-  if ((attr = ippFindAttribute(supported, "printer-make-and-model",
++-			       IPP_TAG_TEXT)) != NULL)
++-    strlcpy(make, ippGetString(attr, 0, NULL), sizeof(make));
++-  else if (make_model && make_model[0] != '\0')
++-    strlcpy(make, make_model, sizeof(make));
++-  else
++-    strlcpy(make, "Unknown Printer", sizeof(make));
++-
++-  if (!strncasecmp(make, "Hewlett Packard ", 16) ||
++-      !strncasecmp(make, "Hewlett-Packard ", 16))
++-  {
++-    model = make + 16;
++-    strlcpy(make, "HP", sizeof(make));
++-  }
++-  else if ((model = strchr(make, ' ')) != NULL)
++-    *model++ = '\0';
++-  else
++-    model = make;
++-
++   cupsFilePrintf(fp, "*Manufacturer: \"%s\"\n", make);
++   cupsFilePrintf(fp, "*ModelName: \"%s %s\"\n", make, model);
++   cupsFilePrintf(fp, "*Product: \"(%s %s)\"\n", make, model);
++@@ -425,21 +472,19 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++   }
++   cupsFilePuts(fp, "\"\n");
++ 
++-  if ((attr = ippFindAttribute(supported, "printer-more-info", IPP_TAG_URI)) !=
++-      NULL)
+++  if ((attr = ippFindAttribute(supported, "printer-more-info", IPP_TAG_URI)) != NULL && ippValidateAttribute(attr))
++     cupsFilePrintf(fp, "*APSupplies: \"%s\"\n", ippGetString(attr, 0, NULL));
++ 
++-  if ((attr = ippFindAttribute(supported, "printer-charge-info-uri",
++-			       IPP_TAG_URI)) != NULL)
++-    cupsFilePrintf(fp, "*cupsChargeInfoURI: \"%s\"\n", ippGetString(attr, 0,
++-								    NULL));
+++  if ((attr = ippFindAttribute(supported, "printer-charge-info-uri", IPP_TAG_URI)) != NULL && ippValidateAttribute(attr))
+++    cupsFilePrintf(fp, "*cupsChargeInfoURI: \"%s\"\n", ippGetString(attr, 0, NULL));
++ 
++   // Message catalogs for UI strings
+++  lang = cupsLangDefault();
++   opt_strings_catalog = cfCatalogOptionArrayNew();
++   cfCatalogLoad(NULL, NULL, opt_strings_catalog);
++ 
++   if ((attr = ippFindAttribute(supported, "printer-strings-uri",
++-			       IPP_TAG_URI)) != NULL)
+++			       IPP_TAG_URI)) != NULL && ippValidateAttribute(attr))
++   {
++     printer_opt_strings_catalog = cfCatalogOptionArrayNew();
++     cfCatalogLoad(ippGetString(attr, 0, NULL), NULL,
++@@ -492,7 +537,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 	  response = cupsDoRequest(http, request, resource);
++ 
++ 	  if ((attr = ippFindAttribute(response, "printer-strings-uri",
++-				       IPP_TAG_URI)) != NULL)
+++				       IPP_TAG_URI)) != NULL && ippValidateAttribute(attr))
++ 	    cupsFilePrintf(fp, "*cupsStringsURI %s: \"%s\"\n", keyword,
++ 			   ippGetString(attr, 0, NULL));
++ 
++@@ -518,13 +563,10 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 				     IPP_TAG_BOOLEAN), 0))
++     cupsFilePuts(fp, "*cupsJobAccountingUserId: True\n");
++ 
++-  if ((attr = ippFindAttribute(supported, "printer-privacy-policy-uri",
++-			       IPP_TAG_URI)) != NULL)
++-    cupsFilePrintf(fp, "*cupsPrivacyURI: \"%s\"\n",
++-		   ippGetString(attr, 0, NULL));
+++  if ((attr = ippFindAttribute(supported, "printer-privacy-policy-uri", IPP_TAG_URI)) != NULL && ippValidateAttribute(attr))
+++    cupsFilePrintf(fp, "*cupsPrivacyURI: \"%s\"\n", ippGetString(attr, 0, NULL));
++ 
++-  if ((attr = ippFindAttribute(supported, "printer-mandatory-job-attributes",
++-			       IPP_TAG_KEYWORD)) != NULL)
+++  if ((attr = ippFindAttribute(supported, "printer-mandatory-job-attributes", IPP_TAG_KEYWORD)) != NULL && ippValidateAttribute(attr))
++   {
++     char	prefix = '\"';		// Prefix for string
++ 
++@@ -544,8 +586,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++     cupsFilePuts(fp, "\"\n");
++   }
++ 
++-  if ((attr = ippFindAttribute(supported, "printer-requested-job-attributes",
++-			       IPP_TAG_KEYWORD)) != NULL)
+++  if ((attr = ippFindAttribute(supported, "printer-requested-job-attributes", IPP_TAG_KEYWORD)) != NULL && ippValidateAttribute(attr))
++   {
++     char	prefix = '\"';		// Prefix for string
++ 
++@@ -664,7 +705,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++   }
++ 
++   //
++-  // Fax 
+++  // Fax
++   //
++ 
++   if (is_fax)
++@@ -705,21 +746,21 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ #ifdef CUPS_RASTER_HAVE_APPLERASTER
++   else if (cupsArrayFind(pdl_list, "image/urf"))
++   {
++-    int resStore = 0; // Variable for storing the no. of resolutions in the resolution array 
+++    int resStore = 0; // Variable for storing the no. of resolutions in the resolution array
++     int resArray[__INT16_MAX__]; // Creating a resolution array supporting a maximum of 32767 resolutions.
++     int lowdpi = 0, middpi = 0, hidpi = 0; // Lower , middle and higher resolution
++     if ((attr = ippFindAttribute(supported, "urf-supported",
++ 			IPP_TAG_KEYWORD)) != NULL)
++     {
++       for (int i = 0, count = ippGetCount(attr); i < count; i ++)
++-      {  
+++      {
++        	const char *rs = ippGetString(attr, i, NULL); // RS values
++-        const char *rsCopy = ippGetString(attr, i, NULL); // RS values(copy) 
+++        const char *rsCopy = ippGetString(attr, i, NULL); // RS values(copy)
++ 	if (strncasecmp(rs, "RS", 2)) // Comparing attributes to have RS in
++ 	                              // the beginning to indicate the
++ 	                              // resolution feature
++ 	  continue;
++-        int resCount = 0; // Using a count variable which can be reset 
+++        int resCount = 0; // Using a count variable which can be reset
++         while (*rsCopy != '\0') // Parsing through the copy pointer to
++ 	                        // determine the no. of resolutions
++         {
++@@ -817,7 +858,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 	    formatfound = 1;
++ 	    is_apple = 1;
++ 	  }
++-        } 
+++        }
++       }
++     }
++   }
++@@ -909,7 +950,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++   if (manual_copies == 1)
++     cupsFilePuts(fp, "*cupsManualCopies: True\n");
++ 
++-  // No resolution requirements by any of the supported PDLs? 
+++  // No resolution requirements by any of the supported PDLs?
++   // Use "printer-resolution-supported" attribute
++   if (common_res == NULL)
++   {
++@@ -1027,7 +1068,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++   //
++   // PageSize/PageRegion/ImageableArea/PaperDimension
++   //
++- 
+++
++   cfGenerateSizes(supported, CF_GEN_SIZES_DEFAULT, &printer_sizes, &defattr,
++ 		  NULL, NULL, NULL, NULL, NULL, NULL,
++ 		  &min_width, &min_length,
++@@ -1406,15 +1447,15 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++         if (!strcmp(sources[j], keyword))
++ 	  break;
++       if (j >= 0)
++-	cupsFilePrintf(fp, "*InputSlot %s%s%s: \"<</MediaPosition %d>>setpagedevice\"\n",
++-		       ppdname,
++-		       (human_readable ? "/" : ""),
++-		       (human_readable ? human_readable : ""), j);
+++      {
+++	cupsFilePrintf(fp, "*InputSlot %s: \"<</MediaPosition %d>>setpagedevice\"\n", ppdname, j);
+++	ppd_put_string(fp, lang, "InputSlot", ppdname, human_readable);
+++      }
++       else
++-	cupsFilePrintf(fp, "*InputSlot %s%s%s: \"\"\n",
++-		       ppdname,
++-		       (human_readable ? "/" : ""),
++-		       (human_readable ? human_readable : ""));
+++      {
+++	cupsFilePrintf(fp, "*InputSlot %s%s%s:\"\"\n", ppdname, human_readable ? "/" : "", human_readable ? human_readable : "");
+++	ppd_put_string(fp, lang, "InputSlot", ppdname, human_readable);
+++      }
++     }
++     cupsFilePuts(fp, "*CloseUI: *InputSlot\n");
++   }
++@@ -1449,11 +1490,8 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++       human_readable = cfCatalogLookUpChoice((char *)keyword, "media-type",
++ 					     opt_strings_catalog,
++ 					     printer_opt_strings_catalog);
++-      cupsFilePrintf(fp, "*MediaType %s%s%s: \"<</MediaType(%s)>>setpagedevice\"\n",
++-		     ppdname,
++-		     (human_readable ? "/" : ""),
++-		     (human_readable ? human_readable : ""),
++-		     ppdname);
+++      cupsFilePrintf(fp, "*MediaType %s: \"<</MediaType(%s)>>setpagedevice\"\n", ppdname, ppdname);
+++      ppd_put_string(fp, lang, "MediaType", ppdname, human_readable);
++     }
++     cupsFilePuts(fp, "*CloseUI: *MediaType\n");
++   }
++@@ -1776,10 +1814,8 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++       human_readable = cfCatalogLookUpChoice((char *)keyword, "output-bin",
++ 					     opt_strings_catalog,
++ 					     printer_opt_strings_catalog);
++-      cupsFilePrintf(fp, "*OutputBin %s%s%s: \"\"\n",
++-		     ppdname,
++-		     (human_readable ? "/" : ""),
++-		     (human_readable ? human_readable : ""));
+++      cupsFilePrintf(fp, "*OutputBin %s: \"\"\n", ppdname);
+++      ppd_put_string(fp, lang, "OutputBin", ppdname, human_readable);
++       outputorderinfofound = 0;
++       faceupdown = 1;
++       firsttolast = 1;
++@@ -1833,7 +1869,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 
++   //
++   // Finishing options...
++-  // 
+++  //
++ 
++   if ((attr = ippFindAttribute(supported, "finishings-supported",
++ 			       IPP_TAG_ENUM)) != NULL)
++@@ -1958,9 +1994,8 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 	human_readable = cfCatalogLookUpChoice(buf, "finishings",
++ 					       opt_strings_catalog,
++ 					       printer_opt_strings_catalog);
++-	cupsFilePrintf(fp, "*StapleLocation %s%s%s: \"\"\n", ppd_keyword,
++-		       (human_readable ? "/" : ""),
++-		       (human_readable ? human_readable : ""));
+++	cupsFilePrintf(fp, "*StapleLocation %s: \"\"\n", ppd_keyword);
+++	ppd_put_string(fp, lang, "StapleLocation", ppd_keyword, human_readable);
++ 	cupsFilePrintf(fp, "*cupsIPPFinishings %d/%s: \"*StapleLocation %s\"\n",
++ 		       value, keyword, ppd_keyword);
++       }
++@@ -2050,9 +2085,8 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 	human_readable = cfCatalogLookUpChoice(buf, "finishings",
++ 					       opt_strings_catalog,
++ 					       printer_opt_strings_catalog);
++-	cupsFilePrintf(fp, "*FoldType %s%s%s: \"\"\n", ppd_keyword,
++-		       (human_readable ? "/" : ""),
++-		       (human_readable ? human_readable : ""));
+++	cupsFilePrintf(fp, "*FoldType %s: \"\"\n", ppd_keyword);
+++	ppd_put_string(fp, lang, "FoldType", ppd_keyword, human_readable);
++ 	cupsFilePrintf(fp, "*cupsIPPFinishings %d/%s: \"*FoldType %s\"\n",
++ 		       value, keyword, ppd_keyword);
++       }
++@@ -2149,9 +2183,8 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 	human_readable = cfCatalogLookUpChoice(buf, "finishings",
++ 					       opt_strings_catalog,
++ 					       printer_opt_strings_catalog);
++-	cupsFilePrintf(fp, "*PunchMedia %s%s%s: \"\"\n", ppd_keyword,
++-		       (human_readable ? "/" : ""),
++-		       (human_readable ? human_readable : ""));
+++	cupsFilePrintf(fp, "*PunchMedia %s: \"\"\n", ppd_keyword);
+++	ppd_put_string(fp, lang, "PunchMedia", ppd_keyword, human_readable);
++ 	cupsFilePrintf(fp, "*cupsIPPFinishings %d/%s: \"*PunchMedia %s\"\n",
++ 		       value, keyword, ppd_keyword);
++       }
++@@ -2242,9 +2275,8 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 	human_readable = cfCatalogLookUpChoice(buf, "finishings",
++ 					       opt_strings_catalog,
++ 					       printer_opt_strings_catalog);
++-	cupsFilePrintf(fp, "*CutMedia %s%s%s: \"\"\n", ppd_keyword,
++-		       (human_readable ? "/" : ""),
++-		       (human_readable ? human_readable : ""));
+++	cupsFilePrintf(fp, "*CutMedia %s: \"\"\n", ppd_keyword);
+++	ppd_put_string(fp, lang, "CutMedia", ppd_keyword, human_readable);
++ 	cupsFilePrintf(fp, "*cupsIPPFinishings %d/%s: \"*CutMedia %s\"\n",
++ 		       value, keyword, ppd_keyword);
++       }
++@@ -2268,7 +2300,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++     cupsFilePrintf(fp, "*OpenUI *cupsFinishingTemplate/%s: PickOne\n",
++ 		   (human_readable ? human_readable : "Finishing Template"));
++     cupsFilePuts(fp, "*OrderDependency: 10 AnySetup *cupsFinishingTemplate\n");
++-    cupsFilePuts(fp, "*DefaultcupsFinishingTemplate: none\n");
+++    cupsFilePuts(fp, "*DefaultcupsFinishingTemplate: None\n");
++     human_readable = cfCatalogLookUpChoice("3", "finishings",
++ 					   opt_strings_catalog,
++ 					   printer_opt_strings_catalog);
++@@ -2299,8 +2331,9 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 					     printer_opt_strings_catalog);
++       if (human_readable == NULL)
++ 	human_readable = (char *)keyword;
++-      cupsFilePrintf(fp, "*cupsFinishingTemplate %s/%s: \"\n", keyword,
++-		     human_readable);
+++      ppdPwgPpdizeName(keyword, ppdname, sizeof(ppdname));
+++      cupsFilePrintf(fp, "*cupsFinishingTemplate %s: \"\n", ppdname);
+++      ppd_put_string(fp, lang, "cupsFinishingTemplate", ppdname, human_readable);
++       for (finishing_attr = ippFirstAttribute(finishing_col); finishing_attr;
++ 	   finishing_attr = ippNextAttribute(finishing_col)) {
++         if (ippGetValueTag(finishing_attr) == IPP_TAG_BEGIN_COLLECTION) {
++@@ -2564,14 +2597,14 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++       if (!preset || !preset_name)
++         continue;
++ 
++-      if ((localized_name =
+++      ppdPwgPpdizeName(preset_name, ppdname, sizeof(ppdname));
+++
+++      localized_name =
++ 	   cfCatalogLookUpOption((char *)preset_name,
++ 				 opt_strings_catalog,
++-				 printer_opt_strings_catalog)) == NULL)
++-        cupsFilePrintf(fp, "*APPrinterPreset %s: \"\n", preset_name);
++-      else
++-        cupsFilePrintf(fp, "*APPrinterPreset %s/%s: \"\n", preset_name,
++-		       localized_name);
+++				 printer_opt_strings_catalog);
+++      cupsFilePrintf(fp, "*APPrinterPreset %s: \"\n", ppdname);
+++      ppd_put_string(fp, lang, "APPrinterPreset", ppdname, localized_name);
++ 
++       for (member = ippFirstAttribute(preset); member;
++ 	   member = ippNextAttribute(preset))
++@@ -2620,7 +2653,10 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 		 ippGetString(ippFindAttribute(fin_col,
++ 					       "finishing-template",
++ 					       IPP_TAG_ZERO), 0, NULL)) != NULL)
++-              cupsFilePrintf(fp, "*cupsFinishingTemplate %s\n", keyword);
+++            {
+++	      ppdPwgPpdizeName(keyword, ppdname, sizeof(ppdname));
+++              cupsFilePrintf(fp, "*cupsFinishingTemplate %s\n", ppdname);
+++            }
++           }
++         }
++ 	else if (!strcmp(member_name, "media"))
++@@ -2659,7 +2695,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 				      NULL)) != NULL)
++ 	  {
++             ppdPwgPpdizeName(keyword, ppdname, sizeof(ppdname));
++-            cupsFilePrintf(fp, "*InputSlot %s\n", keyword);
+++            cupsFilePrintf(fp, "*InputSlot %s\n", ppdname);
++ 	  }
++ 
++           if ((keyword = ippGetString(ippFindAttribute(media_col, "media-type",
++@@ -2667,7 +2703,7 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
++ 				      NULL)) != NULL)
++ 	  {
++             ppdPwgPpdizeName(keyword, ppdname, sizeof(ppdname));
++-            cupsFilePrintf(fp, "*MediaType %s\n", keyword);
+++            cupsFilePrintf(fp, "*MediaType %s\n", ppdname);
++ 	  }
++         }
++ 	else if (!strcmp(member_name, "print-quality"))
++@@ -2817,3 +2853,38 @@ http_connect(http_t     **http,		// IO - Current HTTP connection
++ 
++   return (*http != NULL);
++ }
+++
+++
+++/*
+++ * 'ppd_put_strings()' - Write localization attributes to a PPD file.
+++ */
+++
+++static void
+++ppd_put_string(cups_file_t  *fp,	/* I - PPD file */
+++               cups_lang_t  *lang,	/* I - Language */
+++	       const char   *ppd_option,/* I - PPD option */
+++	       const char   *ppd_choice,/* I - PPD choice */
+++	       const char   *text)	/* I - Localized text */
+++{
+++  if (!text)
+++    return;
+++
+++  // Add the first line of localized text...
+++#if CUPS_VERSION_MAJOR > 2
+++  cupsFilePrintf(fp, "*%s.%s %s/", cupsLangGetName(lang), ppd_option, ppd_choice);
+++#else
+++  cupsFilePrintf(fp, "*%s.%s %s/", lang->language, ppd_option, ppd_choice);
+++#endif // CUPS_VERSION_MAJOR > 2
+++
+++  while (*text && *text != '\n')
+++  {
+++    // Escape ":" and "<"...
+++    if (*text == ':' || *text == '<')
+++      cupsFilePrintf(fp, "<%02X>", *text);
+++    else
+++      cupsFilePutChar(fp, *text);
+++
+++    text ++;
+++  }
+++  cupsFilePuts(fp, ": \"\"\n");
+++}
+diff --git a/meta-oe/recipes-printing/cups/libppd_2.0.0.bb b/meta-oe/recipes-printing/cups/libppd_2.0.0.bb
+index 99b1f6e730..f1cf25901e 100644
+--- a/meta-oe/recipes-printing/cups/libppd_2.0.0.bb
++++ b/meta-oe/recipes-printing/cups/libppd_2.0.0.bb
+@@ -5,7 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c1fca671047153ce6825c4ab06f2ab49"
  
+ DEPENDS = "libcupsfilters"
+ 
+-SRC_URI = "https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz"
++SRC_URI = " \
++    https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz \
++    file://0001-CVE-2024-47175.patch \
++"
+ SRC_URI[sha256sum] = "882d3c659a336e91559de8f3c76fc26197fe6e5539d9b484a596e29a5a4e0bc8"
+ 
+ inherit autotools gettext pkgconfig github-releases
 
