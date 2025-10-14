@@ -2,135 +2,102 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F10DCCD184
-	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 04:12:46 +0000 (UTC)
-Received: from mail-yx1-f43.google.com (mail-yx1-f43.google.com [74.125.224.43])
- by mx.groups.io with SMTP id smtpd.web10.7347.1760415157806611123
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AB64CCD18D
+	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 04:23:56 +0000 (UTC)
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.web10.7464.1760415835783398253
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Oct 2025 21:12:37 -0700
+ Mon, 13 Oct 2025 21:23:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=D+DHw9SL;
- spf=pass (domain: gmail.com, ip: 74.125.224.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f43.google.com with SMTP id 956f58d0204a3-63b710f276fso5018100d50.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Oct 2025 21:12:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MGIs+KgO;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-781010ff051so3453874b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Oct 2025 21:23:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760415157; x=1761019957; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1760415835; x=1761020635; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RsV89pOxo0Az90uCncTBp+q57rbHmEni4VvlrUFgpe4=;
-        b=D+DHw9SLc9tryBHozu+ZjlcbRHNh8zLVY5mj8RJ4ujqDajFxgGdmbLOH4MLtvh+upf
-         v0P/FqFnqM+Qe+AYSZmxNRQRin8Ji9KKNcezKGsPWhLxsl2iZVU0vYQkbCHd+yYE6iA/
-         rn100FxsB7h2+oPORLPJc0KymF9JXpnWjFdEwruInp3Xf+dpG1Trw4kFgwxV5b6RLVnp
-         8CeH4K1i5Wg/1BSi3DbiR4ZJqMLekItGKuAOOwbG0XX2/jXGzl4Y/JhGSvFM3Y/tvWZm
-         NfZ9WQpZLTXTnIcq/AdePb09ckVDwbIepVWN+YHgbHtySyu0gMZl6oqM3gBmBZmH/3Dl
-         8m3w==
+        bh=egsaIfCXQz59EOWSXaCyuVMnL4MeHH/a3gjDfpZeR1o=;
+        b=MGIs+KgOXypImoXfbbOdGmLdhKPxqfxBiwShjjAiVV590gZUxduWx1Vviy2InoS9oo
+         dPVkuD4sz7Geg4Dawk/nV9z8exv4cOSspmCALrf06Vj0JRzDvpFTyGMFTQE9dMGDtQ9K
+         18J8R1Dhgy3JOczVMsAO0nlrVu+Vpst84OcBQwDbLuPwWBj8sFb3+mBcTmihLJtcuQFK
+         nJu6AVWYzIjcbMAJupHm+l/yNMhVOm4bvgdjWbpNaGzk7f8HwiP4h3jNO6GRouzA5KzO
+         omm5Rt0kvNxx1oUHSQGrmgQeIQQljeLk4T879xNcLsQ+lalflYiKt16w/OyxPimU2cZz
+         qXDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760415157; x=1761019957;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1760415835; x=1761020635;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RsV89pOxo0Az90uCncTBp+q57rbHmEni4VvlrUFgpe4=;
-        b=iJfpTHshDTLKGkwoYs93LY7Tp33ltvENonAGcyXu+zX6dMvhi+8DEgoB4hK+aPALu1
-         CahG3VWiwJf8QWLvow0sqxPUdeuZ42KXjHpfczR4+ZKjCebyXaCROSZWtobXuouIINuW
-         PpUHOyB4dizIMVkoJ/Y1ugGtVMa6YgYdxPgyo5Hwul5ZMnfLO8TYqygV22SxOelBPCNe
-         5kfqJRkNnGWoF3k3FrMx87c9RqYgZj2B+809lCcX6gwK9g7BHLkXSA2wjVRw5GB0zkjF
-         XUZLXsDS9V6/+zmYUTFbi8QxrD8CuPBdZfwwmid5tNrYomOyUBmu3fyVB7G+JP0itKTT
-         tUhg==
-X-Gm-Message-State: AOJu0Yx0NKYOe1lpBTd1nrw/A5NbhEkYkVN1MIBSMoD5dVQjGk8BlO0M
-	Og6Aj165FO9Oh+SeH1/BOlc7sI/7Ya4mCDdZdyifsSBW7yi230WaZr/T7K4v/ZATvMchZUpU7pt
-	uoKSr9G69nlE6KbiLbeSgADYJNO8oh6g=
-X-Gm-Gg: ASbGncuMVsdRAejMFaRAIBik3+iTTu3L34ui1wlZcF+e2eDkz4a5m60rZhN2ifCbIUl
-	im2o2LGCDlw5jjtb1moSNTrAxP2gUhRxUZs5RqJfZS/TvYWpxkwAV1vVzzEoafq07+ndMv/Fie6
-	B9tSGivwmEqLk1/0G5qzeKd/IPs0jPmlHStBGNlfv5rOTVRz3mNy61B2k7cZCglw1o13tCRLDfH
-	CXh5We3XSsYtAx2f09Q4Ru8TMMHA53T7Xzy+5kOpWAE7YJiISBDDVkVmKs=
-X-Google-Smtp-Source: AGHT+IFFBEniUrd+jALG97EtV1V/m28c3KejljEoDgwCKamRA8tGyIvlKeQUv7V0j9SbsYjEAHDEtLeUe3SvzqtXgqo=
-X-Received: by 2002:a53:ba4c:0:b0:63a:183:ffda with SMTP id
- 956f58d0204a3-63ccb8e1958mr15900914d50.26.1760415156900; Mon, 13 Oct 2025
- 21:12:36 -0700 (PDT)
-MIME-Version: 1.0
-References: <20251013131725.2583786-1-leon.anavi@konsulko.com> <20251013131725.2583786-4-leon.anavi@konsulko.com>
-In-Reply-To: <20251013131725.2583786-4-leon.anavi@konsulko.com>
+        bh=egsaIfCXQz59EOWSXaCyuVMnL4MeHH/a3gjDfpZeR1o=;
+        b=cUByLIEZds0SqEvb2JHbyvjZdyWxlDfnhEPT/Du1fUETde5YPOO0FSD8SWt0rYI3n3
+         FdH1yp0HvlQRjf/wSrygta4y2W+hb1xuS22pNIxIhGqCOP9jPd2t7J21d4oaDtVsTxhX
+         pOswt+N5w8tl4afJ9Ob3OWaw2+3q4IlUg4qFtago+5Q/ZZs4/Lf67R+/uQq+6Ql5qusP
+         bykRcKUMTBc1HgvBmBqn2cFxJuoaPN1ARnQGaM4jkfrkeEnSxV/GgAtH7/k0PfJVuciK
+         pmrT6I8hvDROg9FNrCc0Ol3V71axHBtqBaE0188DqiU7dEjOo3WAQOeCiyfj1ZUNRb1L
+         GLHQ==
+X-Gm-Message-State: AOJu0YzIR3n6R2/kL04+243Erj1mn5AChaN5NJ3QD36J6O2aj4iAW6KO
+	qcMvtUdFPir35+WCSmMnJV2rWdWLbmGzqQWtdvttY00MjPZJPhbfUvdPhV6PvKvn
+X-Gm-Gg: ASbGncvEuwTAiTBXG0I5l2b6OgXrkkjBY5zYoeVRQXzl+sBY3EzvC/MalbBwJQyCcyE
+	eosJQAjFVHG8RDNOMi1VpZwzcbnfoSAEhz1bUk46IQFU+WFkTmF3bgDO/f3244rHn6AeSLaZsr2
+	HXK489Izv6kwj6acn8pA83NAN8D4dhG3GXQU4j47wh7rMFD3x5nB13MdPKnIxZa9zrPE/C+fVHQ
+	bvI2qQXHHOtgEkDMldOJShptPBkwk7twVckFUQadx1oCxDIwTZsBcmyS3SDR3sBQa+NrJZdZqSf
+	1ublqCJ3Gx3uBsvpZQ5QtFUKWtaHYZUvZ74Ma5COLF/i0/lCdy7roF/yRDM9Ds6V2/8pscAuN2V
+	nOy4YKMk+WyP6Z1iWIySYghI3M56gvbD6c45VFJkyHI3V/TW59CE=
+X-Google-Smtp-Source: AGHT+IHh/CR0dGGmuK/cT4Ja/7RGWxZdpMGVaZS2SgV5Xt6QsGHlX+K7e+XytD5EV+n0DtfOiGKX1w==
+X-Received: by 2002:a05:6a20:7349:b0:319:1c54:17ad with SMTP id adf61e73a8af0-32da839f216mr29445316637.37.1760415834530;
+        Mon, 13 Oct 2025 21:23:54 -0700 (PDT)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::fc3])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7992d096740sm13504959b3a.38.2025.10.13.21.23.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 13 Oct 2025 21:23:54 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 13 Oct 2025 21:12:10 -0700
-X-Gm-Features: AS18NWDg0BkN5l06DOQtUeFrjNiI_h_93d1NC4Mo8E8Q_lZ5pZXpN4Fz41_Cnzk
-Message-ID: <CAMKF1sqG+hC0F5tiH8drCVocT3V4O54UrhV6=x_b9DD4qvy+Og@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 4/4] pydantic: Upgrade 2.11.7 -> 2.12.0
-To: leon.anavi@konsulko.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-lief: Upgrade to 0.16.7
+Date: Mon, 13 Oct 2025 21:23:51 -0700
+Message-ID: <20251014042351.465422-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251014042351.465422-1-raj.khem@gmail.com>
+References: <20251014042351.465422-1-raj.khem@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 04:12:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120552
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 04:23:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120554
 
-On Mon, Oct 13, 2025 at 6:17=E2=80=AFAM Leon Anavi via lists.openembedded.o=
-rg
-<leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
->
-> Upgrade to release 2.12.0:
->
-> - Update V1 copy to v1.10.24
-> - Add extra parameter to the validate functions
-> - Add exclude_computed_fields serialization option
-> - Add preverse_empty_path URL options
-> - Add union_format parameter to JSON Schema generation
-> - Add __qualname__ parameter for create_model
-> - Do not try to infer name from lambda definitions in pipelines API
-> - Use proper namespace for functions in TypeAdapter
-> - Use Any for context type annotation in TypeAdapter
-> - Expose FieldInfo in pydantic.fields.__all__
-> - Respect validation_alias in @validate_call
-> - Use Any as context annotation in plugin API
-> - Use proper stacklevel in warnings when possible
->
+Changes:
 
-We need to fix python3-lief recipe as to reflect this dependency as
-well. It currently has a patch that only handles 2.11
-there is upgrade for lief module available too, please address that
-recipe along with this change set as well.
+https://github.com/lief-project/LIEF/compare/0.16.6...0.16.7
 
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  .../{python3-pydantic_2.11.7.bb =3D> python3-pydantic_2.12.0.bb}  | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-pydantic_2.11.7.bb =
-=3D> python3-pydantic_2.12.0.bb} (97%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.11.7.=
-bb b/meta-python/recipes-devtools/python/python3-pydantic_2.12.0.bb
-> similarity index 97%
-> rename from meta-python/recipes-devtools/python/python3-pydantic_2.11.7.b=
-b
-> rename to meta-python/recipes-devtools/python/python3-pydantic_2.12.0.bb
-> index e603e7dccd..8016b55dfe 100644
-> --- a/meta-python/recipes-devtools/python/python3-pydantic_2.11.7.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pydantic_2.12.0.bb
-> @@ -11,7 +11,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D09280955509d=
-1c4ca14bae02f21d49a6"
->
->  inherit python_hatchling ptest-python-pytest
->
-> -SRCREV =3D "9b52422377d974ffc3de4e8b0bf7faab1acf2ec4"
-> +SRCREV =3D "a7928e692e5a7841c4379d1af1fd37966941dade"
->  PV .=3D "+git"
->  SRC_URI =3D "git://github.com/pydantic/pydantic;protocol=3Dhttps;branch=
-=3Dmain"
->  DEPENDS +=3D "python3-hatch-fancy-pypi-readme-native"
-> --
-> 2.47.3
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#120531): https://lists.openembedded.org/g/openembedde=
-d-devel/message/120531
-> Mute This Topic: https://lists.openembedded.org/mt/115733948/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../python/{python3-lief_0.16.6.bb => python3-lief_0.16.7.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-lief_0.16.6.bb => python3-lief_0.16.7.bb} (95%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-lief_0.16.6.bb b/meta-python/recipes-devtools/python/python3-lief_0.16.7.bb
+similarity index 95%
+rename from meta-python/recipes-devtools/python/python3-lief_0.16.6.bb
+rename to meta-python/recipes-devtools/python/python3-lief_0.16.7.bb
+index 2c5aeb6bb6..e511d0232b 100644
+--- a/meta-python/recipes-devtools/python/python3-lief_0.16.6.bb
++++ b/meta-python/recipes-devtools/python/python3-lief_0.16.7.bb
+@@ -5,12 +5,12 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=be298b85ef6036ef77810ae0dce93776"
+ SECTION = "libs"
+ 
++SRCREV = "a4fcb58cfb5f0016a944f7ac20dcf4fca08aa6a9"
+ SRC_URI = " \
+     git://github.com/lief-project/LIEF.git;protocol=https;branch=release/0.16.x;tag=${PV} \
+     file://0001-build-requirements.txt-Allow-newer-versions.patch \
+     file://0002-api-python-config-default.toml-Debug.patch \
+ "
+-SRCREV = "d52c66d6da4d67c69438989df83a5415236ae08b"
+ 
+ PEP517_SOURCE_PATH = "${S}/api/python"
+ 
 
