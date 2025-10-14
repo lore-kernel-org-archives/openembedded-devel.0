@@ -2,63 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D9FFCCD184
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DA3BCCD190
 	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 20:39:29 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web11.6670.1760474363725719190
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.web11.6659.1760474361339869810
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 13:39:23 -0700
+ Tue, 14 Oct 2025 13:39:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TRLuSLM1;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-782bfd0a977so4858565b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:39:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XFNZmYEp;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-781ea2cee3fso5588104b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:39:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760474363; x=1761079163; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760474360; x=1761079160; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=KuHObWYC1ebz1v78RMCaXViosS6lpH2EK5GFmog0Eb8=;
-        b=TRLuSLM1JqytkYOdmnSZtAG6rWpmnqAwBr6mEN1yYFP6me1q7YM72W96b/F2HjklXR
-         FPLGtIgzne3XkN7AtO16va7NyXs7CJcy037f0T3LayVE/0zXxOt4jq9xtDF4M52qTpJO
-         H535b6+Hwq0nCp3V4AGIL0gU9XkgvTsWrrHGz43Q86vdIuDljD3f/HXSdgtCA3ApctFd
-         G426vvUzEKHlCXXSwBKC7sVvolMPia8MrbqclWvCfAvq92BPo9PZpH+VMYa/xW1WzEk9
-         FN9u9EG+3waHL/u9N1CgAn4t/46tnpwNWSNaC4QUKQaH7sDE3EZaiZrZAlcswXeUJj5X
-         vYeQ==
+        bh=e3dErGWZhUilwr6e6fZ2g5gPmNT9iqC8kjiHGvft6Ug=;
+        b=XFNZmYEpqQ+LFV4KfgxE/3aH96TTHxiEJzZ3lZe3LAR6TTjlN9HxYHJjgGVJS3mVPM
+         5LtKk4xC7dObbe3M7m9HDgSSobzvMLhxng6OER5CQoKZRobJKjnmJmBuzeTvoGj3RI0I
+         wbqIcCgcmGwcy0ulReP6WN4Bb7Roro0l6tkVLbdUx3fSLJFAmUcexW9GKb+1/dEMYG0N
+         ME5eLcCwvwAgossBaVdgw3TMF1wAKeRkcm0jcVey06IVEHqxfmTj4kxUZ+ilIv+gB1b+
+         JT0/iAOP+4wdXxch0iCHUOtvc1643SUx+kNAdjJH8+24VpmAFJYzkrzz8/uJ6xTcIRIl
+         TAHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760474363; x=1761079163;
+        d=1e100.net; s=20230601; t=1760474360; x=1761079160;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=KuHObWYC1ebz1v78RMCaXViosS6lpH2EK5GFmog0Eb8=;
-        b=Gg+y7iNpJhwnURmh7yYi0+Y+Fg08xx12exqlMf4vquRg3Tz4qJtL9+zDaYIhnPZpb+
-         jd8/zUzfpNXvLPf4BRIDvaNI9EzwjG/Lp3xu1hwLnt0qw7QI56HCqdAASfSNX+exukkV
-         1Vqg49hPq2e6bfpDASwprw6MvL+0LXqSTIisGQcnEold5QFlOktytfKDKeDO4M1Ca8kW
-         cyDCqtz+j8xoD6ekVndfQyWrurxRavsrfhVemGwpsE8pF2JaF8AuwuhY/DznLcQEXXhi
-         A43+q7JJijOGrYekyQzSNhw9AAGe1ecVfVKLZksjtt/rYzNh0nND63iw/8JtUrHfYBJp
-         EHQQ==
-X-Gm-Message-State: AOJu0YyBH957cmj/F2xgZ+P71lGCaVNlJd4xkGWr6kZui7VhiED5FC9/
-	3JsBun1HlSwzAAx/biLL69NWiF5WugOgyaRJPTJM/EsLgZCCAM9amn/kYBl7YA==
-X-Gm-Gg: ASbGncvp4Wx9ildZgh4Orq9CjAHfN1jv47o1m4dRvi1QZLFq0+2KT6CNSDMNMXeDP5C
-	Y3F9kVohLPAxqFvVEw8SlyiPRKu5GQeQaHErHmOUmipVqSK1dm3QX5l814ggR9s/c7+exkyVcUr
-	hlyrwfxpUJOFczaZsX3hPzvVL1ns/LJrR2hwFB3ci+EjxwiU2Nnl08dKTC+VZvCdCmXJ5EFV0Ur
-	ALC5A96DKKNEeT5iTNC+BUPGaUBv9Q+5l3G5DurE7EJZU5dRR2SaD6hUWT6S9LWP6RqGi2g4IMS
-	aLqVwjayUGNlnH9ZJcTixdjvwP3pTBnudN+GQSrIRBLquQ7VkKuTheKiNp0TfafSIs6+WdEw4CW
-	9xGHBM0FooVLS+ehAfh1QvgfgvdtCDoZp9170H9rqF8iCkqroxGPmRCI=
-X-Google-Smtp-Source: AGHT+IGP0Mcv2BPWI363wFeWFnUkajN5qMBhatkYEBGneWbKCPwqDGUPaVqzir49sS3A6DndVpsNUQ==
-X-Received: by 2002:a05:6a20:5493:b0:263:3b40:46d4 with SMTP id adf61e73a8af0-32da84640d0mr33623359637.56.1760474362890;
-        Tue, 14 Oct 2025 13:39:22 -0700 (PDT)
+        bh=e3dErGWZhUilwr6e6fZ2g5gPmNT9iqC8kjiHGvft6Ug=;
+        b=qITlSUbg4tsRXEyf2u4e9yRzvs3owdv4YPWXqNj1vI9HySViYvJ/C3tnif4UwHnetK
+         bYNCU/1HdKOxkWaXKbrL+UN4siBeJPVtXbfxftoRApBPzZDoZi0B+mNCcZhfxtZ4W4PS
+         imnVtqKnBrmOXsJWhSkxdQfOksfjo+jBnPq4gGFIR/Hn60rvSk7VJYm8PZiLM2tIxvJs
+         Jbj7Z+zAHoEW45sny54bhiqPH0eZ9PiG4iIOlye+KUv1KormhR8JsCaBwgbvWgf/KDtS
+         cqvobimGy31l1RaixljIhVazzdUvINqsdAiRnVLsrgVkvOts9+2jflwKkA5eszfCAl0U
+         GOEg==
+X-Gm-Message-State: AOJu0YxDzGvsFI8Iv0gdh6daf3FrLhkrSYLnqkUIpIwcSDYPr1ihi6As
+	RtYTk3WyfLo48wJpAm0k/Ym/WCnuulYTEl09Bsdo+6JJD4AqmcUTsQG4BbI6MA==
+X-Gm-Gg: ASbGnctUbLJiiDq/O7AGhgPfGoKItiZBX0f66csgJZJq73Pbyjjz0vKt8UwJSyfssyr
+	oHUjnyNFnDYd08zvfoE6OzA1I3ldCDHYDKwyy1CVSzOPZX/FB3Y/iX/TKyPADqnsshV+yTl3MEG
+	ZKXrhy8c1LlCWvONwdLqTec21lA3mckOPl38vn26mN60fgjG60sJkcWp5BYMJx+auaClR3FCO1b
+	Kwi2MZZg+adsIFk7q/YUDYJI02f0cywlvDd5dEhaWT5JLjP6clvSQeN4I+DpnBDg3uutsx4SinL
+	+6pHCebM50baoF8SYWs5bOtmND+S9gOFS8cQYVp1lpmr2AFfEtwJEijhSGAXB6p8jv2EqZ54SVd
+	JMb1cMi5Tsq9C7b7LcNnhKPMny6+VfIsqDFwjPPcMtMq6erQNEJW2+44=
+X-Google-Smtp-Source: AGHT+IGfaYcWS+YJFFUxfg4zRHDBJeotMagKOkbhE3WOWbMxfUSvdGRknAyhyZ4SxgeGUisqx6XlJg==
+X-Received: by 2002:a05:6a00:4fca:b0:78a:f6be:74d9 with SMTP id d2e1a72fcca58-793876375c2mr29374351b3a.26.1760474360536;
+        Tue, 14 Oct 2025 13:39:20 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7992b733355sm16009495b3a.26.2025.10.14.13.39.20
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7992b733355sm16009495b3a.26.2025.10.14.13.39.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Oct 2025 13:39:22 -0700 (PDT)
+        Tue, 14 Oct 2025 13:39:20 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
-	Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [oe][meta-networking][scarthgap][PATCH 5/6] tinyproxy: patch CVE-2023-49606
-Date: Wed, 15 Oct 2025 09:39:00 +1300
-Message-ID: <20251014203901.1479326-5-ankur.tyagi85@gmail.com>
+Cc: Peter Marko <peter.marko@siemens.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Gyorgy Sarvari <skandigraun@gmail.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][scarthgap][PATCH 4/6] corosync: patch CVE-2025-30472
+Date: Wed, 15 Oct 2025 09:38:59 +1300
+Message-ID: <20251014203901.1479326-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251014203901.1479326-1-ankur.tyagi85@gmail.com>
 References: <20251014203901.1479326-1-ankur.tyagi85@gmail.com>
@@ -68,95 +70,112 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 20:39:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120630
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120629
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2023-49606
+From: Peter Marko <peter.marko@siemens.com>
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Pick commit from [1] mentioned in [2] from [3]
+
+[1] https://github.com/corosync/corosync/issues/778
+[2] https://github.com/corosync/corosync/pull/779
+[3] https://nvd.nist.gov/vuln/detail/CVE-2025-30472
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-(cherry picked from commit 7f8516d8db5e51c5d2e75f6c6ca75199bee55217)
+(cherry picked from commit eab04e462009f938fcaefefdde5e67cc94c525e8)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../tinyproxy/0001-CVE-2023-49606.patch       | 59 +++++++++++++++++++
- .../tinyproxy/tinyproxy_1.11.1.bb             |  1 +
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/0001-CVE-2023-49606.patch
+ .../corosync/corosync/CVE-2025-30472.patch    | 69 +++++++++++++++++++
+ .../corosync/corosync_3.1.9.bb                |  1 +
+ 2 files changed, 70 insertions(+)
+ create mode 100644 meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/0001-CVE-2023-49606.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/0001-CVE-2023-49606.patch
+diff --git a/meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch b/meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch
 new file mode 100644
-index 0000000000..dd10d2cd33
+index 0000000000..9b36dbe3fb
 --- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/0001-CVE-2023-49606.patch
-@@ -0,0 +1,59 @@
-+From 982a46347c5939e08ad659858b1ac32361d7ffb8 Mon Sep 17 00:00:00 2001
-+From: rofl0r <rofl0r@users.noreply.github.com>
-+Date: Sun, 5 May 2024 10:37:29 +0000
-+Subject: [PATCH] CVE-2023-49606
++++ b/meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch
+@@ -0,0 +1,69 @@
++From 7839990f9cdf34e55435ed90109e82709032466a Mon Sep 17 00:00:00 2001
++From: Jan Friesse <jfriesse@redhat.com>
++Date: Mon, 24 Mar 2025 12:05:08 +0100
++Subject: [PATCH] totemsrp: Check size of orf_token msg
 +
-+fix potential UAF in header handling
++orf_token message is stored into preallocated array on endian convert
++so carefully crafted malicious message can lead to crash of corosync.
 +
-+https://talosintelligence.com/vulnerability_reports/TALOS-2023-1889
++Solution is to check message size beforehand.
 +
-+this bug was brought to my attention today by the debian tinyproxy
-+package maintainer. the above link states that the issue was known
-+since last year and that maintainers have been contacted, but if
-+that is even true then it probably was done via a private email
-+to a potentially outdated email address of one of the maintainers,
-+not through the channels described clearly on the tinyproxy homepage:
++Signed-off-by: Jan Friesse <jfriesse@redhat.com>
++Reviewed-by: Christine Caulfield <ccaulfie@redhat.com>
 +
-+> Feel free to report a new bug or suggest features via github issues.
-+> Tinyproxy developers hang out in #tinyproxy on irc.libera.chat.
-+
-+no github issue was filed, and nobody mentioned a vulnerability on
-+the mentioned IRC chat. if the issue had been reported on github or
-+IRC, the bug would have been fixed within a day.
-+
-+CVE: CVE-2023-49606
-+Upstream-Status: Backport [https://github.com/tinyproxy/tinyproxy/commit/12a8484265f7b00591293da492bb3c9987001956]
-+
-+(cherry picked from commit 12a8484265f7b00591293da492bb3c9987001956)
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++CVE: CVE-2025-30472
++Upstream-Status: Backport [https://github.com/corosync/corosync/commits/7839990f9cdf34e55435ed90109e82709032466a]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
 +---
-+ src/reqs.c | 9 +++++++--
-+ 1 file changed, 7 insertions(+), 2 deletions(-)
++ exec/totemsrp.c | 18 +++++++++++++++++-
++ 1 file changed, 17 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/reqs.c b/src/reqs.c
-+index b865190..705ce11 100644
-+--- a/src/reqs.c
-++++ b/src/reqs.c
-+@@ -779,7 +779,7 @@ static int remove_connection_headers (orderedmap hashofheaders)
-+         char *data;
-+         char *ptr;
-+         ssize_t len;
-+-        int i;
-++        int i,j,df;
++diff --git a/exec/totemsrp.c b/exec/totemsrp.c
++index 962d0e2a..364528ce 100644
++--- a/exec/totemsrp.c
+++++ b/exec/totemsrp.c
++@@ -3679,12 +3679,20 @@ static int check_orf_token_sanity(
++ 	const struct totemsrp_instance *instance,
++ 	const void *msg,
++ 	size_t msg_len,
+++	size_t max_msg_len,
++ 	int endian_conversion_needed)
++ {
++ 	int rtr_entries;
++ 	const struct orf_token *token = (const struct orf_token *)msg;
++ 	size_t required_len;
 + 
-+         for (i = 0; i != (sizeof (headers) / sizeof (char *)); ++i) {
-+                 /* Look for the connection header.  If it's not found, return. */
-+@@ -804,7 +804,12 @@ static int remove_connection_headers (orderedmap hashofheaders)
-+                  */
-+                 ptr = data;
-+                 while (ptr < data + len) {
-+-                        orderedmap_remove (hashofheaders, ptr);
-++                        df = 0;
-++                        /* check that ptr isn't one of headers to prevent
-++                           double-free (CVE-2023-49606) */
-++                        for (j = 0; j != (sizeof (headers) / sizeof (char *)); ++j)
-++                                if(!strcasecmp(ptr, headers[j])) df = 1;
-++                        if (!df) orderedmap_remove (hashofheaders, ptr);
+++	if (msg_len > max_msg_len) {
+++		log_printf (instance->totemsrp_log_level_security,
+++		    "Received orf_token message is too long...  ignoring.");
+++
+++		return (-1);
+++	}
+++
++ 	if (msg_len < sizeof(struct orf_token)) {
++ 		log_printf (instance->totemsrp_log_level_security,
++ 		    "Received orf_token message is too short...  ignoring.");
++@@ -3698,6 +3706,13 @@ static int check_orf_token_sanity(
++ 		rtr_entries = token->rtr_list_entries;
++ 	}
 + 
-+                         /* Advance ptr to the next token */
-+                         ptr += strlen (ptr) + 1;
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-index 999deff4de..8aff50fac8 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.1.bb
-@@ -8,6 +8,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
-            file://tinyproxy.service \
-            file://tinyproxy.conf \
-            file://CVE-2022-40468.patch \
-+           file://0001-CVE-2023-49606.patch \
-            "
+++	if (rtr_entries > RETRANSMIT_ENTRIES_MAX) {
+++		log_printf (instance->totemsrp_log_level_security,
+++		    "Received orf_token message rtr_entries is corrupted...  ignoring.");
+++
+++		return (-1);
+++	}
+++
++ 	required_len = sizeof(struct orf_token) + rtr_entries * sizeof(struct rtr_item);
++ 	if (msg_len < required_len) {
++ 		log_printf (instance->totemsrp_log_level_security,
++@@ -3868,7 +3883,8 @@ static int message_handler_orf_token (
++ 	    "Time since last token %0.4f ms", tv_diff / (float)QB_TIME_NS_IN_MSEC);
++ #endif
++ 
++-	if (check_orf_token_sanity(instance, msg, msg_len, endian_conversion_needed) == -1) {
+++	if (check_orf_token_sanity(instance, msg, msg_len, sizeof(token_storage),
+++	    endian_conversion_needed) == -1) {
++ 		return (0);
++ 	}
++ 
+diff --git a/meta-networking/recipes-extended/corosync/corosync_3.1.9.bb b/meta-networking/recipes-extended/corosync/corosync_3.1.9.bb
+index b4e0f1c7db..cd9feb5da5 100644
+--- a/meta-networking/recipes-extended/corosync/corosync_3.1.9.bb
++++ b/meta-networking/recipes-extended/corosync/corosync_3.1.9.bb
+@@ -9,6 +9,7 @@ inherit autotools pkgconfig systemd github-releases
  
- SRC_URI[sha256sum] = "1574acf7ba83c703a89e98bb2758a4ed9fda456f092624b33cfcf0ce2d3b2047"
+ SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/${BP}.tar.gz \
+            file://corosync.conf \
++           file://CVE-2025-30472.patch \
+           "
+ SRC_URI[sha256sum] = "203354bbddee1a97b3c50a076eae89c635f406dd674ccaefc94bb9092acd9535"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
