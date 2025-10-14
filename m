@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77531CCD193
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5728FCCD18E
 	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 09:20:08 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.web10.10926.1760433600256738786
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web11.11098.1760433607121321706
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 02:20:00 -0700
+ Tue, 14 Oct 2025 02:20:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=AX6OzEk+;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=XK23/8FJ;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1760433601; x=1791969601;
+  t=1760433607; x=1791969607;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Ai5U4cdblwhK/1g6ccLoz1ID6PGegEDWRIPTM6e63uw=;
-  b=AX6OzEk+BgPWos5JXIS09Xo8z3eBrp+ebuRUvg1AeJ8tJK/8MMlnEsiF
-   AvN3Mx8UFpXYRa9tMkisXI+vR+bKIqdvqJ1L5xwBMveYGUQ2cgP6aCRTp
-   8XjUzGxvUrJyBfhONh5YU71OH+TYkJUFYl7sKz3EotV9VLASUdIXXh+Qq
-   7AOEYKISeE6xBD8u3o36kRVt75C4dP/tdGFNgI+Qlsg8mu0P3z7Ik3zHu
-   pZ2fDjzceCeM7VDc932Cd77Ow1V8Ar65EGbWciRDO6VsHpi6wyx2vJnik
-   tPGD/Xryyt1Wl3ic0ncZ0v7BISLxSXs13vdQmc+D0npE6U4NTMG1e3HP0
+  bh=1y+gC11guqaxHHQOFhJdzjekM4Rc+gSu7irsRqouTrM=;
+  b=XK23/8FJmXlZnUsyyaOnp4hEhV67qs9D+USA0RMexGH/K9M78AMuMnaY
+   qDyN2FXTkvLBb4UuUEyflpmqj3ivPzvXUdXAt+2nagwvQRSafIvD/x+Wm
+   WzFpvwBMKMPk97bStYXy5dOv62YFTfzX/GrIf8tVTKTkHl7pc018MwLCk
+   IFQ4sVBtd2TnF0mTVLFIvf8OpWoNYiV1rhhuT4oBiuGl6zTdbkmiNfzf/
+   S6Nj6OyhHTSAz+4IByTTqaR70PKL0LkugruGE1H4m1dhKmSBjokTrrFtj
+   U89PPSm+vt5I2byq4CaCOp9az9X1DU7LAIo9sjc/HEBDNXIKyAi9mwtdp
    w==;
-X-CSE-ConnectionGUID: 30wl4bhuR0eLE4/ox8K+Ng==
-X-CSE-MsgGUID: Wz80SgB0S1iTgzbO4ATAAw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11581"; a="215838935"
+X-CSE-ConnectionGUID: Jg1OAWQHQLyCqy7sKVg3Lw==
+X-CSE-MsgGUID: 5JIG2800TBKITOrmLpFm5A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11581"; a="204394465"
 X-IronPort-AV: E=Sophos;i="6.19,227,1754924400"; 
-   d="scan'208";a="215838935"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.128])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2025 18:19:59 +0900
-Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
+   d="scan'208";a="204394465"
+Received: from unknown (HELO az2nlsmgr2.o.css.fujitsu.com) ([20.61.8.234])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2025 18:20:05 +0900
+Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id A8F2AC00375
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 09:19:58 +0000 (UTC)
+	by az2nlsmgr2.o.css.fujitsu.com (Postfix) with ESMTPS id AC6EC1569
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 09:20:05 +0000 (UTC)
 Received: from az2nlsmom3.fujitsu.com (az2nlsmom3.o.css.fujitsu.com [10.150.26.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 60BB2C00419
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 09:19:58 +0000 (UTC)
+	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id 684AE1800BFC
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 09:20:05 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
-	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id C603B101BB76;
-	Tue, 14 Oct 2025 09:19:55 +0000 (UTC)
+	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id E86FE101BB76;
+	Tue, 14 Oct 2025 09:20:02 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 14/44] ndctl: upgrade v82 -> v83
-Date: Tue, 14 Oct 2025 17:18:57 +0800
-Message-ID: <20251014091927.493-14-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 18/44] python3-astroid: upgrade 3.3.11 -> 4.0.1
+Date: Tue, 14 Oct 2025 17:19:01 +0800
+Message-ID: <20251014091927.493-18-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20251014091927.493-1-wangmy@fujitsu.com>
 References: <20251014091927.493-1-wangmy@fujitsu.com>
@@ -61,31 +61,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 09:20:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120571
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120575
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-core/ndctl/{ndctl_v82.bb => ndctl_v83.bb} | 2 +-
+ .../{python3-astroid_3.3.11.bb => python3-astroid_4.0.1.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-core/ndctl/{ndctl_v82.bb => ndctl_v83.bb} (96%)
+ rename meta-python/recipes-devtools/python/{python3-astroid_3.3.11.bb => python3-astroid_4.0.1.bb} (90%)
 
-diff --git a/meta-oe/recipes-core/ndctl/ndctl_v82.bb b/meta-oe/recipes-core/ndctl/ndctl_v83.bb
-similarity index 96%
-rename from meta-oe/recipes-core/ndctl/ndctl_v82.bb
-rename to meta-oe/recipes-core/ndctl/ndctl_v83.bb
-index 2603217326..ed3c639369 100644
---- a/meta-oe/recipes-core/ndctl/ndctl_v82.bb
-+++ b/meta-oe/recipes-core/ndctl/ndctl_v83.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74a614eac8b2657a4b8e6607421a0883"
+diff --git a/meta-python/recipes-devtools/python/python3-astroid_3.3.11.bb b/meta-python/recipes-devtools/python/python3-astroid_4.0.1.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-astroid_3.3.11.bb
+rename to meta-python/recipes-devtools/python/python3-astroid_4.0.1.bb
+index cdb25a6515..be69adeee5 100644
+--- a/meta-python/recipes-devtools/python/python3-astroid_3.3.11.bb
++++ b/meta-python/recipes-devtools/python/python3-astroid_4.0.1.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
  
- inherit meson pkgconfig bash-completion systemd
+-SRC_URI[sha256sum] = "1e5a5011af2920c7c67a53f65d536d65bfa7116feeaf2354d8b94f29573bb0ce"
++SRC_URI[sha256sum] = "0d778ec0def05b935e198412e62f9bcca8b3b5c39fdbe50b0ba074005e477aab"
  
--SRCREV = "74b9e411bf13e87df39a517d10143fafa7e2ea92"
-+SRCREV = "4f7a1c63b3305c97013d3c46daa6c0f76feff10d"
- SRC_URI = "git://github.com/pmem/ndctl.git;branch=main;protocol=https;tag=${PV} \
-            file://0001-include-libgen.h-for-basename.patch"
+ inherit pypi python_setuptools_build_meta
  
 -- 
 2.43.0
