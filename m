@@ -1,136 +1,117 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1EFCCCD18E
-	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 20:54:56 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web11.380.1760475291808585613
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8D76CCD18E
+	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 21:07:16 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web10.591.1760476036233897966
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 13:54:51 -0700
+ Tue, 14 Oct 2025 14:07:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=P8JMpjFh;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-27d3540a43fso57138285ad.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:54:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dp5+aP3T;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-46e430494ccso33596805e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 14:07:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760475291; x=1761080091; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=aAbitykDe3OYlEZED5XRHUY1tK1YN7YxFN4UyIXXC0s=;
-        b=P8JMpjFh816HuhF01dT/5wJYHR5ZObGWygs1zBMdo116fhmOZv6Xe2NB2lp/mFCrkj
-         4VonL7TnRUTclYXe1F6v147jFxtiF+SVC2wCGDLmI6vdhr5jxk9grRFWlnM+ANOkmdhp
-         TvTaEWZ14voJcVinuBLKUy0mutYu/98iXrvdTLcThLbwCkXalPtwY32PUZ35MucPbLfz
-         MfoEzdpxCAQJ838VbJrcC74iJ1JjLs8g0Koktm4cIfx1d6wRkialj3J9ZWyvhYQ00DHw
-         Fq6syiuVy4881UI3tq8ibX6nkQ2JxnsPbnF9xM0YxIKC8BLmJYyADlw0i6ZG9jHXRjBv
-         FOCg==
+        d=gmail.com; s=20230601; t=1760476035; x=1761080835; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=uhl/z26iKOWO/UdPy531Hahe7KXo43AvtWDshLNqndQ=;
+        b=dp5+aP3Tci9g26iDGDWVBLe18lOwcb4ys/8Cc1ss1W1Qo0y6zHT/usQGa/nbkyzFya
+         S22HMWTMOgFRKvDbkpkDDRSgAM5kZ7CKnOPQ3DpIUJ30YY9s0Gf35iM7JxTG9l99i9LE
+         r9XdUvLREXxHLb4MQATHLQwzBHv3pfqHBVDggJ9f8f3ZpGuj0YzmqBQqDYHH77e4WlpE
+         zJYRATafYA5KKXZKFbeZF3qLLAeTQtSDSwH4Y7J/8/S/t4T0Mt4vj8npRwxBi8fZVcRI
+         z0D4lYw0YcTVgvW7nGCF6sQOFqto38jUMd+trN4lfHCbvXOcxRrb83inL2doDnZnK3UD
+         aGRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760475291; x=1761080091;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=aAbitykDe3OYlEZED5XRHUY1tK1YN7YxFN4UyIXXC0s=;
-        b=dYGSLB3ofaSXG425spuhUFTl1l17GjaNLX+cr63QEH4B8s6ERrMIKYuQCBnXRNx2Au
-         ZLl3YfRbish0ELpqD9NYi7+Jdjrr0tHpkY44VYLmUphCsiRidRCKhD6n3JygZjTeDOKW
-         6/BK4Hu15GNGA1qx/8HyR7w7TCP9/l5zUombCafVrAAIjvPbdHHXPyge0QOW59RuCS+u
-         W0ejhvR49OW+a6bEemqE/ZxgmSiTWQER0H6Vnd2Oqm4gOcgZ6e/MxFS/tvooe4k6iOQJ
-         oiPWK6La408oH5kymmxCkTyTSSOQvowNJyHSWAB2WI4Tgq0eiGPLzfFE6HXLUwFujoL7
-         iPFg==
-X-Gm-Message-State: AOJu0YwQekDk+dYHLJyY5CvqXi0NBo/lcfgMFmT0vavIroA2+ZTVf4v0
-	Bp7SrSgzE0orXXZP4U/SwntvtlNKfiDWIhWmMJi/29q4N7UdOFY/xWkkan/3PQ==
-X-Gm-Gg: ASbGncvoP7QuxPR8PPplH4xgNdAalEep82JYR6CtYLqHoKdp11RErKzzB0NDdETVW9e
-	qirup+LuZArzPzbM1bCsj3eQMQW/8zj3mSV97Se1tw22Ll8tnnm19tuM0buwTIRWaveQIAYpvap
-	zzcqKo4VJotLQs0h+DXBafnswT4Qli7GpCCogvMIGjW4JRzdYaq2tiim4gxtRYFTEZmJMdWYd8m
-	XTdhgq2YWaGzni1UScn97Q2UYEIey/F89ODDH28fIDadgl6XFRtfqDddEGVfVYNP4Q+xvWxWWgy
-	ZCDelT+qXQoWmcKF2V6eJD968qvkH/oFKvmosCSAwDl6cAxzJ4098xU++TvkpHwnLXuL+DR14q2
-	PAe78DpOc996mHPEP3pCZ9RLm2pJ2o3476GQl/1j+5Ofoa8muSNEidaY=
-X-Google-Smtp-Source: AGHT+IEkD1E/HN6ulVpsbC4pWllA/2r14eb4tpeK5vO8w5INMmyzRPMGdwVK81Mcvzy1H/3M/ymcLw==
-X-Received: by 2002:a17:903:b0e:b0:273:240a:9b6f with SMTP id d9443c01a7336-290272c31b3mr324975815ad.39.1760475291059;
-        Tue, 14 Oct 2025 13:54:51 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034dea083sm174952475ad.24.2025.10.14.13.54.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Oct 2025 13:54:50 -0700 (PDT)
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 18/18] jasper: upgrade to 4.1.2 release
-Date: Wed, 15 Oct 2025 09:54:01 +1300
-Message-ID: <20251014205402.1487867-18-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251014205402.1487867-1-ankur.tyagi85@gmail.com>
-References: <20251014205402.1487867-1-ankur.tyagi85@gmail.com>
+        d=1e100.net; s=20230601; t=1760476035; x=1761080835;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=uhl/z26iKOWO/UdPy531Hahe7KXo43AvtWDshLNqndQ=;
+        b=idp7mIuB8tAHAq6qInHb2d/7b99zAKJ5yh0y2C73cPvCGtQMpmJU+RglVjvg/ugu0w
+         hjxdq1ILfJb+L0Y1Mz7KSFkIHY+DxnsDs02hR61QY7Y2W+WeKFQ61Ces8RU5bnrh5Yr4
+         sgezBMNXebC2ofUCid8NUMzLeeW2bZHhYtWGif1tupoL7kZ7kPwb/LySUCTVtqlPmM/0
+         sIqy3VW4DhuzBaeln3PuVP/JdZSNxs8y2ub8C15q3qWVl93IdRlpU7fSou57+oavU7bI
+         4v2SFOahaUM4KbkvZUgnc7kJiDYcHJ9TxT3cWL5eeP3Dz+FQy6vyW+yrDUcReSgXGPfF
+         lvUA==
+X-Forwarded-Encrypted: i=1; AJvYcCX/5Hmvz7LSnvfTMnL9E5G8PLzp5d/mxPzOv++ZdwN7EkEKviTm+UefC8gih8LYCJcsK5LaotazKbDkWsQAF3m9GmU=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxgxthhRepvGGwu1fGYtGH6QhgsZYAA9ANLik4EZq3y+qNggeOO
+	m0hp47yOndDlcTqety/xrVvVZBmeB8FaoO+OomLWlJ9Jck+qxgsu7OQr
+X-Gm-Gg: ASbGncsmmwKX7JwpTmD6k8Zr1/7F7Yls6he+raKk4Egs66KAYAzjCwnCOvkuCmj2UCe
+	GzdtaROXPqzSnxROxkXJ1d2tDjbc42Ob6H7jmTp72RH+iYQCrRNCxSphtgxKaUvP1BfNCX4c/r8
+	jhIBeZeqlyDqj0JFv4vHmIiZCxTmZtpMJ0BJ9X1jIZS6DTaZiYt+fWzejyfIwRMwSsW4zac75uP
+	dwhSAtHghn5MP0ySpV4Tl7zMtdnFxp28rH7ISuwJPeq30p0y4X4o2ShAJ+6B/NZeuEODZ1kaDp3
+	QHM8iblDgKkta0JtV28Fs1wWPFCz1tN1as2S70L9IS6TMSueTh/wNcMEgJ38qcbsiB17Bgus526
+	2JsTCWkhLNLnTeev8432uExyVY76IJVKH972DrOwllQmXqwsPdA==
+X-Google-Smtp-Source: AGHT+IFbTU4k3HdPqCxe6zF5s/FSxw/ca6ArOoBe11nkkiU8TmcTwEC2RxXLdutHfNTOLWoXLiUY7Q==
+X-Received: by 2002:a05:600c:a47:b0:46e:45ff:5bdb with SMTP id 5b1f17b1804b1-46fb4816974mr133141185e9.8.1760476034414;
+        Tue, 14 Oct 2025 14:07:14 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-46fab36ed3bsm172124285e9.0.2025.10.14.14.07.13
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 14 Oct 2025 14:07:14 -0700 (PDT)
+Message-ID: <3c5e211d-f25e-4516-a59d-b082f5400482@gmail.com>
+Date: Tue, 14 Oct 2025 23:07:13 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-networking][kirkstone][PATCH] squid: mark
+ CVE-2025-59362 as patched
+To: peter.marko@siemens.com, openembedded-devel@lists.openembedded.org
+References: <20251014203704.585165-1-peter.marko@siemens.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20251014203704.585165-1-peter.marko@siemens.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 20:54:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120651
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 21:07:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120652
 
-Bugfixes including CVE-2023-51257
-https://github.com/jasper-software/jasper/compare/version-4.1.1...version-4.1.2
+Could you please fix the subject? It refers to CVE-2025-59362 instead
+of CVE-2025-54574 - it took a bit of staring to see what's going on :)
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
----
- .../recipes-graphics/jasper/jasper_4.1.1.bb   |  2 +-
- .../recipes-graphics/jasper/jasper_4.1.2.bb   | 35 +++++++++++++++++++
- 2 files changed, 36 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-graphics/jasper/jasper_4.1.2.bb
+On 10/14/25 22:37, Peter Marko via lists.openembedded.org wrote:
+> From: Peter Marko <peter.marko@siemens.com>
+>
+> Per [1] CVE-2025-59362 is fixed in patch for CVE-2023-5824.
+> That was a composite patch from more commits.
+> When checking it, it really contains also commit [2] which is mentioned
+> as fix for CVE-2025-59362.
+>
+> [1] https://security-tracker.debian.org/tracker/CVE-2025-54574
+> [2] https://github.com/squid-cache/squid/commit/a27bf4b84da23594150c7a86a23435df0b35b988
+>
+> Signed-off-by: Peter Marko <peter.marko@siemens.com>
+> ---
+>  meta-networking/recipes-daemons/squid/files/CVE-2023-5824.patch | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-daemons/squid/files/CVE-2023-5824.patch b/meta-networking/recipes-daemons/squid/files/CVE-2023-5824.patch
+> index 4946060313..6a58b56a9e 100644
+> --- a/meta-networking/recipes-daemons/squid/files/CVE-2023-5824.patch
+> +++ b/meta-networking/recipes-daemons/squid/files/CVE-2023-5824.patch
+> @@ -8,7 +8,7 @@ Date:   Tue Nov 21 13:21:43 2023 +0100
+>      backport
+>  
+>  Upstream-Status: Backport [RedHat RHEL8 squid-4.15-7.module+el8.9.0+20806+014d88aa.3.src.rpm]
+> -CVE: CVE-2023-5824
+> +CVE: CVE-2023-5824 CVE-2025-54574
+>  Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+>  
+>  diff --git a/src/AccessLogEntry.cc b/src/AccessLogEntry.cc
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#120625): https://lists.openembedded.org/g/openembedded-devel/message/120625
+> Mute This Topic: https://lists.openembedded.org/mt/115760259/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
-diff --git a/meta-oe/recipes-graphics/jasper/jasper_4.1.1.bb b/meta-oe/recipes-graphics/jasper/jasper_4.1.1.bb
-index 5281980ecb..d6d5b5de32 100644
---- a/meta-oe/recipes-graphics/jasper/jasper_4.1.1.bb
-+++ b/meta-oe/recipes-graphics/jasper/jasper_4.1.1.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a80440d1d8f17d041c71c7271d6e06eb"
- 
- SRC_URI = "git://github.com/jasper-software/jasper.git;protocol=https;branch=master"
--SRCREV = "917f7708b755d8434f70618108c1a76f1b6a0a82"
-+SRCREV = "ff633699cb785967a2cb0084d89d56e53c46e416"
- 
- CVE_STATUS[CVE-2015-8751] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
- 
-diff --git a/meta-oe/recipes-graphics/jasper/jasper_4.1.2.bb b/meta-oe/recipes-graphics/jasper/jasper_4.1.2.bb
-new file mode 100644
-index 0000000000..d4dae1f22a
---- /dev/null
-+++ b/meta-oe/recipes-graphics/jasper/jasper_4.1.2.bb
-@@ -0,0 +1,35 @@
-+SUMMARY = "Jpeg 2000 implementation"
-+HOMEPAGE = "https://jasper-software.github.io/jasper/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a80440d1d8f17d041c71c7271d6e06eb"
-+
-+SRC_URI = "git://github.com/jasper-software/jasper.git;protocol=https;branch=master"
-+SRCREV = "ff633699cb785967a2cb0084d89d56e53c46e416"
-+
-+CVE_STATUS[CVE-2015-8751] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
-+CVE_STATUS[CVE-2023-51257] = "fixed-version: patch is already included in sources"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake multilib_header
-+
-+do_configure:prepend() {
-+	JAS_STDC_VERSION="$(echo __STDC_VERSION__ | ${CPP} -E -P -)"
-+}
-+
-+EXTRA_OECMAKE:append = " -DJAS_STDC_VERSION=${JAS_STDC_VERSION}"
-+
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'opengl', '', d)} \
-+		   jpeg"
-+
-+PACKAGECONFIG[jpeg] = "-DJAS_ENABLE_LIBJPEG=ON,-DJAS_ENABLE_LIBJPEG=OFF,jpeg,"
-+PACKAGECONFIG[opengl] = "-DJAS_ENABLE_OPENGL=ON,-DJAS_ENABLE_OPENGL=OFF,freeglut,"
-+
-+do_install:append() {
-+    chrpath -d ${D}${bindir}/jasper
-+    chrpath -d ${D}${bindir}/imginfo
-+    chrpath -d ${D}${bindir}/imgcmp
-+    chrpath -d ${D}${libdir}/libjasper.so.*
-+    oe_multilib_header jasper/jas_config.h
-+}
-+
 
