@@ -2,63 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B683ACCD184
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7ADACCD190
 	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 20:54:56 +0000 (UTC)
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web11.378.1760475287109125535
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web10.332.1760475289644343504
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 13:54:47 -0700
+ Tue, 14 Oct 2025 13:54:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=k8sZb54p;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-b5526b7c54eso3509405a12.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:54:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=K6g9TfZE;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-b5507d3ccd8so4857832a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:54:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760475286; x=1761080086; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760475289; x=1761080089; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=AXQHJwFS0a+HJ0ixs5bXpKf7+JIbexdsYkmNmliyaZE=;
-        b=k8sZb54pzdzekD1ftPdy/7TFGRW2ArdLV5gCvunK2ehux3tPsxKR5Qa2vRmuI0R2V2
-         h+0tBepFlhXTUkEIeoJW4LtnBZmWSn/vrP9YLnn9C8Xnk5I8zzpWUw6/EGGDb8L7gqDC
-         q1149ojDHnc+UFTEQHf8QT/8Z7qqez6Y7+wlIGSmcLv2Ou7YDlHlVjyGNuN3lXM8pWTg
-         kgESKQ6I/SGN4abRmLut32buxHigsZx5/FQcy8oEBaYH8Ly+S8tMplskQxOIF8fhJi1J
-         jZHxQnobRmQGX5MpvJhjq0Cj3ZKSYNTa912kkMz3AtEpJfP0FuQkb+Oo2nz2FLu7p7NE
-         lUJQ==
+        bh=KUBBfd6aAwoxlRKb+QK2tOi9JT/wFOoS5ypqGD7WYjM=;
+        b=K6g9TfZEN+E66hlqkYycWnMNVr1MHR0c9G30ssCMc+ILnCRTVR6ZThJFkoEOftek3E
+         aUjYTxghLAC00twZlWDifoxYQq+BbbUeARA2zUUZ8mgtg9PfmotSUF973miMnEAF4HFw
+         r8JR898pfHzOsalSxBDvDSkKCj9QCbj9sVgWcm2tiDt4PaTt3yd4hAxSvnSvsSKKQpfh
+         TAM0I9TfM3Y0NtwN1Mk8LRAtsleBKYqm04wq921/FwjaEsIJaXr+jBkZLweUF/9xgtjF
+         7PHhCuGsUuDI/tOP5v9L9wmE+z3+kVNkH3EseoJZpNqck9kWSobZrIGCZIqSnzaqhUN+
+         BRAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760475286; x=1761080086;
+        d=1e100.net; s=20230601; t=1760475289; x=1761080089;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=AXQHJwFS0a+HJ0ixs5bXpKf7+JIbexdsYkmNmliyaZE=;
-        b=QnvO+K0RC55AdnLjWnoCO+Z4fAFGaOjm1j5OVkb2uj7IDSfpJbKtNG8NWrm+aC+UHW
-         l/yf0N0My5RwVPnadu84vS9zxIjnJL0tGkxS9DRqtRB6NrBRtqziTdXnT16AszLxGRrx
-         OkhvdZy8CxlftQdbfdTTfHON/naOUpzdeIg9mcV70g7mPGzCHRATsbrf30f5VEiMu9N+
-         eHFaERopIqJqDBhHimqcyOXYi9LrXukQ6X7FQ8C3bTnztn4yr0peYniiGpTWx+SL1Atz
-         S10RYAmACTB4Psxx9tYdRGd0HSIhbYPE6bWdETyOinberByaLycndPp5XomFPTEwZPzh
-         WBmA==
-X-Gm-Message-State: AOJu0YwYYAJcwieaVFrhfwGSCkZyF/oJ7N0LAii/jeN7jw+OOIfDY49+
-	RXu64DsTorsxdc2WstbiXk+xyC8n/iJwqn8WXIvgtFIA8E4wCIWUvBUWN94e8w==
-X-Gm-Gg: ASbGncsJMLW7UTt4deoM0hYI1fGacEOqDKvIrSux2vI5679yJaOovtPd9cDya94XDib
-	emENz3MXNQxUDcvgOWrMGuAA6wElox+vm2xGruhzy/vPdQ5PSnckopFk6IFTRj9zwiEMz4q7Gc1
-	5XbBjheZ8hDW+aRe1spSX0l7KaB/WMxFBjk8Y4X9RxAQd/sYRIZ6dff5TPqcF0T1xoP6MnOz6OQ
-	yxgTzMu7dPn8681C1wIynEIUTVcgKav84yGbDxCK/B0SAukfuHTWa/W4dHOXt3n8Vfl0hyLhpFm
-	/dbDE/IeXCV+Iqt46oy8zPX5iOhlYUGqcCBdffhDN5c4wGFpY+nybLCpwi0PyqOqASQLShLT3Yu
-	iO7tquKvBxJpsrRjEgx1K7knbY3YJ4MwNJ3o93Dyxv6Qdv+hY6kjb6am00Jrm173LhA==
-X-Google-Smtp-Source: AGHT+IFUgm/i3MORLq4V9fxliPs3qK5f0qTyiFOMijrShQ9hK0nvyaoZRQFEkyZMbrEeVXJhvKg0VQ==
-X-Received: by 2002:a17:903:3885:b0:246:cfc4:9a30 with SMTP id d9443c01a7336-290272c037dmr321169835ad.35.1760475286317;
-        Tue, 14 Oct 2025 13:54:46 -0700 (PDT)
+        bh=KUBBfd6aAwoxlRKb+QK2tOi9JT/wFOoS5ypqGD7WYjM=;
+        b=hYFJZc3sfanJa/Gx40Ms9DDF6ZNPJ7ZEpuO5zTlfRns82fraYYLPUJ8sY81EZb0FOn
+         f49mvTaWGUEYrWRQzML3xzqHJIVEAtfwNpJXgfTTim0vZSXy6EjMYL6g3XoQiSwqCZBH
+         4CALEstRwyS1cFdHDIJROMa3Vt27tNgza3VM+SaZv38z0mPlBhSAK/w11IEihjaMjOVz
+         TvX+Q+wCvozRhCpNqwvGJ5wmS/JaCD3fQ2gs9Cyp4YVZJ94XJuH8TZKkg4hkCJbx7lMX
+         FPwVxmFGHx5ilJ9rTS6SyCfe9wxK66SvyAhfjKTss9BwqYg5HYtebpOvQ4TVooxXOW5q
+         yhGw==
+X-Gm-Message-State: AOJu0YxFQu2yxPtOVhWVJHsysUSp+i6uE/oQOanoxxuaKz802DQnDe3D
+	cH3wqfRtoAtvzzgOHiD1Z7O9ZFuk12U9b4N1u7NfJHiJzF3MiJeU1Zl/q3T3Hw==
+X-Gm-Gg: ASbGncvjbz9hX8P2Xi5FgLQMry/S+oHxwsGHazQxflSJCzXc3CfTZXMwqTXuNvj8gz8
+	zZjqijN7utphFqutUK1OTGDF1BLVHQDJmBEPKlpq+f4cXDAXncTMNXbQPr6IGYl4EBgeYon4k1r
+	X4nxXtKn7suUJTW0Ye8bfoQ6sZszsroQb1TN2KGogDqZq1fyRVwxmXhwjRNoeWmvzLWVOoPudoS
+	W8Ew1xoE9Vkz+n649U72nBPdrkJSYTn/DweljYO/E9/zN/Ul9LsYMcAaRg3/D0XN7CY0AWBGHC5
+	Z2+cnwbKpYLF97IfH3lDzUc+jyeGEe6jtAD88wZPyTVVFl4aCT44WA3hpp/R/Upduc3ABYIiny8
+	eefY5Wt+vrqdfqqv6pcy0ny66oj4A20ZAH+hv/EWOe5lG1Pt6Pj6187izUTN1+QNbfw==
+X-Google-Smtp-Source: AGHT+IERMv/UpLv9H5BLNtZUPxMQNsU4o4nhexBieGpdgT3mei0kIWjrbOm33l6glM6rJovSLXodxA==
+X-Received: by 2002:a17:903:ac3:b0:272:dee1:c133 with SMTP id d9443c01a7336-2902723facfmr283829225ad.22.1760475288938;
+        Tue, 14 Oct 2025 13:54:48 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034dea083sm174952475ad.24.2025.10.14.13.54.44
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034dea083sm174952475ad.24.2025.10.14.13.54.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Oct 2025 13:54:46 -0700 (PDT)
+        Tue, 14 Oct 2025 13:54:48 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
+Cc: Ninette Adhikari <ninette@thehoodiefirm.com>,
+	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 16/18] influxdb: Do not remove non-existing files
-Date: Wed, 15 Oct 2025 09:53:59 +1300
-Message-ID: <20251014205402.1487867-16-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 17/18] influxdb: Update CVE status for CVE-2019-10329
+Date: Wed, 15 Oct 2025 09:54:00 +1300
+Message-ID: <20251014205402.1487867-17-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251014205402.1487867-1-ankur.tyagi85@gmail.com>
 References: <20251014205402.1487867-1-ankur.tyagi85@gmail.com>
@@ -68,45 +69,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 20:54:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120649
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120650
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Ninette Adhikari <ninette@thehoodiefirm.com>
 
+The version don't match and only the Jenkins plugin is affected.
+
+Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit cd6e2d8f53b45108ae9aa7b2a2988452dff4a2eb)
+(cherry picked from commit 524acf0542cafed3f5e82cd94291a653f6cf86e1)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-index 5301071516..9506d0e55d 100644
+index 9506d0e55d..cc8161cc3d 100644
 --- a/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
 +++ b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-@@ -38,19 +38,20 @@ USERADD_PACKAGES = "${PN}"
+@@ -38,7 +38,7 @@ USERADD_PACKAGES = "${PN}"
  USERADD_PARAM:${PN} = "--system -d /var/lib/influxdb -m -s /bin/nologin influxdb"
  
  do_install:prepend() {
--    rm ${B}/src/${GO_IMPORT}/build.py
--    rm ${B}/src/${GO_IMPORT}/build.sh
--    rm ${B}/src/${GO_IMPORT}/Dockerfile*
-+    test -e ${B}/src/${GO_IMPORT}/build.py && rm ${B}/src/${GO_IMPORT}/build.py 
-+    test -e ${B}/src/${GO_IMPORT}/build.sh && rm ${B}/src/${GO_IMPORT}/build.sh
-+    rm -rf ${B}/src/${GO_IMPORT}/Dockerfile*
+-    test -e ${B}/src/${GO_IMPORT}/build.py && rm ${B}/src/${GO_IMPORT}/build.py 
++    test -e ${B}/src/${GO_IMPORT}/build.py && rm ${B}/src/${GO_IMPORT}/build.py
+     test -e ${B}/src/${GO_IMPORT}/build.sh && rm ${B}/src/${GO_IMPORT}/build.sh
+     rm -rf ${B}/src/${GO_IMPORT}/Dockerfile*
+ 
+@@ -75,3 +75,5 @@ INITSCRIPT_NAME = "influxdb"
+ INITSCRIPT_PARAMS = "defaults"
+ 
+ SYSTEMD_SERVICE:${PN} = "influxdb.service"
 +
-     sed -i -e "s#usr/bin/sh#bin/sh#g" ${B}/src/${GO_IMPORT}/scripts/ci/run_perftest.sh
- }
- 
- do_install:append() {
-     install -d ${D}${sysconfdir}/influxdb
--    install -m 0644 ${WORKDIR}/influxdb.conf ${D}${sysconfdir}/influxdb
-+    install -m 0644 ${UNPACKDIR}/influxdb.conf ${D}${sysconfdir}/influxdb
-     chown -R root:influxdb ${D}${sysconfdir}/influxdb
- 
-     install -d ${D}${sysconfdir}/init.d
--    install -m 0755 ${WORKDIR}/influxdb ${D}${sysconfdir}/init.d/influxdb
-+    install -m 0755 ${UNPACKDIR}/influxdb ${D}${sysconfdir}/init.d/influxdb
- 
-     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'sysvinit', d)}" ] ; then
-         install -d ${D}${sysconfdir}/logrotate.d
++CVE_STATUS[CVE-2019-10329] = "cpe-incorrect: Version does not match and only the Jenkins plugin is affected."
 
