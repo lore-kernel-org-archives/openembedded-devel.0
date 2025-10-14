@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9682ECCD18E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92B44CCD184
 	for <webhook@archiver.kernel.org>; Tue, 14 Oct 2025 20:54:26 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web10.315.1760475265429494707
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.web10.311.1760475258389832533
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 13:54:25 -0700
+ Tue, 14 Oct 2025 13:54:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=T/c6GKLB;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-26e68904f0eso60100445ad.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:54:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SdB39oFu;
+ spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-b6329b6e3b0so196212a12.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 13:54:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760475265; x=1761080065; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760475258; x=1761080058; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=UDPOE6a3v42coAe5i+xdegPnrJahUafqdM1RNbGrV6A=;
-        b=T/c6GKLBH1HrU8lsI4Jbw8OpeO1QnM1S0u5Ll3oHDsGhlGgvRlZkYKou9Pd8e8NfZ2
-         SWGN5vwyUSHrzLzRYRemRx92QtaB/jjEbslJwKH6tD5LVRdIE2NAjZmeqoY53sAXR4Ly
-         ZIW4EOPKDtxi24cp+xaaxBAEXbN353ingpLa/qLcWEvG/W25SR12s/3PPG+ZGRHGFp2B
-         E3TvxXkFxRzVujOdxn1xKRseWR+Q1ymaVUlorzOwZhJfa58NA0xYdGiEQ3uTAkwteOk/
-         OTvDE8JZ/mcUq/B+JwwwtCM9esI2gqTIVvAJCNiFRKQ9qTpeaDcqXAua/kMYhq11ReoY
-         RpnA==
+        bh=os960+YvAPECZcOnkZ8D8wTgTbF9vHvo7RSwctv9RwQ=;
+        b=SdB39oFurXkx0/7/tkJ4WE+GxL2HCPCO3USlytTUJBoB0EqPzezyUFhQM3wUoFyuYP
+         Nv4JEJMhjYGPyuAP5qLIanZ3ga9fstybHntQtXCoakw1usyQjeJ8uE8j5zYCeAlgkCue
+         VxKvZ7e79v6+Xz5QDfoikuC93pEWDsyHoYOjwnQAvibCfOKbkvfcvH+P4PnTTdE37XGP
+         Dpz3zkwbYD9cnhL0pn8j0UyG6C5nJthzOivmbtk0bkU1bi8+2N9oVyO6OJSBmBephmZQ
+         ripZTfEIoFWTudslmxd+mD2gX0UNVI9QbCMBEsKJIruFdoMN3SBYx2joxN5kHfLdgkae
+         zGTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760475265; x=1761080065;
+        d=1e100.net; s=20230601; t=1760475258; x=1761080058;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=UDPOE6a3v42coAe5i+xdegPnrJahUafqdM1RNbGrV6A=;
-        b=CQqsn0xPtzzODI3K7POGXEJhShwXgSHpFVXseXEpEuseEVhoA/o9ymtgPxa0JB+lV9
-         t0ersNuW0M8II6DU0tekWEzat4u9Us3O3M2/Xzjh7US9l6meWaX16x6+ZoEO4KyduZ3U
-         Zplc5jz+yPeeiX52m33GRNO6635mRmGyfe963XT6KcT6LMZ39l9O7FhKPZQTG2SYIZBy
-         EhvSutPH6Uog4p6bf6l4C+U7YQzcIEsNRjAse8ykwNvhY+04VG/pOOYVP/35k+dllCC0
-         qyX01QqjO24puRzFHbAyNUhmdg8QZEXRwpB/9jfLtFqrwKALKtgYjebIv2B04ycMpN83
-         MGFw==
-X-Gm-Message-State: AOJu0YyrmP/EqigzjZ73T1iKayTcCb0cRxJ6t9pMmm5huHXnkn4VNfzN
-	ghsj7WYXJE3VoicBhPgJJmuEPoJAJAXEVmeEGj8FIc1cfvY1MgrZlRkQODL9VA==
-X-Gm-Gg: ASbGnctHcDwAWMp33i8HwiXSeTBHF+CKZNk6u2Kpta9FAixCqGGfGkqZ2NhCcoRg+Bq
-	P/CCwUi9oQ9HJe68IMxuKn4UkIIkRGwZf0ma1ZFHvGw2++bV1i4XU8eGLNcT9PbcE59i2lIELpR
-	TLZswMRVNFZVJGtO8G7yhAw8WM4mwPwlSCD1Th1fEVdKzlHODUwBdyBEVwpLwpiocaDHXAqrZfz
-	dta9/FtWRcqtGYCS2zbTDPPzjWMh1dxeUa3KT8gGw8povvJsNgqMIQh0WbxwfyiSpzgQMIPN+oe
-	wrsWOE5a1apDff485ho8Z7C3APMR2pm9sZR9Ugk2YAtMcRZDprWDvhUGMezx4gu/yFz1d5Y+CH+
-	2kUsWMZIjB8ah1Fra64N0BQcPH692Ljex+6G1MBut1F8IECsrwrlmLV+Emxc/8+3DkQ==
-X-Google-Smtp-Source: AGHT+IGtRR+30i0/lC2xd5+JI83G+5SxRx/nZqKNaQrhi9wzPDaublPP6gTt3W77MX2f6FnpaoJrtQ==
-X-Received: by 2002:a17:903:244b:b0:272:c95c:866 with SMTP id d9443c01a7336-2902723c20cmr326754575ad.20.1760475264667;
-        Tue, 14 Oct 2025 13:54:24 -0700 (PDT)
+        bh=os960+YvAPECZcOnkZ8D8wTgTbF9vHvo7RSwctv9RwQ=;
+        b=KmPy669WKYi86FDvlgu7aE3JhBRr8SswcrcGfW+GZH04m9uR4EHda+Hfkb2Y7NJLkr
+         tf0Whp9krFYqUopu1Qnj0xoq/6EKR4B4G1F1HEQ2fZ4XR94tt8NSGj1nBqUSK0+BCL+F
+         I/KYUBS+CXOSWHpR8UZGbpVYOYTj/VqxvPCzKpDEqpUX1q4enrbk2z9K+Ngi0kBhxAFj
+         7BmJmFhP64erJeiV+mQjBHN5yI1wBK58rYe0aqYi6lHgEc0MC0VtZ89KTIaYJPkAqgP9
+         1+yCA5/LSERmVCmHEn6peDt74JVEYaBdEol/TjNWdg6Qf8W+6IWBtVoZQvI2ea2AWgtj
+         rAdQ==
+X-Gm-Message-State: AOJu0YzBO0tzelmSYlwqZGN8aNJXwLVvFxmtYCTrjxpqQkqS1+cfY/Jr
+	P5dTEeFeFaIe9FWTD0/uH8nU2lksjlD4g9MDeRvbaEoNnCtgOeOVzgmQ9vVdDA==
+X-Gm-Gg: ASbGncuACTfFYeJjv771aFemy/snNj3DEXYYP5X7jb696IxzJrZD9TxqNBZEMdLaahD
+	WTHCTRZVISpp0UeFyUyq7fX3wK8XQSSwO5hguZyHsGfF6KznhJ4ASapALD/UqwudDl4PhFMzPGQ
+	uvxV1uVcf1N1dxqk2olXzkaJVH+bCg2wczv9ZO3xoyZfK3D+8zl5Y5Dvdj6B3keHA8MtcFV5Ld+
+	uRgCQREYKej7/ZMmq1n0g8uhKBLm39GdYmtM+f+VcWK4PErDnfk+C7GyoIri4RtkHzlfjYPUUKE
+	6dmjVxeEQjwhFtOKg+BHj1A/IwPWtWC3JCxV7eH67J6PhP8auT6Pu0jB/uxp7YQrhpdyQZlXogU
+	UCJoKgduQeaP9BFsNvzKr+C9FgwRf0kDiOlTg9XuLIV/RxhthnlIfXVGbZoBwgZNaaw==
+X-Google-Smtp-Source: AGHT+IHqyY8be3RPtFfSaB7O8yGO7GgoHzNChCtB1fufO6LXNfEEbHY6Sn5jrQ4Lm3UCSySHfZWfiA==
+X-Received: by 2002:a17:903:faf:b0:28e:873d:8a with SMTP id d9443c01a7336-29027f0cd0cmr323725165ad.15.1760475257616;
+        Tue, 14 Oct 2025 13:54:17 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034dea083sm174952475ad.24.2025.10.14.13.54.22
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29034dea083sm174952475ad.24.2025.10.14.13.54.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Oct 2025 13:54:24 -0700 (PDT)
+        Tue, 14 Oct 2025 13:54:17 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>,
 	Gyorgy Sarvari <skandigraun@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 07/18] libcupsfilters: patch CVE-2024-47076
-Date: Wed, 15 Oct 2025 09:53:50 +1300
-Message-ID: <20251014205402.1487867-7-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 04/18] hdf5: patch CVE-2025-2924
+Date: Wed, 15 Oct 2025 09:53:47 +1300
+Message-ID: <20251014205402.1487867-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251014205402.1487867-1-ankur.tyagi85@gmail.com>
 References: <20251014205402.1487867-1-ankur.tyagi85@gmail.com>
@@ -68,74 +68,75 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 20:54:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120640
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120637
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2024-47076
+Details https://nvd.nist.gov/vuln/detail/CVE-2025-2924
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-(cherry picked from commit 1ef236b6c507ccf280d9a9aa1cbba3a9c2fee5f8)
+(cherry picked from commit f0cdeee91832709fe78b1f2af2a0504af80c41d7)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libcupsfilters/0001-CVE-2024-47076.patch  | 38 +++++++++++++++++++
- .../cups/libcupsfilters_2.0.0.bb              |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-printing/cups/libcupsfilters/0001-CVE-2024-47076.patch
+ .../hdf5/files/0002-CVE-2025-2924.patch       | 39 +++++++++++++++++++
+ meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |  1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hdf5/files/0002-CVE-2025-2924.patch
 
-diff --git a/meta-oe/recipes-printing/cups/libcupsfilters/0001-CVE-2024-47076.patch b/meta-oe/recipes-printing/cups/libcupsfilters/0001-CVE-2024-47076.patch
+diff --git a/meta-oe/recipes-support/hdf5/files/0002-CVE-2025-2924.patch b/meta-oe/recipes-support/hdf5/files/0002-CVE-2025-2924.patch
 new file mode 100644
-index 0000000000..5fdf2bd444
+index 0000000000..73ee50db1f
 --- /dev/null
-+++ b/meta-oe/recipes-printing/cups/libcupsfilters/0001-CVE-2024-47076.patch
-@@ -0,0 +1,38 @@
-+From 5f950f6a52c7453d76fb30dbc8d66bbc1cc682a3 Mon Sep 17 00:00:00 2001
-+From: Zdenek Dohnal <zdohnal@redhat.com>
-+Date: Thu, 26 Sep 2024 23:09:29 +0200
-+Subject: [PATCH] CVE-2024-47076
++++ b/meta-oe/recipes-support/hdf5/files/0002-CVE-2025-2924.patch
+@@ -0,0 +1,39 @@
++From 3a6f6c1f57c09281d4a9d11a1ae809fd21b666dd Mon Sep 17 00:00:00 2001
++From: Glenn Song <43005495+glennsong09@users.noreply.github.com>
++Date: Mon, 15 Sep 2025 07:56:54 -0500
++Subject: [PATCH] CVE-2025-2924
 +
-+cfGetPrinterAttributes5(): Validate response attributes before return
++Fixes heap-based buffer overflow in H5HL__fl_deserialize by adding an overflow check.
 +
-+The destination can be corrupted or forged, so validate the response
-+to strenghten security measures.
++CVE: CVE-2025-2924
++Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/0a57195ca67d278f1cf7d01566c121048e337a59]
 +
-+CVE: CVE-2024-47076
-+Upstream-Status: Backport [https://github.com/OpenPrinting/libcupsfilters/commit/95576ec3d20c109332d14672a807353cdc551018]
-+
-+(cherry picked from commit 95576ec3d20c109332d14672a807353cdc551018)
++(cherry picked from commit 0a57195ca67d278f1cf7d01566c121048e337a59)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ cupsfilters/ipp.c | 8 ++++++++
-+ 1 file changed, 8 insertions(+)
++ src/H5HLcache.c | 5 +++++
++ 1 file changed, 5 insertions(+)
 +
-+diff --git a/cupsfilters/ipp.c b/cupsfilters/ipp.c
-+index a0814ae5..994c8dac 100644
-+--- a/cupsfilters/ipp.c
-++++ b/cupsfilters/ipp.c
-+@@ -452,6 +452,14 @@ cfGetPrinterAttributes5(http_t *http_printer,
-+ 	    ippDelete(response2);
-+ 	  }
-+ 	}
++diff --git a/src/H5HLcache.c b/src/H5HLcache.c
++index d0836fe..7f412d2 100644
++--- a/src/H5HLcache.c
+++++ b/src/H5HLcache.c
++@@ -225,6 +225,7 @@ H5HL__fl_deserialize(H5HL_t *heap)
++     /* check arguments */
++     assert(heap);
++     assert(!heap->freelist);
+++    HDcompile_assert(sizeof(hsize_t) == sizeof(uint64_t));
++ 
++     /* Build free list */
++     free_block = heap->free_block;
++@@ -232,6 +233,10 @@ H5HL__fl_deserialize(H5HL_t *heap)
++         const uint8_t *image; /* Pointer into image buffer */
++ 
++         /* Sanity check */
 ++
-++	// Check if the response is valid
-++	if (!ippValidateAttributes(response))
-++	{
-++	  ippDelete(response);
-++	  response = NULL;
-++	}
+++        if (free_block > UINT64_MAX - (2 * heap->sizeof_size))
+++            HGOTO_ERROR(H5E_HEAP, H5E_BADRANGE, FAIL, "decoded heap block address overflow");
 ++
-+ 	if (have_http == 0) httpClose(http_printer);
-+ 	if (uri) free(uri);
-+ 	return (response);
-diff --git a/meta-oe/recipes-printing/cups/libcupsfilters_2.0.0.bb b/meta-oe/recipes-printing/cups/libcupsfilters_2.0.0.bb
-index 7f7174d940..827172a6a1 100644
---- a/meta-oe/recipes-printing/cups/libcupsfilters_2.0.0.bb
-+++ b/meta-oe/recipes-printing/cups/libcupsfilters_2.0.0.bb
-@@ -8,6 +8,7 @@ DEPENDS = "cups fontconfig libexif dbus lcms qpdf poppler libpng jpeg tiff"
- SRC_URI = " \
- 	https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz \
- 	file://0001-use-noexcept-false-instead-of-throw-from-c-17-onward.patch \
-+	file://0001-CVE-2024-47076.patch \
++         if ((free_block + (2 * heap->sizeof_size)) > heap->dblk_size)
++             HGOTO_ERROR(H5E_HEAP, H5E_BADRANGE, FAIL, "bad heap free list");
++ 
+diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
+index 4305826b22..06a375c673 100644
+--- a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
++++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
+@@ -16,6 +16,7 @@ SRC_URI = " \
+     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
+     file://0001-cmake-remove-build-flags.patch \
+     file://0001-CVE-2025-2923.patch \
++    file://0002-CVE-2025-2924.patch \
  "
- SRC_URI[sha256sum] = "542f2bfbc58136a4743c11dc8c86cee03c9aca705612654e36ac34aa0d9aa601"
+ SRC_URI[sha256sum] = "019ac451d9e1cf89c0482ba2a06f07a46166caf23f60fea5ef3c37724a318e03"
  
 
