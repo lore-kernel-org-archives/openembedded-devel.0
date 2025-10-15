@@ -2,103 +2,93 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF8C4CCD185
-	for <webhook@archiver.kernel.org>; Wed, 15 Oct 2025 20:09:46 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web11.27964.1760558985645674503
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5835CCD185
+	for <webhook@archiver.kernel.org>; Wed, 15 Oct 2025 20:09:55 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web10.28098.1760558986364266934
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Oct 2025 13:09:45 -0700
+ Wed, 15 Oct 2025 13:09:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dAbtIF0I;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-28a5b8b12a1so83535ad.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 13:09:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aBX26qp0;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-b555ab7fabaso6447723a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 13:09:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1760558985; x=1761163785; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CJAd/6Jkiih/jtPucDfGmFLDMF1moAdChCdbgGH92M8=;
-        b=dAbtIF0IOIHDJwEA7XpqoBnEB1svuPFfVJBd1NjGCZdDwp91rvjsoYG4VxIoIJN059
-         d0+lOyboms8/G9MeDoWfypx9WDtycZ14P3xFwcy2WHG3bl+VzawV6HTo/bQYe2IUQk7R
-         QK+y0AB1UCjZAobJZ/tbMZQfZKHdJySQPNANBs/IkeU/G2iQnKHNb5lJxvEnUgPv0ZfH
-         0MRE7qmqRRTvSyZhU4QGG8FA1VA6yq8assuTOzxLiNvbs10WvW84DkROCsI6DcEPio1z
-         HlXI/XjWK5USffe8zfH2qSwfwNigEDwh/PIx+gWGOyrYEiE4AmHsAVdS43peGF2kj/kZ
-         kSiw==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hhtfzdPFsvs8UwRoqGVroiZHAm67rK0PJylQIe3AHTY=;
+        b=aBX26qp0wYJu767yeYNF+u7tKyClU19gd7wZNk/vnGQrX5fhwddXq2yFloE7YQITZG
+         V90XbE/0UJWu2xBlkWix98Gvh5VzAFSRWntNgdV++pX5N6L6JUeDvIjqJlCVgZcRalkT
+         MzXmJK2nOkuzM4OtxfPfSU/WXqOEc6E5OEynVYif+FdPLHgOzAMS2x6bYl08JU2bX5Fs
+         NKHYRjB09NR8Yl7lpPt+SoaUpGMYCd7o068GvDWGj0QwQFN5iWTqIgXG3p3I0/b1UyG9
+         dzqo1V4BsR29M8lCDlQDS7QQ+cSMPq4GF+0LoS/cTseOiSjqbfp6T96piLGXxtpyPgwg
+         2HrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1760558985; x=1761163785;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=CJAd/6Jkiih/jtPucDfGmFLDMF1moAdChCdbgGH92M8=;
-        b=jKPeN42v6ICUMdWevoLj4z00lKgwicQyZ9pESx0e1Pfgt7FJTVkMyC1A6rn1jHZipT
-         Fh4bfcv1+vg4J3Cxt2f8rZQebDPrFViwS0J4KqRaVGX+sEN7NQMVLVPsqPcLTj5KCvSk
-         aMvRTvI9beWVGlba5k1T7AMNrsyFtP5Xx5iqwXQFxGo9H8hJxL+kI6k8jBp88YwdFUDU
-         EawYQwtfygBB8z1oQX8kDmjJlJt45Sk9ycnbPNuP3MoobDSK/N4EMG6Q0n6ThqPyKw70
-         AaMw0d7SNr/atHQHx6DkOK3cgyHoRxeV7590u0bZZ/ts5E4vErb6/gM4Ph7u+wBPg9tB
-         uY2A==
-X-Gm-Message-State: AOJu0Yxpe+J6Kmbq2T5f7LqM1Y9R7pJ8MWNvOlG01o6D7PcfU2syAjrZ
-	sBg9sbJMa4fK39MybxZ6rd1B4djQSm0i/5oFdOz8A+DR6z/qka6ZZxWIqC13auoM
-X-Gm-Gg: ASbGnctLuD2jtlNNXKyNQuhBik/wwpH206wA8sHa3aD0WIE8cZsKqA+W58x+js1obcV
-	K3b6FSXUiLxUMK1CrjGJXV9IYb+BbeeRVTF9N0RmeMPMq3Wi5XrTgNIe9D/tEA1gEKvHNWObXDb
-	9RSCWxgDKnZNgo8fUk/emzy70csw0x/Q4H9ycWlhei/Z95za9d2bFBa4KlcU3lPJEKQftF8oR5Y
-	JeNeLJ/TNWyV+SEICEyVcTD4M1IYA0JWGwTr9h9nBFIbWLzYDdRgRsNMklhZa3QIkdtiD4w666w
-	/bGAd17ns/YUNErTrJWiX/XcUqw5BpfqgdqFUpdKPCci+i0Gn5ha9YVzmynT0p/plkK9c7VhHAU
-	epQevZnVlPhMGlsXQNN+J2fGj9EdRVEaZetSrW6O56wn+k7flrkZGrxUqXX3Wep+23IOKIa22fU
-	C10cIGsaOwCo0kzXILxTnol5+BQyTSMEeWI0YQ25OZSbR9rPJQM6XUCH/zCkEqgmRli+kDZzcS
-X-Google-Smtp-Source: AGHT+IE3PR6aRu0xYaEPwcUpG8SdKJEA1H93ORShaFLTvuP3md8TyZQsCK/3oohvsVHjUuF3VeXgsQ==
-X-Received: by 2002:a17:902:e952:b0:27e:f018:d2fb with SMTP id d9443c01a7336-2902735667emr380246535ad.6.1760558984494;
-        Wed, 15 Oct 2025 13:09:44 -0700 (PDT)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=hhtfzdPFsvs8UwRoqGVroiZHAm67rK0PJylQIe3AHTY=;
+        b=WrlxN53zXGRkSU4wVDoc/U7kxI4CmjMFwtbFqz9xkc8bomIfWrPR+19RCJSEDYSKjq
+         IwU3469AKL1mS7mJVfmFEXwXyK+r4jWStyi93q3E8vB17gS+wQdjBNKgqrd0/C5Xrfmn
+         lpcKV4+1wDGVoIwtMUyxIIwyeC9wgj0ui9BI/8Fi7beqwB5/Qgv3vFAW5oaQ9XhywQ6u
+         +7dRZSPPRIiAyclaXrMbfhB7lhYk2uoBqVileKefylAi3zFcxxz49kCycDLXMBJVQRRZ
+         nnktfY6vYTFVdnff5NsmcCPJFuWnmExzOS6mub5YtpDGun2emzrEVruORIubhJpP/2UH
+         +kxQ==
+X-Gm-Message-State: AOJu0YwQbFcMrWhqq2jtPpIWZANqFnxnfsay8+urqdWrSHFs40yGBezC
+	nnCVaqO1hDwb3jKGfdCnyX1uVMvZdPK0LUhHDyiGBMpCDEzuwPUSsAGt59y+VmWf
+X-Gm-Gg: ASbGncuzxZhF73QRbbF/UUnf0Qou6yDB0TMiBu0rR4pOHb/45mzGooM+rQzzbJooEYS
+	IuqCpW/WG+oXJ8W/ilQ1q84CtHAfiBXH7O0zNdSdwXuLIB0EJtw4d9rQMEXr3PgxR7uioEB4ty7
+	6D4HuAPWgFPtoK7pcmC7lqXPIDEKh1adB2307OG+DBIb+CLOB1SA6bfMIng9PGL5H4LX3p1yNlE
+	SJlPf8algmnfUcUz0QZmAj2jW29PLiNtJhO7mBtrwZ+TQYqa8UJM9/SSESEPdY+Pu2G27MaY9Y9
+	xyfih4sVh+8rKRswtAv94skARo7UicVS34DhLRmhu1OKXf0gS2nqTy7BcYkumfbOwlTcytflhZL
+	IQIaP45Hr9TGbjFSb6QlmrL2I3+GZN2AMiliqA2tnbl0//rgJzpk6L3scYHNjoUmQ3bfiJiyuN8
+	G6p3iwrNHCXlCHNlMVh5aUc8noL4FeTmziO2p1wUsR2UHyGpJFHtPWD/yaVkKQ0vME22o/3ypQD
+	tGUNUzfdEQ=
+X-Google-Smtp-Source: AGHT+IE22UHbxGb4fz3Qs9FIaFx8LqecMyJstNPDpTnq9wobe63/bCeFSymu61RQ4t8CbGq0gt+gkw==
+X-Received: by 2002:a17:903:3c4d:b0:267:44e6:11d3 with SMTP id d9443c01a7336-29027379986mr381282095ad.21.1760558985257;
+        Wed, 15 Oct 2025 13:09:45 -0700 (PDT)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::a529])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29099313b28sm5181325ad.3.2025.10.15.13.09.43
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29099313b28sm5181325ad.3.2025.10.15.13.09.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Wed, 15 Oct 2025 13:09:44 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 1/2] python3-lazy-object-proxy: Upgrade to 1.12.0 release
-Date: Wed, 15 Oct 2025 13:09:41 -0700
-Message-ID: <20251015200942.996584-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/2] python3-lazy-object-proxy: Remove __pycache__ from packaging
+Date: Wed, 15 Oct 2025 13:09:42 -0700
+Message-ID: <20251015200942.996584-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251015200942.996584-1-raj.khem@gmail.com>
+References: <20251015200942.996584-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 20:09:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120714
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 20:09:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120715
 
-* Fixed testing issues when C extensions are not desired. Contributed by Michał Górny in #79.
-* Added support for GraalPy. Contributed by Michael Šimáček in #87.
-* Fixed testing issues on Python 3.14. Contributed by Michał Górny in #88.
-* Modernized packaging to have metadata in pyproject.toml.
-* Added Python 3.14 wheels.
+They make the package non-reproducible morever these are cache files anyway
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ct-proxy_1.11.0.bb => python3-lazy-object-proxy_1.12.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-lazy-object-proxy_1.11.0.bb => python3-lazy-object-proxy_1.12.0.bb} (63%)
+ .../python/python3-lazy-object-proxy_1.12.0.bb               | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.11.0.bb b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.12.0.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.11.0.bb
-rename to meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.12.0.bb
-index ebf9f84951..b0296dfc95 100644
---- a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.11.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.12.0.bb b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.12.0.bb
+index b0296dfc95..acd84efd21 100644
+--- a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.12.0.bb
 +++ b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.12.0.bb
-@@ -2,11 +2,11 @@ SUMMARY = "A fast and thorough lazy object proxy"
- HOMEPAGE = "https://python-lazy-object-proxy.readthedocs.io/"
- LICENSE = "BSD-2-Clause"
- SECTION = "devel/python"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=b44e35194fc96f303ff4302a2a5759dd"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f0cd92fd68aacee0503822c05a3ee6a2"
-
- DEPENDS += "python3-setuptools-scm-native"
-
--SRC_URI[sha256sum] = "18874411864c9fbbbaa47f9fc1dd7aea754c86cfde21278ef427639d1dd78e9c"
-+SRC_URI[sha256sum] = "1f5a462d92fd0cfb82f1fab28b51bfb209fabbe6aabf7f0d51472c0c124c0c61"
-
+@@ -11,3 +11,8 @@ SRC_URI[sha256sum] = "1f5a462d92fd0cfb82f1fab28b51bfb209fabbe6aabf7f0d51472c0c12
  PYPI_PACKAGE = "lazy_object_proxy"
 
+ inherit pypi python_setuptools_build_meta
++
++do_install:append() {
++	# contain moddate, makes is non-reproducible
++	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/lazy_object_proxy/__pycache__/*.cpython-*.pyc
++}
 
