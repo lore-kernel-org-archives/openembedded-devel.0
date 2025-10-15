@@ -2,139 +2,103 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CB008CCD193
-	for <webhook@archiver.kernel.org>; Wed, 15 Oct 2025 19:43:05 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web10.27457.1760557383642581696
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF8C4CCD185
+	for <webhook@archiver.kernel.org>; Wed, 15 Oct 2025 20:09:46 +0000 (UTC)
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.web11.27964.1760558985645674503
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Oct 2025 12:43:03 -0700
+ Wed, 15 Oct 2025 13:09:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LMg4H6ou;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-29094f23f56so3988395ad.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 12:43:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dAbtIF0I;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-28a5b8b12a1so83535ad.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 13:09:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760557383; x=1761162183; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760558985; x=1761163785; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=lD+CRtbCazfNd/m7O2ZR0g2cAUrUAiPbjIhIhFgFEew=;
-        b=LMg4H6ouXj8KaELXW5ZRc3B46jgaN0bzCf3Vd4iJR9sxoRjf0UD9SfeBz5jR9Vwj7t
-         IB2mtXPDyT0dB7yn6GHaeRRlYJKfP2fNwetpHHBUopuo/EHcS01e24xm481vIGxl2Lh2
-         AhWZxgY1RJpgJDd/mtxLqfHT8irSK8Su0xgEGdYrV4sHyQJTtLBfK6+RdkzaHL8tS6Mc
-         +/ekjQJv6uxE/2JRgGiNjIryX4EDwnQ5+6w/mdxXpsAKE4YhltCIieKdd2lu1uX9VlUf
-         2IFV8kY7R/UqU63Lg2Vh0AoJ+jzDoAyc13/cLXj3TqdlYmJY3W08Uh9qrH9uvRi+1wFt
-         hYtQ==
+        bh=CJAd/6Jkiih/jtPucDfGmFLDMF1moAdChCdbgGH92M8=;
+        b=dAbtIF0IOIHDJwEA7XpqoBnEB1svuPFfVJBd1NjGCZdDwp91rvjsoYG4VxIoIJN059
+         d0+lOyboms8/G9MeDoWfypx9WDtycZ14P3xFwcy2WHG3bl+VzawV6HTo/bQYe2IUQk7R
+         QK+y0AB1UCjZAobJZ/tbMZQfZKHdJySQPNANBs/IkeU/G2iQnKHNb5lJxvEnUgPv0ZfH
+         0MRE7qmqRRTvSyZhU4QGG8FA1VA6yq8assuTOzxLiNvbs10WvW84DkROCsI6DcEPio1z
+         HlXI/XjWK5USffe8zfH2qSwfwNigEDwh/PIx+gWGOyrYEiE4AmHsAVdS43peGF2kj/kZ
+         kSiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760557383; x=1761162183;
+        d=1e100.net; s=20230601; t=1760558985; x=1761163785;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=lD+CRtbCazfNd/m7O2ZR0g2cAUrUAiPbjIhIhFgFEew=;
-        b=Bp/xzbtY7aHkA1Wveo7LyGg/XAr3lYSCUesU0jh0kqR6uCVm9DQ7hf8RdKUk1Hw6Qi
-         JNbAKjwyKQmHSO1QYKYlVv335CfrymOWZHeWiW7MhiDce2cTjxAEHs4BC59pSp7eOeT9
-         WTKC1MrPmq/lNKLcPo0tcHNeJqQhgoSuPIJBjDVNxAuwHbE1pR2zxiq7w8Yb6y42WhCj
-         PFoD27uY16DAE5N0wjQxZr0wBRUurY9tTrulEt9U/debr2DDcMIslU/KWEZNha2km2yk
-         U5bQwn5YoBoy+CNone1DCpMy/LaOYM9hAIMB49BxsdhNqqzgoCr72C87dDKzw7U/41kD
-         TlVA==
-X-Gm-Message-State: AOJu0Yx/+fueS19FrTJn7bwBFJIYAeN82bftRK3HrXxxCMzL8abtFw9I
-	yjhe8WMD+HB+cAsODWA5HmSyJZkz7LrmLf/+Z/iOLa9U6gC8bpCa2wI/RnoRsPuo
-X-Gm-Gg: ASbGncun1qktk4Sv+HF4gxld90iCusxxYq7HVgrOIWrFULaMQOcoP8TpST8iOXXe0I7
-	GTHtoTiMHUvcS+lNS43aOv0l3ZsaAEcvcU2Tlmm4AH7KPhPOzIClJPRZIuzA64idin6S8eZC3bL
-	auO9bMUiZGqa+dif3YmCSIv33FmYdv2BDNLEAbYDNW788qHNpDXunzfylh6PtQ8uuHRDtQiu1gM
-	HtyAC/P4wxOGOWaSUUAS/CiTafe4d1IyhRku2aKCIdksEOpZ2Cb6WwpsdrpfZ+cPhnwdekkgdzM
-	vdhWj0thPc2dYNG2NhI49jhErjERC54UyurikFDxmXBDP9ybM0X9CG21BlJb3mmgwjxv0YIVKWI
-	M2hWfHdWv3w/NVOl5ZUiaMFF3Wsaov9UGOua2wKAtGzmiZJxr8LmNjnmoRCmm0lU+J+gVV9kXHX
-	D54olzNul3BdaBPr+GBP9+j/EfrAy2tR7cPWB4nZRDRiBlPYLI66t9cPSuMTMkLoPXf73qRLPN
-X-Google-Smtp-Source: AGHT+IFDHLrhjGxZu/zFFFBgzip38+R6hn3UpI2FlAq/LGG+BPOCzm62f9oXuZc99RMSXfZ4fxw3Rg==
-X-Received: by 2002:a17:903:faf:b0:26a:ac66:ef3f with SMTP id d9443c01a7336-290272161e2mr324884025ad.8.1760557382699;
-        Wed, 15 Oct 2025 12:43:02 -0700 (PDT)
+        bh=CJAd/6Jkiih/jtPucDfGmFLDMF1moAdChCdbgGH92M8=;
+        b=jKPeN42v6ICUMdWevoLj4z00lKgwicQyZ9pESx0e1Pfgt7FJTVkMyC1A6rn1jHZipT
+         Fh4bfcv1+vg4J3Cxt2f8rZQebDPrFViwS0J4KqRaVGX+sEN7NQMVLVPsqPcLTj5KCvSk
+         aMvRTvI9beWVGlba5k1T7AMNrsyFtP5Xx5iqwXQFxGo9H8hJxL+kI6k8jBp88YwdFUDU
+         EawYQwtfygBB8z1oQX8kDmjJlJt45Sk9ycnbPNuP3MoobDSK/N4EMG6Q0n6ThqPyKw70
+         AaMw0d7SNr/atHQHx6DkOK3cgyHoRxeV7590u0bZZ/ts5E4vErb6/gM4Ph7u+wBPg9tB
+         uY2A==
+X-Gm-Message-State: AOJu0Yxpe+J6Kmbq2T5f7LqM1Y9R7pJ8MWNvOlG01o6D7PcfU2syAjrZ
+	sBg9sbJMa4fK39MybxZ6rd1B4djQSm0i/5oFdOz8A+DR6z/qka6ZZxWIqC13auoM
+X-Gm-Gg: ASbGnctLuD2jtlNNXKyNQuhBik/wwpH206wA8sHa3aD0WIE8cZsKqA+W58x+js1obcV
+	K3b6FSXUiLxUMK1CrjGJXV9IYb+BbeeRVTF9N0RmeMPMq3Wi5XrTgNIe9D/tEA1gEKvHNWObXDb
+	9RSCWxgDKnZNgo8fUk/emzy70csw0x/Q4H9ycWlhei/Z95za9d2bFBa4KlcU3lPJEKQftF8oR5Y
+	JeNeLJ/TNWyV+SEICEyVcTD4M1IYA0JWGwTr9h9nBFIbWLzYDdRgRsNMklhZa3QIkdtiD4w666w
+	/bGAd17ns/YUNErTrJWiX/XcUqw5BpfqgdqFUpdKPCci+i0Gn5ha9YVzmynT0p/plkK9c7VhHAU
+	epQevZnVlPhMGlsXQNN+J2fGj9EdRVEaZetSrW6O56wn+k7flrkZGrxUqXX3Wep+23IOKIa22fU
+	C10cIGsaOwCo0kzXILxTnol5+BQyTSMEeWI0YQ25OZSbR9rPJQM6XUCH/zCkEqgmRli+kDZzcS
+X-Google-Smtp-Source: AGHT+IE3PR6aRu0xYaEPwcUpG8SdKJEA1H93ORShaFLTvuP3md8TyZQsCK/3oohvsVHjUuF3VeXgsQ==
+X-Received: by 2002:a17:902:e952:b0:27e:f018:d2fb with SMTP id d9443c01a7336-2902735667emr380246535ad.6.1760558984494;
+        Wed, 15 Oct 2025 13:09:44 -0700 (PDT)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::a529])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29099a7cebbsm4384885ad.64.2025.10.15.12.43.01
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29099313b28sm5181325ad.3.2025.10.15.13.09.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Oct 2025 12:43:02 -0700 (PDT)
+        Wed, 15 Oct 2025 13:09:44 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Yoann Congal <yoann.congal@smile.fr>,
-	Hongxu Jia <hongxu.jia@windriver.com>
-Subject: [meta-python][PATCH] python3-pynacl: Fix reproduciblity
-Date: Wed, 15 Oct 2025 12:42:57 -0700
-Message-ID: <20251015194257.195594-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH 1/2] python3-lazy-object-proxy: Upgrade to 1.12.0 release
+Date: Wed, 15 Oct 2025 13:09:41 -0700
+Message-ID: <20251015200942.996584-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 19:43:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120713
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 20:09:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120714
 
-glob output isn't guaranteed to be in any particular order, so _sodium.*.so wasn't always reproducible.
+* Fixed testing issues when C extensions are not desired. Contributed by Michał Górny in #79.
+* Added support for GraalPy. Contributed by Michael Šimáček in #87.
+* Fixed testing issues on Python 3.14. Contributed by Michał Górny in #88.
+* Modernized packaging to have metadata in pyproject.toml.
+* Added Python 3.14 wheels.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Cc: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../0001-Build-bindings-reproducibly.patch    | 39 +++++++++++++++++++
- .../python/python3-pynacl_1.5.0.bb            |  1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pynacl/0001-Build-bindings-reproducibly.patch
+ ...ct-proxy_1.11.0.bb => python3-lazy-object-proxy_1.12.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-lazy-object-proxy_1.11.0.bb => python3-lazy-object-proxy_1.12.0.bb} (63%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pynacl/0001-Build-bindings-reproducibly.patch b/meta-python/recipes-devtools/python/python3-pynacl/0001-Build-bindings-reproducibly.patch
-new file mode 100644
-index 0000000000..3e7480b485
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pynacl/0001-Build-bindings-reproducibly.patch
-@@ -0,0 +1,39 @@
-+From eccc9ea5eef13ee353de610af36fb7759b70e2e4 Mon Sep 17 00:00:00 2001
-+From: Colin Watson <cjwatson@debian.org>
-+Date: Mon, 26 Aug 2024 18:14:33 +0100
-+Subject: [PATCH] Build bindings reproducibly
-+
-+`glob` output isn't guaranteed to be in any particular order, so
-+`_sodium.*.so` wasn't always reproducible.
-+
-+Upstream-Status: Backport [https://github.com/pyca/pynacl/pull/836]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/bindings/build.py | 12 ++++++++----
-+ 1 file changed, 8 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/bindings/build.py b/src/bindings/build.py
-+index 9634237..777237b 100644
-+--- a/src/bindings/build.py
-++++ b/src/bindings/build.py
-+@@ -22,12 +22,16 @@ from cffi import FFI
-+ __all__ = ["ffi"]
-+
-+
-+-HEADERS = glob.glob(
-+-    os.path.join(os.path.abspath(os.path.dirname(__file__)), "*.h")
-++HEADERS = sorted(
-++    glob.glob(os.path.join(os.path.abspath(os.path.dirname(__file__)), "*.h"))
-+ )
-+
-+-MINIMAL_HEADERS = glob.glob(
-+-    os.path.join(os.path.abspath(os.path.dirname(__file__)), "minimal", "*.h")
-++MINIMAL_HEADERS = sorted(
-++    glob.glob(
-++        os.path.join(
-++            os.path.abspath(os.path.dirname(__file__)), "minimal", "*.h"
-++        )
-++    )
-+ )
-+
-+
-diff --git a/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb b/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
-index 77ca2e1ff4..393066de9d 100644
---- a/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
-@@ -4,6 +4,7 @@ HOMEPAGE = "https://github.com/pyca/pynacl"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8cc789b082b3d97e1ccc5261f8594d3f"
+diff --git a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.11.0.bb b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.12.0.bb
+similarity index 63%
+rename from meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.11.0.bb
+rename to meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.12.0.bb
+index ebf9f84951..b0296dfc95 100644
+--- a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.11.0.bb
++++ b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.12.0.bb
+@@ -2,11 +2,11 @@ SUMMARY = "A fast and thorough lazy object proxy"
+ HOMEPAGE = "https://python-lazy-object-proxy.readthedocs.io/"
+ LICENSE = "BSD-2-Clause"
+ SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=b44e35194fc96f303ff4302a2a5759dd"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=f0cd92fd68aacee0503822c05a3ee6a2"
 
-+SRC_URI += "file://0001-Build-bindings-reproducibly.patch"
- SRC_URI[sha256sum] = "8ac7448f09ab85811607bdd21ec2464495ac8b7c66d146bf545b0f08fb9220ba"
+ DEPENDS += "python3-setuptools-scm-native"
 
- PYPI_PACKAGE = "PyNaCl"
+-SRC_URI[sha256sum] = "18874411864c9fbbbaa47f9fc1dd7aea754c86cfde21278ef427639d1dd78e9c"
++SRC_URI[sha256sum] = "1f5a462d92fd0cfb82f1fab28b51bfb209fabbe6aabf7f0d51472c0c124c0c61"
+
+ PYPI_PACKAGE = "lazy_object_proxy"
+
 
