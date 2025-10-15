@@ -1,216 +1,378 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87B6ACCD184
-	for <webhook@archiver.kernel.org>; Wed, 15 Oct 2025 03:43:09 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web11.7495.1760499784808644489
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6B95CCD185
+	for <webhook@archiver.kernel.org>; Wed, 15 Oct 2025 04:22:39 +0000 (UTC)
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web11.8081.1760502156221986533
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Oct 2025 20:43:04 -0700
+ Tue, 14 Oct 2025 21:22:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OyGN716D;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-26a0a694ea8so44399955ad.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 20:43:04 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=IG3MCEMa;
+ spf=pass (domain: mvista.com, ip: 209.85.210.177, mailfrom: vanusuri@mvista.com)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-782bfd0a977so5065556b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Oct 2025 21:22:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760499784; x=1761104584; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kEw3EOfBGKeI7lqiSXyx7HBho1wYVOHXpDoE3Qv8SAY=;
-        b=OyGN716DxJ2e6oAI2F+oHcDvFsKHZY5mHubHo2dkO3WxPA9BfUrzZMmsOCD9O9X/1S
-         1dqJdlY/IdYRgrY8ZW0ItppnxgoRPgEH/85RQO6svUsdbL15PHYwNRiH7ufX3gdxzzpc
-         OoOU48dftb/atW0qOJBZ9TV/FzV5vLRVmUkxT7JEYIAPElI5D08vDJ0BF91IY3q2BOvh
-         MxVyPgUP5sA4/GLmQ/aBtajGKy+Ci9HOt5jvudf8FrVt2DPOHMUSb6vtEqdlmZHBg1Bi
-         j0ZGncz46ox9udbHao5dzJ1VtfRw+6o3i1KkEbZZReZ3yZB+TzozaQezh43ijAwGKrO8
-         lQ0w==
+        d=mvista.com; s=google; t=1760502155; x=1761106955; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=hXczYhdP4RhU51cnswx4SmdDrAESw46DKNEqzoNIsmM=;
+        b=IG3MCEMaYGVby2B8zjqet+iWCglc+onNYEZLANHO/hzd3AfXDZfioPqBFX3WtmSnN9
+         3sK8lclUWmKcj3cmUlRrMZOMO6LjV0qw9ZjomKPxadS/wCsBLnmYP/5PgNPFMxa4au2g
+         KSmsFCrDTXiG5LAH8R/tLOsnUUYpOhIuuSQTI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760499784; x=1761104584;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=kEw3EOfBGKeI7lqiSXyx7HBho1wYVOHXpDoE3Qv8SAY=;
-        b=P98/d/8XjBffDP7BTz0GVzeZklAKr0QyzgvYV3ryOOlk/HQk0ngvtdacQJyVrk1m1n
-         YhVsrf9M9+0376Zbz7Pk1k/NRq7Kn+xQMmupzVdPgCzhmUOnisuNY0v9NFpLiKrbOvHR
-         wM9GO1v7/+pgUMYip5dH2I5I7jtr8AwBv0lFni1hfO2As/LUyGKtWnDpnOs250CAs0E/
-         FOIRZ8WhQ7bGk64Mb0PhbnUr9b9sfFGC1cWVg5E27/cwMZT47vNWVmF2dVRy5vVGc2QE
-         /AIWPnQYrW2IGgA921CK939TI3vgCuIV67YjHX2OMx/g49OB+6B+2wNwE82UYJ83wGkE
-         Cf8A==
-X-Gm-Message-State: AOJu0Yx5S2BlWlUKDpx2cPVb85czDYV2jimhdtESkV41HfjVtWHdazNq
-	COjcnh4NhXLP7TqUw5GIeh9TH3kTEsv3/t4XwyqdZ7XMri9uhid/sglCMJIegw==
-X-Gm-Gg: ASbGncv/R+a+mOw4nvl2b1+vqNOqP3s247CyXqZbrLoCEonHB1n8X7SxH6Fv0Vz0fa0
-	bodLeOa5HBcGj+MKC4Zit7eqmBsii2G05sJoWLBBZFRkuBGd6bad84YaBXoWXKHeNuE+f1q5Bx4
-	MZGlpOOjJZAIHrKl1fWFBO7mgxBuC/miguIRWVa9w3zsMA4f/NFoumlH3tl6GEr+Xb2eIbIVCln
-	HG7YtPT4YdjHg+exHWLNCQ3qozbQr/6UUN0hh8a3x7MoDb8b6Bai1I1sHWR/37OC6XPyFAM9CFJ
-	1s/JAThx9aHS8TmD3ulEandVFToue7gBYAKVy5/cYoHG9VrfQkQM6cP/+vZVJjCYBB2qCNFs/G7
-	UuMEWM/aF1qkkLbGc+KopXVYW2oTOpirCInXqu3qblxYxlywjSqaxb1k=
-X-Google-Smtp-Source: AGHT+IHT3bTXq2HwIr9+T7b/tzA6CrXpzvxl2MJyATWurE9vO8GN+HALsngXMyBTmgVXvfDm3cmj8A==
-X-Received: by 2002:a17:903:1510:b0:27e:ec72:f62 with SMTP id d9443c01a7336-2902728b8a2mr338622845ad.6.1760499783944;
-        Tue, 14 Oct 2025 20:43:03 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b6a096870a3sm888627a12.33.2025.10.14.20.43.02
+        d=1e100.net; s=20230601; t=1760502155; x=1761106955;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=hXczYhdP4RhU51cnswx4SmdDrAESw46DKNEqzoNIsmM=;
+        b=Uuo/hPoBplhITtZLfX/1mkYyGnXzL0JSlvHSBI60BB9C5Uhbi5Zle+MDFnU39Guh5W
+         n/vFM06/8/xATL/oBM+o13CJdLAqo1k9vCBmvlTBgZJWs14hznM0c/6cqbIQNVqNovo+
+         O/wGdHqRNj45anOQ90LQekYG/QJcPlGz8vyJwrIw+//3OXtl3/rZM04BLZJgxLbrlnuQ
+         sf5yL0UhgvkzOMNyOyoDpb0HbrXep91fe/p1d5bvfSHW07yKoguta7q/A2cd3HrtqcIf
+         mqOJYb70J97TXEPP/mVpaDOedxOBnWmkL3/MpgepfsAsgb3fUoNqFvn4VSQlzNXIw92Q
+         Ep5g==
+X-Gm-Message-State: AOJu0Yyc5RuxAagNKy74ACCWePSqrFtR81Np2U6pf9ORoyJ8BjyJJonX
+	Fb1pR/Z8bq5RFgdHimcqxz7NMSGSLAgOEgMa+RSGVsDeJ2yO6B2m+xYuL5seT96fWX1l18LWGsc
+	5nZoq
+X-Gm-Gg: ASbGncvAJLI9ViLyLiLW1qsAELcQrNbWSCleJ2tTgwA1YMa9xmXFvwukovICPqwtFbJ
+	SvaKtyT9rps8+n7nCKAbeMqEnI0XCyDxVE6h74fHopWSCdC1B21F/SCmTCBoYAS1nOC4t7aRUUf
+	G7ALdN/5WerO26YIjH5OiZ0Tb0dVSSTfHKqhrCCpNRKAHx2Xh7gsURFIKgJQJe8P9k7ad1oC/q/
+	znjil7in855b8XJ1/ySz+gvwMlzO3Avvcb1kB32lN2T0BT2ED4kEpAcTK+QN/cBG6czJ4zj000R
+	BKiTFDyoNuP2hOCrWUp4cH3iM/metCn3b+LBeVphv4BJaVXKZAMxAJmyI00lwf8h9MG9HnN0BZo
+	ZVStEBcEC++S+AoBC2ljSLxuLmOmCGs33+e84QxeE2ykCgLUKq8vj06Yc
+X-Google-Smtp-Source: AGHT+IH4fw2Rbj9pi/gThSSTe8oZcc1k+qJI7dKIbpU9O0r6tPUzRkf515c55Zd5tO/mci3Nv5ZAzQ==
+X-Received: by 2002:a05:6a00:1492:b0:772:4319:e7df with SMTP id d2e1a72fcca58-793883da697mr30506505b3a.30.1760502154900;
+        Tue, 14 Oct 2025 21:22:34 -0700 (PDT)
+Received: from localhost.localdomain ([2401:4900:3282:6d6c:6f79:5d45:48d:1d79])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7992b060c4esm17067760b3a.14.2025.10.14.21.22.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Oct 2025 20:43:03 -0700 (PDT)
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+        Tue, 14 Oct 2025 21:22:34 -0700 (PDT)
+From: vanusuri@mvista.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][scarthgap][PATCH 4/4] memcached: patch CVE-2023-46853
-Date: Wed, 15 Oct 2025 16:42:44 +1300
-Message-ID: <20251015034244.1445689-4-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251015034244.1445689-1-ankur.tyagi85@gmail.com>
-References: <20251015034244.1445689-1-ankur.tyagi85@gmail.com>
+Cc: Yi Zhao <yi.zhao@windriver.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/3] redis: upgrade 6.2.14 -> 6.2.16
+Date: Wed, 15 Oct 2025 09:52:20 +0530
+Message-Id: <20251015042222.121285-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 03:43:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120682
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 04:22:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120683
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2023-46853
+From: Yi Zhao <yi.zhao@windriver.com>
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+ChangeLog:
+
+Security fixes
+==============
+* (CVE-2024-31449) Lua library commands may lead to stack overflow and
+  potential RCE.
+* (CVE-2024-31228) Potential Denial-of-service due to unbounded pattern
+  matching.
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit f702405fe9c24f66e8bf38b8801cd7e87ddd2f55)
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- .../memcached/memcached/CVE-2023-46853.patch  | 117 ++++++++++++++++++
- .../memcached/memcached_1.6.17.bb             |   1 +
- 2 files changed, 118 insertions(+)
- create mode 100644 meta-networking/recipes-support/memcached/memcached/CVE-2023-46853.patch
+ ...1-hiredis-use-default-CC-if-it-is-set.patch} | 14 +++++++-------
+ ...file-to-use-environment-build-setting.patch} | 10 +++++-----
+ ...0003-hack-to-force-use-of-libc-malloc.patch} |  9 ++++-----
+ ...h => 0004-src-Do-not-reset-FINAL_LIBS.patch} |  8 ++++----
+ ...URCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch} |  6 ++----
+ .../0006-Define-correct-gregs-for-RISCV32.patch | 12 +++++-------
+ .../redis/redis/init-redis-server               |  0
+ .../redis/{redis_6.2.14.bb => redis_6.2.16.bb}  | 17 +++++++++--------
+ 8 files changed, 36 insertions(+), 40 deletions(-)
+ rename meta-oe/recipes-extended/redis/redis/{hiredis-use-default-CC-if-it-is-set.patch => 0001-hiredis-use-default-CC-if-it-is-set.patch} (85%)
+ rename meta-oe/recipes-extended/redis/redis/{lua-update-Makefile-to-use-environment-build-setting.patch => 0002-lua-update-Makefile-to-use-environment-build-setting.patch} (93%)
+ rename meta-oe/recipes-extended/redis/redis/{oe-use-libc-malloc.patch => 0003-hack-to-force-use-of-libc-malloc.patch} (92%)
+ rename meta-oe/recipes-extended/redis/redis/{0001-src-Do-not-reset-FINAL_LIBS.patch => 0004-src-Do-not-reset-FINAL_LIBS.patch} (86%)
+ rename meta-oe/recipes-extended/redis/redis/{GNU_SOURCE.patch => 0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch} (91%)
+ mode change 100755 => 100644 meta-oe/recipes-extended/redis/redis/init-redis-server
+ rename meta-oe/recipes-extended/redis/{redis_6.2.14.bb => redis_6.2.16.bb} (79%)
 
-diff --git a/meta-networking/recipes-support/memcached/memcached/CVE-2023-46853.patch b/meta-networking/recipes-support/memcached/memcached/CVE-2023-46853.patch
-new file mode 100644
-index 0000000000..cf8aaf467b
---- /dev/null
-+++ b/meta-networking/recipes-support/memcached/memcached/CVE-2023-46853.patch
-@@ -0,0 +1,117 @@
-+From 51c1f144d57379bd77f5b04c462171d26ebc5514 Mon Sep 17 00:00:00 2001
-+From: dormando <dormando@rydia.net>
-+Date: Wed, 2 Aug 2023 15:45:56 -0700
-+Subject: [PATCH] CVE-2023-46853
-+
-+proxy: fix off-by-one if \r is missing
-+
-+A bunch of the parser assumed we only had \r\n, but I didn't actually
-+have that strictness set. Some commands worked and some broke in subtle
-+ways when just "\n" was being submitted.
-+
-+I'm not 100% confident in this change yet so I'm opening a PR to stage
-+it while I run some more thorough tests.
-+
-+CVE: CVE-2023-46853
-+Upstream-Status: Backport [https://github.com/memcached/memcached/commit/6987918e9a3094ec4fc8976f01f769f624d790fa]
-+(cherry picked from commit 6987918e9a3094ec4fc8976f01f769f624d790fa)
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ proxy.h         |  1 +
-+ proxy_request.c | 22 ++++++++++++++++------
-+ t/proxy.t       |  5 +++--
-+ 3 files changed, 20 insertions(+), 8 deletions(-)
-+
-+diff --git a/proxy.h b/proxy.h
-+index 015c093..29e5175 100644
-+--- a/proxy.h
-++++ b/proxy.h
-+@@ -271,6 +271,7 @@ struct mcp_parser_s {
-+     uint8_t keytoken; // because GAT. sigh. also cmds without a key.
-+     uint32_t parsed; // how far into the request we parsed already
-+     uint32_t reqlen; // full length of request buffer.
-++    uint32_t endlen; // index to the start of \r\n or \n
-+     int vlen;
-+     uint32_t klen; // length of key.
-+     uint16_t tokens[PARSER_MAX_TOKENS]; // offsets for start of each token
-+diff --git a/proxy_request.c b/proxy_request.c
-+index 457e9a1..6351d02 100644
-+--- a/proxy_request.c
-++++ b/proxy_request.c
-+@@ -9,7 +9,7 @@
-+ // where we later scan or directly feed data into API's.
-+ static int _process_tokenize(mcp_parser_t *pr, const size_t max) {
-+     const char *s = pr->request;
-+-    int len = pr->reqlen - 2;
-++    int len = pr->endlen;
-+ 
-+     // since multigets can be huge, we can't purely judge reqlen against this
-+     // limit, but we also can't index past it since the tokens are shorts.
-+@@ -93,7 +93,7 @@ static int _process_request_key(mcp_parser_t *pr) {
-+ // Returns the offset for the next key.
-+ size_t _process_request_next_key(mcp_parser_t *pr) {
-+     const char *cur = pr->request + pr->parsed;
-+-    int remain = pr->reqlen - pr->parsed - 2;
-++    int remain = pr->endlen - pr->parsed;
-+ 
-+     // chew off any leading whitespace.
-+     while (remain) {
-+@@ -126,7 +126,7 @@ static int _process_request_metaflags(mcp_parser_t *pr, int token) {
-+         return 0;
-+     }
-+     const char *cur = pr->request + pr->tokens[token];
-+-    const char *end = pr->request + pr->reqlen - 2;
-++    const char *end = pr->request + pr->endlen;
-+ 
-+     // We blindly convert flags into bits, since the range of possible
-+     // flags is deliberately < 64.
-+@@ -290,15 +290,25 @@ int process_request(mcp_parser_t *pr, const char *command, size_t cmdlen) {
-+         return -1;
-+     }
-+ 
-+-    const char *s = memchr(command, ' ', cmdlen-2);
-++    // Commands can end with bare '\n's. Depressingly I intended to be strict
-++    // with a \r\n requirement but never did this and need backcompat.
-++    // In this case we _know_ \n is at cmdlen because we can't enter this
-++    // function otherwise.
-++    if (cm[cmdlen-2] == '\r') {
-++        pr->endlen = cmdlen - 2;
-++    } else {
-++        pr->endlen = cmdlen - 1;
-++    }
-++
-++    const char *s = memchr(command, ' ', pr->endlen);
-+     if (s != NULL) {
-+         cl = s - command;
-+     } else {
-+-        cl = cmdlen - 2;
-++        cl = pr->endlen;
-+     }
-+     pr->keytoken = 0;
-+     pr->has_space = false;
-+-    pr->parsed = cl + 1;
-++    pr->parsed = cl;
-+     pr->request = command;
-+     pr->reqlen = cmdlen;
-+     int token_max = PARSER_MAX_TOKENS;
-+diff --git a/t/proxy.t b/t/proxy.t
-+index 37caa27..af6213a 100644
-+--- a/t/proxy.t
-++++ b/t/proxy.t
-+@@ -151,13 +151,14 @@ my $p_sock = $p_srv->sock;
-+ # NOTE: memcached always allowed [\r]\n for single command lines, but payloads
-+ # (set/etc) require exactly \r\n as termination.
-+ # doc/protocol.txt has always specified \r\n for command/response.
-+-# Proxy is more strict than normal server in this case.
-++# Note a bug lead me to believe that the proxy was more strict, we accept any
-++# \n or \r\n terminated commands.
-+ {
-+     my $s = $srv[0]->sock;
-+     print $s "version\n";
-+     like(<$s>, qr/VERSION/, "direct server version cmd with just newline");
-+     print $p_sock "version\n";
-+-    like(<$p_sock>, qr/SERVER_ERROR/, "proxy version cmd with just newline");
-++    like(<$p_sock>, qr/VERSION/, "proxy version cmd with just newline");
-+     print $p_sock "version\r\n";
-+     like(<$p_sock>, qr/VERSION/, "proxy version cmd with full CRLF");
-+ }
-diff --git a/meta-networking/recipes-support/memcached/memcached_1.6.17.bb b/meta-networking/recipes-support/memcached/memcached_1.6.17.bb
-index b4c1847bf6..bfa1450368 100644
---- a/meta-networking/recipes-support/memcached/memcached_1.6.17.bb
-+++ b/meta-networking/recipes-support/memcached/memcached_1.6.17.bb
-@@ -23,6 +23,7 @@ SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
-            file://memcached-add-hugetlbfs-check.patch \
-            file://0001-Fix-function-protypes.patch \
-            file://CVE-2023-46852.patch \
-+           file://CVE-2023-46853.patch \
-            "
- SRC_URI[sha256sum] = "2055e373613d8fc21529aff9f0adce3e23b9ce01ba0478d30e7941d9f2bd1224"
+diff --git a/meta-oe/recipes-extended/redis/redis/hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
+similarity index 85%
+rename from meta-oe/recipes-extended/redis/redis/hiredis-use-default-CC-if-it-is-set.patch
+rename to meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
+index d2a1b45e66..51a6e9c957 100644
+--- a/meta-oe/recipes-extended/redis/redis/hiredis-use-default-CC-if-it-is-set.patch
++++ b/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
+@@ -1,11 +1,16 @@
+-From dc745a33f3875cc72d41bd34ed490b352e546352 Mon Sep 17 00:00:00 2001
++From 67990f216f2fbbc8a6699c700dfc089aa617905f Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Fri, 8 Feb 2013 17:39:52 -0600
+ Subject: [PATCH] hiredis: use default CC if it is set
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
  
+ Instead of trying to automagically figure out CC, which breaks with OE
+ as CC has spaces in it, just skip it if one was already passed in.
+ 
++Upstream-Status: Pending
++
+ Signed-off-by: Venture Research <tech@ventureresearch.com>
+ 
+ Update to work with 4.0.8
+@@ -14,13 +19,11 @@ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+ Reworked for 6.0.4
+ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+ ---
+-Upstream-Status: Pending
+-
+  deps/hiredis/Makefile | 2 --
+  1 file changed, 2 deletions(-)
+ 
+ diff --git a/deps/hiredis/Makefile b/deps/hiredis/Makefile
+-index 25ac154..569f82b 100644
++index 7e41c97..54717e3 100644
+ --- a/deps/hiredis/Makefile
+ +++ b/deps/hiredis/Makefile
+ @@ -42,8 +42,6 @@ endef
+@@ -32,6 +35,3 @@ index 25ac154..569f82b 100644
+  OPTIMIZATION?=-O3
+  WARNINGS=-Wall -W -Wstrict-prototypes -Wwrite-strings -Wno-missing-field-initializers
+  DEBUG_FLAGS?= -g -ggdb
+--- 
+-2.21.3
+-
+diff --git a/meta-oe/recipes-extended/redis/redis/lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+similarity index 93%
+rename from meta-oe/recipes-extended/redis/redis/lua-update-Makefile-to-use-environment-build-setting.patch
+rename to meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+index aade7afd06..17b533669b 100644
+--- a/meta-oe/recipes-extended/redis/redis/lua-update-Makefile-to-use-environment-build-setting.patch
++++ b/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+@@ -1,4 +1,4 @@
+-From 097a2b259cb266c2c861dc74fa6f80712d6138c5 Mon Sep 17 00:00:00 2001
++From ef989aab052510bfda32b2b325a5f80b76c42677 Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Fri, 8 Feb 2013 20:22:19 -0600
+ Subject: [PATCH] lua: update Makefile to use environment build settings
+@@ -6,6 +6,8 @@ Subject: [PATCH] lua: update Makefile to use environment build settings
+ OE-specific parameters, instead of overriding all of these simply use
+ the ones that are already passed in. Also configure for only Linux...
+ 
++Upstream-Status: Pending
++
+ Signed-off-by: Venture Research <tech@ventureresearch.com>
+ 
+ Updated to work with 3.0.x
+@@ -15,18 +17,16 @@ Signed-off-by: Armin Kuster <akust808@gmail.com>
+ updated to work wtih 6.2.1
+ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+ ---
+-Upstream-Status: Pending
+-
+  deps/Makefile         |  1 -
+  deps/lua/Makefile     |  1 -
+  deps/lua/src/Makefile | 16 ++++++----------
+  3 files changed, 6 insertions(+), 12 deletions(-)
+ 
+ diff --git a/deps/Makefile b/deps/Makefile
+-index ff16ee9..d8d64aa 100644
++index cbe3aef..76bc222 100644
+ --- a/deps/Makefile
+ +++ b/deps/Makefile
+-@@ -74,7 +74,6 @@ LUA_LDFLAGS+= $(LDFLAGS)
++@@ -81,7 +81,6 @@ endif
+  # lua's Makefile defines AR="ar rcu", which is unusual, and makes it more
+  # challenging to cross-compile lua (and redis).  These defines make it easier
+  # to fit redis into cross-compilation environments, which typically set AR.
+diff --git a/meta-oe/recipes-extended/redis/redis/oe-use-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
+similarity index 92%
+rename from meta-oe/recipes-extended/redis/redis/oe-use-libc-malloc.patch
+rename to meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
+index e76bdbc263..f1021eef6c 100644
+--- a/meta-oe/recipes-extended/redis/redis/oe-use-libc-malloc.patch
++++ b/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
+@@ -1,4 +1,4 @@
+-From 1fa047162983d4a7e0576f0837a73a6027a783bd Mon Sep 17 00:00:00 2001
++From b9586abcb803747301f6cc4ff93c7642bef693ea Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Wed, 6 Feb 2013 20:51:02 -0600
+ Subject: [PATCH] hack to force use of libc malloc
+@@ -9,19 +9,18 @@ removed in favor of magic.
+ Note that this of course doesn't allow tcmalloc and jemalloc, however
+ jemalloc wasn't building correctly.
+ 
++Upstream-Status: Pending
++
+ Signed-off-by: Venture Research <tech@ventureresearch.com>
+ 
+ Update to work with 4.0.8
+ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+-
+ ---
+-Upstream-Status: Pending
+-
+  src/Makefile | 3 ++-
+  1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+ diff --git a/src/Makefile b/src/Makefile
+-index ecd6929..c7f43c5 100644
++index 7d75c83..35dd314 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+ @@ -13,7 +13,8 @@
+diff --git a/meta-oe/recipes-extended/redis/redis/0001-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
+similarity index 86%
+rename from meta-oe/recipes-extended/redis/redis/0001-src-Do-not-reset-FINAL_LIBS.patch
+rename to meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
+index 66ab0ee33c..958106e261 100644
+--- a/meta-oe/recipes-extended/redis/redis/0001-src-Do-not-reset-FINAL_LIBS.patch
++++ b/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
+@@ -1,4 +1,4 @@
+-From 97584e1eb78dc18599534b47b6670c20c63f5ee2 Mon Sep 17 00:00:00 2001
++From a4d87aca1c00c53b386ee7490223971e00873add Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Tue, 10 Sep 2019 20:04:26 -0700
+ Subject: [PATCH] src: Do not reset FINAL_LIBS
+@@ -9,17 +9,17 @@ environment to get it going
+ e.g. -latomic is needed on clang/x86 to provide for 64bit atomics
+ 
+ Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  src/Makefile | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/src/Makefile b/src/Makefile
+-index 5564351..83ccd76 100644
++index 35dd314..3770f96 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+-@@ -91,7 +91,7 @@ endif
++@@ -93,7 +93,7 @@ endif
+  
+  FINAL_CFLAGS=$(STD) $(WARN) $(OPT) $(DEBUG) $(CFLAGS) $(REDIS_CFLAGS)
+  FINAL_LDFLAGS=$(LDFLAGS) $(REDIS_LDFLAGS) $(DEBUG)
+diff --git a/meta-oe/recipes-extended/redis/redis/GNU_SOURCE.patch b/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+similarity index 91%
+rename from meta-oe/recipes-extended/redis/redis/GNU_SOURCE.patch
+rename to meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+index 20f689bd0b..d73c66c9d0 100644
+--- a/meta-oe/recipes-extended/redis/redis/GNU_SOURCE.patch
++++ b/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+@@ -1,4 +1,4 @@
+-From 98d526f76049be21bf3d77158236b2189419a78e Mon Sep 17 00:00:00 2001
++From 2e6311c9c7cd85bf63eab8fe92c08ec1ec01b6fc Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sat, 21 Dec 2019 12:09:51 -0800
+ Subject: [PATCH] Define _GNU_SOURCE to get PTHREAD_MUTEX_INITIALIZER
+@@ -9,6 +9,7 @@ Fixes
+ |       |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ Upstream-Status: Pending
++
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  src/zmalloc.c | 1 +
+@@ -26,6 +27,3 @@ index 1f33d09..5e182d1 100644
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <stdint.h>
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
+index 9d7e502717..bb3f5c607e 100644
+--- a/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
++++ b/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
+@@ -1,9 +1,10 @@
+-From 26bd72f3b8de22e5036d86e6c79f815853b83473 Mon Sep 17 00:00:00 2001
++From 6149911f7a6fbaef3ed418408e2b501fa9479ffa Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Mon, 26 Oct 2020 21:32:22 -0700
+ Subject: [PATCH] Define correct gregs for RISCV32
+ 
+ Upstream-Status: Pending
++
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ 
+ Updated patch for 6.2.1
+@@ -13,10 +14,10 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+  1 file changed, 24 insertions(+), 2 deletions(-)
+ 
+ diff --git a/src/debug.c b/src/debug.c
+-index 5318c14..8c21b47 100644
++index bb76c5d..55a0696 100644
+ --- a/src/debug.c
+ +++ b/src/debug.c
+-@@ -1055,7 +1055,9 @@ static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) {
++@@ -1067,7 +1067,9 @@ static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) {
+      #endif
+  #elif defined(__linux__)
+      /* Linux */
+@@ -27,7 +28,7 @@ index 5318c14..8c21b47 100644
+      GET_SET_RETURN(uc->uc_mcontext.gregs[14], eip);
+      #elif defined(__X86_64__) || defined(__x86_64__)
+      GET_SET_RETURN(uc->uc_mcontext.gregs[16], eip);
+-@@ -1222,8 +1224,28 @@ void logRegisters(ucontext_t *uc) {
++@@ -1234,8 +1236,28 @@ void logRegisters(ucontext_t *uc) {
+      #endif
+  /* Linux */
+  #elif defined(__linux__)
+@@ -57,6 +58,3 @@ index 5318c14..8c21b47 100644
+      serverLog(LL_WARNING,
+      "\n"
+      "EAX:%08lx EBX:%08lx ECX:%08lx EDX:%08lx\n"
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-extended/redis/redis/init-redis-server b/meta-oe/recipes-extended/redis/redis/init-redis-server
+old mode 100755
+new mode 100644
+diff --git a/meta-oe/recipes-extended/redis/redis_6.2.14.bb b/meta-oe/recipes-extended/redis/redis_6.2.16.bb
+similarity index 79%
+rename from meta-oe/recipes-extended/redis/redis_6.2.14.bb
+rename to meta-oe/recipes-extended/redis/redis_6.2.16.bb
+index fa430ce402..b5d53a2370 100644
+--- a/meta-oe/recipes-extended/redis/redis_6.2.14.bb
++++ b/meta-oe/recipes-extended/redis/redis_6.2.16.bb
+@@ -10,19 +10,20 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://redis.conf \
+            file://init-redis-server \
+            file://redis.service \
+-           file://hiredis-use-default-CC-if-it-is-set.patch \
+-           file://lua-update-Makefile-to-use-environment-build-setting.patch \
+-           file://oe-use-libc-malloc.patch \
+-           file://0001-src-Do-not-reset-FINAL_LIBS.patch \
+-           file://GNU_SOURCE.patch \
++           file://0001-hiredis-use-default-CC-if-it-is-set.patch \
++           file://0002-lua-update-Makefile-to-use-environment-build-setting.patch \
++           file://0003-hack-to-force-use-of-libc-malloc.patch \
++           file://0004-src-Do-not-reset-FINAL_LIBS.patch \
++           file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+-           "
+-SRC_URI[sha256sum] = "34e74856cbd66fdb3a684fb349d93961d8c7aa668b06f81fd93ff267d09bc277"
++          "
++
++SRC_URI[sha256sum] = "846bff83c26d827d49f8cc8114ea9d1e72eea1169f7de36b8135ea2cec104e7d"
+ 
+ inherit autotools-brokensep update-rc.d systemd useradd
+ 
+ FINAL_LIBS:x86:toolchain-clang = "-latomic"
+-FINAL_LIBS:riscv32:toolchain-clang = "-latomic"
++FINAL_LIBS:riscv32 = "-latomic"
+ FINAL_LIBS:mips = "-latomic"
+ FINAL_LIBS:arm = "-latomic"
+ FINAL_LIBS:powerpc = "-latomic"
+-- 
+2.25.1
+
 
