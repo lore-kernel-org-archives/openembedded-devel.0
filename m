@@ -1,526 +1,387 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A453BCCD193
-	for <webhook@archiver.kernel.org>; Wed, 15 Oct 2025 09:08:21 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web10.11298.1760519294966880550
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7947CCD18E
+	for <webhook@archiver.kernel.org>; Wed, 15 Oct 2025 09:23:21 +0000 (UTC)
+Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+ by mx.groups.io with SMTP id smtpd.web11.11546.1760520194065374180
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Oct 2025 02:08:15 -0700
+ Wed, 15 Oct 2025 02:23:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fSPfrCxM;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-3f2cf786abeso5405579f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 02:08:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kJkdvwex;
+ spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-30cce5be7d0so1581494fac.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 02:23:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760519293; x=1761124093; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZfplDgCPE39MM2k19q8uZqR1dZPN198Y6g91vT1zU1I=;
-        b=fSPfrCxMTXtm3gInJ068ALcLX4wTq2Z2OKLpfvXBa3K5m1hwQKph+Pk6SfRZFkMHsV
-         6fyHe+6OEOSHc3WzlE6e9LyYoJmrhCjx6jlvwZFlSt/tzlEOm4HypXfdBw7lJcqe3MVz
-         LBwLKWVgDOhlHj4+kV/asZJWbAxBnglrn8WOKggVMiYyd+L908DhZ3DvgbNtzr4Dx+kj
-         j0t1YnkD2xIN3R91Jnnc4aq4g4KyX8Jy/LK0eD3HdUtfruu38CqVgzR+oEawuv1o+/Aj
-         yU71SQYSZq0c58cTXDky0oRlbzkuyPzDFy2ChxwUlydUgSaPFP9SbWMt7KJwVoyC7JpW
-         FzYQ==
+        d=gmail.com; s=20230601; t=1760520193; x=1761124993; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KJBcH1jQv9hgB753etpuCjpusIlOpmHrQdI1bDXuqrQ=;
+        b=kJkdvwexvP3vmOjFCKl8B8fKYwmeqmk597ST7O7eCs4Iywez0bMEzHxkDBnoJHHl5W
+         YcMImvm9CN4itSY+Qx1ZsTiwQm8kpEIz7wBftYe2m1G0PvmqRYyerOmHsBOR20n8/NK0
+         z3daH4+12mzAikTro15l/YfLNDg99up7R3t8OHpZlm9Y++OV9ke86VYZ3xJJqbuqs2Y/
+         WoKumE/t4RDNW59PLXGoeRCgJQ3tOLrPcph2I/4Ci+2pyYcNFGnp5jSH6FeMws2bJD89
+         xeWAGzjKxdzjrxs7yiv2TaUaVOXQ+3HLrQCVfA23LZRFXxLHCAeOjiWWLpGzKddbIIrI
+         ytjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760519293; x=1761124093;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZfplDgCPE39MM2k19q8uZqR1dZPN198Y6g91vT1zU1I=;
-        b=iGadYt2kSYUv6YrgrRN5B3KtAJjAaSqzgk6zwZqaEbgzh6HYnMyId6khxXQjbhd5fc
-         CGk1e7OGBR8lBjDyI1/xw3zv4oTM2ERNlFy/srJbc+wUhnkkN6moTTa8FsdLZRUGtRxw
-         3VIzKR6n7mzS6FmggZ161uxgs/2vCm0rPRw3NKor9VmQhwx601nsvWNA/UxcxE4DbtjI
-         OiNsrC+Sg8DaoSth/DRIYXll9eLNgPuGIuw9iXji05L4z8dp5qCVaRcTDQ+XnuO5dCp4
-         Mvp2DRPT40iRgVBzN/20yliypwb4V+buX9+iFkJiPYu+xrqtfADr/cu5dgptLslwmFro
-         CC3g==
-X-Gm-Message-State: AOJu0Yx/axl8MUOHlh9AJeLPsBLLry+8wHngPaqfDDKsM3Yn8fknPSC7
-	EKi/RsNCy12RepS6eqx9uEJgv/l15YXigiF7qmM/IDNYV5v1al6qdEF1sXamCQ==
-X-Gm-Gg: ASbGnct6FuzGavLSlIakwmdZe5Rs0CbsWchHjo9mQ0O45j7W4ZibPxn7Pqe335r7xiJ
-	U7PkEL/xIHXhyX32B3yf1xKtdBHzqVu8RaHPBCPUXYnYXwQAq6AsXg8iVHxkvKQX1dJpnbrEh8Z
-	aP7gaXs0NVzl07JEavY8c5T4GK4VYjcWQzyB/L+yTgKW1bTD9NUKFeUTTkZlMAETxQ53XdGyLYW
-	HubzCk/dot7QB3WK4oFhH/w6qTlA9OATDCLdlW+TIK0+2KdQVfLzoLy9tk3An4O48YCL6c2Krf0
-	CNWzIgtm+U3jz5z611CHPIFjKosD9oEL76TooRYpIn68yb21wk69rmzF7LY1+stEpYjTl8g/5C1
-	eN6p2zvSnCfxCiRE4TYno5W9wwMZx5Zcs9RJR+PupZ9/JUpvEfA==
-X-Google-Smtp-Source: AGHT+IGF3eG4DFntaB3KLFvI3aslfs16BFxjbntoHElgrLfc+xcqdhj1PajGQQyYyLJOgDnAtBpDnw==
-X-Received: by 2002:a05:6000:200f:b0:425:7cf6:5b9e with SMTP id ffacd0b85a97d-42666ac60f1mr17018374f8f.3.1760519292774;
-        Wed, 15 Oct 2025 02:08:12 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-426ce5825aasm27601101f8f.14.2025.10.15.02.08.12
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Oct 2025 02:08:12 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Walnascar Pull Request Oct 15th
-Date: Wed, 15 Oct 2025 11:08:08 +0200
-Message-ID: <20251015090811.625601-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
+        d=1e100.net; s=20230601; t=1760520193; x=1761124993;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=KJBcH1jQv9hgB753etpuCjpusIlOpmHrQdI1bDXuqrQ=;
+        b=P/AxVH02sTXAeVbJyuzyVMlhNSnXU88e7XKChHf6z5/tQTw42QfAKEc0MBfDunCtDY
+         UJgYFwyGTl74FH/6dwl35SbtF32ciNGVkMrAw57QftGCyj6GDLWc3PUbxqUWW5aNwgCi
+         2U/HgNDu9RVYexzoURfQUP0oqHpBlufjcd6seZCkqJmHqlktSVHjDn52S61rO9BF/+/O
+         7zFB5P9r15zDPEjshb4t7B4iVb+JEpnQlylBqt4B8ltQ2cL8ANaNHPXqKU379vBmOqSQ
+         2dT9BVBhHIMWa62gmAZ3uEGm4zkV91bn/P7BLR9RE1sP+DOjnjiKtYByTOxR/GkaZHyE
+         O4Cw==
+X-Gm-Message-State: AOJu0YxAMGeh4qgdbrSspk1MfA9E/tIzuvQeA2VkcgEH971+MhoMVW0e
+	R3p1q3YDdXfUqzkRqeyFrxu4YfYXV8PWhkr4od2h3yUeWZdcAd1tQbGlzALxGnJR90BHNU/ZJ8v
+	IxdeSY4GiH1I7h4JJDgJ6gNhIHDI38sA=
+X-Gm-Gg: ASbGnctsK3BYA+CAbdf9ACJkkK5eB0xg7Ti32ZDEhSmkgBTud8gDiaU+8lgsBQWc8y6
+	CDGo9Xps4Xx04nYwtombLtnq2lsPJfjUDgfB7LDIeYDYeIvDTd3uXV6cvvvkHwLRsaMrCwP6qFQ
+	lccKh5rX/U+X4ozEKSaMA3hJ4ou/YONHeAhOrlgIHA2e9qKv4/pJ6ofpOxkJKN7Zhjj/VPlWshO
+	WFk+L0mebEs2zr4+iPik9DXQoaH
+X-Google-Smtp-Source: AGHT+IH8n0MoNX7RvcbX2ZuErKnHAYLECN+Zsds/wlFhZPmas98izFxhEEJUG3l8LWRohVymkT0u72enDhbhFd8A6Zg=
+X-Received: by 2002:a05:6870:9625:b0:36a:9d8c:b2f7 with SMTP id
+ 586e51a60fabf-3c0f4ab6c11mr11665390fac.18.1760520193084; Wed, 15 Oct 2025
+ 02:23:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20251015063531.1573191-1-ankur.tyagi85@gmail.com>
+ <20251015063531.1573191-2-ankur.tyagi85@gmail.com> <300c0fb8-5d58-4500-8122-406549f2d5d7@gmail.com>
+In-Reply-To: <300c0fb8-5d58-4500-8122-406549f2d5d7@gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Wed, 15 Oct 2025 22:23:02 +1300
+X-Gm-Features: AS18NWDnbApQVaDi7wq_fqQKDW6xyVpPfK4L6j90c3ZpBYqrhWNvXE-c9KEI8XY
+Message-ID: <CADySD0Fxa2qpEWV++s=tA-sUeHZBbS1rhQdBXYgS5fmbPtoGaA@mail.gmail.com>
+Subject: Re: [oe][meta-oe][scarthgap][PATCH 2/4] libvpx: patch CVE-2024-5197
+To: Gyorgy Sarvari <skandigraun@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 09:08:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120700
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Oct 2025 09:23:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120701
 
-Hello,
+On Wed, Oct 15, 2025 at 9:44=E2=80=AFPM Gyorgy Sarvari <skandigraun@gmail.c=
+om> wrote:
+>
+> It looks that v1.14.1 contains this fix also - can the relevant commit
+> be cherry-picked from master? (Maybe not because it's a big change,
+> haven't checked, this is just a question...)
+>
+Yeah, the patch is big but the CVE fix is actually three commits which
+I cherry-picked from v1.14.1 and squashed in one patch.
+It made the patch big but I thought it was better than keeping three
+separate patches for a single CVE.
+I included all three commit details in the patch description along
+with bug ID to avoid any loss of information.
 
-This is what's intended to be the last pull request for Walnascar branch.
+But open to other ideas if it simplifies the situation.
 
-This is somewhat bigger than usual, it contains a number of CVE-fixes and minor
-version updates (thank you everyone involved).
-
-arm build logs: https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/18458276556/job/52583748632
-aarch64 build logs: https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/18458400620/job/52584106553
-x86 build logs: https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/18458402760/job/52584113425
-x86-64 build logs: https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/18458406025/job/52584122824
-YP compatibility check: https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/18461359873/job/52593373926
-
-Please let me know if you have any questions or concerns.
-
----
-
-The following changes since commit 80ab58cc404959ae2f0e8b2e68935b3bfd8e8cfe:
-
-  readme: update maintainer (2025-09-16 08:37:07 +0200)
-
-are available in the Git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib stable/walnascar-nut
-
-for you to fetch changes up to 07330a98cf93806b7a4e0170a541b94962ff3960:
-
-  libppd: patch CVE-2024-47175 (2025-10-13 09:21:32 +0200)
-
-----------------------------------------------------------------
-Ankur Tyagi (15):
-      lsscsi: fix versioning
-      zlog: fix CVE-2024-22857
-      libiec61850: patch CVE-2024-26529
-      libiec61850: patch CVE-2024-45971
-      libiec61850: patch CVE-2024-45970
-      libcupsfilters: patch CVE-2024-47076
-      libraw: patch CVE-2025-43961 CVE-2025-43962
-      libraw: patch CVE-2025-43963
-      libraw: patch CVE-2025-43964
-      tinyproxy: patch CVE-2023-49606
-      hdf5: patch CVE-2025-2923
-      hdf5: patch CVE-2025-2924
-      hdf5: patch CVE-2025-2925
-      hdf5: patch CVE-2025-6269
-      libppd: patch CVE-2024-47175
-
-Archana Polampalli (1):
-      tcpreplay: upgrade 4.5.1 -> 4.5.2
-
-Bartosz Golaszewski (1):
-      libgpiod: update to v2.2.2
-
-Changqing Li (2):
-      pahole: fix a Segmentation fault error
-      lsscsi: upgrade to version 0.32
-
-Denis OSTERLAND-HEIM (1):
-      libusbgx: fix example gadget start
-
-Divya Chellam (1):
-      cjson: upgrade 1.7.18 -> 1.7.19
-
-Gyorgy Sarvari (43):
-      pm-qa: update git fetch protocol
-      tokyocabinet: switch to working SRC_URI
-      tokyocabinet: fix license
-      readme: update maintainer
-      collectd: set working SRC_URI
-      mosh: set working SRC_URI
-      nmap: set correct license
-      daemonize: update to latest revision
-      apache2: patch CVE-2025-54090
-      civetweb: patch CVE-2025-55763
-      dovecot: patch CVE-2022-30550
-      emacs: patch CVE-2024-30202
-      emacs: patch CVE-2024-30203
-      emacs: patch CVE-2024-30204
-      emacs: patch CVE-2024-30205
-      emacs: patch CVE-2024-39331
-      wireshark: patch CVE-2025-5601
-      redis: ignore CVE-2025-21605
-      redis: patch CVE-2025-27151
-      redis: patch CVE-2025-32023
-      redis: patch CVE-2025-48367
-      python3-django: ignore CVE-2025-27556
-      exiv2: patch CVE-2025-26623
-      exiv2: patch CVE-2025-54080
-      exiv2: patch CVE-2025-55304
-      gimp: ignore CVE-2025-8672
-      gimp: patch CVE-2025-5473
-      imagemagick: patch CVE-2025-53014
-      imagemagick: patch CVE-2025-53015
-      imagemagick: patch CVE-2025-53019
-      imagemagick: patch CVE-2025-53101
-      imagemagick: patch CVE-2025-55004
-      imagemagick: patch CVE-2025-55005
-      imagemagick: patch CVE-2025-55154
-      imagemagick: patch CVE-2025-55160
-      imagemagick: patch CVE-2025-55212
-      imagemagick: patch CVE-2025-57803
-      imagemagick: patch CVE-2025-57807
-      iperf2: ignore irrelevant CVEs
-      jasper: patch CVE-2025-8835
-      jasper: patch CVE-2025-8836
-      jasper: patch CVE-2025-8837
-      libavif: patch CVE-2025-48174
-
-Jason Schonberg (1):
-      Remove the use of http://ftp.gnome.org/pub/gnome
-
-Jeroen Hofstee (1):
-      php: ignore CVE-2024-3566
-
-Jiaying Song (2):
-      webkitgtk3: fix build failure with DEBUG_BUILD enabled
-      webkitgtk3: fix do_configure error on beaglebone-yocto
-
-Khem Raj (2):
-      tomlplusplus: Fix test failures with clang/libcxx
-      safec: Pass Qunused-arguments when using clang
-
-Kéléfa Sané (1):
-      crash: fix reproducibility
-
-Leon Anavi (1):
-      ssd1306: Update to newer version
-
-Libo Chen (1):
-      python3-gpt-image: Add native and nativesdk targets to the build
-
-Liu Yiding (2):
-      freeradius: Fix service start error
-      freeradius: Fix the multilib config
-
-Louis Rannou (1):
-      mosquitto: bump to 2.0.21
-
-Markus Volk (1):
-      malcontent: update 0.13.0 -> 0.13.1
-
-Mikko Rapeli (1):
-      fwupd-efi: update from 1.6 to 1.7
-
-Nitin Wankhade (1):
-      iperf3: Fix CVE-2025-54350
-
-Nylon Chen (1):
-      kernel-selftest: handle missing -64.h headers
-
-Patrick Zacharias (1):
-      libcanberra: Fix sound not playing on Colibri iMX8X
-
-Peter Kjellerstedt (3):
-      hostapd: Backport a patch to build SAE-PK correctly
-      glog: Support building for native
-      opencv: Support building for native
-
-Praveen Kumar (2):
-      fix: CVE-2025-53644
-      polkit: fix CVE-2025-7519
-
-Rajeshkumar Ramasamy (1):
-      open-vm-tools: upgrade 12.5.0 -> 12.5.4
-
-Sana Kazi (1):
-      imagemagick: guard sed operations in do_install for optional files
-
-Saravanan (1):
-      udisks2: upgrade 2.10.1 -> 2.10.2
-
-Sunil Dora (1):
-      layer.conf: add bpftrace to NON_MULTILIB_RECIPES
-
-Wang Mingyu (16):
-      bolt: upgrade 0.9.6 -> 0.9.10
-      gensio: upgrade 2.8.7 -> 2.8.15
-      libimobiledevice-glue: upgrade 1.3.1 -> 1.3.2
-      ser2net: upgrade 4.6.4 -> 4.6.5
-      mm-common: upgrade 1.0.6 -> 1.0.7
-      valijson: upgrade 1.0.4 -> 1.0.5
-      valijson: upgrade 1.0.5 -> 1.0.6
-      tk: upgrade 9.0.1 -> 9.0.2
-      sexpect: upgrade 2.3.14 -> 2.3.15
-      iptraf-ng: upgrade 1.2.1 -> 1.2.2
-      libssh: upgrade 0.11.2 -> 0.11.3
-      parallel: upgrade 20250322 -> 20250422
-      parallel: upgrade 20250422 -> 20250522
-      parallel: upgrade 20250522 -> 20250622
-      parallel: upgrade 20250622 -> 20250722
-      parallel: upgrade 20250722 -> 20250822
-
-Yi Zhao (2):
-      tk8: upgrade 8.6.15 -> 8.6.17
-      nmap: set UPSTREAM_CHECK_REGEX
-
-Yoann Congal (2):
-      gutenprint: fix a build race-condition
-      boinc-client: fix hostname reproducibility
-
-Yogita Urade (1):
-      indent: fix CVE-2023-40305
-
-Zoltán Böszörményi (1):
-      gutenprint: 5.3.5
-
-hongxu (1):
-      indent: fix CVE-2024-0911
-
-jacobpanov (1):
-      kernel-selftest: Fix PTP selftest compilation for kernel 6.7+
-
- README.md                                          |    2 +
- meta-filesystems/README.md                         |    2 +
- meta-gnome/README.md                               |    2 +
- .../0001-plug-ins-ZDI-CAN-26752-mitigation.patch   |   38 +
- meta-gnome/recipes-gimp/gimp/gimp_3.0.2.bb         |    3 +-
- meta-initramfs/README.md                           |    2 +
- meta-multimedia/README.md                          |    2 +
- ...01-Add-integer-overflow-check-to-makeRoom.patch |   27 +
- .../recipes-multimedia/libavif/libavif_1.0.1.bb    |    4 +-
- meta-networking/README.md                          |    1 +
- ...erflow-in-directory-URI-slash-redirection.patch |   57 +
- .../recipes-connectivity/civetweb/civetweb_1.16.bb |    1 +
- .../files/0018-Fix-Service-start-error.patch       |   33 +
- .../freeradius/freeradius_3.2.7.bb                 |    5 +-
- ...don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch |    7 +-
- ...se-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch} |    4 +-
- ...0-fixed-null-pointer-dereference-in-mmsSe.patch |   33 +
- ...7-replaced-unsafe-function-StringUtils_cr.patch |  218 +
- ...9-fixed-potential-buffer-overflows-in-MMS.patch |   73 +
- .../libiec61850/libiec61850_1.5.3.bb               |    5 +-
- .../mosquitto/files/2895.patch                     |    2 +-
- .../mosquitto/files/3238.patch                     |   25 +
- .../{mosquitto_2.0.20.bb => mosquitto_2.0.21.bb}   |    3 +-
- ...ndling-passdbs-with-identical-driver-args.patch |  136 +
- .../recipes-support/dovecot/dovecot_2.3.21.1.bb    |    1 +
- .../open-vm-tools/CVE-2025-22247.patch             |  378 --
- ...-vm-tools_12.5.0.bb => open-vm-tools_12.5.4.bb} |    3 +-
- .../{tcpreplay_4.5.1.bb => tcpreplay_4.5.2.bb}     |    2 +-
- .../tinyproxy/tinyproxy/0001-CVE-2023-49606.patch  |   59 +
- .../recipes-support/tinyproxy/tinyproxy_1.11.1.bb  |    1 +
- ...ot-allow-fence-to-go-beyond-column-size-w.patch |   61 +
- .../recipes-support/wireshark/wireshark_4.2.11.bb  |    1 +
- meta-oe/conf/include/non-repro-meta-oe.inc         |    3 -
- meta-oe/conf/layer.conf                            |    2 +-
- meta-oe/licenses/NPSL                              |  583 +++
- meta-oe/recipes-benchmark/iperf2/iperf2_2.2.1.bb   |    3 +
- .../iperf3/iperf3/CVE-2025-54350.patch             |   24 +
- meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb    |    3 +-
- .../bolt/{bolt_0.9.6.bb => bolt_0.9.10.bb}         |    2 +-
- ...erate_binary.py-Use-env-to-detect-python3.patch |   23 -
- .../fwupd/{fwupd-efi_1.6.bb => fwupd-efi_1.7.bb}   |    5 +-
- .../lsscsi/{lsscsi_030.bb => lsscsi_0.32.bb}       |    8 +-
- .../gensio/{gensio_2.8.7.bb => gensio_2.8.15.bb}   |    4 +-
- ...e-base64-for-hostapd-CONFIG_SAE_PK-builds.patch |   40 +
- .../recipes-connectivity/hostapd/hostapd_2.11.bb   |    1 +
- ...lue_1.3.1.bb => libimobiledevice-glue_1.3.2.bb} |    2 +-
- meta-oe/recipes-connectivity/mosh/mosh_1.4.0.bb    |    5 +-
- .../ser2net/{ser2net_4.6.4.bb => ser2net_4.6.5.bb} |    2 +-
- .../libsigc++-2.0/libsigc++-2.0_2.12.1.bb          |    2 +-
- .../libsigc++-2.0/libsigc++-3_3.6.0.bb             |    2 +-
- .../{mm-common_1.0.6.bb => mm-common_1.0.7.bb}     |    4 +-
- .../proxy-libintl/proxy-libintl_20100902.bb        |    4 +-
- meta-oe/recipes-core/safec/safec_3.7.1.bb          |    3 +
- .../cjson/{cjson_1.7.18.bb => cjson_1.7.19.bb}     |    2 +-
- meta-oe/recipes-devtools/glade/glade_3.36.0.bb     |    2 +-
- .../{iptraf-ng_1.2.1.bb => iptraf-ng_1.2.2.bb}     |    4 +-
- ...ncoder-Fix-elf_functions-cleanup-on-error.patch |   54 +
- meta-oe/recipes-devtools/pahole/pahole_1.29.bb     |    3 +-
- meta-oe/recipes-devtools/php/php_8.4.10.bb         |    1 +
- .../{sexpect_2.3.14.bb => sexpect_2.3.15.bb}       |    4 +-
- meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb    |    2 +-
- .../tcltk/{tk8_8.6.15.bb => tk8_8.6.17.bb}         |    2 +-
- .../tcltk/{tk_9.0.1.bb => tk_9.0.2.bb}             |    2 +-
- .../tomlplusplus/tomlplusplus_git.bb               |    4 +
- .../{valijson_1.0.4.bb => valijson_1.0.6.bb}       |    4 +-
- .../recipes-extended/boinc/boinc-client_7.20.5.bb  |    5 +-
- .../recipes-extended/collectd/collectd_5.12.0.bb   |    4 +-
- ...-a-heap-buffer-underread-in-set_buf_break.patch |  123 +
- .../indent/indent/CVE-2023-40305_0001.patch        | 4196 +++++++++++++++++++
- .../indent/indent/CVE-2023-40305_0002.patch        | 4254 ++++++++++++++++++++
- meta-oe/recipes-extended/indent/indent_2.2.12.bb   |    3 +
- .../{parallel_20250322.bb => parallel_20250822.bb} |    2 +-
- .../polkit/files/CVE-2025-7519.patch               |   34 +
- meta-oe/recipes-extended/polkit/polkit_126.bb      |    5 +-
- ...h-of-AOF-file-name-in-redis-check-aof-CVE.patch |   34 +
- ...bounds-write-in-hyperloglog-commands-CVE-.patch |  215 +
- ...t-even-if-accepted-connection-reports-an-.patch |  117 +
- .../redis/redis/0001-CVE-2025-27151.patch          |   31 +
- ...bounds-write-in-hyperloglog-commands-CVE-.patch |  215 +
- ...t-even-if-accepted-connection-reports-an-.patch |  107 +
- meta-oe/recipes-extended/redis/redis_6.2.18.bb     |    5 +
- meta-oe/recipes-extended/redis/redis_7.2.8.bb      |    4 +
- ...01-CVE-2024-22857-buffer-overflow-patched.patch |   31 +
- meta-oe/recipes-extended/zlog/zlog_1.2.16.bb       |    4 +-
- .../gnome-themes/gnome-themes-extra_3.28.bb        |    2 +-
- meta-oe/recipes-gnome/gtk+/gtk+_2.24.33.bb         |    2 +-
- meta-oe/recipes-gnome/malcontent/malcontent.inc    |    6 +-
- .../jasper/jasper/0001-Fixes-400.patch             |  173 +
- .../jasper/jasper/0001-Fixes-401.patch             |   80 +
- .../jasper/jasper/0001-Fixes-402-403.patch         |   63 +
- meta-oe/recipes-graphics/jasper/jasper_4.2.4.bb    |    6 +-
- meta-oe/recipes-kernel/crash/crash.inc             |    1 +
- ...01-Use-CC-env-var-to-get-compiler-version.patch |   48 +
- .../kernel-selftest/kernel-selftest.bb             |   17 +-
- .../cups/libcupsfilters/0001-CVE-2024-47076.patch  |   38 +
- .../recipes-printing/cups/libcupsfilters_2.0.0.bb  |    1 +
- .../cups/libppd/0001-CVE-2024-47175.patch          |  600 +++
- meta-oe/recipes-printing/cups/libppd_2.0.0.bb      |    5 +-
- ...build-race-condition-around-empty-directo.patch |   60 +
- .../{gutenprint_5.3.4.bb => gutenprint_5.3.5.bb}   |    6 +-
- meta-oe/recipes-security/nmap/nmap_7.95.bb         |    5 +-
- ...c-too-many-arguments-to-function-write-er.patch |   46 -
- meta-oe/recipes-support/daemonize/daemonize_git.bb |    3 +-
- meta-oe/recipes-support/emacs/emacs_29.1.bb        |    5 +
- ...m-view.el-mm-display-inline-fontify-Mark-.patch |   27 +
- ...contents-Consider-all-remote-files-unsafe.patch |   38 +
- ...review-Add-protection-when-untrusted-cont.patch |   60 +
- ...pand-abbrev-Do-not-evaluate-arbitrary-uns.patch |   71 +
- ...cro-set-templates-Prevent-code-evaluation.patch |   47 +
- ...hod-appendIccProfile-to-fix-quadratic-per.patch |   96 +
- .../exiv2/exiv2/0001-CVE-2025-54080-fix.patch      |   77 +
- .../exiv2/0001-Revert-fix-copy-constructors.patch  |   82 +
- meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb      |    6 +-
- meta-oe/recipes-support/glog/glog_0.7.1.bb         |    2 +
- .../hdf5/files/0001-CVE-2025-2923.patch            |   67 +
- .../hdf5/files/0002-CVE-2025-2924.patch            |   39 +
- .../hdf5/files/0003-CVE-2025-2925.patch            |   53 +
- .../files/0004-CVE-2025-6269-OSV-2023-77.patch     |  294 ++
- meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb      |    4 +
- ...-checks-to-make-sure-we-don-t-get-stuck-i.patch |   48 +
- .../imagemagick/0001-CVE-2025-55004.patch          |   64 +
- .../imagemagick/0001-CVE-2025-55005.patch          |   36 +
- .../imagemagick/0001-CVE-2025-55154.patch          |   80 +
- .../imagemagick/0001-CVE-2025-55160.patch          |  161 +
- .../imagemagick/0001-CVE-2025-55212.patch          |   56 +
- .../imagemagick/0001-CVE-2025-57803.patch          |   61 +
- .../imagemagick/0001-CVE-2025-57807.patch          |   46 +
- ...rrect-out-of-bounds-read-of-a-single-byte.patch |   25 +
- ...y-leak-when-entering-StreamImage-multiple.patch |   26 +
- ...b.com-ImageMagick-ImageMagick-security-ad.patch |   52 +
- .../imagemagick/0002-Added-missing-return.patch    |   24 +
- .../imagemagick/imagemagick_7.1.1-43.bb            |   38 +-
- ...ine-audio-buffer-size-for-a-time-of-500ms.patch |   42 +
- .../libcanberra/libcanberra_0.30.bb                |    1 +
- .../{libgpiod_2.2.1.bb => libgpiod_2.2.2.bb}       |    2 +-
- .../0001-CVE-2025-43961-CVE-2025-43962.patch       |  108 +
- .../libraw/libraw/0002-CVE-2025-43963.patch        |   40 +
- .../libraw/libraw/0003-CVE-2025-43964.patch        |   29 +
- meta-oe/recipes-support/libraw/libraw_0.21.2.bb    |    7 +-
- .../libssh/{libssh_0.11.2.bb => libssh_0.11.3.bb}  |    2 +-
- meta-oe/recipes-support/libusbgx/libusbgx_git.bb   |    2 +-
- .../opencv/opencv/CVE-2025-53644.patch             |   29 +
- meta-oe/recipes-support/opencv/opencv_4.11.0.bb    |   16 +-
- .../tokyocabinet/tokyocabinet_1.4.48.bb            |    4 +-
- meta-oe/recipes-support/udisks/udisks2_2.10.1.bb   |    3 +-
- ...-variable-to-control-macro-__PAS_ALWAYS_I.patch |   74 +
- .../recipes-support/webkitgtk/webkitgtk3_2.48.1.bb |   16 +-
- meta-oe/recipes-test/pm-qa/pm-qa_git.bb            |    2 +-
- meta-perl/README.md                                |    4 +-
- meta-python/README.md                              |    2 +
- .../python/python3-django_5.0.13.bb                |    2 +
- .../python3-gpt-image/python3-gpt-image_0.9.0.bb   |    2 +
- meta-webserver/README.md                           |    2 +
- .../apache2/apache2/CVE-2025-54090.patch           |   40 +
- .../recipes-httpd/apache2/apache2_2.4.64.bb        |    1 +
- meta-xfce/README.md                                |    2 +
- 156 files changed, 14115 insertions(+), 553 deletions(-)
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-plug-ins-ZDI-CAN-26752-mitigation.patch
- create mode 100644 meta-multimedia/recipes-multimedia/libavif/libavif/0001-Add-integer-overflow-check-to-makeRoom.patch
- create mode 100644 meta-networking/recipes-connectivity/civetweb/civetweb/0001-Fix-heap-overflow-in-directory-URI-slash-redirection.patch
- create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0018-Fix-Service-start-error.patch
- rename meta-networking/recipes-connectivity/libiec61850/files/{0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch => 0002-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch} (89%)
- create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/0003-LIB61850-430-fixed-null-pointer-dereference-in-mmsSe.patch
- create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/0004-LIB61850-447-replaced-unsafe-function-StringUtils_cr.patch
- create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/0005-LIB61850-449-fixed-potential-buffer-overflows-in-MMS.patch
- create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/3238.patch
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.20.bb => mosquitto_2.0.21.bb} (96%)
- create mode 100644 meta-networking/recipes-support/dovecot/dovecot/0001-auth-Fix-handling-passdbs-with-identical-driver-args.patch
- delete mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-22247.patch
- rename meta-networking/recipes-support/open-vm-tools/{open-vm-tools_12.5.0.bb => open-vm-tools_12.5.4.bb} (98%)
- rename meta-networking/recipes-support/tcpreplay/{tcpreplay_4.5.1.bb => tcpreplay_4.5.2.bb} (88%)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/0001-CVE-2023-49606.patch
- create mode 100644 meta-networking/recipes-support/wireshark/files/0001-column-Do-not-allow-fence-to-go-beyond-column-size-w.patch
- create mode 100644 meta-oe/licenses/NPSL
- create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3/CVE-2025-54350.patch
- rename meta-oe/recipes-bsp/bolt/{bolt_0.9.6.bb => bolt_0.9.10.bb} (92%)
- delete mode 100644 meta-oe/recipes-bsp/fwupd/fwupd-efi/0001-efi-generate_binary.py-Use-env-to-detect-python3.patch
- rename meta-oe/recipes-bsp/fwupd/{fwupd-efi_1.6.bb => fwupd-efi_1.7.bb} (90%)
- rename meta-oe/recipes-bsp/lsscsi/{lsscsi_030.bb => lsscsi_0.32.bb} (62%)
- rename meta-oe/recipes-connectivity/gensio/{gensio_2.8.7.bb => gensio_2.8.15.bb} (92%)
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0001-Include-base64-for-hostapd-CONFIG_SAE_PK-builds.patch
- rename meta-oe/recipes-connectivity/libimobiledevice-glue/{libimobiledevice-glue_1.3.1.bb => libimobiledevice-glue_1.3.2.bb} (89%)
- rename meta-oe/recipes-connectivity/ser2net/{ser2net_4.6.4.bb => ser2net_4.6.5.bb} (91%)
- rename meta-oe/recipes-core/mm-common/{mm-common_1.0.6.bb => mm-common_1.0.7.bb} (78%)
- rename meta-oe/recipes-devtools/cjson/{cjson_1.7.18.bb => cjson_1.7.19.bb} (97%)
- rename meta-oe/recipes-devtools/iptraf/{iptraf-ng_1.2.1.bb => iptraf-ng_1.2.2.bb} (89%)
- create mode 100644 meta-oe/recipes-devtools/pahole/files/0001-btf_encoder-Fix-elf_functions-cleanup-on-error.patch
- rename meta-oe/recipes-devtools/sexpect/{sexpect_2.3.14.bb => sexpect_2.3.15.bb} (82%)
- rename meta-oe/recipes-devtools/tcltk/{tk8_8.6.15.bb => tk8_8.6.17.bb} (97%)
- rename meta-oe/recipes-devtools/tcltk/{tk_9.0.1.bb => tk_9.0.2.bb} (97%)
- rename meta-oe/recipes-devtools/valijson/{valijson_1.0.4.bb => valijson_1.0.6.bb} (90%)
- create mode 100644 meta-oe/recipes-extended/indent/indent/0001-Fix-a-heap-buffer-underread-in-set_buf_break.patch
- create mode 100644 meta-oe/recipes-extended/indent/indent/CVE-2023-40305_0001.patch
- create mode 100644 meta-oe/recipes-extended/indent/indent/CVE-2023-40305_0002.patch
- rename meta-oe/recipes-extended/parallel/{parallel_20250322.bb => parallel_20250822.bb} (93%)
- create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2025-7519.patch
- create mode 100644 meta-oe/recipes-extended/redis/redis-7.2.8/0001-Check-length-of-AOF-file-name-in-redis-check-aof-CVE.patch
- create mode 100644 meta-oe/recipes-extended/redis/redis-7.2.8/0001-Fix-out-of-bounds-write-in-hyperloglog-commands-CVE-.patch
- create mode 100644 meta-oe/recipes-extended/redis/redis-7.2.8/0001-Retry-accept-even-if-accepted-connection-reports-an-.patch
- create mode 100644 meta-oe/recipes-extended/redis/redis/0001-CVE-2025-27151.patch
- create mode 100644 meta-oe/recipes-extended/redis/redis/0001-Fix-out-of-bounds-write-in-hyperloglog-commands-CVE-.patch
- create mode 100644 meta-oe/recipes-extended/redis/redis/0001-Retry-accept-even-if-accepted-connection-reports-an-.patch
- create mode 100644 meta-oe/recipes-extended/zlog/zlog/0001-CVE-2024-22857-buffer-overflow-patched.patch
- create mode 100644 meta-oe/recipes-graphics/jasper/jasper/0001-Fixes-400.patch
- create mode 100644 meta-oe/recipes-graphics/jasper/jasper/0001-Fixes-401.patch
- create mode 100644 meta-oe/recipes-graphics/jasper/jasper/0001-Fixes-402-403.patch
- create mode 100644 meta-oe/recipes-kernel/crash/crash/0001-Use-CC-env-var-to-get-compiler-version.patch
- create mode 100644 meta-oe/recipes-printing/cups/libcupsfilters/0001-CVE-2024-47076.patch
- create mode 100644 meta-oe/recipes-printing/cups/libppd/0001-CVE-2024-47175.patch
- create mode 100644 meta-oe/recipes-printing/gutenprint/gutenprint/0001-cups-fix-a-build-race-condition-around-empty-directo.patch
- rename meta-oe/recipes-printing/gutenprint/{gutenprint_5.3.4.bb => gutenprint_5.3.5.bb} (91%)
- delete mode 100644 meta-oe/recipes-support/daemonize/daemonize/0001-fix-getopt.c-too-many-arguments-to-function-write-er.patch
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-org-file-contents-Consider-all-remote-files-unsafe.patch
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-org-latex-preview-Add-protection-when-untrusted-cont.patch
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-org-link-expand-abbrev-Do-not-evaluate-arbitrary-uns.patch
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-org-macro-set-templates-Prevent-code-evaluation.patch
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-CVE-2025-54080-fix.patch
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-Revert-fix-copy-constructors.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/0001-CVE-2025-2923.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/0002-CVE-2025-2924.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/0003-CVE-2025-2925.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/0004-CVE-2025-6269-OSV-2023-77.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-Added-extra-checks-to-make-sure-we-don-t-get-stuck-i.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-CVE-2025-55004.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-CVE-2025-55005.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-CVE-2025-55154.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-CVE-2025-55160.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-CVE-2025-55212.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-CVE-2025-57803.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-CVE-2025-57807.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-Correct-out-of-bounds-read-of-a-single-byte.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-Fixed-memory-leak-when-entering-StreamImage-multiple.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-https-github.com-ImageMagick-ImageMagick-security-ad.patch
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0002-Added-missing-return.patch
- create mode 100644 meta-oe/recipes-support/libcanberra/files/0001-Determine-audio-buffer-size-for-a-time-of-500ms.patch
- rename meta-oe/recipes-support/libgpiod/{libgpiod_2.2.1.bb => libgpiod_2.2.2.bb} (98%)
- create mode 100644 meta-oe/recipes-support/libraw/libraw/0001-CVE-2025-43961-CVE-2025-43962.patch
- create mode 100644 meta-oe/recipes-support/libraw/libraw/0002-CVE-2025-43963.patch
- create mode 100644 meta-oe/recipes-support/libraw/libraw/0003-CVE-2025-43964.patch
- rename meta-oe/recipes-support/libssh/{libssh_0.11.2.bb => libssh_0.11.3.bb} (96%)
- create mode 100644 meta-oe/recipes-support/opencv/opencv/CVE-2025-53644.patch
- create mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2025-54090.patch
+> On 10/15/25 08:35, Ankur Tyagi via lists.openembedded.org wrote:
+> > Details https://nvd.nist.gov/vuln/detail/CVE-2024-5197
+> > ---
+> >  .../webm/libvpx/CVE-2024-5197.patch           | 225 ++++++++++++++++++
+> >  .../recipes-multimedia/webm/libvpx_1.14.0.bb  |   1 +
+> >  2 files changed, 226 insertions(+)
+> >  create mode 100644 meta-oe/recipes-multimedia/webm/libvpx/CVE-2024-519=
+7.patch
+> >
+> > diff --git a/meta-oe/recipes-multimedia/webm/libvpx/CVE-2024-5197.patch=
+ b/meta-oe/recipes-multimedia/webm/libvpx/CVE-2024-5197.patch
+> > new file mode 100644
+> > index 0000000000..5ab7f6d8d5
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-multimedia/webm/libvpx/CVE-2024-5197.patch
+> > @@ -0,0 +1,225 @@
+> > +From 402e649a26196152a1703a949a71e4c8985edb8a Mon Sep 17 00:00:00 2001
+> > +From: Wan-Teh Chang <wtc@google.com>
+> > +Date: Wed, 10 Apr 2024 17:01:10 -0700
+> > +Subject: [PATCH] CVE-2024-5197
+> > +
+> > +[1] Fix integer overflows in calc of stride_in_bytes
+> > +
+> > +A port of the libaom CL
+> > +https://aomedia-review.googlesource.com/c/aom/+/188761.
+> > +
+> > +Fix unsigned integer overflows in the calculation of stride_in_bytes i=
+n
+> > +img_alloc_helper() when d_w is huge.
+> > +
+> > +Change the type of stride_in_bytes from unsigned int to int because it
+> > +will be assigned to img->stride[VPX_PLANE_Y], which is of the int type=
+.
+> > +
+> > +Test:
+> > +. ../libvpx/tools/set_analyzer_env.sh integer
+> > +../libvpx/configure --enable-debug --disable-optimizations
+> > +make -j
+> > +./test_libvpx --gtest_filter=3DVpxImageTest.VpxImgAllocHugeWidth
+> > +
+> > +Bug: chromium:332382766
+> > +Change-Id: I3b39d78f61c7255e10cbf72ba2f4975425a05a82
+> > +
+> > +[2] Avoid integer overflows in arithmetic operations
+> > +
+> > +A port of the libaom CL
+> > +https://aomedia-review.googlesource.com/c/aom/+/188823.
+> > +
+> > +Impose maximum values on the input parameters so that we can perform
+> > +arithmetic operations without worrying about overflows.
+> > +
+> > +Also change the VpxImageTest.VpxImgAllocHugeWidth test to write to the
+> > +first and last samples in the first row of the Y plane, so that the te=
+st
+> > +will crash if there is unsigned integer overflow in the calculation of
+> > +stride_in_bytes.
+> > +
+> > +Bug: chromium:332382766
+> > +Change-Id: I54cec6c9e26377abaa8a991042ba277ff70afdf3
+> > +
+> > +[3] Fix a bug in alloc_size for high bit depths
+> > +
+> > +I introduced this bug in commit 2e32276:
+> > +https://chromium-review.googlesource.com/c/webm/libvpx/+/5446333
+> > +
+> > +I changed the line
+> > +
+> > +  stride_in_bytes =3D (fmt & VPX_IMG_FMT_HIGHBITDEPTH) ? s * 2 : s;
+> > +
+> > +to three lines:
+> > +
+> > +  s =3D (fmt & VPX_IMG_FMT_HIGHBITDEPTH) ? s * 2 : s;
+> > +  if (s > INT_MAX) goto fail;
+> > +  stride_in_bytes =3D (int)s;
+> > +
+> > +But I didn't realize that `s` is used later in the calculation of
+> > +alloc_size.
+> > +
+> > +As a quick fix, undo the effect of s * 2 for high bit depths after `s`
+> > +has been assigned to stride_in_bytes.
+> > +
+> > +Bug: chromium:332382766
+> > +Change-Id: I53fbf405555645ab1d7254d31aadabe4f426be8c
+> > +
+> > +(cherry picked from commit c5640e3300690705c336966e2a8bb346a388c829)
+> > +(cherry picked from commit 9d7054c0cb83665a74cf6f59b6261f455e692149)
+> > +(cherry picked from commit 61c4d556bd03b97d84e3fa49180d14bde5a62baa)
+> > +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> > +
+> > +CVE: CVE-2024-5197
+> > +Upstream-Status: Backport
+> > +[1] [https://chromium.googlesource.com/webm/libvpx/+/c5640e3300690705c=
+336966e2a8bb346a388c829]
+> > +[2] [https://chromium.googlesource.com/webm/libvpx/+/9d7054c0cb83665a7=
+4cf6f59b6261f455e692149]
+> > +[3] [https://chromium.googlesource.com/webm/libvpx/+/61c4d556bd03b97d8=
+4e3fa49180d14bde5a62baa]
+> > +---
+> > + vpx/src/vpx_image.c | 45 +++++++++++++++++++++++++++++++++-----------=
+-
+> > + vpx/vpx_image.h     | 16 +++++++++++-----
+> > + 2 files changed, 44 insertions(+), 17 deletions(-)
+> > +
+> > +diff --git a/vpx/src/vpx_image.c b/vpx/src/vpx_image.c
+> > +index f9f0dd602..838a9ea4e 100644
+> > +--- a/vpx/src/vpx_image.c
+> > ++++ b/vpx/src/vpx_image.c
+> > +@@ -8,6 +8,7 @@
+> > +  *  be found in the AUTHORS file in the root of the source tree.
+> > +  */
+> > +
+> > ++#include <assert.h>
+> > + #include <limits.h>
+> > + #include <stdlib.h>
+> > + #include <string.h>
+> > +@@ -21,12 +22,23 @@ static vpx_image_t *img_alloc_helper(vpx_image_t *=
+img, vpx_img_fmt_t fmt,
+> > +                                      unsigned int buf_align,
+> > +                                      unsigned int stride_align,
+> > +                                      unsigned char *img_data) {
+> > +-  unsigned int h, w, s, xcs, ycs, bps;
+> > +-  unsigned int stride_in_bytes;
+> > ++  unsigned int h, w, xcs, ycs, bps;
+> > ++  uint64_t s;
+> > ++  int stride_in_bytes;
+> > +   unsigned int align;
+> > +
+> > +   if (img !=3D NULL) memset(img, 0, sizeof(vpx_image_t));
+> > +
+> > ++  if (fmt =3D=3D VPX_IMG_FMT_NONE) goto fail;
+> > ++
+> > ++  /* Impose maximum values on input parameters so that this function =
+can
+> > ++   * perform arithmetic operations without worrying about overflows.
+> > ++   */
+> > ++  if (d_w > 0x08000000 || d_h > 0x08000000 || buf_align > 65536 ||
+> > ++      stride_align > 65536) {
+> > ++    goto fail;
+> > ++  }
+> > ++
+> > +   /* Treat align=3D=3D0 like align=3D=3D1 */
+> > +   if (!buf_align) buf_align =3D 1;
+> > +
+> > +@@ -80,9 +92,12 @@ static vpx_image_t *img_alloc_helper(vpx_image_t *i=
+mg, vpx_img_fmt_t fmt,
+> > +    * and height shouldn't be adjusted. */
+> > +   w =3D d_w;
+> > +   h =3D d_h;
+> > +-  s =3D (fmt & VPX_IMG_FMT_PLANAR) ? w : bps * w / 8;
+> > +-  s =3D (s + stride_align - 1) & ~(stride_align - 1);
+> > +-  stride_in_bytes =3D (fmt & VPX_IMG_FMT_HIGHBITDEPTH) ? s * 2 : s;
+> > ++  s =3D (fmt & VPX_IMG_FMT_PLANAR) ? w : (uint64_t)bps * w / 8;
+> > ++  s =3D (s + stride_align - 1) & ~((uint64_t)stride_align - 1);
+> > ++  s =3D (fmt & VPX_IMG_FMT_HIGHBITDEPTH) ? s * 2 : s;
+> > ++  if (s > INT_MAX) goto fail;
+> > ++  stride_in_bytes =3D (int)s;
+> > ++  s =3D (fmt & VPX_IMG_FMT_HIGHBITDEPTH) ? s / 2 : s;
+> > +
+> > +   /* Allocate the new image */
+> > +   if (!img) {
+> > +@@ -100,12 +115,16 @@ static vpx_image_t *img_alloc_helper(vpx_image_t=
+ *img, vpx_img_fmt_t fmt,
+> > +     /* Calculate storage sizes given the chroma subsampling */
+> > +     align =3D (1 << xcs) - 1;
+> > +     w =3D (d_w + align) & ~align;
+> > ++    assert(d_w <=3D w);
+> > +     align =3D (1 << ycs) - 1;
+> > +     h =3D (d_h + align) & ~align;
+> > ++    assert(d_h <=3D h);
+> > +
+> > +-    s =3D (fmt & VPX_IMG_FMT_PLANAR) ? w : bps * w / 8;
+> > +-    s =3D (s + stride_align - 1) & ~(stride_align - 1);
+> > +-    stride_in_bytes =3D (fmt & VPX_IMG_FMT_HIGHBITDEPTH) ? s * 2 : s;
+> > ++    s =3D (fmt & VPX_IMG_FMT_PLANAR) ? w : (uint64_t)bps * w / 8;
+> > ++    s =3D (s + stride_align - 1) & ~((uint64_t)stride_align - 1);
+> > ++    s =3D (fmt & VPX_IMG_FMT_HIGHBITDEPTH) ? s * 2 : s;
+> > ++    if (s > INT_MAX) goto fail;
+> > ++    stride_in_bytes =3D (int)s;
+> > +     alloc_size =3D (fmt & VPX_IMG_FMT_PLANAR) ? (uint64_t)h * s * bps=
+ / 8
+> > +                                             : (uint64_t)h * s;
+> > +
+> > +@@ -170,12 +189,12 @@ int vpx_img_set_rect(vpx_image_t *img, unsigned =
+int x, unsigned int y,
+> > +       if (img->fmt & VPX_IMG_FMT_HAS_ALPHA) {
+> > +         img->planes[VPX_PLANE_ALPHA] =3D
+> > +             data + x * bytes_per_sample + y * img->stride[VPX_PLANE_A=
+LPHA];
+> > +-        data +=3D img->h * img->stride[VPX_PLANE_ALPHA];
+> > ++        data +=3D (size_t)img->h * img->stride[VPX_PLANE_ALPHA];
+> > +       }
+> > +
+> > +       img->planes[VPX_PLANE_Y] =3D
+> > +           data + x * bytes_per_sample + y * img->stride[VPX_PLANE_Y];
+> > +-      data +=3D img->h * img->stride[VPX_PLANE_Y];
+> > ++      data +=3D (size_t)img->h * img->stride[VPX_PLANE_Y];
+> > +
+> > +       if (img->fmt =3D=3D VPX_IMG_FMT_NV12) {
+> > +         img->planes[VPX_PLANE_U] =3D
+> > +@@ -186,7 +205,8 @@ int vpx_img_set_rect(vpx_image_t *img, unsigned in=
+t x, unsigned int y,
+> > +         img->planes[VPX_PLANE_U] =3D
+> > +             data + (x >> img->x_chroma_shift) * bytes_per_sample +
+> > +             (y >> img->y_chroma_shift) * img->stride[VPX_PLANE_U];
+> > +-        data +=3D (img->h >> img->y_chroma_shift) * img->stride[VPX_P=
+LANE_U];
+> > ++        data +=3D
+> > ++            (size_t)(img->h >> img->y_chroma_shift) * img->stride[VPX=
+_PLANE_U];
+> > +         img->planes[VPX_PLANE_V] =3D
+> > +             data + (x >> img->x_chroma_shift) * bytes_per_sample +
+> > +             (y >> img->y_chroma_shift) * img->stride[VPX_PLANE_V];
+> > +@@ -194,7 +214,8 @@ int vpx_img_set_rect(vpx_image_t *img, unsigned in=
+t x, unsigned int y,
+> > +         img->planes[VPX_PLANE_V] =3D
+> > +             data + (x >> img->x_chroma_shift) * bytes_per_sample +
+> > +             (y >> img->y_chroma_shift) * img->stride[VPX_PLANE_V];
+> > +-        data +=3D (img->h >> img->y_chroma_shift) * img->stride[VPX_P=
+LANE_V];
+> > ++        data +=3D
+> > ++            (size_t)(img->h >> img->y_chroma_shift) * img->stride[VPX=
+_PLANE_V];
+> > +         img->planes[VPX_PLANE_U] =3D
+> > +             data + (x >> img->x_chroma_shift) * bytes_per_sample +
+> > +             (y >> img->y_chroma_shift) * img->stride[VPX_PLANE_U];
+> > +diff --git a/vpx/vpx_image.h b/vpx/vpx_image.h
+> > +index 1adc9b9d9..2c30a8993 100644
+> > +--- a/vpx/vpx_image.h
+> > ++++ b/vpx/vpx_image.h
+> > +@@ -132,10 +132,13 @@ typedef struct vpx_image_rect {
+> > +  *                         is NULL, the storage for the descriptor wi=
+ll be
+> > +  *                         allocated on the heap.
+> > +  * \param[in]    fmt       Format for the image
+> > +- * \param[in]    d_w       Width of the image
+> > +- * \param[in]    d_h       Height of the image
+> > ++ * \param[in]    d_w       Width of the image. Must not exceed 0x0800=
+0000
+> > ++ *                         (2^27).
+> > ++ * \param[in]    d_h       Height of the image. Must not exceed 0x080=
+00000
+> > ++ *                         (2^27).
+> > +  * \param[in]    align     Alignment, in bytes, of the image buffer a=
+nd
+> > +- *                         each row in the image(stride).
+> > ++ *                         each row in the image (stride). Must not e=
+xceed
+> > ++ *                         65536.
+> > +  *
+> > +  * \return Returns a pointer to the initialized image descriptor. If =
+the img
+> > +  *         parameter is non-null, the value of the img parameter will=
+ be
+> > +@@ -155,9 +158,12 @@ vpx_image_t *vpx_img_alloc(vpx_image_t *img, vpx_=
+img_fmt_t fmt,
+> > +  *                             parameter is NULL, the storage for the=
+ descriptor
+> > +  *                             will be allocated on the heap.
+> > +  * \param[in]    fmt           Format for the image
+> > +- * \param[in]    d_w           Width of the image
+> > +- * \param[in]    d_h           Height of the image
+> > ++ * \param[in]    d_w           Width of the image. Must not exceed 0x=
+08000000
+> > ++ *                             (2^27).
+> > ++ * \param[in]    d_h           Height of the image. Must not exceed 0=
+x08000000
+> > ++ *                             (2^27).
+> > +  * \param[in]    stride_align  Alignment, in bytes, of each row in th=
+e image.
+> > ++ *                             Must not exceed 65536.
+> > +  * \param[in]    img_data      Storage to use for the image
+> > +  *
+> > +  * \return Returns a pointer to the initialized image descriptor. If =
+the img
+> > diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.14.0.bb b/meta-oe=
+/recipes-multimedia/webm/libvpx_1.14.0.bb
+> > index b4d49842ea..13e342d420 100644
+> > --- a/meta-oe/recipes-multimedia/webm/libvpx_1.14.0.bb
+> > +++ b/meta-oe/recipes-multimedia/webm/libvpx_1.14.0.bb
+> > @@ -10,6 +10,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd5b0475501=
+5be901744a78cc30d390d4"
+> >  SRCREV =3D "602e2e8979d111b02c959470da5322797dd96a19"
+> >  SRC_URI +=3D "git://chromium.googlesource.com/webm/libvpx;protocol=3Dh=
+ttps;branch=3Dmain \
+> >             file://libvpx-configure-support-blank-prefix.patch \
+> > +           file://CVE-2024-5197.patch \
+> >             "
+> >
+> >  S =3D "${WORKDIR}/git"
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#120691): https://lists.openembedded.org/g/openembed=
+ded-devel/message/120691
+> > Mute This Topic: https://lists.openembedded.org/mt/115766812/6084445
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[skandigraun@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
 
