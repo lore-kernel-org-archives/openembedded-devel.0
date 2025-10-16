@@ -2,61 +2,61 @@ Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02129CCD194
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14A97CCD19E
 	for <webhook@archiver.kernel.org>; Thu, 16 Oct 2025 10:10:42 +0000 (UTC)
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
- by mx.groups.io with SMTP id smtpd.web11.4597.1760609438529497966
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web11.4595.1760609436517198768
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Oct 2025 03:10:38 -0700
+ Thu, 16 Oct 2025 03:10:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=buon0kt+;
- spf=pass (domain: mvista.com, ip: 209.85.215.170, mailfrom: vanusuri@mvista.com)
-Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-b608df6d2a0so449192a12.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Oct 2025 03:10:38 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=DpQnKsdF;
+ spf=pass (domain: mvista.com, ip: 209.85.215.172, mailfrom: vanusuri@mvista.com)
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-b679450ecb6so410909a12.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Oct 2025 03:10:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1760609437; x=1761214237; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1760609435; x=1761214235; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=i9jKo5OeUSAPOx/AVd5tGNd4hbE3hrwLvUcyxvdoKh0=;
-        b=buon0kt+fnt7/Do1buZm8YNLokCs2jt1BVbUme/SvcRgki6W7lHwU+jpW4MCwZIFrY
-         9F1QlvoL1uYrQTU9Df2wVbWdpyYebMuBQb75Uy/DjSWQS6L2tXj2RBj79qp1TNGRUulV
-         0z52GoQ5/WdLI147RzfHKQDTehYRHZJCjOiuo=
+        bh=etaKVOOVHSTM6bOEfPIe3umSVTN7gd2frbtmNPy5xbY=;
+        b=DpQnKsdFkYz76mh48R2f7SP732rsEyJgTdgFbKdriGT3LWVqsUKjluCvXVLBNMoA9y
+         V4vQzgFoacOAoVClmLUvNxghMtO9fJaQcZrW15rvm7mN6CHVnnsUGXcXXigIz0jFIjLB
+         c55DImecwP5KGJGghVSzAC2Ivk63JV7FhEdeQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760609437; x=1761214237;
+        d=1e100.net; s=20230601; t=1760609435; x=1761214235;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=i9jKo5OeUSAPOx/AVd5tGNd4hbE3hrwLvUcyxvdoKh0=;
-        b=PK3onLlwN3r/YSSXEoYNQZvYxr82IVCdvko/wEKjkpBj/PkM+vUORAh2+nKtd6hsdg
-         1F22Icps2lD0VVttw7szV0f+F6gQdc/XP9vK68HeWhWcSyZ5guhF50gduTOHHU+U76Mi
-         6Cp1l2AIj+8OngtIZYkliU5fXgayuQzJ7U5VvWQNw1cfazyAodQ2/sXSiqGK7tfHWpXN
-         VT5RlNlRAlgj1dtSe32/nBNGtIAq1gHQxbPoKcsTJ+adh0rklFVTJZDKpKPe5U6R7Wuy
-         P3AqZAPAt8XyR5ZAqWlORen7CFam4P7VdvuxjWLrdOdv9pvseWJIcp1QJ7xhYHKW5KNt
-         0J1g==
-X-Gm-Message-State: AOJu0YxwrZBMhEeG9IQC1JIlYS1cckczVQqT6E+EdrDBN6eBS0h7VraJ
-	9rO4Tc+sicQNSjE9zjZo2rN9jyKNhimuwJdQIG7OSZ4gSeXKNmygwnZvVMjNMOVCRE6uQqPIv1E
-	MQ3dD+Vs=
-X-Gm-Gg: ASbGncvx9Kblefx6LRk+w7e6dbzq/iCvd2a8OV+hU0b4Xr6zf8CG4VdRvYNe7iW7C6S
-	IFHv3XfQjPGwhioQYIH16eNKMDMQBU7qZ7mKdn3gvHjSZDbCC32j/q9kG6/UqCqf4Z2HVib+YvT
-	/NZiZ0qYzzyiPvyWyz5nLjOfkFb8/IUdcXluc2RRc8JUtvrjbdJcTyiQ/1kNfjHxlp7Z9r72+3o
-	y8fNmn/J9jB+c4Z9bZ5VZyz4RGd9fxesJVr39eqYS2sCa/PEFIYZeDsEQ2TYF8rKnrLO5ms8Qga
-	qW7BxZ6UWs2FCj8t08D5vAzFglk80uJIGUy8XGaz+I1eIX9n+j3HQuYKWo1QBykWT4iJsvcrsqo
-	1AZdf83AgsI2VQNlIw72ibvotRMw5s6MinUKz4LoHVCiMmGOPs9n0WYl02C3F5JCwVAik0qlAXg
-	r+JEwhGTxgTWsfgQk=
-X-Google-Smtp-Source: AGHT+IHvSEH5ir/Dcuk7M/FeVte67a2arwTDLrpAeetwUMufctfMjpWvLk7PccNaQG1HbsfRvY61ZA==
-X-Received: by 2002:a17:903:2d1:b0:277:3488:787e with SMTP id d9443c01a7336-29027356933mr375303305ad.12.1760609437520;
-        Thu, 16 Oct 2025 03:10:37 -0700 (PDT)
+        bh=etaKVOOVHSTM6bOEfPIe3umSVTN7gd2frbtmNPy5xbY=;
+        b=sHHBXQgdH02UDdpX9nb8zMGKKluZxC4MeqUFHgV/mBpkCjANWiFNZZVJu6tFLJPeVZ
+         3O2Fr45/Vo+GjD47YdWPpVAbhtTxHmqDgt3MKn4koW6ZhDsUkOIGdp4RaIHI1qOpSzt+
+         SCp7MNdUxNnuDrsbzxGfLfp8RywE+NUu5MyvI67A1R4H/l5CAJSCVzcdeNN0gKM2E7qy
+         0yFYrbZLVr1BS8cL9OnGlQgziOslcr/sx/JMn4CfFiuns1ZYGQhXyatciWp54VnjB+lI
+         H2vS++Pw3kUNIEGfdnQma3hbALjxqa8+cw82EXLbmHrLkt8SReNHqpiTwXwM/h9aCiXj
+         1Nmw==
+X-Gm-Message-State: AOJu0Yw1esdgWUaSHSxvgHJwzqYTUBCELUXb/Rptq/0dgNQLdoBBsv5P
+	02ZeOG4I39Nx28OWjeiJOm6TrOxQtmC9YR9NgyaP9qtG+VbOa5J0cm6z2pfP0Fw0hfXT8kaFkzy
+	1m6bOox8=
+X-Gm-Gg: ASbGncuvQKHPD8xqG2nmUZxnZgahe2s6JnnvCggDT4+kAO2MFJ0wtpI87b3wdt+gTEP
+	K50clnqY3plBXLjsWhTKaJG2NHsORIWjp6CstheMOLZoun45mdacW3wgQT4nxTWPKoIxnvX8AY9
+	zJqKoteVjZBwzX3e5XX3Qt9u3CfUhA5sMa9OE9GyltnrveOrPcOHJSbsfIUGK/v3Jrv7uq6kBIB
+	gJFNojuhO9oF97IuqlHIM+ns2G3XCu7qSoiuqx9pFIgP0xvbLNRf25tlapSMBnRcxZciyOddrNG
+	fWnVxLavmfnxBNcvtPkMbCrve8va4KU2RQLX1vTy2UbUeLvXDwQwJfeD73ubyi1p6+Q5hKtFId0
+	vMXOli3/jjEYo0g6qaRskDBTk2YnxWTW65AdSdKXWsXz3AODq+K1MQxDqgWCUkvJAB8YmDpxQXW
+	db80SFJZDBR4wmPwc=
+X-Google-Smtp-Source: AGHT+IHO4lknZGaOalEeH3ttfYNo4WmGQY5eLyFI3qOW1HPaydqn+TCDK99f5EfYgx9eHmlV6Zo7Ug==
+X-Received: by 2002:a17:902:f60d:b0:26a:b9b4:8342 with SMTP id d9443c01a7336-2902726259dmr374089925ad.25.1760609435257;
+        Thu, 16 Oct 2025 03:10:35 -0700 (PDT)
 Received: from localhost.localdomain ([2401:4900:8fcc:1614:2a1b:7928:3155:7a64])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29099a7cebbsm24617685ad.64.2025.10.16.03.10.35
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29099a7cebbsm24617685ad.64.2025.10.16.03.10.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Oct 2025 03:10:36 -0700 (PDT)
+        Thu, 16 Oct 2025 03:10:34 -0700 (PDT)
 From: vanusuri@mvista.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][kirkstone][PATCH 4/7] redis: Fix CVE-2025-46817
-Date: Thu, 16 Oct 2025 15:40:17 +0530
-Message-Id: <20251016101020.279084-4-vanusuri@mvista.com>
+Subject: [oe][meta-oe][kirkstone][PATCH 3/7] redis: Fix CVE-2025-48367
+Date: Thu, 16 Oct 2025 15:40:16 +0530
+Message-Id: <20251016101020.279084-3-vanusuri@mvista.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20251016101020.279084-1-vanusuri@mvista.com>
 References: <20251016101020.279084-1-vanusuri@mvista.com>
@@ -66,135 +66,150 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 16 Oct 2025 10:10:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120732
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120731
 
 From: Vijay Anusuri <vanusuri@mvista.com>
 
-Upstream-Status: Backport from https://github.com/redis/redis/commit/fc282edb61b56e7fe1e6bacf9400252145852fdc
+import patch from debian to fix
+ CVE-2025-48367
+
+Upstream-Status: Backport [import from debian redis_7.0.15-1~deb12u6.debian.tar.xz
+Upstream commit
+https://github.com/redis/redis/commit/0fe67435935cc5724ff6eb9c4ca4120c58a15765]
 
 Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- .../redis/redis-7.0.13/CVE-2025-46817.patch   | 101 ++++++++++++++++++
+ .../redis/redis-7.0.13/CVE-2025-48367.patch   | 111 ++++++++++++++++++
  .../recipes-extended/redis/redis_7.0.13.bb    |   1 +
- 2 files changed, 102 insertions(+)
- create mode 100644 meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2025-46817.patch
+ 2 files changed, 112 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2025-48367.patch
 
-diff --git a/meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2025-46817.patch b/meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2025-46817.patch
+diff --git a/meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2025-48367.patch b/meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2025-48367.patch
 new file mode 100644
-index 0000000000..97b722b03e
+index 0000000000..0084eaa04a
 --- /dev/null
-+++ b/meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2025-46817.patch
-@@ -0,0 +1,101 @@
-+From fc282edb61b56e7fe1e6bacf9400252145852fdc Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2025-48367.patch
+@@ -0,0 +1,111 @@
++From 0fe67435935cc5724ff6eb9c4ca4120c58a15765 Mon Sep 17 00:00:00 2001
 +From: Ozan Tezcan <ozantezcan@gmail.com>
-+Date: Mon, 23 Jun 2025 13:33:00 +0300
-+Subject: [PATCH] Lua script may lead to integer overflow and potential RCE
-+ (CVE-2025-46817)
++Date: Wed, 14 May 2025 11:02:30 +0300
++Subject: [PATCH] Retry accept() even if accepted connection reports an error
++ (CVE-2025-48367)
 +
-+Upstream-Status: Backport [https://github.com/redis/redis/commit/fc282edb61b56e7fe1e6bacf9400252145852fdc]
-+CVE: CVE-2025-46817
++In case of accept4() returns an error, we should check errno value and
++decide if we should retry accept4() without waiting next event loop iteration.
++
++Upstream-Status: Backport [import from debian redis_7.0.15-1~deb12u6.debian.tar.xz
++Upstream commit
++https://github.com/redis/redis/commit/0fe67435935cc5724ff6eb9c4ca4120c58a15765]
++CVE: CVE-2025-48367
 +Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 +---
-+ deps/lua/src/lbaselib.c  |  7 ++++---
-+ deps/lua/src/ltable.c    |  3 +--
-+ tests/unit/scripting.tcl | 39 +++++++++++++++++++++++++++++++++++++++
-+ 3 files changed, 44 insertions(+), 5 deletions(-)
++ src/anet.c       | 24 ++++++++++++++++++++++++
++ src/anet.h       |  1 +
++ src/cluster.c    |  2 ++
++ src/networking.c |  6 ++++++
++ 4 files changed, 33 insertions(+)
 +
-+diff --git a/deps/lua/src/lbaselib.c b/deps/lua/src/lbaselib.c
-+index 2ab550bd48d..26172d15b40 100644
-+--- a/deps/lua/src/lbaselib.c
-++++ b/deps/lua/src/lbaselib.c
-+@@ -340,13 +340,14 @@ static int luaB_assert (lua_State *L) {
++diff --git a/src/anet.c b/src/anet.c
++index 10840fc..a38ab1b 100644
++--- a/src/anet.c
+++++ b/src/anet.c
++@@ -705,3 +705,27 @@ int anetSetSockMarkId(char *err, int fd, uint32_t id) {
++     return ANET_OK;
++ #endif
++ }
+++
+++/* This function must be called after accept4() fails. It returns 1 if 'err'
+++ * indicates accepted connection faced an error, and it's okay to continue
+++ * accepting next connection by calling accept4() again. Other errors either
+++ * indicate programming errors, e.g. calling accept() on a closed fd or indicate
+++ * a resource limit has been reached, e.g. -EMFILE, open fd limit has been
+++ * reached. In the latter case, caller might wait until resources are available.
+++ * See accept4() documentation for details. */
+++int anetAcceptFailureNeedsRetry(int err) {
+++    if (err == ECONNABORTED)
+++	return 1;
+++
+++#if defined(__linux__)
+++    /* For details, see 'Error Handling' section on
+++     * https://man7.org/linux/man-pages/man2/accept.2.html */
+++    if (err == ENETDOWN || err == EPROTO || err == ENOPROTOOPT ||
+++	err == EHOSTDOWN || err == ENONET || err == EHOSTUNREACH ||
+++	err == EOPNOTSUPP || err == ENETUNREACH)
+++    {
+++	return 1;
+++    }
+++#endif
+++    return 0;
+++}
++diff --git a/src/anet.h b/src/anet.h
++index ff86e20..864f756 100644
++--- a/src/anet.h
+++++ b/src/anet.h
++@@ -74,5 +74,6 @@ int anetFormatAddr(char *fmt, size_t fmt_len, char *ip, int port);
++ int anetFormatFdAddr(int fd, char *buf, size_t buf_len, int fd_to_str_type);
++ int anetPipe(int fds[2], int read_flags, int write_flags);
++ int anetSetSockMarkId(char *err, int fd, uint32_t id);
+++int anetAcceptFailureNeedsRetry(int err);
 + 
-+ 
-+ static int luaB_unpack (lua_State *L) {
-+-  int i, e, n;
-++  int i, e;
-++  unsigned int n;
-+   luaL_checktype(L, 1, LUA_TTABLE);
-+   i = luaL_optint(L, 2, 1);
-+   e = luaL_opt(L, luaL_checkint, 3, luaL_getn(L, 1));
-+   if (i > e) return 0;  /* empty range */
-+-  n = e - i + 1;  /* number of elements */
-+-  if (n <= 0 || !lua_checkstack(L, n))  /* n <= 0 means arith. overflow */
-++  n = (unsigned int)e - (unsigned int)i;  /* number of elements minus 1 */
-++  if (n >= INT_MAX || !lua_checkstack(L, ++n))
-+     return luaL_error(L, "too many results to unpack");
-+   lua_rawgeti(L, 1, i);  /* push arg[i] (avoiding overflow problems) */
-+   while (i++ < e)  /* push arg[i + 1...e] */
-+diff --git a/deps/lua/src/ltable.c b/deps/lua/src/ltable.c
-+index f75fe19fe39..55575a8ace9 100644
-+--- a/deps/lua/src/ltable.c
-++++ b/deps/lua/src/ltable.c
-+@@ -434,8 +434,7 @@ static TValue *newkey (lua_State *L, Table *t, const TValue *key) {
-+ ** search function for integers
-+ */
-+ const TValue *luaH_getnum (Table *t, int key) {
-+-  /* (1 <= key && key <= t->sizearray) */
-+-  if (cast(unsigned int, key-1) < cast(unsigned int, t->sizearray))
-++  if (1 <= key && key <= t->sizearray)
-+     return &t->array[key-1];
-+   else {
-+     lua_Number nk = cast_num(key);
-+diff --git a/tests/unit/scripting.tcl b/tests/unit/scripting.tcl
-+index 333cc2692de..d45c63ceec3 100644
-+--- a/tests/unit/scripting.tcl
-++++ b/tests/unit/scripting.tcl
-+@@ -315,6 +315,45 @@ start_server {tags {"scripting"}} {
-+         set e
-+     } {*against a key*}
-+ 
-++    test {EVAL - Test table unpack with invalid indexes} {
-++        catch {run_script { return {unpack({1,2,3}, -2, 2147483647)} } 0} e
-++        assert_match {*too many results to unpack*} $e
-++        catch {run_script { return {unpack({1,2,3}, 0, 2147483647)} } 0} e
-++        assert_match {*too many results to unpack*} $e
-++        catch {run_script { return {unpack({1,2,3}, -2147483648, -2)} } 0} e
-++        assert_match {*too many results to unpack*} $e
-++        set res [run_script { return {unpack({1,2,3}, -1, -2)} } 0]
-++        assert_match {} $res
-++        set res [run_script { return {unpack({1,2,3}, 1, -1)} } 0]
-++        assert_match {} $res
-++
-++        # unpack with range -1 to 5, verify nil indexes
-++        set res [run_script {
-++             local function unpack_to_list(t, i, j)
-++               local n, v = select('#', unpack(t, i, j)), {unpack(t, i, j)}
-++               for i = 1, n do v[i] = v[i] or '_NIL_' end
-++               v.n = n
-++               return v
-++             end
-++
-++            return unpack_to_list({1,2,3}, -1, 5)
-++        } 0]
-++        assert_match {_NIL_ _NIL_ 1 2 3 _NIL_ _NIL_} $res
-++
-++        # unpack with negative range, verify nil indexes
-++        set res [run_script {
-++             local function unpack_to_list(t, i, j)
-++               local n, v = select('#', unpack(t, i, j)), {unpack(t, i, j)}
-++               for i = 1, n do v[i] = v[i] or '_NIL_' end
-++               v.n = n
-++               return v
-++             end
-++
-++            return unpack_to_list({1,2,3}, -2147483648, -2147483646)
-++        } 0]
-++        assert_match {_NIL_ _NIL_ _NIL_} $res
-++    } {}
-++
-+     test {EVAL - JSON numeric decoding} {
-+         # We must return the table as a string because otherwise
-+         # Redis converts floats to ints and we get 0 and 1023 instead
++ #endif
++diff --git a/src/cluster.c b/src/cluster.c
++index 70ede5c..cb37160 100644
++--- a/src/cluster.c
+++++ b/src/cluster.c
++@@ -879,6 +879,8 @@ void clusterAcceptHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
++     while(max--) {
++         cfd = anetTcpAccept(server.neterr, fd, cip, sizeof(cip), &cport);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_VERBOSE,
++                     "Error accepting cluster node: %s", server.neterr);
++diff --git a/src/networking.c b/src/networking.c
++index 386773e..0f9b7bf 100644
++--- a/src/networking.c
+++++ b/src/networking.c
++@@ -1366,6 +1366,8 @@ void acceptTcpHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
++     while(max--) {
++         cfd = anetTcpAccept(server.neterr, fd, cip, sizeof(cip), &cport);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_WARNING,
++                     "Accepting client connection: %s", server.neterr);
++@@ -1386,6 +1388,8 @@ void acceptTLSHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
++     while(max--) {
++         cfd = anetTcpAccept(server.neterr, fd, cip, sizeof(cip), &cport);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_WARNING,
++                     "Accepting client connection: %s", server.neterr);
++@@ -1405,6 +1409,8 @@ void acceptUnixHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
++     while(max--) {
++         cfd = anetUnixAccept(server.neterr, fd);
++         if (cfd == ANET_ERR) {
+++            if (anetAcceptFailureNeedsRetry(errno))
+++                continue;
++             if (errno != EWOULDBLOCK)
++                 serverLog(LL_WARNING,
++                     "Accepting client connection: %s", server.neterr);
++-- 
++2.25.1
++
 diff --git a/meta-oe/recipes-extended/redis/redis_7.0.13.bb b/meta-oe/recipes-extended/redis/redis_7.0.13.bb
-index 9e4b158b7a..e3a302e582 100644
+index 1c45784b6e..9e4b158b7a 100644
 --- a/meta-oe/recipes-extended/redis/redis_7.0.13.bb
 +++ b/meta-oe/recipes-extended/redis/redis_7.0.13.bb
-@@ -27,6 +27,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+@@ -26,6 +26,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://CVE-2025-21605.patch \
             file://CVE-2025-27151.patch \
             file://CVE-2025-32023.patch \
-            file://CVE-2025-48367.patch \
-+           file://CVE-2025-46817.patch \
++           file://CVE-2025-48367.patch \
             "
  SRC_URI[sha256sum] = "97065774d5fb8388eb0d8913458decfcb167d356e40d31dd01cd30c1cc391673"
  
