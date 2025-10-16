@@ -2,137 +2,132 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA241CCD194
-	for <webhook@archiver.kernel.org>; Thu, 16 Oct 2025 09:29:21 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web10.3911.1760606960169463958
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0661CCD194
+	for <webhook@archiver.kernel.org>; Thu, 16 Oct 2025 09:29:31 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web11.4055.1760606962273282179
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Oct 2025 02:29:20 -0700
+ Thu, 16 Oct 2025 02:29:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FsNfaMyM;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-46fcf9f63b6so2503325e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Oct 2025 02:29:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PWgh9asn;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-47114a40161so2819935e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Oct 2025 02:29:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760606958; x=1761211758; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=x5ofIk0ltGzXdf3N/iNuy/7e5TnAqKnf5oscRMyTvQM=;
-        b=FsNfaMyMGJRuVYoeF+L/IL97Uga7Uc/l7dl+y9VHeAPRYTrJebG/UaXWhL9HIFzVAQ
-         SuiIm576gC+SMJT5QOTacX3e8r0fKc+42lwblB/xH2wNan6rAYktIxF4uP8ZAl5Jn6FX
-         jGAsD0b2iuPw247Wv4Cb9kZMQiKNkI530YP4I/I3xJFxsn3BZRNEA9U/7IDvNpCjZ+V9
-         DGWwYSYBRu5Ig3DvUg4p1JqBqDe2PnY1rv9/DIv7g6o7pEJfGa3+5RS3plYQX8lrWxpm
-         jYAFtjSJHNTz8hrgRW8Vz1VosM3NVu36MvEvWLeiV7mtWR/t+wFiGstvEpbRw6bnVs3Y
-         GjRg==
+        d=gmail.com; s=20230601; t=1760606961; x=1761211761; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Trhv4x+ol06BIXVkNSzZMUCUVQ830dP7CDsUujlzym8=;
+        b=PWgh9asnVJ9QbQBeaBsGQdutAxipYH3xyVJDM8pG75ejz0wE3olvp4PINpVHrItJ+p
+         8nt77Xdeak+j04pgukV1MsOkVVAtWdjKETZbQdTsw5Uha1zvV+N3f564xR03vMXLiAfI
+         lOG8SvnCXd1+elVWvb1CaVhh5pHAGlqX4AcVn5jRxuyf7TwhwyV3rELQJgJbaX92gv+L
+         n9sfC9gn6G8BcirCN0BW2YVZPNkWpyGN1oRVAZfKrsw0ZbFlbqHlP1HU+tlIsmRzXCJ5
+         xcCqXFvlFSaV3fRQsOIN0gFJAfogC/w0BF6jkwS/5KtrHeo3+7hJ7z1kFwUjip19fwHN
+         fBXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760606958; x=1761211758;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=x5ofIk0ltGzXdf3N/iNuy/7e5TnAqKnf5oscRMyTvQM=;
-        b=DmO+fb0yr2xrGWoyG87ZB5RK2nSrjC+wkV5uPyfOkFUkqaKBmY+rCGWJUiyTu7kADO
-         wclAFo6gxwOwKbKUKpwcYEI6CY37ZAnKVgKs/1s8qC7cFnCHy2BqYSj91lbGvu1Yii9Z
-         6S7UirmPwSjaa2YLEAD8b74B37emiBYOkueZjWSoZguQ/RK0Vt3LS3ySPKTGFP3erCTD
-         GNjxx3zYZVot8mWxrbD13QRy3v4PN53ru5//Exg7X4cdg+oqtfTaSQdRuWu480QfoigQ
-         P9P1R3HkvlvlCc2/+NO3SGU9uu1L7XndaTqXhlfHDIevIgBTrAWZieqs9qi52k1c3vCx
-         pFWw==
-X-Gm-Message-State: AOJu0YyLFLfgLBmUZbU57lLf2tiVmlYPLJU8B/PQAXQnFO5iWofcu3p7
-	8MC2PjORHG9tZSCBNtrrtyAC31KourJ92moDFDVbhSE96wItylM+WPjQCAmy4Q==
-X-Gm-Gg: ASbGncv1lXZWsUApCee0kB2wDpjQamHyr43/gClRAJrvADgH4yrYDQNIpokaqnA81N9
-	1e7PeGo/Ro2I8MGJtq4//5tHE3fPYAaMumh5c/dstK6oV5JDy9uqFSwucYpPD50C/4ozUugz1mw
-	zGPBSMLLAHIkM5CFHHKo40vqAFlJ1Mq5qZb4kUINnykomObvwDxlEMHqBn7QV1jkecKO3ctLWxP
-	uBV6WDVIhSgv/2R5Htx7etOrNtaYyEf7oFDKlQyQ+88N7huXnIWdzdD8043DjNTdkdfdqH4s6+V
-	XH9AYG3abMKDVqMVdc9rcV5j1XkqLiNncZCkfa5n0hA/Ura/Kzi1eklcKUnc5RaKRF3Vrd3UvDH
-	bzq1+eUNzSmiOiKyAtdZJUjshnf9dJBljTL2pajE6Uerh6qPUdYA/v8WB6rBpOUZirGln9RNAMp
-	t9MWrOPcyd
-X-Google-Smtp-Source: AGHT+IGZzeOzi23OYTKCGH5EB8CIlxKHolo8V2TIyAvMMR46Owjwt+yxui9MXbf9xPeUhjIy99AKmA==
-X-Received: by 2002:a05:600c:8288:b0:471:6f4:601f with SMTP id 5b1f17b1804b1-47106f460f6mr39938395e9.19.1760606958367;
-        Thu, 16 Oct 2025 02:29:18 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1760606961; x=1761211761;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Trhv4x+ol06BIXVkNSzZMUCUVQ830dP7CDsUujlzym8=;
+        b=FuooKpW/0cOkjPh+fbZ0QFEp458EK6qDRJ5n2YUVGy7vInxIEp9B20w0QXVREntnR9
+         euugZPBXF9EwLV8Q4RR+s5L5O5kNSbGN3tMrQe0VNz3WB3F3jpG68wbplzGtl6GvzyML
+         Z56uezdmPcVP+SbJjyjHsb8yDx2edcKquLM0oBcsADpGrbLU7QSmqxnKZSEc4f0r2lP5
+         AEbCCiTIHgvn1B8E21fucJgEVRROVVN/DKKxF6Ldw9IG2q23vN9DjFspQfmyu5JkqWCh
+         8WLMMkMLR4mjISeF5n8vtuLKsj+VBl+bLpO0AcBMvMWIL4Gneb10DgkiYd3IZaIQ1MLg
+         MMDQ==
+X-Gm-Message-State: AOJu0YwCWh6SvrAYL2R70kWbC/4je4ydBdTCc0yheMwXy4wr9GgJMzaQ
+	4AWkmG28NdF6UyHhfvl04T2hoIj0I24hfbrFY+coF563IEkzs/jFEAiLYt+wxQ==
+X-Gm-Gg: ASbGncs2fH3j3bF11D9qHc3Gl6R1nqG78Yp/mIpgYplHhrsj4qkVCcw5sOxie5yyZI+
+	JHd79CGczRw8+L09IimOIICbGu/uYlatLSgSxbk4A7zAoOMVNKDDjJKOqFq/+z4W+o/XzDBX9wm
+	MCVHZve9Os9H5ycxWI9LEAtjboIwXlK5BGi28BJaPL2KUYcIJAfPuc6jsFBC/rlM4OLgMj+5CDF
+	d0S6oPkgLzMrraEy9bV/dZmJP4ZLYnAKfUp5k5ofUL+SvQLBfEt8KQs28McOgWe5BT8Mv9bSrkV
+	kEu9giIXIia5HRAq9RjUF91WVMSVMAkZqrEX5oPlLC2FwYgWZQ8lVef5RnNdlDZ7Qs9MXxeA9qO
+	6aLBxR98NrpbvMGetYsJ87rCSjTede2JWw4+3qUG2qCxfBlNpTIpgrOZpJfNaoLD2l60WpneZuW
+	qVcaTwpvdGCcyH2yTaeyA=
+X-Google-Smtp-Source: AGHT+IEbADxOoDirg/VkBWoSdIf03WjNLCe3dk4kx0SXiyyqTxBpvqu9BDgN7n/2fxtPw0Nt8IlgJA==
+X-Received: by 2002:a05:600c:354f:b0:471:12c2:2025 with SMTP id 5b1f17b1804b1-47112c22146mr13453565e9.32.1760606960561;
+        Thu, 16 Oct 2025 02:29:20 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4710ed9e7d7sm16819345e9.3.2025.10.16.02.29.17
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4710ed9e7d7sm16819345e9.3.2025.10.16.02.29.19
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Oct 2025 02:29:18 -0700 (PDT)
+        Thu, 16 Oct 2025 02:29:20 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 1/4] faad2: patch CVE-221-32272
-Date: Thu, 16 Oct 2025 11:29:14 +0200
-Message-ID: <20251016092917.1946972-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 4/4] faad2: patch CVE-2021-32278
+Date: Thu, 16 Oct 2025 11:29:17 +0200
+Message-ID: <20251016092917.1946972-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251016092917.1946972-1-skandigraun@gmail.com>
+References: <20251016092917.1946972-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Oct 2025 09:29:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120723
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Oct 2025 09:29:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120726
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2021-32272
+Details: https://nvd.nist.gov/vuln/detail/CVE-2021-32278
 
-Pick the patch that is mentioned in the ncv report.
+Pick the patch that is marked to revolve the issue linked in the nvd report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...ix-heap-buffer-overflow-in-mp4read.c.patch | 37 +++++++++++++++++++
- .../recipes-multimedia/faad2/faad2_2.8.8.bb   |  4 +-
- 2 files changed, 40 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-multimedia/faad2/faad2/0001-fix-heap-buffer-overflow-in-mp4read.c.patch
+ .../0001-Check-return-value-of-ltp_data.patch | 31 +++++++++++++++++++
+ .../recipes-multimedia/faad2/faad2_2.8.8.bb   |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/faad2/faad2/0001-Check-return-value-of-ltp_data.patch
 
-diff --git a/meta-oe/recipes-multimedia/faad2/faad2/0001-fix-heap-buffer-overflow-in-mp4read.c.patch b/meta-oe/recipes-multimedia/faad2/faad2/0001-fix-heap-buffer-overflow-in-mp4read.c.patch
+diff --git a/meta-oe/recipes-multimedia/faad2/faad2/0001-Check-return-value-of-ltp_data.patch b/meta-oe/recipes-multimedia/faad2/faad2/0001-Check-return-value-of-ltp_data.patch
 new file mode 100644
-index 0000000000..c739e82fb0
+index 0000000000..3cd72baf79
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/faad2/faad2/0001-fix-heap-buffer-overflow-in-mp4read.c.patch
-@@ -0,0 +1,37 @@
-+From 57850acf9d40fc2898ded492b9ce942110d0c426 Mon Sep 17 00:00:00 2001
-+From: Fabian Greffrath <fabian@greffrath.com>
-+Date: Mon, 31 Aug 2020 10:00:37 +0200
-+Subject: [PATCH] fix heap-buffer-overflow in mp4read.c
++++ b/meta-oe/recipes-multimedia/faad2/faad2/0001-Check-return-value-of-ltp_data.patch
+@@ -0,0 +1,31 @@
++From 4f8a793807d57d6a28aac3ab73ba0992efd5d828 Mon Sep 17 00:00:00 2001
++From: Andrew Wesie <awesie@gmail.com>
++Date: Mon, 5 Oct 2020 00:33:44 -0500
++Subject: [PATCH] Check return value of ltp_data.
 +
-+This originated from an integer overflow: If mp4config.frame.ents
-+would be read-in with a value of (uint32t)(-1), it would overflow to 0
-+in the size calculation for the allocation in the next line. The
-+malloc() function would then successfully return a pointer to a memory
-+region of size 0, which will cause a segfault when written to.
++Fixes #62.
 +
-+Fixes #57.
-+
-+CVE: CVE-2021-32272
-+Upstream-Status: Backport [https://github.com/knik0/faad2/commit/1b71a6ba963d131375f5e489b3b25e36f19f3f24]
++CVE: CVE-2021-32278
++Upstream-Status: Backport [https://github.com/knik0/faad2/commit/e19a5e491354e0e4664d02b796dacee28fb2521e]
 +
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ frontend/mp4read.c | 5 ++++-
++ libfaad/syntax.c | 5 ++++-
 + 1 file changed, 4 insertions(+), 1 deletion(-)
 +
-+diff --git a/frontend/mp4read.c b/frontend/mp4read.c
-+index 9767383..5dc36b7 100644
-+--- a/frontend/mp4read.c
-++++ b/frontend/mp4read.c
-+@@ -340,7 +340,10 @@ static int stszin(int size)
-+     // Number of entries
-+     mp4config.frame.ents = u32in();
-+     // fixme error checking
-+-    // fixme: check atom size
-++
-++    if (!(mp4config.frame.ents + 1))
-++        return ERR_FAIL;
-++
-+     mp4config.frame.data = malloc(sizeof(*mp4config.frame.data)
-+                                   * (mp4config.frame.ents + 1));
-+     ofs = 0;
++diff --git a/libfaad/syntax.c b/libfaad/syntax.c
++index 462ba9e..4e57efd 100644
++--- a/libfaad/syntax.c
+++++ b/libfaad/syntax.c
++@@ -872,7 +872,10 @@ static uint8_t ics_info(NeAACDecStruct *hDecoder, ic_stream *ics, bitfile *ld,
++                     if ((ics->ltp.data_present = faad_get1bit(ld
++                         DEBUGVAR(1,50,"ics_info(): ltp.data_present"))) & 1)
++                     {
++-                        ltp_data(hDecoder, ics, &(ics->ltp), ld);
+++                        if ((retval = ltp_data(hDecoder, ics, &(ics->ltp), ld)) > 0)
+++                        {
+++                            return retval;
+++                        }
++                     }
++                 }
++ #endif
 diff --git a/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb b/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb
-index 56d5e1201e..d70c18f43d 100644
+index 731600205a..f354c99d33 100644
 --- a/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb
 +++ b/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=381c8cbe277a7bc1ee2ae6083a04c958"
- 
- LICENSE_FLAGS = "commercial"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/faac/faad2-src/faad2-2.8.0/${BP}.tar.gz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/faac/faad2-src/faad2-2.8.0/${BP}.tar.gz \
-+           file://0001-fix-heap-buffer-overflow-in-mp4read.c.patch \
-+           "
+@@ -11,6 +11,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/faac/faad2-src/faad2-2.8.0/${BP}.tar.gz \
+            file://0001-fix-heap-buffer-overflow-in-mp4read.c.patch \
+            file://0001-mp4read.c-fix-stack-buffer-overflow-in-stringin-ftyp.patch \
+            file://0001-Restrict-SBR-frame-length-to-960-and-1024-samples.patch \
++           file://0001-Check-return-value-of-ltp_data.patch \
+            "
  SRC_URI[md5sum] = "28f6116efdbe9378269f8a6221767d1f"
  SRC_URI[sha256sum] = "985c3fadb9789d2815e50f4ff714511c79c2710ac27a4aaaf5c0c2662141426d"
- 
 
