@@ -2,192 +2,156 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BFA0CCCD183
-	for <webhook@archiver.kernel.org>; Thu, 16 Oct 2025 09:29:31 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web10.3913.1760606961572606602
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF637CCD194
+	for <webhook@archiver.kernel.org>; Thu, 16 Oct 2025 09:32:31 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web11.4087.1760607148588690269
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Oct 2025 02:29:21 -0700
+ Thu, 16 Oct 2025 02:32:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cx1o6csH;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-46fc5e54cceso3468465e9.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Oct 2025 02:29:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DhpLVILD;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-46e384dfde0so5639495e9.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Oct 2025 02:32:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760606960; x=1761211760; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=I8t47QPwtAYkeI1PYffgaKnUrAxtHvduowkPEb/fw5s=;
-        b=cx1o6csHCVJfBhj3xIzAcrIwk+yEbTqcVvuwTHS2muPUr4Hj6LpZ1GLaHR66WQ+ksO
-         R5LMUtgzGAUjhxNBRdDOp7Tz2oRj7LwSF8JkV47jzTraTxoJ52gnG30PMZNsGSJfNK0R
-         vfUIirZSjNNi0P3iHTqlYpfPHQVfmptSsk4QpHGJyDz+Tk7/AV8iEYxsofg8ooX0ENY3
-         twQWvVQc6CPp/H32uvxKOycNFUDtKpYupeVVrRx1RSbjHuYGtz4Y+KIusDzhMeojaM9t
-         Eb7o7BeY9H1MQiKi8tz+HNxcoRpc3AKPoEWrhduazqCxUSMZ2Ll7F5NC1OZj4Jo852/n
-         l2wg==
+        d=gmail.com; s=20230601; t=1760607147; x=1761211947; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=mOgwpFkM9ak36fyD4E6UqqxxXXLYAoszAjRlxHSqA+Q=;
+        b=DhpLVILDdgEwcgTOp+90Lnfl72DA+Ih+41t0WcrcF/LDcTXnSGNZ+M4KhfmJhvqBdv
+         WDxyB7abNNPxmSLZslhZ4Lz1uXDm5oVkkuW9j4N7UtANx+4BJPeQddDLqdgMjSDTRLvl
+         +s23EmqrKeCsN65FG8oxej2TYweojWETEz7TqFu2rNynR04eQYR45YyyOKppeMtTZieY
+         eyedURLkrSGUZy0nDcoZhaGl0LH0l5k9Bu5HZmB0Rgg/0k4MBVZ9VmAR7ReeZlPx7Jao
+         2k7gjPTUUVrYn2231Aia9E5SUrim26DLtRSwUQlyvvOpNmX141uFquMpGuS4NZYDUNU0
+         h5jA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760606960; x=1761211760;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=I8t47QPwtAYkeI1PYffgaKnUrAxtHvduowkPEb/fw5s=;
-        b=P6a5vAnYa4M8X7XS6mzx7l9fzIPWa1ODi6hbo8d2f78L/92NjGXINBxjVpK9s7V0L/
-         1Kxsa7JzBORWWTqaNZHbifTM+Qw9sWZMSZPo3CPaH2HuC4c8crtyAICO+OeWhadWg/wJ
-         mcwVu3V2j9jqvTz+LjvjkOX3AwZXEdPZhzWPJc7+rXfVuPTKe4FiXXhvsvyKc9LLSguN
-         e0H/mm+XedaPNsgOWGvjYk/1XOP9BlZnZC6Z4/2hwyAoTq5qugNL96sJsgP2Lq8LPVxu
-         eYg2yeUOiWrdykr2pYwkecB59+HGROpNuIixVlvJDdVzczv74j0R9Msi/GVh6KBEpjNJ
-         BETQ==
-X-Gm-Message-State: AOJu0YwZ7RILdXbHv49tzsyDDYofYFZdedBQfdqWsiGltS9lx1eewj55
-	aeuy76JM+CwKKr9ZbH8pqLLzMPFVec9/1fDCbeRFDhxgbWtxdTlO6eAJof8ndQ==
-X-Gm-Gg: ASbGncumUgUkwnc+wxyRpHUqF0H30uf2oWzvN66G33utcXzQt0nFMAgedtHyK07xXPU
-	2DHM63SR60x0m3/hYFrXsUW9sMYugVSywDlbmP0/VTFLKyJtDxg7vns8Dacr8GL4l2RQEztT+ob
-	8zkHFg2PQMxZPzKS5ITSNBuIxcbEViD0z3faStjj59y3kmSgm0lhfILAo2pIS+8oeJfmv2QjFXw
-	tLuXsrCuupZNJ3pPCy5Ve7RtcDY94viH7zLJWk/K3vxlCzLnn41XG9m4id6GhGDWEPaF68VbPHd
-	uuUsGCndjRswmgKcetVBzhiXIMMLvjqvrPvUzVRyP9uxWiyZ2Zp3pWDVrMGGrwpvRe2/pdpAVDH
-	9fBkUu1AAHjmZcmqflrvigchdV15QCVJ0vllrABO/W8KsSTpAGWji+DF8/jPRR9HMuuFVRPaGZg
-	EQHe4neGdo
-X-Google-Smtp-Source: AGHT+IHlkADVczC5vVGJtHfRwDPmauHS3znJd2Jml5WMDx/gx8NtRpuEjmosrYFYR8vBDpPT2qe/jg==
-X-Received: by 2002:a05:600c:1395:b0:46e:27fb:17f0 with SMTP id 5b1f17b1804b1-46fa9aa204cmr214665125e9.9.1760606959805;
-        Thu, 16 Oct 2025 02:29:19 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4710ed9e7d7sm16819345e9.3.2025.10.16.02.29.19
+        d=1e100.net; s=20230601; t=1760607147; x=1761211947;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=mOgwpFkM9ak36fyD4E6UqqxxXXLYAoszAjRlxHSqA+Q=;
+        b=G4Wt3/lSERKwQJDMKP4Tz3YDU5VLb/tInkPdxNec65Vr1aTt/bhxcrQQgTuvfaVaNL
+         4zDp5cUY8LsofFrnvbLLiiM6k4QgpSa++6vQddR4UH3Rq6Oqb/4t6sdmd9fx8iZ/qSh/
+         CdGSGetiqi1c/nQcMiQJKDEcJgV/YPgnWyAY8MnaPxj1os/ekzHXhrlq7k3ES6d0YTuh
+         JRXaJK94iS/ejl05prC7MfBK7TmXQOO1fJfib9HCvTBB/ruMsJhVuEjq4Yp79IMIBjGO
+         1bjYsrILAmOOYZiydaoVDTrOSULVO39IBcRBzHuMZbkF+C9SUXKnR3pGuvw8K7k3JvyI
+         KV1A==
+X-Gm-Message-State: AOJu0YySJOXWXUAAOMoXXtMhrahRrYi4dSJK7pRQJ+yWlwxUKAmA7wQ/
+	jyfxk8hePTNckH5YlUUwVPkx3P99zrcYeDjn7WZDa2SNjh5Fla74cwJXwEBm3Q==
+X-Gm-Gg: ASbGncupWcMQcbaihwyRm4McQIVtC+/yoWh2NuN1keXHcZYhdlcSzQ6wpnZ0B9Lc4/Z
+	kw6UoADxYQhVraK+mlruBncB+HeKjx0K4IRkhqqtKmwbOlBQWBervGxO6IC4AV7ISJXTzI0YLY5
+	QkXZIP9/gIk8iwIRifs8qKfdwdN+4x9vi729O4dQcoUGCU4LQZfOmoYidhMZvEqHFeYxBOLU2AJ
+	MHpJu+zBteZH5mNuepoYkEpoqXr1S/2KGq4xHJS0P2qwiVSgekxSQD6tREpAgd1/iXsoHFan6/W
+	XnlCaIjcPQqu5QLQEEdCkgDrW9LQQXzYCBB6vbUm7qA3EiEyyLQNe7r2YQxVHYnRaNT8qmlOEx6
+	EcEqFeSf3CNQyBP78jrdUzgCQvuH3GuiAeBHNgypbddRjHGtmYguMp8qJRrYFicKSmNXf2qmxtv
+	V6KnF39kZ1VdYLkGyNgZo=
+X-Google-Smtp-Source: AGHT+IGeFbTSan32nhL3rCNAvLKTX+brSRcGwpFYeLWtKIJOOtubSpFHxdTTA94O6vApUkpTxpt+/Q==
+X-Received: by 2002:a05:600c:8285:b0:471:15df:9fcd with SMTP id 5b1f17b1804b1-47115dfa1cfmr2110085e9.25.1760607146682;
+        Thu, 16 Oct 2025 02:32:26 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4710f29da7fsm14562475e9.9.2025.10.16.02.32.26
         for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Oct 2025 02:29:19 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 3/4] faad2: patch CVE-2021-32274 and CVE-2021-32277
-Date: Thu, 16 Oct 2025 11:29:16 +0200
-Message-ID: <20251016092917.1946972-3-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251016092917.1946972-1-skandigraun@gmail.com>
-References: <20251016092917.1946972-1-skandigraun@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 16 Oct 2025 02:32:26 -0700 (PDT)
+Message-ID: <d3b4ca1c-9dac-419a-80cc-380fdc3b4852@gmail.com>
+Date: Thu, 16 Oct 2025 11:32:25 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][kirkstone][PATCH 1/4] faad2: patch CVE-221-32272
+To: openembedded-devel@lists.openembedded.org
+References: <186EEEB3D77BBE16.8420@lists.openembedded.org>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <186EEEB3D77BBE16.8420@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Oct 2025 09:29:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120725
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Oct 2025 09:32:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120727
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2021-32274
-https://nvd.nist.gov/vuln/detail/CVE-2021-32277
+Will resend this one with correct subject.
 
-Pick the patch that resolved the issues linked in the nvd reports
-(same patch fixes both vulnerabilities).
+On 10/16/25 11:29, Gyorgy Sarvari via lists.openembedded.org wrote:
+> Details: https://nvd.nist.gov/vuln/detail/CVE-2021-32272
+>
+> Pick the patch that is mentioned in the ncv report.
+>
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> ---
+>  ...ix-heap-buffer-overflow-in-mp4read.c.patch | 37 +++++++++++++++++++
+>  .../recipes-multimedia/faad2/faad2_2.8.8.bb   |  4 +-
+>  2 files changed, 40 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-multimedia/faad2/faad2/0001-fix-heap-buffer-overflow-in-mp4read.c.patch
+>
+> diff --git a/meta-oe/recipes-multimedia/faad2/faad2/0001-fix-heap-buffer-overflow-in-mp4read.c.patch b/meta-oe/recipes-multimedia/faad2/faad2/0001-fix-heap-buffer-overflow-in-mp4read.c.patch
+> new file mode 100644
+> index 0000000000..c739e82fb0
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/faad2/faad2/0001-fix-heap-buffer-overflow-in-mp4read.c.patch
+> @@ -0,0 +1,37 @@
+> +From 57850acf9d40fc2898ded492b9ce942110d0c426 Mon Sep 17 00:00:00 2001
+> +From: Fabian Greffrath <fabian@greffrath.com>
+> +Date: Mon, 31 Aug 2020 10:00:37 +0200
+> +Subject: [PATCH] fix heap-buffer-overflow in mp4read.c
+> +
+> +This originated from an integer overflow: If mp4config.frame.ents
+> +would be read-in with a value of (uint32t)(-1), it would overflow to 0
+> +in the size calculation for the allocation in the next line. The
+> +malloc() function would then successfully return a pointer to a memory
+> +region of size 0, which will cause a segfault when written to.
+> +
+> +Fixes #57.
+> +
+> +CVE: CVE-2021-32272
+> +Upstream-Status: Backport [https://github.com/knik0/faad2/commit/1b71a6ba963d131375f5e489b3b25e36f19f3f24]
+> +
+> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> +---
+> + frontend/mp4read.c | 5 ++++-
+> + 1 file changed, 4 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/frontend/mp4read.c b/frontend/mp4read.c
+> +index 9767383..5dc36b7 100644
+> +--- a/frontend/mp4read.c
+> ++++ b/frontend/mp4read.c
+> +@@ -340,7 +340,10 @@ static int stszin(int size)
+> +     // Number of entries
+> +     mp4config.frame.ents = u32in();
+> +     // fixme error checking
+> +-    // fixme: check atom size
+> ++
+> ++    if (!(mp4config.frame.ents + 1))
+> ++        return ERR_FAIL;
+> ++
+> +     mp4config.frame.data = malloc(sizeof(*mp4config.frame.data)
+> +                                   * (mp4config.frame.ents + 1));
+> +     ofs = 0;
+> diff --git a/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb b/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb
+> index 56d5e1201e..d70c18f43d 100644
+> --- a/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb
+> +++ b/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb
+> @@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=381c8cbe277a7bc1ee2ae6083a04c958"
+>  
+>  LICENSE_FLAGS = "commercial"
+>  
+> -SRC_URI = "${SOURCEFORGE_MIRROR}/faac/faad2-src/faad2-2.8.0/${BP}.tar.gz"
+> +SRC_URI = "${SOURCEFORGE_MIRROR}/faac/faad2-src/faad2-2.8.0/${BP}.tar.gz \
+> +           file://0001-fix-heap-buffer-overflow-in-mp4read.c.patch \
+> +           "
+>  SRC_URI[md5sum] = "28f6116efdbe9378269f8a6221767d1f"
+>  SRC_URI[sha256sum] = "985c3fadb9789d2815e50f4ff714511c79c2710ac27a4aaaf5c0c2662141426d"
+>  
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#120723): https://lists.openembedded.org/g/openembedded-devel/message/120723
+> Mute This Topic: https://lists.openembedded.org/mt/115786212/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-
-merge to CVE-2021-32274
----
- ...frame-length-to-960-and-1024-samples.patch | 87 +++++++++++++++++++
- .../recipes-multimedia/faad2/faad2_2.8.8.bb   |  1 +
- 2 files changed, 88 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/faad2/faad2/0001-Restrict-SBR-frame-length-to-960-and-1024-samples.patch
-
-diff --git a/meta-oe/recipes-multimedia/faad2/faad2/0001-Restrict-SBR-frame-length-to-960-and-1024-samples.patch b/meta-oe/recipes-multimedia/faad2/faad2/0001-Restrict-SBR-frame-length-to-960-and-1024-samples.patch
-new file mode 100644
-index 0000000000..f1d5c63437
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/faad2/faad2/0001-Restrict-SBR-frame-length-to-960-and-1024-samples.patch
-@@ -0,0 +1,87 @@
-+From 9f7515c9571d5c72f6ec2dd6199650093628730b Mon Sep 17 00:00:00 2001
-+From: Andrew Wesie <awesie@gmail.com>
-+Date: Mon, 5 Oct 2020 05:47:59 -0500
-+Subject: [PATCH] Restrict SBR frame length to 960 and 1024 samples.
-+
-+Fixes #59 and #60.
-+
-+CVE: CVE-2021-32274 CVE-2021-32277
-+Upstream-Status: Backport [https://github.com/knik0/faad2/commit/c78251b2b5d41ea840fd61ab9502b3d3036bd747]
-+
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ libfaad/sbr_dec.c | 9 ++++++++-
-+ libfaad/specrec.c | 4 ++++
-+ libfaad/syntax.c  | 7 +++++++
-+ 3 files changed, 19 insertions(+), 1 deletion(-)
-+
-+diff --git a/libfaad/sbr_dec.c b/libfaad/sbr_dec.c
-+index 0705ddd..1a541ef 100644
-+--- a/libfaad/sbr_dec.c
-++++ b/libfaad/sbr_dec.c
-+@@ -97,10 +97,17 @@ sbr_info *sbrDecodeInit(uint16_t framelength, uint8_t id_aac,
-+     {
-+         sbr->numTimeSlotsRate = RATE * NO_TIME_SLOTS_960;
-+         sbr->numTimeSlots = NO_TIME_SLOTS_960;
-+-    } else {
-++    }
-++    else if (framelength == 1024)
-++    {
-+         sbr->numTimeSlotsRate = RATE * NO_TIME_SLOTS;
-+         sbr->numTimeSlots = NO_TIME_SLOTS;
-+     }
-++    else
-++    {
-++        faad_free(sbr);
-++        return NULL;
-++    }
-+ 
-+     sbr->GQ_ringbuf_index[0] = 0;
-+     sbr->GQ_ringbuf_index[1] = 0;
-+diff --git a/libfaad/specrec.c b/libfaad/specrec.c
-+index 9797d6e..d539bbe 100644
-+--- a/libfaad/specrec.c
-++++ b/libfaad/specrec.c
-+@@ -1053,6 +1053,8 @@ uint8_t reconstruct_single_channel(NeAACDecStruct *hDecoder, ic_stream *ics,
-+ #endif
-+                 );
-+         }
-++        if (!hDecoder->sbr[ele])
-++            return 19;
-+ 
-+         if (sce->ics1.window_sequence == EIGHT_SHORT_SEQUENCE)
-+             hDecoder->sbr[ele]->maxAACLine = 8*min(sce->ics1.swb_offset[max(sce->ics1.max_sfb-1, 0)], sce->ics1.swb_offset_max);
-+@@ -1305,6 +1307,8 @@ uint8_t reconstruct_channel_pair(NeAACDecStruct *hDecoder, ic_stream *ics1, ic_s
-+ #endif
-+                 );
-+         }
-++        if (!hDecoder->sbr[ele])
-++            return 19;
-+ 
-+         if (cpe->ics1.window_sequence == EIGHT_SHORT_SEQUENCE)
-+             hDecoder->sbr[ele]->maxAACLine = 8*min(cpe->ics1.swb_offset[max(cpe->ics1.max_sfb-1, 0)], cpe->ics1.swb_offset_max);
-+diff --git a/libfaad/syntax.c b/libfaad/syntax.c
-+index f8e808c..462ba9e 100644
-+--- a/libfaad/syntax.c
-++++ b/libfaad/syntax.c
-+@@ -1079,6 +1079,8 @@ static uint8_t fill_element(NeAACDecStruct *hDecoder, bitfile *ld, drc_info *drc
-+ #endif
-+                     );
-+             }
-++            if (!hDecoder->sbr[sbr_ele])
-++                return 19;
-+ 
-+             hDecoder->sbr_present_flag = 1;
-+ 
-+@@ -1348,6 +1350,11 @@ void DRM_aac_scalable_main_element(NeAACDecStruct *hDecoder, NeAACDecFrameInfo *
-+             hDecoder->sbr[0] = sbrDecodeInit(hDecoder->frameLength, hDecoder->element_id[0],
-+                 2*get_sample_rate(hDecoder->sf_index), 0 /* ds SBR */, 1);
-+         }
-++        if (!hDecoder->sbr[0])
-++        {
-++            hInfo->error = 19;
-++            return;
-++        }
-+ 
-+         /* Reverse bit reading of SBR data in DRM audio frame */
-+         revbuffer = (uint8_t*)faad_malloc(buffer_size*sizeof(uint8_t));
-diff --git a/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb b/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb
-index 6ac09c19ce..731600205a 100644
---- a/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb
-+++ b/meta-oe/recipes-multimedia/faad2/faad2_2.8.8.bb
-@@ -10,6 +10,7 @@ LICENSE_FLAGS = "commercial"
- SRC_URI = "${SOURCEFORGE_MIRROR}/faac/faad2-src/faad2-2.8.0/${BP}.tar.gz \
-            file://0001-fix-heap-buffer-overflow-in-mp4read.c.patch \
-            file://0001-mp4read.c-fix-stack-buffer-overflow-in-stringin-ftyp.patch \
-+           file://0001-Restrict-SBR-frame-length-to-960-and-1024-samples.patch \
-            "
- SRC_URI[md5sum] = "28f6116efdbe9378269f8a6221767d1f"
- SRC_URI[sha256sum] = "985c3fadb9789d2815e50f4ff714511c79c2710ac27a4aaaf5c0c2662141426d"
 
