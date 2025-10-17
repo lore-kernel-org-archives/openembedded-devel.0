@@ -1,154 +1,122 @@
-Return-Path: <m.schwan@phytec.de>
+Return-Path: <corentin.guillevic@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7430BCCD199
-	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 14:58:41 +0000 (UTC)
-Received: from MRWPR03CU001.outbound.protection.outlook.com (MRWPR03CU001.outbound.protection.outlook.com [40.107.130.128])
- by mx.groups.io with SMTP id smtpd.web11.17859.1760713112915837873
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8481CCD195
+	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 15:51:31 +0000 (UTC)
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com [209.85.221.66])
+ by mx.groups.io with SMTP id smtpd.web11.19594.1760716284681826967
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Oct 2025 07:58:33 -0700
+ Fri, 17 Oct 2025 08:51:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@phytec.de header.s=selector2 header.b=TWNELXuL;
- spf=pass (domain: phytec.de, ip: 40.107.130.128, mailfrom: m.schwan@phytec.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eW63KtxCwwsgMcP/2sBjiKavIwaehefVrsALcsoOnorLFr+8ewx9xP2jE10XxonAnrqgw6dREuv42TLaVu2g62q+RNV9X3fnzkvXR1WHvzRYGoTzlm23QsxMBQKupBCG7vhCrJXBTcCBbxdH7Kmbf1KkjIrxgiC6DxTQUzipGRaea+jmBCDsSzITOWSEtDh3lqlHTZynSfaJ9G0hhhq6/2ad3/cnR+PiACCP0X8tG4agKtE1hwsUrzP3evSh2q+73skUwh2+O+pu/1IvFdXrxP/ywPCjeJP3D0RjmPq4itLnqKVzyVUBKIdUA79Rksz1Ox1LBaPskLJNarXkCCBCaQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ODXCf5nJQBcbgpfeC8kPHqY9HhMRoWosNxj12pPcDug=;
- b=Tn1HgeaL3TNRPZX8+fYzC5SUOmdRDUQ6mfEkleMN1ko1lYmEGaA8IJUi5h2fGNZbJTU1q+KCIF/nDFL0FUiEY86iQTB/QyXYAb0p++N24hs7c3A45hPYr0ecIBKTkC686RBAUiBQ+QrgvnhCI6COoCVilpqYR0SfAP8rWz6OPV8920fW3cMkytsWFzIeoXbpNeHdhin0oNf2SuhXnZZyTQuqBP/hpgnu6H8h1T6zI7HyUprQUPWBFUe9P0/HS1X78K4mpxqMMmTSO62eepj8Qf65g5/E8d99ZGue7aS9+d/2mzzNuAIxl0vr99GfFCGADRu/CaE4aDwusUmw3hmtgw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=phytec.de; dmarc=fail (p=quarantine sp=quarantine pct=100)
- action=quarantine header.from=phytec.de; dkim=none (message not signed);
- arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ODXCf5nJQBcbgpfeC8kPHqY9HhMRoWosNxj12pPcDug=;
- b=TWNELXuLtHSxZ2vAqro2AqagLahlOkz0UiERyYmFRiJFFgXm8NqeBjvi5BY3ZbwfkDFcy/y9TMAMsJK2xvHUCr0EopaUwf15U1qQQoGgVcF/Czmw66A2XwDyXnH+43BOBy1sXVuB4QtKnLfqfI/F9LPxI8CEaCLkeVswCb4wbG9hpVaRTn85kj0kRLO530HNWruLHPW4ieEH6HaHlwFUWW6qXalkS+sSTjiABNSIJLFy6Z5+qiFeWzlJnaXfl8AuUUxU0zqHU7Lm5tirrpitWsOKbN4mcPcoKERDD6alCRUhTMujL5pWxPkfpO+qNHfUKSEn3qWuD1n+xh8I7he1GA==
-Received: from DU2PR04CA0297.eurprd04.prod.outlook.com (2603:10a6:10:28c::32)
- by DU0P195MB1403.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:343::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.12; Fri, 17 Oct
- 2025 14:58:28 +0000
-Received: from DU2PEPF00028D01.eurprd03.prod.outlook.com
- (2603:10a6:10:28c:cafe::60) by DU2PR04CA0297.outlook.office365.com
- (2603:10a6:10:28c::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9228.13 via Frontend Transport; Fri,
- 17 Oct 2025 14:58:28 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de; dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Postix.phytec.de (91.26.50.189) by
- DU2PEPF00028D01.mail.protection.outlook.com (10.167.242.185) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9228.7 via Frontend Transport; Fri, 17 Oct 2025 14:58:28 +0000
-Received: from augenblix2.phytec.de (172.25.0.51) by Postix.phytec.de
- (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 17 Oct
- 2025 16:58:27 +0200
-From: Martin Schwan <m.schwan@phytec.de>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][walnascar][PATCH] kronosnet: Fetch version tag with BB_GIT_SHALLOW_EXTRA_REFS
-Date: Fri, 17 Oct 2025 16:58:18 +0200
-Message-ID: <20251017145818.2019373-1-m.schwan@phytec.de>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@smile.fr header.s=google header.b=HnD3PeuU;
+ spf=pass (domain: smile.fr, ip: 209.85.221.66, mailfrom: corentin.guillevic@smile.fr)
+Received: by mail-wr1-f66.google.com with SMTP id ffacd0b85a97d-427007b1fe5so1239401f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 08:51:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile.fr; s=google; t=1760716283; x=1761321083; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=yjAb5gMxBzZ+fBRO1ZY3Sk6DvUdHLuyuBexJXLmliZY=;
+        b=HnD3PeuU1a9c3tTEQUmkYL5tUVyoLfkgp1C7HPNArDCqV9vCiozIBnqEcK2u2FnyqB
+         y/FdJlEZ0EHzmK9I/8YQpmO2hFW40NEz5DzZ1vm+3e23eySVi2gQdf1S+b3qHSsF8nf0
+         xVzOVjHu75hBdTKHQgQ+WOxtItnn8Gwg8eBZ0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1760716283; x=1761321083;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yjAb5gMxBzZ+fBRO1ZY3Sk6DvUdHLuyuBexJXLmliZY=;
+        b=Jgxd2y3HWkhDNkydVJAsttD+5vTBoEw7bBqfwMBL419HY+Vabf0FUG8jkYAQMrJE5B
+         CcqFraJSM3CYi9l3XSolZDPEE4Fho5hy+gBT+N6Fnng0CFqJ0wjLA+amBraCiZj+5kXA
+         yQmwQeifxBHJ0gSe2+k+fPxIAkUvQfN9w8P10+62owMjELAO1iv+lS5HteBpDe9Rx9JY
+         9LM1NLhq/nrAoUvPvJoAYxAB2NRFhTOfMRFdBHuJ6QjzEspcywbdgOXdeSxxetH5cLTZ
+         IKC/E7htmLq4l7By6Ax33pMnie58mTE300pEog9dSgclCoITzCZNJuwdyToHoFy8uaBP
+         HeaQ==
+X-Gm-Message-State: AOJu0Ywp1nAqgjGwE0ZCFsIUsLq8sKMskhf/8VD5XEya5CNqAufWOGoK
+	qZHBXOKWTYi0bksiTF25u0/s7IPWvhRWmgttwnU2zVQuyWRGCvRAckMYKcaFN1oZpm1IzHqaKPb
+	cOxwom1hp1b+i
+X-Gm-Gg: ASbGncsvM/7NsfjfjBqntO9FVgQVBNEApXKZs+dowaR8P5Zohy0ftd+Xy/wvfnW5vFp
+	iCIsQtgjIAiwDGiKrIMFByLBujxZA/Wmzu1Fz+fMgPPeTi+ejai++TLehWnUlnpivH5cgiEalKE
+	MfwKvSX5iuVa8eQE79qxSnuW/pEL1kcPe4mbJ9YotEjzU1xFKAUB81c/P3rgtiJx6ZrrW+vfG2L
+	qiS8FgQCmA/Koa4lGKTuPI4dXvUJ7pPMoq1I+hqz2kqFtde0RmKeH/ysQdBZl0r3U2YxHXuFFIw
+	+V4E/oiJJuybH5ekXvK9oqMcDKtYQ5vE07fA4UaWaax7DueyMS0l1zuJBD1AsBTtl3mfrTId30k
+	bvHb+fRGoVRRL4qmwbZ5qBjl/MX50U/Q+moWNCxPkRIKqUJu22gi23lpqGmr26dif942hmpzwTV
+	XQYIF43w==
+X-Google-Smtp-Source: AGHT+IEf83HmzrsuW/285i4SV/NMmdkx2topj1qfc3/LMXNXR0O4xNTJn8P9qaljUJdM6XDPjnGBDg==
+X-Received: by 2002:a5d:64c3:0:b0:426:dbef:9abf with SMTP id ffacd0b85a97d-42704d8e0b2mr3084678f8f.23.1760716282978;
+        Fri, 17 Oct 2025 08:51:22 -0700 (PDT)
+Received: from heaven.. ([2a01:e0a:25d:d2b0:d59a:9e09:f40:c107])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-426ce583664sm41568914f8f.22.2025.10.17.08.51.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 17 Oct 2025 08:51:22 -0700 (PDT)
+From: Corentin Guillevic <corentin.guillevic@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: pkj@axis.com,
+	Corentin Guillevic <corentin.guillevic@smile.fr>
+Subject: [PATCH v3] opencv: limit features in native
+Date: Fri, 17 Oct 2025 17:50:47 +0200
+Message-ID: <20251017155047.1122714-2-corentin.guillevic@smile.fr>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.51]
-X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
- (172.25.0.11)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D01:EE_|DU0P195MB1403:EE_
-X-MS-Office365-Filtering-Correlation-Id: 670970a8-ec07-47d7-2bd6-08de0d8da181
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700013|13003099007;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?uLRpC8In/IIxElQ28iN3z239Rm/1qQVmz42s99TfntAsc3yis2SBabtmQZYQ?=
- =?us-ascii?Q?MX/cJc5BYChzdroQwijoL7VExYHLJK3C13uKwTZtJS+ntt9696KDxD/cIyE4?=
- =?us-ascii?Q?epx6oEmyfUIwrdACoxL5luXtuevAvYVMROZn34KqApI+G4grzT3UdYVyt9Cj?=
- =?us-ascii?Q?m73CghEBzKWtymQ4Uq6L8tU+7NOeh37eAHUh2QUvoaIA9A4hHHQ9rIu1xhF1?=
- =?us-ascii?Q?frj4Ce14jffayGroGLkV8LuYsQ5YFoWCn5laztlN7vlOvUQYdfaT6zHfzZ09?=
- =?us-ascii?Q?H+MUpqwIjw2BqdRcTb5kiVIsZZE++0KAPo84w45BsE13WXXAe61v5be0+/rB?=
- =?us-ascii?Q?cW6he76lGLLquNbUtMWtVl6AFOYwRzcUIn668Puy9yMV8N2G4Onf3y6OzleX?=
- =?us-ascii?Q?P+aXeXJgUCY3z/iPKh2/CILLiI8B+JQznX1CQa4nsYRwjW+V+wU4WOuiT6cI?=
- =?us-ascii?Q?hQkyW7zE1FKFpDsIqBzRp3Ah3pbndiVwZu/EAqpz9wlY3OPCxFKC3/Sho6eO?=
- =?us-ascii?Q?l+MDK6CplnhtWHdpOMAcwRlpwjSIGToT0a4vOH+Tb1CB8gPMSrDjJGKW0iv0?=
- =?us-ascii?Q?WnbQ1WDVkkC2Q9TzWxCsr7oWc3UBnNDmKQec3+XzH1mJFhj87KmL1A9t+skB?=
- =?us-ascii?Q?lRAlrOiHPH8d3LWES5IA5Zfj4FJEENdkVdpftO5veQuGuqc6acM1ssgflde8?=
- =?us-ascii?Q?sIOyJq0wNV4qpEFR4ufYnBLIY/9k/9He+oHHrJUZb6WaRZ4kppLJeJvbz9V3?=
- =?us-ascii?Q?fOs2g3FoXtFQYgVdF1QL3eFVZcstixyuJKnIOcIdW1kocR90tI8leUehL7hs?=
- =?us-ascii?Q?sE8J79ThzayW9+rZNsNx/qkQQ/2zJBX8V/C6QHUu5rkAr6s0B2adUwQ6v5gS?=
- =?us-ascii?Q?0yWzkR7gvjJvgXpH85DAm9R2sgX20Ws95+cufOYeF79kGGXRoQla18Zbe8UG?=
- =?us-ascii?Q?73PzNgWCEvZeaPq7/AbAV4DAY69opR/ybOaESEERKg6HaqcQiwoHQPsKmjia?=
- =?us-ascii?Q?0PPfhDO3M/j37xl+wifL0cnwDNduevKe6Gn0xULDlZ1G53BItJv8Hq8ztB+C?=
- =?us-ascii?Q?UKRwB70FgnivhnytAN/iwmkFc8Pkxfga/aLuVyIb++f1FKjEGIkTs18lgcRy?=
- =?us-ascii?Q?cipvAe+WoCF95uqDNFD+hYEiHAOjKyI5+7J1/Uf8EVpH27x+4aIp8ZFA62Yq?=
- =?us-ascii?Q?okMUGHn6L5onChqmqM8fq2Es7dtuh9vvXvqkoHhhkkGv19Xd4jK95cPJI86U?=
- =?us-ascii?Q?4akObS8GrA1uNi5ZesIc0X7U3kvEC2r0zfKQrwh5/ErYkXxjyLYEAVA/vWO9?=
- =?us-ascii?Q?R2Ru7MwqNpv/lYZ3rrUdkOlVjBFmRGTN8qk0lQ+hgtlsXu2ywr/L81E+y5Dp?=
- =?us-ascii?Q?gMvSLWOo+BhGoHrOq8EqVSe2cgFsSEI57zHtabxthB1sYjhhXBq8Hbl27fDX?=
- =?us-ascii?Q?H6vfsubxL1vvQESIWRLCLauWUZXGp6NXcL2i39MUyBsaavWNYblJCF6Z//4n?=
- =?us-ascii?Q?QW4n7xNWJbTfSTj+HUMU1IyFdtK0BSwVHqiK3WqH6xCWNciSLM1FznuSFSzU?=
- =?us-ascii?Q?bIQiMMXlNhDQBP7UZhs=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:91.26.50.189;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:Postix.phytec.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013)(13003099007);DIR:OUT;SFP:1102;
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2025 14:58:28.3618
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 670970a8-ec07-47d7-2bd6-08de0d8da181
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29;Ip=[91.26.50.189];Helo=[Postix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DU2PEPF00028D01.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P195MB1403
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 14:58:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120767
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 15:51:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120768
 
-Fetch the needed Git tag by using BB_GIT_SHALLOW_EXTRA_REFS. This fixes
-the following autotools configuration error:
+Since commit 91e428d4cd5a ("opencv: Support building for native"),
+opencv can be built on a native target. However, not all of their
+PACKAGECONFIG dependencies (ade, libgphoto2, ffmpeg, gstreamer1.0 and
+gstreamer1.0-plugins-base) can be built in this context due to the
+missing native BBCLASSEXTEND.
 
-| build-aux/git-version-gen: WARNING: .gitarchivever doesn't contain valid =
-version tag
-| build-aux/git-version-gen: ERROR: Can't find valid version. Please use va=
-lid git repository, released tarball or version tagged archive
-| configure.ac:22: error: AC_INIT should be called with package and version=
- arguments
+These recipes would need to be extended for native build, but specific
+work is required to ensure they work properly. To make opencv-native work
+for now, remove the above features for the native build.
 
-Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+Effectively, PACKAGECONFIG for native is target minus gapi, gstreamer,
+gphoto2 and libav.
+
+Fixes this warning from AB[0]:
+WARNING: Nothing PROVIDES 'gstreamer1.0-plugins-base-native' (but virtual:native:[...]/meta-openembedded/meta-oe/recipes-support/opencv/opencv_4.12.0.bb DEPENDS on or otherwise requires it). Close matches:
+WARNING: Nothing PROVIDES 'ffmpeg-native' (but virtual:native:[...]/meta-openembedded/meta-oe/recipes-support/opencv/opencv_4.12.0.bb DEPENDS on or otherwise requires it). Close matches:
+WARNING: Nothing PROVIDES 'libgphoto2-native' (but virtual:native:[...]/meta-openembedded/meta-oe/recipes-support/opencv/opencv_4.12.0.bb DEPENDS on or otherwise requires it). Close matches:
+WARNING: Nothing PROVIDES 'gstreamer1.0-native' (but virtual:native:[...]/meta-openembedded/meta-oe/recipes-support/opencv/opencv_4.12.0.bb DEPENDS on or otherwise requires it). Close matches:
+WARNING: Nothing PROVIDES 'ade-native' (but virtual:native:[...]/meta-openembedded/meta-oe/recipes-support/opencv/opencv_4.12.0.bb DEPENDS on or otherwise requires it). Close matches:
+WARNING: Nothing RPROVIDES 'opencv-dev-native' (but virtual:native:[...]/meta-openembedded/meta-oe/recipes-support/opencv/opencv_4.12.0.bb RDEPENDS on or otherwise requires it)
+WARNING: Nothing RPROVIDES 'opencv-native' (but virtual:native:[...]/meta-openembedded/meta-oe/recipes-support/opencv/opencv_4.12.0.bb RDEPENDS on or otherwise requires it)
+[0]: https://autobuilder.yoctoproject.org/valkyrie/#/builders/82/builds/469/steps/13/logs/warnings
+
+Signed-off-by: Corentin Guillevic <corentin.guillevic@smile.fr>
 ---
- meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb | 2 ++
- 1 file changed, 2 insertions(+)
+changes in v3:
+- update commit text according to the v2 implementation
 
-diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb b=
-/meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb
-index cbd5e7a0fd..06807bef47 100644
---- a/meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb
-+++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.24.bb
-@@ -16,6 +16,8 @@ SRC_URI =3D "git://github.com/kronosnet/kronosnet;protoco=
-l=3Dhttps;branch=3Dstable1 \
-            file://0001-links.c-Fix-build-with-gcc-12.patch \
-            "
-=20
-+BB_GIT_SHALLOW_EXTRA_REFS =3D "refs/tags/v${PV}"
-+
- UPSTREAM_CHECK_URI =3D "https://github.com/kronosnet/kronosnet/releases"
-=20
- inherit autotools pkgconfig
---=20
-2.25.1
+changes in v2:
+- change implementation to a more commonly written one
+---
+ meta-oe/recipes-support/opencv/opencv_4.12.0.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
+index 27499caa92..aa11d3da43 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
+@@ -86,8 +86,9 @@ LDFLAGS:append:riscv32 = " -Wl,--no-as-needed -latomic -Wl,--as-needed"
+ 
+ EXTRA_OECMAKE:append:x86 = " -DX86=ON"
+ 
+-PACKAGECONFIG ??= "gapi python3 eigen jpeg png tiff v4l libv4l gstreamer samples tbb gphoto2 \
+-    ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)} \
++PACKAGECONFIG ??= "python3 eigen jpeg png tiff v4l libv4l samples tbb \
++    ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)}"
++PACKAGECONFIG:append:class-target = " gapi gstreamer gphoto2 \
+     ${@bb.utils.contains_any("LICENSE_FLAGS_ACCEPTED", "commercial_ffmpeg commercial", "libav", "", d)}"
+ 
+ # TBB does not build for powerpc so disable that package config
+-- 
+2.49.0
 
 
