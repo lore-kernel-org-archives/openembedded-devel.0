@@ -2,119 +2,122 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D93ACCD199
-	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 20:26:03 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web10.2881.1760732758896447428
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1A35CCD199
+	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 20:37:53 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web10.3149.1760733469234512015
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Oct 2025 13:25:59 -0700
+ Fri, 17 Oct 2025 13:37:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RljUU2+3;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-471076f819bso19391155e9.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 13:25:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CSoC//W9;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4710683a644so21657335e9.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 13:37:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760732757; x=1761337557; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760733467; x=1761338267; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ak9NzhP1kJjrE86we6rOvEBf7tQQ4IuXq6Ri2/Bs8oI=;
-        b=RljUU2+3s7fT7KfGo2QZGULTiY+xMon1k3+/9jVN2PkKRL7D8lxVfb9q5PzWQvMoFN
-         lpjFHBkB4RBLkwMl+kBVG7TEckXHn7taw01x7JZQ12RhQSOFvETJ1I4R9O4fv0OO5mE/
-         a4egLghyN5o4yfzOdOSFVqA4yXV0F9oz2UQ0nF9OED5u2J3c0je8HtFNTI8zsPzxrDOk
-         1B/sNIcGN9A5JOenHOSjFTx6/jgRJOnO3f7eOnhaBdx+rj4Vm59j0KimxuDYYEI0RLlR
-         2iqatPFV3uAjIGfLCBTh6AfA8DB4GGdAyAiJpsnQkNrT3rfov+CazEnKygHYEYI+nFNU
-         Ob0g==
+        bh=aZyq4kf1MwaPgx3Eku1+lxoZArcjgXSZjTRTz4Gnfa0=;
+        b=CSoC//W9nKB8JF10X1/Xv/H+CGKxTusDUe85iTg+4y4zRynOTtbBCzkGxCnm3PS30p
+         PTaVtmE/UE2Fiqjjtjg18DSl9FIYHxVYNfDvNXMIuvgTwRT7tXPqVVqR61XzwhpmuMTJ
+         GRiqXm/vYjf5ZBXDJH5T4J1zbB8FJKcM2zo3+U/ql1wDOlEu5f8vij+2NXtUzi7xKdrh
+         s9gmc+F/LOIlNcZNuy8DvZxYmUSuELFKMsjsnksgR2d76RL+hvpf16CgC4lWh6blVdkR
+         rpKGzaXFNSbs5PGUbmlBvvXSH9w8en1WmgyndgGWfptUoyvrN/F2BzoI6c8pvIJgUQTx
+         FxSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760732757; x=1761337557;
+        d=1e100.net; s=20230601; t=1760733467; x=1761338267;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ak9NzhP1kJjrE86we6rOvEBf7tQQ4IuXq6Ri2/Bs8oI=;
-        b=ITWbVMcvxfRi/uqnUWgxS0RVjylSt/4os+JEvoXBpNohvmp/WVAaNmWQyKx2R41voT
-         pGz7Llnu2A9Ba8l8FYeclb8DekupoJOesCR4yF5CHPblEWr4/f4vTC5B8ho1IBLb6mXv
-         +Kdv9EKJuQBcIOqbdRQJte2EbaRXb7GKfoXtq/ubRkN8+P3k8Ch0R4lzU97AYA5CC+Z/
-         9WpVkw6wPmdqMF+THkNFAmR1kBydW4EfyFjFceBRlqZEIcBXu5lMIMFipE5NPBbM+vG2
-         hgMepxsQQqimskqKUH/Nd1AYspNKrjC0gaIueD8Sq7peExFWz5SWZ7u3cQRqPIiNsM05
-         zTag==
-X-Gm-Message-State: AOJu0Yyw1fVlBjsJNuaeW8IZZEko6d8LM5WkQUwmQ1M3P7QWpWGEaYij
-	4H84g8BGOxRv2AxwaO7Pcuzb0sbYcf5M20guMRLkoHfACAy/y36T72ZJlGZ5Ng==
-X-Gm-Gg: ASbGncvpNuOoH+2BcbxG2JHAYBzn6Zdkesvvsk67vEhb3NCsN9Uq7+MttVU/hCs7XEc
-	muC3GmCYlwhg6tiuFRrzGSLLWydNPQVlsGZOkNilLIYa4el4er6dxSKd5T6oRJP3IsgTXfxTdTL
-	3Psqv2ADDAF2OJ+1OPe/9fkw7XBBt16ONJv2PFVWkbBZqFgQH6C1GxX3GpS24YMr6uvXoHwP2bF
-	hQAlwgVb6Ron86tyo+DwvfWeyCW86UezMKWIw11cvKjKWyoxOfcHbBMV4cRrdBQOgdpPb6wGnWb
-	V92AwCid2W9h7iW50vmI98asRcJvkorah08HZaP+HzePrknUF/BTbhk7WNjuWzuxXvbVSU0q9Gp
-	ftysyKxzL8PMiOJ/DA1nftfGM5uh5FGk2f+cWsTt06wUvIs3HHWUk8OtsBNkq0AQrS5IGAwxVCg
-	==
-X-Google-Smtp-Source: AGHT+IG8HB+zCUxDJ75T9XKcVFovUxho3fh9U23CCfq8msm/H7IwTEgYnRlPSqQ1m9fy1ax2x4sRgA==
-X-Received: by 2002:a05:600d:416b:b0:46e:45f7:34f3 with SMTP id 5b1f17b1804b1-47117874b06mr39793805e9.8.1760732757020;
-        Fri, 17 Oct 2025 13:25:57 -0700 (PDT)
+        bh=aZyq4kf1MwaPgx3Eku1+lxoZArcjgXSZjTRTz4Gnfa0=;
+        b=CeI3j4EpQEsCTgt0pCdsWwDR/1Ov+ifVuM4PNSCjV3GiLJVCfYQzDkkPFeoG37kULi
+         kDjI+RiAE3uCZWuqkrkaPGKqpzv2CvSZ7m6tAf+O8S/44iCMvJbDBxiMPBP/zl4vi3IP
+         GnXczjYnpwkM1BpM0VdVAGW/nr5SRUavlhvlAwuKJnRYjm39CmewSiQlDzcy7Jw/As9z
+         nFVHv5P/Jc4DbN8pUyomco6oQKR81AfvyiZ78raF3XZcsoF8Y+UYyXMIe3c1PiV9+MmE
+         bvv8cocdHfIY0wi0Mf3ZYW+xnqZCsz5k/MK4rsyoj7UotTaiCymLs5ChPSjhvGzsPX1C
+         a5Rw==
+X-Gm-Message-State: AOJu0YxX1JFtWGiagO1QzL3nQFntbdmpw8uDAujtb8kMNSEkK22vWqsS
+	nmUQHD080yEjvQDBvE1mjozp7il4EUHbELwfGy+Pz/niKTtfYS5YPgbMsW4Ctw==
+X-Gm-Gg: ASbGnctrj3xbI9J1sHTpamdq2itxaDdVwd5SzmwvzAjh9WFAkX9ctC5n+RrV5iIxK3v
+	9Mw3j9S6WSwh2AAGbbjhG5ZfpnJ6abEE+eYIFiU9Fx7snNY2w5lP6Met2CE4XCnyeYCjtZqQ9/a
+	TQzJlnc1xijpRvShf7rkjNMMmgvORuJKMYpb10oyA8mLraN6cv8X+SWpu86YDstzkB2j1U8PZOH
+	EzYZ765V4UL3dMHfK0DHZq6SXEyTHotYvX0RFDxifs9qhug5rcNHjXt0vl5OKISd53AasriJ1AQ
+	wfQ+KQsQTK4bqz+mOB9hHxthgNlNK8U7wQpq+OzLw7t6k6fE+rJVlZ89JfctGzcjsHQzN2g/3vn
+	WV389slluWtoNm9AoBOUvoPuUT40TtQzNGO0dQHTslXE8Fh09w6dmPnU713cVDN9RJRdwF0P9Ux
+	Otl1XauZHK
+X-Google-Smtp-Source: AGHT+IG9BGrtkIhu+tJsLu5zFhaVal5nLIJQDUx7w9NrewKL9iSxyWVpIIaUOAKMn7/zyu7hSvsJNg==
+X-Received: by 2002:a05:600c:4e49:b0:46e:1a60:c995 with SMTP id 5b1f17b1804b1-4711721a463mr44065665e9.2.1760733467265;
+        Fri, 17 Oct 2025 13:37:47 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-427f00ce586sm1152906f8f.49.2025.10.17.13.25.55
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4710ed9e7d7sm57425425e9.3.2025.10.17.13.37.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Oct 2025 13:25:55 -0700 (PDT)
+        Fri, 17 Oct 2025 13:37:46 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/2] libmanette: upgrade 0.2.9 -> 0.2.13
-Date: Fri, 17 Oct 2025 22:25:54 +0200
-Message-ID: <20251017202555.3027445-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] libmanette: fix ptests
+Date: Fri, 17 Oct 2025 22:37:46 +0200
+Message-ID: <20251017203746.3042722-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 20:26:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120776
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 20:37:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120778
 
-Changelog:
-0.2.13:
-- Update controller mappings
+The original content of the ptest package, manette-test, is a helper demo
+application (like evtest), and not a test suite. Also, the recipe did not
+provide a run-ptest script.
 
-0.2.12:
-- Add a deadzone for Steam Deck analog sticks
-- Fix build with older gobject-introspection
+Fix it by installing the actual tests, and adding a run-ptest script.
 
-0.2.11:
-- Port documentation to gi-docgen
-- Add support for Steam Deck gamepad
-  - Add ManetteDeviceType and manette_device_get_device_type()
-  - Add manette_device_supports_mapping()
-- Deprecate LIBMANETTE_* version check symbols, add MANETTE_* instead
-- Add runtime version check functions
-- Make hat to buttons mapping always emit button release
-  (fixes d-pad getting stuck when quickly flipping right->left etc)
-- Fix paddle keycodes
-- Fix DualSense motion sensor and touchpad being recognized as gamepads
-- Fix half-range axis mappings
-- Build
-  - Depend on hidapi-hidraw
-  - Specify --doc-format for GIR data
-  - Fix build warnings
+Note that the test folder structure looks like a gnome desktop test suite
+(and the application is under the gnome umbrella), however the project
+doesn't provide all necessary scaffolding for gnome-desktop-test to work, so
+the tests are executed directly from the run-ptest script.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../libmanette/{libmanette_0.2.9.bb => libmanette_0.2.13.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libmanette/{libmanette_0.2.9.bb => libmanette_0.2.13.bb} (82%)
+ .../recipes-support/libmanette/libmanette/run-ptest    | 10 ++++++++++
+ meta-oe/recipes-support/libmanette/libmanette_0.2.6.bb |  7 +++++--
+ 2 files changed, 15 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/libmanette/libmanette/run-ptest
 
-diff --git a/meta-oe/recipes-support/libmanette/libmanette_0.2.9.bb b/meta-oe/recipes-support/libmanette/libmanette_0.2.13.bb
-similarity index 82%
-rename from meta-oe/recipes-support/libmanette/libmanette_0.2.9.bb
-rename to meta-oe/recipes-support/libmanette/libmanette_0.2.13.bb
-index 2e59401892..2825b8af98 100644
---- a/meta-oe/recipes-support/libmanette/libmanette_0.2.9.bb
-+++ b/meta-oe/recipes-support/libmanette/libmanette_0.2.13.bb
-@@ -5,10 +5,10 @@ HOMEPAGE = "https://gnome.pages.gitlab.gnome.org/libmanette/"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-oe/recipes-support/libmanette/libmanette/run-ptest b/meta-oe/recipes-support/libmanette/libmanette/run-ptest
+new file mode 100644
+index 0000000000..3c937825d1
+--- /dev/null
++++ b/meta-oe/recipes-support/libmanette/libmanette/run-ptest
+@@ -0,0 +1,10 @@
++#!/bin/sh
++if [ -d /usr/libexec/installed-tests/manette-0.2 ]; then
++	cd /usr/libexec/installed-tests/manette-0.2
++	for t in ./*; do
++		$t && echo PASS: $t || echo FAIL: $t
++	done
++	cd -
++else
++	echo FAIL: no tests found
++fi
+diff --git a/meta-oe/recipes-support/libmanette/libmanette_0.2.6.bb b/meta-oe/recipes-support/libmanette/libmanette_0.2.6.bb
+index 5509b0bb09..4375e4db9a 100644
+--- a/meta-oe/recipes-support/libmanette/libmanette_0.2.6.bb
++++ b/meta-oe/recipes-support/libmanette/libmanette_0.2.6.bb
+@@ -7,10 +7,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
  
--DEPENDS = "libevdev libgudev"
-+DEPENDS = "libevdev libgudev hidapi"
+ DEPENDS = "libevdev libgudev"
  
- SRC_URI = "https://download.gnome.org/sources/libmanette/0.2/libmanette-${PV}.tar.xz"
--SRC_URI[sha256sum] = "29366be5452f60a74c65fc64ffe2d74eddd4e6e6824c2cefa567a43bd92b688f"
-+SRC_URI[sha256sum] = "287cc2fde0de092919366af757d85e7b3a0248eb1b395344726e97955a77d8ae"
+-SRC_URI = "https://download.gnome.org/sources/libmanette/0.2/libmanette-${PV}.tar.xz"
++SRC_URI = "https://download.gnome.org/sources/libmanette/0.2/libmanette-${PV}.tar.xz \
++           file://run-ptest"
+ SRC_URI[sha256sum] = "63653259a821ec7d90d681e52e757e2219d462828c9d74b056a5f53267636bac"
  
  inherit meson pkgconfig gobject-introspection ptest vala
  
+-FILES:${PN}-ptest =+ "${bindir}/manette-test"
+ FILES:${PN}-dev =+ "${libdir}/girepository-1.0"
++FILES:${PN}-ptest += "${libexecdir}/installed-tests"
++
++EXTRA_OEMESON += "${@bb.utils.contains('PTEST_ENABLED', '1', '-Dinstall-tests=true', '', d)}"
 
