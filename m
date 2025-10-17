@@ -2,111 +2,136 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46860CCD195
-	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 14:24:11 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web11.16676.1760711046781819566
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6683BCCD195
+	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 14:51:41 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web11.17636.1760712697677019347
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Oct 2025 07:24:07 -0700
+ Fri, 17 Oct 2025 07:51:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cecEC3IM;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-471076f819bso16337355e9.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 07:24:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=e8PIpt59;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-47117e75258so8395035e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 07:51:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760711045; x=1761315845; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760712696; x=1761317496; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Oe/7TD948t/rv05j3Lb8LpbSJzKsosymxX+4MmT13KA=;
-        b=cecEC3IMgqJxKm5u6v3NTu9gg2AVsPOW9Tm8/jm3cRmO5fRDoQvO/ULmwUp+Xsf9Ih
-         85kVilCBCoRphT4bXWXn79/AA5qo7mc/RvaTHNzuMIz5aohIx5lsY+wTJoHsIEMjCQnY
-         FGaU3nXxTsQRK3ELP+Scbh2IIo8iuCCEiZM+npdHUqPM2NG9a8r1JuTAbjqawTbGtHSQ
-         hNfe65GDjTdL1Wn6fmYMIbi4nwjeJhpljWCsmlEa+Rn6kfMZJ5+cDmR+w5fbvlh2zhzb
-         /6iacKbnzZETtBk8zkbFXlaPiY+gdqi7RFwASLcgDUx91NyiPQZOIkRn2NSmB2vvmexg
-         QrnA==
+        bh=3Lo3+l4HjgTj8D/SyQnCrybYqPZ/qRIkJqZW4j/hXRc=;
+        b=e8PIpt59qeD2cVP+YAjgzFH7ELvDBpcW4EysO91r/Eh+gdkxLoni1/zrQzRgvFKqi/
+         fxB718061E9HAIaiGmtpPQ0cTWl9aOWf0QMFgqN95YH4TkBulpGkycfYqulLriUh7aZC
+         pE/ib6K3Ll5QVejlLdfCEZG0NHW9j4KrExqZxIv7eOsuShHaQtYPXGKJgsX3IS9av7ul
+         w3e4jx2LJo9Ft4o3J4fIWgWfWiLcMzSIGr6KwNEV3A1rQicSxLhmknq0pLuPF/tJyhN4
+         pu7F50pHURzYcdEmAN6Yq3wFb7y11eVJrTs+EZTHcYJxY7OB3jpDAZxWck+AmD+rp3Iu
+         6/NA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760711045; x=1761315845;
+        d=1e100.net; s=20230601; t=1760712696; x=1761317496;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Oe/7TD948t/rv05j3Lb8LpbSJzKsosymxX+4MmT13KA=;
-        b=pGTY+BqSYfiAI8/H4Jes2ximgGKY2d5I3S0tz12SjcMRhdrT/ZgTzjQ9DpTCiyniPo
-         9Te6/5BsFj2M1pX7UVD0sd6VinsUFurFBmE7nGpW+juKSx/a7VgRXHF3RtFdSt6rDOP8
-         KOEYc1nrPWw/dfjZYzCNmHrTt8RiuBw3KZ8RogHM7hRJgiAwN2s7Ft8QGgjACcFJZysE
-         q6Lk/42oFB1/UmzXnbPCzQVLWrC0RYfiN645fXfwwnCXSvVX+uOniCGMROyAzpDXhYll
-         /MbJhMOKMiPDhGm5A/BjdqAH4juEwJW7GcBN1jgEXsCpTkuYf+p5QvBVEYAbmdyKO5BX
-         PzaA==
-X-Gm-Message-State: AOJu0YyU0kdhBm0pLg0lU7yfaV4ZFV1GyJvCW99hSLAqXpdVwtG189Xf
-	k3kP3YP3WxieCsyz0UDkINyt0Ez5s4/snmMKHZ+9v7+EhNBlHMvSrWUYKLv4nA==
-X-Gm-Gg: ASbGnct8aN+BgMs0tF3BnD/qIQULJdGwvUcG+v/1+ciaFGjg2JU/+8lzxFDVV3RyjRy
-	+8RAmC3OLaQzN9xYHqYUmBACl/iS2kY43fTYzn6pBFz9Uo4EY818kpdUPWfOIN8o7oeE/uSpRua
-	/xcmFddhDlUEVShzURCabZio/+RjSMUjYksU0Ggx3NzsGZudpX78btGLZbhE+u410KYMPUYwgXe
-	42eOviC5tnnqM1cLdXc/DdMUOHk5KVa/iqtreF8JhmSroiirNeUsgQBFQit5RlL24fyQ0MpBmYu
-	x4aF8dZ+dVDmqYVcj9w2mIC0MUWtymWZ1O7apD6B7whmlPRqFdJ/2paZ0eYlYxqKwheq6MP3Uzp
-	gHUf7QAho3BgPn0Hpx15HIAsPgknk4C7zZwo62Hwg5pdTc8iy8fIH/90DSy17qYkZMjb9gSlg96
-	ImXSUFuvbZ
-X-Google-Smtp-Source: AGHT+IEXh2V6FoGp4HofbGCGKMVu9wY1/FtL2CL8h7XaQo7OMD28CLbbALKAvNs9WatNiiCq54jgSQ==
-X-Received: by 2002:a05:6000:420f:b0:427:614:83ef with SMTP id ffacd0b85a97d-42706148516mr2383804f8f.25.1760711044991;
-        Fri, 17 Oct 2025 07:24:04 -0700 (PDT)
+        bh=3Lo3+l4HjgTj8D/SyQnCrybYqPZ/qRIkJqZW4j/hXRc=;
+        b=s+DXg8IRotvrJqYFgWA2Ck6M2XSyQC1Wf+MiYA8OuM4WICDTjqz9suvdJWBqIFNUhw
+         5r6IDBdwDZLhgdzhEdMqk383QfOXBRMj1UqqvCqImNBVC+T9t3HPMh491OEuDPw72Ez3
+         pV7M5S0Nt4gDIRNr4INexooTgmIqPu915P/Tv29V9MifuOlUze+vpwFufYsT1mE9ic8K
+         BiUAtclq7EabXsENxLuyfiFloE43IbKAic4IpeFY82LeCIlGHwqbpTzlI713DJYZhZoT
+         NEhTgIB3gh4w/m5XEODtGjwXzzr6bjvuwcMoSD3BpxTbR6Z2vlWrV7rCW8KYC3PX8NwC
+         ZkrQ==
+X-Gm-Message-State: AOJu0Yw4JuGiqvDXTtkpW2Brr73/byt7OtAbj6e7csplnM5+ZB///PWR
+	3B+FX8EUAzeP7/dqgHnNXZbWEJrqOC/8aN4HgGFBH/YyI8NVx2hvxEGaEimepw==
+X-Gm-Gg: ASbGnctO5JCuSYxcwYJiI+8wqsmoZLuY6IpyND6UEm6bLfgVwLIrXAunNSeSobLrdDQ
+	EbPoI/SJ1Pe/4MfShPZMCDm2VdT2NTf78SYo7BUEbi9JRAcPKKLBZjBmgrpJ1CsgGxJQWYWiQtV
+	VDq7tRHuSjTxbUVx9795qxWp/10D+ep86mToVy3Tdh0Vx5JDQ/DWQa8VdEgHSIN57JovHTm5VKW
+	BP6v6LVvvlWgkjwR8pW0gk1avRE14YbfyYiBEYuodsNfx46RZaAE4UOhlN9ryKbz0cScAYoD5CB
+	7IIMh5vIRIM/gVmgfcix06++KT4H/zwNi5pCCEN0qc9HEj6AuJrN3uVyitjZZ9vYqzkUR4kbTw6
+	2QUuK3yvl40FDxyewAkDm8h3TPQKYRDY5Ri33382TCjZyh3vfe10mA2XGt55STOZgOPzVI4m2R/
+	yHFFwmK7Aqmx89opFFUHs=
+X-Google-Smtp-Source: AGHT+IFi8fZKb8T8dlBOhpDr3PgLeXuWUE4z/0HfC0dZeUm7HXNyOYe6EBxlykglLhSf7sCAkPjjBQ==
+X-Received: by 2002:a05:600c:3e0b:b0:46e:6af4:ed83 with SMTP id 5b1f17b1804b1-4711791158cmr28348655e9.23.1760712695686;
+        Fri, 17 Oct 2025 07:51:35 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-426e50ef821sm26725714f8f.38.2025.10.17.07.24.04
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-471144b5c34sm94531995e9.10.2025.10.17.07.51.35
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Oct 2025 07:24:04 -0700 (PDT)
+        Fri, 17 Oct 2025 07:51:35 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH] kernel-selftest: fix ptest
-Date: Fri, 17 Oct 2025 16:24:03 +0200
-Message-ID: <20251017142403.2586968-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] keyutils: fix ptest failed since "+++ Can't Determine Endianness"
+Date: Fri, 17 Oct 2025 16:51:34 +0200
+Message-ID: <20251017145134.2612603-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 14:24:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120763
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 14:51:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120764
 
-The run-ptest script was trying to call test_align executable, which
-doesn't exist (anymore?).
+From: Changqing Li <changqing.li@windriver.com>
 
-Instead align more to master branch, and execute the selftests themselves.
+All the ptest cases are failed since error "+++ Can't Determine Endianness",
+update the regex for matching the endianness to fix this issue.
 
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 6de9b46cc78543f838526c3bcb193d02d487cfb6)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 2 +-
- .../kernel-selftest/kernel-selftest/run-ptest             | 8 +++-----
- 2 files changed, 4 insertions(+), 6 deletions(-)
+ ...c.sh-update-regex-for-getting-endian.patch | 35 +++++++++++++++++++
+ .../keyutils/keyutils_1.6.1.bb                |  1 +
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-security/keyutils/files/0001-tests-toolbox.inc.sh-update-regex-for-getting-endian.patch
 
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-index 3d97ea0967..73be432d2d 100644
---- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-@@ -133,7 +133,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
- INHIBIT_PACKAGE_DEBUG_SPLIT="1"
- FILES:${PN} += "/usr/kernel-selftest"
+diff --git a/meta-oe/recipes-security/keyutils/files/0001-tests-toolbox.inc.sh-update-regex-for-getting-endian.patch b/meta-oe/recipes-security/keyutils/files/0001-tests-toolbox.inc.sh-update-regex-for-getting-endian.patch
+new file mode 100644
+index 0000000000..728f464331
+--- /dev/null
++++ b/meta-oe/recipes-security/keyutils/files/0001-tests-toolbox.inc.sh-update-regex-for-getting-endian.patch
+@@ -0,0 +1,35 @@
++From 935a31dd6f14bd1aff735495f0fdbae4ca05c695 Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Fri, 2 Dec 2022 15:35:40 +0800
++Subject: [PATCH] tests/toolbox.inc.sh: update regex for getting endian
++
++Update regex for getting endian in following condition:
++/proc/777/exe: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2
++
++Upstream-Status: Submited [Submitted to keyrings@vger.kernel.org ]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ tests/toolbox.inc.sh | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/tests/toolbox.inc.sh b/tests/toolbox.inc.sh
++index 1964450..e827e20 100644
++--- a/tests/toolbox.inc.sh
+++++ b/tests/toolbox.inc.sh
++@@ -13,10 +13,10 @@
++ echo === $OUTPUTFILE ===
++ 
++ endian=`file -L /proc/$$/exe`
++-if expr "$endian" : '.* MSB \+\(executable\|shared object\).*' >&/dev/null
+++if expr "$endian" : '.* MSB .*\(executable\|shared object\).*' >&/dev/null
++ then
++     endian=BE
++-elif expr "$endian" : '.* LSB \+\(executable\|shared object\).*' >&/dev/null
+++elif expr "$endian" : '.* LSB .*\(executable\|shared object\).*' >&/dev/null
++ then
++     endian=LE
++ else
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-security/keyutils/keyutils_1.6.1.bb b/meta-oe/recipes-security/keyutils/keyutils_1.6.1.bb
+index a915b7f2d2..0464117311 100644
+--- a/meta-oe/recipes-security/keyutils/keyutils_1.6.1.bb
++++ b/meta-oe/recipes-security/keyutils/keyutils_1.6.1.bb
+@@ -19,6 +19,7 @@ SRC_URI = "https://people.redhat.com/dhowells/keyutils/${BP}.tar.bz2 \
+            file://keyutils-fix-error-report-by-adding-default-message.patch \
+            file://run-ptest \
+            file://fix_library_install_path.patch \
++           file://0001-tests-toolbox.inc.sh-update-regex-for-getting-endian.patch \
+            "
  
--RDEPENDS:${PN} += "python3 perl"
-+RDEPENDS:${PN} += "python3 perl perl-module-io-handle"
- # tools/testing/selftests/vm/Makefile doesn't respect LDFLAGS and tools/testing/selftests/Makefile explicitly overrides to empty
- INSANE_SKIP:${PN} += "ldflags"
- 
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest
-index d40b9576d8..d8c942a2ea 100755
---- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest
-@@ -1,11 +1,9 @@
- #!/bin/sh
- export PATH=$PATH:/usr/kernel-selftest/bpf
- 
--# test_align
--test_align | grep "12 pass" &> /dev/null
-+/usr/kernel-selftest/run_kselftest.sh -s
- if [ $? == 0 ]; then
--    echo "[PASS]: test_align"
-+    echo "PASS: kernel-selftest"
- else
--    echo "[FAIL]: test_align"
-+    echo "[FAIL]: kernel-selftest"
- fi
--
+ SRC_URI[md5sum] = "919af7f33576816b423d537f8a8692e8"
 
