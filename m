@@ -2,175 +2,119 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66101CCD195
-	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 12:05:20 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.web11.13528.1760702715012970508
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3EEACCD199
+	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 12:54:50 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.web11.14678.1760705685179641552
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Oct 2025 05:05:15 -0700
+ Fri, 17 Oct 2025 05:54:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=noAxagUp;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-47112edf9f7so10519035e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 05:05:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=j5g78As0;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-42557c5cedcso1098072f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 05:54:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760702713; x=1761307513; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760705683; x=1761310483; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CybblooEeSIq61TS+gru4X7AF4dcas8Tdob4mCneYww=;
-        b=noAxagUpUbqbSXpFN/UrWnFZl1I3zudGPso0zoMdGJWqofR+kEGItEAu1v64ta5VHR
-         RfFln6D4bC+IIwANeo4ssAycSUzmjfVbMc9yejs8kfxlb6aQRaEuTayZwk3StM4n7nJJ
-         WAFfz/r7W1+nAAk1NFGopplwLn8lr/DeiVYKUmD5Wt0graJHPAy6taPjjOZT0FguHpEw
-         0Mj3VAT/3UpFNlWlq244hs7d+UISmZ4HCRj+LtJPViJnK6r4uW8vce5rSqq22TjkuG5w
-         Ws5hC+TqjVzN6BEHPWySgQAqw7gx8j/BL75c7WrjIXJz94Lm+sw64QLRViU6YMMBuk8J
-         i8fw==
+        bh=VXVc44tI0x7AiREnjJzlcnkHRpBNdsPKjVU09DoKp+U=;
+        b=j5g78As0olV0JlRSFuWcj904XIvcqudetg3HEtTpQGGl6J5GFf0LOWrqUjoi8wrZl8
+         n5G4C7eKXq6F2wFzO2NExRNPYaCPK/NB2dkQmFDAqmK8gOuHpE83vB4+rN9Tr7KuYniR
+         6ZDyGbrHIsQp2h9lNJRcYcv5yjbr7N4urhyCbSsC8ZzWUCgmJeTN4Vs3YhecSxf0F8MW
+         hhI1QkEG/izshnv8i9O2QHQEZ9OtE+7SOtV6HCRzu/39RWzsMQkKrEKaxJY6TQB4APTC
+         Bn/vc+cVtFW73wqrDx6QAZ+GfkmNY+iAJ/BHxGf+cWC+8LDggujcXpj3v9XAqwvNVXI6
+         Oy9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760702713; x=1761307513;
+        d=1e100.net; s=20230601; t=1760705683; x=1761310483;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=CybblooEeSIq61TS+gru4X7AF4dcas8Tdob4mCneYww=;
-        b=Bw2wScvyorjfpvgz27oDdItGa2A5Vw7D/CJaYBHE1EVbbWGKMfsH7jq4T8RdMHqiEW
-         ZVo05ctvmaF1uU8n/iVD9iqwDl+Qq8hmQw4Qj+7/8E4siOEBGoo/s6xeak+OGzmxeNOl
-         ++V1HvCvfMTPWI2sEZoi+8J8XQEvkhl0ep3HiCcb+S84zS3U7bppUAuuz6HI1WOAIi9Y
-         4uOmUpX9dcWU9aoqBQLLiqiFACWzDU5TBCThkeM4awBum82cQUVWa5O4CB0LMHp8f/0n
-         6nhb75regk8qY4Vs07/8TO8p4/+mmGpR9a5E7lQcoHafgL+u25K8/iOYjz5x8WxyB8PY
-         Y6oQ==
-X-Gm-Message-State: AOJu0Ywe8D/rNwu/IAh/o0Nz8Cg7aeqim9g/MEv+hZI+T+5wos7WeVng
-	66Th3+pMtlvnJ5WJtQLxn1znLXR59wVvMuc7WfjnlbiBTdgvYYdBhmgSdaqvCg==
-X-Gm-Gg: ASbGnctePyOwzTtEJ5FgJDZa4k8pfkgIA1G6M6aH7pRkZOr5eQgDLzZ3ecji1AxR8D3
-	tEh95V4iCXUzqbQfsCertdJR62HT+Htbcyuah1DwEU8V9WGqojTMH3RFfHg7tkr80pyZQl2lx9v
-	+kpVs9VNsbDlFbTon5sPFETb0AgrB8EF//TftijcRkdtzvDXHjSIJYLfZ+XtIDKUHalgaYhokVD
-	rSWN+P9cHOmJGJS0gSMeerJfQRK3hlKpOjBs/crL4unzqTWEMHzTeGhHya3LhG46gmVGAk/PcEg
-	Y0FKDDkD+64cppHEoY83X1r921HqriZmYbjq2PhDxw90sytlxsttXQI3Q7OqP8FMcvnjo/7vXkP
-	wQfXHrsRSohv3ctQO4h5XszXoxzaRTE8IjlJ5Se7fFykVdGrdy5Ho19XJWs18NgZ9q4sG3lD8aw
+        bh=VXVc44tI0x7AiREnjJzlcnkHRpBNdsPKjVU09DoKp+U=;
+        b=RzFmJS2bbR7D3rz00vNCjxvefak4mKvD7tSpb1wlqxnyRapx5zcmJQtc3VeyF6AMQd
+         03xNk6HazMHMY+9MPxPhBhpYuGrDZM2G6fTMlLkII1tcDFSK/4IFLNvDMtMSnx/HQ3qa
+         HeVqpDVJAACVpYYyKVlmaLFeDvdZjq93c0PmBfcWzOef87yzuNbzllRzlcvloUctWPpg
+         elnj+GcWvZaqtYTSG3tqJ4zyM50js/TZIjx2AEjUgX4bxPaQNVSVXyFrPpoctXMulhOA
+         GOdOfr4Jy/0CD5DedRtPdZ9o2Di4nbstjeqFmz8GOyNfTX8PcgYq9S7S0H+pcdPSmxPx
+         3FJA==
+X-Gm-Message-State: AOJu0YwDgS3858bAzxPLGh28/F7KAHcuEQk3rcKoHLeuMI8+oFjP9JdU
+	g+z29Mz2bCJ+IsS6n3UUI6HqGdVh4Lsp7Z5ETvHiVvOdr4PREGHzpvL3PlFpew==
+X-Gm-Gg: ASbGncuMQevs+DjBnTGhHhODPIQLap4lOQzYFzSaJ8WNKed86sX6z4/kgigi86tX1zK
+	/4sNwhfBgPMRff5L3bietsqUPD/Nnd8z+epK134J3vpprZ/JnllY36s7st9lC75NOFycuEXhGti
+	HnGYqrnmyklZYX+nwxyc7fs/4OzUtmjoLl4h+tVU8raDJwdPx79UuDAy9FIRJCfW8twSocn9l5d
+	cjTziRNR3V+icQIle8qxwsPF7TE+v0Hdrx6GD5w06Aqmd3OKsXN5CuAaI4ZG9I0VhKEp7ksw/xk
+	YYeeGG9qC40Q0MNzSyBiRmW0ZFRHybg8o4V0Z7FtoiIaeI7YTYVoNVCK4GDj9XwHlxO2+BUg05q
+	f2MLTY4SmJsVL25bXSJGo5XP88kCHwkk2f/A2P035Biqb1YqMeSbqWF/oPOpYTNC42pV3swXwfw
 	==
-X-Google-Smtp-Source: AGHT+IEBYFMu5zanqMcrVNHHRaUZAsxSI8XPSzYTpe/+nPdkWVGnArP6/rOKdw0GYZVXnnSKQHBxNw==
-X-Received: by 2002:a05:600d:416b:b0:46e:506b:20c5 with SMTP id 5b1f17b1804b1-47117911890mr23643135e9.26.1760702712902;
-        Fri, 17 Oct 2025 05:05:12 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFj475E/mg/TMBgtN3UxDRLGcHtWzg6JuRret4osLI8QrsS02ZzgFD4HQI5l17n0CC+BuKiFQ==
+X-Received: by 2002:a5d:5888:0:b0:3ec:2ef7:2134 with SMTP id ffacd0b85a97d-42704d54b25mr2049699f8f.18.1760705683219;
+        Fri, 17 Oct 2025 05:54:43 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4710f28a920sm43169595e9.7.2025.10.17.05.05.11
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4710f289daasm44796985e9.6.2025.10.17.05.54.42
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Oct 2025 05:05:11 -0700 (PDT)
+        Fri, 17 Oct 2025 05:54:42 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] cli11: add ptest support
-Date: Fri, 17 Oct 2025 14:05:10 +0200
-Message-ID: <20251017120510.2439753-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] fmt: fix ptests
+Date: Fri, 17 Oct 2025 14:54:41 +0200
+Message-ID: <20251017125441.2463913-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 12:05:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120760
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 12:54:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120761
 
-The tests take single digit seconds to execute.
+The recipe has inherited the ptest class, however it did not install
+not execute any tests.
+
+This change installs the tests and add a script to execute them.
+
+The tests are quick, execution takes single digit seconds.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../include/ptest-packagelists-meta-oe.inc    |  1 +
- .../remove_tmpdir_from_test_binary.patch      | 33 +++++++++++++++++++
- meta-oe/recipes-support/cli11/cli11/run-ptest |  5 +++
- meta-oe/recipes-support/cli11/cli11_2.5.0.bb  | 19 +++++++++--
- 4 files changed, 56 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/cli11/cli11/remove_tmpdir_from_test_binary.patch
- create mode 100644 meta-oe/recipes-support/cli11/cli11/run-ptest
+ meta-oe/recipes-support/fmt/fmt/run-ptest |  5 +++++
+ meta-oe/recipes-support/fmt/fmt_8.1.1.bb  | 10 +++++++++-
+ 2 files changed, 14 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/fmt/fmt/run-ptest
 
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-index 18324ff0d3..825747d522 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -8,6 +8,7 @@
- # ptests which take less than ~30s each
- PTESTS_FAST_META_OE = "\
-     asio \
-+    cli11 \
-     cmocka \
-     cunit \
-     duktape \
-diff --git a/meta-oe/recipes-support/cli11/cli11/remove_tmpdir_from_test_binary.patch b/meta-oe/recipes-support/cli11/cli11/remove_tmpdir_from_test_binary.patch
+diff --git a/meta-oe/recipes-support/fmt/fmt/run-ptest b/meta-oe/recipes-support/fmt/fmt/run-ptest
 new file mode 100644
-index 0000000000..22c3e5211f
+index 0000000000..a069e4543c
 --- /dev/null
-+++ b/meta-oe/recipes-support/cli11/cli11/remove_tmpdir_from_test_binary.patch
-@@ -0,0 +1,33 @@
-+Remove tmpdir from apptest binary
-+
-+This binary is used in the ptest package. It executes another helper binary
-+for the test, which is identified by its absolute path, as it was determined during
-+build. To avoid the QA error (and to find the helper binary during test excution),
-+use pwd command files.
-+
-+Upstream-Status: Inappropriate [oe-specific]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+
-+
-+diff --git a/tests/AppTest.cpp b/tests/AppTest.cpp
-+index 29aff27c..ddb8238b 100644
-+--- a/tests/AppTest.cpp
-++++ b/tests/AppTest.cpp
-+@@ -2819,7 +2819,7 @@ TEST_CASE("C20_compile", "simple") {
-+ 
-+ // #845
-+ TEST_CASE("Ensure UTF-8", "[app]") {
-+-    const char *commandline = CLI11_ENSURE_UTF8_EXE " 1234 false \"hello world\"";
-++    const char *commandline = "$(pwd)/ensure_utf8 1234 false \"hello world\"";
-+     int retval = std::system(commandline);
-+ 
-+     if(retval == -1) {
-+@@ -2837,7 +2837,7 @@ TEST_CASE("Ensure UTF-8", "[app]") {
-+ 
-+ // #845
-+ TEST_CASE("Ensure UTF-8 called twice", "[app]") {
-+-    const char *commandline = CLI11_ENSURE_UTF8_TWICE_EXE " 1234 false \"hello world\"";
-++    const char *commandline = "$(pwd)/ensure_utf8_twice 1234 false \"hello world\"";
-+     int retval = std::system(commandline);
-+ 
-+     if(retval == -1) {
-diff --git a/meta-oe/recipes-support/cli11/cli11/run-ptest b/meta-oe/recipes-support/cli11/cli11/run-ptest
-new file mode 100644
-index 0000000000..ef37d44783
---- /dev/null
-+++ b/meta-oe/recipes-support/cli11/cli11/run-ptest
++++ b/meta-oe/recipes-support/fmt/fmt/run-ptest
 @@ -0,0 +1,5 @@
 +#!/bin/sh
-+cd tests
-+for t in `ls ./*Test`; do
++
++for t in `ls ./*-test`; do
 +	./$t && echo PASS: $t || echo FAIL: $t
 +done
-diff --git a/meta-oe/recipes-support/cli11/cli11_2.5.0.bb b/meta-oe/recipes-support/cli11/cli11_2.5.0.bb
-index f6c9ac8f69..980932165b 100644
---- a/meta-oe/recipes-support/cli11/cli11_2.5.0.bb
-+++ b/meta-oe/recipes-support/cli11/cli11_2.5.0.bb
-@@ -6,12 +6,27 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b8bdde6bda8508bef68a39f3e0d7e939"
+diff --git a/meta-oe/recipes-support/fmt/fmt_8.1.1.bb b/meta-oe/recipes-support/fmt/fmt_8.1.1.bb
+index c53dd38901..54b8fd3d9e 100644
+--- a/meta-oe/recipes-support/fmt/fmt_8.1.1.bb
++++ b/meta-oe/recipes-support/fmt/fmt_8.1.1.bb
+@@ -4,7 +4,8 @@ HOMEPAGE = "https://fmt.dev"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
  
- DEPENDS = "catch2"
- 
--SRC_URI = "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https"
-+SRC_URI = "gitsm://github.com/CLIUtils/CLI11;branch=main;protocol=https \
-+           file://remove_tmpdir_from_test_binary.patch \
+-SRC_URI = "git://github.com/fmtlib/fmt;branch=master;protocol=https"
++SRC_URI = "git://github.com/fmtlib/fmt;branch=master;protocol=https \
 +           file://run-ptest"
- SRCREV = "4160d259d961cd393fd8d67590a8c7d210207348"
+ SRCREV = "b6f4ceaed0a0a24ccf575fab6c56dd50ccf6f1a9"
  
--inherit cmake
-+inherit cmake ptest
+ S = "${WORKDIR}/git"
+@@ -13,5 +14,12 @@ inherit cmake
+ inherit ptest
  
- # cli11 is a header only C++ library, so the main package will be empty.
- RDEPENDS:${PN}-dev = ""
-+RDEPENDS:${PN}-ptest = ""
+ EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
++EXTRA_OECMAKE += "${@bb.utils.contains('PTEST_ENABLED', '1', '-DFMT_TEST=ON', '', d)}"
 +
 +do_install_ptest(){
-+	# double tests is not a typo. The inner empty tests folder is
-+	# used by one the tests.
-+	install -d ${D}${PTEST_PATH}/tests/tests
-+	for t in `ls ${B}/tests/*Test`; do
-+		install $t ${D}${PTEST_PATH}/tests/
++	for t in `ls ${B}/bin/*-test`; do
++		install $t ${D}${PTEST_PATH}/
 +	done
-+	install ${B}/tests/ensure_utf8 ${D}${PTEST_PATH}/tests/
-+	install ${B}/tests/ensure_utf8_twice ${D}${PTEST_PATH}/tests/
-+	install ${B}/tests/link_test_2 ${D}${PTEST_PATH}/tests/
 +}
  
  BBCLASSEXTEND = "native nativesdk"
