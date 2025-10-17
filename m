@@ -1,201 +1,158 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A99E2CCD184
-	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 07:43:08 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web10.10397.1760686982915588620
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ED85ECCD195
+	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 08:31:28 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.10920.1760689885588609513
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Oct 2025 00:43:03 -0700
+ Fri, 17 Oct 2025 01:31:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=QqK7X90t;
- spf=pass (domain: mvista.com, ip: 209.85.216.49, mailfrom: vanusuri@mvista.com)
-Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-33d28dbced5so150264a91.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 00:43:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1760686982; x=1761291782; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QdYosj18JxsdOF4tX6FsTGxogFUVKkATj7II134gg94=;
-        b=QqK7X90t+aw9c53GRW3/MrmTiz33a1Um66MjwSQQiVvlrwnv0KBT40qlPcUfqbZOL6
-         Ba7LlMB2EaXeHUjPD35TugoRPsqrcTloiC5ObgG2nQ941qINOvfYc3Ly0xLOGinSed3y
-         dua0BUIy/0gafmUVgEZuvcJfNb0JFO5Cbqzc4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760686982; x=1761291782;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=QdYosj18JxsdOF4tX6FsTGxogFUVKkATj7II134gg94=;
-        b=fK8OtL2bd9X2wCF2BTjzMt7lQ/gjO5/ZzbFezVL4f5SsNzcrIIsxMaWoUlVPaKTR2G
-         Z/ja64x3JUcby6Tu2Z/YDgIoorvEVpVc1PioG/AupF2vyE/AiD4RFe/mFmSCsts2wh83
-         bZCC8ot51Bad4k92HdPKGyhIlRHQZk/PSv4bL1fYNeFCrqbudgO4o4JGGjUsCnoX0waZ
-         LPJ0VijIISAqfQhdcyj//tmKLfiqtiCb28uPJQ/OyTWEq/KPfVhCrNGb14ZDhsGmhsGP
-         IghqnhNnfLpBnoDaOAZ425quMhDwOVEg0jfQRvKtmxxZd8RjDtX/XfRx1S+4g3Ivb9H8
-         x4uw==
-X-Gm-Message-State: AOJu0YyoaH9felAXlD8x6PaE/HD9sUWcwDdirc0hIJxlZJnrbFVODEKP
-	vveCvdjNqUs0E/p/O7wUTiRkhkZTZm0pKspbqgk6IYNmhRpQz5Q/L6v00tWNyIHOwuY8b1UKfmr
-	pqrcpm80=
-X-Gm-Gg: ASbGncvJVX5b2gT4AB27HbPabjnSQd225QEuT7WnvI5Rw4E9MNwQQnZMk6Qm7K+0RRf
-	OY+BFmEBiKnW8XCJ3QSWZ89tJONoX8Qgi6AuAcwkQHDiguEtBlTjptR4brzB9itQZzWvtptDMqM
-	e/Cc4lMAsxjH1RThzk6pUM0+Vu9K7fItYF3lj7k4W9Us7ehzNcz6p3B/5AnMeSkiA4nP4WXb7nt
-	/leEDBh7d0W+lt3GCiJIju6+pFaDJ+XSIF/43MtJkOfG0m1N7TuZy6JOsyV8Q4pYbx2VVVWyBLN
-	5Iu0JBQHSytvdn65OAtvxaDYDhxmhdCDfC/GBGQZzN5+SPIoEnXR0AvclmUarz6P7cO+JDOsGVC
-	Rpn6Ljju4hI6mwMMMQt5nKqYRRSAVO6zHONKovJbBKcFPnBvaOgggzVtnJ26HdtqG6fx8t2MUzr
-	nZE9huazOd8KKtRurvoFXHraK54w==
-X-Google-Smtp-Source: AGHT+IH1FPxWqYRpGGGLIK9uPpDS8xvR0qO/67WZPEkL5OMPfAK0kSB+wPBmuqDrBcG9Bnwq14uqOQ==
-X-Received: by 2002:a17:90a:e70f:b0:32e:3837:284f with SMTP id 98e67ed59e1d1-33bcf8e312bmr2932901a91.21.1760686981657;
-        Fri, 17 Oct 2025 00:43:01 -0700 (PDT)
-Received: from localhost.localdomain ([2401:4900:8fcf:39c2:10fc:ab36:ff9a:d488])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33bd79b2ee4sm1897076a91.1.2025.10.17.00.42.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Oct 2025 00:43:00 -0700 (PDT)
-From: vanusuri@mvista.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-multimedia][kirkstone][PATCH] vorbis-tools: Fix CVE-2023-43361
-Date: Fri, 17 Oct 2025 13:12:40 +0530
-Message-Id: <20251017074240.1510482-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=RdRGKgdD;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=238598bdad=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59H3vpKu1070118
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 01:31:25 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=2KimHwSQ2ivOuPHPe4mp
+	76JUozRnKsqpBf1qh5HtdYU=; b=RdRGKgdDOCySeEZ7ZsAx/1/EYNfXwFFz9MUC
+	CszbuVBboxetq3nriTBP70esajE5z32P/CG39XPB6f8T8Ew17cpFLloBZ/RBOGNT
+	iMssHUq/fAToqe/rFF//pBr9o68lTFbQ2dCnD6KEm2hkIkg+Z6zvisIxitV2tzlR
+	ca4ZD+Q+RsvxGU0tq6a32t7sMskh0tebQs4ZQuw8gOklD/7PSckDGZJT8r6p8bY3
+	ZnhRoyMOUMoFtk1/qGKG+VOgQVpkel/Rede5fWbcLaDfbnTbFPL07B58UZRAx12S
+	JnchVk2FepbdlmxbnaPxDbHW67h9dqTU9i98eTChLy0Ey3edRQ==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49qprdy15s-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 01:31:24 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.59; Fri, 17 Oct 2025 01:31:23 -0700
+From: yurade <yogita.urade@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][walnascar][PATCH 1/1] poppler: fix CVE-2025-52885
+Date: Fri, 17 Oct 2025 14:01:03 +0530
+Message-ID: <20251017083103.1009709-1-yogita.urade@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.11.232.110]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) To
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121)
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDE3MDA2MiBTYWx0ZWRfXyM66bcdN5mSc
+ jwFffErQ6RElQNg/FAEeEDkTZLB5zuttb+duqK5c+JqrdC8lhycrIlYgzJs3I01wUOmHTkY3ezR
+ Rcuptk4rKyzQE7PrmD2XY/Bsma4/asyP7KwCvDG1imWAkc9p/uefemTYYIQLjEVWyNxoseqiLLj
+ eQDxF0rdQZHOeQepxdmAYl5KmxeOctKDZJMJW2l3pGTHvzVIh9ArUBMb3Il9D40CQztVo8Dpyvr
+ Dt6uxetOkNs2gyGGZvhzvgXOXlZzVlocmLbWPd8oKIwdjHIBa0ccsOZ+3+SVHowV7mm11Zh2j9p
+ c81y2m29VfX3NcIJo8jqDaqh3reAP86UtDB8A6hcjVltqY6sD6alPKxGPZCOAohD2caUYT6TQL0
+ moI+NrQzJeuQlRalMqhdG+DnKDiQmw==
+X-Proofpoint-GUID: XZh97yX89KEuf5nXsqzkB1x9CF_z0bVt
+X-Authority-Analysis: v=2.4 cv=JaKxbEKV c=1 sm=1 tr=0 ts=68f1fedd cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=gmxlzscTznEA:10 a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=PYnjg3YJAAAA:8 a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8
+ a=ctjzhJtuCZY7hVibU10A:9 a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: XZh97yX89KEuf5nXsqzkB1x9CF_z0bVt
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-17_03,2025-10-13_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 adultscore=0 phishscore=0 clxscore=1015
+ suspectscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510020000
+ definitions=main-2510170062
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 07:43:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120742
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 08:31:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120743
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+From: Yogita Urade <yogita.urade@windriver.com>
 
-Upstream-commits:
-https://gitlab.xiph.org/xiph/vorbis-tools/-/commit/68c5a33685f5b86e7f18f239ceb8861484fee552
-& https://gitlab.xiph.org/xiph/vorbis-tools/-/commit/5bb47f58582c15c2413564b741d1d95e7b566aa8
+Poppler ia a library for rendering PDF files, and examining or
+modifying their structure. A use-after-free (write) vulnerability
+has been detected in versions Poppler prior to 25.10.0 within the
+StructTreeRoot class. The issue arises from the use of raw pointers
+to elements of a `std::vector`, which can lead to dangling pointers
+when the vector is resized. The vulnerability stems from the way that
+refToParentMap stores references to `std::vector` elements using raw
+pointers. These pointers may become invalid when the vector is resized.
+This vulnerability is a common security problem involving the use of
+raw pointers to `std::vectors`. Internally, `std::vector `stores its
+elements in a dynamically allocated array. When the array reaches its
+capacity and a new element is added, the vector reallocates a larger
+block of memory and moves all the existing elements to the new location.
+At this point if any pointers to elements are stored before a resize
+occurs, they become dangling pointers once the reallocation happens.
+Version 25.10.0 contains a patch for the issue.
 
-Drop md5sum
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2025-52885
 
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Upstream patch:
+https://gitlab.freedesktop.org/poppler/poppler/-/commit/4ce27cc826bf90cc8dbbd8a8c87bd913cccd7ec0
+
+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 ---
- ...g-include-utf8.h-to-codec_skeleton.c.patch | 28 +++++++++
- .../vorbis-tools/CVE-2023-43361.patch         | 57 +++++++++++++++++++
- .../vorbis-tools/vorbis-tools_1.4.2.bb        |  3 +-
- 3 files changed, 87 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-Added-missing-include-utf8.h-to-codec_skeleton.c.patch
- create mode 100644 meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/CVE-2023-43361.patch
+ .../poppler/poppler/CVE-2025-52885.patch      | 30 +++++++++++++++++++
+ .../poppler/poppler_23.04.0.bb                |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-52885.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-Added-missing-include-utf8.h-to-codec_skeleton.c.patch b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-Added-missing-include-utf8.h-to-codec_skeleton.c.patch
+diff --git a/meta-oe/recipes-support/poppler/poppler/CVE-2025-52885.patch b/meta-oe/recipes-support/poppler/poppler/CVE-2025-52885.patch
 new file mode 100644
-index 0000000000..db7d142543
+index 0000000000..a48b2c01a6
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-Added-missing-include-utf8.h-to-codec_skeleton.c.patch
-@@ -0,0 +1,28 @@
-+From 68c5a33685f5b86e7f18f239ceb8861484fee552 Mon Sep 17 00:00:00 2001
-+From: Petter Reinholdtsen <pere@debian.org>
-+Date: Sun, 6 Apr 2025 07:53:53 +0200
-+Subject: [PATCH] Added missing include "utf8.h" to codec_skeleton.c.
++++ b/meta-oe/recipes-support/poppler/poppler/CVE-2025-52885.patch
+@@ -0,0 +1,30 @@
++From 4ce27cc826bf90cc8dbbd8a8c87bd913cccd7ec0 Mon Sep 17 00:00:00 2001
++From: Kevin Backhouse <kevinbackhouse@github.com>
++Date: Wed, 3 Sep 2025 14:36:54 +0100
++Subject: [PATCH] Check for duplicate entries
 +
-+Patch from Sebastian Ramacher <sramacher@debian.org> and Debian.
++CVE: CVE-2025-52885
++Upstream-Status: Backport [https://gitlab.freedesktop.org/poppler/poppler/-/commit/4ce27cc826bf90cc8dbbd8a8c87bd913cccd7ec0]
 +
-+Upstream-Status: Backport [https://gitlab.xiph.org/xiph/vorbis-tools/-/commit/68c5a33685f5b86e7f18f239ceb8861484fee552]
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
 +---
-+ ogginfo/codec_skeleton.c | 1 +
-+ 1 file changed, 1 insertion(+)
++ poppler/StructTreeRoot.cc | 4 ++++
++ 1 file changed, 4 insertions(+)
 +
-+diff --git a/ogginfo/codec_skeleton.c b/ogginfo/codec_skeleton.c
-+index a27f8da..0709860 100644
-+--- a/ogginfo/codec_skeleton.c
-++++ b/ogginfo/codec_skeleton.c
-+@@ -25,6 +25,7 @@
-+ #include <ogg/ogg.h>
-+ 
-+ #include "i18n.h"
-++#include "utf8.h"
-+ 
-+ #include "private.h"
-+ 
-+-- 
-+GitLab
++diff --git a/poppler/StructTreeRoot.cc b/poppler/StructTreeRoot.cc
++index 47adac9..10db9aa 100644
++--- a/poppler/StructTreeRoot.cc
+++++ b/poppler/StructTreeRoot.cc
++@@ -137,6 +137,10 @@ void StructTreeRoot::parseNumberTreeNode(Dict *node)
++                 }
++                 int keyVal = key.getInt();
++                 std::vector<Parent> &vec = parentTree[keyVal];
+++                if (!vec.empty()) {
+++                    error(errSyntaxError, -1, "Nums item at position {0:d} is a duplicate entry for key {1:d}", i, keyVal);
+++                    continue;
+++                }
 +
-diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/CVE-2023-43361.patch b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/CVE-2023-43361.patch
-new file mode 100644
-index 0000000000..69286907fa
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/CVE-2023-43361.patch
-@@ -0,0 +1,57 @@
-+From 5bb47f58582c15c2413564b741d1d95e7b566aa8 Mon Sep 17 00:00:00 2001
-+From: Ralph Giles <giles@thaumas.net>
-+Date: Sun, 17 Sep 2023 11:49:12 -0700
-+Subject: [PATCH] oggenc: Don't assume the output path ends in a file name.
-+
-+oggenc attempts to create any specified directories in the output
-+file path if they don't exist. The parser was assuming there was
-+a final filename after the last directory separator, and so would
-+try to read off the end of the argument if it was a bare directory
-+such as `./` or `outdir/`. It also did not handle more than one
-+consecutive separator. This corrects both issues.
-+
-+Thanks to Frank-Z7 (Zeng Yunxiang) at Huazhong University of Science
-+and Technology (cse.hust.edu.cn) for the report.
-+
-+Fixes CVE-2023-43361.
-+
-+Upstream-Status: Backport [https://gitlab.xiph.org/xiph/vorbis-tools/-/commit/5bb47f58582c15c2413564b741d1d95e7b566aa8]
-+CVE: CVE-2023-43361
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ oggenc/platform.c | 10 +++++++---
-+ 1 file changed, 7 insertions(+), 3 deletions(-)
-+
-+diff --git a/oggenc/platform.c b/oggenc/platform.c
-+index 6d9f4ef..d50ad99 100644
-+--- a/oggenc/platform.c
-++++ b/oggenc/platform.c
-+@@ -136,18 +136,22 @@ int create_directories(char *fn, int isutf8)
-+ {
-+     char *end, *start;
-+     struct stat statbuf;
-+-    char *segment = malloc(strlen(fn)+1);
-++    const size_t fn_len = strlen(fn);
-++    char *segment = malloc(fn_len+1);
-+ #ifdef _WIN32
-+     wchar_t seg[MAX_PATH+1];
-+ #endif
-+ 
-+     start = fn;
-+ #ifdef _WIN32
-+-    if(strlen(fn) >= 3 && isalpha(fn[0]) && fn[1]==':')
-++    // Strip drive prefix
-++    if(fn_len >= 3 && isalpha(fn[0]) && fn[1]==':') {
-+         start = start+2;
-++    }
-+ #endif
-+ 
-+-    while((end = strpbrk(start+1, PATH_SEPS)) != NULL)
-++    // Loop through path segments, creating directories if necessary
-++    while((end = strpbrk(start + strspn(start, PATH_SEPS), PATH_SEPS)) != NULL)
-+     {
-+         int rv;
-+         memcpy(segment, fn, end-fn);
-+-- 
-+GitLab
-+
-diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.2.bb b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.2.bb
-index 290162127f..33a212de8e 100644
---- a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.2.bb
-+++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.2.bb
-@@ -12,9 +12,10 @@ DEPENDS = "libogg libvorbis"
++                 Object valueArray = nums.arrayGet(i + 1);
++                 if (valueArray.isArray()) {
++--
++2.40.0
+diff --git a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+index c7287f42c5..b56a4cf6b1 100644
+--- a/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_23.04.0.bb
+@@ -20,6 +20,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://CVE-2025-52886-0002.patch \
+            file://CVE-2025-50420.patch \
+            file://CVE-2025-43718.patch \
++           file://CVE-2025-52885.patch \
+            "
+ SRC_URI[sha256sum] = "b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1"
  
- SRC_URI = "http://downloads.xiph.org/releases/vorbis/${BP}.tar.gz \
-            file://gettext.patch \
-+           file://0001-Added-missing-include-utf8.h-to-codec_skeleton.c.patch \
-+           file://CVE-2023-43361.patch \
-           "
- 
--SRC_URI[md5sum] = "998fca293bd4e4bdc2b96fb70f952f4e"
- SRC_URI[sha256sum] = "db7774ec2bf2c939b139452183669be84fda5774d6400fc57fde37f77624f0b0"
- 
- inherit autotools pkgconfig gettext
 -- 
-2.25.1
+2.40.0
 
 
