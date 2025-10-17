@@ -2,40 +2,40 @@ Return-Path: <Yogita.Urade@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED85ECCD195
-	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 08:31:28 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.10920.1760689885588609513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB837CCD195
+	for <webhook@archiver.kernel.org>; Fri, 17 Oct 2025 08:34:38 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.10925.1760690073365234566
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Oct 2025 01:31:25 -0700
+ Fri, 17 Oct 2025 01:34:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=RdRGKgdD;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=238598bdad=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59H3vpKu1070118
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 01:31:25 -0700
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=H4MeVd75;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=238598bdad=yogita.urade@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59H5RLiO2670396
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 08:34:32 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=content-transfer-encoding:content-type:date:from:message-id
 	:mime-version:subject:to; s=PPS06212021; bh=2KimHwSQ2ivOuPHPe4mp
-	76JUozRnKsqpBf1qh5HtdYU=; b=RdRGKgdDOCySeEZ7ZsAx/1/EYNfXwFFz9MUC
-	CszbuVBboxetq3nriTBP70esajE5z32P/CG39XPB6f8T8Ew17cpFLloBZ/RBOGNT
-	iMssHUq/fAToqe/rFF//pBr9o68lTFbQ2dCnD6KEm2hkIkg+Z6zvisIxitV2tzlR
-	ca4ZD+Q+RsvxGU0tq6a32t7sMskh0tebQs4ZQuw8gOklD/7PSckDGZJT8r6p8bY3
-	ZnhRoyMOUMoFtk1/qGKG+VOgQVpkel/Rede5fWbcLaDfbnTbFPL07B58UZRAx12S
-	JnchVk2FepbdlmxbnaPxDbHW67h9dqTU9i98eTChLy0Ey3edRQ==
+	76JUozRnKsqpBf1qh5HtdYU=; b=H4MeVd757gHzIwtFwc/FlS2DP0XNh16Qskfb
+	vgYUMv+DHw5UsalU5FlFeQuTGoHpQNMd9itC+Kdu18+aaoC6KDFPCmDRfGn75ygP
+	NE/RM269dtPrXpHgaDd4Jjv/Maa/bRmQNKVH21vvoGRTzt3x40ihfnGQdFjyUu/G
+	jNDAmn50mbqJF3nQmYnzad6urXLrTJl8dTtX5BZPs5zhF9IH5nQkx7/YOTq0i4zo
+	mNiWXx0Hg32MzzVmf7SVnWszCdf1mnrsh7KNXWT5ycc3hOkJHNwg2s/URjz2aAMv
+	N4i0G5GU8asHDvMk6qYEW5eQKKeJvtTCdpK2fHFBOQkS3FGdFg==
 Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49qprdy15s-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49sthhbu22-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 01:31:24 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 08:34:32 +0000 (GMT)
 Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
  ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.59; Fri, 17 Oct 2025 01:31:23 -0700
+ 15.1.2507.59; Fri, 17 Oct 2025 01:34:29 -0700
 From: yurade <yogita.urade@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][walnascar][PATCH 1/1] poppler: fix CVE-2025-52885
-Date: Fri, 17 Oct 2025 14:01:03 +0530
-Message-ID: <20251017083103.1009709-1-yogita.urade@windriver.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/1] poppler: fix CVE-2025-52885
+Date: Fri, 17 Oct 2025 14:04:07 +0530
+Message-ID: <20251017083407.1335577-1-yogita.urade@windriver.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -43,34 +43,33 @@ Content-Type: text/plain
 X-Originating-IP: [10.11.232.110]
 X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) To
  ala-exchng01.corp.ad.wrs.com (10.11.224.121)
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDE3MDA2MiBTYWx0ZWRfXyM66bcdN5mSc
- jwFffErQ6RElQNg/FAEeEDkTZLB5zuttb+duqK5c+JqrdC8lhycrIlYgzJs3I01wUOmHTkY3ezR
- Rcuptk4rKyzQE7PrmD2XY/Bsma4/asyP7KwCvDG1imWAkc9p/uefemTYYIQLjEVWyNxoseqiLLj
- eQDxF0rdQZHOeQepxdmAYl5KmxeOctKDZJMJW2l3pGTHvzVIh9ArUBMb3Il9D40CQztVo8Dpyvr
- Dt6uxetOkNs2gyGGZvhzvgXOXlZzVlocmLbWPd8oKIwdjHIBa0ccsOZ+3+SVHowV7mm11Zh2j9p
- c81y2m29VfX3NcIJo8jqDaqh3reAP86UtDB8A6hcjVltqY6sD6alPKxGPZCOAohD2caUYT6TQL0
- moI+NrQzJeuQlRalMqhdG+DnKDiQmw==
-X-Proofpoint-GUID: XZh97yX89KEuf5nXsqzkB1x9CF_z0bVt
-X-Authority-Analysis: v=2.4 cv=JaKxbEKV c=1 sm=1 tr=0 ts=68f1fedd cx=c_pps
+X-Proofpoint-GUID: tNoU9czmQZlKM0AszmgWAxkLPrc6JjIx
+X-Proofpoint-ORIG-GUID: tNoU9czmQZlKM0AszmgWAxkLPrc6JjIx
+X-Authority-Analysis: v=2.4 cv=QLBlhwLL c=1 sm=1 tr=0 ts=68f1ff98 cx=c_pps
  a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
  a=gmxlzscTznEA:10 a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22
  a=PYnjg3YJAAAA:8 a=e5mUnYsNAAAA:8 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8
  a=ctjzhJtuCZY7hVibU10A:9 a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: XZh97yX89KEuf5nXsqzkB1x9CF_z0bVt
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDE3MDA2MyBTYWx0ZWRfXy7uOCFmlHJfJ
+ JSuui4HWHRHemSbMem53+ERZGDOU0bjt7FnvYuq6miDQtk+Fcfdx//UF+xRsx62jZEON8SBAb30
+ mvGIE+y7ao5ve2CXjrnn09y+6ujEGJwAZFv846LeoNJnb75ka6siiHeRX3eb2L8UILxoCNsDlCc
+ erijh293RISvxi0AqD351g7FwwTZMqQo9jXUzdOvBnlHqisDviRIo0x6+AGpYtKkcn44PfDzkKD
+ kze0zKwN+uMpbssZzd7tibnGGs5tlL9/Z42DS8wibrlEmAeiHa8mPVFbyyfljFjmG87o5g+uZ2Z
+ 7a+aJK0XWnxfhLGKp80ebb5Q8sHmm7FiwURAcovVNtl3LU7Rk+yg7GDrkSbx74QSVrivlOgKHcG
+ jMTMbWHDotoVgxJ5ECLe44zmdeDSFQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-10-17_03,2025-10-13_01,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 adultscore=0 phishscore=0 clxscore=1015
- suspectscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510020000
- definitions=main-2510170062
+ malwarescore=0 lowpriorityscore=0 impostorscore=0 phishscore=0 adultscore=0
+ priorityscore=1501 bulkscore=0 spamscore=0 suspectscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510020000 definitions=main-2510170063
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 08:31:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120743
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 08:34:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120744
 
 From: Yogita Urade <yogita.urade@windriver.com>
 
