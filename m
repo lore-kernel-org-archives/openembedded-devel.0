@@ -2,98 +2,116 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 07AF0CCD184
-	for <webhook@archiver.kernel.org>; Sat, 18 Oct 2025 05:12:15 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web11.683.1760764326287040031
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91280CCD184
+	for <webhook@archiver.kernel.org>; Sat, 18 Oct 2025 07:04:55 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web10.1519.1760771088175599753
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Oct 2025 22:12:06 -0700
+ Sat, 18 Oct 2025 00:04:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cBKPJMR5;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-47112a73785so19347085e9.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Oct 2025 22:12:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=c5Hx8KoQ;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-46b303f755aso26297765e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 00:04:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760764325; x=1761369125; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760771086; x=1761375886; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=sq7w0MTsBfWVVOhf4lorSp7UJUcepkPRAuKPdhtkbTU=;
-        b=cBKPJMR5YEM732BXAQjDdVLiC4kUzfMyKjsxCgvCfnD5SR/1pQDRJuu2TMGHNxZBSI
-         +MqfsNhdP0uYzgO6me/icEEqpBEBzvvpUMBmgrQku0tadm5cyaxWhBRe5FiyfUEO4JNj
-         eMTy5qN6YiI0DRcuQVJwwcvH7fe0Ix3qSBCaIUTjbKd4KcgZspt2PuWlGDDnLUuyxcHG
-         26GgLVnxAnaK6Pv8mJDa/VMczFpZX+3WQazaFxbqj7p7CWtjY/JK9wmyX7eVWZnyZ0FF
-         eszJcAAHNazX8XEWmuuChfPcnxKF+mvu7rWNZ9vqJVoFHMdTMxrBLH+8ZsTDPQjliIs5
-         ftkA==
+        bh=YkNVw2CmpXfvuLr1Yu6sPbUDgobF3rN9JDdJhsqqwqo=;
+        b=c5Hx8KoQISJY5n4JhmYQJBsO8XZlJ2aD1qkDElsBpTw2IJeVBouUckzWK6MMswgyui
+         JaYe9Ufk4EzR4uEyeCRc9O0bKsQGIozz0ElAwYsuR+SJF/0ms2gvqxsany7a9BdSwdXL
+         VvY+eDlB1KavbM+4aNyCbEKdhdHeEWoi+U2KwassbEj+iwPVGtQRvAVWUDECdNnAyyyk
+         1gXDaE6rcyhFXmYkYL4gKIpiDdVzToR+HJfLZ0G58NwHqr7JS4fC4AeGRlh+mJCoMRoV
+         HY4cr2IkBl3U3/7xR7KqrMeRGeTyt6prGoosN7EtrQlOJQKHZ872AR0sw0fu+zN+SCmV
+         Oa3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760764325; x=1761369125;
+        d=1e100.net; s=20230601; t=1760771086; x=1761375886;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=sq7w0MTsBfWVVOhf4lorSp7UJUcepkPRAuKPdhtkbTU=;
-        b=NK4FAFdqdrc2j5iJ0NpAJNbdbBaqIRskcTaM/2YiG8UEmyIKOyTpdG0wnvmX7PFoqY
-         eLnr8jD3Vr6EXThJRyEi0VulIrMjRVCF+0oAuWF4jPdnO7z8BUdNt9stz2GrbpCuzDs6
-         sQIV++fe/g4kCxyqHL/KbAz1hl0saSi09ca8tYrERpWZVY2Kmphkt1QRb8kfnn9pzrAL
-         ruIfpNYXETxbrYPqB0p/lcC8ejYbwXYfnTxtVIHIMvqcIRDlXqaZ4ZfJpNh4gpPFI1Fd
-         bLcyEtH3JQQmUzDgVHBqaQRuj5yq/MupcJ9OiolYnDMJg7bgfAIowEsk5nE/JgMKqsHx
-         /5aQ==
-X-Gm-Message-State: AOJu0Yw+HXK4jrQKL2J7mcxm3uBM8d8wCvPzpTZ+1BjZnQrSRU6rhCWS
-	+r92YQ+A+UK/eaHE0+7wsxVQ/ihtg4km88W+1NwSod0lc7SuN8NghPdiBb1muA==
-X-Gm-Gg: ASbGncvp989LBzmR7SoMbxvVeCQmaJz91XysKvy2Tp09HxZQbZ0P0DxZc6QNAU8J+iw
-	xs4wnjt1ju8ThHYtWrI/0kUFoRPJ+Zoy0CLJ6tLQnheyBoRddJTlsidk3HrZ67s9YnFiIamR58+
-	vVFVsqRnzHOImAjlO4EeQ6VgI0lX2WU4zLg7qTuyQOyHadoU3+PaEkg5YDa41CBjiBLWd+wa7VE
-	SbXbflSqTpFNVseNRhWwfkQ6Qi0+W2Qtz0GpAZWDGxONvMBg6Y71WW4g2TGMZjfB1JzEvmAiVXX
-	/F8kvzc2Uw/FDAkyWEGixkCR+4lgYyZRiBrrjQDdlWf1Nk3RNN6EHHqI84MMXNoZ4JCLPEqzcxR
-	0lN08iMWiorhaFml2X8Cmu0HxHuSyh18hX2JdMQgNlEyO5WSCnL0k/vzZbvmsBrXgcs1bS5WqwA
+        bh=YkNVw2CmpXfvuLr1Yu6sPbUDgobF3rN9JDdJhsqqwqo=;
+        b=adpAnPhmFUPn8Nu8E5wRuqqI1XXpcjKbtkhv43oEpCzt/cPjGYtNP7wC5Jq/73XibR
+         H/Y6UYDjpVjbXcKXJ/mn8m+LrnNpZ7Vk42QoaNuVaMvEmtteCJ2Bz4z/gm0hbJNYKagv
+         BpGDTLd4Clu/cLNyF++ybTU40zUMGweslOdyq/5nN+6zJzrUZHLMZtDsseQ6j5sqAkfM
+         muUlQxcxUy3i7NNKRCO2+2M6/TRB+l73Xn5854U+lbhpN4VDAqF6qIDia2+q5+vroyPa
+         GFgesGNzaYdYWcv1e2QCOTuzc7t1Hi8DYqQNq4JNySa0GtQArwNXesgnkKWwRG70pnlq
+         Kt1g==
+X-Gm-Message-State: AOJu0Yx4/ppH+5ofsLA2RgV8oRZOzs4qfNi7Z5Uh4szoAQA6/M4VkLrq
+	2ASDOc7qUpMl2TdMIdqMlMvQTrHYo0osuC+/y3ADuPReK0YSNTzJCyXFhWmGwA==
+X-Gm-Gg: ASbGncupC+OYmGib5+B1BV0hxIMzY4ezWdN4AUUZXpI/m9PmrSvDG8mTcjd82TtZy/v
+	1k1V4zrf2xMT9npzOlWQ4v3bYm9q5cA32/bB6NjizVGYNohcSZs6y3qFzTNH5+r5SvALrmdIe6G
+	s2npMRa41tgXBi7FHNQgijd8h8Scvy0fz19HH3UcANzlox9MT0N+/ynqZmeOUGOe3LVNpZlpOCx
+	p47M9Ma2YVYtYluoctFWsXqQSPbx+StaBlPWtFLkr1dTn8X6RXyzUWZNT36FH8IKsx63D8hw+oT
+	SP0Ulf+t/Eg1KKRqrAZf2YYcrF+n4Yw3PftZYr9Zk39rYNqjmUplSq7IrkV4IzjmcKlcZK2JDC8
+	2beUFHvuzAYpxQK0bIatH+MjjJM4trvPKl8gfR1jmj+vzbmis/bvLM5YeZEoiXRVipmD/6VhwyA
 	==
-X-Google-Smtp-Source: AGHT+IHPnykGfa/Fofkg8CG9M/nE+CPuwh9P1T0nMbcLph2z71oQmmPliuD1s0f0vGk6eej+oz+Jcw==
-X-Received: by 2002:a05:600c:34d0:b0:471:114e:5894 with SMTP id 5b1f17b1804b1-471179122aamr45173655e9.25.1760764324479;
-        Fri, 17 Oct 2025 22:12:04 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE4bebqhNqcyPCjSl8dYqVP18Iqmeq9aQ9PoMf7KlJ9i9Y6917UwFWGuEgcDIHd0uJbdiTdVA==
+X-Received: by 2002:a05:600c:4fc6:b0:471:115e:624b with SMTP id 5b1f17b1804b1-471178aaa72mr40630325e9.17.1760771086058;
+        Sat, 18 Oct 2025 00:04:46 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-471144c82b8sm114368565e9.15.2025.10.17.22.12.03
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4715e4e267fsm12988155e9.12.2025.10.18.00.04.45
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Oct 2025 22:12:04 -0700 (PDT)
+        Sat, 18 Oct 2025 00:04:45 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH] libteam: Add missing dependencies revealed by ptests
-Date: Sat, 18 Oct 2025 07:12:03 +0200
-Message-ID: <20251018051203.3180887-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] libxml++-5.0: fix ptests
+Date: Sat, 18 Oct 2025 09:04:44 +0200
+Message-ID: <20251018070444.3231537-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 05:12:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120780
+ <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 07:04:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120781
 
-From: Khem Raj <raj.khem@gmail.com>
+The recipe inherits the ptest class, however installs no tests nor
+run-ptest script.
 
-Fixes ptests provided kernel has team driver enabled
+This change rectifies this.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit df35bef3ae6411900efdfc3ea5ade23820e9af2f)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-support/libteam/libteam_1.31.bb | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ meta-oe/recipes-core/libxml/libxml++-5.0/run-ptest |  4 ++++
+ meta-oe/recipes-core/libxml/libxml++-5.0_5.4.0.bb  | 10 ++++++++++
+ 2 files changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-core/libxml/libxml++-5.0/run-ptest
 
-diff --git a/meta-oe/recipes-support/libteam/libteam_1.31.bb b/meta-oe/recipes-support/libteam/libteam_1.31.bb
-index ad84389013..c8397e002c 100644
---- a/meta-oe/recipes-support/libteam/libteam_1.31.bb
-+++ b/meta-oe/recipes-support/libteam/libteam_1.31.bb
-@@ -34,7 +34,13 @@ FILES:${PN}-utils = "${bindir}/bond2team \
- "
+diff --git a/meta-oe/recipes-core/libxml/libxml++-5.0/run-ptest b/meta-oe/recipes-core/libxml/libxml++-5.0/run-ptest
+new file mode 100644
+index 0000000000..4f54f90e09
+--- /dev/null
++++ b/meta-oe/recipes-core/libxml/libxml++-5.0/run-ptest
+@@ -0,0 +1,4 @@
++#!/bin/sh
++for t in `ls ./*_test`; do
++	$t && echo PASS: $t || echo FAIL: $t
++done
+diff --git a/meta-oe/recipes-core/libxml/libxml++-5.0_5.4.0.bb b/meta-oe/recipes-core/libxml/libxml++-5.0_5.4.0.bb
+index e4fdac2c2c..cd16ec862f 100644
+--- a/meta-oe/recipes-core/libxml/libxml++-5.0_5.4.0.bb
++++ b/meta-oe/recipes-core/libxml/libxml++-5.0_5.4.0.bb
+@@ -11,11 +11,21 @@ DEPENDS = "libxml2 glibmm"
+ GNOMEBN = "libxml++"
+ inherit gnomebase ptest
  
- RDEPENDS:${PN}-utils = "bash"
--RDEPENDS:${PN}-ptest = "python3-core"
-+RDEPENDS:${PN}-ptest = "python3-core libteam-utils"
-+# Ensure kernel has these mods enabled features/net/team/team.scc
-+RRECOMMENDS:${PN} += "kernel-module-team kernel-module-team-mode-activebackup \
-+                      kernel-module-team-mode-broadcast \
-+                      kernel-module-team-mode-loadbalance \
-+                      kernel-module-team-mode-random \
-+                      kernel-module-team-mode-roundrobin"
++SRC_URI += "file://run-ptest"
+ S = "${UNPACKDIR}/libxml++-${PV}"
  
- do_install_ptest() {
- 	install ${S}/scripts/team_basic_test.py ${D}${PTEST_PATH}/
+ SRC_URI[archive.sha256sum] = "e9a23c436686a94698d2138e6bcbaf849121d63bfa0f50dc34fefbfd79566848"
+ 
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ 
++PACKAGECONFIG ??= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
++PACKAGECONFIG[tests] = "-Dbuild-tests=true, -Dbuild-tests=false"
++
++do_install_ptest(){
++	for t in `ls ${B}/tests/*_test`; do
++		install $t ${D}${PTEST_PATH}/
++	done
++}
++
+ FILES:${PN}-doc += "${datadir}/devhelp"
+ FILES:${PN}-dev += "${libdir}/libxml++-${@gnome_verdir("${PV}")}/include/libxml++config.h"
 
