@@ -1,101 +1,139 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76D38CCD195
-	for <webhook@archiver.kernel.org>; Sat, 18 Oct 2025 13:04:57 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web11.5472.1760792693390070172
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A46EECCD1A4
+	for <webhook@archiver.kernel.org>; Sat, 18 Oct 2025 16:28:28 +0000 (UTC)
+Received: from mail-yx1-f47.google.com (mail-yx1-f47.google.com [74.125.224.47])
+ by mx.groups.io with SMTP id smtpd.web10.8861.1760804903155164269
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Oct 2025 06:04:53 -0700
+ Sat, 18 Oct 2025 09:28:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jbfV2Ukb;
- spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-3ecde0be34eso2254297f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 06:04:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZmkEDlxw;
+ spf=pass (domain: gmail.com, ip: 74.125.224.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f47.google.com with SMTP id 956f58d0204a3-63e2c7a3d10so367647d50.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 09:28:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760792692; x=1761397492; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QgepKbEAIEQeZQyy7OrxCyHnuLQVQCwcuzpHv9lwVDA=;
-        b=jbfV2UkbSPPF6LTRVmTb9MRJuiMeG65A83zMx5UjAFdM/p2q/JV2kVhpwTQD3cPgm/
-         6xTJoN6ytM6XJBaPro4tOr7rkdBU4EGbVDdhUG4g2aOa5HEtzsxIwFH0dsqSpHNrUMAO
-         Mb/m7sOC6hkKXNijXfV2bddfgR3runtmBDh+RrOUYAo80h1lpnsRHSyrc2vjzxqRjxwm
-         NJA/Fqua0NKOfzs/0Ea3L2eaadtc9L7QRnEwrA78eZblBNKz1KeX6FWt2XPeREmOnik0
-         AMb7Iivwr1gl81XbT7cGILuIKB6J6Z4Q88KRK2H4tDYu5ftU504heDijaOpeEF4MZjzj
-         xPcA==
+        d=gmail.com; s=20230601; t=1760804902; x=1761409702; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=EzNXd+RJXp0hc0VEp1gqVNBkpzix96eVZi5ycXF85DA=;
+        b=ZmkEDlxwKCBf8AnhpgVVR24cBMfedT23gB74NwsG9vK89EFWUccqYNrsPBGCGU44Eu
+         6RGE9+pWZ1eVBZUiSDl1eSFR5sh1AEpEr9NSQ17o+wafKTy7nR9ETCLQkfA7wzQvEPsL
+         +X0gInQ19a97tWGQSNJ/0gg3Jsu8HqGITyz518MZ0z61mwFcFdN/JO/sYr7KcCkWPzrY
+         x+ZbcGSYGc4f1fOvCZyTdO54CQFWfhHjxChsE2AlUTblRjv3Ew7QdVdNZq27voA/zjaO
+         77ZxIj8lTzLOcpoLJZqDtcw5B+EzZ9cSgQpUI4Gx8CdCuseiz39tNQBQAEwroPBRkX8B
+         2QpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760792692; x=1761397492;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=QgepKbEAIEQeZQyy7OrxCyHnuLQVQCwcuzpHv9lwVDA=;
-        b=BpSOM/cgVqYXb/HGFVNoLaiwLh0sLxui3RWlu8Xt3WFw20f3UnCuHgh26qeLYhkbbH
-         RYGponXq6ZB6tz/WVrloWdg9Il5jToxNYVt5l+oyWN60AAjGwlqOK7Sjwlb/bA4Go/LE
-         6J0J8bpXVnTxO+l0ViAVf/Mm0Q9Wogl2fqaky+xwHyEQtDi5ahAvrWXWTJuCFFXA8IGQ
-         +dFrqpzxHIAu87NOhephv4V7zp6MhOMvODCMqRWCIJ+7qBzZurkhKVTW1aD6oywEcwlJ
-         waJ8jhcSKeB/2E0DXXl3qAPCO5rKHJNe8oCNmDzk8rZNh1jVqN9a7c0Q0lFEC6QKqY2F
-         VHAg==
-X-Gm-Message-State: AOJu0YyluSs/qnlLgQ/pTqeTzMT2yd3SqIZccvDu64bhPmQEe9BsG2/g
-	yEOcIhm5asVLm+ibTeZrYAqdnVd1ISyjNjjlTB0ccDMmQIu93+X+iSiTxClomA==
-X-Gm-Gg: ASbGnctcpTS2N1aDFUrTj8oViYBjTam+D1zuS1lr4+JQv3/QU87aFH65axKcVR9xDuB
-	6m4VK8EaIlbWZDql1+W7fkBi7mS9C0jjqRqZpJKNOlNSY/Bc6yd1hZ76B7+7pgRzFjY8rWiF9v0
-	9IPRveuRVcja9qzrXz5ZnwYf79Oio1Lthe7u1GFVYKKm8bz+9Qgb2edW08TJGGT2nd++BcrSJow
-	Nqvo5R9AB+9ndDf6iCQj2och44DMGOn3bNDd9XInY9zAcLWzvysk2eyOEz2pFACpABk+6yJKqgw
-	dERfxZ4F3uTYSRRhnjXRU2Vz8hX6wix/CWMN17z5OhVEJtwYsOHFVuUzYGT5PBOqDSjtWeLHO2U
-	S7z2inq0KjJONsvxXsIiBWv8tOkEYok0A+scQhS6IIYGda216B9sUpOiz+V+h7WeSSvB01enbDA
-	==
-X-Google-Smtp-Source: AGHT+IH4qTPj5Vb4hVSlona8a8UKJdXi5i8lOxF2GpM+Ne7HUtrC840oew5kuy9oAA0q/qvyA2jyPQ==
-X-Received: by 2002:a5d:5886:0:b0:410:f600:c35e with SMTP id ffacd0b85a97d-426fb6a7055mr7317555f8f.8.1760792691758;
-        Sat, 18 Oct 2025 06:04:51 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-427f009a9a9sm4917591f8f.29.2025.10.18.06.04.50
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Oct 2025 06:04:51 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH] sdbus-c++: fix ptest script output
-Date: Sat, 18 Oct 2025 15:04:49 +0200
-Message-ID: <20251018130449.1382400-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
+        d=1e100.net; s=20230601; t=1760804902; x=1761409702;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=EzNXd+RJXp0hc0VEp1gqVNBkpzix96eVZi5ycXF85DA=;
+        b=kcplhH+ReyDsBmeUQ9YgtI5yyWikoYkbpGGDPFvuDC2Zb/O1yw61lG5Xrh9urr4SzR
+         ajaehNGcTKR3kH/qZeM4If50PECnv5htQ4qYl4R3CDvissFzCvACeCx1YzDLGuETtHcJ
+         HccH7Tw1r1MVP0bUvuqpxNErhnbUO0gEW/ywcu6hxc8B2DChfKzcPM246X7YeudZArpC
+         39bGZZ5g2u2GHOUKzpWl8sWJ3MhJ8SEJdcyfC7jLK96MGS1Q6tYc67YnimCd9W0tVvmy
+         ln+V8t06FhEl0QQkiBXoX7TgZWJV4tyWcsORwU6VUUxBBonbPPB/NJ+QWetvrkSd4d0j
+         oy4g==
+X-Gm-Message-State: AOJu0YzFnSGjz5jGJ3A44/3Fk/sDECnhXX4MRmqD8x5FnIUH0J4zXux+
+	p1fwKOBvfnkvvMmrDtgM/fgMk+V2Ncx0TjtGUgnab7PqDF+Ij1LsqRZZNAq+QF9QZ4vBB4fIdog
+	BUg4EB8vltCMZCgCEtQAFcxSmc+MO8PE=
+X-Gm-Gg: ASbGncuM1KkVCecOl8/Ifo3lfCIQmjHIFPVOmMoumzsQiig9+w8q2giAHLpWzyjKvXx
+	cEePDmZgK5hWw7Eb1QMcHR03s6E7vtvGdyDtdHcA7a7N7ue1Pn7d/gevqA1pw8oflmc8QDRG6hP
+	PKKl8MIuBbbN9CNiP7nJPIan8VKVAP4RPXg05+N7ioE+PVz2iTLRw9+WzjDUe0+oT/8Ld24QpEk
+	M/duQ/Dt00lbZVw2iwiIo7hlnAIbcR/9NUEtmF3M8Bt1cUsQWppXMBGOg0AlLI/DmPpBpFUo1tM
+	w9u/3bAuMdaK3Sd5z93upiifDwFTgQ3SZ0me7rBJcnY0qCnqwMwLKpMJBF2dnJgCyWQRKuGF0Cx
+	/RvA=
+X-Google-Smtp-Source: AGHT+IFBSmqBth2hNgoC5T9th4tSkleu89Sb6Yi55jP1mAED6Q6l093Ct7VyWVvAh4q8vZ2+NwvUsPLaW6oxfkUkSqw=
+X-Received: by 2002:a05:690e:168c:b0:63c:f5a6:f30f with SMTP id
+ 956f58d0204a3-63e1626157bmr5996377d50.57.1760804902145; Sat, 18 Oct 2025
+ 09:28:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251018101937.3979005-1-skandigraun@gmail.com>
+In-Reply-To: <20251018101937.3979005-1-skandigraun@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 18 Oct 2025 09:27:56 -0700
+X-Gm-Features: AS18NWBRtp79sPv2-TTLbWk1uG5e5sJcY0leIQoP6Do4h6cVQzz-Hofkg3deupg
+Message-ID: <CAMKF1sqbUCQ4Fk6sX8ALuS_bv_4P=gy=a233mcFGeBjjpZav9w@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][kirkstone][PATCH] oprofile: Fix failing ptests
+To: skandigraun@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 13:04:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120786
+ <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 16:28:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120787
 
-The run-ptest script had incorrect output: instead of PASS/FAIL, it
-is outputting OK/FAILED - that cannot be interpreted by the logparser.
+Thanks for fixing the ptests Gyorgi, I do run the meta-openembedded
+ptests regularly and every bit helps in keeping the bar up.
 
-This patch sets the correct run-ptest output.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../recipes-core/sdbus-c++/sdbus-c++-1.0.0/run-ptest | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-1.0.0/run-ptest b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-1.0.0/run-ptest
-index f6ade0c7e4..48354c2f85 100755
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-1.0.0/run-ptest
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-1.0.0/run-ptest
-@@ -5,11 +5,11 @@ set -o pipefail
- SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
- 
- ${SCRIPTPATH}/../tests/sdbus-c++-unit-tests 2>&1 | \
--sed -r 's/^\[\s+OK\s+\] (.*) \([0-9]+\sms\)$/OK: \1 /' | \
--sed -r 's/^\[\s+FAILED\s+\] (.*) \([0-9]+\sms\)$/FAILED: \1 /' | \
--awk '{if ($1 == "OK:" || $1 == "FAILED:") {print $0}}'
-+sed -r 's/^\[\s+OK\s+\] (.*) \([0-9]+\sms\)$/PASS: \1 /' | \
-+sed -r 's/^\[\s+FAILED\s+\] (.*) \([0-9]+\sms\)$/FAIL: \1 /' | \
-+awk '{if ($1 == "PASS:" || $1 == "FAIL:") {print $0}}'
- 
- ${SCRIPTPATH}/../tests/sdbus-c++-integration-tests 2>&1 | \
--sed -r 's/^\[\s+OK\s+\] (.*) \([0-9]+\sms\)$/OK: \1 /' | \
--sed -r 's/^\[\s+FAILED\s+\] (.*) \([0-9]+\sms\)$/FAILED: \1 /' | \
--awk '{if ($1 == "OK:" || $1 == "FAILED:") {print $0}}' 
-+sed -r 's/^\[\s+OK\s+\] (.*) \([0-9]+\sms\)$/PASS: \1 /' | \
-+sed -r 's/^\[\s+FAILED\s+\] (.*) \([0-9]+\sms\)$/FAIL: \1 /' | \
-+awk '{if ($1 == "PASS:" || $1 == "FAIL:") {print $0}}' 
+On Sat, Oct 18, 2025 at 3:19=E2=80=AFAM Gyorgy Sarvari via
+lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> From: Khem Raj <raj.khem@gmail.com>
+>
+> Files need to be in right directory structure
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> (cherry picked from commit 51b38953a6e7f2769b5f4ac021f55299f3c68b99)
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> ---
+>  meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb b/meta-oe/=
+recipes-kernel/oprofile/oprofile_1.4.0.bb
+> index 23e7d3d5c3..fb10992890 100644
+> --- a/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb
+> +++ b/meta-oe/recipes-kernel/oprofile/oprofile_1.4.0.bb
+> @@ -56,16 +56,18 @@ do_install_ptest() {
+>                 find ${tooltest} -perm /u=3Dx -type f| cpio -pvdu ${D}${P=
+TEST_PATH}
+>         done
+>
+> -       # needed by some libop tests
+> -       cp -r events ${D}${PTEST_PATH}
+> -
+> +       install -d ${D}${PTEST_PATH}/../${BP}/events ${D}${PTEST_PATH}/..=
+/${BP}/libutil++/tests
+>         # needed by libregex regex_test
+>         cp libregex/stl.pat ${D}${PTEST_PATH}/libregex
+>         cp libregex/tests/mangled-name ${D}${PTEST_PATH}/libregex/tests
+>
+>         # needed by litutil++ file_manip_tests
+> +       cp ${S}/libutil++/tests/file_manip_tests.cpp \
+> +               libutil++/tests/file_manip_tests.o ${D}${PTEST_PATH}/../$=
+{BP}/libutil++/tests
+>         cp ${S}/libutil++/tests/file_manip_tests.cpp \
+>                 libutil++/tests/file_manip_tests.o ${D}${PTEST_PATH}/libu=
+til++/tests
+> +       # needed by some libop tests
+> +       cp -R --no-dereference --preserve=3Dmode,links -v ${S}/events ${D=
+}${PTEST_PATH}/../${BP}
+>  }
+>
+>  RDEPENDS:${PN} =3D "binutils-symlinks"
+> @@ -73,3 +75,4 @@ RDEPENDS:${PN} =3D "binutils-symlinks"
+>  FILES:${PN} =3D "${bindir} ${libdir}/${BPN}/lib*${SOLIBS} ${datadir}/${B=
+PN}"
+>  FILES:${PN}-dev +=3D "${libdir}/${BPN}/lib*${SOLIBSDEV} ${libdir}/${BPN}=
+/lib*.la"
+>  FILES:${PN}-staticdev +=3D "${libdir}/${BPN}/lib*.a"
+> +FILES:${PN}-ptest +=3D "${libdir}/${BPN}/${BP}"
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#120783): https://lists.openembedded.org/g/openembedde=
+d-devel/message/120783
+> Mute This Topic: https://lists.openembedded.org/mt/115821404/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
