@@ -2,96 +2,90 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A363CCD195
-	for <webhook@archiver.kernel.org>; Sat, 18 Oct 2025 12:40:17 +0000 (UTC)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.web10.4743.1760791208588363516
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78DBACCD195
+	for <webhook@archiver.kernel.org>; Sat, 18 Oct 2025 12:57:17 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web11.5337.1760792232401188216
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Oct 2025 05:40:08 -0700
+ Sat, 18 Oct 2025 05:57:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CFtfdxnO;
- spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-427084a641aso962326f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 05:40:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lOG25+rR;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-42701aa714aso1715487f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 05:57:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760791207; x=1761396007; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760792231; x=1761397031; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=aFfK/k/psxSasdpzoo3e1y3NxAOeoAhiEfMqduS7ebg=;
-        b=CFtfdxnOIh+jFm7JBbk4PXPoW++mTDW4cGmHXkXBhSirWlL8rEvfJ/RzYyzWPc8NWJ
-         PQP+1PlQrYlF6F6uexwAMAMh7jjNob7G5IjFKGgN5yMroS29MFgw73OCuShpTRixS0cT
-         eOIc4Aj9YW6A0N4BjwwgDIlRKdegFD5nYWhTI5eGOVDQIPuGJfYLBNH4FHK2rYxW3HUv
-         rwS6yl0uRbeXE82ZwUY6gVEn11Lay4+zaPVGF2IQmEyoCPGYivYC/Ky2N1HwqA+iM5EK
-         rsLf9uX2MxSxc9+gzy73LTJ8YwJrgWmPyxH9zbYYxK+DMEnWVYyjHjyIqi/yPL3tQasw
-         JbPw==
+        bh=c1nzcjwgA1AYhFF3MJJ1GKg3quTem5ZtjrDYd9MdnsE=;
+        b=lOG25+rR/z2dy3MENQlzrK9K77laL9zM3Xs8ml56qa05IHQMx59t4WL9FyxlqRnmws
+         D025RX2bYOfQFxTh+KhfV67JdVvtleyYlLLaynR3j86YHExZ/OwVe/RcY4KHg9aIGngH
+         LV1hR6JYYX+1SlrmofwSZryWRbdUC1iPQ8nSlpZwJkINfp441Pj2FJC0HJbGgwL91MGF
+         ZsMcc/WUAplL8Dkcs/zGxzYwadorJJ76e0xegMWPpoJzSomOKSbifZ5zHAUSZnG9i08H
+         cN6WjrwyHBP8g/L0PAuky68ZBT6+zd1odhcKhMUHvhSb0/KIdQDo89b1hr6RATAdvZ3W
+         oHWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760791207; x=1761396007;
+        d=1e100.net; s=20230601; t=1760792231; x=1761397031;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=aFfK/k/psxSasdpzoo3e1y3NxAOeoAhiEfMqduS7ebg=;
-        b=ddfF27C3odXeUvhTRQWmZAGxw0Y81MIfOi1YwWwRLIeU7kXsBx8DaJitfkDZW4bbZa
-         lJ6NJfVlJOOMUrOFP6QW8GfYYsIGi9Uz0S6Dn95Z22b2eXpF77TTZoqKc4nT2N6FR/zk
-         /n2WZDxqEugVW4v1nw1tHtCwTruEj+IkcqOnFNIa+Gxw5m2bip7oOIltdxDG7L9gIiEw
-         ZpT4bfPZYXbp5b25H7zTef8rqzaPIfEcU8GoGRu7h8jjFm7hJuRvk7aXbEOTGh5qAOJo
-         ow8ZBoys/tTzsuIaK/X74snS90BaJX/wQ+fSKCKPZ1LmI3LTetiL7rMF0GZ0wfd7yESF
-         K3Vw==
-X-Gm-Message-State: AOJu0YxSGBdZ0zPueT/QXJlLOqHNsxHxzbQudVJHXl1y7UV+qBR0kEwH
-	+81rpUY+y6FRC8FlgCtvb5fLsH8FzT+2RPrdw2Mlt/E7aucu+RaBvDp4lOAk4Q==
-X-Gm-Gg: ASbGncu7SX4kzDiT3SBmjlU39fiC693aLdhoymeVQ+4/E0zVxC08aJK1mH3U20Stzs0
-	saHe/l2Yb/ZCf10kzMFRrwPqtTooOcoHzSSbZSObuEv09eUkFYkzt8M0i7UvZBD5A+O74y8p20M
-	LfPtGNATTzgXihzRF1mJ8WVA2OlcBmcgiCYEGoX7AKwlw5f7j6ctuDHM+vYFs+6n+1eBzJJ0ctm
-	KAw+MK483Bqo2VeJzORE5kkxF9E/FBYsLZIlaCBHA1nQ0lnjAvIi4szprZIK0mGT2IEYnTJy76a
-	5QhTCzA4ldEuYERtUWJvkXpf33MWdpEKWMDFd/hmR1yq01gW2yyr5Nk0Pw2WZifB/OCry2U2czW
-	X3Cczx8M4CvpsedJRy3iBTaXK1RZ+QQ4jNU2PWC9PdFESsZgw9vC0A7OiK/HgsLqnVZPJEAnlnA
-	==
-X-Google-Smtp-Source: AGHT+IGt3TJoo8vofVSRVeBGrqGK1+YYTpFz2miER7hLG0i2r611cpb+UDU2Q5jayzgZJoeCtcNsow==
-X-Received: by 2002:a05:6000:4285:b0:3ea:80ec:855d with SMTP id ffacd0b85a97d-42704d6c57amr4461186f8f.19.1760791206631;
-        Sat, 18 Oct 2025 05:40:06 -0700 (PDT)
+        bh=c1nzcjwgA1AYhFF3MJJ1GKg3quTem5ZtjrDYd9MdnsE=;
+        b=tFb5in7Pfk+b8r+yHmdWIUb66dN8CohiVVrB9+OicvjB4wRkyZks0uzEU4fqYgYBqS
+         HTCIBUJyYtnjdh5+MT54SplsA4RzIGdOJVFSbSc/nCcsw9xu0X9kC7S/kkufiZ7iILNO
+         rPn/0xuo4gypbJNAB8vKiicmSGvt8ep/epvy92IIigV2uuJsi8uYDr0zVYzlo2da2gmI
+         l2F5EJGYv7QPLhxakk4cSgorBwh2PZdlhrtKPExgeAS0zbvNMHi+KjTWUGNeQtIcVcjP
+         T6utfX0lRGWfDO+231Kjz6lPh6jA3cd+JnHjnNg3ouVZq7Hg4Bge15EonosGKUHFROVX
+         yMtw==
+X-Gm-Message-State: AOJu0YwouoQ7qhqVGB/XXUOb/fLz9UtToNHH5x65qsjab7p8w5L5YwU4
+	gMcBmVWTvKMg8Mw8CcBMaWfbJvbNL8wHKg+128IgTxoNXZk5cE4u87Q4B0I99A==
+X-Gm-Gg: ASbGnctnnau2oMProkBcjTz9+uZcD6tDNaOlzvzzi7SMfdYBxKbDnGTHvfW82o/xbwW
+	s12rpWnZ1OAKzY9RfgTndaPgWvaFRPJEPyjEPnCnY5r6uKprm1DzI9rnRms65Z6cgH8kjZEu+l9
+	lvfP1KaD5oNvv5PwoxvhcnxS728mi4cjgtc9HKqe87VbIJH/pSfGJCchDBc51+pFqitGTueq+2F
+	oUfgdGjnLR4I28P6iPZSAKoGnf7Ky6WtdGCuwJjVrV3Oo/YHR6S0/CmMWMcDE34zMXEiILLrK0d
+	jbPaMvnJyVwpQHAjpdKMne0DDO3oe52ygWPz93yXYmrZy55UMafP9WViK4+SmniFNIQcnIh1yl7
+	SKkeZkTgAqi3bz7vMhWxu0rN0ftGmWf2IUc7dFSPV/P8bx0BLwNFugTX5kcv1mz5XIze5Y8XPQ/
+	gSIZ2l4Vxo
+X-Google-Smtp-Source: AGHT+IHOhKe2vqmX928vYA6S5EDWSAmsLT5RluEitcay1IxlJCsDtu5aG9225KPFMzkQtUASrjapXA==
+X-Received: by 2002:a05:6000:428a:b0:425:8559:5d17 with SMTP id ffacd0b85a97d-42704d9457amr4372856f8f.30.1760792230408;
+        Sat, 18 Oct 2025 05:57:10 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-427f00ce3e2sm4726527f8f.47.2025.10.18.05.40.04
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-471144239bdsm169351065e9.3.2025.10.18.05.57.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Oct 2025 05:40:05 -0700 (PDT)
+        Sat, 18 Oct 2025 05:57:10 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] sdbus-c++: fix ptests
-Date: Sat, 18 Oct 2025 14:40:03 +0200
-Message-ID: <20251018124003.1362665-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] pv: fix ptests
+Date: Sat, 18 Oct 2025 14:57:09 +0200
+Message-ID: <20251018125709.1381888-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 12:40:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120784
+ <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 12:57:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120785
 
-The /etc/machine-id file with some value is required for the integration tests,
-otherwise it fails with the following error:
-
-terminate called after throwing an instance of 'sdbus::Error'
-  what():  [org.freedesktop.DBus.Error.FileNotFound] Failed to process bus requests (No such file or directory)
-Aborted
+Setting the RDEPENDS with "=" erased the base dependencies
+(notably ${PN} itself) from the list, making the tests fail, unless
+the dependencies were installed explicitly.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-core/sdbus-c++/sdbus-c++/run-ptest | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-support/pv/pv_1.6.20.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++/run-ptest b/meta-oe/recipes-core/sdbus-c++/sdbus-c++/run-ptest
-index 5e285b39e0..845ba7d8c6 100755
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++/run-ptest
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++/run-ptest
-@@ -1,6 +1,11 @@
- #!/bin/sh
- set -e
+diff --git a/meta-oe/recipes-support/pv/pv_1.6.20.bb b/meta-oe/recipes-support/pv/pv_1.6.20.bb
+index 867a621d1a..2ecf62e3d0 100644
+--- a/meta-oe/recipes-support/pv/pv_1.6.20.bb
++++ b/meta-oe/recipes-support/pv/pv_1.6.20.bb
+@@ -17,7 +17,7 @@ inherit autotools ptest
+ LDEMULATION:mipsarchn32 = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'elf32btsmipn32', 'elf32ltsmipn32', d)}"
+ export LDEMULATION
  
-+# the integration tests require some machine id
-+if [ ! -f /etc/machine-id ]; then
-+  echo 12345678901234567890123456789012 > /etc/machine-id
-+fi
-+
- ./sdbus-c++-unit-tests 2>&1 && echo "PASS: sdbus-c++-unit-tests" || echo "FAIL: sdbus-c++-unit-tests"
+-RDEPENDS:${PN}-ptest = "coreutils"
++RDEPENDS:${PN}-ptest += "coreutils"
  
- ./sdbus-c++-integration-tests 2>&1 && echo "PASS: sdbus-c++-integration-tests" || echo "FAIL: sdbus-c++-integration-tests"
+ do_install_ptest() {
+     install -d ${D}${PTEST_PATH}/tests
 
