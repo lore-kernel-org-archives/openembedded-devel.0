@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B289CCD184
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66F68CCD1AB
 	for <webhook@archiver.kernel.org>; Sun, 19 Oct 2025 17:07:49 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
- by mx.groups.io with SMTP id smtpd.web11.190.1760893662456549370
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web10.195.1760893661135131776
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Oct 2025 10:07:42 -0700
+ Sun, 19 Oct 2025 10:07:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=H1mE+JwV;
- spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-b4aed12cea3so618253366b.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Oct 2025 10:07:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mvgCAisP;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-b3e9d633b78so876702566b.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Oct 2025 10:07:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760893661; x=1761498461; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760893659; x=1761498459; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=MNWhniv2B+4QOIAgIjkLoSlMjj/5Y62IWbW83+gVBII=;
-        b=H1mE+JwVjrsoYtehjgBgaxV7MMFcCil44NulBsgBIZS2yus/vRiRiV4wjXEV5prRwU
-         +A7Vgn7ojCb/JJAaAB/Y7EWrRg0NvLSM/iw9ypJqYsOMRIzy6W4jddOPMIw28XXjFJdV
-         t+s5qF/C2lu2xuttENcW/gWmcC3m8WpwqoizU1XUNH1EFPBfkfscWJOE/36y4KhFOyMV
-         VCEC25MSmPwgBQmEni5eTazb1gzNHLX+ES8lFm+AQLjBuYuiaYqC+V4N/c6w6g7/aV/K
-         HM4DRgbjjiA/5ALVpACDJJ2V8zwOWtfQQ9cjXeKnfsK8X/FEXlNfZNGkj9ih5h+nyHhw
-         dS2w==
+        bh=xnG4PhdZvzQB5rN4dfICF0h2ooGh3vYfTfk6YB6TJWw=;
+        b=mvgCAisPqmcJO6uBQxFy3Rk126b1T/YuA8jKPuuGLZF2DXI80XUStzvCiSx+lCxzdX
+         oOkl2jBG+UiGQ834PpHqdDe0FEI+xmSkS8xYM0o89g3rewQlwWYZknmuT3gXqZe9aVTO
+         XJgOKs7Eyu3x9bYUXyqx+tzz7q2IugE7iihMIyMhndjv17oNfpvz9titIo/N7ohCay/B
+         0gjJWvEk1IlwwLxLud9izGDvldzx0RZn60tSyEh6g2E8rWTqlCBE7GKlyHNrFXFNHhSu
+         YLo5Evrtx4uCAE3QCLs4uF7XjvNeCiBxLk0KEtECcMVk+Ya835/ahT5Q+eNm5ZTybYV9
+         nyJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760893661; x=1761498461;
+        d=1e100.net; s=20230601; t=1760893659; x=1761498459;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=MNWhniv2B+4QOIAgIjkLoSlMjj/5Y62IWbW83+gVBII=;
-        b=Hvolil2EPP6Bb2/xHVTwax5u9UOauBDfwQP4ze2NJPLwAnb9yZgVUMxpHdsSoR1ZQa
-         wK9fpxJDJxYvsTiIpdVaSv0AVJs34AWKJemO2Hvk+1zej/LCN868ENjR4YoZNL0YchZz
-         Y6yAEsZsLBADqgxitksrIO48FQssKXSf/K/Y2sR4MLymsFt9M3c1ugaZUcGt7oPPjsLp
-         TWQYG4+Ai/Qfv1YI8GhuucRQXJ08IW881tMUGe4bMyy3KJlZgDUsUFkrlwEwGDEzTbnp
-         A3lr5X87Wa8TwACg0K8a9QXVUxq+XWZnoLSEbNDcEPPBrCWONqxF0TjjhbFu1Ocn1amJ
-         k14g==
-X-Gm-Message-State: AOJu0YxGBS56QGi/ZqCCz/pobjzqmMs/0PCRLZMYQU4Mi8ueEqBKWbC0
-	ue06Hk1mR5EuN0AlvccR071u4TVesXNbQpD6zHqi0T7tyQvGqDtMBWkWAsmUmw==
-X-Gm-Gg: ASbGncvWTTekmcYI6f1BmPLzzj8Et+SbRNCtAmWeRk/1gdr4lp/qg9pZre7TOlZNcyy
-	8A/vnfuPUpzlRgbhs1/4sZRMaSu59nLjSnFL1kCNVCQ1jXpcHlr2CKFu/wIJt+QXnxrClMH6gHo
-	TpWvqQk8WNf7SY7+fKYsJ2guca/vDyOhmkxEodEBxN0WoT0njIwzoTkME0b+qA4RtwvKVE2vN1C
-	5QaqFwfdwZV4VgfU1jbHmCVL75SMcvXM8IDH01hnqeysQ/Ycpia1eRY8zp/+Fn1Gd32F/1J4fSC
-	nz50GD2cX6cHwqxXqopl1mHO/mqTmq7EwvfTCJKZbqM28hE1+ZoYxp/XIWFVuVVxaZBWLuBFbjt
-	50poHI3Pj2196vxWMqu47zjSXQ80BNOICH8FuAcZzEkqFC0+iN0i+6vLG1OlTt6NlGwGgCNVLCA
-	==
-X-Google-Smtp-Source: AGHT+IGabjR7B6LxqQVfDaOFu5tH2qcPej3J/EaAmLvxcqGYlFfq4DQjNgKdMAkhlf1RFlWcMaox0A==
-X-Received: by 2002:a17:906:f5a1:b0:b57:2d81:41f with SMTP id a640c23a62f3a-b6474b3602bmr1232003966b.40.1760893660688;
-        Sun, 19 Oct 2025 10:07:40 -0700 (PDT)
+        bh=xnG4PhdZvzQB5rN4dfICF0h2ooGh3vYfTfk6YB6TJWw=;
+        b=u9D9m0OB6YWGibQFCe31UEtaKPHYhPIIlMuxp+Y21+785xuQyv+xIZPfssGh8uIqsW
+         qEuA/Da0xHKVBcqlEIEEoBfXgclOhNh1c4XbzAcrL5M/89eEqX20eH5Dy5YLB0atgJNW
+         up5Lee1pA/ZzZCne2h7FrH1cKOGE9IEGhAooyCKi8b1S0CdIel67XBgAI+8EFzBt+5Ly
+         uWV4ce2OFr4T/onMVM+Q5mNmp+oJelEvC8uvqhhsC4LQjU+/LXoiQqcmLuxtOuDUZv8c
+         VLfbPnPW9hFLlGrgVDMMNCtS2ygL4a+fCSzP4OWmWH3Xhfao37SleCtHGyk8cq1kJLBk
+         5FNQ==
+X-Gm-Message-State: AOJu0YzBpmhIsVHBnRtpdZPfzpP5Emkhq2FzLHU2N7zx1sEyTDUqy/dw
+	ry+4TZBL9eXOmBjFKkhjsey6FTRD7cOMUdEJA4G0psSB9M3ClA3TMEa5DFFohw==
+X-Gm-Gg: ASbGncvXxfCxmE4H8zi1m4OQmMi6SpI1aKdRVwr/5MEpfGVZCK7Nxs6/ZlVTBmf488o
+	YEL6nEc6apPoHKr4Q3qUf9msRqlkfHqIEQp/KT3Ae2uJyqfmW7qgQVgIEoQF05B8zZJKvryn1Hu
+	qTB4jhHPufzC1l9EUi0MTXLl8uO3LPru3l5rihelsMBd9xmzpnO4B7ycpOX6TRjXeBsHemKET3H
+	WSAi+r+6JPrg/9xWIkCw/5tYFF8td9vyYNBiqnAQacYvGeXUJ/5VaXmWi6vWWFWuGPwxCQFsFh7
+	AI1/+YB4km3IehG+xetPWccxccGdWJwlRwXugfSh8/IpaAxWgN3o4XRJ5A/Kbsy3QkWvc7BuoIv
+	UIxYkeVwUEzs1oEN08cC9MYydCXjMEFtKHF10kNNVoXR6IY3JVAeqbMo4HLYH3mYJZeSJQxZpy+
+	CA560N7Tnh
+X-Google-Smtp-Source: AGHT+IH8FIIOCbCM7b9gjzCoZygyFoddbdg6W+PRisH0OziJ36lHrq9G0WOXD+TfYFISf16hAtr9CQ==
+X-Received: by 2002:a17:907:c786:b0:b4f:6d1c:6f4d with SMTP id a640c23a62f3a-b6051dc37f8mr1574692666b.5.1760893659476;
+        Sun, 19 Oct 2025 10:07:39 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b65ebb499dasm556206766b.73.2025.10.19.10.07.40
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b65ebb499dasm556206766b.73.2025.10.19.10.07.38
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 19 Oct 2025 10:07:40 -0700 (PDT)
+        Sun, 19 Oct 2025 10:07:39 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH v2 4/5] emacs: patch CVE-2024-30205
-Date: Sun, 19 Oct 2025 19:07:36 +0200
-Message-ID: <20251019170737.1311808-5-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH v2 2/5] emacs: patch CVE-2024-30203
+Date: Sun, 19 Oct 2025 19:07:34 +0200
+Message-ID: <20251019170737.1311808-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251019170737.1311808-1-skandigraun@gmail.com>
 References: <20251019170737.1311808-1-skandigraun@gmail.com>
@@ -68,73 +68,62 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 19 Oct 2025 17:07:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120800
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120798
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2024-30205
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-30203
 
-Pick the patch that's in the description.
+Pick the patch mentioned in the description.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
  meta-oe/recipes-support/emacs/emacs_29.1.bb   |  1 +
- ...nts-Consider-all-remote-files-unsafe.patch | 38 +++++++++++++++++++
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-org-file-contents-Consider-all-remote-files-unsafe.patch
+ ...w.el-mm-display-inline-fontify-Mark-.patch | 27 +++++++++++++++++++
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-support/emacs/files/0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch
 
 diff --git a/meta-oe/recipes-support/emacs/emacs_29.1.bb b/meta-oe/recipes-support/emacs/emacs_29.1.bb
-index 0af77ef05d..0a88b0282a 100644
+index b1b795dace..c3f36007f8 100644
 --- a/meta-oe/recipes-support/emacs/emacs_29.1.bb
 +++ b/meta-oe/recipes-support/emacs/emacs_29.1.bb
-@@ -8,6 +8,7 @@ SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz \
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
+ 
+ SRC_URI = "https://ftp.gnu.org/pub/gnu/emacs/emacs-${PV}.tar.xz \
             file://0001-org-macro-set-templates-Prevent-code-evaluation.patch \
-            file://0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch \
-            file://0001-org-latex-preview-Add-protection-when-untrusted-cont.patch \
-+           file://0001-org-file-contents-Consider-all-remote-files-unsafe.patch \
++           file://0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch \
            "
  SRC_URI:append:class-target = " \
      file://use-emacs-native-tools-for-cross-compiling.patch \
-diff --git a/meta-oe/recipes-support/emacs/files/0001-org-file-contents-Consider-all-remote-files-unsafe.patch b/meta-oe/recipes-support/emacs/files/0001-org-file-contents-Consider-all-remote-files-unsafe.patch
+diff --git a/meta-oe/recipes-support/emacs/files/0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch b/meta-oe/recipes-support/emacs/files/0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch
 new file mode 100644
-index 0000000000..7408f0e404
+index 0000000000..d951bf4205
 --- /dev/null
-+++ b/meta-oe/recipes-support/emacs/files/0001-org-file-contents-Consider-all-remote-files-unsafe.patch
-@@ -0,0 +1,38 @@
-+From 3a3bc6df4295ff7d5ea7193dfe0492cd858e1664 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/emacs/files/0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch
+@@ -0,0 +1,27 @@
++From 0e7fe7809daa123921faa0bd088931cf8ddfd705 Mon Sep 17 00:00:00 2001
 +From: Ihor Radchenko <yantar92@posteo.net>
-+Date: Tue, 20 Feb 2024 14:59:20 +0300
-+Subject: [PATCH] org-file-contents: Consider all remote files unsafe
++Date: Tue, 20 Feb 2024 12:44:30 +0300
++Subject: [PATCH] * lisp/gnus/mm-view.el (mm-display-inline-fontify): Mark
++ contents untrusted.
 +
-+* lisp/org/org.el (org-file-contents): When loading files, consider all
-+remote files (like TRAMP-fetched files) unsafe, in addition to URLs.
++CVE: CVE-2024-30203
 +
-+CVE: CVE-2024-30205
-+Upstream-Status: Backport [https://cgit.git.savannah.gnu.org/cgit/emacs.git/commit/?h=emacs-29&id=2bc865ace050ff118db43f01457f95f95112b877]
++Upstream-Status: Backport [https://cgit.git.savannah.gnu.org/cgit/emacs.git/commit/?h=emacs-29&id=937b9042ad7426acdcca33e3d931d8f495bdd804]
 +
-+Signed-off-by: Gyorgy Sarvari
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ lisp/org/org.el | 6 +++++-
-+ 1 file changed, 5 insertions(+), 1 deletion(-)
++ lisp/gnus/mm-view.el | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/lisp/org/org.el b/lisp/org/org.el
-+index ab58978..03140bd 100644
-+--- a/lisp/org/org.el
-++++ b/lisp/org/org.el
-+@@ -4576,12 +4576,16 @@ from file or URL, and return nil.
-+ If NOCACHE is non-nil, do a fresh fetch of FILE even if cached version
-+ is available.  This option applies only if FILE is a URL."
-+   (let* ((is-url (org-url-p file))
-++         (is-remote (condition-case nil
-++                        (file-remote-p file)
-++                      ;; In case of error, be safe.
-++                      (t t)))
-+          (cache (and is-url
-+                      (not nocache)
-+                      (gethash file org--file-cache))))
-+     (cond
-+      (cache)
-+-     (is-url
-++     ((or is-url is-remote)
-+       (if (org--should-fetch-remote-resource-p file)
-+           (condition-case error
-+               (with-current-buffer (url-retrieve-synchronously file)
++diff --git a/lisp/gnus/mm-view.el b/lisp/gnus/mm-view.el
++index 2c40735..e24f3f3 100644
++--- a/lisp/gnus/mm-view.el
+++++ b/lisp/gnus/mm-view.el
++@@ -504,6 +504,7 @@ If MODE is not set, try to find mode automatically."
++ 	  (setq coding-system (mm-find-buffer-file-coding-system)))
++ 	(setq text (buffer-string))))
++     (with-temp-buffer
+++      (setq untrusted-content t)
++       (insert (cond ((eq charset 'gnus-decoded)
++ 		     (with-current-buffer (mm-handle-buffer handle)
++ 		       (buffer-string)))
 
