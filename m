@@ -2,185 +2,92 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 611A3CCD195
-	for <webhook@archiver.kernel.org>; Sat, 18 Oct 2025 18:51:59 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web10.11147.1760813516529458007
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B4FECCD183
+	for <webhook@archiver.kernel.org>; Sun, 19 Oct 2025 12:21:05 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web11.23621.1760876455963135681
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Oct 2025 11:51:56 -0700
+ Sun, 19 Oct 2025 05:20:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TLuYi/2k;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-42557c5cedcso1680802f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 11:51:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IeSFN5CP;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-47117f92e32so19901725e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Oct 2025 05:20:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760813515; x=1761418315; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1760876454; x=1761481254; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=FIc0LFinksJ55oQlSpAcnXH81Sk8lJ6lum3ww9D6rl8=;
-        b=TLuYi/2kx7pNuCjdt1FjYVvReZXBVc4BAJZirYEAogzrXlga+gUjod0tDH7NhQJH0N
-         WzDwnU9chl+ByVm3n6DCm8wmiVrz6X4EM3MP0OPt5HK34x3brDaCLvi1zVX59/DE3SU0
-         36lSlRjA1tGYVvOVrE6ITxhYC+m3EbuC+WRpkZyzM5uqVjp/v6wR2sjMnzYGFPcQSvPH
-         jZMAi33ZyG83JVz1EEcAguJKbuwxE8k+9um6FE5CafItN24USb/58I8FgzRSg9YOOfMy
-         j99MuiAy1M/mOojuDeJRFYLwR71zdxR5lN0/bHLWadJzeV4/W/E5TDAZ6fdUm65yOi0q
-         rFSQ==
+        bh=cFBKrabeVPEa7G34w35TSk6SUPSAEP+1Je9OoJxDhX8=;
+        b=IeSFN5CPg745x58jQtiRPi5N7xegCumnMMayOXTdyTSgnUJyKhN58byAWWw28knO1E
+         nEMZa9AOgmW+oU/8XWp1Pe/88+IWwbqOQNo7QdYlHNV1ok5OiK3cabtxS4QWk/0J9dIl
+         2kJJkrv/LW5BTMQgX9fznDS1swONZE8siQWBfX+5xoL9JMEWjYSAp/NB9D4V756Pgcdq
+         p+GaD9yA/YUMUoHFVKfgjSrhQ3L5ekQ5xlR1RtuALp3vtu2fZBAF+6a3P7H5pLsNeFH7
+         ptwmjVebotgR62aiEIKaikQWvhSGbhgW6GcmZbxFwR9bG4aPsdxbojHrTFZiPtAS/upu
+         wf5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760813515; x=1761418315;
+        d=1e100.net; s=20230601; t=1760876454; x=1761481254;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=FIc0LFinksJ55oQlSpAcnXH81Sk8lJ6lum3ww9D6rl8=;
-        b=ulQNBCKGwOA2qUJ/QokAeKie0mMbS8cQySpePmU0Ei4WZLg863b7jittBQWrAC0Tya
-         Dao/W/wjePHdu5EZngz8ij5m5QV0KuloGnFwpUnzRwiRrr9yHWkWDHN6yCArpQRZa2v8
-         O7M6NLu572kGFtcZLzayib3zKJIvFAcsn9/PwbZvaC5IyNeBs9QzdqOXcaEdAIIjULmY
-         vkx9F59S9bp3vmzDUlcc92NvdtLErl/W5yH3EfI/BCu/LTDVXoM5CK37kMSP/K7wW0DW
-         NUIpSp4n4dOfHuaj4kEvyDiQNhqz4L7m96IAo7XqIIoTLZeI/BDYWqmGR/q3GLTHfQih
-         AIPg==
-X-Gm-Message-State: AOJu0YzIaJA5sNo+bhIxbWV6/+9ExX9n2GQEzfE2R49Y1OHXA2vEVDh2
-	SI7nOQk80OhIBEKmNguA+zgu54qz+B0c/7yaeEwkT7zq7VQudwlZm8Iy3EGfqQ==
-X-Gm-Gg: ASbGncvxXWzc4bE8DMZNC09rKzsIu210s5gBdxTqxasa1L6SP0z1XPoWG07BOwGxQgH
-	6Hh/UckOz4evFDFvPdEsaS3O93VyPkPE3cL4IH79+PNfrz+7WZUEhVd5rFkj9kXw3bQsW1HmKOk
-	CYCqfcmbTS7JBunRyzP2mHCa9GE3Cc7T48qfv451nMoUpPSq3zVkbai6GDaYjAjQ9nIZTrDYcEY
-	ir/JaInWoKaoNzgnZ3sEMsDnZUlB9622RXqO/cbmZJDXqi8XWlfG7xZorlP6DUs5eVVoygP65gQ
-	2HGMTBjF8I91EW6ElakkF21SYVlF5HnJhxoWI7BPba4415AQdOpBOPPOUyJARKm2QjSzb3pOIYO
-	donKRdneR3sc7jvWwzKPO1aY1HdkcSTtVQ5NmBjyfnNSyHzjsKbyZkSseY+VtEbU+j6VEZDyuUw
-	==
-X-Google-Smtp-Source: AGHT+IHvzeaX6x5JVL/f0/Qab1hT/REWYzvoGe1pCkiJFrjaBRff/gV3dVCoD6edkYuGo/XNe8tNwg==
-X-Received: by 2002:a05:6000:26d1:b0:3ec:de3c:c56 with SMTP id ffacd0b85a97d-42704d52397mr5942653f8f.16.1760813514455;
-        Sat, 18 Oct 2025 11:51:54 -0700 (PDT)
+        bh=cFBKrabeVPEa7G34w35TSk6SUPSAEP+1Je9OoJxDhX8=;
+        b=Iib1xb8AHbYjDcMmSK8JNP2Is6irhzxVdutAucNcyoveaBI4Z2BB+ghNIm45/0XRVd
+         r9zhHo98bZRQ1urKy+LZZS5/NGZKG1BQPvrc1iij7zU9npucdx9jwSSke+0oGs7KIWj7
+         Uag9h6uAIaQzO6ZG7Q4/Z/tjC4KBGq1K6PsWM2t5fBi3KUe36cZfSNs3VnNU5h4At0Lg
+         af0P3rE6jVPVJ1uTng2vfIMPVQkyvvxzpUZxaXyTBmvDd3a+r8JvxbipFNQr+F8S1qvr
+         vdNFC/cnGXg2ZZKARf7BilbVbhiqyPjSeYbsZ2UGCfF7o6M7TmsgoSyT60Oxn/Z7071G
+         AyHA==
+X-Gm-Message-State: AOJu0YyRW+l5dXOddPmNA65ymE0Txn1OZ99A8llEddBfJStzLZVAGu4f
+	zqQal2tRKebZSxQP+16OdoeqPfXofjU4IfCZbUEM1+HX0hzJPplyGPBmwmF+pg==
+X-Gm-Gg: ASbGncubls1hIyn+su8ZevCR7A34yCfucoEGG/cJgysW7p5+o4jS1lDsRstgyjsiqIZ
+	OuLAg8uMk+gDBMyBH8MDYdl0m1iAkfOu8gY65hOkN42yuIBdhwR53NqDkvlbtAt1MUU9J+T9aUE
+	dP+W2pRcF5twtn7sV/5If8v7DLM7DHHgjw0oVuBndpQP2mp+lxSqU1fODY5e8W4Gl0COucS6U1C
+	bd1x/qixaqzZUD3YT3wPUI3jZhoUjNSjJa2TkZ3iR2J7RfBq2uTMty9q08emyzfco1dqJZXINYS
+	Ef7InOdxCR4+GgS10Lgg95O87FQX3XNC3Jz1o6obCak2yqFsf0/RqhAehCJocabCv0AxfY8GH48
+	aO30OXNL9Qy7hiAM9EnTJyrBbvWsui9vWNnJDd278ocbBBEQ3YDluBKOKwJK5wiAjRNBKXskLE+
+	+Xf2RgQPEVPsqaxv+bTIk=
+X-Google-Smtp-Source: AGHT+IEJC/Zfe0olegHxcSHUaARps6IjY5g0qJdrkam8JzRqZDuH1CAgxDa+jUFcpCatdfNsXtXc2g==
+X-Received: by 2002:a5d:5c89:0:b0:405:3028:1be4 with SMTP id ffacd0b85a97d-42704d1456bmr5774155f8f.8.1760876454197;
+        Sun, 19 Oct 2025 05:20:54 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-427ea5b3affsm6342428f8f.12.2025.10.18.11.51.52
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-427f00b97f8sm9864065f8f.36.2025.10.19.05.20.53
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Oct 2025 11:51:53 -0700 (PDT)
+        Sun, 19 Oct 2025 05:20:53 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] poco: fix some ptests
-Date: Sat, 18 Oct 2025 20:51:50 +0200
-Message-ID: <20251018185152.1642387-1-skandigraun@gmail.com>
+Subject: [meta-python][PATCH] python3-betamax: fix ptests
+Date: Sun, 19 Oct 2025 14:20:53 +0200
+Message-ID: <20251019122053.127152-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 18 Oct 2025 18:51:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120788
+ <openembedded-devel@lists.openembedded.org>; Sun, 19 Oct 2025 12:21:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120789
 
-Remove a number of ignored tests from the ignore-list. They were missing
-some files that weren't installed - after installing them, they pass.
-
-The remaining mongodb test on the list hasn't been tested.
+A number of tests require internet access - set a valid DNS in resolv.conf
+so the tests don't fail.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...nx-Ignore-PKCS12-and-testLaunch-test.patch | 53 ++-----------------
- meta-oe/recipes-support/poco/poco_1.14.2.bb   |  5 +-
- 2 files changed, 9 insertions(+), 49 deletions(-)
+ .../recipes-devtools/python/python3-betamax/run-ptest     | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch b/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
-index 1d4eb9b831..8575797e89 100644
---- a/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
-+++ b/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
-@@ -8,48 +8,14 @@ Content-Transfer-Encoding: 8bit
+diff --git a/meta-python/recipes-devtools/python/python3-betamax/run-ptest b/meta-python/recipes-devtools/python/python3-betamax/run-ptest
+index 8d2017d39c..531af4d015 100644
+--- a/meta-python/recipes-devtools/python/python3-betamax/run-ptest
++++ b/meta-python/recipes-devtools/python/python3-betamax/run-ptest
+@@ -1,3 +1,11 @@
+ #!/bin/sh
  
- These tests fail on Linux
- 
--There were 4 failures:
-- 1: N7CppUnit10TestCallerI11ProcessTestEE.testLaunch
--    "rc == 3"
--    in "/usr/src/debug/poco/1.12.4-r0/Foundation/testsuite/src/ProcessTest.cpp", line 79
-- 2: N7CppUnit10TestCallerI11ProcessTestEE.testLaunchRedirectIn
--    "rc == 100"
--    in "/usr/src/debug/poco/1.12.4-r0/Foundation/testsuite/src/ProcessTest.cpp", line 106
-- 3: N7CppUnit10TestCallerI11ProcessTestEE.testLaunchRedirectOut
--    "s == "Hello, world!""
--    in "/usr/src/debug/poco/1.12.4-r0/Foundation/testsuite/src/ProcessTest.cpp", line 134
-- 4: N7CppUnit10TestCallerI11ProcessTestEE.testLaunchEnv
--    "s == "test""
--    in "/usr/src/debug/poco/1.12.4-r0/Foundation/testsuite/src/ProcessTest.cpp", line 166
--
-- There were 4 errors:-
--   1: N7CppUnit10TestCallerI7EVPTestEE.testRSAEVPKeyFromPKCS12
--  │ │ "N4Poco17NotFoundExceptionE:
--  Not found: POCO_BASE"
--  │ │ in "<unknown>", line -1
--   2: N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testFullPKCS12
--  │ │ "N4Poco17NotFoundExceptionE:
--  Not found: POCO_BASE"
--  │ │ in "<unknown>", line -1
--   3: N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testCertsOnlyPKCS12
--  │ │ "N4Poco17NotFoundExceptionE:
--  Not found: POCO_BASE"
--  │ │ in "<unknown>", line -1
--   4: N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testPEMReadWrite
--  │ │ "N4Poco17NotFoundExceptionE:
--  Not found: POCO_BASE"
--  │ │ in "<unknown>", line -1
--
--There was 1 error:
-- 1: CppUnit::TestCaller<ProcessRunnerTest>.testProcessRunner
--    "Poco::TimeoutException:
--Timeout: ProcessRunner::checkTimeout(): waiting for PID file"
--    in "<unknown>", line -1
--
- Upstream-Status: Inappropriate [OE specific]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
- Signed-off-by: Peter Marko <peter.marko@siemens.com>
 +
-+Updated comment and content after fixing some tests.
-+Left only MongoDBTest.testArray on ignore list, untested.
 +
- ---
-  cppignore.lnx | 9 +++++++++
-  1 file changed, 9 insertions(+)
-@@ -58,17 +24,8 @@ diff --git a/cppignore.lnx b/cppignore.lnx
- index b3288d474..9aad48ca5 100644
- --- a/cppignore.lnx
- +++ b/cppignore.lnx
--@@ -30,3 +30,13 @@ CppUnit::TestCaller<HTTPSClientSessionTest>.testProxy
-+@@ -30,3 +30,4 @@ CppUnit::TestCaller<HTTPSClientSessionTest>.testProxy
-  CppUnit::TestCaller<HTTPSStreamFactoryTest>.testProxy
-  CppUnit::TestCaller<DNSTest>.testHostByAddress
-  CppUnit::TestCaller<DNSTest>.testHostByName
--+CppUnit::TestCaller<ProcessTest>.testLaunch
--+CppUnit::TestCaller<ProcessTest>.testLaunchRedirectIn
--+CppUnit::TestCaller<ProcessTest>.testLaunchRedirectOut
--+CppUnit::TestCaller<ProcessTest>.testLaunchEnv
--+CppUnit::TestCaller<EVPTest>.testRSAEVPKeyFromPKCS12
--+CppUnit::TestCaller<PKCS12ContainerTest>.testFullPKCS12
--+CppUnit::TestCaller<PKCS12ContainerTest>.testCertsOnlyPKCS12
--+CppUnit::TestCaller<PKCS12ContainerTest>.testPEMReadWrite
- +CppUnit::TestCaller<MongoDBTest>.testArray
--+CppUnit::TestCaller<ProcessRunnerTest>.testProcessRunner
-diff --git a/meta-oe/recipes-support/poco/poco_1.14.2.bb b/meta-oe/recipes-support/poco/poco_1.14.2.bb
-index 9cdc9e325c..8f81fac77b 100644
---- a/meta-oe/recipes-support/poco/poco_1.14.2.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.14.2.bb
-@@ -108,13 +108,15 @@ do_install_ptest () {
-        if ${@bb.utils.contains('PACKAGECONFIG', 'DataPostgreSQL', 'true', 'false', d)}; then
-             cp -f ${B}/lib/libPocoDataTest.so* ${D}${libdir}
-        fi
--       cp -rf ${B}/*/testsuite/data ${D}${PTEST_PATH}/bin/
-+       cp -rf ${S}/*/testsuite/data ${D}${PTEST_PATH}/bin/
-        find "${D}${PTEST_PATH}" -executable -exec chrpath -d {} \;
-        rm -f ${D}${PTEST_PATH}/testrunners
-        for f in ${D}${PTEST_PATH}/bin/*-testrunner; do
-             echo `basename $f` >> ${D}${PTEST_PATH}/testrunners
-        done
-        install -Dm 0644 ${S}/cppignore.lnx ${D}${PTEST_PATH}/cppignore.lnx
-+       install ${B}/bin/TestLibrary.so ${D}${libdir}
-+       install -D ${B}/bin/TestApp ${D}${bindir}/TestApp
- }
- 
- PACKAGES_DYNAMIC = "poco-.*"
-@@ -128,6 +130,7 @@ FILES:${PN}-cppunit += "${libdir}/libCppUnit.so*"
- ALLOW_EMPTY:${PN}-cppunit = "1"
- FILES:${PN}-datatest += "${libdir}/libPocoDataTest.so*"
- ALLOW_EMPTY:${PN}-datatest = "1"
-+FILES:${PN}-ptest += "${bindir}/TestApp ${libdir}/TestLibrary.so"
- 
- RDEPENDS:${PN}-ptest += "${PN}-cppunit ${PN}-datatest"
- RDEPENDS:${PN}-ptest += "${@bb.utils.contains('PACKAGECONFIG', 'MongoDB', 'mongodb', '', d)}"
++if ! nslookup httpbin.org >/dev/null 2>&1 ; then
++    trap 'mv /etc/resolv.conf.bak /etc/resolv.conf' INT EXIT
++    mv /etc/resolv.conf /etc/resolv.conf.bak    
++    echo "nameserver 8.8.8.8" > /etc/resolv.conf
++fi
++
+ pytest --automake
 
