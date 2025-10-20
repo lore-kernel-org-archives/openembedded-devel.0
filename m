@@ -2,128 +2,103 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BED0BCCD193
-	for <webhook@archiver.kernel.org>; Mon, 20 Oct 2025 19:44:53 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web11.1398.1760989486865357260
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B50CACCD1A7
+	for <webhook@archiver.kernel.org>; Mon, 20 Oct 2025 19:55:13 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web10.1679.1760990105970121984
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Oct 2025 12:44:47 -0700
+ Mon, 20 Oct 2025 12:55:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=g/P+7X19;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-47106fc51faso55710445e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 12:44:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kZ9ua1/e;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-42701b29a7eso2163847f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 12:55:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760989485; x=1761594285; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Zm5KAmXJ6/ftsRANAkCiP5uCmKbRtWtu9Cpang86E9Y=;
-        b=g/P+7X19LxjQoYv0B9sCrWuRr0fcGNxD1TxmowiDasfS8g31MLucSJoS9muXLX5jJy
-         TanAUPqssmdHSfPA2eDkAs0EH+rC5Zyd0f9RFx+CVqKm6vSz5sf97rqopCb3jJ8jolYW
-         E11u5rUG/NF/QBzb6KEP3vncAGQH8BxJa3FetHETxrJkZRA217SaSo7j9ROJKt69EUh4
-         x6xBzQhMPuq0tDi876BJmeKn8W9qgElPxmxo34cvZA1f8DWH1TDCyOLSSa1+uJEWPzs4
-         G5/Lgobkyw2TfHLpgmr21dT1KlGiwJV6shFUMtB2ue3746HpRvjUOdfYcsyRja2doKKf
-         BwRw==
+        d=gmail.com; s=20230601; t=1760990104; x=1761594904; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=TBwH8aN6ibIA5VrZCQLdGW8LsB62V19MU4Qk2BI/fQs=;
+        b=kZ9ua1/eA3E1sl6y/kizmQXiQyHIaO3psxsESmnKAxHO8KkgQXXRGIT+q6aTr/5z93
+         GxLLDiOxxbigD73+ywgejDad3j8YNxp3emIGJ/XCUnV01e7KJJXIin2jgoUWJbwuMXyS
+         8SXcLbkCv3nbIKTdxu8w65GRG7Z/vW2ISO+8xVmgbH66ikRryxFp73UgsaIDEvuJDzP8
+         7QmEuHpZBGMo6dDTj9M4bCkEronmByTCe0OQdSrJH8Oau2cinYHJydys8M3I1PKPVN6n
+         gxSWljsZH+qV03coHL/6KbiQ0t6wRa64OaA1Jz0GSxjmUdRSM0Wj16ef0jISV9520DV0
+         +YKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760989485; x=1761594285;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Zm5KAmXJ6/ftsRANAkCiP5uCmKbRtWtu9Cpang86E9Y=;
-        b=KkTgnEiTT8d+23NH/Zm6f2gKpgb8LC0Ue3M/+rqZzasPedTVrxAlU/ztTeD9Dghn98
-         83O+ffd4dWulxL2KOcKdIHnsAiyvwP2T4A2Gy/ili0YnUk57tcv4Bf8xhBBzHjvXJNT0
-         CSSCWwQA/rbAT/En76HXGJqwE2druYx1oZs6sraZ0XDLqL/RajGXDg51GeWI/6gg+LqS
-         e3DiuUVUnz8eT2MmaKMYUEXcjDoo3g85Bv67zcAW+HbBrho11Kne6s+mFsvn5dljbcRz
-         XNUavjZ/CJ4nWoy9WkHu1l2DONV+h+eIkqJ8Ay9Q1VAM8W8fvK5MGOgCtRxfyU5dpbkE
-         hrMw==
-X-Forwarded-Encrypted: i=1; AJvYcCVRw0u4DicpRBydH6od5+Ypq4dw7Owe7oGNccF2WadDDcUFKrfvPXlNyUdURqeB/zqaehc1WF1YvcaV7uBLOO6ZOAE=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzsCTst+RVHwr5BGD1MHAil6mNqt5eIzelKHxhIZUBnWjBXwPJI
-	XYNZgxaS6EBeE9WAvfdybCExtCRusb1/4nHStMh8echMXPEZRXfggT6K
-X-Gm-Gg: ASbGnctE+zFTT/UT5VuTUhM81NRCDIptrxGkqgQy/mOW3fVluDgC13m/Uo8g7lfpmVi
-	J6g9DJ52gBNFTQPXbP0MCo4xZG0TbzWBOAoQwExeNfGKCchtCezj++h5eeqajSMybtfrLZJxukM
-	q9995YSB2WttQiqeCXutFZCX2oEpUlAOe3vSQVSbhwVcGl8BSvnyOHaAVNAgDN+SnRyr1hKUIxF
-	MUxJ8L8Sip9k5a7Xn666Oxvxg7//uwG3dKyeKkJwLUmgjLXrNfNRVm3Io5/BXZCOpM/UIUX2iKG
-	O47MOWUx6jFJpp3p06U51H6olGoIQIT3Q3AYnpe3NL+xyEQAqmwoR8OeDXlntNjxdJiXv1Z5Wk2
-	BhzEAp8j6SLN9obX7IPRmlpNy4MK3qtMtkMQaNVxti5lBHGzV8rM2+vFtn5ykNqfXGU3UUc8ph3
-	NueQ/56k2MmrYSn1TO9HA=
-X-Google-Smtp-Source: AGHT+IFLqp7CNyEY9LK6fPm2Fmvzia/DpPQ44ljAqRNxQcCURmgxRP5Ds6ku/KH2nQs40XpuInUT1g==
-X-Received: by 2002:a05:600c:1d9c:b0:45d:d1a3:ba6a with SMTP id 5b1f17b1804b1-471179174dcmr118660905e9.33.1760989485152;
-        Mon, 20 Oct 2025 12:44:45 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-427f00ba01bsm16462233f8f.41.2025.10.20.12.44.43
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 20 Oct 2025 12:44:43 -0700 (PDT)
-Message-ID: <7c7311ac-1964-4ff1-9046-e41c93ae4269@gmail.com>
-Date: Mon, 20 Oct 2025 21:44:43 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-oe][PATCH 2/2] cryptsetup: extend licenses with Apache and
- CC
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <20251020180022.3398560-1-skandigraun@gmail.com>
- <20251020180022.3398560-2-skandigraun@gmail.com>
- <DB5PR02MB10213BD36DCCF1B79BE13FBA1EFF5A@DB5PR02MB10213.eurprd02.prod.outlook.com>
-Content-Language: en-US
+        d=1e100.net; s=20230601; t=1760990104; x=1761594904;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=TBwH8aN6ibIA5VrZCQLdGW8LsB62V19MU4Qk2BI/fQs=;
+        b=LQHykls13HPLH0aD7jsF3NnFDXcW7a7QIDzJ/kHq08yLvWM4wY2X/EOU7pILK0scP5
+         4Iv4jBMdxUEzKupDheDNbHE0ywAlfXIuiM6tSMmeJVJ7fALWlD/gUIAsCu4PnFOAMcA7
+         G2qlNCccizyQy2i9BKxeXQZecCn9BJCSQV07No7iylYsolaO6KdqLFHUVTeVaitm9U+A
+         A6S/igvs1REJ9Bx45rw7r/0E7W/Biw0DjIyXT0iHp7WQYMwP8WAIekaB8ujCatRdUHDr
+         FbA50ZftLJr/ZUPE9/vtE0zGLCIly/NWxVUiDSRC+APztYk/Z3GDLAMazZFTpK1FKtMP
+         YdgQ==
+X-Gm-Message-State: AOJu0YxZjzzZJz82ROxQxkeGCSAo8Fh3y79n3gAGl4J8KZ0OI8J3kW5O
+	3c0zbSA8MFNoZFAVYqaKl5j2Blm+oP9aCUc7O6+VuhMRVcaLbfnhEUsPN2dI0A==
+X-Gm-Gg: ASbGnctkzDQkFQj5D2AtNPNEpzYofs5tz5VuvAGQ7aU0VbU3Jq7jvhs5jIOlmdU38um
+	fTSqm9ddffjPh57MTuxAqaFb03SJfaDsY/GXoJKnbNJWAhRu8lQBR4lCF92cuvM1KYEIrsdGerG
+	y2CzmoaWOttsAtziC6yqUs+Kl4TFPEzabuca+oFbJSocBRrqeRrAohrITm82zpVmod83MMQSfP9
+	bcTS5o9z0Xz7gvSRtZwELxDz702Na4oh8iA2Tq07IcpTG1HRkTVag7WmabJWhtLVJYUvs46mpM6
+	gH0hqNWZ08tY5GP6wD2aMg09YZf3Q5WBex+h4eiD2x8gN/qFHXbdSsaJBVmbMf75gfLTYIXnvk9
+	841XkqUdAYY+jeikT/IAz0iMxVtVbxOnHpwqmicUSk56AVcJbycj4DGBcFrz9EC0TwHnSSAkVGs
+	wmdBVKntKj
+X-Google-Smtp-Source: AGHT+IF25LBTUDFsIpqqbVJIAf9E/D4nWEh9t4fcwVLWNPyPMUXtl1hH55v/LDZQntqN/MYd0U4Kcw==
+X-Received: by 2002:a05:6000:240d:b0:427:7cd:bde7 with SMTP id ffacd0b85a97d-42707cdc0c2mr8798085f8f.5.1760990104247;
+        Mon, 20 Oct 2025 12:55:04 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-427f009a993sm16767915f8f.24.2025.10.20.12.55.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Oct 2025 12:55:03 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <DB5PR02MB10213BD36DCCF1B79BE13FBA1EFF5A@DB5PR02MB10213.eurprd02.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: openembedded-devel@lists.openembedded.org
+Cc: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Subject: [meta-oe][PATCH v2 2/2] cryptsetup: extend licenses with Apache-2.0
+Date: Mon, 20 Oct 2025 21:55:02 +0200
+Message-ID: <20251020195502.3538265-2-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251020195502.3538265-1-skandigraun@gmail.com>
+References: <20251020195502.3538265-1-skandigraun@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 19:44:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120822
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 19:55:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120824
 
-On 10/20/25 21:38, Peter Kjellerstedt wrote:
->> -----Original Message-----
->> From: Gyorgy Sarvari <skandigraun@gmail.com>
->> Sent: den 20 oktober 2025 20:00
->> To: openembedded-devel@lists.openembedded.org
->> Cc: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
->> Subject: [meta-oe][PATCH 2/2] cryptsetup: extend licenses with Apache and CC
-> Apache -> Apache-2.0
-> CC -> CC-BY-SA-4.0
->
->> The project's readme indicates that some parts of the code is covered
->> by Apache and CC licenses - add them to the RECIPE accordingly.
->>
->> Reported-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
->> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
->> ---
->>  meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb | 9 +++++++--
->>  1 file changed, 7 insertions(+), 2 deletions(-)
->>
->> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
->> index c297de053d..f2dc5d9b46 100644
->> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
->> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
->> @@ -6,8 +6,13 @@ and can hence offer more features than plain dm-crypt. On the other \
->>  hand, the header is visible and vulnerable to damage."
->>  HOMEPAGE = "https://gitlab.com/cryptsetup/cryptsetup"
->>  SECTION = "console"
->> -LICENSE = "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-exception"
->> -LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
->> +LICENSE = "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-exception & Apache-2.0 & CC-BY-SA-4.0"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326 \
->> +                    file://docs/licenses/COPYING.Apache-2.0;md5=3b83ef96387f14655fc854ddc3c6bd57 \
->> +                    file://docs/licenses/COPYING.CC-BY-SA-4.0;md5=b296faaab9c17d5874fd17967df54736 \
->> +                    file://docs/licenses/COPYING.GPL-2.0-or-later-WITH-cryptsetup-OpenSSL-exception;md5=32107dd283b1dfeb66c9b3e6be312326 \
->> +                    file://docs/licenses/COPYING.LGPL-2.1-or-later-WITH-cryptsetup-OpenSSL-exception;md5=1960515788100ce5f9c98ea78a65dc52 \
->> +                    file://README.licensing;md5=45c1ba157f18d08991819f41f56d72e9"
->>
->>  DEPENDS = " \
->>      json-c \
-> If you are going to include CC-BY-SA-4.0 in LICENSE, then you also need 
-> to set LICENSE:<pkg> for all packages that this recipe produces. The 
-> license is only used for the FAQ.md file, which does not affect the output 
-> of any package.
->
-> //Peter
->
-True, thanks for that. I thought that argon library was relicensed since
-kirkstone, but I only assumed that without checking it the actual
-content under this cc license. Will send a new version.
+The project's readme indicates that some parts of the code is covered
+by Apache license - add it to the RECIPE accordingly.
+
+Reported-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+
+v2: remove CC license, as it only covers non-code FAQ
+
+ meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
+index c297de053d..a77d488f44 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
+@@ -6,8 +6,12 @@ and can hence offer more features than plain dm-crypt. On the other \
+ hand, the header is visible and vulnerable to damage."
+ HOMEPAGE = "https://gitlab.com/cryptsetup/cryptsetup"
+ SECTION = "console"
+-LICENSE = "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-exception"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
++LICENSE = "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-exception & Apache-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326 \
++                    file://docs/licenses/COPYING.Apache-2.0;md5=3b83ef96387f14655fc854ddc3c6bd57 \
++                    file://docs/licenses/COPYING.GPL-2.0-or-later-WITH-cryptsetup-OpenSSL-exception;md5=32107dd283b1dfeb66c9b3e6be312326 \
++                    file://docs/licenses/COPYING.LGPL-2.1-or-later-WITH-cryptsetup-OpenSSL-exception;md5=1960515788100ce5f9c98ea78a65dc52 \
++                    file://README.licensing;md5=45c1ba157f18d08991819f41f56d72e9"
+ 
+ DEPENDS = " \
+     json-c \
 
