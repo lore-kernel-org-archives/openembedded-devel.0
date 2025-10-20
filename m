@@ -2,70 +2,68 @@ Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6301ECCD199
-	for <webhook@archiver.kernel.org>; Mon, 20 Oct 2025 07:52:45 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web10.12845.1760946762810072728
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBE15CCD193
+	for <webhook@archiver.kernel.org>; Mon, 20 Oct 2025 11:30:36 +0000 (UTC)
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web11.15938.1760959829905140921
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Oct 2025 00:52:42 -0700
+ Mon, 20 Oct 2025 04:30:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=KPZlF/Tc;
- spf=pass (domain: mvista.com, ip: 209.85.215.173, mailfrom: vanusuri@mvista.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-b62ed9c3e79so2780604a12.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 00:52:42 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=QIcAbTC3;
+ spf=pass (domain: mvista.com, ip: 209.85.210.171, mailfrom: vanusuri@mvista.com)
+Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-782e93932ffso3558496b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 04:30:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1760946762; x=1761551562; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1760959829; x=1761564629; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZSQV6JU0twQgDhVnfg/6FR3wxIHgYBe9VLUXOHfTHzo=;
-        b=KPZlF/TcMe6sNa8btd0lqZzpIO09iU6327de/dggBxrR2xEQVN7wjoF1x+bPpMPvx5
-         O+05lUsWrD23jnuqScWRAk0rWDj5OUiqHj8KO8mMJCQagyvxHjYnHlkLVMfPdWUqVFFy
-         7C+62R4e7Z/yQQLYsL2KnqvTmvpxnZxo1RFtI=
+        bh=R1P+8Fq/orsuXVetgrfFfMiL8Miyt6ol4M38IrzuKg4=;
+        b=QIcAbTC3nKdF8TRsUljLz83XDcpHiv/xxd80KeHheJZ7HaeFLtsA4rsnlwvb5T7S4d
+         giKj3J8vNRD94VObCWX9kAWQ3kE62YHHzg9XvD0PjknaqNs/CNwIQaNCy4stu1y1cd+A
+         sa4J4ecrHouWY6fpOKAz7D0dljEOoP7Hu8g9U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760946762; x=1761551562;
+        d=1e100.net; s=20230601; t=1760959829; x=1761564629;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ZSQV6JU0twQgDhVnfg/6FR3wxIHgYBe9VLUXOHfTHzo=;
-        b=NiGnSiB4GhHoJDZ/muvToVaOMaxuRIWOCiZnaeb2Uqz14Q8BFSdBwOHu/3P6vs+jr/
-         3MeQhEaUNVSYuPn4hh+QauOEwifD06yrYiSLct72HUw0hwe7pdPLMpg5p6XiJcHoLwSd
-         LbyqjFKLiixGBl3C93ufvaLDNva7nnvQvKZzZU4PZ6W67nzwnqb8/I7pjBIsr9gQM64S
-         D2G01XJUvpK7rQzU9WJgjMstFgD1KiLroUjKI3dF7yogpAyfoy1I3eoFI2wEXCvQoNOp
-         zuI49pv5kiO4RrdGUfs0W+zHw3946SjFwmcInSYpJPZCQH9SfBlSZbfTu1cUPWhl89r4
-         QuSw==
-X-Gm-Message-State: AOJu0Yz5WATcbY6nGBDsKbBjTcebH7mFriZmuXe7pn90EHutMqmLSCPp
-	HYwdrxmi+CeIJV6yckl+MtndPKwk8dkiFgCTJEMVy83OIYPF8xVs+ytOhmJG//SyeCeSgR/YIy7
-	TIrS4zIA=
-X-Gm-Gg: ASbGncvfmnQBwmUJ5nyEzG76Bb4d49LZ+wvatXn5FumGnUfG4aQMLx7Vbk6tADDTFkG
-	Y8EosHuRXdPpSZhH3ibg+jv4D3sjvcV+b6NatCKrvEMKQXwya6xOcRoHRe+zukNZfv5/dzQpAgD
-	fRSgCo95b0pEZbpLN6FGGGHmwBvYqBRBfc2xfGg1CJvWyBMOH1yW8MVO0uD1ubPY5gPBrW62BTp
-	3l/t+ti5cR8+XmfCr9qS9LiapbdG+Bl5a4HrhBb8amiH0lXuf7k3+6z1mbDCLU3yl5lCkOL8f1U
-	Bj2Gl61ZpUE67oE1QNLVoUWhBi+MMJLhnDW4mVxqmVG/cFn9j1nxYcpbvlKP2h7TMiXoKeFz19p
-	eF5ESTryrj0ksIwp1aiMTwldJyHNEHRREczLd4Ue86vhlU97qNd3ktB5SXGR/FeRWJRjQtkvWrm
-	NGYtGwT7APpBYPObiKR2ofuaQB2g==
-X-Google-Smtp-Source: AGHT+IHq4khWwPbJ05MnDB6TD6a1+G2hIIgA2WKBP+tueecNZODF1mrparC+qT2jfEuu3X8FPkgPRQ==
-X-Received: by 2002:a17:902:ce0f:b0:269:8d1b:40c3 with SMTP id d9443c01a7336-290c9cf344bmr158269105ad.12.1760946761396;
-        Mon, 20 Oct 2025 00:52:41 -0700 (PDT)
-Received: from localhost.localdomain ([2401:4900:8fce:e9c7:4e65:2995:e34f:9dd0])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-292471d5c0bsm72384495ad.69.2025.10.20.00.52.34
+        bh=R1P+8Fq/orsuXVetgrfFfMiL8Miyt6ol4M38IrzuKg4=;
+        b=N/pvaLGDOT4BWxZ3j7EqPchuhni79w/Dxh9JXHcXE5xiOryVMqQzQnsTultj3DhacW
+         kZRub48xNjKkq8zHE/vQwctuoPoS6D9HsWL0oQBWiK8xg+nszfxg/CD8aUQMdM2f58Ie
+         sBUj4/vb50X7Kne/1eF7lszAMX8ofi6YJHcGMOFudxmJZ7Lc9e4pbCcvdALpL21gFgWw
+         Yk/yD2U5fedGDXl24OPcwltamN2PESCipvgz8o9WgTksM7hgiVxfJSCTWh0a1oOx/Rtr
+         G6pfZjNnhKtItFQdWTaaf4dfe3ZySqybdWoeq+H74c8ZIBoKhHhYsioz2liV4IZvqTZm
+         8TMA==
+X-Gm-Message-State: AOJu0Yw11IGIZ054Ck1fOdYmS3aGbMSElSPz6QqrG0cJyUHTYlD25g3f
+	SXnc3F6d/OM3AO2qkn/3bab8wMqC+MgBk7BhzSODnP36wh3mmUulLaUgKxXvwjoYX44aCoI8Yn3
+	rECmv7XI=
+X-Gm-Gg: ASbGncs/L+GOMeUEa5njhAkgMVgsO1rDOuVfrmEhAgjDu4W4boG5LDKg4RSEV3rRDkG
+	rps80p3+8YzYkjYSsJ3UkJb4wz/YJpy763c4rECVfjPwPKMb4qXlGVBTag+16d+wNqBQJUkBSxK
+	i2220oAlsLimhngBHSPLDM/xFj8brkn1cXB+d4RYFyKHIPtA27+imQ9l5dE8wU4IQk0iK9/3Ptg
+	I7xkmUzxFMd9EN5GfrwTEbFtXdCwhoB+XWo7fN2eYANmf4uhmT1Ye4ykzAzXD6YovP710QrXIKK
+	Hm+UKCrJr0l9C4dhIyDDOzGxs5V5Zcpv0zKD2bx9OtTlENk214o1MZgI5fz4wL27lojZ8PL51ET
+	6QjVBsh7m7NgsFJAH+WDQ8Qis/+h7YieIcDHK8wzmooWh96p/VACXaWcDzgowFN+QFdWCDGybG5
+	D/aw==
+X-Google-Smtp-Source: AGHT+IEd7mbSoT2ANXsLc2ZxC6voGP7F+8T0whGg/KLMxUEAQVRzDkI0XeG6uF9UD1esyuVPUEKsPw==
+X-Received: by 2002:a05:6a20:939d:b0:2fb:62bb:e0e with SMTP id adf61e73a8af0-334a8610fe8mr15579351637.32.1760959828356;
+        Mon, 20 Oct 2025 04:30:28 -0700 (PDT)
+Received: from MVIN00352.. ([2401:4900:8fce:e9c7:348c:ea0a:b311:d55e])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b6a76b36188sm7526002a12.27.2025.10.20.04.30.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Oct 2025 00:52:39 -0700 (PDT)
-From: vanusuri@mvista.com
+        Mon, 20 Oct 2025 04:30:27 -0700 (PDT)
+From: Vijay Anusuri <vanusuri@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-networking][kirkstone][PATCH] proftpd: Fix CVE-2023-48795
-Date: Mon, 20 Oct 2025 13:22:25 +0530
-Message-Id: <20251020075225.50847-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [oe][meta-networking][patch] proftpd: Fix CVE-2023-48795
+Date: Mon, 20 Oct 2025 17:00:15 +0530
+Message-ID: <20251020113015.1701620-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 07:52:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120809
-
-From: Vijay Anusuri <vanusuri@mvista.com>
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 11:30:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120810
 
 Upstream-Status: Backport from https://github.com/proftpd/proftpd/commit/bcec15efe6c53dac40420731013f1cd2fd54123b
 
@@ -834,7 +832,7 @@ index 0000000000..39def781fb
 +2.25.1
 +
 diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
-index 3a0fff5599..c8097a14b0 100644
+index ec38fb54e1..036c01482a 100644
 --- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
 +++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
 @@ -17,6 +17,7 @@ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https
@@ -846,6 +844,6 @@ index 3a0fff5599..c8097a14b0 100644
  
  S = "${WORKDIR}/git"
 -- 
-2.25.1
+2.43.0
 
 
