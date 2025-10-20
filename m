@@ -2,97 +2,105 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E151CCD1A7
-	for <webhook@archiver.kernel.org>; Mon, 20 Oct 2025 18:00:35 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web10.4137.1760983225646490445
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EA26CCD1A7
+	for <webhook@archiver.kernel.org>; Mon, 20 Oct 2025 18:54:13 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web10.263.1760986444673516712
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Oct 2025 11:00:25 -0700
+ Mon, 20 Oct 2025 11:54:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ksAbcNz1;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-471075c0a18so49161195e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 11:00:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QOxur9Fu;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-47106fc51faso55281425e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 11:54:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760983224; x=1761588024; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LMgfrGDLUUsxUMW3p7mi2oSS072H2sY0d3borO85Jlw=;
-        b=ksAbcNz1oug4FMp/TpzOpb1Zc+R3+6VIfiTMUWnEHV1H+l205iITVLuW/xGz721bvL
-         Thiu3+xpZ8bWgaV8ilSTYpF8HU4a0s7OSFQM21BKdhGDkEavykEWbpSM5hyuSWmGLf0d
-         hm1brNNpyeAxaBJ7DKfsuIqUqv+z6ut9rSCD8dIFs23D+cYVcsS3uk8eVOZ77vCwYJHM
-         XT7NOvg284ejSAJTvHgc12GRtCA9OWtQ/3CK43wIXNTXRuvGCNKU+ygC1NfsiMrpOljq
-         LAaFLh5Wfk2eru7LxHJb09Mmmb8tb+4K82s6cpkL7zolyBq1STwsKs8ctjPFZsIHy5H6
-         zNkg==
+        d=gmail.com; s=20230601; t=1760986443; x=1761591243; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=N5DPbzRvi7m2fKM/XjRA/8uud7Oe4YKkEdt1tEblzNs=;
+        b=QOxur9FuDfjU5CC3t4TitPWic8tqMsHtOCIaCoAI1Fc5RzTbCG7TgFxhIojENswqR6
+         LFlvY5w4K/g6YIxVYIuk7aJPzqGVK5el2+A8DwMvqsgcXUeLlmk1UtIlmY0cLPL/i1Pq
+         Wxyp3q85WCXSQp+IaeC0/KEh3qSCGCIHelCf8gpCac7/TBnSiJeRGSgShs04BFPeJf+5
+         lcHYz4FIEXOcY/1c7idIFLOdPDl1N4VVgPgi3iNS5+J99hgElGIkYFj9/UXbtwI34NVz
+         6xfQWz5ZBokwrnPgXuTVmGwZyTWQWc7KvYhKJi48iD/MIwAsgW91TNR+ugeyIdTILJ2i
+         Kp/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760983224; x=1761588024;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=LMgfrGDLUUsxUMW3p7mi2oSS072H2sY0d3borO85Jlw=;
-        b=oMFGo3gIpDfLUxWXQFKlPmDHfaBKrAG06sQwolQGhRsOZRxOAh0D7rOb0zXucFdOzz
-         bh7ywCY0faFEc9j+42gX0RRH5UKNTPmyARp/GY1Mpqdo6MzKs3lYS+7pix70jzJXGuHw
-         H6DG2nOBYWRuu+IQ7TzZgAhTTOQK/Qid/bhswyO9t1lluQoGx8kT/CVx2+KIgsNFWPov
-         sL1YT49qqfgbbKwjzm1xJ0CwMFKPaWhqJU5ubulpcDEIZI9epPuZZwvTqIiOvdjEvw4L
-         gQUhq9u87VfJXa8hdQ5/31ZmwGHv+IkaJcce1eYUN5A6mFsuUVGDA031lQX28ZGdV4Rl
-         09zg==
-X-Gm-Message-State: AOJu0YzmmiVAqyynscisZAurtHoabXszuoRpy2/8F/JRlm1lCryS89AD
-	SATPSto2FjlFDadqIl7mYxGJH+fFSie25g0IBMf8nXfYfLQYsOIJKZnPlB/HfQ==
-X-Gm-Gg: ASbGncspxwzBmMECBCo+L6KjlrhgmCZuEWRoYlMvU4CMVAvGB7fo25THgCZS1vWX5c3
-	EohVjoYqgnlsmX96vubgac6apEk9DauU1iS2YdAUZHmW9CRC5/TGKRDb33l3xzUejzrW4t8zRc7
-	g9Nvpz/D4wV+rheCsKoTJu9wOgnYv/wNuzfPnDyFVZjAeokL2AoPo64nffog27Kx7bSXIbJ2DWO
-	7FpcRnv7NX0cSb6oMpEyKT7SHIZ+vb7zapFRx7ZfoaxbZGv5tTY1lw/Gul3IzGft8YggKzJ+Vav
-	qqKRO+LryROLiRXvYNXDhgQZ1M4QCTdrap4GrHTVOLpXPd/6zfXB8zVKIemNO5MuZPb2vcb7hJ5
-	NO7J1MWm8l2J5SCLNpctRLjOHEjglaYIsclbtIRYLvYwCHdiy4aKFPO3G8Zvz1PSEGBeiCDvwog
-	==
-X-Google-Smtp-Source: AGHT+IE9XBsRaQv8E+A4g1+O2bpvMYbTqOdd0PxOe2G2T+ikCWQLdVWYWVFzfG82XgcziGDf/9zkLQ==
-X-Received: by 2002:a05:600c:8519:b0:46e:42aa:75b5 with SMTP id 5b1f17b1804b1-471178706a7mr101406135e9.4.1760983223919;
-        Mon, 20 Oct 2025 11:00:23 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1760986443; x=1761591243;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=N5DPbzRvi7m2fKM/XjRA/8uud7Oe4YKkEdt1tEblzNs=;
+        b=qckcG/fmqpVj5jVoEiRzfFM0v6gReYegQ6SPp/KmsMMbtiX+4w7OyRHziwKzcjFQo8
+         ZFbglb2JgZdZ1oGOeiFsQjZWLVmOUvB3+vgRCqMFW7w2/BS7uL67G9NqPKuv7FrBCRPa
+         hRSD8RuF9tLSxdJ0+zOAUxincde/YixhaD7YPHUSnWyOrXJ48KkgVMzeUWC5JsgbLXq1
+         OM/HhWutYAsilLNkV835RluW4V2WoGIm+mbgSRGaI3aYr5IH1WNKVxiK/dm9HyOtRNbW
+         2X5QDqQPRGS5Z2rsVdyB8TsUvhF7npn7iveLSWY1+yb0WrpKubpQ9r1qUa5OAVQWg9fc
+         vGjg==
+X-Gm-Message-State: AOJu0YwbpsMiBVw+Ixh81jECOSGobHnTLjEabCflNkUOQakDVZTK8wmj
+	ZmCSNj8bL7v48mC2Qd7lEmynLvnE+F2hkF9rs85+Edv/UBHX+9iVm8xEUp8V0A==
+X-Gm-Gg: ASbGnctwqgGLmvjCp0DgOiv5N+ThvW7tUxCkyNpbllUz/UG69WOrdQcYRyO1QlZ7m7f
+	MxlsT2Ex2P6+4MhbdqXXMDcaekNL/g9B3Hh2sXs46dHXkGOXcIfh1Xb531/RKCSTpTKAS9NFuZw
+	h9g4suqocT2jEyWLJznLljlaeXwuyhWKGlYdOCdW+qsDqC1oYxCS9IAgtauR7WDKMJglLaijy4C
+	fIAdnuYaGpQWl4UMlCPi5EBxV9O2d6Bn3io7EaHq6IfUD8B19T7mKAlfpsrEpkWDbiq0E8ENBSh
+	e/tmgVG6/Nq4U9AMI2JKmNTGeVHlo6fq+80zyvDN72j6Q5CG/LhCQm4Wkk5S5xXfnPniesunIkt
+	cdrIHQzbYsi9alLTQ7L4JKCMcqUcc6qPfh7RVYj/COTaIaB1kvRboQWZifYm29m3LN3hwAeJS9Y
+	R3cNkiQgfW2lyVTkYvGs0=
+X-Google-Smtp-Source: AGHT+IGoFnTMdiPZlfGYZWSN27IpkbmaIRHmYZCpuhFYfddb2HMxfI1ADGKQqmcBW9MYOQGZk4sSCQ==
+X-Received: by 2002:a05:600c:3e05:b0:471:16f3:e542 with SMTP id 5b1f17b1804b1-47117870720mr123840415e9.2.1760986442869;
+        Mon, 20 Oct 2025 11:54:02 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-427f00cdf6csm16342024f8f.43.2025.10.20.11.00.23
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4711442dbaesm244999575e9.8.2025.10.20.11.54.02
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Oct 2025 11:00:23 -0700 (PDT)
+        Mon, 20 Oct 2025 11:54:02 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: "Sana Kazi via lists.openembedded.org" <Sana.Kazi=bmwtechworks.in@lists.openembedded.org>,
-	Sana Kazi <Sana.Kazi@bmwtechworks.in>
-Subject: [meta-oe][PATCH 1/2] cryptsetup: Update the license field
-Date: Mon, 20 Oct 2025 20:00:21 +0200
-Message-ID: <20251020180022.3398560-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] postgresql: update sysv init script
+Date: Mon, 20 Oct 2025 20:54:01 +0200
+Message-ID: <20251020185401.3511011-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 18:00:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120818
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 18:54:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120820
 
-From: "Sana Kazi via lists.openembedded.org" <Sana.Kazi=bmwtechworks.in@lists.openembedded.org>
+postmaster binary doesn't seem to be installed by default, making the
+sysv init script fail to start postgres.
 
-The below reference clearly states that GPL-2.0-with-OpenSSL-exception
-is to be used with GPL 2.0 or GPL3.0 and not as a standalone license.
-Therefore, update the correct license.
+Adjust it to use pg_ctl to start the service, just like its systemd
+service counterpart.
 
-Reference:
-https://github.com/aboutcode-org/scancode-licensedb/blob/569d72e13e7c8d14a44380f91e80c5a2d4091f8f/docs/openssl-exception-gpl-2.0.yml#L7
-
-Signed-off-by: Sana Kazi <Sana.Kazi@bmwtechworks.in>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-dbs/postgresql/files/postgresql.init | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
-index b5be30cbb2..c297de053d 100644
---- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
-+++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
-@@ -6,7 +6,7 @@ and can hence offer more features than plain dm-crypt. On the other \
- hand, the header is visible and vulnerable to damage."
- HOMEPAGE = "https://gitlab.com/cryptsetup/cryptsetup"
- SECTION = "console"
--LICENSE = "GPL-2.0-with-OpenSSL-exception"
-+LICENSE = "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-exception"
- LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
+diff --git a/meta-oe/recipes-dbs/postgresql/files/postgresql.init b/meta-oe/recipes-dbs/postgresql/files/postgresql.init
+index 1791e68b58..6d20c60a56 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/postgresql.init
++++ b/meta-oe/recipes-dbs/postgresql/files/postgresql.init
+@@ -56,7 +56,7 @@ pidfile="/var/run/postmaster.${PGPORT}.pid"
+ script_result=0
  
- DEPENDS = " \
+ start(){
+-	[ -x "$PGENGINE/postmaster" ] || exit 5
++	[ -x "$PGENGINE/pg_ctl" ] || exit 5
+ 
+ 	PSQL_START=$"Starting ${NAME} service: "
+ 
+@@ -109,9 +109,9 @@ start(){
+ 
+ 	echo -n "$PSQL_START"
+ 	test x"$PG_OOM_ADJ" != x && echo "$PG_OOM_ADJ" > /proc/self/oom_score_adj
+-	$SU -l postgres -c "$PGENGINE/postmaster -p '$PGPORT' -D '$PGDATA' ${PGOPTS} &" >> "$PGLOG" 2>&1 < /dev/null
+-	sleep 2
+-	pid=`head -n 1 "$PGDATA/postmaster.pid" 2>/dev/null`
++	$SU -l postgres -c "$PGENGINE/pg_ctl start -D '$PGDATA' -s -o '-p $PGPORT' ${PGOPTS} -w -t 300" >> ${PGLOG}
++
++        pid=`su postgres -c "pg_ctl status -D /var/lib/postgresql/data" | grep "PID:" | grep -o [0-9]*`
+ 	if [ "x$pid" != x ]
+ 	then
+ 		echo -n " [ OK ]"
 
