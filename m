@@ -2,156 +2,97 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0DDCCCD199
-	for <webhook@archiver.kernel.org>; Mon, 20 Oct 2025 12:22:36 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
- by mx.groups.io with SMTP id smtpd.web11.16875.1760962951659035733
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11A1FCCD193
+	for <webhook@archiver.kernel.org>; Mon, 20 Oct 2025 17:45:15 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web11.3753.1760982313873990402
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Oct 2025 05:22:31 -0700
+ Mon, 20 Oct 2025 10:45:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IcFEQqtI;
- spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-b4539dddd99so764726466b.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 05:22:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Tftr4POS;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-471193a9d9eso41615055e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 10:45:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760962950; x=1761567750; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Z8fDhRN7r/1EZZAMhPaY4+h6DlNCXhnPtQaxAYmsxKw=;
-        b=IcFEQqtIV7y57oOtnLpHCk707PAbpnVGChMLzS6hRcEUBGj/Tm5QK6TEeOm+2wn31d
-         VKrn6W+VlUsbGcaT2VETxC7j/WrSahTyY7EpYjP3LsQtaZD9Vh2Sh3fUtwOuSHbZNcyV
-         6gKn2+oiXhapd7/d+Eg46INesldICPvDA4VmsfY32LbgmWP7lPliQNDbPLaOc8XCYqv7
-         uSxolSZZ8QEw3piqwtfFT7C4uSWFQKuqbL3fj7sSGd4WbbkoDDiApHRsya77wAN1VG6r
-         dp4jM0gynazmDkTFPWQTPBJqyacrCqH8zdLdxr3lSvZfZG9wlp2X2Z1vmIaawBqovSJc
-         Pe9g==
+        d=gmail.com; s=20230601; t=1760982312; x=1761587112; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Tkyec1wvTP+ZkTtWfGaT2oLk0voKn1l3S6veqOCf9PM=;
+        b=Tftr4POSDcztUFdw3mvfIif8SXpyXh0o3NhZvxManOINPaFCQ2gbVT5WreBbRMqPdm
+         bvd+3vBS1FktOxlkVcAeDrEHjTJc3QlW4IEmkOGXLL/P4yjST3xwbbywXv1g5oR4nwOY
+         cvWNrSsp0uZt6sK+woKO3Vlml7xk4iiu2I/Wegg1FIgqJwAdbOJTlfm09EWSr0hneJZf
+         hcZufMSeUANoDBIDVl+L3ifx/95b0M+pnCB3BraNiH8CEFEgOmlDmtngJQ7dHzGuvbCp
+         pyE1JNJEd7PfPBT1cnBngpSwbxBSpa1p5NkhkbTdkgTY5Lf/FKmt2h6TtAIyyXNPJxQY
+         gdvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760962950; x=1761567750;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Z8fDhRN7r/1EZZAMhPaY4+h6DlNCXhnPtQaxAYmsxKw=;
-        b=VzD1opNG4/um2/Dm1fk4ncthqRW9FePMNntMHxfzCuYgi8XnX5XpIQ0VIXLpvKD9oZ
-         mDuweFPvI1NchT62T/9sbr3DW2Z7YeWRSs3OuEdFK6XdkL2COBRv4jl63f/tu+3tY1h/
-         rofo9elFG8Kt+jbDHXWXC30K2qzLcuSDLTX3JTddDyxjAY2+jVpdxYkAQxePzEKY0u61
-         lGiFGRu7GZ5pqsRFr3kcQh8L+UicGUoOpkxURc+cVHULeUq+3A7i8v53NIXDuNJ1+iCY
-         zaBc1MO2NmLt1h1b3DWapPCqzyb0uMvTM45sKUxocv/n7T1ByoOHwPD974zm+ZiY7XIP
-         qUhg==
-X-Gm-Message-State: AOJu0Yw20/bIBN4VaJhP8p3Ol4Yqt5crHKBAzEt99gaotRPuPURG/XeL
-	nmbeGf9+hkZDhRSSkvFqsWOEIcz9MRRO1sqaCn5n+YyadpCv+qKwvoJiZ9bRVg==
-X-Gm-Gg: ASbGncsXf4ZyYEtGnNgdfRZHZeosL5miTWYUMJXspphgqsxGhoSQwviKRD1jjb9JGii
-	PbvuiQ/T28sm3g623VN5B3iIwWPb1PHaE8bTdIz6Kyu+SCBi2qwOl3EnfssaBX/TXYgQyFhNaCw
-	LC56ooLBq8mDIw2FSDtG8oXr6IdOG+i751xtYrXuSO8K+ta4WU6oVFxWoYYR6TgrfZOfP741Qhb
-	OEh1t7Pdu2VCNkI7hgHQhcIX93rI8sWyTsuCzAI1AkmI7sq1ZMJda+/+AOgMdrlFMNTNSKYPxY4
-	oWQ9pfpi3OpSnbaFHfwasytJUccTnpETxAY8eM3z3B3AZ4389TI6sznR96jYIB5+oAmNd4f0eFM
-	W+hX1nAiDksGZgxnEmMHFe1YFx/kkxEPnf7Qkp6XWDhds3QBFDPo5n+J3XW4l9M7i82Mfw3ssvn
-	bNv7pW2pSR
-X-Google-Smtp-Source: AGHT+IFDFW2cHWtreBaM47+HWRxCrP9kFL044UZkPyRBNNfwJWgFj0MgbHA9/PomJbitpqq+75ZeTw==
-X-Received: by 2002:a17:906:f594:b0:b04:7232:3e97 with SMTP id a640c23a62f3a-b647304ae4amr1506654766b.21.1760962949852;
-        Mon, 20 Oct 2025 05:22:29 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1760982312; x=1761587112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Tkyec1wvTP+ZkTtWfGaT2oLk0voKn1l3S6veqOCf9PM=;
+        b=LoKm22X3VCLZnsMce9ysFNZkgNUHSb2CcnVrKuKDC1tnbHWuQ8QtPA2tXR1nGI2qb4
+         48uFq0HB4wrKMgglU9dD2RMPqcxfu/JN/sVcz9KCi5wq6VUH/pYNoJtp9I5wV0SM+4V6
+         IpUlUd0JYHXtRh20yJsT5WXJX4evOP0QQmHM2D6JO7lONs1gZle+3rDxjw2Gqo8qBHVe
+         rgVg4k7Qy5hm632EtrfEBOz1wc1vAVFKn+2ZA/Ij7pBLqG0Wgjn7wGdiKM/9apFJUROd
+         zHo1D34EdmPZBTARqCskXOU2Rf63GZDyQ6orFVj+LwGk8bp/TEcYQJdwFpypBbLBd1BE
+         Ep6A==
+X-Gm-Message-State: AOJu0YzI5aqFodZET2VhoF9/qDC97LwkUIP0eRq39mnoLZj1hPtECoCx
+	2gQtD4MuIWapMBqC6vyn5+4LmF47N3uhE7W3ZQbEOcwk0Vu6zifNUacwJoZFGg==
+X-Gm-Gg: ASbGncth88+YbXKKhaXrX84WUBY9WpwhaFIsw6XKevv4xWo8Pz2o3G28tST8eTFizYe
+	zvpRQ29gFthHM7lwenhH8l2EcKvk4shCa2GgHwoRvmSuLPD/lTDns8MTceVEpEj8Xl1wq12n+Em
+	y4gtNPZy+do3yDA+kpUNYg3Dv8ll1S0EEvCC0vRb6UPz0GUzbBMjdbMXEuqApXsYQqwTUV3qdfY
+	OYbsyjkc+7egGoVY7yVxDgpTaVXBLxDx9RopI1fp9oYQTapoBfV7VmhB2JUyBjpNm5ghVMBDPB0
+	UlIFgJgjQkJBPLQj4g8Cz+07n0hCjUjjjZk4qbw6b3ODT48Y2/zp5dT1iu6C1ko1ENVd7ELv2s9
+	QhhfF0Q8Gs617pm/Y0e42UrQV9X0rSyGwnAAzORpVzEWHkOFElRKz0CHeUYF/Cu5o5u16I8Dgow
+	==
+X-Google-Smtp-Source: AGHT+IEMl+C86wNmrNa3nXAllWXvHNoq6Td/Ib3aeBmM+lJ9+uIATOp1lDDU5Jb/5lKp3DqygP4qEA==
+X-Received: by 2002:a05:600c:1914:b0:471:c72:c7f8 with SMTP id 5b1f17b1804b1-47117907a52mr97686295e9.21.1760982312163;
+        Mon, 20 Oct 2025 10:45:12 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b65e7da25d4sm772142866b.9.2025.10.20.05.22.29
-        for <openembedded-devel@lists.openembedded.org>
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47494ac30b4sm829585e9.2.2025.10.20.10.45.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Oct 2025 05:22:29 -0700 (PDT)
+        Mon, 20 Oct 2025 10:45:11 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: CVE report - master - 2025-10-20
-Date: Mon, 20 Oct 2025 14:22:28 +0200
-Message-ID: <20251020122228.1467610-1-skandigraun@gmail.com>
+Cc: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Subject: [meta-oe][kirkstone][PATCH] cryptsetup: extend licenses with Apache and CC0
+Date: Mon, 20 Oct 2025 19:45:10 +0200
+Message-ID: <20251020174510.3396789-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 12:22:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120816
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 17:45:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120817
 
-List of all open CVEs (66, out of which new this week: 1):
+The vendored argon library comes with Apache-2.0 or CC0
+license, which hasn't been indicated in the license variable.
 
-audiofile: CVE-2018-13440: https://nvd.nist.gov/vuln/detail/CVE-2018-13440
-audiofile: CVE-2018-17095: https://nvd.nist.gov/vuln/detail/CVE-2018-17095
-audiofile: CVE-2019-13147: https://nvd.nist.gov/vuln/detail/CVE-2019-13147
-audiofile: CVE-2022-24599: https://nvd.nist.gov/vuln/detail/CVE-2022-24599
-dhrystone: CVE-2020-23026: https://nvd.nist.gov/vuln/detail/CVE-2020-23026
-ez-ipupdate: CVE-2003-0887: https://nvd.nist.gov/vuln/detail/CVE-2003-0887
-[NEW] freerdp: CVE-2025-4478: https://nvd.nist.gov/vuln/detail/CVE-2025-4478
-giflib: CVE-2024-45993: https://nvd.nist.gov/vuln/detail/CVE-2024-45993
-hdf5: CVE-2025-2308: https://nvd.nist.gov/vuln/detail/CVE-2025-2308
-hdf5: CVE-2025-2309: https://nvd.nist.gov/vuln/detail/CVE-2025-2309
-hdf5: CVE-2025-2915: https://nvd.nist.gov/vuln/detail/CVE-2025-2915
-hdf5: CVE-2025-2926: https://nvd.nist.gov/vuln/detail/CVE-2025-2926
-hdf5: CVE-2025-44904: https://nvd.nist.gov/vuln/detail/CVE-2025-44904
-hdf5: CVE-2025-44905: https://nvd.nist.gov/vuln/detail/CVE-2025-44905
-hdf5: CVE-2025-6269: https://nvd.nist.gov/vuln/detail/CVE-2025-6269
-hdf5: CVE-2025-6270: https://nvd.nist.gov/vuln/detail/CVE-2025-6270
-hdf5: CVE-2025-6516: https://nvd.nist.gov/vuln/detail/CVE-2025-6516
-hdf5: CVE-2025-6816: https://nvd.nist.gov/vuln/detail/CVE-2025-6816
-hdf5: CVE-2025-6817: https://nvd.nist.gov/vuln/detail/CVE-2025-6817
-hdf5: CVE-2025-6818: https://nvd.nist.gov/vuln/detail/CVE-2025-6818
-hdf5: CVE-2025-6856: https://nvd.nist.gov/vuln/detail/CVE-2025-6856
-hdf5: CVE-2025-6857: https://nvd.nist.gov/vuln/detail/CVE-2025-6857
-hdf5: CVE-2025-6858: https://nvd.nist.gov/vuln/detail/CVE-2025-6858
-hdf5: CVE-2025-7067: https://nvd.nist.gov/vuln/detail/CVE-2025-7067
-hdf5: CVE-2025-7068: https://nvd.nist.gov/vuln/detail/CVE-2025-7068
-hdf5: CVE-2025-7069: https://nvd.nist.gov/vuln/detail/CVE-2025-7069
-libao: CVE-2017-11548: https://nvd.nist.gov/vuln/detail/CVE-2017-11548
-libcdio: CVE-2024-36600: https://nvd.nist.gov/vuln/detail/CVE-2024-36600
-minio: CVE-2018-1000538: https://nvd.nist.gov/vuln/detail/CVE-2018-1000538
-minio: CVE-2020-11012: https://nvd.nist.gov/vuln/detail/CVE-2020-11012
-minio: CVE-2021-21287: https://nvd.nist.gov/vuln/detail/CVE-2021-21287
-minio: CVE-2021-21362: https://nvd.nist.gov/vuln/detail/CVE-2021-21362
-minio: CVE-2021-21390: https://nvd.nist.gov/vuln/detail/CVE-2021-21390
-minio: CVE-2021-43858: https://nvd.nist.gov/vuln/detail/CVE-2021-43858
-minio: CVE-2022-35919: https://nvd.nist.gov/vuln/detail/CVE-2022-35919
-minio: CVE-2023-28433: https://nvd.nist.gov/vuln/detail/CVE-2023-28433
-minio: CVE-2023-28434: https://nvd.nist.gov/vuln/detail/CVE-2023-28434
-ndpi: CVE-2025-25066: https://nvd.nist.gov/vuln/detail/CVE-2025-25066
-openflow: CVE-2018-1000155: https://nvd.nist.gov/vuln/detail/CVE-2018-1000155
-openjpeg: CVE-2023-39327: https://nvd.nist.gov/vuln/detail/CVE-2023-39327
-openjpeg: CVE-2023-39328: https://nvd.nist.gov/vuln/detail/CVE-2023-39328
-openjpeg: CVE-2023-39329: https://nvd.nist.gov/vuln/detail/CVE-2023-39329
-redis: CVE-2025-46817: https://nvd.nist.gov/vuln/detail/CVE-2025-46817
-redis: CVE-2025-46818: https://nvd.nist.gov/vuln/detail/CVE-2025-46818
-redis: CVE-2025-46819: https://nvd.nist.gov/vuln/detail/CVE-2025-46819
-rsyslog: CVE-2015-3243: https://nvd.nist.gov/vuln/detail/CVE-2015-3243
-sthttpd: CVE-2021-26843: https://nvd.nist.gov/vuln/detail/CVE-2021-26843
-yasm: CVE-2021-33455: https://nvd.nist.gov/vuln/detail/CVE-2021-33455
-yasm: CVE-2021-33456: https://nvd.nist.gov/vuln/detail/CVE-2021-33456
-yasm: CVE-2021-33457: https://nvd.nist.gov/vuln/detail/CVE-2021-33457
-yasm: CVE-2021-33458: https://nvd.nist.gov/vuln/detail/CVE-2021-33458
-yasm: CVE-2021-33459: https://nvd.nist.gov/vuln/detail/CVE-2021-33459
-yasm: CVE-2021-33460: https://nvd.nist.gov/vuln/detail/CVE-2021-33460
-yasm: CVE-2021-33461: https://nvd.nist.gov/vuln/detail/CVE-2021-33461
-yasm: CVE-2021-33462: https://nvd.nist.gov/vuln/detail/CVE-2021-33462
-yasm: CVE-2021-33463: https://nvd.nist.gov/vuln/detail/CVE-2021-33463
-yasm: CVE-2021-33464: https://nvd.nist.gov/vuln/detail/CVE-2021-33464
-yasm: CVE-2021-33465: https://nvd.nist.gov/vuln/detail/CVE-2021-33465
-yasm: CVE-2021-33466: https://nvd.nist.gov/vuln/detail/CVE-2021-33466
-yasm: CVE-2021-33467: https://nvd.nist.gov/vuln/detail/CVE-2021-33467
-yasm: CVE-2021-33468: https://nvd.nist.gov/vuln/detail/CVE-2021-33468
-yasm: CVE-2023-30402: https://nvd.nist.gov/vuln/detail/CVE-2023-30402
-yasm: CVE-2023-31972: https://nvd.nist.gov/vuln/detail/CVE-2023-31972
-yasm: CVE-2023-31973: https://nvd.nist.gov/vuln/detail/CVE-2023-31973
-yasm: CVE-2023-31974: https://nvd.nist.gov/vuln/detail/CVE-2023-31974
-yasm: CVE-2023-51258: https://nvd.nist.gov/vuln/detail/CVE-2023-51258
+This change fixes this.
 
-====================
+Reported-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Removed this week (15): 
-
-dovecot: CVE-2016-4983: https://nvd.nist.gov/vuln/detail/CVE-2016-4983
-gimp: CVE-2007-3741: https://nvd.nist.gov/vuln/detail/CVE-2007-3741
-hdf5: CVE-2025-2153: https://nvd.nist.gov/vuln/detail/CVE-2025-2153
-hdf5: CVE-2025-2310: https://nvd.nist.gov/vuln/detail/CVE-2025-2310
-hdf5: CVE-2025-2914: https://nvd.nist.gov/vuln/detail/CVE-2025-2914
-hdf5: CVE-2025-2924: https://nvd.nist.gov/vuln/detail/CVE-2025-2924
-hdf5: CVE-2025-2925: https://nvd.nist.gov/vuln/detail/CVE-2025-2925
-hdf5: CVE-2025-6750: https://nvd.nist.gov/vuln/detail/CVE-2025-6750
-python3-django: CVE-2025-59681: https://nvd.nist.gov/vuln/detail/CVE-2025-59681
-squid: CVE-2025-59362: https://nvd.nist.gov/vuln/detail/CVE-2025-59362
-zabbix: CVE-2024-45700: https://nvd.nist.gov/vuln/detail/CVE-2024-45700
-zabbix: CVE-2025-27231: https://nvd.nist.gov/vuln/detail/CVE-2025-27231
-zabbix: CVE-2025-27236: https://nvd.nist.gov/vuln/detail/CVE-2025-27236
-zabbix: CVE-2025-27238: https://nvd.nist.gov/vuln/detail/CVE-2025-27238
-zabbix: CVE-2025-49641: https://nvd.nist.gov/vuln/detail/CVE-2025-49641
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+index e93c800241..37a932eb30 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
+@@ -6,8 +6,10 @@ and can hence offer more features than plain dm-crypt. On the other \
+ hand, the header is visible and vulnerable to damage."
+ HOMEPAGE = "https://gitlab.com/cryptsetup/cryptsetup"
+ SECTION = "console"
+-LICENSE = "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-exception"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
++LICENSE = "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-exception & (Apache-2.0 | CC0-1.0)"
++LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326 \
++                    file://COPYING.LGPL;md5=1960515788100ce5f9c98ea78a65dc52 \
++                    file://lib/crypto_backend/argon2/argon2.c;endline=16;md5=c11955376e1f924066ca8d0dec33133e"
+ 
+ DEPENDS = " \
+     json-c \
 
