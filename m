@@ -1,112 +1,851 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A71D4CCD199
-	for <webhook@archiver.kernel.org>; Mon, 20 Oct 2025 04:52:43 +0000 (UTC)
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.web11.11273.1760935954092572771
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6301ECCD199
+	for <webhook@archiver.kernel.org>; Mon, 20 Oct 2025 07:52:45 +0000 (UTC)
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web10.12845.1760946762810072728
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Oct 2025 21:52:34 -0700
+ Mon, 20 Oct 2025 00:52:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CcE26NDH;
- spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-7815092cd22so50665487b3.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Oct 2025 21:52:34 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=KPZlF/Tc;
+ spf=pass (domain: mvista.com, ip: 209.85.215.173, mailfrom: vanusuri@mvista.com)
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-b62ed9c3e79so2780604a12.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 00:52:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760935953; x=1761540753; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1760946762; x=1761551562; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=gCCwTcu+DwAunEwWA2/yh0+IeqIUf2Zd033nqUG3TSM=;
-        b=CcE26NDHM79T3oq2Q7dIdMbQ3WM3InWiloDgb0C3X3fEufgEbvlzKEMbv1PtO3lljT
-         1golaIigne9g6orq9Nuu75yxIG6ZcJl6tDJ3+NqxYPbp16p2vbm5Udtk1wB8tLLJgjrH
-         FhAl/Ycnu+y51BeAMrRSCzL/Yfcsb+dWBzztH9gQwaq/jY4v8/6KMgDsSeeOcjgRMW48
-         qLOv4CF1RE8EgaVxe79KdGShVQUzTppDEDc8pbrAJkReJMByAvqzCd9ghCvSZPEPW4Al
-         /BuBIsbiI1aE2KVJjbsVRUCa6ABy4ST2kDDZEQjJ5r4jPhsrqbsxoD11IK3DnppsPpFv
-         +pXQ==
+        bh=ZSQV6JU0twQgDhVnfg/6FR3wxIHgYBe9VLUXOHfTHzo=;
+        b=KPZlF/TcMe6sNa8btd0lqZzpIO09iU6327de/dggBxrR2xEQVN7wjoF1x+bPpMPvx5
+         O+05lUsWrD23jnuqScWRAk0rWDj5OUiqHj8KO8mMJCQagyvxHjYnHlkLVMfPdWUqVFFy
+         7C+62R4e7Z/yQQLYsL2KnqvTmvpxnZxo1RFtI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760935953; x=1761540753;
+        d=1e100.net; s=20230601; t=1760946762; x=1761551562;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=gCCwTcu+DwAunEwWA2/yh0+IeqIUf2Zd033nqUG3TSM=;
-        b=aeuJRFWupmk92Ms99Zj68d3qQNIan9a5g+J7rPVQRriKvVjWTZwLEM6XbLjmoxd2AK
-         wQzqZhVWbJftT2Ev9RCwLSNN8QWZmPShRJbBXKyL7rVFJlBHXcjmn751H1+mqs6XVHZG
-         qQGzlbeC+Br3284x1f5hd3Oy1yIeKDPOp49XxLXJp9ubeaL3Q2jOOXshrr88aHRnvQAj
-         jFtfGX2JkGQg6M5rZ6MJSZHNkfFIQhjgd6r5SbCsGulwbTb8DtuZeHFiGMg8reCZ6/p0
-         tIFtOCocQIShqBPHCUMJkm9IjUysaUTK0Q45NKO5k4ZohZaO5WnSqFFb26iIGkK2CNfS
-         /XDg==
-X-Gm-Message-State: AOJu0YwTk0Tl7SCdqLHrDzBZujzX+8v9KNq/ARTyPXtqRYrZDFceQ97W
-	oID2nR2swsk549BqAcRHomZhngBvtoFlqUeRvbe5wWY6Uuc8HepjnIrWOHcVccub
-X-Gm-Gg: ASbGncv7NUHx2N6p0JTe7ZseJ+3vYG3aOYjaBGlRffexrRPD3RB3FchSP3J6ADwUnuu
-	FskAt3S9DwP5PqeKwXpl5E/4yaFeGhXTUDd0dx8h4LNoGaUko0WDZyTFSZO9zbODD04maI8FtHn
-	lxpmeKI1mw+Fhp93uju+qZDHWhrmMbOti2/glCBcsd7gwYH3cwSDqwNIxM2khzxVp/sycjyStJD
-	wxp4rXFUei1B4tec4AuyLoBLE1T3bE5+zvlpBBtG6J4VOydKlO7DJNifTtJdupe062BYI0kj8sU
-	cZm/s7+OwDF7/7JsM7VPJKYJG1RrmwOBe+1SopqhFbPeel4rIrNL9Wn+c6d6uCAj6ZWEs9UD36u
-	6w3g76ZuVN6GtxPNZrKf3cKL4GcjNkfA3SPY5ObXgk5EXIMkWxBkiITwI3bXQg9Czlt4FKBIMto
-	mNohcO6oE5wg+Wsk7EFXNXTSpqDHTeFn9CgdnDQcaFYw==
-X-Google-Smtp-Source: AGHT+IEEC5fYpvZk/9gruv/fPwe983PAWEiXLUNoHHg97SO+CU/uZsWXG13zfA/oEq0mur87VOh86Q==
-X-Received: by 2002:a05:690c:6384:b0:731:1bc7:7830 with SMTP id 00721157ae682-7836d1fc43amr98920857b3.23.1760935952816;
-        Sun, 19 Oct 2025 21:52:32 -0700 (PDT)
-Received: from localhost.localdomain (71-208-0-23.ftmy.qwest.net. [71.208.0.23])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-784641f37f5sm18925987b3.4.2025.10.19.21.52.31
+        bh=ZSQV6JU0twQgDhVnfg/6FR3wxIHgYBe9VLUXOHfTHzo=;
+        b=NiGnSiB4GhHoJDZ/muvToVaOMaxuRIWOCiZnaeb2Uqz14Q8BFSdBwOHu/3P6vs+jr/
+         3MeQhEaUNVSYuPn4hh+QauOEwifD06yrYiSLct72HUw0hwe7pdPLMpg5p6XiJcHoLwSd
+         LbyqjFKLiixGBl3C93ufvaLDNva7nnvQvKZzZU4PZ6W67nzwnqb8/I7pjBIsr9gQM64S
+         D2G01XJUvpK7rQzU9WJgjMstFgD1KiLroUjKI3dF7yogpAyfoy1I3eoFI2wEXCvQoNOp
+         zuI49pv5kiO4RrdGUfs0W+zHw3946SjFwmcInSYpJPZCQH9SfBlSZbfTu1cUPWhl89r4
+         QuSw==
+X-Gm-Message-State: AOJu0Yz5WATcbY6nGBDsKbBjTcebH7mFriZmuXe7pn90EHutMqmLSCPp
+	HYwdrxmi+CeIJV6yckl+MtndPKwk8dkiFgCTJEMVy83OIYPF8xVs+ytOhmJG//SyeCeSgR/YIy7
+	TIrS4zIA=
+X-Gm-Gg: ASbGncvfmnQBwmUJ5nyEzG76Bb4d49LZ+wvatXn5FumGnUfG4aQMLx7Vbk6tADDTFkG
+	Y8EosHuRXdPpSZhH3ibg+jv4D3sjvcV+b6NatCKrvEMKQXwya6xOcRoHRe+zukNZfv5/dzQpAgD
+	fRSgCo95b0pEZbpLN6FGGGHmwBvYqBRBfc2xfGg1CJvWyBMOH1yW8MVO0uD1ubPY5gPBrW62BTp
+	3l/t+ti5cR8+XmfCr9qS9LiapbdG+Bl5a4HrhBb8amiH0lXuf7k3+6z1mbDCLU3yl5lCkOL8f1U
+	Bj2Gl61ZpUE67oE1QNLVoUWhBi+MMJLhnDW4mVxqmVG/cFn9j1nxYcpbvlKP2h7TMiXoKeFz19p
+	eF5ESTryrj0ksIwp1aiMTwldJyHNEHRREczLd4Ue86vhlU97qNd3ktB5SXGR/FeRWJRjQtkvWrm
+	NGYtGwT7APpBYPObiKR2ofuaQB2g==
+X-Google-Smtp-Source: AGHT+IHq4khWwPbJ05MnDB6TD6a1+G2hIIgA2WKBP+tueecNZODF1mrparC+qT2jfEuu3X8FPkgPRQ==
+X-Received: by 2002:a17:902:ce0f:b0:269:8d1b:40c3 with SMTP id d9443c01a7336-290c9cf344bmr158269105ad.12.1760946761396;
+        Mon, 20 Oct 2025 00:52:41 -0700 (PDT)
+Received: from localhost.localdomain ([2401:4900:8fce:e9c7:4e65:2995:e34f:9dd0])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-292471d5c0bsm72384495ad.69.2025.10.20.00.52.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 19 Oct 2025 21:52:32 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Mon, 20 Oct 2025 00:52:39 -0700 (PDT)
+From: vanusuri@mvista.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-perl][PATCH] libhtml-tree-perl: upgrade 5.05 -> 5.06
-Date: Mon, 20 Oct 2025 00:52:15 -0400
-Message-ID: <20251020045215.14841-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-networking][kirkstone][PATCH] proftpd: Fix CVE-2023-48795
+Date: Mon, 20 Oct 2025 13:22:25 +0530
+Message-Id: <20251020075225.50847-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 04:52:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120808
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 07:52:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120809
 
-5.06     2017-04-28
-   Release by Kent Fredric
-    * Revert XML escaping changes from 5.04 due to large numbers of
-      broken dependents
-      - RT#121310 https://rt.cpan.org/Ticket/Display.html?id=121310
-      - https://github.com/rjbs/MasonX-Resolver-WidgetFactory/issues/1
-      - https://github.com/kentfredric/HTML-Tree/issues/1
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Upstream-Status: Backport from https://github.com/proftpd/proftpd/commit/bcec15efe6c53dac40420731013f1cd2fd54123b
+
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- .../{libhtml-tree-perl_5.05.bb => libhtml-tree-perl_5.06.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libhtml/{libhtml-tree-perl_5.05.bb => libhtml-tree-perl_5.06.bb} (89%)
+ .../proftpd/files/CVE-2023-48795.patch        | 751 ++++++++++++++++++
+ .../recipes-daemons/proftpd/proftpd_1.3.7c.bb |   1 +
+ 2 files changed, 752 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/CVE-2023-48795.patch
 
-diff --git a/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.05.bb b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.06.bb
-similarity index 89%
-rename from meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.05.bb
-rename to meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.06.bb
-index 332eabb153..bcc248d896 100644
---- a/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.05.bb
-+++ b/meta-perl/recipes-perl/libhtml/libhtml-tree-perl_5.06.bb
-@@ -6,7 +6,7 @@ libwww-perl distribution, but are now unbundled in order to facilitate \
- a separate development track."
- SECTION = "libs"
+diff --git a/meta-networking/recipes-daemons/proftpd/files/CVE-2023-48795.patch b/meta-networking/recipes-daemons/proftpd/files/CVE-2023-48795.patch
+new file mode 100644
+index 0000000000..39def781fb
+--- /dev/null
++++ b/meta-networking/recipes-daemons/proftpd/files/CVE-2023-48795.patch
+@@ -0,0 +1,751 @@
++From bcec15efe6c53dac40420731013f1cd2fd54123b Mon Sep 17 00:00:00 2001
++From: TJ Saunders <tj@castaglia.org>
++Date: Tue, 19 Dec 2023 18:55:58 -0800
++Subject: [PATCH] Issue #1760: Implement the "strict KEX" mitigations for the
++ Terrapin SSH protocol attack (CVE-2023-48795).
++
++Upstream-Status: Backport [https://github.com/proftpd/proftpd/commit/bcec15efe6c53dac40420731013f1cd2fd54123b]
++CVE: CVE-2023-48795
++Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++---
++ contrib/mod_sftp/kex.c                        | 124 ++++++++--
++ contrib/mod_sftp/mod_sftp.c                   |   8 +-
++ contrib/mod_sftp/mod_sftp.h.in                |   1 +
++ contrib/mod_sftp/packet.c                     |  12 +
++ contrib/mod_sftp/packet.h                     |   9 +-
++ contrib/mod_sftp/tap.c                        |  26 ++-
++ contrib/mod_sftp/tap.h                        |   5 +-
++ doc/contrib/mod_sftp.html                     |  15 +-
++ tests/t/lib/ProFTPD/Tests/Modules/mod_sftp.pm | 217 ++++++++++++++++++
++ 9 files changed, 380 insertions(+), 37 deletions(-)
++
++diff --git a/contrib/mod_sftp/kex.c b/contrib/mod_sftp/kex.c
++index 754bd9e87..c1caa1c27 100644
++--- a/contrib/mod_sftp/kex.c
+++++ b/contrib/mod_sftp/kex.c
++@@ -149,6 +149,13 @@ static struct sftp_kex *kex_first_kex = NULL;
++ static struct sftp_kex *kex_rekey_kex = NULL;
++ static int kex_sent_kexinit = FALSE;
++ 
+++/* Using strict kex?  Note that we maintain this value here, rather than
+++ * in the sftp_kex struct, so that any "use strict KEX" flag set via the
+++ * first KEXINIT is used through any subsequent KEXINITs.
+++ */
+++static int use_strict_kex = FALSE;
+++static int kex_done_first_kex = FALSE;
+++
++ /* Diffie-Hellman group moduli */
++ 
++ static const char *dh_group1_str =
++@@ -1593,6 +1600,16 @@ static const char *get_kexinit_exchange_list(pool *p) {
++     res = pstrcat(p, res, *res ? "," : "", pstrdup(p, "ext-info-s"), NULL);
++   }
++ 
+++  if (!(sftp_opts & SFTP_OPT_NO_STRICT_KEX)) {
+++    /* Indicate support for OpenSSH's custom "strict KEX" mode extension,
+++     * but only if we have not done/completed our first KEX.
+++     */
+++    if (kex_done_first_kex == FALSE) {
+++      res = pstrcat(p, res, *res ? "," : "",
+++        pstrdup(p, "kex-strict-s-v00@openssh.com"), NULL);
+++    }
+++  }
+++
++   return res;
++ }
++ 
++@@ -2174,6 +2191,21 @@ static int get_session_names(struct sftp_kex *kex, int *correct_guess) {
++     pr_trace_msg(trace_channel, 20, "client %s EXT_INFO support",
++       kex->use_ext_info ? "signaled" : "did not signal" );
++ 
+++    if (!(sftp_opts & SFTP_OPT_NO_STRICT_KEX)) {
+++      /* Did the client indicate "strict kex" support (Issue 1760)?
+++       *
+++       * Note that we only check for this if it is our first KEXINIT.
+++       * The "strict kex" extension is ignored in any subsequent KEXINITs, as
+++       * for rekeys.
+++       */
+++      if (kex_done_first_kex == FALSE) {
+++        use_strict_kex = sftp_misc_namelist_contains(kex->pool,
+++          client_list, "kex-strict-c-v00@openssh.com");
+++        pr_trace_msg(trace_channel, 20, "client %s strict KEX support",
+++          use_strict_kex ? "signaled" : "did not signal" );
+++      }
+++    }
+++
++   } else {
++     (void) pr_log_writefile(sftp_logfd, MOD_SFTP_VERSION,
++       "no shared key exchange algorithm found (client sent '%s', server sent "
++@@ -4406,7 +4438,6 @@ static int handle_kex_ecdh(struct ssh2_packet *pkt, struct sftp_kex *kex) {
++   destroy_pool(pkt->pool);
++   return 0;
++ }
++-
++ #endif /* PR_USE_OPENSSL_ECC */
++ 
++ static struct ssh2_packet *read_kex_packet(pool *p, struct sftp_kex *kex,
++@@ -4457,6 +4488,10 @@ static struct ssh2_packet *read_kex_packet(pool *p, struct sftp_kex *kex,
++     /* Per RFC 4253, Section 11, DEBUG, DISCONNECT, IGNORE, and UNIMPLEMENTED
++      * messages can occur at any time, even during KEX.  We have to be prepared
++      * for this, and Do The Right Thing(tm).
+++     *
+++     * However, due to the Terrapin attack, if we are using a "strict KEX"
+++     * mode, then only DISCONNECT messages can occur during KEX; DEBUG,
+++     * IGNORE, and UNIMPLEMENTED messages will lead to disconnecting.
++      */
++ 
++     mesg_type = sftp_ssh2_packet_get_mesg_type(pkt);
++@@ -4485,35 +4520,43 @@ static struct ssh2_packet *read_kex_packet(pool *p, struct sftp_kex *kex,
++     }
++ 
++     switch (mesg_type) {
++-      case SFTP_SSH2_MSG_DEBUG:
++-        sftp_ssh2_packet_handle_debug(pkt);
++-        pr_response_set_pool(NULL);
++-        pkt = NULL;
++-        break;
++-
+++      /* DISCONNECT messages are always allowed. */
++       case SFTP_SSH2_MSG_DISCONNECT:
++         sftp_ssh2_packet_handle_disconnect(pkt);
++         pr_response_set_pool(NULL);
++         pkt = NULL;
++         break;
++ 
+++      case SFTP_SSH2_MSG_DEBUG:
+++        if (use_strict_kex == FALSE) {
+++          sftp_ssh2_packet_handle_debug(pkt);
+++          pr_response_set_pool(NULL);
+++          pkt = NULL;
+++          break;
+++        }
+++
++       case SFTP_SSH2_MSG_IGNORE:
++-        sftp_ssh2_packet_handle_ignore(pkt);
++-        pr_response_set_pool(NULL);
++-        pkt = NULL;
++-        break;
+++        if (use_strict_kex == FALSE) {
+++          sftp_ssh2_packet_handle_ignore(pkt);
+++          pr_response_set_pool(NULL);
+++          pkt = NULL;
+++          break;
+++        }
++ 
++       case SFTP_SSH2_MSG_UNIMPLEMENTED:
++-        sftp_ssh2_packet_handle_unimplemented(pkt);
++-        pr_response_set_pool(NULL);
++-        pkt = NULL;
++-        break;
+++        if (use_strict_kex == FALSE) {
+++          sftp_ssh2_packet_handle_unimplemented(pkt);
+++          pr_response_set_pool(NULL);
+++          pkt = NULL;
+++          break;
+++        }
++ 
++       default:
++         /* For any other message type, it's considered a protocol error. */
++         (void) pr_log_writefile(sftp_logfd, MOD_SFTP_VERSION,
++-          "received %s (%d) unexpectedly, disconnecting",
++-          sftp_ssh2_packet_get_mesg_type_desc(mesg_type), mesg_type);
+++          "received %s (%d) unexpectedly%s, disconnecting",
+++          sftp_ssh2_packet_get_mesg_type_desc(mesg_type), mesg_type,
+++          use_strict_kex ? " during strict KEX" : "");
++         pr_response_set_pool(NULL);
++         destroy_kex(kex);
++         destroy_pool(pkt->pool);
++@@ -4534,7 +4577,7 @@ int sftp_kex_handle(struct ssh2_packet *pkt) {
++    * initial connect (kex_first_kex not null), or because we
++    * are in a server-initiated rekeying (kex_rekey_kex not null).
++    */
++-  if (kex_first_kex) {
+++  if (kex_first_kex != NULL) {
++     kex = kex_first_kex;
++ 
++     /* We need to assign the client/server versions, which this struct
++@@ -4543,7 +4586,7 @@ int sftp_kex_handle(struct ssh2_packet *pkt) {
++     kex->client_version = kex_client_version;
++     kex->server_version = kex_server_version;
++ 
++-  } else if (kex_rekey_kex) {
+++  } else if (kex_rekey_kex != NULL) {
++     kex = kex_rekey_kex;
++ 
++   } else {
++@@ -4579,6 +4622,24 @@ int sftp_kex_handle(struct ssh2_packet *pkt) {
++     return -1;
++   }
++ 
+++  if (use_strict_kex == TRUE &&
+++      kex_done_first_kex == FALSE) {
+++    uint32_t client_seqno;
+++
+++    client_seqno = sftp_ssh2_packet_get_client_seqno();
+++    if (client_seqno != 1) {
+++      /* Receiving any messages other than a KEXINIT as the first client
+++       * message indicates the possibility of the Terrapin attack being
+++       * conducted (Issue 1760).  Thus we disconnect the client in such
+++       * cases.
+++       */
+++      (void) pr_log_writefile(sftp_logfd, MOD_SFTP_VERSION,
+++        "'strict KEX' violation, as KEXINIT was not the first message; disconnecting");
+++      destroy_kex(kex);
+++      SFTP_DISCONNECT_CONN(SFTP_SSH2_DISCONNECT_BY_APPLICATION, NULL);
+++    }
+++  }
+++
++   /* Once we have received the client KEXINIT message, we can compare what we
++    * want to send against what we already received from the client.
++    *
++@@ -4637,7 +4698,7 @@ int sftp_kex_handle(struct ssh2_packet *pkt) {
++ 
++       destroy_pool(pkt->pool);
++ 
++-      if (!kex_sent_kexinit) {
+++      if (kex_sent_kexinit == FALSE) {
++         pkt = sftp_ssh2_packet_create(kex_pool);
++         res = write_kexinit(pkt, kex);
++         if (res < 0) {
++@@ -4660,7 +4721,7 @@ int sftp_kex_handle(struct ssh2_packet *pkt) {
++       }
++     }
++ 
++-    if (!kex_sent_kexinit) {
+++    if (kex_sent_kexinit == FALSE) {
++       pkt = sftp_ssh2_packet_create(kex_pool);
++       res = write_kexinit(pkt, kex);
++       if (res < 0) {
++@@ -4785,7 +4846,7 @@ int sftp_kex_handle(struct ssh2_packet *pkt) {
++     NULL, 1, SFTP_SSH2_MSG_NEWKEYS);
++ 
++   /* If we didn't send our NEWKEYS message earlier, do it now. */
++-  if (!sent_newkeys) {
+++  if (sent_newkeys == FALSE) {
++     struct ssh2_packet *pkt2;
++ 
++     pr_trace_msg(trace_channel, 9, "sending NEWKEYS message to client");
++@@ -4809,6 +4870,11 @@ int sftp_kex_handle(struct ssh2_packet *pkt) {
++     destroy_pool(pkt2->pool);
++   }
++ 
+++  if (use_strict_kex == TRUE) {
+++    sftp_ssh2_packet_reset_client_seqno();
+++    sftp_ssh2_packet_reset_server_seqno();
+++  }
+++
++   /* Last but certainly not least, set up the keys for encryption and
++    * authentication, based on H and K.
++    */
++@@ -4828,6 +4894,9 @@ int sftp_kex_handle(struct ssh2_packet *pkt) {
++   destroy_pool(pkt->pool);
++   cmd = NULL;
++ 
+++  /* We've now completed our KEX, possibly our first. */
+++  kex_done_first_kex = TRUE;
+++
++   /* If extension negotiation has not been disabled, AND if we have not
++    * received a service request, AND if the client sent "ext-info-c", THEN
++    * send our EXT_INFO.  We do not want send this during rekeys.
++@@ -4864,6 +4933,12 @@ int sftp_kex_handle(struct ssh2_packet *pkt) {
++     cmd = NULL;
++   }
++ 
+++  /* Only start the TAP timer after we have completed our first KEX.
+++   * Otherwise, we risk sending "illegal" packets prior to, or during,
+++   * a "strict KEX" session (Issue 1760).
+++   */
+++  sftp_tap_start_policy();
+++
++   /* Reset this flag for the next time through. */
++   kex_sent_kexinit = FALSE;
++ 
++@@ -4893,7 +4968,7 @@ int sftp_kex_free(void) {
++     destroy_kex(rekey_kex);
++   }
++ 
++-  if (kex_pool) {
+++  if (kex_pool != NULL) {
++     destroy_pool(kex_pool);
++     kex_pool = NULL;
++   }
++@@ -5065,7 +5140,7 @@ int sftp_kex_send_first_kexinit(void) {
++   struct ssh2_packet *pkt;
++   int res;
++ 
++-  if (!kex_pool) {
+++  if (kex_pool == NULL) {
++     kex_pool = make_sub_pool(sftp_pool);
++     pr_pool_tag(kex_pool, "Kex Pool");
++   }
++@@ -5100,4 +5175,3 @@ int sftp_kex_send_first_kexinit(void) {
++   destroy_pool(pkt->pool);
++   return 0;
++ }
++-
++diff --git a/contrib/mod_sftp/mod_sftp.c b/contrib/mod_sftp/mod_sftp.c
++index b84b1a77b..2406ea611 100644
++--- a/contrib/mod_sftp/mod_sftp.c
+++++ b/contrib/mod_sftp/mod_sftp.c
++@@ -1,6 +1,6 @@
++ /*
++  * ProFTPD - mod_sftp
++- * Copyright (c) 2008-2020 TJ Saunders
+++ * Copyright (c) 2008-2023 TJ Saunders
++  *
++  * This program is free software; you can redistribute it and/or modify
++  * it under the terms of the GNU General Public License as published by
++@@ -1411,8 +1411,9 @@ MODRET set_sftpoptions(cmd_rec *cmd) {
++   config_rec *c;
++   unsigned long opts = 0UL;
++ 
++-  if (cmd->argc-1 == 0)
+++  if (cmd->argc-1 == 0) {
++     CONF_ERROR(cmd, "wrong number of parameters");
+++  }
++ 
++   CHECK_CONF(cmd, CONF_ROOT|CONF_VIRTUAL|CONF_GLOBAL);
++ 
++@@ -1476,6 +1477,9 @@ MODRET set_sftpoptions(cmd_rec *cmd) {
++     } else if (strcmp(cmd->argv[i], "NoExtensionNegotiation") == 0) {
++       opts |= SFTP_OPT_NO_EXT_INFO;
++ 
+++    } else if (strcmp(cmd->argv[i], "NoStrictKex") == 0) {
+++      opts |= SFTP_OPT_NO_STRICT_KEX;
+++
++     } else {
++       CONF_ERROR(cmd, pstrcat(cmd->tmp_pool, ": unknown SFTPOption '",
++         cmd->argv[i], "'", NULL));
++diff --git a/contrib/mod_sftp/mod_sftp.h.in b/contrib/mod_sftp/mod_sftp.h.in
++index 065981c31..adcf71276 100644
++--- a/contrib/mod_sftp/mod_sftp.h.in
+++++ b/contrib/mod_sftp/mod_sftp.h.in
++@@ -131,6 +131,7 @@
++ #define SFTP_OPT_IGNORE_SFTP_SET_XATTRS		0x04000
++ #define SFTP_OPT_INCLUDE_SFTP_TIMES		0x08000
++ #define SFTP_OPT_NO_EXT_INFO			0x10000
+++#define SFTP_OPT_NO_STRICT_KEX			0x040000
++ 
++ /* mod_sftp service flags */
++ #define SFTP_SERVICE_FL_SFTP		0x0001
++diff --git a/contrib/mod_sftp/packet.c b/contrib/mod_sftp/packet.c
++index b0067ea80..d8c97e92b 100644
++--- a/contrib/mod_sftp/packet.c
+++++ b/contrib/mod_sftp/packet.c
++@@ -1742,6 +1742,18 @@ int sftp_ssh2_packet_rekey_set_size(off_t size) {
++   return 0;
++ }
++ 
+++uint32_t sftp_ssh2_packet_get_client_seqno(void) {
+++  return packet_client_seqno;
+++}
+++
+++void sftp_ssh2_packet_reset_client_seqno(void) {
+++  packet_client_seqno = 0;
+++}
+++
+++void sftp_ssh2_packet_reset_server_seqno(void) {
+++  packet_server_seqno = 0;
+++}
+++
++ int sftp_ssh2_packet_send_version(void) {
++   if (!sent_version_id) {
++     int res;
++diff --git a/contrib/mod_sftp/packet.h b/contrib/mod_sftp/packet.h
++index a424e9b25..fe538cbd7 100644
++--- a/contrib/mod_sftp/packet.h
+++++ b/contrib/mod_sftp/packet.h
++@@ -1,6 +1,6 @@
++ /*
++  * ProFTPD - mod_sftp packet IO
++- * Copyright (c) 2008-2020 TJ Saunders
+++ * Copyright (c) 2008-2023 TJ Saunders
++  *
++  * This program is free software; you can redistribute it and/or modify
++  * it under the terms of the GNU General Public License as published by
++@@ -107,6 +107,13 @@ int sftp_ssh2_packet_rekey_reset(void);
++ int sftp_ssh2_packet_rekey_set_seqno(uint32_t);
++ int sftp_ssh2_packet_rekey_set_size(off_t);
++ 
+++/* These are used for implementing the "strict KEX" mitigations of the Terrapin
+++ * attack (Issue 1760).
+++ */
+++uint32_t sftp_ssh2_packet_get_client_seqno(void);
+++void sftp_ssh2_packet_reset_client_seqno(void);
+++void sftp_ssh2_packet_reset_server_seqno(void);
+++
++ int sftp_ssh2_packet_send_version(void);
++ int sftp_ssh2_packet_set_poll_timeout(int);
++ int sftp_ssh2_packet_set_version(const char *);
++diff --git a/contrib/mod_sftp/tap.c b/contrib/mod_sftp/tap.c
++index 95f388e43..7eaf959e2 100644
++--- a/contrib/mod_sftp/tap.c
+++++ b/contrib/mod_sftp/tap.c
++@@ -1,6 +1,6 @@
++ /*
++  * ProFTPD - mod_sftp traffic analysis protection
++- * Copyright (c) 2008-2016 TJ Saunders
+++ * Copyright (c) 2008-2023 TJ Saunders
++  *
++  * This program is free software; you can redistribute it and/or modify
++  * it under the terms of the GNU General Public License as published by
++@@ -149,7 +149,6 @@ static void set_policy_chance(struct sftp_tap_policy *policy) {
++ }
++ 
++ static void set_policy_timer(struct sftp_tap_policy *policy) {
++-
++   /* Start a timer which checks the last times we received and sent packets.
++    * From there, we may want to inject a TAP message, depending on the
++    * policy.
++@@ -177,6 +176,16 @@ int sftp_tap_send_packet(void) {
++   int rnd;
++   unsigned int chance;
++ 
+++  /* Due to chances of violating client-side "strict KEX" Terrapin
+++   * mitigations, we will not send packets if we are in the middle of a KEX.
+++   */
+++  if (!(sftp_sess_state & SFTP_SESS_STATE_HAVE_KEX) ||
+++      (sftp_sess_state & SFTP_SESS_STATE_REKEYING)) {
+++    pr_trace_msg(trace_channel, 11,
+++      "unwilling to send TAP packet during KEX");
+++    return 0;
+++  }
+++
++   if (!sftp_interop_supports_feature(SFTP_SSH2_FEAT_IGNORE_MSG)) {
++     pr_trace_msg(trace_channel, 3,
++       "unable to send TAP packet: IGNORE not supported by client");
++@@ -205,7 +214,7 @@ int sftp_tap_send_packet(void) {
++     struct ssh2_packet *pkt;
++     unsigned int max_datalen = 8192;
++ 
++-    if (curr_policy.max_datalen) {
+++    if (curr_policy.max_datalen > 0) {
++       max_datalen = curr_policy.max_datalen;
++     }
++ 
++@@ -246,15 +255,15 @@ int sftp_tap_send_packet(void) {
++ int sftp_tap_set_policy(const char *policy) {
++   register unsigned int i;
++ 
++-  if (tap_pool) {
+++  if (tap_pool != NULL) {
++ 
++     /* Special case: IFF the existing policy is 'none' AND the given
++      * policy is 'rogaway', just return.  The 'none' policy must have been
++      * explicitly configured, and it should override the automatic use of
++      * the 'rogaway' policy.
++      */
++-    if (strncmp(curr_policy.policy, "none", 5) == 0 &&
++-        strncasecmp(policy, "rogaway", 8) == 0) {
+++    if (strcasecmp(curr_policy.policy, "none") == 0 &&
+++        strcasecmp(policy, "rogaway") == 0) {
++       (void) pr_log_writefile(sftp_logfd, MOD_SFTP_VERSION,
++         "'none' traffic policy explicitly configured, ignoring '%s' policy",
++         policy);
++@@ -278,7 +287,6 @@ int sftp_tap_set_policy(const char *policy) {
++     if (strcasecmp(tap_policies[i].policy, policy) == 0) {
++       copy_policy(&curr_policy, &(tap_policies[i]));
++       set_policy_chance(&curr_policy);
++-      set_policy_timer(&curr_policy);
++       return 0;
++     }
++   }
++@@ -286,3 +294,7 @@ int sftp_tap_set_policy(const char *policy) {
++   errno = ENOENT;
++   return -1;
++ }
+++
+++void sftp_tap_start_policy(void) {
+++  set_policy_timer(&curr_policy);
+++}
++diff --git a/contrib/mod_sftp/tap.h b/contrib/mod_sftp/tap.h
++index 4a4c065d2..312223595 100644
++--- a/contrib/mod_sftp/tap.h
+++++ b/contrib/mod_sftp/tap.h
++@@ -1,6 +1,6 @@
++ /*
++  * ProFTPD - mod_sftp traffic analysis protection
++- * Copyright (c) 2008-2016 TJ Saunders
+++ * Copyright (c) 2008-2013 TJ Saunders
++  *
++  * This program is free software; you can redistribute it and/or modify
++  * it under the terms of the GNU General Public License as published by
++@@ -63,4 +63,7 @@ int sftp_tap_send_packet(void);
++  */
++ int sftp_tap_set_policy(const char *);
++ 
+++/* Sets the configured TAP policy in motion. */
+++void sftp_tap_start_policy(void);
+++
++ #endif /* MOD_SFTP_TAP_H */
++diff --git a/doc/contrib/mod_sftp.html b/doc/contrib/mod_sftp.html
++index 60c3436fa..cfc639d05 100644
++--- a/doc/contrib/mod_sftp.html
+++++ b/doc/contrib/mod_sftp.html
++@@ -1186,6 +1186,19 @@ The currently implemented options are:
++     <code>proftpd-1.3.7rc4</code>.
++   </li>
++ 
+++  <p>
+++  <li><code>NoStrictKex</code><br>
+++    <p>
+++    By default, <code>mod_sftp</code> will honor/support the OpenSSH
+++    "strict KEX" mode extension, "kex-strict-c-v00@openssh.com" and
+++    "kex-strict-s-v00@openssh.com".  Use this option to disable support for
+++    these custom OpenSSH extensions.
+++
+++    <p>
+++    <b>Note</b> that this option first appeared in
+++    <code>proftpd-1.3.9rc1</code>.
+++  </li>
+++
++   <p>
++   <li><code>OldProtocolCompat</code><br>
++     <p>
++@@ -2642,7 +2655,7 @@ deal with this issue, then, you can hopefully upgrade to ProFTPD 1.3.6 or later,
++ <p>
++ <hr>
++ <font size=2><b><i>
++-&copy; Copyright 2008-2021 TJ Saunders<br>
+++&copy; Copyright 2008-2023 TJ Saunders<br>
++  All Rights Reserved<br>
++ </i></b></font>
++ <hr>
++diff --git a/tests/t/lib/ProFTPD/Tests/Modules/mod_sftp.pm b/tests/t/lib/ProFTPD/Tests/Modules/mod_sftp.pm
++index b4bdf516b..8c2be5465 100644
++--- a/tests/t/lib/ProFTPD/Tests/Modules/mod_sftp.pm
+++++ b/tests/t/lib/ProFTPD/Tests/Modules/mod_sftp.pm
++@@ -87,6 +87,11 @@ my $TESTS = {
++     test_class => [qw(forking ssh2)],
++   },
++ 
+++  ssh2_ext_kex_strict_terrapin_issue1760 => {
+++    order => ++$order,
+++    test_class => [qw(bug forking ssh2)],
+++  },
+++
++   ssh2_hostkey_rsa => {
++     order => ++$order,
++     test_class => [qw(forking ssh2)],
++@@ -3885,6 +3890,218 @@ EOC
++   unlink($log_file);
++ }
++ 
+++sub ssh2_ext_kex_strict_terrapin_issue1760 {
+++  my $self = shift;
+++  my $tmpdir = $self->{tmpdir};
+++  my $setup = test_setup($tmpdir, 'sftp');
+++
+++  my $rsa_host_key = File::Spec->rel2abs('t/etc/modules/mod_sftp/ssh_host_rsa_key');
+++  my $dsa_host_key = File::Spec->rel2abs('t/etc/modules/mod_sftp/ssh_host_dsa_key');
+++
+++  my $rsa_priv_key = File::Spec->rel2abs('t/etc/modules/mod_sftp/test_rsa_key');
+++  my $rsa_pub_key = File::Spec->rel2abs('t/etc/modules/mod_sftp/test_rsa_key.pub');
+++  my $rsa_rfc4716_key = File::Spec->rel2abs('t/etc/modules/mod_sftp/authorized_rsa_keys');
+++
+++  my $authorized_keys = File::Spec->rel2abs("$tmpdir/.authorized_keys");
+++  unless (copy($rsa_rfc4716_key, $authorized_keys)) {
+++    die("Can't copy $rsa_rfc4716_key to $authorized_keys: $!");
+++  }
+++
+++  my $ssh_config = File::Spec->rel2abs("$tmpdir/ssh.conf");
+++  if (open(my $fh, "> $ssh_config")) {
+++    print $fh <<EOC;
+++HostKeyAlgorithms rsa-sha2-256
+++IdentityAgent none
+++PubkeyAcceptedKeyTypes rsa-sha2-256
+++EOC
+++    unless (close($fh)) {
+++      die("Can't write $ssh_config: $!");
+++    }
+++
+++  } else {
+++    die("Can't open $ssh_config: $!");
+++  }
+++
+++  my $batch_file = File::Spec->rel2abs("$tmpdir/sftp-batch.conf");
+++  if (open(my $fh, "> $batch_file")) {
+++    print $fh "ls -l\n";
+++
+++    unless (close($fh)) {
+++      die("Can't write $batch_file: $!");
+++    }
+++
+++  } else {
+++    die("Can't open $batch_file: $!");
+++  }
+++
+++  my $config = {
+++    PidFile => $setup->{pid_file},
+++    ScoreboardFile => $setup->{scoreboard_file},
+++    SystemLog => $setup->{log_file},
+++    TraceLog => $setup->{log_file},
+++    Trace => 'ssh2:30 sftp:20 scp:20',
+++
+++    AuthUserFile => $setup->{auth_user_file},
+++    AuthGroupFile => $setup->{auth_group_file},
+++    AuthOrder => 'mod_auth_file.c',
+++
+++    IfModules => {
+++      'mod_delay.c' => {
+++        DelayEngine => 'off',
+++      },
+++
+++      'mod_sftp.c' => [
+++        "SFTPEngine on",
+++        "SFTPLog $setup->{log_file}",
+++
+++        "SFTPHostKey $rsa_host_key",
+++        "SFTPHostKey $dsa_host_key",
+++
+++        "SFTPAuthorizedUserKeys file:~/.authorized_keys",
+++      ],
+++    },
+++  };
+++
+++  my ($port, $config_user, $config_group) = config_write($setup->{config_file},
+++    $config);
+++
+++  # Open pipes, for use between the parent and child processes.  Specifically,
+++  # the child will indicate when it's done with its test by writing a message
+++  # to the parent.
+++  my ($rfh, $wfh);
+++  unless (pipe($rfh, $wfh)) {
+++    die("Can't open pipe: $!");
+++  }
+++
+++  require Net::SSH2;
+++
+++  my $ex;
+++
+++  # Fork child
+++  $self->handle_sigchld();
+++  defined(my $pid = fork()) or die("Can't fork: $!");
+++  if ($pid) {
+++    eval {
+++      # We use OpenSSH-9.6p1 to test our "strict KEX" Terrapin mitigations.
+++      my $sftp = '/Users/tj/local/openssh-9.6p1/bin/sftp';
+++
+++      my @cmd = (
+++        $sftp,
+++        '-F',
+++        $ssh_config,
+++        '-oBatchMode=yes',
+++        '-oCheckHostIP=no',
+++        '-oCompression=yes',
+++        "-oPort=$port",
+++        "-oIdentityFile=$rsa_priv_key",
+++        '-oPubkeyAuthentication=yes',
+++        '-oStrictHostKeyChecking=no',
+++        '-oUserKnownHostsFile=/dev/null',
+++        '-vvv',
+++        '-b',
+++        $batch_file,
+++        "$setup->{user}\@127.0.0.1",
+++      );
+++
+++      my $sftp_rh = IO::Handle->new();
+++      my $sftp_wh = IO::Handle->new();
+++      my $sftp_eh = IO::Handle->new();
+++
+++      $sftp_wh->autoflush(1);
+++
+++      sleep(1);
+++
+++      local $SIG{CHLD} = 'DEFAULT';
+++
+++      # Make sure that the perms on the priv key are what OpenSSH wants
+++      unless (chmod(0400, $rsa_priv_key)) {
+++        die("Can't set perms on $rsa_priv_key to 0400: $!");
+++      }
+++
+++      if ($ENV{TEST_VERBOSE}) {
+++        print STDERR "Executing: ", join(' ', @cmd), "\n";
+++      }
+++
+++      my $sftp_pid = open3($sftp_wh, $sftp_rh, $sftp_eh, @cmd);
+++      waitpid($sftp_pid, 0);
+++      my $exit_status = $?;
+++
+++      # Restore the perms on the priv key
+++      unless (chmod(0644, $rsa_priv_key)) {
+++        die("Can't set perms on $rsa_priv_key to 0644: $!");
+++      }
+++
+++      my ($res, $errstr);
+++      if ($exit_status >> 8 == 0) {
+++        $errstr = join('', <$sftp_eh>);
+++        $res = 0;
+++
+++      } else {
+++        $errstr = join('', <$sftp_eh>);
+++        if ($ENV{TEST_VERBOSE}) {
+++          print STDERR "Stderr: $errstr\n";
+++        }
+++
+++        $res = 1;
+++      }
+++
+++      unless ($res == 0) {
+++        die("Can't list files on server: $errstr");
+++      }
+++    };
+++    if ($@) {
+++      $ex = $@;
+++    }
+++
+++    $wfh->print("done\n");
+++    $wfh->flush();
+++
+++  } else {
+++    eval { server_wait($setup->{config_file}, $rfh) };
+++    if ($@) {
+++      warn($@);
+++      exit 1;
+++    }
+++
+++    exit 0;
+++  }
+++
+++  # Stop server
+++  server_stop($setup->{pid_file});
+++  $self->assert_child_ok($pid);
+++
+++  eval {
+++    if (open(my $fh, "< $setup->{log_file}")) {
+++      my $ok = 0;
+++
+++      while (my $line = <$fh>) {
+++        chomp($line);
+++
+++        if ($ENV{TEST_VERBOSE}) {
+++          print STDERR "# $line\n";
+++        }
+++
+++        if ($line =~ /client signaled strict KEX support/) {
+++          $ok = 1;
+++          last;
+++        }
+++      }
+++
+++      close($fh);
+++
+++      $self->assert($ok, test_msg("Did not see expected 'strict KEX' TraceLog message"));
+++
+++    } else {
+++      die("Can't read $setup->{log_file}: $!");
+++    }
+++  };
+++  if ($@) {
+++    $ex = $@;
+++  }
+++
+++  test_cleanup($setup->{log_file}, $ex);
+++}
+++
++ sub ssh2_hostkey_rsa {
++   my $self = shift;
++   my $tmpdir = $self->{tmpdir};
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+index 3a0fff5599..c8097a14b0 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https
+            file://proftpd.service \
+            file://CVE-2023-51713.patch \
+            file://CVE-2024-57392.patch \
++           file://CVE-2023-48795.patch \
+            "
  
--HOMEPAGE = "https://metacpan.org/release/KENTNL/HTML-Tree-5.05/source/README"
-+HOMEPAGE = "https://metacpan.org/release/KENTNL/HTML-Tree-5.06/source/README"
- 
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://README;beginline=88;endline=105;md5=260d31d31370658947ae050eef27aca9"
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=88;endline=105;md5=260d31d3137065894
- SRC_URI = "${CPAN_MIRROR}/authors/id/K/KE/KENTNL/HTML-Tree-${PV}.tar.gz \
-            file://bin-htmltree-fix-shebang.patch \
- "
--SRC_URI[sha256sum] = "9c0461e9058d4d1bf1dca353bb1266cf99c99c8adabd9d3ca97d2bc4a5e8bd0f"
-+SRC_URI[sha256sum] = "9c36eb19cbdf9a5906c858948ca51c35bd7561f52cc18c43281acbe57327536e"
- 
- S = "${UNPACKDIR}/HTML-Tree-${PV}"
- 
+ S = "${WORKDIR}/git"
 -- 
-2.43.0
+2.25.1
 
 
