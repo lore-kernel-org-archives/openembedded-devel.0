@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D924CCD1A7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F0FDCCD19F
 	for <webhook@archiver.kernel.org>; Tue, 21 Oct 2025 06:35:52 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.web11.5210.1761028547566390796
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.web11.5212.1761028552015293404
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Oct 2025 23:35:47 -0700
+ Mon, 20 Oct 2025 23:35:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RLLcIdDY;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-290cd62acc3so47158605ad.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 23:35:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ILZi60eQ;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-b4755f37c3eso4359819a12.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Oct 2025 23:35:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761028547; x=1761633347; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1761028551; x=1761633351; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aXbMkB7shAgJquuMcg9/to1o2vRaTcrTIeNJ2RZwlKc=;
-        b=RLLcIdDYq1PMYQL/EbPcjXMfoAv/kM9r4TA42zrCkTpRCoineEXBYLBDAuvE4h8pQv
-         CFBkl8P8dr5Z7FbcyH2avuH6wsnmEH6aP6/u66PG4fnfGIjk+DHnTk6gGHYZ9DK41tS6
-         Tt542ZUE1w7KAubhLHxaGVXiVY4oipRuxShJ7D4/3MNQG40a+SonEikgPsnSSAyfRWrn
-         rNlaoYF37n0Iu7dLgEV6BtoUtJok3Ii88wvgSHg/Wulgb6RRsH1gnoeII99AhKGEfFEU
-         ig9VcYPEdV5VBaWPeM1jjEpqmoQf6KCdgZWfxR+nDB/IAYjbg+b55dCcwe8TfXqZEVXE
-         3VEQ==
+        bh=GQx8Jyz6w3iwH9lllXMEpNgk/IgsKeyX8UeK1kcsQYI=;
+        b=ILZi60eQUupt+SLrLaPKTfWeZRE0zqYnM2yoqXLmwmsLuvAvQ8vzpW3SrxbDbINTdk
+         S6jTmpQOxiB5w6p3rCOzvsfuVFNxejvBVE6Xu2Re0uVBvu3DMzcvwnjdrZTole6BaDOc
+         Be5qE4zV83Cae+BBTfiMqQzNngFo02WXiPTTnn9R0b4Uh/rnjFIDijHjcUWDXlUsRwVH
+         /yk0XRENCWaxAZ9Wdry36RPeLRgkmxZNDwbOUowTznrjuIIuEHRf3VmIOg3AOo2TC0Em
+         bZ3seclVB5Qdgc+wlRk4RaKgnEdGjcKHuqw+Pjiz2jXELUx2asih6mtxJD+d22pOdw/q
+         Zv0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761028547; x=1761633347;
+        d=1e100.net; s=20230601; t=1761028551; x=1761633351;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=aXbMkB7shAgJquuMcg9/to1o2vRaTcrTIeNJ2RZwlKc=;
-        b=uTpGfJb/2GR9cf5f0LN+/lCXPAgE4HLOs9Y0+Dhxl/wI8JSfx7Nj9qGwdGZiVpEIFX
-         5kV9LYHRrWSMyOUjrBl4AveAcihrLwlutpiApXYKLR2eVwVxp+v7mlTs4Y+WpEaxwgDn
-         uIER36apBRcC0rfWyifro6gLi0iJeW8kYqlEG9kR3R7PFUe+FMymDKc/VYltox+u0shN
-         Wcix+2Xtm6dllYQnF0NSlyom6sNRWW+IACR+kIroruHoyOi6SQBm4NaNWxsZUzxGhuEQ
-         msjzSUk3Ty3Gnf6Mo1DsMQiGv/gbot95/bd5rM6nh33CTumqe2fbWvn3i6jHD/itcOTz
-         njTA==
-X-Gm-Message-State: AOJu0YybPCpAuN+XQ8sfzkkpFmlseKIXjpn+RUzcglLWEgrOl66iixyF
-	k01c7AywsYq67ZatR8fJjDpydsTYKpxWylRwrNDuUsMVzrptfBH2LA/2BT0vLQ==
-X-Gm-Gg: ASbGncvwE6V3ykOARsvNbRtc938SNCipzskcg8lqNGtfB+N0fUtY2EJ6N9o7fBbN3Y3
-	YvO0mEfCn2ZLnW7aETLyvIl1z+1kAlAnm+9bap8FdXnUCV3eAqZe+GspzfGEUnISsp5kuxg6w5n
-	3CGQzxoJgSakVjurb52lyrHUDMU2fcwQ/kGjqLfUIeBRIKTBEWeL4e6AxV07bLNiyicuz4wEaRl
-	da+gJysyesECrIrRY+9V6NGOX+93hKNvN6qQ+LwiH5LpvHflQExv604DRb2NQmvI2KI4eH6cPfG
-	Xew2xXec9LxIqvyKZeUK1iMrnspZmO9N1E5lQh4RvXrQkveWz36riSmmAwSPGuasz3lOd3B+/k6
-	hz914wXyRTXqDNfeLge+qUgjGEok8Q6mBRQTVfY6jebOijjiJh+TVm3FA6iNvdM6ZeVfL6FbZiu
-	e2a5sTP8akfx1rShFZ4R/cs0iljUYLUTMzDXE=
-X-Google-Smtp-Source: AGHT+IFapqU7f+DQGcEsHxF/C6b+hq9KKnJNRVvb15KfhrN7hjI9zjN/eGqqGu7OFomwgPPo2wlaOg==
-X-Received: by 2002:a17:902:ce12:b0:28e:7fce:6685 with SMTP id d9443c01a7336-290cb94792amr179153715ad.32.1761028546731;
-        Mon, 20 Oct 2025 23:35:46 -0700 (PDT)
+        bh=GQx8Jyz6w3iwH9lllXMEpNgk/IgsKeyX8UeK1kcsQYI=;
+        b=BaE0mo1/5/EOG9BkKiZDD8nClW5aXmhcggdK64yR8dJYWAEPux2fofFaPPUSg/31QE
+         i7GdzNNCc0Iy6vm9jOgkXVEKteJ+Z4MXUbzbfsuui6ENQwj8lLh+bqPzmszluoqmNWXS
+         ggI8b/7cwIhBkdps1oPvBeEEfBX67+2OQq1dSIBKr+glZGQnTjdv6uEHgKKFzeXgxnfL
+         /OsAzeqgzQaRNYy0H2rRasOR3Dyg9UmXs2IbSpnE4Hr92FneyRuWiZLQAjHlJhP1hmsO
+         B77zWKp4Pw2LckIu8ul8Xrc/448u/L95ZSbKojONJB6UUPKdWrhzuzyvMrPcXIVreL48
+         fVkA==
+X-Gm-Message-State: AOJu0Yxsnol4T7OZGkT75pdcSl9bGZqxCGugeNl8uTbhGxS+gX1mOBPQ
+	AQExhUZvdni/nF2w67f497wh+8gin4JPeYrTIpUXqrAiuYuYXzSCB4QXiCaBXg==
+X-Gm-Gg: ASbGnct2fqVryj8HpvMkrz+paf6X6ZdKjEy6NeI1DeGT+470fUHfIbcZrIzg/oHPThr
+	Mh9e8bt9G2gC0ci/0kOKBNMfI/zqLYVod58KQQTBxgTR+Wlhj67RRlSQCPtAccZxfHBjQD96M58
+	UW8GRyoR9Fs10ElXWwaD2is87gOAQXPd2486U/yD6Xf7JlUoHs5H1hF9e4iiZzgaDUbyQLjCEr7
+	U97GkOhmyPgWq8dZoVTq4mcvm/M0jf8pZXFaEDrer4w+9C++Cpq9o9IIGo2szmy0D1SM58lp3Wo
+	v83SZqQEv7ohW9tm2FUswm6+SJwlxXJIE5bCA7Nr6n1LuWsBeGFQOQ/bwNMNyDfqcQXF1i4RiuQ
+	E2E9BbBoxhSb1/CMVQ5eMzcZE0ESPepT9qy0JdgnW4EOViZzcf1Fvf1UhGlLbLBlwVxkmRGhhmd
+	w968iyHpivVfyQl8LKPM62Mjzv
+X-Google-Smtp-Source: AGHT+IHoWEWE+TtZTJ0cy9Yvs69crqSSGNNoyhtuucNgNwoVZ+CPMCOl3bO3i+HB82uICz8hXQ35rw==
+X-Received: by 2002:a17:903:287:b0:24b:4a9a:703a with SMTP id d9443c01a7336-290c9cbc0d7mr194895135ad.17.1761028551122;
+        Mon, 20 Oct 2025 23:35:51 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-292471da2f9sm99609595ad.62.2025.10.20.23.35.45
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-292471da2f9sm99609595ad.62.2025.10.20.23.35.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Oct 2025 23:35:46 -0700 (PDT)
+        Mon, 20 Oct 2025 23:35:50 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][scarthgap][PATCH 3/5] libiec61850: patch CVE-2024-26529
-Date: Tue, 21 Oct 2025 19:34:05 +1300
-Message-ID: <20251021063407.232340-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][scarthgap][PATCH 4/5] libiec61850: patch CVE-2024-45970
+Date: Tue, 21 Oct 2025 19:34:06 +1300
+Message-ID: <20251021063407.232340-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251021063407.232340-1-ankur.tyagi85@gmail.com>
 References: <20251021063407.232340-1-ankur.tyagi85@gmail.com>
@@ -68,65 +68,106 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 21 Oct 2025 06:35:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120829
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120830
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2024-26529
+Details https://nvd.nist.gov/vuln/detail/CVE-2024-45970
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libiec61850/files/CVE-2024-26529.patch    | 33 +++++++++++++++++++
+ .../libiec61850/files/CVE-2024-45970.patch    | 74 +++++++++++++++++++
  .../libiec61850/libiec61850_1.5.3.bb          |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/CVE-2024-26529.patch
+ 2 files changed, 75 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/CVE-2024-45970.patch
 
-diff --git a/meta-networking/recipes-connectivity/libiec61850/files/CVE-2024-26529.patch b/meta-networking/recipes-connectivity/libiec61850/files/CVE-2024-26529.patch
+diff --git a/meta-networking/recipes-connectivity/libiec61850/files/CVE-2024-45970.patch b/meta-networking/recipes-connectivity/libiec61850/files/CVE-2024-45970.patch
 new file mode 100644
-index 0000000000..ea3f472f30
+index 0000000000..d0f10287ba
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/libiec61850/files/CVE-2024-26529.patch
-@@ -0,0 +1,33 @@
-+From e29799cba6f1d08cf6463a2b190c0e6502b885df Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-connectivity/libiec61850/files/CVE-2024-45970.patch
+@@ -0,0 +1,74 @@
++From d5bd7cbf26b0254ce068ba7d940c26adbf9ce8e8 Mon Sep 17 00:00:00 2001
 +From: Michael Zillgith <michael.zillgith@mz-automation.de>
-+Date: Fri, 2 Feb 2024 06:44:47 +0000
-+Subject: [PATCH] CVE-2024-26529
++Date: Tue, 23 Jul 2024 18:50:15 +0100
++Subject: [PATCH] CVE-2024-45970
 +
-+fixed - null pointer dereference in mmsServer_handleDeleteNamedVariableListRequest when receiving malformed message (LIB61850-430)
++fixed potential buffer overflows in MMS client file service handling (LIB61850-449)
 +
-+CVE: CVE-2024-26529
-+Upstream-Status: Backport [https://github.com/mz-automation/libiec61850/commit/cf94d64206cf53298edf4799a75b31657bb7cbb3]
++CVE: CVE-2024-45970
++Upstream-Status: Backport [https://github.com/mz-automation/libiec61850/commit/ac925fae8e281ac6defcd630e9dd756264e9c5bc]
 +
-+(cherry picked from commit cf94d64206cf53298edf4799a75b31657bb7cbb3)
++(cherry picked from commit ac925fae8e281ac6defcd630e9dd756264e9c5bc)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/mms/iso_mms/server/mms_named_variable_list_service.c | 6 ++++++
-+ 1 file changed, 6 insertions(+)
++ src/mms/iso_mms/client/mms_client_files.c | 23 +++++++++++++++++++----
++ 1 file changed, 19 insertions(+), 4 deletions(-)
 +
-+diff --git a/src/mms/iso_mms/server/mms_named_variable_list_service.c b/src/mms/iso_mms/server/mms_named_variable_list_service.c
-+index 3a27061c..3365f771 100644
-+--- a/src/mms/iso_mms/server/mms_named_variable_list_service.c
-++++ b/src/mms/iso_mms/server/mms_named_variable_list_service.c
-+@@ -140,6 +140,12 @@ mmsServer_handleDeleteNamedVariableListRequest(MmsServerConnection connection,
-+         mmsMsg_createMmsRejectPdu(&invokeId, MMS_ERROR_REJECT_INVALID_PDU, response);
-+         goto exit_function;
-+     }
++diff --git a/src/mms/iso_mms/client/mms_client_files.c b/src/mms/iso_mms/client/mms_client_files.c
++index 4fca418e..935ba1a4 100644
++--- a/src/mms/iso_mms/client/mms_client_files.c
+++++ b/src/mms/iso_mms/client/mms_client_files.c
++@@ -487,8 +487,13 @@ parseFileAttributes(uint8_t* buffer, int bufPos, int maxBufPos, uint32_t* fileSi
++             break;
++         case 0x81: /* lastModified */
++             {
++-                if (lastModified != NULL) {
+++                if (lastModified != NULL)
+++                {
++                     char gtString[40];
 ++
-++    if (request->listOfVariableListName == NULL)
+++                    if (length > sizeof(gtString) - 1)
+++                        return false; /* lastModified string too long */
+++
++                     memcpy(gtString, buffer + bufPos, length);
++                     gtString[length] = 0;
++                     *lastModified = Conversions_generalizedTimeToMsTime(gtString);
++@@ -515,12 +520,14 @@ parseDirectoryEntry(uint8_t* buffer, int bufPos, int maxBufPos, uint32_t invokeI
++     uint32_t fileSize = 0;
++     uint64_t lastModified = 0;
++ 
++-    while (bufPos < maxBufPos) {
+++    while (bufPos < maxBufPos)
 ++    {
-++        mmsMsg_createMmsRejectPdu(&invokeId, MMS_ERROR_REJECT_INVALID_PDU, response);
-++        goto exit_function;
-++    }
-+  
-+ 	long scopeOfDelete = DeleteNamedVariableListRequest__scopeOfDelete_specific;
++         uint8_t tag = buffer[bufPos++];
++         int length;
++ 
++         bufPos = BerDecoder_decodeLength(buffer, &length, bufPos, maxBufPos);
++-        if (bufPos < 0) {
+++        if (bufPos < 0)
+++        {
++             if (DEBUG_MMS_CLIENT)
++                 printf("MMS_CLIENT: invalid length field\n");
++             return false;
++@@ -534,12 +541,20 @@ parseDirectoryEntry(uint8_t* buffer, int bufPos, int maxBufPos, uint32_t invokeI
++             tag = buffer[bufPos++];
++ 
++             bufPos = BerDecoder_decodeLength(buffer, &length, bufPos, maxBufPos);
++-            if (bufPos < 0) {
+++            if (bufPos < 0)
+++            {
++                 if (DEBUG_MMS_CLIENT)
++                     printf("MMS_CLIENT: invalid length field\n");
++                 return false;
++             }
++ 
+++            if (length > (sizeof(fileNameMemory) - 1))
+++            {
+++                if (DEBUG_MMS_CLIENT)
+++                    printf("MMS_CLIENT: filename too long\n");
+++                return false;
+++            }
+++
++             memcpy(filename, buffer + bufPos, length);
++             filename[length] = 0;
 + 
 diff --git a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.3.bb b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.3.bb
-index fa9e84a29e..ec10f0990e 100644
+index ec10f0990e..70d3b6d2c9 100644
 --- a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.3.bb
 +++ b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.3.bb
-@@ -18,6 +18,7 @@ SRCREV = "6f557c490f0b46ab5d7ef1b01bb3bc9fab3f442f"
- SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5;protocol=https \
+@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5;protocol=https
             file://0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch \
             file://0001-pyiec61850-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallD.patch \
-+           file://CVE-2024-26529.patch \
+            file://CVE-2024-26529.patch \
++           file://CVE-2024-45970.patch \
  "
  
  S = "${WORKDIR}/git"
