@@ -2,105 +2,130 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 74A82CCD184
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7048FCCD1A7
 	for <webhook@archiver.kernel.org>; Tue, 21 Oct 2025 14:53:55 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.14087.1761058433728840793
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web11.14115.1761058432750719207
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Oct 2025 07:53:54 -0700
+ Tue, 21 Oct 2025 07:53:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=D5vDCVoq;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-471131d6121so44818475e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Oct 2025 07:53:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lUBDrFIM;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-475c1f433d8so3029945e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Oct 2025 07:53:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761058432; x=1761663232; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=dcZMhsGZ/IFxKMoW1xk6T9Ac2Gai9ZZZo5Xcq+Zsqss=;
-        b=D5vDCVoqO3gQZJfAEmlo6WvI8V6NcuiIWfdu9ZgR+rjTR2tgVWj+yuGEhcCqNi13Q/
-         2PLM5RVq8D6tXbbxnUaibzAwLsEINHM7HHmTVEwMLSNNPhxSAEHv+Tn3wskq965oLWwQ
-         jLDLdWu46G53sVUYa6WZLLiFCbUPmvFna5JTX4PFugntZvOH7lwkqR64Hzh4fG1TViqz
-         RzrrmTWlMSE7KUC/nooR7nGmx4tbhe/JWvw4hQAhlKUu+EA5fuBKDd7JzWiNyi7SlX1Z
-         Bew25OS0xkftK8VfkqMc+rLP6JU1XFL+xVOj4W9i61KLWVkZ4pBKzPBPdJ8bGpW/KD7/
-         +FZA==
+        d=gmail.com; s=20230601; t=1761058431; x=1761663231; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=A7geCl3h1wM+azRbUb5/nw8tzJVUBoQSVSr7Ozf/z7U=;
+        b=lUBDrFIMEOfXChBp8kvOyxP2jSvl3dpEJVRdZj1f5LrBPNKn2UdosSwBxo4w/h2FIS
+         2AaOrBOgj8pFTASwjDs6j6EGiPClyel0HpkEDG7ee8Lz1LDYlLrZIjPpG41YCw3Epjpe
+         Jbzx7MgMOnVkKbFJP93ZJCehtcyT3ODZxU7FPUZA5aeGi0ibQN6AVjwpC3/X5KabVJBq
+         c14BB09bny+riIISZI5glfkyZIfm5D5pFSA5WyHxUUR69xnXj0sdMHamWumSl02jEdNg
+         jbHUo/f3tTu8vmjMq0CA7g2Hln0SlRzsFLMQLSZ3NH+2uQAW5iW4BH2dpF4JeGzoDAMw
+         TJIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761058432; x=1761663232;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=dcZMhsGZ/IFxKMoW1xk6T9Ac2Gai9ZZZo5Xcq+Zsqss=;
-        b=n/LLs0L/w5tHX+E85IuAZL/8xkcmiIaXXLVTUoILG2n4V9ZpUjI5RmECD2QBt1VHbl
-         uQpdEm91aHaStHcX2Q6bYz4NElnjPf4kdzNFJ+2N7/WPlbg9HA7jUKcGtC62emdAQ79k
-         UwZCPwCG/l/kFcYdI3VX2enEbnlM9L49990/A28VvJoxP9BLUGA+zukiQ5y5aoHQzxNP
-         H7hVzeBzFsjU7zhT8rQo5XHgeYINVxClGrA41lCyCIpPe/Uzjq/PYCq2zOPldLlB1Ppx
-         ncxCQANjK9PPfv05TEYt6QctclxZ2o6BiNkIdkb3EeY6xLmxUo5E63yhQN3U+0ozIZEg
-         XkNQ==
-X-Gm-Message-State: AOJu0Yykkufa6aOxikc+PbWNymuY8LDyaSxux043+TFL7iBpy6O24PE2
-	UylO2gtMAemdxDsXB2u5bNziPvw6E4dX2Fk+rQrhKISrnXaNYYxjxXNnaZxDIA==
-X-Gm-Gg: ASbGncsGcbAYvgpJDbUgoAmIudywlA+R2PJr4f6BaGVCk42KFCBObqQhpdv4dQxF0VE
-	8knUz9GX8YXaUXHYeJZtJwcdyKGJkK4EE6BaXZ7/Yf46eceKRCp002SOJSnPxhIwpLsQ/AWaR4U
-	MECMssRuCETXc8HwKtU0JpelWKSAF4qdciaQekSs42Ug7ur8Jz2DW1Ui4qFYm9dvTcJd2Z1dvb9
-	CwvAZt8h57Fr5ntkuIh2zL0MWntegtgjfXPQPmIhZSq9OP7LxqnaHWdVKGvA9s+c46mETnoNw4A
-	kxPD57vqDTaGf25ckSgz+1qf9lSOrMmIiZNA8ROZGPr/g5y9Moc7NS2VFw62f2C3lIdI1bGEoDU
-	dtPPWKJ/5MEgIGCnKiOtGkkMGdphViElmcExJxn863QTlWef7Bu1QqssBcExrVHsmQEDIe3gmf2
-	pvRbPqAmVI
-X-Google-Smtp-Source: AGHT+IGHuZUJhZUNKjwqvsFDhqTUF3jjV4RtBvuZGslkqASMZPXBDFjlHIUy3PH6RzWpo5fpRnn4eg==
-X-Received: by 2002:a05:600d:41cc:b0:46f:d897:516f with SMTP id 5b1f17b1804b1-4711791c880mr148218685e9.34.1761058431620;
-        Tue, 21 Oct 2025 07:53:51 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1761058431; x=1761663231;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=A7geCl3h1wM+azRbUb5/nw8tzJVUBoQSVSr7Ozf/z7U=;
+        b=hYtDo7LNt6ZiYDEMYgEEujK9BrPwW5gy0vW4TvemM70A8bBRXf6OpYJSaLbpnkmA4m
+         2YlxDS+fG0/iRfSXkcUKL3O18wFAjtQCwZMsY5UeShLvbp9ac/+4Q8wYOhPKkcSSfK86
+         KWWUbHpwNZyo3zj4VQVCC1xuQZ2Yb9R91/XWLUabdvSu2QS4k8x2I5ntx1ItkUZ2yAnW
+         K3jChKh7/6lcLRPoTj56WZKYwdZFXdMo6188L3WUdHQfx3GROuTyjxaeXWoGLirMrB3L
+         0GhWDX/SuPSrrBPR+RamM2NNj1DQV+1j13Man4b5X3hZ57HB3IrJH8/vExs0+zA39ft+
+         ZhHw==
+X-Gm-Message-State: AOJu0YxBAOvyV6VClxepU+9VItnGhAfGlLVpjAatJMwLJYqfzzu3YAOv
+	wk7c2ZXeEaEIhDHd1e/DzNVSiT5f684hixz7oZCOWlt0JOwrI7Vrp/xXqrN0NA==
+X-Gm-Gg: ASbGncsyRGjkGT5AnzBUXfSHXMSYT/J5/H68bx83ZIk+AH3uaOfVlc7cnMr0/LO1ApJ
+	cVAwTElCF5s1n/4Y9mvzKkYEVHS5u/zkmKD3TzGgXrRDdu70ADeovQA/ebQDFUJ1EWl+E/hU6o/
+	PfY/j3XbieC+1A/mb6afpH7qkqgvGd2kt2bxKRw5epFa8+TPIagmli+drOnA2L2PWu7WCuXQc/G
+	Rwih8LZMElBBlc/Sf46zD7deS+QuIZExECJaHxPls7lnuVgSpb8BQwg+RHZTTq0ffBwvZNOThMn
+	G1VW/SC3YsHsODQWfaizFu6XXLnPJ4BWTecrOuPKFDO65/bixxta9x5rqNsFpsfa4xu9ppEZnw7
+	8sEzmO9KH+KuMbTek5PBZDhuAm36DcLAAU3NU6gtbVzdHYapjf/RFSUa9PL+An8wJr3CWSLrqXE
+	bKfKXcpGUY
+X-Google-Smtp-Source: AGHT+IFBy0SFCl4010/oYrjCkqdMGdLJqidQwpbus73bJsA8AwSX327onUkuJfpgHJNwpFrOTtv+aA==
+X-Received: by 2002:a05:600c:3f08:b0:470:ffd1:782d with SMTP id 5b1f17b1804b1-47117876a19mr144162105e9.6.1761058430847;
+        Tue, 21 Oct 2025 07:53:50 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-471144b5c91sm283259535e9.11.2025.10.21.07.53.50
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Oct 2025 07:53:51 -0700 (PDT)
+        Tue, 21 Oct 2025 07:53:50 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 2/4] dash: set CVE_PRODUCT
-Date: Tue, 21 Oct 2025 16:53:46 +0200
-Message-ID: <20251021145349.33878-2-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 1/4] wavpack: patch CVE-2016-10169
+Date: Tue, 21 Oct 2025 16:53:45 +0200
+Message-ID: <20251021145349.33878-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.1
-In-Reply-To: <20251021145349.33878-1-skandigraun@gmail.com>
-References: <20251021145349.33878-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 21 Oct 2025 14:53:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120836
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120835
 
-From: Peter Marko <peter.marko@siemens.com>
+Details: https://nvd.nist.gov/vuln/detail/CVE-2016-10169
 
-This removes false positive CVE-2024-21485 from cve reports.
+Backport the relevant part of the linked patch.
 
-$ sqlite3 nvdcve_2-2.db
-sqlite> select * from products where product = 'dash';
-CVE-2009-0854|dash|dash|0.5.4|=||
-CVE-2024-21485|plotly|dash|||2.13.0|<
-CVE-2024-21485|plotly|dash|2.14.0|>=|2.15.0|<
+(The full patch contains fixes for other vulnerabilities also, which
+were introduced after v4.60)
 
-Our dash:dash did not reach major version 1 yet.
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e1427013e01df44b9275908f7605e8e25fc3fd83)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-shells/dash/dash_0.5.11.5.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../wavpack/wavpack/CVE-2016-10169.patch      | 27 +++++++++++++++++++
+ .../wavpack/wavpack_4.60.1.bb                 |  4 ++-
+ 2 files changed, 30 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-multimedia/wavpack/wavpack/CVE-2016-10169.patch
 
-diff --git a/meta-oe/recipes-shells/dash/dash_0.5.11.5.bb b/meta-oe/recipes-shells/dash/dash_0.5.11.5.bb
-index 3674052311..904d8a74cc 100644
---- a/meta-oe/recipes-shells/dash/dash_0.5.11.5.bb
-+++ b/meta-oe/recipes-shells/dash/dash_0.5.11.5.bb
-@@ -10,6 +10,8 @@ inherit autotools update-alternatives
- SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz"
- SRC_URI[sha256sum] = "db778110891f7937985f29bf23410fe1c5d669502760f584e54e0e7b29e123bd"
- 
-+CVE_PRODUCT = "dash:dash"
+diff --git a/meta-oe/recipes-multimedia/wavpack/wavpack/CVE-2016-10169.patch b/meta-oe/recipes-multimedia/wavpack/wavpack/CVE-2016-10169.patch
+new file mode 100644
+index 0000000000..22dbc2648c
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/wavpack/wavpack/CVE-2016-10169.patch
+@@ -0,0 +1,27 @@
++From 847968ff66f0d743ed2cf3d5f1f7d8d8dafcf42d Mon Sep 17 00:00:00 2001
++From: David Bryant <david@wavpack.com>
++Date: Wed, 21 Dec 2016 22:18:36 -0800
++Subject: [PATCH] CVE-2016-10169
 +
- EXTRA_OECONF += "--bindir=${base_bindir}"
++CVE: CVE-2016-10169
++Upstream-Status: Backport [https://github.com/dbry/WavPack/commit/4bc05fc490b66ef2d45b1de26abf1455b486b0dc]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/words.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/src/words.c b/src/words.c
++index c87b8d2..272760a 100644
++--- a/src/words.c
+++++ b/src/words.c
++@@ -1117,6 +1117,10 @@ int32_t FASTCALL get_word (WavpackStream *wps, int chan, int32_t *correction)
++ 
++     low &= 0x7fffffff;
++     high &= 0x7fffffff;
+++
+++    if (low > high)         // make sure high and low make sense
+++        high = low;
+++
++     mid = (high + low + 1) >> 1;
++ 
++     if (!c->error_limit)
+diff --git a/meta-oe/recipes-multimedia/wavpack/wavpack_4.60.1.bb b/meta-oe/recipes-multimedia/wavpack/wavpack_4.60.1.bb
+index 021496bd43..8dbeb9883c 100644
+--- a/meta-oe/recipes-multimedia/wavpack/wavpack_4.60.1.bb
++++ b/meta-oe/recipes-multimedia/wavpack/wavpack_4.60.1.bb
+@@ -2,7 +2,9 @@ DESCRIPTION = "WavPack is a completely open audio compression format providing l
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://license.txt;md5=f596650807588c61fcab60bec8242df8"
  
- ALTERNATIVE:${PN} = "sh"
+-SRC_URI = "http://wavpack.com/wavpack-${PV}.tar.bz2"
++SRC_URI = "http://wavpack.com/wavpack-${PV}.tar.bz2 \
++           file://CVE-2016-10169.patch \
++           "
+ SRC_URI[md5sum] = "7bb1528f910e4d0003426c02db856063"
+ SRC_URI[sha256sum] = "175ee4f2effd6f51e6ec487956f41177256bf892c2e8e07de5d27ed4ee6888c5"
+ 
 
