@@ -1,251 +1,165 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <hongxu.jia@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A706CCD184
-	for <webhook@archiver.kernel.org>; Tue, 21 Oct 2025 08:48:13 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web10.6668.1761036490403261012
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFB8ACCD1A5
+	for <webhook@archiver.kernel.org>; Tue, 21 Oct 2025 10:22:43 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.7890.1761042156358255371
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Oct 2025 01:48:10 -0700
+ Tue, 21 Oct 2025 03:22:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=e5ecXO5O;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4711810948aso35911875e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Oct 2025 01:48:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761036489; x=1761641289; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+0cbyoDsLrK02t3pIeXpcvfO91dSm76kpr/Tv7MMsrA=;
-        b=e5ecXO5O0lKkz5eCuq9ouoIaZ08NTkMf8a4lkpUOa+dqQFbPwrbz+KnQoe95VSCzS/
-         4sAC5BeQ2Jn/MgSyCMNC3aM9TORsMTAj+SR6YnHG99hBSUOStoqLbP5idYH0RcuoKqTI
-         Zoe24Tywj0CYSEl0DGSJ7y5+3mGigqJQNNs6TT/wpGYyqAsNQejelDzS77roReSxzok6
-         tjrohhgeiW0lbaaxtPjlv2sMqXEdmIcWoWsNXoGdXNsCYNyyyuNQwFQ2soka0J/6CtEB
-         lIOxjv3OBcF91nvGKJXeuMTATwVl1Ht8Vc4keo8WfDo0krT4EtQEFDwcSuZxTz4K/jv5
-         F6pQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761036489; x=1761641289;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=+0cbyoDsLrK02t3pIeXpcvfO91dSm76kpr/Tv7MMsrA=;
-        b=uz94wcavK7AWmHvet/eTC6kr2r2lb3brweT4UlBdcTnvi6i3QvZxFrBAeoOELuCBnY
-         3E4+NdIuPeVDZPyU5Kd8DpSHeWklzrVAXSVbAnXCby7+u58B6sB0YPPhMoD9kkW17VCE
-         2oDj1pGbgrGJ6Xm4qWiWdLiMAvfGh1RT1UwzsXiZ0Tpg8zEkymdufMVpRs9kj5EBzWpl
-         vcySOKEaEvxROqTJZHfU3EljxE3wigvLBr/xg2VOGLyuaOedkx6mjomTdT9XTrxruERA
-         t0ZTB20YpHNW5CM+mee/NwEXc4HfVFuGYdUFtpPjHm77wUeCGMuESprUMtKpgufnEd3v
-         KyXQ==
-X-Gm-Message-State: AOJu0Yz3I7h5EF4p2ruVEG+5HF0oxyj5G8hWskrwdTFbrKIT9UnW/MC9
-	4ZQARHr3U50dNGhUodyRYm1yEsQk+btkmXbbD3BKHvbda0lyrWd36UIeLl1Gug==
-X-Gm-Gg: ASbGncsWja6JCWBZ32xiuMZnvmEX15ojG9pxQZ6XQhp8BNsiP+WU5kR7mqugQD91H3t
-	fA+AsenepynAN4QlwJETnmrjfaHgdLvNlPfF5Ywj4xIutk3O+8XefwnSeS5fSD900zFp0QCQprW
-	/DvTaBO2TY9y1a3zmM7SPLtBj9N8BRpO0AZVQXOn6bitRx8PSsIEUZLVeKUgdjOJyaymNfRFMS6
-	VTOEp56qiKo/LMkSYI2MVbOPVgqolQnJM3rVJkYDTi0FanVNb6UjPbxRpnh5UUjEl5/OH8fuzla
-	4lDz3LZs/j4XxXl8rUZN9xkfgS3cjAAUWPR92kU83qpOF1sXtJ4jzHAJBfHC9G8UFrgcC+tsR7R
-	+JgWMoQsI/jG8mzLcNb65sXts4R1kh8J1vVSy0cq5jprRwIWYGaAQdN2BdnI0jPe3zWLQZjUs31
-	4WBj9IlNUlz8LO0we7vd0=
-X-Google-Smtp-Source: AGHT+IF4W9Yaj80wLkQKtQPJmX7q5o3KHdojh5M1uGBxEny7SBqDniHXgi5zCJpn7hrzvhVVWUNwog==
-X-Received: by 2002:a05:600c:871a:b0:471:14f5:124f with SMTP id 5b1f17b1804b1-471179258f3mr114320165e9.35.1761036488537;
-        Tue, 21 Oct 2025 01:48:08 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-471144c900asm272986055e9.16.2025.10.21.01.48.07
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Oct 2025 01:48:08 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH] zchunk: add ptest support
-Date: Tue, 21 Oct 2025 10:48:07 +0200
-Message-ID: <20251021084807.3657527-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=ZnLYd7K9;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2389149868=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59L9dSQX2638941
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Oct 2025 03:22:35 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=RiBDQl2TMxBB9FlfyRCZ
+	lA/kSAHLGtJgqQC958cavpE=; b=ZnLYd7K9hG8xOFdurLsNnx3L7e/Ubn/2wiMD
+	Y0ocZZJJNK6B5mzXbGTlRUzfqav0DzXrvLnPkIDbJzwoBEfn8ShjBash+n1kchmd
+	g0yhGXPGW10cHiu/Rz1hVUyeAD8G9KBq+MRIl24kEIY5Okt5a109HN5sMuwNMwVb
+	IDSe3IfNZALAwByK3uazFASTB0SCVbAhqUlyDoMGFHKv1TZrPJuAXHsPe7aeJbkT
+	eyKqDPyIwoVIU9XrKcOY7kXbu5TkDKPt6PycLfjxoM1POb5iK1p+32AYg69780wa
+	1/vnSt5njbL/dtwECzlRhY6mw28gZ9CpZlO+P3R/jWHR692i0Q==
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49vadj2m4u-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Oct 2025 03:22:35 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.59; Tue, 21 Oct 2025 03:22:35 -0700
+Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.59 via Frontend Transport; Tue, 21 Oct 2025 03:22:34 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] poppler: fix racing build issue
+Date: Tue, 21 Oct 2025 18:22:33 +0800
+Message-ID: <20251021102233.706528-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: gHnjGa2rdld70RREtSgDAccWqLfpt4tT
+X-Authority-Analysis: v=2.4 cv=K+4v3iWI c=1 sm=1 tr=0 ts=68f75eeb cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Ud-fGmwBAAAA:8 a=e5mUnYsNAAAA:8
+ a=t7CeM3EgAAAA:8 a=1RYnrb_XOU5N2zFwRhgA:9 a=H0_BfbLtyfsadj6IJfz3:22
+ a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDIxMDA4MSBTYWx0ZWRfX4HxtJo664pT0
+ 5TH2wH2kclGd2eKcqtUAIkhcN5LeBFjWJ42DchRx2CN2E+CH+Q89SV4WlFMts5nUyTtTp+lWvW6
+ t12bqfSQr6eUhqewcihXy+wsToH4XILK4fHZHJaXAHs8rrsBbIQ2f9DwCNqjXL+EU9LloV9Zywh
+ BVvjeM6Q8cZnyHfJzYLkJSoQB/B8CmIMCL4livOxS7qa67cHyX0cKSDFumLela0K2fa3SzC8dY9
+ cKD4HE57RXQaAm2IuN9iz79uiagjQ+EJ+67aQB1g8GvUmB1z5GeABPl52p3hl6d24en82tgm3+e
+ h0d7RD+xbdQFsTmWUrZQiEHg39an8qbq98mIv/M3+RR1G1Wa0UO6H2cWw2+Y1DADnJQ9V1shm+f
+ URuwsdQzaV90kGwSPNv/n9fo5mRR+w==
+X-Proofpoint-GUID: gHnjGa2rdld70RREtSgDAccWqLfpt4tT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-20_07,2025-10-13_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 impostorscore=0 phishscore=0 clxscore=1015 priorityscore=1501
+ malwarescore=0 spamscore=0 bulkscore=0 lowpriorityscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510020000 definitions=main-2510210081
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Oct 2025 08:48:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120833
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Oct 2025 10:22:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120834
 
-It takes under 5 seconds to execute.
-The script is a shell conversion from the meson tests.
+There is a racing issue in world build while multilib enabled:
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+...log.do_install...
+CMake Error at utils/po/ca/cmake_install.cmake:46 (file):
+  file INSTALL cannot find
+  "TOPDIR/tmp/work/core2-32-wrs-linux/poppler/25.08.0/build/utils/po/ca/pdfsig.gmo":
+  No such file or directory.
+Call Stack (most recent call first):
+  utils/po/cmake_install.cmake:47 (include)
+  utils/cmake_install.cmake:243 (include)
+  cmake_install.cmake:229 (include)
+...log.do_install...
+
+It seems gettext_process_po_files has racing issue [1], but
+not sure, and the catalan translation of pdfsig is not vital
+for poppler. So revert upstream commit "pdfsig: Catalan translation"
+to workaround
+
+[1] https://public.kitware.com/Bug/view.php?id=14904
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../recipes-support/zchunk/zchunk/run-ptest   | 139 ++++++++++++++++++
- .../recipes-support/zchunk/zchunk_1.2.0.bb    |  10 +-
- 2 files changed, 148 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/zchunk/zchunk/run-ptest
+ .../0001-workaround-build-racing.patch        | 43 +++++++++++++++++++
+ .../poppler/poppler_25.08.0.bb                |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-workaround-build-racing.patch
 
-diff --git a/meta-oe/recipes-support/zchunk/zchunk/run-ptest b/meta-oe/recipes-support/zchunk/zchunk/run-ptest
+diff --git a/meta-oe/recipes-support/poppler/poppler/0001-workaround-build-racing.patch b/meta-oe/recipes-support/poppler/poppler/0001-workaround-build-racing.patch
 new file mode 100644
-index 0000000000..d4b1439905
+index 0000000000..fdf4f7ff70
 --- /dev/null
-+++ b/meta-oe/recipes-support/zchunk/zchunk/run-ptest
-@@ -0,0 +1,139 @@
-+#!/bin/sh
++++ b/meta-oe/recipes-support/poppler/poppler/0001-workaround-build-racing.patch
+@@ -0,0 +1,43 @@
++From 83ad73024c69d41fda302f39acf50c381684890e Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Tue, 21 Oct 2025 02:39:36 -0700
++Subject: [PATCH] workaround build racing
 +
-+# this is a shell-rewrite of meson tests, from test/meson.build file
++There is a racing issue in world build while multilib enabled:
 +
-+report_result(){
-+  if [ $1 -eq 0 ]; then
-+    echo PASS: $2
-+  else
-+    echo FAIL: $2
-+  fi
-+}
++...log.do_install...
++CMake Error at utils/po/ca/cmake_install.cmake:46 (file):
++  file INSTALL cannot find
++  "TOPDIR/tmp/work/core2-32-wrs-linux/poppler/25.08.0/build/utils/po/ca/pdfsig.gmo":
++  No such file or directory.
++Call Stack (most recent call first):
++  utils/po/cmake_install.cmake:47 (include)
++  utils/cmake_install.cmake:243 (include)
++  cmake_install.cmake:229 (include)
++...log.do_install...
 +
-+report_result_expected_fail(){
-+  if [ $? -eq 0 ]; then
-+    echo FAIL: $2
-+  else
-+    echo PASS: $2
-+  fi
-+}
++Revert "pdfsig: Catalan translation" to workaround
 +
-+# create and validate empty zchunk file
-+./tests/empty
-+report_result $? empty
++This reverts commit 99f5416d9bfb6a34bbc5cbcb368e258b98fd3f08.
 +
-+# check version info in zck
-+zck -V
-+report_result $? "zck version"
++Upstream-Status: Inappropriate [Yocto specific]
 +
-+# check version info of unzck
-+unzck -V
-+report_result $? "unzck version"
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ utils/po/ca/CMakeLists.txt | 4 ----
++ 1 file changed, 4 deletions(-)
++ delete mode 100644 utils/po/ca/CMakeLists.txt
 +
-+# check version of zckdl
-+zckdl -V
-+report_result $? "zckdl version"
++diff --git a/utils/po/ca/CMakeLists.txt b/utils/po/ca/CMakeLists.txt
++deleted file mode 100644
++index 3225131c..00000000
++--- a/utils/po/ca/CMakeLists.txt
+++++ /dev/null
++@@ -1,4 +0,0 @@
++-get_filename_component(_lang ${CMAKE_CURRENT_SOURCE_DIR} NAME)
++-gettext_process_po_files(${_lang} ALL INSTALL_DESTINATION ${CMAKE_INSTALL_LOCALEDIR} PO_FILES
++-  pdfsig.po
++-)
++-- 
++2.49.0
 +
-+# check version of zck_read_header
-+zck_read_header -V
-+report_result $? "zck_read_header version"
-+
-+# check version of zck_delta_size
-+zck_delta_size -V
-+report_result $? "zck_delta_size version"
-+
-+# check opening file with optional flags
-+./tests/optelems ./tests/files/empty.optelems.zck
-+report_result $? "check opening file with optional flags"
-+
-+# checksum with non-hex character
-+./tests/invalid_input_checksum ./tests/files/empty.optelems.zck
-+report_result $? "checksum with non-hex character"
-+
-+# read single chunk
-+./tests/read_single_chunk ./tests/files/LICENSE.dict.fodt.zck
-+report_result $? "read single chunk"
-+
-+# read single compressed chunk
-+./tests/read_single_comp_chunk ./tests/files/LICENSE.dict.fodt.zck
-+report_result $? "read single compressed chunk"
-+
-+# check verbosity in unzck
-+unzck -vvvvv ./empty.zck
-+report_result $? "check verbosity in unzck"
-+
-+# check verbosity in zck
-+zck -vvvvv ./empty
-+report_result $? "check verbosity in zck"
-+
-+# check verbosity in zckdl
-+zckdl -vvvvv file:///empty
-+report_result_expected_fail $? "check verbosity in zckdl"
-+
-+# check verbosity in zck_read_header
-+zck_read_header -vvvvvfc ./empty.zck
-+report_result $? "check verbosity in zck_read_header"
-+
-+# check verbosity in zck_delta_size
-+zck_delta_size -vvvvv ./empty.zck ./empty.zck
-+report_result $? "check verbosity in zck_delta_size"
-+
-+# copy chunks from source
-+./tests/copy_chunks ./tests/files/LICENSE.header.new.nodict.fodt.zck ./tests/files/LICENSE.nodict.fodt.zck
-+report_result $? "copy chunks from source"
-+
-+# decompress previously generated auto-chunked file - nocomp
-+./tests/shacheck `which unzck` LICENSE.nocomp.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e ./tests/files/LICENSE.nocomp.fodt.zck
-+report_result $? "decompress previously generated auto-chunked file - nocomp"
-+
-+# decompress previously generated auto-chunked file - no dict
-+./tests/shacheck `which unzck` LICENSE.nodict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e ./tests/files/LICENSE.nodict.fodt.zck
-+report_result $? "decompress previously generated auto-chunked file - no dict"
-+
-+# decompress previously generated auto-chunked file - dict
-+./tests/shacheck `which unzck` LICENSE.dict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e ./tests/files/LICENSE.dict.fodt.zck
-+report_result $? "decompress previously generated auto-chunked file - dict"
-+
-+# decompress previously generated manual file - no dict
-+./tests/shacheck `which unzck` LICENSE.manual.nodict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e ./tests/files/LICENSE.manual.nodict.fodt.zck
-+report_result $? "decompress previously generated manual file - no dict"
-+
-+# decompress previously generated manual file - dict
-+./tests/shacheck `which unzck` LICENSE.manual.dict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e ./tests/files/LICENSE.manual.dict.fodt.zck
-+report_result $? "decompress previously generated manual file - dict"
-+
-+# decompress dict from previously generated auto-chunked file
-+./tests/shacheck `which unzck` LICENSE.dict.fodt.zdict b20064d89c3beb8605d99c994ff45304f308abd840c0981475dd2faca6ec854b --dict ./tests/files/LICENSE.dict.fodt.zck
-+report_result $? "decompress dict from previously generated auto-chunked file"
-+
-+# compress auto-chunked file - no dict
-+./tests/shacheck `which zck` LICENSE.nodict.fodt.zck ac9d431f1f568d8921257fa17929c320f0cdcbff450d9f3c38c78c4f410ee788 -o LICENSE.nodict.fodt.zck ./tests/files/LICENSE.fodt
-+report_result $? "compress auto-chunked file - no dict'"
-+
-+# decompress auto-chunked file - no dict
-+./tests/shacheck `which unzck` LICENSE.nodict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e LICENSE.nodict.fodt.zck
-+report_result $? "decompress auto-chunked file - no dict"
-+
-+# compress auto-chunked file - dict
-+./tests/shacheck `which zck` LICENSE.dict.fodt.zck 35549b28b01c0a43d7389d4c40d5b750c73fb6c0c6701355ef709ef4a37df389 -D ./tests/files/LICENSE.dict -o LICENSE.dict.fodt.zck ./tests/files/LICENSE.fodt
-+report_result $? "compress auto-chunked file - dict"
-+
-+# decompress auto-chunked file - dict
-+./tests/shacheck `which unzck` LICENSE.dict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e LICENSE.dict.fodt.zck
-+report_result $? "decompress auto-chunked file - dict"
-+
-+# compress manual file - no dict
-+./tests/shacheck `which zck` LICENSE.manual.nodict.fodt.zck 2580f66412adce1ed8d92abc09b0f64eb155155f61e21a8269a2c4a338857e51 -m -s "<text:" -o LICENSE.manual.nodict.fodt.zck ./tests/files/LICENSE.fodt
-+report_result $? "compress manual file - no dict"
-+
-+# decompress manual file - no dict
-+./tests/shacheck `which unzck` LICENSE.manual.nodict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e LICENSE.manual.nodict.fodt.zck
-+report_result $? "decompress manual file - no dict"
-+
-+# compress manual file - dict
-+./tests/shacheck `which zck` LICENSE.manual.dict.fodt.zck 863dc2bda721a32c26485eeb2223d5dabcf9ac517ecba8c7991fa0120d04c937 -D ./tests/files/LICENSE.dict -m -s "<text:" -o LICENSE.manual.dict.fodt.zck ./tests/files/LICENSE.fodt
-+report_result $? "compress manual file - dict"
-+
-+# decompress manual file - dict
-+./tests/shacheck `which unzck` LICENSE.manual.dict.fodt 394ed6c2fc4ac47e5ee111a46f2a35b8010a56c7747748216f52105e868d5a3e LICENSE.manual.dict.fodt.zck
-+report_result $? "decompress manual file - dict"
-diff --git a/meta-oe/recipes-support/zchunk/zchunk_1.2.0.bb b/meta-oe/recipes-support/zchunk/zchunk_1.2.0.bb
-index 5eb2741b1f..ce71fcfb8b 100644
---- a/meta-oe/recipes-support/zchunk/zchunk_1.2.0.bb
-+++ b/meta-oe/recipes-support/zchunk/zchunk_1.2.0.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=daf6e68539f564601a5a5869c31e5242"
- 
- SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;branch=main \
-            file://0001-Handle-overflow-errors-in-malformed-zchunk-files.patch \
-+           file://run-ptest \
+diff --git a/meta-oe/recipes-support/poppler/poppler_25.08.0.bb b/meta-oe/recipes-support/poppler/poppler_25.08.0.bb
+index 45f94b0ae7..3b0b4b0e99 100644
+--- a/meta-oe/recipes-support/poppler/poppler_25.08.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_25.08.0.bb
+@@ -7,6 +7,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://basename-include.patch \
+            file://0001-cmake-Do-not-use-isystem.patch \
++           file://0001-workaround-build-racing.patch \
             "
+ SRC_URI[sha256sum] = "425ed4d4515a093bdcdbbaac6876f20617451edc710df6a4fd6c45dd67eb418d"
  
- SRCREV = "dd6a30a1e4e8b738b0cafc682f3c00e7706134e5"
-@@ -19,6 +20,13 @@ DEPENDS = "\
- DEPENDS:append:libc-musl = " argp-standalone"
- LDFLAGS:append:libc-musl = " -largp"
- 
--inherit meson pkgconfig
-+inherit meson pkgconfig ptest
-+
-+do_install_ptest(){
-+    install -d ${D}${PTEST_PATH}/tests
-+    find ${B}/test -maxdepth 1 -type f -exec install {} ${D}${PTEST_PATH}/tests/ \;
-+    cp -r ${S}/test/files ${D}${PTEST_PATH}/tests/
-+}
- 
- BBCLASSEXTEND = "native nativesdk"
-+
+-- 
+2.34.1
+
 
