@@ -1,131 +1,116 @@
-Return-Path: <michael.opdenacker@rootcommit.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2B8FCCD1AB
-	for <webhook@archiver.kernel.org>; Wed, 22 Oct 2025 20:36:56 +0000 (UTC)
-Received: from siberian.tulip.relay.mailchannels.net (siberian.tulip.relay.mailchannels.net [23.83.218.246])
- by mx.groups.io with SMTP id smtpd.web10.4967.1761165408322232648
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA029CCD1AB
+	for <webhook@archiver.kernel.org>; Wed, 22 Oct 2025 23:26:57 +0000 (UTC)
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+ by mx.groups.io with SMTP id smtpd.web11.8317.1761175611044024619
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Oct 2025 13:36:48 -0700
+ Wed, 22 Oct 2025 16:26:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@rootcommit.com header.s=hostingermail-a header.b=V2ZVpzmw;
- spf=pass (domain: rootcommit.com, ip: 23.83.218.246, mailfrom: michael.opdenacker@rootcommit.com)
-X-Sender-Id: hostingeremail|x-authuser|michael.opdenacker@rootcommit.com
-Received: from relay.mailchannels.net (localhost [127.0.0.1])
-	by relay.mailchannels.net (Postfix) with ESMTP id AB3BD6A3229
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 20:36:47 +0000 (UTC)
-Received: from de-fra-smtpout8.hostinger.io (100-118-36-55.trex-nlb.outbound.svc.cluster.local [100.118.36.55])
-	(Authenticated sender: hostingeremail)
-	by relay.mailchannels.net (Postfix) with ESMTPA id 04DFB6A21B3
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 20:36:42 +0000 (UTC)
-ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1761165403; a=rsa-sha256;
-	cv=none;
-	b=bpbwo6as46R7EX7MeYeC5czFBxxUBvdBMoGxW1NtS9pOaXhxxbOiVxtlSJSXnaxvsx3ff+
-	nvG+gFMpukvsynxVcBKWfQYCJXh1dEBKEBX1p96B8PWMHELsE/5yPgTBLvgGyArHyETKKx
-	DCiPxbvFZSB7F2zplf048aGcuczneS3rlBEOOXLEQ0OpkClLuoORxVtwgj1cajNq19CwAe
-	x/dFp6JzNwkie+bzsyCQOAtqYLrWI/8ySJ51afbn3frT+WEmxVFkeFu4Is1S7vHByhcwhK
-	XzGMk+2iKIMc9+yR7o8G5yBYMj/SuvhzGKrRQiYAaJsE25C4YPtpY5DSjmYo0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailchannels.net;
-	s=arc-2022; t=1761165403;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:dkim-signature;
-	bh=svzZjVWPRy9BiF0LNtM3UseyPD6xyMItkpyqoFzy9sk=;
-	b=AfvIWrFjSCEeJBkgQ0KMlF9eEH8ILqh+BBwnwPYFUmIWBU46ERk2JAKf2WihfInzVsE8rR
-	mzeCOSuDNwjgT1EaXeRL7ktez18Gl/Ysbwr20f0MyrJMkuCTaURv7dneBp2Fij/73tgBX3
-	oxX0/wF2Cd9ocdjWrfIFxP9hPzDxxrRYA2l0WhLSzzOjkJQp2fp6k8rv6Br89Ay+8oBrUg
-	TXsCm5y4B5NpFbGF+NIMOmzz02ZnQ1WxZNLMU6ABtl76ICl45poahSTdrnyCZezjy/8dNk
-	WPqkC7EWdIvpNoM3MclkNaLQrml/HzDC0vSnNzV0U0DaCInjY1TdTEtiVV9dgw==
-ARC-Authentication-Results: i=1;
-	rspamd-6d88cf848b-44rw8;
-	auth=pass smtp.auth=hostingeremail
- smtp.mailfrom=michael.opdenacker@rootcommit.com
-X-Sender-Id: hostingeremail|x-authuser|michael.opdenacker@rootcommit.com
-X-MC-Relay: Neutral
-X-MailChannels-SenderId: 
- hostingeremail|x-authuser|michael.opdenacker@rootcommit.com
-X-MailChannels-Auth-Id: hostingeremail
-X-Left-Spot: 1e5db2fd022c568f_1761165407555_144873409
-X-MC-Loop-Signature: 1761165407555:1969249707
-X-MC-Ingress-Time: 1761165407555
-Received: from de-fra-smtpout8.hostinger.io (de-fra-smtpout8.hostinger.io
- [148.222.55.13])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
-	by 100.118.36.55 (trex/7.1.3);
-	Wed, 22 Oct 2025 20:36:47 +0000
-Received: from localhost.localdomain (unknown [IPv6:2001:861:4450:d360:df8b:aa61:9538:1b7a])
-	(Authenticated sender: michael.opdenacker@rootcommit.com)
-	by smtp.hostinger.com (smtp.hostinger.com) with ESMTPSA id 4csLYP1Ph5z3wnb;
-	Wed, 22 Oct 2025 20:36:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rootcommit.com;
-	s=hostingermail-a; t=1761165401;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=svzZjVWPRy9BiF0LNtM3UseyPD6xyMItkpyqoFzy9sk=;
-	b=V2ZVpzmwGT9cVg2P1MjG0EyzIWUVrVpdk9WkcH2Ef3eVUP3bBFtA/aEoqllDV4LpftwIJF
-	yDLC/pxA8mUP8FMi4AGwpCJpdnVt/8FsFtwCKDUYpZs3vxPiQ7Lml/htZ8E3/QtPXhTAxy
-	SSyYF2jfgC7VLu7Mv8Xdt5EXUYY7ZIiqRLG6TCRnQi+fDFIaBpVnSVQVM7TtmAVkEVuAtb
-	1DiFLIf2IgW5Cz0S4/+/OLbUb74gftFbMzL918YnFm03jFE2PgiCzhJ9TNbGwYAdKSGHE9
-	ZoH4P+bfwr7G+63RJC+jyb8mDIwrrYh2H00/k5cvJtnXefFuWO1HtFKQGN4dEw==
-From: michael.opdenacker@rootcommit.com
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=G5U3BR0M;
+ spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-33bda2306c5so178328a91.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 16:26:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1761175610; x=1761780410; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=l3oCf1g5b75t9uxvX/VUzohWuNyHpByymS30jiBLCPw=;
+        b=G5U3BR0MH4XrFQvppbe29BBZTVk0pIunBWoTlnj3Hu9L4YwjPV3+LrHrrjoO9m5doc
+         RfK3GneujD8sSFVNKvOty7zQ3/KSXMEjEZd2xcHwT2XkMKQ1T0exU1HmO6QbNwT1/nKq
+         wCqyEXYZGOp/BBJ1iRESMZdDfPvJXswgflHdTokoSkjJvEeXXHG5GxwqYtsf3NbNeIhw
+         81JSc6DjQbPNwqkmkdTKlMlju3OTH++ueWN0LJi9HxE1x3F67kyFr2wnnA6JkY8Qp+z1
+         gRo95hAHCMxYYBneb8Pdp52zkpptC0dPIsGqBgcKBJ4ou7VDcrWkw8lpq9B52OCkDyS7
+         y9Tw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761175610; x=1761780410;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=l3oCf1g5b75t9uxvX/VUzohWuNyHpByymS30jiBLCPw=;
+        b=sj7LaqMpCj/iArF1wD2KOnuHpiSvAYoD3g/UGzK/0o/YAGbeD2TfV3cmuRbqV1xic4
+         OGF4m0K6fy3haduUTdoNrQcdOmfUpluzNphz93z/0elNFeTVMp41NzVJyDtedZCczb0B
+         6dMrCOHdVfYz+JWZ4rOn9MSG2VMcFbOYRgpU+hoteB94WWZIQZNe58RUjZpRWdH4ffPS
+         /X8dCPGAREZHcIZJ1WzXwqnRaYRFaXl4C81HOClHVZxGJN1KOUWUTbgFBylLj+PG/PSY
+         VL3xxyhPX5I3BAJzUtk8sW73Efr9nm8oKifFiFd9JBsKtF8SLwCyyvpCsePh22FWsZcS
+         Svtg==
+X-Gm-Message-State: AOJu0YzCXv3kdH1eiqcfhXPgz2gbgSSJqVe+otxl7CkCS9kzFVMWfrQp
+	E/fOsY0RvA2mrx9jdRPCrWOXXTPSL4fX/V0Btl8eIDL+uqP+ZNNSaRcyb59n9Q==
+X-Gm-Gg: ASbGncv+xClw0qYEXi5pqhq1evLCiErmZGwRwqnAAdQSqGlbIZYiRx6aLcAMK2aBI7h
+	+mj2bql9DfAtjCl/kZI0zGEUcDNwdkSL2kmGPEQZ1P8zuXsmztqpXyGB/HOma9nG1vteNebRazY
+	S0sK1ZFD35GcbVkQeobq4gYM/LBRQB1VFLu+4ULX13TDgA1yRzwBVPO3g7QLiwPu/1NlLSpfxl4
+	1PtzM4ZjrTEihy5UZzg9WtpiigOru+sWys3fx1Pldgtxuwwu6TVoa2JAD0ukbHnv+eTqKM01Ion
+	quOkRKZ9pK75JraM4YjU6eip0SHbI+kENeeHpkoOEHtV6mNB+EHjKHvhRFzWa9qdCwAJPpDEmUH
+	SUH0o/d7aXuMWsI1Y8Ed2zKv2GDE9RytQAa1XeT4dBgsS41dz2cPj4SJ6BwrOrDy1PWJUMYiIZj
+	trtrzJwUGAc4RM3AB2P4w1vyLICV2i0Z437qI=
+X-Google-Smtp-Source: AGHT+IG3bXFy/RRqh5SGLkyFhIbc0hqtWA6AtE8wTRXJLPGFyvaycYGhYJJxRPY9ohq0YtsjI3jnkg==
+X-Received: by 2002:a17:90b:2411:b0:33e:2d0f:4791 with SMTP id 98e67ed59e1d1-33e2d0f588cmr3108278a91.13.1761175610169;
+        Wed, 22 Oct 2025 16:26:50 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33fb01919aasm331129a91.17.2025.10.22.16.26.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Oct 2025 16:26:49 -0700 (PDT)
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Michael Opdenacker <michael.opdenacker@rootcommit.com>
-Subject: [meta-oe][PATCH] iperf3: add missing "libgcc" RDEPENDS
-Message-ID: <20251022203617.1488734-1-michael.opdenacker@rootcommit.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][scarthgap][PATCH v2 0/8] python3-django CVE fixes
+Date: Thu, 23 Oct 2025 12:26:23 +1300
+Message-ID: <20251022232633.1703690-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Date: Wed, 22 Oct 2025 20:36:41 +0000 (UTC)
-X-CM-Envelope: MS4xfE5hX85sFEsVkknIgRoySI17C4sq9YGJc+kw7yFKTBCT/+3VWiaMyaNTu+5SR4brLYcBImV4F0UcbOWb22sWqCKMiNB+vpidQDgool/KJNhAD13kUmJH +OD1fJlfDiEC3dnzPvlJB8C1/pGBupeATW1c6uXbGlX4xnVE1xR3bnP4rMM74fYuW5yHBGCzPTFQZQrNHX4vX+f+VoFlsiRPSMPkTbgp2d4IA+f0uQHnZGnL Q7wBFa9XA5qamGjzyjC7+b+HvQso265ylCoaBYXynyNPgcX2h8tBV6AVYUs6OrEDIUpDQAZerJYHkgqrbMNi5Jg3IiK7RpgHxz/Yd6QZQoSITE9BlBU4RL60 fADDSxJP
-X-CM-Analysis: v=2.4 cv=ALriHGRn c=1 sm=1 tr=0 ts=68f94059 a=XzW6OEp4kASjoDH3AA+DzQ==:617 a=xqWC_Br6kY4A:10 a=d70CFdQeAAAA:8 a=NEAV23lmAAAA:8 a=Hqg2z-3JD8Yy6xYuSbkA:9 a=NcxpMcIZDGm-g932nG_k:22
-X-AuthUser: michael.opdenacker@rootcommit.com
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 20:36:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120900
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 23:26:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120901
 
-From: Michael Opdenacker <michael.opdenacker@rootcommit.com>
+changes in v2
+- renamed CVE-2025-26699.patch and removed CVE tag because it is not a CVE fix
+  but fixes a regression caused by CVE fix
 
-This fixes an issue observed with iperf3 added to core-image-minimal.
-The executable starts fine but at the end of a test, issues this error:
+Ankur Tyagi (7):
+  python-django: fix 4.2.20 regression
+  python3-django: patch CVE-2025-32873
+  python3-django: patch CVE-2025-48432
+  python3-django: patch CVE-2025-57833
+  python3-django: patch CVE-2025-59681
+  python3-django: patch CVE-2025-59682
+  python3-django: upgrade 5.0.11 -> 5.0.14
 
-iperf3 -c 172.24.0.1
-Connecting to host 172.24.0.1, port 5201
-[ 5] local 172.24.0.2 port 55444 connected to 172.24.0.1 port 5201
-[ ID] Interval Transfer Bitrate Retr Cwnd
-[ 5] 0.00-1.00 sec 113 MBytes 945 Mbits/sec 0 396 KBytes
-[ 5] 1.00-2.00 sec 112 MBytes 941 Mbits/sec 0 396 KBytes
-[ 5] 2.00-3.00 sec 113 MBytes 946 Mbits/sec 0 417 KBytes
-[ 5] 3.00-4.00 sec 112 MBytes 937 Mbits/sec 1 417 KBytes
-[ 5] 4.00-5.00 sec 113 MBytes 946 Mbits/sec 0 424 KBytes
-[ 5] 5.00-6.00 sec 112 MBytes 938 Mbits/sec 0 424 KBytes
-[ 5] 6.00-7.00 sec 112 MBytes 943 Mbits/sec 0 428 KBytes
-[ 5] 7.00-8.00 sec 112 MBytes 942 Mbits/sec 0 445 KBytes
-[ 5] 8.00-9.00 sec 112 MBytes 944 Mbits/sec 0 457 KBytes
-libgcc_s.so.1 must be installed for pthread_cancel to work
-Aborted
+Soumya Sambu (1):
+  python3-django: upgrade 4.2.18 -> 4.2.20
 
-Signed-off-by: Michael Opdenacker <michael.opdenacker@rootcommit.com>
----
- meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../CVE-2025-32873.patch                      |  86 +++++++
+ .../CVE-2025-48432-1.patch                    | 166 +++++++++++++
+ .../CVE-2025-48432-2.patch                    | 225 ++++++++++++++++++
+ .../CVE-2025-48432-3.patch                    | 165 +++++++++++++
+ .../CVE-2025-48432-4.patch                    | 193 +++++++++++++++
+ .../CVE-2025-48432-5.patch                    |  76 ++++++
+ .../CVE-2025-48432-6.patch                    | 167 +++++++++++++
+ .../CVE-2025-57833.patch                      |  83 +++++++
+ .../CVE-2025-59681.patch                      | 174 ++++++++++++++
+ .../CVE-2025-59682.patch                      |  72 ++++++
+ ...ntroduced-when-fixing-CVE-2025-26699.patch | 102 ++++++++
+ .../python/python3-django_4.2.18.bb           |  14 --
+ .../python/python3-django_4.2.20.bb           |  28 +++
+ ...ngo_5.0.11.bb => python3-django_5.0.14.bb} |   2 +-
+ 14 files changed, 1538 insertions(+), 15 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-32873.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-48432-1.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-48432-2.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-48432-3.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-48432-4.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-48432-5.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-48432-6.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-57833.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-59681.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-59682.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/fix-regression-introduced-when-fixing-CVE-2025-26699.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-django_4.2.18.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-django_4.2.20.bb
+ rename meta-python/recipes-devtools/python/{python3-django_5.0.11.bb => python3-django_5.0.14.bb} (56%)
 
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb b/meta-oe/re=
-cipes-benchmark/iperf3/iperf3_3.18.bb
-index 91d266a2d5..a8c74c1b45 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.18.bb
-@@ -22,6 +22,7 @@ SRC_URI =3D "git://github.com/esnet/iperf.git;branch=3D=
-master;protocol=3Dhttps \
-=20
- SRCREV =3D "2a2984488d6de8f7a2d1f5938e03ca7be57e227c"
-=20
-+RDEPENDS:${PN} =3D "libgcc"
-=20
- inherit autotools
-=20
 
