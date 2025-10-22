@@ -2,185 +2,181 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94834CCD1BE
-	for <webhook@archiver.kernel.org>; Wed, 22 Oct 2025 23:27:17 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web10.8321.1761175636828911251
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 890B0CCD1AB
+	for <webhook@archiver.kernel.org>; Wed, 22 Oct 2025 23:27:27 +0000 (UTC)
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+ by mx.groups.io with SMTP id smtpd.web10.8326.1761175641912408270
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Oct 2025 16:27:16 -0700
+ Wed, 22 Oct 2025 16:27:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SzGqaXDI;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-b6ce696c18bso115143a12.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 16:27:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Iq9K5OGC;
+ spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-b67684e2904so89480a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 16:27:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761175636; x=1761780436; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1761175641; x=1761780441; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=f5vU6Yq39HmNeo1b0ZZY0rUj7ENO7+WY0pON3c/LQY4=;
-        b=SzGqaXDI3KRxM5m9wv5dR8hul+jDgTkaGorhXRQmtlgCJo58SIjTljtGPWbw/qdnam
-         Nm9Myjru9w26lus5NRroNNO1CJCGuETjiMf3CveYc4xw5bQKwAKzj2UfZLDz07Ehk1fO
-         UTqmiUcAejYuh6rD7W1yxqqpoJwjNvlg/Mx5/hYACouBUn9ngtN2w89qLLYDcGGclDcM
-         BfmF4zc5HjaZnEZLuv5UC7tO1x6SSSCMlGR6qIAZnXdHPP4xfCc+vMI1PmIRSDA5AUjc
-         v7L9x/znEHEykV7sYm/TFZrrn8m/gzQ1sJkl1wkXWQ2z1/cLn/cOvogbBDWV88PvbEr8
-         ooVA==
+        bh=h8H0hptqct0wZayQZNSWDST1n6Tgg1mMVL78YDJKVTg=;
+        b=Iq9K5OGCqlWIqvi/WBrT0EzfIX/aijxyz7+fc09ZqxLmTL5BHSTX6eimAHilbwccDE
+         GRrQvHWVZgDanrRc/Kcrqx08MDPnkgjoPrQoU8iiqS3Ueh/kvECSob91ja8GWhDT9FWu
+         FGkACxSlduhSkUKjoZ3jTK+B0D+XnCfj1NCnV+4dRFCRB1/+KOrS0mxYYYpgkRSeVQ3b
+         R+mJyVEsbPaVksP11Y5sJJLeiJAVjDuO6GTA0Zt9eA/AbPEiEFrMbdvx+P9kDo7dDNOV
+         BVytetGShOw8CvnawWt7xf/vcnoH/Ag89vqnwgdFrj1Uerp1JSINDW2A6WzoartECdWu
+         EDrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761175636; x=1761780436;
+        d=1e100.net; s=20230601; t=1761175641; x=1761780441;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=f5vU6Yq39HmNeo1b0ZZY0rUj7ENO7+WY0pON3c/LQY4=;
-        b=DI1ncbz0lBRPBGFfMwyyagJAlCoi9lK2upDvUNARkrKWT5koqVoOslewD0ggz4+qM+
-         7oBI6V0EKiFba6z8A6Nrh9C5B9RuU0y+ZE5epUnhZOHJbYPqX+KzbXSyNKeL07CXzMsi
-         WK+n6NiF55vdian2ON3ChI+2ebcg5ydv0xNVZTImwy/RJSeMRPIj5V3f89zdCwo4JXcM
-         RGnDN5PWhaE+DEmj13HzQ958cMRfYM5qbht9irIsGGET66SmROGFxegjIEkM+XT8kmL2
-         dJaz7nEemsza1AMfAYpoqX1Z2XnK++jVKtY2T8SAAakLbeWI+2DwyvI7prsz4V11Yk7z
-         Pqmw==
-X-Gm-Message-State: AOJu0YyVDuILmRHbHpd0f90wQ5MWwKnfkepEwEV1mjGjcYvs8Zxyx5uF
-	5SCx74x09SsTDmqYeFCTM2JPJJ6kioJGiNvOmY2IwEMhl4p9woLATkbK3FgLlA==
-X-Gm-Gg: ASbGncuIH7y/LChMQ3Lrh0vBopvy83iPyrUD3KWRiPetj3A0UfRHPxjr+akFpAcmxwT
-	F+6fhNrrjAxzXuvB13m4eoALhYTUi0dMjNsOQu/VUJdukvJR3Spwv/yjrbnWktIubfPuwfanxtU
-	6LZOh7QYB+zs6fzWfgc/XiRY0I++Pole8NUqFZfbgT38H9inMC0mmjSYmIlh3YWx1pBdaSL+DqK
-	+pjRJfMxPO1IiSjhka2LKRznpgj7GAV8hSK/Dt+OOuggPhDS1c3Q9nI1nmzchIA34L6brFVxRib
-	66E20xZWksHpPeup5NGIrx6Sopx77wkAV7Xn/JilcyMymiCE/JISlYEkhD4W0xshPbeBJdzVgog
-	PR52py+DYRQ8YI264L3Poo1BlPLpRMTSF+8gThEIexIl9wtputlRh1maFKzkAQ6M9pUU7/cfah0
-	csk1FwM/OXWl83pyS8rjzN6hIW
-X-Google-Smtp-Source: AGHT+IE4aQOnEkZGfl2F2IwHXBe4ujkzHY55Wxu2B1uV12U5PIVP+p6paY0T+K7bHCxIIMpixcph3w==
-X-Received: by 2002:a17:902:f691:b0:278:bfae:3244 with SMTP id d9443c01a7336-290cba4382amr286191535ad.54.1761175635931;
-        Wed, 22 Oct 2025 16:27:15 -0700 (PDT)
+        bh=h8H0hptqct0wZayQZNSWDST1n6Tgg1mMVL78YDJKVTg=;
+        b=VwnuvQdYVkfIi8VFESSdbMahLTyBCzq6pzlUm3cXZwaLUxwp9rhpkfVHcQQnV56Bv1
+         4xO40ZddejgH4lgze6MWVIIwIZyZi6dsOhpHBLtkdkNj0GANRiO95MZGk1HnY1yvA9xn
+         DvNxonbUqxBK6LOP4Sd4E2/9GCnxr3x9J8+fxFNPUgqpMsIQbQTcd1a6Yjhl46XwZe+K
+         8Sw+srC2Hexu0MzfDwrEt6k8vWHcNXCpGZFJfUk6LH1eIz5SmPWq+RqTb/hga7fQQxYb
+         CzDmHuXHDSAXpKhn3ifsTNdZF13HQMGg+3izjemuY9ekXqRAtGVTA7+n9yFgbIWXOaLa
+         tgLw==
+X-Gm-Message-State: AOJu0YySJjHIvfJKECXWNHHXzXI1CnQGmxXNrqx8wofiJQXB/RVvj9Va
+	cbhI+Q6LBRKR8G4Av4B6LX+WAIR6VIBnU2SyLP1t6KTlfPVnGa+ADzdJTPmhLg==
+X-Gm-Gg: ASbGnctPvC9Q6uQNIHniaOqdTd8ZuBnsCRPJPzDjcXPRCJw3vNky58XFs1IlUbM50uE
+	51ToqAtz7FGQXDsjYhjgGcy6POq4n0tIh5Y9IjJA6caQVpakGoSuMl7/bVWc28sdAGoSlbSvGcf
+	SXISvWEAYIwtDSTLlWXsqkxjhJWKFPyJz7cGJqaxaBpowlLOL5qAJfqxPoTHzmYNN4+ZnZw0kG/
+	o7M+miN/dIyzcpE5rB4/Hr8fQW/w2XpjTe8XlPAbpGXTQxNJByODgIwjT1FdlVPTLk5Itl5Hasf
+	Lig6SeMfEfbC9EoyfUEE+qFSyvlF7ybVDHL+1gEb/dlKG1pQ4DXK7zkLwl/XsSQZUkBJBSv/RNT
+	N+52eUsuAK0j+XdjXNjgb5cwHYjOCY6rXkTCRTz56h5memTy4fTJOAPxib/3O5KCavSLX/G2rfH
+	r+uV6B1+ARTS7p+ADJ6Aqg//Bm
+X-Google-Smtp-Source: AGHT+IFODNBydVrgYsHLJLBH2xnD34bhREwo59kcZGU0MTAVrc5+DpAft7B4JQ75DKBvtKPV/2RSeg==
+X-Received: by 2002:a17:902:cf0a:b0:291:2b6f:cf64 with SMTP id d9443c01a7336-2912b6fd015mr250031965ad.55.1761175641004;
+        Wed, 22 Oct 2025 16:27:21 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33fb01919aasm331129a91.17.2025.10.22.16.27.14
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33fb01919aasm331129a91.17.2025.10.22.16.27.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Oct 2025 16:27:15 -0700 (PDT)
+        Wed, 22 Oct 2025 16:27:20 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][scarthgap][PATCH v2 3/8] python3-django: patch CVE-2025-32873
-Date: Thu, 23 Oct 2025 12:26:26 +1300
-Message-ID: <20251022232633.1703690-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][scarthgap][PATCH v2 5/8] python3-django: patch CVE-2025-57833
+Date: Thu, 23 Oct 2025 12:26:28 +1300
+Message-ID: <20251022232633.1703690-6-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251022232633.1703690-1-ankur.tyagi85@gmail.com>
 References: <20251022232633.1703690-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 23:27:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120904
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 23:27:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120906
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2025-32873
+Details https://nvd.nist.gov/vuln/detail/CVE-2025-57833
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../CVE-2025-32873.patch                      | 86 +++++++++++++++++++
+ .../CVE-2025-57833.patch                      | 83 +++++++++++++++++++
  .../python/python3-django_4.2.20.bb           |  1 +
- 2 files changed, 87 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-32873.patch
+ 2 files changed, 84 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-57833.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-32873.patch b/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-32873.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-57833.patch b/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-57833.patch
 new file mode 100644
-index 0000000000..cb1e32846a
+index 0000000000..d04589a149
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-32873.patch
-@@ -0,0 +1,86 @@
-+From 3571c537ae0b504cf1326807908682f28aff9613 Mon Sep 17 00:00:00 2001
-+From: Sarah Boyce <42296566+sarahboyce@users.noreply.github.com>
-+Date: Tue, 8 Apr 2025 16:30:17 +0200
-+Subject: [PATCH] CVE-2025-32873
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-57833.patch
+@@ -0,0 +1,83 @@
++From 5826d1b59363e0208ebbd4a59d3b3ef39cfe14d5 Mon Sep 17 00:00:00 2001
++From: Jake Howard <git@theorangeone.net>
++Date: Wed, 13 Aug 2025 14:13:42 +0200
++Subject: [PATCH] [4.2.x] Fixed CVE-2025-57833 -- Protected FilteredRelation
++ against SQL injection in column aliases.
 +
-+[4.2.x] Fixed CVE-2025-32873 -- Mitigated potential DoS in strip_tags().
++Thanks Eyal Gabay (EyalSec) for the report.
 +
-+Thanks to Elias Myllymäki for the report, and Shai Berger and Jake
-+Howard for the reviews.
-+
-+Co-authored-by: Natalia <124304+nessita@users.noreply.github.com>
-+
-+Backport of 9f3419b519799d69f2aba70b9d25abe2e70d03e0 from main.
-+
-+CVE: CVE-2025-32873
-+Upstream-Status: Backport [https://github.com/django/django/commit/9cd8028f3e38dca8e51c1388f474eecbe7d6ca3c]
-+(cherry picked from commit 9cd8028f3e38dca8e51c1388f474eecbe7d6ca3c)
++Backport of 51711717098d3f469f795dfa6bc3758b24f69ef7 from main.
++CVE: CVE-2025-57833
++Upstream-Status: Backport [https://github.com/django/django/commit/31334e6965ad136a5e369993b01721499c5d1a92]
++(cherry picked from commit 31334e6965ad136a5e369993b01721499c5d1a92)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ django/utils/html.py           |  6 ++++++
-+ tests/utils_tests/test_html.py | 15 ++++++++++++++-
-+ 2 files changed, 20 insertions(+), 1 deletion(-)
++ django/db/models/sql/query.py |  1 +
++ tests/annotations/tests.py    | 24 ++++++++++++++++++++++++
++ 2 files changed, 25 insertions(+)
 +
-+diff --git a/django/utils/html.py b/django/utils/html.py
-+index a3a7238cba..84c37d1186 100644
-+--- a/django/utils/html.py
-++++ b/django/utils/html.py
-+@@ -17,6 +17,9 @@ from django.utils.text import normalize_newlines
-+ MAX_URL_LENGTH = 2048
-+ MAX_STRIP_TAGS_DEPTH = 50
++diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
++index e68fd9efb7..5a1b68507b 100644
++--- a/django/db/models/sql/query.py
+++++ b/django/db/models/sql/query.py
++@@ -1620,6 +1620,7 @@ class Query(BaseExpression):
++         return target_clause
 + 
-++# HTML tag that opens but has no closing ">" after 1k+ chars.
-++long_open_tag_without_closing_re = _lazy_re_compile(r"<[a-zA-Z][^>]{1000,}")
++     def add_filtered_relation(self, filtered_relation, alias):
+++        self.check_alias(alias)
++         filtered_relation.alias = alias
++         lookups = dict(get_children_from_q(filtered_relation.condition))
++         relation_lookup_parts, relation_field_parts, _ = self.solve_lookup_type(
++diff --git a/tests/annotations/tests.py b/tests/annotations/tests.py
++index e0cdbf1e0b..a8474abc77 100644
++--- a/tests/annotations/tests.py
+++++ b/tests/annotations/tests.py
++@@ -12,6 +12,7 @@ from django.db.models import (
++     Exists,
++     ExpressionWrapper,
++     F,
+++    FilteredRelation,
++     FloatField,
++     Func,
++     IntegerField,
++@@ -1121,6 +1122,15 @@ class NonAggregateAnnotationTestCase(TestCase):
++         with self.assertRaisesMessage(ValueError, msg):
++             Book.objects.annotate(**{crafted_alias: Value(1)})
++ 
+++    def test_alias_filtered_relation_sql_injection(self):
+++        crafted_alias = """injected_name" from "annotations_book"; --"""
+++        msg = (
+++            "Column aliases cannot contain whitespace characters, quotation marks, "
+++            "semicolons, or SQL comments."
+++        )
+++        with self.assertRaisesMessage(ValueError, msg):
+++            Book.objects.annotate(**{crafted_alias: FilteredRelation("author")})
+++
++     def test_alias_forbidden_chars(self):
++         tests = [
++             'al"ias',
++@@ -1146,6 +1156,11 @@ class NonAggregateAnnotationTestCase(TestCase):
++                 with self.assertRaisesMessage(ValueError, msg):
++                     Book.objects.annotate(**{crafted_alias: Value(1)})
++ 
+++                with self.assertRaisesMessage(ValueError, msg):
+++                    Book.objects.annotate(
+++                        **{crafted_alias: FilteredRelation("authors")}
+++                    )
 ++
 + 
-+ @keep_lazy(SafeString)
-+ def escape(text):
-+@@ -175,6 +178,9 @@ def _strip_once(value):
-+ def strip_tags(value):
-+     """Return the given HTML with all tags stripped."""
-+     value = str(value)
-++    for long_open_tag in long_open_tag_without_closing_re.finditer(value):
-++        if long_open_tag.group().count("<") >= MAX_STRIP_TAGS_DEPTH:
-++            raise SuspiciousOperation
-+     # Note: in typical case this loop executes _strip_once twice (the second
-+     # execution does not remove any more tags).
-+     strip_tags_depth = 0
-+diff --git a/tests/utils_tests/test_html.py b/tests/utils_tests/test_html.py
-+index 579bb2a1e3..25168e2348 100644
-+--- a/tests/utils_tests/test_html.py
-++++ b/tests/utils_tests/test_html.py
-+@@ -115,17 +115,30 @@ class TestUtilsHtml(SimpleTestCase):
-+             ("><!" + ("&" * 16000) + "D", "><!" + ("&" * 16000) + "D"),
-+             ("X<<<<br>br>br>br>X", "XX"),
-+             ("<" * 50 + "a>" * 50, ""),
-++            (">" + "<a" * 500 + "a", ">" + "<a" * 500 + "a"),
-++            ("<a" * 49 + "a" * 951, "<a" * 49 + "a" * 951),
-++            ("<" + "a" * 1_002, "<" + "a" * 1_002),
++ class AliasTests(TestCase):
++     @classmethod
++@@ -1418,3 +1433,12 @@ class AliasTests(TestCase):
 +         )
-+         for value, output in items:
-+             with self.subTest(value=value, output=output):
-+                 self.check_output(strip_tags, value, output)
-+                 self.check_output(strip_tags, lazystr(value), output)
-+ 
-+-    def test_strip_tags_suspicious_operation(self):
-++    def test_strip_tags_suspicious_operation_max_depth(self):
-+         value = "<" * 51 + "a>" * 51, "<a>"
-+         with self.assertRaises(SuspiciousOperation):
-+             strip_tags(value)
-+ 
-++    def test_strip_tags_suspicious_operation_large_open_tags(self):
-++        items = [
-++            ">" + "<a" * 501,
-++            "<a" * 50 + "a" * 950,
-++        ]
-++        for value in items:
-++            with self.subTest(value=value):
-++                with self.assertRaises(SuspiciousOperation):
-++                    strip_tags(value)
++         with self.assertRaisesMessage(ValueError, msg):
++             Book.objects.alias(**{crafted_alias: Value(1)})
 ++
-+     def test_strip_tags_files(self):
-+         # Test with more lengthy content (also catching performance regressions)
-+         for filename in ("strip_tags1.html", "strip_tags2.txt"):
+++    def test_alias_filtered_relation_sql_injection(self):
+++        crafted_alias = """injected_name" from "annotations_book"; --"""
+++        msg = (
+++            "Column aliases cannot contain whitespace characters, quotation marks, "
+++            "semicolons, or SQL comments."
+++        )
+++        with self.assertRaisesMessage(ValueError, msg):
+++            Book.objects.alias(**{crafted_alias: FilteredRelation("authors")})
 diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb b/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
-index 1bb14aeb71..39451dd07e 100644
+index ae99758543..caebfe0e46 100644
 --- a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
 +++ b/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
-@@ -3,6 +3,7 @@ inherit setuptools3
- 
- SRC_URI += " \
-     file://fix-regression-introduced-when-fixing-CVE-2025-26699.patch \
-+    file://CVE-2025-32873.patch \
+@@ -10,6 +10,7 @@ SRC_URI += " \
+     file://CVE-2025-48432-4.patch \
+     file://CVE-2025-48432-5.patch \
+     file://CVE-2025-48432-6.patch \
++    file://CVE-2025-57833.patch \
  "
  
  SRC_URI[sha256sum] = "92bac5b4432a64532abb73b2ac27203f485e40225d2640a7fbef2b62b876e789"
