@@ -1,108 +1,228 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CAD5FCCD1AB
-	for <webhook@archiver.kernel.org>; Wed, 22 Oct 2025 08:38:03 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web11.4201.1761122279634868958
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57053CCD1AB
+	for <webhook@archiver.kernel.org>; Wed, 22 Oct 2025 09:49:04 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.web11.5021.1761126538106442237
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Oct 2025 01:37:59 -0700
+ Wed, 22 Oct 2025 02:48:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Mc93D/28;
- spf=pass (domain: konsulko.com, ip: 209.85.128.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-471131d6121so49891495e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 01:37:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DckMWJ7W;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-46e6a689bd0so62709375e9.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 02:48:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1761122278; x=1761727078; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=209nw+igWDiHlbe1rxpeaFJ/waVCqfYox120xf8vbLk=;
-        b=Mc93D/28z65RaSlvHEPFbfM2vZnXh4XouwdgtygpFYKud/USZF9mrtiZU60/uSweE7
-         gfZI1XUFB74HixiQllNgAFBkorlEu6sAiBOIRda2bj7vZvi+RMtgdj3j/9Kvtk1C+nxv
-         nuIvmYdx1F4j8O3q5EzNRbeFk6H8LFeIfLmds=
+        d=gmail.com; s=20230601; t=1761126536; x=1761731336; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=YcXIY8fm4fWEBnBclim5Lz1VO7T+xdBnzqMNGm4VCxc=;
+        b=DckMWJ7W53uIJl8u2E9FBhE6hvbEmJGPVS0yImrmwKWSAhEGca0UjUGvMlBlDa1T0n
+         PgbNuSmQRiOTzV/tyO6sMo7KElgtUDfcRrTbxv33s05Ix0goxutenZ1BDYJU2zC1e9bM
+         35I0A7CKrZKhHk2s1nDkpnoogI8UBpmLPaPVgipWFFAVy0zeqzFoKjCEVmcc/HeFl8n3
+         95jHCJ6utplHPCV2INOiyaOKZTkn9G/rrWUSLcrNDoKEy7y1xxrhZEgtnCun0axR/1vH
+         jgaOl/OMmzv6RoCjNXYx4yaC4SJeOA0kTWOQx9+39OLchsRr99+g3u9iGGU4CFAgI7zk
+         1kKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761122278; x=1761727078;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=209nw+igWDiHlbe1rxpeaFJ/waVCqfYox120xf8vbLk=;
-        b=b/vzsBonRllZUr4NnsFaRy5d1bjCE6A3jPeyKn+sxIQW+3ow+C9KSve0FYr2IxrWbA
-         4l5rRdBUBZE7bIJujzvg5pp88ZD1dYe5YndXkwsITOCl6ECW8rmUfy01tU0/u76yb9Ig
-         7o4QOZYclytwr2Zn09G2YlvMDcukoMdhL4WyNWm+c9IJJ+MZSod6T29I1En0a5dYi7bs
-         0VG4hXhr39hVsQZ+URTMgAZvX0LvHZiBV81rtPI365+nrpyyWvr+DCjishuz0Z+z2teD
-         IeykVBAR+epbSJFz5FAPHSIUVYv2SDYrFH0vwJcUMY/rVQiihYcM/D+WA8Tib2OU5k2F
-         3QHg==
-X-Gm-Message-State: AOJu0Yx1UcQvqCB28NKNapxe4FyW25Tkmj5EvVAG2gh81VfoDvhMCHgn
-	SuclClCzDwRboKl98US6HIP5etAqJGseDAdt8iT0gKgXTO7HDjEQ+gdQrxlA6ZemBR16cpxba37
-	bkUUa4E4=
-X-Gm-Gg: ASbGncsXy8jlEO0UObRzIuX5E+0aa7ygIX8Npn4NoB40cg2jECPfsgYq39hCxBUnhuc
-	zTgOTxifi6LQ8xZmeeMjwycfYVKWpjDaq4zT6HPqtnBqMgQaxi8CaONFclxf6wNTqedgta1+oXa
-	VUx/WwppnyYI/Qau7ZptnrWccQZsq2P91MGkiRi9Q2fuNKm23Fqh3gUOeJYgQ2LDGjXbxdTji56
-	TeshIYIhisM4f4aliev4NkfhADVQNjHDVCPGVUvbJwtSaJ4Gw3R5cyn4cJGEJVPcqFkUH8T2/dr
-	RJgr9ACaoTA3l9wvRQoAhxAGuG2Q3loPuPRAHTi5ljz7XO7W82x4EphOZL2Ggvz/nBUVuUhJjF+
-	7zLCPDrP5OfsbCCNS6qqD8hnn4U7Piok3+wnZCFLqybOKKoj01iW76ag7mtaEBMkVI22XCORmkr
-	ctc1y0WX6YBDNTag==
-X-Google-Smtp-Source: AGHT+IFO52n0DH8kSc0rfzO2zo9fb/YiIesbKcA/Xzcu7jN9Rnn7eUtOSI+0sJPNy1N+Ps8iHL/TTg==
-X-Received: by 2002:a05:600c:19d4:b0:46e:5100:326e with SMTP id 5b1f17b1804b1-47117901801mr136677555e9.23.1761122277619;
-        Wed, 22 Oct 2025 01:37:57 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-475c427f685sm34121545e9.2.2025.10.22.01.37.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Oct 2025 01:37:57 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH] audiofile: Fix Upstream-Status
-Date: Wed, 22 Oct 2025 11:37:43 +0300
-Message-ID: <20251022083752.4106148-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
+        d=1e100.net; s=20230601; t=1761126536; x=1761731336;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=YcXIY8fm4fWEBnBclim5Lz1VO7T+xdBnzqMNGm4VCxc=;
+        b=foS/Gz/pwUxPnH8LpNPWsjk94TlbFzPA9gvcI6f6C6f5/6ppZPZq5qzt9odew3JSLU
+         qNfCGyTf/qvgesCYuCi/iBO7XL0a8mhtwwoGzpY+YycbPqIs1VrKodjbuJP4EZGXplw0
+         HCc9010aZdRwX/wPbXSRJ2X+GMnWKay+QRzUq2aoFADvtODWMQ8B4sY/G/SH5bAmz/6B
+         NPPaLvY3UdZItb2CY1sx1VLuhtOSnTUN8ZxjQ/znVFmY/vEEFqQnOhM7Ww3CRLowQghd
+         mAHltgs7pEC8kIBRjIm1h0Rriqr+qXQa4J4kFIgXewJPhGr+VgVDNpaWoWuHzSJbq0Ll
+         9oYA==
+X-Forwarded-Encrypted: i=1; AJvYcCWCu7fSsrUoBHUp02+ky/FPUvPDMl1smUoJXcOqc8s9VeGxtuaBZNCwpFQyL+u6XP/C/mu8hw7lIwat+d1fdSAi/H4=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yx9xNPDbzy5YkiC3szhRvj1xbAZ5ZXhtz2AW61OIOKixAZ/UJS5
+	7p0K47CPd96lPXlIVjDdqSpWnzKQzEH8KXazIbj6PgbvXU6EQMPfJXUH
+X-Gm-Gg: ASbGncto0n4MZNUxJyiQWFhCLHNBVpNWV3rRDnF/31BcDCSwTroa5+56mPMZs5MqMP+
+	bpTLgRfAR14R3RBQo+k9M1BUWv1qUbqIbFWSKA4q5HrKCfGVio7JUG50KM8zaRleZ6LLoxUAsO8
+	tkOcUe5zHTZBV2WZAXKb8SnEMTr6lk6lrS7pv6R20WoEP8+JIrhe8MCdjiLth7xad7cYsTSjiyG
+	Wx7Fn+bcX+lSjZBM1qLIBp2pAj1Lok5ALOHOxWiFeSitxd/CaLnb1Mxlp1xwUq7bxz3RrJxz3A7
+	+L4nw67J8x/75ZQ5Kr2pw2MULLS7LY8iyPJwJlKpZaFFDOsqh5YsChQjJinRLRas54Y/YmwUlly
+	ZnH9/dxgt/3wZ0aIK+E/ebJw8qvs23sdc/KXtWYJ+2sXaqhG9bGoB0z38GKFJk6pczsSnMUzjrX
+	S1hpdpImz95vCb2tOoO8Y9m4DaV/Jrbg==
+X-Google-Smtp-Source: AGHT+IFUvxlcU7prJM+d8bb7LsnDB2WUTbEHPX9SeZEMkZSo3zfWSEuuOzOg168f1/oQKf3uUaEB/w==
+X-Received: by 2002:a05:600c:3548:b0:471:131f:85aa with SMTP id 5b1f17b1804b1-471178a74a2mr116095235e9.13.1761126536215;
+        Wed, 22 Oct 2025 02:48:56 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-474949df22csm36306355e9.0.2025.10.22.02.48.55
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 22 Oct 2025 02:48:55 -0700 (PDT)
+Message-ID: <e890a1cc-ce4d-4e65-8327-123db3370b6e@gmail.com>
+Date: Wed, 22 Oct 2025 11:48:54 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=yes
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-python][scarthgap][PATCH 2/8] python3-django: patch
+ CVE-2025-26699
+To: ankur.tyagi85@gmail.com, openembedded-devel@lists.openembedded.org
+References: <20251022061803.887676-1-ankur.tyagi85@gmail.com>
+ <20251022061803.887676-2-ankur.tyagi85@gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20251022061803.887676-2-ankur.tyagi85@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 08:38:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120892
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 09:49:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120893
 
-Fix a minor typo in the patches by replacing "Upstrem-Status" with
-"Upstream-Status". The typo was not triggering a QA Issue because
-there is a second "Upstream-Status" line in each patch.
+The patch looks correct and necessary to me, but I find the commit
+subject and the CVE tag in the patch somewhat misleading. The CVE is
+patched in 4.2.20, this patch is a fix for a regression that was caused
+by the fix, but otherwise not related to the CVE.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../audiofile/files/0001-fix-negative-shift-constants.patch     | 2 +-
- .../audiofile/files/0002-fix-build-on-gcc6.patch                | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+I think the patch should just come as it is, with and explanation of
+what is it, but without referring to it as a CVE fix.
 
-diff --git a/meta-oe/recipes-multimedia/audiofile/files/0001-fix-negative-shift-constants.patch b/meta-oe/recipes-multimedia/audiofile/files/0001-fix-negative-shift-constants.patch
-index 4792a15e86..b4a2398c5a 100644
---- a/meta-oe/recipes-multimedia/audiofile/files/0001-fix-negative-shift-constants.patch
-+++ b/meta-oe/recipes-multimedia/audiofile/files/0001-fix-negative-shift-constants.patch
-@@ -10,7 +10,7 @@ Stolen from [1]
- 
- [1] http://pkgs.fedoraproject.org/cgit/rpms/audiofile.git/tree/audiofile-0.3.6-left-shift-neg.patch
- 
--Upstrem-Status: Pending
-+Upstream-Status: Pending
- 
- Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
- ---
-diff --git a/meta-oe/recipes-multimedia/audiofile/files/0002-fix-build-on-gcc6.patch b/meta-oe/recipes-multimedia/audiofile/files/0002-fix-build-on-gcc6.patch
-index dea8187ccb..1b05ad1d40 100644
---- a/meta-oe/recipes-multimedia/audiofile/files/0002-fix-build-on-gcc6.patch
-+++ b/meta-oe/recipes-multimedia/audiofile/files/0002-fix-build-on-gcc6.patch
-@@ -10,7 +10,7 @@ Stolen from [1]
- 
- [1] http://pkgs.fedoraproject.org/cgit/rpms/audiofile.git/tree/audiofile-0.3.6-narrowing.patch
- 
--Upstrem-Status: Pending
-+Upstream-Status: Pending
- 
- Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
- ---
--- 
-2.47.3
+On 10/22/25 08:17, Ankur Tyagi via lists.openembedded.org wrote:
+> This fixes a regression in Django 4.2.20, introduced when fixing CVE-2025-26699
+>
+> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> ---
+>  .../CVE-2025-26699.patch                      | 102 ++++++++++++++++++
+>  .../python/python3-django_4.2.20.bb           |   4 +
+>  2 files changed, 106 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-26699.patch
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-26699.patch b/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-26699.patch
+> new file mode 100644
+> index 0000000000..54a43b123d
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-26699.patch
+> @@ -0,0 +1,102 @@
+> +From 3407ea136bd619591d259221d8712b72b3f3b9a0 Mon Sep 17 00:00:00 2001
+> +From: Matti Pohjanvirta <matti.pohjanvirta@iki.fi>
+> +Date: Sun, 20 Apr 2025 18:22:51 +0300
+> +Subject: [PATCH] [4.2.x] Fixed #36341 -- Preserved whitespaces in wordwrap
+> + template filter.
+> +
+> +Regression in 55d89e25f4115c5674cdd9b9bcba2bb2bb6d820b.
+> +
+> +This work improves the django.utils.text.wrap() function to ensure that
+> +empty lines and lines with whitespace only are kept instead of being
+> +dropped.
+> +
+> +Thanks Matti Pohjanvirta for the report and fix.
+> +
+> +Co-authored-by: Natalia <124304+nessita@users.noreply.github.com>
+> +
+> +Backport of 1e9db35836d42a3c72f3d1015c2f302eb6fee046 from main.
+> +
+> +CVE: CVE-2025-26699
+> +Upstream-Status: Backport [https://github.com/django/django/commit/e61e3daaf037507211028494d61f24382be31e5a]
+> +(cherry picked from commit e61e3daaf037507211028494d61f24382be31e5a)
+> +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> +---
+> + django/utils/text.py                          | 13 +++++-
+> + .../filter_tests/test_wordwrap.py             | 41 +++++++++++++++++++
+> + 2 files changed, 52 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/django/utils/text.py b/django/utils/text.py
+> +index 81ae88dc76..b018f2601f 100644
+> +--- a/django/utils/text.py
+> ++++ b/django/utils/text.py
+> +@@ -102,10 +102,19 @@ def wrap(text, width):
+> +         width=width,
+> +         break_long_words=False,
+> +         break_on_hyphens=False,
+> ++        replace_whitespace=False,
+> +     )
+> +     result = []
+> +-    for line in text.splitlines(True):
+> +-        result.extend(wrapper.wrap(line))
+> ++    for line in text.splitlines():
+> ++        wrapped = wrapper.wrap(line)
+> ++        if not wrapped:
+> ++            # If `line` contains only whitespaces that are dropped, restore it.
+> ++            result.append(line)
+> ++        else:
+> ++            result.extend(wrapped)
+> ++    if text.endswith("\n"):
+> ++        # If `text` ends with a newline, preserve it.
+> ++        result.append("")
+> +     return "\n".join(result)
+> + 
+> + 
+> +diff --git a/tests/template_tests/filter_tests/test_wordwrap.py b/tests/template_tests/filter_tests/test_wordwrap.py
+> +index 4afa1dd234..1692332e1e 100644
+> +--- a/tests/template_tests/filter_tests/test_wordwrap.py
+> ++++ b/tests/template_tests/filter_tests/test_wordwrap.py
+> +@@ -89,3 +89,44 @@ class FunctionTests(SimpleTestCase):
+> +             "I'm afraid",
+> +             wordwrap(long_text, 10),
+> +         )
+> ++
+> ++    def test_wrap_preserve_newlines(self):
+> ++        cases = [
+> ++            (
+> ++                "this is a long paragraph of text that really needs to be wrapped\n\n"
+> ++                "that is followed by another paragraph separated by an empty line\n",
+> ++                "this is a long paragraph of\ntext that really needs to be\nwrapped\n\n"
+> ++                "that is followed by another\nparagraph separated by an\nempty line\n",
+> ++                30,
+> ++            ),
+> ++            ("\n\n\n", "\n\n\n", 5),
+> ++            ("\n\n\n\n\n\n", "\n\n\n\n\n\n", 5),
+> ++        ]
+> ++        for text, expected, width in cases:
+> ++            with self.subTest(text=text):
+> ++                self.assertEqual(wordwrap(text, width), expected)
+> ++
+> ++    def test_wrap_preserve_whitespace(self):
+> ++        width = 5
+> ++        width_spaces = " " * width
+> ++        cases = [
+> ++            (
+> ++                f"first line\n{width_spaces}\nsecond line",
+> ++                f"first\nline\n{width_spaces}\nsecond\nline",
+> ++            ),
+> ++            (
+> ++                "first line\n \t\t\t \nsecond line",
+> ++                "first\nline\n \t\t\t \nsecond\nline",
+> ++            ),
+> ++            (
+> ++                f"first line\n{width_spaces}\nsecond line\n\nthird{width_spaces}\n",
+> ++                f"first\nline\n{width_spaces}\nsecond\nline\n\nthird\n",
+> ++            ),
+> ++            (
+> ++                f"first line\n{width_spaces}{width_spaces}\nsecond line",
+> ++                f"first\nline\n{width_spaces}{width_spaces}\nsecond\nline",
+> ++            ),
+> ++        ]
+> ++        for text, expected in cases:
+> ++            with self.subTest(text=text):
+> ++                self.assertEqual(wordwrap(text, width), expected)
+> diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb b/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
+> index 3fb8b03224..0b9ff1b8c0 100644
+> --- a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
+> +++ b/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
+> @@ -1,6 +1,10 @@
+>  require python-django.inc
+>  inherit setuptools3
+>  
+> +SRC_URI += " \
+> +    file://CVE-2025-26699.patch \
+> +"
+> +
+>  SRC_URI[sha256sum] = "92bac5b4432a64532abb73b2ac27203f485e40225d2640a7fbef2b62b876e789"
+>  
+>  RDEPENDS:${PN} += "\
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#120885): https://lists.openembedded.org/g/openembedded-devel/message/120885
+> Mute This Topic: https://lists.openembedded.org/mt/115888203/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
