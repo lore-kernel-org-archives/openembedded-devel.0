@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 890B0CCD1AB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CFC8CCF9E4
 	for <webhook@archiver.kernel.org>; Wed, 22 Oct 2025 23:27:27 +0000 (UTC)
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.web10.8326.1761175641912408270
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.web11.8329.1761175646287303413
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Oct 2025 16:27:21 -0700
+ Wed, 22 Oct 2025 16:27:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Iq9K5OGC;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-b67684e2904so89480a12.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 16:27:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HOnMXIz2;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-339d53f4960so208567a91.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 16:27:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761175641; x=1761780441; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1761175645; x=1761780445; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=h8H0hptqct0wZayQZNSWDST1n6Tgg1mMVL78YDJKVTg=;
-        b=Iq9K5OGCqlWIqvi/WBrT0EzfIX/aijxyz7+fc09ZqxLmTL5BHSTX6eimAHilbwccDE
-         GRrQvHWVZgDanrRc/Kcrqx08MDPnkgjoPrQoU8iiqS3Ueh/kvECSob91ja8GWhDT9FWu
-         FGkACxSlduhSkUKjoZ3jTK+B0D+XnCfj1NCnV+4dRFCRB1/+KOrS0mxYYYpgkRSeVQ3b
-         R+mJyVEsbPaVksP11Y5sJJLeiJAVjDuO6GTA0Zt9eA/AbPEiEFrMbdvx+P9kDo7dDNOV
-         BVytetGShOw8CvnawWt7xf/vcnoH/Ag89vqnwgdFrj1Uerp1JSINDW2A6WzoartECdWu
-         EDrA==
+        bh=5+F0TJGPYV4zpXwU3bfCeAqJ9AtMqfu9WqyZC/oWZOE=;
+        b=HOnMXIz21zgJ+HpGtbtez+Az9fyPfTyrWd3lYzCS+gVFV8V/Jo7Bq9reG78zgWT9d5
+         OW+dPsUwGdVR1r+OlEr2IHkP8Bi8aIgXI3HlnmnacnbT2azwm+VbhziZkZzhjPSeVplP
+         Q9GGjq9K/oXchtUdcv1bW8NL5OC8Miio9pQkxOjaXTUG26orF8F5RIWR2hnUkWHrmPzB
+         l8+lYt0vZGt/MjC2BfqqXxKN/HcAlVnm9uVZhHtTa+/wJMYUhwDuyhEb9c6PVh6DuzOt
+         UdTza/gyRC2CYoQLhy1H+XAKERsOHjMp7SvPD9EcTmHufmL8IshOEH0dMMatuxrWXxid
+         AoLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761175641; x=1761780441;
+        d=1e100.net; s=20230601; t=1761175645; x=1761780445;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=h8H0hptqct0wZayQZNSWDST1n6Tgg1mMVL78YDJKVTg=;
-        b=VwnuvQdYVkfIi8VFESSdbMahLTyBCzq6pzlUm3cXZwaLUxwp9rhpkfVHcQQnV56Bv1
-         4xO40ZddejgH4lgze6MWVIIwIZyZi6dsOhpHBLtkdkNj0GANRiO95MZGk1HnY1yvA9xn
-         DvNxonbUqxBK6LOP4Sd4E2/9GCnxr3x9J8+fxFNPUgqpMsIQbQTcd1a6Yjhl46XwZe+K
-         8Sw+srC2Hexu0MzfDwrEt6k8vWHcNXCpGZFJfUk6LH1eIz5SmPWq+RqTb/hga7fQQxYb
-         CzDmHuXHDSAXpKhn3ifsTNdZF13HQMGg+3izjemuY9ekXqRAtGVTA7+n9yFgbIWXOaLa
-         tgLw==
-X-Gm-Message-State: AOJu0YySJjHIvfJKECXWNHHXzXI1CnQGmxXNrqx8wofiJQXB/RVvj9Va
-	cbhI+Q6LBRKR8G4Av4B6LX+WAIR6VIBnU2SyLP1t6KTlfPVnGa+ADzdJTPmhLg==
-X-Gm-Gg: ASbGnctPvC9Q6uQNIHniaOqdTd8ZuBnsCRPJPzDjcXPRCJw3vNky58XFs1IlUbM50uE
-	51ToqAtz7FGQXDsjYhjgGcy6POq4n0tIh5Y9IjJA6caQVpakGoSuMl7/bVWc28sdAGoSlbSvGcf
-	SXISvWEAYIwtDSTLlWXsqkxjhJWKFPyJz7cGJqaxaBpowlLOL5qAJfqxPoTHzmYNN4+ZnZw0kG/
-	o7M+miN/dIyzcpE5rB4/Hr8fQW/w2XpjTe8XlPAbpGXTQxNJByODgIwjT1FdlVPTLk5Itl5Hasf
-	Lig6SeMfEfbC9EoyfUEE+qFSyvlF7ybVDHL+1gEb/dlKG1pQ4DXK7zkLwl/XsSQZUkBJBSv/RNT
-	N+52eUsuAK0j+XdjXNjgb5cwHYjOCY6rXkTCRTz56h5memTy4fTJOAPxib/3O5KCavSLX/G2rfH
-	r+uV6B1+ARTS7p+ADJ6Aqg//Bm
-X-Google-Smtp-Source: AGHT+IFODNBydVrgYsHLJLBH2xnD34bhREwo59kcZGU0MTAVrc5+DpAft7B4JQ75DKBvtKPV/2RSeg==
-X-Received: by 2002:a17:902:cf0a:b0:291:2b6f:cf64 with SMTP id d9443c01a7336-2912b6fd015mr250031965ad.55.1761175641004;
-        Wed, 22 Oct 2025 16:27:21 -0700 (PDT)
+        bh=5+F0TJGPYV4zpXwU3bfCeAqJ9AtMqfu9WqyZC/oWZOE=;
+        b=UXTrdgJFjlCkDExlonLchg2vS2YgUmcOaX1kCUp20LxieBA1Z0dSXluelufOMe7udE
+         eGMqifZucJ/ppM8hB/ZpwDm9anEoxF1JzDW/Y8KK/KrSF+GwnuokCHkhWGpRhkF3HCQd
+         tVrIdgXAKjoyBeRZcyAqvTiIN0WW+W6ky9HbAHUzveU7LV4n2PyEX93gwcSwXob8ljyR
+         +UNIGKcnQkb2XZcgRKqkusNIO+7My0GvXb7uuxw2CGe+QPQ+vxGcFZqzH51Y13z9FR2R
+         1m3Fn7hC2mPkLNxVbAPaadzGZ8Hc+dfdCtCYlwVflRR53Rlj5XS3Wkq9b9XDHnslhNGp
+         LdYw==
+X-Gm-Message-State: AOJu0YxyeOU1adBCdNs//vko2VuAgQyPeXxoBsl9B7O9AVn8af9kVVTX
+	ZJOAGBTHotJ9ivk0eJF2pOEi0jCkVpi6zq6Aj22emVA2yWL6cgixBbebKOipUA==
+X-Gm-Gg: ASbGncteVftMsW/lcGRx34K6qD3dzRaWrpBNcqPB4/ua2Mxl0bLRRZvlwAD6t2yJ/Hy
+	PCLlX5EKx5L/w8ak0sjXMZ99kZMR7AhWSz9XUgAleVNQRtLXwBfIRAG81NE2Z7b/IM5pEsIRqhI
+	NW2w8nh3KGv+33M8WapLBWdu5u0KpTwwtcCw9reaOBqYzn2BHVxFV/+cFNbRwFcvGS3rCrVZlOV
+	E3RvMX0Vs1it55Ga5DzvaT6NjJgRYCYjFABv/4LgtbB15r9WRtFZNrW1mn9b0jR6ghIFiMZgOgR
+	pfe6GkGUX0UGAOZNsKgDKtNdyWseEItCDK9LxRzAtxJhTigDaEuTnk9izOWpzYLAsa23JMQFY0D
+	nTTBFHvSr+1DCt1h8lLDZ0h8lMQA3FJorWIdAgvi6srxKM493XddvsXJK1Nyd8KdtztNnsEZcSG
+	mRGHua30CJzLGdLb+Kq/B5PiI8
+X-Google-Smtp-Source: AGHT+IHj5/+to5JgA0dZRybJ8aPc0ShEQydvfwZUjbJxs3be2YdFd8vl2HBN0O9n5evC9a1aJC6PJQ==
+X-Received: by 2002:a17:90b:3d8a:b0:330:6f16:c4e0 with SMTP id 98e67ed59e1d1-33bcf87f43dmr33021156a91.12.1761175645485;
+        Wed, 22 Oct 2025 16:27:25 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33fb01919aasm331129a91.17.2025.10.22.16.27.19
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33fb01919aasm331129a91.17.2025.10.22.16.27.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Oct 2025 16:27:20 -0700 (PDT)
+        Wed, 22 Oct 2025 16:27:25 -0700 (PDT)
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][scarthgap][PATCH v2 5/8] python3-django: patch CVE-2025-57833
-Date: Thu, 23 Oct 2025 12:26:28 +1300
-Message-ID: <20251022232633.1703690-6-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][scarthgap][PATCH v2 7/8] python3-django: patch CVE-2025-59682
+Date: Thu, 23 Oct 2025 12:26:30 +1300
+Message-ID: <20251022232633.1703690-8-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251022232633.1703690-1-ankur.tyagi85@gmail.com>
 References: <20251022232633.1703690-1-ankur.tyagi85@gmail.com>
@@ -68,115 +68,104 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 22 Oct 2025 23:27:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120906
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120908
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2025-57833
+Details https://nvd.nist.gov/vuln/detail/CVE-2025-59682
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../CVE-2025-57833.patch                      | 83 +++++++++++++++++++
+ .../CVE-2025-59682.patch                      | 72 +++++++++++++++++++
  .../python/python3-django_4.2.20.bb           |  1 +
- 2 files changed, 84 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-57833.patch
+ 2 files changed, 73 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-59682.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-57833.patch b/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-57833.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-59682.patch b/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-59682.patch
 new file mode 100644
-index 0000000000..d04589a149
+index 0000000000..72f566a0e1
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-57833.patch
-@@ -0,0 +1,83 @@
-+From 5826d1b59363e0208ebbd4a59d3b3ef39cfe14d5 Mon Sep 17 00:00:00 2001
-+From: Jake Howard <git@theorangeone.net>
-+Date: Wed, 13 Aug 2025 14:13:42 +0200
-+Subject: [PATCH] [4.2.x] Fixed CVE-2025-57833 -- Protected FilteredRelation
-+ against SQL injection in column aliases.
++++ b/meta-python/recipes-devtools/python/python3-django-4.2.20/CVE-2025-59682.patch
+@@ -0,0 +1,72 @@
++From c757b620cd8099d17e202c0f5582bbab5564056c Mon Sep 17 00:00:00 2001
++From: Sarah Boyce <42296566+sarahboyce@users.noreply.github.com>
++Date: Tue, 16 Sep 2025 17:13:36 +0200
++Subject: [PATCH] [4.2.x] Fixed CVE-2025-59682 -- Fixed potential partial
++ directory-traversal via archive.extract().
 +
-+Thanks Eyal Gabay (EyalSec) for the report.
++Thanks stackered for the report.
 +
-+Backport of 51711717098d3f469f795dfa6bc3758b24f69ef7 from main.
-+CVE: CVE-2025-57833
-+Upstream-Status: Backport [https://github.com/django/django/commit/31334e6965ad136a5e369993b01721499c5d1a92]
-+(cherry picked from commit 31334e6965ad136a5e369993b01721499c5d1a92)
++Follow up to 05413afa8c18cdb978fcdf470e09f7a12b234a23.
++
++Backport of 924a0c092e65fa2d0953fd1855d2dc8786d94de2 from main.
++
++CVE: CVE-2025-59682
++Upstream-Status: Backport [https://github.com/django/django/commit/9504bbaa392c9fe37eee9291f5b4c29eb6037619]
++(cherry picked from commit 9504bbaa392c9fe37eee9291f5b4c29eb6037619)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ django/db/models/sql/query.py |  1 +
-+ tests/annotations/tests.py    | 24 ++++++++++++++++++++++++
-+ 2 files changed, 25 insertions(+)
++ django/utils/archive.py           |  6 +++++-
++ tests/utils_tests/test_archive.py | 19 +++++++++++++++++++
++ 2 files changed, 24 insertions(+), 1 deletion(-)
 +
-+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
-+index e68fd9efb7..5a1b68507b 100644
-+--- a/django/db/models/sql/query.py
-++++ b/django/db/models/sql/query.py
-+@@ -1620,6 +1620,7 @@ class Query(BaseExpression):
-+         return target_clause
++diff --git a/django/utils/archive.py b/django/utils/archive.py
++index 71ec2d0015..e8af690e27 100644
++--- a/django/utils/archive.py
+++++ b/django/utils/archive.py
++@@ -144,7 +144,11 @@ class BaseArchive:
++     def target_filename(self, to_path, name):
++         target_path = os.path.abspath(to_path)
++         filename = os.path.abspath(os.path.join(target_path, name))
++-        if not filename.startswith(target_path):
+++        try:
+++            if os.path.commonpath([target_path, filename]) != target_path:
+++                raise SuspiciousOperation("Archive contains invalid path: '%s'" % name)
+++        except ValueError:
+++            # Different drives on Windows raises ValueError.
++             raise SuspiciousOperation("Archive contains invalid path: '%s'" % name)
++         return filename
 + 
-+     def add_filtered_relation(self, filtered_relation, alias):
-++        self.check_alias(alias)
-+         filtered_relation.alias = alias
-+         lookups = dict(get_children_from_q(filtered_relation.condition))
-+         relation_lookup_parts, relation_field_parts, _ = self.solve_lookup_type(
-+diff --git a/tests/annotations/tests.py b/tests/annotations/tests.py
-+index e0cdbf1e0b..a8474abc77 100644
-+--- a/tests/annotations/tests.py
-++++ b/tests/annotations/tests.py
-+@@ -12,6 +12,7 @@ from django.db.models import (
-+     Exists,
-+     ExpressionWrapper,
-+     F,
-++    FilteredRelation,
-+     FloatField,
-+     Func,
-+     IntegerField,
-+@@ -1121,6 +1122,15 @@ class NonAggregateAnnotationTestCase(TestCase):
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Book.objects.annotate(**{crafted_alias: Value(1)})
++diff --git a/tests/utils_tests/test_archive.py b/tests/utils_tests/test_archive.py
++index 8cd107063f..8063dafb65 100644
++--- a/tests/utils_tests/test_archive.py
+++++ b/tests/utils_tests/test_archive.py
++@@ -3,6 +3,7 @@ import stat
++ import sys
++ import tempfile
++ import unittest
+++import zipfile
 + 
-++    def test_alias_filtered_relation_sql_injection(self):
-++        crafted_alias = """injected_name" from "annotations_book"; --"""
-++        msg = (
-++            "Column aliases cannot contain whitespace characters, quotation marks, "
-++            "semicolons, or SQL comments."
-++        )
-++        with self.assertRaisesMessage(ValueError, msg):
-++            Book.objects.annotate(**{crafted_alias: FilteredRelation("author")})
++ from django.core.exceptions import SuspiciousOperation
++ from django.test import SimpleTestCase
++@@ -96,3 +97,21 @@ class TestArchiveInvalid(SimpleTestCase):
++             with self.subTest(entry), tempfile.TemporaryDirectory() as tmpdir:
++                 with self.assertRaisesMessage(SuspiciousOperation, msg % invalid_path):
++                     archive.extract(os.path.join(archives_dir, entry), tmpdir)
 ++
-+     def test_alias_forbidden_chars(self):
-+         tests = [
-+             'al"ias',
-+@@ -1146,6 +1156,11 @@ class NonAggregateAnnotationTestCase(TestCase):
-+                 with self.assertRaisesMessage(ValueError, msg):
-+                     Book.objects.annotate(**{crafted_alias: Value(1)})
-+ 
-++                with self.assertRaisesMessage(ValueError, msg):
-++                    Book.objects.annotate(
-++                        **{crafted_alias: FilteredRelation("authors")}
-++                    )
+++    def test_extract_function_traversal_startswith(self):
+++        with tempfile.TemporaryDirectory() as tmpdir:
+++            base = os.path.abspath(tmpdir)
+++            tarfile_handle = tempfile.NamedTemporaryFile(suffix=".zip", delete=False)
+++            tar_path = tarfile_handle.name
+++            tarfile_handle.close()
+++            self.addCleanup(os.remove, tar_path)
 ++
-+ 
-+ class AliasTests(TestCase):
-+     @classmethod
-+@@ -1418,3 +1433,12 @@ class AliasTests(TestCase):
-+         )
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Book.objects.alias(**{crafted_alias: Value(1)})
+++            malicious_member = os.path.join(base + "abc", "evil.txt")
+++            with zipfile.ZipFile(tar_path, "w") as zf:
+++                zf.writestr(malicious_member, "evil\n")
+++                zf.writestr("test.txt", "data\n")
 ++
-++    def test_alias_filtered_relation_sql_injection(self):
-++        crafted_alias = """injected_name" from "annotations_book"; --"""
-++        msg = (
-++            "Column aliases cannot contain whitespace characters, quotation marks, "
-++            "semicolons, or SQL comments."
-++        )
-++        with self.assertRaisesMessage(ValueError, msg):
-++            Book.objects.alias(**{crafted_alias: FilteredRelation("authors")})
+++            with self.assertRaisesMessage(
+++                SuspiciousOperation, "Archive contains invalid path"
+++            ):
+++                archive.extract(tar_path, base)
 diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb b/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
-index ae99758543..caebfe0e46 100644
+index 443b4dbbfc..964b982fda 100644
 --- a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
 +++ b/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
-@@ -10,6 +10,7 @@ SRC_URI += " \
-     file://CVE-2025-48432-4.patch \
-     file://CVE-2025-48432-5.patch \
+@@ -12,6 +12,7 @@ SRC_URI += " \
      file://CVE-2025-48432-6.patch \
-+    file://CVE-2025-57833.patch \
+     file://CVE-2025-57833.patch \
+     file://CVE-2025-59681.patch \
++    file://CVE-2025-59682.patch \
  "
  
  SRC_URI[sha256sum] = "92bac5b4432a64532abb73b2ac27203f485e40225d2640a7fbef2b62b876e789"
