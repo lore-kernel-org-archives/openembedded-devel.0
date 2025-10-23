@@ -1,231 +1,176 @@
-Return-Path: <m.schwan@phytec.de>
+Return-Path: <Sana.Kazi@bmwtechworks.in>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B979CCF9E9
-	for <webhook@archiver.kernel.org>; Thu, 23 Oct 2025 09:47:11 +0000 (UTC)
-Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.72])
- by mx.groups.io with SMTP id smtpd.web10.16329.1761212821093965476
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC8C2CCD1BC
+	for <webhook@archiver.kernel.org>; Thu, 23 Oct 2025 09:52:51 +0000 (UTC)
+Received: from MA0PR01CU009.outbound.protection.outlook.com (MA0PR01CU009.outbound.protection.outlook.com [52.101.227.124])
+ by mx.groups.io with SMTP id smtpd.web11.16528.1761213165015255768
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Oct 2025 02:47:01 -0700
+ Thu, 23 Oct 2025 02:52:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@phytec.de header.s=selector2 header.b=IcfnV3GZ;
- spf=pass (domain: phytec.de, ip: 52.101.66.72, mailfrom: m.schwan@phytec.de)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@bmwtechworks.in header.s=selector1 header.b=tx2IA1mg;
+ spf=pass (domain: bmwtechworks.in, ip: 52.101.227.124, mailfrom: sana.kazi@bmwtechworks.in)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MDgxmGf4C/oqgSxhUTrHIRMHzDlIpF6O7Hn9W3VATIPcWPedlv5QnOmegK4FSc0MlJPqvZAkY6OXyj2w3FVkuuZWcJCE9oBDPmRPvik6lO13KTeOf+7PLyBzkCsSVETlCXWXljpfw+FoyKVeYbft/nRmhJJ1QDI3xU07e3EvMp/AvTQJaeEEUFofA2YxU4uxt3sv7+siJpAOwTygnRhmz/ufnS3cDxk22SJL8cwv8QCbaHMMlQ9qw+BtYuePlvHwcVf/97cOEcbRSpAKNzk45M/Jpzp7kU5bP5W8pFK0owVHUGcgRLkWbDJYMlAcNVzlFoN1L2MI6ayjzihbV5PU3w==
+ b=nPAaSZX40wMxXdDyrWmYlqWuWktK5WPTnRTFt8mpYoQ3TP8Ph8p1KEfRwKrIAbnrtszsdQNntItC60rFduGQqL//GjhlngZThz24pNVtg7QTvTXsHTNyKwhFhUkhCZy1/63J9vBeB4twSHf+z6MSl+Ppikb/tvZuziYzNSQRjexiQOgsNo5wzC3EKvx9FNe3M7aLCmVrMhRCLAt08bsLE0k8XSc0H/tITVh/LA8e0WGUOYCI32EZxMi0SNtieA+HAOVls+DBn2i/07w8qm6qpPVVSmO4dvotWV7xGFATCi9ziHmsUo2Q+EZgUY3mR3IpxrvBDcSrp+5GOkB6/zlmVw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8U3w8TKvGitKa3ukygCZc0scpogyAYdsy4/iHZXor9U=;
- b=LELv8HLmzKrBTjKe0o27harxNKstVkjWZbIpYqS4XJpzuK+pnUS68jjepZCf8uA/HYu38k0RwS5PkQIUgJES/zwBKnOw6wddj2+l4qrT57cgjSHDS+6Y0GQJisjQ+krnXmds9w2HZRFJnqiPqK347SX3PjAR/puix5NnTowzYFy7SEpgb3xCb1mrZCohGLBgUoUAsb4wkpGbIz6EtSQ4Muj6q458kr/87Aw1gQtQpBYh2xGuBIsb7tDgHeXhBhvBakT2J7gYQJ8YOWwCcx2k9ldc7MCT3lyyKBH8kScEGkC2qRb9XHIzBasXZn/fdYqdsHqJzXxTCc4De0Y8KLNgBw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=fujitsu.com smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de;
- s=selector2;
+ bh=udxpTuHeBrrVRh3X7N+Qq/+KeCZKDysyAKyNQZ/eXaI=;
+ b=TkhkZob/CrK2L9NlpLL1JnbmnBcJGyBnwWjJkcWQnFnECVsfaaDF1+l2uq6WKLdRJSV41olGQHVoFpw2Zg4yuy+K0Z/+TNcc7j+wD23/uMDVvM/EOsETQ2EVPCgiBBf+gL7Ytp/BYZkRk4W+u7T3GfZ4qXXXz42AywsS+J9sUAeWvQYNizBGMC2imoU5GnAWNz6T5IGy4NVPrvTkcGF/ONvyg+JUCZXdYeje0wT4Yoezb9Al8yzK5En8pyN1utNE23ku9FLrnaRC7YHM+WZEM6R3/tmna6NBhDeLRT8aqoyWnWidaO3uVhXdvJ8oafIPt27Xu9dp7a+9M3ACeg6fiA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bmwtechworks.in; dmarc=pass action=none
+ header.from=bmwtechworks.in; dkim=pass header.d=bmwtechworks.in; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmwtechworks.in;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8U3w8TKvGitKa3ukygCZc0scpogyAYdsy4/iHZXor9U=;
- b=IcfnV3GZdfOs2tEbUmLIsjsAkIY3UIyIxULjc1OXQMZVCNPX3hsdVoAykh2NZt2UZtqD89rMeqZ2ZnPswvwBElFEo1c9Yibc3P9L9eZDX+7tgrH0ztQzS6IjXJ9MAobJAnNSiN5GcBUmwGjSg6U9yG71SK5GXr0j3vYF5i3qRLWo9Exl/2yUsVhBYoVjvK1G4OQbqQqlM3Ho5z/UAfl4/eu+SaQk+C/ekeSHht8AL+XmioBXPhZqrFx3C5rSM8ySIpNf+wXdReHa0DFblVjHNPLKK0A52I5AidjTFgzQkyO9/3EVEO1ce60a3JY18aYXzt7pelfm6Bt/QraBTxIjng==
-Received: from DUZPR01CA0048.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:469::17) by DU0P195MB1651.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:10:3a4::17) with Microsoft SMTP Server (version=TLS1_2,
+ bh=udxpTuHeBrrVRh3X7N+Qq/+KeCZKDysyAKyNQZ/eXaI=;
+ b=tx2IA1mgO5r7vYXLd/Pb4pffPmj3+DU33ffiBpcND/viD/UOZjdvlMkmcREix/tnhtRAy+QPCsfHaAK8NezEV86Y7TI/DeZNAFkaJiTDmj4iuguaZKl4E2MwXd+asygIvprhKPWAU464LCptQasz85mIJKPNQM2/8noXJAAOAg4IcFuwzq9ki1vgeQqAgpvQbVHMf1BeKGM9mTWm7xVJkPxUYpY65QdOpBZy7pw74m7BgobwyjVGDsIoKtu8ZjkQdtJ5EP9xUZM76fYXN5axblFXfq2CntN8jUG/XoGsUaXx15ahnQ1rr89B7XqRKdl2zUriZtH3n6eo/7hxnIJDSA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bmwtechworks.in;
+Received: from MA5P287MB4602.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:19a::20)
+ by PN3P287MB1800.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:19b::9) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.13; Thu, 23 Oct
- 2025 09:46:58 +0000
-Received: from DB1PEPF000509FA.eurprd03.prod.outlook.com
- (2603:10a6:10:469:cafe::a0) by DUZPR01CA0048.outlook.office365.com
- (2603:10a6:10:469::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9253.13 via Frontend Transport; Thu,
- 23 Oct 2025 09:47:54 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de; dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Postix.phytec.de (91.26.50.189) by
- DB1PEPF000509FA.mail.protection.outlook.com (10.167.242.36) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9253.7 via Frontend Transport; Thu, 23 Oct 2025 09:46:58 +0000
-Received: from augenblix2.phytec.de (172.25.0.51) by Postix.phytec.de
- (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 23 Oct
- 2025 11:46:55 +0200
-From: Martin Schwan <m.schwan@phytec.de>
-Date: Thu, 23 Oct 2025 11:46:36 +0200
-Subject: [PATCH 8/8] thingsboard-gateway: Update systemd service
+ 2025 09:52:37 +0000
+Received: from MA5P287MB4602.INDP287.PROD.OUTLOOK.COM
+ ([fe80::478b:23ae:5e3b:de95]) by MA5P287MB4602.INDP287.PROD.OUTLOOK.COM
+ ([fe80::478b:23ae:5e3b:de95%7]) with mapi id 15.20.9253.011; Thu, 23 Oct 2025
+ 09:52:36 +0000
+From: Sana Kazi <Sana.Kazi@bmwtechworks.in>
+To: openembedded-devel@lists.openembedded.org,
+	sana.kazi@bmwtechworks.in
+Subject: [meta-oe][scarthgap][PATCHv2] cryptsetup: Update the license field
+Date: Thu, 23 Oct 2025 15:22:27 +0530
+Message-ID: <20251023095227.3125258-1-Sana.Kazi@bmwtechworks.in>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-ClientProxiedBy: PN2PR01CA0220.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:ea::18) To MA5P287MB4602.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a01:19a::20)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20251023-wip-thingsboard-gateway-master-v1-8-570de0ecafb2@phytec.de>
-References: <20251023-wip-thingsboard-gateway-master-v1-0-570de0ecafb2@phytec.de>
-In-Reply-To: <20251023-wip-thingsboard-gateway-master-v1-0-570de0ecafb2@phytec.de>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@fujitsu.com>, Khem Raj <raj.khem@gmail.com>,
-	<upstream@lists.phytec.de>, Martin Schwan <m.schwan@phytec.de>
-X-Mailer: b4 0.14.2
-X-Originating-IP: [172.25.0.51]
-X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
- (172.25.0.11)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509FA:EE_|DU0P195MB1651:EE_
-X-MS-Office365-Filtering-Correlation-Id: 45a27d81-825d-4d2a-b74a-08de12191c05
+X-MS-TrafficTypeDiagnostic: MA5P287MB4602:EE_|PN3P287MB1800:EE_
+X-MS-Office365-Filtering-Correlation-Id: 71cd1edc-2b96-4c5e-d544-08de1219e527
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|36860700013|82310400026|376014;
+	BCL:0;ARA:13230040|1800799024|376014|52116014|366016|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?VHhsS1g5L1R2QXQxY2Ztc3VJcWJITmdCMWMyRjE3Y3BtUU5uc3hQOUFSb3RZ?=
- =?utf-8?B?VW11MDN1Q25pYTJvcE5GN3AvWkhEL2s4RExtdGRvRERDY05LQWMvNWJ2SnBk?=
- =?utf-8?B?aFU2aWRTMTYxcmdhWSt6amx6b0xXY3hGNCs1TzFQaVNvNXRqVGNoUUVLb3F6?=
- =?utf-8?B?TEUzdmN1S3NieTErZkFWUFhPU1RtbDN5NXBWRTFON2F1Z3ZGM2dGNWRmK0I1?=
- =?utf-8?B?eThtK2Q2TkNyRzBCQ3FLT2kwZ1Nld0Z2b2Zwck9zWVZBdkRBU2k1QXNTRGNm?=
- =?utf-8?B?NlRKckl6Y2s2dzAxck5KNVN3d1FuZUQrL25rMVZtRVZ1YW1pT1NCRXFpa0Rz?=
- =?utf-8?B?V3ZuVXJQMktBQll0bnZqQnZjZzRqRHo2bVNva3RnNUpEL2pzT1d6WFBMd3k4?=
- =?utf-8?B?dkFuVzloMEFKdUpLeXNMR3Q4TTFXVzhINjFlK2xsZFVBNE4xa0g5ekVTTU9v?=
- =?utf-8?B?RWpkK1Vqanl2VHd5Z1RKdTcvNVhRY0Y0UkNVUW16WWRQTjR6dW5YL2lTRDNn?=
- =?utf-8?B?dXlrTlBSTFdHMG1rOUhpc1ZrS3dUNktpR09YUVY0VzY4Nm1TcjNtdHdJd285?=
- =?utf-8?B?SHNXZDkrc0xsakRNd2ZCWG5oUmhOT1gycFloMEdzRGhDZ2xrWXlJdG9JaXNN?=
- =?utf-8?B?TUhJQ01FWmFpelphbU0wanhkc00yNlFrOXR2Z3VMRkNLbjdFdHpGTUw5Yjgv?=
- =?utf-8?B?NWROb09hRzF3UGRmRjkzalY1M3lHN2UwdU9QaVladFl0aGtFUEIxZFBvcm10?=
- =?utf-8?B?SUw3MGRLWDFJQXp6S3pZSm5MVzhLYzJOVHNtbEQrVnRvS3Zqb21US1J0ZFpX?=
- =?utf-8?B?Z0R0WGFDSDhGdUdNZDQ2N1BtcWduajh1OFpDeVJRamZQVUsvVytPZlVURmJS?=
- =?utf-8?B?aHdVSHFqVUQrbGF4cXE5NmFzaVk0TXY5VFlSbTZKS2FLdGJRRFVlbnZJTTFq?=
- =?utf-8?B?akVBNkxOeWFyTWRpWEFzeUt0bmdEV2xrNkpDMGtrVW1lN096YXVnbzNYZ0pn?=
- =?utf-8?B?VERHeUZwZ2dMN09KbU1vVDF2TWJnTkgwQjAwek13SzE1NWhNanhlKzJ1SVlG?=
- =?utf-8?B?N2Q4OUUxcWszNE03RzJOOGwwNDhFaENXQTFMMUNWdlN3Tjc5THNWN0NXSkxt?=
- =?utf-8?B?c2JDZ0hlajZzOE1ndUNJcjdXQWRUTHovdlBDODI3VWtQVndFRWxFMWlpTjBy?=
- =?utf-8?B?K3B6N3QwdFdxTmtLTytkVlZzSWdTSEZhc3FUSmh1MTJ2SDhmQW43Z2VUcThm?=
- =?utf-8?B?VkFvSkhvWnNuL0ozTE9LeHYveGRYeEhacVJpN3dOWG1nSS8wZWc5ZklBRmFY?=
- =?utf-8?B?dXJPL3krUXRQWll0UW9NVGQxcWVwb0hyRXlNcmxMRzZXY24wS21KdjJPbnA2?=
- =?utf-8?B?U0dCUzA3QXVVZFRCM2RFR3hCcVJnKzRzWWNIeXovbnVtUENzWWhqaTB3NEJF?=
- =?utf-8?B?UzRWZlJzWWY4RStrR1lhRENuTVRyL2JuMjN0ZklFOHpSQjlQN1hoR2NxV1Z2?=
- =?utf-8?B?T0lzdEJwTTJRMXBPTlF0MHpRY21IanUxOHBaN2JXNGpOclFNRmpsbm1WcU9H?=
- =?utf-8?B?TmZWT0FSVXB0K2lydFZ1b1V5eThQVGZnd3ZrdFpxcWRpNVExd0x5VHg0SVJv?=
- =?utf-8?B?amp3bXUrVnNHVFJSbWQwV2FjdDJLRFp3TG1KWnIrbDBETkk5UzZaYmdFZmtW?=
- =?utf-8?B?UW9rOFRlQnpFcjk4SEdXUmxMTGpIV21WcWswelp0MXAxZ3BVYW0ycEJETys3?=
- =?utf-8?B?MWt6ZnV6RVY0S0xDNVdkSzhvTDNkWCtidWRoZFAwSE5uVS8ySGFGSUxNUld5?=
- =?utf-8?B?dXNSKzMyODJZR3B5aXJ3UjFzY0U1cGx6dkVnVzhlNEpKY293S3QycEdSeVNU?=
- =?utf-8?B?dlhyNC81ZzAvVS9TSFdiMHVacU1RKytwVmZEZVBHcGJpeEZLdU1OZmZXMGtZ?=
- =?utf-8?B?alNVemh3U2VwN3V6TTloeCtxdVRqRlpMbjRsM3RSWjVWSHU1dndxeW5oVlFu?=
- =?utf-8?B?QlpGSU1VUE8zcHV0UlNUeTZMc0xBZkJmVENyOTNIMFNWekY5ZU1aemFMQUpn?=
- =?utf-8?B?QWpSb1JzelZLWDNSSUN6UDUzakU3bFZDM1pPcTc4UFY5VHF0SnhTNXBWMnRp?=
- =?utf-8?Q?NQ8A=3D?=
+	=?us-ascii?Q?53kCw0Y4XJw6s6l/QtbnUkGu02lHiFvhZa08VKsGxDW3OzCT65OKzf3WWJWA?=
+ =?us-ascii?Q?zw5NtmhQEuyCchERZ7nHd94JABWW7c8vuRvIoonbNV1mrFFzS5fJb/ZkQP9/?=
+ =?us-ascii?Q?9zD/AxkX3QHGEfztbgCW+FaOmBCCO8FHjyrkdA/t5+HW7Vuo2p2O3CjmMl6W?=
+ =?us-ascii?Q?vsxLQJgkPxLYpupiFCdV+t6zLoETB63J3y5Aq004rvgiKi6OW+yZ77RFNpci?=
+ =?us-ascii?Q?THTbM3jdCLCyyB7aQfLPFXmYkapOLMmHxtDC3Hcme/uI8gl16Tsxe0R/CC8l?=
+ =?us-ascii?Q?J6A1HkMeo0435YbBfg3Fv4p5Ton19TR8IkUf88g2Ke3JQDiZ0gOZ4ZLhcuzf?=
+ =?us-ascii?Q?p/YFlZNr/wN8o+utFqyiaUu7wg2Aqh55zMoiNqvtrpMYAeuIakTeET8uTPxa?=
+ =?us-ascii?Q?fS8R0QCN68vvLtIwta+TsZwcxgR/rP1S+q2eqokYLF96Gsc0FMlVG3uIAqrT?=
+ =?us-ascii?Q?+hVk0kt9DlMclZeOaOJoUaGVdmK7jA2A84EBVP6UwFe6DVzzKNYoysw8eIw2?=
+ =?us-ascii?Q?Kc9qsS93QECHumD13XeEtA6sJp82H5xv8CpWsR5/uPM3NxBcFcyHZCAfYNO1?=
+ =?us-ascii?Q?UCp064kq1SzB5ZIxWaLbh68YXYDfvF/+j/VaCxvk6IMB4d9YjWE7oqLOZnK+?=
+ =?us-ascii?Q?xylnQBHUzMKCITr2UbfhYhIMe1JQu9dRreoBYRL0PGSTLBpZ6OezDlfq6+48?=
+ =?us-ascii?Q?VoiN1B0/zuWzVpXo1MyxOfEDVsSSrhOzq6S6HYsV7k9ROERnEz/ikrgdOFQO?=
+ =?us-ascii?Q?QZC6T0UpL0Djk45RMAmxUBO2HI9msaYiEsQXw0uOajuy8YmWLXvrNn6LKsuQ?=
+ =?us-ascii?Q?I0F56Iq51U16Cqo+tjRQ7sptA6Esev7/CVQjTmkIdEpvhDkZQKqS7OwPPdZQ?=
+ =?us-ascii?Q?0NW2ngAKSvpFiB6aZl4hY3hS23ufka4hDybRLi4qYuAFsV20ku9fxsJuk6e3?=
+ =?us-ascii?Q?k06LP+ytm+DDX7UvFlIZ5C/dpCjQOekV1GHBHj+Yu4JEsLv3YwFHqh+BGt4E?=
+ =?us-ascii?Q?KU88ziwbzi1/5ag7IIyO0XXBwKKXr9GdpBC2iol9K/+L7XKIQEeD3WvjslTY?=
+ =?us-ascii?Q?HpK0q69YG9Ca4opR1xJEefAraciDnkWFiRuwkatOjBGqXmEhvQPl+iyXLDRf?=
+ =?us-ascii?Q?EusE3U9FVthd+bRsLFLIWnq7gwr8aZq82d2n8Gn37lL3dy/iTjRw7uqD6fxk?=
+ =?us-ascii?Q?3vMieaT2L+xnBNy55BllRI889sp/TvOR2zLAmCwCrtr8utlqgZwwOpGhZb/6?=
+ =?us-ascii?Q?NQU4+39swIHuCuqFADVv4UVCP6Zv9pZyP2pPjWxgSVB+Nlu6nauDjcMiTnX9?=
+ =?us-ascii?Q?siEh66/5O1sWbk2ZzxtDye5rpZ0Kf8wWgoz+IWs1v3ofwQG4+xWzrK36uA6s?=
+ =?us-ascii?Q?xm+M5Ty8XL8uLOj2OBel4u6MnnJWbhgEapF11n2vXc0gXv7Qd4AQzGsDUbh4?=
+ =?us-ascii?Q?YS8wZ4ei/TnwOi5ODyIZ5XoQsQc1KmNQD4JA/oZ6YHLAhwn1jSI5Yf7WjQC8?=
+ =?us-ascii?Q?6hDx5qQ01VLAVBzaX0y991heqjn0i9cwHTqJ?=
 X-Forefront-Antispam-Report: 
-	CIP:91.26.50.189;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:Postix.phytec.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014);DIR:OUT;SFP:1102;
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2025 09:46:58.6082
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MA5P287MB4602.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(52116014)(366016)(38350700014);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?GLM/XKweLWcIE8uGz4IlCeksJ2X1rteYkWXE2hLpx37OZT6zdUcgM/kqwizW?=
+ =?us-ascii?Q?8lbVUDAeOF2k7a94av1BxzmbEumyojA4Vx47KNGK/AUlqiqruwZuPNG+YdYs?=
+ =?us-ascii?Q?7DHf0KehrH3ePhGc+xeKxIf0075rkL8DXGWPFJLscN9fT6e0qp6p3SNeBX/g?=
+ =?us-ascii?Q?Grs9cxnXt3S8b+IRz66WSch1V8YB3fKFUr+7kaogixIQV7Fb2kgVVZIFYQpC?=
+ =?us-ascii?Q?Et+EK7S2NJdL6/+gRrauGpjn66B85OvJm2i+K0JwU0i+3I8g8Hx7wBitImLk?=
+ =?us-ascii?Q?QOMIF0azY1OxGniedIoCwfvS6mbxP+sgPtCggR+YQKh0GjozVtQXj+S9uv5+?=
+ =?us-ascii?Q?RAhhHqslmT2qLEblqDjHU1GU8FeFrirl1Jk4Gr9XtCVCcE6p6rEaS4zdRBTj?=
+ =?us-ascii?Q?vi0tvzaxiSLEH6uovImjVko9ioA6sOZ/OYx+Lo814MOFtWmXZcSNm12+DuKY?=
+ =?us-ascii?Q?BLfIHhySBCXbDjH3ytCBQhVkvShl1qTM9FrrLqWwhDflu/na4jMxlj/xdeUs?=
+ =?us-ascii?Q?nei6I4qm6SYY7HnAHsvvVNvuk/xjcdE2WqP0BNIMDk8wlMdfAop7DO2cfdUR?=
+ =?us-ascii?Q?rkdAQKsAzW/OZ3UDWYaLS9uFOUWQOs372H9vYQFi4XjyiAC+I3fdB9Z7LyqI?=
+ =?us-ascii?Q?Ye4kCK6riJsZEIOPaExrbHAgf06t7UgiyFR02NVZ6sV3y6YKuiqu/gYq9mJT?=
+ =?us-ascii?Q?584aX8AiDdn6AKLVkTCT3i5ZHvbyd4Kz38fTcVPT8GeQbcSMM5AwJBOpT03r?=
+ =?us-ascii?Q?BufBMffM/88cSG9VUcEhK48vObCFJGN07o65Hxyfe4qWIZyVdYL0MiV8WUb8?=
+ =?us-ascii?Q?6BDetdKRf5rFXiWalD+L23fGM9OOV77MMGdvH6uJ6FUkVO6W81ECgfRXRkDF?=
+ =?us-ascii?Q?nK28MguqKpxeQ0uGqN6jkfBuQ/kzJAHFvUOljKeL6FeaGPzm87TQEipJPlj6?=
+ =?us-ascii?Q?kWF7uFijcuulVylU2aIIs7fFERFpyCHdHlJ+rDvFcaPMZ3ugfSzJnfMEE1WS?=
+ =?us-ascii?Q?fwS6heHbKe+cqnwOQkBHJTy755zD1+xZSwLaSij4yxYUkVZOS0B0/mYzIqkB?=
+ =?us-ascii?Q?iq+Bhrl0VGx1MQThVax91ogx/CPvyJsQ7kmdgfnO4jZi01VFe8V57FozjuS1?=
+ =?us-ascii?Q?nDQFwDfjUfp2BFhH9r3vT0OTxWQE6NNpqPmMskHcPsEG0VJ4ZnivSkVnwKYn?=
+ =?us-ascii?Q?wxNbx6HDVRuIimNhtiCdbWcGH89js3Ry4emH7YLOJn1AhVdTnG/h0TwzFtmz?=
+ =?us-ascii?Q?I55Ahda/WSXTI5mBCgILt7K47l3P0tti+TGczPXtBypapW3NMla6Bo0w2c4t?=
+ =?us-ascii?Q?0+Y1bBkTq9V0yuxXHTC7KFuYL0pOgsH/HYHhzVT2zqrIJSrPYa/7Gstggwq0?=
+ =?us-ascii?Q?E+zIUisQpspeXSk7JjHzWFY80FMfDKiTgUH7dvCva9IxvYQGxePvorbQ/iT2?=
+ =?us-ascii?Q?bx8L5wY4UBA0fvkvtIo5LT3Lgmvqgu+nVv6noyeSlTJIov/rV46rr+yLzahm?=
+ =?us-ascii?Q?fWvYhq6DngD1hTOs+Qr7I+Ony2Zi8trlEn+b7xP2XflcvXlqXUjBAy8wETm6?=
+ =?us-ascii?Q?1IKWDuP1sBIhXtZPrAayedjQ1xHvvbfb+9GZfd7q?=
+X-OriginatorOrg: bmwtechworks.in
+X-MS-Exchange-CrossTenant-Network-Message-Id: 71cd1edc-2b96-4c5e-d544-08de1219e527
+X-MS-Exchange-CrossTenant-AuthSource: MA5P287MB4602.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2025 09:52:36.2180
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 45a27d81-825d-4d2a-b74a-08de12191c05
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29;Ip=[91.26.50.189];Helo=[Postix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DB1PEPF000509FA.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P195MB1651
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 970fa6fd-1031-4cc6-8c56-488f3c61cd05
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: VVX3KfQ8Q/+HWleTChwYNXv+V7aUegBsFHOhVKiGheV7g1o/RDdXH4HEtuRn9urXzU9XggX6sE2p2HuQc8XvZtNiY1mI1Z5EsXUJa1Y/Hok=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN3P287MB1800
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Oct 2025 09:47:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120922
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 Oct 2025 09:52:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120928
 
-Update the systemd service file to reflect the changes of the source
-repository.
+Cryptsetup code uses Apache-2.0 license also. And the below
+reference clearly states that GPL-2.0-with-OpenSSL-exception
+is to be used with GPL 2.0 or GPL3.0 and not as a standalone license.
 
-Add a user and group "thingsboard_gateway" which the service runs under,
-instead of root.
+Therefore, update the correct license.
 
-Store temporary files, like logs, in /var and make use of the newly
-created user and group.
+Reference:
+https://github.com/aboutcode-org/scancode-licensedb/blob/569d72e13e7c8d14a4=
+4380f91e80c5a2d4091f8f/docs/openssl-exception-gpl-2.0.yml#L7
 
-Additionally, the service should start after and wants a network
-connection to be online, not just be activated.
-
-Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+Signed-off-by: Sana Kazi <Sana.Kazi@bmwtechworks.in>
 ---
- .../thingsboard-gateway.service                    | 18 +++++++++-------
- .../thingsboard-gateway_3.7.4.bb                   | 24 +++++++++++++++++++---
- 2 files changed, 32 insertions(+), 10 deletions(-)
+ meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.2.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/thingsboard-gateway.service b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/thingsboard-gateway.service
-index 5dd352a553fc71562f444561e6424bee94814691..0b7601d494b2b10e2e5cd39d25db7be4ba82b437 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/thingsboard-gateway.service
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway/thingsboard-gateway.service
-@@ -1,13 +1,17 @@
- [Unit]
--Description = Systemd service for Thingsboard Gateway
--After       = network.target
-+Description=ThingsBoard Gateway
-+After=network-online.target
-+Wants=network-online.target
-+ConditionPathExists=/etc/thingsboard-gateway/config/tb_gateway.json
- 
- [Service]
--ExecStart   = /usr/bin/python3 /usr/bin/thingsboard-gateway
--ExecStop    = /bin/kill -INT $MAINPID
--ExecReload  = /bin/kill -TERM $MAINPID
--Restart     = always
--Type        = simple
-+Type=simple
-+User=thingsboard_gateway
-+Group=thingsboard_gateway
-+ExecStart=/usr/bin/python3 /usr/bin/thingsboard-gateway
-+ExecStop=/bin/kill -INT $MAINPID
-+ExecReload=/bin/kill -TERM $MAINPID
-+Restart=on-failure
- 
- [Install]
- WantedBy=multi-user.target
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_3.7.4.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_3.7.4.bb
-index 8ff06285f9be60a09c1d49c2f07140e8212d22fc..7a82414937da8bdf3094c825ec5dc2ce4b429c1d 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_3.7.4.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_3.7.4.bb
-@@ -43,21 +43,39 @@ RDEPENDS:${PN} += " python3-jsonpath-rw \
- 
- SRC_URI += "file://thingsboard-gateway.service"
- 
--
--inherit systemd
-+inherit systemd useradd
- 
- SYSTEMD_PACKAGES = "${PN}"
- SYSTEMD_SERVICE:${PN} = "thingsboard-gateway.service"
- 
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM:${PN} = " \
-+    --system --no-create-home \
-+    --comment 'ThingsBoard-Gateway Service' \
-+    --home-dir ${localstatedir}/lib/${BPN} \
-+    --shell ${base_sbindir}/nologin \
-+    --gid thingsboard_gateway thingsboard_gateway"
-+GROUPADD_PARAM:${PN} = "--system thingsboard_gateway"
-+
- FILES:${PN} += "/etc \
-                 /lib \
-                 /usr \
-+                ${localstatedir} \
- "
- 
- do_install:append(){
-     install -d ${D}${sysconfdir}/${BPN}/config
-     install -m 0644 ${S}/thingsboard_gateway/config/*.json ${D}${sysconfdir}/${BPN}/config
-+    chown -R thingsboard_gateway:thingsboard_gateway ${D}${sysconfdir}/${BPN}
- 
--    install -d ${D}${systemd_unitdir}/system/
-+    install -d ${D}${systemd_system_unitdir}/
-     install -m 0644 ${UNPACKDIR}/thingsboard-gateway.service ${D}${systemd_system_unitdir}/thingsboard-gateway.service
-+
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+        install -d ${D}${sysconfdir}/tmpfiles.d
-+        echo "d ${localstatedir}/log/${BPN} 0755 thingsboard_gateway thingsboard_gateway -" \
-+            > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-+        echo "d ${localstatedir}/lib/${BPN} 0755 thingsboard_gateway thingsboard_gateway -" \
-+            >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-+    fi
- }
-
--- 
-2.25.1
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.2.bb b/meta-o=
+e/recipes-crypto/cryptsetup/cryptsetup_2.7.2.bb
+index 711e582809..934aa856d2 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.2.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.2.bb
+@@ -6,8 +6,9 @@ and can hence offer more features than plain dm-crypt. On t=
+he other \
+ hand, the header is visible and vulnerable to damage."
+ HOMEPAGE =3D "https://gitlab.com/cryptsetup/cryptsetup"
+ SECTION =3D "console"
+-LICENSE =3D "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-e=
+xception"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D32107dd283b1dfeb66c9b3e6be31232=
+6"
++LICENSE =3D "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-e=
+xception & Apache-2.0"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D32107dd283b1dfeb66c9b3e6be31232=
+6 \
++    file://COPYING.LGPL;md5=3D1960515788100ce5f9c98ea78a65dc52"
+=20
+ DEPENDS =3D " \
+     json-c \
+--=20
+2.34.1
 
 
