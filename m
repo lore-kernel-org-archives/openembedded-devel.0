@@ -1,175 +1,727 @@
-Return-Path: <Sana.Kazi@bmwtechworks.in>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ADB89CCD1BC
-	for <webhook@archiver.kernel.org>; Thu, 23 Oct 2025 09:56:11 +0000 (UTC)
-Received: from PNYPR01CU001.outbound.protection.outlook.com (PNYPR01CU001.outbound.protection.outlook.com [52.101.225.78])
- by mx.groups.io with SMTP id smtpd.web10.16462.1761213365873692827
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF6CDCCD193
+	for <webhook@archiver.kernel.org>; Thu, 23 Oct 2025 10:13:31 +0000 (UTC)
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+ by mx.groups.io with SMTP id smtpd.web10.16721.1761214407239694927
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Oct 2025 02:56:06 -0700
+ Thu, 23 Oct 2025 03:13:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@bmwtechworks.in header.s=selector1 header.b=HpJ1DYUL;
- spf=pass (domain: bmwtechworks.in, ip: 52.101.225.78, mailfrom: sana.kazi@bmwtechworks.in)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JJqGJuibMgDC9viZWeXIaMyi1Vw3MrEOWa1b/Zytw6R9v69afSwHN3O54eG6I7e7lcL/IHAxrmfcbffDeI4OmXVuIQefAG3QeoxIVwTpAAofPU9h7C/y8Ii0QpKkI3Gz8lSK4gT0CBDAFJahu1Kr23WaRHEmO7izPberI8B4tJY0Pu0XAIwUCbWO0hOcrJNdGuclrUDmkY03mhYDVsx6PfOomC9hAugikfRuwnlqqCpkJQbDn5HQI+OnP3fRcSG5M5U9mN58/kYXMsMZpCptIyH+th9NNNevJ6ljcrWW+oyKA58ng8WJ8v4IGMmW5hXfEG8o+Q7efUhph0QOkIdUOw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SSmVTKReK7tDzIHyUEMYpkkqmGmnpIRFp5Kva9dk0lE=;
- b=UtzRpDq0ceue9ayT9JuzSxl57CmhqXKLW/ZVz838TVJsjwfh1oSZ4zjB7u5NpNg58mySumPwluYWrJXYjYSXpHT5oNCPAW7QjDtAUbUYyltrpMENHhn1ttnt7P0TvqcraLyVdXF8jFOevsnyHAP1JcB211+nghII6qg2uIy5uhlhO+ebxrdJI6T7f4Nv60x+c5cxHuXulSSL260m25dzHo22xtElbC3gyeaC7/SumErWMldJ1YXUot1QrKSmdNeTWEYO/cCfAz98z/5gCljg1b9CVMNqxIILZEdiF3WIHGEtPEz3y6l/LffV4F6MmfjuV1TxKmE3UQIjPdCS1u7N6g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=bmwtechworks.in; dmarc=pass action=none
- header.from=bmwtechworks.in; dkim=pass header.d=bmwtechworks.in; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmwtechworks.in;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SSmVTKReK7tDzIHyUEMYpkkqmGmnpIRFp5Kva9dk0lE=;
- b=HpJ1DYULxO62CN2U5Ei9GKIf82YNTJTTVawwOGeBCp4sjN1nhqFUN0tNaKT+9THO/cH5021k5iUsFNyJQeFEhOixonM3KeOrXVi0bWkUVsz8sOrKsriphIH1gQnYi5IBinFF3OZM+hbB+VnhN+WfeMiopqkE6ebo+Hpn1P+x0aWYIbZnYFcpWFzjNn3F1/2+eSVfMe/1evnHL8hR8wKjkJzGMAaFdtlisBrgMuBLHAX5pdaLR/+dmihSn4OaXr6rx7m5/LI7Ie4PKoShD5N9v0I0id+UTe1RO+93oj9gzqQUcavf/oM8Yni01w/sM+jJE3raZ/kurGpb3sYP9MODqQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=bmwtechworks.in;
-Received: from MA5P287MB4602.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:19a::20)
- by PN3P287MB1800.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:19b::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.13; Thu, 23 Oct
- 2025 09:55:57 +0000
-Received: from MA5P287MB4602.INDP287.PROD.OUTLOOK.COM
- ([fe80::478b:23ae:5e3b:de95]) by MA5P287MB4602.INDP287.PROD.OUTLOOK.COM
- ([fe80::478b:23ae:5e3b:de95%7]) with mapi id 15.20.9253.011; Thu, 23 Oct 2025
- 09:55:57 +0000
-From: Sana Kazi <Sana.Kazi@bmwtechworks.in>
-To: openembedded-devel@lists.openembedded.org,
-	sana.kazi@bmwtechworks.in
-Subject: [meta-oe][kirkstone][PATCHv2] cryptsetup: Update the license field
-Date: Thu, 23 Oct 2025 15:25:49 +0530
-Message-ID: <20251023095549.3125337-1-Sana.Kazi@bmwtechworks.in>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: PN4PR01CA0055.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:274::8) To MA5P287MB4602.INDP287.PROD.OUTLOOK.COM
- (2603:1096:a01:19a::20)
+ dkim=pass header.i=@mvista.com header.s=google header.b=ZMRyUjir;
+ spf=pass (domain: mvista.com, ip: 209.85.215.179, mailfrom: vanusuri@mvista.com)
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-b556284db11so510132a12.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Oct 2025 03:13:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1761214406; x=1761819206; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=I+cuWnYZtAHB3CcF9NN+rdiLMc9fIFYhWQlakJcpke0=;
+        b=ZMRyUjirxuUQ01I8E1pXpIj2hIoG9BU/mndDCDCWBbbLvRkGXytYueT6deqqphPIyw
+         N5vwLe2G4oOi+R9eES0YvG8zx6cEDVqTGCmAFF3oserEjuPKQtZ+ryF4mNF2mecJtG7S
+         PbB4X7A2DdxFz1i5hc9w12igQriA+QFtQY6RM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761214406; x=1761819206;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=I+cuWnYZtAHB3CcF9NN+rdiLMc9fIFYhWQlakJcpke0=;
+        b=Z7l0yMz4aBRY17JdGF6Pjqy0PytUUNls9thJ+Iwy8xVZzQIuFexr7Xr1h6wK3A2TBU
+         PpntatI/KVjmp+KVeSJIA6ZXtnpONjKbRs/Y9Eol521nSHdvWP2Y+acEigQc3h4N0yAN
+         kW8xnlGH7QWsPROKYLmJy76vjA9m6tKSatijt56IzteDyuCNtKuz3FjjnLPX5FppZOIC
+         hwGMdhCxyJ7DBMFK0KczgYpUf3Ghi0Afj4ukyiTyjxblkb07NBBAjiU2dL2EJ2Y7rME2
+         kr8aaB3e+8Q7oxo0Xt+9xalNFbW79No1F7j/amB0cwi/YKoiNMIOPOWD+STOQih+iR0j
+         Xzyw==
+X-Gm-Message-State: AOJu0YzQnkV3xAIvt++xjB3UdTpQaYC7LSDnxIxgKnVM9YIyNIykH0u7
+	2CANtRU/heo4/DN+SdNyabsyhZ2+6tFRxBKbXQOAs959evejTHErF+0jDQ3BWliKV6uPwOeRJiH
+	4cysyiCE=
+X-Gm-Gg: ASbGncsK50tb0Yfhf7uLP9r+gixjc4WVLgt55qTua/SEw22XILqXewmsgY8x0Qk2osC
+	rOJjWw9TrsZrNsTAIgRcL6lnVjneojnEQO5ZaBmLRFFyebJtj6tL0/EX+I5pEi77bANQpWVzKp4
+	aZYwiLEWOfandU3fmFUYFN2IqpAWWdtSgFvPhbzeGZsR0DRzseZip5BDvwbwqCLXtUFmzkBWg+T
+	+NBsyPPMh5bxc27TBIHZLj4c6CAM6+hz4TlQI4Na2JWCeu5TViHrWcQsVDVNvbMb22J5XFEyN+6
+	i902s01SzmOnzmlqPX4hDE/4KSxFA8h56VS9yge4mgSvLVKcJ2mQC95hoHjhwq473qF+fVKe4k2
+	d4DkpSUszdWVQJMh/tgwXGTHho0zuhN26zQip0J0MhnTq8/Hl4SyZ89cZNW51QatfZ+tke7Gyqz
+	npNEGRMm61wEzrNw==
+X-Google-Smtp-Source: AGHT+IG5ADkT5mKMLCCVVnQc2v61x4RaQ2PoGQSIQi6d5xnHg8QjO6OKsEw4y4Y+NWuPu91xV0MPqA==
+X-Received: by 2002:a17:902:e88e:b0:28d:18d3:46ca with SMTP id d9443c01a7336-290cb65ca07mr321933685ad.49.1761214405641;
+        Thu, 23 Oct 2025 03:13:25 -0700 (PDT)
+Received: from localhost.localdomain ([2401:4900:8fce:8546:bea:675a:12eb:bfe2])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2946ddee569sm18369035ad.31.2025.10.23.03.13.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 23 Oct 2025 03:13:24 -0700 (PDT)
+From: vanusuri@mvista.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-networking][kirkstone][PATCH 1/2] unbound: Fix for CVE-2022-30698 and CVE-2022-30699
+Date: Thu, 23 Oct 2025 15:43:16 +0530
+Message-Id: <20251023101317.21230-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MA5P287MB4602:EE_|PN3P287MB1800:EE_
-X-MS-Office365-Filtering-Correlation-Id: 61a9d281-2123-436f-7145-08de121a5cd8
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|376014|52116014|366016|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?HBzt8egGs9KGOYpqMHNJGHUAdcRMTKa8y6EgyygEeC4jY+fRJpBUAcVr0N9M?=
- =?us-ascii?Q?oXIBxPcOHiEcVMQyFdF/uuNxowZVtx7DumnzdYQktDR9FbLWUGVEjTriVcOM?=
- =?us-ascii?Q?go2zpwF0xWmoOLXPHlvmJlh+9xNPbjXEGxbzDyqAuPm5IIem9mlvlukJHILo?=
- =?us-ascii?Q?OJ8ElloT/LnZPaip2nJoCH8ptEdIpYoJs9FMSfj8hHs4OFDFOUPTBYOsNxzf?=
- =?us-ascii?Q?cmYvnx6uqvDU3PCqcjYBQLbi4hE5fFwW+xoaWOZbJJlxZcctWJMpeIcZW4Eu?=
- =?us-ascii?Q?EmMPhlRsgCwlovRlg+z5G9OsvuqwLjapSbjWnL7H3XQejJRkrYAyfpKnns5i?=
- =?us-ascii?Q?glbFDI8eA485Gm16r5/ID21MsrmRuDEp/sIVp+BsVtk91L3Y1BaQzKNxk3xz?=
- =?us-ascii?Q?ryubosQupSP7RThXKFztXJVAbqpt+luJ9iAggXsMEta3zISEZkA3vNnkPdzJ?=
- =?us-ascii?Q?IBt58Wm8rFLUWAqWv6QD0XHFCqyUncAGqKtunkF56Qjc89GIUollMuD5VWnK?=
- =?us-ascii?Q?qMJ3SPdnnZAVG488uCPNNxcUx4CrsT/Tjei7i7cXSp6oVmhcoks8qNKu8yb5?=
- =?us-ascii?Q?d/3fD429Gi2PEZe5UOkIuiUWXAWsBGnxIvO7OdQjElhRUk9GeLq0vfNm0NlG?=
- =?us-ascii?Q?5Y6OtQMtGH14U5kj/cteFmhsCW613tqUPHFkgNhzms6y6pkbZc5jaDvO2Ja/?=
- =?us-ascii?Q?w/LTuEorv9goOanPMjU7W2UzCb72KlW6lEiOGhPKX6dtnofFWUEmCkeuYPYP?=
- =?us-ascii?Q?hJ2UmKUR42DhyoznYxa/ACNpvjGRbIwR+VOeEdrdtQ/maVJ2TjDb6D04KYyi?=
- =?us-ascii?Q?nkBD2Uogqq5wt3TXeNzZruEilRmqjixSD+lUMHIMgNyWOa/z6VkQcvfsH0b4?=
- =?us-ascii?Q?Bn7TyHIN8Dcnrxnu1w86+uhTDk1ZgeW2fMVGACJcOEEIZL/3bDfy2WFHjDD2?=
- =?us-ascii?Q?J1E9mrd+Ey+arMy/WTJnlumhOxrAL7+Szj7N2OSJ8H1zlhoDdBH98Wy3aTVX?=
- =?us-ascii?Q?pLrrW00+iTrXNXqCPHFj5vPdlRWXbPjVkvG3PBKt0ACd6DcHIfnv6WqjqeSW?=
- =?us-ascii?Q?83Eb9t//clYTQdk8dONMzm+zdbN+AOev97EYo//kiwEpi50ZlKESj/M+9u/n?=
- =?us-ascii?Q?LtMly/0I5THxk9L7CFDKezcImlqA+4CPZiPF0pA5UAl08BEUd5ozoSEi1o2B?=
- =?us-ascii?Q?gzldDCIbWP40VMFcVHJqvpyy32QUx8T47PwM++0vSrOwzelsxdG1joEVZKz3?=
- =?us-ascii?Q?k1lgI6pxqPON1DOu0/KbMptQ5Y6cl79dAZXEAurD/J3QqFVpIa4ZRxUhV74w?=
- =?us-ascii?Q?XlH/ZN8NWZ3axLB8vTQBQEC2vmLCtCG7+Pavi/Ae9TeHYz90a1wlk/6XzEAD?=
- =?us-ascii?Q?exsH66jOzHNiR0Rif3J0WaNeLgvUZhUTr+D9zYQpaBIKhXtLeaSBVOedBOqa?=
- =?us-ascii?Q?DD93FmeUqVP9V3bS/wqds5nKL0NTwARC0oQBh+H01E63ylAYfDW4URtck7tR?=
- =?us-ascii?Q?n+zZXd2h7U/FUJiJnNJXRIW724GyMhVqQLjP?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MA5P287MB4602.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(52116014)(366016)(38350700014);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?dbBCDGrMW8qHpOujq/XEqwupZT+QMb5iyYhpHmltUNJG9L01kiIaFbyhGreS?=
- =?us-ascii?Q?fjAfzr19kYC2esDwYbtXvaDOGN0bY/P0wvnbhXpgzt5rx/FUZzQC8KEZp/75?=
- =?us-ascii?Q?prZqDhgEFZK5yODR139rFTqDjOLvZ7ogIgrKIac/jZ/2L9Me0mSxGlW96Ej7?=
- =?us-ascii?Q?AUSqAgU5H4YqYz4yJkd3lNUgawGHS9QDpM2b32d5/NKsZJSe2cI74sYfmPvs?=
- =?us-ascii?Q?3mxmBWe+RDzJ+TLKlvzyk8aVC5OLTEsfn9Zdvt+wy0llBVibNnZuZwUa11ap?=
- =?us-ascii?Q?LiYReU5g1dCGcMLjMe8xZoN2dXkxaCJLP/sKUUPvLWsg4pwXOt6UWczIV9eQ?=
- =?us-ascii?Q?btkZGL59P030hYTPfjXx791HDa+isuM893DUsOUZWQ5TCmzfk4zGcYjno4RK?=
- =?us-ascii?Q?gLaFkVzD8D3xJ66fuK/PBU4TkWE1dyBOwXPWO2CgkMrfh3a3QvaKrTJ1WUrn?=
- =?us-ascii?Q?tviGWFFbr+FzNzyU5RItfhUW7BXWlwTp/7ldXn3PGzfacG/ezNpTl+o4rXOj?=
- =?us-ascii?Q?bLHb+GxYxtp+kii25BXObP+Ws5vPCMRvx+IEnojQTA16GdEWQZan0KQwPNqT?=
- =?us-ascii?Q?8YzUm2SCZDRGXKhBdu1Lo8NmL3XsSfIrk2soXWs0ctWNdVHwa6TQ/Y4lGZlW?=
- =?us-ascii?Q?5Z7kgq4btkpp+wkCllgh/5ykyR5gA7hK+WqGOHVfXfjchQilUUc0JRBjyhqI?=
- =?us-ascii?Q?7j6NNBgZeYliaQvh7n50EM5TClAgXhm8ysXw6BrIZOKDCPAjYNbXBaI12MSu?=
- =?us-ascii?Q?9ULfjwxtM8RNLSGDd1cVb+CqfSzLUfg7ypl8Ptvcw/h8L2+c2OTThLuKyBmT?=
- =?us-ascii?Q?8i7sezNJpSkQZhIeFB2JCaOwrUCK9JCvf9qV6QYvP4JkJ9Ho7UXMrfV1PA4C?=
- =?us-ascii?Q?ao7DSX5o8F5iLsY28HvraqnPMHUjDqWTvFEjEyvHAwjbEzXzrPpQB8MXwvjQ?=
- =?us-ascii?Q?X3NFfuxy+oIWBg0GncUFFM088NsVqFgpMEPidTzTrrWMXUXS5T3hstu6SRV5?=
- =?us-ascii?Q?ssc+abCFqXt0+g+jP6oizsE7wIFfJ4G9yh+YwkyH9x7DR/+0oczZ3k+pXsy5?=
- =?us-ascii?Q?QFmWK33sSdt3xhdz3JFBACz/z3PEGaXrCs0jDJwjjxYK0mNnm9cvGe28vgoW?=
- =?us-ascii?Q?Vz0AVbD4eeog1HJZMNfWS6exNgX1I1kyQ5mklU//5iriunEiSbFo4gMaDC35?=
- =?us-ascii?Q?F3i1zG2KpIKqcDYnv4/nzAIGwDnrxeeGcOBNi8goz6GdRy4ndEfMAjEfK0S9?=
- =?us-ascii?Q?xx/4v909OfseGwlpP1ixsSlnJEx2s6rUkcO/Vqu5WMj82F+a+uAibz7b/rbN?=
- =?us-ascii?Q?/+RljUGLFpzVjE9vbXvpMkdcfyGAOJuzK8MvKmcC/pPcnlwGBLHXvKalTwgK?=
- =?us-ascii?Q?Qva8OgqzPPuhy4LmJ31GdtJ/LZ169T6hZkngEc9GU8oAmUKmrRZx8g+box2Q?=
- =?us-ascii?Q?mgNwYGJcscnrl5obRSD9cLRrgFajCI10Va5Jb1kRN5cDZqtVNmvzsXt8W7YK?=
- =?us-ascii?Q?rVaroFPkWeSkvCC4ElDbvKAKAYlgMXfWsmyH07NQIR0NCujPXQNdsgtmt+r9?=
- =?us-ascii?Q?a0ii/CwfkgWzrEFCnmzciHFqJ4ySvgvTOlv4zqgS?=
-X-OriginatorOrg: bmwtechworks.in
-X-MS-Exchange-CrossTenant-Network-Message-Id: 61a9d281-2123-436f-7145-08de121a5cd8
-X-MS-Exchange-CrossTenant-AuthSource: MA5P287MB4602.INDP287.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2025 09:55:56.9918
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 970fa6fd-1031-4cc6-8c56-488f3c61cd05
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: G8CFvDdaihZHfAdVI8Vq1LIlHdnr5eINRpns+qnCHvLDl3qidVggf2Y51SEHmPG5ulse9CN3uLx6W2Auc7+o/phni3ZgK7J3rM1HgFm1I3M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN3P287MB1800
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Oct 2025 09:56:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120929
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 Oct 2025 10:13:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120930
 
-Cryptsetup code uses Apache-2.0 license also. And the below
-reference clearly states that GPL-2.0-with-OpenSSL-exception
-is to be used with GPL 2.0 or GPL3.0 and not as a standalone license.
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-Therefore, update the correct license.
+Upstream-Status: Backport from https://github.com/NLnetLabs/unbound/commit/f6753a0f1018133df552347a199e0362fc1dac68
 
-Reference:
-https://github.com/aboutcode-org/scancode-licensedb/blob/569d72e13e7c8d14a4=
-4380f91e80c5a2d4091f8f/docs/openssl-exception-gpl-2.0.yml#L7
-
-Signed-off-by: Sana Kazi <Sana.Kazi@bmwtechworks.in>
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ .../unbound/CVE-2022-30698_30699.patch        | 627 ++++++++++++++++++
+ .../recipes-support/unbound/unbound_1.15.0.bb |   1 +
+ 2 files changed, 628 insertions(+)
+ create mode 100644 meta-networking/recipes-support/unbound/unbound/CVE-2022-30698_30699.patch
 
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb b/meta-o=
-e/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-index 4f8bbf0358..8b14ab90ae 100644
---- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-+++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.4.3.bb
-@@ -6,8 +6,9 @@ and can hence offer more features than plain dm-crypt. On t=
-he other \
- hand, the header is visible and vulnerable to damage."
- HOMEPAGE =3D "https://gitlab.com/cryptsetup/cryptsetup"
- SECTION =3D "console"
--LICENSE =3D "GPL-2.0-with-OpenSSL-exception"
--LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D32107dd283b1dfeb66c9b3e6be31232=
-6"
-+LICENSE =3D "LGPL-2.1-or-later & GPL-2.0-or-later & GPL-2.0-with-OpenSSL-e=
-xception & Apache-2.0"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D32107dd283b1dfeb66c9b3e6be31232=
-6i \
-+    file://COPYING.LGPL;md5=3D1960515788100ce5f9c98ea78a65dc52"
-=20
- DEPENDS =3D " \
-     json-c \
---=20
-2.34.1
+diff --git a/meta-networking/recipes-support/unbound/unbound/CVE-2022-30698_30699.patch b/meta-networking/recipes-support/unbound/unbound/CVE-2022-30698_30699.patch
+new file mode 100644
+index 0000000000..ab56e7bea6
+--- /dev/null
++++ b/meta-networking/recipes-support/unbound/unbound/CVE-2022-30698_30699.patch
+@@ -0,0 +1,627 @@
++From f6753a0f1018133df552347a199e0362fc1dac68 Mon Sep 17 00:00:00 2001
++From: "W.C.A. Wijngaards" <wouter@nlnetlabs.nl>
++Date: Mon, 1 Aug 2022 13:24:40 +0200
++Subject: [PATCH] - Fix the novel ghost domain issues CVE-2022-30698 and
++ CVE-2022-30699.
++
++Upstream-Status: Backport [https://github.com/NLnetLabs/unbound/commit/f6753a0f1018133df552347a199e0362fc1dac68]
++CVE: CVE-2022-30698 CVE-2022-30699
++Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++---
++ cachedb/cachedb.c                 |   2 +-
++ daemon/cachedump.c                |   5 +-
++ daemon/worker.c                   |   2 +-
++ dns64/dns64.c                     |   4 +-
++ ipsecmod/ipsecmod.c               |   2 +-
++ iterator/iter_utils.c             |   4 +-
++ iterator/iter_utils.h             |   3 +-
++ iterator/iterator.c               |  19 +++--
++ pythonmod/interface.i             |   5 +-
++ pythonmod/pythonmod_utils.c       |   3 +-
++ services/cache/dns.c              | 111 ++++++++++++++++++++++++++----
++ services/cache/dns.h              |  18 ++++-
++ services/mesh.c                   |   1 +
++ testdata/iter_prefetch_change.rpl |  16 ++---
++ util/module.h                     |   6 ++
++ validator/validator.c             |   4 +-
++ 16 files changed, 157 insertions(+), 48 deletions(-)
++
++diff --git a/cachedb/cachedb.c b/cachedb/cachedb.c
++index 725bc6ce8..b07743d85 100644
++--- a/cachedb/cachedb.c
+++++ b/cachedb/cachedb.c
++@@ -662,7 +662,7 @@ cachedb_intcache_store(struct module_qstate* qstate)
++ 		return;
++ 	(void)dns_cache_store(qstate->env, &qstate->qinfo,
++ 		qstate->return_msg->rep, 0, qstate->prefetch_leeway, 0,
++-		qstate->region, store_flags);
+++		qstate->region, store_flags, qstate->qstarttime);
++ }
++ 
++ /**
++diff --git a/daemon/cachedump.c b/daemon/cachedump.c
++index b1ce53b59..908d2f9d1 100644
++--- a/daemon/cachedump.c
+++++ b/daemon/cachedump.c
++@@ -677,7 +677,8 @@ load_msg(RES* ssl, sldns_buffer* buf, struct worker* worker)
++ 	if(!go_on) 
++ 		return 1; /* skip this one, not all references satisfied */
++ 
++-	if(!dns_cache_store(&worker->env, &qinf, &rep, 0, 0, 0, NULL, flags)) {
+++	if(!dns_cache_store(&worker->env, &qinf, &rep, 0, 0, 0, NULL, flags,
+++		*worker->env.now)) {
++ 		log_warn("error out of memory");
++ 		return 0;
++ 	}
++@@ -848,7 +849,7 @@ int print_deleg_lookup(RES* ssl, struct worker* worker, uint8_t* nm,
++ 	while(1) {
++ 		dp = dns_cache_find_delegation(&worker->env, nm, nmlen, 
++ 			qinfo.qtype, qinfo.qclass, region, &msg, 
++-			*worker->env.now);
+++			*worker->env.now, 0, NULL, 0);
++ 		if(!dp) {
++ 			return ssl_printf(ssl, "no delegation from "
++ 				"cache; goes to configured roots\n");
++diff --git a/daemon/worker.c b/daemon/worker.c
++index 862affb24..15d444c46 100644
++--- a/daemon/worker.c
+++++ b/daemon/worker.c
++@@ -459,7 +459,7 @@ answer_norec_from_cache(struct worker* worker, struct query_info* qinfo,
++ 
++ 	dp = dns_cache_find_delegation(&worker->env, qinfo->qname, 
++ 		qinfo->qname_len, qinfo->qtype, qinfo->qclass,
++-		worker->scratchpad, &msg, timenow);
+++		worker->scratchpad, &msg, timenow, 0, NULL, 0);
++ 	if(!dp) { /* no delegation, need to reprime */
++ 		return 0;
++ 	}
++diff --git a/dns64/dns64.c b/dns64/dns64.c
++index d01b436e1..4b98b609e 100644
++--- a/dns64/dns64.c
+++++ b/dns64/dns64.c
++@@ -652,7 +652,7 @@ handle_event_moddone(struct module_qstate* qstate, int id)
++ 	if ( (!iq || !iq->started_no_cache_store) &&
++ 		qstate->return_msg && qstate->return_msg->rep &&
++ 		!dns_cache_store(qstate->env, &qstate->qinfo, qstate->return_msg->rep,
++-		0, 0, 0, NULL, qstate->query_flags))
+++		0, 0, 0, NULL, qstate->query_flags, qstate->qstarttime))
++ 		log_err("out of memory");
++ 
++ 	/* do nothing */
++@@ -991,7 +991,7 @@ dns64_inform_super(struct module_qstate* qstate, int id,
++ 	/* Store the generated response in cache. */
++ 	if ( (!super_dq || !super_dq->started_no_cache_store) &&
++ 		!dns_cache_store(super->env, &super->qinfo, super->return_msg->rep,
++-		0, 0, 0, NULL, super->query_flags))
+++		0, 0, 0, NULL, super->query_flags, qstate->qstarttime))
++ 		log_err("out of memory");
++ }
++ 
++diff --git a/ipsecmod/ipsecmod.c b/ipsecmod/ipsecmod.c
++index 577f7112e..19549d4ee 100644
++--- a/ipsecmod/ipsecmod.c
+++++ b/ipsecmod/ipsecmod.c
++@@ -456,7 +456,7 @@ ipsecmod_handle_query(struct module_qstate* qstate,
++ 	/* Store A/AAAA in cache. */
++ 	if(!dns_cache_store(qstate->env, &qstate->qinfo,
++ 		qstate->return_msg->rep, 0, qstate->prefetch_leeway,
++-		0, qstate->region, qstate->query_flags)) {
+++		0, qstate->region, qstate->query_flags, qstate->qstarttime)) {
++ 		log_err("ipsecmod: out of memory caching record");
++ 	}
++ 	qstate->ext_state[id] = module_finished;
++diff --git a/iterator/iter_utils.c b/iterator/iter_utils.c
++index 2482a1f40..8480f41d1 100644
++--- a/iterator/iter_utils.c
+++++ b/iterator/iter_utils.c
++@@ -657,10 +657,10 @@ dns_copy_msg(struct dns_msg* from, struct regional* region)
++ void
++ iter_dns_store(struct module_env* env, struct query_info* msgqinf,
++ 	struct reply_info* msgrep, int is_referral, time_t leeway, int pside,
++-	struct regional* region, uint16_t flags)
+++	struct regional* region, uint16_t flags, time_t qstarttime)
++ {
++ 	if(!dns_cache_store(env, msgqinf, msgrep, is_referral, leeway,
++-		pside, region, flags))
+++		pside, region, flags, qstarttime))
++ 		log_err("out of memory: cannot store data in cache");
++ }
++ 
++diff --git a/iterator/iter_utils.h b/iterator/iter_utils.h
++index 0a40916c0..660d6dc16 100644
++--- a/iterator/iter_utils.h
+++++ b/iterator/iter_utils.h
++@@ -132,6 +132,7 @@ struct dns_msg* dns_copy_msg(struct dns_msg* from, struct regional* regional);
++  * 	can be prefetch-updates.
++  * @param region: to copy modified (cache is better) rrs back to.
++  * @param flags: with BIT_CD for dns64 AAAA translated queries.
+++ * @param qstarttime: time of query start.
++  * return void, because we are not interested in alloc errors,
++  * 	the iterator and validator can operate on the results in their
++  * 	scratch space (the qstate.region) and are not dependent on the cache.
++@@ -140,7 +141,7 @@ struct dns_msg* dns_copy_msg(struct dns_msg* from, struct regional* regional);
++  */
++ void iter_dns_store(struct module_env* env, struct query_info* qinf,
++ 	struct reply_info* rep, int is_referral, time_t leeway, int pside,
++-	struct regional* region, uint16_t flags);
+++	struct regional* region, uint16_t flags, time_t qstarttime);
++ 
++ /**
++  * Select randomly with n/m probability.
++diff --git a/iterator/iterator.c b/iterator/iterator.c
++index 54006940d..02741d0b4 100644
++--- a/iterator/iterator.c
+++++ b/iterator/iterator.c
++@@ -370,7 +370,7 @@ error_response_cache(struct module_qstate* qstate, int id, int rcode)
++ 		err.security = sec_status_indeterminate;
++ 		verbose(VERB_ALGO, "store error response in message cache");
++ 		iter_dns_store(qstate->env, &qstate->qinfo, &err, 0, 0, 0, NULL,
++-			qstate->query_flags);
+++			qstate->query_flags, qstate->qstarttime);
++ 	}
++ 	return error_response(qstate, id, rcode);
++ }
++@@ -1477,7 +1477,8 @@ processInitRequest(struct module_qstate* qstate, struct iter_qstate* iq,
++ 		     iq->dp = dns_cache_find_delegation(qstate->env, delname, 
++ 			delnamelen, iq->qchase.qtype, iq->qchase.qclass, 
++ 			qstate->region, &iq->deleg_msg,
++-			*qstate->env->now+qstate->prefetch_leeway);
+++			*qstate->env->now+qstate->prefetch_leeway, 1,
+++			dpname, dpnamelen);
++ 		else iq->dp = NULL;
++ 
++ 		/* If the cache has returned nothing, then we have a 
++@@ -1769,7 +1770,8 @@ generate_parentside_target_query(struct module_qstate* qstate,
++ 			subiq->dp = dns_cache_find_delegation(qstate->env, 
++ 				name, namelen, qtype, qclass, subq->region,
++ 				&subiq->deleg_msg,
++-				*qstate->env->now+subq->prefetch_leeway); 
+++				*qstate->env->now+subq->prefetch_leeway,
+++				1, NULL, 0);
++ 			/* if no dp, then it's from root, refetch unneeded */
++ 			if(subiq->dp) { 
++ 				subiq->dnssec_expected = iter_indicates_dnssec(
++@@ -2834,7 +2836,8 @@ processQueryResponse(struct module_qstate* qstate, struct iter_qstate* iq,
++ 			iter_dns_store(qstate->env, &iq->response->qinfo,
++ 				iq->response->rep, 0, qstate->prefetch_leeway,
++ 				iq->dp&&iq->dp->has_parent_side_NS,
++-				qstate->region, qstate->query_flags);
+++				qstate->region, qstate->query_flags,
+++				qstate->qstarttime);
++ 		/* close down outstanding requests to be discarded */
++ 		outbound_list_clear(&iq->outlist);
++ 		iq->num_current_queries = 0;
++@@ -2923,7 +2926,8 @@ processQueryResponse(struct module_qstate* qstate, struct iter_qstate* iq,
++ 			/* Store the referral under the current query */
++ 			/* no prefetch-leeway, since its not the answer */
++ 			iter_dns_store(qstate->env, &iq->response->qinfo,
++-				iq->response->rep, 1, 0, 0, NULL, 0);
+++				iq->response->rep, 1, 0, 0, NULL, 0,
+++				qstate->qstarttime);
++ 			if(iq->store_parent_NS)
++ 				iter_store_parentside_NS(qstate->env, 
++ 					iq->response->rep);
++@@ -3037,7 +3041,7 @@ processQueryResponse(struct module_qstate* qstate, struct iter_qstate* iq,
++ 			iter_dns_store(qstate->env, &iq->response->qinfo,
++ 				iq->response->rep, 1, qstate->prefetch_leeway,
++ 				iq->dp&&iq->dp->has_parent_side_NS, NULL,
++-				qstate->query_flags);
+++				qstate->query_flags, qstate->qstarttime);
++ 		/* set the current request's qname to the new value. */
++ 		iq->qchase.qname = sname;
++ 		iq->qchase.qname_len = snamelen;
++@@ -3640,7 +3644,8 @@ processFinished(struct module_qstate* qstate, struct iter_qstate* iq,
++ 			iter_dns_store(qstate->env, &qstate->qinfo, 
++ 				iq->response->rep, 0, qstate->prefetch_leeway,
++ 				iq->dp&&iq->dp->has_parent_side_NS,
++-				qstate->region, qstate->query_flags);
+++				qstate->region, qstate->query_flags,
+++				qstate->qstarttime);
++ 		}
++ 	}
++ 	qstate->return_rcode = LDNS_RCODE_NOERROR;
++diff --git a/pythonmod/interface.i b/pythonmod/interface.i
++index 1ca8686a7..186241ba3 100644
++--- a/pythonmod/interface.i
+++++ b/pythonmod/interface.i
++@@ -1375,7 +1375,8 @@ int set_return_msg(struct module_qstate* qstate,
++ /* Functions which we will need to lookup delegations */
++ struct delegpt* dns_cache_find_delegation(struct module_env* env,
++         uint8_t* qname, size_t qnamelen, uint16_t qtype, uint16_t qclass,
++-        struct regional* region, struct dns_msg** msg, uint32_t timenow);
+++        struct regional* region, struct dns_msg** msg, uint32_t timenow,
+++        int noexpiredabove, uint8_t* expiretop, size_t expiretoplen);
++ int iter_dp_is_useless(struct query_info* qinfo, uint16_t qflags,
++         struct delegpt* dp);
++ struct iter_hints_stub* hints_lookup_stub(struct iter_hints* hints,
++@@ -1404,7 +1405,7 @@ struct delegpt* find_delegation(struct module_qstate* qstate, char *nm, size_t n
++     qinfo.qclass = LDNS_RR_CLASS_IN;
++ 
++     while(1) {
++-        dp = dns_cache_find_delegation(qstate->env, (uint8_t*)nm, nmlen, qinfo.qtype, qinfo.qclass, region, &msg, timenow);
+++        dp = dns_cache_find_delegation(qstate->env, (uint8_t*)nm, nmlen, qinfo.qtype, qinfo.qclass, region, &msg, timenow, 0, NULL, 0);
++         if(!dp)
++             return NULL;
++         if(iter_dp_is_useless(&qinfo, BIT_RD, dp)) {
++diff --git a/pythonmod/pythonmod_utils.c b/pythonmod/pythonmod_utils.c
++index 34a20ba76..1f6f25129 100644
++--- a/pythonmod/pythonmod_utils.c
+++++ b/pythonmod/pythonmod_utils.c
++@@ -72,7 +72,8 @@ int storeQueryInCache(struct module_qstate* qstate, struct query_info* qinfo,
++ 	}
++ 
++ 	return dns_cache_store(qstate->env, qinfo, msgrep, is_referral,
++-		qstate->prefetch_leeway, 0, NULL, qstate->query_flags);
+++		qstate->prefetch_leeway, 0, NULL, qstate->query_flags,
+++		qstate->qstarttime);
++ }
++ 
++ /* Invalidate the message associated with query_info stored in message cache */
++diff --git a/services/cache/dns.c b/services/cache/dns.c
++index 5b64fe475..99faaf678 100644
++--- a/services/cache/dns.c
+++++ b/services/cache/dns.c
++@@ -68,11 +68,16 @@
++  * 	in a prefetch situation to be updated (without becoming sticky).
++  * @param qrep: update rrsets here if cache is better
++  * @param region: for qrep allocs.
+++ * @param qstarttime: time when delegations were looked up, this is perhaps
+++ *	earlier than the time in now. The time is used to determine if RRsets
+++ *	of type NS have expired, so that they can only be updated using
+++ *	lookups of delegation points that did not use them, since they had
+++ *	expired then.
++  */
++ static void
++ store_rrsets(struct module_env* env, struct reply_info* rep, time_t now,
++ 	time_t leeway, int pside, struct reply_info* qrep,
++-	struct regional* region)
+++	struct regional* region, time_t qstarttime)
++ {
++ 	size_t i;
++ 	/* see if rrset already exists in cache, if not insert it. */
++@@ -81,8 +86,8 @@ store_rrsets(struct module_env* env, struct reply_info* rep, time_t now,
++ 		rep->ref[i].id = rep->rrsets[i]->id;
++ 		/* update ref if it was in the cache */
++ 		switch(rrset_cache_update(env->rrset_cache, &rep->ref[i],
++-				env->alloc, now + ((ntohs(rep->ref[i].key->rk.type)==
++-				LDNS_RR_TYPE_NS && !pside)?0:leeway))) {
+++				env->alloc, ((ntohs(rep->ref[i].key->rk.type)==
+++				LDNS_RR_TYPE_NS && !pside)?qstarttime:now + leeway))) {
++ 		case 0: /* ref unchanged, item inserted */
++ 			break;
++ 		case 2: /* ref updated, cache is superior */
++@@ -155,7 +160,8 @@ msg_del_servfail(struct module_env* env, struct query_info* qinfo,
++ void 
++ dns_cache_store_msg(struct module_env* env, struct query_info* qinfo,
++ 	hashvalue_type hash, struct reply_info* rep, time_t leeway, int pside,
++-	struct reply_info* qrep, uint32_t flags, struct regional* region)
+++	struct reply_info* qrep, uint32_t flags, struct regional* region,
+++	time_t qstarttime)
++ {
++ 	struct msgreply_entry* e;
++ 	time_t ttl = rep->ttl;
++@@ -170,7 +176,8 @@ dns_cache_store_msg(struct module_env* env, struct query_info* qinfo,
++ 	/* there was a reply_info_sortref(rep) here but it seems to be
++ 	 * unnecessary, because the cache gets locked per rrset. */
++ 	reply_info_set_ttls(rep, *env->now);
++-	store_rrsets(env, rep, *env->now, leeway, pside, qrep, region);
+++	store_rrsets(env, rep, *env->now, leeway, pside, qrep, region,
+++		qstarttime);
++ 	if(ttl == 0 && !(flags & DNSCACHE_STORE_ZEROTTL)) {
++ 		/* we do not store the message, but we did store the RRs,
++ 		 * which could be useful for delegation information */
++@@ -194,10 +201,51 @@ dns_cache_store_msg(struct module_env* env, struct query_info* qinfo,
++ 	slabhash_insert(env->msg_cache, hash, &e->entry, rep, env->alloc);
++ }
++ 
+++/** see if an rrset is expired above the qname, return upper qname. */
+++static int
+++rrset_expired_above(struct module_env* env, uint8_t** qname, size_t* qnamelen,
+++	uint16_t searchtype, uint16_t qclass, time_t now, uint8_t* expiretop,
+++	size_t expiretoplen)
+++{
+++	struct ub_packed_rrset_key *rrset;
+++	uint8_t lablen;
+++
+++	while(*qnamelen > 0) {
+++		/* look one label higher */
+++		lablen = **qname;
+++		*qname += lablen + 1;
+++		*qnamelen -= lablen + 1;
+++		if(*qnamelen <= 0)
+++			break;
+++
+++		/* looks up with a time of 0, to see expired entries */
+++		if((rrset = rrset_cache_lookup(env->rrset_cache, *qname,
+++			*qnamelen, searchtype, qclass, 0, 0, 0))) {
+++			struct packed_rrset_data* data =
+++				(struct packed_rrset_data*)rrset->entry.data;
+++			if(now > data->ttl) {
+++				/* it is expired, this is not wanted */
+++				lock_rw_unlock(&rrset->entry.lock);
+++				log_nametypeclass(VERB_ALGO, "this rrset is expired", *qname, searchtype, qclass);
+++				return 1;
+++			}
+++			/* it is not expired, continue looking */
+++			lock_rw_unlock(&rrset->entry.lock);
+++		}
+++
+++		/* do not look above the expiretop. */
+++		if(expiretop && *qnamelen == expiretoplen &&
+++			query_dname_compare(*qname, expiretop)==0)
+++			break;
+++	}
+++	return 0;
+++}
+++
++ /** find closest NS or DNAME and returns the rrset (locked) */
++ static struct ub_packed_rrset_key*
++ find_closest_of_type(struct module_env* env, uint8_t* qname, size_t qnamelen, 
++-	uint16_t qclass, time_t now, uint16_t searchtype, int stripfront)
+++	uint16_t qclass, time_t now, uint16_t searchtype, int stripfront,
+++	int noexpiredabove, uint8_t* expiretop, size_t expiretoplen)
++ {
++ 	struct ub_packed_rrset_key *rrset;
++ 	uint8_t lablen;
++@@ -212,8 +260,40 @@ find_closest_of_type(struct module_env* env, uint8_t* qname, size_t qnamelen,
++ 	/* snip off front part of qname until the type is found */
++ 	while(qnamelen > 0) {
++ 		if((rrset = rrset_cache_lookup(env->rrset_cache, qname, 
++-			qnamelen, searchtype, qclass, 0, now, 0)))
++-			return rrset;
+++			qnamelen, searchtype, qclass, 0, now, 0))) {
+++			uint8_t* origqname = qname;
+++			size_t origqnamelen = qnamelen;
+++			if(!noexpiredabove)
+++				return rrset;
+++			/* if expiretop set, do not look above it, but
+++			 * qname is equal, so the just found result is also
+++			 * the nonexpired above part. */
+++			if(expiretop && qnamelen == expiretoplen &&
+++				query_dname_compare(qname, expiretop)==0)
+++				return rrset;
+++			/* check for expiry, but we have to let go of the rrset
+++			 * for the lock ordering */
+++			lock_rw_unlock(&rrset->entry.lock);
+++			/* the expired_above function always takes off one
+++			 * label (if qnamelen>0) and returns the final qname
+++			 * where it searched, so we can continue from there
+++			 * turning the O N*N search into O N. */
+++			if(!rrset_expired_above(env, &qname, &qnamelen,
+++				searchtype, qclass, now, expiretop,
+++				expiretoplen)) {
+++				/* we want to return rrset, but it may be
+++				 * gone from cache, if so, just loop like
+++				 * it was not in the cache in the first place.
+++				 */
+++				if((rrset = rrset_cache_lookup(env->
+++					rrset_cache, origqname, origqnamelen,
+++					searchtype, qclass, 0, now, 0))) {
+++					return rrset;
+++				}
+++			}
+++			log_nametypeclass(VERB_ALGO, "ignoring rrset because expired rrsets exist above it", origqname, searchtype, qclass);
+++			continue;
+++		}
++ 
++ 		/* snip off front label */
++ 		lablen = *qname;
++@@ -461,7 +541,8 @@ dns_msg_ansadd(struct dns_msg* msg, struct regional* region,
++ struct delegpt* 
++ dns_cache_find_delegation(struct module_env* env, uint8_t* qname, 
++ 	size_t qnamelen, uint16_t qtype, uint16_t qclass, 
++-	struct regional* region, struct dns_msg** msg, time_t now)
+++	struct regional* region, struct dns_msg** msg, time_t now,
+++	int noexpiredabove, uint8_t* expiretop, size_t expiretoplen)
++ {
++ 	/* try to find closest NS rrset */
++ 	struct ub_packed_rrset_key* nskey;
++@@ -469,7 +550,7 @@ dns_cache_find_delegation(struct module_env* env, uint8_t* qname,
++ 	struct delegpt* dp;
++ 
++ 	nskey = find_closest_of_type(env, qname, qnamelen, qclass, now,
++-		LDNS_RR_TYPE_NS, 0);
+++		LDNS_RR_TYPE_NS, 0, noexpiredabove, expiretop, expiretoplen);
++ 	if(!nskey) /* hope the caller has hints to prime or something */
++ 		return NULL;
++ 	nsdata = (struct packed_rrset_data*)nskey->entry.data;
++@@ -835,7 +916,7 @@ dns_cache_lookup(struct module_env* env,
++ 	 * consistent with the DNAME */
++ 	if(!no_partial &&
++ 		(rrset=find_closest_of_type(env, qname, qnamelen, qclass, now,
++-		LDNS_RR_TYPE_DNAME, 1))) {
+++		LDNS_RR_TYPE_DNAME, 1, 0, NULL, 0))) {
++ 		/* synthesize a DNAME+CNAME message based on this */
++ 		enum sec_status sec_status = sec_status_unchecked;
++ 		struct dns_msg* msg = synth_dname_msg(rrset, region, now, &k,
++@@ -968,7 +1049,7 @@ dns_cache_lookup(struct module_env* env,
++ int
++ dns_cache_store(struct module_env* env, struct query_info* msgqinf,
++         struct reply_info* msgrep, int is_referral, time_t leeway, int pside,
++-	struct regional* region, uint32_t flags)
+++	struct regional* region, uint32_t flags, time_t qstarttime)
++ {
++ 	struct reply_info* rep = NULL;
++ 	/* alloc, malloc properly (not in region, like msg is) */
++@@ -991,9 +1072,9 @@ dns_cache_store(struct module_env* env, struct query_info* msgqinf,
++ 			/*ignore ret: it was in the cache, ref updated */
++ 			/* no leeway for typeNS */
++ 			(void)rrset_cache_update(env->rrset_cache, &ref, 
++-				env->alloc, *env->now + 
+++				env->alloc,
++ 				((ntohs(ref.key->rk.type)==LDNS_RR_TYPE_NS
++-				 && !pside) ? 0:leeway));
+++				 && !pside) ? qstarttime:*env->now + leeway));
++ 		}
++ 		free(rep);
++ 		return 1;
++@@ -1015,7 +1096,7 @@ dns_cache_store(struct module_env* env, struct query_info* msgqinf,
++ 		rep->flags &= ~(BIT_AA | BIT_CD);
++ 		h = query_info_hash(&qinf, (uint16_t)flags);
++ 		dns_cache_store_msg(env, &qinf, h, rep, leeway, pside, msgrep,
++-			flags, region);
+++			flags, region, qstarttime);
++ 		/* qname is used inside query_info_entrysetup, and set to 
++ 		 * NULL. If it has not been used, free it. free(0) is safe. */
++ 		free(qinf.qname);
++diff --git a/services/cache/dns.h b/services/cache/dns.h
++index bece83702..147f992cb 100644
++--- a/services/cache/dns.h
+++++ b/services/cache/dns.h
++@@ -88,11 +88,13 @@ struct dns_msg {
++  * @param flags: flags with BIT_CD for AAAA queries in dns64 translation.
++  *   The higher 16 bits are used internally to customize the cache policy.
++  *   (See DNSCACHE_STORE_xxx flags).
+++ * @param qstarttime: time when the query was started, and thus when the
+++ * 	delegations were looked up.
++  * @return 0 on alloc error (out of memory).
++  */
++ int dns_cache_store(struct module_env* env, struct query_info* qinf,
++         struct reply_info* rep, int is_referral, time_t leeway, int pside,
++-	struct regional* region, uint32_t flags);
+++	struct regional* region, uint32_t flags, time_t qstarttime);
++ 
++ /**
++  * Store message in the cache. Stores in message cache and rrset cache.
++@@ -112,11 +114,14 @@ int dns_cache_store(struct module_env* env, struct query_info* qinf,
++  * 	can be updated to full TTL even in prefetch situations.
++  * @param qrep: message that can be altered with better rrs from cache.
++  * @param flags: customization flags for the cache policy.
+++ * @param qstarttime: time when the query was started, and thus when the
+++ * 	delegations were looked up.
++  * @param region: to allocate into for qmsg.
++  */
++ void dns_cache_store_msg(struct module_env* env, struct query_info* qinfo,
++ 	hashvalue_type hash, struct reply_info* rep, time_t leeway, int pside,
++-	struct reply_info* qrep, uint32_t flags, struct regional* region);
+++	struct reply_info* qrep, uint32_t flags, struct regional* region,
+++	time_t qstarttime);
++ 
++ /**
++  * Find a delegation from the cache.
++@@ -129,11 +134,18 @@ void dns_cache_store_msg(struct module_env* env, struct query_info* qinfo,
++  * @param msg: if not NULL, delegation message is returned here, synthesized
++  *	from the cache.
++  * @param timenow: the time now, for checking if TTL on cache entries is OK.
+++ * @param noexpiredabove: if set, no expired NS rrsets above the one found
+++ * 	are tolerated. It only returns delegations where the delegations above
+++ * 	it are valid.
+++ * @param expiretop: if not NULL, name where check for expiry ends for
+++ * 	noexpiredabove.
+++ * @param expiretoplen: length of expiretop dname.
++  * @return new delegation or NULL on error or if not found in cache.
++  */
++ struct delegpt* dns_cache_find_delegation(struct module_env* env, 
++ 	uint8_t* qname, size_t qnamelen, uint16_t qtype, uint16_t qclass, 
++-	struct regional* region, struct dns_msg** msg, time_t timenow);
+++	struct regional* region, struct dns_msg** msg, time_t timenow,
+++	int noexpiredabove, uint8_t* expiretop, size_t expiretoplen);
++ 
++ /**
++  * generate dns_msg from cached message
++diff --git a/services/mesh.c b/services/mesh.c
++index cdcfedda2..544ca0aa1 100644
++--- a/services/mesh.c
+++++ b/services/mesh.c
++@@ -839,6 +839,7 @@ mesh_state_create(struct module_env* env, struct query_info* qinfo,
++ 	mstate->s.no_cache_store = 0;
++ 	mstate->s.need_refetch = 0;
++ 	mstate->s.was_ratelimited = 0;
+++	mstate->s.qstarttime = *env->now;
++ 
++ 	/* init modules */
++ 	for(i=0; i<env->mesh->mods.num; i++) {
++diff --git a/testdata/iter_prefetch_change.rpl b/testdata/iter_prefetch_change.rpl
++index 007025ad0..1be9e6abe 100644
++--- a/testdata/iter_prefetch_change.rpl
+++++ b/testdata/iter_prefetch_change.rpl
++@@ -22,9 +22,9 @@ REPLY QR NOERROR
++ SECTION QUESTION
++ . IN NS
++ SECTION ANSWER
++-. IN NS	K.ROOT-SERVERS.NET.
+++. 86400 IN NS	K.ROOT-SERVERS.NET.
++ SECTION ADDITIONAL
++-K.ROOT-SERVERS.NET.	IN	A	193.0.14.129
+++K.ROOT-SERVERS.NET.	86400 IN	A	193.0.14.129
++ ENTRY_END
++ 
++ ENTRY_BEGIN
++@@ -34,9 +34,9 @@ REPLY QR NOERROR
++ SECTION QUESTION
++ com. IN A
++ SECTION AUTHORITY
++-com.	IN NS	a.gtld-servers.net.
+++com.	86400 IN NS	a.gtld-servers.net.
++ SECTION ADDITIONAL
++-a.gtld-servers.net.	IN 	A	192.5.6.30
+++a.gtld-servers.net.	86400 IN 	A	192.5.6.30
++ ENTRY_END
++ RANGE_END
++ 
++@@ -50,9 +50,9 @@ REPLY QR NOERROR
++ SECTION QUESTION
++ com. IN NS
++ SECTION ANSWER
++-com.	IN NS	a.gtld-servers.net.
+++com.	86400 IN NS	a.gtld-servers.net.
++ SECTION ADDITIONAL
++-a.gtld-servers.net.	IN 	A	192.5.6.30
+++a.gtld-servers.net.	86400 IN 	A	192.5.6.30
++ ENTRY_END
++ 
++ ENTRY_BEGIN
++@@ -78,9 +78,9 @@ REPLY QR NOERROR
++ SECTION QUESTION
++ com. IN NS
++ SECTION ANSWER
++-com.	IN NS	a.gtld-servers.net.
+++com.	86400 IN NS	a.gtld-servers.net.
++ SECTION ADDITIONAL
++-a.gtld-servers.net.	IN 	A	192.5.6.30
+++a.gtld-servers.net.	86400 IN 	A	192.5.6.30
++ ENTRY_END
++ 
++ ENTRY_BEGIN
++diff --git a/util/module.h b/util/module.h
++index 7a5480033..2f577e81e 100644
++--- a/util/module.h
+++++ b/util/module.h
++@@ -657,6 +657,12 @@ struct module_qstate {
++ 	int need_refetch;
++ 	/** whether the query (or a subquery) was ratelimited */
++ 	int was_ratelimited;
+++	/** time when query was started. This is when the qstate is created.
+++	 * This is used so that type NS data cannot be overwritten by them
+++	 * expiring while the lookup is in progress, using data fetched from
+++	 * those servers. By comparing expiry time with qstarttime for type NS.
+++	 */
+++	time_t qstarttime;
++ 
++ 	/**
++ 	 * Attributes of clients that share the qstate that may affect IP-based
++diff --git a/validator/validator.c b/validator/validator.c
++index e6307284f..196190304 100644
++--- a/validator/validator.c
+++++ b/validator/validator.c
++@@ -2145,7 +2145,7 @@ processFinished(struct module_qstate* qstate, struct val_qstate* vq,
++ 		if(!qstate->no_cache_store) {
++ 			if(!dns_cache_store(qstate->env, &vq->orig_msg->qinfo,
++ 				vq->orig_msg->rep, 0, qstate->prefetch_leeway, 0, NULL,
++-				qstate->query_flags)) {
+++				qstate->query_flags, qstate->qstarttime)) {
++ 				log_err("out of memory caching validator results");
++ 			}
++ 		}
++@@ -2154,7 +2154,7 @@ processFinished(struct module_qstate* qstate, struct val_qstate* vq,
++ 		/* and this does not get prefetched, so no leeway */
++ 		if(!dns_cache_store(qstate->env, &vq->orig_msg->qinfo,
++ 			vq->orig_msg->rep, 1, 0, 0, NULL,
++-			qstate->query_flags)) {
+++			qstate->query_flags, qstate->qstarttime)) {
++ 			log_err("out of memory caching validator results");
++ 		}
++ 	}
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/unbound/unbound_1.15.0.bb b/meta-networking/recipes-support/unbound/unbound_1.15.0.bb
+index 64a70dc6af..8e0cefd7b3 100644
+--- a/meta-networking/recipes-support/unbound/unbound_1.15.0.bb
++++ b/meta-networking/recipes-support/unbound/unbound_1.15.0.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
+ 
+ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=master \
+ 	file://0001-contrib-add-yocto-compatible-init-script.patch \
++	file://CVE-2022-30698_30699.patch \
+ "
+ SRCREV = "c29b0e0a96c4d281aef40d69a11c564d6ed1a2c6"
+ 
+-- 
+2.25.1
 
 
