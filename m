@@ -1,113 +1,91 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3429DCCF9EC
-	for <webhook@archiver.kernel.org>; Fri, 24 Oct 2025 17:58:06 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web10.29.1761328676397683908
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66E78CCD1BF
+	for <webhook@archiver.kernel.org>; Fri, 24 Oct 2025 18:16:36 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.web10.365.1761329787860574935
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Oct 2025 10:57:56 -0700
+ Fri, 24 Oct 2025 11:16:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TTamLu5n;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-47103b6058fso17572515e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 10:57:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fsquENxh;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-781421f5be6so27366577b3.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 11:16:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761328675; x=1761933475; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BPwIeDWxI6WbzGCibIj7IfXJA8adpMKO/F2a7syHb8E=;
-        b=TTamLu5nFTg42OfSxmsDee9L3h9gDKJRTRx18FJEzmvD48sAx7Bwu8U0sFpZPNXw8C
-         PoMuNBC23LKPkvRGrcH8/YlBR8YXggaKlRARbpv4BUM1cp39wg18Fj0Yj2pLsQYa3ss5
-         YYoJhD6K7wkwt18vgNiyC+C9+7SxLliDnL3cNAS6SBPqtzSCP+VggEilXXlrSU9Wv9nV
-         gm6SyMzf6EXZz8FWNGkdz7zYyhHYIB7Cl1alTaBuVPVQxehqPvvIkIfkWHtY4ZYH9cF7
-         NwBDkL+z6tdI1nXpYb62SBDBZyKWxTOswPv313SzUcwdN7Vwt4BDXClFuhlu1cb7j7qr
-         F0uQ==
+        d=gmail.com; s=20230601; t=1761329787; x=1761934587; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=QHILzbCHNNWezJMbvjhCZ5VBewBvSYROPpG5usoPqb4=;
+        b=fsquENxh8jzOJOHGagGrJy0nVbQTkCy9tiwYHgc+jH+hIX+UB2vBDTbVsVF5zXc5SO
+         D/GMRCiSU7qVAT7gnRYwOz5VOYe7ZEL8uH0cS5b2YOhsZPn/Dirxui6ln5SETvond2gM
+         hIznz26MXv85Ud0+AJ1Wg9en4Rm9dlTn9sEnf2p48604xSDCxgK0vSRmlXWK9TY2dh/h
+         x0I9fVHBRYsfm9zZ5Zfq/CkCc8xPAOLx5FDJ8nErctGikjSIL9zcxuisu+URNkYQ4zDT
+         B7y9lzRnsyX1eEXqQBMi55opKw3by+O8l8DDQ9JClTKZeA4dbsrGHNld1fw90ZSFqEMr
+         cHGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761328675; x=1761933475;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BPwIeDWxI6WbzGCibIj7IfXJA8adpMKO/F2a7syHb8E=;
-        b=RD+99KwdD20iXaX4M6JTjZHmVML462cbHgQ6HdVUuHPAr5y9LtOaM+XkiOjMBH8jPF
-         7m9/nTcG/Wb2KbxjAR4j95v9v88oDBBbYiXrb4orOzF0ek21bQMjPM30DEJoUvQrlmA2
-         aAQn3caf4kULrLqHh4WIoxoWQBskbsEjjiAIVgTgrn/zHS+AVNHM/mJyYx9OFkaaeSF6
-         HVWJmgIUdtg9K6EIHohZfV1zFr2M/yOV1UWYdt3yr0XL+rnwuOgFmpuOyFBONtfz6Jet
-         geWD9hSQGItE9VG8d4P/JaXzXIxd3PnlZwoH6FzT+iOLd1707t+HKE3a6BK4srN02RFn
-         wcOw==
-X-Gm-Message-State: AOJu0Yxy4OTp2Idq9ukKuhvbHiYLU/1ZVTRFsHREpjAWLY2lkCliKNjy
-	DwXFisE1ywFq/Bl2jjr9y/ZDn7l/gvDwCdePMKn/8qiSBUSMH+mam+P5P0Lsvw==
-X-Gm-Gg: ASbGncv1katHOUgKRMuwwsRhtTGJuLB2xpttRjgmgYop4L5ZW9WV9vcC8VKb0ZsovsO
-	4L8Un2Kz+S7Y+e5PqFoWml6loQ63z3+yKjXH4X9lX9xtT106BXwesrgfhF95eqjNLJYx9PLjyia
-	zjXk/X5N9RfbB3FiqMFc1H3O/f4su/1AAPnKi3T2nuaGOAvLXPy9qLWyTGAfjnFAqkuqfwIx0xU
-	ZmQjrCsmNJsipegZS5tGm1uxWCtaB9kADCzHmv2qaEyD3uRlr1F6KO9ldxjXhTIx0TriWOSZe7D
-	JqZ2XFOd1eDiH8lvqZ1jnJHx3szbWgxw4H80k3yjZesFGca+2nLK6B8iI+oOLo0f31gznWMg6g3
-	5g/hNP6IkqLTQ+S0B53pkfTe7rxWAhVX+yXEVbPgEmiJCDVW53zIc43VWXd3PjnHvXStSyeW4Y5
-	c5bhFzi3Ky
-X-Google-Smtp-Source: AGHT+IFavI93EcT19tjYoH1QBObCG9OE2MxCAcLdcyI6oase2anIWMS6IE0cnboccLJbVC5GHZGAOQ==
-X-Received: by 2002:a05:600c:4694:b0:46e:37d5:dbed with SMTP id 5b1f17b1804b1-475d2427d73mr32884585e9.12.1761328674760;
-        Fri, 24 Oct 2025 10:57:54 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-475c43900e1sm192686925e9.17.2025.10.24.10.57.54
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1761329787; x=1761934587;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=QHILzbCHNNWezJMbvjhCZ5VBewBvSYROPpG5usoPqb4=;
+        b=V4tRtpQ1aDC5Pvn3/Sw6hlACayvTB4/ugc+YS4UPimhO3eUI+vL1veZLgikunRyTuC
+         aVBJrNay7J690LQlgIpk67HcY4eRCq11qZBmxdjA6aBClrmOdyVDLmRPOWy2IJMhmy87
+         RwuHnlghqc8YcFX4n19OZIOmRoSYFaIE1yrsmMskjLFMl1sUH5Zs10Q4clBTRGPo60d9
+         5NaCiqHS3cH/G88sb2e2/1mhmmuZlzvU7scP18wsTihigCSFkjiqVmPHm3RdFYdvLWVA
+         /PU7aWH6okwg1wgrtTnY9aC0/6et8LhNm8ZyJ+xLpJEy5pzp8HzfNl94gF2msB6hLKTC
+         G5jg==
+X-Gm-Message-State: AOJu0Yylp+RjX6/3dU5wlhzqNAugzVYyPwjdcwrBNdrfsNDHuJG8r9aL
+	TOh1chFoph6VRJzNQJ5w1RQsY/t7LLVqshT/45zZ2qI1a2RHmuiHMsqEf+YZaQcF
+X-Gm-Gg: ASbGncumMEdUh89dnJeBw+s8poBptgRRXJuWn/XoXIgHriLmYsuSqleuS6ejBiOrQj1
+	h6DGcYZvm7zI13PTksjAuP1jvAFvsi6RwlBmGkq62XVf9YD1BsTNqeR//OqjNN7i3yy5ZjbNk5C
+	Zffym8GHkaiQYJ8ZbA2kJGSptgwsFuyGQoolKMjjzC50bO2o/c9JtTJNQ0iGBJ3EQjAA441iTV/
+	dRWsgSU+CzbRxLuy3Fpgt3vdmOzeIZ1uLw7ACRFn721/wqBuODy/WSoBXfjgXsQxfiD4e9LGC3K
+	34ty3ztuEjXNJyqYINq0XP6m1/QTBNuzpd0RSPS8+ra74D+ixu6XlxMbmBW0Wtn8bS9v+yhXrfi
+	dp+c3AV2wCoyyO57c/Ko2XfLctikUqBprPVxQi99mxac35IxNCieP4ARIsAGlpgxBSHdmQb9bk0
+	exDIJiDOAxug0rlBqqwMAshrjYgccnp9T+FtGVWkpm/A==
+X-Google-Smtp-Source: AGHT+IFnWuyChgKAZ1CNlIm75wX+VP6FcldU68oQM531Aj4e6rRO65QubPIf4kwwJA2UQI2XPmCloQ==
+X-Received: by 2002:a05:690c:6101:b0:762:772b:917d with SMTP id 00721157ae682-785e0231442mr23973117b3.49.1761329786485;
+        Fri, 24 Oct 2025 11:16:26 -0700 (PDT)
+Received: from localhost.localdomain (71-208-0-23.ftmy.qwest.net. [71.208.0.23])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-785cd6eeaacsm14728927b3.48.2025.10.24.11.16.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Oct 2025 10:57:54 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Fri, 24 Oct 2025 11:16:26 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-perl][PATCH 09/11] libtest-deep-perl: fix ptests
-Date: Fri, 24 Oct 2025 19:57:45 +0200
-Message-ID: <20251024175747.704498-9-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.1
-In-Reply-To: <20251024175747.704498-1-skandigraun@gmail.com>
-References: <20251024175747.704498-1-skandigraun@gmail.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-perl][PATCH 1/2] libdevel-globaldestruction-perl: fix homepage
+Date: Fri, 24 Oct 2025 14:16:04 -0400
+Message-ID: <20251024181605.120814-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 17:58:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120967
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 18:16:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120970
 
-Add missing dependency.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-perl/conf/include/ptest-packagelists-meta-perl.inc   | 2 +-
- meta-perl/recipes-perl/libtest/libtest-deep-perl_1.205.bb | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ .../libdevel/libdevel-globaldestruction-perl_0.14.bb            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
-index 02c239d9fd..a26b91379c 100644
---- a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
-+++ b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
-@@ -28,6 +28,7 @@ PTESTS_FAST_META_PERL = "\
-     libstrictures-perl \
-     libsub-uplevel-perl \
-     libterm-readkey-perl \
-+    libtest-deep-perl \
-     libtest-nowarnings-perl \
-     libtext-diff-perl \
- "
-@@ -43,7 +44,6 @@ PTESTS_PROBLEMS_META_PERL = "\
-     libnet-dns-perl \
-     libnet-dns-sec-perl \
-     libnet-ssleay-perl \
--    libtest-deep-perl \
-     libtest-harness-perl \
-     libtest-warn-perl \
-     libunicode-linebreak-perl \
-diff --git a/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.205.bb b/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.205.bb
-index 414f0efe3d..93b2e5a1f5 100644
---- a/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.205.bb
-+++ b/meta-perl/recipes-perl/libtest/libtest-deep-perl_1.205.bb
-@@ -46,6 +46,7 @@ RDEPENDS:${PN} += " \
- "
+diff --git a/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb b/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb
+index 1da94516eb..1541751d63 100644
+--- a/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb
++++ b/meta-perl/recipes-perl/libdevel/libdevel-globaldestruction-perl_0.14.bb
+@@ -4,7 +4,7 @@ WRT finalizers because it's not ordered and objects can sometimes disappear."
  
- RDEPENDS:${PN}-ptest += " \
-+    perl-module-extutils-mm-unix \
-     perl-module-if \
-     perl-module-lib \
-     perl-module-test-more \
+ SECTION = "libs"
+ 
+-HOMEPAGE = "https://metacpan.org/pod/Devel-GlobalDestruction/"
++HOMEPAGE = "https://metacpan.org/pod/Devel::GlobalDestruction/"
+ 
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+ LIC_FILES_CHKSUM = "file://README;beginline=53;endline=55;md5=935dadb9423774f53548e5cd5055d41a"
+-- 
+2.43.0
+
 
