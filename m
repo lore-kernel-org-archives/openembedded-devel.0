@@ -1,165 +1,122 @@
-Return-Path: <Divya.Chellam@windriver.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 387A4CCF9E3
-	for <webhook@archiver.kernel.org>; Fri, 24 Oct 2025 13:51:51 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.11489.1761313902121603055
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02DD9CCF9E3
+	for <webhook@archiver.kernel.org>; Fri, 24 Oct 2025 17:57:56 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.web11.28.1761328674400997670
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Oct 2025 06:51:42 -0700
+ Fri, 24 Oct 2025 10:57:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=ENDsxWmf;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2392d52613=divya.chellam@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59O5vTEw2886273
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 13:51:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=pMa75fbcXaj9v9mM86Jl
-	oLGj61V/aAx8/7ABd65vBsM=; b=ENDsxWmfGj+VunWnXMGxSfCwvHyNvNfruuWz
-	lWBlERQJ8AWFNRPorBuk8v/2js5czGfNZuOuhFcJbPPm+pv3af7unbpvqHnvXZwg
-	0yUVRT/aflRwEuCevBTQOTwDNMEp2uIpBEe7Zeiq3X4sWIPv1x6kmpxDF5bclNXm
-	+mtWFjnB0JXFhHNnkYdhtR9OqHfiFKrq0pSvm6vRcKO+5xyvOONne2WLCCFRo/WH
-	8JBTGEN0BkormaAxc7qg69wfRsBXDRpPGCYVim0TKAlLlpYacKBwD8jM7kUszoJf
-	5Wtv/rPNRJYs3xieliARwWGoA8vd1f5hc3IMfoFUqRqfW579RQ==
-Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 49y8athypa-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 13:51:41 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.59; Fri, 24 Oct 2025 06:51:38 -0700
-From: dchellam <divya.chellam@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 2/2] jq: fix CVE-2025-9403
-Date: Fri, 24 Oct 2025 19:21:08 +0530
-Message-ID: <20251024135108.1327995-1-divya.chellam@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IKMVgnac;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-475dae5d473so1357565e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 10:57:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1761328673; x=1761933473; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YcrFLkt1B/N9iXmBZmxQp5ux2YCHUoDDo8/YSsIYWRM=;
+        b=IKMVgnac2ZecEDWKSFyYX3oLG3hRATmWF19sjRUwRf1SkleC5RFfhjkzUKV2XE9b24
+         zs0QkZfv53Jmopr3+9hcg3s7KT6v4wJtWehY6KukGGSo0klb3jjbi/vkMS3AJ4o/+hJ5
+         VbrEQc9MdTlQ5z/X2PqnlPDgAYu3IHJ7+yQQFLwhih0flI/UWScb2bRPUu2F6QkI0LB0
+         DQ8yndR4g2tTQKgALNcW5d4Lv0WvmjpTFQVOtQ0udLMpFLU3CZxj8V+sBpXhNL/mmZ5J
+         yyqIW31GI893bw1jmWGwvsiuPBb+nBPxFTiYOF4r4NlBOxGvoWziM023L1wj/5uVzqWq
+         Ue7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761328673; x=1761933473;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=YcrFLkt1B/N9iXmBZmxQp5ux2YCHUoDDo8/YSsIYWRM=;
+        b=EMbKcfUm+FsOQXkUF0jy+XK/+B6KH4cq3bX9fqjk9DoY8wj5RjGKi+tSmG2pgIGxD+
+         YYh/fTCLy/1l2k40qHBFeYiz2nqaNnFWz+kx5drHHue7IaxhEBf7sj1a/BTPkFp/7kwA
+         GsxP5v+k0B0Xuxylwkaq5mbmSgWEcFoF7kPSdtA75eMKwxychFJ12dcZLoPUr/L0HJ9z
+         yrR19XIlzujBNVrxmD4MZKR5yfFtirqoJh1j+ShT3NlQ1na54/R695rO7SqITGqHdepj
+         xNoR4qDbvy+s0/Agx2ilclBZTCfhEbExE1Xi6RHZInsyTNy6lv6yH5VQ+n5F4hDdesnn
+         29qw==
+X-Gm-Message-State: AOJu0YwLqFxpLe1VRtRQ2pUOb+ziDvxb3CHmeMueDagaTGtzey7DGiV0
+	lY7WPS/vEDwOPBo0wyQk566Sl7qCeKZfO7dQpCIpoPRh7p4AynLCHW93zDbPIg==
+X-Gm-Gg: ASbGncvCudwt+K6iQZQo0ON9sBmezV5F7cimU72CBOLWg5I+HtvvxJ32fiw3A/FuvHW
+	Mdcy85dn7+/8OlSmbh+JLQ6+DlDjkX7kP0inta5Wfd+2Sxcj0YZBAWROSHORCH/Lan90gmzcBXw
+	R3dzL2DYocvqKPN1g77Ti/n49UbRWY/MPBQhWFjW0j6mn9qAMRLsD0ws7WV/pAHHbA11Vzz6eNi
+	uWW4PRmrPvfTpEDY6/bY23Q03Ep6jblSSYpuJCIhmmMNTRYrqGAVVnO0sE/nBiJNSNQsilGmKnl
+	iBzjUccqmPMpGNGhRS9hdZtA+xDP7fvI+3rxfgcXM8lQj990Jyb+Y1zTK8qCfCZo0WiOgbAoQJ1
+	x4EpedF4r+nKYSRKe3xMLZsQ3EHfhhTPbYoJ9Buna6icJe++rvMob9ZSoR6RNKnBIzUH+LoxVbA
+	==
+X-Google-Smtp-Source: AGHT+IEWh8Evk2bg5+AmeTe1QO3cM+lB8BZKEsWzKQCkY1e9wynWwhKhneAHM3vEt+9Lnp1AADsE2A==
+X-Received: by 2002:a05:600c:6085:b0:471:133c:4b9a with SMTP id 5b1f17b1804b1-4711786c79emr248545965e9.6.1761328672582;
+        Fri, 24 Oct 2025 10:57:52 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-475c43900e1sm192686925e9.17.2025.10.24.10.57.52
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Oct 2025 10:57:52 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-perl][PATCH 06/11] libfile-slurper-perl: fix ptests
+Date: Fri, 24 Oct 2025 19:57:42 +0200
+Message-ID: <20251024175747.704498-6-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.1
+In-Reply-To: <20251024175747.704498-1-skandigraun@gmail.com>
+References: <20251024175747.704498-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.11.232.110]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) To
- ala-exchng01.corp.ad.wrs.com (10.11.224.121)
-X-Authority-Analysis: v=2.4 cv=N9ck1m9B c=1 sm=1 tr=0 ts=68fb846d cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=gmxlzscTznEA:10 a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=tX0wWbkNTWi5hoOBzXAA:9
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDI0MDEyMyBTYWx0ZWRfX37uFLlxrr+tN
- 0MHR0PJgx6xp9MJ6RzYpIvTbM4G/pkJTR6qBpUat6OfDdnofkR2KepHc40/DUuz8Om6VsG7aEOd
- hjvo4goeJXLHo1ViQdgHaBED3keP+fPkekw1NP5d1ylczJwxpL9+N0KZoRJyb+oYkOAzxZdV+9k
- byVAi6ynSp7Apkqpbm9liGivz8/TEciKqFSy8K0zRzGriNQ2W9oe6Z4cM4BdtZI+VPJAK5ZmHNH
- kDWg3BTocTDqwHJwFSMyoLQk5rBiniFuI3vB0/NaWFDj8/vfq7V2R2cAWXR8RuklxtGbwqDuWZT
- xjCl8DvP1vnIg7+d28gPSzzFh5PydfGnVPFKaZyuFFBe5s5VxaMumw6dZ/EsFxEAoKTTDjGWUBw
- 6PY9BqE6VbKwG/Xvuvdsg6QkvbjvcQ==
-X-Proofpoint-ORIG-GUID: vi28OT0PAQMUU6iaAphrgLOqiUPiUp6k
-X-Proofpoint-GUID: vi28OT0PAQMUU6iaAphrgLOqiUPiUp6k
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-10-24_02,2025-10-22_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 spamscore=0 impostorscore=0 adultscore=0
- phishscore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510020000 definitions=main-2510240123
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 13:51:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120958
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 17:57:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120964
 
-From: Divya Chellam <divya.chellam@windriver.com>
+Add missing dependencies, and install lib/File in ptest folder, because it
+is considered as test data, accessed by the tests.
 
-A vulnerability was determined in jqlang jq up to 1.6. Impacted is the
-function run_jq_tests of the file jq_test.c of the component JSON Parser.
-Executing manipulation can lead to reachable assertion. The attack
-requires local access. The exploit has been publicly disclosed and may be
-utilized. Other versions might be affected as well.
-
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2025-9403
-
-Upstream-patch:
-https://github.com/jqlang/jq/commit/a4d9d540103ff9a262e304329c277ec89b27e5f9
-
-Signed-off-by: Divya Chellam <divya.chellam@windriver.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../jq/jq/CVE-2025-9403.patch                 | 49 +++++++++++++++++++
- meta-oe/recipes-devtools/jq/jq_1.7.1.bb       |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2025-9403.patch
+ meta-perl/conf/include/ptest-packagelists-meta-perl.inc   | 2 +-
+ .../recipes-perl/libfile/libfile-slurper-perl_0.014.bb    | 8 ++++++++
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2025-9403.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2025-9403.patch
-new file mode 100644
-index 0000000000..19d769a6f5
---- /dev/null
-+++ b/meta-oe/recipes-devtools/jq/jq/CVE-2025-9403.patch
-@@ -0,0 +1,49 @@
-+From a4d9d540103ff9a262e304329c277ec89b27e5f9 Mon Sep 17 00:00:00 2001
-+From: itchyny <itchyny@cybozu.co.jp>
-+Date: Mon, 15 Sep 2025 07:47:51 +0900
-+Subject: [PATCH] Fix expected value assertion for NaN value (fix #3393)
-+ (#3408)
-+
-+CVE: CVE-2025-9403
-+
-+Upstream-Status: Backport [https://github.com/jqlang/jq/commit/a4d9d540103ff9a262e304329c277ec89b27e5f9]
-+
-+Signed-off-by: Divya Chellam <divya.chellam@windriver.com>
-+---
-+ src/jq_test.c | 13 ++++++++-----
-+ 1 file changed, 8 insertions(+), 5 deletions(-)
-+
-+diff --git a/src/jq_test.c b/src/jq_test.c
-+index 3945686..f42b05c 100644
-+--- a/src/jq_test.c
-++++ b/src/jq_test.c
-+@@ -2,6 +2,7 @@
-+ #include <stdio.h>
-+ #include <string.h>
-+ #include <stdlib.h>
-++#include <math.h>
-+ #ifdef HAVE_PTHREAD
-+ #include <pthread.h>
-+ #endif
-+@@ -208,11 +209,13 @@ static void run_jq_tests(jv lib_dirs, int verbose, FILE *testdata, int skip, int
-+         printf(" for test at line number %u: %s\n", lineno, prog);
-+         pass = 0;
-+       }
-+-      jv as_string = jv_dump_string(jv_copy(expected), rand() & ~(JV_PRINT_COLOR|JV_PRINT_REFCOUNT));
-+-      jv reparsed = jv_parse_sized(jv_string_value(as_string), jv_string_length_bytes(jv_copy(as_string)));
-+-      assert(jv_equal(jv_copy(expected), jv_copy(reparsed)));
-+-      jv_free(as_string);
-+-      jv_free(reparsed);
-++      if (!(jv_get_kind(expected) == JV_KIND_NUMBER && isnan(jv_number_value(expected)))) {
-++        jv as_string = jv_dump_string(jv_copy(expected), rand() & ~(JV_PRINT_COLOR|JV_PRINT_REFCOUNT));
-++        jv reparsed = jv_parse_sized(jv_string_value(as_string), jv_string_length_bytes(jv_copy(as_string)));
-++        assert(jv_equal(jv_copy(expected), jv_copy(reparsed)));
-++        jv_free(as_string);
-++        jv_free(reparsed);
-++      }
-+       jv_free(expected);
-+       jv_free(actual);
-+     }
-+-- 
-+2.40.0
-+
-diff --git a/meta-oe/recipes-devtools/jq/jq_1.7.1.bb b/meta-oe/recipes-devtools/jq/jq_1.7.1.bb
-index 9238474319..dfc8dda7ee 100644
---- a/meta-oe/recipes-devtools/jq/jq_1.7.1.bb
-+++ b/meta-oe/recipes-devtools/jq/jq_1.7.1.bb
-@@ -14,6 +14,7 @@ SRC_URI = "${GITHUB_BASE_URI}/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
-     file://CVE-2024-23337.patch \
-     file://CVE-2024-53427.patch \
-     file://CVE-2025-48060.patch \
-+    file://CVE-2025-9403.patch \
-     "
- SRC_URI[sha256sum] = "478c9ca129fd2e3443fe27314b455e211e0d8c60bc8ff7df703873deeee580c2"
+diff --git a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+index 751a22c708..e099910775 100644
+--- a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
++++ b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+@@ -20,6 +20,7 @@ PTESTS_FAST_META_PERL = "\
+     liberror-perl \
+     libextutils-config-perl \
+     libextutils-installpaths-perl \
++    libfile-slurper-perl \
+     libhtml-tagset-perl \
+     libmozilla-ca-perl \
+     libnet-ldap-perl \
+@@ -35,7 +36,6 @@ PTESTS_SLOW_META_PERL = "\
  
--- 
-2.40.0
-
+ PTESTS_PROBLEMS_META_PERL = "\
+     libconfig-autoconf-perl \
+-    libfile-slurper-perl \
+     libhtml-parser-perl \
+     libmime-types-perl \
+     libmodule-build-tiny-perl \
+diff --git a/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.014.bb b/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.014.bb
+index 03001de45e..7186d1a10f 100644
+--- a/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.014.bb
++++ b/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.014.bb
+@@ -24,7 +24,15 @@ RDEPENDS:${PN} = " \
+     perl-module-warnings \
+ "
+ 
++do_install_ptest:append(){
++    install -d ${D}${PTEST_PATH}/lib
++    touch ${D}${PTEST_PATH}/lib/File
++}
++
+ RDEPENDS:${PN}-ptest += "libtest-warnings-perl \
++    perl-module-encode-encoding \
++    perl-module-file-spec-functions \
++    perl-module-findbin \
+     perl-module-test-more \
+     "
+ 
 
