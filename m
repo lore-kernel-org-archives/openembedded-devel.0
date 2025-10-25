@@ -1,112 +1,151 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E4A1CCD1BF
-	for <webhook@archiver.kernel.org>; Sat, 25 Oct 2025 12:35:45 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web11.4661.1761395738645948583
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EDA1CCF9E3
+	for <webhook@archiver.kernel.org>; Sat, 25 Oct 2025 14:26:26 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.web10.6565.1761402384921641665
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 Oct 2025 05:35:38 -0700
+ Sat, 25 Oct 2025 07:26:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gXlVEYq9;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-7836853a0d6so53718167b3.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 05:35:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YE77AxEl;
+ spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-3ece0e4c5faso2799083f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 07:26:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761395738; x=1762000538; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=DIByDpVF8D3qqcLQaASvr+b8dCTb1sn9mzzQvQ4LjkA=;
-        b=gXlVEYq9buldohQdz+aBVn3hvecJpfaZ0/w1pmz5Zex1ePIN3cVI4TeHsNzBtc2rlx
-         gEz9kyfecFxFyKCjdVeRVnkbScw5pWXB+fSOMu7yFyNR37YpUpvyC00yncGgiJbthunp
-         8vYpczrGreWRA6NcxFK36iW0RmfXbjkPGaaK5YLx2JhNhdHdD+WNBdtJUdUa8MnmRtUB
-         HoMWxhGRFLTSHvoZzRJdBqD0JG108z693v+m9RsivtcZdwK9J3evWPy8oCcIwqvrOPnD
-         wDwvuXz2RJRuw/IxO4sNFwNlRgOA+ucElqX+WgNMyC6lsS/9TyaSOClRuysHSN2+DI/J
-         KneQ==
+        d=gmail.com; s=20230601; t=1761402383; x=1762007183; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=O1r0GrTknpgRc3Byw0uFLGTX3dSrRikgJe/Pxw4Omn4=;
+        b=YE77AxElzg4Q4BL5P0JngMJZUMNqmFIwb3yNBb509xgEYcDz5x22NNCL4g1a4OfCD0
+         PMfHMZpz0YwGtKLRy+H97bvJM8JjixFdyYG1s0KktI6Mt2B66bBB9csMWojPu/jzXhLw
+         sRdO+fcbLBccXXCAiDWyVTYr5hDF/iA65AeGPuXuN6FYwWK0tlV+SzgA/4Vv9OWJ4Rkp
+         eCvK3aZAflFrVcluYMM3OYA/tGx61XOJsrHGwYyGAb0fB+Zxkkje+++tHLplLmkAukv1
+         GftH23P75U2k1u7jjVZeqv5hJ5X3vwwQnSDUXxC7Lz96XdVqE+ips56bHC6X1dxNQ5xw
+         6PiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761395738; x=1762000538;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=DIByDpVF8D3qqcLQaASvr+b8dCTb1sn9mzzQvQ4LjkA=;
-        b=Dr15cfytlAPBSk132phj8WJ2OOJCVtwOqpiS9sfbHe+9OYd16k+75lbEgDVRcc0BKc
-         BPOACUek4VsxSboCfMpsQB6ojCBML0obQuE5woTfsj04sW1jUa2uAiTMZE4+yfm9LDzg
-         6CSQaYYtN87vUfEV4Dug0rVzEqk+3qGVnFOqlORB+i3Ze9MZN5XQJJU0y6cW+nsVehPX
-         Y7O8DHoqrGBLpsZ1CX9sq02wUgbXh7j80iZrInhmRtz/dLDpHtk9kzmbDJDp+WTER7mc
-         C+VsbsQuWGI8D4b4Gypu/QTMt9YB91Q+k/bk3PaiNHFUdjhfA4RrMCZgJWbM0bUJFH2E
-         qXCg==
-X-Gm-Message-State: AOJu0YyYmElbaQJvrbaLO2IXh3/U/8/gUEIJL/xoHRbYGhvHkyjMQcqP
-	zhLBdiBbORVfiVHkZCwp9c/uGQE9FId6qpSWpRc/ttluXMIjeMhjz6tEAhKg/RWQ
-X-Gm-Gg: ASbGncuvS/UT07wHiUzqj6wpEWrcg6ITByKIGYwaEpvfxcuuFhl5X2jFVBo/+Rhp1w2
-	CLgKt7aoN1P7jaHCzXO5/16/SUyr+ket6PoJHB68b7WTM9bivvyBHh+he4LIf1ottOYAbv4PIGo
-	u97cDUBSVJVjT6t/gJh0XyI2dVsYQJHuOp100zZbMFVpzBU1POTImXx+gMfVlpZoAyboX1dfdLn
-	HHBjUa+7c+M+f+YlYMDDGyBsg+KuK+Oy09n4H4HS71uz3TxYVxyRkEfa5RIqaaFUU3lVIIc7vPY
-	IbjsNbrR4q9/gLjNFJpCu2UX9SGrVYS8ZivZKZo4XVoEiTpKAmYEgtA4iuVOKGu19okQfS9Dy36
-	ir2bu4HOU0zW9C2+2ffpw5N4InEKW+NJnpLegaRYgHFekZtm/XNgpLF1I3H+IghlmKkHNHtDngB
-	mZmUTlhSMvgdOVStPs79lJnGb4+6Gv7VFupcLhpU5HBJl8yzlFbwpb
-X-Google-Smtp-Source: AGHT+IHQtTUGavhAuxoGXwaAoVcFzwgqT2yiEVHh0FJaakZEwobeOf8A8nzbr7VUlXpe2xhRw4ORkQ==
-X-Received: by 2002:a05:690c:9416:10b0:782:9291:493b with SMTP id 00721157ae682-785dd68a30cmr43817887b3.32.1761395737239;
-        Sat, 25 Oct 2025 05:35:37 -0700 (PDT)
-Received: from localhost.localdomain (71-208-0-23.ftmy.qwest.net. [71.208.0.23])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-785ed1ebdefsm4937277b3.56.2025.10.25.05.35.36
+        d=1e100.net; s=20230601; t=1761402383; x=1762007183;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=O1r0GrTknpgRc3Byw0uFLGTX3dSrRikgJe/Pxw4Omn4=;
+        b=vY8TCkrpnI1j8ui5hMVKh33E/VwedB2AOvvqG3aRlJa1YLOS9uOCDKmYCcz+5HSHTG
+         KsbIuT0XCaFw2191PekeB+/jh4kG22sIDXSgFs6IA4hjrCGPIZmNesPjqkRuykF91980
+         Gy+Jcww0v/hteG52ZTCCL4dA9uVnBh1TRZrcboaZsJWTVmW+5nbjzYvbUBn22QNnFcbJ
+         h6inK/bGPXWFIRXLnOpkh9XzVvKWOo84CmjecTBlmDygH2t41qE2eGJMgiujI4IjlvCO
+         +NsPpIy8UznGA1FAT+6H9kk7BK4IcC0OyM9uE3bpEg+0TSAGVPTN8HRDZjflvM/1J+U3
+         np3g==
+X-Gm-Message-State: AOJu0Ywa5IvuB4mfwOc8KsFT3FeQ7mBTEc9cZWeZjneqkUy7xrKjOqsZ
+	f/Zaft0davKm1D+3Bm6j1QZ1nbCCJZSTBxY+AimMgH22JaxJGWCx0w7E2y47Hg==
+X-Gm-Gg: ASbGncv5i75eYEqse6qhsEbDlq7AH/OBgttHoaemGDFlAzBoDuhC7FJpDrTxgefWd3z
+	tsoQ57LX1ramhMMWHlTUEYFNu8L6+U7xO7Ebwd2JJ/zZiedKoi0Xa1QYSwzmP9MDPdTWYeI61si
+	qFkTDoT61m36GCvY4gqvFqKgxYgSVvKSBt0W5caWmODUQt29ztE0/3Hl907GncGsaVYFJhG3BOj
+	RZzQ0DUTl6PXOd/FZFzZ3g8+/YABlhEz+0H1XPGlq+8Zhc8Vn+139nwtWkhc46/PyCwfey/N/gU
+	u+uRv6dyAf0+xR4uj4X2C1UNNLIHQXLSTWLDSIUQrPf1bKlhOe87XVa2bKRbpXzes29i8TZ1eGS
+	p+stgVXqlx/OEu02ltzpsflLXEjHy/Dxibis+a/emMq4GV9/PsQk/PBFY7yuYBRJeb7TAlgIWlw
+	==
+X-Google-Smtp-Source: AGHT+IGuSSiEkQymaEr4m/dFZtYNjmodsQe8C4tr/iJrSlyGDM/uSgY8P/vnfPlYAkgc0YWCq+MjVw==
+X-Received: by 2002:a05:6000:178f:b0:429:92d8:3371 with SMTP id ffacd0b85a97d-42992d8343dmr3683742f8f.11.1761402383005;
+        Sat, 25 Oct 2025 07:26:23 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952b7ce1sm3867482f8f.0.2025.10.25.07.26.22
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 Oct 2025 05:35:36 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
+        Sat, 25 Oct 2025 07:26:22 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-webserver][PATCH 2/2] phpmyadmin: upgrade 5.2.2 -> 5.2.3
-Date: Sat, 25 Oct 2025 08:35:13 -0400
-Message-ID: <20251025123513.154475-2-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251025123513.154475-1-schonm@gmail.com>
-References: <20251025123513.154475-1-schonm@gmail.com>
+Subject: [meta-perl][PATCH 1/5] libnet-dns-perl: upgrade 1.52 -> 1.53
+Date: Sat, 25 Oct 2025 16:26:17 +0200
+Message-ID: <20251025142621.1566114-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 12:35:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121000
+ <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 14:26:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121001
 
-License-Update: Copyright year updated to 2025
+Also fix ptests.
 
-Release note:
-https://www.phpmyadmin.net/news/2025/10/8/phpmyadmin-523-is-released/
+Changelog:
+-Suppress autovivified undefined $rr->{class} and $rr->{ttl}.
+-Rework test scripts for SVCB and DELEG.
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../phpmyadmin/{phpmyadmin_5.2.2.bb => phpmyadmin_5.2.3.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_5.2.2.bb => phpmyadmin_5.2.3.bb} (91%)
+ .../include/ptest-packagelists-meta-perl.inc   |  2 +-
+ ...ns-perl_1.52.bb => libnet-dns-perl_1.53.bb} | 18 ++++++++++++++++--
+ 2 files changed, 17 insertions(+), 3 deletions(-)
+ rename meta-perl/recipes-perl/libnet/{libnet-dns-perl_1.52.bb => libnet-dns-perl_1.53.bb} (71%)
 
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.2.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.3.bb
-similarity index 91%
-rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.2.bb
-rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.3.bb
-index f0e8b749aa..5b9f306a16 100644
---- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.2.bb
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.2.3.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.phpmyadmin.net"
- # Main code is GPLv2, vendor/tecnickcom/tcpdf is under LGPLv3, js/jquery is under MIT
- LICENSE = "GPL-2.0-only & LGPL-3.0-only & MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
--                    file://vendor/tecnickcom/tcpdf/LICENSE.TXT;md5=72bda492a00ee8c4121987c6afdefc07 \
-+                    file://vendor/tecnickcom/tcpdf/LICENSE.TXT;md5=06da7ef2f2b2874be8528063198fa994 \
-                     file://js/vendor/jquery/MIT-LICENSE.txt;md5=de877aa6d744cc160ff41c26a8e4811f \
+diff --git a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+index e923bd00c4..612754635b 100644
+--- a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
++++ b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+@@ -25,6 +25,7 @@ PTESTS_FAST_META_PERL = "\
+     libmime-base32-perl \
+     libmime-types-perl \
+     libmozilla-ca-perl \
++    libnet-dns-perl \
+     libnet-ldap-perl \
+     libnet-ssleay-perl \
+     libstrictures-perl \
+@@ -47,7 +48,6 @@ PTESTS_PROBLEMS_META_PERL = "\
+     libconfig-autoconf-perl \
+     libhtml-parser-perl \
+     libmodule-build-tiny-perl \
+-    libnet-dns-perl \
+     libnet-dns-sec-perl \
+     libunix-statgrab \
+     libxml-libxml-perl \
+diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.52.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.53.bb
+similarity index 71%
+rename from meta-perl/recipes-perl/libnet/libnet-dns-perl_1.52.bb
+rename to meta-perl/recipes-perl/libnet/libnet-dns-perl_1.53.bb
+index d0f8141794..cccbb16a59 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.52.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.53.bb
+@@ -9,7 +9,7 @@ DEPENDS += "perl"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
+ 
+-SRC_URI[sha256sum] = "c9884fcb08e4d03c23188d4e10836c2382fcb65b69859581a20845a3235a7203"
++SRC_URI[sha256sum] = "04acb4f177d57c147dcedc4bd70e23806af3db75a532f46f95461b2bc9a94959"
+ 
+ UPSTREAM_CHECK_REGEX = "Net\-DNS\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ 
+@@ -41,12 +41,27 @@ RRECOMMENDS:${PN} += " \
+     libnet-dns-sec-perl \
  "
  
-@@ -11,7 +11,7 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
-            file://apache.conf \
++do_install_ptest_perl:append(){
++    install ${S}/MANIFEST ${D}${PTEST_PATH}
++    cp -r ${S}/lib ${D}${PTEST_PATH}
++    cp ${D}${PTEST_PATH}/t/TestToolkit.pm ${D}${PTEST_PATH}
++
++    # This test tries to reconcile the MANIFEST file content with the actual
++    # package content. While this might be useful for package integrity
++    # verification, it is not much for runtime testing. It also requires the
++    # whole source package to be installed. Rather just drop this test.
++    rm ${D}${PTEST_PATH}/t/00-install.t
++}
++
+ RDEPENDS:${PN}-ptest += " \
+     perl-module-encode \
++    perl-module-encode-encoding \
+     perl-module-encode-byte \
+     perl-module-extutils-mm \
+     perl-module-extutils-mm-unix \
+     perl-module-overload \
++    perl-module-perlio \
++    perl-module-perlio-encoding \
  "
  
--SRC_URI[sha256sum] = "f881819a3b11e653b0212afaf0cc105db85c767715cb3f5852670f7fc36c9669"
-+SRC_URI[sha256sum] = "57881348297c4412f86c410547cf76b4d8a236574dd2c6b7d6a2beebe7fc44e3"
- 
- UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
- UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
--- 
-2.43.0
-
+ python __anonymous () {
+@@ -61,4 +76,3 @@ python __anonymous () {
+        raise bb.parse.SkipRecipe("incompatible with %s C library" %
+                                    d.getVar('TCLIBC'))
+ }
+-
 
