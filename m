@@ -1,247 +1,318 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F105ACCD1BF
-	for <webhook@archiver.kernel.org>; Sat, 25 Oct 2025 05:02:22 +0000 (UTC)
-Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.23])
- by mx.groups.io with SMTP id smtpd.web10.362.1761368538492991374
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9033CCCF9E3
+	for <webhook@archiver.kernel.org>; Sat, 25 Oct 2025 06:50:53 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.web10.1158.1761375043882874018
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Oct 2025 22:02:19 -0700
+ Fri, 24 Oct 2025 23:50:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=selector1 header.b=bequPCc/;
- spf=pass (domain: axis.com, ip: 52.101.66.23, mailfrom: peter.kjellerstedt@axis.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Sd0Shjd3O/zzf+Ba5NiDRJxWqmnhiDvgSsOH9WLFJiEkvwoIH5eycfYNWaH3rbRdOIDNrlXPNKmkzeFsRSUvhnHgRDN+/Ai49YziGaUFLAATTBfEJecNq5tzb1Buv3FHocZwq+acgJe+MlIj3AoKW82MnwwFnvJz7TW3QODb+LvVfwts/y1RrfyM1Cxdg2QzGOX0Gki8auqMxk2oBJY6llyEk7pBG8kQwMLiOoRGrPZhzTPRzrFhUmV7I6H/Knux1nrJu896N/nXLPKam79EdP1671MLazvkmm8RJuuI6pTf8gaMa0jYaUG2INJLTy0QOAw8Ue6GKWddWQgVnYsuMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rNch4J6kGSp5EL4bE2lmKLpLxiDVI68pljdNQwvMC9o=;
- b=btn9Y6++DusuFhr+bcAD+ypXMGFa774iafRYlXigHJW0ZpMtYkJHnWWayX0EmU/VB/c2IDuqoux0H+iSAN+Ey9E74LgnEniN1IdsO5XY9+IUfjYELWaxx0VyHE1Mc1rcnZ5z2sq99ZnbmQpY6ojbGMENRgDUyWNVFiY5hIR+gJ9lvILiYFqiqOjUXuiKyfJUWbSe6GMp2/UqmDewcGsNw86zNR/gZRjvn1c0AsvYKF/aj0CWspQt9i09l0vqJuRkEouGl8PJ7aSkywNKyYpGyW4vPNpYZ7FBc6ZtX6fX/S1yS40t6nu90mxkzayBqKnr0gSPnE6Nn1sLWYDii1xXlA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=axis.com; dmarc=pass action=none header.from=axis.com;
- dkim=pass header.d=axis.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rNch4J6kGSp5EL4bE2lmKLpLxiDVI68pljdNQwvMC9o=;
- b=bequPCc/b4Eau6B4QBsYVzOFF/15VHARMavLlVXutrN7K2Sn3qq7zY3sxAGzwdo/gw6vpgxaxJH5DbngsQNcEHZ5rUJlO97yIRVH+h2OyWbjZkHgZagVbay4WA/v6S+OC1DCo9g9AmjDJjgdpXKd02u6etYnC86C4jroZWXNcOM=
-Received: from DB5PR02MB10213.eurprd02.prod.outlook.com (2603:10a6:10:4a8::17)
- by VI0PR02MB11041.eurprd02.prod.outlook.com (2603:10a6:800:25a::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.13; Sat, 25 Oct
- 2025 05:02:14 +0000
-Received: from DB5PR02MB10213.eurprd02.prod.outlook.com
- ([fe80::1bee:3174:a078:5af9]) by DB5PR02MB10213.eurprd02.prod.outlook.com
- ([fe80::1bee:3174:a078:5af9%7]) with mapi id 15.20.9253.013; Sat, 25 Oct 2025
- 05:02:13 +0000
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Khem Raj <raj.khem@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-oe][PATCH 7/9] lvgl: Add support for modifying the
- configuration using menuconfig
-Thread-Topic: [oe] [meta-oe][PATCH 7/9] lvgl: Add support for modifying the
- configuration using menuconfig
-Thread-Index: AQHcRWrwi6OpGSDpZk2rGuZ6jxs46LTSTXVQ
-Date: Sat, 25 Oct 2025 05:02:13 +0000
-Message-ID: 
- <DB5PR02MB10213DE70F085D9C2610F9757EFFEA@DB5PR02MB10213.eurprd02.prod.outlook.com>
-References: <20251025031748.2728416-1-pkj@axis.com>
- <20251025031748.2728416-7-pkj@axis.com>
- <CAMKF1spn_SCNtggcC7g1hBRGWnYCYEmqD8FABUVg=q7t77Y+Fw@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1spn_SCNtggcC7g1hBRGWnYCYEmqD8FABUVg=q7t77Y+Fw@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=axis.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB5PR02MB10213:EE_|VI0PR02MB11041:EE_
-x-ms-office365-filtering-correlation-id: 5a62f6b0-6769-4220-6e01-08de1383a94d
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|1800799024|38070700021;
-x-microsoft-antispam-message-info: 
- =?utf-8?B?d1ZFNkZ1Zm0xV2x1SUM4YnNBVGdmanRQU3k0dnVMbkYrUzFRZ0F2YzNGc2hz?=
- =?utf-8?B?OHF0b3J1WWhqUjhiZEE0c2FLUEkzRTJXR0syVmlmMmJ6bXFDNlFPc2JHZjky?=
- =?utf-8?B?bEppTHRncHpXSVFuanZGdElSUEgwNnhYUVlNSXUrNVNkWEhlb3Jsb0EwTkNr?=
- =?utf-8?B?OC9peGRtc0w2b3ZxVlR5bGcxVHVFZnY0ZkJJbExsdHBrRytWdGZVWEUzdjJq?=
- =?utf-8?B?S3l1SSt4NTdtcHBZUjlqVkc3TkRnUUNxZGpIcktuMEk4RXd0RnhzVXJJRGJD?=
- =?utf-8?B?Q0UzL3g2WGI3R2JxVGZTWndxMW1ua2hockU2cHFCYUY2MzJoNWhXbHF6YnN2?=
- =?utf-8?B?eDRqRFZHek9JSUt4eE1aRkNVSlVDRFpoalhQSklmU2dVVTN4TjE4bVNPck1D?=
- =?utf-8?B?QmlQT0RaNXkzYUhIc2NPZEk2Q2RYaXdHeG94VHNiVWdMT2RsVmdkbWxLcDJz?=
- =?utf-8?B?MUdJVjREZ0MrbUd1TVg1dHhnbC9WZGMwK2FIbDN2YnZ1cmRhbmJ1QytYQlJI?=
- =?utf-8?B?WnE3WFJuWC9xbXlwVHpKeFgrcmo3T1NrTzhTb3M1VVNRSmc0OVNSVG1VeVRM?=
- =?utf-8?B?TmM0cGQxOEFzYlVBRzNnNDJ1dzhhVEZyREhUZ2Urc1NIYWZxanZNNFo0U3lm?=
- =?utf-8?B?SG1BY253WGM1aVdVc3lFcEgxZXFUbWFPcWFTVUZDMEg2Zm81OXR1VE9Lb1V3?=
- =?utf-8?B?N2tKZkJzU3RNUXEzVStTY0hXQnI3SUhwTmx0V1lQRWJldlNZSWxXU1RHSUhz?=
- =?utf-8?B?WFcwZDUxNnhuMEhiZWZNdmhMb3lvWE1sVEZDVFB1MkhVOXhRVnpWTC9URXpB?=
- =?utf-8?B?cXphK0F2dUNRMUJYcDVjeEt2UzUrR1ZBWng3Q0ZEKzVqWUxqWVNPMVF4SHBu?=
- =?utf-8?B?SmI2WWFjYlhwbDRJV3RtZWo4dGRWQkxDZU1ZWGg0anp6cmpuWTJEWnJWVkRE?=
- =?utf-8?B?Mkg4V3c1Z25rNG9Lbm9vejRkTkpJejVraStSWmF1RC9POWRIQVRib25FVE9K?=
- =?utf-8?B?NlVST2VXbnpkdVNCY0lWTmNUZEZjbW10RWtKRURqRVNNVUxMMCtwa2twUTJM?=
- =?utf-8?B?cEJabk9raGlrMEdzS05CMllHaGNHMlNKZkFMTFMzOXBKdTJVQUdUMUZvMlJG?=
- =?utf-8?B?Nmx0NUtUR2VsS056Mk9yem90YVE4c1d1VHZmVm41OVV4MWNFVGt5cmRBeXZK?=
- =?utf-8?B?U2pYUWNLcDBPNlkra3hpaFFTM2tlOEttVE5VQjVEZHg1cWpFeHlqbUsrVDda?=
- =?utf-8?B?M0l2a2M5R2MzWHNFNk5QVUtxRkF3UDVVMUhGdlBHR0FhUEtJSEtFazZNYTFG?=
- =?utf-8?B?ZUhzejNHVUNyZkNhQVJKQzdTNkkrSmhObmRLUzlVT1RmYlVPOHZLQ2hZbTNQ?=
- =?utf-8?B?OHRkQkJoV1JvWld6aVdiR2tDeDViNU8yYjM4V0FXc0k0N3JoeDdLYjRMZG5T?=
- =?utf-8?B?UmtMU3U2UDQ1bHFGNUwxZzZDcjl4UllBdXI0NFl5ZFY5WWVLaEt5UG02RnhY?=
- =?utf-8?B?R21ROVRKaXFLbno3NktvQ08rK3lGR3BjcGgrVG5BVk1CRnJ0R09xWUs5UW9W?=
- =?utf-8?B?YnpXVGY4eFpzTlkwelVodkRvSGdwaVlRMk5hZGdoWXpDQnZNNWJpMzVYaWhi?=
- =?utf-8?B?MEtJYmZ3TGZLYXUrejZBZmYvclBaTjBpVzd1em5pVHN0QnNVL1lzaVNwdEtI?=
- =?utf-8?B?OEliQnJzQmxYREdQVFB5NXc0ZEd1aHlyTlJCYUFjM3poS3RoZGZNS1hvdzNW?=
- =?utf-8?B?M3lvQWtLSUM5cmdQSHJ3RjROQ2VNUHAvTlpac1JlV0pOdVJYK1ZFc1hBWlZt?=
- =?utf-8?B?a2ZydzE3ZTduZmV1SHZpV01ELzROVFlXV0swdTU1N1g3djR3RWdROHhWd1d4?=
- =?utf-8?B?TlhyQjhtY3RhckN2UVJMbjB4NDZxQWpLb3YybklqY2Mwb3FQWXhUSnppM3BY?=
- =?utf-8?B?K0tKcnhaaG1wMzZOdWJrVjJWblVucTRXZFFsVGtXaUxyWmRXZ1lURURPbnBH?=
- =?utf-8?B?SGtaNTdsR0prVWU0dGJEdnI4OGk2R3VYUWc4L0JzV1pKd3JkNEdTb0c2ay9E?=
- =?utf-8?Q?TbCSpJ?=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB5PR02MB10213.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?Ykh5ODh2WkEyaFM0QTVERStkRnUzNW9vNW9Fd2l3QTVDaXUxbElpU0t3ZzFO?=
- =?utf-8?B?R2tiSDNMUHpRY3J1S2dQb3kwN0R5c25UNEdlTTZUaDdIQTBDUEFiRU5sQWhE?=
- =?utf-8?B?UzNISzFueGVRaDdNQkQ2Z2J4bzhMVmFYVmRTY0JpN3grbUtRMFJyTlNHOGs3?=
- =?utf-8?B?cWQ4L0p5bHNUamFLQUdscUdJL2p5M2txSUd1TGxXOUhzcytZVitmNnlSVFMx?=
- =?utf-8?B?cGEreVNLTlhyUWZwUjBGY1h0c3dkajFIV2ZyRm4vcXhqa3gzc0hvWG04c3Y0?=
- =?utf-8?B?bWpya2FwTEVYWkVlVkozS3Vkb2FicXh1ZWpjSU53djFtQmZSUStEdHhhME94?=
- =?utf-8?B?K1lGNTJYenpkSU52dHhPcmVkZE5wdUxtbTRyb21iRkFOL2JaOW9HdzV3Yyth?=
- =?utf-8?B?MWpNWE9OWlJ6NzlnK3JOTkJEazNseGhjMGVXb2ZkVUJGam50V1IvYTBueEhK?=
- =?utf-8?B?dzhHQlZnSUNQUlpxbFhvbGxJWXRsK1Rkd01vS2dacFNxL3AxRFhuL0hYWmdO?=
- =?utf-8?B?WS9YUVl0YUtyTnh1N1N1alNvVHIvaHl2MVFMNDYyNXVJRmtYUG1GMm8vdEsr?=
- =?utf-8?B?NXV4VkNEU3lRL3Iyem84YWlHd05MaEtrOURMYmtPUFlOVmhoRmFicFJCaUll?=
- =?utf-8?B?c0h3a0dRZitvcE02dVpKYk4rS0o2SFh5cE9VS3dwcDRHV2RIRHMrTzBQNWdv?=
- =?utf-8?B?TFp5Mk1MODk1cFNqOUdXTGlUU3ZZNWt5Zk5WVHRTZlZObWhKRWxvVHV3SDY1?=
- =?utf-8?B?SXdyTlZXUXBjY0xtUEFoVjhmWHhlalhHQk9BVFRrZzVqYmtYUEJJQUlNQXF0?=
- =?utf-8?B?M0FXZGFtZWgzRXpnOUtFSVc1eGJRTDVHSDFwV0VycEJvL3d0WEtFWEw3TFJE?=
- =?utf-8?B?MHp0ZGttVnA2QWMxNVJ0am9UQnFvMHZ6ek94K3FqSEhHLytpUFZFWi9xVXhI?=
- =?utf-8?B?d0kzaVpGcEJaYk5keHpYTUZkUGh6eUxSM0ZwRFFHcnFBVklSN1FYcUMwa3RR?=
- =?utf-8?B?cU56RFZJNzFtQy9mamVDWTlJbmNQekw2dmQ4RS92blNqSHJsZFBmZFNjM3dY?=
- =?utf-8?B?YjFSa0tZdHRsNTRWZE5SV0VLd052NXhpbGVIVXVDc2tVb1NLWTNPb25rN1E0?=
- =?utf-8?B?NUZBR0VEdnJDRlFoUTYvWDBwMU5BeUZuS1FzS3VKeStLemxhVmpvaGVSelVM?=
- =?utf-8?B?Qk9DSnhFWDdGdU9UMkZwdmRtT0pOVXFONVZsa0ZORTF1VWlhbnY0THJpOXQ4?=
- =?utf-8?B?TGxMVlZ4dHI0S0dRcVhvNDN3cHJ5WkJJVEhFNVhYYzhhMlVqQXc0bmttSFVN?=
- =?utf-8?B?ZFcwK3MxVEZvZnhnektHYkdEMGsxenR1N1psLzNsaklxTFJkRjE0U0ExV2pB?=
- =?utf-8?B?b1BzY1Ywa0E4Z3M1R2ZZVlh5TlJDVWlLU25Zd0JXZzdzcmc5OXVvM3lub1d6?=
- =?utf-8?B?MmxqVTh0TWo4Y29iQks0VndmOVhzTmdEeFhmY0tZRWwreEhzQjN6TFNybnh5?=
- =?utf-8?B?eUpoanZXR0pJZGpEMno2TmduMUFKKzNuZWx5cnNId0IrR2dIN1MrbEFXa1lN?=
- =?utf-8?B?OUZPVzNjYUNWRkhrSytWZUZiRHR3ZXlON3IyQ2pZekljRThnOW5wMklNKzZS?=
- =?utf-8?B?UjZsTXR3bmc1WVJSejAvOUsrYUFVV3d3M3d5bVd2Z3BNajhTWGc3eVkzUndC?=
- =?utf-8?B?TTl6bmhaV0ZzNXF6ZktZRytTUWtzcC9nNWt4R2ViK2FqcVBZN29RWEs4R0pp?=
- =?utf-8?B?UXlhQnN5NGtxUHoyQjJiZmxaVmgwUTlld0RhMFFyNkJ6MjNaY01xUG5MVGpS?=
- =?utf-8?B?YWRLUEVWVWtwVnNlWVZLdWt4UHVycWhvcnpZWmhXOUtoZDJFYjRvN01CeUwv?=
- =?utf-8?B?OEVMNXI3ZlJjZjBES2FWZEorYTlBVXB5dzdleUJ1Q0lXUlB2NlZkUitKQnlQ?=
- =?utf-8?B?LzhQRDNXVUNzb3RsRkZHT0lUeFVvSk5icTg3QStzMHpETU9iTzhFMzQrK2Iw?=
- =?utf-8?B?NXE3TmIwek1BUVpCWnNaanhoVzcyVU0vWTJEYnFOUFc0NFYzSi9kMldGUWVn?=
- =?utf-8?B?NXBjTTVNUzdsOTlNVEZOWHFKcitFZHVXUzVRUT09?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZcfevjBM;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-475de184058so421535e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 23:50:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1761375042; x=1761979842; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=qvioGqJHe48RZBfUAoBGz2jaw46LlgNwdDDukRe0Gh4=;
+        b=ZcfevjBMSt8CBLpuHeuIGmNnnpJ1kOMYSkv4sNyVGG5cLxcdeKlsQz0IoBfJWcl9gJ
+         9MVh6j8KVTxe2P0OFWr1iRrMl6RfyQ97jGYW4D50l8Yyf9ETFa7ua+8Ta01YB1Q6Qv5W
+         P8DsrhdQzdvNMMk+Dd7RXnax8dSZHKuHkVMo/yKXQotILFj/GNiONYb3hMz3i50X2SPr
+         AK1Tl5BICGiaeIjVTmiBOOYBGxo5U6l5Yxk+OsgnVkdiLiDD21ue9nl+Db+1ZIvz/Ifl
+         VH5BePxLK5S/7pKg6z9fL28sx24TfJJD3U+cEXUbtVoBJE/+l/ajYZ0FYiKvq34+ywRG
+         +f7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761375042; x=1761979842;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=qvioGqJHe48RZBfUAoBGz2jaw46LlgNwdDDukRe0Gh4=;
+        b=oHYXXhHTkjf29sYYlMd/lddb03z9iBdS9C+oULcJ1GPuNyT7SwhcCe1utPRa9Nh7vt
+         Sl0ChHWGWmoV1Q7lPswQtD4dnlrjdMxm03IaYIfQFKIN9oViJ0qaS30kdVdZtztYUUZ+
+         ypdLdzEL0Z8gIL8RRiJCtbMEtRvJJfwnuG66pVMbUiXRZrE9Z5mYbF0pItVyxcKP1Rja
+         lV8osIMuhVCMaCxtHXy+KIql6cIVuefFekSECe3ilMbqFi/8vpKouqmkPB++Js7jvfpX
+         qrCYjmwEaH1opb/KZ/CZtD4jz6vgZ3STh4tkZHhkFwJEBg5+TYMJ7sTos+Fre8mwdmey
+         lZ9g==
+X-Gm-Message-State: AOJu0Yz4Xo0dA463V2CYahAowX3qUSKCvVKMAUb/dyAK7j/sUo62/tLD
+	/v62unaUhpgt3ztU54dAPhOrRNUAmFlR2/rRoU7LnP7UzBqnCP+bIIUsyGHTmA==
+X-Gm-Gg: ASbGncvRgsLguQjscVPD5GuiXjm5hoooyevjE4gG1yqK7er90NI6kZq2Sq5v+2HcbPY
+	tIs6DSeTYAMKjIkkDTPU0UIHRK03iXhd7+1bLkmDTLVGuDa5xRPvHO1p3xd0XnmeF9zYeEAVkLR
+	2qnEAhvfjTguCyPZuXmubcQyeTLij4ZbW9NoWW9E+LJCa/mu7bPG9ERliWgSEUI3TNdwCjOhHic
+	jidf0aEhCr40gqUX5sXCeiks8pHDRKaNVKyUKNA/ePoV0R78fuy0qUR83wKfOYd6ER4hUZfl4Ko
+	zs7X84qUAGZV2oXNQwAmr3AM3gJumtqYftk7kXFh4ZQkwjeGSFj7i+NBGtarjqMmbqHAx6quxuE
+	/GaRwRoX1neaOVRIiVBGpYNpstSjVoxIzrlVzsIE5CHD7nvEy1ki697wsMKIMaRTXH16kFsRuJ2
+	hsd6Jc5SYk
+X-Google-Smtp-Source: AGHT+IHgHIQsrMPigrwrz8h1p27m7k+pPfrNaMBmLZEBEAyvoj0VwwvFEubrpPcd5OAsY3sCW5h50Q==
+X-Received: by 2002:a05:600c:6299:b0:475:ddf7:9969 with SMTP id 5b1f17b1804b1-475ddf79e25mr5172015e9.9.1761375041992;
+        Fri, 24 Oct 2025 23:50:41 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-475dd4cc5efsm18499555e9.16.2025.10.24.23.50.41
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Oct 2025 23:50:41 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-perl][PATCH] libnet-ssleay-perl: upgrade 1.85 -> 1.94
+Date: Sat, 25 Oct 2025 08:50:40 +0200
+Message-ID: <20251025065040.936882-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB5PR02MB10213.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a62f6b0-6769-4220-6e01-08de1383a94d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Oct 2025 05:02:13.4634
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: fBUD+GV4bZnH80hKXJ/UJ6Ap0yxJYw+kBMRlhtQFj8slScMZ/GL2JoBCHaw02TDE
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR02MB11041
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 05:02:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120997
+ <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 06:50:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120998
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBLaGVtIFJhaiA8cmFqLmtoZW1A
-Z21haWwuY29tPg0KPiBTZW50OiBkZW4gMjUgb2t0b2JlciAyMDI1IDA2OjUxDQo+IFRvOiBQZXRl
-ciBLamVsbGVyc3RlZHQgPHBldGVyLmtqZWxsZXJzdGVkdEBheGlzLmNvbT4NCj4gQ2M6IG9wZW5l
-bWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6IFJlOiBbb2Vd
-IFttZXRhLW9lXVtQQVRDSCA3LzldIGx2Z2w6IEFkZCBzdXBwb3J0IGZvciBtb2RpZnlpbmcgdGhl
-IGNvbmZpZ3VyYXRpb24gdXNpbmcgbWVudWNvbmZpZw0KPiANCj4gT24gRnJpLCBPY3QgMjQsIDIw
-MjUgYXQgODoxOOKAr1BNIFBldGVyIEtqZWxsZXJzdGVkdCB2aWEgbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZyA8cGV0ZXIua2plbGxlcnN0ZWR0PWF4aXMuY29tQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+
-IHdyb3RlOg0KPiA+DQo+ID4gR2VuZXJhdGluZyBhIGNvbmZpZ3VyYXRpb24gZnJhZ21lbnQgZm9y
-IGEgZmVhdHVyZSBjYW4gbm93IGJlIGRvbmUgdXNpbmc6DQo+ID4NCj4gPiAgIGJpdGJha2UgbHZn
-bCAtYyBtZW51Y29uZmlnICYmIGJpdGJha2UgbHZnbCAtYyBkaWZmY29uZmlnDQo+ID4NCj4gPiBX
-aGlsZSB0aGlzIHVzZXMgdGhlIHN0YW5kYXJkIGNtbDEuYmJjbGFzcywgaXQgZXhwZWN0cyB0aGF0
-ICJtYWtlIiBpcw0KPiA+IHVzZWQgdG8gcnVuIG1lbnVjb25maWcgZXRjLiBUaGlzIGlzIG5vdCB0
-cnVlIGZvciBsdmdsLCBzbyB1bmZvcnR1bmF0ZWx5DQo+ID4gdGhlIHdob2xlIGRvX21lbnVjb25m
-aWcoKSBmdW5jdGlvbiBoYWQgdG8gYmUgY29waWVkIHRvIGJlIGFibGUgdG8gcmVtb3ZlDQo+ID4g
-dGhlIHVzZSBvZiAibWFrZSIuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBQZXRlciBLamVsbGVy
-c3RlZHQgPHBldGVyLmtqZWxsZXJzdGVkdEBheGlzLmNvbT4NCj4gPiAtLS0NCj4gPg0KPiA+IEkg
-cGxhbiBvbiB1cGRhdGluZyBjbWwxLmJiY2xhc3Mgc28gdGhhdCBpdCBiZXR0ZXIgc3VwcG9ydHMg
-Y29kZSB0aGF0DQo+ID4gZG9lcyBub3QgdXNlICJtYWtlIiB0byBydW4gbWVudWNvbmZpZywgbWF5
-YmUgZXZlbiBnaXZpbmcgaXQgbmF0aXZlDQo+ID4gc3VwcG9ydCBmb3Iga2NvbmZpZ2xpYi4gSG93
-ZXZlciwgZHVlIHRvIHRoZSBjdXJyZW50IHNpdHVhdGlvbiwgSSBkbyBub3QNCj4gPiBleHBlY3Qg
-YW55IHN1Y2ggY2hhbmdlcyB0byBiZSBhY2NlcHRlZCB1bnRpbCBhZnRlciBXaGlubGF0dGVyIGlz
-IG91dCBvZg0KPiA+IHRoZSBkb29yLiBUaHVzLCB0aGUgY29waWVkIGRvX21lbnVjb25maWcgaW4g
-dGhpcyByZWNpcGUgd2lsbCBoYXZlIHRvIGRvDQo+ID4gYXMgYW4gaW50ZXJpbSBzb2x1dGlvbi4N
-Cj4gPg0KPiA+ICBtZXRhLW9lL3JlY2lwZXMtZ3JhcGhpY3MvbHZnbC9sdi1jb25mLmluYyB8IDQ4
-ICsrKysrKysrKysrKysrKysrKysrKystDQo+ID4gIDEgZmlsZSBjaGFuZ2VkLCA0NyBpbnNlcnRp
-b25zKCspLCAxIGRlbGV0aW9uKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNp
-cGVzLWdyYXBoaWNzL2x2Z2wvbHYtY29uZi5pbmMgYi9tZXRhLW9lL3JlY2lwZXMtZ3JhcGhpY3Mv
-bHZnbC9sdi1jb25mLmluYw0KPiA+IGluZGV4IGFiM2FkMDFhNWEuLmNjOGEyYTE2ZDkgMTAwNjQ0
-DQo+ID4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWdyYXBoaWNzL2x2Z2wvbHYtY29uZi5pbmMNCj4g
-PiArKysgYi9tZXRhLW9lL3JlY2lwZXMtZ3JhcGhpY3MvbHZnbC9sdi1jb25mLmluYw0KPiA+IEBA
-IC0yMSw3ICsyMSw3IEBAIFBBQ0tBR0VDT05GSUdbZ3JpZG5hdl0gPSAiLCwiDQo+ID4gIFBBQ0tB
-R0VDT05GSUdbdGhvcnZnXSA9ICIsLCINCj4gPiAgUEFDS0FHRUNPTkZJR1tzZGxdID0gIiwsdmly
-dHVhbC9saWJzZGwyIGxpYnNkbDItaW1hZ2UiDQo+ID4NCj4gPiAtaW5oZXJpdCBweXRob24zbmF0
-aXZlDQo+ID4gK2luaGVyaXQgY21sMSBweXRob24zbmF0aXZlDQo+ID4NCj4gPiAgRVhUUkFfT0VD
-TUFLRSArPSAiLURMVl9CVUlMRF9VU0VfS0NPTkZJRz1PTiINCj4gPg0KPiA+IEBAIC0zNSw2ICsz
-NSw3IEBAIENYWEZMQUdTICs9ICIke0xWR0xfRkxBR1N9Ig0KPiA+ICBLQ09ORklHX0NPTkZJR19S
-T09URElSID89ICIke1N9Ig0KPiA+ICBLQ09ORklHX0ZJTEUgPz0gIiR7S0NPTkZJR19DT05GSUdf
-Uk9PVERJUn0vS2NvbmZpZyINCj4gPiAgZXhwb3J0IEtDT05GSUdfQ09ORklHID89ICIke0tDT05G
-SUdfQ09ORklHX1JPT1RESVJ9Ly5jb25maWciDQo+ID4gK0tDT05GSUdfQ09ORklHX0NPTU1BTkQg
-Pz0gIm1lbnVjb25maWcgJHtLQ09ORklHX0ZJTEV9Ig0KPiA+DQo+ID4gIGRvX2NvbmZpZ3VyZSgp
-IHsNCj4gPiAgICAgIGNhdCAke1VOUEFDS0RJUn0vZGVmY29uZmlnICR7QCIgIi5qb2luKGZpbmRf
-Y2ZncyhkKSl9ID4gJHtCfS9kZWZjb25maWcNCj4gPiBAQCAtNDIsMyArNDMsNDggQEAgZG9fY29u
-ZmlndXJlKCkgew0KPiA+DQo+ID4gICAgICBjbWFrZV9kb19jb25maWd1cmUNCj4gPiAgfQ0KPiA+
-ICsNCj4gPiArIyBDb3BpZWQgZnJvbSBjbWwxLmJiY2xhc3MuIFRoZSBvbmx5IG1vZGlmaWNhdGlv
-biBpcyB0aGF0DQo+ID4gKyMgJHtLQ09ORklHX0NPTkZJR19DT01NQU5EfSBpcyBub3QgcHJlZml4
-ZWQgd2l0aCAibWFrZSIgd2hlbiBjYWxsZWQgYnkNCj4gPiArIyBvZV90ZXJtaW5hbC4NCj4gDQo+
-IEkgd29uZGVyIGlmIHdlIGNhbiBhZGQgdGhpcyBmbGV4aWJpbGl0eSB0byBjbWwxLmJiY2xhc3Mg
-YW5kIHVzZSB0aGUNCj4gY2xhc3MgZGlyZWN0bHkgdGhlbiBoZXJlLg0KDQpZZXMsIHRoYXQgaXMg
-bXkgcGxhbi4gU2VlIG15IGNvbW1lbnQgYWJvdmUuDQoNCj4gPiArcHl0aG9uIGRvX21lbnVjb25m
-aWcoKSB7DQo+ID4gKyAgICBpbXBvcnQgc2h1dGlsDQo+ID4gKw0KPiA+ICsgICAgaWYgbm90IGJi
-LnV0aWxzLnRvX2Jvb2xlYW4oZC5nZXRWYXIoIktDT05GSUdfQ09ORklHX0VOQUJMRV9NRU5VQ09O
-RklHIikpOg0KPiA+ICsgICAgICAgIGJiLmZhdGFsKCJkb19tZW51Y29uZmlnIGlzIGRpc2FibGVk
-LCBwbGVhc2UgY2hlY2sgS0NPTkZJR19DT05GSUdfRU5BQkxFX01FTlVDT05GSUcgdmFyaWFibGUu
-IikNCj4gPiArICAgICAgICByZXR1cm4NCj4gPiArDQo+ID4gKyAgICBjb25maWcgPSBvcy5wYXRo
-LmpvaW4oZC5nZXRWYXIoJ0tDT05GSUdfQ09ORklHX1JPT1RESVInKSwgIi5jb25maWciKQ0KPiA+
-ICsgICAgY29uZmlnb3JpZyA9IG9zLnBhdGguam9pbihkLmdldFZhcignS0NPTkZJR19DT05GSUdf
-Uk9PVERJUicpLCAiLmNvbmZpZy5vcmlnIikNCj4gPiArDQo+ID4gKyAgICB0cnk6DQo+ID4gKyAg
-ICAgICAgbXRpbWUgPSBvcy5wYXRoLmdldG10aW1lKGNvbmZpZykNCj4gPiArICAgICAgICBzaHV0
-aWwuY29weShjb25maWcsIGNvbmZpZ29yaWcpDQo+ID4gKyAgICBleGNlcHQgT1NFcnJvcjoNCj4g
-PiArICAgICAgICBtdGltZSA9IDANCj4gPiArDQo+ID4gKyAgICAjIHNldHVwIG5hdGl2ZSBwa2ct
-Y29uZmlnIHZhcmlhYmxlcyAoa2NvbmZpZyBzY3JpcHRzIGNhbGwgcGtnLWNvbmZpZyBkaXJlY3Rs
-eSwgY2Fubm90IGdlbmVyaWNhbGx5IGJlIG92ZXJyaWRlbiB0byBwa2ctY29uZmlnLW5hdGl2ZSkN
-Cj4gPiArICAgIGQuc2V0VmFyKCJQS0dfQ09ORklHX0RJUiIsICIke1NUQUdJTkdfRElSX05BVElW
-RX0ke2xpYmRpcl9uYXRpdmV9L3BrZ2NvbmZpZyIpDQo+ID4gKyAgICBkLnNldFZhcigiUEtHX0NP
-TkZJR19QQVRIIiwgIiR7UEtHX0NPTkZJR19ESVJ9OiR7U1RBR0lOR19EQVRBRElSX05BVElWRX0v
-cGtnY29uZmlnIikNCj4gPiArICAgIGQuc2V0VmFyKCJQS0dfQ09ORklHX0xJQkRJUiIsICIke1BL
-R19DT05GSUdfRElSfSIpDQo+ID4gKyAgICBkLnNldFZhckZsYWcoIlBLR19DT05GSUdfU1lTUk9P
-VF9ESVIiLCAidW5leHBvcnQiLCAiMSIpDQo+ID4gKyAgICAjIGVuc3VyZSB0aGF0IGVudmlyb25t
-ZW50IHZhcmlhYmxlcyBhcmUgb3ZlcndyaXR0ZW4gd2l0aCB0aGlzIHRhc2tzICdkJyB2YWx1ZXMN
-Cj4gPiArICAgIGQuYXBwZW5kVmFyKCJPRV9URVJNSU5BTF9FWFBPUlRTIiwgIiBQS0dfQ09ORklH
-X0RJUiBQS0dfQ09ORklHX1BBVEggUEtHX0NPTkZJR19MSUJESVIgUEtHX0NPTkZJR19TWVNST09U
-X0RJUiIpDQo+ID4gKw0KPiA+ICsgICAgb2VfdGVybWluYWwoInNoIC1jICclczsgaWYgWyAkPyAt
-bmUgMCBdOyB0aGVuIGVjaG8gXCJDb21tYW5kIGZhaWxlZC5cIjsgcHJpbnRmIFwiUHJlc3MgYW55
-IGtleSB0byBjb250aW51ZS4uLiBcIjsgcmVhZCByOyBmaSciICUgZC5nZXRWYXIoJ0tDT05GSUdf
-Q09ORklHX0NPTU1BTkQnKSwNCj4gPiArICAgICAgICAgICAgICAgIGQuZ2V0VmFyKCdQTicpICsg
-JyBDb25maWd1cmF0aW9uJywgZCkNCj4gPiArDQo+ID4gKyAgICB0cnk6DQo+ID4gKyAgICAgICAg
-bmV3bXRpbWUgPSBvcy5wYXRoLmdldG10aW1lKGNvbmZpZykNCj4gPiArICAgIGV4Y2VwdCBPU0Vy
-cm9yOg0KPiA+ICsgICAgICAgIG5ld210aW1lID0gMA0KPiA+ICsNCj4gPiArICAgIGlmIG5ld210
-aW1lID4gbXRpbWU6DQo+ID4gKyAgICAgICAgYmIucGxhaW4oIkNoYW5nZWQgY29uZmlndXJhdGlv
-biBzYXZlZCBhdDpcbiAlc1xuUmVjb21waWxlIHdpbGwgYmUgZm9yY2VkIiAlIGNvbmZpZykNCj4g
-PiArICAgICAgICBiYi5idWlsZC53cml0ZV90YWludCgnZG9fY29tcGlsZScsIGQpDQo+ID4gK30N
-Cj4gPiArDQo+ID4gK2RvX3NhdmVkZWZjb25maWcoKSB7DQo+ID4gKyAgICBiYnBsYWluICJTYXZp
-bmcgZGVmY29uZmlnIHRvOlxuJHtCfS9kZWZjb25maWciDQo+ID4gKyAgICBzYXZlZGVmY29uZmln
-IC0ta2NvbmZpZyAke0tDT05GSUdfRklMRX0gLS1vdXQgJHtCfS9kZWZjb25maWcNCj4gPiArfQ0K
-DQovL1BldGVyDQo=
+Also fix ptests.
+
+Added two backported patches that makes patches compatible with the latest openssl.
+
+Changelog: https://metacpan.org/release/CHRISN/Net-SSLeay-1.94/changes
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../include/ptest-packagelists-meta-perl.inc  |  2 +-
+ ...509_get_cert_info-allow-single-colon.patch | 29 +++++++++++++++
+ ...rmatting-difference-in-OpenSSL-3.4.1.patch | 32 ++++++++++++++++
+ .../no-exec-on-configure.patch                | 37 -------------------
+ .../libnet/libnet-ssleay-perl/run-ptest       | 27 ++++++++++++++
+ ...erl_1.85.bb => libnet-ssleay-perl_1.94.bb} | 28 ++++++++------
+ 6 files changed, 106 insertions(+), 49 deletions(-)
+ create mode 100644 meta-perl/recipes-perl/libnet/libnet-ssleay-perl/0001-test-32_x509_get_cert_info-allow-single-colon.patch
+ create mode 100644 meta-perl/recipes-perl/libnet/libnet-ssleay-perl/0001-tests-Address-another-formatting-difference-in-OpenSSL-3.4.1.patch
+ delete mode 100644 meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
+ create mode 100644 meta-perl/recipes-perl/libnet/libnet-ssleay-perl/run-ptest
+ rename meta-perl/recipes-perl/libnet/{libnet-ssleay-perl_1.85.bb => libnet-ssleay-perl_1.94.bb} (56%)
+
+diff --git a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+index fff99cab2b..e923bd00c4 100644
+--- a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
++++ b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+@@ -26,6 +26,7 @@ PTESTS_FAST_META_PERL = "\
+     libmime-types-perl \
+     libmozilla-ca-perl \
+     libnet-ldap-perl \
++    libnet-ssleay-perl \
+     libstrictures-perl \
+     libsub-uplevel-perl \
+     libterm-readkey-perl \
+@@ -48,7 +49,6 @@ PTESTS_PROBLEMS_META_PERL = "\
+     libmodule-build-tiny-perl \
+     libnet-dns-perl \
+     libnet-dns-sec-perl \
+-    libnet-ssleay-perl \
+     libunix-statgrab \
+     libxml-libxml-perl \
+ "
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/0001-test-32_x509_get_cert_info-allow-single-colon.patch b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/0001-test-32_x509_get_cert_info-allow-single-colon.patch
+new file mode 100644
+index 0000000000..805a16d6c9
+--- /dev/null
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/0001-test-32_x509_get_cert_info-allow-single-colon.patch
+@@ -0,0 +1,29 @@
++From 4068d585875d3ba99da2cbe41f60d0dd4f4290d1 Mon Sep 17 00:00:00 2001
++From: Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
++Date: Wed, 16 Oct 2024 21:48:51 +0200
++Subject: [PATCH] test: 32_x509_get_cert_info allow single colon.
++
++Starting with 3.4.0 the double colon in emailAddress has been removed.
++Adapt the test to allow a single colon in 3.4.0 and later.
++
++Upstream-Status: Backport [https://github.com/radiator-software/p5-net-ssleay/commit/4068d585875d3ba99da2cbe41f60d0dd4f4290d1]
++Signed-off-by: Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
++---
++ t/local/32_x509_get_cert_info.t | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/t/local/32_x509_get_cert_info.t b/t/local/32_x509_get_cert_info.t
++index 0f7e2d5a..0fd1b689 100644
++--- a/t/local/32_x509_get_cert_info.t
+++++ b/t/local/32_x509_get_cert_info.t
++@@ -188,6 +188,10 @@ for my $f (keys (%$dump)) {
++                   ) {
++                       $ext_data =~ s{(othername:) [^, ]+}{$1<unsupported>}g;
++                   }
+++                  # Starting with 3.4.0 the double colon in emailAddress has been removed.
+++                  if (Net::SSLeay::SSLeay >= 0x30400000) {
+++                      $ext_data =~ s{emailAddress::}{emailAddress:};
+++                  }
++               }
++               elsif ( $nid == 89 ) {
++                   # The output formatting for certificate policies has a
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/0001-tests-Address-another-formatting-difference-in-OpenSSL-3.4.1.patch b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/0001-tests-Address-another-formatting-difference-in-OpenSSL-3.4.1.patch
+new file mode 100644
+index 0000000000..17310908c1
+--- /dev/null
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/0001-tests-Address-another-formatting-difference-in-OpenSSL-3.4.1.patch
+@@ -0,0 +1,32 @@
++From eac7ac502b02f44a84a67920e9f634cce71ff335 Mon Sep 17 00:00:00 2001
++From: Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
++Date: Tue, 18 Feb 2025 18:57:15 +0100
++Subject: [PATCH] tests: Address another formatting difference in OpenSSL 3.4.1
++
++Since OpenSSL 3.4.1, commit 8a28bca8ee08 ("x509: add a newline after
++printing Full Name") to be exact, there is another new line change.
++
++Adapt the testsuite.
++
++Fixes: #513
++
++Upstream-Status: Backport [https://github.com/radiator-software/p5-net-ssleay/commit/eac7ac502b02f44a84a67920e9f634cce71ff335]
++Signed-off-by: Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
++---
++ t/local/32_x509_get_cert_info.t | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/t/local/32_x509_get_cert_info.t b/t/local/32_x509_get_cert_info.t
++index 0fd1b68..08316bf 100644
++--- a/t/local/32_x509_get_cert_info.t
+++++ b/t/local/32_x509_get_cert_info.t
++@@ -218,6 +218,9 @@ for my $f (keys (%$dump)) {
++                       # OpenSSL 1.0.0 to 1.1.1:
++                       $ext_data =~ s{(Full Name:\n  )}{\n$1}g;
++                       $ext_data .= "\n";
+++                  } elsif ( Net::SSLeay::SSLeay >  0x3040000f ) {
+++                      $ext_data =~ s{(\nFull Name:)}{\n$1}g;
+++                      $ext_data .= "\n";
++                   }
++               }
++               elsif ( $nid == 126 ) {
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
+deleted file mode 100644
+index 9620df5ece..0000000000
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-Avoid running target binaries during in cross build
+-
+-Upstream-Status: Inappropriate [Cross-compile specific]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---- a/inc/Module/Install/PRIVATE/Net/SSLeay.pm	2018-08-27 14:56:24.788544991 +0200
+-+++ b/inc/Module/Install/PRIVATE/Net/SSLeay.pm	2018-08-27 15:00:12.847266331 +0200
+-@@ -24,20 +24,7 @@
+-     $self->requires_external_cc;
+- 
+-     my $prefix = $self->find_openssl_prefix;
+--    my $exec   = $self->find_openssl_exec($prefix);
+--
+--    unless (-x $exec) {
+--        print <<EOM;
+--*** Could not find OpenSSL
+--    If it's already installed, please set the OPENSSL_PREFIX environment
+--    variable accordingly. If it isn't installed yet, get the latest version
+--    from http://www.openssl.org/.
+--EOM
+--        exit 0; # according http://wiki.cpantesters.org/wiki/CPANAuthorNotes this is best-practice when "missing library"
+--    }
+--
+--    $self->check_openssl_version($prefix, $exec);
+--    my $opts = $self->ssleay_get_build_opts($prefix, $exec);
+-+    my $opts = $self->ssleay_get_build_opts($prefix);
+- 
+-     $self->makemaker_args(
+-         CCCDLFLAGS => $opts->{cccdlflags},
+-@@ -58,7 +45,7 @@
+- }
+- 
+- sub ssleay_get_build_opts {
+--    my ($self, $prefix, $exec) = @_;
+-+    my ($self, $prefix) = @_;
+- 
+-     my $opts = {
+-         lib_links  => [],
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/run-ptest b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/run-ptest
+new file mode 100644
+index 0000000000..03e3172e3b
+--- /dev/null
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/run-ptest
+@@ -0,0 +1,27 @@
++#!/bin/sh
++
++result=0
++
++if ! nslookup example.com; then
++  mv /etc/resolv.conf /etc/resolv.conf.bak
++  echo "nameserver 8.8.8.8" > /etc/resolv.conf
++  trap "mv /etc/resolv.conf.bak /etc/resolv.conf" INT EXIT
++fi
++
++for case in `find t -type f -name '*.t'`; do
++    perl -I . $case >$case.output 2>&1
++    ret=$?
++    cat $case.output
++    if [ $ret -ne 0 ]; then
++        result=1
++        echo "FAIL: ${case%.t}"
++    elif grep -i 'SKIP' $case.output; then
++        echo "SKIP: ${case%.t}"
++    else
++        echo "PASS: ${case%.t}"
++    fi
++
++    rm -f $case.output
++done
++
++exit $result
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.94.bb
+similarity index 56%
+rename from meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+rename to meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.94.bb
+index daf07baa22..532744456d 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.94.bb
+@@ -7,8 +7,8 @@ so you can write servers or clients for more complicated applications."
+ HOMEPAGE = "https://metacpan.org/dist/Net-SSLeay"
+ SECTION = "libs"
+ 
+-LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+-LIC_FILES_CHKSUM = "file://README;beginline=274;endline=294;md5=67d67095d83e339da538a082fad5f38e"
++LICENSE = "Artistic-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c49f0a6dd21ce7d8988794dea20b650e"
+ 
+ DEPENDS = "openssl zlib openssl-native"
+ RDEPENDS:${PN} += "\
+@@ -23,25 +23,31 @@ RDEPENDS:${PN} += "\
+     zlib \
+ "
+ 
+-SRC_URI = "${CPAN_MIRROR}/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
+-           file://no-exec-on-configure.patch \
+-           file://run-ptest \
+-          "
+-SRC_URI[sha256sum] = "9d8188b9fb1cae3bd791979c20554925d5e94a138d00414f1a6814549927b0c8"
++SRC_URI = "${CPAN_MIRROR}/authors/id/C/CH/CHRISN/Net-SSLeay-${PV}.tar.gz \
++           file://0001-tests-Address-another-formatting-difference-in-OpenSSL-3.4.1.patch \
++           file://0001-test-32_x509_get_cert_info-allow-single-colon.patch \
++           file://run-ptest"
++SRC_URI[sha256sum] = "9d7be8a56d1bedda05c425306cc504ba134307e0c09bda4a788c98744ebcd95d"
+ 
+ S = "${UNPACKDIR}/Net-SSLeay-${PV}"
+ 
+-inherit cpan ptest
++inherit cpan ptest-perl
+ 
+ do_configure() {
+     export OPENSSL_PREFIX="${STAGING_EXECPREFIXDIR}"
+     cpan_do_configure
+ }
+ 
+-do_install_ptest() {
+-    cp -r ${B}/t ${D}${PTEST_PATH}
++do_install_ptest_perl:append(){
++    cp -r ${S}/inc ${D}${PTEST_PATH}
+ }
+ 
+ FILES:${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/Net/SSLeay/.debug/"
+ 
+-RDEPENDS:${PN}-ptest = " perl"
++RDEPENDS:${PN}-ptest += "\
++    perl-module-english \
++    perl-module-file-spec-functions \
++    perl-module-findbin \
++    perl-module-perlio \
++    perl-module-test-more \
++    perl-module-threads"
 
