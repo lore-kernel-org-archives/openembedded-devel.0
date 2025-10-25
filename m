@@ -2,63 +2,63 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BFA2CCF9E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43DAACCD1BF
 	for <webhook@archiver.kernel.org>; Sat, 25 Oct 2025 03:40:24 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web10.953.1761363622838770185
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web11.955.1761363623442427288
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Oct 2025 20:40:22 -0700
+ Fri, 24 Oct 2025 20:40:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kID+WYmY;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-781ea2cee3fso2691789b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 20:40:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=F7o795Kq;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-b6a73db16efso2502025a12.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 20:40:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1761363622; x=1761968422; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=FUlkcl5vKL77zSpOaol1ZuUjETxQBz4VrvjcFLEjtqA=;
-        b=kID+WYmYJNRBSCEUTcqOX86bXnbWZxH4klWNsU8ZULJLTQWlIgfF72s2xG5zqUDcYk
-         vP2IzfYFFKRQyEzzQ5L53Wu3sxWqEu6csJzYXnQYfryJH+2RP101lYLPNv4s9/ozngD5
-         S+1SsWA++AVY5yGrCNexG7kS9HjnF3jiKU6fDEc7yJ9yi5cpAf8Ui+hVouybNxdPQI+g
-         EaGCIjxXnAETbZNvoZaoNcviVqHICPLe7+QMaSDid04kqjsa5IMp5MbM94W8namXvjCE
-         DaveoqlkYfDEW6LNOCV6s2e69xU1TQLXBDiFcydm5fa++D+II7ZcgDCGx7ROYXTmrwtl
-         IEEQ==
+        bh=WquMLdq+/LOsaJSQyfYoI8mwBYiR9IEErOA8F9FoSV0=;
+        b=F7o795KqabAQfRtEj2DAsVjKVjaNNqJiObYI4tqeU31gPIW18i6yA+Sx17mW6toLXk
+         ekukG+SelJQUyxSWF0MKTH+Hb4xbiFfgjOlZba2YB53zdoU1m3ywYel6XQDLgwamzfxU
+         URSMWpO2HwFJvYakmvn+HCMv7VOFbwH9SUtUTu0q6NGWAph8YXEbkU9YmaQyp1yHGuyp
+         Kz/e9tD0ny5o3QuPvZ92BjEiroJ4T84QHQWscUdOVd+cwlPye2knvf8+ER3yv846p0ld
+         Jy09UeMqJtXjRmn2c6Px91kMM6C8GUWa2U/T6EXEhRoZDFvgeu/qiom21FqFRIzvuLgZ
+         V3IA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1761363622; x=1761968422;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=FUlkcl5vKL77zSpOaol1ZuUjETxQBz4VrvjcFLEjtqA=;
-        b=JIfA5kGywRbUZoCfI70lGT3YKAfnpvs2/0TflgaU6yItch/5pHaLZrEEOGqOEDi84N
-         ChXPTRwtTLhutsfIwnGy2eimTizxTdevWQvvivNqVI6MkEOBs8iQYOseJ+t9IFB0oNF+
-         UxVjHfNPOes06jLRYvsQkHYkww/BU7j3acEVhd4CAkdHCLDv+CJ/oi/XruoljX3j37nW
-         0zkA92BqnJS2LPIQm6pmahzxUmEKr4gGHfnK+1EclmIfjzrh9ee3P0QTK1vkYBP6wvih
-         R+oJjFYLrgz5fo9ub3yTwW9G48r6auXsIQEEhVEWRIDUecVCOKuhklLDHABTGKSJD3Eb
-         IbUQ==
-X-Gm-Message-State: AOJu0Yw5gVPdXgi5KdozHegHL1htNLZvStVao1oxfpeOzZMzOZwrVuW3
-	QTPM0EUV8d9ijCQh2kPhNkISG+mMhN9cnFJw0ZtUgtTv2kzfZ2bI8Moz1KKPdy/H
-X-Gm-Gg: ASbGncsanU9esdg7sWwcL2aWb9GXXC+bFDFaSr116KIhpfWHh5AKFN6EJlVJCdOM6mI
-	75ItMQIJPppgI48zGyQXBEx1d6RpWSqt22CVwvVl3i5gerPHSpLnZNI6Dc1VnR3Bke/Dx9kp0zJ
-	ggbHB+4gCXyXCtkkHCKXyrupkeq3TdQjV+ejQRq274coKJV6UwYDEyB0ZXRQwl9m2tsRDhCZcQR
-	zltt1GlZjyYVwc55+pVwSK607Io3/qCbMjlsW39hcELtxBZ2k/Qwo/t/mA9OUP5zQhyq7OUW1Zh
-	btMCKMkfLSiSgR8wyLbnbNok6Jm4oMGkpm0ZvW7QFl+5daLmi3N6I0gER4KYRb34vNDb+JUMa7h
-	XEuIgiPHOVUByee7+uqTbjJAnU5T1t4tzriCg7SWEldOtrA3mrt5CsEBm9yEnAOEeweX/+4/da8
-	ouRrwCRyeKYJvnTn3gCNfN8VgbxTUflG3Woem4oHCCxlbBF8a9htdOEChAUxrkPzMmTHOaDwi1
-X-Google-Smtp-Source: AGHT+IGjUSoEJ1LCpqUbg9tV8o+7C343mbDhY+UDOueIJkKJvNieEcarGotZse4nXzpivEIUuOj7/g==
-X-Received: by 2002:a05:6a00:1702:b0:7a2:50c5:64e8 with SMTP id d2e1a72fcca58-7a28685edcamr4408512b3a.23.1761363621653;
-        Fri, 24 Oct 2025 20:40:21 -0700 (PDT)
+        bh=WquMLdq+/LOsaJSQyfYoI8mwBYiR9IEErOA8F9FoSV0=;
+        b=PZ0YIyDBgLaJpFx9LBdELUbPDgZqCunihlxpuG2WsB5UsiXdDUF0VfIF8ku088d+rJ
+         VUXNrus+bZpvWnIyiJtp4ljTBxwoB0QOKdKEW8DmDbGNmN5dX/Q9IMT6yZ26zKWs6krW
+         AJeWAJvytuo579SMHcY1MttEiHgY1+VjWdrBLMebLUc4oUI+FlisDkvodH0fNoWH/RZR
+         QWnwXp6JhLBRILIhDRYH+VP7HToClWrh5ZTYhLTzIYoj9a2v4rM8R8++FqqF+1JOhHfQ
+         K51M7VrTW6zzemvLu+UvRJaqePHIPdThgIgqE4hKmF/hNAFzqFmRy1iSaZS4J/2WJ6r7
+         +EjA==
+X-Gm-Message-State: AOJu0YzAs48Jj219ofvT0iqT1SxQUuXnc2FFGKh9xb274pw6qgpK5orN
+	wLDqKx84UAMsTEjOcoWkigj3L6IEpUUlzQeGySEeFqqlPEtnzLCgBHYRuCkiWgNz
+X-Gm-Gg: ASbGncut4hwYL6dDoO3KriHznDtjL+HFoc9oQ9Jz8bfr4hlhYvShJaazGixvFvkfjq+
+	w/+qQS/U6Z27xWLnuSXDJYDzdJBp9PIW+PNt5OW904mM95jMzyuO4G336MGHdAgh87VonNEOYKM
+	O7iMdbpQP6Q5IkiJdHEdZLjR7AbwLwH7vmcj3tN85lWDZLBfQIeo7EL8+/oEr7thfRCchFGzLI7
+	GP8EnfugjvaQ+z6HlG5fwRiIhPd9HI0p8zLVnIOXSc9zJjfnpA3qCrjkOIOrs+bsUap59k3+DxT
+	WdWn7n5gzzUFgR1S3ehZrgKW4BQuIszp5LlcLZYIDfutauUwy/gS3ZQUoW3Xg0v5Nu/d/FkHvbN
+	ypWrSGBgxDBYmUk1rqxcXE7oO9TGVY7j7lbbRs/4IgaqwWWVcMejyD12xLBYBsN51Yz0tuCgDYx
+	YP+q7J4MidFwgAUQDp3uEq5mTS60xo4+kn9rnCxBPJZ/m4QFFR9pbmOcULPjVwhg==
+X-Google-Smtp-Source: AGHT+IEBuble6zKix8NgW8KcPnyAtKdqd3xAgELKdXkbZBwYR0sPWrRwrjop0NJiakQLbWzIye95iQ==
+X-Received: by 2002:a17:902:cec7:b0:272:f9c3:31f7 with SMTP id d9443c01a7336-2948ba5b3bamr55412185ad.50.1761363622454;
+        Fri, 24 Oct 2025 20:40:22 -0700 (PDT)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::9dbe])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7a414012bf4sm808487b3a.1.2025.10.24.20.40.20
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7a414012bf4sm808487b3a.1.2025.10.24.20.40.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Oct 2025 20:40:20 -0700 (PDT)
+        Fri, 24 Oct 2025 20:40:22 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 02/11] libcamera: Detect platform/toolchain defaults for C++ library
-Date: Fri, 24 Oct 2025 20:40:07 -0700
-Message-ID: <20251025034017.2071643-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 03/11] rocksdb: stdint.h needs to included in transaction_db_mutex.h
+Date: Fri, 24 Oct 2025 20:40:08 -0700
+Message-ID: <20251025034017.2071643-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <20251025034017.2071643-1-raj.khem@gmail.com>
 References: <20251025034017.2071643-1-raj.khem@gmail.com>
@@ -68,102 +68,44 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 03:40:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120986
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120987
 
-This ensures that meson does not detect it and automatically link to it
-when using clang with gnu runtime
+It uses int64_t type
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...camera-Do-not-assume-libc-with-clang.patch | 68 +++++++++++++++++++
- .../libcamera/libcamera_0.5.2.bb              |  1 +
- 2 files changed, 69 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-libcamera-Do-not-assume-libc-with-clang.patch
+ ...eckpoint.h-Add-missing-includes-cstdint.patch | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-libcamera-Do-not-assume-libc-with-clang.patch b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-libcamera-Do-not-assume-libc-with-clang.patch
-new file mode 100644
-index 0000000000..7495205041
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-libcamera-Do-not-assume-libc-with-clang.patch
-@@ -0,0 +1,68 @@
-+From 82e9d391d312d65e7a62252e9e153b93c06ad37b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 24 Oct 2025 11:10:59 -0700
-+Subject: [PATCH] libcamera: Do not assume libc++ with clang
-+
-+Clang on linux can be defaulting to use libstdc++, it
-+should be using default platform C++ runtime library which the
-+toolchain should be configured to do the right thing
-+
-+Add logic in meson file to detect C++ runtime used by toolchain
-+and defile -stdlib= parameter accordingly
-+
-+Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcamera-devel/2025-October/054151.html]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ meson.build | 32 +++++++++++++++++++++-----------
-+ 1 file changed, 21 insertions(+), 11 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index fd508fd7..5707f850 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -118,7 +118,24 @@ cpp_arguments = [
-+     '-Wnon-virtual-dtor',
-+ ]
-+
-+-cxx_stdlib = 'libstdc++'
-++# Try to detect libc++
-++libcxx_ver = cxx.get_define('_LIBCPP_VERSION',
-++  prefix: '#include <vector>\n')
-++
-++# Try to detect libstdc++
-++glibcxx_ver = cxx.get_define('__GLIBCXX__',
-++  prefix: '#include <vector>\n')
-++
-++stdlib_msg = 'unknown'
-++
-++if libcxx_ver != ''
-++  cxx_stdlib = 'libc++'
-++elif glibcxx_ver != ''
-++  # __GLIBCXX__ is usually a yyyymmdd date code
-++  cxx_stdlib = 'libstdc++'
-++endif
-++
-++message('Detected C++ standard library: ' + cxx_stdlib)
-+
-+ if cc.get_id() == 'clang'
-+     if cc.version().version_compare('<9')
-+@@ -138,16 +155,9 @@ if cc.get_id() == 'clang'
-+             ]
-+         endif
-+     endif
-+-
-+-    # Use libc++ by default if available instead of libstdc++ when compiling
-+-    # with clang.
-+-    if cc.find_library('c++', required : false).found()
-+-        cpp_arguments += [
-+-            '-stdlib=libc++',
-+-        ]
-+-        cxx_stdlib = 'libc++'
-+-    endif
-+-
-++    cpp_arguments += [
-++        '-stdlib=' + cxx_stdlib,
-++    ]
-+     cpp_arguments += [
-+         '-Wextra-semi',
-+         '-Wthread-safety',
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.5.2.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.5.2.bb
-index 88fe9cf39c..8b8d6815c5 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.5.2.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.5.2.bb
-@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "\
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-checkpoint.h-Add-missing-includes-cstdint.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-checkpoint.h-Add-missing-includes-cstdint.patch
+index a872be5b54..9950be4c90 100644
+--- a/meta-oe/recipes-dbs/rocksdb/files/0001-checkpoint.h-Add-missing-includes-cstdint.patch
++++ b/meta-oe/recipes-dbs/rocksdb/files/0001-checkpoint.h-Add-missing-includes-cstdint.patch
+@@ -27,10 +27,8 @@ Signed-off-by: mark.yang <mark.yang@lge.com>
+  include/rocksdb/utilities/checkpoint.h | 1 +
+  1 file changed, 1 insertion(+)
 
- SRC_URI = " \
-         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
-+        file://0001-libcamera-Do-not-assume-libc-with-clang.patch \
- "
+-Index: git/include/rocksdb/utilities/checkpoint.h
+-===================================================================
+---- git.orig/include/rocksdb/utilities/checkpoint.h
+-+++ git/include/rocksdb/utilities/checkpoint.h
++--- a/include/rocksdb/utilities/checkpoint.h
+++++ b/include/rocksdb/utilities/checkpoint.h
+ @@ -7,6 +7,7 @@
 
- SRCREV = "096c50ca881f72d858aca19757a5e73b4775a7cc"
+  #pragma once
+@@ -39,3 +37,13 @@ Index: git/include/rocksdb/utilities/checkpoint.h
+  #include <string>
+  #include <vector>
+
++--- a/include/rocksdb/utilities/transaction_db_mutex.h
+++++ b/include/rocksdb/utilities/transaction_db_mutex.h
++@@ -5,6 +5,7 @@
++
++ #pragma once
++
+++#include <cstdint>
++ #include <memory>
++
++ #include "rocksdb/status.h"
 
