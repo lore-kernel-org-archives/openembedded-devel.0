@@ -2,170 +2,195 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41D40CCF9ED
-	for <webhook@archiver.kernel.org>; Sat, 25 Oct 2025 03:40:34 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web11.958.1761363625514082462
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F359FCCF9E3
+	for <webhook@archiver.kernel.org>; Sat, 25 Oct 2025 04:51:32 +0000 (UTC)
+Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
+ by mx.groups.io with SMTP id smtpd.web11.208.1761367878793530132
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Oct 2025 20:40:25 -0700
+ Fri, 24 Oct 2025 21:51:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HAM2XWVE;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-7a27bf4fbcbso2208191b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 20:40:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=E+C+mBUm;
+ spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-63e3568f90dso2894515d50.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 21:51:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761363625; x=1761968425; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1761367878; x=1761972678; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+4E6ocKA+RbXQSoe/BqL03tmsLjCpbpo+IT5c8r604c=;
-        b=HAM2XWVES1tIvyz2rrOVABNBPbauU5ycyhrJevQy8co/ZFwNPNilNuO7ZIWuNbRSd9
-         trUGsRqkSxDrQOF7XHfO3JBZH6gooUJRneNFW6VL1m1yOFNHzXw0oH3Sm/XlOMOimro4
-         vsLaIEccOOsfXdlZgwnbJ0mN1kga2xV1B4QjzWMpTiemcmh5gYC9Zm2oQDWgdNL2FJ0B
-         6iY4Fk773zUzDd33awv69Sj7YU6NwEOzP7BOqUT150uTK6Wna8058jCPdGcSBl7/ogYd
-         GRuco1k/EwHw9S97ZmUN1qlSaeVm+YZvwxqRFUluyji8fO2eRrA1Z1EQjpoK+EB6CdTH
-         sMfw==
+        bh=BX8dA4viKUBJLsV/Y33I8AhAwvEp8AjpxihxtlMUCQc=;
+        b=E+C+mBUmiB5T0MF0x+KEIgtAxrvSzR2B1r+ehQWh5DEMIoLBiTTCneK3LQmSMt2sYc
+         MHzMBGVfLMcBtt1gWBhYqL81xIuX4z9yuBNxy4lbp85lOhprP5H1arkpB8nAllODex6f
+         YZ+HB3xT9HLq9r8gmzvakTCP79ZvTHXJn8xfm6bPWYwHSGIWL4QpWHH5/Yjjae9f1t5P
+         sMae42R4HNGjbGz2x/2Djwg1RiZ6qtUJrn/cxLaNWcPyMMoh/BQBBe+rvI4gvSv66z6+
+         +MbLjYKl4TZUR+SmsKTIwqY+Twns+nHAcPIu5C9bZYzOyZbDquroHTwGuOdWkCDMyVFE
+         9HyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761363625; x=1761968425;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1761367878; x=1761972678;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=+4E6ocKA+RbXQSoe/BqL03tmsLjCpbpo+IT5c8r604c=;
-        b=YCY5AhCye42imBliIJB+Ox53tFgtp0lVYXgUjVE+JcAZwkvS+MG0H6XvLl3PlXnbj6
-         q0ukyN2txmS1DMDo6WoiFRIviLeYWk0XCv59yOrwjOk7PsgS432gfwIgkFLLID07e78H
-         UUi6MoCtcPK15GnHtc527wagafT8O7EP1i6LOrtMz8dng+05Xchn3goz9rIfNWHBWM99
-         Teyxxp0nWlsvddBC69AMLB3cqAVnG8w3cNNbxsXUPuLPOaA0vimvbCWoPXFbZSetf1Ox
-         iRqNoychHaZQD6cflfqlXySQS8MHPTMVNbhp0+8+ZQxOr6bb6/J/6TFDTHJgJmB0oOL+
-         NkBQ==
-X-Gm-Message-State: AOJu0Yw9aEwfg+dFLpKwkx/6RV8XPHSFch2/kXAaJk9agtE7U3iQThsH
-	lPHFkbKygxL+fKlLML0QHGe7Vq1D4lLmjr8Up77wDwspyp3lQo/o+AGsCYT2PhB2
-X-Gm-Gg: ASbGncuwujPVEm9kHi1KmokHBS2xfG0VhJqyFk9mKhsY2i3nbTsiISgPMYVWRTRDQLR
-	D0D1oqvdQJzhsGwKTp1u8/O+KvU3Qr7/jHAnSjJ2rpq6PwoWghdCcRIEqInJUWFpQ0SSexe3Tdb
-	bAdv3v8kxzDXCSWvktwVfyj88xODepat7iUGOd94P157v7+ChL/7vehAzL0coyTr5DMkyVM4+D4
-	wygshObwxx3BDGcyVR6a70ZlZ5brkYrHljhMUyvnMGFqac/+wPzZCyfRQA+kTc4GBCUlzHdTsnv
-	71vFXvEpO76Aon58Xv9VH3H2+i3T6oxil2tm0+bU3qrnoPxoHAC7LHjJNl3ydE/zFo1zqySVPIw
-	yYQcY9Aovr9huw+bXxhiMzjo6yCeqDmwM3j0UcNVl9btzUTI1iM5gkzGoxSzhvNc8H/8bguPIMO
-	N/Lu9ZwDEun+DtdhgGQKxxkjr9PtbQPXZR3kpMOYb+wx62VdaqbkriAfRwWgHDEbfTgQqggshY
-X-Google-Smtp-Source: AGHT+IFZmOaEULiqorZljBZO0keczJyw4H/lQ5cRI5IzIEfl23XDHA0jiST5VrGsOzMpFPev0GchpQ==
-X-Received: by 2002:a05:6a20:5493:b0:340:db9b:cfe8 with SMTP id adf61e73a8af0-340db9bd2a9mr2598552637.12.1761363624567;
-        Fri, 24 Oct 2025 20:40:24 -0700 (PDT)
-Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::9dbe])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7a414012bf4sm808487b3a.1.2025.10.24.20.40.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Oct 2025 20:40:23 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 05/11] libtorrent: Upgrade to 0.16.1
-Date: Fri, 24 Oct 2025 20:40:10 -0700
-Message-ID: <20251025034017.2071643-5-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.51.1
-In-Reply-To: <20251025034017.2071643-1-raj.khem@gmail.com>
-References: <20251025034017.2071643-1-raj.khem@gmail.com>
+        bh=BX8dA4viKUBJLsV/Y33I8AhAwvEp8AjpxihxtlMUCQc=;
+        b=AzLlxHRn7WWcfaXeQziP8YeOR8IHKmIw9YmlQUHP6OlU44YwnVeRoUFHrlIrZ4hPr+
+         mHPEmrXcER1OltwTi0qoSLTQwOS9QE+YeCMBhb3Z4gCyxstC31mU/H9gJbD4a9nJOkXp
+         +iKKc+NWcgPichvKSNICY/e7R4Vi8ai2ZXrjwrOMU8KK3hdonNq+o3c2Xdw03LfMUzdf
+         o1UtvT91KZlNvcKqfRHucZbOnAFT+UStMPkCZLzzvT9RuYJ/aKogZb0VN7/jMP/FKFHt
+         Dxc3WRGbwuZSwcgoHm1dd5I2X88yR6wtkX74jLtzsEvoGeA5ubZcbxQ377aQanu3fkfG
+         LGXQ==
+X-Gm-Message-State: AOJu0YxOABsJ8ohtSjv4oj5edNRz0zdq8oVDc5SyFAgt0mphBVr6afE1
+	z9smXmp5CFZH13yQC2c5SjyPOE/+buVqV4kvHYJspPHeCBeSfHOtgtgcUtKnI4raGtvCvsqm9hx
+	CuWU6ocsSMZKXKtD7E7MJ3J4gUfiQLXk=
+X-Gm-Gg: ASbGncsk1VAoiEk8MoofGvLZbc0VoC8ko8+v8BA240yl9y2krC8DwiC6UFNghjxaSLf
+	qAOXoO7s0qqDYjb41Hs+SPxmhy/IvymqHRuTDt/ZwO/uDBeurCvYTjg/5yV+1TtezMhEvh10AEQ
+	IURngKgno4QIwREiDgxkie7ZU1BapoRcKUufYYvrwsGiA8SlzY48TjBGl9aa4v04SIaiNNOPg7e
+	uLgbW11vskWoIXFoCMuBTdLd7xuoiSrNLPVN4TDXarF9RvmeRa9brdy1AOguhcSnBzat/4jzxbP
+	yE9YvOOQxpNrOrQIxmX3DVd7zyl3I+YDQj/WIpXfuwM8ERluDIWGg1SegvV5
+X-Google-Smtp-Source: AGHT+IHiKM8eo4geJZfeF7V1xdRZKSL3rgvxLS/7RUBPSn0PcREGnApKiAgQcXewzsBbhC0/NGyJVh+WvGJ/6gEwAL0=
+X-Received: by 2002:a05:690e:430d:b0:63f:31f7:b956 with SMTP id
+ 956f58d0204a3-63f37810842mr5557314d50.27.1761367877755; Fri, 24 Oct 2025
+ 21:51:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20251025031748.2728416-1-pkj@axis.com> <20251025031748.2728416-7-pkj@axis.com>
+In-Reply-To: <20251025031748.2728416-7-pkj@axis.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 24 Oct 2025 21:50:51 -0700
+X-Gm-Features: AS18NWA4lgmQC5BqBbRgBTu-gjtUVtmvARQXHhxDn_yU9tzx10oayNZr3kWUYJ4
+Message-ID: <CAMKF1spn_SCNtggcC7g1hBRGWnYCYEmqD8FABUVg=q7t77Y+Fw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 7/9] lvgl: Add support for modifying the
+ configuration using menuconfig
+To: peter.kjellerstedt@axis.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 03:40:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120989
+ <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 04:51:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120996
 
-Fix a m4 script bug
-Drop CVE_STATUS since this is only needed for < 0.14 release
-Enable using posix_fallocate when creating a new file to avoid fragmentation
+On Fri, Oct 24, 2025 at 8:18=E2=80=AFPM Peter Kjellerstedt via
+lists.openembedded.org
+<peter.kjellerstedt=3Daxis.com@lists.openembedded.org> wrote:
+>
+> Generating a configuration fragment for a feature can now be done using:
+>
+>   bitbake lvgl -c menuconfig && bitbake lvgl -c diffconfig
+>
+> While this uses the standard cml1.bbclass, it expects that "make" is
+> used to run menuconfig etc. This is not true for lvgl, so unfortunately
+> the whole do_menuconfig() function had to be copied to be able to remove
+> the use of "make".
+>
+> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> ---
+>
+> I plan on updating cml1.bbclass so that it better supports code that
+> does not use "make" to run menuconfig, maybe even giving it native
+> support for kconfiglib. However, due to the current situation, I do not
+> expect any such changes to be accepted until after Whinlatter is out of
+> the door. Thus, the copied do_menuconfig in this recipe will have to do
+> as an interim solution.
+>
+>  meta-oe/recipes-graphics/lvgl/lv-conf.inc | 48 ++++++++++++++++++++++-
+>  1 file changed, 47 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-graphics/lvgl/lv-conf.inc b/meta-oe/recipes-=
+graphics/lvgl/lv-conf.inc
+> index ab3ad01a5a..cc8a2a16d9 100644
+> --- a/meta-oe/recipes-graphics/lvgl/lv-conf.inc
+> +++ b/meta-oe/recipes-graphics/lvgl/lv-conf.inc
+> @@ -21,7 +21,7 @@ PACKAGECONFIG[gridnav] =3D ",,"
+>  PACKAGECONFIG[thorvg] =3D ",,"
+>  PACKAGECONFIG[sdl] =3D ",,virtual/libsdl2 libsdl2-image"
+>
+> -inherit python3native
+> +inherit cml1 python3native
+>
+>  EXTRA_OECMAKE +=3D "-DLV_BUILD_USE_KCONFIG=3DON"
+>
+> @@ -35,6 +35,7 @@ CXXFLAGS +=3D "${LVGL_FLAGS}"
+>  KCONFIG_CONFIG_ROOTDIR ?=3D "${S}"
+>  KCONFIG_FILE ?=3D "${KCONFIG_CONFIG_ROOTDIR}/Kconfig"
+>  export KCONFIG_CONFIG ?=3D "${KCONFIG_CONFIG_ROOTDIR}/.config"
+> +KCONFIG_CONFIG_COMMAND ?=3D "menuconfig ${KCONFIG_FILE}"
+>
+>  do_configure() {
+>      cat ${UNPACKDIR}/defconfig ${@" ".join(find_cfgs(d))} > ${B}/defconf=
+ig
+> @@ -42,3 +43,48 @@ do_configure() {
+>
+>      cmake_do_configure
+>  }
+> +
+> +# Copied from cml1.bbclass. The only modification is that
+> +# ${KCONFIG_CONFIG_COMMAND} is not prefixed with "make" when called by
+> +# oe_terminal.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...mmon.m4-Insert-spaces-in-shell-lists.patch | 45 +++++++++++++++++++
- ...torrent_0.14.0.bb => libtorrent_0.16.1.bb} | 12 +++--
- 2 files changed, 50 insertions(+), 7 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-scripts-common.m4-Insert-spaces-in-shell-lists.patch
- rename meta-oe/recipes-connectivity/libtorrent/{libtorrent_0.14.0.bb => libtorrent_0.16.1.bb} (76%)
+I wonder if we can add this flexibility to cml1.bbclass and use the
+class directly then here.
 
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-scripts-common.m4-Insert-spaces-in-shell-lists.patch b/meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-scripts-common.m4-Insert-spaces-in-shell-lists.patch
-new file mode 100644
-index 0000000000..1740b0f478
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-scripts-common.m4-Insert-spaces-in-shell-lists.patch
-@@ -0,0 +1,45 @@
-+From 9df2559d55c454c7128b65103456c2f88b3bf2f5 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 24 Oct 2025 08:45:02 -0700
-+Subject: [PATCH] scripts/common.m4: Insert spaces in shell lists
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+$1=$(echo "$result" | tr -d '\n')
-+
-+removes all newlines without inserting spaces
-+That usually isn’t what we want for shell lists.
-+It should typically be space-separated output.
-+
-+Fixes a bug seen with yocto where compiler is not a single word
-+but a string e.g.
-+
-+ccache aarch64-yoe-linux-musl-clang++  -mcpu=cortex-a72+crc+nocrypto   --dyld-prefix=/usr -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux-musl/libtorrent/0.16.1/recipe-sysroot
-+
-+It changes it to
-+
-+ccacheaarch64-yoe-linux-musl-clang++-mcpu=cortex-a72+crc+nocrypto--dyld-prefix=/usr-fstack-protector-strong-O2-D_FORTIFY_SOURCE=2-Wformat-Wformat-security-Werror=format-security--sysroot=/mnt/b/yoe/master/build/tmp/work/cortexa72-yoe-linux-musl/libtorrent/0.16.1/recipe-sysroot
-+
-+When doing c++17 checks on compiler, resulting in failure
-+
-+Upstream-Status: Submitted [https://github.com/rakshasa/libtorrent/pull/583]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ scripts/common.m4 | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/scripts/common.m4 b/scripts/common.m4
-+index 74b99e6a..44a5fe65 100644
-+--- a/scripts/common.m4
-++++ b/scripts/common.m4
-+@@ -30,7 +30,8 @@ AC_DEFUN([TORRENT_REMOVE_UNWANTED],
-+     $1="$2"
-+   else
-+     result=`echo "${values_to_check}" | $GREP -Fvx -- "${unwanted_values}" | $GREP -v '^$'`
-+-    $1=$(echo "$result" | tr -d '\n')
-++    # join with spaces, squeeze repeats, and trim trailing space
-++    $1=$(printf '%s\n' "$result" | tr '\n' ' ' | sed 's/  */ /g; s/ *$//')
-+   fi
-+ ])
-+
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.1.bb
-similarity index 76%
-rename from meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb
-rename to meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.1.bb
-index 220bb62c64..4a8a68aa15 100644
---- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.14.0.bb
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.16.1.bb
-@@ -4,16 +4,14 @@ HOMEPAGE = "http://libtorrent.rakshasa.no/"
- LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
-
--DEPENDS = "zlib libsigc++-2.0 openssl cppunit"
-+DEPENDS = "zlib curl libsigc++-2.0 openssl cppunit"
-
--SRC_URI = "git://github.com/rakshasa/libtorrent;branch=master;protocol=https"
--SRCREV = "08fb6635ba249665cb08a4de1b955288d25c21e1"
-+SRC_URI = "git://github.com/rakshasa/libtorrent;branch=master;protocol=https;tag=v${PV} \
-+		   file://0001-scripts-common.m4-Insert-spaces-in-shell-lists.patch"
-+SRCREV = "919d23923ad0a483fa24441093eda1c12cea4c0b"
-
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
-
--CVE_STATUS[CVE-2009-1760] = "backported-patch: patched in our product"
--
--
- CVE_PRODUCT = ""
-
- PACKAGECONFIG ??= "instrumentation aligned"
-@@ -27,4 +25,4 @@ PACKAGECONFIG[aligned] = "--enable-aligned,--disable-aligned,"
-
- inherit autotools pkgconfig
-
--EXTRA_OECONF = "--with-zlib=${STAGING_EXECPREFIXDIR}"
-+EXTRA_OECONF = "--with-posix-fallocate"
+> +python do_menuconfig() {
+> +    import shutil
+> +
+> +    if not bb.utils.to_boolean(d.getVar("KCONFIG_CONFIG_ENABLE_MENUCONFI=
+G")):
+> +        bb.fatal("do_menuconfig is disabled, please check KCONFIG_CONFIG=
+_ENABLE_MENUCONFIG variable.")
+> +        return
+> +
+> +    config =3D os.path.join(d.getVar('KCONFIG_CONFIG_ROOTDIR'), ".config=
+")
+> +    configorig =3D os.path.join(d.getVar('KCONFIG_CONFIG_ROOTDIR'), ".co=
+nfig.orig")
+> +
+> +    try:
+> +        mtime =3D os.path.getmtime(config)
+> +        shutil.copy(config, configorig)
+> +    except OSError:
+> +        mtime =3D 0
+> +
+> +    # setup native pkg-config variables (kconfig scripts call pkg-config=
+ directly, cannot generically be overriden to pkg-config-native)
+> +    d.setVar("PKG_CONFIG_DIR", "${STAGING_DIR_NATIVE}${libdir_native}/pk=
+gconfig")
+> +    d.setVar("PKG_CONFIG_PATH", "${PKG_CONFIG_DIR}:${STAGING_DATADIR_NAT=
+IVE}/pkgconfig")
+> +    d.setVar("PKG_CONFIG_LIBDIR", "${PKG_CONFIG_DIR}")
+> +    d.setVarFlag("PKG_CONFIG_SYSROOT_DIR", "unexport", "1")
+> +    # ensure that environment variables are overwritten with this tasks =
+'d' values
+> +    d.appendVar("OE_TERMINAL_EXPORTS", " PKG_CONFIG_DIR PKG_CONFIG_PATH =
+PKG_CONFIG_LIBDIR PKG_CONFIG_SYSROOT_DIR")
+> +
+> +    oe_terminal("sh -c '%s; if [ $? -ne 0 ]; then echo \"Command failed.=
+\"; printf \"Press any key to continue... \"; read r; fi'" % d.getVar('KCON=
+FIG_CONFIG_COMMAND'),
+> +                d.getVar('PN') + ' Configuration', d)
+> +
+> +    try:
+> +        newmtime =3D os.path.getmtime(config)
+> +    except OSError:
+> +        newmtime =3D 0
+> +
+> +    if newmtime > mtime:
+> +        bb.plain("Changed configuration saved at:\n %s\nRecompile will b=
+e forced" % config)
+> +        bb.build.write_taint('do_compile', d)
+> +}
+> +
+> +do_savedefconfig() {
+> +    bbplain "Saving defconfig to:\n${B}/defconfig"
+> +    savedefconfig --kconfig ${KCONFIG_FILE} --out ${B}/defconfig
+> +}
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#120979): https://lists.openembedded.org/g/openembedde=
+d-devel/message/120979
+> Mute This Topic: https://lists.openembedded.org/mt/115939735/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
