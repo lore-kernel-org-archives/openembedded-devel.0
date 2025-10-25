@@ -2,40 +2,40 @@ Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2AF2CCF9E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C183DCCF9E0
 	for <webhook@archiver.kernel.org>; Sat, 25 Oct 2025 03:18:23 +0000 (UTC)
-Received: from PA4PR04CU001.outbound.protection.outlook.com (PA4PR04CU001.outbound.protection.outlook.com [40.107.162.33])
- by mx.groups.io with SMTP id smtpd.web11.735.1761362301193517630
+Received: from AM0PR02CU008.outbound.protection.outlook.com (AM0PR02CU008.outbound.protection.outlook.com [52.101.72.38])
+ by mx.groups.io with SMTP id smtpd.web11.734.1761362300907972705
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 24 Oct 2025 20:18:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=dqF2GKWo;
- spf=pass (domain: axis.com, ip: 40.107.162.33, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=H5e1QzDU;
+ spf=pass (domain: axis.com, ip: 52.101.72.38, mailfrom: peter.kjellerstedt@axis.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nLvDNu2a1rXKGNJ5v5JZb9GgAeMwdBWGJap6/pshTtVg//OAtDqNjf/7AnehO1u1QhAX+AglwsHxSypsKbf2bn2MGTmfAvkzsu97o2ZHMBcfXmvsqmtDuh5Yo0120HOQZDGiGqWqWwirMKsWhuPGWDkMZxhhiTdjFHtXsHzHDiOi6f1eVyvEHdTJpCZZJo4eyeCwg8jALrV7k4erKK6tPjTw3l+S5qZuQg3X5keM6+0e44TNVabo5EfhPgVaTIgxMJw7vB7EOriktZjFq8kqNZjdkoauokAkfkYWmUwU9kce2uuOyfvK/w2ABybkMDJ/muiVRqghxKvJun1EQbLjXw==
+ b=QxKx/BF38puBaX6XyEYnes35E0j3UkHQY7lQ4fkZQVc3Kbsan0t9/g0v42qySyOVk4JRNVD8ONtk29U3fboMz3EZ6Q7BQTUmOufvqLVUpjSy7rsGlbv7CG9pzmZUi+jmdlhmckHP9kSSywbANOltrMAbtmszzzDkKrOh5VvwR8cwdQqpM0GEDFApHPiQHWysGCfosFSy/wwmf0uAqY1iCfM47dQNkvghREWkkOkVSpJZCIUxb0K+3s+7kBWftafBtO06S2LQBYBZyEumJiijPOTudyvUZ8HSDO+dIu4Hrx+kTdV330nIXnmjROxkJ7UEPfHm3bpwH78tAwPlNLVUyw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vIl/1UOkklRs9HXpi3U0YZOeZAO/IKYDhF3kbVBFkDs=;
- b=yPvmcufss/a66tTUQVgcgjYJvTSZWBz6UUmpLBuyUrNItImHni/zuoJlfghNUCHN/hWocuuYRrxnalinwx8KnSDY/2LiAIpL76uEBoKK2raPQl70WndMFhxZBzI0nP7A2bDfOZdkclwadvX7Gs7kYMaZzEfnSe/NnvPhOcwocv5rqOpMCTo793lMNhF23LMeDL+RsH5hC7PuZursrW8XGIw1yzoWCHNGHqNQ7Gs1bvOvaN71RC92G3gy/YzZC+H9fhBsLCzs7DRy6c3Gwl0SC7uWMSG/ahpefsQPPy1ugOubO9Sfn7boObx7E9IzcS3igTtI1UaGGBvS5hVUm/noVA==
+ bh=VAzuWVRF3Emz8Ko0Qoi+xRVX/NGEh5mnPk3rReCWRsU=;
+ b=Pdnl1Vbfpa8siZlbDahWbrFSGINuDrsMYBqXvdHJdp4f/Gcaxh8rB3y/Gt1CoNYETF3bfRKPMmqg8JWj72sjJJ5HHViSAmKo6wx0QXzsow7N2jDR0ZjGfDgchSDMmpH0NLSw1FQ/MD6dYF/C4KXaB+N6Y4MHdqj4WUEN0Wc+6D1CbSoUab+i/zhkesRn58IfhvI8fK7MgGgs62+L+HrT0lNfUOvHWoMRC+xjLyG2Mj+l0kne3yBfd4Mzkiq4S4v2G/wNIq5CC4isWKmqf1e9t7oNNQoeps89Wf0HO/aUrkaHPwOZpof4JGy+VitwEQXwIx9TvLgK5i5WidOHd8V15A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
  smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
  header.from=axis.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vIl/1UOkklRs9HXpi3U0YZOeZAO/IKYDhF3kbVBFkDs=;
- b=dqF2GKWouRNu1TqiGIfTexe/MwK/ST9KoMPc9D9Y/omB4t67sIJU6J3OnbTFDV5gJrlBhNnHLyL8683TS6ZHb0gmLnQFWWCyg2fQV0ZpK5vplyvMxOza822B0vHczdC1pHIe3iDhD+Y6loBUyln6hyBaMup/ZJXihlw5B31jsmA=
-Received: from DU7P251CA0016.EURP251.PROD.OUTLOOK.COM (2603:10a6:10:551::31)
- by DB9PR02MB6842.eurprd02.prod.outlook.com (2603:10a6:10:21d::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.15; Sat, 25 Oct
- 2025 03:18:15 +0000
-Received: from DB5PEPF00014B94.eurprd02.prod.outlook.com
- (2603:10a6:10:551:cafe::9f) by DU7P251CA0016.outlook.office365.com
- (2603:10a6:10:551::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9253.13 via Frontend Transport; Sat,
- 25 Oct 2025 03:18:15 +0000
+ bh=VAzuWVRF3Emz8Ko0Qoi+xRVX/NGEh5mnPk3rReCWRsU=;
+ b=H5e1QzDU/Q0KQJKtDYjvJgmFxTiFoyp9Gqj89qEtjJ0d55CxCzcBfNDdnS5z6A5VRmGZKzWWcwSgHcxcPBKP2+KRb1zt4PiHh47O7lRU1Ft0b+kPVgo0r1jDghnWktZi3vq2Kl56Dx7smNX+lM1d9c0LNuzwsok8Z9bE4AzXHGY=
+Received: from DUZPR01CA0088.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:46a::14) by DB4PR02MB9455.eurprd02.prod.outlook.com
+ (2603:10a6:10:3f8::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.13; Sat, 25 Oct
+ 2025 03:18:14 +0000
+Received: from DB3PEPF00008860.eurprd02.prod.outlook.com
+ (2603:10a6:10:46a:cafe::4e) by DUZPR01CA0088.outlook.office365.com
+ (2603:10a6:10:46a::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9253.15 via Frontend Transport; Sat,
+ 25 Oct 2025 03:18:30 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
  smtp.mailfrom=axis.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=axis.com;
@@ -43,30 +43,30 @@ Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
  195.60.68.100 as permitted sender) receiver=protection.outlook.com;
  client-ip=195.60.68.100; helo=mail.axis.com; pr=C
 Received: from mail.axis.com (195.60.68.100) by
- DB5PEPF00014B94.mail.protection.outlook.com (10.167.8.232) with Microsoft
+ DB3PEPF00008860.mail.protection.outlook.com (10.167.242.11) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9253.7 via Frontend Transport; Sat, 25 Oct 2025 03:18:14 +0000
-Received: from SE-MAILARCH01W.axis.com (10.20.40.15) by se-mail02w.axis.com
- (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9253.7 via Frontend Transport; Sat, 25 Oct 2025 03:18:13 +0000
+Received: from SE-MAIL21W.axis.com (10.20.40.16) by se-mail01w.axis.com
+ (10.20.40.7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.61; Sat, 25 Oct
  2025 05:18:13 +0200
-Received: from se-mail01w.axis.com (10.20.40.7) by SE-MAILARCH01W.axis.com
- (10.20.40.15) with Microsoft SMTP Server (version=TLS1_2,
+Received: from se-mail01w.axis.com (10.20.40.7) by SE-MAIL21W.axis.com
+ (10.20.40.16) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.61; Sat, 25 Oct
  2025 05:18:13 +0200
-Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail01w.axis.com
+Received: from se-intmail02x.se.axis.com (10.4.0.28) by se-mail01w.axis.com
  (10.20.40.7) with Microsoft SMTP Server id 15.1.2507.61 via Frontend
  Transport; Sat, 25 Oct 2025 05:18:13 +0200
 Received: from pc56063-2339.se.axis.com (pc56063-2339.se.axis.com [10.92.3.2])
-	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 2EF002C9
+	by se-intmail02x.se.axis.com (Postfix) with ESMTP id 2F77C2E05
 	for <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 05:18:13 +0200 (CEST)
 Received: by pc56063-2339.se.axis.com (Postfix, from userid 14323)
-	id E30961207A3; Sat, 25 Oct 2025 05:18:11 +0200 (CEST)
+	id E4EBC122963; Sat, 25 Oct 2025 05:18:11 +0200 (CEST)
 From: Peter Kjellerstedt <pkj@axis.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH 3/9] lvgl: Update to 9.4.0
-Date: Sat, 25 Oct 2025 05:17:42 +0200
-Message-ID: <20251025031748.2728416-3-pkj@axis.com>
+Subject: [meta-oe][PATCH 4/9] lvgl-demo-fb: Update to 9.4.0
+Date: Sat, 25 Oct 2025 05:17:43 +0200
+Message-ID: <20251025031748.2728416-4-pkj@axis.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251025031748.2728416-1-pkj@axis.com>
 References: <20251025031748.2728416-1-pkj@axis.com>
@@ -75,169 +75,228 @@ Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B94:EE_|DB9PR02MB6842:EE_
-X-MS-Office365-Filtering-Correlation-Id: 74a67681-2456-4528-37a5-08de137522dc
+X-MS-TrafficTypeDiagnostic: DB3PEPF00008860:EE_|DB4PR02MB9455:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2cdfbb12-3daf-4729-8f6d-08de13752219
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024|13003099007;
+	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013|13003099007;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?DSQA+DdX9xxU2G4XKChgaNogYY4jaNF4H4gFlqTusof58eYGUuNF/cJhm8U5?=
- =?us-ascii?Q?GnzzBrJeOMoBLu1eXCIrul85P/iI9R4WNn76DkaTQyFiE5Nl2J6FZ/DzJv/w?=
- =?us-ascii?Q?FixvUjMlhvHPN7D/Z9JSqCfj4FBmejeYwyJ0c77J0w2Io1Z726GUW0wfYb+S?=
- =?us-ascii?Q?4f63RLDfOabFyciYMSVxpMAqpXicOQMW7gQkH4m5GW7PahYy20vpS2Waaymf?=
- =?us-ascii?Q?E7co0k5BIWi0wOWbsEIJ+l1w2rig8JEftlKyLveZ2VGXB0ihOP0ygZ0QgIdV?=
- =?us-ascii?Q?DZwaOp0UaX6syhJ9xuApCJnRI8lmYZC3U7F6OYVvmvRgje4OWNdemjZdBRry?=
- =?us-ascii?Q?wsAymVzybIRXasRW51Uu2/aKyqpjJWddqIrMq6p2PDmSjb2ELQMW+P9nzoKZ?=
- =?us-ascii?Q?y0idS1B2fO/6hsMWYmo3jXEYR0uhurA/caVV7c/jMeVxk7Zamil/oEDkrjYN?=
- =?us-ascii?Q?P7WF+DXNJ5Z+WLWIYuH9KwbQ1IwC2CUtDhP1GQS2NI6T08NMTr7+XiT3DGfy?=
- =?us-ascii?Q?N4bP44fCbqYeepETlTB8yyXS43pUDbNb06xr39OXZSKUq+o7VnJKlTkvHuLk?=
- =?us-ascii?Q?gCFV/66UioxvFweYITwD9J6qSSzk3Kr4HNcFWAHpXb4o/3j2NmatmMsifILP?=
- =?us-ascii?Q?1TLYmNxsYpqx5XrzG2ZPZKGi+xXcvuEZWB8jFOnDtNgIWxu6EsT516/yQChk?=
- =?us-ascii?Q?nZeL0H/DiplhZL8ANAOxhW0vZU9Oxn/RjkfZNziXJfWr96IF7a3gtmSkoi3E?=
- =?us-ascii?Q?TCiYmB6jr8ANZ3ZFl7umwZUl0sYJ3GS3r79K5t0mkN7a282B9O/dzqWKx0B/?=
- =?us-ascii?Q?oay7Vv2IPCfWNq5BuuatEYtMja1fRXZ4+TvYj5f2np+ScGoVGnZJaIJVREXO?=
- =?us-ascii?Q?zQVDmhVrb8O5RQizRCqQkovlSlOmCju4gx4zTkF4hjIi1uhR+6A/U0f4E7Vy?=
- =?us-ascii?Q?JvNN5LNHgu7EecKEHQAZi3qIYY2YwFdm8/pxV6rQfXFaewrwMl1//hkn0iZS?=
- =?us-ascii?Q?+Ld9j5e5/oU0hCf0yQgR6bt66ypQ9DOP/zBWeAAqU48/gGpLkBEcIIjElkhk?=
- =?us-ascii?Q?86IeJiazwR70g+0nyS2S02B83c4c6M80PdZM9AxrXZYKaiat04GSuCFgnntC?=
- =?us-ascii?Q?jHrJLeGfEs62TshfaiIkJ0JkN+Yxt14YHGf6HQvFKq/jz9xy/dWyZ8UDWa13?=
- =?us-ascii?Q?qeI9RlbC8ftu0yx8Cwos015ooDe+8A2cjqjiK8DJsf2hr9zc3d2krx2wzR+h?=
- =?us-ascii?Q?awQV1BU82eHNrjxS+vxHMhleGwXfBLUKijgA/l6+8CyegAr9qjniH7KZvDwW?=
- =?us-ascii?Q?uLCAIRE6NVM63CxxHQOL8KH6jSABDPaSpfrOcNPau8owumIW7erAPrBQq1X9?=
- =?us-ascii?Q?PIVn/V2sZQ1FYlD8rMX7CIOdRIC0XEoyBcx7XNbam2t+esDm7uw2csfklbe6?=
- =?us-ascii?Q?ndkLXKSyr+GuS2iA49me1RjN9FZtQBIWp9PEtj/BObKarqrsHh7IhUNs0i3X?=
- =?us-ascii?Q?bBk73Df0/jv/dDk=3D?=
+	=?us-ascii?Q?ewGKPRFoM7w2EmTrpt6xnpsN0hYxFiaThRpecTIVwU2716oRh3nKhJRFqJFS?=
+ =?us-ascii?Q?foIeqqjh1KhgcHwWRJObvIX88CayClOzs7flxe8706JdV5RkgTrHqojOMX+F?=
+ =?us-ascii?Q?s48w/S4bnwaQkb3Jo3BTP/63dtGLJQmheQ//4AtmPckEQOi7L4wpQwuDkK40?=
+ =?us-ascii?Q?2xRaEFk3P/W6msb4773nM/nKtVrr+Wzrl8ilS99yDnMlhjaJRiA44WmAKvzP?=
+ =?us-ascii?Q?5tVYQ1ml5EZdgGLEl44gFAl2OY+alW82dh530pG8ZUzJMppD15iTrz7zyrRw?=
+ =?us-ascii?Q?LvL57oEGEH1oP5N0a5w86Vsz8TbNBDZKfyWWt14DlvqDdcqmwRnLhWF4bWkB?=
+ =?us-ascii?Q?Ek0AbyeN1/CbBLxDp4anUIirTxbNrjRUgwUYEMqJmHqxHBLSrtP0bffMx24t?=
+ =?us-ascii?Q?EB/c/RIRJq23Gt4FQB/HxlzfV+ePWW+33QZRVmqM9VjboW8hIwhfllf5pSc1?=
+ =?us-ascii?Q?8VvBxnCCg+Oct/IU+1XwQlgZcIH5SoeuT7JDiWF/Lw+b/E22whfQwcQpTqfw?=
+ =?us-ascii?Q?xm7UrNtnbaPD2GUrdyNFWJhE40V5HKFjYeJo1AAaYZX+vJVplPPW3o+GaAP3?=
+ =?us-ascii?Q?MZqx4l0JqvcPZ19D6qgRmDHt2C5D6K1M8SfTjJ28pdgibEKR8CvwWTQFcFXe?=
+ =?us-ascii?Q?i4wcA4xWrVw3mCiNlRy7rjRORS5CMU38ey3WF7ddUCocCucuvUeHPsdkgF1V?=
+ =?us-ascii?Q?lQ6C/+6DywSHbiDMkOMfElXDoIIEW0cHGrH6RoJkUxQZMODmdOXdnAk7DsUZ?=
+ =?us-ascii?Q?ZS3xXwmJIVUk4hzp4zHx6QnQ6KM3dUB3CUL8wKH0/H+eNPST/bMrKTjMO0B6?=
+ =?us-ascii?Q?TacKl2BzlrAzz7TMEoyn7h7VybY3+gqumR3HRcQ3UHmPnXGT7uUjVz2BWoKN?=
+ =?us-ascii?Q?ovYD2ZTSUb5JIMfpFcwl31XiqZw3AIzm9HMbsOhVB8a9ebInG8/4EFm8wi7x?=
+ =?us-ascii?Q?9CGDrKceXG/ncEAY6ujJvWMeGlq7tdW42JGP/zWuCQQ0n32qy4OqKvbiWQr4?=
+ =?us-ascii?Q?QGfgoJP6TPqfilA8IINQs7H5AtNJJZwAkSgHWIgb+1kGnMPYHHb7qIuWyzXP?=
+ =?us-ascii?Q?5iVvBczlK8lvPyqY3kqYM5hDIEK9Pm6uQyjW55pyJ3KdAERLu0M1Nze4raIn?=
+ =?us-ascii?Q?Wm9frTBnuO2AmbEzIbiWMe26O09bf79UfIAqd33X92EAfYnmOtbPM8ColEyJ?=
+ =?us-ascii?Q?YmRLATCUaJLgMddgXlKINiQnx0gco2r3Ya6yLtUmmUvCcwMwUMBY/SMqRtrx?=
+ =?us-ascii?Q?IlFGGj3VpPn4BkZf2WbEeRj5XY1P1n+BVFsoTChBAO+VOAdCqjTqlzNaeUhl?=
+ =?us-ascii?Q?QyoB9w13wICDJaJXbimg5x6Op9RMg1umQ2pMugl7gEa1grN9W0O9rI3SCExB?=
+ =?us-ascii?Q?4DY42gmT+GAqrs0v5njWyMzU/iYJRr8lLpV8a3flhMmFrKIUAfdceTg5vtdU?=
+ =?us-ascii?Q?VmmB/EH3+AhOOxw+e8TjY/c4oh7yGM2XWodxjwGL8FOgc4h5xgrqZOeidaf+?=
+ =?us-ascii?Q?8Bh7g2RJGgIiFFJebwIHwuG9j44BYqETJnrSnvoKfJkK1kyc/Phd3tFsbouE?=
+ =?us-ascii?Q?Kq024+eYjSLIQxbWQ8Q=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024)(13003099007);DIR:OUT;SFP:1101;
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013)(13003099007);DIR:OUT;SFP:1101;
 X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2025 03:18:14.9600
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2025 03:18:13.6823
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 74a67681-2456-4528-37a5-08de137522dc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2cdfbb12-3daf-4729-8f6d-08de13752219
 X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	DB5PEPF00014B94.eurprd02.prod.outlook.com
+	DB3PEPF00008860.eurprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR02MB6842
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR02MB9455
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 03:18:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120982
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120981
 
-Drop manual installation of lv_conf.h. It has not been needed since at
-least 9.2.2.
+* Add +git to PV since there is no v9.4.0 tag for the
+  lv_port_linux_frame_buffer repository.
+* Do not run the default do_install() as it will install all of lvgl.
+* Remove the hack in do_configure:prepend() for SDL2_image as cmake
+  (with a little help from pkg-config) now finds SDL2_image correctly.
 
 License-Update: Copyright year updated to 2025
 Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- meta-oe/recipes-graphics/lvgl/lv-conf.inc   | 12 +++++-----
- meta-oe/recipes-graphics/lvgl/lvgl_9.2.2.bb | 25 ---------------------
- meta-oe/recipes-graphics/lvgl/lvgl_9.4.0.bb | 20 +++++++++++++++++
- 3 files changed, 26 insertions(+), 31 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/lvgl/lvgl_9.2.2.bb
- create mode 100644 meta-oe/recipes-graphics/lvgl/lvgl_9.4.0.bb
+ .../0001-thorvg-fix-build-with-gcc-15.patch   | 32 ----------------
+ meta-oe/recipes-graphics/lvgl/lv-conf.inc     |  4 +-
+ .../lvgl/lvgl-demo-fb_9.2.2.bb                | 38 -------------------
+ .../lvgl/lvgl-demo-fb_9.4.0.bb                | 33 ++++++++++++++++
+ 4 files changed, 35 insertions(+), 72 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/lvgl/files/0001-thorvg-fix-bui=
+ld-with-gcc-15.patch
+ delete mode 100644 meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.2.2.bb
+ create mode 100644 meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.4.0.bb
 
+diff --git a/meta-oe/recipes-graphics/lvgl/files/0001-thorvg-fix-build-with=
+-gcc-15.patch b/meta-oe/recipes-graphics/lvgl/files/0001-thorvg-fix-build-w=
+ith-gcc-15.patch
+deleted file mode 100644
+index e61b5224aa..0000000000
+--- a/meta-oe/recipes-graphics/lvgl/files/0001-thorvg-fix-build-with-gcc-15=
+.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From a9e41f7e9590c757e74877cace6442dd676223ff Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <martin.jansa@gmail.com>
+-Date: Fri, 21 Mar 2025 10:25:43 +0000
+-Subject: [PATCH] thorvg: fix build with gcc-15
+-
+-* add missing include to fix:
+-  src/libs/thorvg/thorvg.h:357:20: error: 'uint8_t' has not been declared
+-  357 |     Result opacity(uint8_t o) noexcept;
+-      |                    ^~~~~~~
+-
+-* not needed with latest master where it was resolved differently in
+-  fc5c15638 feat(thorvg): use LVGL's malloc/realloc/zalloc/free (#7772)
+-  which includes stdlib/lv_string.h which includes misc/lv_types.h which
+-  includes stdint
+-
+-Upstream-Status: Pending [not needed with latest master where it was resol=
+ved differently in fc5c15638 feat(thorvg): use LVGL's malloc/realloc/zalloc=
+/free (#7772)]
+-
+-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+----
+- src/libs/thorvg/thorvg.h | 1 +
+- 1 file changed, 1 insertion(+)
+-
+---- a/src/libs/thorvg/thorvg.h
+-+++ b/src/libs/thorvg/thorvg.h
+-@@ -12,6 +12,7 @@
+- #define TVG_BUILD 1
+-=20
+-=20
+-+#include <cstdint>
+- #include <functional>
+- #include <memory>
+- #include <string>
 diff --git a/meta-oe/recipes-graphics/lvgl/lv-conf.inc b/meta-oe/recipes-gr=
 aphics/lvgl/lv-conf.inc
-index 69e42af922..d341c8a6da 100644
+index d341c8a6da..7c16eb3936 100644
 --- a/meta-oe/recipes-graphics/lvgl/lv-conf.inc
 +++ b/meta-oe/recipes-graphics/lvgl/lv-conf.inc
-@@ -7,7 +7,11 @@ PACKAGECONFIG[thorvg] =3D ",,"
+@@ -1,7 +1,7 @@
+ PACKAGECONFIG ??=3D "drm"
+=20
+-PACKAGECONFIG[drm] =3D ",,libdrm"
+-PACKAGECONFIG[fbdev] =3D ",,"
++PACKAGECONFIG[drm] =3D ",,libdrm libevdev"
++PACKAGECONFIG[fbdev] =3D ",,libevdev"
+ PACKAGECONFIG[gridnav] =3D ",,"
+ PACKAGECONFIG[thorvg] =3D ",,"
  PACKAGECONFIG[sdl] =3D ",,virtual/libsdl2 libsdl2-image"
-=20
- # Add libdrm include if drm is selected in PACKAGECONFIG
--TARGET_CFLAGS +=3D "${@bb.utils.contains('PACKAGECONFIG', 'drm', '-I${STAG=
-ING_INCDIR}/libdrm', '', d)}"
-+LVGL_FLAGS +=3D " \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'drm', '-I${STAGING_INCDIR}/libd=
-rm', '', d)} \
-+"
-+CFLAGS +=3D "${LVGL_FLAGS}"
-+CXXFLAGS +=3D "${LVGL_FLAGS}"
-=20
- LVGL_CONFIG_USE_DRM =3D "${@bb.utils.contains('PACKAGECONFIG', 'drm', '1',=
- '0', d)}"
-=20
-@@ -45,11 +49,7 @@ LVGL_CONFIG_USE_FLOAT =3D "${@bb.utils.contains('PACKAGE=
-CONFIG', 'thorvg', '1', '0
-=20
- DEBUG_BUILD ??=3D "0"
-=20
--ALLOW_EMPTY:${PN} =3D "1"
--
--EXTRA_OECMAKE +=3D "-Dinstall:BOOL=3DON -DLIB_INSTALL_DIR=3D${baselib}"
--
--do_configure:append() {
-+do_configure:prepend() {
-     # If there is a configuration template, start from that
-     [ -r "${S}/lv_conf_template.h" ] && cp -Lv "${S}/lv_conf_template.h" "=
-${S}/lv_conf.h"
-=20
-diff --git a/meta-oe/recipes-graphics/lvgl/lvgl_9.2.2.bb b/meta-oe/recipes-=
-graphics/lvgl/lvgl_9.2.2.bb
+diff --git a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.2.2.bb b/meta-oe/=
+recipes-graphics/lvgl/lvgl-demo-fb_9.2.2.bb
 deleted file mode 100644
-index 28306a1101..0000000000
---- a/meta-oe/recipes-graphics/lvgl/lvgl_9.2.2.bb
+index ede5c16f3f..0000000000
+--- a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.2.2.bb
 +++ /dev/null
-@@ -1,25 +0,0 @@
--# SPDX-FileCopyrightText: Huawei Inc.
--#
--# SPDX-License-Identifier: MIT
--
--HOMEPAGE =3D "https://lvgl.io/"
--DESCRIPTION =3D "LVGL is an OSS graphics library to create embedded GUI"
--SUMMARY =3D "Light and Versatile Graphics Library"
+@@ -1,38 +0,0 @@
+-SUMMARY =3D "LVGL Demo Application for Framebuffer"
+-HOMEPAGE =3D "https://github.com/lvgl/lv_port_linux_frame_buffer"
 -LICENSE =3D "MIT"
--LIC_FILES_CHKSUM =3D "file://LICENCE.txt;md5=3Dbf1198c89ae87f043108cea6246=
-0b03a"
+-LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D802d3d83ae80ef5f343050bf96cce3a=
+4 \
+-                    file://lvgl/LICENCE.txt;md5=3Dbf1198c89ae87f043108cea6=
+2460b03a"
 -
 -SRC_URI =3D "\
--	git://github.com/lvgl/lvgl;protocol=3Dhttps;branch=3Drelease/v9.2 \
--    file://0001-thorvg-fix-build-with-gcc-15.patch \
+-	git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=3Dhttps;bra=
+nch=3Drelease/v9.2;name=3Ddemo \
+-	git://github.com/lvgl/lvgl;protocol=3Dhttps;branch=3Drelease/v9.2;name=3D=
+lvgl;subdir=3D${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
+-	file://0001-thorvg-fix-build-with-gcc-15.patch;patchdir=3Dlvgl \
 -	"
--SRCREV =3D "7f07a129e8d77f4984fff8e623fd5be18ff42e74"
+-SRCREV_demo =3D "c924e24c7aa55317521bcd9dd75ce9337508f5a5"
+-SRCREV_lvgl =3D "7f07a129e8d77f4984fff8e623fd5be18ff42e74"
+-SRCREV_FORMAT =3D "demo_lvgl"
+-
+-EXTRA_OEMAKE =3D "DESTDIR=3D${D}"
+-
+-LVGL_CONFIG_DRM_CARD ?=3D "/dev/dri/card0"
+-LVGL_CONFIG_LV_USE_LOG    =3D "1"
+-LVGL_CONFIG_LV_LOG_PRINTF =3D "1"
+-LVGL_CONFIG_LV_MEM_SIZE =3D "(256 * 1024U)"
+-LVGL_CONFIG_LV_USE_FONT_COMPRESSED =3D "1"
+-require lv-conf.inc
 -
 -inherit cmake
 -
--EXTRA_OECMAKE =3D "-DLIB_INSTALL_DIR=3D${baselib} -DBUILD_SHARED_LIBS=3DON=
-"
 -
--require lv-conf.inc
+-do_configure:prepend() {
+-	if [ "${LVGL_CONFIG_USE_SDL}" -eq 1 ] ; then
+-		# Add libsdl build dependency, SDL2_image has no cmake file
+-		sed -i '/^target_link_libraries/ s@pthread@& SDL2_image@' "${S}/CMakeLis=
+ts.txt"
+-	fi
+-}
 -
 -do_install:append() {
--    install -m 0644 "${S}/lv_conf.h" "${D}${includedir}/${BPN}/lv_conf.h"
+-	install -d ${D}${bindir}
+-	install -m 0755 ${S}/bin/main ${D}${bindir}/lvgl
 -}
-diff --git a/meta-oe/recipes-graphics/lvgl/lvgl_9.4.0.bb b/meta-oe/recipes-=
-graphics/lvgl/lvgl_9.4.0.bb
+diff --git a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.4.0.bb b/meta-oe/=
+recipes-graphics/lvgl/lvgl-demo-fb_9.4.0.bb
 new file mode 100644
-index 0000000000..04ee34a61f
+index 0000000000..3185d37c5c
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/lvgl/lvgl_9.4.0.bb
-@@ -0,0 +1,20 @@
-+# SPDX-FileCopyrightText: Huawei Inc.
-+#
-+# SPDX-License-Identifier: MIT
-+
-+SUMMARY =3D "Light and Versatile Graphics Library"
-+DESCRIPTION =3D "LVGL is an OSS graphics library to create embedded GUIs."
-+HOMEPAGE =3D "https://lvgl.io/"
++++ b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.4.0.bb
+@@ -0,0 +1,33 @@
++SUMMARY =3D "LVGL Demo Application for Framebuffer"
++HOMEPAGE =3D "https://github.com/lvgl/lv_port_linux_frame_buffer"
 +
 +LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D "file://LICENCE.txt;md5=3D4570b6241b4fced1d1d18eb691a=
-0e083"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D802d3d83ae80ef5f343050bf96cce3a=
+4 \
++                    file://lvgl/LICENCE.txt;md5=3D4570b6241b4fced1d1d18eb6=
+91a0e083"
 +
-+SRC_URI =3D "git://github.com/lvgl/lvgl;protocol=3Dhttps;branch=3Drelease/=
-v9.4;tag=3Dv9.4.0"
++DEPENDS =3D "python3-pcpp-native"
 +
-+SRCREV =3D "c016f72d4c125098287be5e83c0f1abed4706ee5"
++PV .=3D "+git"
 +
-+inherit cmake
++SRC_URI =3D "\
++    git://github.com/lvgl/lv_port_linux_frame_buffer.git;protocol=3Dhttps;=
+branch=3Drelease/v9.4;name=3Ddemo \
++    git://github.com/lvgl/lvgl;protocol=3Dhttps;branch=3Drelease/v9.4;tag=
+=3Dv9.4.0;name=3Dlvgl;subdir=3D${BB_GIT_DEFAULT_DESTSUFFIX}/lvgl \
++"
 +
-+EXTRA_OECMAKE +=3D "-DLIB_INSTALL_DIR=3D${baselib} -DBUILD_SHARED_LIBS=3DO=
-N"
++SRCREV_demo =3D "71050624acd8a52ab7d365d0d12acf9bf5fe41db"
++SRCREV_lvgl =3D "c016f72d4c125098287be5e83c0f1abed4706ee5"
++SRCREV_FORMAT =3D "demo_lvgl"
 +
++inherit cmake pkgconfig
++
++LVGL_CONFIG_DRM_CARD ?=3D "/dev/dri/card0"
++LVGL_CONFIG_LV_USE_LOG    =3D "1"
++LVGL_CONFIG_LV_LOG_PRINTF =3D "1"
++LVGL_CONFIG_LV_MEM_SIZE =3D "(256 * 1024U)"
++LVGL_CONFIG_LV_USE_FONT_COMPRESSED =3D "1"
 +require lv-conf.inc
++
++do_install() {
++    install -d ${D}${bindir}
++    install -m 0755 ${B}/bin/lvglsim ${D}${bindir}
++}
 
