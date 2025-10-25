@@ -2,63 +2,63 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 203F1CCD1BF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20434CCF9E0
 	for <webhook@archiver.kernel.org>; Sat, 25 Oct 2025 03:40:34 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web11.956.1761363624412757785
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web10.956.1761363629680900257
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Oct 2025 20:40:24 -0700
+ Fri, 24 Oct 2025 20:40:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XwZvblln;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-7a28226dd13so1740244b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 20:40:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BuAlffb2;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-7a27053843bso3859424b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Oct 2025 20:40:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761363623; x=1761968423; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1761363629; x=1761968429; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4/tQKAfvBl4RKpenk43bL5NNS/D0ixXJOKI9cRBj9Pk=;
-        b=XwZvbllnASTWmuwXnUQuS0efx+8z3UEV4SjV8lqSnBXxqFj1XPp91IRUjkL4S3Fdk1
-         aV94RWz1lzvhHQW6fwcb314FUMVTI1ke9TY3OEHRNKWdXniJeBFqR58RNTuQWgtVQTwC
-         jhSsSScvZueTdIe0tbl2b1YBE/wJ8ijXjp0/Hgxuz2RUkvQdomMlcQLxoBH8mnqZUjqx
-         97EV313qAuWHTzYi3LrPIyup44cck678ZuSv6xmZOLpgldGBdccmS42tHdFFtmiTa7Wu
-         TC1lN4llWg5SgAJ6in7PuKWqP7eFe/a5PXzLqvU5p+Vh0MPrUXQVZDL05Boz0j8HaAa3
-         Pa6Q==
+        bh=HRGxzbn/GGxK8z6HAIHgzAjlSB4nqaNVl0G8va6HhFY=;
+        b=BuAlffb2cHVCPNV2Ii59n4bIemvkFjxqmCllCMxtN+r5NB/4e5YlyTGz51VvvcO5Uw
+         W8Os1KvztzCZB+fr+u1x9kV3hbxJJRrjstzOoa+cR4xocG7YeS2qOe3bmLb/pJt4Te1n
+         JJwrhRUjxaNUS249WNy/JiXbtSJZ8IErXJOYgrhbCzevuSKwZslHC+vbPvDM1Xwqlq7w
+         7lZjQunx0iOiTu0dJxi/7uOh0Y4Nnb4ij/mwLdCLBztEWGlwg8sdQbwLo/YX/meeWkn2
+         amsmRBqPQccr5hp6cWZW+xkO+aXz4bOPGW2wqcwo+2J0bDTBlglS2TOAvEy9uYNZNPzJ
+         /LPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761363623; x=1761968423;
+        d=1e100.net; s=20230601; t=1761363629; x=1761968429;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=4/tQKAfvBl4RKpenk43bL5NNS/D0ixXJOKI9cRBj9Pk=;
-        b=RuYcqy2Z8dnjj8viZ0TGP8tp4ywlsfkRNWKxDVRhQBN1NPKl++wcEcY5KdcM+DNH4p
-         oZQvzEpiZiI6jvuMU1oJn6BUBsedlb9uBXMqv+Yv2+uZQMQj8J7DTkACF1xkD+DLdS62
-         JEjKG17LMexslyLLQyiZM+ofTNBUeb/+Svt3hRmBB4IpnruQXmBeZ9iQOL278yXa+O8k
-         zZ+hyV73zbXgHIN5UgVXVwP4YObdcXvFk2b5GJq4RKUvwOtP90/BBc7dPcZed4lAzwRh
-         qY+3ZB0g3uxi8TTFpBZgj2I0LIh6O8j7MRrq+G4PIlh/YLkrhmGtn1YUgqgn/meln8XL
-         CQxg==
-X-Gm-Message-State: AOJu0YxsHcGPVYaxoyayuW0wV2HzMjeRj+dcGH47N/JqoAnIWG6TVDCw
-	6AZYPW0nHgoWOIGzgwnxd/+LyWXLGGu6o40CamFZC9Z1k4yoaR2V/SraN3ZV6d8y
-X-Gm-Gg: ASbGncumprHXiKJvWpawq6vu2HkjrYwVeV+rFxM2BKBpeTO+Xdoss4rTg3CKt5d+n/b
-	mqALlm4jo4eZYqgThSFeMjay0xOQNSy5DKnDT8+5iUG+cFlckTUrSr+ETAeAc1/6fyE5Br4ETLo
-	YIoKrM5NJfaGJX0lkT8Ygca+LAdvvZPJWG9awJ2PbE9hmEVXId0VJ5/97wUoUYX9pOrjUrO61lZ
-	g1URhHi6TyJmnakCM2yUQgIsd/eyOxiCd8Otsx66ykQfr1bXN6weAB1Mg/ndfjkHCLfcpmYm4to
-	CFPRQLn6pEKnOT7mDuI63mpG/rdk2EVMIrfWx1BFAYZnGKU2xdJVCNL76pkRYZlC776bZlyLlUa
-	HqMGExmjOsoKGEbVGfGenWFV2ReQfiFRKlta4xOqheCSSe5n714SAEtOVZreol5GXcVIZeqTHmw
-	ZwwfioRXlR8yInwpzRhQpl9Af147+/5yWz8X4vUQmOvSaK/6m7fDV6tPNHvFBQgw==
-X-Google-Smtp-Source: AGHT+IGyhboJ9hlPDjMufdDN4hMxe2UlE2pB60n8V5YZK5/LK3LFTL6XavRNVgmwV7pGIevQ8YQNsQ==
-X-Received: by 2002:a05:6a00:2e18:b0:7a2:89a0:92bc with SMTP id d2e1a72fcca58-7a289a09a00mr4921499b3a.31.1761363623446;
-        Fri, 24 Oct 2025 20:40:23 -0700 (PDT)
+        bh=HRGxzbn/GGxK8z6HAIHgzAjlSB4nqaNVl0G8va6HhFY=;
+        b=pUc6ig5eg5Fy25NuNJtH+tD8Tf9pPenshNUgeA5eCdcVHb2wYdjRQTDlIH/8Ai28yu
+         D7kVHNBM2Ft9CzhhGrG3x4rUM2ttPVNSA9W1Ux2MqYzul93yCOSyVIqpTN3ctk6X0sJX
+         obw7oC8Zof9v7nSPotNtc0ZwQzY09JN1kQuqlt7Buse8Ac4cHvAtqIcRISJyrSXGNBeI
+         h4t+KFdnYunUwxeAZlD/vofX4iFFZub2Fy05XMXpHGNhqt5aRZUhpf86mjBFSmUCVl1g
+         HpE41kY5R4B6PxkG/pY7abTBWhJLLnyXuNESA4yMJEK0pG9XSH5ABuLDcj9XWiljF+9m
+         HrbQ==
+X-Gm-Message-State: AOJu0Yzz5QyOfYj2q9p7TSmoJGOQHMa1zMP+87qqe6bJSSiSC26fJ2np
+	1qxrakhIYCy6rpKF3F6Mt2Y3JYFnjf/AcpFrnoUxr7b7UVD7PZow08hffX9OTtbs
+X-Gm-Gg: ASbGnctkU6mga/Xa/1wzeGBWV3XK9bB53dQ55vfnsR/A7BvDDj8in2GZTcOf9F2Xz9f
+	vtk34t48PkoAezFL8t3zFUkdFDwFpYsJeNu3DHq29Mez80M98vNKHhJ10xIVHXK9WCEAqVeXKRO
+	FS0imGqEoE+O5ihVQWQrvNo8tUJ777sk7GkP7bl4m7mYMlLnb4nozrFcZ2TCLUUgHngijhWlYFR
+	7jhYGuKQxRCwDoGUPXaJoseBOrpDmk+eBMw6aXSyvMuYFNQcAAue12TKBrP/K66vtQLXri1Xllr
+	VDvdl+sIQf9aRuGjAAE3QJa6e9FT8swu5i7iff69U69+naKe0QNCTmP3necIDtVzMfcl68Iwp2e
+	V5e9l8xfZYj4hj92yN0SMsSlH+EQuyafKgOpCuTRqhI9tHU4ZLOaTU4c9WRXjoweja6bqx9x/Fi
+	15DMAUFyvQvnPiLZqk3X4/QWMO5spWMEpB5qaGtgzxoKCp1a9cqyNgHX+tPxliznBGUpG56oL/
+X-Google-Smtp-Source: AGHT+IHM8sibFJ4K1C7JPrxHuJU4vvVqbQxW3i4JarvfXp3X66doVaBDRvUP1ERXLMH9SS2VjFX3oA==
+X-Received: by 2002:a05:6a00:2e85:b0:77f:50df:df36 with SMTP id d2e1a72fcca58-7a286803147mr5465870b3a.18.1761363628788;
+        Fri, 24 Oct 2025 20:40:28 -0700 (PDT)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::9dbe])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7a414012bf4sm808487b3a.1.2025.10.24.20.40.22
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7a414012bf4sm808487b3a.1.2025.10.24.20.40.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Oct 2025 20:40:22 -0700 (PDT)
+        Fri, 24 Oct 2025 20:40:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 04/11] rocksdb: Link with libatomic on x86 when using clang/libgcc
-Date: Fri, 24 Oct 2025 20:40:09 -0700
-Message-ID: <20251025034017.2071643-4-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 09/11] python3-pybase64: Switch to PEP-517 build backend
+Date: Fri, 24 Oct 2025 20:40:14 -0700
+Message-ID: <20251025034017.2071643-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <20251025034017.2071643-1-raj.khem@gmail.com>
 References: <20251025034017.2071643-1-raj.khem@gmail.com>
@@ -68,29 +68,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 25 Oct 2025 03:40:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120988
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/120993
+
+The project has a proper pyproject.toml which declares the
+setuptools.build.meta PEP-517 backend.
 
 Fixes
-| i686-yoe-linux-ld.lld: error: undefined reference: __atomic_compare_exchange
-| >>> referenced by librocksdb.so.9.10.0 (disallowed by --no-allow-shlib-undefined)
-| i686-yoe-linux-clang++: error: linker command failed with exit code 1 (use -v to see invocation)
-| ninja: build stopped: subcommand failed.
+
+WARNING: python3-pybase64-1.4.2-r0 do_check_backend: QA Issue: inherits setuptools3 but has pyproject.toml with setuptools.build_meta, use the correct class [pep517-backend]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-python/recipes-devtools/python/python3-pybase64_1.4.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb
-index 4b15f538ff..c6d5a0ec7f 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb
-@@ -29,6 +29,7 @@ SRC_URI:append:mips = " file://0001-replace-old-sync-with-new-atomic-builtin-equ
- SRC_URI:append:powerpc = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
- SRC_URI:remove:toolchain-clang:riscv32 = "file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
+diff --git a/meta-python/recipes-devtools/python/python3-pybase64_1.4.2.bb b/meta-python/recipes-devtools/python/python3-pybase64_1.4.2.bb
+index a551034168..2246f93e8c 100644
+--- a/meta-python/recipes-devtools/python/python3-pybase64_1.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pybase64_1.4.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/mayeut/pybase64"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=84b11fa55a5d83cf6fa202fd3b49c7e8"
 
-+LDFLAGS:append:toolchain-clang:x86 = "${@bb.utils.contains_any("TC_CXX_RUNTIME", "gnu", " -latomic", "", d)}"
+-inherit pypi setuptools3
++inherit pypi python_setuptools_build_meta
 
- inherit cmake ptest
+ SRC_URI[sha256sum] = "46cdefd283ed9643315d952fe44de80dc9b9a811ce6e3ec97fd1827af97692d0"
 
 
