@@ -1,130 +1,157 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EED0CCD1A5
-	for <webhook@archiver.kernel.org>; Sun, 26 Oct 2025 15:06:56 +0000 (UTC)
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
- by mx.groups.io with SMTP id smtpd.web11.11959.1761491212233668118
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56FD1CCF9E9
+	for <webhook@archiver.kernel.org>; Sun, 26 Oct 2025 20:51:28 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.web11.18157.1761511882201214309
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Oct 2025 08:06:52 -0700
+ Sun, 26 Oct 2025 13:51:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MkrISKc6;
- spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-7849c889ac8so70247687b3.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Oct 2025 08:06:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jNFXtt98;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-3f0ae439bc3so2539949f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Oct 2025 13:51:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761491211; x=1762096011; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BT/AqNyZBbuOmX8Fy6ISe5Nidc70FWrePJg6/j5IQYY=;
-        b=MkrISKc6zqs+qpS6SgQ/xS79xM/XESnJGlKQrDscHHpsjzMfpgT2cAsuombBJzw0x/
-         Rle1O5TumbUkEz5KR3PiKyXPGttk6ZDIW0PvN/Ph2/v4Ob6VFw+1sXv8XOX2NUUevuv6
-         cUCUn20lDa5R3e+vnFuYAEjXdQ5f9/72ltFNTbsSXoUZHNw9ibNaI8INaRg53k7u8P2z
-         pxGnWVpog1vtQXrHFtmWS9aUjEHi+niHHwXDSRXRcBpbrMJa1emvoOFzioEGoEDMbqas
-         K37re8PHiIMPCs4llww9WRzG3AEHfwO1mW2VV3k7Djlcqp9II3sgWuFTm1120Z1BGkBq
-         EShg==
+        d=gmail.com; s=20230601; t=1761511880; x=1762116680; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=j3o+3BaPJMEPoWwdy43C6jzzsUiY6fTQI6Osh3u+hn4=;
+        b=jNFXtt984kWm48gVJ/d2jpO3hHxndyUKttamtp+htKukTx2QnOm1LnyM2oRwrb3sho
+         MIc0HFzxzjxU+XABxuO6NVkJlfYnAwY0nhh7RXx0TH6lz5/SZ3z2LipzKG64+mxsaj09
+         VDyUTdfRfDW3ENqIjJoyH9qATXc401LX/SrsA2uN3wZTKNicJUp9742+/ol3w/3cYYvU
+         jep8a4TGIxCna2SCrOz++INgzUy8tyXVyEt+gngRKO8tLJw4fHv+iKG0uNe0EITIMjAa
+         kT+Lo47zdLx2itlaLsaXrDhjmIPYHImHkHDmAOR1VkrlDR4TBl5mhT6KmmKwoVc22gEO
+         61Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761491211; x=1762096011;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1761511880; x=1762116680;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=BT/AqNyZBbuOmX8Fy6ISe5Nidc70FWrePJg6/j5IQYY=;
-        b=vs5k9i/zmWUP1x6c/apJx1FYU3xD7F5ZJIfOXP474QDeskI9hvSo/mb8mDfSSqht6l
-         5DkIWZqZ8ljx0u5JIUpjh+dsbQF/NPyqJYHHxW+PF2eqpYjxCjwm2+f9g3IPF1p90Ij3
-         cDxRYYSMi0eUm//T5gMieNMVMEabzo46cJgqCd+TMIPR8ke+FVovu4HLefzV7pCA722X
-         nwm2/avtwBA5gWWikthrchiUfsrv9G2RvH9j0RASwzFygwkTTPiRcHGal/reMwtb50oe
-         gcZC+bdR1s32QJ6RnHOFTH12Um67xIZQwGGOntSgfUoI9EVBpYu4mG944e/yfyXUnatG
-         mVPQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUUhH5ql4nuP0bqN9tkal5IF+oIAC2jYrO783BhkvyAj2krlvlraVd2bX2ObEqWEvKaDAJfnUgPTplFcaLtE4ptKaU=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyUf2AZJL6HKTOZbz5Jc4BaXUDE7QFnJlg1a5hnsrOH15lNEMsY
-	pJPtLU0VJhqWLh9HDNfnVo2gbPNJXe/ZYIa74IlMrdhxQQRQy98FkrZG3XTdN9H1dAdosOrwVsI
-	AQAVQLOLOJR0wL9VobM6Wyytg80xOYtM=
-X-Gm-Gg: ASbGnct/U6BJGIMnxArmQhRINbT9wZ2qI7IKI66uBvt8p13tfaKJRvyeAzFagw10Yr0
-	RGJnioevQcpMkrM//fi+EcjWEC4qnGBEdMvJhF3JAN2DwmBO49cs5npuTb3PxvXOHbfQoiUXpi3
-	133Ag0m74TsRff+qAJygGBjxeRY3mXXf7wkZSRKUFcF6LlNJQ71Iv/nAHCUlCnUWug7htoeiw8f
-	DdeBN0uwH9LtU+FjtrhCJrMRPchDDVs3NX4sTqDCXEKGcGhzBldkIyROUqefUddQz+X/zUZbw2W
-	2ztVZjunOR9Nu6zE1h5w2iWjZ0fEIDH08Aauc4hT9jft0nhO3GfRy4/gHPl2
-X-Google-Smtp-Source: AGHT+IHameUK5ZKMQ7pHcaFs4EiEKqD4ddz2HNzK9Peq+o33IuiF9u/H9cGKA3kGDWasgCT30Dsc0anZwLhtjacG84g=
-X-Received: by 2002:a05:690e:4087:b0:63e:2b9e:1462 with SMTP id
- 956f58d0204a3-63f42b7bb9bmr6447779d50.22.1761491211311; Sun, 26 Oct 2025
- 08:06:51 -0700 (PDT)
+        bh=j3o+3BaPJMEPoWwdy43C6jzzsUiY6fTQI6Osh3u+hn4=;
+        b=TEAxD6UGxf/QtzkYcjXXJY+LYSSewxOt+xQT3E42EXxKtCDaoPP68xbY8wkkDEu9hF
+         lA7AF9kumb9MIj7nKubP88C09BIg7Naj+VVThTCuVhaHxCKMXdQgDiMCRKfEgQpWs7Dz
+         k8H+DyNA9XCfwlkOfGOchQjsQ8QpsgH8/xh7rIPddURLxo6a10rKt7X63NoEpm3FNXgV
+         wwc43ST8fVpSQAbjdcbaNM5lLCSUnMmOTuBRDCc7hPJAeZ9JbnlrYi4ymmXPWgbvMPqw
+         IPEtQzGB10vcW7zRaTP1001aLcYvhTOPl6PRfT83EID8zyLid6t43Z53MyFeDpcHG7DJ
+         /Ecg==
+X-Gm-Message-State: AOJu0YxOQZio04Euf/NZgm4v6WUfWZUnd32ytnUBxkrJlqcllF/WYLcV
+	ZN93AH+xuxw5ZiAhqnzguAFjvoPu90Mf6ORmcCvteeN77lH46RE9mcmbuiFjEw==
+X-Gm-Gg: ASbGncs8Y5eRatjG8vRXHHfnXkzaL3w3suZIqvT21/Foz53QLEfFK8vexXLsIm1cTmX
+	7yNHTIjSlxwTRzhIFh1OJOKzVxqcaA+UD1/hwEJyJEfwmWwxzMVLX/aYngppHWttLPsYEUA/+HE
+	r04RjL6PygyofsDXCrtLX1DheBwT8ICXkn1Iqzou9IjaupTzBsROR7aELeKBwLfz6A0DtDj1R/U
+	KbPoeWhKLzS9pgWaPZG2lmL+vHEaR6hhDwyxOg1W69xK5FDvvow+Old9K8VEArI9d+maiQDMWHp
+	y/wqsw5RowikKbXmGd+5lXEZjKtcF9iHQac27jETfAa8Lo8kMtN4orNIxzAsAEsAJjoVJHkHNLh
+	9+zt2UQicevzuAusCNXHv7YbpnXWqY/Ck+w3zXmPECzGABughGiFTd5ZAZXfequbwa/eUMe7E4A
+	==
+X-Google-Smtp-Source: AGHT+IGH/0MYnFqgBov20F1Qzf2UVdiXh53DiGGcWSq3uyR9XKoLiHjZ/o9tcqL/6PheIkf79cioxg==
+X-Received: by 2002:a05:6000:4201:b0:429:8c4e:b0c8 with SMTP id ffacd0b85a97d-42990712215mr8725587f8f.27.1761511880507;
+        Sun, 26 Oct 2025 13:51:20 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952da12dsm10484113f8f.29.2025.10.26.13.51.19
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 26 Oct 2025 13:51:20 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH 2/3] python3-scapy: fix ptests
+Date: Sun, 26 Oct 2025 21:51:17 +0100
+Message-ID: <20251026205118.2439308-2-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.1
+In-Reply-To: <20251026205118.2439308-1-skandigraun@gmail.com>
+References: <20251026205118.2439308-1-skandigraun@gmail.com>
 MIME-Version: 1.0
-References: <20251026145444.7355-1-brgl@bgdev.pl>
-In-Reply-To: <20251026145444.7355-1-brgl@bgdev.pl>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 26 Oct 2025 08:06:24 -0700
-X-Gm-Features: AWmQ_bmEUHQBJi5p-2BxW4gcsNOczf3C21xiPVN_L6fTi-Osv0TFycVRmOzhGS8
-Message-ID: <CAMKF1soGnzmbXvT_qBK=kpAqXDLkggsa=soaV1_1RQHLwg5WEQ@mail.gmail.com>
-Subject: Re: [meta-python][PATCH] python3-gpiod: update to v2.4.0
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Bruce Ashfield <bruce.ashfield@gmail.com>, openembedded-devel@lists.openembedded.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 26 Oct 2025 15:06:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121014
+ <openembedded-devel@lists.openembedded.org>; Sun, 26 Oct 2025 20:51:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121016
 
-On Sun, Oct 26, 2025 at 7:54=E2=80=AFAM Bartosz Golaszewski <brgl@bgdev.pl>=
- wrote:
->
-> From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
->
-> Changelog:
-> - make request and reconfigure behavior for lines requested by names
->   consistent with that of lines requested by offsets
-> - fix parsing non-tuple keys when requesting a line
-> - disable UP045 linter check
-> - use quoted types when casting
-> - generate wheels for CPython 3.14
-> - issue a warning when reconfiguring a line not in the original request
-> - update dependencies for wheel generation
-> - update licensing information
+1. Install missing test files
+2. Enable network access by setting a nameserver in resolv.conf
+   because some tests require this
+3. One test tries to ping Google through IPv6 - this test requires
+   ipv6 DISTRO_FEATURE. In case ipv6 is not enabled, skip this test
+   from the run-ptest script.
 
-Please describe this a bit more in commit under License-Update: tag
+NB: the last mentioned test to work  also requires IPv6 support from
+your ISP. My ISP is IPv4-only, and I couldn't try it out. The above
+comes from my reading of the testcode.
 
-> - coding style fixes
-> - minor performance improvements
->
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-> ---
->  .../python/{python3-gpiod_2.3.0.bb =3D> python3-gpiod_2.4.0.bb} | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-gpiod_2.3.0.bb =3D> =
-python3-gpiod_2.4.0.bb} (90%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-gpiod_2.3.0.bb b=
-/meta-python/recipes-devtools/python/python3-gpiod_2.4.0.bb
-> similarity index 90%
-> rename from meta-python/recipes-devtools/python/python3-gpiod_2.3.0.bb
-> rename to meta-python/recipes-devtools/python/python3-gpiod_2.4.0.bb
-> index cd05b40010..405951fe0c 100644
-> --- a/meta-python/recipes-devtools/python/python3-gpiod_2.3.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-gpiod_2.4.0.bb
-> @@ -3,11 +3,11 @@ SUMMARY =3D "Python bindings for libgpiod."
->  LICENSE =3D "GPL-2.0-or-later & LGPL-2.1-or-later & CC-BY-SA-4.0"
->  # The actual license files live in the upstream libgpiod from which the =
-pypi
->  # package is spun out.
-> -LIC_FILES_CHKSUM =3D "file://pyproject.toml;beginline=3D13;endline=3D13;=
-md5=3Dfca786987ac89b59c767e55467de581e"
-> +LIC_FILES_CHKSUM =3D "file://pyproject.toml;beginline=3D13;endline=3D13;=
-md5=3D0fbc720d3e48432ee239eedb6adb0f07"
->
->  SRC_URI +=3D "file://run-ptest"
->
-> -SRC_URI[sha256sum] =3D "daa840ed5b691e7078a9cf21c79fe813b9a91c3ed0bdbafa=
-e0181c7b98b80300"
-> +SRC_URI[sha256sum] =3D "9243a1a59d084ec749d1df4a1e2f238ffb9d94515b0d9f53=
-35460175143c3aa1"
->
->  inherit python_setuptools_build_meta python_pep517 ptest pypi
->
-> --
-> 2.48.1
->
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../include/ptest-packagelists-meta-networking.inc   |  2 +-
+ .../recipes-devtools/python/python3-scapy/run-ptest  |  7 +++++++
+ .../recipes-devtools/python/python3-scapy_2.6.0.bb   | 12 ++++++++++++
+ 3 files changed, 20 insertions(+), 1 deletion(-)
+
+diff --git a/meta-networking/conf/include/ptest-packagelists-meta-networking.inc b/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
+index 408b559da2..838aee94d3 100644
+--- a/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
++++ b/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
+@@ -20,6 +20,7 @@ PTESTS_FAST_META_NETWORKING = "\
+     mbedtls \
+     openhpi \
+     openl2tp \
++    python3-scapy \
+     squid \
+     tcpdump \
+     wolfssl \
+@@ -41,7 +42,6 @@ PTESTS_SLOW_META_NETWORKING = "\
+ 
+ PTESTS_PROBLEMS_META_NETWORKING = "\
+     nftables \
+-    python3-scapy \
+ "
+ PTESTS_PROBLEMS_META_NETWORKING:append:libc-musl = "\
+     libtalloc \
+diff --git a/meta-networking/recipes-devtools/python/python3-scapy/run-ptest b/meta-networking/recipes-devtools/python/python3-scapy/run-ptest
+index 417e21053c..5c166b7ba0 100644
+--- a/meta-networking/recipes-devtools/python/python3-scapy/run-ptest
++++ b/meta-networking/recipes-devtools/python/python3-scapy/run-ptest
+@@ -1,4 +1,11 @@
+ #!/bin/sh
++
++if ! nslookup example.com; then
++  mv /etc/resolv.conf /etc/resolv.conf.bak
++  echo "nameserver 8.8.8.8" > /etc/resolv.conf
++  trap "mv /etc/resolv.conf.bak /etc/resolv.conf" INT EXIT
++fi
++
+ python3 UTscapy.py -t regression.uts -f text -l -C \
+     -o @PTEST_PATH@/scapy_ptest_$(date +%Y%m%d-%H%M%S).log \
+     2>&1 | sed -e 's/^passed None/PASS:/' -e 's/^failed None/FAIL:/'
+diff --git a/meta-networking/recipes-devtools/python/python3-scapy_2.6.0.bb b/meta-networking/recipes-devtools/python/python3-scapy_2.6.0.bb
+index fdef5473ef..2086b018d6 100644
+--- a/meta-networking/recipes-devtools/python/python3-scapy_2.6.0.bb
++++ b/meta-networking/recipes-devtools/python/python3-scapy_2.6.0.bb
+@@ -30,9 +30,19 @@ do_install:append() {
+ }
+ 
+ do_install_ptest() {
++    install -d ${D}${libdir}/test/pcaps
+     install -m 0644 ${S}/scapy/tools/UTscapy.py ${D}${PTEST_PATH}
+     install -m 0644 ${S}/test/regression.uts ${D}${PTEST_PATH}
++    install -m 0644 ${S}/test/pcaps/bad_rsn_parsing_overrides_ssid.pcap ${D}${libdir}/test/pcaps/
++    install -m 0644 ${S}/test/pcaps/macos.pcapng.gz ${D}${libdir}/test/pcaps/
+     sed -i 's,@PTEST_PATH@,${PTEST_PATH},' ${D}${PTEST_PATH}/run-ptest
++
++    # note1: if ipv6 isn't enabled, skip the related test (add '-K ipv6' argument)
++    # note2: to make this test work, your ISP also must support ipv6 - the test is trying
++    #        to ping google.com through ipv6.
++    if [ "${@oe.utils.all_distro_features(d, 'ipv6', 'true', 'false')}" = "false" ]; then
++        sed -i 's/UTscapy.py/UTscapy.py -K ipv6/g' ${D}${PTEST_PATH}/run-ptest
++    fi
+ }
+ 
+ RDEPENDS:${PN} = "tcpdump python3-compression python3-cryptography python3-netclient  \
+@@ -41,3 +51,5 @@ RDEPENDS:${PN} = "tcpdump python3-compression python3-cryptography python3-netcl
+                   python3-difflib"
+ RDEPENDS:${PN}-ptest += "python3-json python3-mock python3-multiprocessing \
+                          iproute2 tshark"
++
++FILES:${PN}-ptest += "${libdir}/test/"
 
