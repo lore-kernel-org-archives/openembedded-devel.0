@@ -2,141 +2,143 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89A0ACCF9E5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AA3ECCF9EC
 	for <webhook@archiver.kernel.org>; Mon, 27 Oct 2025 14:16:05 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web10.34151.1761574560778639042
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web11.33908.1761574564805408676
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Oct 2025 07:16:01 -0700
+ Mon, 27 Oct 2025 07:16:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=A+0jvV5n;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4711f3c386eso35668735e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 07:16:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bT61dUId;
+ spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-429a0d1c31aso632102f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 07:16:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761574559; x=1762179359; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=cCexvCMiYoE4BHFcYQO/escaPaQGa8lkrCe7tQ7DbbM=;
-        b=A+0jvV5nArU2iF97N/RuqoRrvVgC+YlnZ7DD7LbIlV6FOv7W0iyCwj1ZL+Kr+nYWhO
-         NmzVLHC0k/j7mCG15Xs0HnG2Xrh98jaQxuP4op3iyfEORGugkOKWhcfZ/wK7QrTTHf1r
-         msnqvXCta0QDbMv6dgJb1K0tI+ti8jVrQvDo239GWhU8A03KI5bwlwNiFKu6feKHW2Yl
-         D5kGzadh1FGlKzsCd/JTQGQSb4k9u88LpB4mFKy/e02q0aU04Zh1IMktRnMR6n4670Ar
-         UeOrlqpAr3pqc5WF0h6WEzuH9xWSScDMVQeSRiNM9gGTbriflHa9PFmU3G/qTo/8ehSj
-         GucQ==
+        d=gmail.com; s=20230601; t=1761574563; x=1762179363; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Uv/qhVUVz8UNDk7JJ966hZOYvR25y446bd1AgmDQDtM=;
+        b=bT61dUIdz/jS0ArgcHNtNHWeSDnTb/a5XuivNtO/P6fsRIxJ4P8UybucxI/GB8o59g
+         cX4tptUja1wpYwN207u2DTVADT+AtDh8LN2xmMTfxKAHUQD1ErvEMr0u8gAD7jEfBo7S
+         M9L8EIwzy7r+BFSdmyVW/Tar9IFQzc5qWVoI9N0OGIoZ/BcVp+qSRz3Z8UeYvdpyVwFE
+         XOlgHyQVwcEEv/AFezQpkmJF2rHt+nAhE0udoH6A1/SUZOIJczPxaFXb+DY0OZqSNG6A
+         T9U4C6RGmRQmSkGgzdCMaRmoeBJrs97JMWt/VpNAoPyhBgXc3+R00/fjybrxPYl4TLvN
+         +kKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761574559; x=1762179359;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=cCexvCMiYoE4BHFcYQO/escaPaQGa8lkrCe7tQ7DbbM=;
-        b=BwUFmD6eiLIfqBaWMsAFdp65N7isBRvFl9DUzAna7R8Qjmu02+YioX3tyIFcWVwo+m
-         18jh1JQJRDn9E4n1sc7DD/pMa4ogGRQhl7e15e7KWTE5RNykVqff9nwME1QpNkkYYQ7/
-         LcWIKZ5zWe6+P8lcRU9Op//y+GeG+5FtYPNd/AJsQ2lfcrBPLbk6j40HtH6BFq7tOlMl
-         Mi1t6gdCT1jMLhHzMsAyqb9sEU0fdzZW+SYHmyAwe8PyYgCXO74DWwhRJBBybViXKYd+
-         nDDbWehkHrNTHqsnlY6o5LCaJOS7p5HMZ3Gxv53W5/HUuwJd44IkgHBlPyo55FlvjXsu
-         jP9w==
-X-Gm-Message-State: AOJu0YxNqJdXklksqDyfjvGXZBb3LWBsYgR8HlfY3+xybhDMXUxMcXYu
-	J4/L2jHi9dBbURlZ9i/d8dofrC5zRh0DA1KH/3PRkkQXP1bZ0pgaY7bOvX6djQ==
-X-Gm-Gg: ASbGncumQlWQ5iqTA2HYqxn0sOY4HM5aUoUzgrrntvaW6gQ34pL/Z039O5TVQWJPI3X
-	++OxVuAb745QIhlF2A8fGDiYTe5zZC1HTuRjwx2DfY3BX7Xzl7hzripZIHpffTGVIL1Stvziy96
-	bSRqy7KkDvu89Hmf65Q5wVOGWjItT5kkwntk8gec6bdoElR7XEbqJRlFaGCi7GTk/53LH/xiW7Y
-	TSVlTAUNcZIyE10hnBeBuVQp8B9N+5wJHEqhiDjS1C4oA20nXMAwz64Vdw0EVItlYJbQpfxt9ms
-	zzdItbyAH+Twtbnt0UeLBO22ZbmE7bfW2VJPkOb9soJs3ldNSdHIy6+BVHAQxY+apRb9flVP2D3
-	YCRSqmeWuozrm1yc753bknFHvn98U5KhA1alKVmXosEh9iVWX57W8467pQdnep2ByMiIWqrmvc5
-	pV0vzLdlZP
-X-Google-Smtp-Source: AGHT+IFdMfb5PMu+yGwLF0NA5R28ey+ZBbE6mhVmGiQhzJ/ZTIL2WM79h3nKTeJkAdbU+X2dpXuWaQ==
-X-Received: by 2002:a05:600c:1d20:b0:476:4efc:8ed4 with SMTP id 5b1f17b1804b1-4764efc9b5amr74943075e9.11.1761574558765;
-        Mon, 27 Oct 2025 07:15:58 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1761574563; x=1762179363;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Uv/qhVUVz8UNDk7JJ966hZOYvR25y446bd1AgmDQDtM=;
+        b=YNe2DnKAX0uXMqaRg/dpdnC46FUEUWaIKEXV40jvhyRY7AakcshuNSQaU88KoDPklh
+         iH03NrZTC4V7JHpZQcv1fZ/BjNGqw7/p6XdibP7mlO69zVY2WZci79ob+Vrg8q+dWors
+         aYwYsmth+embZvDQSijLHulPWDBprRByif9y3M0tEFc86TmWFQKpYCVPi2x4jBegU7tt
+         eDkavunSTgoB2qsAWKS8ojRhmLkPr4Lrm9i7Gt++XbhsbpwsIAh7bJklNefSwCYpormi
+         85xFSLQwx3gCtsqjJN8cHfPgtsIQp8yMaOWrxhhUcieousLDF7fEt8GOpXSr0guue291
+         DK7w==
+X-Gm-Message-State: AOJu0YzzPE+5BtucBiwMYH/7HDA99pcv/Zz06u+jkXsPy4ua6iatwsqo
+	viruJon6MOM9AOx21d/5LE6GCCFzjvSmT6u56hTaDXtiRSRk5/lorfLYaao1Eg==
+X-Gm-Gg: ASbGncuc18FUsldwzor5T6iZkwQUaS88pf9A9qrgqhLdWLWSmqd2bFTTSQzHicgGNwP
+	nf2ZBvEHahxiOt29IgaXqDKlY3kq92QoUWbhtlUPIbCaNfzARGFj3MYY9VNLcJQht5qRfbyHXKq
+	hpxq5b2MenzIE718GyAxZQYHzloYkUy/ceJC5ihSlB0umr9sfs4RFRffGe9XdVzYxIk1oxxwvGt
+	3rh77dI7JsCwAEwhrXL0lPGqm9EhKzkMsakjmF5R1eonEQA0CFP0WKGH0U7+j6wVOGi65ZSpdyk
+	qwTOHvxW3n9Q2GAinREv3ijIdMnJlX/0aMxomVimQYHrS9rnKrwN1bpvLAHfEWM2Kno08sO1+3f
+	h3e9ahdv+NXjz4fLUd+MK/+pBC1qNP819sqkX2SQSJvMELs/+HSHm7OKoe84s0CZ5+PlQ81Hf/A
+	KXUESiAVoJ
+X-Google-Smtp-Source: AGHT+IGjez9o3u/P3u+lEb/0us5aZeN8xxiIhwa5PsJQ2kHPbRwrvtLLNN4oFVaXCM2GpYwTU5s+xg==
+X-Received: by 2002:a05:6000:4014:b0:428:3d14:7378 with SMTP id ffacd0b85a97d-4298f594837mr9257734f8f.24.1761574562960;
+        Mon, 27 Oct 2025 07:16:02 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952db80fsm14164067f8f.31.2025.10.27.07.15.57
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952db80fsm14164067f8f.31.2025.10.27.07.16.01
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Oct 2025 07:15:58 -0700 (PDT)
+        Mon, 27 Oct 2025 07:16:02 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-initramfs][kirkstone][PATCH 01/10] klibc: patch CVE-2021-31870
-Date: Mon, 27 Oct 2025 15:15:48 +0100
-Message-ID: <20251027141557.1893563-1-skandigraun@gmail.com>
+Subject: [meta-initramfs][kirkstone][PATCH 04/10] klibc: patch CVE-2021-31873
+Date: Mon, 27 Oct 2025 15:15:51 +0100
+Message-ID: <20251027141557.1893563-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.1
+In-Reply-To: <20251027141557.1893563-1-skandigraun@gmail.com>
+References: <20251027141557.1893563-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 14:16:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121041
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121044
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2021-31870
+Details: https://nvd.nist.gov/vuln/detail/CVE-2021-31873
 
-Pick patch mentioned in the nvd report.
+Pick the patch mentioned by the nvd report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../klibc/files/CVE-2021-31870.patch          | 45 +++++++++++++++++++
+ .../klibc/files/CVE-2021-31873.patch          | 43 +++++++++++++++++++
  .../recipes-devtools/klibc/klibc.inc          |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31870.patch
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31873.patch
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31870.patch b/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31870.patch
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31873.patch b/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31873.patch
 new file mode 100644
-index 0000000000..028b5d395e
+index 0000000000..4dcad20000
 --- /dev/null
-+++ b/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31870.patch
-@@ -0,0 +1,45 @@
-+From 15c0e066ac8a75bdb3189dd5d77dc0f3539afefd Mon Sep 17 00:00:00 2001
++++ b/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31873.patch
+@@ -0,0 +1,43 @@
++From 34f6170eca948ad221effc79db1f38c51e20329f Mon Sep 17 00:00:00 2001
 +From: Ben Hutchings <ben@decadent.org.uk>
-+Date: Wed, 28 Apr 2021 04:29:50 +0200
-+Subject: [PATCH] calloc: Fail if multiplication overflows
++Date: Wed, 28 Apr 2021 04:03:49 +0200
++Subject: [PATCH] malloc: Fail if requested size > PTRDIFF_MAX
 +
-+calloc() multiplies its 2 arguments together and passes the result to
-+malloc().  Since the factors and product both have type size_t, this
-+can result in an integer overflow and subsequent buffer overflow.
-+Check for this and fail if it happens.
++malloc() adds some overhead to the requested size, which may result in
++an integer overflow and subsequent buffer overflow if it is close to
++SIZE_MAX.  It should fail if size is large enough for this to happen.
 +
-+CVE-2021-31870
++Further, it's not legal for a C object to be larger than
++PTRDIFF_MAX (half of SIZE_MAX) as pointer arithmetic within it could
++overflow.  So return failure immediately if size is greater than that.
 +
-+CVE: CVE-2021-31870
-+Upstream-Status: Backport [https://git.kernel.org/pub/scm/libs/klibc/klibc.git/commit/?id=292650f04c2b5348b4efbad61fb014ed09b4f3f2]
++CVE-2021-31873
++
++CVE: CVE-2021-31873
++Upstream-Status: Backport [https://git.kernel.org/pub/scm/libs/klibc/klibc.git/commit/?id=a31ae8c508fc8d1bca4f57e9f9f88127572d5202]
 +
 +Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 +---
-+ usr/klibc/calloc.c | 11 ++++++++---
-+ 1 file changed, 8 insertions(+), 3 deletions(-)
++ usr/klibc/malloc.c | 9 +++++++++
++ 1 file changed, 9 insertions(+)
 +
-+diff --git a/usr/klibc/calloc.c b/usr/klibc/calloc.c
-+index 53dcc6b..4a81cda 100644
-+--- a/usr/klibc/calloc.c
-++++ b/usr/klibc/calloc.c
-+@@ -2,12 +2,17 @@
-+  * calloc.c
-+  */
++diff --git a/usr/klibc/malloc.c b/usr/klibc/malloc.c
++index 413b733..14bfa63 100644
++--- a/usr/klibc/malloc.c
+++++ b/usr/klibc/malloc.c
++@@ -146,6 +146,15 @@ void *malloc(size_t size)
++ 	if (size == 0)
++ 		return NULL;
 + 
-++#include <errno.h>
-+ #include <stdlib.h>
-+ #include <string.h>
-+ 
-+-/* FIXME: This should look for multiplication overflow */
-+-
-+ void *calloc(size_t nmemb, size_t size)
-+ {
-+-	return zalloc(nmemb * size);
-++	unsigned long prod;
-++
-++	if (__builtin_umull_overflow(nmemb, size, &prod)) {
+++	/* Various additions below will overflow if size is close to
+++	   SIZE_MAX.  Further, it's not legal for a C object to be
+++	   larger than PTRDIFF_MAX (half of SIZE_MAX) as pointer
+++	   arithmetic within it could overflow. */
+++	if (size > PTRDIFF_MAX) {
 ++		errno = ENOMEM;
 ++		return NULL;
 ++	}
-++	return zalloc(prod);
-+ }
+++
++ 	/* Add the obligatory arena header, and round up */
++ 	size = (size + 2 * sizeof(struct arena_header) - 1) & ARENA_SIZE_MASK;
++ 
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index ceb4f5ad3b..dd22282b40 100644
+index 87ca00b857..8c2f1b8d62 100644
 --- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
 +++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -21,6 +21,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/libs/klibc/2.0/klibc-${PV}.tar.xz \
-            file://0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch \
-            file://cross-clang.patch \
-            file://0001-workaround-for-overlapping-sections-in-binary.patch \
-+           file://CVE-2021-31870.patch \
+@@ -24,6 +24,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/libs/klibc/2.0/klibc-${PV}.tar.xz \
+            file://CVE-2021-31870.patch \
+            file://CVE-2021-31871.patch \
+            file://CVE-2021-31872.patch \
++           file://CVE-2021-31873.patch \
             "
  
  ARMPATCHES ?= ""
