@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96A5FCCF9EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96747CCF9EE
 	for <webhook@archiver.kernel.org>; Mon, 27 Oct 2025 14:16:05 +0000 (UTC)
 Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web10.34152.1761574561647183897
+ by mx.groups.io with SMTP id smtpd.web10.34154.1761574563509611991
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Oct 2025 07:16:01 -0700
+ Mon, 27 Oct 2025 07:16:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MeEl8DW0;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QDEvUX1v;
  spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-475dd559a83so12007685e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 07:16:01 -0700 (PDT)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4711b95226dso58638825e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 07:16:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761574560; x=1762179360; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1761574562; x=1762179362; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ooKWbr1bBOyzguAg3nkEL7DZ1JHZwsam63gFb9NLvcQ=;
-        b=MeEl8DW0L1k8MnLyObvKnxQRFjQ+jmzu5QzlNLAefoQJOFkN9k2A7Jr5jcwGwpNnhG
-         PmSfYKNXGkh9MdymMb3IsQsFEzuH0hMXa0qNwLf6m5XW7ojpJbfBZf5nqmzK1OZW5Cjx
-         91VdEo5HBJKkDrt3mdtlkb06MbinlieN3ym6DPmHmkUlcL+Y1Ok3S/0zr0lPgPA6Inbk
-         9kncNFB00kX7/1dO0V9o5aByCrKS49Vdhu5T6UM3NHAlA0b5VleQyk4eOVQml1y/StSQ
-         Un0KoQi2bsgLNb2AVbl59eOH1ichmDVAB30JvwGKrUKOgV1z1/uKDq3fy7E/qgBdxe7q
-         vqcA==
+        bh=8vT2TTLpjnE3LuM9czMgLMTrFgZDcCycPUN73j8om70=;
+        b=QDEvUX1vaPFu8IN8wge24EW9E7ovEEF84uddvhibZBtUf0RfLezF2H5Zv81lTUbsR8
+         zodqb5Q+P5MRdhkvPFO7wj0pgJ7myugidNoVW1PmEY231TknQXdb3UM6N5QQFLUQqJU3
+         /SRuzb8D9Mp65Z7P5CvfwKZQfNzRzDZJDfBEgsBi7UmNbVztgh5STah//URzNcTfh/gp
+         /ZGd/GFxFuYVKrnOnq7ludc6Dv5im6K79UZqpewKVbXmOjRiOrDgH2837xUCCcSU4QWt
+         XJ3uDpwyyRQJqkLT/1yL5RVFdtpQk6yceX2G0I6bEWT+dsaw0qtZolgQetOA3DGFdZ6t
+         /MVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761574560; x=1762179360;
+        d=1e100.net; s=20230601; t=1761574562; x=1762179362;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ooKWbr1bBOyzguAg3nkEL7DZ1JHZwsam63gFb9NLvcQ=;
-        b=ImtFvUde/Xk+0N0EinMoZlJnCnYcde1VkmPlADwkwJrBY+zP/V18WDlSDb+JdT0OZf
-         PhYF5vsjL+7PQmlgOZRsqEm1tE7fE1BykRicZ8RypCqwCYb+TXFHa0ko4a2pdVqUmjUO
-         4Gk5JRbX+vOl7gAcDqCnTbVLm12nn3ujnTlHhWXJp+6hyOOocW1pTmUUETDqslDnpJrP
-         XTODAHu8M7Q4Wxq9uLFwf/kyEgwOdAplJCSRMlMFLCZVDEH08QFWMA8Qhfw6GHFY5xFM
-         TPQTMAiaZJsOpctw7J57Cd4kbm1VR8KUwVV540OxsqTkwkBGH9qgc5b/WKkQ/BLuWzB1
-         oXlQ==
-X-Gm-Message-State: AOJu0Yx1IK8ZGnouMgUE+cb7SrM7QJLCGLOxI9T0tz0K3lF0xwfV2eq6
-	NH+vMBKfvahgYrjGJqBo6oVQbbMCxUIjoP7sNmRsqTQjmVhionWj5FU7N4mszQ==
-X-Gm-Gg: ASbGncvS2AM6Q+FiVFLViR1mrzNnEVwMK4KHaf1+N1pT1uPtG7/uQmZ2ABYJCrbkiKy
-	olLODt7pnp5XG+abESyuXYxMWKD5EuOZy3vIZzvVzYDYa96HBH/E13rMhJ52y89IKnsrS3k2tjo
-	bPFvF1whaUrvzIJIzPtBlVKLMwAmr5chicdaWzjbc6JhYmy7HahDX2g2Qxj+V+3JpQ3CSFD6/yv
-	/4RkM3EpM7Obi7iUInOtDETBy7f+H5Ih/izLD/Hjo7LA4k7VB7Nri3PcyCR4tDZ9lXEb96A6WbO
-	u77LYaLo3lyPju7MGWYOvqx/Z7jjsJPnRcLarBkYRu/zOofulBI3xCHYZGr/cN5npNnlfC1twOV
-	LTLyNF87MYh1peLd4nik7riB/fCtcYUqcUN9GKr98qJm8d/GYXBXR05N6Fq21IMIWNT+qtEur3g
-	==
-X-Google-Smtp-Source: AGHT+IHDkuuwuuzomBCT6oWH0C4cyI35YU1bNNsUil3pjJiI5LLgsmj3DDJhYK9pjFpFo7jjGiO2kQ==
-X-Received: by 2002:a05:600c:c492:b0:46d:9d28:fb5e with SMTP id 5b1f17b1804b1-475d2e72db1mr90796425e9.5.1761574559947;
-        Mon, 27 Oct 2025 07:15:59 -0700 (PDT)
+        bh=8vT2TTLpjnE3LuM9czMgLMTrFgZDcCycPUN73j8om70=;
+        b=fRU/D2JO8ieFHupweSGvbNbBYMrl+D8hC6Rk2j/cYzIgZk1yn2ld2NaPnzj3uc/Y5w
+         9TNE2AZi6P1L5X1Acm07hc4lthbd6tP6Xcj5nRGXl9bk45SuXxkauxHdgrS99pxWrNAR
+         Rjj/SFVdg2PD1nT1YaJeYW7SeGYZZHtzemNgznvNDlTZ813dPhkwjmOi+rCa3NfwUxb5
+         oWQo4EJcRH7uu1NIQ6G+cKimn6aM85epgKISF0eV5vQfGqqfXA0oJta9BQ2Utnbhxsyd
+         aORjoajc2JkSvXynV52Jpqvp8sTBTA9hAPCzNGMmtxOaVhKvYFoqt7fT9ApNYf+aOUR6
+         ZMKA==
+X-Gm-Message-State: AOJu0YwKTwlvZ0xLGUZBUUkDBbHB7iLSj4KWrCnNEhMHfa1lh/T7x1UM
+	DGSy9oOqElsXeQ7suESisPsS/iwo42REGgw4hYra+AvLXWRrwJoS3HfAKR8WaA==
+X-Gm-Gg: ASbGnctLM/xuhrNuGhtk3wOC9uCE9xSMjdXLmeUss8uh2jdTwthCrXA9zhIfAtUss8R
+	kJ5KmshIpxKOQZBrv1Qvkk5cM1hQcJxd1WTSUsqPITnfISn46l3jywl4Ep0VNw1Ktl8bA77OYHT
+	ayo3/9MUOq6RWKtrLQImkRZZVpV3LbuEa2ZBHSiXb9ADpb/YEdkH9pECbnsynfpwlEZripldGRq
+	HvPXIUgGsfTgPCtDJ1nOmfRNzjEWIY43zdih4jqR5yTQUf+1dR9d+gClPDM7maldn7Mw4EHYYIi
+	yaJo64fIe/W8IQUBVm8y57KXSM7ByHSvwC4L65vWgpczoBlqkoynnzLNl0bC1JyNEPgWQu4tFnK
+	W2LYB2M8kergu8d8JgzxicNvouhu3sJTs5guPOBAjTuR9fVBqPB8/Cnf8mZE4Fr2dtqXqs+PHQd
+	T4R/42pdJi
+X-Google-Smtp-Source: AGHT+IEwIHgMZJxACAWFJVo992UCzm/DUL6gVuvv3LcuUZ3BhHA4WMgPqi5RuV5ti+3glFuRgZ5Xvw==
+X-Received: by 2002:a05:600c:870e:b0:46e:37a7:48d1 with SMTP id 5b1f17b1804b1-4711791f94dmr359130835e9.34.1761574560855;
+        Mon, 27 Oct 2025 07:16:00 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952db80fsm14164067f8f.31.2025.10.27.07.15.58
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952db80fsm14164067f8f.31.2025.10.27.07.16.00
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Oct 2025 07:15:59 -0700 (PDT)
+        Mon, 27 Oct 2025 07:16:00 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-initramfs][kirkstone][PATCH 02/10] klibc: patch CVE-2021-31871
-Date: Mon, 27 Oct 2025 15:15:49 +0100
-Message-ID: <20251027141557.1893563-2-skandigraun@gmail.com>
+Subject: [meta-initramfs][kirkstone][PATCH 03/10] klibc: patch CVE-2021-31872
+Date: Mon, 27 Oct 2025 15:15:50 +0100
+Message-ID: <20251027141557.1893563-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <20251027141557.1893563-1-skandigraun@gmail.com>
 References: <20251027141557.1893563-1-skandigraun@gmail.com>
@@ -68,68 +68,104 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 14:16:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121042
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121043
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2021-31871
+Details: https://nvd.nist.gov/vuln/detail/CVE-2021-31872
 
-Pick the patch mentioned in the nvd report.
+Pick the patch mentioned by the nvd report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../klibc/files/CVE-2021-31871.patch          | 34 +++++++++++++++++++
+ .../klibc/files/CVE-2021-31872.patch          | 70 +++++++++++++++++++
  .../recipes-devtools/klibc/klibc.inc          |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31871.patch
+ 2 files changed, 71 insertions(+)
+ create mode 100644 meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31872.patch
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31871.patch b/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31871.patch
+diff --git a/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31872.patch b/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31872.patch
 new file mode 100644
-index 0000000000..c8c40ec931
+index 0000000000..dd9a0f2fcf
 --- /dev/null
-+++ b/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31871.patch
-@@ -0,0 +1,34 @@
-+From db29a01c413fcaaa1095284dfe31582e97d35679 Mon Sep 17 00:00:00 2001
++++ b/meta-initramfs/recipes-devtools/klibc/files/CVE-2021-31872.patch
+@@ -0,0 +1,70 @@
++From 5e8b9d0c9cef6194b3588b12f04afd617de3587d Mon Sep 17 00:00:00 2001
 +From: Ben Hutchings <ben@decadent.org.uk>
-+Date: Wed, 28 Apr 2021 19:46:47 +0200
-+Subject: [PATCH] cpio: Fix possible crash on 64-bit systems
++Date: Wed, 28 Apr 2021 05:16:34 +0200
++Subject: [PATCH] cpio: Fix possible integer overflow on 32-bit systems
 +
-+copyin_link() tries to allocate (unsigned int)c_filesize + 1 bytes.
-+If c_filesize == UINT_MAX, this works out as 0 bytes, resulting in a
-+null pointer and a subsequent SIGSEGV.
++The maximum name and file sizes in the "new" header format are 32-bit
++unsigned values.  However, the I/O functions mostly use long for sizes
++and offsets, so that sizes >= 2^31 are handled wrongly on 32-bit
++systems.
 +
-+The previous commit made this impossible on 32-bit systems.
++The current GNU cpio code doesn't seem to have this problem, but the
++divergence between this version and that is large enough that I can't
++simply cherry-pick a fix for it.
 +
-+CVE-2021-31871
++As a short-term fix, in read_in_new_ascii(), fail if c_namesize or
++c_filesize is > LONG_MAX.
 +
-+CVE: CVE-2021-31871
-+Upstream-Status: Backport [https://git.kernel.org/pub/scm/libs/klibc/klibc.git/commit/?id=2e48a12ab1e30d43498c2d53e878a11a1b5102d5]
++CVE-2021-31872
++
++CVE: CVE-2021-31872
++Upstream-Status: Backport [https://git.kernel.org/pub/scm/libs/klibc/klibc.git/commit/?id=9b1c91577aef7f2e72c3aa11a27749160bd278ff]
 +
 +Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 +---
-+ usr/utils/cpio.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ usr/utils/cpio.c | 18 ++++++++++++++++++
++ 1 file changed, 18 insertions(+)
 +
 +diff --git a/usr/utils/cpio.c b/usr/utils/cpio.c
-+index cb61679..a13c876 100644
++index a13c876..9b0b6ae 100644
 +--- a/usr/utils/cpio.c
 ++++ b/usr/utils/cpio.c
-+@@ -831,7 +831,7 @@ static void copyin_link(struct new_cpio_header *file_hdr, int in_file_des)
-+ 	char *link_name = NULL;	/* Name of hard and symbolic links.  */
-+ 	int res;		/* Result of various function calls.  */
++@@ -17,6 +17,7 @@
 + 
-+-	link_name = (char *)xmalloc((unsigned int)file_hdr->c_filesize + 1);
-++	link_name = (char *)xmalloc(file_hdr->c_filesize + 1);
-+ 	link_name[file_hdr->c_filesize] = '\0';
-+ 	tape_buffered_read(link_name, in_file_des, file_hdr->c_filesize);
-+ 	tape_skip_padding(in_file_des, file_hdr->c_filesize);
++ #include <errno.h>
++ #include <fcntl.h>
+++#include <limits.h>
++ #include <malloc.h>
++ #include <stdbool.h>
++ #include <stdio.h>
++@@ -904,6 +905,15 @@ static void read_in_new_ascii(struct new_cpio_header *file_hdr, int in_des)
++ 		file_hdr->c_hdr[i] = strtoul(hexbuf, NULL, 16);
++ 		ah += 8;
++ 	}
+++
+++	/* Sizes > LONG_MAX can currently result in integer overflow
+++	   in various places.  Fail if name is too large. */
+++	if (file_hdr->c_namesize > LONG_MAX) {
+++		fprintf(stderr, "%s: name size out of range\n",
+++			progname);
+++		exit(1);
+++	}
+++
++ 	/* Read file name from input.  */
++ 	free(file_hdr->c_name);
++ 	file_hdr->c_name = (char *)xmalloc(file_hdr->c_namesize);
++@@ -914,6 +924,14 @@ static void read_in_new_ascii(struct new_cpio_header *file_hdr, int in_des)
++ 	   is rounded up to the next long-word, so we might need to drop
++ 	   1-3 bytes.  */
++ 	tape_skip_padding(in_des, file_hdr->c_namesize + 110);
+++
+++	/* Fail if file is too large.  We could check this earlier
+++	   but it's helpful to report the name. */
+++	if (file_hdr->c_filesize > LONG_MAX) {
+++		fprintf(stderr, "%s: %s: file size out of range\n",
+++			progname, file_hdr->c_name);
+++		exit(1);
+++	}
++ }
++ 
++ /* Return 16-bit integer I with the bytes swapped.  */
 diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index dd22282b40..ccf4a56953 100644
+index ccf4a56953..87ca00b857 100644
 --- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
 +++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -22,6 +22,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/libs/klibc/2.0/klibc-${PV}.tar.xz \
-            file://cross-clang.patch \
+@@ -23,6 +23,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/libs/klibc/2.0/klibc-${PV}.tar.xz \
             file://0001-workaround-for-overlapping-sections-in-binary.patch \
             file://CVE-2021-31870.patch \
-+           file://CVE-2021-31871.patch \
+            file://CVE-2021-31871.patch \
++           file://CVE-2021-31872.patch \
             "
  
  ARMPATCHES ?= ""
