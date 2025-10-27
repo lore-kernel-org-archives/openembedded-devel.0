@@ -1,103 +1,100 @@
-Return-Path: <hongxu.jia@eng.windriver.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D593CCF9EA
-	for <webhook@archiver.kernel.org>; Mon, 27 Oct 2025 11:52:04 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.30018.1761565919461495310
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53BF7CCF9EA
+	for <webhook@archiver.kernel.org>; Mon, 27 Oct 2025 12:01:34 +0000 (UTC)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web11.30509.1761566493268244530
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Oct 2025 04:51:59 -0700
+ Mon, 27 Oct 2025 05:01:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=b0x6CYHS;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2395d885ba=hongxu.jia@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59R7FpMs1021443
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 04:51:59 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=RtbJAgeDd1XcoTuIt3tD
-	1jGutsCaBlxsymPwynaSoEE=; b=b0x6CYHSSWK5W5ijb5FCYyXGUWrjt59paIqN
-	S4HGM17UBfjpVG1iP0O71hqCeO4y9ySSvo0S7vPT3q9uRG0YrpwslFDq4YghTd7t
-	xJnlUBDWShLO1if/osYS2Lr8ilovy4H8XLr51CJkgCwDncI8AUSvNAKwNOHhy8cI
-	W7JWNadd4L/yqxWM7/41rb9M6ScK4/e27uW5nR3dtXgW7rVuCVIrtVClgM+B7WBm
-	l1C4WlgAc5r4ylQZoBSwmU/KA3SDbGzW1Y5C/KaX/D5Ny73Vs5ovDXO4wcy8yrXb
-	v1K3VkX3wg90Vzkj/vJMw0n1asuy4qmT8sqeTwEx230CkqwQIQ==
-Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4a0su1hkrw-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 04:51:58 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Mon, 27 Oct 2025 04:51:58 -0700
-Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Mon, 27 Oct 2025 04:51:57 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-multimedia][PATCH] libcamera: insane skip 32bit-time
-Date: Mon, 27 Oct 2025 19:51:57 +0800
-Message-ID: <20251027115157.1941609-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@konsulko.com header.s=google header.b=VzTvMwwE;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.44, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-61feb87fe26so7923962a12.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 05:01:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1761566491; x=1762171291; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ck93KghIMH1IWw4ioE1Jcoiy0i1K5xoaf+U+BmvbWSM=;
+        b=VzTvMwwE0pmoYMJW7mCpPorstQ5xZErQGOlsehsoFfi4egKDXMnG/SRkpEB0Kyk1lR
+         SbDN/W+o1mJtljbGQZm5uC/2u1J9S7Pad9qrp8DAxRLVlTDU+HXRxNEjatqjwYbQ0PAw
+         f+6xnRNROTb+waBcY986LylCU+MAPl102U9dk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761566491; x=1762171291;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ck93KghIMH1IWw4ioE1Jcoiy0i1K5xoaf+U+BmvbWSM=;
+        b=MT+nhZZbUrW1fhVX97YV+fBf6p1TgO2QJCGJ0cJnuftoJHsNGsau7qhDJZ3xh/UfCc
+         R9QyUO/QvBTAOzEQ0/UZRYRoIpc1BjYTmE2YJhrlFm+M42JszSsP8OQHBcVdVO1odp/z
+         SnTOGowYiSU60ptJ/f4InTN4ZwHYyfzNtBb53Wil5voFCztn2HCxSgGreJWt+2JW5CzN
+         ULEXxF6UDPoB7NdoimPCJexfoIAWhr+oFOMa2PaqukjpSLZUjRo+ainvTGEG9AHktLXH
+         YNDuSEJ9azV3AQdKVasUiGDmYHxGS2rsTrYnvLC5+YyHaRjnN+u77I88sxqTEHVHwsCF
+         qHHg==
+X-Gm-Message-State: AOJu0YzLgHSwI3rgmTkK9CX+KjGG1ltRE/IlkYH3WgJns83SO78pqMhM
+	s+tpKmiZbOCT1vzG77TchBvMD3nelBX/D2pOIsC6slxuAvQpHgD7/nQ/dQkHskl/N0LGDhmoIit
+	ltQk6
+X-Gm-Gg: ASbGncsoZvqvSHS6/1Qt9gWOs0ER5YabNMJ3FJWNW4XBYfYtWPapcxY+PjHaglMJves
+	wjhVbDEF7xdTjpqWLxRLhw3e3XDzQGcVpLJ6/hzgF1ucuJk+ZoQLh7E6dVj6d0NAIaSP9HRbu4c
+	VDtHV1Mn1ntgmTDZfH0MpUnt7KZ2qTIAllnNTFX7qIAE60SWyhwjDfoI0HALaROmrDJ6uNN/DmN
+	PxqUIa4ZycyaYojteZNU0CGlRDFmgFPkPd7ujist5XfpXUWntbsL+YlShFQFHdqUNlyzL+Vdbkb
+	YD7Ge3bwwwt/sZH2Ik/rgxgxVQ5ddu1+vgKuQDIgC2WE8kwCAszr4rbu2ULJafMNVqMOnRsYbkr
+	MkYzQqd5KPimyUp0Xx+LcoeKBXbBxFI8++64kqERi+K+hC3Got5mPCRGP+F/Qe//hCBQdXJPK1H
+	pfXqVTps0+fjbVgVTLzfdWlyHY
+X-Google-Smtp-Source: AGHT+IHrOqYl3L0Ifys2Nkrlx/dztl7CDBMxCEJgIEakTB5JPq3KeHPXgswHIPbhz1T2VQY/jtGWBA==
+X-Received: by 2002:a17:906:730d:b0:b6d:42cb:7fb6 with SMTP id a640c23a62f3a-b6d700366c5mr1000558666b.60.1761566490891;
+        Mon, 27 Oct 2025 05:01:30 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b6d85338663sm740833066b.17.2025.10.27.05.01.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 27 Oct 2025 05:01:30 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-termcolor: Upgrade 3.1.0 -> 3.2.0
+Date: Mon, 27 Oct 2025 14:01:26 +0200
+Message-ID: <20251027120127.1536673-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=SuadKfO0 c=1 sm=1 tr=0 ts=68ff5cde cx=c_pps
- a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
- a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22 a=t7CeM3EgAAAA:8
- a=O7o7S3CWejkxAzTINhcA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDI3MDExMCBTYWx0ZWRfX3cyj/1C0OwvR
- M9tj79JjMjRWiRNre8UHEHCpf9/YnE28EAIhYTCMJir7vBGGK1eSl+SooG9HrI7VsN00yUeFDf0
- gmd4ri6UqOcJqlcRlY/rON63dZU9/XOzxvAho3VCgdgPxFj9tNMFqHKrIkS3hgDvFkD1K9akJxz
- QwqKTvs2arZpr/Ip+zRrHVrJG4wqQJ5i13FSDLWEad7JtKhZC68sJuOR9WFdVaE1rfusRYddLIg
- 1dFVTEsJ0AUwhRHcGTQEKrYhn+IvGV8rKu5Pij+MO+93nhln8g7gWqhx4t1Eqv9NA5+BbI83Ltd
- q14PsSO/yjaf8pWTS55ItQ65hjC93JHrWhq3HoXuoEl8GOv4lzhZ9pPWLvKjEu/QvKq00RTBuiP
- tvRAAe7cXhCKyx1CYIFiojlI5aCYOA==
-X-Proofpoint-GUID: 2JLIDsV7WU8Iw3kQa3IyS4bpesbjQn0s
-X-Proofpoint-ORIG-GUID: 2JLIDsV7WU8Iw3kQa3IyS4bpesbjQn0s
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-10-27_05,2025-10-22_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 bulkscore=0 suspectscore=0 spamscore=0
- adultscore=0 lowpriorityscore=0 phishscore=0 impostorscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510020000 definitions=main-2510270110
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 11:52:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121038
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 12:01:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121039
 
-$ echo 'MACHINE = "qemux86"' >> conf/local.conf
-$ bitbake libcamera
-...
-WARNING: libcamera-1_0.5.2-r0 do_package_qa: QA Issue: /usr/lib/libcamera.so.0.5.2 uses 32-bit api 'sendmsg' [32bit-time]
-WARNING: libcamera-1_0.5.2-r0 do_package_qa: QA Issue: /usr/lib/libcamera.so.0.5.2 uses 32-bit api 'clock_gettime' [32bit-time]
-WARNING: libcamera-1_0.5.2-r0 do_package_qa: QA Issue: /usr/lib/libcamera.so.0.5.2 uses 32-bit api 'ioctl' [32bit-time]
-WARNING: libcamera-1_0.5.2-r0 do_package_qa: QA Issue: /usr/lib/libcamera.so.0.5.2 uses 32-bit api 'recvmsg' [32bit-time]
-WARNING: libcamera-1_0.5.2-r0 do_package_qa: QA Issue: /usr/lib/libcamera.so.0.5.2 uses 32-bit api 'stat64' [32bit-time]
-WARNING: libcamera-1_0.5.2-r0 do_package_qa: QA Issue: /usr/lib/libcamera.so.0.5.2 uses 32-bit api 'fstat64' [32bit-time]
-WARNING: libcamera-1_0.5.2-r0 do_package_qa: QA Issue: Suppress with INSANE_SKIP = "32bit-time" [32bit-time]
-...
+Upgrade to release 3.2.0:
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+- Expose can_colorize as public API
+- Add support for Python 3.15
+- Drop support for Python 3.9
+- Replace action-pre-commit-uv with prek-action
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-multimedia/recipes-multimedia/libcamera/libcamera_0.5.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../{python3-termcolor_3.1.0.bb => python3-termcolor_3.2.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-termcolor_3.1.0.bb => python3-termcolor_3.2.0.bb} (80%)
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.5.2.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.5.2.bb
-index 8b8d6815c5..0c6941213b 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.5.2.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.5.2.bb
-@@ -83,3 +83,5 @@ FILES:${PN}-pycamera = "${PYTHON_SITEPACKAGES_DIR}/libcamera"
- # libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=32 to get access to
- # both 32 and 64 bit file APIs.
- GLIBC_64BIT_TIME_FLAGS = ""
-+
-+INSANE_SKIP += "32bit-time"
+diff --git a/meta-python/recipes-devtools/python/python3-termcolor_3.1.0.bb b/meta-python/recipes-devtools/python/python3-termcolor_3.2.0.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-termcolor_3.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-termcolor_3.2.0.bb
+index 5b82da4838..100292858f 100644
+--- a/meta-python/recipes-devtools/python/python3-termcolor_3.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-termcolor_3.2.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=e5f5f7c9b280511f124dba5dda3d180e"
+ 
+ inherit pypi python_hatchling
+ 
+-SRC_URI[sha256sum] = "6a6dd7fbee581909eeec6a756cff1d7f7c376063b14e4a298dc4980309e55970"
++SRC_URI[sha256sum] = "610e6456feec42c4bcd28934a8c87a06c3fa28b01561d46aa09a9881b8622c58"
+ 
+ DEPENDS += " \
+ 	python3-toml-native \
 -- 
-2.34.1
+2.47.3
 
 
