@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EB00CCF9EC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EAC4CCF9E5
 	for <webhook@archiver.kernel.org>; Mon, 27 Oct 2025 14:16:15 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web11.33909.1761574566354639043
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.web11.33916.1761574572237790990
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Oct 2025 07:16:06 -0700
+ Mon, 27 Oct 2025 07:16:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BVUUXlUB;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-42420c7de22so2370275f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 07:16:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iqaSvcTI;
+ spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-4285169c005so2181439f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 07:16:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761574564; x=1762179364; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1761574571; x=1762179371; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=G+Rg0txVYKuHnBj2xyPjzFn/J/2+oLsFdXyCaeknPJY=;
-        b=BVUUXlUBtAL0myl6Mr8//H174Pf3YU911KkSn8QzgGB1FKEpNTMKaFWGFJAF8QuUM3
-         DUrUIhW3C9P46EVD2bm1yadQh5kXB94ybFzDa+8HpHWGcT7ebTqCZOnZ8lndCVdfV7qw
-         y2oV3ggyyXVRNLqEK4SWXriLLfl/E3nmcamyBrUqz9LppNPYwzzkXB8RXtFFHlSAVcaX
-         NUn38YetgNahTxR4C7yOM53AMd43N4IEewB0sez3d1rx7u7FsoPrBvA+P1PpoTmo2vSr
-         6rigMGVq7M8wFRjKpRZkQZbG9NEKWRpaRn7SlSzgflxnTB6RMMJq/5Z7MCXx9PFmMT97
-         GoyQ==
+        bh=KzFh/2u28uOz+sDlvb4LFYO5V9mkwEzNmUQMDC7uLUQ=;
+        b=iqaSvcTI6/Wi1w9zaceyTKNTRWwh475LjsCIUyRCeaxh+C9rwW+xso2/9f+RH/faQj
+         5ViktJ+AnqF2I/8MQvL/YBTThr96ESlkrpL3Q4l9wJiFPVY13otTVKBNCsLfTHQjcND3
+         ZdUBMUP1DLFEx38d+8JTmiK9B5Nxz9NyVffph+sbq1YIEnO1bZASixf/j9KfOY6E3i/H
+         RWcC2rRQRLb1k70gBkBcSPrUSgoZHtW1WNVYE/usw6inirxtLnoS8lgZTo9c9aRO4lu9
+         pd8IASWAmHBhJfbIEpXPqmBU+GWfBTxX4zvAc3WSFf7oRICjSAf+Vhi9asJ352Jy4J9o
+         CnYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761574564; x=1762179364;
+        d=1e100.net; s=20230601; t=1761574571; x=1762179371;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=G+Rg0txVYKuHnBj2xyPjzFn/J/2+oLsFdXyCaeknPJY=;
-        b=ScmN1NnoDmacRmWu1y45d8yOvW1WfXzywQ0fkRYhvb+0vQxwBuZ/SNusTnViIFrr1U
-         mNlVgPrD9H5LVLvNIiV9ylt+9DGJPMyZi86yNXnXOhQkf9L0qwzD5QM+G5dG4GurEpxa
-         kiAMsjCrByuhhw29rfdiTG0uOBhlZAOfYO+91U+/wQZhMr7F94l9+QXuAcwcw6rbOUMN
-         OPWw7XITuxrwihrcH0ICHqLT2tl2VpLrXlodC1/phgcQNqqc4n3LQjRmYDQw3moIjJdL
-         y75/IVBDs0C2H5nLkexGOu82kAuoPFgZ3jlJwcyr95ZC8731XC4QIGOeOMPUe4fgkLPP
-         1XeA==
-X-Gm-Message-State: AOJu0YyOTZOQ9tvBHwvg+9ot6th+cpzXkgDEMnmUEuiW/6W0GUEUwP6y
-	znD0tYK5ksKV3FTXDVVwEbb14go8yEAObxkCwbFSEyehpZM61N2ykGTEuucOzQ==
-X-Gm-Gg: ASbGnctw+nyx5D6S6ItmG25IWy9RMtQfMBTtY6LD+7JAuUUkost4CpCOAqTG2KatZRR
-	LHImuypfAEwANOc/kExZ8vwr9TXJ1gXZY1sNfsjDHSbY2jPdf1gndaTgQP7/iN/8/SR8zCmWvk8
-	umH+tu4QRrucj3TWbpDciG08SHN9amyQUgrE2Bx/piX668cQr3tAbww9ilMJzgUkVI+fehsmx6K
-	Jz1LRhuhFy/GJJ6A8nBnMuMc0AjYT4/JUvV4Ey1FMV7PPM1+kRvoB5jQnAZ4LrhzYjOsLXK+oGr
-	WPxu8bzf+3bcMznglgBDwF2ZrIlbF3LuuMmqgIVqV8c3PO2iscu1LZtpeIPRvJszzPTNrbknYVG
-	HtEQQGGVQpmT/3jG/5CLZw3t8wBm7w4bzebTZq4HCwueKHsAYPIMmtzRzGsMYfUsAZiCkGfKplA
-	==
-X-Google-Smtp-Source: AGHT+IF02rYEbgI+lSHKYWZDENlDSRwy8l2gvFVoMSLtGYuqTT+1ORYrmhztNFReqx+JKq8p81/0pA==
-X-Received: by 2002:adf:e18d:0:b0:427:6c6:4e31 with SMTP id ffacd0b85a97d-42706c64e42mr30324263f8f.22.1761574564457;
-        Mon, 27 Oct 2025 07:16:04 -0700 (PDT)
+        bh=KzFh/2u28uOz+sDlvb4LFYO5V9mkwEzNmUQMDC7uLUQ=;
+        b=iQdNdwIO5RebLaq4mjy/+0AfDsyr3PSoSV2E1O/biFxH63sM74ByPGsL9FYu9NvSaf
+         sy+u4AdHNxAQLyqANUhqGJqF8JxcyXnNXYfdA3b81VZ598mpD2nzVtIorqENB3Rp7ENp
+         vJ2n6jOBILLzwLNUMVT9ReqsM63b8yoRnjs4UbvAHniYCcg+1PUDYTlUOYEWiwaQ+XTB
+         k2rJN9ROpzuDNUt/MoW45ye+bdwB9euHrvGwkIMUbkrTImEDOom0MbBcYY9G+hTf8Irj
+         Pv7DfA/jX9n5HX+xLsLfXiO64pl0nLHJ5MmIfh+9fctXM67YMPWu/AMpIYWKLiQIEZDb
+         lwJQ==
+X-Gm-Message-State: AOJu0YxLIwiEubxGDmNJyxBJNd/Rie36COQMj0TayNJBD48s8xCCWrW4
+	+6myCLm+fPBA/F0hhf8gMjP2FIu0feTgVNYnzGkxnr1RdQxYLwCx80ffYzJnJw==
+X-Gm-Gg: ASbGncsNVcStyBdzkd5QQOTgQTz7yUZs6fcsgbcSKkxITd8fbaA9Fz9rfPUQXfXGF1L
+	YpGLc9NpfOA5n4reH82k7y5w2uNqqHcE7jvaIq8evSxdjFEpec+TSAofRmOrpXU9AH0eFgWfQdj
+	QVr+k6wz4aHZ9c6/sXkIoTcPsmmPV4CoUf7U42d6o5tz0henfjuYiKmZ+0XdALStl5uee3lqlRI
+	+hqx6sqPXKTbiCI0VpCmzc5HERxhRECkuyCeJJ5lZLULx8Z7BF+n7+6DM03fmV2AFiDyxz3zdaJ
+	Hn+oT/YGYwq05RXvRC7jFRnmJSsvxaiRG6SBmcs0LL7cMn8v8NeP0iXy6NXgWpmnPzHktO5zn62
+	J32LSjLnIo62qhp4KC90/6GFAD5VuHjlxD9/Px3N3JFZpK4+NwV5/DhraufX3icRfgqHksSJpAI
+	Dtxf8iuLsf
+X-Google-Smtp-Source: AGHT+IEEwzMb81PRxj2jY2lJk51s4qtif4IatELLiiXDtDUrUT1i9MUk0CPaHkLRe8LiPct+1C3DZw==
+X-Received: by 2002:a05:6000:400d:b0:3ee:1461:1659 with SMTP id ffacd0b85a97d-42704d98980mr26708673f8f.31.1761574570468;
+        Mon, 27 Oct 2025 07:16:10 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952db80fsm14164067f8f.31.2025.10.27.07.16.03
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952db80fsm14164067f8f.31.2025.10.27.07.16.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Oct 2025 07:16:03 -0700 (PDT)
+        Mon, 27 Oct 2025 07:16:09 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][kirkstone][PATCH 05/10] evince: Update status for CVE-2011-0433 and CVE-2011-5244
-Date: Mon, 27 Oct 2025 15:15:52 +0100
-Message-ID: <20251027141557.1893563-5-skandigraun@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH 10/10] keepalived: patch CVE-2021-44225
+Date: Mon, 27 Oct 2025 15:15:57 +0100
+Message-ID: <20251027141557.1893563-10-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <20251027141557.1893563-1-skandigraun@gmail.com>
 References: <20251027141557.1893563-1-skandigraun@gmail.com>
@@ -68,39 +68,76 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 14:16:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121045
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121050
 
-From: Alexandre Truong <alexandre.truong@smile.fr>
+Details: https://nvd.nist.gov/vuln/detail/CVE-2021-44225
 
-The current version 46.0 is not affected by the issues.
-Both issues have been fixed in commit [0].
-The fix is in effect since early versions of evince (3.1.2).
-Thus, both can be safely ignored.
-
-[0]: https://gitlab.gnome.org/GNOME/evince/-/commit/efadec4ffcdde3373f6f4ca0eaac98dc963c4fd5
-
-Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
-Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 492b1b1adc1c546efd10b659d220a810736cc04a)
-
-Reworked for Kirkstone (CVE_STATUS -> CVE_CHECK_IGNORE)
+Pick patch mentioned in the nvd report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-gnome/recipes-gnome/evince/evince_42.3.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../keepalived/CVE-2021-44225.patch           | 41 +++++++++++++++++++
+ .../keepalived/keepalived_2.2.2.bb            |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/keepalived/keepalived/CVE-2021-44225.patch
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince_42.3.bb b/meta-gnome/recipes-gnome/evince/evince_42.3.bb
-index 5f35d5b33b..7b6170a2f8 100644
---- a/meta-gnome/recipes-gnome/evince/evince_42.3.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_42.3.bb
-@@ -51,3 +51,7 @@ FILES:${PN} += "${datadir}/dbus-1 \
-                 ${datadir}/thumbnailers \
- "
- FILES:${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2021-44225.patch b/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2021-44225.patch
+new file mode 100644
+index 0000000000..01737c5734
+--- /dev/null
++++ b/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2021-44225.patch
+@@ -0,0 +1,41 @@
++From 585788ee03bfe204a2a796a5f096a499a02c65db Mon Sep 17 00:00:00 2001
++From: Vincent Bernat <vincent@bernat.ch>
++Date: Tue, 23 Nov 2021 06:50:59 +0100
++Subject: [PATCH] dbus: fix policy to not be overly broad
 +
-+CVE_PRODUCT = "evince"
-+# fixed-version: No action required. The current version (42.3) is not affected by the CVE which has been patched since version 3.1.2
-+CVE_CHECK_IGNORE += "CVE-2021-0433 CVE-2011-5244"
++The DBus policy did not restrict the message destination, allowing any
++user to inspect and manipulate any property.
++
++CVE: CVE-2021-44225
++Upstream-Status: Backport [https://github.com/acassen/keepalived/commit/7977fec0be89ae6fe87405b3f8da2f0b5e415e3d]
++
++Signed-off-by: Vincent Bernat <vincent@bernat.ch>
++---
++ keepalived/dbus/org.keepalived.Vrrp1.conf | 13 ++++++++-----
++ 1 file changed, 8 insertions(+), 5 deletions(-)
++
++diff --git a/keepalived/dbus/org.keepalived.Vrrp1.conf b/keepalived/dbus/org.keepalived.Vrrp1.conf
++index 2b78a57..b5ced60 100644
++--- a/keepalived/dbus/org.keepalived.Vrrp1.conf
+++++ b/keepalived/dbus/org.keepalived.Vrrp1.conf
++@@ -3,12 +3,15 @@
++  "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
++ <busconfig>
++ 	<policy user="root">
++-		<allow own="org.keepalived.Vrrp1"/>
++-		<allow send_destination="org.keepalived.Vrrp1"/>
+++		<allow own="org.keepalived.Vrrp1" />
+++		<allow send_destination="org.keepalived.Vrrp1" />
++ 	</policy>
++ 	<policy context="default">
++-		<allow send_interface="org.freedesktop.DBus.Introspectable" />
++-		<allow send_interface="org.freedesktop.DBus.Peer" />
++-		<allow send_interface="org.freedesktop.DBus.Properties" />
+++		<allow send_destination="org.keepalived.Vrrp1"
+++		       send_interface="org.freedesktop.DBus.Introspectable" />
+++		<allow send_destination="org.keepalived.Vrrp1"
+++		       send_interface="org.freedesktop.DBus.Peer" />
+++		<allow send_destination="org.keepalived.Vrrp1"
+++		       send_interface="org.freedesktop.DBus.Properties" />
++ 	</policy>
++ </busconfig>
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.2.bb b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.2.bb
+index 204d2fd116..ca476f8605 100644
+--- a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.2.bb
++++ b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.2.bb
+@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz \
+            file://0001-layer4-Change-order-of-include-files.patch \
++           file://CVE-2021-44225.patch \
+            "
+ SRC_URI[sha256sum] = "103692bd5345a4ed9f4581632ea636214fdf53e45682e200aab122c4fa674ece"
+ UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
 
