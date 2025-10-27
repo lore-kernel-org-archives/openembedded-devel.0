@@ -1,348 +1,125 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D100CCF9EA
-	for <webhook@archiver.kernel.org>; Mon, 27 Oct 2025 09:30:13 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web10.28051.1761557411725778803
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6834FCCF9E0
+	for <webhook@archiver.kernel.org>; Mon, 27 Oct 2025 09:33:03 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web11.27869.1761557577241973665
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Oct 2025 02:30:12 -0700
+ Mon, 27 Oct 2025 02:32:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WyamunDF;
- spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-42701b29a7eso2269628f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 02:30:11 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=D9EOhrha;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.47, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-475de184058so6901335e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 02:32:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761557410; x=1762162210; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=5q1NwieCu1y61/7jNyzxylZayteUAmSIw7DfuhkMQyU=;
-        b=WyamunDFmjr2ZaNGvaws5Z0zSel8EtMRTbcvarsQ80EZMNU2qdT6V9tNuiLiNRYlf5
-         1fG+VuvxatM4UPuTrmyAkowcM7/9nZGNzYm1mO2xCDuCkVSvAivbETQIF6S/LqijFlgL
-         tM+LrsmyRbG38JY0f9ost/k3AP4aYa3vQL5HOWxQCcfl2acAr5ulLWy1eJbI8nPFJ/N0
-         SfoUxn8Ue/fgPQBVGOjifkWnLyPqowWOgk64zQ5dHnrC6LLvWLwCLnhkGQLsFEugo5Qg
-         5WhAqEstigzoDIEHqiEFFncuQkxFRCUPbBKjxRb0P2d2cheZKoHjqOq9fIrD8eBShlmU
-         DYTQ==
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1761557575; x=1762162375; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=TNMDbG+3Cist1DEe2Zoczg6qL5Dk7vSlT/zaIyaxKK4=;
+        b=D9EOhrhaK4SfEnb3CQYNnZuC1HX4+RdQNTnD6ucxjbhXnzBZVT6wAlPq+QTVmIpYpO
+         ezckvt2eQTV4A3Q4EB3MrsP7J+RVNFATL/yOF64IyWSriTPCJmsO8d12u7VWvQX+H/Vv
+         a6k3duQ6ilLEbfFPCKykpSY4dx7JIkkmfPbFc/e0b1hvsGEbqTkcLj9TpjKmSR9xRj2y
+         FN1JMgkR84xAcTUakNDeSX/yZ3Leg7NdhSaSIgEJ4p5vINLPYohlCGtzj+HiEQWOEw6Q
+         hdkhKZ1VP72V5xamgTByFa02vfpBaDWK0Oua0tBpKnT8gjkFOPasWEqgsyCzccFvedys
+         P2Pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761557410; x=1762162210;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=5q1NwieCu1y61/7jNyzxylZayteUAmSIw7DfuhkMQyU=;
-        b=VrfdMgJ765EPSYeQLWEGzUMbDebJXCUSfZWNPyx8e1BAQ35hHBFIWGTqkpPlLRJ3if
-         jrR+RXe/ZPB51YjHd0O3Wwxa+axup9EjHk41j5yr+x7Kt7/f2tXconcRK7r8ONXRJTTL
-         zEC+ESc6XsWdVtpVH+0+KFNgych55pAnNf+IuaQkAaZDcN7V3mD9kyB2Um4yCfS627mA
-         lPB6A13A2MBhJC097CvcHQAdXNwRLE7OQ8EPSeeBwDcRvW+AzOLziDHp9yQV3WDMER4D
-         +ezKDQqPFaVIVSJGCyvs1e0lhdFKphFqmRS2ZPAaLFUyD7Qp23tN1Ur2Wh/pjPgCpd/a
-         huFw==
-X-Forwarded-Encrypted: i=1; AJvYcCWTp+/WHX3A3baWObgMaatJZ6/QfEHwMsVrjeHMxFiJ+gTwMDZ/nPXIu5Oa/vp3eMF7hWqbk2Mf9oRDpZqlPdbrxeU=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yy12vDIk4iPDQqe79f0NH0vBS6Kbn5bgxHzXylErHCpVcASMKlh
-	mzhNB6wwW18g2dXYW7aZ0sB0fnbUhX3DrYSQqUs9l+K330yTjL3nnTT+
-X-Gm-Gg: ASbGncvmLtTnfHn1Y/ULnsqgDdf9x+gC0YOGGKcoFKEsJCrkr6iPT0QG2nPx8WM+iGt
-	y9Gm8JgaNop86Tji0c5NHiRQ7xqP58pMFprM/jIYeOc9eSETtkQhtq758Mmy7l/xOvYseZMmSME
-	bbq4lSiH4ngE+v3eWWT3MhWOj0c7/d+ktISksciZD2ygnBg6lXU03erpVunJM64hkFjtsfuKIT2
-	aLWHVaACOQfWL7tLW2qZLSCTGHYy1JS5fQR0wltKBM4oL8IUhLCNiqf02xnW/xkiQRCc+7gxjh4
-	dIA5ioF4FIQY+TmNnXNWxpvJiBZVHG6u0/biOMUUIpFKE1PBNKVXNOtd2ekqo6NhlcsXY8gIdxo
-	/6gppe5+7dwRebI+Iynq1D2H/qaKuEqZnpU4tJt8IGHQIJ0RQVhLuBC4qcKtGcvV3HySWPnqJjo
-	aKentzP1HSWAtXAUxfFPw=
-X-Google-Smtp-Source: AGHT+IEYgI8YDgUSSSoC//m9RroLdhfbZ+liHHGw7L0wKrN50G5OjC3swXf4i1KH8ZMR7xs+WtJ89g==
-X-Received: by 2002:adf:e3c8:0:b0:429:8d74:4b16 with SMTP id ffacd0b85a97d-4298f59482cmr5590927f8f.20.1761557409911;
-        Mon, 27 Oct 2025 02:30:09 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952b7b43sm13449419f8f.6.2025.10.27.02.30.09
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 27 Oct 2025 02:30:09 -0700 (PDT)
-Message-ID: <09ba1133-9de9-4bd6-8d59-4cc87b2b2aae@gmail.com>
-Date: Mon, 27 Oct 2025 10:30:08 +0100
+        d=1e100.net; s=20230601; t=1761557575; x=1762162375;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=TNMDbG+3Cist1DEe2Zoczg6qL5Dk7vSlT/zaIyaxKK4=;
+        b=GX+9N75rHLiKPpgi7QbNE4JeNjC/GrAm2IlVWkKMEs3rOPOAidl8Dc8lGZg57U0EEL
+         fukfovfB096Uh4vMjiSn/9HsFLIApB4vdnjI8PU2ObB+siBGqtLVspd9E2Hbdz7v0v92
+         +Qca8C5ZA68WK+fHTX3OADkYYU+e3abssLyGHCmCrHTqsvaBNoKgMqaFKkSl6eIZ5dXq
+         nOSMYfY7Yl9gffj9NcT7tvnbyE6QCS6ZF6Vtg41SrvAPEPDFxXanV2/bTKtYXj60n4dF
+         2e7p+vB5fonx7iUQ9fVdkTfAItdpfQ5leIDhvW9Kdy+z5mxPAWvNU1Mc12e9Yw9p5Fou
+         7tKQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVvkWL/9RLCzrI7tABq5SzrRwVmfnsKF501a/UqoZBQb5uD+xuvbOK5nPMJaJPxzpeP9E4++KkeKmvEkemNbO0HBpE=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzMhQSSf7b061fbXuHePiq/RF2xtuW3Q4jzMDUjDRgiBLBL41I3
+	54NW8wxuipqZ+fO7unc5ykMzBolAb4B2BR/gMRa2+8yBnpAoZs0aoMqOBzLaA+frOXk=
+X-Gm-Gg: ASbGnctBHkAynMg4f2wJK0dZKF+OgTxszhvyzrhzBkNkLzTyY/g2lHa9wqxXw/3VNsX
+	o745YnPguvAqsB9NJiBZdbxQJbawdWmvaoojMVTv0gadDJVO7iWuKt61szAHihf19jHXnqkXZXm
+	I/13XAePYRddjp4VC2ALFWYJtT4ONh9oNIJQiPyfTL/IclGgGpX3fgfclOO7IjIZbc/uGU6M3WY
+	p4x43PUbVvPIJzWPRUsyMEW9L9qd/uYQAxXm6nP0QuOEipDocGdXyJ0JfdBj8KlwXfEA1Qh0Dhl
+	GHGDIIAZS9/basvhljKxoL9KyNwGJfkLLOGSv+0LmFRHl3H7Yj1D1n6eeOHc8Z0+EwrblWtmKA4
+	hVSXFLqYP7JBNYFP6TgFVYsUk7yUkxgqfeHY6QY+3oOv+P5tPNHkldoIrHjYv42kPFGKUJPg7m/
+	cR
+X-Google-Smtp-Source: AGHT+IFuLBndn/U0uxPw6IcJUbDDDZbuT4TPOpFO5344arTPxtLs7df2S7B0wDnSZSBv9OOt4oypYw==
+X-Received: by 2002:a05:600c:8b6c:b0:477:cb6:805e with SMTP id 5b1f17b1804b1-4770cb683a0mr34494545e9.18.1761557575415;
+        Mon, 27 Oct 2025 02:32:55 -0700 (PDT)
+Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:c1c6:7dde:fe94:6881])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-475dd02cbc6sm129275285e9.1.2025.10.27.02.32.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 27 Oct 2025 02:32:54 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-python][PATCH v2] python3-gpiod: update to v2.4.0
+Date: Mon, 27 Oct 2025 10:32:51 +0100
+Message-ID: <20251027093251.16133-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [scarthgap][PATCH] imagemagick: adds ptest for imagemagick
- recipe
-To: ashishkumar.mishra@bmwtechworks.in,
- openembedded-devel@lists.openembedded.org
-References: <20251027045701.3396903-1-ashishkumar.mishra@bmwtechworks.in>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20251027045701.3396903-1-ashishkumar.mishra@bmwtechworks.in>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 09:30:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121028
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 09:33:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121029
 
-In general I think this is a very good patch, but I'd like to add a
-couple of notes:
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-1. Could it include the official test suite also? I would not remove the
-current tests, but rather extend them - actually I think it's a good
-idea to exercise the artifacts in a way you do.
-2. The recipe should be also added to the
-conf/include/ptest-packagelists-meta-oe.inc file
-3. The test suite should return results in a strict form:
-PASS: $testname_or_something_like_that
-or
-FAIL: $testname_or_something_like_that
+Changelog:
+- make request and reconfigure behavior for lines requested by names
+  consistent with that of lines requested by offsets
+- fix parsing non-tuple keys when requesting a line
+- disable UP045 linter check
+- use quoted types when casting
+- generate wheels for CPython 3.14
+- issue a warning when reconfiguring a line not in the original request
+- update dependencies for wheel generation
+- update licensing information
+- coding style fixes
+- minor performance improvements
 
-Other logs can be present between these lines, but the test status
-should be reported like this (not [FAIL]/[PASS])
+License-Update: Follow the PEP 639 specification and remove the
+deprecated license classifier in pyproject.toml. Make the license key
+a top-level string. No changes in the license type.
 
-Just to give some background to the last two points:
-If point 2 is done, then you can do things like "bitbake
-meta-oe-image-ptest-imagemagick" which will build a minimal image that
-contains the ptest with its requirements.
-If you also add "testimage" to IMAGE_CLASSES variable, then you can
-automate the whole thing like "bitbake meta-oe-image-ptest-imagemagick
--c testimage", which will run the tests automatically, and also evaluate
-them for you - this requires the PASS/FAIL output form, this is how
-failures recognized automatically.
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+---
+Changes in v2:
+- add the License-Update tag
 
-On 10/27/25 05:57, AshishKumar Mishra via lists.openembedded.org wrote:
-> The logic used is :
-> - We check if the required tools are present or not
-> - We used convert to create an raw RGB file
-> - The created RGB is then converted to PNG using convert
-> - We re-gerenate RGB from PNG and compare the original and re-generated RGB
->
-> Signed-off-by: AshishKumar Mishra <ashishkumar.mishra@bmwtechworks.in>
-> ---
->  .../imagemagick/imagemagick-ptest.sh          | 128 ++++++++++++++++++
->  .../imagemagick/imagemagick/run-ptest         |  43 ++++++
->  .../imagemagick/imagemagick_7.1.1.bb          |  14 +-
->  3 files changed, 183 insertions(+), 2 deletions(-)
->  create mode 100755 meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-ptest.sh
->  create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/run-ptest
->
-> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-ptest.sh b/meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-ptest.sh
-> new file mode 100755
-> index 0000000000..fbb26d2741
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-ptest.sh
-> @@ -0,0 +1,128 @@
-> +#!/bin/sh
-> +#
-> +# ImageMagick ptest:
-> +# We ceate an BASERGB file for our usage using "convert"
-> +# We convert this RGB file to BASEPNG
-> +# Using BASEPNG we recreate RGB named REGENERATEDRGB
-> +#
-> +# BASERGB to BASEPNG to REGENERATEDRGB
-> +# - Then compare  BASERGB with REGENERATEDRGB
-> +#
-> +# 1) We are checking if the binaries are present in RFS or not
-> +# 2) We Created an RBG of size : WIDTH x HEIGHT pixels
-> +# 3) Return value is captured after every major actio to capture the status
-> +# 4) cmp -s is used to compare binary byte by byte data and
-> +#    capture only exit status
-> +# 5) Important parametsrs used are :
-> +#    -depth                     : How many bits for each colour pixel
-> +#    -alpha off  		: Don't consider transparency
-> +#    -define png:color-type=2   : Make PNG work with truecolour RGB
-> +#    -strip 			: Remove all non-pixel metadata og PNG
-> +#                                 so file is reproducible
-> +#    -set gamma 1.0             : No PNG brightness correction
-> +#     gradient:red-blue         : Data moves liberly from RED to Blue vertically
-> +
-> +
-> +WIDTH=16
-> +HEIGHT=16
-> +BASERGB=base.rgb
-> +BASEPNG=base.png
-> +REGENERATEDRGB=roundtrip.rgb
-> +
-> +echo "[TEST ] Starting ImageMagick Ptest with ${WIDTH}x${HEIGHT} pixels "
-> +
-> +# Verify required binaries
-> +for bin in convert cmp wc rm; do
-> +    if [ -z "$(command -v "$bin" 2>/dev/null)" ]; then
-> +        echo "[ERROR] Required binary '$bin' not found $PATH"
-> +        exit 127
-> +    fi
-> +done
-> +
-> +# Generate raw RGB
-> +convert -size ${WIDTH}x${HEIGHT} -depth 8 -type TrueColor \
-> +    -alpha off -define png:color-type=2 \
-> +    -strip -set gamma 1.0 \
-> +    gradient:red-blue rgb:${BASERGB}
-> +
-> +returnvalue=$?
-> +if [ "$returnvalue" -ne 0 ]; then
-> +    echo "[FAIL] Failed to generate RGB pattern "
-> +    exit 1
-> +else
-> +    echo "[DEBUG] Generated raw RGB ${BASERGB} for test case"
-> +fi
-> +
-> +
-> +
-> +# Convert raw RGB to PNG
-> +convert -size ${WIDTH}x${HEIGHT} -depth 8 -type TrueColor \
-> +    -alpha off -define png:color-type=2 \
-> +    -strip -set gamma 1.0 \
-> +    rgb:${BASERGB} ${BASEPNG}
-> +
-> +returnvalue=$?
-> +if [ $returnvalue -ne 0 ]; then
-> +    echo "[FAIL] Failed to convert RGB to PNG"
-> +    rm -f ${BASERGB}
-> +    exit 1
-> +else
-> +    echo "[DEBUG] ${BASEPNG}  generated from ${BASERGB}"
-> +fi
-> +
-> +
-> +
-> +# Regenrate raw RGB from PNG
-> +convert -size ${WIDTH}x${HEIGHT} -depth 8 -type TrueColor \
-> +    -alpha off -define png:color-type=2 \
-> +    -strip -set gamma 1.0 \
-> +    ${BASEPNG} rgb:${REGENERATEDRGB}
-> +
-> +returnvalue=$?
-> +if [ $returnvalue -ne 0 ]; then
-> +    echo "[FAIL] Failed to re generate RGB from PNG "
-> +    rm -f ${BASERGB} ${BASEPNG}
-> +    exit 1
-> +else
-> +    echo "[DEBUG] ${REGENERATEDRGB} generated from ${BASEPNG}"
-> +fi
-> +
-> +
-> +
-> +# Compare original and recreated RGB
-> +if cmp -s ${BASERGB} ${REGENERATEDRGB}; then
-> +    echo "[PASS] RGB data identical after PNG round-trip"
-> +    RESULT=0
-> +else
-> +    echo "[FAIL] RGB mismatch detected, printing their size "
-> +    echo "[INFO] Base RGB size: $(wc -c < ${BASERGB}) bytes"
-> +    echo "[INFO] Round-trip RGB size: $(wc -c < ${REGENERATEDRGB}) bytes"
-> +    RESULT=1
-> +fi
-> +
-> +
-> +
-> +# Checking the identify tool from imagemagick to get the PNG metadata
-> +# True is added in end to ensure that test script doesnt fail even if
-> +# identify fails for any reason
-> +echo "[DEBUG] PNG file info:"
-> +identify -verbose ${BASEPNG} | grep -E "Depth|Type|Colorspace" || true
-> +
-> +
-> +
-> +# Cleanup of files create by test code
-> +echo "[DEBUG] Cleaning up temporary files"
-> +rm -f ${BASERGB} ${BASEPNG} ${REGENERATEDRGB}
-> +returnvalue=$?
-> +echo "[DEBUG] Cleanup exit=$returnvalue"
-> +
-> +
-> +# Logging the final result
-> +if [ ${RESULT} -eq 0 ]; then
-> +    echo "[DONE] ImageMagick Ptest completed successfully"
-> +else
-> +    echo "[DONE] ImageMagick Ptest completed with FAILURE"
-> +fi
-> +
-> +
-> +exit ${RESULT}
-> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/run-ptest b/meta-oe/recipes-support/imagemagick/imagemagick/run-ptest
-> new file mode 100644
-> index 0000000000..70c0dd8cb8
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/imagemagick/imagemagick/run-ptest
-> @@ -0,0 +1,43 @@
-> +#!/bin/sh
-> +#
-> +# run-ptest — ImageMagick ptest harness
-> +# POSIX-safe and BusyBox compatible
-> +
-> +PTDIR=$(dirname "$0")
-> +TESTDIR="$PTDIR"
-> +PASSCOUNT=0
-> +FAILCOUNT=0
-> +TOTAL=0
-> +
-> +echo "======================================="
-> +echo "ImageMagick ptest: Runtime Validation"
-> +echo "======================================="
-> +
-> +for t in "$TESTDIR"/*.sh; do
-> +    [ -x "$t" ] || chmod +x "$t"
-> +    TOTAL=$((TOTAL + 1))
-> +    echo "[TEST $TOTAL] Executing: $(basename "$t")"
-> +    echo "[DEBUG] Launching test script $t"
-> +
-> +    if sh "$t" 2>&1; then
-> +        echo "[RESULT] PASS: $(basename "$t")"
-> +        PASSCOUNT=$((PASSCOUNT + 1))
-> +    else
-> +        rc=$?
-> +        if [ "$rc" -eq 77 ]; then
-> +            echo "[RESULT] SKIP: $(basename "$t")"
-> +        else
-> +            echo "[RESULT] FAIL (exit=$rc): $(basename "$t")"
-> +            FAILCOUNT=$((FAILCOUNT + 1))
-> +        fi
-> +    fi
-> +
-> +    echo "[DEBUG] Completed test $(basename "$t")"
-> +done
-> +
-> +echo "======================================="
-> +echo "[SUMMARY] Total: $TOTAL | PASS: $PASSCOUNT | FAIL: $FAILCOUNT"
-> +echo "======================================="
-> +
-> +[ "$FAILCOUNT" -eq 0 ]
-> +
-> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-> index 752fef303b..dd199902bd 100644
-> --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-> +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-> @@ -11,12 +11,15 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
->  
->  BASE_PV := "${PV}"
->  PV .= "-26"
-> -SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
-> +SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
-> +           file://run-ptest \
-> +           file://imagemagick-ptest.sh \
-> +"
->  SRCREV = "570a9a048bb0e3a5c221ca87be9408ae35f711e2"
->  
->  S = "${WORKDIR}/git"
->  
-> -inherit autotools pkgconfig update-alternatives
-> +inherit autotools pkgconfig update-alternatives ptest
->  export ac_cv_sys_file_offset_bits="64"
->  
->  EXTRA_OECONF = "--program-prefix= --program-suffix=.im7 --without-perl --enable-largefile"
-> @@ -56,6 +59,13 @@ do_install:append:class-target() {
->      fi
->  }
->  
-> +do_install_ptest() {
-> +    install -d ${D}${PTEST_PATH}
-> +    install -m 0755 ${WORKDIR}/run-ptest ${D}${PTEST_PATH}/
-> +    install -m 0755 ${WORKDIR}/imagemagick-ptest.sh ${D}${PTEST_PATH}/
-> +}
-> +
-> +
->  FILES:${PN} += "${libdir}/ImageMagick-${BASE_PV}/config-Q16* \
->                  ${datadir}/ImageMagick-7"
->  
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#121023): https://lists.openembedded.org/g/openembedded-devel/message/121023
-> Mute This Topic: https://lists.openembedded.org/mt/115970043/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+ .../python/{python3-gpiod_2.3.0.bb => python3-gpiod_2.4.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-gpiod_2.3.0.bb => python3-gpiod_2.4.0.bb} (90%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-gpiod_2.3.0.bb b/meta-python/recipes-devtools/python/python3-gpiod_2.4.0.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-gpiod_2.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-gpiod_2.4.0.bb
+index cd05b40010..405951fe0c 100644
+--- a/meta-python/recipes-devtools/python/python3-gpiod_2.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-gpiod_2.4.0.bb
+@@ -3,11 +3,11 @@ SUMMARY = "Python bindings for libgpiod."
+ LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later & CC-BY-SA-4.0"
+ # The actual license files live in the upstream libgpiod from which the pypi
+ # package is spun out.
+-LIC_FILES_CHKSUM = "file://pyproject.toml;beginline=13;endline=13;md5=fca786987ac89b59c767e55467de581e"
++LIC_FILES_CHKSUM = "file://pyproject.toml;beginline=13;endline=13;md5=0fbc720d3e48432ee239eedb6adb0f07"
+ 
+ SRC_URI += "file://run-ptest"
+ 
+-SRC_URI[sha256sum] = "daa840ed5b691e7078a9cf21c79fe813b9a91c3ed0bdbafae0181c7b98b80300"
++SRC_URI[sha256sum] = "9243a1a59d084ec749d1df4a1e2f238ffb9d94515b0d9f5335460175143c3aa1"
+ 
+ inherit python_setuptools_build_meta python_pep517 ptest pypi
+ 
+-- 
+2.48.1
 
 
