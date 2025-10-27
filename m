@@ -1,320 +1,197 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <koen@dominion.thruhere.net>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2DDCCCF9EA
-	for <webhook@archiver.kernel.org>; Mon, 27 Oct 2025 14:16:15 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web11.33915.1761574571114715700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E53CACCF9E5
+	for <webhook@archiver.kernel.org>; Mon, 27 Oct 2025 14:47:45 +0000 (UTC)
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web10.34936.1761576455549531501
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Oct 2025 07:16:11 -0700
+ Mon, 27 Oct 2025 07:47:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FgEZBmzu;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-4270491e9easo3885340f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 07:16:10 -0700 (PDT)
+ dkim=pass header.i=@dominion-thruhere-net.20230601.gappssmtp.com header.s=20230601 header.b=fdufApPk;
+ spf=none, err=permanent DNS error (domain: dominion.thruhere.net, ip: 209.85.218.52, mailfrom: koen@dominion.thruhere.net)
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-b6d5b756284so1002098566b.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 07:47:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761574569; x=1762179369; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=vKF1erBhVfA9h8fFJqzljTKnGGhm5I0MHdrwphWnCNE=;
-        b=FgEZBmzu1uiS+FXY08a+bswQVUplQlwdT/Hcq1d71iHRKBg/3PC6jyuapeZdKT26eh
-         rQJL0l5LDrnhq/TYvae1MjCDGwSF6jHtS2xsjQTK48MklEe/AUkF/XKtzLl+VHeuzJIz
-         3MiBSOcC8VhTCB3iKqkZ7pHk7zpGDgm+d74uxCPP3Bpz2t8+S9X/k4tLgMVKXhJyIMSP
-         JSzX6/yBR7djIur3xj/FbnTewZJshao14oEvH+Qo6zlU7k0q/zZQmybz4L4UoIqHhF5L
-         Hm3N3bRzKx2DJ+RPQ+EyqsQKJcfyOFzBTNFAUpPDu0FeaIADagpRJqSvDUvX8OMOnCXR
-         R/7w==
+        d=dominion-thruhere-net.20230601.gappssmtp.com; s=20230601; t=1761576453; x=1762181253; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=aRGmi9RnG/TvzrM6QP6zYO3mcwJz32UQvfaBcWKpX5A=;
+        b=fdufApPkJqXakmCz6AWEYOW2lwMGsBa5P1LPlGpjBDsTa3uVoWme+ytVBO9A0CrUx4
+         FechA4+D8iiaTeRXoJ9vpSq/UskpmAT5pyboqxQPUGkzR74et/hRfTtb3Q7gsYwwAlXl
+         ZeWquOMhmLTl5v90pwIn98zEs8klxxgDuvYi4OnXiaWcD1WhLXwiY9IDpVBCa2MiqM04
+         OP1yT0wRllsypqgnDKUu102/3XN5OToNflRp1fjqTs0AAm7rfbY2DSPJrp0Xz0o6oayw
+         8F5E7d6FcKfpT0W6bPaYj8wFx+rBNoVrY3idyI/2yOYzx/JKhNF4D/Z0rDlUMGc/lFNY
+         8X3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761574569; x=1762179369;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=vKF1erBhVfA9h8fFJqzljTKnGGhm5I0MHdrwphWnCNE=;
-        b=IffU9haq6NIN67izAJH+ewRT/EIJDaoFnrWRXdvQNTQaeV4LyiC7BsgkQmyQVNdTf4
-         tqCrJKqi1IjNgZN14jlnR3Nu+rXlazc47eYNsOV+648Yzj6wExnioAUKktimxm5moHRY
-         iJDBHtSHcChLByf2US7RLD6zVh8gBRLT0yEt7i16F/LKjjZqnzWw3OYet/dzdAnVGHPz
-         7PAAmshcH91KIF7wFfSBbl0oGdgC5N3jFZs1/Qc4oIfZdxOOVHXOSLxAG0MhYGwaGYOB
-         lvl4ZekWCrKRNjh/r3OEtcyQ0KDGkSkqAA6Ot/ysSf67qEv/xCeVp4BIuA1lUhEdXW+t
-         uCuA==
-X-Gm-Message-State: AOJu0Yz8OOhyhAtvO9oCn8vxoKkbolRlBBU+fWokX+Jw3bZriQXA7v3l
-	fsKE6mO24NjCjPDx77MoArPmL/V09Iyw6Gt9TU6h++dFM0pBlT9paSbOPlGYgQ==
-X-Gm-Gg: ASbGncteHS2GjpIqGVh6L/px8xp5nB+4IInFJ+wgTPmyoAI/bg2sJw3+GewoKl8BKGS
-	lk+BK3Nehqte8zv5HjpxBDQI9FF0B+CuJPo+gdZdq/Lx/RNPQgwaedITOqJS2LqGL5OUPDkd5Nz
-	RCYvGs3PplKy+uqMYtC8eAOl2hHhmoNET8zuTVLBcJdJ2DrJTMdDlJl5WAerrWDjS1MakUc++/J
-	IN3DSCvHZv6AO9Mgg1+yYS8j8p133vGCqNTtwxSTu7TaJ1bjhJjlmkaxniLjvwv1yCRrFGVUUfU
-	MumGAZKlE8Q6KrR6ZBypX8Eq4rJsF60StTzK+yONYLkD3nKYSa3JoxusWqtDMPdoFbjS1qm7FOy
-	DKwBVd5MOsCo1l5V9KizQ9MYF2+RIPthk1Ob6jpxh5y/i+W3x3zhNgQJ2IVy6BO/tU/0HnHf7Rc
-	GTi+/pNm7R
-X-Google-Smtp-Source: AGHT+IHfmIQEE0WxhgY9lE65OORw/A5Xgsk/qt/fdcIkdnrSpDT6RLV7m9fy8Oio+5CEcrOX1Oft7g==
-X-Received: by 2002:a05:6000:41f4:b0:427:614:83da with SMTP id ffacd0b85a97d-4270614850bmr25213865f8f.48.1761574569324;
-        Mon, 27 Oct 2025 07:16:09 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952db80fsm14164067f8f.31.2025.10.27.07.16.08
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1761576453; x=1762181253;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=aRGmi9RnG/TvzrM6QP6zYO3mcwJz32UQvfaBcWKpX5A=;
+        b=Iu8vTA+nuYmlb9gOOUURlThlZvJbt73CEjmxEDkFty7aiqDC0Y/bF2CD50vkmToxzK
+         dZACxXYi3uaJ3QS434hrDEGC4VKg4eoRxxBkSNtl4OfT9Gs1DWpNHNMnWQx0rqrbBRsr
+         eAIMIGbUribngkc9yO2xT6dzSXWKozR9HxhNWiobqdh7OU2Q2VNnbbE4o7+VH26tOKSY
+         PJRN89jMV6zsK4bjlnDkD7QqUz0l3NL8pxUm9W/J1Hql0NjfbOf/xbS+RJZERiZZy2hr
+         v44+VzmXUHS7ML4v7LHuF9XxTwF8DQQpU4RGjSV57U3h90hjKp4IjrmD8N+iIS8BUWLx
+         z2Zw==
+X-Gm-Message-State: AOJu0YxcB3yl+qGU2H/BMtbXYYWLJPQ61nsSObcxk+CPlKhRNXXxgT5h
+	U9I1/pucOwoouuFcNUsyID2ik6wLSvblpIuIi0+PRxmI211dgtAN0jERJuk+BX05GOPY8J8BzVx
+	U9CY69Q==
+X-Gm-Gg: ASbGncv00eA72z1gmrUAgfC+CxEppxAb4hg/NbIqzJMAur0m8mXfkXdO0ZnWEg0L+Tp
+	uEbl0e4Ovbsxti80gjJlm9tbovLbr1uoGqdJS9BKNqPYV9xrzLqCeLkHIV0uaa1RPiNG4fQGe1z
+	97+ohbOTLDHOhRAISNavUtvnikQ0xO5Z/mAuZzEMfBnE9JJGhYV60ut3EubDCiGUb2aU2KcI/R7
+	bvQDBQTnU3U9uhr4lW4Ucl4vQMLdz7JKlCEhk13Np1cWK4gFrkBvUGuZpNa6MUASonjEdUTGOJl
+	IsZTzz5yzbAJSDqIsohMx83pq9g2ctRLAeRAhiYWdghqpNWwnWKMCVi/X5O/2E+N3EKD0edo5qk
+	vG4bXzGin2TAs/3ZqMxdNNJHrqC16JEbdnsDP6i44QVswewkTQfC+2g7lMlLZozoe6fk2km5yQb
+	6O+XURk/lnttggfHwOlFLYito7erUhVM5/ZevN0pFbaZ+cgw==
+X-Google-Smtp-Source: AGHT+IECugFg5RiNWzZZMb5c1SatMhHyWsMVaNsjMCVmdNt35wfvT1Z12VBQdSNS4/14/g0L/s9/ww==
+X-Received: by 2002:a17:907:9455:b0:b3f:f207:b748 with SMTP id a640c23a62f3a-b6dba44668cmr20320066b.10.1761576453357;
+        Mon, 27 Oct 2025 07:47:33 -0700 (PDT)
+Received: from localhost.localdomain (185-047-135-246.jonaz.nl. [185.47.135.246])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b6d85372e5asm773413966b.32.2025.10.27.07.47.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Oct 2025 07:16:08 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Mon, 27 Oct 2025 07:47:32 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 09/10] iptraf-ng: patch CVE-2024-52949
-Date: Mon, 27 Oct 2025 15:15:56 +0100
-Message-ID: <20251027141557.1893563-9-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.1
-In-Reply-To: <20251027141557.1893563-1-skandigraun@gmail.com>
-References: <20251027141557.1893563-1-skandigraun@gmail.com>
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] gpsd: update to 3.26.1
+Date: Mon, 27 Oct 2025 15:42:00 +0100
+Message-ID: <20251027144201.2754511-1-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 14:16:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121049
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 14:47:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121051
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2024-52949
+Drop patch that was applied upstream in https://gitlab.com/gpsd/gpsd/-/merge_requests/406
 
-Pick the commit that mentions the CVE in its description.
+Upstream changelog:
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+3.26.1: 17 May 2025
+  Increment libgps version
+  Update Debian Trixie in build.adoc
+  Fix buffer overrun in cgps.
+  Make gpsmon deprecation slightly more obvious.
+  Fix some *BSD compiler warnings
+  Fix numerous typos.
+
+3.26: 11 May 2025
+  Handle NTRIPv2 that comes in "chunks".
+  Add many UBX decodes.  Mostly in ubxtool, some in gpsd.
+  Improve TSIP and UBX initialization.
+  Gather Antenna Status (ant_stat) and Jamming (jam) and send to JSON.
+  Always build u-blox, RTCM104V2, RTCM104V3 drivers.
+  Add partial support for badly documented ALLYSTAR GNSS messages.
+  Add minimal support for Unicore GNSS messages.
+  Add minimal support for CASIC GNSS messages.
+  Add minimal support for buggy Inertial Sense GNSS messages.
+  Try to work better as non-root using non-standard "capabilities".
+  Add SUBSYSTEM=gnss rule to gpsd.rules
+  Moved ntploggps from NTPSec to GPSD and renamed to gpslogntp.
+  Fix many build, Coverity, and Codacy warnings.
+  Improved Python interface for the lexer.
+  Add support for new BeiDou PRNs and subframes.
+  Officially deprecate gpsmon.
+  Improve support for NMEA 4.11 (a stealthy moving target).
+  Remove Oceanserver IMU support.  Never worked well.
+  Always with  build ubx, NMEA 103, rtcm104v2 and rtcm104v3 support.
+  Add support for jamming detection.
+  Add Go client example.
+  Add support for RTCM3.2
+
+  Note: The new "chunk" code led to a short lived bug that led to
+        CVE-2023-43628, a buffer overrun.  That bug never appeared in
+        any gpsd release.
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../iptraf/iptraf-ng/CVE-2024-52949.patch     | 218 ++++++++++++++++++
- .../iptraf/iptraf-ng_1.2.1.bb                 |   1 +
- 2 files changed, 219 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/iptraf/iptraf-ng/CVE-2024-52949.patch
+ .../gpsd/gpsd/fix-pps_strerror_r.patch        | 51 -------------------
+ .../gpsd/{gpsd_3.25.bb => gpsd_3.26.1.bb}     |  3 +-
+ 2 files changed, 1 insertion(+), 53 deletions(-)
+ delete mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/fix-pps_strerror_r.patch
+ rename meta-oe/recipes-navigation/gpsd/{gpsd_3.25.bb => gpsd_3.26.1.bb} (97%)
 
-diff --git a/meta-oe/recipes-devtools/iptraf/iptraf-ng/CVE-2024-52949.patch b/meta-oe/recipes-devtools/iptraf/iptraf-ng/CVE-2024-52949.patch
-new file mode 100644
-index 0000000000..be6624dcdb
---- /dev/null
-+++ b/meta-oe/recipes-devtools/iptraf/iptraf-ng/CVE-2024-52949.patch
-@@ -0,0 +1,218 @@
-+From 6a35a7f68c2dd946c5092376d71bbf0b925e2c4e Mon Sep 17 00:00:00 2001
-+From: Vitezslav Samel <vitezslav@samel.cz>
-+Date: Thu, 21 Nov 2024 08:43:57 +0100
-+Subject: [PATCH] interface names: limit length to IFNAMSIZ
-+
-+This fixes CVE-2024-52949 (stack based buffer overflow)
-+when copying user supplied interface name without any
-+check.
-+
-+Problem was reported by Massimiliano Ferraresi and Massimiliano Brolli
-+from TIM Red team (https://www.gruppotim.it/it/footer/red-team.html)
-+
-+CVE: CVE-2024-52949
-+Upstream-Status: Backport [https://github.com/iptraf-ng/iptraf-ng/commit/2b623e991115358a57275af8a53feb5ae707b3ae]
-+
-+Reported-by: Massimiliano Ferraresi, Massimiliano Brolli
-+Signed-off-by: Vitezslav Samel <vitezslav@samel.cz>
-+---
-+ src/ifaces.c           | 16 ++++++++--------
-+ src/ifstats.c          |  6 +++---
-+ src/iptraf-ng-compat.h |  1 +
-+ src/iptraf.c           |  9 +++++++++
-+ src/othptab.c          |  2 +-
-+ src/promisc.c          |  2 +-
-+ src/tcptable.c         |  4 ++--
-+ src/wrapper.c          |  8 ++++++++
-+ 8 files changed, 33 insertions(+), 15 deletions(-)
-+
-+diff --git a/src/ifaces.c b/src/ifaces.c
-+index aeb1614..4c5a545 100644
-+--- a/src/ifaces.c
-++++ b/src/ifaces.c
-+@@ -67,7 +67,7 @@ int dev_up(char *iface)
-+ 
-+ 	fd = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
-+ 
-+-	strcpy(ifr.ifr_name, iface);
-++	ifname_copy(ifr.ifr_name, iface);
-+ 	ir = ioctl(fd, SIOCGIFFLAGS, &ifr);
-+ 
-+ 	close(fd);
-+@@ -90,7 +90,7 @@ int dev_get_ifindex(const char *iface)
-+ 		return fd;
-+ 
-+ 	struct ifreq ifr;
-+-	strcpy(ifr.ifr_name, iface);
-++	ifname_copy(ifr.ifr_name, iface);
-+ 	int ir = ioctl(fd, SIOCGIFINDEX, &ifr);
-+ 
-+ 	/* need to preserve errno across call to close() */
-+@@ -114,7 +114,7 @@ int dev_get_mtu(const char *iface)
-+ 		return fd;
-+ 
-+ 	struct ifreq ifr;
-+-	strcpy(ifr.ifr_name, iface);
-++	ifname_copy(ifr.ifr_name, iface);
-+ 	int ir = ioctl(fd, SIOCGIFMTU, &ifr);
-+ 
-+ 	/* need to preserve errno across call to close() */
-+@@ -138,7 +138,7 @@ int dev_get_flags(const char *iface)
-+ 		return fd;
-+ 
-+ 	struct ifreq ifr;
-+-	strcpy(ifr.ifr_name, iface);
-++	ifname_copy(ifr.ifr_name, iface);
-+ 	int ir = ioctl(fd, SIOCGIFFLAGS, &ifr);
-+ 
-+ 	/* need to preserve errno across call to close() */
-+@@ -162,7 +162,7 @@ int dev_set_flags(const char *iface, int flags)
-+ 		return fd;
-+ 
-+ 	struct ifreq ifr;
-+-	strcpy(ifr.ifr_name, iface);
-++	ifname_copy(ifr.ifr_name, iface);
-+ 	int ir = ioctl(fd, SIOCGIFFLAGS, &ifr);
-+ 	if (ir == -1)
-+ 		goto err;
-+@@ -190,7 +190,7 @@ int dev_clear_flags(const char *iface, int flags)
-+ 		return fd;
-+ 
-+ 	struct ifreq ifr;
-+-	strcpy(ifr.ifr_name, iface);
-++	ifname_copy(ifr.ifr_name, iface);
-+ 	int ir = ioctl(fd, SIOCGIFFLAGS, &ifr);
-+ 	if (ir == -1)
-+ 		goto err;
-+@@ -233,7 +233,7 @@ int dev_get_ifname(int ifindex, char *ifname)
-+ 		return ir;
-+ 	}
-+ 
-+-	strncpy(ifname, ifr.ifr_name, IFNAMSIZ);
-++	ifname_copy(ifname, ifr.ifr_name);
-+ 	return ir;
-+ }
-+ 
-+@@ -256,7 +256,7 @@ int dev_bind_ifname(int fd, const char * const ifname)
-+ 		int ir;
-+ 		struct ifreq ifr;
-+ 
-+-		strcpy(ifr.ifr_name, ifname);
-++		ifname_copy(ifr.ifr_name, ifname);
-+ 		ir = ioctl(fd, SIOCGIFINDEX, &ifr);
-+ 		if (ir)
-+ 			return ir;
-+diff --git a/src/ifstats.c b/src/ifstats.c
-+index 00a2a3f..1b687b6 100644
-+--- a/src/ifstats.c
-++++ b/src/ifstats.c
-+@@ -194,7 +194,7 @@ static void initiflist(struct iflist **list)
-+ 
-+ 		struct iflist *itmp = alloc_iflist_entry();
-+ 		itmp->ifindex = ifindex;
-+-		strcpy(itmp->ifname, ifname);
-++		ifname_copy(itmp->ifname, ifname);
-+ 
-+ 		/* make the linked list sorted by ifindex */
-+ 		struct iflist *cur = *list, *last = NULL;
-+@@ -714,9 +714,9 @@ void selectiface(char *ifname, int withall, int *aborted)
-+ 	if (!(*aborted) && (list != NULL)) {
-+ 		ptmp = (struct iflist *) scrolllist.textptr->nodeptr;
-+ 		if ((withall) && (ptmp->prev_entry == NULL))	/* All Interfaces */
-+-			strcpy(ifname, "");
-++			ifname_copy(ifname, "");
-+ 		else
-+-			strcpy(ifname, ptmp->ifname);
-++			ifname_copy(ifname, ptmp->ifname);
-+ 	}
-+ 
-+ 	tx_destroy_list(&scrolllist);
-+diff --git a/src/iptraf-ng-compat.h b/src/iptraf-ng-compat.h
-+index 5aec185..845f18b 100644
-+--- a/src/iptraf-ng-compat.h
-++++ b/src/iptraf-ng-compat.h
-+@@ -112,6 +112,7 @@ extern void *xmallocz(size_t size);
-+ extern char *xstrdup(const char *s);
-+ extern int strtoul_ui(char const *s, int base, unsigned int *result);
-+ extern int strtol_i(char const *s, int base, int *result);
-++extern void ifname_copy(char *dst, const char *src);
-+ 
-+ extern void die(const char *err, ...) __noreturn __printf(1,2);
-+ extern void die_errno(const char *fmt, ...) __noreturn __printf(1,2);
-+diff --git a/src/iptraf.c b/src/iptraf.c
-+index 95f8e53..e5dcb64 100644
-+--- a/src/iptraf.c
-++++ b/src/iptraf.c
-+@@ -388,6 +388,15 @@ int main(int argc, char **argv)
-+ 	if (__builtin_popcount(command) > 1)
-+ 		die("only one of -i|-d|-s|-z|-l|-g options must be used");
-+ 
-++	/* sanity check of passed arguments */
-++	if ((i_opt && strlen(i_opt) >= IFNAMSIZ) ||
-++	    (d_opt && strlen(d_opt) >= IFNAMSIZ) ||
-++	    (s_opt && strlen(s_opt) >= IFNAMSIZ) ||
-++	    (z_opt && strlen(z_opt) >= IFNAMSIZ) ||
-++	    (l_opt && strlen(l_opt) >= IFNAMSIZ)) {
-++		die("interface name is too long");
-++	}
-++
-+ 	strcpy(current_logfile, "");
-+ 
-+ 	if (f_opt) {
-+diff --git a/src/othptab.c b/src/othptab.c
-+index d1d9658..80f3dc8 100644
-+--- a/src/othptab.c
-++++ b/src/othptab.c
-+@@ -271,7 +271,7 @@ struct othptabent *add_othp_entry(struct othptable *table, struct pkt_hdr *pkt,
-+ 	}
-+ 
-+ 	new_entry->protocol = protocol;
-+-	strcpy(new_entry->iface, ifname);
-++	ifname_copy(new_entry->iface, ifname);
-+ 
-+ 	new_entry->pkt_length = pkt->pkt_len;
-+ 
-+diff --git a/src/promisc.c b/src/promisc.c
-+index d94e8bb..4737962 100644
-+--- a/src/promisc.c
-++++ b/src/promisc.c
-+@@ -70,7 +70,7 @@ static void promisc_enable_dev(struct list_head *promisc, int sock, const char *
-+ 	struct promisc_list *new = xmallocz(sizeof(*new));
-+ 
-+ 	new->ifindex = ifindex;
-+-	strcpy(new->ifname, dev);
-++	ifname_copy(new->ifname, dev);
-+ 	list_add_tail(&new->list, promisc);
-+ }
-+ 
-+diff --git a/src/tcptable.c b/src/tcptable.c
-+index 159d628..2c4efc1 100644
-+--- a/src/tcptable.c
-++++ b/src/tcptable.c
-+@@ -365,8 +365,8 @@ struct tcptableent *addentry(struct tcptable *table,
-+ 	 * Store interface name
-+ 	 */
-+ 
-+-	strcpy(new_entry->ifname, ifname);
-+-	strcpy(new_entry->oth_connection->ifname, ifname);
-++	ifname_copy(new_entry->ifname, ifname);
-++	ifname_copy(new_entry->oth_connection->ifname, ifname);
-+ 
-+ 	/*
-+ 	 * Zero out MAC address fields
-+diff --git a/src/wrapper.c b/src/wrapper.c
-+index 2eb3b59..1d2dc6f 100644
-+--- a/src/wrapper.c
-++++ b/src/wrapper.c
-+@@ -78,3 +78,11 @@ int strtol_i(char const *s, int base, int *result)
-+ 	*result = ul;
-+ 	return 0;
-+ }
-++
-++/* it's up to the caller to ensure there is room for */
-++/* at least IFNAMSIZ bytes in dst */
-++void ifname_copy(char *dst, const char *src)
-++{
-++	strncpy(dst, src, IFNAMSIZ - 1);
-++	dst[IFNAMSIZ - 1] = '\0';
-++}
-diff --git a/meta-oe/recipes-devtools/iptraf/iptraf-ng_1.2.1.bb b/meta-oe/recipes-devtools/iptraf/iptraf-ng_1.2.1.bb
-index 0f6bbb4d54..a622621990 100644
---- a/meta-oe/recipes-devtools/iptraf/iptraf-ng_1.2.1.bb
-+++ b/meta-oe/recipes-devtools/iptraf/iptraf-ng_1.2.1.bb
-@@ -28,6 +28,7 @@ SRC_URI = "https://src.fedoraproject.org/repo/pkgs/iptraf-ng/v${PV}.tar.gz/sha51
-            file://iptraf-ng-tmpfiles.conf \
-            file://ncurses-config.patch \
-            file://0001-make-Make-CC-weak-assignment.patch \
-+           file://CVE-2024-52949.patch \
-            "
- SRC_URI[sha256sum] = "9f5cef584065420dea1ba32c86126aede1fa9bd25b0f8362b0f9fd9754f00870"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/fix-pps_strerror_r.patch b/meta-oe/recipes-navigation/gpsd/gpsd/fix-pps_strerror_r.patch
+deleted file mode 100644
+index 8942b39524..0000000000
+--- a/meta-oe/recipes-navigation/gpsd/gpsd/fix-pps_strerror_r.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+-From c72a489e2eb13296c7b514b7341033114abf430a Mon Sep 17 00:00:00 2001
+-From: Miroslav Lichvar <mlichvar@redhat.com>
+-Date: Mon, 22 Apr 2024 11:31:24 +0200
+-Subject: [PATCH 1/2] SConscript: provide variable names to MergeFlags
+-
+-If the scons MergeFlags() function is provided with a list of
+-compiler/linker options, it needs to guess what options belong where. If
+-it doesn't recognize an option, it is silently ignored. There are also
+-ambiguous options that could be both in CFLAGS and LINKFLAGS (e.g. -spec).
+-
+-Provide MergeFlags() with a dict instead of list to avoid the guesswork
+-in order to pass all options, even if some are not recognized by scons.
+-Switch LDFLAGS to LINKFLAGS for better compatibility with existing
+-scripts.
+-
+-Upstream-Status: Submitted [https://gitlab.com/gpsd/gpsd/-/merge_requests/406]
+-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+-
+----
+- SConscript | 11 ++++++-----
+- 1 file changed, 6 insertions(+), 5 deletions(-)
+-
+-diff --git a/SConscript b/SConscript
+-index dab481654..ee90d87c4 100644
+---- a/SConscript
+-+++ b/SConscript
+-@@ -585,8 +585,8 @@ env['SC_PYTHON'] = sys.executable  # Path to SCons Python
+- # explicitly quote them or (better yet) use the "=" form of GNU option
+- # settings.
+- #
+--# Scons also uses different internal names than most other build-systems.
+--# So we rely on MergeFlags/ParseFlags to do the right thing for us.
+-+# Scons also uses different internal names than most other build-systems,
+-+# e.g. it uses LINKFLAGS instead of LDFLAGS.
+- #
+- # scons uses gcc, or clang, to link. Thus LDFLAGS does not serve its
+- # traditional function of providing arguments to ln. LDFLAGS set in the
+-@@ -618,7 +618,10 @@ for i in ["ARFLAGS",
+-           "SHLINKFLAGS",
+-           ]:
+-     if i in os.environ:
+--        env.MergeFlags(Split(os.getenv(i)))
+-+        t = i
+-+        if t == "LDFLAGS":
+-+            t = "LINKFLAGS"
+-+        env.MergeFlags({t: Split(os.getenv(i))})
+- 
+- 
+- # Keep scan-build options in the environment
+--- 
+-GitLab
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.25.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.26.1.bb
+similarity index 97%
+rename from meta-oe/recipes-navigation/gpsd/gpsd_3.25.bb
+rename to meta-oe/recipes-navigation/gpsd/gpsd_3.26.1.bb
+index 0d5232c88c..e4a571daa6 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.25.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.26.1.bb
+@@ -9,9 +9,8 @@ HOMEPAGE = "https://gpsd.io/"
  
+ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+            file://gpsd.init \
+-           file://fix-pps_strerror_r.patch \
+            "
+-SRC_URI[sha256sum] = "b368b6a305e3f7a6382d23a0cbfc1d78923060b6b7f54cf7987a73c7b4a9afc2"
++SRC_URI[sha256sum] = "dc7e465968c1540e61bc57c7586d6a57a0047212a014efdad348f907bc2e0990"
+ 
+ inherit scons update-rc.d python3-dir python3native systemd update-alternatives pkgconfig
+ 
+-- 
+2.47.3
+
 
