@@ -2,124 +2,114 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55349CCD1BF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61A62CCF9E0
 	for <webhook@archiver.kernel.org>; Tue, 28 Oct 2025 20:28:41 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.web11.19694.1761683312386716656
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web10.22751.1761683314807508096
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Oct 2025 13:28:32 -0700
+ Tue, 28 Oct 2025 13:28:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Fr7vIGxT;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-47117f92e32so58850435e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 13:28:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ogzc65HA;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4711b95226dso81159065e9.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 13:28:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761683311; x=1762288111; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3qslUzpMGp1Q+gvnbjlR/4BOWlXO9l5RzjQnkWIAfAM=;
-        b=Fr7vIGxTrxP2x/tj52cuweaXNgul/UmyhHlmPDmLN4tp9pdh+Sbxz0zbxlL3QzwFwl
-         aYAXg9bkAgTg6Es/Hr/GgPNCxTMVZ4J4/zp2gzFNn5v9ECp7FhYf0MOJSz/KXAhs12nY
-         VrBdL82rYSQhL2WDGa0Ww0Pa7pigND+SqT1eiAthlxn3M3B5ZkPH4kegoBCEABgfw0nW
-         NA4koi3vFjWL98muowAAf7A5E59z7AGlpsiO3VANeUTTDAkLFDyzk+Xaz35rSd18Ewi4
-         pux5XULWaoyMU/j2ey068SQJxSZm35aqvwKYidOtFatERGnRXjTDOM2LqxsizaCI5Sq4
-         /M0g==
+        d=gmail.com; s=20230601; t=1761683313; x=1762288113; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Dwm7rTHVSdW36MsCT9l3nVE9ZhwnsV58QFyhFdxj3lw=;
+        b=Ogzc65HArlPTtW8sJjJvYo5Hv3DdvZRrI+kh/Ysn8Fff63ngCSHo9N5OnU02PWvkBn
+         0eOzawB72voT75N5ZiNx6W9un0+HvPniZ2sfeLRRiEPsQxM/iCUhDa4lGi+PEfRlbMyn
+         qPG80tFbJBgTx+mpVHICF5yanL28yI2bVHV0NUPGzAau8zk7CzxuOb8w3C59k8egAXnP
+         LkoBpwUJpPT7gnqhRh9+pksuORuIUQ5hxad+NZG5b5IQf4dWpBVanMy7lGFAkYkXvAuF
+         guTmzSYBnOgxYc4xEiscoBpyTcg0aMxIQ53oYkM/I9mmZAkRoQyex4+9nYYw65wT98Lb
+         6F7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761683311; x=1762288111;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=3qslUzpMGp1Q+gvnbjlR/4BOWlXO9l5RzjQnkWIAfAM=;
-        b=Plx7Kos1Ysll2Leq/FQY8EOLmw2IWvsgXe39s4x0SU59zgrIPoMLfXXgz3ZOzFOSY3
-         2w0QA/WyNqJWL9zrF8Qdz6dds+iX1k8UmhLCUlDTs88iQKNsxI54+ZcWJJRJK5sO1ekW
-         gGITciQbKm6qvxkLiDo4GjZeVGMrK7Eu9XE4meKQdxNSz1Ye0bLzMtXgp4RAF0ABgFS2
-         XbFX4xAsPGFP3OL7CnWpicobMvMXL8MM1OOiJE+vVxCmX5Qjq/LqXJPgh0GWjSJbuVbL
-         S8qbAOcIO1SRzSjoKYfnkh3mDZHyqlXwL2np2pff6hUeKsu9eCkQowIaPG9wtlMxoGEM
-         Gxyg==
-X-Gm-Message-State: AOJu0YxLgLQXbLHQ1YXkkW503/sWWu1C2A3qSUDjLMTZIpmBTEquk0Kt
-	URPIvXX3fjexaRXxYgSSORq2H3mHPthh+lojZCLoLeZsk/kD+s1fCiFDPtvp6ct/
-X-Gm-Gg: ASbGncujljQ2Gp64lSSSfwEp0ice15+kjHMejZQR7vr6ihI8VRIJLMwc7a7DYaasu1H
-	E28zn+V48hv1zP30DSxAyLU2no8yI1sNIWAwpD1Tz6XkHLC7X2yKnwTzP1vvnduSd1mYptAnanB
-	6ZFjcwFTc9iOggnrYUB2iPyEKaBtw8ybO19nfTEExulgHHUfjFSWOolXI3KwixLCIyaE10dyT20
-	JaWN+afIufa5j90oAHPVXG+/qUK/DjpKXgYuZMpOZtOZj1L09T6Ud3OA+FAgqyLaW0Z2pbWDvYA
-	Ns2ylMn92EggnGFjTq9wKxbWveUVEIDRXHnr6AsH7r2Ep4NHJ3rKSAIwf1NcghtiRkTeJjBL6HT
-	zWcgiMMFudRKH4Murgq6AyWsGRMZObuLx9A4UYpBEJRjnoVRcS1aplhaYF3gMOA0xnbHonvGMfA
+        d=1e100.net; s=20230601; t=1761683313; x=1762288113;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Dwm7rTHVSdW36MsCT9l3nVE9ZhwnsV58QFyhFdxj3lw=;
+        b=iiIH0AFLecokiWEaxGKPu2d4QDJl1vpevQqj4q/+5wxLtdY4m7zwPjSxB5DrERcfrM
+         vOz897Yf1GNRbXGEciJHvfx1jX5buVwmOkYNmGeCFxewmMNZ945mnYl/b4eRuB7EpxTj
+         UYilMKhl9mqEQAY6mKUF+H2xFDeCpr0WHy7uqPqVD8D4VqaID0yQk98eSwr+AXE+yPrG
+         VwaT3TJNN4sNXhxbrUaK56adeyP/2qf6UMrsSn1lkwcRU0UjLHPzj5ovjySqD41QTmZz
+         XpfUtmqT+NSzXz1QQ9JPv7LQe9sUDC4oTr+01qxBmBLtgDwzDdjv5Aua/st+VChr4C+W
+         NmVw==
+X-Gm-Message-State: AOJu0YxJG2tnjh8w8b24rkN0e5LoJ1VHm2E3o7KG90qYC41nZ525TZBH
+	totI0nGE0SfA7rryE9oIRCcY0dSl3aIGiMVzw0P+2va7HcNZN6bqd+0roI115fMg
+X-Gm-Gg: ASbGncsP7acP1urxXNj/A+lIakotCom47jdo23CGtmjQeGr9Jm4TW/d0RxyhmYciSh2
+	Aja0ls4qNi+CYvv3nUL6GsQBTP3LogcW8CfNwjFGCwYN4hDwiKZoPcMD3ZIDZxYUivNB2Hd0jlm
+	waN3rOw/hMVPuYrkV2EDcgJkU8lMS5e/hvlE7RutwS+wqUKJEhyRgt2ZPqjG8/E9PzbApiBjgYe
+	NwD5+uc5Kp4P9Z6H6FZeWSk7NxvZLX9RbOG9WfWVuVkdIB+pQC383ad7PlFy5fT8P0K04URwJQY
+	VdNiTwcVifpg6HhyJmsF0tpoV9pcvJrn9pcGjhgw39SpzvHpmXWCbLMp6Mjm8JAJviJ3DPOslFP
+	XWxboz9rCv63MLgZmHaKG5I7QyVmMc5sl/rpRItv26PWl1s6MRuEogXTJCRTtMpVe7IfmJKuVRQ
 	==
-X-Google-Smtp-Source: AGHT+IF49B04V6SRhkv1XtPzYCjLJeTDvIgTmj3YxgI2jgGwmjh8UTMI3ErIjITJ4h31+kt77Jm8pA==
-X-Received: by 2002:a05:600c:4e8f:b0:475:f16f:6f44 with SMTP id 5b1f17b1804b1-4771e3ac8eemr5673595e9.27.1761683310475;
-        Tue, 28 Oct 2025 13:28:30 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGsH0P3R9xi1Nyx8E9SdLKNWMAeVI+RzyDOPRoWuaUk3/YtU9Jbyz+5t/3dMB8P/tw9K9V4Eg==
+X-Received: by 2002:a05:600d:8310:b0:477:b83:7d1 with SMTP id 5b1f17b1804b1-4771e84ef93mr2516485e9.40.1761683313105;
+        Tue, 28 Oct 2025 13:28:33 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4771e3a88fdsm10093355e9.10.2025.10.28.13.28.29
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4771e3a88fdsm10093355e9.10.2025.10.28.13.28.32
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Oct 2025 13:28:29 -0700 (PDT)
+        Tue, 28 Oct 2025 13:28:32 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH 1/3] openl2tp: Fix ptests
-Date: Tue, 28 Oct 2025 21:28:27 +0100
-Message-ID: <20251028202829.2311091-1-skandigraun@gmail.com>
+Subject: [meta-filesystems][kirkstone][PATCH 3/3] sshfs-fuse: fix ptests
+Date: Tue, 28 Oct 2025 21:28:29 +0100
+Message-ID: <20251028202829.2311091-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
+In-Reply-To: <20251028202829.2311091-1-skandigraun@gmail.com>
+References: <20251028202829.2311091-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 20:28:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121099
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121101
 
-From: Khem Raj <raj.khem@gmail.com>
+Disable host key checking during tests, so the test can be executed without
+human intervention. Also add missing dependency.
 
-- Detect active network interface to use, instead of asking user, this needs
-  to run in automation
-- Find the location of ppp_null.so with find instead of rpm, rpm is a distro choice
-  it can be assumed to be always there.
-- Add missing runtime deps for ptests
-- Kill openl2tpd started by run-ptest script before exiting, otherwise
-  ptest runner hangs forever.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d30427f475f273ab8c5dd83b2c076bb4fc8a9a82)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-protocols/openl2tp/openl2tp/run-ptest          | 7 +++----
- meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb | 1 +
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ .../recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest  | 9 +++++++++
+ .../recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb   | 2 ++
+ 2 files changed, 11 insertions(+)
 
-diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp/run-ptest b/meta-networking/recipes-protocols/openl2tp/openl2tp/run-ptest
-index 01c9c7b447..b8fb08b758 100644
---- a/meta-networking/recipes-protocols/openl2tp/openl2tp/run-ptest
-+++ b/meta-networking/recipes-protocols/openl2tp/openl2tp/run-ptest
-@@ -30,9 +30,7 @@ else
- fi
+diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest
+index b63c4de0d9..b10922d02e 100644
+--- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest
++++ b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/run-ptest
+@@ -1,3 +1,12 @@
+ #!/bin/sh
  
- #read -p "Please input the network interface you use to test(such as eth0, em1 etc):" ETH_TEST
--echo "Please input the network interface you use to test(such as eth0, em1 etc):"
--read ETH_TEST > /dev/null
--
-+ETH_TEST=`ip route get 8.8.8.8 | awk -- '{print $5}'`
- if [ x"$ETH_TEST" = x ]; then
-     exit_cus "The network interface cannot be null" 1
- fi
-@@ -73,7 +71,7 @@ lsmod | grep l2tp_ppp > /dev/null || exit_cus "FAIL: Load module l2tp_ppp" 2
++trap "[ -d ~/.ssh.bak ] && rm -rf ~/.ssh && mv ~/.ssh.bak ~/.ssh || rm -rf ~/.ssh" INT EXIT
++if [ -d ~/.ssh ]; then
++  mv ~/.ssh ~/ssh.bak
++fi
++
++mkdir ~/.ssh
++echo "Host localhost" >> ~/.ssh/config
++echo "    StrictHostKeyChecking no" >> ~/.ssh/config
++
+ pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
+diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
+index f91e682d24..bde0949992 100644
+--- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
++++ b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
+@@ -19,9 +19,11 @@ SRC_URI += " \
+ RDEPENDS:${PN}-ptest += " \
+         ${PYTHON_PN}-pytest \
+         bash \
++        fuse \
+ "
  
- # start openl2tpd
- ps aux | grep openl2tpd | grep -v grep > /dev/null && killall openl2tpd > /dev/null
--ppp_path=`rpm -ql openl2tp | grep ppp_null.so`
-+ppp_path=`find / -name ppp_null.so`
- echo "test it here"
- /usr/sbin/openl2tpd -d all -D -f -p ${ppp_path} &  > /dev/null
- 
-@@ -95,3 +93,4 @@ else
- fi
- 
- restore_file
-+ps aux | grep openl2tpd | grep -v grep > /dev/null && killall openl2tpd > /dev/null
-diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-index 15cebf40f1..fe6abf5b55 100644
---- a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-+++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-@@ -92,3 +92,4 @@ do_install_ptest () {
+ do_install_ptest() {
+         install -d ${D}${PTEST_PATH}/test
+         cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
++        ln -sf ${bindir}/sshfs ${D}${PTEST_PATH}/sshfs
  }
- 
- RDEPENDS:${PN} = "ppp ppp-l2tp bash"
-+RDEPENDS:${PN}-ptest += "rpcbind kernel-module-l2tp-ppp procps-ps tcl"
 
