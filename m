@@ -2,180 +2,235 @@ Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB302CCF9F1
-	for <webhook@archiver.kernel.org>; Tue, 28 Oct 2025 22:33:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4DAFCCF9EA
+	for <webhook@archiver.kernel.org>; Tue, 28 Oct 2025 22:33:21 +0000 (UTC)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.web10.25538.1761690787034313510
+ by mx.groups.io with SMTP id smtpd.web11.22410.1761690798923965356
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Oct 2025 15:33:07 -0700
+ Tue, 28 Oct 2025 15:33:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=GeHkU6Bi;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=Y5duANr1;
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=D7rby3Zf;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=CKYIjDdD;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59SJlIvb2622253
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 22:33:06 GMT
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59SJqZp42511058
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 22:33:18 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=YRI34Ac9/WRSbwvhzEI9nfWijzbab47+Z/h
-	34KaxUvE=; b=GeHkU6BiN0jA8cR6qdudl5FAF+CK60l+3A2Noyue3JRwSXLd3An
-	MDWF61k/dHYLLJnoDMUt5g/XLVbBr4lfnz/sO6nu+0YEoPClAOBV7imq5DhD6MbW
-	sNk1J2h7MpMY+YhSeiE5wbS2Cr4/2+OEVMH+7l3RjXGUxFs2Gf4prC0l04ee5FOl
-	i+F+dkwcpTg3CNfvKWOxr8kmlzSXQMNNaGVEHz0iXeWvKXY1w8n/B2wp3eACTi2g
-	x6HccJnC2+Y7jEwWpgDqbCurtiK3arO0iz/M9R8gg+6hmx1ba8WuZv1nWvRrwoWe
-	UQec8LcHMYYl6Hf6EnGppIvZMR07+Qwz1Ew==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4a34a10bpa-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=Kz+KW1LWL3HdaoZ9RqczB0v54dwanmu34MC
+	br0fWmpQ=; b=D7rby3ZfZ++loZZx5y3OXGsmxE63SQ2bBeF2/LAbTVNPWu4Dkyd
+	73CY86GhSaM5vSDa+1kLPSjHv3LjMCq5KdYvoGxAqpf6/bLvQj7B0gX+lMdhXt+M
+	nFvb4eQvsSouJ1x3e60SFVvSYJgVfhCq1UisMpASB33KFfHCJDp9FSo6rOZ6lIyG
+	hUPoemZVsj6+lAnOFRkEP0/PsGMFNh45X4laZQfZWRiCBkAuXznWzEM8UwLAaPML
+	AagySXZXWKSzfn8vxBMTJOzjUTl/rUKHDtKydx4KUpdugLP4rMAObInfgicq1WT2
+	7GOwk2GEjQvxuM43GAwfjSpxLOxbaPmYDAQ==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4a34cd8bc7-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 22:33:05 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-89090e340bfso1307596285a.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 15:33:05 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 22:33:17 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-4e8a89c9750so190941511cf.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 15:33:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1761690785; x=1762295585; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YRI34Ac9/WRSbwvhzEI9nfWijzbab47+Z/h34KaxUvE=;
-        b=Y5duANr1o8KtIyEgWsBoKTyMAxvN8ckwFlEr/3x9Jqd2Rjj0a4PqU1H5wrMCC7Ufkx
-         SMsF3DOLE2YetT344hX8EMojYFKkQ4Nij5I2ovJbkxlc+CvpSk0Wr6K5bBiVE2o1/P6/
-         iitlLMsduYCiNt60W/vDJ394/cXXMS+ibApJM/kdlMhox0UjQgk61Ry9BMXfiCWyWUKZ
-         QDrsqg5dPVoiJRV+10BiLNHfnq/Bx0a27zaTNu7g5+ELbALWV/CzcUiG7hcmn6OgUAIc
-         Y5BcItOVdetuttL7/GtWCUwnTiDmmAsoJ1C3O2iUqBc4xB/faUG779kKhDdVs3WRzDnS
-         bUZQ==
+        d=oss.qualcomm.com; s=google; t=1761690797; x=1762295597; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Kz+KW1LWL3HdaoZ9RqczB0v54dwanmu34MCbr0fWmpQ=;
+        b=CKYIjDdD2Bt+vKEgj2xRqHNaLLpqRtm3zuw8P58cQuQCRPXJo+2vVgG4xwJpKpWURv
+         0w2oj+W6N595lpzYfRa4bBhlvdCXRBg/wwo903DJPjkotQA2gA0d2mJN6PZ0bKMKe4J7
+         2qrw2bFBTfdX+iM3vuiP6ySdEq9+INHb5yF+984jF/j/dfXIA6Y2y2bwzpTzg6fB2pjW
+         Jz0QPlsuGrQKDBKMf2K17bZ/jxqBbnFbdizmb0FJ1oosQkz+mMZeSbfaHOtNtTZilA2P
+         uwEIx7C9xQLHoeW86acClR0zu3R7IiwFWm8D+6jG3+SGZh1PhJaBz+Pswjri8O7o3Ouf
+         N2Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761690785; x=1762295585;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=YRI34Ac9/WRSbwvhzEI9nfWijzbab47+Z/h34KaxUvE=;
-        b=E+Nvfgay867GJAnW/RPG36l11eYqZSBhWFmOAsWznDTjC7dKXNl2O6qh1vaX5ochXr
-         LcfS+WY7DfZ9lTcOnp9w5HsCXfZqK8+FzhJ7WJup9GT5waX9cER46xkZfOPNa/y+tenF
-         IEw3Y0wbh9/791M23U2pwsQPCaOruyXzSPCBg1cTF06dzQvmhUk+bQjPy5QZXNy8ATZb
-         3FF9o1eQySUFPORgMOTdmLkKq3izlRbFO1B1UV2QFflKPM3U+kOFkY94lnfKxB9WrnOJ
-         DwyOR9/4wnO7sluOmdIAMf5mmWT/ktrZc35dZfsg+cOfxKZ26oN15CAbG/gKpsM0cNYd
-         s+dQ==
-X-Gm-Message-State: AOJu0YzscfnuZ/bNp609sa2tdF3c0uqBZGeb1Koh526pH8sHTGOfEKqS
-	o7QaqoaK0tPke07hvJ1/bVNLyMu4aLbXFHqdWxJAnWE3fzneG+Hyf9bQ7GM8WxEhdNoWKpTJFiZ
-	rSXNpDoTHdlVM9Q2VUDeWf9S9RQ4o/etVry38/2tvDLkL3PZZeZ50d37wGc2D2vjckm1RMOdE2b
-	h+lCmNh+iCQao9bCf7
-X-Gm-Gg: ASbGncsdnTS5HDEtG1E4aljFOMIVHB/HvpTmbq7ZUbgDiYv1WPt0QnZCqAkj886awx9
-	yfBXSvtWx1jog0R6m5tx4EqZXtzCwtZ+mv02ehOFSNUnNprM3Zc94MpQoOgL6EkTXcX0QsSv505
-	/WNZJpj0hpUq8oQGRNZjoe71XSn20EShn65mJ83wQREyLPZjhRTCmcdfxnWjFBd1FXKdUF4D2/M
-	WwtScVTqGGKyNWE/DCWNPAY73JOOCHdKlZit5bsvyFvUKL1hCJ16VPXNq0o0m31Q6FxMFxAq/Z7
-	CWkAtYJCra+af8Q8ah/ca1ojvTSApYL4VHY1yFiqOZL0bJd4sWslVuMcDPSE8+s7NVYu45vBx1o
-	0mEgdiO+d4TqZbvG27PrV9oKPI9bwKTVYpgLMC22g1X8LEKfxbMe4bnPSI4g4L7foBXYTLMGkGt
-	5opxIeSBdKkFNu
-X-Received: by 2002:a05:620a:2a04:b0:89e:c2ef:ea0f with SMTP id af79cd13be357-8a8e4a24ademr152683385a.24.1761690784862;
-        Tue, 28 Oct 2025 15:33:04 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGwZ+pI7/9BmQ9PLxBi2K1w4/DAB7hO/W7kE2KsPji+2Rwv8x4HTtVI9DaO5r1IGhr049jMgA==
-X-Received: by 2002:a05:620a:2a04:b0:89e:c2ef:ea0f with SMTP id af79cd13be357-8a8e4a24ademr152678185a.24.1761690784187;
-        Tue, 28 Oct 2025 15:33:04 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1761690797; x=1762295597;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Kz+KW1LWL3HdaoZ9RqczB0v54dwanmu34MCbr0fWmpQ=;
+        b=rXu8m5+2wNeoXmMG86+EYRYbYMrzUZ9ls+MiZhogA70eHyZxjKapx71vwZCbGKqL7z
+         8pxY6B24LqHghuTtv64kylSXx7/NwwCVahOAoHGKUYbKGnIrAiwQXPhQZjbO3d0vY1Hm
+         mkL+4OT47geRdnRiyLvkPrp1WoIWATUwqSnbgmHd/29SUbWE/vVHv3WLI34JbIFP5vqn
+         OT964ZDzrYQBM2iDLkcYo2AwYMUMU90+ZggG7i8tpBR1iMlaHIbRT/4m3rJJ1nFmA/iF
+         pV/cFM06O/1KrtOgdrnkyrSX5Et+Y9nJKqyzZikt4XqrlZQMN18xWFXGLL8Vg49cVq0R
+         jP2g==
+X-Gm-Message-State: AOJu0YwkydmjuI81xkohK3WSQsqP9uSm7fgR4KyZyPP8EJvKb8JdftSZ
+	fpqHduF2ufgxcM0+y2wJxMBdGVEpmx20WdEL8Pus2X9BbuyiBTJp9qdNOCdZfP929asSpo4gjoz
+	0mZylKAup0GZ23zo4JxQ01U3i73qbOlQkRY2r7+eoq5VUA4+1dv/tORwOTp8pRFc5Ik98hTAgi2
+	kl4Ee3k9UxZ6LpVDTo
+X-Gm-Gg: ASbGncuAQvQfAWyqBmRBlqnj6MKbUTLW6l6dcG32pJWJRVf7302fsiB6voMpM21rGjB
+	D4Ly7TwdblfSA4uj9M/tuQcuxGxIw0thP9ONL9gqnIK8cTFRcRZlhpyiLCNkR9f50oNzUX9hxRF
+	G7ZphRxMpZ8X7fLnvTl3ONkHFnSJfR5CCKySaONvJFEz1dBbiAH2aX9ti+h+7uX9yjf4RHwWZ8x
+	oCBX9DGl5mgm9YSaM5s0FfjNzUPIwThxvfbut6UCbGQJJ8B3XEKViIFQCnOGu+WzSPWdnze2uHG
+	GNjK9jkGKkXYw3IXDSzUjSb4z8kjSxN2PRkSR6999vVzbyQxZ08/LwCizIX/kGpDch4AK9tGA3P
+	1SwNMJsa425+uW9nF/uvM63/v2vdsAkgcG1Eqo6ECVw+2inhifur3958FtQJjOLb1QgISwwEl+X
+	B3+6odVWKSDxFQ
+X-Received: by 2002:a05:622a:cd:b0:4e8:a4ab:8b3f with SMTP id d75a77b69052e-4ed15b752f9mr13520121cf.21.1761690796887;
+        Tue, 28 Oct 2025 15:33:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG5WAJsIVJ+MNKFLiLQEvT3tKiMHJP6BDAEzYIwqK3C7B0Ub2AvDtZw+FlRSFiQvw1N9LxiPQ==
+X-Received: by 2002:a05:622a:cd:b0:4e8:a4ab:8b3f with SMTP id d75a77b69052e-4ed15b752f9mr13519621cf.21.1761690796260;
+        Tue, 28 Oct 2025 15:33:16 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a0c3-3a00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a0c3:3a00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-378ee0c61a7sm28529381fa.28.2025.10.28.15.33.00
-        for <openembedded-devel@lists.openembedded.org>
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-59302556f48sm3331678e87.45.2025.10.28.15.33.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Oct 2025 15:33:02 -0700 (PDT)
+        Tue, 28 Oct 2025 15:33:14 -0700 (PDT)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] opengl-es-cts: upgrade 3.2.12.0 -> 3.2.13.0
-Date: Wed, 29 Oct 2025 00:32:59 +0200
-Message-ID: <20251028223300.587384-1-dmitry.baryshkov@oss.qualcomm.com>
+Cc: Ryan Eatmon <reatmon@ti.com>
+Subject: [meta-oe][PATCH] vulkan-cts: fix building for ARM targets without NEON
+Date: Wed, 29 Oct 2025 00:33:12 +0200
+Message-ID: <20251028223312.587426-1-dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 0f50_xkzYYCFhTaWdzaiv5SX-02_RAOP
-X-Proofpoint-ORIG-GUID: 0f50_xkzYYCFhTaWdzaiv5SX-02_RAOP
-X-Authority-Analysis: v=2.4 cv=A5dh/qWG c=1 sm=1 tr=0 ts=690144a2 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=x6icFKpwvdMA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=JTEwExm7AAAA:20
- a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8 a=3D-5HfX4_kZ6GGEfAocA:9
- a=IoWCM6iH3mJn3m4BftBB:22 a=bA3UWDv6hWIuX7UZL3qL:22 a=yULaImgL6KKpOYXvFmjq:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDI4MDE5MSBTYWx0ZWRfX165ORQgSr5Ga
- 54S/IIyOtnRwjzQlqJjwiw57OeHaUpxLb1bhwmn+jG03q+b9k8JI0p8QQlY6tDpSHhZJ0COsoMI
- MBcEU1crZJU7XmheuQlkZww5LCZZnCQSAnTnqslRzqU/cx/k08kgLZX/d9NdhXdwLcRMhfk2wf5
- aLUBUhww+5Gbkknio4KVgi3b4tM8j6x5/xZGgRMsfPHHvQul3xuKThT5aNsiKJrfUpd4rVwt6HZ
- PzLF6tRteYphbFGc5l72mLnYL9gfRMCBC/+NluCT8YGEsDKeb3+EaNx7ROZ6NzbVjWNxS5l7Uxw
- BKBKjb9hm65Z2JF6m0ZeXiDq4TW0UXJYytGdePu8iHhSYeH0DsVARSHx/10dohMpUTMJfn/BXmg
- R1IQm82dq+unt79HZ+Z3jY1EaQyGig==
+X-Proofpoint-ORIG-GUID: RQvozidNMDQonxtcK4lF8BhrWGWdtcy_
+X-Proofpoint-GUID: RQvozidNMDQonxtcK4lF8BhrWGWdtcy_
+X-Authority-Analysis: v=2.4 cv=avi/yCZV c=1 sm=1 tr=0 ts=690144ad cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=x6icFKpwvdMA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=NEAV23lmAAAA:8 a=sozttTNsAAAA:8
+ a=EUspDBNiAAAA:8 a=0PO-L9UzGEu73nb5_owA:9 a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDI4MDE5MSBTYWx0ZWRfXx4PSr/bn2FEU
+ uqyjfXYT//+0U5yfOKu4Q1NgPpaz25lfJ5GMneydhT5jmAHaaSKy15luGO7mg+Fh9UOn7mNbuQj
+ 9FiVPAucq0WvBraNkJEyUxjgnGzuaneVt8GeVvDhFdZnYC/c+bldWv+pw5q7B1mqINvBTLBZoQl
+ JD7KNdA2hqEPnPxFP0dUUHMChDbjz4+PEsCjzbaimPRlXgSjjHL52OiN3Ey90ZB/GTV0SBnBIJA
+ M760xhQIBiRXccL1M1LyHIU1gWTsFFQC/CZ6qhN7A5G2LcKtFgMV4RCU8qbEBHSwcQZiMeQFcIO
+ KAPY6VLlyRUih+c97zSDvD6ipYMPmxGO9ITQJyyhX8XKcCwOXnA9ysA74DOS6DV6Wkt/Vc6G8ru
+ uYN74clXMbFvK7cvU9SawuEtvZLvnQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-10-28_08,2025-10-22_01,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 priorityscore=1501 spamscore=0 bulkscore=0 impostorscore=0
- clxscore=1015 malwarescore=0 adultscore=0 lowpriorityscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2510280191
+ clxscore=1015 priorityscore=1501 impostorscore=0 malwarescore=0
+ suspectscore=0 adultscore=0 spamscore=0 bulkscore=0 phishscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
+ definitions=main-2510280191
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 22:33:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121103
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 22:33:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121104
 
-Upgrade OpenGL ES CTS, picking up new tests and fixes for old ones.
+Pick up a patch make Vulkan CTS build on ARM hosts without NEON.
 
+Reported-by: Ryan Eatmon <reatmon@ti.com>
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- .../vk-gl-cts/opengl-es-cts-sources.inc         | 17 ++++++++---------
- ...ts_3.2.12.0.bb => opengl-es-cts_3.2.13.0.bb} |  4 ++--
- 2 files changed, 10 insertions(+), 11 deletions(-)
- rename meta-oe/recipes-graphics/vk-gl-cts/{opengl-es-cts_3.2.12.0.bb => opengl-es-cts_3.2.13.0.bb} (83%)
+ ...ing-for-non-NEON-enabled-ARM-targets.patch | 89 +++++++++++++++++++
+ .../vk-gl-cts/vulkan-cts_1.4.4.0.bb           |  5 +-
+ 2 files changed, 93 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/vk-gl-cts/files/0001-decode-fix-building-for-non-NEON-enabled-ARM-targets.patch
 
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
-index 4e7155cd7f91..da4977ca2826 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
-@@ -6,20 +6,19 @@
- RECIPE_UPGRADE_EXTRA_TASKS += "do_refresh_srcuri"
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-decode-fix-building-for-non-NEON-enabled-ARM-targets.patch b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-decode-fix-building-for-non-NEON-enabled-ARM-targets.patch
+new file mode 100644
+index 000000000000..d51ccafc9427
+--- /dev/null
++++ b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-decode-fix-building-for-non-NEON-enabled-ARM-targets.patch
+@@ -0,0 +1,89 @@
++From 95b4ea5b8a5044fed7aeb1c279eddae709a6ce5f Mon Sep 17 00:00:00 2001
++From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
++Date: Tue, 28 Oct 2025 19:27:21 +0200
++Subject: [PATCH] decode: fix building for non-NEON-enabled ARM targets
++
++Building for non-NEON ARM targets fails with the cryptic message. Verify
++that it is possible to build NEON code at all.
++
++.../work/armv7at2hf-vfp-oe-linux-gnueabi/vulkan-cts/1.4.4.0/recipe-sysroot-native/usr/lib/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/15.2.0/include/arm_neon.h:11019:1:
++error: inlining failed in call to 'always_inline' 'uint8x16_t
++vld1q_u8(const uint8_t*)': target specific option mismatch
++11019 | vld1q_u8 (const uint8_t * __a)
++       | ^~~~~~~~
++.../work/armv7at2hf-vfp-oe-linux-gnueabi/vulkan-cts/1.4.4.0/sources/vulkan-cts-1.4.4.0/external/vulkan-video-samples/src/vk_video_decoder/libs/NvVideoParser/src/NextStartCodeNEON.cpp:22:36:
++note: called from here
++    22 |         uint8x16_t vdata = vld1q_u8(pdatain);
++       |                            ~~~~~~~~^~~~~~~~~
++
++Reported-by: Ryan Eatmon <reatmon@ti.com>
++Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
++Upstream-Status: Submitted [https://github.com/KhronosGroup/Vulkan-Video-Samples/pull/112]
++---
++ .../libs/NvVideoParser/CMakeLists.txt          | 18 +++++++++++++++++-
++ .../NvVideoParser/src/VulkanVideoDecoder.cpp   |  2 ++
++ 2 files changed, 19 insertions(+), 1 deletion(-)
++
++diff --git a/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt b/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt
++index 84251ed60ab9..65da635e2929 100644
++--- a/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt
+++++ b/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt
++@@ -65,6 +65,13 @@ check_cxx_source_compiles("
++   #endif
++ " IS_ARM)
++ 
+++check_cxx_source_compiles("
+++  #include <arm_neon.h>
+++  uint8_t *pin;
+++  uint8x16_t vdata;
+++  int main() { vdata = vld1q_u8(pin); return 0; }
+++  " HAS_ARM_NEON)
+++
++ check_cxx_source_compiles("
++   #if defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86)
++   int main() { return 0; }
++@@ -85,6 +99,7 @@ if (IS_AARCH64 OR (CMAKE_GENERATOR_PLATFORM MATCHES "^aarch64") OR (CMAKE_GENERA
++     set(SVE_CPU_FEATURE "-march=armv8-a+sve")
++   endif()
++   MESSAGE(STATUS "Parser optimizations selected for generic ARM NEON")
+++  add_compile_definitions(HAS_ARM_NEON=1)
++   add_library(next_start_code_c OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeC.cpp include)
++   target_include_directories(next_start_code_c PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
++   add_library(next_start_code_neon OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeNEON.cpp include)
++@@ -102,7 +117,7 @@ if (IS_AARCH64 OR (CMAKE_GENERATOR_PLATFORM MATCHES "^aarch64") OR (CMAKE_GENERA
++     target_link_libraries(${VULKAN_VIDEO_PARSER_LIB} next_start_code_c next_start_code_neon next_start_code_sve)
++     target_link_libraries(${VULKAN_VIDEO_PARSER_STATIC_LIB} next_start_code_c next_start_code_neon next_start_code_sve)
++   endif()
++-elseif (IS_ARM OR (CMAKE_GENERATOR_PLATFORM MATCHES "^arm") OR (CMAKE_GENERATOR_PLATFORM MATCHES "^ARM"))
+++elseif ((IS_ARM OR (CMAKE_GENERATOR_PLATFORM MATCHES "^arm") OR (CMAKE_GENERATOR_PLATFORM MATCHES "^ARM")) AND HAS_ARM_NEON)
++   MESSAGE(STATUS "Parser optimization for ARM ${CMAKE_SYSTEM_PROCESSOR}")
++   if(WIN32)
++     MESSAGE(STATUS "Parser optimizations selected for WIN32 VFPv4")
++@@ -111,6 +126,7 @@ elseif (IS_ARM OR (CMAKE_GENERATOR_PLATFORM MATCHES "^arm") OR (CMAKE_GENERATOR_
++     MESSAGE(STATUS "Parser optimizations selected for UNIX armv7-a+simd")
++     set(NEON_CPU_FEATURE "-march=armv7-a+simd")
++   endif()
+++  add_compile_definitions(HAS_ARM_NEON=1)
++   add_library(next_start_code_c OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeC.cpp include)
++   target_include_directories(next_start_code_c PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
++   add_library(next_start_code_neon OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeNEON.cpp include)
++diff --git a/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp b/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp
++index 83b968ef55df..eced7fcd7bba 100644
++--- a/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp
+++++ b/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp
++@@ -335,10 +335,12 @@ bool VulkanVideoDecoder::ParseByteStream(const VkParserBitstreamPacket* pck, siz
++         return ParseByteStreamSVE(pck, pParsedBytes);
++     } else
++ #endif //__aarch64__
+++#if defined(HAS_ARM_NEON)
++     if (m_NextStartCode == SIMD_ISA::NEON)
++     {
++         return ParseByteStreamNEON(pck, pParsedBytes);
++     } else
+++#endif // HAS_ARM_NEON
++ #endif
++     {
++         return ParseByteStreamC(pck, pParsedBytes);
++-- 
++2.51.0
++
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.4.0.bb b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.4.0.bb
+index 465ac981f90a..4d2f223a39b6 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.4.0.bb
++++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.4.0.bb
+@@ -6,7 +6,10 @@ SRCREV_vk-gl-cts = "03c0746a55b78eab63c664a11948b52419e1f309"
  
- python __anonymous() {
--    if d.getVar("PV") != "3.2.12.0":
-+    if d.getVar("PV") != "3.2.13.0":
-         bb.warn("-sources.inc out of date, run refresh_srcuri task")
- }
+ require vulkan-cts-sources.inc
  
- SRC_URI += " \
-     https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/external/renderdoc/src;sha256sum=e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e \
--    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-tools/src;rev=04b4a204aa501992ae85a207be1e200e195c98e1 \
--    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/glslang/src;rev=0549c7127c2fbab2904892c9d6ff491fa1e93751 \
--    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-headers/src;rev=e7294a8ebed84f8c5bd3686c68dbe12a4e65b644 \
--    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-docs/src;rev=645c59c70e826d9738b6bb103316c03d887dfed3 \
--    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-validationlayers/src;rev=6cf616f131e9870c499a50441bca2d07ccda9733 \
--    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/amber/src;rev=6fa5ac1fb3b01c93eef3caa2aeb8841565e38d90 \
-+    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-tools/src;rev=6d43afe9a0ef71712d8cec5b0ce0cd3570d1fd41 \
-+    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/glslang/src;rev=8e1494f9d742a27b54193ecd9475dcb2ef23b8b7 \
-+    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-headers/src;rev=9268f3057354a2cb65991ba5f38b16d81e803692 \
-+    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-docs/src;rev=ac3d0660c45ecf86b2952b298d125270228150d1 \
-+    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-validationlayers/src;rev=68e4cdd8269c2af39aa16793c9089d1893eae972 \
-+    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/amber/src;rev=57ba1ca211b6f4890c013dcf42cb16069ae916dd \
-     git://github.com/open-source-parsers/jsoncpp.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/jsoncpp/src;rev=9059f5cad030ba11d37818847443a53918c327b1 \
--    git://github.com/Igalia/vk_video_samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/nvidia-video-samples/src;rev=45fe88b456c683120138f052ea81f0a958ff3ec4 \
--    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-video-samples/src;rev=0e87744edbb84c9c56c3fc8de9ea5150af5ee4ea \
-+    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-video-samples/src;rev=25f4401686c5b5ec726641f134b1989450e81027 \
-     git://github.com/Igalia/video_generator.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/video_generator/src;rev=426300e12a5cc5d4676807039a1be237a2b68187 \
- "
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.12.0.bb b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.13.0.bb
-similarity index 83%
-rename from meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.12.0.bb
-rename to meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.13.0.bb
-index 33526630d16e..cf01ce2491bf 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.12.0.bb
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.13.0.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "OpenGL CTS"
+-SRC_URI:append = " file://0001-decode-fix-build-on-ARMv7-targets.patch;patchdir=external/vulkan-video-samples/src"
++SRC_URI:append = " \
++    file://0001-decode-fix-build-on-ARMv7-targets.patch;patchdir=external/vulkan-video-samples/src \
++    file://0001-decode-fix-building-for-non-NEON-enabled-ARM-targets.patch;patchdir=external/vulkan-video-samples/src \
++"
  
- require khronos-cts.inc
- 
--SRCREV_vk-gl-cts = "42e61858e862e153cd0fe36593a8c3f7c16c3275"
-+SRCREV_vk-gl-cts = "67ce2ed4a32658b6a80afc52dc4d2825cdfdda8a"
- 
- require opengl-es-cts-sources.inc
- 
-@@ -23,7 +23,7 @@ do_install() {
- 
- 	rm -rf ${D}/${CTSDIR}/*.a ${D}/${CTSDIR}/cmake_install.cmake ${D}/${CTSDIR}/CMakeFiles
- 	rm -rf ${D}/${CTSDIR}/*/*.a ${D}/${CTSDIR}/*/cmake_install.cmake ${D}/${CTSDIR}/*/CMakeFiles
--	rm -rf ${D}/${CTSDIR}/common/subgroups/*.a ${D}/${CTSDIR}/common/subgroups/cmake_install.cmake ${D}/${CTSDIR}/common/subgroups/CMakeFiles
-+	rm -rf ${D}/${CTSDIR}/common/*/*.a ${D}/${CTSDIR}/common/*/cmake_install.cmake ${D}/${CTSDIR}/common/*/CMakeFiles
- }
- 
- SECURITY_CFLAGS:riscv64 = "${SECURITY_NOPIE_CFLAGS}"
+ # Workaround an optimization bug that breaks createMeshShaderMiscTestsEXT
+ OECMAKE_CXX_FLAGS:remove:toolchain-gcc = "-O2"
 -- 
 2.47.3
 
