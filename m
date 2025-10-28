@@ -1,361 +1,295 @@
-Return-Path: <peng.zhang1.cn@windriver.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9EAACCF9E0
-	for <webhook@archiver.kernel.org>; Tue, 28 Oct 2025 06:13:45 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.2473.1761632017164653242
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71B01CCD1BF
+	for <webhook@archiver.kernel.org>; Tue, 28 Oct 2025 07:53:46 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web11.3321.1761638023042640496
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Oct 2025 23:13:37 -0700
+ Tue, 28 Oct 2025 00:53:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=qSKoW6Ps;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2396428d41=peng.zhang1.cn@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59S5I6Sr2397973
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 23:13:36 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=ozDEYgKEMg+Uzn7odRlx
-	HQ4JL+lvmbDtPtFP4QbDP54=; b=qSKoW6PsXC6XzN0nOnV/GtOTDndubad+AqRI
-	FXXM/hgzl459dCHnbiNT2V/wYDpoMaJbAnt46Lt4F7G3WvxscflsdLfqDnROg5Xr
-	X2ZmoQ8IlquZseT2IGFILdy5wDp2fg1pBad51BZhSa5tG94J0zgdnj9A/cmmKC7S
-	emndxnbxwocF936lc+69FkeZ9HGO2ZdG7rLtC/AeEWKE0Qe5Ng5RCJE89R0w3J8N
-	cES2EbVG/6CmYKvh2sNxiNm2CesKwdM0piHZu9FV2bXJKtppDS0QQolY80kZlBBM
-	guuqEQ/GoxP3iiJ+1c5uhrI+WOV5PxhC+XUF8vNw4+9smQu/Yw==
-Received: from mw6pr02cu001.outbound.protection.outlook.com (mail-westus2azon11012057.outbound.protection.outlook.com [52.101.48.57])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4a0x2e2hue-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Oct 2025 23:13:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LWQNQlA2C5ykM/wpZvPg9R5S4fBBBagF1beyQNVCQA1sikYFv6FxsDn7MWs4N6RI80vMerRNdrwS1BDWOaAbEp5YS6cfMT/LF7AaxhuYujpL3Whx7eA81Y56VGcU3lTHAr8Yqr34LneZo0crVwykt4hdNxLsWfywRww22NWsJJ3q5GOgWFDJimAVZtgvd9aCL5ErhCNltOgraVaI7n5rrrqqU2nCYHGyMUTGfm4TK51qJWwxzVVuRV6K2dTZNzShIwSI7swnDFKZSmh88YN+16JDa5bgkIAv0zBTmT10AHgK6XByXN7OK9WCVoKZWHDhnOi3/B2VQFTBJjpjrCk+6g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ozDEYgKEMg+Uzn7odRlxHQ4JL+lvmbDtPtFP4QbDP54=;
- b=AvvBYOvzCDcE7nLgG+osFUIzWYngSPR8RvgITYFbfL7lIIpUg1D3h1cg5E5+/ZmE+p9c2j1TpcTv3RpYz+dbViyO7qPd2TAFY+60LFJKPC0d5xQg7ns4UBLmJXW8WPW4ecBvRric6II7H1q516tHR/wCCmVO1GBc3DjB6kP0xCgDZrFnmQ5U9alxNsQXCKmG4rrV6LrEkRQvfU/esOW2VSkjULoI5wSnRidV7dgI/o4imxUWtPmcsKIS5wOomfbL2dyXTMIQ5u55o83Icx/R1ECQzfL/DIc/4Ng4maFJAYpaGZHF7j30/ZypFHJYAw1iihFUXKnEdJXPLw7jmYeBbQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
- by IA1PR11MB9494.namprd11.prod.outlook.com (2603:10b6:208:59c::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.18; Tue, 28 Oct
- 2025 06:13:34 +0000
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::24c6:f8fc:1afe:179f]) by CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::24c6:f8fc:1afe:179f%6]) with mapi id 15.20.9253.017; Tue, 28 Oct 2025
- 06:13:34 +0000
-From: peng.zhang1.cn@windriver.com
+ dkim=pass header.i=@mvista.com header.s=google header.b=SsyqCe6q;
+ spf=pass (domain: mvista.com, ip: 209.85.210.180, mailfrom: hprajapati@mvista.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-7a226a0798cso4619098b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 00:53:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1761638022; x=1762242822; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=seyqaQFkrJYo5g9za6bs6sq/iM1xuP24D1+CZY5/FuE=;
+        b=SsyqCe6qWJL0LEJUgzzNkngGh9Jo3n/5BNo6JvP6RpJcSDTqFqDy5jH+dQr3ObW1N4
+         qE45MiM9eb/L8jjPcvPNXdk7Qnkr5bGjKWEY++kqaLB113ZIFT+t9bl9QnVxFszMNY71
+         +MFTMjVuC6FjxV0Iy2sG0RJ5C7l/fuh6RaaN4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761638022; x=1762242822;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=seyqaQFkrJYo5g9za6bs6sq/iM1xuP24D1+CZY5/FuE=;
+        b=XzFj0B2SSOYQnoLVv32c7T8ReByKr5u0pq9RZHMn5KPwoo1smxbOJX5b+zIfQBWBoU
+         8c+G+usfN2NMMWN6ZJ6l4VjIxZWOpf0aH2SN4tTdKS4s9PuNJA2lcNJW2bCo62FGIjGO
+         NQHuimIzVtkZ/M0QbtDieBoXFDVOH8DHfDTAhTOyHmgMI4qHECnILpI1qohlUID2DRYN
+         CL1YifxH5BhmqbfmHPJUhvxYEfOzCAAvnG3xZ0Wl76IY/LTgZU2G0wve/8I8e0Bhg+1y
+         Sh63TjeVGgUlUJJO+AkGZiyjFut7On/ZO8w8YcLk9WSbECDrUrC4GqLtcz0KhyTQPoDR
+         geDw==
+X-Gm-Message-State: AOJu0Yy/AaoeR1kF70jUGymIUibp6VlCjlvD9IHUqR9anamDAplnnZ7M
+	VYzMfsntQfnLBQSie1T6nh8MCVqJJAltKTDIcTUcDscoDaq5ikd0FuDJSWU7bZ4Qn4OaG2NwYiU
+	67rOh+Ug=
+X-Gm-Gg: ASbGncuVcms/jozeMoI+/92k5LtFdAVJ6xTJe+cSq/RvJylKGnw1mMpvWQ4pAMq9/4J
+	XFZiX0tW3ctkygvdgIWbG/hcVWIZJ3W4fAMBskbtijbbLjyiVYdJI5B9ZfMZFr8ZieKs0XulsGI
+	SxJ/3UiNZLT6R3pClnvYf9GzzJPB+HRdsKTm57rAMZHI3F85tRWQdZrjjzFktQ9EH2OFavJ4Wnz
+	805R3C6fv/so3seyaF6t8+7AKf9KKfClti941n535pug61pANuNMmnKWUednGJBMd7rrx+xEl16
+	Kq43RTfobcUPRi23v240dDDbhSvKOizG1jfiCNLyqaod/R8GPwx+beh13L3MxMar0Eu/w18QTVk
+	nP4BSGJ35ViiMJVammsZGSEzTLBJSHLITRXGr7snSkROM7bAcKSAQuao/a+aZLM39SbiDDKpLUx
+	vUx/3OKL8EYKNRFA==
+X-Google-Smtp-Source: AGHT+IG6B6ahQGUPDU6Y6446KlgdX9+ZcbqgW0a9LrYVQVGQnCuTZLRn0v4ghDI04y42EsD0b58fUg==
+X-Received: by 2002:a05:6a00:3921:b0:7a2:81fe:b742 with SMTP id d2e1a72fcca58-7a441bde361mr3581995b3a.12.1761638022033;
+        Tue, 28 Oct 2025 00:53:42 -0700 (PDT)
+Received: from MVIN00013.mvista.com ([150.129.170.153])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7a414066d0esm10853367b3a.43.2025.10.28.00.53.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 28 Oct 2025 00:53:41 -0700 (PDT)
+From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH] frr: fix CVE-2024-31949
-Date: Tue, 28 Oct 2025 14:13:22 +0800
-Message-ID: <20251028061322.2651413-1-peng.zhang1.cn@windriver.com>
-X-Mailer: git-send-email 2.50.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: KL1PR01CA0146.apcprd01.prod.exchangelabs.com
- (2603:1096:820:149::9) To CH3PR11MB8562.namprd11.prod.outlook.com
- (2603:10b6:610:1b8::13)
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-oe][scarthgap][PATCH] libjxl: fix CVE-2024-11403 & CVE-2024-11498
+Date: Tue, 28 Oct 2025 13:23:36 +0530
+Message-ID: <20251028075336.114724-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|IA1PR11MB9494:EE_
-X-MS-Office365-Filtering-Correlation-Id: 03c15329-c4d5-4ff0-be2c-08de15e91fcd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|1800799024|52116014|376014|38350700014|13003099007;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?sAE6XGAXoAJSXlZ16Ri0lZx3qH1AFWcuFkVpdahCYNSqzzjqRSDXk8DD0wfY?=
- =?us-ascii?Q?11CN2jVf/WA5jfk09iWWk3/BRUTRWkLQGZxxaQeW1jwXqWnIORjZ4L4K4laP?=
- =?us-ascii?Q?2y4Ns7e9sOA5mXMCR0k72bPQeMi0DTJlG06T21wlb3et8KaHkhyN5AF7e+Kq?=
- =?us-ascii?Q?Oqz+epMItUuA1tM9o+0II2SdLgTEHWA3Q2By+BDEfVhtlqbOjhLvjun2HbzO?=
- =?us-ascii?Q?iYVI52k6xrgsz1C4hxI5ly8WZgHJ843LD/o7W+moWzqqInk8XeoA4E0+ECdW?=
- =?us-ascii?Q?YP/ZANZIeOfKcn2w37OaAAN2WKlZqesKI9iA6M1qVacRwRJOvxW8VXElmrGc?=
- =?us-ascii?Q?AnVGwy5ZoKF7IJcQHWY8XoNCitkzG3kUxkZuWdu2tpGJA7W/nS0Imnnb+YXR?=
- =?us-ascii?Q?EFsD5DnsxT8X4Tz0rvZYLI49m6WRdKksrfgbenAGWkaX3Cs1IU0qfwo2AqfX?=
- =?us-ascii?Q?WChe8yXw+P3dmmyUBCyLEQMHhKU/W15BvO4qPD3bhimmH/GoBLE7xv83ZYx1?=
- =?us-ascii?Q?+DwJFHgemnU9gMd15N6UmPdRCDvyRvn24QnYGLGdBqwUWa/05FqU0uOkz3Sa?=
- =?us-ascii?Q?sXwlxbo8qNIIHqkmZ0s7BKFsZqoULwH5ss/q5tvBXbFgkglHVUautJsKjdk/?=
- =?us-ascii?Q?phTUB6Vk8uPUckwFYh08sFruEZSRrKWKfq2/RQKvpUwjkXfFcfZDBUlQPzaD?=
- =?us-ascii?Q?Zf98bEqcWfpYsZNtpzJO5UIl+2rOlXOa1glUtLd6DIONBbp+YrQE6pkNn2OK?=
- =?us-ascii?Q?ExvdSCtR3FU3CAiRsbcs44howDM2xXFhwuWvc9u2vHMJLSw4Ez6CS3LxDeU4?=
- =?us-ascii?Q?XnX6yAu6UQal0WXAgQatm2MkrI5Qnxynih/WPzQqXjuhvLwCocDHZdqIPNzk?=
- =?us-ascii?Q?iRvDDF1ugVTxHBvJMl/BbkYteJgYgV0xMzIrxWXuRuYgOTxcOo9hrrtxLuFG?=
- =?us-ascii?Q?b3vV/mvX+h6mJgVsOKEjBzy2GHHRZK44b2j3I2JOhqThNmcxyR+0oc0KT5gJ?=
- =?us-ascii?Q?nDitBd8mXOTMyittVzGdJSZ1tFS2aS3g9XHRIIRonVA0VzPFyO3Z6BuHk8PE?=
- =?us-ascii?Q?rvqeC6rfMzo/1yyZCI/TYcRx9ETJTBi9tqvtd5LRcQXjEgXuw8mzKGEb/UuI?=
- =?us-ascii?Q?p5hLgfQLsGxP29Xq4s3xLmFsF6y7DI7RN/UtGUbz///4A1RWp4gFYJMmhthG?=
- =?us-ascii?Q?pDSSvW9K7Pv/T7cTn2sWbiqtt27JreDjHHGDfLNFUQn3v4SSXcFk1nQox/iP?=
- =?us-ascii?Q?mz8+N+qid2le/198HEq2liEWjLSZlBc0CVLcgm1OXnBwmuprj5n7FVDgGE4+?=
- =?us-ascii?Q?PsevE8fm1/Y2YC+QsZTHIg1+VNbvCkjLTodQ4qqV85K6uurCFkJ+UUsmVnaC?=
- =?us-ascii?Q?ySzeN7KzCpYjmdTbs71umKYrPWD3FIuxxQbvNoa+sYK56yQnQtnF1i+eAp/O?=
- =?us-ascii?Q?/NLmHNd6Z+trc5BIhTDgikXe3JsGKwDZD8Qqm1Ny0AMnE+lD2S3bng=3D=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014)(13003099007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?CpuMQ+sIctax1A2mtELUyxD3Am6zkiV2QUaIN988wparAO1n9AItEI0gut0w?=
- =?us-ascii?Q?LQi6P4NsbLjq4LM8xG6zHujCw1J6aBprH5F/R0z1UCWLEC2Qt5+q1nfU6Bd1?=
- =?us-ascii?Q?iYRrN550HzvJfOqEMNlOm/7mCXsvwlc6r0OwUSk/JSQ6MJaoVow5T5z2Y5E2?=
- =?us-ascii?Q?jHd9ctsR/n077ei9wt9Hz3dI2RUn+kqxRkq4nuJ7yihw2oVL4Jce+Qe8iecc?=
- =?us-ascii?Q?Vkfc/eg59g1wzxOzuRyzWnRzmFpj8W8A7d3I93WYyWnwsgIsMIzm6DBB+I6o?=
- =?us-ascii?Q?5WD1iEdGiVbmO3cVboKg2+WCBSQ6HYWlG3RBWpVpxHRza7DnKZL0EOAvJAO7?=
- =?us-ascii?Q?STplAXpTJ+8HQ1ff7sI9lZwMDfgA3X5cOmwQuQUaQ1qz439ekxwZQc/vZjYB?=
- =?us-ascii?Q?4f1gCbM4ix8g+Reo7WrDFk0Q+Ne1MbAeELvN3GGpfmeB8zONWJ546uUKR4ce?=
- =?us-ascii?Q?26W4KrkpTp47nOFa6uWIpKb11yTZ8sbGQ1pa+ljxqNT24wquqH8r3Jl16TlF?=
- =?us-ascii?Q?hcl2l28pZzbp/06gxMbxQv1GcslhINNd4zEoJsjQx39psM7ZmbZ4+sLw6SW+?=
- =?us-ascii?Q?kuAesjiiF9aOjrjfp0Dr1Q1s9NntaPBFz3ZKE/LyArc3KtKrhK6BVRg6gx1P?=
- =?us-ascii?Q?e4gekpt89/ppaArBZvJ8tdKpsttdFaJPcSyfOjBUgP3fZs8jfKphVgGvr8Sr?=
- =?us-ascii?Q?GSsNOoOK0j6N/zVJJKg6vgkfTcGbDpTpnMkQQJrsYOLlEcp2KnMop3aBECPA?=
- =?us-ascii?Q?13H74TnZLpSN3D3pZSelDwpoVuavNy49ZfHNpWE8G5OAVFbazFijXyB19HOZ?=
- =?us-ascii?Q?ycbSSFBYszBOF1Tz2kMr5C00VgIBBLrrvk+0dbEt6us+iOp5TD0VxcAFbMxJ?=
- =?us-ascii?Q?FQsop3LyX6zsyQGxB6/c+okUlnExKWxLx4lPPA+8xUZTP5gxGoEiEKvGzaKC?=
- =?us-ascii?Q?c55ows8272ApNDTdIhRHK0KmGrCKjHZwhtHi9bwBaNaAvhpsTK5L1aiDUDfY?=
- =?us-ascii?Q?rFc6336s26yc/5VKmp4b1e76llreiFEa52XSVlby7VbolXcZZwqZgWXm+aQd?=
- =?us-ascii?Q?vZnVCmeijXvuH0iSxOxfc6YAGkT3tQt/fpCoUWDwleGvpSjvZhaL8MeSsSGG?=
- =?us-ascii?Q?JU0XqK3u38cNOeakXVFMNCrweH5Ke34sJNtiDBq76HPupXqbSCibNOCUR9eH?=
- =?us-ascii?Q?OIyCpZZYs0frz6N4Ku+1VbNF3eNHJMJovTp1UVRX222lF3YQ2P48DEry6cOi?=
- =?us-ascii?Q?NwH/QhL7Z3SVAfW+65XjLXBGYwezOmEuR++LV44/Ec+TJW8s8KzznZ94WVYL?=
- =?us-ascii?Q?OJP3A+2kNYPfli6ON43St9WQJrycEVv9JXMJRAEj9qOctfylBZsLZE9MTIO7?=
- =?us-ascii?Q?KWROWe65QLQ0pWDmkZyBveM5CWDpEh/cPQGCA1PAiaeISFhg2+HQUA8EmuOf?=
- =?us-ascii?Q?B7Gq5XFh9ptPS5vzQXLEg+ctZS1scP2vPgBg34K++ONWh+pPNUf74iNp7Qg+?=
- =?us-ascii?Q?Vb0FJBfnKFYVZOb9yrkoKJJx3GTbbgZqTRdIm6sJOruGDniiKxbXr19MzYJ9?=
- =?us-ascii?Q?PTiwHTxvX8+jYsCPMiJQ36ClfmOU23C0fY66QOg2hooJAv8733XSMNmRic8r?=
- =?us-ascii?Q?zg=3D=3D?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 03c15329-c4d5-4ff0-be2c-08de15e91fcd
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2025 06:13:34.2327
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3gxNlUKfbJrDfjgCaeOpx1AGROIWWMLBFfNusaBNrJGNwdzIinagxxGaj5BjhtQDTUuFuUViMk413NENl6lPIdfzBnVLGQw+L0EMS4HV2Xo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB9494
-X-Proofpoint-ORIG-GUID: pxHuIOjfa8nrAcwTot239i84B0BxKu53
-X-Proofpoint-GUID: pxHuIOjfa8nrAcwTot239i84B0BxKu53
-X-Authority-Analysis: v=2.4 cv=F6Zat6hN c=1 sm=1 tr=0 ts=69005f10 cx=c_pps
- a=7NJmVDyNEcEWmOhjwSrRAw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=PYnjg3YJAAAA:8 a=xNf9USuDAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8
- a=87jn28RfAAAA:8 a=vggBfdFIAAAA:8 a=x_lAc-YVYSfnS8hO9p8A:9
- a=FdTzh2GWekK77mhwV6Dw:22 a=aVDrfO6s1PESLM1EhDzk:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDI4MDA1MiBTYWx0ZWRfX2mrez5Hp/DCp
- KTCQGEf7PINrPcjVVGpO48wWm6cIsEv2sUBY8mroJ9pA7zmwaGv1J09WpCJ9/ZjFqRgFvdsP1l/
- MFTV3379WzfHrJHto7/jBRm1G8Acdez+/8RaoG72xG5XatElYevD9FnAdyPB2oVYV7pXoyemcxK
- dxPKHYvkpL7xOX2+4SkgXy59OS8f83Aq92arLk+s5VC5y/bHXv1lRu6ZmpcbQL/MEAVYKqvR2QG
- i/BfbFbeLhZ8/kc8vW/8mpU/vNK9Ft3P/HZp7ajyiu+DGY42ksUURVIfhsC8n4PP6b0SVyKZpok
- DLI+O3YhWSdD/TLgsztTAicggsLAgiJ7DWGeNiJ/0uN7zaX+UlcWw0TwD/tyPyaUghsVqNUn/BA
- 4uqEJLxA5Y3hHtanZB1chRjSLHZTVA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-10-28_03,2025-10-22_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 suspectscore=0 clxscore=1015 adultscore=0
- impostorscore=0 spamscore=0 phishscore=0 malwarescore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510020000 definitions=main-2510280052
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 06:13:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121065
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Oct 2025 07:53:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121066
 
-From: Zhang Peng <peng.zhang1.cn@windriver.com>
+* CVE-2024-11403 - Upstream-Status: Backport from https://github.com/libjxl/libjxl/commit/9cc451b91b74ba470fd72bd48c121e9f33d24c99
+* CVE-2024-11498 - Upstream-Status: Backport from https://github.com/libjxl/libjxl/commit/bf4781a2eed2eef664790170977d1d3d8347efb9
 
-CVE-2024-31949:
-In FRRouting (FRR) through 9.1, an infinite loop can occur when receiving a MP/GR capability
-as a dynamic capability because malformed data results in a pointer not advancing.
-
-Reference:
-[https://nvd.nist.gov/vuln/detail/CVE-2024-31949]
-[https://salsa.debian.org/lts-team/packages/frr/-/blob/debian/7.5.1-1.1+deb10u4/debian/patches/CVE-2024-31949.patch?ref_type=tags]
-
-Upstream patches:
-[https://github.com/FRRouting/frr/pull/15640/commits/30a332dad86fafd2b0b6c61d23de59ed969a219b]
-
-Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- .../frr/frr/CVE-2024-31949.patch              | 153 ++++++++++++++++++
- .../recipes-protocols/frr/frr_8.2.2.bb        |   1 +
- 2 files changed, 154 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2024-31949.patch
+ .../libjxl/libjxl/CVE-2024-11403.patch        |  70 +++++++++++
+ .../libjxl/libjxl/CVE-2024-11498.patch        | 113 ++++++++++++++++++
+ .../libjxl/libjxl_0.10.2.bb                   |   6 +-
+ 3 files changed, 187 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch
+ create mode 100644 meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch
 
-diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2024-31949.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2024-31949.patch
+diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch b/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch
 new file mode 100644
-index 0000000000..7d6c62e95f
+index 0000000000..625218c2d3
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/frr/frr/CVE-2024-31949.patch
-@@ -0,0 +1,153 @@
-+From 54816c5b32e5318fbd1ff8335adf7e8dd93e2415 Mon Sep 17 00:00:00 2001
-+From: Donatas Abraitis <donatas@opensourcerouting.org>
-+Date: Sat, 30 Mar 2024 15:35:18 +0200
-+Subject: [PATCH] bgpd: Fix errors handling for MP/GR capabilities as dynamic
-+ capability
++++ b/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch
+@@ -0,0 +1,70 @@
++From 9cc451b91b74ba470fd72bd48c121e9f33d24c99 Mon Sep 17 00:00:00 2001
++From: szabadka <9074039+szabadka@users.noreply.github.com>
++Date: Thu, 3 Oct 2024 18:07:38 +0200
++Subject: [PATCH] Port the Huffman lookup table size fix from brunsli. (#3871)
 +
-+When receiving a MP/GR capability as dynamic capability, but malformed, do not
-+forget to advance the pointer to avoid hitting infinity loop.
-+
-+After:
-+```
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [GS0AQ-HKY0X] 127.0.0.1 rcv CAPABILITY
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 5, length 0
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 0, length 0
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [HFHDS-QT71N][EC 33554494] 127.0.0.1(donatas-pc): unrecognized capability code: 0 - ignored
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 0, code: 0, length 0
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [HFHDS-QT71N][EC 33554494] 127.0.0.1(donatas-pc): unrecognized capability code: 0 - ignored
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 0, code: 0, length 0
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [HFHDS-QT71N][EC 33554494] 127.0.0.1(donatas-pc): unrecognized capability code: 0 - ignored
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 0, code: 0, length 1
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [HFHDS-QT71N][EC 33554494] 127.0.0.1(donatas-pc): unrecognized capability code: 0 - ignored
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:15:28 donatas-laptop bgpd[353550]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+```
-+
-+Before:
-+```
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [Z1DRQ-N6Z5F] 127.0.0.1(donatas-pc): Dynamic Capability MultiProtocol Extensions afi/safi invalid (bad-value/unicast)
-+Mar 29 11:14:54 donatas-laptop bgpd[347675]: [JTVED-VGTQQ] 127.0.0.1(donatas-pc): CAPABILITY has action: 1, code: 1, length 10
-+```
-+
-+Reported-by: Iggy Frankovic <iggyfran@amazon.com>
-+Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
-+
-+CVE: CVE-2024-31949
-+Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/30a332dad86fafd2b0b6c61d23de59ed969a219b]
-+Ref debian fix: [https://salsa.debian.org/lts-team/packages/frr/-/blob/debian/7.5.1-1.1+deb10u4/debian/patches/CVE-2024-31949.patch?ref_type=tags]
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
++CVE: CVE-2024-11403
++Upstream-Status: Backport [https://github.com/libjxl/libjxl/commit/9cc451b91b74ba470fd72bd48c121e9f33d24c99]
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 +---
-+ bgpd/bgp_packet.c | 14 +++++++++-----
-+ 1 file changed, 9 insertions(+), 5 deletions(-)
++ lib/jpegli/huffman.h                   | 16 ++++++++++++----
++ lib/jxl/jpeg/enc_jpeg_huffman_decode.h | 16 ++++++++++++----
++ 2 files changed, 24 insertions(+), 8 deletions(-)
 +
-+diff --git a/bgpd/bgp_packet.c b/bgpd/bgp_packet.c
-+index bcd47e32d4..361cd7b6e1 100644
-+--- a/bgpd/bgp_packet.c
-++++ b/bgpd/bgp_packet.c
-+@@ -2420,6 +2420,7 @@ static int bgp_capability_msg_parse(struct peer *peer, uint8_t *pnt,
-+ 			zlog_info("%s Capability length error", peer->host);
-+ 			bgp_notify_send(peer, BGP_NOTIFY_CEASE,
-+ 					BGP_NOTIFY_SUBCODE_UNSPECIFIC);
-++			pnt += length;
-+ 			return BGP_Stop;
-+ 		}
-+ 		action = *pnt;
-+@@ -2432,7 +2433,7 @@ static int bgp_capability_msg_parse(struct peer *peer, uint8_t *pnt,
-+ 				  peer->host, action);
-+ 			bgp_notify_send(peer, BGP_NOTIFY_CEASE,
-+ 					BGP_NOTIFY_SUBCODE_UNSPECIFIC);
-+-			return BGP_Stop;
-++			goto done;
-+ 		}
++diff --git a/lib/jpegli/huffman.h b/lib/jpegli/huffman.h
++index f0e5e1de..99549668 100644
++--- a/lib/jpegli/huffman.h
+++++ b/lib/jpegli/huffman.h
++@@ -15,10 +15,18 @@ namespace jpegli {
 + 
-+ 		if (bgp_debug_neighbor_events(peer))
-+@@ -2445,6 +2446,7 @@ static int bgp_capability_msg_parse(struct peer *peer, uint8_t *pnt,
-+ 				"%s Capability structure is not properly filled out, expected at least %zu bytes but header length specified is %d",
-+ 				peer->host, sizeof(struct capability_mp_data),
-+ 				hdr->length);
-++			pnt += length;
-+ 			return BGP_Stop;
-+ 		}
++ constexpr int kJpegHuffmanRootTableBits = 8;
++ // Maximum huffman lookup table size.
++-// According to zlib/examples/enough.c, 758 entries are always enough for
++-// an alphabet of 257 symbols (256 + 1 special symbol for the all 1s code) and
++-// max bit length 16 if the root table has 8 bits.
++-constexpr int kJpegHuffmanLutSize = 758;
+++// Requirements: alphabet of 257 symbols (256 + 1 special symbol for the all 1s
+++// code) and max bit length 16, the root table has 8 bits.
+++// zlib/examples/enough.c works with an assumption that Huffman code is
+++// "complete". Input JPEGs might have this assumption broken, hence the
+++// following sum is used as estimate:
+++//  + number of 1-st level cells
+++//  + number of symbols
+++//  + asymptotic amount of repeated 2nd level cells
+++// The third number is 1 + 3 + ... + 255 i.e. it is assumed that sub-table of
+++// each "size" might be almost completely be filled with repetitions.
+++// Total sum is slightly less than 1024,...
+++constexpr int kJpegHuffmanLutSize = 1024;
 + 
-+@@ -2453,12 +2455,12 @@ static int bgp_capability_msg_parse(struct peer *peer, uint8_t *pnt,
-+ 			zlog_info("%s Capability length error", peer->host);
-+ 			bgp_notify_send(peer, BGP_NOTIFY_CEASE,
-+ 					BGP_NOTIFY_SUBCODE_UNSPECIFIC);
-++			pnt += length;
-+ 			return BGP_Stop;
-+ 		}
++ struct HuffmanTableEntry {
++   uint8_t bits;    // number of bits used for this symbol
++diff --git a/lib/jxl/jpeg/enc_jpeg_huffman_decode.h b/lib/jxl/jpeg/enc_jpeg_huffman_decode.h
++index b8a60e41..fc9bd17b 100644
++--- a/lib/jxl/jpeg/enc_jpeg_huffman_decode.h
+++++ b/lib/jxl/jpeg/enc_jpeg_huffman_decode.h
++@@ -15,10 +15,18 @@ namespace jpeg {
 + 
-+ 		/* Fetch structure to the byte stream. */
-+ 		memcpy(&mpc, pnt + 3, sizeof(struct capability_mp_data));
-+-		pnt += hdr->length + 3;
++ constexpr int kJpegHuffmanRootTableBits = 8;
++ // Maximum huffman lookup table size.
++-// According to zlib/examples/enough.c, 758 entries are always enough for
++-// an alphabet of 257 symbols (256 + 1 special symbol for the all 1s code) and
++-// max bit length 16 if the root table has 8 bits.
++-constexpr int kJpegHuffmanLutSize = 758;
+++// Requirements: alphabet of 257 symbols (256 + 1 special symbol for the all 1s
+++// code) and max bit length 16, the root table has 8 bits.
+++// zlib/examples/enough.c works with an assumption that Huffman code is
+++// "complete". Input JPEGs might have this assumption broken, hence the
+++// following sum is used as estimate:
+++//  + number of 1-st level cells
+++//  + number of symbols
+++//  + asymptotic amount of repeated 2nd level cells
+++// The third number is 1 + 3 + ... + 255 i.e. it is assumed that sub-table of
+++// each "size" might be almost completely be filled with repetitions.
+++// Total sum is slightly less than 1024,...
+++constexpr int kJpegHuffmanLutSize = 1024;
 + 
-+ 		/* We know MP Capability Code. */
-+ 		if (hdr->code == CAPABILITY_CODE_MP) {
-+@@ -2468,7 +2470,7 @@ static int bgp_capability_msg_parse(struct peer *peer, uint8_t *pnt,
-+ 			/* Ignore capability when override-capability is set. */
-+ 			if (CHECK_FLAG(peer->flags,
-+ 				       PEER_FLAG_OVERRIDE_CAPABILITY))
-+-				continue;
-++				goto done;
-+ 
-+ 			/* Convert AFI, SAFI to internal values. */
-+ 			if (bgp_map_afi_safi_iana2int(pkt_afi, pkt_safi, &afi,
-+@@ -2479,7 +2481,7 @@ static int bgp_capability_msg_parse(struct peer *peer, uint8_t *pnt,
-+ 						peer->host,
-+ 						iana_afi2str(pkt_afi),
-+ 						iana_safi2str(pkt_safi));
-+-				continue;
-++				goto done;
-+ 			}
-+ 
-+ 			/* Address family check.  */
-+@@ -2507,7 +2509,7 @@ static int bgp_capability_msg_parse(struct peer *peer, uint8_t *pnt,
-+ 				if (peer_active_nego(peer))
-+ 					bgp_clear_route(peer, afi, safi);
-+ 				else
-+-					return BGP_Stop;
-++					goto done;
-+ 			}
-+ 		} else {
-+ 			flog_warn(
-+@@ -2515,6 +2517,8 @@ static int bgp_capability_msg_parse(struct peer *peer, uint8_t *pnt,
-+ 				"%s unrecognized capability code: %d - ignored",
-+ 				peer->host, hdr->code);
-+ 		}
-++done:
-++		pnt += hdr->length + 3;
-+ 	}
-+ 
-+ 	/* No FSM action necessary */
++ struct HuffmanTableEntry {
++   // Initialize the value to an invalid symbol so that we can recognize it
 +-- 
-+2.34.1
++2.50.1
 +
-diff --git a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-index 975607f5af..857973df16 100644
---- a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-+++ b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
-@@ -35,6 +35,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/8.2 \
-            file://CVE-2024-31951.patch \
-            file://CVE-2024-31948.patch \
-            file://CVE-2024-55553.patch \
-+           file://CVE-2024-31949.patch \
- 	      "
+diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch b/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch
+new file mode 100644
+index 0000000000..25f85e1527
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch
+@@ -0,0 +1,113 @@
++From bf4781a2eed2eef664790170977d1d3d8347efb9 Mon Sep 17 00:00:00 2001
++From: Luca Versari <veluca@google.com>
++Date: Thu, 21 Nov 2024 16:33:08 +0100
++Subject: [PATCH] Check height limit in modular trees. (#3943)
++
++Also rewrite the implementation to use iterative checking instead of
++recursive checking of tree property values, to ensure stack usage is
++low.
++
++Before, it was possible for appropriately-crafted files to use a
++significant amount of stack (in the order of hundreds of MB).
++
++CVE: CVE-2024-11498
++Upstream-Status: Backport [https://github.com/libjxl/libjxl/commit/bf4781a2eed2eef664790170977d1d3d8347efb9]
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ lib/jxl/modular/encoding/dec_ma.cc | 66 ++++++++++++++++++++----------
++ 1 file changed, 45 insertions(+), 21 deletions(-)
++
++diff --git a/lib/jxl/modular/encoding/dec_ma.cc b/lib/jxl/modular/encoding/dec_ma.cc
++index b53b9a91..df2948d8 100644
++--- a/lib/jxl/modular/encoding/dec_ma.cc
+++++ b/lib/jxl/modular/encoding/dec_ma.cc
++@@ -6,6 +6,7 @@
++ #include "lib/jxl/modular/encoding/dec_ma.h"
++ 
++ #include <limits>
+++#include <vector>
++ 
++ #include "lib/jxl/base/printf_macros.h"
++ #include "lib/jxl/dec_ans.h"
++@@ -17,23 +18,49 @@ namespace jxl {
++ 
++ namespace {
++ 
++-Status ValidateTree(
++-    const Tree &tree,
++-    const std::vector<std::pair<pixel_type, pixel_type>> &prop_bounds,
++-    size_t root) {
++-  if (tree[root].property == -1) return true;
++-  size_t p = tree[root].property;
++-  int val = tree[root].splitval;
++-  if (prop_bounds[p].first > val) return JXL_FAILURE("Invalid tree");
++-  // Splitting at max value makes no sense: left range will be exactly same
++-  // as parent, right range will be invalid (min > max).
++-  if (prop_bounds[p].second <= val) return JXL_FAILURE("Invalid tree");
++-  auto new_bounds = prop_bounds;
++-  new_bounds[p].first = val + 1;
++-  JXL_RETURN_IF_ERROR(ValidateTree(tree, new_bounds, tree[root].lchild));
++-  new_bounds[p] = prop_bounds[p];
++-  new_bounds[p].second = val;
++-  return ValidateTree(tree, new_bounds, tree[root].rchild);
+++Status ValidateTree(const Tree &tree) {
+++  int num_properties = 0;
+++  for (auto node : tree) {
+++    if (node.property >= num_properties) {
+++      num_properties = node.property + 1;
+++    }
+++  }
+++  std::vector<int> height(tree.size());
+++  std::vector<std::pair<pixel_type, pixel_type>> property_ranges(
+++      num_properties * tree.size());
+++  for (int i = 0; i < num_properties; i++) {
+++    property_ranges[i].first = std::numeric_limits<pixel_type>::min();
+++    property_ranges[i].second = std::numeric_limits<pixel_type>::max();
+++  }
+++  const int kHeightLimit = 2048;
+++  for (size_t i = 0; i < tree.size(); i++) {
+++    if (height[i] > kHeightLimit) {
+++      return JXL_FAILURE("Tree too tall: %d", height[i]);
+++    }
+++    if (tree[i].property == -1) continue;
+++    height[tree[i].lchild] = height[i] + 1;
+++    height[tree[i].rchild] = height[i] + 1;
+++    for (size_t p = 0; p < static_cast<size_t>(num_properties); p++) {
+++      if (p == static_cast<size_t>(tree[i].property)) {
+++        pixel_type l = property_ranges[i * num_properties + p].first;
+++        pixel_type u = property_ranges[i * num_properties + p].second;
+++        pixel_type val = tree[i].splitval;
+++        if (l > val || u <= val) {
+++          return JXL_FAILURE("Invalid tree");
+++        }
+++        property_ranges[tree[i].lchild * num_properties + p] =
+++            std::make_pair(val + 1, u);
+++        property_ranges[tree[i].rchild * num_properties + p] =
+++            std::make_pair(l, val);
+++      } else {
+++        property_ranges[tree[i].lchild * num_properties + p] =
+++            property_ranges[i * num_properties + p];
+++        property_ranges[tree[i].rchild * num_properties + p] =
+++            property_ranges[i * num_properties + p];
+++      }
+++    }
+++  }
+++  return true;
++ }
++ 
++ Status DecodeTree(BitReader *br, ANSSymbolReader *reader,
++@@ -82,10 +109,7 @@ Status DecodeTree(BitReader *br, ANSSymbolReader *reader,
++                        tree->size() + to_decode + 2, Predictor::Zero, 0, 1);
++     to_decode += 2;
++   }
++-  std::vector<std::pair<pixel_type, pixel_type>> prop_bounds;
++-  prop_bounds.resize(256, {std::numeric_limits<pixel_type>::min(),
++-                           std::numeric_limits<pixel_type>::max()});
++-  return ValidateTree(*tree, prop_bounds, 0);
+++  return ValidateTree(*tree);
++ }
++ }  // namespace
++ 
++-- 
++2.50.1
++
+diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb b/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb
+index eced6c7726..2bf0f126b0 100644
+--- a/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb
++++ b/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb
+@@ -8,8 +8,10 @@ inherit cmake pkgconfig mime
  
- SRCREV = "79188bf710e92acf42fb5b9b0a2e9593a5ee9b05"
+ DEPENDS = "highway brotli"
+ 
+-SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1"
+-
++SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1 \
++           file://CVE-2024-11403.patch \
++           file://CVE-2024-11498.patch \
++          "
+ SRCREV = "e1489592a770b989303b0edc5cc1dc447bbe0515"
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.50.0
+2.50.1
 
 
