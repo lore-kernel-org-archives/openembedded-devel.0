@@ -1,176 +1,94 @@
-Return-Path: <philip@balister.org>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D90D7CCF9EB
-	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 12:44:17 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.web10.1805.1761720786724253613
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5131CCF9EB
+	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 12:49:57 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web10.5269.1761742190026114139
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Oct 2025 23:53:06 -0700
+ Wed, 29 Oct 2025 05:49:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@quicinc.com header.s=qcppdkim1 header.b=P9b86kOp;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.180.131, mailfrom: sasikuma@qualcomm.com)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 59T4utBQ3692119
-	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 06:53:05 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=wVlsk9WXAdXGRBQuFg4yNWEQyshWnIzVE7r
-	vUTrD91c=; b=P9b86kOp/TGu7Iaq6Y3SmHd0kytdHXDuY4pv/dXC6ISJUc4C+9L
-	FB6MsckfYQsFqv6yUGGhVzepYHcILOAtAssb9mTxYgIL212amgUMikoMUctaDcS2
-	XVS7uBjRbu3cCsKlBQHWmEWZc7W4Madjww54qvB6S+np6lXW3EjLCDNRwNobx6CX
-	agvM/pSUaNBGel/tWGjCcLQAXyowEIcrHuuOMOAoddfk/9aT0WMrQtac39h3wsbV
-	I9Wa8kqH/nmurXwae8aK4ETowgob/rLUniJ5IJiUd/OQ8+De0T4GgfARdpjXAlY5
-	Lfo3nd+QDdETkaOd7m0+BO8AYkXli2uM1jQ==
-Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4a34a2hgbc-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 06:53:05 +0000 (GMT)
-Received: from pps.filterd (APBLRPPMTA01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTP id 59T6r2Ow000909
-	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 06:53:02 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 4a0qmmbcwa-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 06:53:02 +0000
-Received: from APBLRPPMTA01.qualcomm.com (APBLRPPMTA01.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 59T6r1CJ000900
-	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 06:53:01 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-sasikuma-hyd.qualcomm.com [10.147.243.253])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 59T6r17K000893
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 29 Oct 2025 06:53:01 +0000
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4060212)
-	id 948935C8; Wed, 29 Oct 2025 12:23:00 +0530 (+0530)
-From: Sasi Kumar Maddineni <quic_sasikuma@quicinc.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Sasi Kumar Maddineni <quic_sasikuma@quicinc.com>
-Subject: [meta-oe][PATCH] android-tools: scope 'write' macro to prevent conflict with std::basic_ostream::write
-Date: Wed, 29 Oct 2025 12:22:58 +0530
-Message-Id: <20251029065258.3394808-1-quic_sasikuma@quicinc.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FXf197Uw;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-47109187c32so39777315e9.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 05:49:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1761742188; x=1762346988; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=WT/whZXrELp2tNUqF1jz0MBOB3ta2Rgqca1EUNVJ9qM=;
+        b=FXf197Uwu+TPAwoawaITcEylYuVNq6haod0wucynxhz/dSfoGikalNyLj0kS/t7XZw
+         WDZ+sbxH7g66gH2p5HohADZrFMUawySTZJbv/AaxriPQC7PAJUAHHBKDfNEmNkgV7nOc
+         I2juDQWFlzcdIaU8mpmHcGYmwKCtuHf8cfP5PdTJQiLYaDAGnVgzyZxqaEv0gZZEJc8q
+         +rarcgvAcnagXRC1LUpwhDfx80Odz7yYS6ZKRe9Y8EcSUk6v7HMCNj3LmxNDRE3N9tA7
+         wHUyocALRwQ+1r0QOTqdhYk5lPYw+FaDb4o6BTvelyyaizlnO8um4An3A1UbwSdk1JI8
+         fITQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761742188; x=1762346988;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=WT/whZXrELp2tNUqF1jz0MBOB3ta2Rgqca1EUNVJ9qM=;
+        b=TzxIm4tVLNWUWHnxp7sUcbXkdfvlVy3vD4tjbd8o7IVKwU9MQq3cZzEyoGAe+4IaKF
+         Of2kSrtbA7QPmMnncp773l9S/APlBYMH6AkWBc7Hu8Tp9n8ZN6fTKHlkY6GAwCHkM85M
+         jNT5JZkfD+SAAeuL7ePtv4oXoMQKs3s7nJv6A1eQ120GjfggEWq5JxIKzhKvt1RGX9RG
+         TiA0VWOEClMEvn/UUf8sZb9WMCQpjUWRsg2VrRbt5luJ+K8XeZyEhEGAWKh+h+PTaNhc
+         4cfGSnDD+fYrHthkxi8cWvZZVz019m0YoTpc42X19uMGSQ9tMCoqBiRerWmyrwwWM4tl
+         GAaA==
+X-Forwarded-Encrypted: i=1; AJvYcCWtIHpob2ymasEXiiKMZb1mObhgv3uJwh8iNRgQ99IuBykx+XW5cmgRYkVuljpuuXRSSiXNEv6lFdfSjZai6eXedT0=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yy1N08fFvNWAqJ22lyScikbza8nNN5y/CnbRccQm8jmtu/dIi+w
+	+MODMxAmwg6A4/YWlGvIBZ86A1GmyimBIk2iLQn0j/Q8Myarjm/7yRu7
+X-Gm-Gg: ASbGncs9JrtczagFCAIooUagKvIKnmQDkAg5N6T/RA2rNMQqMrS7gzgwH6okoVE5zaz
+	t6yusjt3dp4PUY2PZiNDI/qzjn0SUJURq4IuSNmO/DtOdtbwB5xUJjJrbVm1+xgyDrl/pFxAVL1
+	BY9fuXy3JJrUo+TsZoS5CpZeFblxBreDvMB5xOUCt4d+Mqiv12n752AMqY7Kd7ZEeBTSWHsxwaY
+	BABx60uEOzj2Mzy0taSHEv2QksfBz7iRslw8ZbYL85ecI7fg3v9IheAxNlPPSGGbiPEzMhXBP1H
+	zCt0FpQs+XiH/jL9tE6gQwBPtrZVJjTj/lBoNR26gf0fQLBVq8uFPu4Kt7XQesMlRJ/cFg2g2GW
+	2UAoUCDPzGNvraQ5ByKS8kGdX2l01h39sxZHF7tkz44v301mdwzY8nF9u/hZfrHfjpGVVpQIvbV
+	jmHBhdQ1S2
+X-Google-Smtp-Source: AGHT+IHntCoISrY2pYgr0uvo60MUsf3g2hvz36G7IHbxo0ddd3iO3I2sIAZf0sNuBzXt6iJ/PWH7Yw==
+X-Received: by 2002:a05:600c:4589:b0:477:19af:31ad with SMTP id 5b1f17b1804b1-4771e38c1b7mr24606275e9.1.1761742188186;
+        Wed, 29 Oct 2025 05:49:48 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4771e3b7cb9sm55972495e9.15.2025.10.29.05.49.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 29 Oct 2025 05:49:47 -0700 (PDT)
+Message-ID: <741aa353-6af2-42bf-8982-b8ba62206352@gmail.com>
+Date: Wed, 29 Oct 2025 13:49:47 +0100
 MIME-Version: 1.0
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: uif8WKXrRiChPL2cSruWJM4OvSxtrGee
-X-Proofpoint-ORIG-GUID: uif8WKXrRiChPL2cSruWJM4OvSxtrGee
-X-Authority-Analysis: v=2.4 cv=PcvyRyhd c=1 sm=1 tr=0 ts=6901b9d1 cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22 a=COk6AnOGAAAA:8
- a=PVV792kUnmjxiNvU62QA:9 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDI5MDA0OCBTYWx0ZWRfX73Xk/+8ziotC
- w7brBPbdved1vbKSfHOjcctKqQcj1CngYiK3BFsFJSMeRGJVp9wPWqeRE4DppvRGkxxfSVZh4L9
- z9kZukKgJQcxJwMaygBxg0b66oPAArmiO4kLqT2CcArk/n3u1ZHRnuflXWo2GPWwvAyEbWiB732
- YIU2z4pAR81QpHOeZtG62kWCjyCMj8Gj9Bv0PsiwtI84HtKBgIBbGW/mkQWJLdYOkwbBPJ0/YZh
- 72hVbRbfeYqAwP26KBf4GWDGHwK8rVSv8hRwxznpa7OH9wsYYUIIQdeoJTMfTjVDehkktMLzrQm
- OSMi7BmgpItL7vvpsgskC3hl0+BIekwH/bTzQXwnltH7ZmMJNjFwh9OcMeBqrkO118erUf96xCJ
- dyQEOGZLnjMKvcPRmaypVQNv2qgXDQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-10-29_03,2025-10-22_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 spamscore=0 adultscore=0 priorityscore=1501
- lowpriorityscore=0 malwarescore=0 suspectscore=0 impostorscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2510290048
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [scarthgap][PATCH v2] imagemagick: adds ptest for
+ imagemagick recipe
+To: emailaddress.ashish@gmail.com, openembedded-devel@lists.openembedded.org
+References: <20251028102830.3329011-1-ashishkumar.mishra@bmwtechworks.in>
+ <9606.1761741031220377891@lists.openembedded.org>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <9606.1761741031220377891@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 12:44:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121149
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 12:49:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121151
 
-The build fails with a compiler error due to a macro redefinition of 'write'
-to '___xxx_write'. This macro substitution interferes with the standard C++
-library's definition of std::basic_ostream::write, leading to a mismatch
-between function declarations and definitions in <ostream.tcc>.
+On 10/29/25 13:30, Ashish Mishra via lists.openembedded.org wrote:
+> Dear Team ,
+> Please do let me know if any suggestion on this .
+> I will work on the implementation accordingly and share the patch.
 
-Wrap the `#undef write` and `#define write ___xxx_write` directives with
-`#if defined(__ANDROID__)` to ensure they are only applied when building
-for
-Android.
+There would be 2 notes, about technicalities:
+1. Don't forget to include the target layer in the subject of your patch
+message (meta-oe, meta-gnome etc...) - there are some who look for
+patches by these tags.
+2. All patches that are applicable for master branch should go to master
+branch first, and to stable branch second. That way the improvement will
+be present in later versions too.
 
-Signed-off-by: Sasi Kumar Maddineni <quic_sasikuma@quicinc.com>
----
- ...ope-write-macro-to-prevent-conflict-.patch | 52 +++++++++++++++++++
- .../android-tools/android-tools_29.0.6.r14.bb |  1 +
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch
-
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch
-new file mode 100644
-index 0000000000..61032944d8
---- /dev/null
-+++ b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch
-@@ -0,0 +1,52 @@
-+From 72b53f2d5c6e1b462a288cef3d84dd302fe603d6 Mon Sep 17 00:00:00 2001
-+From: Sasi Kumar Maddineni <quic_sasikuma@quicinc.com>
-+Date: Wed, 29 Oct 2025 11:58:20 +0530
-+Subject: [PATCH] android-tools: scope 'write' macro to prevent conflict with
-+ std::basic_ostream::write
-+
-+The build fails with a compiler error due to a macro redefinition of 'write'
-+to '___xxx_write'. This macro substitution interferes with the standard C++
-+library's definition of std::basic_ostream::write, leading to a mismatch
-+between function declarations and definitions in <ostream.tcc>.
-+
-+Wrap the `#undef write` and `#define write ___xxx_write` directives with
-+`#if defined(__ANDROID__)` to ensure they are only applied when building
-+for
-+Android.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Sasi Kumar Maddineni <quic_sasikuma@quicinc.com>
-+---
-+ system/core/adb/sysdeps.h | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/system/core/adb/sysdeps.h b/system/core/adb/sysdeps.h
-+index a4827b8a..ff51d574 100644
-+--- a/system/core/adb/sysdeps.h
-++++ b/system/core/adb/sysdeps.h
-+@@ -127,8 +127,10 @@ static __inline__ int unix_read(borrowed_fd fd, void* buf, size_t len) {
-+ static __inline__ int unix_write(borrowed_fd fd, const void* buf, size_t len) {
-+     return write(fd.get(), buf, len);
-+ }
-++#if defined(__ANDROID__)
-+ #undef   write
-+ #define  write  ___xxx_write
-++#endif
-+ 
-+ #undef pwrite
-+ #define pwrite ___xxx_pwrite
-+@@ -463,8 +465,10 @@ static __inline__ int adb_pwrite(int fd, const void* buf, size_t len, off64_t of
-+ #endif
-+ }
-+ 
-++#if defined(__ANDROID__)
-+ #undef   write
-+ #define  write  ___xxx_write
-++#endif
-+ #undef pwrite
-+ #define pwrite ___xxx_pwrite
-+ 
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
-index 24b6822433..47c8e08b62 100644
---- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
-+++ b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
-@@ -39,6 +39,7 @@ SRC_URI += " \
-     file://debian/system/core/stub-out-fastdeploy.patch \
-     file://debian/system/core/fix-standard-namespace-errors.patch \
-     file://debian/system/core/Add-riscv64-support.patch \
-+    file://debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch \
-     \
- "
- 
--- 
-2.34.1
-
+>  
+> Thanks ,
+> Ashish Kumar Mishra
+>
 
