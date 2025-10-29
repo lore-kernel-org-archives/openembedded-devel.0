@@ -1,57 +1,68 @@
-Return-Path: <denis@denix.org>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FA76CCF9F1
-	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 16:08:49 +0000 (UTC)
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.9413.1761754121552078801
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92CBBCCF9F1
+	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 16:42:59 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web10.9899.1761756170473213354
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Oct 2025 09:08:42 -0700
+ Wed, 29 Oct 2025 09:42:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id D699840C56;
-	Wed, 29 Oct 2025 16:08:40 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Eji7Ydqkkkgy; Wed, 29 Oct 2025 16:08:40 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-87-159.washdc.fios.verizon.net [100.15.87.159])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8E4A3407DA;
-	Wed, 29 Oct 2025 16:08:37 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 49CC516EBD8; Wed, 29 Oct 2025 12:08:37 -0400 (EDT)
-Date: Wed, 29 Oct 2025 12:08:37 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@lists.yoctoproject.org>,
-	openembedded-members@lists.openembedded.org
-Subject: OpenEmbedded Happy Hour October 29 9pm/2100 UTC
-Message-ID: <20251029160837.GF3125@denix.org>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout05.t-online.de (Postfix) with SMTP id 9E5911DC8
+	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 17:42:48 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([79.219.224.109]) by fwd88.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1vE9Fx-0p6LVh0; Wed, 29 Oct 2025 17:42:41 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH 1/2] spice-protocols: update 0.14.4 -> 0.14.5
+Date: Wed, 29 Oct 2025 17:42:29 +0100
+Message-ID: <20251029164230.218721-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.5.20 (2009-06-14)
+X-TOI-EXPURGATEID: 150726::1761756161-8BFFCA4B-F9FEF1AC/0/0 CLEAN NORMAL
+X-TOI-MSGID: 7b4e5a3d-84dc-4683-8fa1-df87c997a7a1
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 16:08:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121163
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 16:42:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121164
 
-All,
+Major changes in 0.14.5
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+* Add SPICE_MSG_DISPLAY_GL_SCANOUT2_UNIX
+* Fix for Windows Arm64 build
+---
+ .../{spice-protocol_0.14.4.bb =3D> spice-protocol_0.14.5.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/spice/{spice-protocol_0.14.4.bb =3D=
+> spice-protocol_0.14.5.bb} (89%)
 
-Sorry for last minute reminder, but we have our monthly OpenEmbedded Happy 
-Hour today, Wednesday October 29 at 2100/9pm UTC (5pm ET/2pm PT). This is a 
-later timeslot for the APAC (Asia-Pacific) region.
+diff --git a/meta-networking/recipes-support/spice/spice-protocol_0.14.4.=
+bb b/meta-networking/recipes-support/spice/spice-protocol_0.14.5.bb
+similarity index 89%
+rename from meta-networking/recipes-support/spice/spice-protocol_0.14.4.b=
+b
+rename to meta-networking/recipes-support/spice/spice-protocol_0.14.5.bb
+index 7f08eebee7..9ac6833d67 100644
+--- a/meta-networking/recipes-support/spice/spice-protocol_0.14.4.bb
++++ b/meta-networking/recipes-support/spice/spice-protocol_0.14.5.bb
+@@ -8,7 +8,7 @@ HOMEPAGE =3D "https://spice-space.org"
+ LICENSE =3D "BSD-3-Clause"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db37311cb5604f3e5cc2fb0fd23527=
+e95"
+=20
+-SRCREV =3D "6f453a775d87087c6ba59fc180c1a1e466631a47"
++SRCREV =3D "c5c2f26422b44e3143c87814af73c38125d4ccfc"
+=20
+ SRC_URI =3D "git://gitlab.freedesktop.org/spice/spice-protocol.git;proto=
+col=3Dhttps;branch=3Dmaster"
+=20
+--=20
+2.51.0
 
-https://www.openembedded.org/wiki/Calendar
-https://www.openembedded.org/wiki/Happy_Hours
-https://www.timeanddate.com/worldclock/fixedtime.html?msg=OpenEmbedded+Happy+Hour+October+29&iso=20251029T21
-
-Best regards,
-Denys Dmytriyenko
-OpenEmbedded Board of Directors
 
