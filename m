@@ -1,125 +1,90 @@
-Return-Path: <philip@balister.org>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4526CCF9EE
-	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 17:23:19 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.web10.10587.1761758368717219876
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C51A3CCF9EE
+	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 17:24:09 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web10.10671.1761758643010879480
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Oct 2025 10:19:29 -0700
+ Wed, 29 Oct 2025 10:24:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: bst@pengutronix.de)
-Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
-	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
-	(envelope-from <bst@pengutronix.de>)
-	id 1vE9pW-00014O-Pz; Wed, 29 Oct 2025 18:19:26 +0100
-From: "Bastian Krause" <bst@pengutronix.de>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
+	by mailout06.t-online.de (Postfix) with SMTP id EEF751D0EC
+	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 18:24:00 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([79.219.224.109]) by fwd70.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1vE9tv-3W2gNt0; Wed, 29 Oct 2025 18:23:59 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: yocto@pengutronix.de,
-	Liu Yiding <liuyd.fnst@fujitsu.com>,
-	Bastian Krause <bst@pengutronix.de>
-Subject: [meta-networking][PATCH] chrony: upgrade 4.7 -> 4.8
-Date: Wed, 29 Oct 2025 18:19:13 +0100
-Message-ID: <20251029171913.3890761-1-bst@pengutronix.de>
-X-Mailer: git-send-email 2.47.3
+Subject: [meta-gnome][PATCH] gnome-boxes: update 48.0 -> 49.0
+Date: Wed, 29 Oct 2025 18:23:54 +0100
+Message-ID: <20251029172354.294139-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:1101:1d::ac
-X-SA-Exim-Mail-From: bst@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1761758639-3F7FD880-8FD63660/0/0 CLEAN NORMAL
+X-TOI-MSGID: 2b7b5732-a474-405d-9330-73e6411911a8
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 17:23:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121167
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 17:24:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121168
 
-0001-Fix-compilation-with-musl.patch is obsolete due to
-948ecf8 ("hash: include util.h for MIN macro") included in chrony since
-version 3.5.
+49.0 - Sept 16, 2025
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-From chrony's NEWS [1] for the 4.8 release:
+Changes since 49.rc.1
 
-Enhancements
-------------
-* Add maxunreach option to limit selection of unreachable sources
-* Add -u option to chronyc to drop root privileges (default chronyc user
-  is set by configure script)
+  - Added/updated/fixed translations
 
-Bug fixes
----------
-* Hide chronyc socket to mitigate unsafe permissions change
-* Fix refclock extpps option to work on Linux >= 6.15
-* Validate refclock samples for reachability updates
+49.rc.1 - Aug 29, 2025
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-[1] https://chrony-project.org/news.html
+Re-release fixing Flatpak CI build for the release-service CI job
 
-Signed-off-by: Bastian Krause <bst@pengutronix.de>
+49.rc - Aug 29, 2025
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Changes since 49.alpha
+
+  - Added/updated/fixed translations
+  - Default virtual machine storage disks to 30 GiB (from 20 Gib)
+  - Add vala 'CCode' attribute for null terminated string array
 ---
- .../0001-Fix-compilation-with-musl.patch      | 31 -------------------
- .../chrony/{chrony_4.7.bb => chrony_4.8.bb}   |  5 +--
- 2 files changed, 1 insertion(+), 35 deletions(-)
- delete mode 100644 meta-networking/recipes-support/chrony/chrony/0001-Fix-compilation-with-musl.patch
- rename meta-networking/recipes-support/chrony/{chrony_4.7.bb => chrony_4.8.bb} (97%)
+ .../gnome-boxes/{gnome-boxes_48.0.bb =3D> gnome-boxes_49.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome=
+-boxes/{gnome-boxes_48.0.bb =3D> gnome-boxes_49.0.bb} (90%)
 
-diff --git a/meta-networking/recipes-support/chrony/chrony/0001-Fix-compilation-with-musl.patch b/meta-networking/recipes-support/chrony/chrony/0001-Fix-compilation-with-musl.patch
-deleted file mode 100644
-index 5e2bc64af3..0000000000
---- a/meta-networking/recipes-support/chrony/chrony/0001-Fix-compilation-with-musl.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From 11ec10cdb5ab4b94c5999e018a9c854419997761 Mon Sep 17 00:00:00 2001
--From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
--Date: Wed, 10 Apr 2019 03:18:17 +0200
--Subject: [PATCH] Fix compilation with musl
--
--Fixes:
--../hash_intmd5.c:58: undefined reference to `MIN'
--
--Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-----
--Upstream-Status: Pending
--
-- hash_intmd5.c | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/hash_intmd5.c b/hash_intmd5.c
--index 49da1cf..47efe4c 100644
----- a/hash_intmd5.c
--+++ b/hash_intmd5.c
--@@ -33,6 +33,8 @@
-- 
-- #include "md5.c"
-- 
--+#include <sys/param.h>
--+
-- static MD5_CTX ctx;
-- 
-- int
---- 
--2.17.1
--
-diff --git a/meta-networking/recipes-support/chrony/chrony_4.7.bb b/meta-networking/recipes-support/chrony/chrony_4.8.bb
-similarity index 97%
-rename from meta-networking/recipes-support/chrony/chrony_4.7.bb
-rename to meta-networking/recipes-support/chrony/chrony_4.8.bb
-index 0af542869e..826bffc323 100644
---- a/meta-networking/recipes-support/chrony/chrony_4.7.bb
-+++ b/meta-networking/recipes-support/chrony/chrony_4.8.bb
-@@ -36,10 +36,7 @@ SRC_URI = "https://chrony-project.org/releases/chrony-${PV}.tar.gz \
-     file://arm_eabi.patch \
- "
- 
--SRC_URI:append:libc-musl = " \
--    file://0001-Fix-compilation-with-musl.patch \
--"
--SRC_URI[sha256sum] = "c0de41a8c051e5d32b101b5f7014b98ca978b18e592f30ce6840b6d4602d947b"
-+SRC_URI[sha256sum] = "33ea8eb2a4daeaa506e8fcafd5d6d89027ed6f2f0609645c6f149b560d301706"
- 
- DEPENDS = "pps-tools"
- 
--- 
-2.47.3
+diff --git a/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/=
+gnome-boxes/gnome-boxes_48.0.bb b/meta-gnome/dynamic-layers/meta-virtuali=
+zation/recipes-gnome/gnome-boxes/gnome-boxes_49.0.bb
+similarity index 90%
+rename from meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/g=
+nome-boxes/gnome-boxes_48.0.bb
+rename to meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gno=
+me-boxes/gnome-boxes_49.0.bb
+index 41f576bcab..ebc630062f 100644
+--- a/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-b=
+oxes/gnome-boxes_48.0.bb
++++ b/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-b=
+oxes/gnome-boxes_49.0.bb
+@@ -34,7 +34,7 @@ RDEPENDS:${PN} =3D "glib-2.0-dev libvirt-virsh qemu-com=
+mon qemu-system-x86-64 geni
+=20
+ inherit gnomebase gsettings pkgconfig mime-xdg gtk-icon-cache gobject-in=
+trospection vala features_check
+=20
+-SRC_URI[archive.sha256sum] =3D "d05f5f42568fafbf6d88771161b06ed5f739d431=
+21278d418cae95c56e513ead"
++SRC_URI[archive.sha256sum] =3D "fa47266da6f5ef7a904c5b8769d4d871bccd4e6b=
+639a363c3235438d7b0e757a"
+=20
+ GIR_MESON_OPTION =3D ""
+ VALA_MESON_OPTION =3D ""
+--=20
+2.51.0
 
 
