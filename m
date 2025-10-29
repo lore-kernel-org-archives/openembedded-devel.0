@@ -1,180 +1,275 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D499CCF9F6
-	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 13:40:58 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.web01.6389.1761745256044745727
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB8C1CCF9F0
+	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 14:44:48 +0000 (UTC)
+Received: from CO1PR03CU002.outbound.protection.outlook.com (CO1PR03CU002.outbound.protection.outlook.com [52.101.46.1])
+ by mx.groups.io with SMTP id smtpd.web01.7563.1761749082084663142
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Oct 2025 06:40:56 -0700
+ Wed, 29 Oct 2025 07:44:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FHNoU3K7;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-3f2cf786abeso4422304f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 06:40:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761745254; x=1762350054; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=KKbuoykqEwVH+5IqBzI5854hf6ay4jftsbTlfZVpLU4=;
-        b=FHNoU3K7pTp8hKJDLD1BQMBJeeluizBmTHvNsJiN6PM6t+Kwr1CwWPNSBpceB8ZR2X
-         aBG6VxowBOB9lhZUqxHZWbzGNgLBsW1Kmzkt6UtCyBdQH8tRJQkeLaP32VF45Yvn7lar
-         BjCV0pLeah3gIUDpuUawcPgtoAjDuB5zCJPbKdpFKp+01MJ1N80Bpf7myPtYXb1I0mMp
-         bsQP7MAytdYEw+msEjeuMitj/ZPc7Eq0HYnC4dVGu+qJzE+cQPmCyx5QeUj5WX2Z43eC
-         khYaE39XjQxjt4NkM3kweoXZ/FWUUgxNv87TvP6CancykFDAuX9auSLnNxF4VMzmcVX+
-         EASw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761745254; x=1762350054;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=KKbuoykqEwVH+5IqBzI5854hf6ay4jftsbTlfZVpLU4=;
-        b=kf6FE6OXHDHEgA/PQhH+znAOStS6aC4KPzst8dAnvXOT1eHKedbQLxa4PAieeWP4WR
-         NVyrVX1WpoXbHrEvaosQbfL22u/gm+ZLk/rsUeOMGQwD+CWQoXiEaorb+rj6eGnmY8z4
-         7ISlkPqlUFz7KfmsvPhO9ryLTVEhbg8cBklfYZK7nsB4EYV9b1QumatwS4HdEbZXvhww
-         cXo/TT9pPeCHX9lVyIdmP57rm70Is/KEKn9+vNUI3uIVgsJmRq9I5lWG5WXhrJ0EmFev
-         96V9zmGFKKBb7D1LMED59wA9jB2VAYnB1PsiNOYUuYuEwkdGPD0kv146Xkav2/n2MRa6
-         9xgA==
-X-Gm-Message-State: AOJu0YxKH8z/Sna/9i9TjhWd+1hWYQqZDodkQOwx0ujj8v8ucpfr7YES
-	WJwkKpfh2gOxtWVpmRfkFNVRTVSbZuI5Go0cRzdccrr6R6WV9YcFTPiy/n4K7ZOu
-X-Gm-Gg: ASbGncuabNUvfsgTc70GPe/jiLlFrnvOwkAp0flIh2Hz0yYJm0yszItqSPsBejZMEZe
-	K3/Cj4sPzRdnPa2Uth00/J4JCjKSn4NYtkNoQZac0ahoLhn2+AEuWDo+1NTZDUgmIIFRo4fDRoO
-	orquGZTgpLc0/C8GO6SNzH75VZkak5giXqKbKArLGwawDXOvD4Nd3eFiSwJ6ZZqRjxhcWKWd7ml
-	ygEVk4UCw7G6LBVoQ77BQUfbQU4Y6hlNmjI1B2xUiNA/pY1hAuvucyoT83+1TnWTcJSOtne+i2M
-	pnI2HTuwu7o5WwbSf0oGGVNLE9tjY8dfao95QH0vIHuM8F/0tF+W/+76zJEz/xw7qoiobJK0Bx4
-	EBg2BH3DA16rP1j5MU9cMv5xWdsYLrzlcEhT7zLun/uqbVsS6ZivbxB9eM09hrr87G21qBynj3A
-	==
-X-Google-Smtp-Source: AGHT+IFV4g9czWcUJ8wNtv5krJ0b64CqTXoN0408Iap58W0Z4KBg8fZgpaxNDlTPbxtBsnvRC7cDUw==
-X-Received: by 2002:a05:6000:4308:b0:429:8a0f:754f with SMTP id ffacd0b85a97d-429aefdd567mr2059837f8f.55.1761745254312;
-        Wed, 29 Oct 2025 06:40:54 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952d5678sm25950484f8f.22.2025.10.29.06.40.53
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Oct 2025 06:40:53 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-perl][kirkstone][PATCH 4/5] libconfig-autoconf-perl: fix ptests
-Date: Wed, 29 Oct 2025 14:40:49 +0100
-Message-ID: <20251029134050.3455088-4-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.2
-In-Reply-To: <20251029134050.3455088-1-skandigraun@gmail.com>
-References: <20251029134050.3455088-1-skandigraun@gmail.com>
+ dkim=pass header.i=@ti.com header.s=selector1 header.b=WnSl671G;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.46.1, mailfrom: reatmon@ti.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=nUimD0+iwKfcjCqegiwAXChX1AEhCQFjStxERR92TxbXV3SHs44v31un1H6SSOqFRxoYLHv/vEtRfUP91r1Up0U29FxlV25daEgaYIv7v9QqsYW9qLU9Trv898Y/6Y5XrYuvwxq2xnAPz9l3CXGYGhyHwfHxKihy4bPJ9iDCF/hLug2qSi3fnBeB9YxPRAkPFnDuQ6lOdaxinNEAyLnVWwOLbn7yzd6Jhh4q3DG40EutJehHHbjXTk5DFi26plvUii8PI+dQAbhdJjLsYkRFuGzsT/e+dcpbNAPp8tkWcDhfVZ4yvTY/L7SbhCVEWvZmUQk2FUdbCCgCwt0AiWdM4w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xic5ht4R6y9ognZhNMCzScwtgR0tSHuIEC1BZfxmn58=;
+ b=ZzHfYk6LeXt+1dcB9cqrs7BVBlCWXjwEg+TEpyHamPY4PFPMqQxgFea82JvEnBpeEgNfI30YfGKymorRyWVnoHXSbmf5uR05AV0M+3QLcG2PYIKQewH3dY8SaJt7dJWcaLD2MU6vULYaEQ/kVx6KUecO75oJt41+XMfXe5SLp4dePSePUU/H8kpZqdEgUhwChtfGz22cyh7ZPfAufdNuKVbeaHW5XU+MR3AHvQScUr+qX0u4M8Ppxb2g8Hj46A+LcazHYUc5uPND3JkHGPNGUTg5seDWOUMpy5cjRtp5XkxXO55CAm+HMSGr0JWLOe8IsdVW9ee9AzTVclsf9lIUKA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xic5ht4R6y9ognZhNMCzScwtgR0tSHuIEC1BZfxmn58=;
+ b=WnSl671GqLqIA7wkojVNERThV2sS03h1ZNqQRurzbIcqUGIuZ+lUoPdNB7fnblBzUkWqXPB9iWzTSNwL21IGcB7CJnJBg1oNd14HHPSU3Ujs6/8SI+ZRnAaj/P4Kjx1v4+5VaWUqK3Oi8lX/i62po5O9JRN/3YfRSpJWSTsBf/I=
+Received: from MW4PR03CA0048.namprd03.prod.outlook.com (2603:10b6:303:8e::23)
+ by CY5PR10MB6263.namprd10.prod.outlook.com (2603:10b6:930:41::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.12; Wed, 29 Oct
+ 2025 14:44:40 +0000
+Received: from SJ1PEPF00001CDF.namprd05.prod.outlook.com
+ (2603:10b6:303:8e:cafe::69) by MW4PR03CA0048.outlook.office365.com
+ (2603:10b6:303:8e::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9253.17 via Frontend Transport; Wed,
+ 29 Oct 2025 14:44:39 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SJ1PEPF00001CDF.mail.protection.outlook.com (10.167.242.7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9275.10 via Frontend Transport; Wed, 29 Oct 2025 14:44:39 +0000
+Received: from DLEE203.ent.ti.com (157.170.170.78) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Oct
+ 2025 09:44:34 -0500
+Received: from DLEE206.ent.ti.com (157.170.170.90) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 29 Oct
+ 2025 09:44:33 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 29 Oct 2025 09:44:33 -0500
+Received: from [10.249.37.202] ([10.249.37.202])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59TEiXfj4185678;
+	Wed, 29 Oct 2025 09:44:33 -0500
+Message-ID: <5a6285d1-b614-42aa-84f6-0ecf73970f45@ti.com>
+Date: Wed, 29 Oct 2025 09:44:33 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-oe][PATCH] vulkan-cts: fix building for ARM targets without
+ NEON
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20251028223312.587426-1-dmitry.baryshkov@oss.qualcomm.com>
+Content-Language: en-US
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <20251028223312.587426-1-dmitry.baryshkov@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CDF:EE_|CY5PR10MB6263:EE_
+X-MS-Office365-Filtering-Correlation-Id: f901118b-d951-4fee-42ec-08de16f9b067
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|82310400026|376014|34020700016|36860700013|1800799024;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?bnEwVkF4d0lKYkRtRjZQY0NkZm9TaWZScklwWnJWWms1cXBNZC8rS0dyZVk3?=
+ =?utf-8?B?OVpQaXhWUDIvMko0TVdZRG5hN1hXQ09lTFlSYW13MkpsU2dMTzlmeXFPS3dh?=
+ =?utf-8?B?ellaRkdmcFR2UEFoNWhGdTlwMUFJNkR3UllNTG82L1JvVVgzWkVYWGpzQm5k?=
+ =?utf-8?B?SDBtR29nQ05DeHdQOGloMEs2czhXMmdDOEtsSHppdkZpR2t1ZFY2R1IwQWs3?=
+ =?utf-8?B?dVJZY3AwNjcwZTBjSXVaTFI0K0dwVmdrUWxvT3J0aHkrazRIZDFPTXZpbWZL?=
+ =?utf-8?B?eEtUVnJQS1VKSUZ3Rkc3UVVHMlFUL3VQdWRkcGxtWGF0TldNSml4SXZaWktE?=
+ =?utf-8?B?YkVRaFZsUGoxWUd6bE8raDM5dVNVd292RXFUM2tGSlAyZXl4MDhwZGo2Nlo1?=
+ =?utf-8?B?bmtsMDZBSmpzRW1lcWlNc1FXdEswRTZOTHdFWFRsZGVCRVRHcGIzOVlKOG9u?=
+ =?utf-8?B?RkV5a3BHSGFRdGhPeU45aitPOGp1clYvLzlOeEthQkZVcm94dG9MekQyOGVD?=
+ =?utf-8?B?RHVqZDNsMG1hY3IraUk2ZWF5QUdSWmJEUFNDdXBTN0xVcUNpLzRUdmpYWU90?=
+ =?utf-8?B?LzhaUDh1M1lhK0t3V2NZUWxlSm1aMzZxaXpSaHF6b2J3S3BTOStGTS9waE9y?=
+ =?utf-8?B?RmJWczRKUGtjTVpmSnpKWXYzYThUT2ZLYmk2dXVwQlE0eXJaUmFBa2FDc1Uy?=
+ =?utf-8?B?bG5DNnUwN2Q2QWdUOC9RaTlYUUFVOGlhc25FeFFmQkNvRU0rck9aeUJwaWlh?=
+ =?utf-8?B?cU1kc2xzbEU3aFdvNmNTMkIycG9NRGRBaTZVZERtWWw5SjdLTTR2eUZyQ3ky?=
+ =?utf-8?B?K1JHbWE4eHpCb1BCeGQ0aWJqNlI4bThPdEU4YTFJZHBmOFY4c3gwSldqNWJH?=
+ =?utf-8?B?dzZXY3NuZEJaSFh6cEtFNWJxZkQyamhmYUVuUkJhaURFUEZicWNoa1lNejY5?=
+ =?utf-8?B?VEI3MGl0dG5nenRkYW81Q203VHhvci84MzZCd1JPRmdCVDhYRGJTNmlaNkRK?=
+ =?utf-8?B?TzArZE92ZTA2L2R3cHRXMHFPSmVxcHdsd2ZETHE2MmxPNnJJVG1LZWlaQmpl?=
+ =?utf-8?B?TlQ1bDZZQW1NTHVaOUp1RDhaUGc0YitpV1VNVnE3WU9jQ3VpcE1DQ0F6VzhM?=
+ =?utf-8?B?ZXUvMkV4Zzh4VnZmVWg5NC9OSXNVb1piY3hNQ0pZc1dsWkhobVE1cWZVVW80?=
+ =?utf-8?B?ZkFsVVJQTW1hR0lHTDhSZS82R3VHSDFuZGtmUm5OakpJNlFWREFJUS82VTU2?=
+ =?utf-8?B?a3JTVlVjamxQMzUzanF5SVA4d2t6MUZVZHZXTEo3Q1hzVzRiWDFjWHl5cmxr?=
+ =?utf-8?B?RmNqNGpCc0ZwblVjbW9ZSkErN2E5UmM0am5XTCt5WnhNMEVxMThXMHdLdDNr?=
+ =?utf-8?B?ZjRFQW1TQitPQWpQcUFDQ2xWQ0VMYTE0K2ZGWDJlSFhrbEIxQjAvc3RQZVZr?=
+ =?utf-8?B?cDFHMWplMmlRa2JkNlFRUWh3ZDZUL2ZNYVN1a0EwdGxLWnd6cUthdVE4aWNp?=
+ =?utf-8?B?OUpLRS9uUlJHR2xaSzliOWxTUTZheGphSVYrMjhyNGY3RVhpSmlMWGplZ1E5?=
+ =?utf-8?B?Ni9sZGdoeHppTTExUWhHRXdvaEtOdXJqZDVKT2tKWjlWVXp2ZXN3cCtvOVdI?=
+ =?utf-8?B?Wkd3aWVqeFpsNjJMclBkK3pzck0yNmIwcXczWm5wVThIV2V5WHdrOWlCZm4y?=
+ =?utf-8?B?eDUvS2JnRDhWbzFhVkZSbjFJN0pPck5YYW1GMkdzY0FhMW1rdkduNytEcklX?=
+ =?utf-8?B?VHlVdldwNGsrTGlDNng1TXZIeHljOW9BNm94MTB2OWR6czRFVDNrSm04SUhF?=
+ =?utf-8?B?SjFhaEF6czhFQ2FCYUtBaWNWWjgvY3ZtUUgwSHRHcXZrdDExenVPNVVLekgr?=
+ =?utf-8?B?Wk9TZzAxcTFuNFdkMlhXdTUwY3lXZ09INmt1azdBWFo1NnhuUWpxTWNodXEw?=
+ =?utf-8?B?bUZ2eFJxM1lFSXV2NlN2ek1hcitnODYyazFKQVdBNExlbmNLR1U3cmxJRjJO?=
+ =?utf-8?B?T2Q1Yk55Y05IN0JkY0xHUjJNMzdtQ0VaUHk5Qlp6WUpaQll0bGFlOWxyejFC?=
+ =?utf-8?B?TUZodk1VMHBUeS92dlF4R0R5bTAreVllYVlRdTZUckpNWHp5YjhpUk8wWk9s?=
+ =?utf-8?Q?LCjs=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(34020700016)(36860700013)(1800799024);DIR:OUT;SFP:1101;
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2025 14:44:39.4115
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f901118b-d951-4fee-42ec-08de16f9b067
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	SJ1PEPF00001CDF.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR10MB6263
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 13:40:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121155
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 14:44:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121157
 
-Add missing dependencies.
 
-Also, fixing the tests have surfaced an actual bug: the module
-expects unversioned perl library to be present on the system
-(or at least present in Perl's $Config{libperl}), however the
-OE Perl build has a versioned library, which causes final linking
-to fail.
 
-A patch to correct this is part of this change, and it has been
-submitted upstream also.
+Verified this fixes the issue.  Thanks!
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../files/0001-correct-libperl-regex.patch    | 42 +++++++++++++++++++
- .../libconfig-autoconf-perl_0.319.bb          | 16 ++++++-
- 2 files changed, 56 insertions(+), 2 deletions(-)
- create mode 100644 meta-perl/recipes-perl/libconfig/files/0001-correct-libperl-regex.patch
 
-diff --git a/meta-perl/recipes-perl/libconfig/files/0001-correct-libperl-regex.patch b/meta-perl/recipes-perl/libconfig/files/0001-correct-libperl-regex.patch
-new file mode 100644
-index 0000000000..373f773070
---- /dev/null
-+++ b/meta-perl/recipes-perl/libconfig/files/0001-correct-libperl-regex.patch
-@@ -0,0 +1,42 @@
-+From 5ffd363a7acd4ef794eb265eaf6c42321097cd46 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Sat, 25 Oct 2025 15:48:51 +0200
-+Subject: [PATCH] correct libperl regex
-+
-+The module expects the libperl library's format (from $Config{libperl})
-+to be versionless, just simply libperl.so. However this value in the
-+OE builds is versioned, causing some issues.
-+
-+The module transforms this value into a linker flag, and tries to link
-+with the library. The transformation is simple: cut off the "lib" from
-+the start, and everything after the last dot.
-+
-+With versionless version, the transformation works: libperl.so -> perl
-+
-+However with versioned library it looks like this:
-+libperl.so.5.99.9 -> perl.so.5.99
-+which is just wrong.
-+
-+This patch changes this transformation in way that throws away everything
-+after the first dot (instead of the last one).
-+
-+Upstream-Status: Submitted [https://github.com/ambs/Config-AutoConf/pull/19]
-+
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ lib/Config/AutoConf.pm | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/lib/Config/AutoConf.pm b/lib/Config/AutoConf.pm
-+index 0bba5a4..a2e7099 100644
-+--- a/lib/Config/AutoConf.pm
-++++ b/lib/Config/AutoConf.pm
-+@@ -3001,7 +3001,7 @@ sub _check_link_perlapi
-+ 
-+     my $libperl = $Config{libperl};
-+     $libperl =~ s/^lib//;
-+-    $libperl =~ s/\.[^\.]*$//;
-++    $libperl =~ s/^([^\.]*)\..*$/$1/;
-+ 
-+     push @{$self->{extra_link_flags}}, "-L" . File::Spec->catdir($Config{installarchlib}, "CORE");
-+     push @{$self->{extra_libs}},       "$libperl";
-diff --git a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb
-index 5c3701f16b..c3cc388661 100644
---- a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb
-+++ b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.319.bb
-@@ -6,7 +6,7 @@ DESCRIPTION = "Config::AutoConf is intended to provide the same opportunities to
- developers as GNU Autoconf <http://www.gnu.org/software/autoconf/> does for \
- Shell developers."
- 
--HOMEPAGE=       "https://metacpan.org/release/Config-AutoConf"
-+HOMEPAGE = "https://metacpan.org/release/Config-AutoConf"
- 
- SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
-@@ -14,7 +14,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
- file://${COMMON_LICENSE_DIR}/GPL-1.0-or-later;md5=30c0b8a5048cc2f4be5ff15ef0d8cf61"
- 
--SRC_URI = "${CPAN_MIRROR}/authors/id/R/RE/REHSACK/Config-AutoConf-${PV}.tar.gz"
-+SRC_URI = "${CPAN_MIRROR}/authors/id/R/RE/REHSACK/Config-AutoConf-${PV}.tar.gz \
-+           file://0001-correct-libperl-regex.patch"
- 
- SRC_URI[md5sum] = "eeeab8cc93eef7dd2e2c343ecdf247b7"
- SRC_URI[sha256sum] = "304f66cc2653264c0fe127d21669e86d3d18cd72f2574d8f5131beec31a0a33e"
-@@ -34,6 +35,17 @@ RDEPENDS:${PN} += "perl-module-text-parsewords"
- RDEPENDS:${PN} += "perl-module-warnings"
- RRECOMMENDS:${PN} += "libfile-slurper-perl"
- 
-+RDEPENDS:${PN}-ptest += " \
-+    packagegroup-core-buildessential \
-+    perl-dev \
-+    perl-module-file-glob \
-+    perl-module-perl-ostype \
-+    perl-module-metadata"
-+
-+# One test requires perl headers (perl-dev) to compile some
-+# test application.
-+INSANE_SKIP:${PN}-ptest += "dev-deps"
-+
- S = "${WORKDIR}/Config-AutoConf-${PV}"
- 
- inherit cpan ptest-perl
+On 10/28/2025 5:33 PM, Dmitry Baryshkov wrote:
+> Pick up a patch make Vulkan CTS build on ARM hosts without NEON.
+> 
+> Reported-by: Ryan Eatmon <reatmon@ti.com>
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> ---
+>   ...ing-for-non-NEON-enabled-ARM-targets.patch | 89 +++++++++++++++++++
+>   .../vk-gl-cts/vulkan-cts_1.4.4.0.bb           |  5 +-
+>   2 files changed, 93 insertions(+), 1 deletion(-)
+>   create mode 100644 meta-oe/recipes-graphics/vk-gl-cts/files/0001-decode-fix-building-for-non-NEON-enabled-ARM-targets.patch
+> 
+> diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-decode-fix-building-for-non-NEON-enabled-ARM-targets.patch b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-decode-fix-building-for-non-NEON-enabled-ARM-targets.patch
+> new file mode 100644
+> index 000000000000..d51ccafc9427
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-decode-fix-building-for-non-NEON-enabled-ARM-targets.patch
+> @@ -0,0 +1,89 @@
+> +From 95b4ea5b8a5044fed7aeb1c279eddae709a6ce5f Mon Sep 17 00:00:00 2001
+> +From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> +Date: Tue, 28 Oct 2025 19:27:21 +0200
+> +Subject: [PATCH] decode: fix building for non-NEON-enabled ARM targets
+> +
+> +Building for non-NEON ARM targets fails with the cryptic message. Verify
+> +that it is possible to build NEON code at all.
+> +
+> +.../work/armv7at2hf-vfp-oe-linux-gnueabi/vulkan-cts/1.4.4.0/recipe-sysroot-native/usr/lib/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/15.2.0/include/arm_neon.h:11019:1:
+> +error: inlining failed in call to 'always_inline' 'uint8x16_t
+> +vld1q_u8(const uint8_t*)': target specific option mismatch
+> +11019 | vld1q_u8 (const uint8_t * __a)
+> +       | ^~~~~~~~
+> +.../work/armv7at2hf-vfp-oe-linux-gnueabi/vulkan-cts/1.4.4.0/sources/vulkan-cts-1.4.4.0/external/vulkan-video-samples/src/vk_video_decoder/libs/NvVideoParser/src/NextStartCodeNEON.cpp:22:36:
+> +note: called from here
+> +    22 |         uint8x16_t vdata = vld1q_u8(pdatain);
+> +       |                            ~~~~~~~~^~~~~~~~~
+> +
+> +Reported-by: Ryan Eatmon <reatmon@ti.com>
+> +Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> +Upstream-Status: Submitted [https://github.com/KhronosGroup/Vulkan-Video-Samples/pull/112]
+> +---
+> + .../libs/NvVideoParser/CMakeLists.txt          | 18 +++++++++++++++++-
+> + .../NvVideoParser/src/VulkanVideoDecoder.cpp   |  2 ++
+> + 2 files changed, 19 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt b/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt
+> +index 84251ed60ab9..65da635e2929 100644
+> +--- a/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt
+> ++++ b/vk_video_decoder/libs/NvVideoParser/CMakeLists.txt
+> +@@ -65,6 +65,13 @@ check_cxx_source_compiles("
+> +   #endif
+> + " IS_ARM)
+> +
+> ++check_cxx_source_compiles("
+> ++  #include <arm_neon.h>
+> ++  uint8_t *pin;
+> ++  uint8x16_t vdata;
+> ++  int main() { vdata = vld1q_u8(pin); return 0; }
+> ++  " HAS_ARM_NEON)
+> ++
+> + check_cxx_source_compiles("
+> +   #if defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86)
+> +   int main() { return 0; }
+> +@@ -85,6 +99,7 @@ if (IS_AARCH64 OR (CMAKE_GENERATOR_PLATFORM MATCHES "^aarch64") OR (CMAKE_GENERA
+> +     set(SVE_CPU_FEATURE "-march=armv8-a+sve")
+> +   endif()
+> +   MESSAGE(STATUS "Parser optimizations selected for generic ARM NEON")
+> ++  add_compile_definitions(HAS_ARM_NEON=1)
+> +   add_library(next_start_code_c OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeC.cpp include)
+> +   target_include_directories(next_start_code_c PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+> +   add_library(next_start_code_neon OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeNEON.cpp include)
+> +@@ -102,7 +117,7 @@ if (IS_AARCH64 OR (CMAKE_GENERATOR_PLATFORM MATCHES "^aarch64") OR (CMAKE_GENERA
+> +     target_link_libraries(${VULKAN_VIDEO_PARSER_LIB} next_start_code_c next_start_code_neon next_start_code_sve)
+> +     target_link_libraries(${VULKAN_VIDEO_PARSER_STATIC_LIB} next_start_code_c next_start_code_neon next_start_code_sve)
+> +   endif()
+> +-elseif (IS_ARM OR (CMAKE_GENERATOR_PLATFORM MATCHES "^arm") OR (CMAKE_GENERATOR_PLATFORM MATCHES "^ARM"))
+> ++elseif ((IS_ARM OR (CMAKE_GENERATOR_PLATFORM MATCHES "^arm") OR (CMAKE_GENERATOR_PLATFORM MATCHES "^ARM")) AND HAS_ARM_NEON)
+> +   MESSAGE(STATUS "Parser optimization for ARM ${CMAKE_SYSTEM_PROCESSOR}")
+> +   if(WIN32)
+> +     MESSAGE(STATUS "Parser optimizations selected for WIN32 VFPv4")
+> +@@ -111,6 +126,7 @@ elseif (IS_ARM OR (CMAKE_GENERATOR_PLATFORM MATCHES "^arm") OR (CMAKE_GENERATOR_
+> +     MESSAGE(STATUS "Parser optimizations selected for UNIX armv7-a+simd")
+> +     set(NEON_CPU_FEATURE "-march=armv7-a+simd")
+> +   endif()
+> ++  add_compile_definitions(HAS_ARM_NEON=1)
+> +   add_library(next_start_code_c OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeC.cpp include)
+> +   target_include_directories(next_start_code_c PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+> +   add_library(next_start_code_neon OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/src/NextStartCodeNEON.cpp include)
+> +diff --git a/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp b/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp
+> +index 83b968ef55df..eced7fcd7bba 100644
+> +--- a/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp
+> ++++ b/vk_video_decoder/libs/NvVideoParser/src/VulkanVideoDecoder.cpp
+> +@@ -335,10 +335,12 @@ bool VulkanVideoDecoder::ParseByteStream(const VkParserBitstreamPacket* pck, siz
+> +         return ParseByteStreamSVE(pck, pParsedBytes);
+> +     } else
+> + #endif //__aarch64__
+> ++#if defined(HAS_ARM_NEON)
+> +     if (m_NextStartCode == SIMD_ISA::NEON)
+> +     {
+> +         return ParseByteStreamNEON(pck, pParsedBytes);
+> +     } else
+> ++#endif // HAS_ARM_NEON
+> + #endif
+> +     {
+> +         return ParseByteStreamC(pck, pParsedBytes);
+> +--
+> +2.51.0
+> +
+> diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.4.0.bb b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.4.0.bb
+> index 465ac981f90a..4d2f223a39b6 100644
+> --- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.4.0.bb
+> +++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.4.0.bb
+> @@ -6,7 +6,10 @@ SRCREV_vk-gl-cts = "03c0746a55b78eab63c664a11948b52419e1f309"
+>   
+>   require vulkan-cts-sources.inc
+>   
+> -SRC_URI:append = " file://0001-decode-fix-build-on-ARMv7-targets.patch;patchdir=external/vulkan-video-samples/src"
+> +SRC_URI:append = " \
+> +    file://0001-decode-fix-build-on-ARMv7-targets.patch;patchdir=external/vulkan-video-samples/src \
+> +    file://0001-decode-fix-building-for-non-NEON-enabled-ARM-targets.patch;patchdir=external/vulkan-video-samples/src \
+> +"
+>   
+>   # Workaround an optimization bug that breaks createMeshShaderMiscTestsEXT
+>   OECMAKE_CXX_FLAGS:remove:toolchain-gcc = "-O2"
+
+-- 
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
 
