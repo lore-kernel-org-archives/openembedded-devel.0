@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0186BCCF9EB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B02CCCF9F1
 	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 15:55:39 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.web01.9182.1761753328941736059
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web11.9144.1761753329698727652
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 29 Oct 2025 08:55:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=T4o6qfED;
- spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-4285169c005so6995f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 08:55:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IUzDNL/e;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4771b03267bso49725e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 08:55:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761753327; x=1762358127; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1761753328; x=1762358128; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=mnz9AbtKGvYLh5RnKXcWvsUvblyTGyY14vAIomg8aUo=;
-        b=T4o6qfEDxGXUUrRyy6QGGndgDjc8HKCBJPkoIHUUQYH0j77+ee8fqFOA1EA22apz5m
-         HFuOZ4FrJQQhQRIjCUHpn8SYqpxpQr7l4Tb+0H5wPTsjVl5m1pmuCu8iqD/ur8b4OIpI
-         bxzn3KW3ZzzxLlAoWzdnXRkxJm3gB/cWXJm8a323JcSketTuB3sI5fn965WPQUeGa5Z6
-         wbN+27mC3Iq0Q5xNBm1s5bQ8tnmLxKaX9yIa5vp/oyL4X0Mo7iFKUe3SlxYrXNN/iI+s
-         QaPGAlFvXhAYNKJk/9Y7ht5s8dDZx+cf/zMgHVPTh2Dc/Z1R7DeaU08iyIsGwdFip1oS
-         17Cw==
+        bh=0M2tFFVHiNiYARRWgQ9sPXb4DeDt6BJW9Ni/8PgawkU=;
+        b=IUzDNL/epdsfxC5qlA4/6uRD6IsOBxQA41X2pU3KZHwxRoqqQW2gu35TdvZ0DbUBwT
+         q2m2DnKcNIcwwU1c6Z+XDgecz/QBlQmz3/RfTv3LLoWsAyGr3LoPmN8oBW9gGoYxrljZ
+         RtjAwfrODtvlt3xWM41clDXARN35I3QJZk7lALFGq29U83XH06dTLND1ZT3/QhAdhnAP
+         n4gOWjqBJdEy9dkycuaEPZ3unn9pkWIZ3Ptus/QxKMCxn44rYx2gXgOjI4WM7D4amvoK
+         vcGec5ctUrDE6xFKe8N+Z6KmtimbqzzCwqAjZXA1ihdxzaWEszlA2Id06ngri7+wnL9L
+         Zanw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761753327; x=1762358127;
+        d=1e100.net; s=20230601; t=1761753328; x=1762358128;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=mnz9AbtKGvYLh5RnKXcWvsUvblyTGyY14vAIomg8aUo=;
-        b=K9gkp2r16I12HVisGW813zfjMIuKx4JolKWpzdo86E5Vdf4qmqDG8RtDIWhDfn2o2H
-         jHmluYIQcKSLJs7MKG2/xMn/hM1bViEdiYMpGgyKvDLfIwXVfBjTX+JxgO25xfwCqDSp
-         yxvuUl2a5pWPDxYCcR7dXPmPaHxzKbxpGwxz89dgXD6xUFbPQgdlHZEnL/6jeNhXDbq4
-         +qcDLeIPX/xcy0tU+IVMcXgEDbgSIDT36vy8I/Fbd1f0VFC2wjLYqZeRSvkJAsX77J9r
-         wvFkwNQxLw8QsQGGNYN/+SB+HVPK8CUAYS7rDTR1cuv8zgm7SEYTSfAZtf1eW7BWK8m6
-         h5ww==
-X-Gm-Message-State: AOJu0Yw2HLTbLEQU+/o1ZQ+kG1zWX1cbhJV/zAJFxjqd+YTH7YlLwBm2
-	qocg1cZh0fC+PbEwELycCpQVY1SiGu3tZKs/C2XfpaVbTiBD38V+dLE9g9BZDoCc
-X-Gm-Gg: ASbGncvJt2Tw+5IpARvQUmOrbkhOShtzAp5Fto1ral8yo5BKv3GLK9ntyq6OSU4KZWc
-	ExUd+M4HPyfp5O0AKEIDnJFMywm/198ec6Z+hgoCwxIYhcbd4skOciyCW4w6wVM/P27MuvJ1SdL
-	BgOTBBgsi+4rpo7ABthCbPIzKeKGrrOgsA1FPX6q5qcE4SD21jSscLqCEXk3+d1cefhGSpHKndo
-	+7+HcLW+2L2PT3Dmc0hSBFJkFpgZ+gLPNsV0lqkMce538eopbp+fHUQT/7Fy3Ua/MF/oQwstGnr
-	F84RPiiQN7OHDWvhUtGmHdcGOnL5pk7X8MS58/aUqkCO0xe4R93HpdqDf760sETHgXXOSzpaSuy
-	JRC0zo8s2aAbOq1qeVFT+0JV13dWgUmlxlNf3WV082CjkT85wFX68bJ1H5UPBK1SpBqa/b+93PA
-	==
-X-Google-Smtp-Source: AGHT+IEG6LPleaUbUQBN25A3A7YAJ4L1vnVYiqvmctitglxGtK2QIIj4E3XpyYQHdBqs8RlcDXPrug==
-X-Received: by 2002:a05:6000:601:b0:427:699:a9cf with SMTP id ffacd0b85a97d-429aefb9ca4mr3203464f8f.33.1761753327268;
+        bh=0M2tFFVHiNiYARRWgQ9sPXb4DeDt6BJW9Ni/8PgawkU=;
+        b=gZKwvKZ3ZvoQfxxI7yI5HRZODuf0gyZJ2AKBKvMEDZeiDLdApwlPA6Lvi689uKgCJ5
+         gkiNHi3fVcs0MFv9MQlC0qraMhU5BES56CXXtt+RmsYJJ31nyikx0CbRR6JQzNjeZspi
+         8OWOV3zFAsrJOeCS5qssWAuWueEIfdM9downmcGFz+ScegXd3R73ILTM4eq2XzLC+lrp
+         t6VTdO5hlXwQUwE4h83FecyNbWu81WMHcAEySanEf77QT9o03LCyc1BX5d5H3Qkicu7q
+         eeMB6Io2jmJmY1HM3ShlcKNWn/XK4GThsij9UjA8zDFcTDlivFTHmhDH6+EK/ZsDxTea
+         vysw==
+X-Gm-Message-State: AOJu0YzLmNYYMv6QY7pmDJIbXlrCsiCZn04gksT7IMxpYWv8Ouc5WmFu
+	vy5KYrIMU4wp8+tpw04NYhW3B7s0lptUTtxP4x5ROcbQgpsZix8VDJvWrbqPbv7H
+X-Gm-Gg: ASbGncv1ZSiiWJUrUPh6xW2wRJ0fmWGUMjnH02UPgtY6lpRrXYRPr1o/Bv2nRHmSlq7
+	NsrFGlqD4srsPuA9SnEiuNgVQb1jDsN7WktMKUrvVwFHSS2yxWFl8soSs3U13GR5S939GZ87WiJ
+	tWvPOSN8Cn34Vbri3UPz1WOGOi2Be9gFA+WE/PR8B3JA+KaAerEqvEuaD1/6LX/pTvhhYp0+2QD
+	ATVnMvXlESIxsmPkisYaK/9dH49hjYtGOC8VF5CByE+Pio+Yr9yKQOWh4/BwUwYR4Qcvo34kWOd
+	AxzDY80giDbJAy5J+3hFvvbUIjN/9v1W/VLi3alDPwkxh4FawAKG1TPHD5bO1mkjMtxUVvQaeqC
+	WnkDgsh8J3G65WZfu9NCut2170oAR4rxCDt8wmcwnJ68BDmRcl9yXl66Nw08d7OH5V9/bRGUTYl
+	lcb2CaaAMI
+X-Google-Smtp-Source: AGHT+IH/BMZgBhKy0ECAyk7NLHvbphdwIq2Wmfhsj93hKQlEh+mFgDC/dICxgRnROxiSvpcO5eU94A==
+X-Received: by 2002:a5d:64c6:0:b0:425:8462:b72e with SMTP id ffacd0b85a97d-429b4c7f8a3mr69939f8f.3.1761753327989;
         Wed, 29 Oct 2025 08:55:27 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952d3532sm27723334f8f.20.2025.10.29.08.55.26
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952d3532sm27723334f8f.20.2025.10.29.08.55.27
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Oct 2025 08:55:26 -0700 (PDT)
+        Wed, 29 Oct 2025 08:55:27 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-perl][kirkstone][PATCH 3/4] libmime-types-perl: fix ptests
-Date: Wed, 29 Oct 2025 16:55:23 +0100
-Message-ID: <20251029155524.3550326-3-skandigraun@gmail.com>
+Subject: [meta-perl][kirkstone][PATCH 4/4] libencode-perl: fix ptests
+Date: Wed, 29 Oct 2025 16:55:24 +0100
+Message-ID: <20251029155524.3550326-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251029155524.3550326-1-skandigraun@gmail.com>
 References: <20251029155524.3550326-1-skandigraun@gmail.com>
@@ -68,26 +68,30 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 15:55:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121161
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121162
 
-Add missing dependency
+Add missing dependencies.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-perl/recipes-perl/libencode/libencode-perl_3.17.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-index d1f6f8c59c..c0946acb16 100644
---- a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-+++ b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-@@ -28,7 +28,7 @@ RDEPENDS:${PN} = "\
-     perl-module-overload \
- "
- 
--RDEPENDS:${PN}-ptest = "perl-module-lib perl-module-test-more"
-+RDEPENDS:${PN}-ptest = "libmime-types-perl perl-module-lib perl-module-test-more"
- #RSUGGESTS:${PN}-ptest = "libmojo-base-perl"
- 
- do_install () {
+diff --git a/meta-perl/recipes-perl/libencode/libencode-perl_3.17.bb b/meta-perl/recipes-perl/libencode/libencode-perl_3.17.bb
+index 8b4f292a35..9264821917 100644
+--- a/meta-perl/recipes-perl/libencode/libencode-perl_3.17.bb
++++ b/meta-perl/recipes-perl/libencode/libencode-perl_3.17.bb
+@@ -85,10 +85,12 @@ RPROVIDES:${PN} += " \
+ RDEPENDS:${PN}-ptest += " \
+     perl-module-blib \
+     perl-module-charnames \
++    perl-module-devel-peek \
+     perl-module-file-compare \
+     perl-module-file-copy \
+     perl-module-filehandle \
+     perl-module-findbin \
++    perl-module-getopt-long \
+     perl-module-integer \
+     perl-module-io-select \
+     perl-module-ipc-open3 \
 
