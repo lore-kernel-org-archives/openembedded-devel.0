@@ -2,93 +2,92 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5131CCF9EB
-	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 12:49:57 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web10.5269.1761742190026114139
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B9A1CCF9EB
+	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 13:40:58 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web10.6297.1761745255147236160
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Oct 2025 05:49:50 -0700
+ Wed, 29 Oct 2025 06:40:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FXf197Uw;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-47109187c32so39777315e9.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 05:49:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FHE1y61n;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4710022571cso75530745e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 06:40:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761742188; x=1762346988; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=WT/whZXrELp2tNUqF1jz0MBOB3ta2Rgqca1EUNVJ9qM=;
-        b=FXf197Uwu+TPAwoawaITcEylYuVNq6haod0wucynxhz/dSfoGikalNyLj0kS/t7XZw
-         WDZ+sbxH7g66gH2p5HohADZrFMUawySTZJbv/AaxriPQC7PAJUAHHBKDfNEmNkgV7nOc
-         I2juDQWFlzcdIaU8mpmHcGYmwKCtuHf8cfP5PdTJQiLYaDAGnVgzyZxqaEv0gZZEJc8q
-         +rarcgvAcnagXRC1LUpwhDfx80Odz7yYS6ZKRe9Y8EcSUk6v7HMCNj3LmxNDRE3N9tA7
-         wHUyocALRwQ+1r0QOTqdhYk5lPYw+FaDb4o6BTvelyyaizlnO8um4An3A1UbwSdk1JI8
-         fITQ==
+        d=gmail.com; s=20230601; t=1761745253; x=1762350053; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=g6HjC/dO3uriEvRDzdWqPBRPr/FOQ7bENS0cKGV7deo=;
+        b=FHE1y61ntZTsiQqqfWyBVtqUONcnOXBiRbh8MuHubBUmEztW8IRAAnkFwOMAR1p1ZT
+         cClpAQTJBxdK3EoH6kOmwJzuek2SnWQivV+UJNHHhWXOOvlp+dp2WhAqz9rlJ4xTz44w
+         n+dywRgxMn4UjPmslQVZlMP06xkXnqeUT8NwsaMnz8M9Ztdxfntf+iuGNGS4tDoj2aEf
+         EZE7IFf5/Xd5AShnQ/bMRo4Q4YX2ArQBgoWa4Nmk561rXolIz7tI9Npu6Oe5gONmkSUl
+         th2OEnLzjPhAEcqdBVN+Oxno+/FpQEr0zvVaiesCcryg/Fwg3DSuPJsWZEzln+Or2vSb
+         UT6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761742188; x=1762346988;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=WT/whZXrELp2tNUqF1jz0MBOB3ta2Rgqca1EUNVJ9qM=;
-        b=TzxIm4tVLNWUWHnxp7sUcbXkdfvlVy3vD4tjbd8o7IVKwU9MQq3cZzEyoGAe+4IaKF
-         Of2kSrtbA7QPmMnncp773l9S/APlBYMH6AkWBc7Hu8Tp9n8ZN6fTKHlkY6GAwCHkM85M
-         jNT5JZkfD+SAAeuL7ePtv4oXoMQKs3s7nJv6A1eQ120GjfggEWq5JxIKzhKvt1RGX9RG
-         TiA0VWOEClMEvn/UUf8sZb9WMCQpjUWRsg2VrRbt5luJ+K8XeZyEhEGAWKh+h+PTaNhc
-         4cfGSnDD+fYrHthkxi8cWvZZVz019m0YoTpc42X19uMGSQ9tMCoqBiRerWmyrwwWM4tl
-         GAaA==
-X-Forwarded-Encrypted: i=1; AJvYcCWtIHpob2ymasEXiiKMZb1mObhgv3uJwh8iNRgQ99IuBykx+XW5cmgRYkVuljpuuXRSSiXNEv6lFdfSjZai6eXedT0=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yy1N08fFvNWAqJ22lyScikbza8nNN5y/CnbRccQm8jmtu/dIi+w
-	+MODMxAmwg6A4/YWlGvIBZ86A1GmyimBIk2iLQn0j/Q8Myarjm/7yRu7
-X-Gm-Gg: ASbGncs9JrtczagFCAIooUagKvIKnmQDkAg5N6T/RA2rNMQqMrS7gzgwH6okoVE5zaz
-	t6yusjt3dp4PUY2PZiNDI/qzjn0SUJURq4IuSNmO/DtOdtbwB5xUJjJrbVm1+xgyDrl/pFxAVL1
-	BY9fuXy3JJrUo+TsZoS5CpZeFblxBreDvMB5xOUCt4d+Mqiv12n752AMqY7Kd7ZEeBTSWHsxwaY
-	BABx60uEOzj2Mzy0taSHEv2QksfBz7iRslw8ZbYL85ecI7fg3v9IheAxNlPPSGGbiPEzMhXBP1H
-	zCt0FpQs+XiH/jL9tE6gQwBPtrZVJjTj/lBoNR26gf0fQLBVq8uFPu4Kt7XQesMlRJ/cFg2g2GW
-	2UAoUCDPzGNvraQ5ByKS8kGdX2l01h39sxZHF7tkz44v301mdwzY8nF9u/hZfrHfjpGVVpQIvbV
-	jmHBhdQ1S2
-X-Google-Smtp-Source: AGHT+IHntCoISrY2pYgr0uvo60MUsf3g2hvz36G7IHbxo0ddd3iO3I2sIAZf0sNuBzXt6iJ/PWH7Yw==
-X-Received: by 2002:a05:600c:4589:b0:477:19af:31ad with SMTP id 5b1f17b1804b1-4771e38c1b7mr24606275e9.1.1761742188186;
-        Wed, 29 Oct 2025 05:49:48 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4771e3b7cb9sm55972495e9.15.2025.10.29.05.49.47
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 29 Oct 2025 05:49:47 -0700 (PDT)
-Message-ID: <741aa353-6af2-42bf-8982-b8ba62206352@gmail.com>
-Date: Wed, 29 Oct 2025 13:49:47 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [scarthgap][PATCH v2] imagemagick: adds ptest for
- imagemagick recipe
-To: emailaddress.ashish@gmail.com, openembedded-devel@lists.openembedded.org
-References: <20251028102830.3329011-1-ashishkumar.mishra@bmwtechworks.in>
- <9606.1761741031220377891@lists.openembedded.org>
-Content-Language: en-US
+        d=1e100.net; s=20230601; t=1761745253; x=1762350053;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=g6HjC/dO3uriEvRDzdWqPBRPr/FOQ7bENS0cKGV7deo=;
+        b=kpQLzpaHmrPGT0gHjchGq+It1HqR4dDN6hBL071Z8D6/S3tXAjpbHTWYMAWYCMlZI9
+         EAue529oJ52BYCX/3baR9CEwTCSIA07UnL3DVyWSRuRmemA9m8tA65lp3Vl5HEQTXawJ
+         Uqu4R3krLmDBU5IAWGfpHOlwLYMgofWdWBpQQ8/bZiFNKgBXTuAczTfvRFr+x5xPj2I3
+         7KJw21MoIixFN+BPBVXjd0svNyDgmOaCw7UGkHUbWE+tB07kNQbQ/c0OvbajtbFuX12z
+         3PJppbo69xb59wo71zy9RX0XaIFgvQ2lvY2Ji8NKFEn/68XfFh/ej4RSH7YFSVnBgCv3
+         it8Q==
+X-Gm-Message-State: AOJu0YzT0h5fOQxIRIDslJkXHuNxBWK7/H2k9TXasK0JYmFIRMxG8bOa
+	kn00RMAm5bvMCH/iHFq5F0UkGRJ4PVpvY1WlCrwihrLvgfhtEhVx8C1cN4lVzDSv
+X-Gm-Gg: ASbGncsjZMeIcMNVx95szbgOUoQbLir0jqr8EwHChO6eQ4mYtlHFlUwvmyfRvj5nNLW
+	Q4+i00JpfVJ2qBXMPHD4ZJtRJVylol7bCb2QVyF+JgsdvhWWPvTkCougrTknqYworCTJoJnRope
+	DQY8K62M0LZsZlah/sifGaowUVVeR0EW7AjGeZhKVaXBOpuWF1UujdkYhpMxzxfUFU1BNikttGI
+	Vj6HfJEq8t+GDqunpliUeU93S9i2n/L6fBOqDlPnjRzEUklYtPn4hplpgR2aAg6EOsREFjr1sR2
+	IEWLu+QrddGxX2faAhLCG0I8lARc0mZejZ74sG5sL4B8KYEhp/wmZw9addztptbvfRo3cI/WGNy
+	qKH5GE66WAnJymDCm87/Pp2vqei0/hfJVwqqOKTdGOM6HiOb8BUuQx1USFwldmQKousJqEnXTtg
+	==
+X-Google-Smtp-Source: AGHT+IHOiZ8Sgd4J9tjmhmPBaUZu/reLvPxFQqv8zUobXReObqoR3fIOoqumM5PeDBmSnNkDEqclZg==
+X-Received: by 2002:a05:600c:3510:b0:475:da13:257c with SMTP id 5b1f17b1804b1-4771e1f13c5mr24526285e9.27.1761745253458;
+        Wed, 29 Oct 2025 06:40:53 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952d5678sm25950484f8f.22.2025.10.29.06.40.52
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 29 Oct 2025 06:40:53 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <9606.1761741031220377891@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-perl][kirkstone][PATCH 3/5] libauthen-sasl-perl: fix ptest
+Date: Wed, 29 Oct 2025 14:40:48 +0100
+Message-ID: <20251029134050.3455088-3-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.2
+In-Reply-To: <20251029134050.3455088-1-skandigraun@gmail.com>
+References: <20251029134050.3455088-1-skandigraun@gmail.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 12:49:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121151
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 13:40:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121154
 
-On 10/29/25 13:30, Ashish Mishra via lists.openembedded.org wrote:
-> Dear Team ,
-> Please do let me know if any suggestion on this .
-> I will work on the implementation accordingly and share the patch.
+Add missing dependencies.
 
-There would be 2 notes, about technicalities:
-1. Don't forget to include the target layer in the subject of your patch
-message (meta-oe, meta-gnome etc...) - there are some who look for
-patches by these tags.
-2. All patches that are applicable for master branch should go to master
-branch first, and to stable branch second. That way the improvement will
-be present in later versions too.
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
->  
-> Thanks ,
-> Ashish Kumar Mishra
->
+diff --git a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
+index a9eec69502..e4d04b16cb 100644
+--- a/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
++++ b/meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
+@@ -27,4 +27,8 @@ do_install_ptest () {
+     cp -r ${B}/t ${D}${PTEST_PATH}
+ }
+ 
++RDEPENDS:${PN}-ptest += "perl-module-test-more \
++                         perl-module-findbin \
++                         perl-module-tie-handle"
++
+ BBCLASSEXTEND = "native"
 
