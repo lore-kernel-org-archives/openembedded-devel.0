@@ -1,90 +1,132 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C51A3CCF9EE
-	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 17:24:09 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.web10.10671.1761758643010879480
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F18DCCF9EB
+	for <webhook@archiver.kernel.org>; Wed, 29 Oct 2025 17:46:10 +0000 (UTC)
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.web01.11161.1761759964108129306
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Oct 2025 10:24:03 -0700
+ Wed, 29 Oct 2025 10:46:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
-Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
-	by mailout06.t-online.de (Postfix) with SMTP id EEF751D0EC
-	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 18:24:00 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([79.219.224.109]) by fwd70.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vE9tv-3W2gNt0; Wed, 29 Oct 2025 18:23:59 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] gnome-boxes: update 48.0 -> 49.0
-Date: Wed, 29 Oct 2025 18:23:54 +0100
-Message-ID: <20251029172354.294139-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.51.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=e3BWM/PK;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-29292eca5dbso1417895ad.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 10:46:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1761759963; x=1762364763; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=tmjCrgmxr+JzuD9gNv01t39IdT1M6tNQWnhAsGghgGk=;
+        b=e3BWM/PKhpyw3Pn+dDgwm6rmJ6LTY+rM4Iv6NwW8m6X2MXhJkO+3GYCqZW3tvlZry6
+         GGUQHaeRR3qFvAVMUOvEci493F0OO7jyLbGSDyEavyTrCu6X4yCjhOEcojTJYzauGUxs
+         nFTEmok7hR71OgYL9bAZQsGT7RV6ZPyIdxHPm1d8Ys5QxHuwawaH1EzpO0V0HUeihHVs
+         AsYMOfu5vyEMWvO4YS7dTI883E/iCYtDlKnKtEovgJNoK8iedVr6B+q/WzLEWJYMefxp
+         MtIrF94SNgvKNqmcc1aFHetGQPWu7kNf8ziOCtV9Niy6D5144LZQoAonVd97msaac3Bv
+         BJwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761759963; x=1762364763;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=tmjCrgmxr+JzuD9gNv01t39IdT1M6tNQWnhAsGghgGk=;
+        b=mKLHs3z80Qw12u3xWzhyUR3csDEjPlg+x8ksZoPsUt+JQ6DZek8awOd6BRibCuQdWx
+         w/W9N+eR+2j22RMGwYHfIOKrT/82BJB0Qq3nlChxXAAqCcsSrLrNkL6PZYF2k68rp3cJ
+         c42HKlAYIEYJBSYJailfzMNWjkpb6ET6OYxiIqE6lpEiDjjqXlUAV9151ydjI9Rb1tO1
+         ZRAIOKT+vLspu12tkgiXaSC60oWb8lOx50bDrO46nJX92DMvvzBpNzMYqa7QBEciKbYd
+         FIPBLWTxtlK9eFemlvZrOYVXVW7RtRVc5rLB5/6LKJCg8FN0r3dfAOGbCtzwzGa6VyN5
+         QFjA==
+X-Forwarded-Encrypted: i=1; AJvYcCWOLEsB9SbMxbMruKWflgGpHoenaTSN/COE9xUuuXmwOXbH5Fpi5u55arYOlAnIlD+sh8YLuTClK2CCH9yv/OwSbRQ=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YwSp/uyOJhoOt99Kn8khDsI9nyUo3akmY8JsAayP2ctMz3Z7a71
+	KpLhW0xz0c56aCpYfoAMQcsl+6vWN/ff+rlh2BA9lH+OJQNDds3PMo/W
+X-Gm-Gg: ASbGncvafwxq4ZNOtLqfZ4Sz0gVj2o5kbgtQNTcOAJgvPs+ThLhQDs2LvHiHL+uxiDi
+	9qFOF+w4mG9HYX/lURmr9CWoJGn9ctLThDk/0n2eNZt6CHzu70CtFMIUZXL5fk33BI7n0bLorbm
+	Oa5VbkKluPIlu2HRiEjL2c0Uf98QdLIX5n2WlHF8ibsHdn3vwq4g3UyI0j+PgrV9S70QrNaRGCo
+	g87aZPcaEhUs0XCIRW2IGmz6k0vaVj2n+xv6h1jm/BAYZAmI+gEoLs9TA88vqr36KeWr2cywBzI
+	6CNnPuKElmHx5eVY2GeqbTCjACmzx9588w9ZvPW+tJBBRCKJaBTcdKAB7CoRc9TRVt88mEaNoCb
+	hBhY+RxnQU51kMdWdMaVX0K4qnuzPHBU+HyV3aPJ95v/doc4gx7J6qNqlCP4sq0fHJwKN9L4Gt9
+	hnbxnLwtNhn9hXRNssj6ysgAOZkbXXvf/M6tqQMOggQ9nMMWaJ3KS1Y1yc04XZCLWG7imA0pnsK
+	r0bCPmohxu8L5bkX9MsjURvm4Djxg6salPLWnbAJUBbv+DZgEPU
+X-Google-Smtp-Source: AGHT+IGA8oZKeXZkIeaALJ5+o7iaBj2QWvFmM091kE6nFtRjnXfmyP0WF6Ed/N2NqfvpUVu/vjgsAg==
+X-Received: by 2002:a17:902:f601:b0:24c:cb60:f6f0 with SMTP id d9443c01a7336-294ee479ab4mr1435515ad.58.1761759963294;
+        Wed, 29 Oct 2025 10:46:03 -0700 (PDT)
+Received: from ?IPV6:2601:646:8201:fd20:1103:ba81:afc8:4f67? ([2601:646:8201:fd20:1103:ba81:afc8:4f67])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29498d0acecsm156955825ad.38.2025.10.29.10.46.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 29 Oct 2025 10:46:02 -0700 (PDT)
+Message-ID: <43896f35-8987-492f-8428-fe70039cb7ea@gmail.com>
+Date: Wed, 29 Oct 2025 10:46:01 -0700
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1761758639-3F7FD880-8FD63660/0/0 CLEAN NORMAL
-X-TOI-MSGID: 2b7b5732-a474-405d-9330-73e6411911a8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-python] [PATCH 18/32] python3-grpcio: upgrade 1.75.1
+ -> 1.76.0
+To: skandigraun@gmail.com, wangmy@fujitsu.com,
+ openembedded-devel@lists.openembedded.org
+References: <20251029001505.528-1-wangmy@fujitsu.com>
+ <20251029001505.528-18-wangmy@fujitsu.com>
+ <e6122055-c186-4d79-91c7-f1fba7c68250@gmail.com>
+Content-Language: en-US
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <e6122055-c186-4d79-91c7-f1fba7c68250@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 17:24:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121168
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 17:46:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121169
 
-49.0 - Sept 16, 2025
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Changes since 49.rc.1
 
-  - Added/updated/fixed translations
+On 10/29/25 1:25 AM, Gyorgy Sarvari via lists.openembedded.org wrote:
+> I wonder, aren't these python3-grpc* packages supposed to be updated in
+> lockstep with the grpc recipe, at least regarding the major version? Or
+> are these backwards compatible?
 
-49.rc.1 - Aug 29, 2025
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+I do not see it depend upon system libgrpc which means its building a 
+bundled version in that case it will be fine. 1.76.0 will communicate ok 
+with a server running 1.75.x, so technically its ok IMO.
 
-Re-release fixing Flatpak CI build for the release-service CI job
-
-49.rc - Aug 29, 2025
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-Changes since 49.alpha
-
-  - Added/updated/fixed translations
-  - Default virtual machine storage disks to 30 GiB (from 20 Gib)
-  - Add vala 'CCode' attribute for null terminated string array
----
- .../gnome-boxes/{gnome-boxes_48.0.bb =3D> gnome-boxes_49.0.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome=
--boxes/{gnome-boxes_48.0.bb =3D> gnome-boxes_49.0.bb} (90%)
-
-diff --git a/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/=
-gnome-boxes/gnome-boxes_48.0.bb b/meta-gnome/dynamic-layers/meta-virtuali=
-zation/recipes-gnome/gnome-boxes/gnome-boxes_49.0.bb
-similarity index 90%
-rename from meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/g=
-nome-boxes/gnome-boxes_48.0.bb
-rename to meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gno=
-me-boxes/gnome-boxes_49.0.bb
-index 41f576bcab..ebc630062f 100644
---- a/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-b=
-oxes/gnome-boxes_48.0.bb
-+++ b/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-b=
-oxes/gnome-boxes_49.0.bb
-@@ -34,7 +34,7 @@ RDEPENDS:${PN} =3D "glib-2.0-dev libvirt-virsh qemu-com=
-mon qemu-system-x86-64 geni
-=20
- inherit gnomebase gsettings pkgconfig mime-xdg gtk-icon-cache gobject-in=
-trospection vala features_check
-=20
--SRC_URI[archive.sha256sum] =3D "d05f5f42568fafbf6d88771161b06ed5f739d431=
-21278d418cae95c56e513ead"
-+SRC_URI[archive.sha256sum] =3D "fa47266da6f5ef7a904c5b8769d4d871bccd4e6b=
-639a363c3235438d7b0e757a"
-=20
- GIR_MESON_OPTION =3D ""
- VALA_MESON_OPTION =3D ""
---=20
-2.51.0
+> 
+> On 10/29/25 01:14, wangmy via lists.openembedded.org wrote:
+>> From: Wang Mingyu <wangmy@fujitsu.com>
+>>
+>> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+>> ---
+>>   .../{python3-grpcio_1.75.1.bb => python3-grpcio_1.76.0.bb}      | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>   rename meta-python/recipes-devtools/python/{python3-grpcio_1.75.1.bb => python3-grpcio_1.76.0.bb} (94%)
+>>
+>> diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.75.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.76.0.bb
+>> similarity index 94%
+>> rename from meta-python/recipes-devtools/python/python3-grpcio_1.75.1.bb
+>> rename to meta-python/recipes-devtools/python/python3-grpcio_1.76.0.bb
+>> index ef0bf126d5..c4282502e1 100644
+>> --- a/meta-python/recipes-devtools/python/python3-grpcio_1.75.1.bb
+>> +++ b/meta-python/recipes-devtools/python/python3-grpcio_1.76.0.bb
+>> @@ -13,7 +13,7 @@ DEPENDS += "c-ares openssl python3-protobuf re2 zlib"
+>>   SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
+>>              file://abseil-ppc-fixes.patch \
+>>              "
+>> -SRC_URI[sha256sum] = "3e81d89ece99b9ace23a6916880baca613c03a799925afb2857887efa8b1b3d2"
+>> +SRC_URI[sha256sum] = "7be78388d6da1a25c0d5ec506523db58b18be22d9c37d8d3a32c08be4987bd73"
+>>   
+>>   RDEPENDS:${PN} = "python3-protobuf"
+>>   
+>>
+>>
+>>
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#121141): https://lists.openembedded.org/g/openembedded-devel/message/121141
+> Mute This Topic: https://lists.openembedded.org/mt/116004761/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [raj.khem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
 
