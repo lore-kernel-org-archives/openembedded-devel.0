@@ -1,396 +1,209 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC3D9CCF9EA
-	for <webhook@archiver.kernel.org>; Thu, 30 Oct 2025 04:22:23 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.web11.20494.1761798134124747089
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5A5ECCF9E5
+	for <webhook@archiver.kernel.org>; Thu, 30 Oct 2025 04:30:03 +0000 (UTC)
+Received: from mail-vk1-f174.google.com (mail-vk1-f174.google.com [209.85.221.174])
+ by mx.groups.io with SMTP id smtpd.web11.20552.1761798597661634469
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Oct 2025 21:22:14 -0700
+ Wed, 29 Oct 2025 21:29:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
-Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
-	by mailout06.t-online.de (Postfix) with SMTP id 593C51CE14
-	for <openembedded-devel@lists.openembedded.org>; Thu, 30 Oct 2025 05:20:05 +0100 (CET)
-Received: from [192.168.178.36] ([79.219.229.193]) by fwd79.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vEK8k-0PH7iq0; Thu, 30 Oct 2025 05:19:58 +0100
-Date: Thu, 30 Oct 2025 05:19:52 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-gnome][PATCHv2] gnome-software: update 48.3 -> 49.1
-To: openembedded-devel@lists.openembedded.org
-Message-Id: <41GX4T.1QKZNMW5LL1W@t-online.de>
-In-Reply-To: <187329D77542D045.25345@lists.openembedded.org>
-References: <187329D77542D045.25345@lists.openembedded.org>
-X-Mailer: geary/46.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FhjWCkqm;
+ spf=pass (domain: gmail.com, ip: 209.85.221.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-vk1-f174.google.com with SMTP id 71dfb90a1353d-5563c36f6d4so688351e0c.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Oct 2025 21:29:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1761798596; x=1762403396; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=dwtggtd5TKp8uCxQQLTMDn47bU97zoQK8dMZ7j+fshc=;
+        b=FhjWCkqmHMZQ8lClYv0nmxZ+1uhS0lmdYXTAWsuwKuREP+0Sz8GPAhYlEa9scOjLhG
+         mGQfCVgzoN9h9HyBRj+yyU01K7iGHMG12R5ghTlUzJ0N97h5FibCpK4xVzPWm/n1AMcd
+         URea4XlYNTQToPBhhpXrRW4rkSKZWIURy5Z94CKN6MvE+tuldxcv4syqpk3nNeiY/OQ5
+         8o6IGUhCAENbAAQaXfGcVrrmcoxDh0gYk02vH7Fbe0ZmgNEJH0BhDGVnrgnCYGy+sCzx
+         YrtOxidFiKj7cqDT2+efhZykrdpZENPzypjtgjlQzOmunyDrFehExP0DRvsY5KcDM5l+
+         tiLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761798596; x=1762403396;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=dwtggtd5TKp8uCxQQLTMDn47bU97zoQK8dMZ7j+fshc=;
+        b=okvZDXbJDi//3xJ/vEJovQiF8gL0m1UHizp76Od5RS8ajeEmn1IOxBPNdBFFUeSDv0
+         i4DW3093cl/ZWdxlaWoiv5semFs2grE57AyUtjU2tm3fiVwsqarv3V8Yn+1dZEi7+Dwy
+         8uOANlRP58TDG8cMbFSmRv6yYdriqoBTmuOLfwCatF3JtQHBtVaugHnq0uvipgj/hux4
+         oBnFOgmrRodB+m9bPABzk19FrB10mtiQQ6yg3nMppiAWa49dTGQkgB5wmPIHmWJX6P/z
+         0diqnflk9YjaizjGBKVKCcs2Pjsfe1uv/elhL0xSahyYpdGUsYJjz3Q0vDhIEFOvOyig
+         rxpg==
+X-Gm-Message-State: AOJu0YwMntCBUriNJzXYlhjol0MY418q7XaDXY88f5kOv80NahaQa7To
+	erqYP8yOJdI3wgiYW1rNzJU98+oLnHJ5iBzwD87M/aon4QQfj+ed/oQru+F3Q8DORLyaQNigmQe
+	sIX/igynugHmaxbj9oMkhJ43mQq/JBf+lefn/Qek=
+X-Gm-Gg: ASbGncvx4mPxHSvFqea0fLgU0W3YGsIh8MH4LuV4sRZR7t0WT1vmWr0gKW258onvSw4
+	fi1raZysAb51iLwE/pJAs+cilRMTFgcPDEDu+kQhzMVcVqhakaMeZA9zbf32rKxOtQPbS1qkDJO
+	jSCcSBOzO/46j2Qo4KzK8hCV7rYGh5LjCkBt96zMCzjXXvg3mVYJPsy51NaSbGzzz/KlBv/ijqb
+	4Vt7oYFbWllO9GRKJlMHybMQFhR0EhW+7JsQdwPx1POxYXFYdPytjvhrVR1IxChZ4LS/65WsCBr
+	vEWxQsUBEPoI8ItLfrbRugHP/eoBDr7XhnsIV+S40PHWEnilJTxLaTsnbeQr
+X-Google-Smtp-Source: AGHT+IEt8J2v+5BI7FTtEz8R0cBu+6XQacv1Ysghb8fJO/wM2HOs4Nt1LZtc4Zdp1MJz9ON9+rcrLtWXbMv1iQ40wlk=
+X-Received: by 2002:a05:690c:e4eb:b0:784:8f9a:52ab with SMTP id
+ 00721157ae682-78638e2f61bmr18761217b3.23.1761798084258; Wed, 29 Oct 2025
+ 21:21:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-/cGqtU9lOwFKPWKBN2sb"
-X-TOI-EXPURGATEID: 150726::1761797998-33FFCA12-1A5BEA5E/0/0 CLEAN NORMAL
-X-TOI-MSGID: 3fe5a45f-0595-444d-970d-a8b6f30ee6ff
+References: <cover.1761786284.git.anuj.mittal@intel.com>
+In-Reply-To: <cover.1761786284.git.anuj.mittal@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 29 Oct 2025 21:20:57 -0700
+X-Gm-Features: AWmQ_bnHJ7MDSq-QwqcX0_pJZrhqW8zXb5qZl4YnbMk9TCVSDLYt4RSHQOhIHkw
+Message-ID: <CAMKF1srjv7LCCSt_ahPmFA7wx=fyOHEGEi5kyki5YYnp2H=D4g@mail.gmail.com>
+Subject: Re: [scarthgap][PATCH 00/24] Scarthgap pull request
+To: Anuj Mittal <anuj.mittal@intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Oct 2025 04:22:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121184
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Oct 2025 04:30:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121185
 
---=-/cGqtU9lOwFKPWKBN2sb
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+merged now, thanks Anuj
 
-v2: install systemd_user_unitdir
-
-On Thu, Oct 30 2025 at 05:15:50 +01:00:00, Markus Volk via=20
-lists.openembedded.org <f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
-> Version 49.1
-> ~~~~~~~~~~~~
-> Released: 2025-10-10
-> This is a stable release with the following changes:
->  * Fixed search for additional packages requested by other apps
->  * Fixed update notifications, which could be missed sometimes
-> This release also updates translations:
->  * Bulgarian (twlvnn kraftwerk)
->  * Catalan (Jordi Mas i Hernandez)
->  * Chinese (Taiwan) (Cheng-Chia Tseng)
->  * Esperanto (Kristjan SCHMIDT)
->  * German (Tim Sabsch)
->  * Hungarian (Bal=C3=A1zs Mesk=C3=B3)
->  * Interlingua (International Auxiliary Language Association) (Emilio=20
-> Sep=C3=BAlveda)
->  * Occitan (post 1500) (Quentin PAG=C3=88S)
->  * Portuguese (Hugo Carvalho)
->  * Uighur (Abduqadir Abliz)
-> Version 49.0
-> ~~~~~~~~~~~~
-> Released: 2025-09-12
-> This is a stable release with the following changes:
->  * Flag flatpak gpg-agent socket permission as potentially unsafe
->  * Do not animate featured carousel when animations are disabled
-> This release also updates translations:
->  * Basque (Asier Saratsua Garmendia)
->  * Catalan (Jordi Mas i Hernandez)
->  * Danish (Alan Mortensen)
->  * Dutch (Nathan Follens)
->  * English (United Kingdom) (Andi Chandler)
->  * Esperanto (Kristjan SCHMIDT)
->  * Finnish (Jiri Gr=C3=B6nroos)
->  * Galician (Fran Di=C3=A9guez)
->  * Georgian (Ekaterine Papava)
->  * Hebrew (Yaron Shahrabani)
->  * Hungarian (Bal=C3=A1zs =C3=9Ar)
->  * Korean (Seong-ho Cho)
->  * Lithuanian (Aurimas Aurimas =C4=8Cernius)
->  * Persian (Danial Behzadi)
->  * Portuguese (Brazil) (Juliano de Souza Camargo)
->  * Romanian (Antonio Marin)
->  * Russian (Artur S0)
->  * Spanish (Daniel Mustieles)
->  * Swedish (Anders Jonsson)
->  * Turkish (Sabri =C3=9Cnal)
->  * Ukrainian (Yuri Chornoivan)
-> Version 49~rc
-> ~~~~~~~~~~~~~
-> Released: 2025-08-29
-> This is an unstable release with the following changes:
->  * Show past updates in rpm-ostree plugin
->  * Always include Flatpak system installation
->  * Correct total review counter
->  * Support external release notes in AppStream data
->  * Support light/dark screenshots in AppStream data
-> This release also updates translations:
->  * Catalan (Jordi Mas)
->  * Chinese (China) (Luming Zh)
->  * Czech (Daniel Rusek)
->  * Dutch (Nathan Follens)
->  * Galician (Fran Di=C3=A9guez)
->  * Japanese (Jun Oyamada)
->  * Persian (Danial Behzadi)
->=20
->  * Polish (Piotr Dr=C4=85g)
->  * Russian (Artur S0)
->  * Slovenian (Martin)
-> Version 49~beta
-> ~~~~~~~~~~~~~~~
-> Released: 2025-08-01
-> This is an unstable release with the following changes:
->  * Fix read of hardware support tags from app metainfo
->  * Switch to systemd-based startup
-> This release also updates translations:
->  * Chinese (Taiwan) (Cheng-Chia Tseng)
->  * Friulian (Fabio Tomat)
->  * Japanese (Takayuki Kusano)
->  * Romanian (Antonio Marin)
->  * Russian (Artur S0)
-> Version 49~alpha
-> ~~~~~~~~~~~~~~~~
-> Released: 2025-06-27
-> This is an unstable release with the following changes:
->  * Improve contrast of some app safety ratings in dark mode
->  * Improve error handling when fetching app reviews
->  * Improve memory fragmentation after checking for updates
->  * Rewrite threading model for better performance
->  * Provide feedback in the UI after submitting a review
->  * Fix crash on application shutdown
->  * Disallow running gnome-software as root user
-> This release also updates translations:
->  * Belarusian (Vasil Pupkin)
->  * Chinese (Taiwan) (Cheng-Chia Tseng)
->  * Czech (Daniel Rusek)
->  * English (United Kingdom) (Andi Chandler)
->  * Friulian (Fabio Tomat)
->  * German (Philipp Kiemle, Martin Wagner)
->  * Interlingua (International Auxiliary Language Association) (Emilio=20
-> Sep=C3=BAlveda)
->  * Japanese (Makoto Sakaguchi)
->  * Kabyle (Athmane MOKRAOUI)
->  * Latvian (R=C5=ABdolfs Mazurs)
->  * Nepali (Pawan Chitrakar)
->  * Panjabi (A S Alam)
->  * Portuguese (Brazil) (=C3=81lvaro Burns)
->  * Romanian (Antonio Marin)
->  * Slovenian (Martin)
->  * Turkish (Emin Tufan =C3=87etin)
->  * Ukrainian (Yuri Chornoivan)
->  * Uzbek (Baxrom Raxmatov)
->  * Vietnamese (Cas Pascal)
->=20
-> Signed-off-by: Markus Volk <f_l_k@t-online.de=20
-> <mailto:f_l_k@t-online.de>>
-> ---
->  .../{gnome-software_48.3.bb =3D> gnome-software_49.1.bb}        | 4=20
-> ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename=20
-> meta-gnome/recipes-gnome/gnome-software/{gnome-software_48.3.bb =3D>=20
-> gnome-software_49.1.bb} (89%)
->=20
-> diff --git=20
-> a/meta-gnome/recipes-gnome/gnome-software/gnome-software_48.3.bb=20
-> b/meta-gnome/recipes-gnome/gnome-software/gnome-software_49.1.bb
-> similarity index 89%
-> rename from=20
-> meta-gnome/recipes-gnome/gnome-software/gnome-software_48.3.bb
-> rename to=20
-> meta-gnome/recipes-gnome/gnome-software/gnome-software_49.1.bb
-> index beca1e76a0..14ea91359e 100644
-> --- a/meta-gnome/recipes-gnome/gnome-software/gnome-software_48.3.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-software/gnome-software_49.1.bb
-> @@ -28,7 +28,7 @@ RDEPENDS:${PN} =3D "iso-codes"
->=20
->  EXTRA_OEMESON +=3D "-Dtests=3Dfalse"
->=20
-> -SRC_URI[archive.sha256sum] =3D=20
-> "126971e8bc000ddc200178c8fac8f7114eed42de4a4e2012ba06b3ffe707e23a"
-> +SRC_URI[archive.sha256sum] =3D=20
-> "49dfeca77928801756d0c5386c1d20454ca077600a5d1ed66ec46ee33a32c66d"
->=20
->  PACKAGECONFIG ?=3D "flatpak"
->  PACKAGECONFIG[flatpak] =3D "-Dflatpak=3Dtrue,-Dflatpak=3Dfalse,flatpak=20
-> ostree"
-> @@ -39,5 +39,5 @@ PACKAGECONFIG[packagekit] =3D=20
-> "-Dpackagekit=3Dtrue,-Dpackagekit=3Dfalse,gnome-packagek
->  PACKAGECONFIG[fwupd] =3D "-Dfwupd=3Dtrue,-Dfwupd=3Dfalse,fwupd,fwupd"
->  PACKAGECONFIG[malcontent] =3D=20
-> "-Dmalcontent=3Dtrue,-Dmalcontent=3Dfalse,malcontent"
->=20
-> -FILES:${PN} +=3D "${datadir}"
-> +FILES:${PN} +=3D "${datadir} ${systemd_user_unitdir}"
->  FILES:${PN}-dev +=3D "${libdir}/gnome-software/libgnomesoftware.so"
-> --
-> 2.51.0
->=20
->=20
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#121183):=20
-> <https://lists.openembedded.org/g/openembedded-devel/message/121183>
-> Mute This Topic: <https://lists.openembedded.org/mt/116025367/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org=20
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe:=20
-> <https://lists.openembedded.org/g/openembedded-devel/unsub>=20
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->=20
-
-
---=-/cGqtU9lOwFKPWKBN2sb
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto"><div>v2: install systemd_user_unitdir</=
-div></div><div id=3D"geary-quote" dir=3D"auto"><br>On Thu, Oct 30 2025 at 0=
-5:15:50 +01:00:00, Markus Volk via lists.openembedded.org &lt;f_l_k=3Dt-onl=
-ine.de@lists.openembedded.org&gt; wrote:<br><blockquote type=3D"cite"><div =
-class=3D"plaintext" style=3D"white-space: break-spaces;">Version 49.1
-~~~~~~~~~~~~
-Released: 2025-10-10
-This is a stable release with the following changes:
- * Fixed search for additional packages requested by other apps
- * Fixed update notifications, which could be missed sometimes
-This release also updates translations:
- * Bulgarian (twlvnn kraftwerk)
- * Catalan (Jordi Mas i Hernandez)
- * Chinese (Taiwan) (Cheng-Chia Tseng)
- * Esperanto (Kristjan SCHMIDT)
- * German (Tim Sabsch)
- * Hungarian (Bal=C3=A1zs Mesk=C3=B3)
- * Interlingua (International Auxiliary Language Association) (Emilio Sep=
-=C3=BAlveda)
- * Occitan (post 1500) (Quentin PAG=C3=88S)
- * Portuguese (Hugo Carvalho)
- * Uighur (Abduqadir Abliz)
-Version 49.0
-~~~~~~~~~~~~
-Released: 2025-09-12
-This is a stable release with the following changes:
- * Flag flatpak gpg-agent socket permission as potentially unsafe
- * Do not animate featured carousel when animations are disabled
-This release also updates translations:
- * Basque (Asier Saratsua Garmendia)
- * Catalan (Jordi Mas i Hernandez)
- * Danish (Alan Mortensen)
- * Dutch (Nathan Follens)
- * English (United Kingdom) (Andi Chandler)
- * Esperanto (Kristjan SCHMIDT)
- * Finnish (Jiri Gr=C3=B6nroos)
- * Galician (Fran Di=C3=A9guez)
- * Georgian (Ekaterine Papava)
- * Hebrew (Yaron Shahrabani)
- * Hungarian (Bal=C3=A1zs =C3=9Ar)
- * Korean (Seong-ho Cho)
- * Lithuanian (Aurimas Aurimas =C4=8Cernius)
- * Persian (Danial Behzadi)
- * Portuguese (Brazil) (Juliano de Souza Camargo)
- * Romanian (Antonio Marin)
- * Russian (Artur S0)
- * Spanish (Daniel Mustieles)
- * Swedish (Anders Jonsson)
- * Turkish (Sabri =C3=9Cnal)
- * Ukrainian (Yuri Chornoivan)
-Version 49~rc
-~~~~~~~~~~~~~
-Released: 2025-08-29
-This is an unstable release with the following changes:
- * Show past updates in rpm-ostree plugin
- * Always include Flatpak system installation
- * Correct total review counter
- * Support external release notes in AppStream data
- * Support light/dark screenshots in AppStream data
-This release also updates translations:
- * Catalan (Jordi Mas)
- * Chinese (China) (Luming Zh)
- * Czech (Daniel Rusek)
- * Dutch (Nathan Follens)
- * Galician (Fran Di=C3=A9guez)
- * Japanese (Jun Oyamada)
- * Persian (Danial Behzadi)
-
- * Polish (Piotr Dr=C4=85g)
- * Russian (Artur S0)
- * Slovenian (Martin)
-Version 49~beta
-~~~~~~~~~~~~~~~
-Released: 2025-08-01
-This is an unstable release with the following changes:
- * Fix read of hardware support tags from app metainfo
- * Switch to systemd-based startup
-This release also updates translations:
- * Chinese (Taiwan) (Cheng-Chia Tseng)
- * Friulian (Fabio Tomat)
- * Japanese (Takayuki Kusano)
- * Romanian (Antonio Marin)
- * Russian (Artur S0)
-Version 49~alpha
-~~~~~~~~~~~~~~~~
-Released: 2025-06-27
-This is an unstable release with the following changes:
- * Improve contrast of some app safety ratings in dark mode
- * Improve error handling when fetching app reviews
- * Improve memory fragmentation after checking for updates
- * Rewrite threading model for better performance
- * Provide feedback in the UI after submitting a review
- * Fix crash on application shutdown
- * Disallow running gnome-software as root user
-This release also updates translations:
- * Belarusian (Vasil Pupkin)
- * Chinese (Taiwan) (Cheng-Chia Tseng)
- * Czech (Daniel Rusek)
- * English (United Kingdom) (Andi Chandler)
- * Friulian (Fabio Tomat)
- * German (Philipp Kiemle, Martin Wagner)
- * Interlingua (International Auxiliary Language Association) (Emilio Sep=
-=C3=BAlveda)
- * Japanese (Makoto Sakaguchi)
- * Kabyle (Athmane MOKRAOUI)
- * Latvian (R=C5=ABdolfs Mazurs)
- * Nepali (Pawan Chitrakar)
- * Panjabi (A S Alam)
- * Portuguese (Brazil) (=C3=81lvaro Burns)
- * Romanian (Antonio Marin)
- * Slovenian (Martin)
- * Turkish (Emin Tufan =C3=87etin)
- * Ukrainian (Yuri Chornoivan)
- * Uzbek (Baxrom Raxmatov)
- * Vietnamese (Cas Pascal)
-
-Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t=
--online.de</a>&gt;
----
- .../{gnome-software_48.3.bb =3D&gt; gnome-software_49.1.bb}        | 4 ++-=
--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-software/{gnome-software_48.3.bb =3D=
-&gt; gnome-software_49.1.bb} (89%)
-
-diff --git a/meta-gnome/recipes-gnome/gnome-software/gnome-software_48.3.bb=
- b/meta-gnome/recipes-gnome/gnome-software/gnome-software_49.1.bb
-similarity index 89%
-rename from meta-gnome/recipes-gnome/gnome-software/gnome-software_48.3.bb
-rename to meta-gnome/recipes-gnome/gnome-software/gnome-software_49.1.bb
-index beca1e76a0..14ea91359e 100644
---- a/meta-gnome/recipes-gnome/gnome-software/gnome-software_48.3.bb
-+++ b/meta-gnome/recipes-gnome/gnome-software/gnome-software_49.1.bb
-@@ -28,7 +28,7 @@ RDEPENDS:${PN} =3D "iso-codes"
-=20
- EXTRA_OEMESON +=3D "-Dtests=3Dfalse"
-=20
--SRC_URI[archive.sha256sum] =3D "126971e8bc000ddc200178c8fac8f7114eed42de4a=
-4e2012ba06b3ffe707e23a"
-+SRC_URI[archive.sha256sum] =3D "49dfeca77928801756d0c5386c1d20454ca077600a=
-5d1ed66ec46ee33a32c66d"
-=20
- PACKAGECONFIG ?=3D "flatpak"
- PACKAGECONFIG[flatpak] =3D "-Dflatpak=3Dtrue,-Dflatpak=3Dfalse,flatpak ost=
-ree"
-@@ -39,5 +39,5 @@ PACKAGECONFIG[packagekit] =3D "-Dpackagekit=3Dtrue,-Dpack=
-agekit=3Dfalse,gnome-packagek
- PACKAGECONFIG[fwupd] =3D "-Dfwupd=3Dtrue,-Dfwupd=3Dfalse,fwupd,fwupd"
- PACKAGECONFIG[malcontent] =3D "-Dmalcontent=3Dtrue,-Dmalcontent=3Dfalse,ma=
-lcontent"
-=20
--FILES:${PN} +=3D "${datadir}"
-+FILES:${PN} +=3D "${datadir} ${systemd_user_unitdir}"
- FILES:${PN}-dev +=3D "${libdir}/gnome-software/libgnomesoftware.so"
-<div>--=20
-</div>2.51.0
-
-</div><div class=3D"plaintext" style=3D"white-space: break-spaces;">
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-Links: You receive all messages sent to this group.
-View/Reply Online (#121183): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/121183">https://lists.openembedded.org/g/openembed=
-ded-devel/message/121183</a>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116025367/361=
-8223">https://lists.openembedded.org/mt/116025367/3618223</a>
-Group Owner: <a href=3D"mailto:openembedded-devel+owner@lists.openembedded.=
-org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a h=
-ref=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-
-</div></blockquote></div>
---=-/cGqtU9lOwFKPWKBN2sb--
-
+On Wed, Oct 29, 2025 at 6:13=E2=80=AFPM Anuj Mittal <anuj.mittal@intel.com>=
+ wrote:
+>
+> This is an older set of changes that I wasn't able to send but
+> had tested earlier:
+> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1034
+>
+> This mostly includes CVE fixes sent to list and some SRC_URI and host gcc
+> version relat changes.
+>
+> The following changes since commit e621da947048842109db1b4fd3917a02e0501a=
+a2:
+>
+>   procmail: Add -Wno-implicit-int to fix error of do_compile (2025-09-24 =
+10:04:48 +0800)
+>
+> are available in the Git repository at:
+>
+>   https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
+>   https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Danujm/s=
+carthgap
+>
+> Adrian Freihofer (1):
+>   thrift: fix build with gcc 15
+>
+> Changqing Li (1):
+>   mariadb: correct STACK_DIRECTION setting
+>
+> Grygorii Tertychnyi (1):
+>   libusbgx: fix gadget-stop install
+>
+> Gyorgy Sarvari (6):
+>   mosh: set working SRC_URI
+>   psqlodbc: set valid SRC_URI
+>   collectd: set working SRC_URI
+>   apache2: ignore irrelevant CVEs
+>   civetweb: patch CVE-2025-55763
+>   dovecot: patch CVE-2022-30550
+>
+> Jeroen Hofstee (2):
+>   php: ignore CVE-2024-3566
+>   nodejs: ignore CVE-2024-3566
+>
+> Khem Raj (1):
+>   uim: Stick to C17
+>
+> Peter Marko (6):
+>   ace: ignore CVE-2009-1147
+>   audiofile: fix multiple CVEs
+>   audiofile: patch CVE-2017-6829
+>   audiofile: fix multiple CVEs
+>   audiofile: patch CVE-2017-6831
+>   audiofile: patch CVE-2017-6839
+>
+> Praveen Kumar (1):
+>   polkit: fix CVE-2025-7519
+>
+> Saravanan (1):
+>   udisks2: upgrade 2.10.1 -> 2.10.2
+>
+> Sunil Dora (1):
+>   layer.conf: add bpftrace to NON_MULTILIB_RECIPES
+>
+> Yogita Urade (1):
+>   indent: fix CVE-2023-40305
+>
+> hongxu (1):
+>   indent: fix CVE-2024-0911
+>
+> mark.yang (1):
+>   srecord: fix build failure with gcc-15
+>
+>  ...w-in-directory-URI-slash-redirection.patch |   57 +
+>  .../civetweb/civetweb_1.16.bb                 |    1 +
+>  ...g-passdbs-with-identical-driver-args.patch |  137 +
+>  .../recipes-support/dovecot/dovecot_2.3.21.bb |    1 +
+>  meta-oe/conf/layer.conf                       |    2 +-
+>  .../recipes-connectivity/ace/ace_6.5.19.bb    |    2 +
+>  .../recipes-connectivity/mosh/mosh_1.4.0.bb   |    5 +-
+>  ...missing-cstdint-include-for-int64_t-.patch |   51 +
+>  .../thrift/thrift_0.20.0.bb                   |    3 +-
+>  meta-oe/recipes-dbs/mysql/mariadb.inc         |    1 -
+>  .../psqlodbc/psqlodbc_16.00.0000.bb           |    2 +-
+>  .../recipes-devtools/nodejs/nodejs_20.18.2.bb |    1 +
+>  meta-oe/recipes-devtools/php/php_8.2.29.bb    |    1 +
+>  .../collectd/collectd_5.12.0.bb               |    4 +-
+>  ...ap-buffer-underread-in-set_buf_break.patch |  123 +
+>  .../indent/indent/CVE-2023-40305_0001.patch   | 4196 ++++++++++++++++
+>  .../indent/indent/CVE-2023-40305_0002.patch   | 4254 +++++++++++++++++
+>  .../recipes-extended/indent/indent_2.2.12.bb  |    3 +
+>  .../polkit/files/CVE-2025-7519.patch          |   34 +
+>  meta-oe/recipes-extended/polkit/polkit_124.bb |    5 +-
+>  .../audiofile/audiofile_0.3.6.bb              |    5 +
+>  ...ays-check-the-number-of-coefficients.patch |   45 +
+>  ...ues-to-fix-index-overflow-in-IMA.cpp.patch |   43 +
+>  ...multiplication-overflow-in-sfconvert.patch |   79 +
+>  ...ail-when-error-occurs-in-parseFormat.patch |   46 +
+>  ...lication-overflow-in-MSADPCM-decodeS.patch |  126 +
+>  .../recipes-support/libusbgx/libusbgx_git.bb  |    2 +-
+>  ...e-with-gcc-15-by-adding-cstdint-head.patch |   36 +
+>  .../recipes-support/srecord/srecord_1.65.0.bb |    4 +-
+>  .../udisks/udisks2/CVE-2025-6019.patch        |   51 -
+>  .../{udisks2_2.10.1.bb =3D> udisks2_2.10.2.bb}  |    3 +-
+>  meta-oe/recipes-support/uim/uim_1.8.8.bb      |    2 +
+>  .../recipes-httpd/apache2/apache2_2.4.65.bb   |   12 +
+>  33 files changed, 9273 insertions(+), 64 deletions(-)
+>  create mode 100644 meta-networking/recipes-connectivity/civetweb/civetwe=
+b/0001-Fix-heap-overflow-in-directory-URI-slash-redirection.patch
+>  create mode 100644 meta-networking/recipes-support/dovecot/dovecot/0001-=
+auth-Fix-handling-passdbs-with-identical-driver-args.patch
+>  create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/0001-THRIF=
+T-5842-Add-missing-cstdint-include-for-int64_t-.patch
+>  create mode 100644 meta-oe/recipes-extended/indent/indent/0001-Fix-a-hea=
+p-buffer-underread-in-set_buf_break.patch
+>  create mode 100644 meta-oe/recipes-extended/indent/indent/CVE-2023-40305=
+_0001.patch
+>  create mode 100644 meta-oe/recipes-extended/indent/indent/CVE-2023-40305=
+_0002.patch
+>  create mode 100644 meta-oe/recipes-extended/polkit/files/CVE-2025-7519.p=
+atch
+>  create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0004-Alway=
+s-check-the-number-of-coefficients.patch
+>  create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0005-clamp=
+-index-values-to-fix-index-overflow-in-IMA.cpp.patch
+>  create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0006-Check=
+-for-multiplication-overflow-in-sfconvert.patch
+>  create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0007-Actua=
+lly-fail-when-error-occurs-in-parseFormat.patch
+>  create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0008-Check=
+-for-multiplication-overflow-in-MSADPCM-decodeS.patch
+>  create mode 100644 meta-oe/recipes-support/srecord/files/0001-fix-build-=
+failure-with-gcc-15-by-adding-cstdint-head.patch
+>  delete mode 100644 meta-oe/recipes-support/udisks/udisks2/CVE-2025-6019.=
+patch
+>  rename meta-oe/recipes-support/udisks/{udisks2_2.10.1.bb =3D> udisks2_2.=
+10.2.bb} (95%)
+>
 
