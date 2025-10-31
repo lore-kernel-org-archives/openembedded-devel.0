@@ -1,305 +1,262 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CA4DCCF9E3
-	for <webhook@archiver.kernel.org>; Fri, 31 Oct 2025 02:43:04 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.web11.6276.1761878581619630614
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F7A8CCF9E3
+	for <webhook@archiver.kernel.org>; Fri, 31 Oct 2025 02:46:54 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web11.6318.1761878803972596852
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Oct 2025 19:43:01 -0700
+ Thu, 30 Oct 2025 19:46:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
-Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
-	by mailout11.t-online.de (Postfix) with SMTP id DFCC01C837
-	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 03:42:59 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.34.215]) by fwd88.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vEf6L-0OXCYT0; Fri, 31 Oct 2025 03:42:53 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] gtkmm4: update
-Date: Fri, 31 Oct 2025 03:42:42 +0100
-Message-ID: <20251031024242.46550-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.51.0
+ dkim=pass header.i=@mvista.com header.s=google header.b=XHhJ81Bj;
+ spf=pass (domain: mvista.com, ip: 209.85.208.51, mailfrom: vanusuri@mvista.com)
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-61feb87fe26so2960740a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Oct 2025 19:46:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1761878802; x=1762483602; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=f8qRhWZ+BJa8EpH5mYbPgIdZgMKHowWi17ijaS14OSU=;
+        b=XHhJ81Bjdnj6ClLSh5mgOU3OH5eWMyViy+AaKuo17a20Z5X0c2crJoqURQ7/eDbaa/
+         8Zu36e/QIJTyCxe1ljyB9KUnSbOckxVPFkuQc8H7oNttfjfYKFwP/yq+UWw2tAoxjp11
+         fNBvV1+Z0NigAkrk0y8SRKWa1Y0vdtDMdR6QM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761878802; x=1762483602;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=f8qRhWZ+BJa8EpH5mYbPgIdZgMKHowWi17ijaS14OSU=;
+        b=qU5YLKkBEWbMuAoeZbshm9Xm3EM8teBJPfkbqdmyp/s7IS7izfJIoaIg/t2y728AV+
+         zDNUAaiMyR4USqLJ6qrEnh2ujciz3hvZz9ac91d04B/goQjRignlBjCuDXcyCjLFCUHd
+         5d+GHc72GO5sY1Z/T4+vCtRJuOc/cfEIQgq6nXeFaF5JZxjLuPfsLaiNps6845fRiUQZ
+         WidIOAPgWz9P3ayuxATtV2X001rCvAAUA/q0FlqWELXucIogYuLwFSj/V09qNHYq51/w
+         XHWnWeqnD2F0ebKn6eBnoHr7ByR5ZI1frAg1EI4t/NwdN8hl82TiZHCjIjagISm7g97n
+         BeMQ==
+X-Gm-Message-State: AOJu0YzkucSI664RHeaH4eBkmMAq73ncp3TT6Bb/oqGklV1PBMdA+IU/
+	+u6z5oMq9XoVBdYRhBMtE+ev8cX9uV0Ivpuxz6M0TSk9S227DLAV/HBKFTB9+XqNVySalMxUuRs
+	axxNjPJe0Bdi7V4Ert5IUi5IZU7lkVdTSeOiLCwlUww==
+X-Gm-Gg: ASbGncveKx5k77kNamSMLjEOGI2TeReFULnln+wulObK14scfWQNWRBSZodoC3mHAm2
+	uupVx12/vwORaUEF5Jmxz7NohAJFu5+syUVdizFWOXpIvMsxpPrvBaOkqvPKHGoBUsoc/Bh6b/I
+	GwnFOzOYGN6rgoG2cjGMMG4cZNPN5PRPEKXmGJBIXwYvdDHj8ZX1Yt2jUk92NJrsy9HSoLI9WGw
+	eWQyPxJLd8KIBHaEj+wW2LyFLIVBb4IAmoUujCCDg4vMFGsnczD12WMkNY+VnBK0hTelDGW8XGb
+	HuAm112sQxs7FrdQ2w==
+X-Google-Smtp-Source: AGHT+IEp8/cf9XrwwIMn4K3GI+kZxc2s2f5mIH6VGjY4lI0WmIv5jSt6xaZ3ZvkYAAvFvy+gpz3XlkS080utaYm+HF0=
+X-Received: by 2002:a05:6402:510e:b0:639:f54d:9274 with SMTP id
+ 4fb4d7f45d1cf-64076f67014mr1456860a12.2.1761878801879; Thu, 30 Oct 2025
+ 19:46:41 -0700 (PDT)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1761878573-D9FF8A4B-055BB740/0/0 CLEAN NORMAL
-X-TOI-MSGID: a6cddad3-c9f5-4a7e-8382-738d47034b6a
-Content-Transfer-Encoding: quoted-printable
+References: <20251009132543.1680755-1-vanusuri@mvista.com> <d62b15e94667438900736a89a8220db30705a040.camel@intel.com>
+ <CANQUz193KeDJuX8_WO9roc0T1-tOov2c2fdoMv+SAat+tX1-uA@mail.gmail.com> <23fae9ba42d32a600456b5593be9f7262161648f.camel@intel.com>
+In-Reply-To: <23fae9ba42d32a600456b5593be9f7262161648f.camel@intel.com>
+From: Vijay Anusuri <vanusuri@mvista.com>
+Date: Fri, 31 Oct 2025 08:16:29 +0530
+X-Gm-Features: AWmQ_bkPKjyuCuH-k9PEcFZViCLgTb_aYR1N58q2B7VW-s8c-7bUZWqrY92Cnxk
+Message-ID: <CANQUz1-7k-SxrkNEqoixdwWKqYFn8nFBVfuyo-F2BQxt2oqDYQ@mail.gmail.com>
+Subject: Re: [oe][meta-oe][scarthgap][PATCH] libssh: Fix CVE-2025-8277
+To: "Mittal, Anuj" <anuj.mittal@intel.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000001fa44406426b60db"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 02:43:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121217
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 02:46:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121218
 
-4.20.0 (stable) 2025-09-19
+--0000000000001fa44406426b60db
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Gdk:
-* PixbufAnimation, PixbufAnimationIter: Deprecate these classes.
-  GdkPixbufAnimation and GdkPixbufAnimationIter are deprecated
-  since gdk-pixbuf 2.44.
-* PixbufLoader: Deprecate get_animation().
-  (Kjell Ahlstedt)
+Hi Anuj,
 
-4.19.1 (unstable) 2025-08-26
+I have sent a V2 patch
+https://lists.openembedded.org/g/openembedded-devel/message/121197
 
-Gdk:
-* Event: Add get_relative_direction() and enum ScrollRelativeDirection.
-  (Kjell Ahlstedt)
+Thanks & Regards,
+Vijay
 
-Gsk:
-* Transform: Add matrix_2d().
-  (Kjell Ahlstedt)
 
-Gtk:
-* Application: Deprecate property_register_session().
-* CssProvider: Add property_prefers_color_scheme() and
-  property_prefers_contrast().
-* Entry: Add set/get_menu_entry_icon_text(),
-  property_menu_entry_icon_primary_text() and
-  property_menu_entry_icon_secondary_text().
-* Add enum InterfaceColorScheme and InterfaceContrast.
-* FilterListModel: Add get/set/property_watch_items().
-* Settings: Add property_gtk_interface_color_scheme()
-  and property_gtk_interface_contrast().
-  (Kjell Ahlstedt)
+On Thu, Oct 30, 2025 at 12:02=E2=80=AFPM Mittal, Anuj <anuj.mittal@intel.co=
+m> wrote:
 
-Documentation:
-* Add images used in documentation copied by gmmproc.
-* Gtk::DrawingArea, Gtk::GLArea: Update the class descriptions.
-  (Kjell Ahlstedt)
+> On Thu, 2025-10-30 at 11:55 +0530, Vijay Anusuri wrote:
+> > Hi Anuj,
+> >
+> > The relevant changes in `ecdh_crypto.c` are located within the
+> > function `static ssh_string ssh_ecdh_generate`. This function,
+> > however, is not present in the `libssh-0.10.6` version. It was
+> > introduced in `libssh` version 0.11 by the commit
+> > `https://git.libssh.org/projects/libssh.git/commit/src/ecdh_crypto.c?
+> > h=3Dstable-0.11&id=3D1eb3df5254a4348eae6edbc8a2bf08fef4015897`.
+> >
+> > Consequently, these changes cannot be directly applied to the
+> > `libssh-0.10.6` version. This aligns with the approach taken by other
+> > distributions, as Suse also did not backport the `ecdh_crypto.c` file
+> > changes in their `libssh-0.10.6-3.1.src.rpm` package, which is
+> > available at
+> > `https://cdimage.debian.org/mirror/opensuse.org/distribution/leap-mic
+> > ro/6.0/product/repo/openSUSE-Leap-Micro-6.0-x86_64-Media3/src/libssh-
+> > 0.10.6-3.1.src.rpm`.
+>
+> Thank you for the details. These should be present in the commit
+> message saying what was changed while cherry-picking.
+>
+> Can you please send a v2?
+>
+> >
+> > Thanks & Regards,
+> > Vijay
+> >
+> > On Thu, Oct 30, 2025 at 9:25=E2=80=AFAM Mittal, Anuj <anuj.mittal@intel=
+.com>
+> > wrote:
+> > > On Thu, 2025-10-09 at 18:55 +0530, Vijay Anusuri via
+> > > lists.openembedded.org wrote:
+> > > > +++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-2.patch
+> > > > @@ -0,0 +1,89 @@
+> > > > +From 266174a6d36687b65cf90174f06af90b8b27c65f Mon Sep 17
+> > > > 00:00:00
+> > > > 2001
+> > > > +From: Francesco Rollo <eferollo@gmail.com>
+> > > > +Date: Thu, 24 Jul 2025 16:30:07 +0300
+> > > > +Subject: [PATCH] CVE-2025-8277: Fix memory leak of unused
+> > > > ephemeral
+> > > > key pair
+> > > > + after client's wrong KEX guess
+> > > > +
+> > > > +Signed-off-by: Francesco Rollo <eferollo@gmail.com>
+> > > > +Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
+> > > > +(cherry picked from commit
+> > > > ccff22d3787c1355b3f0dcd09fe54d90acc55bf1)
+> > > > +
+> > > > +Upstream-Status: Backport
+> > > > [
+> > > > https://git.libssh.org/projects/libssh.git/commit/?h=3Dstable-0.11&=
+i
+> > > > d=3D
+> > > > 266174a6d36687b65cf90174f06af90b8b27c65f]
+> > > > +CVE: CVE-2025-8277
+> > > > +Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+> > > > +---
+> > > > + src/dh_crypto.c       | 5 +++++
+> > > > + src/dh_key.c          | 5 +++++
+> > > > + src/ecdh_gcrypt.c     | 6 ++++++
+> > > > + src/ecdh_mbedcrypto.c | 6 ++++++
+> > >
+> > > This does not look like a simple backport of
+> > >
+> https://git.libssh.org/projects/libssh.git/commit/?h=3Dstable-0.11&id=3D2=
+66174a6d36687b65cf90174f06af90b8b27c65f
+> > >
+> > > Was the change in ecdh_crypto.c not required?
+>
 
-Build:
-* Require gtk4 >=3D 4.19.4
-  (Kjell Ahlstedt)
+--0000000000001fa44406426b60db
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-4.19.0 (unstable) 2025-06-29
+<div dir=3D"ltr"><div>Hi Anuj,</div><div><br></div><div>I have sent a V2 pa=
+tch</div><div><a href=3D"https://lists.openembedded.org/g/openembedded-deve=
+l/message/121197">https://lists.openembedded.org/g/openembedded-devel/messa=
+ge/121197</a></div><div><br></div><div>Thanks &amp; Regards,</div><div>Vija=
+y</div><br></div><br><div class=3D"gmail_quote gmail_quote_container"><div =
+dir=3D"ltr" class=3D"gmail_attr">On Thu, Oct 30, 2025 at 12:02=E2=80=AFPM M=
+ittal, Anuj &lt;<a href=3D"mailto:anuj.mittal@intel.com">anuj.mittal@intel.=
+com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
+in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
+x">On Thu, 2025-10-30 at 11:55 +0530, Vijay Anusuri wrote:<br>
+&gt; Hi Anuj,<br>
+&gt; <br>
+&gt; The relevant changes in `ecdh_crypto.c` are located within the<br>
+&gt; function `static ssh_string ssh_ecdh_generate`. This function,<br>
+&gt; however, is not present in the `libssh-0.10.6` version. It was<br>
+&gt; introduced in `libssh` version 0.11 by the commit=C2=A0<br>
+&gt; `<a href=3D"https://git.libssh.org/projects/libssh.git/commit/src/ecdh=
+_crypto.c" rel=3D"noreferrer" target=3D"_blank">https://git.libssh.org/proj=
+ects/libssh.git/commit/src/ecdh_crypto.c</a>?<br>
+&gt; h=3Dstable-0.11&amp;id=3D1eb3df5254a4348eae6edbc8a2bf08fef4015897`.<br=
+>
+&gt; <br>
+&gt; Consequently, these changes cannot be directly applied to the<br>
+&gt; `libssh-0.10.6` version. This aligns with the approach taken by other<=
+br>
+&gt; distributions, as Suse also did not backport the `ecdh_crypto.c` file<=
+br>
+&gt; changes in their `libssh-0.10.6-3.1.src.rpm` package, which is<br>
+&gt; available at<br>
+&gt; `<a href=3D"https://cdimage.debian.org/mirror/opensuse.org/distributio=
+n/leap-mic" rel=3D"noreferrer" target=3D"_blank">https://cdimage.debian.org=
+/mirror/opensuse.org/distribution/leap-mic</a><br>
+&gt; ro/6.0/product/repo/openSUSE-Leap-Micro-6.0-x86_64-Media3/src/libssh-<=
+br>
+&gt; 0.10.6-3.1.src.rpm`.<br>
+<br>
+Thank you for the details. These should be present in the commit<br>
+message saying what was changed while cherry-picking. <br>
+<br>
+Can you please send a v2?<br>
+<br>
+&gt; <br>
+&gt; Thanks &amp; Regards,<br>
+&gt; Vijay<br>
+&gt; <br>
+&gt; On Thu, Oct 30, 2025 at 9:25=E2=80=AFAM Mittal, Anuj &lt;<a href=3D"ma=
+ilto:anuj.mittal@intel.com" target=3D"_blank">anuj.mittal@intel.com</a>&gt;=
+<br>
+&gt; wrote:<br>
+&gt; &gt; On Thu, 2025-10-09 at 18:55 +0530, Vijay Anusuri via<br>
+&gt; &gt; <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" targ=
+et=3D"_blank">lists.openembedded.org</a> wrote:<br>
+&gt; &gt; &gt; +++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8277-2.=
+patch<br>
+&gt; &gt; &gt; @@ -0,0 +1,89 @@<br>
+&gt; &gt; &gt; +From 266174a6d36687b65cf90174f06af90b8b27c65f Mon Sep 17<br=
+>
+&gt; &gt; &gt; 00:00:00<br>
+&gt; &gt; &gt; 2001<br>
+&gt; &gt; &gt; +From: Francesco Rollo &lt;<a href=3D"mailto:eferollo@gmail.=
+com" target=3D"_blank">eferollo@gmail.com</a>&gt;<br>
+&gt; &gt; &gt; +Date: Thu, 24 Jul 2025 16:30:07 +0300<br>
+&gt; &gt; &gt; +Subject: [PATCH] CVE-2025-8277: Fix memory leak of unused<b=
+r>
+&gt; &gt; &gt; ephemeral<br>
+&gt; &gt; &gt; key pair<br>
+&gt; &gt; &gt; + after client&#39;s wrong KEX guess<br>
+&gt; &gt; &gt; +<br>
+&gt; &gt; &gt; +Signed-off-by: Francesco Rollo &lt;<a href=3D"mailto:eferol=
+lo@gmail.com" target=3D"_blank">eferollo@gmail.com</a>&gt;<br>
+&gt; &gt; &gt; +Reviewed-by: Andreas Schneider &lt;<a href=3D"mailto:asn@cr=
+yptomilk.org" target=3D"_blank">asn@cryptomilk.org</a>&gt;<br>
+&gt; &gt; &gt; +(cherry picked from commit<br>
+&gt; &gt; &gt; ccff22d3787c1355b3f0dcd09fe54d90acc55bf1)<br>
+&gt; &gt; &gt; +<br>
+&gt; &gt; &gt; +Upstream-Status: Backport<br>
+&gt; &gt; &gt; [<br>
+&gt; &gt; &gt; <a href=3D"https://git.libssh.org/projects/libssh.git/commit=
+/?h=3Dstable-0.11&amp;i" rel=3D"noreferrer" target=3D"_blank">https://git.l=
+ibssh.org/projects/libssh.git/commit/?h=3Dstable-0.11&amp;i</a><br>
+&gt; &gt; &gt; d=3D<br>
+&gt; &gt; &gt; 266174a6d36687b65cf90174f06af90b8b27c65f]<br>
+&gt; &gt; &gt; +CVE: CVE-2025-8277<br>
+&gt; &gt; &gt; +Signed-off-by: Vijay Anusuri &lt;<a href=3D"mailto:vanusuri=
+@mvista.com" target=3D"_blank">vanusuri@mvista.com</a>&gt;<br>
+&gt; &gt; &gt; +---<br>
+&gt; &gt; &gt; + src/dh_crypto.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 5 ++=
++++<br>
+&gt; &gt; &gt; + src/dh_key.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 | 5 +++++<br>
+&gt; &gt; &gt; + src/ecdh_gcrypt.c=C2=A0=C2=A0=C2=A0=C2=A0 | 6 ++++++<br>
+&gt; &gt; &gt; + src/ecdh_mbedcrypto.c | 6 ++++++<br>
+&gt; &gt; <br>
+&gt; &gt; This does not look like a simple backport of<br>
+&gt; &gt; <a href=3D"https://git.libssh.org/projects/libssh.git/commit/?h=
+=3Dstable-0.11&amp;id=3D266174a6d36687b65cf90174f06af90b8b27c65f" rel=3D"no=
+referrer" target=3D"_blank">https://git.libssh.org/projects/libssh.git/comm=
+it/?h=3Dstable-0.11&amp;id=3D266174a6d36687b65cf90174f06af90b8b27c65f</a><b=
+r>
+&gt; &gt; <br>
+&gt; &gt; Was the change in ecdh_crypto.c not required?<br>
+</blockquote></div>
 
-Gdk:
-* Deprecate Gdk::Cairo::set_source_pixbuf().
-* Texture: Deprecate create_for_pixbuf().
-* Pixbuf: Deprecate create_from_xpm_data().
-* ColorState: Add equivalent().
-* MemoryTextureBuilder: Add get/set_stride_for_plane() and get/set_offset=
-().
-* TextureDownloader: Add download_bytes_with_planes().
-* Toplevel: Add enum TitlebarGesture, enum Toplevel::Capabilities,
-  titlebar_gesture(), get/property_capabilities(), get/set/property_gravi=
-ty().
-  (Kjell Ahlstedt)
-
-Gsk: (new subdirectory and namespace)
-* Add RoundedRect, Transform and enums BlendMode, Corner, FillRule,
-  MaskMode, ScalingFilter, Transform::Category.
-  (Kjell Ahlstedt) Merge request !92
-
-Gtk:
-* Add Fixed::set/get_child_transform()
-  (Kjell Ahlstedt)
-* Add FixedLayout and FixedLayoutChild
-  (Kjell Ahlstedt) Issue #164 (Thayne McCombs)
-* Calendar: Deprecate select_day(), property_year/month/day(),
-  add set/property_date().
-* FileFilter: Deprecate add_pixbuf_formats().
-* IconPaintable: Deprecate get/property_icon_name(), is_symbolic(),
-  property_is_symbolic().
-* UriLauncher.hg: Add can_launch().
-* Window: Add enum WindowGravity, get/set/property_gravity().
-  (Kjell Ahlstedt)
-
-Demos:
-* Avoid deprecated Pixbuf methods where possible.
-  (Kjell Ahlstedt)
-
-Build:
-* NMake Makefiles: Generate gskmm build config files
-* NMake builds: Add build rules to build gskmm
-  (Chun-wei Fan) Merge request !92
-* Require gtk4 >=3D 4.19.2
-  (Kjell Ahlstedt)
-
-4.18.0 (stable) 2025-03-23
-
-Gdk:
-* CairoContext: Deprecate cairo_create().
-* Device: Add get/property_active_layout_index(), get/property_layout_nam=
-es().
-* Surface: Add translate_coordinates(), deprecate create_cairo_context().
-  (Kjell Ahlstedt)
-
-Gtk:
-* Accessible: Add update_platform_state().
-* HeaderBar, WindowControls: Add get/set/property_use_native_controls().
-* Widget: Add get/set/property_limit_events().
-  (Kjell Ahlstedt)
-
-Documentation:
-* Gtk::SignalListItemFactory: Remove errroneous links.
-  (Daniel Boles)
-* Gtk::AboutDialog: Update the image.
-* Gtk::ConstraintLayout: Add a link to the description of GtkConstraintLa=
-yout.
-* Gdk::Pixbuf, PixbufFormat, PixbufLoader: Add class descriptions.
-  (Kjell Ahlstedt)
-
-Build:
-* Require gtk4 >=3D 4.17.5
-* Meson build: Use the Python installation that Meson uses.
-  See merge request glibmm!67.
-  (Kjell Ahlstedt)
-
-4.17.0 (unstable) 2025-01-26
-
-Gdk:
-* ColorState: Add get_oklab() and get_oklch().
-* ContentFormats: Add is_empty().
-  (Kjell Ahlstedt)
-
-Gtk:
-* SearchEntry2: Add signal_activate().
-  (Kjell Ahlstedt) Issue #161 (PBS)
-* ColorDialogButton, DropDown, Expander, FontDialogButton, MenuButton,
-  PasswordEntry, Text: Add signal_activate().
-  (Kjell Ahlstedt)
-* Snapshot: Add and deprecate render_background().
-  (Kjell Ahlstedt) Merge request !91 (Ezike Ebuka)
-* ApplicationWindow: Deprecate unset/set/get_help_overlay().
-* ShortcutLabel, ShortcutsGroup, ShortcutsSection, ShortcutsShortcut,
-  ShortcutsWindow: Deprecate these classes.
-* FileDialog: Add open_text_file(), open_text_file_finish(),
-  open_multiple_text_files(), open_multiple_text_files_finish(),
-  save_text_file(), save_text_file_finish().
-* ListBox: Add set/get/property_tab_behavior().
-* StringList: Add find().
-* TextView: Add get_visible_offset().
-  (Kjell Ahlstedt)
-
-Build:
-* Require gtk4 >=3D 4.17.3.
-  Require glibmm >=3D 2.75.0. Actually required since gtkmm 4.15.0.
-* Meson build: If GTKMM_NO_DIST_TESTS is defined, 'meson dist'
-  does not run test programs.
-  (Kjell Ahlstedt)
-
-4.16.0 (stable) 2024-09-10
-
-Almost identical to 4.15.1.
-
-Gtk:
-* gtkmm.h: Add eventcontrollerlegacy.h.
-
-4.15.1 (unstable) 2024-08-30:
-
-Gdk:
-* DrawContext: Deprecate begin_frame(), end_frame(), is_in_frame(),
-  get_frame_region().
-* Surface: Deprecate set_opaque_region().
-  (Kjell Ahlstedt)
-* Cursor: Rename create(const SlotGetTexture& slot, .....).
-  Call it create_from_slot(). It was added in 4.15.0 (unstable),
-  but some create() calls in old code became ambiguous.
-  (Kjell Ahlstedt) Issue #159 (Alessandro Astone)
-
-Gtk:
-* Window: Add set_interactive_debugging().
-* TextBuffer: Add enum TextBuffer::NotifyFlags,
-  add_commit_notify(), remove_commit_notify().
-  (Kjell Ahlstedt)
-
-Build:
-* Require gtk4 >=3D 4.15.5.
-  (Kjell Ahlstedt)
-
-4.15.0 (unstable) 2024-08-01:
-
-Gdk:
-* Cursor: Add create(slot, fallback).
-* Add class CicpParams, ColorState and MemoryTextureBuilder.
-* DmabufTextureBuilder: Add get/set/property_color_state().
-* GLTextureBuilder.[ccg|hg]: Add get/set/property_color_state().
-* Texture: Add get/property_color_state().
-* TextureDownloader: Add get/set_color_state().
-  (Kjell Ahlstedt)
-
-Gtk:
-* Widget: Deprecate set/unset/get_font_options().
-  (Kjell Ahlstedt)
-* Paned: Add unset_start_child() and unset_end_child().
-  (Kjell Ahlstedt) Issue #156 (PBS)
-* Add enum FontRendering.
-* GraphicsOffload: Add set/get/property_black_background().
-* Settings: Add property_gtk_font_rendering().
-* FileDialog: Add a nullptr test.
-  (Kjell Ahlstedt)
-* Undefine preprocessor macro BSD, which can be defined in MacOS,
-  and can interfere with enum License::BSD.
-  (Kjell Ahlstedt) Issue #157 (Mohamed Akram)
-* Shortcut: Add set_action(). Deprecate the misnamed
-  set_trigger(const Glib::RefPtr<const ShortcutAction>& action).
-* Snapshot: Deprecate gl_shader_pop_texture().
-  (Kjell Ahlstedt)
-
-Demos:
-* Dialog demo: Fix a memory leak. Add some comments.
-  (Kjell Ahlstedt)
-
-Documentation:
-* Gdk::Cursor: Update the class description.
-* Gtk::Settings: Improve the class documentation.
-  (Kjell Ahlstedt)
-* Don't link to removed parts of library.gnome.org.
-  (Andre Klapper, Kjell Ahlstedt)
-
-Build:
-* Require gtk4 >=3D 4.15.4.
-* Meson build: Require meson >=3D 0.62.0.
-  Use Meson's pkgconfig module instead of using
-  the *.pc.in templates.
-  (Kjell Ahlstedt)
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../gtk+/{gtkmm4_4.14.0.bb =3D> gtkmm4_4.20.0.bb}           | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-gnome/gtk+/{gtkmm4_4.14.0.bb =3D> gtkmm4_4.20.0.b=
-b} (63%)
-
-diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm4_4.14.0.bb b/meta-oe/recipe=
-s-gnome/gtk+/gtkmm4_4.20.0.bb
-similarity index 63%
-rename from meta-oe/recipes-gnome/gtk+/gtkmm4_4.14.0.bb
-rename to meta-oe/recipes-gnome/gtk+/gtkmm4_4.20.0.bb
-index d3a01e444c..439ab800f8 100644
---- a/meta-oe/recipes-gnome/gtk+/gtkmm4_4.14.0.bb
-+++ b/meta-oe/recipes-gnome/gtk+/gtkmm4_4.20.0.bb
-@@ -3,8 +3,10 @@ HOMEPAGE =3D "http://www.gtkmm.org/"
- SECTION =3D "libs"
-=20
- LICENSE =3D "LGPL-2.1-only & GPL-2.0-only"
--LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
-16c \
--                    file://COPYING.tools;md5=3D751419260aa954499f7abaaba=
-a882bbe"
-+LIC_FILES_CHKSUM =3D " \
-+	file://COPYING;md5=3D4bf661c1e3793e55c8d1051bc5e0ae21 \
-+	file://COPYING.tools;md5=3D570a9b3749dd0463a1778803b12a6dce \
-+"
-=20
- DEPENDS =3D "glib-2.0-native atkmm pangomm-2.48 glibmm gtk4 cairomm-1.16=
- gdk-pixbuf-native"
-=20
-@@ -14,7 +16,7 @@ inherit gnomebase features_check
-=20
- REQUIRED_DISTRO_FEATURES =3D "opengl x11"
-=20
--SRC_URI[archive.sha256sum] =3D "9350a0444b744ca3dc69586ebd1b6707520922b6=
-d9f4f232103ce603a271ecda"
-+SRC_URI[archive.sha256sum] =3D "daad9bf9b70f90975f91781fc7a656c923a91374=
-261f576c883cd3aebd59c833"
-=20
- EXTRA_OEMESON =3D "-Dbuild-demos=3Dfalse"
-=20
---=20
-2.51.0
-
+--0000000000001fa44406426b60db--
 
