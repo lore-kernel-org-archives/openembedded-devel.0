@@ -1,403 +1,305 @@
-Return-Path: <anuj.mittal@intel.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1354FCCF9E3
-	for <webhook@archiver.kernel.org>; Fri, 31 Oct 2025 02:13:34 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
- by mx.groups.io with SMTP id smtpd.web11.5876.1761876809036415253
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CA4DCCF9E3
+	for <webhook@archiver.kernel.org>; Fri, 31 Oct 2025 02:43:04 +0000 (UTC)
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.web11.6276.1761878581619630614
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Oct 2025 19:13:29 -0700
+ Thu, 30 Oct 2025 19:43:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=VV8edZXA;
- spf=pass (domain: intel.com, ip: 198.175.65.18, mailfrom: anuj.mittal@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1761876809; x=1793412809;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Dtz54TR4OdoPKNL+stQi/H9Iuos/Is3RozGCqEwWskI=;
-  b=VV8edZXAlKzSUoalt1Yy2bkBmkoddHb2uHwrn596oktGa9j3qDz7nJu2
-   nR8LnMNESjRKDQ+I5k2vm3231dBas/FVCULarfRAhWuwZk2zm77u1Rk4N
-   5pSOTzFiVPSiQgOdUckTNclZRIhSXEADgIPiJE37rTNY2kdAEIB47plfa
-   GcR1isJEitFWSRAaW6PzjbbVyJMn8e7Hg/xPokGlH+Gn5s80SQNjnqFqb
-   SUYPdHFWBxi6Y2BhsyDZ0A1Q1PSQNDB/t57JgZDWwaF69Xte0qKde2gb1
-   F6IaRiYwCievRFU/Hxbj6cwyQavgTQpu+yxRqhJvm6wsg3UfrV5x1wCjc
-   g==;
-X-CSE-ConnectionGUID: nKhrou0cSKG2aNxTTVs4EA==
-X-CSE-MsgGUID: 464GxvbSToO6VvPrvRvWwQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11598"; a="64071931"
-X-IronPort-AV: E=Sophos;i="6.19,268,1754982000"; 
-   d="scan'208";a="64071931"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
-  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Oct 2025 19:13:28 -0700
-X-CSE-ConnectionGUID: CsPjzlEmS0+3zPIeVyFz5w==
-X-CSE-MsgGUID: 9gzAHVM0QguLlvMnMRm0jw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,268,1754982000"; 
-   d="scan'208";a="185799561"
-Received: from unknown (HELO anmitta2-mobl4.png.intel.com) ([10.107.11.181])
-  by fmviesa007-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Oct 2025 19:13:27 -0700
-From: Anuj Mittal <anuj.mittal@intel.com>
-To: raj.khem@gmail.com,
-	openembedded-devel@lists.openembedded.org
-Subject: [scarthgap][PATCH 00/87] Scarthgap pull request
-Date: Fri, 31 Oct 2025 10:13:21 +0800
-Message-ID: <cover.1761876513.git.anuj.mittal@intel.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
+Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
+	by mailout11.t-online.de (Postfix) with SMTP id DFCC01C837
+	for <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 03:42:59 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.34.215]) by fwd88.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1vEf6L-0OXCYT0; Fri, 31 Oct 2025 03:42:53 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] gtkmm4: update
+Date: Fri, 31 Oct 2025 03:42:42 +0100
+Message-ID: <20251031024242.46550-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1761878573-D9FF8A4B-055BB740/0/0 CLEAN NORMAL
+X-TOI-MSGID: a6cddad3-c9f5-4a7e-8382-738d47034b6a
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 02:13:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121216
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 02:43:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121217
 
-We had a lot of CVE fixes in past month. Thank you to everyone who
-contributed. I tested this on AB and locally.
+4.20.0 (stable) 2025-09-19
 
-https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1040
+Gdk:
+* PixbufAnimation, PixbufAnimationIter: Deprecate these classes.
+  GdkPixbufAnimation and GdkPixbufAnimationIter are deprecated
+  since gdk-pixbuf 2.44.
+* PixbufLoader: Deprecate get_animation().
+  (Kjell Ahlstedt)
 
+4.19.1 (unstable) 2025-08-26
 
-The following changes since commit a8484babb6b06f5a7278e4778d13d7a19abc9502:
+Gdk:
+* Event: Add get_relative_direction() and enum ScrollRelativeDirection.
+  (Kjell Ahlstedt)
 
-  uim: Stick to C17 (2025-10-29 23:07:07 +0800)
+Gsk:
+* Transform: Add matrix_2d().
+  (Kjell Ahlstedt)
 
-are available in the Git repository at:
+Gtk:
+* Application: Deprecate property_register_session().
+* CssProvider: Add property_prefers_color_scheme() and
+  property_prefers_contrast().
+* Entry: Add set/get_menu_entry_icon_text(),
+  property_menu_entry_icon_primary_text() and
+  property_menu_entry_icon_secondary_text().
+* Add enum InterfaceColorScheme and InterfaceContrast.
+* FilterListModel: Add get/set/property_watch_items().
+* Settings: Add property_gtk_interface_color_scheme()
+  and property_gtk_interface_contrast().
+  (Kjell Ahlstedt)
 
-  https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
-  https://git.openembedded.org/meta-openembedded-contrib/log/?h=anujm/scarthgap
+Documentation:
+* Add images used in documentation copied by gmmproc.
+* Gtk::DrawingArea, Gtk::GLArea: Update the class descriptions.
+  (Kjell Ahlstedt)
 
-Alexandre Truong (1):
-  evince: Update status for CVE-2011-0433 and CVE-2011-5244
+Build:
+* Require gtk4 >=3D 4.19.4
+  (Kjell Ahlstedt)
 
-Ankur Tyagi (25):
-  tinyproxy: patch CVE-2023-49606
-  frr: patch CVE-2024-44070
-  libavif: ignore CVE-2025-48175
-  libconfuse: patch CVE-2022-40320
-  hdf5: patch CVE-2025-2913
-  hdf5: patch CVE-2025-2914
-  hdf5: patch CVE-2025-2915
-  hdf5: patch CVE-2025-2923, CVE-2025-6816, CVE-2025-6856
-  hdf5: patch CVE-2025-2924
-  hdf5: patch CVE-2025-2925
-  hdf5: patch CVE-2025-6269, CVE-2025-6270, CVE-2025-6516
-  libppd: patch CVE-2024-47175
-  libcupsfilters: patch CVE-2024-47076
-  libraw: patch CVE-2025-43961 CVE-2025-43962
-  libraw: patch CVE-2025-43963
-  libraw: patch CVE-2025-43964
-  zlog: fix CVE-2024-22857
-  memcached: patch CVE-2023-46852
-  memcached: patch CVE-2023-46853
-  ndpi: ignore CVE-2025-25066
-  libiec61850: patch CVE-2024-26529
-  libiec61850: patch CVE-2024-45970
-  libiec61850: patch CVE-2024-45971
-  mbedtls: upgrade 3.6.4 -> 3.6.5
-  hostapd: patch CVE-2025-24912
+4.19.0 (unstable) 2025-06-29
 
-Christos Gavros (1):
-  corosync: reproducibility issue
+Gdk:
+* Deprecate Gdk::Cairo::set_source_pixbuf().
+* Texture: Deprecate create_for_pixbuf().
+* Pixbuf: Deprecate create_from_xpm_data().
+* ColorState: Add equivalent().
+* MemoryTextureBuilder: Add get/set_stride_for_plane() and get/set_offset=
+().
+* TextureDownloader: Add download_bytes_with_planes().
+* Toplevel: Add enum TitlebarGesture, enum Toplevel::Capabilities,
+  titlebar_gesture(), get/property_capabilities(), get/set/property_gravi=
+ty().
+  (Kjell Ahlstedt)
 
-Divya Chellam (1):
-  jq: fix CVE-2025-9403
+Gsk: (new subdirectory and namespace)
+* Add RoundedRect, Transform and enums BlendMode, Corner, FillRule,
+  MaskMode, ScalingFilter, Transform::Category.
+  (Kjell Ahlstedt) Merge request !92
 
-Gyorgy Sarvari (27):
-  pm-qa: update git fetch protocol
-  tokyocabinet: switch to working SRC_URI
-  tokyocabinet: fix license
-  iperf2: ignore irrelevant CVEs
-  jasper: patch CVE-2025-8835
-  jasper: patch CVE-2025-8836
-  jasper: patch CVE-2025-8837
-  etcd: patch CVE-2023-32082
-  freerdp3: patch CVE-2024-32039 and CVE-2024-32041
-  freerdp3: patch CVE-2024-32040
-  freerdp3: patch CVE-2024-32458
-  freerdp3: patch CVE-2024-32459
-  freerdp3: patch CVE-2024-32460
-  freerdp3: patch CVE-2024-32658
-  freerdp3: patch CVE-2025-32659
-  freerdp3: patch CVE-2024-32660
-  freerdp3: patch CVE-2024-32661
-  freerdp3: patch CVE-2024-32662
-  exiv2: patch CVE-2025-26623
-  exiv2: patch CVE-2025-54080
-  exiv2: patch CVE-2025-55304
-  redis: upgrade 6.2.18 -> 6.2.20
-  emacs: patch CVE-2024-30202
-  emacs: patch CVE-2024-30203
-  emacs: patch CVE-2024-30204
-  emacs: patch CVE-2024-30205
-  emacs: patch CVE-2024-39331
+Gtk:
+* Add Fixed::set/get_child_transform()
+  (Kjell Ahlstedt)
+* Add FixedLayout and FixedLayoutChild
+  (Kjell Ahlstedt) Issue #164 (Thayne McCombs)
+* Calendar: Deprecate select_day(), property_year/month/day(),
+  add set/property_date().
+* FileFilter: Deprecate add_pixbuf_formats().
+* IconPaintable: Deprecate get/property_icon_name(), is_symbolic(),
+  property_is_symbolic().
+* UriLauncher.hg: Add can_launch().
+* Window: Add enum WindowGravity, get/set/property_gravity().
+  (Kjell Ahlstedt)
 
-Hitendra Prajapati (1):
-  libjxl: fix CVE-2024-11403 & CVE-2024-11498
+Demos:
+* Avoid deprecated Pixbuf methods where possible.
+  (Kjell Ahlstedt)
 
-Jiaying Song (2):
-  webkitgtk3: update 2.44.1 -> 2.44.3
-  webkitgtk3: fix do_configure error on beaglebone-yocto
+Build:
+* NMake Makefiles: Generate gskmm build config files
+* NMake builds: Add build rules to build gskmm
+  (Chun-wei Fan) Merge request !92
+* Require gtk4 >=3D 4.19.2
+  (Kjell Ahlstedt)
 
-Khem Raj (2):
-  freerdp: Upgrade 2.11.2 -> 2.11.7
-  influxdb: Do not remove non-existing files
+4.18.0 (stable) 2025-03-23
 
-Ninette Adhikari (3):
-  xsp: CVE status update for CVE-2006-2658
-  influxdb: Update CVE status for CVE-2019-10329
-  monkey: Update status for CVE-2013-2183
+Gdk:
+* CairoContext: Deprecate cairo_create().
+* Device: Add get/property_active_layout_index(), get/property_layout_nam=
+es().
+* Surface: Add translate_coordinates(), deprecate create_cairo_context().
+  (Kjell Ahlstedt)
 
-Peter Marko (12):
-  emlog: set CVE_PRODUCT
-  freerdp: patch CVE-2024-32661
-  freerdp: mark CVE-2024-32662 as fixed
-  freerdp3: set CVE_PRODUCT
-  corosync: fix upstream version check
-  corosync: upgrade 3.1.6 -> 3.1.9
-  corosync: patch CVE-2025-30472
-  dash: set CVE_PRODUCT
-  gattlib: mark CVE-2019-6498 as fixed
-  memcached: ignore disputed CVE-2022-26635
-  monkey: ignore CVE-2013-1771
-  squid: patch CVE-2025-59362
+Gtk:
+* Accessible: Add update_platform_state().
+* HeaderBar, WindowControls: Add get/set/property_use_native_controls().
+* Widget: Add get/set/property_limit_events().
+  (Kjell Ahlstedt)
 
-Praveen Kumar (2):
-  yasm: fix CVE-2024-22653
-  cjson: upgrade 1.7.18 -> 1.7.19
+Documentation:
+* Gtk::SignalListItemFactory: Remove errroneous links.
+  (Daniel Boles)
+* Gtk::AboutDialog: Update the image.
+* Gtk::ConstraintLayout: Add a link to the description of GtkConstraintLa=
+yout.
+* Gdk::Pixbuf, PixbufFormat, PixbufLoader: Add class descriptions.
+  (Kjell Ahlstedt)
 
-Rajeshkumar Ramasamy (1):
-  open-vm-tools: fix CVE-2025-41244
+Build:
+* Require gtk4 >=3D 4.17.5
+* Meson build: Use the Python installation that Meson uses.
+  See merge request glibmm!67.
+  (Kjell Ahlstedt)
 
-Saravanan (1):
-  fio: fix CVE-2025-10823
+4.17.0 (unstable) 2025-01-26
 
-Soumya Sambu (1):
-  python3-django: upgrade 4.2.18 -> 4.2.20
+Gdk:
+* ColorState: Add get_oklab() and get_oklch().
+* ContentFormats: Add is_empty().
+  (Kjell Ahlstedt)
 
-Vijay Anusuri (4):
-  poppler: Fix CVE-2025-43718
-  redis: upgrade 7.2.8 -> 7.2.11
-  redis: upgrade 6.2.16 -> 6.2.18
-  vorbis-tools: Fix CVE-2023-43361
+Gtk:
+* SearchEntry2: Add signal_activate().
+  (Kjell Ahlstedt) Issue #161 (PBS)
+* ColorDialogButton, DropDown, Expander, FontDialogButton, MenuButton,
+  PasswordEntry, Text: Add signal_activate().
+  (Kjell Ahlstedt)
+* Snapshot: Add and deprecate render_background().
+  (Kjell Ahlstedt) Merge request !91 (Ezike Ebuka)
+* ApplicationWindow: Deprecate unset/set/get_help_overlay().
+* ShortcutLabel, ShortcutsGroup, ShortcutsSection, ShortcutsShortcut,
+  ShortcutsWindow: Deprecate these classes.
+* FileDialog: Add open_text_file(), open_text_file_finish(),
+  open_multiple_text_files(), open_multiple_text_files_finish(),
+  save_text_file(), save_text_file_finish().
+* ListBox: Add set/get/property_tab_behavior().
+* StringList: Add find().
+* TextView: Add get_visible_offset().
+  (Kjell Ahlstedt)
 
-Wang Mingyu (1):
-  libiec61850: upgrade 1.5.1 -> 1.5.3
+Build:
+* Require gtk4 >=3D 4.17.3.
+  Require glibmm >=3D 2.75.0. Actually required since gtkmm 4.15.0.
+* Meson build: If GTKMM_NO_DIST_TESTS is defined, 'meson dist'
+  does not run test programs.
+  (Kjell Ahlstedt)
 
-Yi Zhao (1):
-  redis: upgrade 6.2.14 -> 6.2.16
+4.16.0 (stable) 2024-09-10
 
-Yogita Urade (1):
-  poppler: fix CVE-2025-52885
+Almost identical to 4.15.1.
 
- .../recipes-gnome/evince/evince_46.0.bb       |   4 +
- .../libavif/libavif_1.0.1.bb                  |   2 +
- .../vorbis-tools/CVE-2023-43361.patch         |  57 ++
- .../vorbis-tools/vorbis-tools_1.4.2.bb        |   1 +
- .../libiec61850/files/CVE-2024-26529.patch    |  33 +
- .../libiec61850/files/CVE-2024-45970.patch    |  74 +++
- .../libiec61850/files/CVE-2024-45971.patch    | 218 +++++++
- ...iec61850_1.5.1.bb => libiec61850_1.5.3.bb} |   5 +-
- .../{mbedtls_3.6.4.bb => mbedtls_3.6.5.bb}    |   2 +-
- .../squid/files/CVE-2025-59362.patch          |  52 ++
- .../recipes-daemons/squid/squid_6.9.bb        |   1 +
- .../corosync/corosync/CVE-2025-30472.patch    |  69 ++
- .../{corosync_3.1.6.bb => corosync_3.1.9.bb}  |  17 +-
- .../frr/frr/CVE-2024-44070.patch              |  54 ++
- .../recipes-protocols/frr/frr_9.1.bb          |   1 +
- .../net-snmp/net-snmp_5.9.4.bb                |   3 +
- .../libconfuse/files/CVE-2022-40320.patch     |  42 ++
- .../libconfuse/libconfuse_3.3.bb              |   5 +-
- .../memcached/memcached/CVE-2023-46852.patch  |  71 +++
- .../memcached/memcached/CVE-2023-46853.patch  | 117 ++++
- .../memcached/memcached_1.6.17.bb             |   4 +
- .../recipes-support/ntopng/ndpi_4.2.bb        |   2 +
- .../open-vm-tools/CVE-2025-41244.patch        | 123 ++++
- .../open-vm-tools/open-vm-tools_12.3.5.bb     |   1 +
- .../tinyproxy/0001-CVE-2023-49606.patch       |  59 ++
- .../tinyproxy/tinyproxy_1.11.1.bb             |   1 +
- .../fio/fio/CVE-2025-10823.patch              |  37 ++
- meta-oe/recipes-benchmark/fio/fio_3.36.bb     |   2 +
- .../recipes-benchmark/iperf2/iperf2_2.0.13.bb |   3 +
- .../gattlib/gattlib_git.bb                    |   2 +
- .../hostapd/hostapd/CVE-2025-24912_01.patch   |  80 +++
- .../hostapd/hostapd/CVE-2025-24912_02.patch   |  72 +++
- .../hostapd/hostapd_2.10.bb                   |   2 +
- meta-oe/recipes-core/emlog/emlog.inc          |   2 +
- .../recipes-dbs/influxdb/influxdb_1.8.10.bb   |   9 +-
- .../cjson/cjson/CVE-2025-57052.patch          |  33 -
- .../{cjson_1.7.18.bb => cjson_1.7.19.bb}      |   3 +-
- .../jq/jq/CVE-2025-9403.patch                 |  49 ++
- meta-oe/recipes-devtools/jq/jq_1.7.1.bb       |   1 +
- .../yasm/yasm/CVE-2024-22653.patch            |  32 +
- meta-oe/recipes-devtools/yasm/yasm_git.bb     |   1 +
- .../etcd/etcd/CVE-2023-32082.patch            |  86 +++
- meta-oe/recipes-extended/etcd/etcd_3.5.7.bb   |   1 +
- ...-hiredis-use-default-CC-if-it-is-set.patch |   0
- ...ile-to-use-environment-build-setting.patch |   0
- ...003-hack-to-force-use-of-libc-malloc.patch |   8 +-
- .../0004-src-Do-not-reset-FINAL_LIBS.patch    |  10 +-
- ...RCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch |   0
- ...006-Define-correct-gregs-for-RISCV32.patch |   0
- .../init-redis-server                         |   0
- .../{redis-7.2.8 => redis-7.2.11}/redis.conf  |   0
- .../redis.service                             |   0
- .../redis/redis-7.2.8/CVE-2025-32023.patch    | 218 -------
- ...hiredis-use-default-CC-if-it-is-set.patch} |  14 +-
- ...le-to-use-environment-build-setting.patch} |  10 +-
- ...03-hack-to-force-use-of-libc-malloc.patch} |   9 +-
- ...=> 0004-src-Do-not-reset-FINAL_LIBS.patch} |   8 +-
- ...CE-to-get-PTHREAD_MUTEX_INITIALIZER.patch} |   6 +-
- ...006-Define-correct-gregs-for-RISCV32.patch |  12 +-
- .../redis/redis/init-redis-server             |   0
- .../{redis_6.2.14.bb => redis_6.2.20.bb}      |  17 +-
- .../redis/{redis_7.2.8.bb => redis_7.2.11.bb} |   3 +-
- ...E-2024-22857-buffer-overflow-patched.patch |  31 +
- meta-oe/recipes-extended/zlog/zlog_1.2.16.bb  |   4 +-
- .../jasper/jasper/0001-Fixes-400.patch        | 171 +++++
- .../jasper/jasper/0001-Fixes-401.patch        |  78 +++
- .../jasper/jasper/0001-Fixes-402-403.patch    |  62 ++
- .../recipes-graphics/jasper/jasper_4.1.1.bb   |   6 +-
- .../libjxl/libjxl/CVE-2024-11403.patch        |  70 ++
- .../libjxl/libjxl/CVE-2024-11498.patch        | 113 ++++
- .../libjxl/libjxl_0.10.2.bb                   |   6 +-
- meta-oe/recipes-multimedia/xsp/xsp_1.0.0-8.bb |   2 +
- .../libcupsfilters/0001-CVE-2024-47076.patch  |  38 ++
- .../cups/libcupsfilters_2.0.0.bb              |   1 +
- .../cups/libppd/0001-CVE-2024-47175.patch     | 600 ++++++++++++++++++
- meta-oe/recipes-printing/cups/libppd_2.0.0.bb |   5 +-
- meta-oe/recipes-shells/dash/dash_0.5.12.bb    |   2 +
- meta-oe/recipes-support/emacs/emacs_29.1.bb   |   5 +
- ...w.el-mm-display-inline-fontify-Mark-.patch |  27 +
- ...nts-Consider-all-remote-files-unsafe.patch |  38 ++
- ...w-Add-protection-when-untrusted-cont.patch |  60 ++
- ...abbrev-Do-not-evaluate-arbitrary-uns.patch |  71 +++
- ...et-templates-Prevent-code-evaluation.patch |  47 ++
- ...ppendIccProfile-to-fix-quadratic-per.patch |  96 +++
- .../exiv2/exiv2/0001-CVE-2025-54080-fix.patch |  77 +++
- .../0001-Revert-fix-copy-constructors.patch   |  82 +++
- meta-oe/recipes-support/exiv2/exiv2_0.28.3.bb |   6 +-
- .../0001-Fixed-compilation-warnings.patch     |  27 +
- .../freerdp/freerdp/CVE-2024-32661.patch      |  27 +
- .../freerdp/freerdp3/CVE-2024-32039.patch     |  68 ++
- .../freerdp/freerdp3/CVE-2024-32040.patch     |  29 +
- .../freerdp/freerdp3/CVE-2024-32458.patch     | 119 ++++
- .../freerdp/freerdp3/CVE-2024-32459.patch     |  30 +
- .../freerdp/freerdp3/CVE-2024-32460.patch     |  26 +
- .../freerdp/freerdp3/CVE-2024-32658.patch     |  35 +
- .../freerdp/freerdp3/CVE-2024-32659.patch     |  27 +
- .../freerdp/freerdp3/CVE-2024-32660.patch     | 151 +++++
- .../freerdp/freerdp3/CVE-2024-32661.patch     |  28 +
- .../freerdp/freerdp3/CVE-2024-32662.patch     |  28 +
- .../recipes-support/freerdp/freerdp3_3.4.0.bb |  15 +-
- .../{freerdp_2.11.2.bb => freerdp_2.11.7.bb}  |   6 +-
- .../hdf5/files/CVE-2025-2913.patch            |  32 +
- .../hdf5/files/CVE-2025-2914.patch            |  47 ++
- .../hdf5/files/CVE-2025-2915.patch            |  50 ++
- ...025-2923-CVE-2025-6816-CVE-2025-6856.patch |  65 ++
- .../hdf5/files/CVE-2025-2924.patch            |  37 ++
- .../hdf5/files/CVE-2025-2925.patch            |  53 ++
- ...-6269-CVE-2025-6270-CVE-2025-6516_01.patch |  65 ++
- ...-6269-CVE-2025-6270-CVE-2025-6516_02.patch | 252 ++++++++
- meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |   8 +
- .../0001-CVE-2025-43961-CVE-2025-43962.patch  | 108 ++++
- .../libraw/libraw/0002-CVE-2025-43963.patch   |  40 ++
- .../libraw/libraw/0003-CVE-2025-43964.patch   |  29 +
- .../recipes-support/libraw/libraw_0.21.2.bb   |   7 +-
- .../poppler/poppler/CVE-2025-43718.patch      |  31 +
- .../poppler/poppler/CVE-2025-52885.patch      |  30 +
- .../poppler/poppler_23.04.0.bb                |   2 +
- .../tokyocabinet/tokyocabinet_1.4.48.bb       |   4 +-
- ...kitgtk3_2.44.1.bb => webkitgtk3_2.44.3.bb} |  14 +-
- meta-oe/recipes-test/pm-qa/pm-qa_git.bb       |   2 +-
- ...ngo_4.2.18.bb => python3-django_4.2.20.bb} |   4 +-
- .../recipes-httpd/monkey/monkey_1.6.9.bb      |   2 +
- 122 files changed, 4597 insertions(+), 347 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/CVE-2023-43361.patch
- create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/CVE-2024-26529.patch
- create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/CVE-2024-45970.patch
- create mode 100644 meta-networking/recipes-connectivity/libiec61850/files/CVE-2024-45971.patch
- rename meta-networking/recipes-connectivity/libiec61850/{libiec61850_1.5.1.bb => libiec61850_1.5.3.bb} (88%)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_3.6.4.bb => mbedtls_3.6.5.bb} (98%)
- create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2025-59362.patch
- create mode 100644 meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch
- rename meta-networking/recipes-extended/corosync/{corosync_3.1.6.bb => corosync_3.1.9.bb} (84%)
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2024-44070.patch
- create mode 100755 meta-networking/recipes-support/libconfuse/files/CVE-2022-40320.patch
- create mode 100644 meta-networking/recipes-support/memcached/memcached/CVE-2023-46852.patch
- create mode 100644 meta-networking/recipes-support/memcached/memcached/CVE-2023-46853.patch
- create mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2025-41244.patch
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/0001-CVE-2023-49606.patch
- create mode 100644 meta-oe/recipes-benchmark/fio/fio/CVE-2025-10823.patch
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912_01.patch
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912_02.patch
- delete mode 100644 meta-oe/recipes-devtools/cjson/cjson/CVE-2025-57052.patch
- rename meta-oe/recipes-devtools/cjson/{cjson_1.7.18.bb => cjson_1.7.19.bb} (95%)
- create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2025-9403.patch
- create mode 100644 meta-oe/recipes-devtools/yasm/yasm/CVE-2024-22653.patch
- create mode 100644 meta-oe/recipes-extended/etcd/etcd/CVE-2023-32082.patch
- rename meta-oe/recipes-extended/redis/{redis-7.2.8 => redis-7.2.11}/0001-hiredis-use-default-CC-if-it-is-set.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.8 => redis-7.2.11}/0002-lua-update-Makefile-to-use-environment-build-setting.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.8 => redis-7.2.11}/0003-hack-to-force-use-of-libc-malloc.patch (86%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.8 => redis-7.2.11}/0004-src-Do-not-reset-FINAL_LIBS.patch (79%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.8 => redis-7.2.11}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.8 => redis-7.2.11}/0006-Define-correct-gregs-for-RISCV32.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.8 => redis-7.2.11}/init-redis-server (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.8 => redis-7.2.11}/redis.conf (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.8 => redis-7.2.11}/redis.service (100%)
- delete mode 100644 meta-oe/recipes-extended/redis/redis-7.2.8/CVE-2025-32023.patch
- rename meta-oe/recipes-extended/redis/redis/{hiredis-use-default-CC-if-it-is-set.patch => 0001-hiredis-use-default-CC-if-it-is-set.patch} (85%)
- rename meta-oe/recipes-extended/redis/redis/{lua-update-Makefile-to-use-environment-build-setting.patch => 0002-lua-update-Makefile-to-use-environment-build-setting.patch} (93%)
- rename meta-oe/recipes-extended/redis/redis/{oe-use-libc-malloc.patch => 0003-hack-to-force-use-of-libc-malloc.patch} (92%)
- rename meta-oe/recipes-extended/redis/redis/{0001-src-Do-not-reset-FINAL_LIBS.patch => 0004-src-Do-not-reset-FINAL_LIBS.patch} (86%)
- rename meta-oe/recipes-extended/redis/redis/{GNU_SOURCE.patch => 0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch} (91%)
- mode change 100755 => 100644 meta-oe/recipes-extended/redis/redis/init-redis-server
- rename meta-oe/recipes-extended/redis/{redis_6.2.14.bb => redis_6.2.20.bb} (79%)
- rename meta-oe/recipes-extended/redis/{redis_7.2.8.bb => redis_7.2.11.bb} (95%)
- create mode 100644 meta-oe/recipes-extended/zlog/zlog/0001-CVE-2024-22857-buffer-overflow-patched.patch
- create mode 100644 meta-oe/recipes-graphics/jasper/jasper/0001-Fixes-400.patch
- create mode 100644 meta-oe/recipes-graphics/jasper/jasper/0001-Fixes-401.patch
- create mode 100644 meta-oe/recipes-graphics/jasper/jasper/0001-Fixes-402-403.patch
- create mode 100644 meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch
- create mode 100644 meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch
- create mode 100644 meta-oe/recipes-printing/cups/libcupsfilters/0001-CVE-2024-47076.patch
- create mode 100644 meta-oe/recipes-printing/cups/libppd/0001-CVE-2024-47175.patch
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-lisp-gnus-mm-view.el-mm-display-inline-fontify-Mark-.patch
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-org-file-contents-Consider-all-remote-files-unsafe.patch
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-org-latex-preview-Add-protection-when-untrusted-cont.patch
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-org-link-expand-abbrev-Do-not-evaluate-arbitrary-uns.patch
- create mode 100644 meta-oe/recipes-support/emacs/files/0001-org-macro-set-templates-Prevent-code-evaluation.patch
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-Add-new-method-appendIccProfile-to-fix-quadratic-per.patch
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-CVE-2025-54080-fix.patch
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-Revert-fix-copy-constructors.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp/0001-Fixed-compilation-warnings.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp/CVE-2024-32661.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32039.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32040.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32458.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32459.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32460.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32658.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32659.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32660.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32661.patch
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2024-32662.patch
- rename meta-oe/recipes-support/freerdp/{freerdp_2.11.2.bb => freerdp_2.11.7.bb} (93%)
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2913.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2914.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2915.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2923-CVE-2025-6816-CVE-2025-6856.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2924.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2925.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_01.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_02.patch
- create mode 100644 meta-oe/recipes-support/libraw/libraw/0001-CVE-2025-43961-CVE-2025-43962.patch
- create mode 100644 meta-oe/recipes-support/libraw/libraw/0002-CVE-2025-43963.patch
- create mode 100644 meta-oe/recipes-support/libraw/libraw/0003-CVE-2025-43964.patch
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-43718.patch
- create mode 100644 meta-oe/recipes-support/poppler/poppler/CVE-2025-52885.patch
- rename meta-oe/recipes-support/webkitgtk/{webkitgtk3_2.44.1.bb => webkitgtk3_2.44.3.bb} (89%)
- rename meta-python/recipes-devtools/python/{python3-django_4.2.18.bb => python3-django_4.2.20.bb} (63%)
+Gtk:
+* gtkmm.h: Add eventcontrollerlegacy.h.
+
+4.15.1 (unstable) 2024-08-30:
+
+Gdk:
+* DrawContext: Deprecate begin_frame(), end_frame(), is_in_frame(),
+  get_frame_region().
+* Surface: Deprecate set_opaque_region().
+  (Kjell Ahlstedt)
+* Cursor: Rename create(const SlotGetTexture& slot, .....).
+  Call it create_from_slot(). It was added in 4.15.0 (unstable),
+  but some create() calls in old code became ambiguous.
+  (Kjell Ahlstedt) Issue #159 (Alessandro Astone)
+
+Gtk:
+* Window: Add set_interactive_debugging().
+* TextBuffer: Add enum TextBuffer::NotifyFlags,
+  add_commit_notify(), remove_commit_notify().
+  (Kjell Ahlstedt)
+
+Build:
+* Require gtk4 >=3D 4.15.5.
+  (Kjell Ahlstedt)
+
+4.15.0 (unstable) 2024-08-01:
+
+Gdk:
+* Cursor: Add create(slot, fallback).
+* Add class CicpParams, ColorState and MemoryTextureBuilder.
+* DmabufTextureBuilder: Add get/set/property_color_state().
+* GLTextureBuilder.[ccg|hg]: Add get/set/property_color_state().
+* Texture: Add get/property_color_state().
+* TextureDownloader: Add get/set_color_state().
+  (Kjell Ahlstedt)
+
+Gtk:
+* Widget: Deprecate set/unset/get_font_options().
+  (Kjell Ahlstedt)
+* Paned: Add unset_start_child() and unset_end_child().
+  (Kjell Ahlstedt) Issue #156 (PBS)
+* Add enum FontRendering.
+* GraphicsOffload: Add set/get/property_black_background().
+* Settings: Add property_gtk_font_rendering().
+* FileDialog: Add a nullptr test.
+  (Kjell Ahlstedt)
+* Undefine preprocessor macro BSD, which can be defined in MacOS,
+  and can interfere with enum License::BSD.
+  (Kjell Ahlstedt) Issue #157 (Mohamed Akram)
+* Shortcut: Add set_action(). Deprecate the misnamed
+  set_trigger(const Glib::RefPtr<const ShortcutAction>& action).
+* Snapshot: Deprecate gl_shader_pop_texture().
+  (Kjell Ahlstedt)
+
+Demos:
+* Dialog demo: Fix a memory leak. Add some comments.
+  (Kjell Ahlstedt)
+
+Documentation:
+* Gdk::Cursor: Update the class description.
+* Gtk::Settings: Improve the class documentation.
+  (Kjell Ahlstedt)
+* Don't link to removed parts of library.gnome.org.
+  (Andre Klapper, Kjell Ahlstedt)
+
+Build:
+* Require gtk4 >=3D 4.15.4.
+* Meson build: Require meson >=3D 0.62.0.
+  Use Meson's pkgconfig module instead of using
+  the *.pc.in templates.
+  (Kjell Ahlstedt)
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../gtk+/{gtkmm4_4.14.0.bb =3D> gtkmm4_4.20.0.bb}           | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-gnome/gtk+/{gtkmm4_4.14.0.bb =3D> gtkmm4_4.20.0.b=
+b} (63%)
+
+diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm4_4.14.0.bb b/meta-oe/recipe=
+s-gnome/gtk+/gtkmm4_4.20.0.bb
+similarity index 63%
+rename from meta-oe/recipes-gnome/gtk+/gtkmm4_4.14.0.bb
+rename to meta-oe/recipes-gnome/gtk+/gtkmm4_4.20.0.bb
+index d3a01e444c..439ab800f8 100644
+--- a/meta-oe/recipes-gnome/gtk+/gtkmm4_4.14.0.bb
++++ b/meta-oe/recipes-gnome/gtk+/gtkmm4_4.20.0.bb
+@@ -3,8 +3,10 @@ HOMEPAGE =3D "http://www.gtkmm.org/"
+ SECTION =3D "libs"
+=20
+ LICENSE =3D "LGPL-2.1-only & GPL-2.0-only"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c \
+-                    file://COPYING.tools;md5=3D751419260aa954499f7abaaba=
+a882bbe"
++LIC_FILES_CHKSUM =3D " \
++	file://COPYING;md5=3D4bf661c1e3793e55c8d1051bc5e0ae21 \
++	file://COPYING.tools;md5=3D570a9b3749dd0463a1778803b12a6dce \
++"
+=20
+ DEPENDS =3D "glib-2.0-native atkmm pangomm-2.48 glibmm gtk4 cairomm-1.16=
+ gdk-pixbuf-native"
+=20
+@@ -14,7 +16,7 @@ inherit gnomebase features_check
+=20
+ REQUIRED_DISTRO_FEATURES =3D "opengl x11"
+=20
+-SRC_URI[archive.sha256sum] =3D "9350a0444b744ca3dc69586ebd1b6707520922b6=
+d9f4f232103ce603a271ecda"
++SRC_URI[archive.sha256sum] =3D "daad9bf9b70f90975f91781fc7a656c923a91374=
+261f576c883cd3aebd59c833"
+=20
+ EXTRA_OEMESON =3D "-Dbuild-demos=3Dfalse"
+=20
+--=20
+2.51.0
 
 
