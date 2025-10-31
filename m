@@ -1,175 +1,88 @@
-Return-Path: <quaresma.jose@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9631CCF9FE
-	for <webhook@archiver.kernel.org>; Fri, 31 Oct 2025 15:22:58 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web10.18261.1761924175360196424
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDE85CCF9FE
+	for <webhook@archiver.kernel.org>; Fri, 31 Oct 2025 15:40:08 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web11.18420.1761925204094017925
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 Oct 2025 08:22:55 -0700
+ Fri, 31 Oct 2025 08:40:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=a18dEhfy;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-b6d855ca585so518660466b.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 08:22:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nsifToBP;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-475c9881821so22527885e9.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 08:40:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761924174; x=1762528974; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=3lnjzcohC1VmlQ+/kZw7mYwA4l7HxFrJlY5jWbhr9nQ=;
-        b=a18dEhfy2W3R8eWn9PQTwTD4mF68CbjM4RGSQjJ7hxbTP6YjBiWXu7f8J9AvXfd3/O
-         /EbL+U3rCFmfKmdWDDsYKItFmzQGJnVrqxarhjenMC+8szSIfYgjxzYgZn12aTv5Y2kI
-         9GMSwsOp8qLX5PEGI/At44/lMox+YjihLd93rTCy+RddAFTN2IQgRbh0r2rMrT9mwwM/
-         ZvVgRw18FcAQItSWDAks8GOm+27vdwHQidq5xnn4c7SvHrUj2u+UB9SCgk11CclqWQp9
-         2TSxTHY+ClBF++tpTw8FUZUkoQ7W461q4a4xT7R1Af93FTWjs58/nGVK5mIuQ8f8ua2F
-         JH4g==
+        d=gmail.com; s=20230601; t=1761925202; x=1762530002; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=HAVOAviNGW0CavMzqg+VH5rl1MeAW/LZ9frOyh3bUl0=;
+        b=nsifToBPcZXuQTqdyt07gUlYMmDK6SMfz4rra9fAqbBiRamDYGQ4Y1TXWUV8NQLNP+
+         irLK14R8+JRxhcNJ0AE+fEXvGJ6KOiT+TcMC9bA+MFikL27jOkyoICJ2UB6jSUSd0ikY
+         4p7MvWNGbWvW3Gk632B4GLnJAc+zwM54pF53jKi64qU0N//vsCFkPW1UvPRSnBgUbT/3
+         ZArAnTP30H5FuGiLKmPZbqj3QCVpC9UHxeQLyAtMwPL7fF4K46u8YsKCOiIl+F5HAcsr
+         qVlcpjEA7xErfTp+mfU3mfP64bJz+8vQEnIwgLITH4n+Foo95VNBa25zi+DmLZ/sL46X
+         pe5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761924174; x=1762528974;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3lnjzcohC1VmlQ+/kZw7mYwA4l7HxFrJlY5jWbhr9nQ=;
-        b=ABflqGHnfHUHBRhBJOcSGSpJK0a5boNguadBRagTA/vY+EXvzWT1/Udy0UcPCiPdlX
-         7jSYUxp+ZawOm3QbVW+owDV4yGulED01rnVvFNHGS9SdYxIfoEXG+qWHAXHTH89QinTX
-         bfzv7Mm3BwRtJaXotsYUy8y5eGEWyNicTe45dT67IXJuGPWgEotXZ02JNBJ77vMkXpsC
-         +3yI5+wsl1S2+MYVXu5fOQTeCA5ZwW37fafjTO7/CwV4tVVlNLu4e4O/TuNSs3gFi9qS
-         z2Pd1gQx19s10LZVOMCduPXlwZ88RAEp2TqDlk18X4/GI5kEYQe3zirkQXi9a6atZcXm
-         ilow==
-X-Forwarded-Encrypted: i=1; AJvYcCXAUykZDRqiUONXFwGCFjNI75eVrH3K68wxASzKYkMW1yf/QuUM8liO4bwkx1+UUCvFhrnMOsQ1Am7YoGF6HfdR3QM=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yy86PsU/S0FgRGIfC/K2zfm2q3P/PmhFY/TsivTRUabxCMgmg1x
-	VeQYyguqcUf5giKLmnVqeFePLaBsIk88h6Bpnkp+Lm70wtP5mLPIVCjNRF+Pt6HeFRi7aMR52kz
-	b0HkbBXcP0iaYoG1ftXhzzKNgV3egE1c=
-X-Gm-Gg: ASbGncs5Q6a5DK5NIbxsR0SyOP1nqUja0KqJwqb8JOBZqrIzXRqxKeE4kNZMBZDlKqB
-	8F+C5XvIZS7C2AMRpTRbxhpkqNxDikLEUdwtHjc8O7cKN4RUp/AV13zl+xHV/XQdJEELsxom7fZ
-	kvilZqekkVLHNksDZBFlYdZb+Oea3RpSgAfzzMv/RguLZG6gLkESUKuCt1bzWCw7Go3y9J4lfm5
-	zVo1aJ6L5HjCLoQEm0IBlObR1BK3VXkaE2GdvTxILSg5KtU/QXtsMP1eCwWaw==
-X-Google-Smtp-Source: AGHT+IGwaFp5adG6niJPp5QtY0B9NMpmxLiSd1HLkNd4ZiuytNsnYTLx3gJnxa14zbelw1P4LARiaZHKx/D9WX5yQ0s=
-X-Received: by 2002:a17:907:720e:b0:b6a:694e:472e with SMTP id
- a640c23a62f3a-b70700c7b2emr456471766b.12.1761924173267; Fri, 31 Oct 2025
- 08:22:53 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1761925202; x=1762530002;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=HAVOAviNGW0CavMzqg+VH5rl1MeAW/LZ9frOyh3bUl0=;
+        b=V789d9nSyqc4//xpW5/p8xZ684sAQlEwt0MOmS7vnRnePvIyOrMQevChKNaXFJN4qp
+         WunthZkPWcONq//72q3kz04AbzcCIAhLul6A4oNfWb0e3zlAvib/E8zs7aXyh88YRgd2
+         xQ53+jHQBqC9iWPXWr+9ytVVX9zz5uoYikEZ7AftHsOdmTYvF6497eTKcYrvMK1MYBfg
+         TnZRLg/U/dQ1Q590n0JmXP3OghJOM8npgMzqU7xbDV8PH71MMSZr1BrdtsFAAY1AyOnT
+         /S2Y5SjyqM24cNd6vOMqlmfziRCZWmYtjgxpV/mpT/bGVGEb4aK9G0PznEIidCBC7PK1
+         yBuw==
+X-Gm-Message-State: AOJu0Yz7xoTvvqVk+9BCiFap+wAdep+RZQHilDF3Zydo4lVeSbyRTzIh
+	jPW3sggySmdCOaxPa+TLvGKHSUrzaQeN5/IDMAmy1WhVXzwbvUvBMQPK
+X-Gm-Gg: ASbGncuCDlDI0gDz2QCzMKQ2OlzjNjsxCbRTuBwPd8XIC1xffxW/5xVM12r/enUhw6P
+	1eNMMnrDGAuhQeBh6GDHxIcw1JLzRdL8RNH6wBWgz1YE0JIE17Wyxass2xrf1adlzuhqGpRECzU
+	/8ZcJibGkSgBOGcZUDK4FU89sVzrbTbhYWqlyAba4hOKmXo7xKKYtMrqj+Fk3YfOxNJ089Ejthu
+	8qPrZaIu1ReWMKOhKu4wqQKdzyekeWHUkdGo8pp9SKKIjR+dOA7jAS3rnAmUdpv3Vlj2/H+c26L
+	UkoQvhRfIF/VUtnZnbmqt5Rn7MGX7kdfUr0jH8MOtLi4pzmRdyNpnGscBahHnU1PAQYfX99/j+7
+	H1AyP8yF4ikKSVvR/gO1sL/IN2XpaytnigKySE5zkPGo0rSpBZTS5r/Hhn85euUlTSJVeW1OFjk
+	6h4JPdIyDHqI+fReTruuE=
+X-Google-Smtp-Source: AGHT+IH89lzXDL5ZZMXhXx/p/3i1gIGKJbDQnXuH+QmstjjLbBUjK42uFpxcHys9SMzQTq8mLhQO/w==
+X-Received: by 2002:a05:600c:1c93:b0:46e:37d5:dbed with SMTP id 5b1f17b1804b1-4773010414fmr41146615e9.12.1761925201917;
+        Fri, 31 Oct 2025 08:40:01 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4773c374f84sm3266695e9.0.2025.10.31.08.40.00
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 31 Oct 2025 08:40:01 -0700 (PDT)
+Message-ID: <ee11170f-3e6a-4690-9b09-bc6304bcbfd3@gmail.com>
+Date: Fri, 31 Oct 2025 16:40:00 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH 1/2] psqlodbc: upgrade 16.00.0000 ->
+ 17.00.0006
+To: Ross Burton <Ross.Burton@arm.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
 References: <20251023144351.264756-1-skandigraun@gmail.com>
- <4248C252-5AC4-4D04-B9D6-B71509890D3A@arm.com> <CAMSfU+5oOg4FyOa6+BEz2ci2+4wVhXXg=9CVB63XQJEN88j2eA@mail.gmail.com>
- <48C3D497-F482-45F5-9A57-919781B6505D@arm.com>
-In-Reply-To: <48C3D497-F482-45F5-9A57-919781B6505D@arm.com>
-From: Jose Quaresma <quaresma.jose@gmail.com>
-Date: Fri, 31 Oct 2025 15:22:40 +0000
-X-Gm-Features: AWmQ_bmCUREJXxrcvQc2HAI5ZA_R2xkwZryvUCtVYkx7AMPfWKihiDvEw-VAFUo
-Message-ID: <CANPvuRmTRHQRMrHSzRE=TunPOSAnKqn9Y5O7FW7EwKm_Cg--Mg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/2] psqlodbc: upgrade 16.00.0000 -> 17.00.0006
-To: ross.burton@arm.com
-Cc: Yoann Congal <yoann.congal@smile.fr>, Gyorgy Sarvari <skandigraun@gmail.com>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000078099a064275f0da"
+ <4248C252-5AC4-4D04-B9D6-B71509890D3A@arm.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <4248C252-5AC4-4D04-B9D6-B71509890D3A@arm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 15:22:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121237
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 15:40:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121238
 
---00000000000078099a064275f0da
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Ross Burton via lists.openembedded.org <ross.burton=3D
-arm.com@lists.openembedded.org> escreveu (sexta, 31/10/2025 =C3=A0(s) 14:20=
-):
-
-> On 31 Oct 2025, at 13:45, Yoann Congal <yoann.congal@smile.fr> wrote:
-> > Nice catch, this is most likely what did break the meta-oe-mirror test =
-:
-> https://autobuilder.yoctoproject.org/valkyrie/#/builders/82/builds/494/st=
-eps/17/logs/errors
->
-> Yes, it would be.
->
-> > Maybe we need to add a recipe qa warning about this=E2=80=A6
->
-> Agreed. I discovered this when adding a =E2=80=9CBB_NO_NETWORK=3D1 bitbak=
-e
-> =E2=80=94parse-only=E2=80=9D stage to our CI, because one of our recipes =
-was using a named
-> tag too.
+On 10/31/25 14:34, Ross Burton wrote:
+> On 23 Oct 2025, at 15:43, Gyorgy Sarvari via lists.openembedded.org <skandigraun=gmail.com@lists.openembedded.org> wrote:
+>> -SRC_URI = "http://ftp.postgresql.org/pub/odbc/versions.old/src/${BPN}-${PV}.tar.gz \
+>> +PV_WITH_USCORE = "${@d.getVar('PV').replace('.', '_')}"
+>> +SRC_URI = "git://github.com/postgresql-interfaces/psqlodbc.git;protocol=https;branch=main;tag=REL-${PV_WITH_USCORE} \
+> Note that this recipe doesn’t set SRCREV, so this is now doing a remote tag lookup on every parse.
 >
 
-Would it make sense to implement something like this on
-the yocto-check-layer?
-
-Jose
-
-
-> Ross
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#121235):
-> https://lists.openembedded.org/g/openembedded-devel/message/121235
-> Mute This Topic: https://lists.openembedded.org/mt/115911777/5052612
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> quaresma.jose@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---=20
-Best regards,
-
-Jos=C3=A9 Quaresma
-
---00000000000078099a064275f0da
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">Ross Burton via=
- <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;r=
-oss.burton=3D<a href=3D"mailto:arm.com@lists.openembedded.org">arm.com@list=
-s.openembedded.org</a>&gt; escreveu (sexta, 31/10/2025 =C3=A0(s) 14:20):<br=
-></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
-border-left:1px solid rgb(204,204,204);padding-left:1ex">On 31 Oct 2025, at=
- 13:45, Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.fr" target=3D=
-"_blank">yoann.congal@smile.fr</a>&gt; wrote:<br>
-&gt; Nice catch, this is most likely what did break the meta-oe-mirror test=
- : <a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/82/b=
-uilds/494/steps/17/logs/errors" rel=3D"noreferrer" target=3D"_blank">https:=
-//autobuilder.yoctoproject.org/valkyrie/#/builders/82/builds/494/steps/17/l=
-ogs/errors</a><br>
-<br>
-Yes, it would be.<br>
-<br>
-&gt; Maybe we need to add a recipe qa warning about this=E2=80=A6<br>
-<br>
-Agreed. I discovered this when adding a =E2=80=9CBB_NO_NETWORK=3D1 bitbake =
-=E2=80=94parse-only=E2=80=9D stage to our CI, because one of our recipes wa=
-s using a named tag too.<br></blockquote><div><br></div><div>Would it make =
-sense to implement something like this on the=C2=A0yocto-check-layer?</div>=
-<div><br></div><div>Jose</div><div><br></div><blockquote class=3D"gmail_quo=
-te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
-);padding-left:1ex">
-<br>
-Ross<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#121235): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/121235" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/121235</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/115911777/505=
-2612" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/115911777/5052612</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:quaresma.jose@gmail.com"=
- target=3D"_blank">quaresma.jose@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div><div><br clear=3D"all"></div><div><br></div><span class=
-=3D"gmail_signature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_s=
-ignature"><div dir=3D"ltr">Best regards,<div><br>Jos=C3=A9 Quaresma</div></=
-div></div></div>
-
---00000000000078099a064275f0da--
+I'd like to say that it was a test to see if anyone's paying
+attention... but in reality I just totally missed it. Thanks for the fix.
 
