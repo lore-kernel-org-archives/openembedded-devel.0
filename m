@@ -2,102 +2,123 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B536CCF9E3
-	for <webhook@archiver.kernel.org>; Fri, 31 Oct 2025 00:33:23 +0000 (UTC)
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
- by mx.groups.io with SMTP id smtpd.web11.4340.1761870802758025586
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5F16CCF9E3
+	for <webhook@archiver.kernel.org>; Fri, 31 Oct 2025 00:41:23 +0000 (UTC)
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
+ by mx.groups.io with SMTP id smtpd.web11.4473.1761871275113180000
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Oct 2025 17:33:22 -0700
+ Thu, 30 Oct 2025 17:41:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MfSTe7Y9;
- spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-b6cf257f325so1432900a12.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Oct 2025 17:33:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XnMuC+TR;
+ spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-44f44a1a515so1003507b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Oct 2025 17:41:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761870802; x=1762475602; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=u1+JpSYjIxOwQUJK6I8weeYnXRIZMgy3WVzh1zEhxhs=;
-        b=MfSTe7Y9fZijIX/j4n678uAltHxBVeoAR3IUQBnvge1hIN3vacqDn9TBNhhM8HI5DD
-         JT7qMRz/CEM7r4+cfLRW/BkbGyZtB0sVhTa6Psk5OlsB+gVL2jwGQSvravoWNoPEXkW6
-         bBQx7zRUcn1gF0NYkYvBHlEjqMxAGJ1lE2MMNDPEFHc84m8+3+C3mqb04uqkn3pyOEgO
-         q74Kp750Esm39558/gWoWAkkSDOhbWL16y3mLdV5J+Q67KRmPGVPnZ+cyznXuz64+thz
-         zcCnQlgrBabSR9cVtnOanUoZBDuIkkBctMaGDOn5sUFp+iDWlJGWTgWWZv03MRz4XGS1
-         CyNQ==
+        d=gmail.com; s=20230601; t=1761871274; x=1762476074; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=IxmwYoUgSMyC8VBzkRUrOfe1DctR1WRdX050nEyg6Ws=;
+        b=XnMuC+TRKruLOkfSAMvTvixFxHbfZ1blcGGBnws8IxAn7qzl1/G12bCN5CBnKGk056
+         6AP689fMQWNJsBrZsUy/GHJaVlzpM27yd/z0glFztrQ2slEvm54Y0+kSuKmd9EgWlVSy
+         AxXVOqjD4MWsHKXkouMpd2Vh/X84aRRJo4kEU7ybZ2ND4Z+R+s8T+lgQYZZfimaBzrNS
+         sERwb5lm7NWeYKPwwgaaGkS5A2BpaxC6q8wTlPzR7o9tbS4k05XLntsXGLsRuQG4bLZP
+         xCRRDmU4SKhZVsvTWeO8U9rRmp9oaiYk2xIFLTEUb7QReV4v6WFnE3rZlvmY8FSixJkY
+         YD3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761870802; x=1762475602;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=u1+JpSYjIxOwQUJK6I8weeYnXRIZMgy3WVzh1zEhxhs=;
-        b=EsWYVJANwiq/faQf6EKrKGFN/bH0u1fZvd/H+mCskiJPYecy+tFRi78RuqEMOqwfMj
-         VcMXBa1VmeeiIxqT+t29On5xt5Eajv11ZHlKJSJQQxZQEp0qz8fJXdTp0PSvagBcKKLt
-         vw7N7GkEBH9lKxE4jgJnGZf50MdGv1KtI5CyDATGrq8rcM8hOqTTwf/hrHq0qL24ZUAy
-         bZFM/mCs5w6Lshwg4CPrfvOmySgAWfq5LyNCu7G3jGZ5AcJAb6zpl253EyweR7SJwoZU
-         vK1lQN4mv3X673DpO5Ns+KixzoVx9ZgYjqx7T9oVOqFIy50kx7NSdgu7TKuq7Ghbo6tY
-         rnEQ==
-X-Gm-Message-State: AOJu0Yy9XIegXdv9XqxzNtrm3aX1aET0Ic9svOcHmGkRHkZa6XHXVXNh
-	PnOjALPdXaIF0nBCWcHo6rV0J9zuFA+fqoXxqAe7ryj736PF1ktehrTmRmXY6PJQh5w=
-X-Gm-Gg: ASbGncuUAFDO7cnr5sTY3VNriSvvsnOC2AkpyeABGJSG0In7BNfsC7noT1XFhszla9M
-	kxnW2xHHsRxo7O/CO797o5rVbXZ4mwKnJdDFS9j0RI8eaUPIqRhfMU1JSZrY/TYIDHXd0JqnJUU
-	KaPd/ymf8Ly/TCB0nEIFh27La07FelhkR2bjUXjvahwT/xPoRVrgjTLXj2+ofIlmZw+Uca9rtYe
-	P4s+3zpKFqv3CldAdsfs/tZmiVBme7uiK1Qi0nRiFdeOP0yczPGXVxyKe4SBz8/RiHawCH/B4eD
-	IdJg/18jHXECiErWb3HaOMFOTQk+kLxmbY0zIOG+zh6ud7NYqH+3ozeODRd2QZx932hGJo4I3d9
-	jgHw964UFLzHPn33jcDrMZ52DjI7S+qT1M4BUw0R5oFyIBZj0cD20EkxFbY3ZS1DDo+lWqqg1e7
-	hW/FuJK8Rf3m7Vfg==
-X-Google-Smtp-Source: AGHT+IE+IzsFTAzFjGn7Rev4M4U2t/dn3XTWktrLQsHRwJFPH2ZC/X9vZeiksDjWazfEGY7INovPLA==
-X-Received: by 2002:a17:903:a86:b0:295:1a5c:355a with SMTP id d9443c01a7336-2951a5c36d6mr20185545ad.61.1761870801749;
-        Thu, 30 Oct 2025 17:33:21 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2952699b603sm2208285ad.79.2025.10.30.17.33.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Oct 2025 17:33:21 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH] neatvnc: upgrade 0.8.0 -> 0.8.1
-Date: Fri, 31 Oct 2025 13:33:14 +1300
-Message-ID: <20251031003314.2860674-1-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1761871274; x=1762476074;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=IxmwYoUgSMyC8VBzkRUrOfe1DctR1WRdX050nEyg6Ws=;
+        b=NGgyyChxz6uoZ7qrNPhIAE8e6EGOHNAcCLZ4SW6AOJ6HhHUQoIjdx9I3NEp5qcEcpd
+         iERzz8nqrs/44Y6GuxcNcM4BBevv4jb2LvRWlOX6VduD+MNHuViA69d3MNj7KVO0fOZF
+         ya4JDXTO9kmJ+tRlWXJr77IzmJ+IUUJcpPUfkJ8PJj13Gl+YmezoAkP4jb5opB3W8GQL
+         TkBylGYAd1Ddr8yPfgbLUF9dHwuUN9+BtrNkNLg11Q1O1ErjQlAVJInuaV2uaVevDxpk
+         EoeN8u0GGWhNPxr2dp0iSxHOQFswFMUUmU7ceME5R+ZxVOSq1Cj6Ld0cBiKdu7NlvKSy
+         g4Mw==
+X-Gm-Message-State: AOJu0Ywd/Wg4wbvdZzrfi8ipxnlAg2eU8itC9dbLhwCy5RaI/XuZ6/03
+	MajJL0H1NYQXV2a9OgArIRVHn4BosAxa/B9g9wVqcsekjZoKEhBBA6aV8U6bYtLs/k/FgcXmitz
+	8XuVc6t3uKpgcncmfYTlehkXOcWg/jRA=
+X-Gm-Gg: ASbGncth0pMSdJ+J1Op5dG45wo0etzldwTJiyx+GMb/Kc1Yvs8toOy2f0Y9StPBmEDg
+	uRkgsB7C79hZI6q1o4g2hJ4R4lJcrMfqm5sDNxHSTS0y5O2S3tExCElqMfuiFcGfkSYqVXykcCN
+	EGPoLEH64t8pSYxxtCbfs2YlYFsDA9inUPxq/NntpMTmne8zKiVT18LrRjks7LU2hQFgFsKe0fn
+	VRyqzxU79hZyTPzYMb2eBkuLNuWkz5ARl6C0QVCRMX9Es8ZXskujntxlbuDqN8=
+X-Google-Smtp-Source: AGHT+IEWVu0a2syOPm/Pc1Yaq7eCRCFgQeb/HuGnYLbm4C6y0bHL2XYw+vV0Htp5onhu8mDA4iiJYONlQujf184QzQU=
+X-Received: by 2002:a05:6808:c1e1:b0:43f:6cf3:ad37 with SMTP id
+ 5614622812f47-44f952126ecmr839530b6e.3.1761871274271; Thu, 30 Oct 2025
+ 17:41:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251015063531.1573191-1-ankur.tyagi85@gmail.com> <fcb5f25762c06c8566d2fcfbcd4d0c2ad4e8c28a.camel@intel.com>
+In-Reply-To: <fcb5f25762c06c8566d2fcfbcd4d0c2ad4e8c28a.camel@intel.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Fri, 31 Oct 2025 13:41:03 +1300
+X-Gm-Features: AWmQ_blup6DWm_2n1b9otJXYPLEsrh6tJaDf2oUQAFuyvobCRhb8a2Rx6sNPq34
+Message-ID: <CADySD0HFWDovuAd6cvCQ3WzNGUankPYYBDjvGPmO95-iuMZP6w@mail.gmail.com>
+Subject: Re: [oe][meta-oe][scarthgap][PATCH 1/4] mercurial: Update CVE status
+ for CVE-2022-43410
+To: "Mittal, Anuj" <anuj.mittal@intel.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
+	"ninette@thehoodiefirm.com" <ninette@thehoodiefirm.com>, "raj.khem@gmail.com" <raj.khem@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 00:33:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121211
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 Oct 2025 00:41:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121212
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+On Thu, Oct 30, 2025 at 7:38=E2=80=AFPM Mittal, Anuj <anuj.mittal@intel.com=
+> wrote:
+>
+> On Wed, 2025-10-15 at 19:35 +1300, Ankur Tyagi via
+> lists.openembedded.org wrote:
+> > From: Ninette Adhikari <ninette@thehoodiefirm.com>
+> >
+> > The recipe used in the `meta-openembedded` is a different mercurial
+> > package compared to the one which has the CVE issue.
+> > Package used in `meta-embedded`: https://www.mercurial-scm.org/
+> > Package with CVE issue is a Jenkins plugin:
+> > https://plugins.jenkins.io/mercurial/
+> > (This is reflected in the CPE)
+> >
+> > Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > (cherry picked from commit bf84ac1c4c1a00c2aa92a09fbdfae128d055fe05)
+> > Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> > ---
+> >  meta-oe/recipes-devtools/mercurial/mercurial_6.5.bb | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/meta-oe/recipes-devtools/mercurial/mercurial_6.5.bb
+> > b/meta-oe/recipes-devtools/mercurial/mercurial_6.5.bb
+> > index 2451a36be2..53fe0a28ae 100644
+> > --- a/meta-oe/recipes-devtools/mercurial/mercurial_6.5.bb
+> > +++ b/meta-oe/recipes-devtools/mercurial/mercurial_6.5.bb
+> > @@ -34,3 +34,4 @@ PACKAGES =3D+ "${PN}-python"
+> >  FILES:${PN} +=3D "${PYTHON_SITEPACKAGES_DIR} ${datadir}"
+> >  FILES:${PN}-python =3D "${nonarch_libdir}/${PYTHON_DIR}"
+> >
+> > +CVE_STATUS[CVE-2022-43410] =3D "cpe-incorrect: The recipe used in the
+> > `meta-openembedded` is a different mercurial package compared to the
+> > one which has the CVE issue."
+>
+> This shouldn't be a cpe-incorrect in that case and should use
+> mercurial-scm as the vendor in CVE_PRODUCT.
 
-Changelog
-https://github.com/any1/neatvnc/compare/v0.8.0...v0.8.1
+Good point, I'll send the fix to the master branch as well.
+Please drop this patch.
 
-This release fixes CVE-2024-42458
-Details https://nvd.nist.gov/vuln/detail/cve-2024-42458
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
----
- .../neatvnc/{neatvnc_0.8.0.bb => neatvnc_0.8.1.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/neatvnc/{neatvnc_0.8.0.bb => neatvnc_0.8.1.bb} (89%)
-
-diff --git a/meta-oe/recipes-graphics/neatvnc/neatvnc_0.8.0.bb b/meta-oe/recipes-graphics/neatvnc/neatvnc_0.8.1.bb
-similarity index 89%
-rename from meta-oe/recipes-graphics/neatvnc/neatvnc_0.8.0.bb
-rename to meta-oe/recipes-graphics/neatvnc/neatvnc_0.8.1.bb
-index c9c4a6c27a..9065050c62 100644
---- a/meta-oe/recipes-graphics/neatvnc/neatvnc_0.8.0.bb
-+++ b/meta-oe/recipes-graphics/neatvnc/neatvnc_0.8.1.bb
-@@ -4,9 +4,9 @@ HOMEPAGE = "https://github.com/any1/neatvnc"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94fc374e7174f41e3afe0f027ee59ff7"
- 
--SRC_URI = "git://github.com/any1/neatvnc;branch=master;protocol=https"
-+SRC_URI = "git://github.com/any1/neatvnc;branch=v0.8;protocol=https"
- 
--SRCREV = "46432ce8cade0b54a38d4bb42eb07f96c8ff49fd"
-+SRCREV = "07081567ab21a2b099ceb41ae8cab872a31cbb9a"
- 
- S = "${WORKDIR}/git"
- 
+>
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#120690):
+> > https://lists.openembedded.org/g/openembedded-devel/message/120690
+> > Mute This Topic: https://lists.openembedded.org/mt/115766810/3616702
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe:
+> > https://lists.openembedded.org/g/openembedded-devel/unsub [
+> > anuj.mittal@intel.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 
