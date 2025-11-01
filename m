@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E9ACCCFA00
-	for <webhook@archiver.kernel.org>; Sat,  1 Nov 2025 21:06:36 +0000 (UTC)
-Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.497.1762031188862605152
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05CA1CCFA00
+	for <webhook@archiver.kernel.org>; Sat,  1 Nov 2025 21:06:46 +0000 (UTC)
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14309.1762031200472987106
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Nov 2025 14:06:29 -0700
+ Sat, 01 Nov 2025 14:06:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=bGeUNjji;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-202511012106268748137c7c0002075d-k4ljoc@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 202511012106268748137c7c0002075d
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=GELXQFrM;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-202511012106380d3ea4c2c300020717-tth918@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 202511012106380d3ea4c2c300020717
         for <openembedded-devel@lists.openembedded.org>;
-        Sat, 01 Nov 2025 22:06:27 +0100
+        Sat, 01 Nov 2025 22:06:38 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=XuQ/fYfS/WryboxlDl3dTG0go42sZfHxvyE9VnmPaBQ=;
- b=bGeUNjji+aq5oTkDHGx6hAJxAXp5O8NzJ0up55X567POJv1iw9uEUkxBNVM4431OdjXg05
- FwHEb/nhnRSD/qYRi5tn8c/1xLTCot1WwVdXjmMp7w80LIs8cvz6okQ0gNfQf8tj7K3xVDwT
- yItiLbXDTjMrSz50f6GvjdGOBZ5uLQiqImJ2Bx/ycTTAfkbBjEnVkJtkOqVueLQxqC/OldUx
- cUK8SMkGIrI9w4o2B5rPBEjs6qfq3pEnNXOa9VCsl5Ba0J6B/J2QkX6898MsefzI4R+ddrks
- VF5HJQLQbuORSUQIN4g3M/mZpkN58L8hD4UabcGmh7isxarPd73qqxlA==;
+ bh=9KdNZt1MqpA+J5CPl6nBPxG5oD+hXjwYKnQZ6NwLXLE=;
+ b=GELXQFrM7N4w0M8MkF+aDOeGvxf6SPRqTjjRa9X4RgrF4PZ2XPLMlCFO40ZXcBy2mEADp/
+ AwFrIyyKugmInmXI3mPtQCU/QTv8RFpblUpCxcvbKchCpFi4QRy3bxnG90YiR3w3RA1cJG76
+ KFoxbY+Qa85SPHBKQzRhTN7EK0pSfx1bjQjKlj+dWJge8t5F4HuWH2xWaH/QluUQUiB9Q7ec
+ nNENeh/Amv8RrrHTAZcT+4xN9o8behBuveUe1bYBzWmWzZjsIebkfjzNySbKsW+GM2alEGSL
+ bJwcLXs7Mul6p5PST5taMfTJsQRcx++s0NypqzE8vg0m3YrWWCVao9Eg==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH] wpa-supplicant: patch CVE-2025-24912
-Date: Sat,  1 Nov 2025 22:06:22 +0100
-Message-Id: <20251101210622.1359755-1-peter.marko@siemens.com>
+Subject: [meta-oe][kirkstone][PATCH] hostapd: patch CVE-2025-24912
+Date: Sat,  1 Nov 2025 22:06:35 +0100
+Message-Id: <20251101210635.1359777-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -36,8 +36,8 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 01 Nov 2025 21:06:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121251
+ <openembedded-devel@lists.openembedded.org>; Sat, 01 Nov 2025 21:06:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121252
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -54,14 +54,14 @@ Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
  .../hostapd/hostapd/CVE-2025-24912-01.patch   | 79 +++++++++++++++++++
  .../hostapd/hostapd/CVE-2025-24912-02.patch   | 70 ++++++++++++++++
- .../hostapd/hostapd_2.11.bb                   |  2 +
+ .../hostapd/hostapd_2.10.bb                   |  2 +
  3 files changed, 151 insertions(+)
  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch
  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch
 
 diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch
 new file mode 100644
-index 0000000000..36660b5880
+index 0000000000..8976047f68
 --- /dev/null
 +++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch
 @@ -0,0 +1,79 @@
@@ -108,7 +108,7 @@ index 0000000000..36660b5880
 +index 2a7f36170..7909b29a7 100644
 +--- a/src/radius/radius_client.c
 ++++ b/src/radius/radius_client.c
-+@@ -1259,13 +1259,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++@@ -922,13 +922,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
 + 		       roundtrip / 100, roundtrip % 100);
 + 	rconf->round_trip_time = roundtrip;
 + 
@@ -122,7 +122,7 @@ index 0000000000..36660b5880
 + 	for (i = 0; i < num_handlers; i++) {
 + 		RadiusRxResult res;
 + 		res = handlers[i].handler(msg, req->msg, req->shared_secret,
-+@@ -1276,6 +1269,13 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++@@ -939,6 +932,13 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
 + 			radius_msg_free(msg);
 + 			/* fall through */
 + 		case RADIUS_RX_QUEUED:
@@ -136,7 +136,7 @@ index 0000000000..36660b5880
 + 			radius_client_msg_free(req);
 + 			return;
 + 		case RADIUS_RX_INVALID_AUTHENTICATOR:
-+@@ -1297,7 +1297,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++@@ -960,7 +960,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
 + 		       msg_type, hdr->code, hdr->identifier,
 + 		       invalid_authenticator ? " [INVALID AUTHENTICATOR]" :
 + 		       "");
@@ -146,7 +146,7 @@ index 0000000000..36660b5880
 + 	radius_msg_free(msg);
 diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch
 new file mode 100644
-index 0000000000..add2e47048
+index 0000000000..f3cecd6d5f
 --- /dev/null
 +++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch
 @@ -0,0 +1,70 @@
@@ -182,7 +182,7 @@ index 0000000000..add2e47048
 +index 7909b29a7..d4faa7936 100644
 +--- a/src/radius/radius_client.c
 ++++ b/src/radius/radius_client.c
-+@@ -1099,7 +1099,7 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++@@ -824,7 +824,7 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
 + 	struct radius_hdr *hdr;
 + 	struct radius_rx_handler *handlers;
 + 	size_t num_handlers, i;
@@ -191,7 +191,7 @@ index 0000000000..add2e47048
 + 	struct os_reltime now;
 + 	struct hostapd_radius_server *rconf;
 + 	int invalid_authenticator = 0;
-+@@ -1224,7 +1224,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++@@ -887,7 +887,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
 + 		break;
 + 	}
 + 
@@ -199,7 +199,7 @@ index 0000000000..add2e47048
 + 	req = radius->msgs;
 + 	while (req) {
 + 		/* TODO: also match by src addr:port of the packet when using
-+@@ -1236,7 +1235,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++@@ -899,7 +898,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
 + 		    hdr->identifier)
 + 			break;
 + 
@@ -207,7 +207,7 @@ index 0000000000..add2e47048
 + 		req = req->next;
 + 	}
 + 
-+@@ -1270,6 +1268,12 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++@@ -933,6 +931,12 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
 + 			/* fall through */
 + 		case RADIUS_RX_QUEUED:
 + 			/* Remove ACKed RADIUS packet from retransmit list */
@@ -220,14 +220,14 @@ index 0000000000..add2e47048
 + 			if (prev_req)
 + 				prev_req->next = req->next;
 + 			else
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
-index daaf2dcd55..a6f7122847 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
-@@ -12,6 +12,8 @@ SRC_URI = " \
-     file://defconfig \
-     file://init \
-     file://hostapd.service \
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb
+index 798f1ea909..4a1a95c23c 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb
+@@ -22,6 +22,8 @@ SRC_URI = " \
+     file://CVE-2024-3596_08.patch \
+     file://0001-SAE-Check-for-invalid-Rejected-Groups-element-length.patch \
+     file://0003-SAE-Reject-invalid-Rejected-Groups-element-in-the-pa.patch \
 +    file://CVE-2025-24912-01.patch \
 +    file://CVE-2025-24912-02.patch \
  "
