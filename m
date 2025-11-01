@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C975CCFA00
-	for <webhook@archiver.kernel.org>; Sat,  1 Nov 2025 21:08:36 +0000 (UTC)
-Received: from mta-64-226.siemens.flowmailer.net (mta-64-226.siemens.flowmailer.net [185.136.64.226])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14344.1762031310257558231
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF71DCCFA02
+	for <webhook@archiver.kernel.org>; Sat,  1 Nov 2025 22:24:30 +0000 (UTC)
+Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.142.1762035862173317675
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Nov 2025 14:08:30 -0700
+ Sat, 01 Nov 2025 15:24:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=HR0QoJhr;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226, mailfrom: fm-256628-20251101210828ffd4b1753b000207df-hns0od@rts-flowmailer.siemens.com)
-Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id 20251101210828ffd4b1753b000207df
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=Bh+QDyB+;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-20251101222416a5165a439c000207d4-mlkjcm@rts-flowmailer.siemens.com)
+Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 20251101222416a5165a439c000207d4
         for <openembedded-devel@lists.openembedded.org>;
-        Sat, 01 Nov 2025 22:08:28 +0100
+        Sat, 01 Nov 2025 23:24:17 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=XuQ/fYfS/WryboxlDl3dTG0go42sZfHxvyE9VnmPaBQ=;
- b=HR0QoJhrhpnqN9q6144kW6BkpFEKCmcxSfaZcwWBjXUAGl1oI/BkzPM0CUd9FeefYaO08f
- 5JeDlbVSIeJwBHtSZMCHbG2mbAt1XvRw9UxDE/ZY0LuvRVSpU/HIjzXd8rE7jTuvpt6AIbHm
- raYkCcbLr89TOj2akJ/Uu/Rv88nMYeoPIBOSYlQkCf08+BhOcGBvfaA7Da7I2F7U2Ay0ku9v
- 3+eH/5q7ycLZoELyfQdWEb2YOqrq8MKCcnHU0eUUA25nA33hnPeeU2OB+ZGRlWMIBLYCz6hF
- VAb5Bxm3kvQavbB/JEY9ARjh/1ZpnM9mQmnX7CPKPGE+gJNZwooL5Ocw==;
+ bh=Ov7FyNyHQ4dUh0FHZ0ph4j3BLVMrXSF9aIF0LbpL0JQ=;
+ b=Bh+QDyB+r+G1GOvq+vJQiHoXhchAUVjZVXJxGFlSGgPWjQKYOBCryu2GCjYHcCeARK8fdn
+ Vw5x1Lt0MccqgkCfRj1tUxIlzPv6EfzhbXaw9XhD+++cn/4AAFATZcOB/eN62xjgW+aEZ2Yw
+ 1NuHmoKxYz8NCf6rc/lVP2pcSIGrYpAtgl8k2CMcxnUH+TA4MH3WQiT1mgI+SXxDc5HT52/z
+ ja8NHG4mmUgw/vBipDNyQzxFeqYqGVYbK6cz/G1s9G9FoAhAcj9osRkKE6lrMHOsFx6zt3HH
+ 8HTZHBLlme1bBTvQ2SK6JNL1iRS/jcA4BktgrL3YZCtEC8CO2o2r12eQ==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH] hostapd: patch CVE-2025-24912
-Date: Sat,  1 Nov 2025 22:08:26 +0100
-Message-Id: <20251101210826.1359970-1-peter.marko@siemens.com>
+Subject: [meta-networking][scarthgap][PATCH] squid: patch CVE-2025-62168
+Date: Sat,  1 Nov 2025 23:24:10 +0100
+Message-Id: <20251101222410.1579968-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -36,201 +36,245 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 01 Nov 2025 21:08:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121254
+ <openembedded-devel@lists.openembedded.org>; Sat, 01 Nov 2025 22:24:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121255
 
 From: Peter Marko <peter.marko@siemens.com>
 
-Pick patches as listed in NVD CVE report.
+Pick commit mentioned in NVD CVE report.
 
-Note that Debian lists one of the patches as introducing the
-vulnerability. This is against what the original report [1] says.
-Also the commit messages provide hints that the first patch fixes this
-issue and second is fixing problem with the first patch.
-
-[1] https://jvn.jp/en/jp/JVN19358384/
+Conflict in src/errorpage.cc resolved per patch from Debian bookworm.
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../hostapd/hostapd/CVE-2025-24912-01.patch   | 79 +++++++++++++++++++
- .../hostapd/hostapd/CVE-2025-24912-02.patch   | 70 ++++++++++++++++
- .../hostapd/hostapd_2.11.bb                   |  2 +
- 3 files changed, 151 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch
+ .../squid/files/CVE-2025-62168.patch          | 207 ++++++++++++++++++
+ .../recipes-daemons/squid/squid_6.9.bb        |   1 +
+ 2 files changed, 208 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2025-62168.patch
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch
+diff --git a/meta-networking/recipes-daemons/squid/files/CVE-2025-62168.patch b/meta-networking/recipes-daemons/squid/files/CVE-2025-62168.patch
 new file mode 100644
-index 0000000000..36660b5880
+index 0000000000..cd32aa32a6
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch
-@@ -0,0 +1,79 @@
-+From 726432d7622cc0088ac353d073b59628b590ea44 Mon Sep 17 00:00:00 2001
-+From: Jouni Malinen <j@w1.fi>
-+Date: Sat, 25 Jan 2025 11:21:16 +0200
-+Subject: [PATCH] RADIUS: Drop pending request only when accepting the response
++++ b/meta-networking/recipes-daemons/squid/files/CVE-2025-62168.patch
+@@ -0,0 +1,207 @@
++From 0951a0681011dfca3d78c84fd7f1e19c78a4443f Mon Sep 17 00:00:00 2001
++From: Amos Jeffries <yadij@users.noreply.github.com>
++Date: Sat, 11 Oct 2025 16:33:02 +1300
++Subject: [PATCH] Bug 3390: Proxy auth data visible to scripts (#2249)
 +
-+The case of an invalid authenticator in a RADIUS response could imply
-+that the response is not from the correct RADIUS server and as such,
-+such a response should be discarded without changing internal state for
-+the pending request. The case of an unknown response (RADIUS_RX_UNKNOWN)
-+is somewhat more complex since it could have been indicated before
-+validating the authenticator. In any case, it seems better to change the
-+state for the pending request only when we have fully accepted the
-+response.
++Original changes to redact credentials from error page %R code
++expansion output was incomplete. It missed the parse failure
++case where ErrorState::request_hdrs raw buffer contained
++sensitive information.
 +
-+Allowing the internal state of pending RADIUS request to change based on
-+responses that are not fully validation could have allow at least a
-+theoretical DoS attack if an attacker were to have means for injecting
-+RADIUS messages to the network using the IP address of the real RADIUS
-+server and being able to do so more quickly than the real server and
-+with the matching identifier from the request header (i.e., either by
-+flooding 256 responses quickly or by having means to capture the RADIUS
-+request). These should not really be realistic options in a properly
-+protected deployment, but nevertheless it is good to be more careful in
-+processing RADIUS responses.
++Also missed was the %W case where full request message headers
++were generated in a mailto link. This case is especially
++problematic as it may be delivered over insecure SMTP even if
++the error was secured with HTTPS.
 +
-+Remove a pending RADIUS request from the internal list only when having
-+fully accepted a matching RADIUS response, i.e., after one of the
-+registered handlers has confirmed that the authenticator is valid and
-+processing of the response has succeeded.
++After this change:
++* The HttpRequest message packing code for error pages is de-duplicated
++  and elides authentication headers for both %R and %W code outputs.
++* The %R code output includes the CRLF request message terminator.
++* The email_err_data directive causing advanced details to be added to
++  %W mailto links is disabled by default.
 +
-+Signed-off-by: Jouni Malinen <j@w1.fi>
++Also redact credentials from generated TRACE responses.
 +
-+CVE: CVE-2025-24912
-+Upstream-Status: Backport [https://w1.fi/cgit/hostap/commit/?id=726432d7622cc0088ac353d073b59628b590ea44]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---------
++
++Co-authored-by: Alex Rousskov <rousskov@measurement-factory.com>
 +---
-+ src/radius/radius_client.c | 15 +++++++--------
-+ 1 file changed, 7 insertions(+), 8 deletions(-)
++ src/HttpRequest.cc            |  6 +++---
++ src/HttpRequest.h             |  2 +-
++ src/cf.data.pre               |  8 +++++++-
++ src/client_side_reply.cc      | 14 +++++++-------
++ src/errorpage.cc              | 17 ++++-------------
++ src/errorpage.h               |  1 -
++ src/tests/stub_HttpRequest.cc |  2 +-
++ 7 files changed, 23 insertions(+), 27 deletions(-)
 +
-+diff --git a/src/radius/radius_client.c b/src/radius/radius_client.c
-+index 2a7f36170..7909b29a7 100644
-+--- a/src/radius/radius_client.c
-++++ b/src/radius/radius_client.c
-+@@ -1259,13 +1259,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
-+ 		       roundtrip / 100, roundtrip % 100);
-+ 	rconf->round_trip_time = roundtrip;
++diff --git a/src/HttpRequest.cc b/src/HttpRequest.cc
++index cd7ee71d4..c6ed5bee4 100644
++--- a/src/HttpRequest.cc
+++++ b/src/HttpRequest.cc
++@@ -341,7 +341,7 @@ HttpRequest::swapOut(StoreEntry * e)
 + 
-+-	/* Remove ACKed RADIUS packet from retransmit list */
-+-	if (prev_req)
-+-		prev_req->next = req->next;
-+-	else
-+-		radius->msgs = req->next;
-+-	radius->num_msgs--;
-+-
-+ 	for (i = 0; i < num_handlers; i++) {
-+ 		RadiusRxResult res;
-+ 		res = handlers[i].handler(msg, req->msg, req->shared_secret,
-+@@ -1276,6 +1269,13 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
-+ 			radius_msg_free(msg);
-+ 			/* fall through */
-+ 		case RADIUS_RX_QUEUED:
-++			/* Remove ACKed RADIUS packet from retransmit list */
-++			if (prev_req)
-++				prev_req->next = req->next;
-++			else
-++				radius->msgs = req->next;
-++			radius->num_msgs--;
++ /* packs request-line and headers, appends <crlf> terminator */
++ void
++-HttpRequest::pack(Packable * p) const
+++HttpRequest::pack(Packable * const p, const bool maskSensitiveInfo) const
++ {
++     assert(p);
++     /* pack request-line */
++@@ -349,8 +349,8 @@ HttpRequest::pack(Packable * p) const
++                SQUIDSBUFPRINT(method.image()), SQUIDSBUFPRINT(url.path()),
++                http_ver.major, http_ver.minor);
++     /* headers */
++-    header.packInto(p);
++-    /* trailer */
+++    header.packInto(p, maskSensitiveInfo);
+++    /* indicate the end of the header section */
++     p->append("\r\n", 2);
++ }
++ 
++diff --git a/src/HttpRequest.h b/src/HttpRequest.h
++index 6d3690293..28dc4daf9 100644
++--- a/src/HttpRequest.h
+++++ b/src/HttpRequest.h
++@@ -206,7 +206,7 @@ public:
++ 
++     void swapOut(StoreEntry * e);
++ 
++-    void pack(Packable * p) const;
+++    void pack(Packable * p, bool maskSensitiveInfo = false) const;
++ 
++     static void httpRequestPack(void *obj, Packable *p);
++ 
++diff --git a/src/cf.data.pre b/src/cf.data.pre
++index 0a73020e1..2dce65a4d 100644
++--- a/src/cf.data.pre
+++++ b/src/cf.data.pre
++@@ -8915,12 +8915,18 @@ NAME: email_err_data
++ COMMENT: on|off
++ TYPE: onoff
++ LOC: Config.onoff.emailErrData
++-DEFAULT: on
+++DEFAULT: off
++ DOC_START
++ 	If enabled, information about the occurred error will be
++ 	included in the mailto links of the ERR pages (if %W is set)
++ 	so that the email body contains the data.
++ 	Syntax is <A HREF="mailto:%w%W">%w</A>
 ++
-+ 			radius_client_msg_free(req);
-+ 			return;
-+ 		case RADIUS_RX_INVALID_AUTHENTICATOR:
-+@@ -1297,7 +1297,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
-+ 		       msg_type, hdr->code, hdr->identifier,
-+ 		       invalid_authenticator ? " [INVALID AUTHENTICATOR]" :
-+ 		       "");
-+-	radius_client_msg_free(req);
+++	SECURITY WARNING:
+++		Request headers and other included facts may contain
+++		sensitive information about transaction history, the
+++		Squid instance, and its environment which would be
+++		unavailable to error recipients otherwise.
++ DOC_END
 + 
-+  fail:
-+ 	radius_msg_free(msg);
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch
-new file mode 100644
-index 0000000000..add2e47048
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch
-@@ -0,0 +1,70 @@
-+From 339a334551ca911187cc870f4f97ef08e11db109 Mon Sep 17 00:00:00 2001
-+From: Jouni Malinen <quic_jouni@quicinc.com>
-+Date: Wed, 5 Feb 2025 19:23:39 +0200
-+Subject: [PATCH] RADIUS: Fix pending request dropping
-+
-+A recent change to this moved the place where the processed RADIUS
-+request was removed from the pending list to happen after the message
-+handler had been called. This did not take into account possibility of
-+the handler adding a new pending request in the list and the prev_req
-+pointer not necessarily pointing to the correct entry anymore. As such,
-+some of the pending requests could have been lost and that would result
-+in not being able to process responses to those requests and also, to a
-+memory leak.
-+
-+Fix this by determining prev_req at the point when the pending request
-+is being removed, i.e., after the handler function has already added a
-+new entry.
-+
-+Fixes: 726432d7622c ("RADIUS: Drop pending request only when accepting the response")
-+Signed-off-by: Jouni Malinen <quic_jouni@quicinc.com>
-+
-+CVE: CVE-2025-24912
-+Upstream-Status: Backport [https://w1.fi/cgit/hostap/commit/?id=339a334551ca911187cc870f4f97ef08e11db109]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ src/radius/radius_client.c | 10 +++++++---
-+ 1 file changed, 7 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/radius/radius_client.c b/src/radius/radius_client.c
-+index 7909b29a7..d4faa7936 100644
-+--- a/src/radius/radius_client.c
-++++ b/src/radius/radius_client.c
-+@@ -1099,7 +1099,7 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
-+ 	struct radius_hdr *hdr;
-+ 	struct radius_rx_handler *handlers;
-+ 	size_t num_handlers, i;
-+-	struct radius_msg_list *req, *prev_req;
-++	struct radius_msg_list *req, *prev_req, *r;
-+ 	struct os_reltime now;
-+ 	struct hostapd_radius_server *rconf;
-+ 	int invalid_authenticator = 0;
-+@@ -1224,7 +1224,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
-+ 		break;
-+ 	}
++ NAME: deny_info
++diff --git a/src/client_side_reply.cc b/src/client_side_reply.cc
++index d73bf3f99..fc2feccf8 100644
++--- a/src/client_side_reply.cc
+++++ b/src/client_side_reply.cc
++@@ -94,7 +94,7 @@ clientReplyContext::clientReplyContext(ClientHttpRequest *clientContext) :
++ void
++ clientReplyContext::setReplyToError(
++     err_type err, Http::StatusCode status, char const *uri,
++-    const ConnStateData *conn, HttpRequest *failedrequest, const char *unparsedrequest,
+++    const ConnStateData *conn, HttpRequest *failedrequest, const char *,
++ #if USE_AUTH
++     Auth::UserRequest::Pointer auth_user_request
++ #else
++@@ -104,9 +104,6 @@ clientReplyContext::setReplyToError(
++ {
++     auto errstate = clientBuildError(err, status, uri, conn, failedrequest, http->al);
 + 
-+-	prev_req = NULL;
-+ 	req = radius->msgs;
-+ 	while (req) {
-+ 		/* TODO: also match by src addr:port of the packet when using
-+@@ -1236,7 +1235,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
-+ 		    hdr->identifier)
-+ 			break;
++-    if (unparsedrequest)
++-        errstate->request_hdrs = xstrdup(unparsedrequest);
++-
++ #if USE_AUTH
++     errstate->auth_user_request = auth_user_request;
++ #endif
++@@ -995,11 +992,14 @@ clientReplyContext::traceReply()
++     triggerInitialStoreRead();
++     http->storeEntry()->releaseRequest();
++     http->storeEntry()->buffer();
+++    MemBuf content;
+++    content.init();
+++    http->request->pack(&content, true /* hide authorization data */);
++     const HttpReplyPointer rep(new HttpReply);
++-    rep->setHeaders(Http::scOkay, nullptr, "text/plain", http->request->prefixLen(), 0, squid_curtime);
+++    rep->setHeaders(Http::scOkay, nullptr, "message/http", content.contentSize(), 0, squid_curtime);
+++    rep->body.set(SBuf(content.buf, content.size));
++     http->storeEntry()->replaceHttpReply(rep);
++-    http->request->swapOut(http->storeEntry());
++-    http->storeEntry()->complete();
+++    http->storeEntry()->completeSuccessfully("traceReply() stored the entire response");
++ }
 + 
-+-		prev_req = req;
-+ 		req = req->next;
-+ 	}
++ #define SENDING_BODY 0
++diff --git a/src/errorpage.cc b/src/errorpage.cc
++index d7a588d09..06046de9e 100644
++--- a/src/errorpage.cc
+++++ b/src/errorpage.cc
++@@ -792,7 +792,6 @@ ErrorState::~ErrorState()
++ {
++     safe_free(redirect_url);
++     safe_free(url);
++-    safe_free(request_hdrs);
++     wordlistDestroy(&ftp.server_msg);
++     safe_free(ftp.request);
++     safe_free(ftp.reply);
++@@ -850,7 +849,7 @@ ErrorState::Dump(MemBuf * mb)
++                     SQUIDSBUFPRINT(request->url.path()),
++                     AnyP::ProtocolType_str[request->http_ver.protocol],
++                     request->http_ver.major, request->http_ver.minor);
++-        request->header.packInto(&str);
+++        request->header.packInto(&str, true /* hide authorization data */);
++     }
 + 
-+@@ -1270,6 +1268,12 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
-+ 			/* fall through */
-+ 		case RADIUS_RX_QUEUED:
-+ 			/* Remove ACKed RADIUS packet from retransmit list */
-++			prev_req = NULL;
-++			for (r = radius->msgs; r; r = r->next) {
-++				if (r == req)
-++					break;
-++				prev_req = r;
-++			}
-+ 			if (prev_req)
-+ 				prev_req->next = req->next;
-+ 			else
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
-index daaf2dcd55..a6f7122847 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
-@@ -12,6 +12,8 @@ SRC_URI = " \
-     file://defconfig \
-     file://init \
-     file://hostapd.service \
-+    file://CVE-2025-24912-01.patch \
-+    file://CVE-2025-24912-02.patch \
- "
++     str.append("\r\n", 2);
++@@ -1112,18 +1111,10 @@ ErrorState::compileLegacyCode(Build &build)
++                 p = "[no request]";
++             break;
++         }
++-        if (request) {
++-            mb.appendf(SQUIDSBUFPH " " SQUIDSBUFPH " %s/%d.%d\n",
++-                       SQUIDSBUFPRINT(request->method.image()),
++-                       SQUIDSBUFPRINT(request->url.path()),
++-                       AnyP::ProtocolType_str[request->http_ver.protocol],
++-                       request->http_ver.major, request->http_ver.minor);
++-            request->header.packInto(&mb, true); //hide authorization data
++-        } else if (request_hdrs) {
++-            p = request_hdrs;
++-        } else {
+++        else if (request)
+++            request->pack(&mb, true /* hide authorization data */);
+++        else
++             p = "[no request]";
++-        }
++         break;
++ 
++     case 's':
++diff --git a/src/errorpage.h b/src/errorpage.h
++index abca4a17d..297b30697 100644
++--- a/src/errorpage.h
+++++ b/src/errorpage.h
++@@ -194,7 +194,6 @@ public:
++         MemBuf *listing = nullptr;
++     } ftp;
++ 
++-    char *request_hdrs = nullptr;
++     char *err_msg = nullptr; /* Preformatted error message from the cache */
++ 
++     AccessLogEntryPointer ale; ///< transaction details (or nil)
++diff --git a/src/tests/stub_HttpRequest.cc b/src/tests/stub_HttpRequest.cc
++index 495597d9a..48a0f1ce0 100644
++--- a/src/tests/stub_HttpRequest.cc
+++++ b/src/tests/stub_HttpRequest.cc
++@@ -45,7 +45,7 @@ bool HttpRequest::expectingBody(const HttpRequestMethod &, int64_t &) const STUB
++ bool HttpRequest::bodyNibbled() const STUB_RETVAL(false)
++ int HttpRequest::prefixLen() const STUB_RETVAL(0)
++ void HttpRequest::swapOut(StoreEntry *) STUB
++-void HttpRequest::pack(Packable *) const STUB
+++void HttpRequest::pack(Packable *, bool) const STUB
++ void HttpRequest::httpRequestPack(void *, Packable *) STUB
++ HttpRequest * HttpRequest::FromUrl(const SBuf &, const MasterXaction::Pointer &, const HttpRequestMethod &) STUB_RETVAL(nullptr)
++ HttpRequest * HttpRequest::FromUrlXXX(const char *, const MasterXaction::Pointer &, const HttpRequestMethod &) STUB_RETVAL(nullptr)
+diff --git a/meta-networking/recipes-daemons/squid/squid_6.9.bb b/meta-networking/recipes-daemons/squid/squid_6.9.bb
+index 490a5401c3..26460d4619 100644
+--- a/meta-networking/recipes-daemons/squid/squid_6.9.bb
++++ b/meta-networking/recipes-daemons/squid/squid_6.9.bb
+@@ -22,6 +22,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.xz \
+            file://squid.nm \
+            file://CVE-2024-37894.patch \
+            file://CVE-2025-59362.patch \
++           file://CVE-2025-62168.patch \
+            "
  
- 
+ SRC_URI[sha256sum] = "1ad72d46e1cb556e9561214f0fb181adb87c7c47927ef69bc8acd68a03f61882"
 
