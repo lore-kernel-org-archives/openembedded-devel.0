@@ -2,35 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B3A7CCFA02
-	for <webhook@archiver.kernel.org>; Sat,  1 Nov 2025 18:12:55 +0000 (UTC)
-Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11201.1762020768172561387
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E9ACCCFA00
+	for <webhook@archiver.kernel.org>; Sat,  1 Nov 2025 21:06:36 +0000 (UTC)
+Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.497.1762031188862605152
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Nov 2025 11:12:49 -0700
+ Sat, 01 Nov 2025 14:06:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=B31u94k3;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-256628-2025110118014222969d3e1000020776-_qwlsi@rts-flowmailer.siemens.com)
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 2025110118014222969d3e1000020776
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=bGeUNjji;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-202511012106268748137c7c0002075d-k4ljoc@rts-flowmailer.siemens.com)
+Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 202511012106268748137c7c0002075d
         for <openembedded-devel@lists.openembedded.org>;
-        Sat, 01 Nov 2025 19:01:42 +0100
+        Sat, 01 Nov 2025 22:06:27 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=xPprdxipBTDG0bhFGteVveaCRCsLOvV5hSs2eGmjBmw=;
- b=B31u94k3+wVJ++yDQZ+ziktcO4m/iM10VIJ3CLbOhSiUYBRVRT4JhD69AtBGXowMMDlX/P
- MWTffqerU+loO1OIjME5ei02fBAauztTelqGNtrr3cxJgVPdsfjwFRPoUFDk9pIoCncZ+IXr
- gN4pjd94gmGKOfL1GXJsFolxeMn42Bxn7e1UcIbL0KRC9pGDBGbE8OlDJJGdaZ24sMGwiB+l
- yq09yFAqgdDj8T9sWPsK1TmKFeaFaCKH1TTSHfuJHsp2RcfUefu2RUymde+zsHlOjK+uaFUB
- XeMFmGSKI4KkhMNYwEuV5+1/EQGxnr5hCSuAqQYNnyBsTKwBUNk1eLuA==;
+ bh=XuQ/fYfS/WryboxlDl3dTG0go42sZfHxvyE9VnmPaBQ=;
+ b=bGeUNjji+aq5oTkDHGx6hAJxAXp5O8NzJ0up55X567POJv1iw9uEUkxBNVM4431OdjXg05
+ FwHEb/nhnRSD/qYRi5tn8c/1xLTCot1WwVdXjmMp7w80LIs8cvz6okQ0gNfQf8tj7K3xVDwT
+ yItiLbXDTjMrSz50f6GvjdGOBZ5uLQiqImJ2Bx/ycTTAfkbBjEnVkJtkOqVueLQxqC/OldUx
+ cUK8SMkGIrI9w4o2B5rPBEjs6qfq3pEnNXOa9VCsl5Ba0J6B/J2QkX6898MsefzI4R+ddrks
+ VF5HJQLQbuORSUQIN4g3M/mZpkN58L8hD4UabcGmh7isxarPd73qqxlA==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Louis Rannou <louis.rannou@non.se.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Peter Marko <peter.marko@siemens.com>
-Subject: [meta-networking][scarthgap][PATCH 1/2] mosquitto: bump to 2.0.21
-Date: Sat,  1 Nov 2025 19:01:37 +0100
-Message-Id: <20251101180138.9437-1-peter.marko@siemens.com>
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-oe][PATCH] wpa-supplicant: patch CVE-2025-24912
+Date: Sat,  1 Nov 2025 22:06:22 +0100
+Message-Id: <20251101210622.1359755-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -38,90 +36,201 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 01 Nov 2025 18:12:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121250
+ <openembedded-devel@lists.openembedded.org>; Sat, 01 Nov 2025 21:06:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121251
 
-From: Louis Rannou <louis.rannou@non.se.com>
+From: Peter Marko <peter.marko@siemens.com>
 
-Upgrade to mosquitto 2.0.21. Update the patch status for issue 2895 and create a
-new patch for an issue introduced in 2.0.19 which causes connections to get down
-when the clock is changed.
+Pick patches as listed in NVD CVE report.
 
-Signed-off-by: Louis Rannou <louis.rannou@non.se.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Note that Debian lists one of the patches as introducing the
+vulnerability. This is against what the original report [1] says.
+Also the commit messages provide hints that the first patch fixes this
+issue and second is fixing problem with the first patch.
+
+[1] https://jvn.jp/en/jp/JVN19358384/
+
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
-This was backported to kirkstone; pick it to scarthgap so it does not
-have an older version.
+ .../hostapd/hostapd/CVE-2025-24912-01.patch   | 79 +++++++++++++++++++
+ .../hostapd/hostapd/CVE-2025-24912-02.patch   | 70 ++++++++++++++++
+ .../hostapd/hostapd_2.11.bb                   |  2 +
+ 3 files changed, 151 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch
+ create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch
 
- .../mosquitto/files/2895.patch                |  2 +-
- .../mosquitto/files/3238.patch                | 25 +++++++++++++++++++
- ...osquitto_2.0.20.bb => mosquitto_2.0.21.bb} |  3 ++-
- 3 files changed, 28 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/3238.patch
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.20.bb => mosquitto_2.0.21.bb} (96%)
-
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
-index 853f881754..4c39a290b0 100644
---- a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
-+++ b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
-@@ -5,7 +5,7 @@ Subject: [PATCH] Mosquitto now waits for network-online when starting
- 
- See: https://github.com/eclipse/mosquitto/issues/2878
- ---
--Upstream-Status: Pending
-+Upstream-Status: Submitted [https://github.com/eclipse-mosquitto/mosquitto/pull/2895]
- 
-  service/systemd/mosquitto.service.simple | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/3238.patch b/meta-networking/recipes-connectivity/mosquitto/files/3238.patch
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch
 new file mode 100644
-index 0000000000..89795f4cd9
+index 0000000000..36660b5880
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/mosquitto/files/3238.patch
-@@ -0,0 +1,25 @@
-+From 2cb8129793b54de7c68efe1a4a8e91c788077a8e Mon Sep 17 00:00:00 2001
-+From: "Roger A. Light" <roger@atchoo.org>
-+Date: Thu, 1 May 2025 11:58:23 +0100
-+Subject: [PATCH] Fix incorrect reference clock being selected on startup on
-+ Linux.
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-01.patch
+@@ -0,0 +1,79 @@
++From 726432d7622cc0088ac353d073b59628b590ea44 Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <j@w1.fi>
++Date: Sat, 25 Jan 2025 11:21:16 +0200
++Subject: [PATCH] RADIUS: Drop pending request only when accepting the response
 +
-+Closes #3238. Thanks to Eric Guin and karlri.
-+Closes #3168.
++The case of an invalid authenticator in a RADIUS response could imply
++that the response is not from the correct RADIUS server and as such,
++such a response should be discarded without changing internal state for
++the pending request. The case of an unknown response (RADIUS_RX_UNKNOWN)
++is somewhat more complex since it could have been indicated before
++validating the authenticator. In any case, it seems better to change the
++state for the pending request only when we have fully accepted the
++response.
++
++Allowing the internal state of pending RADIUS request to change based on
++responses that are not fully validation could have allow at least a
++theoretical DoS attack if an attacker were to have means for injecting
++RADIUS messages to the network using the IP address of the real RADIUS
++server and being able to do so more quickly than the real server and
++with the matching identifier from the request header (i.e., either by
++flooding 256 responses quickly or by having means to capture the RADIUS
++request). These should not really be realistic options in a properly
++protected deployment, but nevertheless it is good to be more careful in
++processing RADIUS responses.
++
++Remove a pending RADIUS request from the internal list only when having
++fully accepted a matching RADIUS response, i.e., after one of the
++registered handlers has confirmed that the authenticator is valid and
++processing of the response has succeeded.
++
++Signed-off-by: Jouni Malinen <j@w1.fi>
++
++CVE: CVE-2025-24912
++Upstream-Status: Backport [https://w1.fi/cgit/hostap/commit/?id=726432d7622cc0088ac353d073b59628b590ea44]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
 +---
-+Upstream-Status: Backport 2.0.22
-+ src/mosquitto.c | 1 +
-+ 2 files changed, 3 insertions(+)
++ src/radius/radius_client.c | 15 +++++++--------
++ 1 file changed, 7 insertions(+), 8 deletions(-)
 +
-+diff --git a/src/mosquitto.c b/src/mosquitto.c
-+index ff83ef3da..2aea55237 100644
-+--- a/src/mosquitto.c
-++++ b/src/mosquitto.c
-+@@ -465,6 +465,7 @@ int main(int argc, char *argv[])
-+ #endif
-+ 	struct mosquitto *ctxt, *ctxt_tmp;
++diff --git a/src/radius/radius_client.c b/src/radius/radius_client.c
++index 2a7f36170..7909b29a7 100644
++--- a/src/radius/radius_client.c
+++++ b/src/radius/radius_client.c
++@@ -1259,13 +1259,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++ 		       roundtrip / 100, roundtrip % 100);
++ 	rconf->round_trip_time = roundtrip;
 + 
-++	mosquitto_time_init();
-+ #if defined(WIN32) || defined(__CYGWIN__)
-+ 	if(argc == 2){
-+ 		if(!strcmp(argv[1], "run")){
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
-similarity index 96%
-rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb
-rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
-index 2bc1303185..86d26304ee 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
-@@ -17,9 +17,10 @@ DEPENDS = "uthash cjson"
- SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
-            file://mosquitto.init \
-            file://2895.patch \
-+           file://3238.patch \
++-	/* Remove ACKed RADIUS packet from retransmit list */
++-	if (prev_req)
++-		prev_req->next = req->next;
++-	else
++-		radius->msgs = req->next;
++-	radius->num_msgs--;
++-
++ 	for (i = 0; i < num_handlers; i++) {
++ 		RadiusRxResult res;
++ 		res = handlers[i].handler(msg, req->msg, req->shared_secret,
++@@ -1276,6 +1269,13 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++ 			radius_msg_free(msg);
++ 			/* fall through */
++ 		case RADIUS_RX_QUEUED:
+++			/* Remove ACKed RADIUS packet from retransmit list */
+++			if (prev_req)
+++				prev_req->next = req->next;
+++			else
+++				radius->msgs = req->next;
+++			radius->num_msgs--;
+++
++ 			radius_client_msg_free(req);
++ 			return;
++ 		case RADIUS_RX_INVALID_AUTHENTICATOR:
++@@ -1297,7 +1297,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++ 		       msg_type, hdr->code, hdr->identifier,
++ 		       invalid_authenticator ? " [INVALID AUTHENTICATOR]" :
++ 		       "");
++-	radius_client_msg_free(req);
++ 
++  fail:
++ 	radius_msg_free(msg);
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch
+new file mode 100644
+index 0000000000..add2e47048
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2025-24912-02.patch
+@@ -0,0 +1,70 @@
++From 339a334551ca911187cc870f4f97ef08e11db109 Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <quic_jouni@quicinc.com>
++Date: Wed, 5 Feb 2025 19:23:39 +0200
++Subject: [PATCH] RADIUS: Fix pending request dropping
++
++A recent change to this moved the place where the processed RADIUS
++request was removed from the pending list to happen after the message
++handler had been called. This did not take into account possibility of
++the handler adding a new pending request in the list and the prev_req
++pointer not necessarily pointing to the correct entry anymore. As such,
++some of the pending requests could have been lost and that would result
++in not being able to process responses to those requests and also, to a
++memory leak.
++
++Fix this by determining prev_req at the point when the pending request
++is being removed, i.e., after the handler function has already added a
++new entry.
++
++Fixes: 726432d7622c ("RADIUS: Drop pending request only when accepting the response")
++Signed-off-by: Jouni Malinen <quic_jouni@quicinc.com>
++
++CVE: CVE-2025-24912
++Upstream-Status: Backport [https://w1.fi/cgit/hostap/commit/?id=339a334551ca911187cc870f4f97ef08e11db109]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/radius/radius_client.c | 10 +++++++---
++ 1 file changed, 7 insertions(+), 3 deletions(-)
++
++diff --git a/src/radius/radius_client.c b/src/radius/radius_client.c
++index 7909b29a7..d4faa7936 100644
++--- a/src/radius/radius_client.c
+++++ b/src/radius/radius_client.c
++@@ -1099,7 +1099,7 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++ 	struct radius_hdr *hdr;
++ 	struct radius_rx_handler *handlers;
++ 	size_t num_handlers, i;
++-	struct radius_msg_list *req, *prev_req;
+++	struct radius_msg_list *req, *prev_req, *r;
++ 	struct os_reltime now;
++ 	struct hostapd_radius_server *rconf;
++ 	int invalid_authenticator = 0;
++@@ -1224,7 +1224,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++ 		break;
++ 	}
++ 
++-	prev_req = NULL;
++ 	req = radius->msgs;
++ 	while (req) {
++ 		/* TODO: also match by src addr:port of the packet when using
++@@ -1236,7 +1235,6 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++ 		    hdr->identifier)
++ 			break;
++ 
++-		prev_req = req;
++ 		req = req->next;
++ 	}
++ 
++@@ -1270,6 +1268,12 @@ static void radius_client_receive(int sock, void *eloop_ctx, void *sock_ctx)
++ 			/* fall through */
++ 		case RADIUS_RX_QUEUED:
++ 			/* Remove ACKed RADIUS packet from retransmit list */
+++			prev_req = NULL;
+++			for (r = radius->msgs; r; r = r->next) {
+++				if (r == req)
+++					break;
+++				prev_req = r;
+++			}
++ 			if (prev_req)
++ 				prev_req->next = req->next;
++ 			else
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
+index daaf2dcd55..a6f7122847 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.11.bb
+@@ -12,6 +12,8 @@ SRC_URI = " \
+     file://defconfig \
+     file://init \
+     file://hostapd.service \
++    file://CVE-2025-24912-01.patch \
++    file://CVE-2025-24912-02.patch \
  "
  
--SRC_URI[sha256sum] = "ebd07d89d2a446a7f74100ad51272e4a8bf300b61634a7812e19f068f2759de8"
-+SRC_URI[sha256sum] = "7ad5e84caeb8d2bb6ed0c04614b2a7042def961af82d87f688ba33db857b899d"
- 
- inherit systemd update-rc.d useradd cmake pkgconfig
  
 
