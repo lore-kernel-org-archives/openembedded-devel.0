@@ -1,484 +1,800 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9F38CCFA03
-	for <webhook@archiver.kernel.org>; Mon,  3 Nov 2025 16:04:53 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.931.1762185886306682278
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D365CCF9F8
+	for <webhook@archiver.kernel.org>; Mon,  3 Nov 2025 18:22:05 +0000 (UTC)
+Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.112])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4656.1762194117583195869
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Nov 2025 08:04:46 -0800
+ Mon, 03 Nov 2025 10:21:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lUHDH9VN;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4711b95226dso59051355e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Nov 2025 08:04:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762185885; x=1762790685; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=bSkKch/15O/030BWzAytTF7I8ne12NuFW7VYLOb6ZYM=;
-        b=lUHDH9VN2fAffIuMnsf0e171PxHAwnKTSThI+3yUjeDdPqSATTPkSAoxmmPNjjx7ve
-         nIknJeyGg/CyYDwku9kUzKKXh6P0mSRHGKGjMe5A3mURpqa0yLi1XHMZO/8fcslOYk4o
-         /5NYmXmGlKbEScJlDKsgRDrCGKECEK07yYvrOii3wjkIKKhFVbQin9TJZe/szdnqh6en
-         OZ7cEzsXixPaJ87gCp4gcjdea37w37td3bBMRYdOjzj/40rf6zhEUoz4n9UBC9c4VUUP
-         JWJtVnkJKf1pAES7wfgYG9EtpMZQ4sUQ7YlYUny4+aXT3y2N9jv5SGXIcTlgtCBf58ea
-         ovJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762185885; x=1762790685;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=bSkKch/15O/030BWzAytTF7I8ne12NuFW7VYLOb6ZYM=;
-        b=hsmL9YBVBWhJowYDXxhdMUH9P3nN6AjKgpowd+TPo7+MKJPodNYNMOLhYYqbbuEKpt
-         BXgz6CArrmxf/07SfQ5/DEHLqxAnjGrCaSRMdae0QQp/JPKozns8dff8F+uJ3mmJIjmH
-         2fxuXoih5/N10Y/ffhnJvhZG+fmppgkFJcGtT/kcp80rIDEazBEloOuzblzFMdX+GASE
-         3hiyBpk6IQ7FFfPIQVCno9a13xR+uxi91qK/gnz2rJJyKQ92XFg+iYkfCrY4nNwmoxkj
-         rIr7pHeWMmbAz2XjQlwwGFg/aF0yFa+UITbXPMbd+dTvDKAi9x2U16QPJ5AXsXXhAdm2
-         SOvg==
-X-Gm-Message-State: AOJu0YwBEEoEARaiKRgWc61Lz/12+iDfeJkbes7aK0QosAmXIlUnlIQi
-	IVwSZ7aZb9gSPUkpf+qsrhcPCaiFxAxSZikSesnxu1nw4djx1K8eYVvraDJLRW1G
-X-Gm-Gg: ASbGncvNONBAsAt3LwSFUPgmaj8kaPyTFNvaJba95TvA3S7I1SQNKVvvzaJO8Cb+ioM
-	FWi31S41tgMpxCOu8pR5Vau8AD/crfWv3IqZcc4rtSKV9VB6504li8TnDNO5yrDSBnx0K1V/sck
-	MOlI1MkAl0jZjzFdEbV7qu0bWGEgNuFHSoDageC8Jc7A+c3iJUA261ISMTR/M5DhKbNxdsQ6ZmN
-	heMMZVWA2Q/dXBBjiMrlpTsV4DEOqNKwCR/lTa/elEKozMi3SaaOZbM8KU3za6nIwfBuZsSRWZ+
-	9plg8j53rZAyDag9Oy9aB68kt5SmxElsBZyELBUg5DLWDOzP4q8QvRAWFBr7n8btom9NqaZv3E+
-	Siw4juh/EgsalbUHwQVKv5flgC51RRAkjbSRXEir/o7R04Htir3f3lk/BJTUvGUAsWZpkkb68DR
-	F8lnX6ubpRmDnmRft4rXA=
-X-Google-Smtp-Source: AGHT+IFHoVWAiSnChr9su1Es3G7mPHtvWCJGRw8ukEhK6UDzg35cxqfHtFbAjc4LXCN3Flx1Q3Dt9w==
-X-Received: by 2002:a05:600c:3146:b0:459:db7b:988e with SMTP id 5b1f17b1804b1-477307c6852mr114842035e9.13.1762185884225;
-        Mon, 03 Nov 2025 08:04:44 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429c13e1d47sm21402586f8f.23.2025.11.03.08.04.42
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Nov 2025 08:04:43 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: CVE report - kirkstone - 2025-11-03
-Date: Mon,  3 Nov 2025 17:04:42 +0100
-Message-ID: <20251103160442.1859460-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.2
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=UsptHL5J;
+ spf=pass (domain: navimatix.de, ip: 52.101.65.112, mailfrom: joerg.sommer@navimatix.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Wlh6uHq79c76PR/+VdmJjwQcKrO3dxaIDg3frx717T+DQNmFBE39oFs+QkPOzSQYG5YTYX4OLI1onl41L4jNkZOQaGswVO6m70qCS4+XhpwNMTeEIZffu0cEPb1vqYme7KUrlVcbAzXpZixaF9uSt65jtyI/fO4yVqha30GJzr0UHKUo4nJX1oieEat0DR7idUNeRtCooeehJHuqkc4qEsuHkqO62mT8aGV5aXTx/pUq66TgmZvS7XR/78d5pVcp6IzbfFAd5joKz8olTw0S4OtUm3ZZWxEhjdU2VPs9Rd2qXnbmC4cR/r7sy8Uv32upu8HCJZed+zaAmChbugJrcA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lyxVQMU68xNSeoU/oLoCtAV2N6STrmbjasqqb4zw6Mw=;
+ b=SaIAQYcmt4tuu/oOG2Wr+sLKvrDE3X7stGz3waLz8nUfsLfFUrGH1saVxCEDwkHQeAszo0v3W49lSHkIyAvJZ7D4iyDI1UA+DOfeXeg2jVIdt8RzYTjAoLWrY/tn/7l7YXBggQE2DVZbWglCBtn6x6xUjL2cCTOSFbbHWevv+3OpYLQVb+J0i45JkW9Mew72VDLse5IkeXKFRAmM9Ler1EvQpJa1gyEk2Nbf+Cnc2TKa6wA5hgDk+jGrAZ+pbSbnZFHdJZqf5XFDvPPhQHZHGHiJV7jBEffgvoWNfrwykHibOTYKPYEDLzN5QoXR1FtuMjBLa3/bgA3fELQShaEOuw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lyxVQMU68xNSeoU/oLoCtAV2N6STrmbjasqqb4zw6Mw=;
+ b=UsptHL5JWgTXRyO6/0rh5A9oZ5WalncWb8l15d/BfZxbKXlW3UXBwMEYEE8UDnnlPq9N4nbBZC3HXo9I/IhX+h5dooeM1H1IXAMsuKLJ4D/uuVm852f2a7DVY3aTuIv5kR1NYmr+CeUtPnQwIx0Rsy5G08c2pZN/nzTHiC1FYLo=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8) by GV2PR01MB12350.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2f3::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.16; Mon, 3 Nov
+ 2025 18:21:50 +0000
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ ([fe80::aa6f:8b89:a47b:990b]) by
+ GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::aa6f:8b89:a47b:990b%5])
+ with mapi id 15.20.9275.015; Mon, 3 Nov 2025 18:21:50 +0000
+Date: Mon, 3 Nov 2025 19:21:49 +0100
+From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
+CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+Subject: [PATCH] ubi-utils-klibc: Upgrade 2.0.2 -> 2.3.0
+Message-ID: <fe27ccd6c8968ea80f707977d219229f1e731359.1762193894.git.joerg.sommer@navimatix.de>
+X-Mailer: git-send-email 2.51.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: BE1P281CA0018.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:15::20) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|GV2PR01MB12350:EE_
+X-MS-Office365-Filtering-Correlation-Id: cb3e6c12-fb98-48ff-b85e-08de1b05db4b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?t8Ye4o75UCdUGSALHadKvMW+vT8aSeggrZI52yFuYW9iuJycdQ6UE7S6mc/+?=
+ =?us-ascii?Q?GY2K0h5gcAxDc7MtzwM/zSDfTJx86uxYGDiHNQaSmsX9+DgVpkYUTNavff1K?=
+ =?us-ascii?Q?gAbAdKKC3TXAG1FsYVDatgwnGUXEP8LA8bMNYEL0PvG+xCR1FPrKNP/VVLX1?=
+ =?us-ascii?Q?6cJtna9U7QUyRhb7rJmugDJzFt+GTu1ozYunyALUUgKf2DHKrGcTxeGfNBdD?=
+ =?us-ascii?Q?JkXvjTXlDoP7GsDXTSgeN/CtDOg1RWj77TTwKcLmnLGRz+7vBYnhWM+mKQIk?=
+ =?us-ascii?Q?rc/Z2286AMmH3Ec2KCi8sE7m5qkE/sHxDkkhPbTzV3sRytSCqrrMYbFVfZGH?=
+ =?us-ascii?Q?rbHwA11w8ZDkpYvnYT2kgX5Tt6cfh+wjXT9ZTGVDWDla9b2gKqnS2oOxMQX9?=
+ =?us-ascii?Q?BlAscZGcyhLNrGiJMLeqBo/DZov7Xm/MjiS8ELK4WpW0qxh2cl6BGDffCtWP?=
+ =?us-ascii?Q?3NCVb3HCbPJ98eR8bO8XT+ZuKIq6mv4xVust+0rPeG18q0L7VEkUgMUXpsPS?=
+ =?us-ascii?Q?x3KxPKPWpHsrIP8h01Ehs28u9qQIgNhzu46Whc+cWWgwko+VsoepalY7pAS1?=
+ =?us-ascii?Q?AamPuPSin9j1viL7T9rKGe0sWOiPCSw5+6STDsOluI9vdARH2+4BeK1JlwS2?=
+ =?us-ascii?Q?9yckIkQM6Y1JKyOr5UOh4Z5tRPIcJotmQkpJz84OJS9Q6MUGc6oJWIe4Y5f2?=
+ =?us-ascii?Q?1q/7ApO29hTc6fqezgOeVgwYy/WC45KBP3XdYJwDSxkxxP0FqJA6qOpKvoi3?=
+ =?us-ascii?Q?8v63EIGzsjYZBen7A0DPuCn2cYfzqb4gDWl4Jm37FOokDnlHOWu2W3Q02c7+?=
+ =?us-ascii?Q?L20ob7JnBHBqc3Y69p/LTDh3tWPmGRwjRvagXuHvJXm7Yxq0WMCDJNtCqdGP?=
+ =?us-ascii?Q?ELSyS4lJhUsUieFKePaOrCYPtdnn4Je0AuA9nSgCzmf6ZIg+UG5KhLNHr2dS?=
+ =?us-ascii?Q?WstrBYZXqPN5vEaPZpky4WFxpM6g1r3E44bFnnRkkkeJssr6Iyw4SW87hWnr?=
+ =?us-ascii?Q?Ucs1jsx+Iwl9W3YlQY+XXTSqtSlgRoQasLWjUJ0YEMtGxfLqVpE4YfaxyQTX?=
+ =?us-ascii?Q?0V8LfG28oQ1WsZ5IHC5gVfvdvnaKDY9WMVs0pD+JiHdsJhO96Faj5aV5OSuA?=
+ =?us-ascii?Q?wA43e+k0HGVkPAMiOjC1f9wLblqH7T3lEwNFu5xdJYA7cVNXRSEVEWxhiv2f?=
+ =?us-ascii?Q?ldWsvbYo/GywgCGBm3OPr0t9QMDYfuhG5HwJzNV5uEektiOxn9HVZLO9C8i0?=
+ =?us-ascii?Q?OiMvwrg8+3iIcyrcZ3eWCnhgJJNzrR2P8ApnpYqMhrMDf1t5w8a3JlhudJhd?=
+ =?us-ascii?Q?x+Ww0oiZXsxqHxNLZQ+FniKIMzI/6cccYsBzqqVoWDvCIjWCpTJhZMXbgQV9?=
+ =?us-ascii?Q?sJkg2mYeLGBygl+XnwciGVg2Z8V3eKFyV7ohVJyk25tegboOtWTBQAb7BtS+?=
+ =?us-ascii?Q?5N98atSlfC2QJX+CvNyV/SPWjlahg/gQ?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?rx0xCRSnRMVLwC17ZygNg9xMNUzctEnVJ79gHuWTMP2xzQ/IoFQxQ0Q4GGgX?=
+ =?us-ascii?Q?Y4ofIe3Kqh7ETmAAY+HtfaeYbL73DQ25m7opbeLdbwRQ7rxouVqg6P3GoZp8?=
+ =?us-ascii?Q?DV4yBYqSgZxoEl9O/6L7gsyOb2CPCYOdibw9jIo4kJlQMx7y4RdByIRVE+sh?=
+ =?us-ascii?Q?CvkQA9Z/k2jcInk+N7ptINLrftVJ1SyR9vkfTycDibzXBDWdR4rdYUuckkz6?=
+ =?us-ascii?Q?vuMzaSnIFH4md3OHq0IX30Rka7zqLax9o6gRydSFi6ggWivACbWmLAh7c/7K?=
+ =?us-ascii?Q?NDj5Q5ojeFQTu6WB9YxSf1AkaHlLnxUmXhtyoBex4+3mMItLaP08azzVzKXV?=
+ =?us-ascii?Q?hLxpkr72Hw0SgDm52L9WK785N5GGMIyUtAifQEZRFxVBOaNQaHuLBFdis4K5?=
+ =?us-ascii?Q?wmw9Ax82yXWgDvuBLHxleLEZ7dN5G9rmk+Y6fXCVZ0fTtKe/vMPWe4OuojwZ?=
+ =?us-ascii?Q?EJPugU5dmyhDIAyb6BmIr4bV178z3SkwfU7WhUsXOxwJPITOUV4b+CO9mZ9w?=
+ =?us-ascii?Q?r6YxjtsnpqVUbI1JF/tW5dYAEII5G8Q+k+LDFi4GUTNyBS99JcEvMFxXtEcv?=
+ =?us-ascii?Q?Q7q3LYWe5eeAfC6M6Mt4FetAXQsOTOZ/e/2TdjdjwjWfZZ4MgjFN96lVdlPU?=
+ =?us-ascii?Q?ny6fq+ORg7GLCErEYASgS8k4QK6StoyPYWIrVgCVdLGBhIkF5qvhbQD1OBd/?=
+ =?us-ascii?Q?kyhqEBiGLoSzWHuP8fllJy6Cg67QeUR8zT+OjgthgCD26BzkLkOfQvAp4X0C?=
+ =?us-ascii?Q?6BPHZDpL6ARYWIOIaP2E3AgMPYHptQg61Aj+WE1TFMXrwyjbjAnIvpI13qpT?=
+ =?us-ascii?Q?hZeymYXy0SNxj+R5wXVI20q+68wjWIvhtgZElas6YUiauajTprDxrMum6aSl?=
+ =?us-ascii?Q?LtFJSeJVOW0o05fuVpyXYgN5XI6hyudnTtfRzWv7QRhgphxhTZrn6Uf8WNyG?=
+ =?us-ascii?Q?1P0ARCe0TZth2b2ZmKIe/k1LWiiQ8bwJheYEngvBdJOlJd7RF3hJE91I5PpX?=
+ =?us-ascii?Q?4GeC+Bbe6NOsIXS7kjY3Ocn/4rny/pRiRk4/olL54vFLpsQMRp32JXGA1NFy?=
+ =?us-ascii?Q?4qleECRw98/Cnczq+/3rOETdfygLoOlBsDZBmGJ4YpQyfL5uJApsDOqxUP8A?=
+ =?us-ascii?Q?fXJuQS/Z/bNcBhDmB3DUSkR+DfelViZJHO6NruNc/9KqvgDDwCMYEZRBGLpp?=
+ =?us-ascii?Q?+iCs1d7/RuK0xg288WdN7a3lsngpIzoMY4EG/ShA3/fLmTqMpGAhEWm1k2MR?=
+ =?us-ascii?Q?G+M0mP2wQ8szv+zym4ssxFYuE0SALr73eRdw55BJKKB2bR0EGziAB2/Caf5y?=
+ =?us-ascii?Q?ZoOSWnUnIa+Wd8TrOaWM4eyAxRB6iM0/aI5WlQFkgFmTc6NresKsb2YhVjaV?=
+ =?us-ascii?Q?yDBMAEFxukYmxiG467rwo/A1E3E1TKwTG91wzG8wuD8KPM3Ci0oVbGHRPKBw?=
+ =?us-ascii?Q?YU8gdUNfldtEhLGFnEwpd7KVFFANSPQvxYTjIYVI+53jKjKWrQNdhiEbh4pJ?=
+ =?us-ascii?Q?WKBkLm4EyCkBNiLt4uDMUAQYFA4G16NZ9UW0xkEWwD9mWF5QJPiWo1Zzwycb?=
+ =?us-ascii?Q?Q12wAaDLRpsOG2SX6ge2y7vuVjswSK7/lyeawxxoMGhsJ2Z3TXF2Sont2OH1?=
+ =?us-ascii?Q?0A=3D=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: cb3e6c12-fb98-48ff-b85e-08de1b05db4b
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2025 18:21:50.3403
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: TZAsxd6npYuFvCGtJrKudl+XugjDMIRE3BqI7NeQCgMajFIXy+Zd/57iu5SY3aRocd3OMDN7zo2lVKlNdb3YQmADgcUF8hz+trBkHOLi75w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR01MB12350
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Nov 2025 16:04:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121278
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Nov 2025 18:22:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121279
 
-List of all open CVEs (394, out of which new this week: 9):
+From: J=F6rg Sommer <joerg.sommer@navimatix.de>
 
-audiofile: CVE-2018-13440: https://nvd.nist.gov/vuln/detail/CVE-2018-13440
-audiofile: CVE-2018-17095: https://nvd.nist.gov/vuln/detail/CVE-2018-17095
-audiofile: CVE-2019-13147: https://nvd.nist.gov/vuln/detail/CVE-2019-13147
-audiofile: CVE-2020-18781: https://nvd.nist.gov/vuln/detail/CVE-2020-18781
-audiofile: CVE-2022-24599: https://nvd.nist.gov/vuln/detail/CVE-2022-24599
-cups-filters: CVE-2023-24805: https://nvd.nist.gov/vuln/detail/CVE-2023-24805
-dhrystone: CVE-2020-23026: https://nvd.nist.gov/vuln/detail/CVE-2020-23026
-dovecot: CVE-2020-28200: https://nvd.nist.gov/vuln/detail/CVE-2020-28200
-dovecot: CVE-2021-29157: https://nvd.nist.gov/vuln/detail/CVE-2021-29157
-emacs: CVE-2022-45939: https://nvd.nist.gov/vuln/detail/CVE-2022-45939
-emacs: CVE-2022-48337: https://nvd.nist.gov/vuln/detail/CVE-2022-48337
-emacs: CVE-2022-48338: https://nvd.nist.gov/vuln/detail/CVE-2022-48338
-emacs: CVE-2022-48339: https://nvd.nist.gov/vuln/detail/CVE-2022-48339
-emacs: CVE-2024-30202: https://nvd.nist.gov/vuln/detail/CVE-2024-30202
-emacs: CVE-2024-30203: https://nvd.nist.gov/vuln/detail/CVE-2024-30203
-emacs: CVE-2024-30204: https://nvd.nist.gov/vuln/detail/CVE-2024-30204
-emacs: CVE-2024-30205: https://nvd.nist.gov/vuln/detail/CVE-2024-30205
-emacs: CVE-2024-39331: https://nvd.nist.gov/vuln/detail/CVE-2024-39331
-emacs: CVE-2024-53920: https://nvd.nist.gov/vuln/detail/CVE-2024-53920
-evince: CVE-2011-0433: https://nvd.nist.gov/vuln/detail/CVE-2011-0433
-exiv2: CVE-2021-29623: https://nvd.nist.gov/vuln/detail/CVE-2021-29623
-exiv2: CVE-2021-31292: https://nvd.nist.gov/vuln/detail/CVE-2021-31292
-exiv2: CVE-2021-32617: https://nvd.nist.gov/vuln/detail/CVE-2021-32617
-exiv2: CVE-2021-32815: https://nvd.nist.gov/vuln/detail/CVE-2021-32815
-exiv2: CVE-2021-34334: https://nvd.nist.gov/vuln/detail/CVE-2021-34334
-exiv2: CVE-2021-34335: https://nvd.nist.gov/vuln/detail/CVE-2021-34335
-exiv2: CVE-2021-37615: https://nvd.nist.gov/vuln/detail/CVE-2021-37615
-exiv2: CVE-2021-37616: https://nvd.nist.gov/vuln/detail/CVE-2021-37616
-exiv2: CVE-2021-37618: https://nvd.nist.gov/vuln/detail/CVE-2021-37618
-exiv2: CVE-2021-37619: https://nvd.nist.gov/vuln/detail/CVE-2021-37619
-exiv2: CVE-2021-37620: https://nvd.nist.gov/vuln/detail/CVE-2021-37620
-exiv2: CVE-2021-37621: https://nvd.nist.gov/vuln/detail/CVE-2021-37621
-exiv2: CVE-2021-37622: https://nvd.nist.gov/vuln/detail/CVE-2021-37622
-exiv2: CVE-2021-37623: https://nvd.nist.gov/vuln/detail/CVE-2021-37623
-exiv2: CVE-2025-54080: https://nvd.nist.gov/vuln/detail/CVE-2025-54080
-exiv2: CVE-2025-55304: https://nvd.nist.gov/vuln/detail/CVE-2025-55304
-ez-ipupdate: CVE-2003-0887: https://nvd.nist.gov/vuln/detail/CVE-2003-0887
-faad2: CVE-2021-32276: https://nvd.nist.gov/vuln/detail/CVE-2021-32276
-fontforge: CVE-2019-15785: https://nvd.nist.gov/vuln/detail/CVE-2019-15785
-fontforge: CVE-2020-25690: https://nvd.nist.gov/vuln/detail/CVE-2020-25690
-fontforge: CVE-2020-5395: https://nvd.nist.gov/vuln/detail/CVE-2020-5395
-fontforge: CVE-2020-5496: https://nvd.nist.gov/vuln/detail/CVE-2020-5496
-fontforge: CVE-2024-25081: https://nvd.nist.gov/vuln/detail/CVE-2024-25081
-fontforge: CVE-2024-25082: https://nvd.nist.gov/vuln/detail/CVE-2024-25082
-freerdp: CVE-2022-24882: https://nvd.nist.gov/vuln/detail/CVE-2022-24882
-freerdp: CVE-2022-24883: https://nvd.nist.gov/vuln/detail/CVE-2022-24883
-freerdp: CVE-2022-39282: https://nvd.nist.gov/vuln/detail/CVE-2022-39282
-freerdp: CVE-2022-39283: https://nvd.nist.gov/vuln/detail/CVE-2022-39283
-freerdp: CVE-2022-39317: https://nvd.nist.gov/vuln/detail/CVE-2022-39317
-freerdp: CVE-2022-39320: https://nvd.nist.gov/vuln/detail/CVE-2022-39320
-freerdp: CVE-2022-39347: https://nvd.nist.gov/vuln/detail/CVE-2022-39347
-freerdp: CVE-2022-41877: https://nvd.nist.gov/vuln/detail/CVE-2022-41877
-freerdp: CVE-2023-39350: https://nvd.nist.gov/vuln/detail/CVE-2023-39350
-freerdp: CVE-2023-39351: https://nvd.nist.gov/vuln/detail/CVE-2023-39351
-freerdp: CVE-2023-39352: https://nvd.nist.gov/vuln/detail/CVE-2023-39352
-freerdp: CVE-2023-39353: https://nvd.nist.gov/vuln/detail/CVE-2023-39353
-freerdp: CVE-2023-39354: https://nvd.nist.gov/vuln/detail/CVE-2023-39354
-freerdp: CVE-2023-39356: https://nvd.nist.gov/vuln/detail/CVE-2023-39356
-freerdp: CVE-2023-40181: https://nvd.nist.gov/vuln/detail/CVE-2023-40181
-freerdp: CVE-2023-40186: https://nvd.nist.gov/vuln/detail/CVE-2023-40186
-freerdp: CVE-2023-40188: https://nvd.nist.gov/vuln/detail/CVE-2023-40188
-freerdp: CVE-2023-40567: https://nvd.nist.gov/vuln/detail/CVE-2023-40567
-freerdp: CVE-2023-40569: https://nvd.nist.gov/vuln/detail/CVE-2023-40569
-freerdp: CVE-2023-40589: https://nvd.nist.gov/vuln/detail/CVE-2023-40589
-freerdp: CVE-2024-22211: https://nvd.nist.gov/vuln/detail/CVE-2024-22211
-freerdp: CVE-2024-32039: https://nvd.nist.gov/vuln/detail/CVE-2024-32039
-freerdp: CVE-2024-32040: https://nvd.nist.gov/vuln/detail/CVE-2024-32040
-freerdp: CVE-2024-32041: https://nvd.nist.gov/vuln/detail/CVE-2024-32041
-freerdp: CVE-2024-32458: https://nvd.nist.gov/vuln/detail/CVE-2024-32458
-freerdp: CVE-2024-32459: https://nvd.nist.gov/vuln/detail/CVE-2024-32459
-freerdp: CVE-2024-32460: https://nvd.nist.gov/vuln/detail/CVE-2024-32460
-freerdp: CVE-2024-32658: https://nvd.nist.gov/vuln/detail/CVE-2024-32658
-freerdp: CVE-2024-32659: https://nvd.nist.gov/vuln/detail/CVE-2024-32659
-freerdp: CVE-2024-32660: https://nvd.nist.gov/vuln/detail/CVE-2024-32660
-freerdp: CVE-2024-32661: https://nvd.nist.gov/vuln/detail/CVE-2024-32661
-freerdp: CVE-2024-32662: https://nvd.nist.gov/vuln/detail/CVE-2024-32662
-[NEW] frr: CVE-2023-3748: https://nvd.nist.gov/vuln/detail/CVE-2023-3748
-[NEW] frr: CVE-2023-41359: https://nvd.nist.gov/vuln/detail/CVE-2023-41359
-[NEW] frr: CVE-2023-41360: https://nvd.nist.gov/vuln/detail/CVE-2023-41360
-[NEW] frr: CVE-2023-41361: https://nvd.nist.gov/vuln/detail/CVE-2023-41361
-[NEW] frr: CVE-2025-61103: https://nvd.nist.gov/vuln/detail/CVE-2025-61103
-[NEW] frr: CVE-2025-61104: https://nvd.nist.gov/vuln/detail/CVE-2025-61104
-[NEW] frr: CVE-2025-61106: https://nvd.nist.gov/vuln/detail/CVE-2025-61106
-[NEW] frr: CVE-2025-61107: https://nvd.nist.gov/vuln/detail/CVE-2025-61107
-fwupd: CVE-2022-3287: https://nvd.nist.gov/vuln/detail/CVE-2022-3287
-giflib: CVE-2024-45993: https://nvd.nist.gov/vuln/detail/CVE-2024-45993
-gimp: CVE-2022-30067: https://nvd.nist.gov/vuln/detail/CVE-2022-30067
-gimp: CVE-2022-32990: https://nvd.nist.gov/vuln/detail/CVE-2022-32990
-gimp: CVE-2023-44441: https://nvd.nist.gov/vuln/detail/CVE-2023-44441
-gimp: CVE-2023-44442: https://nvd.nist.gov/vuln/detail/CVE-2023-44442
-gimp: CVE-2023-44443: https://nvd.nist.gov/vuln/detail/CVE-2023-44443
-gimp: CVE-2023-44444: https://nvd.nist.gov/vuln/detail/CVE-2023-44444
-gimp: CVE-2025-5473: https://nvd.nist.gov/vuln/detail/CVE-2025-5473
-gnuplot: CVE-2025-31176: https://nvd.nist.gov/vuln/detail/CVE-2025-31176
-gnuplot: CVE-2025-31178: https://nvd.nist.gov/vuln/detail/CVE-2025-31178
-gnuplot: CVE-2025-31179: https://nvd.nist.gov/vuln/detail/CVE-2025-31179
-gnuplot: CVE-2025-31180: https://nvd.nist.gov/vuln/detail/CVE-2025-31180
-gnuplot: CVE-2025-31181: https://nvd.nist.gov/vuln/detail/CVE-2025-31181
-grpc: CVE-2023-33953: https://nvd.nist.gov/vuln/detail/CVE-2023-33953
-grpc: CVE-2023-44487: https://nvd.nist.gov/vuln/detail/CVE-2023-44487
-grpc: CVE-2023-4785: https://nvd.nist.gov/vuln/detail/CVE-2023-4785
-grpc: CVE-2024-7246: https://nvd.nist.gov/vuln/detail/CVE-2024-7246
-hdf5: CVE-2017-17506: https://nvd.nist.gov/vuln/detail/CVE-2017-17506
-hdf5: CVE-2018-17233: https://nvd.nist.gov/vuln/detail/CVE-2018-17233
-hdf5: CVE-2018-17234: https://nvd.nist.gov/vuln/detail/CVE-2018-17234
-hdf5: CVE-2018-17237: https://nvd.nist.gov/vuln/detail/CVE-2018-17237
-hdf5: CVE-2018-17432: https://nvd.nist.gov/vuln/detail/CVE-2018-17432
-hdf5: CVE-2018-17433: https://nvd.nist.gov/vuln/detail/CVE-2018-17433
-hdf5: CVE-2018-17434: https://nvd.nist.gov/vuln/detail/CVE-2018-17434
-hdf5: CVE-2018-17435: https://nvd.nist.gov/vuln/detail/CVE-2018-17435
-hdf5: CVE-2018-17436: https://nvd.nist.gov/vuln/detail/CVE-2018-17436
-hdf5: CVE-2018-17437: https://nvd.nist.gov/vuln/detail/CVE-2018-17437
-hdf5: CVE-2018-17438: https://nvd.nist.gov/vuln/detail/CVE-2018-17438
-hdf5: CVE-2019-8396: https://nvd.nist.gov/vuln/detail/CVE-2019-8396
-hdf5: CVE-2020-10809: https://nvd.nist.gov/vuln/detail/CVE-2020-10809
-hdf5: CVE-2020-10810: https://nvd.nist.gov/vuln/detail/CVE-2020-10810
-hdf5: CVE-2020-10811: https://nvd.nist.gov/vuln/detail/CVE-2020-10811
-hdf5: CVE-2020-10812: https://nvd.nist.gov/vuln/detail/CVE-2020-10812
-hdf5: CVE-2024-29157: https://nvd.nist.gov/vuln/detail/CVE-2024-29157
-hdf5: CVE-2024-29158: https://nvd.nist.gov/vuln/detail/CVE-2024-29158
-hdf5: CVE-2024-29159: https://nvd.nist.gov/vuln/detail/CVE-2024-29159
-hdf5: CVE-2024-29160: https://nvd.nist.gov/vuln/detail/CVE-2024-29160
-hdf5: CVE-2024-29161: https://nvd.nist.gov/vuln/detail/CVE-2024-29161
-hdf5: CVE-2024-29162: https://nvd.nist.gov/vuln/detail/CVE-2024-29162
-hdf5: CVE-2024-29163: https://nvd.nist.gov/vuln/detail/CVE-2024-29163
-hdf5: CVE-2024-29164: https://nvd.nist.gov/vuln/detail/CVE-2024-29164
-hdf5: CVE-2024-29165: https://nvd.nist.gov/vuln/detail/CVE-2024-29165
-hdf5: CVE-2024-29166: https://nvd.nist.gov/vuln/detail/CVE-2024-29166
-hdf5: CVE-2024-32605: https://nvd.nist.gov/vuln/detail/CVE-2024-32605
-hdf5: CVE-2024-32606: https://nvd.nist.gov/vuln/detail/CVE-2024-32606
-hdf5: CVE-2024-32607: https://nvd.nist.gov/vuln/detail/CVE-2024-32607
-hdf5: CVE-2024-32608: https://nvd.nist.gov/vuln/detail/CVE-2024-32608
-hdf5: CVE-2024-32609: https://nvd.nist.gov/vuln/detail/CVE-2024-32609
-hdf5: CVE-2024-32610: https://nvd.nist.gov/vuln/detail/CVE-2024-32610
-hdf5: CVE-2024-32611: https://nvd.nist.gov/vuln/detail/CVE-2024-32611
-hdf5: CVE-2024-32612: https://nvd.nist.gov/vuln/detail/CVE-2024-32612
-hdf5: CVE-2024-32613: https://nvd.nist.gov/vuln/detail/CVE-2024-32613
-hdf5: CVE-2024-32614: https://nvd.nist.gov/vuln/detail/CVE-2024-32614
-hdf5: CVE-2024-32615: https://nvd.nist.gov/vuln/detail/CVE-2024-32615
-hdf5: CVE-2024-32616: https://nvd.nist.gov/vuln/detail/CVE-2024-32616
-hdf5: CVE-2024-32617: https://nvd.nist.gov/vuln/detail/CVE-2024-32617
-hdf5: CVE-2024-32618: https://nvd.nist.gov/vuln/detail/CVE-2024-32618
-hdf5: CVE-2024-32619: https://nvd.nist.gov/vuln/detail/CVE-2024-32619
-hdf5: CVE-2024-32620: https://nvd.nist.gov/vuln/detail/CVE-2024-32620
-hdf5: CVE-2024-32621: https://nvd.nist.gov/vuln/detail/CVE-2024-32621
-hdf5: CVE-2024-32622: https://nvd.nist.gov/vuln/detail/CVE-2024-32622
-hdf5: CVE-2024-32623: https://nvd.nist.gov/vuln/detail/CVE-2024-32623
-hdf5: CVE-2024-32624: https://nvd.nist.gov/vuln/detail/CVE-2024-32624
-hdf5: CVE-2024-33873: https://nvd.nist.gov/vuln/detail/CVE-2024-33873
-hdf5: CVE-2024-33874: https://nvd.nist.gov/vuln/detail/CVE-2024-33874
-hdf5: CVE-2024-33875: https://nvd.nist.gov/vuln/detail/CVE-2024-33875
-hdf5: CVE-2024-33876: https://nvd.nist.gov/vuln/detail/CVE-2024-33876
-hdf5: CVE-2024-33877: https://nvd.nist.gov/vuln/detail/CVE-2024-33877
-hdf5: CVE-2025-2912: https://nvd.nist.gov/vuln/detail/CVE-2025-2912
-hdf5: CVE-2025-2913: https://nvd.nist.gov/vuln/detail/CVE-2025-2913
-hdf5: CVE-2025-2914: https://nvd.nist.gov/vuln/detail/CVE-2025-2914
-hdf5: CVE-2025-2915: https://nvd.nist.gov/vuln/detail/CVE-2025-2915
-hdf5: CVE-2025-2923: https://nvd.nist.gov/vuln/detail/CVE-2025-2923
-hdf5: CVE-2025-2924: https://nvd.nist.gov/vuln/detail/CVE-2025-2924
-hdf5: CVE-2025-2925: https://nvd.nist.gov/vuln/detail/CVE-2025-2925
-hdf5: CVE-2025-2926: https://nvd.nist.gov/vuln/detail/CVE-2025-2926
-hdf5: CVE-2025-6269: https://nvd.nist.gov/vuln/detail/CVE-2025-6269
-hdf5: CVE-2025-6270: https://nvd.nist.gov/vuln/detail/CVE-2025-6270
-hdf5: CVE-2025-6516: https://nvd.nist.gov/vuln/detail/CVE-2025-6516
-hostapd: CVE-2022-37660: https://nvd.nist.gov/vuln/detail/CVE-2022-37660
-hunspell: CVE-2019-16707: https://nvd.nist.gov/vuln/detail/CVE-2019-16707
-imagemagick: CVE-2022-1115: https://nvd.nist.gov/vuln/detail/CVE-2022-1115
-imagemagick: CVE-2023-2157: https://nvd.nist.gov/vuln/detail/CVE-2023-2157
-imagemagick: CVE-2023-34151: https://nvd.nist.gov/vuln/detail/CVE-2023-34151
-imagemagick: CVE-2023-34152: https://nvd.nist.gov/vuln/detail/CVE-2023-34152
-imagemagick: CVE-2023-34153: https://nvd.nist.gov/vuln/detail/CVE-2023-34153
-imagemagick: CVE-2023-3428: https://nvd.nist.gov/vuln/detail/CVE-2023-3428
-imagemagick: CVE-2023-34475: https://nvd.nist.gov/vuln/detail/CVE-2023-34475
-imagemagick: CVE-2024-41817: https://nvd.nist.gov/vuln/detail/CVE-2024-41817
-imagemagick: CVE-2025-53014: https://nvd.nist.gov/vuln/detail/CVE-2025-53014
-imagemagick: CVE-2025-53019: https://nvd.nist.gov/vuln/detail/CVE-2025-53019
-imagemagick: CVE-2025-53101: https://nvd.nist.gov/vuln/detail/CVE-2025-53101
-imagemagick: CVE-2025-55004: https://nvd.nist.gov/vuln/detail/CVE-2025-55004
-imagemagick: CVE-2025-55005: https://nvd.nist.gov/vuln/detail/CVE-2025-55005
-imagemagick: CVE-2025-55154: https://nvd.nist.gov/vuln/detail/CVE-2025-55154
-imagemagick: CVE-2025-55160: https://nvd.nist.gov/vuln/detail/CVE-2025-55160
-imagemagick: CVE-2025-55212: https://nvd.nist.gov/vuln/detail/CVE-2025-55212
-imagemagick: CVE-2025-55298: https://nvd.nist.gov/vuln/detail/CVE-2025-55298
-imagemagick: CVE-2025-57803: https://nvd.nist.gov/vuln/detail/CVE-2025-57803
-imagemagick: CVE-2025-57807: https://nvd.nist.gov/vuln/detail/CVE-2025-57807
-imagemagick: CVE-2025-62171: https://nvd.nist.gov/vuln/detail/CVE-2025-62171
-jasper: CVE-2023-51257: https://nvd.nist.gov/vuln/detail/CVE-2023-51257
-jasper: CVE-2025-8835: https://nvd.nist.gov/vuln/detail/CVE-2025-8835
-jasper: CVE-2025-8836: https://nvd.nist.gov/vuln/detail/CVE-2025-8836
-jasper: CVE-2025-8837: https://nvd.nist.gov/vuln/detail/CVE-2025-8837
-libao: CVE-2017-11548: https://nvd.nist.gov/vuln/detail/CVE-2017-11548
-libass: CVE-2020-24994: https://nvd.nist.gov/vuln/detail/CVE-2020-24994
-libass: CVE-2020-26682: https://nvd.nist.gov/vuln/detail/CVE-2020-26682
-libcdio: CVE-2024-36600: https://nvd.nist.gov/vuln/detail/CVE-2024-36600
-libconfuse: CVE-2022-40320: https://nvd.nist.gov/vuln/detail/CVE-2022-40320
-libde265: CVE-2022-1253: https://nvd.nist.gov/vuln/detail/CVE-2022-1253
-libebml: CVE-2015-8789: https://nvd.nist.gov/vuln/detail/CVE-2015-8789
-libebml: CVE-2015-8790: https://nvd.nist.gov/vuln/detail/CVE-2015-8790
-libebml: CVE-2015-8791: https://nvd.nist.gov/vuln/detail/CVE-2015-8791
-libebml: CVE-2021-3405: https://nvd.nist.gov/vuln/detail/CVE-2021-3405
-libebml: CVE-2023-52339: https://nvd.nist.gov/vuln/detail/CVE-2023-52339
-libiec61850: CVE-2023-27772: https://nvd.nist.gov/vuln/detail/CVE-2023-27772
-libiec61850: CVE-2024-26529: https://nvd.nist.gov/vuln/detail/CVE-2024-26529
-libiec61850: CVE-2024-45970: https://nvd.nist.gov/vuln/detail/CVE-2024-45970
-libiec61850: CVE-2024-45971: https://nvd.nist.gov/vuln/detail/CVE-2024-45971
-libmatroska: CVE-2015-8792: https://nvd.nist.gov/vuln/detail/CVE-2015-8792
-libmemcached: CVE-2023-27478: https://nvd.nist.gov/vuln/detail/CVE-2023-27478
-libraw: CVE-2020-35530: https://nvd.nist.gov/vuln/detail/CVE-2020-35530
-libraw: CVE-2020-35531: https://nvd.nist.gov/vuln/detail/CVE-2020-35531
-libraw: CVE-2020-35532: https://nvd.nist.gov/vuln/detail/CVE-2020-35532
-libraw: CVE-2020-35533: https://nvd.nist.gov/vuln/detail/CVE-2020-35533
-libraw: CVE-2020-35534: https://nvd.nist.gov/vuln/detail/CVE-2020-35534
-libraw: CVE-2020-35535: https://nvd.nist.gov/vuln/detail/CVE-2020-35535
-libraw: CVE-2023-1729: https://nvd.nist.gov/vuln/detail/CVE-2023-1729
-libraw: CVE-2025-43961: https://nvd.nist.gov/vuln/detail/CVE-2025-43961
-libraw: CVE-2025-43962: https://nvd.nist.gov/vuln/detail/CVE-2025-43962
-libraw: CVE-2025-43963: https://nvd.nist.gov/vuln/detail/CVE-2025-43963
-libraw: CVE-2025-43964: https://nvd.nist.gov/vuln/detail/CVE-2025-43964
-libssh: CVE-2025-5372: https://nvd.nist.gov/vuln/detail/CVE-2025-5372
-libssh: CVE-2025-5987: https://nvd.nist.gov/vuln/detail/CVE-2025-5987
-libssh: CVE-2025-8114: https://nvd.nist.gov/vuln/detail/CVE-2025-8114
-libtorrent: CVE-2016-5301: https://nvd.nist.gov/vuln/detail/CVE-2016-5301
-libvncserver: CVE-2020-29260: https://nvd.nist.gov/vuln/detail/CVE-2020-29260
-libvpx: CVE-2023-44488: https://nvd.nist.gov/vuln/detail/CVE-2023-44488
-libvpx: CVE-2023-5217: https://nvd.nist.gov/vuln/detail/CVE-2023-5217
-libvpx: CVE-2023-6349: https://nvd.nist.gov/vuln/detail/CVE-2023-6349
-libvpx: CVE-2024-5197: https://nvd.nist.gov/vuln/detail/CVE-2024-5197
-libwmf: CVE-2009-1364: https://nvd.nist.gov/vuln/detail/CVE-2009-1364
-libwmf: CVE-2015-0848: https://nvd.nist.gov/vuln/detail/CVE-2015-0848
-libwmf: CVE-2015-4588: https://nvd.nist.gov/vuln/detail/CVE-2015-4588
-libwmf: CVE-2015-4695: https://nvd.nist.gov/vuln/detail/CVE-2015-4695
-libwmf: CVE-2015-4696: https://nvd.nist.gov/vuln/detail/CVE-2015-4696
-libwmf: CVE-2016-9011: https://nvd.nist.gov/vuln/detail/CVE-2016-9011
-links: CVE-2008-3319: https://nvd.nist.gov/vuln/detail/CVE-2008-3319
-linuxptp: CVE-2024-42861: https://nvd.nist.gov/vuln/detail/CVE-2024-42861
-lldpd: CVE-2021-43612: https://nvd.nist.gov/vuln/detail/CVE-2021-43612
-logcheck: CVE-2017-20148: https://nvd.nist.gov/vuln/detail/CVE-2017-20148
-memcached: CVE-2022-26635: https://nvd.nist.gov/vuln/detail/CVE-2022-26635
-memcached: CVE-2023-46852: https://nvd.nist.gov/vuln/detail/CVE-2023-46852
-memcached: CVE-2023-46853: https://nvd.nist.gov/vuln/detail/CVE-2023-46853
-mercurial: CVE-2022-43410: https://nvd.nist.gov/vuln/detail/CVE-2022-43410
-mongodb: CVE-2023-1409: https://nvd.nist.gov/vuln/detail/CVE-2023-1409
-mongodb: CVE-2024-1351: https://nvd.nist.gov/vuln/detail/CVE-2024-1351
-monkey: CVE-2013-1771: https://nvd.nist.gov/vuln/detail/CVE-2013-1771
-monkey: CVE-2013-2183: https://nvd.nist.gov/vuln/detail/CVE-2013-2183
-mpd: CVE-2020-7465: https://nvd.nist.gov/vuln/detail/CVE-2020-7465
-mpd: CVE-2020-7466: https://nvd.nist.gov/vuln/detail/CVE-2020-7466
-nbdkit: CVE-2025-47711: https://nvd.nist.gov/vuln/detail/CVE-2025-47711
-nbdkit: CVE-2025-47712: https://nvd.nist.gov/vuln/detail/CVE-2025-47712
-ndpi: CVE-2025-25066: https://nvd.nist.gov/vuln/detail/CVE-2025-25066
-netdata: CVE-2023-22496: https://nvd.nist.gov/vuln/detail/CVE-2023-22496
-netdata: CVE-2023-22497: https://nvd.nist.gov/vuln/detail/CVE-2023-22497
-nodejs: CVE-2024-3566: https://nvd.nist.gov/vuln/detail/CVE-2024-3566
-openflow: CVE-2015-1611: https://nvd.nist.gov/vuln/detail/CVE-2015-1611
-openflow: CVE-2015-1612: https://nvd.nist.gov/vuln/detail/CVE-2015-1612
-openflow: CVE-2018-1000155: https://nvd.nist.gov/vuln/detail/CVE-2018-1000155
-openh264: CVE-2025-27091: https://nvd.nist.gov/vuln/detail/CVE-2025-27091
-openjpeg: CVE-2023-39328: https://nvd.nist.gov/vuln/detail/CVE-2023-39328
-openjpeg: CVE-2023-39329: https://nvd.nist.gov/vuln/detail/CVE-2023-39329
-openjpeg: CVE-2025-54874: https://nvd.nist.gov/vuln/detail/CVE-2025-54874
-openvpn: CVE-2024-4877: https://nvd.nist.gov/vuln/detail/CVE-2024-4877
-ostree: CVE-2022-47085: https://nvd.nist.gov/vuln/detail/CVE-2022-47085
-p7zip: CVE-2022-47069: https://nvd.nist.gov/vuln/detail/CVE-2022-47069
-phpmyadmin: CVE-2020-22452: https://nvd.nist.gov/vuln/detail/CVE-2020-22452
-pidgin: CVE-2022-26491: https://nvd.nist.gov/vuln/detail/CVE-2022-26491
-poco: CVE-2023-52389: https://nvd.nist.gov/vuln/detail/CVE-2023-52389
-poppler: CVE-2022-38171: https://nvd.nist.gov/vuln/detail/CVE-2022-38171
-poppler: CVE-2022-38784: https://nvd.nist.gov/vuln/detail/CVE-2022-38784
-proftpd: CVE-2001-0027: https://nvd.nist.gov/vuln/detail/CVE-2001-0027
-python3-django: CVE-2024-22199: https://nvd.nist.gov/vuln/detail/CVE-2024-22199
-python3-pillow: CVE-2024-28219: https://nvd.nist.gov/vuln/detail/CVE-2024-28219
-quagga: CVE-2017-3224: https://nvd.nist.gov/vuln/detail/CVE-2017-3224
-quagga: CVE-2021-44038: https://nvd.nist.gov/vuln/detail/CVE-2021-44038
-redis: CVE-2022-0543: https://nvd.nist.gov/vuln/detail/CVE-2022-0543
-redis: CVE-2022-3734: https://nvd.nist.gov/vuln/detail/CVE-2022-3734
-rsyslog: CVE-2015-3243: https://nvd.nist.gov/vuln/detail/CVE-2015-3243
-rtmpdump: CVE-2015-8270: https://nvd.nist.gov/vuln/detail/CVE-2015-8270
-rtmpdump: CVE-2015-8271: https://nvd.nist.gov/vuln/detail/CVE-2015-8271
-rtmpdump: CVE-2015-8272: https://nvd.nist.gov/vuln/detail/CVE-2015-8272
-sassc: CVE-2022-43357: https://nvd.nist.gov/vuln/detail/CVE-2022-43357
-smarty: CVE-2018-25047: https://nvd.nist.gov/vuln/detail/CVE-2018-25047
-smarty: CVE-2020-10375: https://nvd.nist.gov/vuln/detail/CVE-2020-10375
-smarty: CVE-2023-28447: https://nvd.nist.gov/vuln/detail/CVE-2023-28447
-snappy: CVE-2023-28115: https://nvd.nist.gov/vuln/detail/CVE-2023-28115
-snappy: CVE-2023-41330: https://nvd.nist.gov/vuln/detail/CVE-2023-41330
-spice: CVE-2021-20201: https://nvd.nist.gov/vuln/detail/CVE-2021-20201
-sqlite: CVE-2015-3414: https://nvd.nist.gov/vuln/detail/CVE-2015-3414
-sqlite: CVE-2015-3415: https://nvd.nist.gov/vuln/detail/CVE-2015-3415
-sqlite: CVE-2015-3416: https://nvd.nist.gov/vuln/detail/CVE-2015-3416
-sqlite: CVE-2015-3717: https://nvd.nist.gov/vuln/detail/CVE-2015-3717
-sqlite: CVE-2015-5895: https://nvd.nist.gov/vuln/detail/CVE-2015-5895
-sqlite: CVE-2015-6607: https://nvd.nist.gov/vuln/detail/CVE-2015-6607
-sqlite: CVE-2016-6153: https://nvd.nist.gov/vuln/detail/CVE-2016-6153
-sqlite: CVE-2017-10989: https://nvd.nist.gov/vuln/detail/CVE-2017-10989
-sqlite: CVE-2018-20346: https://nvd.nist.gov/vuln/detail/CVE-2018-20346
-sqlite: CVE-2018-20505: https://nvd.nist.gov/vuln/detail/CVE-2018-20505
-sqlite: CVE-2018-20506: https://nvd.nist.gov/vuln/detail/CVE-2018-20506
-sqlite: CVE-2018-8740: https://nvd.nist.gov/vuln/detail/CVE-2018-8740
-sqlite: CVE-2019-19645: https://nvd.nist.gov/vuln/detail/CVE-2019-19645
-sqlite: CVE-2019-19646: https://nvd.nist.gov/vuln/detail/CVE-2019-19646
-sqlite: CVE-2020-11655: https://nvd.nist.gov/vuln/detail/CVE-2020-11655
-sqlite: CVE-2020-11656: https://nvd.nist.gov/vuln/detail/CVE-2020-11656
-sqlite: CVE-2020-13434: https://nvd.nist.gov/vuln/detail/CVE-2020-13434
-sqlite: CVE-2020-13435: https://nvd.nist.gov/vuln/detail/CVE-2020-13435
-sqlite: CVE-2020-13630: https://nvd.nist.gov/vuln/detail/CVE-2020-13630
-sqlite: CVE-2020-13631: https://nvd.nist.gov/vuln/detail/CVE-2020-13631
-sqlite: CVE-2020-13632: https://nvd.nist.gov/vuln/detail/CVE-2020-13632
-sqlite: CVE-2020-15358: https://nvd.nist.gov/vuln/detail/CVE-2020-15358
-sqlite: CVE-2022-35737: https://nvd.nist.gov/vuln/detail/CVE-2022-35737
-sqlite: CVE-2023-7104: https://nvd.nist.gov/vuln/detail/CVE-2023-7104
-sqlite: CVE-2025-6965: https://nvd.nist.gov/vuln/detail/CVE-2025-6965
-squid: CVE-2023-49288: https://nvd.nist.gov/vuln/detail/CVE-2023-49288
-squid: CVE-2024-25111: https://nvd.nist.gov/vuln/detail/CVE-2024-25111
-squid: CVE-2024-25617: https://nvd.nist.gov/vuln/detail/CVE-2024-25617
-squid: CVE-2024-37894: https://nvd.nist.gov/vuln/detail/CVE-2024-37894
-[NEW] squid: CVE-2025-62168: https://nvd.nist.gov/vuln/detail/CVE-2025-62168
-sthttpd: CVE-2021-26843: https://nvd.nist.gov/vuln/detail/CVE-2021-26843
-tcpreplay: CVE-2025-9384: https://nvd.nist.gov/vuln/detail/CVE-2025-9384
-tcpreplay: CVE-2025-9385: https://nvd.nist.gov/vuln/detail/CVE-2025-9385
-tcpreplay: CVE-2025-9386: https://nvd.nist.gov/vuln/detail/CVE-2025-9386
-tmux: CVE-2020-27347: https://nvd.nist.gov/vuln/detail/CVE-2020-27347
-unbound: CVE-2023-50387: https://nvd.nist.gov/vuln/detail/CVE-2023-50387
-unbound: CVE-2024-1488: https://nvd.nist.gov/vuln/detail/CVE-2024-1488
-unbound: CVE-2024-8508: https://nvd.nist.gov/vuln/detail/CVE-2024-8508
-usbredir: CVE-2021-3700: https://nvd.nist.gov/vuln/detail/CVE-2021-3700
-usrsctp: CVE-2019-20503: https://nvd.nist.gov/vuln/detail/CVE-2019-20503
-uw-imap: CVE-2018-19518: https://nvd.nist.gov/vuln/detail/CVE-2018-19518
-wavpack: CVE-2016-10170: https://nvd.nist.gov/vuln/detail/CVE-2016-10170
-wavpack: CVE-2016-10171: https://nvd.nist.gov/vuln/detail/CVE-2016-10171
-wavpack: CVE-2016-10172: https://nvd.nist.gov/vuln/detail/CVE-2016-10172
-wavpack: CVE-2018-10536: https://nvd.nist.gov/vuln/detail/CVE-2018-10536
-wavpack: CVE-2018-10537: https://nvd.nist.gov/vuln/detail/CVE-2018-10537
-wavpack: CVE-2018-10538: https://nvd.nist.gov/vuln/detail/CVE-2018-10538
-wavpack: CVE-2018-10539: https://nvd.nist.gov/vuln/detail/CVE-2018-10539
-wavpack: CVE-2018-10540: https://nvd.nist.gov/vuln/detail/CVE-2018-10540
-wavpack: CVE-2018-19840: https://nvd.nist.gov/vuln/detail/CVE-2018-19840
-wavpack: CVE-2018-19841: https://nvd.nist.gov/vuln/detail/CVE-2018-19841
-wavpack: CVE-2019-1010315: https://nvd.nist.gov/vuln/detail/CVE-2019-1010315
-wavpack: CVE-2019-1010317: https://nvd.nist.gov/vuln/detail/CVE-2019-1010317
-wavpack: CVE-2019-1010319: https://nvd.nist.gov/vuln/detail/CVE-2019-1010319
-wavpack: CVE-2019-11498: https://nvd.nist.gov/vuln/detail/CVE-2019-11498
-webmin: CVE-2019-12840: https://nvd.nist.gov/vuln/detail/CVE-2019-12840
-webmin: CVE-2019-15107: https://nvd.nist.gov/vuln/detail/CVE-2019-15107
-webmin: CVE-2019-15641: https://nvd.nist.gov/vuln/detail/CVE-2019-15641
-webmin: CVE-2020-12670: https://nvd.nist.gov/vuln/detail/CVE-2020-12670
-webmin: CVE-2020-35606: https://nvd.nist.gov/vuln/detail/CVE-2020-35606
-webmin: CVE-2020-8820: https://nvd.nist.gov/vuln/detail/CVE-2020-8820
-webmin: CVE-2020-8821: https://nvd.nist.gov/vuln/detail/CVE-2020-8821
-webmin: CVE-2022-30708: https://nvd.nist.gov/vuln/detail/CVE-2022-30708
-webmin: CVE-2022-36446: https://nvd.nist.gov/vuln/detail/CVE-2022-36446
-webmin: CVE-2023-43309: https://nvd.nist.gov/vuln/detail/CVE-2023-43309
-webmin: CVE-2023-52046: https://nvd.nist.gov/vuln/detail/CVE-2023-52046
-webmin: CVE-2024-36450: https://nvd.nist.gov/vuln/detail/CVE-2024-36450
-webmin: CVE-2024-36451: https://nvd.nist.gov/vuln/detail/CVE-2024-36451
-webmin: CVE-2024-36452: https://nvd.nist.gov/vuln/detail/CVE-2024-36452
-webmin: CVE-2024-36453: https://nvd.nist.gov/vuln/detail/CVE-2024-36453
-webmin: CVE-2024-45692: https://nvd.nist.gov/vuln/detail/CVE-2024-45692
-weechat: CVE-2024-46613: https://nvd.nist.gov/vuln/detail/CVE-2024-46613
-wireshark: CVE-2022-4344: https://nvd.nist.gov/vuln/detail/CVE-2022-4344
-wireshark: CVE-2024-24476: https://nvd.nist.gov/vuln/detail/CVE-2024-24476
-wireshark: CVE-2024-24478: https://nvd.nist.gov/vuln/detail/CVE-2024-24478
-wireshark: CVE-2024-24479: https://nvd.nist.gov/vuln/detail/CVE-2024-24479
-wolfssl: CVE-2022-34293: https://nvd.nist.gov/vuln/detail/CVE-2022-34293
-wolfssl: CVE-2022-38152: https://nvd.nist.gov/vuln/detail/CVE-2022-38152
-wolfssl: CVE-2022-39173: https://nvd.nist.gov/vuln/detail/CVE-2022-39173
-wolfssl: CVE-2022-42905: https://nvd.nist.gov/vuln/detail/CVE-2022-42905
-wolfssl: CVE-2022-42961: https://nvd.nist.gov/vuln/detail/CVE-2022-42961
-wolfssl: CVE-2023-3724: https://nvd.nist.gov/vuln/detail/CVE-2023-3724
-wolfssl: CVE-2023-6935: https://nvd.nist.gov/vuln/detail/CVE-2023-6935
-wolfssl: CVE-2023-6936: https://nvd.nist.gov/vuln/detail/CVE-2023-6936
-wolfssl: CVE-2023-6937: https://nvd.nist.gov/vuln/detail/CVE-2023-6937
-wolfssl: CVE-2024-1543: https://nvd.nist.gov/vuln/detail/CVE-2024-1543
-wolfssl: CVE-2024-5288: https://nvd.nist.gov/vuln/detail/CVE-2024-5288
-wolfssl: CVE-2024-5991: https://nvd.nist.gov/vuln/detail/CVE-2024-5991
-yasm: CVE-2021-33454: https://nvd.nist.gov/vuln/detail/CVE-2021-33454
-yasm: CVE-2021-33455: https://nvd.nist.gov/vuln/detail/CVE-2021-33455
-yasm: CVE-2021-33456: https://nvd.nist.gov/vuln/detail/CVE-2021-33456
-yasm: CVE-2021-33457: https://nvd.nist.gov/vuln/detail/CVE-2021-33457
-yasm: CVE-2021-33458: https://nvd.nist.gov/vuln/detail/CVE-2021-33458
-yasm: CVE-2021-33459: https://nvd.nist.gov/vuln/detail/CVE-2021-33459
-yasm: CVE-2021-33460: https://nvd.nist.gov/vuln/detail/CVE-2021-33460
-yasm: CVE-2021-33461: https://nvd.nist.gov/vuln/detail/CVE-2021-33461
-yasm: CVE-2021-33462: https://nvd.nist.gov/vuln/detail/CVE-2021-33462
-yasm: CVE-2021-33463: https://nvd.nist.gov/vuln/detail/CVE-2021-33463
-yasm: CVE-2021-33464: https://nvd.nist.gov/vuln/detail/CVE-2021-33464
-yasm: CVE-2021-33465: https://nvd.nist.gov/vuln/detail/CVE-2021-33465
-yasm: CVE-2021-33466: https://nvd.nist.gov/vuln/detail/CVE-2021-33466
-yasm: CVE-2021-33467: https://nvd.nist.gov/vuln/detail/CVE-2021-33467
-yasm: CVE-2021-33468: https://nvd.nist.gov/vuln/detail/CVE-2021-33468
-yasm: CVE-2023-30402: https://nvd.nist.gov/vuln/detail/CVE-2023-30402
-yasm: CVE-2023-31972: https://nvd.nist.gov/vuln/detail/CVE-2023-31972
-yasm: CVE-2023-31973: https://nvd.nist.gov/vuln/detail/CVE-2023-31973
-yasm: CVE-2023-31974: https://nvd.nist.gov/vuln/detail/CVE-2023-31974
-yasm: CVE-2023-51258: https://nvd.nist.gov/vuln/detail/CVE-2023-51258
+* 0002-Instead-of-doing-preprocessor-magic-just-output-off_.patch was
+  applied upstream as 64667fe63ba9dd78adb9c4abf04bc3e4e25a0fd7
 
-====================
+* 0005-common.h-replace-getline-with-fgets.patch was applied upstream as
+  38a6e3e29d90e11c3d5147e609d7b8e021b2cabf
 
-Removed this week (14): 
+* Updated all other patches due to patch fuzz
 
-evince: CVE-2011-5244: https://nvd.nist.gov/vuln/detail/CVE-2011-5244
-freerdp: CVE-2025-4478: https://nvd.nist.gov/vuln/detail/CVE-2025-4478
-gattlib: CVE-2019-6498: https://nvd.nist.gov/vuln/detail/CVE-2019-6498
-gimp: CVE-2007-3741: https://nvd.nist.gov/vuln/detail/CVE-2007-3741
-hostapd: CVE-2025-24912: https://nvd.nist.gov/vuln/detail/CVE-2025-24912
-id3lib: CVE-2007-4460: https://nvd.nist.gov/vuln/detail/CVE-2007-4460
-influxdb: CVE-2019-10329: https://nvd.nist.gov/vuln/detail/CVE-2019-10329
-iptraf-ng: CVE-2024-52949: https://nvd.nist.gov/vuln/detail/CVE-2024-52949
-keepalived: CVE-2021-44225: https://nvd.nist.gov/vuln/detail/CVE-2021-44225
-klibc: CVE-2021-31870: https://nvd.nist.gov/vuln/detail/CVE-2021-31870
-klibc: CVE-2021-31871: https://nvd.nist.gov/vuln/detail/CVE-2021-31871
-klibc: CVE-2021-31872: https://nvd.nist.gov/vuln/detail/CVE-2021-31872
-klibc: CVE-2021-31873: https://nvd.nist.gov/vuln/detail/CVE-2021-31873
-opensc: CVE-2023-5992: https://nvd.nist.gov/vuln/detail/CVE-2023-5992
+* ubihealthd fails to build with type mismatch errors, because it is not
+  used, it gets disabled.
+
+  ```
+  In file included from /build/tmp/work/x86-64-v3-poky-linux/ubi-utils-klib=
+c/2.0.2/recipe-sysroot/usr/lib/klibc/include/sys/signalfd.h:22,
+                   from ../sources/ubi-utils-klibc-2.0.2/ubi-utils/ubihealt=
+hd.c:16:
+  /build/tmp/work/x86-64-v3-poky-linux/ubi-utils-klibc/2.0.2/recipe-sysroot=
+/usr/lib/klibc/include/bits/types/sigset_t.h:7:20: error: conflicting types=
+ for 'sigse
+  t_t'; have '__sigset_t'
+      7 | typedef __sigset_t sigset_t;
+        |                    ^~~~~~~~
+  In file included from /build/tmp/work/x86-64-v3-poky-linux/ubi-utils-klib=
+c/2.0.2/recipe-sysroot/usr/lib/klibc/include/signal.h:14,
+                   from /build/tmp/work/x86-64-v3-poky-linux/ubi-utils-klib=
+c/2.0.2/recipe-sysroot/usr/lib/klibc/include/sys/poll.h:10,
+                   from /build/tmp/work/x86-64-v3-poky-linux/ubi-utils-klib=
+c/2.0.2/recipe-sysroot/usr/lib/klibc/include/poll.h:1,
+                   from ../sources/ubi-utils-klibc-2.0.2/ubi-utils/ubihealt=
+hd.c:6:
+  /build/tmp/work/x86-64-v3-poky-linux/ubi-utils-klibc/2.0.2/recipe-sysroot=
+/usr/lib/klibc/include/arch/x86_64/klibc/archsignal.h:13:23: note: previous=
+ declaratio
+  n of 'sigset_t' with type 'sigset_t' {aka 'long unsigned int'}
+     13 | typedef unsigned long sigset_t;
+        |                       ^~~~~~~~
+  ```
+
+* add new package for ubiscan
+
+Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
+---
+
+We had to upgrade this recipe for one of our projects, because ubimkvol
+fails to create volumes:
+
+$ ubimkvol /dev/ubi0 -s 20MiB -N config_data
+ubimkvol: error!: more then one UBI device specified (use -h for help)
+
+ ...-preprocessor-magic-just-output-off_.patch | 326 ------------------
+ ...-common.h-replace-getline-with-fgets.patch |  56 ---
+ ...-klibc-build-when-using-glibc-toolch.patch |   9 +-
+ ...make-Add-compiler-includes-in-cflags.patch |   9 +-
+ ...003-Makefile.am-only-build-ubi-utils.patch |   5 +-
+ ...mon.h-no-features.h-for-klibc-builds.patch |   0
+ ...libc_2.0.2.bb =3D> ubi-utils-klibc_2.3.0.bb} |  13 +-
+ 7 files changed, 13 insertions(+), 405 deletions(-)
+ delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0=
+.2/0002-Instead-of-doing-preprocessor-magic-just-output-off_.patch
+ delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0=
+.2/0005-common.h-replace-getline-with-fgets.patch
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc-2.0.2 =3D> ubi=
+-utils-klibc-2.3.0}/0001-libmissing.h-fix-klibc-build-when-using-glibc-tool=
+ch.patch (94%)
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc-2.0.2 =3D> ubi=
+-utils-klibc-2.3.0}/0001-make-Add-compiler-includes-in-cflags.patch (89%)
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc-2.0.2 =3D> ubi=
+-utils-klibc-2.3.0}/0003-Makefile.am-only-build-ubi-utils.patch (91%)
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc-2.0.2 =3D> ubi=
+-utils-klibc-2.3.0}/0004-mtd-utils-common.h-no-features.h-for-klibc-builds.=
+patch (100%)
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc_2.0.2.bb =3D> =
+ubi-utils-klibc_2.3.0.bb} (83%)
+
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0002=
+-Instead-of-doing-preprocessor-magic-just-output-off_.patch b/meta-initramf=
+s/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0002-Instead-of-doing-preproce=
+ssor-magic-just-output-off_.patch
+deleted file mode 100644
+index 5c6e097493..0000000000
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0002-Instea=
+d-of-doing-preprocessor-magic-just-output-off_.patch
++++ /dev/null
+@@ -1,326 +0,0 @@
+-From 01c98d5d5d044d9a125abcdbb2f3d771966365b0 Mon Sep 17 00:00:00 2001
+-From: mirabilos <m@mirbsd.org>
+-Date: Thu, 1 Feb 2018 15:34:07 +0100
+-Subject: [PATCH] Instead of doing preprocessor magic, just output off_t as
+- long long
+-
+-Fix warnings abot PRIdoff_t in libmtd.c, in mtd_read (and mtd_write):
+-
+-In file included from ../git/lib/libmtd.c:40:0:
+-../git/lib/libmtd.c: In function 'mtd_read':
+-../git/include/common.h:110:18: warning: format '%ld' expects argument of
+- type 'long int', but argument 5 has type 'off_t {aka long long int}'
+- [-Wformat=3D]
+-
+-../git/include/common.h:120:2: note: in expansion of macro 'errmsg'
+-  errmsg(fmt, ##__VA_ARGS__);                                         \
+-  ^~~~~~
+-../git/lib/libmtd.c:1082:10: note: in expansion of macro 'sys_errmsg'
+-   return sys_errmsg("cannot seek mtd%d to offset %"PRIdoff_t,
+-          ^~~~~~~~~~
+-
+-/usr/lib/klibc/include/inttypes.h:28:17: note: format string is defined he=
+re
+- #define PRId32 "d"
+-
+-Upstream-Status: Submitted
+-
+-Signed-off-by: Thorsten Glaser <tg@mirbsd.org>
+----
+- include/common.h                    | 18 ------------------
+- jffsX-utils/mkfs.jffs2.c            | 20 ++++++++++----------
+- lib/libmtd.c                        |  8 ++++----
+- misc-utils/flash_erase.c            |  6 +++---
+- misc-utils/flash_otp_write.c        |  2 +-
+- misc-utils/ftl_check.c              |  2 +-
+- misc-utils/mtd_debug.c              |  4 ++--
+- misc-utils/serve_image.c            |  4 ++--
+- tests/fs-tests/integrity/integck.c  |  4 ++--
+- tests/mtd-tests/nandpagetest.c      |  4 ++--
+- tests/ubi-tests/integ.c             |  6 +++---
+- ubifs-utils/mkfs.ubifs/mkfs.ubifs.c |  6 +++---
+- 12 files changed, 33 insertions(+), 51 deletions(-)
+-
+-diff --git a/include/common.h b/include/common.h
+-index f8f72ea..642c212 100644
+---- a/include/common.h
+-+++ b/include/common.h
+-@@ -70,24 +70,6 @@ extern "C" {
+- #define O_CLOEXEC 0
+- #endif
+-=20
+--/* define a print format specifier for off_t */
+--#if (SIZEOF_OFF_T >=3D 8)
+--#define PRIxoff_t PRIx64
+--#define PRIdoff_t PRId64
+--#else
+--#define PRIxoff_t "l"PRIx32
+--#define PRIdoff_t "l"PRId32
+--#endif
+--
+--/* define a print format specifier for loff_t */
+--#if (SIZEOF_LOFF_T >=3D 8)
+--#define PRIxloff_t PRIx64
+--#define PRIdloff_t PRId64
+--#else
+--#define PRIxloff_t "l"PRIx32
+--#define PRIdloff_t "l"PRId32
+--#endif
+--
+- /* Verbose messages */
+- #define bareverbose(verbose, fmt, ...) do {                        \
+- 	if (verbose)                                               \
+-diff --git a/jffsX-utils/mkfs.jffs2.c b/jffsX-utils/mkfs.jffs2.c
+-index 9aa6c39..0661786 100644
+---- a/jffsX-utils/mkfs.jffs2.c
+-+++ b/jffsX-utils/mkfs.jffs2.c
+-@@ -1237,8 +1237,8 @@ static void recursive_populate_directory(struct file=
+system_entry *dir)
+- 		} else switch (e->sb.st_mode & S_IFMT) {
+- 			case S_IFDIR:
+- 				if (verbose) {
+--					printf("\td %04o %9" PRIdoff_t "             %5d:%-3d %s\n",
+--							e->sb.st_mode & ~S_IFMT, e->sb.st_size,
+-+					printf("\td %04o %9lld             %5d:%-3d %s\n",
+-+							e->sb.st_mode & ~S_IFMT, (long long)e->sb.st_size,
+- 							(int) (e->sb.st_uid), (int) (e->sb.st_gid),
+- 							e->name);
+- 				}
+-@@ -1247,8 +1247,8 @@ static void recursive_populate_directory(struct file=
+system_entry *dir)
+- 				break;
+- 			case S_IFSOCK:
+- 				if (verbose) {
+--					printf("\ts %04o %9" PRIdoff_t "             %5d:%-3d %s\n",
+--							e->sb.st_mode & ~S_IFMT, e->sb.st_size,
+-+					printf("\ts %04o %9lld             %5d:%-3d %s\n",
+-+							e->sb.st_mode & ~S_IFMT, (long long)e->sb.st_size,
+- 							(int) e->sb.st_uid, (int) e->sb.st_gid, e->name);
+- 				}
+- 				write_pipe(e);
+-@@ -1256,8 +1256,8 @@ static void recursive_populate_directory(struct file=
+system_entry *dir)
+- 				break;
+- 			case S_IFIFO:
+- 				if (verbose) {
+--					printf("\tp %04o %9" PRIdoff_t "             %5d:%-3d %s\n",
+--							e->sb.st_mode & ~S_IFMT, e->sb.st_size,
+-+					printf("\tp %04o %9lld             %5d:%-3d %s\n",
+-+							e->sb.st_mode & ~S_IFMT, (long long)e->sb.st_size,
+- 							(int) e->sb.st_uid, (int) e->sb.st_gid, e->name);
+- 				}
+- 				write_pipe(e);
+-@@ -1285,8 +1285,8 @@ static void recursive_populate_directory(struct file=
+system_entry *dir)
+- 				break;
+- 			case S_IFLNK:
+- 				if (verbose) {
+--					printf("\tl %04o %9" PRIdoff_t "             %5d:%-3d %s -> %s\n",
+--							e->sb.st_mode & ~S_IFMT, e->sb.st_size,
+-+					printf("\tl %04o %9lld             %5d:%-3d %s -> %s\n",
+-+							e->sb.st_mode & ~S_IFMT, (long long)e->sb.st_size,
+- 							(int) e->sb.st_uid, (int) e->sb.st_gid, e->name,
+- 							e->link);
+- 				}
+-@@ -1297,8 +1297,8 @@ static void recursive_populate_directory(struct file=
+system_entry *dir)
+- 				wrote =3D write_regular_file(e);
+- 				write_xattr_entry(e);
+- 				if (verbose) {
+--					printf("\tf %04o %9" PRIdoff_t " (%9u) %5d:%-3d %s\n",
+--							e->sb.st_mode & ~S_IFMT, e->sb.st_size, wrote,
+-+					printf("\tf %04o %9lld (%9u) %5d:%-3d %s\n",
+-+							e->sb.st_mode & ~S_IFMT, (long long)e->sb.st_size, wrote,
+- 							(int) e->sb.st_uid, (int) e->sb.st_gid, e->name);
+- 				}
+- 				break;
+-diff --git a/lib/libmtd.c b/lib/libmtd.c
+-index 86c89ae..f375381 100644
+---- a/lib/libmtd.c
+-+++ b/lib/libmtd.c
+-@@ -1079,8 +1079,8 @@ int mtd_read(const struct mtd_dev_info *mtd, int fd,=
+ int eb, int offs,
+- 	/* Seek to the beginning of the eraseblock */
+- 	seek =3D (off_t)eb * mtd->eb_size + offs;
+- 	if (lseek(fd, seek, SEEK_SET) !=3D seek)
+--		return sys_errmsg("cannot seek mtd%d to offset %"PRIdoff_t,
+--				  mtd->mtd_num, seek);
+-+		return sys_errmsg("cannot seek mtd%d to offset %lld",
+-+				  mtd->mtd_num, (long long)seek);
+-=20
+- 	while (rd < len) {
+- 		ret =3D read(fd, buf + rd, len - rd);
+-@@ -1188,8 +1188,8 @@ int mtd_write(libmtd_t desc, const struct mtd_dev_in=
+fo *mtd, int fd, int eb,
+- 	if (data) {
+- 		/* Seek to the beginning of the eraseblock */
+- 		if (lseek(fd, seek, SEEK_SET) !=3D seek)
+--			return sys_errmsg("cannot seek mtd%d to offset %"PRIdoff_t,
+--					mtd->mtd_num, seek);
+-+			return sys_errmsg("cannot seek mtd%d to offset %lld",
+-+					mtd->mtd_num, (long long)seek);
+- 		ret =3D write(fd, data, len);
+- 		if (ret !=3D len)
+- 			return sys_errmsg("cannot write %d bytes to mtd%d "
+-diff --git a/misc-utils/flash_erase.c b/misc-utils/flash_erase.c
+-index 0c9449f..ec4b2e1 100644
+---- a/misc-utils/flash_erase.c
+-+++ b/misc-utils/flash_erase.c
+-@@ -53,8 +53,8 @@ int target_endian =3D __BYTE_ORDER;
+- static void show_progress(struct mtd_dev_info *mtd, off_t start, int eb,
+- 			  int eb_start, int eb_cnt)
+- {
+--	bareverbose(!quiet, "\rErasing %d Kibyte @ %"PRIxoff_t" -- %2i %% comple=
+te ",
+--		mtd->eb_size / 1024, start, ((eb - eb_start) * 100) / eb_cnt);
+-+	bareverbose(!quiet, "\rErasing %d Kibyte @ %llx -- %2i %% complete ",
+-+		mtd->eb_size / 1024, (unsigned long long)start, ((eb - eb_start) * 100)=
+ / eb_cnt);
+- 	fflush(stdout);
+- }
+-=20
+-@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
+- 		if (!noskipbad) {
+- 			int ret =3D mtd_is_bad(&mtd, fd, eb);
+- 			if (ret > 0) {
+--				verbose(!quiet, "Skipping bad block at %08"PRIxoff_t, offset);
+-+				verbose(!quiet, "Skipping bad block at %08llx", (unsigned long long)o=
+ffset);
+- 				continue;
+- 			} else if (ret < 0) {
+- 				if (errno =3D=3D EOPNOTSUPP) {
+-diff --git a/misc-utils/flash_otp_write.c b/misc-utils/flash_otp_write.c
+-index b02d0b0..04c96c6 100644
+---- a/misc-utils/flash_otp_write.c
+-+++ b/misc-utils/flash_otp_write.c
+-@@ -76,7 +76,7 @@ int main(int argc,char *argv[])
+- 		return errno;
+- 	}
+-=20
+--	printf("Writing OTP user data on %s at offset 0x%"PRIxoff_t"\n", argv[2]=
+, offset);
+-+	printf("Writing OTP user data on %s at offset 0x%llx\n", argv[2], (unsig=
+ned long long)offset);
+-=20
+- 	if (mtd_type_is_nand_user(&mtdInfo))
+- 		len =3D mtdInfo.writesize;
+-diff --git a/misc-utils/ftl_check.c b/misc-utils/ftl_check.c
+-index a853cf4..e854922 100644
+---- a/misc-utils/ftl_check.c
+-+++ b/misc-utils/ftl_check.c
+-@@ -131,7 +131,7 @@ static void check_partition(int fd)
+- 			perror("read failed");
+- 			break;
+- 		}
+--		printf("\nErase unit %"PRIdoff_t":\n", i);
+-+		printf("\nErase unit %lld:\n", (long long)i);
+- 		if ((hdr2.FormattedSize !=3D hdr.FormattedSize) ||
+- 				(hdr2.NumEraseUnits !=3D hdr.NumEraseUnits) ||
+- 				(hdr2.SerialNumber !=3D hdr.SerialNumber))
+-diff --git a/misc-utils/mtd_debug.c b/misc-utils/mtd_debug.c
+-index ac37e23..d65ad36 100644
+---- a/misc-utils/mtd_debug.c
+-+++ b/misc-utils/mtd_debug.c
+-@@ -160,7 +160,7 @@ retry:
+- 	if (buf !=3D NULL)
+- 		free(buf);
+- 	close(outfd);
+--	printf("Copied %zu bytes from address 0x%.8"PRIxoff_t" in flash to %s\n"=
+, len, offset, filename);
+-+	printf("Copied %zu bytes from address 0x%.8llx in flash to %s\n", len, (=
+unsigned long long)offset, filename);
+- 	return 0;
+-=20
+- err2:
+-@@ -225,7 +225,7 @@ retry:
+- 	if (buf !=3D NULL)
+- 		free(buf);
+- 	fclose(fp);
+--	printf("Copied %d bytes from %s to address 0x%.8"PRIxoff_t" in flash\n",=
+ len, filename, offset);
+-+	printf("Copied %d bytes from %s to address 0x%.8llx in flash\n", len, fi=
+lename, (unsigned long long)offset);
+- 	return 0;
+- }
+-=20
+-diff --git a/misc-utils/serve_image.c b/misc-utils/serve_image.c
+-index f2475d6..6c8c8fb 100644
+---- a/misc-utils/serve_image.c
+-+++ b/misc-utils/serve_image.c
+-@@ -129,8 +129,8 @@ int main(int argc, char **argv)
+- 	}
+-=20
+- 	if (st.st_size % erasesize) {
+--		fprintf(stderr, "Image size %" PRIdoff_t " bytes is not a multiple of e=
+rasesize %d bytes\n",
+--				st.st_size, erasesize);
+-+		fprintf(stderr, "Image size %lld bytes is not a multiple of erasesize %=
+d bytes\n",
+-+				(long long)st.st_size, erasesize);
+- 		exit(1);
+- 	}
+- 	image =3D mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, rfd, 0);
+-diff --git a/tests/fs-tests/integrity/integck.c b/tests/fs-tests/integrity=
+/integck.c
+-index 84753d6..0a7f142 100644
+---- a/tests/fs-tests/integrity/integck.c
+-+++ b/tests/fs-tests/integrity/integck.c
+-@@ -897,8 +897,8 @@ static ssize_t file_write_data(struct file_info *file,=
+ int fd, off_t offset,
+- 	remains =3D size;
+- 	actual =3D 0;
+- 	written =3D IO_BUFFER_SIZE;
+--	v("write %zd bytes, offset %"PRIdoff_t", file %s",
+--	  size, offset, get_file_name(file));
+-+	v("write %zd bytes, offset %lld, file %s",
+-+	  size, (long long)offset, get_file_name(file));
+- 	while (remains) {
+- 		/* Fill up buffer with random data */
+- 		if (written < IO_BUFFER_SIZE) {
+-diff --git a/tests/mtd-tests/nandpagetest.c b/tests/mtd-tests/nandpagetest=
+.c
+-index c6812df..465e548 100644
+---- a/tests/mtd-tests/nandpagetest.c
+-+++ b/tests/mtd-tests/nandpagetest.c
+-@@ -232,8 +232,8 @@ static int verify_eraseblock(int ebnum)
+- 			return err;
+-=20
+- 		if (lseek(fd, addr, SEEK_SET) !=3D addr) {
+--			fprintf(stderr, "cannot seek mtd%d to offset %"PRIdloff_t,
+--	 				mtd.mtd_num, addr);
+-+			fprintf(stderr, "cannot seek mtd%d to offset %lld",
+-+	 				mtd.mtd_num, (long long)addr);
+- 			return -1;
+- 		}
+-=20
+-diff --git a/tests/ubi-tests/integ.c b/tests/ubi-tests/integ.c
+-index 26c2ce5..1cd0649 100644
+---- a/tests/ubi-tests/integ.c
+-+++ b/tests/ubi-tests/integ.c
+-@@ -243,7 +243,7 @@ static void check_erase_block(struct erase_block_info =
+*erase_block, int fd)
+- 			while (size)
+- 				if (read_buffer[--size] !=3D 0xff) {
+- 					fprintf(stderr, "block no. =3D %d\n" , erase_block->block_number);
+--					fprintf(stderr, "offset =3D %"PRIdoff_t"\n" , gap_start);
+-+					fprintf(stderr, "offset =3D %lld\n" , (long long)gap_start);
+- 					fprintf(stderr, "size =3D %ld\n" , (long) bytes_read);
+- 					error_exit("verify 0xff failed");
+- 				}
+-@@ -254,7 +254,7 @@ static void check_erase_block(struct erase_block_info =
+*erase_block, int fd)
+- 		errno =3D 0;
+- 		bytes_read =3D read(fd, read_buffer, w->size);
+- 		if (bytes_read !=3D w->size) {
+--			fprintf(stderr, "offset =3D %"PRIdoff_t"\n" , w->offset);
+-+			fprintf(stderr, "offset =3D %lld\n" , (long long)w->offset);
+- 			fprintf(stderr, "size =3D %ld\n" , (long) w->size);
+- 			fprintf(stderr, "bytes_read =3D %ld\n" , (long) bytes_read);
+- 			error_exit("read failed");
+-@@ -279,7 +279,7 @@ static void check_erase_block(struct erase_block_info =
+*erase_block, int fd)
+- 		while (size)
+- 			if (read_buffer[--size] !=3D 0xff) {
+- 				fprintf(stderr, "block no. =3D %d\n" , erase_block->block_number);
+--				fprintf(stderr, "offset =3D %"PRIdoff_t"\n" , gap_start);
+-+				fprintf(stderr, "offset =3D %lld\n" , (long long)gap_start);
+- 				fprintf(stderr, "size =3D %ld\n" , (long) bytes_read);
+- 				error_exit("verify 0xff failed!");
+- 			}
+-diff --git a/ubifs-utils/mkfs.ubifs/mkfs.ubifs.c b/ubifs-utils/mkfs.ubifs/=
+mkfs.ubifs.c
+-index c916f48..f0237ab 100644
+---- a/ubifs-utils/mkfs.ubifs/mkfs.ubifs.c
+-+++ b/ubifs-utils/mkfs.ubifs/mkfs.ubifs.c
+-@@ -772,11 +772,11 @@ int write_leb(int lnum, int len, void *buf)
+- 			return sys_err_msg("ubi_leb_change_start failed");
+-=20
+- 	if (lseek(out_fd, pos, SEEK_SET) !=3D pos)
+--		return sys_err_msg("lseek failed seeking %"PRIdoff_t, pos);
+-+		return sys_err_msg("lseek failed seeking %lld", (long long)pos);
+-=20
+- 	if (write(out_fd, buf, c->leb_size) !=3D c->leb_size)
+--		return sys_err_msg("write failed writing %d bytes at pos %"PRIdoff_t,
+--				   c->leb_size, pos);
+-+		return sys_err_msg("write failed writing %d bytes at pos %lld",
+-+				   c->leb_size, (long long)pos);
+-=20
+- 	return 0;
+- }
+---=20
+-2.7.4
+-
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0005=
+-common.h-replace-getline-with-fgets.patch b/meta-initramfs/recipes-devtool=
+s/mtd/ubi-utils-klibc-2.0.2/0005-common.h-replace-getline-with-fgets.patch
+deleted file mode 100644
+index a556ed3d87..0000000000
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0005-common=
+.h-replace-getline-with-fgets.patch
++++ /dev/null
+@@ -1,56 +0,0 @@
+-From 2137eb1a6cd0326510bd3b9faf8037d9bf34ca3d Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Wed, 23 May 2018 15:52:34 +0200
+-Subject: [PATCH] common.h: replace getline() with fgets
+-
+-There is an unofficial upstream patch adding a simple getline()
+-to libmissing.h. Unfortunately the patch creates issues if the
+-toolchain is using glibc (autotools cache?) so for the moment
+-keep the old hack and wait for commits upstream.
+-
+-Fix:
+-
+-| ubi-utils/ubiformat.o: In function `prompt.constprop.4':
+-| ubiformat.c:(.text+0x70): undefined reference to `getline'
+-
+-Upstream-Status: Inappropriate [klibc specific]
+-
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- include/common.h | 11 +++++++++++
+- 1 file changed, 11 insertions(+)
+-
+-diff --git a/include/common.h b/include/common.h
+-index a1d59d0..96b0bdb 100644
+---- a/include/common.h
+-+++ b/include/common.h
+-@@ -126,15 +126,26 @@ extern "C" {
+-  */
+- static inline bool prompt(const char *msg, bool def)
+- {
+-+
+-+#ifndef __KLIBC__
+- 	char *line =3D NULL;
+- 	size_t len;
+-+#else
+-+	char *line;
+-+	const int sizeof_line =3D 2;
+-+	line =3D malloc(sizeof_line);
+-+#endif
+- 	bool ret =3D def;
+-=20
+- 	do {
+- 		normsg_cont("%s (%c/%c) ", msg, def ? 'Y' : 'y', def ? 'n' : 'N');
+- 		fflush(stdout);
+-=20
+-+#ifndef __KLIBC__
+- 		while (getline(&line, &len, stdin) =3D=3D -1) {
+-+#else
+-+		while (fgets(line, sizeof_line, stdin) =3D=3D NULL) {
+-+#endif
+- 			printf("failed to read prompt; assuming '%s'\n",
+- 				def ? "yes" : "no");
+- 			break;
+---=20
+-2.7.4
+-
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0001=
+-libmissing.h-fix-klibc-build-when-using-glibc-toolch.patch b/meta-initramf=
+s/recipes-devtools/mtd/ubi-utils-klibc-2.3.0/0001-libmissing.h-fix-klibc-bu=
+ild-when-using-glibc-toolch.patch
+similarity index 94%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0001-=
+libmissing.h-fix-klibc-build-when-using-glibc-toolch.patch
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.3.0/0001-li=
+bmissing.h-fix-klibc-build-when-using-glibc-toolch.patch
+index 4ee9bd9a18..26a07688e9 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0001-libmis=
+sing.h-fix-klibc-build-when-using-glibc-toolch.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.3.0/0001-libmis=
+sing.h-fix-klibc-build-when-using-glibc-toolch.patch
+@@ -23,9 +23,9 @@ diff --git a/include/libmissing.h b/include/libmissing.h
+ index 0196033..832c372 100644
+ --- a/include/libmissing.h
+ +++ b/include/libmissing.h
+-@@ -3,9 +3,11 @@
+-=20
+- #include "config.h"
++@@ -1,9 +1,11 @@
++ #ifndef LIBMISSING_H
++ #define LIBMISSING_H
+ =20
+ +#ifndef __KLIBC__
+  #ifdef HAVE_EXECINFO_H
+@@ -35,6 +35,3 @@ index 0196033..832c372 100644
+ =20
+  #ifndef HAVE_EXECINFO_H
+  int backtrace(void **buffer, int size);
+---=20
+-2.7.4
+-
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0001=
+-make-Add-compiler-includes-in-cflags.patch b/meta-initramfs/recipes-devtoo=
+ls/mtd/ubi-utils-klibc-2.3.0/0001-make-Add-compiler-includes-in-cflags.patc=
+h
+similarity index 89%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0001-=
+make-Add-compiler-includes-in-cflags.patch
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.3.0/0001-ma=
+ke-Add-compiler-includes-in-cflags.patch
+index 778d830128..d58cdfd5c4 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0001-make-A=
+dd-compiler-includes-in-cflags.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.3.0/0001-make-A=
+dd-compiler-includes-in-cflags.patch
+@@ -19,14 +19,11 @@ diff --git a/Makefile.am b/Makefile.am
+ index 5a6e77c..f0003d5 100644
+ --- a/Makefile.am
+ +++ b/Makefile.am
+-@@ -9,6 +9,7 @@ endif
+- if WITHOUT_LZO
+- AM_CPPFLAGS +=3D -DWITHOUT_LZO
++@@ -26,6 +26,7 @@ endif
++ if WITH_CRYPTO
++ AM_CPPFLAGS +=3D -DWITH_CRYPTO
+  endif
+ +AM_CPPFLAGS +=3D -I$(shell $(CC) -print-file-name=3Dinclude)
+ =20
+  sbin_PROGRAMS =3D
+  sbin_SCRIPTS =3D
+---=20
+-2.30.0
+-
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0003=
+-Makefile.am-only-build-ubi-utils.patch b/meta-initramfs/recipes-devtools/m=
+td/ubi-utils-klibc-2.3.0/0003-Makefile.am-only-build-ubi-utils.patch
+similarity index 91%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0003-=
+Makefile.am-only-build-ubi-utils.patch
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.3.0/0003-Ma=
+kefile.am-only-build-ubi-utils.patch
+index 38ab7a91cb..de36c3c8d9 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0003-Makefi=
+le.am-only-build-ubi-utils.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.3.0/0003-Makefi=
+le.am-only-build-ubi-utils.patch
+@@ -16,7 +16,7 @@ diff --git a/Makefile.am b/Makefile.am
+ index 5a6e77c..98715dd 100644
+ --- a/Makefile.am
+ +++ b/Makefile.am
+-@@ -34,9 +34,9 @@ EXTRA_DIST +=3D $(GLOBAL_HEADER) $(GLOBAL_EXTRA)
++@@ -46,9 +46,9 @@ EXTRA_DIST =3D COPYING CHANGELOG.md README.txt
+ =20
+  include lib/Makemodule.am
+  include ubi-utils/Makemodule.am
+@@ -29,6 +29,3 @@ index 5a6e77c..98715dd 100644
+ =20
+  if BUILD_UBIFS
+  include ubifs-utils/Makemodule.am
+---=20
+-2.7.4
+-
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0004=
+-mtd-utils-common.h-no-features.h-for-klibc-builds.patch b/meta-initramfs/r=
+ecipes-devtools/mtd/ubi-utils-klibc-2.3.0/0004-mtd-utils-common.h-no-featur=
+es.h-for-klibc-builds.patch
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0004-=
+mtd-utils-common.h-no-features.h-for-klibc-builds.patch
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.3.0/0004-mt=
+d-utils-common.h-no-features.h-for-klibc-builds.patch
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb b=
+/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.3.0.bb
+similarity index 83%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.3.0.bb
+index 461d75e625..3fcda333c9 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.3.0.bb
+@@ -9,18 +9,16 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0636e73ff0215e=
+8d672dc4c32c317bb3 \
+=20
+ inherit autotools pkgconfig klibc
+=20
+-SRCREV =3D "64f61a9dc71b158c7084006cbce4ea23886f0b47"
+-SRC_URI =3D "git://git.infradead.org/mtd-utils.git;branch=3Dmaster \
++SRCREV =3D "4594fc1f4496a0ed55cabd31fbeba4e3fbf05602"
++SRC_URI =3D "git://git.infraroot.at/mtd-utils.git;protocol=3Dhttps;branch=
+=3Dmaster \
+              file://0001-libmissing.h-fix-klibc-build-when-using-glibc-too=
+lch.patch \
+-             file://0002-Instead-of-doing-preprocessor-magic-just-output-o=
+ff_.patch \
+              file://0003-Makefile.am-only-build-ubi-utils.patch \
+              file://0004-mtd-utils-common.h-no-features.h-for-klibc-builds=
+.patch \
+-             file://0005-common.h-replace-getline-with-fgets.patch \
+              file://0001-make-Add-compiler-includes-in-cflags.patch \
+              "
+=20
+-
+-EXTRA_OECONF +=3D "--disable-tests --without-jffs --without-ubifs"
++# ubihealthd fails to build since 2.3.0
++EXTRA_OECONF +=3D "--without-tests --without-jffs --without-ubifs --disabl=
+e-ubihealthd"
+=20
+ PACKAGECONFIG ?=3D "${@bb.utils.filter('DISTRO_FEATURES', 'xattr', d)}"
+ PACKAGECONFIG[xattr] =3D ",,acl,"
+@@ -36,7 +34,7 @@ PACKAGES =3D "ubi-utils-klibc-dbg ubi-utils-klibc-doc"
+=20
+ PACKAGES =3D+ "mtdinfo-klibc ubiattach-klibc ubiblock-klibc ubicrc32-klibc=
+ ubidetach-klibc \
+              ubiformat-klibc ubimkvol-klibc ubinfo-klibc ubinize-klibc ubi=
+rename-klibc \
+-             ubirmvol-klibc ubirsvol-klibc ubiupdatevol-klibc"
++             ubirmvol-klibc ubirsvol-klibc ubiscan-klibc ubiupdatevol-klib=
+c"
+=20
+ FILES:mtdinfo-klibc =3D "${sbindir}/mtdinfo"
+ FILES:ubiattach-klibc =3D "${sbindir}/ubiattach"
+@@ -50,4 +48,5 @@ FILES:ubinize-klibc =3D "${sbindir}/ubinize"
+ FILES:ubirename-klibc =3D "${sbindir}/ubirename"
+ FILES:ubirmvol-klibc =3D "${sbindir}/ubirmvol"
+ FILES:ubirsvol-klibc =3D "${sbindir}/ubirsvol"
++FILES:ubiscan-klibc =3D "${sbindir}/ubiscan"
+ FILES:ubiupdatevol-klibc =3D "${sbindir}/ubiupdatevol"
+--=20
+2.51.0
+
 
