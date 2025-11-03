@@ -1,111 +1,124 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80122CCF9F8
-	for <webhook@archiver.kernel.org>; Mon,  3 Nov 2025 20:14:37 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1243.1762200872590519052
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7960CCF9F8
+	for <webhook@archiver.kernel.org>; Mon,  3 Nov 2025 21:06:47 +0000 (UTC)
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2468.1762204004778546846
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Nov 2025 12:14:32 -0800
+ Mon, 03 Nov 2025 13:06:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=F6KhW63j;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-47721293fd3so26359925e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Nov 2025 12:14:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NslEUjoK;
+ spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-781421f5be6so51865387b3.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Nov 2025 13:06:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762200871; x=1762805671; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=q2NY4N50P2ccag4W/pvAI64Yz3+j3uYcHoC7KCVz5bg=;
-        b=F6KhW63jTwpcfhpayasQyh9sDA7oJzmYsie+hfkTBwoQIsoY3beBgkxuJKMN89H1DK
-         enuDKu5gbEpEf0lKddc2xG0SfcOoLG4sA1YfucUQ6GQYAcg7edFnmdTau21gjoEofUZi
-         s1OFbUSl++Umh7tW9oBcA82uDud+80I4c1UKurdln4rw8d1m+0HhVbqmI4yUqRHGyJ52
-         B0pprPMnOFL+hFujdp1IUxMKDI3eQ8QuU4T+umPugz8f9g2L/o0vJdBILPpEkenROhfv
-         POGUee6EjCC2AAwrIrPPUxZbcCgcNi7T1pTyRR9JDIGIf/WrnNq0MUWEzEpU2JqXJoEH
-         yP7Q==
+        d=gmail.com; s=20230601; t=1762204004; x=1762808804; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=rBCGXT8WHNCvFxh8Lsf41pKUsJ7fAJIhHVCrRJEdF08=;
+        b=NslEUjoKwB/tSLc57frO31uSx1Q7Iu253wLOY6CT1dQC/y7Ak15hDrRDOp3oNQf0gU
+         cOcrgD3Lvzk7hMdpgY2u+H0gMM4HbB76wAUNJ9gv5KNDf5cxFyimrn57/mas3DRIj1ZG
+         78hGx3WDamOO3Rcwzus8NkFjxGNKL0Ak4SikHSFFmhy4dLCj6HDD3wqOxiReAMDSFSzN
+         WFxrFPyBBj3DE+Ob4tbWML3TaLJ03kuVlV9oTPJ7qyD6cRTa0iUD/zYGL6HkcBxqtMzg
+         s4AdvLPaSrQ30EyGzMCsqPsJqo4+FSMXsUooZAO3x20t9kAd0nF09QUKS15nupmFUhT3
+         33bQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762200871; x=1762805671;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=q2NY4N50P2ccag4W/pvAI64Yz3+j3uYcHoC7KCVz5bg=;
-        b=TfR6Dq7SQG7SGDmDF7FOX426fMUZYYFNMa5SworOkFpqcIAtgcIH5lvJPxhimzsdpo
-         xim2GX824e+WHd8efJKJXaCXg91OmCJ4GIIPvuMYmo0rBqD0xA34mviU2GevIsOEkFKm
-         ZQm/nU5UJcdHcn7o0JUlvJQQHjyQJ1+ju0n1mpQGqdXKZMXJAHcQZUNTGe+yFXXuY2RA
-         uJdxp0l/3k8Me0/TFil8epOckK0R3XsQlg/gb8813D24ZgIXPR37ieoeipZk0+ey9BOK
-         SoRlIN1WnaPCrs47bn4pQOBAJaHwC7K3eIibVJMnm6iVQp1dGLf8S3cFl5cNj6Jqtbew
-         9D/A==
-X-Gm-Message-State: AOJu0YwTY1p4EH/WuzzqYX4jGKRw3ZFH5+YoLP2dMmcRvrh0wkV3gCu4
-	/nkwAJ5fvMFrQrIYVYyNA1as4yj3Hx2DfLnylNQ5aRGX7I+78bHTEQPYuz8grOBI
-X-Gm-Gg: ASbGncuh90ddcOBIOcg3Sc8SGBqVW0ZaZcQ8Y2KGLAB14BEDtYd+Inwev/zyZamg8vQ
-	LvHjCMHknkddHoxY0JsIqWu5Na6PZg3HwxPSAzHUWXukqPRHdCcO7X+4VZ9iv1PLKH8kF/b/FUJ
-	CWeYVhlubhA/Gz2Jd1U34SGXINgmEruHWTdPSEwGeVV92DPSfKgiOjb8WV4tkzWs+Fr01DVS7PA
-	+4HwNMEMClakE7R5mGtRG/Jh/0j6z3z+k3yvfopYNMMBNtW6q5667xBhUWBEIfpXM3FdPEou3Ke
-	C7CdiXW4/XpNXo5IpW8pLZGyRfeU2/Y5ewNACPfIkZHxqYw2OMYooeEjhrZT44a7E+PP3x/FbQA
-	DWwe199g/bpdigcJlWi9MCPHcz8lBKN98NsYMxLP7TuQZIzMVPMN8SYBvoLAf2zJpwE01u9aTeg
-	==
-X-Google-Smtp-Source: AGHT+IHfJ0dTloNQ86ZUwkhH8oxVbMow5/gkm0+C2XuJxZBEtQwCHMo3ni8Ui9c0ngAhVuHdUAD2lA==
-X-Received: by 2002:a05:600c:1589:b0:475:dc32:5600 with SMTP id 5b1f17b1804b1-47754c542efmr4656725e9.19.1762200870738;
-        Mon, 03 Nov 2025 12:14:30 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429dc1a850fsm624900f8f.20.2025.11.03.12.14.29
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Nov 2025 12:14:30 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] mbedtls: upgrade 3.6.4 -> 3.6.5
-Date: Mon,  3 Nov 2025 21:14:29 +0100
-Message-ID: <20251103201429.2204897-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.2
+        d=1e100.net; s=20230601; t=1762204004; x=1762808804;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=rBCGXT8WHNCvFxh8Lsf41pKUsJ7fAJIhHVCrRJEdF08=;
+        b=qam7jok5b5fQ+TsWbQJArplDYCizgdVFR+gnnSNDT3xrx43ZCkHMGPBUHN/NpDrei1
+         zynJ6Oc2Xuc6tUgkCvqH+6yfh6GUz+D3lzWpQf4dApSrdBYOVVFtseT8/0nJFUdPveU6
+         W7RV/W2McR7YIELXWbZ5cWiDR2oqhADZw4Df9eS0A1zChiixysdT6eMGgX4PRZPLIm9+
+         YVCgcg3pb7xVl+rad1Uogek6KoE3kzAOwEGJDsPV4EsGoyCoqL5vwHp6l2B0hceyT2rT
+         sDH3hNvN0rSnC1GhGheTtjQffkjwUwl6ryhRMgfO/Fl7jpO4bMguTXycbSw2k7QqFt4l
+         OW2A==
+X-Gm-Message-State: AOJu0YyLUrY1Ed/93k790G5lfBHu0xOP4owpO71RJDf+Wg3KUsj+p5f7
+	L+B/fgD9E754RVdu8rURi3Z+1vpV5rirWj7v4zl8WV/QCxeZ2q2zB6pYoB2n3q2sw59CLibpyU1
+	QhsB8PbYfmgf0pNtxkhTsi6Ru2ZB5I22PzdTF
+X-Gm-Gg: ASbGncvbKhdVl55AaTwV/2Y3EzrokNUWSJ2NcSyOzDqBtZbMCplX2HYT8dmFJwikFHi
+	EG2t+bM5CCv5B2Qxy4eGSuSYpR9FLi/Hag1dfWLfvj+Hr2MzJbayuBu5qt+4OrDBFGD7aBd/Ldy
+	OqscQzuIUD0E9mzluX3c2mmZvKCAQ/+7wAfnbezYE6Lb3ib6YywrplJCa6HR4zN2qEGx2Nrd5XV
+	nGTcfRUR6SJdscWXVM90L0RxMH6k67x0GCLhzcMWBpiAcikg1DJORW0PoESxNjWtIxtpoDxIt+f
+	PX3O/v+FTil43nUK/t6G8yB0JsPhhwrH1QbrluR9C6EdaDhP+YHr4tnkoACrZEGzekCZ/YBP0MJ
+	3c4eOCpi7CcBWkrGi7GoD
+X-Google-Smtp-Source: AGHT+IGT0VCXODkb61lVyV9rSk0jfKjH2Fcem8uwwPy2G9oMIhddtx4D/Pdzy9WEdZ6A/UY2CYoYw35b/xLotSSATPY=
+X-Received: by 2002:a05:690c:18:b0:784:9deb:fd7 with SMTP id
+ 00721157ae682-78648403687mr119064257b3.23.1762204003797; Mon, 03 Nov 2025
+ 13:06:43 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251103200433.1766280-1-jan.vermaete@gmail.com>
+In-Reply-To: <20251103200433.1766280-1-jan.vermaete@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 3 Nov 2025 13:06:16 -0800
+X-Gm-Features: AWmQ_bn8UkGRH1uRDIUS4lQ1iKup-5jo2AtZoLJcXrLDcpXD4-LbomtNVYZuBHs
+Message-ID: <CAMKF1srn9eqk1M99yhH0x=VQax3eHRzUPj==tqUPaiF-nu-1Yw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-rich-toolkit: add new recipe
+ (version 0.15.1)
+To: jan.vermaete@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Nov 2025 20:14:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121283
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Nov 2025 21:06:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121284
 
-Contains fixes for CVE-2025-54764 and CVE-2025-59438
+Does it have tests ? the please enable them via ptests
 
-Also, add the recipe to the ptest image list, because it was missing.
-Ptests passed successfully.
-
-Changelog: https://github.com/Mbed-TLS/mbedtls/releases/tag/mbedtls-3.6.5
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../mbedtls/{mbedtls_3.6.4.bb => mbedtls_3.6.5.bb}              | 2 +-
- meta-oe/conf/include/ptest-packagelists-meta-oe.inc             | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_3.6.4.bb => mbedtls_3.6.5.bb} (98%)
-
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.5.bb
-similarity index 98%
-rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
-rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.5.bb
-index 07ac602d12..e6dfe43092 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.4.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.6.5.bb
-@@ -26,7 +26,7 @@ SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls
-            file://run-ptest \
-            "
- 
--SRCREV = "c765c831e5c2a0971410692f92f7a81d6ec65ec2"
-+SRCREV = "e185d7fd85499c8ce5ca2a54f5cf8fe7dbe3f8df"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
- 
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-index 78ba1e228c..a54e37562e 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -33,6 +33,7 @@ PTESTS_FAST_META_OE = "\
-     libxml++-5.0 \
-     libyang \
-     lmdb \
-+    mbedtls \
-     microsoft-gsl \
-     minicoredumper \
-     minizip-ng \
+On Mon, Nov 3, 2025 at 12:04=E2=80=AFPM Jan Vermaete via
+lists.openembedded.org <jan.vermaete=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+> ---
+>  .../python/python3-rich-toolkit_0.15.1.bb        | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-rich-tool=
+kit_0.15.1.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-rich-toolkit_0.1=
+5.1.bb b/meta-python/recipes-devtools/python/python3-rich-toolkit_0.15.1.bb
+> new file mode 100644
+> index 0000000000..d63850b3ba
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-rich-toolkit_0.15.1.bb
+> @@ -0,0 +1,16 @@
+> +SUMMARY =3D "Rich toolkit for building command-line applications"
+> +HOMEPAGE =3D "https://github.com/patrick91/rich-toolkit"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://pyproject.toml;md5=3D29c91c89ee62891477a147=
+6375143bef;beginline=3D6;endline=3D6"
+> +
+> +SRC_URI[sha256sum] =3D "6f9630eb29f3843d19d48c3bd5706a086d36d62016687f9d=
+0efa027ddc2dd08a"
+> +
+> +inherit pypi python_hatchling
+> +
+> +PYPI_PACKAGE =3D "rich_toolkit"
+> +
+> +RDEPENDS:${PN} =3D "\
+> +    python3-click \
+> +    python3-rich \
+> +    python3-typing-extensions \
+> +"
+> --
+> 2.47.3
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#121282): https://lists.openembedded.org/g/openembedde=
+d-devel/message/121282
+> Mute This Topic: https://lists.openembedded.org/mt/116105107/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
