@@ -1,153 +1,118 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44AFBCCFA04
-	for <webhook@archiver.kernel.org>; Tue,  4 Nov 2025 23:05:28 +0000 (UTC)
-Received: from mail-yx1-f42.google.com (mail-yx1-f42.google.com [74.125.224.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.300.1762297527638619647
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 382B7CCFA04
+	for <webhook@archiver.kernel.org>; Tue,  4 Nov 2025 23:14:28 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.505.1762298061389522774
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Nov 2025 15:05:27 -0800
+ Tue, 04 Nov 2025 15:14:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LKhbce3j;
- spf=pass (domain: gmail.com, ip: 74.125.224.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-63f96d5038dso4746767d50.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 15:05:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KOpUKdtM;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-340564186e0so5142691a91.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 15:14:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762297527; x=1762902327; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1762298061; x=1762902861; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=OD4RyLwaxbOcm7WSU278AkbWcbT3apDafs2TDwofMWU=;
-        b=LKhbce3jJy0u3QxlVk8LT3J8AAS7yycJarsbziZvZLJbNQTxWyqN48yDMKdVzmTlOj
-         LbhIIjxfv2R2CWMc4MhmcaqQSsCWkc2bdn9+HSYvmerkMQq3pBcyGKjOVh16LMsYH+gr
-         5qD+D3vSWrIDyvzfzVCOkNweDKLxIWRShNrcTRpVTLej+wI+bMYPsB7QpvYvXl3Q+28T
-         dUgT52kzFDSPc5pBkoN94OESzQK9VDv94HD5a3HDNinpkWfpKvtPhWPkzzycBhQ5wXoQ
-         fErKYZqEq+8hrgFvn+DukhxBcKWR/iOIf4Niag2b+IVVD2p7nS2JpC7+Lpirh1aCvP+U
-         LPTQ==
+        bh=T2J9UdpleMbzJ6lT4teK+HNh33BYvc2iR9PHHolqNEA=;
+        b=KOpUKdtMUY2Ahcnft2RIznQSNcdmy5VaVzz4pMwyRVfa3s/VxaYELUSveev3hzxjh1
+         k0Om0IRSfrvqsJheAQo/3ZjhaYwt1rP/wQ/oiReuD8BY7dWJQvbXFrII8D9NzDO4Jb3e
+         gMvhrwkYsylxLLBlyX6KIM1FS33ZEuBuyU6u5sUTbWW8KO0UH8vVEkjFH9JzDFML95oe
+         X0x7Fg9eh9VeFfStiiO45inOncxWcgyBBPjkbu03aZ8V2t9VHLlY6rZYpx+j8ZptbK3D
+         EGKZ+jLmj34BBfhVeoS/LYEeK+60+gBlR0Cb/rTmVzl/Pzqf4W0b3q8p48PZ21IC15mJ
+         Pvag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762297527; x=1762902327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1762298061; x=1762902861;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=OD4RyLwaxbOcm7WSU278AkbWcbT3apDafs2TDwofMWU=;
-        b=oZClFt7qbhFX4PLe6AdjnMEmUsuMKhRF1rm7D49jxDgjjas6sduVgqfILEKd6z8yN0
-         gihOnCR9NToUCrp24zZmy4+DODSbtI1sPkFPzj34yIUkiRD9NYotSc9fb1iEQLbc8fIG
-         LvOnEhbSLrNTZkssvDLTrOWgMfgjGRS3zXJwid/N+I+PljwmQs0oM/S44/vATqbX+E7P
-         vZ8KI4SWkHtSwgjnrdc6A+KxdC+JK2YrIYvnlaU4L8FGmbUnDRapp/lo9YCPxbqHviLx
-         SMVADmaVJHTGw00pYxTtgZ8N45qeUcFv63r4nBxJ6s+FHnwApbsVOBc640DgBLsSrtxy
-         XSpA==
-X-Forwarded-Encrypted: i=1; AJvYcCVYTdS+wV9F5FV4UYgYoC8tytUXqrKng+B4VgPzB9biOp65FLi0BlWTcfhGl+Mq1gRQMKJ5u/PrMqVxgJfoKQN69kI=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxVwuyPBY5Gpz3ZiX0i5bAlfOprbIhOGCnsmKzSNi/sX15CGHQ+
-	rVCwC32vfqvJT5ig1ssjT+V3cbdZpiNr7kx0o3ss9SLEE+eyNE67SVME+hUcGHpbIF2GrmSwWA1
-	9ma5Ym5e1xhPsxAu2FmHo3NjhV1NaOEU=
-X-Gm-Gg: ASbGncvQ5UmkxIPEn6JJ57vFoLAgvgQt95bQdI4RrxA3gtatotm7KWtDIdPQcNb3fOG
-	N82ymTGHYRe3Qguxd5mrG/jULmXTsJ/NQMwx8KRS3CRAvLPx7BnxURVXc1i8T6yDdmbi7S1H8CC
-	1JVrRqwlpV0mGqmkikOOfd3cvPGqvrQdebyr19s178u76a9xf+pFbYhgs/B9/ztR0WJ0biuiMob
-	BuBs0HW6nzI7FRkdeRNyJpo79AYxIceA46NXGm50cIpVmd4PY2QFakNsFWZpACfrQo7k2pn3PZW
-	1j+t3AL/hnLxVFmXeoqyKMCmJIUpyjLpbBDyqG/ItHUnrg==
-X-Google-Smtp-Source: AGHT+IH+eQak5kzN6n3UChc2YKPAp380jgxkSEdri/ScTJnJwxKwjj7CYH8JAhZfchzITM01qt2gccWTaA1KeYPriMI=
-X-Received: by 2002:a05:690e:4109:b0:63f:b9d1:b165 with SMTP id
- 956f58d0204a3-63fd359be98mr806423d50.50.1762297526667; Tue, 04 Nov 2025
- 15:05:26 -0800 (PST)
+        bh=T2J9UdpleMbzJ6lT4teK+HNh33BYvc2iR9PHHolqNEA=;
+        b=UIl7/TI0Gt9kBeGYadHfX1S3EHChGUUCxiArH42D886f19Db1ofWj72k0eU9xr8OOY
+         IxP1qTr2otOImkjDcQXyv+D5Sn25Yo9P0wTNXX9ERbVFyGDXiZYWKq7RWPGKYLmeChL3
+         ojZ2BmDcpGMuvuWabiX1VqoV9jgSdJnwLkHe56mlM0JH+LBZeV2oa8vPI3QKfTyCg4VI
+         /QO0i4Pog1GcLYaMwQcr7cXeKZ3u4iHp33uVJGMtNjmZDmBY+6g+IiliF2iXsX7nsFHd
+         dlZEtP6nTqS5ImkYth9fXpqrQaf2sf+LqpOLwGBqisv2tZFqmTkDP+i92+VP7At7T3E+
+         cC5A==
+X-Gm-Message-State: AOJu0YyBuy7pf8W6n0TYQKb1EiZLKEbodvku6yydVfQgunAphqwluHfc
+	OvVIVwuY+w752vuuK3VfxQZ4Wm9HIR+l24EW6D0vH78nYLObUdTvyRZsjcuHPCKL
+X-Gm-Gg: ASbGncu5fhOCHazI3LvK5MIG9tWSZzJ2adRzPCmKYBi1oq0xU5Gk8NqsLuHUgQrNNjJ
+	pZz0bi3Z1wW66rIJ7q0x8oqAbSvtF1EKSwlsYWBCGCZuy6lB7ayD8oAYAbtSb1jjj3Vg0+gp85U
+	ejxPLdvgtslfuQ/rmw1oLvJYLmeRK9TgIOoTHSFdFxarHCFg57ZRA5il/GggaJjEwLKw6GJg8+s
+	lvizjdnwlRTlSX4l8e4MDFwD4iIbd28Gcnl2I069o+5EgsDoE/7Zre4K7drgF/7kyOMbyR6wXkW
+	ui6RYiBZycpP5JZlZWIDLLYyA1lp2cSEwMxIKs+QJGOwXjSr+gw8JElwsc02qbZxlSkG4YzklVi
+	zuPoDMAR5h9HjnHKH1zrZjBWXGPCEnyCn9O+zR6XW1yX96mWo0dGjYxG72+OrtaZavMV4I0c8uh
+	ZFZ45pxAyR6Rh1vw==
+X-Google-Smtp-Source: AGHT+IFOAhOqzoQoQDxETbpWZfMhhZpfZWZSPVGSf9kyTk9RijLMMAJy2Z7fAHjqKM1oiNK8QN6ADg==
+X-Received: by 2002:a17:90b:4987:b0:341:34eb:1be6 with SMTP id 98e67ed59e1d1-341a6de6bf1mr992088a91.27.1762298060584;
+        Tue, 04 Nov 2025 15:14:20 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-ba1f2a80459sm3503470a12.15.2025.11.04.15.14.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 04 Nov 2025 15:14:20 -0800 (PST)
+From: ankur.tyagi85@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 2/2] libcdio-paranoia: upgrade 10.2+2.0.1 -> 10.2+2.0.2
+Date: Wed,  5 Nov 2025 12:14:09 +1300
+Message-ID: <20251104231409.2056908-2-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251104231409.2056908-1-ankur.tyagi85@gmail.com>
+References: <20251104231409.2056908-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-References: <tencent_5A2A52EA8E20CDC9A5F4546616BFFA67FC07@qq.com>
-In-Reply-To: <tencent_5A2A52EA8E20CDC9A5F4546616BFFA67FC07@qq.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 4 Nov 2025 15:04:59 -0800
-X-Gm-Features: AWmQ_blyrrV1yW7wPcGP0I3uZVGDcVwWBLAgttkKO6keNx_dexG18tXUPhdmZ0s
-Message-ID: <CAMKF1sq_njQuhUFmX=a+Z9whbrZ0+m36iyRe2qE5NNXXNcUt9Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] nethogs: add recipe
-To: wenyang.linux@foxmail.com
-Cc: openembedded-core@lists.openembedded.org, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 23:05:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121312
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 23:14:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121314
 
-On Tue, Nov 4, 2025 at 2:56=E2=80=AFPM wenyang.linux via
-lists.openembedded.org
-<wenyang.linux=3Dfoxmail.com@lists.openembedded.org> wrote:
->
-> From: Wen Yang <wenyang.linux@foxmail.com>
->
-> NetHogs is a small 'net top' tool. Instead of breaking the traffic
-> down per protocol or per subnet, like most tools do, it groups
-> bandwidth by process.
->
-> Signed-off-by: Wen Yang <wenyang.linux@foxmail.com>
-> ---
->  .../recipes-connectivity/nethogs/nethogs.inc   | 18 ++++++++++++++++++
->  .../nethogs/nethogs_0.8.8.bb                   |  4 ++++
->  2 files changed, 22 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/nethogs/nethogs.inc
->  create mode 100644 meta-oe/recipes-connectivity/nethogs/nethogs_0.8.8.bb
->
-> diff --git a/meta-oe/recipes-connectivity/nethogs/nethogs.inc b/meta-oe/r=
-ecipes-connectivity/nethogs/nethogs.inc
-> new file mode 100644
-> index 0000000000..78c92915c9
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/nethogs/nethogs.inc
-> @@ -0,0 +1,18 @@
-> +SUMMARY =3D "NetHogs is a small 'net top' tool that can group bandwidth =
-by process"
-> +HOMEPAGE =3D "https://github.com/raboof/nethogs"
-> +SECTION =3D "console/network"
-> +LICENSE =3D "GPL-2.0-only"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
-> +
-> +SRC_URI =3D "git://github.com/raboof/nethogs.git;branch=3Dmain;protocol=
-=3Dhttps"
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Add tag=3Dv${PV} to SRC_URI
+The project switched to storing their releases on Github.
 
-> +DEPENDS =3D "ncurses libpcap"
-> +
-> +do_compile() {
-> +    oe_runmake nethogs
-> +}
-> +
-> +do_install() {
-> +    oe_runmake install PREFIX=3D${prefix} DESTDIR=3D${D}
-> +}
+Changelog:
+https://github.com/libcdio/libcdio-paranoia/releases/tag/release-10.2%2B2.0.2
 
-Looking at the project it seems to support meson, why are we not using it ?
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+---
+ ...a_10.2+2.0.1.bb => libcdio-paranoia_10.2+2.0.2.bb} | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-multimedia/libcdio/{libcdio-paranoia_10.2+2.0.1.bb => libcdio-paranoia_10.2+2.0.2.bb} (67%)
 
-> +
-> +FILES:${PN} =3D "${sbindir}/nethogs"
-> diff --git a/meta-oe/recipes-connectivity/nethogs/nethogs_0.8.8.bb b/meta=
--oe/recipes-connectivity/nethogs/nethogs_0.8.8.bb
-> new file mode 100644
-> index 0000000000..cb0c4b68eb
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/nethogs/nethogs_0.8.8.bb
-> @@ -0,0 +1,4 @@
-> +require nethogs.inc
-> +
-> +# tag for v0.8.8
-> +SRCREV =3D "632a78846eb3cc3259dc45c59a47fa9c293a2831"
-
-Please merge .inc file in the bb file, there seem to be no other users of i=
-t.
-
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#121311): https://lists.openembedded.org/g/openembedde=
-d-devel/message/121311
-> Mute This Topic: https://lists.openembedded.org/mt/116126344/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+2.0.1.bb b/meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+2.0.2.bb
+similarity index 67%
+rename from meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+2.0.1.bb
+rename to meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+2.0.2.bb
+index 42507051f6..b880f3f090 100644
+--- a/meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+2.0.1.bb
++++ b/meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+2.0.2.bb
+@@ -1,18 +1,19 @@
+ SUMMARY = "library to read digital audio CDs with error correction"
+ HOMEPAGE = "http://www.gnu.org/software/libcdio/"
+-BUGTRUCKER = "https://github.com/rocky/libcdio-paranoia/issues/"
++BUGTRUCKER = "https://github.com/libcdio/libcdio-paranoia/issues"
+ SECTION = "libs"
+ LICENSE = "GPL-3.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ DEPENDS = "libcdio"
+ 
+-SRC_URI = "${GNU_MIRROR}/libcdio/${BP}.tar.bz2"
+-SRC_URI[sha256sum] = "33b1cf305ccfbfd03b43936975615000ce538b119989c4bec469577570b60e8a"
++SRC_URI = "${GITHUB_BASE_URI}/download/release-${PV}/${BP}.tar.bz2"
++SRC_URI[sha256sum] = "186892539dedd661276014d71318c8c8f97ecb1250a86625256abd4defbf0d0c"
++
++GITHUB_BASE_URI = "https://github.com/libcdio/${BPN}/releases/"
+ 
+-UPSTREAM_CHECK_URI = "https://github.com/rocky/libcdio-paranoia/releases"
+ UPSTREAM_CHECK_REGEX = "release-(?P<pver>\d+(\.\d+)+\+\d+(\.\d+)+)"
+ 
+-inherit autotools pkgconfig
++inherit autotools pkgconfig github-releases
+ 
+ PACKAGES += "${PN}-utils"
+ 
 
