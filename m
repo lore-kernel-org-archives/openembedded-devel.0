@@ -2,155 +2,380 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50823CCF9E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57554CCFA08
 	for <webhook@archiver.kernel.org>; Tue,  4 Nov 2025 11:24:22 +0000 (UTC)
-Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.9])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14197.1762249558691135410
+Received: from mail-vs1-f51.google.com (mail-vs1-f51.google.com [209.85.217.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14223.1762250353934610870
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Nov 2025 01:45:59 -0800
+ Tue, 04 Nov 2025 01:59:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@philips.com header.s=selector1 header.b=h86Pxz/T;
- spf=pass (domain: bbl.ms.philips.com, ip: 52.101.70.9, mailfrom: tgiulian@bbl.ms.philips.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ev7cEXH2KEVPyP3PiHwIaGdBa9om4lq3nAeUhDBGm9jlAq0HXOvZ2XPfBmjancNj0Gu/mlPYAftU11Q/6Wn/onPnGVO1YXv2QqAvzoStrXMJmB3MAP/MviHPzVGm07v2f0QNm0mA+F2AUkFI5qm1jtUHHIApD9O9RTeV8vRZ+/MjdrHTQtvxtqUVRTi8sFEhOTHb3jFj7UlrmhO2hQQzpfhh7k/eHxGUX6YINzn3i+TeCq2s7iT+JBUTZvC/tfs8m9NMlERFL86fHk7A1cHLJHfSOU2mDb3wYdu2ApIPpbqmnHR8FHd4EAiMhKi+OMZBYaEpbF+Sbq+yeV4W0YaYXg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DBYOkhgJzcW/6r8P9AStO9rNLEpz/n3ceeOcGTiKwFs=;
- b=GGi3bqYrIxSRJQAR+S4i/6xv0AiQLPo5KDpMZdTLVCf+/9ZpTxLxvvfVDIPFxDywSgWtrdCiFuBduP/R9Hl6NsT0yDV8nbBQ/m6nOimRZwi9QgntR+XrSGi+3wyCnnDhlCbKOeZLHpI1jSvpTIf7TY0+5jD85Ox3rYpwDOstHIecHgn6f262hFZbLbXm+5JpwxRzS4jMy/T9TRz4WhrkTTywN43QJisu91mxUQMEuMAn90kmiho1rBZmkxXbhpqHhQ4vbVaB/RoEAEUdxNOhTKvOXSzIuBI27UgwMA6fb23agn3U6QEIPHXwOQsJBDAbFp2zNWHz8z+vHcJOtj4kUw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 3.248.88.141) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=bbl.ms.philips.com; dmarc=pass (p=reject sp=reject pct=100)
- action=none header.from=philips.com; dkim=none (message not signed); arc=none
- (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philips.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DBYOkhgJzcW/6r8P9AStO9rNLEpz/n3ceeOcGTiKwFs=;
- b=h86Pxz/T8bqjNEJDN8zZp4v4pjvdUvok/ru5t57bUs1ATzLbW1zAcshTY8TmCH82gMZFk2N1EkAWXhurgvMYbSDcYGtbymG6R4IaXZaeCiO1INaXJs8dFN75azTAqffzA9HMX1WbHWlgGpdJta42e7Zmfa+bCQ9Nkeq6mfGGFtg=
-Received: from CWLP265CA0483.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:18a::17)
- by PR3P122MB0291.EURP122.PROD.OUTLOOK.COM (2603:10a6:102:16::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.16; Tue, 4 Nov
- 2025 09:30:28 +0000
-Received: from AMS0EPF000001B7.eurprd05.prod.outlook.com
- (2603:10a6:400:18a:cafe::e7) by CWLP265CA0483.outlook.office365.com
- (2603:10a6:400:18a::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.16 via Frontend Transport; Tue,
- 4 Nov 2025 09:30:28 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 3.248.88.141)
- smtp.mailfrom=bbl.ms.philips.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=philips.com;
-Received-SPF: Pass (protection.outlook.com: domain of bbl.ms.philips.com
- designates 3.248.88.141 as permitted sender) receiver=protection.outlook.com;
- client-ip=3.248.88.141; helo=ext-eur1.smtp.philips.com; pr=C
-Received: from ext-eur1.smtp.philips.com (3.248.88.141) by
- AMS0EPF000001B7.mail.protection.outlook.com (10.167.16.171) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Tue, 4 Nov 2025 09:30:27 +0000
-Received: from smtprelay-eur1.philips.com ([130.138.84.184])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 256/256 bits)
-	(Client did not present a certificate)
-	by ext-eur1.smtp.philips.com with ESMTPS
-	id GBtDvkMd7tKtZGDMxv9Flp; Tue, 04 Nov 2025 10:30:27 +0100
-Received: from mail.bbl.ms.philips.com ([130.143.87.230])
-	by smtprelay-eur1.philips.com with ESMTP
-	id GDMxvOuE3IHN7GDMxvacfQ; Tue, 04 Nov 2025 10:30:27 +0100
-Received: from bbl2xbm1.bbl.ms.philips.com (bbl2xbm1.bbl.ms.philips.com [130.143.220.186])
-	by mail.bbl.ms.philips.com (Postfix) with ESMTP id 48D2618477E;
-	Tue,  4 Nov 2025 10:30:27 +0100 (CET)
-Received: by bbl2xbm1.bbl.ms.philips.com (Postfix, from userid 2462)
-	id 41A02300108; Tue,  4 Nov 2025 10:30:27 +0100 (CET)
-From: Timotheus Giuliani <timotheus.giuliani@philips.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KhvqQSxT;
+ spf=pass (domain: gmail.com, ip: 209.85.217.51, mailfrom: nmjain23@gmail.com)
+Received: by mail-vs1-f51.google.com with SMTP id ada2fe7eead31-5dbdb139b5bso1652499137.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 01:59:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1762250353; x=1762855153; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=TuV7aLiOpi0WfTS05DKEo6Y2tp4D1Xr5/UNrhCbrcLs=;
+        b=KhvqQSxTwwKcWARIijKlaMXtMlQSI4rRD3N6U+J9I7LWGPy06Q38buspSS2erLBi0B
+         DMNsyQxtTZZ5f8t4SmppK21sSs5FwdNlki2AJ8D1k7ptyMoglXPCvVZ7A+P4TmNq8SHR
+         umPzB+8t5SWgyoBMNM9OhTSN+7nWMgmsgdYrgAturFlrfSvMmooKuEToigVrBymnAZWm
+         /P+n3yHo5zRJrL+FZHxpVNLUE/DcB9rfy4ycOKEzcY51jiEqWsm36G++hu+4PcmRUplp
+         MDgQ9z829d3w/0nQ4CjRHu4jc0qbtLex3qdg0x++leWJMwQSDrpoyEg5bdOGYrVdyJie
+         wBQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762250353; x=1762855153;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=TuV7aLiOpi0WfTS05DKEo6Y2tp4D1Xr5/UNrhCbrcLs=;
+        b=PB2pqai2gO3nNPKH96zDzB5VJxnHnTGfjRGhrAHeJDgGInZaB4UteVgOhcfVxkIPgj
+         QlWsNmSH+NsRiHzck5MuYP9ihfSFNjfKH0O3+H5B2UPWi+H00fUgx3LYnMtPYJt4M4da
+         9e/apzG+siMvrEafYerCOF8LDQ9p0KPOdI7P6WsSnYYISQy6vcPlOjHSPDpgFSAOGvbt
+         Xn8zpZhfAKPRGHH7gfmaxwB/WdCVRawI1/nIn4hVphufvsF9qv5BfYCA2Ykj75w6Lo9x
+         BwPyhKzwaRYNb4kwYpnZCvL5CZaezoUcmVnv+uGITEA9IyTpANaywJO69F80wjtJGc/6
+         kT5Q==
+X-Gm-Message-State: AOJu0YyBHe0mRr6DnsWiPzxfrSnmfvQiig+3Glk7WcseGgPM1gYLGnNM
+	JRIFxXDA+uhO6FMpDbcFdppk4Cn/aZ06bBTwfSahPXFE3DSUxID4axvJfpMb5Q==
+X-Gm-Gg: ASbGncvBUJzWXaGOeR0FZ5R+ikEjARp5vAtY3UiZi45Va5PqEUFVINMZEteZX64A/zL
+	/MbajPSuuQBGidgM/10qKvGAbwlRyEacbNox9DxYr9jeyJfgMDvvA/qPhQy3yf1yPF+k8OZgr7Y
+	fx3Ip8jEe8/LGnG7RaPmeRHUnVsCc5SjFUHKKvA8Qg96PPfbispD6kOOMoXVn6HdJfy3prvy3+A
+	R423GIBw0SKZ8RpWHKRArdima9c+7IuNEUZSfYWRCSuCezw+ewX1Nt/WDS5gR6btWL5qMpgpFqR
+	O4blCJXMGj1AX7oJCcgGDnPBIp44J1MFXlSvBJ2jEABvittMPTTplD1wu6/gZARzhokCTFUbY/W
+	kSxatpJsCRBI20mGApI/2SH9kkskR41obXscP07r3Oqpyw34Q43M8qVtYJaFwFbFgPlQsGCEFxM
+	Fm8hMNzS11f/8kyegD27A=
+X-Google-Smtp-Source: AGHT+IEE+nvVVjk5jXYtlkFZPGskKNzRcjAzf7eWFkBGGfhEu3EdAobfIHBO5Gg+UkSz5zKYpF/vtQ==
+X-Received: by 2002:a05:6a20:6a06:b0:32d:a91a:7713 with SMTP id adf61e73a8af0-348cc2cf3fbmr22175980637.40.1762250005142;
+        Tue, 04 Nov 2025 01:53:25 -0800 (PST)
+Received: from LL-3450LLL.kpit.com ([2409:40c2:102b:1278:80a8:d029:241:1657])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-341599f14bbsm4027938a91.13.2025.11.04.01.53.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 04 Nov 2025 01:53:24 -0800 (PST)
+From: Naman Jain <nmjain23@gmail.com>
+X-Google-Original-From: Naman Jain <namanj1@kpit.com>
 To: openembedded-devel@lists.openembedded.org
-CC: Timotheus Giuliani <timotheus.giuliani@philips.com>
-Subject: [meta-oe][PATCH 1/2] fluentbit: set source directory to enable patch application
-Date: Tue,  4 Nov 2025 10:30:16 +0100
-Message-ID: <20251104093017.474084-1-timotheus.giuliani@philips.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Virendra.Thakur@kpit.com
+Subject: [meta-oe][scarthgap][PATCH] unbound: Fix CVE-2025-5994
+Date: Tue,  4 Nov 2025 15:22:56 +0530
+Message-Id: <20251104095256.3402683-1-namanj1@kpit.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001B7:EE_|PR3P122MB0291:EE_
-X-MS-Office365-Filtering-Correlation-Id: f7cc1b15-7709-4b58-030e-08de1b84ca4a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|36860700013|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?w9U/0LwzKKCXh7F3P1hMTM0AkY3duknTjYdj9zrcKp5djZEELnIKpiofyQu0?=
- =?us-ascii?Q?q4pyV8EUPKmjmF+caOOdEOkkCfzJoxxwMnjJIX8AodHxu7iwxrmuqqfPv8Pm?=
- =?us-ascii?Q?HUD+c92/JsVm+a1qR6SQ6ASoQCqcn+5wv7/b+6AUpQkpLvCqn/9adm3+udHA?=
- =?us-ascii?Q?+vyXlROmygvQfO7cIURSnGKA4bCsDNOm2ZTKcnR34M/U4xnbT9K1zIVLIatP?=
- =?us-ascii?Q?SYvckxfh1Re75YYs7MGTdAqCSfIV+D4w4DmayTSgnu4zDXPUmeIsXbtQO+HV?=
- =?us-ascii?Q?MFqVm4h9tbueOut+HzFOJRfC3SFed3LXhXolmznC1Z+0kWt8PAFJrNsurPsc?=
- =?us-ascii?Q?QBmYfvv/V67fTkpKja15L01wjJntQADok7BeNR1csqjCli7YVJiCoJd4VdLY?=
- =?us-ascii?Q?AS/Er5QlLqB517LqA5bmjDhgiZlUU6hNmguc8UnVzYf3s0nWjSU6GPY23bGv?=
- =?us-ascii?Q?3J8YD959E3HTrG949AD2zHvvvq70rADwbt8GQw7OzwhhCEyhdTe6BjDNXg8v?=
- =?us-ascii?Q?Cb6sXmuQTjSh7NNu0QLwn5q0R0xbE/LklLkVYkqclldQQatuq3Hv14cpuPfR?=
- =?us-ascii?Q?3OE0ka/L+sKsozy6RZ2KSG679Ftj/uuBr7tNIzJd7QXUCGmw1EC+OZCLn7fA?=
- =?us-ascii?Q?eHw6clBaYjZXJxgNDHfkI4obGuNSviEQef+V0HpzBNVdgOWteotoaq4G3No/?=
- =?us-ascii?Q?tQ8apeUVOVLEXkqd86IzCMjQGNIKHaWbrlb5LqALLo8IRXvNFp4Zhs03GWdK?=
- =?us-ascii?Q?szK4MABrAGPljDjqNVzVk33PMVQU24ZdtIU16bvGyEQzkE8HYEChmb0mZejj?=
- =?us-ascii?Q?TJWUR0NwnU/NKpTUJieOTq7PEwdGDUUdNzKSUW5dYH7tRPZGfYYd+o7XK8MT?=
- =?us-ascii?Q?5URGTa89AwPnR+I6jyPMxwrgcwlUUu+O5fH3Gve5BWebLwAHK9i+fM9oRkSd?=
- =?us-ascii?Q?8lciR0xgkfd5KhjRQSFc/eQumIGS6Hho9ipixVn2MsvgRmV/+7j0g2qh+Iex?=
- =?us-ascii?Q?gA1sOVumjGVxykylX3fkEzrYuwrvJ3sFUZwgGRWv9okCnfbQ27KQm4v/+hVs?=
- =?us-ascii?Q?M5H1zeYaZs9TiTv7ewWsS9Ukg5S1+8kvIsWLE+saag0NSTdp6OUi7M2pK4DS?=
- =?us-ascii?Q?qjnMG/mq7TSUIIAVT2j0KQGRMOcmodMQF07rhXrpoW9nHxpogZYrKWfnCkUI?=
- =?us-ascii?Q?krmhokEPJUmRu/tdTNfKVwlSGyK6NvE1heDUuy2K1c+L1+sicdEXJ+pQ+hAn?=
- =?us-ascii?Q?1XadmBDyzME1QGmbx/pG4e5TA2fQZGrsOwG42QdhDq4DJ8jHM++GqchMfrwO?=
- =?us-ascii?Q?3PSXHeyUgCgoNqZYGG0J4MDKOq31SPuVhsZWYSJdOcdSWR3fhgfSUra7b0Gl?=
- =?us-ascii?Q?oFKdRkx6SqKDp6nDE+GLbLagAgdTgkbIioGzrK2J9tOzY+TS2FgmglCgAY1a?=
- =?us-ascii?Q?Tr/acRG8V1anAegfc/CsPRh5dqqPjPifFSS9RyVJvLQDkXlyfkpOSglgQsL7?=
- =?us-ascii?Q?u7q6piDi6NECk1jQyGLp6huH1BS0JJP/AsBuZPB3WYX7yOdbfLp/J1yK8hnu?=
- =?us-ascii?Q?GUP64IROUNWijh+g1Fg=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:3.248.88.141;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:ext-eur1.smtp.philips.com;PTR:ext-eur1.smtp.philips.com;CAT:NONE;SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: philips.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2025 09:30:27.5886
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f7cc1b15-7709-4b58-030e-08de1b84ca4a
-X-MS-Exchange-CrossTenant-Id: 1a407a2d-7675-4d17-8692-b3ac285306e4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1a407a2d-7675-4d17-8692-b3ac285306e4;Ip=[3.248.88.141];Helo=[ext-eur1.smtp.philips.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AMS0EPF000001B7.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P122MB0291
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 11:24:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121293
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121294
 
-The recipe was missing the explicit setting of the source directory
-variable S, which prevented patches from being applied correctly during
-the build process. This commit adds the missing S variable assignment
-to point to the git checkout location at ${WORKDIR}/git, ensuring that
-the do_patch task can locate the source files and apply the configured
-patches successfully.
-Without this setting, the build system would fail to find the source
-tree in the expected location.
+A multi-vendor cache poisoning vulnerability named 'Rebirthday Attack' has been
+discovered in caching resolvers that support EDNS Client Subnet (ECS). Unbound is
+also vulnerable when compiled with ECS support, i.e., '--enable-subnet', AND
+configured to send ECS information along with queries to upstream name servers
 
-Signed-off-by: Timotheus Giuliani <timotheus.giuliani@philips.com>
+CVE: CVE-2025-5994
+
+Signed-off-by: Naman Jain <namanj1@kpit.com>
 ---
- meta-oe/recipes-extended/fluentbit/fluentbit_4.0.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../unbound/unbound/CVE-2025-5994.patch       | 275 ++++++++++++++++++
+ .../recipes-support/unbound/unbound_1.19.3.bb |   1 +
+ 2 files changed, 276 insertions(+)
+ create mode 100644 meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_4.0.1.bb b/meta-o=
-e/recipes-extended/fluentbit/fluentbit_4.0.1.bb
-index 05e4fd937f..4d82abc783 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_4.0.1.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_4.0.1.bb
-@@ -32,6 +32,7 @@ SRC_URI:append:libc-musl =3D "\
- # prefix tag with "v" to avoid upgrade to random tags like "20220215"
- UPSTREAM_CHECK_GITTAGREGEX =3D "v(?P<pver>(\d+(\.\d+)+))"
-=20
-+S =3D "${WORKDIR}/git"
-=20
- PACKAGECONFIG ??=3D "\
-     aws \
+diff --git a/meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch b/meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch
+new file mode 100644
+index 0000000000..b6c0e37e43
+--- /dev/null
++++ b/meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch
+@@ -0,0 +1,275 @@
++Backport of:
++
++From 5bf82f246481098a6473f296b21fc1229d276c0f Mon Sep 17 00:00:00 2001
++From: "W.C.A. Wijngaards" <wouter@nlnetlabs.nl>
++Date: Wed, 16 Jul 2025 10:02:01 +0200
++Subject: [PATCH] - Fix RebirthDay Attack CVE-2025-5994, reported by Xiang Li
++ from AOSP   Lab Nankai University.
++
++CVE: CVE-2025-5994
++Upstream-Status: Backport [https://github.com/NLnetLabs/unbound/commit/5bf82f246481098a6473f296b21fc1229d276c0f]
++Signed-off-by: Naman Jain <namanj1@kpit.com> 
++
++---
++ edns-subnet/subnetmod.c | 152 ++++++++++++++++++++++++++++++++++++----
++ edns-subnet/subnetmod.h |   4 ++
++ 2 files changed, 142 insertions(+), 14 deletions(-)
++
++--- a/edns-subnet/subnetmod.c
+++++ b/edns-subnet/subnetmod.c
++@@ -51,6 +51,7 @@
++ #include "services/cache/dns.h"
++ #include "util/module.h"
++ #include "util/regional.h"
+++#include "util/fptr_wlist.h"
++ #include "util/storage/slabhash.h"
++ #include "util/config_file.h"
++ #include "util/data/msgreply.h"
++@@ -152,7 +153,8 @@ int ecs_whitelist_check(struct query_inf
++ 
++ 	/* Cache by default, might be disabled after parsing EDNS option
++ 	 * received from nameserver. */
++-	if(!iter_stub_fwd_no_cache(qstate, &qstate->qinfo, NULL, NULL)) {
+++	if(!iter_stub_fwd_no_cache(qstate, &qstate->qinfo, NULL, NULL)
+++		&& sq->ecs_client_in.subnet_validdata) {
++ 		qstate->no_cache_store = 0;
++ 	}
++ 
++@@ -504,6 +506,69 @@ common_prefix(uint8_t *a, uint8_t *b, ui
++ 	return !memcmp(a, b, n) && ((net % 8) == 0 || a[n] == b[n]);
++ }
++ 
+++/**
+++ * Create sub request that looks up the query.
+++ * @param qstate: query state
+++ * @param sq: subnet qstate
+++ * @return false on failure.
+++ */
+++static int
+++generate_sub_request(struct module_qstate *qstate, struct subnet_qstate* sq)
+++{
+++	struct module_qstate* subq = NULL;
+++	uint16_t qflags = 0; /* OPCODE QUERY, no flags */
+++	int prime = 0;
+++	int valrec = 0;
+++	struct query_info qinf;
+++	qinf.qname = qstate->qinfo.qname;
+++	qinf.qname_len = qstate->qinfo.qname_len;
+++	qinf.qtype = qstate->qinfo.qtype;
+++	qinf.qclass = qstate->qinfo.qclass;
+++	qinf.local_alias = NULL;
+++
+++	qflags |= BIT_RD;
+++	if((qstate->query_flags & BIT_CD)!=0) {
+++		qflags |= BIT_CD;
+++		valrec = 1;
+++	}
+++
+++	fptr_ok(fptr_whitelist_modenv_attach_sub(qstate->env->attach_sub));
+++	if(!(*qstate->env->attach_sub)(qstate, &qinf, qflags, prime, valrec,
+++		&subq)) {
+++		return 0;
+++	}
+++	if(subq) {
+++		/* It is possible to access the subquery module state. */
+++		if(sq->ecs_client_in.subnet_source_mask == 0 &&
+++			edns_opt_list_find(qstate->edns_opts_front_in,
+++				qstate->env->cfg->client_subnet_opcode)) {
+++			subq->no_cache_store = 1;
+++		}
+++	}
+++	return 1;
+++}
+++
+++/**
+++ * Perform the query without subnet
+++ * @param qstate: query state
+++ * @param sq: subnet qstate
+++ * @return module state
+++ */
+++static enum module_ext_state
+++generate_lookup_without_subnet(struct module_qstate *qstate,
+++	struct subnet_qstate* sq)
+++{
+++	verbose(VERB_ALGO, "subnetcache: make subquery to look up without subnet");
+++	if(!generate_sub_request(qstate, sq)) {
+++		verbose(VERB_ALGO, "Could not generate sub query");
+++		qstate->return_rcode = LDNS_RCODE_FORMERR;
+++		qstate->return_msg = NULL;
+++		return module_finished;
+++	}
+++	sq->wait_subquery = 1;
+++	return module_wait_subquery;
+++}
+++
++ static enum module_ext_state
++ eval_response(struct module_qstate *qstate, int id, struct subnet_qstate *sq)
++ {
++@@ -539,14 +604,7 @@ eval_response(struct module_qstate *qsta
++ 		 * is still useful to put it in the edns subnet cache for
++ 		 * when a client explicitly asks for subnet specific answer. */
++ 		verbose(VERB_QUERY, "subnetcache: Authority indicates no support");
++-		if(!sq->started_no_cache_store) {
++-			lock_rw_wrlock(&sne->biglock);
++-			update_cache(qstate, id);
++-			lock_rw_unlock(&sne->biglock);
++-		}
++-		if (sq->subnet_downstream)
++-			cp_edns_bad_response(c_out, c_in);
++-		return module_finished;
+++		return generate_lookup_without_subnet(qstate, sq);
++ 	}
++ 
++ 	/* Purposefully there was no sent subnet, and there is consequently
++@@ -571,14 +629,14 @@ eval_response(struct module_qstate *qsta
++ 		!common_prefix(s_out->subnet_addr, s_in->subnet_addr, 
++ 			s_out->subnet_source_mask))
++ 	{
++-		/* we can not accept, restart query without option */
+++		/* we can not accept, perform query without option */
++ 		verbose(VERB_QUERY, "subnetcache: forged data");
++ 		s_out->subnet_validdata = 0;
++ 		(void)edns_opt_list_remove(&qstate->edns_opts_back_out,
++ 			qstate->env->cfg->client_subnet_opcode);
++ 		sq->subnet_sent = 0;
++ 		sq->subnet_sent_no_subnet = 0;
++-		return module_restart_next;
+++		return generate_lookup_without_subnet(qstate, sq);
++ 	}
++ 
++ 	lock_rw_wrlock(&sne->biglock);
++@@ -763,6 +821,9 @@ ecs_edns_back_parsed(struct module_qstat
++ 	} else if(sq->subnet_sent_no_subnet) {
++ 		/* The answer can be stored as scope 0, not in global cache. */
++ 		qstate->no_cache_store = 1;
+++	} else if(sq->subnet_sent) {
+++		/* Need another query to be able to store in global cache. */
+++		qstate->no_cache_store = 1;
++ 	}
++ 
++ 	return 1;
++@@ -780,6 +841,32 @@ subnetmod_operate(struct module_qstate *
++ 		strmodulevent(event));
++ 	log_query_info(VERB_QUERY, "subnetcache operate: query", &qstate->qinfo);
++ 
+++	if(sq && sq->wait_subquery_done) {
+++		/* The subquery lookup returned. */
+++		if(sq->ecs_client_in.subnet_source_mask == 0 &&
+++			edns_opt_list_find(qstate->edns_opts_front_in,
+++				qstate->env->cfg->client_subnet_opcode)) {
+++			if(!sq->started_no_cache_store &&
+++				qstate->return_msg) {
+++				lock_rw_wrlock(&sne->biglock);
+++				update_cache(qstate, id);
+++				lock_rw_unlock(&sne->biglock);
+++			}
+++			if (sq->subnet_downstream)
+++				cp_edns_bad_response(&sq->ecs_client_out,
+++					&sq->ecs_client_in);
+++			/* It is a scope zero lookup, append edns subnet
+++			 * option to the querier. */
+++			subnet_ecs_opt_list_append(&sq->ecs_client_out,
+++				&qstate->edns_opts_front_out, qstate,
+++				qstate->region);
+++		}
+++		sq->wait_subquery_done = 0;
+++		qstate->ext_state[id] = module_finished;
+++		qstate->no_cache_store = sq->started_no_cache_store;
+++		qstate->no_cache_lookup = sq->started_no_cache_lookup;
+++		return;
+++	}
++ 	if((event == module_event_new || event == module_event_pass) &&
++ 		sq == NULL) {
++ 		struct edns_option* ecs_opt;
++@@ -790,6 +877,8 @@ subnetmod_operate(struct module_qstate *
++ 		}
++ 
++ 		sq = (struct subnet_qstate*)qstate->minfo[id];
+++		if(sq->wait_subquery)
+++			return; /* Wait for that subquery to return */
++ 
++ 		if((ecs_opt = edns_opt_list_find(
++ 			qstate->edns_opts_front_in,
++@@ -819,6 +908,14 @@ subnetmod_operate(struct module_qstate *
++ 			/* No clients are interested in result or we could not
++ 			 * parse it, we don't do client subnet */
++ 			sq->ecs_server_out.subnet_validdata = 0;
+++			if(edns_opt_list_find(qstate->edns_opts_front_in,
+++				qstate->env->cfg->client_subnet_opcode)) {
+++				/* aggregated this deaggregated state */
+++				qstate->ext_state[id] =
+++					generate_lookup_without_subnet(
+++					qstate, sq);
+++				return;
+++			}
++ 			verbose(VERB_ALGO, "subnetcache: pass to next module");
++ 			qstate->ext_state[id] = module_wait_module;
++ 			return;
++@@ -859,6 +956,14 @@ subnetmod_operate(struct module_qstate *
++ 			}
++ 			lock_rw_unlock(&sne->biglock);
++ 		}
+++		if(sq->ecs_client_in.subnet_source_mask == 0 &&
+++			edns_opt_list_find(qstate->edns_opts_front_in,
+++				qstate->env->cfg->client_subnet_opcode)) {
+++			/* client asked for resolution without edns subnet */
+++			qstate->ext_state[id] = generate_lookup_without_subnet(
+++				qstate, sq);
+++			return;
+++		}
++ 		
++ 		sq->ecs_server_out.subnet_addr_fam =
++ 			sq->ecs_client_in.subnet_addr_fam;
++@@ -895,6 +1000,8 @@ subnetmod_operate(struct module_qstate *
++ 		qstate->ext_state[id] = module_wait_module;
++ 		return;
++ 	}
+++	if(sq && sq->wait_subquery)
+++		return; /* Wait for that subquery to return */
++ 	/* Query handed back by next module, we have a 'final' answer */
++ 	if(sq && event == module_event_moddone) {
++ 		qstate->ext_state[id] = eval_response(qstate, id, sq);
++@@ -943,10 +1050,27 @@ subnetmod_clear(struct module_qstate *AT
++ }
++ 
++ void
++-subnetmod_inform_super(struct module_qstate *ATTR_UNUSED(qstate),
++-	int ATTR_UNUSED(id), struct module_qstate *ATTR_UNUSED(super))
+++subnetmod_inform_super(struct module_qstate *qstate, int id,
+++	struct module_qstate *super)
++ {
++-	/* Not used */
+++	struct subnet_qstate* super_sq =
+++		(struct subnet_qstate*)super->minfo[id];
+++	log_query_info(VERB_ALGO, "subnetcache inform_super: query",
+++		&super->qinfo);
+++	super_sq->wait_subquery = 0;
+++	super_sq->wait_subquery_done = 1;
+++	if(qstate->return_rcode != LDNS_RCODE_NOERROR ||
+++		!qstate->return_msg) {
+++		super->return_msg = NULL;
+++		super->return_rcode = LDNS_RCODE_SERVFAIL;
+++		return;
+++	}
+++	super->return_rcode = LDNS_RCODE_NOERROR;
+++	super->return_msg = dns_copy_msg(qstate->return_msg, super->region);
+++	if(!super->return_msg) {
+++		log_err("subnetcache: copy response, out of memory");
+++		super->return_rcode = LDNS_RCODE_SERVFAIL;
+++	}
++ }
++ 
++ size_t
++--- a/edns-subnet/subnetmod.h
+++++ b/edns-subnet/subnetmod.h
++@@ -102,6 +102,10 @@ struct subnet_qstate {
++ 	int started_no_cache_store;
++ 	/** has the subnet module been started with no_cache_lookup? */
++ 	int started_no_cache_lookup;
+++	/** Wait for subquery that has been started for nonsubnet lookup. */
+++	int wait_subquery;
+++	/** The subquery waited for is done. */
+++	int wait_subquery_done;
++ };
++ 
++ void subnet_data_delete(void* d, void* ATTR_UNUSED(arg));
+diff --git a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
+index 6f54038c6c..6c04ed5840 100644
+--- a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
++++ b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
+ 
+ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=branch-1.19.3 \
+            file://CVE-2024-8508.patch \
++           file://CVE-2025-5994.patch \
+            "
+ SRCREV = "48b6c60a24e9a5d6d369a7a37c9fe2a767f26abd"
+ 
+-- 
+2.34.1
+
 
