@@ -1,137 +1,1310 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 670B3CCF9E3
-	for <webhook@archiver.kernel.org>; Tue,  4 Nov 2025 21:00:14 +0000 (UTC)
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6442.1762290013245955952
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E77EDCCFA04
+	for <webhook@archiver.kernel.org>; Tue,  4 Nov 2025 21:18:47 +0000 (UTC)
+Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.367.1762291116472570691
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Nov 2025 13:00:13 -0800
+ Tue, 04 Nov 2025 13:18:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ru3V2FVd;
- spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id 5614622812f47-44fba97bf37so1383738b6e.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 13:00:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762290012; x=1762894812; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nzME+JcSdgJ4LPl2OV67wD1NezBmcgPfN9gQcCA4TIE=;
-        b=Ru3V2FVdvd6HROtPukXTeWY4n4lbYsNhit65BGGB78vp2LSXrvDcFPkm07qunPfVuj
-         d6oUozIR/G3SFpkI6owj7TlmyXs8wTuJObfkkBmjP4DDfXyzURHXjZFB3CL2Mf01cefi
-         0dwmffdILeAtiIVajAXG/SPNcUeZf0pqGV9MMZIuAaBWxGV4jbwq31WHB3K0+HsrxUXE
-         ux1yIwbIyc9H2Y9M1RFZ/Vp8U6Of/4n2IImf4MUyVu0ngKgy8krfOgXq9RpeylnQ3QtX
-         6N2ZsaPSYGtuu8DITD1ZuYfC5LxBwTlF6rpnBupY6eq//NM4jeoK5IdI9kicBGuUHbQO
-         Om2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762290012; x=1762894812;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nzME+JcSdgJ4LPl2OV67wD1NezBmcgPfN9gQcCA4TIE=;
-        b=sieWNbVKzdnwmadzmL2BDv3Ky9542pIXop/AFQbtpdDWUHyui32SgELbdgeRygXFrZ
-         GgSnIYguo3ia6AOQtZzboxBXC+JEuGIGH0UsXYuPCZXv/thsMv9kCAi3suN38WSQyzCo
-         EBMGEy/n+giRbGxlK8VwSoxyZELkKgu4XnG1QHsdeFB2XKi6onYSuR1wACEfUqI9obZv
-         0tRWqQHgH78WX/tOE8XrxHIAeg9USWn/JzphFisGGB5kh6f2NVByXUZt2PnWqjiihaNW
-         YVwAV26NfaXkXrHlrdP7o3pkpwhe8Yj/aVo05OHCpsj+sd/Fb7SkWbtFHIwh41yxGBAJ
-         NzwQ==
-X-Gm-Message-State: AOJu0Ywi+cbqIRE38+zgJDGsnROGzD/jESKWCo5MReWkYzdtKxJMmS9c
-	juin9phydFsw+YWVjsPN+Y3fffcsg3VckWXSKgiq8c/VQ16Mj6XwhH5gsCQ34kNGtEmoDasDTgP
-	h2fmBj+CqoKgUjKZH4o6ThIOSuvp+ZX8=
-X-Gm-Gg: ASbGnct1p79hSdBkk+b2tBGZgBo6R6HOB6Uyly2rp6utbiyfd6Xto8kUI6+/xFGlkCR
-	+SMYQZygTH68psDp677ZQtCfcnBFGSVnR0bTwByLvzj8bYLkV3quaNnmmslggqPDDZQmSjMqDJD
-	iCNabrpgrInfQhhae6pSYjnTOqfr16kvOYKkPeRHFmg0Rl+Y2X6z6q3h0rMb4xlj+pTk+WtNU+N
-	ErfkB8/19J2UalwXxStvVrQrOf+uRWvLGx8fIMVb4anfMYLrI1R1iZegEqG8Oc=
-X-Google-Smtp-Source: AGHT+IGtz69R7Wfs5fWY2Uxu139h6JPjFp8n5mso7311PLjDOEtG4ciBLjq0KmiGZu5BPoO74KdbdqTOnrVWl3Hn43E=
-X-Received: by 2002:a05:6808:6a85:b0:43f:5fc5:e04b with SMTP id
- 5614622812f47-44fed34397fmr369951b6e.15.1762290012427; Tue, 04 Nov 2025
- 13:00:12 -0800 (PST)
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=ho0Q72WH;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-20251104211832e1d2cefa580002078c-rmkcdt@rts-flowmailer.siemens.com)
+Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 20251104211832e1d2cefa580002078c
+        for <openembedded-devel@lists.openembedded.org>;
+        Tue, 04 Nov 2025 22:18:33 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=0FptTtTKIojKqeg/H6tKQxjDUDxkw8hScu8/IQ1LCtU=;
+ b=ho0Q72WHLRsc9TfbWBxAnJaW5E4zmDGubCj+n99zQt5+s6wgCsTCM8y1DfyClLmAlwR1HE
+ KcqY2lHJT908q8v8mvmIkxFhnUwXS5uKJ5mOKPrgMHyYGmbIuAfMMRB2bwlfhMdRDb/KAKvf
+ cb6CUUKgZ7xQQ6PtkP3wH4SEHX+d/22IkhMbQkhHW3jsN9BYMbIOqx7hYmrJKMvVi5dhfEtj
+ /MvP24VTOb33XhwYf0p8WivQoaGhmUuwWI0WF1wr9N6LSHxujj2cMyoVArccgezuB3FFxITR
+ fEGmmjOvOBJbk5pJYz5XNdl/RctDv1FrbOFfYrjWNp4mQSfBq8LBulmA==;
+From: Peter Marko <peter.marko@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-oe][kirkstone][PATCH] hostapd: patch CVE-2022-37660
+Date: Tue,  4 Nov 2025 22:18:31 +0100
+Message-Id: <20251104211831.1918400-1-peter.marko@siemens.com>
 MIME-Version: 1.0
-References: <20251104193437.1797870-1-ankur.tyagi85@gmail.com>
- <20251104193437.1797870-2-ankur.tyagi85@gmail.com> <16996f11-c1e5-4014-b3c6-8bd359be8ee3@gmail.com>
-In-Reply-To: <16996f11-c1e5-4014-b3c6-8bd359be8ee3@gmail.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Wed, 5 Nov 2025 10:00:01 +1300
-X-Gm-Features: AWmQ_blQ0dQ9h8Z9A3MAtSB1RdFHAP0p9Lg0NEdO72OrIP7ngbmV5HkY6wn7MFQ
-Message-ID: <CADySD0EqCxz-Z-_=GVenDpLvKpMoShKMHUqfF2=ZusBJwPbzmw@mail.gmail.com>
-Subject: Re: [oe][meta-oe][PATCH 2/2] redis: ignore CVE-2025-46817,
- CVE-2025-46818, CVE-2025-46819
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 21:00:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121308
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 21:18:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121309
 
-On Wed, Nov 5, 2025 at 9:07=E2=80=AFAM Gyorgy Sarvari <skandigraun@gmail.co=
-m> wrote:
->
-> On 11/4/25 20:34, Ankur Tyagi via lists.openembedded.org wrote:
-> > From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> >
-> > Fixes for CVE 46817[1], 46818[2], 47819[3] are included in the used ver=
-sion
-> > [1] https://github.com/redis/redis/commit/fc282edb61b56e7fe1e6bacf94002=
-52145852fdc
-> > [2] https://github.com/redis/redis/commit/dccb672d838f05c940f040c27b74f=
-de6fb47b2a7
-> > [3] https://github.com/redis/redis/commit/2802b52b554cb9f0f249a24474c9f=
-ba94e933dbb
-> >
-> > Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> > ---
-> >  meta-oe/recipes-extended/redis/redis_7.2.12.bb | 3 +++
-> >  1 file changed, 3 insertions(+)
-> >
-> > diff --git a/meta-oe/recipes-extended/redis/redis_7.2.12.bb b/meta-oe/r=
-ecipes-extended/redis/redis_7.2.12.bb
-> > index 9016254731..6527fb6996 100644
-> > --- a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-> > +++ b/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-> > @@ -23,6 +23,9 @@ RPROVIDES:${PN} =3D "virtual-redis"
-> >
-> >  CVE_STATUS[CVE-2025-21605] =3D "cpe-incorrect: the used version alread=
-y contains the fix"
-> >  CVE_STATUS[CVE-2025-27151] =3D "cpe-incorrect: the used version alread=
-y contains the fix"
-> > +CVE_STATUS[CVE-2025-46817] =3D "cpe-incorrect: the used version alread=
-y contains the fix"
-> > +CVE_STATUS[CVE-2025-46818] =3D "cpe-incorrect: the used version alread=
-y contains the fix"
-> > +CVE_STATUS[CVE-2025-46819] =3D "cpe-incorrect: the used version alread=
-y contains the fix"
->
-> I have submitted this yesterday, but why I'm writing this is because
-> "cpe-incorrect" is not appropriate status for this - cpe-incorrect is
-> for cases when the actual CVE is for a completely different software
-> than the one built by the recipe:
-> https://git.openembedded.org/openembedded-core/tree/meta/conf/cve-check-m=
-ap.conf
-> - this also determines how it shows up in the final CVE report when
-> someone runs the cve checker. "cpe-incorrect" is marked as "ignored",
-> instead of the the more appropriate "patched" status.
+From: Peter Marko <peter.marko@siemens.com>
 
-Got it, thanks for the explanation.
+Pick patches according to oe-core patch for this CVE in wpa-supplicant.
+Leave out commit which patched only files not present in hostapd.
 
->
-> >
-> >  inherit pkgconfig update-rc.d systemd useradd
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#121304): https://lists.openembedded.org/g/openembed=
-ded-devel/message/121304
-> > Mute This Topic: https://lists.openembedded.org/mt/116123103/6084445
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[skandigraun@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
+Note that Debian just picked the last commit (actually fixing the CVE)
+and removed not-applicable parts, but it is probably better to be
+consistent with oe-core status.
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+---
+ .../hostapd/hostapd/CVE-2022-37660-01.patch   | 249 ++++++
+ .../hostapd/hostapd/CVE-2022-37660-02.patch   | 111 +++
+ .../hostapd/hostapd/CVE-2022-37660-03.patch   | 762 ++++++++++++++++++
+ .../hostapd/hostapd/CVE-2022-37660-04.patch   |  85 ++
+ .../hostapd/hostapd_2.10.bb                   |   4 +
+ 5 files changed, 1211 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-01.patch
+ create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-02.patch
+ create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-03.patch
+ create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-04.patch
+
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-01.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-01.patch
+new file mode 100644
+index 0000000000..82bab3f3af
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-01.patch
+@@ -0,0 +1,249 @@
++From 9d3f347a2b14652e767d51142600206a32676b62 Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <quic_jouni@quicinc.com>
++Date: Mon, 24 Jan 2022 20:57:19 +0200
++Subject: [PATCH] DPP3: Add PKEX initiator retries and fallback from v2 to v1
++ for hostapd
++
++This extends hostapd with the design used in wpa_supplicant for PKEX
++initiator retries and automatic version fallback from v2 to v1 (the
++latter is enabled only with CONFIG_DPP3=y).
++
++Signed-off-by: Jouni Malinen <quic_jouni@quicinc.com>
++
++CVE: CVE-2022-37660
++Upstream-Status: Backport [https://git.w1.fi/cgit/hostap/commit/?id=9d3f347a2b14652e767d51142600206a32676b62]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/ap/dpp_hostapd.c | 188 +++++++++++++++++++++++++++++++++++++++----
++ 1 file changed, 171 insertions(+), 17 deletions(-)
++
++diff --git a/src/ap/dpp_hostapd.c b/src/ap/dpp_hostapd.c
++index 13e1fc5bd..6c30ba302 100644
++--- a/src/ap/dpp_hostapd.c
+++++ b/src/ap/dpp_hostapd.c
++@@ -216,6 +216,163 @@ static void hostapd_dpp_auth_resp_retry(struct hostapd_data *hapd)
++ }
++ 
++ 
+++static int hostapd_dpp_allow_ir(struct hostapd_data *hapd, unsigned int freq)
+++{
+++	int i, j;
+++
+++	if (!hapd->iface->hw_features)
+++		return -1;
+++
+++	for (i = 0; i < hapd->iface->num_hw_features; i++) {
+++		struct hostapd_hw_modes *mode = &hapd->iface->hw_features[i];
+++
+++		for (j = 0; j < mode->num_channels; j++) {
+++			struct hostapd_channel_data *chan = &mode->channels[j];
+++
+++			if (chan->freq != (int) freq)
+++				continue;
+++
+++			if (chan->flag & (HOSTAPD_CHAN_DISABLED |
+++					  HOSTAPD_CHAN_NO_IR |
+++					  HOSTAPD_CHAN_RADAR))
+++				continue;
+++
+++			return 1;
+++		}
+++	}
+++
+++	wpa_printf(MSG_DEBUG,
+++		   "DPP: Frequency %u MHz not supported or does not allow PKEX initiation in the current channel list",
+++		   freq);
+++
+++	return 0;
+++}
+++
+++
+++static int hostapd_dpp_pkex_next_channel(struct hostapd_data *hapd,
+++					 struct dpp_pkex *pkex)
+++{
+++	if (pkex->freq == 2437)
+++		pkex->freq = 5745;
+++	else if (pkex->freq == 5745)
+++		pkex->freq = 5220;
+++	else if (pkex->freq == 5220)
+++		pkex->freq = 60480;
+++	else
+++		return -1; /* no more channels to try */
+++
+++	if (hostapd_dpp_allow_ir(hapd, pkex->freq) == 1) {
+++		wpa_printf(MSG_DEBUG, "DPP: Try to initiate on %u MHz",
+++			   pkex->freq);
+++		return 0;
+++	}
+++
+++	/* Could not use this channel - try the next one */
+++	return hostapd_dpp_pkex_next_channel(hapd, pkex);
+++}
+++
+++
+++static int hostapd_dpp_pkex_init(struct hostapd_data *hapd, bool v2)
+++{
+++	struct dpp_pkex *pkex;
+++	struct wpabuf *msg;
+++	unsigned int wait_time;
+++
+++	wpa_printf(MSG_DEBUG, "DPP: Initiating PKEXv%d", v2 ? 2 : 1);
+++	dpp_pkex_free(hapd->dpp_pkex);
+++	hapd->dpp_pkex = dpp_pkex_init(hapd->msg_ctx, hapd->dpp_pkex_bi,
+++				       hapd->own_addr,
+++				       hapd->dpp_pkex_identifier,
+++				       hapd->dpp_pkex_code, v2);
+++	pkex = hapd->dpp_pkex;
+++	if (!pkex)
+++		return -1;
+++
+++	msg = hapd->dpp_pkex->exchange_req;
+++	wait_time = 2000; /* TODO: hapd->max_remain_on_chan; */
+++	pkex->freq = 2437;
+++	wpa_msg(hapd->msg_ctx, MSG_INFO, DPP_EVENT_TX "dst=" MACSTR
+++		" freq=%u type=%d", MAC2STR(broadcast), pkex->freq,
+++		v2 ? DPP_PA_PKEX_EXCHANGE_REQ :
+++		DPP_PA_PKEX_V1_EXCHANGE_REQ);
+++	hostapd_drv_send_action(hapd, pkex->freq, 0, broadcast,
+++				wpabuf_head(msg), wpabuf_len(msg));
+++	pkex->exch_req_wait_time = wait_time;
+++	pkex->exch_req_tries = 1;
+++
+++	return 0;
+++}
+++
+++
+++static void hostapd_dpp_pkex_retry_timeout(void *eloop_ctx, void *timeout_ctx)
+++{
+++	struct hostapd_data *hapd = eloop_ctx;
+++	struct dpp_pkex *pkex = hapd->dpp_pkex;
+++
+++	if (!pkex || !pkex->exchange_req)
+++		return;
+++	if (pkex->exch_req_tries >= 5) {
+++		if (hostapd_dpp_pkex_next_channel(hapd, pkex) < 0) {
+++#ifdef CONFIG_DPP3
+++			if (pkex->v2) {
+++				wpa_printf(MSG_DEBUG,
+++					   "DPP: Fall back to PKEXv1");
+++				hostapd_dpp_pkex_init(hapd, false);
+++				return;
+++			}
+++#endif /* CONFIG_DPP3 */
+++			wpa_msg(hapd->msg_ctx, MSG_INFO, DPP_EVENT_FAIL
+++				"No response from PKEX peer");
+++			dpp_pkex_free(pkex);
+++			hapd->dpp_pkex = NULL;
+++			return;
+++		}
+++		pkex->exch_req_tries = 0;
+++	}
+++
+++	pkex->exch_req_tries++;
+++	wpa_printf(MSG_DEBUG, "DPP: Retransmit PKEX Exchange Request (try %u)",
+++		   pkex->exch_req_tries);
+++	wpa_msg(hapd->msg_ctx, MSG_INFO, DPP_EVENT_TX "dst=" MACSTR
+++		" freq=%u type=%d",
+++		MAC2STR(broadcast), pkex->freq,
+++		pkex->v2 ? DPP_PA_PKEX_EXCHANGE_REQ :
+++		DPP_PA_PKEX_V1_EXCHANGE_REQ);
+++	hostapd_drv_send_action(hapd, pkex->freq, pkex->exch_req_wait_time,
+++				broadcast,
+++				wpabuf_head(pkex->exchange_req),
+++				wpabuf_len(pkex->exchange_req));
+++}
+++
+++
+++static void hostapd_dpp_pkex_tx_status(struct hostapd_data *hapd, const u8 *dst,
+++				       const u8 *data, size_t data_len, int ok)
+++{
+++	struct dpp_pkex *pkex = hapd->dpp_pkex;
+++
+++	if (pkex->failed) {
+++		wpa_printf(MSG_DEBUG,
+++			   "DPP: Terminate PKEX exchange due to an earlier error");
+++		if (pkex->t > pkex->own_bi->pkex_t)
+++			pkex->own_bi->pkex_t = pkex->t;
+++		dpp_pkex_free(pkex);
+++		hapd->dpp_pkex = NULL;
+++		return;
+++	}
+++
+++	if (pkex->exch_req_wait_time && pkex->exchange_req) {
+++		/* Wait for PKEX Exchange Response frame and retry request if
+++		 * no response is seen. */
+++		eloop_cancel_timeout(hostapd_dpp_pkex_retry_timeout, hapd,
+++				     NULL);
+++		eloop_register_timeout(pkex->exch_req_wait_time / 1000,
+++				       (pkex->exch_req_wait_time % 1000) * 1000,
+++				       hostapd_dpp_pkex_retry_timeout, hapd,
+++				       NULL);
+++	}
+++}
+++
+++
++ void hostapd_dpp_tx_status(struct hostapd_data *hapd, const u8 *dst,
++ 			   const u8 *data, size_t data_len, int ok)
++ {
++@@ -227,6 +384,11 @@ void hostapd_dpp_tx_status(struct hostapd_data *hapd, const u8 *dst,
++ 		" result=%s", MAC2STR(dst), ok ? "SUCCESS" : "FAILED");
++ 
++ 	if (!hapd->dpp_auth) {
+++		if (hapd->dpp_pkex) {
+++			hostapd_dpp_pkex_tx_status(hapd, dst, data, data_len,
+++						   ok);
+++			return;
+++		}
++ 		wpa_printf(MSG_DEBUG,
++ 			   "DPP: Ignore TX status since there is no ongoing authentication exchange");
++ 		return;
++@@ -1783,6 +1945,9 @@ hostapd_dpp_rx_pkex_exchange_resp(struct hostapd_data *hapd, const u8 *src,
++ 		return;
++ 	}
++ 
+++	eloop_cancel_timeout(hostapd_dpp_pkex_retry_timeout, hapd, NULL);
+++	hapd->dpp_pkex->exch_req_wait_time = 0;
+++
++ 	msg = dpp_pkex_rx_exchange_resp(hapd->dpp_pkex, src, buf, len);
++ 	if (!msg) {
++ 		wpa_printf(MSG_DEBUG, "DPP: Failed to process the response");
++@@ -2172,26 +2337,14 @@ int hostapd_dpp_pkex_add(struct hostapd_data *hapd, const char *cmd)
++ 		return -1;
++ 
++ 	if (os_strstr(cmd, " init=1") || os_strstr(cmd, " init=2")) {
++-		struct wpabuf *msg;
+++#ifdef CONFIG_DPP3
+++		bool v2 = true;
+++#else /* CONFIG_DPP3 */
++ 		bool v2 = os_strstr(cmd, " init=2") != NULL;
+++#endif /* CONFIG_DPP3 */
++ 
++-		wpa_printf(MSG_DEBUG, "DPP: Initiating PKEX");
++-		dpp_pkex_free(hapd->dpp_pkex);
++-		hapd->dpp_pkex = dpp_pkex_init(hapd->msg_ctx, own_bi,
++-					       hapd->own_addr,
++-					       hapd->dpp_pkex_identifier,
++-					       hapd->dpp_pkex_code, v2);
++-		if (!hapd->dpp_pkex)
+++		if (hostapd_dpp_pkex_init(hapd, v2) < 0)
++ 			return -1;
++-
++-		msg = hapd->dpp_pkex->exchange_req;
++-		/* TODO: Which channel to use? */
++-		wpa_msg(hapd->msg_ctx, MSG_INFO, DPP_EVENT_TX "dst=" MACSTR
++-			" freq=%u type=%d", MAC2STR(broadcast), 2437,
++-			v2 ? DPP_PA_PKEX_EXCHANGE_REQ :
++-			DPP_PA_PKEX_V1_EXCHANGE_REQ);
++-		hostapd_drv_send_action(hapd, 2437, 0, broadcast,
++-					wpabuf_head(msg), wpabuf_len(msg));
++ 	}
++ 
++ 	/* TODO: Support multiple PKEX info entries */
++@@ -2319,6 +2472,7 @@ void hostapd_dpp_deinit(struct hostapd_data *hapd)
++ #endif /* CONFIG_TESTING_OPTIONS */
++ 	if (!hapd->dpp_init_done)
++ 		return;
+++	eloop_cancel_timeout(hostapd_dpp_pkex_retry_timeout, hapd, NULL);
++ 	eloop_cancel_timeout(hostapd_dpp_reply_wait_timeout, hapd, NULL);
++ 	eloop_cancel_timeout(hostapd_dpp_auth_conf_wait_timeout, hapd, NULL);
++ 	eloop_cancel_timeout(hostapd_dpp_init_timeout, hapd, NULL);
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-02.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-02.patch
+new file mode 100644
+index 0000000000..f4f84fc624
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-02.patch
+@@ -0,0 +1,111 @@
++From bdcccbc2755dd1a75731496782e02b5435fb9534 Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <quic_jouni@quicinc.com>
++Date: Tue, 25 Jan 2022 20:06:49 +0200
++Subject: [PATCH] DPP: Change PKEX version configuration design
++
++Use a separate ver=<1|2> parameter to DPP_PKEX_ADD instead of
++overloading init=1 with version indication. This allows additional
++options for forcing v1-only and v2-only in addition to automatic mode
++(start with v2 and fall back to v1, if needed).
++
++Signed-off-by: Jouni Malinen <quic_jouni@quicinc.com>
++
++CVE: CVE-2022-37660
++Upstream-Status: Backport [https://git.w1.fi/cgit/hostap/commit/?id=bdcccbc2755dd1a75731496782e02b5435fb9534]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/ap/dpp_hostapd.c | 37 ++++++++++++++++++++++++++++++-------
++ src/common/dpp.h     |  1 +
++ 2 files changed, 31 insertions(+), 7 deletions(-)
++
++diff --git a/src/ap/dpp_hostapd.c b/src/ap/dpp_hostapd.c
++index 6c30ba302..fdfdcf9ae 100644
++--- a/src/ap/dpp_hostapd.c
+++++ b/src/ap/dpp_hostapd.c
++@@ -272,11 +272,19 @@ static int hostapd_dpp_pkex_next_channel(struct hostapd_data *hapd,
++ }
++ 
++ 
++-static int hostapd_dpp_pkex_init(struct hostapd_data *hapd, bool v2)
+++enum hostapd_dpp_pkex_ver {
+++	PKEX_VER_AUTO,
+++	PKEX_VER_ONLY_1,
+++	PKEX_VER_ONLY_2,
+++};
+++
+++static int hostapd_dpp_pkex_init(struct hostapd_data *hapd,
+++				 enum hostapd_dpp_pkex_ver ver)
++ {
++ 	struct dpp_pkex *pkex;
++ 	struct wpabuf *msg;
++ 	unsigned int wait_time;
+++	bool v2 = ver != PKEX_VER_ONLY_1;
++ 
++ 	wpa_printf(MSG_DEBUG, "DPP: Initiating PKEXv%d", v2 ? 2 : 1);
++ 	dpp_pkex_free(hapd->dpp_pkex);
++@@ -287,6 +295,7 @@ static int hostapd_dpp_pkex_init(struct hostapd_data *hapd, bool v2)
++ 	pkex = hapd->dpp_pkex;
++ 	if (!pkex)
++ 		return -1;
+++	pkex->forced_ver = ver != PKEX_VER_AUTO;
++ 
++ 	msg = hapd->dpp_pkex->exchange_req;
++ 	wait_time = 2000; /* TODO: hapd->max_remain_on_chan; */
++@@ -314,10 +323,10 @@ static void hostapd_dpp_pkex_retry_timeout(void *eloop_ctx, void *timeout_ctx)
++ 	if (pkex->exch_req_tries >= 5) {
++ 		if (hostapd_dpp_pkex_next_channel(hapd, pkex) < 0) {
++ #ifdef CONFIG_DPP3
++-			if (pkex->v2) {
+++			if (pkex->v2 && !pkex->forced_ver) {
++ 				wpa_printf(MSG_DEBUG,
++ 					   "DPP: Fall back to PKEXv1");
++-				hostapd_dpp_pkex_init(hapd, false);
+++				hostapd_dpp_pkex_init(hapd, PKEX_VER_ONLY_1);
++ 				return;
++ 			}
++ #endif /* CONFIG_DPP3 */
++@@ -2336,14 +2345,28 @@ int hostapd_dpp_pkex_add(struct hostapd_data *hapd, const char *cmd)
++ 	if (!hapd->dpp_pkex_code)
++ 		return -1;
++ 
++-	if (os_strstr(cmd, " init=1") || os_strstr(cmd, " init=2")) {
+++	if (os_strstr(cmd, " init=1")) {
++ #ifdef CONFIG_DPP3
++-		bool v2 = true;
+++		enum hostapd_dpp_pkex_ver ver = PKEX_VER_AUTO;
++ #else /* CONFIG_DPP3 */
++-		bool v2 = os_strstr(cmd, " init=2") != NULL;
+++		enum hostapd_dpp_pkex_ver ver = PKEX_VER_ONLY_1;
++ #endif /* CONFIG_DPP3 */
++ 
++-		if (hostapd_dpp_pkex_init(hapd, v2) < 0)
+++		pos = os_strstr(cmd, " ver=");
+++		if (pos) {
+++			int v;
+++
+++			pos += 5;
+++			v = atoi(pos);
+++			if (v == 1)
+++				ver = PKEX_VER_ONLY_1;
+++			else if (v == 2)
+++				ver = PKEX_VER_ONLY_2;
+++			else
+++				return -1;
+++		}
+++
+++		if (hostapd_dpp_pkex_init(hapd, ver) < 0)
++ 			return -1;
++ 	}
++ 
++diff --git a/src/common/dpp.h b/src/common/dpp.h
++index 8d62a0e2a..bfea44623 100644
++--- a/src/common/dpp.h
+++++ b/src/common/dpp.h
++@@ -177,6 +177,7 @@ struct dpp_pkex {
++ 	unsigned int exchange_done:1;
++ 	unsigned int failed:1;
++ 	unsigned int v2:1;
+++	unsigned int forced_ver:1;
++ 	struct dpp_bootstrap_info *own_bi;
++ 	u8 own_mac[ETH_ALEN];
++ 	u8 peer_mac[ETH_ALEN];
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-03.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-03.patch
+new file mode 100644
+index 0000000000..c5b576eed7
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-03.patch
+@@ -0,0 +1,762 @@
++From d7be749335f2585658cf98c4f0e7d6cd5ac06865 Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <jouni@qca.qualcomm.com>
++Date: Tue, 25 Jan 2022 00:35:36 +0200
++Subject: [PATCH] DPP3: PKEX over TCP
++
++Signed-off-by: Jouni Malinen <jouni@qca.qualcomm.com>
++
++CVE: CVE-2022-37660
++Upstream-Status: Backport [https://git.w1.fi/cgit/hostap/commit/?id=d7be749335f2585658cf98c4f0e7d6cd5ac06865]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/ap/dpp_hostapd.c  | 155 +++++++++++++++++++--
++ src/common/dpp.h      |  13 ++
++ src/common/dpp_pkex.c |  18 ++-
++ src/common/dpp_tcp.c  | 308 ++++++++++++++++++++++++++++++++++++++++--
++ 4 files changed, 466 insertions(+), 28 deletions(-)
++
++diff --git a/src/ap/dpp_hostapd.c b/src/ap/dpp_hostapd.c
++index fdfdcf9ae..d956be928 100644
++--- a/src/ap/dpp_hostapd.c
+++++ b/src/ap/dpp_hostapd.c
++@@ -28,12 +28,16 @@ static void hostapd_dpp_auth_conf_wait_timeout(void *eloop_ctx,
++ static void hostapd_dpp_auth_success(struct hostapd_data *hapd, int initiator);
++ static void hostapd_dpp_init_timeout(void *eloop_ctx, void *timeout_ctx);
++ static int hostapd_dpp_auth_init_next(struct hostapd_data *hapd);
+++static void hostapd_dpp_set_testing_options(struct hostapd_data *hapd,
+++					    struct dpp_authentication *auth);
++ #ifdef CONFIG_DPP2
++ static void hostapd_dpp_reconfig_reply_wait_timeout(void *eloop_ctx,
++ 						    void *timeout_ctx);
++ static void hostapd_dpp_handle_config_obj(struct hostapd_data *hapd,
++ 					  struct dpp_authentication *auth,
++ 					  struct dpp_config_obj *conf);
+++static int hostapd_dpp_process_conf_obj(void *ctx,
+++					struct dpp_authentication *auth);
++ #endif /* CONFIG_DPP2 */
++ 
++ static const u8 broadcast[ETH_ALEN] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
++@@ -272,6 +276,75 @@ static int hostapd_dpp_pkex_next_channel(struct hostapd_data *hapd,
++ }
++ 
++ 
+++#ifdef CONFIG_DPP2
+++static int hostapd_dpp_pkex_done(void *ctx, void *conn,
+++				 struct dpp_bootstrap_info *peer_bi)
+++{
+++	struct hostapd_data *hapd = ctx;
+++	const char *cmd = hapd->dpp_pkex_auth_cmd;
+++	const char *pos;
+++	u8 allowed_roles = DPP_CAPAB_CONFIGURATOR;
+++	struct dpp_bootstrap_info *own_bi = NULL;
+++	struct dpp_authentication *auth;
+++
+++	if (!cmd)
+++		cmd = "";
+++	wpa_printf(MSG_DEBUG, "DPP: Start authentication after PKEX (cmd: %s)",
+++		   cmd);
+++
+++	pos = os_strstr(cmd, " own=");
+++	if (pos) {
+++		pos += 5;
+++		own_bi = dpp_bootstrap_get_id(hapd->iface->interfaces->dpp,
+++					      atoi(pos));
+++		if (!own_bi) {
+++			wpa_printf(MSG_INFO,
+++				   "DPP: Could not find bootstrapping info for the identified local entry");
+++			return -1;
+++		}
+++
+++		if (peer_bi->curve != own_bi->curve) {
+++			wpa_printf(MSG_INFO,
+++				   "DPP: Mismatching curves in bootstrapping info (peer=%s own=%s)",
+++				   peer_bi->curve->name, own_bi->curve->name);
+++			return -1;
+++		}
+++	}
+++
+++	pos = os_strstr(cmd, " role=");
+++	if (pos) {
+++		pos += 6;
+++		if (os_strncmp(pos, "configurator", 12) == 0)
+++			allowed_roles = DPP_CAPAB_CONFIGURATOR;
+++		else if (os_strncmp(pos, "enrollee", 8) == 0)
+++			allowed_roles = DPP_CAPAB_ENROLLEE;
+++		else if (os_strncmp(pos, "either", 6) == 0)
+++			allowed_roles = DPP_CAPAB_CONFIGURATOR |
+++				DPP_CAPAB_ENROLLEE;
+++		else
+++			return -1;
+++	}
+++
+++	auth = dpp_auth_init(hapd->iface->interfaces->dpp, hapd->msg_ctx,
+++			     peer_bi, own_bi, allowed_roles, 0,
+++			     hapd->iface->hw_features,
+++			     hapd->iface->num_hw_features);
+++	if (!auth)
+++		return -1;
+++
+++	hostapd_dpp_set_testing_options(hapd, auth);
+++	if (dpp_set_configurator(auth, cmd) < 0) {
+++		dpp_auth_deinit(auth);
+++		return -1;
+++	}
+++
+++	return dpp_tcp_auth(hapd->iface->interfaces->dpp, conn, auth,
+++			    hapd->conf->dpp_name, DPP_NETROLE_AP,
+++			    hostapd_dpp_process_conf_obj);
+++}
+++#endif /* CONFIG_DPP2 */
+++
+++
++ enum hostapd_dpp_pkex_ver {
++ 	PKEX_VER_AUTO,
++ 	PKEX_VER_ONLY_1,
++@@ -279,7 +352,9 @@ enum hostapd_dpp_pkex_ver {
++ };
++ 
++ static int hostapd_dpp_pkex_init(struct hostapd_data *hapd,
++-				 enum hostapd_dpp_pkex_ver ver)
+++				 enum hostapd_dpp_pkex_ver ver,
+++				 const struct hostapd_ip_addr *ipaddr,
+++				 int tcp_port)
++ {
++ 	struct dpp_pkex *pkex;
++ 	struct wpabuf *msg;
++@@ -288,15 +363,26 @@ static int hostapd_dpp_pkex_init(struct hostapd_data *hapd,
++ 
++ 	wpa_printf(MSG_DEBUG, "DPP: Initiating PKEXv%d", v2 ? 2 : 1);
++ 	dpp_pkex_free(hapd->dpp_pkex);
++-	hapd->dpp_pkex = dpp_pkex_init(hapd->msg_ctx, hapd->dpp_pkex_bi,
++-				       hapd->own_addr,
++-				       hapd->dpp_pkex_identifier,
++-				       hapd->dpp_pkex_code, v2);
++-	pkex = hapd->dpp_pkex;
+++	hapd->dpp_pkex = NULL;
+++	pkex = dpp_pkex_init(hapd->msg_ctx, hapd->dpp_pkex_bi, hapd->own_addr,
+++			     hapd->dpp_pkex_identifier,
+++			     hapd->dpp_pkex_code, v2);
++ 	if (!pkex)
++ 		return -1;
++ 	pkex->forced_ver = ver != PKEX_VER_AUTO;
++ 
+++	if (ipaddr) {
+++#ifdef CONFIG_DPP2
+++		return dpp_tcp_pkex_init(hapd->iface->interfaces->dpp, pkex,
+++					 ipaddr, tcp_port,
+++					 hapd->msg_ctx, hapd,
+++					 hostapd_dpp_pkex_done);
+++#else /* CONFIG_DPP2 */
+++		return -1;
+++#endif /* CONFIG_DPP2 */
+++	}
+++
+++	hapd->dpp_pkex = pkex;
++ 	msg = hapd->dpp_pkex->exchange_req;
++ 	wait_time = 2000; /* TODO: hapd->max_remain_on_chan; */
++ 	pkex->freq = 2437;
++@@ -326,7 +412,8 @@ static void hostapd_dpp_pkex_retry_timeout(void *eloop_ctx, void *timeout_ctx)
++ 			if (pkex->v2 && !pkex->forced_ver) {
++ 				wpa_printf(MSG_DEBUG,
++ 					   "DPP: Fall back to PKEXv1");
++-				hostapd_dpp_pkex_init(hapd, PKEX_VER_ONLY_1);
+++				hostapd_dpp_pkex_init(hapd, PKEX_VER_ONLY_1,
+++						      NULL, 0);
++ 				return;
++ 			}
++ #endif /* CONFIG_DPP3 */
++@@ -1883,7 +1970,7 @@ static void hostapd_dpp_rx_peer_disc_req(struct hostapd_data *hapd,
++ 
++ static void
++ hostapd_dpp_rx_pkex_exchange_req(struct hostapd_data *hapd, const u8 *src,
++-				 const u8 *buf, size_t len,
+++				 const u8 *hdr, const u8 *buf, size_t len,
++ 				 unsigned int freq, bool v2)
++ {
++ 	struct wpabuf *msg;
++@@ -1897,14 +1984,14 @@ hostapd_dpp_rx_pkex_exchange_req(struct hostapd_data *hapd, const u8 *src,
++ 	if (!hapd->dpp_pkex_code || !hapd->dpp_pkex_bi) {
++ 		wpa_printf(MSG_DEBUG,
++ 			   "DPP: No PKEX code configured - ignore request");
++-		return;
+++		goto try_relay;
++ 	}
++ 
++ 	if (hapd->dpp_pkex) {
++ 		/* TODO: Support parallel operations */
++ 		wpa_printf(MSG_DEBUG,
++ 			   "DPP: Already in PKEX session - ignore new request");
++-		return;
+++		goto try_relay;
++ 	}
++ 
++ 	hapd->dpp_pkex = dpp_pkex_rx_exchange_req(hapd->msg_ctx,
++@@ -1916,7 +2003,7 @@ hostapd_dpp_rx_pkex_exchange_req(struct hostapd_data *hapd, const u8 *src,
++ 	if (!hapd->dpp_pkex) {
++ 		wpa_printf(MSG_DEBUG,
++ 			   "DPP: Failed to process the request - ignore it");
++-		return;
+++		goto try_relay;
++ 	}
++ 
++ 	msg = hapd->dpp_pkex->exchange_resp;
++@@ -1933,6 +2020,17 @@ hostapd_dpp_rx_pkex_exchange_req(struct hostapd_data *hapd, const u8 *src,
++ 		dpp_pkex_free(hapd->dpp_pkex);
++ 		hapd->dpp_pkex = NULL;
++ 	}
+++
+++	return;
+++
+++try_relay:
+++#ifdef CONFIG_DPP2
+++	if (v2)
+++		dpp_relay_rx_action(hapd->iface->interfaces->dpp,
+++				    src, hdr, buf, len, freq, NULL, NULL, hapd);
+++#else /* CONFIG_DPP2 */
+++	wpa_printf(MSG_DEBUG, "DPP: No relay functionality included - skip");
+++#endif /* CONFIG_DPP2 */
++ }
++ 
++ 
++@@ -2132,12 +2230,12 @@ void hostapd_dpp_rx_action(struct hostapd_data *hapd, const u8 *src,
++ 		/* This is for PKEXv2, but for now, process only with
++ 		 * CONFIG_DPP3 to avoid issues with a capability that has not
++ 		 * been tested with other implementations. */
++-		hostapd_dpp_rx_pkex_exchange_req(hapd, src, buf, len, freq,
+++		hostapd_dpp_rx_pkex_exchange_req(hapd, src, hdr, buf, len, freq,
++ 						 true);
++ 		break;
++ #endif /* CONFIG_DPP3 */
++ 	case DPP_PA_PKEX_V1_EXCHANGE_REQ:
++-		hostapd_dpp_rx_pkex_exchange_req(hapd, src, buf, len, freq,
+++		hostapd_dpp_rx_pkex_exchange_req(hapd, src, hdr, buf, len, freq,
++ 						 false);
++ 		break;
++ 	case DPP_PA_PKEX_EXCHANGE_RESP:
++@@ -2303,6 +2401,29 @@ int hostapd_dpp_pkex_add(struct hostapd_data *hapd, const char *cmd)
++ {
++ 	struct dpp_bootstrap_info *own_bi;
++ 	const char *pos, *end;
+++	int tcp_port = DPP_TCP_PORT;
+++	struct hostapd_ip_addr *ipaddr = NULL;
+++#ifdef CONFIG_DPP2
+++	struct hostapd_ip_addr ipaddr_buf;
+++	char *addr;
+++
+++	pos = os_strstr(cmd, " tcp_port=");
+++	if (pos) {
+++		pos += 10;
+++		tcp_port = atoi(pos);
+++	}
+++
+++	addr = get_param(cmd, " tcp_addr=");
+++	if (addr) {
+++		int res;
+++
+++		res = hostapd_parse_ip_addr(addr, &ipaddr_buf);
+++		os_free(addr);
+++		if (res)
+++			return -1;
+++		ipaddr = &ipaddr_buf;
+++	}
+++#endif /* CONFIG_DPP2 */
++ 
++ 	pos = os_strstr(cmd, " own=");
++ 	if (!pos)
++@@ -2366,8 +2487,14 @@ int hostapd_dpp_pkex_add(struct hostapd_data *hapd, const char *cmd)
++ 				return -1;
++ 		}
++ 
++-		if (hostapd_dpp_pkex_init(hapd, ver) < 0)
+++		if (hostapd_dpp_pkex_init(hapd, ver, ipaddr, tcp_port) < 0)
++ 			return -1;
+++	} else {
+++#ifdef CONFIG_DPP2
+++		dpp_controller_pkex_add(hapd->iface->interfaces->dpp, own_bi,
+++					hapd->dpp_pkex_code,
+++					hapd->dpp_pkex_identifier);
+++#endif /* CONFIG_DPP2 */
++ 	}
++ 
++ 	/* TODO: Support multiple PKEX info entries */
++diff --git a/src/common/dpp.h b/src/common/dpp.h
++index bfea44623..ca33fe35c 100644
++--- a/src/common/dpp.h
+++++ b/src/common/dpp.h
++@@ -550,6 +550,9 @@ int dpp_auth_conf_rx(struct dpp_authentication *auth, const u8 *hdr,
++ 		     const u8 *attr_start, size_t attr_len);
++ int dpp_notify_new_qr_code(struct dpp_authentication *auth,
++ 			   struct dpp_bootstrap_info *peer_bi);
+++void dpp_controller_pkex_add(struct dpp_global *dpp,
+++			     struct dpp_bootstrap_info *bi,
+++			     const char *code, const char *identifier);
++ struct dpp_configuration * dpp_configuration_alloc(const char *type);
++ int dpp_akm_psk(enum dpp_akm akm);
++ int dpp_akm_sae(enum dpp_akm akm);
++@@ -688,12 +691,22 @@ struct dpp_authentication * dpp_controller_get_auth(struct dpp_global *dpp,
++ 						    unsigned int id);
++ void dpp_controller_new_qr_code(struct dpp_global *dpp,
++ 				struct dpp_bootstrap_info *bi);
+++int dpp_tcp_pkex_init(struct dpp_global *dpp, struct dpp_pkex *pkex,
+++		      const struct hostapd_ip_addr *addr, int port,
+++		      void *msg_ctx, void *cb_ctx,
+++		      int (*pkex_done)(void *ctx, void *conn,
+++				       struct dpp_bootstrap_info *bi));
++ int dpp_tcp_init(struct dpp_global *dpp, struct dpp_authentication *auth,
++ 		 const struct hostapd_ip_addr *addr, int port,
++ 		 const char *name, enum dpp_netrole netrole, void *msg_ctx,
++ 		 void *cb_ctx,
++ 		 int (*process_conf_obj)(void *ctx,
++ 					 struct dpp_authentication *auth));
+++int dpp_tcp_auth(struct dpp_global *dpp, void *_conn,
+++		 struct dpp_authentication *auth, const char *name,
+++		 enum dpp_netrole netrole,
+++		 int (*process_conf_obj)(void *ctx,
+++					 struct dpp_authentication *auth));
++ 
++ struct wpabuf * dpp_build_presence_announcement(struct dpp_bootstrap_info *bi);
++ void dpp_notify_chirp_received(void *msg_ctx, int id, const u8 *src,
++diff --git a/src/common/dpp_pkex.c b/src/common/dpp_pkex.c
++index 38349fa3f..72084d9fb 100644
++--- a/src/common/dpp_pkex.c
+++++ b/src/common/dpp_pkex.c
++@@ -469,8 +469,10 @@ struct dpp_pkex * dpp_pkex_rx_exchange_req(void *msg_ctx,
++ 	pkex->t = bi->pkex_t;
++ 	pkex->msg_ctx = msg_ctx;
++ 	pkex->own_bi = bi;
++-	os_memcpy(pkex->own_mac, own_mac, ETH_ALEN);
++-	os_memcpy(pkex->peer_mac, peer_mac, ETH_ALEN);
+++	if (own_mac)
+++		os_memcpy(pkex->own_mac, own_mac, ETH_ALEN);
+++	if (peer_mac)
+++		os_memcpy(pkex->peer_mac, peer_mac, ETH_ALEN);
++ 	if (identifier) {
++ 		pkex->identifier = os_strdup(identifier);
++ 		if (!pkex->identifier)
++@@ -742,7 +744,8 @@ struct wpabuf * dpp_pkex_rx_exchange_resp(struct dpp_pkex *pkex,
++ 	}
++ #endif /* CONFIG_DPP2 */
++ 
++-	os_memcpy(pkex->peer_mac, peer_mac, ETH_ALEN);
+++	if (peer_mac)
+++		os_memcpy(pkex->peer_mac, peer_mac, ETH_ALEN);
++ 
++ 	attr_status = dpp_get_attr(buf, buflen, DPP_ATTR_STATUS,
++ 				   &attr_status_len);
++@@ -1341,9 +1344,12 @@ dpp_pkex_finish(struct dpp_global *dpp, struct dpp_pkex *pkex, const u8 *peer,
++ 		return NULL;
++ 	bi->id = dpp_next_id(dpp);
++ 	bi->type = DPP_BOOTSTRAP_PKEX;
++-	os_memcpy(bi->mac_addr, peer, ETH_ALEN);
++-	bi->num_freq = 1;
++-	bi->freq[0] = freq;
+++	if (peer)
+++		os_memcpy(bi->mac_addr, peer, ETH_ALEN);
+++	if (freq) {
+++		bi->num_freq = 1;
+++		bi->freq[0] = freq;
+++	}
++ 	bi->curve = pkex->own_bi->curve;
++ 	bi->pubkey = pkex->peer_bootstrap_key;
++ 	pkex->peer_bootstrap_key = NULL;
++diff --git a/src/common/dpp_tcp.c b/src/common/dpp_tcp.c
++index fb8ef1c5b..1a8a7c7d5 100644
++--- a/src/common/dpp_tcp.c
+++++ b/src/common/dpp_tcp.c
++@@ -24,10 +24,12 @@ struct dpp_connection {
++ 	struct dpp_controller *ctrl;
++ 	struct dpp_relay_controller *relay;
++ 	struct dpp_global *global;
+++	struct dpp_pkex *pkex;
++ 	struct dpp_authentication *auth;
++ 	void *msg_ctx;
++ 	void *cb_ctx;
++ 	int (*process_conf_obj)(void *ctx, struct dpp_authentication *auth);
+++	int (*pkex_done)(void *ctx, void *conn, struct dpp_bootstrap_info *bi);
++ 	int sock;
++ 	u8 mac_addr[ETH_ALEN];
++ 	unsigned int freq;
++@@ -71,6 +73,9 @@ struct dpp_controller {
++ 	struct dl_list conn; /* struct dpp_connection */
++ 	char *configurator_params;
++ 	enum dpp_netrole netrole;
+++	struct dpp_bootstrap_info *pkex_bi;
+++	char *pkex_code;
+++	char *pkex_identifier;
++ 	void *msg_ctx;
++ 	void *cb_ctx;
++ 	int (*process_conf_obj)(void *ctx, struct dpp_authentication *auth);
++@@ -102,6 +107,7 @@ static void dpp_connection_free(struct dpp_connection *conn)
++ 	wpabuf_free(conn->msg);
++ 	wpabuf_free(conn->msg_out);
++ 	dpp_auth_deinit(conn->auth);
+++	dpp_pkex_free(conn->pkex);
++ 	os_free(conn->name);
++ 	os_free(conn);
++ }
++@@ -525,6 +531,8 @@ int dpp_relay_rx_action(struct dpp_global *dpp, const u8 *src, const u8 *hdr,
++ 		/* TODO: Could send this to all configured Controllers. For now,
++ 		 * only the first Controller is supported. */
++ 		ctrl = dpp_relay_controller_get_ctx(dpp, cb_ctx);
+++	} else if (type == DPP_PA_PKEX_EXCHANGE_REQ) {
+++		ctrl = dpp_relay_controller_get_ctx(dpp, cb_ctx);
++ 	} else {
++ 		if (!r_bootstrap)
++ 			return -1;
++@@ -609,6 +617,8 @@ static void dpp_controller_free(struct dpp_controller *ctrl)
++ 		eloop_unregister_sock(ctrl->sock, EVENT_TYPE_READ);
++ 	}
++ 	os_free(ctrl->configurator_params);
+++	os_free(ctrl->pkex_code);
+++	os_free(ctrl->pkex_identifier);
++ 	os_free(ctrl);
++ }
++ 
++@@ -955,6 +965,143 @@ static int dpp_controller_rx_reconfig_auth_resp(struct dpp_connection *conn,
++ }
++ 
++ 
+++static int dpp_controller_rx_pkex_exchange_req(struct dpp_connection *conn,
+++					       const u8 *hdr, const u8 *buf,
+++					       size_t len)
+++{
+++	struct dpp_controller *ctrl = conn->ctrl;
+++
+++	if (!ctrl)
+++		return 0;
+++
+++	wpa_printf(MSG_DEBUG, "DPP: PKEX Exchange Request");
+++
+++	/* TODO: Support multiple PKEX codes by iterating over all the enabled
+++	 * values here */
+++
+++	if (!ctrl->pkex_code || !ctrl->pkex_bi) {
+++		wpa_printf(MSG_DEBUG,
+++			   "DPP: No PKEX code configured - ignore request");
+++		return 0;
+++	}
+++
+++	if (conn->pkex || conn->auth) {
+++		wpa_printf(MSG_DEBUG,
+++			   "DPP: Already in PKEX/Authentication session - ignore new PKEX request");
+++		return 0;
+++	}
+++
+++	conn->pkex = dpp_pkex_rx_exchange_req(conn->ctrl->global, ctrl->pkex_bi,
+++					      NULL, NULL,
+++					      ctrl->pkex_identifier,
+++					      ctrl->pkex_code,
+++					      buf, len, true);
+++	if (!conn->pkex) {
+++		wpa_printf(MSG_DEBUG,
+++			   "DPP: Failed to process the request");
+++		return -1;
+++	}
+++
+++	return dpp_tcp_send_msg(conn, conn->pkex->exchange_resp);
+++}
+++
+++
+++static int dpp_controller_rx_pkex_exchange_resp(struct dpp_connection *conn,
+++						const u8 *hdr, const u8 *buf,
+++						size_t len)
+++{
+++	struct dpp_pkex *pkex = conn->pkex;
+++	struct wpabuf *msg;
+++	int res;
+++
+++	wpa_printf(MSG_DEBUG, "DPP: PKEX Exchange Response");
+++
+++	if (!pkex || !pkex->initiator || pkex->exchange_done) {
+++		wpa_printf(MSG_DEBUG, "DPP: No matching PKEX session");
+++		return 0;
+++	}
+++
+++	msg = dpp_pkex_rx_exchange_resp(pkex, NULL, buf, len);
+++	if (!msg) {
+++		wpa_printf(MSG_DEBUG, "DPP: Failed to process the response");
+++		return -1;
+++	}
+++
+++	wpa_printf(MSG_DEBUG, "DPP: Send PKEX Commit-Reveal Request");
+++	res = dpp_tcp_send_msg(conn, msg);
+++	wpabuf_free(msg);
+++	return res;
+++}
+++
+++
+++static int dpp_controller_rx_pkex_commit_reveal_req(struct dpp_connection *conn,
+++						    const u8 *hdr,
+++						    const u8 *buf, size_t len)
+++{
+++	struct dpp_pkex *pkex = conn->pkex;
+++	struct wpabuf *msg;
+++	int res;
+++	struct dpp_bootstrap_info *bi;
+++
+++	wpa_printf(MSG_DEBUG, "DPP: PKEX Commit-Reveal Request");
+++
+++	if (!pkex || pkex->initiator || !pkex->exchange_done) {
+++		wpa_printf(MSG_DEBUG, "DPP: No matching PKEX session");
+++		return 0;
+++	}
+++
+++	msg = dpp_pkex_rx_commit_reveal_req(pkex, hdr, buf, len);
+++	if (!msg) {
+++		wpa_printf(MSG_DEBUG, "DPP: Failed to process the request");
+++		return -1;
+++	}
+++
+++	wpa_printf(MSG_DEBUG, "DPP: Send PKEX Commit-Reveal Response");
+++	res = dpp_tcp_send_msg(conn, msg);
+++	wpabuf_free(msg);
+++	if (res < 0)
+++		return res;
+++	bi = dpp_pkex_finish(conn->global, pkex, NULL, 0);
+++	if (!bi)
+++		return -1;
+++	conn->pkex = NULL;
+++	return 0;
+++}
+++
+++
+++static int
+++dpp_controller_rx_pkex_commit_reveal_resp(struct dpp_connection *conn,
+++					  const u8 *hdr,
+++					  const u8 *buf, size_t len)
+++{
+++	struct dpp_pkex *pkex = conn->pkex;
+++	int res;
+++	struct dpp_bootstrap_info *bi;
+++
+++	wpa_printf(MSG_DEBUG, "DPP: PKEX Commit-Reveal Response");
+++
+++	if (!pkex || !pkex->initiator || !pkex->exchange_done) {
+++		wpa_printf(MSG_DEBUG, "DPP: No matching PKEX session");
+++		return 0;
+++	}
+++
+++	res = dpp_pkex_rx_commit_reveal_resp(pkex, hdr, buf, len);
+++	if (res < 0) {
+++		wpa_printf(MSG_DEBUG, "DPP: Failed to process the response");
+++		return res;
+++	}
+++
+++	bi = dpp_pkex_finish(conn->global, pkex, NULL, 0);
+++	if (!bi)
+++		return -1;
+++	conn->pkex = NULL;
+++
+++	if (!conn->pkex_done)
+++		return -1;
+++	return conn->pkex_done(conn->cb_ctx, conn, bi);
+++}
+++
+++
++ static int dpp_controller_rx_action(struct dpp_connection *conn, const u8 *msg,
++ 				    size_t len)
++ {
++@@ -1014,6 +1161,22 @@ static int dpp_controller_rx_action(struct dpp_connection *conn, const u8 *msg,
++ 	case DPP_PA_RECONFIG_AUTH_RESP:
++ 		return dpp_controller_rx_reconfig_auth_resp(conn, msg, pos,
++ 							    end - pos);
+++	case DPP_PA_PKEX_V1_EXCHANGE_REQ:
+++		wpa_printf(MSG_DEBUG,
+++			   "DPP: Ignore PKEXv1 Exchange Request - not supported over TCP");
+++		return -1;
+++	case DPP_PA_PKEX_EXCHANGE_REQ:
+++		return dpp_controller_rx_pkex_exchange_req(conn, msg, pos,
+++							   end - pos);
+++	case DPP_PA_PKEX_EXCHANGE_RESP:
+++		return dpp_controller_rx_pkex_exchange_resp(conn, msg, pos,
+++							    end - pos);
+++	case DPP_PA_PKEX_COMMIT_REVEAL_REQ:
+++		return dpp_controller_rx_pkex_commit_reveal_req(conn, msg, pos,
+++								end - pos);
+++	case DPP_PA_PKEX_COMMIT_REVEAL_RESP:
+++		return dpp_controller_rx_pkex_commit_reveal_resp(conn, msg, pos,
+++								 end - pos);
++ 	default:
++ 		/* TODO: missing messages types */
++ 		wpa_printf(MSG_DEBUG,
++@@ -1559,6 +1722,101 @@ fail:
++ }
++ 
++ 
+++int dpp_tcp_pkex_init(struct dpp_global *dpp, struct dpp_pkex *pkex,
+++		      const struct hostapd_ip_addr *addr, int port,
+++		      void *msg_ctx, void *cb_ctx,
+++		      int (*pkex_done)(void *ctx, void *conn,
+++				       struct dpp_bootstrap_info *bi))
+++{
+++	struct dpp_connection *conn;
+++	struct sockaddr_storage saddr;
+++	socklen_t addrlen;
+++	const u8 *hdr, *pos, *end;
+++	char txt[100];
+++
+++	wpa_printf(MSG_DEBUG, "DPP: Initialize TCP connection to %s port %d",
+++		   hostapd_ip_txt(addr, txt, sizeof(txt)), port);
+++	if (dpp_ipaddr_to_sockaddr((struct sockaddr *) &saddr, &addrlen,
+++				   addr, port) < 0) {
+++		dpp_pkex_free(pkex);
+++		return -1;
+++	}
+++
+++	conn = os_zalloc(sizeof(*conn));
+++	if (!conn) {
+++		dpp_pkex_free(pkex);
+++		return -1;
+++	}
+++
+++	conn->msg_ctx = msg_ctx;
+++	conn->cb_ctx = cb_ctx;
+++	conn->pkex_done = pkex_done;
+++	conn->global = dpp;
+++	conn->pkex = pkex;
+++	conn->sock = socket(AF_INET, SOCK_STREAM, 0);
+++	if (conn->sock < 0)
+++		goto fail;
+++
+++	if (fcntl(conn->sock, F_SETFL, O_NONBLOCK) != 0) {
+++		wpa_printf(MSG_DEBUG, "DPP: fnctl(O_NONBLOCK) failed: %s",
+++			   strerror(errno));
+++		goto fail;
+++	}
+++
+++	if (connect(conn->sock, (struct sockaddr *) &saddr, addrlen) < 0) {
+++		if (errno != EINPROGRESS) {
+++			wpa_printf(MSG_DEBUG, "DPP: Failed to connect: %s",
+++				   strerror(errno));
+++			goto fail;
+++		}
+++
+++		/*
+++		 * Continue connecting in the background; eloop will call us
+++		 * once the connection is ready (or failed).
+++		 */
+++	}
+++
+++	if (eloop_register_sock(conn->sock, EVENT_TYPE_WRITE,
+++				dpp_conn_tx_ready, conn, NULL) < 0)
+++		goto fail;
+++	conn->write_eloop = 1;
+++
+++	hdr = wpabuf_head(pkex->exchange_req);
+++	end = hdr + wpabuf_len(pkex->exchange_req);
+++	hdr += 2; /* skip Category and Actiom */
+++	pos = hdr + DPP_HDR_LEN;
+++	conn->msg_out = dpp_tcp_encaps(hdr, pos, end - pos);
+++	if (!conn->msg_out)
+++		goto fail;
+++	/* Message will be sent in dpp_conn_tx_ready() */
+++
+++	/* TODO: eloop timeout to clear a connection if it does not complete
+++	 * properly */
+++	dl_list_add(&dpp->tcp_init, &conn->list);
+++	return 0;
+++fail:
+++	dpp_connection_free(conn);
+++	return -1;
+++}
+++
+++
+++static int dpp_tcp_auth_start(struct dpp_connection *conn,
+++			      struct dpp_authentication *auth)
+++{
+++	const u8 *hdr, *pos, *end;
+++
+++	hdr = wpabuf_head(auth->req_msg);
+++	end = hdr + wpabuf_len(auth->req_msg);
+++	hdr += 2; /* skip Category and Actiom */
+++	pos = hdr + DPP_HDR_LEN;
+++	conn->msg_out = dpp_tcp_encaps(hdr, pos, end - pos);
+++	if (!conn->msg_out)
+++		return -1;
+++	/* Message will be sent in dpp_conn_tx_ready() */
+++	return 0;
+++}
+++
+++
++ int dpp_tcp_init(struct dpp_global *dpp, struct dpp_authentication *auth,
++ 		 const struct hostapd_ip_addr *addr, int port, const char *name,
++ 		 enum dpp_netrole netrole, void *msg_ctx, void *cb_ctx,
++@@ -1568,7 +1826,6 @@ int dpp_tcp_init(struct dpp_global *dpp, struct dpp_authentication *auth,
++ 	struct dpp_connection *conn;
++ 	struct sockaddr_storage saddr;
++ 	socklen_t addrlen;
++-	const u8 *hdr, *pos, *end;
++ 	char txt[100];
++ 
++ 	wpa_printf(MSG_DEBUG, "DPP: Initialize TCP connection to %s port %d",
++@@ -1620,14 +1877,8 @@ int dpp_tcp_init(struct dpp_global *dpp, struct dpp_authentication *auth,
++ 		goto fail;
++ 	conn->write_eloop = 1;
++ 
++-	hdr = wpabuf_head(auth->req_msg);
++-	end = hdr + wpabuf_len(auth->req_msg);
++-	hdr += 2; /* skip Category and Actiom */
++-	pos = hdr + DPP_HDR_LEN;
++-	conn->msg_out = dpp_tcp_encaps(hdr, pos, end - pos);
++-	if (!conn->msg_out)
+++	if (dpp_tcp_auth_start(conn, auth) < 0)
++ 		goto fail;
++-	/* Message will be sent in dpp_conn_tx_ready() */
++ 
++ 	/* TODO: eloop timeout to clear a connection if it does not complete
++ 	 * properly */
++@@ -1639,6 +1890,30 @@ fail:
++ }
++ 
++ 
+++int dpp_tcp_auth(struct dpp_global *dpp, void *_conn,
+++		 struct dpp_authentication *auth, const char *name,
+++		 enum dpp_netrole netrole,
+++		 int (*process_conf_obj)(void *ctx,
+++					 struct dpp_authentication *auth))
+++{
+++	struct dpp_connection *conn = _conn;
+++
+++	/* Continue with Authentication exchange on an existing TCP connection.
+++	 */
+++	conn->process_conf_obj = process_conf_obj;
+++	os_free(conn->name);
+++	conn->name = os_strdup(name ? name : "Test");
+++	conn->netrole = netrole;
+++	conn->auth = auth;
+++
+++	if (dpp_tcp_auth_start(conn, auth) < 0)
+++		return -1;
+++
+++	dpp_conn_tx_ready(conn->sock, conn, NULL);
+++	return 0;
+++}
+++
+++
++ int dpp_controller_start(struct dpp_global *dpp,
++ 			 struct dpp_controller_config *config)
++ {
++@@ -1789,6 +2064,23 @@ void dpp_controller_new_qr_code(struct dpp_global *dpp,
++ }
++ 
++ 
+++void dpp_controller_pkex_add(struct dpp_global *dpp,
+++			     struct dpp_bootstrap_info *bi,
+++			     const char *code, const char *identifier)
+++{
+++	struct dpp_controller *ctrl = dpp->controller;
+++
+++	if (!ctrl)
+++		return;
+++
+++	ctrl->pkex_bi = bi;
+++	os_free(ctrl->pkex_code);
+++	ctrl->pkex_code = code ? os_strdup(code) : NULL;
+++	os_free(ctrl->pkex_identifier);
+++	ctrl->pkex_identifier = identifier ? os_strdup(identifier) : NULL;
+++}
+++
+++
++ void dpp_tcp_init_flush(struct dpp_global *dpp)
++ {
++ 	struct dpp_connection *conn, *tmp;
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-04.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-04.patch
+new file mode 100644
+index 0000000000..4c2e02173b
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd/CVE-2022-37660-04.patch
+@@ -0,0 +1,85 @@
++From 15af83cf1846870873a011ed4d714732f01cd2e4 Mon Sep 17 00:00:00 2001
++From: Jouni Malinen <quic_jouni@quicinc.com>
++Date: Tue, 19 Jul 2022 21:23:04 +0300
++Subject: [PATCH] DPP: Delete PKEX code and identifier on success completion of
++ PKEX
++
++We are not supposed to reuse these without being explicitly requested to
++perform PKEX again. There is not a strong use case for being able to
++provision an Enrollee multiple times with PKEX, so this should have no
++issues on the Enrollee. For a Configurator, there might be some use
++cases that would benefit from being able to use the same code with
++multiple Enrollee devices, e.g., for guess access with a laptop and a
++smart phone. That case will now require a new DPP_PKEX_ADD command on
++the Configurator after each completion of the provisioning exchange.
++
++Signed-off-by: Jouni Malinen <quic_jouni@quicinc.com>
++
++CVE: CVE-2022-37660
++Upstream-Status: Backport [https://git.w1.fi/cgit/hostap/commit/?id=15af83cf1846870873a011ed4d714732f01cd2e4]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/ap/dpp_hostapd.c | 22 +++++++++++++++++++++-
++ 1 file changed, 21 insertions(+), 1 deletion(-)
++
++diff --git a/src/ap/dpp_hostapd.c b/src/ap/dpp_hostapd.c
++index b6b81dd52..d85a38df8 100644
++--- a/src/ap/dpp_hostapd.c
+++++ b/src/ap/dpp_hostapd.c
++@@ -276,6 +276,22 @@ static int hostapd_dpp_pkex_next_channel(struct hostapd_data *hapd,
++ }
++ 
++ 
+++static void hostapd_dpp_pkex_clear_code(struct hostapd_data *hapd)
+++{
+++	if (!hapd->dpp_pkex_code && !hapd->dpp_pkex_identifier)
+++		return;
+++
+++	/* Delete PKEX code and identifier on successful completion of
+++	 * PKEX. We are not supposed to reuse these without being
+++	 * explicitly requested to perform PKEX again. */
+++	wpa_printf(MSG_DEBUG, "DPP: Delete PKEX code/identifier");
+++	os_free(hapd->dpp_pkex_code);
+++	hapd->dpp_pkex_code = NULL;
+++	os_free(hapd->dpp_pkex_identifier);
+++	hapd->dpp_pkex_identifier = NULL;
+++}
+++
+++
++ #ifdef CONFIG_DPP2
++ static int hostapd_dpp_pkex_done(void *ctx, void *conn,
++ 				 struct dpp_bootstrap_info *peer_bi)
++@@ -287,6 +303,8 @@ static int hostapd_dpp_pkex_done(void *ctx, void *conn,
++ 	struct dpp_bootstrap_info *own_bi = NULL;
++ 	struct dpp_authentication *auth;
++ 
+++	hostapd_dpp_pkex_clear_code(hapd);
+++
++ 	if (!cmd)
++ 		cmd = "";
++ 	wpa_printf(MSG_DEBUG, "DPP: Start authentication after PKEX (cmd: %s)",
++@@ -2114,6 +2132,7 @@ hostapd_dpp_rx_pkex_commit_reveal_req(struct hostapd_data *hapd, const u8 *src,
++ 				wpabuf_head(msg), wpabuf_len(msg));
++ 	wpabuf_free(msg);
++ 
+++	hostapd_dpp_pkex_clear_code(hapd);
++ 	bi = dpp_pkex_finish(hapd->iface->interfaces->dpp, pkex, src, freq);
++ 	if (!bi)
++ 		return;
++@@ -2145,6 +2164,7 @@ hostapd_dpp_rx_pkex_commit_reveal_resp(struct hostapd_data *hapd, const u8 *src,
++ 		return;
++ 	}
++ 
+++	hostapd_dpp_pkex_clear_code(hapd);
++ 	bi = dpp_pkex_finish(hapd->iface->interfaces->dpp, pkex, src, freq);
++ 	if (!bi)
++ 		return;
++@@ -2518,7 +2538,7 @@ int hostapd_dpp_pkex_remove(struct hostapd_data *hapd, const char *id)
++ 			return -1;
++ 	}
++ 
++-	if ((id_val != 0 && id_val != 1) || !hapd->dpp_pkex_code)
+++	if ((id_val != 0 && id_val != 1))
++ 		return -1;
++ 
++ 	/* TODO: Support multiple PKEX entries */
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb
+index 4a1a95c23c..c76873cbf4 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb
+@@ -24,6 +24,10 @@ SRC_URI = " \
+     file://0003-SAE-Reject-invalid-Rejected-Groups-element-in-the-pa.patch \
+     file://CVE-2025-24912-01.patch \
+     file://CVE-2025-24912-02.patch \
++    file://CVE-2022-37660-01.patch \
++    file://CVE-2022-37660-02.patch \
++    file://CVE-2022-37660-03.patch \
++    file://CVE-2022-37660-04.patch \
+ "
+ 
+ 
 
