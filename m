@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E77EDCCFA04
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E66C7CCF9E3
 	for <webhook@archiver.kernel.org>; Tue,  4 Nov 2025 21:18:47 +0000 (UTC)
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.367.1762291116472570691
+Received: from mta-65-228.siemens.flowmailer.net (mta-65-228.siemens.flowmailer.net [185.136.65.228])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.372.1762291124663992463
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Nov 2025 13:18:38 -0800
+ Tue, 04 Nov 2025 13:18:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=ho0Q72WH;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-20251104211832e1d2cefa580002078c-rmkcdt@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 20251104211832e1d2cefa580002078c
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=Kx2Cgv0S;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.228, mailfrom: fm-256628-202511042118422f6b9ad21e000207bf-mquhlb@rts-flowmailer.siemens.com)
+Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id 202511042118422f6b9ad21e000207bf
         for <openembedded-devel@lists.openembedded.org>;
-        Tue, 04 Nov 2025 22:18:33 +0100
+        Tue, 04 Nov 2025 22:18:42 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=0FptTtTKIojKqeg/H6tKQxjDUDxkw8hScu8/IQ1LCtU=;
- b=ho0Q72WHLRsc9TfbWBxAnJaW5E4zmDGubCj+n99zQt5+s6wgCsTCM8y1DfyClLmAlwR1HE
- KcqY2lHJT908q8v8mvmIkxFhnUwXS5uKJ5mOKPrgMHyYGmbIuAfMMRB2bwlfhMdRDb/KAKvf
- cb6CUUKgZ7xQQ6PtkP3wH4SEHX+d/22IkhMbQkhHW3jsN9BYMbIOqx7hYmrJKMvVi5dhfEtj
- /MvP24VTOb33XhwYf0p8WivQoaGhmUuwWI0WF1wr9N6LSHxujj2cMyoVArccgezuB3FFxITR
- fEGmmjOvOBJbk5pJYz5XNdl/RctDv1FrbOFfYrjWNp4mQSfBq8LBulmA==;
+ bh=RZmM0ZMnYCFGMW4ppHC3pMI7RaykSrbRhheyQGDNnF0=;
+ b=Kx2Cgv0SFlfrPakw/oV5PO+9UG62nHQobQ6cGqR3y9yihmInegxSodQzAioB8TxIpfzO8l
+ vetFuikbSAupv4vGnTbdIqiSlWF1GThJfwEOS8MfpiheUQ9XKt52Gd1KrPcyV1OmMRjxqJQ9
+ ArrsnPI4bNFfFMGbNkQwR3k3FuSMYyqoe0hL0Zh6F3lCvY3uZfI2UOHbjEF+jkoAgBIqL/8q
+ 58382Gqp/ngPRx5rrpjI4RJFlrUx+52944RNOSblcLnuMtcOZaPVexm+EMSU1mKkdfD4inpM
+ dunHncNtcLdj5CQw3FhRYNSGPK8Z3Kg4GtIYTEZEpz5M4+Ya5uZTZAsw==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][kirkstone][PATCH] hostapd: patch CVE-2022-37660
-Date: Tue,  4 Nov 2025 22:18:31 +0100
-Message-Id: <20251104211831.1918400-1-peter.marko@siemens.com>
+Subject: [meta-oe][scarthgap][PATCH] hostapd: patch CVE-2022-37660
+Date: Tue,  4 Nov 2025 22:18:37 +0100
+Message-Id: <20251104211837.1918426-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -37,7 +37,7 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 21:18:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121309
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121310
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -1293,13 +1293,13 @@ index 0000000000..4c2e02173b
 + 
 + 	/* TODO: Support multiple PKEX entries */
 diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb
-index 4a1a95c23c..c76873cbf4 100644
+index 0e241e48b0..fec54f8a47 100644
 --- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb
 +++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.10.bb
 @@ -24,6 +24,10 @@ SRC_URI = " \
-     file://0003-SAE-Reject-invalid-Rejected-Groups-element-in-the-pa.patch \
-     file://CVE-2025-24912-01.patch \
-     file://CVE-2025-24912-02.patch \
+     file://CVE-2023-52160.patch \
+     file://CVE-2025-24912_01.patch \
+     file://CVE-2025-24912_02.patch \
 +    file://CVE-2022-37660-01.patch \
 +    file://CVE-2022-37660-02.patch \
 +    file://CVE-2022-37660-03.patch \
