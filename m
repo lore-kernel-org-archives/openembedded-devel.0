@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1305ECCFA0D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24196CCFA1C
 	for <webhook@archiver.kernel.org>; Wed,  5 Nov 2025 23:44:31 +0000 (UTC)
-Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2918.1762386269644363217
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2916.1762386265994331990
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Nov 2025 15:44:30 -0800
+ Wed, 05 Nov 2025 15:44:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Cs3qBR4E;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=FEFl55pi;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1762386270; x=1793922270;
+  t=1762386266; x=1793922266;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=CDGo9qj5UEnb4ueatOu9v6K0U3zqHKljfuR53ZnQEzA=;
-  b=Cs3qBR4Eh6at69lyrth9EaE5Gs/MBZBQBVbDNxvF7KCaa5/zgLiSonuq
-   EeyDA5FIU1InCvIPB21FJcRs/ojpSpZVxlkl8AEClsSscKkqr5iFAC17H
-   zVoF1sU2J9IQs9LBNGi26Q/2lPRDj0rvhcm9SZSQs1QDChvOz+SFbPo/k
-   BKkJ3JC4ubTT58T1SKKrBtT/aNsqSKuvB5P71U/QwtihCZCnP5nKihZ6L
-   oe0MK1Y1N8swDyytx68Hb/hgFYTdXDguc6Pc8JNfQc5l5ctSUbKslkAmf
-   S6glxbvnP+se5My4lFAk3U5Kp5BTBcqhbeKo1BQWx/HWVRySGnaDkDMVP
-   A==;
-X-CSE-ConnectionGUID: xofOKBc0Ra+p9mQTgnMDXQ==
-X-CSE-MsgGUID: nxYoVx93Q961l6hmNnWNoQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11604"; a="218262772"
+  bh=7GD5WoD858C9EcBrQ0NW6tPuiNAXmvrMzk8Z9c2t2sY=;
+  b=FEFl55piYwPbagxEYmV+qJKqXSrTeRSqGlJf1A/0iSV0/lXgwZZB05yL
+   WyJcqnEcORkeiLTEaBPfgDUR9P08LrH5BECqMfgEW43k2z91a1bxhY8jG
+   IQb7aycc7cY/YkO45/sOc197cyCFgdCGFDoRVoYPYdUCiler5QBlRMOnL
+   RzfsimU/SvvIRQ9eCFaeEWqKhkmNUl8c3d/68p1H7NEQuOXlMR+x8Pxrl
+   BY/OxYnM+uJsd0CUpi+Ngcefx0dtZcjZe2QSvOxZ2mZ+nqdIr222QKDwI
+   raM5IgtwEYHFoJHUixjAymplFoMqD7vqFf/drhFptOvynklA7jVPcjmir
+   g==;
+X-CSE-ConnectionGUID: 8zerY6//Sqel/AWChRMQYw==
+X-CSE-MsgGUID: 8cXOfLUnSU+R8+fiGcnaqQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11604"; a="197066956"
 X-IronPort-AV: E=Sophos;i="6.19,283,1754924400"; 
-   d="scan'208";a="218262772"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.128])
-  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Nov 2025 08:44:28 +0900
+   d="scan'208";a="197066956"
+Received: from unknown (HELO az2uksmgr2.o.css.fujitsu.com) ([52.151.125.128])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Nov 2025 08:44:24 +0900
 Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 0EDAAC000AF
-	for <openembedded-devel@lists.openembedded.org>; Wed,  5 Nov 2025 23:44:28 +0000 (UTC)
+	by az2uksmgr2.o.css.fujitsu.com (Postfix) with ESMTPS id 6273D821108
+	for <openembedded-devel@lists.openembedded.org>; Wed,  5 Nov 2025 23:44:24 +0000 (UTC)
 Received: from az2uksmom3.o.css.fujitsu.com (az2uksmom3.o.css.fujitsu.com [10.151.22.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id B850FC00326
-	for <openembedded-devel@lists.openembedded.org>; Wed,  5 Nov 2025 23:44:27 +0000 (UTC)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 19842C00326
+	for <openembedded-devel@lists.openembedded.org>; Wed,  5 Nov 2025 23:44:24 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 46CB7100310F;
-	Wed,  5 Nov 2025 23:44:24 +0000 (UTC)
+	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 9075A100310E;
+	Wed,  5 Nov 2025 23:44:21 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-webserver] [PATCH 11/12] swagger-ui: upgrade 5.29.5 -> 5.30.0
-Date: Thu,  6 Nov 2025 07:44:01 +0800
-Message-ID: <20251105234402.423-11-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 09/12] python3-virtualenv: upgrade 20.35.3 -> 20.35.4
+Date: Thu,  6 Nov 2025 07:43:59 +0800
+Message-ID: <20251105234402.423-9-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20251105234402.423-1-wangmy@fujitsu.com>
 References: <20251105234402.423-1-wangmy@fujitsu.com>
@@ -61,32 +61,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 23:44:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121350
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121348
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../swagger-ui/{swagger-ui_5.29.5.bb => swagger-ui_5.30.0.bb}   | 2 +-
+ ...hon3-virtualenv_20.35.3.bb => python3-virtualenv_20.35.4.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-devtools/swagger-ui/{swagger-ui_5.29.5.bb => swagger-ui_5.30.0.bb} (94%)
+ rename meta-python/recipes-devtools/python/{python3-virtualenv_20.35.3.bb => python3-virtualenv_20.35.4.bb} (87%)
 
-diff --git a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.29.5.bb b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.30.0.bb
-similarity index 94%
-rename from meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.29.5.bb
-rename to meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.30.0.bb
-index cc7d5d52ce..033b53e248 100644
---- a/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.29.5.bb
-+++ b/meta-webserver/recipes-devtools/swagger-ui/swagger-ui_5.30.0.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_20.35.3.bb b/meta-python/recipes-devtools/python/python3-virtualenv_20.35.4.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-virtualenv_20.35.3.bb
+rename to meta-python/recipes-devtools/python/python3-virtualenv_20.35.4.bb
+index 3d9b6a097f..28444f12c4 100644
+--- a/meta-python/recipes-devtools/python/python3-virtualenv_20.35.3.bb
++++ b/meta-python/recipes-devtools/python/python3-virtualenv_20.35.4.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/pypa/virtualenv"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0ce089158cf60a8ab6abb452b6405538"
  
- SRC_URI = "git://github.com/swagger-api/swagger-ui;branch=master;protocol=https;tag=v${PV}"
+-SRC_URI[sha256sum] = "4f1a845d131133bdff10590489610c98c168ff99dc75d6c96853801f7f67af44"
++SRC_URI[sha256sum] = "643d3914d73d3eeb0c552cbb12d7e82adf0e504dbf86a3182f8771a153a1971c"
  
--SRCREV = "04b9ad7b37f02bce0e1cb8c521e40b68585ccf9f"
-+SRCREV = "9c1e7699a7ba433f66cabc7eefa18579acf58c85"
- 
- CVE_STATUS[CVE-2016-1000229] = "fixed-version: fixed since 2.2.1"
- 
+ BBCLASSEXTEND = "native nativesdk"
+ inherit pypi python_hatchling
 -- 
 2.43.0
 
