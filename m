@@ -2,64 +2,64 @@ Return-Path: <t.f.g.geelen@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45621CCFA0D
-	for <webhook@archiver.kernel.org>; Wed,  5 Nov 2025 21:28:19 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.21227.1762378098250459581
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 372D8CCFA0D
+	for <webhook@archiver.kernel.org>; Wed,  5 Nov 2025 21:28:29 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.21076.1762378099537319613
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Nov 2025 13:28:18 -0800
+ Wed, 05 Nov 2025 13:28:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NA+kKxgN;
- spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: t.f.g.geelen@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-640a503fbe8so387332a12.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 13:28:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=l171CLwY;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: t.f.g.geelen@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b70bee93dc4so37234166b.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 13:28:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762378096; x=1762982896; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1762378097; x=1762982897; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ydWNDGpOD8l+7FHtfBtacIf2gqvICbSXF9h+/Ddbnm8=;
-        b=NA+kKxgN0xHf1tO0vFYG57FiXuEq9a4yOzjQn5KOyj2T7wL8D51lZiHGtelDVb023j
-         pXcrJzWSg4hH426AGYjWzSVeCnXDnQANlrXh2JWgzCp/zbNchVCVfiE5SjS46hBg3oCz
-         Y+q3W6kLJhpJoxdkUK2jp3lzgpgygHI2s20UjsXsSm+JQ8VCQawr3Bt3bHUZbEshd3KJ
-         YxhmaeFoRLdwTkLjwkhIiWyFhFke4KThjyT6qRHZ5/azTuJbkchTeqhzAFdTURXq4NE2
-         v6Qb3OL8Piw4pIzu4/ECM2NCNogLcplkKW2Xs/emwqeV2ABnrjJ4JCgsh1316sujvwNw
-         X47A==
+        bh=GuKDKeBpaJP1pVVg9NZGgWlP9z7WprbWBrdFdTYZt5E=;
+        b=l171CLwYwGBFZCIlRIrwGMiusc6FpQu42/QvCySMEfGRaHNEZi7RiK0fANnj+MGZjs
+         l3p5hPSzOvl8F5buYpi5OA6KZxfnrG8kEkNCJyBYEJSA0mEmoP5319itsk/OzorJbR8y
+         d3YXlKk3jJq/xFrnrvoh6DQitkvxKTj/ae3JCLrfaFIW9IfWp8iGXowEtkDXDB+jVHsT
+         qYeLTicCopfZltsJuCmyXZ9Ep+64lDwq5vjlAccvMRKo3p/GvyuOye5Xu9yG4tpQAgfG
+         Y4lQgqrerIbaUEM9nN3/LzfqPnCZhpuZ2YWedFBJd/dBJJ7f3iXCLlAEn7wHhGIgjMoi
+         yi+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762378096; x=1762982896;
+        d=1e100.net; s=20230601; t=1762378097; x=1762982897;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ydWNDGpOD8l+7FHtfBtacIf2gqvICbSXF9h+/Ddbnm8=;
-        b=HfZjLUDICTdBEM8+J+aHXxbLiiKDuB3tgNDGKTE51N4tJSDjdFPow5ph9YD0NjvT4t
-         HWDO4cRqqxYhn3koyRLYPGntC0/KSavdtSueHkCL2hQv2Hbiyj/KOKMo8PWX/SsCVWFe
-         Fa6i9zYw6XGpOK8bj4AkCsJ0gSDMKC4+iY88VXwzVGhE6ws6/qsArG+490PbWHMZ5iFw
-         yxUfs8ml/Y9lkF2jzh0K8TkpsmFfjmtsDuq/iqbq3fO0wwFGvgBJaufDCsczgdJRUn7B
-         fj3s36nP6mC0iqOJbwNZK+sgBz2/bSNulB/hW6d/j8/2bivgtlieHzLjuAa2MNozEKu/
-         ntuw==
-X-Gm-Message-State: AOJu0YySPU9JLuwsRPQx3Cuo+PG7aaKykHNQb4wNKWfHBy9Wgt9cyFRC
-	MXy82VAVLnlcFj0q25XQH+AbI7lCtPiNFCCGK40cLNwpa0fQkJ3H6ghkMm/DbpNv
-X-Gm-Gg: ASbGncuJbvCkB2pTVsrkWm53UBP9P5pOmuKR2vXhqXvd4w9cT4dwiYcoYTGQ47oHwKh
-	cIr+CHL0l3/ti7uomUvFVkuE1Ffi7VcI6fV+KJM5DG68OSuOopXZ+uQRaTXbjgcbl/5GMrRwdRh
-	qTD35H5B5H3vG1gxBXA6DU9wB6OBcMyEdgYSD+s6siR7OoZt6AX2VcqDQ4IMtxC1HhbcTRw6Zeb
-	5Gkf5fc18IhqwVIzV4oArSRbCrEE0d7YXFDgUskQ71RYpUbdBkPzW3E1VbcB5oCVAAc5PcCXMuh
-	OuBG0xOknkoDFp6kv4sz9Fl/04y/Uz49SJd0IYWP2Q9BoPipqudHcAt/LfkFUW/YE7D32lZRaQi
-	uEPw4yWTb6Iw8hmXzNhgaJZevLheqyb7wDoDcUzg6vWptqJpBegEEi6162WpUVTVfSkiRSfhu86
-	hQbLYa+bbl8vBAizL0RqAPTTPZ73tDhuwYHUwAzf2GTfyk3lDNmII67iac8DDGPiAXHQ6huDib6
-	1gebdh1K6/PZ4MiuoIP8Pmw
-X-Google-Smtp-Source: AGHT+IFo1ACFO7wrfLKCSCsdDLWSLsniT634xPP1jmz4AkCAHr388s7UEUnoOpW0Pxk1lOYI+DWbKA==
-X-Received: by 2002:a17:907:9721:b0:b6d:5bc1:4859 with SMTP id a640c23a62f3a-b72653cb70amr419196466b.29.1762378096280;
-        Wed, 05 Nov 2025 13:28:16 -0800 (PST)
+        bh=GuKDKeBpaJP1pVVg9NZGgWlP9z7WprbWBrdFdTYZt5E=;
+        b=onJMSEkD2ItUqNZDXNNZ9/hbXFTyqS/YyF/5K/mKk7d6gLQ9H+T2SeeX15hDEwyKZP
+         PgAVLiWHAAEa3TmyFvrERuDhadLzcG48W7QPVObYD58Oe63cdHlw2t2Yiv3q3Agg1hNt
+         XWUz07JMzq3H10DD9ojVURObSQvfpFPjP/XupPdrJ3edH02kaTCu3/fMrdoc5N+CMvWL
+         y+A/BJyVCA9L8yPK0IqiIeKlzWTW9P+27xhhAsiWbSQ/X3WrBWgzL2T2T8I+Tkvt0mYO
+         4BdWVvjvwgiO0ez7G1F5kv4ShMXo4Ihto8LdcdFV5hGmtjhoKE3kymNX7Yx+onDUiFMw
+         ot1w==
+X-Gm-Message-State: AOJu0YyzTCHt6mQIHSVo1nE4jDnJpmE71vHa3h1yf61R62iMH4aIOLne
+	DMBn+1uLQpqtDQxzugvzrRbnWXlRPCA1zCbsHLYRiVJJ68FtA/pEciZfMCY7R7GA
+X-Gm-Gg: ASbGncv1SxScoJW2XNubD0Q4ANGNjoD8i5xuNEmQpXABFkUwStn04OpV7FYkVS9s7NG
+	3THjIYWaitYaH4TMTvSq0/jj9w4tHTg8Tbm10mS4m6TfE14+ni7YXQSMyptM12DUd5qgxrKKLp0
+	PCd+W/HOuV1dzDoxCVV1INlLgQO9+YTVN9KGan9tkwAA3mV4hVgFXuPjnJPt03sv2/CFVf60iSd
+	RO/f2Vjr5oe6wA7G8cYZZ1O8ud9HZAg0QaiihLEOrNaydkc+h1XZpGVp5eIBzPA3Q3VJQbYV0J2
+	xNqMOgpOXx/PCmk9mSRh6pja8RCeEctVbVgDV0ROfokm/nhq2GWhZIuJWeXvjVsIDaGUHH+o0GS
+	e+qOoZxoRzLdZZvzA9j+nzVagFUEYAxAO7yT2OgCXbMaIhr+zq5VMn2DiU9c9it9QE/pkTsMhjF
+	WGjRjTen+uAIEBgtvJVNW/wrTs52HNdQSMWg2BVKnavKOhOzEknkaPgBsD58YiG3B05kKT95zqu
+	jbfu2/BvasKjw==
+X-Google-Smtp-Source: AGHT+IFwnTu614YHp1zL2tMbnVdNZm5ly3ee2VqPa68aiU+g5iaEy5l5yXrm+zvUt9i92oBQ2Bt4hQ==
+X-Received: by 2002:a17:907:6d24:b0:b2d:830a:8c01 with SMTP id a640c23a62f3a-b72656907e7mr519347466b.61.1762378097371;
+        Wed, 05 Nov 2025 13:28:17 -0800 (PST)
 Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b728933429fsm58550766b.9.2025.11.05.13.28.15
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b728933429fsm58550766b.9.2025.11.05.13.28.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Nov 2025 13:28:15 -0800 (PST)
+        Wed, 05 Nov 2025 13:28:17 -0800 (PST)
 From: Tom Geelen <t.f.g.geelen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tom Geelen <t.f.g.geelen@gmail.com>
-Subject: [meta-python][PATCH 7/8] new recipe: python3-pytest-picked
-Date: Wed,  5 Nov 2025 22:26:34 +0100
-Message-ID: <20251105212631.386242-11-t.f.g.geelen@gmail.com>
+Subject: [meta-python][PATCH 8/8] new recipe: python3-pytest-retry
+Date: Wed,  5 Nov 2025 22:26:35 +0100
+Message-ID: <20251105212631.386242-12-t.f.g.geelen@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251105212631.386242-2-t.f.g.geelen@gmail.com>
 References: <20251105212631.386242-2-t.f.g.geelen@gmail.com>
@@ -68,37 +68,36 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 21:28:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121336
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 21:28:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121337
 
-Run the tests related to the unstaged files or the current branch (according to Git)
+pytest-retry is a plugin for Pytest which adds the ability to retry flaky tests, thereby improving the consistency of the test suite results.
 
 Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
 ---
- .../python/python3-pytest-picked_0.5.1.bb          | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
+ .../python/python3-pytest-retry_1.7.0.bb            | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pytest-retry_1.7.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb b/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-retry_1.7.0.bb b/meta-python/recipes-devtools/python/python3-pytest-retry_1.7.0.bb
 new file mode 100644
-index 0000000000..5bea05a036
+index 0000000000..f70adca68f
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Run the tests related to the changed files"
-+HOMEPAGE = "https://github.com/anapaulagomes/pytest-picked"
++++ b/meta-python/recipes-devtools/python/python3-pytest-retry_1.7.0.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "Adds the ability to retry flaky tests in CI environments"
++HOMEPAGE = "https://github.com/str0zzapreti/pytest-retry"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=6d374a27c85c3fcc979009952ec16f1b"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c25bd3d1db774af27b10acd6f80bf939"
 +RECIPE_MAINTAINER = "Tom Geelen <t.f.g.geelen@gmail.com>"
 +
-+SRC_URI[sha256sum] = "6634c4356a560a5dc3dba35471865e6eb06bbd356b56b69c540593e9d5620ded"
++SRC_URI[sha256sum] = "f8d52339f01e949df47c11ba9ee8d5b362f5824dff580d3870ec9ae0057df80f"
 +
 +inherit pypi python_setuptools_build_meta ptest-python-pytest
 +
-+PYPI_PACKAGE = "pytest_picked"
-+RDEPENDS:${PN} = "python3-pytest (>=3.7.0)"
-+
++PYPI_PACKAGE = "pytest_retry"
 +UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
++RDEPENDS:${PN} = "python3-pytest"
 -- 
 2.43.0
 
