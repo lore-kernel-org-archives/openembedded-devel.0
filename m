@@ -1,213 +1,102 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3946BCCFA13
-	for <webhook@archiver.kernel.org>; Tue,  4 Nov 2025 23:14:28 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.489.1762298059341153743
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 268A8CCFA04
+	for <webhook@archiver.kernel.org>; Wed,  5 Nov 2025 02:43:03 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.39.1762310579666473067
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Nov 2025 15:14:19 -0800
+ Tue, 04 Nov 2025 18:42:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Bx3/4hpZ;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-340c39ee02dso3415674a91.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 15:14:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762298058; x=1762902858; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yt0JdgQd2A9q10fFUBr3iezLVCm/8Uczeq54DIzFZC0=;
-        b=Bx3/4hpZdlGP740QtPCvDUMhGTm7g0LptckI48okQOoSFPjssPcFS8c57/w8xLKtML
-         WhDVRuvZ4hRAU2Y9K70QEnY4TIWb5QR2ydIPXyS+0CxYgRuIPfFz/cH6135iJmlmIqz4
-         aHE8XaJlnNDXkWnOrOvKKbd4mTyjYCDHo+qV3kwSs4nFSyHoMyRbC6LwPI2nm01nkwGt
-         bnBBbkxjoUKz+fyP+ET/ycnbrByQrM7xTdUlykG8ZnjlH9tQTXr396xFdDgXSrvQ+6UT
-         o+QHM9rhFyALEwOga1dPta0Cd0K8IJUINOlVTKXuDUcff4thFSVXvCI9A0T9z2Kn+bUw
-         go+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762298058; x=1762902858;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=yt0JdgQd2A9q10fFUBr3iezLVCm/8Uczeq54DIzFZC0=;
-        b=LyLNEyMi9sfvfEWz4l6vRvC0+hqf5Q1KdcMD4jCzn4v1hFhq4ScD+y6/8RBX+sP+Nt
-         fZYCtGcH4vNFv4/vPXb1Np0LbGo9wHKzBvbqb2DmqxBEZGJoBoK6b6dDNRiCeFrB4Cy1
-         UO4N29mlPxZu65fQ0j9x5EjgNwJ6cD3r1BqlALoGH/xYePAjdar/GWS8zsr3l03rLiXk
-         xqWiIs4MHXjW7FFdl7fl0kaxe3uEUYEeoXdqaNQm6HSWJXIKnc5NYGCwKVLxA7oy9JhY
-         C3V5HV2wsflucyhCsYYoN7DSfMsBcOpONO8cMu1sNBY6VrX/ASOavtQLKlDqrAy00vhA
-         w52w==
-X-Gm-Message-State: AOJu0YysU2AmFNFRAy3ldLKikWPwnyW9CpfCCHBeewkbc46B++Iaaym5
-	NIMrxcRejZRRRugq4LfELrc36sSoSFSnfmVb5NE0WtGb+SFSPGrwy4z78C+Ofk+u
-X-Gm-Gg: ASbGncuWBEyYd7qqFLs12mpxv6qjmuzxI0oYc+VTLRx57RScJv1cmy6pn+J/Vz7hbyZ
-	HNJi1dFeVsk2B0o/RQky7qMKqYgNWxbFbGJM3sPjptun8NX0EP+PyWnyvAdx1pV1jbvaP/pebUb
-	deJSTjX463W9g7iZVydst0Oc0/TlAmxLFXwzVaiEU28wN4uSqm+JZeIQGKNbfjoONFuNHEi2LUv
-	rcSqF5mR5V6vtDJIbMZu26g0Qoj5isP/vkvxuv8cFS4w4BreWe7hJ7WDzYr0W2pn/2ifvIoh3B1
-	CWJdgpz7ZDcOahQo7zoxnsKNTrhj/nCQZK1b7LLajN0IfhlrAInIe51zBuJre7qfqqGtsmZOWkR
-	rpe80jubg+0Uflz4EM91PZH/szC4U4x/z9uXRi58U3MLEfC3qQQMYd6qLcckD4eRMi1ZYam4fBF
-	4myW6OKOtn6S17xw==
-X-Google-Smtp-Source: AGHT+IG24Z7F0e9d4Z++3fmzIJ9LsKSCNnD7uuUPVgn/Y6zJuXRIKbibgQMtV7SRrn+c6nlNqinD5g==
-X-Received: by 2002:a17:90b:37c7:b0:340:bc90:d9a4 with SMTP id 98e67ed59e1d1-341a6c00c4amr1209226a91.5.1762298058426;
-        Tue, 04 Nov 2025 15:14:18 -0800 (PST)
-Received: from NVAPF55DW0D-IPD.. ([147.161.216.252])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-ba1f2a80459sm3503470a12.15.2025.11.04.15.14.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Nov 2025 15:14:18 -0800 (PST)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 1/2] libcdio: upgrade 2.1.0 -> 2.2.0
-Date: Wed,  5 Nov 2025 12:14:08 +1300
-Message-ID: <20251104231409.2056908-1-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=CtdE+G8u;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3404a64814=jiaying.song.cn@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5A51sF121812918
+	for <openembedded-devel@lists.openembedded.org>; Wed, 5 Nov 2025 02:42:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=7NBWl2QTZyv5U225oVs6
+	ej2s7zhEAx+X4MPvo+i04NM=; b=CtdE+G8uTTYCO3TwhczvAqLnxY2PL9ZrKSCi
+	Nw69fqWpr31yKtAt+1uz7xI6GxRKX3t7Fngwr7Z0ufI0sYYL0iq+lqtjMimkOhhC
+	chkA2kY+9bqezEuttUeU9cmmqZJMC9MKo64l3EocICgUPq+MY2W4RopEd4jpODMF
+	pM9RBGjZLN1o2DjB7xCxjQUwRD40njD6krlGsxMhrRF13WnBy628UwWd6XjlWAby
+	z9r7rfbzxo7y91pnRSlwK62IzIS6Hir0zte27ZPAoGlZ7Q/In2h9Q7BRRbCGuppo
+	37m5QIXmVtF3LWSVCa7YslBC4KpB7f4hIHP7FRRWY1a3fJYdtw==
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4a7war8194-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 02:42:58 +0000 (GMT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Tue, 4 Nov 2025 18:42:57 -0800
+Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Tue, 4 Nov 2025 18:42:57 -0800
+From: <jiaying.song.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] minifi-cpp: fix python shebang in minifi-python-examples
+Date: Wed, 5 Nov 2025 10:42:56 +0800
+Message-ID: <20251105024256.2037233-1-jiaying.song.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=UYJciaSN c=1 sm=1 tr=0 ts=690ab9b2 cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=t7CeM3EgAAAA:8
+ a=HsSA6g-maf90pnkv3jEA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTA1MDAxNSBTYWx0ZWRfXzy7C+onWSRL6
+ tcDtRTSTGQ64sOHoHKQUfhltXQZHc/78I6Sy1p3Gx/5QDbu12VAESM69Rtj0cJzbZAfX+yQ0Hb3
+ L9eReQGx2j+s3ac5NwOY4z9NdlJalAZXgUj7FJberzi+wXJ1+MP0Hyfh1p7NsA3VG7MoTNjoQSA
+ tp2AMyGmIXkC6KgkWilUqaOynonzUwkZ6xL+PEPUAj5CLCF7XnhM7xp0QOOaTnljrsSQ6ZmIW3o
+ wEQ6fpYZMUHFAw7ydER+0RUjhZnQIT6Cyohv6U/xXUBUr7l26pQOUW6j6XRJLg3aoKB5qUwlDCT
+ JB7+cTD2QgAoiKOVtuDCod9inaecrW1Oo+6MDa9tIXQMc2RbPhh0v0RPa1wZ3NaMG7DT41qt4fT
+ M8XFmsnWn+vXl1LwzNurnf8jyQNtjQ==
+X-Proofpoint-GUID: JRZrngIVtJpVHBMWFYYkxcuEL99lqom4
+X-Proofpoint-ORIG-GUID: JRZrngIVtJpVHBMWFYYkxcuEL99lqom4
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-05_01,2025-11-03_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 priorityscore=1501 bulkscore=0 adultscore=0 phishscore=0
+ impostorscore=0 spamscore=0 malwarescore=0 suspectscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511050015
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Nov 2025 23:14:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121313
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 02:43:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121315
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+From: Jiaying Song <jiaying.song.cn@windriver.com>
 
-* The project switched to storing their releases on Github
-* Dropped patches which are now merged in the upstream
-* There is API, ABI change between 2.1.0 and 2.1.1
-- API change: Rename some fields in ecma_167.h from integer (prefix i_) to unsigned (prefix u_) to actually match their type
-- ABI change: Add u_su_fields to the end of iso_rock_statbuf_t
-- ABI change: Add total_size in the middle of iso9660_stat_t
+Replace '/usr/bin/env python' with '/usr/bin/env python3' in the scripts
+under ${libexecdir}/minifi-python-examples.
 
-Changelog:
-https://github.com/libcdio/libcdio/releases/tag/2.1.1
-https://github.com/libcdio/libcdio/releases/tag/2.2.0
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
 ---
- ...-format-security-errors-with-mvprint.patch | 40 -----------------
- ...RCE_PATH-by-dropping-STRIP_FROM_PATH.patch | 43 -------------------
- .../{libcdio_2.1.0.bb => libcdio_2.2.0.bb}    |  9 ++--
- 3 files changed, 3 insertions(+), 89 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/libcdio/libcdio/0001-Fix-a-few-Werror-format-security-errors-with-mvprint.patch
- delete mode 100644 meta-oe/recipes-multimedia/libcdio/libcdio/Drop-LIBCDIO_SOURCE_PATH-by-dropping-STRIP_FROM_PATH.patch
- rename meta-oe/recipes-multimedia/libcdio/{libcdio_2.1.0.bb => libcdio_2.2.0.bb} (74%)
+ meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-oe/recipes-multimedia/libcdio/libcdio/0001-Fix-a-few-Werror-format-security-errors-with-mvprint.patch b/meta-oe/recipes-multimedia/libcdio/libcdio/0001-Fix-a-few-Werror-format-security-errors-with-mvprint.patch
-deleted file mode 100644
-index 09e7dc3dfb..0000000000
---- a/meta-oe/recipes-multimedia/libcdio/libcdio/0001-Fix-a-few-Werror-format-security-errors-with-mvprint.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From e5e54be286bf6d8336b747503c803750bc674c57 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 30 Oct 2021 01:28:18 -0700
--Subject: [PATCH] Fix a few -Werror=format-security errors with mvprintw()
--
--In all these places a non-constant is used as a format string which
--compiler complains about. Fix by using "%s" as format.
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/cdda-player.c | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/src/cdda-player.c b/src/cdda-player.c
--index 69eddee..8834d60 100644
----- a/src/cdda-player.c
--+++ b/src/cdda-player.c
--@@ -298,7 +298,7 @@ action(const char *psz_action)
--              psz_action);
--   else
--     snprintf(psz_action_line, sizeof(psz_action_line), "%s", "" );
---  mvprintw(LINE_ACTION, 0, psz_action_line);
--+  mvprintw(LINE_ACTION, 0, "%s", psz_action_line);
--   clrtoeol();
--   refresh();
-- }
--@@ -1029,10 +1029,10 @@ display_tracks(void)
--       }
--       if (sub.track == i) {
--         attron(A_STANDOUT);
---        mvprintw(i_line++, 0, line);
--+        mvprintw(i_line++, 0, "%s", line);
--         attroff(A_STANDOUT);
--       } else
---        mvprintw(i_line++, 0, line);
--+        mvprintw(i_line++, 0, "%s", line);
--       clrtoeol();
--     }
--   }
-diff --git a/meta-oe/recipes-multimedia/libcdio/libcdio/Drop-LIBCDIO_SOURCE_PATH-by-dropping-STRIP_FROM_PATH.patch b/meta-oe/recipes-multimedia/libcdio/libcdio/Drop-LIBCDIO_SOURCE_PATH-by-dropping-STRIP_FROM_PATH.patch
-deleted file mode 100644
-index 0b25dff75e..0000000000
---- a/meta-oe/recipes-multimedia/libcdio/libcdio/Drop-LIBCDIO_SOURCE_PATH-by-dropping-STRIP_FROM_PATH.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 08c1768aaeea86c522c0ef1705b9b6d434ebd3ae Mon Sep 17 00:00:00 2001
--From: Chris Lamb <chris@chris-lamb.co.uk>
--Date: Fri, 28 Jul 2017 11:49:13 +0100
--Subject: [PATCH] Drop LIBCDIO_SOURCE_PATH by dropping STRIP_FROM_PATH Doxygen
-- setup; it's not used as FULL_PATH_NAMES = no
--
--Source: https://sources.debian.org/data/main/libc/libcdio/2.1.0-4/debian/patches/Drop-LIBCDIO_SOURCE_PATH-by-dropping-STRIP_FROM_PATH.patch
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- configure.ac            | 5 -----
-- doc/doxygen/Doxyfile.in | 2 +-
-- 2 files changed, 1 insertion(+), 6 deletions(-)
--
--Index: b/configure.ac
--===================================================================
----- a/configure.ac
--+++ b/configure.ac
--@@ -557,11 +557,6 @@ AC_SUBST(HAVE_SOLARIS_CDROM)
-- AC_SUBST(HAVE_WIN32_CDROM)
-- AC_SUBST(HAVE_OS2_CDROM)
-- 
---LIBCDIO_SOURCE_PATH="`pwd`"
---AC_DEFINE_UNQUOTED(LIBCDIO_SOURCE_PATH, "$LIBCDIO_SOURCE_PATH",
---	[Full path to libcdio top_sourcedir.])
---AC_SUBST(LIBCDIO_SOURCE_PATH)
---
-- AC_CHECK_FUNCS( [chdir drand48 fseeko fseeko64 ftruncate geteuid getgid \
-- 		 getuid getpwuid gettimeofday lseek64 lstat memcpy memset mkstemp rand \
-- 		 seteuid setegid snprintf setenv strndup unsetenv tzset sleep \
--Index: b/doc/doxygen/Doxyfile.in
--===================================================================
----- a/doc/doxygen/Doxyfile.in
--+++ b/doc/doxygen/Doxyfile.in
--@@ -138,7 +138,7 @@ FULL_PATH_NAMES        = NO
-- # If left blank the directory from which doxygen is run is used as the
-- # path to strip.
-- 
---STRIP_FROM_PATH        = @LIBCDIO_SOURCE_PATH@
--+STRIP_FROM_PATH        =
-- 
-- # The STRIP_FROM_INC_PATH tag can be used to strip a user-defined part of
-- # the path mentioned in the documentation of a class, which tells
-diff --git a/meta-oe/recipes-multimedia/libcdio/libcdio_2.1.0.bb b/meta-oe/recipes-multimedia/libcdio/libcdio_2.2.0.bb
-similarity index 74%
-rename from meta-oe/recipes-multimedia/libcdio/libcdio_2.1.0.bb
-rename to meta-oe/recipes-multimedia/libcdio/libcdio_2.2.0.bb
-index d986f90d72..c443d9b891 100644
---- a/meta-oe/recipes-multimedia/libcdio/libcdio_2.1.0.bb
-+++ b/meta-oe/recipes-multimedia/libcdio/libcdio_2.2.0.bb
-@@ -4,14 +4,11 @@ SECTION = "libs"
- LICENSE = "GPL-3.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb
+index f4d206c154..28c1063ceb 100644
+--- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb
++++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.99.1.bb
+@@ -207,6 +207,11 @@ do_install() {
  
--SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.bz2 \
--           file://0001-Fix-a-few-Werror-format-security-errors-with-mvprint.patch \
--           file://Drop-LIBCDIO_SOURCE_PATH-by-dropping-STRIP_FROM_PATH.patch \
--           "
-+SRC_URI = "${GITHUB_BASE_URI}/download/${PV}/${BP}.tar.bz2"
+         sed -i "s|@MINIFI_LOG@|${MINIFI_LOG}|g" ${D}${sysconfdir}/default/volatiles/99_minifi
+     fi
++    
++    for ss in $(find ${D}${libexecdir}/minifi-python-examples -type f); do
++        sed -i 's,/usr/bin/env python$,/usr/bin/env python3,' "$ss"
++    done
++
+ }
  
--SRC_URI[sha256sum] = "8550e9589dbd594bfac93b81ecf129b1dc9d0d51e90f9696f1b2f9b2af32712b"
-+SRC_URI[sha256sum] = "6f8fbdf4d189cf63f2a7a1549c516cd720c7b222c7aaadbc924a26e745a48539"
- 
--inherit autotools pkgconfig
-+inherit autotools pkgconfig github-releases
- 
- PACKAGECONFIG ??= "cdda-player"
- PACKAGECONFIG[cdda-player] = "--with-cdda-player,--without-cdda-player,ncurses"
+ pkg_postinst:${PN}() {
+-- 
+2.34.1
+
 
