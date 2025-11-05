@@ -1,768 +1,751 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5558CCCFA0D
-	for <webhook@archiver.kernel.org>; Wed,  5 Nov 2025 15:26:47 +0000 (UTC)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12200.1762356403083338574
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B041FCCFA0D
+	for <webhook@archiver.kernel.org>; Wed,  5 Nov 2025 16:44:17 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14251.1762361054443080284
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Nov 2025 07:26:43 -0800
+ Wed, 05 Nov 2025 08:44:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LlnBAwt+;
- spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-7869deffb47so17323597b3.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 07:26:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762356402; x=1762961202; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=v6kN4K0lwMfS5EAge5Irn/r3LWRtgW+erKX2YYN6ZyI=;
-        b=LlnBAwt+FalGFCGoMDenJL1goKzauMaoEtPCiv+qTdxWw5U89rQR9GvN6loTNX6d4U
-         MBQ/7u72LApKLiNoIzIBAE5VtWe+niq7Tv+gHekaNec3/Z4aYmYbOMeFtsJD3I87yLvf
-         CBO18+gDixik+G6ie/IsIeH2vHdS+4ZOKYUiCsiKcbMz+ioIQiQ84A5qtr7PJFQ+0Ea3
-         77VLNDYZ31mNFYw8Z4Z4j4LQz+14F3vlmb1XRKJfh5ODz+W6tmKGX6D/rDMCj/ygjcoy
-         EziFUI2S0tcKMqsE3m70c23lyrImaIH7mBulfw/Uk+v9agZ15umckqrxaQ/0mW23+Ef/
-         I1Ow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762356402; x=1762961202;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=v6kN4K0lwMfS5EAge5Irn/r3LWRtgW+erKX2YYN6ZyI=;
-        b=Xf7g0rv275wKmXl/Yc8wDawAxNGFbGUmBJc4PatbxpfhwlUoKLujH3x2N+aJ/ic6fQ
-         Puy+FqHNeNjhj0n6S2N8Br4YT+aEVJI+x6XnNdfI86VPIt0+JThPaHIlqzPtAnUa0aza
-         rqMeQoGkl0fh1QfnkjOj/wgNlN/foeKucWEukL3F6kb1gOak5huLvQ/litPEV7H8V0qP
-         uAbvozKqR8GeljYmhIEhjPaQWSoHGgupZI5aOX1BmV1H/GxDHoYYtjKvl4X05yEeUSIC
-         b7AopUs/rANbvU1eJPpQTklHcOOozXp/Rcp/wPdKe9m2xvB+wCPoHuEKtHHEwgNH8wUa
-         4A8g==
-X-Forwarded-Encrypted: i=1; AJvYcCU4YArvKBCAaropgscZ6/yJWXZQC0HCProAIF1lDTOPcN831n1L5ewo05ECYoKyj0rvMWP+uSIC83S2HxRYTR9aYWk=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yzys3Bb943wqmEp32/4AJrComQzTJhIfSQIXILNwwzkYvViewCi
-	UUckGbWWaZciONXLebqWvrIpXusE3/I/grbT7hHXGh7EM1TWHqGkdc+g5ZmwDjgf3C9TiSvJyAU
-	KWZjwF6jJPpbuZdNgH2NB17VXza0heoI=
-X-Gm-Gg: ASbGncuYGNWh4xle2TvQyoGMsHsqG3JEOvm9ecFwjl3XDcCxkL456H5tssbZaH0tUGG
-	oM3DDLkdzKLzRNq0R3wO3R9nqyuhsiiou7hVThdQGgwPLDDBy90m3xLG/8e77LXQheLsThfAaDS
-	PLmvD1nlvMg89fN/QB4jDGlspwT8HzAa53CssA/D7mIMrBj/sDc1d5svIwIvNF8rvvtERvZUqHf
-	GSnZJnZVfsQylhCj2dvyCZOFUUCCkN6fdHzgwY7bjm61n9t0fV+dJe6jAHXGTsv7FQ/TPDbhVDd
-	bX+rR17vz3TpspSLZElZz/PljA0iWpL6RN8Yjip3zLw7Vg==
-X-Google-Smtp-Source: AGHT+IE1iDL6d0o3mnDcI+pB9FT2K5S10u9JaAlZfFSFDl2kp8s73Y1bTUnQnNhmmrHA3HCZpB3FEIVeGJFx80esLaU=
-X-Received: by 2002:a05:690c:fd6:b0:786:a3fa:cb92 with SMTP id
- 00721157ae682-786a40fc6camr31019387b3.9.1762356402023; Wed, 05 Nov 2025
- 07:26:42 -0800 (PST)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=aANv8bv3;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=34043ea9ca=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5A5DhQsd2402967
+	for <openembedded-devel@lists.openembedded.org>; Wed, 5 Nov 2025 08:44:14 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=4fpNtE/B622IWBD5sleO
+	I76a6NIsVdZjZ5w9yaf1b0o=; b=aANv8bv34KMlPS3Yxzjl63rnP0XrYAqTLt9g
+	kIMxepTM11pQJEGpTPNxco06f9Ck3Vg0XAQm984G5BPDN1HxAudGa/qHBdAU3oA3
+	MdHIc5c2e/N/OaJNzkTvzvQBVMpWd4wzwzXXSQqvytqvGVBz950wMEo5pQAeFCXq
+	OKsND1EFF1O4V+6pKdqduCTEmWOwQuevfCVEAibtAt3NWGqRI/dWwuh6pRJTfzmV
+	F6wCN+Wg10Y7bFsjoMERI2+vSiPbhUzvPBQcOy96QW3Jgy17lknjmTQZatjQgV7N
+	50vdK8PXexGGkCATzAr7Hv671DGw2QYG+JIwZ4tC3dwXB/hsJw==
+Received: from bn1pr04cu002.outbound.protection.outlook.com (mail-eastus2azon11010033.outbound.protection.outlook.com [52.101.56.33])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4a7wd7gshd-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 08:44:13 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=r0Nl1mtvocceRFSAFvR3SiFxvDg0znT7SHXsEIJWTzGirlkVpDFVnND/T94vHyDoR55oOJG5zWY+Og+Hmcc6OSv7a5x2EjlIJYISXIfkY5L+CyaBudKKWap6QfxRjmGt509/BdxGzviBug01AhQkJv6Be2qYY3AfiY3hhjxj/WDTGeRsKdBxQiw55bMM1fI8CojvaJvIiUH3a9FBFhn0Wd9qJi2UJcYyuSr7HMo/Ew/VcWJ5en8nikDP7gTW7S1uR9CpGkqanfAZT1+JHM3ZV4OJIXRr1TTmuPsambiWsIhxDlQRm2HmJfGnL4CvqySJX3466dTR7ZYh8dGTV4+WBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4fpNtE/B622IWBD5sleOI76a6NIsVdZjZ5w9yaf1b0o=;
+ b=dvIOMPJ+HwPlFTFzuwV6kR70S3dFR97AChKJsODB/OCODYViGLuNrDJ04zEnoBOjeu5Psuugl1SE78NJEXLMY3v6k8mc3FpLml+MUHBqf0p7KtujFK1/8Sm7F7fL3J1wzGa6shs0c9mmNstH8qhDHxGeyhY4fU+dhWA3+Zo+QGDHWsIJcHraTxLzFuDavtVkVzKqMfntEEwv74jqUMxKE9yVb7LSKcN4E4DPnh4QauxuoLUNjYvkw1k97FimJ+QGLxEGUcTVSOPAkwqcrOUgK4kXCY6QwLLpnKYWMLQpyWXinFg9wQf8XejMiUN60Q5567UCJa8g23f+sXbsnJXMIA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
+ DM3PPF5AD378C3B.namprd11.prod.outlook.com (2603:10b6:f:fc00::f24) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.8; Wed, 5 Nov
+ 2025 16:44:10 +0000
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad%3]) with mapi id 15.20.9275.015; Wed, 5 Nov 2025
+ 16:44:09 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH v2] vsomeip: upgrade 3.5.3 -> 3.5.10
+Date: Thu,  6 Nov 2025 00:43:55 +0800
+Message-Id: <20251105164355.4007107-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TYCPR01CA0109.jpnprd01.prod.outlook.com
+ (2603:1096:405:4::25) To DS0PR11MB6399.namprd11.prod.outlook.com
+ (2603:10b6:8:c8::5)
 MIME-Version: 1.0
-References: <20251103051945.1615774-1-ashishkumar.mishra@bmwtechworks.in> <2636ab70-4d47-49ce-a35d-60556a154f9c@gmail.com>
-In-Reply-To: <2636ab70-4d47-49ce-a35d-60556a154f9c@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 5 Nov 2025 07:26:15 -0800
-X-Gm-Features: AWmQ_blPCBwE1WNJbGQFcAG5AXzxGd0mnTktTIsmqigHfwFPrA4w9ICajRchym4
-Message-ID: <CAMKF1soMk==acguwu05qDLWLXq_MwEHaHDfYj7BVnKFvr-99OQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][master][PATCH] imagemagick: adds ptest for
- imagemagick recipe
-To: skandigraun@gmail.com
-Cc: ashishkumar.mishra@bmwtechworks.in, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000004f71580642da93c6"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|DM3PPF5AD378C3B:EE_
+X-MS-Office365-Filtering-Correlation-Id: 26b7df71-b66c-45db-7445-08de1c8a8a9e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|52116014|1800799024|376014|366016|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?Wcxi5HP2/MhcXadzgt7KrjlqwxKHz3JGLzP2QcokA4hsFD5qMA1L0sBlzE52?=
+ =?us-ascii?Q?rAwTT+7r8hwVGuZ1ZtHEYDr4kAoKhKcqnAB3YokohpvgIl9Fw4WyCwrlUwEO?=
+ =?us-ascii?Q?QS+Z91IqZKW88ugDGgSCxITcw7/txyThfNL4IMb5Oz1SPC3IEx0pm/h9kKOZ?=
+ =?us-ascii?Q?CKxpoXdQPkcrv8tMmmpQwX9avwoJmt4HDfHsiAGViNjZAMN9okrq2uYGFefE?=
+ =?us-ascii?Q?rwSzeFWP1t118AioI4aYsU9nYZuR+b4/O0VWPpqK2D0/EAewQkDUUZoyibiQ?=
+ =?us-ascii?Q?GX+UrHaAUkagsm0bsJ3DhXEd6aAdBcSPBrnYki80cQZxX0gQ6SSY3X9AixJ8?=
+ =?us-ascii?Q?s/Xwg9H/l58wfrXV2dFlamHmVfmDdwObRe8A+71oeyYp10mQhq1dmgJIAEIk?=
+ =?us-ascii?Q?9VIcIZK5bUNwrwO4Q2dJzkM7h1xECoSdXWcUHXnLC4Lj6srEkwklIk1SwviE?=
+ =?us-ascii?Q?nVGfKN/QmhL82PCMrcVyATN2mgjKaE8EnhUZucwEo6+Vrjbwy8gBqAVt6Qtg?=
+ =?us-ascii?Q?dIEUzzTwG1wDJlusSFcN6y6biNMvQ3DqXHATYH3i6ENeqSBdTx1BUBuQQmty?=
+ =?us-ascii?Q?+/6ZE2r+XvxEhgM1KXoeQ/EwbHKt90LFHtxR78QNmUpn6wjHCl7I5AzSocAN?=
+ =?us-ascii?Q?lpMnzeAaT7Y2dXO7RcLn3xNgxFV/XypYr7C67nMinC5GX/Ifm8KEZeOhaT+8?=
+ =?us-ascii?Q?kFexkjYK18EqL5qnf9S+ZtJ94s4yjmivEZHpHf/ZY9vv7B1G3AXd8EVT5v2p?=
+ =?us-ascii?Q?ZI55PuV5+kIpq3Q92TKT/I+oUimd5SmyfS1I45idaM6S+wL8EhvRfRCxetUU?=
+ =?us-ascii?Q?4HUCQlCoBFKza7C6E47A7eybEw/9ohNFa8M0W5ykJ4qKnA7gzGWQStXcef5z?=
+ =?us-ascii?Q?t/zHKb+k7MXNSkGaaf4Fz/jXOOZFDFhOK4+r9BXc/UXrNNJcTaq7nPMpBpML?=
+ =?us-ascii?Q?RNrPEjg3OxBYIRgIlz6QF3nYZdmla9bUPgnY1NRYa+4ODs8Sz1ZQ55dIoZMp?=
+ =?us-ascii?Q?ArymuNJ2JQMR/ORlWZZZB4CWpiszUXoGv/t3dBLoh6/pJv3auF/oXcWKBMgq?=
+ =?us-ascii?Q?8Z/rfLp+9Nmt0DxoHD5Do1PfQyAw9aQMp0yJnNODzWTVlAPMzWcKsMbSbPQc?=
+ =?us-ascii?Q?wkPL8H3Bl4DbO4emPVkLTFeYziVRr5JMgtQtppNVq/zzJfABl2A0cqeiMNRa?=
+ =?us-ascii?Q?AgKXNAzU1+Gm8IuofCgTJiLzDQWnb9tTUmSC1PIWkc6IxomqGvw4gdYEaz3R?=
+ =?us-ascii?Q?aAPmjWO3fJXxRBT75xvw9cAkRL0SV+mQUtf0ZC45fHD7x68ch7hdoqYbQ3RH?=
+ =?us-ascii?Q?UFirW3aFAV8bNVhPZ5ZHnRFOvfYbwbVUY+MJMK0moG8QYcS8pS3NOurRNg7d?=
+ =?us-ascii?Q?TFYph5CPM+bKX4G/1yD5NXbqRLGHJzIcSSh2KE+3c/BG2al63QVkubE4OqIA?=
+ =?us-ascii?Q?2EkzoXfi99/V7PMfTirLpOazN6s67ffCN9oRY70lcjhyGV/AjNyvore3XBqO?=
+ =?us-ascii?Q?7hXvqVmXTMe5XPqda2TnWiS3GPARinOaeq6mCkq5u5444QSalBNX2UiR2Q?=
+ =?us-ascii?Q?=3D=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(1800799024)(376014)(366016)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?oewQevoZoa/xhJUzkPGC3LYYZFYdHDxMCNm8/LEP6ZL3/XZ+QBdWGCE5IfiI?=
+ =?us-ascii?Q?HrjnxqyqR7qCsX2AtMZu/vUd9okSxZK2yZ9aENctsFIegEuNa5ko/tUAR5RE?=
+ =?us-ascii?Q?eMM10OZKkKPguWJyjbFnHn2CViFGa1C+9JpnxZGWi9F2qVgUMTkgAXeBLV2y?=
+ =?us-ascii?Q?jmieio6PNlz7p1zRtMpiFiDzS0tSTdc7BnbCTM47mIZeLtCy/xG5Ps8jDcga?=
+ =?us-ascii?Q?w2uxY6Fz006RZi8/jQiEDHXw6xowzgtWq0LKGmqOIHHPTuCfwt3ClpOCq8od?=
+ =?us-ascii?Q?afjCKQXZM1XP7UEmuVRom4vWqspe4mnmOipUtPrFFJXikLJeTGC3t+J7zLXB?=
+ =?us-ascii?Q?5qfm1xFYb31X6WVI8VJKz43dQwdzacF0OjIxQvBeelF35CNYfI81l8lk/Etd?=
+ =?us-ascii?Q?H7Rh5iHMBKZYeoessoEMNqTZ2Yor3hHoEoaWktN0W9De1elMMYUykwtGQaUs?=
+ =?us-ascii?Q?UNh7Z65wPRUAyKcQBllmEdhNwFyPGNciN+pIhxxwTVAG/0liHWA2A2osV7NJ?=
+ =?us-ascii?Q?bbsqnonTHX1u0q+Us2tkKpk9EnRmfP9gFv2tl5f8mp0/4+n4t4ot/kesf/HK?=
+ =?us-ascii?Q?YXwGbJ2GcWmfcAeJB/WuVZbZlt6mBMHbd6LqPJKCGuRZkvfWpQjN45PIOGHL?=
+ =?us-ascii?Q?ocJXxG4zwQFsFckQzcSvIhWb+l0CyGrC5Zxs3TYREf5DUKeize+7Cd0VfN+d?=
+ =?us-ascii?Q?Th20E+saqtY2ol+Osv3oO9/CMwcIWv7Bbh9wDxJo79+psqLLJ8zf4FUyr9kS?=
+ =?us-ascii?Q?L7WN8hJXexjyqcNX2KNg+ttQPBIWIpbhNs5lF36/eloIbSBJznKylXodTYS1?=
+ =?us-ascii?Q?E8X0GGWOTq+3Ko9o5kUP4IDMVZjr0ZGCWH6rcj92j6tRHh7fL9nNVXMbYKiN?=
+ =?us-ascii?Q?pAFZZChqJm5JjFVoHyKDT7izYmNrX6FUFBwpMnki8Ep6npCpKDwEfcaF/xdh?=
+ =?us-ascii?Q?8a2KKsimxdJlqz1XTFL8Z3MhFlmhOlR5pckS3sOX7oDmhhbfy5slTPeEqy0I?=
+ =?us-ascii?Q?3HqDl5nrH/PaN+kyq0EsKSC5uRbjGaZplnnwEMF5ZXrAfytd9J/VB8PEx8vW?=
+ =?us-ascii?Q?cy4EX+y+Sw0R5W2LJ7kCCAv6ZU9y0SWhjyCh+yFlgW22GnP+ofj4/0znDd+Q?=
+ =?us-ascii?Q?qt1OQTrwhhdkH5QJ5RpGBrh94jeRHe1KjOIudFcjn5rW/maL1uYMiPwR+4GC?=
+ =?us-ascii?Q?AOCVp9ulDEFW5NKnwT0FrFEx2YrDmRbS2T5ALngrSxNZFtZsaTovLoeTq5o8?=
+ =?us-ascii?Q?cMEdhm2CHFvxXdUXdCIV0C9fdpo1370lvhmp4xzxKIlcdqr4biWSKkB/oEmV?=
+ =?us-ascii?Q?ebWEmSN7Xo/LYQQBW4emng1WeMuYfj5ENElAo729rFKwLz8aRo1EMdMiZp71?=
+ =?us-ascii?Q?GeLmV667P8JALMLSuG6JNk/zqqipYbek+wkhcZIK3OaPmxre5f6XX97hVcAX?=
+ =?us-ascii?Q?Ssd1ZnvbWqePAgN4R3lLLYTu3DA3Aq+IU4pHxaLuCRPHI9wTE7HCFSuTAkqE?=
+ =?us-ascii?Q?X6pl2/QDkEeufxTlGBjUGtHFN+By0HSSasEMuG1opBtGWsIR/aZXT6PJMfXy?=
+ =?us-ascii?Q?0wYBAbFFS+h9Jc2sCuGEFVDpKhK7ejBo5PyqsByT?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 26b7df71-b66c-45db-7445-08de1c8a8a9e
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2025 16:44:09.8229
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4dKoj7N+Nd9Xye7UH0SQAYg8moLliz5/WNp4K+MOGDrrPd+3WhUT/+uj5D2M9AeOVnqNMzOYtnhywvxUFoejLg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PPF5AD378C3B
+X-Proofpoint-GUID: 6pRIKSkL6GTeOAL0fBqNeHr_31Fi3Fv3
+X-Authority-Analysis: v=2.4 cv=Dacaa/tW c=1 sm=1 tr=0 ts=690b7edd cx=c_pps
+ a=3IxC/HLiWPPRhiYFHlIRMw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=Bk7mZIDdsEizWGDkWTYA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: 6pRIKSkL6GTeOAL0fBqNeHr_31Fi3Fv3
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTA1MDEyOSBTYWx0ZWRfX9paokU4eTTch
+ set3+aPJD2srBxn6HOkRDsnJOWgZvxc/k17b7a2iqKakUo/gdAxXKTOUZoldYu4u/HsMp9SMD8G
+ /vR+egbo9cYajzWlLSkeEOEudIa9UcRG9Uyn1HdwVrJrHKTQ4fOkXZzt2kuTk6wYyFySGMW/lur
+ gVSdP9zZ8k9QgmDozm8Yy0dD7+WWy2s43+54ck1YbyQDGVz8+jOQURWAZKpp6SzGzv5n9PyuRss
+ O6rFtsLFGzMWDWvG1ky9AfDPvbx12E9xBIaevlRt/pvgcnV5PoNt4Uc3N8KkEStYHj/swH5d1QX
+ gnTGnKrRDXXTWsj0BH3fAPfqQMn/HBSGwid9DPnQrFCX/0T8XDPa70Pibf/RHFRo0TSDR9hjBEc
+ mWQAQBT6LTPa2InlsVrdg6F3SmuQgw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-05_06,2025-11-03_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 malwarescore=0 lowpriorityscore=0 bulkscore=0 spamscore=0
+ clxscore=1015 phishscore=0 adultscore=0 impostorscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511050129
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 15:26:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121327
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 16:44:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121328
 
---0000000000004f71580642da93c6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ChangeLog:
+https://github.com/COVESA/vsomeip/releases/tag/3.5.4
+https://github.com/COVESA/vsomeip/releases/tag/3.5.5
+https://github.com/COVESA/vsomeip/releases/tag/3.5.6
+https://github.com/COVESA/vsomeip/releases/tag/3.5.7
+https://github.com/COVESA/vsomeip/releases/tag/3.5.8
+https://github.com/COVESA/vsomeip/releases/tag/3.5.9
+https://github.com/COVESA/vsomeip/releases/tag/3.5.10
 
-On Wed, Nov 5, 2025 at 2:33=E2=80=AFAM Gyorgy Sarvari via lists.openembedde=
-d.org
-<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
+* Fix build with boost 1.89
+* Fix build on 32-bit host
 
-> Khem,
->
-> Did this patch fell through the cracks accidentally, or do you think it
-> needs some corrections first?
->
->
-Thanks for bumping this up, I was dealing with another patch doing the
-upgrade for this recipe and wanted to serialize them
-but did not reply back. Please rebase it on the latest master/master-next
-and I will queue it up.
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+V2 Changes: Update to 3.5.10
+            Fix build with clang
+			Update Upstream-Status in patches
 
+ .../0001-Fix-pkgconfig-dir-for-multilib.patch |   8 +-
+ ...e-configuration-files-to-etc-vsomeip.patch |   8 +-
+ ...-Do-not-specify-PIE-flag-explicitly.patch} |  21 +--
+ .../0004-Fix-build-with-boost-1.89.patch      |  42 ++++++
+ ...ddress-from_string-with-make_address.patch |  47 +++++++
+ ...eLists.txt-add-missing-link-with-dlt.patch |  41 ------
+ ...06-Fix-scanning-64-bit-integer-types.patch | 128 ++++++++++++++++++
+ ...treat-warnings-as-errors-with-clang.patch} |  45 +++---
+ .../{vsomeip_3.5.3.bb => vsomeip_3.5.10.bb}   |  32 +++--
+ 9 files changed, 278 insertions(+), 94 deletions(-)
+ copy meta-networking/recipes-protocols/vsomeip/vsomeip/{0004-Do-not-specify-PIE-flag-explicitly.patch => 0003-Do-not-specify-PIE-flag-explicitly.patch} (82%)
+ create mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Fix-build-with-boost-1.89.patch
+ create mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip/0005-Replace-address-from_string-with-make_address.patch
+ delete mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip/0005-test-common-CMakeLists.txt-add-missing-link-with-dlt.patch
+ create mode 100644 meta-networking/recipes-protocols/vsomeip/vsomeip/0006-Fix-scanning-64-bit-integer-types.patch
+ rename meta-networking/recipes-protocols/vsomeip/vsomeip/{0004-Do-not-specify-PIE-flag-explicitly.patch => 0007-Do-not-treat-warnings-as-errors-with-clang.patch} (50%)
+ rename meta-networking/recipes-protocols/vsomeip/{vsomeip_3.5.3.bb => vsomeip_3.5.10.bb} (66%)
 
-> On 11/3/25 06:19, AshishKumar Mishra via lists.openembedded.org wrote:
-> > The logic used is :
-> > - We check if the required tools are present or not
-> > - We used magick to create an raw RGB file
-> > - The created RGB is then converted to PNG using convert
-> > - We re-gerenate RGB from PNG and compare the original and re-generated
-> RGB
-> > - Enabled the ptest in ptest-packagelists-meta-oe.inc as
-> >   suggested by Gyorgy Sarvari and incorporated logging suggestion
-> > - This was done as standard imagemagick test like drawtest requires
-> manual
-> >   internetion to verify the file.
-> > ---
-> >  .../include/ptest-packagelists-meta-oe.inc    |   1 +
-> >  .../imagemagick/imagemagick-ptest.sh          | 132 ++++++++++++++++++
-> >  .../imagemagick/imagemagick/run-ptest         |  43 ++++++
-> >  .../imagemagick/imagemagick_7.1.2-5.bb        |  13 +-
-> >  4 files changed, 187 insertions(+), 2 deletions(-)
-> >  create mode 100755
-> meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-ptest.sh
-> >  create mode 100644
-> meta-oe/recipes-support/imagemagick/imagemagick/run-ptest
-> >
-> > diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> > index 825747d522..bd6db35c5b 100644
-> > --- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> > +++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> > @@ -16,6 +16,7 @@ PTESTS_FAST_META_OE =3D "\
-> >      function2 \
-> >      fwupd \
-> >      gcab \
-> > +    imagemagick \
-> >      jemalloc \
-> >      jq \
-> >      leveldb \
-> > diff --git
-> a/meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-ptest.sh
-> b/meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-ptest.sh
-> > new file mode 100755
-> > index 0000000000..08595837d6
-> > --- /dev/null
-> > +++
-> b/meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-ptest.sh
-> > @@ -0,0 +1,132 @@
-> > +#!/bin/sh
-> > +#
-> > +# ImageMagick ptest:
-> > +# We ceate an BASERGB file for our usage using "magick"
-> > +# We convert this RGB file to BASEPNG
-> > +# Using BASEPNG we recreate RGB named REGENERATEDRGB
-> > +#
-> > +# BASERGB to BASEPNG to REGENERATEDRGB
-> > +# - Then compare  BASERGB with REGENERATEDRGB
-> > +#
-> > +# 0) The convert command is deprecated in IMv7
-> > +#    used "magick" instead of "convert"
-> > +# 1) We are checking if the binaries are present in RFS or not
-> > +# 2) We Created an RBG of size : WIDTH x HEIGHT pixels
-> > +# 3) Return value is captured after every major actio to capture the
-> status
-> > +# 4) cmp -s is used to compare binary byte by byte data and
-> > +#    capture only exit status
-> > +# 5) Important parametsrs used are :
-> > +#    -depth                     : How many bits for each colour pixel
-> > +#    -alpha off              : Don't consider transparency
-> > +#    -define png:color-type=3D2   : Make PNG work with truecolour RGB
-> > +#    -strip                  : Remove all non-pixel metadata og PNG
-> > +#                                 so file is reproducible
-> > +#    -set gamma 1.0             : No PNG brightness correction
-> > +#     gradient:red-blue         : Data moves liberly from RED to Blue
-> vertically
-> > +
-> > +
-> > +WIDTH=3D16
-> > +HEIGHT=3D16
-> > +BASERGB=3Dbase.rgb
-> > +BASEPNG=3Dbase.png
-> > +REGENERATEDRGB=3Droundtrip.rgb
-> > +
-> > +echo "[DEBUG] Starting ImageMagick Ptest with ${WIDTH}x${HEIGHT} pixel=
-s
-> "
-> > +
-> > +# Verify required binaries
-> > +for bin in magick cmp wc rm; do
-> > +    if [ -z "$(command -v "$bin" 2>/dev/null)" ]; then
-> > +        echo "[ERROR] Required binary '$bin' not found $PATH"
-> > +        exit 127
-> > +    fi
-> > +done
-> > +
-> > +
-> > +# Generate raw RGB
-> > +magick -size ${WIDTH}x${HEIGHT} gradient:red-blue \
-> > +    -depth 8 -type TrueColor \
-> > +    -alpha off -define png:color-type=3D2 \
-> > +    -strip -set gamma 1.0 \
-> > +    rgb:${BASERGB}
-> > +
-> > +returnvalue=3D$?
-> > +if [ "$returnvalue" -ne 0 ]; then
-> > +    echo "[FAIL] Failed to generate RGB pattern "
-> > +    exit 1
-> > +else
-> > +    echo "[DEBUG] ${BASERGB} generated from gradient"
-> > +fi
-> > +
-> > +
-> > +# Convert raw RGB to PNG
-> > +magick -depth 8 -size ${WIDTH}x${HEIGHT} rgb:${BASERGB} \
-> > +    -type TrueColor -alpha off \
-> > +    -define png:color-type=3D2 -strip -set gamma 1.0 \
-> > +    ${BASEPNG}
-> > +
-> > +returnvalue=3D$?
-> > +if [ $returnvalue -ne 0 ]; then
-> > +    echo "[FAIL] Failed to convert RGB to PNG"
-> > +    rm -f ${BASERGB}
-> > +    exit 1
-> > +else
-> > +    echo "[DEBUG] ${BASEPNG} generated from ${BASERGB}"
-> > +fi
-> > +
-> > +
-> > +
-> > +# Regenerate raw RGB from PNG
-> > +magick ${BASEPNG} \
-> > +    -size ${WIDTH}x${HEIGHT} -depth 8 -type TrueColor \
-> > +    -alpha off -define png:color-type=3D2 \
-> > +    -strip -set gamma 1.0 \
-> > +    rgb:${REGENERATEDRGB}
-> > +
-> > +returnvalue=3D$?
-> > +if [ $returnvalue -ne 0 ]; then
-> > +    echo "[FAIL] Failed to regenerate RGB from PNG"
-> > +    rm -f ${BASERGB} ${BASEPNG}
-> > +    exit 1
-> > +else
-> > +    echo "[DEBUG] ${REGENERATEDRGB} generated from ${BASEPNG}"
-> > +fi
-> > +
-> > +
-> > +
-> > +# Compare original and recreated RGB
-> > +if cmp -s ${BASERGB} ${REGENERATEDRGB}; then
-> > +    echo "[PASS] RGB data identical after PNG round-trip"
-> > +    RESULT=3D0
-> > +else
-> > +    echo "[FAIL] RGB mismatch detected, printing their size "
-> > +    echo "[INFO] Base RGB size: $(wc -c < ${BASERGB}) bytes"
-> > +    echo "[INFO] Round-trip RGB size: $(wc -c < ${REGENERATEDRGB})
-> bytes"
-> > +    RESULT=3D1
-> > +fi
-> > +
-> > +
-> > +
-> > +# Checking the identify tool from imagemagick to get the PNG metadata
-> > +# True is added in end to ensure that test script doesnt fail even if
-> > +# identify fails for any reason
-> > +echo "[DEBUG] PNG file info:"
-> > +identify -verbose ${BASEPNG} | grep -E "Depth|Type|Colorspace" || true
-> > +
-> > +
-> > +
-> > +# Cleanup of files create by test code
-> > +echo "[DEBUG] Cleaning up temporary files"
-> > +rm -f ${BASERGB} ${BASEPNG} ${REGENERATEDRGB}
-> > +returnvalue=3D$?
-> > +echo "[DEBUG] Cleanup exit=3D$returnvalue"
-> > +
-> > +
-> > +# Logging the final result
-> > +if [ ${RESULT} -eq 0 ]; then
-> > +    echo "[DEBUG]: imagemagick-ptest.sh sucessfull "
-> > +else
-> > +    echo "[DEBUG]: imagemagick-ptest.sh failed "
-> > +fi
-> > +
-> > +
-> > +exit ${RESULT}
-> > diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/run-ptest
-> b/meta-oe/recipes-support/imagemagick/imagemagick/run-ptest
-> > new file mode 100644
-> > index 0000000000..75251a803f
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/imagemagick/imagemagick/run-ptest
-> > @@ -0,0 +1,43 @@
-> > +#!/bin/sh
-> > +#
-> > +# run-ptest =E2=80=94 ImageMagick ptest harness
-> > +# POSIX-safe and BusyBox compatible
-> > +
-> > +PTDIR=3D$(dirname "$0")
-> > +TESTDIR=3D"$PTDIR"
-> > +PASSCOUNT=3D0
-> > +FAILCOUNT=3D0
-> > +TOTAL=3D0
-> > +
-> > +echo "=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D"
-> > +echo "ImageMagick ptest: Runtime Validation"
-> > +echo "=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D"
-> > +
-> > +for t in "$TESTDIR"/*.sh; do
-> > +    [ -x "$t" ] || chmod +x "$t"
-> > +    TOTAL=3D$((TOTAL + 1))
-> > +    echo
-> > +    echo "[DEBUG] Launching test script $t"
-> > +
-> > +    if sh "$t" 2>&1; then
-> > +        echo "PASS: $(basename "$t")"
-> > +        PASSCOUNT=3D$((PASSCOUNT + 1))
-> > +    else
-> > +        rc=3D$?
-> > +        if [ "$rc" -eq 77 ]; then
-> > +            echo "SKIP: $(basename "$t")"
-> > +        else
-> > +            echo "FAIL: $(basename "$t")"
-> > +            FAILCOUNT=3D$((FAILCOUNT + 1))
-> > +        fi
-> > +    fi
-> > +
-> > +done
-> > +
-> > +echo
-> > +echo "=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D"
-> > +echo "[SUMMARY] Total: $TOTAL | PASS: $PASSCOUNT | FAIL: $FAILCOUNT"
-> > +echo "=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D"
-> > +echo
-> > +[ "$FAILCOUNT" -eq 0 ]
-> > +
-> > diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-5.bb
-> b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-5.bb
-> > index 8ba14261ae..9da9d7df58 100644
-> > --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-5.bb
-> > +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-5.bb
-> > @@ -12,11 +12,14 @@ DEPENDS =3D "lcms bzip2 jpeg libpng tiff zlib fftw
-> freetype libtool"
-> >  BASE_PV =3D "${@d.getVar('PV').split('-')[0]}"
-> >  UPSTREAM_CHECK_GITTAGREGEX =3D "(?P<pver>([0-9][\.|_|-]?)+)"
-> >
-> > -SRC_URI =3D "git://
-> github.com/ImageMagick/ImageMagick.git;branch=3Dmain;protocol=3Dhttps;tag=
-=3D${PV}
-> <http://github.com/ImageMagick/ImageMagick.git;branch=3Dmain;protocol=3Dh=
-ttps;tag=3D$%7BPV%7D>
-> "
-> > +SRC_URI =3D "git://
-> github.com/ImageMagick/ImageMagick.git;branch=3Dmain;protocol=3Dhttps;tag=
-=3D${PV}
-> <http://github.com/ImageMagick/ImageMagick.git;branch=3Dmain;protocol=3Dh=
-ttps;tag=3D$%7BPV%7D>
-> \
-> > +           file://run-ptest \
-> > +           file://imagemagick-ptest.sh \
-> > +"
-> >  SRCREV =3D "4a620c2a89a7481e83cb4a0ff32db0ccbb3afcd2"
-> >
-> >
-> > -inherit autotools pkgconfig update-alternatives
-> > +inherit autotools pkgconfig update-alternatives ptest
-> >  export ac_cv_sys_file_offset_bits =3D "64"
-> >
-> >  EXTRA_OECONF =3D "--program-prefix=3D --program-suffix=3D.im7 --withou=
-t-perl
-> --enable-largefile"
-> > @@ -55,6 +58,12 @@ do_install:append:class-target() {
-> >      fi
-> >  }
-> >
-> > +do_install_ptest() {
-> > +    install -d ${D}${PTEST_PATH}
-> > +    install -m 0755 ${UNPACKDIR}/run-ptest ${D}${PTEST_PATH}/
-> > +    install -m 0755 ${UNPACKDIR}/imagemagick-ptest.sh ${D}${PTEST_PATH=
-}/
-> > +}
-> > +
-> >  FILES:${PN} +=3D "${libdir}/ImageMagick-${BASE_PV}/config-Q16* \
-> >                  ${datadir}/ImageMagick-7"
-> >
-> >
-> >
-> >
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#121325):
-> https://lists.openembedded.org/g/openembedded-devel/message/121325
-> Mute This Topic: https://lists.openembedded.org/mt/116093375/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Fix-pkgconfig-dir-for-multilib.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Fix-pkgconfig-dir-for-multilib.patch
+index 0ddcb642bc..ffbe4e6744 100644
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Fix-pkgconfig-dir-for-multilib.patch
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Fix-pkgconfig-dir-for-multilib.patch
+@@ -1,4 +1,4 @@
+-From 2f931baf290477b586309189445bf87e3bc5d5ba Mon Sep 17 00:00:00 2001
++From 0be97662524d86a24647f7c37b0a66b18da7b72c Mon Sep 17 00:00:00 2001
+ From: Yi Zhao <yi.zhao@windriver.com>
+ Date: Wed, 2 Mar 2022 14:51:13 +0800
+ Subject: [PATCH] Fix pkgconfig dir for multilib
+@@ -11,10 +11,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index ab399a69..beae6eaf 100644
++index 8445ecc8..12c3b947 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -637,7 +637,7 @@ endif()
++@@ -661,7 +661,7 @@ endif()
+  # create pkg-config file
+  if(NOT WIN32)
+          configure_file(${VSOMEIP_NAME}.pc.in ${PROJECT_BINARY_DIR}/${VSOMEIP_NAME}.pc @ONLY)
+@@ -24,5 +24,5 @@ index ab399a69..beae6eaf 100644
+  
+  ##############################################################################
+ -- 
+-2.25.1
++2.34.1
+ 
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-Install-example-configuration-files-to-etc-vsomeip.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-Install-example-configuration-files-to-etc-vsomeip.patch
+index bdaf343606..6dd854e94e 100644
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-Install-example-configuration-files-to-etc-vsomeip.patch
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-Install-example-configuration-files-to-etc-vsomeip.patch
+@@ -1,4 +1,4 @@
+-From ebaa3206ee125741314272cddafa04fa71bd2d1e Mon Sep 17 00:00:00 2001
++From c9d03f6b100d1be8bee75caf933e10fcbb599db3 Mon Sep 17 00:00:00 2001
+ From: Yi Zhao <yi.zhao@windriver.com>
+ Date: Wed, 9 Mar 2022 11:48:44 +0800
+ Subject: [PATCH] Install example configuration files to /etc/vsomeip
+@@ -11,10 +11,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index beae6eaf..d791c12e 100644
++index 12c3b947..b42f8688 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -536,7 +536,7 @@ install(FILES ${PROJECT_BINARY_DIR}/vsomeip.pc DESTINATION lib/pkgconfig)
++@@ -578,7 +578,7 @@ install(FILES ${PROJECT_BINARY_DIR}/vsomeip.pc DESTINATION lib/pkgconfig)
+  endif ()
+  
+  install (
+@@ -24,5 +24,5 @@ index beae6eaf..d791c12e 100644
+  
+  # Add all targets to the build-tree export set
+ -- 
+-2.25.1
++2.34.1
+ 
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-specify-PIE-flag-explicitly.patch
+similarity index 82%
+copy from meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch
+copy to meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-specify-PIE-flag-explicitly.patch
+index 2d789627a3..cada06e98e 100644
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-specify-PIE-flag-explicitly.patch
+@@ -1,4 +1,4 @@
+-From ec2d36466c9050ee282ea1c3bb1b5f1f61c96ecb Mon Sep 17 00:00:00 2001
++From 8054f459d47cde818ed9d1eb1e49efb4a8d4b3df Mon Sep 17 00:00:00 2001
+ From: Yi Zhao <yi.zhao@windriver.com>
+ Date: Mon, 17 Jul 2023 14:33:32 +0800
+ Subject: [PATCH] Do not specify PIE flag explicitly
+@@ -23,9 +23,11 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  CMakeLists.txt | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
+ 
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index b42f8688..c39184e9 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -70,7 +70,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux"
++@@ -73,7 +73,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+  if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      # This is only relevant for GCC and causes warnings on Clang
+      set(EXPORTSYMBOLS "-Wl,-export-dynamic -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exportmap.gcc")
+@@ -34,12 +36,15 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  endif()
+  
+      set(NO_DEPRECATED "")
+-@@ -78,7 +78,7 @@ endif()
+-   if(NOT DEFINED _FORTIFY_SOURCE)
+-       set(_FORTIFY_SOURCE 2)
+-   endif()
+--    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic -Werror -fPIE")
+-+    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic")
++@@ -82,7 +82,7 @@ endif()
++     if(NOT DEFINED _FORTIFY_SOURCE)
++         set(_FORTIFY_SOURCE 2)
++     endif()
++-    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic -Werror -fPIE -Wno-inconsistent-missing-override")
+++    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic -Werror -Wno-inconsistent-missing-override")
+  
+      # force all use of std::mutex and std::recursive_mutex to use runtime init
+      # instead of static initialization so mutexes can be hooked to enable PI as needed
++-- 
++2.34.1
++
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Fix-build-with-boost-1.89.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Fix-build-with-boost-1.89.patch
+new file mode 100644
+index 0000000000..45fffa733f
+--- /dev/null
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Fix-build-with-boost-1.89.patch
+@@ -0,0 +1,42 @@
++From 2a5c3fbfd863a69eafce6a13b273f5c17cbf4062 Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Mon, 3 Nov 2025 23:06:35 +0800
++Subject: [PATCH] Fix build with boost 1.89
++
++The Boost.System stub library has been removed in Boost 1.89.0[1], which
++causes a CMake error:
++
++CMake Error at Boost-1.89.0/BoostConfig.cmake:141 (find_package):
++  Could not find a package configuration file provided by "boost_system"
++  (requested version 1.89.0) with any of the following names:
++    boost_systemConfig.cmake
++    boost_system-config.cmake
++
++Drop 'system' from the COMPONENTS in find_package to fix this issue[2].
++
++[1] https://github.com/boostorg/system/commit/7a495bb46d7ccd808e4be2a6589260839b0fd3a3
++[2] https://github.com/boostorg/system/issues/132
++
++Upstream-Status: Pending
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index c39184e9..ddc1eed8 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -189,7 +189,7 @@ add_definitions(-DVSOMEIP_INTERNAL_SUPPRESS_DEPRECATED)
++ find_package(Threads REQUIRED)
++ 
++ # Boost
++-find_package( Boost 1.66 COMPONENTS system thread filesystem REQUIRED )
+++find_package( Boost 1.66 COMPONENTS thread filesystem REQUIRED )
++ if(${CMAKE_SYSTEM_NAME} MATCHES "QNX")
++     include_directories(${Boost_INCLUDE_DIR} )
++ else()
++-- 
++2.34.1
++
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0005-Replace-address-from_string-with-make_address.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0005-Replace-address-from_string-with-make_address.patch
+new file mode 100644
+index 0000000000..c25df03d3b
+--- /dev/null
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0005-Replace-address-from_string-with-make_address.patch
+@@ -0,0 +1,47 @@
++From 47b976736e4f57447339081ab5a40435b3b2d5a8 Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Tue, 4 Nov 2025 22:10:33 +0800
++Subject: [PATCH] Replace address::from_string with make_address
++
++boost::asio::ip::address::from_string is deprecated since boost 1.87[1].
++Replace it with make_address.
++
++Fix:
++implementation/routing/src/routing_manager_impl.cpp:1406:98: error: 'from_string' is not a member of 'boost::asio::ip::address_v4'
++ 1406 |  _remote_address.is_v4() ?  _remote_address.to_v4() : boost::asio::ip::address_v4::from_string("6.6.6.6");
++      |                                                                                    ^~~~~~~~~~~
++
++[1] https://github.com/boostorg/asio/commit/c0d1cfce7767599c4cf00df36f8017a1073339ae
++
++Upstream-Status: Submitted [https://github.com/COVESA/vsomeip/pull/973]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ implementation/routing/src/routing_manager_impl.cpp | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/implementation/routing/src/routing_manager_impl.cpp b/implementation/routing/src/routing_manager_impl.cpp
++index 3723fe5b..8a252c0b 100644
++--- a/implementation/routing/src/routing_manager_impl.cpp
+++++ b/implementation/routing/src/routing_manager_impl.cpp
++@@ -1404,7 +1404,7 @@ void routing_manager_impl::on_message(const byte_t* _data, length_t _size, endpo
++     if (is_forwarded) {
++         trace::header its_header;
++         const boost::asio::ip::address_v4 its_remote_address =
++-                _remote_address.is_v4() ? _remote_address.to_v4() : boost::asio::ip::address_v4::from_string("6.6.6.6");
+++                _remote_address.is_v4() ? _remote_address.to_v4() : boost::asio::ip::make_address_v4("6.6.6.6");
++         trace::protocol_e its_protocol = _receiver->is_local() ? trace::protocol_e::local
++                 : _receiver->is_reliable()                     ? trace::protocol_e::tcp
++                                                                : trace::protocol_e::udp;
++@@ -1442,7 +1442,7 @@ bool routing_manager_impl::on_message(service_t _service, instance_t _instance,
++         std::shared_ptr<endpoint> _receiver = its_info->get_endpoint(_reliable);
++         if (_receiver && _receiver.get()) {
++             if(!is_acl_message_allowed(_receiver.get(), _service, _instance,
++-                    boost::asio::ip::address_v4::from_string("127.0.0.1"))) {
+++                    boost::asio::ip::make_address_v4("127.0.0.1"))) {
++                 return false;
++             }
++         }
++-- 
++2.34.1
++
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0005-test-common-CMakeLists.txt-add-missing-link-with-dlt.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0005-test-common-CMakeLists.txt-add-missing-link-with-dlt.patch
+deleted file mode 100644
+index 25d66514f8..0000000000
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0005-test-common-CMakeLists.txt-add-missing-link-with-dlt.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From 8676ef287bb25b49668be4336387bdf83a0cae5c Mon Sep 17 00:00:00 2001
+-From: Yi Zhao <yi.zhao@windriver.com>
+-Date: Mon, 1 Jan 2024 17:02:41 +0800
+-Subject: [PATCH] test/common/CMakeLists.txt: add missing link with dlt
+-
+-The libvsomeip_utilities library uses functions e.g.
+-dlt_check_library_version/dlt_register_app/dlt_unregister_app which are
+-provided by dlt therefore add it to linker flags.
+-
+-Fixes:
+-x86_64-poky-linux-ld.lld: error: undefined reference due to --no-allow-shlib-undefined: dlt_check_library_version
+->>> referenced by test/common/libvsomeip_utilities.so
+-
+-x86_64-poky-linux-ld.lld: error: undefined reference due to --no-allow-shlib-undefined: dlt_register_app
+->>> referenced by test/common/libvsomeip_utilities.so
+-
+-x86_64-poky-linux-ld.lld: error: undefined reference due to --no-allow-shlib-undefined: dlt_unregister_app
+->>> referenced by test/common/libvsomeip_utilities.so
+-
+-Upstream-Status: Submitted [https://github.com/COVESA/vsomeip/pull/602]
+-
+-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+----
+- test/common/CMakeLists.txt | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/test/common/CMakeLists.txt b/test/common/CMakeLists.txt
+-index d4d14534..afc8c2d6 100644
+---- a/test/common/CMakeLists.txt
+-+++ b/test/common/CMakeLists.txt
+-@@ -27,6 +27,7 @@ TARGET_LINK_LIBRARIES (
+-         ${Boost_LIBRARIES}
+-         ${DL_LIBRARY}
+-         ${TEST_LINK_LIBRARIES}
+-+        ${DLT_LIBRARIES}
+- )
+- 
+- # ----------------------------------------------------------------------------
+--- 
+-2.25.1
+-
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0006-Fix-scanning-64-bit-integer-types.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0006-Fix-scanning-64-bit-integer-types.patch
+new file mode 100644
+index 0000000000..f4653d0010
+--- /dev/null
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0006-Fix-scanning-64-bit-integer-types.patch
+@@ -0,0 +1,128 @@
++From 67878aa198e17f13a6d1a0de72bf06a872aec472 Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Tue, 4 Nov 2025 12:50:51 +0800
++Subject: [PATCH] Fix scanning 64-bit integer types
++
++Fix build error on 32-bit host:
++test/network_tests/cpu_load_tests/cpu_load_measurer.cpp:89:24: error: format '%lu' expects argument of type 'long unsigned int*',
++but argument 3 has type 'uint64_t*' {aka 'long long unsigned int*'} [-Werror=format=]
++   89 |   "%lu %lu %ld %ld", // utime, stime, cutime, cstime
++      |    ~~^
++      |      |
++      |      long unsigned int*
++      |    %llu
++   90 |   &utime, &stime, &cutime, &cstime)
++      |   ~~~~~~
++      |   |
++      |   uint64_t* {aka long long unsigned int*}
++
++Upstream-Status: Submitted [https://github.com/COVESA/vsomeip/pull/974]
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ implementation/routing/src/routing_manager_impl.cpp     | 4 +++-
++ test/network_tests/cpu_load_tests/cpu_load_measurer.cpp | 6 ++++--
++ test/network_tests/memory_tests/memory_test_client.cpp  | 4 +++-
++ test/network_tests/memory_tests/memory_test_service.cpp | 4 +++-
++ 4 files changed, 13 insertions(+), 5 deletions(-)
++
++diff --git a/implementation/routing/src/routing_manager_impl.cpp b/implementation/routing/src/routing_manager_impl.cpp
++index 8a252c0b..9fb6c32c 100644
++--- a/implementation/routing/src/routing_manager_impl.cpp
+++++ b/implementation/routing/src/routing_manager_impl.cpp
++@@ -10,6 +10,7 @@
++ #include <fstream>
++ #include <forward_list>
++ #include <thread>
+++#include <cinttypes>
++ 
++ #if defined(__linux__) || defined(__QNX__)
++ #include <unistd.h>
++@@ -3914,7 +3915,8 @@ void routing_manager_impl::memory_log_timer_cbk(boost::system::error_code const&
++     std::uint64_t its_dirtypages(0);
++ 
++     if (EOF
++-        == std::fscanf(its_file, "%lu %lu %lu %lu %lu %lu %lu", &its_size, &its_rsssize, &its_sharedpages, &its_text, &its_lib, &its_data,
+++        == std::fscanf(its_file, "%" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64,
+++                    &its_size, &its_rsssize, &its_sharedpages, &its_text, &its_lib, &its_data,
++                     &its_dirtypages)) {
++         VSOMEIP_ERROR << "memory_log_timer_cbk: error reading: errno " << errno;
++     }
++diff --git a/test/network_tests/cpu_load_tests/cpu_load_measurer.cpp b/test/network_tests/cpu_load_tests/cpu_load_measurer.cpp
++index aaf91174..dfe27e8c 100644
++--- a/test/network_tests/cpu_load_tests/cpu_load_measurer.cpp
+++++ b/test/network_tests/cpu_load_tests/cpu_load_measurer.cpp
++@@ -12,6 +12,7 @@
++ #include <vector>
++ #include <stdexcept>
++ #include <cstdio>
+++#include <cinttypes>
++ 
++ #include <sys/types.h>
++ #include <unistd.h>
++@@ -86,7 +87,7 @@ std::uint64_t cpu_load_measurer::read_proc_pid_stat() {
++     std::int64_t cstime(0);
++     if (std::fscanf(f,
++                     "%*d %*s %*c %*d %*d %*d %*d %*d %*u %*u %*u %*u %*u "
++-                    "%lu %lu %ld %ld", // utime, stime, cutime, cstime
+++                    "%" SCNu64 " %" SCNu64 " %" SCNi64 " %" SCNi64, // utime, stime, cutime, cstime
++                     &utime, &stime, &cutime, &cstime)
++         == EOF) {
++         std::cerr << "Failed to read " + path << std::endl;
++@@ -116,7 +117,8 @@ std::uint64_t cpu_load_measurer::read_proc_stat(std::uint64_t* _idle) {
++     std::uint64_t steal(0);
++     std::uint64_t guest(0);
++     std::uint64_t guest_nice(0);
++-    if (std::fscanf(f, "%*s %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu", &user, &nice, &system, &idle, &iowait, &irq, &softirq, &steal, &guest,
+++    if (std::fscanf(f, "%*s %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64,
+++                    &user, &nice, &system, &idle, &iowait, &irq, &softirq, &steal, &guest,
++                     &guest_nice)
++         == EOF) {
++         std::cerr << "Failed to read /proc/stat" << std::endl;
++diff --git a/test/network_tests/memory_tests/memory_test_client.cpp b/test/network_tests/memory_tests/memory_test_client.cpp
++index 102c8218..d922ad81 100644
++--- a/test/network_tests/memory_tests/memory_test_client.cpp
+++++ b/test/network_tests/memory_tests/memory_test_client.cpp
++@@ -6,6 +6,7 @@
++ #include <chrono>
++ #include <iomanip>
++ #include <cstring>
+++#include <cinttypes>
++ 
++ #include <vsomeip/internal/logger.hpp>
++ #include "memory_test_client.hpp"
++@@ -30,7 +31,8 @@ void check_memory(std::vector<std::uint64_t>& test_memory_, std::atomic<bool>& s
++         std::uint64_t its_dirtypages(0);
++ 
++         if (EOF
++-            == std::fscanf(its_file, "%lu %lu %lu %lu %lu %lu %lu", &its_size, &its_rsssize, &its_sharedpages, &its_text, &its_lib,
+++            == std::fscanf(its_file, "%" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64,
+++                           &its_size, &its_rsssize, &its_sharedpages, &its_text, &its_lib,
++                            &its_data, &its_dirtypages)) {
++             VSOMEIP_ERROR << "check_memory: error reading: errno " << errno;
++         }
++diff --git a/test/network_tests/memory_tests/memory_test_service.cpp b/test/network_tests/memory_tests/memory_test_service.cpp
++index a8547395..751c6f9e 100644
++--- a/test/network_tests/memory_tests/memory_test_service.cpp
+++++ b/test/network_tests/memory_tests/memory_test_service.cpp
++@@ -5,6 +5,7 @@
++ 
++ #include <vsomeip/internal/logger.hpp>
++ #include <cstring>
+++#include <cinttypes>
++ 
++ #include "memory_test_service.hpp"
++ 
++@@ -28,7 +29,8 @@ void check_memory(std::vector<std::uint64_t>& test_memory_, std::atomic<bool>& s
++         std::uint64_t its_dirtypages(0);
++ 
++         if (EOF
++-            == std::fscanf(its_file, "%lu %lu %lu %lu %lu %lu %lu", &its_size, &its_rsssize, &its_sharedpages, &its_text, &its_lib,
+++            == std::fscanf(its_file, "%" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64 " %" SCNu64,
+++                           &its_size, &its_rsssize, &its_sharedpages, &its_text, &its_lib,
++                            &its_data, &its_dirtypages)) {
++             VSOMEIP_ERROR << "check_memory: error reading: errno " << errno;
++         }
++-- 
++2.34.1
++
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch b/meta-networking/recipes-protocols/vsomeip/vsomeip/0007-Do-not-treat-warnings-as-errors-with-clang.patch
+similarity index 50%
+rename from meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch
+rename to meta-networking/recipes-protocols/vsomeip/vsomeip/0007-Do-not-treat-warnings-as-errors-with-clang.patch
+index 2d789627a3..31e7efcf33 100644
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0007-Do-not-treat-warnings-as-errors-with-clang.patch
+@@ -1,45 +1,40 @@
+-From ec2d36466c9050ee282ea1c3bb1b5f1f61c96ecb Mon Sep 17 00:00:00 2001
++From 74c6e762097ad8016d1410bd1beaef1398f02901 Mon Sep 17 00:00:00 2001
+ From: Yi Zhao <yi.zhao@windriver.com>
+-Date: Mon, 17 Jul 2023 14:33:32 +0800
+-Subject: [PATCH] Do not specify PIE flag explicitly
++Date: Wed, 5 Nov 2025 22:17:14 +0800
++Subject: [PATCH] Do not treat warnings as errors with clang
+ 
+-For nodistro distro, packages are built without PIE because
+-security_flags.inc is not included by default. But in vsomeip, the PIE
+-flag is explicitly specified in CMAKE_CXX_FLAGS, which will cause
+-building with PIE even in nodistro, causing an error when linking the
+-googletest static library:
++There are some warnings when building with clang which are treated as
++errors and fails the build.
+ 
+-TOPDIR/tmp-glibc/work/cortexa53-oe-linux/vsomeip/3.1.20.3-r0/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../../libexec/aarch64-oe-linux/gcc/aarch64-oe-linux/12.2.0/ld:
+-TOPDIR/tmp-glibc/work/cortexa53-oe-linux/vsomeip/3.1.20.3-r0/recipe-sysroot/usr/lib/libgtest.a(gtest-all.cc.o)(.text+0x4a90):
+-unresolvable R_AARCH64_ADR_PREL_PG_HI21 relocation against symbol `_ZSt4cerr@@GLIBCXX_3.4'
+-
+-Remove PIE flag from CMAKE_CXX_FLAGS and only enable PIE flag by
+-including security_flags.inc.
+-
+-Upstream-Status: Inappropriate [embedded specific]
++Upstream-Status: Inappropriate [oe specific]
+ 
+ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+ ---
+  CMakeLists.txt | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
+ 
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index ddc1eed8..62b096e7 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -70,7 +70,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux"
++@@ -73,7 +73,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+  if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      # This is only relevant for GCC and causes warnings on Clang
+      set(EXPORTSYMBOLS "-Wl,-export-dynamic -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exportmap.gcc")
+--    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -pie -Wno-tsan -Wl,-z,relro,-z,now")
+-+    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -Wno-tsan -Wl,-z,relro,-z,now")
++-    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -Wno-tsan -Wl,-z,relro,-z,now")
+++    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -Wno-tsan -Wl,-z,relro,-z,now -Werror")
+  endif()
+  
+      set(NO_DEPRECATED "")
+-@@ -78,7 +78,7 @@ endif()
+-   if(NOT DEFINED _FORTIFY_SOURCE)
+-       set(_FORTIFY_SOURCE 2)
+-   endif()
+--    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic -Werror -fPIE")
+-+    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic")
++@@ -82,7 +82,7 @@ endif()
++     if(NOT DEFINED _FORTIFY_SOURCE)
++         set(_FORTIFY_SOURCE 2)
++     endif()
++-    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic -Werror -Wno-inconsistent-missing-override")
+++    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP -pthread -O -Wall -Wextra -Wformat -Wformat-security -Wconversion -fexceptions -fstrict-aliasing -fstack-protector-strong -fasynchronous-unwind-tables -fno-omit-frame-pointer -D_FORTIFY_SOURCE=${_FORTIFY_SOURCE} -Wformat -Wformat-security -Wpedantic -Wno-inconsistent-missing-override")
+  
+      # force all use of std::mutex and std::recursive_mutex to use runtime init
+      # instead of static initialization so mutexes can be hooked to enable PI as needed
++-- 
++2.34.1
++
+diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.3.bb b/meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.10.bb
+similarity index 66%
+rename from meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.3.bb
+rename to meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.10.bb
+index f854078004..0455e23caa 100644
+--- a/meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.3.bb
++++ b/meta-networking/recipes-protocols/vsomeip/vsomeip_3.5.10.bb
+@@ -7,25 +7,27 @@ SECTION = "net"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
+ 
+-GTEST_VER = "1.15.2"
++GTEST_VER = "1.17.0"
+ SRC_URI = "git://github.com/GENIVI/${BPN}.git;branch=master;protocol=https;name=vsomeip \
+            https://github.com/google/googletest/releases/download/v${GTEST_VER}/googletest-${GTEST_VER}.tar.gz;name=gtest;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/ \
+            file://0001-Fix-pkgconfig-dir-for-multilib.patch \
+            file://0002-Install-example-configuration-files-to-etc-vsomeip.patch \
+-           file://0004-Do-not-specify-PIE-flag-explicitly.patch \
+-           file://0005-test-common-CMakeLists.txt-add-missing-link-with-dlt.patch \
++           file://0003-Do-not-specify-PIE-flag-explicitly.patch \
++           file://0004-Fix-build-with-boost-1.89.patch \
++           file://0005-Replace-address-from_string-with-make_address.patch \
++           file://0006-Fix-scanning-64-bit-integer-types.patch \
++           file://0007-Do-not-treat-warnings-as-errors-with-clang.patch \
+           "
+ 
+-SRCREV = "6461369b3874c844642c9adaac9d1b7406794ab8"
+-SRC_URI[gtest.sha256sum] = "7b42b4d6ed48810c5362c265a17faebe90dc2373c885e5216439d37927f02926"
++SRCREV = "c4e0db329da9b63f511f3c2456c040582daf9305"
++SRC_URI[gtest.sha256sum] = "65fab701d9829d38cb77c14acdc431d2108bfdbf8979e40eb8ae567edf10b27c"
+ 
+ COMPATIBLE_HOST:mips = "null"
+ COMPATIBLE_HOST:mips64 = "null"
+ COMPATIBLE_HOST:powerpc = "null"
+ COMPATIBLE_HOST:libc-musl = 'null'
+ 
+-DEPENDS = "boost dlt-daemon googletest"
+-
++DEPENDS = "boost dlt-daemon"
+ 
+ inherit cmake pkgconfig
+ 
+@@ -43,9 +45,10 @@ EXTRA_OECMAKE += "-DTEST_IP_MASTER=10.0.3.1 \
+ 
+ RDEPENDS:${PN}-test = "bash lsof"
+ 
+-do_compile:append() {
+-    cmake_runcmake_build --target examples
+-    cmake_runcmake_build --target build_tests
++OECMAKE_TARGET_COMPILE += "vsomeip_ctrl examples build_tests"
++
++do_compile:prepend() {
++    sed -i -e 's#${S}/build#/opt/${PN}-test#g' ${S}/test/unit_tests/security_policy_manager_impl_tests/policy_manager_impl_unit_test_macro.hpp
+ }
+ 
+ do_install:append() {
+@@ -58,13 +61,17 @@ do_install:append() {
+     install -d ${D}/opt/${PN}-test/test/test/common
+     cp -rf ${S}/test/common/examples_policies \
+         ${D}/opt/${PN}-test/test/test/common/
++
++    install -d ${D}/opt/${PN}-test/test/common
+     install -m 0755 ${B}/test/common/libvsomeip_utilities.so \
+-        ${D}/opt/${PN}-test/test/test/common/
++        ${D}/opt/${PN}-test/test/common/
+ 
+     for d in unit_tests network_tests; do
+         install -d ${D}/opt/${PN}-test/test/$d
+         cp -rf ${B}/test/$d/*_tests ${D}/opt/${PN}-test/test/$d
++        find ${D}/opt/${PN}-test/test/$d -maxdepth 2 \( -name "*.cmake" -o -name "CMakeFiles" \) -exec rm -rf {} \;
+     done
++    sed -i -e 's#../..${B}#/opt/${PN}-test#g' ${D}/opt/${PN}-test/test/network_tests/lazy_load_tests/vsomeip/vsomeip_policy_extensions.json
+ }
+ 
+ PACKAGES += "${PN}-test"
+@@ -75,4 +82,5 @@ FILES:${PN}-dbg += " \
+ FILES:${PN}-test = " \
+    /opt/${PN}-test \
+    "
+-SKIP_RECIPE[vsomeip] ?= "Does not work with boost >= 1.87"
++
++INSANE_SKIP += "32bit-time"
+-- 
+2.34.1
 
---0000000000004f71580642da93c6
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Nov 5, =
-2025 at 2:33=E2=80=AFAM Gyorgy Sarvari via <a href=3D"http://lists.openembe=
-dded.org">lists.openembedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:gm=
-ail.com@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; wr=
-ote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Khem,<br>
-<br>
-Did this patch fell through the cracks accidentally, or do you think it<br>
-needs some corrections first?<br>
-<br></blockquote><div><br></div><div>Thanks for bumping this up, I was deal=
-ing with another patch doing the upgrade for this recipe and wanted to seri=
-alize them</div><div>but did not reply back. Please rebase it on the latest=
- master/master-next and I will queue it up.=C2=A0</div><div>=C2=A0</div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t:1px solid rgb(204,204,204);padding-left:1ex">
-On 11/3/25 06:19, AshishKumar Mishra via <a href=3D"http://lists.openembedd=
-ed.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> wro=
-te:<br>
-&gt; The logic used is :<br>
-&gt; - We check if the required tools are present or not<br>
-&gt; - We used magick to create an raw RGB file<br>
-&gt; - The created RGB is then converted to PNG using convert<br>
-&gt; - We re-gerenate RGB from PNG and compare the original and re-generate=
-d RGB<br>
-&gt; - Enabled the ptest in ptest-packagelists-meta-oe.inc as<br>
-&gt;=C2=A0 =C2=A0suggested by Gyorgy Sarvari and incorporated logging sugge=
-stion<br>
-&gt; - This was done as standard imagemagick test like drawtest requires ma=
-nual<br>
-&gt;=C2=A0 =C2=A0internetion to verify the file.<br>
-&gt; ---<br>
-&gt;=C2=A0 .../include/ptest-packagelists-meta-oe.inc=C2=A0 =C2=A0 |=C2=A0 =
-=C2=A01 +<br>
-&gt;=C2=A0 .../imagemagick/imagemagick-ptest.sh=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 | 132 ++++++++++++++++++<br>
-&gt;=C2=A0 .../imagemagick/imagemagick/run-ptest=C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0|=C2=A0 43 ++++++<br>
-&gt;=C2=A0 .../imagemagick/<a href=3D"http://imagemagick_7.1.2-5.bb" rel=3D=
-"noreferrer" target=3D"_blank">imagemagick_7.1.2-5.bb</a>=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 |=C2=A0 13 +-<br>
-&gt;=C2=A0 4 files changed, 187 insertions(+), 2 deletions(-)<br>
-&gt;=C2=A0 create mode 100755 meta-oe/recipes-support/imagemagick/imagemagi=
-ck/imagemagick-ptest.sh<br>
-&gt;=C2=A0 create mode 100644 meta-oe/recipes-support/imagemagick/imagemagi=
-ck/run-ptest<br>
-&gt;<br>
-&gt; diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/met=
-a-oe/conf/include/ptest-packagelists-meta-oe.inc<br>
-&gt; index 825747d522..bd6db35c5b 100644<br>
-&gt; --- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc<br>
-&gt; +++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc<br>
-&gt; @@ -16,6 +16,7 @@ PTESTS_FAST_META_OE =3D &quot;\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 function2 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 fwupd \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 gcab \<br>
-&gt; +=C2=A0 =C2=A0 imagemagick \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 jemalloc \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 jq \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 leveldb \<br>
-&gt; diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/imagemagi=
-ck-ptest.sh b/meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-p=
-test.sh<br>
-&gt; new file mode 100755<br>
-&gt; index 0000000000..08595837d6<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-ptes=
-t.sh<br>
-&gt; @@ -0,0 +1,132 @@<br>
-&gt; +#!/bin/sh<br>
-&gt; +#<br>
-&gt; +# ImageMagick ptest:<br>
-&gt; +# We ceate an BASERGB file for our usage using &quot;magick&quot;<br>
-&gt; +# We convert this RGB file to BASEPNG<br>
-&gt; +# Using BASEPNG we recreate RGB named REGENERATEDRGB<br>
-&gt; +#<br>
-&gt; +# BASERGB to BASEPNG to REGENERATEDRGB<br>
-&gt; +# - Then compare=C2=A0 BASERGB with REGENERATEDRGB<br>
-&gt; +#<br>
-&gt; +# 0) The convert command is deprecated in IMv7<br>
-&gt; +#=C2=A0 =C2=A0 used &quot;magick&quot; instead of &quot;convert&quot;=
-<br>
-&gt; +# 1) We are checking if the binaries are present in RFS or not<br>
-&gt; +# 2) We Created an RBG of size : WIDTH x HEIGHT pixels<br>
-&gt; +# 3) Return value is captured after every major actio to capture the =
-status<br>
-&gt; +# 4) cmp -s is used to compare binary byte by byte data and<br>
-&gt; +#=C2=A0 =C2=A0 capture only exit status<br>
-&gt; +# 5) Important parametsrs used are :<br>
-&gt; +#=C2=A0 =C2=A0 -depth=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0: How many bits for each colour pixel<br>
-&gt; +#=C2=A0 =C2=A0 -alpha off=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 : Don&#39;t consider transparency<br>
-&gt; +#=C2=A0 =C2=A0 -define png:color-type=3D2=C2=A0 =C2=A0: Make PNG work=
- with truecolour RGB<br>
-&gt; +#=C2=A0 =C2=A0 -strip=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 : Remove all non-pixel metadata og PNG<br>
-&gt; +#=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0so file is reproducible=
-<br>
-&gt; +#=C2=A0 =C2=A0 -set gamma 1.0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0: No PNG brightness correction<br>
-&gt; +#=C2=A0 =C2=A0 =C2=A0gradient:red-blue=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0: Data moves liberly from RED to Blue vertically<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +WIDTH=3D16<br>
-&gt; +HEIGHT=3D16<br>
-&gt; +BASERGB=3Dbase.rgb<br>
-&gt; +BASEPNG=3Dbase.png<br>
-&gt; +REGENERATEDRGB=3Droundtrip.rgb<br>
-&gt; +<br>
-&gt; +echo &quot;[DEBUG] Starting ImageMagick Ptest with ${WIDTH}x${HEIGHT}=
- pixels &quot;<br>
-&gt; +<br>
-&gt; +# Verify required binaries<br>
-&gt; +for bin in magick cmp wc rm; do<br>
-&gt; +=C2=A0 =C2=A0 if [ -z &quot;$(command -v &quot;$bin&quot; 2&gt;/dev/n=
-ull)&quot; ]; then<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 echo &quot;[ERROR] Required binary &#39;$=
-bin&#39; not found $PATH&quot;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 exit 127<br>
-&gt; +=C2=A0 =C2=A0 fi<br>
-&gt; +done<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +# Generate raw RGB<br>
-&gt; +magick -size ${WIDTH}x${HEIGHT} gradient:red-blue \<br>
-&gt; +=C2=A0 =C2=A0 -depth 8 -type TrueColor \<br>
-&gt; +=C2=A0 =C2=A0 -alpha off -define png:color-type=3D2 \<br>
-&gt; +=C2=A0 =C2=A0 -strip -set gamma 1.0 \<br>
-&gt; +=C2=A0 =C2=A0 rgb:${BASERGB}<br>
-&gt; +<br>
-&gt; +returnvalue=3D$?<br>
-&gt; +if [ &quot;$returnvalue&quot; -ne 0 ]; then<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[FAIL] Failed to generate RGB pattern &quot;=
-<br>
-&gt; +=C2=A0 =C2=A0 exit 1<br>
-&gt; +else<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[DEBUG] ${BASERGB} generated from gradient&q=
-uot;<br>
-&gt; +fi<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +# Convert raw RGB to PNG<br>
-&gt; +magick -depth 8 -size ${WIDTH}x${HEIGHT} rgb:${BASERGB} \<br>
-&gt; +=C2=A0 =C2=A0 -type TrueColor -alpha off \<br>
-&gt; +=C2=A0 =C2=A0 -define png:color-type=3D2 -strip -set gamma 1.0 \<br>
-&gt; +=C2=A0 =C2=A0 ${BASEPNG}<br>
-&gt; +<br>
-&gt; +returnvalue=3D$?<br>
-&gt; +if [ $returnvalue -ne 0 ]; then<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[FAIL] Failed to convert RGB to PNG&quot;<br=
->
-&gt; +=C2=A0 =C2=A0 rm -f ${BASERGB}<br>
-&gt; +=C2=A0 =C2=A0 exit 1<br>
-&gt; +else<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[DEBUG] ${BASEPNG} generated from ${BASERGB}=
-&quot;<br>
-&gt; +fi<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +# Regenerate raw RGB from PNG<br>
-&gt; +magick ${BASEPNG} \<br>
-&gt; +=C2=A0 =C2=A0 -size ${WIDTH}x${HEIGHT} -depth 8 -type TrueColor \<br>
-&gt; +=C2=A0 =C2=A0 -alpha off -define png:color-type=3D2 \<br>
-&gt; +=C2=A0 =C2=A0 -strip -set gamma 1.0 \<br>
-&gt; +=C2=A0 =C2=A0 rgb:${REGENERATEDRGB}<br>
-&gt; +<br>
-&gt; +returnvalue=3D$?<br>
-&gt; +if [ $returnvalue -ne 0 ]; then<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[FAIL] Failed to regenerate RGB from PNG&quo=
-t;<br>
-&gt; +=C2=A0 =C2=A0 rm -f ${BASERGB} ${BASEPNG}<br>
-&gt; +=C2=A0 =C2=A0 exit 1<br>
-&gt; +else<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[DEBUG] ${REGENERATEDRGB} generated from ${B=
-ASEPNG}&quot;<br>
-&gt; +fi<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +# Compare original and recreated RGB<br>
-&gt; +if cmp -s ${BASERGB} ${REGENERATEDRGB}; then<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[PASS] RGB data identical after PNG round-tr=
-ip&quot;<br>
-&gt; +=C2=A0 =C2=A0 RESULT=3D0<br>
-&gt; +else<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[FAIL] RGB mismatch detected, printing their=
- size &quot;<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[INFO] Base RGB size: $(wc -c &lt; ${BASERGB=
-}) bytes&quot;<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[INFO] Round-trip RGB size: $(wc -c &lt; ${R=
-EGENERATEDRGB}) bytes&quot;<br>
-&gt; +=C2=A0 =C2=A0 RESULT=3D1<br>
-&gt; +fi<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +# Checking the identify tool from imagemagick to get the PNG metadata=
-<br>
-&gt; +# True is added in end to ensure that test script doesnt fail even if=
-<br>
-&gt; +# identify fails for any reason<br>
-&gt; +echo &quot;[DEBUG] PNG file info:&quot;<br>
-&gt; +identify -verbose ${BASEPNG} | grep -E &quot;Depth|Type|Colorspace&qu=
-ot; || true<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +# Cleanup of files create by test code<br>
-&gt; +echo &quot;[DEBUG] Cleaning up temporary files&quot;<br>
-&gt; +rm -f ${BASERGB} ${BASEPNG} ${REGENERATEDRGB}<br>
-&gt; +returnvalue=3D$?<br>
-&gt; +echo &quot;[DEBUG] Cleanup exit=3D$returnvalue&quot;<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +# Logging the final result<br>
-&gt; +if [ ${RESULT} -eq 0 ]; then<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[DEBUG]: imagemagick-ptest.sh sucessfull &qu=
-ot;<br>
-&gt; +else<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[DEBUG]: imagemagick-ptest.sh failed &quot;<=
-br>
-&gt; +fi<br>
-&gt; +<br>
-&gt; +<br>
-&gt; +exit ${RESULT}<br>
-&gt; diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/run-ptest=
- b/meta-oe/recipes-support/imagemagick/imagemagick/run-ptest<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..75251a803f<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-oe/recipes-support/imagemagick/imagemagick/run-ptest<br>
-&gt; @@ -0,0 +1,43 @@<br>
-&gt; +#!/bin/sh<br>
-&gt; +#<br>
-&gt; +# run-ptest =E2=80=94 ImageMagick ptest harness<br>
-&gt; +# POSIX-safe and BusyBox compatible<br>
-&gt; +<br>
-&gt; +PTDIR=3D$(dirname &quot;$0&quot;)<br>
-&gt; +TESTDIR=3D&quot;$PTDIR&quot;<br>
-&gt; +PASSCOUNT=3D0<br>
-&gt; +FAILCOUNT=3D0<br>
-&gt; +TOTAL=3D0<br>
-&gt; +<br>
-&gt; +echo &quot;=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D&quot;<br>
-&gt; +echo &quot;ImageMagick ptest: Runtime Validation&quot;<br>
-&gt; +echo &quot;=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D&quot;<br>
-&gt; +<br>
-&gt; +for t in &quot;$TESTDIR&quot;/*.sh; do<br>
-&gt; +=C2=A0 =C2=A0 [ -x &quot;$t&quot; ] || chmod +x &quot;$t&quot;<br>
-&gt; +=C2=A0 =C2=A0 TOTAL=3D$((TOTAL + 1))<br>
-&gt; +=C2=A0 =C2=A0 echo<br>
-&gt; +=C2=A0 =C2=A0 echo &quot;[DEBUG] Launching test script $t&quot;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 if sh &quot;$t&quot; 2&gt;&amp;1; then<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 echo &quot;PASS: $(basename &quot;$t&quot=
-;)&quot;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 PASSCOUNT=3D$((PASSCOUNT + 1))<br>
-&gt; +=C2=A0 =C2=A0 else<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 rc=3D$?<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if [ &quot;$rc&quot; -eq 77 ]; then<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 echo &quot;SKIP: $(basename=
- &quot;$t&quot;)&quot;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 else<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 echo &quot;FAIL: $(basename=
- &quot;$t&quot;)&quot;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 FAILCOUNT=3D$((FAILCOUNT + =
-1))<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 fi<br>
-&gt; +=C2=A0 =C2=A0 fi<br>
-&gt; +<br>
-&gt; +done<br>
-&gt; +<br>
-&gt; +echo<br>
-&gt; +echo &quot;=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D&quot;<br>
-&gt; +echo &quot;[SUMMARY] Total: $TOTAL | PASS: $PASSCOUNT | FAIL: $FAILCO=
-UNT&quot;<br>
-&gt; +echo &quot;=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D&quot;<br>
-&gt; +echo<br>
-&gt; +[ &quot;$FAILCOUNT&quot; -eq 0 ]<br>
-&gt; +<br>
-&gt; diff --git a/meta-oe/recipes-support/imagemagick/<a href=3D"http://ima=
-gemagick_7.1.2-5.bb" rel=3D"noreferrer" target=3D"_blank">imagemagick_7.1.2=
--5.bb</a> b/meta-oe/recipes-support/imagemagick/<a href=3D"http://imagemagi=
-ck_7.1.2-5.bb" rel=3D"noreferrer" target=3D"_blank">imagemagick_7.1.2-5.bb<=
-/a><br>
-&gt; index 8ba14261ae..9da9d7df58 100644<br>
-&gt; --- a/meta-oe/recipes-support/imagemagick/<a href=3D"http://imagemagic=
-k_7.1.2-5.bb" rel=3D"noreferrer" target=3D"_blank">imagemagick_7.1.2-5.bb</=
-a><br>
-&gt; +++ b/meta-oe/recipes-support/imagemagick/<a href=3D"http://imagemagic=
-k_7.1.2-5.bb" rel=3D"noreferrer" target=3D"_blank">imagemagick_7.1.2-5.bb</=
-a><br>
-&gt; @@ -12,11 +12,14 @@ DEPENDS =3D &quot;lcms bzip2 jpeg libpng tiff zlib=
- fftw freetype libtool&quot;<br>
-&gt;=C2=A0 BASE_PV =3D &quot;${@d.getVar(&#39;PV&#39;).split(&#39;-&#39;)[0=
-]}&quot;<br>
-&gt;=C2=A0 UPSTREAM_CHECK_GITTAGREGEX =3D &quot;(?P&lt;pver&gt;([0-9][\.|_|=
--]?)+)&quot;<br>
-&gt;=C2=A0 <br>
-&gt; -SRC_URI =3D &quot;git://<a href=3D"http://github.com/ImageMagick/Imag=
-eMagick.git;branch=3Dmain;protocol=3Dhttps;tag=3D$%7BPV%7D" rel=3D"noreferr=
-er" target=3D"_blank">github.com/ImageMagick/ImageMagick.git;branch=3Dmain;=
-protocol=3Dhttps;tag=3D${PV}</a>&quot;<br>
-&gt; +SRC_URI =3D &quot;git://<a href=3D"http://github.com/ImageMagick/Imag=
-eMagick.git;branch=3Dmain;protocol=3Dhttps;tag=3D$%7BPV%7D" rel=3D"noreferr=
-er" target=3D"_blank">github.com/ImageMagick/ImageMagick.git;branch=3Dmain;=
-protocol=3Dhttps;tag=3D${PV}</a> \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://run-ptest \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://imagemagick-ptest.sh =
-\<br>
-&gt; +&quot;<br>
-&gt;=C2=A0 SRCREV =3D &quot;4a620c2a89a7481e83cb4a0ff32db0ccbb3afcd2&quot;<=
-br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 <br>
-&gt; -inherit autotools pkgconfig update-alternatives<br>
-&gt; +inherit autotools pkgconfig update-alternatives ptest<br>
-&gt;=C2=A0 export ac_cv_sys_file_offset_bits =3D &quot;64&quot;<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 EXTRA_OECONF =3D &quot;--program-prefix=3D --program-suffix=3D.i=
-m7 --without-perl --enable-largefile&quot;<br>
-&gt; @@ -55,6 +58,12 @@ do_install:append:class-target() {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 fi<br>
-&gt;=C2=A0 }<br>
-&gt;=C2=A0 <br>
-&gt; +do_install_ptest() {<br>
-&gt; +=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}<br>
-&gt; +=C2=A0 =C2=A0 install -m 0755 ${UNPACKDIR}/run-ptest ${D}${PTEST_PATH=
-}/<br>
-&gt; +=C2=A0 =C2=A0 install -m 0755 ${UNPACKDIR}/imagemagick-ptest.sh ${D}$=
-{PTEST_PATH}/<br>
-&gt; +}<br>
-&gt; +<br>
-&gt;=C2=A0 FILES:${PN} +=3D &quot;${libdir}/ImageMagick-${BASE_PV}/config-Q=
-16* \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${datadi=
-r}/ImageMagick-7&quot;<br>
-&gt;=C2=A0 <br>
-&gt;<br>
-&gt; <br>
-&gt;<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#121325): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/121325" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/121325</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116093375/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/116093375/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---0000000000004f71580642da93c6--
 
