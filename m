@@ -1,248 +1,210 @@
-Return-Path: <nikhil.r@bmwtechworks.in>
+Return-Path: <Qi.Chen@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C522CCCFA04
-	for <webhook@archiver.kernel.org>; Wed,  5 Nov 2025 04:56:03 +0000 (UTC)
-Received: from MA0PR01CU012.outbound.protection.outlook.com (MA0PR01CU012.outbound.protection.outlook.com [40.107.57.66])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2135.1762318563050023331
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C41BECCFA04
+	for <webhook@archiver.kernel.org>; Wed,  5 Nov 2025 04:58:43 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2207.1762318717509990585
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Nov 2025 20:56:03 -0800
+ Tue, 04 Nov 2025 20:58:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@bmwtechworks.in header.s=selector1 header.b=im5S34KE;
- spf=pass (domain: bmwtechworks.in, ip: 40.107.57.66, mailfrom: nikhil.r@bmwtechworks.in)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=XlX9z+Dg;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3404044f81=qi.chen@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5A54o3Wj2097893
+	for <openembedded-devel@lists.openembedded.org>; Wed, 5 Nov 2025 04:58:36 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=m5+pXDyr2cR81BR3g09n
+	DRepYUKm9eKOOaP+GZo0wHk=; b=XlX9z+DgT9l63RP/OEkUKIbiMIy8Ns6a5e3Z
+	HN/5rsMZuRMLt/OMZOCnPprvjprSQN1whfcKF1ugTbTmicGMSpDG0UIutwywwoMG
+	+9YlIFIPEzLV1X+BZAga8Y2b4FY5VRq8hk0ft6SW86J+1RalMgr0oVEE6HLNmnYe
+	ROha1jw/BhLRqah0GjK6bYJtgkR55KHeyH+3dCboW6uQmKdJ8ZwqYHWUyW10v/Du
+	AVGCOSaFFCCtk09s/W446Ut16uFNuMT3Ts8UoLN7X/6ayJZ3hLC6UMh09eOnE0i3
+	sPIjnx5SM/mNQgSGdmfWwKjrkyY3S/rqvJlPqkzuOXidttd3Vg==
+Received: from cy7pr03cu001.outbound.protection.outlook.com (mail-westcentralusazon11010003.outbound.protection.outlook.com [40.93.198.3])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4a7war83ts-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 04:58:36 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OI+l94RcfNIByqc7KT6S+IXUecPMEvootUrxFi5q5f3Y53/29smBiuaBFEbTmBDKhj+5FPrUCg69kp+ZeGNMYwdD6x7m3m66lpOpTTSWyprzqcNXXAxWnecWfGj49udgcm64pJMLjUuTkFkQ18VdAx1MkZ3OouF7mmvt/WMhj9HliFZelJxsGXQyeApCWRooQ0ILsRjeNyISgyeXARBuD3BLxLOA7NiyqOmZBlYb4U5NJ7wCSgamyeEFKj39DBUyHWqtxb+25wgBbl8uV5LXMbQX5RQz6xcby09NfhCZ63RO9iZ85QtepAH04BxbunFVDBAwaWYMq4wb3tD55EBdsQ==
+ b=lKCppMd0eXLvO39z3Iu//v/a9Teq/ajnprKK9szmoxUnE1VMVrZ/GntI7MY0h0OcKc2168GqpdBBIz9FlqIAT199gdxctjK4TS7HRJIVJWDW69qu0lUjryyTY3NJ3pVf3Rbxlkib5mQwA9F7slUs5b046h4RjN0xqU3sTRzLSCDmA97eIrhI/BC4CgtS2MQHJYFzc+cX86mz3uAnyTpKBWP4Aw0pwT+eQ+Lw4Av23PYyhiIGWGZCWsQmg1HXqbTUKtzsl6rRs2jr0KsEUX2znUmDQmZbxUOJTBZ4dj4ishpMUjrQnb41etlsoJBSRlK6EhBpamcylyuPFKROtenkTQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0c6tYdJ4akemWcWhPad+TOo+DN39VV3IAzeGTw8rrk0=;
- b=quQKDbeFQJLVsa3l3XjXwEHvWz1NgqkkGkZOvmo5egytO6neoxxulYbj0PoI9Rs3uQI6ZPe7o5xYpiUz7PPbjUk5BpZ/jp0VGwxXnqnIMUmN6YxBdMGTvFEuNTzItJ9o6jq2DhMbM5RCxX5YWDtjVfcdW9RFd7Vc/F2636EbXlQetOPDfs7gbRbKWCRFYppnLI4784B5piRhTsuZB42Drwq3mGmgpoCq1O41PMrle5ViLqFiNGe0kKqZjVz7i1I5K9iFYxPPOI5FuZQT4lLlyL0FH5ezkCXBpKXiaLiWJd2PLxwhkNIWnM5E9aNukdTCREjE8Z7yVwLygBLqegKLYg==
+ bh=m5+pXDyr2cR81BR3g09nDRepYUKm9eKOOaP+GZo0wHk=;
+ b=J8ijWVb6ukUepxtKJqAOvtt8YUbpTAht9nDlDv0aWnU8q1YTRKBO9A2UiDE+J6y3sX+1Q2CPNbl7pM2hXNpPIwDVX6kib0y0ZWc2Upd+g/+A7F7fdgJ9fkmERO5a2m2+F1kJ2sksThx2vQLuYQe1vCw6Ib+YIuxRcUYGNb04yWbrjH0W+Wr3lm9MxE/QA9apGWqWYQrMoET5w3q9U0trNM0YYhB4OKlzE3KCZEpE4ZszrPXrTiruNoN/CiuP7VFj21TkxCQkXwjRzhstod1PsOA+/CZWNGI+O8UVOPgXr67E+WDxR2f0IxVT0tGCYHRAH8/MmNdnN8D7qOU6ZofyCg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=bmwtechworks.in; dmarc=pass action=none
- header.from=bmwtechworks.in; dkim=pass header.d=bmwtechworks.in; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmwtechworks.in;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0c6tYdJ4akemWcWhPad+TOo+DN39VV3IAzeGTw8rrk0=;
- b=im5S34KEPji9xgTPkxuP6XoeU9xIonwbmQa9P0kpAQLzNg+y6memruip3V1nV84y0Rj9OLv+Q9ej3gkoWxYuVkOjUBMxExRs6axuRWq+T1jT+R1UlVFpTC7ICp2fAGtKBEA9UmgaLuukQ9ShrPmpfJaXIDQcfTc08Qx+ZWiIFIuJbgihNEkydawOcLiAbrAq7giamkWscoCXMNUiqo/F4OLLiYH8RbBHm/7O2xoKZAMZ4X3uEiBPe2wqn0zZVEZRFeEiwt2Cd3MYVaLD/RhZnwTxI97JWrHzc5XJT0m4IbvuFTMErpc1yzMaXJsCiPtQXehsoBhRES9JUVhXkt2o+w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=bmwtechworks.in;
-Received: from PN3P287MB1693.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:19c::12)
- by MA5P287MB4800.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:181::6) with
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CO6PR11MB5602.namprd11.prod.outlook.com (2603:10b6:303:13a::5)
+ by PH3PPF1BAF94C4A.namprd11.prod.outlook.com (2603:10b6:518:1::d0d) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.7; Wed, 5 Nov
- 2025 04:55:55 +0000
-Received: from PN3P287MB1693.INDP287.PROD.OUTLOOK.COM
- ([fe80::e15d:4961:f9fe:b7d1]) by PN3P287MB1693.INDP287.PROD.OUTLOOK.COM
- ([fe80::e15d:4961:f9fe:b7d1%3]) with mapi id 15.20.9298.007; Wed, 5 Nov 2025
- 04:55:55 +0000
-From: Nikhil R <nikhil.r@bmwtechworks.in>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.8; Wed, 5 Nov
+ 2025 04:58:34 +0000
+Received: from CO6PR11MB5602.namprd11.prod.outlook.com
+ ([fe80::5ad6:8f90:b01d:2c62]) by CO6PR11MB5602.namprd11.prod.outlook.com
+ ([fe80::5ad6:8f90:b01d:2c62%4]) with mapi id 15.20.9275.015; Wed, 5 Nov 2025
+ 04:58:33 +0000
+From: Qi.Chen@windriver.com
 To: openembedded-devel@lists.openembedded.org
-CC: Nikhil R <nikhil.r@bmwtechworks.in>
-Subject: [oe][kirkstone][PATCH] inotify-tools: add ptest support for inotify-tools
-Date: Wed,  5 Nov 2025 10:25:40 +0530
-Message-ID: <20251105045540.793451-1-nikhil.r@bmwtechworks.in>
+Subject: [oe][meta-python][PATCH] python3-systemd: fix build failure caused by race condition
+Date: Wed,  5 Nov 2025 12:58:18 +0800
+Message-Id: <20251105045818.2593363-1-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 2.34.1
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: PN2PR01CA0216.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:ea::14) To PN3P287MB1693.INDP287.PROD.OUTLOOK.COM
- (2603:1096:c01:19c::12)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2PR06CA0007.apcprd06.prod.outlook.com
+ (2603:1096:4:186::9) To CO6PR11MB5602.namprd11.prod.outlook.com
+ (2603:10b6:303:13a::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PN3P287MB1693:EE_|MA5P287MB4800:EE_
-X-MS-Office365-Filtering-Correlation-Id: 55d280a7-6857-4fa9-4746-08de1c279a46
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: CO6PR11MB5602:EE_|PH3PPF1BAF94C4A:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4f83fbe1-34bf-4948-1e4d-08de1c27f8da
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|1800799024|376014|52116014|38350700014;
+	BCL:0;ARA:13230040|1800799024|52116014|376014|366016|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?02/tJ4EbGDKUrjFb45JLvCT2z5eVI537ABP1T2+PDz2gx3tY6Nnf4H0fwWTg?=
- =?us-ascii?Q?OB6MWUJYr/sawNYQnPGcTrCmv5nwSyJi/ms/rB60qJPxUlg9iclgoiFkXPon?=
- =?us-ascii?Q?U0csW8VghFUQl9K2+iZ8OESxZYcTu2YCnXl2gj3gQ0gEo2d0NxkBfDa6X/CP?=
- =?us-ascii?Q?o/+cXt5BqTfRjaJtghik88x6qLkWHoS2KDHOb4UdjUVXMCuSOlcrMIeWOeLd?=
- =?us-ascii?Q?mO20cyQyxdJImHKl7FaPcFFLs2rS2bml5t2pExsEh/L/J96cvAgg9lw2aJfw?=
- =?us-ascii?Q?t7w881LTsIuR7llJnz/a7TkKvGlKtKT6ErELtk2x3YSJVDQTMoQKQwiLmizi?=
- =?us-ascii?Q?Zdi5Rigv5vnkgDHJJt5oT15kgIiALnUel2k12qwkxwWiVQYiE5PlFv+X/lA3?=
- =?us-ascii?Q?F/5hT5m8l56U6CyXoaqKBX0SPlE90TitF9q2a8hvuWiNCtob2y/S80RazfKm?=
- =?us-ascii?Q?RsPuLL1oQYkKRjYmjuVMjKBaw+vxzT4Znu99zPlSB0QgKXKOVv/dfR1jNPF2?=
- =?us-ascii?Q?UULuWZGpmvusLTT2EuIERN6AL0yRxFx+CPGJ4wdusxuSYkKbDi0mjje23ABO?=
- =?us-ascii?Q?lXuB+FQ6cOuXZKHmECz0ERBnDpPN5n8b3K6RIQb2QaKldtTEoCtaI5n8EAM3?=
- =?us-ascii?Q?8zYtwCFANsPbZ0GdkdyFab0m/uNdOcClGQvaIV9xqxpOxjY0/PcgsIBsFxw/?=
- =?us-ascii?Q?wJnChrQq3PF+NtGEOj2SD5cL0kZZ6XJgCGZDK7/CZ+BM86lqQohAI5AOn4hi?=
- =?us-ascii?Q?5YjmTuzLgYMtcQO/JvKsl6CyZo/9W0AV8X0nIu+lbp3YSCdtF5I8gokXYcJb?=
- =?us-ascii?Q?yDIO7bE6gqM710q+ZY+M5jkaf+tlUMud/+pOHcv1GKPM79lYUOa9bm+lWc6b?=
- =?us-ascii?Q?0VtwaRXUca3/7w9zK42pXt9l/73wNfxq0JeAM8w5GPI5mdMOZEpxmuzjT+6R?=
- =?us-ascii?Q?iM970iVGSt6LzZXPNN+6aD7+KoU3l6F9kZYSRME00upGS3Iw7cdjgkrjVM3L?=
- =?us-ascii?Q?mK3ODFtMiEHOQPAqnyaf6fkOEXTDUxplbeOspQM+l7ncZodvyugA0vXQ5ZzM?=
- =?us-ascii?Q?/2MFIVBk34AWYNwjsQDPq7IQAABtdZztSVrHrTt/lYHBmXzpv5TVobvYJ9Rs?=
- =?us-ascii?Q?MVcT9Jb1PP3O3lBsYQLkv4eXfFmvXkuJmxCGGfPzeyHfmyjfRhho5TcSfjFB?=
- =?us-ascii?Q?OIBwNtHgHY9sAQajUNPTFBchdlX0zONPKNmGiQ4gYnOl6zsCcUWZFhim0jCU?=
- =?us-ascii?Q?4tzM+Tr1Whnsfx2Ls0X9/aieeJQUKZG96AnfME5O8XDQABZ9z2T1uwjP7cZt?=
- =?us-ascii?Q?xHrzrG9DvhppP9lmoQMEJyv3Q/L7KqgF07bzlKek0RNVKAVJpWs1h4KmnXnG?=
- =?us-ascii?Q?mhu5n00b/sQHluCFNfHdicDM3E6npXNcScOpNfycFsMEoNlns1i0nK1kyAVy?=
- =?us-ascii?Q?vpDAgjmtNnNMymX2iDFWJA2oQb7heeRQ2nd7o9lsC9slhfWvAgFKwCW0qlvp?=
- =?us-ascii?Q?ObuqFz70IKWh/Iikmmo8P9uRcp1tAxNNQi1E?=
+	=?us-ascii?Q?W923EtBJyOuot0e7jKY0bg9OfbLLTEPWR5oscWYxYkuPE+y00zfL9wOOwD0/?=
+ =?us-ascii?Q?xstItdkuIlD0WCjLEtfKcOfTMADHxVK9mqkS5cUroxuuIJqO507B167cwgM/?=
+ =?us-ascii?Q?MS/zG4CbJTiyr6V9GwkvPd23yqHuOOFpdltJgziCD/NDiyC4cPKGkQoRoMG8?=
+ =?us-ascii?Q?E/tttL4Ozm7lHiFx7OL36rztoOD7sMtF29KhddctXPV+wQEW1W0DApQU/OoX?=
+ =?us-ascii?Q?nUEtQBV6wx6hVIM3sxMk10sTKs4Tuh0ABd3IOMiXfAD9ivm/JrD/9vR17oQO?=
+ =?us-ascii?Q?ICyM1PJj9xhj9Gtf4lPEYmQxvrjdCakMv5tb/i1jG3Qcx7demj8xzjI0341Q?=
+ =?us-ascii?Q?U20/DpAnce1ce0qbQZ3HxPGfiRLvTYKhPF9K6f3UL2sHuPPEHXndYKr9O9EM?=
+ =?us-ascii?Q?5m8ZTphwTXMTH/ccp3rC7kVTJNkqJsDL6yaM8mdlTiNPx9+9gH9IisVZl2VM?=
+ =?us-ascii?Q?gMzwokLkEEFSTxINYZxu/WHBnknlsicusyJS4WLEDAV/uJ4G+dbHRsjdoOEt?=
+ =?us-ascii?Q?uchPM4JBDMYMSmtcFJ49y7DMMqNF2PnIT1LkulXCsH8OfdQ8hc/GBVyURzSu?=
+ =?us-ascii?Q?AesxvTrRbeBJr4Xs2zuRrEYiMJxz1leqQNO41BRIUp7hT74dPE5lpFZs/SRS?=
+ =?us-ascii?Q?kGb5lfg468j+WD+6jr0rYdAn9KeTahV1IGhMDIaCI/E5mAYE28554ppJrd6D?=
+ =?us-ascii?Q?62QHvdeHC/jAyZ1l1YREZ52g3m57RV5rgt4aO68O9TVpHYqYYF16kY9mzNdX?=
+ =?us-ascii?Q?if9mIDYXOBDrtyjAP56CBVzYJomrFDCi+ZELSxO5OKF217Kd2yEcNgfXrSS5?=
+ =?us-ascii?Q?uWvKjODkf5zlFIdo3CM/AnwNuiZFXtDa3403HBQZ4BcUt7AAk1vqGcWGRAGE?=
+ =?us-ascii?Q?JgGu8S5dB5EivEI2dVQyNtv7ardnKhnQG5WE50Zn4u4Eui2kaJHhSkk13Cvg?=
+ =?us-ascii?Q?I4twF2dgkupwsslMPQJB7mBgClvCMOR2NKLntO6LIpLGdfGMMe92z3BBUYbc?=
+ =?us-ascii?Q?O3yuNe9Qe91PqRknPYfvtEElGFfpz+i7r6cD3k034Q3DW9BlpTN1r16c/SC3?=
+ =?us-ascii?Q?LEEKOyAEJLHKBrmEJf7IDou2CrvJqVvuNL4ZG0deeJ/SuDWz6qvR0mlJO05D?=
+ =?us-ascii?Q?Uda6nMPw/7zIMATL/8Lv38qOyr+RRjpvH/DjEY7/ATY/T+P5R1giOcft2kBs?=
+ =?us-ascii?Q?9qeuXJecmH4k4fpdeB4QR85Qffw6vG3Nr0cN4J2lMv+um5dRhNM2/t4iTh8d?=
+ =?us-ascii?Q?4km6l3RIxuL4qMRYDnhiW7trWCmHwmOw3ky009vfkqtyybtgZnXdNBH4JAKV?=
+ =?us-ascii?Q?2OFRIOvZbPlzjgYNQib/ScR6Jy0Y/hXsUPk4MSfi7HKuIwfMvXI1VHmF8VeF?=
+ =?us-ascii?Q?EIFRDUhZ5cOxex9WU+Cf5bK4XQaVA5U3jT6owJ/qWTiE5h+9BRXDSBKQC+i/?=
+ =?us-ascii?Q?1jeaJEj4q9gCOTJ5S1/CVWSX5k4X2UGst6XNuh4jakvZeRYDsJo508lz5Sn2?=
+ =?us-ascii?Q?YuCPQRVr36H3FsY3AguHv71UYVesWMsnb+0t?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3P287MB1693.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(52116014)(38350700014);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5602.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?52NdCsr8rk9MjktzsNUgWxO2X2+UxJfVYpo3u1rfEMDi/rhdZh20gRXMRFyx?=
- =?us-ascii?Q?rSTpz2oeFAPHWrMqlinv+223aF0iXL3Bvdb2gvsi4qw73nljzkNtAN5IimWW?=
- =?us-ascii?Q?1UK2QUiO+Esjmm/Dqqjiap5f8oqNrULTFojGAHB+/fX0MaX1/Sp7uxrxW5NF?=
- =?us-ascii?Q?WmvhA04MMOQaIjrwRHGLBfv95oXwYuUL86xvxDCeX0Cn0mpTyLkdPBl5M1Cb?=
- =?us-ascii?Q?pgJRskcCO5HaJDsWDQ9nF1ZqrMZ4ZrglGrgr70plRlhzDkf1e1MUDmi8HClG?=
- =?us-ascii?Q?fyM0qwj8G2RllZL8b8Jg7kkOVq7tuPbaVK8T3yewBVf8VoW4cDNUTStQCLYs?=
- =?us-ascii?Q?HlfK7y8KFY20XLGWvVs/H4yZte6jMUYCMh9F0iPHh2XYEuie3536jNMIqnyq?=
- =?us-ascii?Q?kJvVeJah/CPZaifyw33PrYja/K6mxAMzJk+1fZWCniUI63t3gSBvbQaB5VeF?=
- =?us-ascii?Q?1czmjMO2ovtIOA2MBrWMcWjAQi/2pABFTdi66T+DoZBVcWhBit4Apd1UY0U8?=
- =?us-ascii?Q?k7ZO3FvKOLoRAqjyOYhRfutu5DztCi+PrBZNj5QKXxj3c/hNoR6RLapD1U1f?=
- =?us-ascii?Q?b5mlPLSbBGDiFdp8z7D/6I4Bt0MRpnE+IJaZNceR12kTp0QX+0SWl3XLsbAU?=
- =?us-ascii?Q?e8k9LLdHDZRYML5NlQIoXbP652AMv3UV8A4f4tJ1JRni8ch7YsNYYt3M/dAb?=
- =?us-ascii?Q?T7EMYyZdWkFgrjzple+bJEt6glVq47NLsLRx3JVh+Ohu43CjdeKBLKwX069l?=
- =?us-ascii?Q?E3h7y/R4Nx93hiwr+V7tSwy6L2FczWUm0yck923h0KoMQS6y7I/bzzzpmvwn?=
- =?us-ascii?Q?wWuHDDGumJLEdAkSdnAVzE4pDJDqvtvIlfHjFf3AAFTNye7EhUIubTxirzvR?=
- =?us-ascii?Q?RRPdZndZxUCTUEGHDzdkr8koTepDlTzh1UqZl/5qtAsmQH80TiY1OrZ951zf?=
- =?us-ascii?Q?Gvlt1sv7QqPvwazvva7niN4CpWmcpd0v7DcmRMBPLWrFuLjTFxBnyjpBepHd?=
- =?us-ascii?Q?WG6wyXWacuWav/raVEFVp2HnCt24OtZ60sOY1v+skowgUgQE6c8mV6w+iMSr?=
- =?us-ascii?Q?h/cor1XFJFtr+xRgFyVaIA0D1OxmQ8+7rFx1/nmvxXJZj8JkTjWNEiPqC676?=
- =?us-ascii?Q?D3+WGL92KWrZ3tbG6zbh9ZIiFo29cvo20RqzvLWKt3UzfWyEmoHgox8/mbw2?=
- =?us-ascii?Q?xqsMbc+SRm3iSBHP5qF2ZYNPOsrCAat46Wjq7hKfjfsT4NSIbqDJbohd4Fjn?=
- =?us-ascii?Q?QjeGPahAHc7leEWzxJxZTLZ7zqILt5EORKPKGIxjXbK/16Y/HFmGaCq4TOqH?=
- =?us-ascii?Q?Oqfg1dsKK/10k+D46s3BiV9v6bgkI+bMIH1iDJXr8NGjj7nNJuDBJ1B4DMAm?=
- =?us-ascii?Q?zYxmezxHh3dIrlhxhwdGLQLUCRI5j/c5J+itDhQVDuy6neYJJafQJPmiCIeP?=
- =?us-ascii?Q?qAVoO/MbIniqd3yyVKRuuGEpAM0D69/R6rWM/J2C72l8ohaRw76Ji0gMFEPS?=
- =?us-ascii?Q?LU/Sh5YEPnsXrWqnRaSVuQAlMYiQeYtvkjZHhj48VeCYCzYWP9MERzabqYBM?=
- =?us-ascii?Q?PELMK3ovZP8/9yngxCMDEncqwNSuD1sX8WLhfVmR?=
-X-OriginatorOrg: bmwtechworks.in
-X-MS-Exchange-CrossTenant-Network-Message-Id: 55d280a7-6857-4fa9-4746-08de1c279a46
-X-MS-Exchange-CrossTenant-AuthSource: PN3P287MB1693.INDP287.PROD.OUTLOOK.COM
+	=?us-ascii?Q?6SAb192DQARKIbK4ki3AldE7cQ9TJV+p1ybGeomFxC6MFESHIad0pXd3sQ+b?=
+ =?us-ascii?Q?v9TetRLo45XjFM1oql7bwEPmtoJvvZjYwmqonJiRHOEkdkQkzANBhdyEbYlg?=
+ =?us-ascii?Q?8itGbCAahVHok7MAPreCfrCtSpcGs6a3yY/yx3RvV/s8Feu4VrB7ZfoC0PXu?=
+ =?us-ascii?Q?v1nuVUkZHm6DSVuZYIVQBmNlCdmj/xEsfXcY1En0hsKuz717tn02CrNbURW5?=
+ =?us-ascii?Q?r2hQTgN8IdVcb4V+VXe2boZ0Ou6OodHq/Wz+JdzXwPfPJwFnG6Vz5AIN+qPv?=
+ =?us-ascii?Q?fW6366AofTExnvCEB1fb12174mbu6qx7M4PVXHca0fENtBFkA2CfRJomH49a?=
+ =?us-ascii?Q?GYHMEsz+0ctbH9Go9VppPX2vV2dR9NJ87qshdjPtqVhtgzgyJ3jrYUUlzF9h?=
+ =?us-ascii?Q?L6bIag003LFlimGowrJh/gaezmAZVSzfwxvmAar3zTLS8fPfvgkPqHVFiKOg?=
+ =?us-ascii?Q?lGM8Tl6/pVPuEN7t43an/D8vgx4DT3U4qzDK0WnKCCzhiQuAiGYHe/WWQ6vh?=
+ =?us-ascii?Q?kXb2gfMhNWObqtZIBUvcjsfTWKnhNlQv6Pq7C8OelgFxGdp0Xh/v3dNxv1HV?=
+ =?us-ascii?Q?ETFmZe4F9UM4hBsJcYQzh7O1WlnsoUVeOkjZFW376JzhQjOHuv3tGQC2DBQz?=
+ =?us-ascii?Q?/R5dLpZgxMRSAtM2G/fIuw8pwwsbYtyxbvMW1MlRCxecZsxd867KbQYZt13o?=
+ =?us-ascii?Q?ImwLOcNrBlxKalY5XAyZije9YV+hFM1Gg5nXSzVLPyEn0aU2jJvhnzbuWXp5?=
+ =?us-ascii?Q?veKhG+D65QssoEdZjNjbdEwmwXzlhw7oanWFLODbqHtL/5lR8ykCAaOIDMUS?=
+ =?us-ascii?Q?eqZdcEVp6kfhk9nS0wehGsx99FZrTT4kQiU7k0Bz2tj9PiOITtqwzEk5QaCr?=
+ =?us-ascii?Q?zabdK2YFMZZI83IXfoeLUsggxvhgC+0FbirqEkTJzIVmeZ90dUsNnCtyuAuG?=
+ =?us-ascii?Q?1SUvLdXcXpM08mbb/Zf6/zri2nwfV2hIxTRVJmIvqJIYD497gO1Y9K4k3kXQ?=
+ =?us-ascii?Q?4a/vC1H2JOmfwPuYSXQSyYvsz5pmEaUdp8cqEIlwRmcoPh4kSZDiI+hdywRX?=
+ =?us-ascii?Q?i+FWYJ78uCJtTv0wLlzvoGSzO5p6jvUrhlYyjz+rmC2KdbSG2Fi7YjMTlHOO?=
+ =?us-ascii?Q?DpHrlTUJ5b0noM5G1rFzDt8UreAuxuZwV6GoM4NJxMm20TOqaDE0f9HcU00C?=
+ =?us-ascii?Q?mcwXqxUymuWzUNXXv+raLcsiToB5Wx9BDz9mov2pltz/+JKMF7M49H1CxITU?=
+ =?us-ascii?Q?RDWchpfoEGMRbhTjK+nuvzx1ScA3FFgfnNUzVyo2Ncps7Qw1Nq3iUdHkU60D?=
+ =?us-ascii?Q?9dhIedPDB/itdOUK8XbGdHZLHP3Q+J6uaDkkxS/BVhIH2qK54oC34SWUiQBL?=
+ =?us-ascii?Q?7X4f4WFnLGL42pxVz+zwR/ljll/9RIdwHR7FoDV+SsFAVZg1Sx8r5zcNdghA?=
+ =?us-ascii?Q?83rkTL6Lg5v8i47l6WIXwiSG7OC9cxHdpc4iSZXobvFAHGu1MRjFNUnvr3OL?=
+ =?us-ascii?Q?KFusx0oguPXbP6iBi32zgMZIUmKw1SZcMhyLg0pdqckJjUGyyLpxwI6gA+Gd?=
+ =?us-ascii?Q?7J6Mm3f5EYYTwILBcoKDB23uKrwaNhBCeyxs8jtU?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4f83fbe1-34bf-4948-1e4d-08de1c27f8da
+X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5602.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2025 04:55:55.2412
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2025 04:58:33.9135
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 970fa6fd-1031-4cc6-8c56-488f3c61cd05
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jZX2yRTKAOdzMPqpCX/WD3YMlZyj6vhxK+h9czWbOOpyffSwaW+X6gHzNshFBN2Tz6pJQF8Bu8verLaQKr1fuPWGye4H1XF2lGOj8ysw4SA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA5P287MB4800
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4G0KpDKVn1khG6TwDPqrtKYRl/m2tqdMADMlA8eVBB88pXxudIkIzFGHSatmYPgQCJ2ymICEHGfdy0fUTpUwlg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH3PPF1BAF94C4A
+X-Authority-Analysis: v=2.4 cv=UYJciaSN c=1 sm=1 tr=0 ts=690ad97c cx=c_pps
+ a=u8Zh/y5cvmLMdp3U04oolg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=t7CeM3EgAAAA:8 a=XlCiLC4QaC34ana_LRIA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTA1MDAzMiBTYWx0ZWRfX7y7AKc4jBTmw
+ NclRb5DVU3aTZKgwX1hFLDdFoDIXFR1zn3M6QaC2xtcvzzwYA0F9Tuyd4Y6wcb5rseeb3Sq4b8X
+ 5sygKF+2qM0NWD3AqqK1N8vZ9amnHFtOwDKTw1pWwEHIimeCZ8TM9MevfocqQAtHW71FT0ey6ro
+ VFR5ECX62efJuAxy6AF8abk2+MYdsyL5P4WJ67zJQO494BXg+I4E9IQ8+Nm+CKZ6B9fX53ddNq4
+ VZPKbzXbIUSkpEv15w8HhYkKHtXz0GbFJ4i8Ub3vnxPR+BaQKUtvPFdajJKNU5tOvE8zsNk+jgv
+ yN5SYFpRqGb0thTw2crT5gNeO7HLk/UQ2fvvWuRngLWu0KpHPAlDFEc+D5uR4qg6nyyM74NhPH4
+ 4Z4UldKnvbAhIj0T60oeCuRMS00NHg==
+X-Proofpoint-GUID: VcXSTRi1_uEV0aIyr6sfKkv3Znc5KmVb
+X-Proofpoint-ORIG-GUID: VcXSTRi1_uEV0aIyr6sfKkv3Znc5KmVb
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-05_02,2025-11-03_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 priorityscore=1501 bulkscore=0 adultscore=0 phishscore=0
+ impostorscore=0 spamscore=0 malwarescore=0 suspectscore=0 clxscore=1011
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511050032
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 04:56:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121316
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Nov 2025 04:58:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121317
 
-Add ptest support for inotify-tools by introducing a run-ptest script.
-The ptest verifies the correct functioning of inotify event handling
-and related utilities.
+From: Chen Qi <Qi.Chen@windriver.com>
 
-Test coverage includes:
- - File creation, modification, and deletion event monitoring
- - Event handling and command-line option parsing
- - Basic consistency and behavior of inotify event queues
+For now, building python3-systemd sometimes reports error:
 
-The ptest completes in under 20 seconds
+  pyutil.o not found
 
-output:
-root@qemux86-64:~# ptest-runner inotify-tools
-START: ptest-runner
-BEGIN: /usr/lib/inotify-tools/ptest
-If you want to do a malloc trace, set MALLOC_TRACE to a path for logging.
-event_to_str: test begin
-event_to_str: test end
-event_to_str_sep: test begin
-event_to_str_sep: test end
-str_to_event: test begin
-str_to_event: test end
-str_to_event_sep: test begin
-str_to_event_sep: test end
-basic_watch_info: test begin
-basic_watch_info: test end
-watch_limit: test begin
-watch_limit: Warning, this test may take a while
-watch_limit: test end
-tst_inotifytools_snprintf: test begin
-tst_inotifytools_snprintf: test end
-Out of 362746 tests, 362746 succeeded and 0 failed.
-All tests passed successfully.
-DURATION: 16
-END: /usr/lib/inotify-tools/ptest
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
+This is because its setup.py is not written in a way to handle
+race condition. Multiple modules are using the same .c file,
+resulting in the corresponding .o file generated multiple times.
 
-Verified that enabling ptest does not modify existing package contents
-for inotify-tools
+The latest release of python3-systemd is 235, and the latest codes
+have switched away from setup.py. So we'd better not patch setup.py.
+Instead, we handle this issue by making its modules compile one by
+one. It only has 5 modules, so there should be little impact on
+building time.
 
-Signed-off-by: Nikhil R <nikhil.r@bmwtechworks.in>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../inotify-tools/inotify-tools/run-ptest        | 15 +++++++++++++++
- .../inotify-tools/inotify-tools_3.22.1.0.bb      | 16 +++++++++++++++-
- 2 files changed, 30 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/inotify-tools/inotify-tools/run=
--ptest
+ .../recipes-devtools/python/python3-systemd_235.bb  | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/meta-oe/recipes-support/inotify-tools/inotify-tools/run-ptest =
-b/meta-oe/recipes-support/inotify-tools/inotify-tools/run-ptest
-new file mode 100644
-index 0000000000..c45b75e387
---- /dev/null
-+++ b/meta-oe/recipes-support/inotify-tools/inotify-tools/run-ptest
-@@ -0,0 +1,15 @@
-+#!/bin/sh
-+# run-ptest for inotify-tools
+diff --git a/meta-python/recipes-devtools/python/python3-systemd_235.bb b/meta-python/recipes-devtools/python/python3-systemd_235.bb
+index 6b44751df7..0229b2a820 100644
+--- a/meta-python/recipes-devtools/python/python3-systemd_235.bb
++++ b/meta-python/recipes-devtools/python/python3-systemd_235.bb
+@@ -15,3 +15,16 @@ inherit pypi features_check pkgconfig setuptools3
+ REQUIRED_DISTRO_FEATURES = "systemd"
+ 
+ RDEPENDS:${PN} += "systemd python3-syslog python3-logging python3-syslog"
 +
-+# Run the test binary and show output
-+./test
-+status=3D$?
++do_compile() {
++        cd ${SETUPTOOLS_SETUP_PATH}
 +
-+# Exit with the test=E2=80=99s result code
-+if [ $status -eq 0 ]; then
-+    echo "All tests passed successfully."
-+else
-+    echo "Some tests failed. See output above for details."
-+fi
++        export STAGING_INCDIR=${STAGING_INCDIR}
++        export STAGING_LIBDIR=${STAGING_LIBDIR}
 +
-+exit $status
-diff --git a/meta-oe/recipes-support/inotify-tools/inotify-tools_3.22.1.0.b=
-b b/meta-oe/recipes-support/inotify-tools/inotify-tools_3.22.1.0.bb
-index 4e6bfbbc27..e8ed69d449 100644
---- a/meta-oe/recipes-support/inotify-tools/inotify-tools_3.22.1.0.bb
-+++ b/meta-oe/recipes-support/inotify-tools/inotify-tools_3.22.1.0.bb
-@@ -9,11 +9,12 @@ SRCREV =3D "4b72dcd15299e1d0cb096397d9aab513ffed1657"
-=20
- SRC_URI =3D "git://github.com/${BPN}/${BPN};branch=3Dmaster;protocol=3Dhtt=
-ps \
-            file://0002-libinotifytools-Bridge-differences-between-musl-gli=
-b.patch \
-+           file://run-ptest \
-           "
-=20
- S =3D "${WORKDIR}/git"
-=20
--inherit autotools
-+inherit autotools ptest
-=20
- EXTRA_OECONF =3D "--disable-doxygen"
-=20
-@@ -24,3 +25,16 @@ CFLAGS +=3D "-Wno-error"
- PACKAGES =3D+ "libinotifytools"
-=20
- FILES:libinotifytools =3D "${libdir}/lib*.so.*"
-+
-+do_compile_ptest() {
-+        cd libinotifytools/src
-+        oe_runmake
-+        oe_runmake test
++        nativepython3 setup.py --verbose \
++            build -j 1 \
++            bdist_wheel --dist-dir ${PEP517_WHEEL_PATH} \
++            ${SETUPTOOLS_BUILD_ARGS}
 +}
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}
-+    cp -r ${B}/libinotifytools/src/.libs/test ${D}${PTEST_PATH}/
-+}
-+
-+FILES:${PN}-ptest +=3D "${PTEST_PATH}"
---=20
++do_compile[vardepsexclude] = "MACHINE"
+-- 
 2.34.1
 
 
