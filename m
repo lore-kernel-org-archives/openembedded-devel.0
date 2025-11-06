@@ -2,40 +2,40 @@ Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC72ECCFA0D
-	for <webhook@archiver.kernel.org>; Thu,  6 Nov 2025 00:02:01 +0000 (UTC)
-Received: from DM5PR21CU001.outbound.protection.outlook.com (DM5PR21CU001.outbound.protection.outlook.com [52.101.62.66])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3279.1762387311713806800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0254CCFA0D
+	for <webhook@archiver.kernel.org>; Thu,  6 Nov 2025 00:16:41 +0000 (UTC)
+Received: from DM5PR21CU001.outbound.protection.outlook.com (DM5PR21CU001.outbound.protection.outlook.com [52.102.139.20])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3601.1762388189856188112
  for <Openembedded-devel@lists.openembedded.org>;
- Wed, 05 Nov 2025 16:01:52 -0800
+ Wed, 05 Nov 2025 16:16:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=coq5bfsG;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.62.66, mailfrom: rs@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=C3OXKRbo;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.102.139.20, mailfrom: rs@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=M04sak4VQML6jcdOzwgjBGYs0kT57QkOXrVX2M2jLEfW36MY8c21TKLPf3hxlxuuqllhw3o7YtfAWT+Vcdbp1UEuegiSSVJNSDN8VjcPX8bqtG03Z0wUZmepgzgx7fVkiZ7mJ6/uIIfUdOTr7AzekAnNAQGybN6luT6znXxRTh9DQYNADybV4yXfKx63TnV4GtW2HKpO9j931KJ5E51sC7tv8YqGROt0Wl9ojE6PIbuGgbslw0gtIAt60c2OgfL0BPqvOUSJJQDSkkGsYQkalOhb+SFOXA44H/jux9Lc0TlxHrJNb1Xt9aN2bzW74RME8APlwj1ytp7BHFOuz200gA==
+ b=aUaAOyaTW8/Sh1UxzmG7xD/3u+hkpvmGfWebJALNID5VxPRgnNJE9B9CnfQwnTUaiv/J3RWKUDBQ8SbVxuxa3/bzTlsyaP+cb3GaHiNcv6SgBMSdcCyisfy7+0mPI5SUsonDK8RHd4nGDFtBW6/LEwq84v1QIdOItBSbTnYcXrxYFnCQ1SOm2UtJTc/ZdshsQxY3Q7FisEeKayPz3guxXcXf5l0HFuTCL+KR0QJBNJ0xW8SCemIEtY3bUAXURKInr0dCZw8GPey4FtKkkWapn7nVtRycnj/UqdcY/JO9BXFwGgnhLgVcqHUK494r3QbTOG/YJSmcBuTBPATe+q3MEw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LXvR61Ax46csygxUbICz20tyQAOBT1h7hK8yPOKAShM=;
- b=mm/mYJoOb1QYwR9fMXJY9M2rgSI3I5DQbarBINw9ro/E1wOePBkoNJsQshAj4Fi1SlBN5NiPrp7wZGYzeNhROdw4p2WQVOaFRMaVyuA4nAs8CCiUUJCpgZl1IfZNSJS+8A4Kfd8Ssf5b+Mmh+DpsB6TTi6KQ9X0HRAZY1mMaGEnk1UG7iKX3cIEG8mTYMQSSmShMvZ9Ivjh5Pr4hT2RkckkpiG6wNke78IcPQ2QLPI0j/YF8W5zZGmlUXa6qniP0gBc6XLaufgTa1yp8sqprRTVuf3GCxCV0xc8Mv7TRr+/hrRAPrs5fptywjXRqAZ/DmzRqHLhtX2yPx49jfOM3ww==
+ bh=4u6aAuchcge5t369L5DfuUpooLv9bMmNkc9Ji4D2KhQ=;
+ b=lxixyx7VPiMtA+7ZuR2E2ESv2pIN8adq2cVwDUFdNcUM+ZfOBQxoO2A6vvAGywnHy+BvlL0Vxwh9Iu4mt5J7MQYcUSFePjNBu5FOdEM9gNaKpOvAKUDI/0g2+6qkIb3IEV0HQscDN2iF1sfEVoNubnCY9LphE6oWX69DO6LTovVoI9Tove4CpYeQcmEplIvujn3UkR4ReXGQWftfxiwFYtBtCR6kbyZ/0jYNMO11cNCOhyvYuGde8MiiOlKjpOdNwNk5SWtMg2n+jDqfXXantj200fC46di8CqWhIaxRH7MzKbALCKw3/cBXI49oDf9uheoIoF44JTF+dYQjVuFtRw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.23.194) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LXvR61Ax46csygxUbICz20tyQAOBT1h7hK8yPOKAShM=;
- b=coq5bfsGoCjh4hKaA9eWEGwhBIBm1baJL8/hpmeEe9TnqNZsGY3+Pw/SBl/FHkWrONNXwCpk55R78kuruO5QeXKl9xE7y4GH66CzkXXw7IrwaozjerTTLUGnv9i8ZhVxF6iVE1zHKHYG/Qro/qv97JfkeDazVMpTJcY8CG5yFQg=
-Received: from DS7PR03CA0034.namprd03.prod.outlook.com (2603:10b6:5:3b5::9) by
- SJ0PR10MB4687.namprd10.prod.outlook.com (2603:10b6:a03:2d8::12) with
+ bh=4u6aAuchcge5t369L5DfuUpooLv9bMmNkc9Ji4D2KhQ=;
+ b=C3OXKRbohLkH90dzYqWS8KNVPpbze4NbG9idrC2x/KNuIH1r77YTcgJFnqeYSWfH1mHgeDWLkNo81V1I2w+ZHdMm8GFdXGcMrbWCtyL02q3Yvd1EQY6fDFaHSh5K5Am5yWQ6mhHvyD2vTAiiA9LdkOuiknLrginHzJV6Fu+Uid4=
+Received: from CH0PR03CA0396.namprd03.prod.outlook.com (2603:10b6:610:11b::16)
+ by IA4PR10MB8375.namprd10.prod.outlook.com (2603:10b6:208:560::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.10; Thu, 6 Nov
- 2025 00:01:49 +0000
-Received: from CH2PEPF0000009E.namprd02.prod.outlook.com
- (2603:10b6:5:3b5:cafe::c5) by DS7PR03CA0034.outlook.office365.com
- (2603:10b6:5:3b5::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.9 via Frontend Transport; Thu, 6
- Nov 2025 00:01:49 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.8; Thu, 6 Nov
+ 2025 00:16:22 +0000
+Received: from CH2PEPF00000099.namprd02.prod.outlook.com
+ (2603:10b6:610:11b:cafe::62) by CH0PR03CA0396.outlook.office365.com
+ (2603:10b6:610:11b::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.8 via Frontend Transport; Thu, 6
+ Nov 2025 00:16:18 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
@@ -43,30 +43,30 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.23.194 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
 Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- CH2PEPF0000009E.mail.protection.outlook.com (10.167.244.27) with Microsoft
+ CH2PEPF00000099.mail.protection.outlook.com (10.167.244.20) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Thu, 6 Nov 2025 00:01:49 +0000
-Received: from DLEE115.ent.ti.com (157.170.170.26) by lewvzet200.ext.ti.com
+ 15.20.9298.6 via Frontend Transport; Thu, 6 Nov 2025 00:16:21 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet200.ext.ti.com
  (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.2.2562.20; Wed, 5 Nov
- 2025 18:01:46 -0600
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 5
- Nov 2025 18:01:46 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 5 Nov
+ 2025 18:16:17 -0600
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 5 Nov
+ 2025 18:16:17 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 5 Nov 2025 18:01:46 -0600
+ Transport; Wed, 5 Nov 2025 18:16:17 -0600
 Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A601kgF295247;
-	Wed, 5 Nov 2025 18:01:46 -0600
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5A60GHtQ312651;
+	Wed, 5 Nov 2025 18:16:17 -0600
 From: <rs@ti.com>
-To: <anuj.mittal@intel.com>
+To: <akuster808@gmail.com>
 CC: <Openembedded-devel@lists.openembedded.org>
 Subject: [meta-oe][scarthgap][PATCH] glm: add nativesdk to BBCLASSEXTEND
-Date: Wed, 5 Nov 2025 17:59:08 -0600
-Message-ID: <20251105235907.567327-2-rs@ti.com>
+Date: Wed, 5 Nov 2025 18:15:42 -0600
+Message-ID: <20251106001541.569231-2-rs@ti.com>
 X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
@@ -74,58 +74,58 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000009E:EE_|SJ0PR10MB4687:EE_
-X-MS-Office365-Filtering-Correlation-Id: add3cde0-1725-4d5b-4bd0-08de1cc7aedc
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000099:EE_|IA4PR10MB8375:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1ae5d634-078c-4abe-c8bf-08de1cc9b73c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|36860700013|34020700016|376014|82310400026;
+	BCL:0;ARA:13230040|376014|34020700016|36860700013|1800799024|82310400026|12100799066;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?VvUknq3dhetE8orp8+pL9Blpa8VIoFn3T+uZnFEDOjyD2sM50N3OjBH67pjF?=
- =?us-ascii?Q?X8EzlphMDzJdpB9R80990+pILo1DuaxuZiQZLgFndlhi5DOUVal9W4TFXCSz?=
- =?us-ascii?Q?Q4b44eeKS0abZc4eNINiOrXmOI8bkPdV8SwVSBgHewxH/24t1czRwWGo9sb/?=
- =?us-ascii?Q?k6tFq+Ri+XjgGLcIAwBDwbdpLs8GpQHRWokOpH6mZ5yDjum/tKRGf51wUZSs?=
- =?us-ascii?Q?XbOf/pzrHxrRbbXyzWIIS+OpYXlP8gAoQu2QvXMMMzudMiVgCdqt4vjwlSLa?=
- =?us-ascii?Q?tTTMVIdA+6vMAO3MA07cyia15G243rGdu3vPs6Sx5YSlTiZe+C7Ll4sWBm79?=
- =?us-ascii?Q?2EBka9/mhXEYZcLFFK/FPvkN/hMigN10oPz3IsBAfbciY08aQd+BSA4Hihcj?=
- =?us-ascii?Q?qH/FmsDlig/obvMYwB6LQWmZSR1s81WE4GzWdgmx8DacAS4BJ4js8FwI3/0y?=
- =?us-ascii?Q?6cpELw/gZzQp2f/2TK6LlsCrjsnuoyMxaTn74GWim5J6xxnxkVzDdlnvbtdz?=
- =?us-ascii?Q?kb9rB8UMILmIFzVjvEhjIC5evZ7wRH768iADfD15nLdeiyTrIVHYL8l7FBOV?=
- =?us-ascii?Q?dQLyA0+jwfwCarUUEFtY5vko8iYxOzlxvRvZwOs9V9fm3Hs+1OKrTmkp3g6i?=
- =?us-ascii?Q?hwIxI6sNFftnrAPUZzR3h8GZU3cvP+fRuQYbuRaGnMEFFPVrKpz9vXKagxtX?=
- =?us-ascii?Q?nh6Gi1LzAZdtCoBAq6AZClprCx4s14HgBhkGbJ6GcKUdcoUDo/5wZ1kXgzHJ?=
- =?us-ascii?Q?SKQUEfs+bdyJE+yqUVC0Imf0s6eTjwpeGLRZklC5L8GG1tMtzVnbfqNFzSIH?=
- =?us-ascii?Q?VnUgU6knVSWUXb3W8eJwOpjI+1wFJKwp0mq+ba0eJgxn+3aQDLCUMmLFMg8P?=
- =?us-ascii?Q?7pIFzyHH7AW4PVLm8NNbUAD9f66InXp/JZcs31w28jz0UtmEw6sXcXDoJ0r7?=
- =?us-ascii?Q?tnufqwPffxnAHOpuyLQK5ID9rXUYvGcC54GIgDNsFb7TGHXJYxVOtBBrO1ec?=
- =?us-ascii?Q?KGtP8dBcww/Q9OTubNTSvdaBWmCIxTFjoJHrMYfpreSVwkp+78jOQEggWn1S?=
- =?us-ascii?Q?S1BE/pBw/8TggLjN2N8gYQwGCjgEUtyeuBKqkYT+PKgBjm98qlvzIpFTIKWY?=
- =?us-ascii?Q?z82ZvduGxRHgIwMspAmubpqfJrPxzC3R3Cml/0jWfFUC6ESJNUrbY1x5R35j?=
- =?us-ascii?Q?VUGBTYGzYx+ZeTGVq2rzrfXlOR2H2sbHFXCjesB10leCb1rKsO7dpC0K9w9b?=
- =?us-ascii?Q?XenlFOYV2wkrBu0QYg1XGD8aoNfKcFgrCiqEwFI1ea9ZjdY/udJofiWACZYk?=
- =?us-ascii?Q?fnNTbVbyw2OiAuocQ/Muw4le2LXrDQji+OBVHjkcsv+5VfbiVZ/FR77b8F+L?=
- =?us-ascii?Q?3tqjyB0FP3B+aSypATP1qf5LLqcpIZG5+5PZITVw5sgagKm9w6YSKZ8IShzt?=
- =?us-ascii?Q?fL1xDI1j0gMf6ihbxODSaDcCG4f5NmnrPd32oiXCZBHYS2DEcg3D67CTU/g0?=
- =?us-ascii?Q?LXhQdqBhLnpQehW0pMXfP3cGbsSTu/XeEXHzcTq9SbKQ9GYPXDhJmfA4hySP?=
- =?us-ascii?Q?4qj+KIvO92i+M1VHyhA=3D?=
+	=?us-ascii?Q?Yqadd0Kt4S/WTjTAsrLAqZru3SGEiT5lKvAcXYtaPAG5d37XWRgVYz8wvAGD?=
+ =?us-ascii?Q?USzN/I2eFG74OsM6Bq5stEQrUYPe5B7+5dUmq5SoM4vJ1AC2sVw5oJK5cvTw?=
+ =?us-ascii?Q?3d+4cjQJhyUwC6KHGHd/dM6GoTlobjtw10JLIHLEqeXTbXPaop1dVtGfXjPs?=
+ =?us-ascii?Q?7j7V3PE34xvLpgEYsYODHUoE29Ar17uZqRFD2UXM8yLIQPkXhztkswTPlKP8?=
+ =?us-ascii?Q?hhpAzQ7w8OLRSIQRlh30QIid8cD9VxUxrOr52pqkkHEMEDKjWIaL9Spob7VV?=
+ =?us-ascii?Q?7KQVBZ/Aufail6PowGpeYrw2cqjQDKtjnsBWKJzTbyQRudlcJ0BCFTgn9ep4?=
+ =?us-ascii?Q?83bilBdy/S8JqpF637LAOYBs4u6ZRkcRVLkYyJXS4NC0NPW05chbrEDRQRLg?=
+ =?us-ascii?Q?Dqr4Gn/8AfxTAPXF4Hiu9+gf/RuIdiDPhfVYRHQQlCtzpk2utsAeQu/gE94V?=
+ =?us-ascii?Q?NuTJZ2QLsrsr6KGHLheKs/pIg0T0QRRF2THnq+/xZHaWyjgwq0cC9ykcx0RR?=
+ =?us-ascii?Q?2cMqRIJHdYkE4U6A+lARKVkFQH2YMeM7nlYFMMAL5YCovcDPhhfC3yBWJoV2?=
+ =?us-ascii?Q?Ki14NbyrQk3In0nmAS1Jg48Odm++vvBl8joJU1Kw4Y4v7+JXF8tZWzjihvqu?=
+ =?us-ascii?Q?0A7p7Lvy+NwO159/r0mc/8kXrqVtm6UgH4dSV2hcx31IpOCcRKX1whdtTXIG?=
+ =?us-ascii?Q?fii7AP9k6jk/1RxeiQJYWVgn8MfTzfW+PU191kNp20Qw5lRjvl0TnOjennSm?=
+ =?us-ascii?Q?26Wsthbbylh8JPOztt4OU/1bbc62JvOJBMyBddht657r2sj39XYPIZU+jIO6?=
+ =?us-ascii?Q?rdluuKb9SzDob/0L35cCRC8A5jwFJNDfRzCopNpCIotATUzEaIzH1aKnYOsJ?=
+ =?us-ascii?Q?c1IBcCq2cPrAtfw3g+jf6Tk8Xw0KpiHwAi7bPKDQaFFsj1AiHBgxjY+D6uqU?=
+ =?us-ascii?Q?W4r9oCFbDKwp5or9s1s1ah/iAFrKPR5K737jy8zH++Kx3E2TSp/YeZHNdFpi?=
+ =?us-ascii?Q?u9fKI3BefJFPs19qcCcKnnd9yIQu6/UfEqTpZsEs5oLJz8BAnw2OtvHqj/ml?=
+ =?us-ascii?Q?9chC4UzNNarXClYwFgijcv3jXrvpzq+FkGer7Ter3GtRXUACtLHrucxzQjBh?=
+ =?us-ascii?Q?qUnK/MEkUlOvx0fovggC1wJl3KAEQhb5YuiULUqsjE7bYdk0KdPhDQrVCA5s?=
+ =?us-ascii?Q?xIFwK7t71IS5VPMctRdyfua7rPRP0CFbr2RSQ91AKIMsrK3LgPWysk4sHUxE?=
+ =?us-ascii?Q?LKJJck6z//4Gp2uLoY/ag9kdyh6dY0uXGp4dzwclM6d82y3AO5hoMNealeG6?=
+ =?us-ascii?Q?cyNMJGtfxassfNdxNBZJZLHjdzVCw9oDtnYHRi7l6QUD77JO4zgeVi8aUKCp?=
+ =?us-ascii?Q?u6QxVLmIL88xuBvpWfcM7NopL2M+CfuRJeUPvwSiTC2NXpbqbJhaX76C3o4Q?=
+ =?us-ascii?Q?l5+xoF+qf1qJ1rXKrFomxRvqDkvTgCzMljmFvlzttNPcfJfxu9UeVlLLwx4E?=
+ =?us-ascii?Q?nLL0UWdqYQrg4WYGyZesr0depFmOia9kKehmYc6UHh7h03f6zZpnDVP3wN+F?=
+ =?us-ascii?Q?7c3TjS3015o8Y2XnZlk=3D?=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700013)(34020700016)(376014)(82310400026);DIR:OUT;SFP:1101;
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(34020700016)(36860700013)(1800799024)(82310400026)(12100799066);DIR:OUT;SFP:1501;
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2025 00:01:49.0212
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2025 00:16:21.9897
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: add3cde0-1725-4d5b-4bd0-08de1cc7aedc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ae5d634-078c-4abe-c8bf-08de1cc9b73c
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	CH2PEPF0000009E.namprd02.prod.outlook.com
+	CH2PEPF00000099.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4687
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA4PR10MB8375
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Nov 2025 00:02:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121352
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Nov 2025 00:16:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121353
 
 From: Randolph Sapp <rs@ti.com>
 
@@ -140,6 +140,8 @@ Backport this quick modification to the BBCLASSEXTEND for glm since it was
 requested. If it's too late for this type of change feel free to let me kno=
 w.
 We'll carry it on our end if necessary.
+
+Forgive the resubmission. Noticed the email was wrong too late.
 
  meta-oe/recipes-graphics/glm/glm_0.9.9.8.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
