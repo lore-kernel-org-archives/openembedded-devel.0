@@ -1,221 +1,108 @@
-Return-Path: <emailaddress.ashish@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B520CCCFA03
-	for <webhook@archiver.kernel.org>; Thu,  6 Nov 2025 09:39:26 +0000 (UTC)
-Subject: Re: [scarthgap][PATCH v2] imagemagick: adds ptest for imagemagick recipe
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F35D4CCFA03
+	for <webhook@archiver.kernel.org>; Thu,  6 Nov 2025 12:40:17 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14364.1762432812320450078
+ for <openembedded-devel@lists.openembedded.org>;
+ Thu, 06 Nov 2025 04:40:12 -0800
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PAAyOAJL;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-42421b1514fso508371f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 06 Nov 2025 04:40:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1762432811; x=1763037611; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=HzsP7mYaOQuUUMUb4X+E1AjECsB5P9zNaMe5DWhYjCM=;
+        b=PAAyOAJLEd4v2p++sBZ6yaQn0sDj6TZ3bhVd2mUl1tjxUrSPJglQYs5KhjebghVmtG
+         gPEl3whQfd3+eYaIiKJZX2ySMZmFye3KxKFv6yJewzB9YNmRsLplEQt87o9PyuzNplw8
+         xdhZUs2z1vxACg7qlGERdq93I1i0/KgjgeKX8vQRgUi+XoxDSliGjle5ouqCioCsXii/
+         g2WjdumJCjYZ+uloLC/jHHxSmeWX14PdSL0EYbjrlyEm8+K8yEELha9Y8LYVFOvqTKo0
+         jYWjqGYiMHC+L46yWvyF3V1rK2B+J+pmHLJSDR9e3ooZA0XcToH8AJccIbFnUK3B8/HU
+         NR2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762432811; x=1763037611;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=HzsP7mYaOQuUUMUb4X+E1AjECsB5P9zNaMe5DWhYjCM=;
+        b=TDWnoiHTyh3Tc6luI7ajXukb/Q6cuGUqvHmlmTjNF9rpTcl8saDd0MXwos/G5kLQ2/
+         Hu1Wmdx0afxB16GNPoXyXTB8uupyErKGQ8eQo6UN/66y5N7OGOlAuF6/whVeeloTRb0M
+         0V3dfRzrjfzhH0awFn7ANKRbGha0SCW+kasHhvnokYBeQQG/HlxBJO4P+bAfnpxoMwfm
+         hUl/G/h/bTZxzGNUBeTY4c4dotsP70pqtL+kF+CS68YGGJU7d9buX+o4pqvyFZ6V3lnR
+         T/Df/aWWXQtBRMnBCgCBoc3xtIzILBuyxCh2yR7MouIe9BIekMZ0RQzhBFS/ef/E2xVf
+         p4Ag==
+X-Gm-Message-State: AOJu0YwXuikFeI36Ev0bU8woq7T/K6pYWt/2DHo0AzY7G+ZgmWhPtlw9
+	uCQUOkI8e+h/AZFqMxwhJgotMffg/4OQxgGji9A7Xcs+8o4881CyazD5GJqR02M4
+X-Gm-Gg: ASbGncsKAE4KpPD5tNkaEISnAplIlmrH9MG4ovC0vNDoBt4RnXYi9KnUTNRoJGpY1gF
+	KQZv80Mnz5yk1F9Xsyp13jy3XxHuBHP0/SHBI/UMS92eA4bIONSOUIaKoZ+OtKRWgceLM0IVeg4
+	Tu3x6CqjPRTfVeAneuM9K2OIrjThcYUdnXk8UhoBbnNJthJo3nmIjk4CUJ+m4qwktW8kH64xdjp
+	TlSy24SIhdJqG1mIev8s2bQFuQiTHRD/HxbLkEo0db97CPqOIHA2deyUWqSGRJUr/w1SQNsNlsf
+	98BrnKn89icPTnmk50SXMs3ZxLHZ3fDTn9h4YoRc1ZlBLeBJsYFyhotvXs//1FUb1SESLMnOlLJ
+	cxKhbJbQq5ZFesv/OKn/V3dQEWm+LAN+AIAiZtRsOtrpuN9ZTI+uq76fsfltgpekfIYSjhDoJyA
+	==
+X-Google-Smtp-Source: AGHT+IEAQgKs9qMWF+BBsM0BVzHG+IHl3OMDst0Ac1l43JQqa9d3PWVJTCmesX6LoxcZXdJNBrRZ8Q==
+X-Received: by 2002:a05:6000:210c:b0:429:a894:a327 with SMTP id ffacd0b85a97d-429e330794dmr4986130f8f.39.1762432810466;
+        Thu, 06 Nov 2025 04:40:10 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429eb40617asm4811327f8f.10.2025.11.06.04.40.09
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 06 Nov 2025 04:40:10 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: "Ashish Mishra" <emailaddress.ashish@gmail.com>
-X-Originating-Location: IN (1.6.138.68)
-X-Originating-Platform: Linux Chrome 139
-User-Agent: GROUPS.IO Web Poster
+Subject: [PATCH v2] mariadb: move from PTESTS_PROBLEMS list to PTESTS_SLOW
+Date: Thu,  6 Nov 2025 13:40:09 +0100
+Message-ID: <20251106124009.490978-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.2
 MIME-Version: 1.0
-Date: Thu, 06 Nov 2025 01:39:16 -0800
-References: <116884.1762145303951599276@lists.openembedded.org> <142688.1762248598727477659@lists.openembedded.org> <193319.1762406171835153307@lists.openembedded.org> <CA+s=J=y=OWL_KfpjtZcewF5Qsb1gW4-eLAGp+Tw9CQ6mqTHSHQ@mail.gmail.com>
-In-Reply-To: <CA+s=J=y=OWL_KfpjtZcewF5Qsb1gW4-eLAGp+Tw9CQ6mqTHSHQ@mail.gmail.com>
-Message-ID: <193319.1762421956956925614@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="8Ugu0FhD6MJ9Rlu32w9d"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Nov 2025 09:39:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121362
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Nov 2025 12:40:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121363
 
---8Ugu0FhD6MJ9Rlu32w9d
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+The tests are executing and passing fine using glibc.
+It takes a bit more than 5 minutes to run them.
 
-Dear Anuj ,
+When using musl, the timezone tests fail due to the different ways
+glibc and musl handle posix timezones. It have been reported
+upstream: https://jira.mariadb.org/browse/MDEV-38029
 
-1) For scarthgap imagemagick version uses "convert" binary for its central =
-operations whereas latest version of imagemagick uses "magick" [ in master =
-]
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ meta-oe/conf/include/ptest-packagelists-meta-oe.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-master=C2=A0 =C2=A0 =C2=A0 =C2=A0: *"magick"=C2=A0 =C2=A0is central binary =
-and all other supporting binaries are symlink to it*
-scarthgap=C2=A0 : *"convert" is central binary and all other supporting bin=
-aries are symlink to it*
-
-2) Have created same ptest (with "magick" ) for master branch @ https://lis=
-ts.openembedded.org/g/openembedded-devel/topic/meta_oe_master_patch_v2/1161=
-49980
-This causes same patch logic but with respective central binaries to be use=
-d in their respective branches
-
-3) I can rework on logic if any suggestion from team or if there is another=
- suggested approach for such scenario
-
-Thanks ,
-
-Ashish Kumar Mishra
-
---8Ugu0FhD6MJ9Rlu32w9d
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"msgbody259079790" class=3D"user-content" style=3D"box-sizing: bo=
-rder-box; color: #333333; font-family: system-ui, 'Segoe UI', Roboto, 'Helv=
-etica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Colo=
-r Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-siz=
-e: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-c=
-aps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-ali=
-gn: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing:=
- 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-=
-thickness: initial; text-decoration-style: initial; text-decoration-color: =
-initial;">
-<div class=3D"forcebreak" dir=3D"auto" style=3D"box-sizing: border-box; ove=
-rflow-wrap: break-word !important;">
-<div dir=3D"ltr" style=3D"box-sizing: border-box; overflow-wrap: break-word=
- !important;">
-<div class=3D"gmail_quote gmail_quote_container" style=3D"box-sizing: borde=
-r-box; overflow-wrap: break-word !important;">Dear Anuj ,&nbsp;<br /><br />=
-</div>
-</div>
-</div>
-</div>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">1) For scarthgap =
-imagemagick version uses "convert" binary for its central operations wherea=
-s latest version of imagemagick uses "magick" [ in master ]&nbsp;</p>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">&nbsp; &nbsp;mast=
-er&nbsp; &nbsp; &nbsp; &nbsp;:&nbsp; <strong>"magick"&nbsp; &nbsp;is centra=
-l binary and all other supporting binaries are symlink to it</strong>&nbsp;=
-<br />&nbsp; &nbsp;scarthgap&nbsp; :&nbsp; <strong>"convert" is central bin=
-ary and all other supporting binaries are symlink to it&nbsp;</strong></p>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">&nbsp;</p>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">2) Have created s=
-ame ptest (with "magick" ) for master branch @&nbsp; &nbsp;&nbsp;<a href=3D=
-"https://lists.openembedded.org/g/openembedded-devel/topic/meta_oe_master_p=
-atch_v2/116149980" target=3D"_blank" rel=3D"noopener">https://lists.openemb=
-edded.org/g/openembedded-devel/topic/meta_oe_master_patch_v2/116149980</a>&=
-nbsp;<br />&nbsp; &nbsp; This causes same patch logic but with respective c=
-entral binaries to be used in their respective branches&nbsp;</p>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">&nbsp;</p>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">3) I can rework o=
-n logic if any suggestion from team or if there is another suggested approa=
-ch for such scenario</p>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">&nbsp;</p>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">Thanks ,</p>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">Ashish Kumar Mish=
-ra&nbsp;</p>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">&nbsp;</p>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">&nbsp; &nbsp;</p>
-<p style=3D"box-sizing: border-box; margin: 0px 0px 10px; color: #333333; f=
-ont-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', '=
-Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',=
- 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: normal=
-; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 4=
-00; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px=
-; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-w=
-idth: 0px; white-space: normal; text-decoration-thickness: initial; text-de=
-coration-style: initial; text-decoration-color: initial;">&nbsp;&nbsp;</p>
-<div class=3D"table-highlight-background-color" style=3D"box-sizing: border=
--box; background-color: #eeeeee; color: #333333; font-family: system-ui, 'S=
-egoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, =
-sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto=
- Color Emoji'; font-size: 16px; font-style: normal; font-variant-ligatures:=
- normal; font-variant-caps: normal; font-weight: 400; letter-spacing: norma=
-l; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; w=
-idows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: n=
-ormal; text-decoration-thickness: initial; text-decoration-style: initial; =
-text-decoration-color: initial; margin-left: -10px; margin-right: -10px; ma=
-rgin-bottom: -10px; padding: 4px 10px 2px; border-bottom-left-radius: 4px; =
-border-bottom-right-radius: 4px;">
-<div class=3D"row" style=3D"box-sizing: border-box; margin-right: -15px; ma=
-rgin-left: -15px;">
-<div class=3D"col-xs-4 text-left" style=3D"box-sizing: border-box; text-ali=
-gn: left; position: relative; min-height: 1px; padding-right: 15px; padding=
--left: 15px; float: left; width: 746.323px;">&nbsp;</div>
-</div>
-</div>
-
---8Ugu0FhD6MJ9Rlu32w9d--
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+index 580c79d6d9..09944e6629 100644
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+@@ -63,19 +63,19 @@ PTESTS_SLOW_META_OE = "\
+     c-ares \
+     fftw \
+     libusb-compat \
++    mariadb \
+     rocksdb \
+     re2 \
+ "
+ PTESTS_SLOW_META_OE:append:x86 = " kernel-selftest"
+ PTESTS_SLOW_META_OE:append:x86-64 = " kernel-selftest"
+-PTESTS_SLOW_META_OE:remove:libc-musl = "kernel-selftest"
++PTESTS_SLOW_META_OE:remove:libc-musl = "kernel-selftest mariadb"
+ 
+ PTESTS_PROBLEMS_META_OE = "\
+     keyutils \
+-    mariadb \
+     ostree \
+     poco \
+     psqlodbc \
+     rsyslog \
+ "
+-PTESTS_PROBLEMS_META_OE:append:libc-musl = " jemalloc minicoredumper oprofile"
++PTESTS_PROBLEMS_META_OE:append:libc-musl = " jemalloc minicoredumper oprofile mariadb"
 
