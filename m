@@ -1,226 +1,202 @@
-Return-Path: <philip@balister.org>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B816CCCF9E3
-	for <webhook@archiver.kernel.org>; Fri,  7 Nov 2025 13:31:51 +0000 (UTC)
-Received: from rcdn-iport-5.cisco.com (rcdn-iport-5.cisco.com [173.37.86.76])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8359.1762510912260254532
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CDA4CCFA05
+	for <webhook@archiver.kernel.org>; Fri,  7 Nov 2025 16:43:34 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3693.1762533810390949323
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 07 Nov 2025 02:21:52 -0800
+ Fri, 07 Nov 2025 08:43:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=XIT/7x/j;
- spf=pass (domain: cisco.com, ip: 173.37.86.76, mailfrom: adongare@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=4923; q=dns/txt;
-  s=iport01; t=1762510912; x=1763720512;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=u73RISfebOFaTYSN5zWbxOs89YxU+c9fMogp/eGfZAs=;
-  b=XIT/7x/jt6/muOMxNlUZSAJNXAtGWQtEFd4UfuSKuS0JX95EOJPOlVlt
-   6okOvGduaPahKu21CDvjKvodSUN/ywpl4P7BQleBwHWYAvxF1KffYGbIa
-   vS5RnT9npqVotNi3HybNNMBzxJ42U8ep/J1l2IidXtKIo1+2j6n3UUGzp
-   7zThRzGy+7lzKbc36VEQbcTn1ckmuTJ3SV6fXD1xtp/1NCgRvHedfJpzm
-   qEnH6zZ3XZ8o1Q9+Rlf9dbJaE1bPbmp0eKKNaUMjEmg/SijGC6hN+k9m5
-   vnKWp1STopy0nJuiss2XxplBo3fv57L6Igk8008RnolqOwYsLUWnrbqzx
-   Q==;
-X-CSE-ConnectionGUID: 7DLmU0GgQaSKNFHaaNHRfg==
-X-CSE-MsgGUID: hkTWBbDdQL66Hk+2dkg4gg==
-X-IPAS-Result: =?us-ascii?q?A0CwBADIxw1p/5L/Ja1aglmCR3tdQ0mWSAOeGoF/DwEBA?=
- =?us-ascii?q?Q89FAQBAYRBRgKMWAImNAkOAQIEAQEBAQMCAwEBAQEBAQEBAQEBCwEBBQEBA?=
- =?us-ascii?q?QIBBwWBDhOGTw2GWgECAQMyARgBLRAcAwECLysjCBmDAgGCcwMRsGqCLIEBg?=
- =?us-ascii?q?ygBPwJDT9sqgUqFO4gWWBgBhHgnGxuBcoEVgTuCLYEFgVwBAYgkBIIiehSGJ?=
- =?us-ascii?q?3iBWyARkCJIgR4DWSwBVRMNCgsHBYFjAzUMCyoVbjIdgSRBGHGEXSJoDwaBE?=
- =?us-ascii?q?oNRBoEuh3APiksDCxgNSBEsNxQbBj5uB5QPgnyBDgErIF+BLR6TBxqSNaEOC?=
- =?us-ascii?q?iiDdIwelTkaM4VbpRALmHuOCJYGSoRpgWg8gUcLB3AVgyIJSRkPjjgng0KBf?=
- =?us-ascii?q?4NltQElMgI6AgcLAQEDCZNnAQE?=
-IronPort-Data: A9a23:0sJ5rKCDNHXX/RVW/3niw5YqxClBgxIJ4kV8jS/XYbTApGkigj0Bm
- DMcCj+FM/bZZWr3fIglboy1o05T75PRzNNrOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
- /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357gUmthh
- fuo+5eCYQb9hGYtWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
- P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
- 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TEnNlKCXxuEoIh891UJ09u/
- PU+CAoDYUXW7w626OrTpuhEnM8vKozveYgYoHwllWCfBvc9SpeFSKLPjTNa9G5v3YYVQrCEO
- pdfMGYxBPjDS0Un1lM/AZ45muihnHTXeDxDo1XTrq0yi4TW5FAriue1YIaPJrRmQ+1VnXqnj
- Gjq813dXE86N5/FxTmKrn2j07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
- AoT4icooK04+UCnQ9W7WAe3yENopTYGUNZWVul/4waXx++MskCSB3MPSXhKb9lOWNIKeAHGH
- 2Shx7vBbQGDepXPIZ5B3t94dQ+PBBU=
-IronPort-HdrOrdr: A9a23:8dtfDa+NAD9pKKP+WMhuk+DfI+orL9Y04lQ7vn2ZhyY7TiX+rb
- HIoB11737JYVoqNU3I3OrwWpVoIkmskaKdg7NwAV7KZmCP0wGVxcNZnO7fKlbbdREWmNQw6U
- 4ZSdkcNDU1ZmIK9PoTJ2KDYrAd/OU=
-X-Talos-CUID: 9a23:rFZbNm/KjDwQ2/DWcL+VvxE4PsUYKlLS9X7rAGmWKW9gbp2vR1DFrQ==
-X-Talos-MUID: =?us-ascii?q?9a23=3Ay/gaNg2jLepFUCc6wQ4ONgTNrjUj46eSN2oHvZk?=
- =?us-ascii?q?/n5faFS8zYTueg2i4Tdpy?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.19,286,1754956800"; 
-   d="scan'208";a="422708424"
-Received: from rcdn-l-core-09.cisco.com ([173.37.255.146])
-  by rcdn-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 07 Nov 2025 10:21:31 +0000
-Received: from sjc-ads-10055.cisco.com (sjc-ads-10055.cisco.com [10.30.210.59])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by rcdn-l-core-09.cisco.com (Postfix) with ESMTPS id 636931800022C;
-	Fri,  7 Nov 2025 10:21:31 +0000 (GMT)
-Received: by sjc-ads-10055.cisco.com (Postfix, from userid 1870532)
-	id 10E58CC1288; Fri,  7 Nov 2025 02:21:31 -0800 (PST)
-From: "Anil Dongare -X (adongare - E INFOCHIPS PRIVATE LIMITED at Cisco)" <adongare@cisco.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=P4rCaCin;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=34068aa157=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5A77urOU3483764
+	for <openembedded-devel@lists.openembedded.org>; Fri, 7 Nov 2025 16:43:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=j7zFXfK4cl0LP5bphn69
+	qEOSCS5Mny6D/zdTpkcToaI=; b=P4rCaCin46aGy5Oz2jLGEAUjjbjOasCUl3yU
+	Q4p73XQBUf6/Lo48mzuK5gFiMWktZtcxxmK0MJ4LgxXnoBtFAjo4pheskwEsDMga
+	hIL+0kIInj2Q3xcXkbfAtzrgWIsJEQLmWTdjrxI+b5TUhuWTm41NPcMWRYZGU6Dw
+	X2He6+TP9DcClRLjYw29+jmZIUkiHsSWlqySgcCMsadpGrJOGClKREtzyAvEgV/8
+	X3CD+Z2j3VnFcWo+Xb8CxhqptCwxd97oWnZHK3oQRiQzmzP/tZ/EUnA3An+C5h82
+	mtTJ2gz1s8V10HiOxE22MqkWnB5Z6X8b9WedXmutOA4thNmygQ==
+Received: from sa9pr02cu001.outbound.protection.outlook.com (mail-southcentralusazon11013067.outbound.protection.outlook.com [40.93.196.67])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4a96wb8t33-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 07 Nov 2025 16:43:28 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ARyw5XyyrW2dG6goVJBeJBzq9BWMwD4fR4YpuEa2uBeeRIxti336s5wOTVZhZHgxPMO1iYRxLhajTj9rm4b0frSeCBetfvqrnV4O9OxnZv0eh0lDYtYdKBNjaPyYGdNIuByfsBS2Xd9CJoVPM97I7I1V++FDUg5AjtgXTKjRDuXQkt2nr06OegLhznDCWU/tkAf0ACXyM1jwXcWj+J1D94hgosW57TfUsmnN612eOwGNhfC0zLqQARxc50dczEcIgz9ebzhPzRrp0U3bFvrU+q0cS2i0bn1nu8nl4jbTxyGfy7zJsgG5bq+p/LgwC+VFU3oPvaZmXcjqP5lsdg81MA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=j7zFXfK4cl0LP5bphn69qEOSCS5Mny6D/zdTpkcToaI=;
+ b=Nxt8ZTIRVmdaRAs5Co6rJkzPaT/jiSFpd/YmbfflYLlHoqTh7MBaE8B7Js8MrhModv6xf79rp8nnp1nlp9jADGljZGbdMlZ1rg0RP/DrV3rfFPLk4afkp0d/vJ9dyNCQg+HSopOo82zP/GhV+yo9ajZ2XMpwlijmnXaKYHY3nft5xm7lLIKvgV6BFVG9M2smpEc79sq67UoQKxen8rCj1fGiBIhJbjUU1b1qaL0YOmyVs6dFiLm7RRHkiHx8t1zgTB2ttPwtwE8zbpG4U6zH5yNkHVUlBHCxGpe47oTMXdw+tH18HPKYzqyusXzpAB92jxhCB+6Nz2gPPxPdsxwxKA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
+ LV4PR11MB9491.namprd11.prod.outlook.com (2603:10b6:408:2de::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.13; Fri, 7 Nov
+ 2025 16:43:27 +0000
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad%3]) with mapi id 15.20.9298.012; Fri, 7 Nov 2025
+ 16:43:27 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: xe-linux-external@cisco.com, to@cisco.com,
-	Anil Dongare <adongare@cisco.com>
-Subject: [meta-openembedded] [scarthgap] [PATCH 2/2] python3-django 5.0.11: Fix CVE-2025-26699
-Date: Fri,  7 Nov 2025 02:21:15 -0800
-Message-ID: <20251107102116.924586-2-adongare@cisco.com>
-X-Mailer: git-send-email 2.44.1
-In-Reply-To: <20251107102116.924586-1-adongare@cisco.com>
-References: <20251107102116.924586-1-adongare@cisco.com>
-MIME-Version: 1.0
-X-Outbound-SMTP-Client: 10.30.210.59, sjc-ads-10055.cisco.com
-X-Outbound-Node: rcdn-l-core-09.cisco.com
+Subject: [meta-webserver][PATCH] xdebug: update UPSTREAM_CHECK_URI
+Date: Sat,  8 Nov 2025 00:43:12 +0800
+Message-Id: <20251107164312.3934232-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.34.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI1PR02CA0056.apcprd02.prod.outlook.com
+ (2603:1096:4:1f5::7) To DS0PR11MB6399.namprd11.prod.outlook.com
+ (2603:10b6:8:c8::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|LV4PR11MB9491:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9ec87458-fe45-43a0-134b-08de1e1cc627
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|376014|52116014|1800799024|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?UNthmT7AHbih5/XgYOrJwUSm6i6x5ximnBCtJT+RFCeFKj/z0Os5JBlcfzgG?=
+ =?us-ascii?Q?/gsXaascjJXRIEmCX8FK2P9iVYLmytnHp8AWizilHGAqpv6uP3UmEFHt8x4B?=
+ =?us-ascii?Q?gd2cymp4L1e8UXRoi24s2DeLS5xe8enz2YtjfhiyrcJijnMZgJ5SWnVJxINL?=
+ =?us-ascii?Q?fhrYtUnXz6IJlJ3aSdS//6zkL1eQCuOZHEY44bulYdquXtMN1jI8n4qqcrBF?=
+ =?us-ascii?Q?bpUjHwmphDiCizp/vS2nbhs4E187zbU4nMHRLsKZ+QG52AsxdocVSiRSMgVm?=
+ =?us-ascii?Q?9LtSFJMYNTCaCBoCUKS/0FwfocAqu1jAiNH1GS7a34YxNF/Z/D3Zig3c9b1z?=
+ =?us-ascii?Q?Kf19zh9hJ0i8yN3ionfqo6n5yC8HA4zZP5dIG6Sfp4V3GUUKatq8zSjxCywH?=
+ =?us-ascii?Q?u5uI2U0TnZvTiH5BiMBK4YghgMpCxxU0VS/KVpZnhRWeNxJtJEXEvMXcYLeW?=
+ =?us-ascii?Q?MnsW7adQZQR3hdpJrbtndFSECpxT/Dcoc3CAPGiSeMmi/KzmfOWjvrk2LSED?=
+ =?us-ascii?Q?iXaZUX49Tfgy6PBroMIEJKeY+UqElyaxLwLbKRdHTbvKwaH+DPMrUI6iBaPL?=
+ =?us-ascii?Q?wtN565snBARdlBMFBbAj4fjgX6hZ6HIWr8Cqei/1domN+3JG+lnzCH9IcsRr?=
+ =?us-ascii?Q?WjklMDcLOGXOEy1fHHHeRJm2+Epb9cO+0LiTWxRVFSlhQ9YsGz3RpY0xjTC+?=
+ =?us-ascii?Q?PArsXyyPsHV5ocetCZ0Jv2f35D0o4Iv3jHO2mjDQAQnzqIFdMQtWDmWRnw9i?=
+ =?us-ascii?Q?A8DwcdTEopH8Mz2cqPOuprupBM7MwwI+0+xr4Q1M5Hup9ETNwtrF2Ax2UiTK?=
+ =?us-ascii?Q?8pTo+0VN+6R0ajC7+fo9JGHcraDXG69bnzdSyY8LGa3+MGaMBV+TzzUU9wtQ?=
+ =?us-ascii?Q?5D4brDSjIPgs3+I9EyeRroefNldvUQUJ7O5etM8FezcagDE0ldISslX1iReN?=
+ =?us-ascii?Q?9gRww+o+eRkpeuSQ37Zye4swnObrWDOxRKyXsqxUFajx+ACgbReNsEy+y403?=
+ =?us-ascii?Q?vKDXJFL/lZQYvDCFIiCG9/8FyGRs+6gh5xeWwGVh1+esj8oSUYiWaww88BFz?=
+ =?us-ascii?Q?0wbrYtQsr1Iuwo46zetAPxjF+BQVSpAcQk+YszuVlEGwKnA4QCY7uU2lvI+j?=
+ =?us-ascii?Q?LPPsvKPcY+UX7fvO71/tVI0rbfPeYky4TljX4owdc3gc4IRtyfImu86stuV7?=
+ =?us-ascii?Q?LduWvmOsTlFKLr++jBJOKmtVq5fv1rc2JDB4p6T7C2L1wtHFAqwh2sADKk1z?=
+ =?us-ascii?Q?ihn5VIPBMff60zp7RvjRfEo9rh6sjaXEiEToqjBU0dFpagSvQ5obxDsRpNnb?=
+ =?us-ascii?Q?2kLvgcyHhvCo+qmeIbQQNp/cBheP/F/cwP2R6YHY8+iz5UrMUu1kI8Vc/sjN?=
+ =?us-ascii?Q?yAUUEg7q0+nFkDD2kvAMHKsxHP4yCz1qifQehleLFrfv0Gu9Kth+O8f7ipJ+?=
+ =?us-ascii?Q?mzBvEBMOlrnvNXH7NzNRI0SrHThmzH2g7vcpzfT03lfSzfvKHLz6H4lRIGRC?=
+ =?us-ascii?Q?t22TDT1vgKVudSQv1eSAc0g1izfcsJe8kun8?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?YegJyXmbF/ABbC0vkYL7gOo6i+gSB82meMfCB6tFCGvKBOCkHz9uTjnKUlCX?=
+ =?us-ascii?Q?ACcVbhgZvmSkiAPJ7UU7/sU9vOM9Sucm+O5EzDEd3ab3kD4FlYqHwKULsMbg?=
+ =?us-ascii?Q?+gTTrZlUHOd0xB1hr9xloEN8+/S3NynWLgMxLD/FzFTL9QJuoxVDq5Q789tI?=
+ =?us-ascii?Q?LaGe5yjCxBWs2K5h0EFlXu55Bol4zsfNwZIjRSg6WDgjdOv1wVnMVsIJ/gk3?=
+ =?us-ascii?Q?C5psdrMqoJAC0lyCP+8O2UN0WTwRCEEd+JwOPralu5clbks+7v1iF4QrrHms?=
+ =?us-ascii?Q?AfA5nX+PEg4RTOGNHInL4j4+AFbc655T7EHdBByen6wa0EZrVReOJ7I8ENRL?=
+ =?us-ascii?Q?pOypCHScSrdwMd44nuRED85O26e66svbtBWpkrHIbnsDVlppAca8YZ8RgEVw?=
+ =?us-ascii?Q?lOzqwSaGxwhvkJFFLjh6H7SLOtn2L7yVQ91MztVQum/PkIKJ+CcNxaI9e5oj?=
+ =?us-ascii?Q?SZlXC7jvLgIGeLlWwcsY96WeVjbjiiM5rIqbQlk+7j7Qv/cCBeAEXhdGKdor?=
+ =?us-ascii?Q?LvDYRgxPsdm6zW9fTYw0wVNnfZEEPwEjwDF3UYh69D1ON8OB4EXn7sifUF66?=
+ =?us-ascii?Q?rJT/YvvFjG9QAQntonyEGe3Q/Zba8L9Uq7SkUr1qJE29wEhgnI9GUrj33SUr?=
+ =?us-ascii?Q?oL1YgF8QcD/BWCbP0udVg3C0NelYncZ4G3Eo/90visPXFn8cAPd6de9kRtRJ?=
+ =?us-ascii?Q?KiDQVRKbqAuQ3QCi0Jd49O/M1UOeq9kxuE3Qplg17PFEC0cNVwWQSNL23aWM?=
+ =?us-ascii?Q?8UoNEiNkBGYiloSivtBkdP95ACFK6EsBBPP2GxyQ8k5X9a1lQgi3c8GOASn/?=
+ =?us-ascii?Q?DvEnQ6N3FPctbCEvR810nFfoqkumYqzIuU2J5KgTQ9MD5wakNrCKxE/3JYch?=
+ =?us-ascii?Q?OPJVhOVLzHxjYtvCZSIb8lB6JR6u1meIzcZjSSsbyfqGHeyvBhJoguMfJjeK?=
+ =?us-ascii?Q?h7aEaZn2B4JJz6yjRx+U2f2ijdNEadW1STizIfU50xNEm9K2DBLYzzc9qr+2?=
+ =?us-ascii?Q?9IMsV29nqsRHGkMlSh56dbNAwBa8bWzkE2RbotkPEEPCnL5HhIuvW2jwdWUZ?=
+ =?us-ascii?Q?Cof5Oa4TirY9QpWoz8Hn89ZIlLq+ewBk0/wHVBRelq/F6uMsak9N1Uc1dYCu?=
+ =?us-ascii?Q?l5/NbmnK68ODYc9GUKnMH4ydz8fzjfyhAXe1kwCWMCTvpmayGLTnqy/H1cfW?=
+ =?us-ascii?Q?9cgTaI++6WDDK6a08F7HidXony89s42JD+uP2tpQhsEUfwZ0wOzni1uQ78Gl?=
+ =?us-ascii?Q?iqDm8uJiGgKbQQSCVIZ4DqIFphlYyllVcgnllgR3LzDAig5Ez6DhbXBnL4sK?=
+ =?us-ascii?Q?AKEQuAaLKnCgefmd2kwrWbZkvV89lRZvcLa7GCALHXpXVicsLt+62EwJtDb+?=
+ =?us-ascii?Q?cMlBYNQPVs7dYTGn/AwQYmyVUY8WYQVohCaWEBCjELhWDeh5e5ucIhhMBdPb?=
+ =?us-ascii?Q?/mNGWeoRkcmnjhoUF7+nNYXKNO4r8fyIIFAbGO7AAOUAOzosiJxf0meRPOHC?=
+ =?us-ascii?Q?u4pdSLqTWLYGY0o5Byj/5QuemEXiCZlICwDc2lipys2MDuIF6y/JHMO/1zbZ?=
+ =?us-ascii?Q?sGWV6XGkQxp7j47fcvJae4oHkfmZSn764cDBkbM+?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ec87458-fe45-43a0-134b-08de1e1cc627
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2025 16:43:27.0149
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tyXIgMqOhBlWMEpyrtfqX+ES+SrVpItCoCsPS10OoVvlXbRgtoAfpA2rvtqwxfOCABCClANJjVTv6U8Zk/Ym+Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV4PR11MB9491
+X-Proofpoint-GUID: m2fYOsmdIQDWneTs0r8iLIM_NWUSf5Iu
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTA3MDEzOSBTYWx0ZWRfX22D4QCd8xoIr
+ 1HQTXYergnyJD3eWe/zjn1omMMpKHKfIffbvhTH+lCK+1qmVhAHYCUpR/zx4SYo9clMAvE3ckwJ
+ XIy4mhNCmOv5L04DzZUnMQRFLIdXJV17VahxHnSSVrZ+NXQoKPcXkkwtsmw+YqFfbOOPSzIrnQA
+ /rQNJ3V0rz1xCLGV6l0KYnXXjLe7yrMihXEliaIbH4DgKyEdw3eaq3Z1CHazcXtc/uC9re6/5to
+ atoJB4lixAVLuvM7VQnfYgomNJfU4ygJsHvwbSiomS7kXi1AMQkr8wXOpdFIo8jKGQWQagDMwCI
+ Tj6no3hSlftkQFEb4Puqc5/WobsujVa1fI5RLr31zw6Nc9JWc7Bz262k2j1UI5sP2lwmuU5DSHo
+ evcNnaBIEaAOMNv+72PVF6kYkaExHw==
+X-Proofpoint-ORIG-GUID: m2fYOsmdIQDWneTs0r8iLIM_NWUSf5Iu
+X-Authority-Analysis: v=2.4 cv=bLAb4f+Z c=1 sm=1 tr=0 ts=690e21b1 cx=c_pps
+ a=2HONG/MLgVK7ceQJVUCxIA==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=dv67sbeyAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=Jl_jOLasJoZwQEY6TioA:9
+ a=l0HWC-NE-IlxOwCL1BNn:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-07_04,2025-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 phishscore=0 lowpriorityscore=0 priorityscore=1501
+ malwarescore=0 suspectscore=0 adultscore=0 clxscore=1015 spamscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
+ definitions=main-2511070139
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Nov 2025 13:31:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121374
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Nov 2025 16:43:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121375
 
-From: Anil Dongare <adongare@cisco.com>
+Update UPSTREAM_CHECK_URI and UPSTREAM_CHECK_REGEX to check the correct
+latest stable verison.
 
-Upstream Repository: https://github.com/django/django.git
+Before the patch:
+$ devtool latest-version xdebug
+INFO: Current version: 3.4.6
+INFO: Latest version:
 
-Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2025-26699
-Type: Security Fix
-CVE: CVE-2025-26699
-Score: 7.5
-Patch: https://github.com/django/django/commit/e88f7376fe68
+After the patch:
+$ devtool latest-version xdebug
+INFO: Current version: 3.4.6
+INFO: Latest version: 3.4.7
 
-Signed-off-by: Anil Dongare <adongare@cisco.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../python3-django/CVE-2025-26699.patch       | 100 ++++++++++++++++++
- .../python/python3-django_5.0.11.bb           |   2 +
- 2 files changed, 102 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django/CVE-2025-26699.patch
+ meta-webserver/recipes-php/xdebug/xdebug_3.4.6.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django/CVE-2025-26699.patch b/meta-python/recipes-devtools/python/python3-django/CVE-2025-26699.patch
-new file mode 100644
-index 0000000000..bba65eaee3
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django/CVE-2025-26699.patch
-@@ -0,0 +1,100 @@
-+From 5fd7c868791b635ef20d2991cc028516b9021dd4 Mon Sep 17 00:00:00 2001
-+From: Sarah Boyce <42296566+sarahboyce@users.noreply.github.com>
-+Date: Tue, 25 Feb 2025 09:40:54 +0100
-+Subject: [PATCH] [5.0.x] Fixed CVE-2025-26699 -- Mitigated potential DoS in
-+ wordwrap template filter.
-+
-+Thanks sw0rd1ight for the report.
-+
-+Backport of 55d89e25f4115c5674cdd9b9bcba2bb2bb6d820b from main.
-+
-+CVE: CVE-2025-26699
-+Upstream-Status: Backport [https://github.com/django/django/commit/e88f7376fe68]
-+
-+Backport Changes:
-+- The fix has been adapted from the upstream Django v4.2.20 patch for
-+  CVE-2025-26699, applied to the python3-django_5.0.11.bb recipe.
-+
-+- The upstream patch includes changes to a 4.2.20.txt release-note file.
-+  This file does not exist in the Django 5.0.11 source tree, so it was
-+  intentionally omitted from this backport.
-+
-+- Only the relevant code changes from the upstream patch were applied.
-+  No functional differences exist in the vulnerable logic between
-+  Django 4.2.x and 5.0.x.
-+
-+(cherry picked from commit e88f7376fe68dbf4ebaf11fad1513ce700b45860)
-+Signed-off-by: Anil Dongare <adongare@cisco.com>
-+---
-+ django/utils/text.py                          | 28 +++++++------------
-+ .../filter_tests/test_wordwrap.py             | 11 ++++++++
-+ 2 files changed, 21 insertions(+), 18 deletions(-)
-+
-+diff --git a/django/utils/text.py b/django/utils/text.py
-+index d992f80dd2..36ab6a9efc 100644
-+--- a/django/utils/text.py
-++++ b/django/utils/text.py
-+@@ -1,6 +1,7 @@
-+ import gzip
-+ import re
-+ import secrets
-++import textwrap
-+ import unicodedata
-+ from gzip import GzipFile
-+ from gzip import compress as gzip_compress
-+@@ -97,24 +98,15 @@ def wrap(text, width):
-+     ``width``.
-+     """
-+ 
-+-    def _generator():
-+-        for line in text.splitlines(True):  # True keeps trailing linebreaks
-+-            max_width = min((line.endswith("\n") and width + 1 or width), width)
-+-            while len(line) > max_width:
-+-                space = line[: max_width + 1].rfind(" ") + 1
-+-                if space == 0:
-+-                    space = line.find(" ") + 1
-+-                    if space == 0:
-+-                        yield line
-+-                        line = ""
-+-                        break
-+-                yield "%s\n" % line[: space - 1]
-+-                line = line[space:]
-+-                max_width = min((line.endswith("\n") and width + 1 or width), width)
-+-            if line:
-+-                yield line
-+-
-+-    return "".join(_generator())
-++    wrapper = textwrap.TextWrapper(
-++        width=width,
-++        break_long_words=False,
-++        break_on_hyphens=False,
-++    )
-++    result = []
-++    for line in text.splitlines(True):
-++        result.extend(wrapper.wrap(line))
-++    return "\n".join(result)
-+ 
-+ 
-+ def add_truncation_text(text, truncate=None):
-+diff --git a/tests/template_tests/filter_tests/test_wordwrap.py b/tests/template_tests/filter_tests/test_wordwrap.py
-+index 88fbd274da..4afa1dd234 100644
-+--- a/tests/template_tests/filter_tests/test_wordwrap.py
-++++ b/tests/template_tests/filter_tests/test_wordwrap.py
-+@@ -78,3 +78,14 @@ class FunctionTests(SimpleTestCase):
-+             "this is a long\nparagraph of\ntext that\nreally needs\nto be wrapped\n"
-+             "I'm afraid",
-+         )
-++
-++    def test_wrap_long_text(self):
-++        long_text = (
-++            "this is a long paragraph of text that really needs"
-++            " to be wrapped I'm afraid " * 20_000
-++        )
-++        self.assertIn(
-++            "this is a\nlong\nparagraph\nof text\nthat\nreally\nneeds to\nbe wrapped\n"
-++            "I'm afraid",
-++            wordwrap(long_text, 10),
-++        )
-+-- 
-+2.43.5
-+
-diff --git a/meta-python/recipes-devtools/python/python3-django_5.0.11.bb b/meta-python/recipes-devtools/python/python3-django_5.0.11.bb
-index 43be30c7ec..0d26c7928d 100644
---- a/meta-python/recipes-devtools/python/python3-django_5.0.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_5.0.11.bb
-@@ -4,6 +4,8 @@ inherit setuptools3
- # Windows-specific DoS via NFKC normalization, not applicable to Linux
- CVE_STATUS[CVE-2025-27556] = "not-applicable-platform: Issue only applies on Windows"
+diff --git a/meta-webserver/recipes-php/xdebug/xdebug_3.4.6.bb b/meta-webserver/recipes-php/xdebug/xdebug_3.4.6.bb
+index 5314074fbf..6f8540c0cf 100644
+--- a/meta-webserver/recipes-php/xdebug/xdebug_3.4.6.bb
++++ b/meta-webserver/recipes-php/xdebug/xdebug_3.4.6.bb
+@@ -8,7 +8,8 @@ SRC_URI = "https://xdebug.org/files/xdebug-${PV}.tgz"
  
-+SRC_URI = "file://CVE-2025-26699.patch \
-+           "
- SRC_URI[sha256sum] = "e7d98fa05ce09cb3e8d5ad6472fb602322acd1740bfdadc29c8404182d664f65"
+ SRC_URI[sha256sum] = "4cd6a2523d9c1576c818eb4d15fe0c1650a25dde4d31d1d20a616e9d9435cc20"
  
- RDEPENDS:${PN} += "\
+-UPSTREAM_CHECK_REGEX = "xdebug-(?P<pver>\d+(\.\d+)+)\.tgz"
++UPSTREAM_CHECK_URI = "https://github.com/xdebug/xdebug/releases"
++UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)$"
+ 
+ inherit autotools
+ 
 -- 
-2.44.1
+2.34.1
 
 
