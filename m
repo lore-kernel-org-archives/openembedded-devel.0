@@ -1,121 +1,157 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81065CCFA05
-	for <webhook@archiver.kernel.org>; Fri,  7 Nov 2025 11:22:50 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9104.1762514568009181506
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 80147CCFA05
+	for <webhook@archiver.kernel.org>; Fri,  7 Nov 2025 11:34:40 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9250.1762515278596990424
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 07 Nov 2025 03:22:48 -0800
+ Fri, 07 Nov 2025 03:34:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FdIF2byk;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-471b80b994bso6542535e9.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 07 Nov 2025 03:22:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762514566; x=1763119366; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=NohQH1IffKnEJGugzk7JezRIx1Wkxg5scDkApDy1B2U=;
-        b=FdIF2bykZ5+yLOb81BWvjSXbUEgQE2R8jDzLKRx6dZJr/9V7LISXVTD7X6ZILaGlq6
-         8kh9nxVjp0sWpJl/vEOrv9IxdY25MrRvEi1+7DZ6u2FRPI0IdNpdPWXtbVpczJQMzghB
-         2ksDTW+EKvsCf5kuySJX4N8b1thLrdmSc+mZcvw5OJG1/FMd9hedVr+EKPayjt94gzkR
-         6UqpqfOx2QMog+eNmRf8G84iaq3kk7dVH4GZYqkhPuq9Jyb2AlDVR1mG+xLoCN5G29Ok
-         IA9flraytNFD1+p2HnQhhVWZp/llDAZzkgAWBA8yza4Qweorqp++Omyf4VEIb343CSWt
-         sEWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762514566; x=1763119366;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NohQH1IffKnEJGugzk7JezRIx1Wkxg5scDkApDy1B2U=;
-        b=G0pMiHV5qc0gohnAitjbAV+/mU+fK6ZxiISkpumF/ttZXG6Gd7T9iIHBdHhFux/lVE
-         HGvOzTIzDc1Al0e6fLoHZefO+9PH/0Ap2PRgQcE5eaFg5RLZA821+5MfDn1DEWo+1JCy
-         lp8P7J83jwKjwffUjea9YOp8Q9NdL/al+tOcSqNtdesVqsaQbNcwaKNar5JmLR2xaeiT
-         6EIvhOP/jyva9dWrpfMqdX0CMJqjKTu+6DAIJR8ah8sjYGPYt5WcYfVTy1YERmw63ybG
-         Xm1tvFuIV7c74P1yr94BBCAfTeGByR731Za25iUgyO067cF9QeeAkpNEZM+5XABh001C
-         fu6A==
-X-Forwarded-Encrypted: i=1; AJvYcCWLZqF+fynt/+9PJarRzptC8GGUe95iuMosveaPwhcmK/e11Dbi81Vi2AfNWrrx8yCZpN8ZAR3Kq5JzXt6ujWjTE2I=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yxg9VSzbdt/3j+PclMtSy9lIwu7zUlYQSnSkqHJ5tH+c1geKHTF
-	K67lorpyBgAW03yENwdKVv28L1vGm+aYc72I4P0XPP6AhwpYSL65IyXk
-X-Gm-Gg: ASbGncttWcfbU+pwbWm8lBO9MQqVLG4DrM4Sy0wi4cxq6ykYxh17fpcJ2zlxgjWAaZU
-	16fh+80a4ib7VHgoUDWdeIGbCT7q/ymYmvcWNBDBLWnrABc0Ui9+WAwj3j9O3mM5DY/dz0vtEmY
-	ddtXQiFI/XPYD03VfFqZDaofIpoRd3P9ddbqiEP0OiM5J92ToRpSI9UlomsbgOQYwvkfVFI4y4/
-	LTBHvdpwtzHlXrXnZC8wuLP9/XZRXq/uu3VaZsRNaJ2fng/PqinxNwfg9LByG8e25JEGDWFK258
-	8LMi6lv88gb2bxX13m2/b69Nk1uxJWrUrPOoBRR8U5kXyfrau192DjlbazrROPNXI6e5p5BriRo
-	f9xNB0lfpE2CIxYEoBI3KXuxc/n7p7iKsQZ0FNo7JKUKEMl9AJ3Qef0ErrYhBYc1wVrrQCZovIF
-	syBOa8FZoG
-X-Google-Smtp-Source: AGHT+IFHKd+1XJyIqxQEhqe1jQl5XsOOrfAHBYQVgpkTqiEAehNdy5tPR8PCHLainAWnoygV9FFyCA==
-X-Received: by 2002:a05:600c:a41:b0:471:115e:87bd with SMTP id 5b1f17b1804b1-4776bcb5a0fmr16801425e9.26.1762514566124;
-        Fri, 07 Nov 2025 03:22:46 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47763b5714dsm42597355e9.0.2025.11.07.03.22.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 07 Nov 2025 03:22:45 -0800 (PST)
-Message-ID: <592a566b-c5a5-44bf-bb12-f5542eed4cd0@gmail.com>
-Date: Fri, 7 Nov 2025 12:22:45 +0100
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=hLWWkJRk;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=34066b3d81=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5A75gwb62562264
+	for <openembedded-devel@lists.openembedded.org>; Fri, 7 Nov 2025 03:34:38 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=UQ2f2wq5e/FJU+bv6b/L
+	MIOJm8lkZ4pwUG0Fp6B8LF0=; b=hLWWkJRkSL/DuIpKHyRsOuX9I2ebXoEwxa8R
+	hl534agyPNCdS2b7Bey5r2KRkX91m3SROP03tZwqiz/VbOZ1rB3S5U8oVXpT0Jl+
+	/SxoGFA7CIm2Nv2Qy39CqhYZtsHWPtolLBDRpsA5hL13D0hKwi6tutVqVu1rMkv6
+	TxKIDavViOA9TOF/4viIbvOcpH3WaJoWzjMIyRl09zc9Lb+LQ3JJQdfu0obx/GEd
+	LwfbJnXZE/vaz69u45RM5eE1afTlxWZuTXsuRkTbCXAzfVJRS+MInCMoGWUFMzgK
+	RG1kYPb461XqVqL9HAgd6VG120m0WvCZPb3wt/aSEb70knGxGw==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4a96ym8f1w-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 07 Nov 2025 03:34:38 -0800 (PST)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Fri, 7 Nov 2025 03:34:37 -0800
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Fri, 7 Nov 2025 03:34:36 -0800
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-python][kirkstone][PATCH 1/1] python3-pillow: Fix CVE-2024-28219
+Date: Fri, 7 Nov 2025 17:04:28 +0530
+Message-ID: <20251107113428.597691-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] Call for patches for next Kirkstone release
-To: "Marko, Peter" <Peter.Marko@siemens.com>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <ca2ee105-a3a2-48dc-9ad5-77676a71d8d6@gmail.com>
- <AS1PR10MB56971CBAB41937C12EDB33F8FDC3A@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <AS1PR10MB56971CBAB41937C12EDB33F8FDC3A@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: soGxdO6qG5z9eYY16OjuonwPp62BhHUk
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTA3MDA5NCBTYWx0ZWRfXxTS+ZmBy3R45
+ 2Vm00wp8OJ7rYkLCOx2gWRL1Tglt9M9x1uUMufmGQn6x+DxC82uiCIX7UBGxGgxcsxEByxnZ3IC
+ 3kdhWxRE4uIIQiU9gubc8txdZwEo98+jTzc8sWwRu6cPbfPoDUeAUmVTjPduAf9PZhwGB2ylEE5
+ gY7pzgtoCEqYpNbxg36nPDwrCdP5RdINdbyQ6LrvQeb7VtcUqSjVyZMEthzQU5UbbzX9T1flCxT
+ N7sq/Wv+aQEh3Mt2Hq1KbLLFICV4/DNE88/pk6v4sCSHe/fg96s6/WB0+9d1s5QHEH+vqjD8kL5
+ ELYtflToE+Oi53W/OIR/9vRwSkB36botJqZTbyFetX/FQ01sFY14SLedIba8ZYNr+IE3Px/snOn
+ hULQUJPQ917PvPSRrNTb6fVgM945Sw==
+X-Proofpoint-GUID: soGxdO6qG5z9eYY16OjuonwPp62BhHUk
+X-Authority-Analysis: v=2.4 cv=NqPcssdJ c=1 sm=1 tr=0 ts=690dd94e cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=wjU5IotzqukA:10 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=PYnjg3YJAAAA:8 a=xNf9USuDAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8
+ a=-M1QvdhFEmmEk38SpgEA:9 a=FdTzh2GWekK77mhwV6Dw:22 a=6_D5ljFcL1GZDUJyZucp:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-07_02,2025-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 impostorscore=0 lowpriorityscore=0 bulkscore=0 clxscore=1015
+ phishscore=0 adultscore=0 spamscore=0 malwarescore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511070094
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Nov 2025 11:22:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121370
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Nov 2025 11:34:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121371
 
-On 11/7/25 12:04, Marko, Peter wrote:
-> Hello Gyorgy,
-> I really like this announcement; it makes planning so much easier.
->
-> However, I wonder if the future PRs can be synced with oe-core dot release dates.
-> For instance, the plan for 4.0.31 was to create rc1 on Monday this week, reality was the last Friday, and it included 5-week-old meta-openembedded, doh.
-> Since Steve very often creates rc1 oe-core on Friday before the announced date, could meta-openembedded do it e.g. 1 week ahead say Monday or Wednesday? (not sure how long the testing takes)
-> I know that the releases are not exactly tied together, but I like the extra oe-core dot release testing and always take meta-opemebedded hash used there instead of the latest one when I'm bumping Yocto version.
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-Yeah, I guess it's a bit of a chicken-or-egg, I also like testing with
-latest oe-core... but I do see your point.
-Will try your suggestion from the next cycle, and switch it a bit
-around, so that meta-oe will be merged sooner, and oe-core can be tested
-more widely with a more up to date version of these layers.
+In _imagingcms.c in Pillow before 10.3.0, a buffer overflow exists because
+strcpy is used instead of strncpy.
 
-Thanks a lot for the feedback.
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2024-28219
+https://security-tracker.debian.org/tracker/CVE-2024-28219
 
-> Peter
->
->> -----Original Message-----
->> From: openembedded-devel@lists.openembedded.org <openembedded-
->> devel@lists.openembedded.org> On Behalf Of Gyorgy Sarvari via
->> lists.openembedded.org
->> Sent: Friday, November 7, 2025 11:43
->> To: openembedded-devel@lists.openembedded.org
->> Subject: [oe] Call for patches for next Kirkstone release
->>
->> Hello,
->>
->> The next Kirkstone PR for meta-openembedded is planned around the end of
->> next week-ish. Anything that arrives until the end of next Tuesday
->> (11/Nov, any timezone) will be considered for this PR. Anything that
->> arrives afterwards will be part of the next merge cycle.
->>
->> To anyone's interested what's queued up so far, this is the staging repo
->> I use:
->> https://git.openembedded.org/meta-openembedded-
->> contrib/log/?h=stable/kirkstone-nut
->>
->> Thank you,
->> Gyorgy
+Upstream patch:
+https://github.com/python-pillow/Pillow/commit/2a93aba5cfcf6e241ab4f9392c13e3b74032c061
+
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+---
+ .../python3-pillow/CVE-2024-28219.patch       | 43 +++++++++++++++++++
+ .../python/python3-pillow_9.4.0.bb            |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pillow/CVE-2024-28219.patch
+
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/CVE-2024-28219.patch b/meta-python/recipes-devtools/python/python3-pillow/CVE-2024-28219.patch
+new file mode 100644
+index 0000000000..3509b108eb
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pillow/CVE-2024-28219.patch
+@@ -0,0 +1,43 @@
++From 2a93aba5cfcf6e241ab4f9392c13e3b74032c061 Mon Sep 17 00:00:00 2001
++From: Andrew Murray <radarhere@users.noreply.github.com>
++Date: Thu, 22 Feb 2024 18:56:26 +1100
++Subject: [PATCH] Use strncpy to avoid buffer overflow
++
++CVE: CVE-2024-28219
++
++Upstream-Status: Backport [https://github.com/python-pillow/Pillow/commit/2a93aba5cfcf6e241ab4f9392c13e3b74032c061]
++
++Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
++---
++ src/_imagingcms.c | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/src/_imagingcms.c b/src/_imagingcms.c
++index 9b5a121d7..b839f09f0 100644
++--- a/src/_imagingcms.c
+++++ b/src/_imagingcms.c
++@@ -201,8 +201,8 @@ cms_transform_new(cmsHTRANSFORM transform, char *mode_in, char *mode_out) {
++ 
++     self->transform = transform;
++ 
++-    strcpy(self->mode_in, mode_in);
++-    strcpy(self->mode_out, mode_out);
+++    strncpy(self->mode_in, mode_in, 8);
+++    strncpy(self->mode_out, mode_out, 8);
++ 
++     return (PyObject *)self;
++ }
++@@ -244,8 +244,8 @@ findLCMStype(char *PILmode) {
++     }
++ 
++     else {
++-        /* take a wild guess... but you probably should fail instead. */
++-        return TYPE_GRAY_8; /* so there's no buffer overrun... */
+++        /* take a wild guess... */
+++        return TYPE_GRAY_8;
++     }
++ }
++ 
++-- 
++2.40.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb b/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
+index e42e58be80..ffc2c00fb1 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
+@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https
+ 	   file://CVE-2023-50447-2.patch \
+ 	   file://CVE-2023-50447-3.patch \
+ 	   file://CVE-2023-50447-4.patch \
++           file://CVE-2024-28219.patch \
+            "
+ SRCREV ?= "82541b6dec8452cb612067fcebba1c5a1a2bfdc8"
+ 
+-- 
+2.40.0
 
 
