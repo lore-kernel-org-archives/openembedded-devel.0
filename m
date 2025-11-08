@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D23FBCCFA1A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB5E0CD1292
 	for <webhook@archiver.kernel.org>; Sat,  8 Nov 2025 19:32:19 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.12358.1762630333667385522
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12369.1762630332337608157
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 08 Nov 2025 11:32:13 -0800
+ Sat, 08 Nov 2025 11:32:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=d1Kcmac1;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-477770019e4so4746705e9.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Nov 2025 11:32:13 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=h5+TX+vs;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-477770019e4so4746405e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 08 Nov 2025 11:32:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762630332; x=1763235132; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1762630331; x=1763235131; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=d4/tBBdfirzQAHi6f0fV/lq4+U3WTUQRObcZjzOEZ44=;
-        b=d1Kcmac1MzRhS88Uem3240h6FGReqZx2fx5S3Uo9FShhnf5T/zvKMRLxOqdYVm2DBZ
-         CM+rPdPzXJ90sluZuY6aLM7YH1hPlWJYdzDGrGdOxWW8F7du+icNB+nm8FMBH2c07Y//
-         BgGC2/bLVh3WQ0F28QRbD3KWonF3n2TItH4z/ZXQAG8kd6a6rBOhYGVEiwJNPrSYiRui
-         3YRo8tNvAlNBVJ153kVs6H2CvfTOI5pnlgKnfe+910cO2buxUeq8+qZSZ9bZ4CwIQ65A
-         tOW63YmV9VaPMxx6/KweyUvdq0KkNqdFKzLNyLvK8RuXguXSyuJwroALp5eYcbolHPeA
-         85kw==
+        bh=AU1FXEaR+cloc1/x+3G9JfZUFPZuotdCBfBW5Zx4hRY=;
+        b=h5+TX+vsUmOPF6ci61f0583jkdU8G/xz1464NwjhPltGsmuecsCItxz/G4n0VpRCj/
+         iURXFbo3T15a7GaFD+pTrVi+tQT2QuvgMuYY+eGwxuFc51xA1qDoIOabNf2F5FkJaV2A
+         f6I0NftOCuHvWOFPfRR/sH9cw09Rp3NCgB4FQPwqb9yIwdfOb3TQ8ZZzI7Oy27JiBZja
+         52sKYF1uotzH9AjQhJtNVfSNPoTiIoa6VytmOyWSmddr2Rj461wKuaXWnTkZGu4ajfo7
+         TtBoLeuLmqpZHQ3uEeaAIBFUsF7j0XlO0FkFrNf0vrbQ6T9efF6kPrXwzVuwHC7w5lY9
+         E+tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762630332; x=1763235132;
+        d=1e100.net; s=20230601; t=1762630331; x=1763235131;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=d4/tBBdfirzQAHi6f0fV/lq4+U3WTUQRObcZjzOEZ44=;
-        b=ayDmccQSYpkszyFCUfOANJusmw1XqVaEMviG4hOYY6j/bro43iNxquWpSpWdtZMHl2
-         Jjn5j3QSGwFWlYP3uPDn2cleA8PBaSE151GPy3cAXq07icrfEKI5ABc6sCjXqdvNKvhW
-         aGdhts/SNMrgg5+Zzr2jTO0JCi9vNhArYuFYuTnSQm4HOmfquPpIiko/GGImmB9dg59c
-         R1i2AP5TZDImfJQNZuVjUhRnQRQKewMJB/Bu+hyYG0hIoWhnziys4rf8rtgUXl3G9shh
-         xI7qT3ag8We0lIVea/RrSVWUFatUj59k5S1JYH08LIjUQ9yKgSvLbF0221BJE7yuJUtd
-         YK/w==
-X-Gm-Message-State: AOJu0YzuCzq/0Yk0olBEk05WXp8ssNYRtqus6N1ChXOTi9g150/Y38jL
-	dScsUb6Yb8j9iLX/ilpt8bizD2psF+uVahd4q/7h0HZmIt5uNVmQco1ZbfEBVNb9
-X-Gm-Gg: ASbGnctl/EiEi4Ar8b3L4KhX5Vwcf0CDBlM+Pd/5S/NkCrXIgym/q4Fx42mdKIi7xvT
-	6Q/fTs0oyI+VG8Z2TzCB5mvg5Ii2JZftyQR+E9AMJqrKWoKjvfkvslO8Co/aiBPtbr5L9bESfvA
-	7w4cT1tdQRlGCjaplEoICB1judw/BVqfGr9BTnLofIZrMJqddgXWCyCzRwLV5IM637nDN1Kc2S6
-	RiZkL7TI00FRFEEpgj1KpGdUY30PrHvvBNTmWzenVYWirU4uubHYxKoivFbW0fPMog4TAVYzS1v
-	CVuThZ2V9PYYDpSM21rcXPu8uRUo8NBLWK1vWBHmYA+TMERlSimqRflHR1cIit1rQK1MspF9mU9
-	YLc66rFqSbeneL+KebOz2eY/ej4RHKf0mASXAD1ndmo6pwb/oJ5e2eVw/oyG63XJS1aSQIVdj9w
+        bh=AU1FXEaR+cloc1/x+3G9JfZUFPZuotdCBfBW5Zx4hRY=;
+        b=T2DYRFglA27RRZbQ6mtuMGPx5CC9OVy0ERg3HwCTiqmmQ+ZHFkEzedP/WFq9JD5z5T
+         NQ41yv6PS/+oANzNz8VDWLs3jL/QsCYL6HWCuWg29Rn/R5w03OG2lZk1qFZL4gvwcj+u
+         7wIeyWZKJ8UiiXvtI5yC4LpA36BKYiaTsgisiF23D4HO9dEr1BjerAyR3jt+NO1XWOo7
+         IVcVx5uAOq9V2+AdjB3lSBAFZ1JbuszwCToEWFIvhMUdfG52tcGNxBwOLIY2VIJ7bvYu
+         hmWaGzqFVwebIOBrBbW6VtrPMXuuDXMRD4uFdlLau0sfrorbOhWnSkt5YHI9SHHv1+r4
+         OecA==
+X-Gm-Message-State: AOJu0Ywkh5x+6dBJ1vrXqtMrblzBo/aQ3iajtl/Lc1hfLK96Y9OUfBTS
+	3HCxLLGP4M069zS4/A543njfhXfqD8VFJ90DhPZIBKoVF8mM1BIReuNoFXTxIlMa
+X-Gm-Gg: ASbGncskDfeTSdNwuinY9O/rhtB8aA+d2xddPA/ifYN/NMQmSC1vaJFV240BK2KjzCJ
+	cnPLlmryxzL6d1SaETGHK1xfGpQDXF80Aafepd5b9LCBijDGZF50BSYffPKkwhXyvdZXK8RtxJU
+	Tfdt6ZEQUzmayqf5iftUBiqCtx13h1wpIvGuXIKgcQ04z29TG8yRCd/CSr0OMcwSxFnZww/FpqF
+	Oso6q5NaU0jUOp6q+3XWQ24McRCvem7jTHmAi7AEpRUjd7BdOOa/tQYpRPeZ5M8kQve4wpxVjIl
+	CItm7zxa5jsU8FKIXPaM+c1j/YugxcWhimZA7RNqd1+oxc8rCKIEJjfkunE8J7Wt6BVN/al0GXh
+	XnaJwpAzZCNys5/jMj5EKwgS+O+ZSrCUo6BEZC+7Kraa9xisknMH4dfIqYqsyVeyGLN/TM3NyzQ
 	==
-X-Google-Smtp-Source: AGHT+IE1UdFoMM3lLYwnFAMs03kdeOSddTFkOANq2IHDXl1dzZ6lFQwo46i2I03HJk+CjXl5YISshw==
-X-Received: by 2002:a05:600c:3110:b0:477:6e02:54b4 with SMTP id 5b1f17b1804b1-4777327b228mr30708895e9.31.1762630331916;
-        Sat, 08 Nov 2025 11:32:11 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEA07LKy1Cp/rLwf3ikCCWUYui0EXv7oHndiV9dtjocI94TisrqKMs2pDJx9Wby9vSHrPz3BA==
+X-Received: by 2002:a05:600c:a43:b0:477:63db:283f with SMTP id 5b1f17b1804b1-477732874b9mr25450455e9.37.1762630330563;
+        Sat, 08 Nov 2025 11:32:10 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4776bcfd021sm150455725e9.11.2025.11.08.11.32.11
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4776bcfd021sm150455725e9.11.2025.11.08.11.32.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 08 Nov 2025 11:32:11 -0800 (PST)
+        Sat, 08 Nov 2025 11:32:10 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 4/5] id3lib: update remote patch SRC_URI
-Date: Sat,  8 Nov 2025 20:32:07 +0100
-Message-ID: <20251108193208.3465135-4-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 2/5] ttf-mplus: update to latest revision
+Date: Sat,  8 Nov 2025 20:32:05 +0100
+Message-ID: <20251108193208.3465135-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251108193208.3465135-1-skandigraun@gmail.com>
 References: <20251108193208.3465135-1-skandigraun@gmail.com>
@@ -68,35 +68,83 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 08 Nov 2025 19:32:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121404
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121402
 
-The URL of the patch archive from Debian got out of date - update it.
+The original sourceforge project page doesn't exist anymore along
+with the original download location. The project switched to github.
 
-While touching it, also drop the old md5 hashes from the recipe.
+From the github history it is not possible to determine when did it
+switch license to OFL (sourceforge history was not imported),
+it used this license from the initial commit.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ .../ttf-fonts/ttf-mplus_027.bb                | 25 -------------------
+ .../ttf-fonts/ttf-mplus_git.bb                | 25 +++++++++++++++++++
+ 2 files changed, 25 insertions(+), 25 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_git.bb
 
-diff --git a/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb b/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
-index 7ae262345b..2d47116cf0 100644
---- a/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
-+++ b/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
-@@ -6,13 +6,11 @@ DEPENDS = "zlib"
- 
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/id3lib/id3lib-${PV}.tar.gz;name=archive \
--           ${DEBIAN_MIRROR}/main/i/id3lib3.8.3/id3lib3.8.3_3.8.3-16.2.debian.tar.xz;name=patch;subdir=${BP} \
-+           ${DEBIAN_MIRROR}/main/i/id3lib3.8.3/id3lib3.8.3_3.8.3-16.3.debian.tar.xz;name=patch;subdir=${BP} \
-            file://acdefine.patch \
- "
--SRC_URI[archive.md5sum] = "19f27ddd2dda4b2d26a559a4f0f402a7"
- SRC_URI[archive.sha256sum] = "2749cc3c0cd7280b299518b1ddf5a5bcfe2d1100614519b68702230e26c7d079"
--SRC_URI[patch.md5sum] = "997c764d3be11c9a51779d93facf1118"
--SRC_URI[patch.sha256sum] = "ac2ee23ec89ba2af51d2c6dd5b1b6bf9f8a9f813de251bc182941439a4053176"
-+SRC_URI[patch.sha256sum] = "6170f085972fdeb5fd69e346860100416707bb0b9f3a73a17a64945dc8b7cfe1"
- 
- CVE_STATUS[CVE-2007-4460] = "patched: fix is included in debian patch"
- 
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
+deleted file mode 100644
+index 1ae1d1a2b4..0000000000
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_027.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-require ttf.inc
+-
+-SUMMARY = "MPlus font - TTF Edition"
+-HOMEPAGE = "http://dejavu.sourceforge.net/wiki/"
+-LICENSE = "${BPN}"
+-LIC_FILES_CHKSUM = "file://LICENSE_E;md5=ac161e96eda00db9a3aec7870b5d9658 \
+-                    file://LICENSE_J;md5=a120ca8d7c8e4a475d5277c9aeb95221 \
+-"
+-SRC_URI = "http://downloads.sourceforge.jp/mplus-fonts/6650/mplus-TESTFLIGHT-${PV}.tar.gz"
+-S = "${UNPACKDIR}/mplus-TESTFLIGHT-${PV}"
+-
+-PACKAGESPLITFUNCS:prepend = "split_ttf_mplus_packages "
+-
+-python split_ttf_mplus_packages() {
+-    plugindir = d.expand('${datadir}/fonts/ttf-mplus/')
+-    packages = do_split_packages(d, plugindir, r'^(.*)\.ttf$', 'ttf-%s', 'TTF Font %s')
+-    d.setVar('FONT_PACKAGES', ' '.join(packages))
+-}
+-
+-do_install() {
+-    install -d ${D}${datadir}/fonts/ttf-mplus
+-    install -m 0644 *.ttf ${D}${datadir}/fonts/ttf-mplus/
+-}
+-
+-SRC_URI[sha256sum] = "a20b9b9b03c2a6fb1e2137d29e8a6ce06406ba1e008906ea3c474dc048dc06a6"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_git.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_git.bb
+new file mode 100644
+index 0000000000..c491a44095
+--- /dev/null
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-mplus_git.bb
+@@ -0,0 +1,25 @@
++require ttf.inc
++
++SUMMARY = "MPlus font - TTF Edition"
++HOMEPAGE = "https://mplusfonts.github.io/"
++LICENSE = "OFL-1.1"
++LIC_FILES_CHKSUM = "file://OFL.txt;md5=ee870a4a7cee012360178b2f8bccb725"
++
++SRC_URI = "git://github.com/coz-m/MPLUS_FONTS.git;protocol=https;branch=master"
++SRCREV = "80ac404d0c80442781b6f4c6119a8c9e71770806"
++
++PACKAGESPLITFUNCS:prepend = "split_ttf_mplus_packages "
++
++python split_ttf_mplus_packages() {
++    plugindir = d.expand('${datadir}/fonts/ttf-mplus/')
++    packages = do_split_packages(d, plugindir, r'^(.*)\.ttf$', 'ttf-%s', 'TTF Font %s')
++    d.setVar('FONT_PACKAGES', ' '.join(packages))
++}
++
++do_install() {
++    install -d ${D}${datadir}/fonts/ttf-mplus
++    cd fonts/ttf
++    for f in *.ttf; do
++        install -m 0644 $f ${D}${datadir}/fonts/ttf-mplus/"$(echo "$f" | tr '[]' '_')"
++    done
++}
 
