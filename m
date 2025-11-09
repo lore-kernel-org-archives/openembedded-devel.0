@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7471CCFA1A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8868CCFA1E
 	for <webhook@archiver.kernel.org>; Sun,  9 Nov 2025 16:00:26 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.27187.1762704024135544696
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.27284.1762704023479760922
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 Nov 2025 08:00:24 -0800
+ Sun, 09 Nov 2025 08:00:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NeCHfuFt;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-42b32900c8bso358338f8f.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Hh4L3krS;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-429c7e438a8so1990199f8f.2
         for <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 08:00:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1762704022; x=1763308822; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=tk1GPN8SdNccX2PD1TLt8AcXhAMj/rqrHcXaXv8LUE4=;
-        b=NeCHfuFtKC2erwnPPIv0Y1ukpk5yxjS8WB5NrMSFB7fW94JeD6+K1pBVuFo9A+IMz4
-         xDAJVn08IKfbzB90yUCna3Qm3rao3ghk7bjN9f9xbM1s8oyWVT4X6tRj7k8P0ieO9cn5
-         qosFeexZtM/PWewf/6H1RuYS67atp1TUDgm++B9RtAHQiQZGYjJfWavGEAWDntO7Fdt/
-         asKoI+oI+WNqIgTQzQd97lsq7WQUhRBZ9Y/VsveWZHRvGiVpg2GHOKPhQqSKFlfZDGVH
-         JPgRrrEr88HMEutB7SL/Zp3Z/lKJlSKApWLEfrVsGfUTWUmw5l0ZNsgowkL3vRoDYGmv
-         IeNg==
+        bh=FdXr+C3Pl4iSE5EEUrMbSkAYvdYGEWzuYV5OAfT/vj0=;
+        b=Hh4L3krSSVSV/lYe8tIlobsMqdWhYciNkvUL9YgcKXbc39GvLbpqqiKLMS99IBIY5j
+         dp7VenPEdojc4BLGuAw40tR4P1PX5Ynt7y0CR6VPeDokeE4pzAFdmEjAzlF0XMpqY85b
+         FAfegjxT3ceBIate7yuNEKKk0RWmVDQKtSVb1z3lZb2aaba/etREHo+5H0UYm+4VX8N9
+         NxF88jHr1JDFP6x6ADsHvHwdRJMwyyJAIoLiLp8uxzAU2cw8pHFPNu7BNjB9Uwk5KphD
+         m6WW78Ec/9UnLurjASDmPTQ/c0QeyGEfvSXwOtuwbDNl2NWDKieeFZK2RCjAjAby7wB6
+         joCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1762704022; x=1763308822;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=tk1GPN8SdNccX2PD1TLt8AcXhAMj/rqrHcXaXv8LUE4=;
-        b=wjFAQNlcufZC1EIn0PeSvBEyS3Ur6J/p/a97gMp7Uz+55GBJXgPlbxZe884FatxUFp
-         p9ypiM6pGg9qx02fXz6JnxTcAQL9PFS6bFayaH/bB6M+uqpCXRjS6oF5fJKvIKDBUfzh
-         rNm051brECocS9a327jlqWlxFj/EEzfbaMwF4E05e7tVDtY7qjbmq5C3+28MvMVDcJKO
-         a7tgFaqx+6vfkKCdSUxkWneMfRqJ5OpGW9Px2PTKjdGO++jSYVM2NC/IP/teMx4+U3S3
-         0ZK+Yt+hFT7o+mkjLRbUilPIVO4izGT+5+dCwQFtNwevM1qMMvi4AJsRTdY/vQZkGhty
-         1ABQ==
-X-Gm-Message-State: AOJu0YzBxp9BYuSFfMRzKF4j8Cuo/HpCaD+ZXu8G7rF3U3kvxFAI++dh
-	TaecL+0Rp2C91c5FuVVDt8P57JoIHeDMV8o0BAapGIiLcEUEsg/vWuTJLSeIna7+
-X-Gm-Gg: ASbGncuRCW10p/dgW4Sn16aXhJ/joJbUPhak1PO6gleZj2s77izJ5wTn0yFzyhIPJCg
-	rxEaypkFW3zZTWUhkAztSo/cOX8/77g7tHcfNgM+N0N2yPaztdFmIkPq2Zp7WxuDPaDPPes6GZY
-	ON/nSSB3hb0p6IXmlftqXZFpO/GDeez9C1H7N/YiC6tmV93g2xdtE9/X2zzfnBvtsrie6WJDJ5H
-	u/OC40t+fdgXO3c1k4jE3/cuVZhcxWTjLCKwePIVirND//WQNbY/NIoIoQ9iDsZBhyu5BEmhZt2
-	17BgOFarMABQ1OGmEI6zWBuz6GYFT0P5s5NJlLyX+VVJS/NZZ58nxbFk88OtFkDyGa2eyYRtGmH
-	cAlx3ecv+06bugA7NdxdDJxNnVCgOygBqk9UjsG0SaZiF8kSzh4kFlyALoE6g1Q2lFOC2CpN30Q
-	==
-X-Google-Smtp-Source: AGHT+IGZhyITNlJwqgzz7uwjuCHkvrFUTRYtA3cHcZdcfTitYzFOHqKOCeDrN5AZSMGbp17zC6+dcQ==
-X-Received: by 2002:a05:6000:178b:b0:429:bc68:6c95 with SMTP id ffacd0b85a97d-42b2dca46c5mr4310842f8f.47.1762704022415;
-        Sun, 09 Nov 2025 08:00:22 -0800 (PST)
+        bh=FdXr+C3Pl4iSE5EEUrMbSkAYvdYGEWzuYV5OAfT/vj0=;
+        b=XHDJT8DzztEg9m72JkwTbKuNodKu/jp9ZT/n9Z8+nCz2t1vgJ+10sRqpoEh2Sy4ipk
+         wxxy1tVFL7vACwrh2EBzvU5CBMY3Kqls9B4/n8Ds6x7mZU7B9/QaxgYXeCZj8xImF184
+         Hp86xfoaDfb30k4ImjvWzcDDcyjxpUqr/dyLtwONi1VxnocKS6kKO9WSGkE5HeSn7PTN
+         t4j2hoE+23o5oDqtXl9OlS73QbFn5QNOo/XrjAz8Ufpx/3szljHDr+886BXlc7OnUOkl
+         gLAY2PhKLyMgG3owcZe6ZLb4Xw686eeMs9fKGflNRunHNBDXMFOq07TQP/T0ne2jRWoB
+         eZCA==
+X-Gm-Message-State: AOJu0Yy/jm7lKkcv9yK/B+lLmGH+oQxsCPk/LR+YHxm0+q+qmQDztkfY
+	WodJFHIZGJsn91cTm2Uhl2IujgvmDDxJWUueli99ZbAZFOpkdJVJ9mPr35VZSbXW
+X-Gm-Gg: ASbGnctsosTynFNc5EqHXwI5iWmTLay2XWRuWEmjtsZ9Zkk642VSIje7IJL0DSz9cRJ
+	e4YCYTT4NcqqB8vI6hdX+JExW6QtE6pzRL2qtxkSNHAV9AzH+lbj72Wx6wcBgIHOYoaW41opp89
+	+zUIwx3LcXZ34Wk5GBJ4phizR8lV3Y1dHnfPF+AihaUUpwq8EgIYt/mn7NeXVTo3+wivKkpbLWK
+	6Umz7pq8L0J/x2g09nKuJM7G9M+fmB3l4lJB65mh0DWoilDZ41yugGjIs3B4f8CN5wUUyc832ls
+	tEj1qVuBXM6rTINQFDag50u5xcUm1CKWIxW60eZMy+RRf6/PWZDTBg4DgBswRYM/6ydbKmtVLG+
+	9PEbbkffr8XnfEVYFkzsYsYP4dTbDel6AA6KKevzcoU0dQlCAvEFsWIiRHRmXNpr0XPw0kUrrOL
+	vGF9I4KoZWl78kle/dnGY=
+X-Google-Smtp-Source: AGHT+IFR5qZ9f2S1SXoM39dZktqSEm8cKGosBMSBT/2GxW2uDbUT4RHFy9aJjCCPF5o9EVJknxVlLQ==
+X-Received: by 2002:a05:6000:2083:b0:42b:3ab7:b8b9 with SMTP id ffacd0b85a97d-42b3ab7bb9fmr696442f8f.20.1762704021775;
+        Sun, 09 Nov 2025 08:00:21 -0800 (PST)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42abe63e131sm17406445f8f.20.2025.11.09.08.00.21
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Nov 2025 08:00:22 -0800 (PST)
+        Sun, 09 Nov 2025 08:00:21 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 03/27] pcp: update SRC_URI
-Date: Sun,  9 Nov 2025 16:59:55 +0100
-Message-ID: <20251109160020.2522353-3-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 02/27] libvdpau: update SRC_URI
+Date: Sun,  9 Nov 2025 16:59:54 +0100
+Message-ID: <20251109160020.2522353-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251109160020.2522353-1-skandigraun@gmail.com>
 References: <20251109160020.2522353-1-skandigraun@gmail.com>
@@ -68,39 +68,27 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 16:00:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121419
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121418
 
-The original download location, jfrog's artifactory stopped
-providing any kind of free service, and the source code is not
-downloadable anymore.
-
-The project however has an official github repository also -
-change the SRC_URI to this to make it work again.
+The old repository was moved to a new freedesktop gitlab instance,
+causing fetching faulres.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-support/pcp/pcp.inc | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/pcp/pcp.inc b/meta-oe/recipes-support/pcp/pcp.inc
-index 4cafa7234b..d2472e87e1 100644
---- a/meta-oe/recipes-support/pcp/pcp.inc
-+++ b/meta-oe/recipes-support/pcp/pcp.inc
-@@ -7,12 +7,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=37ab75b580d5aad4ada04260efa3702f \
-                     "
- COMPATIBLE_HOST:libc-musl = "null"
+diff --git a/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb b/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb
+index db3c045588..3ee56b0a23 100644
+--- a/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb
++++ b/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=83af8811a28727a13f04132cc33b7f58"
+ DEPENDS = "virtual/libx11 libxext xorgproto"
  
--SRC_URI = "https://performancecopilot.jfrog.io/artifactory/pcp-source-release/${BP}.src.tar.gz \
-+SRC_URI = "git://github.com/performancecopilot/pcp;branch=main;protocol=https \
-            file://0001-configure-Limit-the-header-search-to-sysroot.patch \
-            file://0001-htop-Change-dependency-order-of-header-and-sourcefil.patch \
-            file://config.linux \
- 	   "
--SRC_URI[sha256sum] = "dacf92ba195f1f2ea8f40bf0c455d2cd2456273a1e30dcc3ee5b5bfd099a99ee"
-+SRCREV = "c13558fd0df54438cbb87cf303dc279cb58816c2"
-+
-+S = "${WORKDIR}/git"
+ SRCREV = "79f1506a3307d3275b0fdfb2e110c173f68e6f78"
+-SRC_URI = "git://anongit.freedesktop.org/vdpau/libvdpau;branch=master"
++SRC_URI = "git://gitlab.freedesktop.org/vdpau/libvdpau.git;branch=master;protocol=https"
  
- inherit setuptools3-base pkgconfig autotools-brokensep
+ S = "${WORKDIR}/git"
  
 
