@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 614B0CD13D9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F503CD13DA
 	for <webhook@archiver.kernel.org>; Sun,  9 Nov 2025 16:00:57 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.27306.1762704051922735003
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.27305.1762704049617091961
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 Nov 2025 08:00:52 -0800
+ Sun, 09 Nov 2025 08:00:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Zgi3DYsB;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-42b32ff5d10so263559f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 08:00:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DDs08gcF;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-47778b23f64so2688745e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 08:00:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762704050; x=1763308850; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1762704048; x=1763308848; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=UvZLDyuOdO3nNOtxpa3f/VrsCrUWwJ+72CFHEHOthw0=;
-        b=Zgi3DYsBNp88zZxCrGpt/Vgl6j8ZmWe25kVyyBZMyn3rJil2nGHsUgmlEqWrrEQCnI
-         RAtyFWzF/QEANwjAork3eODv5Vq6C64m+UzTCfknEYcmc2TDryEKQexgFpV9nIfCgqF1
-         2Yk59sinbxPJxo6PH46CoS+yQs9Z2h0TNCzHIj8PgMIbLBZhmktYIfoenEtOaUfMVeyr
-         GG5+//MfqHdupKEk7dGcjBTg+OUF0OMm2sluV1FkSAeEXETJIEtCaypn8VnIi9/v5ym3
-         V+Cdl7pM//EleeoRbp5xW2/g3+jRFqLwakQPfri1XMdCw+tlBPppicf6WRTRBsqV56UP
-         HAzA==
+        bh=/IsZzjpp+v5Je1sTXzuT3gP1EG9UF+/MtYZ1UfEFnJE=;
+        b=DDs08gcF2qp5BrLRtZcXWb/zmhk620hzrbwBBZNtjqGcG7PloOaxU2pc9oioG2mMs5
+         r1Z4vadi2mks+sMQ7wHN/84elF1hj96lcNBfvXUfwu/ffnXxNJiQPEaGTD8PQTTjmufh
+         BuQnNR/UgDhQ1xbWd85VgrlRfM5mvdBE3UUzglv9NSCxql5VhfCnvsHx2L3uoX+e6Dxy
+         u1eX6LvopWVS+EAqKvbw5Upf/t4rX/yhLEtY8MaGFKAq8+xSeQi9kqw9OPXPpg2zGidA
+         9Jz4phve1w7plVLHu0na7pqILVWKUopdJ8oiNGFQRO/yr8OZicMb8Ofi7CWErxeJFk8K
+         9b6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762704050; x=1763308850;
+        d=1e100.net; s=20230601; t=1762704048; x=1763308848;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=UvZLDyuOdO3nNOtxpa3f/VrsCrUWwJ+72CFHEHOthw0=;
-        b=wS7bBK5+Gs9DYnaigzhLJ6ByZRMOlrUAy+X+BTGzb2NXGaQYAZV2VZQGMLGX0BQkLW
-         wTiNVZVLJa0GTJMTiGHDV1asGwPPjR2Vcq/TnIJ9z00bGEjY9lkgWQp0fbMGzuGzWxXT
-         jVRvI274UNMs6KA5EouX3yLDw50VYvYjidZZMXL6Aoo4wn4tv2mzQsHSWJ/jWc2bREZL
-         4Yz495y0s2mbfq8lFBpnIeiYnT4j96FU8xLKCdVGn0S4VjLTcP8/B7vn1VLeE3MlWp6+
-         +ekGmjHejMBSyIE2KGWwVKRNdIyatd+iBfNc2ZsBHokEeZxy00VRrbxanlCAIti9OO0s
-         2WcQ==
-X-Gm-Message-State: AOJu0YwiWFK21uNbhF0Bres05j8uwpQaOyMMLTJ5nHTladS9lhnvbtAm
-	lWZT10KDrwc42a2oTTZ/nUzbY+g9/u9dFJZEuL8F2V+MHN1xy4s7Aws1HHjhM5Yb
-X-Gm-Gg: ASbGncs5ucuToj8BTFS0Njs38AF4DxzlAy6Wc+Hk/hIAyoyiV1b3kG8aNlOQfhvi/EQ
-	VVQZfMwNaJD4ZDDPRPLwBr54R8j/KetVrvPd3erWF0vKM6L/bNdgN4M42DMG3IhaURFk7Iuir8S
-	g9Wys6VNDb1f3+tBfjVxhWtWlYnib/mgbD9l5C2T17AGtsWbbHk6mmqzftMjG7q0P+dSmzQc3RT
-	OqH8+tCNO6abf4JnHTt/hNmN/BjaDQO/rhK/zwCdKJzLFIKVEaPJXL9eXG+mae5oxqleqYJAAsa
-	lgfAKU4qHvTXmQLL2eRhKPSbo2QXSeqRzG5CwbRdzAB43TUtOPY40Bo3lKNhWi2BimTApx+wEiQ
-	88pfOphc/uUWq4ifeKBSVCBuzvpUWA0W4dVBcj+dja8cc1YzPaqiGd5epWlWVINcFQDKyCAe1bE
-	33TpJemUwstKiynymRzYE=
-X-Google-Smtp-Source: AGHT+IE7ji5co1eMmFEAD+PXnsfdQSFZTfhnd4BiAxc53MC124hZBRHECgM9ReHpUaiWfTY6OTbjyQ==
-X-Received: by 2002:a05:6000:250c:b0:429:8bb2:d0ce with SMTP id ffacd0b85a97d-42b26fb47d7mr6933065f8f.18.1762704050153;
-        Sun, 09 Nov 2025 08:00:50 -0800 (PST)
+        bh=/IsZzjpp+v5Je1sTXzuT3gP1EG9UF+/MtYZ1UfEFnJE=;
+        b=wYutytLUROyyUpM6Vsjs8sgr4VFurlqg1aTtOcvuWCNCu58h2/LTMXa2QQW9c1M1rY
+         uIESdgOdGE/Svv00QJHJ0Lk1r7qFQ0iGlQgMqmLxjZ0PEulZZvSHiziJOUCTnv5JYM8O
+         oJ2D07L72IlQdUvnuI6dkO94q+quN8jyJcQSKMHsz78O/CropVz69eWyEdFLudj3YFIb
+         gnCCbU7KaPWKNl8JagrCl0Y4EEk4pf9NcBG8D0e6PTrPOKTR0qR65/GCWDHj5XKnb1QD
+         p8vBAtXV8cEFpP0Vtga5C4bJu4ElisRTH46oUoUGtn4FDW/JQNPLMa2tCb2OwS9n0jOs
+         Z09Q==
+X-Gm-Message-State: AOJu0YzYStf1Q+fjwMDPEHDcaZM6WMXukXckk/uZEsz3uVrT2WVTmV1D
+	lVUs5wj5TMbM29N4USFahNdcA4q6rSsiTsuiRDt6E6ez0SHGJuLpTkjaFnEz8aah
+X-Gm-Gg: ASbGnct4UmfVZcmn1gLiE7evkG1xVTfg+JKGN/y1BzwrfTKlJiuoNNP7G0fE4QVnec5
+	HJKm0qlEg6Zfz3S/vzdqeafqeua1yS2WQldSBQMaVqJYHCQ3k0fYbpsNmgcl7Pk9OxMp6+att86
+	pHBnViZ3sejQWEQsBxRHGpvCXNFnG2F2/tOglCVz6TcfL0+oXZy4PZC694Iecy0k1aYuYN8/yqX
+	65idS77TLn8iUrAKNh1uzN6zoVJZMQ/RT1g/gCLaMl6mGbkhJXofvuZs4zijBFUNzdp7WO9F08f
+	9tmZL5dEXIOgti2wZZxPdTSk8g8oqHOd2dDYrwMNgiCEuBZdG3lERYy5UWWIMPZSYIm52JKoeNn
+	5cajVL9F7KghL4R0MlAVPR1qmtyawoRnbj6csj4LfZZv9+XtZeYvJFrP4b+MRzBaPP0nFMIqCB2
+	AlMlbRjxut
+X-Google-Smtp-Source: AGHT+IECy3l/DYznCznhBAnvE723rc0TQiJnDKD/STj6TKXcjiAlzia/X8MA6LiiL9GCNEBww4ZLIw==
+X-Received: by 2002:a05:600c:45cd:b0:477:1ae1:fa5d with SMTP id 5b1f17b1804b1-47773286285mr38175685e9.20.1762704047912;
+        Sun, 09 Nov 2025 08:00:47 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42abe63e131sm17406445f8f.20.2025.11.09.08.00.49
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42abe63e131sm17406445f8f.20.2025.11.09.08.00.47
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Nov 2025 08:00:49 -0800 (PST)
+        Sun, 09 Nov 2025 08:00:47 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 26/27] unicode-ucd: Updates due to license.txt updates
-Date: Sun,  9 Nov 2025 17:00:18 +0100
-Message-ID: <20251109160020.2522353-26-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 23/27] consolation: fix SRC_URI protocol
+Date: Sun,  9 Nov 2025 17:00:15 +0100
+Message-ID: <20251109160020.2522353-23-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251109160020.2522353-1-skandigraun@gmail.com>
 References: <20251109160020.2522353-1-skandigraun@gmail.com>
@@ -68,40 +68,27 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 16:00:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121442
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121439
 
-From: Khem Raj <raj.khem@gmail.com>
+Switch to https protocol to avoid fetching failures (anonymous fetching
+with git protocol is not available anymore on this server).
 
-This is downloaded and does not have version, so we have to
-update it whenever upstream update it. The copyright year
-is changed this time.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6121f2907aff77839bfdff9fdedb7e9bee6b1628)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/consolation/consolation_0.0.9.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
-index 7970cd953f..a4952cf97d 100644
---- a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
-+++ b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
-@@ -1,14 +1,14 @@
- SUMMARY = "Unicode Character Database"
- HOMEPAGE = "https://unicode.org/ucd/"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/license.txt;md5=4b11b5cbb0a24df9f4e7db63db98f22f"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/license.txt;md5=ea17640caddb659394df50e5db6efd69"
- 
- SRC_URI = " \
-     https://www.unicode.org/Public/zipped/${PV}/UCD.zip;name=ucd;subdir=ucd;downloadfilename=unicode-ucd-${PV}.zip \
-     https://www.unicode.org/license.txt;name=ucd-license \
+diff --git a/meta-oe/recipes-support/consolation/consolation_0.0.9.bb b/meta-oe/recipes-support/consolation/consolation_0.0.9.bb
+index 17981b6e9b..b7a27f3255 100644
+--- a/meta-oe/recipes-support/consolation/consolation_0.0.9.bb
++++ b/meta-oe/recipes-support/consolation/consolation_0.0.9.bb
+@@ -14,7 +14,7 @@ DEPENDS = " \
+     udev \
  "
- SRC_URI[ucd.sha256sum] = "033a5276b5d7af8844589f8e3482f3977a8385e71d107d375055465178c23600"
--SRC_URI[ucd-license.sha256sum] = "f7830d126f59d83842565d3dddedc79db4ca978ed52aee0ebcc040ea76a85519"
-+SRC_URI[ucd-license.sha256sum] = "abf84f74dea2812799e1dbef7f0581adf7db244881e4febb8684f441568da0ad"
  
- inherit allarch
+-SRC_URI = "git://salsa.debian.org/consolation-team/consolation.git;branch=master"
++SRC_URI = "git://salsa.debian.org/consolation-team/consolation.git;branch=master;protocol=https"
+ SRCREV = "5ef08f0cd6ede62de14de477b74fc3611108c676"
  
+ S = "${WORKDIR}/git"
 
