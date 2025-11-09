@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C7B1CD13D9
-	for <webhook@archiver.kernel.org>; Sun,  9 Nov 2025 16:00:47 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.27204.1762704039983916713
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 489A8CCFA1A
+	for <webhook@archiver.kernel.org>; Sun,  9 Nov 2025 16:00:57 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.27216.1762704050477658264
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 Nov 2025 08:00:40 -0800
+ Sun, 09 Nov 2025 08:00:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dH8bOLHC;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-42b3b29153fso45384f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 08:00:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HxUqL2XE;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-47777000dadso5251885e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 08:00:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762704038; x=1763308838; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1762704049; x=1763308849; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=sLd5cvW7qQZWovDCsKP80oSfSdwe8OB0K04wB0qZqlY=;
-        b=dH8bOLHCTVaOijeiMDtdW/NRxnBpImguBsGk+gNICYESn/ndSXHBwdr2z2a4II12fM
-         P48z9ViaGNeij7Qz//LpKVU1XlgWJVqzczae3l5Sxb5vDSiJ7QD3tNAdGx5XRv4qPB3M
-         mGf03V7MgD+wjIWmKI8FagGkAhlQ+GAzXsjQkvPnjbaMr0d6U8p9lHyyjMbFHVAavnTQ
-         3x2sppvgJB3PDZ6AtzwNZlbKTd65BlCsYWBGnt5cm7DZAye9KtO8WA96NABAOZGkV5iU
-         54zVVMkNFK3FduDn342ByG+Dm5n0ZPo5/fAuQcRm6QkThgLxe7SaG3v1RBCzRAMO8lve
-         JdCg==
+        bh=pURnAyw5V7FO/q8otuFifsqdO/uC8OpYpPBMn2rjruo=;
+        b=HxUqL2XEeR/z241trIhTutuHbc8WvjbFBMnKLkyt7cRfXbM2RhbA8zF5sqQsJMJBKu
+         GdVOqtwjOkw2jPoBk98PrBkfTku1b7dVmsXDOuzsoeAek7iCYO1h3jzOuiCm8dqhOZc4
+         EDG/WFA2WKQfiyMYDB8/StT6dAG79Z+QkWjdHfL2Xbknrxk14L3AKXwOdxkpFkIDJFK2
+         dotfZ1bT6mBYzhg9cJYvmdSXcY8lNI3he14LEykk6Cw8OBYuXS5cnm8YtO1dtak9n3WH
+         dVKAOxfkxKuRgFWc4JwLf6GCFP1Ax9/IgFko9zsfiiPi1HhjQKWnOuqQbQk43Is1u2Rc
+         4JqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762704038; x=1763308838;
+        d=1e100.net; s=20230601; t=1762704049; x=1763308849;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=sLd5cvW7qQZWovDCsKP80oSfSdwe8OB0K04wB0qZqlY=;
-        b=S7SZ5PFxke5Q01jwDuD9vMK1husm8VRhgQCPAcAeef+azkIVy/d7qchWsXf2LUBnMS
-         WAWySRg0GIPMJr+AHWTpEHYDBwJbkGKlKbge8O0vVXyHQIqi9S6Khqq5ALh4ad+Wo7FO
-         Gwfa2FHvWwJe/Nt+1tY/BerG39RQohsAzcr3nIP3r3bn9shCTz3N1Y/ERBlJjA7p/gpA
-         wYokj/Vz/pVnlgADQb2HbRlDfEsPSaqspY7e1Xu2CyOEREQHCwo+I/+u7ewzqxL92vUj
-         zj2K6FR3t5nYFRPu2oQsx43Yel7ORZpPUwo9rpvcK2zpIPaFO1y4nR68MTxVS8ZMrH5g
-         hTqw==
-X-Gm-Message-State: AOJu0YzwFruv1M0XXB75NzrG6cQffv+cZI0mNVoNHoC9RXs2ROclKYtl
-	ZlEjt7Asp7f9SRlgr8dzY0yqyyrfMZPNiar/Td8rY62xueTn21MXp6Jqq3inmIH0
-X-Gm-Gg: ASbGncuMzVN5OvPGFZoeyEiYPUDH5nqQuVIG+lNvIfvTohfRgi2Jdg4vhj5cjO0udbg
-	T5Q8rGaDxj9SFLcfL1SqhBkfoZg2T8HWVjgbEZk6MWZfNQ1rR3P2y1kSlaIpuSQRDdAzivsOeVH
-	Or6QgblZAWnRxv4EivCtUOupjyJOSFwOcOufIcDki9ivvXkiMj7IWxUl272SfpRlGqDiwGelre3
-	UTMt8mU0J/vvi22Pig1lG1ySx2ejzbp0tWG74adnCgLHYD+TNVunwa1hhk121gfC2xRx6ksPv7p
-	rPqyEAk3kDnG1RGzBEKOP86+ixetx9uahR2Gm1fhhid8mRFJdsp5Wsl6TSsAipQlx3lEIJjzd0T
-	LvlOMcdRZy4oInyKVgCWcSyvDH78zI7bs+uRB+RhfPJK1d23Cw1QsN3n85Lpi01e5qHj5I6BGSP
-	F4Chk1lUvN
-X-Google-Smtp-Source: AGHT+IEYNNs4GA7dkThJ5Cp/U+goL+f1I3ShMxGBkQR9kyPfPww9btdIcNQApcfpp0snReOQxPrHMw==
-X-Received: by 2002:a05:6000:2b05:b0:42b:3023:66a6 with SMTP id ffacd0b85a97d-42b30236856mr2542180f8f.40.1762704038280;
-        Sun, 09 Nov 2025 08:00:38 -0800 (PST)
+        bh=pURnAyw5V7FO/q8otuFifsqdO/uC8OpYpPBMn2rjruo=;
+        b=hqw1s9l2aX+GKwbVtH3VNHO5mZ7Pls5syi5DKjtv64Wd5L12rp8IdvZAaPZV1qThZm
+         0O2bIfUvQZoDcKbZph7RGwO1Yd+n3X38NWXOT/JCJf0juQONXkNbBuwlpQBQsjNAlrHt
+         mVvdeh2/PdTYLhrXnaUQ46xb4n0LnZLSD18tcngZvl8YCwVoO4A3Jry97ZbyWdtJKq+m
+         kP6lB+cgTHIsEAKJoOoVGyl3Yh/5JjjsFESsbqAmEnHsr9k00pjHH7cEiMm8403jVQ9i
+         bdTMy3QhY9nhdc/ssoyVSLTfPb6FRHwf74XUytrFFbr6z6IXS0cYGfmbeqXfOYC6+gt5
+         9Vrw==
+X-Gm-Message-State: AOJu0YzjItGg8QWaNkn+qSJ84OHLMeCPhuTtaCOCPQR7hNhBfTsFCYiE
+	TE2klM2jjkIJXuGWMOD5Ew1Q9osc3dcemBPRMSJBo6FpkxKsIkrCPRyOcSUEaSO5
+X-Gm-Gg: ASbGncu7XgIBrViAEMxpsBz+nROfAKYpbRShefyA5oXQJPmXuOWrbcHSptRg6PUIUSd
+	2Yp4VNEJyOIcTuEXAz5tRpFpbCG+W3Fn5re2N9FzN5ywV2tlQ3hTKgBHDUjC3ofQ82E1Y/aNeza
+	fycZ8F32I3KgncvKMFUcLpRqFix4J1hMCDLBCY7XZE9titFlFJp1h7oHZhTUS5hSuMmL4ehpKEJ
+	PdLmD/xDbGh/QWlrbcdtOmibxsXj1yVk+yA0NFV0nazQ25ht+mFdOTV6jKivsN+Hsp8TomeZ9TW
+	VwEGTzYeY/IbuCRd6SQm4EmtvQyEqUtRLdHMiEhFmQlOHhPgB03OkGpzpdZOpl8iV/JWCYvVYTw
+	dPMB1JI7y9/a6g48tmRXBnpUxHPbeIwqZNxlJSMA9T/35BQNIi3n5OefiqQ6+4qHZW3bTfsEMAQ
+	==
+X-Google-Smtp-Source: AGHT+IFFZDm6DqWjrk7hFUdyFf3PAIn9CKSyxY3TBrEwYul5iGpWES2rGkYV1gM+E/t6o2DP92QyfA==
+X-Received: by 2002:a05:600c:3588:b0:477:7af8:c893 with SMTP id 5b1f17b1804b1-4777af8c976mr16429345e9.15.1762704048774;
+        Sun, 09 Nov 2025 08:00:48 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42abe63e131sm17406445f8f.20.2025.11.09.08.00.37
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42abe63e131sm17406445f8f.20.2025.11.09.08.00.47
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Nov 2025 08:00:37 -0800 (PST)
+        Sun, 09 Nov 2025 08:00:48 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-webserver][scarthgap][PATCH 15/27] hiawatha: fix SRC_URI
-Date: Sun,  9 Nov 2025 17:00:07 +0100
-Message-ID: <20251109160020.2522353-15-skandigraun@gmail.com>
+Subject: [meta-networking][scarthgap][PATCH 24/27] ncftp: fix SRC_URI
+Date: Sun,  9 Nov 2025 17:00:16 +0100
+Message-ID: <20251109160020.2522353-24-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251109160020.2522353-1-skandigraun@gmail.com>
 References: <20251109160020.2522353-1-skandigraun@gmail.com>
@@ -67,28 +67,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 16:00:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121431
+ <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 16:00:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121440
 
-The previous url stopped working, switch to the same host
-that's used in the master branch also.
+The downloaded tarball was moved to a new folder, causing
+fetching failures.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-daemons/ncftp/ncftp_3.2.7.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
-index 2e848eaf56..0b3c325e80 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
-@@ -6,7 +6,7 @@ DEPENDS = "libxml2 libxslt virtual/crypt"
+diff --git a/meta-networking/recipes-daemons/ncftp/ncftp_3.2.7.bb b/meta-networking/recipes-daemons/ncftp/ncftp_3.2.7.bb
+index 15bb00a3af..508a94ed2d 100644
+--- a/meta-networking/recipes-daemons/ncftp/ncftp_3.2.7.bb
++++ b/meta-networking/recipes-daemons/ncftp/ncftp_3.2.7.bb
+@@ -5,12 +5,12 @@ LICENSE = "ClArtistic"
+ LIC_FILES_CHKSUM = "file://ncftp/cmds.c;beginline=3;endline=4;md5=9c2390809f71465aa7ff76e03dc14d91"
+ DEPENDS = "ncurses"
  
- SECTION = "net"
+-SRC_URI = "https://www.ncftp.com/public_ftp/ncftp/${BP}-src.tar.xz \
++SRC_URI = "https://www.ncftp.com/public_ftp/ncftp/older_versions/${BP}-src.tar.gz \
+            file://ncftp-configure-use-BUILD_CC-for-ccdv.patch \
+            file://unistd.patch \
+            file://0001-Forward-port-defining-PREFIX_BINDIR-to-use-new-autoc.patch \
+            "
+-SRC_URI[sha256sum] = "d41c5c4d6614a8eae2ed4e4d7ada6b6d3afcc9fb65a4ed9b8711344bef24f7e8"
++SRC_URI[sha256sum] = "dbde0d3b4d28ba3a445621e10deaee57a6ba3ced277cc9dbce4052bcddf6cb2a"
  
--SRC_URI = "http://hiawatha-webserver.org/files/hiawatha-10/${BP}.tar.gz \
-+SRC_URI = "https://hiawatha.leisink.net/files/hiawatha-10/${BP}.tar.gz \
-            file://hiawatha-init \
-            file://hiawatha.service "
+ inherit autotools-brokensep pkgconfig
  
 
