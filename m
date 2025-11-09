@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F3273CD13D3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC9C6CCFA13
 	for <webhook@archiver.kernel.org>; Sun,  9 Nov 2025 16:00:36 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.27191.1762704027595153020
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.27289.1762704029604446972
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 Nov 2025 08:00:27 -0800
+ Sun, 09 Nov 2025 08:00:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lqY3nmfG;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-477770019e4so10377065e9.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 08:00:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kejLU6fy;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-429c7e438a8so1990241f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 08:00:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762704026; x=1763308826; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1762704028; x=1763308828; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=5zdZ/FJhWFKl5N5gwpv3vfEksxF6gQiUevnSda1UmPM=;
-        b=lqY3nmfGwkO4nwXXcyBezakauXBEak2heX/5RPzMLW3e9+CgUTMjOXYXb2Lmes4+89
-         zP4vaLyB9RJpMgQy9WSBjCXkC0rkdIa9qEhj3KNO+PPez8Id7XsOPm5LyAIgZT9P9lwM
-         ukOJ0HPgEpWUQpB3Kpwbez497gt21SLFLmJBDyMBMD48sIq8nNFs90Dq2dVfUicA5vY3
-         XLcp+9NheA9QDzQXOSV8OIPY/lEd7Qui/nt+FZYBpBXlm7hjofO+m7h5IXsSU+CycFA2
-         QucHDnUj1pWIrJFBFNr2z+TUvhyQYn78sPIikNoapT1/FDzHqB0K7REyBsvsvCNVTsbh
-         qsFQ==
+        bh=/TZGw3Su3PLNxZu/N/g9/BpMC0KDuhZR8vZ3/j8Zx90=;
+        b=kejLU6fyPfdIH31jI7dxDFaqZ7Xfdkb9szwWdAKKV1mFWoP25idT3aIGomT/Jb8pXy
+         sZY582Chxepefwu0T5maiR+/cPrrxFqUKEQLgcUkXMv8HWmL16eVyu/NSGOWi2vcaU97
+         VcVc2xwFB9LHYT5cV1QAfQcMtYKnosGnR32LnElT8y5o3/fr4kVkz/a0Vics4JfoOBsd
+         B5gEAd+4y0jnre/zrbzr+/6wVlLHGSzV8/YUH9hOa66SuvVfARm+3w715PQGKXoMzDzX
+         DmkMqMLNlXSuFeJoDsNCV1kH9H4XKu6HAEV5AQZZPe6KR5z/cFD50GOmiZ7fyHmqny1w
+         0Xjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762704026; x=1763308826;
+        d=1e100.net; s=20230601; t=1762704028; x=1763308828;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=5zdZ/FJhWFKl5N5gwpv3vfEksxF6gQiUevnSda1UmPM=;
-        b=KACZdP8DTZvOFaSpUfgDwhjKbi2leFOSfiDfQY5z7gG7DOUh8aZy5heWJWpjA87W85
-         UZsImYqq/v70184MBXAfIFA6LUcg97VugZCsmi4AkzLjXeyE7Y9W0tvasOHjQNtBQwnX
-         +zlIRavBM6MbKbPV8e11D38giwwRaLp7TOiw31Qlnv15POd6nu3ICLYOlnPHHf6Je0Wm
-         NocwdzXE4XgmIVRJv0/0WcJ567USgk7Qxo7jHfjqHJrCp1gzpBjsKXpmpiW53PnDdf7d
-         BO3cSc6EJujYmYF3ElWN5EK4xbXITs7T1KGOLFGZaB1ILPESJ0l2jBZ5MSLncMpMpHTU
-         rnnw==
-X-Gm-Message-State: AOJu0YxwyIvhCP2LPjkkCWduPgVpMM6JjJkHFRDcZeZ8K4UHSbp7VXro
-	uyWCmJLvP6sZUsfineWsldixnaq0Hqj6qBiNhtgNyoNgXH5T5GgGiVKB07ROGonv
-X-Gm-Gg: ASbGnct0sISH/aDT/BOPsaLyAelIeLvEFWNPEz4pL7U4CWmhGziX0L2oDUDeBaNg+rS
-	PGzt8kCazIkY0EkHcMZ7nSVxRD6hs615jH0/edWQRgEPNpMa5RG2A0IEfR0916i8Tu1zHH1yB4o
-	4Vbwy+tYCI2H3Mu4BlkT50DthFXOPLEFUCWhGM/OTdTORvCHBQY86Hucpo1MCrzOdooZ/3lKdlC
-	gxT0uE+a3lJHOtmoTgPL0AtXpR6hS7cyTpK0A6AQRyRTwI4NwpxF8yAWTljcVQL3puz506wNWIp
-	RN7MGs6XnUhox0oKRdjzGzQpT0HNxcBPR06ZQe9k3L4yUyfTprMHWApHrsrmDHXGJXWdMQSq4up
-	Mk0oC51O7DNfrVsJoZ4lM05J8MoNTLSy7NRQo4sWC3Goh6HLRBpZiKk8PDwHpqHufD4DvhPnznQ
+        bh=/TZGw3Su3PLNxZu/N/g9/BpMC0KDuhZR8vZ3/j8Zx90=;
+        b=gyYEFuaGiMhQm/r0iOrpRyDCS2Nn/ULKR870xw72d2QEMo9yZJDbWdeqAQhTGK5Q6u
+         V6HLI2B9ChjUk8yd27BZ9SbEsBpuhQK4hJ0YK6P3V6ZOfQ4e3G80Lhr2o0qIcXsHZNtN
+         2z3RE3SouMfhuHG1SM+cLW0YDhJRKlS7EyLCdzj/4fsMV/w9lyhUNCDRxvm/K1vICCRB
+         bIgJ+fckc9mCRnempN2aiWA7g4FKZaRh4E1RoW5AXrKHndUOOVDr7I8fLiuqIe9Zf8E1
+         2/4A4Bv0TtUccc5cycsJgNDBtepcyhovL2+zLB+GqIa3JsVRQ4HUwS4yj5/1oYISGGbU
+         11rQ==
+X-Gm-Message-State: AOJu0YwjhTwhQiKd3GZr0nTnlxwLPFOL6xMKRZK04uk3DOugApQuAfx/
+	AilHFEVoK4Hae9brH8qrdx+mpTepqwjEdM+5gZmQ+e6s/8OKmsHF3BF8R1Sitdnb
+X-Gm-Gg: ASbGncvme40FVmqbDCYVxPmczi3ynPBI/JyZf4tKCzM3ZqKrkNiLCRZ5UHXJ2C2WbFy
+	IMK93tN/pRn9alQcfVKsbgaVB3fEAhIg+dmWf5mjUH14RoEnrFfl5bgHZ3LODFlevVjcYZ8nTS6
+	QWFYgBPvd1SVm61bgYI/0l4EHKY/mPo2D+EZFAshL4NeWsxG7AxoI8uUqQCTSEvs6rvO0aYUQJv
+	2MiOo0GVTCix6zj0RyFMbPCsMBrbhlqi/ZJnjtC5NOIeqQ9lHUJb/TIabqbYIwNmsro0Ef0342h
+	6r5eY90bOSCQrNAJxYqJ33ktrFW9roDhNyadGVDQ/L8gsmYGnfIiItq+o+RzRL1yQny9zsmX1+z
+	q/yb4woBR4lEMBee+JciFWOPquWqkOENSSfGJ8tNvihoxsV09AziuLyofr25O/fbC+HfzYNq8uw
 	==
-X-Google-Smtp-Source: AGHT+IG9vs4vClWqhha7ffZMBPTbOU1+f9ylcJYDpJlwl7on7TxwXdZ6U9JOeQUJtFCYCFOFi70jbw==
-X-Received: by 2002:a5d:5f87:0:b0:425:8bc2:9c43 with SMTP id ffacd0b85a97d-42b2dc12867mr4406246f8f.1.1762704025850;
-        Sun, 09 Nov 2025 08:00:25 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF1cQjWWjOdg3ERjhiEBLjPsPXy4sT5AOqMmaC7ZLDRhKlY/4XeUzt1VwK0k9h4o3duy1r8Iw==
+X-Received: by 2002:a05:6000:230d:b0:42b:3963:d08f with SMTP id ffacd0b85a97d-42b3963d385mr1411785f8f.26.1762704027962;
+        Sun, 09 Nov 2025 08:00:27 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42abe63e131sm17406445f8f.20.2025.11.09.08.00.25
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42abe63e131sm17406445f8f.20.2025.11.09.08.00.27
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Nov 2025 08:00:25 -0800 (PST)
+        Sun, 09 Nov 2025 08:00:27 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 05/27] zabbix: fix SRC_URI
-Date: Sun,  9 Nov 2025 16:59:57 +0100
-Message-ID: <20251109160020.2522353-5-skandigraun@gmail.com>
+Subject: [meta-networking][scarthgap][PATCH 08/27] netsniff-ng: fix SRC_URI branch
+Date: Sun,  9 Nov 2025 17:00:00 +0100
+Message-ID: <20251109160020.2522353-8-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251109160020.2522353-1-skandigraun@gmail.com>
 References: <20251109160020.2522353-1-skandigraun@gmail.com>
@@ -68,26 +68,26 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 16:00:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121421
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121424
 
-The folder has changed, causing fetching failures.
+Source branch was renamed from master to main.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-connectivity/zabbix/zabbix_6.2.7.bb | 2 +-
+ .../recipes-support/netsniff-ng/netsniff-ng_0.6.8.bb            | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.7.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.7.bb
-index 8708852ce7..df29d4a9e7 100644
---- a/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.7.bb
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix_6.2.7.bb
-@@ -23,7 +23,7 @@ DEPENDS  = "libevent libpcre openldap virtual/libiconv zlib"
+diff --git a/meta-networking/recipes-support/netsniff-ng/netsniff-ng_0.6.8.bb b/meta-networking/recipes-support/netsniff-ng/netsniff-ng_0.6.8.bb
+index 341eab015c..5a7d86c4ac 100644
+--- a/meta-networking/recipes-support/netsniff-ng/netsniff-ng_0.6.8.bb
++++ b/meta-networking/recipes-support/netsniff-ng/netsniff-ng_0.6.8.bb
+@@ -6,7 +6,7 @@ DEPENDS = "libpcap"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ SRCREV = "be3e706f00295024ebc199e70177343fdaebbc9e"
+ SRC_URI = " \
+-	git://github.com/netsniff-ng/netsniff-ng.git;protocol=https;branch=master \
++	git://github.com/netsniff-ng/netsniff-ng.git;protocol=https;branch=main \
+ 	file://0001-Cmds-automatically-create-folder.patch \
+ 	"
  
--SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/6.2/${BPN}-${PV}.tar.gz \
-+SRC_URI = "https://cdn.zabbix.com/zabbix/sources/oldstable/6.2/${BPN}-${PV}.tar.gz \
-     file://0001-Fix-configure.ac.patch \
-     file://0001-initialize-msghdr-portably.patch \
-     file://zabbix-agent.service \
 
