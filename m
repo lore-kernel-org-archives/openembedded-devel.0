@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44806CD13DA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C7B1CD13D9
 	for <webhook@archiver.kernel.org>; Sun,  9 Nov 2025 16:00:47 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.27299.1762704041193144371
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.27204.1762704039983916713
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 Nov 2025 08:00:41 -0800
+ Sun, 09 Nov 2025 08:00:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FpTYlNne;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4775638d819so12448355e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 08:00:40 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dH8bOLHC;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-42b3b29153fso45384f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 08:00:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762704039; x=1763308839; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1762704038; x=1763308838; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=cFa7QCCuEtc6dcRwSxXa4xTxjr86jZ50BBdeUcjdvr0=;
-        b=FpTYlNney9MbFkbbrSw8icJWbiEl1KTax8PEd5GofdLrrV4hPW93+omf1A2ryWqlmW
-         vSd/AdlHh6ukIUFoRGuYfGwFCpeoTfzBc/79wt8V8w/8SCn8nmI5cFLBY2n94YDH800C
-         FaDvQUevl4SlObG8yVGyWcHMHGYBeVOfn+jHlrq076h+eJG3tWWHeXuy5/igOt0SuvQI
-         DGzsEDUZCxKFR57229KWqh/W3CiXuye+39b58TixCAN9XFlb7ePJ/aHYDczrDjytfOeE
-         r5nvgGRuGq0Oywh2SAqo63yrY00nL4mWucvy2GLVcWpPKhdrOruzysXVYET5s/aNTnVP
-         tjjA==
+        bh=sLd5cvW7qQZWovDCsKP80oSfSdwe8OB0K04wB0qZqlY=;
+        b=dH8bOLHCTVaOijeiMDtdW/NRxnBpImguBsGk+gNICYESn/ndSXHBwdr2z2a4II12fM
+         P48z9ViaGNeij7Qz//LpKVU1XlgWJVqzczae3l5Sxb5vDSiJ7QD3tNAdGx5XRv4qPB3M
+         mGf03V7MgD+wjIWmKI8FagGkAhlQ+GAzXsjQkvPnjbaMr0d6U8p9lHyyjMbFHVAavnTQ
+         3x2sppvgJB3PDZ6AtzwNZlbKTd65BlCsYWBGnt5cm7DZAye9KtO8WA96NABAOZGkV5iU
+         54zVVMkNFK3FduDn342ByG+Dm5n0ZPo5/fAuQcRm6QkThgLxe7SaG3v1RBCzRAMO8lve
+         JdCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762704039; x=1763308839;
+        d=1e100.net; s=20230601; t=1762704038; x=1763308838;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=cFa7QCCuEtc6dcRwSxXa4xTxjr86jZ50BBdeUcjdvr0=;
-        b=WzCRpIjLsTy81cO4AbGTdKUI1kFNL1EEU6fdEm16RJVrp3WRjVKTF2lYqjztZI95/c
-         PqXyoeFf/OPVw4/81Jk+0M4pV9Np5Kwx/FB1pd9NEcq2LfpKxiNOMdh0/qCYzu9WDjhf
-         ASVzAYNzBYS/Z3cpWyNlRoZxxz5VJdCXpx8o1tZ+R4F2ZksreqhIi4nyveT/yKii6HO1
-         GxW2XErErj+t1D9a/QP3h2U3FBp+B0NIzIIZY2aocWbAyOXsUXZZwYwBlaGyd8etzJX+
-         yeFtEvVG9tU6qk7tKaZUHuvomvFynqLffYl60D3aHAW9Xue65eNxmo5hT+KVYSFc7HRD
-         e6tw==
-X-Gm-Message-State: AOJu0Yy6c1GFpDRKwAbLDbyEXkzcgnpQp4MG5ztDUu+1gyUcpmWBJ7RQ
-	Gy2a6WjZYI5FhLplibHAYZkOJnmE0fOquGVo8FZODEdIfrK1p7eyO2jQqLmF7sZ2
-X-Gm-Gg: ASbGncs/23LD2uf+yQkjHIDJfMPwipgY40WOGccQpaIvrE989s8zOcrrOW1AjgUJtAY
-	F3pyFCjt2OzdpyhN93o4urRr1Zm7IJZLPSdc1Xn87djcBZvOg5zc40IcBxdzoUkcQq7IdPvcXHa
-	mxaCTcZlQOBhyOgWH6JF1MDkTuzqFL02iqJiy+t4IDOzJE/vL+7/xXN+GDQd+2NX30jkbzBmOYx
-	fvmgkk9Y3LZ3TKPxoqozK8JQJTwfLzZiv0QnxpVmz5kxREJIROxzbr+41lNLv3FYVaY14nv04G+
-	qhsnQ3voMSwHusKR+BSuUnCUJNTQ4MHVOEfSnTepzIoQp3hyoZYtjeO0pjn2btcZpmwDUtGgg4H
-	ISa/JrrYb2wNdZc3ZCUfgpO5+gu9hNSs+v7zMOvlzIVPilrXJimQaRDcVYIfV1iw65BKrxaZNBZ
-	B2n2KWyXZx
-X-Google-Smtp-Source: AGHT+IGt2koz7Ei18yYVlfrWJ1Xhq9SmKl7EWh4+WWserf+QSRqTEIOg99+2Hloc0/+W4LeQfFw+0w==
-X-Received: by 2002:a05:600c:19cf:b0:46e:53cb:9e7f with SMTP id 5b1f17b1804b1-4777325ba85mr46808805e9.18.1762704039519;
-        Sun, 09 Nov 2025 08:00:39 -0800 (PST)
+        bh=sLd5cvW7qQZWovDCsKP80oSfSdwe8OB0K04wB0qZqlY=;
+        b=S7SZ5PFxke5Q01jwDuD9vMK1husm8VRhgQCPAcAeef+azkIVy/d7qchWsXf2LUBnMS
+         WAWySRg0GIPMJr+AHWTpEHYDBwJbkGKlKbge8O0vVXyHQIqi9S6Khqq5ALh4ad+Wo7FO
+         Gwfa2FHvWwJe/Nt+1tY/BerG39RQohsAzcr3nIP3r3bn9shCTz3N1Y/ERBlJjA7p/gpA
+         wYokj/Vz/pVnlgADQb2HbRlDfEsPSaqspY7e1Xu2CyOEREQHCwo+I/+u7ewzqxL92vUj
+         zj2K6FR3t5nYFRPu2oQsx43Yel7ORZpPUwo9rpvcK2zpIPaFO1y4nR68MTxVS8ZMrH5g
+         hTqw==
+X-Gm-Message-State: AOJu0YzwFruv1M0XXB75NzrG6cQffv+cZI0mNVoNHoC9RXs2ROclKYtl
+	ZlEjt7Asp7f9SRlgr8dzY0yqyyrfMZPNiar/Td8rY62xueTn21MXp6Jqq3inmIH0
+X-Gm-Gg: ASbGncuMzVN5OvPGFZoeyEiYPUDH5nqQuVIG+lNvIfvTohfRgi2Jdg4vhj5cjO0udbg
+	T5Q8rGaDxj9SFLcfL1SqhBkfoZg2T8HWVjgbEZk6MWZfNQ1rR3P2y1kSlaIpuSQRDdAzivsOeVH
+	Or6QgblZAWnRxv4EivCtUOupjyJOSFwOcOufIcDki9ivvXkiMj7IWxUl272SfpRlGqDiwGelre3
+	UTMt8mU0J/vvi22Pig1lG1ySx2ejzbp0tWG74adnCgLHYD+TNVunwa1hhk121gfC2xRx6ksPv7p
+	rPqyEAk3kDnG1RGzBEKOP86+ixetx9uahR2Gm1fhhid8mRFJdsp5Wsl6TSsAipQlx3lEIJjzd0T
+	LvlOMcdRZy4oInyKVgCWcSyvDH78zI7bs+uRB+RhfPJK1d23Cw1QsN3n85Lpi01e5qHj5I6BGSP
+	F4Chk1lUvN
+X-Google-Smtp-Source: AGHT+IEYNNs4GA7dkThJ5Cp/U+goL+f1I3ShMxGBkQR9kyPfPww9btdIcNQApcfpp0snReOQxPrHMw==
+X-Received: by 2002:a05:6000:2b05:b0:42b:3023:66a6 with SMTP id ffacd0b85a97d-42b30236856mr2542180f8f.40.1762704038280;
+        Sun, 09 Nov 2025 08:00:38 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42abe63e131sm17406445f8f.20.2025.11.09.08.00.38
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42abe63e131sm17406445f8f.20.2025.11.09.08.00.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Nov 2025 08:00:38 -0800 (PST)
+        Sun, 09 Nov 2025 08:00:37 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 16/27] transmission: update SRC_URI branch
-Date: Sun,  9 Nov 2025 17:00:08 +0100
-Message-ID: <20251109160020.2522353-16-skandigraun@gmail.com>
+Subject: [meta-webserver][scarthgap][PATCH 15/27] hiawatha: fix SRC_URI
+Date: Sun,  9 Nov 2025 17:00:07 +0100
+Message-ID: <20251109160020.2522353-15-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251109160020.2522353-1-skandigraun@gmail.com>
 References: <20251109160020.2522353-1-skandigraun@gmail.com>
@@ -68,26 +68,27 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 16:00:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121432
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121431
 
-Master branch was renamed to main, causing fetching failures.
+The previous url stopped working, switch to the same host
+that's used in the master branch also.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-connectivity/transmission/transmission_git.bb | 2 +-
+ meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/transmission/transmission_git.bb b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
-index 735db1441e..2f259ed873 100644
---- a/meta-oe/recipes-connectivity/transmission/transmission_git.bb
-+++ b/meta-oe/recipes-connectivity/transmission/transmission_git.bb
-@@ -8,7 +8,7 @@ DEPENDS = "curl libevent gnutls openssl libtool intltool-native glib-2.0-native"
- RDEPENDS:${PN}-web = "${PN}"
+diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
+index 2e848eaf56..0b3c325e80 100644
+--- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
++++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
+@@ -6,7 +6,7 @@ DEPENDS = "libxml2 libxslt virtual/crypt"
  
- SRC_URI = " \
--	gitsm://github.com/transmission/transmission;branch=master;protocol=https \
-+	gitsm://github.com/transmission/transmission;branch=main;protocol=https \
- 	file://transmission-daemon \
- "
+ SECTION = "net"
+ 
+-SRC_URI = "http://hiawatha-webserver.org/files/hiawatha-10/${BP}.tar.gz \
++SRC_URI = "https://hiawatha.leisink.net/files/hiawatha-10/${BP}.tar.gz \
+            file://hiawatha-init \
+            file://hiawatha.service "
  
 
