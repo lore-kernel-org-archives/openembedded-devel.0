@@ -2,112 +2,126 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56D89CCF9E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56DD0CCFA1A
 	for <webhook@archiver.kernel.org>; Mon, 10 Nov 2025 14:29:44 +0000 (UTC)
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.45896.1762773356700218622
+Received: from rcdn-iport-6.cisco.com (rcdn-iport-6.cisco.com [173.37.86.77])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.39143.1762744396135328707
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 10 Nov 2025 03:15:57 -0800
+ Sun, 09 Nov 2025 19:13:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DgOdA12R;
- spf=pass (domain: gmail.com, ip: 209.85.128.66, mailfrom: moraless.philius5@gmail.com)
-Received: by mail-wm1-f66.google.com with SMTP id 5b1f17b1804b1-4777a9aeedaso9805015e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 10 Nov 2025 03:15:56 -0800 (PST)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=H6kT26OV;
+ spf=pass (domain: cisco.com, ip: 173.37.86.77, mailfrom: adongare@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762773355; x=1763378155; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=e5UM79HAAHIicPV0NWv6rNOWHAN98TEegcQyYKNazic=;
-        b=DgOdA12RPZhNKRIODyMs5pdtVqO2D8PX3pVoDFsqejmcB+Ax/wZojYCRd6V1pBptIs
-         hyRxTan0L5es6YiKg+j6PG3LyLLyUWQGeL7nWWM/e61d/yws5Ji/p8FCUXN4Ju2oIMUK
-         s0kYA9Fyr6202fkLXeGhZf5t+OZcAdPjr4eqpFsfQp8cAcf21015zczy8oELdVIzfTVc
-         CBWOv/pAj7S+HL909J8ETISk6gyRveOHOnTXhu5cCT39GNjJ6m6srybPO74czATHX8/z
-         By1F0xVzwiZ4KvgEXsS4tcF7l+KWOA/nblM8galK628IlSydgWIPNxFWZCuv5JxGmhST
-         paJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762773355; x=1763378155;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=e5UM79HAAHIicPV0NWv6rNOWHAN98TEegcQyYKNazic=;
-        b=ZsTKk1zzJqDoRHGfZnqEGhJqxFaR0PgjuC6l0/YxA6xcChizpl1BIuZr+Fw7j1j7pX
-         v5P6rndWF+y6ZL8Bp5BAQa+hValeec8cXsZM9Xks71LIaBaKQU9FRO/ukHyISI13WvZt
-         Z0vD9kfjUx3Fhf5eVPAU3Ic0uTzWANIJ7JBMkv/dNk+Xd4qZWLYEtz6wAvffXb5wPBZ8
-         b6gG+mg2OiqfIZLCt/YW9GvcHKdsZuxmJc3Nj6FZBw+dX0tsVAtCGFQSsJBcbnzlAT8X
-         k1c9OPAgummpOYFmhPrGZlHPJxOIGMDbgWM1S43x47t/LKY3QOrYwYoiNnLxhBTg6xUU
-         tZlA==
-X-Gm-Message-State: AOJu0YxNxGwCQHKvzkTalPKsPc1WxdquVIN0OeVh+4bZb2VssUJ839tJ
-	3/RLy9XHfT55lE2yW8dOFESpcBjpfy/46sPy08YITqq9ND+zhwVGWkyahtWfcIHjAGxkGw==
-X-Gm-Gg: ASbGncuUOGG//fFyS9M3sUrRepR34ckmZD97ZKZlG2kd7q8To37KTUKcobLmEurG/Mv
-	kiW3TtBfElSZyzyfjdhBlo7rD6Ds4K1Fre2Pr2jUWL1Qkhvov4120EsTo4SusNAlMYvMQGOVqCR
-	mmq3ebNxXJ+I1zWo4WrQGrAIFaxNnqZ5yY9ocsl5JRea0HUJSaLifkU1SgWKfHWDvC//fV8/ftS
-	mQ2KeUNcVOI6jJIu/xNOr5yii288OKjK15HEwcby92bUSCdBazuPH5YJgfzy4zhdJNGxSuH+m3P
-	SEuOdFxG4/Z26bWF4zZ9fpMyo5BfXJWwn1zvucNYwkn8s2bAwXIHMOcBPz1stP7ejB1XjnSEjcy
-	iA6C6025m0TNSF19Peg3qwcPdSNj+B0E8xD6ny5eLlAa2fmg4kRSpCO4tZPnjj6nHzGc0ew8Tzb
-	2KS2wyWw85E5ay2rcbwmz/oM9PlFh7MXOYPxcwnBuyjuk1J5C7nydiFYWNc+R39vvh3pb+q/kGI
-	Jkx8Md96U9O/po=
-X-Google-Smtp-Source: AGHT+IEjLtEiLfA0BRik4Up0QkIhgTXMToNfFFWv5WaLJsyLYiv5BuYXwD8bGA1745nP5F9bpdBj8A==
-X-Received: by 2002:a05:600c:365a:b0:477:7ab8:ad7 with SMTP id 5b1f17b1804b1-4777ab80ca9mr25279335e9.9.1762773354474;
-        Mon, 10 Nov 2025 03:15:54 -0800 (PST)
-Received: from LAPTOP-35JGH6FO.lan (i16-lef01-t2-212-195-130-192.ft.lns.abo.bbox.fr. [212.195.130.192])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4775ce20ee3sm313657195e9.9.2025.11.10.03.15.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Nov 2025 03:15:54 -0800 (PST)
-From: moraless.philius5@gmail.com
+  d=cisco.com; i=@cisco.com; l=1451; q=dns/txt;
+  s=iport01; t=1762744396; x=1763953996;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=I9R7qSBn9v+6GNHHhhuHOXtKbICUYqlVup0w9BFXAMQ=;
+  b=H6kT26OVSV8Ibu87kB8+95WiK36XULNwPYaTZ46Fb7NLv7V6PfwxCCFm
+   yQKiWev/Sb6Z384uY/bs6RsPCgBr3M3tWzl+cOfC82PMAwPxADst3ZFn3
+   Q6CZgo3oo9eocJX3EW7aHQEKtCXN2fQ0HwtERoNNkeF6H+qVoMM3wog2X
+   gh2+07GDmQnKqx11jG5chmGZSegGH8vcb5rANm+ubDLJuIXRUM/zx0T8U
+   XTpwqRBUZcwuQ0Lcw+3qy0brVSghFahFWc82OWl0xikUbB/yPTDDkTE38
+   PBgWICvGQtAwhvDURGrEJtyreDASWqnHM0pL9oC2M+quhJ+9kfeiI5Ejh
+   g==;
+X-CSE-ConnectionGUID: eA8gPEyBRkus6FvleaRNag==
+X-CSE-MsgGUID: zAa9QFWHTQOS/Xu2BeRmtA==
+X-IPAS-Result: =?us-ascii?q?A0C2BADNVhFp/4v/Ja1aglmCR3tdQ0m0ZYF/DwEBAQ89F?=
+ =?us-ascii?q?AQBAYUHjFsCJjUIDgECBAEBAQEDAgMBAQEBAQEBAQEBAQsBAQUBAQECAQcFg?=
+ =?us-ascii?q?Q4Thk8Nhl02ARgBLTBcHQEmgwIBgnMDEa09giyBAYMoATEFCQJDT9sqgUqFO?=
+ =?us-ascii?q?4gWcAGEeCcbG4FyhH2BBYFcAQGCLYV3BIIigQ6GJ4JzkC5IgR4DWSwBVRMNC?=
+ =?us-ascii?q?gsHBYFjAzUMCyoVbjIdgSRBGHGEXSJoDwaBEoNRBokYD4owAwsYDUgRLDcUG?=
+ =?us-ascii?q?wY+bgeUBYJ8gQ4sBByCDJMlkk+hDgoog3SMHpU5GjOqa5kGjgiWUIRpgWkBO?=
+ =?us-ascii?q?oFHCwdwFYMiCUkZD444g2mBf7syJTICOgIHCwEBAwmTZwEB?=
+IronPort-Data: A9a23:uILHxa1IR+KqyUc4cfbD5YNwkn2cJEfYwER7XKvMYLTBsI5bp2AGm
+ DcfUWzXPfnZa2GnLt4kb42/p0MH78CAxoAwGwZo3Hw8FHgiRegpqji6wuYcGwvIc6UvmWo+t
+ 512huHodZ5yFjmH4E/xbtANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq8wIDqtYAbeORXUXU6
+ Lsen+WFYAX4gmcsYzpOg06+gEoHUMra6WtwUmMWPZinjHeG/1EJAZQWI72GLneQauF8Au6gS
+ u/f+6qy92Xf8g1FIovNfmHTKxBirhb6ZGBiu1IOM0SQqkEqSh8ajs7XAMEhhXJ/0F1lqTzeJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXcG7lyX7n3XQL/pGAWhmMrU168xNAnxVq
+ 9IGLD0EVDaKiLfjqF67YrEEasULNsLnOsYb/3pn1zycVaxgSpHYSKKM7thdtNsyrpkRRrCFO
+ IxDNGcpNU+RC/FMEg9/5JYWleuvgHb2aTBwo1OOrq1x6G/WpOB0+OS3aouPJ43TGK25mG6Kj
+ 2uXxkrGIi0jE+fY+Sff2H+Wg/PmyHaTtIU6UefQGuRRqFqLy2oeDRcbWVe2rby1h1CzX/pbK
+ lcI4WwptaU0+UmhQ9XxUhH+p2SL1iPwQPJKGOE8rQXIwa3O7kPBXC4PTyVKb5ots8peqSEW6
+ 2JlVujBXVRH2IB5g1rEnltIhVte4RQoEFI=
+IronPort-HdrOrdr: A9a23:LwRuXK+oTX5IsPcPO2Nuk+DTI+orL9Y04lQ7vn2ZhyY7TiX+rb
+ HKoB11737JYVoqNU3I+urwWpVoI0m9yXcd2+B4Vt2ftWLd1ldAQrsP0WKb+UyCJ8U7ndQtsp
+ uJtMNFebnNMWQ=
+X-Talos-CUID: =?us-ascii?q?9a23=3Aj7Xru2mbrIAtrPUdLb5mNisPR47XOXD0nHjoDl6?=
+ =?us-ascii?q?SM2V0U+O7V1ud8ZlCmsU7zg=3D=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3AR2Xvvgx7HaTx5L2aOIbdak7uge+aqLaHARE0v6o?=
+ =?us-ascii?q?mh/CjDmtAJm23gQ6yXqZyfw=3D=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.19,292,1754956800"; 
+   d="scan'208";a="422925915"
+Received: from rcdn-l-core-02.cisco.com ([173.37.255.139])
+  by rcdn-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 10 Nov 2025 03:13:15 +0000
+Received: from sjc-ads-10055.cisco.com (sjc-ads-10055.cisco.com [10.30.210.59])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-02.cisco.com (Postfix) with ESMTPS id 2043A18000234;
+	Mon, 10 Nov 2025 03:13:15 +0000 (GMT)
+Received: by sjc-ads-10055.cisco.com (Postfix, from userid 1870532)
+	id B85F7CC1288; Sun,  9 Nov 2025 19:13:14 -0800 (PST)
+From: "Anil Dongare -X (adongare - E INFOCHIPS PRIVATE LIMITED at Cisco)" <adongare@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Moraless Philius <moraless.philius5@gmail.com>
-Subject: [meta-networking][PATCH v2] libtalloc: fix pytalloc package ordering
-Date: Mon, 10 Nov 2025 12:15:12 +0100
-Message-ID: <20251110111513.4067-1-moraless.philius5@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251109164541.2901-1-moraless.philius5@gmail.com>
-References: <20251109164541.2901-1-moraless.philius5@gmail.com>
+Cc: xe-linux-external@cisco.com, to@cisco.com,
+	Anil Dongare <adongare@cisco.com>
+Subject: [meta-openembedded] [scarthgap] [PATCH] nodejs 20.18.2: ignore CVE-2024-3566
+Date: Sun,  9 Nov 2025 19:12:59 -0800
+Message-ID: <20251110031300.3852180-1-adongare@cisco.com>
+X-Mailer: git-send-email 2.44.1
 MIME-Version: 1.0
+X-Outbound-SMTP-Client: 10.30.210.59, sjc-ads-10055.cisco.com
+X-Outbound-Node: rcdn-l-core-02.cisco.com
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 10 Nov 2025 14:29:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121465
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121464
 
-From: Moraless Philius <moraless.philius5@gmail.com>
+From: Anil Dongare <adongare@cisco.com>
 
-The libtalloc recipe did not properly populate the pytalloc package
-because pytalloc was listed after the main libtalloc package in the
-PACKAGES variable. As a result, the pytalloc package contained only
-talloc.so and was missing other required files.
+Upstream Repository: https://github.com/nodejs/node.git
 
-Signed-off-by: Moraless Philius <moraless.philius5@gmail.com>
+Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2024-3566
+Type: Security Advisory
+CVE: CVE-2024-3566
+Score: 9.8
+
+Analysis:
+- The vulnerability (CVE-2024-3566) affects Windows builds of Node.js where
+  applications indirectly depend on the CreateProcess API.
+- The issue allows command injection when specific conditions are met within
+  that API call sequence.
+- This flaw is specific to Windows platforms; Node.js on Linux or UNIX-based
+  systems (such as Yocto builds) is not affected because CreateProcess is a
+  Windows-only API.
+
+ Reference:
+ - https://nvd.nist.gov/vuln/detail/CVE-2024-3566
+
+Signed-off-by: Anil Dongare <adongare@cisco.com>
 ---
- .../recipes-support/libtalloc/libtalloc_2.4.3.bb       | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.4.3.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.4.3.bb
-index ff36a61d15..254d94064f 100644
---- a/meta-networking/recipes-support/libtalloc/libtalloc_2.4.3.bb
-+++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.4.3.bb
-@@ -49,13 +49,15 @@ do_install_ptest() {
-     install -m 0755 ${B}/bin/*_testsuite ${D}${PTEST_PATH}/tests/
- }
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
+index bef62f88eb..9a2841b245 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
+@@ -40,6 +40,8 @@ SRC_URI[sha256sum] = "69bf81b70f3a95ae0763459f02860c282d7e3a47567c8afaf126cc7781
+ S = "${WORKDIR}/node-v${PV}"
  
--PACKAGES += "pytalloc pytalloc-dev"
-+PACKAGES =+ "pytalloc pytalloc-dev"
+ CVE_PRODUCT += "node.js"
++CVE_STATUS[CVE-2024-3566] = "not-applicable-platform: Issue only applies on Windows"
++
  
- RPROVIDES:${PN}-dbg += "pytalloc-dbg"
- 
- FILES:pytalloc = "${PYTHON_SITEPACKAGES_DIR}/* \
--                  ${libdir}/libpytalloc-util.so.2 \
--                  ${libdir}/libpytalloc-util.so.2.1.1 \
-+                  ${libdir}/libpytalloc-util.so.* \
-                  "
--FILES:pytalloc-dev = "${libdir}/libpytalloc-util.so"
-+FILES:pytalloc-dev = "${libdir}/libpytalloc-util.so \
-+                      ${includedir}/pytalloc.h \
-+                      ${libdir}/pkgconfig/pytalloc.pc \
-+                     "
- RDEPENDS:pytalloc = "python3"
+ # v8 errors out if you have set CCACHE
+ CCACHE = ""
 -- 
-2.43.0
+2.44.1
 
 
