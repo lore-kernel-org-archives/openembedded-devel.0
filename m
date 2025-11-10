@@ -1,233 +1,219 @@
-Return-Path: <Haixiao.Yan.CN@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B82B6CCFA1A
-	for <webhook@archiver.kernel.org>; Mon, 10 Nov 2025 05:59:51 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.41772.1762754379153849107
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19A49CCFA1A
+	for <webhook@archiver.kernel.org>; Mon, 10 Nov 2025 07:27:02 +0000 (UTC)
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.42958.1762759619369810757
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 09 Nov 2025 21:59:39 -0800
+ Sun, 09 Nov 2025 23:26:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=avm2kcs2;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3409702c7c=haixiao.yan.cn@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AA4ssHi2892822
-	for <openembedded-devel@lists.openembedded.org>; Mon, 10 Nov 2025 05:59:38 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=NwMO4KBhL7LMr+p98MNM/+gfTUyhrrwD2PihoJR1CFs=; b=avm2kcs21gcI
-	tOdRDSSsqHUK8q/7JjfcxpKVSzvJpn46ci9qtJIxUUqtPbPUOYwfySRWo2Mo/bPU
-	6ggK1HD7IkobHn5BgjATtJ8NGjmShyvPOCwoVREztFjadRgz2tHJainlRTgmzcT1
-	jhZy4ORMVOiKLzA3Kyjw8HJ0qArSfF99WEC5jbp8huImAIAkFYs2VR7Xt59ZU1is
-	K0xzhUcc/5bPiNI9u+oq8lAc7ZvOEskts0+UUBmobX/xcym6d2Sy9kigfaml0DA9
-	Az7FdPrDPBXI72isynLKQpYUfeF1TSA65tzDgA6gTpzokjI/+6wj6B7yaUnbY2j3
-	lGMz/zBBTQ==
-Received: from bl0pr03cu003.outbound.protection.outlook.com (mail-eastusazon11012068.outbound.protection.outlook.com [52.101.53.68])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4a9u2x1kqq-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Mon, 10 Nov 2025 05:59:37 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FSZVryGFVqEaRvUBAhXOtvXhX3RVQ5qBi/5sBV6X9VLVgedlieQ8hP62htstNCU+8Zx3787ask8JeNnWrZHsFuDYgm1tt+IWKZ7UMelU/JkBGhpFr4WnROaRdDXT0IQGizMACdIFq5Qpco4nHgftmWYUITrul/FH7wiFScU3UGbbWh+5C9fawe8bciG98sT5U83pWJ/KwyHZc3Xp7J/Uy6A9ZYdOth59NC8ps1Fd/r6rx7bnOI6gt/hzXqIg89c2vWjwnSNGOAhw4vBmBN1omYrpZIp6Q/6+elobJyIUiQxfOP2jqLg0Mm3H2VD+xQ2CJQ4CJr0LC3mlR8ggM+/Dmw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NwMO4KBhL7LMr+p98MNM/+gfTUyhrrwD2PihoJR1CFs=;
- b=jF22WtaH2ms6ye+zWB1YCXzrY7IDHwnR5H8280vdGOnXSYFm89veh8hzkgQCAJOkZdcuXROWozsEtIjQeajQbET/k32+2awEaQgXijma38TZmiYtc7I5ATgfWAplNMg9f+5+GvNSVqnRQszVOITvIesere3zJZYB+B8RgrPW9qnnlJxaVgr5FQ43O5iFAvhSQ4iL6qd9USpozbV9fyNORqMBq33WsvpNg+NwoGcnqeNjYmFwat514sJIHn+3Ini0Q2QU1DOQjrMu2StgzKqvIG0Pv2aKnEx2hhyfgxxWnEmwzeMzc1aP8qwOye16nsmlVLaB50y+7WlgHFViVCI5hw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CH0PR11MB8189.namprd11.prod.outlook.com (2603:10b6:610:18d::13)
- by DM4PR11MB5295.namprd11.prod.outlook.com (2603:10b6:5:392::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9298.16; Mon, 10 Nov
- 2025 05:59:35 +0000
-Received: from CH0PR11MB8189.namprd11.prod.outlook.com
- ([fe80::4025:23a:33d9:30a4]) by CH0PR11MB8189.namprd11.prod.outlook.com
- ([fe80::4025:23a:33d9:30a4%3]) with mapi id 15.20.9298.015; Mon, 10 Nov 2025
- 05:59:35 +0000
-Message-ID: <21fec570-0453-4252-ba74-ef3fd45352e2@windriver.com>
-Date: Mon, 10 Nov 2025 13:58:15 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-networking][scarthgap][PATCH] mbedtls: update SRC_URI
- branch
-To: skandigraun@gmail.com, openembedded-devel@lists.openembedded.org
-References: <20251108112738.1968029-1-skandigraun@gmail.com>
-Content-Language: en-US
-From: Haixiao Yan <haixiao.yan.cn@windriver.com>
-In-Reply-To: <20251108112738.1968029-1-skandigraun@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: TYCP286CA0070.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:31a::14) To CH0PR11MB8189.namprd11.prod.outlook.com
- (2603:10b6:610:18d::13)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=g+8HnOMx;
+ spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-787f586532bso3962597b3.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 09 Nov 2025 23:26:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1762759618; x=1763364418; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=BQwQIuokgpw7m78AkT2VO28GTfPaI03p97BJde5hq2o=;
+        b=g+8HnOMxHfHdLDJsPVtWDE7adooJ3XoYC4Y8zyhcws0JYwHuMyoszgo3XAH4JidcGr
+         /OyuczFBjtlYASqt49mfcvFDrONMHWXA+SoTKBmWXIvuDxapQhUENOZqL6BArhtbdiLA
+         Y/2tc9eUp5qjW7D3pJufWi7xhm2Lza9dmaeQ9RusMsKmiYdpWR9/ESHWe21L2/rxMwfY
+         U1f0dUUpK004Bu0azHPjlcxoVVpN8jIaWFMXsQDlD4DdcklD1xW2CzbLwV1QIbx4Mk5A
+         uu/3k00p7VzAMqfO+IMkZZpf9i19hgxBrsxeEVwnA0cB4RsvDwDw+YWRvAkKUYiM3Tya
+         /0KA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762759618; x=1763364418;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=BQwQIuokgpw7m78AkT2VO28GTfPaI03p97BJde5hq2o=;
+        b=HcsZ6iGwl3SmZ/6GGSaF/ZbVrhP2w+zdRLpeRgPuhsRhktS2Z1lcSLLWHP09pNysN+
+         OcxJoIuVYkte8Ijj0V0RzQ8h83njuRTn2jrHYuWnW3e0N0Re4B0hb/MYltvxXW0PMPAq
+         PckK0jTkxsuuoij9y8WuskYoUus2/xo1JDfy0i8BGHBz7jQFipHV033mPUXlrMfWaQku
+         dK1auG7iVLc/rKkx7EwpMmV7sy9pONiD3ZueP5VMPgeufhvAqbV1vvbk010uc14z1UgQ
+         Xp81wVmTXlYZrz7nF+aRdVBHntEsIh5IMEvSGN8nTin2Jma6JSMs50Fm2Gga4xXJ+06R
+         Sgmg==
+X-Gm-Message-State: AOJu0Yyla0IVcepYUY4jFLvpwQMHyQlU8hdlYFGr6J7kR/+8bSAW5qv4
+	PTnmG16qOMwXI7wgjADJ/BQOHqMydxf4zCuvMj5SxDXQPjmOdk+kOjS6agKvJabEQzMaBtOIiTC
+	8Zm+zFFbVdPkC1f7pafLpRR66olQZz5I=
+X-Gm-Gg: ASbGncvRJViKXkWdlZcjdB6Mt0mdRq7ce0UrHYpJQFERaBeQJo9ddDhbVilENn/m7iE
+	u1FHN+b1Cubh2TzjFX7o2QN+MILAvkSFL9JDyB/eVn9Rw4d2XEXCkOtH8XWmmFGTn9TLzX3PK8t
+	XQFtnI456Y+xjIiXk3UQEEs2wgCbFafg1iM6f+/6hOSCLAY6HowPPxlhCofdK60uSGPp2TVK3ey
+	ZINM1LWeBWTqIDVPU1SInR5ryBVSThLETeojagfe0HHTfKZlA9FJf3TkNR4ztmi25+anXS7kxsH
+	LQyIujs86ANTkh1diciJriQX7gkHj0oE7I7V0zl/O8FcGmmBGqghM7216fgx2G2QEDlv1PM=
+X-Google-Smtp-Source: AGHT+IFDh5mB2+R6h0dHYJMVHQXGje21olG93jL648wPWS81W8lai3eJ4cQFmPls2p+XcdEfe/j87gtqxyjRT/CXF7w=
+X-Received: by 2002:a05:690c:6ac9:b0:786:5789:57df with SMTP id
+ 00721157ae682-787d5414d63mr75686097b3.45.1762759618372; Sun, 09 Nov 2025
+ 23:26:58 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH0PR11MB8189:EE_|DM4PR11MB5295:EE_
-X-MS-Office365-Filtering-Correlation-Id: bbebf579-5de0-45b4-717a-08de201e5359
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|4022899009|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?SVhkVlVtT3hPS0FkT0l6cG1PbXVqVGhKMmR5Mm1NU2FpNTJMMEFHeWc0QTFP?=
- =?utf-8?B?c2FhVnNCRDNjWkJXMHZSSDZjS3BpaDNmMWVLYjMvWGh1OTIxL0FPc3FTY1Zm?=
- =?utf-8?B?UVVNWWJPL0QyNk5pc2JUQjNDaHJoWjh1TkIwbm9HVTMxR0pPWGZ5NEdHQTdu?=
- =?utf-8?B?a25yMG5aYm12NVlPU2dQM2RaTUNIY2FPRGNMZEJKMlV0SDZwc0t5cTdEcjlx?=
- =?utf-8?B?MnExZy9ncDVEQ0pNVnoyOHI5RWt0ZlJndVR3WEZSSTRxYUpVZysvcVVPS2Y1?=
- =?utf-8?B?TURoRkxWSGhaTlovOVdCOXN4SWFLUlpOWERydTVjZE12Z1FGOXNVbHNMVmJr?=
- =?utf-8?B?RjR3dzNEeDJOVWExMW1hM0YreGplRm1ZdlFHRzVMSEVmUU9Cb0NxMXd4b2Ry?=
- =?utf-8?B?WkRXTTRndm9tUnVaYUo2MmtkeTB2dEdITFNLQm50dzVUNHVqbG9GWDhkMUxl?=
- =?utf-8?B?dEJSaTdGTVNmL2M4V0Z3bFRDZTcydi9oSzhnbDY0blhicWdaMjJ0MjFpMy9r?=
- =?utf-8?B?TmhMd3MxV0JvRnBEUWp1ZENVcTdHckFMSCtaL3I0NXcxY0FwZGFiOHlLN3Ix?=
- =?utf-8?B?amtla3hyV3lJS00zZnJ1RUtCOTRRZzBmdnVXQjZSMzcxcDBLZFBPMjFZS2ZZ?=
- =?utf-8?B?N0hNZm13WUdVUjROSzk4bm9aTnZNZWFBSXlZRThIUmlYV1VrNDN2NzB6K2or?=
- =?utf-8?B?ajlMOUc2UWxjZy9VdjFpb3pVVThheDZEeUJyd3lPUGxTSDFvRHloaHk3dTNE?=
- =?utf-8?B?UlRqNlI3MFVmQ2hGS01ZaHdXWjNOUE10bDBsWHQ1b2VCL1JXNHl5d2lmd0h0?=
- =?utf-8?B?WU5CTEpCRTRKKzNpY0VzaFNUUDR5eUMvajhsbm4rakhmKzlORnpxRDR3TVd3?=
- =?utf-8?B?aTN3Y0tuL2NkSDV2QVlBTlF0Wm16bHVXVE1iTGRCcFJlUWNYZnRPWTcyMTIv?=
- =?utf-8?B?RkRzb0JLeFMrNVZjSDBHMVBSbFRwSVNBVjllMzhxY3RGVWJFNFFPTVNTLy91?=
- =?utf-8?B?MUtIN0pOOTFNUktsemZUemE3dGVOejFHOWx0NXJhVXVnNDU4Nmt1N3Rzd1U4?=
- =?utf-8?B?Ky9rUUo4U0FnUkNHNHplMkZQeERIVHNPUnZYWGx0cC8vZnFuWDBVbm8wODRu?=
- =?utf-8?B?TjdoaXVuRzVNMWVkbnU1OUsyakc5SmF6YldIUDM1VE9pUWUvbmVkeDcvUUFY?=
- =?utf-8?B?QTFOc0NjY0F4MWt3ZTlkL29aUWJFMXo0cVBNd09iTHZnNERoS1hGQmxSdHcv?=
- =?utf-8?B?R0VHUjJ4ME56ckVLeUhEb1VCSHIvbXdFZFZNZEgrV0lDSVVjRThWekNUa1Zs?=
- =?utf-8?B?RE1BZHlmTDBRUFV6NUNubm5mSUcwN2FNbkVFYkNIZC80UWw4WksybVdoaTM1?=
- =?utf-8?B?djVrT2dEc1h1ZGIxYzhNMkRoVTRMRnBZZi9UUXpLZnhIajRDMnI5dzZuSzRP?=
- =?utf-8?B?UjI3d0UwZFZTNDJGdmlxdDNMTXRTMUFJTWpObW5DUzF3cFVSalZ3cWtsbHM1?=
- =?utf-8?B?R2VDNzk0TUFNajRWaXVKdWhvb3VGZnYwZGF5bk53ZDdyL0V3bW1yS2ZjVWFs?=
- =?utf-8?B?UTlPWldoVlI3YzZ3WlkxWE9zaHVWV1lRVnZuYmZ2WEU4NDlIL1ljV2hCcVJp?=
- =?utf-8?B?ZFJKWmNWc2MzSGJqamJMR05rekxBZHNGd3ZIYTlCUGhxeGVXRlBDSTBOWmhm?=
- =?utf-8?B?U2ZxWW5MNW4yajJlTldEZlpUM3NGaFNkUUUxeFA3TDE3SVBlN3ptV0NXZXAx?=
- =?utf-8?B?L0VaN0FabUN2UTc2WElmR0NlS2JhQ3htenk2MXE1dmJJUXhBSDBsbXJWdzZs?=
- =?utf-8?B?N2pXUGJBUFdHVmNXTDVMbXM5bmJCa2ZHbFY1aWNQL0gwZ3NvdTV2YUtUekd0?=
- =?utf-8?B?UnhMTm9BSU4wWXQ4cld5aXdzcmh0ZVJiY3gxMnhBd3hUdUE9PQ==?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH0PR11MB8189.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(4022899009)(366016)(7053199007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?RFZObUVFTlN1cWJya1hOV2VKQjcyNTZFNkQzY0JkUG5uaUZNK2FYRXFPLzU1?=
- =?utf-8?B?ZW5JdGR6Q29jVW5OUGVYVnF6ampReWl1YURHVzl5ZGZJNTVrZlZ5K1hTMnRT?=
- =?utf-8?B?VENSQzZHTWNxOTUrWDNVSUR5aXY5MklTa2tPU2cwbWd4eE0rSU4wWUhCTUdl?=
- =?utf-8?B?M1ZNeEgyRkE1SmFOUlVoT25Db0ZKd0x4QTIwcUFja1JIVWpsVmFySkRPeTFV?=
- =?utf-8?B?L0FMMFA2VDNRenRaT0xyeUM3ejNnOHR4OEg2N2IzZ2RFTWN4dWFnUmFOZXla?=
- =?utf-8?B?ZHJOZzFRdHFpS0NocGRzYnY1dzZEUHp5SVJzbytKZ3NEb25LMEF0ZFpkRWxG?=
- =?utf-8?B?WEZxcjNadW4vMjNIeG55LzhORlEzY3dRVnhaM2VwUjdJclljeVdKaTJBZWY3?=
- =?utf-8?B?WXdPb1lob0VFSk12M0ZzZzN5NlZoOGxETGp5WVgwZGVtMTdybW0vVTJTMkhI?=
- =?utf-8?B?MkZXZ2ZIc01CcHA3ZEtqd2JDOUw4MHM1bUJMaEJMc292ZjdxR1l2ajd2Mml3?=
- =?utf-8?B?bndHWEJ0a2FaK3VRWW9ZWGhjRDdMNnB4VG9GL1MydDQ1S2dkMkdLbUoybWdL?=
- =?utf-8?B?TFdYTjFNR0Z6TEcxVnp2YWdhcm1QUW5KRm5Cd1FBZG92aDdCa0pDQzJKa1Vw?=
- =?utf-8?B?ZUZ2dDhNcW9ocTZDeUJSY1R2dDhQdGhIenJkLzdoZ1JHVkU0SGZZOEFCUzVO?=
- =?utf-8?B?S1lIbTY4c2x0WFEzSGtoWWlLN01vZnJmR0N3UTZZMGk1RTJtb1A0Q0R1cnM5?=
- =?utf-8?B?SDNNRENwNERiY0NzaFJwMFpmdVlWOXhMdysrRzE0eGQvQzgwS0xEbllUQUdm?=
- =?utf-8?B?bnBXV0NmWVBKbmJaaE4xbkx3Y3U2U0FCWDhuTWM0ZUJPSWY0VkhiWWdjakFt?=
- =?utf-8?B?ejE2SUtmbE5JdSt3MGsxY1ZVR3lqYzl4YjRESnNlQitGZ1c0WU1haDZROWUw?=
- =?utf-8?B?ZDE3a1Z2N2doUDR0b1BaMkordWZTbUp6UStCekprSWRqYTRYeHkyVEJiWUFT?=
- =?utf-8?B?REYvS0V6ODA2TldGbnV4dzFXb1l3Tk13Y05waDhzK05HM3YwdU5DMkQ3cXUx?=
- =?utf-8?B?Z1hrdGo4WXlhRjNhQkNBOWRmaFkvckpvazZoQW8vNTQvMUNmMGhsN2o2aWs5?=
- =?utf-8?B?VWorUGhic2pDK3VVYkdkMkFiN283dWRlWVg0RFZWUnpsMzFRRmtWQ0hTOFkw?=
- =?utf-8?B?b0o0ejNJOVVBbEorSWNRTm9BcXNKL1lsRUR0MmlzY0haeElrWjB1ak04ZkN6?=
- =?utf-8?B?Smlsb2VZVjhxOVdqcDNTOFNhMVpjZWFnaFk3VUU1dVpsZ0Vwc0UrekxIRGNr?=
- =?utf-8?B?NksyY1ZrNmJGa1FyTzh1M2QwVnZoZm5aMVBxc2VNMXV3SjdlRTk4eTIrbVhj?=
- =?utf-8?B?clJ1V1pMYlJ2c0ZBMEdnN2Z0K2k2M0ZMZlpRMlpLeFAvTHBGTWpGK29QbnlS?=
- =?utf-8?B?OEc0NmVESWhqWDR5TW5CamhWd3RlaVRkWS9Kak5BZlc0enlVWE1rZitMVlR6?=
- =?utf-8?B?MFhxYVRTdlBmMW1aRk11cG9udE9JN0Qxanc4V2F1Zy82NlBnbGVwYnBjYXRQ?=
- =?utf-8?B?eUp2N2kvRk5CbWgwMFBjVlJPbmxsN1BsSUJRN095RzE5bWYyZlhwVURRbHRU?=
- =?utf-8?B?VVpRUHVpNlM2T045WGNXdHRMUytJOUpsYVV6RDIzZkcrOGw4MWRTWTBEK0pv?=
- =?utf-8?B?cDdGV2pLUXZXeEd3VmxrVXZVTUNyYXZ2NFYyUGtqQzRVSWhaU091cXBmN0ph?=
- =?utf-8?B?RFZFZVhnbllKUGo1S3Blc1loMzA5aEdLVVM2T2Yxc3E1Y0cydVgvYkQrZmZJ?=
- =?utf-8?B?ZWhWamJodzZZY0I1NUhlSFhCU3kxUHRRN2FCSFpCeDh2dmRaajRxQ2NuWHRG?=
- =?utf-8?B?K0JkTUtMWFZUUlpEbVl2Tlg5WkZFNU1vT3ZPZHY4S296ZGZEWDV3YVAxTG9R?=
- =?utf-8?B?Z3BVL1plT0NwZFovN1lVR1F0TFJ4WEwzUmtUelNBQVI3WGN2Y1RYU293WUdp?=
- =?utf-8?B?aG4wa0taMGxSeStlaEVMRDdpZHZGTzhTY2FYd2MxbDVOK0szMDRrdnYzTVZH?=
- =?utf-8?B?NGRQVTVvdFN1bFN1L0lEWks0WEJ3M09UOER2d3JQSllSRFBQTFFqN3M5MHRv?=
- =?utf-8?B?OHRvbzMxRjdpNmVGMFZyWk1QcU80bzNwZ0p4Q3Y1c3hmblYvWjJBRnZEMXcx?=
- =?utf-8?B?MVE9PQ==?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bbebf579-5de0-45b4-717a-08de201e5359
-X-MS-Exchange-CrossTenant-AuthSource: CH0PR11MB8189.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2025 05:59:35.4389
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1ABs0iUWtBszUMeUBRbcJuxhsv9k7vlZqz+b1ayWv3Od/6/88e+yNdR7QovSQM7b/yzGDr6FVH6KT7FzNNHSij2ckzUZt7Byeirb+B2ZChs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR11MB5295
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTEwMDA1MCBTYWx0ZWRfX3FoXdpq2IjH/
- LMqz90be4d/+H6KS1wYO4fqQgnmd3diERd0vwJnh9gNkmQm+2PNxvZeuqNuUsXokgHZn2bZn+a2
- rfW/b/L7tsDcncW5H2I0qDhLn1euTo660ncJybf3OdOcBHonQSSBzf8MLebmHCFqMx//bLlSZkt
- c8ytl95dO6HtiHnwGXejkoAC8iaqbu04Ai8T9123GMTZr/KUr8yXbpPOXpsPi7r6zuf2UTEdm7s
- JBidEQi0e4tGYiZfwrrkcQCN4W0moYGL/6woJnTxIGzRnkkjGE0AmmiUgwWz0AqGB83g+S8mpwb
- dfACwjjLVEq8AW/yzuwfhBdMc/Ol+kn74ycAONtXPsUl15BVJ62x8wFSIjjKKukdZi2B2Qm2cDQ
- 1qUf0cYO2+HDkmWfe4txr2D8tPIbJg==
-X-Proofpoint-GUID: CJVmscopW6DBJlFNzS-FJ0qj4GuvWlOP
-X-Authority-Analysis: v=2.4 cv=Uvpu9uwB c=1 sm=1 tr=0 ts=69117f4a cx=c_pps
- a=EOla4jo+ZS3aUDydQNalYw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Q4-j1AaZAAAA:8 a=pGLkceISAAAA:8 a=NEAV23lmAAAA:8
- a=t7CeM3EgAAAA:8 a=NJuWnAnK2s-WiZUJ1b8A:9 a=QEXdDO2ut3YA:10
- a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: aaxn2yk21Zxwsdnb5g8Tt7xKS1peNUhh
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-10_02,2025-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1015 impostorscore=0 priorityscore=1501 adultscore=0
- lowpriorityscore=0 bulkscore=0 suspectscore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511100050
+References: <20251109164541.2901-1-moraless.philius5@gmail.com>
+In-Reply-To: <20251109164541.2901-1-moraless.philius5@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 9 Nov 2025 23:26:31 -0800
+X-Gm-Features: AWmQ_bl2OoEO6P0DVwIB1qNy1dKULe0DoeBJAO3WxqLmMkRuy56Bm0FktAuo7uQ
+Message-ID: <CAMKF1srh_7tQiHoafxDPjg-okoJM-Wnk+_DO4kbsMVBRJHxWcg@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] libtalloc: fix pytalloc package ordering
+To: moraless.philius5@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000e0a9e006433874d3"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 10 Nov 2025 05:59:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121446
+ <openembedded-devel@lists.openembedded.org>; Mon, 10 Nov 2025 07:27:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121447
 
+--000000000000e0a9e006433874d3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 2025/11/8 19:27, Gyorgy Sarvari via lists.openembedded.org wrote:
-> CAUTION: This email comes from a non Wind River email account!
-> Do not click links or open attachments unless you recognize the sender and know the content is safe.
+please rebase it on master-next and resend
+
+On Sun, Nov 9, 2025 at 11:22=E2=80=AFAM moraless.philius5 via lists.openemb=
+edded.org
+<moraless.philius5=3Dgmail.com@lists.openembedded.org> wrote:
+
+> From: Moraless Philius <moraless.philius5@gmail.com>
 >
-> Branch was renamed.
+> The libtalloc recipe did not properly populate the pytalloc package
+> because pytalloc was listed after the main libtalloc package in the
+> PACKAGES variable. As a result, the pytalloc package contained only
+> talloc.so and was missing other required files.
 >
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> (cherry picked from commit 8d5baf12df3cf8a178bde5f11e0c8b28f2f6dcdb)
-
-I was unable to locate the commit 
-8d5baf12df3cf8a178bde5f11e0c8b28f2f6dcdb in the repository. Could you 
-please clarify which branch it was cherry-picked from?
-
-Thanks,
-
-Haixiao
-
+> Signed-off-by: Moraless Philius <moraless.philius5@gmail.com>
 > ---
->   meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>  .../recipes-support/libtalloc/libtalloc_2.4.2.bb       | 10 ++++++----
+>  1 file changed, 6 insertions(+), 4 deletions(-)
 >
-> diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
-> index 610fd0af5e..62e6c90f63 100644
-> --- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
-> +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
-> @@ -24,7 +24,7 @@ SECTION = "libs"
+> diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.4.2.bb
+> b/meta-networking/recipes-support/libtalloc/libtalloc_2.4.2.bb
+> index b617f097cf..177872fd60 100644
+> --- a/meta-networking/recipes-support/libtalloc/libtalloc_2.4.2.bb
+> +++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.4.2.bb
+> @@ -49,13 +49,15 @@ do_install_ptest() {
+>      install -m 0755 ${B}/bin/*_testsuite ${D}${PTEST_PATH}/tests/
+>  }
 >
->   S = "${WORKDIR}/git"
->   SRCREV = "2fc8413bfcb51354c8e679141b17b3f1a5942561"
-> -SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-2.28 \
-> +SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=archive/mbedtls-2.28 \
->              file://run-ptest \
->             "
+> -PACKAGES +=3D "pytalloc pytalloc-dev"
+> +PACKAGES =3D+ "pytalloc pytalloc-dev"
+>
+>  RPROVIDES:${PN}-dbg +=3D "pytalloc-dbg"
+>
+>  FILES:pytalloc =3D "${PYTHON_SITEPACKAGES_DIR}/* \
+> -                  ${libdir}/libpytalloc-util.so.2 \
+> -                  ${libdir}/libpytalloc-util.so.2.1.1 \
+> +                  ${libdir}/libpytalloc-util.so.* \
+>                   "
+> -FILES:pytalloc-dev =3D "${libdir}/libpytalloc-util.so"
+> +FILES:pytalloc-dev =3D "${libdir}/libpytalloc-util.so \
+> +                      ${includedir}/pytalloc.h \
+> +                      ${libdir}/pkgconfig/pytalloc.pc \
+> +                     "
+>  RDEPENDS:pytalloc =3D "python3"
+> --
+> 2.43.0
 >
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#121381): https://lists.openembedded.org/g/openembedded-devel/message/121381
-> Mute This Topic: https://lists.openembedded.org/mt/116186077/8599992
+> View/Reply Online (#121445):
+> https://lists.openembedded.org/g/openembedded-devel/message/121445
+> Mute This Topic: https://lists.openembedded.org/mt/116207686/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [Haixiao.Yan.CN@windriver.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
+>
+
+--000000000000e0a9e006433874d3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">please rebase it on master-next and resend</div><br><div c=
+lass=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_=
+attr">On Sun, Nov 9, 2025 at 11:22=E2=80=AFAM moraless.philius5 via <a href=
+=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;moraless.=
+philius5=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@li=
+sts.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quo=
+te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
+);padding-left:1ex">From: Moraless Philius &lt;<a href=3D"mailto:moraless.p=
+hilius5@gmail.com" target=3D"_blank">moraless.philius5@gmail.com</a>&gt;<br=
+>
+<br>
+The libtalloc recipe did not properly populate the pytalloc package<br>
+because pytalloc was listed after the main libtalloc package in the<br>
+PACKAGES variable. As a result, the pytalloc package contained only<br>
+talloc.so and was missing other required files.<br>
+<br>
+Signed-off-by: Moraless Philius &lt;<a href=3D"mailto:moraless.philius5@gma=
+il.com" target=3D"_blank">moraless.philius5@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0.../recipes-support/libtalloc/<a href=3D"http://libtalloc_2.4.2.bb" r=
+el=3D"noreferrer" target=3D"_blank">libtalloc_2.4.2.bb</a>=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0| 10 ++++++----<br>
+=C2=A01 file changed, 6 insertions(+), 4 deletions(-)<br>
+<br>
+diff --git a/meta-networking/recipes-support/libtalloc/<a href=3D"http://li=
+btalloc_2.4.2.bb" rel=3D"noreferrer" target=3D"_blank">libtalloc_2.4.2.bb</=
+a> b/meta-networking/recipes-support/libtalloc/<a href=3D"http://libtalloc_=
+2.4.2.bb" rel=3D"noreferrer" target=3D"_blank">libtalloc_2.4.2.bb</a><br>
+index b617f097cf..177872fd60 100644<br>
+--- a/meta-networking/recipes-support/libtalloc/<a href=3D"http://libtalloc=
+_2.4.2.bb" rel=3D"noreferrer" target=3D"_blank">libtalloc_2.4.2.bb</a><br>
++++ b/meta-networking/recipes-support/libtalloc/<a href=3D"http://libtalloc=
+_2.4.2.bb" rel=3D"noreferrer" target=3D"_blank">libtalloc_2.4.2.bb</a><br>
+@@ -49,13 +49,15 @@ do_install_ptest() {<br>
+=C2=A0 =C2=A0 =C2=A0install -m 0755 ${B}/bin/*_testsuite ${D}${PTEST_PATH}/=
+tests/<br>
+=C2=A0}<br>
+<br>
+-PACKAGES +=3D &quot;pytalloc pytalloc-dev&quot;<br>
++PACKAGES =3D+ &quot;pytalloc pytalloc-dev&quot;<br>
+<br>
+=C2=A0RPROVIDES:${PN}-dbg +=3D &quot;pytalloc-dbg&quot;<br>
+<br>
+=C2=A0FILES:pytalloc =3D &quot;${PYTHON_SITEPACKAGES_DIR}/* \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${libdir}/l=
+ibpytalloc-util.so.2 \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${libdir}/l=
+ibpytalloc-util.so.2.1.1 \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${libdir}/l=
+ibpytalloc-util.so.* \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
+-FILES:pytalloc-dev =3D &quot;${libdir}/libpytalloc-util.so&quot;<br>
++FILES:pytalloc-dev =3D &quot;${libdir}/libpytalloc-util.so \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 ${includedir}/pytalloc.h \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 ${libdir}/pkgconfig/pytalloc.pc \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0&quot;<br>
+=C2=A0RDEPENDS:pytalloc =3D &quot;python3&quot;<br>
+-- <br>
+2.43.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#121445): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/121445" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/121445</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116207686/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/116207686/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000e0a9e006433874d3--
 
