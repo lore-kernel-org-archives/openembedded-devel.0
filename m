@@ -1,111 +1,153 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03D52CCF9E3
-	for <webhook@archiver.kernel.org>; Tue, 11 Nov 2025 08:27:07 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13128.1762849621600650291
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B348CCF9E3
+	for <webhook@archiver.kernel.org>; Tue, 11 Nov 2025 09:37:47 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13799.1762853863327956839
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Nov 2025 00:27:02 -0800
+ Tue, 11 Nov 2025 01:37:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=fJUalJ3P;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3410a7eecb=changqing.li@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AB4F1Dr3416473
-	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Nov 2025 00:27:01 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=/4o6DQzXIgRv82ZZr4c0
-	C5uLVIjq2Wgd6gmxmvdD2aE=; b=fJUalJ3Pym93fvmi3IuLbvNOU11eujLOAJ6r
-	3bOzx0FJWTqTRt5f4pXOZ3Rj6aXJVsNsbHJr8M+iSZkmfBgsXNw0LfeHxtILt3rh
-	Ym7dCK4h6PlnpmSQ159ZdVwanUQr9hBycf+pVPgqPeRguvim2jZpUWbX+20YGqZQ
-	9ioiutFd7tUAnQ9JHkCYNIKnV0edoRAtzxlQtpp0KT+tmNwbEVVIVbbDzcMbiw+d
-	6Ch0qEzKYoF1WRCqX40GUspq8zlfZ6VMw74F5PCHIlJXnZpFkQs5cKFIRWwuFO9/
-	dUSfKhRDbrHPw0tzFWG35F5Nkv+UZWkDvqA3cqYaWTUgqviQhQ==
-Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4aa2132us4-9
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 11 Nov 2025 00:27:00 -0800 (PST)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Tue, 11 Nov 2025 00:27:00 -0800
-Received: from pek-lpg-core6.wrs.com (10.11.232.110) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Tue, 11 Nov 2025 00:26:59 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-grpcio: add python3-typing-extensions to RDEPENDS
-Date: Tue, 11 Nov 2025 16:26:59 +0800
-Message-ID: <20251111082659.663867-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XDScTBZ3;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-bbac8ed0614so844806a12.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Nov 2025 01:37:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1762853862; x=1763458662; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=S9o4lapLl0KKy7Klu2loY7JATJ29mGXIDBep8/WhTDI=;
+        b=XDScTBZ324eCibNrOTg9BAFl2lvJ17Bw9i4euogfdD6cOaKAzwQ91t12FMIGIPZk8r
+         +ykgaH/6w11XMylXh3p20k6/lsFG/ruI1U1XBcdyA72TuOYj7Yxp+OuwomOz99LmsF0y
+         /PiizH6mmY74knvwbELy1mX3XkU+hApbxboyDzChhN7STFt+e8tOANSOmcTUy4a+6TNU
+         bl+69FM/rbUbPSxBDeg655+duTy5eF8TLbw2hFqRPUlrYnKX+7TZ56COv0G2TkgtQ9IR
+         1n08KT3LXaGrF0AAnxiqfA7wJOHsbPQIQNwZO/EqI1JdG92Zjvwek71AOIz8DsRanXY4
+         UcKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762853862; x=1763458662;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=S9o4lapLl0KKy7Klu2loY7JATJ29mGXIDBep8/WhTDI=;
+        b=wtKOS2n0Hpk6Cxn/r7XjAs9qAlO0nlwsCO8a1LXL4FU1XHrvxuKE76vgrJwKJfOTgN
+         oyhg/KLiGvhpR4mc/QuwiEIEpbrjeQ2ahnMYuvhmVS4i0g9eZYv2E+HwOm/FaZuVHYt+
+         svQaWQ2InEnZxyAww6hdusE0ZEKI8gONPW6WJ9kagxac/wNcLLeFIDFdlslh8lQSSTtN
+         bykE/9izfhfvnw9Xtt4DZJ1jRaZ8PTKu+dkrqvQ93rY3NTKlG5QwR/DBj9KUTtM3/Ci+
+         dCRnCbD33SRtDLUw2hZ7dqrniPLNeZjFBD3CIZDLEHfpuTwdK6zLMQMgzYbU3ZMXnY8x
+         DmQg==
+X-Gm-Message-State: AOJu0YxVvzsm7mKIFK6v3r0vW2Ry32kmeT5w252kU2JAS1rMIuDcKbIF
+	4z/FjLuiksNFjR7Qc7YTR9uCsJYRHpT3E4Vps469RLto6HSiXQjKlXjJKInLN6kH
+X-Gm-Gg: ASbGncscFeNXyA3tcmrpQ8k4KiBXbtUyd/GizrVojXI7dmdw+D54cYxB1gW8fybP+hW
+	morKoJCsF35WWK1+r5YtYFBYxyiZLu5FE9f3b2ks7foEjeeA0+GeBBDtdkCDpP0S6VMYbbbKzXc
+	Z4u/kTW5neSMtCfLFykWeWPRX6LpgQGbgQxN9+fyGFDIIL1oJBYoSlwqn/jiBPAqJ00YQolt261
+	DLBi6PGPTTka5zuln4oRc6KbHdu4xygmNhq9ag2MtU+YDYf4XFgn0Ba4bby035QXosO27VhY0Ku
+	ayw+o2BMzWVUUezGdwoKrkOd0qWWzJwc9iBf1PzKTHby8m37dNDuVD1+S1KyK5uAfKg22P/zqOf
+	mp/H980dliVEiNfH/OtOsV8P4TjSbFH1jdVJ2+xoNl2QRf5ybr+OylV5VmdXw4OdDPwwKMCxUJm
+	qOi90f7ZhV8xqsc0HxytyrSBNG
+X-Google-Smtp-Source: AGHT+IFxINmqTgp4HqcAa+UkNPstZ8v+72hPuhko63c1UYa7IpY2eIAw8fYUjFxt1AuqUXxn0R5vKQ==
+X-Received: by 2002:a17:902:f54e:b0:277:3488:787e with SMTP id d9443c01a7336-297e53e7704mr153491585ad.12.1762853862074;
+        Tue, 11 Nov 2025 01:37:42 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([147.161.216.248])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2965096b90asm173611505ad.23.2025.11.11.01.37.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 11 Nov 2025 01:37:41 -0800 (PST)
+From: ankur.tyagi85@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Louis Rannou <louis.rannou@non.se.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][scarthgap][PATCH 01/18] mosquitto: bump to 2.0.21
+Date: Tue, 11 Nov 2025 22:37:16 +1300
+Message-ID: <20251111093733.1393568-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTExMDA2NSBTYWx0ZWRfX2tS/Jdgr9WQf
- Yo1pLPPzas6HGu+t9QFURs2Y8J84F6UmcHMHFqy9AwD7rO1owDTM6jDqVr/rjrotIR0YsU4ldRQ
- Wh5/geYiZ4RQFuISfmoJ3c1Q7kaHp9eVr+z4v5rr5RYcz9kXVRKoV9u+sn7p7G4cfjxdX87RJPU
- 8+9mhmoxLtgIswdcLWJzPrBVuHXSks9yljFPY2M2Yas9D+4jxZXLmP112gRhob9wTCKNtVUTYSx
- N3W+mPTnU5doerrxyx5wnV786MqKF4QkMP/U3Hw7Y9MzTTZVuXhzVybofVpD7UNFy/8M9rhZt54
- /SPoIUAhNBQvv58JZBhLThXLQsCKuKLzF/gv8XO+MwMtoKlqWG2AVBMG7Dh5qjDdR/DlB0iaFCq
- 9bY+o47DHv+iCkVkYtYNLjqvcLTJMQ==
-X-Proofpoint-ORIG-GUID: 5F2hhpsA_6eHIcIpZUwAnua2T_YWTwO7
-X-Authority-Analysis: v=2.4 cv=XPA9iAhE c=1 sm=1 tr=0 ts=6912f354 cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=t7CeM3EgAAAA:8
- a=XqihByVhs_2NIaOnEfwA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: 5F2hhpsA_6eHIcIpZUwAnua2T_YWTwO7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-11_01,2025-11-11_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1015 malwarescore=0 adultscore=0 bulkscore=0
- phishscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511110065
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Nov 2025 08:27:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121503
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Nov 2025 09:37:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121504
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Louis Rannou <louis.rannou@non.se.com>
 
-Fix error:
->>> import grpc
->>> from concurrent import futures
->>> server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-Traceback (most recent call last):
-File "<python-input-4>", line 1, in <module>
-server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-File "/usr/lib64/python3.13/site-packages/grpc/_init_.py", line 2219, in server
-from grpc import _server # pylint: disable=cyclic-import
-^^^^^^^^^^^^^^^^^^^^^^^^
-File "/usr/lib64/python3.13/site-packages/grpc/_server.py", line 57, in <module>
-from typing_extensions import override
-ModuleNotFoundError: No module named 'typing_extensions'
->>>
+Upgrade to mosquitto 2.0.21. Update the patch status for issue 2895 and create a
+new patch for an issue introduced in 2.0.19 which causes connections to get down
+when the clock is changed.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Louis Rannou <louis.rannou@non.se.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 2a27eacee2dc066365e32bafa66c666bcd93b3ca)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-grpcio_1.76.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../mosquitto/files/2895.patch                |  2 +-
+ .../mosquitto/files/3238.patch                | 25 +++++++++++++++++++
+ ...osquitto_2.0.20.bb => mosquitto_2.0.21.bb} |  3 ++-
+ 3 files changed, 28 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/3238.patch
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.20.bb => mosquitto_2.0.21.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.76.0.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.76.0.bb
-index c4282502e1..037614da3e 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio_1.76.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio_1.76.0.bb
-@@ -15,7 +15,7 @@ SRC_URI += "file://0001-python-enable-unbundled-cross-compilation.patch \
-            "
- SRC_URI[sha256sum] = "7be78388d6da1a25c0d5ec506523db58b18be22d9c37d8d3a32c08be4987bd73"
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+index 853f881754..4c39a290b0 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
++++ b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+@@ -5,7 +5,7 @@ Subject: [PATCH] Mosquitto now waits for network-online when starting
  
--RDEPENDS:${PN} = "python3-protobuf"
-+RDEPENDS:${PN} = "python3-protobuf python3-typing-extensions"
+ See: https://github.com/eclipse/mosquitto/issues/2878
+ ---
+-Upstream-Status: Pending
++Upstream-Status: Submitted [https://github.com/eclipse-mosquitto/mosquitto/pull/2895]
  
- inherit setuptools3
- inherit pypi
--- 
-2.34.1
-
+  service/systemd/mosquitto.service.simple | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/3238.patch b/meta-networking/recipes-connectivity/mosquitto/files/3238.patch
+new file mode 100644
+index 0000000000..89795f4cd9
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mosquitto/files/3238.patch
+@@ -0,0 +1,25 @@
++From 2cb8129793b54de7c68efe1a4a8e91c788077a8e Mon Sep 17 00:00:00 2001
++From: "Roger A. Light" <roger@atchoo.org>
++Date: Thu, 1 May 2025 11:58:23 +0100
++Subject: [PATCH] Fix incorrect reference clock being selected on startup on
++ Linux.
++
++Closes #3238. Thanks to Eric Guin and karlri.
++Closes #3168.
++---
++Upstream-Status: Backport 2.0.22
++ src/mosquitto.c | 1 +
++ 2 files changed, 3 insertions(+)
++
++diff --git a/src/mosquitto.c b/src/mosquitto.c
++index ff83ef3da..2aea55237 100644
++--- a/src/mosquitto.c
+++++ b/src/mosquitto.c
++@@ -465,6 +465,7 @@ int main(int argc, char *argv[])
++ #endif
++ 	struct mosquitto *ctxt, *ctxt_tmp;
++ 
+++	mosquitto_time_init();
++ #if defined(WIN32) || defined(__CYGWIN__)
++ 	if(argc == 2){
++ 		if(!strcmp(argv[1], "run")){
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
+similarity index 96%
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
+index 2bc1303185..86d26304ee 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.20.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.21.bb
+@@ -17,9 +17,10 @@ DEPENDS = "uthash cjson"
+ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://mosquitto.init \
+            file://2895.patch \
++           file://3238.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "ebd07d89d2a446a7f74100ad51272e4a8bf300b61634a7812e19f068f2759de8"
++SRC_URI[sha256sum] = "7ad5e84caeb8d2bb6ed0c04614b2a7042def961af82d87f688ba33db857b899d"
+ 
+ inherit systemd update-rc.d useradd cmake pkgconfig
+ 
 
