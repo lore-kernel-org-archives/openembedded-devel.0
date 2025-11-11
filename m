@@ -2,65 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 496E2CCFA1A
-	for <webhook@archiver.kernel.org>; Tue, 11 Nov 2025 09:37:57 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13800.1762853871824345513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BEE4CD1297
+	for <webhook@archiver.kernel.org>; Tue, 11 Nov 2025 09:38:07 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13704.1762853882472776702
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 11 Nov 2025 01:37:51 -0800
+ Tue, 11 Nov 2025 01:38:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iB0Q8fzv;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-298145fe27eso24281105ad.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Nov 2025 01:37:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FfiUEZiL;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-ba507fe592dso2447090a12.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 11 Nov 2025 01:38:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762853871; x=1763458671; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1762853882; x=1763458682; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9EQQ2cxHv9H/t0x+fUsEKY/0GiR3U/ocHyyGP+4Mk5U=;
-        b=iB0Q8fzv37757Ei6OH4EBWXJI8N90OliHmuZtZIJ8jG08uazRYO7PRLkNyhWx9y1Wi
-         ZzW/GMQEKvQvQs5/YQym2EIvS7IxmsslCpJvcv97o5LI49RWuvHe8dWBKu2EaXOOBt++
-         vbnvLvpS4XGoSy6VB8JUVNOf2uWo9SL4OkLQL2rwm+VBg2dcapIbiRSYtyRv/kq1mfII
-         Cqof3V5cvue3Uz65eR9W1e39q4TzKz/6zeZ/Dikt4MF7U95Ng0cIxWlvzn1fgdvFw91U
-         WC7t87dWDWJavKIXLNJb6awnOmbw2qWPTkZBxk1QeyDrLnjFDwSinygBm/RmrAK9NmPT
-         hJRQ==
+        bh=dosnjtnHYU/2OQEDQqOy6XGNqpTZQsA0p/Eze1rw09g=;
+        b=FfiUEZiLJmGMM/baleacJPp3tndmmX+nchFMC19SCPtRHdDfD4S9rCT+T2GNzcdxNb
+         a+tNr+4r692hcTLn4LXq+VmxbXGDE0eB0OFnNWIn4N7EOhIeCLDa/rlfqEa0bwb8dsmM
+         XSehLWhcbXkYO6BE6956VtLBgVQjFShZLmvr4vPhn3T/0BE7GcIwipqpMaFkcI1MW+e2
+         1lS1KctvuYuaeUS3mXXQbVnl8wVZ+5Fwujedr61+g49AU3nUIp2nNAZhUATTcH83XEOt
+         pCbnqjHKaNT0SahAkUK4pJNN5Po6Okp565k4DVfKgwsxngVG3iZknw9IJZJlGWZQQfyW
+         d+Pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762853871; x=1763458671;
+        d=1e100.net; s=20230601; t=1762853882; x=1763458682;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=9EQQ2cxHv9H/t0x+fUsEKY/0GiR3U/ocHyyGP+4Mk5U=;
-        b=Yy61yVXmTzfsHZebetasn0m/oc5oQt46ylidiCMXI/P/AlMRiHJ5ioIo/ZEN4Hj8zj
-         Pk7yXkc2bU6X2dEKV9HwW5XMazNWt2zPcovgz4a1PhqFUhY5qkqFIQKomPLUNFoqByQs
-         0GkI4foxvZSTE+j7LAKyPNNA7gQ7ia6bpBqAd8SMpIi5NZwnnrFwgqiWXyst15fqKqpL
-         PmWK5dc1ri1dhqLHvwZ95+LM1iDw/zNda0WhdbEklj/ifogV/EweE0BMaxFRVEJscuSd
-         fWJHI7kHZ/oS7vc92WrGXXsgNpc/SLiEL97YUo4JKe9tQhkcpenuv15kUhK07z4T+Cvm
-         gbJw==
-X-Gm-Message-State: AOJu0Yw6JSaUSWpT5STsK9YLGnOnAe+e3ZHI6Cs4KF1Hs1lxYSz2u5fR
-	fi7vT/9SdGmNqLP+1+rd7P7p0sYRueCpD5UEsjNVUO3WApiadNUwsQ3Qxq56YWDXkMM=
-X-Gm-Gg: ASbGncuMyC94ceelQXy5UuHUTNV+HOKU8BQWPXgxlAPFu5l6XYIAXh3KpfmsSC/35PI
-	H0udTMzleWv3zEMu2YS+XaQby9WSVRgp+F24QPgE9Vg2Td4Gja+sgfVcUkyAiw6/2eWp9ZomR1s
-	HPEk53s4X7TrbJMPHT6wwdhKh61wS71Yy8ETCsN3QgFzHgpLS0Q1mf9LTvNt//bOXIhhySWALWm
-	gFlIXdMjzmusKQHpXNX3F92YFtRtE/YexHMQSodXpRKm0KZH4kcwFPXtsOe2g055iB9crko9LAT
-	+/1x6CnT9QsPXh2S6s+tFClUL8NO3KozakSLT4qDfCLqJw5UFTdhl91jJxp/Z43VMKiw+FTPZv1
-	uVbNwKf2eMi7LdSknvcl8/JwKeDWshsj9rJ+HzO1R05IKUZdtU4QBDLFZ0CnK/QLmeZsdCty2V6
-	3yZZ0a+BIOuKIZCUcKXn2g+Yr3
-X-Google-Smtp-Source: AGHT+IFogOOeaA3TRArGpul0RqjQs5eWT8Sql1OP/uDC1P9rokssycmLVpHZyNPHVKPGzpz2n1y4QQ==
-X-Received: by 2002:a17:902:f64f:b0:298:1156:acd5 with SMTP id d9443c01a7336-2981156ad51mr101351815ad.39.1762853870938;
-        Tue, 11 Nov 2025 01:37:50 -0800 (PST)
+        bh=dosnjtnHYU/2OQEDQqOy6XGNqpTZQsA0p/Eze1rw09g=;
+        b=DEHLop9dRhNmLWN3RtunQv7XjzeAI2iR8cKAP47HJfqVvzkIO5r6Kmtj4nY9AwJC4n
+         SL+eD7ExrvQ70fAHhkYv5nCV+V6fhxe7BgQYxbi0S/21Zt5hBKOvSnYCspG8NQlc6JBo
+         vdANhYjsy2gGOSjRZ8qbe9KmrN0LfAHTrmbtpiHH0FddQXH6ALqRL1Xitiu1v5xvgtqj
+         ZjF8tvnmj4rEAvatd0+fpKgBeRYYSvXHc1QB1sNTCMkprG68INOVEFJ0gOnoLCc3Sm1L
+         UUr69K9pYz29E1K4G6fVLgZVi1RJAeC/w+EB/BZ/oB6gSfkAnQcigrLxCVipGCAHzOvv
+         gUwA==
+X-Gm-Message-State: AOJu0Yy1MabGS4YPd1uuNvQntlZhVrHifBH9L0YVAEj495yZfXKCrf1v
+	vdubSNC0dqm8QVqh2yfvP0VFskZw91aOa2cXzDOLOVIjGWC4EVQnmMKjcjX2bI2+q+M=
+X-Gm-Gg: ASbGncvOnMoEbM2kRr/HaIcdHFr/sSA7gPxBKhND9BMcRejXl1vZ01Vbj2yWFkekqKA
+	yDQGFVk6yI/QbkdG1eH5bR1DGuIwysqo+3dMeDx7xTwGzAgDCwRnsULILdH8IwhQsuc8PoP4m36
+	g/vamFwKBLsY1tCCpvaV4yMtBVzOJuWjXJzNnGTx5QAqun1Bofj0hdHw0OYpM9agLNo7hxc/lrb
+	lP+BQc2kQA7q2wLu6h4ffN/xAT6dHXWJQ7D3ql3IO2Xaovwt204Up/br3mGNp5+9GDcybPFEBsm
+	ztueMmofa+tkDLtKe2hX6YxwG4mWuptmynvu3N6iReMIWM/7FUVkL/wnCH0YQE1Tuc1iFfoAN1X
+	uhrwpPvwnK2K7cwd6gSindAqlT/axWg7b+wm8RBuEPDYuCo4CjU0E84gJLOatyUYY0IVsPYEVz+
+	DwCI+LGguNg3dfhyxgMmbyphwA
+X-Google-Smtp-Source: AGHT+IH15GvEAXtn1Cc+BW1xnjMuI3XyWdnGWz+g2x3QI3zyV1TsCivprcr2Z1uwLRFywUPhImsCJw==
+X-Received: by 2002:a17:903:988:b0:297:dde4:8024 with SMTP id d9443c01a7336-297e56622c0mr136137515ad.23.1762853881608;
+        Tue, 11 Nov 2025 01:38:01 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.248])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2965096b90asm173611505ad.23.2025.11.11.01.37.48
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2965096b90asm173611505ad.23.2025.11.11.01.37.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Nov 2025 01:37:50 -0800 (PST)
+        Tue, 11 Nov 2025 01:38:01 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Yi Zhao <yi.zhao@windriver.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][scarthgap][PATCH 04/18] samba: upgrade 4.19.8 -> 4.19.9
-Date: Tue, 11 Nov 2025 22:37:19 +1300
-Message-ID: <20251111093733.1393568-4-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][scarthgap][PATCH 08/18] squid: upgrade 6.12 -> 6.14
+Date: Tue, 11 Nov 2025 22:37:23 +1300
+Message-ID: <20251111093733.1393568-8-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251111093733.1393568-1-ankur.tyagi85@gmail.com>
 References: <20251111093733.1393568-1-ankur.tyagi85@gmail.com>
@@ -69,37 +67,41 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 11 Nov 2025 09:37:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121507
+ <openembedded-devel@lists.openembedded.org>; Tue, 11 Nov 2025 09:38:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121511
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-ChangeLog:
-https://www.samba.org/samba/history/samba-4.19.9.html
+License-Update: copyright years updated
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit f7305be2c8b81d012a7d7019a9f029f6f7588fba)
+Changelog:
+https://github.com/squid-cache/squid/releases/tag/SQUID_6_13
+https://github.com/squid-cache/squid/releases/tag/SQUID_6_14
+
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../samba/{samba_4.19.8.bb => samba_4.19.9.bb}                  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/samba/{samba_4.19.8.bb => samba_4.19.9.bb} (99%)
+ .../recipes-daemons/squid/{squid_6.12.bb => squid_6.14.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-daemons/squid/{squid_6.12.bb => squid_6.14.bb} (97%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.19.8.bb b/meta-networking/recipes-connectivity/samba/samba_4.19.9.bb
-similarity index 99%
-rename from meta-networking/recipes-connectivity/samba/samba_4.19.8.bb
-rename to meta-networking/recipes-connectivity/samba/samba_4.19.9.bb
-index 429f983c93..30b7ea5a1f 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.19.8.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.19.9.bb
-@@ -31,7 +31,7 @@ SRC_URI:append:libc-musl = " \
-            file://samba-4.3.9-remove-getpwent_r.patch \
+diff --git a/meta-networking/recipes-daemons/squid/squid_6.12.bb b/meta-networking/recipes-daemons/squid/squid_6.14.bb
+similarity index 97%
+rename from meta-networking/recipes-daemons/squid/squid_6.12.bb
+rename to meta-networking/recipes-daemons/squid/squid_6.14.bb
+index ba5ca3a698..e6841719cc 100644
+--- a/meta-networking/recipes-daemons/squid/squid_6.12.bb
++++ b/meta-networking/recipes-daemons/squid/squid_6.14.bb
+@@ -23,10 +23,10 @@ SRC_URI = "https://github.com/squid-cache/${BPN}/releases/download/SQUID_${PV_U}
+            file://CVE-2025-59362.patch \
             "
  
--SRC_URI[sha256sum] = "1aeff76c207f383477ce4badebd154691c408d2e15b01b333c85eb775468ddf6"
-+SRC_URI[sha256sum] = "71ed406444714c90bb9d36c576d807b67af15449f297e91106d42b3ca2fa5549"
+-SRC_URI[sha256sum] = "f3df3abb2603a513266f24a5d4699a9f0d76b9f554d1848b67f9c51cd3b3cb50"
++SRC_URI[sha256sum] = "9eafe06f58a199b918e79d33d8aa03afb9ae0c11d18974dca0b44c2669cab6dd"
  
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.19(\.\d+)+).tar.gz"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+-                    file://errors/COPYRIGHT;md5=6fbb6a2adc362e206da7b4f42846cdec \
++                    file://errors/COPYRIGHT;md5=c2a0e15750d3a9743af9109fecc05622 \
+                     "
  
+ UPSTREAM_CHECK_URI = "https://github.com/squid-cache/${BPN}/releases/"
 
