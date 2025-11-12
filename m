@@ -2,156 +2,123 @@ Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FC77CCFA1E
-	for <webhook@archiver.kernel.org>; Wed, 12 Nov 2025 09:52:35 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10078.1762941145726558686
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EB08CCF9F8
+	for <webhook@archiver.kernel.org>; Wed, 12 Nov 2025 10:05:05 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10050.1762941898389896449
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Nov 2025 01:52:26 -0800
+ Wed, 12 Nov 2025 02:04:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LhF9G2U4;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: zboszor@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-42b379cd896so333118f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 01:52:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=I5GJ2RbH;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: zboszor@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-42b2e9ac45aso371565f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 02:04:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762941144; x=1763545944; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=amf785e1WeylEBMWp0x+Sk6aP8cDHXLJ8vWPtouAwIQ=;
-        b=LhF9G2U43DC+xfpiwF0oxVdGODQJ1qflnCBE4kbG1fm3a+JYWhE4L7jC+wjuv99n3J
-         A+o7SzefdzAzmdyn/c/g83TOZc3BsBgdRd6vIuxeF6QeY324fi/qBbMV+uVES2PNt/6P
-         QNQr44d/fxe+xRyDVzJNtg1aexPSxcn6V+9gbwR3bZmHACqWR00ez/AMlb7yrtpPxjOW
-         COnOroGTG45vb/1qerKkWqdcngInhyLdocwcYOQi61CBzGKtO6k4WO8pe9AFCwH3zhRF
-         lsS+41vI4/4njpcg9JYw2aQsmLNlLCIrM5BXdhJvLaDH0y4VEfQU8bVWpQxgukwdJA6e
-         jdvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762941144; x=1763545944;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1762941896; x=1763546696; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=amf785e1WeylEBMWp0x+Sk6aP8cDHXLJ8vWPtouAwIQ=;
-        b=rGV06+853VR31rX/Bm3oH7Qatj7FI/bzSXKw28ub1YjGzGdMzBmYRHGBIr5zZs2kll
-         p2BZUMb/KudBJoLrXUfXHfnGuwbiv2Dt6tC4hYxnONcATdpSzQs2405g34HTaeu3Pq74
-         EDfkDCoVBXtYvs0NPi4hg2oRQeGwwqr6nZ5GleGCvCsUwGmf+BKY6qx2LjGWjpKumDzQ
-         1zsI72C5p6DhnL3pDUdk+XwOY5u1t8WwCIUIjYObHUtLQ235oFp7pq45ZCuuv+2NXGqI
-         eD43kq1AvigHuHUSHX8TfAOYXW5wbQznXm0GT1q48vej/YYGmheuP1WKTYU+naDys05E
-         04Pw==
-X-Gm-Message-State: AOJu0Yx1eHWdirFqfCzFVYSUzZoYbWintalNdn49biL7om1D08x0utxy
-	9yEanQtvHaV5Kd8ww1TaVHg64q4ANaYoe5RZXX4OqLpWNkaR8oAqi9q6pBEFDA==
-X-Gm-Gg: ASbGncsm1oZ7JmZOgpyOgcM4EvS/SOUnVSDg9CWprx4SxBeTde3vcclcnyo8RO/1yPs
-	JlRjgJIDZDxgEX4FdKPx44qAhsEoNv0iqhsOpA3Uy6m+25VIKqyedlnz+/lStPmF6/DtGA5fWkC
-	UQ+BkajpNwrv8hlNqotJKl9m+zTqYZlDaB6fDpn/nrt/G39sbsf1vjNcbygR9CNFhSUHhle+tXp
-	jyetImseBM/7iZb5lmYM5HOmE0nwmlXIS8KFpIMV8pwqgfET2GW5SqtezYQl3JO1soKcF7d1/NN
-	IOBEvaxGFN9nE1X9xLQlcP2KEgQs1A7vY8o5PTCqSTGIdfSIg0WdSv8nVKTR3taXtjXMxkdULWU
-	b5nQDeh9Je7UbzBaA4mVirrg/SeR7Sf3OlvvWueU+o+ZdJnCrnExOi6x0C/N5hRrqnM/5GpVvYo
-	CYf0g3YhgR19sOp3LHZbwu2w==
-X-Google-Smtp-Source: AGHT+IHDm06ftChAbHSuTsan/cdqQ9M4zNaStPLGAsYt0sBhKNtDHtypD3IrNvnq6Xn1qQZ4ELrwDA==
-X-Received: by 2002:a05:6000:2892:b0:429:c774:dc08 with SMTP id ffacd0b85a97d-42b4bdd3e92mr2217020f8f.53.1762941143509;
-        Wed, 12 Nov 2025 01:52:23 -0800 (PST)
+        bh=BzmVBd94yQSJti8SDcl8a8CFiU9wieDpevKmKWqsxGk=;
+        b=I5GJ2RbHIYzCSGApfzdUpSDzB9fbwxUCoxCWDoacb9yZC6zynRWV/a2g1WZjFQDb7y
+         2WlV8BxFV7mND+g5l/Uutzc6GMxJlT6kRkD9+YnMRmpU8L0gMoILhvNwmYox+JKGsneR
+         B/NFaEM/kSH8r+F3CF2pc8JhKs5bxap6noF9TsLyOnNStZh+qrtayLJLqPJp5EQKZFv2
+         Oo7k4Jgcn988YpOaF6eD7DV1WTTHLPnc1/CmxRVZxwCWYhK3FUe2vhFr41mPLDhtRJMM
+         An8iuJlnQcXTXetTM/kXcxqiaKOmXAptwZlYKE0u5Pm+wVhkrTDxGmMZ/ysNrm6O10Hb
+         UoMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762941896; x=1763546696;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=BzmVBd94yQSJti8SDcl8a8CFiU9wieDpevKmKWqsxGk=;
+        b=ArOhE7pbe1lDnbVlzCsR3PQOYcc202rms9og2VUkk+4ANTSAreauCXKWVBeXLw1RhI
+         699R5IMYnFD+iZB0TPNvMM5/JR6X4KLxvSw76JEIVpPQ9c2Bso1t5vu5SnvBO+PVlES8
+         AhbTcY4080qkBpJiGLMJBfIfUeWsAv5ly24xuwUIVwoe8+egC3lhD/naXwPw5O/qlpCc
+         G9QOG/gv7gepXT2Fy+O5G6nakDXKTpFFJ8XS2BwsexvLcBqHwfhMmy8L5h9vQ8tbxjAV
+         TUOFcX6loR+ZSZSWspWpQdrD++rzs/N7Ai0LXA9B1dT6VKH/vnt6uvHSDMcPsBjbNn+n
+         pObw==
+X-Gm-Message-State: AOJu0YyLkPkwDxp9wF+Eq2qjiIt3KiuPogR1pq61C3cVxPEX58NLuPHw
+	vvGsRD1cxn8qbJ5PlbWAtdwo/vlmu8yaoJpkUoHg0C+eppUTgoQk0lcctynVcg==
+X-Gm-Gg: ASbGncsrAfaY+9ypltssKW/9v7hrkF5unRS9fog6K6+70WnswyydzUWESeMbIR0Yh3S
+	DGfxvA/axlq+yCDpJBHPjEBi/t9j+Q9pnD2eQh8bHvmknnhDtx5b2yEzxq4qb386xKj0I8yEiAw
+	StxfCN1FYHuea5nGxExyc1m2slkzVb05SNVIJOBhFmG474Q3wkS8RMIYmGwxPGmCa9wRjdl7IhA
+	F6M9HzPxnb6Fv1c5SzoRCQe//wgE0hwd9+hTpSZ5exQp9cFkhC23CFUUpiv8bc1QLbG8j6zPWuV
+	DbkcUrfC+F6beA0lqhcFHadUhT76pg5p0COhznaa4ESzi2Jm7hItLO67TD2eIKWjHP4jj8yHHEy
+	Q1sVzQns/rwC9Fy5P5zQxBgate9HoGTTB1vb4TVu8etuB94Zedp41oO2Nq6vkrio9qZmKArAVOZ
+	iZd/IOuKwMWfXGA306wkkoBg==
+X-Google-Smtp-Source: AGHT+IETrnOvOYtJ1Q0AXvkoB/+hlZRpl4L2EkBA20K8kPJZ2AugON1VyGwR6OWdkz053TdWl/XwNQ==
+X-Received: by 2002:a05:6000:1acf:b0:42b:3ee9:4771 with SMTP id ffacd0b85a97d-42b4bb9c65dmr2145324f8f.23.1762941896290;
+        Wed, 12 Nov 2025 02:04:56 -0800 (PST)
 Received: from fedora (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42abe63ba87sm33892185f8f.14.2025.11.12.01.52.23
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42ac679c5dcsm37276170f8f.44.2025.11.12.02.04.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Nov 2025 01:52:23 -0800 (PST)
+        Wed, 12 Nov 2025 02:04:56 -0800 (PST)
 From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tim moto-timo Orling <TicoTimo@gmail.com>,
 	Derek Straka <derek@asterius.io>,
 	Khem Raj <raj.khem@gmail.com>,
 	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-python][PATCH 1/2] python3-scikit-build-core: Use cmake from PATH
-Date: Wed, 12 Nov 2025 10:52:20 +0100
-Message-ID: <20251112095221.587048-1-zboszor@gmail.com>
+Subject: [meta-python][PATCH v2 2/2] python3-nanobind: Fix build
+Date: Wed, 12 Nov 2025 11:04:54 +0100
+Message-ID: <20251112100454.589682-2-zboszor@gmail.com>
 X-Mailer: git-send-email 2.51.1
+In-Reply-To: <20251112100454.589682-1-zboszor@gmail.com>
+References: <20251112100454.589682-1-zboszor@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 09:52:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121526
+ <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 10:05:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121529
 
-Added a patch to remove using CMAKE_BIN_DIR. Instead, use
-the fallback to find cmake from PATH.
+Fix the order of inherited classes, so the nanobuild python module
+actually gets built.
 
-It's a pre-requisite for building python3-nanobind correctly.
+Also, put the cmake files into the correct location, i.e.
+  ${libdir}/cmake/nanobind
+instead of
+  ${base_libdir}/cmake/python3-nanobind
+
+onnx 1.20.0rc1 uses nanobind and during its build it detects the
+presence of the python module, and wants to use the nanobind cmake
+module, both of which fail.
 
 Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
 ---
- ...e-from-PATH-instead-of-CMAKE_BIN_DIR.patch | 47 +++++++++++++++++++
- .../python3-scikit-build-core_0.11.6.bb       |  5 +-
- 2 files changed, 51 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-scikit-build-core/0001-Find-cmake-from-PATH-instead-of-CMAKE_BIN_DIR.patch
+ .../recipes-devtools/python/python3-nanobind_2.9.2.bb      | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-Find-cmake-from-PATH-instead-of-CMAKE_BIN_DIR.patch b/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-Find-cmake-from-PATH-instead-of-CMAKE_BIN_DIR.patch
-new file mode 100644
-index 0000000000..71319c0245
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-scikit-build-core/0001-Find-cmake-from-PATH-instead-of-CMAKE_BIN_DIR.patch
-@@ -0,0 +1,47 @@
-+From deb225d2aaeb44f6a4c01eab25624193351f7f58 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?=
-+ <zboszor@gmail.com>
-+Date: Wed, 12 Nov 2025 09:56:59 +0100
-+Subject: [PATCH] Find cmake from PATH instead of CMAKE_BIN_DIR
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+python3-cmake is patched to run cmake from PATH.
-+
-+Another detail called CMAKE_BIN_DIR is not patched out, but
-+scikit-build-core prefers using it in its program_search.py.
-+It also has a fallback to find cmake from PATH.
-+
-+Remove using CMAKE_BIN_DIR and keep the fallback.
-+
-+Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
-+Upstream-Status: Inappropriate [oe specific]
-+---
-+ src/scikit_build_core/program_search.py | 10 ----------
-+ 1 file changed, 10 deletions(-)
-+
-+diff --git a/src/scikit_build_core/program_search.py b/src/scikit_build_core/program_search.py
-+index 7995c14..f82cad3 100644
-+--- a/src/scikit_build_core/program_search.py
-++++ b/src/scikit_build_core/program_search.py
-+@@ -90,16 +90,6 @@ class Program(NamedTuple):
-+ 
-+ 
-+ def _get_cmake_path(*, module: bool = True) -> Generator[Path, None, None]:
-+-    """
-+-    Get the path to CMake.
-+-    """
-+-    if module:
-+-        with contextlib.suppress(ImportError):
-+-            # If a "cmake" directory exists, this will also ImportError
-+-            from cmake import CMAKE_BIN_DIR
-+-
-+-            yield Path(CMAKE_BIN_DIR) / "cmake"
-+-
-+     candidates = ("cmake3", "cmake")
-+     for candidate in candidates:
-+         cmake_path = shutil.which(candidate)
-+-- 
-+2.51.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-scikit-build-core_0.11.6.bb b/meta-python/recipes-devtools/python/python3-scikit-build-core_0.11.6.bb
-index 73cbf2a3f9..93a83ead65 100644
---- a/meta-python/recipes-devtools/python/python3-scikit-build-core_0.11.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-scikit-build-core_0.11.6.bb
-@@ -9,7 +9,10 @@ DEPENDS = "python3-hatch-vcs-native"
+diff --git a/meta-python/recipes-devtools/python/python3-nanobind_2.9.2.bb b/meta-python/recipes-devtools/python/python3-nanobind_2.9.2.bb
+index 85105fd196..cfbe9cea66 100644
+--- a/meta-python/recipes-devtools/python/python3-nanobind_2.9.2.bb
++++ b/meta-python/recipes-devtools/python/python3-nanobind_2.9.2.bb
+@@ -6,19 +6,20 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7646f9ee25e49eaf53f89a10665c568c"
  
- inherit pypi python_hatchling
+ SRC_URI[sha256sum] = "e7608472de99d375759814cab3e2c94aba3f9ec80e62cfef8ced495ca5c27d6e"
  
--SRC_URI += "file://0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch"
-+SRC_URI += " \
-+	file://0001-builder.py-Check-PYTHON_INCLUDE_DIR.patch \
-+	file://0001-Find-cmake-from-PATH-instead-of-CMAKE_BIN_DIR.patch \
-+"
- SRC_URI[sha256sum] = "5982ccd839735be99cfd3b92a8847c6c196692f476c215da84b79d2ad12f9f1b"
+-inherit pypi python_setuptools_build_meta cmake lib_package
++inherit pypi cmake python_setuptools_build_meta
  
- BBCLASSEXTEND = "native nativesdk"
+ EXTRA_OECMAKE += "-DNB_TEST=OFF"
+ 
+ DEPENDS += "\
++    python3-cmake-native \
+     python3-scikit-build-native \
+     python3-scikit-build-core-native \
+     ninja-native \
+ "
+ 
+ do_install:append() {
+-    install -d ${D}${base_libdir}/cmake/${PN}
+-    install -m 0644 ${S}/cmake/* ${D}${base_libdir}/cmake/${PN}/
++    install -d ${D}${libdir}/cmake/${PYPI_PACKAGE}
++    install -m 0644 ${S}/cmake/* ${D}${libdir}/cmake/${PYPI_PACKAGE}/
+ }
+ 
+ FILES:${PN} += "${prefix_native}/* ${prefix_native}/${PN}/* ${base_libdir}/cmake/*"
 -- 
 2.51.1
 
