@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A71ECD4842
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82BE0CD4843
 	for <webhook@archiver.kernel.org>; Wed, 12 Nov 2025 19:36:02 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6232.1762976154302265219
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6299.1762976153688634379
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Nov 2025 11:35:54 -0800
+ Wed, 12 Nov 2025 11:35:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VW0W984t;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-429c8632fcbso28663f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 11:35:54 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nIYddGc/;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-42b379cd896so25969f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 11:35:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762976153; x=1763580953; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1762976152; x=1763580952; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=MkaqTICaZQWLpoIaBBS6Fo2MgvUoIxM2ssonplC4gDE=;
-        b=VW0W984tW+37FmR7+2aIRYF+uU/ut2u7S2YEGmMkSzxQww0GEvu89XIl/hPanNuSuc
-         kZOuYPOanC1Tqc7lU3p4jqDVuSlZQ3+64KGHqiU3sLUnnlxlpARIOFME80s9O/0yuBdD
-         f9CorIJut0svMX6QFmLqpgmLw6mUDQkMKi0fXZ6w9acPT08C0+rMMllELAu2UZi/5+em
-         FVLvut4CsQJQPrMDwsTuQRU0/2acNV8hAvlr7oiXwrKeqzCdfZcIcgdcgqY0L+xMHGqZ
-         oHdRtVYPItBqJgzH4EqGX7ZlR2k+W9NoArqXTAegtrdh8SIXTugJafeK/S5RbkxsC3g0
-         UdMw==
+        bh=eWlVBXOSjRf0/IIqX7l9ygLYZPPZSeN0S3qnp2ypd30=;
+        b=nIYddGc/8mNtXs5CsSxFSHfX/1KrMPlAMW6GeVpFNOebyUSm6/kiTj29eGoaXdOXr9
+         p25O7fEpuZID4R+PTMeW+YS80RNXBDZzVFueWrd7AXRf34hhngkkAaX66xNrPYyASUWV
+         Yg9i4TF9KKvOkpPFCP8U8bFzj8KlPaljJrmQMHgPOb62/CHl3yg10QJRj6lOYIsXVPpT
+         EFKChUACIkcC+qhsE2bYbpRq54VPRFWPqW/wRzaIuCYNBSFT5fBakk7xrqe809IUMjNe
+         14kbiVFYYPPvT5SiZiewAGBu9BnaIFsjIhD1sf8hFXycQq6YncOIyQeNTFHXIICxSf2L
+         T2mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762976153; x=1763580953;
+        d=1e100.net; s=20230601; t=1762976152; x=1763580952;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=MkaqTICaZQWLpoIaBBS6Fo2MgvUoIxM2ssonplC4gDE=;
-        b=eowkWUIiapxGrQuWxDPZtemMlDQRc/og96Qrfc65dyT+IN6tQGkSXoxbaLk7WxMS8e
-         agmgBuP5nBPWEIwRrXBIYgW/EYaaphpmrNbzXkQu/3L6AiM+3K4Jzx7Re1WtYUGsXU62
-         BcAbWngQbII/HMUMDeuVqvoUK00oifks8jaSSeEG1jJrMTPHjeTv4Taf3gFM02QwJNIj
-         LXiW6ZnMpOQ8fjatnQztY5tA6x0BEMrKMxpSjgChu9YjDoxnrq2vygi3DSTpksnvUPp6
-         wTs5AGKblqatL/GzEK2tEm318CoHG7/QTz2dkZCexz5QGHXDmqpvPY3lfjtEYir4JaEu
-         3S8A==
-X-Gm-Message-State: AOJu0YzFcCnuohmdxJwgdyWGl1w4a1R+EIsTYVefjZkOUNWNMMFnvQX+
-	rmRE618RTAAtztjQ2WBmti4LUGfU4qftmIkd6lFzs7vamnk3y5jJzypZQfwnJBFy
-X-Gm-Gg: ASbGncvDVHWaf3L58fCPktuV0WA9ozuBivyOf6meSYKxuIwCRkMc4pqw50UzKPJJfpa
-	fZfs+6oLpa71xaWD4p1O7po24saxN5tQvD/X9l/i3OPwETjBuTgfcagbg2YebxYZFW757SmK3Qx
-	nqgkT046Ksv9TG1KcAyr+zQ8D9Pur2P5+q/o4XpWf6lJZBARkiPe5WxnJWHoeXsCTrLS7Q0YJbi
-	r0fdhkNDqVVeCYQ004Dzo3QKBDvR0qY1nZFS0MxNVmsEYrYUF8EmxB9fy2NWKaSTeBd7j/YqO3t
-	gUc/xVDiYaVTQfDGu73+BMUCKk40egJSSbR2njPDrWb5n63xiG2TOzgkSGi+6gD7+OezykyJRH9
-	80XYRQcPoggpV0FdNwvUE6/u+AK+0MBi1g269Wcp+pVHjk2iNEmrsz+c5Gala5ctp1D3StCRROo
-	in/aZQuKKf
-X-Google-Smtp-Source: AGHT+IEFUA2uMgG9NFqTOwRcsHmN7k1DEzwib871PQ53HUBp8fH3TpSMt8L8IkoL0Q0a33kdLIfafw==
-X-Received: by 2002:a05:6000:40cd:b0:42b:4803:75e8 with SMTP id ffacd0b85a97d-42b4bdb44c0mr2816082f8f.43.1762976152615;
-        Wed, 12 Nov 2025 11:35:52 -0800 (PST)
+        bh=eWlVBXOSjRf0/IIqX7l9ygLYZPPZSeN0S3qnp2ypd30=;
+        b=RiAOj5om2RulBFNXlOFOsWe9dAbOrDjy3c302ktV352vKH9sHQxylXxxdRoWl2k7DT
+         mt0SNxI8QkAoa7rRTvvcmBSZywGyhnZ4RYS499zeOqAV3MnJftJPLkHKsoCoejm6xEk/
+         i2ZDJ+u9ldbdw9R+u4JlIdA5E4862pFzkTzaK2QLZRY9kM6+AMwIeIUzzsPbQdqGYWZf
+         Ahx43aPv5x5GV5DY1RzcCmMCeKQU3hqiGTq1rvrA1xt+RSZNOF3Ur8k5CkWeNVW5e30H
+         V4aPZRXD2Rv2A4ol5+0GIfks7JCK4cwDvMCeq/gHxNmnP2o2A1B8GFiyjfD0J7pQwch7
+         djmg==
+X-Gm-Message-State: AOJu0YzBimmoYQ1tIcvIrlFAsAubeqNvq1sVUCAVJVLDj/3DAxvGq9IW
+	7tspU2klt/gxr+qb70cejt3++0TlTlHc159lg1VRWtxD5V5WbsguGDxf5Je8dEch
+X-Gm-Gg: ASbGncuBnblVRs+ARKOAEWlaEGK95GOPMgqOQQf3F+sOEfgDYR3U/BKF37Qo3GN2t01
+	FilSiAm/SJM5H8z1963EijTcbjRF3EaTHjIxnFNP562xlh2ppfx69nmF7oIAFzZYwaannEAXKn6
+	Hd+jUDE9LWFRibnu4LNDzD8fN9uJjEu/OhCsndpt8kBVQdLmMIVggqwRjWS2P3GEDyT9fL1xLxT
+	lXq51xIh9LkgEOCaJ8YYiCHEGS39eh2dYei6xJCSJdpECaa8PGNIbU20R1V7xS6c6XkTD0wodK5
+	KGg1yXmv83VhfvMvD105+WMNpyGCAVDzS73TbzeJYwUmXAjuEAxCaE1B+Wqn5Lth3X2YSndbg1h
+	AMGnPYwaTsEgZsLY6YL3KEIottJYTQlufHPxXFux4En6kvWCthHJz22RRLUKAHmzZiJY0QHuhTg
+	==
+X-Google-Smtp-Source: AGHT+IGi7ReIL1BLEaMLgUmK3tGxxO3NjrKead+A3Aa32tz2hRT7ouls3BoUPgRr6RhwJJMPIa8ytg==
+X-Received: by 2002:a05:6000:4310:b0:429:d391:642d with SMTP id ffacd0b85a97d-42b4bb8f01fmr4070229f8f.5.1762976151908;
+        Wed, 12 Nov 2025 11:35:51 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b2dd927c9sm28723881f8f.27.2025.11.12.11.35.52
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b2dd927c9sm28723881f8f.27.2025.11.12.11.35.51
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Nov 2025 11:35:52 -0800 (PST)
+        Wed, 12 Nov 2025 11:35:51 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][kirkstone][PATCH 13/21] mpd: fix SRC_URI branch
-Date: Wed, 12 Nov 2025 20:35:33 +0100
-Message-ID: <20251112193542.1589821-13-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 12/21] breakpad: update SRC_URI branch
+Date: Wed, 12 Nov 2025 20:35:32 +0100
+Message-ID: <20251112193542.1589821-12-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251112193542.1589821-1-skandigraun@gmail.com>
 References: <20251112193542.1589821-1-skandigraun@gmail.com>
@@ -68,27 +68,26 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 19:36:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121574
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121573
 
-The original branch was deleted, but the commit is still present in the
-master branch.
+Master branch was renamed to main
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.12.bb | 2 +-
+ meta-oe/recipes-devtools/breakpad/breakpad_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.12.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.12.bb
-index 13938444c8..0b4e9e3df1 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.12.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.23.12.bb
-@@ -18,7 +18,7 @@ DEPENDS += " \
-     fmt \
- "
+diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+index c752a10083..31120650b5 100644
+--- a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
++++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+@@ -30,7 +30,7 @@ SRCREV_gyp = "324dd166b7c0b39d513026fa52d6280ac6d56770"
  
--SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=v0.23.x;protocol=https \
-+SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https \
-            file://mpd.conf.in \
-            "
- SRCREV = "d91da9679801224847c30147f5914785b6f8f240"
+ SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main;protocol=https \
+            git://github.com/google/googletest.git;destsuffix=git/src/testing/gtest;name=gtest;branch=main;protocol=https \
+-           git://github.com/protocolbuffers/protobuf.git;destsuffix=git/src/third_party/protobuf/protobuf;name=protobuf;branch=master;protocol=https \
++           git://github.com/protocolbuffers/protobuf.git;destsuffix=git/src/third_party/protobuf/protobuf;name=protobuf;branch=main;protocol=https \
+            git://chromium.googlesource.com/linux-syscall-support;protocol=https;branch=main;destsuffix=git/src/third_party/lss;name=lss \
+            git://chromium.googlesource.com/external/gyp;protocol=https;destsuffix=git/src/tools/gyp;name=gyp;branch=master \
+            file://0001-include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch \
 
