@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 299B1CD37AD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38A16CD37B2
 	for <webhook@archiver.kernel.org>; Wed, 12 Nov 2025 19:36:02 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6231.1762976152100929214
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6235.1762976156503011578
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Nov 2025 11:35:52 -0800
+ Wed, 12 Nov 2025 11:35:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GI0DLFmI;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4777707a7c2so9879095e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 11:35:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=igyLHzLo;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-42b3108f41fso23146f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 11:35:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762976150; x=1763580950; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1762976155; x=1763580955; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Dr84gsqgQmLhy5W3AYhqoEoqgrXiPX7fU3xj/7TjbS8=;
-        b=GI0DLFmID//2OKiQnUft/cgpCAS8hNeGISBg6ph+Fm5+gZfVy2yHV+wxLTpWaUPy9C
-         xysy8KjmLulUckztm+jNOmCwoG4cfd8ec6rRU9LoeLT0eiof1GRLEKWcwHsN7pTLpK6j
-         VbJvuDoUGMgd2O8FU7TxM3rwNwvlMb8AJP7vG8uyeAPrlju4RSWj/3HvAKZY1o+DRQ43
-         CP6Z6frVTxDfta3uBP0zDhcfgu4BQydwymSATBjbPtDYph9J8OSeqw1l4gEPxIRzs5Ij
-         qVBS0AqFabHfuvefCez4VILAc4xUC+6N38ASDKondyfEzh5E3MAF+6JTh3u4xg5RsgbH
-         2+5Q==
+        bh=AEuAeDhkU9kVVZ8KCsYeorTiRdNu4pRXptvOZ2akqvY=;
+        b=igyLHzLoYfwHLU1/VvtIyXDAh76Nctcd3x47gbjwbf81+Y7qxZ4zExctVauZ4QeTq9
+         Bcw4h+TqhRLLk5ppA10E1OpcJ7F8xKUMXMTb0H4lEiOnhKK9mlnc7Uar0/sT0q37BLp9
+         yzrUSQbe+DUx3Lswo2dv94ozNIoknjCmFAsPtY3/sQxwW6VFeDBjYAy6uraulO5lrpte
+         BHhSl5DiBG0KEQ2MFgh4IVQlB36Sey1eHLXcjcQEnkFdvku376gANHwhnscrca9bHAV8
+         uoKKPaEkJ/X78LwpnvkhPcNxs+YeU6CFjI6eYtthheVhN9Dmpu4WC0SwF/KhVqvh7RDE
+         w/6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762976150; x=1763580950;
+        d=1e100.net; s=20230601; t=1762976155; x=1763580955;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=Dr84gsqgQmLhy5W3AYhqoEoqgrXiPX7fU3xj/7TjbS8=;
-        b=Dkeoiuh3cTAblqoQdJDbs338npCeU19PZIFXtsvUSsz6VhQDIijjTKaBDGrTy+yt3P
-         mYLumjYbbVOrNW24huiR0LBM1Rp+lCUp6CwdFDFvr4HvF5C/CRQPEJTEBgFbMjhQjgMe
-         uJVJYur1jrOHWa0EcvismaovBA2syNdTJIM0cN6eT+ghEUeTREumsfTKmvBdwsg9QS3Q
-         pmvsEv68e4pafbsgAa9HduAWgv9G0scmiFx8on79b8oTnVq8rEk1qa4Ooe7+ccjbdzRj
-         AMwIoslv82IUOMckrbg0liMgsNoKRXoBMR3/c1yVIWKVyVVzHQWiZ100SPvCv6YXokUg
-         XrqQ==
-X-Gm-Message-State: AOJu0YyYLNMaRHtrl+XjsDpeS8ZRNMfhaZwBBzmJBHfc1wbuJAnhq41i
-	OqY+lxpsapOnfu+eXBaHVTSs/TXKCgHAhckxIdYJAJzbSx752fHISp9LersYHUdX
-X-Gm-Gg: ASbGncvf07vLPBB1c5jtjJPMtudxvFpVsXBgReWWZe3M1NezciRkug2uy8Q4Y6DCz0D
-	zLTOvJ0F4otVIK5Zion1ODCOxyXeS+LAXaouKBiY0sHtevnQSXX4XmbwRjh8B6ZKR7eUegOB74/
-	J81YXsDfGSDCY5wKh1Xx10V9P2AjGnHeBVztEXWfHmC343AbQFS/yx96guV3zNzATW22FTqs1Og
-	KLs/QQDDPeY886c488UwTpUWJ82eLSEgbrpnip0tCBhBAs6rTOR5jtm2lkaBuAzuWk5PNwvOVf1
-	VeZfAdO7yum6qFrXneeyLTWqPahM772OEKbSEDSC+pbtiLljiYrt3vmtDMjiY+0RDHuZF13UmIb
-	tsHvWeRgzD9YiahnIOBFul0q4xCpQl8VWDdLGnJMQay1lYzg3sA/7LLNK7IFKGVSEKl5+VRA2ag
-	==
-X-Google-Smtp-Source: AGHT+IHX/lfeNOJJWBQlYBWoRZMRJJIomwurPQPL6iUV2SmVSHq4/Y3VXV8FWQGoyQh5V5NBcNdn7g==
-X-Received: by 2002:a05:600c:2e48:b0:477:14ba:28da with SMTP id 5b1f17b1804b1-4778bccfb0dmr3973615e9.5.1762976150357;
-        Wed, 12 Nov 2025 11:35:50 -0800 (PST)
+        bh=AEuAeDhkU9kVVZ8KCsYeorTiRdNu4pRXptvOZ2akqvY=;
+        b=MU2qXA7zBD5dvfGgzwd/b0pJxWGwVtwgvc8vrMR9pF9SkgVZlMo4RxuMX0xg27r1P6
+         LqVk7Yb0y5jXmJ5zI6bSr5w+XE6p9NkP1XifYEZ0nIjIZp/Nd2Zmc8E5GZx6TYQ4Lr5l
+         vCzOcMzfxz6AXquIRFyoa4b2FybKk9stizAvEundfek9bEh1UVVrsmhOZk30hj4+CcFz
+         g3wdAbFd8yGYXiIJtHmhKdlYxRD2MQZYnP0j3wdqsQREjXAY5wgGckr27fKB86dlXOEa
+         BAiNKRcB3tyK6VQBUJ1IPt4xl0fHLh/G9wWyDDkLa0y88M4i9NxXOxbeYZnI/EaOoLtN
+         5C9g==
+X-Gm-Message-State: AOJu0YxdFYeotwwcKp6ILsGYqVJFVZQFMq4WT5Ad6vZWGsohd56hU474
+	4oNILrPtUJd6Bkc0/VrK9Yu0gYd742qmT1ZvG9KcP6ARxsxhlUGIANbrZhS9i33Q
+X-Gm-Gg: ASbGncvG39CFkIdNRwp9O4VAg9X7XK/0fBccH7ZZ5TmmJQcABGYoqBMyR48qNO0dpaX
+	IkwujZ894mHjCQIC9KMi3KL+rkShfczAf2w3inq1Ic2k75UHclEYgDIGcDObjIlAPmm7clFmhZg
+	cosbKxL8WY8B65tspiugU0PrLjEdiPzFeUh4188Yuv4OjBpS4tvh0vr5+UEyHTpWT73Wd03drvA
+	aHUEcYrNVec4JPOCQEbyAtD0l1I6sEmM8ttCEWfrCxp+KpZzFc0b66DuU09sNehNaeKolSJJLIi
+	e9vye5QeqS+Y+TY6hpYTbkg32p5imBw/fPua9j1LjfTSswA0z+44WGOc0K2ijtDF6SZi0X/D3zR
+	97iw+pvUXEM/HJSsbAyVNtweK3lDCrSPVPfRrY7xpg9P3mrvaUjIy659IxP0v/UCv13LXH+ScCK
+	ojii32dUWrk2A+gxy6QTc=
+X-Google-Smtp-Source: AGHT+IExeFr15I6cty5wpxAZrKvud0AEGiA1nt6iPlvt5rF2crUne61jiSeSQlzA04iHSgjmQNkR2A==
+X-Received: by 2002:a05:6000:430e:b0:42b:47da:c313 with SMTP id ffacd0b85a97d-42b4bb8f0d9mr4281050f8f.3.1762976154794;
+        Wed, 12 Nov 2025 11:35:54 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b2dd927c9sm28723881f8f.27.2025.11.12.11.35.48
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b2dd927c9sm28723881f8f.27.2025.11.12.11.35.54
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Nov 2025 11:35:48 -0800 (PST)
+        Wed, 12 Nov 2025 11:35:54 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 10/21] unicode-ucd: Updates due to license.txt updates
-Date: Wed, 12 Nov 2025 20:35:30 +0100
-Message-ID: <20251112193542.1589821-10-skandigraun@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH 16/21] nng: Rename default branch of github.com:nanomsg/nng.git
+Date: Wed, 12 Nov 2025 20:35:36 +0100
+Message-ID: <20251112193542.1589821-16-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251112193542.1589821-1-skandigraun@gmail.com>
 References: <20251112193542.1589821-1-skandigraun@gmail.com>
@@ -68,41 +68,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 19:36:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121571
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121577
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Jeroen Knoops <jeroen.knoops@philips.com>
 
-This is downloaded and does not have version, so we have to
-update it whenever upstream update it. The copyright year
-is changed this time.
+Default branch is renamed from `master` to `main`. Commitshas are the
+same.
 
+Signed-off-by: Jeroen Knoops <jeroen.knoops@philips.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6121f2907aff77839bfdff9fdedb7e9bee6b1628)
+(cherry picked from commit 58679b6a515b51d28c480836ad598fca6f0cc655)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-networking/recipes-connectivity/nanomsg/nng_1.5.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
-index f0f3a66e07..a4952cf97d 100644
---- a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
-+++ b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
-@@ -1,14 +1,14 @@
- SUMMARY = "Unicode Character Database"
- HOMEPAGE = "https://unicode.org/ucd/"
+diff --git a/meta-networking/recipes-connectivity/nanomsg/nng_1.5.2.bb b/meta-networking/recipes-connectivity/nanomsg/nng_1.5.2.bb
+index ab2907110d..438998693d 100644
+--- a/meta-networking/recipes-connectivity/nanomsg/nng_1.5.2.bb
++++ b/meta-networking/recipes-connectivity/nanomsg/nng_1.5.2.bb
+@@ -5,7 +5,7 @@ SECTION = "libs/networking"
  LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/license.html;beginline=43;endline=83;md5=cf6c4777b109bcee78b6083a21be6192"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/license.txt;md5=ea17640caddb659394df50e5db6efd69"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a41e579bb4326c21c774f8e51e41d8a3"
  
- SRC_URI = " \
-     https://www.unicode.org/Public/zipped/${PV}/UCD.zip;name=ucd;subdir=ucd;downloadfilename=unicode-ucd-${PV}.zip \
--    https://www.unicode.org/license.html;name=license \
-+    https://www.unicode.org/license.txt;name=ucd-license \
- "
- SRC_URI[ucd.sha256sum] = "033a5276b5d7af8844589f8e3482f3977a8385e71d107d375055465178c23600"
--SRC_URI[license.sha256sum] = "e415e1f2188ef2b1a5f7e6ee8c60cefe8a49dacd8b96c9025cad5013985129e4"
-+SRC_URI[ucd-license.sha256sum] = "abf84f74dea2812799e1dbef7f0581adf7db244881e4febb8684f441568da0ad"
+-SRC_URI = "git://github.com/nanomsg/nng.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/nanomsg/nng.git;branch=main;protocol=https"
+ SRCREV = "169221da8d53b2ca4fda76f894bee8505887a7c6"
  
- inherit allarch
- 
+ S = "${WORKDIR}/git"
 
