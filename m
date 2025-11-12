@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29969CD37AB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61501CD37BD
 	for <webhook@archiver.kernel.org>; Wed, 12 Nov 2025 19:36:02 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6302.1762976155774852983
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6236.1762976160195133021
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Nov 2025 11:35:56 -0800
+ Wed, 12 Nov 2025 11:36:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MhoYwsLU;
- spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-42b2e9ac45aso32488f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 11:35:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YCDmlQGc;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4775ae77516so646965e9.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 11:35:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762976154; x=1763580954; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1762976158; x=1763580958; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=KKwgkn+lF1z/ocbg/d8AeDgwYodY/2s2tlPPiS/Ypjg=;
-        b=MhoYwsLUckFY7tAco3TiUkynBgnl7aSO/u7NL0GPYIySWQmsnv+at4AFyhw9sZfssk
-         Cfqz4G9o6i3KK4sqMiZrd8XWQFUQDVVJkiz5XYoUpPIlLtynG0j49BKTON7soFjS9C3O
-         B8r0xF65UNW2C/rc47KkKhTxPnVDsq+SwrJDRcLAZN4eDa4Z2BFqO6YrpkV7I/KtsF9r
-         /6oNMIDR5TKfe/0ARDHCaZfwzjlVmzipJJjCDyQimfnC7EBBIm9e7uLEEISgntgvKKBo
-         dbe9WwBog+iGTkUl1tJzuIFDk8s6Kj5RTqburDq1rj7FK0IKKdKCQ/uGJiKK6RYOU6Ys
-         vi2w==
+        bh=o6JpNkOg8SjL0wg5zLEbzIP0qgU12jEO0ibLrJxBRL0=;
+        b=YCDmlQGcDeKtxC7IrPomDaX9nMrz4IgJ1iCwFY7O3SM7QBUBZro8zcEQxlbpTf4uQ8
+         IAAA8IhtHGufhfKrP6ucKDDxovUFBz47KATE1kHE4Wpr8lbUFMloW6CjbLmfR8Kio4Ko
+         3RXzbpxPshnHUUTO2pN0kkt55LSnQ+wMWVf0EE/gPwjLHP7Wjvd/GQekPY87wN5DAk9A
+         IebTdSwINmZTOSFaKHKkxjJcfb3YUVoo65MmQDXyuV8ieopbbPrNbqNvZ1lhIHbShKtZ
+         IOWcTRod7C/+W++0rLutqYdbvZqnCK0+iVlmGWaQGipsx8jKg7ZaHU/VCb9TKeDYQxnq
+         B3Lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762976154; x=1763580954;
+        d=1e100.net; s=20230601; t=1762976158; x=1763580958;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=KKwgkn+lF1z/ocbg/d8AeDgwYodY/2s2tlPPiS/Ypjg=;
-        b=M1glK246xHS37dC65OZEYHL6RnOruwt7mQRWtT3jItZkE3GPbXBg3W049ZnVQt2eGX
-         UvqUzk+iA8Q2fu926hv6X6wRhBT5166NC2vZAMlRM9vVgbUT+PSqvQBhQEtxjuExWhXT
-         NDE3GIM4ePexxP4B8E9MRWgxVvpkJkDldlLSq2rYX0CM5193Khq16wjClTGg5Mb9v+UD
-         SSeatfylNK+FOrFGzJ3vYn/xVMhRX2BGsgfOiKCgdMRS7aCZLg85H3/aZssD1Rjz+KEi
-         QdEPpCFiQzOELeSj9hZ6yNYknxkkgK5zBj/IVqLMs1iqVlJ89OAu1Dd7uDKnyXfAU46w
-         z4cg==
-X-Gm-Message-State: AOJu0YyDrvPhWO7otcjKx1fXH9pqIx49K683NqTZuWbxbdFR023u7mo/
-	WsJlHjgfn2dDD2Ce3UwWP7szmFx90GRbJDSwJRfg6PykX61MmtJg2h3uhBrnVHiq
-X-Gm-Gg: ASbGncs3MxcTX8ze/GEG+9ag5I+ZKcr/6KWuh6ejEdkCwjj7njKp84r+5fkhhWnvK5+
-	ZYPCmNTuGENR/npcHPS1fG3xVYtxMySdTi4ONBksYwIhI90A9aEyIdmM85rFoO/QWE9cTtEmniR
-	0xyrVnvml/+lVcaeVP/jRed5FjlSWdedj+OxkPBhC7gNMNyrkH3noLqD9z6hTWI3uiDqAJAWMYa
-	APvgFVdBnze31ZdarJTRBb9lxYRwZzzAK2w+p6pG81+gxCIZj3Pwj12//jlALhxANtC/sY59ONB
-	qQjN6mI+yHuu1vlCwpOpauCNi/HuzGwT7FHQ7c57qRMIctJ3WSekQu4zNF25lqiMeqMuCYMizOU
-	SQWnB1qFLpKrXGgK3WEz/Gp1fuvzqNT9D/4mbbqQ3bp0P905r723U3hLWsi4eWGfFzgp/LNmOWA
+        bh=o6JpNkOg8SjL0wg5zLEbzIP0qgU12jEO0ibLrJxBRL0=;
+        b=kRccpDQwWDQTIAQk91sMjkSnvU/m3aI8oMU1ju9C6GMgEvIMWKVG4q3mCextLPspA1
+         m4+O9W6DvDNI5ko+iZM6z9m8Bx+UqIYqvUv72+d3IceGO3FEV33ddAN+oqg9HD603idl
+         HdbJf//TdlflaN+Cmlr+8+WzfCmeC+Q20jQoL6md3b5CtpRjoNrvMd93x60HvGjAVLMl
+         mSTpXYdnkzY/Yj3pNaETRjkLITSV/p5VaHMWPnw4ZAOSSPLc069ysTBYlrGsClTrkwFZ
+         qSaKnfe36dyQEi4DeJQdz+p2oYVLSagBXOnOiy9wrAr+Iiy/I13h8e8K2w9PAfsD+YPJ
+         cwzA==
+X-Gm-Message-State: AOJu0YyhX4X0oPXur8qgvRyJMHt0rkTR3Jqv2KpCy/Bt+ACwzV855J5K
+	+7A7Ow+1167q4757SQJJtCiG/MIRXob4IKwOeHWyzdqSZjIngkz72FeuZvt+RQwM
+X-Gm-Gg: ASbGncu28Cvets28lY14JvAcbPHWIoVzDAW2nIdjz2AyMOngjT17DVGDL2BzOBr5DIr
+	oQ/xGoS406+F7kD1PZbyBLYdZ8Cbiczekb9FEBDvoQCMd8LcNbY5ZhJW8WwcjKXE8qv5vclbYiO
+	X8eTwZywedtAyyMnFXo/Vj+fJ1bFWhV4FbmjVw2fCBEqAMza5UaTs3Ho8IU1/jZP0KMpxxc0xqo
+	+VL7/xUibCG2g9DnXjC7NenPZYT2YiIXTo0W+i+qG+Kx4/lYMnCpJYvuJs91WWPHjbULUK9v2Jq
+	5KOnQMyhnR3cqu+s5IK/8C0qrev/hYNYiVABw/HNln1aTNZWsGzWaz1XzFz4Ci4tOT8m1f91UtP
+	+J7p9YYBSFMN9bXm6sGwkJqb14jPeqx6LtvFb3eBG6ut4rO5W0YHTnzeFj6yvd+6ZHRgVlFIozA
 	==
-X-Google-Smtp-Source: AGHT+IHoDg5A8YGK5c2KORk24hbyVlgOFLFNEpaR1WPjUM5xfPgCmztKtrhtcqtKm3Ti00KGxdyVig==
-X-Received: by 2002:a05:6000:2506:b0:429:ba48:4d8 with SMTP id ffacd0b85a97d-42b4bb9e6e8mr3923770f8f.25.1762976154091;
-        Wed, 12 Nov 2025 11:35:54 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF5VkUfL2SdlT1ExE6KmWln/COwFpxjMpj2p629lmfs1soiqf2ARMaWIfft5PpIWpWmFmMtKQ==
+X-Received: by 2002:a05:600c:3587:b0:459:e398:ed89 with SMTP id 5b1f17b1804b1-477870450ffmr46846895e9.1.1762976158509;
+        Wed, 12 Nov 2025 11:35:58 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b2dd927c9sm28723881f8f.27.2025.11.12.11.35.53
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b2dd927c9sm28723881f8f.27.2025.11.12.11.35.57
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Nov 2025 11:35:53 -0800 (PST)
+        Wed, 12 Nov 2025 11:35:58 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 15/21] libvdpau: fix SRC_URI
-Date: Wed, 12 Nov 2025 20:35:35 +0100
-Message-ID: <20251112193542.1589821-15-skandigraun@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 20/21] python3-behave: update SRC_URI branch
+Date: Wed, 12 Nov 2025 20:35:40 +0100
+Message-ID: <20251112193542.1589821-20-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251112193542.1589821-1-skandigraun@gmail.com>
 References: <20251112193542.1589821-1-skandigraun@gmail.com>
@@ -68,31 +68,25 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 19:36:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121576
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121581
 
-The old repository was moved to a new freedesktop gitlab instance.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0e79b3a9079a36b5c32de17b5b9a794ac2247e2c)
-
-Removed "tag" tag from SRC_URI for Kirkstone
+Master branch was renamed to main.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb | 2 +-
+ meta-python/recipes-devtools/python/python3-behave_1.2.6.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb b/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb
-index db3c045588..3ee56b0a23 100644
---- a/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb
-+++ b/meta-oe/recipes-graphics/vdpau/libvdpau_1.5.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=83af8811a28727a13f04132cc33b7f58"
- DEPENDS = "virtual/libx11 libxext xorgproto"
+diff --git a/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb b/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
+index 1dcc7d218e..caca282707 100644
+--- a/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
++++ b/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d950439e8ea6ed233e4288f5e1a49c06"
  
- SRCREV = "79f1506a3307d3275b0fdfb2e110c173f68e6f78"
--SRC_URI = "git://anongit.freedesktop.org/vdpau/libvdpau;branch=master"
-+SRC_URI = "git://gitlab.freedesktop.org/vdpau/libvdpau.git;branch=master;protocol=https"
+ PV .= "+git${SRCREV}"
+ SRCREV = "9520119376046aeff73804b5f1ea05d87a63f370"
+-SRC_URI += "git://github.com/behave/behave;branch=master;protocol=https"
++SRC_URI += "git://github.com/behave/behave;branch=main;protocol=https"
  
  S = "${WORKDIR}/git"
  
