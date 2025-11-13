@@ -1,259 +1,328 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A32E1CD98E2
-	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 20:54:43 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3165.1763067278726154575
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 683C3CD98F7
+	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 22:30:24 +0000 (UTC)
+Received: from mail-yx1-f50.google.com (mail-yx1-f50.google.com [74.125.224.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5263.1763073018756212896
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Nov 2025 12:54:39 -0800
+ Thu, 13 Nov 2025 14:30:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CFv95kSA;
- spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-b728a43e410so199874066b.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 12:54:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VKEIQsWB;
+ spf=pass (domain: gmail.com, ip: 74.125.224.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f50.google.com with SMTP id 956f58d0204a3-640d0895d7cso1744499d50.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 14:30:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763067277; x=1763672077; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ls0p1i7HzqamS2Ki4ICfjzYIY+d8mOFB5ftEOfXAWGA=;
-        b=CFv95kSA/vpEHmdw+qiJQb2nDKJ0s1hTKMkOxvJzWsKrVINv70Z+m+JDeznN49lboa
-         EFQhY95okG0VcjB7GgIHI/KoqcDYKIWpnKRkbv/Nl0fVo69DO3wTU3ye4vjRV4BikvuY
-         SSe9H1aQ1MguWStnkIl/qbuDflnySEFosdTjA9Mu0wYklsnSOwyyiCAL99Dw5XTEvifp
-         XdQP53gUdDP0wmnqiTVoUjj6JcUz6CKek6X55u4JALBkzb0+STL1dqOU5RMoyOeBqdgu
-         oUa8/eNA14gNh46uT9W4L4HvI7UhNonz9kPmS2cgOtrHw5I1rPdoNDrZTRnBexBxhpR7
-         krNg==
+        d=gmail.com; s=20230601; t=1763073018; x=1763677818; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=6Sflj34pTnVRuIFZo6Ntck3zpD148s+py5RZJtO1lrM=;
+        b=VKEIQsWBmntN95FO5BM40xEX7dOmRGACQsV3Vt1bqIz5RHV3vnGF9z1+eAzgQGxbht
+         GMVG8Ezc9M7fzwR5dl2jJAdPvsAAcaMlne5Aprm4upBWe+Ia6qqW1BFMT0/cjSfXfheL
+         +3glGrQQnL595R2F+MxxknxVYEm5lUpQpP0pahHuvqcuKQMnsj8jg/i3Lz6EiFfYGzoa
+         Dedp5KoP9cWI1PZqTNnBsNIbfJqUikfGPEtl4gKbimXrjGqNWGCq+7STx4RkjUNkhtMa
+         ZwTV7NqQY/+MRO79cW0Wyogb1i+yH8Gw867zSThSJupqzkFJzyeDt1ZIIMBNGCpwaNqP
+         lCIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763067277; x=1763672077;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1763073018; x=1763677818;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ls0p1i7HzqamS2Ki4ICfjzYIY+d8mOFB5ftEOfXAWGA=;
-        b=kFU/kVq3F50fJGjKL0Tg8uO5QCXD8xq1MKiE4fY3wStsPKJrs3slk+UZSk6DR5Yl7J
-         pAfjhZke9pcycVP3bwm8CiZSPwruHfr2/JE7cqtQ9chT6WK4CTDBO0LsB0s1GZPJcmHE
-         ZEz5/gZYgt+cD5yQuJnVPlsVpfaKFcyKD1van5wCSBkFCdDcLyaxXXllncE9YGS86JGt
-         I3OFjE/j1tRtfUeofeXymRqtaH/VRcF9G/aG4YYHVcgm/T0wMZilXGuWYp2bw655k/5n
-         Oaik/szMUeLN2DqthEF19JVWgi/sp7SO2/vfuZCx2AWf7YBu+sxN/l6MkN1RrV4k1uz8
-         EIQA==
-X-Gm-Message-State: AOJu0YxhumGrSnknixNAh8p+l4c0jMEdtoRxiyQjfQJftSOc3BB3j8RF
-	tSfPwNXsLCFDz5VSFi+VGhuGWgUKEr34wH0wXmICHhgAD9FkET8DOaHOtGVlag==
-X-Gm-Gg: ASbGncvlZH+ZpgHLY0BiyS9navbvcU+F2wU6G+KGgfyFAc7qqrDUdUkqjuD6st55nVJ
-	nW5lsTDHn9YWu8NESDjMgRWstJv+t1WTFXa4FrRg72MVOn3o5N30zMGRq/2cKlVjZcfggkp93U2
-	to+TX9adbrNdyeQ1qr3MeZqWYKDIfk7axOylqHJtEll/HfDi6cL0B7MpgyPN1ZVn1itwmOfEoDa
-	UHZnyf7aog0X1MCz8eNdzohmfOJw4Ai+lzBYtGwjCFfi3qDYD5ZpJJcuHPNZRh6dKKb4LltC5zn
-	+8Ia0J8cMVMxcN1s0CIdX+qvIvbkDU0yUlSXKJ1soDLvNttavm/ke1crRdWI7OoIhNwSqsL/Ipi
-	UuFqEExOKF1Llcv4zeUdrUv7jXWgpYLj7E7oztaNdiqJVVJQim7+nuqGhx/bzzYEeyFKbXbpjxw
-	XFjcLseo6XN2ntUw==
-X-Google-Smtp-Source: AGHT+IFFmcr97JUhHn1O38+URMfC5NmjVpZ9+3kNwqmbaEFn34ONPpEHdUpL4VH5FXAjbJjXD1xWEQ==
-X-Received: by 2002:a17:907:2d92:b0:b73:51f3:a801 with SMTP id a640c23a62f3a-b7367bc52bamr57579866b.47.1763067276830;
-        Thu, 13 Nov 2025 12:54:36 -0800 (PST)
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b734fa81331sm239112166b.9.2025.11.13.12.54.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Nov 2025 12:54:36 -0800 (PST)
-From: martin.jansa@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-python][PATCH 1/2] python3-checksec-py, python3-pylddwrap, python3-icontract: add recipes
-Date: Thu, 13 Nov 2025 21:54:30 +0100
-Message-ID: <20251113205431.3489223-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.51.2
+        bh=6Sflj34pTnVRuIFZo6Ntck3zpD148s+py5RZJtO1lrM=;
+        b=Mb9vehIEfEWz0HpY2hmfYLKVpE3usuLowLXZI5j4hgjxrw6J3u8ndey2KfebQej2vG
+         uVmzp/H7C0K6cuFNtEU9nfPdO9fIb2EzBkiu93PGlWSgSm16auVFJXoo3zYfwJISFQmo
+         YXRdmJqNPbvJP03KAKjyyxzBNSKXU0rFl9EmW/1LZ0lFj5c3alVfyrzPEgAwZ2tsk4HK
+         CAFPwiU9QOYxEvZFWLYK1RE8+iKRqDe3vNtIaHOAHd78YfPs7GpRkKFdCv4lwBzYllKv
+         m24B3ZsQmYHorkJgPS/3q/+aaKldlbdaLiat/3/7uD2w/zGZuGtPm69gpqcw1P9ThU0u
+         +nUA==
+X-Gm-Message-State: AOJu0YwEvoW6Af3evFOxIC3TobdHA+TFMpTGO1Opcl0ERmRJEGTA+vgN
+	1qAcPr084sWKtxTISYFqC3n23JWwp6WM9BOMJ4O7JVyzqpLRtLVFJqLgxiPgZH9C3EcagKlx8G1
+	XmBnZCNYu8X4J9ouBmG+h/tzHaYgj1PQ=
+X-Gm-Gg: ASbGncsQZMjxS1uwv1KjIRxFI80+WtJw8wOGD3CsgA+vv2LpKPlm40s5+HKRt0jkcVH
+	5YcgoiRVPhjmrHfyCcN5uTooorvbZU5tTPsmWinyaa7hMAS3TTGfk6dJlTpjh94XJVQoYX4e5ft
+	6oJQpxKwFufm9ajE6yGDLj6Rpf+T8TuhzxxpS9I6gq/O+X3oick6CLayLbxOwjoYVeQpftjHIVm
+	BmFc1vu00saFyXxga2Xq08xezoFrNUCikx0e8oVspngeFT1Zal7jT2URtUcFHy+kpUFZ6lEBpya
+	0BxGvVQoA2jY2wg7wd/9Qkq6jjeHxKxs/PVl7i2EqqGGSIJG8+nrwSpfmV9+W6qpy6NyDo6meis
+	OmJMKQX6jwCcuBMe7oVAQWWgiXidZmCIxAC8=
+X-Google-Smtp-Source: AGHT+IGcDlBxnLufWQk/okUd7rgSUgBF5KrugvIWdXRVU0OBcrh0rb+WVz6PG4a5DbgBH0HSMIk3BdAzNDFQ3GKmbMI=
+X-Received: by 2002:a05:690e:11c8:b0:640:ce59:128b with SMTP id
+ 956f58d0204a3-6410d06e011mr3801385d50.2.1763073017865; Thu, 13 Nov 2025
+ 14:30:17 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251113120611.2590707-1-skandigraun@gmail.com> <20251113120611.2590707-2-skandigraun@gmail.com>
+In-Reply-To: <20251113120611.2590707-2-skandigraun@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 13 Nov 2025 14:29:51 -0800
+X-Gm-Features: AWmQ_bkveJvev7U92VL9I1A6gjujlMT0F2moaCx56vfaPGYgnbzG4r5gcLqg0Ik
+Message-ID: <CAMKF1sqg+noB8XmacL5Sezp-_0=3kG_W05RSgh5Eybktwm=voQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 2/4] audiofile: add ptest support
+To: skandigraun@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000f168700643816c72"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 20:54:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121658
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 22:30:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121660
 
-From: Martin Jansa <martin.jansa@gmail.com>
+--000000000000f168700643816c72
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-they were sent for meta-security long time ago in 2021:
-https://lists.yoctoproject.org/g/yocto/message/54470
-but never merged there, now there are lief, docopt, rich, asttokens
-already in meta-python and checksec-py depends on lief version, e.g.
-https://github.com/Wenzel/checksec.py/commit/976d530867756d1393189708aa98308b07b1f3b2
-is needed to fixcompatibility with newer lief currently in meta-python
+Its a good addition but fails to build with clang.
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
----
- ...1-main-Add-option-to-ignore-symlinks.patch | 81 +++++++++++++++++++
- .../python/python3-checksec-py_0.7.5.bb       | 23 ++++++
- .../python/python3-icontract_2.6.6.bb         | 14 ++++
- .../python/python3-pylddwrap_1.2.2.bb         | 26 ++++++
- 4 files changed, 144 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-checksec-py/0001-main-Add-option-to-ignore-symlinks.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-checksec-py_0.7.5.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-icontract_2.6.6.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-pylddwrap_1.2.2.bb
+https://errors.yoctoproject.org/Errors/Details/888035/
 
-diff --git a/meta-python/recipes-devtools/python/python3-checksec-py/0001-main-Add-option-to-ignore-symlinks.patch b/meta-python/recipes-devtools/python/python3-checksec-py/0001-main-Add-option-to-ignore-symlinks.patch
-new file mode 100644
-index 0000000000..3a99ba33e3
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-checksec-py/0001-main-Add-option-to-ignore-symlinks.patch
-@@ -0,0 +1,81 @@
-+From b540967b87394d855c26375ac5a9a7265f265053 Mon Sep 17 00:00:00 2001
-+From: Maximilian Blenk <Maximilian.Blenk@bmw.de>
-+Date: Fri, 2 Jul 2021 14:42:25 +0200
-+Subject: [PATCH] main: Add option to ignore symlinks
-+
-+When analyzing a complete rootfs (which might not be the rootfs of the
-+analyzing system) symlinks within that rootfs might be broken. In
-+particular absolute symlinks. However, if by chance such a symlink
-+currently points to a valid binary in your system, this binary pointed
-+to is analyzed. This commit adds the possibility to ignore symlinks to
-+files (symlinks to dirs are already ignored by default). This allows to
-+solve the issue described above, and if the whole rootfs is analyzed
-+there shouldn't be a loss of information (because all the binaries will
-+be analyzed anyway). Additionally, this also saves some time when
-+performing the analysis.
-+
-+Upstream-Status: Submitted [https://github.com/Wenzel/checksec.py/pull/106]
-+---
-+ checksec/__main__.py | 12 +++++++-----
-+ 1 file changed, 7 insertions(+), 5 deletions(-)
-+
-+diff --git a/checksec/__main__.py b/checksec/__main__.py
-+index a14862f..931d850 100644
-+--- a/checksec/__main__.py
-++++ b/checksec/__main__.py
-+@@ -8,6 +8,7 @@ Options:
-+     -w WORKERS --workers=WORKERS    Specify the number of process pool workers [default: 4]
-+     -j --json                       Display results as JSON
-+     -s LIBC --set-libc=LIBC         Specify LIBC library to use to check for fortify scores (ELF)
-++    -i --ignore-symlinks            Ignore symlinks to files
-+     -d --debug                      Enable debug output
-+     -h --help                       Display this message
-+ """
-+@@ -27,18 +28,18 @@ from .pe import PEChecksecData, PESecurity, is_pe
-+ from .utils import lief_set_logging
-+ 
-+ 
-+-def walk_filepath_list(filepath_list: List[Path], recursive: bool = False) -> Iterator[Path]:
-++def walk_filepath_list(filepath_list: List[Path], recursive: bool = False, ignore_symlinks: bool = False) -> Iterator[Path]:
-+     for path in filepath_list:
-+         if path.is_dir() and not path.is_symlink():
-+             try:
-+                 if recursive:
-+                     for f in os.scandir(path):
-+-                        yield from walk_filepath_list([Path(f)], recursive)
-++                        yield from walk_filepath_list([Path(f)], recursive, ignore_symlinks)
-+                 else:
-+                     yield from (Path(f) for f in os.scandir(path))
-+             except OSError:
-+                 continue
-+-        elif path.is_file():
-++        elif path.is_file() and (not ignore_symlinks or not path.is_symlink()):
-+             yield path
-+ 
-+ 
-+@@ -75,6 +76,7 @@ def main(args):
-+     json = args["--json"]
-+     recursive = args["--recursive"]
-+     libc_path = args["--set-libc"]
-++    ignore_symlinks = args["--ignore-symlinks"]
-+ 
-+     # logging
-+     formatter = "%(asctime)s %(levelname)s:%(name)s:%(message)s"
-+@@ -110,7 +112,7 @@ def main(args):
-+             # we need to consume the iterator once to get the total
-+             # for the progress bar
-+             check_output.enumerating_tasks_start()
-+-            count = sum(1 for i in walk_filepath_list(filepath_list, recursive))
-++            count = sum(1 for i in walk_filepath_list(filepath_list, recursive, ignore_symlinks))
-+             check_output.enumerating_tasks_stop(count)
-+             with ProcessPoolExecutor(
-+                 max_workers=workers, initializer=worker_initializer, initargs=(libc_path,)
-+@@ -119,7 +121,7 @@ def main(args):
-+                     check_output.processing_tasks_start()
-+                     future_to_checksec = {
-+                         pool.submit(checksec_file, filepath): filepath
-+-                        for filepath in walk_filepath_list(filepath_list, recursive)
-++                        for filepath in walk_filepath_list(filepath_list, recursive, ignore_symlinks)
-+                     }
-+                     for future in as_completed(future_to_checksec):
-+                         filepath = future_to_checksec[future]
-diff --git a/meta-python/recipes-devtools/python/python3-checksec-py_0.7.5.bb b/meta-python/recipes-devtools/python/python3-checksec-py_0.7.5.bb
-new file mode 100644
-index 0000000000..82ef304849
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-checksec-py_0.7.5.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Recipe to embedded the Python PiP Package checksec_py"
-+HOMEPAGE = "https://pypi.org/project/checksec_py"
-+LICENSE = "GPL-3.0-only"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
-+
-+PR = "r0"
-+
-+inherit pypi python_poetry_core
-+PYPI_PACKAGE = "checksec_py"
-+SRC_URI[sha256sum] = "892854f95d17a76d8f45a5c0cc597b9f1bebced3fffb9c7205d0baaf5eace886"
-+
-+SRC_URI += " \
-+    file://0001-main-Add-option-to-ignore-symlinks.patch \
-+"
-+
-+RDEPENDS:${PN} += " \
-+    python3-docopt \
-+    python3-lief \
-+    python3-pylddwrap \
-+    python3-rich \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-icontract_2.6.6.bb b/meta-python/recipes-devtools/python/python3-icontract_2.6.6.bb
-new file mode 100644
-index 0000000000..5075a1a6a1
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-icontract_2.6.6.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Recipe to embedded the Python PiP Package icontract"
-+HOMEPAGE = "https://pypi.org/project/icontract"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=1d4a9b1f6b84bedf7a38843931e0dd57"
-+
-+PR = "r0"
-+
-+inherit pypi setuptools3
-+PYPI_PACKAGE = "icontract"
-+SRC_URI[sha256sum] = "c1fd55c7709ef18a2ee64313fe863be2668b53060828fcca3525051160c92691"
-+
-+RDEPENDS:${PN} += "python3-asttokens"
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python3-pylddwrap_1.2.2.bb b/meta-python/recipes-devtools/python/python3-pylddwrap_1.2.2.bb
-new file mode 100644
-index 0000000000..045ccb9f1e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pylddwrap_1.2.2.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "Recipe to embedded the Python PiP Package pylddwrap"
-+HOMEPAGE = "https://pypi.org/project/pylddwrap"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=48fd6c978d39a38b3a04f45a1456d0fa"
-+
-+inherit pypi setuptools3
-+PYPI_PACKAGE = "pylddwrap"
-+SRC_URI[sha256sum] = "a70437fea7bca647c0e98161e1006ef49970267999c571b499760f1c43c6ba10"
-+
-+PR = "r0"
-+
-+RDEPENDS:${PN} += "python3-icontract"
-+
-+BBCLASSEXTEND = "native"
-+
-+do_install:append() {
-+    # similarly to https://gitlab.com/akuster/meta-security/-/commit/0fd8e0f8cae612010bafecbff77ed9bb6f647a2d#4e154e295e639fd6c298ca644c75291eb99e0a57_0_16
-+    # but delete it from prefix and delete requirements.txt as well.
-+    # ERROR: QA Issue: python3-pylddwrap: Files/directories were installed but not shipped in any package:
-+    # /usr/README.rst
-+    # /usr/requirements.txt
-+    # /usr/LICENSE
-+    # Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-+    # python3-pylddwrap: 3 installed and not shipped files. [installed-vs-shipped]
-+    rm -f ${D}${prefix}/README.rst ${D}${prefix}/requirements.txt ${D}${prefix}/LICENSE
-+}
+On Thu, Nov 13, 2025 at 4:06=E2=80=AFAM Gyorgy Sarvari via lists.openembedd=
+ed.org
+<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
+
+> It's under 15 seconds to execute it.
+>
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> ---
+>  .../include/ptest-packagelists-meta-oe.inc     |  1 +
+>  .../audiofile/audiofile_0.3.6.bb               | 18 +++++++++++++++++-
+>  .../audiofile/files/run-ptest                  | 14 ++++++++++++++
+>  3 files changed, 32 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-multimedia/audiofile/files/run-ptest
+>
+> diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> index 1d5932c315..96e0d87bd4 100644
+> --- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> +++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> @@ -8,6 +8,7 @@
+>  # ptests which take less than ~30s each
+>  PTESTS_FAST_META_OE =3D "\
+>      asio \
+> +    audiofile \
+>      cli11 \
+>      cmocka \
+>      cunit \
+> diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+> b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+> index fd80729bd2..f734a41dfc 100644
+> --- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+> +++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+> @@ -10,6 +10,7 @@ LIC_FILES_CHKSUM =3D
+> "file://COPYING;md5=3D4fbd65380cdd255951079008b364516c \
+>
+>  SRC_URI =3D " \
+>      ${GNOME_MIRROR}/audiofile/0.3/${BP}.tar.xz \
+> +    file://run-ptest \
+>      file://0001-fix-negative-shift-constants.patch \
+>      file://0002-fix-build-on-gcc6.patch \
+>      file://0003-fix-CVE-2015-7747.patch \
+> @@ -23,7 +24,7 @@ SRC_URI =3D " \
+>  "
+>  SRC_URI[sha256sum] =3D
+> "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782"
+>
+> -inherit autotools lib_package pkgconfig
+> +inherit autotools lib_package pkgconfig ptest
+>
+>  CXXFLAGS +=3D "-std=3Dc++14"
+>
+> @@ -33,3 +34,18 @@ DEPENDS =3D " \
+>      libogg \
+>      flac \
+>  "
+> +
+> +do_compile_ptest(){
+> +    oe_runmake -C gtest libgtest.la
+> +    cd test
+> +    # Query the TESTS variable value, remove the $(...) parts from it,
+> +    # compile as make target along with FLAC (which is an optional test)
+> +    oe_runmake `make -p | grep "^TESTS =3D " | sed 's/$([^)]*)//g' | cut
+> -d=3D -f2` FLAC
+> +}
+> +
+> +do_install_ptest(){
+> +    install -d ${D}${PTEST_PATH}/test
+> +    for t in test/.libs/*; do
+> +        install $t ${D}${PTEST_PATH}/test/
+> +    done
+> +}
+> diff --git a/meta-oe/recipes-multimedia/audiofile/files/run-ptest
+> b/meta-oe/recipes-multimedia/audiofile/files/run-ptest
+> new file mode 100644
+> index 0000000000..cdf1677bde
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/audiofile/files/run-ptest
+> @@ -0,0 +1,14 @@
+> +#!/bin/sh
+> +
+> +RES=3D0
+> +cd test
+> +for t in *; do
+> +  if ./$t; then
+> +    echo PASS: $t
+> +  else
+> +    echo FAIL: $t
+> +    RES=3D1
+> +  fi
+> +done
+> +
+> +exit $RES
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#121646):
+> https://lists.openembedded.org/g/openembedded-devel/message/121646
+> Mute This Topic: https://lists.openembedded.org/mt/116272850/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000f168700643816c72
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Its a good addition but fails to build with clang.<div><br=
+></div><div><a href=3D"https://errors.yoctoproject.org/Errors/Details/88803=
+5/">https://errors.yoctoproject.org/Errors/Details/888035/</a></div></div><=
+br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Thu, Nov 13, 2025 at 4:06=E2=80=AFAM Gyorgy Sarvari via =
+<a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;sk=
+andigraun=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@l=
+ists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
+4);padding-left:1ex">It&#39;s under 15 seconds to execute it.<br>
+<br>
+Signed-off-by: Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gmail.com" =
+target=3D"_blank">skandigraun@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0.../include/ptest-packagelists-meta-oe.inc=C2=A0 =C2=A0 =C2=A0|=C2=A0=
+ 1 +<br>
+=C2=A0.../audiofile/<a href=3D"http://audiofile_0.3.6.bb" rel=3D"noreferrer=
+" target=3D"_blank">audiofile_0.3.6.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0| 18 +++++++++++++++++-<br>
+=C2=A0.../audiofile/files/run-ptest=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 | 14 ++++++++++++++<br>
+=C2=A03 files changed, 32 insertions(+), 1 deletion(-)<br>
+=C2=A0create mode 100644 meta-oe/recipes-multimedia/audiofile/files/run-pte=
+st<br>
+<br>
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/=
+conf/include/ptest-packagelists-meta-oe.inc<br>
+index 1d5932c315..96e0d87bd4 100644<br>
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc<br>
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc<br>
+@@ -8,6 +8,7 @@<br>
+=C2=A0# ptests which take less than ~30s each<br>
+=C2=A0PTESTS_FAST_META_OE =3D &quot;\<br>
+=C2=A0 =C2=A0 =C2=A0asio \<br>
++=C2=A0 =C2=A0 audiofile \<br>
+=C2=A0 =C2=A0 =C2=A0cli11 \<br>
+=C2=A0 =C2=A0 =C2=A0cmocka \<br>
+=C2=A0 =C2=A0 =C2=A0cunit \<br>
+diff --git a/meta-oe/recipes-multimedia/audiofile/<a href=3D"http://audiofi=
+le_0.3.6.bb" rel=3D"noreferrer" target=3D"_blank">audiofile_0.3.6.bb</a> b/=
+meta-oe/recipes-multimedia/audiofile/<a href=3D"http://audiofile_0.3.6.bb" =
+rel=3D"noreferrer" target=3D"_blank">audiofile_0.3.6.bb</a><br>
+index fd80729bd2..f734a41dfc 100644<br>
+--- a/meta-oe/recipes-multimedia/audiofile/<a href=3D"http://audiofile_0.3.=
+6.bb" rel=3D"noreferrer" target=3D"_blank">audiofile_0.3.6.bb</a><br>
++++ b/meta-oe/recipes-multimedia/audiofile/<a href=3D"http://audiofile_0.3.=
+6.bb" rel=3D"noreferrer" target=3D"_blank">audiofile_0.3.6.bb</a><br>
+@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D4fbd65380=
+cdd255951079008b364516c \<br>
+<br>
+=C2=A0SRC_URI =3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0${GNOME_MIRROR}/audiofile/0.3/${BP}.tar.xz \<br>
++=C2=A0 =C2=A0 file://run-ptest \<br>
+=C2=A0 =C2=A0 =C2=A0file://0001-fix-negative-shift-constants.patch \<br>
+=C2=A0 =C2=A0 =C2=A0file://0002-fix-build-on-gcc6.patch \<br>
+=C2=A0 =C2=A0 =C2=A0file://0003-fix-CVE-2015-7747.patch \<br>
+@@ -23,7 +24,7 @@ SRC_URI =3D &quot; \<br>
+=C2=A0&quot;<br>
+=C2=A0SRC_URI[sha256sum] =3D &quot;ea2449ad3f201ec590d811db9da6d02ffc5e87a6=
+77d06b92ab15363d8cb59782&quot;<br>
+<br>
+-inherit autotools lib_package pkgconfig<br>
++inherit autotools lib_package pkgconfig ptest<br>
+<br>
+=C2=A0CXXFLAGS +=3D &quot;-std=3Dc++14&quot;<br>
+<br>
+@@ -33,3 +34,18 @@ DEPENDS =3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0libogg \<br>
+=C2=A0 =C2=A0 =C2=A0flac \<br>
+=C2=A0&quot;<br>
++<br>
++do_compile_ptest(){<br>
++=C2=A0 =C2=A0 oe_runmake -C gtest <a href=3D"http://libgtest.la" rel=3D"no=
+referrer" target=3D"_blank">libgtest.la</a><br>
++=C2=A0 =C2=A0 cd test<br>
++=C2=A0 =C2=A0 # Query the TESTS variable value, remove the $(...) parts fr=
+om it,<br>
++=C2=A0 =C2=A0 # compile as make target along with FLAC (which is an option=
+al test)<br>
++=C2=A0 =C2=A0 oe_runmake `make -p | grep &quot;^TESTS =3D &quot; | sed &#3=
+9;s/$([^)]*)//g&#39; | cut -d=3D -f2` FLAC<br>
++}<br>
++<br>
++do_install_ptest(){<br>
++=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}/test<br>
++=C2=A0 =C2=A0 for t in test/.libs/*; do<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 install $t ${D}${PTEST_PATH}/test/<br>
++=C2=A0 =C2=A0 done<br>
++}<br>
+diff --git a/meta-oe/recipes-multimedia/audiofile/files/run-ptest b/meta-oe=
+/recipes-multimedia/audiofile/files/run-ptest<br>
+new file mode 100644<br>
+index 0000000000..cdf1677bde<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-multimedia/audiofile/files/run-ptest<br>
+@@ -0,0 +1,14 @@<br>
++#!/bin/sh<br>
++<br>
++RES=3D0<br>
++cd test<br>
++for t in *; do<br>
++=C2=A0 if ./$t; then=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 <br>
++=C2=A0 =C2=A0 echo PASS: $t=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 <br>
++=C2=A0 else=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
++=C2=A0 =C2=A0 echo FAIL: $t=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 <br>
++=C2=A0 =C2=A0 RES=3D1=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 <br>
++=C2=A0 fi=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0<br>
++done=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0<br>
++exit $RES<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#121646): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/121646" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/121646</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116272850/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/116272850/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000f168700643816c72--
 
