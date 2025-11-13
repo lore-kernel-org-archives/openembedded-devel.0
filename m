@@ -1,344 +1,100 @@
-Return-Path: <emailaddress.ashish@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0504CD4F5F
-	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 08:38:56 +0000 (UTC)
-Subject: Re: [meta-oe][scarthgap][PATCH v2] [Backport from master] imagemagick: adds ptest for imagemagick recipe
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15553CD5BA8
+	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 09:16:07 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.19704.1763025362624240306
+ for <openembedded-devel@lists.openembedded.org>;
+ Thu, 13 Nov 2025 01:16:02 -0800
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Wi87m236;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4711810948aso3674295e9.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 01:16:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1763025361; x=1763630161; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/gJK6icGyyL/6kWU/ZHGn7Qvj/bMoq5SZE6Dx/Izc18=;
+        b=Wi87m236gBMpVt8KembKLEBupWiToG1cvh8Pw4y1LJzJDQeu1O5KPsRlFquh4ZP7V7
+         Ij5Py4j70yIsTOz9AFBAil9pNYy9aCije78Alsv9qM5/j/9FKhNlsxeMOHPKEdi69mB3
+         3MHzpJyH9LKf3k0Q+lW0bgjmYwE4IoFTLNLWFYFNeeP6XUYkrXeg1nUePGmDD0ofYlHD
+         C9RCGGS3iREicj3X6HvoVAG+JZOQkglZuVyVJ7PqAGOOqACkp5MZOjq4N5bblBR3hFTX
+         2Z6eaRGzQlMXhGnGngaAksJclrSNh9eWeInUUBbpPqBOktrrSpZ+NhT8C5A7DrFuqrwz
+         6vNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763025361; x=1763630161;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/gJK6icGyyL/6kWU/ZHGn7Qvj/bMoq5SZE6Dx/Izc18=;
+        b=EEuC4/4HWpE44dqONi172R8gGdd/R+7wXzQxtc1+NdS1FG48yXcMH4SME65neWEE2/
+         2vnK7oilKs3cB8juN5zLEAe9Y2Ol5G8vAfmJa5khIjLCOj1w/KOvJIFimzcGFEkKRiRB
+         aEcCS6EnTcrNe6HrMTJP92e0WpGNC8zuxzeWUJ1r8Q3NMTlmQKr4SObXfP1+hMs7LH+g
+         NqvgM24tNJDG5gcdHi4vlBc3x8DIVjzHT0YSA/pO54hu57xzevPA5KQmlR61LT2aASyo
+         eWlS2SjIUgEDqSRb8EBYA5dh69gzkayDdqnKQCNmFqrs0nxO/xw+dTSR1AfeBGdrj6tx
+         HiVQ==
+X-Gm-Message-State: AOJu0YziIzrBURJT80xuyeQFBDUT85HIlgSNBMqKI522ui6MjOxvQ/lr
+	bANXWB2sTUZ1NUpKf4F8WN5yWmQqc/Vo9fUBXjF2NPsGapkUFHzcF22y/IHTr402
+X-Gm-Gg: ASbGnctX1jHkluoHafsEeufFrVqVqprwCrLjK2YeNm2xOSDt83OJx0001IEmkwxADIZ
+	zbclymCwSxEu+eZtYew3LuQPhtSkJXZYodcYZ3RSD9rAMw++UJFHMMH5E8CkP/rgfqOWoP4/WOs
+	V66bzJYik+TaKIhFi53Fk4kYEJrIMFG9IFtNeGG5igC8Y3VJnSSHwXj62FZ4muqIhUhYecr5smg
+	uU6OmfyDX+5ix2akKCeWafehRzqZTsMrnM3q6uTl5QzA8s7cMcXpnA3ZKMo/+YrWSs2tT3eLpWu
+	uSTSUlt7qNC6DXS7cU8Z4IQUx5V+uSFdsgrVIiJMHsIf77FiH47adlEGfJ1BvDzWzRSDilfw2Dd
+	ceU36kJr3lFEoIy25+OkVnlXaoCIydfMriU3/1A9ISc6on9SXcbQqPQvsmwfE0eqFe31ji6oXh1
+	VuslG6LdD9
+X-Google-Smtp-Source: AGHT+IFb28mHxpW+uQdIHbVcV9XZTo4RbqkIwelHvUbPC32yyhl8Hdww57rojQcdu5ay77e5hqrkVQ==
+X-Received: by 2002:a05:600c:350d:b0:471:989:9d85 with SMTP id 5b1f17b1804b1-47787095d77mr56376815e9.19.1763025360769;
+        Thu, 13 Nov 2025 01:16:00 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4778c8a992bsm23758715e9.16.2025.11.13.01.16.00
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Nov 2025 01:16:00 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: "Ashish Mishra" <emailaddress.ashish@gmail.com>
-X-Originating-Location: IN (203.197.190.100)
-X-Originating-Platform: Linux Chrome 139
-User-Agent: GROUPS.IO Web Poster
+Subject: [meta-oe][kirkstone][PATCH] redis: update test error message in CVE patch
+Date: Thu, 13 Nov 2025 10:15:59 +0100
+Message-ID: <20251113091559.1188351-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.2
 MIME-Version: 1.0
-Date: Thu, 13 Nov 2025 00:38:54 -0800
-References: <20251113082329.1279411-1-ashishkumar.mishra@bmwtechworks.in>
-In-Reply-To: <20251113082329.1279411-1-ashishkumar.mishra@bmwtechworks.in>
-Message-ID: <436791.1763023134858507513@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="05U2YNi5xkeyCmEbKoUD"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 08:38:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121641
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 09:16:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121642
 
---05U2YNi5xkeyCmEbKoUD
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+The expected error message has changed between versions - update the test
+in the patch accordingly.
 
-Hi Anuj ,
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../recipes-extended/redis/redis-7.0.13/CVE-2024-51741.patch  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-I understand that generally new ptest directly may not be taken in LTS.
-But would request to consider this patch as this change improves confidence=
- in the ImageMagick package in the scarthgap branch without introducing new=
- features or risks.
-
-1) We have this in master @ 96b97c0c6490b713b559a4e82bd699a2ebe357d3
-
-2) No functional changes are introduced to the core package.
-This doesn't alter existing runtime behaviour or ABI/API in the LTS/stable =
-branch.
-
-3) This ptest will help users validate the imagemagick on scarthgap improvi=
-ng test coverage for C.I
-
-4) Tested locally on qemu :
-
-root@qemux86-64:~#
-root@qemux86-64:~#
-root@qemux86-64:~# ptest-runner imagemagick
-START: ptest-runner
-2025-11-13T08:16
-BEGIN: /usr/lib/imagemagick/ptest
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-ImageMagick ptest: Runtime Validation
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-[DEBUG] Launching test script /usr/lib/imagemagick/ptest/imagemagick-ptest.=
-sh
-[DEBUG] Starting ImageMagick Ptest with 16x16 pixels
-[DEBUG] Generated raw RGB base.rgb for test case
-[DEBUG] base.png =C2=A0generated from base.rgb
-[DEBUG] roundtrip.rgb generated from base.png
-[PASS] RGB data identical after PNG round-trip
-[DEBUG] PNG file info:
-Colorspace: sRGB
-Type: Palette
-Depth: 8/4-bit
-[DEBUG] Cleaning up temporary files
-[DEBUG] Cleanup exit=3D0
-[DEBUG]: imagemagick-ptest.sh sucessfull
-PASS: imagemagick-ptest.sh
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-[SUMMARY] Total: 1 | PASS: 1 | FAIL: 0
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-DURATION: 1
-END: /usr/lib/imagemagick/ptest
-2025-11-13T08:16
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
-root@qemux86-64:~#
-
-Thanks ,
-Ashish
-
---05U2YNi5xkeyCmEbKoUD
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div>Hi Anuj ,&nbsp;</div>
-<div>&nbsp;</div>
-<div>I understand that generally new ptest directly may not be taken in LTS=
-.&nbsp;</div>
-<div>But would request to consider this patch as <span style=3D"color: #333=
-333; font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sa=
-ns', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI E=
-moji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-style: =
-normal; font-variant-ligatures: normal; font-variant-caps: normal; font-wei=
-ght: 400; letter-spacing: normal; orphans: 2; text-align: start; text-inden=
-t: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-st=
-roke-width: 0px; white-space: pre-wrap; background-color: #ffffff; text-dec=
-oration-thickness: initial; text-decoration-style: initial; text-decoration=
--color: initial; display: inline !important; float: none;"><span style=3D"c=
-olor: #333333; font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue'=
-, 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', '=
-Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; fo=
-nt-style: normal; font-variant-ligatures: normal; font-variant-caps: normal=
-; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; =
-text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webk=
-it-text-stroke-width: 0px; white-space: pre-wrap; background-color: #ffffff=
-; text-decoration-thickness: initial; text-decoration-style: initial; text-=
-decoration-color: initial; display: inline !important; float: none;">this c=
-hange improves confidence in the ImageMagick package in the scarthgap branc=
-h without introducing new features or risks.</span></span></div>
-<div>&nbsp;</div>
-<div><span style=3D"color: #333333; font-family: system-ui, 'Segoe UI', Rob=
-oto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, '=
-Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'=
-; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font=
--variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2=
-; text-align: start; text-indent: 0px; text-transform: none; widows: 2; wor=
-d-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; back=
-ground-color: #ffffff; text-decoration-thickness: initial; text-decoration-=
-style: initial; text-decoration-color: initial; display: inline !important;=
- float: none;"><span style=3D"color: #333333; font-family: system-ui, 'Sego=
-e UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, san=
-s-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Co=
-lor Emoji'; font-size: 16px; font-style: normal; font-variant-ligatures: no=
-rmal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; =
-orphans: 2; text-align: start; text-indent: 0px; text-transform: none; wido=
-ws: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-=
-wrap; background-color: #ffffff; text-decoration-thickness: initial; text-d=
-ecoration-style: initial; text-decoration-color: initial; display: inline !=
-important; float: none;">1) We have this in master @ <span style=3D"color: =
-#333333; font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Not=
-o Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe =
-UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; font-sty=
-le: normal; font-variant-ligatures: normal; font-variant-caps: normal; font=
--weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-i=
-ndent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-tex=
-t-stroke-width: 0px; white-space: pre-wrap; background-color: #ffffff; text=
--decoration-thickness: initial; text-decoration-style: initial; text-decora=
-tion-color: initial; display: inline !important; float: none;">96b97c0c6490=
-b713b559a4e82bd699a2ebe357d3 </span></span></span></div>
-<div>&nbsp;</div>
-<div>
-<div><span style=3D"color: #333333; font-family: system-ui, 'Segoe UI', Rob=
-oto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, '=
-Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'=
-; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font=
--variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2=
-; text-align: start; text-indent: 0px; text-transform: none; widows: 2; wor=
-d-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; back=
-ground-color: #ffffff; text-decoration-thickness: initial; text-decoration-=
-style: initial; text-decoration-color: initial; display: inline !important;=
- float: none;">2) <span style=3D"color: #333333; font-family: system-ui, 'S=
-egoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, =
-sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto=
- Color Emoji'; font-size: 16px; font-style: normal; font-variant-ligatures:=
- normal; font-variant-caps: normal; font-weight: 400; letter-spacing: norma=
-l; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; w=
-idows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: p=
-re-wrap; background-color: #ffffff; text-decoration-thickness: initial; tex=
-t-decoration-style: initial; text-decoration-color: initial; display: inlin=
-e !important; float: none;">No functional changes are introduced to the cor=
-e package.</span></span></div>
-<div><span style=3D"color: #333333; font-family: system-ui, 'Segoe UI', Rob=
-oto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, '=
-Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'=
-; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font=
--variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2=
-; text-align: start; text-indent: 0px; text-transform: none; widows: 2; wor=
-d-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; back=
-ground-color: #ffffff; text-decoration-thickness: initial; text-decoration-=
-style: initial; text-decoration-color: initial; display: inline !important;=
- float: none;"><span style=3D"color: #333333; font-family: system-ui, 'Sego=
-e UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, san=
-s-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Co=
-lor Emoji'; font-size: 16px; font-style: normal; font-variant-ligatures: no=
-rmal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; =
-orphans: 2; text-align: start; text-indent: 0px; text-transform: none; wido=
-ws: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-=
-wrap; background-color: #ffffff; text-decoration-thickness: initial; text-d=
-ecoration-style: initial; text-decoration-color: initial; display: inline !=
-important; float: none;"> &nbsp; &nbsp;&nbsp;This doesn't alter existing ru=
-ntime behaviour or ABI/API in the LTS/stable branch.</span></span></div>
-<div>&nbsp;</div>
-</div>
-<div><span style=3D"color: #333333; font-family: system-ui, 'Segoe UI', Rob=
-oto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, '=
-Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'=
-; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font=
--variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2=
-; text-align: start; text-indent: 0px; text-transform: none; widows: 2; wor=
-d-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; back=
-ground-color: #ffffff; text-decoration-thickness: initial; text-decoration-=
-style: initial; text-decoration-color: initial; display: inline !important;=
- float: none;">3) This ptest will help users validate the imagemagick on sc=
-arthgap </span><span style=3D"color: #333333; font-family: system-ui, 'Sego=
-e UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, san=
-s-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Co=
-lor Emoji'; font-size: 16px; font-style: normal; font-variant-ligatures: no=
-rmal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; =
-orphans: 2; text-align: start; text-indent: 0px; text-transform: none; wido=
-ws: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-=
-wrap; background-color: #ffffff; text-decoration-thickness: initial; text-d=
-ecoration-style: initial; text-decoration-color: initial; display: inline !=
-important; float: none;"><span style=3D"color: #333333; font-family: system=
--ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', =
-Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'=
-, 'Noto Color Emoji'; font-size: 16px; font-style: normal; font-variant-lig=
-atures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing=
-: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: =
-none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-s=
-pace: pre-wrap; background-color: #ffffff; text-decoration-thickness: initi=
-al; text-decoration-style: initial; text-decoration-color: initial; display=
-: inline !important; float: none;">improving test coverage for C.I</span></=
-span></div>
-<div><span style=3D"color: #333333; font-family: system-ui, 'Segoe UI', Rob=
-oto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, '=
-Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'=
-; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font=
--variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2=
-; text-align: start; text-indent: 0px; text-transform: none; widows: 2; wor=
-d-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; back=
-ground-color: #ffffff; text-decoration-thickness: initial; text-decoration-=
-style: initial; text-decoration-color: initial; display: inline !important;=
- float: none;"><span style=3D"color: #333333; font-family: system-ui, 'Sego=
-e UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, san=
-s-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Co=
-lor Emoji'; font-size: 16px; font-style: normal; font-variant-ligatures: no=
-rmal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; =
-orphans: 2; text-align: start; text-indent: 0px; text-transform: none; wido=
-ws: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-=
-wrap; background-color: #ffffff; text-decoration-thickness: initial; text-d=
-ecoration-style: initial; text-decoration-color: initial; display: inline !=
-important; float: none;"> </span></span></div>
-<div><span style=3D"color: #333333; font-family: system-ui, 'Segoe UI', Rob=
-oto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, '=
-Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'=
-; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font=
--variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2=
-; text-align: start; text-indent: 0px; text-transform: none; widows: 2; wor=
-d-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; back=
-ground-color: #ffffff; text-decoration-thickness: initial; text-decoration-=
-style: initial; text-decoration-color: initial; display: inline !important;=
- float: none;"><span style=3D"color: #333333; font-family: system-ui, 'Sego=
-e UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, san=
-s-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Co=
-lor Emoji'; font-size: 16px; font-style: normal; font-variant-ligatures: no=
-rmal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; =
-orphans: 2; text-align: start; text-indent: 0px; text-transform: none; wido=
-ws: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-=
-wrap; background-color: #ffffff; text-decoration-thickness: initial; text-d=
-ecoration-style: initial; text-decoration-color: initial; display: inline !=
-important; float: none;"><span style=3D"color: #333333; font-family: system=
--ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', =
-Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'=
-, 'Noto Color Emoji'; font-size: 16px; font-style: normal; font-variant-lig=
-atures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing=
-: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: =
-none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-s=
-pace: pre-wrap; background-color: #ffffff; text-decoration-thickness: initi=
-al; text-decoration-style: initial; text-decoration-color: initial; display=
-: inline !important; float: none;">4) Tested locally on qemu :</span></span=
-></span></div>
-<div><span style=3D"color: #333333; font-family: system-ui, 'Segoe UI', Rob=
-oto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, '=
-Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'=
-; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font=
--variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2=
-; text-align: start; text-indent: 0px; text-transform: none; widows: 2; wor=
-d-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; back=
-ground-color: #ffffff; text-decoration-thickness: initial; text-decoration-=
-style: initial; text-decoration-color: initial; display: inline !important;=
- float: none;"><span style=3D"color: #333333; font-family: system-ui, 'Sego=
-e UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, san=
-s-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Co=
-lor Emoji'; font-size: 16px; font-style: normal; font-variant-ligatures: no=
-rmal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; =
-orphans: 2; text-align: start; text-indent: 0px; text-transform: none; wido=
-ws: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-=
-wrap; background-color: #ffffff; text-decoration-thickness: initial; text-d=
-ecoration-style: initial; text-decoration-color: initial; display: inline !=
-important; float: none;"><span style=3D"color: #333333; font-family: system=
--ui, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', =
-Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'=
-, 'Noto Color Emoji'; font-size: 16px; font-style: normal; font-variant-lig=
-atures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing=
-: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: =
-none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-s=
-pace: pre-wrap; background-color: #ffffff; text-decoration-thickness: initi=
-al; text-decoration-style: initial; text-decoration-color: initial; display=
-: inline !important; float: none;"><br /></span></span></span>
-<div>root@qemux86-64:~#&nbsp;<br />root@qemux86-64:~#&nbsp;<br />root@qemux=
-86-64:~# ptest-runner imagemagick<br />START: ptest-runner<br />2025-11-13T=
-08:16<br />BEGIN: /usr/lib/imagemagick/ptest<br />=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D<br />ImageMagick ptest: Runtime Validation<br />=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D</div>
-<div>[DEBUG] Launching test script /usr/lib/imagemagick/ptest/imagemagick-p=
-test.sh<br />[DEBUG] Starting ImageMagick Ptest with 16x16 pixels&nbsp;<br =
-/>[DEBUG] Generated raw RGB base.rgb for test case<br />[DEBUG] base.png &n=
-bsp;generated from base.rgb<br />[DEBUG] roundtrip.rgb generated from base.=
-png<br />[PASS] RGB data identical after PNG round-trip<br />[DEBUG] PNG fi=
-le info:<br />&nbsp; Colorspace: sRGB<br />&nbsp; Type: Palette<br />&nbsp;=
- Depth: 8/4-bit<br />[DEBUG] Cleaning up temporary files<br />[DEBUG] Clean=
-up exit=3D0<br />[DEBUG]: imagemagick-ptest.sh sucessfull&nbsp;<br />PASS: =
-imagemagick-ptest.sh</div>
-<div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br />[SUMMARY] Total: 1 | =
-PASS: 1 | FAIL: 0<br />=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D</div>
-<div>DURATION: 1<br />END: /usr/lib/imagemagick/ptest<br />2025-11-13T08:16=
-<br />STOP: ptest-runner<br />TOTAL: 1 FAIL: 0<br />root@qemux86-64:~#&nbsp=
-;</div>
-<div>&nbsp;</div>
-<span style=3D"color: #333333; font-family: system-ui, 'Segoe UI', Roboto, =
-'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple=
- Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; fon=
-t-size: 16px; font-style: normal; font-variant-ligatures: normal; font-vari=
-ant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; tex=
-t-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spa=
-cing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; backgroun=
-d-color: #ffffff; text-decoration-thickness: initial; text-decoration-style=
-: initial; text-decoration-color: initial; display: inline !important; floa=
-t: none;"><span style=3D"color: #333333; font-family: system-ui, 'Segoe UI'=
-, Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-ser=
-if, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color E=
-moji'; font-size: 16px; font-style: normal; font-variant-ligatures: normal;=
- font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orpha=
-ns: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2=
-; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap;=
- background-color: #ffffff; text-decoration-thickness: initial; text-decora=
-tion-style: initial; text-decoration-color: initial; display: inline !impor=
-tant; float: none;">Thanks ,<br />Ashish </span></span></div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-
---05U2YNi5xkeyCmEbKoUD--
+diff --git a/meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2024-51741.patch b/meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2024-51741.patch
+index e3a43fe896..b8e5bf4444 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2024-51741.patch
++++ b/meta-oe/recipes-extended/redis/redis-7.0.13/CVE-2024-51741.patch
+@@ -71,7 +71,7 @@ index d836f9c..0b83b89 100644
+ +        $r2 auth key-permission-RW password
+ +        catch {$r2 SET x 5} err
+ +        set err
+-+    } {NOPERM No permissions to access a key}
+++    } {NOPERM this user has no permissions to access one of the keys used as arguments}
+ +
+ +    test {Validate read and write permissions format - no pattern} {
+ +        # No pattern results with R/W access to no key (currently we accept this syntax error)
+@@ -79,7 +79,7 @@ index d836f9c..0b83b89 100644
+ +        $r2 auth key-permission-RW password
+ +        catch {$r2 SET x 5} err
+ +        set err
+-+    } {NOPERM No permissions to access a key}
+++    } {NOPERM this user has no permissions to access one of the keys used as arguments}
+ +
+      test {Test separate read and write permissions on different selectors are not additive} {
+          r ACL SETUSER key-permission-RW-selector on nopass "(%R~read* +@all)" "(%W~write* +@all)"
 
