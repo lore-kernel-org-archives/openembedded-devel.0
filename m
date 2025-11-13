@@ -2,65 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B63EACD4F2F
-	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 06:20:15 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17886.1763014811789984598
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB3D7CD4F28
+	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 06:20:25 +0000 (UTC)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17711.1763014821990339814
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Nov 2025 22:20:11 -0800
+ Wed, 12 Nov 2025 22:20:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=A3yLaw/h;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-7a9c64dfa8aso374607b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 22:20:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JyPtg81r;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-7afc154e411so253971b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 22:20:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763014811; x=1763619611; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763014821; x=1763619621; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Gb+W+c3yhuxfhWFIm/GglJyF1xfAHf6w4u8isGtP06A=;
-        b=A3yLaw/hsKx9kE61NDMDXo/2vCMlvoclUcMxzBaea+RhcPqHZAf3F0YmEv3vkJtX2P
-         aTP8qXKK02ny2+6NTcVtYLQzUreN3o0f/ieRFQqDS6Sa8ZjADFEWn5KOfdoXf8GBbEmr
-         8bc06yANvItZd9oUnzTuKPuIqyHSblP6SC/zbjFOMPTg0Qq0OGdLvijWF2yKqUQ6rqu0
-         UiAg3Sl5YDxlOfqP4ejioPatyb/x9zCcxa3Z+wZhimsRn21AY9xe6DCk5TGe4tyyOatK
-         4uAJLow0CvjUgoGt/nVQwFO6tZVToQWOL3FQ8nHqc9vUr48AWnKvy1CRpggoeFp21Fl9
-         uKaw==
+        bh=qR9eWV6EuECE6F0gFc2Op9vbFe+JC3cbWoqj0Jnd7lY=;
+        b=JyPtg81rKuURLcmhuO6+xQHgEgRKUEsyVURDTINUMc/NY4CQJ0dLRVd9+5BvGJfzNn
+         Qu6h78YoO6HKUqk1KeJq6+FiQJZU93rqMSy0WavMmYpfW3FKhrbcUPZo/OQh12+4sUJc
+         44mHcoYrRKGD4XZ4AflnjytVv/wXGAc5ix3pKrhWWp4F8253T7UOZbXU7w0e61YkA0N7
+         FilI/W9xqhUV3DoNMPnV5qec6Wvkc2xngJ0tire9bN1ohoxSOzvSM86GLLZEoZ/V5gxQ
+         CTdP5gtGbZdf+DdPwY94qPd11t+nfapC9aLfx7QkI06hmVMMk1T5X2KF18CFZPHVPvT/
+         p1UA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763014811; x=1763619611;
+        d=1e100.net; s=20230601; t=1763014821; x=1763619621;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Gb+W+c3yhuxfhWFIm/GglJyF1xfAHf6w4u8isGtP06A=;
-        b=fkDlGnk/ZxvJP8lKM/JeEBN31nLQc8DACd4P5QupfsXKwD8dwDJ2ak8h/zsL/BeHwY
-         eyJ5HAyFE0LVx6akuHYtKTHq7cTMPPurtTgjiw+ChHU3ihSR4qJos6iz2mvz9P29mhYl
-         kalTUso01UZg086naNIHrX4pkvrI/veCnex6gjhoaV3PSsEqpYSLxbh8+ccE1Zd0NzRd
-         D1cn7pZklYCE8rcQJnj1rh+qSvUoMUlGwSRG6scq6uAwhCS3xSqnd2NcwIyfuz6N3RlL
-         NPs+Q7AVzUfJvRPViZ7gcLH7Rqd6DOx4fOtdx3ZMqz+CezRmkgHVIPyIzkaVWPjL7E9m
-         Nrwg==
-X-Gm-Message-State: AOJu0YychDd8dyQl/ijJfRCBgV7tSwkjx6PBLIhF0TYwrMKb4sNOlk5J
-	ez4mTyKlMOyFHH7Fj12qM0pm8sZijyYfjb/35lLZDKRiyFIQssN6KsTGA436cg==
-X-Gm-Gg: ASbGncuQhD/RdmASW+aCnZMq0d2h67nMzGuZft+9VMYlNI42uWGP/Ypw3dLAlu04qbA
-	vlQWNVyd2Cu1wtntIu94lKRLYL1cVDYAkxjfU4VY9aVbgjoXjORieOPpMeTHPfCtPOC81gHWhKy
-	rvoKgHBJr3eMtEc28UwCwicLI3ZXLG924EOnstpqoouV48nZTmGRxBqUiT+vfjAhoDZGcoHOTMd
-	2VXK5aBM8+ZrjsMyQtHR3VuEt+yRkc/u/NVyOjfvyH/ZNTV6KzB+SWOHTGf9j6eFOgPR8pOZI07
-	vL9NGJWTOQLnslcn16GOt501SsGa3sKsSKnGzCuUCP/7Y4D9qded/Y/cq0xQNRdUJ0PUq3vm5fB
-	OYWqtJ9gs/QrSvmyer5/z++FjAkO+76E/UcGEaIPgpaSI+UJLoSV66qjgVDlIEUNMXgKO/5zQf1
-	wnJfsIIqkJLQF+vA==
-X-Google-Smtp-Source: AGHT+IFOG2cV0KJOEfS9EZ58rzJYgbaqUim4TUcX6bdjNqFuk6yZv7PifSZqXbqCE4G7ZRssatFo2A==
-X-Received: by 2002:a05:6a00:1404:b0:777:797b:7318 with SMTP id d2e1a72fcca58-7b7a25a9d42mr6782575b3a.7.1763014809653;
-        Wed, 12 Nov 2025 22:20:09 -0800 (PST)
+        bh=qR9eWV6EuECE6F0gFc2Op9vbFe+JC3cbWoqj0Jnd7lY=;
+        b=GMCdDdxGo+PNzz2KZwiuwhKxHZYkEH3Iku3+6k6CJn6tU5mxF8D+uLxIOCpGgxS8on
+         j1lWBYTX6iHariAi5bTCwXLqhvev9TwUisU62x5dBLl4ScAnxKFZLuwwZUcNU5Qd5IFN
+         Y6F7y63QYCGqngTuwtvB1Iu0Qk8UTn3z2li/hJACcJBjoAmx5ejYa0gKsOTp65vOY+qg
+         lBEJnA509dq8X53ODVjTGqubhOkuaWS4gOiVJTq++rm+3yzpiauNShdxIIiaRz1QnSqq
+         8wfi/b4wT0xME9OBzcDEn+Z+/zkTyKEvOStVDQt854ksB/CYqWn7rywUDb/y5qK80I6C
+         Yg4Q==
+X-Gm-Message-State: AOJu0YxzoiEcdwdlnloPRk7EMzuYt/ib+buBpWMSYN5kvBfRJwW/Hw5W
+	izguMTB/wQa/MYA4HzeQnFjlsPhmWfPFoCPXh6kPA7rkNI0e2tlO66+LaVcYgg==
+X-Gm-Gg: ASbGncsHbDUlhq/SU1hw1vh3EDbHp9CxJPyW/0JPM6WdQI61QfHkctd5ZhD3td4feVX
+	cdQbxDrGyGmU/Qf1ayWOQIBfF9W0TH3K7mFo0ZGaNvNvzGEGsdZwHEHKt9sKc+7f92pmGCAjgh7
+	eZiooqp2Xwl068rIbzv1Y0REEe5tiXJf0nyuZkUKWKsS3rxeOS3doC0X+l+QSKQRwmP35znrlk9
+	kzy2wHNhQ3n1QTcaeIbKWd2881R6SqHbdO/KlNYzZ97aJoNhhurtNSDw+JJm5FQ0MOubgEV5zFu
+	bEVnRIxdSIZ+XO1+5pXrc+9IoRXVLKDuZnjHxtmir9DYs/YGrXXUcDk/bLJxiR5mdx65NpQOPnC
+	gK8pn+1/9BpZtX/VgZ7ikmW1i5d4F8E1q1AbKi3WqVqscP9QIGaXYnN3bLeWUpdJ/drMhKLhtVn
+	LRsm/x/0l8PQYn2w==
+X-Google-Smtp-Source: AGHT+IG1S/puSDQYa7U/iwrE4DucmWTCGisLJ/s0wwHqnenSqwRqwCjtYeOd/EX6Agkjq492kJ7mhQ==
+X-Received: by 2002:aa7:88c1:0:b0:780:ed4f:e191 with SMTP id d2e1a72fcca58-7b7a4fd9172mr5572320b3a.23.1763014821262;
+        Wed, 12 Nov 2025 22:20:21 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.248])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7b927d1c413sm1000454b3a.69.2025.11.12.22.20.06
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7b927d1c413sm1000454b3a.69.2025.11.12.22.20.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Nov 2025 22:20:08 -0800 (PST)
+        Wed, 12 Nov 2025 22:20:20 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 13/38] mcelog: upgrade 198 -> 199
-Date: Thu, 13 Nov 2025 19:18:48 +1300
-Message-ID: <20251113061914.3756301-13-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 17/38] libgpiod: update v2.1.2 -> v2.1.3
+Date: Thu, 13 Nov 2025 19:18:52 +1300
+Message-ID: <20251113061914.3756301-17-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251113061914.3756301-1-ankur.tyagi85@gmail.com>
 References: <20251113061914.3756301-1-ankur.tyagi85@gmail.com>
@@ -69,47 +69,95 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 06:20:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121611
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 06:20:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121615
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-0001-server-Correct-prameter-type-for-connect-API.patch
-removed since it's included in 199
+Bug fixes:
+- fix C++ tests with recent kernels which introduced stricter reconfigure
+  behavior
+- fix a use-after-free bug in python bindings
+- fix passing the event clock property to line requests in python bindings
+- fix a memory leak in tools
+- make sure the string buffers in line-info and chip-info are big enough to not
+  truncate the strings they hold below the size accepted by the kernel
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Dropped patch which is merged in the upstream
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 7596d6a497e3ab4ac88fbb0c64526d3a1b5aac61)
+(cherry picked from commit 9958590b703a79b735874ea59b54aa4bb7233811)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../mcelog/{mcelog_198.bb => mcelog_199.bb}           | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-support/mcelog/{mcelog_198.bb => mcelog_199.bb} (79%)
+ ...ts-set-direction-when-reconfiguring-.patch | 38 -------------------
+ .../{libgpiod_2.1.2.bb => libgpiod_2.1.3.bb}  |  4 +-
+ 2 files changed, 1 insertion(+), 41 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch
+ rename meta-oe/recipes-support/libgpiod/{libgpiod_2.1.2.bb => libgpiod_2.1.3.bb} (87%)
 
-diff --git a/meta-oe/recipes-support/mcelog/mcelog_198.bb b/meta-oe/recipes-support/mcelog/mcelog_199.bb
-similarity index 79%
-rename from meta-oe/recipes-support/mcelog/mcelog_198.bb
-rename to meta-oe/recipes-support/mcelog/mcelog_199.bb
-index e302f4175d..0a48fc48ce 100644
---- a/meta-oe/recipes-support/mcelog/mcelog_198.bb
-+++ b/meta-oe/recipes-support/mcelog/mcelog_199.bb
-@@ -5,13 +5,12 @@ and should run on all Linux systems that need error handling."
- HOMEPAGE = "https://mcelog.org/"
- SECTION = "System Environment/Base"
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch
+deleted file mode 100644
+index f8b94f0b99..0000000000
+--- a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From 8c7126b7b5dee0ed5433cf9265ccc79095d53939 Mon Sep 17 00:00:00 2001
+-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+-Date: Mon, 8 Jul 2024 11:48:27 +0200
+-Subject: [PATCH] bindings: cxx: tests: set direction when reconfiguring lines
+-
+-Linux kernel commit b44039638741 ("gpiolib: cdev: Ignore reconfiguration
+-without direction") made the direction setting mandatory for line config
+-passed to the kernel when reconfiguring requested lines. Fix the C++ test
+-case which doesn't do it and now fails due to the rest of the settings
+-being ignored.
+-
+-Reviewed-by: Kent Gibson <warthog618@gmail.com>
+-Link: https://lore.kernel.org/r/20240708094827.84986-1-brgl@bgdev.pl
+-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+-
+-Upstream-Status: Backport
+-[https://web.git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/commit/?id=3e224d885b1de54fe5510b9c5e7296260a1a4507]
+-
+-Signed-off-by: Libo Chen <libo.chen.cn@windriver.com>
+----
+- bindings/cxx/tests/tests-line-request.cpp | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/bindings/cxx/tests/tests-line-request.cpp b/bindings/cxx/tests/tests-line-request.cpp
+-index 9632ae0..6e29532 100644
+---- a/bindings/cxx/tests/tests-line-request.cpp
+-+++ b/bindings/cxx/tests/tests-line-request.cpp
+-@@ -208,6 +208,7 @@ TEST_CASE("values can be read", "[line-request]")
+- 				.add_line_settings(
+- 					offs,
+- 					::gpiod::line_settings()
+-+						.set_direction(direction::INPUT)
+- 						.set_active_low(true))
+- 		);
+- 
+--- 
+-2.44.1
+-
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.1.3.bb
+similarity index 87%
+rename from meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb
+rename to meta-oe/recipes-support/libgpiod/libgpiod_2.1.3.bb
+index edbde0f7a7..4463f7d4df 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.1.3.bb
+@@ -7,11 +7,9 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSES/CC-BY-SA-4.0.txt;md5=fba3b94d88bfb9b81369b869a1e9a20f \
+ "
  
--SRC_URI = "\
--    git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http;;branch=master \
--    file://0001-client-Include-string.h-form-mem-function-prototypes.patch \
--    file://run-ptest \
--"
-+SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http;;branch=master \
-+           file://0001-client-Include-string.h-form-mem-function-prototypes.patch \
-+           file://run-ptest \
-+           "
+-SRC_URI += "file://0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch"
+-
+ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
  
--SRCREV = "ab58f07b9b1a4456fca0f5f41639d5cbecc80e36"
-+SRCREV = "c17897deb52daab300c585a6a6c2456d062d80cf"
+-SRC_URI[sha256sum] = "7a148a5a7d1c97a1abb40474b9a392b6edd7a42fe077dfd7ff42cfba24308548"
++SRC_URI[sha256sum] = "2be4c0b03e995d236c0e476e14aeb475d7b431dd1439609b6d65c540f91eaf58"
  
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ # Enable all project features for ptest
+ PACKAGECONFIG[tests] = "--enable-tests --enable-tools --enable-bindings-cxx --enable-gpioset-interactive,--disable-tests,kmod util-linux glib-2.0 catch2 libedit"
 
