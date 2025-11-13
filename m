@@ -1,190 +1,110 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8A3BCD5BDE
-	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 12:06:17 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.22279.1763035574912667059
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13579CD6E4A
+	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 12:39:18 +0000 (UTC)
+Received: from rcdn-iport-6.cisco.com (rcdn-iport-6.cisco.com [173.37.86.77])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.20590.1763029529165652350
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Nov 2025 04:06:15 -0800
+ Thu, 13 Nov 2025 02:25:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SHfXYyhX;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-42b3377aaf2so444401f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 04:06:14 -0800 (PST)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=U+b+T647;
+ spf=pass (domain: cisco.com, ip: 173.37.86.77, mailfrom: adongare@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763035573; x=1763640373; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4EsJqjXdMuu8W6PDoffbyPWJXeqckiJq1VsIqEt1AEc=;
-        b=SHfXYyhX/dhOFaFgQ3jGUUTx5xG7xyeuhkHAe0XhTFNKH4tFURrcn9LMv+DBAYRHkZ
-         Uakn7wDukNCyRTEULfsLzx7EGW3wToFY9dVe/g3vLoIbXAL5AH/fRyeYVVVqeCP5Gl4H
-         pe5sHvJQw4UjlAB2xOI01vID6tnqoxbWlVmTVx5qzUgVjIVYIQuyp64VwdJg+R7IOI+q
-         LqB1TUtBHD7rdhGBTjEHnvWXmdpA/xFoq4AwV6ZqYQEvqwBnRNgl8tXjeuccab3+yvn/
-         eG9+1fPjsb4+cnNV7q+MTNztke/9lKRst4jxH1nY93umc9DG4w08kmmjROI4YzmMtI+g
-         DZ1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763035573; x=1763640373;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4EsJqjXdMuu8W6PDoffbyPWJXeqckiJq1VsIqEt1AEc=;
-        b=BcYv2OU/3jdvw8xtiHyvmERK7BBr2Zvlch5QUNnap/5EQEqydXEaO4pDWrdhoKoDFq
-         vY7sNcGyBYZVN4JhICd6TxF4IbcOJ1dsuq+G6IAj1XWIEduitYciBLM8CSpqwKK+/ZSw
-         vkQ4bUTcZx4LwAC4dOnIev8R6Wtiqayk0viYuRCZr15NktxQXQKvYPQzxbpfWo3jCRNa
-         pzF+YiHQJvjpxzgSfWaqG7hqsWi8JE2qp9LRhVWSsqXFqgKiZavBfMA2RulGShCK8aKp
-         svjYg4lboUiQ+1bbC1uF9dMC81T5rfbtWldftDrGNKsy5Dwld6Mw7iMw/FlomDKDpiZD
-         D9Wg==
-X-Gm-Message-State: AOJu0YxuQvc8tK0lFMxnxyMuYGHm3EmXizOU3W1pAgQKe2rU/NEZbBYl
-	SqrTEcLCrhv1ethsAo8jFH4Gjfu8VR+BtZpRYuVNTukgxow8O3xbX8smF8ci9gRG
-X-Gm-Gg: ASbGncsnkREnA0PsNCjfHlCgq20U+U8vLMFm05SZGcLW+vKYptka+HXwVQL77L8jCNY
-	FXandFYxgnHdW1DjqYD8xCk+DEOpKDjzQxkLllLkRJMJju8LJOnxGN+cSSNkxUTlCyOW5sP1S1e
-	HKlDLjhm7ZdsnpzIk1MzxQdjFhUuqmf+UfIDYHdUCvu3Z91S5Rtzzg84bCr1+v6OKigRK1wzq9o
-	+Yv6GsiD46fhW7542htuNMxuf+ITMAjWNTrTLTU3ljD3waugppUIrY6Fpdgkl+G3B83ngbyUWEp
-	8a3WXrgDakG2bFsiKQJAMTUeqHULM2t9XQT7rLoEvbWTV1ciFAJKHSYAYd6DLmaWICayeauU0IS
-	VWSQxyM59Ck9aDx+BkRbLZn6GB6s46ggow1IT0881XqJxZkqwjrpxIp04UUSY8FMSuWMeWtXOXg
-	==
-X-Google-Smtp-Source: AGHT+IFYBm9OS1mP6hlHmz4/lzVku7kaujT+HTvQmkLxgyVLRPOc27LxPn2IBhmZ6gcWv5imRb1Rqw==
-X-Received: by 2002:a5d:5d0a:0:b0:429:d3c9:b889 with SMTP id ffacd0b85a97d-42b4bb8f18dmr5764570f8f.1.1763035572885;
-        Thu, 13 Nov 2025 04:06:12 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b53e85627sm3974561f8f.16.2025.11.13.04.06.12
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Nov 2025 04:06:12 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+  d=cisco.com; i=@cisco.com; l=895; q=dns/txt;
+  s=iport01; t=1763029529; x=1764239129;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=2ABT9XcYVDfzYWMyaDANVqgeKIQ1lAFgsuK71VO0WJ8=;
+  b=U+b+T647uHsPJrc0uXDHuQqfraUlG/cXOOT7XSlJoEFSWV5vFXe5kcD1
+   Q/9rqUSVSCapJ4Z7HzeVoIlKo4hUDZY7LkST2102Ux58tZ9BgcXJ0MKsZ
+   SXi95c5y/9tWZK3IQSc4wGzsX4bc4/syQBgpyD+wbSajtx6mMdmj77ewt
+   rTwkMZbfvlFRDKbm4e+7uSZzUXfe30UkEpTPdL7s8jtyuDA8EP+Pfwq4O
+   QO7hd2h4E1uUy5gY6U31x7LQ9xrQOZ2lhBPTsvuyrDUqz0ADwClLDspgD
+   kKLmnJvCE9qcNfl/JTM8Co5BS4hEN5JXirbTIC2s3XZRcUl/4AQfXWrx6
+   Q==;
+X-CSE-ConnectionGUID: mlrirVn0S+2GjJ6rQEpjag==
+X-CSE-MsgGUID: GoWbW+BJTgG8WbvR+ATdTw==
+X-IPAS-Result: =?us-ascii?q?A0C7BQC3sBVp/5H/Ja1ahSB7XUNJoi+UNQ8BAQEPMSAEA?=
+ =?us-ascii?q?QGFB4xcAiY4EwECBAEBAQEDAgMBAQEBAQEBAQEBAQsBAQUBAQECAQcFgQ4Th?=
+ =?us-ascii?q?lyGXTYBGAEtMFELRIMCAYI6AzYDsTOCLIEBgygB2hUNgluBSoU7gnmFHWgIA?=
+ =?us-ascii?q?YR4JxsbgXKEfYEFgRqCDGWFdwSCIoEOgXqELYIkA0qQREiBHgNZLAFVEw0KC?=
+ =?us-ascii?q?wcFgWMDNQwLKhVuMh2BJEEYcYRdImgPBoESg1EGg3OFIw+KTwMLGA1IESw3F?=
+ =?us-ascii?q?BsGPm4HlBaCfIEOliGDGY8Si3eUJnEKKIN0jB6PPYV8GjOEBKZnmQaCWI85k?=
+ =?us-ascii?q?keEaYF/JYFZcBWDIglJGQ+OOMddJTICOgIHCwEBAwmTZwEB?=
+IronPort-Data: A9a23:8WxKBaxtuSSA0FbCOnh6t+c2xyrEfRIJ4+MujC+fZmUNrF6WrkVUy
+ 2MaW2vVOa3YYWGkKdkiOovg8kMHucOEndBjQFdtrVhgHilAwSbn6Xt1DatR0we6dJCroJdPt
+ p1GAjX4BJlqCCea/VH1buSJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
+ IKaT/H3Ygf/hmctazlMsspvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
+ evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
+ zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJEQyJ4wCxOAvOiIU2
+ v46dio0QwiBju3jldpXSsE07igiBNPgMIVavjRryivUSK52B5vCWK7No9Rf2V/chOgXQq2YP
+ JVfM2cyKk2cPnWjOX9PYH46tO6kgX/weidVgFmUvqEwpWPUyWSd1ZCxaoGOKofTFZk9ckCwi
+ WX59Vu6KDMmO/PP9jCbyDGFuuPzgnauMG4VPPjinhJwu3WJz25VCx0bUHO0pPC4jgi1XNc3A
+ 0sM9ywjqKI/+ECmQpzxUgO1pFaAvwUAQJxXC+A85QSHx6bY7grfAXILJhZHadorqNM7bSAq2
+ 1+OmN/oCDJuqrjTQnWYnop4thuoMiQTaGtHbigeQE5ds5/ooZo4iVTESdML/LOJs+AZ0ArYm
+ 1iixBXSTZ1K5SLX/81XJWz6vg8=
+IronPort-HdrOrdr: A9a23:gSIX16hm+YELbc2deQmMZ7gB9HBQXtEji2hC6mlwRA09TyVXra
+ +TdZMgpHrJYVkqOU3I9ersBEDiewK/yXcW2+ks1N6ZNWGM0ldAR7sN0WKN+VHd8lXFh41gPW
+ MKSdkYNDU2ZmIK6frH3A==
+X-Talos-CUID: 9a23:5zJtXmAsbhZXpar6Eyxj7k8OJMZ9ST6H43XyfVWBJH5rQbLAHA==
+X-Talos-MUID: 9a23:llmBVAiimoZlyV/mSY3RbcMpG8BX6ZvtImIxnrpWhMOaD29ZBzuhk2Hi
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.19,301,1754956800"; 
+   d="scan'208";a="423383184"
+Received: from rcdn-l-core-08.cisco.com ([173.37.255.145])
+  by rcdn-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 13 Nov 2025 10:25:28 +0000
+Received: from sjc-ads-10055.cisco.com (sjc-ads-10055.cisco.com [10.30.210.59])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-08.cisco.com (Postfix) with ESMTPS id 42F4818000449;
+	Thu, 13 Nov 2025 10:25:28 +0000 (GMT)
+Received: by sjc-ads-10055.cisco.com (Postfix, from userid 1870532)
+	id DF13ACC1288; Thu, 13 Nov 2025 02:25:27 -0800 (PST)
+From: "Anil Dongare -X (adongare - E INFOCHIPS PRIVATE LIMITED at Cisco)" <adongare@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/4] audiofile: patch CVE-2019-13147 and CVE-2022-24599
-Date: Thu, 13 Nov 2025 13:06:08 +0100
-Message-ID: <20251113120611.2590707-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.2
+Cc: xe-linux-external@cisco.com, to@cisco.com,
+	Ninette Adhikari <ninette@thehoodiefirm.com>,
+	Khem Raj <raj.khem@gmail.com>, Anil Dongare <adongare@cisco.com>
+Subject: [meta-openembedded] [scarthgap] [PATCH] redis: Update status for CVE-2022-3734
+Date: Thu, 13 Nov 2025 02:25:00 -0800
+Message-ID: <20251113102459.3739007-2-adongare@cisco.com>
+X-Mailer: git-send-email 2.44.1
 MIME-Version: 1.0
+X-Outbound-SMTP-Client: 10.30.210.59, sjc-ads-10055.cisco.com
+X-Outbound-Node: rcdn-l-core-08.cisco.com
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 12:06:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121645
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 12:39:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121649
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2019-13147
-https://nvd.nist.gov/vuln/detail/CVE-2022-24599
+From: Ninette Adhikari <ninette@thehoodiefirm.com>
 
-These patches are used by opensuse to mitigate the corresponding vulnerabulities.
+CVE only applies for Windows.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 36bb521a136d0ac1061b06e3326abc316a40481a)
+Signed-off-by: Anil Dongare <adongare@cisco.com>
 ---
- .../audiofile/audiofile_0.3.6.bb              |  2 +
- .../audiofile/files/CVE-2019-13147.patch      | 31 ++++++++++++
- .../audiofile/files/CVE-2022-24599.patch      | 50 +++++++++++++++++++
- 3 files changed, 83 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-2019-13147.patch
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-2022-24599.patch
+ meta-oe/recipes-extended/redis/redis_7.2.8.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-index 50df31c7b9..fd80729bd2 100644
---- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-+++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-@@ -18,6 +18,8 @@ SRC_URI = " \
-     file://0006-Check-for-multiplication-overflow-in-sfconvert.patch \
-     file://0007-Actually-fail-when-error-occurs-in-parseFormat.patch \
-     file://0008-Check-for-multiplication-overflow-in-MSADPCM-decodeS.patch \
-+    file://CVE-2019-13147.patch \
-+    file://CVE-2022-24599.patch \
- "
- SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782"
+diff --git a/meta-oe/recipes-extended/redis/redis_7.2.8.bb b/meta-oe/recipes-extended/redis/redis_7.2.8.bb
+index a1739b4f30..a601e060f1 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.2.8.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.2.8.bb
+@@ -70,3 +70,5 @@ INITSCRIPT_NAME = "redis-server"
+ INITSCRIPT_PARAMS = "defaults 87"
  
-diff --git a/meta-oe/recipes-multimedia/audiofile/files/CVE-2019-13147.patch b/meta-oe/recipes-multimedia/audiofile/files/CVE-2019-13147.patch
-new file mode 100644
-index 0000000000..19f6892f69
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/audiofile/files/CVE-2019-13147.patch
-@@ -0,0 +1,31 @@
-+This patch is taken from opensuse: 
-+https://build.opensuse.org/package/show/multimedia:libs/audiofile
+ SYSTEMD_SERVICE:${PN} = "redis.service"
 +
-+CVE: CVE-2019-13147
-+Upstream-Status: Inactive-Upstream [lastcommit: 2016-Aug-30]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+
-+diff --unified --recursive --text --new-file --color audiofile-0.3.6/libaudiofile/NeXT.cpp audiofile-0.3.6.new/libaudiofile/NeXT.cpp
-+--- audiofile-0.3.6/libaudiofile/NeXT.cpp	2013-03-06 13:30:03.000000000 +0800
-++++ audiofile-0.3.6.new/libaudiofile/NeXT.cpp	2025-05-14 10:45:11.685700984 +0800
-+@@ -32,6 +32,7 @@
-+ #include <stdint.h>
-+ #include <stdlib.h>
-+ #include <string.h>
-++#include <limits.h>
-+ 
-+ #include "File.h"
-+ #include "Setup.h"
-+@@ -122,6 +123,12 @@
-+ 		_af_error(AF_BAD_CHANNELS, "invalid file with 0 channels");
-+ 		return AF_FAIL;
-+ 	}
-++	/* avoid overflow of INT for double size rate */
-++	if (channelCount > (INT32_MAX / (sizeof(double))))
-++	{
-++		_af_error(AF_BAD_CHANNELS, "invalid file with %i channels", channelCount);
-++		return AF_FAIL;
-++	}
-+ 
-+ 	Track *track = allocateTrack();
-+ 	if (!track)
-diff --git a/meta-oe/recipes-multimedia/audiofile/files/CVE-2022-24599.patch b/meta-oe/recipes-multimedia/audiofile/files/CVE-2022-24599.patch
-new file mode 100644
-index 0000000000..9214d80172
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/audiofile/files/CVE-2022-24599.patch
-@@ -0,0 +1,50 @@
-+This patch is taken from opensuse:
-+https://build.opensuse.org/package/show/multimedia:libs/audiofile
-+
-+CVE: CVE-2022-24599
-+Upstream-Status: Inactive-Upstream [lastcommit: 2016-Aug-30]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+
-+diff --unified --recursive --text --new-file --color audiofile-0.3.6.old/sfcommands/printinfo.c audiofile-0.3.6.new/sfcommands/printinfo.c
-+--- audiofile-0.3.6.old/sfcommands/printinfo.c	2013-03-06 13:30:03.000000000 +0800
-++++ audiofile-0.3.6.new/sfcommands/printinfo.c	2025-04-30 15:18:24.778177640 +0800
-+@@ -37,6 +37,7 @@
-+ #include <stdint.h>
-+ #include <stdio.h>
-+ #include <stdlib.h>
-++#include <limits.h>
-+ 
-+ static char *copyrightstring (AFfilehandle file);
-+ 
-+@@ -147,7 +148,11 @@
-+ 	int		i, misccount;
-+ 
-+ 	misccount = afGetMiscIDs(file, NULL);
-+-	miscids = (int *) malloc(sizeof (int) * misccount);
-++	if (!misccount)
-++	    return NULL;
-++	miscids = (int *)calloc(misccount, sizeof(int));
-++	if (!miscids)
-++	    return NULL;
-+ 	afGetMiscIDs(file, miscids);
-+ 
-+ 	for (i=0; i<misccount; i++)
-+@@ -159,13 +164,16 @@
-+ 			If this code executes, the miscellaneous chunk is a
-+ 			copyright chunk.
-+ 		*/
-+-		int datasize = afGetMiscSize(file, miscids[i]);
-+-		char *data = (char *) malloc(datasize);
-++		size_t datasize = afGetMiscSize(file, miscids[i]);
-++		if (datasize >= INT_MAX - 1)
-++		    goto error;
-++		char *data = (char *)calloc(datasize + 1, sizeof(char));
-+ 		afReadMisc(file, miscids[i], data, datasize);
-+ 		copyright = data;
-+ 		break;
-+ 	}
-+ 
-++error:
-+ 	free(miscids);
-+ 
-+ 	return copyright;
++CVE_STATUS[CVE-2022-3734] = "not-applicable-platform: CVE only applies for Windows."
+-- 
+2.44.1
+
 
