@@ -1,196 +1,1760 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7D77CD4F49
-	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 02:59:34 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15571.1763002763712280080
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81691CCFA18
+	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 05:24:15 +0000 (UTC)
+Received: from mail-yx1-f52.google.com (mail-yx1-f52.google.com [74.125.224.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17067.1763011446057061517
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Nov 2025 18:59:24 -0800
+ Wed, 12 Nov 2025 21:24:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=BWMExsv+;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3412a946d8=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AD0VH7m1240296
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 02:59:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=SUwE+gTqcKZKE/Zc28cds7l6sYZurGTGIWhQkUwXq/s=; b=BWMExsv+8hjF
-	BH/PYAwYgSEHrwmRzoiwxZUYlsguifj/PGVm3/ksLJLbsx3hwGj3NH0WCByZNQQj
-	LIMoDazHJMapdppUSoVXkx66v8a2Fdvc9I1yL7W2IUxrYLsIPU6Ub7wizp2tMogh
-	E3HIkHWRAlhkGbXqLlpXLu18PQuZeTqHgQ43voI3xTMVq8YSDP2oAS/sREPDPnVH
-	ii5GQ9j3iu3WwQ6TWRjduXnB4Lq6S8uCYsgT2CmZxjz2wf4V8WEoVWNDxSWSwHg/
-	eadIEdrTH2vw2vlZfu+y1czQtX4trH7ssmfnlyy3oBeCER4+cYmPEz6FKiM5iwkq
-	5GsqVr7aRQ==
-Received: from ch4pr04cu002.outbound.protection.outlook.com (mail-northcentralusazon11013043.outbound.protection.outlook.com [40.107.201.43])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4a9u2x6pxg-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 02:59:20 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o6E9/XAGCE6yrMYnIvXmcghhKBjfk+gi4/c0ICmlyupc++/d34nAjM8xXaofg380dIp7rGdy1r5SWQ0xXvtTkzFLnSMehrgxnMen6qGdu9t/hnm53uxbUD+tqXEI+KVHt9pLv8akrOCExyFXyiyP/ukPD+WbtyksaBXURqVCAExMSXe5WhdludWUn4RYDcDJ46geg2yfWS+taGDA+ILeWy6HT9AdtlAxFVeI4nHBsUxNlFPsjGqiD1eaRfEKRyZ39Ir/t6Oxvxq0lBqXT1munlN6YxTWfAkRFCmpzSmJVy6dqzfhgvyL9nAmv4TBNFNM2QnL6+y5ksaqVjGLjM0ylA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SUwE+gTqcKZKE/Zc28cds7l6sYZurGTGIWhQkUwXq/s=;
- b=pBA4UX7NjDpgSqH9X39AA3FnEjiB5tpyTCXvGbE8Ii4QZaBTk7KKqt4yKv1U9AEDG+t5w2bPHRyXznGIztbm2I97CAqZH+Q1FjSTmrekTqwrKchhTvl54jEYx931TBN0Gp5yuDMMphFTG2Mxo0R8P2Q2fg92rHU9fKsTLfYdGpIC+2268fnFqfhKowSLT4rfcdnPKsJ+2bA3lLwk9/5ItkZensJXVW2aaBMITd6O/FRh3ZPlrYjUtZbslPqql4rGWA2rU9ykMN08tHxCLOn5dxGdy9XN4RpXIRb+mjGrEEyHu1L8jZBqqZnx782fwMd3k0TTzS1zsia/BQxsHMQWEw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
- PH7PR11MB7570.namprd11.prod.outlook.com (2603:10b6:510:27a::8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.16; Thu, 13 Nov 2025 02:59:18 +0000
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad%3]) with mapi id 15.20.9320.013; Thu, 13 Nov 2025
- 02:59:18 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MTweH0dY;
+ spf=pass (domain: gmail.com, ip: 74.125.224.52, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f52.google.com with SMTP id 956f58d0204a3-640d4f2f13dso383966d50.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 12 Nov 2025 21:24:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1763011445; x=1763616245; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UYo39PUv4csXHTkqi6DCJsCI6o5FFUbKI1BYuUXm5TU=;
+        b=MTweH0dY2a9tqa+JQrn4Zzvo62CmviBzkOpxusc49WkA7qJLXV6a4Q6vlZk83KClqr
+         F6nIJd1bal5NP9xPWvTfiCkzPY4qoAPAeQyAjT+BCwG/klrC+yCJOqnhPtAV/l4LCqv/
+         pq+THB//DiVZ/IpKXPns/JCi3YlHckVm6w7ecNjVp1BHKc25F2+/pBiiNXhMzhMLOKZ6
+         aaWe3gdpMmqOCLm6dmNmfa8Htsy+GeSSxMIbLV1Z0mZa1wHsNC9H1Dt5QoRCyNYGYiFV
+         l3zCWiTUr37nrocQhjDNxkzUWrKmdNjSTmyVLC0IMTuXT7xnRBT0aCyFjQ2YPD021+dh
+         WLHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763011445; x=1763616245;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UYo39PUv4csXHTkqi6DCJsCI6o5FFUbKI1BYuUXm5TU=;
+        b=IGRJALgIcw3i04N4fXvunp2dA4iSQRK9YoZfzHE3lJbZWR1XLfpbOnqPZYbTty2V6R
+         bcRQGbx1DZ7GatDjJjojayEa1Fd45DgO+4bO0sVQmjAlhXkvMlRYrxR3fv44GYBB8aA4
+         oPaJwezgoFFyeMbpNoWtyS5g5h0JpHdCGdeKIyCnltNCbGW31nYvfp/h5bdZ+tMYm3jX
+         LR31aO7uDDBov5vGWYJ+Izna0uiawYyIoIGwfBzwrtEK6mI79lZKVb4lNovx2/qMOEau
+         Lnlsx7qWwNszKS9bNMhnOvADcLDvtEe1BkWZgzkd/LnHS1FOpy213ob+8kMETQyxuLg0
+         po0Q==
+X-Gm-Message-State: AOJu0YyPgWhaKHSWZihnskrMWhX/dEhOrnaWCvpWvvalwxV961Hkw1tE
+	WNX568KI4JCu5O+4o5VSe85gTDW9lmVpbj5dHGgVo85yveqvw1RfOMoeYnqQgWl3
+X-Gm-Gg: ASbGncsE9j1O2ydjtPrmSI+1oEY4suf7yP+1he5rM+cu7LLVTU7VYcfs+zJqx+nZi1a
+	8XCDQlFTV9iDrp78fgory3ziAUMRdW+yyIAgRj7S7iVwM5V6zFLlg1lTD3WEBV5nYc41vC075yD
+	FGasJmvsnpkckEP3MekwGhADuKLAnDl99OQezIs8H6zCdslwl12sSWpXU7RrhDCj4TuRbQ220Vd
+	E8bieJw9c9DxzoBMzRGYJeBOTPHGL6EpdX5jI/1AO8OGyf6Qexb4WmU7xTaO5og8WGrzZ2uZDvf
+	GJY6iOVRPVbLZoUDsJ21CDq5nT2aeynX9tD9E77uEWVBc8Y/RyMpvqfqAizsv8KrSFQkW3wIte9
+	QUE4hlmhpmc3yaC4q1Miba9aJun5NQQvrzKgXM/5AJymyBpm3mEj4/Jbod7TCoXSZkELHhChsUw
+	v0kP67
+X-Google-Smtp-Source: AGHT+IG1r0MgOgykGN3UE48pdEnZ235I1pPSYVAH7Ok8T5Jl4BcnfZ4HxotEFa9jZg2LF6+8zXQAOQ==
+X-Received: by 2002:a53:b10c:0:b0:640:c75d:9a98 with SMTP id 956f58d0204a3-64101b6285emr3960011d50.69.1763011444098;
+        Wed, 12 Nov 2025 21:24:04 -0800 (PST)
+Received: from localhost.localdomain ([71.3.201.67])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-7882214e1d8sm3446397b3.49.2025.11.12.21.24.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 12 Nov 2025 21:24:03 -0800 (PST)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 08/11 v2] python3-pytest-timeout: add UPSTREAM_CHECK_PYPI_PACKAGE
-Date: Thu, 13 Nov 2025 10:58:52 +0800
-Message-Id: <20251113025855.1520038-8-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20251113025855.1520038-1-yi.zhao@windriver.com>
-References: <20251113025855.1520038-1-yi.zhao@windriver.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TY1PR01CA0197.jpnprd01.prod.outlook.com (2603:1096:403::27)
- To DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5)
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-xfce][PATCH] xfce4-weather-plugin: upgrade 0.11.3 -> 0.12.0
+Date: Thu, 13 Nov 2025 00:23:50 -0500
+Message-ID: <20251113052351.55321-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|PH7PR11MB7570:EE_
-X-MS-Office365-Filtering-Correlation-Id: f7d3866a-0c73-4afb-c278-08de2260a33d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|52116014|376014|1800799024|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?MxvnXI+W3zWO5f6MicNw1RGn+d8YIJgXVSOHZUrd9vhWNUJMeoyQC2I3OQy+?=
- =?us-ascii?Q?j69dl2ajy1G1QCIYt6cLyISUzCbFMht9nbRD4yKT7er2NoBH+JKELs+rvZYY?=
- =?us-ascii?Q?WMlTzQeMLjyuDLwFTkw32TEsnnes0czUrOwEQCnthKk+ei0c9Zufa/sZE3Gd?=
- =?us-ascii?Q?hvVYep7gWCXm4D4hLk5fz0SDxE7KZWYUhFduUaUt61LJY4V5MAwpuBkWzIIE?=
- =?us-ascii?Q?6A7/N/eCqOeDOcPEd2CzSE7Acc0TV/2++IBPk4wUW8xAmwNJxL46zfIP+lT4?=
- =?us-ascii?Q?mhUGzWD2TT5L4HEo0KnWc9EwJY0RAUTXLSfBJzokZt7oqj/FGkpBpYKLPEOX?=
- =?us-ascii?Q?/JlaC15TvldR3A1HiQmGDHRJuWvUFPV+GreknXOZZydtVH1y2psh4xsd96oX?=
- =?us-ascii?Q?XHg3zMA13btnhd+CrAQay90f0Yj5KIJRMiGm9thFGqfE/Ep5OxZ0jevoZziG?=
- =?us-ascii?Q?jjNfyE+O2qBPrtGI/dhvus8uC5PGwY/hVWcLW0DzLRlSd5jhNpRaulN/0Gf7?=
- =?us-ascii?Q?bj0Jo0QmtTfl9HWWOBX8irziDYIzDfjwg4pkHDWL6/Iwb8Q1e8BpCBH1L3DN?=
- =?us-ascii?Q?W2i82KpnDDcxmIuqTorFVsAwOMF/d5hx2WHeoygbTMzWKfYFj/VMJMWYaqon?=
- =?us-ascii?Q?ckL4fHjAwiSJet/sS591zXCoOICs5SQApc9Awjq+SvhdBNomu6SXezbLmdLR?=
- =?us-ascii?Q?UKAkcSYVSmU2w4DuZ9/Q20qFyJlZe7r+jijnZ045VDMv0mVn3CLUiaXfmmKi?=
- =?us-ascii?Q?SiAQ4xwKhjMCXdrr8Gd2UAfXJWDmNahdZ2fNCu5T82iex8M5CIIM8J9isG+S?=
- =?us-ascii?Q?/Kz2IstGORwnMzHSpTnnaunKFYuc800JxJg5aNvNBBDvF2gdlIA8d12pwG/R?=
- =?us-ascii?Q?gwqhyO/YBkMpd/NXHJF3wgrh7ChX5dOuYW1jQlsKtzL7CwVRpY11Bhy6xbxI?=
- =?us-ascii?Q?0jVs0pjrOMnFlBtP5ysw1kfjYJmI/NT66fEvawCR5hRvGBf8bkWvggyjalE2?=
- =?us-ascii?Q?PMKd5ZcmbBPEsKDqkbsi05wAsMw1GCQgsSzajlRJ0NFGQqVUlggI+JxybmnL?=
- =?us-ascii?Q?oVw9OWncwOaVcqlkbEw1rPe+4H/AUspi7+Hnqg26KeTMbgb0pg2Mf2oKGlH3?=
- =?us-ascii?Q?xVzzrgRzcYeBdlqW8JP7FoYlky39jNJXJRxnyoAasUiCBuBCe+etznMTx4Vf?=
- =?us-ascii?Q?mepVDPxA6m9uSbOkRJKy4mzjIzMO4dazU066hua1S9LY0RzHcf+606cAGxOz?=
- =?us-ascii?Q?YisSpq11jl+WJTs50LtJcb5FxAwPE3uBr9QML+9itj5RqngA9QFWWS+yRq5L?=
- =?us-ascii?Q?498J0XvOul1ki3IXCrF10tKwtJ+IDrRWRqTzrfovxJACxL/j4jBR1IQSC7+x?=
- =?us-ascii?Q?xshxMOzNBzwPr88f1inczGyRR1ASciXCHbTIHCWj0/98/jPyeLyRz7fJPz5/?=
- =?us-ascii?Q?SZg3ZX7BgzY/I/xH+9G2dUGLburUm8Vf8Gw7m/z1GXB9QbYXHfPAlybwGt2c?=
- =?us-ascii?Q?OR6Oz9f1GA13dmX7lcvXCXE7g0ok0+jzoA8y?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?hKl+8vaJNeP6UZwuEZbAr6DUaFPROA4WHNfKHFOfVMeReRLsc9LI/l2NgxIG?=
- =?us-ascii?Q?fNLSOX+yxCwkQnPsVGFrox1bVLPE96Luvgx4nw60fMMNUUvgeuueGI63XPFC?=
- =?us-ascii?Q?YDStSa0qqEkvsUoJfspSBP4XgWTM4Ya3ADnO9TY4IvawIacqYhXGM4kH3Gc5?=
- =?us-ascii?Q?PHWzCPhmZY0p9ShM6Skn1jeaFQ38piVoVYvmMgClDrtoimEJwoHm52NC14N0?=
- =?us-ascii?Q?poZxuRODhlar6EUMhXITXFak3S974uv53kmSgjX4f9Bf7Hv76SgDdGeEJu66?=
- =?us-ascii?Q?26om8lvBwo0hAfBAnYlC4WrE00mCi1ouREsVqh1UtWpUc8Eqfde4u1SP4L11?=
- =?us-ascii?Q?ewP26MaKj2CNYFbNovWCXeRLNuDrKKmlgPTJsr9e6VFO0EsJ38nR92QNSGjw?=
- =?us-ascii?Q?vYBOyEev8x4e3Qpv+hEw5RW7gP0507GuetfVnj+qpzMDBoKU+kBCvemAPXQa?=
- =?us-ascii?Q?A6Pl9MarbFvOe1NKqfh4u6VP40VkP945EHGlBvw5iVzmPWnJajnaYzSDH9dI?=
- =?us-ascii?Q?4SJVHwZdhDLzY2iVkzDFST4RzsRUeA/oOntifADKUnGFs83/JSPpAPjBB5B3?=
- =?us-ascii?Q?QmNVjFPqSplhIQ4xMCZslwWFQHc/n3uSotQdNRY5phwHrsKAO209nh+26GlJ?=
- =?us-ascii?Q?phYEY+gAIeJSFUY2PbFxxWfe/lSfmRGIxPtNwZh/NxobpS+EEDGwxs4WABN3?=
- =?us-ascii?Q?dPJ1VvkXkFTz55S/X1Wub9cLII88Wcpro4lpVSEQRQRc481Gd76EvPgwXjWo?=
- =?us-ascii?Q?8Kq7mnDSn26VN1rNU81VnzmsPWVFaHBHupVtX1LTNOvxFPeiiESPUxwpR1Md?=
- =?us-ascii?Q?SyHmekzOrqA6T5QApIOm2WnncYhEBIqIak5eKQ01sbS/GuS1YI0m/CaSThce?=
- =?us-ascii?Q?f7posUDNzozhQF04tWBlpxzHasB4u/UCZPoIWkLwkv9vYd+LpTFmpaOg2Fb2?=
- =?us-ascii?Q?Nsg4raKQ1DS/b9jUpwPdt3wakZUCavu1lPwLYJWn3OwMR2HnrYuWUoN8O2k3?=
- =?us-ascii?Q?mrDHpVY5RTTzq5tLrKdRGOtUI3XX6cp9urbNxS/gC/gUIFizOuGARJy02bue?=
- =?us-ascii?Q?Lxsy4agu/qr+hLcaA3fFY4+qAjP7hh2Ovh364ul7uJKTR/3ysm8SzGovEQdw?=
- =?us-ascii?Q?LAbo5N6iIIE5j2gYLWQ1A2MN7COUaVcnvcCwGHStc1Q/mCf7q9GdmVKlqu1f?=
- =?us-ascii?Q?QTaNofGDF4RHS5Hd4fG3aAPxo4GeRJbbnKwATLiwwVUUbya8VDsUJuPLGUcs?=
- =?us-ascii?Q?r61Nq3EOR3pSBUmKw56SGTJyNGjwhuFTG7wEMsR2taw2YmoeQX3HPFjMxQ71?=
- =?us-ascii?Q?N020bQfK/6xTbE9zn1iVjUikmBXer1x3cIYODP0cAaIXOaxriGbEdR9y5yIp?=
- =?us-ascii?Q?IFsPHikhGNzAL0QgdxMZHjLFUPUCOjhhzf2a0nGh158I82R06Sp9G1OU6sOC?=
- =?us-ascii?Q?tNGDtrpTadjn1n79KlI6hKtkrvXfVUQZhRh0pWkOgZPT1gzn00AmSUiNBYo4?=
- =?us-ascii?Q?T+EuR6Ca/iVA06v4fkQEwScsXKgUDsqdYP2GV9lI7Yqc37pPXPaXw6an8LGP?=
- =?us-ascii?Q?ZmZwkm1XhyQQmEYT4KhzAhRWXr/IvvAvW/D4q65f?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f7d3866a-0c73-4afb-c278-08de2260a33d
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 02:59:18.7008
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4Ur+MwySRdvTHGZF2MfsGixiIJDiwxogn4CvQYFeNvOsNv3DubjmYJ2ihm9T/N1hjzYzZiQk1/nWb9R8NaEHrw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB7570
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTEzMDAyMCBTYWx0ZWRfX078i9lE9rtfa
- EQKGNmYhhKqr7rV8dsR20sWzLOOS0V1DHwD/LnDEx2+uEpCCcMPEYPu67jLiSQ053HMB3z9J0Gt
- J6uyUiFG3G0j4XmO10KtJQGiVkUyNWd38e4Fop+5ZdOPBXJIcuqXCZvLMTK3j2/fsWTcK8EOTey
- iMpY5CzXOkziqFNtXy3RmbBnzne+lDDFuvVAMRcsyhA8MTTj6jF89GmuanjzyG1FBmF48Jg3hrj
- VZSI5ZOMF1LU1z8OCpwZSG3i9+Xh5k/svfogIaSOCSl/DCQrjyjNyU4JuvoJZ08nUsCQjcRfwBW
- IHWkz49rW7yX/fVuAdXSoaw0EOUVZPy+/BZgWyWhrvnxUbrQOQzXjEwL1ds4XuuA+Ws+FzbZGhz
- fS1gTWI2wUxZCKdFczPILfTXKDyAog==
-X-Proofpoint-GUID: WT9IKHlyiCYCRqmuAyx1DECUEtUe_ZFC
-X-Authority-Analysis: v=2.4 cv=Uvpu9uwB c=1 sm=1 tr=0 ts=69154988 cx=c_pps
- a=+LMkLzjU88PdHoliF3eHPQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=t7CeM3EgAAAA:8 a=bp5ZUruqnwhb4Cqy5coA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: WT9IKHlyiCYCRqmuAyx1DECUEtUe_ZFC
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-12_06,2025-11-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1015 impostorscore=0 priorityscore=1501 adultscore=0
- lowpriorityscore=0 bulkscore=0 suspectscore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511130020
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 02:59:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121594
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 05:24:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121596
 
-Add UPSTREAM_CHECK_PYPI_PACKAGE to check the correct latest stable
-verison.
+Drop backported patches which have already been integrated into this version.
 
-Before the patch:
-$ devtool latest-version python3-pytest-timeout
-INFO: Current version: 2.4.0
-INFO: Latest version: 2.3.1
+0001-libxfce4ui-Avoid-deprecated-functions.patch
+  https://github.com/xfce-mirror/xfce4-weather-plugin/commit/9115037ed7cfe722d3739ca800d5247f4bb3bc53
+0002-parsers-Generalise-input-to-array-of-gchar.patch
+  https://github.com/xfce-mirror/xfce4-weather-plugin/commit/c0653a903c6f2cecdf41ac9eaeba4f4617656ffe
+0003-libsoup-Port-to-libsoup-3.0.patch
+  https://github.com/xfce-mirror/xfce4-weather-plugin/commit/279c975dc1f95bd1ce9152eee1d19122e7deb9a8
+0004-Report-UPower-Glib-support.patch
+  https://github.com/xfce-mirror/xfce4-weather-plugin/commit/3bfb13249d3c3417a05d41e5a1924c841c83ebc6
+0005-Make-libsoup-v3-support-optional.patch
+  https://github.com/xfce-mirror/xfce4-weather-plugin/commit/5116b68b453e04c2a72c21769f55b4c786a1318d
 
-After the patch:
-$ devtool latest-version python3-pytest-timeout
-INFO: Current version: 2.4.0
-INFO: Latest version: 2.4.0
+Use meson as that is now the supported build system.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Changelog: https://gitlab.xfce.org/panel-plugins/xfce4-weather-plugin/-/tags/xfce4-weather-plugin-0.12.0
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../recipes-devtools/python/python3-pytest-timeout_2.4.0.bb      | 1 +
- 1 file changed, 1 insertion(+)
+ ...ibxfce4ui-Avoid-deprecated-functions.patch |  79 ---
+ ...s-Generalise-input-to-array-of-gchar.patch | 289 --------
+ .../0003-libsoup-Port-to-libsoup-3.0.patch    | 563 ----------------
+ .../0004-Report-UPower-Glib-support.patch     |  20 -
+ ...005-Make-libsoup-v3-support-optional.patch | 626 ------------------
+ .../weather/xfce4-weather-plugin_0.11.3.bb    |  18 -
+ .../weather/xfce4-weather-plugin_0.12.0.bb    |  15 +
+ 7 files changed, 15 insertions(+), 1595 deletions(-)
+ delete mode 100644 meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0001-libxfce4ui-Avoid-deprecated-functions.patch
+ delete mode 100644 meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0002-parsers-Generalise-input-to-array-of-gchar.patch
+ delete mode 100644 meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0003-libsoup-Port-to-libsoup-3.0.patch
+ delete mode 100644 meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0004-Report-UPower-Glib-support.patch
+ delete mode 100644 meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0005-Make-libsoup-v3-support-optional.patch
+ delete mode 100644 meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb
+ create mode 100644 meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.12.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-timeout_2.4.0.bb b/meta-python/recipes-devtools/python/python3-pytest-timeout_2.4.0.bb
-index a376d02e38..6d7901f5e7 100644
---- a/meta-python/recipes-devtools/python/python3-pytest-timeout_2.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest-timeout_2.4.0.bb
-@@ -10,3 +10,4 @@ inherit pypi python_setuptools_build_meta
- RDEPENDS:${PN} = "python3-pytest"
- 
- PYPI_PACKAGE = "pytest_timeout"
-+UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0001-libxfce4ui-Avoid-deprecated-functions.patch b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0001-libxfce4ui-Avoid-deprecated-functions.patch
+deleted file mode 100644
+index 981ba560d4..0000000000
+--- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0001-libxfce4ui-Avoid-deprecated-functions.patch
++++ /dev/null
+@@ -1,79 +0,0 @@
+-From 9a3fc89f924f7a322c3b537256621640561daf95 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?=C4=90o=C3=A0n=20Tr=E1=BA=A7n=20C=C3=B4ng=20Danh?=
+- <congdanhqx@gmail.com>
+-Date: Fri, 1 Mar 2024 21:56:34 +0700
+-Subject: [PATCH 1/5] libxfce4ui: Avoid deprecated functions
+-
+-- xfce_titled_dialog_new_with_buttons is deprecated from 4.16.
+-- xfce_spawn_command_line_on_screen is deprecated from 4.16
+-
+-- xfce_titled_dialog_new_with_mixed_buttons is available from 4.14
+-- xfce_spawn_command_line is available from 4.16
+-
+-Upstream-Status: Backport [https://github.com/xfce-mirror/xfce4-weather-plugin/commit/9115037ed7cfe722d3739ca800d5247f4bb3bc53]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- configure.ac                  |  2 +-
+- panel-plugin/weather-config.c |  4 ++--
+- panel-plugin/weather-search.c | 20 +++++++++++---------
+- 3 files changed, 14 insertions(+), 12 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index e0516e6..cf82b7e 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -66,7 +66,7 @@ XDT_CHECK_PACKAGE([GTK], [gtk+-3.0], [3.22.0])
+- XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.64.0])
+- XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.64.0])
+- XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.12.0])
+--XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [4.12.0])
+-+XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [4.16.0])
+- XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-2.0], [4.14.0])
+- XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [4.12.0])
+- XDT_CHECK_PACKAGE([LIBXML], [libxml-2.0], [2.4.0])
+-diff --git a/panel-plugin/weather-config.c b/panel-plugin/weather-config.c
+-index 9f77340..2645408 100644
+---- a/panel-plugin/weather-config.c
+-+++ b/panel-plugin/weather-config.c
+-@@ -958,8 +958,8 @@ button_icons_dir_clicked(GtkWidget *button,
+-     g_mkdir_with_parents(dir, 0755);
+-     command = g_strdup_printf("exo-open %s", dir);
+-     g_free(dir);
+--    xfce_spawn_command_line_on_screen(gdk_screen_get_default(),
+--                                      command, FALSE, TRUE, NULL);
+-+    xfce_spawn_command_line(gdk_screen_get_default(), command, FALSE,
+-+                            TRUE, TRUE, NULL);
+-     g_free(command);
+- }
+- 
+-diff --git a/panel-plugin/weather-search.c b/panel-plugin/weather-search.c
+-index 83f1d71..7e87ae8 100644
+---- a/panel-plugin/weather-search.c
+-+++ b/panel-plugin/weather-search.c
+-@@ -205,15 +205,17 @@ create_search_dialog(GtkWindow *parent,
+-     dialog->session = session;
+- 
+-     dialog->dialog =
+--        xfce_titled_dialog_new_with_buttons(_("Search location"),
+--                                            parent,
+--                                            GTK_DIALOG_MODAL |
+--                                            GTK_DIALOG_DESTROY_WITH_PARENT,
+--                                            _("Cancel"),
+--                                            GTK_RESPONSE_REJECT,
+--                                            _("OK"),
+--                                            GTK_RESPONSE_ACCEPT,
+--                                            NULL);
+-+        xfce_titled_dialog_new_with_mixed_buttons(_("Search location"),
+-+                                                  parent,
+-+                                                  GTK_DIALOG_MODAL |
+-+                                                  GTK_DIALOG_DESTROY_WITH_PARENT,
+-+                                                  "",
+-+                                                  _("Cancel"),
+-+                                                  GTK_RESPONSE_REJECT,
+-+                                                  "",
+-+                                                  _("OK"),
+-+                                                  GTK_RESPONSE_ACCEPT,
+-+                                                  NULL);
+-     gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog->dialog),
+-                                       GTK_RESPONSE_ACCEPT, FALSE);
+-     gtk_window_set_icon_name(GTK_WINDOW(dialog->dialog), "edit-find");
+diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0002-parsers-Generalise-input-to-array-of-gchar.patch b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0002-parsers-Generalise-input-to-array-of-gchar.patch
+deleted file mode 100644
+index a76a7741bf..0000000000
+--- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0002-parsers-Generalise-input-to-array-of-gchar.patch
++++ /dev/null
+@@ -1,289 +0,0 @@
+-From 3c095487e3a6c14f2900762c18c6e2170d22a283 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?=C4=90o=C3=A0n=20Tr=E1=BA=A7n=20C=C3=B4ng=20Danh?=
+- <congdanhqx@gmail.com>
+-Date: Fri, 1 Mar 2024 21:56:34 +0700
+-Subject: [PATCH 2/5] parsers: Generalise input to array of gchar
+-
+-In a later change, we will move to libsoup-3.0, which doesn't expose
+-`response_body' in SoupMessage.
+-
+-Prepare for that move.
+-
+-Upstream-Status: Backport [https://github.com/xfce-mirror/xfce4-weather-plugin/commit/3c095487e3a6c14f2900762c18c6e2170d22a283]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- panel-plugin/weather-config.c  | 18 +++++++++++++++--
+- panel-plugin/weather-parsers.c | 36 ++++++++++++++++++----------------
+- panel-plugin/weather-parsers.h |  7 +++----
+- panel-plugin/weather-search.c  | 18 +++++++++++++++--
+- panel-plugin/weather.c         | 26 ++++++++++++++++++++----
+- 5 files changed, 76 insertions(+), 29 deletions(-)
+-
+-diff --git a/panel-plugin/weather-config.c b/panel-plugin/weather-config.c
+-index 2645408..19fa1d8 100644
+---- a/panel-plugin/weather-config.c
+-+++ b/panel-plugin/weather-config.c
+-@@ -245,6 +245,13 @@ cb_lookup_altitude(SoupSession *session,
+-     xfceweather_dialog *dialog = (xfceweather_dialog *) user_data;
+-     xml_altitude *altitude;
+-     gdouble alt = 0;
+-+    const gchar *body = NULL;
+-+    gsize len = 0;
+-+
+-+    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+        body = msg->response_body->data;
+-+        len = msg->response_body->length;
+-+    }
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -252,7 +259,7 @@ cb_lookup_altitude(SoupSession *session,
+-     }
+- 
+-     altitude = (xml_altitude *)
+--        parse_xml_document(msg, (XmlParseFunc) parse_altitude);
+-+        parse_xml_document(body, len, (XmlParseFunc) parse_altitude);
+- 
+-     if (altitude) {
+-         alt = string_to_double(altitude->altitude, -9999);
+-@@ -274,6 +281,13 @@ cb_lookup_timezone(SoupSession *session,
+- {
+-     xfceweather_dialog *dialog = (xfceweather_dialog *) user_data;
+-     xml_timezone *xml_tz;
+-+    const gchar *body = NULL;
+-+    gsize len = 0;
+-+
+-+    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+        body = msg->response_body->data;
+-+        len = msg->response_body->length;
+-+    }
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -281,7 +295,7 @@ cb_lookup_timezone(SoupSession *session,
+-     }
+- 
+-     xml_tz = (xml_timezone *)
+--        parse_xml_document(msg, (XmlParseFunc) parse_timezone);
+-+        parse_xml_document(body, len, (XmlParseFunc) parse_timezone);
+-     weather_dump(weather_dump_timezone, xml_tz);
+- 
+-     if (xml_tz) {
+-diff --git a/panel-plugin/weather-parsers.c b/panel-plugin/weather-parsers.c
+-index d53a2bc..28934c4 100644
+---- a/panel-plugin/weather-parsers.c
+-+++ b/panel-plugin/weather-parsers.c
+-@@ -791,49 +791,51 @@ parse_timezone(xmlNode *cur_node)
+- 
+- 
+- xmlDoc *
+--get_xml_document(SoupMessage *msg)
+-+get_xml_document(const gchar *data, gsize len)
+- {
+--    if (G_LIKELY(msg && msg->response_body && msg->response_body->data)) {
+--        if (g_utf8_validate(msg->response_body->data, -1, NULL)) {
+-+    if (G_LIKELY(data && len)) {
+-+        if (g_utf8_validate(data, len, NULL)) {
+-             /* force parsing as UTF-8, the XML encoding header may lie */
+--            return xmlReadMemory(msg->response_body->data,
+--                                 strlen(msg->response_body->data),
+-+            return xmlReadMemory(data, len,
+-                                  NULL, "UTF-8", 0);
+-         } else {
+--            return xmlParseMemory(msg->response_body->data,
+--                                  strlen(msg->response_body->data));
+-+            return xmlParseMemory(data, len);
+-         }
+-     }
+-     return NULL;
+- }
+- 
+- json_object *
+--get_json_tree(SoupMessage *msg)
+-+get_json_tree(const gchar *data, gsize len)
+- {
+-     json_object *res=NULL;
+--    enum json_tokener_error err;
+-+    struct json_tokener *tok = json_tokener_new();
+- 
+--    if (G_LIKELY(msg && msg->response_body && msg->response_body->data)) {
+--        res =  json_tokener_parse_verbose(msg->response_body->data, &err);
+--        if (err != json_tokener_success)
+--            g_warning("get_json_tree: error =%d",err);
+-+    if (G_UNLIKELY(tok == NULL)) {
+-+        return NULL;
+-+    } else if (G_LIKELY(data && len)) {
+-+        res =  json_tokener_parse_ex(tok, data, len);
+-+        if (res == NULL)
+-+            g_warning("get_json_tree: error =%d",
+-+                      json_tokener_get_error(tok));
+-     }
+-+    json_tokener_free(tok);
+-     return res;
+- }
+- 
+- gpointer
+--parse_xml_document(SoupMessage *msg,
+-+parse_xml_document(const gchar *data, gsize len,
+-                    XmlParseFunc parse_func)
+- {
+-     xmlDoc *doc;
+-     xmlNode *root_node;
+-     gpointer user_data = NULL;
+- 
+--    g_assert(msg != NULL);
+--    if (G_UNLIKELY(msg == NULL))
+-+    g_assert(data != NULL);
+-+    if (G_UNLIKELY(data == NULL || len == 0))
+-         return NULL;
+- 
+--    doc = get_xml_document(msg);
+-+    doc = get_xml_document(data, len);
+-     if (G_LIKELY(doc)) {
+-         root_node = xmlDocGetRootElement(doc);
+-         if (G_LIKELY(root_node))
+-diff --git a/panel-plugin/weather-parsers.h b/panel-plugin/weather-parsers.h
+-index a9d019d..09b9c02 100644
+---- a/panel-plugin/weather-parsers.h
+-+++ b/panel-plugin/weather-parsers.h
+-@@ -22,7 +22,6 @@
+- #include <glib.h>
+- #include <gtk/gtk.h>
+- #include <libxml/parser.h>
+--#include <libsoup/soup.h>
+- #include <json-c/json_tokener.h>
+- 
+- #define DATA_EXPIRY_TIME (24 * 3600)
+-@@ -157,11 +156,11 @@ xml_astro *get_astro(const GArray *astrodata,
+-                      const time_t day_t,
+-                      guint *index);
+- 
+--xmlDoc *get_xml_document(SoupMessage *msg);
+-+xmlDoc *get_xml_document(const gchar *data, gsize len);
+- 
+--json_object *get_json_tree(SoupMessage *msg);
+-+json_object *get_json_tree(const gchar *data, gsize len);
+- 
+--gpointer parse_xml_document(SoupMessage *msg,
+-+gpointer parse_xml_document(const gchar *data, gsize len,
+-                             XmlParseFunc parse_func);
+- 
+- xml_astro *xml_astro_copy(const xml_astro *src);
+-diff --git a/panel-plugin/weather-search.c b/panel-plugin/weather-search.c
+-index 7e87ae8..6a2ba1f 100644
+---- a/panel-plugin/weather-search.c
+-+++ b/panel-plugin/weather-search.c
+-@@ -89,6 +89,13 @@ cb_searchdone(SoupSession *session,
+-     gint found = 0;
+-     GtkTreeIter iter;
+-     GtkTreeSelection *selection;
+-+    const gchar *body = NULL;
+-+    gsize len = 0;
+-+
+-+    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+        body = msg->response_body->data;
+-+        len = msg->response_body->length;
+-+    }
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -97,7 +104,7 @@ cb_searchdone(SoupSession *session,
+- 
+-     gtk_widget_set_sensitive(dialog->find_button, TRUE);
+- 
+--    doc = get_xml_document(msg);
+-+    doc = get_xml_document(body, len);
+-     if (!doc)
+-         return;
+- 
+-@@ -385,6 +392,13 @@ cb_geolocation(SoupSession *session,
+-     xml_geolocation *geo;
+-     gchar *full_loc;
+-     units_config *units;
+-+    const gchar *body = NULL;
+-+    gsize len = 0;
+-+
+-+    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+        body = msg->response_body->data;
+-+        len = msg->response_body->length;
+-+    }
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -392,7 +406,7 @@ cb_geolocation(SoupSession *session,
+-     }
+- 
+-     geo = (xml_geolocation *)
+--        parse_xml_document(msg, (XmlParseFunc) parse_geolocation);
+-+        parse_xml_document(body, len, (XmlParseFunc) parse_geolocation);
+-     weather_dump(weather_dump_geolocation, geo);
+- 
+-     if (!geo) {
+-diff --git a/panel-plugin/weather.c b/panel-plugin/weather.c
+-index 0a92b4e..b75c633 100644
+---- a/panel-plugin/weather.c
+-+++ b/panel-plugin/weather.c
+-@@ -489,11 +489,17 @@ cb_astro_update_sun(SoupSession *session,
+-     json_object *json_tree;
+-     time_t now_t;
+-     guint astro_forecast_days;
+-+    const gchar *body = NULL;
+-+    gsize len = 0;
+- 
+-     data->msg_parse->sun_msg_processed++;
+-     data->astro_update->http_status_code = msg->status_code;
+-     if ((msg->status_code == 200 || msg->status_code == 203)) {
+--        json_tree = get_json_tree(msg);
+-+        if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+            body = msg->response_body->data;
+-+            len = msg->response_body->length;
+-+        }
+-+        json_tree = get_json_tree(body, len);
+-         if (G_LIKELY(json_tree)) {
+-             if (!parse_astrodata_sun(json_tree, data->astrodata))  {
+-                 data->msg_parse->sun_msg_parse_error++;
+-@@ -545,11 +551,17 @@ cb_astro_update_moon(SoupSession *session,
+-     json_object *json_tree;
+-     time_t now_t;
+-     guint astro_forecast_days;
+-+    const gchar *body = NULL;
+-+    gsize len = 0;
+- 
+-     data->msg_parse->moon_msg_processed++;
+-     data->astro_update->http_status_code = msg->status_code;
+-     if ((msg->status_code == 200 || msg->status_code == 203)) {
+--        json_tree = get_json_tree(msg);
+-+        if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+            body = msg->response_body->data;
+-+            len = msg->response_body->length;
+-+        }
+-+        json_tree = get_json_tree(body, len);
+-         if (G_LIKELY(json_tree)) {
+-             if (!parse_astrodata_moon(json_tree, data->astrodata))  {
+-                 data->msg_parse->moon_msg_parse_error++;
+-@@ -606,17 +618,23 @@ cb_weather_update(SoupSession *session,
+-                   gpointer user_data)
+- {
+-     plugin_data *data = user_data;
+--    xmlDoc *doc;
+-+    xmlDoc *doc = NULL;
+-     xmlNode *root_node;
+-     time_t now_t;
+-     gboolean parsing_error = TRUE;
+-+    const gchar *body = NULL;
+-+    gsize len = 0;
+- 
+-     weather_debug("Processing downloaded weather data.");
+-     time(&now_t);
+-     data->weather_update->attempt++;
+-     data->weather_update->http_status_code = msg->status_code;
+-     if (msg->status_code == 200 || msg->status_code == 203) {
+--        doc = get_xml_document(msg);
+-+        if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+            body = msg->response_body->data;
+-+            len = msg->response_body->length;
+-+        }
+-+        doc = get_xml_document(body, len);
+-         if (G_LIKELY(doc)) {
+-             root_node = xmlDocGetRootElement(doc);
+-             if (G_LIKELY(root_node))
+diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0003-libsoup-Port-to-libsoup-3.0.patch b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0003-libsoup-Port-to-libsoup-3.0.patch
+deleted file mode 100644
+index 3970df672b..0000000000
+--- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0003-libsoup-Port-to-libsoup-3.0.patch
++++ /dev/null
+@@ -1,563 +0,0 @@
+-From 05b3ab7c755d7a6667852576ed11944304acdd4a Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?=C4=90o=C3=A0n=20Tr=E1=BA=A7n=20C=C3=B4ng=20Danh?=
+- <congdanhqx@gmail.com>
+-Date: Fri, 1 Mar 2024 21:56:34 +0700
+-Subject: [PATCH 3/5] libsoup: Port to libsoup-3.0
+-
+-Upstream-Status: Backport [https://github.com/xfce-mirror/xfce4-weather-plugin/commit/05b3ab7c755d7a6667852576ed11944304acdd4a]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- README                         |   4 +-
+- configure.ac                   |   2 +-
+- panel-plugin/weather-config.c  |  32 ++++---
+- panel-plugin/weather-search.c  |  37 ++++++---
+- panel-plugin/weather-summary.c |  23 ++++--
+- panel-plugin/weather.c         | 147 +++++++++++++++------------------
+- panel-plugin/weather.h         |   2 +-
+- 7 files changed, 132 insertions(+), 115 deletions(-)
+-
+-diff --git a/README b/README
+-index 6587581..3530b1f 100644
+---- a/README
+-+++ b/README
+-@@ -152,10 +152,10 @@ using gdb or any other debugger should the plugin crash:
+- BUILD REQUIREMENTS AND DEPENDENCIES
+- ==========================================================================
+- To be able to build the plugin, the following requirements have to be
+--met in addition to those of XFCE-4.14:
+-+met in addition to those of XFCE-4.16:
+- 
+- * >=libxml-2.4.0
+--* >=libsoup-2.42.0
+-+* >=libsoup-3.0.0
+- * >=upower-0.9.0 (optional)
+- 
+- You might also need developer libraries necessary for building other
+-diff --git a/configure.ac b/configure.ac
+-index cf82b7e..15e8b46 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -70,7 +70,7 @@ XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [4.16.0])
+- XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-2.0], [4.14.0])
+- XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [4.12.0])
+- XDT_CHECK_PACKAGE([LIBXML], [libxml-2.0], [2.4.0])
+--XDT_CHECK_PACKAGE([SOUP], [libsoup-2.4], [2.42.0])
+-+XDT_CHECK_PACKAGE([SOUP], [libsoup-3.0], [3.0.0])
+- XDT_CHECK_PACKAGE([JSON], [json-c], [0.13.1])
+- XDT_CHECK_OPTIONAL_PACKAGE([UPOWER_GLIB], [upower-glib], [0.9.0], [upower],
+-                            [upower for adapting update interval to power state])
+-diff --git a/panel-plugin/weather-config.c b/panel-plugin/weather-config.c
+-index 19fa1d8..d27c825 100644
+---- a/panel-plugin/weather-config.c
+-+++ b/panel-plugin/weather-config.c
+-@@ -238,8 +238,8 @@ sanitize_location_name(const gchar *location_name)
+- 
+- 
+- static void
+--cb_lookup_altitude(SoupSession *session,
+--                   SoupMessage *msg,
+-+cb_lookup_altitude(GObject *source,
+-+                   GAsyncResult *result,
+-                    gpointer user_data)
+- {
+-     xfceweather_dialog *dialog = (xfceweather_dialog *) user_data;
+-@@ -247,11 +247,14 @@ cb_lookup_altitude(SoupSession *session,
+-     gdouble alt = 0;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+    GError *error = NULL;
+-+    GBytes *response =
+-+        soup_session_send_and_read_finish(SOUP_SESSION(source), result, &error);
+- 
+--    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+--        body = msg->response_body->data;
+--        len = msg->response_body->length;
+--    }
+-+    if (G_UNLIKELY(error))
+-+        g_error_free(error);
+-+    else
+-+        body = g_bytes_get_data(response, &len);
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -271,23 +274,27 @@ cb_lookup_altitude(SoupSession *session,
+-     else if (dialog->pd->units->altitude == FEET)
+-         alt /= 0.3048;
+-     gtk_spin_button_set_value(GTK_SPIN_BUTTON(dialog->spin_alt), alt);
+-+    g_bytes_unref(response);
+- }
+- 
+- 
+- static void
+--cb_lookup_timezone(SoupSession *session,
+--                   SoupMessage *msg,
+-+cb_lookup_timezone(GObject *source,
+-+                   GAsyncResult *result,
+-                    gpointer user_data)
+- {
+-     xfceweather_dialog *dialog = (xfceweather_dialog *) user_data;
+-     xml_timezone *xml_tz;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+    GError *error = NULL;
+-+    GBytes *response =
+-+        soup_session_send_and_read_finish(SOUP_SESSION(source), result, &error);
+- 
+--    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+--        body = msg->response_body->data;
+--        len = msg->response_body->length;
+--    }
+-+    if (G_UNLIKELY(error))
+-+        g_error_free(error);
+-+    else
+-+        body = g_bytes_get_data(response, &len);
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -304,6 +311,7 @@ cb_lookup_timezone(SoupSession *session,
+-         xml_timezone_free(xml_tz);
+-     } else
+-         gtk_entry_set_text(GTK_ENTRY(dialog->text_timezone), "");
+-+    g_bytes_unref(response);
+- }
+- 
+- 
+-diff --git a/panel-plugin/weather-search.c b/panel-plugin/weather-search.c
+-index 6a2ba1f..e030ff8 100644
+---- a/panel-plugin/weather-search.c
+-+++ b/panel-plugin/weather-search.c
+-@@ -78,8 +78,8 @@ sanitize_str(const gchar *str)
+- 
+- 
+- static void
+--cb_searchdone(SoupSession *session,
+--              SoupMessage *msg,
+-+cb_searchdone(GObject *source,
+-+              GAsyncResult *result,
+-               gpointer user_data)
+- {
+-     search_dialog *dialog = (search_dialog *) user_data;
+-@@ -91,11 +91,14 @@ cb_searchdone(SoupSession *session,
+-     GtkTreeSelection *selection;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+    GError *error = NULL;
+-+    GBytes *response =
+-+        soup_session_send_and_read_finish(SOUP_SESSION(source), result, &error);
+- 
+--    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+--        body = msg->response_body->data;
+--        len = msg->response_body->length;
+--    }
+-+    if (G_UNLIKELY(error))
+-+        g_error_free(error);
+-+    else
+-+        body = g_bytes_get_data(response, &len);
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -105,8 +108,10 @@ cb_searchdone(SoupSession *session,
+-     gtk_widget_set_sensitive(dialog->find_button, TRUE);
+- 
+-     doc = get_xml_document(body, len);
+--    if (!doc)
+-+    if (!doc) {
+-+        g_bytes_unref(response);
+-         return;
+-+    }
+- 
+-     cur_node = xmlDocGetRootElement(doc);
+-     if (cur_node) {
+-@@ -140,6 +145,7 @@ cb_searchdone(SoupSession *session,
+-         }
+- 
+-     gtk_tree_view_column_set_title(dialog->column, _("Results"));
+-+    g_bytes_unref(response);
+- }
+- 
+- 
+-@@ -384,8 +390,8 @@ get_preferred_units(const gchar *country_code)
+- 
+- 
+- static void
+--cb_geolocation(SoupSession *session,
+--               SoupMessage *msg,
+-+cb_geolocation(GObject *source,
+-+               GAsyncResult *result,
+-                gpointer user_data)
+- {
+-     geolocation_data *data = (geolocation_data *) user_data;
+-@@ -394,11 +400,14 @@ cb_geolocation(SoupSession *session,
+-     units_config *units;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+    GError *error = NULL;
+-+    GBytes *response =
+-+        soup_session_send_and_read_finish(SOUP_SESSION(source), result, &error);
+- 
+--    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+--        body = msg->response_body->data;
+--        len = msg->response_body->length;
+--    }
+-+    if (G_UNLIKELY(error))
+-+        g_error_free(error);
+-+    else
+-+        body = g_bytes_get_data(response, &len);
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -411,6 +420,7 @@ cb_geolocation(SoupSession *session,
+- 
+-     if (!geo) {
+-         data->cb(NULL, NULL, NULL, NULL, data->user_data);
+-+        g_bytes_unref(response);
+-         g_free(data);
+-         return;
+-     }
+-@@ -441,6 +451,7 @@ cb_geolocation(SoupSession *session,
+-     g_slice_free(units_config, units);
+-     xml_geolocation_free(geo);
+-     g_free(full_loc);
+-+    g_bytes_unref(response);
+-     g_free(data);
+- }
+- 
+-diff --git a/panel-plugin/weather-summary.c b/panel-plugin/weather-summary.c
+-index a6a2f56..224bb34 100644
+---- a/panel-plugin/weather-summary.c
+-+++ b/panel-plugin/weather-summary.c
+-@@ -234,22 +234,29 @@ get_logo_path(void)
+- 
+- 
+- static void
+--logo_fetched(SoupSession *session,
+--             SoupMessage *msg,
+-+logo_fetched(GObject *source,
+-+             GAsyncResult *result,
+-              gpointer user_data)
+- {
+--    if (msg && msg->response_body && msg->response_body->length > 0) {
+-+    GError *error = NULL;
+-+    GBytes *response =
+-+        soup_session_send_and_read_finish(SOUP_SESSION(source), result, &error);
+-+
+-+    if (G_LIKELY(error == NULL)) {
+-+        gsize len = 0;
+-+        const gchar *body = g_bytes_get_data(response, &len);
+-         gchar *path = get_logo_path();
+--        GError *error = NULL;
+-         GdkPixbuf *pixbuf = NULL;
+-         gint scale_factor;
+--        if (!g_file_set_contents(path, msg->response_body->data,
+--                                 msg->response_body->length, &error)) {
+-+        g_file_set_contents(path, body, len, &error);
+-+        g_bytes_unref(response);
+-+        if (error) {
+-             g_warning("Error downloading met.no logo image to %s, "
+-                       "reason: %s\n", path,
+-                       error ? error->message : "unknown");
+-             g_error_free(error);
+-             g_free(path);
+-+            g_bytes_unref(response);
+-             return;
+-         }
+-         scale_factor = gtk_widget_get_scale_factor(user_data);
+-@@ -261,7 +268,9 @@ logo_fetched(SoupSession *session,
+-             cairo_surface_destroy(surface);
+-             g_object_unref(pixbuf);
+-         }
+--    }
+-+        g_bytes_unref(response);
+-+    } else
+-+        g_error_free(error);
+- }
+- 
+- 
+-diff --git a/panel-plugin/weather.c b/panel-plugin/weather.c
+-index b75c633..1a84537 100644
+---- a/panel-plugin/weather.c
+-+++ b/panel-plugin/weather.c
+-@@ -23,6 +23,8 @@
+- #include <string.h>
+- #include <sys/stat.h>
+- 
+-+#include <glib.h>
+-+
+- #include <libxfce4util/libxfce4util.h>
+- #include <libxfce4ui/libxfce4ui.h>
+- #include <xfconf/xfconf.h>
+-@@ -106,13 +108,14 @@ static void schedule_next_wakeup(plugin_data *data);
+- void
+- weather_http_queue_request(SoupSession *session,
+-                            const gchar *uri,
+--                           SoupSessionCallback callback_func,
+-+                           GAsyncReadyCallback callback_func,
+-                            gpointer user_data)
+- {
+-     SoupMessage *msg;
+- 
+-     msg = soup_message_new("GET", uri);
+--    soup_session_queue_message(session, msg, callback_func, user_data);
+-+    soup_session_send_and_read_async(session, msg, G_PRIORITY_DEFAULT, NULL,
+-+                                     callback_func, user_data);
+- }
+- 
+- 
+-@@ -481,8 +484,8 @@ calc_next_download_time(const update_info *upi,
+-  * Process downloaded sun astro data and schedule next astro update.
+-  */
+- static void
+--cb_astro_update_sun(SoupSession *session,
+--                    SoupMessage *msg,
+-+cb_astro_update_sun(GObject *source,
+-+                    GAsyncResult *result,
+-                     gpointer user_data)
+- {
+-     plugin_data *data = user_data;
+-@@ -491,14 +494,17 @@ cb_astro_update_sun(SoupSession *session,
+-     guint astro_forecast_days;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+    SoupMessage *msg;
+-+    GError *error = NULL;
+-+    GBytes *response;
+- 
+-+    msg = soup_session_get_async_result_message(SOUP_SESSION(source), result);
+-     data->msg_parse->sun_msg_processed++;
+--    data->astro_update->http_status_code = msg->status_code;
+--    if ((msg->status_code == 200 || msg->status_code == 203)) {
+--        if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+--            body = msg->response_body->data;
+--            len = msg->response_body->length;
+--        }
+-+    data->astro_update->http_status_code = soup_message_get_status(msg);
+-+    response = soup_session_send_and_read_finish(SOUP_SESSION(source),
+-+                                                 result, &error);
+-+    if (G_LIKELY(error == NULL)) {
+-+        body = g_bytes_get_data(response, &len);
+-         json_tree = get_json_tree(body, len);
+-         if (G_LIKELY(json_tree)) {
+-             if (!parse_astrodata_sun(json_tree, data->astrodata))  {
+-@@ -514,10 +520,12 @@ cb_astro_update_sun(SoupSession *session,
+-             g_warning("Error parsing sun astronomical data!");
+-             weather_debug("No json_tree");
+-         }
+-+        g_bytes_unref(response);
+-     } else {
+-         data->msg_parse->http_msg_fail = TRUE;
+--        g_warning_once("Download of sun astronomical data failed with HTTP Status Code %d, Reason phrase: %s",
+--                       msg->status_code, msg->reason_phrase);
+-+        g_warning_once("Download of sun astronomical data failed: %s",
+-+                       error->message);
+-+        g_error_free(error);
+-     }
+- 
+-     astro_forecast_days = data->forecast_days + 1;
+-@@ -543,8 +551,8 @@ cb_astro_update_sun(SoupSession *session,
+-  * Process downloaded moon astro data and schedule next astro update.
+-  */
+- static void
+--cb_astro_update_moon(SoupSession *session,
+--                     SoupMessage *msg,
+-+cb_astro_update_moon(GObject *source,
+-+                     GAsyncResult *result,
+-                      gpointer user_data)
+- {
+-     plugin_data *data = user_data;
+-@@ -553,14 +561,17 @@ cb_astro_update_moon(SoupSession *session,
+-     guint astro_forecast_days;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+    SoupMessage *msg;
+-+    GError *error = NULL;
+-+    GBytes *response;
+- 
+-+    response = soup_session_send_and_read_finish(SOUP_SESSION(source),
+-+                                                 result, &error);
+-+    msg = soup_session_get_async_result_message(SOUP_SESSION(source), result);
+-     data->msg_parse->moon_msg_processed++;
+--    data->astro_update->http_status_code = msg->status_code;
+--    if ((msg->status_code == 200 || msg->status_code == 203)) {
+--        if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+--            body = msg->response_body->data;
+--            len = msg->response_body->length;
+--        }
+-+    data->astro_update->http_status_code = soup_message_get_status(msg);
+-+    if (G_LIKELY(error == NULL)) {
+-+        body = g_bytes_get_data(response, &len);
+-         json_tree = get_json_tree(body, len);
+-         if (G_LIKELY(json_tree)) {
+-             if (!parse_astrodata_moon(json_tree, data->astrodata))  {
+-@@ -576,10 +587,12 @@ cb_astro_update_moon(SoupSession *session,
+-             g_warning("Error parsing moon astronomical data");
+-             weather_debug("No json_tree");
+-         }
+-+        g_bytes_unref(response);
+-     } else {
+-         data->msg_parse->http_msg_fail = TRUE;
+--        g_warning_once("Download of moon astronomical data failed with HTTP Status Code %d, Reason phrase: %s",
+--                       msg->status_code, msg->reason_phrase);
+-+        g_warning_once("Download of moon astronomical data failed: %s",
+-+                       error->message);
+-+        g_error_free(error);
+-     }
+- 
+-     astro_forecast_days = data->forecast_days + 1;
+-@@ -613,8 +626,8 @@ cb_astro_update_moon(SoupSession *session,
+-  * Process downloaded weather data and schedule next weather update.
+-  */
+- static void
+--cb_weather_update(SoupSession *session,
+--                  SoupMessage *msg,
+-+cb_weather_update(GObject *source,
+-+                  GAsyncResult *result,
+-                   gpointer user_data)
+- {
+-     plugin_data *data = user_data;
+-@@ -624,16 +637,19 @@ cb_weather_update(SoupSession *session,
+-     gboolean parsing_error = TRUE;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+    SoupMessage *msg;
+-+    GError *error = NULL;
+-+    GBytes *response = NULL;
+- 
+-     weather_debug("Processing downloaded weather data.");
+-+    response = soup_session_send_and_read_finish(SOUP_SESSION(source),
+-+                                                 result, &error);
+-+    msg = soup_session_get_async_result_message(SOUP_SESSION(source), result);
+-     time(&now_t);
+-     data->weather_update->attempt++;
+--    data->weather_update->http_status_code = msg->status_code;
+--    if (msg->status_code == 200 || msg->status_code == 203) {
+--        if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+--            body = msg->response_body->data;
+--            len = msg->response_body->length;
+--        }
+-+    data->weather_update->http_status_code = soup_message_get_status(msg);
+-+    if (G_LIKELY(error == NULL)) {
+-+        body = g_bytes_get_data(response, &len);
+-         doc = get_xml_document(body, len);
+-         if (G_LIKELY(doc)) {
+-             root_node = xmlDocGetRootElement(doc);
+-@@ -645,12 +661,13 @@ cb_weather_update(SoupSession *session,
+-                 }
+-             xmlFreeDoc(doc);
+-         }
+-+        g_bytes_unref(response);
+-         if (parsing_error)
+-             g_warning("Error parsing weather data!");
+--    } else
+--        weather_debug
+--            ("Download of weather data failed with HTTP Status Code %d, "
+--             "Reason phrase: %s", msg->status_code, msg->reason_phrase);
+-+    } else {
+-+        weather_debug("Download of weather data failed: %s", error->message);
+-+        g_error_free(error);
+-+    }
+-     data->weather_update->next = calc_next_download_time(data->weather_update,
+-                                                          now_t);
+- 
+-@@ -1708,32 +1725,6 @@ mi_click(GtkWidget *widget,
+-     update_weatherdata_with_reset(data);
+- }
+- 
+--static void
+--proxy_auth(SoupSession *session,
+--           SoupMessage *msg,
+--           SoupAuth *auth,
+--           gboolean retrying,
+--           gpointer user_data)
+--{
+--    SoupURI *soup_proxy_uri;
+--    const gchar *proxy_uri;
+--
+--    if (!retrying) {
+--        if (msg->status_code == SOUP_STATUS_PROXY_AUTHENTICATION_REQUIRED) {
+--            proxy_uri = g_getenv("HTTP_PROXY");
+--            if (!proxy_uri)
+--                proxy_uri = g_getenv("http_proxy");
+--            if (proxy_uri) {
+--                soup_proxy_uri = soup_uri_new(proxy_uri);
+--                soup_auth_authenticate(auth,
+--                                       soup_uri_get_user(soup_proxy_uri),
+--                                       soup_uri_get_password(soup_proxy_uri));
+--                soup_uri_free(soup_proxy_uri);
+--            }
+--        }
+--    }
+--}
+--
+- 
+- #ifdef HAVE_UPOWER_GLIB
+- static void
+-@@ -2037,9 +2028,10 @@ static plugin_data *
+- xfceweather_create_control(XfcePanelPlugin *plugin)
+- {
+-     plugin_data *data = g_slice_new0(plugin_data);
+--    SoupURI *soup_proxy_uri;
+-+    GProxyResolver *proxy_resolver;
+-     const gchar *proxy_uri;
+--    const gchar *proxy_user;
+-+    const gchar *no_proxy;
+-+    gchar **no_proxy_lst = NULL;
+-     GtkWidget *refresh;
+-     cairo_surface_t *icon = NULL;
+-     data_types lbl;
+-@@ -2077,29 +2069,26 @@ xfceweather_create_control(XfcePanelPlugin *plugin)
+- 
+-     /* Setup session for HTTP connections */
+-     data->session = soup_session_new();
+--    g_object_set(data->session, SOUP_SESSION_USER_AGENT,
+--                 PACKAGE_NAME "-" PACKAGE_VERSION, NULL);
+--    g_object_set(data->session, SOUP_SESSION_TIMEOUT,
+--                 CONN_TIMEOUT, NULL);
+-+    soup_session_set_user_agent(data->session,
+-+                                PACKAGE_NAME "-" PACKAGE_VERSION);
+-+    soup_session_set_timeout(data->session, CONN_TIMEOUT);
+- 
+-     /* Set the proxy URI from environment */
+-     proxy_uri = g_getenv("HTTP_PROXY");
+-     if (!proxy_uri)
+-         proxy_uri = g_getenv("http_proxy");
+-     if (proxy_uri) {
+--        soup_proxy_uri = soup_uri_new(proxy_uri);
+--        g_object_set(data->session, SOUP_SESSION_PROXY_URI,
+--                     soup_proxy_uri, NULL);
+--
+--        /* check if uri contains authentication info */
+--        proxy_user = soup_uri_get_user(soup_proxy_uri);
+--        if (proxy_user && strlen(proxy_user) > 0) {
+--            g_signal_connect(G_OBJECT(data->session), "authenticate",
+--                             G_CALLBACK(proxy_auth), NULL);
+--        }
+--
+--        soup_uri_free(soup_proxy_uri);
+--    }
+-+        no_proxy = g_getenv("no_proxy");
+-+        if (!no_proxy)
+-+            no_proxy = g_getenv("NO_PROXY");
+-+        if (no_proxy)
+-+            no_proxy_lst = g_strsplit(no_proxy, ",", -1);
+-+        proxy_resolver = g_simple_proxy_resolver_new(proxy_uri, no_proxy_lst);
+-+        g_strfreev(no_proxy_lst);
+-+        soup_session_set_proxy_resolver(data->session, proxy_resolver);
+-+        g_object_unref(proxy_resolver);
+-+    }
+-+    /* Otherwise, g_proxy_resolver_get_default() will be used */
+- 
+-     data->scrollbox = gtk_scrollbox_new();
+- 
+-diff --git a/panel-plugin/weather.h b/panel-plugin/weather.h
+-index 208de09..01974ce 100644
+---- a/panel-plugin/weather.h
+-+++ b/panel-plugin/weather.h
+-@@ -183,7 +183,7 @@ extern gboolean debug_mode;
+- 
+- void weather_http_queue_request(SoupSession *session,
+-                                 const gchar *uri,
+--                                SoupSessionCallback callback_func,
+-+                                GAsyncReadyCallback callback_func,
+-                                 gpointer user_data);
+- 
+- void scrollbox_set_visible(plugin_data *data);
+diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0004-Report-UPower-Glib-support.patch b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0004-Report-UPower-Glib-support.patch
+deleted file mode 100644
+index d7ee7b8135..0000000000
+--- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0004-Report-UPower-Glib-support.patch
++++ /dev/null
+@@ -1,20 +0,0 @@
+-From 34ac536970d2e9f3c3f8ffd691d6a8ef6f434b1a Mon Sep 17 00:00:00 2001
+-From: Andrzej Radecki <andrzejr@xfce.org>
+-Date: Sun, 10 Nov 2024 16:24:28 +0000
+-Subject: [PATCH 4/5] Report UPower Glib support
+-
+-Upstream-Status: Submitted [Upstream-Status: Backport [https://github.com/xfce-mirror/xfce4-weather-plugin/commit/34ac536970d2e9f3c3f8ffd691d6a8ef6f434b1a]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- configure.ac | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 15e8b46..da98a5e 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -120,3 +120,4 @@ echo
+- echo "Build Configuration:"
+- echo
+- echo "* Debug Support:             $enable_debug"
+-+echo "* UPower Glib Support:       ${UPOWER_GLIB_FOUND:-no}"
+diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0005-Make-libsoup-v3-support-optional.patch b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0005-Make-libsoup-v3-support-optional.patch
+deleted file mode 100644
+index 46042154f9..0000000000
+--- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin/0005-Make-libsoup-v3-support-optional.patch
++++ /dev/null
+@@ -1,626 +0,0 @@
+-From 663c416c59ea8e063d4b5a181104f26e4bd1658c Mon Sep 17 00:00:00 2001
+-From: Andrzej Radecki <andrzejr@xfce.org>
+-Date: Sun, 10 Nov 2024 16:29:21 +0000
+-Subject: [PATCH 5/5] Make libsoup v3 support optional
+-
+-The plugin still targets Xfce4.16 and its contemporary is libsoup-2.4.
+-This commit is to be reverted when support for libsoup-2.4 is
+-no longer needed as all the #if's make the libsoup code less maintainable.
+-
+-Upstream-Status: Submitted [Upstream-Status: Backport [https://github.com/xfce-mirror/xfce4-weather-plugin/commit/663c416c59ea8e063d4b5a181104f26e4bd1658c]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- configure.ac                   |   5 +-
+- panel-plugin/weather-config.c  |  28 +++++++
+- panel-plugin/weather-search.c  |  32 ++++++++
+- panel-plugin/weather-summary.c |  21 +++++
+- panel-plugin/weather.c         | 140 ++++++++++++++++++++++++++++++++-
+- panel-plugin/weather.h         |   4 +
+- 6 files changed, 225 insertions(+), 5 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index da98a5e..f60ad64 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -70,7 +70,9 @@ XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-2], [4.16.0])
+- XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-2.0], [4.14.0])
+- XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [4.12.0])
+- XDT_CHECK_PACKAGE([LIBXML], [libxml-2.0], [2.4.0])
+--XDT_CHECK_PACKAGE([SOUP], [libsoup-3.0], [3.0.0])
+-+dnl XDT_CHECK_PACKAGE([SOUP], [libsoup-3.0], [3.0.0])
+-+XDT_CHECK_PACKAGE([SOUP], [libsoup-3.0], [3.0.0], [],
+-+                          [XDT_CHECK_PACKAGE([SOUP], [libsoup-2.4], [2.42.0])])
+- XDT_CHECK_PACKAGE([JSON], [json-c], [0.13.1])
+- XDT_CHECK_OPTIONAL_PACKAGE([UPOWER_GLIB], [upower-glib], [0.9.0], [upower],
+-                            [upower for adapting update interval to power state])
+-@@ -121,3 +123,4 @@ echo "Build Configuration:"
+- echo
+- echo "* Debug Support:             $enable_debug"
+- echo "* UPower Glib Support:       ${UPOWER_GLIB_FOUND:-no}"
+-+echo "* Soup Version:              ${SOUP_VERSION:-no}"
+-diff --git a/panel-plugin/weather-config.c b/panel-plugin/weather-config.c
+-index d27c825..1035ddd 100644
+---- a/panel-plugin/weather-config.c
+-+++ b/panel-plugin/weather-config.c
+-@@ -238,8 +238,13 @@ sanitize_location_name(const gchar *location_name)
+- 
+- 
+- static void
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+- cb_lookup_altitude(GObject *source,
+-                    GAsyncResult *result,
+-+#else
+-+cb_lookup_altitude(SoupSession *session,
+-+                   SoupMessage *msg,
+-+#endif
+-                    gpointer user_data)
+- {
+-     xfceweather_dialog *dialog = (xfceweather_dialog *) user_data;
+-@@ -247,6 +252,7 @@ cb_lookup_altitude(GObject *source,
+-     gdouble alt = 0;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     GError *error = NULL;
+-     GBytes *response =
+-         soup_session_send_and_read_finish(SOUP_SESSION(source), result, &error);
+-@@ -255,6 +261,12 @@ cb_lookup_altitude(GObject *source,
+-         g_error_free(error);
+-     else
+-         body = g_bytes_get_data(response, &len);
+-+#else
+-+    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+        body = msg->response_body->data;
+-+        len = msg->response_body->length;
+-+    }
+-+#endif
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -274,19 +286,27 @@ cb_lookup_altitude(GObject *source,
+-     else if (dialog->pd->units->altitude == FEET)
+-         alt /= 0.3048;
+-     gtk_spin_button_set_value(GTK_SPIN_BUTTON(dialog->spin_alt), alt);
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     g_bytes_unref(response);
+-+#endif
+- }
+- 
+- 
+- static void
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+- cb_lookup_timezone(GObject *source,
+-                    GAsyncResult *result,
+-+#else
+-+cb_lookup_timezone(SoupSession *session,
+-+                   SoupMessage *msg,
+-+#endif
+-                    gpointer user_data)
+- {
+-     xfceweather_dialog *dialog = (xfceweather_dialog *) user_data;
+-     xml_timezone *xml_tz;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     GError *error = NULL;
+-     GBytes *response =
+-         soup_session_send_and_read_finish(SOUP_SESSION(source), result, &error);
+-@@ -295,6 +315,12 @@ cb_lookup_timezone(GObject *source,
+-         g_error_free(error);
+-     else
+-         body = g_bytes_get_data(response, &len);
+-+#else
+-+    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+        body = msg->response_body->data;
+-+        len = msg->response_body->length;
+-+    }
+-+#endif
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -311,7 +337,9 @@ cb_lookup_timezone(GObject *source,
+-         xml_timezone_free(xml_tz);
+-     } else
+-         gtk_entry_set_text(GTK_ENTRY(dialog->text_timezone), "");
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     g_bytes_unref(response);
+-+#endif
+- }
+- 
+- 
+-diff --git a/panel-plugin/weather-search.c b/panel-plugin/weather-search.c
+-index e030ff8..b07627e 100644
+---- a/panel-plugin/weather-search.c
+-+++ b/panel-plugin/weather-search.c
+-@@ -78,8 +78,13 @@ sanitize_str(const gchar *str)
+- 
+- 
+- static void
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+- cb_searchdone(GObject *source,
+-               GAsyncResult *result,
+-+#else
+-+cb_searchdone(SoupSession *session,
+-+              SoupMessage *msg,
+-+#endif
+-               gpointer user_data)
+- {
+-     search_dialog *dialog = (search_dialog *) user_data;
+-@@ -91,6 +96,7 @@ cb_searchdone(GObject *source,
+-     GtkTreeSelection *selection;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     GError *error = NULL;
+-     GBytes *response =
+-         soup_session_send_and_read_finish(SOUP_SESSION(source), result, &error);
+-@@ -99,6 +105,12 @@ cb_searchdone(GObject *source,
+-         g_error_free(error);
+-     else
+-         body = g_bytes_get_data(response, &len);
+-+#else
+-+    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+        body = msg->response_body->data;
+-+        len = msg->response_body->length;
+-+    }
+-+#endif
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -109,7 +121,9 @@ cb_searchdone(GObject *source,
+- 
+-     doc = get_xml_document(body, len);
+-     if (!doc) {
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-         g_bytes_unref(response);
+-+#endif
+-         return;
+-     }
+- 
+-@@ -145,7 +159,9 @@ cb_searchdone(GObject *source,
+-         }
+- 
+-     gtk_tree_view_column_set_title(dialog->column, _("Results"));
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     g_bytes_unref(response);
+-+#endif
+- }
+- 
+- 
+-@@ -390,8 +406,13 @@ get_preferred_units(const gchar *country_code)
+- 
+- 
+- static void
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+- cb_geolocation(GObject *source,
+-                GAsyncResult *result,
+-+#else
+-+cb_geolocation(SoupSession *session,
+-+               SoupMessage *msg,
+-+#endif
+-                gpointer user_data)
+- {
+-     geolocation_data *data = (geolocation_data *) user_data;
+-@@ -400,6 +421,7 @@ cb_geolocation(GObject *source,
+-     units_config *units;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     GError *error = NULL;
+-     GBytes *response =
+-         soup_session_send_and_read_finish(SOUP_SESSION(source), result, &error);
+-@@ -408,6 +430,12 @@ cb_geolocation(GObject *source,
+-         g_error_free(error);
+-     else
+-         body = g_bytes_get_data(response, &len);
+-+#else
+-+    if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+        body = msg->response_body->data;
+-+        len = msg->response_body->length;
+-+    }
+-+#endif
+- 
+-     if (global_dialog == NULL) {
+-         weather_debug("%s called after dialog was destroyed", G_STRFUNC);
+-@@ -420,7 +448,9 @@ cb_geolocation(GObject *source,
+- 
+-     if (!geo) {
+-         data->cb(NULL, NULL, NULL, NULL, data->user_data);
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-         g_bytes_unref(response);
+-+#endif
+-         g_free(data);
+-         return;
+-     }
+-@@ -451,7 +481,9 @@ cb_geolocation(GObject *source,
+-     g_slice_free(units_config, units);
+-     xml_geolocation_free(geo);
+-     g_free(full_loc);
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     g_bytes_unref(response);
+-+#endif
+-     g_free(data);
+- }
+- 
+-diff --git a/panel-plugin/weather-summary.c b/panel-plugin/weather-summary.c
+-index 224bb34..8e79b0a 100644
+---- a/panel-plugin/weather-summary.c
+-+++ b/panel-plugin/weather-summary.c
+-@@ -234,10 +234,16 @@ get_logo_path(void)
+- 
+- 
+- static void
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+- logo_fetched(GObject *source,
+-              GAsyncResult *result,
+-+#else
+-+logo_fetched(SoupSession *session,
+-+             SoupMessage *msg,
+-+#endif
+-              gpointer user_data)
+- {
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     GError *error = NULL;
+-     GBytes *response =
+-         soup_session_send_and_read_finish(SOUP_SESSION(source), result, &error);
+-@@ -251,12 +257,23 @@ logo_fetched(GObject *source,
+-         g_file_set_contents(path, body, len, &error);
+-         g_bytes_unref(response);
+-         if (error) {
+-+#else
+-+    if (msg && msg->response_body && msg->response_body->length > 0) {
+-+         gchar *path = get_logo_path();
+-+         GError *error = NULL;
+-+         GdkPixbuf *pixbuf = NULL;
+-+         gint scale_factor;
+-+         if (!g_file_set_contents(path, msg->response_body->data,
+-+                                  msg->response_body->length, &error)) {
+-+#endif
+-             g_warning("Error downloading met.no logo image to %s, "
+-                       "reason: %s\n", path,
+-                       error ? error->message : "unknown");
+-             g_error_free(error);
+-             g_free(path);
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-             g_bytes_unref(response);
+-+#endif
+-             return;
+-         }
+-         scale_factor = gtk_widget_get_scale_factor(user_data);
+-@@ -268,9 +285,13 @@ logo_fetched(GObject *source,
+-             cairo_surface_destroy(surface);
+-             g_object_unref(pixbuf);
+-         }
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-         g_bytes_unref(response);
+-     } else
+-         g_error_free(error);
+-+#else
+-+    }
+-+#endif
+- }
+- 
+- 
+-diff --git a/panel-plugin/weather.c b/panel-plugin/weather.c
+-index 1a84537..db123fa 100644
+---- a/panel-plugin/weather.c
+-+++ b/panel-plugin/weather.c
+-@@ -108,14 +108,22 @@ static void schedule_next_wakeup(plugin_data *data);
+- void
+- weather_http_queue_request(SoupSession *session,
+-                            const gchar *uri,
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-                            GAsyncReadyCallback callback_func,
+-+#else
+-+                           SoupSessionCallback callback_func,
+-+#endif
+-                            gpointer user_data)
+- {
+-     SoupMessage *msg;
+- 
+-     msg = soup_message_new("GET", uri);
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     soup_session_send_and_read_async(session, msg, G_PRIORITY_DEFAULT, NULL,
+-                                      callback_func, user_data);
+-+#else
+-+    soup_session_queue_message(session, msg, callback_func, user_data);
+-+#endif
+- }
+- 
+- 
+-@@ -484,8 +492,13 @@ calc_next_download_time(const update_info *upi,
+-  * Process downloaded sun astro data and schedule next astro update.
+-  */
+- static void
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+- cb_astro_update_sun(GObject *source,
+-                     GAsyncResult *result,
+-+#else
+-+cb_astro_update_sun(SoupSession *session,
+-+                    SoupMessage *msg,
+-+#endif
+-                     gpointer user_data)
+- {
+-     plugin_data *data = user_data;
+-@@ -494,6 +507,7 @@ cb_astro_update_sun(GObject *source,
+-     guint astro_forecast_days;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     SoupMessage *msg;
+-     GError *error = NULL;
+-     GBytes *response;
+-@@ -505,6 +519,15 @@ cb_astro_update_sun(GObject *source,
+-                                                  result, &error);
+-     if (G_LIKELY(error == NULL)) {
+-         body = g_bytes_get_data(response, &len);
+-+#else
+-+     data->msg_parse->sun_msg_processed++;
+-+     data->astro_update->http_status_code = msg->status_code;
+-+     if ((msg->status_code == 200 || msg->status_code == 203)) {
+-+         if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+             body = msg->response_body->data;
+-+             len = msg->response_body->length;
+-+         }
+-+#endif
+-         json_tree = get_json_tree(body, len);
+-         if (G_LIKELY(json_tree)) {
+-             if (!parse_astrodata_sun(json_tree, data->astrodata))  {
+-@@ -520,12 +543,19 @@ cb_astro_update_sun(GObject *source,
+-             g_warning("Error parsing sun astronomical data!");
+-             weather_debug("No json_tree");
+-         }
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-         g_bytes_unref(response);
+--    } else {
+-+#endif
+-+     } else {
+-         data->msg_parse->http_msg_fail = TRUE;
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-         g_warning_once("Download of sun astronomical data failed: %s",
+-                        error->message);
+-         g_error_free(error);
+-+#else
+-+        g_warning_once("Download of sun astronomical data failed with HTTP Status Code %d, Reason phrase: %s",
+-+                       msg->status_code, msg->reason_phrase);
+-+#endif
+-     }
+- 
+-     astro_forecast_days = data->forecast_days + 1;
+-@@ -551,8 +581,13 @@ cb_astro_update_sun(GObject *source,
+-  * Process downloaded moon astro data and schedule next astro update.
+-  */
+- static void
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+- cb_astro_update_moon(GObject *source,
+-                      GAsyncResult *result,
+-+#else
+-+cb_astro_update_moon(SoupSession *session,
+-+                     SoupMessage *msg,
+-+#endif
+-                      gpointer user_data)
+- {
+-     plugin_data *data = user_data;
+-@@ -561,6 +596,7 @@ cb_astro_update_moon(GObject *source,
+-     guint astro_forecast_days;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     SoupMessage *msg;
+-     GError *error = NULL;
+-     GBytes *response;
+-@@ -572,6 +608,15 @@ cb_astro_update_moon(GObject *source,
+-     data->astro_update->http_status_code = soup_message_get_status(msg);
+-     if (G_LIKELY(error == NULL)) {
+-         body = g_bytes_get_data(response, &len);
+-+#else
+-+     data->msg_parse->moon_msg_processed++;
+-+     data->astro_update->http_status_code = msg->status_code;
+-+     if ((msg->status_code == 200 || msg->status_code == 203)) {
+-+         if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+             body = msg->response_body->data;
+-+             len = msg->response_body->length;
+-+         }
+-+#endif
+-         json_tree = get_json_tree(body, len);
+-         if (G_LIKELY(json_tree)) {
+-             if (!parse_astrodata_moon(json_tree, data->astrodata))  {
+-@@ -587,13 +632,20 @@ cb_astro_update_moon(GObject *source,
+-             g_warning("Error parsing moon astronomical data");
+-             weather_debug("No json_tree");
+-         }
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-         g_bytes_unref(response);
+--    } else {
+-+#endif
+-+     } else {
+-         data->msg_parse->http_msg_fail = TRUE;
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-         g_warning_once("Download of moon astronomical data failed: %s",
+-                        error->message);
+-         g_error_free(error);
+--    }
+-+#else
+-+        g_warning_once("Download of moon astronomical data failed with HTTP Status Code %d, Reason phrase: %s",
+-+                       msg->status_code, msg->reason_phrase);
+-+#endif
+-+     }
+- 
+-     astro_forecast_days = data->forecast_days + 1;
+-     if (data->msg_parse->sun_msg_processed == astro_forecast_days && data->msg_parse->moon_msg_processed == astro_forecast_days) {
+-@@ -626,8 +678,13 @@ cb_astro_update_moon(GObject *source,
+-  * Process downloaded weather data and schedule next weather update.
+-  */
+- static void
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+- cb_weather_update(GObject *source,
+-                   GAsyncResult *result,
+-+#else
+-+cb_weather_update(SoupSession *session,
+-+                  SoupMessage *msg,
+-+#endif
+-                   gpointer user_data)
+- {
+-     plugin_data *data = user_data;
+-@@ -637,6 +694,7 @@ cb_weather_update(GObject *source,
+-     gboolean parsing_error = TRUE;
+-     const gchar *body = NULL;
+-     gsize len = 0;
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     SoupMessage *msg;
+-     GError *error = NULL;
+-     GBytes *response = NULL;
+-@@ -650,6 +708,17 @@ cb_weather_update(GObject *source,
+-     data->weather_update->http_status_code = soup_message_get_status(msg);
+-     if (G_LIKELY(error == NULL)) {
+-         body = g_bytes_get_data(response, &len);
+-+#else
+-+     weather_debug("Processing downloaded weather data.");
+-+     time(&now_t);
+-+     data->weather_update->attempt++;
+-+     data->weather_update->http_status_code = msg->status_code;
+-+     if (msg->status_code == 200 || msg->status_code == 203) {
+-+         if (G_LIKELY(msg->response_body && msg->response_body->data)) {
+-+             body = msg->response_body->data;
+-+             len = msg->response_body->length;
+-+         }
+-+#endif
+-         doc = get_xml_document(body, len);
+-         if (G_LIKELY(doc)) {
+-             root_node = xmlDocGetRootElement(doc);
+-@@ -661,14 +730,22 @@ cb_weather_update(GObject *source,
+-                 }
+-             xmlFreeDoc(doc);
+-         }
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-         g_bytes_unref(response);
+-+#endif
+-         if (parsing_error)
+-             g_warning("Error parsing weather data!");
+-     } else {
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-         weather_debug("Download of weather data failed: %s", error->message);
+-         g_error_free(error);
+-+#else
+-+        weather_debug
+-+            ("Download of weather data failed with HTTP Status Code %d, "
+-+             "Reason phrase: %s", msg->status_code, msg->reason_phrase);
+-+#endif
+-     }
+--    data->weather_update->next = calc_next_download_time(data->weather_update,
+-+     data->weather_update->next = calc_next_download_time(data->weather_update,
+-                                                          now_t);
+- 
+-     xml_weather_clean(data->weatherdata);
+-@@ -1725,6 +1802,33 @@ mi_click(GtkWidget *widget,
+-     update_weatherdata_with_reset(data);
+- }
+- 
+-+#if !SOUP_CHECK_VERSION(3, 0, 0)
+-+static void
+-+proxy_auth(SoupSession *session,
+-+           SoupMessage *msg,
+-+           SoupAuth *auth,
+-+           gboolean retrying,
+-+           gpointer user_data)
+-+{
+-+    SoupURI *soup_proxy_uri;
+-+    const gchar *proxy_uri;
+-+
+-+    if (!retrying) {
+-+        if (msg->status_code == SOUP_STATUS_PROXY_AUTHENTICATION_REQUIRED) {
+-+            proxy_uri = g_getenv("HTTP_PROXY");
+-+            if (!proxy_uri)
+-+                proxy_uri = g_getenv("http_proxy");
+-+            if (proxy_uri) {
+-+                soup_proxy_uri = soup_uri_new(proxy_uri);
+-+                soup_auth_authenticate(auth,
+-+                                       soup_uri_get_user(soup_proxy_uri),
+-+                                       soup_uri_get_password(soup_proxy_uri));
+-+                soup_uri_free(soup_proxy_uri);
+-+            }
+-+        }
+-+    }
+-+}
+-+#endif
+- 
+- #ifdef HAVE_UPOWER_GLIB
+- static void
+-@@ -2028,10 +2132,18 @@ static plugin_data *
+- xfceweather_create_control(XfcePanelPlugin *plugin)
+- {
+-     plugin_data *data = g_slice_new0(plugin_data);
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     GProxyResolver *proxy_resolver;
+-+#else
+-+    SoupURI *soup_proxy_uri;
+-+#endif
+-     const gchar *proxy_uri;
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     const gchar *no_proxy;
+-     gchar **no_proxy_lst = NULL;
+-+#else
+-+    const gchar *proxy_user;
+-+#endif
+-     GtkWidget *refresh;
+-     cairo_surface_t *icon = NULL;
+-     data_types lbl;
+-@@ -2069,15 +2181,23 @@ xfceweather_create_control(XfcePanelPlugin *plugin)
+- 
+-     /* Setup session for HTTP connections */
+-     data->session = soup_session_new();
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-     soup_session_set_user_agent(data->session,
+-                                 PACKAGE_NAME "-" PACKAGE_VERSION);
+-     soup_session_set_timeout(data->session, CONN_TIMEOUT);
+-+#else
+-+    g_object_set(data->session, SOUP_SESSION_USER_AGENT,
+-+                 PACKAGE_NAME "-" PACKAGE_VERSION, NULL);
+-+    g_object_set(data->session, SOUP_SESSION_TIMEOUT,
+-+                 CONN_TIMEOUT, NULL);
+-+#endif
+- 
+-     /* Set the proxy URI from environment */
+-     proxy_uri = g_getenv("HTTP_PROXY");
+-     if (!proxy_uri)
+-         proxy_uri = g_getenv("http_proxy");
+-     if (proxy_uri) {
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-         no_proxy = g_getenv("no_proxy");
+-         if (!no_proxy)
+-             no_proxy = g_getenv("NO_PROXY");
+-@@ -2087,6 +2207,18 @@ xfceweather_create_control(XfcePanelPlugin *plugin)
+-         g_strfreev(no_proxy_lst);
+-         soup_session_set_proxy_resolver(data->session, proxy_resolver);
+-         g_object_unref(proxy_resolver);
+-+#else
+-+        soup_proxy_uri = soup_uri_new(proxy_uri);
+-+        g_object_set(data->session, SOUP_SESSION_PROXY_URI,
+-+                     soup_proxy_uri, NULL);
+-+        /* check if uri contains authentication info */
+-+        proxy_user = soup_uri_get_user(soup_proxy_uri);
+-+        if (proxy_user && strlen(proxy_user) > 0) {
+-+            g_signal_connect(G_OBJECT(data->session), "authenticate",
+-+                             G_CALLBACK(proxy_auth), NULL);
+-+        }
+-+        soup_uri_free(soup_proxy_uri);
+-+#endif
+-     }
+-     /* Otherwise, g_proxy_resolver_get_default() will be used */
+- 
+-diff --git a/panel-plugin/weather.h b/panel-plugin/weather.h
+-index 01974ce..87a6157 100644
+---- a/panel-plugin/weather.h
+-+++ b/panel-plugin/weather.h
+-@@ -183,7 +183,11 @@ extern gboolean debug_mode;
+- 
+- void weather_http_queue_request(SoupSession *session,
+-                                 const gchar *uri,
+-+#if SOUP_CHECK_VERSION(3, 0, 0)
+-                                 GAsyncReadyCallback callback_func,
+-+#else
+-+                                SoupSessionCallback callback_func,
+-+#endif
+-                                 gpointer user_data);
+- 
+- void scrollbox_set_visible(plugin_data *data);
+diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb
+deleted file mode 100644
+index c0c2ad3313..0000000000
+--- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.11.3.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-SUMMARY = "Panel plugin to display current temperature and weather condition"
+-HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-weather-plugin/start"
+-LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-
+-inherit xfce-panel-plugin
+-
+-DEPENDS += "libsoup dbus-glib upower json-c"
+-
+-SRC_URI += "file://0001-libxfce4ui-Avoid-deprecated-functions.patch \
+-            file://0002-parsers-Generalise-input-to-array-of-gchar.patch \
+-            file://0003-libsoup-Port-to-libsoup-3.0.patch \
+-            file://0004-Report-UPower-Glib-support.patch \
+-            file://0005-Make-libsoup-v3-support-optional.patch \
+-"
+-SRC_URI[sha256sum] = "002d1fe63906d2f3a012f3cb58cceff1dfbcc466759e36c76d3b03dd01c0dc57"
+-
+-FILES:${PN} += "${datadir}/xfce4/weather"
+diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.12.0.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.12.0.bb
+new file mode 100644
+index 0000000000..35a55383bc
+--- /dev/null
++++ b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.12.0.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Panel plugin to display current temperature and weather condition"
++HOMEPAGE = "https://docs.xfce.org/panel-plugins/xfce4-weather-plugin/start"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++XFCEBASEBUILDCLASS = "meson"
++XFCE_COMPRESS_TYPE = "xz"
++
++inherit xfce-panel-plugin
++
++DEPENDS += "libsoup dbus-glib upower json-c"
++
++SRC_URI[sha256sum] = "5dd90b032c06ef4b64b818023154ef9463a2c694a0290e57f3412296c7545ff6"
++
++FILES:${PN} += "${datadir}/xfce4/weather"
 -- 
-2.34.1
+2.43.0
 
 
