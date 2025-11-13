@@ -1,196 +1,413 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <ashishkumar.mishra@bmwtechworks.in>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9F8FCD4F4D
-	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 07:41:46 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18708.1763019698751309559
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2A0ACD4F57
+	for <webhook@archiver.kernel.org>; Thu, 13 Nov 2025 08:23:56 +0000 (UTC)
+Received: from MA0PR01CU009.outbound.protection.outlook.com (MA0PR01CU009.outbound.protection.outlook.com [52.101.227.66])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.19207.1763022226149036027
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 12 Nov 2025 23:41:40 -0800
+ Thu, 13 Nov 2025 00:23:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Hh9dZEpT;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3412a946d8=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AD4eYDm1648027
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 07:41:37 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=5auaTnLhlIekmgrfFZ3H
-	QYLtwfGFNR756fKJeJsyqFg=; b=Hh9dZEpT35IEOs+B6fIOEsJx0IEzZfZAYoue
-	guHa5xy4os8qGIUPg5+ITmHLgFqsgfNZTv2iK1G4hwYgvdbQNQFmIRvfGg2pgsmy
-	bujgS5U1/zIc6DIPMFI69ebeIDg6nG7kBOmEIqHnert+FE0/Z69PB+gXjua4c4Dd
-	UhUpgcbSitKtBfuBy5vCcujm5u9O8nZYN29TL8FqYw2praP2IIPoA92UvxmOYbJz
-	u0ir6EN3HOeW9wYeWoKuH/n3to/bnLUj7b6x2B+Eb7BMDZr72RgUGGU4VxGVon1r
-	c1qHoGx2iiEyvQYdcj6ykTCItyLyG57P6c7yOsYBsGa/rPHcCw==
-Received: from ph8pr06cu001.outbound.protection.outlook.com (mail-westus3azon11012014.outbound.protection.outlook.com [40.107.209.14])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4a9u2x739c-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 07:41:37 +0000 (GMT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@bmwtechworks.in header.s=selector1 header.b=gfzHkxF4;
+ spf=pass (domain: bmwtechworks.in, ip: 52.101.227.66, mailfrom: ashishkumar.mishra@bmwtechworks.in)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UEQ/HCkD7KATBj4WJl7Y2VDaoAHZqSoiTaG6VooRpFescCJdprfZyW8GQBcsJWqMWqHntZyYF3a9Kgv49naWgQoXaBEJW8jaLPULWVzXQjBvYDxonXqYW0/FGjSm1k5yEzNm5Dp9A0tqIU11CBjqzxH2fLeg/Xs3jturZtYJyP6dkkoaTy5Y8EB4r3Ys28g2r/BgLceZ8KYi1A951BdNf7wuWcSGvTYb6oLPz7Srf8jg8cHsvAThLsuvzOyavTmUex3fpPsZiWqyzumsCUCSqA/oUXpKDr0mvE9H2ChAnsxAshvB99GsbpjNfn01PHrOKsJdZxdu/E3tzIn2hkkIpA==
+ b=CuvYgux03NDN+CdygYXs2yUzr0dcxr5N36uIE1BE9DytPR849VRiLlwmA38C8eL0XLXBm4dsGEGiSLpheIz6ycstL2u8hnDAfSgax+W6GAMcNOwHb/FlwHex0pDnSAfrvN2RmgzgFXbXDp2CvdRessjxJMPn+m5OrvKAXBnCidSOz8ZHG6DeQuIcqUvBxXGXc5woKtQMVGPM1EHgKzgkYlDqD4BA74KwY5lcliE83u+uU+rhU7wbZmCsivmOsRYMhrX8wOulahDbzG2YaipTySKSuGiwTtxGzBjH0BNpMBeH39K5uiP1eGb3EQMY3IBiN17hSNIg22F45+wShwmNdQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5auaTnLhlIekmgrfFZ3HQYLtwfGFNR756fKJeJsyqFg=;
- b=XH8sQEO+9uiFL2xoHP86BQSMDVFw2u4LX97IOi4UieBkR8NzTdVOBdU83Vs/pQFycJOVR7KEjqcTxjtaTL+wb/gsuzVoFtDBP4VFbtiT0URN8JD1wQ5bi5OZBP3nWTiDbis7BUnbc3pvAba5lusnBbmq/p1dfKATxduIu/XoYzzXTWmktxKTeE9PAaeuvEBD2CPGYxDGxpU36AqSJ/zw0hAazhcYZPDXPt/SBJ/oemNsnIrxJqahPkXRrp0qUg4PsxHonvmlUTlkvRG8S5DdA2ddtQwtxMYVY63T/wCbBCqKdz7GbkYedRbzPmos98xN3P/tMEa2utSqZumVBazr5g==
+ bh=UvMc1OU6G9eI9s/yCBWUJK0DShgZ18z8A4kZlQnHFaY=;
+ b=vnsOnJ6+uj++2GcZIjZw0YOsXXazeHCZLYxmdMkXvUuklukoNN1mUow7N30b7GertmjYbzYT+2CyjKgqyPgOstXzQJ9l1Gqw6cPhIoZHBZyeOhwZxfmbp6UnupzO1jQntYXm7o/LKOSth+5nZYyTE8xo6+MDb3wihTvnr5kc3S3PMa3GK+h9GEisDKoHNDMEQh5GvzPQ1HE35xImfe9YIpg+qb2c+F3xUN50Sjh4U7otReBpSdxXbavMAdtUJXMlFvs63taFZLRFhfL/bX4ghaTVVUoFI4ESTfjTvgTPXV8sg3pJqZtQn5jHSaJFx1KRyECCl/vjJi+Q6zbuPQ+txg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
- SA0PR11MB7159.namprd11.prod.outlook.com (2603:10b6:806:24b::6) with Microsoft
+ smtp.mailfrom=bmwtechworks.in; dmarc=pass action=none
+ header.from=bmwtechworks.in; dkim=pass header.d=bmwtechworks.in; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmwtechworks.in;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UvMc1OU6G9eI9s/yCBWUJK0DShgZ18z8A4kZlQnHFaY=;
+ b=gfzHkxF4mM+xG3lOjSIYzudyO7MC74NPCt2j5DUG3DFzRh3epjUWpo7vY0Zri4fjxJ84B3D0svZtd5NomlooJ0pMS8ZbsTB3ZgJBhW7D2+u4qdy7s+qXYXO0ZnEuHjfh7Y4KxGRi3gwEXyrFIHhIb9uHG3Iq9jXZQVfa1hK+BZ+HgmElRmXMHHoysnPJhBw7Up3xIUEV8xToPwNy07Lfdb3jFfksbaccHMdKzM4wA1TGS5WwB4QZzDlmsbq11Yv/Q1jlJ6qtsYJSyJtm/TYuFpKgo2UF4usadWn0HDBTZSO/audACteZSKZJmqlafc2oz0OA0cfkEWNsjasFfgjtFQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bmwtechworks.in;
+Received: from PN0P287MB0358.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:db::8) by
+ MA0P287MB1436.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:fa::9) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.17; Thu, 13 Nov 2025 07:41:34 +0000
-Received: from DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
- ([fe80::2b44:787c:e7ee:bfad%3]) with mapi id 15.20.9320.013; Thu, 13 Nov 2025
- 07:41:34 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
+ 15.20.9320.17; Thu, 13 Nov 2025 08:23:39 +0000
+Received: from PN0P287MB0358.INDP287.PROD.OUTLOOK.COM
+ ([fe80::6aac:8839:3843:7cd0]) by PN0P287MB0358.INDP287.PROD.OUTLOOK.COM
+ ([fe80::6aac:8839:3843:7cd0%5]) with mapi id 15.20.9320.013; Thu, 13 Nov 2025
+ 08:23:39 +0000
+From: AshishKumar Mishra <ashishkumar.mishra@bmwtechworks.in>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 1/2] ntp: add UPSTREAM_CHECK_URI
-Date: Thu, 13 Nov 2025 15:41:16 +0800
-Message-Id: <20251113074117.4031867-1-yi.zhao@windriver.com>
+CC: AshishKumar Mishra <ashishkumar.mishra@bmwtechworks.in>
+Subject: [meta-oe][scarthgap][PATCH v2] [Backport from master] imagemagick: adds ptest for imagemagick recipe
+Date: Thu, 13 Nov 2025 13:53:29 +0530
+Message-ID: <20251113082329.1279411-1-ashishkumar.mishra@bmwtechworks.in>
 X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TYCP286CA0235.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:3c7::13) To DS0PR11MB6399.namprd11.prod.outlook.com
- (2603:10b6:8:c8::5)
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: MA5PR01CA0080.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:1ad::13) To PN0P287MB0358.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c01:db::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|SA0PR11MB7159:EE_
-X-MS-Office365-Filtering-Correlation-Id: bd895060-692b-4987-9319-08de228811d0
+X-MS-TrafficTypeDiagnostic: PN0P287MB0358:EE_|MA0P287MB1436:EE_
+X-MS-Office365-Filtering-Correlation-Id: ca827f68-b5ce-4092-de62-08de228df2e5
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|376014|1800799024|52116014|38350700014;
+	BCL:0;ARA:13230040|52116014|376014|1800799024|366016|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?uo/NzMMPy5YJrXrmcyGZVvHmzDFbN01syPtusuNI4zFfFM7ESjnzUTv4D18+?=
- =?us-ascii?Q?NDDk4bQi3knmRs6slEHjS9+ds+gFpCFdCYSVJilXiQlzYADevG4cFXZXK7+J?=
- =?us-ascii?Q?X0OIphovx9bTjdIXV3lQ3OotpKsm4gSyHxBwsI0n5Ax1KIK55Z1n4jLXEAnV?=
- =?us-ascii?Q?nImG2TnhPJU2mAGDc8Vqvln7seApux1WpcwKq2dIW85obUUo+8HgwUpHVC7Q?=
- =?us-ascii?Q?VV1n99Dw2hvc74FaQxv/TWm43fVYoyLhWBj539kAf1oorNgQuMAtv0ue1iY7?=
- =?us-ascii?Q?lMg75QGyezml5fY7oggOcm8VO4cP0eCqcZ9z+ROr8+VjmAGUhRGWt6TxR+9h?=
- =?us-ascii?Q?qIHHkUFRifrzxDcAEtBUP05tII/H1kNYQV1EXdqCNBLI7Pgh2HlPy6++Itjb?=
- =?us-ascii?Q?v2/Z9SarBMr7k6kmnXEdfqpwo0I/2vrZKwDVuQSR2zM3A+sF7xy9XOG0vaVA?=
- =?us-ascii?Q?l1r4xt495QjzFCeLly6bExjryfSd1jJxl3hfcW1R7jCO4N90kxTw0sfEefMB?=
- =?us-ascii?Q?uuB3Umc1itreejxSBYV2yuu+d7uSvVZSqLH6yYnGelnuqf9AtYcUW+WZRTQy?=
- =?us-ascii?Q?32ereNcc4hR97PLIL+KV6P5yKnKV/LYdrPQUBqR2KnFt5znoca0oPSe//PMP?=
- =?us-ascii?Q?taDBBVwPGeoO18DDOy6Pzf+m8DR+k0FWC4J5mV6QYQl2OHCboqgU99r/yKOI?=
- =?us-ascii?Q?zOO5QlZ1Cg7AKJGzUQT0bEz/O6Y59VbEivHNY03bzF1EOkBMfnE4tkWkJhE0?=
- =?us-ascii?Q?B4A2aZ+i/wBqnfHS6eJIZ3w4tD7RfxJYl/bVN9RvAPhi9fhDTlcVffC2OAlL?=
- =?us-ascii?Q?N6FLq0dxveWVWUOjZoD7zEMQXOE7q6U8SIOFj2scfkag4SMgd7EwMDeAh5tz?=
- =?us-ascii?Q?cFelWsN1OXngwchQbftHwMVvda2HCl5Pkimu3FX9u9bQjzRioINLagvbhyAh?=
- =?us-ascii?Q?Twd37cL0z0aW2UmTANo+MxeLewyhl2WRUCEZNW3fxLpW/OSDXgL1imd9+MCh?=
- =?us-ascii?Q?M1G3pJXQshce5WO/Dds6vfPdwHpT+RPkrllKpG46FhrCUFSfcR7K7qOBUdgr?=
- =?us-ascii?Q?8edhudSwfylvmTmt8BCMlCMxFaXlga3nHsg6y7yjJmaUsyNSzlwBmlCvv4p0?=
- =?us-ascii?Q?4gYu54PIIVqREfDH/XWKhOhE9yesf48/E9QFG8Xvy7HnwYHMw3YDPpGvLz4a?=
- =?us-ascii?Q?7or15HWbVoP4WGVf3MSVC0Td5GM/FGAvzwLnChC6jlenCMvZLl1cBbIm5cRW?=
- =?us-ascii?Q?dR7Cw4rsKIxRFmKOKIFAXWE9REsWZrS2lQixGgq45H1RwfnPIcx9rVo+AWUN?=
- =?us-ascii?Q?HkR/7PxCT8aMJZX+HA8Sr6f6FgIpS0Jr1W27+m/RwhZwLApkOk/ZchK0Czqj?=
- =?us-ascii?Q?lnWybWNAT7DbvU9ogqbLUiMlkIV8ZdWpr2vzXzy9FhkfJ33uKzIoKFviOIqZ?=
- =?us-ascii?Q?qDgKf5DH48BGOzeGTmjoMKCWRPY1n0tH?=
+	=?us-ascii?Q?7uReAzCHIu66rklFClvYJrsW0MwfMVdBgKx0NPucdUUrd8k/z4r72y+POEzW?=
+ =?us-ascii?Q?EtK7DAtXy7drbnnHIEXRB0komhs7nFcUI37kdkPoxYCbcq84N1bOZqsI6FOd?=
+ =?us-ascii?Q?xRP+CCK9DeNTen8tXIZKz1G+24gpbVIHQibYTCReZOFupz165Py7QMyokk97?=
+ =?us-ascii?Q?kbd1WjQKQCFh+b0pnlwa6Lz+E4kFAelT+VJwGVl8AokqCwQ0nFVbU62Y/hUx?=
+ =?us-ascii?Q?fHD5IJwaQfIKsmBkdF9B9IPOXIf+lrjGfjIQwj0xfTUwjP1A/+krJap9SLwZ?=
+ =?us-ascii?Q?UXAe1pY7ADvDl/qXxt6+7dgigwGj5+qLC+izntUvwxlYobQt3CCpVLxyUn3a?=
+ =?us-ascii?Q?evoSiAuGubNeqRKuCXdiHeRYh+jzu2odDnRZBgcdip+g0BTkPH6lvp4b2CKZ?=
+ =?us-ascii?Q?JugKH6bBmfMOMryjG6gwi+zy/hcKFsoUHgTvJ9y3K3hEYTN22RX3dGhnC1s8?=
+ =?us-ascii?Q?iV8NvNbHtU/61rEdwFxej7fvRk2k1txACR64KjB/ZE0KfRSxYctiv1CqZL0G?=
+ =?us-ascii?Q?UIRTE5O1SEYuAeneSpsjZXRYbvr7KY8g/FBEAzY3p61ylNKHeEXVJy6Opt3w?=
+ =?us-ascii?Q?KnY+ndLIqqLT0i331n3Uukn8/mSR7le2pGtjYPvYLUe0Tk03uhkaLCGb8d3Q?=
+ =?us-ascii?Q?QQCiYJVHGGJoAWLguVYkA6+V506SzrYYDosnkKhuxdTFycSyFYs2OsTJfAXP?=
+ =?us-ascii?Q?Gb6eUptKMbpuepDoCv8NNZc8kOFUi7GnY4H+eZhCb3U6s2RDaUWYdLI6nuva?=
+ =?us-ascii?Q?XV5yavDD9PmOqst+r9stJ7bXUa3VcYF1N3vxXlLGcjTm4disWT4EIWfuggYr?=
+ =?us-ascii?Q?pGfOVrpMf5YNFlWpVl3aYX7Q8vgNXxfNX2gmPYdw0ekd2+fVMm+IiPYpgHhK?=
+ =?us-ascii?Q?ZRo1NJCcFkz/pluuq8f/RlVXFl6QV/9WIH3ShS6y2whPd3GO5EP0YxJYQrJY?=
+ =?us-ascii?Q?VR0XZxO4thLElrJ8Z3hnLox6bUGVE6hza1uywOrfXnfeIkZO4kvJAxW+orwG?=
+ =?us-ascii?Q?ARZ2E828KKhlKLuZ2Uc15nrFunH1/2IBf4S97qh+xmkTPB3qiWne6HqjXTF6?=
+ =?us-ascii?Q?Xe9K7nZDhlUIXvHeu8AqteohbXE89/QpuIQ+gdB55C6+TIbToLR7cL9s1U6i?=
+ =?us-ascii?Q?BplGWneNxABZL8tH7dhlm/jjsfb5hkNlAyEnspqReNYXZtfUaZR32XAOZKLm?=
+ =?us-ascii?Q?UFpZzYgfJPSI/sdSsWyxurkhw5Swp2e872y5jOK/vx7AW5pn62KHjTxL08eP?=
+ =?us-ascii?Q?jKr/kZS73GzktiEO7zvz/Tq0MgfPvN7RkHgYEa57yGzfSpQw1zz86qJcuBlO?=
+ =?us-ascii?Q?kdVCqCdzbjLvwr0Qsp7/TGlomjoov3gm/uCP894RJ5RiZa8ikrowbDS5JrZQ?=
+ =?us-ascii?Q?VTNQGtFKUo7kh3TstoGNyWPX0gLq0NuoFw4ueMqCl/yVReHY1l9SJKQ8fqNz?=
+ =?us-ascii?Q?51r4/ue8l8s6cg731B/Vn/BTAvbLJ0NgmrJxhGHBoiepfD0OWqbqH1+Xhks3?=
+ =?us-ascii?Q?8tzcVVjpTPIWyP1exEYCOdobR3VN6XbM5mQ8?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(52116014)(38350700014);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN0P287MB0358.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(52116014)(376014)(1800799024)(366016)(38350700014);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?KIhWgefjXolBblB/tlLrikVEIwxikyPCAA6wXM/7161/PaMW1K3/WDuy0p3L?=
- =?us-ascii?Q?2Lu8CDTvLZzg34twBmPgS31u/8Xq+rPp3o7huiku3q7rM0JlHclh5cPitTZp?=
- =?us-ascii?Q?mucLJ12TihBO2kGOk+Rw10VjbD8Cxh8/W569r7BM+MFXmWIgKC5evwjsMz0z?=
- =?us-ascii?Q?SIN1+LuXrRPDqR6Lm1XRGMgJRT67j5BUvjaC0c+YzX/3E5qN07ivRu6LJ8Nt?=
- =?us-ascii?Q?FOvKHus1t84Pnb1udK92rJRH9a02zZVAnwd27WfXlyIkUDsvx1THdxnzFd/b?=
- =?us-ascii?Q?yVJeAq4GHTeiQFnTY5pJSbpWb/PhZ9jZvQ0Jh/4/At7dCezxTjUwm2ijl4d0?=
- =?us-ascii?Q?2QyxWMFUhwvZ+b37HGcALcHicoYcCVnVjhVge8CfhNDx4Q42T6AWPP+8Iz46?=
- =?us-ascii?Q?tN9fU3ZvGgsjk3/q+Vdg3Wzt7HWFk/lW91RbGrjCp4HTSM/OjjqB08UVCbtN?=
- =?us-ascii?Q?fs9monuPSTQ8ICmR3xTXkLFfVLJyLAZfAO1y0RN1E5LvlpDVLq8Zo0k9mjC0?=
- =?us-ascii?Q?lA0KixJC0mljhUP5g+fgFbqAt1eWU6KXR1N0vxX6A4nA9DV2J9J+jCFZVcBA?=
- =?us-ascii?Q?awaA8fX0/TnGtmY2oo005cp5CKa3nbzjKhuNBz7JYtiDt7JlgdXv/p1RIbVI?=
- =?us-ascii?Q?PSawpRT530rgcebNhKjaZwD6hZftrU7UzOdjH8IX6RgUd1IIPCLQdFS0JkYT?=
- =?us-ascii?Q?tJaSJp5UgOTMSgHSQfrUo8yTnjD2tHVUSJvQ8TviKWb5Bza0fciTMrIG8Q5M?=
- =?us-ascii?Q?cVJ9ocpy0a9CJbfe456pCMue73nnwcpqDHarTRamqDHQWLh4Ac0AkmS7NXx3?=
- =?us-ascii?Q?K79mgpc6WLQ6PaXncHUpZW1fAvZZHe0WTMyKGfjq5FaoXA63DAl4/v0llpgi?=
- =?us-ascii?Q?12s/824WMQ22PuJ6dGR/cObyPbXr8a2cQBS/GdqFutRIR5pevC9Yg6qopc7g?=
- =?us-ascii?Q?aPEOrdgNrWlX/6ZLhtlBpiDfKjHXnkb9wdW++LY70qD4boV5jmljcwyCHsGm?=
- =?us-ascii?Q?iu+TsskWBlQmu0TOBCaGGUVsNRtUA2Dj+xbyLWHSMzH/eEROA/gUCy5HkK7v?=
- =?us-ascii?Q?QI2wB25DSfj/ODF57uVE0tRcrtCEQ4gJp8B1Y6xUYGvlvjwMS7UMhZBSQibU?=
- =?us-ascii?Q?TOjHLdNmtNNNInS2F/pdHkmvPgoPQsU8G/Ep6n2FE89TFcksXO29amZKkRur?=
- =?us-ascii?Q?IqTb+/Mzl+2pC1yNuUdsRQPxuLkMtz2Pz+ZeNiyHGdNWWlvucWdtQ+NcEkR6?=
- =?us-ascii?Q?ObSWc9IHqlfuocZMm40oNgsMbRfVEpRLqc6zz0nW66pZinfYEZBjd4DD1Z6F?=
- =?us-ascii?Q?JtfA2lhUMqkqeqy0MHF73/Kq+u3NP5pv1zfdjlLkRYHiPrtnEwtEpXIMd8UK?=
- =?us-ascii?Q?hdxOYmEKp25IxDdnZkIuXP62PdNFL5WREVi9IESE7kWTsVhXGOooe1czqhTL?=
- =?us-ascii?Q?8Wtuu0VSbHsZN9xls+ghYpaNmlZBhzcefRRSJNrl2EoWaoM/AmtrJc5KJN2n?=
- =?us-ascii?Q?P0FwdjKn0WEI7eVah9DaIdzsEQ2zGAYFDQkovNBa9/Mb3GKXuGZVGA6cVUCp?=
- =?us-ascii?Q?3KFn5REP7mzc874zowkmc0TkqrjXKsBXAZGbfWXH?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bd895060-692b-4987-9319-08de228811d0
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
+	=?us-ascii?Q?I1M6uKBSHHYOVY7bOrHqru0BSAhHkvkuTFfVGPdwxkr8JUqZIFk7DgH3MTIi?=
+ =?us-ascii?Q?XQAt+64l5UeY9i3dkuj8QWZuJAaBBEpxN3Z2bf2cmx72Wt9t7qV9CHyq26zC?=
+ =?us-ascii?Q?NHnEWiGNA7AdErFF0n0kHnZsX2M4FJi19SYArpcd3mw70MNUzhytjldrHoBe?=
+ =?us-ascii?Q?tvw5NoSz5IX5uFEpjJ8I6fMjJEqU0kq1w2rh9Uam75bMklMpRsLuJgsfvtRF?=
+ =?us-ascii?Q?9FFzdEV3V0kkBwPq/tS4sPtrwLR/EkSMNxbiMJHsDKYe1Iy3laifxh3eNGBg?=
+ =?us-ascii?Q?DCz8d/69TeXUpnO7phxq83ds1KPxKLyS4+8uGy+UVC93I0bT9TT3P5uFXXRP?=
+ =?us-ascii?Q?iwdh63YSG0NDUwWwhHkcjDTcdtb0cB/1FAdrTsE/frJX5LdpcwXGfu45mfJi?=
+ =?us-ascii?Q?IQASWZJuo1rXz69LX/Xjse8NHFJdbbUQure6E8Vapp+yO0Kl4Jdrl4QzdFO0?=
+ =?us-ascii?Q?0HMsxxihqIxM14P7MOKxTj3j4TlbPj/SnjiNG3O7qiAJ/F8BsxZN7merlTcf?=
+ =?us-ascii?Q?Jehg+Ar0QiHyP8iI0ge2JBu2Gdnkc7E8wgqXr4Gzn1ByM9P22GzbpsVXJDsN?=
+ =?us-ascii?Q?MHG+WumIqsnLKnGGOaAd2FyYyP63b1rJ7CKdFQQAho4wnFmVfKGqOVaa/y2H?=
+ =?us-ascii?Q?S/Ffd/OkKeeoZKEUvTpZ3NZeJlF2ghRO8OetDmh6Mw+YrQZ8paaPCJ6b9tCn?=
+ =?us-ascii?Q?3JfXXtp61JNi+nDtqM2TmxIUJAk4iNOSFZnj9Crb2gIhCByQDVWww0oeqYAa?=
+ =?us-ascii?Q?ixnWMSLb2JP1uGFszdAXaJJpJuoB70mRA0cSr8N/o8dSDdcc8mV5L7BdOpiS?=
+ =?us-ascii?Q?+jljJYe5C8e2wV1X2tsn+J4dFh5ITKmYC3QiW+ZcxtJ+Q2XUHGvlYkxkmYkg?=
+ =?us-ascii?Q?SqbpC4dzZ/peMpvPCmhHc9ma7SB1Fn1fKCZaCRp9YcLP0Y0gVvJNpTBhgS5O?=
+ =?us-ascii?Q?nbLBs1XW1djTV1UQMSm9kzGkHYmv5QRyi+3BQ1+MvPuM1A6tU+n2wRSDeIqP?=
+ =?us-ascii?Q?dPmf+Jd6875c4YqHMSIHXJOqMEqk0LSISdjJE5RNLwooykpx/EUfRQhZmLNQ?=
+ =?us-ascii?Q?x5z0Y00Y/kOJ12AJUkQs2Yu1afmZRBStmjve0CkjamROUuSF5+4OnWZkQz2U?=
+ =?us-ascii?Q?4olRcepEQRIkveaHhrqJ1boHQbASY4TnWznu0I36evGy+2uEyAAfPvQcCqFD?=
+ =?us-ascii?Q?rCQvJYez5Zql0hra0gnss7TB569++DXq1aoe+DkX9klKnblxDC4LSszOa53i?=
+ =?us-ascii?Q?FPmuNaHtv99D32rlBWa5EG8xlxB3Hco9oPo8zJ6+BA7TEu4vLxJwQCyTViNL?=
+ =?us-ascii?Q?WyQbwx5PGNY+m2M2riGHnMrHyE4D21+EU4Y4Nc+VWsRU/pAcpUKBYmTHgBTb?=
+ =?us-ascii?Q?7HNM3vc+RMZyxH1qNvq5kuAlAUg1EjVldYUDv6MLGVZrNZ/bjPmhFObA8ajW?=
+ =?us-ascii?Q?6LS+VcEeqM16V8TFwXwjaTEjD2ANvi0zyRcJLKMDeWZWDzYPWQw+f677zWSE?=
+ =?us-ascii?Q?614dwkQUxl1OXPK1Jhb0sf22B8Z+yzO2oQKrmBpCMJRUAOxLDv+WowYIxDFE?=
+ =?us-ascii?Q?Y3qP+bStG/W1k9j1fbg6j621J/9Fxl0K4pfgakWbNgHRvFqlWCV1AGjjj4Po?=
+ =?us-ascii?Q?DpXS4cineeUtTE2DTEkJtgM=3D?=
+X-OriginatorOrg: bmwtechworks.in
+X-MS-Exchange-CrossTenant-Network-Message-Id: ca827f68-b5ce-4092-de62-08de228df2e5
+X-MS-Exchange-CrossTenant-AuthSource: PN0P287MB0358.INDP287.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 07:41:34.5777
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 08:23:39.5240
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-Id: 970fa6fd-1031-4cc6-8c56-488f3c61cd05
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uhAs0Ba+bHHB+c+VialSF81m4Di8mIgYn3EESznFv/VzVMmWIG79xamAmlSrkTmQOgNWOHPNuqcU6VlHPng6rw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR11MB7159
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTEzMDA1MyBTYWx0ZWRfXy/fsZvcPLZTa
- geYBvN5mYUwDR2bgP6AtykWF+i3sBe4LlMN7iNRQXBSgbifnhAtY2+d7/XyoyHQIFdtmpQc3+Nl
- dzQQ6XHqN/nzBqJbvtwyKg4vMfH4XGVvBkWLLldf4Uv/MNwGH8U51eqR5iz8mubNBzmpgBeJeC7
- EY6kdEmwW/iwaLiUCrg4/lcpAxUwr/Cmds7iT5xjIqPCDU/RD6f9dMcqX1ifZ7X9zbxnK8siQPl
- Ia2YZIINlB58uNNWoFGrP7j6v44hxPezPbaQjxyVWDk7mHLU3vsCVAVGYqGdA8ZY0G94izCxjVr
- oKicuv5iAaEjRPymNl2K0MK9iQQFOJVoJd4cfaH7Cv/eTZMVjxxXhA35ofLwIj3CahMCxVtNdj8
- Rx3gX/Pq6ST22InjNBFmCSrA+8f9cw==
-X-Proofpoint-GUID: HyggqYySvz_Gclh647m9pCoUakshct0v
-X-Authority-Analysis: v=2.4 cv=Uvpu9uwB c=1 sm=1 tr=0 ts=69158bb1 cx=c_pps
- a=91TlPzG7kPfjcj/W1M6+cg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=gCGlv7sVAAAA:8 a=EkcXrb_YAAAA:8 a=t7CeM3EgAAAA:8 a=FNydv7uxz2qLtlas0z8A:9
- a=LK5xJRSDVpKd5WXXoEvA:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: HyggqYySvz_Gclh647m9pCoUakshct0v
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-12_06,2025-11-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1015 impostorscore=0 priorityscore=1501 adultscore=0
- lowpriorityscore=0 bulkscore=0 suspectscore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511130053
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2V7P5j2q6BSlGyv9RpR9wHB29bE0q+Vp33JJaNoOEx+x+ZTLhglD3Nog4LC1zZS8Ii1LXWBDbvdrtvfB7BZUQv7gXhO8Y6NyJGMT0zFg4UdvswzTO0kNYblC9ic3+Vqh
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA0P287MB1436
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 07:41:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121638
+ <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 08:23:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121640
 
-Add UPSTREAM_CHECK_URI to check the correct latest stable verison.
+Backport of the commit 96b97c0c6490b713b559a4e82bd699a2ebe357d3 from master
 
-Before the patch:
-$ devtool latest-version ntp
-INFO: Current version: 4.2.8p18
-INFO: Latest version:
+This patch enables ptest for imagemagick, improving test coverage for
+continuous integration and runtime validation.
+No functional changes are introduced to the core package.
 
-After the patch:
-$ devtool latest-version ntp
-INFO: Current version: 4.2.8p18
-INFO: Latest version: 4.2.8p18
+The logic used is :
+- We check if the required tools are present or not
+- We used convert to create an raw RGB file
+- The created RGB is then converted to PNG using convert
+- We re-gerenate RGB from PNG and compare the original and re-generated RGB
+- Enabled the ptest in ptest-packagelists-meta-oe.inc as
+  suggested by Gyorgy Sarvari and incorporated logging suggestion
+- This was done as standard imagemagick test like drawtest requires manual
+  internetion to verify the file.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: AshishKumar Mishra <ashishkumar.mishra@bmwtechworks.in>
 ---
- meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../include/ptest-packagelists-meta-oe.inc    |   1 +
+ .../imagemagick/imagemagick-ptest.sh          | 128 ++++++++++++++++++
+ .../imagemagick/imagemagick/run-ptest         |  43 ++++++
+ .../imagemagick/imagemagick_7.1.1.bb          |  14 +-
+ 4 files changed, 184 insertions(+), 2 deletions(-)
+ create mode 100755 meta-oe/recipes-support/imagemagick/imagemagick/imagema=
+gick-ptest.sh
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/run-pte=
+st
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
-index 33d19a696a..a5a6048f8a 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
-@@ -26,6 +26,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
- 
- SRC_URI[sha256sum] = "cf84c5f3fb1a295284942624d823fffa634144e096cfc4f9969ac98ef5f468e5"
- 
-+UPSTREAM_CHECK_URI = "https://downloads.nwtime.org/ntp/"
- UPSTREAM_CHECK_REGEX = "ntp-(?P<pver>(\d+(\.\d+)+)(p\d+)?)\.tar"
- 
- CVE_STATUS[CVE-2016-9312] = "not-applicable-platform: Issue only applies on Windows"
--- 
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/=
+conf/include/ptest-packagelists-meta-oe.inc
+index 639daec992..36b2723e1b 100644
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+@@ -14,6 +14,7 @@ PTESTS_FAST_META_OE =3D "\
+     function2 \
+     fwupd \
+     gcab \
++    imagemagick \
+     jemalloc \
+     jq \
+     leveldb \
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-pt=
+est.sh b/meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-ptest.=
+sh
+new file mode 100755
+index 0000000000..2afc2ff246
+--- /dev/null
++++ b/meta-oe/recipes-support/imagemagick/imagemagick/imagemagick-ptest.sh
+@@ -0,0 +1,128 @@
++#!/bin/sh
++#
++# ImageMagick ptest:
++# We ceate an BASERGB file for our usage using "convert"
++# We convert this RGB file to BASEPNG
++# Using BASEPNG we recreate RGB named REGENERATEDRGB
++#
++# BASERGB to BASEPNG to REGENERATEDRGB
++# - Then compare  BASERGB with REGENERATEDRGB
++#
++# 1) We are checking if the binaries are present in RFS or not
++# 2) We Created an RBG of size : WIDTH x HEIGHT pixels
++# 3) Return value is captured after every major actio to capture the statu=
+s
++# 4) cmp -s is used to compare binary byte by byte data and
++#    capture only exit status
++# 5) Important parametsrs used are :
++#    -depth                     : How many bits for each colour pixel
++#    -alpha off  		: Don't consider transparency
++#    -define png:color-type=3D2   : Make PNG work with truecolour RGB
++#    -strip 			: Remove all non-pixel metadata og PNG
++#                                 so file is reproducible
++#    -set gamma 1.0             : No PNG brightness correction
++#     gradient:red-blue         : Data moves liberly from RED to Blue vert=
+ically
++
++
++WIDTH=3D16
++HEIGHT=3D16
++BASERGB=3Dbase.rgb
++BASEPNG=3Dbase.png
++REGENERATEDRGB=3Droundtrip.rgb
++
++echo "[DEBUG] Starting ImageMagick Ptest with ${WIDTH}x${HEIGHT} pixels "
++
++# Verify required binaries
++for bin in convert cmp wc rm; do
++    if [ -z "$(command -v "$bin" 2>/dev/null)" ]; then
++        echo "[ERROR] Required binary '$bin' not found $PATH"
++        exit 127
++    fi
++done
++
++# Generate raw RGB
++convert -size ${WIDTH}x${HEIGHT} -depth 8 -type TrueColor \
++    -alpha off -define png:color-type=3D2 \
++    -strip -set gamma 1.0 \
++    gradient:red-blue rgb:${BASERGB}
++
++returnvalue=3D$?
++if [ "$returnvalue" -ne 0 ]; then
++    echo "[FAIL] Failed to generate RGB pattern "
++    exit 1
++else
++    echo "[DEBUG] Generated raw RGB ${BASERGB} for test case"
++fi
++
++
++
++# Convert raw RGB to PNG
++convert -size ${WIDTH}x${HEIGHT} -depth 8 -type TrueColor \
++    -alpha off -define png:color-type=3D2 \
++    -strip -set gamma 1.0 \
++    rgb:${BASERGB} ${BASEPNG}
++
++returnvalue=3D$?
++if [ $returnvalue -ne 0 ]; then
++    echo "[FAIL] Failed to convert RGB to PNG"
++    rm -f ${BASERGB}
++    exit 1
++else
++    echo "[DEBUG] ${BASEPNG}  generated from ${BASERGB}"
++fi
++
++
++
++# Regenrate raw RGB from PNG
++convert -size ${WIDTH}x${HEIGHT} -depth 8 -type TrueColor \
++    -alpha off -define png:color-type=3D2 \
++    -strip -set gamma 1.0 \
++    ${BASEPNG} rgb:${REGENERATEDRGB}
++
++returnvalue=3D$?
++if [ $returnvalue -ne 0 ]; then
++    echo "[FAIL] Failed to re generate RGB from PNG "
++    rm -f ${BASERGB} ${BASEPNG}
++    exit 1
++else
++    echo "[DEBUG] ${REGENERATEDRGB} generated from ${BASEPNG}"
++fi
++
++
++
++# Compare original and recreated RGB
++if cmp -s ${BASERGB} ${REGENERATEDRGB}; then
++    echo "[PASS] RGB data identical after PNG round-trip"
++    RESULT=3D0
++else
++    echo "[FAIL] RGB mismatch detected, printing their size "
++    echo "[INFO] Base RGB size: $(wc -c < ${BASERGB}) bytes"
++    echo "[INFO] Round-trip RGB size: $(wc -c < ${REGENERATEDRGB}) bytes"
++    RESULT=3D1
++fi
++
++
++
++# Checking the identify tool from imagemagick to get the PNG metadata
++# True is added in end to ensure that test script doesnt fail even if
++# identify fails for any reason
++echo "[DEBUG] PNG file info:"
++identify -verbose ${BASEPNG} | grep -E "Depth|Type|Colorspace" || true
++
++
++
++# Cleanup of files create by test code
++echo "[DEBUG] Cleaning up temporary files"
++rm -f ${BASERGB} ${BASEPNG} ${REGENERATEDRGB}
++returnvalue=3D$?
++echo "[DEBUG] Cleanup exit=3D$returnvalue"
++
++
++# Logging the final result
++if [ ${RESULT} -eq 0 ]; then
++    echo "[DEBUG]: imagemagick-ptest.sh sucessfull "
++else
++    echo "[DEBUG]: imagemagick-ptest.sh failed "
++fi
++
++
++exit ${RESULT}
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/run-ptest b/me=
+ta-oe/recipes-support/imagemagick/imagemagick/run-ptest
+new file mode 100644
+index 0000000000..75251a803f
+--- /dev/null
++++ b/meta-oe/recipes-support/imagemagick/imagemagick/run-ptest
+@@ -0,0 +1,43 @@
++#!/bin/sh
++#
++# run-ptest =E2=80=94 ImageMagick ptest harness
++# POSIX-safe and BusyBox compatible
++
++PTDIR=3D$(dirname "$0")
++TESTDIR=3D"$PTDIR"
++PASSCOUNT=3D0
++FAILCOUNT=3D0
++TOTAL=3D0
++
++echo "=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D"
++echo "ImageMagick ptest: Runtime Validation"
++echo "=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D"
++
++for t in "$TESTDIR"/*.sh; do
++    [ -x "$t" ] || chmod +x "$t"
++    TOTAL=3D$((TOTAL + 1))
++    echo
++    echo "[DEBUG] Launching test script $t"
++
++    if sh "$t" 2>&1; then
++        echo "PASS: $(basename "$t")"
++        PASSCOUNT=3D$((PASSCOUNT + 1))
++    else
++        rc=3D$?
++        if [ "$rc" -eq 77 ]; then
++            echo "SKIP: $(basename "$t")"
++        else
++            echo "FAIL: $(basename "$t")"
++            FAILCOUNT=3D$((FAILCOUNT + 1))
++        fi
++    fi
++
++done
++
++echo
++echo "=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D"
++echo "[SUMMARY] Total: $TOTAL | PASS: $PASSCOUNT | FAIL: $FAILCOUNT"
++echo "=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D"
++echo
++[ "$FAILCOUNT" -eq 0 ]
++
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb b/met=
+a-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
+index 752fef303b..dd199902bd 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
+@@ -11,12 +11,15 @@ DEPENDS =3D "lcms bzip2 jpeg libpng tiff zlib fftw free=
+type libtool"
+=20
+ BASE_PV :=3D "${PV}"
+ PV .=3D "-26"
+-SRC_URI =3D "git://github.com/ImageMagick/ImageMagick.git;branch=3Dmain;pr=
+otocol=3Dhttps"
++SRC_URI =3D "git://github.com/ImageMagick/ImageMagick.git;branch=3Dmain;pr=
+otocol=3Dhttps \
++           file://run-ptest \
++           file://imagemagick-ptest.sh \
++"
+ SRCREV =3D "570a9a048bb0e3a5c221ca87be9408ae35f711e2"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+-inherit autotools pkgconfig update-alternatives
++inherit autotools pkgconfig update-alternatives ptest
+ export ac_cv_sys_file_offset_bits=3D"64"
+=20
+ EXTRA_OECONF =3D "--program-prefix=3D --program-suffix=3D.im7 --without-pe=
+rl --enable-largefile"
+@@ -56,6 +59,13 @@ do_install:append:class-target() {
+     fi
+ }
+=20
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}
++    install -m 0755 ${WORKDIR}/run-ptest ${D}${PTEST_PATH}/
++    install -m 0755 ${WORKDIR}/imagemagick-ptest.sh ${D}${PTEST_PATH}/
++}
++
++
+ FILES:${PN} +=3D "${libdir}/ImageMagick-${BASE_PV}/config-Q16* \
+                 ${datadir}/ImageMagick-7"
+=20
+--=20
 2.34.1
 
 
