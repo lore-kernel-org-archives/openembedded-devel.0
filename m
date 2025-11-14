@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94B5BCDE019
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98B90CDE020
 	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 07:43:47 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12994.1763106224194852887
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12995.1763106224559225885
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 13 Nov 2025 23:43:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CbjrKOc1;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-47728f914a4so10412435e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 23:43:43 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=grhYBrv8;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-42b3720e58eso1472243f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 23:43:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763106222; x=1763711022; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763106223; x=1763711023; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=u7MM8qxWFRQiKXm1Te2n7mTCj99r6iAG6PZW9JKr0GE=;
-        b=CbjrKOc1gYvWIDfvtF/8fvrNzA3KgK3OqF1aBAIdWcsj41SaFrjHxVnOYE+1pnCEGX
-         /UBzlK2MZgJCAt6sNByr96wwsYtUpn6sSnu4dJDRHI/QDFDQzljD360CIS4y2jBtZAfM
-         Cnz04lc3WcL9HO4HUpJTuGPVjaqyEadyPtlRzq48ivXG1TpQwEkhblyX6fQ5HE8UTnlR
-         D9fERV5W8Di4JNG8l4t1KKs9Xs2zLTD2+lW1y/wnPtKGUdUFoq2svlr9Zzpw+O6aNSFZ
-         W6gSECWCE1E+vgmdO3L5vdhX5hIlwU9S0Ww59w/3lw0jgCGbZeRdZmmM6cbGR8CPY26a
-         eQRA==
+        bh=72FQUXKEC+/N5M9Mut38WSaWdS09e2AJ86ea9s1LBtw=;
+        b=grhYBrv82Yuf3My8SK9LQjzLXV1G5zK5p6uVpqpk34/U47phWN8lmy6PEm+0PBEZq2
+         8QcT5twxhE24XnfaEx87j3IdXKR7X6gY4tCVmWGeEeDYhp+1Ei4EZ6POYIG0VoLqGbH4
+         hBh+n57r3seSU+mGyMvXTJbH4IUJ+42WmYqcX7ve/Y+DdQxdhzpBHqedF+8XimNAfLa3
+         rCev3+z2ZTZmhluSuJqhlvvqYz3YtDKJ8QgVM32sQBfEpbu63DHfli0/Vt77Bz5HZlK1
+         rtVqm+h8Oi7gEwvvYXZQB3iQH7KJIGGFp04Jq/thHOwatCmra2SN6TAYWiabxEdJ0M13
+         7Ejw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763106222; x=1763711022;
+        d=1e100.net; s=20230601; t=1763106223; x=1763711023;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=u7MM8qxWFRQiKXm1Te2n7mTCj99r6iAG6PZW9JKr0GE=;
-        b=UxZv6nHBZW28fyzEET6ECWLPslG7xMqmBkG5uX4rJAXjosD17xkJi/Ps+1dkj8ebB4
-         52BmIn/uHLXqPo27tZBJaEnCj4wdXRmLAH4CONGzAo1MZEk+hpv+wHc2f/kO+6JyfwU3
-         bPSDmz/UQRtMWfoZO7THET8BTXH6IMSZtSOB7Ie01ZohnCTm/RJQ+0S9zjtvRzLLIfe8
-         mH+tiNAP67AujoOzhuPxLzq5v0LFVdyRC0QSGNpenAYN0pUnOTiEm0iiKDuPGvZA2MjF
-         WjWsaTLAlosggRMTnQX0ijjtw1eBQgb7zYJMsdekeEqqXKiQ1pnqJ7FJDZZwZ7D0kC1y
-         4cPg==
-X-Gm-Message-State: AOJu0Yx1PoZpZX7UCERZV9Wl9MxCVaAyqm7QrSN+EE3Xweo6YQnF5Ykx
-	pETMX7MHo4pCTt6Nn94wQF5eDSFMiHNX7EIctcyxVNx3e8f8ky3mV/aoR7D5Ywjr
-X-Gm-Gg: ASbGncu4b15uByzhX6qbHzg5tOgzRH6BS1PK3VJ4LReNCX5IFa/RLqXAA52l3GKMn3L
-	eeiQ8xH2oS8fO6fMPOiZaH7UMPSAoZrrBQwZJTNSmuN1T+iNFcO3HxhTm5lAOoEGcC0iIiRGXii
-	nxAtOiWHFRC0NmBMtY8MAWO2orlT4SkdpEks0qkx3EXv7oQotKxexMtPDUE7OSnAr6zlDgkHk1u
-	CbEfqCV7vjhTTwE0lSEYl6BVsByLMKZMgES2HOLEQVLWcjCUI0XTaqXVJNme1ZCON1P86LqD+kz
-	B3A11FAx1WObUFjJYCiC5E2P+8VPmBDhsCIQe+l6j1mq0D4cLnAchhaZMpR1MGaECjxjHCrV/Zx
-	X8cKitAhBox2YN4d5o/DC02zggoz5nVhEgjVWXk6+HGvj2/awqOtUPZ0DCuNKeU9q0eS7BDLRbJ
-	gnMLKin4hI
-X-Google-Smtp-Source: AGHT+IFSNQTK4xlyaTXZCbqBHUhudnEjPe7CTAsB7vkOjF/vc5EDtB1HScMbuYGSNy2uwjBcRBFeqw==
-X-Received: by 2002:a05:600c:4f4e:b0:477:6d96:b3c8 with SMTP id 5b1f17b1804b1-4778fe95399mr20144425e9.23.1763106222123;
+        bh=72FQUXKEC+/N5M9Mut38WSaWdS09e2AJ86ea9s1LBtw=;
+        b=UuItm2QhcsmJJipXtndAe8kCSn+dj3BsQT/I8rrxFGEed9InTFY3CYtHz+fJEw4XKv
+         km1ijNsp+dwxZTgvYekZyBMK3Za6mBKGuWIo9yRxgK3paD4TlIto086reo7ysTdzE9RP
+         bwY4rz8HTorcanvhxioCCOOUK6tI0oKw+KRN/YVx50Og+sv4LqK4D4XDHJJbtg2u4b91
+         HTKYP7YimQ843tcMHPMY/fJ60DVquCS9bB+ZOUXfoj40WrV0hyG7rTdiuFkfm5wqn/De
+         +0OygzZ94IaoyjqKN7m+ar7RgDJ9NFav14BNx/k9vSfpc9Bd873yyPFDwu9hbF62e7EM
+         L1YA==
+X-Gm-Message-State: AOJu0Yynwi7eG0U23ZwsyUFqSi+nAFG7aREvRaMnmAIvamGMbnJQV+fa
+	0JZAhy12ur2gtRXt7wquS2LoFuFbuwiJQX4B8k9bT8LbRmy4MSuEVjDrgU3p6KhM
+X-Gm-Gg: ASbGncu5MvierQR5HhY0dHgHbd0Szcapy7YmGeXWZO+1+DdQ9FEqhdz5AhY3vg57F8p
+	Ij69RNR6YThzw4DFMnaOmEk6QmMgLT3yOI25oYNlisbc9oUSZ/fDGdHQtxdqv4BWyXqIczFdc8t
+	lhcmGrNbNfAIxPK1nvcmY54+bzbgS1oh4zt2XCJU9lzv47lmJ3ouHWN5+m4d1s0jzYqHMS8vJb8
+	9LZa6hY3arvjGAeerAZSpAXPJErFVtBZ/Ik5N8HJLWWauHgq9jwbiWA3V3t2PrldzUowtu4R1j7
+	5Ux18BsLho/dhBea2VgMUK4RmpBSMYWbXRj4k6JId1b2+UfY6LTuJTdJn4k9+q25COm4RpZpm4l
+	pb1uKDgNb37HaWYxFPdo93ULOaajT2jbHoT7WDfzv+OQZza/F7NNkVf+AAP7rYI4ugiMD4TAvcj
+	yvrG7Ttkee
+X-Google-Smtp-Source: AGHT+IGAIe3Nfw0kaIzzbSqYxkz0pfejyIOyDoctG0PWt19SjC+VH8WK3RtOs/Ka5UJNXDril3nHmw==
+X-Received: by 2002:a5d:588d:0:b0:42b:4069:428a with SMTP id ffacd0b85a97d-42b5933deeemr1977882f8f.12.1763106222830;
         Thu, 13 Nov 2025 23:43:42 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b53f0b622sm8090954f8f.29.2025.11.13.23.43.41
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b53f0b622sm8090954f8f.29.2025.11.13.23.43.42
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Nov 2025 23:43:41 -0800 (PST)
+        Thu, 13 Nov 2025 23:43:42 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2 2/4] audiofile: add ptest support
-Date: Fri, 14 Nov 2025 08:43:38 +0100
-Message-ID: <20251114074340.2716135-2-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH v2 3/4] audiofile: backport test for CVE-2015-7747
+Date: Fri, 14 Nov 2025 08:43:39 +0100
+Message-ID: <20251114074340.2716135-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251114074340.2716135-1-skandigraun@gmail.com>
 References: <20251114074340.2716135-1-skandigraun@gmail.com>
@@ -68,91 +68,204 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 07:43:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121686
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121687
 
-It's under 15 seconds to execute it.
+This is a backported patch from opensuse, which contains a testcase
+for CVE-2015-7747 (which is already patched in ths recipe, but not
+tested explicitly).
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
 
-v2: remove trailing whitespace from run-ptest script
+v2: no change
 
- .../include/ptest-packagelists-meta-oe.inc     |  1 +
- .../audiofile/audiofile_0.3.6.bb               | 18 +++++++++++++++++-
- .../audiofile/files/run-ptest                  | 14 ++++++++++++++
- 3 files changed, 32 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/run-ptest
+ .../audiofile/audiofile_0.3.6.bb              |   1 +
+ .../files/test-for-CVE-2015-7747.patch        | 166 ++++++++++++++++++
+ 2 files changed, 167 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/audiofile/files/test-for-CVE-2015-7747.patch
 
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-index 1d5932c315..96e0d87bd4 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -8,6 +8,7 @@
- # ptests which take less than ~30s each
- PTESTS_FAST_META_OE = "\
-     asio \
-+    audiofile \
-     cli11 \
-     cmocka \
-     cunit \
 diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-index fd80729bd2..f734a41dfc 100644
+index f734a41dfc..b14b4792b3 100644
 --- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
 +++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
- 
- SRC_URI = " \
-     ${GNOME_MIRROR}/audiofile/0.3/${BP}.tar.xz \
-+    file://run-ptest \
-     file://0001-fix-negative-shift-constants.patch \
-     file://0002-fix-build-on-gcc6.patch \
-     file://0003-fix-CVE-2015-7747.patch \
-@@ -23,7 +24,7 @@ SRC_URI = " \
+@@ -19,6 +19,7 @@ SRC_URI = " \
+     file://0006-Check-for-multiplication-overflow-in-sfconvert.patch \
+     file://0007-Actually-fail-when-error-occurs-in-parseFormat.patch \
+     file://0008-Check-for-multiplication-overflow-in-MSADPCM-decodeS.patch \
++    file://test-for-CVE-2015-7747.patch \
+     file://CVE-2019-13147.patch \
+     file://CVE-2022-24599.patch \
  "
- SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782"
- 
--inherit autotools lib_package pkgconfig
-+inherit autotools lib_package pkgconfig ptest
- 
- CXXFLAGS += "-std=c++14"
- 
-@@ -33,3 +34,18 @@ DEPENDS = " \
-     libogg \
-     flac \
- "
-+
-+do_compile_ptest(){
-+    oe_runmake -C gtest libgtest.la
-+    cd test
-+    # Query the TESTS variable value, remove the $(...) parts from it,
-+    # compile as make target along with FLAC (which is an optional test)
-+    oe_runmake `make -p | grep "^TESTS = " | sed 's/$([^)]*)//g' | cut -d= -f2` FLAC
-+}
-+
-+do_install_ptest(){
-+    install -d ${D}${PTEST_PATH}/test
-+    for t in test/.libs/*; do
-+        install $t ${D}${PTEST_PATH}/test/
-+    done
-+}
-diff --git a/meta-oe/recipes-multimedia/audiofile/files/run-ptest b/meta-oe/recipes-multimedia/audiofile/files/run-ptest
+diff --git a/meta-oe/recipes-multimedia/audiofile/files/test-for-CVE-2015-7747.patch b/meta-oe/recipes-multimedia/audiofile/files/test-for-CVE-2015-7747.patch
 new file mode 100644
-index 0000000000..4e41ef3cda
+index 0000000000..a62cc7589b
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/audiofile/files/run-ptest
-@@ -0,0 +1,14 @@
-+#!/bin/sh
++++ b/meta-oe/recipes-multimedia/audiofile/files/test-for-CVE-2015-7747.patch
+@@ -0,0 +1,166 @@
++From 1debf51f3a89d44c0bd46e7bc45c07342087dd7c Mon Sep 17 00:00:00 2001
++From: Fabrizio Gennari <fabrizio.ge@tiscali.it>
++Date: Sun, 4 Oct 2015 01:14:00 +0200
++Subject: [PATCH 2/2] Add a test case for conversion of both sample format and
++ number of channels
 +
-+RES=0
-+cd test
-+for t in *; do
-+  if ./$t; then
-+    echo PASS: $t
-+  else
-+    echo FAIL: $t
-+    RES=1
-+  fi
-+done
++This patch contains the testcase backport to version 0.3.6.
++Author: Stanislav Brabec <sbrabec@suse.com>
 +
-+exit $RES
++https://bugzilla.novell.com/show_bug.cgi?id=949399#c7
++
++
++This patch is from opensuse, to verify a CVE fix:
++https://build.opensuse.org/projects/multimedia:libs/packages/audiofile/files/audiofile-CVE-2015-7747.patch:
++
++Upstream-Status: Inactive-Upstream [lastcommit: 2016-Aug-30]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ test/Makefile.am                    |   2 +
++ test/sixteen-stereo-to-eight-mono.c | 118 ++++++++++++++++++++++++++++++++++++
++ 2 files changed, 120 insertions(+)
++ create mode 100644 test/sixteen-stereo-to-eight-mono.c
++
++diff --git a/test/Makefile.am b/test/Makefile.am
++index 7bbf8e4..d311719 100644
++--- a/test/Makefile.am
+++++ b/test/Makefile.am
++@@ -27,6 +27,7 @@ TESTS = \
++ 	VirtualFile \
++ 	floatto24 \
++ 	query2 \
+++	sixteen-stereo-to-eight-mono \
++ 	sixteen-to-eight \
++ 	testchannelmatrix \
++ 	testdouble \
++@@ -143,6 +144,7 @@ printmarkers_SOURCES = printmarkers.c
++ printmarkers_LDADD = $(LIBAUDIOFILE) -lm
++ 
++ sixteen_to_eight_SOURCES = sixteen-to-eight.c TestUtilities.cpp TestUtilities.h
+++sixteen_stereo_to_eight_mono_SOURCES = sixteen-stereo-to-eight-mono.c TestUtilities.cpp TestUtilities.h
++ 
++ testchannelmatrix_SOURCES = testchannelmatrix.c TestUtilities.cpp TestUtilities.h
++ 
++diff --git a/test/sixteen-stereo-to-eight-mono.c b/test/sixteen-stereo-to-eight-mono.c
++new file mode 100644
++index 0000000..0f14636
++--- /dev/null
+++++ b/test/sixteen-stereo-to-eight-mono.c
++@@ -0,0 +1,117 @@
+++/*
+++	Audio File Library
+++
+++	Copyright 2000, Silicon Graphics, Inc.
+++
+++	This program is free software; you can redistribute it and/or modify
+++	it under the terms of the GNU General Public License as published by
+++	the Free Software Foundation; either version 2 of the License, or
+++	(at your option) any later version.
+++
+++	This program is distributed in the hope that it will be useful,
+++	but WITHOUT ANY WARRANTY; without even the implied warranty of
+++	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++	GNU General Public License for more details.
+++
+++	You should have received a copy of the GNU General Public License along
+++	with this program; if not, write to the Free Software Foundation, Inc.,
+++	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+++*/
+++
+++/*
+++	sixteen-stereo-to-eight-mono.c
+++
+++	This program tests the conversion from 2-channel 16-bit integers to
+++	1-channel 8-bit	integers.
+++*/
+++
+++#ifdef HAVE_CONFIG_H
+++#include <config.h>
+++#endif
+++
+++#include <stdint.h>
+++#include <stdio.h>
+++#include <stdlib.h>
+++#include <string.h>
+++#include <unistd.h>
+++#include <limits.h>
+++
+++#include <audiofile.h>
+++
+++#include "TestUtilities.h"
+++
+++int main (int argc, char **argv)
+++{
+++	AFfilehandle file;
+++	AFfilesetup setup;
+++	int16_t frames16[] = {14298, 392, 3923, -683, 958, -1921};
+++	int8_t frames8[] = {28, 6, -2};
+++	int i, frameCount = 3;
+++	int8_t byte;
+++	AFframecount result;
+++
+++	setup = afNewFileSetup();
+++
+++	afInitFileFormat(setup, AF_FILE_WAVE);
+++
+++	afInitSampleFormat(setup, AF_DEFAULT_TRACK, AF_SAMPFMT_TWOSCOMP, 16);
+++	afInitChannels(setup, AF_DEFAULT_TRACK, 2);
+++
+++	char testFileName[PATH_MAX];
+++	if (!createTemporaryFile("sixteen-to-eight", testFileName))
+++	{
+++		fprintf(stderr, "Could not create temporary file.\n");
+++		exit(EXIT_FAILURE);
+++	}
+++
+++	file = afOpenFile(testFileName, "w", setup);
+++	if (file == AF_NULL_FILEHANDLE)
+++	{
+++		fprintf(stderr, "could not open file for writing\n");
+++		exit(EXIT_FAILURE);
+++	}
+++
+++	afFreeFileSetup(setup);
+++
+++	afWriteFrames(file, AF_DEFAULT_TRACK, frames16, frameCount);
+++
+++	afCloseFile(file);
+++
+++	file = afOpenFile(testFileName, "r", AF_NULL_FILESETUP);
+++	if (file == AF_NULL_FILEHANDLE)
+++	{
+++		fprintf(stderr, "could not open file for reading\n");
+++		exit(EXIT_FAILURE);
+++	}
+++
+++	afSetVirtualSampleFormat(file, AF_DEFAULT_TRACK, AF_SAMPFMT_TWOSCOMP, 8);
+++	afSetVirtualChannels(file, AF_DEFAULT_TRACK, 1);
+++
+++	for (i=0; i<frameCount; i++)
+++	{
+++		/* Read one frame. */
+++		result = afReadFrames(file, AF_DEFAULT_TRACK, &byte, 1);
+++
+++		if (result != 1)
+++			break;
+++
+++		/* Compare the byte read with its precalculated value. */
+++		if (memcmp(&byte, &frames8[i], 1) != 0)
+++		{
+++			printf("error\n");
+++			printf("expected %d, got %d\n", frames8[i], byte);
+++			exit(EXIT_FAILURE);
+++		}
+++		else
+++		{
+++#ifdef DEBUG
+++			printf("got what was expected: %d\n", byte);
+++#endif
+++		}
+++	}
+++
+++	afCloseFile(file);
+++	unlink(testFileName);
+++
+++	exit(EXIT_SUCCESS);
+++}
 
