@@ -1,220 +1,313 @@
-Return-Path: <hongxu.jia@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5970CDE026
-	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 08:09:07 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13386.1763107743968364686
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D60EACDE027
+	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 08:19:27 +0000 (UTC)
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13486.1763108363737163997
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 14 Nov 2025 00:09:04 -0800
+ Fri, 14 Nov 2025 00:19:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=aBjpY2+r;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=341359508a=hongxu.jia@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AE7wYps2232640
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 00:09:03 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=jY7RlowqtpETbFdr/zn2CqBaPhAAx9yYnZxjlOfq3lc=; b=aBjpY2+rmDfM
-	Ttds0RAX76fl8rAc97Ylj4aHjGaEeuPaSb6Mkw3bEZV0F3yUPXR7MPOX2+sg0t4E
-	RgNH4koRCDfSgsoadHsXPSLT0kWl8tyS3MeB/alJ7v/I06qWP1KDqhX5sBfAz8gv
-	77uE00q8O3tG7+bAFUSRXp1jcxpqZNqfUAxw3BI6/YblnDyghiljo4cDDhB0nMB4
-	zmF3nJCbAUOKBwcA7tNN+BTTAjhVJ9wGNddyydIitu2IOlaG8adUfrkvvOchvi0C
-	4N4qiiPKyreScISEq0YDUO+oWLpR6x+5dEcceQtEDNejk6a8Zn4JOJBK8Cy/gTuR
-	+yX5iERq+w==
-Received: from sn4pr2101cu001.outbound.protection.outlook.com (mail-southcentralusazon11012037.outbound.protection.outlook.com [40.93.195.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4adtk6r9g8-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 00:09:03 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=e27nTHtbej9R1VmwAOfTdGdOXcQPP0VSAoK70uacxXmMexixgmZLDIvczgi/R0MfR9jRLZysHam5Kl6fRYBh0PkEK+Gxi/7B26ic/UWLeOYy/94hmJARah0DORR+XqLlsauffEjFIXvy8nzLcRTR6US7ri6+xl1/JNTrqANkRr6WsLqnSTpH2cqV6gSutoAIozR8Zl8cmDnm/L7eTRdePNCvhL4bx/66+SHBLhoSYf2YV6ISu1Avgw0hEwL79lA7H5pMXwDJVIR6lIjygGu8Cyhzrb7PSL7YzA2gv/ME3Fr//AmDHRqXEKRNsT21WijfDrlhNGtQmNKYsOEWE34t9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jY7RlowqtpETbFdr/zn2CqBaPhAAx9yYnZxjlOfq3lc=;
- b=FQqJJqEGKFySibQNw+V8sqEp+Y6PwS6Cs+b2rkkf9vTqzPDxI8uhDqixZlok5qR9XU5geyFbyVdl/p6EG1PQtEzAF99TkQf+BOUvixnfu0NyfLMzU7ZPYg3vrZahoD8lROIDyzzr5LXRIDrIeKwmg1pMj9mn/CaxAvRFTdyjvFSvIh7cMxYZTT7xZxNHRo7rzkvA5NEIRNOOFc99hLlmD6cT6g44jneQofPClNbKW0WCm3MpnpDMhJFolh9A7mJjGbfc1uBiEIc0Sntwhw5uLxBl7dMBycoPRyIUkEm9BQDi9XZluYT/XyiwSOmL2F8VL8RLIH0rN9++q9q1s5AfQA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from PH7PR11MB7608.namprd11.prod.outlook.com (2603:10b6:510:269::20)
- by MW4PR11MB8290.namprd11.prod.outlook.com (2603:10b6:303:20f::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Fri, 14 Nov
- 2025 08:09:00 +0000
-Received: from PH7PR11MB7608.namprd11.prod.outlook.com
- ([fe80::ef64:bc9f:eb8c:e6e]) by PH7PR11MB7608.namprd11.prod.outlook.com
- ([fe80::ef64:bc9f:eb8c:e6e%4]) with mapi id 15.20.9320.013; Fri, 14 Nov 2025
- 08:09:00 +0000
-Message-ID: <7680ec42-85ec-438f-b0b0-9e9ab7ae0717@windriver.com>
-Date: Fri, 14 Nov 2025 16:08:54 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python][PATCH 2/2] python3-aiohttp: apply compile
- option -flax-vector-conversions for gcc
-To: openembedded-devel@lists.openembedded.org
-References: <20251030051505.1693030-1-hongxu.jia@windriver.com>
- <18732CF4DF98F73E.25345@lists.openembedded.org>
-Content-Language: en-US
-From: Hongxu Jia <hongxu.jia@windriver.com>
-In-Reply-To: <18732CF4DF98F73E.25345@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI2P153CA0032.APCP153.PROD.OUTLOOK.COM
- (2603:1096:4:190::23) To PH7PR11MB7608.namprd11.prod.outlook.com
- (2603:10b6:510:269::20)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XTS25Jov;
+ spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-786d1658793so16914037b3.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 00:19:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1763108363; x=1763713163; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=fndNAvynuHHVYfIFR8UXvmWkRnefL7Jx36lwLAbITWs=;
+        b=XTS25Jovqan8HlVWgMM2gaFYb69Itm9mZE9YWAsWnWjYsGAf4znbeQ30XVE7E8EIBz
+         JcR3JulygcHxG5RvucwGQo+EPTlnDckmmaHi/nUIwm8ATdQCZNQTe5UjRfXNP1BRI36i
+         uUY3hltazCuSWLiY78rfqM76e96Cut3MF7WWe1xBoxh8dwLZ+7iXJchcs7gFtxwWLCLF
+         Jg1p1dvyRgZS9FQ/eMQ7Nub5f/yxD36fc90bYzyHgApQ1gSp/3ebE7RO1sWJZM9twrtq
+         Jj7o3uwWk5LsJBLWLW+DAq9myRRvH1sbrqp3bnboSmur+nLNrjqTblIRzJVzpLKB5gKr
+         7P3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763108363; x=1763713163;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fndNAvynuHHVYfIFR8UXvmWkRnefL7Jx36lwLAbITWs=;
+        b=dKmT+EwpCOgACJvhbmsw457lSDd523TERaVey+D60JdvNSNGY/6NNuRQikJ2kwNm48
+         4h6Ci0T5Q+szj/PuRljvoggHu32odu0O1g15LZWThiSnfvBatr68rf0AzRTp//tSqcWf
+         ZaQvOGa0BrngG4ZAothQEKroXqwtTMOdYl5CXDbjs+DmWoSnbTL7hB8F/Z/hDquO/j5u
+         FCoJ6NZPfukFod7DyysfdwIdeyfRIuLae5PdDbVs+5NLVTsgRZFV+jtjxibcUDg2oSId
+         RN3D25xxWwwZFu7cQkW6K5WEkYgtrKoxRnkReb+hY3yLjIl0frvDR0+9YgFmfNXJs13p
+         qMYw==
+X-Gm-Message-State: AOJu0Yy9HxY1uQq9FJOQKaJb2FjFrGL0JrMFMKE+MHIZ3MAsX/Naols8
+	4PR3DXubvw2QfrJ8tEbXOZ0rtFbiqwNoMJdmNlHReDq120XChgV27nyQITC/0qCbpASQSY7Vmzy
+	c/7dHtyc+bKt67Pwf5t3ZWW9fYxg8oFw=
+X-Gm-Gg: ASbGncuTX3shoVgsyYKM4OWDCe51TRgP0CvulVJVoeF56Ls+RcMoHcJGT6NqlegY6Ti
+	SN0kZGAHwRJ821f9i25EPA7OL+D9txG+0a1uq1gH3n1XQB4Zu0POOti1wRADAMeLbrtGpmJ0xNZ
+	BBsn/AtL+D3prWENze6EvKk+m8ay7iHUa5pETyuq78QiK+1DRwKEIGSNnPlU8pwQwNo81GrimtX
+	60lTrispTWGSSGNVyefJm8dvE/J7pqrde/qfUU2W9rCYukdHFIkWB10aTTbdWa1hT8LaQ5Th4NV
+	4h28Ntk4ylwaV08ptsCkcU9W8E9EDfWG7pH8snGUty6XOxKwFZlwVTmCVv2adPllOG0eqfk5O3n
+	hxvPWUrJ6GCcUlG5WCyibDe1IRy3R4qU6yr0=
+X-Google-Smtp-Source: AGHT+IHoQfaiHpocp3zDp15npa/xgwf9KVilIB3aV2SJxPpdZJi989YM2Tw6Uq3aIXFzMIkml1mfDYxHGhDx+q5cHso=
+X-Received: by 2002:a05:690c:6206:b0:786:581d:f24b with SMTP id
+ 00721157ae682-78929ef5d0dmr34008187b3.47.1763108362799; Fri, 14 Nov 2025
+ 00:19:22 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR11MB7608:EE_|MW4PR11MB8290:EE_
-X-MS-Office365-Filtering-Correlation-Id: 71216ac7-3ecf-4e29-63ae-08de235510da
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|4022899009|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?OWJYS2lQWmUxTk1jcmxick1SOTlYUE05eWF0MmxBVXZ6MXQvVnNjTy82dHh1?=
- =?utf-8?B?YWl0OFVldEVpbUkwUCtad1ZrSmZrN2x2MitIVWFYL2pCdGU0WDU3ZXB6c09k?=
- =?utf-8?B?UHJBTVY3dEcvdm05bDhsdG4zU3Q0U2xMQm9SYTRTR3Z4dnIwQ3VzdjNVbjhv?=
- =?utf-8?B?WlJDQ2ZLZ3J5cm5nS1NOS2xoejl6RUM4UHZzN3UydThkUHVEUS9jVElQb0tI?=
- =?utf-8?B?Vkt2WE11cHMvSlJUVDlpb2ZoNWFmMGdQdWpzT3UwY3JRM1h2MU5YcndzenZC?=
- =?utf-8?B?Wi91c1ZsVFZwVm9RVGFTdHM0ZjdvSGpwaGFjZHRHY2hmc011ZzBpbXpZbXNs?=
- =?utf-8?B?Yk5iaUFyL09YeFN0MndvUGlyeCttY0pZUnhQTXlGUExUQkprL2k2dk9VTVNK?=
- =?utf-8?B?ZzI2L2xTVnNDRHdacWNPNGZpQUlVaHdUcWEyV2JZcHdybFhRajR4MHdwc3hK?=
- =?utf-8?B?bUVJZ1g1UU9xaUVrcVE4dExSS2V1aEZwOG1TRnVVV1EzSmVIZzMyaG5wbE1v?=
- =?utf-8?B?UE4rZ2Y2N285UTM1K3pNTXFvYy9kWjBpMk1hYVNiUTZ2bm84RDJ0Q2w4SURG?=
- =?utf-8?B?RFNjdXRVMXlzTDFHc24xSm4zTkRBVkUwanYrZVpNVlZZNnJmby9yUEtXUnBI?=
- =?utf-8?B?ajVZeldOUzl6VERUZFM1VFV1R3hDTjE3ekhnZUNHeWFRSTE3K1laR2hLOUJ2?=
- =?utf-8?B?NmtKcnFzU2FwUURoemlHM0ZhZFdNMEdPUGV4NlNYNGh4SGJtR0k4ZTZyWktN?=
- =?utf-8?B?djRKWE9IVmZtNlgxamdoVVRkQlpsdzFBMk5JU0VkbWkzQ0s0M2ljdGk1dk5P?=
- =?utf-8?B?bDdWdVBCZ0hINkJzQVVIaGxZbGUxREVyZldpb3pxY04xa21LN2EvVE5MVzND?=
- =?utf-8?B?ZWpqbUNGQkMySTdOK3hLM0tLR3A4TDVldkxQWXBkRTA4ai9OeGVRMkRYaDkr?=
- =?utf-8?B?dng5WFBGMUZNRUxyZE00em5qREdTWFJ4WmU5QXU2L1FRM1NTamNIVFU1U00r?=
- =?utf-8?B?cjdURzN6bmlYL2NmYWVyTW83R05UdktIcjVnd01yUTJzM2U4T3Z3SzFLQTdV?=
- =?utf-8?B?OUJLQkcxN0E1M3hnUVZ2UElpSUloWFA4QjRVZkQ2V2FYeWlFMTc3NnhxM0Rl?=
- =?utf-8?B?ZVYrZ1VVbTZSK3BTWmwxYStkN01NcGhPVWxaME9oRXZ3TCt3MEduSWMydEZ4?=
- =?utf-8?B?Q2plV2pGSVh1VEpxdW9TejNQUWl0SXcxd0xXakV2ei8xZzAvSzFhb2FlK280?=
- =?utf-8?B?WlBtY1hmeS9kaUNwdk9rN1JqTm5reVZGeDlvQWo4cHlVNzFINzVjVDRIcXh5?=
- =?utf-8?B?ZTliV29USlgrcG5zY2pkWHFXeUZVancwcStwUzBsdjhiMEZ4UVVJUHdRYW50?=
- =?utf-8?B?ZFVzSXRCUXI1SlY0VmNPa2ZJa1pOR1J1RmRLNFN2SHdNZ0k0aDYzRTVuam5L?=
- =?utf-8?B?VlZ5NXhzdXdOem5xMzh3OUk1aGEwdkNZWU5scUJQOFN0dkE5WXZ5aGoybUxq?=
- =?utf-8?B?ckJMQmJjNFdPeVdrbG50bHRiZ2Q5UXVLVHB4MjdRQkpZZDZNZ2dWSGdzY09Z?=
- =?utf-8?B?SC9OTDcrL2trQVVORUJsODB4VjdDbmtFWUoxNEcrNmlpRmtNY0tuUW56RFlR?=
- =?utf-8?B?a0l5eFNidkUzQ1JvVm5qVnVUUWV1dktjQmVIV1E4NlBDUG5hRjhUSHowc3hM?=
- =?utf-8?B?RUVoMlF5Q3NGelgybFBUK0xJQ2NjRDNvMlJEOTkyZk5zOWYvK3E2QkJHWDdh?=
- =?utf-8?B?MnIvR2JRN2R0cVJ3T290VktIQ0Y5eUQzNklkNUVIdExaVk45K1F3Y0JtL3hx?=
- =?utf-8?B?ZEZHYm1mMTY1dE1naWh0bDM0ZFRDeUZQTDNPamFubW9GbU0rTVJ4eEJBWmRv?=
- =?utf-8?B?Z0N1RUtUODBkU2hZaFB0cGU4RVM4WmRKSlYvcHNjRjRvT2c9PQ==?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR11MB7608.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(4022899009)(366016)(376014)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?VGtNSWxlcHpseGdzWVNGUDZMSW1CTjhCVloxMmtiS2hacUdhSmRieVBtMGF6?=
- =?utf-8?B?THUrS1FGY3FqTXRoU3EyOUhXRWJvV09MUS9VdkRkOGIzVWd0Y201YXF6SnRG?=
- =?utf-8?B?MkdUUDUwTHpTTm9jRTRoWDJIQ3YwRllMQjdEWWsySmJhbzVhZzdHTEh0RThz?=
- =?utf-8?B?M1E3Tm95OUdtQkZ3a2MrL0F5VUJWbkYzNTYrZDkwNnlxRU5keG4yeVNXeE9a?=
- =?utf-8?B?MytJMEFVQkVCVkxqaUlGSWR2QnFTaWovQThjVXBiRHNWd2F5OG1KWTRVTmJt?=
- =?utf-8?B?VXB2Q1pCZ3Z5RmJuWkJ4bHJGeStlNmorQ0JXRldHcEhhckFvS1pWeTR4bmZC?=
- =?utf-8?B?WXR1RVp0L09GSmRZdGUyTWdhS1pjRFVPQ1dvTVdQZHM1RUZEdWlPUGswRlpJ?=
- =?utf-8?B?TmhnY0E4bnVRNFY5UTJVMHhZbWRjK3UycmF6SHQwbno3UTh3R0JaK3ZMSk5V?=
- =?utf-8?B?d21MY1BkUDVYY3VMOUhCUjIrN1FlTm9vY0RoSUJ6YVRyN091TnpBYitESDVI?=
- =?utf-8?B?cUxKNHN2Mk9LWDdFdkltbVdOVmkyTXdoZm55cmZrOEZ5bzcrWTI4TDZXayt3?=
- =?utf-8?B?bDVvbXJyUEJZUjlKaGZRRUpsclh4RVVuNDE3LzAvWS9QRU1mZDZ5aEpabit3?=
- =?utf-8?B?WG1nZGJiK3BIY0ZpU1FITWZTYStEQkxSRFVMZkVJcmNNRmVSYTVYNittVkt5?=
- =?utf-8?B?S1JYTmE4eWZhV2gwdjFwYVdNb0pnRW00T2c2VTY4ZERRdVM0S1NHN3JjMmx1?=
- =?utf-8?B?eXdPREtOci80VWdUaFp2dFBaMzhjNndqU1Fxb0VTNmlxRlpzZHhaOHJ2NVJq?=
- =?utf-8?B?c1RzbjZoalhPVGJBSWVjOHZURS9MWktiQUtoUVFqdlN6TzkwS3FXc01kMERW?=
- =?utf-8?B?NnFITjA3RkdldVZGVGlVdnRiZzlySUFWUzJtWFcxejUwWW9wb0RGeUtoVjlD?=
- =?utf-8?B?SlBTb2ZBR3hqM1BQa3hGZEwxcDJqWnZzdTh2SFJuWUJXTTl3Qm92bWZCSEg5?=
- =?utf-8?B?Z2JrOGFWVEdpVTdndVcvcUJrNTlJZkEwRXZHNlV2aW1BTTlITWlyVUs4cXl2?=
- =?utf-8?B?SExReXpNTUxyR1NJY3dLZ29rRHlmb3g3RVY5YU5ETW5acTl0eTlCQW9mWkpr?=
- =?utf-8?B?WXF3ZXJ0aC91ZjBqRzV3bFJCL1g1aUNqREFZbnVYMmFHaUx6VnM3Z040dmZ5?=
- =?utf-8?B?NjNiVUVyWGE0ZlU5ZDBzcEhxWUU2ejZmLy9HRTREUUExUmYvblN0R2pYczYv?=
- =?utf-8?B?eC9qTEdGcnNEeGNwdk5pSmVnaWZVTFFUS1l0bWI2V29qRkVBdmlSVG1uQ2Ri?=
- =?utf-8?B?ZE9zZ2htaTdDZ1FZOU5xa0tidTM2VFVMZDd0dkVNQUI4R1FYSFdtMHhGWFgw?=
- =?utf-8?B?SWlNVXoyTlNraHRoNDZ0Q1lSVC9aZnAvbDJoU2gyQzhWbFBTamdTRG5jUFlF?=
- =?utf-8?B?UlpGZUdTOHFMTkltYjNsWkp3bzBLU2kzOXAzb256eWNUTEJETlpLOE0vZVEz?=
- =?utf-8?B?STg5aE0wN2MwRDFTdElCemxhYzk0U2Nac25KczJmbmlMdk5CRm1vYURzQVpH?=
- =?utf-8?B?TkZTMDBkMjM2SjAvMi9hcGgzY2s5bEt6TmppTk5uT0d4eXBNUFNJMHJBQWk5?=
- =?utf-8?B?MEk3TVlQWDJ3VkhwMGxraU5TN0U1S000c1JQbzhiNWhoSG81N2VIb1NHM2pV?=
- =?utf-8?B?cEhiSU9kQnBpTEQ1WVZFcFlwRmNpYnp3cGhqYnl1MDNENmhNdkhqVHNXV2dQ?=
- =?utf-8?B?cHZXZURjOXJaZ2ZZeXorbUlVRFFKT2xBSFB4Y0JNc1ppYzZsR2xHYlVlb3ky?=
- =?utf-8?B?L3hhWkJKc05pc0hlL1VuYkpqRmZYcm12UEo5U1l1aTdhbFA0VmlFcjNjWjZr?=
- =?utf-8?B?b0FmdHRTVlZTY0Z4UzRGNGhpeHpmcHpUVzR3RVg4S1l1RXJSOXJJR2gyU2JB?=
- =?utf-8?B?c2xWUFlsUUdmWXhJNk0zbERyaGh6a2F4dWVXZG5DQWYvczYrYTBqeWc3Zm53?=
- =?utf-8?B?cHhMaHNvV3lCaXBnWEtnRlVHNkFKSVh6czZlaVRyOVpDanJSWitXc1hhSDRM?=
- =?utf-8?B?cGVwdmp1aWExMkxmT2tUNmZmL1Jma0gwcUVtMjFTNlNwUWFKY0U1UU1NVXVT?=
- =?utf-8?B?OUlPR0lpSWFvbnRaT3lQV2lJNjJ1MGtzZndWaXJaYW0ybnlQVTRvUXNwZGdF?=
- =?utf-8?B?dFE9PQ==?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 71216ac7-3ecf-4e29-63ae-08de235510da
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR11MB7608.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Nov 2025 08:08:59.9641
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +FmDEUW1N2HcguyN09/38Qq+h9r9jBciFIsKjXCmrxnAhVTbeaeZa9sufKZNcGMTHxzX5GCXdn82pLNjCIHuJ91Wn+We9mACKNxvcRuIndI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB8290
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE0MDA2MyBTYWx0ZWRfX6pT0L+UkfrDn
- x0E51a6WORKOUxuac59qxWN7JcFPYK8C6b8aUOs3kgHBhRNfNDcxNdGQfal966ux8Xqxm+Uye6C
- SyX3v1hjFFSYx7w1hz8n5+PZN6Xr+10Rcl/DEnOF53tR/VR+Dt0gSGAbOcQ+jsWKBUbDT34ioQV
- G60cw/NmGOwNSgEA2uD7Xb7VZTGk01PlZ2X83982WoZooMs9dQpODcsSiZzS5me5+8gmGP3MyQP
- H7XtI1L8zwq0CPDxn0iv0AwJXPk2VyAqnmOX/mgBvO06dRtzahofdhz2zF0kgtltNwszwlZ9ATG
- 2wcCagxZL+E7wqNMLw2QG5HHdqNnTi/+tdbQJl9wsKJ1MZvUO/GRBT+eUfvcVectuNMnlSdDb/r
- p8XB2syqGlIxUCxOH4TKXVlVphuS3Q==
-X-Proofpoint-GUID: 9SI_g0xXIfadtps9ovhC75-iMmxJ5T9g
-X-Proofpoint-ORIG-GUID: 9SI_g0xXIfadtps9ovhC75-iMmxJ5T9g
-X-Authority-Analysis: v=2.4 cv=YsQChoYX c=1 sm=1 tr=0 ts=6916e39f cx=c_pps
- a=Tu5Wf88tfLtYLtD+ArEHOw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Q4-j1AaZAAAA:8 a=t7CeM3EgAAAA:8
- a=14Z9r8xRtE7pHVYXAB8A:9 a=QEXdDO2ut3YA:10 a=9H3Qd4_ONW2Ztcrla5EB:22
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-14_01,2025-11-13_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 clxscore=1015 malwarescore=0 adultscore=0
- phishscore=0 spamscore=0 suspectscore=0 lowpriorityscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511140063
+References: <20251114013528.108047-1-raj.khem@gmail.com> <ea2ee27f-989f-49d3-b810-ed3e79611f02@gmail.com>
+In-Reply-To: <ea2ee27f-989f-49d3-b810-ed3e79611f02@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 14 Nov 2025 00:18:56 -0800
+X-Gm-Features: AWmQ_blwlYPc_ajRPya-O4SAIjLyKODKdIVEwI6GOLLnGhPZFxzTSvTsAwXBk6c
+Message-ID: <CAMKF1spUhc_s8kcES2DjLAsKFZzyha7Nn8SwjddaEYtSMG69HQ@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] audiofile: Fix build with clang++
+To: Gyorgy Sarvari <skandigraun@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000aa4ea2064389a72a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 08:09:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121692
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 08:19:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121693
 
-Ping
+--000000000000aa4ea2064389a72a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-//Hongxu
-On 10/30/25 13:15, hongxu via lists.openembedded.org wrote:
-> The clang does not need option -flax-vector-conversions to
-> avoid build failure for 32bit arm target
+Can you include this patch in your series as well ? and send v3
+
+On Thu, Nov 13, 2025 at 11:44=E2=80=AFPM Gyorgy Sarvari <skandigraun@gmail.=
+com>
+wrote:
+
+> Works on my machine, lgtm
 >
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->   meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> On 11/14/25 02:35, Khem Raj wrote:
+> > When tests are enabled additional C++ code is compiled and clang does
+> > not like the code.
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > Cc: Gyorgy Sarvari <skandigraun@gmail.com>
+> > ---
+> >  .../audiofile/audiofile_0.3.6.bb              |  1 +
+> >  ...test-sign.cpp-Fix-C-narrowing-errors.patch | 41 +++++++++++++++++++
+> >  2 files changed, 42 insertions(+)
+> >  create mode 100644
+> meta-oe/recipes-multimedia/audiofile/files/0001-test-sign.cpp-Fix-C-narro=
+wing-errors.patch
+> >
+> > diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+> b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+> > index cc7fef2a26..6ebb54e261 100644
+> > --- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+> > +++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+> > @@ -19,6 +19,7 @@ SRC_URI =3D " \
+> >      file://0006-Check-for-multiplication-overflow-in-sfconvert.patch \
+> >      file://0007-Actually-fail-when-error-occurs-in-parseFormat.patch \
+> >
+> file://0008-Check-for-multiplication-overflow-in-MSADPCM-decodeS.patch \
+> > +    file://0001-test-sign.cpp-Fix-C-narrowing-errors.patch \
+> >      file://test-for-CVE-2015-7747.patch \
+> >      file://CVE-2019-13147.patch \
+> >      file://CVE-2022-24599.patch \
+> > diff --git
+> a/meta-oe/recipes-multimedia/audiofile/files/0001-test-sign.cpp-Fix-C-nar=
+rowing-errors.patch
+> b/meta-oe/recipes-multimedia/audiofile/files/0001-test-sign.cpp-Fix-C-nar=
+rowing-errors.patch
+> > new file mode 100644
+> > index 0000000000..83c573a873
+> > --- /dev/null
+> > +++
+> b/meta-oe/recipes-multimedia/audiofile/files/0001-test-sign.cpp-Fix-C-nar=
+rowing-errors.patch
+> > @@ -0,0 +1,41 @@
+> > +From bed0eb57c3294bac1c743cbe4404168c1007287d Mon Sep 17 00:00:00 2001
+> > +From: Khem Raj <raj.khem@gmail.com>
+> > +Date: Thu, 13 Nov 2025 17:00:59 -0800
+> > +Subject: [PATCH] test/sign.cpp: Fix C++ narrowing errors
+> > +
+> > +The error is because -kMinInt32 is both overflowing and a narrowing
+> conversion in a brace initializer.
+> > +Fix it by doing the negation in a wider type and explicitly casting to
+> uint32_t in the initializer.
+> > +
+> > +Fixes
+> > +
+> > +../../sources/audiofile-0.3.6/test/Sign.cpp:160:39: error:
+> non-constant-expression cannot be narrowed from type 'int32_t' (aka 'int'=
+)
+> to 'uint32_t' (aka 'unsigned int') in initializer list [-Wc++11-narrowing=
+]
+> > +  160 |         const uint32_t expectedData[] =3D { 0, -kMinInt32,
+> kMaxUInt32 };
+> > +      |                                              ^~~~~~~~~~
+> > +../../sources/audiofile-0.3.6/test/Sign.cpp:160:39: note: insert an
+> explicit cast to silence this issue
+> > +  160 |         const uint32_t expectedData[] =3D { 0, -kMinInt32,
+> kMaxUInt32 };
+> > +      |                                              ^~~~~~~~~~
+> > +      |
+> static_cast<uint32_t>( )
+> > +../../sources/audiofile-0.3.6/test/Sign.cpp:160:39: warning: overflow
+> in expression; result is -2'147'483'648 with type 'int32_t' (aka 'int')
+> [-Winteger-overflow]
+> > +  160 |         const uint32_t expectedData[] =3D { 0, -kMinInt32,
+> kMaxUInt32 };
+> > +      |                                              ^~~~~~~~~~
+> > +1 warning and 1 error generated.
+> > +
+> > +Upstream-Status: Pending
+> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > +---
+> > + test/Sign.cpp | 2 +-
+> > + 1 file changed, 1 insertion(+), 1 deletion(-)
+> > +
+> > +diff --git a/test/Sign.cpp b/test/Sign.cpp
+> > +index c339514..0d80fe6 100644
+> > +--- a/test/Sign.cpp
+> > ++++ b/test/Sign.cpp
+> > +@@ -157,7 +157,7 @@ TEST_F(SignConversionTest, Int32)
+> > +     AFframecount framesRead =3D afReadFrames(file, AF_DEFAULT_TRACK,
+> readData, frameCount);
+> > +     ASSERT_EQ(framesRead, frameCount);
+> > +     afCloseFile(file);
+> > +-    const uint32_t expectedData[] =3D { 0, -kMinInt32, kMaxUInt32 };
+> > ++    const uint32_t expectedData[] =3D { 0,
+> static_cast<uint32_t>(-static_cast<int64_t>(kMinInt32)), kMaxUInt32 };
+> > +     for (int i=3D0; i<frameCount; i++)
+> > +             EXPECT_EQ(readData[i], expectedData[i]);
+> > + }
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
-> index 6ca05d0596..b6344d4c68 100644
-> --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
-> +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
-> @@ -22,4 +22,4 @@ RDEPENDS:${PN} = "\
->       python3-aiodns \
->   "
->   
-> -CFLAGS:append:arm = " -flax-vector-conversions"
-> +CFLAGS:append:toolchain-gcc:arm = " -flax-vector-conversions"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#121189): https://lists.openembedded.org/g/openembedded-devel/message/121189
-> Mute This Topic: https://lists.openembedded.org/mt/116025741/3617049
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [hongxu.jia@eng.windriver.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
 >
 
+--000000000000aa4ea2064389a72a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Can you include this patch in your series as well ? and se=
+nd v3</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D=
+"ltr" class=3D"gmail_attr">On Thu, Nov 13, 2025 at 11:44=E2=80=AFPM Gyorgy =
+Sarvari &lt;<a href=3D"mailto:skandigraun@gmail.com">skandigraun@gmail.com<=
+/a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">W=
+orks on my machine, lgtm<br>
+<br>
+On 11/14/25 02:35, Khem Raj wrote:<br>
+&gt; When tests are enabled additional C++ code is compiled and clang does<=
+br>
+&gt; not like the code.<br>
+&gt;<br>
+&gt; Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+&gt; Cc: Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gmail.com" target=
+=3D"_blank">skandigraun@gmail.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 .../audiofile/<a href=3D"http://audiofile_0.3.6.bb" rel=3D"noref=
+errer" target=3D"_blank">audiofile_0.3.6.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 |=C2=A0 1 +<br>
+&gt;=C2=A0 ...test-sign.cpp-Fix-C-narrowing-errors.patch | 41 +++++++++++++=
+++++++<br>
+&gt;=C2=A0 2 files changed, 42 insertions(+)<br>
+&gt;=C2=A0 create mode 100644 meta-oe/recipes-multimedia/audiofile/files/00=
+01-test-sign.cpp-Fix-C-narrowing-errors.patch<br>
+&gt;<br>
+&gt; diff --git a/meta-oe/recipes-multimedia/audiofile/<a href=3D"http://au=
+diofile_0.3.6.bb" rel=3D"noreferrer" target=3D"_blank">audiofile_0.3.6.bb</=
+a> b/meta-oe/recipes-multimedia/audiofile/<a href=3D"http://audiofile_0.3.6=
+.bb" rel=3D"noreferrer" target=3D"_blank">audiofile_0.3.6.bb</a><br>
+&gt; index cc7fef2a26..6ebb54e261 100644<br>
+&gt; --- a/meta-oe/recipes-multimedia/audiofile/<a href=3D"http://audiofile=
+_0.3.6.bb" rel=3D"noreferrer" target=3D"_blank">audiofile_0.3.6.bb</a><br>
+&gt; +++ b/meta-oe/recipes-multimedia/audiofile/<a href=3D"http://audiofile=
+_0.3.6.bb" rel=3D"noreferrer" target=3D"_blank">audiofile_0.3.6.bb</a><br>
+&gt; @@ -19,6 +19,7 @@ SRC_URI =3D &quot; \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 file://0006-Check-for-multiplication-overflow-in-s=
+fconvert.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 file://0007-Actually-fail-when-error-occurs-in-par=
+seFormat.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 file://0008-Check-for-multiplication-overflow-in-M=
+SADPCM-decodeS.patch \<br>
+&gt; +=C2=A0 =C2=A0 file://0001-test-sign.cpp-Fix-C-narrowing-errors.patch =
+\<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 file://test-for-CVE-2015-7747.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 file://CVE-2019-13147.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 file://CVE-2022-24599.patch \<br>
+&gt; diff --git a/meta-oe/recipes-multimedia/audiofile/files/0001-test-sign=
+.cpp-Fix-C-narrowing-errors.patch b/meta-oe/recipes-multimedia/audiofile/fi=
+les/0001-test-sign.cpp-Fix-C-narrowing-errors.patch<br>
+&gt; new file mode 100644<br>
+&gt; index 0000000000..83c573a873<br>
+&gt; --- /dev/null<br>
+&gt; +++ b/meta-oe/recipes-multimedia/audiofile/files/0001-test-sign.cpp-Fi=
+x-C-narrowing-errors.patch<br>
+&gt; @@ -0,0 +1,41 @@<br>
+&gt; +From bed0eb57c3294bac1c743cbe4404168c1007287d Mon Sep 17 00:00:00 200=
+1<br>
+&gt; +From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_b=
+lank">raj.khem@gmail.com</a>&gt;<br>
+&gt; +Date: Thu, 13 Nov 2025 17:00:59 -0800<br>
+&gt; +Subject: [PATCH] test/sign.cpp: Fix C++ narrowing errors<br>
+&gt; +<br>
+&gt; +The error is because -kMinInt32 is both overflowing and a narrowing c=
+onversion in a brace initializer.<br>
+&gt; +Fix it by doing the negation in a wider type and explicitly casting t=
+o uint32_t in the initializer.<br>
+&gt; +<br>
+&gt; +Fixes<br>
+&gt; +<br>
+&gt; +../../sources/audiofile-0.3.6/test/Sign.cpp:160:39: error: non-consta=
+nt-expression cannot be narrowed from type &#39;int32_t&#39; (aka &#39;int&=
+#39;) to &#39;uint32_t&#39; (aka &#39;unsigned int&#39;) in initializer lis=
+t [-Wc++11-narrowing]<br>
+&gt; +=C2=A0 160 |=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0const uint32_t expected=
+Data[] =3D { 0, -kMinInt32, kMaxUInt32 };<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ^~~~~~~~~~<br>
+&gt; +../../sources/audiofile-0.3.6/test/Sign.cpp:160:39: note: insert an e=
+xplicit cast to silence this issue<br>
+&gt; +=C2=A0 160 |=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0const uint32_t expected=
+Data[] =3D { 0, -kMinInt32, kMaxUInt32 };<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ^~~~~~~~~~<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 static_cast&lt;uint32_t&gt;( )<br=
+>
+&gt; +../../sources/audiofile-0.3.6/test/Sign.cpp:160:39: warning: overflow=
+ in expression; result is -2&#39;147&#39;483&#39;648 with type &#39;int32_t=
+&#39; (aka &#39;int&#39;) [-Winteger-overflow]<br>
+&gt; +=C2=A0 160 |=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0const uint32_t expected=
+Data[] =3D { 0, -kMinInt32, kMaxUInt32 };<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ^~~~~~~~~~<br>
+&gt; +1 warning and 1 error generated.<br>
+&gt; +<br>
+&gt; +Upstream-Status: Pending<br>
+&gt; +Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" tar=
+get=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+&gt; +---<br>
+&gt; + test/Sign.cpp | 2 +-<br>
+&gt; + 1 file changed, 1 insertion(+), 1 deletion(-)<br>
+&gt; +<br>
+&gt; +diff --git a/test/Sign.cpp b/test/Sign.cpp<br>
+&gt; +index c339514..0d80fe6 100644<br>
+&gt; +--- a/test/Sign.cpp<br>
+&gt; ++++ b/test/Sign.cpp<br>
+&gt; +@@ -157,7 +157,7 @@ TEST_F(SignConversionTest, Int32)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0AFframecount framesRead =3D afReadFrames(file, AF=
+_DEFAULT_TRACK, readData, frameCount);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0ASSERT_EQ(framesRead, frameCount);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0afCloseFile(file);<br>
+&gt; +-=C2=A0 =C2=A0 const uint32_t expectedData[] =3D { 0, -kMinInt32, kMa=
+xUInt32 };<br>
+&gt; ++=C2=A0 =C2=A0 const uint32_t expectedData[] =3D { 0, static_cast&lt;=
+uint32_t&gt;(-static_cast&lt;int64_t&gt;(kMinInt32)), kMaxUInt32 };<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0for (int i=3D0; i&lt;frameCount; i++)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0EXPECT_EQ(readData[i]=
+, expectedData[i]);<br>
+&gt; + }<br>
+<br>
+</blockquote></div>
+
+--000000000000aa4ea2064389a72a--
 
