@@ -2,211 +2,178 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06704CDB47B
-	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 03:03:16 +0000 (UTC)
-Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9873.1763089386382313000
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05343CDB47C
+	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 03:04:46 +0000 (UTC)
+Received: from mail-yx1-f47.google.com (mail-yx1-f47.google.com [74.125.224.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9890.1763089476461931609
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Nov 2025 19:03:06 -0800
+ Thu, 13 Nov 2025 19:04:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QQ2HrFz1;
- spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-78802ac22abso15947177b3.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 19:03:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Qj1RPtAg;
+ spf=pass (domain: gmail.com, ip: 74.125.224.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f47.google.com with SMTP id 956f58d0204a3-641e4744e59so824675d50.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 19:04:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763089385; x=1763694185; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763089475; x=1763694275; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=aG+G5lGb0WkHfrJM5MlDg3niFZysLpNLFjrukFealKw=;
-        b=QQ2HrFz1X+1jD5roc6I9keUyv0D5Qh4Vj6tN+X4x2+z3cGS2EbRHZbSgZdVMtcek7o
-         9YxDsnyEAQmFi63uF+yd/d/9xk1Lh4gdAbjzIhuv3Wo1//3jWr772c1Jj+lU+TTUbpSN
-         1bJ1G3mkgmw6dt106myiWROFjy2SfIrLQHt/tkS5ViM4KNAXW2vx/4BWA+ugxaN2z5eD
-         OHr5kmSnRMkoCsi9q8cFD9OGybFPdEf+sNrIyP96wvFYYN1DgSGD6P8/fIfHWy/FM1AN
-         3amuNzXYf/6Twd/tlHm9mM+smPl0kz/V06bhtk6993InjvL+JZbgYapZVtHd91Ew0JT8
-         fYZw==
+        bh=cuvxlrHyMvgP4t2aat2w1vnptseqRcwrVkrJyQxeU30=;
+        b=Qj1RPtAgaFlqjP+t72mMyXO9Vzd3UfAk6CF6ZgV3A3ygfFW1pRymUPD8RbTeEsoq8C
+         Hj9h87gCrlc9hbvuFAnjnPyUT0XJfkasjLrYaIwyqZCxUHcsHivRdC5uAAPEsPhBd8+H
+         vtbP2rYuwcMB/WZmvWoCL05wirqNpwWGaRCZrOuDMsswcBK6IW0ZzLH4kXpWMWH0qBwH
+         jwFPzGeBAH75K7MfOgSTTcBYFlwkrE2FyE6ihHw+oju+/asgBi0uiiRNuO7Q0grYam69
+         NgTBRXjJ6Y/pbmvQBiBZve1VIWxtU65nSR6VFJVXGlOhJFkDCy56fwWcEZPyP77Oh+x9
+         maZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763089385; x=1763694185;
+        d=1e100.net; s=20230601; t=1763089475; x=1763694275;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aG+G5lGb0WkHfrJM5MlDg3niFZysLpNLFjrukFealKw=;
-        b=tI6u89874+IRUZe13p3ntb/u8V/RXEeFRbdJYLZWjK+939YvY6+E6ENhxhG3PdkuYR
-         KQD0ZbBUC6BuTB2p3kFIp4KXfDbpEuZ3BhMCoa+KcHeepxog0d0qBNU+rRl1JxXoIcU/
-         xilEgk9Hl9NAVXpeOY+9chxYDm2d++TUdUlmAdsd0f1h9qjbhTny9vTKsiw4UQa8IG2S
-         aejg0KEQJ38nTDVzkYBHT/5tquvqrbq6DzPKR2TTn91i0xc8PdqKflsjwdZt6RzbI3Ej
-         cdoYBgXFfhuA/8HtgjeWA8jridmPxNchSkRGrP/AVetkCaYxx7l4QqdxVRejadal2v3x
-         cd+g==
-X-Gm-Message-State: AOJu0Yy+FUjMLZTIvcEv4hdo6JknhoIosczw6JCYWtTNRlin3IJjVBg0
-	q7qV492KgkCWJv2gcXU1qVzW1JAuTy9IfN4niZv+KIQ02gONo/UIJCZwE2EgUepw9PfDNS+Ut2d
-	I23k7zzYx0eqLv0UtW/nUJMr31TjP9mo=
-X-Gm-Gg: ASbGncui0+RzA2TydiVclhz3GMvdhYl6nDZ2TAtv1g0bf5o9RHMVijKZUZUKYZ1/dbX
-	yxhM2p3uLBCOpnC2JbOFLQkKb0AB0/xXIP0P35g09T1BeB+2zgLuXNg0eMpUT7OBHdTDG6DckDP
-	vSXEQGeLSBDyAXUnLK0AWhgKBiacxw4rmf/yREc8nJQGpNclf2kAo246cwp3/odnyq/vI/G1qcl
-	Fb4jRh4QrTN63IHkfjUkOGjpERxyn4thPZ+yHQv8ewZGGx0dOLrv9JZAv49D8vI8UDQmkBEP5wx
-	k8kb8PAgoZFV9pCmWWedfbHvnPJmGbMgrNJQNdTmjz3Er70VcT8xcphSk3R4XUHaOPKokjaJYw2
-	eYHPYMG1kcldcVYsJU6qrpofWBLp4qj2JnEUIhhWd/C9zZg==
-X-Google-Smtp-Source: AGHT+IFH4pN9dJEduT8NQKaLtamsTbfHK/9vlkwZ87PjTTMQ1iIUuTNEcXqqVM8YOU/iqA6rMhA2ubjqq2MajgURqEQ=
-X-Received: by 2002:a05:690c:8681:20b0:787:e015:8561 with SMTP id
- 00721157ae682-78929e38822mr14235987b3.20.1763089385483; Thu, 13 Nov 2025
- 19:03:05 -0800 (PST)
+        bh=cuvxlrHyMvgP4t2aat2w1vnptseqRcwrVkrJyQxeU30=;
+        b=doGwmlpt+7zrBX23+GMTh0/i5XL4LkKDVOAznqeo6fgELTti5h6D26Da4p7403n3Na
+         WOn3kUTsUzMwrcPQ7p68Ur/JXGowVbL/g3s7i6CvFAaqHZmlXfDx80CwoNMIEd3C7m+t
+         YCITz8231mGFR/klYLr4trE17b59guxYtaKZ3G7RDKMWyWTS6anz4TGGXhw7MxGlnFUp
+         xdae4mvMDGHbU1Wf9y3dmknG8xV5f9kEgRayPtOjiCxJl1+aP0ildMAEiIHDpc6o8CqL
+         8DvmLMhjYdKJwZZg9pAE2XncjDtviJXYpKtoKY6eavddKOukPjuDsUQ6R4tL38fCovcL
+         fByA==
+X-Gm-Message-State: AOJu0YzqjuiDvAMe1hdit0qTpJqHXDoVh2+YUE7UM6eg9SIbAKYfLahs
+	XGA2UhJVii/+rGV3jkTipdf2U9uBRkk6wx014dczFim+51KCUEyKu0H58Zk8KAAVIdPBu0VcCgk
+	O3EckXQiyh7U7YsUlvrHCwMgSY6PFSwI=
+X-Gm-Gg: ASbGncsAlfWgPC0H3aNgNqVISV5WVl8KrFT9dkyXK9Obun406YJdowQOwj42/etdQ7p
+	nd5elwpTmYv4RtYWDLUdWzbfd6nH/158BzVBDyljy9JtXbk5ht6ngVjb78s6+RSuLYxOcOYxEtp
+	lU6A/geItK5ffxO6ZUbBJSKH2K/KQBipSnPDxsDTtQXPj8SMzsuY2nbUh1qZKE9vzIz+k9CEY3t
+	LzWxjsBXbTxllJC1R21rZrH6wnNFNU4vXmXuVaGL+93n+Qjd3sQ0mMRp4FX10itNf347Og4fFWE
+	r3IahgzCPmiOXINx95bsJCyDHqLz3+QMuc7YmuitnNc8Pd0PUrGOh5/1kqHwEVW4ptyhcg6hRPz
+	00WJ4rHEH3enCPnHt7UVvTiRBK1y0VOJUpExGivIQJ+jbOQ+0SI5rQyFP
+X-Google-Smtp-Source: AGHT+IHDacBbCHyErWGVFaopgGX+STl+3T9M5bh8wVzQhNc3iJ6cEo5neMGIHPB662QkLks7Y0TNx31K+69uFpnopOk=
+X-Received: by 2002:a53:c04a:0:10b0:640:6d2f:468d with SMTP id
+ 956f58d0204a3-641e76a1556mr1230190d50.43.1763089475469; Thu, 13 Nov 2025
+ 19:04:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20251114022702.2554476-1-f_l_k@t-online.de>
-In-Reply-To: <20251114022702.2554476-1-f_l_k@t-online.de>
+References: <20251114023522.1449515-1-alistair.francis@wdc.com>
+In-Reply-To: <20251114023522.1449515-1-alistair.francis@wdc.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 13 Nov 2025 19:02:39 -0800
-X-Gm-Features: AWmQ_bkMzyikpW7j9o_RGV9lwYVGD8BzetZZnu8bWoXVAxN1tCox2PXSq9gut5o
-Message-ID: <CAMKF1soNtEJb4WgZUk6J4TqJ2bVjaMQtQAHR1w2SmZKNo1UQxA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCHv2] fex: add recipe
-To: f_l_k@t-online.de
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000008770c50643853cb1"
+Date: Thu, 13 Nov 2025 19:04:08 -0800
+X-Gm-Features: AWmQ_bn_i_MoaL-YYRcqE4X-4kW38EFFNVkPg2PL-KdC1yhBRJo78kQWAJSHgZE
+Message-ID: <CAMKF1so-KwnHxBU6Bf5N1muRZ4MS4mo=9h13YqUpbXPyeS9iLg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] libspdm: upgrade 3.7.0 -> 3.8.1
+To: alistair23@gmail.com
+Cc: openembedded-devel@lists.openembedded.org, Archana.Kakani@ibm.com, 
+	Alistair Francis <alistair.francis@wdc.com>
+Content-Type: multipart/alternative; boundary="000000000000e4861206438541a9"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 03:03:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121674
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 03:04:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121675
 
---0000000000008770c50643853cb1
+--000000000000e4861206438541a9
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-it fails on musl, perhaps disable it for musl targets unless you want to
-fix it.
+Please rebase it on the latest master-next and resend.
 
-https://errors.yoctoproject.org/Errors/Details/888047/
+On Thu, Nov 13, 2025 at 6:35=E2=80=AFPM Alistair Francis via lists.openembe=
+dded.org
+<alistair23=3Dgmail.com@lists.openembedded.org> wrote:
 
-On Thu, Nov 13, 2025 at 6:27=E2=80=AFPM Markus Volk via lists.openembedded.=
-org
-<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
-
-> Fex is a fast usermode x86 and x86-64 emulator for Arm64 Linux
-> It is used by 'valve' to run windows games on snapdragon
+> From: Alistair Francis <alistair.francis@wdc.com>
 >
-> Compilation requires TOOLCHAIN =3D "clang"
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  meta-oe/recipes-devtools/fex/fex_2511.bb | 55 ++++++++++++++++++++++++
->  1 file changed, 55 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/fex/fex_2511.bb
+>  ...port-API-introduced-in-openssl-3.5.0.patch | 33 -------------------
+>  .../{libspdm_3.7.0.bb =3D> libspdm_3.8.1.bb}    |  6 ++--
+>  2 files changed, 2 insertions(+), 37 deletions(-)
+>  delete mode 100644
+> meta-oe/recipes-support/libspdm/libspdm/0001-Backport-API-introduced-in-o=
+penssl-3.5.0.patch
+>  rename meta-oe/recipes-support/libspdm/{libspdm_3.7.0.bb =3D>
+> libspdm_3.8.1.bb} (92%)
 >
-> diff --git a/meta-oe/recipes-devtools/fex/fex_2511.bb
-> b/meta-oe/recipes-devtools/fex/fex_2511.bb
-> new file mode 100644
-> index 0000000000..9eefe8a8ab
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/fex/fex_2511.bb
-> @@ -0,0 +1,55 @@
-> +SUMMARY =3D "A fast usermode x86 and x86-64 emulator for Arm64 Linux"
-> +HOMEPAGE =3D "https://github.com/FEX-Emu/FEX"
-> +LICENSE =3D "MIT & BSL-1.0 & BSD-2-Clause"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D70d20d502833c35d6d5a4f0ef5d9e=
-fcc"
-> +LIC_FILES_CHKSUM +=3D
-> "file://External/range-v3/LICENSE.txt;md5=3D5dc23d5193abaedb6e42f05650004=
-624"
-> +LIC_FILES_CHKSUM +=3D
-> "file://External/xxhash/LICENSE;md5=3D13be6b481ff5616f77dda971191bb29b"
-> +
-> +COMPATIBLE_HOST =3D "aarch64.*-linux"
-> +
-> +SRC_URI =3D " \
-> +       git://
-> github.com/FEX-Emu/FEX.git;name=3Dfex;protocol=3Dhttps;nobranch=3D1;tag=
-=3DFEX-${PV}
-> <http://github.com/FEX-Emu/FEX.git;name=3Dfex;protocol=3Dhttps;nobranch=
-=3D1;tag=3DFEX-$%7BPV%7D>
-> \
-> +       git://
-> github.com/Sonicadvance1/cpp-optparse.git;name=3Dcpp-optparse;subdir=3D${=
-S}/Source/Common/cpp-optparse;protocol=3Dhttps;nobranch=3D1
-> <http://github.com/Sonicadvance1/cpp-optparse.git;name=3Dcpp-optparse;sub=
-dir=3D$%7BS%7D/Source/Common/cpp-optparse;protocol=3Dhttps;nobranch=3D1>
-> \
-> +       git://
-> github.com/FEX-Emu/drm-headers.git;name=3Dfex-drm;subdir=3D${S}/External/=
-drm-headers;protocol=3Dhttps;nobranch=3D1
-> <http://github.com/FEX-Emu/drm-headers.git;name=3Dfex-drm;subdir=3D$%7BS%=
-7D/External/drm-headers;protocol=3Dhttps;nobranch=3D1>
-> \
-> +       git://
-> github.com/Cyan4973/xxHash.git;name=3Dxxhash;subdir=3D${S}/External/xxhas=
-h;protocol=3Dhttps;nobranch=3D1
-> <http://github.com/Cyan4973/xxHash.git;name=3Dxxhash;subdir=3D$%7BS%7D/Ex=
-ternal/xxhash;protocol=3Dhttps;nobranch=3D1>
-> \
-> +       git://
-> github.com/FEX-Emu/jemalloc.git;name=3Djemalloc;subdir=3D${S}/External/je=
-malloc;protocol=3Dhttps;nobranch=3D1
-> <http://github.com/FEX-Emu/jemalloc.git;name=3Djemalloc;subdir=3D$%7BS%7D=
-/External/jemalloc;protocol=3Dhttps;nobranch=3D1>
-> \
-> +       git://
-> github.com/FEX-Emu/jemalloc.git;name=3Djemalloc-glibc;subdir=3D${S}/Exter=
-nal/jemalloc_glibc;protocol=3Dhttps;nobranch=3D1
-> <http://github.com/FEX-Emu/jemalloc.git;name=3Djemalloc-glibc;subdir=3D$%=
-7BS%7D/External/jemalloc_glibc;protocol=3Dhttps;nobranch=3D1>
-> \
-> +       git://
-> github.com/ericniebler/range-v3.git;name=3Drange-v3;subdir=3D${S}/Externa=
-l/range-v3;protocol=3Dhttps;nobranch=3D1
-> <http://github.com/ericniebler/range-v3.git;name=3Drange-v3;subdir=3D$%7B=
-S%7D/External/range-v3;protocol=3Dhttps;nobranch=3D1>
-> \
-> +       git://
-> github.com/FEX-Emu/robin-map.git;name=3Drobin-map;subdir=3D${S}/External/=
-robin-map;protocol=3Dhttps;nobranch=3D1
-> <http://github.com/FEX-Emu/robin-map.git;name=3Drobin-map;subdir=3D$%7BS%=
-7D/External/robin-map;protocol=3Dhttps;nobranch=3D1>
-> \
-> +"
-> +
-> +SRCREV_FORMAT =3D "fex"
-> +SRCREV_fex =3D "663fd5a98befbf7a0ac585627de15c662715a731"
-> +SRCREV_cpp-optparse =3D "9f94388a339fcbb0bc95c17768eb786c85988f6e"
-> +SRCREV_fex-drm =3D "3e49836995c1dcb3df709440ad2f270b569c6a5f"
-> +SRCREV_xxhash =3D "e626a72bc2321cd320e953a0ccf1584cad60f363"
-> +SRCREV_jemalloc =3D "ce24593018ca5d5af7e5661ceda9744e02b59f8f"
-> +SRCREV_jemalloc-glibc =3D "8436195ad5e1bc347d9b39743af3d29abee59f06"
-> +SRCREV_robin-map =3D "d5683d9f1891e5b04e3e3b2192b5349dc8d814ea"
-> +SRCREV_range-v3 =3D "ca1388fb9da8e69314dda222dc7b139ca84e092f"
-> +
-> +DEPENDS =3D " \
-> +    catch2 \
-> +    fmt \
-> +    libdrm  \
-> +    nasm-native \
-> +    vulkan-headers \
-> +"
-> +
-> +PACKAGECONFIG =3D ""
-> +PACKAGECONFIG[qt] =3D "-DBUILD_FEXCONFIG=3DON,-DBUILD_FEXCONFIG=3DOFF,qt=
-base
-> qttools-native qtquick3d"
-> +
-> +EXTRA_OECMAKE +=3D " \
-> +       -DBUILD_TESTING=3DOFF \
-> +       -DENABLE_VIXL_DISASSEMBLER=3DOFF \
-> +       -DENABLE_VIXL_SIMULATOR=3DOFF \
-> +       -DDATA_DIRECTORY=3D${datadir} \
-> +       -DQT_HOST_PATH:PATH=3D${RECIPE_SYSROOT_NATIVE}${prefix_native} \
-> +"
-> +
-> +inherit cmake ccache pkgconfig
-> +
-> +LDFLAGS +=3D "-fuse-ld=3Dlld"
-> +
-> +FILES:${PN} +=3D "${datadir} ${libdir}/binfmt.d ${libdir}/libFEXCore.so"
-> +FILES:${PN}-dev =3D "${includedir}"
+> diff --git
+> a/meta-oe/recipes-support/libspdm/libspdm/0001-Backport-API-introduced-in=
+-openssl-3.5.0.patch
+> b/meta-oe/recipes-support/libspdm/libspdm/0001-Backport-API-introduced-in=
+-openssl-3.5.0.patch
+> deleted file mode 100644
+> index 2df9a18c68..0000000000
+> ---
+> a/meta-oe/recipes-support/libspdm/libspdm/0001-Backport-API-introduced-in=
+-openssl-3.5.0.patch
+> +++ /dev/null
+> @@ -1,33 +0,0 @@
+> -From 92f6c3d8fa26d9019ba27e0c1aa894517ada93b9 Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Fri, 11 Apr 2025 17:47:05 -0700
+> -Subject: [PATCH] Backport API introduced in openssl 3.5.0
+> -
+> -This commit [1] introduced this new API which is used by pem.h from
+> -openssl and it should be provided by asn1.h which is vendored here so
+> -it goes out of sync and causes build errors e.g
+> -
+> -In file included from ./os_stub/cryptlib_openssl/pk/x509.c:18:
+> -/usr/include/openssl/pem.h:399:28: error: unknown type name
+> 'OSSL_i2d_of_void_ctx'
+> -  399 | int PEM_ASN1_write_bio_ctx(OSSL_i2d_of_void_ctx *i2d, void *vctx=
+,
+> -
+> -[1]
+> https://github.com/openssl/openssl/commit/35f6e7ea02b599d5aaf220b4720cbad=
+d946d8023
+> -
+> -Upstream-Status: Submitted [https://github.com/DMTF/libspdm/pull/3033]
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - os_stub/openssllib/openssl_gen/openssl/asn1.h | 1 +
+> - 1 file changed, 1 insertion(+)
+> -
+> -diff --git a/os_stub/openssllib/openssl_gen/openssl/asn1.h
+> b/os_stub/openssllib/openssl_gen/openssl/asn1.h
+> -index a90152ee..fcfbe42e 100644
+> ---- a/os_stub/openssllib/openssl_gen/openssl/asn1.h
+> -+++ b/os_stub/openssllib/openssl_gen/openssl/asn1.h
+> -@@ -368,6 +368,7 @@ typedef struct ASN1_VALUE_st ASN1_VALUE;
+> -
+> - typedef void *d2i_of_void(void **, const unsigned char **, long);
+> - typedef int i2d_of_void(const void *, unsigned char **);
+> -+typedef int OSSL_i2d_of_void_ctx(const void *, unsigned char **, void
+> *vctx);
+> -
+> - /*-
+> -  * The following macros and typedefs allow an ASN1_ITEM
+> diff --git a/meta-oe/recipes-support/libspdm/libspdm_3.7.0.bb
+> b/meta-oe/recipes-support/libspdm/libspdm_3.8.1.bb
+> similarity index 92%
+> rename from meta-oe/recipes-support/libspdm/libspdm_3.7.0.bb
+> rename to meta-oe/recipes-support/libspdm/libspdm_3.8.1.bb
+> index c6bbd1716b..431eb8fd40 100644
+> --- a/meta-oe/recipes-support/libspdm/libspdm_3.7.0.bb
+> +++ b/meta-oe/recipes-support/libspdm/libspdm_3.8.1.bb
+> @@ -9,10 +9,8 @@ LIC_FILES_CHKSUM =3D
+> "file://LICENSE.md;md5=3D8f9b59a81a88da8e812af43728b72dd7"
+>
+>  DEPENDS =3D "openssl"
+>
+> -SRC_URI =3D "git://github.com/DMTF/libspdm.git;branch=3Dmain;protocol=3D=
+https \
+> -           file://0001-Backport-API-introduced-in-openssl-3.5.0.patch"
+> -SRCREV =3D "1be116c7b7713fa9003e1bd53b53a34758549eb9"
+> -
+> +SRC_URI =3D "git://
+> github.com/DMTF/libspdm.git;branch=3Drelease-3.8;protocol=3Dhttps"
+> +SRCREV =3D "d7c8c8247b4d0bd8ed75d9f35a558a4df173a4c7"
+>
+>  inherit cmake
+>
 > --
-> 2.51.0
+> 2.51.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#121668):
-> https://lists.openembedded.org/g/openembedded-devel/message/121668
-> Mute This Topic: https://lists.openembedded.org/mt/116286600/1997914
+> View/Reply Online (#121669):
+> https://lists.openembedded.org/g/openembedded-devel/message/121669
+> Mute This Topic: https://lists.openembedded.org/mt/116286670/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > raj.khem@gmail.com]
@@ -214,157 +181,136 @@ base
 >
 >
 
---0000000000008770c50643853cb1
+--000000000000e4861206438541a9
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">it fails on musl, perhaps disable it for musl targets unle=
-ss you want to fix it.<div><br></div><div><a href=3D"https://errors.yoctopr=
-oject.org/Errors/Details/888047/">https://errors.yoctoproject.org/Errors/De=
-tails/888047/</a></div></div><br><div class=3D"gmail_quote gmail_quote_cont=
-ainer"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Nov 13, 2025 at 6:27=
-=E2=80=AFPM Markus Volk via <a href=3D"http://lists.openembedded.org">lists=
-.openembedded.org</a> &lt;f_l_k=3D<a href=3D"mailto:t-online.de@lists.opene=
-mbedded.org">t-online.de@lists.openembedded.org</a>&gt; wrote:<br></div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t:1px solid rgb(204,204,204);padding-left:1ex">Fex is a fast usermode x86 a=
-nd x86-64 emulator for Arm64 Linux<br>
-It is used by &#39;valve&#39; to run windows games on snapdragon<br>
+<div dir=3D"ltr">Please rebase it on the latest master-next and resend.</di=
+v><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" cla=
+ss=3D"gmail_attr">On Thu, Nov 13, 2025 at 6:35=E2=80=AFPM Alistair Francis =
+via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &l=
+t;alistair23=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.co=
+m@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail=
+_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
+,204);padding-left:1ex">From: Alistair Francis &lt;<a href=3D"mailto:alista=
+ir.francis@wdc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
 <br>
-Compilation requires TOOLCHAIN =3D &quot;clang&quot;<br>
-<br>
-Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=
-=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
+Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.=
+com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
 ---<br>
-=C2=A0meta-oe/recipes-devtools/fex/<a href=3D"http://fex_2511.bb" rel=3D"no=
-referrer" target=3D"_blank">fex_2511.bb</a> | 55 ++++++++++++++++++++++++<b=
-r>
-=C2=A01 file changed, 55 insertions(+)<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/fex/<a href=3D"http://fex=
-_2511.bb" rel=3D"noreferrer" target=3D"_blank">fex_2511.bb</a><br>
+=C2=A0...port-API-introduced-in-openssl-3.5.0.patch | 33 ------------------=
+-<br>
+=C2=A0.../{<a href=3D"http://libspdm_3.7.0.bb" rel=3D"noreferrer" target=3D=
+"_blank">libspdm_3.7.0.bb</a> =3D&gt; <a href=3D"http://libspdm_3.8.1.bb" r=
+el=3D"noreferrer" target=3D"_blank">libspdm_3.8.1.bb</a>}=C2=A0 =C2=A0 |=C2=
+=A0 6 ++--<br>
+=C2=A02 files changed, 2 insertions(+), 37 deletions(-)<br>
+=C2=A0delete mode 100644 meta-oe/recipes-support/libspdm/libspdm/0001-Backp=
+ort-API-introduced-in-openssl-3.5.0.patch<br>
+=C2=A0rename meta-oe/recipes-support/libspdm/{<a href=3D"http://libspdm_3.7=
+.0.bb" rel=3D"noreferrer" target=3D"_blank">libspdm_3.7.0.bb</a> =3D&gt; <a=
+ href=3D"http://libspdm_3.8.1.bb" rel=3D"noreferrer" target=3D"_blank">libs=
+pdm_3.8.1.bb</a>} (92%)<br>
 <br>
-diff --git a/meta-oe/recipes-devtools/fex/<a href=3D"http://fex_2511.bb" re=
-l=3D"noreferrer" target=3D"_blank">fex_2511.bb</a> b/meta-oe/recipes-devtoo=
-ls/fex/<a href=3D"http://fex_2511.bb" rel=3D"noreferrer" target=3D"_blank">=
-fex_2511.bb</a><br>
-new file mode 100644<br>
-index 0000000000..9eefe8a8ab<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-devtools/fex/<a href=3D"http://fex_2511.bb" rel=3D"no=
-referrer" target=3D"_blank">fex_2511.bb</a><br>
-@@ -0,0 +1,55 @@<br>
-+SUMMARY =3D &quot;A fast usermode x86 and x86-64 emulator for Arm64 Linux&=
-quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/FEX-Emu/FEX" rel=3D"noref=
-errer" target=3D"_blank">https://github.com/FEX-Emu/FEX</a>&quot;<br>
-+LICENSE =3D &quot;MIT &amp; BSL-1.0 &amp; BSD-2-Clause&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D70d20d502833c35d6d5a4f0ef5=
-d9efcc&quot;<br>
-+LIC_FILES_CHKSUM +=3D &quot;file://External/range-v3/LICENSE.txt;md5=3D5dc=
-23d5193abaedb6e42f05650004624&quot;<br>
-+LIC_FILES_CHKSUM +=3D &quot;file://External/xxhash/LICENSE;md5=3D13be6b481=
-ff5616f77dda971191bb29b&quot;<br>
-+<br>
-+COMPATIBLE_HOST =3D &quot;aarch64.*-linux&quot;<br>
-+<br>
-+SRC_URI =3D &quot; \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/FEX-Emu/FEX.=
-git;name=3Dfex;protocol=3Dhttps;nobranch=3D1;tag=3DFEX-$%7BPV%7D" rel=3D"no=
-referrer" target=3D"_blank">github.com/FEX-Emu/FEX.git;name=3Dfex;protocol=
-=3Dhttps;nobranch=3D1;tag=3DFEX-${PV}</a> \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/Sonicadvance=
-1/cpp-optparse.git;name=3Dcpp-optparse;subdir=3D$%7BS%7D/Source/Common/cpp-=
-optparse;protocol=3Dhttps;nobranch=3D1" rel=3D"noreferrer" target=3D"_blank=
-">github.com/Sonicadvance1/cpp-optparse.git;name=3Dcpp-optparse;subdir=3D${=
-S}/Source/Common/cpp-optparse;protocol=3Dhttps;nobranch=3D1</a> \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/FEX-Emu/drm-=
-headers.git;name=3Dfex-drm;subdir=3D$%7BS%7D/External/drm-headers;protocol=
-=3Dhttps;nobranch=3D1" rel=3D"noreferrer" target=3D"_blank">github.com/FEX-=
-Emu/drm-headers.git;name=3Dfex-drm;subdir=3D${S}/External/drm-headers;proto=
-col=3Dhttps;nobranch=3D1</a> \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/Cyan4973/xxH=
-ash.git;name=3Dxxhash;subdir=3D$%7BS%7D/External/xxhash;protocol=3Dhttps;no=
-branch=3D1" rel=3D"noreferrer" target=3D"_blank">github.com/Cyan4973/xxHash=
-.git;name=3Dxxhash;subdir=3D${S}/External/xxhash;protocol=3Dhttps;nobranch=
-=3D1</a> \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/FEX-Emu/jema=
-lloc.git;name=3Djemalloc;subdir=3D$%7BS%7D/External/jemalloc;protocol=3Dhtt=
-ps;nobranch=3D1" rel=3D"noreferrer" target=3D"_blank">github.com/FEX-Emu/je=
-malloc.git;name=3Djemalloc;subdir=3D${S}/External/jemalloc;protocol=3Dhttps=
-;nobranch=3D1</a> \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/FEX-Emu/jema=
-lloc.git;name=3Djemalloc-glibc;subdir=3D$%7BS%7D/External/jemalloc_glibc;pr=
-otocol=3Dhttps;nobranch=3D1" rel=3D"noreferrer" target=3D"_blank">github.co=
-m/FEX-Emu/jemalloc.git;name=3Djemalloc-glibc;subdir=3D${S}/External/jemallo=
-c_glibc;protocol=3Dhttps;nobranch=3D1</a> \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/ericniebler/=
-range-v3.git;name=3Drange-v3;subdir=3D$%7BS%7D/External/range-v3;protocol=
-=3Dhttps;nobranch=3D1" rel=3D"noreferrer" target=3D"_blank">github.com/eric=
-niebler/range-v3.git;name=3Drange-v3;subdir=3D${S}/External/range-v3;protoc=
-ol=3Dhttps;nobranch=3D1</a> \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/FEX-Emu/robi=
-n-map.git;name=3Drobin-map;subdir=3D$%7BS%7D/External/robin-map;protocol=3D=
-https;nobranch=3D1" rel=3D"noreferrer" target=3D"_blank">github.com/FEX-Emu=
-/robin-map.git;name=3Drobin-map;subdir=3D${S}/External/robin-map;protocol=
-=3Dhttps;nobranch=3D1</a> \<br>
-+&quot;<br>
-+<br>
-+SRCREV_FORMAT =3D &quot;fex&quot;<br>
-+SRCREV_fex =3D &quot;663fd5a98befbf7a0ac585627de15c662715a731&quot;<br>
-+SRCREV_cpp-optparse =3D &quot;9f94388a339fcbb0bc95c17768eb786c85988f6e&quo=
-t;<br>
-+SRCREV_fex-drm =3D &quot;3e49836995c1dcb3df709440ad2f270b569c6a5f&quot;<br=
+diff --git a/meta-oe/recipes-support/libspdm/libspdm/0001-Backport-API-intr=
+oduced-in-openssl-3.5.0.patch b/meta-oe/recipes-support/libspdm/libspdm/000=
+1-Backport-API-introduced-in-openssl-3.5.0.patch<br>
+deleted file mode 100644<br>
+index 2df9a18c68..0000000000<br>
+--- a/meta-oe/recipes-support/libspdm/libspdm/0001-Backport-API-introduced-=
+in-openssl-3.5.0.patch<br>
++++ /dev/null<br>
+@@ -1,33 +0,0 @@<br>
+-From 92f6c3d8fa26d9019ba27e0c1aa894517ada93b9 Mon Sep 17 00:00:00 2001<br>
+-From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank"=
+>raj.khem@gmail.com</a>&gt;<br>
+-Date: Fri, 11 Apr 2025 17:47:05 -0700<br>
+-Subject: [PATCH] Backport API introduced in openssl 3.5.0<br>
+-<br>
+-This commit [1] introduced this new API which is used by pem.h from<br>
+-openssl and it should be provided by asn1.h which is vendored here so<br>
+-it goes out of sync and causes build errors e.g<br>
+-<br>
+-In file included from ./os_stub/cryptlib_openssl/pk/x509.c:18:<br>
+-/usr/include/openssl/pem.h:399:28: error: unknown type name &#39;OSSL_i2d_=
+of_void_ctx&#39;<br>
+-=C2=A0 399 | int PEM_ASN1_write_bio_ctx(OSSL_i2d_of_void_ctx *i2d, void *v=
+ctx,<br>
+-<br>
+-[1] <a href=3D"https://github.com/openssl/openssl/commit/35f6e7ea02b599d5a=
+af220b4720cbadd946d8023" rel=3D"noreferrer" target=3D"_blank">https://githu=
+b.com/openssl/openssl/commit/35f6e7ea02b599d5aaf220b4720cbadd946d8023</a><b=
+r>
+-<br>
+-Upstream-Status: Submitted [<a href=3D"https://github.com/DMTF/libspdm/pul=
+l/3033" rel=3D"noreferrer" target=3D"_blank">https://github.com/DMTF/libspd=
+m/pull/3033</a>]<br>
+-Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=
+=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+----<br>
+- os_stub/openssllib/openssl_gen/openssl/asn1.h | 1 +<br>
+- 1 file changed, 1 insertion(+)<br>
+-<br>
+-diff --git a/os_stub/openssllib/openssl_gen/openssl/asn1.h b/os_stub/opens=
+sllib/openssl_gen/openssl/asn1.h<br>
+-index a90152ee..fcfbe42e 100644<br>
+---- a/os_stub/openssllib/openssl_gen/openssl/asn1.h<br>
+-+++ b/os_stub/openssllib/openssl_gen/openssl/asn1.h<br>
+-@@ -368,6 +368,7 @@ typedef struct ASN1_VALUE_st ASN1_VALUE;<br>
+- <br>
+- typedef void *d2i_of_void(void **, const unsigned char **, long);<br>
+- typedef int i2d_of_void(const void *, unsigned char **);<br>
+-+typedef int OSSL_i2d_of_void_ctx(const void *, unsigned char **, void *vc=
+tx);<br>
+- <br>
+- /*-<br>
+-=C2=A0 * The following macros and typedefs allow an ASN1_ITEM<br>
+diff --git a/meta-oe/recipes-support/libspdm/<a href=3D"http://libspdm_3.7.=
+0.bb" rel=3D"noreferrer" target=3D"_blank">libspdm_3.7.0.bb</a> b/meta-oe/r=
+ecipes-support/libspdm/<a href=3D"http://libspdm_3.8.1.bb" rel=3D"noreferre=
+r" target=3D"_blank">libspdm_3.8.1.bb</a><br>
+similarity index 92%<br>
+rename from meta-oe/recipes-support/libspdm/<a href=3D"http://libspdm_3.7.0=
+.bb" rel=3D"noreferrer" target=3D"_blank">libspdm_3.7.0.bb</a><br>
+rename to meta-oe/recipes-support/libspdm/<a href=3D"http://libspdm_3.8.1.b=
+b" rel=3D"noreferrer" target=3D"_blank">libspdm_3.8.1.bb</a><br>
+index c6bbd1716b..431eb8fd40 100644<br>
+--- a/meta-oe/recipes-support/libspdm/<a href=3D"http://libspdm_3.7.0.bb" r=
+el=3D"noreferrer" target=3D"_blank">libspdm_3.7.0.bb</a><br>
++++ b/meta-oe/recipes-support/libspdm/<a href=3D"http://libspdm_3.8.1.bb" r=
+el=3D"noreferrer" target=3D"_blank">libspdm_3.8.1.bb</a><br>
+@@ -9,10 +9,8 @@ LIC_FILES_CHKSUM =3D &quot;file://LICENSE.md;md5=3D8f9b59a=
+81a88da8e812af43728b72dd7&quot;<br>
+<br>
+=C2=A0DEPENDS =3D &quot;openssl&quot;<br>
+<br>
+-SRC_URI =3D &quot;git://<a href=3D"http://github.com/DMTF/libspdm.git;bran=
+ch=3Dmain;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">github.com=
+/DMTF/libspdm.git;branch=3Dmain;protocol=3Dhttps</a> \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-Backport-API-introduc=
+ed-in-openssl-3.5.0.patch&quot;<br>
+-SRCREV =3D &quot;1be116c7b7713fa9003e1bd53b53a34758549eb9&quot;<br>
+-<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/DMTF/libspdm.git;bran=
+ch=3Drelease-3.8;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">git=
+hub.com/DMTF/libspdm.git;branch=3Drelease-3.8;protocol=3Dhttps</a>&quot;<br=
 >
-+SRCREV_xxhash =3D &quot;e626a72bc2321cd320e953a0ccf1584cad60f363&quot;<br>
-+SRCREV_jemalloc =3D &quot;ce24593018ca5d5af7e5661ceda9744e02b59f8f&quot;<b=
-r>
-+SRCREV_jemalloc-glibc =3D &quot;8436195ad5e1bc347d9b39743af3d29abee59f06&q=
-uot;<br>
-+SRCREV_robin-map =3D &quot;d5683d9f1891e5b04e3e3b2192b5349dc8d814ea&quot;<=
-br>
-+SRCREV_range-v3 =3D &quot;ca1388fb9da8e69314dda222dc7b139ca84e092f&quot;<b=
-r>
-+<br>
-+DEPENDS =3D &quot; \<br>
-+=C2=A0 =C2=A0 catch2 \<br>
-+=C2=A0 =C2=A0 fmt \<br>
-+=C2=A0 =C2=A0 libdrm=C2=A0 \<br>
-+=C2=A0 =C2=A0 nasm-native \<br>
-+=C2=A0 =C2=A0 vulkan-headers \<br>
-+&quot;<br>
-+<br>
-+PACKAGECONFIG =3D &quot;&quot;<br>
-+PACKAGECONFIG[qt] =3D &quot;-DBUILD_FEXCONFIG=3DON,-DBUILD_FEXCONFIG=3DOFF=
-,qtbase qttools-native qtquick3d&quot;<br>
-+<br>
-+EXTRA_OECMAKE +=3D &quot; \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0-DBUILD_TESTING=3DOFF \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0-DENABLE_VIXL_DISASSEMBLER=3DOFF \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0-DENABLE_VIXL_SIMULATOR=3DOFF \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0-DDATA_DIRECTORY=3D${datadir} \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0-DQT_HOST_PATH:PATH=3D${RECIPE_SYSROOT_NATIVE}$=
-{prefix_native} \<br>
-+&quot;<br>
-+<br>
-+inherit cmake ccache pkgconfig<br>
-+<br>
-+LDFLAGS +=3D &quot;-fuse-ld=3Dlld&quot;<br>
-+<br>
-+FILES:${PN} +=3D &quot;${datadir} ${libdir}/binfmt.d ${libdir}/libFEXCore.=
-so&quot;<br>
-+FILES:${PN}-dev =3D &quot;${includedir}&quot;<br>
++SRCREV =3D &quot;d7c8c8247b4d0bd8ed75d9f35a558a4df173a4c7&quot;<br>
+<br>
+=C2=A0inherit cmake<br>
+<br>
 -- <br>
-2.51.0<br>
+2.51.1<br>
 <br>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#121668): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/121668" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/121668</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116286600/199=
+View/Reply Online (#121669): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/121669" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/121669</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116286670/199=
 7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/116286600/1997914</a><br>
+t/116286670/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
@@ -376,5 +322,5 @@ et=3D"_blank">raj.khem@gmail.com</a>]<br>
 <br>
 </blockquote></div>
 
---0000000000008770c50643853cb1--
+--000000000000e4861206438541a9--
 
