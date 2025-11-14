@@ -1,124 +1,154 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 105CFCDB47D
-	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 03:09:06 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9955.1763089741326889304
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A618CDE001
+	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 03:50:46 +0000 (UTC)
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10458.1763092245434900129
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Nov 2025 19:09:01 -0800
+ Thu, 13 Nov 2025 19:50:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd89.aul.t-online.de (fwd89.aul.t-online.de [10.223.144.115])
-	by mailout08.t-online.de (Postfix) with SMTP id 5A30AEF38
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 04:08:59 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.32.97]) by fwd89.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vJkBF-4N92x70; Fri, 14 Nov 2025 04:08:58 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UPqN0+Oh;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-34361025290so1309915a91.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 19:50:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1763092245; x=1763697045; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=k9Wzd99L1iU6rTydkIGkOdzX2EFHnYWuN0TO0X/CPYk=;
+        b=UPqN0+OhVBvPrycbu5SvJMuSuxjETWJLqkwtWmBRTcKKUPctb89k/OUK/Utlu9hhUF
+         k2BozCLSKLlqAKC//52Kc/VZNtsZYNBCy2adStjCE2goZWmiprmn+Q5DV10kyj5xaCkD
+         CIlgp6yZ559pyX+Z+ozQ4gxs3zRcVsXbNRgf2kumaPGdPAdGnsZL1D1twO+IXVn7MDMc
+         G2qvwpSItCXBrcLN2fR4KaVYNfb6Ulp6T0UzFV2y+o8KD5eGAKNJ+iic0nqDS0aQI3TA
+         o271hvY609BBD5fg12o10Nzm+uo2TdG/icsAkVyogo1VcZvG8+mRrzCO9Y20i/TcKzDq
+         1GIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763092245; x=1763697045;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=k9Wzd99L1iU6rTydkIGkOdzX2EFHnYWuN0TO0X/CPYk=;
+        b=H2CIgQs5eglyyEGkQLdqX/NQ+dsulelgnrXYRy+7ONp7rRA2YZ1ACm6iyblvsZ/qr0
+         Gv9H9HihjUAaOVVIC/CNwAvqOFJWVhL51d0CbJuTZizifBGT7fj8a74Lbcd2Dlw7CSiE
+         Roq60W+y/J/Dl9MTL6nXEdL6KbY+L060MJWzDbStSdnaE/jzAqkCCfWRpo+VpGUo95jO
+         yfCs5l6EjpMGxqiYVyb54nQoFG7qkrD/JetOtGQdQRF6XZJw0tovBnkdwFYEXCALrQ8e
+         ALB6bsD1nsS2tj/slv5ocAHWtSK1MUhMkZwMDoASq4GEprNjw9dT0XfB73HXTnHhHKbV
+         4GlQ==
+X-Gm-Message-State: AOJu0YzOHiHo4DsKRzZx6Mtsui3BlrAbpABciD/ICfgL+csUI09M8sPg
+	k2XwgH5eajr60JTIgS7PrtaLkStOF2TQnzSm6Gpo4N4uKrHyu40ZTgJTRibnXA==
+X-Gm-Gg: ASbGncuElaC2yLIOVPnD3Wq3DWz7V5BoYICR9WQXUIZLO53TdheKOrW7U3RGVadKr34
+	URb7mdQ02alCZAe3/enVEfTavJj3OpizN7dbZWClyWxmv2AzVR53Cgbod2uVEh4dQxYgoNYHZ0h
+	b6NRW6LgCHF1pZj7ISJBWb2FxPH9kfR+gvY9huTQTL0Xe/XoOw3/zD2RTxKXQl1e032dqYk93t7
+	boWdg9nqMavcDutsbu4kK6lBN2wrifDZzljZ8Qyv+PE6mLz37XpPk9g1mFE5scD9iihlafhGg6X
+	1G9gnlS6uMrzOQ5MLbepytrgrKoHJJ3k8luuk8PWHrlPLUd6HbvZswp06Zv6w91h2eCEfKqhYYG
+	sHqir8aU5f1qsXF7QKm8agxqq/xL5jDkY84l0QpK8ZK7LTaTTtzFTCRTsx6BwOT6PUbI9icQn4x
+	QhjqvWrB3tFLYoarSg/Sp3xVPB
+X-Google-Smtp-Source: AGHT+IGfpSXYtOzaisj0JPDGk5937Ow5czzyw63onxKVr1K6e5n3f1KTsfPWRYi+w59zQ4dx1LVk/A==
+X-Received: by 2002:a17:90b:33c6:b0:340:d578:f298 with SMTP id 98e67ed59e1d1-343f9d90cadmr1945150a91.8.1763092244526;
+        Thu, 13 Nov 2025 19:50:44 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([147.161.216.245])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-bc37507fc7bsm3478092a12.23.2025.11.13.19.50.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Nov 2025 19:50:44 -0800 (PST)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCHv3] fex: add recipe
-Date: Fri, 14 Nov 2025 04:08:50 +0100
-Message-ID: <20251114030850.2565749-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.51.0
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 5/5] liburing: upgrade 2.9 -> 2.12
+Date: Fri, 14 Nov 2025 16:50:30 +1300
+Message-ID: <20251114035030.4042745-5-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251114035030.4042745-1-ankur.tyagi85@gmail.com>
+References: <20251114035030.4042745-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1763089738-137FC50A-86E3F4F1/0/0 CLEAN NORMAL
-X-TOI-MSGID: 62104192-2c3c-4e02-9d6f-e80826047e2f
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 03:09:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121676
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 03:50:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121681
 
-Fex is a fast usermode x86 and x86-64 emulator for Arm64 Linux
-It is used by 'valve' to run windows games on snapdragon
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Compilation requires TOOLCHAIN =3D "clang"
+Dropped patch which is now merged upstream.
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Changelog:
+https://github.com/axboe/liburing/releases/tag/liburing-2.10
+https://github.com/axboe/liburing/releases/tag/liburing-2.11
+https://github.com/axboe/liburing/releases/tag/liburing-2.12
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-devtools/fex/fex_2511.bb | 56 ++++++++++++++++++++++++
- 1 file changed, 56 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/fex/fex_2511.bb
+ ...ncluding-missing-string.h-for-memcpy.patch | 39 -------------------
+ .../{liburing_2.9.bb => liburing_2.12.bb}     |  5 +--
+ 2 files changed, 2 insertions(+), 42 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/liburing/liburing/0001-test-Including-missing-string.h-for-memcpy.patch
+ rename meta-oe/recipes-support/liburing/{liburing_2.9.bb => liburing_2.12.bb} (91%)
 
-diff --git a/meta-oe/recipes-devtools/fex/fex_2511.bb b/meta-oe/recipes-d=
-evtools/fex/fex_2511.bb
-new file mode 100644
-index 0000000000..9c0748ac63
---- /dev/null
-+++ b/meta-oe/recipes-devtools/fex/fex_2511.bb
-@@ -0,0 +1,56 @@
-+SUMMARY =3D "A fast usermode x86 and x86-64 emulator for Arm64 Linux"
-+HOMEPAGE =3D "https://github.com/FEX-Emu/FEX"
-+LICENSE =3D "MIT & BSL-1.0 & BSD-2-Clause"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D70d20d502833c35d6d5a4f0ef5d9e=
-fcc"
-+LIC_FILES_CHKSUM +=3D "file://External/range-v3/LICENSE.txt;md5=3D5dc23d=
-5193abaedb6e42f05650004624"
-+LIC_FILES_CHKSUM +=3D "file://External/xxhash/LICENSE;md5=3D13be6b481ff5=
-616f77dda971191bb29b"
-+
-+COMPATIBLE_HOST =3D "aarch64.*-linux"
-+COMPATIBLE_HOST:libc-musl =3D "null"
-+
-+SRC_URI =3D " \
-+	git://github.com/FEX-Emu/FEX.git;name=3Dfex;protocol=3Dhttps;nobranch=3D=
-1;tag=3DFEX-${PV} \
-+	git://github.com/Sonicadvance1/cpp-optparse.git;name=3Dcpp-optparse;sub=
-dir=3D${S}/Source/Common/cpp-optparse;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/FEX-Emu/drm-headers.git;name=3Dfex-drm;subdir=3D${S}/E=
-xternal/drm-headers;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/Cyan4973/xxHash.git;name=3Dxxhash;subdir=3D${S}/Extern=
-al/xxhash;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/FEX-Emu/jemalloc.git;name=3Djemalloc;subdir=3D${S}/Ext=
-ernal/jemalloc;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/FEX-Emu/jemalloc.git;name=3Djemalloc-glibc;subdir=3D${=
-S}/External/jemalloc_glibc;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/ericniebler/range-v3.git;name=3Drange-v3;subdir=3D${S}=
-/External/range-v3;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/FEX-Emu/robin-map.git;name=3Drobin-map;subdir=3D${S}/E=
-xternal/robin-map;protocol=3Dhttps;nobranch=3D1 \
-+"
-+
-+SRCREV_FORMAT =3D "fex"
-+SRCREV_fex =3D "663fd5a98befbf7a0ac585627de15c662715a731"
-+SRCREV_cpp-optparse =3D "9f94388a339fcbb0bc95c17768eb786c85988f6e"
-+SRCREV_fex-drm =3D "3e49836995c1dcb3df709440ad2f270b569c6a5f"
-+SRCREV_xxhash =3D "e626a72bc2321cd320e953a0ccf1584cad60f363"
-+SRCREV_jemalloc =3D "ce24593018ca5d5af7e5661ceda9744e02b59f8f"
-+SRCREV_jemalloc-glibc =3D "8436195ad5e1bc347d9b39743af3d29abee59f06"
-+SRCREV_robin-map =3D "d5683d9f1891e5b04e3e3b2192b5349dc8d814ea"
-+SRCREV_range-v3 =3D "ca1388fb9da8e69314dda222dc7b139ca84e092f"
-+
-+DEPENDS =3D " \
-+    catch2 \
-+    fmt \
-+    libdrm  \
-+    nasm-native \
-+    vulkan-headers \
-+"
-+
-+PACKAGECONFIG =3D ""
-+PACKAGECONFIG[qt] =3D "-DBUILD_FEXCONFIG=3DON,-DBUILD_FEXCONFIG=3DOFF,qt=
-base qttools-native qtquick3d"
-+
-+EXTRA_OECMAKE +=3D " \
-+	-DBUILD_TESTING=3DOFF \
-+	-DENABLE_VIXL_DISASSEMBLER=3DOFF \
-+	-DENABLE_VIXL_SIMULATOR=3DOFF \
-+	-DDATA_DIRECTORY=3D${datadir} \
-+	-DQT_HOST_PATH:PATH=3D${RECIPE_SYSROOT_NATIVE}${prefix_native} \
-+"
-+
-+inherit cmake ccache pkgconfig
-+
-+LDFLAGS +=3D "-fuse-ld=3Dlld"
-+
-+FILES:${PN} +=3D "${datadir} ${libdir}/binfmt.d ${libdir}/libFEXCore.so"
-+FILES:${PN}-dev =3D "${includedir}"
---=20
-2.51.0
-
+diff --git a/meta-oe/recipes-support/liburing/liburing/0001-test-Including-missing-string.h-for-memcpy.patch b/meta-oe/recipes-support/liburing/liburing/0001-test-Including-missing-string.h-for-memcpy.patch
+deleted file mode 100644
+index f744812a3f..0000000000
+--- a/meta-oe/recipes-support/liburing/liburing/0001-test-Including-missing-string.h-for-memcpy.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From c55874bc28f66d606527b940d4bd0f266bbaaa2c Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 17 Feb 2025 11:51:19 -0800
+-Subject: [PATCH] test: Including missing string.h for memcpy
+-
+-Fixes
+-accept-test.c:39:2: error: call to undeclared library function 'memcpy' with type 'void *(void *, const void *, unsigned long)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+-
+-Upstream-Status: Submitted [https://github.com/axboe/liburing/pull/1351]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- test/232c93d07b74.c | 1 +
+- test/accept-test.c  | 1 +
+- 2 files changed, 2 insertions(+)
+-
+-diff --git a/test/232c93d07b74.c b/test/232c93d07b74.c
+-index d3053b9..d5677d3 100644
+---- a/test/232c93d07b74.c
+-+++ b/test/232c93d07b74.c
+-@@ -10,6 +10,7 @@
+- #include <stdlib.h>
+- #include <stdint.h>
+- #include <assert.h>
+-+#include <string.h>
+- 
+- #include <pthread.h>
+- #include <errno.h>
+-diff --git a/test/accept-test.c b/test/accept-test.c
+-index 99f6080..142b2de 100644
+---- a/test/accept-test.c
+-+++ b/test/accept-test.c
+-@@ -7,6 +7,7 @@
+- #include <sys/socket.h>
+- #include <sys/un.h>
+- #include <assert.h>
+-+#include <string.h>
+- #include "liburing.h"
+- #include "helpers.h"
+- 
+diff --git a/meta-oe/recipes-support/liburing/liburing_2.9.bb b/meta-oe/recipes-support/liburing/liburing_2.12.bb
+similarity index 91%
+rename from meta-oe/recipes-support/liburing/liburing_2.9.bb
+rename to meta-oe/recipes-support/liburing/liburing_2.12.bb
+index a645a8e4c4..2519d650a6 100644
+--- a/meta-oe/recipes-support/liburing/liburing_2.9.bb
++++ b/meta-oe/recipes-support/liburing/liburing_2.12.bb
+@@ -9,9 +9,8 @@ SECTION = "libs"
+ LICENSE = "LGPL-2.1-only | MIT"
+ LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=2b0e9926530c269f5ae95560370195af"
+ 
+-SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
+-           file://0001-test-Including-missing-string.h-for-memcpy.patch"
+-SRCREV = "08468cc3830185c75f9e7edefd88aa01e5c2f8ab"
++SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https"
++SRCREV = "e907d6a342e80b70874f93abd440b92b8a40b7bc"
+ 
+ 
+ DEPENDS:append:libc-musl = " libucontext"
 
