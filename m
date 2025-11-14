@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63FF9CDE003
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 580C9CDE004
 	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 03:50:46 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10473.1763092241381215227
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10455.1763092239326511219
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Nov 2025 19:50:41 -0800
+ Thu, 13 Nov 2025 19:50:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gFMw9IaH;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-7b86e0d9615so1326943b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 19:50:41 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MF2dPO29;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-7b0246b27b2so1936215b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 19:50:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763092240; x=1763697040; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763092238; x=1763697038; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aVk+gqmq3GcbL0N3dufpbrQ5bkDF5DZZtw+O+sSLFk0=;
-        b=gFMw9IaH7y5RLKWJNMDyUrc/E5dgV/6jsaBojEbkBN6tPWKDmeq0QnwPXKr7NSZlxJ
-         w7v7skNqabLxhUIx5CJmVVzmtJPSNBqpg1gOTjHQwZDsiOlMO+CD6EEeDtjbZVjJP5Hw
-         cywIQlQd/+fFJ1YgWZF1rAZyvAHGqfcVF1SBIbny0gS8EN4iiDviO/BUNDWz4wAhMRKT
-         M0bfL6Wx+Cxl9Gi0SzAQlLcPsnVI9Go1OA1N2or4NN8+3Qej7aO7+4iUUis2B6t53ZiR
-         PztLi6l487AIp/6sM8U9zg0XkC/rW8C9Eff0r610oaZuHb9d5U6X3/AKNDgVw5OxUzwH
-         uL3w==
+        bh=eyR4vw5RBJ/s+moS7YB/AOT5GlD6/azk1CD4VuI4abk=;
+        b=MF2dPO29bvfcM4wrOHHBfO+rWyam20axplIT13NKiBXrtpviUhuddWH8wjt4Jv/x37
+         ktoBNuqFimkyKg0ZlRkI/A/yBUh4YIlIgIxAjxVwmcxNkLluykCx3bqGCTs9PBygRD2d
+         6yE1f2a9r7Hzk6wBceqxHFJoUPxsy4XsBVFkwpvtT1Gky1ElBNpZ2PMmECJkTcFOQWp4
+         akZSCEYR4vGbAGJ2TXoMJsq4s062194GXc0ZPxzs61OfLDE+f/kmn+KsgmPyDekplh5P
+         v7CAj6WVpqqXx/ebK8gMSrXN8dFbRGugYxT4Ig59WBvz7Q2hnnsDMVOuu/TDNFn1+IKG
+         uJgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763092240; x=1763697040;
+        d=1e100.net; s=20230601; t=1763092238; x=1763697038;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=aVk+gqmq3GcbL0N3dufpbrQ5bkDF5DZZtw+O+sSLFk0=;
-        b=MCHGcluW0e4JeQYhf67gLw7VJ/TolQXdyStgKDdRuXEZJVCwXaYubMHdMJ4kLujlmH
-         iMW5lPgns7gP0EsRsqo3lQWmdvIzjCt0vtjvF95PrLMrIaY7pwHU0JVVqX4XW3OIQFYQ
-         p6Hx02sSmH83NH3IzqHgS4apbiRMjdvb2iebw1PtqBH5TqOcokqsMFbZejBhI2YvasN2
-         rYC3YlLOND0upFcm2X4/jY5gYF2Sy1a0rtjl/TglySJ/0s6Wes34eCl1v/SPrCQu5hvy
-         DN5TZqosrtXG9kvlGPMWrKXI5qsJ37J+8I3qDDK8SJoA3mZYxB3+vpZl+ZLh/88A0b8d
-         zHTw==
-X-Gm-Message-State: AOJu0Yw808aYo5VO/e+X+o8NuVHc1Tbwv7m1CGX8h7awMyJWdL5PeUkM
-	JPWlMYNowY/TiVNSBaZdtkPCoQOlsBwl84S5rnT5EWF3cwvui/JzY/Rf/1PkAA==
-X-Gm-Gg: ASbGnctnTqCgPjwXz6kJTfsG4rhuaaPJPftuk4e80PQ3SYf6CIG05wV1u9VVm4KUJ91
-	MMmiwZLP8QoEeNLUeGyT2eEuk1GqVqCsTWnDS9Vy+53Ok3xVQwrCv0a2W9chRLfkoBVk7YxL/x0
-	XXFHkv+o7z1/1FqNQXjLqYhTS3YAJZpabeOEgT72TvGo1tJ5HpNENvMnoH+r5ybdEf4NVrVzA3a
-	dmzfKNfYsO0OaFtAJkN5wm9TTPZOyTY19fU2z7VCrhTN1Mu6syvcbcsD8HVoGPj/yPTh1UuiOHW
-	buUaUs6M9tDoAzn3/fuPNLvAt970HinPcEZycAUGyYvNzB5nJHZwPYssgqmD0VuOwyb059+5Smb
-	UVJmBfSHDwR7/E9dagAPdCjxXBwK3mYBiacR/sFu2ym1fsC2BRYeDfq8nElytfI9tkSJWKz9o9D
-	3Lsdc9vZeZSDLxtA==
-X-Google-Smtp-Source: AGHT+IE+Es5tdQAPUoev66HoTp0RIqAqDirZ5fH3HVxusWw/4M+bQOcuUuI3XVYOSP8zoBXCFSqLhQ==
-X-Received: by 2002:a05:6a21:3386:b0:334:a523:abec with SMTP id adf61e73a8af0-35ba298170bmr1949668637.60.1763092240483;
-        Thu, 13 Nov 2025 19:50:40 -0800 (PST)
+        bh=eyR4vw5RBJ/s+moS7YB/AOT5GlD6/azk1CD4VuI4abk=;
+        b=JMVGUSJuOduvkISv1UYl8pzS2PNH5oDIhCHP9sxkwKyhSSwjoYvJFQPA6eZ3mjEYSs
+         MuKBhQGgk5jEt/qjjJBYVFZUX/n8VkYa3yzJMvdQZQjtvyego8a9XcJLfK7oJ0y/CN2E
+         YGpVWsOKe1ysKRbkH44eDJOr3eEWPnXoTleaihWt4SohUdRkEaz0HDby2uKDYBQ2nrlu
+         4dnzlhklYhlJkZCZceqqdrhkG71n6R/2C9yBXvb0eLodwzzIi9chkkxJalYoJu+M4dVa
+         hGO3rkuD5qFydQRorIZl2tm35j2TRfeffRibeI4EfmaNqURZaj1JvHJOfosGoX9bbJwt
+         B0Qg==
+X-Gm-Message-State: AOJu0YxbI1AQNYpPP5Fm+qSMPI6yRkUApDHzbDrq5jTbtGgE1DZqYSkM
+	D4czLUj7IlmJdXG77H2WQW9bf7chgSZGJ7tH0IyxFvNXVQIVjF11xx6sK6Roeg==
+X-Gm-Gg: ASbGncvw8Q15oXwyd7xSrJ5hp4JwHdjFE38B/Q+G0Ab7BN/AhQM64xvMovJOAwJ+ken
+	wnyNEuALfMzo/7xDXqUEr1ZUic+fMp/z1/yGAcok6J9xavS4vKHzJmjagA9yTbCC1eXe5OP2f8v
+	TAtuX8Rv42rcvaEGxRPoLaFZhG8skZr3AmCcmnrEh6S19ysQ42wlDDj8QsGN3Q/oZQB3lqoEPmX
+	klGy/KawzaKeGUNmIgsH7W84aLL6LQdEbhzf+Se03QS0ujG9+Xinq0vC3MgOwfiS4oVlEMomX9f
+	pJ8JNlZ3zWbqVtHiJ+2H8D0Obu6wueOQD5+Etk6oG3O+vcL4Jt7OpNgbIS3JQGHnT6W1lqkyQ20
+	VaK7uDOzokhlLfZwPx5XUmSp/OKlJMC1N386UY6rd6TUUs3byBz9T9UB6XdcbwQY31LUj1myhnp
+	WRU4Q4S38U664ZIA==
+X-Google-Smtp-Source: AGHT+IHJD/CAFAhzFQMhDDuYrDFboGC0MaNc0xf7y1MuUIifbu2JXMn541wDDHgNyIz8QjL6O4wIgQ==
+X-Received: by 2002:a05:6a21:6da8:b0:2b7:e136:1f30 with SMTP id adf61e73a8af0-35ba22a4fc2mr2466530637.55.1763092238522;
+        Thu, 13 Nov 2025 19:50:38 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.245])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-bc37507fc7bsm3478092a12.23.2025.11.13.19.50.38
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-bc37507fc7bsm3478092a12.23.2025.11.13.19.50.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Nov 2025 19:50:40 -0800 (PST)
+        Thu, 13 Nov 2025 19:50:38 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH 3/5] tbb: upgrade 2022.1.0 -> 2022.3.0
-Date: Fri, 14 Nov 2025 16:50:28 +1300
-Message-ID: <20251114035030.4042745-3-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 2/5] libtracefs: upgrade 1.8.1 -> 1.8.2
+Date: Fri, 14 Nov 2025 16:50:27 +1300
+Message-ID: <20251114035030.4042745-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251114035030.4042745-1-ankur.tyagi85@gmail.com>
 References: <20251114035030.4042745-1-ankur.tyagi85@gmail.com>
@@ -68,34 +68,41 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 03:50:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121679
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121678
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
+New version added trace_sql.bash for tracefs_sql() bash completions.
+
 Changelog:
-https://github.com/uxlfoundation/oneTBB/releases/tag/v2022.2.0
-https://github.com/uxlfoundation/oneTBB/releases/tag/v2022.3.0
+https://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git/tag/?h=libtracefs-1.8.2
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../recipes-support/tbb/{tbb_2022.1.0.bb => tbb_2022.3.0.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/tbb/{tbb_2022.1.0.bb => tbb_2022.3.0.bb} (98%)
+ .../libtracefs/{libtracefs_1.8.1.bb => libtracefs_1.8.2.bb}   | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-kernel/libtracefs/{libtracefs_1.8.1.bb => libtracefs_1.8.2.bb} (89%)
 
-diff --git a/meta-oe/recipes-support/tbb/tbb_2022.1.0.bb b/meta-oe/recipes-support/tbb/tbb_2022.3.0.bb
-similarity index 98%
-rename from meta-oe/recipes-support/tbb/tbb_2022.1.0.bb
-rename to meta-oe/recipes-support/tbb/tbb_2022.3.0.bb
-index 937cf6a0b9..01115e7e4d 100644
---- a/meta-oe/recipes-support/tbb/tbb_2022.1.0.bb
-+++ b/meta-oe/recipes-support/tbb/tbb_2022.3.0.bb
-@@ -13,7 +13,7 @@ DEPENDS:append:class-target = " hwloc"
- PE = "1"
+diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.1.bb b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.2.bb
+similarity index 89%
+rename from meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.1.bb
+rename to meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.2.bb
+index 6b9e8b9b38..bc7311a634 100644
+--- a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.1.bb
++++ b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.2.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=e6a75371ba4d16749254a51215d13f97
+ SECTION = "libs"
+ DEPENDS = "libtraceevent bison-native flex-native"
  
- BRANCH = "onetbb_2022"
--SRCREV = "45587e94dfb6dfe00220c5f520020a5bc745e92f"
-+SRCREV = "f1862f38f83568d96e814e469ab61f88336cc595"
- SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
-           "
- 
+-SRCREV = "417c2e3aa21af670cc5c13db633dd35292f2d0fa"
++SRCREV = "03790961bf2e83b7b61fb6d326fb1076a4293adb"
+ SRC_URI = "git://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=${BPN};protocol=https \
+            file://0001-makefile-Do-not-preserve-ownership-in-cp-command.patch \
+            "
+@@ -19,3 +19,5 @@ inherit pkgconfig
+ do_install() {
+     oe_runmake install DESTDIR=${D} pkgconfig_dir=${libdir}/pkgconfig
+ }
++
++FILES:${PN} += "${datadir}/bash-completion"
 
