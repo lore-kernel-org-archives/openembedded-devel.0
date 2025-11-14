@@ -1,126 +1,198 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B51A5CD8CBF
-	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 02:05:55 +0000 (UTC)
-Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9098.1763085951473812846
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6E1ECDB470
+	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 02:17:05 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9231.1763086624576418104
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Nov 2025 18:05:51 -0800
+ Thu, 13 Nov 2025 18:17:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
-Received: from fwd77.aul.t-online.de (fwd77.aul.t-online.de [10.223.144.103])
-	by mailout09.t-online.de (Postfix) with SMTP id 4C672379F0
-	for <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 03:05:00 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.32.97]) by fwd77.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vJjBL-1KIZWb0; Fri, 14 Nov 2025 03:04:59 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] fex: add recipe
-Date: Fri, 14 Nov 2025 03:04:47 +0100
-Message-ID: <20251114020447.2540986-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.51.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=X3H8MW25;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-780fe76f457so14298787b3.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 18:17:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1763086624; x=1763691424; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=B7h6oya3z4YIZDsjkq1l0NXAEPCg2/jeWdg7InhZZFU=;
+        b=X3H8MW25aIPJ3LluqavJoC+CEBR7tlSHwNov2V/+78/D2gFSMwr6VByjCNyT8AMPZn
+         xvVyz22E/o9nEUfCa6UwmSs9X3E+2+tSc0F8fiCB8j3MgYFal4iLPXeN28IeYW+EBmsa
+         G3pDSKV96qBwQTQ9EWIDtcIKxit4HeLyTC2v3NARXEmWB/JBM2Da4iZ1QRaZaFczdo6U
+         /17LRER3xCc9RRxyKq+1jkCrhlB2xykMfHmn0+dD6vgiKw4RwFirc+9I0V8Ael7uETdz
+         AQpkqDeX7ovKv5NqK9Je4sD/Oi9pZsANld1FrbL410/8zoe9ChVRLeO05DxNfUVTFPLJ
+         9PSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763086624; x=1763691424;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=B7h6oya3z4YIZDsjkq1l0NXAEPCg2/jeWdg7InhZZFU=;
+        b=BeIl5tHASic93P90U4yVy3ux2rd9ZqhrrGeWshIF9zg0RceYbTQdOiRduNrO8AIkke
+         3ESdO7G5anVPsSyEl4Ze9yXeMS68KkYB+m1Tg7GkJ9GZPgzVPKLummlWUs2Z28CDKRv9
+         T2Gylvs3yKrD6f70xANP1GybnHgalp3VztRt6kTFR2bf8yqhjEZHuofYy6G9te2Vqup8
+         KohyZghzaROXqfn1nDNGbKZ5bQlx5xGfEiDUQlgZvBVCKWMLFJMzjov03AOOOvVXHDxq
+         VOnUyCgqsulWOlfybugZNzdeJ8zAPsgVZLXcNNdF5qBwTD5IknJ8deQxCFZGdoFfU0QE
+         WTWA==
+X-Gm-Message-State: AOJu0Yx7Cjib+UEhiDAyfC4mCpUMap5aHYKy8SsEmMhYRRFQDJexCQEf
+	Fyicn+ayd66SsZbqALK8fY4nAI/OWyV2SfVnO0308+rCZr0iGQM1/MozGn4PnXlrg5/Q4VNem1h
+	Z6ZaQQvCJ9cC2OCenhIrR/0/CHh8DqHU=
+X-Gm-Gg: ASbGncth3l/q1wY+QEK8PntUScX/XF5Od2NeA/9wPtO8dH0Q584abgtKIgFBNfM1j/K
+	RpIUBxSRHcVBhrXLhiYpFp3LdWWsDuU1ZmahvNJYTMdfQ85rwY6xkpNunKnoV+hmnNqfeZtm7Vr
+	RiRkRkRFnfOkwCwQVgC7oclEWU8sIN3jTbWz/LRPHyglYPbG6vwEMv3ADYazSg7Hmt1/qlfBPAg
+	e8Dr/ILVK6guJyQ+Gk8wyIc+JlrABea58p84pPsMffJJjcveFJMpAW5dKE7Q8XOxeLHvp+6YBMr
+	y5dTmo9qWM5MycVTo8hpb1I1equg3awQea+5eq+PynDdli0yJ8I6RSk4tizSUbUWhOjIorMsyAb
+	iwza2hnanzPbiWiF7ylrWlae77mco6cWnHLjEYp9MKmnWqQgE1R4o/yaX
+X-Google-Smtp-Source: AGHT+IGmSqA00uZfOYnE7iO4ruaTQhKCukJZ7b41iyIDqT7Qlm2sG0qwN+aJZ+xzcLUpl0+7xZLM2d5/4g2FYAYOn5I=
+X-Received: by 2002:a05:690c:3588:b0:788:e74:b267 with SMTP id
+ 00721157ae682-78929f236fcmr28990747b3.65.1763086623648; Thu, 13 Nov 2025
+ 18:17:03 -0800 (PST)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1763085899-0BFFD440-F425C8C4/0/0 CLEAN NORMAL
-X-TOI-MSGID: 74459aae-1e4e-41dd-bd93-6efa525fd158
-Content-Transfer-Encoding: quoted-printable
+References: <20251113112122.1553793-1-anuj.mittal@oss.qualcomm.com>
+In-Reply-To: <20251113112122.1553793-1-anuj.mittal@oss.qualcomm.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 13 Nov 2025 18:16:37 -0800
+X-Gm-Features: AWmQ_bnp62TPhuIhkHySTuuV1QrFkqODLExWv6GqFBMUHc2r403QNjTxRlh0IoY
+Message-ID: <CAMKF1sqQF434+QRz02vjnaSSzmBrXpoHgEsuqh==d2AzdBEr3Q@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][master][scarthgap][PATCH] remmina: add
+ DEPENDS on curl
+To: anuj.mittal@oss.qualcomm.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000e92efb064384974c"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 02:05:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121663
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 02:17:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121664
 
-Fex is a fast usermode x86 and x86-64 emulator for Arm64 Linux
-It is used by 'valve' to run windows games on snapdragon
+--000000000000e92efb064384974c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Compilation requires TOOLCHAIN =3D "clang"
+This patch mentions master in subject but the patch is not for version of
+recipe in master. Can you confirm if it is still needed with the master
+version ?
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- meta-oe/recipes-devtools/fex/fex_2511.bb | 58 ++++++++++++++++++++++++
- 1 file changed, 58 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/fex/fex_2511.bb
+On Thu, Nov 13, 2025 at 3:21=E2=80=AFAM Anuj Mittal via lists.openembedded.=
+org
+<anuj.mittal=3Doss.qualcomm.com@lists.openembedded.org> wrote:
 
-diff --git a/meta-oe/recipes-devtools/fex/fex_2511.bb b/meta-oe/recipes-d=
-evtools/fex/fex_2511.bb
-new file mode 100644
-index 0000000000..295df8e814
---- /dev/null
-+++ b/meta-oe/recipes-devtools/fex/fex_2511.bb
-@@ -0,0 +1,58 @@
-+SUMMARY =3D "A fast usermode x86 and x86-64 emulator for Arm64 Linux"
-+HOMEPAGE =3D "https://github.com/FEX-Emu/FEX"
-+LICENSE =3D "MIT & BSL-1.0 & BSD-2-Clause"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D70d20d502833c35d6d5a4f0ef5d9e=
-fcc"
-+LIC_FILES_CHKSUM +=3D "file://External/range-v3/LICENSE.txt;md5=3D5dc23d=
-5193abaedb6e42f05650004624"
-+LIC_FILES_CHKSUM +=3D "file://External/xxhash/LICENSE;md5=3D13be6b481ff5=
-616f77dda971191bb29b"
-+
-+COMPATIBLE_HOST =3D "aarch64.*-linux"
-+
-+REQUIRED_DISTRO_FEATURES =3D "ld-is-lld"
-+
-+SRC_URI =3D " \
-+	git://github.com/FEX-Emu/FEX.git;name=3Dfex;protocol=3Dhttps;nobranch=3D=
-1;tag=3DFEX-${PV} \
-+	git://github.com/Sonicadvance1/cpp-optparse.git;name=3Dcpp-optparse;sub=
-dir=3D${S}/Source/Common/cpp-optparse;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/FEX-Emu/drm-headers.git;name=3Dfex-drm;subdir=3D${S}/E=
-xternal/drm-headers;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/Cyan4973/xxHash.git;name=3Dxxhash;subdir=3D${S}/Extern=
-al/xxhash;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/FEX-Emu/jemalloc.git;name=3Djemalloc;subdir=3D${S}/Ext=
-ernal/jemalloc;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/FEX-Emu/jemalloc.git;name=3Djemalloc-glibc;subdir=3D${=
-S}/External/jemalloc_glibc;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/ericniebler/range-v3.git;name=3Drange-v3;subdir=3D${S}=
-/External/range-v3;protocol=3Dhttps;nobranch=3D1 \
-+	git://github.com/FEX-Emu/robin-map.git;name=3Drobin-map;subdir=3D${S}/E=
-xternal/robin-map;protocol=3Dhttps;nobranch=3D1 \
-+"
-+
-+SRCREV_FORMAT =3D "fex"
-+SRCREV_fex =3D "663fd5a98befbf7a0ac585627de15c662715a731"
-+SRCREV_cpp-optparse =3D "9f94388a339fcbb0bc95c17768eb786c85988f6e"
-+SRCREV_fex-drm =3D "3e49836995c1dcb3df709440ad2f270b569c6a5f"
-+SRCREV_xxhash =3D "e626a72bc2321cd320e953a0ccf1584cad60f363"
-+SRCREV_jemalloc =3D "ce24593018ca5d5af7e5661ceda9744e02b59f8f"
-+SRCREV_jemalloc-glibc =3D "8436195ad5e1bc347d9b39743af3d29abee59f06"
-+SRCREV_robin-map =3D "d5683d9f1891e5b04e3e3b2192b5349dc8d814ea"
-+SRCREV_range-v3 =3D "ca1388fb9da8e69314dda222dc7b139ca84e092f"
-+
-+DEPENDS =3D " \
-+    catch2 \
-+    fmt \
-+    libdrm  \
-+    nasm-native \
-+    vulkan-headers \
-+"
-+
-+PACKAGECONFIG =3D ""
-+PACKAGECONFIG[qt] =3D "-DBUILD_FEXCONFIG=3DON,-DBUILD_FEXCONFIG=3DOFF,qt=
-base qttools-native qtquick3d"
-+
-+EXTRA_OECMAKE +=3D " \
-+	-DBUILD_TESTING=3DOFF \
-+	-DENABLE_VIXL_DISASSEMBLER=3DOFF \
-+	-DENABLE_VIXL_SIMULATOR=3DOFF \
-+	-DCMAKE_EXE_LINKER_FLAGS_INIT=3D"-fuse-ld=3Dlld" \
-+	-DCMAKE_MODULE_LINKER_FLAGS_INIT=3D"-fuse-ld=3Dlld" \
-+	-DCMAKE_SHARED_LINKER_FLAGS_INIT=3D"-fuse-ld=3Dlld" \
-+	-DDATA_DIRECTORY=3D${datadir} \
-+	-DQT_HOST_PATH:PATH=3D${RECIPE_SYSROOT_NATIVE}${prefix_native} \
-+"
-+
-+inherit cmake ccache pkgconfig features_check
-+
-+FILES:${PN} +=3D "${datadir} ${libdir}/binfmt.d ${libdir}/libFEXCore.so"
-+FILES:${PN}-dev =3D "${includedir}"
---=20
-2.51.0
+> remmina has a hard dependency on curl [1]. This doesn't result in an
+> error on branches with gtk4 because curl gets pulled in via vte ->
+> gtk4 -> gstreamer-plugins-bad -> curl.
+>
+> Add an explicit DEPENDS on curl to reflect the dependency.
+>
+> [1]
+> https://github.com/FreeRDP/Remmina/blob/a8afdd728d215791e3ce2ebc041156952=
+9cd0296/src/CMakeLists.txt#L259
+>
+> Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+> ---
+>  meta-oe/recipes-support/remmina/remmina_1.4.34.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-support/remmina/remmina_1.4.34.bb
+> b/meta-oe/recipes-support/remmina/remmina_1.4.34.bb
+> index 921d34d9fd..d101908b94 100644
+> --- a/meta-oe/recipes-support/remmina/remmina_1.4.34.bb
+> +++ b/meta-oe/recipes-support/remmina/remmina_1.4.34.bb
+> @@ -20,6 +20,7 @@ DEPENDS =3D " \
+>      libvncserver \
+>      libsecret \
+>      libxkbfile \
+> +    curl \
+>  "
+>
+>  DEPENDS:append:libc-musl =3D " libexecinfo"
+> --
+> 2.51.2
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#121643):
+> https://lists.openembedded.org/g/openembedded-devel/message/121643
+> Mute This Topic: https://lists.openembedded.org/mt/116272361/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
+--000000000000e92efb064384974c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">This patch mentions master in subject but the patch is not=
+ for version of recipe in master. Can you confirm if it is still needed wit=
+h the master version ?</div><br><div class=3D"gmail_quote gmail_quote_conta=
+iner"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Nov 13, 2025 at 3:21=E2=
+=80=AFAM Anuj Mittal via <a href=3D"http://lists.openembedded.org">lists.op=
+enembedded.org</a> &lt;anuj.mittal=3D<a href=3D"mailto:oss.qualcomm.com@lis=
+ts.openembedded.org">oss.qualcomm.com@lists.openembedded.org</a>&gt; wrote:=
+<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
+ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">remmina has a h=
+ard dependency on curl [1]. This doesn&#39;t result in an<br>
+error on branches with gtk4 because curl gets pulled in via vte -&gt;<br>
+gtk4 -&gt; gstreamer-plugins-bad -&gt; curl.<br>
+<br>
+Add an explicit DEPENDS on curl to reflect the dependency.<br>
+<br>
+[1] <a href=3D"https://github.com/FreeRDP/Remmina/blob/a8afdd728d215791e3ce=
+2ebc0411569529cd0296/src/CMakeLists.txt#L259" rel=3D"noreferrer" target=3D"=
+_blank">https://github.com/FreeRDP/Remmina/blob/a8afdd728d215791e3ce2ebc041=
+1569529cd0296/src/CMakeLists.txt#L259</a><br>
+<br>
+Signed-off-by: Anuj Mittal &lt;<a href=3D"mailto:anuj.mittal@oss.qualcomm.c=
+om" target=3D"_blank">anuj.mittal@oss.qualcomm.com</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-support/remmina/<a href=3D"http://remmina_1.4.34.bb" =
+rel=3D"noreferrer" target=3D"_blank">remmina_1.4.34.bb</a> | 1 +<br>
+=C2=A01 file changed, 1 insertion(+)<br>
+<br>
+diff --git a/meta-oe/recipes-support/remmina/<a href=3D"http://remmina_1.4.=
+34.bb" rel=3D"noreferrer" target=3D"_blank">remmina_1.4.34.bb</a> b/meta-oe=
+/recipes-support/remmina/<a href=3D"http://remmina_1.4.34.bb" rel=3D"norefe=
+rrer" target=3D"_blank">remmina_1.4.34.bb</a><br>
+index 921d34d9fd..d101908b94 100644<br>
+--- a/meta-oe/recipes-support/remmina/<a href=3D"http://remmina_1.4.34.bb" =
+rel=3D"noreferrer" target=3D"_blank">remmina_1.4.34.bb</a><br>
++++ b/meta-oe/recipes-support/remmina/<a href=3D"http://remmina_1.4.34.bb" =
+rel=3D"noreferrer" target=3D"_blank">remmina_1.4.34.bb</a><br>
+@@ -20,6 +20,7 @@ DEPENDS =3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0libvncserver \<br>
+=C2=A0 =C2=A0 =C2=A0libsecret \<br>
+=C2=A0 =C2=A0 =C2=A0libxkbfile \<br>
++=C2=A0 =C2=A0 curl \<br>
+=C2=A0&quot;<br>
+<br>
+=C2=A0DEPENDS:append:libc-musl =3D &quot; libexecinfo&quot;<br>
+-- <br>
+2.51.2<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#121643): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/121643" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/121643</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116272361/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/116272361/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000e92efb064384974c--
 
