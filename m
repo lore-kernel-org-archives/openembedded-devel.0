@@ -2,192 +2,149 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 977D9CDE01F
-	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 07:43:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94947CDE020
+	for <webhook@archiver.kernel.org>; Fri, 14 Nov 2025 07:44:07 +0000 (UTC)
 Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12993.1763106223469720034
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13002.1763106243818155081
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 13 Nov 2025 23:43:43 -0800
+ Thu, 13 Nov 2025 23:44:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=f7zRlPB1;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gYGFFFbH;
  spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-42b3c965ca9so811267f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 23:43:43 -0800 (PST)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-42b3ac40ae4so872267f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 13 Nov 2025 23:44:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763106222; x=1763711022; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=FjpKUuetYqUU4EhqCgwOTe5hYAIkkHVGnl6sre1uxe8=;
-        b=f7zRlPB1wtR9BSwxzj+5ciyHFYirmrLdnOchj6pPv6OHwWN0ikD+v3lS0P8RpKFVVx
-         QnD5ZfNyBd9YvuCTvhr94yaUInjKSBSLw4i95nGRl62lzr0kAz9PZZGaqS549rdlhkiv
-         Hn36bm2c8CIpkdz5Q0Rw9ojCWnmq3OhH03fmnOqT5Fqm2jBEaKP+DYbnDRWG86qx7ScK
-         aNspghYWaPD9DIDF/XjOwiBkasHeuYfUAFJgVJ1d0QgOb4hkxTOs8em8Me9L7SR/VRJ8
-         ukjHvjZvWeMzjZ2F367XWY+2n+kfgPOs37rV8zINE+GuU10i+aXu4+eRnT8VH7k0f80+
-         Pyng==
+        d=gmail.com; s=20230601; t=1763106242; x=1763711042; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=K+45YDVGo8i3xQyUAx0BEm4YPQ09m6aA7wJR9TNs0AM=;
+        b=gYGFFFbHPKMz1TgvSWUFT/p481wgLGOEWdx//uKn0EcYa1+chVbXBLh7vWbBAKbpE6
+         bGduTgrNVKN9utg4kotKY60Uu/f+iGfVE5hXa/LknS2yiiCM+XK3JazZVuBTUIJqF9Zs
+         mOMPBCF8WLLk5mtcROyZbz7iqcC85zqn00DYIZmEbSheBQAfC7rkNTkdQbnkUX8txSp7
+         1w53Q9sUwSvLldLycj9zaTPWIMUPyGxtc1Ae8FejbZOvY/PWHxBPzRjThBUKoQatRPEx
+         eriYKZgXRSYa6sF3D+7//BU2iI8kjbCJEugkunsYAazIHDVo7EnEfeTfZ0W+qXKdyzqc
+         0vsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763106222; x=1763711022;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1763106242; x=1763711042;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=FjpKUuetYqUU4EhqCgwOTe5hYAIkkHVGnl6sre1uxe8=;
-        b=aNbrhkEIN6FApCrk3APrds3hQLi0T7uOsGQwtAaMp3uGSPg/IY/8axpTthzK+r0dx7
-         aoLMWGzQ6Y/Eg47CY8Pt+3treAcYskm9ua/UK5wMO3ATFTBM2T0sLEgh0uBUWZZ5Ld/U
-         MCc9Z0g82zAbIcJUKu2vbJuRpVpfJ8+paCOGn39/ccffxykQq8tm5/zm0xCyZZ+Kw2Z+
-         jJMbsvjw188F3Ur8vK3KW7Bd2Ce7YNcpZd6U8MCdWlhyzcFWql5ybpf6u0Z/qmWQfNk7
-         NJ9PSaI9AzH0M8koXOcYQouN3YGEJjPQPGj7Y5xq8PPbEiQThi+nmqdqypp83Oov14BB
-         4imw==
-X-Gm-Message-State: AOJu0YzLNdVPlB+8T8bPkWhVN+9QPJv0ynyMCgFKhQ2po1mv58trSOXz
-	zChU8UQErs8RChjyRq/pQqYfFSNdoPXajVXN+7HzrFF3+r7bleLiYRIYHJntGykd
-X-Gm-Gg: ASbGncuWwYQrXOUD9hgh/BAFsXM8ZCA5UiSPDMPJJaJifiF0SRMHbVM5vHQ2pE7XGmN
-	2oeJnnBk3X0ZokBJZiA7A72xmGW+2+2yNWYsMmUi/uy1nYlbkKNScDJqjvv4x+EPjpc1ds/YyCb
-	Qp5llsdcDkb8am09sUzDPcyA7NkVbO9a1enH8eoUinEnd1K0+wH+cg2uW6S3ILKyZUp3cUyyxLw
-	YW5htJMMVSw8eaV77rba1/tv/3CWomh1+Y2bTmSLFdW9wdpLE/UMQwTFdRdKtcP3Fnx0oMm/nFX
-	x96HNRnMqPVlaf9ZAXtiFiZoCLMS4Jc0g0m/IL3knYYZV/WhhNJmBxOWnsGvJ7X9WCn8kIQMmIG
-	1//F+BLYX4S+IMk8AzZs+dGtIsIGoto2MrnYdWKWQPCOvvSgWHYiN5FepEURychnuQcFcU3PL1w
-	==
-X-Google-Smtp-Source: AGHT+IHf8zqMgFqxo7ffCuUBeLn3nMLS9/uS1Z5Qwpvk/RvP5852qm4yDdFfANwnQ2LZUhig4TglmA==
-X-Received: by 2002:a05:6000:4029:b0:42b:4177:7139 with SMTP id ffacd0b85a97d-42b59374d6emr2010174f8f.46.1763106221445;
-        Thu, 13 Nov 2025 23:43:41 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b53f0b622sm8090954f8f.29.2025.11.13.23.43.40
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Nov 2025 23:43:41 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2 1/4] audiofile: patch CVE-2019-13147 and CVE-2022-24599
-Date: Fri, 14 Nov 2025 08:43:37 +0100
-Message-ID: <20251114074340.2716135-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.51.2
+        bh=K+45YDVGo8i3xQyUAx0BEm4YPQ09m6aA7wJR9TNs0AM=;
+        b=MAdgzBsKY/6qaS9MQMXaKlOHN1C148prsnLi33GuPDI1xFt6VbTnv/YpBmj+HFcEWe
+         RFH6lI9SVwIkaZWeojA3UPuk4XhYqOkqv0qklKYQ7GS1fbPx4YLjTaZ7e9NDie7Sov6e
+         mj3r3gF/yj90b3o1fQIS22u9NpFOI3R+YL20wLDQlS1L/p9WC0T5qd2gBcBg6B/DxXg6
+         wN9c1bitLCq2snrqbju3P4koudhNUhSi3ijc8QI5Tburt4zv0NYOXRrpoDCycQ2q6tbS
+         C9R7feBKJ0ZlM2EKT6FMsCtmjFYvFzJ+upgHnz+cjlfTX4BPWc15oqligX96eCwsyPd2
+         Gxbg==
+X-Forwarded-Encrypted: i=1; AJvYcCVb/7I9Rx9u2rVeQFwu7q2T51RvF7w/kVV7nBJmI4K2YBVNndMrGac34rAOGGhIdx5pRQ1fGlPSU+BKuF8a5prKav8=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YygMDzWwDtpCA/FVWmDVqBqaDPOVu9BOxdFYZwLSPKesVcR2vkp
+	iXdyQ9NKjTFWgnJTNv8eq8A7Vnsf1aaQS14zlPDadzjthSvEw1JBJPmMreWA0Ctv
+X-Gm-Gg: ASbGncvVXqdGsOpQ3VFQ+qykJQrlsH5m4weKcxsytxzyybFeAEsF3nQU/6gaoWjTDEi
+	n+XmdEEZiIMPcxMgdkGKvXkleBs+eQ3VLh6gI7saGs4lucYCVAPyIgKTKwU426ywcMXtVhFVDeI
+	xmKRANJYnIq04F7Jy73Gaxmsr5DV6L8TH1tgjqUrHUeq6ZhGXeENDH85zVRA3tJmy8YSJ/nR8tH
+	TpjTSS36pHumwJnfmCfpp3ZEKfsPGshhrvnteDtAFUf+BSTU9REi2q+OWWzYmGP2oJatnX3ayPb
+	i6BYHH6GX/hkXHa8PfuB1e1AL/ANe+JGrrDbzLNsdORzJfIVWluB7Tia8hBw39JoPhlcXAUFH7b
+	NKrNjhnmSRHLJoIGRH3PlEsMZJoYtz/t97JUJJWnP+hN9YJapB/gKjIncIBAr8JeEPQsskxZ78s
+	cq9hfOPFR2
+X-Google-Smtp-Source: AGHT+IGrjX+zeD5yS9aUQyvSWAeFF7tdAORsbzDWUeLOWwCMRsRn4XeL2//LUD0jIVYtZf9yff02bA==
+X-Received: by 2002:a05:6000:1846:b0:42b:41dc:1b5f with SMTP id ffacd0b85a97d-42b593742b1mr1437222f8f.32.1763106242079;
+        Thu, 13 Nov 2025 23:44:02 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b53f0b57asm8549962f8f.27.2025.11.13.23.44.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 13 Nov 2025 23:44:01 -0800 (PST)
+Message-ID: <ea2ee27f-989f-49d3-b810-ed3e79611f02@gmail.com>
+Date: Fri, 14 Nov 2025 08:44:01 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-oe][PATCH] audiofile: Fix build with clang++
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+References: <20251114013528.108047-1-raj.khem@gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20251114013528.108047-1-raj.khem@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 07:43:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121685
+ <openembedded-devel@lists.openembedded.org>; Fri, 14 Nov 2025 07:44:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121689
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2019-13147
-https://nvd.nist.gov/vuln/detail/CVE-2022-24599
+Works on my machine, lgtm
 
-These patches are used by opensuse to mitigate the corresponding vulnerabulities.
+On 11/14/25 02:35, Khem Raj wrote:
+> When tests are enabled additional C++ code is compiled and clang does
+> not like the code.
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Cc: Gyorgy Sarvari <skandigraun@gmail.com>
+> ---
+>  .../audiofile/audiofile_0.3.6.bb              |  1 +
+>  ...test-sign.cpp-Fix-C-narrowing-errors.patch | 41 +++++++++++++++++++
+>  2 files changed, 42 insertions(+)
+>  create mode 100644 meta-oe/recipes-multimedia/audiofile/files/0001-test-sign.cpp-Fix-C-narrowing-errors.patch
+>
+> diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+> index cc7fef2a26..6ebb54e261 100644
+> --- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+> +++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+> @@ -19,6 +19,7 @@ SRC_URI = " \
+>      file://0006-Check-for-multiplication-overflow-in-sfconvert.patch \
+>      file://0007-Actually-fail-when-error-occurs-in-parseFormat.patch \
+>      file://0008-Check-for-multiplication-overflow-in-MSADPCM-decodeS.patch \
+> +    file://0001-test-sign.cpp-Fix-C-narrowing-errors.patch \
+>      file://test-for-CVE-2015-7747.patch \
+>      file://CVE-2019-13147.patch \
+>      file://CVE-2022-24599.patch \
+> diff --git a/meta-oe/recipes-multimedia/audiofile/files/0001-test-sign.cpp-Fix-C-narrowing-errors.patch b/meta-oe/recipes-multimedia/audiofile/files/0001-test-sign.cpp-Fix-C-narrowing-errors.patch
+> new file mode 100644
+> index 0000000000..83c573a873
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/audiofile/files/0001-test-sign.cpp-Fix-C-narrowing-errors.patch
+> @@ -0,0 +1,41 @@
+> +From bed0eb57c3294bac1c743cbe4404168c1007287d Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Thu, 13 Nov 2025 17:00:59 -0800
+> +Subject: [PATCH] test/sign.cpp: Fix C++ narrowing errors
+> +
+> +The error is because -kMinInt32 is both overflowing and a narrowing conversion in a brace initializer.
+> +Fix it by doing the negation in a wider type and explicitly casting to uint32_t in the initializer.
+> +
+> +Fixes
+> +
+> +../../sources/audiofile-0.3.6/test/Sign.cpp:160:39: error: non-constant-expression cannot be narrowed from type 'int32_t' (aka 'int') to 'uint32_t' (aka 'unsigned int') in initializer list [-Wc++11-narrowing]
+> +  160 |         const uint32_t expectedData[] = { 0, -kMinInt32, kMaxUInt32 };
+> +      |                                              ^~~~~~~~~~
+> +../../sources/audiofile-0.3.6/test/Sign.cpp:160:39: note: insert an explicit cast to silence this issue
+> +  160 |         const uint32_t expectedData[] = { 0, -kMinInt32, kMaxUInt32 };
+> +      |                                              ^~~~~~~~~~
+> +      |                                              static_cast<uint32_t>( )
+> +../../sources/audiofile-0.3.6/test/Sign.cpp:160:39: warning: overflow in expression; result is -2'147'483'648 with type 'int32_t' (aka 'int') [-Winteger-overflow]
+> +  160 |         const uint32_t expectedData[] = { 0, -kMinInt32, kMaxUInt32 };
+> +      |                                              ^~~~~~~~~~
+> +1 warning and 1 error generated.
+> +
+> +Upstream-Status: Pending
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + test/Sign.cpp | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/test/Sign.cpp b/test/Sign.cpp
+> +index c339514..0d80fe6 100644
+> +--- a/test/Sign.cpp
+> ++++ b/test/Sign.cpp
+> +@@ -157,7 +157,7 @@ TEST_F(SignConversionTest, Int32)
+> + 	AFframecount framesRead = afReadFrames(file, AF_DEFAULT_TRACK, readData, frameCount);
+> + 	ASSERT_EQ(framesRead, frameCount);
+> + 	afCloseFile(file);
+> +-	const uint32_t expectedData[] = { 0, -kMinInt32, kMaxUInt32 };
+> ++	const uint32_t expectedData[] = { 0, static_cast<uint32_t>(-static_cast<int64_t>(kMinInt32)), kMaxUInt32 };
+> + 	for (int i=0; i<frameCount; i++)
+> + 		EXPECT_EQ(readData[i], expectedData[i]);
+> + }
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
-
-v2: no change
-
- .../audiofile/audiofile_0.3.6.bb              |  2 +
- .../audiofile/files/CVE-2019-13147.patch      | 31 ++++++++++++
- .../audiofile/files/CVE-2022-24599.patch      | 50 +++++++++++++++++++
- 3 files changed, 83 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-2019-13147.patch
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-2022-24599.patch
-
-diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-index 50df31c7b9..fd80729bd2 100644
---- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-+++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-@@ -18,6 +18,8 @@ SRC_URI = " \
-     file://0006-Check-for-multiplication-overflow-in-sfconvert.patch \
-     file://0007-Actually-fail-when-error-occurs-in-parseFormat.patch \
-     file://0008-Check-for-multiplication-overflow-in-MSADPCM-decodeS.patch \
-+    file://CVE-2019-13147.patch \
-+    file://CVE-2022-24599.patch \
- "
- SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782"
- 
-diff --git a/meta-oe/recipes-multimedia/audiofile/files/CVE-2019-13147.patch b/meta-oe/recipes-multimedia/audiofile/files/CVE-2019-13147.patch
-new file mode 100644
-index 0000000000..19f6892f69
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/audiofile/files/CVE-2019-13147.patch
-@@ -0,0 +1,31 @@
-+This patch is taken from opensuse: 
-+https://build.opensuse.org/package/show/multimedia:libs/audiofile
-+
-+CVE: CVE-2019-13147
-+Upstream-Status: Inactive-Upstream [lastcommit: 2016-Aug-30]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+
-+diff --unified --recursive --text --new-file --color audiofile-0.3.6/libaudiofile/NeXT.cpp audiofile-0.3.6.new/libaudiofile/NeXT.cpp
-+--- audiofile-0.3.6/libaudiofile/NeXT.cpp	2013-03-06 13:30:03.000000000 +0800
-++++ audiofile-0.3.6.new/libaudiofile/NeXT.cpp	2025-05-14 10:45:11.685700984 +0800
-+@@ -32,6 +32,7 @@
-+ #include <stdint.h>
-+ #include <stdlib.h>
-+ #include <string.h>
-++#include <limits.h>
-+ 
-+ #include "File.h"
-+ #include "Setup.h"
-+@@ -122,6 +123,12 @@
-+ 		_af_error(AF_BAD_CHANNELS, "invalid file with 0 channels");
-+ 		return AF_FAIL;
-+ 	}
-++	/* avoid overflow of INT for double size rate */
-++	if (channelCount > (INT32_MAX / (sizeof(double))))
-++	{
-++		_af_error(AF_BAD_CHANNELS, "invalid file with %i channels", channelCount);
-++		return AF_FAIL;
-++	}
-+ 
-+ 	Track *track = allocateTrack();
-+ 	if (!track)
-diff --git a/meta-oe/recipes-multimedia/audiofile/files/CVE-2022-24599.patch b/meta-oe/recipes-multimedia/audiofile/files/CVE-2022-24599.patch
-new file mode 100644
-index 0000000000..9214d80172
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/audiofile/files/CVE-2022-24599.patch
-@@ -0,0 +1,50 @@
-+This patch is taken from opensuse:
-+https://build.opensuse.org/package/show/multimedia:libs/audiofile
-+
-+CVE: CVE-2022-24599
-+Upstream-Status: Inactive-Upstream [lastcommit: 2016-Aug-30]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+
-+diff --unified --recursive --text --new-file --color audiofile-0.3.6.old/sfcommands/printinfo.c audiofile-0.3.6.new/sfcommands/printinfo.c
-+--- audiofile-0.3.6.old/sfcommands/printinfo.c	2013-03-06 13:30:03.000000000 +0800
-++++ audiofile-0.3.6.new/sfcommands/printinfo.c	2025-04-30 15:18:24.778177640 +0800
-+@@ -37,6 +37,7 @@
-+ #include <stdint.h>
-+ #include <stdio.h>
-+ #include <stdlib.h>
-++#include <limits.h>
-+ 
-+ static char *copyrightstring (AFfilehandle file);
-+ 
-+@@ -147,7 +148,11 @@
-+ 	int		i, misccount;
-+ 
-+ 	misccount = afGetMiscIDs(file, NULL);
-+-	miscids = (int *) malloc(sizeof (int) * misccount);
-++	if (!misccount)
-++	    return NULL;
-++	miscids = (int *)calloc(misccount, sizeof(int));
-++	if (!miscids)
-++	    return NULL;
-+ 	afGetMiscIDs(file, miscids);
-+ 
-+ 	for (i=0; i<misccount; i++)
-+@@ -159,13 +164,16 @@
-+ 			If this code executes, the miscellaneous chunk is a
-+ 			copyright chunk.
-+ 		*/
-+-		int datasize = afGetMiscSize(file, miscids[i]);
-+-		char *data = (char *) malloc(datasize);
-++		size_t datasize = afGetMiscSize(file, miscids[i]);
-++		if (datasize >= INT_MAX - 1)
-++		    goto error;
-++		char *data = (char *)calloc(datasize + 1, sizeof(char));
-+ 		afReadMisc(file, miscids[i], data, datasize);
-+ 		copyright = data;
-+ 		break;
-+ 	}
-+ 
-++error:
-+ 	free(miscids);
-+ 
-+ 	return copyright;
 
