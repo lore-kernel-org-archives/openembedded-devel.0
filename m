@@ -2,102 +2,109 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA871CEB2FA
-	for <webhook@archiver.kernel.org>; Sat, 15 Nov 2025 18:19:20 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13810.1763230751939823678
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D90A0CEBF61
+	for <webhook@archiver.kernel.org>; Sat, 15 Nov 2025 18:23:20 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13880.1763230995731277120
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Nov 2025 10:19:12 -0800
+ Sat, 15 Nov 2025 10:23:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LBsPhiKh;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-42b566859ecso2158341f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 15 Nov 2025 10:19:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kAFqPtOd;
+ spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-429c48e05aeso1799194f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 15 Nov 2025 10:23:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763230750; x=1763835550; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ie7GsmXu/4OEGSkaGUxXhKRxe9O1r5Sfu/bzDNp3KOs=;
-        b=LBsPhiKh9Lim3iw+bjkUZGq6YFfGqPs62zBE9FUXUhNFBxf7codaSt6bazI1sivxn0
-         FR3Pbk8LwL8IjI4qZRDbRjLgbwsiYc/FXf9LjWyYHSRw2wf8/J3+FIaZRqZ1Nz+XwHqA
-         BXNuMCBbO4qyY7Tk0ugFED7HvdGdHN+KjDGNEdaJ6JDNc5MYn+FWrk9si+eAxKsfiYf5
-         qvQDIIw8MdGQ9IPkj7e+zDj+bEd5IJapypu5fYACvUykz5nCNDmpuv4dUAqKDDA2zPSn
-         YelOPvZ+6w+hv4K2CxdPfxBSKlEs9G0jYWALKtca88tDd0jww29sgkw1oGJfAYnvcgfg
-         Il1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763230750; x=1763835550;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1763230994; x=1763835794; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ie7GsmXu/4OEGSkaGUxXhKRxe9O1r5Sfu/bzDNp3KOs=;
-        b=mO+Ju15e2MiDn9nyK1/IZ3TqfMDkfqsWqs+Scn+ZqminyD/ou2WDSV6rkDjErfCkgk
-         LfQ3BJaYLQW95ms577bEMKzMSimzUmBv80Har9wXGQEF8Yxa7ntAVBOFpU6jxD9BlHfZ
-         aJ1HGARHHZG3ABbE4BXW5wfteu5BHJPs5hfJgJg5di/e1lYIq2dFfV57tQjbIgZlTuAD
-         w9wzjxdgYrVsTwveYdPNu3NoCfERMgr/gb0FCK9nOEaOtT1QCXPuuW8g3QWRiZtNALnz
-         4ahs+xSnWxBaQWb/mit8kynkZLvglDUW/l6WgbX6vWS211zoI/dDu1pCRX3XIGqrQcPd
-         R+7Q==
-X-Gm-Message-State: AOJu0YwxasefQVKIG/YuKyZ9SyjcfazTNAC7nKpcfNvcsbZJvYKbxNiG
-	B2Reqe0Ta1feI2Cv2Xm4gUNAbWcClWYg7p5/OkTwZfS/bH+NpOD4e8MjQK8uDaMx
-X-Gm-Gg: ASbGncv7UtvQ6M/ZRs0jWGGpl0pqVHECTIKAGHMPsFQ+jNkQKtJ8kIfaxvhqfTMrJT4
-	BFBwWjTlYts0ORLazsb+NTEKywoziB2VGJUAb3YYT3NcVcadVAQZCiXbHiAZJ7CF0kzp8xM+Vda
-	O+o95ZtXThbDMO3/Voqe0WlP+yzRjDUkKNwnxR8VqJssM24sizTFvgTINxjjhtRawxeL4FYhGaZ
-	HUe1Naf4sO/7ewQJEQHb7n0dCVz3wZx4Acfs7nL8Hf8VUOhf+L9B7VfYQkAMHTeVtlFGfJgAGOV
-	l+rKBczTMq+C6KPxYgjuiUwlSvCVSmj1qtveTa3jezh7B0zRV9A4irliGQiyifJoINTb7WwMa4A
-	qbT2vVCMxU3UcEsmvEIjh2FdreJH7vhcM8JaDSVnogGvm9W1nYma+NOm/cYoXXKHAzeuA2qjkzn
-	Zwx3/l/sYFnaz/gfCGMa4=
-X-Google-Smtp-Source: AGHT+IFwDqIU6HjhkXF3Y4Jdkm+VWWBN9MnJxwAzSwC5D/bzTGb/hCw39ItBViy/qGgvQl/2cvMmeA==
-X-Received: by 2002:a05:6000:1a8d:b0:42b:3d93:9a27 with SMTP id ffacd0b85a97d-42b59385c46mr7359578f8f.36.1763230750113;
-        Sat, 15 Nov 2025 10:19:10 -0800 (PST)
+        bh=FrwTeRigPNebJmpwm4uecmXzfVqAJhIWUXfOp7rfRBg=;
+        b=kAFqPtOd/7J9HNN+fjsyaJ01P6NwSn7uVXK4odGgJl8+mTDKnbbygHriXHWdbItnuV
+         5dCs/r98pu1yzibNtl3KWOaWgXhhGg2iAeY/hgAbZSOKOdAldLgkloSvre+GhBmYlJlB
+         xkuP3RuXpdg7aU1F5Bl3eFRWTd8b71kmi7BwTRHkcLhu7ImTHS29trxOyNHJYQgGn6bp
+         45+VtOGNpgJxj4sZ5w6wDoJNmHheQEYP/fNi4D7OslmAxt5Gh35NYVKvD0f5COGqhcbm
+         bIZlQHGZD0oNap2Mdt1zhuMIQ7govy9hfgkvhys8QInN/TQf1lfLvL3JOshJj5fVOdGz
+         wnLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763230994; x=1763835794;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=FrwTeRigPNebJmpwm4uecmXzfVqAJhIWUXfOp7rfRBg=;
+        b=Kqh3uOXvy81gDgtpbiKxTctIT2rVoqilllkte8hKRb7lXdkPn/9QKVfT81HpXkjqgz
+         uGsDATckCQGMfW+yERFwuOVH43haikibWBpfzJETTVwePfajiQxCu7Hrl0AQMdUu3T3r
+         pXEaav3tUxuJcrRt4EgfnaPqfbpJtnO62w1HfVHIGJUserQoqATTPa3Rz+2MIeQsVAKH
+         QPj2gEzs1xGG8agIj+Q1jwpEOaYel8Su6CbqNLl6CcPINdd1ClqnuLOzSpLH5FQeWRYc
+         SEiS/2vzbUYG+AZi/t2NYNs/QUqxcjV5GXWo99y11MV+7/1LTF4rzpPkdQbxoCsJ8tBJ
+         N0gA==
+X-Gm-Message-State: AOJu0Yy9U/ydCDa7qYRQN/Pz7wlmkCkjyYlMKQT8LkZtHQaszDMCNXXO
+	2h6bKNc0XJIpObtzGn3JZ0Dbor417E2mVIZE6MJL+2Mo9+b6UO+vOlie6muBrEUL
+X-Gm-Gg: ASbGncuj/6rDxc3tF4LehwbcXGraMAGNo/oQtVG0sedR0WesbP2MKLGJFdfLBsUhlv5
+	EIz9N2dUH8irublkwNJkSvq/zXFnXBFxElfpYGGeMNDFxYBekSuoA2Isc4Q4L8dpb2BFQt2KLTt
+	RgH6LG4Ai6Jpb5UbF7gW05yt8gX7q/Y+7DaDrhPCXYMui0+1H0LQN/Ugu6Dh293iJNPhi52kDMF
+	E10RFqVwOEXjhLT0BeHLl9Z4NZ45311ty5AwL0gFomvUbJjaJyW9I1yfNdVBvTeX8iagovmbsaI
+	JUMojUZ4wqbTE3eoeXYFFlg/uR+HZmhYh1uEplk8//Ds/ti/6Ht5HPQsmj/z2p737U9ntEnJELs
+	d0eiXst9puVe/qshO8IliqB0Eit8rDaYH4rYoRnOs0vvYGwsqSmIXfDtDlGQ6ecjSraw+lGWRrQ
+	==
+X-Google-Smtp-Source: AGHT+IHn7Koje5tYNCOjlXKzU80uhA6gGfEEbXQg4UjGol+k3n8+KBsIpAi+pB9JP41dcTTMRDXX4w==
+X-Received: by 2002:a05:6000:4182:b0:3e7:6424:1b47 with SMTP id ffacd0b85a97d-42b58d67e84mr6022197f8f.6.1763230994002;
+        Sat, 15 Nov 2025 10:23:14 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b53f0b60csm16882562f8f.22.2025.11.15.10.19.09
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b53f176basm16791186f8f.34.2025.11.15.10.23.13
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 Nov 2025 10:19:09 -0800 (PST)
+        Sat, 15 Nov 2025 10:23:13 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] links: set CVE_PRODUCT
-Date: Sat, 15 Nov 2025 19:19:09 +0100
-Message-ID: <20251115181909.1262253-1-skandigraun@gmail.com>
+Subject: [meta-networking][scarthgap][PATCH 2/3] proftpd: set status of CVE-2001-0027
+Date: Sat, 15 Nov 2025 19:23:11 +0100
+Message-ID: <20251115182312.1262645-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
+In-Reply-To: <20251115182312.1262645-1-skandigraun@gmail.com>
+References: <20251115182312.1262645-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 15 Nov 2025 18:19:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121742
+ <openembedded-devel@lists.openembedded.org>; Sat, 15 Nov 2025 18:23:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121744
 
-There are some unrelated software called "links", which cases
-false-positive CVEs to be reported by the CVE checker.
+From: Peter Marko <peter.marko@siemens.com>
 
-Set the vendor/product pairs that were historically used with
-CVEs for this software.
+This ancient CVE [1] is unversioned ("*") in NVD DB.
+"mod_sqlpw module in ProFTPD does not reset a cached password..."
 
+Looking at history and changelog, the module was removed [2] around
+the time when this CVE was published, likely as reaction to this CVE.
+"mod_sqlpw.c, mod_mysql.c and mod_pgsql.c have been REMOVED from the
+distribution. They are currently unmaintained and have numerous bugs."
+
+Note: It was later re-introduced as mod_sql when it got fixed under
+new maintainer.
+
+[1] https://nvd.nist.gov/vuln/detail/CVE-2001-0027
+[2] https://github.com/proftpd/proftpd/blob/v1.3.8b/NEWS#L3362
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 03a1b56bc7ce88a3b0ad6790606b0498899cc1e3)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-support/links/links.inc     | 2 ++
- meta-oe/recipes-support/links/links_2.29.bb | 2 --
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/links/links.inc b/meta-oe/recipes-support/links/links.inc
-index d772d54aff..a255f0ba6b 100644
---- a/meta-oe/recipes-support/links/links.inc
-+++ b/meta-oe/recipes-support/links/links.inc
-@@ -14,4 +14,6 @@ PACKAGECONFIG ??= ""
- PACKAGECONFIG[bzip2] = "--with-bzip2,--without-bzip2,bzip2"
- PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,xz"
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+index ec38fb54e1..2488c30d53 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+@@ -23,6 +23,8 @@ S = "${WORKDIR}/git"
  
-+CVE_PRODUCT = "twibright_labs:links twibright:links links:links"
+ inherit autotools-brokensep useradd update-rc.d systemd multilib_script
+ 
++CVE_STATUS[CVE-2001-0027] = "fixed-version: version 1.2.0rc3 removed affected module"
 +
- inherit autotools pkgconfig
-diff --git a/meta-oe/recipes-support/links/links_2.29.bb b/meta-oe/recipes-support/links/links_2.29.bb
-index 311d84e484..e3a15d1819 100644
---- a/meta-oe/recipes-support/links/links_2.29.bb
-+++ b/meta-oe/recipes-support/links/links_2.29.bb
-@@ -9,5 +9,3 @@ EXTRA_OECONF = "--enable-graphics \
-                 --without-directfb --without-pmshell --without-atheos \
-                 --without-x"
- SRC_URI[sha256sum] = "22aa96c0b38e1a6f8f7ed9d7a4167a47fc37246097759ef6059ecf8f9ead7998"
--
--CVE_STATUS[CVE-2008-3319] = "cpe-incorrect: The recipe used in the `meta-openembedded` is a different links package compared to the one which has the CVE issue."
+ EXTRA_OECONF += "--enable-largefile"
+ 
+ PACKAGECONFIG ??= "shadow \
 
