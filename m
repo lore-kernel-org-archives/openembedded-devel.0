@@ -2,161 +2,92 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 922B6CEB2F0
-	for <webhook@archiver.kernel.org>; Sat, 15 Nov 2025 18:11:30 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13804.1763230290081488196
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A465CCEB2F7
+	for <webhook@archiver.kernel.org>; Sat, 15 Nov 2025 18:18:20 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13792.1763230692952751064
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Nov 2025 10:11:30 -0800
+ Sat, 15 Nov 2025 10:18:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CXzBedmw;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-42b31c610fcso2630813f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 15 Nov 2025 10:11:29 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OhToBi1i;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-42b3c5defb2so2049502f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 15 Nov 2025 10:18:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763230288; x=1763835088; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=W8kgIBw4gVZega1QYKV28kMTj8qgjd1iOX25z5eXA9M=;
-        b=CXzBedmwQGNSEHZaZ35nmKMYexBtgWn5rvXkvtbdukJ86UibUmtV1vjFA0fPARDco7
-         Ks2+f1nz+z3oURw2Zgsozydi2UphHTvj56AGOhQWhrjIvvTcA2FQjHpwRarq3cV2BAN4
-         buMuHlKzjyHKtUMBItN6jHz+5NzapmaLOlxJLY32QCT9gN+K4olO9DQNdM3ewNnUoL4v
-         3L6lybF14BUHntLH7rdFt20flmjD9j8WUukJ8OwvewJn+dZpW/FAmRHFSpryNmYOWxnL
-         Rb2zN9hXuc4THD3U84S+H6hWDAtitkKmNXGe05frtnAaR49ni218CjVmCCBpOC8ZeC40
-         dJfQ==
+        d=gmail.com; s=20230601; t=1763230691; x=1763835491; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=fRoJhrYJvHPc33u+XCGsF7+PtCkTwN4T6nCg0XN/B4E=;
+        b=OhToBi1iGPRHmhhIMJMLS4JUl598E46E8jzDSAv8abD1AaV6e1j8zY+xo9QazLbaBJ
+         jbrwzhgvb4l0YVf9+cRQVRzTOqIYU+76jazIA9e+lBqlAflHppXCjQUcc+s0DdEJHCy2
+         eY34YoFNiogOl/RWAxoeFXXnCzF63DN6Es+lQzNGG2PIJdWYh0LKPo0TsyuPjs1TF0Q/
+         5tLdfUf9r27XM4/dxz8vxR1zsAGRY3GytERRLDrf+tRg9x8r3tVXnVJfbeC+QBJJ3b9P
+         iupLgW57N6QBfD+OUaULfCqK9pWrN7khwvG/aZT9nHd/iD2dsbqC3U8XbSNgkndQ24c8
+         2qwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763230288; x=1763835088;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1763230691; x=1763835491;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=W8kgIBw4gVZega1QYKV28kMTj8qgjd1iOX25z5eXA9M=;
-        b=H8uWfh43IfV8oD48ook+b68q5L9G5Rgn5EGOkwk3sX9YdqHUGhKFqkpJx47ahzsv8j
-         KEyDLOcQ7ufiT/um44yq7pJ+G8mpfnFo5GG38yCQe5gDTpkTwOAlylD7bQncwsYbw37o
-         LwSGZXuHVE9aIHQpSVOsyOlMaWfB9F1aWQQj740idN9DNBPI+v72onQC99Zq4+LiMOyC
-         LWEVjOf8GZa8vYAEBJd0yIcKz+u/DtNA+Vzl1VA/DPR/4t+24NzIeyjSEGS43ZwnHZv+
-         lTi9aKxbVhSCXIvA+lv35DhViKrq3VbJnfobOlCHe3sCEIPcSk1uxe5NZn6c4I4TE8C6
-         heFw==
-X-Gm-Message-State: AOJu0Yy0Y54O4o9H7y5GtzThWLj5+DNI2AmRV36DMtuPYgCc1zmZ4edp
-	0PswgljSRG1X5ceRrwWa5MKMlouT0b9/AIJiXs1UdbIYsv8590og4d5l7oG4X34C
-X-Gm-Gg: ASbGncsbnfVFs0bS9qtmFny/L3IlP7CAFYLWpEl7MrsuJ4UF08UUuZp04JSVnG8llg7
-	+EmLHJzEsdvMUnhxCRcdqtlTq0GaiU/PpdD4SQO5MtUT/Zi2YkJW1oZM1YU0ejYEx7ojfMiSFAQ
-	yVyq47LAd7Gd5jBttaqIe6CSIBNa0mn1gUBVP/xy89mUkQy974D2D76Lp2I3B0RehisfQwu4/Br
-	5DNmBkkq1Ns4sFS9k0KtfYxzEQ8NKHACw8+llmRWdSjXWck6VPJCEBn89smGyxgOIBVzJDOi1Tq
-	J2VYKEFeCZtuGubSVGtlK0nyLNBJpbfaaDdVa6jdB3W3BvAbsHwag80Cfbw4kjUsOKcO2Zdf8fb
-	DvA1nKEKa1vvCkSHdxx3CXKCs6ULeSJoBnRxxfXfksrsb/URf60JTdVjwzkgOmBMZJ6YOFBxT2x
-	YLDrrXLAAI8zkCgwhUfY4=
-X-Google-Smtp-Source: AGHT+IGD5g43czF4b30wKK1G37dnEC9gmvUXb/7mW9QKsLwf4SZtFUwtXHu3XDfZkw2/qoSm/DZRfg==
-X-Received: by 2002:a5d:5f50:0:b0:42b:300f:7d8d with SMTP id ffacd0b85a97d-42b593869c6mr6779555f8f.34.1763230287994;
-        Sat, 15 Nov 2025 10:11:27 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b53e84b12sm17899379f8f.15.2025.11.15.10.11.27
+        bh=fRoJhrYJvHPc33u+XCGsF7+PtCkTwN4T6nCg0XN/B4E=;
+        b=nNQz1deZCsdeGawvhnMxZDcRUoQVtNpOhe4qrkv7NvBDBf3ZBQQxSdmMax8Kxu2ADs
+         5LJB9jHK2fccP0YSov+LB2RMLO7odvGZ1+Ns+WJIuzfrbZvmAXfV2U3zie4d7Y5mP2Lh
+         1rnNRXY4wArT/rR5KEJgnosTM22NQbvwmo0oV6F3L9L4EDTUkGuyUusWN3wD5ZVYm5h5
+         PnBQg8ZlkNUaG6C9F1aYLOVip0Ob7nPw3KJ3ZwV2JDMslaQy/gS6Oo0PcRTBiPGZQYSV
+         yOBu+l4Coj0PFIQh2aM9E8SufdvoL7qlVL4jGMPNSMtden6fiTJHG2pTbPLK46xtZLTi
+         3oAw==
+X-Gm-Message-State: AOJu0YytXPpP0kKsrcTWa9fNJz7osTHhI2ZbKHZc4AJ0VUYhGgQ4aBaa
+	XoYX6hMYAJzpoLuTEmzEFxPfTHFSD8Fo7ikKxdt1J3uicHcUTFwSVRVKkcuKE+gb
+X-Gm-Gg: ASbGnctfJmF1lB/qEb/XgK42DG02Ta5x15DZoQKNi5heu9DWFsbiTdFdKO62aRYE6cA
+	cj/E0kcmW+/Q6rUwbkSQ/F9ajaGoU2x5yDnjyiq8FJEVDktTcLRYNF0jZULSUjfGuo74HQiI5xk
+	X5jKqvSG29Eauzympvoy7t+/euFr9fhTjAXgyJ/sd8/9inZDwtrupUSiJWRDWwHQWlWVHJaeQq1
+	KsK6523to329Qlo+b0BxOdV5qwA/e5jvuIASLQ41oVenrhoP4EsY8ijqtkBmrhFDvZpEA1F+UyJ
+	+Lah9TG35Tu/5cFIGMeWusQS9Y7ZX4iIKsgfwfxUjzi50a9YSsJjcj0cMqAgpQOO3B9A7gmUYAG
+	ktQtF6Qoiy2a24bEk5Txr4lF9jx048/qB9S//oBx/+1Lamb8mIp5bWZ0YplwZU3ejQfR84UJzFn
+	JWbeqiB7Ar
+X-Google-Smtp-Source: AGHT+IHzUN6xJBFg83ljx/rNlj0dJGVxV4XJ87tihhfFC7+HajauYDc9Zl0YOMoedcHK7hswFAy04A==
+X-Received: by 2002:a05:6000:400a:b0:429:d170:b3ca with SMTP id ffacd0b85a97d-42b5939b17emr6432538f8f.55.1763230691201;
+        Sat, 15 Nov 2025 10:18:11 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b53e7b12asm17344186f8f.10.2025.11.15.10.18.10
         for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 15 Nov 2025 10:11:27 -0800 (PST)
-Message-ID: <627ca98d-8aa6-4c7f-80c5-0453f811dee8@gmail.com>
-Date: Sat, 15 Nov 2025 19:11:26 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH 2/4] yasm: patch CVE-2023-59579
-To: openembedded-devel@lists.openembedded.org
-References: <20251115123843.708911-1-skandigraun@gmail.com>
- <18782E73673BFCC1.1143620@lists.openembedded.org>
-Content-Language: en-US
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 15 Nov 2025 10:18:10 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <18782E73673BFCC1.1143620@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH v2 1/4] yasm: add alternative CVE_PRODUCT
+Date: Sat, 15 Nov 2025 19:18:07 +0100
+Message-ID: <20251115181810.1262158-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.2
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 15 Nov 2025 18:11:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121737
+ <openembedded-devel@lists.openembedded.org>; Sat, 15 Nov 2025 18:18:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121738
 
-Please ignore this -  made a typo in the CVE id at multiple places - it
-is 29579, not 59579. Will send a new version.
+There are multiple vendors for yasm:
 
-On 11/15/25 13:38, Gyorgy Sarvari via lists.openembedded.org wrote:
-> Details: https://nvd.nist.gov/vuln/detail/CVE-2023-29579
->
-> The patch was taken from Debian:
-> https://sources.debian.org/patches/yasm/1.3.0-8/1000-x86-dir-cpu-CVE-2023-29579.patch/
->
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ---
->  .../yasm/yasm/CVE-2023-59579.patch            | 39 +++++++++++++++++++
->  meta-oe/recipes-devtools/yasm/yasm_git.bb     |  3 +-
->  2 files changed, 41 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-devtools/yasm/yasm/CVE-2023-59579.patch
->
-> diff --git a/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-59579.patch b/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-59579.patch
-> new file mode 100644
-> index 0000000000..564b27f5e5
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-59579.patch
-> @@ -0,0 +1,39 @@
-> +From 81c1b7b0a28f052eaadddcb010944bf67e6ae257 Mon Sep 17 00:00:00 2001
-> +From: Gyorgy Sarvari <skandigraun@gmail.com>
-> +Date: Sat, 15 Nov 2025 13:24:21 +0100
-> +Subject: [PATCH] Make sure CPU feature parsing use large enough string buffer.
-> +  Fixes CVE-2023-29579.
-> +
-> +Author: Petter Reinholdtsen <pere@debian.org>
-> +Bug: https://github.com/yasm/yasm/issues/214
-> +Bug-Debian: https://bugs.debian.org/1035951
-> +Forwarded:  https://github.com/yasm/yasm/issues/214
-> +Last-Update: 2025-04-30
-> +
-> +This patch is taken from Debian:
-> +https://sources.debian.org/patches/yasm/1.3.0-8/1000-x86-dir-cpu-CVE-2023-29579.patch/
-> +
-> +CVE: CVE-2023-59579
-> +Upstream-Status: Submitted [https://github.com/yasm/yasm/issues/214]
-> +
-> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> +---
-> + modules/arch/x86/x86arch.c | 5 +++--
-> + 1 file changed, 3 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/modules/arch/x86/x86arch.c b/modules/arch/x86/x86arch.c
-> +index bac11774..58327958 100644
-> +--- a/modules/arch/x86/x86arch.c
-> ++++ b/modules/arch/x86/x86arch.c
-> +@@ -165,8 +165,9 @@ x86_dir_cpu(yasm_object *object, yasm_valparamhead *valparams,
-> +                 yasm_error_set(YASM_ERROR_SYNTAX,
-> +                                N_("invalid argument to [%s]"), "CPU");
-> +             else {
-> +-                char strcpu[16];
-> +-                sprintf(strcpu, "%lu", yasm_intnum_get_uint(intcpu));
-> ++                char strcpu[21]; /* 21 = ceil(log10(LONG_MAX)+1) */
-> ++                assert(8*sizeof(unsigned long) <= 64);
-> ++                snprintf(strcpu, sizeof(strcpu), "%lu", yasm_intnum_get_uint(intcpu));
-> +                 yasm_x86__parse_cpu(arch_x86, strcpu, strlen(strcpu));
-> +             }
-> +         } else
-> diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-> index abaeef4db3..f4f84a21f7 100644
-> --- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
-> +++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-> @@ -14,7 +14,8 @@ SRC_URI = "git://github.com/yasm/yasm.git;branch=master;protocol=https \
->             file://0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch \
->             file://0002-yasm-Use-BUILD_DATE-for-reproducibility.patch \
->             file://0001-bitvect-fix-build-with-gcc-15.patch \
-> -"
-> +           file://CVE-2023-59579.patch \
-> +           "
->  
->  
->  inherit autotools gettext python3native
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#121723): https://lists.openembedded.org/g/openembedded-devel/message/121723
-> Mute This Topic: https://lists.openembedded.org/mt/116306636/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+$ sqlite3 ./nvdcve_2-2.db "select distinct vendor, product from products where product = 'yasm';"
+tortall|yasm
+yasm_project|yasm
 
+Both products refer to the same application
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ meta-oe/recipes-devtools/yasm/yasm_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+index 68895a1697..abaeef4db3 100644
+--- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
++++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+@@ -33,3 +33,5 @@ do_configure:prepend() {
+ CVE_STATUS_GROUPS += "CVE_STATUS_HASH_UPDATE"
+ CVE_STATUS_HASH_UPDATE = "CVE-2021-33454 CVE-2023-31975 CVE-2023-37732"
+ CVE_STATUS_HASH_UPDATE[status] = "fixed-version: patched in current git hash"
++
++CVE_PRODUCT += "tortall:yasm yasm_project:yasm"
 
