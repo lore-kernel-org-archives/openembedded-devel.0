@@ -2,92 +2,143 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8983CCEB2D0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 860D3CEB2CF
 	for <webhook@archiver.kernel.org>; Sat, 15 Nov 2025 12:38:48 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7747.1763210326556755640
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7731.1763210326940071294
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Nov 2025 04:38:46 -0800
+ Sat, 15 Nov 2025 04:38:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aWbhHyfE;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4779a4fc95aso1898955e9.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bRMKLp6X;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-42b31507ed8so2235837f8f.1
         for <openembedded-devel@lists.openembedded.org>; Sat, 15 Nov 2025 04:38:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1763210325; x=1763815125; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fRoJhrYJvHPc33u+XCGsF7+PtCkTwN4T6nCg0XN/B4E=;
-        b=aWbhHyfEusN5mF6m0VBk0Hnq8vI7OR2wdbY6JFKrxAOScSGsgXACliygxq3TImorbM
-         8hsORN56aEg/Q7aZ5CL3mQcOQNynawQEVj4mKv0ihziu7DwZ5TJHJmncLogSZB5qpEeW
-         CUDinZGnoMvQexpOGXonTKvuQm1rgyp5RFySCGJDc/jIHJIow99SNY+zacZbkwmZzDNq
-         IhqQjxRXMid0qdlJEfxJB8s1KT6BMbHureY0Q8jOg8PnaUGrleBYjAdMzddcQn43tAfs
-         a8WHX5AeVqLuJAjxJqJzg+pI51hY2QmfFO/n+Kb8DSz/u+eUoeB3G9SlH2u2qBCJzct5
-         CFGg==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=EHxf2eMnfq/+DZiBDLAE3c5ORs4eShe1/ihqwYj/zqk=;
+        b=bRMKLp6XSi8Ktq8V+J9+NBKpv3GYO9Wm1thedcBZA7qX6NXzFbHBnOF1/8yqdu8qAp
+         +Y7n7CThT7Df4lqigCXBvKYOYYy+rvFwZjOuA+qmCs4n2gx90Mx6MBUnPnhioxmmyQH+
+         se6DXZCXsaE516c47ReaiJxZAJN8zN68iHfGGD/hWCAtuByH1Z8XRsGnA3C/NeYxEEn/
+         1p2MOIPDaV1HDv42LTojTiXbfB6HnW19nQ0yXQ5+8XLiUvYbAJRzr9CGZJ3gpDpRxAfC
+         kMglstAM/8w+F5FRpTID5o3ypS1NYuBHWOT1baWoS4bWqScR8UrqDOwsg8N4ruE5X9FY
+         2Giw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1763210325; x=1763815125;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=fRoJhrYJvHPc33u+XCGsF7+PtCkTwN4T6nCg0XN/B4E=;
-        b=RJl4O2iB17k5rgIJzUMo6lVTOeKwW2/dYPiRwkQzyLkr4VzDh/zdJWKrfum9ei8TLk
-         wLTg/OYcqt+PcAfiHyCTGpZGO9PSJjKH86mYDCJJ3ZWDQA4MWiSR19+G1qCqnyIP0x4l
-         V/HpgFdVng8n3+MyFlPcektpQeUWzlcqmMcn85IVo0Da9CZzzaoSopjVPig+sPHE5VDw
-         IqvMyu2yfm47bZ2TmGpP0Fs+O4KApPQGg6Dn2K5NZaNVmBdYIGnbXqWD5CsvGl4w7eYE
-         L5eP//OPnsx5vHc9z/rvvkFDRHfny7Q8f/JokJjZVFwSWupUUSjuQoS84q2rthKuLtT6
-         9JNA==
-X-Gm-Message-State: AOJu0YwUhUD+9Mt+9w8ABWE7ppWjiNOwsyqTy439lqL/W30YWrZlIC2B
-	oHSk+YRpcoq+OQCHbn1Ge6gyZWX5pGUkh3G4xH2YtnyF1N/AoGk5Vz33jiYTIEEv
-X-Gm-Gg: ASbGncsZRZXKZmMV7XnlB428+mjtzLV5cspaUN1j4O1WSfNfPwD58Le0cHN2ypbmqly
-	xWJ/nn7Dj07AS5ICEaR8oDLqj+FDTXfOsvj/2ezlr3p8zF1euo+DvYgD9r8C+YCG1Av7+1mmvyE
-	qYckdnv1zLsp1F5ajM8GnycdjjNxGT9uuwWhIBEg4lcITKCn/v9q/rQqSv9rrDbxpS4WiUzOemZ
-	KgZesONLEMCZgLCLvPdkt+BXoGxRtlPeERAFxCoop0t8bfqGKH8nrvGNg6cdMpnQey5HCkMAh/q
-	8Q8YhBCt4nGUJQV+f9zSMaxZFTNeOmjZI6zH6mcjqPysV3luqjwDF+ztTpHqOg/zZ86T1uYr3Zv
-	PH6Ni6NLKCxxKmtA7hV7MI0EHLxQobm3wKMBuG7cDOc6cyKUCRXue5gNvyky7/ZQ6dhWcuEdZFQ
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=EHxf2eMnfq/+DZiBDLAE3c5ORs4eShe1/ihqwYj/zqk=;
+        b=VbDuCe45kVnuAyUpEC0IY2lonxHSr1W69qA+z5UPf5cbp3RokWt9cxhnfFy0feL5F3
+         DBhKehFdMJlz+Ol38rkrfNPwHI7x3CK+PWHjzHEsVubOMobPmXADY97gM4CfdzMEw4Bf
+         /lAFIDVa7PEv73MDeainOEjnUEGzhwUCXGDL1IVsAqmgC/hMu7wGnqvcOF/lG/u3hu0A
+         YTvV4AnAeNRAUYZT7v4dYpWqi57OpOY7lmo6yjUVmgcULQ05yYkw02PLCA5PjThfpq6Q
+         1I7iMtOduZOp7x8pTR/Q9ZOJ4iGO74tnnTRa/QQJ49VqFIA4TFamVFMBT1grQi66+5Yg
+         eBfw==
+X-Gm-Message-State: AOJu0YxhqSb1dpdmGbZU1ZRZTM6lE80QlfMLI6D59WiSylGPNi3VmEo6
+	24kfs1B/AzPenInMR6Hgmv8vhGkkgb4vcXwD1yqNYyVRbsLPhz47rf5f2Xw7Scj1
+X-Gm-Gg: ASbGnct9hAw9fz553tfY+44J82MB1Y1rFVDM3yk1qRL6uHDaGRrSf4WYOHj9wh/EsqL
+	kZLpbazAfP+FHR2l2KvZoC09fctcSMQltxUVcmeP8lu5czN8q6QwThoOZPIw+m30aOhLeZlkYDR
+	+ChQlBaEi4xsC4QGTkSBZX/iuw3PDhWHBGpLMpdLcgqNJfQS5F6DsGPRx5t0sAu7ZhXeywwmEXA
+	YqRVUjinFP9+20RHFhq++AxYnUcjUgT53LOccbMuEUWWJDhrKJjNHXAoYa3Esw1TffLdtt1RHfi
+	wbtmJ7XIVG/ht2DiPbMeJHSnPv4vgDI0SNpAjy5+5mNQ+sd+9hRZbnFv3QxY3fYJekMviePTejV
+	jij2uQ41uy/qIkUunVSlTSPNEoGwyfDuoPuCaSz8jUjvS5EQCLTJHnYTNdMqui3C6SR5UxTepZA
 	==
-X-Google-Smtp-Source: AGHT+IHXfTKTme4RDAE4er2TG1qADw97gtvSWhPMuPtn88PHrh9kDkP6gEGAMxGk1E4ib4K/GqnKdA==
-X-Received: by 2002:a05:6000:200c:b0:42b:3108:5671 with SMTP id ffacd0b85a97d-42b528452c9mr10007577f8f.29.1763210324559;
-        Sat, 15 Nov 2025 04:38:44 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEDuVvzrme3mVaWR3ygzayxfkwmIH7lc3XzsAeJ2bGOi5fkS7U5ewar8n7CcJO/+fPQUt8YBw==
+X-Received: by 2002:a05:6000:25c8:b0:429:cda2:9ffd with SMTP id ffacd0b85a97d-42b59342d0dmr5445590f8f.9.1763210325171;
+        Sat, 15 Nov 2025 04:38:45 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b53f17cbfsm15673572f8f.35.2025.11.15.04.38.43
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42b53f17cbfsm15673572f8f.35.2025.11.15.04.38.44
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sat, 15 Nov 2025 04:38:44 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/4] yasm: add alternative CVE_PRODUCT
-Date: Sat, 15 Nov 2025 13:38:40 +0100
-Message-ID: <20251115123843.708911-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 2/4] yasm: patch CVE-2023-59579
+Date: Sat, 15 Nov 2025 13:38:41 +0100
+Message-ID: <20251115123843.708911-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.51.2
+In-Reply-To: <20251115123843.708911-1-skandigraun@gmail.com>
+References: <20251115123843.708911-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 15 Nov 2025 12:38:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121722
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121723
 
-There are multiple vendors for yasm:
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-29579
 
-$ sqlite3 ./nvdcve_2-2.db "select distinct vendor, product from products where product = 'yasm';"
-tortall|yasm
-yasm_project|yasm
-
-Both products refer to the same application
+The patch was taken from Debian:
+https://sources.debian.org/patches/yasm/1.3.0-8/1000-x86-dir-cpu-CVE-2023-29579.patch/
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-devtools/yasm/yasm_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../yasm/yasm/CVE-2023-59579.patch            | 39 +++++++++++++++++++
+ meta-oe/recipes-devtools/yasm/yasm_git.bb     |  3 +-
+ 2 files changed, 41 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/yasm/yasm/CVE-2023-59579.patch
 
+diff --git a/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-59579.patch b/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-59579.patch
+new file mode 100644
+index 0000000000..564b27f5e5
+--- /dev/null
++++ b/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-59579.patch
+@@ -0,0 +1,39 @@
++From 81c1b7b0a28f052eaadddcb010944bf67e6ae257 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Sat, 15 Nov 2025 13:24:21 +0100
++Subject: [PATCH] Make sure CPU feature parsing use large enough string buffer.
++  Fixes CVE-2023-29579.
++
++Author: Petter Reinholdtsen <pere@debian.org>
++Bug: https://github.com/yasm/yasm/issues/214
++Bug-Debian: https://bugs.debian.org/1035951
++Forwarded:  https://github.com/yasm/yasm/issues/214
++Last-Update: 2025-04-30
++
++This patch is taken from Debian:
++https://sources.debian.org/patches/yasm/1.3.0-8/1000-x86-dir-cpu-CVE-2023-29579.patch/
++
++CVE: CVE-2023-59579
++Upstream-Status: Submitted [https://github.com/yasm/yasm/issues/214]
++
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ modules/arch/x86/x86arch.c | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/modules/arch/x86/x86arch.c b/modules/arch/x86/x86arch.c
++index bac11774..58327958 100644
++--- a/modules/arch/x86/x86arch.c
+++++ b/modules/arch/x86/x86arch.c
++@@ -165,8 +165,9 @@ x86_dir_cpu(yasm_object *object, yasm_valparamhead *valparams,
++                 yasm_error_set(YASM_ERROR_SYNTAX,
++                                N_("invalid argument to [%s]"), "CPU");
++             else {
++-                char strcpu[16];
++-                sprintf(strcpu, "%lu", yasm_intnum_get_uint(intcpu));
+++                char strcpu[21]; /* 21 = ceil(log10(LONG_MAX)+1) */
+++                assert(8*sizeof(unsigned long) <= 64);
+++                snprintf(strcpu, sizeof(strcpu), "%lu", yasm_intnum_get_uint(intcpu));
++                 yasm_x86__parse_cpu(arch_x86, strcpu, strlen(strcpu));
++             }
++         } else
 diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-index 68895a1697..abaeef4db3 100644
+index abaeef4db3..f4f84a21f7 100644
 --- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
 +++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-@@ -33,3 +33,5 @@ do_configure:prepend() {
- CVE_STATUS_GROUPS += "CVE_STATUS_HASH_UPDATE"
- CVE_STATUS_HASH_UPDATE = "CVE-2021-33454 CVE-2023-31975 CVE-2023-37732"
- CVE_STATUS_HASH_UPDATE[status] = "fixed-version: patched in current git hash"
-+
-+CVE_PRODUCT += "tortall:yasm yasm_project:yasm"
+@@ -14,7 +14,8 @@ SRC_URI = "git://github.com/yasm/yasm.git;branch=master;protocol=https \
+            file://0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch \
+            file://0002-yasm-Use-BUILD_DATE-for-reproducibility.patch \
+            file://0001-bitvect-fix-build-with-gcc-15.patch \
+-"
++           file://CVE-2023-59579.patch \
++           "
+ 
+ 
+ inherit autotools gettext python3native
 
