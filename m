@@ -1,103 +1,96 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <t.f.g.geelen@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF500CEBF88
-	for <webhook@archiver.kernel.org>; Sun, 16 Nov 2025 01:10:21 +0000 (UTC)
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1222.1763255414468302527
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE416CCD19A
+	for <webhook@archiver.kernel.org>; Sun, 16 Nov 2025 22:50:28 +0000 (UTC)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3925.1763333424796750331
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 15 Nov 2025 17:10:14 -0800
+ Sun, 16 Nov 2025 14:50:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OH1L74RS;
- spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-3438231df5fso3719616a91.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 15 Nov 2025 17:10:14 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LVMwfqX8;
+ spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: t.f.g.geelen@gmail.com)
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-b72cbc24637so631837466b.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 14:50:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763255413; x=1763860213; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763333423; x=1763938223; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hnaRlJnqb+EC8l+VdDCUIxu565P/lrMaAxxflB1eBvY=;
-        b=OH1L74RSOdy8eV7HDEKi/uIGZiHeU/MuSRtMcF35sXhgYQPe8bnihLnJQsQ3noaqti
-         CArZ5vcANOtCUsdG4peVN9bl68PbSMr2qteF+HZLvmAEgujyCwAGLrsqGRwpHUSKIHK/
-         LXYOp/AtQm1KuvDhpBZTLHNmNtuz7no6oahoyq8zsQ1npYz2FaqpErydDssWJ/Y09jn2
-         VH603XbFM5Z3ggFBd3FVSChysAbN2WolNC0GEdSaPMu0c2+elO4HggxobfMjby8tEkIY
-         YFjvHjY00bKBIY0qzjN29zHtguOEGigakxbwP/PKDTO8QmMQDQvFG8sDKdkX5CzvVDvS
-         pu4g==
+        bh=lEmhm5jNyO6M5tKgCCzXF5kMsBR27yn1X7cNksuB13A=;
+        b=LVMwfqX8a2XDDQsPjPLSTchyyydvCVxQYM+v1ADCqoOk0vSKPf6ngnkfT6ByF/O4yV
+         bF0CXl1U/jkq+ukI8Rll4CbHy5T+bODeIYFCnG5pyhO/vox557GFnGRnr14NOJ//Rw+b
+         ciUJBFTyqNGihce5NGo6algoPBO0ISDe/eLs4jx/eeX1a3tW9QXCiCHC0WIhjBcNgKsp
+         wBgjuq6meTYiKDQIlzCqjg/tZvJNnav96kbn8iHCIt/G4uMGrQ1tWABkaMV5Bg0oEEzW
+         m7L1/l2MUJsvBwuYUqsFEKF6YF7KApL/NYS+3UI/WVj4BC/rhTcSqLh2crkbQiSyRzsi
+         0k9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763255413; x=1763860213;
+        d=1e100.net; s=20230601; t=1763333423; x=1763938223;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=hnaRlJnqb+EC8l+VdDCUIxu565P/lrMaAxxflB1eBvY=;
-        b=KWSRlcu5aueK4Ax+hN2A3a168s0I96SlbHhjgR7X7PFIQH4QYFi2Gv+cAVorQcoHkZ
-         uKO1gXCzfiWbti3iKMtMpWqWEDrtp9Qj+prs1Midrv1rdyDdNX8kYVvW2VRuii9K0rQu
-         Raa16DENB8cEjwDe50mWxAVNAYXEv/2TFAVcD3Od821lOlUFp/LheUx5qy7dAWmA675P
-         o1pgRJWWPXs5zTD33Pmr+s1/l6Bjy3pJr7Fu/G/87Z9vOvK8g/nRcs1aJsLjIX9kkuOu
-         L33ftxgOPAMRlCtXK3yLqgu2fwOJnedfaCDRdMoA/BsMDloTKWUcizjDpYQ3/RnZE7I+
-         NtGw==
-X-Gm-Message-State: AOJu0YwThsbu+UpLmviCLbc4kXA4Vp/smEmJBYIiELqmQBzCanNJKAFr
-	8kCiwwdKasq0TM5UsDHmCqNvI03Pf+43l6+XaaFKsLdDNX/9jWQh7W9TNRoi9SaD/3c=
-X-Gm-Gg: ASbGncsGX771NsB2J3OJo1zdZozUpNmNEqzAMJZ2eWzdFY2A2kO8wkXjxiOTTAEUkSW
-	Oojk0Jnr3GLPq90APGEVE7UrrWIxoba42lQSGvcLYMVuxuwJWXJYTHa/Fj0QoNM12Tz6tyFj0gM
-	PkKb3V+UkESh6zpWyXPb+JNZrfZ06dKZQG08gML+Spw0wIReN8fTw4jxHyJaaT3Kr5QjDGL/5S8
-	oTF5bbbmmyOc+956LaZm4QAT8sjA7A8q+olz8+5yofLbTL2pdHXKdwQ+9oiPexaVybF4xxdflXq
-	FPbOZ66Cfl2gGU2YE85NmQdQTBUzbX775Qvs6PP0ey2pqUmb3BqGlbFpQ0D3gpg9cPnGWZ+iBci
-	pufbMP+RO1h+sRS050MjjNgHMEoiZBP+2oicqsLXRw6d9yzpMp4iYptmszSQWm02tJKEaGebQlK
-	Z3V6+cVOBQTNHzVOzAyzM1NXWFUNbBsA2H47H2CoZpa0JkA33lCBy9GUBWl/eWvPmNCnA2Y1+s3
-	un3tMHNpviKYRlmCenmTw==
-X-Google-Smtp-Source: AGHT+IFoLPpY3iDfhNC3zi7mtckkSYBHLe0wctzLhUOF8xhnfds9srd3HPGkPENxdV413+m/5GK35g==
-X-Received: by 2002:a05:7022:ef01:b0:11b:9386:7ecd with SMTP id a92af1059eb24-11b938682efmr2357773c88.42.1763255413362;
-        Sat, 15 Nov 2025 17:10:13 -0800 (PST)
-Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::888a])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11b060885eesm28842460c88.1.2025.11.15.17.10.12
+        bh=lEmhm5jNyO6M5tKgCCzXF5kMsBR27yn1X7cNksuB13A=;
+        b=bTqloOUaai+UsMIH5HXcAjbgN4Co/JmOGQWxi7JZ9w7QpSZmtNFyOG2YwdHsDJk9T3
+         RiuLLdW0c2iiqz7JaE/+m9l4z5QnZFptK35OSbKxhJWpPFsHDSCMlURUp0jx+5ci8P++
+         DHhgeLSgYGjJDIK6+GIVCZY8uPPfWarPbYMWb8gideT5WRgW6u6rFgQpeZUn4iva3tnP
+         0uabkXSK8oA0YJHvHQlzRGUw3ptPFc35yLJZugeSBO4vbO2WB1VSWIchVI4TSwxUZJFB
+         oELd6worBtog1UckaZo6cSFz6dkStbKKoLouM8tbv0RfdyRVpuk6QCyJWsPsNldOjDby
+         4s7w==
+X-Gm-Message-State: AOJu0Yy33s4p7ZG3+7BxTc6sWAowLEuUGS8XjcHsCpyjUOqQhSHCgJ8+
+	Qg3AdXb+ZzoyGic3DiauLUfCNQl8P/u5sparZA0IO05cjCGAN6DNM7AFytvjQQ==
+X-Gm-Gg: ASbGnct9vVHXHYLQpMF43gSHqAgguqovlvJ2MCcr5do8M/1LUitmReeFXiEGdwlO9l9
+	NMhYzhpWGRPuB94LFbcitEOYcMUUKHktw6TzTqu7MbaCZdgbnVhzELjxPLx3rsAKmUBsABwyJfW
+	Y8ufLi16Hm5NXinQqw6RiL0TWDSvakwTFS8tMwd7VLzF3JZD7Getqj6Fbd/kEbynqjWPkySepYC
+	uzpTK6TR2gVQzsX9PkJh68AqDQ9gWBGP3oj6yh5ZtlEd9BCrKE7pRaUvRPKfEKT5rQR4nlzI2tK
+	fQUvETLvWdwtwprGFrz43XkfSIwHzKh7cYr+Ktgs02wVvk5uv1YG3ENzIl42T5/VtuG17GBABex
+	k5N5EOY3S8xv7XnK0IRiyKGXDHT+FKG/fmvuKCw9aNeKN+GMdTb8K7HtliIY0DeVTC/S/WCtLAu
+	43jQ+PzN2ElqMjED+aXrO2suDi9UB8b89CBzDoAqp27W4kDn9fv8Eh5KUeE8A2OM8X1q2WpZaXQ
+	Zh9u4t2NvO2eA==
+X-Google-Smtp-Source: AGHT+IEFfnIuNTdbI6KOSegByyCl+aoOe1zxJS8WWTJ/n/8CE6KUp/bmOtYhLRRMTXN0WPe7A1+M+w==
+X-Received: by 2002:a17:907:980b:b0:b72:eaba:aac2 with SMTP id a640c23a62f3a-b73678be1admr988256966b.26.1763333422678;
+        Sun, 16 Nov 2025 14:50:22 -0800 (PST)
+Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b734fa811e2sm942983566b.5.2025.11.16.14.50.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 Nov 2025 17:10:12 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Sun, 16 Nov 2025 14:50:22 -0800 (PST)
+From: Tom Geelen <t.f.g.geelen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] googlebenchmark: Disable c2y extentions diagnostics
-Date: Sat, 15 Nov 2025 17:10:10 -0800
-Message-ID: <20251116011010.924811-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.51.2
+Cc: Tom Geelen <t.f.g.geelen@gmail.com>
+Subject: [meta-python][PATCH 1/2] python3-orjson: 3.10.17 -> 3.11.3
+Date: Sun, 16 Nov 2025 23:50:12 +0100
+Message-ID: <20251116225013.2063395-1-t.f.g.geelen@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 01:10:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121748
+ <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 22:50:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121749
 
-clang-22 now finds __COUNTER__ and it complains
-
-| sources/googlebenchmark-1.9.4/src/benchmark.cc:15:
-| sources/googlebenchmark-1.9.4/include/benchmark/benchmark.h:1461:30: error: '__COUNTER__' is a C2y extension [-Werror,-Wc2y-extensions]
-|  1461 | #if defined(__COUNTER__) && (__COUNTER__ + 1 == __COUNTER__ + 0)
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
 ---
- .../recipes-support/googlebenchmark/googlebenchmark_1.9.4.bb  | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ .../{python3-orjson_3.10.17.bb => python3-orjson_3.11.3.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-orjson_3.10.17.bb => python3-orjson_3.11.3.bb} (84%)
 
-diff --git a/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.9.4.bb b/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.9.4.bb
-index 4558aa13d6..7f6755d51e 100644
---- a/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.9.4.bb
-+++ b/meta-oe/recipes-support/googlebenchmark/googlebenchmark_1.9.4.bb
-@@ -7,13 +7,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- SRC_URI = "git://github.com/google/benchmark.git;protocol=https;branch=main;tag=v${PV}"
- SRCREV = "eddb0241389718a23a42db6af5f0164b6e0139af"
+diff --git a/meta-python/recipes-devtools/python/python3-orjson_3.10.17.bb b/meta-python/recipes-devtools/python/python3-orjson_3.11.3.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-orjson_3.10.17.bb
+rename to meta-python/recipes-devtools/python/python3-orjson_3.11.3.bb
+index 7db76c9415..7fdd0fef9b 100644
+--- a/meta-python/recipes-devtools/python/python3-orjson_3.10.17.bb
++++ b/meta-python/recipes-devtools/python/python3-orjson_3.11.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/orjson/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=b377b220f43d747efdec40d69fcaa69d"
+ 
+-SRC_URI[sha256sum] = "28eeae6a15243966962b658dfcf7bae9e7bb1f3260dfcf0370dbd41f5ff6058b"
++SRC_URI[sha256sum] = "1c0603b1d2ffcd43a411d64797a19556ef76958aef1c182f22dc30860152a98a"
+ 
+ require ${BPN}-crates.inc
+ 
+-- 
+2.43.0
 
--
- EXTRA_OECMAKE = " \
-     -DBUILD_SHARED_LIBS=yes \
-     -DBENCHMARK_ENABLE_TESTING=no \
-     -DCMAKE_BUILD_TYPE=Release \
- "
-
-+# Needed with glibc 2.43 which also defines __COUNTER__ now
-+CXXFLAGS += "-Wno-c2y-extensions"
-+
- inherit cmake
-
- FILES:${PN}-dev += "${libdir}/cmake"
 
