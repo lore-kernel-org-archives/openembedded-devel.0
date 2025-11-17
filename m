@@ -2,1127 +2,458 @@ Return-Path: <saravanan.kadambathursubramaniyam@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D312FCEACEF
-	for <webhook@archiver.kernel.org>; Mon, 17 Nov 2025 03:27:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7637CE8D6B
+	for <webhook@archiver.kernel.org>; Mon, 17 Nov 2025 03:35:29 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1125.1763350078522846203
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1281.1763350522946238540
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Nov 2025 19:27:58 -0800
+ Sun, 16 Nov 2025 19:35:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Iew4i3EI;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=q1LO8s5X;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=34167910e3=saravanan.kadambathursubramaniyam@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AH2brLA365489
-	for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 19:27:58 -0800
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AH2tWFt1131187
+	for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 19:35:22 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=dfuZXop8/skGbU6H0E7t
-	/vzxe9Sa1e9rSFw7j3Xn2MQ=; b=Iew4i3EICLjVFswnsf226QhgMKoGiQBarWqe
-	/8bYM9HKJZRU46SEZsX6RLwX6nKpkzFp/SAszRYEVhAMyHPxsL/B7ZYU8qZ79xwB
-	+s1M9DRPN+KbgGW3uH3nNuHwtJZZ7CXMLjACMfm9Z2eGLm2nVA+BjI1iGN289y60
-	0c7dG5aLdh8xL5fe8WnsqcBs1a8BqXMJW4tkmO5aMRDom3tHvvJlqpCjUucLjwaO
-	Z1KW1KZ/euDJcloFa2XKeq9Ejuzs1lLGSKf2yMlFBPG0flGSQyle7cHrnQ//Z3U8
-	lyMLqU2lzEPO59bsh6qfPVgcEm8ZZ+jQiU7jqXOU12FC86y5iQ==
-Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4aeswj97g4-1
+	:mime-version:subject:to; s=PPS06212021; bh=cznC8rowU13AhQmaXVps
+	GnHK1AdnEf2777J1YFIb2Bg=; b=q1LO8s5X7ho7/RZ70JKKF0MEPwEAwLV+J5+G
+	5EgszsDJRk8fvETzM52d+rHMPUQHgaHiYYQktTdezPmiKueB+imNjQ2fMHpjHj5t
+	6mkcZswNe6VOEga2m0V+RIzpc4uuE/OrF+w1ZPrZdv9U8lEwvVl7n80p15j00bot
+	ii69SHVFBMDiOs/0GzsQD4N/rG2kPJdv3FmWJd10em35glhB2B9VcpB5MeQ6BQaf
+	Zsh0sZnthpO4VuQlXEdbSDVJ4HpcrwqdOCndf3VHCXixydiD5rw3EDC38XGw5YME
+	zUBtscHnrDG/KARUZ5jFyCjVRaof5Z1lqjBwcKRPETUKmF2YPA==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4aenp2sbrt-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 19:27:57 -0800 (PST)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 19:35:22 -0800 (PST)
 Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Sun, 16 Nov 2025 19:27:56 -0800
+ 15.1.2507.61; Sun, 16 Nov 2025 19:35:21 -0800
 Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
  ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Sun, 16 Nov 2025 19:27:55 -0800
+ 15.1.2507.61 via Frontend Transport; Sun, 16 Nov 2025 19:35:20 -0800
 From: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] python3-django: fix CVE-2024-56374
-Date: Mon, 17 Nov 2025 08:57:54 +0530
-Message-ID: <20251117032754.3885964-1-saravanan.kadambathursubramaniyam@windriver.com>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] python3-django: fix CVE-2025-57833
+Date: Mon, 17 Nov 2025 09:05:19 +0530
+Message-ID: <20251117033519.3893499-1-saravanan.kadambathursubramaniyam@windriver.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=BqiQAIX5 c=1 sm=1 tr=0 ts=691a963d cx=c_pps
- a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE3MDAyOSBTYWx0ZWRfX0XRjPX+9PGMV
+ USdoGoPaJAyrPOUNYt1p0SrGTs1JNASFoBrzsraRto+goqUWQQ3YQU8pYJ8/xiE3E7x9CMz+LO8
+ kT9FRQTTPRVI7trBiMAV58Dsyx4T1MuCcczbJdMvM1qvSN0FTwoTU9gCIPOYhRh52xvWVrtW4i9
+ n5koigCRLGf1Rjomjr2c+frWmwBYvAp1ZXw5kZX9rRjkWhChh6NQ2XYvCxuyAaegrJSwrUZGYcG
+ WYEiwwc1TowGhO7C2R1p75Ir6+xOQAViYxsmjDUvmiG3OfRt8RaItiwFKzJ5yGzXfpHcDM/hy4Y
+ aV7AJhX9EYx2AMfu4RwZErv7l0sT8LvvU5lfhiTdWBgO8dS7cLkgd6hV+s6vtB74nwQ3qEJNuly
+ nB0TSxnNzZUZwL9R+bVobbMuQfGNmQ==
+X-Proofpoint-ORIG-GUID: GPr9fY71h77g25hLMx3A8dNRRE27z7kW
+X-Proofpoint-GUID: GPr9fY71h77g25hLMx3A8dNRRE27z7kW
+X-Authority-Analysis: v=2.4 cv=Z6Xh3XRA c=1 sm=1 tr=0 ts=691a97fa cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
  a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8
- a=ArP49Si0AAAA:8 a=t7CeM3EgAAAA:8 a=l7q3S0e3bX1SYfcgVKMA:9
- a=1-XXx92sLnUDa7cx:21 a=glZLBWN_5F3qvmUqPDV8:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: hKJKVH0y4ERnFJNgpLqALU6F5RqJnblJ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE3MDAyNyBTYWx0ZWRfX6IOmbM5BfPE1
- dQ33VPCaL4WZcWt+KteP32eMdVCmJlFtQqJPqm49D12JBymrMQrX0Y0T+grRC5ADV2H8Muvl7Wi
- pzaQlKHgZporXLmpV3XQ5oxo9CEIRspebeZJ+1srlLNBy713AGV+3U4AwQAeKA8eBOze52wSMBw
- pHaNLxdBH97hj6g9ebL9aGppU0aplARGm1Ypw3vc16Sd/EMyatSBfGRVpvUMYZQZzzYbIRJtqaF
- 9snwGmn8bJB9889zVhdXBY65uuGZLSDa0nnUso6blvSDIK/W2PPGGt6QtUE0XBfMfcxELWlxH0a
- cOWS3UbsC9J0RAISdOdfhkKI5mMwihUnQrhJ/jrv3C7snSIZ52XyXOZpNQ1fsRRgbJU24FryWeu
- g/nA4ExxkFs5pgXl8b+cvzKNLz/Ykw==
-X-Proofpoint-ORIG-GUID: hKJKVH0y4ERnFJNgpLqALU6F5RqJnblJ
+ a=t7CeM3EgAAAA:8 a=VWcOui0qAAAA:8 a=ZWfh1_taU_7_8XZ8-UUA:9
+ a=FdTzh2GWekK77mhwV6Dw:22 a=QrT887owLcKFfbcY6Lji:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-11-17_01,2025-11-13_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 priorityscore=1501 suspectscore=0 adultscore=0
- lowpriorityscore=0 impostorscore=0 malwarescore=0 spamscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511170027
+ bulkscore=0 spamscore=0 phishscore=0 suspectscore=0 adultscore=0
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 clxscore=1015
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
+ definitions=main-2511170029
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 03:27:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121753
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 03:35:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121754
 
 Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2024-56374
+https://nvd.nist.gov/vuln/detail/CVE-2025-57833
 
 Upstream-patch:
-https://github.com/django/django/commit/ad866a1ca3e7d60da888d25d27e46a8adb2ed36e
+https://github.com/django/django/commit/31334e6965ad136a5e369993b01721499c5d1a92
 
 Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
 ---
- .../CVE-2024-56374.patch                      | 315 ++++++++++++++++
- .../CVE-2024-56374.patch                      | 306 +++++++++++++++
- .../CVE-2024-56374.patch                      | 354 ++++++++++++++++++
+ .../CVE-2025-57833.patch                      |  96 ++++++++++++++++
+ .../CVE-2025-57833.patch                      | 107 ++++++++++++++++++
+ .../CVE-2025-57833.patch                      | 106 +++++++++++++++++
  .../python/python3-django_2.2.28.bb           |   1 +
  .../python/python3-django_3.2.23.bb           |   1 +
- .../python/python3-django_4.2.17.bb           |   5 +-
- 6 files changed, 981 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2024-56374.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2024-56374.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2024-56374.patch
+ .../python/python3-django_4.2.17.bb           |   1 +
+ 6 files changed, 312 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-57833.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-57833.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-57833.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2024-56374.patch b/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2024-56374.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-57833.patch b/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-57833.patch
 new file mode 100644
-index 0000000000..e6f1f7f419
+index 0000000000..8fe0eb36c2
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2024-56374.patch
-@@ -0,0 +1,315 @@
-+From 69094122141408d93590a7c22cb9ca8016143a5d Mon Sep 17 00:00:00 2001
-+From: Natalia <124304+nessita@users.noreply.github.com>
-+Date: Mon, 6 Jan 2025 15:51:45 -0300
-+Subject: [PATCH] Fixed CVE-2024-56374 -- Mitigated potential DoS in IPv6
-+ validation.
++++ b/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-57833.patch
+@@ -0,0 +1,96 @@
++From 31334e6965ad136a5e369993b01721499c5d1a92 Mon Sep 17 00:00:00 2001
++From: Jake Howard <git@theorangeone.net>
++Date: Wed, 13 Aug 2025 14:13:42 +0200
++Subject: [PATCH] Fixed CVE-2025-57833 -- Protected FilteredRelation against
++ SQL injection in column aliases.
 +
-+Thanks Saravana Kumar for the report, and Sarah Boyce and Mariusz
-+Felisiak for the reviews.
++Thanks Eyal Gabay (EyalSec) for the report.
 +
-+CVE: CVE-2024-56374
++Backport of 51711717098d3f469f795dfa6bc3758b24f69ef7 from main.
++
++CVE: CVE-2025-57833
 +
 +Upstream-Status: Backport
-+https://github.com/django/django/commit/ad866a1ca3e7d60da888d25d27e46a8adb2ed36e
++https://github.com/django/django/commit/31334e6965ad136a5e369993b01721499c5d1a92
 +
-+Signed-off-by: Natalia <124304+nessita@users.noreply.github.com>
-+Co-authored-by: Natalia <124304+nessita@users.noreply.github.com>
++Signed-off-by: Jake Howard <git@theorangeone.net>
 +Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
 +---
-+ django/db/models/fields/__init__.py           |  6 +--
-+ django/forms/fields.py                        |  7 +++-
-+ django/utils/ipv6.py                          | 22 ++++++++--
-+ docs/ref/forms/fields.txt                     | 13 +++++-
-+ docs/releases/2.2.28.txt                      | 12 ++++++
-+ .../field_tests/test_genericipaddressfield.py | 35 +++++++++++++++-
-+ tests/utils_tests/test_ipv6.py                | 40 +++++++++++++++++--
-+ 7 files changed, 120 insertions(+), 15 deletions(-)
++ django/db/models/sql/query.py |  1 +
++ docs/releases/2.2.28.txt      |  7 +++++++
++ tests/annotations/tests.py    | 18 ++++++++++++++++--
++ 3 files changed, 24 insertions(+), 2 deletions(-)
 +
-+diff --git a/django/db/models/fields/__init__.py b/django/db/models/fields/__init__.py
-+index e2d1846..c77702f 100644
-+--- a/django/db/models/fields/__init__.py
-++++ b/django/db/models/fields/__init__.py
-+@@ -26,7 +26,7 @@ from django.utils.dateparse import (
-+ )
-+ from django.utils.duration import duration_microseconds, duration_string
-+ from django.utils.functional import Promise, cached_property
-+-from django.utils.ipv6 import clean_ipv6_address
-++from django.utils.ipv6 import MAX_IPV6_ADDRESS_LENGTH, clean_ipv6_address
-+ from django.utils.itercompat import is_iterable
-+ from django.utils.text import capfirst
-+ from django.utils.translation import gettext_lazy as _
-+@@ -1904,7 +1904,7 @@ class GenericIPAddressField(Field):
-+         self.default_validators, invalid_error_message = \
-+             validators.ip_address_validators(protocol, unpack_ipv4)
-+         self.default_error_messages['invalid'] = invalid_error_message
-+-        kwargs['max_length'] = 39
-++        kwargs["max_length"] = MAX_IPV6_ADDRESS_LENGTH
-+         super().__init__(verbose_name, name, *args, **kwargs)
-+
-+     def check(self, **kwargs):
-+@@ -1931,7 +1931,7 @@ class GenericIPAddressField(Field):
-+             kwargs['unpack_ipv4'] = self.unpack_ipv4
-+         if self.protocol != "both":
-+             kwargs['protocol'] = self.protocol
-+-        if kwargs.get("max_length") == 39:
-++        if kwargs.get("max_length") == self.max_length:
-+             del kwargs['max_length']
-+         return name, path, args, kwargs
-+
-+diff --git a/django/forms/fields.py b/django/forms/fields.py
-+index f939338..b3156b9 100644
-+--- a/django/forms/fields.py
-++++ b/django/forms/fields.py
-+@@ -29,7 +29,7 @@ from django.forms.widgets import (
-+ from django.utils import formats
-+ from django.utils.dateparse import parse_duration
-+ from django.utils.duration import duration_string
-+-from django.utils.ipv6 import clean_ipv6_address
-++from django.utils.ipv6 import MAX_IPV6_ADDRESS_LENGTH, clean_ipv6_address
-+ from django.utils.translation import gettext_lazy as _, ngettext_lazy
-+
-+ __all__ = (
-+@@ -1162,6 +1162,7 @@ class GenericIPAddressField(CharField):
-+     def __init__(self, *, protocol='both', unpack_ipv4=False, **kwargs):
-+         self.unpack_ipv4 = unpack_ipv4
-+         self.default_validators = validators.ip_address_validators(protocol, unpack_ipv4)[0]
-++        kwargs.setdefault("max_length", MAX_IPV6_ADDRESS_LENGTH)
-+         super().__init__(**kwargs)
-+
-+     def to_python(self, value):
-+@@ -1169,7 +1170,9 @@ class GenericIPAddressField(CharField):
-+             return ''
-+         value = value.strip()
-+         if value and ':' in value:
-+-            return clean_ipv6_address(value, self.unpack_ipv4)
-++            return clean_ipv6_address(
-++                value, self.unpack_ipv4, max_length=self.max_length
-++            )
-+         return value
-+
-+
-+diff --git a/django/utils/ipv6.py b/django/utils/ipv6.py
-+index ddb8c80..aed7902 100644
-+--- a/django/utils/ipv6.py
-++++ b/django/utils/ipv6.py
-+@@ -3,9 +3,23 @@ import ipaddress
-+ from django.core.exceptions import ValidationError
-+ from django.utils.translation import gettext_lazy as _
-+
-++MAX_IPV6_ADDRESS_LENGTH = 39
-+
-+-def clean_ipv6_address(ip_str, unpack_ipv4=False,
-+-                       error_message=_("This is not a valid IPv6 address.")):
-++
-++def _ipv6_address_from_str(ip_str, max_length=MAX_IPV6_ADDRESS_LENGTH):
-++    if len(ip_str) > max_length:
-++        raise ValueError(
-++            f"Unable to convert {ip_str} to an IPv6 address (value too long)."
-++        )
-++    return ipaddress.IPv6Address(int(ipaddress.IPv6Address(ip_str)))
-++
-++
-++def clean_ipv6_address(
-++    ip_str,
-++    unpack_ipv4=False,
-++    error_message=_("This is not a valid IPv6 address."),
-++    max_length=MAX_IPV6_ADDRESS_LENGTH,
-++	):
-+     """
-+     Clean an IPv6 address string.
-+
-+@@ -23,7 +37,7 @@ def clean_ipv6_address(ip_str, unpack_ipv4=False,
-+     Return a compressed IPv6 address or the same value.
-+     """
-+     try:
-+-        addr = ipaddress.IPv6Address(int(ipaddress.IPv6Address(ip_str)))
-++        addr = _ipv6_address_from_str(ip_str, max_length)
-+     except ValueError:
-+         raise ValidationError(error_message, code='invalid')
-+
-+@@ -40,7 +54,7 @@ def is_valid_ipv6_address(ip_str):
-+     Return whether or not the `ip_str` string is a valid IPv6 address.
-+     """
-+     try:
-+-        ipaddress.IPv6Address(ip_str)
-++        _ipv6_address_from_str(ip_str)
-+     except ValueError:
-+         return False
-+     return True
-+diff --git a/docs/ref/forms/fields.txt b/docs/ref/forms/fields.txt
-+index 3a888ef..688890a 100644
-+--- a/docs/ref/forms/fields.txt
-++++ b/docs/ref/forms/fields.txt
-+@@ -791,7 +791,7 @@ For each field, we describe the default widget used if you don't specify
-+     * Empty value: ``''`` (an empty string)
-+     * Normalizes to: A string. IPv6 addresses are normalized as described below.
-+     * Validates that the given value is a valid IP address.
-+-    * Error message keys: ``required``, ``invalid``
-++    * Error message keys: ``required``, ``invalid``, ``max_length``
-+
-+     The IPv6 address normalization follows :rfc:`4291#section-2.2` section 2.2,
-+     including using the IPv4 format suggested in paragraph 3 of that section, like
-+@@ -799,7 +799,7 @@ For each field, we describe the default widget used if you don't specify
-+     ``2001::1``, and ``::ffff:0a0a:0a0a`` to ``::ffff:10.10.10.10``. All characters
-+     are converted to lowercase.
-+
-+-    Takes two optional arguments:
-++    Takes three optional arguments:
-+
-+     .. attribute:: protocol
-+
-+@@ -814,6 +814,15 @@ For each field, we describe the default widget used if you don't specify
-+         ``192.0.2.1``. Default is disabled. Can only be used
-+         when ``protocol`` is set to ``'both'``.
-+
-++    .. attribute:: max_length
-++
-++        Defaults to 39, and behaves the same way as it does for
-++        :class:`CharField`.
-++
-++    .. versionchanged:: 4.2.18
-++
-++        The default value for ``max_length`` was set to 39 characters.
-++
-+ ``MultipleChoiceField``
-+ -----------------------
-+
++diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
++index 9b054bd..96a6f5f 100644
++--- a/django/db/models/sql/query.py
+++++ b/django/db/models/sql/query.py
++@@ -1369,6 +1369,7 @@ class Query:
++         return target_clause
++ 
++     def add_filtered_relation(self, filtered_relation, alias):
+++        self.check_alias(alias)
++         filtered_relation.alias = alias
++         lookups = dict(get_children_from_q(filtered_relation.condition))
++         for lookup in chain((filtered_relation.relation_name,), lookups):
 +diff --git a/docs/releases/2.2.28.txt b/docs/releases/2.2.28.txt
-+index 63877eb..9853d95 100644
++index 9853d95..1a824c1 100644
 +--- a/docs/releases/2.2.28.txt
 ++++ b/docs/releases/2.2.28.txt
-+@@ -6,6 +6,18 @@ Django 2.2.28 release notes
-+
++@@ -6,6 +6,13 @@ Django 2.2.28 release notes
++ 
 + Django 2.2.28 fixes two security issues with severity "high" in 2.2.27.
-+
-++CVE-2024-56374: Potential denial-of-service vulnerability in IPv6 validation
-++============================================================================
++ 
+++CVE-2025-57833: Potential SQL injection in ``FilteredRelation`` column aliases
+++==============================================================================
 ++
-++Lack of upper bound limit enforcement in strings passed when performing IPv6
-++validation could lead to a potential denial-of-service attack. The undocumented
-++and private functions ``clean_ipv6_address`` and ``is_valid_ipv6_address`` were
-++vulnerable, as was the  :class:`django.forms.GenericIPAddressField` form field,
-++which has now been updated to define a ``max_length`` of 39 characters.
+++:class:`.FilteredRelation` was subject to SQL injection in column aliases,
+++using a suitably crafted dictionary, with dictionary expansion, as the
+++``**kwargs`` passed to :meth:`.QuerySet.annotate` or :meth:`.QuerySet.alias`.
 ++
-++The :class:`django.db.models.GenericIPAddressField` model field was not
-++affected.
++ CVE-2024-56374: Potential denial-of-service vulnerability in IPv6 validation
++ ============================================================================
++ 
++diff --git a/tests/annotations/tests.py b/tests/annotations/tests.py
++index 27cd7eb..cdffb07 100644
++--- a/tests/annotations/tests.py
+++++ b/tests/annotations/tests.py
++@@ -3,8 +3,8 @@ from decimal import Decimal
++ 
++ from django.core.exceptions import FieldDoesNotExist, FieldError
++ from django.db.models import (
++-    BooleanField, CharField, Count, DateTimeField, ExpressionWrapper, F, Func,
++-    IntegerField, NullBooleanField, OuterRef, Q, Subquery, Sum, Value,
+++    BooleanField, CharField, Count, DateTimeField, ExpressionWrapper, F,  FilteredRelation,
+++    Func, IntegerField, NullBooleanField, OuterRef, Q, Subquery, Sum, Value,
++ )
++ from django.db.models.expressions import RawSQL
++ from django.db.models.functions import Length, Lower
++@@ -608,6 +608,15 @@ class NonAggregateAnnotationTestCase(TestCase):
++         with self.assertRaisesMessage(ValueError, msg):
++             Book.objects.annotate(**{crafted_alias: Value(1)})
++ 
+++    def test_alias_filtered_relation_sql_injection(self):
+++        crafted_alias = """injected_name" from "annotations_book"; --"""
+++        msg = (
+++            "Column aliases cannot contain whitespace characters, quotation marks, "
+++            "semicolons, or SQL comments."
+++        )
+++        with self.assertRaisesMessage(ValueError, msg):
+++            Book.objects.annotate(**{crafted_alias: FilteredRelation("author")})
 ++
-+ CVE-2025-26699: Potential denial-of-service vulnerability in ``django.utils.text.wrap()``
-+ =========================================================================================
-+
-+diff --git a/tests/forms_tests/field_tests/test_genericipaddressfield.py b/tests/forms_tests/field_tests/test_genericipaddressfield.py
-+index 97a83e3..4c79d78 100644
-+--- a/tests/forms_tests/field_tests/test_genericipaddressfield.py
-++++ b/tests/forms_tests/field_tests/test_genericipaddressfield.py
-+@@ -1,5 +1,6 @@
-+ from django.forms import GenericIPAddressField, ValidationError
-+ from django.test import SimpleTestCase
-++from django.utils.ipv6 import MAX_IPV6_ADDRESS_LENGTH
-+
-+
-+ class GenericIPAddressFieldTest(SimpleTestCase):
-+@@ -89,6 +90,35 @@ class GenericIPAddressFieldTest(SimpleTestCase):
-+         with self.assertRaisesMessage(ValidationError, "'This is not a valid IPv6 address.'"):
-+             f.clean('1:2')
-+
-++    def test_generic_ipaddress_max_length_custom(self):
-++        # Valid IPv4-mapped IPv6 address, len 45.
-++        addr = "0000:0000:0000:0000:0000:ffff:192.168.100.228"
-++        f = GenericIPAddressField(max_length=len(addr))
-++        f.clean(addr)
++     def test_alias_forbidden_chars(self):
++         tests = [
++             'al"ias',
++@@ -632,3 +641,8 @@ class NonAggregateAnnotationTestCase(TestCase):
++             with self.subTest(crafted_alias):
++                 with self.assertRaisesMessage(ValueError, msg):
++                     Book.objects.annotate(**{crafted_alias: Value(1)})
 ++
-++    def test_generic_ipaddress_max_length_validation_error(self):
-++        # Valid IPv4-mapped IPv6 address, len 45.
-++        addr = "0000:0000:0000:0000:0000:ffff:192.168.100.228"
-++
-++        cases = [
-++            ({}, MAX_IPV6_ADDRESS_LENGTH),  # Default value.
-++            ({"max_length": len(addr) - 1}, len(addr) - 1),
-++        ]
-++        for kwargs, max_length in cases:
-++            max_length_plus_one = max_length + 1
-++            msg = (
-++                f"Ensure this value has at most {max_length} characters (it has "
-++                f"{max_length_plus_one}).'"
-++            )
-++            with self.subTest(max_length=max_length):
-++                f = GenericIPAddressField(**kwargs)
-++                with self.assertRaisesMessage(ValidationError, msg):
-++                    f.clean("x" * max_length_plus_one)
-++                with self.assertRaisesMessage(
-++                    ValidationError, "This is not a valid IPv6 address."
-++                ):
-++                    f.clean(addr)
-++
-+     def test_generic_ipaddress_as_generic_not_required(self):
-+         f = GenericIPAddressField(required=False)
-+         self.assertEqual(f.clean(''), '')
-+@@ -103,7 +133,10 @@ class GenericIPAddressFieldTest(SimpleTestCase):
-+         with self.assertRaisesMessage(ValidationError, "'Enter a valid IPv4 or IPv6 address.'"):
-+             f.clean('256.125.1.5')
-+         self.assertEqual(f.clean(' fe80::223:6cff:fe8a:2e8a '), 'fe80::223:6cff:fe8a:2e8a')
-+-        self.assertEqual(f.clean(' 2a02::223:6cff:fe8a:2e8a '), '2a02::223:6cff:fe8a:2e8a')
-++        self.assertEqual(
-++            f.clean(" " * MAX_IPV6_ADDRESS_LENGTH + " 2a02::223:6cff:fe8a:2e8a "),
-++            "2a02::223:6cff:fe8a:2e8a",
-++            )
-+         with self.assertRaisesMessage(ValidationError, "'This is not a valid IPv6 address.'"):
-+             f.clean('12345:2:3:4')
-+         with self.assertRaisesMessage(ValidationError, "'This is not a valid IPv6 address.'"):
-+diff --git a/tests/utils_tests/test_ipv6.py b/tests/utils_tests/test_ipv6.py
-+index 4e434f3..1ac6763 100644
-+--- a/tests/utils_tests/test_ipv6.py
-++++ b/tests/utils_tests/test_ipv6.py
-+@@ -1,9 +1,17 @@
-+-import unittest
-++import traceback
-++from io import StringIO
-+
-+-from django.utils.ipv6 import clean_ipv6_address, is_valid_ipv6_address
-++from django.core.exceptions import ValidationError
-++from django.test import SimpleTestCase
-++from django.utils.ipv6 import (
-++    MAX_IPV6_ADDRESS_LENGTH,
-++    clean_ipv6_address,
-++    is_valid_ipv6_address,
-++)
-++from django.utils.version import PY310
-+
-+
-+-class TestUtilsIPv6(unittest.TestCase):
-++class TestUtilsIPv6(SimpleTestCase):
-+
-+     def test_validates_correct_plain_address(self):
-+         self.assertTrue(is_valid_ipv6_address('fe80::223:6cff:fe8a:2e8a'))
-+@@ -55,3 +63,29 @@ class TestUtilsIPv6(unittest.TestCase):
-+         self.assertEqual(clean_ipv6_address('::ffff:0a0a:0a0a', unpack_ipv4=True), '10.10.10.10')
-+         self.assertEqual(clean_ipv6_address('::ffff:1234:1234', unpack_ipv4=True), '18.52.18.52')
-+         self.assertEqual(clean_ipv6_address('::ffff:18.52.18.52', unpack_ipv4=True), '18.52.18.52')
-++
-++    def test_address_too_long(self):
-++        addresses = [
-++            "0000:0000:0000:0000:0000:ffff:192.168.100.228",  # IPv4-mapped IPv6 address
-++            "0000:0000:0000:0000:0000:ffff:192.168.100.228%123456",  # % scope/zone
-++            "fe80::223:6cff:fe8a:2e8a:1234:5678:00000",  # MAX_IPV6_ADDRESS_LENGTH + 1
-++        ]
-++        msg = "This is the error message."
-++        value_error_msg = "Unable to convert %s to an IPv6 address (value too long)."
-++        for addr in addresses:
-++            with self.subTest(addr=addr):
-++                self.assertGreater(len(addr), MAX_IPV6_ADDRESS_LENGTH)
-++                self.assertEqual(is_valid_ipv6_address(addr), False)
-++                with self.assertRaisesMessage(ValidationError, msg) as ctx:
-++                    clean_ipv6_address(addr, error_message=msg)
-++                exception_traceback = StringIO()
-++                if PY310:
-++                    traceback.print_exception(ctx.exception, file=exception_traceback)
-++                else:
-++                    traceback.print_exception(
-++                        type(ctx.exception),
-++                        value=ctx.exception,
-++                        tb=ctx.exception.__traceback__,
-++                        file=exception_traceback,
+++                with self.assertRaisesMessage(ValueError, msg):
+++                    Book.objects.annotate(
+++                        **{crafted_alias: FilteredRelation("authors")}
 ++                    )
-++                self.assertIn(value_error_msg % addr, exception_traceback.getvalue())
-+--
++-- 
 +2.35.5
-diff --git a/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2024-56374.patch b/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2024-56374.patch
++
+diff --git a/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-57833.patch b/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-57833.patch
 new file mode 100644
-index 0000000000..acb9ae23c4
+index 0000000000..4056dbbc4e
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2024-56374.patch
-@@ -0,0 +1,306 @@
-+From c11be4dd31d1dedc9ba6e3a1e70bc0a27dbbaa2d Mon Sep 17 00:00:00 2001
-+From: Natalia <124304+nessita@users.noreply.github.com>
-+Date: Mon, 6 Jan 2025 15:51:45 -0300
-+Subject: [PATCH] Fixed CVE-2024-56374 -- Mitigated potential DoS in IPv6
-+ validation.
++++ b/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-57833.patch
+@@ -0,0 +1,107 @@
++From 9c8cc0c011772179c21d62b17aadee5c3ee3c2aa Mon Sep 17 00:00:00 2001
++From: Jake Howard <git@theorangeone.net>
++Date: Wed, 13 Aug 2025 14:13:42 +0200
++Subject: [PATCH] Fixed CVE-2025-57833 -- Protected FilteredRelation against
++ SQL injection in column aliases.
 +
-+Thanks Saravana Kumar for the report, and Sarah Boyce and Mariusz
-+Felisiak for the reviews.
++Thanks Eyal Gabay (EyalSec) for the report.
 +
-+CVE: CVE-2024-56374
++Backport of 51711717098d3f469f795dfa6bc3758b24f69ef7 from main.
++
++CVE: CVE-2025-57833
 +
 +Upstream-Status: Backport
-+https://github.com/django/django/commit/ad866a1ca3e7d60da888d25d27e46a8adb2ed36e
++https://github.com/django/django/commit/31334e6965ad136a5e369993b01721499c5d1a92
 +
-+Signed-off-by: Natalia <124304+nessita@users.noreply.github.com>
-+Co-authored-by: Natalia <124304+nessita@users.noreply.github.com>
++Signed-off-by: Jake Howard <git@theorangeone.net>
 +Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
 +---
-+ django/db/models/fields/__init__.py           |  4 +-
-+ django/forms/fields.py                        |  7 +++-
-+ django/utils/ipv6.py                          | 22 ++++++++--
-+ docs/ref/forms/fields.txt                     | 13 +++++-
-+ docs/releases/3.2.23.txt                      | 13 ++++++
-+ .../field_tests/test_genericipaddressfield.py | 35 +++++++++++++++-
-+ tests/utils_tests/test_ipv6.py                | 40 +++++++++++++++++--
-+ 7 files changed, 120 insertions(+), 14 deletions(-)
++ django/db/models/sql/query.py |  1 +
++ docs/releases/3.2.23.txt      |  7 +++++++
++ tests/annotations/tests.py    | 25 ++++++++++++++++++++++++-
++ 3 files changed, 32 insertions(+), 1 deletion(-)
 +
-+diff --git a/django/db/models/fields/__init__.py b/django/db/models/fields/__init__.py
-+index 167c3d2..148201d 100644
-+--- a/django/db/models/fields/__init__.py
-++++ b/django/db/models/fields/__init__.py
-+@@ -22,7 +22,7 @@ from django.utils.dateparse import (
-+ )
-+ from django.utils.duration import duration_microseconds, duration_string
-+ from django.utils.functional import Promise, cached_property
-+-from django.utils.ipv6 import clean_ipv6_address
-++from django.utils.ipv6 import MAX_IPV6_ADDRESS_LENGTH, clean_ipv6_address
-+ from django.utils.itercompat import is_iterable
-+ from django.utils.text import capfirst
-+ from django.utils.translation import gettext_lazy as _
-+@@ -1940,7 +1940,7 @@ class GenericIPAddressField(Field):
-+             kwargs['unpack_ipv4'] = self.unpack_ipv4
-+         if self.protocol != "both":
-+             kwargs['protocol'] = self.protocol
-+-        if kwargs.get("max_length") == 39:
-++        if kwargs.get("max_length") == self.max_length:
-+             del kwargs['max_length']
-+         return name, path, args, kwargs
++diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
++index 230b6fa..e56ff81 100644
++--- a/django/db/models/sql/query.py
+++++ b/django/db/models/sql/query.py
++@@ -1466,6 +1466,7 @@ class Query(BaseExpression):
++         return target_clause
 + 
-+diff --git a/django/forms/fields.py b/django/forms/fields.py
-+index 8adb09e..6969c4a 100644
-+--- a/django/forms/fields.py
-++++ b/django/forms/fields.py
-+@@ -28,7 +28,7 @@ from django.forms.widgets import (
-+ from django.utils import formats
-+ from django.utils.dateparse import parse_datetime, parse_duration
-+ from django.utils.duration import duration_string
-+-from django.utils.ipv6 import clean_ipv6_address
-++from django.utils.ipv6 import MAX_IPV6_ADDRESS_LENGTH, clean_ipv6_address
-+ from django.utils.regex_helper import _lazy_re_compile
-+ from django.utils.translation import gettext_lazy as _, ngettext_lazy
-+ 
-+@@ -1179,6 +1179,7 @@ class GenericIPAddressField(CharField):
-+     def __init__(self, *, protocol='both', unpack_ipv4=False, **kwargs):
-+         self.unpack_ipv4 = unpack_ipv4
-+         self.default_validators = validators.ip_address_validators(protocol, unpack_ipv4)[0]
-++        kwargs.setdefault("max_length", MAX_IPV6_ADDRESS_LENGTH)
-+         super().__init__(**kwargs)
-+ 
-+     def to_python(self, value):
-+@@ -1186,7 +1187,9 @@ class GenericIPAddressField(CharField):
-+             return ''
-+         value = value.strip()
-+         if value and ':' in value:
-+-            return clean_ipv6_address(value, self.unpack_ipv4)
-++            return clean_ipv6_address(
-++                value, self.unpack_ipv4, max_length=self.max_length
-++            )
-+         return value
-+ 
-+ 
-+diff --git a/django/utils/ipv6.py b/django/utils/ipv6.py
-+index ddb8c80..aed7902 100644
-+--- a/django/utils/ipv6.py
-++++ b/django/utils/ipv6.py
-+@@ -3,9 +3,23 @@ import ipaddress
-+ from django.core.exceptions import ValidationError
-+ from django.utils.translation import gettext_lazy as _
-+ 
-++MAX_IPV6_ADDRESS_LENGTH = 39
-+ 
-+-def clean_ipv6_address(ip_str, unpack_ipv4=False,
-+-                       error_message=_("This is not a valid IPv6 address.")):
-++
-++def _ipv6_address_from_str(ip_str, max_length=MAX_IPV6_ADDRESS_LENGTH):
-++    if len(ip_str) > max_length:
-++        raise ValueError(
-++            f"Unable to convert {ip_str} to an IPv6 address (value too long)."
-++        )
-++    return ipaddress.IPv6Address(int(ipaddress.IPv6Address(ip_str)))
-++
-++
-++def clean_ipv6_address(
-++    ip_str,
-++    unpack_ipv4=False,
-++    error_message=_("This is not a valid IPv6 address."),
-++    max_length=MAX_IPV6_ADDRESS_LENGTH,
-++	):
-+     """
-+     Clean an IPv6 address string.
-+ 
-+@@ -23,7 +37,7 @@ def clean_ipv6_address(ip_str, unpack_ipv4=False,
-+     Return a compressed IPv6 address or the same value.
-+     """
-+     try:
-+-        addr = ipaddress.IPv6Address(int(ipaddress.IPv6Address(ip_str)))
-++        addr = _ipv6_address_from_str(ip_str, max_length)
-+     except ValueError:
-+         raise ValidationError(error_message, code='invalid')
-+ 
-+@@ -40,7 +54,7 @@ def is_valid_ipv6_address(ip_str):
-+     Return whether or not the `ip_str` string is a valid IPv6 address.
-+     """
-+     try:
-+-        ipaddress.IPv6Address(ip_str)
-++        _ipv6_address_from_str(ip_str)
-+     except ValueError:
-+         return False
-+     return True
-+diff --git a/docs/ref/forms/fields.txt b/docs/ref/forms/fields.txt
-+index 5b485f2..45973eb 100644
-+--- a/docs/ref/forms/fields.txt
-++++ b/docs/ref/forms/fields.txt
-+@@ -847,7 +847,7 @@ For each field, we describe the default widget used if you don't specify
-+     * Empty value: ``''`` (an empty string)
-+     * Normalizes to: A string. IPv6 addresses are normalized as described below.
-+     * Validates that the given value is a valid IP address.
-+-    * Error message keys: ``required``, ``invalid``
-++    * Error message keys: ``required``, ``invalid``, ``max_length``
-+ 
-+     The IPv6 address normalization follows :rfc:`4291#section-2.2` section 2.2,
-+     including using the IPv4 format suggested in paragraph 3 of that section, like
-+@@ -855,7 +855,7 @@ For each field, we describe the default widget used if you don't specify
-+     ``2001::1``, and ``::ffff:0a0a:0a0a`` to ``::ffff:10.10.10.10``. All characters
-+     are converted to lowercase.
-+ 
-+-    Takes two optional arguments:
-++    Takes three optional arguments:
-+ 
-+     .. attribute:: protocol
-+ 
-+@@ -870,6 +870,15 @@ For each field, we describe the default widget used if you don't specify
-+         ``192.0.2.1``. Default is disabled. Can only be used
-+         when ``protocol`` is set to ``'both'``.
-+ 
-++    .. attribute:: max_length
-++
-++        Defaults to 39, and behaves the same way as it does for
-++        :class:`CharField`.
-++
-++    .. versionchanged:: 4.2.18
-++
-++        The default value for ``max_length`` was set to 39 characters.
-++
-+ ``MultipleChoiceField``
-+ -----------------------
-+ 
++     def add_filtered_relation(self, filtered_relation, alias):
+++        self.check_alias(alias)
++         filtered_relation.alias = alias
++         lookups = dict(get_children_from_q(filtered_relation.condition))
++         relation_lookup_parts, relation_field_parts, _ = self.solve_lookup_type(filtered_relation.relation_name)
 +diff --git a/docs/releases/3.2.23.txt b/docs/releases/3.2.23.txt
-+index da75eca..9a9b52d 100644
++index 9a9b52d..329aed1 100644
 +--- a/docs/releases/3.2.23.txt
 ++++ b/docs/releases/3.2.23.txt
-+@@ -32,3 +32,16 @@ CVE-2025-26699: Potential denial-of-service vulnerability in ``django.utils.text
-+ The ``wrap()`` and :tfilter:`wordwrap` template filter were subject to a
-+ potential denial-of-service attack when used with very long strings.
++@@ -45,3 +45,10 @@ which has now been updated to define a ``max_length`` of 39 characters.
++ The :class:`django.db.models.GenericIPAddressField` model field was not
++ affected.
 + 
+++CVE-2025-57833: Potential SQL injection in ``FilteredRelation`` column aliases
+++==============================================================================
 ++
-++CVE-2024-56374: Potential denial-of-service vulnerability in IPv6 validation
-++============================================================================
+++:class:`.FilteredRelation` was subject to SQL injection in column aliases,
+++using a suitably crafted dictionary, with dictionary expansion, as the
+++``**kwargs`` passed to :meth:`.QuerySet.annotate` or :meth:`.QuerySet.alias`.
 ++
-++Lack of upper bound limit enforcement in strings passed when performing IPv6
-++validation could lead to a potential denial-of-service attack. The undocumented
-++and private functions ``clean_ipv6_address`` and ``is_valid_ipv6_address`` were
-++vulnerable, as was the  :class:`django.forms.GenericIPAddressField` form field,
-++which has now been updated to define a ``max_length`` of 39 characters.
-++
-++The :class:`django.db.models.GenericIPAddressField` model field was not
-++affected.
-++
-+diff --git a/tests/forms_tests/field_tests/test_genericipaddressfield.py b/tests/forms_tests/field_tests/test_genericipaddressfield.py
-+index 92dbd71..fc3f129 100644
-+--- a/tests/forms_tests/field_tests/test_genericipaddressfield.py
-++++ b/tests/forms_tests/field_tests/test_genericipaddressfield.py
-+@@ -1,6 +1,7 @@
-+ from django.core.exceptions import ValidationError
-+ from django.forms import GenericIPAddressField
-+ from django.test import SimpleTestCase
-++from django.utils.ipv6 import MAX_IPV6_ADDRESS_LENGTH
++diff --git a/tests/annotations/tests.py b/tests/annotations/tests.py
++index 8082c7a..00d4ee6 100644
++--- a/tests/annotations/tests.py
+++++ b/tests/annotations/tests.py
++@@ -4,7 +4,7 @@ from decimal import Decimal
++ from django.core.exceptions import FieldDoesNotExist, FieldError
++ from django.db.models import (
++     BooleanField, Case, CharField, Count, DateTimeField, DecimalField, Exists,
++-    ExpressionWrapper, F, FloatField, Func, IntegerField, Max,
+++    ExpressionWrapper, F, FilteredRelation, FloatField, Func, IntegerField, Max,
++     NullBooleanField, OuterRef, Q, Subquery, Sum, Value, When,
++ )
++ from django.db.models.expressions import RawSQL
++@@ -775,6 +775,15 @@ class NonAggregateAnnotationTestCase(TestCase):
++         with self.assertRaisesMessage(ValueError, msg):
++             Book.objects.annotate(**{crafted_alias: Value(1)})
 + 
-+ 
-+ class GenericIPAddressFieldTest(SimpleTestCase):
-+@@ -90,6 +91,35 @@ class GenericIPAddressFieldTest(SimpleTestCase):
-+         with self.assertRaisesMessage(ValidationError, "'This is not a valid IPv6 address.'"):
-+             f.clean('1:2')
-+ 
-++    def test_generic_ipaddress_max_length_custom(self):
-++        # Valid IPv4-mapped IPv6 address, len 45.
-++        addr = "0000:0000:0000:0000:0000:ffff:192.168.100.228"
-++        f = GenericIPAddressField(max_length=len(addr))
-++        f.clean(addr)
+++    def test_alias_filtered_relation_sql_injection(self):
+++        crafted_alias = """injected_name" from "annotations_book"; --"""
+++        msg = (
+++            "Column aliases cannot contain whitespace characters, quotation marks, "
+++            "semicolons, or SQL comments."
+++        )
+++        with self.assertRaisesMessage(ValueError, msg):
+++            Book.objects.annotate(**{crafted_alias: FilteredRelation("author")})
 ++
-++    def test_generic_ipaddress_max_length_validation_error(self):
-++        # Valid IPv4-mapped IPv6 address, len 45.
-++        addr = "0000:0000:0000:0000:0000:ffff:192.168.100.228"
-++
-++        cases = [
-++            ({}, MAX_IPV6_ADDRESS_LENGTH),  # Default value.
-++            ({"max_length": len(addr) - 1}, len(addr) - 1),
-++        ]
-++        for kwargs, max_length in cases:
-++            max_length_plus_one = max_length + 1
-++            msg = (
-++                f"Ensure this value has at most {max_length} characters (it has "
-++                f"{max_length_plus_one}).'"
-++            )
-++            with self.subTest(max_length=max_length):
-++                f = GenericIPAddressField(**kwargs)
-++                with self.assertRaisesMessage(ValidationError, msg):
-++                    f.clean("x" * max_length_plus_one)
-++                with self.assertRaisesMessage(
-++                    ValidationError, "This is not a valid IPv6 address."
-++                ):
-++                    f.clean(addr)
-++
-+     def test_generic_ipaddress_as_generic_not_required(self):
-+         f = GenericIPAddressField(required=False)
-+         self.assertEqual(f.clean(''), '')
-+@@ -104,7 +134,10 @@ class GenericIPAddressFieldTest(SimpleTestCase):
-+         with self.assertRaisesMessage(ValidationError, "'Enter a valid IPv4 or IPv6 address.'"):
-+             f.clean('256.125.1.5')
-+         self.assertEqual(f.clean(' fe80::223:6cff:fe8a:2e8a '), 'fe80::223:6cff:fe8a:2e8a')
-+-        self.assertEqual(f.clean(' 2a02::223:6cff:fe8a:2e8a '), '2a02::223:6cff:fe8a:2e8a')
-++        self.assertEqual(
-++            f.clean(" " * MAX_IPV6_ADDRESS_LENGTH + " 2a02::223:6cff:fe8a:2e8a "),
-++            "2a02::223:6cff:fe8a:2e8a",
-++            )
-+         with self.assertRaisesMessage(ValidationError, "'This is not a valid IPv6 address.'"):
-+             f.clean('12345:2:3:4')
-+         with self.assertRaisesMessage(ValidationError, "'This is not a valid IPv6 address.'"):
-+diff --git a/tests/utils_tests/test_ipv6.py b/tests/utils_tests/test_ipv6.py
-+index 4e434f3..1ac6763 100644
-+--- a/tests/utils_tests/test_ipv6.py
-++++ b/tests/utils_tests/test_ipv6.py
-+@@ -1,9 +1,17 @@
-+-import unittest
-++import traceback
-++from io import StringIO
++     def test_alias_forbidden_chars(self):
++         tests = [
++             'al"ias',
++@@ -800,6 +809,11 @@ class NonAggregateAnnotationTestCase(TestCase):
++                 with self.assertRaisesMessage(ValueError, msg):
++                     Book.objects.annotate(**{crafted_alias: Value(1)})
 + 
-+-from django.utils.ipv6 import clean_ipv6_address, is_valid_ipv6_address
-++from django.core.exceptions import ValidationError
-++from django.test import SimpleTestCase
-++from django.utils.ipv6 import (
-++    MAX_IPV6_ADDRESS_LENGTH,
-++    clean_ipv6_address,
-++    is_valid_ipv6_address,
-++)
-++from django.utils.version import PY310
-+ 
-+ 
-+-class TestUtilsIPv6(unittest.TestCase):
-++class TestUtilsIPv6(SimpleTestCase):
-+ 
-+     def test_validates_correct_plain_address(self):
-+         self.assertTrue(is_valid_ipv6_address('fe80::223:6cff:fe8a:2e8a'))
-+@@ -55,3 +63,29 @@ class TestUtilsIPv6(unittest.TestCase):
-+         self.assertEqual(clean_ipv6_address('::ffff:0a0a:0a0a', unpack_ipv4=True), '10.10.10.10')
-+         self.assertEqual(clean_ipv6_address('::ffff:1234:1234', unpack_ipv4=True), '18.52.18.52')
-+         self.assertEqual(clean_ipv6_address('::ffff:18.52.18.52', unpack_ipv4=True), '18.52.18.52')
-++
-++    def test_address_too_long(self):
-++        addresses = [
-++            "0000:0000:0000:0000:0000:ffff:192.168.100.228",  # IPv4-mapped IPv6 address
-++            "0000:0000:0000:0000:0000:ffff:192.168.100.228%123456",  # % scope/zone
-++            "fe80::223:6cff:fe8a:2e8a:1234:5678:00000",  # MAX_IPV6_ADDRESS_LENGTH + 1
-++        ]
-++        msg = "This is the error message."
-++        value_error_msg = "Unable to convert %s to an IPv6 address (value too long)."
-++        for addr in addresses:
-++            with self.subTest(addr=addr):
-++                self.assertGreater(len(addr), MAX_IPV6_ADDRESS_LENGTH)
-++                self.assertEqual(is_valid_ipv6_address(addr), False)
-++                with self.assertRaisesMessage(ValidationError, msg) as ctx:
-++                    clean_ipv6_address(addr, error_message=msg)
-++                exception_traceback = StringIO()
-++                if PY310:
-++                    traceback.print_exception(ctx.exception, file=exception_traceback)
-++                else:
-++                    traceback.print_exception(
-++                        type(ctx.exception),
-++                        value=ctx.exception,
-++                        tb=ctx.exception.__traceback__,
-++                        file=exception_traceback,
+++                with self.assertRaisesMessage(ValueError, msg):
+++                    Book.objects.annotate(
+++                        **{crafted_alias: FilteredRelation("authors")}
 ++                    )
-++                self.assertIn(value_error_msg % addr, exception_traceback.getvalue())
+++
++ 
++ class AliasTests(TestCase):
++     @classmethod
++@@ -1039,3 +1053,12 @@ class AliasTests(TestCase):
++         )
++         with self.assertRaisesMessage(ValueError, msg):
++             Book.objects.alias(**{crafted_alias: Value(1)})
+++
+++    def test_alias_filtered_relation_sql_injection(self):
+++        crafted_alias = """injected_name" from "annotations_book"; --"""
+++        msg = (
+++            "Column aliases cannot contain whitespace characters, quotation marks, "
+++            "semicolons, or SQL comments."
+++        )
+++        with self.assertRaisesMessage(ValueError, msg):
+++            Book.objects.alias(**{crafted_alias: FilteredRelation("authors")})
 +-- 
-+2.40.0
++2.35.5
 +
-diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2024-56374.patch b/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2024-56374.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-57833.patch b/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-57833.patch
 new file mode 100644
-index 0000000000..cee4be249e
+index 0000000000..0f06215209
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2024-56374.patch
-@@ -0,0 +1,354 @@
-+From ed42ea878033ef6b8bbc811140108816021b1d50 Mon Sep 17 00:00:00 2001
-+From: Natalia <124304+nessita@users.noreply.github.com>
-+Date: Mon, 6 Jan 2025 15:51:45 -0300
-+Subject: [PATCH] Fixed CVE-2024-56374 -- Mitigated potential DoS in IPv6
++++ b/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-57833.patch
+@@ -0,0 +1,106 @@
++From 31334e6965ad136a5e369993b01721499c5d1a92 Mon Sep 17 00:00:00 2001
++From: Jake Howard <git@theorangeone.net>
++Date: Wed, 13 Aug 2025 14:13:42 +0200
++Subject: [PATCH] Fixed CVE-2025-57833 -- Protected FilteredRelation against
++ SQL injection in column aliases.
 +
-+ validation.
++Thanks Eyal Gabay (EyalSec) for the report.
 +
-+Thanks Saravana Kumar for the report, and Sarah Boyce and Mariusz
-+Felisiak for the reviews.
++Backport of 51711717098d3f469f795dfa6bc3758b24f69ef7 from main.
 +
-+CVE: CVE-2024-56374
++CVE: CVE-2025-57833
 +
 +Upstream-Status: Backport
-+https://github.com/django/django/commit/ad866a1ca3e7d60da888d25d27e46a8adb2ed36e
++https://github.com/django/django/commit/31334e6965ad136a5e369993b01721499c5d1a92
 +
-+Signed-off-by: Natalia <124304+nessita@users.noreply.github.com>
-+Co-authored-by: Natalia <124304+nessita@users.noreply.github.com>
++Signed-off-by: Jake Howard <git@theorangeone.net>
 +Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
-+
-+%% original patch: CVE-2024-56374.patch
 +---
-+ Django.egg-info/PKG-INFO                      | 11 ++---
-+ Django.egg-info/entry_points.txt              |  1 +
-+ django/db/models/fields/__init__.py           |  6 +--
-+ django/forms/fields.py                        |  7 +++-
-+ django/utils/ipv6.py                          | 19 +++++++--
-+ docs/ref/forms/fields.txt                     | 13 +++++-
-+ docs/releases/4.2.17.txt                      | 11 +++++
-+ .../field_tests/test_genericipaddressfield.py | 33 ++++++++++++++-
-+ tests/utils_tests/test_ipv6.py                | 40 +++++++++++++++++--
-+ 9 files changed, 119 insertions(+), 22 deletions(-)
++ django/db/models/sql/query.py |  1 +
++ docs/releases/4.2.17.txt      |  7 +++++++
++ tests/annotations/tests.py    | 24 ++++++++++++++++++++++++
++ 3 files changed, 32 insertions(+)
 +
-+diff --git a/Django.egg-info/PKG-INFO b/Django.egg-info/PKG-INFO
-+index 77b00b7..6159219 100644
-+--- a/Django.egg-info/PKG-INFO
-++++ b/Django.egg-info/PKG-INFO
-+@@ -11,6 +11,7 @@ Project-URL: Release notes, https://docs.djangoproject.com/en/stable/releases/
-+ Project-URL: Funding, https://www.djangoproject.com/fundraising/
-+ Project-URL: Source, https://github.com/django/django
-+ Project-URL: Tracker, https://code.djangoproject.com/
-++Platform: UNKNOWN
-+ Classifier: Development Status :: 5 - Production/Stable
-+ Classifier: Environment :: Web Environment
-+ Classifier: Framework :: Django
-+@@ -31,17 +32,11 @@ Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
-+ Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
-+ Classifier: Topic :: Software Development :: Libraries :: Python Modules
-+ Requires-Python: >=3.8
-++Provides-Extra: argon2
-++Provides-Extra: bcrypt
-+ License-File: LICENSE
-+ License-File: LICENSE.python
-+ License-File: AUTHORS
-+-Requires-Dist: asgiref<4,>=3.6.0
-+-Requires-Dist: backports.zoneinfo; python_version < "3.9"
-+-Requires-Dist: sqlparse>=0.3.1
-+-Requires-Dist: tzdata; sys_platform == "win32"
-+-Provides-Extra: argon2
-+-Requires-Dist: argon2-cffi>=19.1.0; extra == "argon2"
-+-Provides-Extra: bcrypt
-+-Requires-Dist: bcrypt; extra == "bcrypt"
++diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
++index e68fd9e..5a1b685 100644
++--- a/django/db/models/sql/query.py
+++++ b/django/db/models/sql/query.py
++@@ -1620,6 +1620,7 @@ class Query(BaseExpression):
++         return target_clause
 + 
-+ ======
-+ Django
-+diff --git a/Django.egg-info/entry_points.txt b/Django.egg-info/entry_points.txt
-+index eaeb88e..22df67e 100644
-+--- a/Django.egg-info/entry_points.txt
-++++ b/Django.egg-info/entry_points.txt
-+@@ -1,2 +1,3 @@
-+ [console_scripts]
-+ django-admin = django.core.management:execute_from_command_line
-++
-+diff --git a/django/db/models/fields/__init__.py b/django/db/models/fields/__init__.py
-+index b65948d..0cfba4e 100644
-+--- a/django/db/models/fields/__init__.py
-++++ b/django/db/models/fields/__init__.py
-+@@ -25,7 +25,7 @@ from django.utils.dateparse import (
-+ )
-+ from django.utils.duration import duration_microseconds, duration_string
-+ from django.utils.functional import Promise, cached_property
-+-from django.utils.ipv6 import clean_ipv6_address
-++from django.utils.ipv6 import MAX_IPV6_ADDRESS_LENGTH, clean_ipv6_address
-+ from django.utils.itercompat import is_iterable
-+ from django.utils.text import capfirst
-+ from django.utils.translation import gettext_lazy as _
-+@@ -2160,7 +2160,7 @@ class GenericIPAddressField(Field):
-+             invalid_error_message,
-+         ) = validators.ip_address_validators(protocol, unpack_ipv4)
-+         self.default_error_messages["invalid"] = invalid_error_message
-+-        kwargs["max_length"] = 39
-++        kwargs["max_length"] = MAX_IPV6_ADDRESS_LENGTH
-+         super().__init__(verbose_name, name, *args, **kwargs)
-+ 
-+     def check(self, **kwargs):
-+@@ -2187,7 +2187,7 @@ class GenericIPAddressField(Field):
-+             kwargs["unpack_ipv4"] = self.unpack_ipv4
-+         if self.protocol != "both":
-+             kwargs["protocol"] = self.protocol
-+-        if kwargs.get("max_length") == 39:
-++        if kwargs.get("max_length") == self.max_length:
-+             del kwargs["max_length"]
-+         return name, path, args, kwargs
-+ 
-+diff --git a/django/forms/fields.py b/django/forms/fields.py
-+index 01cd831..e62417f 100644
-+--- a/django/forms/fields.py
-++++ b/django/forms/fields.py
-+@@ -42,7 +42,7 @@ from django.forms.widgets import (
-+ from django.utils import formats
-+ from django.utils.dateparse import parse_datetime, parse_duration
-+ from django.utils.duration import duration_string
-+-from django.utils.ipv6 import clean_ipv6_address
-++from django.utils.ipv6 import MAX_IPV6_ADDRESS_LENGTH, clean_ipv6_address
-+ from django.utils.regex_helper import _lazy_re_compile
-+ from django.utils.translation import gettext_lazy as _
-+ from django.utils.translation import ngettext_lazy
-+@@ -1284,6 +1284,7 @@ class GenericIPAddressField(CharField):
-+         self.default_validators = validators.ip_address_validators(
-+             protocol, unpack_ipv4
-+         )[0]
-++        kwargs.setdefault("max_length", MAX_IPV6_ADDRESS_LENGTH)
-+         super().__init__(**kwargs)
-+ 
-+     def to_python(self, value):
-+@@ -1291,7 +1292,9 @@ class GenericIPAddressField(CharField):
-+             return ""
-+         value = value.strip()
-+         if value and ":" in value:
-+-            return clean_ipv6_address(value, self.unpack_ipv4)
-++            return clean_ipv6_address(
-++                value, self.unpack_ipv4, max_length=self.max_length
-++            )
-+         return value
-+ 
-+ 
-+diff --git a/django/utils/ipv6.py b/django/utils/ipv6.py
-+index 88dd6ec..de41a97 100644
-+--- a/django/utils/ipv6.py
-++++ b/django/utils/ipv6.py
-+@@ -3,9 +3,22 @@ import ipaddress
-+ from django.core.exceptions import ValidationError
-+ from django.utils.translation import gettext_lazy as _
-+ 
-++MAX_IPV6_ADDRESS_LENGTH = 39
-++
-++
-++def _ipv6_address_from_str(ip_str, max_length=MAX_IPV6_ADDRESS_LENGTH):
-++    if len(ip_str) > max_length:
-++        raise ValueError(
-++            f"Unable to convert {ip_str} to an IPv6 address (value too long)."
-++        )
-++    return ipaddress.IPv6Address(int(ipaddress.IPv6Address(ip_str)))
-++
-+ 
-+ def clean_ipv6_address(
-+-    ip_str, unpack_ipv4=False, error_message=_("This is not a valid IPv6 address.")
-++    ip_str,
-++    unpack_ipv4=False,
-++    error_message=_("This is not a valid IPv6 address."),
-++    max_length=MAX_IPV6_ADDRESS_LENGTH,
-+ ):
-+     """
-+     Clean an IPv6 address string.
-+@@ -24,7 +37,7 @@ def clean_ipv6_address(
-+     Return a compressed IPv6 address or the same value.
-+     """
-+     try:
-+-        addr = ipaddress.IPv6Address(int(ipaddress.IPv6Address(ip_str)))
-++        addr = _ipv6_address_from_str(ip_str, max_length)
-+     except ValueError:
-+         raise ValidationError(error_message, code="invalid")
-+ 
-+@@ -41,7 +54,7 @@ def is_valid_ipv6_address(ip_str):
-+     Return whether or not the `ip_str` string is a valid IPv6 address.
-+     """
-+     try:
-+-        ipaddress.IPv6Address(ip_str)
-++        _ipv6_address_from_str(ip_str)
-+     except ValueError:
-+         return False
-+     return True
-+diff --git a/docs/ref/forms/fields.txt b/docs/ref/forms/fields.txt
-+index 1a7274e..76b4587 100644
-+--- a/docs/ref/forms/fields.txt
-++++ b/docs/ref/forms/fields.txt
-+@@ -719,7 +719,7 @@ For each field, we describe the default widget used if you don't specify
-+     * Empty value: ``''`` (an empty string)
-+     * Normalizes to: A string. IPv6 addresses are normalized as described below.
-+     * Validates that the given value is a valid IP address.
-+-    * Error message keys: ``required``, ``invalid``
-++    * Error message keys: ``required``, ``invalid``, ``max_length``
-+ 
-+     The IPv6 address normalization follows :rfc:`4291#section-2.2` section 2.2,
-+     including using the IPv4 format suggested in paragraph 3 of that section, like
-+@@ -727,7 +727,7 @@ For each field, we describe the default widget used if you don't specify
-+     ``2001::1``, and ``::ffff:0a0a:0a0a`` to ``::ffff:10.10.10.10``. All characters
-+     are converted to lowercase.
-+ 
-+-    Takes two optional arguments:
-++    Takes three optional arguments:
-+ 
-+     .. attribute:: protocol
-+ 
-+@@ -742,6 +742,15 @@ For each field, we describe the default widget used if you don't specify
-+         ``192.0.2.1``. Default is disabled. Can only be used
-+         when ``protocol`` is set to ``'both'``.
-+ 
-++    .. attribute:: max_length
-++
-++        Defaults to 39, and behaves the same way as it does for
-++        :class:`CharField`.
-++
-++    .. versionchanged:: 4.2.18
-++
-++        The default value for ``max_length`` was set to 39 characters.
-++
-+ ``ImageField``
-+ --------------
-+ 
++     def add_filtered_relation(self, filtered_relation, alias):
+++        self.check_alias(alias)
++         filtered_relation.alias = alias
++         lookups = dict(get_children_from_q(filtered_relation.condition))
++         relation_lookup_parts, relation_field_parts, _ = self.solve_lookup_type(
 +diff --git a/docs/releases/4.2.17.txt b/docs/releases/4.2.17.txt
-+index 0475a96..1392724 100644
++index 1392724..3a0815b 100644
 +--- a/docs/releases/4.2.17.txt
 ++++ b/docs/releases/4.2.17.txt
-+@@ -39,3 +39,14 @@ CVE-2025-26699: Potential denial-of-service vulnerability in ``django.utils.text
-+ The ``wrap()`` and :tfilter:`wordwrap` template filter were subject to a
-+ potential denial-of-service attack when used with very long strings.
++@@ -50,3 +50,10 @@ which has now been updated to define a ``max_length`` of 39 characters.
 + 
-++CVE-2024-56374: Potential denial-of-service vulnerability in IPv6 validation
-++============================================================================
++ The :class:`django.db.models.GenericIPAddressField` model field was not
++ affected.
 ++
-++Lack of upper bound limit enforcement in strings passed when performing IPv6
-++validation could lead to a potential denial-of-service attack. The undocumented
-++and private functions ``clean_ipv6_address`` and ``is_valid_ipv6_address`` were
-++vulnerable, as was the  :class:`django.forms.GenericIPAddressField` form field,
-++which has now been updated to define a ``max_length`` of 39 characters.
+++CVE-2025-57833: Potential SQL injection in ``FilteredRelation`` column aliases
+++==============================================================================
 ++
-++The :class:`django.db.models.GenericIPAddressField` model field was not
-++affected.
-+diff --git a/tests/forms_tests/field_tests/test_genericipaddressfield.py b/tests/forms_tests/field_tests/test_genericipaddressfield.py
-+index 80722f5..ef00a72 100644
-+--- a/tests/forms_tests/field_tests/test_genericipaddressfield.py
-++++ b/tests/forms_tests/field_tests/test_genericipaddressfield.py
-+@@ -1,6 +1,7 @@
-+ from django.core.exceptions import ValidationError
-+ from django.forms import GenericIPAddressField
-+ from django.test import SimpleTestCase
-++from django.utils.ipv6 import MAX_IPV6_ADDRESS_LENGTH
+++:class:`.FilteredRelation` was subject to SQL injection in column aliases,
+++using a suitably crafted dictionary, with dictionary expansion, as the
+++``**kwargs`` passed to :meth:`.QuerySet.annotate` or :meth:`.QuerySet.alias`.
++diff --git a/tests/annotations/tests.py b/tests/annotations/tests.py
++index e0cdbf1..a8474ab 100644
++--- a/tests/annotations/tests.py
+++++ b/tests/annotations/tests.py
++@@ -12,6 +12,7 @@ from django.db.models import (
++     Exists,
++     ExpressionWrapper,
++     F,
+++    FilteredRelation,
++     FloatField,
++     Func,
++     IntegerField,
++@@ -1121,6 +1122,15 @@ class NonAggregateAnnotationTestCase(TestCase):
++         with self.assertRaisesMessage(ValueError, msg):
++             Book.objects.annotate(**{crafted_alias: Value(1)})
 + 
-+ 
-+ class GenericIPAddressFieldTest(SimpleTestCase):
-+@@ -125,6 +126,35 @@ class GenericIPAddressFieldTest(SimpleTestCase):
-+         ):
-+             f.clean("1:2")
-+ 
-++    def test_generic_ipaddress_max_length_custom(self):
-++        # Valid IPv4-mapped IPv6 address, len 45.
-++        addr = "0000:0000:0000:0000:0000:ffff:192.168.100.228"
-++        f = GenericIPAddressField(max_length=len(addr))
-++        f.clean(addr)
+++    def test_alias_filtered_relation_sql_injection(self):
+++        crafted_alias = """injected_name" from "annotations_book"; --"""
+++        msg = (
+++            "Column aliases cannot contain whitespace characters, quotation marks, "
+++            "semicolons, or SQL comments."
+++        )
+++        with self.assertRaisesMessage(ValueError, msg):
+++            Book.objects.annotate(**{crafted_alias: FilteredRelation("author")})
 ++
-++    def test_generic_ipaddress_max_length_validation_error(self):
-++        # Valid IPv4-mapped IPv6 address, len 45.
-++        addr = "0000:0000:0000:0000:0000:ffff:192.168.100.228"
-++
-++        cases = [
-++            ({}, MAX_IPV6_ADDRESS_LENGTH),  # Default value.
-++            ({"max_length": len(addr) - 1}, len(addr) - 1),
-++        ]
-++        for kwargs, max_length in cases:
-++            max_length_plus_one = max_length + 1
-++            msg = (
-++                f"Ensure this value has at most {max_length} characters (it has "
-++                f"{max_length_plus_one}).'"
-++            )
-++            with self.subTest(max_length=max_length):
-++                f = GenericIPAddressField(**kwargs)
-++                with self.assertRaisesMessage(ValidationError, msg):
-++                    f.clean("x" * max_length_plus_one)
-++                with self.assertRaisesMessage(
-++                    ValidationError, "This is not a valid IPv6 address."
-++                ):
-++                    f.clean(addr)
-++
-+     def test_generic_ipaddress_as_generic_not_required(self):
-+         f = GenericIPAddressField(required=False)
-+         self.assertEqual(f.clean(""), "")
-+@@ -150,7 +180,8 @@ class GenericIPAddressFieldTest(SimpleTestCase):
-+             f.clean(" fe80::223:6cff:fe8a:2e8a "), "fe80::223:6cff:fe8a:2e8a"
-+         )
-+         self.assertEqual(
-+-            f.clean(" 2a02::223:6cff:fe8a:2e8a "), "2a02::223:6cff:fe8a:2e8a"
-++            f.clean(" " * MAX_IPV6_ADDRESS_LENGTH + " 2a02::223:6cff:fe8a:2e8a "),
-++            "2a02::223:6cff:fe8a:2e8a",
-+         )
-+         with self.assertRaisesMessage(
-+             ValidationError, "'This is not a valid IPv6 address.'"
-+diff --git a/tests/utils_tests/test_ipv6.py b/tests/utils_tests/test_ipv6.py
-+index bf78ed9..2d06507 100644
-+--- a/tests/utils_tests/test_ipv6.py
-++++ b/tests/utils_tests/test_ipv6.py
-+@@ -1,9 +1,17 @@
-+-import unittest
-++import traceback
-++from io import StringIO
++     def test_alias_forbidden_chars(self):
++         tests = [
++             'al"ias',
++@@ -1146,6 +1156,11 @@ class NonAggregateAnnotationTestCase(TestCase):
++                 with self.assertRaisesMessage(ValueError, msg):
++                     Book.objects.annotate(**{crafted_alias: Value(1)})
 + 
-+-from django.utils.ipv6 import clean_ipv6_address, is_valid_ipv6_address
-++from django.core.exceptions import ValidationError
-++from django.test import SimpleTestCase
-++from django.utils.ipv6 import (
-++    MAX_IPV6_ADDRESS_LENGTH,
-++    clean_ipv6_address,
-++    is_valid_ipv6_address,
-++)
-++from django.utils.version import PY310
-+ 
-+ 
-+-class TestUtilsIPv6(unittest.TestCase):
-++class TestUtilsIPv6(SimpleTestCase):
-+     def test_validates_correct_plain_address(self):
-+         self.assertTrue(is_valid_ipv6_address("fe80::223:6cff:fe8a:2e8a"))
-+         self.assertTrue(is_valid_ipv6_address("2a02::223:6cff:fe8a:2e8a"))
-+@@ -64,3 +72,29 @@ class TestUtilsIPv6(unittest.TestCase):
-+         self.assertEqual(
-+             clean_ipv6_address("::ffff:18.52.18.52", unpack_ipv4=True), "18.52.18.52"
-+         )
-++
-++    def test_address_too_long(self):
-++        addresses = [
-++            "0000:0000:0000:0000:0000:ffff:192.168.100.228",  # IPv4-mapped IPv6 address
-++            "0000:0000:0000:0000:0000:ffff:192.168.100.228%123456",  # % scope/zone
-++            "fe80::223:6cff:fe8a:2e8a:1234:5678:00000",  # MAX_IPV6_ADDRESS_LENGTH + 1
-++        ]
-++        msg = "This is the error message."
-++        value_error_msg = "Unable to convert %s to an IPv6 address (value too long)."
-++        for addr in addresses:
-++            with self.subTest(addr=addr):
-++                self.assertGreater(len(addr), MAX_IPV6_ADDRESS_LENGTH)
-++                self.assertEqual(is_valid_ipv6_address(addr), False)
-++                with self.assertRaisesMessage(ValidationError, msg) as ctx:
-++                    clean_ipv6_address(addr, error_message=msg)
-++                exception_traceback = StringIO()
-++                if PY310:
-++                    traceback.print_exception(ctx.exception, file=exception_traceback)
-++                else:
-++                    traceback.print_exception(
-++                        type(ctx.exception),
-++                        value=ctx.exception,
-++                        tb=ctx.exception.__traceback__,
-++                        file=exception_traceback,
+++                with self.assertRaisesMessage(ValueError, msg):
+++                    Book.objects.annotate(
+++                        **{crafted_alias: FilteredRelation("authors")}
 ++                    )
-++                self.assertIn(value_error_msg % addr, exception_traceback.getvalue())
+++
++ 
++ class AliasTests(TestCase):
++     @classmethod
++@@ -1418,3 +1433,12 @@ class AliasTests(TestCase):
++         )
++         with self.assertRaisesMessage(ValueError, msg):
++             Book.objects.alias(**{crafted_alias: Value(1)})
+++
+++    def test_alias_filtered_relation_sql_injection(self):
+++        crafted_alias = """injected_name" from "annotations_book"; --"""
+++        msg = (
+++            "Column aliases cannot contain whitespace characters, quotation marks, "
+++            "semicolons, or SQL comments."
+++        )
+++        with self.assertRaisesMessage(ValueError, msg):
+++            Book.objects.alias(**{crafted_alias: FilteredRelation("authors")})
 +-- 
 +2.35.5
 +
 diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-index 24eee95f03..f4b8da69b5 100644
+index f4b8da69b5..82cdcb2328 100644
 --- a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
 +++ b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-@@ -26,6 +26,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
-             file://CVE-2024-53907.patch \
+@@ -27,6 +27,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
              file://CVE-2024-27351.patch \
              file://CVE-2025-26699.patch \
-+            file://CVE-2024-56374.patch \
+             file://CVE-2024-56374.patch \
++            file://CVE-2025-57833.patch \
             "
  
  SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
 diff --git a/meta-python/recipes-devtools/python/python3-django_3.2.23.bb b/meta-python/recipes-devtools/python/python3-django_3.2.23.bb
-index 92a3886cbc..b8e8759467 100644
+index b8e8759467..b5a6c8d41b 100644
 --- a/meta-python/recipes-devtools/python/python3-django_3.2.23.bb
 +++ b/meta-python/recipes-devtools/python/python3-django_3.2.23.bb
-@@ -9,6 +9,7 @@ RDEPENDS:${PN} += "\
- SRC_URI += "\
+@@ -10,6 +10,7 @@ SRC_URI += "\
  	file://CVE-2024-27351.patch \
  	file://CVE-2025-26699.patch \
-+	file://CVE-2024-56374.patch \
+ 	file://CVE-2024-56374.patch \
++	file://CVE-2025-57833.patch \
  "
  
  # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
 diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.17.bb b/meta-python/recipes-devtools/python/python3-django_4.2.17.bb
-index c2b517a441..5377b96c79 100644
+index 5377b96c79..f2fe1f6e90 100644
 --- a/meta-python/recipes-devtools/python/python3-django_4.2.17.bb
 +++ b/meta-python/recipes-devtools/python/python3-django_4.2.17.bb
-@@ -7,7 +7,10 @@ RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-sqlparse \
+@@ -10,6 +10,7 @@ RDEPENDS:${PN} += "\
+ SRC_URI += "\
+ 	file://CVE-2025-26699.patch \
+ 	file://CVE-2024-56374.patch \
++	file://CVE-2025-57833.patch \
  "
  
--SRC_URI += "file://CVE-2025-26699.patch"
-+SRC_URI += "\
-+	file://CVE-2025-26699.patch \
-+	file://CVE-2024-56374.patch \
-+"
- 
  # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
- # default. To build the 4.x branch, 
 -- 
 2.40.0
 
