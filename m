@@ -2,152 +2,120 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C834CCEACEF
-	for <webhook@archiver.kernel.org>; Mon, 17 Nov 2025 08:53:01 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5420.1763369573843197272
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7406CEACEF
+	for <webhook@archiver.kernel.org>; Mon, 17 Nov 2025 08:58:51 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5353.1763369931009296996
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Nov 2025 00:52:54 -0800
+ Mon, 17 Nov 2025 00:58:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=H/P7h9UH;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4775ae77516so45158415e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 00:52:53 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ghmzRWm7;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4775e891b5eso20540575e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 00:58:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763369572; x=1763974372; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ZfLfo9HCpUCweYEguwLiLz98FdPwujVkjV8X+zoJTV0=;
-        b=H/P7h9UHYF6LtMcwmaIYKqhYI4fTGEbuIUDlAevRVdciqvEKtWg9WqAr9mPb3MV2/l
-         3L1COVvWkx2L2PjjwoQx5D4fvFFAkm4i6vUyILtA+OG7bAOjRoUU6V2n0wgobIdwCYPk
-         Zz5aPoUMMk3LN9BXIKHWswUnrQnIJ/FeL1sZ9yy5/A8kHHNHNhPkQWG3VsJiGN/195qu
-         JsmmBRr5+n22aav7kibzzBFXNxLqH2PQn0iOG/isorJTXUI14CoNd2uSXUsP0OF+jee8
-         VD6XeTbL1MvoLBYQNEF1hhNM9E5Jd63xGOWT/PMsctEw6VuuGcAo0HFBqRDnHAIVJ2SK
-         oADQ==
+        d=gmail.com; s=20230601; t=1763369929; x=1763974729; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=yia4lyN7SlDUQog7SwPV1DqsdyHMiXQTleiJZdWgplQ=;
+        b=ghmzRWm7DIVGXYjw1MhWZ6dyzCoW+hwiirXx+SpxqA0Ll/wb390akBrVOh+LvVSRLs
+         jYPMF3R9mlOG7od+sakDw7ATwOBA5gKIgTBu30ipclUzDcNQbpLiP1K01kNkOP2ar3+a
+         PftMMBiv1HqFZlbNLSI9iTZnOFp+nxay/4tfBYPhHW1BSdvi3CmIF/5odGH6sz5e/rpa
+         ACxbWVGG7xTMTpQwQVPaDQEUE2U1q3pigVkCN8+iTF2fM6o3MVEUfkz7xZb5qMb/Mt/N
+         kVACjlUomoUBygcB/+Xfm4g3wBTP+eKw++czEBcuUnM+vTrIq1XNlBxa1Pvqlheukv7e
+         rk0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763369572; x=1763974372;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1763369929; x=1763974729;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ZfLfo9HCpUCweYEguwLiLz98FdPwujVkjV8X+zoJTV0=;
-        b=GgHGkaOQ1a0Gov91JNSc/dxrkQP3ahANwlt4NWs50x+hm3rk82vfD+A+2f2WLgQa7w
-         IpEJBNUGVdCGalQqZawl6RMa6ivHm7BHrIlRAP9Ls2DwTO+tsuZ4OIRwNDhu08s0HAFo
-         DAUAPh8bClyw6AsSVz4SxBoP9LIj3upQtUJdVnzpzWfiqcAniIL9kMbhdVNK2xaIE9fP
-         Owq/n2RegT5rSay4CD6+4647jgDhOxYdUWY9lpX233nW58pLjaoGKsHrCAhU7dYPVD6p
-         +HPYZrBsFDYcp4dkEWhuAEpI6Q4b47RjDK4mCBv0r9ivb0r9M2MyB9GtAxYmkscczlVB
-         pNeg==
-X-Gm-Message-State: AOJu0YwZKY+tQ9ucPoyBxIy+w9/n51CspgQt+NgL/9UOIr/kV7waWVvy
-	DglHeWG4KdU95uQ/i7LKqa4ebbF/dBuLwsPqWiXO7enFzTjIRKbOQ0EfFmKHE9lU
-X-Gm-Gg: ASbGncuOMcwhN+hx1W/NaHyl53Dx0Uoq7IHyodZwf0af5t6/gFqkKe3I9bf68WacMrc
-	ZU2yv062qnV8RATXku4ySKoJxthWXEorWi6rJMseZ0auAWxH5D8mmC93/ZmP3Aaehrjd/6oJ0aY
-	wmQevGeJG4y6imBwd4TOY8AK2Zaak0ZqZ8Hpn3aBzWmofUuBGvm+6RMDXWHQR8z2I/5W7zlQwwc
-	xEbySybLCTTseUEsQQKr+9R5DI01AYEa67qPLmdD3vVlaqmBRpRWpECeHfwx3WQBxKGguVQTq0x
-	mbHXBPJr07+SPPljjDSfCnAyYAkVB0tmjKOSf8Hz+eGJl1bpREYNFo0Y6ih2r8JW+OU8OH6hRwT
-	3e4XMOID9a8t7IrDOV5EI1CZTSTJLcgUWKxEMytHtf9RiPOdkurhzDPU1ChWApAhuy118bRpmp/
-	7M1nCYVxYj7kqpbYvtwCk=
-X-Google-Smtp-Source: AGHT+IFDZ2V6rK9QSf3fV+46kOAmaWGGPt2Ibuk/Wm26Fc1t+pH8hv4A9rdak7kZ/0AG9EiusnG7sQ==
-X-Received: by 2002:a05:600c:4f53:b0:477:8985:4038 with SMTP id 5b1f17b1804b1-4778fe5e5a9mr90127545e9.13.1763369572040;
-        Mon, 17 Nov 2025 00:52:52 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4778bd0f761sm109493395e9.4.2025.11.17.00.52.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 17 Nov 2025 00:52:51 -0800 (PST)
-Message-ID: <5748b43a-d6a6-482c-850c-5ccb03ecd05f@gmail.com>
-Date: Mon, 17 Nov 2025 09:52:51 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH 4/4] rsyslog: set status for
- CVE-2015-3243
-To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20251115130000.1121405-1-skandigraun@gmail.com>
- <20251115130000.1121405-4-skandigraun@gmail.com>
- <CA+s=J=xgkjKkQ+rC83CALXWCXoWhcj1a7RXbRm68=UTfJm1-wQ@mail.gmail.com>
-Content-Language: en-US
+        bh=yia4lyN7SlDUQog7SwPV1DqsdyHMiXQTleiJZdWgplQ=;
+        b=WmFH70Ths84XSGVKc6z3XgzGSKRF8MQ//D4y81dgBMfVLH1tYm4qci2KPoBPZNP+oZ
+         IBZcR8+XOxT/cUedKbu6ZnAbi1w92TYa18Wc9c6dcYmB/1iNTw1XMBADjT9tlckjUhKq
+         e85l0WPtwFw2HlG/18oI1YYP7+J5yiz4Is6pd89t4bhbOEE2yeBl3XOn9PCdWlwg2l1r
+         0f7ZNTuJW8417tNM2vfwoICY4RKGF0u90XczPII7+as38n7Ku4NV96CsEgAil6iI01LA
+         8gmZ7/cEv3cai9f/nBof6bL+CTaL9FsvxnQftMQAMyTRBlE6ojhzvem1wgm8oOSfS54P
+         /lgg==
+X-Gm-Message-State: AOJu0Ywb/tnw65zKN0jG2yGgwq7H43l2KfNzO3cOBsjcc/QQjmifbwq8
+	2tl+L3wqfHMpemJaIiAuPMAJfqAughlJFR313OSd17H1uammLnJ2cR6k0fVpt51q
+X-Gm-Gg: ASbGncuuF5Yvtyeggs5WqleD/zJQysau8FxV1hmxwuMVaxnoi/s2KUxJQUbJIX9UyBn
+	qwfxPy9oxmx3KC9fozreausmkKyu1K5KSqMSAhoBOj9LQAH3/PQ6RX1Og1PPSKuXjAnP+PL/rI6
+	oEX7D/yh4pDhuBL7/Fekm8t30PRxPqlYRKO6WkKUzsOJ5kOaLaKfPnpLguPtic5ugWehbZ5FmxH
+	gCFzWwDa47TrwExR4pEdpHiKvFGXSX6mbem2LqJpP+6ewlIo7edWXnqbFX69dlNOZfoIeFIKX/i
+	sMcreGyyuzbGll2YgEdVaJmUGpO7Zs2bcOR2PFvQnnpgbcMiqpPx6jAymW1FFeB4j2Ug+PCoKMo
+	HhKX80cJ6LcvCKRlzSVeMugOiQu+75KqWRceYZzoRwKXEdp/NwNZm94+2sIJEVxLN8x3fCwyZ7C
+	oI3idVf7Fdjkm5NPCsFgY=
+X-Google-Smtp-Source: AGHT+IGE7//avvN9BRtUzMjYLBmPrtcRV7ISDp10Yumx4An552KpCunQxt2IkWzjg3fUtJmIfRUOMQ==
+X-Received: by 2002:a05:600c:4753:b0:477:333a:f71f with SMTP id 5b1f17b1804b1-4778fe60658mr109157495e9.17.1763369928913;
+        Mon, 17 Nov 2025 00:58:48 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477a5153d8fsm10292765e9.2.2025.11.17.00.58.48
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 17 Nov 2025 00:58:48 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <CA+s=J=xgkjKkQ+rC83CALXWCXoWhcj1a7RXbRm68=UTfJm1-wQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][scarthgap][PATCH v2] rsyslog: set status for CVE-2015-3243
+Date: Mon, 17 Nov 2025 09:58:47 +0100
+Message-ID: <20251117085847.762880-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.51.2
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 08:53:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121766
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 08:58:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121767
 
-On 11/17/25 06:50, Anuj Mittal wrote:
->
->
->
-> On Sat, Nov 15, 2025 at 9:00 PM Gyorgy Sarvari via
-> lists.openembedded.org <http://lists.openembedded.org>
-> <skandigraun=gmail.com@lists.openembedded.org> wrote:
->
->     Details: https://nvd.nist.gov/vuln/detail/CVE-2015-3243
->
->     The issue is about file permissions: by default rsyslog creates
->     world-readable
->     files. In case a log message contains some sensitive information,
->     then that's
->     exposed to every user on the system.
->
->     However the rsyslog.conf file that is shipped with the recipe
->     solves it: it
->     already sets non-world-readable default permissions on all files,
->     so this
->     vulnerability is fixed in the default OE recipe.
->
->     See also this package in OpenSuse[1], where it is solved the same way.
->
->     [1]: https://build.opensuse.org/requests/619439/changes
->     (rsyslog.conf.in <http://rsyslog.conf.in>)
->
->     Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
->     ---
->      meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf | 3 ++-
->      meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
->     <http://rsyslog_8.2402.0.bb>  | 2 ++
->      2 files changed, 4 insertions(+), 1 deletion(-)
->
->     diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
->     b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
->     index dbfefb7597..6316efb629 100644
->     --- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
->     +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
->     @@ -13,7 +13,8 @@ $ModLoad imklog   # kernel logging (formerly
->     provided by rklogd)
->
->      #
->      # Set the default permissions
->     -#
->     +# Setting the $FileCreateMode not world readable fixes CVE-2015-3243
->     +#
->      $FileOwner root
->      $FileGroup adm
->      $FileCreateMode 0640
->     diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
->     <http://rsyslog_8.2402.0.bb>
->     b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
->     <http://rsyslog_8.2402.0.bb>
->     index af46cc14d7..59944cd70c 100644
->     --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
->     <http://rsyslog_8.2402.0.bb>
->     +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
->     <http://rsyslog_8.2402.0.bb>
->     @@ -37,6 +37,8 @@ SRC_URI[sha256sum] =
->     "acbdd8579489df36b4a383dc6909a61b7623807f0aff54c062115f2de7
->      UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
->      UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
->
->     +CVE_STATUS[CVE-2015-3243] = "fix-file-included: The shipped
->     default rsyslog.conf contains the fix"
->     +
->
->
->  fix-file-included isn't available in scarthgap so we will have to use
-> something else.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2015-3243
 
-Right, it seems there isn't any that would really fit... will pick a
-"Patched" status in a few moments.
+The issue is about file permissions: by default rsyslog creates world-readable
+files. In case a log message contains some sensitive information, then that's
+exposed to every user on the system.
+
+However the rsyslog.conf file that is shipped with the recipe solves it: it
+already sets non-world-readable default permissions on all files, so this
+vulnerability is fixed in the default OE recipe.
+
+See also this package in OpenSuse[1], where it is solved the same way.
+
+[1]: https://build.opensuse.org/requests/619439/changes (rsyslog.conf.in)
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+
+v2: updated the CVE_STATUS key to "backported-patch" due to the lack of a better one.
+(fix-file-included status doesn't exist in Scarthgap)
+
+ meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf | 3 ++-
+ meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb  | 2 ++
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
+index dbfefb7597..6316efb629 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
+@@ -13,7 +13,8 @@ $ModLoad imklog   # kernel logging (formerly provided by rklogd)
+ 
+ #
+ # Set the default permissions
+-#
++# Setting the $FileCreateMode not world readable fixes CVE-2015-3243
++# 
+ $FileOwner root
+ $FileGroup adm
+ $FileCreateMode 0640
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
+index af46cc14d7..c5bd9be5bb 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
+@@ -37,6 +37,8 @@ SRC_URI[sha256sum] = "acbdd8579489df36b4a383dc6909a61b7623807f0aff54c062115f2de7
+ UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ 
++CVE_STATUS[CVE-2015-3243] = "backported-patch: The shipped default rsyslog.conf contains the fix"
++
+ inherit autotools pkgconfig systemd update-rc.d ptest
+ 
+ EXTRA_OECONF += "--disable-generate-man-pages ap_cv_atomic_builtins=yes"
 
