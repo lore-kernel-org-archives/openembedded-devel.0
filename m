@@ -2,94 +2,91 @@ Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21AFCCE8D6B
-	for <webhook@archiver.kernel.org>; Mon, 17 Nov 2025 07:51:31 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4645.1763365886489992259
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DB5ECEACEF
+	for <webhook@archiver.kernel.org>; Mon, 17 Nov 2025 07:52:11 +0000 (UTC)
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4775.1763365927363906134
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Nov 2025 23:51:26 -0800
+ Sun, 16 Nov 2025 23:52:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=RJ/eFj0B;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: liuyd.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ESiW9juz;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: liuyd.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1763365887; x=1794901887;
+  t=1763365928; x=1794901928;
   h=from:to:subject:date:message-id;
-  bh=dBXP6kK+0zhYWaUGBfcY4wZEHXpwZPSQwzxll74nXls=;
-  b=RJ/eFj0BEG9HdiveIJq4b/EIpEpIlwbLv+urUEc39AtgeMOmdLtw/U3A
-   LdoglQ8HASe460lEIG3BKXNXbwOz0nICk2Ktl4X4yrHyfSVU1wlp+mslh
-   hQSsvHSa94qYHgYNAxMMHpsmz3rjObbWxvspHvfD0fTxMcGEjVdD7nPhC
-   cJLbei5CGhib4sIurds9ryLlpRhSRBOvzDWHySJJDTSkeLrGpiO4lgUfS
-   rA30hK0cxDy5FrWtOumUvftVflKbPlcMAufaj3NaxrliePBIuSMleIJAN
-   bqLvZW/Fsp/7HyoEPz9Vo5T9t8B2ylTnQYXN2sZmBjvl29NvPRMa7kBeJ
+  bh=R8Utg7/3sZY2Ni5GiCOpV37v1MLNG39R9APiiCSt1Iw=;
+  b=ESiW9juztC8KPVTFFeGZRWhVvwoJQUlpty+WcEOxrU+RdhzVuzJfvz+0
+   rL8P1VoBQfS01mXpEw9TWZETvcFiJxdQKj4RVg7mE73RyM/HHCxYOFpAD
+   eqOVLsxl2bl5UUmG/GShZwRzum9CsGX027b1UyRIX2tC/y5hsfkdyEQZH
+   Z567r99aZXsGWSR73/W1zy4t0+NLMC30t0iR+ffb0IRQCJ1SapCVaD/xm
+   7jTC7405H7ZKlfbqaNBv4MSyJfSJA9YH6hrdIIt6HA7o+/8cCmNMRHLER
+   oZiOUMsZTzOIdHlVW/epp+L9JHNBEEoQVyIgHV68K8MTLOh1U7jH9N6wB
    A==;
-X-CSE-ConnectionGUID: U84d96n9RD2wTSJiYZcLTQ==
-X-CSE-MsgGUID: joMmVhTTSmu+YERVXvDSQQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11615"; a="219465941"
+X-CSE-ConnectionGUID: TmKeIIfeTOG9yCLyfd4+iw==
+X-CSE-MsgGUID: xmdcAG7dRGaB3CYLj6vfgw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11615"; a="219504880"
 X-IronPort-AV: E=Sophos;i="6.19,311,1754924400"; 
-   d="scan'208";a="219465941"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.19])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Nov 2025 16:51:25 +0900
-Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
+   d="scan'208";a="219504880"
+Received: from unknown (HELO az2uksmgr1.o.css.fujitsu.com) ([52.151.125.128])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Nov 2025 16:52:06 +0900
+Received: from az2uksmgm2.o.css.fujitsu.com (unknown [10.151.22.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 6F5D4C000AF
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 07:51:24 +0000 (UTC)
-Received: from az2uksmom4.o.css.fujitsu.com (az2uksmom4.o.css.fujitsu.com [10.151.22.204])
+	by az2uksmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 7BCC41C1C718
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 07:52:05 +0000 (UTC)
+Received: from az2nlsmom4.fujitsu.com (az2nlsmom4.o.css.fujitsu.com [10.150.26.201])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 2469CC008AB
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 07:51:24 +0000 (UTC)
+	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 2EC6D1800253
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 07:52:05 +0000 (UTC)
 Received: from zhengrq-VirtualBox.fnst-internet.local (unknown [10.193.135.3])
-	by az2uksmom4.o.css.fujitsu.com (Postfix) with ESMTP id 6B30940F8D0
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 07:51:22 +0000 (UTC)
+	by az2nlsmom4.fujitsu.com (Postfix) with ESMTP id 53EAF200020B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 07:52:03 +0000 (UTC)
 From: Liu Yiding <liuyd.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH] poppler: upgrade 25.10.0 -> 25.11.0
-Date: Mon, 17 Nov 2025 15:51:17 +0800
-Message-Id: <20251117075117.2705-1-liuyd.fnst@fujitsu.com>
+Subject: [oe][meta-python][PATCH] python3-imageio: upgrade 2.37.0 -> 2.37.2
+Date: Mon, 17 Nov 2025 15:51:31 +0800
+Message-Id: <20251117075131.2751-1-liuyd.fnst@fujitsu.com>
 X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 07:51:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121759
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 07:52:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121760
 
 Changelog:
- core:
-  * NSS Signatures: Tweak the logic that decides which firefox profile to use
-  * NSS Signatures: call PORT_GetError() only if the preceding CERT_PKIXVerifyCert() fails
-  * Splash: Performance improvements
-  * Fix crashes in malformed documents
-
- glib:
-  * Fix ocsp check for signatures validation
-  * Fix warning when running glib-mkenums
+ https://github.com/imageio/imageio/releases/tag/v2.37.2
 
 Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- .../poppler/{poppler_25.10.0.bb => poppler_25.11.0.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/poppler/{poppler_25.10.0.bb => poppler_25.11.0.bb} (96%)
+ ...{python3-imageio_2.37.0.bb => python3-imageio_2.37.2.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-imageio_2.37.0.bb => python3-imageio_2.37.2.bb} (58%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_25.10.0.bb b/meta-oe/recipes-support/poppler/poppler_25.11.0.bb
-similarity index 96%
-rename from meta-oe/recipes-support/poppler/poppler_25.10.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_25.11.0.bb
-index cce5e5f7ae..7f079ec641 100644
---- a/meta-oe/recipes-support/poppler/poppler_25.10.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_25.11.0.bb
-@@ -9,7 +9,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-cmake-Do-not-use-isystem.patch \
-            file://0001-workaround-build-racing.patch \
-            "
--SRC_URI[sha256sum] = "6b5e9bb64dabb15787a14db1675291c7afaf9387438cc93a4fb7f6aec4ee6fe0"
-+SRC_URI[sha256sum] = "63f155142b77349e2bccaef148e754e7506ab1641e713b83af4f54a8f8b15369"
+diff --git a/meta-python/recipes-devtools/python/python3-imageio_2.37.0.bb b/meta-python/recipes-devtools/python/python3-imageio_2.37.2.bb
+similarity index 58%
+rename from meta-python/recipes-devtools/python/python3-imageio_2.37.0.bb
+rename to meta-python/recipes-devtools/python/python3-imageio_2.37.2.bb
+index 5de9ee466c..582cd348f9 100644
+--- a/meta-python/recipes-devtools/python/python3-imageio_2.37.0.bb
++++ b/meta-python/recipes-devtools/python/python3-imageio_2.37.2.bb
+@@ -3,10 +3,10 @@ write a wide range of image data, including animated images, video, \
+ volumetric data, and scientific formats."
+ SECTION = "devel/python"
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=24cb9a367a9e641b459a01c4d15256ba"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=9da78aa88ef5e9acd41f7bb288286273"
  
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0 glib-2.0-native"
+-SRC_URI[sha256sum] = "71b57b3669666272c818497aebba2b4c5f20d5b37c81720e5e1a56d59c492996"
++SRC_URI[sha256sum] = "0212ef2727ac9caa5ca4b2c75ae89454312f440a756fcfc8ef1993e718f50f8a"
  
+-inherit pypi setuptools3
++inherit pypi python_setuptools_build_meta
+ 
+ RDEPENDS:${PN} = "python3-numpy python3-pillow"
 -- 
 2.43.0
 
