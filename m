@@ -1,91 +1,101 @@
-Return-Path: <t.f.g.geelen@gmail.com>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8B52CCD19A
-	for <webhook@archiver.kernel.org>; Sun, 16 Nov 2025 22:50:38 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3926.1763333428759751927
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98A4BCD4F3E
+	for <webhook@archiver.kernel.org>; Mon, 17 Nov 2025 02:44:39 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.70.1763347470319613859
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Nov 2025 14:50:29 -0800
+ Sun, 16 Nov 2025 18:44:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Z+AJQPC9;
- spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: t.f.g.geelen@gmail.com)
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-b736ffc531fso374008166b.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 14:50:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763333427; x=1763938227; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OcPGI2Xgc2TwBxFwMbh50v0M9iuGfIbKm+2oHyRIPcI=;
-        b=Z+AJQPC9S2hLQNCsJ9DOSjnYwkpe4MtY7nEEfhdVhuMBgSS9I0J+GamdzX8UdIrZdU
-         7nT1gUXd5edZPYgC7li7DBH2MoxwrHV0LxOUxzTSIR6FwyhSuJvNsagxnSo0Xgc2yUpV
-         RU6F7BZZdSCALzMFFYyhEuCXtSIII+Zq0QWzOfa5o7j5CP7o5BNU82N3qKG7+dUHwQ3j
-         FLywgfGZwdJuy2GsrAEKmA0Mx8Jgir84NzovnodO1hHcuclzJzAf3rkBOj/lwAUBOv1W
-         69G00so/taFe9l403mwZ2WYnZv4S9vDaLJWfRHqJv4e89WLBl5KMdpxUzGpPY84aV4kI
-         EXsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763333427; x=1763938227;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=OcPGI2Xgc2TwBxFwMbh50v0M9iuGfIbKm+2oHyRIPcI=;
-        b=nlKCihazoIg4HodS6dJbqKSTdkUnRtXVSUSf/f58RWL1Jfqc1IspYIOu8nqeHfE1dj
-         /GM7zQmv/LkwkvK4PdmzBe5s58mTpKCgEE2V2MKQo6MEDeVDUULe7yat+i227z2Fk4kP
-         KS0tt+HVpr19GJ7GRJS+ftjsoKFNROyJkipmhl2EzJ80LN77QmkmLzvDFrE1JJp8TY1D
-         tB3UKXPjl3sblhB0alEa3KYVvuUzw9Gi3mSFYiYcOKAfgGvLa8xZv6yJAko6wWRr+7+0
-         2/aM16tglsZ2LFixBQ8BpQtlErWRr9yQN27x/Eb/sDCWxjRj0CATBSxYqHr5Nkd7nBno
-         KPng==
-X-Gm-Message-State: AOJu0YyEFFr94XJddV9fx2i5+3ZLaQkuIYWl2ocBa0g3X9MLPTuYnUqc
-	reQIf95Q9lb0jQ2euVP9RGIemzt+LNBPXvOi5WjU+Xnlgn1xJkPkCGmR+KKEAw==
-X-Gm-Gg: ASbGncvxVyxlpwkmYGX2wzPKfWUCZhZCGdGPYfMG1QYCUjNe/X6iwV7sLSz4EFGLS1B
-	WU6Vgcjhy//2r5vRR93PcJIApKlN4IHTMsZ9CjVOHhYc2qha7XLYFawRk6zMHUd5XUv3Rj2EtZV
-	cS2DioVPxEg+RfjppVXlYlqGAQtvBgTc74Zf62QJd1omEV2TDFZgXnWQI1w6PSPHju5d3C63+qU
-	IfAcMmKSwWc394s2yXijHqmPKMlbYmj3J3bU3Hrs9CvqLORyKivQnMnNcTdqc3PtwIXONGJaKTR
-	6sN6LTfQnd50f4yMOyV4dnFS6kZLD5Jl3Ahg1gzBTk3oh1CVHQbqUVywlUJUCkNohkfB6SY/Og9
-	A7+BybYsxDieltTlZbIOVm0DURDUHZJ7qwixHM641BGv6g3O1fpODPCjLxPVj9VIJVFM9cqMeuV
-	4HjYfXCZFEP9oY9UxH81N2yGU7ou4nP8z07AXKqGFw/GuXaWGkjIpCY3cQzK/RfUjp8Typl15bR
-	kB1+1wpsB6yx82yuRV8oCP/
-X-Google-Smtp-Source: AGHT+IGZe3GhLec6fgEcb1QvsUefK9OMmUyc1vyY8Ka9wojUTlCdhU2U/JiRea49CtVWd0oG6219LQ==
-X-Received: by 2002:a17:907:d0f:b0:b73:5a2f:2f0e with SMTP id a640c23a62f3a-b73677f3ee3mr1019830266b.3.1763333426727;
-        Sun, 16 Nov 2025 14:50:26 -0800 (PST)
-Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b734fa811e2sm942983566b.5.2025.11.16.14.50.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 16 Nov 2025 14:50:26 -0800 (PST)
-From: Tom Geelen <t.f.g.geelen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tom Geelen <t.f.g.geelen@gmail.com>
-Subject: [meta-python][PATCH 2/2] python3-yarl: add BBCLASSEXTEND = "native nativesdk"
-Date: Sun, 16 Nov 2025 23:50:13 +0100
-Message-ID: <20251116225013.2063395-2-t.f.g.geelen@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251116225013.2063395-1-t.f.g.geelen@gmail.com>
-References: <20251116225013.2063395-1-t.f.g.geelen@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=n1m1vB6Y;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3416890ff6=jiaying.song.cn@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AH1QBYE248046
+	for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 18:44:30 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=s7CIYyykFEjokw10eXsl
+	XHb46wtoCHVwZLawurdfmaQ=; b=n1m1vB6YQMklRmbebGk1mq916skpoSgwBzWH
+	gf4EkBHrLdpuOwMWEv40OjZGunRSW4oFI9Qdeb3hF8FId83gTdmrUFjOrkOXrNvR
+	BgQFPcchM2eTXe98vN+okQGy7T5zzTohcZ8JtxgXjR733vHBWsEd2koa2n9nNZkM
+	EyiG/ETV1Epg5VFksTwsY29KcCAZPcBvIiEofZ1d2Q5bK0U00lDYas6pYhtlAbvb
+	oIMOs04s9JdTZ/Yyw7wNQyR3PrZ0s5z7QNXlCIatUm2bV6ZHv7VOoP0lv79gUbJH
+	pPSYpiQpsFNjp1gBacilrXYS9aCmX5tMKxvn78g+XDdAvswrxg==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4aeswj96kr-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 18:44:29 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Sun, 16 Nov 2025 18:44:28 -0800
+Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Sun, 16 Nov 2025 18:44:28 -0800
+From: <jiaying.song.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][scarthgap][PATCH] minifi-cpp: fix python shebang in minifi-python
+Date: Mon, 17 Nov 2025 10:44:27 +0800
+Message-ID: <20251117024427.964131-1-jiaying.song.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=BqiQAIX5 c=1 sm=1 tr=0 ts=691a8c0d cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=t7CeM3EgAAAA:8
+ a=HsSA6g-maf90pnkv3jEA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: HUUF2BVS73XeXpPfgt0OWAjz3Nj-y_rL
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE3MDAyMSBTYWx0ZWRfX4K2dkqS7dol8
+ adGH8A7+I3f65B2Vn03/CpR2DYv63cIh6p2v6zRk+iH9EU2Fl9CbZMFWfxqUAHcnpsDzE9I2+i4
+ pKMzTM6NfR4d7H4l3aiMJ73ytfR1uuT+j7WJHl4PfRESH+xNpGsww3C6outkICDuQ2YKUKPLRID
+ frfYZh3knzvXZcDLSwsyEOjB1ZRpVjQdXcibWZU1mmZRIETBtPQTi3ICFn1IYB3PLWVjzXMGiBO
+ mFZf3dljDzUHpjamNfStYyaAQzQrZKoN7p8dXQwTDaqFlhrFzMorlsgRDs5tThFSN2TOY5dQctg
+ /BaYCv+uVtprrKv4IeAcCMPu1BAPFEi/TzmnAI/2U5iFjZIyvn77AJo/Mphc3BxNbjzbfDre3Cg
+ U2oiTP9FyJYA9YagHQ0bjkKidglk2Q==
+X-Proofpoint-ORIG-GUID: HUUF2BVS73XeXpPfgt0OWAjz3Nj-y_rL
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-17_01,2025-11-13_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 phishscore=0 priorityscore=1501 suspectscore=0 adultscore=0
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 spamscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511170021
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 22:50:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121750
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 02:44:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121751
 
-Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
+From: Jiaying Song <jiaying.song.cn@windriver.com>
+
+Replace '/usr/bin/env python' with '/usr/bin/env python3' in the scripts
+under ${libexecdir}/minifi-python.
+
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
 ---
- meta-python/recipes-devtools/python/python3-yarl_1.22.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.15.0.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.22.0.bb b/meta-python/recipes-devtools/python/python3-yarl_1.22.0.bb
-index 6be8a6773c..6c2e2259b7 100644
---- a/meta-python/recipes-devtools/python/python3-yarl_1.22.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-yarl_1.22.0.bb
-@@ -33,3 +33,4 @@ RDEPENDS:${PN}-ptest += " \
-     python3-unittest-automake-output \
- "
+diff --git a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.15.0.bb b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.15.0.bb
+index f84f018ea9..fee161b66f 100644
+--- a/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.15.0.bb
++++ b/meta-oe/recipes-extended/minifi-cpp/minifi-cpp_0.15.0.bb
+@@ -179,6 +179,10 @@ do_install() {
  
-+BBCLASSEXTEND = "native nativesdk"
+         sed -i "s|@MINIFI_LOG@|${MINIFI_LOG}|g" ${D}${sysconfdir}/default/volatiles/99_minifi
+     fi
++    
++    for ss in $(find ${D}${libexecdir}/minifi-python -type f); do
++        sed -i 's,/usr/bin/env python$,/usr/bin/env python3,' "$ss"
++    done
+ }
+ 
+ pkg_postinst:${PN}() {
 -- 
-2.43.0
+2.34.1
 
 
