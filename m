@@ -1,261 +1,492 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 727D0CEACEF
-	for <webhook@archiver.kernel.org>; Mon, 17 Nov 2025 05:50:50 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3249.1763358646663444569
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 429F7CEACEF
+	for <webhook@archiver.kernel.org>; Mon, 17 Nov 2025 07:40:21 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4540.1763365215241187834
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Nov 2025 21:50:46 -0800
+ Sun, 16 Nov 2025 23:40:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=kZhl9v3Z;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=cXKvLhwz;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AH4nltt2790796
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 05:50:46 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=07PvFmfEsmTsEkRm746LOrpc
-	NP136xFfQT6u3UCwqhQ=; b=kZhl9v3Zka4LuWiIFWsdw1GFZpzgJH1PpyYIn5Aq
-	CieYvCpV9pEgTMizxX9jP81auS8GSJ9Iyy+ctCd/JfXf1lHWy5sSEXgMZxShWWFt
-	SMgYRuyQB1PRrB2JsjtaA8JE7FiGCqAC6uxuFJ8EvjHMtuQc/S3KWVGEBPNN9hJi
-	0Aqot4wWHdbCmF5QXs1nk19GG2tDvBzMUuZfb0niwNbf8DRtuiaPuBEpysfuHNZO
-	9yGXgxGs3FaUaZow0LN39NVI9i92nLkriHEkmClt008m0ZUse+tLguTAzDoa9TBX
-	/20s2tXvv9PoCo7EkLCBMOmqY8IXPikDk5J+81KmXTT8Rg==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4afu5bgcc6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 05:50:45 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-4ee1964b1b4so15814921cf.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 21:50:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=guvWVZhn;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4779adb38d3so10376525e9.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 23:40:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1763358644; x=1763963444; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=07PvFmfEsmTsEkRm746LOrpcNP136xFfQT6u3UCwqhQ=;
-        b=cXKvLhwzSeAjRtw9NY/xQlMlVt5HTuBFQj7Dl2Q8oQeGpNXIjlyOZUK48NNlUCZoa9
-         cp8mVCgyc6yLQ5NQCOUoEKfDu5dyq8SWFfSq4vx6OiRTTIXqmEcR9nbyGSB4SsKSgFQv
-         hil0wgRRExRy41hVNmur398lCVxRaxXasLemAlrOLFDWw/wtIkDrXEnX9wmn0vy958GU
-         Z8h5jPP+X5Ne18UDCq1fP3y+HLFeuAJTCif34N77RfP0VTZn9LmnQFuya3o2HdSEsI/M
-         +A4J3ZK+vTjp/FnfNFWioimROM9XVffSu9Zc+fjInuUISonNc6SnBvFOrTNu3RasUM0u
-         Scmg==
+        d=gmail.com; s=20230601; t=1763365213; x=1763970013; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=ma1Tm6wTNlqx9l3a6JvoAtcmWNU+I7GgxO5hcrD0n2Y=;
+        b=guvWVZhnq0vAa+DLvrns5u/ySPKTob1IVtEGmNm0PTuJa4Y0iGs7M/fnNfNsZ82Wc6
+         w3vYo/3CVJIvbnthKIWsc3h2LsG0rLt40DnAZwxI8VUaPA1UWLN1hkysCy62SD1DJoIh
+         8rNcItNA1ofSQKwzCg2OxO8tCB7rFx+vzgCwkzMqArxXBFNEeO+WECUpFE2K1iQ17G4C
+         TOxO6L8LuqM/SUArYBRPzFvVymuXolqd8LSyqBfWYeYslmHqnTH/vQR+iGng/aRnfe66
+         Aw3IHDjGOz9CSsJIjjBVBmQ0bgzEgXqul5bPY9k3sBT9b098PzKVkrhYte1Gm8/m7utg
+         ESLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763358644; x=1763963444;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=07PvFmfEsmTsEkRm746LOrpcNP136xFfQT6u3UCwqhQ=;
-        b=Nm/jWZvhavLR3Zu5gDl1Lg6zEtTlnxKF9K3C9g4q/t3Tl/fQytjizhsNr7RE1O+ml9
-         KeIeIrEopdHqB4RBMV3eS8dXuHXs1lVG2m9Ru3d7nzOue5Xa/NUedaP0csCMbZ/tvca0
-         dgotXRJKwNSCSCsRNNwRNEfv1XphgJjF3nDn/oY4RfDxvhwedhUA9Li07JZLyA6NOphp
-         gw06nLEWIma1iY/82JT8EGpGFolgCGnFOydw3iFDJb/XuGoE703HIUnrHBjlU5tK8lfy
-         wM6HC2/Jr4CijcCloLfgb7LothN2+ZaJvn4goER50Ibxnnjz60RfM5TbQMkuNh0yweMQ
-         qfXQ==
-X-Gm-Message-State: AOJu0YzbZxndVToS1/v+LWl4sXGLZVUt8At+e1Vi2bMuYPmcVVy4m6Gp
-	mbhXG/FhyHeos+avmKMkuArlq2eKv655AA9ZHLjpglS/Gy2diELy+N4RqhISbdyDuwb7bu5n/wT
-	XnVzDXNKvnDEonHqc1jsh+hc8J3pKue3Zj0fqI3VH80ggoQZCckYs2l/4zvdJSXdjRlY9m96l7j
-	j6RudkICD6NIe9xsKl5X1DwgWbUmialgHnryaJFJzrgMaxPDKGU6iafU/gnJM=
-X-Gm-Gg: ASbGncuHN7KzI4HgFcgpigqRfYq0vIfb3J/rBswC/nS4LbURgfWqnGRvCUlfqqRxRWR
-	yFM+Qfe6CqFlw/3C4KMS4biugXkbM28h2GdosJwJ4IWCL7OZXGZVLVXl7B6FZaV4OcG4QOtT6RV
-	MfuiO7mRWg9zMz0Z8YTFrUX8KBFjA8VDathYiW7w0Bwr+x2+lgHhv7arBi+RN3HZuz
-X-Received: by 2002:a05:622a:181d:b0:4ed:6803:6189 with SMTP id d75a77b69052e-4edf20f5181mr159162191cf.53.1763358644173;
-        Sun, 16 Nov 2025 21:50:44 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEakHL1mk6SdEJyHjLIJOuJlZMs0eGYw9Qua2vOjJ+UBsXGFQTABAD1yGZj7Jv+7kq8iit55s4lyQJnvAG9teQ=
-X-Received: by 2002:a05:622a:181d:b0:4ed:6803:6189 with SMTP id
- d75a77b69052e-4edf20f5181mr159161951cf.53.1763358643202; Sun, 16 Nov 2025
- 21:50:43 -0800 (PST)
+        d=1e100.net; s=20230601; t=1763365213; x=1763970013;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ma1Tm6wTNlqx9l3a6JvoAtcmWNU+I7GgxO5hcrD0n2Y=;
+        b=lTuduQHtNakm6RQzN5atuTfCasWx6YBMGauy3UPiWL38sIRAyTN91ppwd8gdEQznZx
+         uMCDOKIq31Io0WYgV5hBaBMkJIIvCb6/XADBigG0/LHVjrfh3fb6sZ2T6Pcngk29uJ7P
+         TXkDhs9VccrlRuV8tnOAQYVqcxF6T+QY4eZ5IfzesUkRPMQMKC4bvKmMNcXpO/FRX6z5
+         8ZHw3dzKQdZ+e/cWtdyIS435Q037tihTCWfEakgKxE6S2ewp5PQsk769TxY0kDxqtDkv
+         l+xTkMs6VNIc9aXAgg51uGYx+RlbglKCeuQVQ2WXVnWxUDNBEcnBlreHEhuQMA6tVxsw
+         +hPw==
+X-Forwarded-Encrypted: i=1; AJvYcCVsZSuh0QdCQM4hO5SvCSPbllnmvYG9N2MQ94MDIw5GzO7CnkEj/zy/STn9wtQFWjW/H/Kx08kVNl9M/OTURLEoTbM=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yx3/zba3XOsu3BNuaITCwhkqwpb+CpTOWLXqeKq4ExckQaJTnhd
+	ZmvwtxZ3A1d7+votY5BW5vcfufOuT4TbkRaVBknGLCo7Tgruzb7kiOGXssTprMDn
+X-Gm-Gg: ASbGncs/SWtpo9qV478eiH8qMOnGquEJk8EXcNlirPGB54qjMhEHmFAku7TNz1qw7c8
+	uHx4p3T92p2JJfZcM7yDr+kEhyWMu+EFzl/vQ+GbtlxIT+yiOxbtJO/nCQWt9YrEMCQ4GAsD7Up
+	gZpIPnH29QIbG+BJbahx/L6lA0ju++2jOvWZiX6lMEg/uiWYhYKJM650wWTkB1H47PojXYi/SSu
+	8cstClcBiXePTRrra8B0W2b0duuX+FcJdaZXTf9WxAbIlv/HGW+SOTpUKB1AZ+hZR940Oean6Mf
+	bS9qwswrfwIcnFki8++WlRbBpur/14IhkzsoCRSZzpx53UU7jToTzmPj2rcsjBo82I2Cu0OSlIU
+	P0ShCzdltGTzQiNFCsvAy5qRXoB5B8Sm7zTC/wCQhGWPxvyoOY2uNk+Qa+/Eimd76ZgNkjiz2wR
+	F9EpjhO86a
+X-Google-Smtp-Source: AGHT+IFd/VT9Zh7hSdozjvUa5XunDCCQUXU5arPaO70gSGLjvuNRMukvfcsV6xJgNTjeQO9luaFkow==
+X-Received: by 2002:a05:600c:a06:b0:470:fe3c:a3b7 with SMTP id 5b1f17b1804b1-4778fe5ece9mr119352765e9.5.1763365213044;
+        Sun, 16 Nov 2025 23:40:13 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477952823d3sm150046765e9.11.2025.11.16.23.40.10
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 16 Nov 2025 23:40:10 -0800 (PST)
+Message-ID: <fcf207d4-6b57-49bb-be82-3dc264206969@gmail.com>
+Date: Mon, 17 Nov 2025 08:40:10 +0100
 MIME-Version: 1.0
-References: <20251115130000.1121405-1-skandigraun@gmail.com> <20251115130000.1121405-4-skandigraun@gmail.com>
-In-Reply-To: <20251115130000.1121405-4-skandigraun@gmail.com>
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Mon, 17 Nov 2025 13:50:32 +0800
-X-Gm-Features: AWmQ_bltFIkcB-Gr2i6ibpyOcOmVMVeRsY3acEA24ffzsp7EfoMgIFVtrh-2JEk
-Message-ID: <CA+s=J=xgkjKkQ+rC83CALXWCXoWhcj1a7RXbRm68=UTfJm1-wQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH 4/4] rsyslog: set status for CVE-2015-3243
-To: skandigraun@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000008a3ce30643c3edf6"
-X-Proofpoint-GUID: KTR27KOEhFQg_WuNv_HmhgI0Psk9dguy
-X-Proofpoint-ORIG-GUID: KTR27KOEhFQg_WuNv_HmhgI0Psk9dguy
-X-Authority-Analysis: v=2.4 cv=Xvz3+FF9 c=1 sm=1 tr=0 ts=691ab7b5 cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=PYnjg3YJAAAA:8 a=KSb9T-wMAAAA:8 a=NEAV23lmAAAA:8
- a=Q4-j1AaZAAAA:8 a=pGLkceISAAAA:8 a=aEY5PuoWai5K1rUELw8A:9 a=QEXdDO2ut3YA:10
- a=Y3j8kKFJAAAA:8 a=0zhiEtMHAAAA:8 a=TkK8yqU6duVKRCnAgsIA:9
- a=bXj8O2t2o-V-M3xg:21 a=lqcHg5cX4UMA:10 a=uxP6HrT_eTzRwkO_Te1X:22
- a=KF4VuIdXkMyp4E_ug72i:22 a=9H3Qd4_ONW2Ztcrla5EB:22 a=MXjRsPfA6TQ6-bNz-KDY:22
- a=v7CeC1Rd8Ef7gCqLsajQ:22 a=poXaRoVlC6wW9_mwW8W4:22 a=pHzHmUro8NiASowvMSCR:22
- a=nt3jZW36AmriUCFCBwmW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE3MDA0OCBTYWx0ZWRfX8WAfxsqJwSO+
- 6LgAUEJYZSPOdJLZTzbTnvwtJnB5EsTWhjTDlk+zrYqdU7LMk/hbhjhBmi6ghIsOLpTPZdp1d+L
- WBO/K34gLnHv9M4Dvj6n8CiXyEJzNsbFFbeuMA8klx1GKuV+8xzgtKKQttjm/3JZevfLaBnjeky
- eqtHgIYSAtmoiOX8igJEZnC+RzQJ5G1JiZ5MPev74E3b5Kt96VTIDJB6l3Ymqg+lqfu+uyodMcR
- xm0IN84FMnIJSbc2jAQYmODHgailvIivkiFyF1ERD99jzmhWmE+dGKIwfZoS8aXHKE7ucw3XVwG
- Qfcrin1lZzdDHAmpnLWXNCE1UdxbRPYiKhDMn0kOlqQUnq0ezDTVda+IdeBCezztclux8nY0QaU
- 51osE0yhXy02M5W7xvk10HwnGczQiw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-17_02,2025-11-13_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
- phishscore=0 priorityscore=1501 clxscore=1015 suspectscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511170048
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-oe][kirkstone][PATCH 1/1] python3-django: fix
+ CVE-2025-26699
+To: saravanan.kadambathursubramaniyam@windriver.com,
+ openembedded-devel@lists.openembedded.org
+References: <20251117031438.3872441-1-saravanan.kadambathursubramaniyam@windriver.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20251117031438.3872441-1-saravanan.kadambathursubramaniyam@windriver.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 05:50:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121755
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 07:40:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121756
 
---0000000000008a3ce30643c3edf6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, Nov 15, 2025 at 9:00=E2=80=AFPM Gyorgy Sarvari via lists.openembedd=
-ed.org
-<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
-
-> Details: https://nvd.nist.gov/vuln/detail/CVE-2015-3243
+On 11/17/25 04:14, Kadambathur Subramaniyam, Saravanan via
+lists.openembedded.org wrote:
+> Reference:
+> https://nvd.nist.gov/vuln/detail/CVE-2025-26699
 >
-> The issue is about file permissions: by default rsyslog creates
-> world-readable
-> files. In case a log message contains some sensitive information, then
-> that's
-> exposed to every user on the system.
+> Upstream-patch:
+> https://github.com/django/django/commit/e88f7376fe68dbf4ebaf11fad1513ce700b45860
 >
-> However the rsyslog.conf file that is shipped with the recipe solves it: =
-it
-> already sets non-world-readable default permissions on all files, so this
-> vulnerability is fixed in the default OE recipe.
->
-> See also this package in OpenSuse[1], where it is solved the same way.
->
-> [1]: https://build.opensuse.org/requests/619439/changes (rsyslog.conf.in)
->
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
 > ---
->  meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf | 3 ++-
->  meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb  | 2 ++
->  2 files changed, 4 insertions(+), 1 deletion(-)
+>  .../CVE-2025-26699.patch                      | 107 ++++++++++++++++++
+>  .../CVE-2025-26699.patch                      | 105 +++++++++++++++++
+>  .../CVE-2025-26699.patch                      | 107 ++++++++++++++++++
+>  .../python/python3-django_2.2.28.bb           |   1 +
+>  .../python/python3-django_3.2.23.bb           |   5 +-
+>  .../python/python3-django_4.2.17.bb           |   2 +
+>  6 files changed, 326 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-26699.patch
+>  create mode 100644 meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-26699.patch
+>  create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-26699.patch
 >
-> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
-> b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
-> index dbfefb7597..6316efb629 100644
-> --- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
-> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
-> @@ -13,7 +13,8 @@ $ModLoad imklog   # kernel logging (formerly provided b=
-y
-> rklogd)
->
->  #
->  # Set the default permissions
-> -#
-> +# Setting the $FileCreateMode not world readable fixes CVE-2015-3243
-> +#
->  $FileOwner root
->  $FileGroup adm
->  $FileCreateMode 0640
-> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
-> b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
-> index af46cc14d7..59944cd70c 100644
-> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
-> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
-> @@ -37,6 +37,8 @@ SRC_URI[sha256sum] =3D
-> "acbdd8579489df36b4a383dc6909a61b7623807f0aff54c062115f2de7
->  UPSTREAM_CHECK_URI =3D "https://github.com/rsyslog/rsyslog/releases"
->  UPSTREAM_CHECK_REGEX =3D "(?P<pver>\d+(\.\d+)+)"
->
-> +CVE_STATUS[CVE-2015-3243] =3D "fix-file-included: The shipped default
-> rsyslog.conf contains the fix"
+> diff --git a/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-26699.patch b/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-26699.patch
+> new file mode 100644
+> index 0000000000..d1c3767069
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-26699.patch
+> @@ -0,0 +1,107 @@
+> +From e88f7376fe68dbf4ebaf11fad1513ce700b45860 Mon Sep 17 00:00:00 2001
+> +From: Sarah Boyce <42296566+sarahboyce@users.noreply.github.com>
+> +Date: Tue, 25 Feb 2025 09:40:54 +0100
+> +Subject: [PATCH] Fixed CVE-2025-26699 -- Mitigated potential DoS in wordwrap
+> + template filter.
 > +
+> +Thanks sw0rd1ight for the report.
+> +
+> +Backport of 55d89e25f4115c5674cdd9b9bcba2bb2bb6d820b from main.
+> +
+> +CVE: CVE-2025-26699
+> +
+> +Upstream-Status: Backport
+> +https://github.com/django/django/commit/e88f7376fe68dbf4ebaf11fad1513ce700b45860
+> +
+> +Signed-off-by: Sarah Boyce <42296566+sarahboyce@users.noreply.github.com>
+
+Please do not add other people's sign off without their explicit
+permission. If the author didn't include it in the original patch, then
+it should go without it. Your sign off is enough.
+
+> +Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
+> +---
+> + django/utils/text.py                          | 28 ++++++++-----------
+> + docs/releases/2.2.28.txt                      |  6 ++++
+> + .../filter_tests/test_wordwrap.py             | 12 ++++++++
+> + 3 files changed, 29 insertions(+), 17 deletions(-)
+> +
+> +diff --git a/django/utils/text.py b/django/utils/text.py
+> +index 2c4040e..c474d56 100644
+> +--- a/django/utils/text.py
+> ++++ b/django/utils/text.py
+> +@@ -1,5 +1,6 @@
+> + import html.entities
+> + import re
+> ++import textwrap
+> + import unicodedata
+> + from gzip import GzipFile
+> + from io import BytesIO
+> +@@ -88,23 +89,16 @@ def wrap(text, width):
+> +     Don't wrap long words, thus the output text may have lines longer than
+> +     ``width``.
+> +     """
+> +-    def _generator():
+> +-        for line in text.splitlines(True):  # True keeps trailing linebreaks
+> +-            max_width = min((line.endswith('\n') and width + 1 or width), width)
+> +-            while len(line) > max_width:
+> +-                space = line[:max_width + 1].rfind(' ') + 1
+> +-                if space == 0:
+> +-                    space = line.find(' ') + 1
+> +-                    if space == 0:
+> +-                        yield line
+> +-                        line = ''
+> +-                        break
+> +-                yield '%s\n' % line[:space - 1]
+> +-                line = line[space:]
+> +-                max_width = min((line.endswith('\n') and width + 1 or width), width)
+> +-            if line:
+> +-                yield line
+> +-    return ''.join(_generator())
+> ++
+> ++    wrapper = textwrap.TextWrapper(
+> ++        width=width,
+> ++        break_long_words=False,
+> ++        break_on_hyphens=False,
+> ++    )
+> ++    result = []
+> ++    for line in text.splitlines(True):
+> ++        result.extend(wrapper.wrap(line))
+> ++    return "\n".join(result)
+> +
+> +
+> + class Truncator(SimpleLazyObject):
+> +diff --git a/docs/releases/2.2.28.txt b/docs/releases/2.2.28.txt
+> +index 8f79fd0..63877eb 100644
+> +--- a/docs/releases/2.2.28.txt
+> ++++ b/docs/releases/2.2.28.txt
+> +@@ -6,6 +6,12 @@ Django 2.2.28 release notes
+> +
+> + Django 2.2.28 fixes two security issues with severity "high" in 2.2.27.
+> +
+> ++CVE-2025-26699: Potential denial-of-service vulnerability in ``django.utils.text.wrap()``
+> ++=========================================================================================
+> ++
+> ++The ``wrap()`` and :tfilter:`wordwrap` template filter were subject to a
+> ++potential denial-of-service attack when used with very long strings.
+> ++
+> + CVE-2024-27351: Potential regular expression denial-of-service in ``django.utils.text.Truncator.words()``
+> + =========================================================================================================
+> +
+> +diff --git a/tests/template_tests/filter_tests/test_wordwrap.py b/tests/template_tests/filter_tests/test_wordwrap.py
+> +index 02f8605..c1c1fe9 100644
+> +--- a/tests/template_tests/filter_tests/test_wordwrap.py
+> ++++ b/tests/template_tests/filter_tests/test_wordwrap.py
+> +@@ -51,3 +51,15 @@ class FunctionTests(SimpleTestCase):
+> +             ), 14),
+> +             'this is a long\nparagraph of\ntext that\nreally needs\nto be wrapped\nI\'m afraid',
+> +         )
+> ++
+> ++    def test_wrap_long_text(self):
+> ++        long_text = (
+> ++            "this is a long paragraph of text that really needs"
+> ++            " to be wrapped I'm afraid " * 20_000
+> ++        )
+> ++        self.assertIn(
+> ++            "this is a\nlong\nparagraph\nof text\nthat\nreally\nneeds to\nbe wrapped\n"
+> ++            "I'm afraid",
+> ++            wordwrap(long_text, 10),
+> ++        )
+> ++
+> +--
+> +2.35.5
+> diff --git a/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-26699.patch b/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-26699.patch
+> new file mode 100644
+> index 0000000000..e9552bbfbc
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-26699.patch
+> @@ -0,0 +1,105 @@
+> +From e88f7376fe68dbf4ebaf11fad1513ce700b45860 Mon Sep 17 00:00:00 2001
+> +From: Sarah Boyce <42296566+sarahboyce@users.noreply.github.com>
+> +Date: Tue, 25 Feb 2025 09:40:54 +0100
+> +Subject: [PATCH] Fixed CVE-2025-26699 -- Mitigated potential DoS in wordwrap
+> + template filter.
+> +
+> +Thanks sw0rd1ight for the report.
+> +
+> +Backport of 55d89e25f4115c5674cdd9b9bcba2bb2bb6d820b from main.
+> +
+> +CVE: CVE-2025-26699
+> +
+> +Upstream-Status: Backport
+> +https://github.com/django/django/commit/e88f7376fe68dbf4ebaf11fad1513ce700b45860
+> +
+> +Signed-off-by: Sarah Boyce <42296566+sarahboyce@users.noreply.github.com>
+> +Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
+> +---
+> + django/utils/text.py                          | 27 +++++++------------
+> + docs/releases/3.2.23.txt                      |  7 +++++
+> + .../filter_tests/test_wordwrap.py             | 12 +++++++++
+> + 3 files changed, 29 insertions(+), 17 deletions(-)
+> +
+> +diff --git a/django/utils/text.py b/django/utils/text.py
+> +index 88da9a2..cabd76f 100644
+> +--- a/django/utils/text.py
+> ++++ b/django/utils/text.py
+> +@@ -1,5 +1,6 @@
+> + import html.entities
+> + import re
+> ++import textwrap
+> + import unicodedata
+> + import warnings
+> + from gzip import GzipFile
+> +@@ -91,23 +92,15 @@ def wrap(text, width):
+> +     Don't wrap long words, thus the output text may have lines longer than
+> +     ``width``.
+> +     """
+> +-    def _generator():
+> +-        for line in text.splitlines(True):  # True keeps trailing linebreaks
+> +-            max_width = min((line.endswith('\n') and width + 1 or width), width)
+> +-            while len(line) > max_width:
+> +-                space = line[:max_width + 1].rfind(' ') + 1
+> +-                if space == 0:
+> +-                    space = line.find(' ') + 1
+> +-                    if space == 0:
+> +-                        yield line
+> +-                        line = ''
+> +-                        break
+> +-                yield '%s\n' % line[:space - 1]
+> +-                line = line[space:]
+> +-                max_width = min((line.endswith('\n') and width + 1 or width), width)
+> +-            if line:
+> +-                yield line
+> +-    return ''.join(_generator())
+> ++    wrapper = textwrap.TextWrapper(
+> ++        width=width,
+> ++        break_long_words=False,
+> ++        break_on_hyphens=False,
+> ++    )
+> ++    result = []
+> ++    for line in text.splitlines(True):
+> ++        result.extend(wrapper.wrap(line))
+> ++    return "\n".join(result)
+> + 
+> + 
+> + class Truncator(SimpleLazyObject):
+> +diff --git a/docs/releases/3.2.23.txt b/docs/releases/3.2.23.txt
+> +index dd9d68a..da75eca 100644
+> +--- a/docs/releases/3.2.23.txt
+> ++++ b/docs/releases/3.2.23.txt
+> +@@ -25,3 +25,10 @@ CVE-2024-27351: Potential regular expression denial-of-service in ``django.utils
+> + :tfilter:`truncatewords_html` template filter were subject to a potential
+> + regular expression denial-of-service attack using a suitably crafted string
+> + (follow up to :cve:`2019-14232` and :cve:`2023-43665`).
+> ++
+> ++CVE-2025-26699: Potential denial-of-service vulnerability in ``django.utils.text.wrap()``
+> ++=========================================================================================
+> ++
+> ++The ``wrap()`` and :tfilter:`wordwrap` template filter were subject to a
+> ++potential denial-of-service attack when used with very long strings.
+> ++
+> +diff --git a/tests/template_tests/filter_tests/test_wordwrap.py b/tests/template_tests/filter_tests/test_wordwrap.py
+> +index 02f8605..e6f2afb 100644
+> +--- a/tests/template_tests/filter_tests/test_wordwrap.py
+> ++++ b/tests/template_tests/filter_tests/test_wordwrap.py
+> +@@ -51,3 +51,15 @@ class FunctionTests(SimpleTestCase):
+> +             ), 14),
+> +             'this is a long\nparagraph of\ntext that\nreally needs\nto be wrapped\nI\'m afraid',
+> +         )
+> ++
+> ++    def test_wrap_long_text(self):
+> ++        long_text = (
+> ++            "this is a long paragraph of text that really needs"
+> ++            " to be wrapped I'm afraid " * 20_000
+> ++        )
+> ++        self.assertIn(
+> ++            "this is a\nlong\nparagraph\nof text\nthat\nreally\nneeds to\nbe wrapped\n"
+> ++            "I'm afraid",
+> ++            wordwrap(long_text, 10),
+> ++        )
+> ++
+> +-- 
+> +2.35.5
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-26699.patch b/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-26699.patch
+> new file mode 100644
+> index 0000000000..6a4e32bd27
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-26699.patch
+> @@ -0,0 +1,107 @@
+> +From e88f7376fe68dbf4ebaf11fad1513ce700b45860 Mon Sep 17 00:00:00 2001
+> +From: Sarah Boyce <42296566+sarahboyce@users.noreply.github.com>
+> +Date: Tue, 25 Feb 2025 09:40:54 +0100
+> +Subject: [PATCH] Fixed CVE-2025-26699 -- Mitigated potential DoS in wordwrap
+> + template filter.
+> +
+> +Thanks sw0rd1ight for the report.
+> +
+> +Backport of 55d89e25f4115c5674cdd9b9bcba2bb2bb6d820b from main.
+> +
+> +CVE: CVE-2025-26699
+> +
+> +Upstream-Status: Backport
+> +https://github.com/django/django/commit/e88f7376fe68dbf4ebaf11fad1513ce700b45860
+> +
+> +Signed-off-by: Sarah Boyce <42296566+sarahboyce@users.noreply.github.com>
+> +Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
+> +---
+> + django/utils/text.py                          | 28 +++++++------------
+> + docs/releases/4.2.17.txt                      |  8 ++++++
+> + .../filter_tests/test_wordwrap.py             | 11 ++++++++
+> + 3 files changed, 29 insertions(+), 18 deletions(-)
+> +
+> +diff --git a/django/utils/text.py b/django/utils/text.py
+> +index e1b835e..81ae88d 100644
+> +--- a/django/utils/text.py
+> ++++ b/django/utils/text.py
+> +@@ -1,6 +1,7 @@
+> + import gzip
+> + import re
+> + import secrets
+> ++import textwrap
+> + import unicodedata
+> + from gzip import GzipFile
+> + from gzip import compress as gzip_compress
+> +@@ -97,24 +98,15 @@ def wrap(text, width):
+> +     ``width``.
+> +     """
+> + 
+> +-    def _generator():
+> +-        for line in text.splitlines(True):  # True keeps trailing linebreaks
+> +-            max_width = min((line.endswith("\n") and width + 1 or width), width)
+> +-            while len(line) > max_width:
+> +-                space = line[: max_width + 1].rfind(" ") + 1
+> +-                if space == 0:
+> +-                    space = line.find(" ") + 1
+> +-                    if space == 0:
+> +-                        yield line
+> +-                        line = ""
+> +-                        break
+> +-                yield "%s\n" % line[: space - 1]
+> +-                line = line[space:]
+> +-                max_width = min((line.endswith("\n") and width + 1 or width), width)
+> +-            if line:
+> +-                yield line
+> +-
+> +-    return "".join(_generator())
+> ++    wrapper = textwrap.TextWrapper(
+> ++        width=width,
+> ++        break_long_words=False,
+> ++        break_on_hyphens=False,
+> ++    )
+> ++    result = []
+> ++    for line in text.splitlines(True):
+> ++        result.extend(wrapper.wrap(line))
+> ++    return "\n".join(result)
+> + 
+> + 
+> + class Truncator(SimpleLazyObject):
+> +diff --git a/docs/releases/4.2.17.txt b/docs/releases/4.2.17.txt
+> +index 9a6aee3..0475a96 100644
+> +--- a/docs/releases/4.2.17.txt
+> ++++ b/docs/releases/4.2.17.txt
+> +@@ -31,3 +31,11 @@ was subject to SQL injection if untrusted data was used as a ``lhs`` value.
+> + 
+> + Applications that use the :lookup:`has_key <jsonfield.has_key>` lookup through
+> + the ``__`` syntax are unaffected.
+> ++
+> ++
+> ++CVE-2025-26699: Potential denial-of-service vulnerability in ``django.utils.text.wrap()``
+> ++=========================================================================================
+> ++
+> ++The ``wrap()`` and :tfilter:`wordwrap` template filter were subject to a
+> ++potential denial-of-service attack when used with very long strings.
+> ++
+> +diff --git a/tests/template_tests/filter_tests/test_wordwrap.py b/tests/template_tests/filter_tests/test_wordwrap.py
+> +index 88fbd27..4afa1dd 100644
+> +--- a/tests/template_tests/filter_tests/test_wordwrap.py
+> ++++ b/tests/template_tests/filter_tests/test_wordwrap.py
+> +@@ -78,3 +78,14 @@ class FunctionTests(SimpleTestCase):
+> +             "this is a long\nparagraph of\ntext that\nreally needs\nto be wrapped\n"
+> +             "I'm afraid",
+> +         )
+> ++
+> ++    def test_wrap_long_text(self):
+> ++        long_text = (
+> ++            "this is a long paragraph of text that really needs"
+> ++            " to be wrapped I'm afraid " * 20_000
+> ++        )
+> ++        self.assertIn(
+> ++            "this is a\nlong\nparagraph\nof text\nthat\nreally\nneeds to\nbe wrapped\n"
+> ++            "I'm afraid",
+> ++            wordwrap(long_text, 10),
+> ++        )
+> +-- 
+> +2.35.5
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
+> index f394397453..24eee95f03 100644
+> --- a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
+> +++ b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
+> @@ -25,6 +25,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
+>              file://CVE-2024-45231.patch \
+>              file://CVE-2024-53907.patch \
+>              file://CVE-2024-27351.patch \
+> +            file://CVE-2025-26699.patch \
+>             "
+>  
+>  SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
+> diff --git a/meta-python/recipes-devtools/python/python3-django_3.2.23.bb b/meta-python/recipes-devtools/python/python3-django_3.2.23.bb
+> index e049b6552c..92a3886cbc 100644
+> --- a/meta-python/recipes-devtools/python/python3-django_3.2.23.bb
+> +++ b/meta-python/recipes-devtools/python/python3-django_3.2.23.bb
+> @@ -6,7 +6,10 @@ SRC_URI[sha256sum] = "82968f3640e29ef4a773af2c28448f5f7a08d001c6ac05b32d02aeee65
+>  RDEPENDS:${PN} += "\
+>      ${PYTHON_PN}-sqlparse \
+>  "
+> -SRC_URI += "file://CVE-2024-27351.patch"
+> +SRC_URI += "\
+> +	file://CVE-2024-27351.patch \
+> +	file://CVE-2025-26699.patch \
+> +"
+>  
+>  # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
+>  # default. To build the 3.x branch, 
+> diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.17.bb b/meta-python/recipes-devtools/python/python3-django_4.2.17.bb
+> index dfce4b85c2..c2b517a441 100644
+> --- a/meta-python/recipes-devtools/python/python3-django_4.2.17.bb
+> +++ b/meta-python/recipes-devtools/python/python3-django_4.2.17.bb
+> @@ -7,6 +7,8 @@ RDEPENDS:${PN} += "\
+>      ${PYTHON_PN}-sqlparse \
+>  "
+>  
+> +SRC_URI += "file://CVE-2025-26699.patch"
+> +
+>  # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
+>  # default. To build the 4.x branch, 
+>  # PREFERRED_VERSION_python3-django = "4.2.17" can be added to local.conf
 >
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#121752): https://lists.openembedded.org/g/openembedded-devel/message/121752
+> Mute This Topic: https://lists.openembedded.org/mt/116332353/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
 >
- fix-file-included isn't available in scarthgap so we will have to use
-something else.
 
---0000000000008a3ce30643c3edf6
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><div dir=3D"ltr"><div dir=3D"lt=
-r"><br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
-_attr">On Sat, Nov 15, 2025 at 9:00=E2=80=AFPM Gyorgy Sarvari via <a href=
-=3D"http://lists.openembedded.org" target=3D"_blank">lists.openembedded.org=
-</a> &lt;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" =
-target=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div>=
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left:1px solid rgb(204,204,204);padding-left:1ex">Details: <a href=3D"https=
-://nvd.nist.gov/vuln/detail/CVE-2015-3243" rel=3D"noreferrer" target=3D"_bl=
-ank">https://nvd.nist.gov/vuln/detail/CVE-2015-3243</a><br>
-<br>
-The issue is about file permissions: by default rsyslog creates world-reada=
-ble<br>
-files. In case a log message contains some sensitive information, then that=
-&#39;s<br>
-exposed to every user on the system.<br>
-<br>
-However the rsyslog.conf file that is shipped with the recipe solves it: it=
-<br>
-already sets non-world-readable default permissions on all files, so this<b=
-r>
-vulnerability is fixed in the default OE recipe.<br>
-<br>
-See also this package in OpenSuse[1], where it is solved the same way.<br>
-<br>
-[1]: <a href=3D"https://build.opensuse.org/requests/619439/changes" rel=3D"=
-noreferrer" target=3D"_blank">https://build.opensuse.org/requests/619439/ch=
-anges</a> (<a href=3D"http://rsyslog.conf.in" rel=3D"noreferrer" target=3D"=
-_blank">rsyslog.conf.in</a>)<br>
-<br>
-Signed-off-by: Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gmail.com" =
-target=3D"_blank">skandigraun@gmail.com</a>&gt;<br>
----<br>
-=C2=A0meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf | 3 ++-<br>
-=C2=A0meta-oe/recipes-extended/rsyslog/<a href=3D"http://rsyslog_8.2402.0.b=
-b" rel=3D"noreferrer" target=3D"_blank">rsyslog_8.2402.0.bb</a>=C2=A0 | 2 +=
-+<br>
-=C2=A02 files changed, 4 insertions(+), 1 deletion(-)<br>
-<br>
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf b/meta-o=
-e/recipes-extended/rsyslog/rsyslog/rsyslog.conf<br>
-index dbfefb7597..6316efb629 100644<br>
---- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf<br>
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf<br>
-@@ -13,7 +13,8 @@ $ModLoad imklog=C2=A0 =C2=A0# kernel logging (formerly pr=
-ovided by rklogd)<br>
-<br>
-=C2=A0#<br>
-=C2=A0# Set the default permissions<br>
--#<br>
-+# Setting the $FileCreateMode not world readable fixes CVE-2015-3243<br>
-+# <br>
-=C2=A0$FileOwner root<br>
-=C2=A0$FileGroup adm<br>
-=C2=A0$FileCreateMode 0640<br>
-diff --git a/meta-oe/recipes-extended/rsyslog/<a href=3D"http://rsyslog_8.2=
-402.0.bb" rel=3D"noreferrer" target=3D"_blank">rsyslog_8.2402.0.bb</a> b/me=
-ta-oe/recipes-extended/rsyslog/<a href=3D"http://rsyslog_8.2402.0.bb" rel=
-=3D"noreferrer" target=3D"_blank">rsyslog_8.2402.0.bb</a><br>
-index af46cc14d7..59944cd70c 100644<br>
---- a/meta-oe/recipes-extended/rsyslog/<a href=3D"http://rsyslog_8.2402.0.b=
-b" rel=3D"noreferrer" target=3D"_blank">rsyslog_8.2402.0.bb</a><br>
-+++ b/meta-oe/recipes-extended/rsyslog/<a href=3D"http://rsyslog_8.2402.0.b=
-b" rel=3D"noreferrer" target=3D"_blank">rsyslog_8.2402.0.bb</a><br>
-@@ -37,6 +37,8 @@ SRC_URI[sha256sum] =3D &quot;acbdd8579489df36b4a383dc6909=
-a61b7623807f0aff54c062115f2de7<br>
-=C2=A0UPSTREAM_CHECK_URI =3D &quot;<a href=3D"https://github.com/rsyslog/rs=
-yslog/releases" rel=3D"noreferrer" target=3D"_blank">https://github.com/rsy=
-slog/rsyslog/releases</a>&quot;<br>
-=C2=A0UPSTREAM_CHECK_REGEX =3D &quot;(?P&lt;pver&gt;\d+(\.\d+)+)&quot;<br>
-<br>
-+CVE_STATUS[CVE-2015-3243] =3D &quot;fix-file-included: The shipped default=
- rsyslog.conf contains the fix&quot;<br>
-+<br><br></blockquote><div><br></div><div>=C2=A0fix-file-included isn&#39;t=
- available in scarthgap so we will have to use something else.</div></div><=
-/div>
-</div>
-
---0000000000008a3ce30643c3edf6--
 
