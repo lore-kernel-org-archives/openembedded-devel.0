@@ -1,460 +1,261 @@
-Return-Path: <saravanan.kadambathursubramaniyam@windriver.com>
+Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7637CE8D6B
-	for <webhook@archiver.kernel.org>; Mon, 17 Nov 2025 03:35:29 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1281.1763350522946238540
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 727D0CEACEF
+	for <webhook@archiver.kernel.org>; Mon, 17 Nov 2025 05:50:50 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3249.1763358646663444569
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 16 Nov 2025 19:35:22 -0800
+ Sun, 16 Nov 2025 21:50:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=q1LO8s5X;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=34167910e3=saravanan.kadambathursubramaniyam@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AH2tWFt1131187
-	for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 19:35:22 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=cznC8rowU13AhQmaXVps
-	GnHK1AdnEf2777J1YFIb2Bg=; b=q1LO8s5X7ho7/RZ70JKKF0MEPwEAwLV+J5+G
-	5EgszsDJRk8fvETzM52d+rHMPUQHgaHiYYQktTdezPmiKueB+imNjQ2fMHpjHj5t
-	6mkcZswNe6VOEga2m0V+RIzpc4uuE/OrF+w1ZPrZdv9U8lEwvVl7n80p15j00bot
-	ii69SHVFBMDiOs/0GzsQD4N/rG2kPJdv3FmWJd10em35glhB2B9VcpB5MeQ6BQaf
-	Zsh0sZnthpO4VuQlXEdbSDVJ4HpcrwqdOCndf3VHCXixydiD5rw3EDC38XGw5YME
-	zUBtscHnrDG/KARUZ5jFyCjVRaof5Z1lqjBwcKRPETUKmF2YPA==
-Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4aenp2sbrt-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 19:35:22 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Sun, 16 Nov 2025 19:35:21 -0800
-Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Sun, 16 Nov 2025 19:35:20 -0800
-From: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] python3-django: fix CVE-2025-57833
-Date: Mon, 17 Nov 2025 09:05:19 +0530
-Message-ID: <20251117033519.3893499-1-saravanan.kadambathursubramaniyam@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=kZhl9v3Z;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=cXKvLhwz;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AH4nltt2790796
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 05:50:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=07PvFmfEsmTsEkRm746LOrpc
+	NP136xFfQT6u3UCwqhQ=; b=kZhl9v3Zka4LuWiIFWsdw1GFZpzgJH1PpyYIn5Aq
+	CieYvCpV9pEgTMizxX9jP81auS8GSJ9Iyy+ctCd/JfXf1lHWy5sSEXgMZxShWWFt
+	SMgYRuyQB1PRrB2JsjtaA8JE7FiGCqAC6uxuFJ8EvjHMtuQc/S3KWVGEBPNN9hJi
+	0Aqot4wWHdbCmF5QXs1nk19GG2tDvBzMUuZfb0niwNbf8DRtuiaPuBEpysfuHNZO
+	9yGXgxGs3FaUaZow0LN39NVI9i92nLkriHEkmClt008m0ZUse+tLguTAzDoa9TBX
+	/20s2tXvv9PoCo7EkLCBMOmqY8IXPikDk5J+81KmXTT8Rg==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4afu5bgcc6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 05:50:45 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-4ee1964b1b4so15814921cf.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 16 Nov 2025 21:50:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1763358644; x=1763963444; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=07PvFmfEsmTsEkRm746LOrpcNP136xFfQT6u3UCwqhQ=;
+        b=cXKvLhwzSeAjRtw9NY/xQlMlVt5HTuBFQj7Dl2Q8oQeGpNXIjlyOZUK48NNlUCZoa9
+         cp8mVCgyc6yLQ5NQCOUoEKfDu5dyq8SWFfSq4vx6OiRTTIXqmEcR9nbyGSB4SsKSgFQv
+         hil0wgRRExRy41hVNmur398lCVxRaxXasLemAlrOLFDWw/wtIkDrXEnX9wmn0vy958GU
+         Z8h5jPP+X5Ne18UDCq1fP3y+HLFeuAJTCif34N77RfP0VTZn9LmnQFuya3o2HdSEsI/M
+         +A4J3ZK+vTjp/FnfNFWioimROM9XVffSu9Zc+fjInuUISonNc6SnBvFOrTNu3RasUM0u
+         Scmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763358644; x=1763963444;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=07PvFmfEsmTsEkRm746LOrpcNP136xFfQT6u3UCwqhQ=;
+        b=Nm/jWZvhavLR3Zu5gDl1Lg6zEtTlnxKF9K3C9g4q/t3Tl/fQytjizhsNr7RE1O+ml9
+         KeIeIrEopdHqB4RBMV3eS8dXuHXs1lVG2m9Ru3d7nzOue5Xa/NUedaP0csCMbZ/tvca0
+         dgotXRJKwNSCSCsRNNwRNEfv1XphgJjF3nDn/oY4RfDxvhwedhUA9Li07JZLyA6NOphp
+         gw06nLEWIma1iY/82JT8EGpGFolgCGnFOydw3iFDJb/XuGoE703HIUnrHBjlU5tK8lfy
+         wM6HC2/Jr4CijcCloLfgb7LothN2+ZaJvn4goER50Ibxnnjz60RfM5TbQMkuNh0yweMQ
+         qfXQ==
+X-Gm-Message-State: AOJu0YzbZxndVToS1/v+LWl4sXGLZVUt8At+e1Vi2bMuYPmcVVy4m6Gp
+	mbhXG/FhyHeos+avmKMkuArlq2eKv655AA9ZHLjpglS/Gy2diELy+N4RqhISbdyDuwb7bu5n/wT
+	XnVzDXNKvnDEonHqc1jsh+hc8J3pKue3Zj0fqI3VH80ggoQZCckYs2l/4zvdJSXdjRlY9m96l7j
+	j6RudkICD6NIe9xsKl5X1DwgWbUmialgHnryaJFJzrgMaxPDKGU6iafU/gnJM=
+X-Gm-Gg: ASbGncuHN7KzI4HgFcgpigqRfYq0vIfb3J/rBswC/nS4LbURgfWqnGRvCUlfqqRxRWR
+	yFM+Qfe6CqFlw/3C4KMS4biugXkbM28h2GdosJwJ4IWCL7OZXGZVLVXl7B6FZaV4OcG4QOtT6RV
+	MfuiO7mRWg9zMz0Z8YTFrUX8KBFjA8VDathYiW7w0Bwr+x2+lgHhv7arBi+RN3HZuz
+X-Received: by 2002:a05:622a:181d:b0:4ed:6803:6189 with SMTP id d75a77b69052e-4edf20f5181mr159162191cf.53.1763358644173;
+        Sun, 16 Nov 2025 21:50:44 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEakHL1mk6SdEJyHjLIJOuJlZMs0eGYw9Qua2vOjJ+UBsXGFQTABAD1yGZj7Jv+7kq8iit55s4lyQJnvAG9teQ=
+X-Received: by 2002:a05:622a:181d:b0:4ed:6803:6189 with SMTP id
+ d75a77b69052e-4edf20f5181mr159161951cf.53.1763358643202; Sun, 16 Nov 2025
+ 21:50:43 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE3MDAyOSBTYWx0ZWRfX0XRjPX+9PGMV
- USdoGoPaJAyrPOUNYt1p0SrGTs1JNASFoBrzsraRto+goqUWQQ3YQU8pYJ8/xiE3E7x9CMz+LO8
- kT9FRQTTPRVI7trBiMAV58Dsyx4T1MuCcczbJdMvM1qvSN0FTwoTU9gCIPOYhRh52xvWVrtW4i9
- n5koigCRLGf1Rjomjr2c+frWmwBYvAp1ZXw5kZX9rRjkWhChh6NQ2XYvCxuyAaegrJSwrUZGYcG
- WYEiwwc1TowGhO7C2R1p75Ir6+xOQAViYxsmjDUvmiG3OfRt8RaItiwFKzJ5yGzXfpHcDM/hy4Y
- aV7AJhX9EYx2AMfu4RwZErv7l0sT8LvvU5lfhiTdWBgO8dS7cLkgd6hV+s6vtB74nwQ3qEJNuly
- nB0TSxnNzZUZwL9R+bVobbMuQfGNmQ==
-X-Proofpoint-ORIG-GUID: GPr9fY71h77g25hLMx3A8dNRRE27z7kW
-X-Proofpoint-GUID: GPr9fY71h77g25hLMx3A8dNRRE27z7kW
-X-Authority-Analysis: v=2.4 cv=Z6Xh3XRA c=1 sm=1 tr=0 ts=691a97fa cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8
- a=t7CeM3EgAAAA:8 a=VWcOui0qAAAA:8 a=ZWfh1_taU_7_8XZ8-UUA:9
- a=FdTzh2GWekK77mhwV6Dw:22 a=QrT887owLcKFfbcY6Lji:22
+References: <20251115130000.1121405-1-skandigraun@gmail.com> <20251115130000.1121405-4-skandigraun@gmail.com>
+In-Reply-To: <20251115130000.1121405-4-skandigraun@gmail.com>
+From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Date: Mon, 17 Nov 2025 13:50:32 +0800
+X-Gm-Features: AWmQ_bltFIkcB-Gr2i6ibpyOcOmVMVeRsY3acEA24ffzsp7EfoMgIFVtrh-2JEk
+Message-ID: <CA+s=J=xgkjKkQ+rC83CALXWCXoWhcj1a7RXbRm68=UTfJm1-wQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH 4/4] rsyslog: set status for CVE-2015-3243
+To: skandigraun@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000008a3ce30643c3edf6"
+X-Proofpoint-GUID: KTR27KOEhFQg_WuNv_HmhgI0Psk9dguy
+X-Proofpoint-ORIG-GUID: KTR27KOEhFQg_WuNv_HmhgI0Psk9dguy
+X-Authority-Analysis: v=2.4 cv=Xvz3+FF9 c=1 sm=1 tr=0 ts=691ab7b5 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=PYnjg3YJAAAA:8 a=KSb9T-wMAAAA:8 a=NEAV23lmAAAA:8
+ a=Q4-j1AaZAAAA:8 a=pGLkceISAAAA:8 a=aEY5PuoWai5K1rUELw8A:9 a=QEXdDO2ut3YA:10
+ a=Y3j8kKFJAAAA:8 a=0zhiEtMHAAAA:8 a=TkK8yqU6duVKRCnAgsIA:9
+ a=bXj8O2t2o-V-M3xg:21 a=lqcHg5cX4UMA:10 a=uxP6HrT_eTzRwkO_Te1X:22
+ a=KF4VuIdXkMyp4E_ug72i:22 a=9H3Qd4_ONW2Ztcrla5EB:22 a=MXjRsPfA6TQ6-bNz-KDY:22
+ a=v7CeC1Rd8Ef7gCqLsajQ:22 a=poXaRoVlC6wW9_mwW8W4:22 a=pHzHmUro8NiASowvMSCR:22
+ a=nt3jZW36AmriUCFCBwmW:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE3MDA0OCBTYWx0ZWRfX8WAfxsqJwSO+
+ 6LgAUEJYZSPOdJLZTzbTnvwtJnB5EsTWhjTDlk+zrYqdU7LMk/hbhjhBmi6ghIsOLpTPZdp1d+L
+ WBO/K34gLnHv9M4Dvj6n8CiXyEJzNsbFFbeuMA8klx1GKuV+8xzgtKKQttjm/3JZevfLaBnjeky
+ eqtHgIYSAtmoiOX8igJEZnC+RzQJ5G1JiZ5MPev74E3b5Kt96VTIDJB6l3Ymqg+lqfu+uyodMcR
+ xm0IN84FMnIJSbc2jAQYmODHgailvIivkiFyF1ERD99jzmhWmE+dGKIwfZoS8aXHKE7ucw3XVwG
+ Qfcrin1lZzdDHAmpnLWXNCE1UdxbRPYiKhDMn0kOlqQUnq0ezDTVda+IdeBCezztclux8nY0QaU
+ 51osE0yhXy02M5W7xvk10HwnGczQiw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-17_01,2025-11-13_02,2025-10-01_01
+ definitions=2025-11-17_02,2025-11-13_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 spamscore=0 phishscore=0 suspectscore=0 adultscore=0
- lowpriorityscore=0 impostorscore=0 malwarescore=0 clxscore=1015
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
- definitions=main-2511170029
+ adultscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
+ phishscore=0 priorityscore=1501 clxscore=1015 suspectscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511170048
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 03:35:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121754
+ <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 05:50:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121755
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2025-57833
+--0000000000008a3ce30643c3edf6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Upstream-patch:
-https://github.com/django/django/commit/31334e6965ad136a5e369993b01721499c5d1a92
+On Sat, Nov 15, 2025 at 9:00=E2=80=AFPM Gyorgy Sarvari via lists.openembedd=
+ed.org
+<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
 
-Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
----
- .../CVE-2025-57833.patch                      |  96 ++++++++++++++++
- .../CVE-2025-57833.patch                      | 107 ++++++++++++++++++
- .../CVE-2025-57833.patch                      | 106 +++++++++++++++++
- .../python/python3-django_2.2.28.bb           |   1 +
- .../python/python3-django_3.2.23.bb           |   1 +
- .../python/python3-django_4.2.17.bb           |   1 +
- 6 files changed, 312 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-57833.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-57833.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-57833.patch
+> Details: https://nvd.nist.gov/vuln/detail/CVE-2015-3243
+>
+> The issue is about file permissions: by default rsyslog creates
+> world-readable
+> files. In case a log message contains some sensitive information, then
+> that's
+> exposed to every user on the system.
+>
+> However the rsyslog.conf file that is shipped with the recipe solves it: =
+it
+> already sets non-world-readable default permissions on all files, so this
+> vulnerability is fixed in the default OE recipe.
+>
+> See also this package in OpenSuse[1], where it is solved the same way.
+>
+> [1]: https://build.opensuse.org/requests/619439/changes (rsyslog.conf.in)
+>
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> ---
+>  meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf | 3 ++-
+>  meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb  | 2 ++
+>  2 files changed, 4 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
+> b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
+> index dbfefb7597..6316efb629 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
+> @@ -13,7 +13,8 @@ $ModLoad imklog   # kernel logging (formerly provided b=
+y
+> rklogd)
+>
+>  #
+>  # Set the default permissions
+> -#
+> +# Setting the $FileCreateMode not world readable fixes CVE-2015-3243
+> +#
+>  $FileOwner root
+>  $FileGroup adm
+>  $FileCreateMode 0640
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
+> b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
+> index af46cc14d7..59944cd70c 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
+> @@ -37,6 +37,8 @@ SRC_URI[sha256sum] =3D
+> "acbdd8579489df36b4a383dc6909a61b7623807f0aff54c062115f2de7
+>  UPSTREAM_CHECK_URI =3D "https://github.com/rsyslog/rsyslog/releases"
+>  UPSTREAM_CHECK_REGEX =3D "(?P<pver>\d+(\.\d+)+)"
+>
+> +CVE_STATUS[CVE-2015-3243] =3D "fix-file-included: The shipped default
+> rsyslog.conf contains the fix"
+> +
+>
+>
+ fix-file-included isn't available in scarthgap so we will have to use
+something else.
 
-diff --git a/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-57833.patch b/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-57833.patch
-new file mode 100644
-index 0000000000..8fe0eb36c2
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-2.2.28/CVE-2025-57833.patch
-@@ -0,0 +1,96 @@
-+From 31334e6965ad136a5e369993b01721499c5d1a92 Mon Sep 17 00:00:00 2001
-+From: Jake Howard <git@theorangeone.net>
-+Date: Wed, 13 Aug 2025 14:13:42 +0200
-+Subject: [PATCH] Fixed CVE-2025-57833 -- Protected FilteredRelation against
-+ SQL injection in column aliases.
-+
-+Thanks Eyal Gabay (EyalSec) for the report.
-+
-+Backport of 51711717098d3f469f795dfa6bc3758b24f69ef7 from main.
-+
-+CVE: CVE-2025-57833
-+
-+Upstream-Status: Backport
-+https://github.com/django/django/commit/31334e6965ad136a5e369993b01721499c5d1a92
-+
-+Signed-off-by: Jake Howard <git@theorangeone.net>
-+Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
-+---
-+ django/db/models/sql/query.py |  1 +
-+ docs/releases/2.2.28.txt      |  7 +++++++
-+ tests/annotations/tests.py    | 18 ++++++++++++++++--
-+ 3 files changed, 24 insertions(+), 2 deletions(-)
-+
-+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
-+index 9b054bd..96a6f5f 100644
-+--- a/django/db/models/sql/query.py
-++++ b/django/db/models/sql/query.py
-+@@ -1369,6 +1369,7 @@ class Query:
-+         return target_clause
-+ 
-+     def add_filtered_relation(self, filtered_relation, alias):
-++        self.check_alias(alias)
-+         filtered_relation.alias = alias
-+         lookups = dict(get_children_from_q(filtered_relation.condition))
-+         for lookup in chain((filtered_relation.relation_name,), lookups):
-+diff --git a/docs/releases/2.2.28.txt b/docs/releases/2.2.28.txt
-+index 9853d95..1a824c1 100644
-+--- a/docs/releases/2.2.28.txt
-++++ b/docs/releases/2.2.28.txt
-+@@ -6,6 +6,13 @@ Django 2.2.28 release notes
-+ 
-+ Django 2.2.28 fixes two security issues with severity "high" in 2.2.27.
-+ 
-++CVE-2025-57833: Potential SQL injection in ``FilteredRelation`` column aliases
-++==============================================================================
-++
-++:class:`.FilteredRelation` was subject to SQL injection in column aliases,
-++using a suitably crafted dictionary, with dictionary expansion, as the
-++``**kwargs`` passed to :meth:`.QuerySet.annotate` or :meth:`.QuerySet.alias`.
-++
-+ CVE-2024-56374: Potential denial-of-service vulnerability in IPv6 validation
-+ ============================================================================
-+ 
-+diff --git a/tests/annotations/tests.py b/tests/annotations/tests.py
-+index 27cd7eb..cdffb07 100644
-+--- a/tests/annotations/tests.py
-++++ b/tests/annotations/tests.py
-+@@ -3,8 +3,8 @@ from decimal import Decimal
-+ 
-+ from django.core.exceptions import FieldDoesNotExist, FieldError
-+ from django.db.models import (
-+-    BooleanField, CharField, Count, DateTimeField, ExpressionWrapper, F, Func,
-+-    IntegerField, NullBooleanField, OuterRef, Q, Subquery, Sum, Value,
-++    BooleanField, CharField, Count, DateTimeField, ExpressionWrapper, F,  FilteredRelation,
-++    Func, IntegerField, NullBooleanField, OuterRef, Q, Subquery, Sum, Value,
-+ )
-+ from django.db.models.expressions import RawSQL
-+ from django.db.models.functions import Length, Lower
-+@@ -608,6 +608,15 @@ class NonAggregateAnnotationTestCase(TestCase):
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Book.objects.annotate(**{crafted_alias: Value(1)})
-+ 
-++    def test_alias_filtered_relation_sql_injection(self):
-++        crafted_alias = """injected_name" from "annotations_book"; --"""
-++        msg = (
-++            "Column aliases cannot contain whitespace characters, quotation marks, "
-++            "semicolons, or SQL comments."
-++        )
-++        with self.assertRaisesMessage(ValueError, msg):
-++            Book.objects.annotate(**{crafted_alias: FilteredRelation("author")})
-++
-+     def test_alias_forbidden_chars(self):
-+         tests = [
-+             'al"ias',
-+@@ -632,3 +641,8 @@ class NonAggregateAnnotationTestCase(TestCase):
-+             with self.subTest(crafted_alias):
-+                 with self.assertRaisesMessage(ValueError, msg):
-+                     Book.objects.annotate(**{crafted_alias: Value(1)})
-++
-++                with self.assertRaisesMessage(ValueError, msg):
-++                    Book.objects.annotate(
-++                        **{crafted_alias: FilteredRelation("authors")}
-++                    )
-+-- 
-+2.35.5
-+
-diff --git a/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-57833.patch b/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-57833.patch
-new file mode 100644
-index 0000000000..4056dbbc4e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-3.2.23/CVE-2025-57833.patch
-@@ -0,0 +1,107 @@
-+From 9c8cc0c011772179c21d62b17aadee5c3ee3c2aa Mon Sep 17 00:00:00 2001
-+From: Jake Howard <git@theorangeone.net>
-+Date: Wed, 13 Aug 2025 14:13:42 +0200
-+Subject: [PATCH] Fixed CVE-2025-57833 -- Protected FilteredRelation against
-+ SQL injection in column aliases.
-+
-+Thanks Eyal Gabay (EyalSec) for the report.
-+
-+Backport of 51711717098d3f469f795dfa6bc3758b24f69ef7 from main.
-+
-+CVE: CVE-2025-57833
-+
-+Upstream-Status: Backport
-+https://github.com/django/django/commit/31334e6965ad136a5e369993b01721499c5d1a92
-+
-+Signed-off-by: Jake Howard <git@theorangeone.net>
-+Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
-+---
-+ django/db/models/sql/query.py |  1 +
-+ docs/releases/3.2.23.txt      |  7 +++++++
-+ tests/annotations/tests.py    | 25 ++++++++++++++++++++++++-
-+ 3 files changed, 32 insertions(+), 1 deletion(-)
-+
-+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
-+index 230b6fa..e56ff81 100644
-+--- a/django/db/models/sql/query.py
-++++ b/django/db/models/sql/query.py
-+@@ -1466,6 +1466,7 @@ class Query(BaseExpression):
-+         return target_clause
-+ 
-+     def add_filtered_relation(self, filtered_relation, alias):
-++        self.check_alias(alias)
-+         filtered_relation.alias = alias
-+         lookups = dict(get_children_from_q(filtered_relation.condition))
-+         relation_lookup_parts, relation_field_parts, _ = self.solve_lookup_type(filtered_relation.relation_name)
-+diff --git a/docs/releases/3.2.23.txt b/docs/releases/3.2.23.txt
-+index 9a9b52d..329aed1 100644
-+--- a/docs/releases/3.2.23.txt
-++++ b/docs/releases/3.2.23.txt
-+@@ -45,3 +45,10 @@ which has now been updated to define a ``max_length`` of 39 characters.
-+ The :class:`django.db.models.GenericIPAddressField` model field was not
-+ affected.
-+ 
-++CVE-2025-57833: Potential SQL injection in ``FilteredRelation`` column aliases
-++==============================================================================
-++
-++:class:`.FilteredRelation` was subject to SQL injection in column aliases,
-++using a suitably crafted dictionary, with dictionary expansion, as the
-++``**kwargs`` passed to :meth:`.QuerySet.annotate` or :meth:`.QuerySet.alias`.
-++
-+diff --git a/tests/annotations/tests.py b/tests/annotations/tests.py
-+index 8082c7a..00d4ee6 100644
-+--- a/tests/annotations/tests.py
-++++ b/tests/annotations/tests.py
-+@@ -4,7 +4,7 @@ from decimal import Decimal
-+ from django.core.exceptions import FieldDoesNotExist, FieldError
-+ from django.db.models import (
-+     BooleanField, Case, CharField, Count, DateTimeField, DecimalField, Exists,
-+-    ExpressionWrapper, F, FloatField, Func, IntegerField, Max,
-++    ExpressionWrapper, F, FilteredRelation, FloatField, Func, IntegerField, Max,
-+     NullBooleanField, OuterRef, Q, Subquery, Sum, Value, When,
-+ )
-+ from django.db.models.expressions import RawSQL
-+@@ -775,6 +775,15 @@ class NonAggregateAnnotationTestCase(TestCase):
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Book.objects.annotate(**{crafted_alias: Value(1)})
-+ 
-++    def test_alias_filtered_relation_sql_injection(self):
-++        crafted_alias = """injected_name" from "annotations_book"; --"""
-++        msg = (
-++            "Column aliases cannot contain whitespace characters, quotation marks, "
-++            "semicolons, or SQL comments."
-++        )
-++        with self.assertRaisesMessage(ValueError, msg):
-++            Book.objects.annotate(**{crafted_alias: FilteredRelation("author")})
-++
-+     def test_alias_forbidden_chars(self):
-+         tests = [
-+             'al"ias',
-+@@ -800,6 +809,11 @@ class NonAggregateAnnotationTestCase(TestCase):
-+                 with self.assertRaisesMessage(ValueError, msg):
-+                     Book.objects.annotate(**{crafted_alias: Value(1)})
-+ 
-++                with self.assertRaisesMessage(ValueError, msg):
-++                    Book.objects.annotate(
-++                        **{crafted_alias: FilteredRelation("authors")}
-++                    )
-++
-+ 
-+ class AliasTests(TestCase):
-+     @classmethod
-+@@ -1039,3 +1053,12 @@ class AliasTests(TestCase):
-+         )
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Book.objects.alias(**{crafted_alias: Value(1)})
-++
-++    def test_alias_filtered_relation_sql_injection(self):
-++        crafted_alias = """injected_name" from "annotations_book"; --"""
-++        msg = (
-++            "Column aliases cannot contain whitespace characters, quotation marks, "
-++            "semicolons, or SQL comments."
-++        )
-++        with self.assertRaisesMessage(ValueError, msg):
-++            Book.objects.alias(**{crafted_alias: FilteredRelation("authors")})
-+-- 
-+2.35.5
-+
-diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-57833.patch b/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-57833.patch
-new file mode 100644
-index 0000000000..0f06215209
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-4.2.17/CVE-2025-57833.patch
-@@ -0,0 +1,106 @@
-+From 31334e6965ad136a5e369993b01721499c5d1a92 Mon Sep 17 00:00:00 2001
-+From: Jake Howard <git@theorangeone.net>
-+Date: Wed, 13 Aug 2025 14:13:42 +0200
-+Subject: [PATCH] Fixed CVE-2025-57833 -- Protected FilteredRelation against
-+ SQL injection in column aliases.
-+
-+Thanks Eyal Gabay (EyalSec) for the report.
-+
-+Backport of 51711717098d3f469f795dfa6bc3758b24f69ef7 from main.
-+
-+CVE: CVE-2025-57833
-+
-+Upstream-Status: Backport
-+https://github.com/django/django/commit/31334e6965ad136a5e369993b01721499c5d1a92
-+
-+Signed-off-by: Jake Howard <git@theorangeone.net>
-+Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
-+---
-+ django/db/models/sql/query.py |  1 +
-+ docs/releases/4.2.17.txt      |  7 +++++++
-+ tests/annotations/tests.py    | 24 ++++++++++++++++++++++++
-+ 3 files changed, 32 insertions(+)
-+
-+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
-+index e68fd9e..5a1b685 100644
-+--- a/django/db/models/sql/query.py
-++++ b/django/db/models/sql/query.py
-+@@ -1620,6 +1620,7 @@ class Query(BaseExpression):
-+         return target_clause
-+ 
-+     def add_filtered_relation(self, filtered_relation, alias):
-++        self.check_alias(alias)
-+         filtered_relation.alias = alias
-+         lookups = dict(get_children_from_q(filtered_relation.condition))
-+         relation_lookup_parts, relation_field_parts, _ = self.solve_lookup_type(
-+diff --git a/docs/releases/4.2.17.txt b/docs/releases/4.2.17.txt
-+index 1392724..3a0815b 100644
-+--- a/docs/releases/4.2.17.txt
-++++ b/docs/releases/4.2.17.txt
-+@@ -50,3 +50,10 @@ which has now been updated to define a ``max_length`` of 39 characters.
-+ 
-+ The :class:`django.db.models.GenericIPAddressField` model field was not
-+ affected.
-++
-++CVE-2025-57833: Potential SQL injection in ``FilteredRelation`` column aliases
-++==============================================================================
-++
-++:class:`.FilteredRelation` was subject to SQL injection in column aliases,
-++using a suitably crafted dictionary, with dictionary expansion, as the
-++``**kwargs`` passed to :meth:`.QuerySet.annotate` or :meth:`.QuerySet.alias`.
-+diff --git a/tests/annotations/tests.py b/tests/annotations/tests.py
-+index e0cdbf1..a8474ab 100644
-+--- a/tests/annotations/tests.py
-++++ b/tests/annotations/tests.py
-+@@ -12,6 +12,7 @@ from django.db.models import (
-+     Exists,
-+     ExpressionWrapper,
-+     F,
-++    FilteredRelation,
-+     FloatField,
-+     Func,
-+     IntegerField,
-+@@ -1121,6 +1122,15 @@ class NonAggregateAnnotationTestCase(TestCase):
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Book.objects.annotate(**{crafted_alias: Value(1)})
-+ 
-++    def test_alias_filtered_relation_sql_injection(self):
-++        crafted_alias = """injected_name" from "annotations_book"; --"""
-++        msg = (
-++            "Column aliases cannot contain whitespace characters, quotation marks, "
-++            "semicolons, or SQL comments."
-++        )
-++        with self.assertRaisesMessage(ValueError, msg):
-++            Book.objects.annotate(**{crafted_alias: FilteredRelation("author")})
-++
-+     def test_alias_forbidden_chars(self):
-+         tests = [
-+             'al"ias',
-+@@ -1146,6 +1156,11 @@ class NonAggregateAnnotationTestCase(TestCase):
-+                 with self.assertRaisesMessage(ValueError, msg):
-+                     Book.objects.annotate(**{crafted_alias: Value(1)})
-+ 
-++                with self.assertRaisesMessage(ValueError, msg):
-++                    Book.objects.annotate(
-++                        **{crafted_alias: FilteredRelation("authors")}
-++                    )
-++
-+ 
-+ class AliasTests(TestCase):
-+     @classmethod
-+@@ -1418,3 +1433,12 @@ class AliasTests(TestCase):
-+         )
-+         with self.assertRaisesMessage(ValueError, msg):
-+             Book.objects.alias(**{crafted_alias: Value(1)})
-++
-++    def test_alias_filtered_relation_sql_injection(self):
-++        crafted_alias = """injected_name" from "annotations_book"; --"""
-++        msg = (
-++            "Column aliases cannot contain whitespace characters, quotation marks, "
-++            "semicolons, or SQL comments."
-++        )
-++        with self.assertRaisesMessage(ValueError, msg):
-++            Book.objects.alias(**{crafted_alias: FilteredRelation("authors")})
-+-- 
-+2.35.5
-+
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-index f4b8da69b5..82cdcb2328 100644
---- a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-@@ -27,6 +27,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
-             file://CVE-2024-27351.patch \
-             file://CVE-2025-26699.patch \
-             file://CVE-2024-56374.patch \
-+            file://CVE-2025-57833.patch \
-            "
- 
- SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
-diff --git a/meta-python/recipes-devtools/python/python3-django_3.2.23.bb b/meta-python/recipes-devtools/python/python3-django_3.2.23.bb
-index b8e8759467..b5a6c8d41b 100644
---- a/meta-python/recipes-devtools/python/python3-django_3.2.23.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_3.2.23.bb
-@@ -10,6 +10,7 @@ SRC_URI += "\
- 	file://CVE-2024-27351.patch \
- 	file://CVE-2025-26699.patch \
- 	file://CVE-2024-56374.patch \
-+	file://CVE-2025-57833.patch \
- "
- 
- # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
-diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.17.bb b/meta-python/recipes-devtools/python/python3-django_4.2.17.bb
-index 5377b96c79..f2fe1f6e90 100644
---- a/meta-python/recipes-devtools/python/python3-django_4.2.17.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_4.2.17.bb
-@@ -10,6 +10,7 @@ RDEPENDS:${PN} += "\
- SRC_URI += "\
- 	file://CVE-2025-26699.patch \
- 	file://CVE-2024-56374.patch \
-+	file://CVE-2025-57833.patch \
- "
- 
- # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
--- 
-2.40.0
+--0000000000008a3ce30643c3edf6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><div dir=3D"ltr"><div dir=3D"lt=
+r"><br></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
+_attr">On Sat, Nov 15, 2025 at 9:00=E2=80=AFPM Gyorgy Sarvari via <a href=
+=3D"http://lists.openembedded.org" target=3D"_blank">lists.openembedded.org=
+</a> &lt;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" =
+target=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left:1px solid rgb(204,204,204);padding-left:1ex">Details: <a href=3D"https=
+://nvd.nist.gov/vuln/detail/CVE-2015-3243" rel=3D"noreferrer" target=3D"_bl=
+ank">https://nvd.nist.gov/vuln/detail/CVE-2015-3243</a><br>
+<br>
+The issue is about file permissions: by default rsyslog creates world-reada=
+ble<br>
+files. In case a log message contains some sensitive information, then that=
+&#39;s<br>
+exposed to every user on the system.<br>
+<br>
+However the rsyslog.conf file that is shipped with the recipe solves it: it=
+<br>
+already sets non-world-readable default permissions on all files, so this<b=
+r>
+vulnerability is fixed in the default OE recipe.<br>
+<br>
+See also this package in OpenSuse[1], where it is solved the same way.<br>
+<br>
+[1]: <a href=3D"https://build.opensuse.org/requests/619439/changes" rel=3D"=
+noreferrer" target=3D"_blank">https://build.opensuse.org/requests/619439/ch=
+anges</a> (<a href=3D"http://rsyslog.conf.in" rel=3D"noreferrer" target=3D"=
+_blank">rsyslog.conf.in</a>)<br>
+<br>
+Signed-off-by: Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gmail.com" =
+target=3D"_blank">skandigraun@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf | 3 ++-<br>
+=C2=A0meta-oe/recipes-extended/rsyslog/<a href=3D"http://rsyslog_8.2402.0.b=
+b" rel=3D"noreferrer" target=3D"_blank">rsyslog_8.2402.0.bb</a>=C2=A0 | 2 +=
++<br>
+=C2=A02 files changed, 4 insertions(+), 1 deletion(-)<br>
+<br>
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf b/meta-o=
+e/recipes-extended/rsyslog/rsyslog/rsyslog.conf<br>
+index dbfefb7597..6316efb629 100644<br>
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf<br>
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf<br>
+@@ -13,7 +13,8 @@ $ModLoad imklog=C2=A0 =C2=A0# kernel logging (formerly pr=
+ovided by rklogd)<br>
+<br>
+=C2=A0#<br>
+=C2=A0# Set the default permissions<br>
+-#<br>
++# Setting the $FileCreateMode not world readable fixes CVE-2015-3243<br>
++# <br>
+=C2=A0$FileOwner root<br>
+=C2=A0$FileGroup adm<br>
+=C2=A0$FileCreateMode 0640<br>
+diff --git a/meta-oe/recipes-extended/rsyslog/<a href=3D"http://rsyslog_8.2=
+402.0.bb" rel=3D"noreferrer" target=3D"_blank">rsyslog_8.2402.0.bb</a> b/me=
+ta-oe/recipes-extended/rsyslog/<a href=3D"http://rsyslog_8.2402.0.bb" rel=
+=3D"noreferrer" target=3D"_blank">rsyslog_8.2402.0.bb</a><br>
+index af46cc14d7..59944cd70c 100644<br>
+--- a/meta-oe/recipes-extended/rsyslog/<a href=3D"http://rsyslog_8.2402.0.b=
+b" rel=3D"noreferrer" target=3D"_blank">rsyslog_8.2402.0.bb</a><br>
++++ b/meta-oe/recipes-extended/rsyslog/<a href=3D"http://rsyslog_8.2402.0.b=
+b" rel=3D"noreferrer" target=3D"_blank">rsyslog_8.2402.0.bb</a><br>
+@@ -37,6 +37,8 @@ SRC_URI[sha256sum] =3D &quot;acbdd8579489df36b4a383dc6909=
+a61b7623807f0aff54c062115f2de7<br>
+=C2=A0UPSTREAM_CHECK_URI =3D &quot;<a href=3D"https://github.com/rsyslog/rs=
+yslog/releases" rel=3D"noreferrer" target=3D"_blank">https://github.com/rsy=
+slog/rsyslog/releases</a>&quot;<br>
+=C2=A0UPSTREAM_CHECK_REGEX =3D &quot;(?P&lt;pver&gt;\d+(\.\d+)+)&quot;<br>
+<br>
++CVE_STATUS[CVE-2015-3243] =3D &quot;fix-file-included: The shipped default=
+ rsyslog.conf contains the fix&quot;<br>
++<br><br></blockquote><div><br></div><div>=C2=A0fix-file-included isn&#39;t=
+ available in scarthgap so we will have to use something else.</div></div><=
+/div>
+</div>
+
+--0000000000008a3ce30643c3edf6--
 
