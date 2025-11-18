@@ -2,91 +2,109 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90807CEBF96
-	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 02:24:06 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2457.1763432644666412476
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FFF7CEBF97
+	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 02:24:16 +0000 (UTC)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2476.1763432644046978610
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 17 Nov 2025 18:24:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ijDXMilZ;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-298287a26c3so60638625ad.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=EXdoN30L;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-7ba49f92362so3774557b3a.1
         for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 18:24:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763432644; x=1764037444; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PcjP63Lc4oYBdo1pTtU9ukjI7vSGM6KNk8rt2UF6Dz4=;
-        b=ijDXMilZDtMrvoCXaQYTgpgUbmdDHNo9MaD4K4U3Ur/swiNTYsRDzCbsoOOme2Gz2y
-         NpeaMJu+YqZ0oxF+xZuk0BqOxvMESWsR3Xg5QZIhN6tcLpJEB/Mnit6V9K5j5WE8wXBP
-         9nWcAOoFEfZwnpXTj/IU0pEFVxroQKOTkEu4HEj1BLq+RL3/8eZwH+PMdaWSR0lbW/s8
-         B1j60CVftVR5CN+rEM0k0A8Nv9U3u1npQ16jmHpE0T0eDQNBIIPSeM1cxVpnmQ5gq+o4
-         T388zJXSMytgN5yFmraY9y1Cbt+ObCFptoTQETd9qOCuAk8+oIg4OSF0jNzrVL1DFJJv
-         xQ+Q==
+        d=gmail.com; s=20230601; t=1763432643; x=1764037443; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=N/9hIDkhESH+Cw8hm043T0kBa68AdDQLvT5TplC8s+8=;
+        b=EXdoN30Ldvlv3Ed6bNIhT66BEPZ4NlGURaD+DLSMIsI8TvfXkOW6UTVABWwWtFBtlt
+         4QgCDFyJrZ3FlL1yfUDTsrgyzC9ZXscJVsxK7jm3vSJCj8g2Xc454IUGAFj0ivbevPtu
+         GwCZ94xbA5/nMr4Q8GQl7NaufVuvEAXZoKBjN/B9+fMr10UKU/rtgIvkf4Q+goNCHqHH
+         bpGpkznsx0rmW3c2mE9MlE6zUP899++uBU2+XFx7kLSZJUVWDwc7uVM9Jp82K78+cIjd
+         kyrQYbR3iey0rKUAfT4yOaLDVhMIEJGP6PsZHiH5UJjpMp7XKivkvpMohlKrnLai+Bnx
+         QzOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763432644; x=1764037444;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=PcjP63Lc4oYBdo1pTtU9ukjI7vSGM6KNk8rt2UF6Dz4=;
-        b=laa3sIyOaMjpMmcE4i2RJz5WkaT6JrrumnmLVyQq2AKrkwFkWBJevFnOmHdtQt22Do
-         mjDdLFDqvYyyjMXn8aBqN936XwrSsNzOFoNiFI5loGE0wbLNFzWaWK87Q+SVub7NzAhr
-         KXP1Gne64pnMPhlRSxxqshdpdbhi3WVjZ4QNlsfxgQNnANcWjkJ138t81HAmuSDl2GJU
-         zX0L/5OV6iC12l0bCEvBbKImuLYBBvNmVtsjT1s6TvAJuqtZP52miEMiuQhHLYJwUb7g
-         ruSmdONptFhIVvQ+t/uvQ7F5gYN2QriJRm8+GfwuCngdFQqFcSNPjPKuNXhPtS03t2Eh
-         j8qQ==
-X-Gm-Message-State: AOJu0YxZFfQ2DnClQ91BLfUPYFVAlsCIsCYrDom9Hcn50E/vq7Dt1xBi
-	oX0R/FifnvxfTIXgnME8SgFLka4nZkKdRVvIvktvmYQzgVorWAVw+bzt256qB62Z
-X-Gm-Gg: ASbGncs8PH/SelKECWj15GozHBWTrgTKVQcTAZON0sZTexVPwA9Jd7Otl3ZwYiYhCQY
-	0Box+i68ccC87aoMSjjpJL+X6PDtv17dBLfeTuFX+X9SWYweBbl7lgdc9v5oxtXhk9KtgFLinIB
-	mw8BvNTI407mRL4siXtcq8ucqBWWXyXjvA6oHFnCKXa201vfLyb4rSARpnK31FHy0IXZo0kCdgk
-	RSGdKVGQ6rrKvFPx2XEVsqeuHz9m5/T5zS3A79kLoPi/O/9x928PiCJe6lg0vgJiFMRGeechPl3
-	J5t7yk0wsBxJNnGvCXG8qgWXXG98aJFPVWGCXsDEepoXzFR355be55VHCqpTOiYt3bCsI/Ivpvs
-	6bFwKw0CbN7jhFa+bBz2mPDjB5w6hIgGPwHNR5hR8e0BEPAHeFHlTqiNYdIHCaYKdp6Jr8vSbxt
-	GxTx0+A24bKPFYwqulIMehysJgRXahIBSsZbsDMi0TyDedHKvI9fMv4HJe7/jYAtzrpR3/gUNS3
-	piBCQpQJGbrd9uPhxwlLMo12PctfaFP
-X-Google-Smtp-Source: AGHT+IGss23ww3Rs+cWmBHMkKtP4DkcfJe0fcU2vjdeWZ/JbrjNy518bKJBWalIYAI9i8dW/2E4cJQ==
-X-Received: by 2002:a05:7022:ed0b:b0:11a:6424:f40f with SMTP id a92af1059eb24-11b41717eb6mr5206243c88.36.1763432643643;
-        Mon, 17 Nov 2025 18:24:03 -0800 (PST)
+        d=1e100.net; s=20230601; t=1763432643; x=1764037443;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=N/9hIDkhESH+Cw8hm043T0kBa68AdDQLvT5TplC8s+8=;
+        b=NJSqqZ3YhHBTA5n6kl4LAkh9Yhwthxn1AqnwweDQZ0dfwxZ3HbMDFy7pTxjsj6JZMp
+         BrIbNo8/l9LT3VmCulC/EbHhJlwOZonaKrhe4GhSrqy48Xa4JKuJVv+GLGty4z82+Ysy
+         cXc7Xx+GYv4a2yf1u4OyUcmMxPDaFFXR4tdu/HphiuPbIO8if73qEldxuieYv7xwBlRG
+         FDqwxZFImmhFLl7Xqkpdc+FegtLyq9FR+6uVUQLziTveUHB9xoZYVCKoZ0vzfFc6M/Tc
+         c+Gtatl7hB7yU1H9AoatR/dO2Ry7jUH4C05bJ9EnUSHjtLqOXRpnIIW8UWP9DpzqA+O2
+         K2LQ==
+X-Gm-Message-State: AOJu0YyUJef1etHY/gtFhVRl0wqkTQFcJX7eITwY9wIZBZTKt6xouUjs
+	R30SPIgshnI/QZmp5SqUxzsfASRVjGcQa1/haUXXJ5mw+vvljsDN5DuVgdPHcx5W
+X-Gm-Gg: ASbGncs7rC2T2/WtP1ltWLFZPYHyUbBnuGo1vDb4J9EUOfP+vuwnZKLCCJTca0YNS0Z
+	zkGxCgVnej3yZrkhwkL86mhIdV4YSNDU+4/wYx/ZAKU0aR52Qp5KKXXgtUWC0sMSN+dttU7Gf4H
+	Rh2IYL/X7T5o0AKBUVndHD8xhLss9IkJdbf1F8mLnyhZE6YytNGieSslblRQGU3A/CRkhye1AzZ
+	5/vL8Da2SiJgaMN6hgUi0tgw89uVHAvvxq19jFmnLL8If2q/opWq0oINhDeNz2g0eUi0cfUHykT
+	/Luzit/KJBi37KdcEFUIMxpFjDU2VCuB+QZ9buir8oq+vj5YtoZ/lwwYOETIxWwJKH4dmG4yBdL
+	KNOucxVUl2nN9O35gnalWrunE/9Y88rKBIFlUdRGd0G92m1zbXfFtgAlPmxun9y80G0gGHLyaR8
+	LhsSl1aGJ7ssn18m6NOLKrasqOulATA6ClalUSB58a/4b98dRF5il/h4CBl0vhzV5FJW9qoUVDS
+	Popd1XYesQvPTyYYvrWWwFvnkAp9XICvqzfzI+5G8k=
+X-Google-Smtp-Source: AGHT+IEBFJMqkPf+Oa2q14ClJjIPMPyBdtPr0/BDhoEGFS4ZxGznVqTWrfmAzdxRr0kjzgmu2FF2XQ==
+X-Received: by 2002:a05:7022:4083:b0:11b:9386:a38f with SMTP id a92af1059eb24-11c74fb20f9mr617838c88.22.1763432642507;
+        Mon, 17 Nov 2025 18:24:02 -0800 (PST)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::888a])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11b0608861asm36829873c88.9.2025.11.17.18.24.02
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11b0608861asm36829873c88.9.2025.11.17.18.24.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Nov 2025 18:24:03 -0800 (PST)
+        Mon, 17 Nov 2025 18:24:01 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-xfce][PATCH 2/2] xfce4-screenshooter: Add gtk-layer-shell to depends with wayland
-Date: Mon, 17 Nov 2025 18:24:00 -0800
-Message-ID: <20251118022400.3733149-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/2] gtk-layer-shell: Add recipe for GTK3 version
+Date: Mon, 17 Nov 2025 18:23:59 -0800
+Message-ID: <20251118022400.3733149-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251118022400.3733149-1-raj.khem@gmail.com>
-References: <20251118022400.3733149-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 02:24:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121799
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 02:24:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121798
+
+This is needed by xfce4-screenshooter
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../xfce4-screenshooter/xfce4-screenshooter_1.11.3.bb           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../gtk-layer-shell/gtk-layer-shell_0.10.0.bb | 25 +++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-support/gtk-layer-shell/gtk-layer-shell_0.10.0.bb
 
-diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.11.3.bb b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.11.3.bb
-index 1dff925a0b..144848a6c8 100644
---- a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.11.3.bb
-+++ b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.11.3.bb
-@@ -13,7 +13,7 @@ XFCE_COMPRESS_TYPE = "xz"
- SRC_URI[sha256sum] = "1f6a14f7d1b0c440f31e24a8cc4fe2996185357fa786f0c2cdfe564ef673a710"
-
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
--PACKAGECONFIG[wayland] = "-Dwayland=enabled, -Dwayland=disabled, wayland-native wayland"
-+PACKAGECONFIG[wayland] = "-Dwayland=enabled, -Dwayland=disabled, gtk-layer-shell wayland-native wayland"
-
- EXTRA_OECONF += "WAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner"
-
+diff --git a/meta-oe/recipes-support/gtk-layer-shell/gtk-layer-shell_0.10.0.bb b/meta-oe/recipes-support/gtk-layer-shell/gtk-layer-shell_0.10.0.bb
+new file mode 100644
+index 0000000000..2bfe9b0e77
+--- /dev/null
++++ b/meta-oe/recipes-support/gtk-layer-shell/gtk-layer-shell_0.10.0.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "A library to write GTK applications that use Layer Shell"
++HOMEPAGE = "https://github.com/wmww/gtk-layer-shell"
++BUGTRACKER = "https://github.com/www/gtk-layer-shell/issues"
++SECTION = "graphics"
++LICENSE = "MIT"
++
++LIC_FILES_CHKSUM = "file://LICENSE_MIT.txt;md5=ffeb3391e5dace600b84c757688b9f1b"
++
++REQUIRED_DISTRO_FEATURES = "wayland gobject-introspection-data"
++
++DEPENDS += " \
++	gtk+3 \
++	wayland \
++	wayland-native \
++	wayland-protocols \
++"
++
++SRC_URI = " \
++	git://github.com/wmww/gtk-layer-shell.git;protocol=https;branch=master;tag=v${PV} \
++"
++SRCREV = "3964966d72ea3359f4ff748081493e979c080b7e"
++
++inherit meson pkgconfig features_check gobject-introspection vala
++
++EXTRA_OEMESON += "--buildtype release"
 
