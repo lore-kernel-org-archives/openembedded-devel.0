@@ -2,139 +2,171 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2638ACED60B
-	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 11:03:30 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9826.1763463808306663211
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 148BFCED613
+	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 11:03:40 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9800.1763463810606153130
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Nov 2025 03:03:28 -0800
+ Tue, 18 Nov 2025 03:03:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LCe9J9Wf;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2958db8ae4fso49516095ad.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 03:03:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HHo+ez+h;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-297d4ac44fbso47059465ad.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 03:03:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763463807; x=1764068607; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=JTh8yCUXylvf4RTdbjVnlTAJCfPyUBgil3VT96xOXEY=;
-        b=LCe9J9Wfv2jWRxZuKOha3L4N9WQ5xTRbhqQaH1i7PbFCSBmkK4MlfjMKKAyYW485MB
-         VNr+P4uVNw/oWiQUjXbkBcsj4N3grhqSDN6JBfSLteec+5Z9DeHK5v44IycKfGdCurQP
-         N2PZOXmuNZRgSFCoMoeS6MNZDXD5iuJ0+qUE5qaTkI/BvyPU6oXselbRUOAT3sGKZgwn
-         UL9mqQINQBi4fFicF+JnEboVMHmj0K/l8AtFrLpy1NDaKQh5R3lx7vl5x1LXV8UE9iHC
-         dhAxy0y2XYTvWdHdrR9b8P1YV4I5jnrfw/sulI4RsW7fqiYSQXOVDMTXjSH1nQEt7tyL
-         pCKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763463807; x=1764068607;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1763463810; x=1764068610; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=JTh8yCUXylvf4RTdbjVnlTAJCfPyUBgil3VT96xOXEY=;
-        b=Atqx4Zt0mxJaLjZ9td7kiSOklRqrpjndPE+GyVrRAnsYpye48T9R4zfsiPDRcHWfdX
-         dIxDRCGjFf5Co6rCJUjR9Qw7Qqjvpygevz9jvrBzU4HyH/fNSlvCRHqCIOVTusmDpHlF
-         2DxKML5x5/fUOvEj7qcJmSBcQoh53w/MrvLmA1KYgevusWdVktwiSJXUdjwe9hC/HVx4
-         YahkWUPGKRfIgUVlJVAwhHU+8ObKl8EfM4c8dG6xdsty2o2w+UDa2lIKkBsDdPArrMm1
-         f6WZRLN+77jjHOq1QMziaxuG6cl5YV1CH3rO0WcyrOpUcr7g2T2TXllfYDTvZvZgOHHI
-         csQg==
-X-Gm-Message-State: AOJu0YybzU4Y4Ucnj7BtkWNzcd9kGkyc2eASHj0VJS0gIHnvYduppXuO
-	KL23YpU+r1oY8Flh2HHMr2XFzReaGGzIMjSMsSgwjeK3mOupFR4euIceECwbVg==
-X-Gm-Gg: ASbGncsp7eBW+2mw/tdkSf/eCu7LekU6OZ6WtOhyUL+YOYLeV0eHYnmiGxXYpUYxV0l
-	O71/V3fBeVn2N50sl2I9Foy1wH4CBRpDQfj75N76YwE42tKGJKJA5u6wKzdSFsGMVM9cAcIqIbD
-	9nAzmhxnbDv5hpGd6MYo3jgZnIX/x4UV/GPkDZWUNp8veWscLQfrbQfZSHnsfFFKsKZcPH29C2x
-	JxJdfL1R09xk+cm3j8X+unbKru85MgMGLv/7PeK7dehOEAnezdRR9/ZRzEj87xWRb5zLudUusGP
-	b+X8FHXPqEWQpFnWQ+gEnoO3nFuiBybDkUUNlRmYfdphLV4k/GJPUGTjwaa82z0xuACQzLE8JDv
-	5q66quZZy98etXvG+NeghrFTzmsuuUoyR/toW+58nu/yrX9mgR/xChrJ3WPGJHbaieqbkFATm2D
-	+ZamyLDo+SUTtPPPdu9pJo+tWW
-X-Google-Smtp-Source: AGHT+IH2gRleAbtK8+S92Dt5hpjeazBYCknCtBLFO0aPdjoCCRcyOZk9UVcClkdsRyMrsa0F/cQ/hw==
-X-Received: by 2002:a17:903:1104:b0:295:9b39:4533 with SMTP id d9443c01a7336-2986a73b30emr198810295ad.30.1763463807495;
-        Tue, 18 Nov 2025 03:03:27 -0800 (PST)
+        bh=fPc+Jrp2dHqkN4fo+kyOvAd+VFui7HxBVpbj3cXWFuw=;
+        b=HHo+ez+h/2Yzp97MpplyliqkcXe+Lq3ydVYmlQQQ8j3d63Fl78bU0RW2G49D5PtQW1
+         oUoZ0wW7+E6nend3Rbs+6jYaDxcuRvcXJhaN5tsx084PonP0a1nsSNwwMJ/QSiwEnDNj
+         avJSaTaF/FV+o++Mt1mE17J+kjkEudQUA3o2QtfQdpyFLl7NWoJ9dQhRanxc4qlf9Tb9
+         E1K6Hpws4rzyfL16lljEOLnKIoxoNbATtvUbHe45LeHxXN02vX4FGs/KuuMLZn6QonS1
+         57ISl+cktLQP4CA/oUrHpE7HQyp3LKfOc8Lv6eEapZvEs1L3yzYVTxrtwwhaaOWXt/+H
+         n70Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763463810; x=1764068610;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=fPc+Jrp2dHqkN4fo+kyOvAd+VFui7HxBVpbj3cXWFuw=;
+        b=H5FlEnua2QRfp0kUDGCeAAu54hHtY0UUaVRH2+r8f/u58G1I3a8Lj2TouuUUkDm82B
+         R0uuroTi2jIoPo6nFjdYaz0S+K1DOI3RsMAUsLFnKMNJdhmGEfnawj/5CaIaho4+kRAS
+         0NqznJW4mC+/G9NWZ/rJN4wEa3O9tyQ+1ewQTWIAgjtGrsvm/ccgpuyIUHuAp0/PZXNp
+         Fh5Udg++x/w5gLvVi4O5XHArxO1MhnbYIi00UzOR8GB+lLqnqTfl+1Hoy4znqC8kp+jj
+         EQg5kZ8qNfzH00tou5zpcbOEIh8RB5pLOVsqX62flfyxyX0EEAZBmx5oQiyb4Nh8Fft/
+         qz3Q==
+X-Gm-Message-State: AOJu0YzsmD9SD5++efc93a+o9RxD3fK8SNYK+bAiVhPIAZTTtRLAl0JJ
+	VtjYjrzJ7Kru6yy9c8SRmrqJx3w8jNVuATY/QuyU8obhu/oVAzjf3++pvG7eSg==
+X-Gm-Gg: ASbGncvW5yoxKERzbkB2UvP9BgBOd60vg7l6eIUEguFJqh0le2RVSLiHJJB17nOB1Lb
+	xgBY2c7rWM6OKfCFD4/fqR/TkBmQBlu2Ad5lMUOuXgwDWz91ll4u+UT1LAsOq6PEp+4I6I6ecvm
+	J0n9KZQV4uIvsvrEaI6lPk8CTZykorKWwSRs+fDPC7/SK6nG9CkXP5LSfnDCbCDKvsELbm5ZSu0
+	JiCBHwWKw0wsZX727Xj5gA0ko4odR36xK+6hK3KeU6qYoCJvRWEibbN4F77FLLh23MpXGfHJDXg
+	OQqrrkm25Lm1Bcshe/jwuald0gNNhfu+dwXA51GQG+jB0Vr/GwDZ6ihxCqLmrUnnhezpeLY7zXw
+	mB+JMmtuCko3uRxZ96KVIYM13f0LmIhd9k2CW8iGfWxIVzur6GnC0YcIQSksaajxOfAB3D+xljQ
+	wPvcVcKRysg+2f3v3xkSLxuClDdr6mnFDP5O0=
+X-Google-Smtp-Source: AGHT+IFg88pOsMJt8pwjuRm8ly1fiImy5h6zWZePiEbhM7j1bQmUJBin57W0jjuVjvKuErF1Va0G2Q==
+X-Received: by 2002:a17:902:cec7:b0:296:547a:4bf2 with SMTP id d9443c01a7336-299f55b6333mr27599045ad.27.1763463809738;
+        Tue, 18 Nov 2025 03:03:29 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([167.103.126.249])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2985c244e46sm167431675ad.25.2025.11.18.03.03.25
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2985c244e46sm167431675ad.25.2025.11.18.03.03.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Nov 2025 03:03:27 -0800 (PST)
+        Tue, 18 Nov 2025 03:03:29 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 1/5] botan: patch CVE-2024-34703
-Date: Wed, 19 Nov 2025 00:03:16 +1300
-Message-ID: <20251118110320.1635988-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 2/5] botan: patch CVE-2024-50382 and CVE-2024-50383
+Date: Wed, 19 Nov 2025 00:03:17 +1300
+Message-ID: <20251118110320.1635988-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251118110320.1635988-1-ankur.tyagi85@gmail.com>
+References: <20251118110320.1635988-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 11:03:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121852
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 11:03:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121853
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2024-34703
+Same patch fixes both vulnerabilities.
+
+Details:
+https://nvd.nist.gov/vuln/detail/CVE-2024-50382
+https://nvd.nist.gov/vuln/detail/CVE-2024-50383
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../botan/botan/CVE-2024-34703.patch          | 38 +++++++++++++++++++
- meta-oe/recipes-crypto/botan/botan_3.2.0.bb   |  4 +-
- 2 files changed, 41 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-crypto/botan/botan/CVE-2024-34703.patch
+ .../CVE-2024-50382-and-CVE-2024-50383.patch   | 66 +++++++++++++++++++
+ meta-oe/recipes-crypto/botan/botan_3.2.0.bb   |  1 +
+ 2 files changed, 67 insertions(+)
+ create mode 100644 meta-oe/recipes-crypto/botan/botan/CVE-2024-50382-and-CVE-2024-50383.patch
 
-diff --git a/meta-oe/recipes-crypto/botan/botan/CVE-2024-34703.patch b/meta-oe/recipes-crypto/botan/botan/CVE-2024-34703.patch
+diff --git a/meta-oe/recipes-crypto/botan/botan/CVE-2024-50382-and-CVE-2024-50383.patch b/meta-oe/recipes-crypto/botan/botan/CVE-2024-50382-and-CVE-2024-50383.patch
 new file mode 100644
-index 0000000000..c3eb6e0936
+index 0000000000..d1b625f19b
 --- /dev/null
-+++ b/meta-oe/recipes-crypto/botan/botan/CVE-2024-34703.patch
-@@ -0,0 +1,38 @@
-+From 0d7909e8d88782fd827ed6869563c435f418c5ff Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-crypto/botan/botan/CVE-2024-50382-and-CVE-2024-50383.patch
+@@ -0,0 +1,66 @@
++From 157bf1cd6877e16084e910d68c1844ac73b4f6ff Mon Sep 17 00:00:00 2001
 +From: Jack Lloyd <jack@randombit.net>
-+Date: Tue, 20 Feb 2024 06:30:10 -0500
-+Subject: [PATCH] When decoding an arbitrary elliptic curve, set an upper bound
-+ on length
++Date: Sat, 19 Oct 2024 07:43:18 -0400
++Subject: [PATCH] Add more value barriers to avoid compiler induced side
++ channels
 +
-+Otherwise it's trivial to send a very large prime, which can take a
-+significant amount of computation to check.
++The paper https://arxiv.org/pdf/2410.13489 claims that on specific
++architectures Clang and GCC may introduce jumps here. The donna128
++issues only affect 32-bit processors, which explains why we would not
++see it in the x86-64 valgrind runs.
 +
-+Reported by Bing Shi
++The GHASH leak would seem to be generic but the authors only observed
++it on RISC-V.
 +
-+CVE: CVE-2024-34703
-+Upstream-Status: Backport [https://github.com/randombit/botan/commit/fbe9ec578a8548958677224d2e60d2c2c838bc9a]
-+(cherry picked from commit fbe9ec578a8548958677224d2e60d2c2c838bc9a)
++CVE: CVE-2024-50382
++CVE: CVE-2024-50383
++Upstream-Status: Backport [https://github.com/randombit/botan/commit/53b0cfde580e86b03d0d27a488b6c134f662e957]
++(cherry picked from commit 53b0cfde580e86b03d0d27a488b6c134f662e957)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/lib/pubkey/ec_group/ec_group.cpp | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
++ src/lib/utils/donna128.h      | 5 +++--
++ src/lib/utils/ghash/ghash.cpp | 2 +-
++ 2 files changed, 4 insertions(+), 3 deletions(-)
 +
-+diff --git a/src/lib/pubkey/ec_group/ec_group.cpp b/src/lib/pubkey/ec_group/ec_group.cpp
-+index eb4ed90e2..beaeedd51 100644
-+--- a/src/lib/pubkey/ec_group/ec_group.cpp
-++++ b/src/lib/pubkey/ec_group/ec_group.cpp
-+@@ -357,8 +357,12 @@ std::pair<std::shared_ptr<EC_Group_Data>, bool> EC_Group::BER_decode_EC_group(co
-+          .end_cons()
-+          .verify_end();
++diff --git a/src/lib/utils/donna128.h b/src/lib/utils/donna128.h
++index f39f57f97..ab7fb4c83 100644
++--- a/src/lib/utils/donna128.h
+++++ b/src/lib/utils/donna128.h
++@@ -8,6 +8,7 @@
++ #ifndef BOTAN_CURVE25519_DONNA128_H_
++ #define BOTAN_CURVE25519_DONNA128_H_
 + 
-+-      if(p.bits() < 64 || p.is_negative() || !is_bailie_psw_probable_prime(p)) {
-+-         throw Decoding_Error("Invalid ECC p parameter");
-++      if(p.bits() < 112 || p.bits() > 1024) {
-++         throw Decoding_Error("ECC p parameter is invalid size");
-++      }
-++
-++      if(p.is_negative() || !is_bailie_psw_probable_prime(p)) {
-++         throw Decoding_Error("ECC p parameter is not a prime");
+++#include <botan/internal/ct_utils.h>
++ #include <botan/internal/mul128.h>
++ 
++ namespace Botan {
++@@ -54,14 +55,14 @@ class donna128 final {
++          l += x.l;
++          h += x.h;
++ 
++-         const uint64_t carry = (l < x.l);
+++         const uint64_t carry = CT::Mask<uint64_t>::is_lt(l, x.l).if_set_return(1);
++          h += carry;
++          return *this;
 +       }
 + 
-+       if(a.is_negative() || a >= p) {
++       donna128& operator+=(uint64_t x) {
++          l += x;
++-         const uint64_t carry = (l < x);
+++         const uint64_t carry = CT::Mask<uint64_t>::is_lt(l, x).if_set_return(1);
++          h += carry;
++          return *this;
++       }
++diff --git a/src/lib/utils/ghash/ghash.cpp b/src/lib/utils/ghash/ghash.cpp
++index 38604afdb..5c244b4f8 100644
++--- a/src/lib/utils/ghash/ghash.cpp
+++++ b/src/lib/utils/ghash/ghash.cpp
++@@ -129,7 +129,7 @@ void GHASH::key_schedule(std::span<const uint8_t> key) {
++          m_HM[4 * j + 2 * i + 1] = H1;
++ 
++          // GCM's bit ops are reversed so we carry out of the bottom
++-         const uint64_t carry = R * (H1 & 1);
+++         const uint64_t carry = CT::Mask<uint64_t>::expand(H1 & 1).if_set_return(R);
++          H1 = (H1 >> 1) | (H0 << 63);
++          H0 = (H0 >> 1) ^ carry;
++       }
 diff --git a/meta-oe/recipes-crypto/botan/botan_3.2.0.bb b/meta-oe/recipes-crypto/botan/botan_3.2.0.bb
-index 1fdda65a05..3c603a9b26 100644
+index 3c603a9b26..ef3e63a93b 100644
 --- a/meta-oe/recipes-crypto/botan/botan_3.2.0.bb
 +++ b/meta-oe/recipes-crypto/botan/botan_3.2.0.bb
-@@ -4,7 +4,9 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://license.txt;md5=f5254d3abe90ec5bb82c5694ff751546"
- SECTION = "libs"
+@@ -6,6 +6,7 @@ SECTION = "libs"
  
--SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
-+SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
-+           file://CVE-2024-34703.patch \
-+"
+ SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
+            file://CVE-2024-34703.patch \
++		   file://CVE-2024-50382-and-CVE-2024-50383.patch \
+ "
  SRC_URI[sha256sum] = "049c847835fcf6ef3a9e206b33de05dd38999c325e247482772a5598d9e5ece3"
  
- S = "${WORKDIR}/Botan-${PV}"
 
