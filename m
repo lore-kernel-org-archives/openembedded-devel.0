@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61FD0CED243
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BF00CCD19A
 	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 05:50:57 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6154.1763445047468618540
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6156.1763445052582507393
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Nov 2025 21:50:47 -0800
+ Mon, 17 Nov 2025 21:50:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dRy4SBic;
- spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-297e982506fso61675395ad.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 21:50:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ja2SCIf3;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-295548467c7so59873235ad.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 21:50:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763445047; x=1764049847; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763445052; x=1764049852; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=kr8d90d+HRMDHJ6SwfJRqax5dzpYNS1TC6kq9it8zsg=;
-        b=dRy4SBicWE6ms0rbe7OX3L2FhS+8Htf0acMHdvGtrqBDzqxXREm4mQeXfcJU6z2xTD
-         2QR7e1WG1tZ3Raha/dPU4ZyEbT7jJAIZN4yAlGRv6pYl8TpxCu5UPDkpv3MsKs427cqX
-         PQQw33LdhRewsTyZuBANWSV1DdIGKyqkcH1SC2g7FqtpdfLvya7OOy/DTBhTf+MNdWiD
-         6EFv5aqWvpH4OUuRytCaIaEjyVE769lDJ6RFrqUfI4BjlzTGatQoAjhPsS0+jE4pjHsT
-         Rdi3w9PpyBQO9oyJ7aDUDyWZJg9uK9zW3cLrQ9y4piXdoa/OUUpIHk0o3wOooOevxmw9
-         5MjQ==
+        bh=+c88eWzE2hoYPZLiHYxXYgg2De+qrWsHGh4XO46SfNU=;
+        b=Ja2SCIf39SRwhUS/RPS7+X/dT6YiYjYkAL/p79hHfrFr32/C0uyBdsbUTcChZDnsQX
+         t0WZksK/nRbZBpg1xVwR4WnK3aPeDmofkM/1JW94EFiJEaX1/MxAAFEEZWEFuSh6+bVb
+         iKaCNdfIgXkgkOefKLteQ9D7iAbFCRmWDRG84OiA8iVXp0+Ghb8SOCkwtwt4rWlc+lD4
+         PV1+D0MerDM7sxR/mZoYkwqhl5SWVHS8xLw8EoM27CwcBVIVsATrg0wQhhDfLKJr6qNs
+         4O6Kt8ODUH3+IhS2HWgnXdv2/I8ir7YvW2F28iu3LIcRNjQ3+7YcxsALpnIWBOtXQL1o
+         HPcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763445047; x=1764049847;
+        d=1e100.net; s=20230601; t=1763445052; x=1764049852;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=kr8d90d+HRMDHJ6SwfJRqax5dzpYNS1TC6kq9it8zsg=;
-        b=RQkHBF2u2SK7PnUQCnAdd9OiyXPPdC0f9VGTdfw7h16RSNUGPOLKJsoud8c9jca9HB
-         2GR/qvIArVO5aeDo9DqxYMwSwJiB83cogX9Tw5fmYBMJcnmEnVCmG6luoynLEUDFjO8N
-         0SNDxKKBx5AQgJYoRSIJ71xtO0ICzbdjeZsaeHdqELXHQ+bnP5bPfyrdIEqIftMzG9hk
-         LoW3yr9vSpZ38T/Pa9X9edfPynXqy+QnXp0NWDNLpSXQWp91NPu3zEqOrayyrs4jrDir
-         rbXDDwxdbhuhii6RNUClAiqvsNx9OAgIcvHRNdXQD9CCH6zCueiBRLoogOgDGH4PVupe
-         La6w==
-X-Gm-Message-State: AOJu0YxJNL3MPzKdXoGTYP3cn0sMFORXmB6sEkN0oyx0Nj+QMSkh6uSN
-	Xj07s9K5OKnUqQUDYOhbqEs83p9GrMtiQD5xGx5Em6llynEZ6r0nf3qOTBEryQ==
-X-Gm-Gg: ASbGncvhb22TBwYrIlPmmEWgi0SLUnn1ISxhiqJviNMicotteBNYchoqH7IvqHfP2Jc
-	3OkZ5X9reO7T2ZY8UnQ2XWXgLBx8etdxB7u3t27skLyj42pw07fIeBW3LA8NrbrNp7TSjQjScb5
-	INZ2V/DJBE3h5xEIEzQf7V5CgZmKdUXvgnXAqJXQJPr8W4EgY1MTlCvHdg77h35LiyfXuiqbEEW
-	KaXJcu0yZ06HKa1O/7l+pQ1MXJvOiQT2CFrHszdY7Ax1Hkj2U+OMrCnXoqt7nMRKuKiCMTKJtRm
-	vBfCZFvk58kE4Xmu7AFvCAqgHHtzi974STmpIQK3khe5v9DDwDTHBbiJdhJ/UtDa+jf9LKsguw0
-	DaLbiR+zPXt7v49Ol2XgfxrvskHjW5BOExlzCjcR2c4VR26m5Qls/5ond5lrR/gJnpe8bGK/st0
-	zFKRkG6IONJZmib+BLrHQJZecJ8uyCl/wIeQs=
-X-Google-Smtp-Source: AGHT+IGW0FMs2XwYNOoxmsup3Cw5kzrgjsUYNGGwfxJp7XC9dEo7AFvG2dmlXDMTJkDAjF9Bspn0MQ==
-X-Received: by 2002:a17:902:c942:b0:296:ec5:ab3d with SMTP id d9443c01a7336-2986a782c9cmr196988105ad.61.1763445046650;
-        Mon, 17 Nov 2025 21:50:46 -0800 (PST)
+        bh=+c88eWzE2hoYPZLiHYxXYgg2De+qrWsHGh4XO46SfNU=;
+        b=K3fjXBvaLxbBmmb5yVgnNW9hSesKJblwWUbDjZXd0SCqrKwAn40KEKBMv6iCuhM6I6
+         YmxgQ/gvd3DMWE/B3hl1TodJ/6eZoF+wPBWGIyEVE1NVdG6MGXN7BENSdquIKgQN+nuA
+         Cfh33FrI6wcXX7sOKfLly7esYyIduqwDZ7McU1BDRtWqrytOcWuuHyE7SxHwX4h96gNK
+         RbZoUXpj4pc2/ipKtpuznsAutS+Z3cI607UNiNj/EeABME/FOBTmzzhwqRl2fB727neY
+         biiA93sUXBr5OIJIKQuHiXwaKxAOUb3uSL2UB72oJ/ev7OVovZONbIP6LVrgLZde00e1
+         3k3g==
+X-Gm-Message-State: AOJu0YyRU83hsTgYRmPsCdMNWwfkEnPTDaFBVr++a8D4PaYwMGIT2Htr
+	Ulr87VEZbEfnYSonp89UYO4pvpSiRJEjBRdmQde/bOdGQAkgJ3MnZCmHHtFSqg==
+X-Gm-Gg: ASbGncvylZv7jCHI6MBGPB1BKG06j752H98vZWtlGlFgji36nsw0a3z91pMWiR7Mrfj
+	i5In87dRZ5YWzYzl21t1QKJ0BeMavFNOLxx64eSPcWLYo8p51Qpm1xGro6yNCeSL3mV5iakBT7d
+	h3r8poTZDpFfYmKouheR9bvjeZn2zffpSNyb0uTqxSdqyMNP+AeDWM6JBTcJF+Hvewm6D8PNIEG
+	g9NdMEyxzRKOx3z9udskoq04VD1upidd7+0UJOmC16kTl7ycPNtk/bDHa7NcVatvzEUM+DrMVdQ
+	u7pF0DuTQorTsGNTBloTOOBmQy/NnLpTCdLugyOCZLxWkg6Xe4fGPxKLlbS+j4HxPh5Du0gUaU0
+	LoTjyM7m6zjfUVfJM7sZgzGHi55cN1Vl6gNwFidM4YzvLSU2C95XSHyo7Dlog2eU0tCvw2e87Kx
+	SMtC6s1Ehhht5qII2/4UUfcK0r
+X-Google-Smtp-Source: AGHT+IGoGM8VKop0APeqJkxc1hpvbtqpfl9ahCwZds5Tj0Rb36YHDWut3hVgBlSLCc8iin1A/4yOrA==
+X-Received: by 2002:a17:902:f60e:b0:295:9d7f:9296 with SMTP id d9443c01a7336-2986a74333fmr189004535ad.45.1763445051899;
+        Mon, 17 Nov 2025 21:50:51 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([167.103.126.249])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2986a60b116sm126822955ad.79.2025.11.17.21.50.44
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2986a60b116sm126822955ad.79.2025.11.17.21.50.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Nov 2025 21:50:46 -0800 (PST)
+        Mon, 17 Nov 2025 21:50:51 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-webserver][scarthgap][PATCH 4/6] webmin: patch CVE-2019-15642
-Date: Tue, 18 Nov 2025 18:50:25 +1300
-Message-ID: <20251118055027.1334922-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-webserver][scarthgap][PATCH 6/6] webmin: patch CVE-2022-0829
+Date: Tue, 18 Nov 2025 18:50:27 +1300
+Message-ID: <20251118055027.1334922-6-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251118055027.1334922-1-ankur.tyagi85@gmail.com>
 References: <20251118055027.1334922-1-ankur.tyagi85@gmail.com>
@@ -69,64 +69,63 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 05:50:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121807
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121809
 
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2019-15642
+Details: https://nvd.nist.gov/vuln/detail/CVE-2022-0829
 
-Pick the patch mentioned in the nvm report.
+Pick the patch from the nvd report details.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-(cherry picked from commit 241abdec1282b65eab79923434a059e6d6f869f6)
+(cherry picked from commit 80b536578028e4f6d0e5d13d133d1d88764f7445)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...es-cannot-contact-special-characters.patch | 26 +++++++++++++++++++
+ ...issions-check-when-saving-allowed-cr.patch | 25 +++++++++++++++++++
  .../recipes-webadmin/webmin/webmin_1.850.bb   |  1 +
- 2 files changed, 27 insertions(+)
- create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-Object-names-cannot-contact-special-characters.patch
+ 2 files changed, 26 insertions(+)
+ create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-Add-missing-permissions-check-when-saving-allowed-cr.patch
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/0001-Object-names-cannot-contact-special-characters.patch b/meta-webserver/recipes-webadmin/webmin/files/0001-Object-names-cannot-contact-special-characters.patch
+diff --git a/meta-webserver/recipes-webadmin/webmin/files/0001-Add-missing-permissions-check-when-saving-allowed-cr.patch b/meta-webserver/recipes-webadmin/webmin/files/0001-Add-missing-permissions-check-when-saving-allowed-cr.patch
 new file mode 100644
-index 0000000000..9abb02a6ae
+index 0000000000..a1ab677bc9
 --- /dev/null
-+++ b/meta-webserver/recipes-webadmin/webmin/files/0001-Object-names-cannot-contact-special-characters.patch
-@@ -0,0 +1,26 @@
-+From 8470368e42af2b66a31a112299df6239fccf111e Mon Sep 17 00:00:00 2001
++++ b/meta-webserver/recipes-webadmin/webmin/files/0001-Add-missing-permissions-check-when-saving-allowed-cr.patch
+@@ -0,0 +1,25 @@
++From 15dd0e4e55579671c01e4808236beb4fe23e9eef Mon Sep 17 00:00:00 2001
 +From: Jamie Cameron <jcameron@webmin.com>
-+Date: Sat, 3 Aug 2019 22:41:37 -0700
-+Subject: [PATCH] Object names cannot contact special characters
++Date: Sat, 19 Feb 2022 13:10:36 -0800
++Subject: [PATCH] Add missing permissions check when saving allowed cron users
 +
-+CVE: CVE-2019-15642
-+Upstream-Status: Backport [https://github.com/webmin/webmin/commit/df8a43fb4bdc9c858874f72773bcba597ae9432c]
++CVE: CVE-2022-0829
++Upstream-Status: Backport [https://github.com/webmin/webmin/commit/eeeea3c097f5cc473770119f7ac61f1dcfa671b9]
 +
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ web-lib-funcs.pl | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ cron/save_allow.cgi | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/web-lib-funcs.pl b/web-lib-funcs.pl
-+index df673bb7..bbe154a9 100755
-+--- a/web-lib-funcs.pl
-++++ b/web-lib-funcs.pl
-+@@ -7102,7 +7102,7 @@ elsif ($v[0] eq 'REF') {
-+ elsif ($v[0] eq 'UNDEF') {
-+ 	$rv = undef;
-+ 	}
-+-elsif ($v[0] =~ /^OBJECT\s+(.*)$/) {
-++elsif ($v[0] =~ /^OBJECT\s+([A-Za-z0-9_:]+)$/) {
-+ 	# An object hash that we have to re-bless
-+ 	my $cls = $1;
-+ 	$rv = { };
++diff --git a/cron/save_allow.cgi b/cron/save_allow.cgi
++index 87bbe453..73df9a84 100755
++--- a/cron/save_allow.cgi
+++++ b/cron/save_allow.cgi
++@@ -4,6 +4,7 @@
++ 
++ require './cron-lib.pl';
++ &ReadParse();
+++$access{'allow'} || &error($text{'allow_ecannot'});
++ 
++ &lock_file($config{cron_allow_file});
++ &lock_file($config{cron_deny_file});
 diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
-index 784e3b69b9..cc31ff35a7 100644
+index d553c7530c..78ab19601f 100644
 --- a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
 +++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
-@@ -21,6 +21,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
-            file://webmin.service \
-            file://0001-Escape-potentially-malicious-HTTP-headers.patch \
+@@ -23,6 +23,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
             file://0001-HTML-escape-command-description.patch \
-+           file://0001-Object-names-cannot-contact-special-characters.patch \
+            file://0001-Object-names-cannot-contact-special-characters.patch \
+            file://0001-Foreign-module-may-need-a-check.patch \
++           file://0001-Add-missing-permissions-check-when-saving-allowed-cr.patch \
             "
  
  SRC_URI[md5sum] = "cd6ee98f73f9418562197675b952d81b"
