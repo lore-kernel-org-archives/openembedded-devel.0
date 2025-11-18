@@ -1,110 +1,125 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FFF7CEBF97
-	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 02:24:16 +0000 (UTC)
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2476.1763432644046978610
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 774CDCEBF9A
+	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 02:24:46 +0000 (UTC)
+Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2468.1763432682933400051
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 17 Nov 2025 18:24:04 -0800
+ Mon, 17 Nov 2025 18:24:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=EXdoN30L;
- spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-7ba49f92362so3774557b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 18:24:04 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=L5BtRhFJ;
+ spf=pass (domain: gmail.com, ip: 209.85.161.50, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-6574ace76dbso856495eaf.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 17 Nov 2025 18:24:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763432643; x=1764037443; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=N/9hIDkhESH+Cw8hm043T0kBa68AdDQLvT5TplC8s+8=;
-        b=EXdoN30Ldvlv3Ed6bNIhT66BEPZ4NlGURaD+DLSMIsI8TvfXkOW6UTVABWwWtFBtlt
-         4QgCDFyJrZ3FlL1yfUDTsrgyzC9ZXscJVsxK7jm3vSJCj8g2Xc454IUGAFj0ivbevPtu
-         GwCZ94xbA5/nMr4Q8GQl7NaufVuvEAXZoKBjN/B9+fMr10UKU/rtgIvkf4Q+goNCHqHH
-         bpGpkznsx0rmW3c2mE9MlE6zUP899++uBU2+XFx7kLSZJUVWDwc7uVM9Jp82K78+cIjd
-         kyrQYbR3iey0rKUAfT4yOaLDVhMIEJGP6PsZHiH5UJjpMp7XKivkvpMohlKrnLai+Bnx
-         QzOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763432643; x=1764037443;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1763432682; x=1764037482; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=N/9hIDkhESH+Cw8hm043T0kBa68AdDQLvT5TplC8s+8=;
-        b=NJSqqZ3YhHBTA5n6kl4LAkh9Yhwthxn1AqnwweDQZ0dfwxZ3HbMDFy7pTxjsj6JZMp
-         BrIbNo8/l9LT3VmCulC/EbHhJlwOZonaKrhe4GhSrqy48Xa4JKuJVv+GLGty4z82+Ysy
-         cXc7Xx+GYv4a2yf1u4OyUcmMxPDaFFXR4tdu/HphiuPbIO8if73qEldxuieYv7xwBlRG
-         FDqwxZFImmhFLl7Xqkpdc+FegtLyq9FR+6uVUQLziTveUHB9xoZYVCKoZ0vzfFc6M/Tc
-         c+Gtatl7hB7yU1H9AoatR/dO2Ry7jUH4C05bJ9EnUSHjtLqOXRpnIIW8UWP9DpzqA+O2
-         K2LQ==
-X-Gm-Message-State: AOJu0YyUJef1etHY/gtFhVRl0wqkTQFcJX7eITwY9wIZBZTKt6xouUjs
-	R30SPIgshnI/QZmp5SqUxzsfASRVjGcQa1/haUXXJ5mw+vvljsDN5DuVgdPHcx5W
-X-Gm-Gg: ASbGncs7rC2T2/WtP1ltWLFZPYHyUbBnuGo1vDb4J9EUOfP+vuwnZKLCCJTca0YNS0Z
-	zkGxCgVnej3yZrkhwkL86mhIdV4YSNDU+4/wYx/ZAKU0aR52Qp5KKXXgtUWC0sMSN+dttU7Gf4H
-	Rh2IYL/X7T5o0AKBUVndHD8xhLss9IkJdbf1F8mLnyhZE6YytNGieSslblRQGU3A/CRkhye1AzZ
-	5/vL8Da2SiJgaMN6hgUi0tgw89uVHAvvxq19jFmnLL8If2q/opWq0oINhDeNz2g0eUi0cfUHykT
-	/Luzit/KJBi37KdcEFUIMxpFjDU2VCuB+QZ9buir8oq+vj5YtoZ/lwwYOETIxWwJKH4dmG4yBdL
-	KNOucxVUl2nN9O35gnalWrunE/9Y88rKBIFlUdRGd0G92m1zbXfFtgAlPmxun9y80G0gGHLyaR8
-	LhsSl1aGJ7ssn18m6NOLKrasqOulATA6ClalUSB58a/4b98dRF5il/h4CBl0vhzV5FJW9qoUVDS
-	Popd1XYesQvPTyYYvrWWwFvnkAp9XICvqzfzI+5G8k=
-X-Google-Smtp-Source: AGHT+IEBFJMqkPf+Oa2q14ClJjIPMPyBdtPr0/BDhoEGFS4ZxGznVqTWrfmAzdxRr0kjzgmu2FF2XQ==
-X-Received: by 2002:a05:7022:4083:b0:11b:9386:a38f with SMTP id a92af1059eb24-11c74fb20f9mr617838c88.22.1763432642507;
-        Mon, 17 Nov 2025 18:24:02 -0800 (PST)
-Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::888a])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11b0608861asm36829873c88.9.2025.11.17.18.24.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Nov 2025 18:24:01 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] gtk-layer-shell: Add recipe for GTK3 version
-Date: Mon, 17 Nov 2025 18:23:59 -0800
-Message-ID: <20251118022400.3733149-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.52.0
+        bh=CKMlmuGT2xeO2dgjtnaVtKH41nBkZ14Q/KduhGJ49y4=;
+        b=L5BtRhFJQVz0tW7eGoNjsuWn71JX2R1kdm0sKpZLb18Kfed+ObFZuGiHjEU6o5DHEX
+         NNDfdnqzPIRUlabk13opgibMeUD7Gb663QM/CO/3pxrRZep9myOL+ZzDsoZ1P81pWRyV
+         6ZIraUZ3VX9Qixnjqv8M43fDtSd+hQ4wo9pbmwS5gjxcAnOhddXibaOREDbdIucJKY2D
+         tAjK/3N7NunaugRjffzLydy3e047/FyiCUJiackFXbzb9k5XNTkTdmDY9Z6w7CFd7LrD
+         8HuQUeG2+20z2Di1kPGhxeMmXWnPk546P0YOqGvwe3dqOSPDV5h4LnC7Ntyt4VcqA12U
+         YxVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763432682; x=1764037482;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=CKMlmuGT2xeO2dgjtnaVtKH41nBkZ14Q/KduhGJ49y4=;
+        b=u8tSS+D7pi4CYt8ebJYhkcjyq13I9DOIv1FBZkZ0bxxeJPxBlKX+hUl7H3MMTSguSR
+         +RVrlna8zA+G9HP6NlfxW0K8kV8fQIT6hhyzJAHOba3qIbB1AMiPspyG1UL0yrUsdwkU
+         yRwcKutNcnWLii1H/ZUsGsnqkGzXkM2NXxcF+iR8+AJT1cXwIRjkwc2c3gBTWY6XN5y3
+         89wC+hqeChuJ0t9BjmhCE4Dldl1UEkDDs8IwI2jMuoyBMNGAa0Xusm8H/AUIZeFd/x6+
+         3iak2ex4bnqV+Bx6xIZ3ba1W1SFQLlqbFRVS5QHRJuY76o5FdxvqppgFt79krrR7j2zR
+         MjrQ==
+X-Gm-Message-State: AOJu0YyW24Son5N1O4MT/3ffmPXW/AyyMrrqL4iAKVfT9AJ1QbbXXww2
+	JVsIuWdp2pEELDOcJFuEEIC2tIP2Gp7WqzRQQ5Qi7HA1xPkJ5C7WoNS9+QVszQnLdoMBdNqBO9d
+	xeBDhRFgfuxZxSdSHIzk8hsVr8c7jyD59+g==
+X-Gm-Gg: ASbGncsUqqNIn9lepekVg61v5eOX34krsjTDvDM2vOLQ6gXf6vrmEPok2NWq1+MS6Yg
+	kti5B2/0vCjltQG4cF48QZvXPIs3BOXyf1YqRq0V2+Ex4/iPCTgZhXaGLTkEf/DqUVVBe/JOzoo
+	UMi+njQ9FovNiYJeBI71X0JiAj9noCW8Uh67Fie89J7dyrBQs+uYsaT1i8YfG3D8aab+sYPoyMp
+	4gfVUFyYHuTZ2sZnxZlaIbTc9/W9MqUHP8v0kCOfgr4HsgjgWrMLU96jHs9poffZoFj+3qzc4Cu
+	CBH+r7k=
+X-Google-Smtp-Source: AGHT+IENDHjtpdvylvdy5sLeR7P9iRw8h8WlmiAmAvzmMgblBe9yl2/9Wt5ciFQuGKGjNKnnBcQUgwBYN6ZxpHN8n3Y=
+X-Received: by 2002:a05:6871:723:b0:3e8:8e56:671b with SMTP id
+ 586e51a60fabf-3e88e56b13cmr4356299fac.55.1763432682017; Mon, 17 Nov 2025
+ 18:24:42 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251118002723.829508-1-ankur.tyagi85@gmail.com>
+ <20251118002723.829508-2-ankur.tyagi85@gmail.com> <CA+s=J=xiUQufA6Yzzb3hP6nD5CVwGNHWJN1BGY=X8UnCHXQNCQ@mail.gmail.com>
+In-Reply-To: <CA+s=J=xiUQufA6Yzzb3hP6nD5CVwGNHWJN1BGY=X8UnCHXQNCQ@mail.gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Tue, 18 Nov 2025 15:24:30 +1300
+X-Gm-Features: AWmQ_bky8WPJVU5wOj3xUepfy5DurfcQZREEqIl6g2_EhvzCznHYy4oGjDwOt34
+Message-ID: <CADySD0ERyR_HgiZ3JcFf=pHAkMfcfTLRbx-WtiTdo123SZXObw@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH 2/6] smarty: upgrade 5.4.5 -> 5.6.0
+To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 02:24:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121798
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 02:24:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121800
 
-This is needed by xfce4-screenshooter
+On Tue, Nov 18, 2025 at 3:15=E2=80=AFPM Anuj Mittal
+<anuj.mittal@oss.qualcomm.com> wrote:
+>
+>
+>
+> On Tue, Nov 18, 2025 at 8:27=E2=80=AFAM Ankur Tyagi via lists.openembedde=
+d.org <ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
+>>
+>> From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>>
+>> Also update CVE_PRODUCT.
+>>
+>> Changelog:
+>> https://github.com/smarty-php/smarty/blob/v5.6.0/CHANGELOG.md
+>> ---
+>>  .../smarty/{smarty_5.4.5.bb =3D> smarty_5.6.0.bb}               | 4 ++-=
+-
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>  rename meta-oe/recipes-support/smarty/{smarty_5.4.5.bb =3D> smarty_5.6.=
+0.bb} (82%)
+>>
+>> diff --git a/meta-oe/recipes-support/smarty/smarty_5.4.5.bb b/meta-oe/re=
+cipes-support/smarty/smarty_5.6.0.bb
+>> similarity index 82%
+>> rename from meta-oe/recipes-support/smarty/smarty_5.4.5.bb
+>> rename to meta-oe/recipes-support/smarty/smarty_5.6.0.bb
+>> index 047f10589d..88afc55c15 100644
+>> --- a/meta-oe/recipes-support/smarty/smarty_5.4.5.bb
+>> +++ b/meta-oe/recipes-support/smarty/smarty_5.6.0.bb
+>> @@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2c0f216b212=
+0ffc367e20f2b56df51b3"
+>>
+>>  SRC_URI =3D "git://github.com/smarty-php/smarty.git;protocol=3Dhttps;br=
+anch=3Dmaster;tag=3Dv${PV}"
+>>
+>> -SRCREV =3D "e26f82d02c4d18fc82094c28fbc65f711e39ed5d"
+>> +SRCREV =3D "1fc41e385da8a27a87bec5914392ab662a7bb8ec"
+>>
+>>
+>>  INHIBIT_DEFAULT_DEPS =3D "1"
+>> @@ -34,4 +34,4 @@ FILES:${PN} +=3D "${datadir}/php/smarty3/"
+>>
+>>  RDEPENDS:${PN} =3D "php"
+>>
+>> -CVE_STATUS[CVE-2020-10375] =3D "cpe-incorrect: The recipe used in the m=
+eta-openembedded is a different smarty package compared to the one which ha=
+s the CVE issue."
+>> +CVE_PRODUCT =3D "smarty:smarty"
+>>
+>
+> I think this change should be split into a separate patch so it can be ba=
+ckported.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../gtk-layer-shell/gtk-layer-shell_0.10.0.bb | 25 +++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-support/gtk-layer-shell/gtk-layer-shell_0.10.0.bb
-
-diff --git a/meta-oe/recipes-support/gtk-layer-shell/gtk-layer-shell_0.10.0.bb b/meta-oe/recipes-support/gtk-layer-shell/gtk-layer-shell_0.10.0.bb
-new file mode 100644
-index 0000000000..2bfe9b0e77
---- /dev/null
-+++ b/meta-oe/recipes-support/gtk-layer-shell/gtk-layer-shell_0.10.0.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "A library to write GTK applications that use Layer Shell"
-+HOMEPAGE = "https://github.com/wmww/gtk-layer-shell"
-+BUGTRACKER = "https://github.com/www/gtk-layer-shell/issues"
-+SECTION = "graphics"
-+LICENSE = "MIT"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE_MIT.txt;md5=ffeb3391e5dace600b84c757688b9f1b"
-+
-+REQUIRED_DISTRO_FEATURES = "wayland gobject-introspection-data"
-+
-+DEPENDS += " \
-+	gtk+3 \
-+	wayland \
-+	wayland-native \
-+	wayland-protocols \
-+"
-+
-+SRC_URI = " \
-+	git://github.com/wmww/gtk-layer-shell.git;protocol=https;branch=master;tag=v${PV} \
-+"
-+SRCREV = "3964966d72ea3359f4ff748081493e979c080b7e"
-+
-+inherit meson pkgconfig features_check gobject-introspection vala
-+
-+EXTRA_OEMESON += "--buildtype release"
+thanks Anuj, good suggestion.
 
