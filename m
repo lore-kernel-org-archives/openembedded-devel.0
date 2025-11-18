@@ -1,146 +1,105 @@
-Return-Path: <tgamblin@baylibre.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9741CCEE349
-	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 18:03:10 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3422.1763488985465303545
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F339BCEE34D
+	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 19:20:20 +0000 (UTC)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5190.1763493618730135274
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Nov 2025 10:03:06 -0800
+ Tue, 18 Nov 2025 11:20:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20230601.gappssmtp.com header.s=20230601 header.b=mm0dGJCg;
- spf=pass (domain: baylibre.com, ip: 209.85.128.54, mailfrom: tgamblin@baylibre.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-47775fb6cb4so41970965e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 10:03:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=d79fI15t;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-7aab061e7cbso6702593b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 11:20:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1763488984; x=1764093784; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=NNZWk9DTfTsnzEWzDJQgWWZCZ10DalDqkSyLBwkufBQ=;
-        b=mm0dGJCgwm6OJajKHJURHEmQ7RbKR8IhCrdmFbojCDXgc407ORJM+FDmCxlwGLD3DR
-         gRC6DktiyeBL54oJuOs6opZNpoCipu3FpHegbmdKA049eUMS2mJqCaT0P4R2nH4NlVKh
-         Pbgr+de0PTvseUYVFtmmTDNwStqbiqeG/dWwaYEUGqlpdmG97L+2CGM3fhBCQRUI+Ksr
-         dVo1o3E3ei0aLd2pnj8VR8AV2RSm1hhcQIdmKlH+8eUfUQ/xxrbpi+POYxoctad77mYo
-         ArgMMILiLP4E21TtjBub9+3VX3WXDxGjGr7P5WAYC/me+JR4/6phuZVFad+gODrtJ55o
-         KcFg==
+        d=gmail.com; s=20230601; t=1763493618; x=1764098418; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=QoWCHsJDlE0yKG0tmoggfEkg7JcX1bkY0mnX7JwFRGA=;
+        b=d79fI15tDk+Q2i33P0hDXVwSYH2KrcaTNYf2M6Q+OIWw1W3kDtoA59FyMb+Z9U1y/U
+         3w3Hz2KLyxlEbJgaWKK6PG43aRvG7KKl5fwnXqvb3v0CoAOluGs5ayQqoAwQoFNXMTHB
+         z9vZWabIB2eTwLoT0CmcPYawKzNzwI5OED/3u1TnQmfTMl3/0s6TvcJBrOx42LOQ2wrZ
+         NJ0H/KIS557OHrWmwYypoB4pIoHu2JcZ4c2cmaSEanl8p8AVvXLhrvp/XvalrP+TZp03
+         5reGcG9QKB7OzvoY6FLqz5Z7n26R2d+DD6+I4b2XjH39l3D+mwGsoFuJ3j0QxwLOK4qp
+         qc9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763488984; x=1764093784;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NNZWk9DTfTsnzEWzDJQgWWZCZ10DalDqkSyLBwkufBQ=;
-        b=WqpFjKK5d+18P4kWT/oBEN/uJFQi/UMeGw+b4OK1PqiTcjJ4mXXG/3bVSkugVQRGt0
-         nSQmbiLu+w5+feHzMpggMB0rIbbVmCzsaIfzMdTZ9i+ESqf+TUB05ZKAxKCpgLR5lZAQ
-         L+QYBGpBiOTAL7mzonqid22DwyWpa1M3MojiMZN83rm/Mn+7D3FwTB9qlDmvjS4v4Q6f
-         fxNLBhkwgiDmh2jaM1j+BqVCCAUD7M649fJP2OVQQM9CU3ZW1JFTCAWcTnewAJRg9X+l
-         NB80/t5zcbVGRuRvljQXTSaNoJviP6NGuxbOIM7kKvw+oAMBHyyytKchK2V2aAC6Uw0k
-         QzTQ==
-X-Gm-Message-State: AOJu0YxD9i+J3kunqQS1GZZr+ZncMIsvkGM01obgbX8E1HtmSdLqeS5h
-	BmV60+sk2qwyMkuspdgN1dK4lMuEn4tEf5dIrSOUVfUm5YYhd/hNeqn9mjOwi0gb9z8=
-X-Gm-Gg: ASbGncvRIzhi4ZgY5cFDFhVKFt8ELtBBh7oRuKbiaVY45udvh0pZNksWX+EjKqUK1LN
-	oqllGu9oL3fohqDIreweOrke/MZU5EbnsINPhHJl1RUcQ6TKyuxck9FeIhAEyn/Q0Wkod+J+VDU
-	N6koEqspqnRKA6iYv03iWcOI3Rtak2uZfSQ4eKGpMYaW4lgS9Ml2nn/HyKDXDEkIzuHYTTIXxls
-	g0VQOjhGYzvWS6eH97GJV0c21pMGncvspJGhiAcHw/NZNF9vSWCU/RHf3nUFpFRIA3yVHZ45aUt
-	zHBM/l8WRGqdqBoRt+g6u17FhFZIgmGsJvRE0CFP2DN/3vPdHSRq9ktCp4aGOLVEUqhQmWq+t1u
-	yVi9LYO/zEqxTOnRgsizQzw8RG1C4nEDo1Gc6Xakl5BxugprL6xg91V+lKfPI4Kw7IoWd1XWzqw
-	PdGyGzsotpAQunxZs+5WsuIKGEXSYO6kbwIKQ3a0Xe93LanMH4cKR8wrjEvmyXjA7fPGpdJs5YL
-	Os=
-X-Google-Smtp-Source: AGHT+IEdmUgAUcQX+1mgQEJe0Lv8iTtIcL7C0VIr9nYkg1vJA8WHXHNNEWVBjU7eGq69qEPzFDR4lQ==
-X-Received: by 2002:a05:600c:6289:b0:46e:37fc:def0 with SMTP id 5b1f17b1804b1-4778fe62100mr163326995e9.9.1763488983399;
-        Tue, 18 Nov 2025 10:03:03 -0800 (PST)
-Received: from ?IPV6:2001:1970:3847:e000:84f2:c6ad:afd9:6725? ([2001:1970:3847:e000:84f2:c6ad:afd9:6725])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477b1041defsm2516855e9.15.2025.11.18.10.03.02
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 18 Nov 2025 10:03:02 -0800 (PST)
-Message-ID: <897cf7ec-7354-4c5d-9e46-b262fcf6431c@baylibre.com>
-Date: Tue, 18 Nov 2025 13:03:00 -0500
+        d=1e100.net; s=20230601; t=1763493618; x=1764098418;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=QoWCHsJDlE0yKG0tmoggfEkg7JcX1bkY0mnX7JwFRGA=;
+        b=YgzvghOQOaFZ1KobdCMy+i/VXZbZm5QMdYHhl5mff4NrXtBi+6Jn5wpFoZKKnsfDek
+         qozX8U2NsTImYUKy1pHpYWjtlI7JYep8zmCiKxa1WYmX++63PhqJa97gDLbDyzcImuLc
+         ZZuRTMdNI4Dgl94TAt9ZOUSKnrvMREPObPrg/ka0Aci1lMI+qwxNPcmyy23ynxdEUjWO
+         ziP/O5XhdxyPHcHqR9/oe/w2u1EHip7h9J2ZJDJ34VnagGPHV0J9oVNoc2Pgh0cGOC1S
+         fQdk/nJgSzkJa8mU7M0Q+Kn0on7JAQTiBZjgXxfMWzy+TXb1QJxZjnSE4XIX+qhU9DGR
+         COQQ==
+X-Gm-Message-State: AOJu0YylX/1FJcL35nI6iXb6KBPodNntHtAWekYElhqvHSsmYIMlCKY4
+	3KzGwW7TEv6TxUZZRmQgVTLHe/BetbpUpfz7WQCXNTSHxEcN/uAWK01ZQNth3Q==
+X-Gm-Gg: ASbGncvYrUsn9+Bykbeu1FbaT737k8Wvv0EXmMK3rWsZJovS0PXglq09h3LX1wyA+Cw
+	je+YWfraz/yQ3Rr+GlDVKyBA0c0RDdqHOULLoMeRPQ2ffnUYpSuhk0PItWupfLaW8zel3jFagRP
+	G5pEM/j/F0MiN1asXSMcEm4TNQeH0kJZA3DKM9JCn38E3d20/QBJI7bS1U6G3JK8r+/YOhiw8C0
+	nIzPY8Is2koeJ6t0M1hMR4uGsdc0r1doEo/uhgeHgwmi4Uzs08CaJc3d0g48qii5RyLzEG4W6Yf
+	G8MoR/ON/xWX73uOsW0aN5bFZmIex28Peg9pGYhJIEx0izJD02S9Ckkfsx8L1lOUsrsYReeleU1
+	KU8iNoLMtX80shhuR7ixoNOgM94lBG434dJNzrb8T99AMt6jDYIEPAAQdosBH3ELDKB0PvhkXDA
+	LbGwjTMYHMRSDoIEYEpC8+w6/J
+X-Google-Smtp-Source: AGHT+IFvTBimEyvL19Yt85YvzANTEwkhwKXg3BEZ9k4AOqBmCzk/mtApQD6bYL9Ku716fldTcoTavw==
+X-Received: by 2002:a05:6a00:2443:b0:7aa:9ca5:da9c with SMTP id d2e1a72fcca58-7ba3c4755d7mr18048386b3a.22.1763493618030;
+        Tue, 18 Nov 2025 11:20:18 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([167.103.126.249])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7b927c22b1bsm17041601b3a.66.2025.11.18.11.20.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 18 Nov 2025 11:20:17 -0800 (PST)
+From: ankur.tyagi85@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH v3 2/2] smarty: upgrade 5.4.5 -> 5.6.0
+Date: Wed, 19 Nov 2025 08:20:09 +1300
+Message-ID: <20251118192009.2018290-2-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251118192009.2018290-1-ankur.tyagi85@gmail.com>
+References: <20251118192009.2018290-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python][PATCH 1/2] python3-orjson: 3.10.17 -> 3.11.3
-To: raj.khem@gmail.com, t.f.g.geelen@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-References: <20251116225013.2063395-1-t.f.g.geelen@gmail.com>
- <CAMKF1soQYmApxJ1weUw1PSxQGA0sbGiiYPPH8zFENCyPwZogkQ@mail.gmail.com>
-Content-Language: en-US
-From: Trevor Gamblin <tgamblin@baylibre.com>
-In-Reply-To: <CAMKF1soQYmApxJ1weUw1PSxQGA0sbGiiYPPH8zFENCyPwZogkQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 18:03:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121868
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 19:20:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121870
 
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-On 2025-11-18 12:24, Khem Raj via lists.openembedded.org wrote:
-> this fails to build on riscv64 - 
-> https://gist.github.com/kraj/8d818b0bb2ec93afc4abf5b1ed06a7df
-Seems like it's trying to pull in x86-64 extensions. That maturin call 
-should be able to accept '--target riscv64-unknown-linux-gnu'... Would 
-be interesting to see if that helps.
->
-> On Sun, Nov 16, 2025 at 2:50 PM Tom Geelen via lists.openembedded.org 
-> <http://lists.openembedded.org> 
-> <t.f.g.geelen=gmail.com@lists.openembedded.org> wrote:
->
->     Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
->     ---
->      .../{python3-orjson_3.10.17.bb <http://python3-orjson_3.10.17.bb>
->     => python3-orjson_3.11.3.bb <http://python3-orjson_3.11.3.bb>}  
->      | 2 +-
->      1 file changed, 1 insertion(+), 1 deletion(-)
->      rename
->     meta-python/recipes-devtools/python/{python3-orjson_3.10.17.bb
->     <http://python3-orjson_3.10.17.bb> => python3-orjson_3.11.3.bb
->     <http://python3-orjson_3.11.3.bb>} (84%)
->
->     diff --git
->     a/meta-python/recipes-devtools/python/python3-orjson_3.10.17.bb
->     <http://python3-orjson_3.10.17.bb>
->     b/meta-python/recipes-devtools/python/python3-orjson_3.11.3.bb
->     <http://python3-orjson_3.11.3.bb>
->     similarity index 84%
->     rename from
->     meta-python/recipes-devtools/python/python3-orjson_3.10.17.bb
->     <http://python3-orjson_3.10.17.bb>
->     rename to
->     meta-python/recipes-devtools/python/python3-orjson_3.11.3.bb
->     <http://python3-orjson_3.11.3.bb>
->     index 7db76c9415..7fdd0fef9b 100644
->     ---
->     a/meta-python/recipes-devtools/python/python3-orjson_3.10.17.bb
->     <http://python3-orjson_3.10.17.bb>
->     +++ b/meta-python/recipes-devtools/python/python3-orjson_3.11.3.bb
->     <http://python3-orjson_3.11.3.bb>
->     @@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/orjson/"
->      LICENSE = "MIT"
->      LIC_FILES_CHKSUM =
->     "file://LICENSE-MIT;md5=b377b220f43d747efdec40d69fcaa69d"
->
->     -SRC_URI[sha256sum] =
->     "28eeae6a15243966962b658dfcf7bae9e7bb1f3260dfcf0370dbd41f5ff6058b"
->     +SRC_URI[sha256sum] =
->     "1c0603b1d2ffcd43a411d64797a19556ef76958aef1c182f22dc30860152a98a"
->
->      require ${BPN}-crates.inc
->
->     -- 
->     2.43.0
->
->
->
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#121864): https://lists.openembedded.org/g/openembedded-devel/message/121864
-> Mute This Topic: https://lists.openembedded.org/mt/116329171/7611679
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [tgamblin@baylibre.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Changelog:
+https://github.com/smarty-php/smarty/blob/v5.6.0/CHANGELOG.md
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+---
+chnages in v3:
+- corrected recipe version
+changes in v2:
+- CVE_PRODUCT change in a separate patch
+---
+ .../recipes-support/smarty/{smarty_5.4.5.bb => smarty_5.6.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/smarty/{smarty_5.4.5.bb => smarty_5.6.0.bb} (95%)
+
+diff --git a/meta-oe/recipes-support/smarty/smarty_5.4.5.bb b/meta-oe/recipes-support/smarty/smarty_5.6.0.bb
+similarity index 95%
+rename from meta-oe/recipes-support/smarty/smarty_5.4.5.bb
+rename to meta-oe/recipes-support/smarty/smarty_5.6.0.bb
+index 7f99b9b5d7..88afc55c15 100644
+--- a/meta-oe/recipes-support/smarty/smarty_5.4.5.bb
++++ b/meta-oe/recipes-support/smarty/smarty_5.6.0.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2c0f216b2120ffc367e20f2b56df51b3"
+ 
+ SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master;tag=v${PV}"
+ 
+-SRCREV = "e26f82d02c4d18fc82094c28fbc65f711e39ed5d"
++SRCREV = "1fc41e385da8a27a87bec5914392ab662a7bb8ec"
+ 
+ 
+ INHIBIT_DEFAULT_DEPS = "1"
 
