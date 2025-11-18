@@ -1,183 +1,174 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <hongxu.jia@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C69DCEBF93
-	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 09:09:49 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8441.1763456983488076607
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A0FCCED255
+	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 09:28:29 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8625.1763458099288306634
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Nov 2025 01:09:43 -0800
+ Tue, 18 Nov 2025 01:28:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=qS78hYPa;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1763456983; x=1794992983;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=Im1TdYyKTzVEiIuybqgyHZh2Q1udY60tb/iYrq8WR10=;
-  b=qS78hYPafWBfbCbUya/n2C0YrHaVixcdAiqQc3TV7dPZrBUMvv12hdlB
-   KF4jHeuvVIIKtsKWfN/Cmn1woScwZhtW1LLy0uA+5MgWWXD1sYc4gZoRv
-   SmoRL0Chj4PqSeNMvPraaOAQ5XN1nn9An06MVX8jTgrmY404UGwWSQTfB
-   uEoFtW8qcqvQ+bzwT56Yw8eMMpX0ZuvBSb9lWCu/3ztwSlCE00VJ3SFkh
-   Z1ovDTCxChY+k2/G8PFLHTYCnbSf7hcpkWkbWo44WN5yD3gS2zjbA1l2V
-   6ev8Y3Jul8quTXdV7cs326rNkxC2UKH1UekGz1Mz/worUOdDTRfi2jOqq
-   Q==;
-X-CSE-ConnectionGUID: LU1kreuzT4CgY3uZHTHZHQ==
-X-CSE-MsgGUID: raLoLhIdR7W2xLlzDl1eMw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11616"; a="223411722"
-X-IronPort-AV: E=Sophos;i="6.19,314,1754924400"; 
-   d="scan'208";a="223411722"
-Received: from unknown (HELO az2nlsmgr3.o.css.fujitsu.com) ([51.138.80.169])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Nov 2025 18:09:41 +0900
-Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgr3.o.css.fujitsu.com (Postfix) with ESMTPS id 0924E1000348
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 09:09:42 +0000 (UTC)
-Received: from az2uksmom2.o.css.fujitsu.com (az2uksmom2.o.css.fujitsu.com [10.151.22.203])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id B2551100038C
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 09:09:41 +0000 (UTC)
-Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.34])
-	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTP id 3CE22140027A;
-	Tue, 18 Nov 2025 09:09:38 +0000 (UTC)
-From: Wang Mingyu < wangmy@fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-filesystems] [PATCH 29/29] sshfs-fuse: upgrade 3.7.3 -> 3.7.5
-Date: Tue, 18 Nov 2025 17:08:46 +0800
-Message-ID: <20251118090846.1484-29-wangmy@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
-In-Reply-To: <20251118090846.1484-1-wangmy@fujitsu.com>
-References: <20251118090846.1484-1-wangmy@fujitsu.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=mJbd4LNX;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3417ae58e6=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AI6A2ee1543533
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 09:28:18 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=PPS06212021;
+	 bh=tWRGh3jSF6s4K5KbpWxoXgYT0xhwPucKMibuDc74zxw=; b=mJbd4LNX+w4o
+	a7EkbWttXCT8tC2YOIj/3JCttcqOk021tlH9NIK+sH6El1+r+eZPjFPgXfJRoN6f
+	S7OxF3b022hN5cKFh0lNC4gOfgtop7yW9MVa1n03R8h5n7U04U5b+L0dfv0Nnvyl
+	JXdsUHSxKBR/e3b269ECAY5DefemPlT5MiDr0PLGDKr3smy3A/ZclCEGhOT//L0P
+	o4WOG7+rvjUWfcAvL5K6KQTrzs1PitHEmvb2HZUkFbg+ryHAHDEHqKDOXZ9FRe78
+	Zc3Dd3d+sR8ejMvgXmKSsctN2J3CMuEpLVVgdv0WT1c5JWTVZPFpgTpoVMwZnXdy
+	0NaODrqTtw==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4aeeqwk9pv-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 09:28:18 +0000 (GMT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Tue, 18 Nov 2025 01:28:17 -0800
+Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Tue, 18 Nov 2025 01:28:17 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-filesystems][PATCH 2/2] xfsprogs: support reproducible builds
+Date: Tue, 18 Nov 2025 17:28:15 +0800
+Message-ID: <20251118092815.1068882-2-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20251118092815.1068882-1-hongxu.jia@windriver.com>
+References: <20251118092815.1068882-1-hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE4MDA3NCBTYWx0ZWRfX3cqVemvFd8Qx
+ hUT2OuGe6lPh8HouHYyHHfgNKhS6F3z9H9pNFYtEQkWy0H33mtGAfnxJr0aJQhP1HObu6MHChHN
+ IlReHDRPT5Uj7e7W8ohfjisWvfky/BO4lwVdEuNuS3UOxXFxJ+7GvO7K2EKrwS+ABfJMbzadCif
+ 7HvZ0q2DUPgItXbq48AslFPoZLzCkqAf8rxInDdteeihAKDyjynbOQE/uN6t1dg2cysYvJi3Nu6
+ mjltAOTcreeD3aRCv3bl+dVCqiWrP/rNknxb7teHz/oUliNWjjAsLI0gIR81qei9sOqwQwNU6/X
+ d5i3yoow+WExESHQPlM8l7R7fT5yyDUknrArIccZ2/gtUX4J9lUgZNFIpwzWqEfXFjRArBiXM+H
+ CyBCPHOvoIXC5TJiyr4rDTc3U8SXqA==
+X-Proofpoint-GUID: 6wS505dR2JKluYtW7hIGiomH2TzPitiX
+X-Authority-Analysis: v=2.4 cv=OuxCCi/t c=1 sm=1 tr=0 ts=691c3c32 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=t7CeM3EgAAAA:8
+ a=nPxhRX6_BImEySsYWHIA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: 6wS505dR2JKluYtW7hIGiomH2TzPitiX
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-17_04,2025-11-13_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 phishscore=0 bulkscore=0 malwarescore=0
+ lowpriorityscore=0 clxscore=1015 priorityscore=1501 suspectscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
+ definitions=main-2511180074
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 09:09:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121840
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 09:28:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121841
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+When compressing docs, do not save the original file name and
+timestamp by default (gzip -n). Make archives be reproducible
+at each build
 
-03ee1f8aa0899268ec02b2f54849352df92a3a1d.patch
-a1d58ae1be99571a88b8439b027abe6349b74658.patch
-removed since they're included in 3.7.5
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...1f8aa0899268ec02b2f54849352df92a3a1d.patch | 34 -------------------
- ...8ae1be99571a88b8439b027abe6349b74658.patch | 31 -----------------
- ...shfs-fuse_3.7.3.bb => sshfs-fuse_3.7.5.bb} |  7 ++--
- 3 files changed, 2 insertions(+), 70 deletions(-)
- delete mode 100644 meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/03ee1f8aa0899268ec02b2f54849352df92a3a1d.patch
- delete mode 100644 meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/a1d58ae1be99571a88b8439b027abe6349b74658.patch
- rename meta-filesystems/recipes-filesystems/sshfs-fuse/{sshfs-fuse_3.7.3.bb => sshfs-fuse_3.7.5.bb} (79%)
+ meta-filesystems/conf/layer.conf              |  1 -
+ ...-doc-man-support-reproducible-builds.patch | 54 +++++++++++++++++++
+ .../recipes-utils/xfsprogs/xfsprogs_6.6.0.bb  |  1 +
+ 3 files changed, 55 insertions(+), 1 deletion(-)
+ create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/0001-doc-man-support-reproducible-builds.patch
 
-diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/03ee1f8aa0899268ec02b2f54849352df92a3a1d.patch b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/03ee1f8aa0899268ec02b2f54849352df92a3a1d.patch
-deleted file mode 100644
-index 63cdc57b44..0000000000
---- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/03ee1f8aa0899268ec02b2f54849352df92a3a1d.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 03ee1f8aa0899268ec02b2f54849352df92a3a1d Mon Sep 17 00:00:00 2001
--From: Gabriel Staples <ercaguy@gmail.com>
--Date: Tue, 22 Dec 2020 23:33:55 -0800
--Subject: [PATCH] pytest.ini: fix test warning
--
--Warning:
--
--```
--test/util.py:99
--  sshfs/build/test/util.py:99: PytestUnknownMarkWarning: Unknown pytest.mark.uses_fuse - is this a typo?
--  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/mark.html
--    return pytest.mark.uses_fuse()
--```
--
--References for the fix:
--
--1. https://stackoverflow.com/questions/60806473/pytestunknownmarkwarning-unknown-pytest-mark-xxx-is-this-a-typo/60813297#60813297
--1. https://docs.pytest.org/en/stable/mark.html
--
--Upstream-Status: Submitted [https://github.com/libfuse/sshfs/pull/238]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- test/pytest.ini | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/test/pytest.ini b/test/pytest.ini
--index 95161546..7a7efed4 100644
----- a/test/pytest.ini
--+++ b/test/pytest.ini
--@@ -1,2 +1,4 @@
-- [pytest]
-- addopts = --verbose --assert=rewrite --tb=native -x -r a
--+markers =
--+    uses_fuse
-diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/a1d58ae1be99571a88b8439b027abe6349b74658.patch b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/a1d58ae1be99571a88b8439b027abe6349b74658.patch
-deleted file mode 100644
-index e76dbd5059..0000000000
---- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse/a1d58ae1be99571a88b8439b027abe6349b74658.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From a1d58ae1be99571a88b8439b027abe6349b74658 Mon Sep 17 00:00:00 2001
--From: Gabriel Staples <ercaguy@gmail.com>
--Date: Tue, 22 Dec 2020 23:26:40 -0800
--Subject: [PATCH] Fix deprecated warning in conftest.py
--
--```
--test/conftest.py:66
--  sshfs/build/test/conftest.py:66: PytestDeprecationWarning: @pytest.yield_fixture is deprecated.
--  Use @pytest.fixture instead; they are the same.
--    @pytest.yield_fixture(autouse=True)
--```
--
--Upstream-Status: Submitted [https://github.com/libfuse/sshfs/pull/238]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- test/conftest.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/test/conftest.py b/test/conftest.py
--index 70cd0c62..d58d45b2 100644
----- a/test/conftest.py
--+++ b/test/conftest.py
--@@ -63,7 +63,7 @@ def register_output(self, pattern, count=1, flags=re.MULTILINE):
-- # relies on tests running sequential (i.e., don't dare to use e.g. the xdist
-- # plugin)
-- current_capfd = None
---@pytest.yield_fixture(autouse=True)
--+@pytest.fixture(autouse=True)
-- def save_cap_fixtures(request, capfd):
--     global current_capfd
--     capfd.false_positives = []
-diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.5.bb
-similarity index 79%
-rename from meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
-rename to meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.5.bb
-index c3a00566ab..ba27bc6312 100644
---- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
-+++ b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.5.bb
-@@ -5,11 +5,8 @@ LICENSE = "GPL-2.0-only"
- DEPENDS = "glib-2.0 fuse3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
--SRC_URI = "git://github.com/libfuse/sshfs;branch=master;protocol=https \
--           file://03ee1f8aa0899268ec02b2f54849352df92a3a1d.patch \
--           file://a1d58ae1be99571a88b8439b027abe6349b74658.patch \
--"
--SRCREV = "c91eb9a9a992f1a36c49a8e6f1146e45b5e1c8e7"
-+SRC_URI = "git://github.com/libfuse/sshfs;branch=master;protocol=https;tag=sshfs-${PV}"
-+SRCREV = "9e35c39ba83f54a49a9df4bf0a629f26c60cc38c"
- 
- inherit meson pkgconfig ptest
- 
+diff --git a/meta-filesystems/conf/layer.conf b/meta-filesystems/conf/layer.conf
+index 4d147b7139..f3525365e7 100644
+--- a/meta-filesystems/conf/layer.conf
++++ b/meta-filesystems/conf/layer.conf
+@@ -25,5 +25,4 @@ BBFILES_DYNAMIC += " \
+ # Please keep this list sorted
+ OEQA_REPRODUCIBLE_EXCLUDED_PACKAGES += " \
+     e2tools-ptest \
+-    xfsprogs-doc \
+ "
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/0001-doc-man-support-reproducible-builds.patch b/meta-filesystems/recipes-utils/xfsprogs/files/0001-doc-man-support-reproducible-builds.patch
+new file mode 100644
+index 0000000000..182d45e4e2
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/xfsprogs/files/0001-doc-man-support-reproducible-builds.patch
+@@ -0,0 +1,54 @@
++From c98d9022377e88f8cc2d557a4ffd321e6f2dd320 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@eng.windriver.com>
++Date: Tue, 18 Nov 2025 01:04:27 -0800
++Subject: [PATCH] doc/man: support reproducible builds
++
++When compressing, do not save the original file name and
++timestamp by default (gzip -n). Make archives be reproducible
++at each build
++
++Upstream-Status: Submitted [linux-xfs@vger.kernel.org]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@eng.windriver.com>
++---
++ doc/Makefile        | 2 +-
++ include/buildmacros | 4 ++--
++ 2 files changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/doc/Makefile b/doc/Makefile
++index 83dfa38b..17b63c85 100644
++--- a/doc/Makefile
+++++ b/doc/Makefile
++@@ -14,7 +14,7 @@ include $(BUILDRULES)
++ 
++ CHANGES.gz:
++ 	@echo "    [ZIP]    $@"
++-	$(Q)$(ZIP) --best -c < CHANGES > $@
+++	$(Q)$(ZIP) -n --best -c < CHANGES > $@
++ 
++ install: default
++ 	$(INSTALL) -m 755 -d $(PKG_DOC_DIR)
++diff --git a/include/buildmacros b/include/buildmacros
++index 9183e5bc..6ba0d515 100644
++--- a/include/buildmacros
+++++ b/include/buildmacros
++@@ -105,7 +105,7 @@ INSTALL_MAN = \
++ 			t=$(MAN_DEST)/$$m.$(MAN_SECTION); \
++ 			if $$first; then \
++ 				if $(HAVE_ZIPPED_MANPAGES); then \
++-					$(ZIP) -9 -c $$d > $$d.gz; _sfx=.gz; \
+++					$(ZIP) -n -9 -c $$d > $$d.gz; _sfx=.gz; \
++ 				fi; \
++ 				u=$$m.$(MAN_SECTION)$$_sfx; \
++ 				echo $(INSTALL) -m 644 $${d}$$_sfx $${t}$$_sfx;\
++@@ -132,6 +132,6 @@ endif
++ MAN_MAKERULE = \
++ 	@for f in *.[12345678] ""; do \
++ 		if test ! -z "$$f"; then \
++-			$(ZIP) --best -c < $$f > $$f.gz; \
+++			$(ZIP) -n --best -c < $$f > $$f.gz; \
++ 		fi; \
++ 	done
++-- 
++2.49.0
++
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.6.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.6.0.bb
+index 907b875718..80bce6f939 100644
+--- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.6.0.bb
++++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.6.0.bb
+@@ -12,6 +12,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
+            file://0001-support-usrmerge.patch \
+            file://0004-configure-Use-AC_SYS_LARGERFILE-autoconf-macro.patch \
+            file://0005-Replace-off64_t-stat64-with-off_t-stat.patch \
++           file://0001-doc-man-support-reproducible-builds.patch \
+            "
+ SRC_URI[sha256sum] = "50ca2f4676df8fab4cb4c3ef3dd512d5551e6844d40a65a31d5b8e03593d22df"
+ inherit autotools-brokensep pkgconfig
 -- 
-2.43.0
+2.34.1
 
 
