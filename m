@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DBAFCEBF93
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A23ACEBF92
 	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 09:09:08 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8423.1763456940773673596
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8424.1763456942379571272
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Nov 2025 01:09:01 -0800
+ Tue, 18 Nov 2025 01:09:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=TmVjVFJP;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=LY9DvAoR;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1763456941; x=1794992941;
+  t=1763456942; x=1794992942;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=4zUTsQ8DFoJWbnfNVwpxELPUPb3vT45fEsHQ1EewpnI=;
-  b=TmVjVFJPd4ItYG4DxjY97VPGsXvfruVot9G3iDW0Wwm+hLv0NOU3rCV1
-   aM53gJMVJeZjnbVjJc4mn78Vq8EpugkOcddaXFmS7A8/YZHm4ogz73mBY
-   A+MxqzKbYXrcenXNXdcAWxdcnjHgtTzza+VQ/J2T5d9U1nDGJXu498e05
-   7qjMUcAkJgh5veLB2QHeZmuE3TPdmoih+2jKjcQc+0gXu64Fxei2RUZj/
-   /fE45lfWdynhYi+gT2lWR/yg5s519dOTBEn31uF8JRBvXWbHjHJXwApS5
-   7gnBJFQt/jveHbRrtpPyaiDGwelOVUOkeS+/IfTbpF7zg6CzRWwGEzajh
-   g==;
-X-CSE-ConnectionGUID: YBGgDI78SSyjF6r1XobNZA==
-X-CSE-MsgGUID: QvdvYjb+SoeG4hkULAIf4Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11616"; a="208179050"
+  bh=MhMj6b8jpvB4mngJZwiajYBnQuwzPyC3i5S+lc99Jkk=;
+  b=LY9DvAoRUXKGZhUpdb8kcwzm1unO8c9PAngi2zJpoI9KNHdKmK8F3LzC
+   czqtn91cUsWMonocP4AQFGtlQnyOVOjngZCvVbXEBqEflDdIFIBB6IkXo
+   dQuy3nvnKBP7dWFKhNhwHqrF68dS+3IJvp34n0e+tdJ0oITRDgj7XrY/S
+   2gV4+axnM4G36qL1a/395olGic2TyFXKWPAohgx7+WYTL4XLcmlbDTNBy
+   2gpwjJxqBGwRZJ3NXiIlmKkkxXQ6yTrcQf1sYgRXLfFL9ayVNeTH4XReV
+   DBcrlNeXN4awXVwwYsKA3TnoGAdhwO2d5B8hnn29xFpIcvbMwmAuraHj2
+   Q==;
+X-CSE-ConnectionGUID: Jx3ivMckSkOVxtoA7KEIxg==
+X-CSE-MsgGUID: U62P3drfRYWKXJYEOxsOfg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11616"; a="223411634"
 X-IronPort-AV: E=Sophos;i="6.19,314,1754924400"; 
-   d="scan'208";a="208179050"
+   d="scan'208";a="223411634"
 Received: from unknown (HELO az2nlsmgr1.o.css.fujitsu.com) ([20.61.8.234])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Nov 2025 18:08:59 +0900
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Nov 2025 18:09:00 +0900
 Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 18A741C0008F
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 09:08:59 +0000 (UTC)
+	by az2nlsmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id C17A81C0008F
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 09:09:00 +0000 (UTC)
 Received: from az2uksmom2.o.css.fujitsu.com (az2uksmom2.o.css.fujitsu.com [10.151.22.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id B0C991C0014D
-	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 09:08:58 +0000 (UTC)
+	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 678981C00161
+	for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 09:09:00 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.34])
-	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTP id 372D91400096;
-	Tue, 18 Nov 2025 09:08:55 +0000 (UTC)
+	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTP id EE9F11400252;
+	Tue, 18 Nov 2025 09:08:57 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 04/29] freerdp3: upgrade 3.17.2 -> 3.18.0
-Date: Tue, 18 Nov 2025 17:08:21 +0800
-Message-ID: <20251118090846.1484-4-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 05/29] graphviz: upgrade 14.0.2 -> 14.0.4
+Date: Tue, 18 Nov 2025 17:08:22 +0800
+Message-ID: <20251118090846.1484-5-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20251118090846.1484-1-wangmy@fujitsu.com>
 References: <20251118090846.1484-1-wangmy@fujitsu.com>
@@ -61,32 +61,55 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 09:09:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121815
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121816
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+==========
+### Changed
+
+- Internal timing operations now use 'clock()' on all platforms (previously this
+  was only used on Windows). This should result in more accurate timing in
+  verbose informational messages.
+- Building Graphviz with expat &lt; 2.2.8 is no longer supported on MinGW.
+
+### Fixed
+
+- 'diffimg' now notices failures when calling Ghostscript to convert PS images
+  to PNG and exits instead of continuing.
+- 'dtstat' no longer reads/writes out of bounds memory on platforms where
+  'sizeof(int) < sizeof(size_t)'. This was a regression in Graphviz 7.0.1.
+- Some incorrect variable types in the libcdt man page have been corrected.
+- 'gvgen' no longer triggers Undefined Behavior when asked to generate a binary
+  tree with depth >= 32 (e.g. 'gvgen -t32').
+- 'gvgen' no longer triggers Undefined Behavior when asked to generate a
+  hypercube with depth  >= 32 (e.g. 'gvgen -h32').
+- A null pointer dereference in edge pair analysis within the circo algorithm
+  has been fixed.
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../freerdp/{freerdp3_3.17.2.bb => freerdp3_3.18.0.bb}          | 2 +-
+ .../graphviz/{graphviz_14.0.2.bb => graphviz_14.0.4.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/freerdp/{freerdp3_3.17.2.bb => freerdp3_3.18.0.bb} (98%)
+ rename meta-oe/recipes-graphics/graphviz/{graphviz_14.0.2.bb => graphviz_14.0.4.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.17.2.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.18.0.bb
-similarity index 98%
-rename from meta-oe/recipes-support/freerdp/freerdp3_3.17.2.bb
-rename to meta-oe/recipes-support/freerdp/freerdp3_3.18.0.bb
-index 7a95f5399e..02590973f6 100644
---- a/meta-oe/recipes-support/freerdp/freerdp3_3.17.2.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp3_3.18.0.bb
-@@ -7,7 +7,7 @@ DEPENDS = "openssl libusb1 uriparser cairo icu pkcs11-helper zlib jpeg json-c"
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_14.0.2.bb b/meta-oe/recipes-graphics/graphviz/graphviz_14.0.4.bb
+similarity index 97%
+rename from meta-oe/recipes-graphics/graphviz/graphviz_14.0.2.bb
+rename to meta-oe/recipes-graphics/graphviz/graphviz_14.0.4.bb
+index 6cd285392f..3188c8afd5 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_14.0.2.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_14.0.4.bb
+@@ -23,7 +23,7 @@ SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-re
+ SRC_URI:append:class-nativesdk = "\
+            file://graphviz-setup.sh \
+ "
+-SRC_URI[sha256sum] = "31af4728cd0d7db91013d29286227ae6b5264ff897647c2ebfeb85f47c08177e"
++SRC_URI[sha256sum] = "a005977de2fec13753f5bde767cf97fdc28ac54bfd6a2737c563748bc4f32317"
  
- inherit pkgconfig cmake
- 
--SRCREV = "955ad49545919c35ed731bc7716b26ddf888833a"
-+SRCREV = "11ed2c65fe1f50f8714e51be5bcb2655cd8ba31f"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https;tag=${PV}"
- 
- 
+ UPSTREAM_CHECK_URI = "https://graphviz.org/download/"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 -- 
 2.43.0
 
