@@ -1,257 +1,210 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C8D8CEE32E
-	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 15:54:30 +0000 (UTC)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.312.1763481265782962508
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F9EBCEE333
+	for <webhook@archiver.kernel.org>; Tue, 18 Nov 2025 16:05:40 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.604.1763481932463201668
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Nov 2025 07:54:25 -0800
+ Tue, 18 Nov 2025 08:05:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Fo1z6yfp;
- spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-786d1658793so51754077b3.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 07:54:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ci7T1xPn;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-bc2abdcfc6fso3331053a12.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 08:05:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763481265; x=1764086065; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=7AtA2m39Qwt6hBaQ4AQfCrmNMBeNso4chtOUrJKaPuM=;
-        b=Fo1z6yfp3TiKJoYilI/k94dKrBDGdljVCtjwteF0b76cty0xNt9i/uJjgTJ45OJmTu
-         uRhfuv3hn9UOffXJLWlYZq9KijTUcbnDUZfDKzFmYuN+ia1wSxi9+6Eo43C0Y2zMSoGA
-         JpXKmwtARmuEYMzzL6AeVQQNhT9dqNBCTr8qEUNm+QAL+c8mAhXwtjbAhGUjeHcrK5/y
-         W95wJr2lnciTC7vtF6OCIk8XzdWgt4Cdmg1bwyhauGK/0rmZWZtGCiJCpViiGv6SCO/D
-         IYIxY/JIusWqAn+QpkxAJVZNrTCmfyTT4UvBZqxPh73jFfBfqtlbwUUfiDanbVzwrBQY
-         AraQ==
+        d=gmail.com; s=20230601; t=1763481932; x=1764086732; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=DIR3xyp5HRxHw5F/aQLqYJYoVPZ0Dn7Kbmi2ESCV3ps=;
+        b=Ci7T1xPnLDbNF6Uo96KB3+7c6/mH722R1jNTJRx5MoVLW3ww6vFkG7KcxQYmpT4Nxy
+         NJy8zh4d3DeKOWJ0eMBqaf5kQtK/NEWc/ht4Bc6T1zHQIdJ9nRUhFMJAE/XUnDJNbsma
+         qnCPiwWxfdS/iZ2xflc5PenxIoLjy2pr/4BNyHS7a1bfBmD1vlXIS4F/KhoS0oVRPG/o
+         YAMyQ1/KaqoOlCi3ITTGHeZYuzaji+wUd/WH1GR74AzDCyHd+1gJo2XYm/4YWWRH0NW9
+         mSxkC2UoeFmccB/LHYACODztLJdxWWx6eqH1t3LidIIaDJR7B4RS45BOwGvzIhApOiZJ
+         whpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763481265; x=1764086065;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=7AtA2m39Qwt6hBaQ4AQfCrmNMBeNso4chtOUrJKaPuM=;
-        b=LkPCCILdybSeBrIYur4g+j5hpH7gca7EW3oxbL1TghPkefRrRaJ7YDRxRNdZhb61E1
-         gSfiLtFFWiyjtpoSrV2pIZcYsSR+hHWzVgwWIOIebUaoJ+YLlo7yTUkW84at2jDDHPaO
-         B7aOuz0eiH8WRQnoYBu7y/rVbEz4e1d6ZhyoqJtuUjEsp6rhO3dq/B10NUwqDR1Dc/rG
-         PbxNFPOk9wmTebBSRDHkcv2tnec0GzWNvImFMN7+z9dbtwHyBaOgi1ahPbr6yCHON8qU
-         GUYrKGS3e3NNS3Wzi2ii9jyPiKJ6yqj2m74cofb15YCAVDozWVviq28pw9p6sopQH/0b
-         p6kQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWnJ0GQxMESz5irg3roUywHdXtQEchSjVbQpcO+jtnzjWBsvWIgt+RiItiYHAvo5IoikMVNBL27GmjmQbubVG8ay3o=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxT+Vn7qZIIffPixukg8IQ3td0EiR9gt0NO/G24Vhkoy9a8NNaD
-	3aPCxX501XikOpSRhs80+h4AAsRYkHxoGw0nHma/vI9roNdmVEV83Sr3DG2Raa3njRFvt1hlX0y
-	fSDFizyENdFSWY9a+qYc1TW7KfDMBook=
-X-Gm-Gg: ASbGncsNM6xUkRq0e1WIxaMsIJkm6Yny/Nm6cMLKWtbexatADdnFF5b07UHSJIlDJT0
-	9erLedTWkYvDepGitPDs9mso9xNb1E6zlRW+hSgBBfRSBKEBb1oycilBJ1txFH4ZBpOXszApXIO
-	6GlidrWjKxWxD7jneBHORRXKSrje5So4JUkQqGJfWV0doWho49blUYlpCYQXigdoPTbEfGojtkg
-	a/JZ2reqkwaAi94f/cDxSmw6sUALgzIYh5TMcs+gGD3DyoGDlpCvxvRRez0H7bKfSv8PInP61n0
-	NVd1G/4yHxjifx4DtmNUNI5xUur87Z1c18HEMp+veKMCq4foujugW18hqYohzaYW9H3q060WVQA
-	veGyQoZnysZDNdEZaJ46WLtahxD6xaasL89ZwN8ELm4kCXA==
-X-Google-Smtp-Source: AGHT+IGEeUtNcQ1K2OU2QKUoh9LQTt+VdSWGuZ1cGdcJSYJ65g1V7Vwss3Ww0tK2YIr6Dx4Yw7i+qpmAjh/9rFU8vMs=
-X-Received: by 2002:a05:690c:3507:b0:786:96de:af5f with SMTP id
- 00721157ae682-78929ef8948mr278649997b3.53.1763481264866; Tue, 18 Nov 2025
- 07:54:24 -0800 (PST)
+        d=1e100.net; s=20230601; t=1763481932; x=1764086732;
+        h=to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=DIR3xyp5HRxHw5F/aQLqYJYoVPZ0Dn7Kbmi2ESCV3ps=;
+        b=W1zyY2ee2WmqHhL2BVu4oeeWlg9Yj8f6g2YoGAV0YzcECA9Lzt1Wcb3vCBSg6uYvSZ
+         jQmg7wCXTDQqM41klSlPanwV72REjfGyonsQklBr1OgB6eRzumE3iES+tJWR5eDOUzoG
+         0jQcJtsorLSKIiZGzE/DFpaJPOp8nNg0KzRuyccNFfrn8SCnaAQrpq4qpOzkTU1CjauI
+         tmjd/30Ss3776pnp6FY+hQWfymqqWUzG/LxzEaRcdWXNGbgVD2ssvTqQM/2RlOV4JTBG
+         ts32LftTE0WYJZlMBizTPKya5VJeOULfK0kOmHXfboCTlOCHzRgnoZu//ziUWbVSTxBO
+         /Giw==
+X-Gm-Message-State: AOJu0YwF8CZsnfhZttL59xMlrK6x95IPHpYdtLLiSkcHch34VeoFsnw9
+	vbyba5285KEwFDoH3+mxqmSjS17rCpaq+fMC78RC6sN5/BKCYZoBOjuCkCTTdkDyr0j48w/2dDH
+	pALiYiSRItSqRYh5WQ63d0AmRi3B+U42s792E
+X-Gm-Gg: ASbGnct5Pjacvk2+xlFGM0YHzqN8abuJgbO9oulyD0u/uZAPfSowH0Ury69w75tu6GM
+	kdZ//vafL5ylJ6Bhcsz+lVXV7zfsJ1QY73Z9x/qvdsk12F7eM0MfnCHtpbhWwLIOMBoO/1Q7+Ec
+	cwJDcu+LHKNo9/qk2YNlrXocWJh/ibAkMxd9q804DXymB9aEGooUlDhrUYDgyo57/0SrP1t6DNL
+	Wtu1SQl2X3zn5ngniXTEBKyNOwUinNLDtKt39mN4MOl8do9oS0YIGnBZ3kLOD7dVZQKg6fJs3tA
+	syF0YG3lZC+DuaWLJrSq0yb9GLGZjmR+H46j2HVWVohqf66B/8ReQZ9+V15Imn7sWOWR5G3FTbr
+	jcLbNiCYvXa9sIjk=
+X-Google-Smtp-Source: AGHT+IGaT90iBmhPuQc2drq7d6IXizxhhBeJm+qc3hge8tAO7iGAAjax4Q/whaKdc29n0CZmgtM6QnZaJ+qh/rEvE2s=
+X-Received: by 2002:a05:7300:c38f:b0:2a4:7d0a:6351 with SMTP id
+ 5a478bee46e88-2a4abaebc59mr5584286eec.16.1763481931412; Tue, 18 Nov 2025
+ 08:05:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20251117093853.844143-1-skandigraun@gmail.com> <BA866AFA-CD11-4615-8AA4-04646194A330@arm.com>
-In-Reply-To: <BA866AFA-CD11-4615-8AA4-04646194A330@arm.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 18 Nov 2025 07:54:13 -0800
-X-Gm-Features: AWmQ_bltf7ulNebsE3fVO4DHpQmN46B2JcWQ4F90b54ibAhpYrsScrijBG4Zt60
-Message-ID: <CAMKF1sq9Oi45L2okL4PtEwCQNmeMAa7UjuNnQOwEd=VUU20JJQ@mail.gmail.com>
-Subject: Re: [oe] CVE report - master - 2025-11-17
-To: ross.burton@arm.com
-Cc: "skandigraun@gmail.com" <skandigraun@gmail.com>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000005c4a690643e07aaa"
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Tue, 18 Nov 2025 09:05:19 -0700
+X-Gm-Features: AWmQ_blGES4Ma0fClsLvHQXW5ctCZVJiTCSe8NI_cVhQvYgETcUERCEVx_fFRKc
+Message-ID: <CAK5yBb-xUF-+Av5wZgfErwCavLpJ1wd27BD5dgQ9Py7_2wC=8g@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="00000000000016faac0643e0a237"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 15:54:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121861
+ <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 16:05:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121862
 
---0000000000005c4a690643e07aaa
+--00000000000016faac0643e0a237
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 18, 2025 at 6:53=E2=80=AFAM Ross Burton via lists.openembedded.=
-org
-<ross.burton=3Darm.com@lists.openembedded.org> wrote:
+All,
 
-> On 17 Nov 2025, at 09:38, Gyorgy Sarvari via lists.openembedded.org
-> <skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
-> >
-> > - yasm: CVE-2021-33455: https://nvd.nist.gov/vuln/detail/CVE-2021-33455
-> > - yasm: CVE-2021-33457: https://nvd.nist.gov/vuln/detail/CVE-2021-33457
-> > - yasm: CVE-2021-33458: https://nvd.nist.gov/vuln/detail/CVE-2021-33458
-> > - yasm: CVE-2021-33459: https://nvd.nist.gov/vuln/detail/CVE-2021-33459
-> > - yasm: CVE-2021-33460: https://nvd.nist.gov/vuln/detail/CVE-2021-33460
-> > - yasm: CVE-2021-33461: https://nvd.nist.gov/vuln/detail/CVE-2021-33461
-> > - yasm: CVE-2021-33462: https://nvd.nist.gov/vuln/detail/CVE-2021-33462
-> > - yasm: CVE-2021-33463: https://nvd.nist.gov/vuln/detail/CVE-2021-33463
-> > - yasm: CVE-2021-33465: https://nvd.nist.gov/vuln/detail/CVE-2021-33465
-> > - yasm: CVE-2021-33466: https://nvd.nist.gov/vuln/detail/CVE-2021-33466
-> > - yasm: CVE-2021-33467: https://nvd.nist.gov/vuln/detail/CVE-2021-33467
-> > - yasm: CVE-2021-33468: https://nvd.nist.gov/vuln/detail/CVE-2021-33468
-> > - yasm: CVE-2023-30402: https://nvd.nist.gov/vuln/detail/CVE-2023-30402
-> > - yasm: CVE-2023-31972: https://nvd.nist.gov/vuln/detail/CVE-2023-31972
-> > - yasm: CVE-2023-31973: https://nvd.nist.gov/vuln/detail/CVE-2023-31973
-> > - yasm: CVE-2023-31974: https://nvd.nist.gov/vuln/detail/CVE-2023-31974
-> > - yasm: CVE-2023-51258: https://nvd.nist.gov/vuln/detail/CVE-2023-51258
->
-> Proposal: delete yasm.  It advertises itself as a rewrite of nasm, but
-> nasm is still alive and did a major release just a few months ago. Nothin=
-g
-> else in meta-oe depends on yasm, and according to the layer index[1] the
-> only interesting recipe that depends on yasm is chromium, which I basical=
-ly
-> refuse to believe won=E2=80=99t work with nasm (mainly as the debian pack=
-aging for
-> chromium doesn=E2=80=99t depend on nasm or yasm[2] so this dependency is =
-likely
-> obsolete now).
->
-> I can send a patch... :)
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
+
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
+
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 465
+unassigned or newcomer bugs.
+
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.3=E2=80=9D, =E2=80=9C6.0", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.3" and then =E2=80=9C6.0=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
 
 
-I think we need to ensure chromium can still build without it otherwise I
-am with you on this proposal
 
->
->
-> Cheers,
-> Ross
->
-> [1]
-> https://layers.openembedded.org/layerindex/branch/master/recipes/?q=3Ddep=
-ends%3Ayasm-native
-> [2]
-> https://salsa.debian.org/chromium-team/chromium/-/blob/master/debian/cont=
-rol
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#121860):
-> https://lists.openembedded.org/g/openembedded-devel/message/121860
-> Mute This Topic: https://lists.openembedded.org/mt/116334910/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+*Stephen K. Jolley*
 
---0000000000005c4a690643e07aaa
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--00000000000016faac0643e0a237
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div><br></div><div><br><div class=3D"gmail_quote gmail_quote_container"><d=
-iv dir=3D"ltr" class=3D"gmail_attr">On Tue, Nov 18, 2025 at 6:53=E2=80=AFAM=
- Ross Burton via <a href=3D"http://lists.openembedded.org">lists.openembedd=
-ed.org</a> &lt;ross.burton=3D<a href=3D"mailto:arm.com@lists.openembedded.o=
-rg">arm.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote clas=
-s=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;pad=
-ding-left:1ex">On 17 Nov 2025, at 09:38, Gyorgy Sarvari via <a href=3D"http=
-://lists.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.opene=
-mbedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openemb=
-edded.org" target=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote=
-:<br>
-&gt; <br>
-&gt; - yasm: CVE-2021-33455: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33455" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33455</a><br>
-&gt; - yasm: CVE-2021-33457: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33457" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33457</a><br>
-&gt; - yasm: CVE-2021-33458: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33458" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33458</a><br>
-&gt; - yasm: CVE-2021-33459: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33459" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33459</a><br>
-&gt; - yasm: CVE-2021-33460: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33460" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33460</a><br>
-&gt; - yasm: CVE-2021-33461: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33461" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33461</a><br>
-&gt; - yasm: CVE-2021-33462: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33462" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33462</a><br>
-&gt; - yasm: CVE-2021-33463: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33463" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33463</a><br>
-&gt; - yasm: CVE-2021-33465: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33465" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33465</a><br>
-&gt; - yasm: CVE-2021-33466: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33466" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33466</a><br>
-&gt; - yasm: CVE-2021-33467: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33467" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33467</a><br>
-&gt; - yasm: CVE-2021-33468: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2021-33468" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2021-33468</a><br>
-&gt; - yasm: CVE-2023-30402: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2023-30402" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2023-30402</a><br>
-&gt; - yasm: CVE-2023-31972: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2023-31972" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2023-31972</a><br>
-&gt; - yasm: CVE-2023-31973: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2023-31973" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2023-31973</a><br>
-&gt; - yasm: CVE-2023-31974: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2023-31974" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2023-31974</a><br>
-&gt; - yasm: CVE-2023-51258: <a href=3D"https://nvd.nist.gov/vuln/detail/CV=
-E-2023-51258" rel=3D"noreferrer" target=3D"_blank">https://nvd.nist.gov/vul=
-n/detail/CVE-2023-51258</a><br>
-<br>
-Proposal: delete yasm.=C2=A0 It advertises itself as a rewrite of nasm, but=
- nasm is still alive and did a major release just a few months ago. Nothing=
- else in meta-oe depends on yasm, and according to the layer index[1] the o=
-nly interesting recipe that depends on yasm is chromium, which I basically =
-refuse to believe won=E2=80=99t work with nasm (mainly as the debian packag=
-ing for chromium doesn=E2=80=99t depend on nasm or yasm[2] so this dependen=
-cy is likely obsolete now).<br>
-<br>
-I can send a patch... :)</blockquote><div dir=3D"auto"><br></div><div dir=
-=3D"auto">I think we need to ensure chromium can still build without it oth=
-erwise I am with you on this proposal=C2=A0</div><blockquote class=3D"gmail=
-_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
-1ex" dir=3D"auto"><br>
-<br>
-Cheers,<br>
-Ross<br>
-<br>
-[1] <a href=3D"https://layers.openembedded.org/layerindex/branch/master/rec=
-ipes/?q=3Ddepends%3Ayasm-native" rel=3D"noreferrer" target=3D"_blank">https=
-://layers.openembedded.org/layerindex/branch/master/recipes/?q=3Ddepends%3A=
-yasm-native</a><br>
-[2] <a href=3D"https://salsa.debian.org/chromium-team/chromium/-/blob/maste=
-r/debian/control" rel=3D"noreferrer" target=3D"_blank">https://salsa.debian=
-.org/chromium-team/chromium/-/blob/master/debian/control</a><br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#121860): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/121860" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/121860</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116334910/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/116334910/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
+<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
+al">All,<br><br>The triage team is starting to try and collect up and class=
+ify bugs which a newcomer to the project would be able to work on in a way =
+which means people can find them. They&#39;re being listed on the triage pa=
+ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
+wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
+e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
+d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
+org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
+illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
+.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
+ea is these bugs should be straight forward for a person to help work on wh=
+o doesn&#39;t have deep experience with the project.  If anyone can help, p=
+lease take ownership of the bug and send patches!  If anyone needs help/adv=
+ice there are people on irc who can likely do so, or some of the more exper=
+ienced contributors will likely be happy to help too.<br><br>Also, the tria=
+ge team meets weekly and does its best to handle the bugs reported into the=
+ Bugzilla. The number of people attending that meeting has fallen, as have =
+the number of people available to help fix bugs. One of the things we hear =
+users report is they don&#39;t know how to help. We (the triage team) are t=
+herefore going to start reporting out the currently 465 unassigned or newco=
+mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
+ and again to help out with these.  Bugs are split into two types, &quot;tr=
+ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
+ents&quot; which are features we&#39;d want to add to the system.  There ar=
+e also roughly four different &quot;priority&quot; classes right now, =E2=
+=80=9C5.3=E2=80=9D, =E2=80=9C6.0&quot;, &quot;5.99&quot; and &quot;Future&q=
+uot;, the more pressing/urgent issues being in &quot;5.3&quot; and then =E2=
+=80=9C6.0=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
+g you would be able to help with either take ownership of the bug, or send =
+me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
+ an e-mail with the bug number you would like and I will assign it to you (=
+please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
+_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
+ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
+s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
+al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
+al,sans-serif">Thanks,<span></span></span></p>
 
---0000000000005c4a690643e07aaa--
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--00000000000016faac0643e0a237--
 
