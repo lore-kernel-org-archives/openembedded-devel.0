@@ -2,191 +2,537 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10ED8CF3195
-	for <webhook@archiver.kernel.org>; Wed, 19 Nov 2025 10:55:46 +0000 (UTC)
-Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3983.1763549740067847696
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17FF7CF3196
+	for <webhook@archiver.kernel.org>; Wed, 19 Nov 2025 10:57:56 +0000 (UTC)
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3997.1763549871992232336
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Nov 2025 02:55:40 -0800
+ Wed, 19 Nov 2025 02:57:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=It9ME8Ww;
- spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-3ec4d494383so1676654fac.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 02:55:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=efpQ+xlC;
+ spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-3e3dac349easo3883598fac.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 02:57:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763549739; x=1764154539; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763549871; x=1764154671; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Dd6U5d//tKO0F/kSYf5Co287kenHgiuEgutCIS7APUs=;
-        b=It9ME8WwMrv0lBNNk/r5Bj3NjIM1ykksHqUZ2KPdg3EM4OFLW48wNDdPMEpbId+GP3
-         W0uFeRsqe9KQSwvQaKis4Sn7atp9Sa60f2aG+Bm+MwWJVQmaTdTBImBumC/1bIAPp1Dn
-         uHJQFlTkC1bYd7HD0C9zSZpPio+Kq019hCIzkXmM+Q/96ifi567x++93cwYCIRdvmdNw
-         fZEcOhFIUcEAC2ocsDzyf5r9gbGfCJ+g/caA1RVokdb6egXMDy72pQ/ZQN0ntK+EpW0V
-         S8JEMOz7IFJ+hGCbEOPWqaMdpkfTKv5AiNyeZUVEPASKOjy/ilw0P3+XoQCb64idSjF5
-         Au5w==
+        bh=iAvLfD8nVuZifI6qGIj+AvetttkpMX9ZKnO7psoNG8I=;
+        b=efpQ+xlCkSj0qM0/ePyAZ5UwOFxKKcz+ZpYSBQxXuRKmLQtEqTnCZ7VMyV3xNBPqtH
+         m+Gxzgp+4fRBCRsuntqBVi2awuHjNLXx9mG+XXo3ZcGjp/fYn2gLfsQ8n8V1iL/KlJ7T
+         BzuzhSgl19Cm1+soB9bAclKrMry4zKbWapLjKkCeT+yEkXmI2FgSmyxkCBfqCyts8oqn
+         goAtL0cYGenGx5SN2ApGS88XQ90OKZ912fp26qN5Az8mfkb2Uhxj0dFY2J0pmhV9uGt4
+         eoHZrN6IexREuRXhSKXnVmnz+1ijaAbuPEf+ixa8+fKFexe6u8U3148oY3C0ACm1Et18
+         7GKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763549739; x=1764154539;
+        d=1e100.net; s=20230601; t=1763549871; x=1764154671;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Dd6U5d//tKO0F/kSYf5Co287kenHgiuEgutCIS7APUs=;
-        b=hdnser0ANa64fTl4TrzsU4a8apEOEyKFl2IQ9oj4EGFWxvZJ/P0t7TMDu6aeP54z+J
-         HO01eCpRyZFE0cr0VbFSYKq5eZ/GXp8Bgq6DjU4lCovpaMbOGg+52/2JFPV5a3klliii
-         yAaYxZ9IihWtZyl0lBw9SYdWOKrVcNLXuZE2rfG7bDdbFdDosRkWXFEWAQAXZbCs8pPJ
-         XxdI9bDbbuT4AuQn7bLvPXLObuuKdPUtDN9Y4TYuQPHPFkRCRe1JIT5x37X8neyoRoLa
-         mGBCm7MIp1yjZO+DmtftJkwnSx48r/2v6oPtVHjrUqdLYkybCzvB6vjKD1T/D+3D9zri
-         Ki/Q==
-X-Gm-Message-State: AOJu0Yxde9PrPj5G76MpMCF00leNUKKwRFlM3txOzWKUq3VPitPbxsAy
-	5ohhO+FQMZmAj5a1OfS0Aqwxtt6rO50QecighGebvcOKcj0lnZWnjfTDIihH3ynBfwj++6MM3/Z
-	z8VPc9PgTflzs+kDKbNnOojQI+tIXiS7oV/CN
-X-Gm-Gg: ASbGncuB/n2AgrYvM+O4JaHizNIoYlrtdn9W5ZCeh5SbhU80KqRzm+5bqUmwvb1Rvhc
-	kKsYr63JqZTTckZZScttHAjdo9LeFZ0dL/4+lpV23QvbFANLu3Xk6BrwcJZ4N5SJs1flEZ6hguO
-	xbcZsYO1fUdzzWuxi2zLVv/nG6pZOxzr6NXPzulKpBX2LC7jH9IdkJTMEPENGSiyA/IvaMXCu+H
-	5yavuF7HTE5BWTL1Yo3F3ec4dGMkiqbLtv9NRAyPP+aCvRVil8fN0O/65ynQGq9hOtEIrjnU7So
-	rHONHQT2
-X-Google-Smtp-Source: AGHT+IGvIa/o8Cwqf9R5rOtdABO1G5jrlhXdgTcgDkkL5XH9fZTnHVSaWLI6KMs16cCkCZ70KPNS9GLHZAm+bxpn/tg=
-X-Received: by 2002:a05:6870:a108:b0:3e0:fd27:2623 with SMTP id
- 586e51a60fabf-3e868e2f270mr10561294fac.4.1763549739162; Wed, 19 Nov 2025
- 02:55:39 -0800 (PST)
+        bh=iAvLfD8nVuZifI6qGIj+AvetttkpMX9ZKnO7psoNG8I=;
+        b=RSkw3jtXTUlOQd44WOMdri/3vTG5k0kN0U62Y0Y/GDZZvcTz2qV/4XZlwTfrrkLopL
+         jbbCeNC3RDl7l45oAs4xSVptbR1xVRfNxkvOYaUn14NbGjuw+w94RC9i4uOrJMSFw44Z
+         JKNDDJeScA9oET9m8tGHYDM7Tl/1QczpkiwYIH8WLMwUyajv+woD19QdG9z3/YG5U+mB
+         6tld6JQcC7uBVLgRypxXKRW/dsptPrB2FxLWGw0FSf47e0FV9QJl5rVbisg/QdmoIbSq
+         4CvzbUMrTsV/A8XjrM7VsL7DCUhcV32ITo2huBuZYsbMHFtOeFXbXhLsdp7EuzyTB6gE
+         LLzQ==
+X-Gm-Message-State: AOJu0YxhYjxqmn3LHCb9W/qMZn9xS9rdqut1lsW0r5dxvouucKDebYEt
+	MAu+weTCVn8ijXcoIgPwEVul7tXvI/evXE8o0guaOP4O5fqUBghRFsHtNqB0HFqrEl+Ql+QHGAE
+	uw74LdgTG+9P8o8DeaQibwD2apVIUrpg6IMXs
+X-Gm-Gg: ASbGncu7CaHu8uJexj3CJFLhW+fG2KhUgSL+BK65GolpBk2PgCGHa3DGmJm8EiwITY+
+	E4SgWUCxv6R1Rb5DP1yRNDkR3xudilXeOYpHgn8o8u1nyrd+5xlMtOljZketwXO5gf7ngt/wz9G
+	rWv+lDAGTkyDS1ZD0jy15Wfa+rdHxH8NDyUry8WJqsHtn4E5s84WIntiGZWYyYqPPQ4bwUtOHaB
+	AZUxXvTz74U8uX6BxkDwyCMNCViqZbCcLp5cS0c22901eZHOpk5nCYT2f4OLnf8qDXoNMpqPCAe
+	atM/sJWI
+X-Google-Smtp-Source: AGHT+IGJMx8eliRrMd2MWyEGR3/TGkcPU4uY98/sdmK+M6CJKuaHys/SX7mMKI4fxDfK9OAqm9Y5N+l+zOc+0/XawNc=
+X-Received: by 2002:a05:6870:2208:b0:3e7:eee7:9466 with SMTP id
+ 586e51a60fabf-3e8691344c9mr8326243fac.39.1763549871138; Wed, 19 Nov 2025
+ 02:57:51 -0800 (PST)
 MIME-Version: 1.0
-References: <187963093743F200.1423420@lists.openembedded.org>
-In-Reply-To: <187963093743F200.1423420@lists.openembedded.org>
+References: <20251119105328.2849176-1-ankur.tyagi85@gmail.com> <18796309B75AD22C.1255594@lists.openembedded.org>
+In-Reply-To: <18796309B75AD22C.1255594@lists.openembedded.org>
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Wed, 19 Nov 2025 23:55:28 +1300
-X-Gm-Features: AWmQ_bl83urdAbku1lalxD7PCMB_wIIqfMRb0smj5v5Qn3_I-6mZhMpMKcnBZQQ
-Message-ID: <CADySD0GU2M3Wc-Nh23idbJfh26S_7n+RcfkJqaxw+mOw=DJsbA@mail.gmail.com>
-Subject: Re: [oe][meta-oe][PATCH 1/6] cli11: upgrade 2.6.0 -> 2.6.1
+Date: Wed, 19 Nov 2025 23:57:39 +1300
+X-Gm-Features: AWmQ_bm1v9us8Cuo54SwwofBQlau2pku_VbINdD3UvBPP7vhSOWHTksn-YwvCgw
+Message-ID: <CADySD0HjNzgqHbvf=SERmsst-XNeH-ZmgqcXHU6HxCd-M3HREQ@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH 3/6] libplist: add ptest support
 To: ankur.tyagi85@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 10:55:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121897
+ <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 10:57:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121898
 
-cHRlc3Qgc3VtbWFyeToNCg0Kcm9vdEBxZW11eDg2LTY0On4jIHB0ZXN0LXJ1bm5lciBjbGkxMQ0K
-U1RBUlQ6IHB0ZXN0LXJ1bm5lcg0KMjAyNS0xMS0xOVQwNTowNA0KQkVHSU46IC91c3IvbGliNjQv
-Y2xpMTEvcHRlc3QNClJhbmRvbW5lc3Mgc2VlZGVkIHRvOiA2OTA0MzAyMDcNCj09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT0NCkFsbCB0ZXN0cyBwYXNzZWQgKDU2MiBhc3NlcnRpb25zIGluIDE3OCB0ZXN0
-IGNhc2VzKQ0KDQpQQVNTOiAuL0FwcFRlc3QNClJhbmRvbW5lc3Mgc2VlZGVkIHRvOiAzMTU0NzAw
-NjgxDQo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09DQpBbGwgdGVzdHMgcGFzc2VkICgxNyBhc3NlcnRp
-b25zIGluIDQgdGVzdCBjYXNlcykNCg0KUEFTUzogLi9Db21wbGV4VHlwZVRlc3QNClJhbmRvbW5l
-c3Mgc2VlZGVkIHRvOiA4ODM5MDMzNzYNCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCkFsbCB0ZXN0
-cyBwYXNzZWQgKDY4MSBhc3NlcnRpb25zIGluIDE4OCB0ZXN0IGNhc2VzKQ0KDQpQQVNTOiAuL0Nv
-bmZpZ0ZpbGVUZXN0DQpSYW5kb21uZXNzIHNlZWRlZCB0bzogNTkzNjU1MjMwDQo9PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09DQpBbGwgdGVzdHMgcGFzc2VkICgyNjkgYXNzZXJ0aW9ucyBpbiA1OCB0ZXN0
-IGNhc2VzKQ0KDQpQQVNTOiAuL0NyZWF0aW9uVGVzdA0KUmFuZG9tbmVzcyBzZWVkZWQgdG86IDE1
-NTE2ODE4NTcNCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCkFsbCB0ZXN0cyBwYXNzZWQgKDEgYXNz
-ZXJ0aW9uIGluIDEgdGVzdCBjYXNlKQ0KDQpQQVNTOiAuL0RlcHJlY2F0ZWRUZXN0DQpSYW5kb21u
-ZXNzIHNlZWRlZCB0bzogODA0ODA1NDEwDQo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQpBbGwgdGVz
-dHMgcGFzc2VkICgxMCBhc3NlcnRpb25zIGluIDIgdGVzdCBjYXNlcykNCg0KUEFTUzogLi9FbmNv
-ZGluZ1Rlc3QNClJhbmRvbW5lc3Mgc2VlZGVkIHRvOiAxMjkwNjM4NDANCj09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT0NCkFsbCB0ZXN0cyBwYXNzZWQgKDEyOCBhc3NlcnRpb25zIGluIDE5IHRlc3QgY2Fz
-ZXMpDQoNClBBU1M6IC4vRXh0cmFWYWxpZGF0b3JzVGVzdA0KUmFuZG9tbmVzcyBzZWVkZWQgdG86
-IDQ0NTc0MzQ2NQ0KPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0KQWxsIHRlc3RzIHBhc3NlZCAoNjUg
-YXNzZXJ0aW9ucyBpbiAxNSB0ZXN0IGNhc2VzKQ0KDQpQQVNTOiAuL0Zvcm1hdHRlclRlc3QNClJh
-bmRvbW5lc3Mgc2VlZGVkIHRvOiAxODgwNjQyOTk0DQotLXNvbWV0aGluZyBpcyBkZXByZWNhdGVk
-IHBsZWFzZSB1c2UgJ3NvbWV0aGluZ19lbHNlJyBpbnN0ZWFkDQotLXNvbWV0aGluZyBpcyBkZXBy
-ZWNhdGVkIHBsZWFzZSB1c2UgJycgaW5zdGVhZA0KLS1zb21ldGhpbmcgaXMgZGVwcmVjYXRlZCBw
-bGVhc2UgdXNlICctLXNvbWV0aGluZ19lbHNlJyBpbnN0ZWFkDQpXQVJOSU5HIC0tc29tZXRoaW5n
-IGlzIHJldGlyZWQgYW5kIGhhcyBubyBlZmZlY3QNCldBUk5JTkcgLS1zb21ldGhpbmcgaXMgcmV0
-aXJlZCBhbmQgaGFzIG5vIGVmZmVjdA0KV0FSTklORyAtLXNvbWV0aGluZyBpcyByZXRpcmVkIGFu
-ZCBoYXMgbm8gZWZmZWN0DQoNClVzYWdlOiBbT1BUSU9OU10NCg0KDQpPUFRJT05TOg0KICAtaCwg
-ICAgIC0taGVscCAgICAgICAgICAgICAgUHJpbnQgdGhpcyBoZWxwIG1lc3NhZ2UgYW5kIGV4aXQN
-ClRoZSBmb2xsb3dpbmcgYXJndW1lbnQgd2FzIG5vdCBleHBlY3RlZDogVGhpbmcNClJ1biB3aXRo
-IC0taGVscCBmb3IgbW9yZSBpbmZvcm1hdGlvbi4NCj09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCkFs
-bCB0ZXN0cyBwYXNzZWQgKDMxMSBhc3NlcnRpb25zIGluIDEwNSB0ZXN0IGNhc2VzKQ0KDQpQQVNT
-OiAuL0hlbHBUZXN0DQpSYW5kb21uZXNzIHNlZWRlZCB0bzogMjUyNTExNTkwNA0KPT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PQ0KQWxsIHRlc3RzIHBhc3NlZCAoNTUzIGFzc2VydGlvbnMgaW4gOTMgdGVz
-dCBjYXNlcykNCg0KUEFTUzogLi9IZWxwZXJzVGVzdA0KUmFuZG9tbmVzcyBzZWVkZWQgdG86IDEy
-NjQzMDI2ODMNCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCkFsbCB0ZXN0cyBwYXNzZWQgKDkzIGFz
-c2VydGlvbnMgaW4gMjYgdGVzdCBjYXNlcykNCg0KUEFTUzogLi9OZXdQYXJzZVRlc3QNClJhbmRv
-bW5lc3Mgc2VlZGVkIHRvOiA0MjM1MDA2MDYyDQo9PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQpBbGwg
-dGVzdHMgcGFzc2VkICgxMzAgYXNzZXJ0aW9ucyBpbiAxNyB0ZXN0IGNhc2VzKQ0KDQpQQVNTOiAu
-L051bWVyaWNUeXBlVGVzdA0KUmFuZG9tbmVzcyBzZWVkZWQgdG86IDM0MDExNjg1MDcNCj09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT0NCkFsbCB0ZXN0cyBwYXNzZWQgKDE3MSBhc3NlcnRpb25zIGluIDM4
-IHRlc3QgY2FzZXMpDQoNClBBU1M6IC4vT3B0aW9uR3JvdXBUZXN0DQpSYW5kb21uZXNzIHNlZWRl
-ZCB0bzogMTAxMzYzMTY3DQo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQpBbGwgdGVzdHMgcGFzc2Vk
-ICgyODYgYXNzZXJ0aW9ucyBpbiA3NyB0ZXN0IGNhc2VzKQ0KDQpQQVNTOiAuL09wdGlvblR5cGVU
-ZXN0DQpSYW5kb21uZXNzIHNlZWRlZCB0bzogNzk4MjU5MTU0DQo9PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09DQpBbGwgdGVzdHMgcGFzc2VkICgxIGFzc2VydGlvbiBpbiAxIHRlc3QgY2FzZSkNCg0KUEFT
-UzogLi9PcHRpb25hbFRlc3QNClJhbmRvbW5lc3Mgc2VlZGVkIHRvOiAxODA0ODM4MjUyDQo9PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09DQpBbGwgdGVzdHMgcGFzc2VkICgxNjcgYXNzZXJ0aW9ucyBpbiAz
-OSB0ZXN0IGNhc2VzKQ0KDQpQQVNTOiAuL1NldFRlc3QNClJhbmRvbW5lc3Mgc2VlZGVkIHRvOiAy
-NDU0ODk0MjM2DQo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQpBbGwgdGVzdHMgcGFzc2VkICgxIGFz
-c2VydGlvbiBpbiAxIHRlc3QgY2FzZSkNCg0KUEFTUzogLi9TaW1wbGVUZXN0DQpSYW5kb21uZXNz
-IHNlZWRlZCB0bzogMjcyNjcwOTU4OA0KPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0KQWxsIHRlc3Rz
-IHBhc3NlZCAoMjIgYXNzZXJ0aW9ucyBpbiA3IHRlc3QgY2FzZXMpDQoNClBBU1M6IC4vU3RyaW5n
-UGFyc2VUZXN0DQpSYW5kb21uZXNzIHNlZWRlZCB0bzogMTk2NzQyMjg4NQ0KPT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PQ0KQWxsIHRlc3RzIHBhc3NlZCAoNTM2IGFzc2VydGlvbnMgaW4gMTE5IHRlc3Qg
-Y2FzZXMpDQoNClBBU1M6IC4vU3ViY29tbWFuZFRlc3QNClJhbmRvbW5lc3Mgc2VlZGVkIHRvOiAx
-NDUwMzgzMDk3DQpUaW1lcjogMTIxLjkyIHVzDQpUaW1lcjogMTkwLjY0IHVzDQoxMC4yOTYgbXMg
-Zm9yIDEwIHRyaWVzDQo9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQpBbGwgdGVzdHMgcGFzc2VkICg4
-IGFzc2VydGlvbnMgaW4gNSB0ZXN0IGNhc2VzKQ0KDQpQQVNTOiAuL1RpbWVyVGVzdA0KUmFuZG9t
-bmVzcyBzZWVkZWQgdG86IDMwMjY5ODAzOTANCj09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCkFsbCB0
-ZXN0cyBwYXNzZWQgKDEzMyBhc3NlcnRpb25zIGluIDI2IHRlc3QgY2FzZXMpDQoNClBBU1M6IC4v
-VHJhbnNmb3JtVGVzdA0KUmFuZG9tbmVzcyBzZWVkZWQgdG86IDkzMDU1MDY3DQo9PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09DQpBbGwgdGVzdHMgcGFzc2VkICgxNiBhc3NlcnRpb25zIGluIDIgdGVzdCBj
-YXNlcykNCg0KUEFTUzogLi9UcnVlRmFsc2VUZXN0DQpSYW5kb21uZXNzIHNlZWRlZCB0bzogMTg3
-MDYyNTc3MQ0KPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQ0KQWxsIHRlc3RzIHBhc3NlZCAoNCBhc3Nl
-cnRpb25zIGluIDEgdGVzdCBjYXNlKQ0KDQpQQVNTOiAuL2xvY2FsZVRlc3QNCkRVUkFUSU9OOiAz
-DQpFTkQ6IC91c3IvbGliNjQvY2xpMTEvcHRlc3QNCjIwMjUtMTEtMTlUMDU6MDQNClNUT1A6IHB0
-ZXN0LXJ1bm5lcg0KVE9UQUw6IDEgRkFJTDogMA0Kcm9vdEBxZW11eDg2LTY0On4jDQoNCg0KT24g
-V2VkLCBOb3YgMTksIDIwMjUgYXQgMTE6NTPigK9QTSBBbmt1ciBUeWFnaSB2aWENCmxpc3RzLm9w
-ZW5lbWJlZGRlZC5vcmcNCjxhbmt1ci50eWFnaTg1PWdtYWlsLmNvbUBsaXN0cy5vcGVuZW1iZWRk
-ZWQub3JnPiB3cm90ZToNCj4NCj4gRnJvbTogQW5rdXIgVHlhZ2kgPGFua3VyLnR5YWdpODVAZ21h
-aWwuY29tPg0KPg0KPiBSZWxlYXNlIE5vdGVzOg0KPiBodHRwczovL2dpdGh1Yi5jb20vQ0xJVXRp
-bHMvQ0xJMTEvcmVsZWFzZXMvdGFnL3YyLjYuMQ0KPg0KPiBTaWduZWQtb2ZmLWJ5OiBBbmt1ciBU
-eWFnaSA8YW5rdXIudHlhZ2k4NUBnbWFpbC5jb20+DQo+IC0tLQ0KPiAgLi4uL3JlY2lwZXMtc3Vw
-cG9ydC9jbGkxMS97Y2xpMTFfMi42LjAuYmIgPT4gY2xpMTFfMi42LjEuYmJ9ICAgIHwgMiArLQ0K
-PiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQo+ICByZW5h
-bWUgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvY2xpMTEve2NsaTExXzIuNi4wLmJiID0+IGNsaTEx
-XzIuNi4xLmJifSAoOTUlKQ0KPg0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBv
-cnQvY2xpMTEvY2xpMTFfMi42LjAuYmIgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9jbGkxMS9j
-bGkxMV8yLjYuMS5iYg0KPiBzaW1pbGFyaXR5IGluZGV4IDk1JQ0KPiByZW5hbWUgZnJvbSBtZXRh
-LW9lL3JlY2lwZXMtc3VwcG9ydC9jbGkxMS9jbGkxMV8yLjYuMC5iYg0KPiByZW5hbWUgdG8gbWV0
-YS1vZS9yZWNpcGVzLXN1cHBvcnQvY2xpMTEvY2xpMTFfMi42LjEuYmINCj4gaW5kZXggZGVmMzJi
-N2E2Yi4uYjZjMWFjNTZiYSAxMDA2NDQNCj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQv
-Y2xpMTEvY2xpMTFfMi42LjAuYmINCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvY2xp
-MTEvY2xpMTFfMi42LjEuYmINCj4gQEAgLTgsNyArOCw3IEBAIERFUEVORFMgPSAiY2F0Y2gyIg0K
-PiAgU1JDX1VSSSA9ICJnaXRzbTovL2dpdGh1Yi5jb20vQ0xJVXRpbHMvQ0xJMTE7YnJhbmNoPW1h
-aW47cHJvdG9jb2w9aHR0cHM7dGFnPXYke1BWfSBcDQo+ICAgICAgICAgICAgIGZpbGU6Ly9yZW1v
-dmVfdG1wZGlyX2Zyb21fdGVzdF9iaW5hcnkucGF0Y2ggXA0KPiAgICAgICAgICAgICBmaWxlOi8v
-cnVuLXB0ZXN0Ig0KPiAtU1JDUkVWID0gIjM5MTQ4MjZlZjgxMjA4ZjM3ZGM1ODQzZmExNmY0OTFk
-N2Y4YzA4MjkiDQo+ICtTUkNSRVYgPSAiYmZmZmQzN2UxZjgwNGNhNGZhZTFjYWFlMTA2OTM1Nzkx
-Njk2YjZhOSINCj4NCj4gIGluaGVyaXQgY21ha2UgcHRlc3QNCj4NCj4NCj4gLT0tPS09LT0tPS09
-LT0tPS09LT0tPS0NCj4gTGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50IHRvIHRo
-aXMgZ3JvdXAuDQo+IFZpZXcvUmVwbHkgT25saW5lICgjMTIxODkyKTogaHR0cHM6Ly9saXN0cy5v
-cGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvMTIxODkyDQo+IE11
-dGUgVGhpcyBUb3BpYzogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL210LzExNjM3MTUz
-OS8zNjE5NzM3DQo+IEdyb3VwIE93bmVyOiBvcGVuZW1iZWRkZWQtZGV2ZWwrb3duZXJAbGlzdHMu
-b3BlbmVtYmVkZGVkLm9yZw0KPiBVbnN1YnNjcmliZTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRk
-ZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL3Vuc3ViIFthbmt1ci50eWFnaTg1QGdtYWlsLmNv
-bV0NCj4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4NCg==
+ptest summary:
+
+root@qemux86-64:~# time ptest-runner libplist
+START: ptest-runner
+2025-11-19T10:23
+BEGIN: /usr/lib64/libplist/ptest
+ERROR: Could not parse plist data, expected XML or binary plist
+PASS: test/amp.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/6.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 99092
+Output size : 99083
+Comparing
+PList parsing succeeded
+PASS: test/bigarray++.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/6.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 99092
+Output size : 99083
+Comparing
+PList parsing succeeded
+PASS: test/bigarray.test
+PList parsing succeeded
+PASS: test/cdata.test
+PList parsing succeeded
+PList parsing succeeded
+PASS: test/dates.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/1.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 752
+Output size : 765
+Comparing
+PList parsing succeeded
+PASS: test/empty++.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/1.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 752
+Output size : 765
+Comparing
+PList parsing succeeded
+PASS: test/empty.test
+PList parsing succeeded
+PASS: test/empty_keys.test
+PList parsing succeeded
+PASS: test/entities.test
+PList parsing succeeded
+PASS: test/hex.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/5.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 4292380
+Output size : 4305301
+Comparing
+PList parsing succeeded
+PASS: test/huge++.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/5.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 4292380
+Output size : 4305301
+Comparing
+PList parsing succeeded
+PASS: test/huge.test
+SUCCESS: plist_set_uint_val with 0x8000000000000000LL
+SUCCESS: plist_set_int_val with 0x8000000000000000LL
+SUCCESS: plist_set_uint_val with (uint64_t)-1LL
+SUCCESS: plist_set_int_val with -1LL
+SUCCESS: plist_set_uint_val with 0x8000000000000001LL
+SUCCESS: plist_set_uint_val with 0x8000000000000001LL
+PASS: test/integer_set.test
+ERROR: Could not parse plist data, expected XML or binary plist
+PASS: test/invalid_tag.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/int64_min_max.json is open
+PList JSON parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList JSON writing succeeded
+Comparing
+PList parsing succeeded
+PASS: test/json-int64-min-max.test
+Converting (failure expected)
+ERROR: Input plist data is not compatible with output format.
+./test/json-invalid-types.test: line 17: [: -neq: binary operator expected
+Converting (failure expected)
+ERROR: Input plist data is not compatible with output format.
+./test/json-invalid-types.test: line 23: [: -neq: binary operator expected
+Converting (failure expected)
+ERROR: Input plist data is not compatible with output format.
+./test/json-invalid-types.test: line 29: [: -neq: binary operator expected
+PASS: test/json-invalid-types.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/j1.json is open
+PList JSON parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList JSON writing succeeded
+Size of input and output is different
+Input size : 171
+Output size : 170
+Comparing
+PList parsing succeeded
+PASS: test/json1.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/j2.json is open
+PList JSON parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList JSON writing succeeded
+Size of input and output is different
+Input size : 426
+Output size : 423
+Comparing
+PList parsing succeeded
+PASS: test/json2.test
+Converting input file to JSON
+Converting to binary and back to JSON
+File /usr/lib64/libplist/ptest/test/test/data/json3.test.json is open
+PList JSON parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList JSON writing succeeded
+Size of input and output is different
+Input size : 1017
+Output size : 866
+Comparing
+PList parsing succeeded
+PASS: test/json3.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/4.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 391148
+Output size : 392301
+Comparing
+PList parsing succeeded
+PASS: test/large++.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/4.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 391148
+Output size : 392301
+Comparing
+PList parsing succeeded
+PASS: test/large.test
+ERROR: Could not parse plist data, expected XML or binary plist
+PASS: test/malformed_dict.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/3.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 31034
+Output size : 31101
+Comparing
+PList parsing succeeded
+PASS: test/medium++.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/3.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 31034
+Output size : 31101
+Comparing
+PList parsing succeeded
+PASS: test/medium.test
+* checking off1byte.bplist
+PList parsing succeeded
+* checking off2bytes.bplist
+PList parsing succeeded
+* checking off3bytes.bplist
+PList parsing succeeded
+* checking off4bytes.bplist
+PList parsing succeeded
+* checking off5bytes.bplist
+PList parsing succeeded
+* checking off6bytes.bplist
+PList parsing succeeded
+* checking off7bytes.bplist
+PList parsing succeeded
+* checking off8bytes.bplist
+PList parsing succeeded
+PASS: test/offsetsize.test
+PList parsing succeeded
+PASS: test/order.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/o3.ostep is open
+OpenStep PList parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+OpenStep PList writing succeeded
+Size of input and output is different
+Input size : 341
+Output size : 125
+Comparing
+PList parsing succeeded
+PASS: test/ostep-comments.test
+Converting (failure expected)
+./test/ostep-invalid-types.test: line 17: [: -neq: binary operator expected
+Converting (failure expected)
+ERROR: Input plist data is not compatible with output format.
+./test/ostep-invalid-types.test: line 23: [: -neq: binary operator expected
+Converting (failure expected)
+ERROR: Input plist data is not compatible with output format.
+./test/ostep-invalid-types.test: line 29: [: -neq: binary operator expected
+PASS: test/ostep-invalid-types.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/test.strings is open
+OpenStep PList parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+OpenStep PList writing succeeded
+Size of input and output is different
+Input size : 312
+Output size : 274
+Comparing
+PList parsing succeeded
+PASS: test/ostep-strings.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/o1.ostep is open
+OpenStep PList parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+OpenStep PList writing succeeded
+Size of input and output is different
+Input size : 566
+Output size : 148
+Comparing
+PList parsing succeeded
+PASS: test/ostep1.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/o2.ostep is open
+OpenStep PList parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+OpenStep PList writing succeeded
+Size of input and output is different
+Input size : 461
+Output size : 382
+Comparing
+PList parsing succeeded
+PASS: test/ostep2.test
+ERROR: Could not parse plist data, expected XML or binary plist
+PASS: test/recursion.test
+* checking dictref1byte.bplist
+PList parsing succeeded
+* checking dictref2bytes.bplist
+PList parsing succeeded
+* checking dictref3bytes.bplist
+PList parsing succeeded
+* checking dictref4bytes.bplist
+PList parsing succeeded
+* checking dictref5bytes.bplist
+PList parsing succeeded
+* checking dictref6bytes.bplist
+PList parsing succeeded
+* checking dictref7bytes.bplist
+PList parsing succeeded
+* checking dictref8bytes.bplist
+PList parsing succeeded
+PASS: test/refsize.test
+PASS: test/signedunsigned1.test
+PASS: test/signedunsigned2.test
+PASS: test/signedunsigned3.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/2.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 6030
+Output size : 6021
+Comparing
+PList parsing succeeded
+PASS: test/small++.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/2.plist is open
+PList XML parsing succeeded
+PList BIN writing succeeded
+PList BIN parsing succeeded
+PList XML writing succeeded
+Size of input and output is different
+Input size : 6030
+Output size : 6021
+Comparing
+PList parsing succeeded
+PASS: test/small.test
+PList parsing succeeded
+PList parsing succeeded
+PASS: test/timezone1.test
+PList parsing succeeded
+PList parsing succeeded
+PList parsing succeeded
+PASS: test/timezone2.test
+Converting
+File /usr/lib64/libplist/ptest/input/test/data/uid.bplist is open
+PList BIN parsing succeeded
+PList XML writing succeeded
+PList XML parsing succeeded
+PList BIN writing succeeded
+Comparing
+PList parsing succeeded
+PASS: test/uid.test
+DURATION: 7
+END: /usr/lib64/libplist/ptest
+2025-11-19T10:23
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
+
+real    0m7.166s
+user    0m2.552s
+sys    0m5.882s
+
+On Wed, Nov 19, 2025 at 11:53=E2=80=AFPM Ankur Tyagi via
+lists.openembedded.org
+<ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
+>
+> From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>
+> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> ---
+>  .../include/ptest-packagelists-meta-oe.inc    |  1 +
+>  .../libimobiledevice/libplist/run-ptest       |  6 ++++
+>  .../libimobiledevice/libplist_2.6.0.bb        | 30 +++++++++++++++++--
+>  3 files changed, 35 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-oe/recipes-extended/libimobiledevice/libplist/ru=
+n-ptest
+>
+> diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-o=
+e/conf/include/ptest-packagelists-meta-oe.inc
+> index 09b1dbb3e1..25db9fe5cc 100644
+> --- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> +++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> @@ -54,6 +54,7 @@ PTESTS_FAST_META_OE =3D "\
+>      xmlsec1 \
+>      zeromq \
+>      cjson \
+> +    libplist \
+>  "
+>  PTESTS_FAST_META_OE:append:x86 =3D " mcelog"
+>  PTESTS_FAST_META_OE:append:x86-64 =3D " mcelog"
+> diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist/run-ptest=
+ b/meta-oe/recipes-extended/libimobiledevice/libplist/run-ptest
+> new file mode 100644
+> index 0000000000..ed940af5f6
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/libimobiledevice/libplist/run-ptest
+> @@ -0,0 +1,6 @@
+> +#!/bin/sh
+> +
+> +for t in `ls test/*.test`; do
+> +       top_srcdir=3D$(pwd)/input top_builddir=3D$(pwd)/test ./$t && echo=
+ PASS: $t || echo FAIL: $t
+> +       rm $(pwd)/test/test/data/* 2>/dev/null
+> +done
+> diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb =
+b/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
+> index 7f01962a97..1dfe895d23 100644
+> --- a/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
+> +++ b/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
+> @@ -6,10 +6,12 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Debb5c50ab7ca=
+b4baeffba14977030c07 \
+>
+>  DEPENDS =3D "libxml2 glib-2.0 swig python3"
+>
+> -inherit autotools pkgconfig python3native python3targetconfig
+> +inherit autotools pkgconfig python3native python3targetconfig ptest
+>
+>  SRCREV =3D "2117b8fdb6b4096455bd2041a63e59a028120136"
+> -SRC_URI =3D "git://github.com/libimobiledevice/libplist;protocol=3Dhttps=
+;branch=3Dmaster"
+> +SRC_URI =3D "git://github.com/libimobiledevice/libplist;protocol=3Dhttps=
+;branch=3Dmaster \
+> +           file://run-ptest \
+> +"
+>
+>
+>  CVE_STATUS_GROUPS +=3D "CVE_STATUS_LIBLIST"
+> @@ -30,6 +32,28 @@ do_install:append () {
+>      fi
+>  }
+>
+> +do_install_ptest(){
+> +    # tests expect a particular directory structure for input and output
+> +    install -d ${D}${PTEST_PATH}/input/test/data
+> +    install -d ${D}${PTEST_PATH}/test/tools
+> +    install -d ${D}${PTEST_PATH}/test/test/.libs
+> +    install -d ${D}${PTEST_PATH}/test/test/data
+> +    install ${S}/test/data/* ${D}${PTEST_PATH}/input/test/data/
+> +    install ${S}/test/*.test ${D}${PTEST_PATH}/test/
+> +    install -m 0755 ${B}/test/.libs/plist* ${D}${PTEST_PATH}/test/test/.=
+libs/
+> +    install -m 0755 ${B}/test/.libs/integer_set_test ${D}${PTEST_PATH}/t=
+est/test/
+> +    for t in $(find ${B}/test -type f -name 'plist*' \! -name '*.o'); do
+> +        install -m 0755 $t ${D}${PTEST_PATH}/test/test/
+> +    done
+> +    for t in $(find ${B}/tools -type f -name 'plist*' \! -name '*.o'); d=
+o
+> +        install -m 0755 $t ${D}${PTEST_PATH}/test/tools/
+> +    done
+> +    sed -i 's@LD_LIBRARY_PATH=3D"[^"]*:@LD_LIBRARY_PATH=3D"@g' \
+> +        ${D}${PTEST_PATH}/test/test/plist_cmp
+> +    sed -i 's@LD_LIBRARY_PATH=3D"[^"]*:@LD_LIBRARY_PATH=3D"@g' \
+> +        ${D}${PTEST_PATH}/test/test/plist_test
+> +}
+> +
+>  PACKAGES =3D+ "${PN}-utils \
+>               ${PN}++ \
+>               ${PN}-python"
+> @@ -38,3 +62,5 @@ FILES:${PN} =3D "${libdir}/libplist-2.0${SOLIBS}"
+>  FILES:${PN}++ =3D "${libdir}/libplist++-2.0${SOLIBS}"
+>  FILES:${PN}-utils =3D "${bindir}/*"
+>  FILES:${PN}-python =3D "${PYTHON_SITEPACKAGES_DIR}/*"
+> +
+> +RDEPENDS:${PN}-ptest +=3D "bash"
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#121893): https://lists.openembedded.org/g/openembedde=
+d-devel/message/121893
+> Mute This Topic: https://lists.openembedded.org/mt/116371540/3619737
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nkur.tyagi85@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
