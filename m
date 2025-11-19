@@ -2,64 +2,64 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D21BFCF257C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD8C8CF257F
 	for <webhook@archiver.kernel.org>; Wed, 19 Nov 2025 04:12:52 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7545.1763525562927912532
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7546.1763525563689813341
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Nov 2025 20:12:42 -0800
+ Tue, 18 Nov 2025 20:12:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=F5pd6GTG;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-bb2447d11ceso3722721a12.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 20:12:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QuY3bJS1;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-ba2450aba80so3671793a12.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 20:12:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763525562; x=1764130362; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763525563; x=1764130363; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=VIgKE0FKzMVPuW02iT+F4tc2fXcfi+hUTqO81LrGHqo=;
-        b=F5pd6GTGHrkfi2wT+xrBdzsis7p+ZY4kDVo/MTj3xuy41wMlr1K6QYcK9yg+ogTt0C
-         OlKQLQjQZgbkSaG8p66y8e7JKmQA+DbTuse8g4YA9l6WqpkKk11x8Upn6lRy5aSmzSbn
-         Rcuif1w+h8oa9PEKrMfj1vW9EmayJ+QrxITNAaRPtSwlwlznRU2kMohrAN/1tKvX72zU
-         SzmetXG3ri/dqcKnttDaHayL6kaDTrI/fsTBI5ETTvAMFIpWZXOmn3Yg/0xbwxDK/hkO
-         M7VL95dMq0dNQiKxV4vuymqo2RIvM4Z7dzO1IyTc+7OVGOcDZAY4rw39wWS8pTaWtzpv
-         IOMw==
+        bh=usA3qQJ6YJSDTtDDl8zzYp4xhC+LUz/1mcG1CV5Kk7w=;
+        b=QuY3bJS15opg60xtFEWVr//JqBMHr3KrTPjmPNTeSeXC54Gt6A2kBq2cDk9flLja05
+         ByuTUVNEr3M/Cns/3Q27HqXAni3fCBWCKvoRUZN2kgDH1FfeK6euFbz9KaGW3vrTD3ID
+         tDzzDAkn3y4GYaiWO35WIFV/Wc+4gM8QTaaoy8kgx8epIMBlG9a6sj237UTApUqKLMdx
+         HkylUNt1nxYJZ0B0wPXUnUG0trN8kZsX+ZoE5T+v1Wt/Fq4B5riA2XU4oljRpYzI46tn
+         pWx+dwGVOgEBA8KESezS3wRVKg0h7YC8SyM6GAR1kKtuydtLYAaXoEBR7vP2gM8OmKUj
+         VUcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763525562; x=1764130362;
+        d=1e100.net; s=20230601; t=1763525563; x=1764130363;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=VIgKE0FKzMVPuW02iT+F4tc2fXcfi+hUTqO81LrGHqo=;
-        b=a/MM12KQwa0HOr9yu9voSyrodZdBDshavjRVI9zxk8zjaYes6aR+dabRyUZ20xj1gx
-         9OFwUDU1Sa+EJZy2+ZSMyNV+o4A+Jsp+nOgqBKPOebfvopLiqMaANVD/L2kQf41jS55S
-         2iFhwgbO9EtShWEWTHuEAEHJrWky6L4062c9xrTqGNF+6iDgNw9txn4fEpDHMLRpzHqO
-         e9/78XfDEZgrxDD7Ptmj30iyUhNEec2yoX/e5Mlgz0hvnyUenI1qHgnwvssrC7FG6Fkl
-         cCreTXzzNzCVuWe7lzN22163s6/UQbTexPDCmmfd8+NC21vxcOQUtwVr+C/DC+6U6S5k
-         ep4Q==
-X-Gm-Message-State: AOJu0Yydn7LboPkCrQrSCHTr6IuAfCJi3E5oSKAwTccnxu+7dJlRQRJ8
-	rX+N7OChHsVWTkodoJtuC2bzi+9h+p8ilZsyqo8U1Q+b2hCSkmBdNpX+AUAdkU0hlvU=
-X-Gm-Gg: ASbGncvS9X+lO5LBxTsHO2GGpg+JN4Ed9ZykTNfZ/MIFFsQePU9WrrFXsMdMVGehwih
-	aid0r75/EmPCs7r7+AKl6l5d8ZV0nmti0kXqO7WzoEq9Z50n8CDQMhBGWxSMJrvvjJcAzblle7o
-	f1JX+MCJkFHsvP9k5z9xbLJzZL1/3SfhVipb0Cx94i+Blw9Gx+0+Y/C7EanyUBKyN5AHYmcaNRc
-	C+2NJ5uj98opH2EKzRvQ2OBr5IbLPkxp6Ikb0m421ir2gLjN1aGdYhLt63s2FjuEOhKT+LgcQWJ
-	ykJfqUrQinWNh3tgVcS4xHf7Wxiv0gmMSt4Vxa+uUGzvPvb5wrZoCPv/FhGn9BZJ6uhR0woPXq6
-	hYhwOZcmH/DTJwlMuq9CqvqlEmDc47ZDCutgvwxiRB2fNjxrLoEsE+ZLCYtoS4UnALzWlm2faA3
-	AZxyDNnjO2ZX4u080ZIk3GXxQCcbp/QBwfiPX1tZ+b/ZpqtDUutHY664RpaIZNQXm5FhkIgiLX2
-	HUy0U6eW/+quBAJR47a5pjLtkbDr+uU
-X-Google-Smtp-Source: AGHT+IHvHkv/5AoVe/OXPP22O3dYaFczQv3+yvNEQJAmO1NIzFItwyU2iGD5zzf4s4k3xlwquHR56g==
-X-Received: by 2002:a05:7022:688a:b0:119:e56b:9899 with SMTP id a92af1059eb24-11b40b3420cmr10074247c88.0.1763525561684;
-        Tue, 18 Nov 2025 20:12:41 -0800 (PST)
+        bh=usA3qQJ6YJSDTtDDl8zzYp4xhC+LUz/1mcG1CV5Kk7w=;
+        b=jKCneccFNNC+GbGK19rViRuyk13cgy31Fc4Kq46VUpsc1Xw+z2KhDrkUJoxEWx+Cy+
+         rcs/JloQqWBPC7MY9PwWjpO3320cb8bQA4s2BITxf7vttIZXbu3CYHy9l2WkIE8lvD7t
+         iom9SWAIRMj4cU/gbgE+1URG5NM9nIlE6hY701s7RgwXDK2G+wAjWYFIGnkDeyvuAqrQ
+         nKSV/QAqO3qxg1oB+Gk9SmY9yvR72S+N1ClHXFo2uXjy7hiLZMniKHPsFOBF+1GEFcQg
+         NttVpbEr1nnqT+ZLHz0XvZRVxQYJ9kjg7P8KPAoFSJJ5M6D0RBI1VvD4n/PhDak/Mcba
+         gDnA==
+X-Gm-Message-State: AOJu0YzhmACItS5FMkJ3xUdsUHJ7VcbMQIbXpIOO072fIlJOzwmnwhbA
+	IYvvP4wcH1C8pnwkZOapMxoZK1Po55UuQ7+rBoyOD2cJ9+RuxUeYGenxhvHJU1NDfyQ=
+X-Gm-Gg: ASbGncvpyk7rxxuORxc6R9xMrfa7QKC25T9k8OEmpx3Cb2SoSZ/VRUUUYjuXyfAJzJZ
+	+ElGNGvCfiyLCCdquW7LtQeEiXwM1vEWDfdNHm2nAQ8vvmd3tZpvjJZNah+n3N21qZ2dZqdKeDn
+	cJlcDp020A0dAPIFMGE0vCtc51iWCsicREuucByNK9Rd4NOIPaLB3MlzyHvq0gdu0BsHFc3PUnu
+	S4+EjaA6RYjCPf+4uqLTrbw4UtncaSvqC7LOe9QTESK85096hJS8hmMpLxQV+GdBe34GbIi7Fdb
+	gBp70mxwhxux9/BM27aG+OaURhVQbtTfXD8gEvMpOMEZbg46QQ0NqzqNEEcnewX9vqP9e+9AbLE
+	O/iC0/0IkFyyM0jQFYf1rxuYjKzN8hUpWlMxUinEUf49T2EvGcCrRoDFTpV2ZwtTMRR8H9HoHCE
+	bpcjJMsdYLvkwEJEN4xZcqK8qOYns+fZma0l7HQ6ZhzU0jS13oru8Y3tGL8Yj3gVDNMkpL11i6K
+	E87Z+UyUtUAfnMb+2mA9jxUEC6aGmBHhJepBohbb6s=
+X-Google-Smtp-Source: AGHT+IHOeRUhe8V5TaCuhIBOGfUB5rVuZYfUe8KOKmQvbtxBWsWHCRd1hE08t3Wucsg0DBE6H2V/5g==
+X-Received: by 2002:a05:7023:b07:b0:119:e56b:98b9 with SMTP id a92af1059eb24-11b41306c47mr9010864c88.32.1763525562460;
+        Tue, 18 Nov 2025 20:12:42 -0800 (PST)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::888a])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11b060885e3sm66819088c88.0.2025.11.18.20.12.40
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11b060885e3sm66819088c88.0.2025.11.18.20.12.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Nov 2025 20:12:40 -0800 (PST)
+        Tue, 18 Nov 2025 20:12:42 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][ 4/9] python3-pylint: Upgrade to 4.0.3 release
-Date: Tue, 18 Nov 2025 20:12:30 -0800
-Message-ID: <20251119041235.2448193-4-raj.khem@gmail.com>
+Subject: [meta-python][ 5/9] python3-blinker: Fix ptests with pytest 8.4+
+Date: Tue, 18 Nov 2025 20:12:31 -0800
+Message-ID: <20251119041235.2448193-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251119041235.2448193-1-raj.khem@gmail.com>
 References: <20251119041235.2448193-1-raj.khem@gmail.com>
@@ -69,77 +69,73 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 04:12:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121878
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121879
 
-Forward patches to avoid fuzz, no functional change
+pytest 8.4 is less forgiving about functions not marked async and using
+it
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Adjust-test-expectations-for-ptest.patch         | 4 +---
- ...yproject.toml-Keep-tool.setuptools.license-files.patch | 8 +++-----
- .../{python3-pylint_3.3.8.bb => python3-pylint_4.0.3.bb}  | 4 ++--
- 3 files changed, 6 insertions(+), 10 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pylint_3.3.8.bb => python3-pylint_4.0.3.bb} (95%)
+ ...yncio-fixture-to-test_async_receiver.patch | 32 +++++++++++++++++++
+ .../python/python3-blinker_1.9.0.bb           |  4 +++
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-blinker/0001-Add-asyncio-fixture-to-test_async_receiver.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch b/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch
-index 0f3e7d45e8..307dc0083b 100644
---- a/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch
-+++ b/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch
-@@ -12,11 +12,9 @@ Signed-off-by: Dan McGregor <dan.mcgregor@vecima.com>
-  tests/functional/w/wrong_import_order.txt | 22 +++++++++++-----------
-  1 file changed, 11 insertions(+), 11 deletions(-)
+diff --git a/meta-python/recipes-devtools/python/python3-blinker/0001-Add-asyncio-fixture-to-test_async_receiver.patch b/meta-python/recipes-devtools/python/python3-blinker/0001-Add-asyncio-fixture-to-test_async_receiver.patch
+new file mode 100644
+index 0000000000..2f3d1dfa5d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-blinker/0001-Add-asyncio-fixture-to-test_async_receiver.patch
+@@ -0,0 +1,32 @@
++From 2edb837a27ea52ec98d2c72db3534cc764c41337 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 18 Nov 2025 13:06:49 -0800
++Subject: [PATCH] Add asyncio fixture to test_async_receiver
++
++This ensures that this test executes and passes
++with pytest-8.4+
++
++pytest now throws errors for such functions [1]
++which were skipped in older versions
++
++[1] https://github.com/pytest-dev/pytest/issues/11372
++
++Upstream-Status: Submitted [https://github.com/pallets-eco/blinker/pull/187]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tests/test_signals.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/tests/test_signals.py b/tests/test_signals.py
++index 93a9c48..da88627 100644
++--- a/tests/test_signals.py
+++++ b/tests/test_signals.py
++@@ -256,7 +256,7 @@ def test_strong_receiver() -> None:
++     assert sentinel
++     assert [id(fn) for fn in sig.receivers.values()] == [fn_id]
++
++-
+++@pytest.mark.asyncio
++ async def test_async_receiver() -> None:
++     sentinel = []
++
+diff --git a/meta-python/recipes-devtools/python/python3-blinker_1.9.0.bb b/meta-python/recipes-devtools/python/python3-blinker_1.9.0.bb
+index f82d686a64..7ddcd04b62 100644
+--- a/meta-python/recipes-devtools/python/python3-blinker_1.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-blinker_1.9.0.bb
+@@ -2,6 +2,7 @@ DESCRIPTION = "Fast, simple object-to-object and broadcast signaling."
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=42cd19c88fc13d1307a4efd64ee90e4e"
  
--diff --git a/tests/functional/w/wrong_import_order.txt b/tests/functional/w/wrong_import_order.txt
--index 9f143c292..a283467af 100644
- --- a/tests/functional/w/wrong_import_order.txt
- +++ b/tests/functional/w/wrong_import_order.txt
--@@ -3,14 +3,14 @@ wrong-import-order:14:0:14:10::"standard import ""sys"" should be placed before
-+@@ -3,14 +3,14 @@ wrong-import-order:14:0:14:10::"standard
-  wrong-import-order:15:0:15:15::"standard import ""datetime"" should be placed before third party imports ""six"", ""astroid.are_exclusive""":UNDEFINED
-  wrong-import-order:18:0:18:22::"third party import ""totally_missing"" should be placed before local import ""package.Class""":UNDEFINED
-  wrong-import-order:20:0:20:14::"third party import ""astroid"" should be placed before local imports ""package.Class"", "".package""":UNDEFINED
-diff --git a/meta-python/recipes-devtools/python/python3-pylint/0002-pyproject.toml-Keep-tool.setuptools.license-files.patch b/meta-python/recipes-devtools/python/python3-pylint/0002-pyproject.toml-Keep-tool.setuptools.license-files.patch
-index d30e852025..9c1d535690 100644
---- a/meta-python/recipes-devtools/python/python3-pylint/0002-pyproject.toml-Keep-tool.setuptools.license-files.patch
-+++ b/meta-python/recipes-devtools/python/python3-pylint/0002-pyproject.toml-Keep-tool.setuptools.license-files.patch
-@@ -19,8 +19,6 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-  pyproject.toml | 6 ++++--
-  1 file changed, 4 insertions(+), 2 deletions(-)
++SRC_URI += "file://0001-Add-asyncio-fixture-to-test_async_receiver.patch"
+ SRC_URI[sha256sum] = "b4ce2265a7abece45e7cc896e98dbebe6cead56bcf805a3d23136d145f5445bf"
  
--diff --git a/pyproject.toml b/pyproject.toml
--index a3cc3f43b..5eaf5ee5e 100644
- --- a/pyproject.toml
- +++ b/pyproject.toml
- @@ -8,8 +8,7 @@ name = "pylint"
-@@ -33,9 +31,9 @@ index a3cc3f43b..5eaf5ee5e 100644
-  authors = [
-    { name = "Python Code Quality Authority", email = "code-quality@python.org" },
-  ]
--@@ -65,6 +64,9 @@ scripts.pylint-config = "pylint:_run_pylint_config"
-- scripts.pyreverse = "pylint:run_pyreverse"
-- scripts.symilar = "pylint:run_symilar"
-+@@ -105,6 +104,9 @@ test-min = [
-+   "typing-extensions~=4.15",
-+ ]
-  
- +[tool.setuptools]
- +license-files = [ "LICENSE", "CONTRIBUTORS.txt" ]
-diff --git a/meta-python/recipes-devtools/python/python3-pylint_3.3.8.bb b/meta-python/recipes-devtools/python/python3-pylint_4.0.3.bb
-similarity index 95%
-rename from meta-python/recipes-devtools/python/python3-pylint_3.3.8.bb
-rename to meta-python/recipes-devtools/python/python3-pylint_4.0.3.bb
-index 9864084355..04144aa7a3 100644
---- a/meta-python/recipes-devtools/python/python3-pylint_3.3.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-pylint_4.0.3.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://www.pylint.org/"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c107cf754550e65755c42985a5d4e9c9"
- 
--SRCREV = "98942ba4126a6fe1657bad77027bcc11016d16da"
--SRC_URI += "git://github.com/pylint-dev/pylint;branch=main;protocol=https \
-+SRCREV = "84b6552b86e210097ac29de7ef64b152efb4a454"
-+SRC_URI += "git://github.com/pylint-dev/pylint;branch=main;protocol=https;tag=v${PV} \
-            file://0001-Adjust-test-expectations-for-ptest.patch \
-            file://0002-pyproject.toml-Keep-tool.setuptools.license-files.patch \
-            file://run-ptest \
+ inherit pypi python_flit_core ptest-python-pytest
+@@ -9,3 +10,6 @@ inherit pypi python_flit_core ptest-python-pytest
+ RDEPENDS:${PN} += "\
+         python3-asyncio \
+ "
++RDEPENDS:${PN}-ptest += "\
++        python3-pytest-asyncio \
++"
 
