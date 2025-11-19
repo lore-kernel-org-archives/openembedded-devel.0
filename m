@@ -2,64 +2,64 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC970CF2582
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD9AACF2580
 	for <webhook@archiver.kernel.org>; Wed, 19 Nov 2025 04:12:52 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7413.1763525566569871375
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7411.1763525564315960666
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 18 Nov 2025 20:12:46 -0800
+ Tue, 18 Nov 2025 20:12:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=EmOWNaVP;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-bd1b0e2c1eeso2090472a12.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 20:12:46 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=m7CRiGOW;
+ spf=pass (domain: gmail.com, ip: 209.85.215.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-ba599137cf8so344829a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 18 Nov 2025 20:12:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763525566; x=1764130366; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763525563; x=1764130363; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=r9T9sVf+J3r2kU4MZD7PVXrZYT+7ivO12AC2XWf1nMI=;
-        b=EmOWNaVPV+FUhanaK2/9lbTogeH4+fyutDZuK5m+ozl7uKYRUHRecjz6MVQLDigPN1
-         nnUmlKdhKIFHtzC/upaUALucjANMRyQiMY6jBjbeIlsV50tFsR5FI+lXhALgCHyovZ2f
-         6mE8The2ecFfdAWyJZ1MM9uz7YVyLJEhpavVsWBUX8eP4dTk1lqpshHEePy5knlhh64M
-         IsF/ER1MvvcehzqAReW2To3Jr+E+AblKSBy81Nc4AkxOQit9KSmjFJ7bJTqu2qjMLpAT
-         qpaKbHowXCTdnHMxrdSkQKy17WdeAY/2fhXkbT+s1rzSL1IlWo6dX+B04VmB5QMjalIb
-         wLnA==
+        bh=Iw6NWO24aoZC6LCfsIy4Tps1sfFrB0WsRXPpLssGlIo=;
+        b=m7CRiGOW5md+NgH/uCVeMnY5vxf+rDhNAM19J1hC2gXbUAg9qGFT0gfJrkb/c7eabO
+         6jpq5CP/uwk8o/qYnLR8sYPDOih9jCNUl7clK8kXPX5jSFo+KrFcn11NpOdKiLpMjiHb
+         a8izbQCmGN6b4KiSnWgCDQib+rRatqSqrVVrJ2KQbOtmIKCweojBwqqockBgyXgxt9t3
+         PtDB5HJsyEKNtCbOHIYCa4DhOohNnCVe+dJ4RIPOpUI8Erj+6Jb5vKo+w0g5wb8js6dk
+         rZI9DcU3LOSI1844o5kUdvE2dP01fF2ZCig99KKOgvMAe5j3uGGrvcrBoMYZrVX7mM4I
+         9/Gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763525566; x=1764130366;
+        d=1e100.net; s=20230601; t=1763525563; x=1764130363;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=r9T9sVf+J3r2kU4MZD7PVXrZYT+7ivO12AC2XWf1nMI=;
-        b=G2wHFw/11kIBsy1OEMY8ALehPjVxida4s78s/9E1pwX82ouQrhvRFjSIErzeVrkCxL
-         U1gwz8FSfW10yxqyJRvnCXkxw0pyYqQbpdH4hzuId/110o0FDTMeQ0e5vidO2rXF2feR
-         VH6A+Mm6PqxPLbF4E2sF6cPTotiaMIG4zUAmymZiBIttaYkFvpPwEmTKt3qvjUBOtoIK
-         dOdxMvDzry/xEiQF4uiDbOIJ18jM8gWsNu0eFEBwIk/lpRwUG6/BAp2IhVhecQBrnacp
-         n29y/CErF3v7COeSK95/vPA5jo9MIXxkcZjATIdYLdzUrYdksJ/WAI0Q6BkSS+GcggHQ
-         Rjxw==
-X-Gm-Message-State: AOJu0YzCaaEHS/j1NglUb+ZXRpE4n/io16ZuwMQnjfhM/vTzQqWEuMT2
-	gB921PUSegU1tYDFmY3by+gxKRAtzirLDzLqw7EuvsGBrgr7tHKUgn5bahno1KlG+Fg=
-X-Gm-Gg: ASbGncvBRzd4+53rp6tX9/ruXEiP364yu7b3yCvxMtEk0mzDG2gbkv6uv8ChW7xPKqO
-	uW9EsWKo7eH/hkFxJ7NUbBrIT1z5LAQq4/OZrA3K4rWPuCB6Bertqp7zjoYWn87iydp25m57n1I
-	WZWFZGQ4T7MjwVSG+d1Oz6Vfmh++iTx1O/KYGjO1ij4nE/TAHWuYac41d6c2jA0TYvLoD+AH1Pc
-	w6Ek4az1J/x+OeOD9A2+NOnHQHDjarTiHCWbZtYGU903qLET4SngHcUE4jZs39IyyxrS1rNtJnq
-	5QJsAmLGto8WY17ISz0e6HiVtpj1cigk8Rd+fx1JwTtJ+lBLmF7qlRjS/1AXtXnleP2/rLaqTGg
-	MPmiyuN3rjqCB9zzv0PqZ93PhWqq+24X7+12kKExkLpbj6IRMUB7f1b496hA0pbmFMwyiIDIZMf
-	o+9u/k0aITfooNSzpu1B/Dg+6tRHey5xF1yw1+nVc+TrZ6gcLDR9p6bNdD32eVWRtkp/4uFkJ2d
-	cpUlE0GNQYeM+Dl1dOyQlhzDBD/96/c
-X-Google-Smtp-Source: AGHT+IFvDQhu6CsebgluryUH8CXu1eAKa3zP2IKpP/Wjf4PIMli7t51Uiq0V6GBok93ecO9+onH2vA==
-X-Received: by 2002:a05:7022:ff41:b0:119:e569:f629 with SMTP id a92af1059eb24-11b4160cecfmr11107125c88.34.1763525565630;
-        Tue, 18 Nov 2025 20:12:45 -0800 (PST)
+        bh=Iw6NWO24aoZC6LCfsIy4Tps1sfFrB0WsRXPpLssGlIo=;
+        b=bT7xmubAK6XbzTBeQm+Eq42AvkV6+U4hmtvIXMXnpxzOj2YVbeyZyvekCpAAdcwzCO
+         euZ1FGVgPcp5MgslXjdyE1m89Uhcl1/X9+tho045yFhNFpvyglQajIAJ0DSgkb4ltphM
+         C1mBNSmCMvcKCD4Q9ZJPeFB2KtATs7vtGDK55KiXRu6yjW7XDvvvtomZqbNMg8Q40f2E
+         yqzt4pGFSsy+TTsbPZSYYpC4CzDA6OdjFBubf6cB1OhLQ6GMF3LK6y3DVyV8UwIkgSlE
+         nLHN1Keuwuyh59giZecQlaxWOP6EaaqtoR0ek2imUgcm3DrnyGpaxGF8w9ocoLqQgaNa
+         eL4w==
+X-Gm-Message-State: AOJu0YyxeMB8xtGGLQhtOmKYHRH0ViftUf8ubM/NuFVsHrxh+ZbB856y
+	Vps7j8lyC8XLEoLbQLZSqbBFwChEcaluS1/Ngug+237zXf3lHxtoYvJsERbE8F++r4Q=
+X-Gm-Gg: ASbGnctLvuGUtuyHq0hTHBeohcZCUkKW+pEFEPOkLV9UkiPxZN4KkPor7kY8mZvmxIi
+	8dzkpgNKXSWBCbtSDQTsjLywzQ2RoYd7BPu+L26CTlxmr4JwdUcJL0q/mvIIz9FCrgsMvAMvlPF
+	84YyrKndYZYNhShCWDQB62/J1DMvnxXH8spKuX7NcrzT1KmrVlzTzFompto+VKgzGV4m06vEUCm
+	SW4CYOstL7l2s4ldTvhllHE/k8vv4oU73XueLP37TIORS0G/miEiZgzymk7CSfcZrzk42iVepSC
+	y7aUcVXJfzigA3Aq0XTGHxk9gDo7H007NWbNfco/7JEiRU0rTNf7SHg/hHyMkvrEIcY496p7Sm0
+	CzXKNsyOdZtL4ap8uV9QVwNJiRG2FgUPc0Ij6CdLnfQxwNt9JOpzVfHgCexC5Mkp/nrPyy1lmr8
+	uDM1PljLCLKD4c9+9+wNlyCANoIPaoZnMFtKKho7OpHY/E3L+ZmQ9qkW1a+GwuMDjPPa3Wizlxf
+	PJOLwYCjW8+pobYAdCaavC8mVBoYR3L
+X-Google-Smtp-Source: AGHT+IG4yeFDSFJr5c0hppOXfkbNlukuQye8DPvgZYz6Mfxpy4fz73CHDqSt4rhp4QdYlrWJk3ggHQ==
+X-Received: by 2002:a05:7022:619e:b0:119:e569:f851 with SMTP id a92af1059eb24-11c8dd338c8mr458094c88.8.1763525563298;
+        Tue, 18 Nov 2025 20:12:43 -0800 (PST)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::888a])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11b060885e3sm66819088c88.0.2025.11.18.20.12.44
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11b060885e3sm66819088c88.0.2025.11.18.20.12.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Nov 2025 20:12:44 -0800 (PST)
+        Tue, 18 Nov 2025 20:12:42 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][ 8/9] python3-arrow: Add missing rdeps on tzdata pre-commit modules
-Date: Tue, 18 Nov 2025 20:12:34 -0800
-Message-ID: <20251119041235.2448193-8-raj.khem@gmail.com>
+Subject: [meta-python][ 6/9] python3-typer: Add missing rdeps for ptests
+Date: Tue, 18 Nov 2025 20:12:32 -0800
+Message-ID: <20251119041235.2448193-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251119041235.2448193-1-raj.khem@gmail.com>
 References: <20251119041235.2448193-1-raj.khem@gmail.com>
@@ -69,31 +69,27 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 04:12:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121881
-
-These were missing pieces for ptests to work
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121880
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-arrow_1.4.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-python/recipes-devtools/python/python3-typer_0.20.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-arrow_1.4.0.bb b/meta-python/recipes-devtools/python/python3-arrow_1.4.0.bb
-index 3394e4d323..a967f9e429 100644
---- a/meta-python/recipes-devtools/python/python3-arrow_1.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-arrow_1.4.0.bb
-@@ -14,6 +14,7 @@ inherit pypi python_flit_core ptest-python-pytest
- RDEPENDS:${PN}-ptest += " \
-     python3-dateparser \
-     python3-dateutil-zoneinfo \
-+    python3-pre-commit \
-     python3-pytest-cov \
-     python3-pytest-mock \
-     python3-pytz \
-@@ -23,4 +24,5 @@ RDEPENDS:${PN}-ptest += " \
-
- RDEPENDS:${PN} += " \
-     python3-dateutil \
-+    python3-tzdata \
+diff --git a/meta-python/recipes-devtools/python/python3-typer_0.20.0.bb b/meta-python/recipes-devtools/python/python3-typer_0.20.0.bb
+index db682c5d35..f6be56cde3 100644
+--- a/meta-python/recipes-devtools/python/python3-typer_0.20.0.bb
++++ b/meta-python/recipes-devtools/python/python3-typer_0.20.0.bb
+@@ -23,8 +23,11 @@ RDEPENDS:${PN} += "\
  "
+ # python3-misc for webbrowser module
+ RDEPENDS:${PN}-ptest += "\
++    python3-coverage \
++    python3-markdown-it-py \
+     python3-misc \
+     python3-mypy \
++    python3-pluggy \
+     python3-pytest \
+     python3-pytest-cov \
+     python3-pytest-sugar \
 
