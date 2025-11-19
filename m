@@ -2,148 +2,147 @@ Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8B17CF31B9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8B56CF31BA
 	for <webhook@archiver.kernel.org>; Wed, 19 Nov 2025 12:34:56 +0000 (UTC)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5830.1763555687328222685
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5830.1763555687323037376
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 19 Nov 2025 04:34:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=GDE0c8TN;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=MRLQB/qx;
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=afE7tiTK;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=MRHslABk;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AJB60fG1981507
-	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 12:34:45 GMT
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AJ9Jqaq3412690
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 12:34:46 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=6Hh9ICx43T7BLaE11IO6a5bp56fHGhlJzKz
-	bBIth7oQ=; b=GDE0c8TNhC37GyDXZWe2cy2G0f6tTAPIqv9vQ8zSkj7KNbZnzDa
-	7rLOgS3VMaTMxddSiFSwlCL3tQvvLGE3rBo1Uu8ipRvP6P9s2EDhGeOtxKV2Ohuo
-	caBeb4ozg52xyFG5qi9IbanP2Gs1z6Mv1kCz8gNSWfMKx2KLxYpIkKFRNM7rP6Q2
-	S/hF9XlWe82wJvjJbCRFoLNoI/gQhT4yFZZ/fnHr6VvRs74h/E8bsexd5T3w8rd4
-	7nBUWp2LW2wCpLsyWNvtjq0/OlSwx39JJzTWbBmcTXTagI1QVrMBXZ4/c3dvmqP9
-	lJTNj8lJbWLkRDj4iCZ9A7+pLUCFUFk6WGQ==
+	content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=/4dDBbRIJny
+	SIfW6vUpxsi5cAK6fYQMygfERxxhbVu4=; b=afE7tiTKmDgcI99/4sSBEyUSnEm
+	2YIwUmX3PaK2zcSUNlkS8/E5HVKfp+CBOgehAocLl1MahmSPe5xfJ8NX4U6MGaGG
+	g5NMmnIThmwvf3J7T/thVEZcAOKgjPeFHChJMD2amZvjQncCWG+J7KdEllpZU8Sg
+	SGQud8iNJ6wAr6K+HVXszx3c38yzQc6igYDU76TOBTIJtqYjguBMGHiH3Y2M2b7g
+	5QlIvsU5Ye6GNijy7EqfP5kprlzrCvtG4GfRsPmpKa3twbR9EDBtmNJTny5DQuPx
+	ufpRir/nlQAm39yFgaIAnXftIX+bSBSVnEcdeG8LQDZPWIqg1R00BWwuAhQ==
 Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ahcqng72c-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4agv0v39a4-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 12:34:45 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-295592eb5dbso58489345ad.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 04:34:44 -0800 (PST)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 12:34:46 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2982dec5ccbso122255355ad.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 04:34:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1763555684; x=1764160484; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=6Hh9ICx43T7BLaE11IO6a5bp56fHGhlJzKzbBIth7oQ=;
-        b=MRLQB/qxuZRvoELIH19jO6NmLlTIbT/j7fgGI9vaNP1uhbonOWRY6k9C44Y+BG6Jc2
-         L6UVeY+S0W957Qdj61mlIwDnICUJ7DSs8oW9SFKnzAHLZy38Ars41pWAiJL/cxjDg8nN
-         QCy+LPsddM5jzLMAwwAudAWRx2r91WAhGNkZoGr2aPS0dLLEM4oiiO1gFfDGOemyYPyV
-         3A7rBQigAI1e5JoJNXVKzvnGWUjDX58m0iNuaGgFJ7WjG4fqU7hQlm6aN3MCNySgxBsq
-         ohIQZKZhOLdo3Xz+lQTYcIgovJhAOcFy686rDeoJ1JGoYndP2gLsKwCRjWDtNs0XEse8
-         EoYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763555684; x=1764160484;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=oss.qualcomm.com; s=google; t=1763555685; x=1764160485; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=6Hh9ICx43T7BLaE11IO6a5bp56fHGhlJzKzbBIth7oQ=;
-        b=exxvB3y/cqPDB5X0jCIPJz3Oz2ET5thxjj27RAgkBu0d5/fajiXQ3JImULhPFwmozj
-         L+s4xvodHa4Yei8ihfP9G6m2dgMkOtdvnVMAbi5m/7gHAj7mf6QoXCnEreiAwO8f872E
-         IcE+dzZBAf8RAzW/aN1HwKypO/z8q26/EecKWz21XkMJaOZAW02p7QEWKfkf98r4L+cW
-         wKOy3j1yUDWkLPPySjZMRbn/lxbhcGzDTsd7SnrJxMaQ+6BQKJjEAvZuqDV7NUY9cW3U
-         RAUTb+ktuyCcwF/YVCodvWLlhd3VKpsv8eR2mC+3lBG701yqOAu7j6ntwvMr1mdH20qc
-         +tyw==
-X-Gm-Message-State: AOJu0Yz55nBLL04plAH8DTrVmSVLLmMDWOcAmfv3WJqZVSlxCKDt/JKd
-	Gv2K+CH0h9+txwkZoAgYmgdGTqlUV1Mvtg5EJFPG47PCJztUcj5M+ABX58UXO4pcFwhtICApp9j
-	edtKgU4mywUzMl9xe0y1A+PwrVQhRfbuZA5oGsTRtUEaAAvipELhh9A7NZ16zyKhrNcdf+l1Z0k
-	EuVvfelZbosA4DEcRuIfA=
-X-Gm-Gg: ASbGnctM4zGa7Hlx4eNNjErhOF5skzj/TQOKFrfrxVPyk0cxv3/h6NVCvkVLGd0J3p4
-	Ja+KxZi/J/+D/Wexh70QT8/O58AA4erZXRgK7vP7lqOuxBhYiHPEgbVS3tefAltuMUAk0f7rq5j
-	zJEvTqhs3sghqoHpEzj1Kh03jf7Kyf3koA5wdqIXA/nCqZ9qIAZw1N8YflJ56gWYMPMqMszHU+/
-	QJsgTBbFTuKXhpiY2CsMqgJDTqLTqdklCSbRbIi6u9BGw4GQ6K/RBnCIoyklPhP05c//svtpenR
-	+Plx7JkQCF6Y5WG/ZHpsl0q12s/6n0n/sP7bzVMONuEC2hxMd+lbGemmpBCbXvgubQkITwWtxnB
-	pYWSYjLf2pCcx2v6o1Kr1FtwL9OMQRHQjAPRxgeA2
-X-Received: by 2002:a17:902:d58a:b0:296:3f23:b909 with SMTP id d9443c01a7336-2986a72cabbmr257014615ad.39.1763555683748;
-        Wed, 19 Nov 2025 04:34:43 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE/vyUMFJkS38jVfzioICytR397vBiD8n57iFzXOnJgwuwbI/hI/9V8Pz5TxVzzZOZ4wM0/HA==
-X-Received: by 2002:a17:902:d58a:b0:296:3f23:b909 with SMTP id d9443c01a7336-2986a72cabbmr257014235ad.39.1763555683156;
-        Wed, 19 Nov 2025 04:34:43 -0800 (PST)
+        bh=/4dDBbRIJnySIfW6vUpxsi5cAK6fYQMygfERxxhbVu4=;
+        b=MRHslABkjhgzZxkqx9r9mHDkEQuf4zqb6+F0DFgfPROn2dMDyfGHOvRm8NhuVzTB71
+         vt7u7PIDU+dcRljOnKUO48Bxc6tIuTbLjHHpAI8pi1ECE4wFMmaCWJ3bizNnSAYzmPcn
+         sfxE5u5OpBxQVKwMBZE5YLZZvK//DUGnGHymQcsXu7WY15AnUsTR8thXT7pGDBS1XKKV
+         ZIO0du6yUuHtIzngiXXMx6fTbuAvqf7zS3nSinj/qomAfqMuDCByYxVph1p1gTl2p5sZ
+         aUhxLYWmip96nqxR6CWS4wCl9QiduvMHhyjB353/1vQ6bmtO8c0MMiBxh0WfwFKNPCOL
+         vPLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763555685; x=1764160485;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=/4dDBbRIJnySIfW6vUpxsi5cAK6fYQMygfERxxhbVu4=;
+        b=JdZVWPLFYyi3JIcOtn5owrTmVVz/hUakvQ1rBbvl2O1wEt0SLD9dTHYj8skM0H7ozV
+         AYHPfnvL9rqYoF1dynDGKGk5eWAjxpIK10gV+VsMa6LDvKua9BDbxUmlmHfKBytO27/h
+         fZm2N1Xdp3qbUBi+17i8JmaL3e/Pqs9Q2j8TETiJsc2xZn1E5+BxPNPZxuv5E1ngs8uD
+         zOH3gOR6vOkT+cPYsicY2Sf3cZfvCZgx3Lk5qFgAsr5M9plBCzGJwpW379jR4dhwMWrg
+         lZdxEumOdi8Dy7LCm/OATudlbDiJQ+afs05yqWnJkdTZicEb+PESxQYHp773p6BERrih
+         WZ+Q==
+X-Gm-Message-State: AOJu0YzQGoW08R/OJUaORTKinndDywGg8ArVVfYnF0bB0deCe2Bj2aR8
+	hJM4/9NdsCoYvlt59FkOc2OlbvzRdtVdb9nPi/28S+T80O4aa3eiHf61E0Jithl/HFpqFrVo+4y
+	L7uoK8jUDrmdD/H05MMDPIxnyNqLPufX9E/KlNoiOqngta49zIXvtNMSuz70veENMBznxkee5FQ
+	RFtXqJqorLAKz8indwEy4=
+X-Gm-Gg: ASbGnctnIAPGLd2wS7pl6ulZA5Yb9SS9vZ9lDA2BCSHRBYpl6HFoYviBlRUV+1BkUoX
+	goEI8ymD46kI+ftv6AIFj3xoe40h5tnkx/ChblpVLO5n5U5qP40qaIvVnYyRE/nKd8i5TvNTsj+
+	01vy1pI5+5ZMSkbGuGroEprqgQFb7eTktPqns/ozHcy47mw6K/w6wsUs6ituaqo4Zp+Gu0yOPDb
+	WjtgTeB6i3KWJtvEC9NmiRz45IrSc92oQLJEOy7kYIKFLWx5nnEc/unOpSQgq9yHrmRp2Hbldjq
+	bIKEA8ZYYRh4J8TdKvvIBYAtdBqcYbnGEnVvOntuCmDxN1ISoSgbc5oux2cgKE0QrmCpY2SZ6eW
+	A7R1a7RbeTFZBwwG17MvnWJtC7PBMkV8rUHpDf99d
+X-Received: by 2002:a17:902:e884:b0:295:4d50:aaab with SMTP id d9443c01a7336-2986a6d6818mr251418895ad.20.1763555685061;
+        Wed, 19 Nov 2025 04:34:45 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IElQmR+vb3BIy+IdxRUeM8t8JHQTMta5lruKfz0wozs4IIqK61qS4jRjDzA3wJPfwuvuutMIA==
+X-Received: by 2002:a17:902:e884:b0:295:4d50:aaab with SMTP id d9443c01a7336-2986a6d6818mr251418615ad.20.1763555684539;
+        Wed, 19 Nov 2025 04:34:44 -0800 (PST)
 Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2985c2bf158sm207999915ad.91.2025.11.19.04.34.42
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2985c2bf158sm207999915ad.91.2025.11.19.04.34.43
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Nov 2025 04:34:42 -0800 (PST)
+        Wed, 19 Nov 2025 04:34:44 -0800 (PST)
 From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [scarthgap][meta-initramfs][PATCH 1/4] klibc: fix debug pkgs reproducibility
-Date: Wed, 19 Nov 2025 18:04:34 +0530
-Message-ID: <20251119123437.2192091-1-anuj.mittal@oss.qualcomm.com>
+Subject: [scarthgap][meta-oe][PATCH 2/4] fvwm: Fix buildpaths QA Errors
+Date: Wed, 19 Nov 2025 18:04:35 +0530
+Message-ID: <20251119123437.2192091-2-anuj.mittal@oss.qualcomm.com>
 X-Mailer: git-send-email 2.51.2
+In-Reply-To: <20251119123437.2192091-1-anuj.mittal@oss.qualcomm.com>
+References: <20251119123437.2192091-1-anuj.mittal@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE5MDEwMCBTYWx0ZWRfXzgeR7yLfX057
- 1JOuO4pfsDK4nqZ/7BlWhHQuUL30BawF4YvF+BM2SkhWw62r7K35TQUcHjlYc25DBwBN78yJnsF
- m+0au+24PbnqL/AKWNOH0N33I3tSctpFkDzFOZQt+hNzCV85AiP5L4JtqxH9ZtAfawlIh8boT9d
- /7DzSr0fY8iV3GsLwaex3rznm3H/2CsCH/GmjCzggrLy8DlpttlakVtx3MybN5WXMYB8Iu/SRil
- 2RQxTovr8M84UpG39otuCYuTklq30eZ9rlxrLflMozGolkpIrv109RWLFaUV3zAf4S1ETSTGnNr
- 4MwYdaN3jgV/A1CPshC96e5fduzjJcJj8ixIK6Aif15199a/zFxBmarzZ8IsF8F7sP5DNXIqe7D
- GPOigwGHf6OjNmpix7eJBQkSRLAlAg==
-X-Authority-Analysis: v=2.4 cv=ApfjHe9P c=1 sm=1 tr=0 ts=691db965 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE5MDEwMCBTYWx0ZWRfX2tG1pxO0aVn5
+ +j2isOWq25jQTBaIfn4y9dqz/BfkRzV5q6HRegiYRYM3tHhhgulv0sXjGGNvd/CK9KlXyiw9vyg
+ yw6ZJiso78zOSfaXPTLiuZ3McX0OM5Rxm65gEUW6u1JsdGgAuedOXsdlikFtTqQNMNpQILuIN7n
+ vUiOdXGfFrcKV7/YPtt98i0F95zdjqtwfOC1dUD21i+4TkKY3yT9zY+eT1HRSg7IuPdnw4ncMdT
+ zx2SbyfAGelyeZkNqg2UCjdbAGzOf29YuCuEq2lGfDv3Hz/gRXNfKkFJ5p5INHXmDBZzccLhzuz
+ pLYGCe1/X4pGU9uZPl5HM1vxIPYkBUXdrW10U6NdB5gK2wgy9do01QOqlVwR6mWE7OY0Zy6L7bR
+ RrnNW9tkTt1xMxMOGTmVqllLoxVdCw==
+X-Authority-Analysis: v=2.4 cv=S8XUAYsP c=1 sm=1 tr=0 ts=691db966 cx=c_pps
  a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=iGHA9ds3AAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=rGqztzX4EKtxgQP8p-gA:9
- a=uG9DUKGECoFWVXl0Dc02:22 a=nM-MV4yxpKKO9kiQg6Ot:22
-X-Proofpoint-GUID: 9Ho24DlGaKRpuvm_1EwnE-kYWYtFqc3h
-X-Proofpoint-ORIG-GUID: 9Ho24DlGaKRpuvm_1EwnE-kYWYtFqc3h
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=ZkvEkkkm1gKiDClHXsAA:9
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-ORIG-GUID: E6dTnDkdTUUWCSmiXZrXuSOn3P0ulsK3
+X-Proofpoint-GUID: E6dTnDkdTUUWCSmiXZrXuSOn3P0ulsK3
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-11-19_03,2025-11-18_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 spamscore=0 priorityscore=1501
- suspectscore=0 impostorscore=0 phishscore=0 adultscore=0 malwarescore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
+ clxscore=1015 malwarescore=0 adultscore=0 suspectscore=0 bulkscore=0
+ lowpriorityscore=0 priorityscore=1501 impostorscore=0 spamscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
  definitions=main-2511190100
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 12:34:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121901
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121900
 
-From: Yoann Congal <yoann.congal@smile.fr>
+From: Khem Raj <raj.khem@gmail.com>
 
-Debug packages of klibc-based recipe contains reference to TMPDIR and
-fail to build since "buildpaths" is a ERROR_QA: For example, from [0]:
-stdio: ERROR: kexec-tools-klibc-2.0.18+git-r0 do_package_qa: QA Issue: File /usr/sbin/.debug/kexec in package kexec-tools-klibc-dbg contains reference to TMPDIR
-stdio: ERROR: kexecboot-klibc-0.6+git-r0 do_package_qa: QA Issue: File /usr/bin/.debug/kexecboot in package kexecboot-klibc-dbg contains reference to TMPDIR [buildpaths]
-stdio: ERROR: ubi-utils-klibc-2.0.2-r0 do_package_qa: QA Issue: File /usr/sbin/.debug/ubirename in package ubi-utils-klibc-dbg contains reference to TMPDIR
-
-Fix this by adding DEBUG_PREFIX_MAP to the klibc build CFLAGS to rewrite
-these paths in a reproducible way.
-
-[0]: https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/40
-
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 643bc59b0ca271f71c7fef80ed1db4d117248f9b)
+(cherry picked from commit 228c3483e28ad72d1961aba1585fd6b575362ec8)
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 ---
- meta-initramfs/classes/klibc.bbclass | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-initramfs/classes/klibc.bbclass b/meta-initramfs/classes/klibc.bbclass
-index 202d132d94..ca50a3d431 100644
---- a/meta-initramfs/classes/klibc.bbclass
-+++ b/meta-initramfs/classes/klibc.bbclass
-@@ -9,7 +9,7 @@ CC:append:armv7ve = " ${@' -mfloat-abi=${TUNE_CCARGS_MFLOAT}' if (d.getVar('TUNE
- CC:append:armv7a = " ${@' -mfloat-abi=${TUNE_CCARGS_MFLOAT}' if (d.getVar('TUNE_CCARGS_MFLOAT') != '') else ''}"
+diff --git a/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb b/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb
+index 8daf38a0ba..38e22253d9 100644
+--- a/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb
++++ b/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb
+@@ -69,6 +69,8 @@ EXTRA_OECONF = " \
+     --without-xpm-library \
+     ac_cv_func_mkstemp=no \
+     has_safety_mkstemp=yes \
++    ac_cv_path_FVWM_CPP=cpp \
++    ac_cv_path_PERL=perl \
+ "
  
- # klcc uses own optimizations by default. See klcc(1) man file.
--export CFLAGS="${TUNE_CCARGS}"
-+export CFLAGS="${TUNE_CCARGS} ${DEBUG_PREFIX_MAP}"
- export CPPFLAGS="${TUNE_CCARGS}"
- export LDFLAGS="${TUNE_CCARGS}"
+ # show the exact commands in the log file
+@@ -87,6 +89,7 @@ do_install:append() {
+     sed -i -e 's:${STAGING_BINDIR_NATIVE}/perl-native/perl:${USRBINPATH}/env perl:g' ${D}${bindir}/fvwm-*
+     sed -i -e 's:${STAGING_BINDIR_NATIVE}/perl-native/perl:${USRBINPATH}/env perl:g' ${D}${libexecdir}/fvwm/*/Fvwm*
+     sed -i -e 's:${STAGING_BINDIR_NATIVE}/python3-native/python3:${USRBINPATH}/env python3:g' ${D}${bindir}/fvwm-menu-desktop
++    sed -i -e 's:${WORKDIR}::g' ${D}${bindir}/fvwm-bug
+ }
  
+ # the only needed packages (note: locale packages are automatically generated
 -- 
 2.51.2
 
