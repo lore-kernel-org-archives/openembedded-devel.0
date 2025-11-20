@@ -1,392 +1,973 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 25C47CF6497
-	for <webhook@archiver.kernel.org>; Wed, 19 Nov 2025 23:34:12 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.21061.1763595241946815208
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B32A9CF64A1
+	for <webhook@archiver.kernel.org>; Thu, 20 Nov 2025 01:31:52 +0000 (UTC)
+Received: from mail-yx1-f46.google.com (mail-yx1-f46.google.com [74.125.224.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.23058.1763602302290845093
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Nov 2025 15:34:02 -0800
+ Wed, 19 Nov 2025 17:31:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=p8aAcpNH;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=PruyO6y2;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AJNEUTT3314703
-	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 23:34:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=2b/puTj7wx92s4kM6WfYOI
-	Zc6BMdp9BCXmciP3HrqGQ=; b=p8aAcpNHXYvJdmSpqUxeEboLpNTj1cs0yYybl7
-	5ou8HFn3HUYOxeCMBVLUdZnZQaD5jCN9XaYROOWEeKCO2PJ3ylvF+SQWGXgbcFJ7
-	+sEMAz3SRoIiUQ/PMJ0aDiOu9HRgckoYS0+0zld1rhCiirz4ZLF5laFvlzVEVuJd
-	mbxzYwGtdZVqBbugJq1cKT+6LVU1DqYPRGGBrZb4jWFoLShIxTPSYGm+vlFu6Pra
-	tto3wXU+cGNDIQB955H6r1WCBmnxOs1Q6riS7lfHiPb5cyWVfMXKh9bP/ZbQInz+
-	6qI11frjs/BDGNcGYY6cgVSy5D2h2Mx2e+j8LZOvHpaDFrYA==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ah6fgb9xk-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 23:34:00 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-7b90740249dso515879b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 15:34:00 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OlQS3b03;
+ spf=pass (domain: gmail.com, ip: 74.125.224.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f46.google.com with SMTP id 956f58d0204a3-6420c0cf4abso267096d50.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 17:31:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1763595240; x=1764200040; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=2b/puTj7wx92s4kM6WfYOIZc6BMdp9BCXmciP3HrqGQ=;
-        b=PruyO6y20coycy/C8j7RVHPZig5pvAOMxIf9VZsR7hsECj9A8AQYR1lZ81E1/cp86b
-         j/AHLhh4LTtZL3wrz7wS10dfLb4YIpYRLxY9bw0LwjijS9xgRiXPRyjjK1rDggLde/wj
-         lFy8JrD7XfHcPziSvXQAzM1nGEKQVr5Gu9CP2/LuZl3JwCqZLiFIFhznVpuwo+NO0obB
-         g7Z9pT0C2FlyzqS/sa9Epkec7ibnUw742DmWpAbupnd3ZxhSFtxKeNIe55vt0CV/TYoa
-         jiNVuJgB5P/dkid6wnlHPjFtuLojAzAi51QAHr1S4w+Le3EXyqEio8Jl3TUCp7kkYVmS
-         YJlg==
+        d=gmail.com; s=20230601; t=1763602301; x=1764207101; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=QDK2R7VCqONRQXYEJWwW+Uoap7XTgAEaCDJJ01Os3tE=;
+        b=OlQS3b03HtYOrcasutlf6xBm/DBDiE6FqQ9LzbzCImuSdPSzeVfqoepmMwOkf1PRsB
+         sb9IooIXD/U5r74uz66sm/MQYfVU9eXDez4dT9aK24CO4LJqmEgdAtZMSv4o2ydtZamf
+         ALoAX7/iffcqlsOvVqkVYecU4uiGU2J3HeGo5KbqQ7kY1qRDfCaM5VkLibdK27C7OWkD
+         j6gxM84kUVlUpXuy02cVudmoxsCpIwo08xOt4w/dgR3/r+FhhkwkKVHtg0wrD/ferk5g
+         uwKQo+/7ajMP2/aFsQgB2EWlwUjNc/5cSCY10AjiFK8oO+gS+uXezFwBd3DYUj6bM6fx
+         Wu0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763595240; x=1764200040;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=2b/puTj7wx92s4kM6WfYOIZc6BMdp9BCXmciP3HrqGQ=;
-        b=YIxOgEKngejE48XMxk8diGJg6RFp89mrx01X5vWX8qyEpDMo6QVR47JZHbmod3oR/c
-         tQtDg3Zd+Zy4TV48YZIX5rrPGb+vcGknMx1ErC7IKx5cthGYvJsEMaAIEQOmw/jOESuT
-         jNNxUoqsvM63T52UaDxJ6K3p5L/gpmi68r65VwJNDJ3ws7yW5gjFqSLk0sMtwkGykNGh
-         FZU0++nWDAcJwrDrC1miha2c29WsYdQNPZDYbt0+akl+fFy4kaZ/gh4n1DfTVdByq6nh
-         DpPLmQfZzmzaOTKwDQBRy/8zBnYyV9pwbFjtQsWD5NWoFrhdH6VdloF1Wax6dJhFnZ5R
-         zpcg==
-X-Forwarded-Encrypted: i=1; AJvYcCWhSYrFFKz+g+bpwOPe4XZtIyOx2q2tWDAnu5JVTr1/MlXtrCX23FnX+aj1IaJLXQfg+5pwgKabX17XROsO4WUl4cU=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwGeAdIKjzWd2ALBmTgJ1sXptGC9BXj3/VHGa96eFe9ssn/pSB6
-	d407p7ShfR2HkOqm605maO3X4ZOXb5TrFChSAAs0VOmxoGG8ed1O/Rm5kqlYDjSEXcPIzHOoZ0Q
-	Ukm6n090ha7tbWddo8XZ9ELJg3BNlJMf/fefEVT8G1l2A2CNF0t8iRq5BySWeaoFRiwe9+MSAvy
-	1HYI74GdVF
-X-Gm-Gg: ASbGncv1wC2GUZWNju7kM9EbXF5NuOcIZD77KQiRvrp/YECQYdA9L0LnttCgOShqndz
-	Ockrs3Hxe89ipCEKA1BIyU0STmQPA+9H1hcA+I1EoQ+fvCInlKdvAiMoZAa+WZTasxPq4C61Lcx
-	SyhKijv0kkHWhIf6QQNq5+MnObrfzmHKn8mZQW44ZOUyFecAe1R5SN8mN4/sfglX0sxw65u277q
-	OsRsEG3trBaMENfnbTaqgSn6jWvOxk6noauVvpa5vloMFb+U9rux4uLEB/kZtN7fId759j8v0en
-	hr4Y1NWhh1yJ1wnDH/p6OsZaf2H+C+wI8J32s/oOjur6m88Ehc59VXv1Oz3iNHqd4wxtKaVSMLl
-	m0ESZXz4mNOoXwaMP7K0Ne51aqM6bgBc9QLL7JWaD
-X-Received: by 2002:a05:6a20:1585:b0:34f:7454:b977 with SMTP id adf61e73a8af0-3613e9705b3mr345798637.48.1763595239492;
-        Wed, 19 Nov 2025 15:33:59 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE/Pw1tthT8QxVPNeNVAoaI9yGeMlngF7RJqrA8McaujM/cUOsaUYOX4Rcu5p9EcAYIT++29w==
-X-Received: by 2002:a05:6a20:1585:b0:34f:7454:b977 with SMTP id adf61e73a8af0-3613e9705b3mr345761637.48.1763595238901;
-        Wed, 19 Nov 2025 15:33:58 -0800 (PST)
-Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7c3f155f6e7sm475166b3a.63.2025.11.19.15.33.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Nov 2025 15:33:58 -0800 (PST)
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-To: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org
-Subject: [PATCH 00/74] Scarthgap pull request
-Date: Thu, 20 Nov 2025 05:03:50 +0530
-Message-ID: <cover.1763595040.git.anuj.mittal@oss.qualcomm.com>
-X-Mailer: git-send-email 2.51.2
+        d=1e100.net; s=20230601; t=1763602301; x=1764207101;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=QDK2R7VCqONRQXYEJWwW+Uoap7XTgAEaCDJJ01Os3tE=;
+        b=EXJSFTDzeba9/mBXajxsfMUAP3QXLM1xmYyLT9gb34oSpon+cUs8toJKE0jWXPpOJC
+         aML1Tj9WcbcECA9dqp5QCqEt8NC8JVN+lNyPntP575qmtjUPPZV9a+8QmLDDOgxHs17z
+         LkS3wdrUgBg+Kof6WPN1WWqUfhBaThLmBHY0QfrSNuz8X4Cwowg9f+qnDE/9eF0cZ0Ob
+         5z5k2dEqQPqsxudRazBS+Z/B18JprZKaCBPdvPlkXFqHM3RTiX8OuF33YngOZpq+BdWX
+         lyJUKReZMdBTP2QF7Y9UJjkN5MCsrhKc6kDxjUqVciNALeuyvKfzWnMVokossWJuK09z
+         wC/g==
+X-Gm-Message-State: AOJu0YzFp/hSNZEhS33uOVeCJhNHIGugtMlePdtKguuRzXhRGjL78Jfs
+	EiSFznLrw8YWNVg8lrzd3vPvYjE8rQaPfyUYKp0YiD5r3D51SYLzBEGhtfj+LCuh1p6kUB2MLvo
+	2/G1Rn7Ws9HCVyCdq0MwX6YjrZ0bA6ok=
+X-Gm-Gg: ASbGncv+1xpK9TSpEds9F/kfZKPZv9E8oNrvPs0UEuGOxSzafUjNxKzs2PBlu/Mrknl
+	VrN0uasHplrzMiOCs+4GA0GZnAstIh7CW1HyaDROZY3ketmYC1Rq3yZzyG6U4oQy+w3OQgtXyG4
+	ooGDzDAWqm4zOxIJW9jEg+JndMkdfK81GbN22enmu667WLwukNpj78FWGo4nPRG0DFgCp0dqH1z
+	3pPduia+IdQYXy3wx3O3MWhbDgx2wBL9XgHwhApuA7wiXc2K2IjMy1AA3WMsY/x04JtDlbOY0uN
+	FVSKGXsXq89mpJz9c3Ra+cDIG1lZj2MbKbd3VgVgkU5cRsKZhWYXukOFO3wD9qbF79sEXY5eq+0
+	dz9N/7CN7DUxvAHaNm/2uPZPxD/vDWhRqE7FSR2l8QUq44H6hXjRiOJQ/
+X-Google-Smtp-Source: AGHT+IG4Y26Wa9Zc4NTcbFjwi/AfSAsITHCSo0/ENhLxzjZ9LaNmTWjcfKuov0L8Pkwih8eIl0IqoUnpqYGOCBQcZgU=
+X-Received: by 2002:a05:690e:1345:b0:63f:ab9d:11f3 with SMTP id
+ 956f58d0204a3-642f7d21ee2mr850296d50.33.1763602300975; Wed, 19 Nov 2025
+ 17:31:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: IZVSBwiyDjS7bRTnMXVn4k31sP7pr2d_
-X-Authority-Analysis: v=2.4 cv=ZKHaWH7b c=1 sm=1 tr=0 ts=691e53e8 cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=iGHA9ds3AAAA:8 a=NEAV23lmAAAA:8
- a=l8F31PViw6Xrj59VTakA:9 a=QEXdDO2ut3YA:10 a=zc0IvFSfCIW2DFIPzwfm:22
- a=nM-MV4yxpKKO9kiQg6Ot:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTE5MDE4NCBTYWx0ZWRfX3K2ccCMNRa4I
- CurQacuQNwL3Eauu8EdklI+s0agN4QiOahVDaE03ICsBCf/mzMuids5cl6MKeewe/MXf7crBD6t
- O9ixk1n3e2hdvE4ts1dp22Q7tE44pKcRhMF6z/tvNrZjYn8MdiOmbcarOYzDnBDCaj6JIYPalIr
- jn0vGs7fC8/uR97pd+HmgxS6lzF3UKQjU02wkzM/GeshXoG8gDaslTaAc4Qrhbquo/P+mgkQK3m
- 8cUYRNdSaMymFB4ziYPC2D/oux9UCKYO60A/pfVddQLyDKeD8ftSrp4VmqxE0pKc/pPCoEVvR1a
- /3pwFoVEjORguGaiTZDLnx9kvmEnwI3jOtWenc4r61eOk1xJ4hnEu8YmxRaFwKE0q/Qg3hJOh+s
- fLIT3gtxOS1VB/cOJmMwNiemkt5gPg==
-X-Proofpoint-ORIG-GUID: IZVSBwiyDjS7bRTnMXVn4k31sP7pr2d_
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-19_07,2025-11-18_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 priorityscore=1501 impostorscore=0 spamscore=0
- lowpriorityscore=0 malwarescore=0 adultscore=0 bulkscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511190184
+References: <cover.1763595040.git.anuj.mittal@oss.qualcomm.com>
+In-Reply-To: <cover.1763595040.git.anuj.mittal@oss.qualcomm.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 19 Nov 2025 17:31:14 -0800
+X-Gm-Features: AWmQ_bm-Mv1LKFMc4Nks_AUG2-gFmsIOhbQdHTsOG3IFlESSulwGVyaAz4haVr0
+Message-ID: <CAMKF1sr7qxW_ruK5RTB+pH3W_v2_nucBEBF1fwbQ7aWEE8F76A@mail.gmail.com>
+Subject: Re: [PATCH 00/74] Scarthgap pull request
+To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000acc02a0643fca855"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 23:34:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121918
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Nov 2025 01:31:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121919
 
-Please merge these changes in scarthgap. Tested on AB and locally.
+--000000000000acc02a0643fca855
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1098
+merged now thanks Anuj
 
-The following changes since commit f1f248262d662315159ee96c604f97415d1dbe6a:
+On Wed, Nov 19, 2025 at 3:34=E2=80=AFPM Anuj Mittal <anuj.mittal@oss.qualco=
+mm.com>
+wrote:
 
-  cockpit: remove deprecated packages (2025-11-12 11:38:29 +0530)
+> Please merge these changes in scarthgap. Tested on AB and locally.
+>
+> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1098
+>
+> The following changes since commit
+> f1f248262d662315159ee96c604f97415d1dbe6a:
+>
+>   cockpit: remove deprecated packages (2025-11-12 11:38:29 +0530)
+>
+> are available in the Git repository at:
+>
+>   https://github.com/anujm1/meta-openembedded anujm/scarthgap
+>   https://github.com/anujm1/meta-openembedded/tree/anujm/scarthgap
+>
+> Ankur Tyagi (10):
+>   tbb: upgrade 2021.11.0 -> 2021.12.0
+>   jasper: upgrade 4.1.1 -> 4.1.2
+>   libspiro: upgrade 20221101 -> 20230902
+>   redis-plus-plus: upgrade 1.3.11 -> 1.3.12
+>   redis: upgrade 7.2.11 -> 7.2.12
+>   redis: upgrade 6.2.20 -> 6.2.21
+>   botan: patch CVE-2024-34703
+>   botan: patch CVE-2024-50382 and CVE-2024-50383
+>   freerdp3: patch CVE-2025-4478
+>   hdf5: patch CVE-2025-2926
+>
+> Anuj Mittal (1):
+>   remmina: add DEPENDS on curl
+>
+> Armin Kuster (1):
+>   audit: fix build when systemd is enabled.
+>
+> Bartosz Golaszewski (2):
+>   libgpiod: update to v1.6.5
+>   libgpiod: update v2.1.2 -> v2.1.3
+>
+> Ethan Roderick (1):
+>   openldap: make license match spdx identifier
+>
+> Gyorgy Sarvari (17):
+>   audiofile: patch CVE-2019-13147 and CVE-2022-24599
+>   audiofile: patch CVE-2018-13440 and CVE-2018-17059
+>   linuxptp: ignore CVE-2024-42861
+>   rsyslog: set status for CVE-2015-3243
+>   apache2: ignore CVE-2025-3891
+>   webmin: patch CVE-2017-15644, CVE-2017-15645 and CVE-2017-15646
+>   webmin: patch CVE-2017-17089
+>   webmin: patch CVE-2019-15642
+>   webmin: patch CVE-2022-0824
+>   webmin: patch CVE-2022-0829
+>   libwmf: add proper CVE tag to patch
+>   libwmf: add missing CVE tag to patch
+>   libwmf: patch CVE-2015-0848 and CVE-2015-4588
+>   libwmf: patch CVE-2015-4695
+>   libwmf: patch CVE-2015-4696
+>   libwmf: patch CVE-2016-9011
+>   iptraf-ng: patch CVE-2024-52949
+>
+> J. S. (1):
+>   libhtml-tree-perl: fix QA Issue: TMPDIR [buildpaths]
+>
+> Jason Schonberg (3):
+>   xrdp: upgrade 0.9.19 -> 0.9.20
+>   usbids: upgrade 2023.01.16 -> 2025.04.01
+>   usbids: upgrade 2025.04.01 -> 2025.09.15
+>
+> Jiaying Song (1):
+>   minifi-cpp: fix python shebang in minifi-python
+>
+> Khem Raj (3):
+>   libforms: Remove buildpaths from fd2ps and fdesign scripts
+>   libwmf: Fix buildpaths QA Errors in libwmf-config
+>   fvwm: Fix buildpaths QA Errors
+>
+> Markus Volk (2):
+>   xdg-desktop-portal: update 1.18.1 -> 1.18.4
+>   flatpak;xdg-desktop-portal: add missing runtime dependency on
+>     fuse3-utils
+>
+> Michael Wyraz (3):
+>   python3-passlib: add native support
+>   python3-transitions: add native support
+>   python3-passlib: add python3-misc as a depencency
+>
+> Ninette Adhikari (1):
+>   redis: Update status for CVE-2022-3734
+>
+> Peter Marko (4):
+>   audiofile: mark CVE-2020-18781 as patched
+>   proftpd: set status of CVE-2001-0027
+>   rtmpdump: mark CVE-2015-8270, CVE-2015-8271 and CVE-2015-8272 as fixed
+>   squid: patch CVE-2025-62168
+>
+> Shinji Matsunaga (1):
+>   audit: Fix CVE_PRODUCT
+>
+> Wang Mingyu (16):
+>   evtest: upgrade 1.35 -> 1.36
+>   xmlsec1: upgrade 1.3.4 -> 1.3.5
+>   openldap: upgrade 2.6.7 -> 2.6.8
+>   openldap: upgrade 2.6.9 -> 2.6.10
+>   mcelog: upgrade 198 -> 199
+>   mcelog: upgrade 199 -> 200
+>   libiodbc: upgrade 3.52.15 -> 3.52.16
+>   libbytesize: upgrade 2.10 -> 2.11
+>   libbpf: upgrade 1.4.0 -> 1.4.2
+>   libbpf: upgrade 1.4.2 -> 1.4.3
+>   libbpf: upgrade 1.4.3 -> 1.4.5
+>   libbpf: upgrade 1.4.5 -> 1.4.6
+>   openjpeg: upgrade 2.5.3 -> 2.5.4
+>   feh: upgrade 3.10.2 -> 3.10.3
+>   cryptsetup: upgrade 2.7.2 -> 2.7.3
+>   cryptsetup: upgrade 2.7.3 -> 2.7.4
+>
+> Yi Zhao (4):
+>   openldap: upgrade 2.6.8 -> 2.6.9
+>   audit: upgrade 4.0.1 -> 4.0.2
+>   libbpf: upgrade 1.4.6 -> 1.4.7
+>   cryptsetup: upgrade 2.7.4 -> 2.7.5
+>
+> Yoann Congal (2):
+>   klibc: fix debug pkgs reproducibility
+>   grilo: fix buildpaths QA error
+>
+> alperak (1):
+>   pcp: Fix contains reference to TMPDIR [buildpaths] warnings
+>
+>  .../recipes-gnome/grilo/grilo_0.3.16.bb       |  11 +-
+>  meta-initramfs/classes/klibc.bbclass          |   2 +-
+>  .../rtmpdump/rtmpdump_2.4.bb                  |   4 +
+>  .../recipes-daemons/proftpd/proftpd_1.3.7f.bb |   2 +
+>  .../squid/files/CVE-2025-62168.patch          | 211 +++++++++++++++++
+>  .../recipes-daemons/squid/squid_6.14.bb       |   1 +
+>  meta-oe/licenses/{OpenLDAP =3D> OLDAP-2.8}      |   0
+>  .../linuxptp/linuxptp_4.1.bb                  |   2 +
+>  .../botan/botan/CVE-2024-34703.patch          |  38 +++
+>  .../CVE-2024-50382-and-CVE-2024-50383.patch   |  66 ++++++
+>  meta-oe/recipes-crypto/botan/botan_3.2.0.bb   |   5 +-
+>  ...ryptsetup_2.7.2.bb =3D> cryptsetup_2.7.5.bb} |   2 +-
+>  .../iptraf/iptraf-ng/CVE-2024-52949.patch     | 218 ++++++++++++++++++
+>  .../iptraf/iptraf-ng_1.2.1.bb                 |   1 +
+>  .../flatpak/flatpak_1.15.8.bb                 |   1 +
+>  .../libwmf/CVE-2015-0848-CVE-2015-4588.patch  | 135 +++++++++++
+>  .../libwmf/libwmf/CVE-2015-4695.patch         |  70 ++++++
+>  .../libwmf/libwmf/CVE-2015-4696.patch         |  37 +++
+>  .../libwmf/libwmf/CVE-2016-9011.patch         |  50 ++++
+>  .../libwmf/libwmf-0.2.8.4-intoverflow.patch   |   2 +
+>  .../libwmf/libwmf-0.2.8.4-useafterfree.patch  |   2 +
+>  .../recipes-extended/libwmf/libwmf_0.2.8.4.bb |  10 +-
+>  .../minifi-cpp/minifi-cpp_0.15.0.bb           |   4 +
+>  ...us_1.3.11.bb =3D> redis-plus-plus_1.3.12.bb} |   2 +-
+>  ...-hiredis-use-default-CC-if-it-is-set.patch |   6 +-
+>  ...ile-to-use-environment-build-setting.patch |   2 +-
+>  ...003-hack-to-force-use-of-libc-malloc.patch |  10 +-
+>  .../0004-src-Do-not-reset-FINAL_LIBS.patch    |  10 +-
+>  ...RCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch |   2 +-
+>  ...006-Define-correct-gregs-for-RISCV32.patch |   2 +-
+>  .../init-redis-server                         |   0
+>  .../{redis-7.2.11 =3D> redis-7.2.12}/redis.conf |   0
+>  .../redis.service                             |   0
+>  .../{redis_6.2.20.bb =3D> redis_6.2.21.bb}      |   2 +-
+>  .../{redis_7.2.11.bb =3D> redis_7.2.12.bb}      |   5 +-
+>  .../rsyslog/rsyslog/rsyslog.conf              |   3 +-
+>  .../rsyslog/rsyslog_8.2402.0.bb               |   2 +
+>  .../feh/{feh_3.10.2.bb =3D> feh_3.10.3.bb}      |   2 +-
+>  ...spiro_20221101.bb =3D> libspiro_20240902.bb} |   2 +-
+>  meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb   |   3 +
+>  .../{jasper_4.1.1.bb =3D> jasper_4.1.2.bb}      |   2 +-
+>  .../libforms/libforms_1.2.5pre1.bb            |   5 +
+>  .../openjpeg/openjpeg/CVE-2025-54874.patch    |  44 ----
+>  .../{openjpeg_2.5.3.bb =3D> openjpeg_2.5.4.bb}  |   3 +-
+>  .../{libbpf_1.4.0.bb =3D> libbpf_1.4.7.bb}      |   4 +-
+>  .../audiofile/audiofile_0.3.6.bb              |   4 +
+>  ...ays-check-the-number-of-coefficients.patch |   1 +
+>  .../audiofile/files/CVE-2018-13440.patch      |  36 +++
+>  .../audiofile/files/CVE-2018-17059.patch      |  35 +++
+>  .../audiofile/files/CVE-2019-13147.patch      |  31 +++
+>  .../audiofile/files/CVE-2022-24599.patch      |  50 ++++
+>  ...ute_malloc__-with-__attribute__-__ma.patch |  49 ----
+>  .../audit/{audit_4.0.1.bb =3D> audit_4.0.2.bb}  |  12 +-
+>  .../freerdp/freerdp3/CVE-2025-4478.patch      |  60 +++++
+>  .../recipes-support/freerdp/freerdp3_3.4.0.bb |   1 +
+>  .../hdf5/files/CVE-2025-2926.patch            |  32 +++
+>  meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |   1 +
+>  ...ibbytesize_2.10.bb =3D> libbytesize_2.11.bb} |   2 +-
+>  ...ts-set-direction-when-reconfiguring-.patch |  38 ---
+>  .../{libgpiod_1.6.4.bb =3D> libgpiod_1.6.5.bb}  |   2 +-
+>  .../{libgpiod_2.1.2.bb =3D> libgpiod_2.1.3.bb}  |   4 +-
+>  ...ibiodbc_3.52.15.bb =3D> libiodbc_3.52.16.bb} |   4 +-
+>  .../mcelog/{mcelog_198.bb =3D> mcelog_200.bb}   |  11 +-
+>  .../{openldap_2.6.7.bb =3D> openldap_2.6.10.bb} |  10 +-
+>  meta-oe/recipes-support/pcp/pcp_6.0.5.bb      |   4 +
+>  .../recipes-support/remmina/remmina_1.4.34.bb |   1 +
+>  ...suppress-new-GCC-12-13-warnings-1192.patch |  57 -----
+>  ....cmake-remove-cross-compiation-check.patch |  33 ---
+>  .../{tbb_2021.11.0.bb =3D> tbb_2021.12.0.bb}    |   8 +-
+>  ...ids_2023.01.16.bb =3D> usbids_2025.09.15.bb} |   3 +-
+>  ...1.18.1.bb =3D> xdg-desktop-portal_1.18.4.bb} |   6 +-
+>  .../0001-nss-nspr-fix-for-multilib.patch      |   7 +-
+>  .../xmlsec1/change-finding-path-of-nss.patch  |   7 +-
+>  .../{xmlsec1_1.3.4.bb =3D> xmlsec1_1.3.5.bb}    |   2 +-
+>  ...guished_name-in-etc-xrdp-openssl.con.patch |   7 +-
+>  .../xrdp/0001-Fix-the-compile-error.patch     |  12 +-
+>  ...1-arch-Define-NO_NEED_ALIGN-on-ppc64.patch |   9 +-
+>  ...001-mark-count-with-unused-attribute.patch |   9 +-
+>  .../xrdp/{xrdp_0.9.19.bb =3D> xrdp_0.9.20.bb}   |   2 +-
+>  ...ld-on-32bit-arches-with-64bit-time_t.patch |   7 +-
+>  .../evtest/{evtest_1.35.bb =3D> evtest_1.36.bb} |   2 +-
+>  .../libhtml/libhtml-tree-perl_5.03.bb         |   7 +
+>  .../python/python3-passlib_1.7.4.bb           |   3 +
+>  .../python/python3-transitions_0.9.0.bb       |   2 +
+>  .../recipes-httpd/apache2/apache2_2.4.65.bb   |   1 +
+>  ...issions-check-when-saving-allowed-cr.patch |  25 ++
+>  ...e-potentially-malicious-HTTP-headers.patch |  53 +++++
+>  ...0001-Foreign-module-may-need-a-check.patch |  27 +++
+>  ...0001-HTML-escape-command-description.patch |  29 +++
+>  ...es-cannot-contact-special-characters.patch |  26 +++
+>  .../recipes-webadmin/webmin/webmin_1.850.bb   |   7 +-
+>  91 files changed, 1403 insertions(+), 321 deletions(-)
+>  create mode 100644
+> meta-networking/recipes-daemons/squid/files/CVE-2025-62168.patch
+>  rename meta-oe/licenses/{OpenLDAP =3D> OLDAP-2.8} (100%)
+>  create mode 100644 meta-oe/recipes-crypto/botan/botan/CVE-2024-34703.pat=
+ch
+>  create mode 100644
+> meta-oe/recipes-crypto/botan/botan/CVE-2024-50382-and-CVE-2024-50383.patc=
+h
+>  rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.7.2.bb =3D>
+> cryptsetup_2.7.5.bb} (98%)
+>  create mode 100644
+> meta-oe/recipes-devtools/iptraf/iptraf-ng/CVE-2024-52949.patch
+>  create mode 100644
+> meta-oe/recipes-extended/libwmf/libwmf/CVE-2015-0848-CVE-2015-4588.patch
+>  create mode 100644
+> meta-oe/recipes-extended/libwmf/libwmf/CVE-2015-4695.patch
+>  create mode 100644
+> meta-oe/recipes-extended/libwmf/libwmf/CVE-2015-4696.patch
+>  create mode 100644
+> meta-oe/recipes-extended/libwmf/libwmf/CVE-2016-9011.patch
+>  rename meta-oe/recipes-extended/redis-plus-plus/{
+> redis-plus-plus_1.3.11.bb =3D> redis-plus-plus_1.3.12.bb} (95%)
+>  rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D>
+> redis-7.2.12}/0001-hiredis-use-default-CC-if-it-is-set.patch (89%)
+>  rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D>
+> redis-7.2.12}/0002-lua-update-Makefile-to-use-environment-build-setting.p=
+atch
+> (97%)
+>  rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D>
+> redis-7.2.12}/0003-hack-to-force-use-of-libc-malloc.patch (81%)
+>  rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D>
+> redis-7.2.12}/0004-src-Do-not-reset-FINAL_LIBS.patch (74%)
+>  rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D>
+> redis-7.2.12}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.pa=
+tch
+> (92%)
+>  rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D>
+> redis-7.2.12}/0006-Define-correct-gregs-for-RISCV32.patch (97%)
+>  rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D>
+> redis-7.2.12}/init-redis-server (100%)
+>  rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D>
+> redis-7.2.12}/redis.conf (100%)
+>  rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D>
+> redis-7.2.12}/redis.service (100%)
+>  rename meta-oe/recipes-extended/redis/{redis_6.2.20.bb =3D> redis_6.2.21=
+.bb}
+> (96%)
+>  rename meta-oe/recipes-extended/redis/{redis_7.2.11.bb =3D> redis_7.2.12=
+.bb}
+> (93%)
+>  rename meta-oe/recipes-graphics/feh/{feh_3.10.2.bb =3D> feh_3.10.3.bb}
+> (88%)
+>  rename meta-oe/recipes-graphics/fontforge/{libspiro_20221101.bb =3D>
+> libspiro_20240902.bb} (85%)
+>  rename meta-oe/recipes-graphics/jasper/{jasper_4.1.1.bb =3D>
+> jasper_4.1.2.bb} (95%)
+>  delete mode 100644
+> meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2025-54874.patch
+>  rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.5.3.bb =3D>
+> openjpeg_2.5.4.bb} (86%)
+>  rename meta-oe/recipes-kernel/libbpf/{libbpf_1.4.0.bb =3D> libbpf_1.4.7.=
+bb}
+> (92%)
+>  create mode 100644
+> meta-oe/recipes-multimedia/audiofile/files/CVE-2018-13440.patch
+>  create mode 100644
+> meta-oe/recipes-multimedia/audiofile/files/CVE-2018-17059.patch
+>  create mode 100644
+> meta-oe/recipes-multimedia/audiofile/files/CVE-2019-13147.patch
+>  create mode 100644
+> meta-oe/recipes-multimedia/audiofile/files/CVE-2022-24599.patch
+>  delete mode 100644
+> meta-oe/recipes-security/audit/audit/0001-Replace-__attribute_malloc__-wi=
+th-__attribute__-__ma.patch
+>  rename meta-oe/recipes-security/audit/{audit_4.0.1.bb =3D> audit_4.0.2.b=
+b}
+> (90%)
+>  create mode 100644
+> meta-oe/recipes-support/freerdp/freerdp3/CVE-2025-4478.patch
+>  create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2926.patc=
+h
+>  rename meta-oe/recipes-support/libbytesize/{libbytesize_2.10.bb =3D>
+> libbytesize_2.11.bb} (93%)
+>  delete mode 100644
+> meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-set=
+-direction-when-reconfiguring-.patch
+>  rename meta-oe/recipes-support/libgpiod/{libgpiod_1.6.4.bb =3D>
+> libgpiod_1.6.5.bb} (94%)
+>  rename meta-oe/recipes-support/libgpiod/{libgpiod_2.1.2.bb =3D>
+> libgpiod_2.1.3.bb} (87%)
+>  rename meta-oe/recipes-support/libiodbc/{libiodbc_3.52.15.bb =3D>
+> libiodbc_3.52.16.bb} (82%)
+>  rename meta-oe/recipes-support/mcelog/{mcelog_198.bb =3D> mcelog_200.bb}
+> (79%)
+>  rename meta-oe/recipes-support/openldap/{openldap_2.6.7.bb =3D>
+> openldap_2.6.10.bb} (96%)
+>  delete mode 100644
+> meta-oe/recipes-support/tbb/tbb/0001-Fix-suppress-new-GCC-12-13-warnings-=
+1192.patch
+>  delete mode 100644
+> meta-oe/recipes-support/tbb/tbb/0001-hwloc_detection.cmake-remove-cross-c=
+ompiation-check.patch
+>  rename meta-oe/recipes-support/tbb/{tbb_2021.11.0.bb =3D> tbb_2021.12.0.=
+bb}
+> (92%)
+>  rename meta-oe/recipes-support/usbids/{usbids_2023.01.16.bb =3D>
+> usbids_2025.09.15.bb} (84%)
+>  rename meta-oe/recipes-support/xdg-desktop-portal/{
+> xdg-desktop-portal_1.18.1.bb =3D> xdg-desktop-portal_1.18.4.bb} (88%)
+>  rename meta-oe/recipes-support/xmlsec1/{xmlsec1_1.3.4.bb =3D>
+> xmlsec1_1.3.5.bb} (96%)
+>  rename meta-oe/recipes-support/xrdp/{xrdp_0.9.19.bb =3D> xrdp_0.9.20.bb}
+> (97%)
+>  rename meta-oe/recipes-test/evtest/{evtest_1.35.bb =3D> evtest_1.36.bb}
+> (90%)
+>  create mode 100644
+> meta-webserver/recipes-webadmin/webmin/files/0001-Add-missing-permissions=
+-check-when-saving-allowed-cr.patch
+>  create mode 100644
+> meta-webserver/recipes-webadmin/webmin/files/0001-Escape-potentially-mali=
+cious-HTTP-headers.patch
+>  create mode 100644
+> meta-webserver/recipes-webadmin/webmin/files/0001-Foreign-module-may-need=
+-a-check.patch
+>  create mode 100644
+> meta-webserver/recipes-webadmin/webmin/files/0001-HTML-escape-command-des=
+cription.patch
+>  create mode 100644
+> meta-webserver/recipes-webadmin/webmin/files/0001-Object-names-cannot-con=
+tact-special-characters.patch
+>
+> --
+> 2.51.2
+>
+>
 
-are available in the Git repository at:
+--000000000000acc02a0643fca855
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-  https://github.com/anujm1/meta-openembedded anujm/scarthgap
-  https://github.com/anujm1/meta-openembedded/tree/anujm/scarthgap
+<div dir=3D"ltr">merged now thanks Anuj</div><br><div class=3D"gmail_quote =
+gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Nov 19=
+, 2025 at 3:34=E2=80=AFPM Anuj Mittal &lt;<a href=3D"mailto:anuj.mittal@oss=
+.qualcomm.com">anuj.mittal@oss.qualcomm.com</a>&gt; wrote:<br></div><blockq=
+uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
+x solid rgb(204,204,204);padding-left:1ex">Please merge these changes in sc=
+arthgap. Tested on AB and locally.<br>
+<br>
+<a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/buil=
+ds/1098" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproj=
+ect.org/valkyrie/#/builders/81/builds/1098</a><br>
+<br>
+The following changes since commit f1f248262d662315159ee96c604f97415d1dbe6a=
+:<br>
+<br>
+=C2=A0 cockpit: remove deprecated packages (2025-11-12 11:38:29 +0530)<br>
+<br>
+are available in the Git repository at:<br>
+<br>
+=C2=A0 <a href=3D"https://github.com/anujm1/meta-openembedded" rel=3D"noref=
+errer" target=3D"_blank">https://github.com/anujm1/meta-openembedded</a> an=
+ujm/scarthgap<br>
+=C2=A0 <a href=3D"https://github.com/anujm1/meta-openembedded/tree/anujm/sc=
+arthgap" rel=3D"noreferrer" target=3D"_blank">https://github.com/anujm1/met=
+a-openembedded/tree/anujm/scarthgap</a><br>
+<br>
+Ankur Tyagi (10):<br>
+=C2=A0 tbb: upgrade 2021.11.0 -&gt; 2021.12.0<br>
+=C2=A0 jasper: upgrade 4.1.1 -&gt; 4.1.2<br>
+=C2=A0 libspiro: upgrade 20221101 -&gt; 20230902<br>
+=C2=A0 redis-plus-plus: upgrade 1.3.11 -&gt; 1.3.12<br>
+=C2=A0 redis: upgrade 7.2.11 -&gt; 7.2.12<br>
+=C2=A0 redis: upgrade 6.2.20 -&gt; 6.2.21<br>
+=C2=A0 botan: patch CVE-2024-34703<br>
+=C2=A0 botan: patch CVE-2024-50382 and CVE-2024-50383<br>
+=C2=A0 freerdp3: patch CVE-2025-4478<br>
+=C2=A0 hdf5: patch CVE-2025-2926<br>
+<br>
+Anuj Mittal (1):<br>
+=C2=A0 remmina: add DEPENDS on curl<br>
+<br>
+Armin Kuster (1):<br>
+=C2=A0 audit: fix build when systemd is enabled.<br>
+<br>
+Bartosz Golaszewski (2):<br>
+=C2=A0 libgpiod: update to v1.6.5<br>
+=C2=A0 libgpiod: update v2.1.2 -&gt; v2.1.3<br>
+<br>
+Ethan Roderick (1):<br>
+=C2=A0 openldap: make license match spdx identifier<br>
+<br>
+Gyorgy Sarvari (17):<br>
+=C2=A0 audiofile: patch CVE-2019-13147 and CVE-2022-24599<br>
+=C2=A0 audiofile: patch CVE-2018-13440 and CVE-2018-17059<br>
+=C2=A0 linuxptp: ignore CVE-2024-42861<br>
+=C2=A0 rsyslog: set status for CVE-2015-3243<br>
+=C2=A0 apache2: ignore CVE-2025-3891<br>
+=C2=A0 webmin: patch CVE-2017-15644, CVE-2017-15645 and CVE-2017-15646<br>
+=C2=A0 webmin: patch CVE-2017-17089<br>
+=C2=A0 webmin: patch CVE-2019-15642<br>
+=C2=A0 webmin: patch CVE-2022-0824<br>
+=C2=A0 webmin: patch CVE-2022-0829<br>
+=C2=A0 libwmf: add proper CVE tag to patch<br>
+=C2=A0 libwmf: add missing CVE tag to patch<br>
+=C2=A0 libwmf: patch CVE-2015-0848 and CVE-2015-4588<br>
+=C2=A0 libwmf: patch CVE-2015-4695<br>
+=C2=A0 libwmf: patch CVE-2015-4696<br>
+=C2=A0 libwmf: patch CVE-2016-9011<br>
+=C2=A0 iptraf-ng: patch CVE-2024-52949<br>
+<br>
+J. S. (1):<br>
+=C2=A0 libhtml-tree-perl: fix QA Issue: TMPDIR [buildpaths]<br>
+<br>
+Jason Schonberg (3):<br>
+=C2=A0 xrdp: upgrade 0.9.19 -&gt; 0.9.20<br>
+=C2=A0 usbids: upgrade 2023.01.16 -&gt; 2025.04.01<br>
+=C2=A0 usbids: upgrade 2025.04.01 -&gt; 2025.09.15<br>
+<br>
+Jiaying Song (1):<br>
+=C2=A0 minifi-cpp: fix python shebang in minifi-python<br>
+<br>
+Khem Raj (3):<br>
+=C2=A0 libforms: Remove buildpaths from fd2ps and fdesign scripts<br>
+=C2=A0 libwmf: Fix buildpaths QA Errors in libwmf-config<br>
+=C2=A0 fvwm: Fix buildpaths QA Errors<br>
+<br>
+Markus Volk (2):<br>
+=C2=A0 xdg-desktop-portal: update 1.18.1 -&gt; 1.18.4<br>
+=C2=A0 flatpak;xdg-desktop-portal: add missing runtime dependency on<br>
+=C2=A0 =C2=A0 fuse3-utils<br>
+<br>
+Michael Wyraz (3):<br>
+=C2=A0 python3-passlib: add native support<br>
+=C2=A0 python3-transitions: add native support<br>
+=C2=A0 python3-passlib: add python3-misc as a depencency<br>
+<br>
+Ninette Adhikari (1):<br>
+=C2=A0 redis: Update status for CVE-2022-3734<br>
+<br>
+Peter Marko (4):<br>
+=C2=A0 audiofile: mark CVE-2020-18781 as patched<br>
+=C2=A0 proftpd: set status of CVE-2001-0027<br>
+=C2=A0 rtmpdump: mark CVE-2015-8270, CVE-2015-8271 and CVE-2015-8272 as fix=
+ed<br>
+=C2=A0 squid: patch CVE-2025-62168<br>
+<br>
+Shinji Matsunaga (1):<br>
+=C2=A0 audit: Fix CVE_PRODUCT<br>
+<br>
+Wang Mingyu (16):<br>
+=C2=A0 evtest: upgrade 1.35 -&gt; 1.36<br>
+=C2=A0 xmlsec1: upgrade 1.3.4 -&gt; 1.3.5<br>
+=C2=A0 openldap: upgrade 2.6.7 -&gt; 2.6.8<br>
+=C2=A0 openldap: upgrade 2.6.9 -&gt; 2.6.10<br>
+=C2=A0 mcelog: upgrade 198 -&gt; 199<br>
+=C2=A0 mcelog: upgrade 199 -&gt; 200<br>
+=C2=A0 libiodbc: upgrade 3.52.15 -&gt; 3.52.16<br>
+=C2=A0 libbytesize: upgrade 2.10 -&gt; 2.11<br>
+=C2=A0 libbpf: upgrade 1.4.0 -&gt; 1.4.2<br>
+=C2=A0 libbpf: upgrade 1.4.2 -&gt; 1.4.3<br>
+=C2=A0 libbpf: upgrade 1.4.3 -&gt; 1.4.5<br>
+=C2=A0 libbpf: upgrade 1.4.5 -&gt; 1.4.6<br>
+=C2=A0 openjpeg: upgrade 2.5.3 -&gt; 2.5.4<br>
+=C2=A0 feh: upgrade 3.10.2 -&gt; 3.10.3<br>
+=C2=A0 cryptsetup: upgrade 2.7.2 -&gt; 2.7.3<br>
+=C2=A0 cryptsetup: upgrade 2.7.3 -&gt; 2.7.4<br>
+<br>
+Yi Zhao (4):<br>
+=C2=A0 openldap: upgrade 2.6.8 -&gt; 2.6.9<br>
+=C2=A0 audit: upgrade 4.0.1 -&gt; 4.0.2<br>
+=C2=A0 libbpf: upgrade 1.4.6 -&gt; 1.4.7<br>
+=C2=A0 cryptsetup: upgrade 2.7.4 -&gt; 2.7.5<br>
+<br>
+Yoann Congal (2):<br>
+=C2=A0 klibc: fix debug pkgs reproducibility<br>
+=C2=A0 grilo: fix buildpaths QA error<br>
+<br>
+alperak (1):<br>
+=C2=A0 pcp: Fix contains reference to TMPDIR [buildpaths] warnings<br>
+<br>
+=C2=A0.../recipes-gnome/grilo/<a href=3D"http://grilo_0.3.16.bb" rel=3D"nor=
+eferrer" target=3D"_blank">grilo_0.3.16.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+=C2=A0 11 +-<br>
+=C2=A0meta-initramfs/classes/klibc.bbclass=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 |=C2=A0 =C2=A02 +-<br>
+=C2=A0.../rtmpdump/<a href=3D"http://rtmpdump_2.4.bb" rel=3D"noreferrer" ta=
+rget=3D"_blank">rtmpdump_2.4.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A04 +<br>
+=C2=A0.../recipes-daemons/proftpd/<a href=3D"http://proftpd_1.3.7f.bb" rel=
+=3D"noreferrer" target=3D"_blank">proftpd_1.3.7f.bb</a> |=C2=A0 =C2=A02 +<b=
+r>
+=C2=A0.../squid/files/CVE-2025-62168.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 | 211 +++++++++++++++++<br>
+=C2=A0.../recipes-daemons/squid/<a href=3D"http://squid_6.14.bb" rel=3D"nor=
+eferrer" target=3D"_blank">squid_6.14.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
+=A0 =C2=A01 +<br>
+=C2=A0meta-oe/licenses/{OpenLDAP =3D&gt; OLDAP-2.8}=C2=A0 =C2=A0 =C2=A0 |=
+=C2=A0 =C2=A00<br>
+=C2=A0.../linuxptp/<a href=3D"http://linuxptp_4.1.bb" rel=3D"noreferrer" ta=
+rget=3D"_blank">linuxptp_4.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +<br>
+=C2=A0.../botan/botan/CVE-2024-34703.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 |=C2=A0 38 +++<br>
+=C2=A0.../CVE-2024-50382-and-CVE-2024-50383.patch=C2=A0 =C2=A0|=C2=A0 66 ++=
+++++<br>
+=C2=A0meta-oe/recipes-crypto/botan/<a href=3D"http://botan_3.2.0.bb" rel=3D=
+"noreferrer" target=3D"_blank">botan_3.2.0.bb</a>=C2=A0 =C2=A0|=C2=A0 =C2=
+=A05 +-<br>
+=C2=A0...<a href=3D"http://ryptsetup_2.7.2.bb" rel=3D"noreferrer" target=3D=
+"_blank">ryptsetup_2.7.2.bb</a> =3D&gt; <a href=3D"http://cryptsetup_2.7.5.=
+bb" rel=3D"noreferrer" target=3D"_blank">cryptsetup_2.7.5.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../iptraf/iptraf-ng/CVE-2024-52949.patch=C2=A0 =C2=A0 =C2=A0| 218 ++=
+++++++++++++++++<br>
+=C2=A0.../iptraf/<a href=3D"http://iptraf-ng_1.2.1.bb" rel=3D"noreferrer" t=
+arget=3D"_blank">iptraf-ng_1.2.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A01 +<br>
+=C2=A0.../flatpak/<a href=3D"http://flatpak_1.15.8.bb" rel=3D"noreferrer" t=
+arget=3D"_blank">flatpak_1.15.8.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A01 +<br>
+=C2=A0.../libwmf/CVE-2015-0848-CVE-2015-4588.patch=C2=A0 | 135 +++++++++++<=
+br>
+=C2=A0.../libwmf/libwmf/CVE-2015-4695.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 70 ++++++<br>
+=C2=A0.../libwmf/libwmf/CVE-2015-4696.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 37 +++<br>
+=C2=A0.../libwmf/libwmf/CVE-2016-9011.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 50 ++++<br>
+=C2=A0.../libwmf/libwmf-0.2.8.4-intoverflow.patch=C2=A0 =C2=A0|=C2=A0 =C2=
+=A02 +<br>
+=C2=A0.../libwmf/libwmf-0.2.8.4-useafterfree.patch=C2=A0 |=C2=A0 =C2=A02 +<=
+br>
+=C2=A0.../recipes-extended/libwmf/<a href=3D"http://libwmf_0.2.8.4.bb" rel=
+=3D"noreferrer" target=3D"_blank">libwmf_0.2.8.4.bb</a> |=C2=A0 10 +-<br>
+=C2=A0.../minifi-cpp/<a href=3D"http://minifi-cpp_0.15.0.bb" rel=3D"norefer=
+rer" target=3D"_blank">minifi-cpp_0.15.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0|=C2=A0 =C2=A04 +<br>
+=C2=A0...<a href=3D"http://us_1.3.11.bb" rel=3D"noreferrer" target=3D"_blan=
+k">us_1.3.11.bb</a> =3D&gt; <a href=3D"http://redis-plus-plus_1.3.12.bb" re=
+l=3D"noreferrer" target=3D"_blank">redis-plus-plus_1.3.12.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0...-hiredis-use-default-CC-if-it-is-set.patch |=C2=A0 =C2=A06 +-<br>
+=C2=A0...ile-to-use-environment-build-setting.patch |=C2=A0 =C2=A02 +-<br>
+=C2=A0...003-hack-to-force-use-of-libc-malloc.patch |=C2=A0 10 +-<br>
+=C2=A0.../0004-src-Do-not-reset-FINAL_LIBS.patch=C2=A0 =C2=A0 |=C2=A0 10 +-=
+<br>
+=C2=A0...RCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch |=C2=A0 =C2=A02 +-<br>
+=C2=A0...006-Define-correct-gregs-for-RISCV32.patch |=C2=A0 =C2=A02 +-<br>
+=C2=A0.../init-redis-server=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A00<br>
+=C2=A0.../{redis-7.2.11 =3D&gt; redis-7.2.12}/redis.conf |=C2=A0 =C2=A00<br=
+>
+=C2=A0.../redis.service=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A00<br>
+=C2=A0.../{<a href=3D"http://redis_6.2.20.bb" rel=3D"noreferrer" target=3D"=
+_blank">redis_6.2.20.bb</a> =3D&gt; <a href=3D"http://redis_6.2.21.bb" rel=
+=3D"noreferrer" target=3D"_blank">redis_6.2.21.bb</a>}=C2=A0 =C2=A0 =C2=A0 =
+|=C2=A0 =C2=A02 +-<br>
+=C2=A0.../{<a href=3D"http://redis_7.2.11.bb" rel=3D"noreferrer" target=3D"=
+_blank">redis_7.2.11.bb</a> =3D&gt; <a href=3D"http://redis_7.2.12.bb" rel=
+=3D"noreferrer" target=3D"_blank">redis_7.2.12.bb</a>}=C2=A0 =C2=A0 =C2=A0 =
+|=C2=A0 =C2=A05 +-<br>
+=C2=A0.../rsyslog/rsyslog/rsyslog.conf=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 |=C2=A0 =C2=A03 +-<br>
+=C2=A0.../rsyslog/<a href=3D"http://rsyslog_8.2402.0.bb" rel=3D"noreferrer"=
+ target=3D"_blank">rsyslog_8.2402.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0.../feh/{<a href=3D"http://feh_3.10.2.bb" rel=3D"noreferrer" target=
+=3D"_blank">feh_3.10.2.bb</a> =3D&gt; <a href=3D"http://feh_3.10.3.bb" rel=
+=3D"noreferrer" target=3D"_blank">feh_3.10.3.bb</a>}=C2=A0 =C2=A0 =C2=A0 |=
+=C2=A0 =C2=A02 +-<br>
+=C2=A0...<a href=3D"http://spiro_20221101.bb" rel=3D"noreferrer" target=3D"=
+_blank">spiro_20221101.bb</a> =3D&gt; <a href=3D"http://libspiro_20240902.b=
+b" rel=3D"noreferrer" target=3D"_blank">libspiro_20240902.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0meta-oe/recipes-graphics/fvwm/<a href=3D"http://fvwm_2.7.0.bb" rel=3D=
+"noreferrer" target=3D"_blank">fvwm_2.7.0.bb</a>=C2=A0 =C2=A0|=C2=A0 =C2=A0=
+3 +<br>
+=C2=A0.../{<a href=3D"http://jasper_4.1.1.bb" rel=3D"noreferrer" target=3D"=
+_blank">jasper_4.1.1.bb</a> =3D&gt; <a href=3D"http://jasper_4.1.2.bb" rel=
+=3D"noreferrer" target=3D"_blank">jasper_4.1.2.bb</a>}=C2=A0 =C2=A0 =C2=A0 =
+|=C2=A0 =C2=A02 +-<br>
+=C2=A0.../libforms/<a href=3D"http://libforms_1.2.5pre1.bb" rel=3D"noreferr=
+er" target=3D"_blank">libforms_1.2.5pre1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 |=C2=A0 =C2=A05 +<br>
+=C2=A0.../openjpeg/openjpeg/CVE-2025-54874.patch=C2=A0 =C2=A0 |=C2=A0 44 --=
+--<br>
+=C2=A0.../{<a href=3D"http://openjpeg_2.5.3.bb" rel=3D"noreferrer" target=
+=3D"_blank">openjpeg_2.5.3.bb</a> =3D&gt; <a href=3D"http://openjpeg_2.5.4.=
+bb" rel=3D"noreferrer" target=3D"_blank">openjpeg_2.5.4.bb</a>}=C2=A0 |=C2=
+=A0 =C2=A03 +-<br>
+=C2=A0.../{<a href=3D"http://libbpf_1.4.0.bb" rel=3D"noreferrer" target=3D"=
+_blank">libbpf_1.4.0.bb</a> =3D&gt; <a href=3D"http://libbpf_1.4.7.bb" rel=
+=3D"noreferrer" target=3D"_blank">libbpf_1.4.7.bb</a>}=C2=A0 =C2=A0 =C2=A0 =
+|=C2=A0 =C2=A04 +-<br>
+=C2=A0.../audiofile/<a href=3D"http://audiofile_0.3.6.bb" rel=3D"noreferrer=
+" target=3D"_blank">audiofile_0.3.6.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A04 +<br>
+=C2=A0...ays-check-the-number-of-coefficients.patch |=C2=A0 =C2=A01 +<br>
+=C2=A0.../audiofile/files/CVE-2018-13440.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+36 +++<br>
+=C2=A0.../audiofile/files/CVE-2018-17059.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+35 +++<br>
+=C2=A0.../audiofile/files/CVE-2019-13147.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+31 +++<br>
+=C2=A0.../audiofile/files/CVE-2022-24599.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+50 ++++<br>
+=C2=A0...ute_malloc__-with-__attribute__-__ma.patch |=C2=A0 49 ----<br>
+=C2=A0.../audit/{<a href=3D"http://audit_4.0.1.bb" rel=3D"noreferrer" targe=
+t=3D"_blank">audit_4.0.1.bb</a> =3D&gt; <a href=3D"http://audit_4.0.2.bb" r=
+el=3D"noreferrer" target=3D"_blank">audit_4.0.2.bb</a>}=C2=A0 |=C2=A0 12 +-=
+<br>
+=C2=A0.../freerdp/freerdp3/CVE-2025-4478.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+60 +++++<br>
+=C2=A0.../recipes-support/freerdp/<a href=3D"http://freerdp3_3.4.0.bb" rel=
+=3D"noreferrer" target=3D"_blank">freerdp3_3.4.0.bb</a> |=C2=A0 =C2=A01 +<b=
+r>
+=C2=A0.../hdf5/files/CVE-2025-2926.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 |=C2=A0 32 +++<br>
+=C2=A0meta-oe/recipes-support/hdf5/<a href=3D"http://hdf5_1.14.4-3.bb" rel=
+=3D"noreferrer" target=3D"_blank">hdf5_1.14.4-3.bb</a> |=C2=A0 =C2=A01 +<br=
+>
+=C2=A0...<a href=3D"http://ibbytesize_2.10.bb" rel=3D"noreferrer" target=3D=
+"_blank">ibbytesize_2.10.bb</a> =3D&gt; <a href=3D"http://libbytesize_2.11.=
+bb" rel=3D"noreferrer" target=3D"_blank">libbytesize_2.11.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0...ts-set-direction-when-reconfiguring-.patch |=C2=A0 38 ---<br>
+=C2=A0.../{<a href=3D"http://libgpiod_1.6.4.bb" rel=3D"noreferrer" target=
+=3D"_blank">libgpiod_1.6.4.bb</a> =3D&gt; <a href=3D"http://libgpiod_1.6.5.=
+bb" rel=3D"noreferrer" target=3D"_blank">libgpiod_1.6.5.bb</a>}=C2=A0 |=C2=
+=A0 =C2=A02 +-<br>
+=C2=A0.../{<a href=3D"http://libgpiod_2.1.2.bb" rel=3D"noreferrer" target=
+=3D"_blank">libgpiod_2.1.2.bb</a> =3D&gt; <a href=3D"http://libgpiod_2.1.3.=
+bb" rel=3D"noreferrer" target=3D"_blank">libgpiod_2.1.3.bb</a>}=C2=A0 |=C2=
+=A0 =C2=A04 +-<br>
+=C2=A0...<a href=3D"http://ibiodbc_3.52.15.bb" rel=3D"noreferrer" target=3D=
+"_blank">ibiodbc_3.52.15.bb</a> =3D&gt; <a href=3D"http://libiodbc_3.52.16.=
+bb" rel=3D"noreferrer" target=3D"_blank">libiodbc_3.52.16.bb</a>} |=C2=A0 =
+=C2=A04 +-<br>
+=C2=A0.../mcelog/{<a href=3D"http://mcelog_198.bb" rel=3D"noreferrer" targe=
+t=3D"_blank">mcelog_198.bb</a> =3D&gt; <a href=3D"http://mcelog_200.bb" rel=
+=3D"noreferrer" target=3D"_blank">mcelog_200.bb</a>}=C2=A0 =C2=A0|=C2=A0 11=
+ +-<br>
+=C2=A0.../{<a href=3D"http://openldap_2.6.7.bb" rel=3D"noreferrer" target=
+=3D"_blank">openldap_2.6.7.bb</a> =3D&gt; <a href=3D"http://openldap_2.6.10=
+.bb" rel=3D"noreferrer" target=3D"_blank">openldap_2.6.10.bb</a>} |=C2=A0 1=
+0 +-<br>
+=C2=A0meta-oe/recipes-support/pcp/<a href=3D"http://pcp_6.0.5.bb" rel=3D"no=
+referrer" target=3D"_blank">pcp_6.0.5.bb</a>=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+=C2=A04 +<br>
+=C2=A0.../recipes-support/remmina/<a href=3D"http://remmina_1.4.34.bb" rel=
+=3D"noreferrer" target=3D"_blank">remmina_1.4.34.bb</a> |=C2=A0 =C2=A01 +<b=
+r>
+=C2=A0...suppress-new-GCC-12-13-warnings-1192.patch |=C2=A0 57 -----<br>
+=C2=A0....cmake-remove-cross-compiation-check.patch |=C2=A0 33 ---<br>
+=C2=A0.../{<a href=3D"http://tbb_2021.11.0.bb" rel=3D"noreferrer" target=3D=
+"_blank">tbb_2021.11.0.bb</a> =3D&gt; <a href=3D"http://tbb_2021.12.0.bb" r=
+el=3D"noreferrer" target=3D"_blank">tbb_2021.12.0.bb</a>}=C2=A0 =C2=A0 |=C2=
+=A0 =C2=A08 +-<br>
+=C2=A0...<a href=3D"http://ids_2023.01.16.bb" rel=3D"noreferrer" target=3D"=
+_blank">ids_2023.01.16.bb</a> =3D&gt; <a href=3D"http://usbids_2025.09.15.b=
+b" rel=3D"noreferrer" target=3D"_blank">usbids_2025.09.15.bb</a>} |=C2=A0 =
+=C2=A03 +-<br>
+=C2=A0...<a href=3D"http://1.18.1.bb" rel=3D"noreferrer" target=3D"_blank">=
+1.18.1.bb</a> =3D&gt; <a href=3D"http://xdg-desktop-portal_1.18.4.bb" rel=
+=3D"noreferrer" target=3D"_blank">xdg-desktop-portal_1.18.4.bb</a>} |=C2=A0=
+ =C2=A06 +-<br>
+=C2=A0.../0001-nss-nspr-fix-for-multilib.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+=C2=A07 +-<br>
+=C2=A0.../xmlsec1/change-finding-path-of-nss.patch=C2=A0 |=C2=A0 =C2=A07 +-=
+<br>
+=C2=A0.../{<a href=3D"http://xmlsec1_1.3.4.bb" rel=3D"noreferrer" target=3D=
+"_blank">xmlsec1_1.3.4.bb</a> =3D&gt; <a href=3D"http://xmlsec1_1.3.5.bb" r=
+el=3D"noreferrer" target=3D"_blank">xmlsec1_1.3.5.bb</a>}=C2=A0 =C2=A0 |=C2=
+=A0 =C2=A02 +-<br>
+=C2=A0...guished_name-in-etc-xrdp-openssl.con.patch |=C2=A0 =C2=A07 +-<br>
+=C2=A0.../xrdp/0001-Fix-the-compile-error.patch=C2=A0 =C2=A0 =C2=A0|=C2=A0 =
+12 +-<br>
+=C2=A0...1-arch-Define-NO_NEED_ALIGN-on-ppc64.patch |=C2=A0 =C2=A09 +-<br>
+=C2=A0...001-mark-count-with-unused-attribute.patch |=C2=A0 =C2=A09 +-<br>
+=C2=A0.../xrdp/{<a href=3D"http://xrdp_0.9.19.bb" rel=3D"noreferrer" target=
+=3D"_blank">xrdp_0.9.19.bb</a> =3D&gt; <a href=3D"http://xrdp_0.9.20.bb" re=
+l=3D"noreferrer" target=3D"_blank">xrdp_0.9.20.bb</a>}=C2=A0 =C2=A0|=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0...ld-on-32bit-arches-with-64bit-time_t.patch |=C2=A0 =C2=A07 +-<br>
+=C2=A0.../evtest/{<a href=3D"http://evtest_1.35.bb" rel=3D"noreferrer" targ=
+et=3D"_blank">evtest_1.35.bb</a> =3D&gt; <a href=3D"http://evtest_1.36.bb" =
+rel=3D"noreferrer" target=3D"_blank">evtest_1.36.bb</a>} |=C2=A0 =C2=A02 +-=
+<br>
+=C2=A0.../libhtml/<a href=3D"http://libhtml-tree-perl_5.03.bb" rel=3D"noref=
+errer" target=3D"_blank">libhtml-tree-perl_5.03.bb</a>=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0|=C2=A0 =C2=A07 +<br>
+=C2=A0.../python/<a href=3D"http://python3-passlib_1.7.4.bb" rel=3D"norefer=
+rer" target=3D"_blank">python3-passlib_1.7.4.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A03 +<br>
+=C2=A0.../python/<a href=3D"http://python3-transitions_0.9.0.bb" rel=3D"nor=
+eferrer" target=3D"_blank">python3-transitions_0.9.0.bb</a>=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0.../recipes-httpd/apache2/<a href=3D"http://apache2_2.4.65.bb" rel=3D=
+"noreferrer" target=3D"_blank">apache2_2.4.65.bb</a>=C2=A0 =C2=A0|=C2=A0 =
+=C2=A01 +<br>
+=C2=A0...issions-check-when-saving-allowed-cr.patch |=C2=A0 25 ++<br>
+=C2=A0...e-potentially-malicious-HTTP-headers.patch |=C2=A0 53 +++++<br>
+=C2=A0...0001-Foreign-module-may-need-a-check.patch |=C2=A0 27 +++<br>
+=C2=A0...0001-HTML-escape-command-description.patch |=C2=A0 29 +++<br>
+=C2=A0...es-cannot-contact-special-characters.patch |=C2=A0 26 +++<br>
+=C2=A0.../recipes-webadmin/webmin/<a href=3D"http://webmin_1.850.bb" rel=3D=
+"noreferrer" target=3D"_blank">webmin_1.850.bb</a>=C2=A0 =C2=A0|=C2=A0 =C2=
+=A07 +-<br>
+=C2=A091 files changed, 1403 insertions(+), 321 deletions(-)<br>
+=C2=A0create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-20=
+25-62168.patch<br>
+=C2=A0rename meta-oe/licenses/{OpenLDAP =3D&gt; OLDAP-2.8} (100%)<br>
+=C2=A0create mode 100644 meta-oe/recipes-crypto/botan/botan/CVE-2024-34703.=
+patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-crypto/botan/botan/CVE-2024-50382-=
+and-CVE-2024-50383.patch<br>
+=C2=A0rename meta-oe/recipes-crypto/cryptsetup/{<a href=3D"http://cryptsetu=
+p_2.7.2.bb" rel=3D"noreferrer" target=3D"_blank">cryptsetup_2.7.2.bb</a> =
+=3D&gt; <a href=3D"http://cryptsetup_2.7.5.bb" rel=3D"noreferrer" target=3D=
+"_blank">cryptsetup_2.7.5.bb</a>} (98%)<br>
+=C2=A0create mode 100644 meta-oe/recipes-devtools/iptraf/iptraf-ng/CVE-2024=
+-52949.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-extended/libwmf/libwmf/CVE-2015-08=
+48-CVE-2015-4588.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-extended/libwmf/libwmf/CVE-2015-46=
+95.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-extended/libwmf/libwmf/CVE-2015-46=
+96.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-extended/libwmf/libwmf/CVE-2016-90=
+11.patch<br>
+=C2=A0rename meta-oe/recipes-extended/redis-plus-plus/{<a href=3D"http://re=
+dis-plus-plus_1.3.11.bb" rel=3D"noreferrer" target=3D"_blank">redis-plus-pl=
+us_1.3.11.bb</a> =3D&gt; <a href=3D"http://redis-plus-plus_1.3.12.bb" rel=
+=3D"noreferrer" target=3D"_blank">redis-plus-plus_1.3.12.bb</a>} (95%)<br>
+=C2=A0rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D&gt; redis-7.2=
+.12}/0001-hiredis-use-default-CC-if-it-is-set.patch (89%)<br>
+=C2=A0rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D&gt; redis-7.2=
+.12}/0002-lua-update-Makefile-to-use-environment-build-setting.patch (97%)<=
+br>
+=C2=A0rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D&gt; redis-7.2=
+.12}/0003-hack-to-force-use-of-libc-malloc.patch (81%)<br>
+=C2=A0rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D&gt; redis-7.2=
+.12}/0004-src-Do-not-reset-FINAL_LIBS.patch (74%)<br>
+=C2=A0rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D&gt; redis-7.2=
+.12}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch (92%)<b=
+r>
+=C2=A0rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D&gt; redis-7.2=
+.12}/0006-Define-correct-gregs-for-RISCV32.patch (97%)<br>
+=C2=A0rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D&gt; redis-7.2=
+.12}/init-redis-server (100%)<br>
+=C2=A0rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D&gt; redis-7.2=
+.12}/redis.conf (100%)<br>
+=C2=A0rename meta-oe/recipes-extended/redis/{redis-7.2.11 =3D&gt; redis-7.2=
+.12}/redis.service (100%)<br>
+=C2=A0rename meta-oe/recipes-extended/redis/{<a href=3D"http://redis_6.2.20=
+.bb" rel=3D"noreferrer" target=3D"_blank">redis_6.2.20.bb</a> =3D&gt; <a hr=
+ef=3D"http://redis_6.2.21.bb" rel=3D"noreferrer" target=3D"_blank">redis_6.=
+2.21.bb</a>} (96%)<br>
+=C2=A0rename meta-oe/recipes-extended/redis/{<a href=3D"http://redis_7.2.11=
+.bb" rel=3D"noreferrer" target=3D"_blank">redis_7.2.11.bb</a> =3D&gt; <a hr=
+ef=3D"http://redis_7.2.12.bb" rel=3D"noreferrer" target=3D"_blank">redis_7.=
+2.12.bb</a>} (93%)<br>
+=C2=A0rename meta-oe/recipes-graphics/feh/{<a href=3D"http://feh_3.10.2.bb"=
+ rel=3D"noreferrer" target=3D"_blank">feh_3.10.2.bb</a> =3D&gt; <a href=3D"=
+http://feh_3.10.3.bb" rel=3D"noreferrer" target=3D"_blank">feh_3.10.3.bb</a=
+>} (88%)<br>
+=C2=A0rename meta-oe/recipes-graphics/fontforge/{<a href=3D"http://libspiro=
+_20221101.bb" rel=3D"noreferrer" target=3D"_blank">libspiro_20221101.bb</a>=
+ =3D&gt; <a href=3D"http://libspiro_20240902.bb" rel=3D"noreferrer" target=
+=3D"_blank">libspiro_20240902.bb</a>} (85%)<br>
+=C2=A0rename meta-oe/recipes-graphics/jasper/{<a href=3D"http://jasper_4.1.=
+1.bb" rel=3D"noreferrer" target=3D"_blank">jasper_4.1.1.bb</a> =3D&gt; <a h=
+ref=3D"http://jasper_4.1.2.bb" rel=3D"noreferrer" target=3D"_blank">jasper_=
+4.1.2.bb</a>} (95%)<br>
+=C2=A0delete mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-202=
+5-54874.patch<br>
+=C2=A0rename meta-oe/recipes-graphics/openjpeg/{<a href=3D"http://openjpeg_=
+2.5.3.bb" rel=3D"noreferrer" target=3D"_blank">openjpeg_2.5.3.bb</a> =3D&gt=
+; <a href=3D"http://openjpeg_2.5.4.bb" rel=3D"noreferrer" target=3D"_blank"=
+>openjpeg_2.5.4.bb</a>} (86%)<br>
+=C2=A0rename meta-oe/recipes-kernel/libbpf/{<a href=3D"http://libbpf_1.4.0.=
+bb" rel=3D"noreferrer" target=3D"_blank">libbpf_1.4.0.bb</a> =3D&gt; <a hre=
+f=3D"http://libbpf_1.4.7.bb" rel=3D"noreferrer" target=3D"_blank">libbpf_1.=
+4.7.bb</a>} (92%)<br>
+=C2=A0create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-201=
+8-13440.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-201=
+8-17059.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-201=
+9-13147.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-202=
+2-24599.patch<br>
+=C2=A0delete mode 100644 meta-oe/recipes-security/audit/audit/0001-Replace-=
+__attribute_malloc__-with-__attribute__-__ma.patch<br>
+=C2=A0rename meta-oe/recipes-security/audit/{<a href=3D"http://audit_4.0.1.=
+bb" rel=3D"noreferrer" target=3D"_blank">audit_4.0.1.bb</a> =3D&gt; <a href=
+=3D"http://audit_4.0.2.bb" rel=3D"noreferrer" target=3D"_blank">audit_4.0.2=
+.bb</a>} (90%)<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2025-=
+4478.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2926.p=
+atch<br>
+=C2=A0rename meta-oe/recipes-support/libbytesize/{<a href=3D"http://libbyte=
+size_2.10.bb" rel=3D"noreferrer" target=3D"_blank">libbytesize_2.10.bb</a> =
+=3D&gt; <a href=3D"http://libbytesize_2.11.bb" rel=3D"noreferrer" target=3D=
+"_blank">libbytesize_2.11.bb</a>} (93%)<br>
+=C2=A0delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001=
+-bindings-cxx-tests-set-direction-when-reconfiguring-.patch<br>
+=C2=A0rename meta-oe/recipes-support/libgpiod/{<a href=3D"http://libgpiod_1=
+.6.4.bb" rel=3D"noreferrer" target=3D"_blank">libgpiod_1.6.4.bb</a> =3D&gt;=
+ <a href=3D"http://libgpiod_1.6.5.bb" rel=3D"noreferrer" target=3D"_blank">=
+libgpiod_1.6.5.bb</a>} (94%)<br>
+=C2=A0rename meta-oe/recipes-support/libgpiod/{<a href=3D"http://libgpiod_2=
+.1.2.bb" rel=3D"noreferrer" target=3D"_blank">libgpiod_2.1.2.bb</a> =3D&gt;=
+ <a href=3D"http://libgpiod_2.1.3.bb" rel=3D"noreferrer" target=3D"_blank">=
+libgpiod_2.1.3.bb</a>} (87%)<br>
+=C2=A0rename meta-oe/recipes-support/libiodbc/{<a href=3D"http://libiodbc_3=
+.52.15.bb" rel=3D"noreferrer" target=3D"_blank">libiodbc_3.52.15.bb</a> =3D=
+&gt; <a href=3D"http://libiodbc_3.52.16.bb" rel=3D"noreferrer" target=3D"_b=
+lank">libiodbc_3.52.16.bb</a>} (82%)<br>
+=C2=A0rename meta-oe/recipes-support/mcelog/{<a href=3D"http://mcelog_198.b=
+b" rel=3D"noreferrer" target=3D"_blank">mcelog_198.bb</a> =3D&gt; <a href=
+=3D"http://mcelog_200.bb" rel=3D"noreferrer" target=3D"_blank">mcelog_200.b=
+b</a>} (79%)<br>
+=C2=A0rename meta-oe/recipes-support/openldap/{<a href=3D"http://openldap_2=
+.6.7.bb" rel=3D"noreferrer" target=3D"_blank">openldap_2.6.7.bb</a> =3D&gt;=
+ <a href=3D"http://openldap_2.6.10.bb" rel=3D"noreferrer" target=3D"_blank"=
+>openldap_2.6.10.bb</a>} (96%)<br>
+=C2=A0delete mode 100644 meta-oe/recipes-support/tbb/tbb/0001-Fix-suppress-=
+new-GCC-12-13-warnings-1192.patch<br>
+=C2=A0delete mode 100644 meta-oe/recipes-support/tbb/tbb/0001-hwloc_detecti=
+on.cmake-remove-cross-compiation-check.patch<br>
+=C2=A0rename meta-oe/recipes-support/tbb/{<a href=3D"http://tbb_2021.11.0.b=
+b" rel=3D"noreferrer" target=3D"_blank">tbb_2021.11.0.bb</a> =3D&gt; <a hre=
+f=3D"http://tbb_2021.12.0.bb" rel=3D"noreferrer" target=3D"_blank">tbb_2021=
+.12.0.bb</a>} (92%)<br>
+=C2=A0rename meta-oe/recipes-support/usbids/{<a href=3D"http://usbids_2023.=
+01.16.bb" rel=3D"noreferrer" target=3D"_blank">usbids_2023.01.16.bb</a> =3D=
+&gt; <a href=3D"http://usbids_2025.09.15.bb" rel=3D"noreferrer" target=3D"_=
+blank">usbids_2025.09.15.bb</a>} (84%)<br>
+=C2=A0rename meta-oe/recipes-support/xdg-desktop-portal/{<a href=3D"http://=
+xdg-desktop-portal_1.18.1.bb" rel=3D"noreferrer" target=3D"_blank">xdg-desk=
+top-portal_1.18.1.bb</a> =3D&gt; <a href=3D"http://xdg-desktop-portal_1.18.=
+4.bb" rel=3D"noreferrer" target=3D"_blank">xdg-desktop-portal_1.18.4.bb</a>=
+} (88%)<br>
+=C2=A0rename meta-oe/recipes-support/xmlsec1/{<a href=3D"http://xmlsec1_1.3=
+.4.bb" rel=3D"noreferrer" target=3D"_blank">xmlsec1_1.3.4.bb</a> =3D&gt; <a=
+ href=3D"http://xmlsec1_1.3.5.bb" rel=3D"noreferrer" target=3D"_blank">xmls=
+ec1_1.3.5.bb</a>} (96%)<br>
+=C2=A0rename meta-oe/recipes-support/xrdp/{<a href=3D"http://xrdp_0.9.19.bb=
+" rel=3D"noreferrer" target=3D"_blank">xrdp_0.9.19.bb</a> =3D&gt; <a href=
+=3D"http://xrdp_0.9.20.bb" rel=3D"noreferrer" target=3D"_blank">xrdp_0.9.20=
+.bb</a>} (97%)<br>
+=C2=A0rename meta-oe/recipes-test/evtest/{<a href=3D"http://evtest_1.35.bb"=
+ rel=3D"noreferrer" target=3D"_blank">evtest_1.35.bb</a> =3D&gt; <a href=3D=
+"http://evtest_1.36.bb" rel=3D"noreferrer" target=3D"_blank">evtest_1.36.bb=
+</a>} (90%)<br>
+=C2=A0create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-=
+Add-missing-permissions-check-when-saving-allowed-cr.patch<br>
+=C2=A0create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-=
+Escape-potentially-malicious-HTTP-headers.patch<br>
+=C2=A0create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-=
+Foreign-module-may-need-a-check.patch<br>
+=C2=A0create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-=
+HTML-escape-command-description.patch<br>
+=C2=A0create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-=
+Object-names-cannot-contact-special-characters.patch<br>
+<br>
+-- <br>
+2.51.2<br>
+<br>
+</blockquote></div>
 
-Ankur Tyagi (10):
-  tbb: upgrade 2021.11.0 -> 2021.12.0
-  jasper: upgrade 4.1.1 -> 4.1.2
-  libspiro: upgrade 20221101 -> 20230902
-  redis-plus-plus: upgrade 1.3.11 -> 1.3.12
-  redis: upgrade 7.2.11 -> 7.2.12
-  redis: upgrade 6.2.20 -> 6.2.21
-  botan: patch CVE-2024-34703
-  botan: patch CVE-2024-50382 and CVE-2024-50383
-  freerdp3: patch CVE-2025-4478
-  hdf5: patch CVE-2025-2926
-
-Anuj Mittal (1):
-  remmina: add DEPENDS on curl
-
-Armin Kuster (1):
-  audit: fix build when systemd is enabled.
-
-Bartosz Golaszewski (2):
-  libgpiod: update to v1.6.5
-  libgpiod: update v2.1.2 -> v2.1.3
-
-Ethan Roderick (1):
-  openldap: make license match spdx identifier
-
-Gyorgy Sarvari (17):
-  audiofile: patch CVE-2019-13147 and CVE-2022-24599
-  audiofile: patch CVE-2018-13440 and CVE-2018-17059
-  linuxptp: ignore CVE-2024-42861
-  rsyslog: set status for CVE-2015-3243
-  apache2: ignore CVE-2025-3891
-  webmin: patch CVE-2017-15644, CVE-2017-15645 and CVE-2017-15646
-  webmin: patch CVE-2017-17089
-  webmin: patch CVE-2019-15642
-  webmin: patch CVE-2022-0824
-  webmin: patch CVE-2022-0829
-  libwmf: add proper CVE tag to patch
-  libwmf: add missing CVE tag to patch
-  libwmf: patch CVE-2015-0848 and CVE-2015-4588
-  libwmf: patch CVE-2015-4695
-  libwmf: patch CVE-2015-4696
-  libwmf: patch CVE-2016-9011
-  iptraf-ng: patch CVE-2024-52949
-
-J. S. (1):
-  libhtml-tree-perl: fix QA Issue: TMPDIR [buildpaths]
-
-Jason Schonberg (3):
-  xrdp: upgrade 0.9.19 -> 0.9.20
-  usbids: upgrade 2023.01.16 -> 2025.04.01
-  usbids: upgrade 2025.04.01 -> 2025.09.15
-
-Jiaying Song (1):
-  minifi-cpp: fix python shebang in minifi-python
-
-Khem Raj (3):
-  libforms: Remove buildpaths from fd2ps and fdesign scripts
-  libwmf: Fix buildpaths QA Errors in libwmf-config
-  fvwm: Fix buildpaths QA Errors
-
-Markus Volk (2):
-  xdg-desktop-portal: update 1.18.1 -> 1.18.4
-  flatpak;xdg-desktop-portal: add missing runtime dependency on
-    fuse3-utils
-
-Michael Wyraz (3):
-  python3-passlib: add native support
-  python3-transitions: add native support
-  python3-passlib: add python3-misc as a depencency
-
-Ninette Adhikari (1):
-  redis: Update status for CVE-2022-3734
-
-Peter Marko (4):
-  audiofile: mark CVE-2020-18781 as patched
-  proftpd: set status of CVE-2001-0027
-  rtmpdump: mark CVE-2015-8270, CVE-2015-8271 and CVE-2015-8272 as fixed
-  squid: patch CVE-2025-62168
-
-Shinji Matsunaga (1):
-  audit: Fix CVE_PRODUCT
-
-Wang Mingyu (16):
-  evtest: upgrade 1.35 -> 1.36
-  xmlsec1: upgrade 1.3.4 -> 1.3.5
-  openldap: upgrade 2.6.7 -> 2.6.8
-  openldap: upgrade 2.6.9 -> 2.6.10
-  mcelog: upgrade 198 -> 199
-  mcelog: upgrade 199 -> 200
-  libiodbc: upgrade 3.52.15 -> 3.52.16
-  libbytesize: upgrade 2.10 -> 2.11
-  libbpf: upgrade 1.4.0 -> 1.4.2
-  libbpf: upgrade 1.4.2 -> 1.4.3
-  libbpf: upgrade 1.4.3 -> 1.4.5
-  libbpf: upgrade 1.4.5 -> 1.4.6
-  openjpeg: upgrade 2.5.3 -> 2.5.4
-  feh: upgrade 3.10.2 -> 3.10.3
-  cryptsetup: upgrade 2.7.2 -> 2.7.3
-  cryptsetup: upgrade 2.7.3 -> 2.7.4
-
-Yi Zhao (4):
-  openldap: upgrade 2.6.8 -> 2.6.9
-  audit: upgrade 4.0.1 -> 4.0.2
-  libbpf: upgrade 1.4.6 -> 1.4.7
-  cryptsetup: upgrade 2.7.4 -> 2.7.5
-
-Yoann Congal (2):
-  klibc: fix debug pkgs reproducibility
-  grilo: fix buildpaths QA error
-
-alperak (1):
-  pcp: Fix contains reference to TMPDIR [buildpaths] warnings
-
- .../recipes-gnome/grilo/grilo_0.3.16.bb       |  11 +-
- meta-initramfs/classes/klibc.bbclass          |   2 +-
- .../rtmpdump/rtmpdump_2.4.bb                  |   4 +
- .../recipes-daemons/proftpd/proftpd_1.3.7f.bb |   2 +
- .../squid/files/CVE-2025-62168.patch          | 211 +++++++++++++++++
- .../recipes-daemons/squid/squid_6.14.bb       |   1 +
- meta-oe/licenses/{OpenLDAP => OLDAP-2.8}      |   0
- .../linuxptp/linuxptp_4.1.bb                  |   2 +
- .../botan/botan/CVE-2024-34703.patch          |  38 +++
- .../CVE-2024-50382-and-CVE-2024-50383.patch   |  66 ++++++
- meta-oe/recipes-crypto/botan/botan_3.2.0.bb   |   5 +-
- ...ryptsetup_2.7.2.bb => cryptsetup_2.7.5.bb} |   2 +-
- .../iptraf/iptraf-ng/CVE-2024-52949.patch     | 218 ++++++++++++++++++
- .../iptraf/iptraf-ng_1.2.1.bb                 |   1 +
- .../flatpak/flatpak_1.15.8.bb                 |   1 +
- .../libwmf/CVE-2015-0848-CVE-2015-4588.patch  | 135 +++++++++++
- .../libwmf/libwmf/CVE-2015-4695.patch         |  70 ++++++
- .../libwmf/libwmf/CVE-2015-4696.patch         |  37 +++
- .../libwmf/libwmf/CVE-2016-9011.patch         |  50 ++++
- .../libwmf/libwmf-0.2.8.4-intoverflow.patch   |   2 +
- .../libwmf/libwmf-0.2.8.4-useafterfree.patch  |   2 +
- .../recipes-extended/libwmf/libwmf_0.2.8.4.bb |  10 +-
- .../minifi-cpp/minifi-cpp_0.15.0.bb           |   4 +
- ...us_1.3.11.bb => redis-plus-plus_1.3.12.bb} |   2 +-
- ...-hiredis-use-default-CC-if-it-is-set.patch |   6 +-
- ...ile-to-use-environment-build-setting.patch |   2 +-
- ...003-hack-to-force-use-of-libc-malloc.patch |  10 +-
- .../0004-src-Do-not-reset-FINAL_LIBS.patch    |  10 +-
- ...RCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch |   2 +-
- ...006-Define-correct-gregs-for-RISCV32.patch |   2 +-
- .../init-redis-server                         |   0
- .../{redis-7.2.11 => redis-7.2.12}/redis.conf |   0
- .../redis.service                             |   0
- .../{redis_6.2.20.bb => redis_6.2.21.bb}      |   2 +-
- .../{redis_7.2.11.bb => redis_7.2.12.bb}      |   5 +-
- .../rsyslog/rsyslog/rsyslog.conf              |   3 +-
- .../rsyslog/rsyslog_8.2402.0.bb               |   2 +
- .../feh/{feh_3.10.2.bb => feh_3.10.3.bb}      |   2 +-
- ...spiro_20221101.bb => libspiro_20240902.bb} |   2 +-
- meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb   |   3 +
- .../{jasper_4.1.1.bb => jasper_4.1.2.bb}      |   2 +-
- .../libforms/libforms_1.2.5pre1.bb            |   5 +
- .../openjpeg/openjpeg/CVE-2025-54874.patch    |  44 ----
- .../{openjpeg_2.5.3.bb => openjpeg_2.5.4.bb}  |   3 +-
- .../{libbpf_1.4.0.bb => libbpf_1.4.7.bb}      |   4 +-
- .../audiofile/audiofile_0.3.6.bb              |   4 +
- ...ays-check-the-number-of-coefficients.patch |   1 +
- .../audiofile/files/CVE-2018-13440.patch      |  36 +++
- .../audiofile/files/CVE-2018-17059.patch      |  35 +++
- .../audiofile/files/CVE-2019-13147.patch      |  31 +++
- .../audiofile/files/CVE-2022-24599.patch      |  50 ++++
- ...ute_malloc__-with-__attribute__-__ma.patch |  49 ----
- .../audit/{audit_4.0.1.bb => audit_4.0.2.bb}  |  12 +-
- .../freerdp/freerdp3/CVE-2025-4478.patch      |  60 +++++
- .../recipes-support/freerdp/freerdp3_3.4.0.bb |   1 +
- .../hdf5/files/CVE-2025-2926.patch            |  32 +++
- meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |   1 +
- ...ibbytesize_2.10.bb => libbytesize_2.11.bb} |   2 +-
- ...ts-set-direction-when-reconfiguring-.patch |  38 ---
- .../{libgpiod_1.6.4.bb => libgpiod_1.6.5.bb}  |   2 +-
- .../{libgpiod_2.1.2.bb => libgpiod_2.1.3.bb}  |   4 +-
- ...ibiodbc_3.52.15.bb => libiodbc_3.52.16.bb} |   4 +-
- .../mcelog/{mcelog_198.bb => mcelog_200.bb}   |  11 +-
- .../{openldap_2.6.7.bb => openldap_2.6.10.bb} |  10 +-
- meta-oe/recipes-support/pcp/pcp_6.0.5.bb      |   4 +
- .../recipes-support/remmina/remmina_1.4.34.bb |   1 +
- ...suppress-new-GCC-12-13-warnings-1192.patch |  57 -----
- ....cmake-remove-cross-compiation-check.patch |  33 ---
- .../{tbb_2021.11.0.bb => tbb_2021.12.0.bb}    |   8 +-
- ...ids_2023.01.16.bb => usbids_2025.09.15.bb} |   3 +-
- ...1.18.1.bb => xdg-desktop-portal_1.18.4.bb} |   6 +-
- .../0001-nss-nspr-fix-for-multilib.patch      |   7 +-
- .../xmlsec1/change-finding-path-of-nss.patch  |   7 +-
- .../{xmlsec1_1.3.4.bb => xmlsec1_1.3.5.bb}    |   2 +-
- ...guished_name-in-etc-xrdp-openssl.con.patch |   7 +-
- .../xrdp/0001-Fix-the-compile-error.patch     |  12 +-
- ...1-arch-Define-NO_NEED_ALIGN-on-ppc64.patch |   9 +-
- ...001-mark-count-with-unused-attribute.patch |   9 +-
- .../xrdp/{xrdp_0.9.19.bb => xrdp_0.9.20.bb}   |   2 +-
- ...ld-on-32bit-arches-with-64bit-time_t.patch |   7 +-
- .../evtest/{evtest_1.35.bb => evtest_1.36.bb} |   2 +-
- .../libhtml/libhtml-tree-perl_5.03.bb         |   7 +
- .../python/python3-passlib_1.7.4.bb           |   3 +
- .../python/python3-transitions_0.9.0.bb       |   2 +
- .../recipes-httpd/apache2/apache2_2.4.65.bb   |   1 +
- ...issions-check-when-saving-allowed-cr.patch |  25 ++
- ...e-potentially-malicious-HTTP-headers.patch |  53 +++++
- ...0001-Foreign-module-may-need-a-check.patch |  27 +++
- ...0001-HTML-escape-command-description.patch |  29 +++
- ...es-cannot-contact-special-characters.patch |  26 +++
- .../recipes-webadmin/webmin/webmin_1.850.bb   |   7 +-
- 91 files changed, 1403 insertions(+), 321 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2025-62168.patch
- rename meta-oe/licenses/{OpenLDAP => OLDAP-2.8} (100%)
- create mode 100644 meta-oe/recipes-crypto/botan/botan/CVE-2024-34703.patch
- create mode 100644 meta-oe/recipes-crypto/botan/botan/CVE-2024-50382-and-CVE-2024-50383.patch
- rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.7.2.bb => cryptsetup_2.7.5.bb} (98%)
- create mode 100644 meta-oe/recipes-devtools/iptraf/iptraf-ng/CVE-2024-52949.patch
- create mode 100644 meta-oe/recipes-extended/libwmf/libwmf/CVE-2015-0848-CVE-2015-4588.patch
- create mode 100644 meta-oe/recipes-extended/libwmf/libwmf/CVE-2015-4695.patch
- create mode 100644 meta-oe/recipes-extended/libwmf/libwmf/CVE-2015-4696.patch
- create mode 100644 meta-oe/recipes-extended/libwmf/libwmf/CVE-2016-9011.patch
- rename meta-oe/recipes-extended/redis-plus-plus/{redis-plus-plus_1.3.11.bb => redis-plus-plus_1.3.12.bb} (95%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.11 => redis-7.2.12}/0001-hiredis-use-default-CC-if-it-is-set.patch (89%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.11 => redis-7.2.12}/0002-lua-update-Makefile-to-use-environment-build-setting.patch (97%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.11 => redis-7.2.12}/0003-hack-to-force-use-of-libc-malloc.patch (81%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.11 => redis-7.2.12}/0004-src-Do-not-reset-FINAL_LIBS.patch (74%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.11 => redis-7.2.12}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch (92%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.11 => redis-7.2.12}/0006-Define-correct-gregs-for-RISCV32.patch (97%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.11 => redis-7.2.12}/init-redis-server (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.11 => redis-7.2.12}/redis.conf (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.11 => redis-7.2.12}/redis.service (100%)
- rename meta-oe/recipes-extended/redis/{redis_6.2.20.bb => redis_6.2.21.bb} (96%)
- rename meta-oe/recipes-extended/redis/{redis_7.2.11.bb => redis_7.2.12.bb} (93%)
- rename meta-oe/recipes-graphics/feh/{feh_3.10.2.bb => feh_3.10.3.bb} (88%)
- rename meta-oe/recipes-graphics/fontforge/{libspiro_20221101.bb => libspiro_20240902.bb} (85%)
- rename meta-oe/recipes-graphics/jasper/{jasper_4.1.1.bb => jasper_4.1.2.bb} (95%)
- delete mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2025-54874.patch
- rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.5.3.bb => openjpeg_2.5.4.bb} (86%)
- rename meta-oe/recipes-kernel/libbpf/{libbpf_1.4.0.bb => libbpf_1.4.7.bb} (92%)
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-2018-13440.patch
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-2018-17059.patch
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-2019-13147.patch
- create mode 100644 meta-oe/recipes-multimedia/audiofile/files/CVE-2022-24599.patch
- delete mode 100644 meta-oe/recipes-security/audit/audit/0001-Replace-__attribute_malloc__-with-__attribute__-__ma.patch
- rename meta-oe/recipes-security/audit/{audit_4.0.1.bb => audit_4.0.2.bb} (90%)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2025-4478.patch
- create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2926.patch
- rename meta-oe/recipes-support/libbytesize/{libbytesize_2.10.bb => libbytesize_2.11.bb} (93%)
- delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-tests-set-direction-when-reconfiguring-.patch
- rename meta-oe/recipes-support/libgpiod/{libgpiod_1.6.4.bb => libgpiod_1.6.5.bb} (94%)
- rename meta-oe/recipes-support/libgpiod/{libgpiod_2.1.2.bb => libgpiod_2.1.3.bb} (87%)
- rename meta-oe/recipes-support/libiodbc/{libiodbc_3.52.15.bb => libiodbc_3.52.16.bb} (82%)
- rename meta-oe/recipes-support/mcelog/{mcelog_198.bb => mcelog_200.bb} (79%)
- rename meta-oe/recipes-support/openldap/{openldap_2.6.7.bb => openldap_2.6.10.bb} (96%)
- delete mode 100644 meta-oe/recipes-support/tbb/tbb/0001-Fix-suppress-new-GCC-12-13-warnings-1192.patch
- delete mode 100644 meta-oe/recipes-support/tbb/tbb/0001-hwloc_detection.cmake-remove-cross-compiation-check.patch
- rename meta-oe/recipes-support/tbb/{tbb_2021.11.0.bb => tbb_2021.12.0.bb} (92%)
- rename meta-oe/recipes-support/usbids/{usbids_2023.01.16.bb => usbids_2025.09.15.bb} (84%)
- rename meta-oe/recipes-support/xdg-desktop-portal/{xdg-desktop-portal_1.18.1.bb => xdg-desktop-portal_1.18.4.bb} (88%)
- rename meta-oe/recipes-support/xmlsec1/{xmlsec1_1.3.4.bb => xmlsec1_1.3.5.bb} (96%)
- rename meta-oe/recipes-support/xrdp/{xrdp_0.9.19.bb => xrdp_0.9.20.bb} (97%)
- rename meta-oe/recipes-test/evtest/{evtest_1.35.bb => evtest_1.36.bb} (90%)
- create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-Add-missing-permissions-check-when-saving-allowed-cr.patch
- create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-Escape-potentially-malicious-HTTP-headers.patch
- create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-Foreign-module-may-need-a-check.patch
- create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-HTML-escape-command-description.patch
- create mode 100644 meta-webserver/recipes-webadmin/webmin/files/0001-Object-names-cannot-contact-special-characters.patch
-
--- 
-2.51.2
-
+--000000000000acc02a0643fca855--
 
