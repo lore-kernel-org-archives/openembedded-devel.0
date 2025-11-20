@@ -1,173 +1,542 @@
-Return-Path: <hongxu.jia@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6D78CF64BA
-	for <webhook@archiver.kernel.org>; Thu, 20 Nov 2025 05:14:13 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.27962.1763615647101603146
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3B30CF64BB
+	for <webhook@archiver.kernel.org>; Thu, 20 Nov 2025 05:22:53 +0000 (UTC)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.28080.1763616165163182037
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 19 Nov 2025 21:14:07 -0800
+ Wed, 19 Nov 2025 21:22:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=lLnzHhU6;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=341940cbf5=hongxu.jia@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AK4t103071231
-	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 21:14:06 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=qLSxaZs48pdNymNEBysw
-	TYaSHLuXvfvkU07cPYOTX+8=; b=lLnzHhU6mhtpWXuI287INQUeu4JNTG+fITbb
-	L/5KQmoAgooS7qp2idEI5ijDfsMYzfMgLDxhcGpzIt6lTkZu9L3vkW+DrD4fwdIS
-	fkgHf5IxkX4R6QGROttlf+SkmAwkl82bGFYIu+/UFVu1Pzgel43i8JIbNW7gTZGM
-	FdwiQvU9RKYRHneDVijOymTldu6NIFDa/cLwWA5xlpUGOLRwdOTtnm2xqpYi/hfb
-	uyGxN1hMUU8jV8eWsF/ofDOq/rGXY/t+SXXYfzKUaFlboN1rv9RLLt7eqJiE565+
-	yRLkICtf8sEC89Yz9AP7mg/XDF7vm/azfr8hTZ7kvzJfOmgLEw==
-Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4aenp2wx5p-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 21:14:05 -0800 (PST)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Wed, 19 Nov 2025 21:14:05 -0800
-Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Wed, 19 Nov 2025 21:14:04 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] thrift: support reproducible builds
-Date: Thu, 20 Nov 2025 13:14:04 +0800
-Message-ID: <20251120051404.2231799-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dc/gJ0J8;
+ spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-78a76afeff6so5109157b3.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 19 Nov 2025 21:22:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1763616164; x=1764220964; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=fP+/kt47UGxL8i5Z1VviGCFrY4zpU32REFSnZHDBA3g=;
+        b=dc/gJ0J89sb+aXYsub/tq6jJJkF7ib+QRuZ2UjAs9QO1Eskmc/J3Tyb9NuOlKonzKJ
+         5QwSfbMV/ZPtbLMyUKfQEZR7ByEmvttVDuCAUl1AJOH3wOKPAKGFWJ52zLmgyDf+HAV1
+         u0br4Bf1QClELWb0Z+iB2vJrTJfDS2uNgFg11s8cWwy+dPCANVbc3R6dyfTiCXZSfFTp
+         TEUFju3HcdTgYDkHwtPA4Shq7uXwXRe/dvhr4ro+AXamO0AL6VNjcMWTFLvWfzWTGQAS
+         XKoX9Xt56BtKqeNQY5VIHtZlwqQcP2LZdKCU/HZJr+0/Cog36zzDwDTvtDS/Ehou+OW8
+         rCLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763616164; x=1764220964;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fP+/kt47UGxL8i5Z1VviGCFrY4zpU32REFSnZHDBA3g=;
+        b=IfKO2lyir8q622ZEB/Qi9nUGc4oHpoRWitdUZekjWpWRFDgfs1BKYpatSTwBYgQf0D
+         dBVu5fPurMHBgv0nj15dCBX1hIuKVcD/x0Rnyp4Fw7Zvq7RkRCf+D3JpN7NQ49IP1MX4
+         OTNP+WnaKYvMEybEWU7q43xhvsHzfWykvd3EZ4zuIQ30Fofh+ToKYbaq6b+p24BZpJSd
+         Yd1GcrP2lwSl/K32UDYK5NLKyGJ5GAAiXP50A8mdKfsiRl67hUDEfVz60gCJiFe2VDtp
+         NCsfvTAhyZpNWSBsNvr+uOgm01x+ibTru7pjMAuRhFl7n2ARlycZSrNionhi69eIR37A
+         1bSQ==
+X-Gm-Message-State: AOJu0Yy0PnxqSpYuOEwFlSIRJYbwDqiOC5kNH7sAHzHXYbUP7bGVAcrG
+	vRb+Nkmfp0Avmd9zRknwd5GBgw3Id9DSuZFoEXtVUO/+a7w4QWbGDqRZzJasoXlIEd8LI2PRwHn
+	fuFeafWSMsPjwwSwtpT3c/KXBkoGGmiP321BvfK8=
+X-Gm-Gg: ASbGnctqYn0toAF+v6WTzH26NMYVejgGgc7j7yPf/i/XHtV8+dtX7CmGIyysCRibKto
+	gEkDH4Jmddf4LG5C9nkXbRb9CdrhE//FgIIfzxyjao8t2kNtptls9KhWaQkjD5hfDOcLntdBk7h
+	5aKYLgiGHd/7QWmqxkMVGSJQdxou55JScauFC/gqMCk75pIsWm5IvQP/jT/W7yopUzuTrNzQhD1
+	mkpEl0HDPZDU5PsD8CNBqg5iquRclUpG49QPQrEtmysZFDKrWLhZfxcinOEk/4sWXuya7aJEg76
+	MZ0BAcIwycCQZofjkhZE9NDq0lCWYWPR7CRmaZRdIJI02ZaIzVaEOtv7dSm/ir63DBxL4CCfWcH
+	C4pe2/SBO6IKU6rI8cIsPcMZBlD0rOfyqBScM8g==
+X-Google-Smtp-Source: AGHT+IFDvQOb+x+7EzHUVtM+KbVdfej71Gb670s7q3XdQhtL+DUrULRA/UNi0XWrjfCJdaaM+gKetN0La5JS0O18yNA=
+X-Received: by 2002:a05:690c:724a:b0:786:5789:57d1 with SMTP id
+ 00721157ae682-78a7cd12859mr6818937b3.52.1763616164225; Wed, 19 Nov 2025
+ 21:22:44 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTIwMDAyOCBTYWx0ZWRfX3P3hVxwp+qDs
- d+EB59eRZ0LtIKnfXeotgJG7vIv9qLMqdXJm+wyPn82kUDuNxDqJ/PTua1hLueB8RGIJGxZ5wX/
- vOqUdRYEH0qiTD57rrLbYhWxAlcgmxXyG71KAhKiC3DTO8RyQdttD6yPiQNlbzCevzVplqJ4C/h
- f1845jXy1otI+dgc6J/1oCrfDjslPYvoJwTrQPY5fF3j0Kuw7lSbKgiDONtK653Boj5qSjP9gnu
- XrmpDw+Ap1QKERnRAdt9kUqef37sH+QxJK9wLYY/cY1us1eeEDlN9oRK/W9AsQrfwXVMNEbwg6M
- wDhufAQYHZvNE+/J7zGh1SX2Nfyfv4AgaDIOJ2C843sxz0ZiVOolEokhTQEPp83KkZQNvCJuU94
- J6RpGO2FIVDvEFBCNe8xpzTTmsGdAg==
-X-Proofpoint-ORIG-GUID: Xk8_wdVnCJwn9JdqN3B7vtsZ4ux8UMxT
-X-Proofpoint-GUID: Xk8_wdVnCJwn9JdqN3B7vtsZ4ux8UMxT
-X-Authority-Analysis: v=2.4 cv=Z6Xh3XRA c=1 sm=1 tr=0 ts=691ea39e cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=SsMK-6ewAAAA:8 a=mDV3o1hIAAAA:8
- a=NEAV23lmAAAA:8 a=mV9VRH-2AAAA:8 a=t7CeM3EgAAAA:8 a=k7TvBiywjsa08gjsEy8A:9
- a=49hUO6naoDravHwzbBTq:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-20_01,2025-11-18_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 spamscore=0 phishscore=0 suspectscore=0 adultscore=0
- lowpriorityscore=0 impostorscore=0 malwarescore=0 clxscore=1015
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
- definitions=main-2511200028
+References: <20251120032931.3639995-1-ankur.tyagi85@gmail.com>
+In-Reply-To: <20251120032931.3639995-1-ankur.tyagi85@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 19 Nov 2025 21:22:17 -0800
+X-Gm-Features: AWmQ_bk_hR3t3o-czS0bUADberBJPY--MNrtkYTd49sRNT0d3ef9pJzQ3KqBImA
+Message-ID: <CAMKF1sqixpcnxqE-y9y9v0Fk5Umr6Mit2gLWKjZFDDJ125E5OQ@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH v2 1/2] libplist: add ptest support
+To: ankur.tyagi85@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000fd27730643ffe2dc"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Nov 2025 05:14:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121924
+ <openembedded-devel@lists.openembedded.org>; Thu, 20 Nov 2025 05:22:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121925
 
-In order to support reproducible builds [1], while using bison
-to generate source code, add COMPILE_FLAGS --file-prefix-map [2]
-to remove build path prefix and source path prefix in the generated
-header file.
+--000000000000fd27730643ffe2dc
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-[1] https://reproducible-builds.org/
-[2] https://cgit.git.savannah.gnu.org/cgit/bison.git/commit/?id=dd878d18519689c7bbcd72de4c9f9e53085a3cbf
+Hmm, I have applied v1 already, so please rebase this on top of the latest
+master and resend the delta, this will need to be backported to whinlatter
+too.
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-oe/conf/layer.conf                       |  1 -
- .../0001-support-reproducible-builds.patch    | 49 +++++++++++++++++++
- .../thrift/thrift_0.22.0.bb                   |  1 +
- 3 files changed, 50 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/0001-support-reproducible-builds.patch
+On Wed, Nov 19, 2025 at 7:29=E2=80=AFPM Ankur Tyagi via lists.openembedded.=
+org
+<ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index 1f55f5bee1..186ff9a488 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -200,7 +200,6 @@ OEQA_REPRODUCIBLE_EXCLUDED_PACKAGES += " \
-     libsource-highlight-dbg \
-     libsource-highlight-dev \
-     libsource-highlight-src \
--    libthrift-c-glib-zlib-src \
-     libvncserver-dev \
-     libwebsockets-testapps \
-     libwmf \
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift/0001-support-reproducible-builds.patch b/meta-oe/recipes-connectivity/thrift/thrift/0001-support-reproducible-builds.patch
-new file mode 100644
-index 0000000000..7fad4ddaa6
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/thrift/thrift/0001-support-reproducible-builds.patch
-@@ -0,0 +1,49 @@
-+From d4c19c3c88200c49d48c9d47971977627f98f51b Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Thu, 20 Nov 2025 11:43:45 +0800
-+Subject: [PATCH] support reproducible builds
-+
-+In order to support reproducible builds [1], while using bison to generate
-+source code, add COMPILE_FLAGS --file-prefix-map [2] to remove build path
-+prefix and source path prefix in the generated header file.
-+
-+[1] https://reproducible-builds.org/
-+[2] https://cgit.git.savannah.gnu.org/cgit/bison.git/commit/?id=dd878d18519689c7bbcd72de4c9f9e53085a3cbf
-+
-+Upstream-Status: Submitted [https://github.com/apache/thrift/pull/3246]
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ compiler/cpp/CMakeLists.txt       | 2 +-
-+ compiler/cpp/tests/CMakeLists.txt | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/compiler/cpp/CMakeLists.txt b/compiler/cpp/CMakeLists.txt
-+index 4c1c2c5..a1a8fcb 100644
-+--- a/compiler/cpp/CMakeLists.txt
-++++ b/compiler/cpp/CMakeLists.txt
-+@@ -30,7 +30,7 @@ find_package(BISON REQUIRED)
-+ file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/thrift/)
-+ 
-+ # Create flex and bison files and build the lib parse static library
-+-BISON_TARGET(thrifty ${CMAKE_CURRENT_SOURCE_DIR}/src/thrift/thrifty.yy ${CMAKE_CURRENT_BINARY_DIR}/thrift/thrifty.cc)
-++BISON_TARGET(thrifty ${CMAKE_CURRENT_SOURCE_DIR}/src/thrift/thrifty.yy ${CMAKE_CURRENT_BINARY_DIR}/thrift/thrifty.cc COMPILE_FLAGS "--file-prefix-map=${CMAKE_BINARY_DIR}='' --file-prefix-map=${CMAKE_SOURCE_DIR}=''")
-+ FLEX_TARGET(thriftl ${CMAKE_CURRENT_SOURCE_DIR}/src/thrift/thriftl.ll ${CMAKE_CURRENT_BINARY_DIR}/thrift/thriftl.cc)
-+ ADD_FLEX_BISON_DEPENDENCY(thriftl thrifty)
-+ 
-+diff --git a/compiler/cpp/tests/CMakeLists.txt b/compiler/cpp/tests/CMakeLists.txt
-+index 6a078ec..39f5bb2 100644
-+--- a/compiler/cpp/tests/CMakeLists.txt
-++++ b/compiler/cpp/tests/CMakeLists.txt
-+@@ -45,7 +45,7 @@ find_package(BISON REQUIRED)
-+ file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/thrift/)
-+ 
-+ # Create flex and bison files and build the lib parse static library
-+-BISON_TARGET(thrifty ${THRIFT_COMPILER_SOURCE_DIR}/src/thrift/thrifty.yy ${CMAKE_CURRENT_BINARY_DIR}/thrift/thrifty.cc)
-++BISON_TARGET(thrifty ${THRIFT_COMPILER_SOURCE_DIR}/src/thrift/thrifty.yy ${CMAKE_CURRENT_BINARY_DIR}/thrift/thrifty.cc COMPILE_FLAGS "--file-prefix-map=${CMAKE_BINARY_DIR}='' --file-prefix-map=${CMAKE_SOURCE_DIR}=''")
-+ FLEX_TARGET(thriftl ${THRIFT_COMPILER_SOURCE_DIR}/src/thrift/thriftl.ll ${CMAKE_CURRENT_BINARY_DIR}/thrift/thriftl.cc)
-+ ADD_FLEX_BISON_DEPENDENCY(thriftl thrifty)
-+ 
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb
-index 9c50317eff..8ca1d0085e 100644
---- a/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb
-+++ b/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb
-@@ -10,6 +10,7 @@ DEPENDS = "thrift-native boost flex-native bison-native openssl zlib"
- 
- SRC_URI = "https://downloads.apache.org/${BPN}/${PV}/${BP}.tar.gz \
-            file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch \
-+           file://0001-support-reproducible-builds.patch \
-            "
- SRC_URI[sha256sum] = "794a0e455787960d9f27ab92c38e34da27e8deeda7a5db0e59dc64a00df8a1e5"
- 
--- 
-2.34.1
+> From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>
+> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> ---
+> changes in v2:
+> - added patch to fix ptest error
+> ---
+>  .../include/ptest-packagelists-meta-oe.inc    |  1 +
+>  .../0001-test-fix-operator-error.patch        | 68 +++++++++++++++++++
+>  .../libimobiledevice/libplist/run-ptest       |  6 ++
+>  .../libimobiledevice/libplist_2.6.0.bb        | 31 ++++++++-
+>  4 files changed, 104 insertions(+), 2 deletions(-)
+>  create mode 100644
+> meta-oe/recipes-extended/libimobiledevice/libplist/0001-test-fix-operator=
+-error.patch
+>  create mode 100644
+> meta-oe/recipes-extended/libimobiledevice/libplist/run-ptest
+>
+> diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> index 09b1dbb3e1..25db9fe5cc 100644
+> --- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> +++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+> @@ -54,6 +54,7 @@ PTESTS_FAST_META_OE =3D "\
+>      xmlsec1 \
+>      zeromq \
+>      cjson \
+> +    libplist \
+>  "
+>  PTESTS_FAST_META_OE:append:x86 =3D " mcelog"
+>  PTESTS_FAST_META_OE:append:x86-64 =3D " mcelog"
+> diff --git
+> a/meta-oe/recipes-extended/libimobiledevice/libplist/0001-test-fix-operat=
+or-error.patch
+> b/meta-oe/recipes-extended/libimobiledevice/libplist/0001-test-fix-operat=
+or-error.patch
+> new file mode 100644
+> index 0000000000..0866851537
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-extended/libimobiledevice/libplist/0001-test-fix-operat=
+or-error.patch
+> @@ -0,0 +1,68 @@
+> +From 18e5b22a71f85091127cc063db79c8df687c582c Mon Sep 17 00:00:00 2001
+> +From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> +Date: Thu, 20 Nov 2025 16:01:58 +1300
+> +Subject: [PATCH] test: fix operator error
+> +
+> +Otherwise test fail with error [: -neq: binary operator expected
+> +
+> +Upstream-Status: Submitted [
+> https://github.com/libimobiledevice/libplist/pull/284]
+> +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> +---
+> + test/json-invalid-types.test  | 6 +++---
+> + test/ostep-invalid-types.test | 6 +++---
+> + 2 files changed, 6 insertions(+), 6 deletions(-)
+> +
+> +diff --git a/test/json-invalid-types.test b/test/json-invalid-types.test
+> +index c532316..a21fcd9 100755
+> +--- a/test/json-invalid-types.test
+> ++++ b/test/json-invalid-types.test
+> +@@ -14,19 +14,19 @@ export PLIST_JSON_DEBUG=3D1
+> +
+> + echo "Converting (failure expected)"
+> + $top_builddir/tools/plistutil -f json -i $DATASRC/$TESTFILE0 -o /dev/nu=
+ll
+> +-if [ $? -neq 2 ]; then
+> ++if [ $? -ne 2 ]; then
+> +   exit 1
+> + fi
+> +
+> + echo "Converting (failure expected)"
+> + $top_builddir/tools/plistutil -f json -i $DATASRC/$TESTFILE1 -o /dev/nu=
+ll
+> +-if [ $? -neq 2 ]; then
+> ++if [ $? -ne 2 ]; then
+> +   exit 2
+> + fi
+> +
+> + echo "Converting (failure expected)"
+> + $top_builddir/tools/plistutil -f json -i $DATASRC/$TESTFILE2 -o /dev/nu=
+ll
+> +-if [ $? -neq 2 ]; then
+> ++if [ $? -ne 2 ]; then
+> +   exit 3
+> + fi
+> +
+> +diff --git a/test/ostep-invalid-types.test b/test/ostep-invalid-types.te=
+st
+> +index 9222394..240505c 100755
+> +--- a/test/ostep-invalid-types.test
+> ++++ b/test/ostep-invalid-types.test
+> +@@ -14,19 +14,19 @@ export PLIST_OSTEP_DEBUG=3D1
+> +
+> + echo "Converting (failure expected)"
+> + $top_builddir/tools/plistutil -f openstep -i $DATASRC/$TESTFILE0 -o
+> /dev/null
+> +-if [ $? -neq 2 ]; then
+> ++if [ $? -ne 2 ]; then
+> +   exit 1
+> + fi
+> +
+> + echo "Converting (failure expected)"
+> + $top_builddir/tools/plistutil -f openstepn -i $DATASRC/$TESTFILE1 -o
+> /dev/null
+> +-if [ $? -neq 2 ]; then
+> ++if [ $? -ne 2 ]; then
+> +   exit 2
+> + fi
+> +
+> + echo "Converting (failure expected)"
+> + $top_builddir/tools/plistutil -f openstep -i $DATASRC/$TESTFILE2 -o
+> /dev/null
+> +-if [ $? -neq 2 ]; then
+> ++if [ $? -ne 2 ]; then
+> +   exit 3
+> + fi
+> +
+> diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist/run-ptest
+> b/meta-oe/recipes-extended/libimobiledevice/libplist/run-ptest
+> new file mode 100644
+> index 0000000000..ed940af5f6
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/libimobiledevice/libplist/run-ptest
+> @@ -0,0 +1,6 @@
+> +#!/bin/sh
+> +
+> +for t in `ls test/*.test`; do
+> +       top_srcdir=3D$(pwd)/input top_builddir=3D$(pwd)/test ./$t && echo
+> PASS: $t || echo FAIL: $t
+> +       rm $(pwd)/test/test/data/* 2>/dev/null
+> +done
+> diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
+> b/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
+> index 7f01962a97..831b74cd1f 100644
+> --- a/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
+> +++ b/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
+> @@ -6,10 +6,13 @@ LIC_FILES_CHKSUM =3D
+> "file://COPYING;md5=3Debb5c50ab7cab4baeffba14977030c07 \
+>
+>  DEPENDS =3D "libxml2 glib-2.0 swig python3"
+>
+> -inherit autotools pkgconfig python3native python3targetconfig
+> +inherit autotools pkgconfig python3native python3targetconfig ptest
+>
+>  SRCREV =3D "2117b8fdb6b4096455bd2041a63e59a028120136"
+> -SRC_URI =3D "git://
+> github.com/libimobiledevice/libplist;protocol=3Dhttps;branch=3Dmaster"
+> +SRC_URI =3D "git://
+> github.com/libimobiledevice/libplist;protocol=3Dhttps;branch=3Dmaster \
+> +           file://run-ptest \
+> +           file://0001-test-fix-operator-error.patch \
+> +"
+>
+>
+>  CVE_STATUS_GROUPS +=3D "CVE_STATUS_LIBLIST"
+> @@ -30,6 +33,28 @@ do_install:append () {
+>      fi
+>  }
+>
+> +do_install_ptest(){
+> +    # tests expect a particular directory structure for input and output
+> +    install -d ${D}${PTEST_PATH}/input/test/data
+> +    install -d ${D}${PTEST_PATH}/test/tools
+> +    install -d ${D}${PTEST_PATH}/test/test/.libs
+> +    install -d ${D}${PTEST_PATH}/test/test/data
+> +    install ${S}/test/data/* ${D}${PTEST_PATH}/input/test/data/
+> +    install ${S}/test/*.test ${D}${PTEST_PATH}/test/
+> +    install -m 0755 ${B}/test/.libs/plist*
+> ${D}${PTEST_PATH}/test/test/.libs/
+> +    install -m 0755 ${B}/test/.libs/integer_set_test
+> ${D}${PTEST_PATH}/test/test/
+> +    for t in $(find ${B}/test -type f -name 'plist*' \! -name '*.o'); do
+> +        install -m 0755 $t ${D}${PTEST_PATH}/test/test/
+> +    done
+> +    for t in $(find ${B}/tools -type f -name 'plist*' \! -name '*.o'); d=
+o
+> +        install -m 0755 $t ${D}${PTEST_PATH}/test/tools/
+> +    done
+> +    sed -i 's@LD_LIBRARY_PATH=3D"[^"]*:@LD_LIBRARY_PATH=3D"@g' \
+> +        ${D}${PTEST_PATH}/test/test/plist_cmp
+> +    sed -i 's@LD_LIBRARY_PATH=3D"[^"]*:@LD_LIBRARY_PATH=3D"@g' \
+> +        ${D}${PTEST_PATH}/test/test/plist_test
+> +}
+> +
+>  PACKAGES =3D+ "${PN}-utils \
+>               ${PN}++ \
+>               ${PN}-python"
+> @@ -38,3 +63,5 @@ FILES:${PN} =3D "${libdir}/libplist-2.0${SOLIBS}"
+>  FILES:${PN}++ =3D "${libdir}/libplist++-2.0${SOLIBS}"
+>  FILES:${PN}-utils =3D "${bindir}/*"
+>  FILES:${PN}-python =3D "${PYTHON_SITEPACKAGES_DIR}/*"
+> +
+> +RDEPENDS:${PN}-ptest +=3D "bash"
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#121921):
+> https://lists.openembedded.org/g/openembedded-devel/message/121921
+> Mute This Topic: https://lists.openembedded.org/mt/116386363/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
+--000000000000fd27730643ffe2dc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hmm, I have applied v1 already, so please rebase this on t=
+op of the latest master and resend the delta, this will need to be backport=
+ed to whinlatter too.</div><br><div class=3D"gmail_quote gmail_quote_contai=
+ner"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Nov 19, 2025 at 7:29=E2=
+=80=AFPM Ankur Tyagi via <a href=3D"http://lists.openembedded.org">lists.op=
+enembedded.org</a> &lt;ankur.tyagi85=3D<a href=3D"mailto:gmail.com@lists.op=
+enembedded.org">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><b=
+lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
+ft:1px solid rgb(204,204,204);padding-left:1ex">From: Ankur Tyagi &lt;<a hr=
+ef=3D"mailto:ankur.tyagi85@gmail.com" target=3D"_blank">ankur.tyagi85@gmail=
+.com</a>&gt;<br>
+<br>
+Signed-off-by: Ankur Tyagi &lt;<a href=3D"mailto:ankur.tyagi85@gmail.com" t=
+arget=3D"_blank">ankur.tyagi85@gmail.com</a>&gt;<br>
+---<br>
+changes in v2:<br>
+- added patch to fix ptest error<br>
+---<br>
+=C2=A0.../include/ptest-packagelists-meta-oe.inc=C2=A0 =C2=A0 |=C2=A0 1 +<b=
+r>
+=C2=A0.../0001-test-fix-operator-error.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 6=
+8 +++++++++++++++++++<br>
+=C2=A0.../libimobiledevice/libplist/run-ptest=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+=C2=A0 6 ++<br>
+=C2=A0.../libimobiledevice/<a href=3D"http://libplist_2.6.0.bb" rel=3D"nore=
+ferrer" target=3D"_blank">libplist_2.6.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+| 31 ++++++++-<br>
+=C2=A04 files changed, 104 insertions(+), 2 deletions(-)<br>
+=C2=A0create mode 100644 meta-oe/recipes-extended/libimobiledevice/libplist=
+/0001-test-fix-operator-error.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-extended/libimobiledevice/libplist=
+/run-ptest<br>
+<br>
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/=
+conf/include/ptest-packagelists-meta-oe.inc<br>
+index 09b1dbb3e1..25db9fe5cc 100644<br>
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc<br>
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc<br>
+@@ -54,6 +54,7 @@ PTESTS_FAST_META_OE =3D &quot;\<br>
+=C2=A0 =C2=A0 =C2=A0xmlsec1 \<br>
+=C2=A0 =C2=A0 =C2=A0zeromq \<br>
+=C2=A0 =C2=A0 =C2=A0cjson \<br>
++=C2=A0 =C2=A0 libplist \<br>
+=C2=A0&quot;<br>
+=C2=A0PTESTS_FAST_META_OE:append:x86 =3D &quot; mcelog&quot;<br>
+=C2=A0PTESTS_FAST_META_OE:append:x86-64 =3D &quot; mcelog&quot;<br>
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist/0001-test-f=
+ix-operator-error.patch b/meta-oe/recipes-extended/libimobiledevice/libplis=
+t/0001-test-fix-operator-error.patch<br>
+new file mode 100644<br>
+index 0000000000..0866851537<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist/0001-test-fix-oper=
+ator-error.patch<br>
+@@ -0,0 +1,68 @@<br>
++From 18e5b22a71f85091127cc063db79c8df687c582c Mon Sep 17 00:00:00 2001<br>
++From: Ankur Tyagi &lt;<a href=3D"mailto:ankur.tyagi85@gmail.com" target=3D=
+"_blank">ankur.tyagi85@gmail.com</a>&gt;<br>
++Date: Thu, 20 Nov 2025 16:01:58 +1300<br>
++Subject: [PATCH] test: fix operator error<br>
++<br>
++Otherwise test fail with error [: -neq: binary operator expected<br>
++<br>
++Upstream-Status: Submitted [<a href=3D"https://github.com/libimobiledevice=
+/libplist/pull/284" rel=3D"noreferrer" target=3D"_blank">https://github.com=
+/libimobiledevice/libplist/pull/284</a>]<br>
++Signed-off-by: Ankur Tyagi &lt;<a href=3D"mailto:ankur.tyagi85@gmail.com" =
+target=3D"_blank">ankur.tyagi85@gmail.com</a>&gt;<br>
++---<br>
++ test/json-invalid-types.test=C2=A0 | 6 +++---<br>
++ test/ostep-invalid-types.test | 6 +++---<br>
++ 2 files changed, 6 insertions(+), 6 deletions(-)<br>
++<br>
++diff --git a/test/json-invalid-types.test b/test/json-invalid-types.test<b=
+r>
++index c532316..a21fcd9 100755<br>
++--- a/test/json-invalid-types.test<br>
+++++ b/test/json-invalid-types.test<br>
++@@ -14,19 +14,19 @@ export PLIST_JSON_DEBUG=3D1<br>
++ <br>
++ echo &quot;Converting (failure expected)&quot;<br>
++ $top_builddir/tools/plistutil -f json -i $DATASRC/$TESTFILE0 -o /dev/null=
+<br>
++-if [ $? -neq 2 ]; then<br>
+++if [ $? -ne 2 ]; then<br>
++=C2=A0 =C2=A0exit 1<br>
++ fi<br>
++ <br>
++ echo &quot;Converting (failure expected)&quot;<br>
++ $top_builddir/tools/plistutil -f json -i $DATASRC/$TESTFILE1 -o /dev/null=
+<br>
++-if [ $? -neq 2 ]; then<br>
+++if [ $? -ne 2 ]; then<br>
++=C2=A0 =C2=A0exit 2<br>
++ fi<br>
++ <br>
++ echo &quot;Converting (failure expected)&quot;<br>
++ $top_builddir/tools/plistutil -f json -i $DATASRC/$TESTFILE2 -o /dev/null=
+<br>
++-if [ $? -neq 2 ]; then<br>
+++if [ $? -ne 2 ]; then<br>
++=C2=A0 =C2=A0exit 3<br>
++ fi<br>
++ <br>
++diff --git a/test/ostep-invalid-types.test b/test/ostep-invalid-types.test=
+<br>
++index 9222394..240505c 100755<br>
++--- a/test/ostep-invalid-types.test<br>
+++++ b/test/ostep-invalid-types.test<br>
++@@ -14,19 +14,19 @@ export PLIST_OSTEP_DEBUG=3D1<br>
++ <br>
++ echo &quot;Converting (failure expected)&quot;<br>
++ $top_builddir/tools/plistutil -f openstep -i $DATASRC/$TESTFILE0 -o /dev/=
+null<br>
++-if [ $? -neq 2 ]; then<br>
+++if [ $? -ne 2 ]; then<br>
++=C2=A0 =C2=A0exit 1<br>
++ fi<br>
++ <br>
++ echo &quot;Converting (failure expected)&quot;<br>
++ $top_builddir/tools/plistutil -f openstepn -i $DATASRC/$TESTFILE1 -o /dev=
+/null<br>
++-if [ $? -neq 2 ]; then<br>
+++if [ $? -ne 2 ]; then<br>
++=C2=A0 =C2=A0exit 2<br>
++ fi<br>
++ <br>
++ echo &quot;Converting (failure expected)&quot;<br>
++ $top_builddir/tools/plistutil -f openstep -i $DATASRC/$TESTFILE2 -o /dev/=
+null<br>
++-if [ $? -neq 2 ]; then<br>
+++if [ $? -ne 2 ]; then<br>
++=C2=A0 =C2=A0exit 3<br>
++ fi<br>
++ <br>
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist/run-ptest b=
+/meta-oe/recipes-extended/libimobiledevice/libplist/run-ptest<br>
+new file mode 100644<br>
+index 0000000000..ed940af5f6<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist/run-ptest<br>
+@@ -0,0 +1,6 @@<br>
++#!/bin/sh<br>
++<br>
++for t in `ls test/*.test`; do<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0top_srcdir=3D$(pwd)/input top_builddir=3D$(pwd)=
+/test ./$t &amp;&amp; echo PASS: $t || echo FAIL: $t<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0rm $(pwd)/test/test/data/* 2&gt;/dev/null<br>
++done<br>
+diff --git a/meta-oe/recipes-extended/libimobiledevice/<a href=3D"http://li=
+bplist_2.6.0.bb" rel=3D"noreferrer" target=3D"_blank">libplist_2.6.0.bb</a>=
+ b/meta-oe/recipes-extended/libimobiledevice/<a href=3D"http://libplist_2.6=
+.0.bb" rel=3D"noreferrer" target=3D"_blank">libplist_2.6.0.bb</a><br>
+index 7f01962a97..831b74cd1f 100644<br>
+--- a/meta-oe/recipes-extended/libimobiledevice/<a href=3D"http://libplist_=
+2.6.0.bb" rel=3D"noreferrer" target=3D"_blank">libplist_2.6.0.bb</a><br>
++++ b/meta-oe/recipes-extended/libimobiledevice/<a href=3D"http://libplist_=
+2.6.0.bb" rel=3D"noreferrer" target=3D"_blank">libplist_2.6.0.bb</a><br>
+@@ -6,10 +6,13 @@ LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3Debb5c50ab=
+7cab4baeffba14977030c07 \<br>
+<br>
+=C2=A0DEPENDS =3D &quot;libxml2 glib-2.0 swig python3&quot;<br>
+<br>
+-inherit autotools pkgconfig python3native python3targetconfig<br>
++inherit autotools pkgconfig python3native python3targetconfig ptest<br>
+<br>
+=C2=A0SRCREV =3D &quot;2117b8fdb6b4096455bd2041a63e59a028120136&quot;<br>
+-SRC_URI =3D &quot;git://<a href=3D"http://github.com/libimobiledevice/libp=
+list;protocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank"=
+>github.com/libimobiledevice/libplist;protocol=3Dhttps;branch=3Dmaster</a>&=
+quot;<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/libimobiledevice/libp=
+list;protocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank"=
+>github.com/libimobiledevice/libplist;protocol=3Dhttps;branch=3Dmaster</a> =
+\<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://run-ptest \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-test-fix-operator-err=
+or.patch \<br>
++&quot;<br>
+<br>
+<br>
+=C2=A0CVE_STATUS_GROUPS +=3D &quot;CVE_STATUS_LIBLIST&quot;<br>
+@@ -30,6 +33,28 @@ do_install:append () {<br>
+=C2=A0 =C2=A0 =C2=A0fi<br>
+=C2=A0}<br>
+<br>
++do_install_ptest(){<br>
++=C2=A0 =C2=A0 # tests expect a particular directory structure for input an=
+d output<br>
++=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}/input/test/data<br>
++=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}/test/tools<br>
++=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}/test/test/.libs<br>
++=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}/test/test/data<br>
++=C2=A0 =C2=A0 install ${S}/test/data/* ${D}${PTEST_PATH}/input/test/data/<=
+br>
++=C2=A0 =C2=A0 install ${S}/test/*.test ${D}${PTEST_PATH}/test/<br>
++=C2=A0 =C2=A0 install -m 0755 ${B}/test/.libs/plist* ${D}${PTEST_PATH}/tes=
+t/test/.libs/<br>
++=C2=A0 =C2=A0 install -m 0755 ${B}/test/.libs/integer_set_test ${D}${PTEST=
+_PATH}/test/test/<br>
++=C2=A0 =C2=A0 for t in $(find ${B}/test -type f -name &#39;plist*&#39; \! =
+-name &#39;*.o&#39;); do<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -m 0755 $t ${D}${PTEST_PATH}/test/test=
+/<br>
++=C2=A0 =C2=A0 done<br>
++=C2=A0 =C2=A0 for t in $(find ${B}/tools -type f -name &#39;plist*&#39; \!=
+ -name &#39;*.o&#39;); do<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -m 0755 $t ${D}${PTEST_PATH}/test/tool=
+s/<br>
++=C2=A0 =C2=A0 done<br>
++=C2=A0 =C2=A0 sed -i &#39;s@LD_LIBRARY_PATH=3D&quot;[^&quot;]*:@LD_LIBRARY=
+_PATH=3D&quot;@g&#39; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 ${D}${PTEST_PATH}/test/test/plist_cmp<br>
++=C2=A0 =C2=A0 sed -i &#39;s@LD_LIBRARY_PATH=3D&quot;[^&quot;]*:@LD_LIBRARY=
+_PATH=3D&quot;@g&#39; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 ${D}${PTEST_PATH}/test/test/plist_test<br>
++}<br>
++<br>
+=C2=A0PACKAGES =3D+ &quot;${PN}-utils \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${PN}++ \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${PN}-python&quot;<br>
+@@ -38,3 +63,5 @@ FILES:${PN} =3D &quot;${libdir}/libplist-2.0${SOLIBS}&quo=
+t;<br>
+=C2=A0FILES:${PN}++ =3D &quot;${libdir}/libplist++-2.0${SOLIBS}&quot;<br>
+=C2=A0FILES:${PN}-utils =3D &quot;${bindir}/*&quot;<br>
+=C2=A0FILES:${PN}-python =3D &quot;${PYTHON_SITEPACKAGES_DIR}/*&quot;<br>
++<br>
++RDEPENDS:${PN}-ptest +=3D &quot;bash&quot;<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#121921): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/121921" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/121921</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116386363/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/116386363/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000fd27730643ffe2dc--
 
