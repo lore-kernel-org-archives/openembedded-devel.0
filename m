@@ -2,47 +2,47 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1C91CF886E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B102ECF8871
 	for <webhook@archiver.kernel.org>; Thu, 20 Nov 2025 15:26:36 +0000 (UTC)
-Received: from MA0PR01CU012.outbound.protection.outlook.com (MA0PR01CU012.outbound.protection.outlook.com [40.107.57.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.30427.1763629570098347010
+Received: from PNZPR01CU001.outbound.protection.outlook.com (PNZPR01CU001.outbound.protection.outlook.com [40.107.51.29])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.30438.1763629637392236504
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Nov 2025 01:06:10 -0800
+ Thu, 20 Nov 2025 01:07:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@bmwtechworks.in header.s=selector1 header.b=ojZa43Na;
- spf=pass (domain: bmwtechworks.in, ip: 40.107.57.43, mailfrom: divyanshu.rathore@bmwtechworks.in)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@bmwtechworks.in header.s=selector1 header.b=uYflnOLz;
+ spf=pass (domain: bmwtechworks.in, ip: 40.107.51.29, mailfrom: divyanshu.rathore@bmwtechworks.in)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PKTMOquYLgXPIDHduiqpFdaa1TM4sLC7yx8Ws48CpVtXS4blqk1ucRU7Jj/sQYlmyLLxOm1f+ic6r+aWDJ4scKgZjMcUlhndMmrj4PGe/w9foKLs1JH35sQEBB2urxYdNq+zUBolwTgWRcTvAGVtUt0Z2UV2lK8wr+6urvTK6s/FpEvujf42/6ho88b8P1hgtxamgDcptKvV4EJGQWdlXtZ7PyPEbz3Tm3dA8mPPRFOwutApJXRVYhaAn8p5+lcV5EZ7PmbXubo7nLh8UjZBz0bBZEZlt1PhSC1iedRcXZY/Hn3k4OZnbN4UWJuMadAS9BFZL6pVUkA7VK2q0sffcA==
+ b=xhhe1q3K0K7fy4vNCUnGYWpv1LVdAZ7odajHBGajYrNAwSce9cd63D7JylMyTcWR+q20PlBVsRTOAePcRg81x8V7tm5yYs/zdnWD04VD91owOdc9wU4ZlO4m47NmEV619r+Mzp2okrp+ikfXLodFDy1DV3iTaiG4TL7GF86F3vxQdAg/kbA/9lEKZhY4frxSQ5jYyKJteaIiCaIzQmeY5L8vG2twAy8ahBhuR50vWiR0L505vGLz2i7hbXKS/4/lBgUv3Pa2CYuYVfTaOtavyaGrgm4jqZh5sS1k/4mp7EcF6yhKpvF2Eis3GIOEOW80zl0wcdC2nA1j6XxZH3s0lg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vG6vqx5fDFyU0Y8Wti6pJsQv+a8NBj9iL87l2LusreM=;
- b=rh2PlidDXw77Z0X8pFiPAPh5qJn79SYf7MriWInQL83ph6M+km9v94seQJTOWEN6u008n3672PiP6scW9rZmtet1ypRrs8MRu7jQU7G233mkFrtizwXyCGNLD6BhFxTCLg6bzTBjvuOOfr8hrCVhavZpmYt33CgrOk+QQLkFJrWxKT2LieZyS27zCL/5w7aOV80xRA+PcRgNz+JVHRRrlGXBHjyW/mv+Nilbqtl4laEKsjknAMKgKxyyAQOXtB6LueQq71vxud0bL9LCDoAIWVlAO9oET4IxjYfjxnXC5N9ks7bI0RNcpq/ocNabSrxktY/gb9i9KP9PgG/9pRNabA==
+ bh=QbfrGUX8BAj5k6cc7JklEYcYq4M7CwXhj8dvezuMSV8=;
+ b=oSrwvTs9VWdFtXVJPjijFRxMZlIWILPYSm8KmLP/keZ77kcjw8+8XdVkaZiESsMTrtK0eDPHLOfQ2mZG7sfCF/j5WjvJTJWzlm7OMUpI1AzHXWIYrfT34dlGLsKIeVwr1Hf/4HPi/dQnhf5jj1tm5kHTH0S7N2YzJxGDjaBhqyXFnA5gjxTu19EndiJoN54k2axYeXak1zPv7f2soaoCwhXrs/r56CJuiWk+9+KytF0eA5zJhdSoiuqp0QLGHsZPQXg3ntT/mHNP/XUh7XKheFCaZwk+APVeycIO16OIZeuITczBcs1PkJrWRjqDDHz+G1QJ1rwp8kFRgd5Ew2Tyxg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=bmwtechworks.in; dmarc=pass action=none
  header.from=bmwtechworks.in; dkim=pass header.d=bmwtechworks.in; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmwtechworks.in;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vG6vqx5fDFyU0Y8Wti6pJsQv+a8NBj9iL87l2LusreM=;
- b=ojZa43NaImhJWlkBxhTK4M3AWlJKWbTnSUF+rAYOaTbeeUaPVfvQt+E8FBnZx6qn3AEHj8fZyeufAEsL6ZZ1ewY5/wIrKOfksJFyIxINVgQEzSkerVk9bojnEWgk2xwN9sj5BR//PejXKCqkD0a5n4etT1S8q5JEpcRXaWbVx/KY+2O3aWHWA7AIcLnHl+//pY2bXxj90VtpjPn5qNavVy8Ov3sF4GhXGS2ad7v4uqR+4q4B150wHrduVj6MtzONgwAg5fUa8y+qWBbl+ZnC9v7Q9q7zFORckWQP6vJUyDfzI3BpM1r13ZzuSzCuuYlQlP+VLUgF6OMHZ2XGb6AyPw==
+ bh=QbfrGUX8BAj5k6cc7JklEYcYq4M7CwXhj8dvezuMSV8=;
+ b=uYflnOLzmH0xzdTXMeGV/Q1WWZt3bAsihUVujGF7/J6W2zPf5z00o8gWvPftPcPpMXM75FWjOc7AYGYr5SJ+DlmGlI6gzFCHYB/76s5cYOsOoJUtKOnE7T9suHnFLU3BIyvJH4UQv0aGG2ztuSSFfceI8Eq99NJiA3LTS8Q+T2QoDbN3grro8mCA6UJ/LkMV/W7Te3y2WOm3yqKWZGIBilkD9sXbL+QhLs6nrnu0cdxjUYxJcROMjsdnL70CvZVKHEEvuzixh71GroHhI3LbuGEYzAaNMYJSnq5l9dflMDMjU2DibnkhObmr0DSwcpYrF6+bQ929y7Rx3qZBsCfyZA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=bmwtechworks.in;
 Received: from MA0P287MB3378.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:143::11)
- by PN2P287MB1004.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:134::13) with
+ by MA0P287MB1011.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:e3::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Thu, 20 Nov
- 2025 08:50:22 +0000
+ 2025 08:50:17 +0000
 Received: from MA0P287MB3378.INDP287.PROD.OUTLOOK.COM
  ([fe80::9a89:c69c:9878:e483]) by MA0P287MB3378.INDP287.PROD.OUTLOOK.COM
  ([fe80::9a89:c69c:9878:e483%6]) with mapi id 15.20.9343.009; Thu, 20 Nov 2025
- 08:50:22 +0000
+ 08:50:17 +0000
 From: Divyanshu Rathore <Divyanshu.Rathore@bmwtechworks.in>
 To: openembedded-devel@lists.openembedded.org
 CC: Sana.Kazi@bmwtechworks.in
-Subject: [meta-oe][kirkstone][PATCH 12/12] ImageMagick: Fix CVE-2024-41817
-Date: Thu, 20 Nov 2025 14:19:59 +0530
-Message-ID: <20251120084959.51761-12-Divyanshu.Rathore@bmwtechworks.in>
+Subject: [meta-oe][kirkstone][PATCH 08/12] ImageMagick: Fix CVE-2025-57807
+Date: Thu, 20 Nov 2025 14:19:55 +0530
+Message-ID: <20251120084959.51761-8-Divyanshu.Rathore@bmwtechworks.in>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251120084959.51761-1-Divyanshu.Rathore@bmwtechworks.in>
 References: <20251120084959.51761-1-Divyanshu.Rathore@bmwtechworks.in>
@@ -51,179 +51,181 @@ X-ClientProxiedBy: MA5P287CA0130.INDP287.PROD.OUTLOOK.COM
  (2603:1096:a01:143::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MA0P287MB3378:EE_|PN2P287MB1004:EE_
-X-MS-Office365-Filtering-Correlation-Id: b0109ddb-db09-49ca-ee34-08de2811d717
+X-MS-TrafficTypeDiagnostic: MA0P287MB3378:EE_|MA0P287MB1011:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3c6a4bfc-6b7e-4b8a-243e-08de2811d40d
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|376014|52116014|10070799003|1800799024|13003099007;
+	BCL:0;ARA:13230040|10070799003|52116014|376014|366016|1800799024;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?LOujjCVTef4/QtGmQPGMD9n2J8RnH3UNnLIC6XxyHjNIaJdbP12J9mnC5x2B?=
- =?us-ascii?Q?Tg5NKEBz8zrMXNyam9jru7MKA6v8ONd2kDvZMe/5zMcxAm2Q6iN3zN86cp03?=
- =?us-ascii?Q?NQcz6Odg9S9aolesfWTkMANToyRz5+cOHKi892Bbt17p4XH9U7/qQENHmv4i?=
- =?us-ascii?Q?qTh7Yq2jUBDB39NPVUfiF91ZRXU+esjc8qmqDpnGLDH8VzCHh/ONL+7YAKu1?=
- =?us-ascii?Q?fvVb9M0O2zYnht5H71TRkvNiZbBepO5xoda/4jCjqcyMt4hOXBsFsVJMr6BY?=
- =?us-ascii?Q?4puh18KZjsqM2phn+0dyRNCXQrN4NlyBsf+UVJVX1NGcTJZiBM1VRnw8gZYm?=
- =?us-ascii?Q?sDygrpikLzI2tsh/5emL7tbtTyOdq4H9Q6m2FJ7u8HMz72fhwj7TKc9yyTcv?=
- =?us-ascii?Q?1xaYHN5xO6bGSBEu7XQKQmCzfEaR0Y9HjrpWBMYm8oYYOMO7x3goTfovQwgN?=
- =?us-ascii?Q?8mUFH2y1S26Tu+4d0ftb7O0T/ilV9rmLJ4a6ftorAO08UvtWVyh4HNRAIaBY?=
- =?us-ascii?Q?37fXEGPUXb2bGPtm2OyMoTOcMxzRH4qZx8/9rpIikHWNofTapjlris5UWpHM?=
- =?us-ascii?Q?cCrhHBEvnS1OyCrKS5SnEwB21/F6tiGJjiYsxueMynlOf7v8nrkOAZSltvP1?=
- =?us-ascii?Q?OQ6mhEJDtv0P4y8j2do8TzzhrrnmmoTeVSS7lkGxhtqeVk3bVjK1enCaagB+?=
- =?us-ascii?Q?PVFuUiCmStb6buJraJzRT46D4GjYsskZJIJ3X3lwVGbVk+BgUzH1MFgwNU9K?=
- =?us-ascii?Q?/2glkW4IM5r6NMLw0gLAoVYg84DQpoi4Nebu/wH4p0pDFtQpcq7ddRdMLOX7?=
- =?us-ascii?Q?FdEELXm2c67IZmxzkUaOCOmUZjLS2qtyXKl5kU5jKNIAURy9Py57OGbFFzVp?=
- =?us-ascii?Q?6jRkTvAOV4azu6ByxN6HyZaEnqCuLhrMiw4phzMlhYa8YvrZnRih0Cm+AZKA?=
- =?us-ascii?Q?scXIU9QrNC8cLLnPPZ4pqAM8Mg0WHs2xch2K7mescblD6nka9GiOAb+lVL9s?=
- =?us-ascii?Q?5zhrZehJJVBFYm7shKlp0+gDkkPVdxw1WHcIIHEsN4UhXINyjp7xiHP7PfVM?=
- =?us-ascii?Q?z24OWJ8ypnsFpRJtYVMOaLMmli9zdze2w+RBLsBoYHPR1chMbZbKgrJhPWrQ?=
- =?us-ascii?Q?zX/K6IWvsX0z0PDpodxAf8QRx9GNcJnNQT0VzvGsd7oV9Ojx6wavcZYOv3HJ?=
- =?us-ascii?Q?wDMATQFgUJD9ADeosGG+34eOHokDhXpP2koR9V9+vY5iJ5so2DZLOW2+M3uc?=
- =?us-ascii?Q?U3lx3cw3+3eZpi9d+oZ5JoA2OoHqKZ2aOhvRppPuyxW0hH8p3Ozb0Y9G+qhr?=
- =?us-ascii?Q?PxYDmjXt16AF6RGDDTqNxNHEPWyN1CKHoX14r3X8+T23O0bRlR5agBy8duSh?=
- =?us-ascii?Q?px76SkBPQ8oH6qkr4DL6Qs0VPJyEcwr7BwChzDcsSeFpoytAtg=3D=3D?=
+	=?us-ascii?Q?ai1ScqJtEvig0xCn4VwXoOBq6F5XWxi9bwKYqFZwUDaRYnJ8JCcZKbGF0xRz?=
+ =?us-ascii?Q?nPKo2R83IhXzeDLiqDqahuPrefdsLnQj11NDTLrA/ZiKaozF92HTyT6WsZpX?=
+ =?us-ascii?Q?eZ5HHk6+spVRLezsQur7lyetmzVbkouKz+ZSbrqrxE8Oye4WdkXKjOXh2J8x?=
+ =?us-ascii?Q?F8FuCFbfbqGOhZ6rMnLb02j3UzE50LPNCiKk8WyQHPbc7iX4+zaTlbcs2FR5?=
+ =?us-ascii?Q?KwjVzKBD8rNBCtNyYD2GKvwxvIN/j7Y4mPymUky7S3MAweb69WQpBCadhf+A?=
+ =?us-ascii?Q?256YQujq2KKBzn7MhgkVHbHQl1jrf0WCxuOQANFmek+61tOqwt7rs0zst85N?=
+ =?us-ascii?Q?YYrg+WGd+sACmQ22zum+EqB3wisfAm+wmeXXjIEoeafZO06JetL2udfEJPew?=
+ =?us-ascii?Q?h5UD7OI2JzdloGNuj1j7fbPrHP/KdSTGO8fBKS1XK8nHm6NTR4jx2Yxi4mke?=
+ =?us-ascii?Q?VYf9Y32MTEKnQgkb4nmzL8cmVGYih2LJjNGNfV98q0H2iPe1o9ECoc15ac+/?=
+ =?us-ascii?Q?qdK8DyyymN1g2NEUSNr8ltBkHwtqURR+ux526kuEN1amO6QmLf9mffGBVgb+?=
+ =?us-ascii?Q?veiujBreVxbp3df9iNKs65tzPDPQbaGtWlTeCQR2ziC5RzpEBvXmKlaNSatp?=
+ =?us-ascii?Q?DxVEs2A8t5eI5j4z7DzMpueiSb+2au8LAgMlvTrPWfAc4IFXMRtsnZY7px0n?=
+ =?us-ascii?Q?D88MY2Oq5KMmvit0LvyP8ZoEhTJi7JhY2XCNpdJrL4GuN+yFYmfh4BVpQUY4?=
+ =?us-ascii?Q?/UHRca7KG0SH4T5CL06OZxjmIh6cgaZK0PQlSz3zYnOUwgOHCzg8zwCVeMB7?=
+ =?us-ascii?Q?66grlv4k6D+ewxLf7vRnuM+Y6mcXAITzaNTia/58s8qJn4oCCUTqrZHRzpuF?=
+ =?us-ascii?Q?MAm+/giR2nOseGWc8gl4iuM6uw0mk63pO0q7+Y/+ts75u9HxySYpBOspPp7t?=
+ =?us-ascii?Q?/kRv64uENA9pDwbAdGDD6dHQ4F0YaP9L7c1lS3qVUqbnikNK1gi5/rTZTec2?=
+ =?us-ascii?Q?MVwPzKNxiIY+wI8T5SkI9uq5fd13tmNrUPQgShza2A7nll41zVKR77bhdyGZ?=
+ =?us-ascii?Q?MhS7LqwMgJJDGGM/cbaFvo7OVWcf7+0eAU+ForVexXAHN2Ci45RsC65sMG4X?=
+ =?us-ascii?Q?Ypk+KDPdrCyj/lIzYn4Oiip3UKSzxT/0l8Sa+IsTq84tSuw6xMW/nQ5Qmcdh?=
+ =?us-ascii?Q?wqsOdEXQZ0AkH/jyVMrsdfFZ/hUud69ZDViDB80ZwQKm6i0v1o59Dv8qXDR/?=
+ =?us-ascii?Q?rkSYnB+9+yt2fvehfGTr7eugYubPcVqQK+ydVPAWIQR7t/cIGHxBzDfqdhPE?=
+ =?us-ascii?Q?dK4f9ngi41Rpfdh2h/bR8J3clsPoMpAns1TJ+jyv2/aeOengU75b8+dOVGDL?=
+ =?us-ascii?Q?SBcBVYAGrXHdqIg3RWAR2Xug2EmpULPGiT8p0o2avWUf5GqVcH1KuAnG1lsI?=
+ =?us-ascii?Q?bWEAtLhZBVFLjefjYFkYT+O4ODfQ4VEX?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MA0P287MB3378.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(52116014)(10070799003)(1800799024)(13003099007);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MA0P287MB3378.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(10070799003)(52116014)(376014)(366016)(1800799024);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?0IVBb373TY220jA0a0s5THSBTzt1Kmb2xVnjDu3G2yhHR7DjEn/fI5V1+3gF?=
- =?us-ascii?Q?FDl7sx4DSiKwcs+5Nxiqi0O769J2i1Z3+eUFWqL2S6V+p+3nl0adRkQJ2iIX?=
- =?us-ascii?Q?aBB1iZT82Wse4bt2DgkpctrKSv8yOB69SxIXdvBkkzt0a8XoZl4LjpkHFIz/?=
- =?us-ascii?Q?ITmpsA4hr811/XTRCRZGMpbfTQyVsQ+FplE9+3yfB2+iChr0kJm0KsT1hUK0?=
- =?us-ascii?Q?lPAlFH/xQs2s9YXiu1qBiX1EGh2abnX/bkeFI7/Rq1BbtKUttDNObaG3mxEb?=
- =?us-ascii?Q?6w7+O3nvEmBiZY6eOXy4ljzJuthOGIPBIvrUHI76Fwlr7mlKkd3glw+xZyo8?=
- =?us-ascii?Q?2y5oeaCnzX0pa188shhS3t9eI+6BipzqveUDtYuIC3w+ibLOKtZrPF9B+D48?=
- =?us-ascii?Q?t/ZW++hJaMX7puQy/7bgyNN/ZCY5SwyAfqsBpBAkPMrxD+mMI4gVrn1t5Bo+?=
- =?us-ascii?Q?PBF+QCT3tHdFIeJ5BkLj4QWr7c56AvDu7kuSmNlua2Za7eHW+t1qcz4Tf+gh?=
- =?us-ascii?Q?eDAFVYG10b6WNftPz4j4J/4GRJ017rZclYnmA9KYc6DhwclkUZznqylG+vct?=
- =?us-ascii?Q?rm5L1jEON6n92A1lPKuVGFT8ftT6t4CH3WwvdlrTb9+4NwlvUCRa0uTbckQG?=
- =?us-ascii?Q?ewFadEePXZknGmovdWWSH9++giBMMFyJuVmCJEEAUpN9K+B9QXghieHfU7vj?=
- =?us-ascii?Q?OGT8qF7e4ATgNFPG6jFDc6GHt0SKlyG2uPVT0pdKRP1L8Xgg1BlcavJ46JOC?=
- =?us-ascii?Q?OF3FszwhgiI1L6t220tycc9ZxxYu8uslsTIYiW++jsVgZs6c7oSk9abAasqZ?=
- =?us-ascii?Q?IxftEV9AFSOpoQkQT0gKFqRqjN0P45i+4wHtNvhNgOdJ52r+kwQC32jW1HFe?=
- =?us-ascii?Q?RQL0UKXfIc3JsAiUVnatralCXFVvhy9Vog+ZvkP6DXAaY8K2OyKSd1ROTb8X?=
- =?us-ascii?Q?o/EFK59Y+frygEyEhiC5JcIeqoDO/f8QU0ELuBlmmkr36MnwybAdGMlcgi68?=
- =?us-ascii?Q?ETKIRzI2asykESpzHGBKcNKuhNmNJExwZmeecEQeqBp3+wcKUuzr5kI2fXcs?=
- =?us-ascii?Q?3uW7q4HbiJkQRN4xU8sLnRZyJaWp2ab2wGvac+q5+QWE+yrxySNM8bFizZTl?=
- =?us-ascii?Q?cpQXHXaH62vAk8iNgAtdiEWzvNCHdM/toCs97abn8SXDgmcdggNWPsTtZCer?=
- =?us-ascii?Q?q0657sd0/HGeiOQqcUV0Q+xMRIihgdz7oJXehqywjjYVbb75n5rPvD73/Awb?=
- =?us-ascii?Q?3R4RbCFLAKoaeSFyL2PTldcpZgHzGojuFGTit+2pX2RONVPgiXlzp7+Wm8B3?=
- =?us-ascii?Q?XfsVv2Sg048HadJLgOU1aHCwPEE58n/kiClg8SzzRbz+cObkAqHBvoAXl4i8?=
- =?us-ascii?Q?/lc9iPPhssAc8UCteULRAufTfJu16bNSrZ7rLdtZu+WEm451LRGbiuRa8XJ2?=
- =?us-ascii?Q?cr+V7Zh9ULO3NNSBESr7Nq9zyRSoYUztqXbx3vLamaHiGB+fmUWaUxJwSP2v?=
- =?us-ascii?Q?2VVNF5aQzpnXjZKsAncNLMOxjuqSn0J8X9sUHNsNbhsiT6SWTijrtRr/H2+R?=
- =?us-ascii?Q?VDjOvQkl0SvHWy8p7pc1PsUQES2qDxJb0jX5YfPpKkG2Ap4SjH+00LH7jMdR?=
- =?us-ascii?Q?tAW8hmViqZn2SDWXgGjKbzpFFWZQsTAyDUsniFRTsRfpp1wg/+HMdcxmAIif?=
- =?us-ascii?Q?0Cj2uikbStw7+9ofXUHeye9HuuI=3D?=
+	=?us-ascii?Q?QGz9cu2S+4WIUYJjfzNnrgbuAu3NsLej26lUowy541YM+E2mBoK4r6RarGCp?=
+ =?us-ascii?Q?7EOk6X6iAtuItm3WKa4DUDxs0Sgaq32ecEKj1vrRRNPwmuzBltXE9JnEy9KM?=
+ =?us-ascii?Q?MVJAnUNr1GSpg3Q11Qo5TgtGZfStzPf/2uQ/tG9K2Z3Y8a2OdmlMp9wuuIWO?=
+ =?us-ascii?Q?4c363WU+wCSJV/nGRGlDbgOfCe7rPmsxkAH4/nEjUxhCp6ToZxHk87PScB5B?=
+ =?us-ascii?Q?jqmReSyfprgYZa6nG6Gb8vaKdAsFqlZAE06rXUqSiMT/6TshVg0RL8LiLaIW?=
+ =?us-ascii?Q?Ajbk4Tjh8t4IvJCE/68s0lVZJhVc2A0BOxTl1WQVpNFGXNhRnircx5hlIm9g?=
+ =?us-ascii?Q?GQ65x4rd3w7V/AqbQLHLU7TPVWv4dBRXcO7r0mDFq3V3ICjek3T8yRJ+rCrC?=
+ =?us-ascii?Q?VO/S8rgVIco528BENEwatPklWs8B11oZ+VCIDkciYdjFF5HbRpxKIzdGOMEX?=
+ =?us-ascii?Q?WkgzcbJ5O3k/GKatdCw6oQTg7Oawx55EyFSlHCFI6FAYr9qjc7p5JUDi5ZVs?=
+ =?us-ascii?Q?hXgf0HMZYYNlSdTyBbd3eklDFGLgVvEn3Bkq1VaRdpT45+GtY4QOf30llm2X?=
+ =?us-ascii?Q?1prJTTapvk7vjquXAiDNhVNQVuWXVvo4KnlcluQaKK6fvXtHo5r1l9dFi3Sf?=
+ =?us-ascii?Q?43oFgTHHf05YXFpaTsRu220cDxmnA1Z+WLtfZNJ1YJIlvGqsPyAQWRV42Eb+?=
+ =?us-ascii?Q?4SPXqJSP+umXWIANf83UzhHRAGY72gia/CDU5k+JruS6JNg3pGm95pEFPGlt?=
+ =?us-ascii?Q?D+ZJr4N/UXeRp+lA+l1/h5BXLbfto12YhAkCugcuqqD6QF3pvLxjztY0ezox?=
+ =?us-ascii?Q?DeozvZKdavINYkZG2QqNapReNfcp92GHTlEHk91MDKQaOowN9HFV+bI/dtzS?=
+ =?us-ascii?Q?E5dxjdvc+LeEXjnFq1jphvBUsKItFnlqI+elzXEujmKz6lCq1zA8SaFTUIWb?=
+ =?us-ascii?Q?jOl6ujxSs84Ga3iw+jifOB40sQCcfVBmbLEDIECCZGoTxtOw3MOt/uzvl3Vz?=
+ =?us-ascii?Q?o+wFLKxozSQ5VmxnhTjp8mTmgU7L7qLQZ+oXpvJm1u6Pymc5KWQUAunXaZkx?=
+ =?us-ascii?Q?ZUUWexLFJMi2qr2O7vXpzAqwmSOQzm9BS0zsXpT3sFHGyA04dc7rF81G1XbF?=
+ =?us-ascii?Q?3VLb7hToLXsZHvXXTT8+y//CgqD3HXYnoo8a0ngeiqhxRvZwVX8rd65w/gsx?=
+ =?us-ascii?Q?LCOQCjW5wQySfCM3m5VlIZv2Nxj/7mj9yoGPrIYiBWYbTLKN/TegxpDmHChs?=
+ =?us-ascii?Q?HG3XRaXVrzb1Y6WO3gVFyjQUApTAcE/ZhuUg3EV6nZIq9EU8FqMDNqGP0RLO?=
+ =?us-ascii?Q?w532o/qJmrf/77FdNarh/Goa+IqlZUq7NNYu6UV/q4HU9vNIFFCSNcJ+Pr93?=
+ =?us-ascii?Q?qfYvAN6R07QOz1MMPorW6s3S0CJGATpIG4187WjOjuysFn/vIajuIXt1Q0BY?=
+ =?us-ascii?Q?4bxWGOUdQRrusrlIw0tyXXsVDJKNFJMX/PoRmcLt+xR0L3T7nLeudf5MRe2t?=
+ =?us-ascii?Q?9bbQ6AhW6+CQ0rRXysLR6LISZL09zThyE5RqsbFO1KmcRYGoYV1GKaMEvvHD?=
+ =?us-ascii?Q?nqK/n5qsOIj7FfUoRjHiznyYHWrZPi0Q/4MDHjBSoDj7UFLWmwKRk35cNPqq?=
+ =?us-ascii?Q?6oWBt0pJTG4nCsupaAfMmukBdM3okQl1f38i/TV+OccvwjaO0nEF45xzvCbo?=
+ =?us-ascii?Q?IhxG6LJ0MBVNNMs+zmcg4yqEzbM=3D?=
 X-OriginatorOrg: bmwtechworks.in
-X-MS-Exchange-CrossTenant-Network-Message-Id: b0109ddb-db09-49ca-ee34-08de2811d717
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3c6a4bfc-6b7e-4b8a-243e-08de2811d40d
 X-MS-Exchange-CrossTenant-AuthSource: MA0P287MB3378.INDP287.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2025 08:50:22.2423
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2025 08:50:17.1338
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 970fa6fd-1031-4cc6-8c56-488f3c61cd05
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: P60twOnzglO0kkC2aZANN/jN0g3QvZaItjkjsNLWy5ISL++azBax/YW0vl888fklbGxtiL8HD3qgnyU+92KBrjOF8JjhrcADen/BOLC4QAJRLZS7f83GveO4KQOFB+Hi
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN2P287MB1004
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9jdmsCJM5Mm22XitCIE491TSH9yEkW6LV5VbySffCWTtBPJUKkyCMBSKYDMZQc5CQ2gg2sWxS+mssfWpd515q4+A4Qmaflc73BJPuRXZ0jxwvQlywxlnqgVekf+xLfL3
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA0P287MB1011
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 20 Nov 2025 15:26:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121946
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121949
 
-Backport the fix for CVE-2024-41817
+Backport the fix for CVE-2025-57807
 
 Add below patch to fix
-0012-ImageMagick-Fix-CVE-2024-41817.patch
+0008-ImageMagick-Fix-CVE-2025-57807.patch
 
 Signed-off-by: Divyanshu Rathore <Divyanshu.Rathore@bmwtechworks.in>
 ---
- .../0012-ImageMagick-Fix-CVE-2024-41817.patch | 44 +++++++++++++++++++
+ .../0008-ImageMagick-Fix-CVE-2025-57807.patch | 51 +++++++++++++++++++
  .../imagemagick/imagemagick_7.0.10.bb         |  1 +
- 2 files changed, 45 insertions(+)
- create mode 100644 meta-oe/recipes-support/imagemagick/files/0012-ImageMag=
-ick-Fix-CVE-2024-41817.patch
+ 2 files changed, 52 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/files/0008-ImageMag=
+ick-Fix-CVE-2025-57807.patch
 
-diff --git a/meta-oe/recipes-support/imagemagick/files/0012-ImageMagick-Fix=
--CVE-2024-41817.patch b/meta-oe/recipes-support/imagemagick/files/0012-Imag=
-eMagick-Fix-CVE-2024-41817.patch
+diff --git a/meta-oe/recipes-support/imagemagick/files/0008-ImageMagick-Fix=
+-CVE-2025-57807.patch b/meta-oe/recipes-support/imagemagick/files/0008-Imag=
+eMagick-Fix-CVE-2025-57807.patch
 new file mode 100644
-index 0000000000..1a7f2aa72d
+index 0000000000..a09113fe36
 --- /dev/null
-+++ b/meta-oe/recipes-support/imagemagick/files/0012-ImageMagick-Fix-CVE-20=
-24-41817.patch
-@@ -0,0 +1,44 @@
-+From 80612989115844741371c10deda249d592c0b801 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/imagemagick/files/0008-ImageMagick-Fix-CVE-20=
+25-57807.patch
+@@ -0,0 +1,51 @@
++From 0d258139d51628d53493cf5dc15e1fa9f3077bd3 Mon Sep 17 00:00:00 2001
 +From: Divyanshu Rathore <Divyanshu.Rathore@bmwtechworks.in>
-+Date: Fri, 7 Nov 2025 09:45:43 +0530
-+Subject: [PATCH 8/8] ImageMagick: Fix CVE-2024-41817
++Date: Fri, 24 Oct 2025 12:37:14 +0530
++Subject: [PATCH 2/8] ImageMagick: Fix CVE-2025-57807
 +
-+CVE: CVE-2024-41817
++CVE: CVE-2025-57807
 +
 +Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/comm=
-it/6526a2b28510ead6a3e14de711bb991ad9abff38]
+it/077a417a19a5ea8c85559b602754a5b928eef23e]
 +
 +Comment: Refreshed hunk to match latest kirkstone
 +
 +Signed-off-by: Divyanshu Rathore <Divyanshu.Rathore@bmwtechworks.in>
 +---
-+ AppRun | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
++ MagickCore/blob.c | 11 +++++++----
++ 1 file changed, 7 insertions(+), 4 deletions(-)
 +
-+diff --git a/AppRun b/AppRun
-+index 4c597fa99..cd2787fe3 100644
-+--- a/AppRun
-++++ b/AppRun
-+@@ -7,16 +7,16 @@
-+=20
-+ HERE=3D"$(dirname "$(readlink -f "${0}")")"
-+=20
-+-export MAGICK_HOME=3D"$HERE/usr:$MAGICK_HOME" # https://imagemagick.org/Q=
-uickStart.txt
-+-export MAGICK_CONFIGURE_PATH=3D$(readlink -f "$HERE/usr/lib/ImageMagick-7=
-.0.9/config-Q16"):$(readlink -f "$HERE/usr/lib/ImageMagick-7.0.9/config-Q16=
-HDRI"):$(readlink -f "$HERE/usr/share/ImageMagick-7"):$(readlink -f "$HERE/=
-usr/etc/ImageMagick-7"):$MAGICK_CONFIGURE_PATH #Wildcards don't work
-++export MAGICK_HOME=3D"$HERE/usr$MAGICK_HOME" # https://imagemagick.org/Qu=
-ickStart.txt
-++export MAGICK_CONFIGURE_PATH=3D$(readlink -f "$HERE/usr/lib/ImageMagick-7=
-.0.9/config-Q16"):$(readlink -f "$HERE/usr/lib/ImageMagick-7.0.9/config-Q16=
-HDRI"):$(readlink -f "$HERE/usr/share/ImageMagick-7"):$(readlink -f "$HERE/=
-usr/etc/ImageMagick-7")$MAGICK_CONFIGURE_PATH #Wildcards don't work
-+=20
-+ export LD_LIBRARY_PATH=3D$(readlink -f "$HERE/usr/lib"):$LD_LIBRARY_PATH
-+ export LD_LIBRARY_PATH=3D${HERE}/usr/lib/ImageMagick-7.0.9/modules-Q16HDR=
-I/coders:$LD_LIBRARY_PATH
-+=20
-+ if [ "$1" =3D=3D "man" ] ; then
-+-  export MANPATH=3D"$HERE/usr/share/man:$MANPATH" ; exec "$@" ; exit $?
-++  export MANPATH=3D"$HERE/usr/share/man$MANPATH" ; exec "$@" ; exit $?
-+ elif [ "$1" =3D=3D "info" ] ; then
-+-  export INFOPATH=3D"$HERE/usr/share/info:$INFOPATH" ; exec "$@" ; exit $=
-?
-++  export INFOPATH=3D"$HERE/usr/share/info$INFOPATH" ; exec "$@" ; exit $?
-+ fi
-+=20
-+ if [ ! -z $APPIMAGE ] ; then
++diff --git a/MagickCore/blob.c b/MagickCore/blob.c
++index 6a15d4808..38af749fe 100644
++--- a/MagickCore/blob.c
+++++ b/MagickCore/blob.c
++@@ -1598,7 +1598,7 @@ static inline ssize_t WriteBlobStream(Image *image,c=
+onst size_t length,
++   extent=3D(MagickSizeType) (blob_info->offset+(MagickOffsetType) length)=
+;
++   if (extent >=3D blob_info->extent)
++     {
++-      extent=3Dblob_info->extent+blob_info->quantum+length;
+++      extent+=3Dblob_info->quantum+length;
++       blob_info->quantum<<=3D1;
++       if (SetBlobExtent(image,extent) =3D=3D MagickFalse)
++         return(0);
++@@ -5774,12 +5774,15 @@ MagickExport ssize_t WriteBlob(Image *image,const =
+size_t length,
++     }
++     case BlobStream:
++     {
++-      if ((blob_info->offset+(MagickOffsetType) length) >=3D
++-          (MagickOffsetType) blob_info->extent)
+++      MagickSizeType
+++        extent;
+++
+++      extent=3D(MagickSizeType) (blob_info->offset+(MagickOffsetType) len=
+gth);
+++      if (extent >=3D blob_info->extent)
++         {
++           if (blob_info->mapped !=3D MagickFalse)
++             return(0);
++-          blob_info->extent+=3Dlength+blob_info->quantum;
+++          blob_info->extent=3Dextent+blob_info->quantum+length;
++           blob_info->quantum<<=3D1;
++           blob_info->data=3D(unsigned char *) ResizeQuantumMemory(
++             blob_info->data,blob_info->extent+1,sizeof(*blob_info->data))=
+;
 +--=20
 +2.34.1
 +
 diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/me=
 ta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-index d929a220f1..1b4ab344c2 100644
+index e1519b13fa..905af46f11 100644
 --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
 +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-@@ -39,6 +39,7 @@ SRC_URI =3D "git://github.com/ImageMagick/ImageMagick.git=
+@@ -30,6 +30,7 @@ SRC_URI =3D "git://github.com/ImageMagick/ImageMagick.git=
 ;branch=3Dmain;protocol=3Dhtt
-     file://0011-ImageMagick-Add-support-patch-4-to-fix-CVE-2025-5529.patch=
- \
-     file://0011-ImageMagick-Fix-1-CVE-2025-55298.patch \
-     file://0011-ImageMagick-Fix-2-CVE-2025-55298.patch \
-+    file://0012-ImageMagick-Fix-CVE-2024-41817.patch \
+     file://0005-ImageMagick-Fix-CVE-2025-53019.patch \
+     file://0006-ImageMagick-Fix-CVE-2025-55004.patch \
+     file://0007-ImageMagick-Fix-CVE-2025-57803.patch \
++    file://0008-ImageMagick-Fix-CVE-2025-57807.patch \
  "
 =20
  SRCREV =3D "35b4991eb0939a327f3489988c366e21068b0178"
