@@ -2,140 +2,197 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DA26CFA450
-	for <webhook@archiver.kernel.org>; Thu, 20 Nov 2025 22:54:43 +0000 (UTC)
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.498.1763679274670895869
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C868CFA46B
+	for <webhook@archiver.kernel.org>; Fri, 21 Nov 2025 02:10:23 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2455.1763691018788416900
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Nov 2025 14:54:34 -0800
+ Thu, 20 Nov 2025 18:10:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ITODbomf;
- spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-b6ceb3b68eeso1343779a12.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Nov 2025 14:54:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kVqfxkyS;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-7aae5f2633dso1667110b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Nov 2025 18:10:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763679274; x=1764284074; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763691018; x=1764295818; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=s2/bCpJW/Mx/mUnpN/RMH/7bO57CBSiNMNl1I6k84Kk=;
-        b=ITODbomfJjkewKkG1DGd3CbCYUOXptRuATle0tA6pa7ex63KaRmFyCf6QZOXvHCWNh
-         ngydo5s3bEIxnodz+3AgbH9nwtM3Llt4I+tIuHIl/X4b6Vgi5fJR+2kmtZn+zMNfZpHM
-         PH+ieCOhy0/tJeNUn5jrlaxIGcgE2LlJANA30zI/KdMzFGXHk5PLP1NgjvfcKmC2BVuZ
-         SY9lRVE163L6vX8SdZpnNAGuJPuENpqdgcOZY3UkxwkJ6RuQIb6Lp28nq8gzbFZK+YZP
-         jt2ktzWx0I8xai61/rEvzG/X7KSGua2CnSJPeJr+ZrrRYH7kR9xhE6xnrNtiSQTEaDeQ
-         7pfA==
+        bh=yQkJhrysTWwPDuz3kYBXbLOrjhT2KFqXq4VaPsjPLkk=;
+        b=kVqfxkySrgf91DcpbLf1wcD8urkTkL/fFH7ddmsAEFO3VrB2olsCp+xMTkp9YUgPqx
+         b7ZVs3MqMdl7zLza0FqVGG6zvlHGs5fGvaUR3yNW32mumtNvwWfcYaGxATNyRZaIyGH8
+         d4Z5clUZANTvLCQlccKqq997+ja9ya9OrR6/fEyvVUbRwkAI6hI3eb66yj9ORP7aqahi
+         TawY69a9J7WBT9fYyAoGw5//+HdUtdr63mNZUrognQ1cPTyAxnN5DACD0t7GDYVGnNGo
+         Hha+GS8Vau1DgYIyIulsR4Czep5gN4xvnFGK4gt0M4zlOLL9CSsPyer2pAfqIAoOFDDA
+         ozUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763679274; x=1764284074;
+        d=1e100.net; s=20230601; t=1763691018; x=1764295818;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=s2/bCpJW/Mx/mUnpN/RMH/7bO57CBSiNMNl1I6k84Kk=;
-        b=KdhJ7dr4JpQKgsICfGukUt6Aanzdq6BWayCFWg2OO2DZEDgv96x6dk6SuM9hnBzxRa
-         oUh+uYLVbItQwEkkCSJXIMtYgZES1vV1bNqx/VBAQe/wCVoMIy0paignWQrc7lFBPhkU
-         Ve9H2glHeYjd0ajQiOrp5eKqYUnzhQCnekV+9WE2jmfCXi4DbcA1vTxi0ez4+3L5Nirm
-         5wi8tlVUEWchQRF5LRg865L7KOEQqhWVA3bVoSJUs3a7ELDonU1wuS+BpNEQWTZXt+me
-         WczNC/nE4NPG712s/wgLCOSGwCWk+kJJSXzzkfZ1PDEtSDQi8MbCQStSzTBrcq7rG3Ku
-         v2Pg==
-X-Gm-Message-State: AOJu0YwUAji4PHC5K6l/hwjeDknVNCR8qT4j9i0bQTikUjyACjgRCmuu
-	bNKUVypf7wo1qmDPCpDhv8lRLecFRr5xdv4z8nIJ8vb4B6HgTgw6E/91CuYCEw2FX+Q=
-X-Gm-Gg: ASbGncuAcAm++L1uR5emqZWEZ2kw5Qh6FfNlWXlfyBS4Wy3nBl7R6oVimHZ6QPAh1ka
-	mM3IfBiFijHJS8YbschYEXdnwXEAEpeFsuNO25wmmPWlkwJG/Y70h6PMCwoRSS7ZylIxy5ofxie
-	Av/784Q1zO3wY7G5vjX2yJcyLHjZTiBrILRfnv0HuYTG290W+0TBxnIzFMoCqWRMuuHMpUFZ1ak
-	vxh7lhvebruFgLtjYPJ2W9aUuiqU1bXKEHE/Tk+LET084bqNlL5lgvL8PZEVs42PDynXhkWwL00
-	ItGFdPhHr51hNEe2qqw+ntDejJwHl5itY7sdQ4r4W3iMGxJjgHnX82bVUMPyUXcjl2299xDBtEQ
-	5QUG4V0JPrZm1xT3CbIYGyvz1OGzivMcAnzvP/KIJZVUK2gLgCZ9I8lLaRdtL18TLRt1GvKZ8qa
-	S2EGpAgEN16sfEmPA0nJsZGqLahDSpP+2f9ST/YhY4TJ4PEFw1CTcwZvFRXaqB2PtN3jAe8dlhl
-	RrZvrrWCMw3ujsCEY7Dey7hVcIEF4nX
-X-Google-Smtp-Source: AGHT+IEq4iNmLq5JCuV0tSZmAynq5KLtbtPD4j/bQCUHNmT0aJeCXN//Y3WlvnDyOGUy6LEYIOdA9w==
-X-Received: by 2002:a05:7301:e22:b0:2a4:3594:d534 with SMTP id 5a478bee46e88-2a7195369f7mr70953eec.1.1763679273551;
-        Thu, 20 Nov 2025 14:54:33 -0800 (PST)
+        bh=yQkJhrysTWwPDuz3kYBXbLOrjhT2KFqXq4VaPsjPLkk=;
+        b=pHrs+Ta0suxCsSCWMubhcpcmGw9SS9tevsbjrI3+886DAt5KIB5J6N98f4iqF1Jom5
+         rAh9aVcitdIdu97OKo10ypjkFfCeFuUX+54YbOu5Faw7gFGqpnvfDPwv9nw1+RlXC0J2
+         ZOEURdqo6hVpJOgukuKoZFDA/mODiT2ZuD6U7Or5toejJrfT5D4ibdvzKqPO/GKiEaRV
+         LCNKpHvl9KUhXmTnOCN4mbEgmYF5AEANWpG/1pb/vp7eJVjViJFZI+qkuO/JoE2Vo75B
+         IG1wWcfRiLpJBMw37LkXQSWs4EkXgXxzkvyn4srCTlFBsXyYN72RPo4FxnxNheiDj6A+
+         LW2g==
+X-Gm-Message-State: AOJu0YyKDCwazX2sPHKdw2Zra5mvLjLow/AsuUOw8XKz9CL/20D+mqqZ
+	g1qI2XahRiKfEJfd4yO6qwNnpDXm6xuS9FZf1ZLdzLH5guWXoZWWgaN/g1zlJMHy
+X-Gm-Gg: ASbGnctAopNgxvrTanWouqm7tpXoh8McA1XVMhsyi1jn0oXoVmoX9/EaRHIs1gb/d93
+	2BoYdR4ZsAEVpffvH2qurL1vI19TcXLky0kYCCxgzJVPgnLQUbO641CcXqDcjkty9JzBRv5rjow
+	Rnu3QYnVv4fz1xuyoFVfpi3X/Nrj/ECB6RTH9GoMpdGmwHR+Qxdm1PA6fwv2yIhQMGois56VX65
+	ZyKd0g8anEVTbFvBpYg01l2hmAsNCjBhz2lSQW+DtlspNnDfzDZ+Va+vj2qlhThpZReByInY2m0
+	M+HCf6b5xr0LQvelieDdn0Yb08qahEZLEbNcAxkvN8fXFI63Nh8Bb/dSGLRBm4ychnk+QCA/fVF
+	Qu6D/gcDlpejPdHsq+HxaN0bDp2qZkr6NnLlRPlz2hzgv2NYrMt2jp+x1B2tfaotdAFIGdeQi4G
+	3lifj57jk5EjTgCMm5aFypu+e2sPafxGrAIJLYNIya9L4NCPFzXa/EJRC6K4WuZyoOwTu58i4Y5
+	f5oRLDhDqwz/YmOIt3qtKej83ASvkV6gvL8WgLal5I=
+X-Google-Smtp-Source: AGHT+IH6vKGez5PZg/Cggqln5F6j9IKfTYCc/Amq3KIcp7I1UIRktv661Txq4AgRIYIE1t2DXRueZg==
+X-Received: by 2002:a05:7022:6b97:b0:119:e569:fb9b with SMTP id a92af1059eb24-11c9d708d34mr241229c88.10.1763691017598;
+        Thu, 20 Nov 2025 18:10:17 -0800 (PST)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::888a])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2a6fc4f6671sm15230082eec.3.2025.11.20.14.54.32
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11c93db556csm15548933c88.1.2025.11.20.18.10.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Nov 2025 14:54:33 -0800 (PST)
+        Thu, 20 Nov 2025 18:10:17 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-google-auth-oauthlib: Upgrade to 1.2.3
-Date: Thu, 20 Nov 2025 14:54:31 -0800
-Message-ID: <20251120225431.720142-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-google-auth: Skip mTLS tests from ptests
+Date: Thu, 20 Nov 2025 18:10:14 -0800
+Message-ID: <20251121021014.1673264-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 20 Nov 2025 22:54:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121955
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Nov 2025 02:10:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121956
 
-Skip a failing ptest
+They need a cert infrastructure to execute.
+Mutual TLS authentication requires client/server certificates
+and a proper PKI setup that doesn't exist in the minimal qemu ptest
+environment. These are integration tests that need real
+certificate infrastructure.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...uth-oauthlib-Skip-failing-3PI-creden.patch | 34 +++++++++++++++++++
- ... => python3-google-auth-oauthlib_1.2.3.bb} |  4 ++-
- 2 files changed, 37 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-google-auth-oauthlib/0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch
- rename meta-python/recipes-devtools/python/{python3-google-auth-oauthlib_1.2.0.bb => python3-google-auth-oauthlib_1.2.3.bb} (78%)
+ ...uth-Skip-mTLS-tests-in-ptest-environ.patch | 96 +++++++++++++++++++
+ .../python/python3-google-auth_2.43.0.bb      |  1 +
+ 2 files changed, 97 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib/0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib/0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch
+diff --git a/meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch b/meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch
 new file mode 100644
-index 0000000000..1309896b19
+index 0000000000..1b09043748
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib/0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch
-@@ -0,0 +1,34 @@
-+From 7612367e4bd2a366365bf527c6672be55a133ee6 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch
+@@ -0,0 +1,96 @@
++From 2bb8c964f31ba0413a818f5b99d668b54e83cfa3 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Nov 2025 12:55:48 -0800
-+Subject: [PATCH] python3-google-auth-oauthlib: Skip failing 3PI credentials
-+ test
++Date: Thu, 20 Nov 2025 17:47:43 -0800
++Subject: [PATCH] python3-google-auth: Skip mTLS tests in ptest environment
 +
-+The test_credentials_from_session_3pi test fails because
-+external_account_authorized_user.Credentials objects do not
-+preserve the refresh_token in the same way as standard OAuth2
-+credentials. This is expected behavior for 3rd party identity
-+(3PI) credentials.
++Mutual TLS tests require SSL certificates and proper crypto library
++setup that is not available in the isolated ptest environment.
 +
-+Skip this test in the ptest environment as it tests an edge case
-+that is not relevant for typical OAuth flows and fails due to
-+the architectural difference in how 3PI credentials are handled.
++Skip all TestMutualTlsAdapter, TestMutualTlsOffloadAdapter, and
++TestMakeMutualTlsHttp tests as they require:
++- Valid SSL client certificates
++- Server certificates for mTLS handshake
++- Proper certificate chains and CAs
 +
-+Upstream-Status: Inappropriate [test environment shortcoming]
++These tests verify mTLS functionality which is not feasible to test
++in the embedded ptest runtime without external certificate infrastructure.
++
++Upstream-Status: Inappropriate [ptest environment limitation]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ tests/unit/test_helpers.py | 1 +
-+ 1 file changed, 1 insertion(+)
++ tests/transport/test_requests.py | 7 ++++++-
++ tests/transport/test_urllib3.py  | 2 ++
++ 2 files changed, 8 insertions(+), 1 deletion(-)
 +
-+diff --git a/tests/unit/test_helpers.py b/tests/unit/test_helpers.py
-+index 9df49de..6ec19f5 100644
-+--- a/tests/unit/test_helpers.py
-++++ b/tests/unit/test_helpers.py
-+@@ -123,6 +123,7 @@ def test_credentials_from_session_granted_scopes(session):
-+     assert credentials.granted_scopes == granted_scopes
++diff --git a/tests/transport/test_requests.py b/tests/transport/test_requests.py
++index 0da3e36..3a62ef7 100644
++--- a/tests/transport/test_requests.py
+++++ b/tests/transport/test_requests.py
++@@ -176,6 +176,7 @@ class TimeTickAdapterStub(AdapterStub):
++ class TestMutualTlsAdapter(object):
++     @mock.patch.object(requests.adapters.HTTPAdapter, "init_poolmanager")
++     @mock.patch.object(requests.adapters.HTTPAdapter, "proxy_manager_for")
+++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
++     def test_success(self, mock_proxy_manager_for, mock_init_poolmanager):
++         adapter = google.auth.transport.requests._MutualTlsAdapter(
++             pytest.public_cert_bytes, pytest.private_key_bytes
++@@ -187,6 +188,7 @@ class TestMutualTlsAdapter(object):
++         adapter.proxy_manager_for()
++         mock_proxy_manager_for.assert_called_with(ssl_context=adapter._ctx_proxymanager)
++
+++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
++     def test_invalid_cert_or_key(self):
++         with pytest.raises(OpenSSL.crypto.Error):
++             google.auth.transport.requests._MutualTlsAdapter(
++@@ -404,7 +406,7 @@ class TestAuthorizedSession(object):
++         authed_session.credentials._create_self_signed_jwt.assert_called_once_with(
++             "https://{}/".format(default_host)
++         )
++-
+++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
++     def test_configure_mtls_channel_with_callback(self):
++         mock_callback = mock.Mock()
++         mock_callback.return_value = (
++@@ -429,6 +431,7 @@ class TestAuthorizedSession(object):
++     @mock.patch(
++         "google.auth.transport._mtls_helper.get_client_cert_and_key", autospec=True
++     )
+++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
++     def test_configure_mtls_channel_with_metadata(self, mock_get_client_cert_and_key):
++         mock_get_client_cert_and_key.return_value = (
++             True,
++@@ -548,6 +551,7 @@ class TestMutualTlsOffloadAdapter(object):
++         google.auth.transport._custom_tls_signer.CustomTlsSigner,
++         "attach_to_ssl_context",
++     )
+++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
++     def test_success(
++         self,
++         mock_attach_to_ssl_context,
++@@ -581,6 +585,7 @@ class TestMutualTlsOffloadAdapter(object):
++         google.auth.transport._custom_tls_signer.CustomTlsSigner,
++         "attach_to_ssl_context",
++     )
+++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
++     def test_success_should_use_provider(
++         self,
++         mock_attach_to_ssl_context,
++diff --git a/tests/transport/test_urllib3.py b/tests/transport/test_urllib3.py
++index e832300..66af909 100644
++--- a/tests/transport/test_urllib3.py
+++++ b/tests/transport/test_urllib3.py
++@@ -93,12 +93,14 @@ class ResponseStub(object):
 +
 +
-++@pytest.mark.skip(reason="3PI credentials do not preserve refresh_token")
-+ def test_credentials_from_session_3pi(session):
-+     session.token = {
-+         "access_token": mock.sentinel.access_token,
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.3.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.3.bb
-index 70e843a094..4b2634a108 100644
---- a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.3.bb
-@@ -4,9 +4,11 @@ HOMEPAGE = "https://github.com/googleapis/google-auth-library-python-oauthlib"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-
--SRC_URI[sha256sum] = "292d2d3783349f2b0734a0a0207b1e1e322ac193c2c09d8f7c613fb7cc501ea8"
-+SRC_URI += "file://0001-python3-google-auth-oauthlib-Skip-failing-3PI-creden.patch"
-+SRC_URI[sha256sum] = "eb09e450d3cc789ecbc2b3529cb94a713673fd5f7a22c718ad91cf75aedc2ea4"
-
- inherit pypi setuptools3 ptest
-+PYPI_PACKAGE = "google_auth_oauthlib"
++ class TestMakeMutualTlsHttp(object):
+++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
++     def test_success(self):
++         http = google.auth.transport.urllib3._make_mutual_tls_http(
++             pytest.public_cert_bytes, pytest.private_key_bytes
++         )
++         assert isinstance(http, urllib3.PoolManager)
++
+++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
++     def test_crypto_error(self):
++         with pytest.raises(OpenSSL.crypto.Error):
++             google.auth.transport.urllib3._make_mutual_tls_http(
+diff --git a/meta-python/recipes-devtools/python/python3-google-auth_2.43.0.bb b/meta-python/recipes-devtools/python/python3-google-auth_2.43.0.bb
+index aa94035eb6..1a1b035a41 100644
+--- a/meta-python/recipes-devtools/python/python3-google-auth_2.43.0.bb
++++ b/meta-python/recipes-devtools/python/python3-google-auth_2.43.0.bb
+@@ -7,6 +7,7 @@ inherit pypi setuptools3 ptest
 
  SRC_URI += " \
+         file://0001-make-the-TLS-tests-skip-when-pyopenssl-isn-t-availab.patch \
++        file://0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch \
          file://run-ptest \
+ "
+ SRC_URI[sha256sum] = "88228eee5fc21b62a1b5fe773ca15e67778cb07dc8363adcb4a8827b52d81483"
 
