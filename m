@@ -1,198 +1,201 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C868CFA46B
-	for <webhook@archiver.kernel.org>; Fri, 21 Nov 2025 02:10:23 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2455.1763691018788416900
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 624E8CFA46C
+	for <webhook@archiver.kernel.org>; Fri, 21 Nov 2025 03:27:43 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3472.1763695654117450145
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 20 Nov 2025 18:10:18 -0800
+ Thu, 20 Nov 2025 19:27:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kVqfxkyS;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-7aae5f2633dso1667110b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 20 Nov 2025 18:10:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763691018; x=1764295818; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yQkJhrysTWwPDuz3kYBXbLOrjhT2KFqXq4VaPsjPLkk=;
-        b=kVqfxkySrgf91DcpbLf1wcD8urkTkL/fFH7ddmsAEFO3VrB2olsCp+xMTkp9YUgPqx
-         b7ZVs3MqMdl7zLza0FqVGG6zvlHGs5fGvaUR3yNW32mumtNvwWfcYaGxATNyRZaIyGH8
-         d4Z5clUZANTvLCQlccKqq997+ja9ya9OrR6/fEyvVUbRwkAI6hI3eb66yj9ORP7aqahi
-         TawY69a9J7WBT9fYyAoGw5//+HdUtdr63mNZUrognQ1cPTyAxnN5DACD0t7GDYVGnNGo
-         Hha+GS8Vau1DgYIyIulsR4Czep5gN4xvnFGK4gt0M4zlOLL9CSsPyer2pAfqIAoOFDDA
-         ozUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763691018; x=1764295818;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=yQkJhrysTWwPDuz3kYBXbLOrjhT2KFqXq4VaPsjPLkk=;
-        b=pHrs+Ta0suxCsSCWMubhcpcmGw9SS9tevsbjrI3+886DAt5KIB5J6N98f4iqF1Jom5
-         rAh9aVcitdIdu97OKo10ypjkFfCeFuUX+54YbOu5Faw7gFGqpnvfDPwv9nw1+RlXC0J2
-         ZOEURdqo6hVpJOgukuKoZFDA/mODiT2ZuD6U7Or5toejJrfT5D4ibdvzKqPO/GKiEaRV
-         LCNKpHvl9KUhXmTnOCN4mbEgmYF5AEANWpG/1pb/vp7eJVjViJFZI+qkuO/JoE2Vo75B
-         IG1wWcfRiLpJBMw37LkXQSWs4EkXgXxzkvyn4srCTlFBsXyYN72RPo4FxnxNheiDj6A+
-         LW2g==
-X-Gm-Message-State: AOJu0YyKDCwazX2sPHKdw2Zra5mvLjLow/AsuUOw8XKz9CL/20D+mqqZ
-	g1qI2XahRiKfEJfd4yO6qwNnpDXm6xuS9FZf1ZLdzLH5guWXoZWWgaN/g1zlJMHy
-X-Gm-Gg: ASbGnctAopNgxvrTanWouqm7tpXoh8McA1XVMhsyi1jn0oXoVmoX9/EaRHIs1gb/d93
-	2BoYdR4ZsAEVpffvH2qurL1vI19TcXLky0kYCCxgzJVPgnLQUbO641CcXqDcjkty9JzBRv5rjow
-	Rnu3QYnVv4fz1xuyoFVfpi3X/Nrj/ECB6RTH9GoMpdGmwHR+Qxdm1PA6fwv2yIhQMGois56VX65
-	ZyKd0g8anEVTbFvBpYg01l2hmAsNCjBhz2lSQW+DtlspNnDfzDZ+Va+vj2qlhThpZReByInY2m0
-	M+HCf6b5xr0LQvelieDdn0Yb08qahEZLEbNcAxkvN8fXFI63Nh8Bb/dSGLRBm4ychnk+QCA/fVF
-	Qu6D/gcDlpejPdHsq+HxaN0bDp2qZkr6NnLlRPlz2hzgv2NYrMt2jp+x1B2tfaotdAFIGdeQi4G
-	3lifj57jk5EjTgCMm5aFypu+e2sPafxGrAIJLYNIya9L4NCPFzXa/EJRC6K4WuZyoOwTu58i4Y5
-	f5oRLDhDqwz/YmOIt3qtKej83ASvkV6gvL8WgLal5I=
-X-Google-Smtp-Source: AGHT+IH6vKGez5PZg/Cggqln5F6j9IKfTYCc/Amq3KIcp7I1UIRktv661Txq4AgRIYIE1t2DXRueZg==
-X-Received: by 2002:a05:7022:6b97:b0:119:e569:fb9b with SMTP id a92af1059eb24-11c9d708d34mr241229c88.10.1763691017598;
-        Thu, 20 Nov 2025 18:10:17 -0800 (PST)
-Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::888a])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11c93db556csm15548933c88.1.2025.11.20.18.10.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Nov 2025 18:10:17 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=TSytqKRl;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=342016e232=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AL1obW34077904
+	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Nov 2025 03:27:33 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=yjjmw6zDBLluoLhZ1nc/
+	+3DDRpk5P2QY7gfIwnU4L8o=; b=TSytqKRlhcs66Yt8YyvZRwQO7yERzDwVYf8u
+	GnbGgu3hh1NmsFXhASob96Bn4caq8XrHTHatmrpUsjnB0YY6npA0GVkYK2j4NSRs
+	ksRPTWyyva6NRH6HgoaxWYVWwt7M0uNHFotgdE6ggUdtkd8JsIIFl7UEbaCyL/dY
+	7zGqrUMJ2AVnRYZig/ECs9HQJFrCgeqbnxbax6r156lT4KUBpWiUp0DDF6yNYM00
+	hZ2pvri7OCX+ffB/X6ejdDMhEHMDpoXrdxCbU1j8S+6bPoq5LWXuwCdJ0qgOQA/4
+	uk+TutXk72ADRU9v8e1ZvhiUwId3JsmHb1cFmgUv6yBecTz3KQ==
+Received: from dm5pr21cu001.outbound.protection.outlook.com (mail-centralusazon11011058.outbound.protection.outlook.com [52.101.62.58])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4ajehqg2qw-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 21 Nov 2025 03:27:32 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=h1OHEGej4WECVI/qpuf9rlgCuYXB2BAoNjwGzMgkC3OCtwOCUtpWvLs5JYoCQ/VojU5dZ0d2z80dgO3vkzv9/Ur1u/NSWgsWUB2FdttfuevVgdOkOxEeRCgAnKty+g3dBLwxQLAnM8szgcTGkiL6Fz0kEZ6GSizl3eXOSKRLWxEmaTfeKd1+dlUG47pgUMpzsrot0iJRsKpCSzO70Ikzyy00vZdgiZGZTMYw+r4FMiFMSDUBZR5ZDgPWs9F6vEJmVG4ZNvJ6dujyIiQjUuL4ZoFifhE+KbenPHIbQMQi2eXqr2W9toD5gN9/mFYt4vbgl48eJmBZhydokRQkWHJD0A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yjjmw6zDBLluoLhZ1nc/+3DDRpk5P2QY7gfIwnU4L8o=;
+ b=cJGBwkdkGBgXJzp80MJVD5Hx9NDobiVs4E0kP5FKMaoa5JdW+scqN0m/68VcouNdj7+bnU2RPLs2oU8j5vuOyEb2AjySj8PJe46jNptTBBZ7DrWbqUzGpM3eiJinPQtopBR1ykqpcBcQkwtnud/UcBXMnkkQ8ayYgk1FoshPGPWIn3Pf6kU6t5bpCA4UFnzKvUm0ne4IAxjjiMXmcgtoIV95M6Mk0X4GR9dsZDydkE9cByZOjudy2aLyzi10IO3LqCjapXdV3KXduMAjdlzJo5Re9TGfaSWpZpFxn3avfWsrQlrPg6iehPoCVxs2taJwfoyJSLwy3rOh5XVCKPwIAQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
+ IA0PR11MB7839.namprd11.prod.outlook.com (2603:10b6:208:408::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.10; Fri, 21 Nov
+ 2025 03:27:31 +0000
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad]) by DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::2b44:787c:e7ee:bfad%3]) with mapi id 15.20.9343.011; Fri, 21 Nov 2025
+ 03:27:31 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-google-auth: Skip mTLS tests from ptests
-Date: Thu, 20 Nov 2025 18:10:14 -0800
-Message-ID: <20251121021014.1673264-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.52.0
-MIME-Version: 1.0
+Subject: [meta-oe][PATCH] re2: add UPSTREAM_CHECK_GITTAGREGEX
+Date: Fri, 21 Nov 2025 11:27:14 +0800
+Message-Id: <20251121032714.3836200-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.34.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TY4PR01CA0110.jpnprd01.prod.outlook.com
+ (2603:1096:405:378::8) To DS0PR11MB6399.namprd11.prod.outlook.com
+ (2603:10b6:8:c8::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|IA0PR11MB7839:EE_
+X-MS-Office365-Filtering-Correlation-Id: c7406816-6759-4403-ce14-08de28ade72b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|1800799024|376014|52116014|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?RBVIntfaxTVHHx5SuzhbSDxRIuGXVnWjC4RgK//vjhspnque1xG0xXmGk8s9?=
+ =?us-ascii?Q?k1g9RNBQ2DVoyYRUaHiGX6dnkD62rXNCvM67D1VgjKh8lL2iUo/mWuLHJyzG?=
+ =?us-ascii?Q?MI9h8Mirz9Nx01z5I1T9riD+Vn71IO8DMpAzIlUltxD2+uRHXL0dz93bno+T?=
+ =?us-ascii?Q?trBOe2vCAqdxuWBk/c0qrv+pORp73dqthYZsoFEXPtARWlS1utXoj6nVuQIT?=
+ =?us-ascii?Q?aIeWgY7ZpRtjhlJQi33CzXTv1gNDPV14KJ6ktXg6rhtCA5o+1lZF05i3lrrF?=
+ =?us-ascii?Q?KKr1QkkPsyqPkH7OZrq3zwlVzDnk7+QkRx8oDig19yNEZj8sCYSMIzRQq2PS?=
+ =?us-ascii?Q?JqoaiNHPGG/hS0MFaR7Pb+JdmASsfJg7JF+z0bsiSV/MYMlbtHA8RSVTHgMb?=
+ =?us-ascii?Q?1SKCR/9IXZ95GPSQJ5KWp3iCXi2CahyU8vBWClGWwizSCtlllEhO6x53Rc1M?=
+ =?us-ascii?Q?z0oVuKDtjo5NmJxsWMofRK2bxlKOrLJ5NZ3cBvN7wnxLmAA2ckFcaB7BjpKk?=
+ =?us-ascii?Q?3rd/wdyt5yOd7t0URI4r4asmtkYI/TSI/C9y9W+MkxyadQx9Gsfnwrr66GMt?=
+ =?us-ascii?Q?ES+QVjajVIn6ysvqssABb8mXwuIvQZNXGcyKTzsU9WOTYV6al7rnkafC4Sdv?=
+ =?us-ascii?Q?yTpTXzU7nwdwFe2KJIo3sjyWhYWDSqxEmAvITt30maSjXvYcuYxU39y/zlGJ?=
+ =?us-ascii?Q?7uy7j5QneZ4SXmKqjN6kIo+rVZRS1QzNPRcuTlall6IMTTuyhWuvnvyADgsC?=
+ =?us-ascii?Q?1RyyCyZc2m0puFZe/vANMO66pKgXi1tkrDpatmtMSa6avMpypF4YiTZw10uR?=
+ =?us-ascii?Q?wpnYLqQETjiF3PynI3Vw21NBzIR0GCcc7yuid5/oiZXAnTuUQDNBJIpU+Hz/?=
+ =?us-ascii?Q?RjYZR6gfyIugLzPSV7IUG1OW2UoXAnAf4L7w5IE42Ta/5JlihqvvA5i9A4iP?=
+ =?us-ascii?Q?KqsVCEVapruUJlGMIC1HweO2WPxIiKLdZZDR4WFkrrhyFQ0GMX06XULX7FqZ?=
+ =?us-ascii?Q?Q3DuqZEgtETxCtly/VTAxQ2x3PAjjQVsm87GvdEQQsgXO6Vubdz3jSlWnlbY?=
+ =?us-ascii?Q?/pRKsNZ7+LAXuh+H5LOwwF1kblueUea6FxSf5bfdk8rzSRnmvKcyzGuDHewp?=
+ =?us-ascii?Q?u/rZ7J4jMIkLbwMUBpAXyRY/kW+IoP+aet7yeZXS1Wcv8LDcKafE8Hq6sADo?=
+ =?us-ascii?Q?fdFLQc8ViWPDIbbTbmgJqTmRzYOzxIkM+UOYLWj2zFkYATCrN8GTcvPN46Ol?=
+ =?us-ascii?Q?jJkMA0MFZc/QuylHKQTjgJeagvzVo9RiAncBrq/N5QtK7+cATRqqYgkbk4MK?=
+ =?us-ascii?Q?Xla+FlIf3BWdfxz9ICt4TTDw3mixHSyz9c4U6ybz4OPDxd+snvVbCz0PkJYf?=
+ =?us-ascii?Q?Xcdovu7rhFQqd8RKifOjb5FW85AzAwIyUxXxrcdKZ3lS4sYTdRxgCw9s3FL8?=
+ =?us-ascii?Q?/IDvWff8wvaaQ7FoGQYpyuQgBJIAB7re54xYuP6posg4zsTnbQYFIEVxHhL1?=
+ =?us-ascii?Q?qVHun1wM+/w2tvlyug8/q1+iblpb+rr8NkF5?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(52116014)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?Npg6TiHjV57XdNdSthtGqeSOslVhmfUkfp5a/UMECSO2bQvgT13TGIWqC0UL?=
+ =?us-ascii?Q?HakJB6JNCEIwgin22mZ63inZrGECQfYWgzXcplLY7UR1XxBIV8B8wV3RrsqH?=
+ =?us-ascii?Q?m9YR61V8LNdGjokgKMQmQDxdE1wcZczo8NywJfhb26/+6nSQivzEL9z54uN2?=
+ =?us-ascii?Q?qfa/H3X/YJZezjQownNBrIfGGrLpQ9gJXNDvrPIoQm6qUOZ6N9CsHcJlg6kG?=
+ =?us-ascii?Q?k6uA8Hzpew4+sqwCNCF9PBLUDBX4MkCRJMtgKz6ud4pBqn+SNICV9WFap2Kx?=
+ =?us-ascii?Q?8zUbPA1UQ/jsQI79PObTeDqz5eu28gjmH6LZkJ1VqEvuPHht8pS8j/hBQums?=
+ =?us-ascii?Q?6xYz+TNWD3d00befzm1tfvbfcd5Pgi0lWFFOitnFTPvThT9ZSv/InhIUPIGM?=
+ =?us-ascii?Q?lNNb2ivo7K2gbE1rK7dTMbd43mQWzcq6e/D91ltTXU/VLmxLRXYCu/KSPpXt?=
+ =?us-ascii?Q?3b1UQAbWWGwfvBsdQItxA86tjswNDtXSkB6a62ODDMkD209aHctDbsxHKULB?=
+ =?us-ascii?Q?eUGwKdLVGUz5h3KDNv5rb/r9cg72k6N4PlRsVPvbCbXshrIO6qQbpk/vUI3E?=
+ =?us-ascii?Q?hJNVGbvEP3trRIZJLqrFnbXCMRHSprM1oIj/3axJPXkXOmUjwEcgcFfYdMvG?=
+ =?us-ascii?Q?ktS34xoOY+OnjSvPd94TzKmH6NWweClaAl1PBBrKkpVfkDUpA7Dc6T8uOETw?=
+ =?us-ascii?Q?RykE+0Q1pzxwlTdn4sYz2ChqUYMxGBHyWr9JwEMFfRl3MVZipfeMl7HlWqah?=
+ =?us-ascii?Q?fX8s2zQa/jGef8z8OaPAPuDYbwHSK4kloFvaKEqwvnuiAMKXDkHRtGlIsluL?=
+ =?us-ascii?Q?qMvhNXHnzkvR9CAIgP5PFnDxMDRKMoDeIGAUWaoWscsoyuolDVq4IZzmhSu8?=
+ =?us-ascii?Q?iH4SzHU56asY6uuwf7uWBAOjIdFKR7yGcWx/VzCRq010ee2uy0dkRD/OXg4D?=
+ =?us-ascii?Q?fewnXm+cuWQVCMVccuf4rlbD7L0Dx9oPXFp2KI3VxuOHnDZ+1v1i0AjvBFCi?=
+ =?us-ascii?Q?nja+DjRe5JQqaE4RO0KdDuXyXPVALW4t4Bt3ff8xwAE3C6KOE8WTK+EWm+WS?=
+ =?us-ascii?Q?6Coy8nrHNr73k0e7tXXSQsj3W7ErZDew90oxaHAqnHOTGPgsEfUe/yXks6Dg?=
+ =?us-ascii?Q?ff43TwpVquYKdnCc4TII9lslDUaVFQrRlBhmd6IfPq1o7xsjq2Hdd2W70jDp?=
+ =?us-ascii?Q?/zYmTeEGFoJL5VmtqTEx+G1k4tHJDYi3RQGlkMiHaxtYKEKO64pOXwEeuBEO?=
+ =?us-ascii?Q?GoNAdnlfUKLbqEwZOwK/GgJn8liE49rBRhnjOG89fWOoDpUJdndorD2Te2cB?=
+ =?us-ascii?Q?S3STX/Tejh81X9FCVRcbzkzJIK+PVnL3lgo5DfkGaV7t+C+O60KRzRYFIwnB?=
+ =?us-ascii?Q?VOVa0FyRXNDjgArY9PLYkOt9ikBVWA0LFSaUZOlMFVaz1pkyqc3hhrnNBjwz?=
+ =?us-ascii?Q?nP5t/EJsaL0P1/Uo01gC1drqJGeIMnyoJYhvDQGzU6RtY8GgOWJSUOTLgK+M?=
+ =?us-ascii?Q?QetBQMzTnpgd7Q41oB7z0FxoDAKbNBqTh642R6J/yrPurcMSPM2lW5Y0IbHy?=
+ =?us-ascii?Q?elRQBxOvHXFc+6X6bPgsqP8ZsI7FEdHaNtsCrHXP?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c7406816-6759-4403-ce14-08de28ade72b
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2025 03:27:31.0972
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rd+U8wedpd2aEk2bcnCcaabXHhwPRq60cY0KNdGw2jK8Jk/cyvT/gAJuLauINdYVJF0y+9I5LSQ/Dp50la20Bw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR11MB7839
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTIxMDAyNSBTYWx0ZWRfX8LJkX4ofbP4c
+ inUfoAy8if4J0MA9pLWDgFSq129BMa3mH3DUVviuAQociV7XmYql177wQkFBg8K3bkgXedIs94T
+ KzYkFXjswI/xGV2s/WpnN1J1dVCZBXgpWAJu98TRgzYjihbdgUFgG9o6odaZwTVOWRZMkb7u/rV
+ XXt0GCtuLG4swbm/4MEQhrLs+2G37I/dtekYSxyZFHg/Wsbhuw9LgFPqU6l9lLPGXhT+Qoj4SaY
+ DXT4Ssed+ui19yXam26BUw0f8ds4IJp1wL4UUUtUQsjSLbkDKahx4meRdvDHDoVHvBPzODYZV3h
+ Uwg8gdqFlTb2Plmx/mXcg9LLVgzHDimpz3OLmB87V3BCVuqfg1a1JfnlNs0wPNOtkh2wx5Workk
+ bGcYdXffg6d01zL2nAjCkDDK0SP/UQ==
+X-Authority-Analysis: v=2.4 cv=EKQLElZC c=1 sm=1 tr=0 ts=691fdc25 cx=c_pps
+ a=RV/m/49WaDJDQ/P4gGxFUg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8 a=1Cu5c7XlS_Q7MqVc3c8A:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: OLzzjlpKSObNZep96uk8vNE4cNc5Xt5C
+X-Proofpoint-GUID: OLzzjlpKSObNZep96uk8vNE4cNc5Xt5C
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-21_01,2025-11-20_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 impostorscore=0 clxscore=1015 suspectscore=0 priorityscore=1501
+ adultscore=0 phishscore=0 malwarescore=0 lowpriorityscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511210025
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Nov 2025 02:10:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121956
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Nov 2025 03:27:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121957
 
-They need a cert infrastructure to execute.
-Mutual TLS authentication requires client/server certificates
-and a proper PKI setup that doesn't exist in the minimal qemu ptest
-environment. These are integration tests that need real
-certificate infrastructure.
+Add UPSTREAM_CHECK_GITTAGREGEX to check the correct latest stable
+verison.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Before the patch:
+$ devtool latest-version re2
+INFO: Current version: 2024.03.01
+INFO: Latest version: 2025
+INFO: Latest version's commit: 927f5d53caf8111721e734cf24724686bb745f55
+
+After the patch:
+$ devtool latest-version re2
+INFO: Current version: 2024.03.01
+INFO: Latest version: 2025-11-05
+INFO: Latest version's commit: 927f5d53caf8111721e734cf24724686bb745f55
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- ...uth-Skip-mTLS-tests-in-ptest-environ.patch | 96 +++++++++++++++++++
- .../python/python3-google-auth_2.43.0.bb      |  1 +
- 2 files changed, 97 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch
+ meta-oe/recipes-support/re2/re2_2024.03.01.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch b/meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch
-new file mode 100644
-index 0000000000..1b09043748
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-google-auth/0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch
-@@ -0,0 +1,96 @@
-+From 2bb8c964f31ba0413a818f5b99d668b54e83cfa3 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Nov 2025 17:47:43 -0800
-+Subject: [PATCH] python3-google-auth: Skip mTLS tests in ptest environment
-+
-+Mutual TLS tests require SSL certificates and proper crypto library
-+setup that is not available in the isolated ptest environment.
-+
-+Skip all TestMutualTlsAdapter, TestMutualTlsOffloadAdapter, and
-+TestMakeMutualTlsHttp tests as they require:
-+- Valid SSL client certificates
-+- Server certificates for mTLS handshake
-+- Proper certificate chains and CAs
-+
-+These tests verify mTLS functionality which is not feasible to test
-+in the embedded ptest runtime without external certificate infrastructure.
-+
-+Upstream-Status: Inappropriate [ptest environment limitation]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ tests/transport/test_requests.py | 7 ++++++-
-+ tests/transport/test_urllib3.py  | 2 ++
-+ 2 files changed, 8 insertions(+), 1 deletion(-)
-+
-+diff --git a/tests/transport/test_requests.py b/tests/transport/test_requests.py
-+index 0da3e36..3a62ef7 100644
-+--- a/tests/transport/test_requests.py
-++++ b/tests/transport/test_requests.py
-+@@ -176,6 +176,7 @@ class TimeTickAdapterStub(AdapterStub):
-+ class TestMutualTlsAdapter(object):
-+     @mock.patch.object(requests.adapters.HTTPAdapter, "init_poolmanager")
-+     @mock.patch.object(requests.adapters.HTTPAdapter, "proxy_manager_for")
-++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
-+     def test_success(self, mock_proxy_manager_for, mock_init_poolmanager):
-+         adapter = google.auth.transport.requests._MutualTlsAdapter(
-+             pytest.public_cert_bytes, pytest.private_key_bytes
-+@@ -187,6 +188,7 @@ class TestMutualTlsAdapter(object):
-+         adapter.proxy_manager_for()
-+         mock_proxy_manager_for.assert_called_with(ssl_context=adapter._ctx_proxymanager)
-+
-++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
-+     def test_invalid_cert_or_key(self):
-+         with pytest.raises(OpenSSL.crypto.Error):
-+             google.auth.transport.requests._MutualTlsAdapter(
-+@@ -404,7 +406,7 @@ class TestAuthorizedSession(object):
-+         authed_session.credentials._create_self_signed_jwt.assert_called_once_with(
-+             "https://{}/".format(default_host)
-+         )
-+-
-++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
-+     def test_configure_mtls_channel_with_callback(self):
-+         mock_callback = mock.Mock()
-+         mock_callback.return_value = (
-+@@ -429,6 +431,7 @@ class TestAuthorizedSession(object):
-+     @mock.patch(
-+         "google.auth.transport._mtls_helper.get_client_cert_and_key", autospec=True
-+     )
-++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
-+     def test_configure_mtls_channel_with_metadata(self, mock_get_client_cert_and_key):
-+         mock_get_client_cert_and_key.return_value = (
-+             True,
-+@@ -548,6 +551,7 @@ class TestMutualTlsOffloadAdapter(object):
-+         google.auth.transport._custom_tls_signer.CustomTlsSigner,
-+         "attach_to_ssl_context",
-+     )
-++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
-+     def test_success(
-+         self,
-+         mock_attach_to_ssl_context,
-+@@ -581,6 +585,7 @@ class TestMutualTlsOffloadAdapter(object):
-+         google.auth.transport._custom_tls_signer.CustomTlsSigner,
-+         "attach_to_ssl_context",
-+     )
-++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
-+     def test_success_should_use_provider(
-+         self,
-+         mock_attach_to_ssl_context,
-+diff --git a/tests/transport/test_urllib3.py b/tests/transport/test_urllib3.py
-+index e832300..66af909 100644
-+--- a/tests/transport/test_urllib3.py
-++++ b/tests/transport/test_urllib3.py
-+@@ -93,12 +93,14 @@ class ResponseStub(object):
-+
-+
-+ class TestMakeMutualTlsHttp(object):
-++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
-+     def test_success(self):
-+         http = google.auth.transport.urllib3._make_mutual_tls_http(
-+             pytest.public_cert_bytes, pytest.private_key_bytes
-+         )
-+         assert isinstance(http, urllib3.PoolManager)
-+
-++    @pytest.mark.skip(reason="mTLS requires certificates not available in ptest")
-+     def test_crypto_error(self):
-+         with pytest.raises(OpenSSL.crypto.Error):
-+             google.auth.transport.urllib3._make_mutual_tls_http(
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth_2.43.0.bb b/meta-python/recipes-devtools/python/python3-google-auth_2.43.0.bb
-index aa94035eb6..1a1b035a41 100644
---- a/meta-python/recipes-devtools/python/python3-google-auth_2.43.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-auth_2.43.0.bb
-@@ -7,6 +7,7 @@ inherit pypi setuptools3 ptest
+diff --git a/meta-oe/recipes-support/re2/re2_2024.03.01.bb b/meta-oe/recipes-support/re2/re2_2024.03.01.bb
+index 5b7b241a25..a510545bab 100644
+--- a/meta-oe/recipes-support/re2/re2_2024.03.01.bb
++++ b/meta-oe/recipes-support/re2/re2_2024.03.01.bb
+@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/google/re2.git;branch=main;protocol=https \
+            ${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-ptest', '', d)} \
+           "
+ 
++UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(-\d+)+)"
+ 
+ DEPENDS = "abseil-cpp ${@bb.utils.contains('PTEST_ENABLED', '1', 'gtest googlebenchmark', '', d)}"
+ 
+-- 
+2.34.1
 
- SRC_URI += " \
-         file://0001-make-the-TLS-tests-skip-when-pyopenssl-isn-t-availab.patch \
-+        file://0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch \
-         file://run-ptest \
- "
- SRC_URI[sha256sum] = "88228eee5fc21b62a1b5fe773ca15e67778cb07dc8363adcb4a8827b52d81483"
 
