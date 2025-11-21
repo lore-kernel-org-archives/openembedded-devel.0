@@ -1,122 +1,147 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5635DCFC274
-	for <webhook@archiver.kernel.org>; Fri, 21 Nov 2025 13:17:46 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11228.1763731061543712378
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42773CFC50D
+	for <webhook@archiver.kernel.org>; Fri, 21 Nov 2025 22:25:29 +0000 (UTC)
+Received: from rcdn-iport-3.cisco.com (rcdn-iport-3.cisco.com [173.37.86.74])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18875.1763751183104499809
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Nov 2025 05:17:41 -0800
+ Fri, 21 Nov 2025 10:53:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=mBgqSqdH;
- spf=pass (domain: konsulko.com, ip: 209.85.221.41, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-42b387483bbso1370317f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Nov 2025 05:17:41 -0800 (PST)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=GuMeXjZe;
+ spf=temperror, err=temporary DNS error (domain: cisco.com, ip: 173.37.86.74, mailfrom: adongare@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1763731060; x=1764335860; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=TDLy+PWrbXuKSgdtmKBe9nY5dnBEC0rR7resNkGlZW8=;
-        b=mBgqSqdHFLuYTnkEkgRchOyC7fJ/AEmzntlRsZAi46rTS+F3mWz8PFwgQL+yIpCQQ9
-         +qEcrwJRe0dt/imyneE3LqGygcuL/tgAO4cjBtIgWyqCcxSU7tuwVcvOzEFyeqwF/rAe
-         Lg5WpY4/yaApsDPo4lcNhhhIKo3sbN8n1olnI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763731060; x=1764335860;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=TDLy+PWrbXuKSgdtmKBe9nY5dnBEC0rR7resNkGlZW8=;
-        b=ZZQA4A7iAiIlyR7VVORHiDLqDlPcrapRY6QXqHaSnGCmfkUviPRgquiwcoj3AZZ67U
-         4/qVd9NFU/AYP+3qRWETJsmyPemWfZPrxOwMh1OS8xXtNyJtjmOa+lFnviFFZdARAls8
-         4FA/9TYreaLOpfHx9OOigm3hASsAbqdWPJ5bEJVvuGYpsydWltvnumpSfNVOnHVLOZf2
-         qm6zNLfL8s8+6kR7cI9Nop+IDosLBzoIerATYKwbYmfozA1n2kdhMG/8p3fe5E9Y6Uuy
-         udLu7S5nIbXBLsWRUVF8z8jwF3u4mMbO89MrSg2LQTuOn3jOljVvdZJPbfjVEjUzxwbH
-         IJow==
-X-Gm-Message-State: AOJu0YxTMvinXB8aOpkg/Snx/ETCoty5rqTb7QtobcaKNC9JLMUPWxsZ
-	ELZFxidoxoYbKnYjgCARz9a/8CfSjpEgeK/7WXkBgTFqN3V1L1AaWxKUkAciOiZ46sAP1BA05/i
-	ZtRPx
-X-Gm-Gg: ASbGncuQi0gUgwIWmTL1EicYa+KmAl68f4Iddn6kQBZENCgVmnfRC262fU5PCV+NnZ0
-	ghyDu/0WaHe0Act7Vj6N57Qt8PWwnui56dcogg9P/As8DwB/b8nuVtFVgBf2zHB8RG7mq5VUK/g
-	F7fFPnTYI/6Vab0QHDoR0NrNnbnG+tUnk0VTg6e3PMCd38N+ZLIA8k8qDW9O8p83ax+A5E5IMpS
-	m7slDjLhaWQDMr5q3yrx1xidnOoJgriRSuQQ1tdXwjv5LXwZ1xFBKr1RqTP+idEV8aDm81bQitq
-	GyCqyQBHjPKRmHsvP97kiqsyjj17QCertlvKHvb8YhIm/mrEmC6xEiwroiN171Fe84CkqrP35Lu
-	uRHzelmwgrmvvyIzKeTcxXUGqmS13/LS+O6KsfO70S4wreIxlU5EkVWjyTx/9xfC21NYiK2WZNN
-	D7uyL83Vyoed9m1ScJC9aBazQw
-X-Google-Smtp-Source: AGHT+IG371XtXLx6B9rVD1BYmCvrusBI/ok4xpgilqBxLPoLVjYMfdO1ypBS+55s8zO7Jd9Zi2Qpsw==
-X-Received: by 2002:a05:6000:1889:b0:42b:3155:21da with SMTP id ffacd0b85a97d-42cc1cd8f1cmr2346852f8f.2.1763731059509;
-        Fri, 21 Nov 2025 05:17:39 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42cb7fa3a81sm11348550f8f.26.2025.11.21.05.17.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Nov 2025 05:17:39 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+  d=cisco.com; i=@cisco.com; l=2618; q=dns/txt;
+  s=iport01; t=1763751183; x=1764960783;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=3nJjJtJy+ehocgbBxHHsLILSR66gDjUYvypjDPIUeus=;
+  b=GuMeXjZeQIw7ukrHY9MjHsC+CwMHjBXbZ4y4m5YuCtkC5giBUMAs+0tT
+   KUo6K7hvOWQgdYLsFxC8EPMcL+fiGUieMeMBUOEQbRQ2GSMMiiEJiDyKh
+   BaFXU0R4z0fx26axozu3O6cMGVE9ITezmDkw6bTl55SAHA06aQHYQ6QKJ
+   afcD6meSEQNc9nx752GRnAdtZNzqHpzedCn++P/HzrnIuTbmVFqBviPII
+   X+NNQmVge6I55LCz3iFuPzpqAtiZgLhiYgUMD1lY0HHIKTigKnEx7patk
+   oXp/2mMXkWz7FT6R9uXjzRZ88zY3fO+aQQzzV6bEogVMs9l0sNffU1uF/
+   Q==;
+X-CSE-ConnectionGUID: 93abOtsNQPmH7/tA2ncgpg==
+X-CSE-MsgGUID: M7qS4n8AR4ieB2D1g3pkLQ==
+X-IPAS-Result: =?us-ascii?q?A0BOBAC5syBp/43/Ja1aHgEBCxIMggULgkd7XUNJlVxsi?=
+ =?us-ascii?q?2eSNoF/DwEBAQ9EDQQBAYUHjF8CJjQJDgECBAEBAQEDAgMBAQEBAQEBAQEBA?=
+ =?us-ascii?q?QsBAQUBAQECAQcFgQ4Thk8IBYZdNgE9CTBRC0SDAgGCOgM2AxGxfYIsgQHdP?=
+ =?us-ascii?q?g2CVQaBSoU7gnmFHXABhHgnGxuBcoEVgTuCLYEFgRqCDGWFdwSCIoEOgXqEL?=
+ =?us-ascii?q?YJTHhCQL0iBHgNZLAFVEw0KCwcFgWMDNQwLKhVuMh2BJD4Yc4RdImgPBoESg?=
+ =?us-ascii?q?1EGgS6HaQ+KWQMLGA1IESw3FBsGPm4HlCJRgi5ZNQErWZULP4JrjHGCIaAdc?=
+ =?us-ascii?q?Qoog3SMHo89hXwaM6prC5h7jgiECZErMWuEaYFoPIFZcBWDIlIZD44uCguIc?=
+ =?us-ascii?q?cF2JTILMQIHCwEBAwmTZwEB?=
+IronPort-Data: A9a23:sdWEO64ppOLxbEZ23aV1JQxRtD/GchMFZxGqfqrLsTDasY5as4F+v
+ mQdWGCFM6uKMGv0KopwPomy8E9X6pGAzddhQAQ4/ypjZn8b8sCt6fZ1gavT04J+CuWZESqLO
+ u1HMoGowPgcFyGa/lH2dOC98RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
+ 5Wo+6UzBHf/g2QpaztOsvrZwP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
+ +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
+ jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4ebNYR8MFrGkd3z
+ fk4d3cRR0qFjO2uz+fuIgVsrpxLwMjDJogTvDRkiDreF/tjGcyFSKTR7tge1zA17ixMNa+BP
+ IxCNnw1MUmGOkEWUrsUIMpWcOOAj3X4dTJRsl+9rqss6G+Vxwt0uFToGIaPJ4bXGJUEwS50o
+ ErjoH3CXhdKHebDyDevqF71ibTXngfCDdd6+LqQs6QCbEeo7nYaClsVVVa+ifa8g0+6HdlYL
+ iQ8/TIjq6U3/kGnQtTxGhG1vnOAlhodQMZLVeoi5QeAz6DZ7wqUCi4DVDEpQMQrqMIsAzkjz
+ FyOt8joCDlitqbTQnWYnop4thuoMiQTaGtHbigeQE5dv5/ooZo4iVTESdML/LOJs+AZ0ArYm
+ 1iixBXSTZ1K5SLX/81XJWz6vg8=
+IronPort-HdrOrdr: A9a23:exADeqlAxVFUq5eBv4fqY61cI2vpDfIn3DAbv31ZSRFFG/FwWf
+ rAoB19726QtN9/YhAdcLy7VZVoIkmsl6Kdg7NwAV7KZmCP0wGVxepZg7cKrQeNJ8SHzJ8/6U
+ +lGJIOb+EZyjNB/KLH3DU=
+X-Talos-CUID: =?us-ascii?q?9a23=3AQUUraGj/t0me3qI0T/Ob+xTQGjJuIybUxlDMOGm?=
+ =?us-ascii?q?BMWNJF/qJYAWW86x8nJ87?=
+X-Talos-MUID: 9a23:3rBrZQZx7PKfoOBTkmD1v21kZO5Sv6WjIhohyJpdo8qgDHkl
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.20,216,1758585600"; 
+   d="scan'208";a="425255897"
+Received: from rcdn-l-core-04.cisco.com ([173.37.255.141])
+  by rcdn-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 21 Nov 2025 18:53:02 +0000
+Received: from sjc-ads-10055.cisco.com (sjc-ads-10055.cisco.com [10.30.210.59])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id 23261180001A2;
+	Fri, 21 Nov 2025 18:53:02 +0000 (GMT)
+Received: by sjc-ads-10055.cisco.com (Postfix, from userid 1870532)
+	id BE23BCC1288; Fri, 21 Nov 2025 10:53:01 -0800 (PST)
+From: "Anil Dongare -X (adongare - E INFOCHIPS PRIVATE LIMITED at Cisco)" <adongare@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-pybind11: Upgrade 2.13.6 -> 3.0.1
-Date: Fri, 21 Nov 2025 15:17:36 +0200
-Message-ID: <20251121131736.2998314-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20251121131736.2998314-1-leon.anavi@konsulko.com>
-References: <20251121131736.2998314-1-leon.anavi@konsulko.com>
+Cc: xe-linux-external@cisco.com, to@cisco.com,
+	Peter Marko <peter.marko@siemens.com>, Khem Raj <raj.khem@gmail.com>,
+	Anil Dongare <adongare@cisco.com>
+Subject: [meta-openembedded] [scarthgap] [PATCH] uw-imap: patch CVE-2018-19518
+Date: Fri, 21 Nov 2025 10:52:55 -0800
+Message-ID: <20251121185256.1745520-1-adongare@cisco.com>
+X-Mailer: git-send-email 2.44.1
 MIME-Version: 1.0
+X-Outbound-SMTP-Client: 10.30.210.59, sjc-ads-10055.cisco.com
+X-Outbound-Node: rcdn-l-core-04.cisco.com
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 21 Nov 2025 13:17:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121962
+ <openembedded-devel@lists.openembedded.org>; Fri, 21 Nov 2025 22:25:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121963
 
-Upgrade to version 3.0.1:
+From: Peter Marko <peter.marko@siemens.com>
 
-- Fixed compilation error in `type_caster_enum_type` when casting
-  pointer-to-enum types. Added pointer overload to handle
-  dereferencing before enum conversion.
-- Implement binary version of `make_index_sequence` to reduce
-  template depth requirements for functions with many parameters.
-- Subinterpreter-specific exception handling code was removed to
-  resolve segfaults.
-- Fixed issue that caused ``PYBIND11_MODULE`` code to run again if
-  the module was re-imported after being deleted from
-  ``sys.modules``.
-- Prevent concurrent creation of sub-interpreters as a workaround
-  for stdlib concurrency issues in Python 3.12.
-- Fixed potential crash when using `cpp_function` objects with
-  sub-interpreters.
-- Fixed non-entrant check in `implicitly_convertible()`.
-- Support C++20 on platforms that have older c++ runtimes.
-- Fix compilation with clang on msys2.
-- Avoid `nullptr` dereference warning with GCC 13.3.0 and python
-  3.11.13.
-- Fix potential warning about number of threads being too large.
-- Fix gcc 11.4+ warning about serial compilation using CMake.
+Take patch from Debian from
+https://salsa.debian.org/lts-team/packages/uw-imap/-/commit/873b07f46ce40f43bca10ec85fe63a7a0b934294
 
-This work was sponsored by GOVCERT.LU.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 9f7c1e6bd101494c6cc5dad16a7fa65a13cbac70)
+Signed-off-by: Anil Dongare <adongare@cisco.com>
 ---
- .../{python3-pybind11_2.13.6.bb => python3-pybind11_3.0.1.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pybind11_2.13.6.bb => python3-pybind11_3.0.1.bb} (92%)
+ .../uw-imap/uw-imap/CVE-2018-19518.patch      | 24 +++++++++++++++++++
+ .../recipes-devtools/uw-imap/uw-imap_2007f.bb |  1 +
+ 2 files changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/CVE-2018-19518.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.13.6.bb b/meta-python/recipes-devtools/python/python3-pybind11_3.0.1.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-pybind11_2.13.6.bb
-rename to meta-python/recipes-devtools/python/python3-pybind11_3.0.1.bb
-index 7d71767297..cc2f0c66dc 100644
---- a/meta-python/recipes-devtools/python/python3-pybind11_2.13.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-pybind11_3.0.1.bb
-@@ -7,7 +7,7 @@ DEPENDS = "\
-     python3-ninja-native \
- "
+diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap/CVE-2018-19518.patch b/meta-oe/recipes-devtools/uw-imap/uw-imap/CVE-2018-19518.patch
+new file mode 100644
+index 0000000000..d942a752b3
+--- /dev/null
++++ b/meta-oe/recipes-devtools/uw-imap/uw-imap/CVE-2018-19518.patch
+@@ -0,0 +1,24 @@
++uw-imap (8:2007f~dfsg-6) unstable; urgency=medium
++
++  * [CVE-2018-19518] 2013_disable_rsh.patch (new): Disable access to IMAP
++    mailboxes through running imapd over rsh, and therefore ssh (Closes:
++    #914632). Code using the library can enable it with tcp_parameters()
++    after making sure that the IMAP server name is sanitized.
++
++ -- Magnus Holmgren <holmgren@debian.org>  Tue, 26 Feb 2019 23:35:43 +0100
++
++CVE: CVE-2018-19518
++Upstream-Status: Inactive-Upstream [lastrelease: 2007]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++
++--- a/src/osdep/unix/Makefile
+++++ b/src/osdep/unix/Makefile
++@@ -988,7 +988,7 @@ onceenv:
++ 	 -DMD5ENABLE=\"$(MD5PWD)\" -DMAILSPOOL=\"$(MAILSPOOL)\" \
++ 	 -DANONYMOUSHOME=\"$(MAILSPOOL)/anonymous\" \
++ 	 -DACTIVEFILE=\"$(ACTIVEFILE)\" -DNEWSSPOOL=\"$(NEWSSPOOL)\" \
++-	 -DRSHPATH=\"$(RSHPATH)\" -DLOCKPGM=\"$(LOCKPGM)\" \
+++	 -DLOCKPGM=\"$(LOCKPGM)\" \
++ 	 -DLOCKPGM1=\"$(LOCKPGM1)\" -DLOCKPGM2=\"$(LOCKPGM2)\" \
++ 	 -DLOCKPGM3=\"$(LOCKPGM3)\" > OSCFLAGS
++ 	echo $(BASELDFLAGS) $(EXTRALDFLAGS) > LDFLAGS
+diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+index dcb59f4ea0..0fec03524a 100644
+--- a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
++++ b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+@@ -15,6 +15,7 @@ SRC_URI = "https://fossies.org/linux/misc/old/imap-${PV}.tar.gz \
+            file://0001-Do-not-build-mtest.patch \
+            file://0002-tmail-Include-ctype.h-for-isdigit.patch \
+            file://0001-Fix-Wincompatible-function-pointer-types.patch \
++           file://CVE-2018-19518.patch \
+            "
  
--SRCREV = "a2e59f0e7065404b44dfe92a28aca47ba1378dc4"
-+SRCREV = "f5fbe867d2d26e4a0a9177a51f6e568868ad3dc8"
- SRC_URI = "\
-     git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
- "
+ SRC_URI[md5sum] = "2126fd125ea26b73b20f01fcd5940369"
 -- 
-2.47.3
+2.44.1
 
 
