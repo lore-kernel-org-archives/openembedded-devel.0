@@ -1,95 +1,101 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99BC2CFC518
-	for <webhook@archiver.kernel.org>; Sat, 22 Nov 2025 00:12:56 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.443.1763770368369949518
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB6DDCFC51E
+	for <webhook@archiver.kernel.org>; Sat, 22 Nov 2025 08:26:38 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5944.1763799993511810037
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 21 Nov 2025 16:12:48 -0800
+ Sat, 22 Nov 2025 00:26:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=pACNUdi5;
- spf=pass (domain: smile.fr, ip: 209.85.128.48, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-477a219dbcaso24455685e9.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 21 Nov 2025 16:12:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OGIWKkpS;
+ spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-5959b2f3fc9so2754774e87.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 22 Nov 2025 00:26:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1763770366; x=1764375166; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1763799991; x=1764404791; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Rfh1FlwJApVet5K4n2pPjoz/vZulBtAofBSj19BWPpo=;
-        b=pACNUdi51wJZFOPy0vFYUHs9dLcjdzDFyhkjqaHaLlTBYfgQ+zCkb+OGucj75n73MF
-         0DTj+8osg/pxxpmUpkMgjunCOhSjPNZmVRX/VUq1zgVAzwF91rnobiXB84x9Or0A/oA4
-         OuQpiVV+Q89uIFh0qtSoG2m28QVmz2zRCDM7g=
+        bh=SVcGRbd+2SsKa9Zu18cRTqH4ipAgSVmjAGhBpGmRp1Q=;
+        b=OGIWKkpS3blNbNeu4pGmg8oy/0UaLUh34m/2e8ToiZPDNFaxIgx0Hjv1DYhr05O2nH
+         rr9fBfNdtV0u6cZi7/9PMmMq/IC4Q8bEBdtfrkYJFLSjHGFaqw2G0///KYduoK1dyVwF
+         kZDDbHgD+y+nBUKwY0+wxB3qWWUU8dfPGVi8RMgEVQj7g3XDljSkxIGLoNF2axLBdeC+
+         veUJXcG+cpFkUV4wxc5zKWbZL5Os6uJN6DqNPESsX91LBOinmV2tgxlZBSwu5NGaFJxg
+         cbluBcrRxyhs0WDb6MH08uwpJ5lLs0IHC75c0CpFA7TLhE3JLQgBTvemadnZWTSRB1TB
+         bOhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763770366; x=1764375166;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+        d=1e100.net; s=20230601; t=1763799991; x=1764404791;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Rfh1FlwJApVet5K4n2pPjoz/vZulBtAofBSj19BWPpo=;
-        b=nYXzihJIor754q4ueWIwJZpllCv366FRf5R4kkN6PgrvVp+fWVZsrUK2jTGcSR8qbq
-         8SWeKkcUbvWB6Oy1dwuTC+VhqVZGRlsxEpaHY1dRFBVGWuIbZ0aIcpLJdfVS2a4jrhRA
-         HUahtDn0UQdKAK8GrYie1NBOkrxQxV+q5Ea+SgbDne054yCFUq/Wcf5lnjJ/b5Kxmes3
-         erz+kyLEFkZ41r2dtL0/w6M7dJuAMwBgLJnbkaG++qn2/hjxht0qW+qsKSrNPwJLowWA
-         fBKtZLddoacXgjaCXQIdchNJH9DhwDGWVs8tBZ9u9WydRvkSMaHFfRthUP4sNOoWTy+M
-         1znw==
-X-Gm-Message-State: AOJu0YwefNgC2VYoB/AHrB8zxYc9LgcGyu+VZmXi1AtChnEUgJ+rsZXH
-	/4SjwuR1Bsj1mL/w6bYlOWTGZDl6bzMLo5QH03xxNPoWk90dMKbPcliIwe04PkUvGEpJGbDtwt1
-	ibrw+A8U=
-X-Gm-Gg: ASbGnctSyLqMV52mVtt4qAxAtpMFSd8wXGQLYTKv+tE9F533st1JiTFEcZq6Lu4dDid
-	CONYmuHQUYMxE2eYbeofa5FMPhitbaBObTUJRJTMeydEyHkXTHOLEUTdfRUjXB/VMvZ4pgYGBbk
-	cS/CZJT2mpi8ww8//J4iesXAqrFLwZybXCmAqYvwWRpl00qd5SFFBP0KlcBj1E9x3k1P6us9ti6
-	SN3qfZthMiESLPKebg9T/5v2f4Lpfq4Q6dhPym1Cnv+YlrntQeP2U0AXJlkGtW05cVPLRgU/nU4
-	rTRhA8WmzqQ1ze6jNSMLSbvoYhwqYEKF2nRpVCmLct4yyOryfK3/zeSYv8aPbFuafom1G+chlcE
-	WCSs8QluhAhH4u8Vrk+sNMUT99BmKTCf0SQbyeyDYNlJqN9Hj/AtIHHSb8O/+OSWPZzvxo7mdp8
-	DCMjAUbSS0qV8D5/4i3s3yEG4qfYPYD4lYq9mT+Qm4qbdlqXRqKE1REhzyAw6dSyvhQUB0TcBzp
-	LibccmLRYX/PIWD8AjbMA==
-X-Google-Smtp-Source: AGHT+IHTnybJhJOpgHi/1O0lXqkYkAkpCwwgmkEm/HRkYe3gIYU7HEhA2WF31lPXfJX8Zd40MnWRWg==
-X-Received: by 2002:a05:600c:1d1d:b0:477:7a87:48d1 with SMTP id 5b1f17b1804b1-477c01ff5bbmr50136915e9.30.1763770366344;
-        Fri, 21 Nov 2025 16:12:46 -0800 (PST)
-Received: from P-ASN-ECS-830T8C3.home (2a01cb001331aa0017b58d8bf04048c3.ipv6.abo.wanadoo.fr. [2a01:cb00:1331:aa00:17b5:8d8b:f040:48c3])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477a9dcbca9sm95018525e9.6.2025.11.21.16.12.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 21 Nov 2025 16:12:46 -0800 (PST)
-From: Yoann Congal <yoann.congal@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-python][PATCH 2/4] python3-icontract: add BBCLASSEXTEND nativesdk
-Date: Sat, 22 Nov 2025 01:12:25 +0100
-Message-Id: <20251122001227.3538675-2-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20251122001227.3538675-1-yoann.congal@smile.fr>
-References: <20251122001227.3538675-1-yoann.congal@smile.fr>
+        bh=SVcGRbd+2SsKa9Zu18cRTqH4ipAgSVmjAGhBpGmRp1Q=;
+        b=YEqnvhqcQHZmmbyUKd74tC8QeKMZFws3453Z9Vd8Vf4AC14FNyl2u5hMpvqbNhx6q+
+         DnPmvePG/mjoE5UMayhHEakAD6Oa/JlUMvJIuB6IGUBa5y+I1M0twK5YZlCbOHPaf1Fl
+         SPOXBUjcKO5Iq9TnXraIZAy+Gc/j/iXKHhOUVAYXVKSZ8lJ8HGwUVVmlg5aHRsXnCLMm
+         AVg0b0yOu2N7TrGQ0KKtwn+8uTTd9FbmlkwhrywSuu5EAwaQEDvjh5aiXk0AwSg+RmWf
+         ZXVdDO4SqLd/xqHAZlLZOqCGom9EGwtbNED1us2YrKby9iGqXVEBs7acEEydKLuIrVW+
+         fSsw==
+X-Gm-Message-State: AOJu0YwQY13zkYfZ793Nnb6mSP3hC4JNN0kIYsx91/kkaxLGQd/cxxr9
+	+C9GnmpAYDjx+TQhKbdeQk+1TbfH3qAeS5gPUhHR6G5ueOD4iUhPhh63gVQNamCvPp/uJpkPdzl
+	893uyShyYw4pNtXiniZlahy/3Ea6tYHo=
+X-Gm-Gg: ASbGncsgXUyfAjXfmuy/UUGmL1Fz9GKCdglDTvLyAkRav7vqVI6lLXD99nHgh6/Lcng
+	+NbDpke4YKM5b55Ue52K7JiWAHwMDIQYVnWECexyTPvBHVLUnTa/8z+XIoLD7d+2D3G0drZGp3M
+	oUtxTAbD1OtuJ3CoeG2hIRpMkmlwJTZX8J2flYERL5vsrBMYZaQCWV8UqZsUzXj/z43G3EVIgin
+	pP8FNTyizdt8icaHyAzLHYEcsdsTRVSGPJjPEEQnWt/2kHEnvRs3xLsUsIcdnmFbb1qI4m1hg==
+X-Google-Smtp-Source: AGHT+IE8bDQlh1YIDAJdE2pmoDfgeYTD1MPMeEbZfjpAh7CKc1NyvW5HSeXyIa0MhYZoCYFjnv323Z653qyW/NWHhMA=
+X-Received: by 2002:a05:6512:3992:b0:57a:2be1:d779 with SMTP id
+ 2adb3069b0e04-596a3ecf608mr1341867e87.31.1763799991188; Sat, 22 Nov 2025
+ 00:26:31 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251122001227.3538675-1-yoann.congal@smile.fr>
+In-Reply-To: <20251122001227.3538675-1-yoann.congal@smile.fr>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sat, 22 Nov 2025 09:26:18 +0100
+X-Gm-Features: AWmQ_blYchbb7zZ0_d4GPOkr3KyrSMeI5arNb_fKuRH_vlQ3VIn-JTy08kAUItA
+Message-ID: <CA+chaQfZvbqdBi1GWS-QuBpQytAeSuGBavXGE4mXbsdswWccLQ@mail.gmail.com>
+Subject: Re: [meta-python][PATCH 1/4] python3-asttokens: add BBCLASSEXTEND nativesdk
+To: Yoann Congal <yoann.congal@smile.fr>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 22 Nov 2025 00:12:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121965
+ <openembedded-devel@lists.openembedded.org>; Sat, 22 Nov 2025 08:26:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121968
 
-From: Yoann Congal <yoann.congal@smile.fr>
+Not sure why it didn't show in my testing, but thanks for taking care of th=
+ese.
 
-nativesdk-python3-icontract is needed for the dependency tree :
-`-> nativesdk-python3-pylddwrap
-    `-> nativesdk-python3-checksec-py
+Acked-by: Martin Jansa <martin.jansa@gmail.com>
 
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
----
- meta-python/recipes-devtools/python/python3-icontract_2.7.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-python/recipes-devtools/python/python3-icontract_2.7.2.bb b/meta-python/recipes-devtools/python/python3-icontract_2.7.2.bb
-index b906be4ac2..355f1fd88b 100644
---- a/meta-python/recipes-devtools/python/python3-icontract_2.7.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-icontract_2.7.2.bb
-@@ -11,4 +11,4 @@ SRC_URI[sha256sum] = "281ec16f1d09bbcca7a4227e82cd10b4d5fb291f638df77c29b7acf493
- 
- RDEPENDS:${PN} += "python3-asttokens"
- 
--BBCLASSEXTEND = "native"
-+BBCLASSEXTEND = "native nativesdk"
+On Sat, Nov 22, 2025 at 1:12=E2=80=AFAM Yoann Congal <yoann.congal@smile.fr=
+> wrote:
+>
+> From: Yoann Congal <yoann.congal@smile.fr>
+>
+> nativesdk-python3-asttokens is needed for the dependency tree :
+> `-> nativesdk-python3-icontract
+>    `-> nativesdk-python3-pylddwrap
+>        `-> nativesdk-python3-checksec-py
+>
+> Cc: Martin Jansa <martin.jansa@gmail.com>
+> Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+> ---
+>  meta-python/recipes-devtools/python/python3-asttokens_3.0.1.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-asttokens_3.0.1.=
+bb b/meta-python/recipes-devtools/python/python3-asttokens_3.0.1.bb
+> index 81eab1d5c7..5b6cf0624f 100644
+> --- a/meta-python/recipes-devtools/python/python3-asttokens_3.0.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-asttokens_3.0.1.bb
+> @@ -15,4 +15,4 @@ RDEPENDS:${PN} +=3D " \
+>         python3-six \
+>  "
+>
+> -BBCLASSEXTEND =3D "native"
+> +BBCLASSEXTEND =3D "native nativesdk"
 
