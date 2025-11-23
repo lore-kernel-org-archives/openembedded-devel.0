@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF84DCFD31C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3682CFD316
 	for <webhook@archiver.kernel.org>; Sun, 23 Nov 2025 17:43:19 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17915.1763919792664379179
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.17917.1763919793438560630
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Nov 2025 09:43:12 -0800
+ Sun, 23 Nov 2025 09:43:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mQH3orcX;
- spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-42b3c965df5so1801092f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Nov 2025 09:43:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DBF9fegR;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-477b5e0323bso23643285e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Nov 2025 09:43:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763919791; x=1764524591; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763919792; x=1764524592; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=H3a+R9nmPdnbgzEHSDtdmmFHODau20iI8ZzYRWZdRZA=;
-        b=mQH3orcXIwQNkdmkORUjiOtkqVMJ6pmoeIis49ajyXeJ6jnWvQyVHT43ux39ZtReix
-         1z859+xVGOkJQ9p633PnXPcmQJB4nv03J79NWekNkCMNGjr7e3eHW9mAOxU4nMvYYC/H
-         vAmH0GgxWizW0yjM/VEKWdyEv5UxtGs6Y8VjHZmmdAQouP8fEeBIGmUjxU+Wafu1WnUj
-         osqiOqWQIJgx95O52IGBWwcGG7u5kA1q5a52j4JmyaEF+aOlBi94jQUrQAISGDXARC8n
-         wa5rM1WVOrn198h3+RdOMq5PhtWtPW4O5EkuT/E4L+Q7YrrPGUNCy+jDxj3GBff+Zp43
-         o2Hw==
+        bh=fQ1M3qddofyHNonxwcStH++mRiDTQRQHKys5+MfACEc=;
+        b=DBF9fegRAwDwcn32q7JTEPpPBpdZhgadCwelzLt2r91KU5i33y5HUagdjhtv5aCAhz
+         ZIH21Z9KzQnOci0ql3iHhVBNvPaemSUQHX2FB7F9836/i/nI+jAziIBZzPRjmb7dogwn
+         a425vW3TtENYvhpkM5kvma4MLIDEhi1l1bu8Tg4ItsbS0OgPrYZV4jO8ZYbWcX/0KaNw
+         Iqc98duiKkY5ZsUcEeoBO+1zc0gxpcxouJSMrHtMfDTGD3C4kPgVUE+WOx+ARssQJrI6
+         p1/OTXz3Oxxn7klN3dw7V6K/Kt6ffgv2PftTZ+eSJieY0rDTHMySA32UPEf9b9Qen7Du
+         qyMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763919791; x=1764524591;
+        d=1e100.net; s=20230601; t=1763919792; x=1764524592;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=H3a+R9nmPdnbgzEHSDtdmmFHODau20iI8ZzYRWZdRZA=;
-        b=E4wZj59lQ7mCuFMDiK4618m1eQgTUj3MrSBeoAqEIdfcgWvu7ULHLCpUnbO/2ppP0C
-         9kjhM02mF+BBDQKJKNGH8ZZ2/iN8QyXwfIHuTVj6mJ7ypBr3NsweaZ1mwgWs5RIRafud
-         o/33tHKBvZK6/atVCs02Ixd1EUJL+oBCo3WsOPD1nS2LHGgGB/8v4WDjhBcAHUhqTvZm
-         KiBNXKdmSmpzLBAMFamgskwG2sQAlDAQlR2hhzHzXYni8kimuntsy/bzDHu7k/CmFvwZ
-         bnJvuR45aiaYPIWjvlsNzmVJpTnRc/2HRLlhLPh4WKjcvJSD1p/bIu5fyGimnQ+h2+vQ
-         7ztA==
-X-Gm-Message-State: AOJu0Yyjo960RTU4qRc4FYg+oNnLx+8PtLigAk/oelkP25PvbDFEEyOQ
-	ccVyA9LAich5zxs/YD1BcWeFKIihGAqnE1qkOap7rwZWMH61f6GFehjlghOh9DWV
-X-Gm-Gg: ASbGncumji/GrgOh0U6QYNqV0hnnwEiGKMCyAX9EVPnJvUJQGbQmheVGeBLLk4HrIxc
-	gkD0ymL11LH+DxsH837eGIo9ijvHY/zGJ6SctsG9U/Ra3zo8paMB8g6vlxUUnM4AvS7jOGiX/36
-	wbAjksjBEon8iu3wcDLcCIuj2HtV29JyQISRmuzI1LDIsObsKc7mMy0gwW7KKjUXMIpYi3ocG/K
-	gsgKAap9yVFe504x2Ex6Qx50Dx6Np6/NaG3Jy23uakX8GNa42bXE0pdZZx+CioUQQN9K4wFyM3u
-	wjW2Q5pcAX7C2gMm4RMEtBMWBbn/MpIztoOmFV1RoX3xv6VoxxqvnFRpaywRgJwYNUJRK5YkOby
-	TwDKdb1VhWJ5cf3r/lTozdzPY9aP2OK8s3h9i/2dL2hx44/PzZP4dRioE+NLtJnSo+SFOlvtyjD
-	t2eg8eInqH
-X-Google-Smtp-Source: AGHT+IH5JqBeaCeDxQfQrs7qsOVrcda9VbJiBY4rBE8JTCnAIYOfBu1eYCnbBrR2elJ6kJNMhLcWjw==
-X-Received: by 2002:a05:600c:35cf:b0:477:9a28:b0a4 with SMTP id 5b1f17b1804b1-477c00ee003mr119354685e9.0.1763919790881;
-        Sun, 23 Nov 2025 09:43:10 -0800 (PST)
+        bh=fQ1M3qddofyHNonxwcStH++mRiDTQRQHKys5+MfACEc=;
+        b=lF9APgbnkrleWx1LB7T/xE4I6VPEnfrZhe4mYxoFeJDzGQlRxQzAAohuaDNoFJ3Ym6
+         VoR30AgPYJKFcGTePvxm0OpGqVDXIOM2URk2xscKSNH7TKzpRand6iPzyhndVslYegNY
+         O1SD8Q73g+gsvKNjzQ9gWgc5gUhtIv2VA7jqirGiIYN6tPZNQoL/Mf69IzjeKo0Sfsag
+         pgCa6NSLC3v+aHiBJ8n8rtasPRvIqKM6RhyDEtVrHoXWLPi8++8q/0ijg1e/OHtciPqw
+         Jd6tfmRqQEOwx0tja23bGVQ0jGQuduzm4ewuE42nybjbdf1P6qVGDe31XtVJwzDIGoSm
+         Nrww==
+X-Gm-Message-State: AOJu0YzmFnegwrVlP8SpNat/Im3iWWTPeArdoDaHjMAKRfkFWJ21jo3v
+	oZ+dFS1rKZmZrvYc1SZ0XNPf1CP92zXU0r0tJXUWJNM2Rpct4RDx1WkdZ9tvQwrO
+X-Gm-Gg: ASbGncunSWvVPSiRrjY3El+hYieXynpwDvi8Ud5Tc0QPKIP5BooAHiaYdqiVc4WXzPm
+	NlFvkmxP4jt5kR6zG5V97uGjPofk+XIL/lJklbvg3iiwjmlTt7Wl8O2gsPVnvt3EFie4a3+m7Qr
+	ecp/uIRYrkwGjYbbHLQwxfh6sv0dTo1rJK4hhvZV1BKLXe6jn30TSkzE+36nKtw66cM60M5pPOc
+	+JDSQrXoUh8zUXsgm9gMhUwnlVBh7eeJQ5fvZwYVAwNdiMPT8rCl6rV+kF1SpsAkI0s3IkE4FLr
+	FJa5lxKnxLn6WiyMDNRyGKNV0FeXx7/KwT6Dg/8KqpJwkPUoWWxzr7copM2qIX1+cmnTzLZEr2E
+	t0AFeWcvioGtK1RWeDtzXO13QknnvlmmqZHiYkzhaHFMm4Gm8MFk9xFLQBc0GzBfXEIxImL970l
+	EfauatIxvlhc2+WGYtidY=
+X-Google-Smtp-Source: AGHT+IECEZ7Md8XPIq6uY/cpQerJbrBh+ZMee9t2Or77SLmexhcDSR27ihL8y2g+emBHFP/YuekrIQ==
+X-Received: by 2002:a05:600c:628f:b0:477:bf1:8c82 with SMTP id 5b1f17b1804b1-477c053c90amr99110955e9.15.1763919791590;
+        Sun, 23 Nov 2025 09:43:11 -0800 (PST)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477bf1f3e63sm156733795e9.7.2025.11.23.09.43.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 23 Nov 2025 09:43:10 -0800 (PST)
+        Sun, 23 Nov 2025 09:43:11 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 2/4] jasper: patch CVE-2025-8835
-Date: Sun, 23 Nov 2025 18:43:07 +0100
-Message-ID: <20251123174309.2625557-2-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 3/4] jasper: patch CVE-2025-8836
+Date: Sun, 23 Nov 2025 18:43:08 +0100
+Message-ID: <20251123174309.2625557-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251123174309.2625557-1-skandigraun@gmail.com>
 References: <20251123174309.2625557-1-skandigraun@gmail.com>
@@ -68,204 +68,112 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 23 Nov 2025 17:43:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121999
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122000
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-8835
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-8836
 
 Pick the patch that is referenced by the nvd report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../jasper/jasper/CVE-2025-8835.patch         | 170 ++++++++++++++++++
- .../recipes-graphics/jasper/jasper_2.0.33.bb  |   1 +
- 2 files changed, 171 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/jasper/jasper/CVE-2025-8835.patch
+ .../jasper/jasper/CVE-2025-8836.patch         | 78 +++++++++++++++++++
+ .../recipes-graphics/jasper/jasper_2.0.33.bb  |  1 +
+ 2 files changed, 79 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/jasper/jasper/CVE-2025-8836.patch
 
-diff --git a/meta-oe/recipes-graphics/jasper/jasper/CVE-2025-8835.patch b/meta-oe/recipes-graphics/jasper/jasper/CVE-2025-8835.patch
+diff --git a/meta-oe/recipes-graphics/jasper/jasper/CVE-2025-8836.patch b/meta-oe/recipes-graphics/jasper/jasper/CVE-2025-8836.patch
 new file mode 100644
-index 0000000000..d781d24361
+index 0000000000..247d1064ca
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/jasper/jasper/CVE-2025-8835.patch
-@@ -0,0 +1,170 @@
-+From 8c72f24556b2418f5689713eb706014423473a73 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/jasper/jasper/CVE-2025-8836.patch
+@@ -0,0 +1,78 @@
++From 0e045908b1fec6748688cbc13bd3dc3703ddb17e Mon Sep 17 00:00:00 2001
 +From: Michael Adams <mdadams@ece.uvic.ca>
-+Date: Tue, 29 Jul 2025 20:16:35 -0700
-+Subject: [PATCH] Fixes #400.
++Date: Sat, 2 Aug 2025 18:00:39 -0700
++Subject: [PATCH] Fixes #401.
 +
-+Added a check for a missing color component in the jas_image_chclrspc
-+function.
++JPEG-2000 (JPC) Encoder:
++- Added some missing range checking on several coding parameters
++  (e.g., precint width/height and codeblock width/height).
 +
-+CVE: CVE-2025-8835
-+Upstream-Status: Backport [https://github.com/jasper-software/jasper/commit/bb7d62bd0a2a8e0e1fdb4d603f3305f955158c52]
-+
++CVE: CVE-2025-8836
++Upstream-Status: Backport [https://github.com/jasper-software/jasper/commit/79185d32d7a444abae441935b20ae4676b3513d4]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/libjasper/base/jas_image.c | 73 ++++++++++++++++++++++++++++------
-+ 1 file changed, 61 insertions(+), 12 deletions(-)
++ src/libjasper/jpc/jpc_enc.c   | 30 ++++++++++++++++++++++++------
++ src/libjasper/jpc/jpc_t2dec.c |  3 ++-
++ 2 files changed, 26 insertions(+), 7 deletions(-)
 +
-+diff --git a/src/libjasper/base/jas_image.c b/src/libjasper/base/jas_image.c
-+index 68a94e1..bfbf9e5 100644
-+--- a/src/libjasper/base/jas_image.c
-++++ b/src/libjasper/base/jas_image.c
-+@@ -112,7 +112,8 @@ static long convert(long val, bool oldsgnd, unsigned oldprec, bool newsgnd,
-+   unsigned newprec);
-+ static void jas_image_calcbbox2(const jas_image_t *image, jas_image_coord_t *tlx,
-+   jas_image_coord_t *tly, jas_image_coord_t *brx, jas_image_coord_t *bry);
-+-
-++static jas_cmcmptfmt_t* jas_cmcmptfmt_array_create(int n);
-++static void jas_cmcmptfmt_array_destroy(jas_cmcmptfmt_t* cmptfmts, int n);
-+ /******************************************************************************\
-+ * Global data.
-+ \******************************************************************************/
-+@@ -409,6 +410,36 @@ static void jas_image_cmpt_destroy(jas_image_cmpt_t *cmpt)
-+ 	jas_free(cmpt);
-+ }
-+ 
-++static jas_cmcmptfmt_t* jas_cmcmptfmt_array_create(int n)
-++{
-++	jas_cmcmptfmt_t* cmptfmts;
-++	JAS_DBGLOG(10, ("jas_cmcmptfmt_array_create(%d)\n", n));
-++	if (!(cmptfmts = jas_alloc2(n, sizeof(jas_cmcmptfmt_t)))) {
-++		return 0;
-++	}
-++	for (int i = 0; i < n; ++i) {
-++		cmptfmts[i].buf = 0;
-++	}
-++	JAS_DBGLOG(10, ("jas_cmcmptfmt_array_create(%d) returning %p\n", n,
-++	  JAS_CAST(void *, cmptfmts)));
-++	return cmptfmts;
-++}
-++
-++static void jas_cmcmptfmt_array_destroy(jas_cmcmptfmt_t* cmptfmts, int n)
-++{
-++	assert(cmptfmts);
-++	assert(n > 0);
-++	JAS_DBGLOG(10, ("jas_cmcmptfmt_array_destroy(%p, %d)\n",
-++	  JAS_CAST(void *, cmptfmts), n));
-++	for (int i = 0; i < n; ++i) {
-++		if (cmptfmts[i].buf) {
-++			jas_free(cmptfmts[i].buf);
-++		}
-++		cmptfmts[i].buf = 0;
-++	}
-++	jas_free(cmptfmts);
-++}
-++
-+ /******************************************************************************\
-+ * Load and save operations.
-+ \******************************************************************************/
-+@@ -1470,12 +1501,15 @@ jas_image_t *jas_image_chclrspc(jas_image_t *image, const jas_cmprof_t *outprof,
-+ 	jas_cmcmptfmt_t *incmptfmts;
-+ 	jas_cmcmptfmt_t *outcmptfmts;
-+ 
-++	assert(image);
-++	assert(outprof);
-++
-+ #if 0
-+ jas_eprintf("IMAGE\n");
-+ jas_image_dump(image, stderr);
-+ #endif
-+ 
-+-	if (image->numcmpts_ == 0)
-++	if (!jas_image_numcmpts(image))
-+ 		/* can't work with a file with no components;
-+ 		   continuing would crash because we'd attempt to
-+ 		   obtain information about the first component */
-+@@ -1483,6 +1517,8 @@ jas_image_dump(image, stderr);
-+ 
-+ 	outimage = 0;
-+ 	xform = 0;
-++	incmptfmts = 0;
-++	outcmptfmts = 0;
-+ 	if (!(inimage = jas_image_copy(image)))
-+ 		goto error;
-+ 	image = 0;
-+@@ -1565,15 +1601,21 @@ jas_image_dump(image, stderr);
-+ 	}
-+ 
-+ 	inpixmap.numcmpts = numinclrchans;
-+-	if (!(incmptfmts = jas_alloc2(numinclrchans, sizeof(jas_cmcmptfmt_t)))) {
-++	assert(numinclrchans != 0);
-++	if (!(incmptfmts = jas_cmcmptfmt_array_create(numinclrchans))) {
-+ 		abort();
-+ 	}
-+ 	inpixmap.cmptfmts = incmptfmts;
-+ 	for (unsigned i = 0; i < numinclrchans; ++i) {
-+ 		const int j = jas_image_getcmptbytype(inimage, JAS_IMAGE_CT_COLOR(i));
-++		if (j < 0) {
-++			jas_eprintf("missing color component %d\n", i);
-++			goto error;
-++		}
-+ 		if (!(incmptfmts[i].buf = jas_alloc2(width, sizeof(long)))) {
-+ 			goto error;
-+ 		}
-++		assert(j >= 0 && j < jas_image_numcmpts(inimage));
-+ 		incmptfmts[i].prec = jas_image_cmptprec(inimage, j);
-+ 		incmptfmts[i].sgnd = jas_image_cmptsgnd(inimage, j);
-+ 		incmptfmts[i].width = width;
-+@@ -1581,15 +1623,20 @@ jas_image_dump(image, stderr);
-+ 	}
-+ 
-+ 	outpixmap.numcmpts = numoutclrchans;
-+-	if (!(outcmptfmts = jas_alloc2(numoutclrchans, sizeof(jas_cmcmptfmt_t)))) {
-++	if (!(outcmptfmts = jas_cmcmptfmt_array_create(numoutclrchans))) {
-+ 		abort();
-+ 	}
-+ 	outpixmap.cmptfmts = outcmptfmts;
-+ 
-+ 	for (unsigned i = 0; i < numoutclrchans; ++i) {
-+ 		const int j = jas_image_getcmptbytype(outimage, JAS_IMAGE_CT_COLOR(i));
-++		if (j < 0) {
-++			jas_eprintf("missing color component %d\n", i);
-++			goto error;
-++		}
-+ 		if (!(outcmptfmts[i].buf = jas_alloc2(width, sizeof(long))))
-+ 			goto error;
-++		assert(j >= 0 && j < jas_image_numcmpts(outimage));
-+ 		outcmptfmts[i].prec = jas_image_cmptprec(outimage, j);
-+ 		outcmptfmts[i].sgnd = jas_image_cmptsgnd(outimage, j);
-+ 		outcmptfmts[i].width = width;
-+@@ -1612,14 +1659,8 @@ jas_image_dump(image, stderr);
-+ 		}
-+ 	}
-+ 
-+-	for (unsigned i = 0; i < numoutclrchans; ++i) {
-+-		jas_free(outcmptfmts[i].buf);
-+-	}
-+-	jas_free(outcmptfmts);
-+-	for (unsigned i = 0; i < numinclrchans; ++i) {
-+-		jas_free(incmptfmts[i].buf);
-+-	}
-+-	jas_free(incmptfmts);
-++	jas_cmcmptfmt_array_destroy(outcmptfmts, numoutclrchans);
-++	jas_cmcmptfmt_array_destroy(incmptfmts, numinclrchans);
-+ 	jas_cmxform_destroy(xform);
-+ 	jas_image_destroy(inimage);
-+ 
-+@@ -1631,6 +1672,14 @@ jas_image_dump(outimage, stderr);
-+ #endif
-+ 	return outimage;
-+ error:
-++	if (incmptfmts) {
-++		assert(numinclrchans);
-++		jas_cmcmptfmt_array_destroy(incmptfmts, numinclrchans);
-++	}
-++	if (outcmptfmts) {
-++		assert(numoutclrchans);
-++		jas_cmcmptfmt_array_destroy(outcmptfmts, numoutclrchans);
-++	}
-+ 	if (xform)
-+ 		jas_cmxform_destroy(xform);
-+ 	if (inimage)
++diff --git a/src/libjasper/jpc/jpc_enc.c b/src/libjasper/jpc/jpc_enc.c
++index 93013f9..c957e3f 100644
++--- a/src/libjasper/jpc/jpc_enc.c
+++++ b/src/libjasper/jpc/jpc_enc.c
++@@ -474,18 +474,36 @@ static jpc_enc_cp_t *cp_create(const char *optstr, jas_image_t *image)
++ 			cp->tileheight = atoi(jas_tvparser_getval(tvp));
++ 			break;
++ 		case OPT_PRCWIDTH:
++-			prcwidthexpn = jpc_floorlog2(atoi(jas_tvparser_getval(tvp)));
+++			i = atoi(jas_tvparser_getval(tvp));
+++			if (i <= 0) {
+++				jas_eprintf("invalid precinct width (%d)\n", i);
+++				goto error;
+++			}
+++			prcwidthexpn = jpc_floorlog2(i);
++ 			break;
++ 		case OPT_PRCHEIGHT:
++-			prcheightexpn = jpc_floorlog2(atoi(jas_tvparser_getval(tvp)));
+++			i = atoi(jas_tvparser_getval(tvp));
+++			if (i <= 0) {
+++				jas_eprintf("invalid precinct height (%d)\n", i);
+++				goto error;
+++			}
+++			prcheightexpn = jpc_floorlog2(i);
++ 			break;
++ 		case OPT_CBLKWIDTH:
++-			tccp->cblkwidthexpn =
++-			  jpc_floorlog2(atoi(jas_tvparser_getval(tvp)));
+++			i = atoi(jas_tvparser_getval(tvp));
+++			if (i <= 0) {
+++				jas_eprintf("invalid code block width (%d)\n", i);
+++				goto error;
+++			}
+++			tccp->cblkwidthexpn = jpc_floorlog2(i);
++ 			break;
++ 		case OPT_CBLKHEIGHT:
++-			tccp->cblkheightexpn =
++-			  jpc_floorlog2(atoi(jas_tvparser_getval(tvp)));
+++			i = atoi(jas_tvparser_getval(tvp));
+++			if (i <= 0) {
+++				jas_eprintf("invalid code block height (%d)\n", i);
+++				goto error;
+++			}
+++			tccp->cblkheightexpn = jpc_floorlog2(i);
++ 			break;
++ 		case OPT_MODE:
++ 			if ((tagid = jas_taginfo_nonull(jas_taginfos_lookup(modetab,
++diff --git a/src/libjasper/jpc/jpc_t2dec.c b/src/libjasper/jpc/jpc_t2dec.c
++index e52b549..6e1f1f7 100644
++--- a/src/libjasper/jpc/jpc_t2dec.c
+++++ b/src/libjasper/jpc/jpc_t2dec.c
++@@ -337,7 +337,8 @@ static int jpc_dec_decodepkt(jpc_dec_t *dec, jas_stream_t *pkthdrstream, jas_str
++ 						const unsigned n = JAS_MIN((unsigned)numnewpasses, maxpasses);
++ 						mycounter += n;
++ 						numnewpasses -= n;
++-						if ((len = jpc_bitstream_getbits(inb, cblk->numlenbits + jpc_floorlog2(n))) < 0) {
+++						if ((len = jpc_bitstream_getbits(inb,
+++						  cblk->numlenbits + jpc_floorlog2(n))) < 0) {
++ 							jpc_bitstream_close(inb);
++ 							return -1;
++ 						}
 diff --git a/meta-oe/recipes-graphics/jasper/jasper_2.0.33.bb b/meta-oe/recipes-graphics/jasper/jasper_2.0.33.bb
-index 522adba93d..c314da539f 100644
+index c314da539f..d78250306b 100644
 --- a/meta-oe/recipes-graphics/jasper/jasper_2.0.33.bb
 +++ b/meta-oe/recipes-graphics/jasper/jasper_2.0.33.bb
-@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a80440d1d8f17d041c71c7271d6e06eb"
- 
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a80440d1d8f17d041c71c7271d6e06eb"
  SRC_URI = "git://github.com/jasper-software/jasper.git;protocol=https;branch=master \
             file://CVE-2023-51257.patch \
-+           file://CVE-2025-8835.patch \
+            file://CVE-2025-8835.patch \
++           file://CVE-2025-8836.patch \
             "
  SRCREV = "fe00207dc10db1d7cc6f2757961c5c6bdfd10973"
  
