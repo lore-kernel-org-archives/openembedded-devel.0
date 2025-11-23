@@ -1,101 +1,143 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6FE1CFA46B
-	for <webhook@archiver.kernel.org>; Sun, 23 Nov 2025 17:21:29 +0000 (UTC)
-Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17531.1763918485579210799
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D201DCFC518
+	for <webhook@archiver.kernel.org>; Sun, 23 Nov 2025 17:43:19 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.19118.1763919792210201186
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 23 Nov 2025 09:21:25 -0800
+ Sun, 23 Nov 2025 09:43:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mOsSO4SF;
- spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-63e19642764so2600936d50.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Nov 2025 09:21:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=UHAthl6T;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-477bf34f5f5so18132095e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 23 Nov 2025 09:43:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763918484; x=1764523284; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LSEfcvVxd7pTarCt+C1Fv07xfzRtQzp1I9G3MzFJlSU=;
-        b=mOsSO4SFiaXF81koHF/SxA5i1uBx254ymxH1jK2/p2zcvaaeq0wRap+ezxlb65KIJS
-         IL/m/PEYaiRF6MzWj5B3eD2w6Nx2wIeWCM1WUDfcSWf3yZU1gxJDUcWs/KRhSFsupitj
-         Ykv/oHIYpTfwk9Q6pmbgr3QiRh2uyWdJzQ/kyOjb12VzzlZ+wn3tEcrYcFWQ6dLQwWcT
-         xAc9X4sv2xeJ2SiomR63bOTMUY062AWpStMRPXXzRzDXlRfWVK1vo9AWe5vIObRhlefs
-         oYIEt45Rn67OrPSdMt685bBMUnH8ap+ZemoC4SwNryh9HNV6euDVWsO5hel+Y+lRWTrB
-         bBZw==
+        d=gmail.com; s=20230601; t=1763919790; x=1764524590; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4TEpoHmaYQxjlTC9qeVs15x9ks9gJM5DXcPyVNcIqX8=;
+        b=UHAthl6Tom9XDnmyRQZHSY7SB/DuVN5b0YAOnMqXuZWZAcfyHAESCCdqj5fG2uKFRx
+         zWRXbQxS2pxKq2lASLvfNldXH4VxbA2JNlkrMQA0bxRlbGDk+5fzM/Tm/Q+1jktpTeco
+         DPUn3zWuPYBmgTl5u0qCGt4+Y190jlIiOkSmUsDJVEIUWthgydvI06991sToDq4409XO
+         j63NYKkPYm+4dV1xgJyvZOU6ILdiZmAv7NmyDOyR7p2G4O8zenzzb2u0OIHH59NARNVc
+         S6qNFWffeNx1wCAsuZzcbpnI05+AsoVkxk2QzBJHm+NBhPP6BzJyMkUQQclQ9vbF+W9J
+         PV8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763918484; x=1764523284;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=LSEfcvVxd7pTarCt+C1Fv07xfzRtQzp1I9G3MzFJlSU=;
-        b=UWuTXvq3yt+4HuOVn6C9n3e9E+uNLeGH+SS6xF3RLF1JRnyH0R4iMUvuaNv9zKt/y3
-         RRWo4aYFtSbcg/oyHuITnGF/olxW1I0Z36/rFV1SaUm9d0SXnY//+/jo/8h5J3FBK1AX
-         hsxeSSKmdN5QGCuQ6DQ7VMAPezuH+fQUx5R2pFOqXA4jur263unjlUJszPRWsBGXI38m
-         xyIj+lHHK+hT0IA6Acbm2yNN7XtQ7NaBlrxa6CUitx4VxmnggQHlwKh6h5pdCYcOIjT5
-         ooDe+EC2C1FKnZ5ef++cWOlfOUdgHaWpJxjz0IRoyll81NRVF9Oic8WdQolAVLsnPfXB
-         IlSw==
-X-Gm-Message-State: AOJu0Ywztk/4R2JsqKF4RYVSSi8PFnvHBMeTjtUHfhirdIpIdNmbSo+s
-	BIpJb4igWCuZF0uYIJTR4B/bqNQ/UgCbH//9RMe7vxs8g9c1StL73GNWBiJRUQP7
-X-Gm-Gg: ASbGncvbLXOKarfTqwjwlXEg08847mu2cMtvAvLiiIUUlb+qHxRGuvy3uCrJzntOEW9
-	59IXan16zMt+9lJtJfvBJUYTFI2rwla2ho53LKpAFGCi5UkoIiFD31m7pF1ozgVCtwBoGyXqcZ7
-	tNLOdUJH5ak6Rg3l+Meq76fH4PjK/w8zyf0zKUBbRGzlqG4FQ7nxW+EmCFAtVUvxfU553NckwG8
-	vC2bdVMfJq7UPEdJU7PYaV3+7vAZNMNfyjWbBmJXSB7ezJNpENQFlU2pmcum4sJTu/394VfoZf5
-	1xm+ZSKCr00q+59HZVunci0WUjVnAF95N5qXQLORr09cEB0gi+/roiYKClT9CUaqfFGM0z6DMDd
-	Ouuv8i+6GYhznr7na5pwvWAg+1Nn4PO2QhOYwqI61Mz/PPEM/qCfKYCmYzhWdl2FsLuK6hR+34H
-	8dtEouThlER/nxURFpTD99pTM5vxKb1X0peHfGIywfn0iA
-X-Google-Smtp-Source: AGHT+IEDByv+4cglxvveCbz446b844HByat9oBflDm4rsnAPqGuGfguOITkNG/TmB7wH5KfG4rUTOQ==
-X-Received: by 2002:a05:690e:4089:b0:63f:bcec:35d with SMTP id 956f58d0204a3-64302a3a7b0mr6922861d50.17.1763918484028;
-        Sun, 23 Nov 2025 09:21:24 -0800 (PST)
-Received: from localhost.localdomain (71-208-12-78.ftmy.qwest.net. [71.208.12.78])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-642f70a6c44sm3996715d50.10.2025.11.23.09.21.23
+        d=1e100.net; s=20230601; t=1763919790; x=1764524590;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=4TEpoHmaYQxjlTC9qeVs15x9ks9gJM5DXcPyVNcIqX8=;
+        b=bLST6RjIZqh5AGJD3r5wrcdUVc7dOh9j42mjgq1XUeLf6Dm7iFEDDpZ0lxfxfph6Gh
+         lXLDk7xaHp9zxv+7LooARdCAokv1gQe9cbSDe/i6yiEIsV8Q7raWysTr5oOHY7bhaSK0
+         TqGiZ31N1QboBFjgMI+f7T4DjHrjo2jY4bGsTCJOaKW+FYGfBT6dZs65LSeQLzcZzT3m
+         hO6cSwasTBOvxmFTNOH7N2IEdWwqC5l3IqD7sbks/nxJaLHSAFb/eGwEhroQhlBwcUjg
+         CMx9+T0mQvqB02VVOYCxcp4b76Za4bzVLDu+Z8ttl4ArPWl0wQOz6eC+7yXnZYullKrT
+         yY5Q==
+X-Gm-Message-State: AOJu0Yx863fkE/SB7piieG7JoSTDmcABtZYEWs3cJAulWFxJ2ILc9Iqc
+	f2oKmojLsX/jDrNJNZhsvAc4BV4GB8c0ZPSmt94HWc7BxjFIZITYEqENlucTe3Z5
+X-Gm-Gg: ASbGncuH+Zr0W++ul015MBg+bru9HL/JVuD+DCLi/ZFXUV2/ptX3tX6qhRUUO9xOOuh
+	a2EFjK3ZqWDSOXRl1oKO4iEkC1TugC3fnfHbxx3CdYdFUKlA51tJYUUkVXzAMN18+ON8OyqMmwt
+	pBaB9PbK2n3VVlpqXYVAefmD/yv/iVb/2G3k9hEfHbuKy/PmtcHQ39uJCUGSuZacD3atnd8YjYo
+	zlhpeFr8Zr24J/ELqFLhbkxY8Cyhr9qJwfBcXKun9EXn+WRAt+fGwzLbxRk2vvNnvLHYyZCJvAD
+	yrw3Wf9rbeGUz/V2plVaHNzu3yJOCRo1V3Rjk+67lXbXDDHUT6f4zS49DsHOl6dwklJ/odzZITp
+	9Co1B35Nw0fa/VmsD36gt8Dji4/ahpMfhZfj3NMFslewIFvtSxSkbAcXgIdu5P0Y1e98XZvoH+N
+	8o5hOhlDIQ40FpUVbzueg=
+X-Google-Smtp-Source: AGHT+IGKsw1GjLbRR25tc5f3sNXtErroZD1NP0jpdU3biLEruBL2SMCzXchsSVTM4DRqbb3GePSJ8w==
+X-Received: by 2002:a05:600c:1f8f:b0:477:5c45:8100 with SMTP id 5b1f17b1804b1-477c01df155mr106132135e9.24.1763919790244;
+        Sun, 23 Nov 2025 09:43:10 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477bf1f3e63sm156733795e9.7.2025.11.23.09.43.09
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 23 Nov 2025 09:21:23 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
+        Sun, 23 Nov 2025 09:43:09 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-webserver][PATCH] xdebug: upgrade 3.4.6 -> 3.4.7
-Date: Sun, 23 Nov 2025 12:21:10 -0500
-Message-ID: <20251123172110.487279-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-oe][kirkstone][PATCH 1/4] jasper: patch CVE-2023-51257
+Date: Sun, 23 Nov 2025 18:43:06 +0100
+Message-ID: <20251123174309.2625557-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 23 Nov 2025 17:21:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121997
+ <openembedded-devel@lists.openembedded.org>; Sun, 23 Nov 2025 17:43:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/121998
 
-[2025-10-26] — Xdebug 3.4.7
-    Fixed bug #2359: PHP 8.4 Lazy Ghost Object inoperable/defunct when Xdebug is enabled
-    Fixed bug #2371: Step debugging initialize lazy objects
-    Fixed bug #2375: Xdebug's exception trace conversion initialises lazy objects
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-51257
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Pick the patch that's marked to solve the issue linked in the
+nvd report.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-php/xdebug/{xdebug_3.4.6.bb => xdebug_3.4.7.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-php/xdebug/{xdebug_3.4.6.bb => xdebug_3.4.7.bb} (91%)
+ .../jasper/jasper/CVE-2023-51257.patch        | 40 +++++++++++++++++++
+ .../recipes-graphics/jasper/jasper_2.0.33.bb  |  4 +-
+ 2 files changed, 43 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/jasper/jasper/CVE-2023-51257.patch
 
-diff --git a/meta-webserver/recipes-php/xdebug/xdebug_3.4.6.bb b/meta-webserver/recipes-php/xdebug/xdebug_3.4.7.bb
-similarity index 91%
-rename from meta-webserver/recipes-php/xdebug/xdebug_3.4.6.bb
-rename to meta-webserver/recipes-php/xdebug/xdebug_3.4.7.bb
-index 6f8540c0cf..a3947a8801 100644
---- a/meta-webserver/recipes-php/xdebug/xdebug_3.4.6.bb
-+++ b/meta-webserver/recipes-php/xdebug/xdebug_3.4.7.bb
-@@ -6,7 +6,7 @@ DEPENDS = "php re2c-native"
+diff --git a/meta-oe/recipes-graphics/jasper/jasper/CVE-2023-51257.patch b/meta-oe/recipes-graphics/jasper/jasper/CVE-2023-51257.patch
+new file mode 100644
+index 0000000000..96c23698b9
+--- /dev/null
++++ b/meta-oe/recipes-graphics/jasper/jasper/CVE-2023-51257.patch
+@@ -0,0 +1,40 @@
++From b19a51001e681d6c4bbc32b43bd425dee7f2caff Mon Sep 17 00:00:00 2001
++From: Michael Adams <mdadams@ece.uvic.ca>
++Date: Thu, 14 Dec 2023 19:04:19 -0800
++Subject: [PATCH] Fixes #367.
++
++Fixed an integer-overflow bug in the ICC profile parsing code.
++Added another invalid image to the test set.
++
++CVE: CVE-2023-51257
++Upstream-Status: Backport [https://github.com/jasper-software/jasper/commit/aeef5293c978158255ad4f127089644745602f2a]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/libjasper/base/jas_icc.c | 10 ++++++++++
++ 1 file changed, 10 insertions(+)
++
++diff --git a/src/libjasper/base/jas_icc.c b/src/libjasper/base/jas_icc.c
++index 905b823..7e69bd4 100644
++--- a/src/libjasper/base/jas_icc.c
+++++ b/src/libjasper/base/jas_icc.c
++@@ -1295,10 +1295,20 @@ static int jas_icctxt_input(jas_iccattrval_t *attrval, jas_stream_t *in,
++ {
++ 	jas_icctxt_t *txt = &attrval->data.txt;
++ 	txt->string = 0;
+++	/* The string must at least contain a single null character. */
+++	if (cnt < 1) {
+++		goto error;
+++	}
++ 	if (!(txt->string = jas_malloc(cnt)))
++ 		goto error;
++ 	if (jas_stream_read(in, txt->string, cnt) != cnt)
++ 		goto error;
+++	/* Ensure that the string is null terminated. */
+++	if (txt->string[cnt - 1] != '\0') {
+++		goto error;
+++	}
+++	/* The following line is redundant, unless we do not enforce that
+++	the last character must be null. */
++ 	txt->string[cnt - 1] = '\0';
++ 	if (strlen(txt->string) + 1 != cnt)
++ 		goto error;
+diff --git a/meta-oe/recipes-graphics/jasper/jasper_2.0.33.bb b/meta-oe/recipes-graphics/jasper/jasper_2.0.33.bb
+index 27dff82df5..522adba93d 100644
+--- a/meta-oe/recipes-graphics/jasper/jasper_2.0.33.bb
++++ b/meta-oe/recipes-graphics/jasper/jasper_2.0.33.bb
+@@ -3,7 +3,9 @@ HOMEPAGE = "https://jasper-software.github.io/jasper/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a80440d1d8f17d041c71c7271d6e06eb"
  
- SRC_URI = "https://xdebug.org/files/xdebug-${PV}.tgz"
+-SRC_URI = "git://github.com/jasper-software/jasper.git;protocol=https;branch=master"
++SRC_URI = "git://github.com/jasper-software/jasper.git;protocol=https;branch=master \
++           file://CVE-2023-51257.patch \
++           "
+ SRCREV = "fe00207dc10db1d7cc6f2757961c5c6bdfd10973"
  
--SRC_URI[sha256sum] = "4cd6a2523d9c1576c818eb4d15fe0c1650a25dde4d31d1d20a616e9d9435cc20"
-+SRC_URI[sha256sum] = "7592923501e3fdb9741ad35b90e08fc6b3c5dd31eadc4c83b7b3c9dda0627b24"
- 
- UPSTREAM_CHECK_URI = "https://github.com/xdebug/xdebug/releases"
- UPSTREAM_CHECK_REGEX = "releases/tag/(?P<pver>\d+(\.\d+)+)$"
--- 
-2.43.0
-
+ CVE_CHECK_IGNORE += "\
 
