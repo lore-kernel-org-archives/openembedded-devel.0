@@ -1,179 +1,172 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FE78CFD31C
-	for <webhook@archiver.kernel.org>; Mon, 24 Nov 2025 09:29:27 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.12780.1763976559960426155
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D38DCFD31C
+	for <webhook@archiver.kernel.org>; Mon, 24 Nov 2025 09:36:07 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.12947.1763976959060141854
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Nov 2025 01:29:20 -0800
+ Mon, 24 Nov 2025 01:35:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Df6M2SAn;
- spf=pass (domain: konsulko.com, ip: 209.85.128.52, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-477a219dbcaso36915245e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 01:29:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1763976558; x=1764581358; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=WTcMUtiFA6ZuoVI+q5LJ3h9tOS/Qo2i96YefrmsQ964=;
-        b=Df6M2SAnLwloJ87f00bsVtmv+0lwsSa6LZGUfg/bU9Dx5T+ZTQN1qgpcBmx2W1dZeU
-         AsbRby3DLPK3Jme29gbnkWEzznj44e8yOIcEiA1Eb15sHI32CFpyIt6gjYCjfUIDK6Y8
-         eHlW7jlyh1yRiuvy0PlMiQ3CT3zueGSOTvh8M=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763976558; x=1764581358;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WTcMUtiFA6ZuoVI+q5LJ3h9tOS/Qo2i96YefrmsQ964=;
-        b=r7qnA4xFyWT+gIpD42+eGtBkacoybkXkW5n/yDmO/AgEqN+9YDGdzAWIQENtx6aFvy
-         a4EuNHLFRlTib2zt/wC9glDAgO5Y2F5Bhd9LnLMbdVKRHEc8tYGfHvXBGGy7gfokihew
-         Cn1lvXMPVvXGhyMuQXszdmd9BM5IvBNbZCX3NSuc5rXL/mxSxrl6Qs14JdCcb9QT5b93
-         qi0jaSsjXqbULLY9d7quVN0qMa1a9Vnjmxo3m6BDw6vnSGL+1HfSHaz5vvTohdq2IhTD
-         mm0eHZloelrMJdyAQHTHkUMaHM53uy9M0+02X+K9T9987XVBMVF513I34k1+ONttNWDH
-         X8Fg==
-X-Gm-Message-State: AOJu0YxXpIlo83s4AdaJ2YD4Os8p9GDW2ePxYRlEx52Un3MkdslUa6R+
-	Kec69zclqnQSivcf76KmV5e4r/paDeMwoHHniSa7ShucxeSjk9p0xlqYDbTDBPwhRKowZRPXoXq
-	7Alu0
-X-Gm-Gg: ASbGncuAS43nbMqq12I0zTLbaK9SnlrlyxZR+cStOtVIJmVm5hRcyKZxf+7qIvkQZN/
-	tnX/UVAAT3NaKdEDh9FvpCiGfPxBVavZEo7FKHzANfygZ6KKyKP4O+nt1teUip5q5dsGlMk65DS
-	DLYX8U58I7tOBEABRo4zgk6M6gFvSXgHsagnnJsx39FHQAx0ZDu4azgwYw2ZohveI+cMce7+8lz
-	RwMe2gyw4d2cwAtvLHlylbst2Yl8r2NKfoInsR40aYVRBBLX66/iX+amKs142EQPR79tgia428r
-	hv/cWmgbfRhj4DSQLYQbtO6+/786kb8lNhbHBc2T+ubdX1TZcW8xSg+V1OxafPVVkf8WgmNbNNz
-	7yQtf0MJhKrSbpFzMnDA8XS0PgBmluOxqFuhC9uNNI97lBMi8BY0TdnPQCjQZAJ9DrNIQ+lbIAj
-	6FYCXS5bbF/aFB+t6mOIZXnAsC
-X-Google-Smtp-Source: AGHT+IEZWWFnZda2O4COByGPfknIzRwmeZAtCEV7/k0LBglvfDiZMfP2X0KD7v7rfLUjXezyu3okGQ==
-X-Received: by 2002:a05:600c:3b07:b0:471:c72:c7f8 with SMTP id 5b1f17b1804b1-477c01d4b3dmr80806365e9.21.1763976557432;
-        Mon, 24 Nov 2025 01:29:17 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477bf355933sm191008255e9.2.2025.11.24.01.29.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Nov 2025 01:29:16 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH] valkey: Upgrade 8.1.4 -> 9.0.0
-Date: Mon, 24 Nov 2025 11:29:03 +0200
-Message-ID: <20251124092909.3234487-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=a6D10oeW;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3423b2b4bb=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AO8FXrZ2083734
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 09:35:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=JZbvIyfmIosj3i34fvTP
+	4e0TQeSX2mWPlbkYy7SHV+E=; b=a6D10oeWAoFI6NL+Hdr2EHI0nABTtejqd3qW
+	66Veb323QXonzcFYYy/kWzZFS1HY6zEuRz8Z7+eU4JMzupUoLlNTkvlIw0kyxudv
+	xk6Ia9gFpak5ZuzksBKiQMgne2bvYr/PsX5rEEQfiflT9NDBszzWmnOlVBQKf/Db
+	k06nQ0TgE+iFNZ0SpDppdtK3OoEYY2GR+mvebA7tWcyM1iKdlqKLdOC44OhcTZB1
+	M5ekmct0UWQhpGJxHOmxywiEtTyHYQIb5hSm6WzMWrwXYh1SkaJWhkipNnBdSjEz
+	1/S2sszirMeFJPj1FS1ZsxfgjUQbC112LGlJCv0RwOeUc7Lfew==
+Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4ak455hr86-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 09:35:49 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Mon, 24 Nov 2025 01:35:49 -0800
+Received: from pek-lpg-core4.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Mon, 24 Nov 2025 01:35:48 -0800
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] mariadb: Upgrade 11.4.8 -> 11.4.9
+Date: Mon, 24 Nov 2025 17:35:45 +0800
+Message-ID: <20251124093545.3217845-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: fyS7MvCsq6HJX33ZzeumlR_nhoLUbBjV
+X-Proofpoint-GUID: fyS7MvCsq6HJX33ZzeumlR_nhoLUbBjV
+X-Authority-Analysis: v=2.4 cv=T6eBjvKQ c=1 sm=1 tr=0 ts=692426f6 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=jpp-Wi3FAAAA:8 a=NEAV23lmAAAA:8
+ a=hkEv4HZQAAAA:8 a=t7CeM3EgAAAA:8 a=qK8EfE0Hi3_JzoGgzOgA:9
+ a=3HWhRrkoiJongTt84g_J:22 a=NA03pvyaApPJG5valX87:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI0MDA4NCBTYWx0ZWRfX1U1IQn1d9bLr
+ L6Ay+vmTrv6Puu6BK0MQaFXJLhAb1MpQt05yItP42lGbSVvHyAv3jvF1Fi51BfzZ6UA3gtxJri3
+ lUbTz3ZuN8SIa8Oopef5PuPEBLsQHaUFrZiwquwWbGzVMd8T6aaiPMFGDpz3loKfQGbBofL0Vay
+ mU2zIAsDoBA3L44QCRx2g7RhYJ2Sw6Nl2PWYuVaz9dBQDrr+wkChuC54tDvX9mGXNkOVqJcnfbl
+ D1E8lQAUGxuXjDAD76CgKv+3wXgqRCn4lzeFMnyzuZ64MGfSHJU/S/Q61YpnzrWZ4wrOHHpmiS9
+ 1r/mUhHhcJFMUCOLNwDl77f+Srv3dIabpdLq1Jy4oBfHy+pjUKj5giE/7KnUPCpGfywadVwD/pw
+ HtlkYoPTpzO4YBHxLzh3mip6OU/6Cw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-24_04,2025-11-21_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 lowpriorityscore=0 clxscore=1015 bulkscore=0
+ phishscore=0 suspectscore=0 priorityscore=1501 impostorscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511240084
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 09:29:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122005
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 09:36:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122006
 
-Upgrade to release 9.0.0:
+From: Mingli Yu <mingli.yu@windriver.com>
 
-- HSETEX with FXX should not create an object if it does not exist
-- Fix crash when aborting a slot migration while child snapshot is
-  active
-- Fix double MOVED reply on unblock at failover
-- Fix memory leak with CLIENT LIST/KILL duplicate filters
-- Fix incorrect accounting after completed atomic slot migration
-- Fix Lua VM crash after FUNCTION FLUSH ASYNC + FUNCTION LOAD
-- Fix invalid memory address caused by hashtable shrinking during
-  safe iteration
+Remove the 0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch
+patch as its logic included in new version [1].
 
-Replace dependency hiredis with libvalkey.
+Release notes: https://mariadb.com/docs/release-notes/community-server/11.4/11.4.9
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+[1] https://github.com/MariaDB/server/commit/e8026a50197cbfccd70a2072cbc0ae4728a4ab40
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../hiredis-use-default-CC-if-it-is-set.patch | 43 -------------------
- .../{valkey_8.1.4.bb => valkey_9.0.0.bb}      |  7 ++-
- 2 files changed, 3 insertions(+), 47 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/valkey/valkey/hiredis-use-default-CC-if-it-is-set.patch
- rename meta-oe/recipes-extended/valkey/{valkey_8.1.4.bb => valkey_9.0.0.bb} (91%)
+ ...ive_11.4.8.bb => mariadb-native_11.4.9.bb} |  0
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |  3 +-
+ ...lity-with-ARMv9-by-updating-.arch-di.patch | 41 -------------------
+ .../{mariadb_11.4.8.bb => mariadb_11.4.9.bb}  |  0
+ 4 files changed, 1 insertion(+), 43 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_11.4.8.bb => mariadb-native_11.4.9.bb} (100%)
+ delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch
+ rename meta-oe/recipes-dbs/mysql/{mariadb_11.4.8.bb => mariadb_11.4.9.bb} (100%)
 
-diff --git a/meta-oe/recipes-extended/valkey/valkey/hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/valkey/valkey/hiredis-use-default-CC-if-it-is-set.patch
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_11.4.8.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_11.4.9.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_11.4.8.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_11.4.9.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 82479c248f..4fcb5a1e40 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -22,14 +22,13 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+            file://0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch \
+            file://lfs64.patch \
+            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+-           file://0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch \
+            file://riscv32.patch \
+            file://0001-Remove-x86-specific-loop-in-my_convert.patch \
+            file://0001-support-reproducible-builds.patch \
+            file://0001-storage-mroonga-CMakeLists.txt-fix-reproducible-buil.patch \
+            file://0001-MDEV-38029-my_tzinfo-t-fails-for-certain-TZ-values-o.patch \
+           "
+-SRC_URI[sha256sum] = "52fa4dca2c5f80afc1667d523a27c06176d98532298a6b0c31ed73505f49e15c"
++SRC_URI[sha256sum] = "8e481ca29b5a740444d45451c8ea2d93711cf525d6fa5d27bc9512cf8973b075"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/tags"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch
 deleted file mode 100644
-index ffb365f371..0000000000
---- a/meta-oe/recipes-extended/valkey/valkey/hiredis-use-default-CC-if-it-is-set.patch
+index 2a1c74a68c..0000000000
+--- a/meta-oe/recipes-dbs/mysql/mariadb/0001-Ensure-compatibility-with-ARMv9-by-updating-.arch-di.patch
 +++ /dev/null
-@@ -1,43 +0,0 @@
--From a5bcf56630df520040076dd14c3c54fef0785ceb Mon Sep 17 00:00:00 2001
--From: Venture Research <tech@ventureresearch.com>
--Date: Fri, 8 Feb 2013 17:39:52 -0600
--Subject: [PATCH] hiredis: use default CC if it is set
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
+@@ -1,41 +0,0 @@
+-From 0b1ba174bd5148c0675b335fcebde767a56e10bb Mon Sep 17 00:00:00 2001
+-From: Ruiqiang Hao <Ruiqiang.Hao@windriver.com>
+-Date: Mon, 2 Dec 2024 02:18:46 +0000
+-Subject: [PATCH] Ensure compatibility with ARMv9 by updating .arch directive
 -
--Instead of trying to automagically figure out CC, which breaks with OE
--as CC has spaces in it, just skip it if one was already passed in.
+-The pmem_cvap() function currently uses the '.arch armv8.2-a' directive
+-for the 'dc cvap' instruction. This will cause build errors below when
+-compiling for ARMv9 systems. Update the '.arch' directive to 'armv9.4-a'
+-to ensure compatibility with ARMv9 architectures.
 -
--Signed-off-by: Venture Research <tech@ventureresearch.com>
+-{standard input}: Assembler messages:
+-{standard input}:169: Error: selected processor does not support `retaa'
+-{standard input}:286: Error: selected processor does not support `retaa'
+-make[2]: *** [storage/innobase/CMakeFiles/innobase_embedded.dir/build.make:
+-1644: storage/innobase/CMakeFiles/innobase_embedded.dir/sync/cache.cc.o]
+-Error 1
 -
--Update to work with 4.0.8
--Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+-Upstream-Status: Submitted
 -
--Reworked for 6.0.4
--Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
--
--Reworked for 8.0.0
--Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
--
--Reworked for 8.1.0
--Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
--
--Upstream-Status: Inappropriate [OE-specifc]
+-Signed-off-by: Ruiqiang Hao <Ruiqiang.Hao@windriver.com>
 ----
-- deps/hiredis/Makefile | 2 --
-- 1 file changed, 2 deletions(-)
+- storage/innobase/sync/cache.cc | 5 +++++
+- 1 file changed, 5 insertions(+)
 -
--diff --git a/deps/hiredis/Makefile b/deps/hiredis/Makefile
--index 4a3de1f6e..49bb525cd 100644
----- a/deps/hiredis/Makefile
--+++ b/deps/hiredis/Makefile
--@@ -36,8 +36,6 @@ endef
-- export REDIS_TEST_CONFIG
+-diff --git a/storage/innobase/sync/cache.cc b/storage/innobase/sync/cache.cc
+-index 43d642d0..c5e67709 100644
+---- a/storage/innobase/sync/cache.cc
+-+++ b/storage/innobase/sync/cache.cc
+-@@ -82,7 +82,12 @@ static void pmem_cvap(const void* buf, size_t size)
+-   for (uintptr_t u= uintptr_t(buf) & ~(CPU_LEVEL1_DCACHE_LINESIZE),
+-          end= uintptr_t(buf) + size;
+-        u < end; u+= CPU_LEVEL1_DCACHE_LINESIZE)
+-+#if defined __ARM_ARCH && __ARM_ARCH == 9
+-+    __asm__ __volatile__(".arch armv9.4-a\n dc cvap, %0" :: "r"(u) : "memory");
+-+#else
+-     __asm__ __volatile__(".arch armv8.2-a\n dc cvap, %0" :: "r"(u) : "memory");
+-+#endif
+-+
+-   __asm__ __volatile__("dmb ishst" ::: "memory");
+- }
 - 
-- # Fallback to gcc when $CC is not in $PATH.
---CC:=$(shell sh -c 'type $${CC%% *} >/dev/null 2>/dev/null && echo $(CC) || echo gcc')
---CXX:=$(shell sh -c 'type $${CXX%% *} >/dev/null 2>/dev/null && echo $(CXX) || echo g++')
-- OPTIMIZATION?=-O3
-- WARNINGS=-Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wno-missing-field-initializers
-- DEBUG_FLAGS?= -g -ggdb
-diff --git a/meta-oe/recipes-extended/valkey/valkey_8.1.4.bb b/meta-oe/recipes-extended/valkey/valkey_9.0.0.bb
-similarity index 91%
-rename from meta-oe/recipes-extended/valkey/valkey_8.1.4.bb
-rename to meta-oe/recipes-extended/valkey/valkey_9.0.0.bb
-index 9947a9299c..82b08d7a82 100644
---- a/meta-oe/recipes-extended/valkey/valkey_8.1.4.bb
-+++ b/meta-oe/recipes-extended/valkey/valkey_9.0.0.bb
-@@ -7,17 +7,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=08b9159809d809e8aaa340a8387e693e"
- DEPENDS = "readline lua ncurses"
- 
- SRC_URI = " \
--	git://github.com/valkey-io/valkey.git;branch=8.1;protocol=https \
-+	git://github.com/valkey-io/valkey.git;branch=9.0;protocol=https \
-         file://valkey.conf \
- 	file://init-valkey-server \
- 	file://valkey.service \
--	file://hiredis-use-default-CC-if-it-is-set.patch \
- 	file://lua-update-Makefile-to-use-environment-build-setting.patch \
- 	file://oe-use-libc-malloc.patch \
- 	file://0001-src-Do-not-reset-FINAL_LIBS.patch \
- 	file://GNU_SOURCE-7.patch \
- "
--SRCREV = "5f4bae3ea10174a7c872cc099c953b0e91afa93a"
-+SRCREV = "5018b12b0de2d2322a1bbf6b041c43740587c0f2"
- 
- RPROVIDES:${PN} = "virtual-redis"
- 
-@@ -41,7 +40,7 @@ PACKAGECONFIG[systemd] = "USE_SYSTEMD=yes,USE_SYSTEMD=no,systemd"
- EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
- 
- do_compile() {
--    oe_runmake -C deps hiredis lua linenoise
-+    oe_runmake -C deps libvalkey lua linenoise
-     oe_runmake
- }
- 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_11.4.8.bb b/meta-oe/recipes-dbs/mysql/mariadb_11.4.9.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_11.4.8.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_11.4.9.bb
 -- 
-2.47.3
+2.34.1
 
 
