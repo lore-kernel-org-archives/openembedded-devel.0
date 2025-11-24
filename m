@@ -2,84 +2,93 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3051CFA466
-	for <webhook@archiver.kernel.org>; Mon, 24 Nov 2025 15:11:08 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18886.1763997060528465666
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5FABCFA466
+	for <webhook@archiver.kernel.org>; Mon, 24 Nov 2025 15:48:08 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.19749.1763999288197341617
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Nov 2025 07:11:00 -0800
+ Mon, 24 Nov 2025 07:48:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kryeeH4a;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-47778b23f64so23467065e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 07:11:00 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=EcZ+1ygs;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4779cc419b2so42925005e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 07:48:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763997059; x=1764601859; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763999284; x=1764604084; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=qVsrycqxyynLzO7UuDV4VX6uhxl73mmnphg0VfkYK+A=;
-        b=kryeeH4azQxaBaosyukOfwGjgb3qx2vE9vHdft68rsm8xHtuAfHDI1jQd/XDMjB1IG
-         iMZQgblFL/oDxdR0Xgb6Q/hjbJhLj4vdqUbADKG0xSgQ6xLwZ6jUz4MaWvJR8ui1dciK
-         wjoCHGi+1eRhriCzVuHiQ1BtZt86luoZ28/aUz05QY0WzkYvRQD/bwl54Zzs9jcamRfT
-         /2GI4RX87OSUOaMKwvA0TCwERkZzk9i/m15pFrClGv11vmn96eUaTJH5DKeJtgwhEeEm
-         am6zd6kYrarv1AL+gsz9mNsKyPoB0RzQS5agYdvd45Pw4XLDATa05JFJztvOT+UDw/6j
-         8Gqw==
+        bh=BD6rmbvdcm9LaDwTXF5eZW+PomtQ8Ccyj5HJ7gjuNO4=;
+        b=EcZ+1ygsxP5JUojLjbM8P25PstG9xVs3/dYEDsMneA/7Xban/yFj5CjAIJyb7yHNHB
+         CjbwfbS1DN4nql+qS1YJnjNWp0d9T3XE2sLehNfYIEh31Fvv4CnLgYWwkOQ0QBkirQlm
+         Qbayc4Z2BlHvMsJmyT66vMT5a9xDus1WgSCOPcRTnErNZ7qh6RfMF2hlL8jz4ocEBGZc
+         K7SIEM22cHmcNduhLawBcMH+0xf8/Wmex3muWGcIe+Yc+OXUztsl1P18odOuWc1XH68K
+         TF34Pxgskh+rJVID41nQGuodndMwDDVBVyEGT1v58YraLCxxoa+04HBn/jK5JTZFUsJ9
+         10nA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763997059; x=1764601859;
+        d=1e100.net; s=20230601; t=1763999284; x=1764604084;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=qVsrycqxyynLzO7UuDV4VX6uhxl73mmnphg0VfkYK+A=;
-        b=qWt9BBAyDkv2RrA356NIDENVxXXcny9eshGx6ShmQBzf05PxDTJcFFNArEYAqEOier
-         RjuCE+IyOUUnUk9IC6lQB9N6H6qZtygczBnYThMdKRqJ8wm6P5vKL75k80K16T3L8Ju/
-         UnHncwJaTaB6Ai5j7aUeZN8cPKZoaB80UaDjFPAtYDdKqz5DJyROO+yf5/Hqrpicn2bA
-         ziuxTsalPiTHBFafalMRGtL++OoyPrQw2KAIML5LdaKddjLLLyDaigjG7tH2bD42eGMj
-         0zZmdo53rCRZl7NLjuKf/hSYHU5J/D/DTiB40gEOk2JQCNraECiLqcwENsqZ0Y7I8Wc9
-         J4Cw==
-X-Gm-Message-State: AOJu0Yz3Df8QxPL4193BwAf3L8jxKGS0KkH5QmSsGJxscSkPfmDFtKi9
-	JdCBTNy56UY484u6BNiBJQEJtS1uH5ot46uh/A+I2us6X7Lo+tcPHVAa1fqs9aog
-X-Gm-Gg: ASbGncvNDiTgSiI35z7T/UPemX+whSe5SfMUB7r2zB6EBosv4wPGd/+zn5lbBENj/h2
-	woNKbshJdyoHRP9G6NuWQeNFSPAKFYMcw2niswEPdfP6m6XLutFT37FjUz99FyOTIOA4YT0FAhL
-	wT8ssvlcqzOSFzEyNsVnkdhzH5Miu7+NzYwdG9Tgb32hKoAocncvVzdrGhmVTDThD4bx4B6qULm
-	KVovdw88o3MeDkF9kmGdF5CX+6jFPj9sa0cXNJU4NDtS3LluAIIbksMEfSWEINohYjeCB4pgPF8
-	R09P3d05YJHa/jtpEGFYriH+WrzR1ufL7JYFeY5NArxtIVaDtELf5QifdiE79VvI3+kTM+72fuI
-	/0Pwetat7neKUeqLQR+iLBHCUd19prZwn1uBWE733h4jVvqPuih6ZvxruihUyrmtT5X2uv3z/0O
-	1LTKPz8ua1
-X-Google-Smtp-Source: AGHT+IH2d5gxG/ZHyV80X4ycWMP9sUfMPJsV116bSan7QE14hCwaovDlW680Ehm1FQ+IxW6S0AKKog==
-X-Received: by 2002:a05:600c:46cf:b0:477:561f:6fc8 with SMTP id 5b1f17b1804b1-477c1103015mr103787315e9.5.1763997058732;
-        Mon, 24 Nov 2025 07:10:58 -0800 (PST)
+        bh=BD6rmbvdcm9LaDwTXF5eZW+PomtQ8Ccyj5HJ7gjuNO4=;
+        b=KhDnPg2Dm8Kwa3OaikiWh1Ze2ImPazF/1/W9qDiTHnCA9tqZowR0u4vBgWepV/JZbW
+         EpbCI2Q+pXeczNz6NYvHZZhlMezkrEqbVh6XjpXYVXcfqcG3uXrftKuTLQYPByoJ4LqR
+         eQfYS+lnDsDIxlat87975K0YhQTa5FvXAiVIsxkeF1xPHuIucNnMGUW/wfjOIOoMK+QD
+         Kj0eK895EwkwIFAbh7O4p72mjKJj4wCrHSVeRWt1n8qgiwiYW7ugvITRmfBZuLpuPoJH
+         w8puwY6Y2rnSYsTdRodMrEbVDrWIua2Uvo7hbOSa1dZalAhsOgkc+2qHpuPH6aJorHCH
+         5zmg==
+X-Gm-Message-State: AOJu0YzdUhkrbyXmeamMMTYE/97Ys6j57xGPCAkz0EvLCH6ehXaIUqIO
+	VOm6Yv0JXyD4fnPAQsW9v/TFsa7m4sNeX2EjQxM1op+G4nx1c7JGv6YlaSXd9K1A
+X-Gm-Gg: ASbGnctyBaqJytJYapyU5e7PS0nvfT2v+oGVj4QvWj4YREj3f2wF9xz/W5ZYkUaaNGD
+	e8OQPPFZxMLOePKccCw+ZNAIiS5LU+wxgwB78BmINGP/Cxwn+Zt4Q3nRJ1YKdtQqsO0JynxPUZs
+	dG65Ykh4BJOQy7TueFHLXT1Nz71Yl7G6M9sEr112nlkhW8wJXcf32l50Vg3Pz56Yib/C07beXxP
+	UzNj+7+9kUNnEiNuEJcKneL+2Bi6y8HLjE06h5UHQDpNDTedBk7MN3/Z61NZcJ3XHa9H4oBiU/D
+	vZz8nw88cpw+Pa7Zwk7TQ9RVetpPcVs3FShllQuBZkjcKpEuA/43wdUDOfEJpezq/61BMyaX63w
+	8Gbz0u7hFix3tJEK6igSfIgrVOk4FcZBP5yBF+fqDPB6wtw2PFbdQRElwcCNW8PF69kUXWOqfO0
+	rruGys1gBf
+X-Google-Smtp-Source: AGHT+IEGJHENTQ4CRVTZkecp15yGqQ6tftU7DnH/NjZD1Yi3nP9E0/fA5dc9NQ1ePG2us0ZycwQZbg==
+X-Received: by 2002:a05:600c:3543:b0:46e:1a5e:211 with SMTP id 5b1f17b1804b1-477c1143046mr105406375e9.21.1763999283666;
+        Mon, 24 Nov 2025 07:48:03 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477a97412e3sm149092445e9.5.2025.11.24.07.10.57
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42cb7fb8ff3sm30584286f8f.29.2025.11.24.07.48.02
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Nov 2025 07:10:58 -0800 (PST)
+        Mon, 24 Nov 2025 07:48:03 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-webserver][PATCH 1/2] cockpit: set correct CVE_PRODUCT
-Date: Mon, 24 Nov 2025 16:10:56 +0100
-Message-ID: <20251124151057.389723-1-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH] links: set CVE_PRODUCT
+Date: Mon, 24 Nov 2025 16:48:02 +0100
+Message-ID: <20251124154802.392729-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 15:11:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122014
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 15:48:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122016
+
+There are some unrelated software called "links", which cases
+false-positive CVEs to be reported by the CVE checker.
+
+Set the vendor/product pairs that were historically used with
+CVEs for this software.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 62a53097324ace9161d8fdcfbc533baac9ee6309)
 ---
- meta-webserver/recipes-webadmin/cockpit/cockpit_349.bb | 2 ++
+ meta-oe/recipes-support/links/links.inc | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-webserver/recipes-webadmin/cockpit/cockpit_349.bb b/meta-webserver/recipes-webadmin/cockpit/cockpit_349.bb
-index 4726386f6c..f84b1c4c34 100644
---- a/meta-webserver/recipes-webadmin/cockpit/cockpit_349.bb
-+++ b/meta-webserver/recipes-webadmin/cockpit/cockpit_349.bb
-@@ -197,3 +197,5 @@ do_install:append() {
-         done
-     fi
- }
+diff --git a/meta-oe/recipes-support/links/links.inc b/meta-oe/recipes-support/links/links.inc
+index d772d54aff..a255f0ba6b 100644
+--- a/meta-oe/recipes-support/links/links.inc
++++ b/meta-oe/recipes-support/links/links.inc
+@@ -14,4 +14,6 @@ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[bzip2] = "--with-bzip2,--without-bzip2,bzip2"
+ PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,xz"
+ 
++CVE_PRODUCT = "twibright_labs:links twibright:links links:links"
 +
-+CVE_PRODUCT = "cockpit-project:cockpit"
+ inherit autotools pkgconfig
 
