@@ -2,110 +2,98 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DCC2CFD313
-	for <webhook@archiver.kernel.org>; Mon, 24 Nov 2025 13:09:48 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16362.1763989784506513518
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4B12CFD313
+	for <webhook@archiver.kernel.org>; Mon, 24 Nov 2025 15:11:08 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18888.1763997063583326919
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Nov 2025 05:09:44 -0800
+ Mon, 24 Nov 2025 07:11:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JzP9HyKy;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4779cb0a33fso41598055e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 05:09:40 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cq/ITVR1;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-477b5e0323bso28309915e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 07:11:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763989779; x=1764594579; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=NLOJFtVvF9irHYWFiKsSxpS4KgmbLBF/X7LAbWz8Hto=;
-        b=JzP9HyKy03nDY/oz/Od67nWPoMiBQXKRAUc0CB4tuWEG2OgKtDCUqfFE2660AbS7L8
-         iUkhw9LW9L4bwC+iFISA+smal9lAgoyQEv3aLijjlnyvQVhz8eNmHpLAExbsh3vIe11N
-         RYPR4+QuulozTc6oW5IeK+Asuy19gQVcBkI3NVKLwZSLHKG6GNnUjC+fEsIUq0TYpV5P
-         hCHkJXSiguaAuvDii/KgP8Hdvx4gg6N63vNVhs3Rb+PuDH3L3CyphlrCxDg/kK3W9hPL
-         GWm+MVL+m2/TLVXUdl93Bxd6wAnPkyl23+bGIL/1S2BnC9OKhvR96/xws57+EiNYfS19
-         iMkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763989779; x=1764594579;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1763997061; x=1764601861; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=NLOJFtVvF9irHYWFiKsSxpS4KgmbLBF/X7LAbWz8Hto=;
-        b=kV5Tr76LwQ4YRcqaH43RSpJx+rYHz2AY6rs5sAlmGwbSf3h9848dxBDz224tzkWCwy
-         /mZXYkgXpl2BlAWdE6qVydaIe70uhQbzSbt4YydiRinnVWmyw05KQtBCQi5oN0JKmrqM
-         R3pcwctO35IGDkdDpDBmTxuuYkp8BNgtou3CF3FYDKNcfCjm71u0J1FSQkoiPhN54bf+
-         hQxY8rIAoU7kcFy3KDJ2jkFNGEKV0xLPY5KsAAbnJ24bfuyoE24LtQC66lTZkshqdfDK
-         8TWJlgmdah41cBfp17wvKFZIc7u7H7UflfYPjU/kvbeIT3Y+EUjJN4W9ai257SfCJgHB
-         zMfA==
-X-Gm-Message-State: AOJu0Yyj8k+6/wBTVacuhFYg7jO5XX0rhVdLL71QuHvPWRf8ktYAJKrH
-	rjVEo/9sbqFxV8XHygYx1ZPICIVh8D6gkO4CDEb7jcW1JbZVNK/d/pUthAbrbN/R
-X-Gm-Gg: ASbGnct8Bhq1ZEl1S1HvlZw/WUIae3emPgADEX31g8NFZfGtNKr3oBCQM4capifeSQP
-	XmXqu+pz+qXm9mxe/M2OM07Ib9mf00HPsbvoBSbnG5blZjCQpTPlD8ibWtS0XHUzbQGDfVi1rYC
-	mA3LfWzqa73FlybfgeJhPh5+djbbkLCUR7/HTeZ6q63e2wpZaDEyRK9R/POwBnCIJ9mUyCU5ce3
-	Dc64qAGJ7kuTbQk2xIvhrwMEE+J3rHey6PfKHahHIRENYEpYkSxUEwKjSGOTcsHp8ChIXZpsxrs
-	l4OxesgCO6jWcwRweJ5Z3K/w0lXLrqGxKrpbafFCuMR8NnyFeUJm9XCtWe4uQajPyUNWgSLT2Q0
-	Vr6M81yaS38mZ4kftr6Xg3eovMAjX1heKCblK6iV+qXRZpD+S/eRChx3SptfKLxOnNeHIbf1TvV
-	KARhM1JT/K9BZkA7BIu6I=
-X-Google-Smtp-Source: AGHT+IEc0FCuNXl30SReZO3mUs4S1xu6SMDCFe2YUufdog5ksvdbPVyoGIyyJ6gZfT5Fs1nOI5GBIg==
-X-Received: by 2002:a05:600c:3b09:b0:471:13fa:1b84 with SMTP id 5b1f17b1804b1-477c0185bc8mr140721295e9.12.1763989778885;
-        Mon, 24 Nov 2025 05:09:38 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477a9de4631sm149826195e9.7.2025.11.24.05.09.38
+        bh=ubC8xsk+sEiv+YwqyOM+6ViTsFgPivgQzieo+V0y4LY=;
+        b=cq/ITVR1wrnRszmzs4Itj7BDGnowzYXdDlBgcBhR7Vk/ak1/qbSPmaV5aeTzL+p9Qf
+         AaSxeaPD6x2f8yHsfqQzAXbycOLlHv9qoAy7AoRLrl1g6XZGZapUzoLognTJz6tZas+e
+         3jhIQc5gpNqXC0XlcgrjqnGhjMoBMz4UsjoNV/W8VfI0iDGjQXk5N5Mqr5cNDKW40vb0
+         Q3zxsQQi4JY4tOQBgnYwItbLtn0J840bF7G+zqe4TMpahrsuY/HBXM21q8ZlTko66vaA
+         4RDteRN+b8yaExmFcpE0Z+oioie3WEm5/Zh+bczJNAGYXhEno6/QEEnROIqh3qg0KTqX
+         L22g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763997061; x=1764601861;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=ubC8xsk+sEiv+YwqyOM+6ViTsFgPivgQzieo+V0y4LY=;
+        b=Cqjh24xO5aEhVkmCZHjirk0caVDbODBD34klRjpIcsx79fmqQU+xJAJKJ8sp2nh0aE
+         MGnR8WSVQJrBddmRzUfS+6vB6KzkgINZ0i/F1PYbIscZavYQUL9HmYsnP05vDYfkSy8Q
+         Ycvgz0WfWnOZ/GZk+3Kt/eCKR/6mWECqrv/jaWjn/WI5wPRmk43eO52ed8E4Y+VH7uv2
+         Ean2o65Y+fVGS6qpjBwM7eVUmBDBqXu9Y4aDUT9LYbj9XL9ehUXS6HdcciixIHrqqVFW
+         vtcLoTaQAezkuM7h+CWGFY6/ujUWZTjcbhVj5QeLeB8N1Y7OwLKpSjx2lLjbFGSFUthc
+         pGMQ==
+X-Gm-Message-State: AOJu0YyAlt86TbXna4I7SL1TcU6eDf0ma5y6nResjx2Re1Hx5/bZjjW1
+	nRb/LjQRMbaVDPo5XID4LFQbmveKN6diF7m6/OPnObIcaqSf+SENOp41/JocUji9
+X-Gm-Gg: ASbGncu+lb9DpAxCuw8jL30fH2txqLeYKIEsdtj+j1kMOQdCT460FV7kyi5SSay8XHy
+	3AZ3BeKVlVdUPJ0548fMvOQvAS1/6rtL8moiZicsDDNknAQnZmjbMXMNRVj8JQiBC16Qi6AvEkZ
+	7a5pCAXhm8rCbmdzNDKCYPBzYSQkRUnui4yB/CuHBCrJZgbFQgmCvraM1u12t0YBJla8aTQHT4p
+	sc5Io98ad6+V/BG4SZ+hfVyiBD5a7f+fR+WiDJRERXCGZuDzPilwxG5Pn7A28P/OWDjBU7NZwiQ
+	Ja/BmdPrD/r6UaYK8cvfP0H+HuSxTjeOg4xTguf0qvH2xFEjcR8yLoaSmOIisrWhpaNxcYkqrph
+	T6iVKct8jg1SJhNgQpBThYtn4KF7KZ+pOeJVO6st/MU3OSnJuq+1pLfjZpGtSMR2B8uzob7nxzX
+	t5mQs2ZM5OSwb0rfLy9EA=
+X-Google-Smtp-Source: AGHT+IFE1P/1S7GWDTz2v+CifJ3smZip4/fn1ERzlvr58wYks0n06vcuatnzJ94WP6lhin+66DaU+A==
+X-Received: by 2002:a05:600c:4746:b0:477:a289:d854 with SMTP id 5b1f17b1804b1-477c04cfa31mr125096505e9.5.1763997060490;
+        Mon, 24 Nov 2025 07:11:00 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477a97412e3sm149092445e9.5.2025.11.24.07.10.58
         for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 24 Nov 2025 05:09:38 -0800 (PST)
-Message-ID: <c3163020-30df-49fe-b0ef-0492c6babe39@gmail.com>
-Date: Mon, 24 Nov 2025 14:09:37 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] CVE report - whinlatter - 2025-11-24
-To: openembedded-devel@lists.openembedded.org
-References: <187AF2C630F5DA19.66502@lists.openembedded.org>
-Content-Language: en-US
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 Nov 2025 07:10:59 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <187AF2C630F5DA19.66502@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 2/2] tigervnc: ignore CVE-2014-8241
+Date: Mon, 24 Nov 2025 16:10:57 +0100
+Message-ID: <20251124151057.389723-2-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251124151057.389723-1-skandigraun@gmail.com>
+References: <20251124151057.389723-1-skandigraun@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 13:09:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122013
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 15:11:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122015
 
-On 11/24/25 13:58, Gyorgy Sarvari via lists.openembedded.org wrote:
-> List of all open CVEs (76, out of which new this week: 29):
->
->
+Details: https://nvd.nist.gov/vuln/detail/CVE-2014-8241
 
-Hi all,
+The vulnerability is about a potential null-pointer dereference, because
+of a malloc result is not verified[1].
 
-I would like to add a couple of random notes to this week's reports.
+The vulnerable code has been refactored since completely[2], and the code isn't
+present anymore in the codebase.
 
-1. Whinlatter is now part of this report. The base for new/removed
-comparison for the first report is the last week's result from master
-branch.
+[1]: https://github.com/TigerVNC/tigervnc/issues/993#issuecomment-612874972 - attachment
+[2]: https://github.com/TigerVNC/tigervnc/commit/b8a24f055f1a29886d8b18bb3f0902144dc5bd14
 
-2. There are some new CVEs which were missing in previous reports. This
-is because until now I ran the checks with vanilla config, but these
-reports were generated with a config that had more features added to
-cover more recipes. And it has highlighted an issue with the CVE checks
-with universe builds - if a recipe is excluded from building due to a
-missing feature for example, that is excluded from CVE checks also.
-Technically it makes sense, though I still find it somewhat unexpected.
-Will try to spend some time on looking into bitbake about this, because
-it makes it harder to get a fuller picture.
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-3. When I started sending these reports, I mentioned that I plan send
-them till the end of November as an experiment. The end of November is
-here - anybody has anything against getting these reports in the future?
-Personally I think that they are useful even with their limitations, but
-I might be biased, since I started it to scratch my own itch. If no one
-will speak up, will keep sending them.
-
-Let me know if you have any questions or comments, either on this ML or
-in private message.
-
-Thank you,
-Gyorgy
+diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
+index dd4f79c314..d3159f8a88 100644
+--- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
++++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
+@@ -85,3 +85,5 @@ FILES:${PN} += " \
+ "
+ 
+ SYSTEMD_SERVICE:${PN} = "vncserver@.service"
++
++CVE_STATUS[2014-8241] = "fixed-version: The vulnerable code is not present in the used version (1.15.0)"
 
