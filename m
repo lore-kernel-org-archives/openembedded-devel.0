@@ -2,70 +2,70 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5FABCFA466
-	for <webhook@archiver.kernel.org>; Mon, 24 Nov 2025 15:48:08 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.19749.1763999288197341617
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C82B9CFD31D
+	for <webhook@archiver.kernel.org>; Mon, 24 Nov 2025 15:48:18 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.19751.1763999289990449453
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Nov 2025 07:48:08 -0800
+ Mon, 24 Nov 2025 07:48:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=EcZ+1ygs;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4779cc419b2so42925005e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 07:48:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dPshFVKV;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-47795f6f5c0so28156115e9.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 07:48:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763999284; x=1764604084; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1763999288; x=1764604088; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
         bh=BD6rmbvdcm9LaDwTXF5eZW+PomtQ8Ccyj5HJ7gjuNO4=;
-        b=EcZ+1ygsxP5JUojLjbM8P25PstG9xVs3/dYEDsMneA/7Xban/yFj5CjAIJyb7yHNHB
-         CjbwfbS1DN4nql+qS1YJnjNWp0d9T3XE2sLehNfYIEh31Fvv4CnLgYWwkOQ0QBkirQlm
-         Qbayc4Z2BlHvMsJmyT66vMT5a9xDus1WgSCOPcRTnErNZ7qh6RfMF2hlL8jz4ocEBGZc
-         K7SIEM22cHmcNduhLawBcMH+0xf8/Wmex3muWGcIe+Yc+OXUztsl1P18odOuWc1XH68K
-         TF34Pxgskh+rJVID41nQGuodndMwDDVBVyEGT1v58YraLCxxoa+04HBn/jK5JTZFUsJ9
-         10nA==
+        b=dPshFVKVTeSMddf1bb4DqegiOVjiAb1MU5MVunds45bspXhU/6y3C5grR7J4p7bpyx
+         nmbpgicgVuREsgPnYpEsc7CPaRBC4/FEcMJZaP7kZG8aTrPcU6f8F1q7MA8DdGuy1xWj
+         464G450JUiudO7BImvkULkHAP7PTdkby5t23giPQ63echUH64GXXP+RKMvuycrSifFeu
+         0Tih3mStJwrSeIWFURL7VU/JxPyF9BuRcNot2DZmnPOrYR6/zvQHs3+ZngLaEVJnZ0tC
+         OmEzmpH6XzJeRROW1qPSBPYHs4lxzSBhlcRnG5W8GAypE1v6fAy1x8aWW28I2ZWqNrlf
+         fVQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763999284; x=1764604084;
+        d=1e100.net; s=20230601; t=1763999288; x=1764604088;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=BD6rmbvdcm9LaDwTXF5eZW+PomtQ8Ccyj5HJ7gjuNO4=;
-        b=KhDnPg2Dm8Kwa3OaikiWh1Ze2ImPazF/1/W9qDiTHnCA9tqZowR0u4vBgWepV/JZbW
-         EpbCI2Q+pXeczNz6NYvHZZhlMezkrEqbVh6XjpXYVXcfqcG3uXrftKuTLQYPByoJ4LqR
-         eQfYS+lnDsDIxlat87975K0YhQTa5FvXAiVIsxkeF1xPHuIucNnMGUW/wfjOIOoMK+QD
-         Kj0eK895EwkwIFAbh7O4p72mjKJj4wCrHSVeRWt1n8qgiwiYW7ugvITRmfBZuLpuPoJH
-         w8puwY6Y2rnSYsTdRodMrEbVDrWIua2Uvo7hbOSa1dZalAhsOgkc+2qHpuPH6aJorHCH
-         5zmg==
-X-Gm-Message-State: AOJu0YzdUhkrbyXmeamMMTYE/97Ys6j57xGPCAkz0EvLCH6ehXaIUqIO
-	VOm6Yv0JXyD4fnPAQsW9v/TFsa7m4sNeX2EjQxM1op+G4nx1c7JGv6YlaSXd9K1A
-X-Gm-Gg: ASbGnctyBaqJytJYapyU5e7PS0nvfT2v+oGVj4QvWj4YREj3f2wF9xz/W5ZYkUaaNGD
-	e8OQPPFZxMLOePKccCw+ZNAIiS5LU+wxgwB78BmINGP/Cxwn+Zt4Q3nRJ1YKdtQqsO0JynxPUZs
-	dG65Ykh4BJOQy7TueFHLXT1Nz71Yl7G6M9sEr112nlkhW8wJXcf32l50Vg3Pz56Yib/C07beXxP
-	UzNj+7+9kUNnEiNuEJcKneL+2Bi6y8HLjE06h5UHQDpNDTedBk7MN3/Z61NZcJ3XHa9H4oBiU/D
-	vZz8nw88cpw+Pa7Zwk7TQ9RVetpPcVs3FShllQuBZkjcKpEuA/43wdUDOfEJpezq/61BMyaX63w
-	8Gbz0u7hFix3tJEK6igSfIgrVOk4FcZBP5yBF+fqDPB6wtw2PFbdQRElwcCNW8PF69kUXWOqfO0
-	rruGys1gBf
-X-Google-Smtp-Source: AGHT+IEGJHENTQ4CRVTZkecp15yGqQ6tftU7DnH/NjZD1Yi3nP9E0/fA5dc9NQ1ePG2us0ZycwQZbg==
-X-Received: by 2002:a05:600c:3543:b0:46e:1a5e:211 with SMTP id 5b1f17b1804b1-477c1143046mr105406375e9.21.1763999283666;
-        Mon, 24 Nov 2025 07:48:03 -0800 (PST)
+        b=ECwacgBGS+DIAu7KouE+XLPlnV3olvD1iqRI/miMTc0XQ0yfmk4soKo2jcf1P9uPV0
+         B8tbmZXVxuRTDKHYQoK04yfzDPsBKBLNugfUHYJmUdvggkKxjVuxWkKB9SVGYSt66NTo
+         8cjQgcPnX/aoRaPI3AWVv+6g9AkxEb+bHcfvXvUTU6swXsAb+Fzg+AQcz/VIMRij2z86
+         APQUnw23UuVRNOTTgchd6jzoUcx6JylgvUxOk1h45hLLb4/T0+QcfCv0E1d8uwq6+Dad
+         kvuAIG17xt9P/wsq+iMqVGehmrF1aHhB4EZBEf5/n6SEy9vOBUqm9DEeQKQDAX2aAUs4
+         dtjQ==
+X-Gm-Message-State: AOJu0YxUnkA72rIILqz3QbsUoz+LJHDlpsHleWxUHYfhjQ6Ik76mnsw/
+	2BtqLl6mLdLbtGwv2fRtAxmyjib11UBgxEp1W40xq8U/j8okWZtroHm3LCfIjfVK
+X-Gm-Gg: ASbGnctJDW99BMJmbczEJLBRrwb4jHIgWkVZhOePbA0ar8+FPsU4eCKIzx5BiswzJHi
+	pbSz90K1HNxjipMoYRYF3459CiIxhAGHcfq1lVovdjzkfGtHGLEbF2hxtFY8IRq8uWKR434Z6Zx
+	SQ8OQIjbdEj4crnfFL3DWqSBF4nfgd89tZOUVnegdOd4PHkqAKW6US7x4J5eoamJ4KKAFWZbJFK
+	LqsFcQjQ4k8zMN+2elPsIF6wRRuDW3IzOY2YGhYPRqEZVotfoeT/RyBO/m1JlV+ICu3PkbNiajP
+	dHG7ack9kdC/19/s2Go660VpNNEcrc6VV2oOaXaYLllcRFYx/fucV+IHLibWCgL9DLSnmDX1wd1
+	sV8k8OHW73SnRhF4iWm5MZAmdd5b1aMllPTATSqy0rNXIORhJHwttsPYDOWAx7DgSk4sC8nQh73
+	2YYLkFJxMvoJBcPeEKyI8=
+X-Google-Smtp-Source: AGHT+IHVbgz+2pybH1q/W/IGxVju3s2sHj0Nvvvu3aGWwa3EFKp1Xk+97tkHRjCmY4Lat2zd7OS/8g==
+X-Received: by 2002:a05:600c:474b:b0:477:8b2e:aa8f with SMTP id 5b1f17b1804b1-477c0181287mr146262035e9.15.1763999288280;
+        Mon, 24 Nov 2025 07:48:08 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42cb7fb8ff3sm30584286f8f.29.2025.11.24.07.48.02
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477bf1df334sm200587935e9.3.2025.11.24.07.48.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Nov 2025 07:48:03 -0800 (PST)
+        Mon, 24 Nov 2025 07:48:07 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH] links: set CVE_PRODUCT
-Date: Mon, 24 Nov 2025 16:48:02 +0100
-Message-ID: <20251124154802.392729-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] links: set CVE_PRODUCT
+Date: Mon, 24 Nov 2025 16:48:07 +0100
+Message-ID: <20251124154807.392751-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 15:48:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122016
+ <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 15:48:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122017
 
 There are some unrelated software called "links", which cases
 false-positive CVEs to be reported by the CVE checker.
