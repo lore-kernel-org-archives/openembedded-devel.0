@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 31DCCCFD37A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F18BCFD37C
 	for <webhook@archiver.kernel.org>; Tue, 25 Nov 2025 09:13:18 +0000 (UTC)
-Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13206.1764061990535119038
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13205.1764061989115575435
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Nov 2025 01:13:11 -0800
+ Tue, 25 Nov 2025 01:13:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=gDGdiRYj;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=mOAAg/6e;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1764061990; x=1795597990;
+  t=1764061989; x=1795597989;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=tLx5oLOss5+4pO5h/gNLWHL1sV1aE0RrdoEyoagUJ9k=;
-  b=gDGdiRYjbA7m0wJ4tzNRVi/+coX8y3SU+9AC3wYm+4i7tkBLzSJXakIt
-   wlmd1NuxqKlkSrYIiZCgMfsau3G4skAuQ1ZxA/eLsKhAhEsu8kCzivF8Q
-   PeEPwJdKGhQuRDg/Btw/5lCFoCjAV1+P9F3vJZSMw/Va8rUXVaBE+fFAo
-   MtTQnDeh9+u3eLUHeNjJQpJ8Minm43RzEXvZUOjZxiWU4iv0aKyx7CH84
-   nz44hjjx/PE2+MJL/FNzvqd3AXmFJ/Ybd4FI5pFC1lirQgFcqRBr2o0bW
-   jQyhbj7ocvuN+UzEWC3snjBEmDy3lF6N5N5W6XNTCAdQHr9phjIpGb3Az
-   g==;
-X-CSE-ConnectionGUID: BF47WBarTSSD/zGuyZVwZQ==
-X-CSE-MsgGUID: IVE7ptU1SJCVGtdvFpLuHw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11623"; a="208280927"
+  bh=kvBq6/nRETNabimg2yQh1KXelh5oZd4eA5n6kbd0+eo=;
+  b=mOAAg/6eyvf8ndiWZX+HwOq5Ub3Ast0Z34ZAMl0yB7Sq+jjKCBnSyxBX
+   KzllMpCAZBY4si5tGVzdGOfTHK/eoV+qO74T7Ou+FuJalv2O41KzYS2DG
+   xJEge+WfF9lS7rDHfcKK2LRQMh9IhOKDRW4nZmmVlsyTFe9l/d2WCChDl
+   L8s58Whvba33JiDKXsRU6K0GTlEA6dqlfxHCFjEGF7k3bzlAL72NnPihh
+   heiuMY6GmD5u3rap8LoIzrq7lApyEA8u3geQZAhu+B6A2LWT7M9qFkp24
+   hxe03PwYkfCgKvXaZdPJ59Ix7nXw3JPzpAy8mLZ7SXZh9riDKuOGGBVai
+   w==;
+X-CSE-ConnectionGUID: h4B8X2VsQLueeHOC/LoVZA==
+X-CSE-MsgGUID: op7CKxeiQruGkv+33Pzamg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11623"; a="199164445"
 X-IronPort-AV: E=Sophos;i="6.20,225,1758553200"; 
-   d="scan'208";a="208280927"
-Received: from unknown (HELO az2nlsmgr4.o.css.fujitsu.com) ([20.61.8.234])
-  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Nov 2025 18:13:08 +0900
+   d="scan'208";a="199164445"
+Received: from unknown (HELO az2nlsmgr2.o.css.fujitsu.com) ([20.61.8.234])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Nov 2025 18:13:03 +0900
 Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id F0BCE42A30C
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 09:13:08 +0000 (UTC)
+	by az2nlsmgr2.o.css.fujitsu.com (Postfix) with ESMTPS id AFFBC1549
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 09:13:03 +0000 (UTC)
 Received: from az2uksmom2.o.css.fujitsu.com (az2uksmom2.o.css.fujitsu.com [10.151.22.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id A99621800EB6
-	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 09:13:08 +0000 (UTC)
+	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id 674DB1800EB9
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 09:13:03 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTP id 5213A14001EB;
-	Tue, 25 Nov 2025 09:13:06 +0000 (UTC)
+	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTP id 8B53814001D4;
+	Tue, 25 Nov 2025 09:13:00 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH 09/26] openvpn: upgrade 2.6.15 -> 2.6.16
-Date: Tue, 25 Nov 2025 17:11:39 +0800
-Message-ID: <20251125091156.1376-9-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 06/26] lvm2: upgrade 2.03.36 -> 2.03.37
+Date: Tue, 25 Nov 2025 17:11:36 +0800
+Message-ID: <20251125091156.1376-6-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20251125091156.1376-1-wangmy@fujitsu.com>
 References: <20251125091156.1376-1-wangmy@fujitsu.com>
@@ -61,68 +61,29 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 09:13:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122034
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122033
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Code maintenance / Compat changes
----------------------------------
-- adapt to new "encrypt-then-mac" cipher suites in OpenSSL 3.6.0 - these
-  need special handling which we don't do, so the t_lpback self-test
-  failed on them.  Exclude from list of allowed ciphers, as there is no
-  strong reason today to make OpenVPN use these.
-- fix various compile-time warnings
-
-Documentation updates
----------------------
-- fix outdated and non-HTTPS URLs throughout the tree (doxygen, warnings,
-  manpage, ...)
-
-Bugfixes
---------
-- Fix memcmp check for the hmac verification in the 3way handshake.
-  This bug renders the HMAC based protection against state exhaustion on
-  receiving spoofed TLS handshake packets in the OpenVPN server inefficient.
-  CVE: 2025-13086
-- fix invalid pointer creation in tls_pre_decrypt() - technically this is
-  a memory over-read issue, in practice, the compilers optimize it away
-  so no negative effects could be observed.
-- Windows: in the interactive service, fix the "undo DNS config" handling.
-- Windows: in the interactive service, disallow using of "stdin" for the
-  config file, unless the caller is authorized OpenVPN Administrator
-- Windows: in the interactive service, change all netsh calls to use
-  interface index and not interface name - sidesteps all possible attack
-  avenues with special characters in interface names.
-- Windows: in the interactive service, improve error handling in
-  some "unlikely to happen" paths.
-- auth plugin/script handling: properly check for errors in creation on
-  $auth_failed_reason_file (arf).
-- for incoming TCP connections, close-on-exec option was applied to
-  the wrong socket fd, leaking socket FDs to child processes.
-- sitnl: set close-on-exec flag on netlink socket
-- ssl_mbedtls: fix missing perf_pop() call (optional performance profiling)
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../openvpn/{openvpn_2.6.15.bb => openvpn_2.6.16.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-support/openvpn/{openvpn_2.6.15.bb => openvpn_2.6.16.bb} (98%)
+ meta-oe/recipes-support/lvm2/lvm2.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.6.15.bb b/meta-networking/recipes-support/openvpn/openvpn_2.6.16.bb
-similarity index 98%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.6.15.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.6.16.bb
-index 8a88282cd5..88f564313f 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.6.15.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.6.16.bb
-@@ -15,7 +15,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 09ee410614..ccefa206b6 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -18,8 +18,8 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main \
+            file://0001-include-libgen.h-for-basename.patch \
+            "
  
- UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+-SRCREV = "c8b7a765cbd731af32964adaf921f9e19d56a048"
+-PV = "2.03.36"
++SRCREV = "d34fc799fd86538756ba56b37e1ab56ab1b75d13"
++PV = "2.03.37"
  
--SRC_URI[sha256sum] = "e35513ee15995e3c71adfd8891b9f33522896c70b3baa2ed9a23c7a42c4d7bde"
-+SRC_URI[sha256sum] = "05cb5fdf1ea33fcba719580b31a97feaa019c4a3050563e88bc3b34675e6fed4"
- 
- CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
  
 -- 
 2.43.0
