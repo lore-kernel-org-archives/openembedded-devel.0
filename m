@@ -1,159 +1,205 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <t.f.g.geelen@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2F86D0EE13
-	for <webhook@archiver.kernel.org>; Tue, 25 Nov 2025 18:09:18 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.731.1764094148917602682
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B29E1D0EE18
+	for <webhook@archiver.kernel.org>; Tue, 25 Nov 2025 20:08:09 +0000 (UTC)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3261.1764101287627102820
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Nov 2025 10:09:09 -0800
+ Tue, 25 Nov 2025 12:08:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gP5ZJLv9;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-42b566859ecso5159047f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 10:09:08 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KiUT8xoS;
+ spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: t.f.g.geelen@gmail.com)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-b737cd03d46so807079666b.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 12:08:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764094147; x=1764698947; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1764101286; x=1764706086; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=o6kPZx5ETwOH0T3cnCAXtYAzbIutpmG+HR33V7JtR/o=;
-        b=gP5ZJLv93JWH1mZBlDET7Rb8Lt02af9XHXtiSCU5/Q/eEWd80rmHmRc+RU1gwUVZWi
-         Hce71bf9naVBd4SYhXq8qI6auLHuEDMkS0MGeoLoddr8mPFT3xsgl+locNHr8XXRH0L0
-         B5IvMYdKS722EulimSCk+enm5s7eYs9aUi/bhRTOopxmHrPyVAnj3ZqkRGU6waET9wYk
-         x4UTExIixPWejyhnt7u4YWTvwf+q+gI5WSqZUQgWWDtMJkOEgNs0HmzqNeIDb9QpcQm+
-         Ou0f/A1RxEpaLTJKOHJfLresQWVr7EL20x1vjFayGq3hRVnYzdvr3PyyHECokwfnMluj
-         dwyA==
+        bh=h9pMRcpkmt3T8JEh8G/F6lEhdXChCRUvWu6n/Ut1VQ4=;
+        b=KiUT8xoSIDQrFtIInqtT4fotY4Ovx+0k+1q3ISOdG8q0eMIGcyWRUgqjciFiwk8SAk
+         3ffcvkAsInnYUv4MNJfwU9zwk8Hlefl5c18aKWERuxkGC0VwwzIl6TdCOVGRdpCprLnK
+         YFIo23ykin3lohjeyQ+TRzLh2OvQfJnaQWZk7e+/EG9J+kLNN1yOFbyCurNaArN4+Iq9
+         Kghv/75vnAb/S4eXFU6JVtKERuAs8ifKSJCCPz7Yw+5C+i4gLjVL1tFEyJH1p4q7oTu7
+         xZ6S/vA5zIfqwfIs7MnU5qD6+JjITYxO8EopUxAO6QYImTys03TTgtk4WXqXi/SAZUD6
+         XFkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764094147; x=1764698947;
+        d=1e100.net; s=20230601; t=1764101286; x=1764706086;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=o6kPZx5ETwOH0T3cnCAXtYAzbIutpmG+HR33V7JtR/o=;
-        b=N1O20xxG2VZ/uZxU5Ki8GUHtMbihNaqQVeT94aMLCHdyrBtGI+32XKO2TooLPkNMps
-         zKwO/W4qYEfxkOR34Ysgg319Hub63ses8JT2CY7XU/aiiPRe7oO+sR36pAM01erhR8H1
-         14pBu7IjNo14EEPZrTinB99325PVJo83XlSL+hdURLPIrhxvcd3F76UIVSj9XorzgvD2
-         H+4Pcz4WqMks4mN/OvMrr9bnYJ41Q8krs6eEHLpHjfP3DxVmxepUoD+LEUtL7mf9wg+y
-         CCtdNQ50Fr0/fUmQwpp1K2fe5Lk4E+aJXCR6S5dRpJ2gfF/3BBTbgYVavK4fD4KRMAxS
-         uTow==
-X-Gm-Message-State: AOJu0YzSgcM7iqXu8DQA2lIfHnvusIfMqnthtBCrbRZR92kHp5knGnRT
-	3Ve1w426pazPZP6soA8Y641z7zZttn/7PVaDvow5Ntwf3ho8A029hRqoiPJYEZRu
-X-Gm-Gg: ASbGncvbjZaW/G64mqgqULmg7J+vY0vqSlRvXjCSA6xLrZ/xC4m/nLdP8RLO0nsykD5
-	9QR5MIGYyYj1g20jjr1SP79s59eSyjFaBMcR79Sr9epOXjwegBtqnL3T4IL2nv9Tr94HrhizbuU
-	+DI0KBemiNhNXpyGRl94R2BQ4YGT2YFLOMwH9+KaNkq5Iwp0bsFTXWAt54ZXu4Fd949pVz0+w3k
-	/JC/ua6f58SmNDNAYfdDdieXszo9vGgM3KhfdqS4hdbnt2vhldtX4MDDyyJonPtIexNF8FKGkFF
-	OI7NalT4eRIQWzUePkXKbpaIaAix4+5wAkPhZYBlQ0GNOoryffJGUe8orO1yLJBXNqRszr2Ijr5
-	xlLKW2mu9qHzEjX0E0Sy9NjKR9/ByOxa6pqNRTa5EDAZbdB+UssTcbhFkTKATsGwWU+9h5g+jos
-	/XJ2TAUbUdFpMJPO9QOC5fy6jNwdu6HECOX3gS+01xGXT7LPveLBO/Btgnb41a9WwWb2NNw5Ru0
-	4iEBO0Z1P+l6xV4aMROKYXoEV5Gv+xDfbiAos1l6mjQ
-X-Google-Smtp-Source: AGHT+IHz5q4KyJPqMPxBPdsvCoad5b1uFvNflYUYxp3fValSSry2oKb0sOuxxAr6OJK4tsHjfH2jJg==
-X-Received: by 2002:a05:6000:2401:b0:42b:3963:d08d with SMTP id ffacd0b85a97d-42e0f22738bmr3440971f8f.21.1764094146897;
-        Tue, 25 Nov 2025 10:09:06 -0800 (PST)
-Received: from localhost.localdomain (2a02-1812-512-2c00-30e-f95e-1c9a-8ddd.ip6.access.telenet.be. [2a02:1812:512:2c00:30e:f95e:1c9a:8ddd])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42cb7f2e5a3sm35560212f8f.6.2025.11.25.10.09.06
+        bh=h9pMRcpkmt3T8JEh8G/F6lEhdXChCRUvWu6n/Ut1VQ4=;
+        b=q+XvecbaQUYZqMNGvSuXOeEF6SLFiiBceEeKL75IyViSzfqrPmBJYMb+T8OHHHjJMM
+         yz+vX0QR4C9p+TzMoW9tMBk1DKmp7rh2cJbbF7FGrC++0ot7AWsPu0Df8KC5opKQNT31
+         JLNa2/8w76kDKHDYVVHnz/pBgeehQ5qiDRwOwM8ke2aSNKv1F5AahXHuFR51lvWRL5mK
+         X0zONzQLLZHMSyBVfp+IlY3bpq2dRNeZxTEF+YalM76zmtDj+e7zx3NytbyJJeslyDTR
+         p7WAvpUXALpCWvzBwOhH7wEO+J2SWjDg5Diu4nUwUZEG3tFXjEq98UpCbPNPaLBYdaZK
+         pukA==
+X-Gm-Message-State: AOJu0YxYpBEW7W4xVmBPb3Zp8M71RaNQyu5+kvhcKvzdRxtvT/vcQvgw
+	HtHtPpdPTOFv6pxhHGjloWdrKbpfupD24syamfRGCKJbtd/aoehw/oJpg6lpCg==
+X-Gm-Gg: ASbGncs28W2gl/8gkDk3pykvuclmPIKY2zqQR5VyqKfnY9ZITjJ9IP1x1bQCP59Y4vp
+	d5Yaz2+6CRnMt4FSrnR4snXiOx+vHHxJwyDKt9sXY4WHBXU6bVQtt4aNjocYuZP0w/GD3rbGKBz
+	sMR8Q+VUL6qltFPEmUO3I9p1bq4vHvPatM9AOIe9xFVzXXb/0zgsAvXwi6JSI33XO9ZOgcob2SU
+	6QrWNt+7YQiCjBF/HQynxvZz4RyFAbagwYGUh0fk5UyZwK36OjctStsT/zAjrNL19+0N4QmH0nU
+	QViuJSAcQ+64PfoxpfiWaBClRK3aStJlhN+yg9bTnetSgYPVJ64ba4lUz+hvGPVCxjTHSMX3a+/
+	ZXehB1ICwbQ7p+x7LZO3EL/dQdzQDlYwJPVqIq/U1M1ntbFABuLxLEkfz+x2uqFSnE59H6UN5gI
+	ozfu3Sw2PlmVyNiHUywKjwP63vHUALOoEwPwcJbunQGm3hd2cMW5ddBifeau6O6Wp6
+X-Google-Smtp-Source: AGHT+IGtDnABJUs7lfu2cpNiJItbxHq6HOwmLIJeO1hP/gN1/Ujsy51ZeXRgzSPQGgIEXzKk68vhfQ==
+X-Received: by 2002:a17:907:a0d:b0:b70:be0b:6ba8 with SMTP id a640c23a62f3a-b76719d9598mr1735262366b.61.1764101285375;
+        Tue, 25 Nov 2025 12:08:05 -0800 (PST)
+Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b76550283f4sm1639477466b.55.2025.11.25.12.08.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 25 Nov 2025 10:09:06 -0800 (PST)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+        Tue, 25 Nov 2025 12:08:04 -0800 (PST)
+From: Tom Geelen <t.f.g.geelen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: t.f.g.geelen@gmail.com,
-	Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH] python3-tenacity: new recipe version 9.1.2
-Date: Tue, 25 Nov 2025 19:08:43 +0100
-Message-ID: <20251125180844.40549-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.47.3
+Cc: Tom Geelen <t.f.g.geelen@gmail.com>
+Subject: [meta-python][PATCH] new recipe: python3-pytest-picked
+Date: Tue, 25 Nov 2025 21:07:43 +0100
+Message-ID: <20251125200743.3730553-2-t.f.g.geelen@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 18:09:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122060
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 20:08:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122061
 
-Moved the recipe from meta-homeassistant
-  - all credits to them
-Added ptest
-  - skip one test that fails on qemu
-
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Description: Run the tests related to the changed files
+Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
 ---
  .../ptest-packagelists-meta-python.inc        |  1 +
- ...ip-a-test-that-does-not-pass-on-qemu.patch | 27 +++++++++++++++++++
- .../python/python3-tenacity_9.1.2.bb          | 19 +++++++++++++
- 3 files changed, 47 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-tenacity/0001-ptest-skip-a-test-that-does-not-pass-on-qemu.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-tenacity_9.1.2.bb
+ .../packagegroups/packagegroup-meta-python.bb |  1 +
+ ...g-tests-to-capture-only-ptest-output.patch | 50 +++++++++++++++++++
+ .../python/python3-pytest-picked/run-ptest    |  5 ++
+ .../python/python3-pytest-picked_0.5.1.bb     | 22 ++++++++
+ 5 files changed, 79 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pytest-picked/0001-adjust-failing-tests-to-capture-only-ptest-output.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-pytest-picked/run-ptest
+ create mode 100644 meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
 
 diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index a172f8c676..7e8ab54639 100644
+index a172f8c676..1cb419a721 100644
 --- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
 +++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -96,6 +96,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-soupsieve \
-     python3-sqlparse \
-     python3-starlette \
-+    python3-tenacity \
-     python3-tomli-w \
-     python3-tomlkit \
-     python3-trustme \
-diff --git a/meta-python/recipes-devtools/python/python3-tenacity/0001-ptest-skip-a-test-that-does-not-pass-on-qemu.patch b/meta-python/recipes-devtools/python/python3-tenacity/0001-ptest-skip-a-test-that-does-not-pass-on-qemu.patch
+@@ -76,6 +76,7 @@ PTESTS_FAST_META_PYTHON = "\
+     python3-pyserial \
+     python3-pytest-httpx \
+     python3-pytest-mock \
++    python3-pytest-picked \
+     python3-pytest-sugar \
+     python3-pytoml \
+     python3-pyyaml-include \
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index ad68d74205..d3abc0761f 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -351,6 +351,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
+     python3-pytest-httpx \
+     python3-pytest-lazy-fixtures \
+     python3-pytest-metadata \
++    python3-pytest-picked\
+     python3-pytest-tempdir \
+     python3-pytest-timeout \
+     python3-pytest-xdist \
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-picked/0001-adjust-failing-tests-to-capture-only-ptest-output.patch b/meta-python/recipes-devtools/python/python3-pytest-picked/0001-adjust-failing-tests-to-capture-only-ptest-output.patch
 new file mode 100644
-index 0000000000..7fb9458a32
+index 0000000000..dfb50ace75
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tenacity/0001-ptest-skip-a-test-that-does-not-pass-on-qemu.patch
-@@ -0,0 +1,27 @@
-+From 8895af81a672bb8aad2aa8e32b93cb9ca96cac63 Mon Sep 17 00:00:00 2001
-+From: Jan Vermaete <jan.vermaete@oip.be>
-+Date: Tue, 25 Nov 2025 10:52:15 +0100
-+Subject: [PATCH 1/1] ptest: skip a test that does not pass on qemu
++++ b/meta-python/recipes-devtools/python/python3-pytest-picked/0001-adjust-failing-tests-to-capture-only-ptest-output.patch
+@@ -0,0 +1,50 @@
++From b9341394314e5dcaca0aa1d91fc3af28c64db387 Mon Sep 17 00:00:00 2001
++From: Tom Geelen <t.f.g.geelen@gmail.com>
++Date: Tue, 25 Nov 2025 20:42:15 +0100
++Subject: [PATCH] adjust failing tests to capture only ptest output
 +
-+Upstream-Status: Inappropriate [oe specific]
++The tests should only check for warnings emitted by the plugin itself,
++not for any other warnings that may be emitted by other plugins or pytest
++itself.
 +
-+Signed-off-by: Jan Vermaete <jan.vermaete@oip.be>
++Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
++Upstream-Status: Inappropriate [OE specific]
 +---
-+ tests/test_asyncio.py | 1 +
-+ 1 file changed, 1 insertion(+)
++ tests/test_pytest_picked.py | 17 ++++++++++++++---
++ 1 file changed, 14 insertions(+), 3 deletions(-)
 +
-+diff --git a/tests/test_asyncio.py b/tests/test_asyncio.py
-+index 0b74476..2da0784 100644
-+--- a/tests/test_asyncio.py
-++++ b/tests/test_asyncio.py
-+@@ -192,6 +192,7 @@ class TestContextManager(unittest.TestCase):
-+         else:
-+             raise Exception
++diff --git a/tests/test_pytest_picked.py b/tests/test_pytest_picked.py
++index fb2bedb..947b43a 100644
++--- a/tests/test_pytest_picked.py
+++++ b/tests/test_pytest_picked.py
++@@ -182,8 +182,13 @@ def test_should_accept_branch_as_mode(testdir, tmpdir, recwarn):
++                 "Changed test folders... 0. []",
++             ]
++         )
++-        assert len(recwarn) == 1
++-        assert str(recwarn[0].message) == "Now `main` is the default parent branch"
+++    # Only count the plugin's own UserWarning about default parent branch
+++    plugin_warnings = [
+++        w
+++        for w in recwarn
+++        if w.category is UserWarning and "default parent branch" in str(w.message)
+++    ]
+++    assert len(plugin_warnings) == 1
 + 
-++    @unittest.skip("Failing in ptest with qemu")
-+     @asynctest
-+     async def test_sleeps(self):
-+         start = current_time_ms()
-+-- 
-+2.43.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-tenacity_9.1.2.bb b/meta-python/recipes-devtools/python/python3-tenacity_9.1.2.bb
++ 
++ def test_should_accept_unstaged_as_mode(testdir, tmpdir, recwarn):
++@@ -211,7 +216,13 @@ def test_should_accept_unstaged_as_mode(testdir, tmpdir, recwarn):
++                 "Changed test folders... 0. []",
++             ]
++         )
++-        assert len(recwarn) == 0
+++    # Ignore unrelated deprecation warnings from other plugins
+++    plugin_warnings = [
+++        w
+++        for w in recwarn
+++        if w.category is UserWarning and "default parent branch" in str(w.message)
+++    ]
+++    assert len(plugin_warnings) == 0
++ 
++ 
++ def test_should_not_run_the_tests_if_mode_is_invalid(testdir, tmpdir):
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-picked/run-ptest b/meta-python/recipes-devtools/python/python3-pytest-picked/run-ptest
 new file mode 100644
-index 0000000000..76d23aee40
+index 0000000000..39f369f20b
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tenacity_9.1.2.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Retry code until it succeeds"
-+HOMEPAGE = "https://github.com/jd/tenacity"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
++++ b/meta-python/recipes-devtools/python/python3-pytest-picked/run-ptest
+@@ -0,0 +1,5 @@
++#!/bin/sh
 +
-+SRC_URI[sha256sum] = "1169d376c297e7de388d18b4481760d478b0e99a777cad3a9c86e556f4b697cb"
++# need to explicitly call the correct fixture as of pytest 8.x
 +
-+SRC_URI:append = "file://0001-ptest-skip-a-test-that-does-not-pass-on-qemu.patch"
++pytest -p pytester --automake
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb b/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
+new file mode 100644
+index 0000000000..6636ede2ed
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Run the tests related to the changed files"
++HOMEPAGE = "https://github.com/anapaulagomes/pytest-picked"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=6d374a27c85c3fcc979009952ec16f1b"
++RECIPE_MAINTAINER = "Tom Geelen <t.f.g.geelen@gmail.com>"
 +
-+DEPENDS += "python3-setuptools-scm-native"
++SRC_URI += "file://run-ptest \
++           file://0001-adjust-failing-tests-to-capture-only-ptest-output.patch \
++           "
++SRC_URI[sha256sum] = "6634c4356a560a5dc3dba35471865e6eb06bbd356b56b69c540593e9d5620ded"
 +
 +inherit pypi python_setuptools_build_meta ptest-python-pytest
 +
-+PYPI_PACKAGE = "tenacity"
-+
-+RDEPENDS:${PN}-ptest += "\
-+    python3-tornado \
-+    python3-typeguard \
++RDEPENDS:${PN} += "\
++    git \
++    python3-pytest (>=3.7.0) \
 +"
++
++PYPI_PACKAGE = "pytest_picked"
++UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
++
++INSANE_SKIP:${PN} += "buildpaths"
 -- 
-2.47.3
+2.43.0
 
 
