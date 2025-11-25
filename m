@@ -2,70 +2,73 @@ Return-Path: <t.f.g.geelen@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B29E1D0EE18
-	for <webhook@archiver.kernel.org>; Tue, 25 Nov 2025 20:08:09 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3261.1764101287627102820
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D585CD0EE22
+	for <webhook@archiver.kernel.org>; Tue, 25 Nov 2025 20:21:59 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3577.1764102115833210748
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Nov 2025 12:08:07 -0800
+ Tue, 25 Nov 2025 12:21:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KiUT8xoS;
- spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: t.f.g.geelen@gmail.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-b737cd03d46so807079666b.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 12:08:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TfGWF8WI;
+ spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: t.f.g.geelen@gmail.com)
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-640c6577120so10649256a12.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 12:21:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764101286; x=1764706086; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1764102114; x=1764706914; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=h9pMRcpkmt3T8JEh8G/F6lEhdXChCRUvWu6n/Ut1VQ4=;
-        b=KiUT8xoSIDQrFtIInqtT4fotY4Ovx+0k+1q3ISOdG8q0eMIGcyWRUgqjciFiwk8SAk
-         3ffcvkAsInnYUv4MNJfwU9zwk8Hlefl5c18aKWERuxkGC0VwwzIl6TdCOVGRdpCprLnK
-         YFIo23ykin3lohjeyQ+TRzLh2OvQfJnaQWZk7e+/EG9J+kLNN1yOFbyCurNaArN4+Iq9
-         Kghv/75vnAb/S4eXFU6JVtKERuAs8ifKSJCCPz7Yw+5C+i4gLjVL1tFEyJH1p4q7oTu7
-         xZ6S/vA5zIfqwfIs7MnU5qD6+JjITYxO8EopUxAO6QYImTys03TTgtk4WXqXi/SAZUD6
-         XFkw==
+        bh=Al7kCAYxoUDRpDosm0ynpGllmm3KdN7i4dukgiPSM+Y=;
+        b=TfGWF8WIgoIpmBKdDzyPQ8KFmblvEdLt/+7rxXoE3TswTays4sPiKmODunU/7zs6HV
+         v76Y8ztjy/aK5+EVdgcc7x8DCmeIQONoIrE/ASyjJnTkewEtX8Fn2F91WVQz8KkednH5
+         1nruW0eQA1rfLwDDitUDgty6A/vSdr/cpfbjNshbLafcKhBwpbHUbYtVY41c48EbKjVc
+         Or7Xp/gdZ5PmegAp/WbHrvP8xl4W6orf8S4inciTQAUf1ArykepOfH1wF2V0vM3pBBRC
+         V0/M69w3n0iS2/Xc1QwLQz4MbX3VluBr+LZGM+o0fwmUBtXv3yS39jweXM7PI/+lmJoZ
+         kfKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764101286; x=1764706086;
+        d=1e100.net; s=20230601; t=1764102114; x=1764706914;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=h9pMRcpkmt3T8JEh8G/F6lEhdXChCRUvWu6n/Ut1VQ4=;
-        b=q+XvecbaQUYZqMNGvSuXOeEF6SLFiiBceEeKL75IyViSzfqrPmBJYMb+T8OHHHjJMM
-         yz+vX0QR4C9p+TzMoW9tMBk1DKmp7rh2cJbbF7FGrC++0ot7AWsPu0Df8KC5opKQNT31
-         JLNa2/8w76kDKHDYVVHnz/pBgeehQ5qiDRwOwM8ke2aSNKv1F5AahXHuFR51lvWRL5mK
-         X0zONzQLLZHMSyBVfp+IlY3bpq2dRNeZxTEF+YalM76zmtDj+e7zx3NytbyJJeslyDTR
-         p7WAvpUXALpCWvzBwOhH7wEO+J2SWjDg5Diu4nUwUZEG3tFXjEq98UpCbPNPaLBYdaZK
-         pukA==
-X-Gm-Message-State: AOJu0YxYpBEW7W4xVmBPb3Zp8M71RaNQyu5+kvhcKvzdRxtvT/vcQvgw
-	HtHtPpdPTOFv6pxhHGjloWdrKbpfupD24syamfRGCKJbtd/aoehw/oJpg6lpCg==
-X-Gm-Gg: ASbGncs28W2gl/8gkDk3pykvuclmPIKY2zqQR5VyqKfnY9ZITjJ9IP1x1bQCP59Y4vp
-	d5Yaz2+6CRnMt4FSrnR4snXiOx+vHHxJwyDKt9sXY4WHBXU6bVQtt4aNjocYuZP0w/GD3rbGKBz
-	sMR8Q+VUL6qltFPEmUO3I9p1bq4vHvPatM9AOIe9xFVzXXb/0zgsAvXwi6JSI33XO9ZOgcob2SU
-	6QrWNt+7YQiCjBF/HQynxvZz4RyFAbagwYGUh0fk5UyZwK36OjctStsT/zAjrNL19+0N4QmH0nU
-	QViuJSAcQ+64PfoxpfiWaBClRK3aStJlhN+yg9bTnetSgYPVJ64ba4lUz+hvGPVCxjTHSMX3a+/
-	ZXehB1ICwbQ7p+x7LZO3EL/dQdzQDlYwJPVqIq/U1M1ntbFABuLxLEkfz+x2uqFSnE59H6UN5gI
-	ozfu3Sw2PlmVyNiHUywKjwP63vHUALOoEwPwcJbunQGm3hd2cMW5ddBifeau6O6Wp6
-X-Google-Smtp-Source: AGHT+IGtDnABJUs7lfu2cpNiJItbxHq6HOwmLIJeO1hP/gN1/Ujsy51ZeXRgzSPQGgIEXzKk68vhfQ==
-X-Received: by 2002:a17:907:a0d:b0:b70:be0b:6ba8 with SMTP id a640c23a62f3a-b76719d9598mr1735262366b.61.1764101285375;
-        Tue, 25 Nov 2025 12:08:05 -0800 (PST)
+        bh=Al7kCAYxoUDRpDosm0ynpGllmm3KdN7i4dukgiPSM+Y=;
+        b=oaaD8Q1jk2AJiVMC/JXGdsAPn8FU7KGKpS8wwXtaF65TkFyiH/zZKzdS8u/Pq06OTm
+         NYJHlANh89FZqMdhhfv0PlRyn7Eo8F1TNut53qZU16cWFj49KfoUySv1S/9mKWhHj7Oo
+         9wh9hxyJeOKWfdM1J62WOVmc+We7lszoWrGZySwW8rh33/DeIds3icq/WK3EUAidu6Ur
+         2bo7nLXGkqz304LZWq4699KXm+d7bnhm+O/JPEdTcvVSNP8ZpBS1QWUv8Du8vUQh49HU
+         JKn5aERo03C2lCZmEelAKdBLP0PnSHWveE3vSPtvH9I8GA/jdhs4xzelYzoolHjmQ6Sj
+         Iqxg==
+X-Gm-Message-State: AOJu0Yz5V/NEHpR+C0EJXhI/NmUmhlyL/z0MZ3y6K0I68EI/ebPx3qLh
+	tMf1SXmrCQN/RIN7h0ILRZ86bCngjt0G/2Ainy6aiVPWrA4hAOF6S/8NQUGtMw==
+X-Gm-Gg: ASbGncsvMWQZchN8NNAAk4AUReIZRQCxRvB7hMEbkhP5J5vhLdG6PIXtUrpoIvI/Y68
+	6LMGterQuApblr25L6SkzVp9FFjF2Tn5JmL3wX5PfsCN+hXIdxO08obcIz4P4ddyng7janx+aJh
+	vBXVNAHjsJGNMBXj4WULhYMQlN3A2WpD4qufkUeBEIY6M1QJ70cJz3pjrfw5y3uDrzJ98oU3kZM
+	OJof6ZexAFN6zjupL8IK84ok5MKCVHVdKGewTvrgmU3xVKLuzIUTIb7H5pU/T2b+j85jc7M8aUq
+	TKMIrssPYzB5pXtKEPOtq3BI1rB8Wvapp3NeedrMU8DO7lnORh85PWlNGhSqwWOiakqjrPcansj
+	SogzVi+6KTLdPxh/0c5DQWKptmohBJJlDixwrM81ak3viAdcPx6L7e3/ik985Eb57d4fOZM3hIQ
+	zrNA2ehuEw5v4+5fzwG3ph7pnmQq5TzOV8lSx+/j9r5MJX1wSvYSKjF/CyNozzGouUfOx14znJF
+	zU=
+X-Google-Smtp-Source: AGHT+IE5YAvzWxQvRwe6FubBWZ4zvuvV4KiFpPilULM7/PQn1b9bry5ZEyLcyfnzMh16orBeNEhXKw==
+X-Received: by 2002:a17:907:3f17:b0:b73:7440:bd3a with SMTP id a640c23a62f3a-b767173e72bmr1800434066b.40.1764102113574;
+        Tue, 25 Nov 2025 12:21:53 -0800 (PST)
 Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b76550283f4sm1639477466b.55.2025.11.25.12.08.03
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b7654fd4f59sm1626888466b.36.2025.11.25.12.21.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 25 Nov 2025 12:08:04 -0800 (PST)
+        Tue, 25 Nov 2025 12:21:53 -0800 (PST)
 From: Tom Geelen <t.f.g.geelen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tom Geelen <t.f.g.geelen@gmail.com>
 Subject: [meta-python][PATCH] new recipe: python3-pytest-picked
-Date: Tue, 25 Nov 2025 21:07:43 +0100
-Message-ID: <20251125200743.3730553-2-t.f.g.geelen@gmail.com>
+Date: Tue, 25 Nov 2025 21:20:49 +0100
+Message-ID: <20251125202048.3753948-2-t.f.g.geelen@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 20:08:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122061
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 20:21:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122062
+
+Sorry for the additional email. The previous patch still contained an erroneous line.
 
 Description: Run the tests related to the changed files
 Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
@@ -74,8 +77,8 @@ Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
  .../packagegroups/packagegroup-meta-python.bb |  1 +
  ...g-tests-to-capture-only-ptest-output.patch | 50 +++++++++++++++++++
  .../python/python3-pytest-picked/run-ptest    |  5 ++
- .../python/python3-pytest-picked_0.5.1.bb     | 22 ++++++++
- 5 files changed, 79 insertions(+)
+ .../python/python3-pytest-picked_0.5.1.bb     | 20 ++++++++
+ 5 files changed, 77 insertions(+)
  create mode 100644 meta-python/recipes-devtools/python/python3-pytest-picked/0001-adjust-failing-tests-to-capture-only-ptest-output.patch
  create mode 100644 meta-python/recipes-devtools/python/python3-pytest-picked/run-ptest
  create mode 100644 meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
@@ -173,10 +176,10 @@ index 0000000000..39f369f20b
 +pytest -p pytester --automake
 diff --git a/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb b/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
 new file mode 100644
-index 0000000000..6636ede2ed
+index 0000000000..c7c2183337
 --- /dev/null
 +++ b/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
-@@ -0,0 +1,22 @@
+@@ -0,0 +1,20 @@
 +SUMMARY = "Run the tests related to the changed files"
 +HOMEPAGE = "https://github.com/anapaulagomes/pytest-picked"
 +LICENSE = "MIT"
@@ -197,8 +200,6 @@ index 0000000000..6636ede2ed
 +
 +PYPI_PACKAGE = "pytest_picked"
 +UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
-+
-+INSANE_SKIP:${PN} += "buildpaths"
 -- 
 2.43.0
 
