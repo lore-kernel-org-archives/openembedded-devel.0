@@ -1,164 +1,96 @@
-Return-Path: <nitin.wankhade333@gmail.com>
+Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4863CFD364
-	for <webhook@archiver.kernel.org>; Tue, 25 Nov 2025 08:06:27 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12499.1764057983968194980
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE29ACFD315
+	for <webhook@archiver.kernel.org>; Tue, 25 Nov 2025 08:52:57 +0000 (UTC)
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13005.1764060774973221077
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Nov 2025 00:06:24 -0800
+ Tue, 25 Nov 2025 00:52:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CxcyVMNz;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: nitin.wankhade333@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-3436b2dbff6so799602a91.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 00:06:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764057983; x=1764662783; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=01leQzscFHUMYfThn5M2a73VSskpKhm2JZJQoHhQXUI=;
-        b=CxcyVMNzWGmaaTA7RYwiJWWzbFXTgc50dA2nm9+TuEwqNMXQt0Vu2/Hkr0Qbp8oLpm
-         U6g0qWXz57y7oWLp4872K97PjvWS+PtTH2G4PMeqK9/oWJ+ZuhN+vZy9CFIHopxAiz33
-         wT6qgluL2LhHIK3tvq9eYElj7XyJtj2YC3gik5DB0K4S3YVLxiW8orazfHGXchtC0mpF
-         CZ3OGJ6A0wH/khdw0Sak/Mqiiz30HXMakoI7VfkG7kuy2p5L0uiprqsAD4MeAZy0FU4O
-         KzYLwOWQ8r1zhdA+UaGu2yEu5uzX62e69L7F9msyGC/N8GUyhtXcpOO9vT/aq7lS9GRJ
-         zTCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764057983; x=1764662783;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=01leQzscFHUMYfThn5M2a73VSskpKhm2JZJQoHhQXUI=;
-        b=E6ChV7MI7xKkD42Dh4j18lqVIHhe1MeNCH9ePQItIptl+hznry9wTAEWOWm++aD7oQ
-         JdPt1JAFHs0DtgoLd9fmKfo86Mrvkd4kVaR7p3fUHOsNnqQ/l+IaWow1Vq/BCFcL9g2q
-         sztVvr5GoCCn4NVNXsK2N8cPEi1h4j6jhG7/uBXIW/ioWAsywEQ+4guyQ5EhlfyxLSe1
-         wvKr+Ew5qGeLJgKPLLed0jzDTfCXbcycKvhMG0no+SdsrGHIYlcon7XVBBUg0HIBWqYL
-         n4QX/QojEDAiKYHXVSaE2DL8zyJkr06bpt+49anNpLE+ozdFM0ZESJePuQXtwhHqayPg
-         8/NA==
-X-Gm-Message-State: AOJu0Yy+ICKOwpIVlQbG8QKBL+AOD6d19RuseRO3I0vvfYfSF2k13g2S
-	bYor9wNBxSKJP11O/QwDwFuIGLCQLk+08GIE0GeXNhxIJpxNviw5diXWglLeqw==
-X-Gm-Gg: ASbGnctxr26CvkrozEksnCswm7CQyoMaIK6SSb6RAsLvsq9thgH5b1fynsFHkaoWqXf
-	K7NsCA7WP6pBWMFl/bTgXeMCpZlEDRIej0eWWd0nIgQ48QVw9f3/Zo1NKtsZBxfy04cEhy770ZF
-	jZFl6yleNctW1QioiCPnNjSx5ziz51+reHfW9tMifzATeISSAD3RynUEiGUBbqlcgcM1LhmfB6s
-	+ptrtn01snxbh4sEXkZLhyLiCNQTwCe8ilEFuwhBpKt1FNw7CNEgWwrm0k/Isn2OqnO8Tik+o65
-	nuhyQkyO9TjUG2gvOMgdjsxztUmDOxB/i/YkMxUuO+0d/7TkEmLVi7TSdU2RtU6Ki9KCsXNMx/p
-	Sf4buRWpY3OToao2LJbb3coitkpalEz4sr7Pr1gQ6sZyJUYbv8Vee4Wcc1KTTadD8hYSKyqr5y7
-	Zo0HBL5CVQX2d1sq6RM0x4ZlQgrBIKizFyGg==
-X-Google-Smtp-Source: AGHT+IHbqZ2Jmw6IE50VAQ14lF+yUKHpPYo+xzIWshcsmZSQPAMazjr18GIi6aWTfXaamBg/B/41HQ==
-X-Received: by 2002:a17:90b:380a:b0:340:5834:39ad with SMTP id 98e67ed59e1d1-34733f5ed08mr8351795a91.7.1764057982783;
-        Tue, 25 Nov 2025 00:06:22 -0800 (PST)
-Received: from LL-3324L.kpit.com ([122.167.113.36])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3475fee187bsm697685a91.3.2025.11.25.00.06.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 25 Nov 2025 00:06:22 -0800 (PST)
-From: Nitin Wankhade <nitin.wankhade333@gmail.com>
-X-Google-Original-From: Nitin Wankhade <nitin.wankhade@kpit.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=TmhM8CRx;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: liuyd.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1764060775; x=1795596775;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=+7Yxzk6HhEdE4SaSS5au4gTZBjtKqo5KV0xt5AzxMlM=;
+  b=TmhM8CRx0O36EiBa4n0HAHMAWBH6uB4E88OsEtRLmDFqKxd8Skwh2C7k
+   1QN9ATm6BDWkRf6JuEfROHLYpbN7Z8o8HgKYiAxAu/laeWXcgr0vZ7y6l
+   CPGz2FfSKJ/SoAiRXidrP3Ic3EvVO6hWLfZnNCphB6GmbYHnKsDDEqnSM
+   tKrBRh9/tFwDN/cUIal9nuzOKbALmikhCSmHcnTNbEOXtXla74ON/4eWh
+   PtJidPtRD9WjYPQSVaqCmuctebuX8cPaEDCREP8jpw7BQ+yIvybqParWP
+   HJ53YMg5KBEvakafwdSUO8BUfjxjRwITrrZu3wdzEwu3EzTQZ4Qq1FJrS
+   g==;
+X-CSE-ConnectionGUID: J1/wWGQlQcyxI+Qgz5mNVQ==
+X-CSE-MsgGUID: Zw/LGg5DQh65mB67lgNalw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11623"; a="207754412"
+X-IronPort-AV: E=Sophos;i="6.20,225,1758553200"; 
+   d="scan'208";a="207754412"
+Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.128])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Nov 2025 17:52:52 +0900
+Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id E24C0C0041B
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 08:52:51 +0000 (UTC)
+Received: from az2uksmom1.o.css.fujitsu.com (az2uksmom1.o.css.fujitsu.com [10.151.22.202])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 9DD49C01191
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 08:52:51 +0000 (UTC)
+Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 9127218004F0
+	for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 08:52:49 +0000 (UTC)
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: nitin.wankhade@kpit.com,
-	Jackson James <jacksonj2@kpit.com>
-Subject: [OE-core][kirkstone][PATCH] libssh 0.8.9: Fix CVE-2025-8114
-Date: Tue, 25 Nov 2025 13:38:57 +0530
-Message-Id: <20251125080857.2758353-1-nitin.wankhade@kpit.com>
-X-Mailer: git-send-email 2.34.1
+Subject: [oe][meta-oe][PATCH] lvm2: upgrade 2.03.36 -> 2.03.37
+Date: Tue, 25 Nov 2025 16:52:23 +0800
+Message-ID: <20251125085223.3312-1-liuyd.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 08:06:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122022
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 08:52:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122023
 
-From: Jackson James <jacksonj2@kpit.com>
+Changelog:
+Mostly bugfix release, with most focus on dmeventd, persitent reservations,
+lvmdevices, and improvement in tests.
 
-Fix NULL pointer dereference after allocation failure.
-Fix was available for this CVE in kex.c, but version 0.8.9 have the vulnerable
-code resides in dh.c.
+* Improvements in dmeventd thread safety, shutdown times and more.
+* Many fixes and improvements for persistent reservations.
+* Support output in list mode for all lvmconfig --typeconfig types with --list.
+* Fix deadlock in lvmdbusd on SIGINT in lvm shell mode.
+* And many more.
 
-Upstream Repository: https://git.libssh.org/projects/libssh.git/
-
-Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2025-8114
-Type: Security Fix
-CVE: CVE-2025-8114
-
-Signed-off-by: Jackson James <jacksonj2@kpit.com>
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- .../libssh/libssh/CVE-2025-8114.patch         | 52 +++++++++++++++++++
- .../recipes-support/libssh/libssh_0.8.9.bb    |  1 +
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-8114.patch
+ meta-oe/recipes-support/lvm2/lvm2.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2025-8114.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8114.patch
-new file mode 100644
-index 0000000000..27d53a012d
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8114.patch
-@@ -0,0 +1,52 @@
-+From b67ac7d9d2dd0dfb834cc657841c32f085661a84 Mon Sep 17 00:00:00 2001
-+From: Jackson James <jacksonj2@kpit.com>
-+Date: Wed, 19 Nov 2025 15:29:41 +0530
-+Subject: [PATCH] CVE-2025-8114: Fix NULL pointer dereference after allocation
-+failure
-+
-+Fix was available for this CVE in kex.c, but version 0.8.9 have the vulnerable
-+code resides in dh.c.
-+
-+CVE: CVE-2025-8114
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=53ac23ded4cb]
-+Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
-+
-+Comment: Patch is refreshed as per codebase of 0.8.9
-+Signed-off-by: Jackson James <jacksonj2@kpit.com>
-+---
-+ src/dh.c | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/dh.c b/src/dh.c
-+index 33883f2..607db15 100644
-+--- a/src/dh.c
-++++ b/src/dh.c
-+@@ -872,7 +872,8 @@ int ssh_make_sessionid(ssh_session session) {
-+ #ifdef DEBUG_CRYPTO
-+     ssh_print_hexa("hash buffer", ssh_buffer_get(buf), ssh_buffer_get_len(buf));
-+ #endif
-+-
-++    /* Set rc for the following switch statement in case we goto error. */
-++    rc = SSH_ERROR;
-+     switch (session->next_crypto->kex_type) {
-+     case SSH_KEX_DH_GROUP1_SHA1:
-+     case SSH_KEX_DH_GROUP14_SHA1:
-+@@ -925,6 +926,7 @@ int ssh_make_sessionid(ssh_session session) {
-+                session->next_crypto->secret_hash);
-+         break;
-+     }
-++
-+     /* During the first kex, secret hash and session ID are equal. However, after
-+      * a key re-exchange, a new secret hash is calculated. This hash will not replace
-+      * but complement existing session id.
-+@@ -933,6 +935,7 @@ int ssh_make_sessionid(ssh_session session) {
-+         session->next_crypto->session_id = malloc(session->next_crypto->digest_len);
-+         if (session->next_crypto->session_id == NULL) {
-+             ssh_set_error_oom(session);
-++            rc = SSH_ERROR;
-+             goto error;
-+         }
-+         memcpy(session->next_crypto->session_id, session->next_crypto->secret_hash,
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-index 891b2c38ac..3781b501cd 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-@@ -27,6 +27,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
-            file://CVE-2025-8277-1.patch \
-            file://CVE-2025-8277-2.patch \
-            file://CVE-2025-8277-3.patch \
-+           file://CVE-2025-8114.patch \
-           "
- SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 09ee410614..ccefa206b6 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -18,8 +18,8 @@ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main \
+            file://0001-include-libgen.h-for-basename.patch \
+            "
+ 
+-SRCREV = "c8b7a765cbd731af32964adaf921f9e19d56a048"
+-PV = "2.03.36"
++SRCREV = "d34fc799fd86538756ba56b37e1ab56ab1b75d13"
++PV = "2.03.37"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
  
 -- 
-2.34.1
+2.43.0
 
 
