@@ -1,401 +1,164 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <nitin.wankhade333@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0ED65CFD368
-	for <webhook@archiver.kernel.org>; Tue, 25 Nov 2025 05:59:37 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11062.1764050375134607976
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4863CFD364
+	for <webhook@archiver.kernel.org>; Tue, 25 Nov 2025 08:06:27 +0000 (UTC)
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12499.1764057983968194980
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 24 Nov 2025 21:59:35 -0800
+ Tue, 25 Nov 2025 00:06:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MCglH+2C;
- spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-78a712cfbc0so48231257b3.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 24 Nov 2025 21:59:35 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CxcyVMNz;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: nitin.wankhade333@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-3436b2dbff6so799602a91.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 00:06:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764050374; x=1764655174; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=EeLApC9vxAY7mU/bcZdX2E35T6NA46vomcgm9bDjWOY=;
-        b=MCglH+2C3FpygqLHfaXYm8kAc9CbT22hakwhdr4ejVpb5yoOzGR9cq9MbqU/01Ipnh
-         P90bvICaeTVFWQ9ammFd5jKMehwKBtiNhy6CGi3NsCaFNlQmaB5DoAjtl7zneBn6Uite
-         K0YMYeVM5Pjzz0hBBZhLUYcqOFSjGuc6stTc3Lrwe0WErP2/S5ETT6mIH9Z+qT8ZmN4U
-         nLu6E+IwQsoq+SB2TQtNxH0LWJLRLhBMQA12riof10No7APDt0OtU8lS52u9H0K7efnN
-         i/ujOUIAAsz2/LxsAV/MCORDG96a9hJrw396oWGzcOZxOc7AkuAIusCgQDmXskvpXxN6
-         8FNw==
+        d=gmail.com; s=20230601; t=1764057983; x=1764662783; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=01leQzscFHUMYfThn5M2a73VSskpKhm2JZJQoHhQXUI=;
+        b=CxcyVMNzWGmaaTA7RYwiJWWzbFXTgc50dA2nm9+TuEwqNMXQt0Vu2/Hkr0Qbp8oLpm
+         U6g0qWXz57y7oWLp4872K97PjvWS+PtTH2G4PMeqK9/oWJ+ZuhN+vZy9CFIHopxAiz33
+         wT6qgluL2LhHIK3tvq9eYElj7XyJtj2YC3gik5DB0K4S3YVLxiW8orazfHGXchtC0mpF
+         CZ3OGJ6A0wH/khdw0Sak/Mqiiz30HXMakoI7VfkG7kuy2p5L0uiprqsAD4MeAZy0FU4O
+         KzYLwOWQ8r1zhdA+UaGu2yEu5uzX62e69L7F9msyGC/N8GUyhtXcpOO9vT/aq7lS9GRJ
+         zTCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764050374; x=1764655174;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1764057983; x=1764662783;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=EeLApC9vxAY7mU/bcZdX2E35T6NA46vomcgm9bDjWOY=;
-        b=hCPUXnCxSxmlbVB/5g2PgoXNc87tT3Jay5L9l6rILbCmpCEhPI81rTy6iXVps0oa4Z
-         jHqmsO61/Gc8yilysBeq8mYTjowXCIeW6i4t7hxAGNywnDjF95nFRd0dyC4VwXGPdP3L
-         Xf6Tq+lmGHz8OkzCOEF1GAcCte2nBBRC9n8lwEg38TSM2xNuT3L0z4Y5tP/uTQV8pCzG
-         WK28I7pqxldsBj2JjX6WG+D9HTUbmMcZ8mYYt5AamVSqSZXEvVDOw8fU2EyeIfq2xyHT
-         9OIuAT/DMDl3iqvumkGPmXClYNMz9oGwylfOrs6ljsY5oKqO4HHXjsHkBH8yV5NvZfg5
-         FZ5w==
-X-Gm-Message-State: AOJu0Yz9rZOGsxvcFgOy7X3gpIlfAwKimOcg3YmpPU+bNoxUQRFd15zx
-	nPsWxetdRDxY0Rkt5ac3tepQBN2+w1bzasI01JZeTWbHKLAtKOp7+3os/AkMFn9qLRocvMdrgs+
-	R5/bRJIohGTGwe3jsu9uZQn3mZathN5w=
-X-Gm-Gg: ASbGnctARW5Q2rfyLyxfxhWo7D22U3olvAvm/FrF/Z+XayDM/SLhZQoQeuQPAvIZSjo
-	Ra9CGEUpP4owWQpsZpOD3xHj6uYvet+e4FsHS6V8cL6F0TS6ZH0OEXWQNy/963WRYwaD1w3f2jP
-	H1I2gHAklJmabbu6zXE3nQm3pxFVFCsvV59nB1Z3tsLVHWnHDpmTIVAqpYgMD/KdhuqJB1Mm56P
-	Cl/XDqyVfZ524lbRB2kFptoP2pHx/gABzM77eP3K8TzYvp3pYGMuRcifemPDG4csJfj1qcpiU4R
-	rcZGmO8C5ZxMUCHkw+PArICxYtlhg2dT9IrTgYXmy46QuTOQFrHXz6p+/N4LsDajmkY1BH+bQ7P
-	PLyBt9LnjKx0ypdneQo1CId6DfXmiIYTN1SNkPcxCPKQ=
-X-Google-Smtp-Source: AGHT+IE1jggKlrGii2PTtLUiffKc/uYxtc0ruwfcXg9I9zGStRGXNVf59COdQBWzBr0TVTv90QQGrFvMHExpar7ccbg=
-X-Received: by 2002:a05:690c:6f0d:b0:786:91ac:e16b with SMTP id
- 00721157ae682-78a8b47abbcmr105299027b3.9.1764050374113; Mon, 24 Nov 2025
- 21:59:34 -0800 (PST)
+        bh=01leQzscFHUMYfThn5M2a73VSskpKhm2JZJQoHhQXUI=;
+        b=E6ChV7MI7xKkD42Dh4j18lqVIHhe1MeNCH9ePQItIptl+hznry9wTAEWOWm++aD7oQ
+         JdPt1JAFHs0DtgoLd9fmKfo86Mrvkd4kVaR7p3fUHOsNnqQ/l+IaWow1Vq/BCFcL9g2q
+         sztVvr5GoCCn4NVNXsK2N8cPEi1h4j6jhG7/uBXIW/ioWAsywEQ+4guyQ5EhlfyxLSe1
+         wvKr+Ew5qGeLJgKPLLed0jzDTfCXbcycKvhMG0no+SdsrGHIYlcon7XVBBUg0HIBWqYL
+         n4QX/QojEDAiKYHXVSaE2DL8zyJkr06bpt+49anNpLE+ozdFM0ZESJePuQXtwhHqayPg
+         8/NA==
+X-Gm-Message-State: AOJu0Yy+ICKOwpIVlQbG8QKBL+AOD6d19RuseRO3I0vvfYfSF2k13g2S
+	bYor9wNBxSKJP11O/QwDwFuIGLCQLk+08GIE0GeXNhxIJpxNviw5diXWglLeqw==
+X-Gm-Gg: ASbGnctxr26CvkrozEksnCswm7CQyoMaIK6SSb6RAsLvsq9thgH5b1fynsFHkaoWqXf
+	K7NsCA7WP6pBWMFl/bTgXeMCpZlEDRIej0eWWd0nIgQ48QVw9f3/Zo1NKtsZBxfy04cEhy770ZF
+	jZFl6yleNctW1QioiCPnNjSx5ziz51+reHfW9tMifzATeISSAD3RynUEiGUBbqlcgcM1LhmfB6s
+	+ptrtn01snxbh4sEXkZLhyLiCNQTwCe8ilEFuwhBpKt1FNw7CNEgWwrm0k/Isn2OqnO8Tik+o65
+	nuhyQkyO9TjUG2gvOMgdjsxztUmDOxB/i/YkMxUuO+0d/7TkEmLVi7TSdU2RtU6Ki9KCsXNMx/p
+	Sf4buRWpY3OToao2LJbb3coitkpalEz4sr7Pr1gQ6sZyJUYbv8Vee4Wcc1KTTadD8hYSKyqr5y7
+	Zo0HBL5CVQX2d1sq6RM0x4ZlQgrBIKizFyGg==
+X-Google-Smtp-Source: AGHT+IHbqZ2Jmw6IE50VAQ14lF+yUKHpPYo+xzIWshcsmZSQPAMazjr18GIi6aWTfXaamBg/B/41HQ==
+X-Received: by 2002:a17:90b:380a:b0:340:5834:39ad with SMTP id 98e67ed59e1d1-34733f5ed08mr8351795a91.7.1764057982783;
+        Tue, 25 Nov 2025 00:06:22 -0800 (PST)
+Received: from LL-3324L.kpit.com ([122.167.113.36])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3475fee187bsm697685a91.3.2025.11.25.00.06.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 25 Nov 2025 00:06:22 -0800 (PST)
+From: Nitin Wankhade <nitin.wankhade333@gmail.com>
+X-Google-Original-From: Nitin Wankhade <nitin.wankhade@kpit.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: nitin.wankhade@kpit.com,
+	Jackson James <jacksonj2@kpit.com>
+Subject: [OE-core][kirkstone][PATCH] libssh 0.8.9: Fix CVE-2025-8114
+Date: Tue, 25 Nov 2025 13:38:57 +0530
+Message-Id: <20251125080857.2758353-1-nitin.wankhade@kpit.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20251124092909.3234487-1-leon.anavi@konsulko.com>
-In-Reply-To: <20251124092909.3234487-1-leon.anavi@konsulko.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 24 Nov 2025 21:59:08 -0800
-X-Gm-Features: AWmQ_blLy9KWGio3yJpFjr5CgYCs-Gsn-h7lUDOERDmHgTtHwxHWK5I56_gdoT8
-Message-ID: <CAMKF1sqOhnb6t9O1HPnYAFpt5JWQ-XbkKzMgGfGX65_LZ+zHoQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] valkey: Upgrade 8.1.4 -> 9.0.0
-To: leon.anavi@konsulko.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000ea3e2b064464fb47"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 05:59:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122021
+ <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 08:06:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122022
 
---000000000000ea3e2b064464fb47
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Jackson James <jacksonj2@kpit.com>
 
-Fails on qemuarm - https://errors.yoctoproject.org/Errors/Details/889836/
+Fix NULL pointer dereference after allocation failure.
+Fix was available for this CVE in kex.c, but version 0.8.9 have the vulnerable
+code resides in dh.c.
 
-On Mon, Nov 24, 2025 at 1:29=E2=80=AFAM Leon Anavi via lists.openembedded.o=
-rg
-<leon.anavi=3Dkonsulko.com@lists.openembedded.org> wrote:
+Upstream Repository: https://git.libssh.org/projects/libssh.git/
 
-> Upgrade to release 9.0.0:
->
-> - HSETEX with FXX should not create an object if it does not exist
-> - Fix crash when aborting a slot migration while child snapshot is
->   active
-> - Fix double MOVED reply on unblock at failover
-> - Fix memory leak with CLIENT LIST/KILL duplicate filters
-> - Fix incorrect accounting after completed atomic slot migration
-> - Fix Lua VM crash after FUNCTION FLUSH ASYNC + FUNCTION LOAD
-> - Fix invalid memory address caused by hashtable shrinking during
->   safe iteration
->
-> Replace dependency hiredis with libvalkey.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  .../hiredis-use-default-CC-if-it-is-set.patch | 43 -------------------
->  .../{valkey_8.1.4.bb =3D> valkey_9.0.0.bb}      |  7 ++-
->  2 files changed, 3 insertions(+), 47 deletions(-)
->  delete mode 100644
-> meta-oe/recipes-extended/valkey/valkey/hiredis-use-default-CC-if-it-is-se=
-t.patch
->  rename meta-oe/recipes-extended/valkey/{valkey_8.1.4.bb =3D>
-> valkey_9.0.0.bb} (91%)
->
-> diff --git
-> a/meta-oe/recipes-extended/valkey/valkey/hiredis-use-default-CC-if-it-is-=
-set.patch
-> b/meta-oe/recipes-extended/valkey/valkey/hiredis-use-default-CC-if-it-is-=
-set.patch
-> deleted file mode 100644
-> index ffb365f371..0000000000
-> ---
-> a/meta-oe/recipes-extended/valkey/valkey/hiredis-use-default-CC-if-it-is-=
-set.patch
-> +++ /dev/null
-> @@ -1,43 +0,0 @@
-> -From a5bcf56630df520040076dd14c3c54fef0785ceb Mon Sep 17 00:00:00 2001
-> -From: Venture Research <tech@ventureresearch.com>
-> -Date: Fri, 8 Feb 2013 17:39:52 -0600
-> -Subject: [PATCH] hiredis: use default CC if it is set
-> -MIME-Version: 1.0
-> -Content-Type: text/plain; charset=3DUTF-8
-> -Content-Transfer-Encoding: 8bit
-> -
-> -Instead of trying to automagically figure out CC, which breaks with OE
-> -as CC has spaces in it, just skip it if one was already passed in.
-> -
-> -Signed-off-by: Venture Research <tech@ventureresearch.com>
-> -
-> -Update to work with 4.0.8
-> -Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> -
-> -Reworked for 6.0.4
-> -Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> -
-> -Reworked for 8.0.0
-> -Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> -
-> -Reworked for 8.1.0
-> -Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
-> -
-> -Upstream-Status: Inappropriate [OE-specifc]
-> ----
-> - deps/hiredis/Makefile | 2 --
-> - 1 file changed, 2 deletions(-)
-> -
-> -diff --git a/deps/hiredis/Makefile b/deps/hiredis/Makefile
-> -index 4a3de1f6e..49bb525cd 100644
-> ---- a/deps/hiredis/Makefile
-> -+++ b/deps/hiredis/Makefile
-> -@@ -36,8 +36,6 @@ endef
-> - export REDIS_TEST_CONFIG
-> -
-> - # Fallback to gcc when $CC is not in $PATH.
-> --CC:=3D$(shell sh -c 'type $${CC%% *} >/dev/null 2>/dev/null && echo $(C=
-C)
-> || echo gcc')
-> --CXX:=3D$(shell sh -c 'type $${CXX%% *} >/dev/null 2>/dev/null && echo
-> $(CXX) || echo g++')
-> - OPTIMIZATION?=3D-O3
-> - WARNINGS=3D-Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings
-> -Wno-missing-field-initializers
-> - DEBUG_FLAGS?=3D -g -ggdb
-> diff --git a/meta-oe/recipes-extended/valkey/valkey_8.1.4.bb
-> b/meta-oe/recipes-extended/valkey/valkey_9.0.0.bb
-> similarity index 91%
-> rename from meta-oe/recipes-extended/valkey/valkey_8.1.4.bb
-> rename to meta-oe/recipes-extended/valkey/valkey_9.0.0.bb
-> index 9947a9299c..82b08d7a82 100644
-> --- a/meta-oe/recipes-extended/valkey/valkey_8.1.4.bb
-> +++ b/meta-oe/recipes-extended/valkey/valkey_9.0.0.bb
-> @@ -7,17 +7,16 @@ LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3D08b9159809d809e8aaa340a8387e693e"
->  DEPENDS =3D "readline lua ncurses"
->
->  SRC_URI =3D " \
-> -       git://github.com/valkey-io/valkey.git;branch=3D8.1;protocol=3Dhtt=
-ps \
-> +       git://github.com/valkey-io/valkey.git;branch=3D9.0;protocol=3Dhtt=
-ps \
->          file://valkey.conf \
->         file://init-valkey-server \
->         file://valkey.service \
-> -       file://hiredis-use-default-CC-if-it-is-set.patch \
->         file://lua-update-Makefile-to-use-environment-build-setting.patch=
- \
->         file://oe-use-libc-malloc.patch \
->         file://0001-src-Do-not-reset-FINAL_LIBS.patch \
->         file://GNU_SOURCE-7.patch \
->  "
-> -SRCREV =3D "5f4bae3ea10174a7c872cc099c953b0e91afa93a"
-> +SRCREV =3D "5018b12b0de2d2322a1bbf6b041c43740587c0f2"
->
->  RPROVIDES:${PN} =3D "virtual-redis"
->
-> @@ -41,7 +40,7 @@ PACKAGECONFIG[systemd] =3D
-> "USE_SYSTEMD=3Dyes,USE_SYSTEMD=3Dno,systemd"
->  EXTRA_OEMAKE +=3D "${PACKAGECONFIG_CONFARGS}"
->
->  do_compile() {
-> -    oe_runmake -C deps hiredis lua linenoise
-> +    oe_runmake -C deps libvalkey lua linenoise
->      oe_runmake
->  }
->
-> --
-> 2.47.3
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#122005):
-> https://lists.openembedded.org/g/openembedded-devel/message/122005
-> Mute This Topic: https://lists.openembedded.org/mt/116448996/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2025-8114
+Type: Security Fix
+CVE: CVE-2025-8114
 
---000000000000ea3e2b064464fb47
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Jackson James <jacksonj2@kpit.com>
+---
+ .../libssh/libssh/CVE-2025-8114.patch         | 52 +++++++++++++++++++
+ .../recipes-support/libssh/libssh_0.8.9.bb    |  1 +
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2025-8114.patch
 
-<div dir=3D"ltr">Fails on qemuarm -=C2=A0<a href=3D"https://errors.yoctopro=
-ject.org/Errors/Details/889836/">https://errors.yoctoproject.org/Errors/Det=
-ails/889836/</a></div><br><div class=3D"gmail_quote gmail_quote_container">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Nov 24, 2025 at 1:29=E2=80=AF=
-AM Leon Anavi via <a href=3D"http://lists.openembedded.org">lists.openembed=
-ded.org</a> &lt;leon.anavi=3D<a href=3D"mailto:konsulko.com@lists.openembed=
-ded.org">konsulko.com@lists.openembedded.org</a>&gt; wrote:<br></div><block=
-quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
-px solid rgb(204,204,204);padding-left:1ex">Upgrade to release 9.0.0:<br>
-<br>
-- HSETEX with FXX should not create an object if it does not exist<br>
-- Fix crash when aborting a slot migration while child snapshot is<br>
-=C2=A0 active<br>
-- Fix double MOVED reply on unblock at failover<br>
-- Fix memory leak with CLIENT LIST/KILL duplicate filters<br>
-- Fix incorrect accounting after completed atomic slot migration<br>
-- Fix Lua VM crash after FUNCTION FLUSH ASYNC + FUNCTION LOAD<br>
-- Fix invalid memory address caused by hashtable shrinking during<br>
-=C2=A0 safe iteration<br>
-<br>
-Replace dependency hiredis with libvalkey.<br>
-<br>
-Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" ta=
-rget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
----<br>
-=C2=A0.../hiredis-use-default-CC-if-it-is-set.patch | 43 ------------------=
--<br>
-=C2=A0.../{<a href=3D"http://valkey_8.1.4.bb" rel=3D"noreferrer" target=3D"=
-_blank">valkey_8.1.4.bb</a> =3D&gt; <a href=3D"http://valkey_9.0.0.bb" rel=
-=3D"noreferrer" target=3D"_blank">valkey_9.0.0.bb</a>}=C2=A0 =C2=A0 =C2=A0 =
-|=C2=A0 7 ++-<br>
-=C2=A02 files changed, 3 insertions(+), 47 deletions(-)<br>
-=C2=A0delete mode 100644 meta-oe/recipes-extended/valkey/valkey/hiredis-use=
--default-CC-if-it-is-set.patch<br>
-=C2=A0rename meta-oe/recipes-extended/valkey/{<a href=3D"http://valkey_8.1.=
-4.bb" rel=3D"noreferrer" target=3D"_blank">valkey_8.1.4.bb</a> =3D&gt; <a h=
-ref=3D"http://valkey_9.0.0.bb" rel=3D"noreferrer" target=3D"_blank">valkey_=
-9.0.0.bb</a>} (91%)<br>
-<br>
-diff --git a/meta-oe/recipes-extended/valkey/valkey/hiredis-use-default-CC-=
-if-it-is-set.patch b/meta-oe/recipes-extended/valkey/valkey/hiredis-use-def=
-ault-CC-if-it-is-set.patch<br>
-deleted file mode 100644<br>
-index ffb365f371..0000000000<br>
---- a/meta-oe/recipes-extended/valkey/valkey/hiredis-use-default-CC-if-it-i=
-s-set.patch<br>
-+++ /dev/null<br>
-@@ -1,43 +0,0 @@<br>
--From a5bcf56630df520040076dd14c3c54fef0785ceb Mon Sep 17 00:00:00 2001<br>
--From: Venture Research &lt;<a href=3D"mailto:tech@ventureresearch.com" tar=
-get=3D"_blank">tech@ventureresearch.com</a>&gt;<br>
--Date: Fri, 8 Feb 2013 17:39:52 -0600<br>
--Subject: [PATCH] hiredis: use default CC if it is set<br>
--MIME-Version: 1.0<br>
--Content-Type: text/plain; charset=3DUTF-8<br>
--Content-Transfer-Encoding: 8bit<br>
--<br>
--Instead of trying to automagically figure out CC, which breaks with OE<br>
--as CC has spaces in it, just skip it if one was already passed in.<br>
--<br>
--Signed-off-by: Venture Research &lt;<a href=3D"mailto:tech@ventureresearch=
-.com" target=3D"_blank">tech@ventureresearch.com</a>&gt;<br>
--<br>
--Update to work with 4.0.8<br>
--Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc=
-.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
--<br>
--Reworked for 6.0.4<br>
--Signed-off-by: Andreas M=C3=BCller &lt;<a href=3D"mailto:schnitzeltony@gma=
-il.com" target=3D"_blank">schnitzeltony@gmail.com</a>&gt;<br>
--<br>
--Reworked for 8.0.0<br>
--Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" t=
-arget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
--<br>
--Reworked for 8.1.0<br>
--Signed-off-by: Randy MacLeod &lt;<a href=3D"mailto:Randy.MacLeod@windriver=
-.com" target=3D"_blank">Randy.MacLeod@windriver.com</a>&gt;<br>
--<br>
--Upstream-Status: Inappropriate [OE-specifc]<br>
-----<br>
-- deps/hiredis/Makefile | 2 --<br>
-- 1 file changed, 2 deletions(-)<br>
--<br>
--diff --git a/deps/hiredis/Makefile b/deps/hiredis/Makefile<br>
--index 4a3de1f6e..49bb525cd 100644<br>
----- a/deps/hiredis/Makefile<br>
--+++ b/deps/hiredis/Makefile<br>
--@@ -36,8 +36,6 @@ endef<br>
-- export REDIS_TEST_CONFIG<br>
-- <br>
-- # Fallback to gcc when $CC is not in $PATH.<br>
---CC:=3D$(shell sh -c &#39;type $${CC%% *} &gt;/dev/null 2&gt;/dev/null &am=
-p;&amp; echo $(CC) || echo gcc&#39;)<br>
---CXX:=3D$(shell sh -c &#39;type $${CXX%% *} &gt;/dev/null 2&gt;/dev/null &=
-amp;&amp; echo $(CXX) || echo g++&#39;)<br>
-- OPTIMIZATION?=3D-O3<br>
-- WARNINGS=3D-Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wno=
--missing-field-initializers<br>
-- DEBUG_FLAGS?=3D -g -ggdb<br>
-diff --git a/meta-oe/recipes-extended/valkey/<a href=3D"http://valkey_8.1.4=
-.bb" rel=3D"noreferrer" target=3D"_blank">valkey_8.1.4.bb</a> b/meta-oe/rec=
-ipes-extended/valkey/<a href=3D"http://valkey_9.0.0.bb" rel=3D"noreferrer" =
-target=3D"_blank">valkey_9.0.0.bb</a><br>
-similarity index 91%<br>
-rename from meta-oe/recipes-extended/valkey/<a href=3D"http://valkey_8.1.4.=
-bb" rel=3D"noreferrer" target=3D"_blank">valkey_8.1.4.bb</a><br>
-rename to meta-oe/recipes-extended/valkey/<a href=3D"http://valkey_9.0.0.bb=
-" rel=3D"noreferrer" target=3D"_blank">valkey_9.0.0.bb</a><br>
-index 9947a9299c..82b08d7a82 100644<br>
---- a/meta-oe/recipes-extended/valkey/<a href=3D"http://valkey_8.1.4.bb" re=
-l=3D"noreferrer" target=3D"_blank">valkey_8.1.4.bb</a><br>
-+++ b/meta-oe/recipes-extended/valkey/<a href=3D"http://valkey_9.0.0.bb" re=
-l=3D"noreferrer" target=3D"_blank">valkey_9.0.0.bb</a><br>
-@@ -7,17 +7,16 @@ LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D08b915980=
-9d809e8aaa340a8387e693e&quot;<br>
-=C2=A0DEPENDS =3D &quot;readline lua ncurses&quot;<br>
-<br>
-=C2=A0SRC_URI =3D &quot; \<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/valkey-io/va=
-lkey.git;branch=3D8.1;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank=
-">github.com/valkey-io/valkey.git;branch=3D8.1;protocol=3Dhttps</a> \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/valkey-io/va=
-lkey.git;branch=3D9.0;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank=
-">github.com/valkey-io/valkey.git;branch=3D9.0;protocol=3Dhttps</a> \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://valkey.conf \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 file://init-valkey-server \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 file://valkey.service \<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0file://hiredis-use-default-CC-if-it-is-set.patc=
-h \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 file://lua-update-Makefile-to-use-environment-b=
-uild-setting.patch \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 file://oe-use-libc-malloc.patch \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-src-Do-not-reset-FINAL_LIBS.patch \=
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 file://GNU_SOURCE-7.patch \<br>
-=C2=A0&quot;<br>
--SRCREV =3D &quot;5f4bae3ea10174a7c872cc099c953b0e91afa93a&quot;<br>
-+SRCREV =3D &quot;5018b12b0de2d2322a1bbf6b041c43740587c0f2&quot;<br>
-<br>
-=C2=A0RPROVIDES:${PN} =3D &quot;virtual-redis&quot;<br>
-<br>
-@@ -41,7 +40,7 @@ PACKAGECONFIG[systemd] =3D &quot;USE_SYSTEMD=3Dyes,USE_SY=
-STEMD=3Dno,systemd&quot;<br>
-=C2=A0EXTRA_OEMAKE +=3D &quot;${PACKAGECONFIG_CONFARGS}&quot;<br>
-<br>
-=C2=A0do_compile() {<br>
--=C2=A0 =C2=A0 oe_runmake -C deps hiredis lua linenoise<br>
-+=C2=A0 =C2=A0 oe_runmake -C deps libvalkey lua linenoise<br>
-=C2=A0 =C2=A0 =C2=A0oe_runmake<br>
-=C2=A0}<br>
-<br>
--- <br>
-2.47.3<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#122005): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/122005" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/122005</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116448996/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/116448996/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
+diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2025-8114.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8114.patch
+new file mode 100644
+index 0000000000..27d53a012d
+--- /dev/null
++++ b/meta-oe/recipes-support/libssh/libssh/CVE-2025-8114.patch
+@@ -0,0 +1,52 @@
++From b67ac7d9d2dd0dfb834cc657841c32f085661a84 Mon Sep 17 00:00:00 2001
++From: Jackson James <jacksonj2@kpit.com>
++Date: Wed, 19 Nov 2025 15:29:41 +0530
++Subject: [PATCH] CVE-2025-8114: Fix NULL pointer dereference after allocation
++failure
++
++Fix was available for this CVE in kex.c, but version 0.8.9 have the vulnerable
++code resides in dh.c.
++
++CVE: CVE-2025-8114
++Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=53ac23ded4cb]
++Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
++
++Comment: Patch is refreshed as per codebase of 0.8.9
++Signed-off-by: Jackson James <jacksonj2@kpit.com>
++---
++ src/dh.c | 5 ++++-
++ 1 file changed, 4 insertions(+), 1 deletion(-)
++
++diff --git a/src/dh.c b/src/dh.c
++index 33883f2..607db15 100644
++--- a/src/dh.c
+++++ b/src/dh.c
++@@ -872,7 +872,8 @@ int ssh_make_sessionid(ssh_session session) {
++ #ifdef DEBUG_CRYPTO
++     ssh_print_hexa("hash buffer", ssh_buffer_get(buf), ssh_buffer_get_len(buf));
++ #endif
++-
+++    /* Set rc for the following switch statement in case we goto error. */
+++    rc = SSH_ERROR;
++     switch (session->next_crypto->kex_type) {
++     case SSH_KEX_DH_GROUP1_SHA1:
++     case SSH_KEX_DH_GROUP14_SHA1:
++@@ -925,6 +926,7 @@ int ssh_make_sessionid(ssh_session session) {
++                session->next_crypto->secret_hash);
++         break;
++     }
+++
++     /* During the first kex, secret hash and session ID are equal. However, after
++      * a key re-exchange, a new secret hash is calculated. This hash will not replace
++      * but complement existing session id.
++@@ -933,6 +935,7 @@ int ssh_make_sessionid(ssh_session session) {
++         session->next_crypto->session_id = malloc(session->next_crypto->digest_len);
++         if (session->next_crypto->session_id == NULL) {
++             ssh_set_error_oom(session);
+++            rc = SSH_ERROR;
++             goto error;
++         }
++         memcpy(session->next_crypto->session_id, session->next_crypto->secret_hash,
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
+index 891b2c38ac..3781b501cd 100644
+--- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
++++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
+@@ -27,6 +27,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
+            file://CVE-2025-8277-1.patch \
+            file://CVE-2025-8277-2.patch \
+            file://CVE-2025-8277-3.patch \
++           file://CVE-2025-8114.patch \
+           "
+ SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
+ 
+-- 
+2.34.1
 
---000000000000ea3e2b064464fb47--
 
