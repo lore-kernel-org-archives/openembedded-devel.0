@@ -1,116 +1,323 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D808D10399
-	for <webhook@archiver.kernel.org>; Wed, 26 Nov 2025 08:58:34 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9254.1764147506617925146
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9D84D10F20
+	for <webhook@archiver.kernel.org>; Wed, 26 Nov 2025 10:19:14 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10313.1764152342228134398
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Nov 2025 00:58:26 -0800
+ Wed, 26 Nov 2025 02:19:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=N/8C7CN0;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-42b3c965cc4so286804f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 00:58:26 -0800 (PST)
+ dkim=pass header.i=@smile.fr header.s=google header.b=uG/cNoLG;
+ spf=pass (domain: smile.fr, ip: 209.85.221.53, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-42b566859ecso5713168f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 02:19:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764147505; x=1764752305; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=h2zqDwzKe83W4LMqVaFoK0FDctbjFnxr2O/CITDJ0mo=;
-        b=N/8C7CN04zy+vLbWtWg+6fYyoWb16mkmYDi0QbTtpFP4kYSE/xCBoJFzDtCiSPmIoh
-         a83jHyma/G3T//FMwVcygaD8b6Eg/9UKXQnsnNMCdHxsKNJW+2MyDJGMoq18RAll23uF
-         azVy2UMuo786V3gQ9ezDPkDvW+HCKI9Kw+oShGQ57WEQAlf3sWBpen7JQwffBJkYgCHf
-         xxCifUAf4UIFU+hQyPXbSMdQooAOoqveOS2uXag6olmSoI/t3myM+tWcRJ+T7dEzsIUC
-         NrnBi2HMk1y6kMk/zoYelX29rcJQ280XRoPkWsuM4VKDCkSUjp1SchRKkH4A0uaVyLed
-         EFzQ==
+        d=smile.fr; s=google; t=1764152340; x=1764757140; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=nJPwDz6gxckQw+Xd4juDkytrMLAwinf5eGIZp2ipLwE=;
+        b=uG/cNoLGwMbegrA6XJLu9We6tXO997NOswnhjJmCuBgPQqG5IS26w2AScf21DPA0rl
+         1fmnLcP6pp3jL6Tdqsj0kkmPNsDSFR0/KkUKzkc/fKMrqWFtCPaFaxM8kIE+qb2kV5QH
+         YWn1VMm5410iD+/UUcN82OdSRF27qzb3D00wg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764147505; x=1764752305;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=h2zqDwzKe83W4LMqVaFoK0FDctbjFnxr2O/CITDJ0mo=;
-        b=SRTRQudDVTbL2i4+eB/T+k+oMFg2sZQxROENsUZHGtkIAe4St8CWZhvmuYsz981V8v
-         zNW6kPd6s8sBXW4qkqEkNO+1RrCn/VwpdH/IDXtKHz7etGl8DJoeFpJdyeIR3fM5dgr9
-         aWIwX8KNodsGLmFacVK9bqKmicZEBIi2UvKkwImL8SukXz/jOYOy22sMql8dfpp+/Hyc
-         h5Zz9FC7bePibJRVLT3Je81J7wvfLwBDvMFCLhNBv59WDuen6I//e4jlFjvwGRa/yznZ
-         zO38mpFjFay/eYBIsW9lZn1lYb2jBIvrDmBEmI9dAovojmfN6yaeRWymrqc7H8hzvayK
-         yqvg==
-X-Gm-Message-State: AOJu0YwUB0wN5FFYiiLVkkb5IPY2JM6KjRTC0kvQ+3Ik1R/I/geC3RZE
-	PDIzXL3w8LdStfkMUoKEn7IUlyctrbDT0UaBvs82Cgbf4KFaVBPvghr4pXXo3g==
-X-Gm-Gg: ASbGncv9vMY6Q0n0MFoWaDdFakiXq3d3rQqo/TWn1GzQZZbaqt0/uBjWUQ8JCJn9Nht
-	on6504HsLimSZLQq5Fa5B0L29DMPlZD3dZ68/3iWzUwUF2r6gedvTLCVSBpyRYfZ2eAsY1XqVip
-	r7DgvJt+p15h8ywwAln05mJF1f6CTqzI+/uOy7mWQmnUSodPLa3aFjztDyNRRH1XWCFq/Vi+2cO
-	n8qlr+U49T085JuKWjJFislRBt5jLGeOVk7OTBL62we0dpVY2WfpKPqtcIf16awZ4XgR7ZiNb1J
-	67EznyErTrHwAW66qgPZRbwF3eSSJrgRjW22wkwnbD0OrAAhLgA8sCAHWlo2EQQjpMDmXk+nJOA
-	8c9NMFuLHl6W3B8C6rBuYIFpUsYico1OC16pdpoqWl07LoDxJX4bzvlfz/sPi/nJ5IjUOGlm4P9
-	OHtaoRiSsH
-X-Google-Smtp-Source: AGHT+IHH5wLrHMK76zXh6zIlbSVBso2Gpyz0lIzowpxkWTuogLI+Y/qkc44qeMTsCfJoiYT97D0h5w==
-X-Received: by 2002:a05:6000:438a:b0:42b:3746:3b67 with SMTP id ffacd0b85a97d-42cba7c4d0dmr25844376f8f.25.1764147504883;
-        Wed, 26 Nov 2025 00:58:24 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42cbd764dbesm35919817f8f.27.2025.11.26.00.58.24
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Nov 2025 00:58:24 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2] xorgxrdp: upgrade 0.9.19 -> 0.10.4
-Date: Wed, 26 Nov 2025 09:58:23 +0100
-Message-ID: <20251126085823.73442-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
+        d=1e100.net; s=20230601; t=1764152340; x=1764757140;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=nJPwDz6gxckQw+Xd4juDkytrMLAwinf5eGIZp2ipLwE=;
+        b=L4aqyqZIRHwkwf6E9oZhBC3wImbNRB7RCuTA9+Vgo9nl2gNEwjpoQVhQ8i0YoaFmhd
+         4VhO6HWcTP4ZDH+mxDF6VTRf0Y+O/4dhCNTQ4JcjijCZrUq//2t5HQ4wA3wnB7ntaukQ
+         QhvbnY8PXVsYm+VSYRh7KIMFDfQaJ2K8jdb/ZylUE6g2NT2DInjUCHxcvsVTAyiC6wVY
+         BqBxt1w5ScE2Kt4k9tyQ0iEGFLrxEnuuVeuZfhvhN9FaG8jF79lgVBDvgJ8D6nC3E2Bj
+         1Zj6zdcOt45mykgIM8nJYdWQ7wuX0AN9+QBXdxUV1BoIssXC4WmF4yBkOsnC8g55TnOx
+         ZKcg==
+X-Gm-Message-State: AOJu0Yxa1vTjbeQ2tdXIEbaXMBHcJinNCnGEBWCq/GL7RVWr1Q7/kjlN
+	3lmRnd+3Oot8P6dHvs7rgVIinuRGkGgz7qutmee1nAM6DsvkGJFL2CUeMCu1Ev+TClJEDcYuJsl
+	1oxtL2kX3sLE5FT302xeHUw/gn2GLk0WYe7NNrWPzxQ==
+X-Gm-Gg: ASbGnctjoVHZKYjTL31/Fb5T0cDzF8Duuf4+kfTyeCjZGRpn9Ua7nOsCLE8RTq7Xj51
+	R7e0XDxUq2of56ILx89GkHVoKcK1Hl4lZOYI9+7ZTyr15e85Q/1qe1adznWeI+YEkCtiMGEFmNH
+	KEl4rqmt5OK3EDe9lGqmHW31xaNWZe/t8iGBOAfWdNvN+WOWW7VnhUQfQM3i0ByDvki5aR/jfEZ
+	Lha2qEhgtVz5TYt9+TOD1c72B9WotP9ZrAbLUTiT2AAfbbvEZ7a6aeWsUGgQDF/TBiggheLOA==
+X-Google-Smtp-Source: AGHT+IHAK1lcyF2MfD8tbQj3YK9/LViw3Px6pulnc3CFaO2h68paioAb3ymhBs0zl6RgA6nT8EfIdvDF4ZvpGBTkH1g=
+X-Received: by 2002:a05:6000:4028:b0:42b:3366:632a with SMTP id
+ ffacd0b85a97d-42e0f355caamr6067778f8f.39.1764152340336; Wed, 26 Nov 2025
+ 02:19:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251124115258.3337453-1-leon.anavi@konsulko.com> <20251124115258.3337453-2-leon.anavi@konsulko.com>
+In-Reply-To: <20251124115258.3337453-2-leon.anavi@konsulko.com>
+From: Yoann Congal <yoann.congal@smile.fr>
+Date: Wed, 26 Nov 2025 11:18:33 +0100
+X-Gm-Features: AWmQ_bn9mLgWauwjYPEnoEYXCS7NR6v-ZKB6aY8I3VSq-D-f8mmkhrUFXb9TgCg
+Message-ID: <CAMSfU+70YVWOWjQBVZyoK8QXvekbJ52WoF5A9Q8jBwyijauCVw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 2/2] python3-pikepdf: Add recipe
+To: leon.anavi@konsulko.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000093631b06447cb9ee"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 08:58:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122076
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 10:19:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122077
 
-Changelog:
-0.10.4: https://github.com/neutrinolabs/xorgxrdp/releases/tag/v0.10.4
-0.10.3: https://github.com/neutrinolabs/xorgxrdp/releases/tag/v0.10.3
-0.10.2: https://github.com/neutrinolabs/xorgxrdp/releases/tag/v0.10.2
-0.10.1: https://github.com/neutrinolabs/xorgxrdp/releases/tag/v0.10.1
-0.10.0: https://github.com/neutrinolabs/xorgxrdp/releases/tag/v0.10.0
+--00000000000093631b06447cb9ee
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
+Le lun. 24 nov. 2025 =C3=A0 12:53, Leon Anavi via lists.openembedded.org
+<leon.anavi=3Dkonsulko.com@lists.openembedded.org> a =C3=A9crit :
 
-v2: removed duplicated entry from the staticdev package file list
+> Add recipe for v10.0.2:
+>
+> - Fixed presentation of strings using unparse_content_stream -
+>   if the stream can be represented using PdfDocEncoding, it is
+>   rendered in that way for ease of reading.
+> - Reformatted C++ source.
+>
+> This work was sponsored by GOVCERT.LU.
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>  .../python/python3-pikepdf_10.0.2.bb          | 22 +++++++++++++++++++
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python3-pikepdf_10.0.2.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-pikepdf_10.0.2.b=
+b
+> b/meta-python/recipes-devtools/python/python3-pikepdf_10.0.2.bb
+> new file mode 100644
+> index 0000000000..4821e273d8
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pikepdf_10.0.2.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY =3D "Read and write PDFs with Python, powered by qpdf"
+> +HOMEPAGE =3D "https://github.com/pikepdf/pikepdf"
+> +LICENSE =3D "MPL-2.0"
+> +LIC_FILES_CHKSUM =3D
+> "file://LICENSE.txt;md5=3D9741c346eef56131163e13b9db1241b3"
+> +
+> +SRC_URI[sha256sum] =3D
+> "7c85a2526253e35575edb2e28cdc740d004be4b7c5fda954f0e721ee1c423a52"
+> +
+> +inherit pypi python_setuptools_build_meta
+> +
+> +PYPI_PACKAGE =3D "pikepdf"
+> +
+> +DEPENDS +=3D " \
+> +       python3-pybind11-native \
+> +       qpdf \
+> +"
+> +
+> +RDEPENDS:${PN} +=3D " \
+> +       python3-pillow \
+> +       python3-lxml \
+> +"
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+>
 
- .../{xorgxrdp_0.9.19.bb => xorgxrdp_0.10.4.bb}      | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-support/xorg-xrdp/{xorgxrdp_0.9.19.bb => xorgxrdp_0.10.4.bb} (65%)
+That creates warnings in CI:
 
-diff --git a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.9.19.bb b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.10.4.bb
-similarity index 65%
-rename from meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.9.19.bb
-rename to meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.10.4.bb
-index 533b0801cb..f111c4eed9 100644
---- a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.9.19.bb
-+++ b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.10.4.bb
-@@ -10,14 +10,17 @@ DEPENDS = "virtual/libx11 xserver-xorg xrdp nasm-native"
- inherit features_check
- REQUIRED_DISTRO_FEATURES = "x11 pam"
- 
--SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git;branch=v0.9;protocol=https"
--
--SRCREV = "d463bad9639c910fadc2f30dac473c7688b11cfc"
--
--PV = "0.9.19"
-+SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git;branch=v0.10;protocol=https;tag=v${PV}"
- 
-+SRCREV = "2b1f913f4aa6b88d63d9ce9302c61cb0e39483f6"
- 
- FILES:${PN} += "${libdir}/xorg/modules/*"
-+FILES:${PN}-staticdev += " \
-+    ${libdir}/xorg/modules/libxorgxrdp.a \
-+    ${libdir}/xorg/modules/drivers/xrdpdev_drv.a \
-+    ${libdir}/xorg/modules/input/xrdpmouse_drv.a \
-+    ${libdir}/xorg/modules/input/xrdpkeyb_drv.a \
-+    "
- 
- require recipes-graphics/xorg-xserver/xserver-abi.inc
- 
+stdio: WARNING: Nothing PROVIDES 'nativesdk-qpdf' (but
+virtual:nativesdk:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-ope=
+nembedded/meta-python/recipes-devtools/python/python3-pikepdf_10.0.2.bb
+DEPENDS on or otherwise requires it). Close matches:
+stdio: WARNING: Nothing PROVIDES 'qpdf-native' (but
+virtual:native:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openem=
+bedded/meta-python/recipes-devtools/python/python3-pikepdf_10.0.2.bb
+DEPENDS on or otherwise requires it). Close matches:
+stdio: WARNING: Nothing RPROVIDES 'nativesdk-python3-pillow' (but
+virtual:nativesdk:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-ope=
+nembedded/meta-python/recipes-devtools/python/python3-pikepdf_10.0.2.bb
+RDEPENDS on or otherwise requires it)
+stdio: WARNING: Nothing RPROVIDES 'nativesdk-python3-pikepdf' (but
+virtual:nativesdk:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-ope=
+nembedded/meta-python/recipes-devtools/python/python3-pikepdf_10.0.2.bb
+RDEPENDS on or otherwise requires it)
+stdio: WARNING: Nothing RPROVIDES 'nativesdk-python3-pikepdf-dev' (but
+virtual:nativesdk:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-ope=
+nembedded/meta-python/recipes-devtools/python/python3-pikepdf_10.0.2.bb
+RDEPENDS on or otherwise requires it)
+stdio: WARNING: Nothing RPROVIDES 'python3-pikepdf-native' (but
+virtual:native:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openem=
+bedded/meta-python/recipes-devtools/python/python3-pikepdf_10.0.2.bb
+RDEPENDS on or otherwise requires it)
+stdio: WARNING: Nothing RPROVIDES 'python3-pikepdf-dev-native' (but
+virtual:native:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openem=
+bedded/meta-python/recipes-devtools/python/python3-pikepdf_10.0.2.bb
+RDEPENDS on or otherwise requires it)
+
+From
+https://autobuilder.yoctoproject.org/valkyrie/?#/builders/82/builds/526/ste=
+ps/13/logs/stdio
+
+Leon, can you look into it? (I guess some dependencies lack their
+BBCLASSEXTEND)
+
+Regards,
+
+> --
+> 2.47.3
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#122008):
+> https://lists.openembedded.org/g/openembedded-devel/message/122008
+> Mute This Topic: https://lists.openembedded.org/mt/116449994/4316185
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> yoann.congal@smile.fr]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--=20
+Yoann Congal
+Smile ECS
+
+--00000000000093631b06447cb9ee
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Le=C2=A0lun. 24 nov. 2025 =C3=A0=C2=A012:=
+53, Leon Anavi via <a href=3D"http://lists.openembedded.org">lists.openembe=
+dded.org</a> &lt;leon.anavi=3D<a href=3D"mailto:konsulko.com@lists.openembe=
+dded.org">konsulko.com@lists.openembedded.org</a>&gt; a =C3=A9crit=C2=A0:</=
+div><div class=3D"gmail_quote gmail_quote_container"><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">Add recipe for v10.0.2:<br>
+<br>
+- Fixed presentation of strings using unparse_content_stream -<br>
+=C2=A0 if the stream can be represented using PdfDocEncoding, it is<br>
+=C2=A0 rendered in that way for ease of reading.<br>
+- Reformatted C++ source.<br>
+<br>
+This work was sponsored by <a href=3D"http://GOVCERT.LU" rel=3D"noreferrer"=
+ target=3D"_blank">GOVCERT.LU</a>.<br>
+<br>
+Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" ta=
+rget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
+---<br>
+=C2=A0.../python/<a href=3D"http://python3-pikepdf_10.0.2.bb" rel=3D"norefe=
+rrer" target=3D"_blank">python3-pikepdf_10.0.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 | 22 +++++++++++++++++++<br>
+=C2=A01 file changed, 22 insertions(+)<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
+p://python3-pikepdf_10.0.2.bb" rel=3D"noreferrer" target=3D"_blank">python3=
+-pikepdf_10.0.2.bb</a><br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+pikepdf_10.0.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-pikepdf_10.=
+0.2.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+pikepdf_10.0.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-pikepdf_10.=
+0.2.bb</a><br>
+new file mode 100644<br>
+index 0000000000..4821e273d8<br>
+--- /dev/null<br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-pikepdf=
+_10.0.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-pikepdf_10.0.2.bb<=
+/a><br>
+@@ -0,0 +1,22 @@<br>
++SUMMARY =3D &quot;Read and write PDFs with Python, powered by qpdf&quot;<b=
+r>
++HOMEPAGE =3D &quot;<a href=3D"https://github.com/pikepdf/pikepdf" rel=3D"n=
+oreferrer" target=3D"_blank">https://github.com/pikepdf/pikepdf</a>&quot;<b=
+r>
++LICENSE =3D &quot;MPL-2.0&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE.txt;md5=3D9741c346eef56131163e13=
+b9db1241b3&quot;<br>
++<br>
++SRC_URI[sha256sum] =3D &quot;7c85a2526253e35575edb2e28cdc740d004be4b7c5fda=
+954f0e721ee1c423a52&quot;<br>
++<br>
++inherit pypi python_setuptools_build_meta<br>
++<br>
++PYPI_PACKAGE =3D &quot;pikepdf&quot;<br>
++<br>
++DEPENDS +=3D &quot; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0python3-pybind11-native \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0qpdf \<br>
++&quot;<br>
++<br>
++RDEPENDS:${PN} +=3D &quot; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0python3-pillow \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0python3-lxml \<br>
++&quot;<br>
++<br>
++BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br></blockquote><div><br></=
+div><div>That creates warnings in CI:</div><div><div><pre class=3D"gmail-bb=
+-log-preview-contents gmail-select-content gmail-log"><div class=3D"gmail-l=
+ogline"><span class=3D"gmail-log_o"><span>stdio: WARNING: Nothing PROVIDES =
+&#39;nativesdk-qpdf&#39; (but virtual:nativesdk:/srv/pokybuild/yocto-worker=
+/meta-oe-mirror/build/meta-openembedded/meta-python/recipes-devtools/python=
+/<a href=3D"http://python3-pikepdf_10.0.2.bb">python3-pikepdf_10.0.2.bb</a>=
+ DEPENDS on or otherwise requires it). Close matches:</span></span></div><d=
+iv class=3D"gmail-logline"><span class=3D"gmail-log_o"><span>stdio: WARNING=
+: Nothing PROVIDES &#39;qpdf-native&#39; (but virtual:native:/srv/pokybuild=
+/yocto-worker/meta-oe-mirror/build/meta-openembedded/meta-python/recipes-de=
+vtools/python/<a href=3D"http://python3-pikepdf_10.0.2.bb">python3-pikepdf_=
+10.0.2.bb</a> DEPENDS on or otherwise requires it). Close matches:</span></=
+span></div><div class=3D"gmail-logline"><span class=3D"gmail-log_o"><span>s=
+tdio: WARNING: Nothing RPROVIDES &#39;nativesdk-python3-pillow&#39; (but vi=
+rtual:nativesdk:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-opene=
+mbedded/meta-python/recipes-devtools/python/<a href=3D"http://python3-pikep=
+df_10.0.2.bb">python3-pikepdf_10.0.2.bb</a> RDEPENDS on or otherwise requir=
+es it)</span></span></div><div class=3D"gmail-logline"><span class=3D"gmail=
+-log_o"><span>stdio: WARNING: Nothing RPROVIDES &#39;nativesdk-python3-pike=
+pdf&#39; (but virtual:nativesdk:/srv/pokybuild/yocto-worker/meta-oe-mirror/=
+build/meta-openembedded/meta-python/recipes-devtools/python/<a href=3D"http=
+://python3-pikepdf_10.0.2.bb">python3-pikepdf_10.0.2.bb</a> RDEPENDS on or =
+otherwise requires it)</span></span></div><div class=3D"gmail-logline"><spa=
+n class=3D"gmail-log_o"><span>stdio: WARNING: Nothing RPROVIDES &#39;native=
+sdk-python3-pikepdf-dev&#39; (but virtual:nativesdk:/srv/pokybuild/yocto-wo=
+rker/meta-oe-mirror/build/meta-openembedded/meta-python/recipes-devtools/py=
+thon/<a href=3D"http://python3-pikepdf_10.0.2.bb">python3-pikepdf_10.0.2.bb=
+</a> RDEPENDS on or otherwise requires it)</span></span></div><div class=3D=
+"gmail-logline"><span class=3D"gmail-log_o"><span>stdio: WARNING: Nothing R=
+PROVIDES &#39;python3-pikepdf-native&#39; (but virtual:native:/srv/pokybuil=
+d/yocto-worker/meta-oe-mirror/build/meta-openembedded/meta-python/recipes-d=
+evtools/python/<a href=3D"http://python3-pikepdf_10.0.2.bb">python3-pikepdf=
+_10.0.2.bb</a> RDEPENDS on or otherwise requires it)</span></span></div><di=
+v class=3D"gmail-logline"><span class=3D"gmail-log_o"><span>stdio: WARNING:=
+ Nothing RPROVIDES &#39;python3-pikepdf-dev-native&#39; (but virtual:native=
+:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openembedded/meta-py=
+thon/recipes-devtools/python/<a href=3D"http://python3-pikepdf_10.0.2.bb">p=
+ython3-pikepdf_10.0.2.bb</a> RDEPENDS on or otherwise requires it)</span></=
+span></div></pre></div></div><div>From <a href=3D"https://autobuilder.yocto=
+project.org/valkyrie/?#/builders/82/builds/526/steps/13/logs/stdio">https:/=
+/autobuilder.yoctoproject.org/valkyrie/?#/builders/82/builds/526/steps/13/l=
+ogs/stdio</a></div><div><br></div><div>Leon, can you look into it? (I guess=
+ some dependencies lack their BBCLASSEXTEND)</div><div><br></div><div>Regar=
+ds,</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+-- <br>
+2.47.3<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#122008): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/122008" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/122008</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116449994/431=
+6185" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/116449994/4316185</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:yoann.congal@smile.fr" t=
+arget=3D"_blank">yoann.congal@smile.fr</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div><div><br clear=3D"all"></div><br><span class=3D"gmail_si=
+gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
+iv dir=3D"ltr"><font face=3D"Raleway, regular">Yoann Congal</font><div><fon=
+t face=3D"Raleway, regular">Smile ECS</font></div></div></div></div>
+
+--00000000000093631b06447cb9ee--
 
