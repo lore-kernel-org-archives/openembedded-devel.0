@@ -1,200 +1,189 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A256D10386
-	for <webhook@archiver.kernel.org>; Wed, 26 Nov 2025 07:10:13 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8055.1764141008135041045
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5C92D10387
+	for <webhook@archiver.kernel.org>; Wed, 26 Nov 2025 07:16:43 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8281.1764141399126579386
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 25 Nov 2025 23:10:08 -0800
+ Tue, 25 Nov 2025 23:16:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=PWhPHERD;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1764141008; x=1795677008;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=8/hlRMjaKHMCN9PD1ITGkt5nPtS2UZeR5LQE5WvuWwI=;
-  b=PWhPHERDhI+8nEevLR4/CxbEUNBYgwVpsYveBgeqxttqrbbrcrLahnfT
-   x0A0Gzg8b6oc/xcosY9oOgMF+PzVimekQQi8x3KPsHnX+SFkqFwKO8kvc
-   86gxRncImGOzQ7KXuBt+vqJUbauityxdbRg2afvWMkmD88Dsz1Kj9ha5R
-   47GHiylmBBBfHjxvrVoj9s9+bXCEnSDi2/SkG6jX6nvxTqH4UVggdnJpE
-   Wv420icYm33RKcKhfDRZ5eNm0MlqVlcqPrV2Er2r4tkXt8XsUV2xqwKTt
-   G2ebckYNsixKZPG9RpDkBrh7Z26xZ2Y9KH8t/K33cNPRGctuCAuXrq8rx
-   w==;
-X-CSE-ConnectionGUID: KZIHbj1MSra/Uwi4sbSQsw==
-X-CSE-MsgGUID: almuX5T7TP2nbK44BzVoiQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11624"; a="224279906"
-X-IronPort-AV: E=Sophos;i="6.20,227,1758553200"; 
-   d="scan'208";a="224279906"
-Received: from unknown (HELO az2uksmgr2.o.css.fujitsu.com) ([52.151.125.128])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Nov 2025 16:10:06 +0900
-Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgr2.o.css.fujitsu.com (Postfix) with ESMTPS id 6B2B5820701
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 07:10:06 +0000 (UTC)
-Received: from az2uksmom2.o.css.fujitsu.com (az2uksmom2.o.css.fujitsu.com [10.151.22.203])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 29BB28D2068
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 07:10:06 +0000 (UTC)
-Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
-	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTP id 2E2F51403DC3
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 07:10:03 +0000 (UTC)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-perl][PATCH] rasdaemon: upgrade 0.8.3 -> 0.8.4
-Date: Wed, 26 Nov 2025 15:09:59 +0800
-Message-ID: <20251126070959.4885-1-liuyd.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@konsulko.com header.s=google header.b=C3uEjpLM;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.48, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-b76b5afdf04so387010466b.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 25 Nov 2025 23:16:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1764141397; x=1764746197; darn=lists.openembedded.org;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=6CSjcXMt0yJyh4wj3W46SJLpWxumEyDcuyUVlgnpu4c=;
+        b=C3uEjpLMwSg+D0pJbl0H9fOXCwNsp7TTgPtMRCUqvh/MPlevv/9apg5Qdr/HMhwuNy
+         u0eLfBgeBEpV296Bp8TpHhp1MMLUQNv5+jqEC2BKprBmYxWfpW6DFrFcDSPMgSUPUU5T
+         F+yOocUbUZTZCL4k8dSO3hjJxLTUppE8+SJZA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764141397; x=1764746197;
+        h=in-reply-to:from:content-language:references:cc:to:subject
+         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=6CSjcXMt0yJyh4wj3W46SJLpWxumEyDcuyUVlgnpu4c=;
+        b=Z5pHuaoZjOzL2cdVUZcgZi5szOqK/+4svtEXDNfU0FX8Cio5gcCsDz0zKhz2hKAswN
+         5pN0pn3eVAVZxLAxrTqILl0RwPMG82njjHBmbjrPKnDYMbjCjpxiWf/eBCW7ArHfxnsI
+         vqNrA3gWY6aa92mbgmytDfpZeHioHKzb/zW8lT0WCoh9xgNe/d5UWeiG34dVwhiqpC4M
+         EeTmUSTbzPpX3kQWpp4/S+2nz4cjOlur79M9h/2lHfF2TIb7clo+9yyoZRmBYbOe6n7p
+         j3G8eIgul/7aNN4wdOxWnOYRNF3C4rNb1Y1jDsGFuXmafJ25wbFNZqmSAJ+skRraRMue
+         n2hQ==
+X-Gm-Message-State: AOJu0YzoKurQQWgvkDIi2W+7sAYwFgy3jW/XRqnUVdV5Fz38xd3Y0Z5j
+	Ulu0D67LTO3W4YSBhGHqacI3iXAredjemqM6e4Qkt/v+3yH2j28xSNyb1+Y+nkLq/fg=
+X-Gm-Gg: ASbGncsb1ZeApMxJ7x3tD2MoHmZ3/mBdg8o+MwX2zmOfkbHep3cXT6KRfcrYMz1CMJY
+	TpuT0iV87v9e3alfyjUMQ6eYpFgA9kJ3YF7nd2oe8TyCxK8ggmr3hp+RbZjMLttpVHMBSlD/ozD
+	fwc9NLRPCzZmziTWSPWt+DK9nDdxsB7rchkmQ+G85U42PC0tIdDcVVr+dcI5yJUCArlAgXQpahz
+	VCQLlyg+aM0EBL77GxgJZYDpplsn5e5Fl6svZz3sTZPgKMNFKMd7J70H79qCoFcMtMIReaqkCiw
+	6qBwVtZALqne59dOesmbe8LLyqfAIRDks5JPZhBNgF5R5itFRnUJ/GNkXbP6FlexlIPBIMlAu5o
+	kJOHBE8G3X0I2Ne/oVbemcOvKH2v8ue51Perx7R2PWtjTYYWJJ3/TvZKXeKNVSXZxzGwpCfBrZI
+	/h5t66wiyvnFj5Dr40FQ==
+X-Google-Smtp-Source: AGHT+IHn4U7OJ4AuUkV1mpfF8I0po8l12DQsZQazDOqAUyZro9u1nVR6xmLZLiobtCksT7NDFJWO7A==
+X-Received: by 2002:a17:907:94c3:b0:b73:2b08:ac70 with SMTP id a640c23a62f3a-b76718cfdf2mr2015004266b.49.1764141397216;
+        Tue, 25 Nov 2025 23:16:37 -0800 (PST)
+Received: from [192.168.5.161] ([46.55.231.62])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b7654d50328sm1828683366b.20.2025.11.25.23.16.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 25 Nov 2025 23:16:36 -0800 (PST)
+Content-Type: multipart/alternative;
+ boundary="------------79dvIwnn1p71SIpZy3KHKPu8"
+Message-ID: <5bc930f8-8671-4d00-a342-a2dcf436955e@konsulko.com>
+Date: Wed, 26 Nov 2025 09:16:36 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] valkey: Upgrade 8.1.4 -> 9.0.0
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20251124092909.3234487-1-leon.anavi@konsulko.com>
+ <CAMKF1sqOhnb6t9O1HPnYAFpt5JWQ-XbkKzMgGfGX65_LZ+zHoQ@mail.gmail.com>
+ <9e1752f6-85af-4c4f-a215-57b75a3c9449@konsulko.com>
+ <CAMKF1sqwitQj1H_CNMLFwENmpR4Q22Ly2kULaRSoVTzsuL9Vyg@mail.gmail.com>
+Content-Language: en-US
+From: Leon Anavi <leon.anavi@konsulko.com>
+In-Reply-To: <CAMKF1sqwitQj1H_CNMLFwENmpR4Q22Ly2kULaRSoVTzsuL9Vyg@mail.gmail.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 07:10:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122071
+ <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 07:16:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122072
 
-1.Changelog:
-https://github.com/mchehab/rasdaemon/commit/5a1efb8f324498df8cbaaa5adff0e9db96f648a9
+This is a multi-part message in MIME format.
+--------------79dvIwnn1p71SIpZy3KHKPu8
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-2.Remove 0001-rasdaemon-fix-post-processing-options.patch as it was merged upstream.
+Hi Khem,
 
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
----
- ...asdaemon-fix-post-processing-options.patch | 83 -------------------
- ...{rasdaemon_0.8.3.bb => rasdaemon_0.8.4.bb} |  7 +-
- 2 files changed, 3 insertions(+), 87 deletions(-)
- delete mode 100644 meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-rasdaemon-fix-post-processing-options.patch
- rename meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/{rasdaemon_0.8.3.bb => rasdaemon_0.8.4.bb} (93%)
+On 11/25/25 18:44, Khem Raj wrote:
+>
+>
+> On Tue, Nov 25, 2025 at 1:30 AM Leon Anavi <leon.anavi@konsulko.com> 
+> wrote:
+>
+>     Hi Khem,
+>
+>     On 11/25/25 07:59, Khem Raj wrote:
+>     > Fails on qemuarm -
+>     https://errors.yoctoproject.org/Errors/Details/889836/
+>
+>     Thank you for informing me.  I was able to reproduce the issue
+>     locally,
+>     submitted an updated version of the patch and opened a GitHub pull
+>     request with the fix for valkey's upstream:
+>     https://github.com/valkey-io/valkey/pull/2873
+>
+>
+> Thanks for looking into this, the patch limits it to armv8 but there 
+> are armv7 with neon in ABI
+> as well, I think it will need to take that into account.
 
-diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-rasdaemon-fix-post-processing-options.patch b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-rasdaemon-fix-post-processing-options.patch
-deleted file mode 100644
-index d999f288dc..0000000000
---- a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/files/0001-rasdaemon-fix-post-processing-options.patch
-+++ /dev/null
-@@ -1,83 +0,0 @@
--From 64bc04705ea8606eed1b1e810904cc8296e99472 Mon Sep 17 00:00:00 2001
--From: Yi Zhao <yi.zhao@windriver.com>
--Date: Sat, 2 Aug 2025 15:43:11 +0800
--Subject: [PATCH] rasdaemon: fix post-processing options
--
--Some post-processing options require an argument, otherwise a segfault
--will occur:
--
--root@qemux86-64:~# rasdaemon  -p --status --ipid
--Segmentation fault    (core dumped) rasdaemon -p --status --ipid
--
--According to the specification of argp, when an option requires an
--argument, we should use the 'arg' parameter, which points to the
--argument string for that option. Therefore we set char* arg for these
--options in struct argp_option and use it in parse_opt_offline function
--instead of state->argv[state->next].
--
--Fix #220
--
--Upstream-Status: Backport
--[https://github.com/mchehab/rasdaemon/commit/64bc04705ea8606eed1b1e810904cc8296e99472]
--
--Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
--Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-----
-- rasdaemon.c | 24 ++++++++++++------------
-- 1 file changed, 12 insertions(+), 12 deletions(-)
--
--diff --git a/rasdaemon.c b/rasdaemon.c
--index be5c390..9368b12 100644
----- a/rasdaemon.c
--+++ b/rasdaemon.c
--@@ -98,22 +98,22 @@ static error_t parse_opt_offline(int key, char *arg,
-- 		event.smca = true;
-- 		break;
-- 	case MODEL:
---		event.model = strtoul(state->argv[state->next], NULL, 0);
--+		event.model = strtoul(arg, NULL, 0);
-- 		break;
-- 	case FAMILY:
---		event.family = strtoul(state->argv[state->next], NULL, 0);
--+		event.family = strtoul(arg, NULL, 0);
-- 		break;
-- 	case BANK_NUM:
---		event.bank = atoi(state->argv[state->next]);
--+		event.bank = atoi(arg);
-- 		break;
-- 	case IPID_REG:
---		event.ipid = strtoull(state->argv[state->next], NULL, 0);
--+		event.ipid = strtoull(arg, NULL, 0);
-- 		break;
-- 	case STATUS_REG:
---		event.status = strtoull(state->argv[state->next], NULL, 0);
--+		event.status = strtoull(arg, NULL, 0);
-- 		break;
-- 	case SYNDROME_REG:
---		event.synd = strtoull(state->argv[state->next], NULL, 0);
--+		event.synd = strtoull(arg, NULL, 0);
-- 		break;
-- 	default:
-- 		return ARGP_ERR_UNKNOWN;
--@@ -146,12 +146,12 @@ int main(int argc, char *argv[])
-- #ifdef HAVE_MCE
-- 	const struct argp_option offline_options[] = {
-- 		{"smca", SMCA, 0, 0, "AMD SMCA Error Decoding"},
---		{"model", MODEL, 0, 0, "CPU Model"},
---		{"family", FAMILY, 0, 0, "CPU Family"},
---		{"bank", BANK_NUM, 0, 0, "Bank Number"},
---		{"ipid", IPID_REG, 0, 0, "IPID Register (for SMCA systems only)"},
---		{"status", STATUS_REG, 0, 0, "Status Register"},
---		{"synd", SYNDROME_REG, 0, 0, "Syndrome Register"},
--+		{"model", MODEL, "MODEL", 0, "CPU Model"},
--+		{"family", FAMILY, "FAMILY", 0, "CPU Family"},
--+		{"bank", BANK_NUM, "BANK_NUM", 0, "Bank Number"},
--+		{"ipid", IPID_REG, "IPID_REG", 0, "IPID Register (for SMCA systems only)"},
--+		{"status", STATUS_REG, "STATUS_REG", 0, "Status Register"},
--+		{"synd", SYNDROME_REG, "SYNDROME_REG", 0, "Syndrome Register"},
-- 		{0, 0, 0, 0, 0, 0},
-- 	};
-- 
---- 
--2.43.0
--
-diff --git a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.3.bb b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.4.bb
-similarity index 93%
-rename from meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.3.bb
-rename to meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.4.bb
-index 2cc2a26acb..0024729a91 100644
---- a/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.3.bb
-+++ b/meta-oe/dynamic-layers/perl-layer/recipes-support/rasdaemon/rasdaemon_0.8.4.bb
-@@ -4,14 +4,12 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
- 
- SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master;protocol=https \
--           file://0001-rasdaemon-fix-post-processing-options.patch \
-            file://rasdaemon.service \
-            file://init"
- 
--SRCREV = "db0870edd2919f4f4d0101843136bcae92ab0743"
-+SRCREV = "5a1efb8f324498df8cbaaa5adff0e9db96f648a9"
- 
--
--DEPENDS = "libtraceevent"
-+DEPENDS = "libtraceevent pciutils"
- RDEPENDS:${BPN} = "perl perl-module-file-basename perl-module-file-find perl-module-file-spec perl-module-getopt-long \
- 	perl-module-posix perl-module-file-glob libdbi-perl libdbd-sqlite-perl"
- 
-@@ -41,6 +39,7 @@ do_install:append() {
- 
- FILES:${PN} += "${sbindir}/rasdaemon \
- 		${sysconfdir}/init.d \
-+		${datadir} \
- 		${systemd_unitdir}/system/rasdaemon.service"
- 
- SYSTEMD_SERVICE:${PN} = "rasdaemon.service"
--- 
-2.43.0
+Which 32-bit ARMv7 machine with NEON do you recommend for testing?
 
+May be the Rockchip RK3288 SoC on ASUS Tinker Board and ASUS Tinker 
+Board S is a good fit. I think I bought a Tinker Board for hobby 
+projects many years ago and never really found spare time to play with 
+it. I have to double check and find it.
+
+The maintainers of valkey have already merged my GitHub pull request. I 
+guess I can follow-up with a fix and a test for ARMv7 with NEON in ABI 
+using ASUS Tinker Board and Rockchip RK3288 SoC.
+
+Best regards, Leon
+--------------79dvIwnn1p71SIpZy3KHKPu8
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p>Hi Khem,</p>
+    <div class="moz-cite-prefix">On 11/25/25 18:44, Khem Raj wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:CAMKF1sqwitQj1H_CNMLFwENmpR4Q22Ly2kULaRSoVTzsuL9Vyg@mail.gmail.com">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <div dir="ltr">
+        <div dir="ltr"><br>
+        </div>
+        <br>
+        <div class="gmail_quote gmail_quote_container">
+          <div dir="ltr" class="gmail_attr">On Tue, Nov 25, 2025 at
+            1:30 AM Leon Anavi &lt;<a
+              href="mailto:leon.anavi@konsulko.com"
+              moz-do-not-send="true" class="moz-txt-link-freetext">leon.anavi@konsulko.com</a>&gt;
+            wrote:<br>
+          </div>
+          <blockquote class="gmail_quote"
+style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi
+            Khem,<br>
+            <br>
+            On 11/25/25 07:59, Khem Raj wrote:<br>
+            &gt; Fails on qemuarm - <a
+href="https://errors.yoctoproject.org/Errors/Details/889836/"
+              rel="noreferrer" target="_blank" moz-do-not-send="true"
+              class="moz-txt-link-freetext">https://errors.yoctoproject.org/Errors/Details/889836/</a><br>
+            <br>
+            Thank you for informing me.  I was able to reproduce the
+            issue locally, <br>
+            submitted an updated version of the patch and opened a
+            GitHub pull <br>
+            request with the fix for valkey's upstream:<br>
+            <a href="https://github.com/valkey-io/valkey/pull/2873"
+              rel="noreferrer" target="_blank" moz-do-not-send="true"
+              class="moz-txt-link-freetext">https://github.com/valkey-io/valkey/pull/2873</a><br>
+            <br>
+          </blockquote>
+          <div><br>
+          </div>
+          <div>Thanks for looking into this, the patch limits it to
+            armv8 but there are armv7 with neon in ABI</div>
+          <div>as well, I think it will need to take that into account.</div>
+        </div>
+      </div>
+    </blockquote>
+    <br>
+    Which 32-bit ARMv7 machine with NEON do you recommend for testing?<br>
+    <br>
+    May be the Rockchip RK3288 SoC on ASUS Tinker Board and ASUS Tinker
+    Board S is a good fit. I think I bought a Tinker Board for hobby
+    projects many years ago and never really found spare time to play
+    with it. I have to double check and find it.<br>
+    <br>
+    The maintainers of valkey have already merged my GitHub pull
+    request. I guess I can follow-up with a fix and a test for ARMv7
+    with NEON in ABI using ASUS Tinker Board and Rockchip RK3288 SoC.<br>
+    <br>
+    Best regards, Leon
+  </body>
+</html>
+
+--------------79dvIwnn1p71SIpZy3KHKPu8--
 
