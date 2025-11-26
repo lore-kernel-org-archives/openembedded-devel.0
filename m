@@ -2,65 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB508D1119F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB4C3D1119E
 	for <webhook@archiver.kernel.org>; Wed, 26 Nov 2025 20:49:31 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3849.1764190161866478012
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3905.1764190164621210196
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Nov 2025 12:49:21 -0800
+ Wed, 26 Nov 2025 12:49:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QSVb7y9j;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-298456bb53aso2542865ad.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 12:49:21 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=X5aBV6sk;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-297d4a56f97so2671745ad.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 12:49:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764190161; x=1764794961; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1764190164; x=1764794964; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=kq2fcNVYJdalbrToEU5LR0/4GlwbFBUWh1TAol/s+m0=;
-        b=QSVb7y9jqlaxHufmCX9hxwBjgv7hLYWN3WgJEQPxiNwSydAAawjjMG1NwfOGKpEBpT
-         IuaAlYFRajVgP2NSZ8/1PnZJi7PvEuygB6Cn+VuAiE6EO5jBQtYNkgaVdhB9Xkv14j6L
-         yfrJvZy+UYHPx7MbtYw0ND4yoCtsCgOdhUgBCBvtwT7RFTLV848J6NvywzpqshoyeRY8
-         Wb08/SmYw5h+BAFTHQ1kob35EJRTZRaafnb+Nd4n0Qajc0WjWTSlnWhrRQXR0X1gJYvq
-         L72EHEETbBBy15xtZWQlIB7WpL0BtSeXWCuezBhSaq8eGzGzwz00zTwHNqjntVYUJ8wD
-         +jpg==
+        bh=UsGyb+TphcmJeHBD6XFPXmb8coIA1f6z9WDPMEJL/kc=;
+        b=X5aBV6sktAt29uPNGBgNY1RATYTiTOiN8jQWzHfZZQrd5d5toHTkfSAZGynL8Vib1M
+         HUTNsj9dQrZM2b84SU528ZmLlyqjnCX2cDAh/jXj/G7m7lu/AIa3PE7/vth+ss1AW73Z
+         exiSuW0JBfHwpj0hf78ZueECG41EtKJ5nw85aPn1Fzfe29Yd1XbtBMcSyN7jIK/Tzm2Y
+         sAcdmyCwdwyX8A9ynIFoxxjE5VyGNcQzg4UKjTHJg08mwxjtdRmM+oexuXVmJyjlujC7
+         uhmMzsimRpA6JjJmUxC3PdTiEcFp31MHpAFpDt5jqFLeDAuztSh4fs3KEqPzHajOnYa4
+         k8Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764190161; x=1764794961;
+        d=1e100.net; s=20230601; t=1764190164; x=1764794964;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=kq2fcNVYJdalbrToEU5LR0/4GlwbFBUWh1TAol/s+m0=;
-        b=KLJVNUnumTs8ELam/mFfsahXbUlcXenVVPS5tIaH5/eBQNetNdMX4KnaChNybKzCA3
-         9+V0FequY/kmDCvW36yboTd4S24cXBgAvkum9FMY1pcpSVQVWqQ1KrqbBvJ1eybs8okT
-         S/x8XQWiK4S/hgg3YanfkMObn8JW1sQBebczu0M8xNIpgj1d5Lk/ANt6M7vRk+GXFbg1
-         TNNiq9ZiWDzIRAizIzREqQFwM2Q0kA2WLw7F6HfUHC3B54tjwwY3TdZ/dOytBn53vuqm
-         nF3P9BhFc27Vza4uAJg3umikPBBqK38u+uMIvphdMV/9HxdQKqEqb3Tjt3/ZXa838jqB
-         ijtQ==
-X-Gm-Message-State: AOJu0YyIyZs9FtH/+UYUdjAHV1AmyKHIV+Qjqfs7xa64gX2DlYqQHu0f
-	kMYBCgGmvEa2YeSRXt8FB+4CNWE4s/uEedLxBq1yKz5gQawDP7Ji/TpanuG5YA==
-X-Gm-Gg: ASbGnctR0mm6GGEgmOJeubS5GukcCZKfcoJa6cgEY0rLn+P29QMgUlCIOQz3ydYkvPr
-	JNRLOLUxZu/RERKfBlTzTfDhWFt/UrNaT6qos4+8NhcPWYWQ8Ds6VP4gqsI0p4wXnGsvXFvNsFa
-	xf8OSLFjf1j516iQeSBD3b4XFBjvBhflF4x+TCJD6uHDWwt6iKCrdSpcIjzRiU9LJ1VtJ4PdF2X
-	u6zdqJwr3Q2xR/1O23yUoNZT41jlZbS8JfZdS+jwx7ZSirItwa+53N/FvSCs1xKsmvc8MlDODPJ
-	gHz9lSLVSAjDv0yX8SORNgTSvfxxVKTui3QfdYLGlCpBsuXYuJZY+X9wYRu4Cdox1kId4aKVuhd
-	TzHmmZtTRTbunoL63ppPvtrBkiU8JBfsTvjWLD7fj5vUjHPOWkiUbiQjH2hvihpX2Jq3/lUtMDT
-	FZ2yL7B3q0iwaQb5nWQH+mjkI=
-X-Google-Smtp-Source: AGHT+IHHWZIYKerNtDdcfvtzUaHpDbK3ABi5J+WXoM4ykQzQgdZ/nfb3DIPYsKrgYP3HODrdJH1mDQ==
-X-Received: by 2002:a17:903:458d:b0:298:616a:ba93 with SMTP id d9443c01a7336-29b6c3db802mr177102685ad.9.1764190161162;
-        Wed, 26 Nov 2025 12:49:21 -0800 (PST)
+        bh=UsGyb+TphcmJeHBD6XFPXmb8coIA1f6z9WDPMEJL/kc=;
+        b=XIphcPoSyMk2RbTF0L8CSSR4zL6ktKEdvQ7gBVdE3+Q31kAa1YP+u7kyH8Qg7a+3w4
+         yh/v7yjplDow5NAKeP/jKhZiOUQVa8nV8Eon9UQ5pSWB1pkxdYSLw6g/IpmjliSdBzBN
+         ZdSbqiOEQhbuExFFRJpqvkgLg3fZ0cxKNY/jaqewbp/lipgs7/8rBkkvPlbi2aKjMeKT
+         /sP+CWtX4mM20m5iu++3FoxPaEpjZo4FPUcdEeYvA22CegNwaYGGfx5HG/DZx7BxaPbY
+         O2VtZVfWc4pyC+ZXyI43inQXEtoBBshUj7biVm0ab1Ezi1WNez3f1Wmx/DKt9AHS/Q5Y
+         Cdcw==
+X-Gm-Message-State: AOJu0YyYARqqiBRoTiSW/2c/ph4NCvaqWVEKA5LeGscmMSdGPUp2hT1o
+	OUNJgeNtTjbNayJ7oBzM1w6OxfLVE9/pJ72gX9eTrwoCp/NwM3NPvUdwcnlLbg==
+X-Gm-Gg: ASbGncsuLRx3dMd8md6tU3gpreIfhQIprXjr0YQ9V+S5dGdV3U8lOZbf1n682WxPArw
+	X6DYK6brAfFz9jmtn4thU2WupqObT90HbB+kV64VyejvhKlePxACa85JlugCmrt9TP5xqDqp9ay
+	vJotpUhNHWPlEqIngd0pbeGxyf/9dzd2jlxK5k7hkoxOaNvEJmK6mXJya/a01Xh3IFJELaz4hL4
+	5cG9Yeg1yQGZSZBzNq7ue4AkFC+Eklslsf/RjirhaDtUNpRbQefjmCtaH2jFvKoxXAg9DBKZee8
+	fhN1m10e85PrSMEsOV7c00JK/zjW5cJv8ZtnfyOpD/qzhyAGkae/DzmYbt97r9ign5of0W/3X3U
+	1iVgyQJbGZrSL4Cs3W7ZcLol4Ua1v0JIdN6hSubhrQr9hFDM1xBl5bxhbflqOnCKQ1YTwGlqLbG
+	0nNlBaKl3A4/O6CXrk7ezIPQU=
+X-Google-Smtp-Source: AGHT+IH8S++IAfyVjX3HjvBasSzgcvoF75qgJlTxeTY6C9k0qmG6CeycWlKS6oAHl7ys1JSdKr4xRw==
+X-Received: by 2002:a17:903:19d0:b0:295:9db1:ff41 with SMTP id d9443c01a7336-29b6c3e922amr227024335ad.21.1764190163848;
+        Wed, 26 Nov 2025 12:49:23 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([136.226.230.97])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29b5b111016sm202443635ad.6.2025.11.26.12.49.19
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29b5b111016sm202443635ad.6.2025.11.26.12.49.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Nov 2025 12:49:20 -0800 (PST)
+        Wed, 26 Nov 2025 12:49:23 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>,
+Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][whinlatter][PATCH 3/9] php: upgrade 8.4.14 -> 8.4.15
-Date: Thu, 27 Nov 2025 09:48:40 +1300
-Message-ID: <20251126204847.1969339-3-ankur.tyagi85@gmail.com>
+Subject: [oe][whinlatter][PATCH 4/9] libao: ignore CVE-2017-11548
+Date: Thu, 27 Nov 2025 09:48:41 +1300
+Message-ID: <20251126204847.1969339-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251126204847.1969339-1-ankur.tyagi85@gmail.com>
 References: <20251126204847.1969339-1-ankur.tyagi85@gmail.com>
@@ -70,37 +70,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 20:49:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122085
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122086
 
-From: Jason Schonberg <schonm@gmail.com>
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-This is a bug fix release.
+Both Suse[1] and Debian[2] disputes that this is a vulnerability in libao.
+Based on their investigation while an issue exists, it is not in libao, however
+higher in the audio-toolchain, most likely in libmad or mpg321. There seem to
+be nothing to be fixed about this in libao - ignore this CVE due to this.
 
-Changelog: https://www.php.net/ChangeLog-8.php#8.4.15
+[1]: https://bugzilla.suse.com/show_bug.cgi?id=1081767
+[2]: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=870608
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 53db086b3504fe9e92b39e5a74fe0ec760f28ed2)
+(cherry picked from commit a993eb8b93f16e3a16c9a1ab2eb0939cb2331593)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-devtools/php/{php_8.4.14.bb => php_8.4.15.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.4.14.bb => php_8.4.15.bb} (99%)
+ meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.4.14.bb b/meta-oe/recipes-devtools/php/php_8.4.15.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.4.14.bb
-rename to meta-oe/recipes-devtools/php/php_8.4.15.bb
-index 086e7114fb..629eef0519 100644
---- a/meta-oe/recipes-devtools/php/php_8.4.14.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.4.15.bb
-@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
- 
- S = "${UNPACKDIR}/php-${PV}"
- 
--SRC_URI[sha256sum] = "f2139ce4cb7a6c5643ee98caa34e5c32ba841c2ba293e34a3d0357faa84bb3e7"
-+SRC_URI[sha256sum] = "b7155bdd498d60d63e4bc320dc224863976d31b5bd9339699726c961255a3197"
- 
- CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
- CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
+diff --git a/meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb b/meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb
+index 233b890711..42c0934b2e 100644
+--- a/meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb
++++ b/meta-multimedia/recipes-multimedia/libao/libao_1.2.0.bb
+@@ -31,3 +31,5 @@ PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'alsa pulseaudio', d)}"
+ PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
+ PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio"
+ FILES:${BPN}-ckport = "${libdir}/ckport"
++
++CVE_STATUS[CVE-2017-11548] = "disputed: the referenced vulnerability is not in libao"
 
