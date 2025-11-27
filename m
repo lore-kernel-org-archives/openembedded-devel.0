@@ -1,206 +1,99 @@
-Return-Path: <t.f.g.geelen@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AADCCD111BD
-	for <webhook@archiver.kernel.org>; Wed, 26 Nov 2025 23:25:52 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7037.1764199545948795285
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88A34D116EA
+	for <webhook@archiver.kernel.org>; Thu, 27 Nov 2025 02:35:33 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9972.1764210927392747840
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Nov 2025 15:25:46 -0800
+ Wed, 26 Nov 2025 18:35:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=njryPLOB;
- spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: t.f.g.geelen@gmail.com)
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-b7370698a8eso39501066b.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 15:25:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JprIoN9s;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-bc2abdcfc6fso251266a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 18:35:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764199544; x=1764804344; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1764210926; x=1764815726; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=6/hAjYY5uooW9lcXcUxL7ayr61YW4WXwIzENt6Xfo5M=;
-        b=njryPLOBg+hxYtSbK3yn5qE64sJFNh0iUBSfN7YutEh9a2WXMFOKo4UAuxHkkAn2c2
-         YzvOH8qd9uZdmzJhVrrwmczDVWo7DISdvFS4+FlJkzvrzQZVtmjvdRer3dKhnqFPIjVd
-         tfyoVBJPKLFgMx25lwOSW9fOC9RV1Ip/qHVk4femdzshlBqBUt334sWKPyItc/VTO/AC
-         T5lnLHVvFBUAtX8GizYNe3A0lCfeZBXnPfPgoJFwKqM7EJz0rPUkEiN+5OsqPGKzj1BD
-         l3HZBlVsAJwf7tadgHE/RdkymP4ORVfb9Mi7KTsMOlMalqjbWOoJfwszXEbscQxdTmY7
-         x7kA==
+        bh=3BDdByChJjiCJI3H9/dy3/mFBL+c0Qn4lhMbZLmh6tc=;
+        b=JprIoN9s4tViFsakeq5ZM26beHODADmc2/90Ma9qFO/mmLp/rGB9MHs9FUyi6Vo46f
+         /3JdwFLY1Gf9Og8Fk0xRjzFxtnE8wrju7avYcyLQ4nOO95CEzK8AsjFiuiNl23yNWHpl
+         ez5ziyDUVjjbXsKJUlR8tnAGTdzfqS+YluA3K54t3y6Ova5aU630yfNPEDKZ/DIFfhPp
+         onYpyl52ICwq6gkzG7qhCj0IFeBkKUdvsddzJeh0kbB7cgAOq3Kl19oYPlPkrKizjF9H
+         oSHi2DSkpdO6KX9O1Q01Vsh6juZ3BLTcJN8C+Yvz2lPvpR9KU2BP7KirrZHy+pfe6LaY
+         adoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764199544; x=1764804344;
+        d=1e100.net; s=20230601; t=1764210926; x=1764815726;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6/hAjYY5uooW9lcXcUxL7ayr61YW4WXwIzENt6Xfo5M=;
-        b=bIean2I25nxRCgnie3Og2PFSRefTPenkNh3NHN0640NLa1RGtbokywCSl0g9ogvSg6
-         om5eg1eXPYR/DjH7oH/P0OfgE9+BeJckXrIshBIU0Db12l+8EtwYTXth5gkXjU+lcRsg
-         HqTQlCp6RDcNU/CcqpWWZ0HQWl16FmXTACGfYBNsprKYLOj50UYPxkypNv7xd1cwxDs/
-         GnbTWfnI4Q3tjj7DvL4ztdOKxy3ioB7tiHCQ/XX47H3D/9BH0FMX03S1UegmXucKnhv0
-         Mj9Y1DBJFfTLHvR5bka0D/gK27Z1bMLxBkdhMYm15yjBeWljlIepyTU1M7k/m38i5cry
-         EPHA==
-X-Gm-Message-State: AOJu0YwqKrYTxiGFVnxDdz+YHkTfB+PC2qPVVrMM1rjlVJzHviCZwFvE
-	YzVb2IGGl8iPryRAPu8JSuo+U7AyKgSWN51gqpsT1dwYqcvcN9BUwML/Rx5BzA==
-X-Gm-Gg: ASbGnctHSgykpqURG+xXRGOp8CFzDyASgHBDdMnl6bVDhHW/A7qTOQD2wTGEGrW6D+l
-	V3rhBagVTdCzEwe6INOh0eUftdwLqN4koL5TnBNKZQWhMrt2ny5/XXwpMU26juk7jy6E0BT4wFN
-	h6dICrICucYAelew1lV0s0DaRgBky70XORmcaDjcSCsRbaaAgSqJynISQbxlO3jkVDfJXapFa6G
-	tOsI8bAnBe7mlZ5y8uqfPjlYZTLvb0ooDSNF8+07zCFmVoX/zvwdV/fQ19ewwkqdxuBMOmMQV4X
-	16Me8rc4U52BcMz3J+6srPbJcLz1+ecHytsU2vNtaGq5AfSRmxD8N4ENUHF9PQ4AA2lsHkm2TvG
-	FfjyG5wzhg+Co6mTLrmQ9HDVkpiqthkdgSyzFV3jUt44zebQD2ccJuRlRLq5E2vVdIG2dheYqTt
-	3/SeMHGyUZkjXnHOy+fj8uxuWjsAYOVlJyGjcXKFvf2+8LMRoLH2ZRK5UsedNY37zs
-X-Google-Smtp-Source: AGHT+IEqXlr02kULPR64EB8d8SAGN6gLaUoL57YrMqg7txF3YVydX3NH0uFEgexD4pETArZmK5fDGA==
-X-Received: by 2002:a17:907:741:b0:b76:3548:b741 with SMTP id a640c23a62f3a-b767153f880mr2381205066b.10.1764199543738;
-        Wed, 26 Nov 2025 15:25:43 -0800 (PST)
-Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b76f59aea6bsm682266b.35.2025.11.26.15.25.43
+        bh=3BDdByChJjiCJI3H9/dy3/mFBL+c0Qn4lhMbZLmh6tc=;
+        b=Wq8aqYzCWfWctr2CZErRpaT9w7+kP7Pd3j1wJVc1yiM8Gn4gD5fl4FsppQyNVXUg2b
+         a9iO8IiWe6L5E/VN1cwnqZMyR/47Is1VwDHxNblMC5attN83dfD7W+GDtsDpqdopDg0C
+         OqiDdW5SoYpoAz4EKFhB9qKv1gdbzIcskk05vpJp+8xuQ+fejggt+dkRWYUywZV+pF2G
+         CwqvBwdE9/rYBs1cWHW7Hr0k7wISpuj4mzJyOI/N9LnKBw0fTodxWw0Ctg7aQCqdtMcl
+         kfyE+3O0WzOakDkopxYF/DA1ifCIg7cYTjCWxEiiXKsw1wfFgu/R1L4ejUUKWZnFH7+Q
+         KvOA==
+X-Gm-Message-State: AOJu0YydBBO6C0SlPt80Q/vZPk9jWuT23S/4Eo8APJ2V83EQUnX2CTAn
+	63tUZo/iwbr2qoQh05asYujErVY3DAsRZr1MY7OgvfrzAhHqFsiOgbVWb6q43/N/
+X-Gm-Gg: ASbGnctOK/JludqYuGE/mk9tS5AwAdEHZXbu4668l09dd/3tlK2Yt/UX3uI7n0OIHnH
+	4EksaV829+v0LiklkQRRPPfTlu3a+YfgwYuLi8HA+LuLNVoltQMayG41LNQAhTa0m3aELMJkcmc
+	zp9FjrkomfEqs/7KUv1ZjfIXhRNiOJN+Wype+qYe0YjodqPfXIndmUp44coIE3y4AhlRRfpBfZp
+	A1TXkx9NtvTcegvFruY67nFfIcc9/ZDSqKZ677MXRoxBW7Ud/J5Mp20gJtom6msl0ww8T8p3Lgy
+	W3F0VFbKRJ01TbBMzHKoMdnrgBhVneuEoEOAZxZQbnIgssIkFbpjAbmDxgyvmnmNiK0Y5lLFC3h
+	MCCXyrnRtQOznp1PaJJbbsM9OzSlGYxcPloWRPqF37LouAQoSBuNqTHDNmv945HOvGcOfdhQ0Hm
+	BPU04368BgMVL+BfhdzVDkK7UG+6cfQxLZgHKLIeyauALhgPY90nNkiCyVF+ZpWEWS+8ZSuiUby
+	gvRmdJkwaPkUK8jbBnIRYTDhNpB4RvW
+X-Google-Smtp-Source: AGHT+IEqpuRsIei7vBTZNEG1riOXwvHQY87NGT4zpsTXAW2XFGUkhep5n1LK5lkvABzQ3PU6CuprKA==
+X-Received: by 2002:a05:7300:3c1e:b0:2a4:3593:ddf0 with SMTP id 5a478bee46e88-2a719fbd09bmr14273864eec.29.1764210926001;
+        Wed, 26 Nov 2025 18:35:26 -0800 (PST)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::7c49])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2a965b47caasm1625898eec.6.2025.11.26.18.35.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Nov 2025 15:25:43 -0800 (PST)
-From: Tom Geelen <t.f.g.geelen@gmail.com>
+        Wed, 26 Nov 2025 18:35:25 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tom Geelen <t.f.g.geelen@gmail.com>
-Subject: [meta-python][PATCH v4] python3-pytest-picked: Add recipe for version 0.5.1
-Date: Thu, 27 Nov 2025 00:25:22 +0100
-Message-ID: <20251126232521.1133242-2-t.f.g.geelen@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [meta-oe][PATCH 1/2] libplist: Fix buildpaths in ptests
+Date: Wed, 26 Nov 2025 18:35:19 -0800
+Message-ID: <20251127023522.519364-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 23:25:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122099
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Nov 2025 02:35:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122100
 
-Python package description: Run the tests related to the unstaged files or the current branch (according to Git)
-More information: https://pypi.org/project/pytest-picked/
-
-Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../ptest-packagelists-meta-python.inc        |  1 +
- .../packagegroups/packagegroup-meta-python.bb |  1 +
- ...g-tests-to-capture-only-ptest-output.patch | 51 +++++++++++++++++++
- .../python/python3-pytest-picked/run-ptest    |  5 ++
- .../python/python3-pytest-picked_0.5.1.bb     | 20 ++++++++
- 5 files changed, 78 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-picked/0001-adjust-failing-tests-to-capture-only-ptest-output.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-picked/run-ptest
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
+ .../libimobiledevice/libplist_2.6.0.bb                 | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index a172f8c676..1cb419a721 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -76,6 +76,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-pyserial \
-     python3-pytest-httpx \
-     python3-pytest-mock \
-+    python3-pytest-picked \
-     python3-pytest-sugar \
-     python3-pytoml \
-     python3-pyyaml-include \
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index ad68d74205..d3abc0761f 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -351,6 +351,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-pytest-httpx \
-     python3-pytest-lazy-fixtures \
-     python3-pytest-metadata \
-+    python3-pytest-picked\
-     python3-pytest-tempdir \
-     python3-pytest-timeout \
-     python3-pytest-xdist \
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-picked/0001-adjust-failing-tests-to-capture-only-ptest-output.patch b/meta-python/recipes-devtools/python/python3-pytest-picked/0001-adjust-failing-tests-to-capture-only-ptest-output.patch
-new file mode 100644
-index 0000000000..b4d7794e47
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-picked/0001-adjust-failing-tests-to-capture-only-ptest-output.patch
-@@ -0,0 +1,51 @@
-+From b9341394314e5dcaca0aa1d91fc3af28c64db387 Mon Sep 17 00:00:00 2001
-+From: Tom Geelen <t.f.g.geelen@gmail.com>
-+Date: Tue, 25 Nov 2025 20:42:15 +0100
-+Subject: [PATCH] adjust failing tests to capture only ptest output
-+
-+The tests should only check for warnings emitted by the plugin itself,
-+not for any other warnings that may be emitted by other plugins or pytest
-+itself. This behavior is caused by the fact that pytest might throw some deprecation warnings
-+or other warnings that are unrelated to the plugin being tested.
-+
-+Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
-+Upstream-Status: Inappropriate [OE specific]
-+---
-+ tests/test_pytest_picked.py | 17 ++++++++++++++---
-+ 1 file changed, 14 insertions(+), 3 deletions(-)
-+
-+diff --git a/tests/test_pytest_picked.py b/tests/test_pytest_picked.py
-+index fb2bedb..947b43a 100644
-+--- a/tests/test_pytest_picked.py
-++++ b/tests/test_pytest_picked.py
-+@@ -182,8 +182,13 @@ def test_should_accept_branch_as_mode(testdir, tmpdir, recwarn):
-+                 "Changed test folders... 0. []",
-+             ]
-+         )
-+-        assert len(recwarn) == 1
-+-        assert str(recwarn[0].message) == "Now `main` is the default parent branch"
-++    # Only count the plugin's own UserWarning about default parent branch
-++    plugin_warnings = [
-++        w
-++        for w in recwarn
-++        if w.category is UserWarning and "default parent branch" in str(w.message)
-++    ]
-++    assert len(plugin_warnings) == 1
-+ 
-+ 
-+ def test_should_accept_unstaged_as_mode(testdir, tmpdir, recwarn):
-+@@ -211,7 +216,13 @@ def test_should_accept_unstaged_as_mode(testdir, tmpdir, recwarn):
-+                 "Changed test folders... 0. []",
-+             ]
-+         )
-+-        assert len(recwarn) == 0
-++    # Ignore unrelated deprecation warnings from other plugins
-++    plugin_warnings = [
-++        w
-++        for w in recwarn
-++        if w.category is UserWarning and "default parent branch" in str(w.message)
-++    ]
-++    assert len(plugin_warnings) == 0
-+ 
-+ 
-+ def test_should_not_run_the_tests_if_mode_is_invalid(testdir, tmpdir):
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-picked/run-ptest b/meta-python/recipes-devtools/python/python3-pytest-picked/run-ptest
-new file mode 100644
-index 0000000000..39f369f20b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-picked/run-ptest
-@@ -0,0 +1,5 @@
-+#!/bin/sh
-+
-+# need to explicitly call the correct fixture as of pytest 8.x
-+
-+pytest -p pytester --automake
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb b/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
-new file mode 100644
-index 0000000000..c7c2183337
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-picked_0.5.1.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "Run the tests related to the changed files"
-+HOMEPAGE = "https://github.com/anapaulagomes/pytest-picked"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=6d374a27c85c3fcc979009952ec16f1b"
-+RECIPE_MAINTAINER = "Tom Geelen <t.f.g.geelen@gmail.com>"
-+
-+SRC_URI += "file://run-ptest \
-+           file://0001-adjust-failing-tests-to-capture-only-ptest-output.patch \
-+           "
-+SRC_URI[sha256sum] = "6634c4356a560a5dc3dba35471865e6eb06bbd356b56b69c540593e9d5620ded"
-+
-+inherit pypi python_setuptools_build_meta ptest-python-pytest
-+
-+RDEPENDS:${PN} += "\
-+    git \
-+    python3-pytest (>=3.7.0) \
-+"
-+
-+PYPI_PACKAGE = "pytest_picked"
-+UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
--- 
-2.43.0
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
+index 17b1d7cfd3..5f8d1f8d72 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
+@@ -49,10 +49,12 @@ do_install_ptest(){
+     for t in $(find ${B}/tools -type f -name 'plist*' \! -name '*.o'); do
+         install -m 0755 $t ${D}${PTEST_PATH}/test/tools/
+     done
+-    sed -i 's@LD_LIBRARY_PATH="[^"]*:@LD_LIBRARY_PATH="@g' \
+-        ${D}${PTEST_PATH}/test/test/plist_cmp
+-    sed -i 's@LD_LIBRARY_PATH="[^"]*:@LD_LIBRARY_PATH="@g' \
+-        ${D}${PTEST_PATH}/test/test/plist_test
++    for f in test/plist_cmp test/plist_test test/plist_test++ test/plist_jtest \
++        test/plist_btest test/plist_otest tools/plistutil; do
++        sed -i 's@LD_LIBRARY_PATH="[^"]*:@LD_LIBRARY_PATH="@g' \
++            ${D}${PTEST_PATH}/test/$f
++    done
++    sed -i '/notinst_deplibs=/d' ${D}${PTEST_PATH}/test/test/plist_test++
+ }
 
+ PACKAGES =+ "${PN}-utils \
 
