@@ -2,106 +2,176 @@ Return-Path: <danismostlikely@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76578D111A8
-	for <webhook@archiver.kernel.org>; Thu, 27 Nov 2025 19:41:44 +0000 (UTC)
-Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2328.1764272499677597163
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2129CFD2F6
+	for <webhook@archiver.kernel.org>; Thu, 27 Nov 2025 20:58:14 +0000 (UTC)
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3451.1764277087954607481
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Nov 2025 11:41:39 -0800
+ Thu, 27 Nov 2025 12:58:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lY5azdk+;
- spf=pass (domain: gmail.com, ip: 209.85.219.44, mailfrom: danismostlikely@gmail.com)
-Received: by mail-qv1-f44.google.com with SMTP id 6a1803df08f44-88242fc32c9so13385096d6.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Nov 2025 11:41:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764272498; x=1764877298; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=RF4YFPK0u9xBhfTZFt5qJskrZ6qsnJ9PumMqmpK/HkI=;
-        b=lY5azdk+seQE9xmlblUbF+5V6hXGZAGbOZQbUxJI4XWrmScHoUBoJl14sTdK29dFUR
-         RJhCqPvH8nEoeOk/kDURFnyULwFoxQgyjAsyXW3kh2zoSmImaKuEvjDYRwWphMW1PeXP
-         jKDC8kxG2aKKHP/w2SCc6rm7EqpZB+EVSsFBeUmEZr2BBOM2jaH6C7Ta5wJ/DXM7tD6p
-         W3I46iLkVQ4i/5x0ZjyL2vRrrVsDB/SccmfqqZcRzHKEuW20SovZgzZ8bC8+ACR5BbJQ
-         LczGPjLp5BIZdCgPbA+H+UUVY4pKtSzKZaxOdtAN6K3To33jTSP+Tj/mtXvZ6V3OD5E+
-         pdwA==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.160.173, mailfrom: danismostlikely@gmail.com)
+Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-4edaf8773c4so14757531cf.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Nov 2025 12:58:07 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764272498; x=1764877298;
+        d=1e100.net; s=20230601; t=1764277087; x=1764881887;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RF4YFPK0u9xBhfTZFt5qJskrZ6qsnJ9PumMqmpK/HkI=;
-        b=bYbKUHxin9RyHncPSb/xSibA9tZSxA8d2NUALv2VuChZXRT5iAe3gDRVBlbuKcyXsW
-         oZ97Rz/Zaqw2TDHEXf527MznmWm2nVKO5Rgs63PbthZtQxuhVIFIynJzsqaJ0q1Wg6Ru
-         94Bl6O255cW+LmklVj9tpT2N9eD5rlensR8g7++FNzT8aStns9eee2fTgHRdUv+HSRo/
-         9Uofdbhy78JIMnUF8Asqy8yr/qPhfZFJ3KwJdSTH4f+O0tzNIwRwpZetErl4GpX0EeUe
-         ubwi8x6hBw0s1o+2TK0SE7eQWR4fdGYfgu41sSkO0HKGkjpU2ClQJ7D1h7/lA8gkNm/x
-         DeMQ==
-X-Gm-Message-State: AOJu0YwErS7kkO5p6Em66b+vsaz1lHkqhRiVoeKXIuS7b+nvI2PoMNJq
-	t+olp3m0MWfBUhei9Z2yrS9Kt5L9jEOlGwQzeBCv89F7cPAXDcskAv2qDEN5Dw==
-X-Gm-Gg: ASbGncusO8f1P1FYXpSG7lXwEwr2WrStvwxFJfKupdSZ4aAzKYVRWzZZAhjrvY7OPWO
-	zKMJgMPpAz1FViZrJb5gjQjLMVXfZplmfNPgtiz+g3mPKvhuPKLLyJJ2P5fzOVVQgwS3T1eXhOR
-	GYx7lJd71RRwn5ccjIFWNJE4Oaew5FxYKwC0f8+xx01lFPplmCyIk9A+TsK9tPY9O1EuAgUNKEQ
-	PDLDzReqH2kD6El6XPTDjcOOh0BwTTT8/SZyoXllB0Hi0WGLNsrTZfUDeE+3LoIVDKZF3Tlrv4m
-	cK6CXRX6jwbknkt44XoyxwUlL5ldZ3FGvLMpdbqb8tccdLLuhe1xdGGvLx9zqxo1F6t7QqC/JqI
-	TmkV+4VgJUpP6Xk+gYX+gbV/bEI8dEAiuwIxaGc50sPdqrWkWGxw+JCHqaxFn/0fe2qqk6E6ADg
-	cMXhTD+3XJv3IWSOtwOdqe6e8XDYSEZ7Mto91KTPRfDhPSG/n+luhA
-X-Google-Smtp-Source: AGHT+IGBW4TVOsv63KQp9xJDvPxwRStYnDIJ4v/52kviR/1Vdy7uUAD5X5Vbn3rlTU7nJhbxgyIVZA==
-X-Received: by 2002:a05:6214:2b9a:b0:880:61e1:f9ed with SMTP id 6a1803df08f44-8847c499074mr332057126d6.17.1764272498468;
-        Thu, 27 Nov 2025 11:41:38 -0800 (PST)
+        bh=E3sfIaxjAIgN8gif34j+5pIUO5OUcE2zOMjrLmzGyBI=;
+        b=n1o2toUF94MZ7VpMyhjfnoWAIy4SkRKQ4ejIh7rbYbkkXvo0yrYcikZCtCrT9pk4bR
+         QgMOsf+ylJR8zvl38M8jIW6ohY5x0jsJR6z8pMCLMvqpe2XsHpduMMqOJ6YtpsvgOj09
+         sqPvX1CM7LWADCB2C52gOaAx2zYuQsDRWGJGe27cT8vanIBEcLS4EGYKmFOOHN43M+cc
+         DjT+0zIj+veXgERJeGgtb3L729z/Sbuj1gDlmZvdpPFwWqCaC8yGtElHvd0dBMlNTZFy
+         n0qAyaRksFk/pDvTU4B0REEXt2NnG+htOvglPtr8EHZhI6FFEnzuDJ+lPzF6ncYK9aS6
+         PuhA==
+X-Gm-Message-State: AOJu0YyDzI1O1XMdwnp5LIZpBLLq4sOKijGSQKBv2TgaVk81T6/W3A5z
+	TQJB8QRv0AT/vBJkeBhmHOYn9esjPAA5hAlavUf4FPXLZyoHmYYymXM46wRDqA==
+X-Gm-Gg: ASbGnctrn3GSI6Qw19UAtIBxxqNuStmxObzOUKSTPfdqlDE8TBDYOgUQuF2W+lSWjUi
+	klepfakSNAxiep0TQmNb3OtaEbALxxF3iwyusOJTFG7Xdcf5sVIAIZDchlHMNMdT3W1bXspdDCW
+	G4slRv1Jii8ozP32tNxIv85rPIUpLOWkRA3AcCzzAPmLahgeD+rRRF0s640VwmZQjui1m/6sM9H
+	8ms+ssucVBhgTcus4pbtGyuFoM9xNhOiwREIVrJ61zZp6E8srzq3y58qpg+fKSJnHPRkdGhOb/Q
+	1m6Mwwr923M1HK4leU4PuTCTMZbi4cAVnYylzhROiR1T2UivCx3TirMBpDPap+ZvebGi5TFlvTo
+	FkjpvUZaBjKjaZy4z7zL3eKARehhlght6Bn8qpPXwo17QQ0HkQXLEzjfInA7e/vxYTCKdAPy8E2
+	GrIs1b0O7XIPyc/d3PSUoUH/m0xhWRSAdWQW4PzZ3/qg==
+X-Google-Smtp-Source: AGHT+IEyRxAPtlxtiU415L4xNkXT3NTNuQ3WEZgaYWqhG9738rhfjxwIaU2vgtMKDhjebiWbfQAM3A==
+X-Received: by 2002:a05:622a:1802:b0:4ee:1f09:4c39 with SMTP id d75a77b69052e-4ee58ad4719mr329880781cf.45.1764277086746;
+        Thu, 27 Nov 2025 12:58:06 -0800 (PST)
 Received: from nebuchadnezzar.home.dankm.pro ([204.83.204.143])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-886524af138sm15645906d6.3.2025.11.27.11.41.37
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-4efd2f9a755sm14701181cf.3.2025.11.27.12.58.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Nov 2025 11:41:37 -0800 (PST)
-From: Anthony Del Frari <danismostlikely@gmail.com>
-X-Google-Original-From: Anthony Del Frari <anthony.delfrari@vecima.com>
+        Thu, 27 Nov 2025 12:58:06 -0800 (PST)
+From: Dan McGregor <dan.mcgregor@usask.ca>
 To: openembedded-devel@lists.openembedded.org
-Cc: Anthony Del Frari <anthony.delfrari@vecima.com>,
-	Dan McGregor <dan.mcgregor@vecima.com>
-Subject: [meta-python][PATCH] python3-requests-unixsocket: Update to 0.4.1
-Date: Thu, 27 Nov 2025 13:40:10 -0600
-Message-ID: <20251127194009.1607087-2-anthony.delfrari@vecima.com>
+Cc: Dan McGregor <dan.mcgregor@usask.ca>
+Subject: [meta-networking][PATCH v2] netcat-openbsd: update to 1.228
+Date: Thu, 27 Nov 2025 14:57:37 -0600
+Message-ID: <20251127205737.1625218-1-dan.mcgregor@usask.ca>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Nov 2025 19:41:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122114
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Nov 2025 20:58:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122115
 
-python3-requests broke the http+unix url scheme with version 2.32.
-Their position is that it's the responsibility of consuming libraries
-to adopt their new interface. requests-unixsocket 0.4 adapts to the
-new interface.
+A version newer than 1.195 is required for certain features of newer
+versions of cloud-init.  May as well bump to the version in Debian
+Testing.
 
-Signed-off-by: Dan McGregor <dan.mcgregor@vecima.com>
+I also noticed it appears the licence was incorrectly specified, and is
+indeed BSD-3-Clause.
+
+License-update: Added copyright holders and clarified man page licence
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
 ---
- ...ket_0.3.0.bb => python3-requests-unixsocket_0.4.1.bb} | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-requests-unixsocket_0.3.0.bb => python3-requests-unixsocket_0.4.1.bb} (54%)
+ ...bundle-own-base64-encode-decode-functions.patch | 12 ++++++------
+ ...0001-fix-netcat-openbsd-ftbfs-with-GCC-15.patch | 10 +++++-----
+ ...at-openbsd_1.195.bb => netcat-openbsd_1.228.bb} | 14 ++++++--------
+ 3 files changed, 17 insertions(+), 19 deletions(-)
+ rename meta-networking/recipes-support/netcat/{netcat-openbsd_1.195.bb => netcat-openbsd_1.228.bb} (63%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb b/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.4.1.bb
-similarity index 54%
-rename from meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-requests-unixsocket_0.4.1.bb
-index 94497b609bd..4485b89de7d 100644
---- a/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.4.1.bb
-@@ -3,12 +3,11 @@ HOMEPAGE = "https://pypi.org/project/requests-unixsocket/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
+diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd/0001-bundle-own-base64-encode-decode-functions.patch b/meta-networking/recipes-support/netcat/netcat-openbsd/0001-bundle-own-base64-encode-decode-functions.patch
+index 929f63f4a9c..7e665d777fb 100644
+--- a/meta-networking/recipes-support/netcat/netcat-openbsd/0001-bundle-own-base64-encode-decode-functions.patch
++++ b/meta-networking/recipes-support/netcat/netcat-openbsd/0001-bundle-own-base64-encode-decode-functions.patch
+@@ -14,7 +14,7 @@ Update to version 1.190-2
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ ---
+  Makefile |   4 +-
+- base64.c | 313 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ base64.c | 313 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  netcat.c |   3 +
+  socks.c  |   3 +
+  4 files changed, 321 insertions(+), 2 deletions(-)
+@@ -360,8 +360,8 @@ diff --git a/netcat.c b/netcat.c
+ index a0fb51b..9c4ed23 100644
+ --- a/netcat.c
+ +++ b/netcat.c
+-@@ -240,6 +240,9 @@ static int connect_with_timeout(int fd, const struct sockaddr *sa,
+- 
++@@ -239,6 +239,9 @@ char *proto_name(int, int);
++ static int connect_with_timeout(int, const struct sockaddr *, socklen_t, int);
+  static void quit();
+  
+ +int    b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize);
+@@ -378,10 +378,10 @@ index 9068f39..c576f6b 100644
+  #define SOCKS_DOMAIN	3
+  #define SOCKS_IPV6	4
+  
+-+int    b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize);
+-+int    b64_pton(char const *src, u_char *target, size_t targsize);
+++int	b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize);
+++int	b64_pton(char const *src, u_char *target, size_t targsize);
+ +
+- int	remote_connect(const char *, const char *, struct addrinfo);
++ int	remote_connect(const char *, const char *, struct addrinfo, char *);
+  int	socks_connect(const char *, const char *, struct addrinfo,
+  	    const char *, const char *, struct addrinfo, int,
+ -- 
+diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd/0001-fix-netcat-openbsd-ftbfs-with-GCC-15.patch b/meta-networking/recipes-support/netcat/netcat-openbsd/0001-fix-netcat-openbsd-ftbfs-with-GCC-15.patch
+index c1757d39ad8..d574ee0b67c 100644
+--- a/meta-networking/recipes-support/netcat/netcat-openbsd/0001-fix-netcat-openbsd-ftbfs-with-GCC-15.patch
++++ b/meta-networking/recipes-support/netcat/netcat-openbsd/0001-fix-netcat-openbsd-ftbfs-with-GCC-15.patch
+@@ -28,19 +28,19 @@ Signed-off-by: mark.yang <mark.yang@lge.com>
+  1 file changed, 2 insertions(+), 2 deletions(-)
  
--SRC_URI[sha256sum] = "28304283ea9357d45fff58ad5b11e47708cfbf5806817aa59b2a363228ee971e"
-+SRC_URI[sha256sum] = "b2596158c356ecee68d27ba469a52211230ac6fb0cde8b66afb19f0ed47a1995"
+ diff --git a/netcat.c b/netcat.c
+-index d70598a..b8ba959 100644
++index 62d01d8..7367f47 100644
+ --- a/netcat.c
+ +++ b/netcat.c
+-@@ -238,7 +238,7 @@ char *proto_name(int uflag, int dccpflag);
+- static int connect_with_timeout(int fd, const struct sockaddr *sa,
+-         socklen_t salen, int ctimeout);
++@@ -237,7 +237,7 @@ ssize_t fillbuf(int, unsigned char *, size_t *);
+  
++ char *proto_name(int, int);
++ static int connect_with_timeout(int, const struct sockaddr *, socklen_t, int);
+ -static void quit();
+ +static void quit(int sig);
+  
+  int    b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize);
+  int    b64_pton(char const *src, u_char *target, size_t targsize);
+-@@ -2235,7 +2235,7 @@ usage(int ret)
++@@ -2347,7 +2347,7 @@ usage(int ret)
+   * quit()
+   * handler for a "-q" timeout (exit 0 instead of 1)
+   */
+diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.195.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.228.bb
+similarity index 63%
+rename from meta-networking/recipes-support/netcat/netcat-openbsd_1.195.bb
+rename to meta-networking/recipes-support/netcat/netcat-openbsd_1.228.bb
+index 99ae90aa914..82753b9f422 100644
+--- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.195.bb
++++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.228.bb
+@@ -1,22 +1,20 @@
+ require netcat.inc
+ SUMMARY = "OpenBSD Netcat"
+ HOMEPAGE = "http://ftp.debian.org"
+-LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://debian/copyright;md5=f39e60ae4ea9fdb559c833be2e59de99"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://debian/copyright;md5=7c58e21ba8c9e76c25f46b2182b23bb8"
  
--PYPI_PACKAGE = "requests-unixsocket"
-+PYPI_PACKAGE = "requests_unixsocket"
+ DEPENDS += "glib-2.0 libbsd"
+ do_patch[depends] = "quilt-native:do_populate_sysroot"
  
--inherit pypi
--inherit setuptools3
-+inherit pypi python_setuptools_build_meta
+-SRC_URI = "http://snapshot.debian.org/archive/debian/20181022T085404Z/pool/main/n/netcat-openbsd/netcat-openbsd_${PV}.orig.tar.gz;name=netcat \
+-           http://snapshot.debian.org/archive/debian/20181022T085404Z/pool/main/n/netcat-openbsd/netcat-openbsd_${PV}-1.debian.tar.xz;name=netcat-patch;subdir=${BP} \
++SRC_URI = "http://snapshot.debian.org/archive/debian/20250301T025722Z/pool/main/n/netcat-openbsd/netcat-openbsd_${PV}.orig.tar.gz;name=netcat \
++           http://snapshot.debian.org/archive/debian/20250301T025722Z/pool/main/n/netcat-openbsd/netcat-openbsd_${PV}-1.debian.tar.xz;name=netcat-patch;subdir=${BP} \
+            file://0001-bundle-own-base64-encode-decode-functions.patch \
+            file://0001-fix-netcat-openbsd-ftbfs-with-GCC-15.patch \
+            "
  
--DEPENDS += "python3-pbr-native"
-+DEPENDS += "python3-pbr-native python3-setuptools-scm-native"
- RDEPENDS:${PN} = "python3-requests python3-urllib3"
+-SRC_URI[netcat.md5sum] = "219d5e49c45658e229a3bda63063a986"
+-SRC_URI[netcat.sha256sum] = "0e283b2a214313c69447cd962c528ac19afb3ddfe606b25de6d179f187cde4c3"
+-SRC_URI[netcat-patch.md5sum] = "7eba241989dbef6caa78ec4bc8e35151"
+-SRC_URI[netcat-patch.sha256sum] = "c6736fcbab5254cbbc52278993a951da1126e42800a297c27db297e332e2017e"
++SRC_URI[netcat.sha256sum] = "e501b0239db0d8f981b964adee74effe80e6337e5d402a00515a6df8d933269e"
++SRC_URI[netcat-patch.sha256sum] = "7989cc18b3ffa4ef1da57149bd3fc03999546a91c35b82b49caf4d758015c573"
+ 
+ inherit pkgconfig
+ 
 
