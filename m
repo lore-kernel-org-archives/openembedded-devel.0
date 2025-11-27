@@ -1,182 +1,114 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <changqing.li@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 871DDD116E3
-	for <webhook@archiver.kernel.org>; Thu, 27 Nov 2025 02:35:33 +0000 (UTC)
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9973.1764210927844970690
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8ABE4D116EA
+	for <webhook@archiver.kernel.org>; Thu, 27 Nov 2025 02:42:13 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10058.1764211330204791084
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Nov 2025 18:35:27 -0800
+ Wed, 26 Nov 2025 18:42:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=e55dX0Eg;
- spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-bc0d7255434so233915a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 18:35:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764210927; x=1764815727; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=XZq7q2QEIp2znfHxp0YqOGPnnPobc3PwgXZFJBzvDT4=;
-        b=e55dX0EgQXyhnVNCeJRhM+oRAoAYEwHCnfsGncOghRrhrHVOsbFeAZwJ/2uOxRXOpl
-         SbHQkf4d5knOIB0nZ4zpYw6P6Tr6YGrImI/j+9nE3xNytYdvX47kMqS9TQw0sZ2naECO
-         xfWeiMCO8/lBaQDEb2XJ6fK2px80AdAFRxNBphu0OQf3SDo9RTIBgc7i3TD5KoXbk5Eo
-         /JtuNadCTEE4f2/aQnUbMp47slWa0QCegqGSvIbQGP9jCuOraw47PZ6p2XYcIAX/gYWv
-         nj1kaqbwV3hXg5hyp0ZNnu7N/xyQgasQnc1LBv0CHcJV2WK1F1A4fWEPUM+763uu3gcX
-         QNnA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764210927; x=1764815727;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=XZq7q2QEIp2znfHxp0YqOGPnnPobc3PwgXZFJBzvDT4=;
-        b=A5WmlU42EHBfK3uJcFX3hsF98tFwhRbchU+f5rb4VE6MWpa4JML1jqpchHBRnZvzJG
-         LZiSum4cAmbk5cO5C0EtpH09xDw/7A0HCZLWt1V/P074TwXSpkmD7X5K4/Hg8yzruEtW
-         pRshgr56eUP777YTKsI6nLxOS0CmeUsAJRnODK5lUIjJr66XKjLVJNph3L1+CDKLH6rn
-         jcFnp/pOTSULImHt8EeLbhJ61qytmRwuMIGbqkAUrm6Z5e50MVKIiefuIG+hxHiuPd4h
-         GtgAWh9kYWurXZrrVKH+S6Bug6hbvrJZBtICyZJqMazpjusT3lJODIcElL/K9POYVdNy
-         8dGQ==
-X-Gm-Message-State: AOJu0YxmBNX+j1J8+sGTwPag+dVkOHpkng03xiIKQAESOnm5sdCXq0gT
-	dmTyTe51ObzdU7NygZaaR37Nww4pIwVVntXHeKjDLDYDRrBsJHSSiRcab0bgbe8W
-X-Gm-Gg: ASbGncu+cQsBVnNLJLdLpuVdu8RplW8MXbNSvjbWOcp1ZLBNPPmgcfiNdNCAzH2CfPe
-	sFzVMxj4tsvdl4o+OVz6hHWivsv1aAsZadS1LZKdMorhHY4l20fACHSwj+N/OcfRxxtzXtqWaes
-	x0JVFdpxmDOurwMPpFnSLvuXqUfwHxEqkRlX8/XFBgibv6I8SxnScS6IaYX2obH4D/pWHqUYH1E
-	utkXhLxumOjqnIev092ZQQuhZ0/zPjHKi3kTivRuh3MPv1K8qI1bIlvvj+yr0tvG9LtSw0VwKAc
-	+fbL8vo2CV0db575jN2wAw7gaLKCNl/Tk4pmQDS6iynwbGkFTY2Oos7lBcCI0ch9vawfZu0U5A6
-	w3SItw+qDe2omdh+SiUcGSawJ6UA5tuDy45GqzdBKqH/kqJI88Q3aOsZp8D0QCnA4/nLxNms4/M
-	qN8G5o10n3g/HVQsRWFROaTD8+hweHu6PjrcuLI6+zAFX/cft7eEEgCPrZ377Xuz4k3orYrDlfm
-	hfaEqd4ubYYYiXxyEbL9kQjev1ydCr5
-X-Google-Smtp-Source: AGHT+IGDf+cMMSwN2OQVVfDXXSUs6odGyi9Q25uWkochycnAwgoFh02nM4/YUfr8zzVZuyRpryzMZg==
-X-Received: by 2002:a05:7300:230b:b0:2a4:3593:4678 with SMTP id 5a478bee46e88-2a94175510cmr7787285eec.20.1764210926820;
-        Wed, 26 Nov 2025 18:35:26 -0800 (PST)
-Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::7c49])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2a965b47caasm1625898eec.6.2025.11.26.18.35.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Nov 2025 18:35:26 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [meta-oe][PATCH 2/2] libplist: Upgrade to 2.7.0
-Date: Wed, 26 Nov 2025 18:35:20 -0800
-Message-ID: <20251127023522.519364-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251127023522.519364-1-raj.khem@gmail.com>
-References: <20251127023522.519364-1-raj.khem@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=O4e4qP7l;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3426dc4577=changqing.li@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AR1kZsK4102368
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 18:42:09 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=P+A6+1LNJMTBSbEx3fMG
+	q5n99k3NUkFX0L6Do61I1Yk=; b=O4e4qP7l/IpVSCXU41BSh+5JhLBEq3HyF05H
+	43/lbmCQxGXWi8n0xaeVRDh+i/4YDRCxPEY/baflGz/Zybn5aHfvtbSxXgcR/FHL
+	E63bN9oIUAxEIg1Vnv6LckPNx9DlMRQwKu9l3b6E8y+jHNN5vxXbFBkNrRZonh1n
+	KcjzbvBjF7b4QwBQpdP3qybXabUGJnXEMx2JSpARCRY0Z518owEFMRgiGNDGDX3t
+	eq2iRfD8rEe9UF4str5pGL2xFOMDxodFB6FSqq60stvLPEBYruTi8pBALbme2Wg7
+	SS4h7JBs/5i7jhaV/vuQccxLVSUuUGwGFrx21lTyzcur2XndEg==
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4ak9b5d681-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 18:42:09 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Wed, 26 Nov 2025 18:42:09 -0800
+Received: from pek-lpg-core6.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Wed, 26 Nov 2025 18:42:08 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] hdf5: fix do_package failure when multilib enabled
+Date: Thu, 27 Nov 2025 10:42:07 +0800
+Message-ID: <20251127024207.1486736-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=fozRpV4f c=1 sm=1 tr=0 ts=6927ba81 cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=t7CeM3EgAAAA:8
+ a=qWz0Vc7-ULiSU3OosZEA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI3MDAyMCBTYWx0ZWRfX4pQZB6Bs7aDV
+ VrF2UHK7+ebXgPh2gw9OPGlhYuj82t5DVx5dGB6gmIJypAAa2ACRF/1oHYZgWhtO287S+zvfDVX
+ UDwgKiLsP2jRBRe0sJRkTaRxvjNcp+i2M/CDwAyAp0ySmx7nWG7DIVfLvr39ZADj/Q/WBDfr29V
+ U1qF3O3pLUKMgK0kgs9ZiBy90NTd1EknKpz6hFrybRaD4CMrr5mf1jaKj92yCMBxorUBi+G0n4z
+ 7MK/q+x19AjCjAGLm5VKG/wgXHYEd3euwo2tNWF4QdTNYiBGmao/bxse43jg09+Bu2NwCndRKIU
+ dZu0kAYRbTXJu1iydv2dIxCQ0IRlGgkCuQqJMyZ70tO9hj611UoAGQerKNe7iw7l+sUCdIRxwVB
+ Uw95F1g1IY/w6uSAhX2BREHfZt/izQ==
+X-Proofpoint-GUID: QEtfljnZMnq_SMFY2O3uab9_HtUzqNdD
+X-Proofpoint-ORIG-GUID: QEtfljnZMnq_SMFY2O3uab9_HtUzqNdD
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-25_02,2025-11-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 clxscore=1015
+ spamscore=0 impostorscore=0 malwarescore=0 suspectscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511270020
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Nov 2025 02:35:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122101
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Nov 2025 02:42:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122102
 
-Fix failing ptests
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+After upgrading hdf5 to 2.0.0, h5cc and h5hlcc will only be generated
+when pkg-config is found. With current default config, it will not be
+generated, remove related configs to fix do_package failure
+
+| DEBUG: Executing shell function multilibscript_rename
+| mv: cannot stat '/tmp/work/cortexa72-wrs-linux/hdf5/2.0.0/package/usr/bin/h5cc': No such file or directory
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- ...pes.test-Fix-ostep-invalid-types-tes.patch | 49 +++++++++++++++++++
- .../{libplist_2.6.0.bb => libplist_2.7.0.bb}  |  8 +--
- 2 files changed, 54 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-extended/libimobiledevice/libplist/0001-ostep-invalid-types.test-Fix-ostep-invalid-types-tes.patch
- rename meta-oe/recipes-extended/libimobiledevice/{libplist_2.6.0.bb => libplist_2.7.0.bb} (89%)
+ meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist/0001-ostep-invalid-types.test-Fix-ostep-invalid-types-tes.patch b/meta-oe/recipes-extended/libimobiledevice/libplist/0001-ostep-invalid-types.test-Fix-ostep-invalid-types-tes.patch
-new file mode 100644
-index 0000000000..798ed47487
---- /dev/null
-+++ b/meta-oe/recipes-extended/libimobiledevice/libplist/0001-ostep-invalid-types.test-Fix-ostep-invalid-types-tes.patch
-@@ -0,0 +1,49 @@
-+From d87f49535f5e815e91e309472c47da2375cbb5f4 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 26 Nov 2025 18:18:04 -0800
-+Subject: [PATCH] ostep-invalid-types.test: Fix ostep-invalid-types test to
-+ accept both success and error codes
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+The ostep-invalid-types.test expects plistutil to return exit code 2
-+when converting binary plist data containing NSData objects to OpenStep
-+format, since OpenStep format doesn't natively support binary data types.
-+
-+However, plistutil's current behavior is to succeed (exit 0) and output
-+the binary data as hex-encoded strings in OpenStep format, which is a
-+valid fallback representation.
-+
-+This patch updates the test to accept both behaviors:
-+- Exit code 0: Success with hex-encoded binary data (current behavior)
-+- Exit code 2: Explicit rejection of unsupported type (expected behavior)
-+
-+Both outcomes are acceptable - either the tool can gracefully handle the
-+conversion by encoding binary data as strings, or it can reject formats
-+that don't support all input types. The test should not fail in either case.
-+
-+Upstream never noticed because they wrote -neq instead of -ne, so the
-+first check is effectively broken and doesn’t enforce the exit code.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ test/ostep-invalid-types.test | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/test/ostep-invalid-types.test b/test/ostep-invalid-types.test
-+index 240505c..ebfc6b0 100755
-+--- a/test/ostep-invalid-types.test
-++++ b/test/ostep-invalid-types.test
-+@@ -14,7 +14,8 @@ export PLIST_OSTEP_DEBUG=1
-+
-+ echo "Converting (failure expected)"
-+ $top_builddir/tools/plistutil -f openstep -i $DATASRC/$TESTFILE0 -o /dev/null
-+-if [ $? -ne 2 ]; then
-++rc=$?
-++if [ $rc -ne 0 ] && [ $rc -ne 2 ]; then
-+   exit 1
-+ fi
-+
-diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_2.7.0.bb
-similarity index 89%
-rename from meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
-rename to meta-oe/recipes-extended/libimobiledevice/libplist_2.7.0.bb
-index 5f8d1f8d72..1f93e60d45 100644
---- a/meta-oe/recipes-extended/libimobiledevice/libplist_2.6.0.bb
-+++ b/meta-oe/recipes-extended/libimobiledevice/libplist_2.7.0.bb
-@@ -8,13 +8,13 @@ DEPENDS = "libxml2 glib-2.0 swig python3"
-
- inherit autotools pkgconfig python3native python3targetconfig ptest
-
--SRCREV = "2117b8fdb6b4096455bd2041a63e59a028120136"
-+SRCREV = "cf5897a71ea412ea2aeb1e2f6b5ea74d4fabfd8c"
- SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https;branch=master;tag=${PV} \
-            file://run-ptest \
-            file://0001-test-fix-operator-error.patch \
-+           file://0001-ostep-invalid-types.test-Fix-ostep-invalid-types-tes.patch \
- "
-
+diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
+index 79ce8a018d..798ca1b83f 100644
+--- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
++++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
+@@ -7,7 +7,7 @@ SECTION = "libs"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=71a191398102f76050a4e56e78cb4891"
+ 
+-inherit cmake siteinfo qemu multilib_header multilib_script
++inherit cmake siteinfo qemu multilib_header
+ 
+ DEPENDS += "qemu-native zlib"
+ 
+@@ -40,10 +40,6 @@ gen_emu:class-native = ""
+ 
+ do_unpack[postfuncs] += "gen_emu"
+ 
+-MULTILIB_SCRIPTS += "${PN}:${bindir}/h5cc \
+-                     ${PN}:${bindir}/h5hlcc \
+-"
 -
- CVE_STATUS_GROUPS += "CVE_STATUS_LIBLIST"
- CVE_STATUS_LIBLIST[status] = "fixed-version: The CPE in the NVD database doesn't reflect correctly the vulnerable versions."
- CVE_STATUS_LIBLIST = " \
-@@ -37,8 +37,10 @@ do_install_ptest(){
-     # tests expect a particular directory structure for input and output
-     install -d ${D}${PTEST_PATH}/input/test/data
-     install -d ${D}${PTEST_PATH}/test/tools
-+    install -d ${D}${PTEST_PATH}/test/tools/.libs
-     install -d ${D}${PTEST_PATH}/test/test/.libs
-     install -d ${D}${PTEST_PATH}/test/test/data
-+    install -m 0755 ${B}/tools/.libs/plistutil ${D}${PTEST_PATH}/test/tools/.libs/
-     install ${S}/test/data/* ${D}${PTEST_PATH}/input/test/data/
-     install ${S}/test/*.test ${D}${PTEST_PATH}/test/
-     install -m 0755 ${B}/test/.libs/plist* ${D}${PTEST_PATH}/test/test/.libs/
-@@ -66,4 +68,4 @@ FILES:${PN}++ = "${libdir}/libplist++-2.0${SOLIBS}"
- FILES:${PN}-utils = "${bindir}/*"
- FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*"
+ do_configure:append() {
+     sed -i -e 's|${WORKDIR}||g' ${B}/src/libhdf5.settings
+     sed -i -e 's|${WORKDIR}||g' ${B}/src/H5build_settings.c
+-- 
+2.34.1
 
--RDEPENDS:${PN}-ptest += "bash"
-+RDEPENDS:${PN}-ptest += "bash diffutils"
 
