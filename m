@@ -1,114 +1,94 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8ABE4D116EA
-	for <webhook@archiver.kernel.org>; Thu, 27 Nov 2025 02:42:13 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10058.1764211330204791084
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 256D6CFD2F6
+	for <webhook@archiver.kernel.org>; Thu, 27 Nov 2025 04:39:24 +0000 (UTC)
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11421.1764218356245360063
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 26 Nov 2025 18:42:10 -0800
+ Wed, 26 Nov 2025 20:39:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=O4e4qP7l;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3426dc4577=changqing.li@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AR1kZsK4102368
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 18:42:09 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=P+A6+1LNJMTBSbEx3fMG
-	q5n99k3NUkFX0L6Do61I1Yk=; b=O4e4qP7l/IpVSCXU41BSh+5JhLBEq3HyF05H
-	43/lbmCQxGXWi8n0xaeVRDh+i/4YDRCxPEY/baflGz/Zybn5aHfvtbSxXgcR/FHL
-	E63bN9oIUAxEIg1Vnv6LckPNx9DlMRQwKu9l3b6E8y+jHNN5vxXbFBkNrRZonh1n
-	KcjzbvBjF7b4QwBQpdP3qybXabUGJnXEMx2JSpARCRY0Z518owEFMRgiGNDGDX3t
-	eq2iRfD8rEe9UF4str5pGL2xFOMDxodFB6FSqq60stvLPEBYruTi8pBALbme2Wg7
-	SS4h7JBs/5i7jhaV/vuQccxLVSUuUGwGFrx21lTyzcur2XndEg==
-Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4ak9b5d681-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 18:42:09 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Wed, 26 Nov 2025 18:42:09 -0800
-Received: from pek-lpg-core6.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Wed, 26 Nov 2025 18:42:08 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] hdf5: fix do_package failure when multilib enabled
-Date: Thu, 27 Nov 2025 10:42:07 +0800
-Message-ID: <20251127024207.1486736-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RUszUEvf;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-bc2abdcfc6fso295831a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 26 Nov 2025 20:39:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1764218355; x=1764823155; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=gGc6XPri/S77jn7Is52eeTfY07Le7iuVt7GEJ6X8NUI=;
+        b=RUszUEvf7j8ne/5xbZQHiR3IZ5/a3EJUo4Ot1Ud5nF24fwwWLYlY+jhIC+mTcJ4+g0
+         o2bLZaJQ+ZiMWxcHLLqy3UQHUTSpoSvQXXeNH1DBUzbi2ewqxf+aD1iBa9ch3gb2QNVd
+         w3pk4TE91pQDgsCbPDTX9/ijG4aEp47mhghVUq3Bi+p1nNL6oOtWY9WUNgoFiH2CI/gj
+         1wr6hSdZGUKeB7P1piM/XlRAx/z0ic6G/oWC9l8VADwBjGR0pBYP9ZHYugULom2cU3XC
+         sAS1zqQK2xKq0mOoL83yqlffq0QvsmI+TA6cr9qNH51TNQjVeu8B8Rh1fIce41IdJPNH
+         ZvSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764218355; x=1764823155;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=gGc6XPri/S77jn7Is52eeTfY07Le7iuVt7GEJ6X8NUI=;
+        b=E8ppiU0Re79Z2Tyk/jmADPfyys2QjtCKNFVdvBqwDj0F7wxso8Jds9G6rdruC7B6SZ
+         J4SXLJR7FsS1x5jPCmU2CAdm/x0wvqGyWSuj/zdFAw8nl6xEgwe1Cy9Y3ndrVqE6lqlW
+         Y2zWlBQdrpjKix2uNc+MFTDV+jHvnOdYQSbBTrklaIaV2BLXQSf8LyesEcZl9cywRFOw
+         9+15+85OiBMwU0FSQUW0hmrLBNw5LGPA09+1nedeHjck8CSu7EU40w51DufiAn0eqJko
+         g+XB53oEyasfeJ5OemwJHPHPEly5Bw/hHQHIEASLd9aMLLaXAb5uX4b7ApNs0TWY8Tz/
+         EggQ==
+X-Gm-Message-State: AOJu0Yz1tYkrIoY5O+af+VPQAIK/raYjSqbod9DZcp4mCV3wAAlJTBcS
+	uU+h/snWMo66kecti+bx6BN3AI69D6+UckrzAgX/LGsp0336LjzYVWXw36fvaRgH
+X-Gm-Gg: ASbGncttXdrftdkulH8lM3FlMbe96rkTPUwAm+yrTJVUSbgnNNMtiBhSGEowk7Kg7VU
+	L1BltOR9KQG0zUhCwNCDSUmaUF6O+oSCscB1Y2mNxjM8oS7Z4ZCvWVvAl/2KTD8cuVK/LcZEWoK
+	H0jTX66UB//MvyQvtznR0GteurCjIA/ZzXJkWiZ3sI65VXoQuEcF71nL3/y6ZpC9012W9mDE5Jq
+	VhzoBC/mPLbeHdwpES9XcsZCKj8q3U0tlSlcLVLricREF9M8IN3AzZZUnHktYNq4dhejlnuJPf8
+	VIVNF4GRwZXsaBDGe/5Epj6j6BilSv9/ENKJHj9v2KUbqGkAyN5kMNNJY+WhCoNobVYJhVpSaRm
+	QT8+Ic8Z3+lr/GfXQVccpUBEM+FrzmBc8YGwi7kucp9s6EwuCKEH050JQXr4rQ667ssLjcwFvyk
+	9FYM+CzX8F1vSSt3wSUL6oG2gFg8c2cUMPgOyqluy52X86/QPWw9q/ZjFBZ+DtMRBjBQjXxGLGP
+	KEI+mJW3hOixPgU4BWR/S660VCdwB/Y
+X-Google-Smtp-Source: AGHT+IFVyCSezBAzxToc5Wft7EEWVLci6k+HHKtaSVZ83Zsxst88kFH2cuFa+WzAgiHdox+8bfTeew==
+X-Received: by 2002:a05:7301:dd98:b0:2a6:9ea0:6db with SMTP id 5a478bee46e88-2a719fb9759mr9346584eec.28.1764218355236;
+        Wed, 26 Nov 2025 20:39:15 -0800 (PST)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::7c49])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2a965ae9d06sm2471591eec.4.2025.11.26.20.39.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 26 Nov 2025 20:39:14 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] fuse3: Add missing rdep on file for ptests
+Date: Wed, 26 Nov 2025 20:39:12 -0800
+Message-ID: <20251127043912.694489-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=fozRpV4f c=1 sm=1 tr=0 ts=6927ba81 cx=c_pps
- a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
- a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=t7CeM3EgAAAA:8
- a=qWz0Vc7-ULiSU3OosZEA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI3MDAyMCBTYWx0ZWRfX4pQZB6Bs7aDV
- VrF2UHK7+ebXgPh2gw9OPGlhYuj82t5DVx5dGB6gmIJypAAa2ACRF/1oHYZgWhtO287S+zvfDVX
- UDwgKiLsP2jRBRe0sJRkTaRxvjNcp+i2M/CDwAyAp0ySmx7nWG7DIVfLvr39ZADj/Q/WBDfr29V
- U1qF3O3pLUKMgK0kgs9ZiBy90NTd1EknKpz6hFrybRaD4CMrr5mf1jaKj92yCMBxorUBi+G0n4z
- 7MK/q+x19AjCjAGLm5VKG/wgXHYEd3euwo2tNWF4QdTNYiBGmao/bxse43jg09+Bu2NwCndRKIU
- dZu0kAYRbTXJu1iydv2dIxCQ0IRlGgkCuQqJMyZ70tO9hj611UoAGQerKNe7iw7l+sUCdIRxwVB
- Uw95F1g1IY/w6uSAhX2BREHfZt/izQ==
-X-Proofpoint-GUID: QEtfljnZMnq_SMFY2O3uab9_HtUzqNdD
-X-Proofpoint-ORIG-GUID: QEtfljnZMnq_SMFY2O3uab9_HtUzqNdD
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-25_02,2025-11-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 clxscore=1015
- spamscore=0 impostorscore=0 malwarescore=0 suspectscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511270020
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Nov 2025 02:42:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122102
+ <openembedded-devel@lists.openembedded.org>; Thu, 27 Nov 2025 04:39:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122103
 
-From: Changqing Li <changqing.li@windriver.com>
+Fixes
 
-After upgrading hdf5 to 2.0.0, h5cc and h5hlcc will only be generated
-when pkg-config is found. With current default config, it will not be
-generated, remove related configs to fix do_package failure
+E  FileNotFoundError: [Errno 2] No such file or directory: 'file'
 
-| DEBUG: Executing shell function multilibscript_rename
-| mv: cannot stat '/tmp/work/cortexa72-wrs-linux/hdf5/2.0.0/package/usr/bin/h5cc': No such file or directory
+../../python3.13/subprocess.py:1972: FileNotFoundError
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ meta-oe/recipes-support/fuse/fuse3_3.17.4.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-index 79ce8a018d..798ca1b83f 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
-@@ -7,7 +7,7 @@ SECTION = "libs"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=71a191398102f76050a4e56e78cb4891"
- 
--inherit cmake siteinfo qemu multilib_header multilib_script
-+inherit cmake siteinfo qemu multilib_header
- 
- DEPENDS += "qemu-native zlib"
- 
-@@ -40,10 +40,6 @@ gen_emu:class-native = ""
- 
- do_unpack[postfuncs] += "gen_emu"
- 
--MULTILIB_SCRIPTS += "${PN}:${bindir}/h5cc \
--                     ${PN}:${bindir}/h5hlcc \
--"
--
- do_configure:append() {
-     sed -i -e 's|${WORKDIR}||g' ${B}/src/libhdf5.settings
-     sed -i -e 's|${WORKDIR}||g' ${B}/src/H5build_settings.c
--- 
-2.34.1
+diff --git a/meta-oe/recipes-support/fuse/fuse3_3.17.4.bb b/meta-oe/recipes-support/fuse/fuse3_3.17.4.bb
+index 256c663852..85991ff7be 100644
+--- a/meta-oe/recipes-support/fuse/fuse3_3.17.4.bb
++++ b/meta-oe/recipes-support/fuse/fuse3_3.17.4.bb
+@@ -35,6 +35,7 @@ RDEPENDS:${PN}-ptest += " \
+     python3-pytest \
+     python3-looseversion \
+     bash \
++    file \
+ "
+ RRECOMMENDS:${PN}-ptest += " kernel-module-cuse"
 
 
