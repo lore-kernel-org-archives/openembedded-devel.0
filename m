@@ -2,96 +2,107 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5731FD116FC
-	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 20:19:01 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3260.1764361132556431188
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 724F8D116F5
+	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 20:26:51 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3387.1764361602327920243
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Nov 2025 12:18:52 -0800
+ Fri, 28 Nov 2025 12:26:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eVFT0YJ4;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-47789cd2083so11813265e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 12:18:52 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=adZgCxYG;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4775e891b5eso9349765e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 12:26:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764361131; x=1764965931; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=GMq/nFeahgVjCUk0uE7ZD5Pme7SbGmR9rG4PWj8iCxU=;
-        b=eVFT0YJ4nmqHvjZHHo5pOhjzeWDzL5BJoR9SwTOBiUfT4yisF8CMNVjFHy6zCq4nIc
-         zrPu7CVu3m5jAoDv3oz93f7ZvjSfLLz73e6g0fxYsDsxlGHI9KDicqm3HVGslk6GzMPK
-         1xZwypHku6BPZK3+Db1O4Is+ugvJecrp/GACirywIssVMzaqrBrXqvhP4bRr0sC/aPL0
-         ME72DxUKNC9ngoebJZC12q9SbC+vwkHDbgiJO1nYiWBb06MsFoWg4blZ40d9RHLV6m10
-         tOdOARS7IpyD/sNXy2uBJgeqMjmHmraajKFzVzrJlys4KTGeFGEbgq4OeANAHYvB2oBd
-         mKyA==
+        d=gmail.com; s=20230601; t=1764361600; x=1764966400; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=DrQ27bQ+nJgf4BATwxBiDE5qy/9kUPGlsBlMAwJE1UQ=;
+        b=adZgCxYGnVaexSLdUbTH/6/WwFmRB1bu5cEnNu2kVTXhnMlsJZZ4V6pJ+OGQlJq+VV
+         Vj2OTuMiunzrazptpw70WjoTWFQlmVmcZDut/JMo0tHW7nNEXUWKRo+w2nokSWjF9M9V
+         y3HW8wipOmynduOanKTpJx6OFsUTWKyxuaDBcRJu24T4gGLudqTmLhC2+Mobf21MHmZW
+         rJTUizvFlryGfj7x53a7xlstPlb9lJTf93r/lFTu6gsS4IvUNtUYgu2EzbgHm+r33Zdg
+         ERkvfRAsmQN6t+dRTBy7iUqRtudLMPnAhORPtEZYsA9aMpVc2997jRkUYPHo1Ce2Qqaz
+         Xxlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764361131; x=1764965931;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=GMq/nFeahgVjCUk0uE7ZD5Pme7SbGmR9rG4PWj8iCxU=;
-        b=AP2wnxKgumfSJgi97l9+BmzF2mYLKusmePsho1ExdLGL93t8zEH2upG95TL+ft9WY2
-         he5dB9eHhmU6AHBVZJzMGMFpU76uq8AxZFNEjCUhDZTaIzmekUXID2NxQPpojXkt3bd9
-         f65NpmCQAu3ufg+5coTIFIliEDMCLiIab5pPMmBWb1Mc9ULFyTB8klqVIlEPWsEGrcDY
-         YbgZYiWENsPGHGEYsDLiQ04umnfj/MJeH32Ef8PkqtEz1F7yL2M14Mzy3pEVsabkvL5i
-         Qa1oJhV9YT8SMMfowv7EhXD79Qw0BeTRKcQWUiNmtuBDk1KPbkRLb0C7sF4D0l3tUeQO
-         E0DQ==
-X-Gm-Message-State: AOJu0Yz1cT+QKLqccmMH/xFkc7GnZ2je3hVl6Sp7II+Dg4Wo9P3u1eoX
-	rd37Gsomovx+htXaKO2+xqyEJwiQnHtHvK1Ev5XKBukBEiNMfFKACWObNM/b3g==
-X-Gm-Gg: ASbGnctzyqVgL9Xk7m1vaA/RTkjtT8LT5l7NhN28vf0LVsw9fo1eDllXE6vYLlboh0s
-	8/mKtp8Wtx9sOo4WX/Yniy/2Jq2Y9rl1MUNEgm+D1iKK/oq0R9CEkqwovqfLdoiEC3KQjN0HuKj
-	eKn8L6yw7wlCtdnTpfg831CxLwZ0ebfoxEaTnQv8wu+318uW6m/0q6Rjk+fXR3W3zbiWRb9Ix01
-	WJL4plCzIvo7TqFhgUGNvQLKwzbaMKE5riOCgo5fVG6XWDfIsOqWxnvL3AZFK1kBYBiJ+C40VVz
-	sGP+z9cXLSrIdWhBf353LcZaIWamXp/K1Gy3noBQhdj9FfOxvNwFRM3ewwnOr9CQEGU8+LNGupZ
-	adrtUpNUVI4ov8mEJO2YNs1bOiivJFD9wwbFEA38r0gJAlo+YoHTUd4mfeTYB7uS+s0uA9U5t02
-	jncG1TVe/IFoYmeGYQ9nw=
-X-Google-Smtp-Source: AGHT+IGRlG032OxkzP4pFjPg6Nc5GM5wgpQhcJ/0p5LGLH0DV7T6NhHCc6QE06HSyvd6E4jtm3W/7Q==
-X-Received: by 2002:a5d:64e9:0:b0:42b:3a1b:f700 with SMTP id ffacd0b85a97d-42cc1cbd1d4mr32791153f8f.20.1764361130872;
-        Fri, 28 Nov 2025 12:18:50 -0800 (PST)
+        d=1e100.net; s=20230601; t=1764361600; x=1764966400;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=DrQ27bQ+nJgf4BATwxBiDE5qy/9kUPGlsBlMAwJE1UQ=;
+        b=hG2VQaC4KPX/CqDHdxdm+IHkSnXiG7hRZe66gLIOx0zzbnRAVJ/8tC0a9eWNe4xFFJ
+         B3ODFvoAjU2+KwLd27ufnckD4oYLK+ancF0JjHGaCInBYryuYP28mMOBI/N56H5ZKhZ7
+         BgkW0knaqlSOjs9BqX/pEVESbzK5EGTby+LdIofH/Fk+eEPHEsQFj2jgA3eBmH1rA39f
+         ag9gwnwt80soaCLhJ2DskOlZX5XFRU71LXAfqFrMGVd6+eUZJWx4WJht+HW4dB3rsOZ9
+         0ipp1zmhZFy1Pb3ebK60gtgf51ZfJhtJzPOmO020d+kjzYdU0Q1yvQaTFpjdMjmGEHWG
+         rrjQ==
+X-Gm-Message-State: AOJu0Yzn9eNEfZcXo2Z93SWgJBZKlTH4UmSupc95X6aTCsxUeJ1sWwqb
+	eyEUtfpWBghji6FQ6cZLvmpIDKF/wkS9DxM1YWbBG9y7Q/vGoMrxYEmKz17czw==
+X-Gm-Gg: ASbGncvP0anc2nMbEVfB9ynzygj6U6+tFB9cuUYUu8L8hqRy+kLjYrJldNmmooFxGbc
+	6vfHbXJ4G9erpK3jcJ4L7mvcyN5mLSziYVURm1Fji3mAwu0VGZQkm8mID7zgXWnLJ2BZgTnPYZ9
+	Q7Xy6aGzkDq4b01WS7s0taBMYNQGP9rjhpUxujozt4WzN8fxdgp87dgNstP9josqO/dibco2qCO
+	kf8f50mbt0+QqD8pw+Vp8FqVvb7eXvXx3oyxd4HEGCE7AIAcEEnWzmarrrLQWh5Ol6cGcfNrUCh
+	5jvz/bsA4O3QFADGluKIRJi6frCWFOeYo0GuELDb2KCBNj72JGytGdDMW9LmGRjh0uJw1rG4giJ
+	JBzhukAsHysZ3IrjEMbCppsObbB3gvEigfBFOnolv1QIjye5cbo5Py9uibpUYF481+uUf5gUJ2C
+	uwzmt1ZvBr
+X-Google-Smtp-Source: AGHT+IEWFvBjHnpkWRD0ZAKvSi1iUvJa31XwPzWh9pwSC+QZpHorRDO+R03wUhochIpjbbpqwTeRoQ==
+X-Received: by 2002:a05:600c:3541:b0:477:9650:3184 with SMTP id 5b1f17b1804b1-477c0165bc3mr303877045e9.2.1764361600359;
+        Fri, 28 Nov 2025 12:26:40 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42e1c5d6064sm11674324f8f.13.2025.11.28.12.18.50
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4790adc6f7bsm177198595e9.2.2025.11.28.12.26.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 28 Nov 2025 12:18:50 -0800 (PST)
+        Fri, 28 Nov 2025 12:26:39 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 08/14] libraw: ignore CVE-2020-35533
-Date: Fri, 28 Nov 2025 21:18:39 +0100
-Message-ID: <20251128201845.2578315-8-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH v2 1/3] dbus-broker: upgrade 36->37
+Date: Fri, 28 Nov 2025 21:26:37 +0100
+Message-ID: <20251128202639.2631231-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251128201845.2578315-1-skandigraun@gmail.com>
-References: <20251128201845.2578315-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 20:19:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122140
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 20:26:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122147
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2020-35533
-
-The fix is already included in the currently used revision.
+Changelog:
+- Add `/etc` and `/run` to the search-paths for system services. This
+  change is aligned with recent changes to the reference
+  implementation.
+- Support systemd's `notify-reload` to trigger a reload operation.
+  This replaces the old `busctl call ...ReloadConfig` operation.
+- Extend `org.freedesktop.DBus.Debug.Stats.GetStats` with all the
+  fields defined by the specification.
+- Fix a bug in match-rule processing which caused argument processing
+  to fail for any but the first message argument.
+- Fix a memory leak in configuration processing when parsing invalid
+  user or group IDs.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-support/libraw/libraw_0.20.2.bb | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libraw/libraw_0.20.2.bb b/meta-oe/recipes-support/libraw/libraw_0.20.2.bb
-index ee64c33d78..41aac581f1 100644
---- a/meta-oe/recipes-support/libraw/libraw_0.20.2.bb
-+++ b/meta-oe/recipes-support/libraw/libraw_0.20.2.bb
-@@ -11,4 +11,9 @@ inherit autotools pkgconfig
- DEPENDS = "jpeg jasper lcms"
+v2: no change
+
+ .../recipes-core/dbus/{dbus-broker_36.bb => dbus-broker_37.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-core/dbus/{dbus-broker_36.bb => dbus-broker_37.bb} (93%)
+
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker_36.bb b/meta-oe/recipes-core/dbus/dbus-broker_37.bb
+similarity index 93%
+rename from meta-oe/recipes-core/dbus/dbus-broker_36.bb
+rename to meta-oe/recipes-core/dbus/dbus-broker_37.bb
+index 8959927a92..f0312181b6 100644
+--- a/meta-oe/recipes-core/dbus/dbus-broker_36.bb
++++ b/meta-oe/recipes-core/dbus/dbus-broker_37.bb
+@@ -11,7 +11,7 @@ DEPENDS = "\
+ "
  
- # The fixes are already included in the current versin (0.20.2)
--CVE_CHECK_IGNORE += "CVE-2020-35530 CVE-2020-35531 CVE-2020-35532"
-+CVE_CHECK_IGNORE += " \
-+    CVE-2020-35530 \
-+    CVE-2020-35531 \
-+    CVE-2020-35532 \
-+    CVE-2020-35533 \
-+    "
+ SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "d333d99bd2688135b6d6961e7ad1360099d186078781c87102230910ea4e162b"
++SRC_URI[sha256sum] = "f819a8db8795fa08c767612e3823fd594694a0990f2543ecf35d6a1a6bf2ab5b"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/bus1/${BPN}/releases"
+ UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+)"
 
