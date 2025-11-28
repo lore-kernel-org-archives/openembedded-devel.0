@@ -1,188 +1,96 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <patrick.wicki@subset.ch>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94812D116EA
-	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 20:48:51 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3680.1764362925405966651
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96EB3D116F5
+	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 20:50:51 +0000 (UTC)
+Received: from outbound.ms.icloud.com (outbound.ms.icloud.com [57.103.72.93])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3700.1764363043692690172
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Nov 2025 12:48:45 -0800
+ Fri, 28 Nov 2025 12:50:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QF7DLjTm;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-477b198f4bcso15421955e9.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 12:48:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764362924; x=1764967724; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=VmXXnqdu1bcUry5P5t9Bohc9NhMZRx1x9pxEQzrPM9M=;
-        b=QF7DLjTmOs43p+WppXm/N5hyFpgxzUKcos2yyD3JKabhiflU5iY0I+8QVIhcUapTI8
-         e7Lbq2uC4RZsUARVy96nkYjcpeYSQ8bujo3ZZkhhGn+JN5vgTvsis873YnpGDXQYRERn
-         stqcijYmZRmSJxCiXUfjxzDZ8ZIPr6wkXd8ZL6Gy6n66e+/aGvwKzOehxqJX30o9aQ90
-         ZaORM8LvJ1g5upouSac+pi/xkbXQ66OStXRpQFdwcGxpwbyidyvSHWb6BBLvBZAI/CJ5
-         zfobnn6wvCUK0xHq38x9wlHgeidRBA1eRwODSka55QmhxV4R84JuQVEKAunzum6d9FbK
-         xTjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764362924; x=1764967724;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=VmXXnqdu1bcUry5P5t9Bohc9NhMZRx1x9pxEQzrPM9M=;
-        b=olXl4xDd4HoBV2e7Y67N1G0DF93yM/1DjBqtlY+e+S5yfmEQtB2IqNkvXEo/r0BGf9
-         KNE7f/d1yYl1fmvDvTmze8xwqQslqP7bi2pUe2u+wQqldV59wuZsEs4DIRFYRDYv+LTR
-         yuyRMXym10cqRuVshBEbQm+WvSSQhOs+Uo7t8jPSp3MbR+SEhPw4Tp/91YEF0HoYBasj
-         2xsL2w0Kk0tRLEXjlB12VCjdjRyvbK5crlnAcSTG3HXOFiQyIWmAVXpOZeqPYJr5qL0W
-         kMzkB9PoTofjlyYcfCWs6clwkY70stfJhwiIT1r0GGjitH0eJjRftp9MPCFOmXSobqS/
-         787g==
-X-Gm-Message-State: AOJu0YwgD1arAwQETpZMoHjBe0aCODzfb+98K31wk7svRGh0WXUKj+7O
-	YNDVltVyZNsD2Xtv/QvYi4J52ul1I63qbo9N8sI0cRI5466jPdLMxUv535zPhQ==
-X-Gm-Gg: ASbGncvD9+LJhts3UQaVD2/oQEvVpS/xdPRGpTkhBtar0wnZTTXN7bl16paDLBt8wHd
-	TVM9/bIUynRuvFFlwMIVIwiVgUlSYvtOeRxoEleIN7c0QORh7RkVyQbMzmfLXamfJE7TSsJTkHy
-	m6vkCzDWq138hwh/IkMY5SHuTS/xXbVq/DapUg3e52HqDHyeyTcxqLnM9fUMxDuWpv3H+L8yHy8
-	Qv4dj9EW81rA7M4wbMhTfSXK6bqy8VcnCmesD4ktrx9amQ+dIh8UaGb/8ZrDsVQGdsEtWVHjW/V
-	k5pSirVLV4Kp6JiTb4vKCUqUOFKA6pYCGodb9ozGYq0R7zwxYxFtyMZN7UhV4U0cw73Z8Hr0+mo
-	yscGZxpugtivsZL5cKzpnuTF5QvxINiY3iQFbCndsXGjKPxWmGo/75IEOQ/jhNeqs0pnxWb/vbY
-	C6jCCy4sJc
-X-Google-Smtp-Source: AGHT+IEAAZ3HskuJ2f8OYezs0RacOHCnBOabm5ez/wsiwJGWDvUgNX84p73/h1WkePdBIR9weBCx/g==
-X-Received: by 2002:a05:600c:3541:b0:477:9650:3184 with SMTP id 5b1f17b1804b1-477c0165bc3mr304344815e9.2.1764362923469;
-        Fri, 28 Nov 2025 12:48:43 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4790ade13ddsm166399485e9.8.2025.11.28.12.48.42
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 28 Nov 2025 12:48:43 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@subset.ch header.s=sig1 header.b=ZEZE7PgF;
+ spf=pass (domain: subset.ch, ip: 57.103.72.93, mailfrom: patrick@subset.ch)
+Received: from outbound.ms.icloud.com (unknown [127.0.0.2])
+	by p00-icloudmta-asmtp-us-west-3a-60-percent-10 (Postfix) with ESMTPS id 7E7EE1800B38;
+	Fri, 28 Nov 2025 20:50:42 +0000 (UTC)
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=subset.ch; s=sig1; bh=pBCV0UknVW7hQeN4Fyw6B/cajFiGlC8IcEuztAhXikc=; h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme; b=ZEZE7PgFQIunczXm4Bo3xrpuIC9BYqHFy7WgdrbaTkHAIVYj9VhnPXnk94lSiuuK0pXkTog0FKAHrD/eQPzL/WLQDkXlCahYZJS8a6bgmh/EDY+VTL1VUtu16cOyEgoTBcQmRWl/CDzVpBaGriko/TYDm302C2fFWDNXTyVC/8mp0lUJK/HlzJLxs3+bjgfv0gxO7qyQwfMSV4/0NuyjEobbBmd2GMz94k5go9NpuQanEYGAYFd7+fDmY7/IFidkaRYZlrOZi3Z7RcMzV+GN4rQWF3B556ysFn93fuAmCOb1biDCavHbXhWiW52YaOnzgllfBQq2t/y06HTgqkvHoA==
+mail-alias-created-date: 1663698038540
+Received: from desk (unknown [17.57.154.37])
+	by p00-icloudmta-asmtp-us-west-3a-60-percent-10 (Postfix) with ESMTPSA id 457D8180026A;
+	Fri, 28 Nov 2025 20:50:41 +0000 (UTC)
+From: patrick@subset.ch
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2] xrdp: add ptest support
-Date: Fri, 28 Nov 2025 21:48:42 +0100
-Message-ID: <20251128204842.186288-1-skandigraun@gmail.com>
+Cc: Patrick Wicki <patrick.wicki@siemens.com>
+Subject: [meta-oe][PATCH 2/2] fluentbit: unbundle msgpack, sqlite3 and zstd
+Date: Fri, 28 Nov 2025 21:48:26 +0100
+Message-ID: <20251128204827.3553598-2-patrick@subset.ch>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251128204827.3553598-1-patrick@subset.ch>
+References: <20251128204827.3553598-1-patrick@subset.ch>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: qwLBlRCZG-W8VLg8e5H7tnIAkfKO7ULE
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI4MDE1NCBTYWx0ZWRfX2ZVisMqbuosC
+ n4hA0JxViV4fyKs0bkXWyIrI4e0fVfKStDn6tSJdT24TRLNLeHh+MUVzCI5Yix/zorxUWlQHvW3
+ 8H5G9gwbzzMotPZW8swbKum06Wme5GZiMDGOiJeWcgp7n8/pXZlVIZmBZBI/ktrXLFwElhyAcYk
+ loqXLFb/xbU7u3CwjSuKi4ZKvefSZVZTkMpSibkEXiAtr1P3FTuWUX4Ar0op4evd/HKAjaqhcN9
+ 798peiukVynCdvKR73SSZDJiCjAqqIUE3GKAwbNJbe/eKl34iQM4CLpocVyPIXMj4vNNa5W0Nf0
+ Qf3TJ3URNy1jON7pL+n
+X-Authority-Info: v=2.4 cv=IpgTsb/g c=1 sm=1 tr=0 ts=692a0b22 cx=c_apl:c_pps
+ a=qkKslKyYc0ctBTeLUVfTFg==:117 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=NEAV23lmAAAA:8 a=a_U1oVfrAAAA:8 a=OzzykBneInmVyopyB4EA:9
+X-Proofpoint-GUID: qwLBlRCZG-W8VLg8e5H7tnIAkfKO7ULE
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-28_08,2025-11-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ bulkscore=0 suspectscore=0 adultscore=0 mlxscore=0 mlxlogscore=822
+ malwarescore=0 clxscore=1030 phishscore=0 classifier=spam authscore=0
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
+ definitions=main-2511280154
+X-JNJ: AAAAAAABybWyI63rUJcbzZ6Lvmx2udiK6kZ7zw6DPg4irmz4fs9RtT4yn8VW5De7ZaZOPMfAWi5mqhhAeK9qDj0Lf13Ughg97hj3ETJSKHaE5aAvr/l5g3GsYUF3aurgR9E0NBt5GvNsf8KaabgMzcu/DLJVrjOHmoetypC9MNvt9d7jWngZ8doKvHM9uYWHbkROkxb6PErSaEiLwR7AzDKm2ZlSzvq72JC08/k65n6k6OzHuyvWcjWkWZPkTO0TPJnc+TTirv9Lb6Ht39sc4bhXQHRmSLHYyQ3vjpLoUhIEcIWHmvfSwWcog+9oDen/+jag+2gXMPoJ50TgnfQrOwGqWpwb61Z0vl8nHWT6wpkkEWhXq1/vrOUtjKkiOog0b4SkHes7nS3no9zChB+kB8fJtf/w4NOwHYDQTqSl3zcrVfQQiT5aB5d3a0Bf5SrEbfeNtbvRwgNtB8hL4RFdpWBuzCskQ/1SnaQ8gROtVep8ohnLfk1es0FeBjLS2zGrg+4WV4bu+Y/uB6vRWZujD0AXgHhO+hgcZTymzFsUL+zLOMDvXBhQjPdlzV5hT0WEsKu+ACTKYdCXtbc5eqjmz9VWLrRbeoUwKdj2XBWgANwIqYVuPjlzLF2VZSJrFYmGS8E=
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 20:48:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122151
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 20:50:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122153
 
-It takes under 10 seconds to run the suite.
-Executed succesfully on x86-64, with musl and glibc.
+From: Patrick Wicki <patrick.wicki@siemens.com>
 
-The recipe requires pam DISTRO_FEATURE to be present.
+With https://github.com/fluent/fluent-bit/pull/9572 it is now possible
+to unbundle these and use the system libs instead.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
 ---
+ meta-oe/recipes-extended/fluentbit/fluentbit_4.2.0.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-v2: add xrdp to the PTESTS_FAST_META_OE list conditionally,
-only if pam is enabled in the DISTRO_FEATURES
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.0.bb b/meta=
+-oe/recipes-extended/fluentbit/fluentbit_4.2.0.bb
+index 279486eee3..2c9b874e50 100644
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.0.bb
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.0.bb
+@@ -57,10 +57,11 @@ PACKAGECONFIG ??=3D "\
+ PACKAGECONFIG:remove:toolchain-clang =3D "ipo"
+=20
+ # Use system libs
+-PACKAGECONFIG[prefer-system-libs] =3D "-DFLB_PREFER_SYSTEM_LIBS=3DYes,-D=
+FLB_PREFER_SYSTEM_LIBS=3DNo, nghttp2 c-ares"
++PACKAGECONFIG[prefer-system-libs] =3D "-DFLB_PREFER_SYSTEM_LIBS=3DYes,-D=
+FLB_PREFER_SYSTEM_LIBS=3DNo, nghttp2 c-ares msgpack-c zstd"
+ DEPENDS +=3D " ${@bb.utils.contains('PACKAGECONFIG', 'prefer-system-libs=
+ backtrace', 'libbacktrace', '', d)}"
+ DEPENDS +=3D " ${@bb.utils.contains('PACKAGECONFIG', 'prefer-system-libs=
+ jemalloc', 'jemalloc', '', d)}"
+ DEPENDS +=3D " ${@bb.utils.contains('PACKAGECONFIG', 'prefer-system-libs=
+ luajit', 'luajit', '', d)}"
++DEPENDS +=3D " ${@bb.utils.contains('PACKAGECONFIG', 'prefer-system-libs=
+ sqldb', 'sqlite3', '', d)}"
+=20
+ PACKAGECONFIG[all] =3D "-DFLB_ALL=3DYes,-DFLB_ALL=3DNo"
+ PACKAGECONFIG[arrow] =3D "-DFLB_ARROW=3DYes,-DFLB_ARROW=3DNo"
+--=20
+2.52.0
 
- .../include/ptest-packagelists-meta-oe.inc    |  1 +
- meta-oe/recipes-support/xrdp/xrdp/run-ptest   | 13 +++++++
- meta-oe/recipes-support/xrdp/xrdp_0.10.4.1.bb | 37 ++++++++++++++++++-
- 3 files changed, 49 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/run-ptest
-
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-index 0473b60504..860c09119b 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -53,6 +53,7 @@ PTESTS_FAST_META_OE = "\
-     utf8proc \
-     uthash \
-     xmlsec1 \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'xrdp', '', d)} \
-     zeromq \
-     cjson \
-     libplist \
-diff --git a/meta-oe/recipes-support/xrdp/xrdp/run-ptest b/meta-oe/recipes-support/xrdp/xrdp/run-ptest
-new file mode 100644
-index 0000000000..4db66da65e
---- /dev/null
-+++ b/meta-oe/recipes-support/xrdp/xrdp/run-ptest
-@@ -0,0 +1,13 @@
-+#!/bin/sh
-+
-+RESULT=0
-+cd tests
-+for t in $(find . -type f -executable); do
-+    ./$t > $t.out
-+    ret=$?
-+    if [ $ret -ne 0 ]; then
-+        RESULT=$ret
-+    fi
-+    sed -e "s/^ok/PASS: /g" -e "s/^not ok/FAIL: /g" ./$t.out
-+done
-+exit $RESULT
-diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.10.4.1.bb b/meta-oe/recipes-support/xrdp/xrdp_0.10.4.1.bb
-index cd45d27fe4..8203ada8e5 100644
---- a/meta-oe/recipes-support/xrdp/xrdp_0.10.4.1.bb
-+++ b/meta-oe/recipes-support/xrdp/xrdp_0.10.4.1.bb
-@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
- "
- 
--inherit features_check autotools pkgconfig useradd systemd
-+inherit features_check autotools pkgconfig useradd systemd ptest
- 
- DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native imlib2 pixman libsm"
- 
-@@ -12,6 +12,7 @@ REQUIRED_DISTRO_FEATURES = "x11 pam"
- 
- SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
-            file://xrdp.sysconfig \
-+           file://run-ptest \
-            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
-            file://0001-arch-Define-NO_NEED_ALIGN-on-ppc64.patch \
-            file://0001-mark-count-with-unused-attribute.patch \
-@@ -25,8 +26,9 @@ UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
- 
- CFLAGS += " -Wno-deprecated-declarations"
- 
--PACKAGECONFIG ??= "fuse"
-+PACKAGECONFIG ??= "fuse ${@bb.utils.contains('PTEST_ENABLED', '1', 'test', '', d)}"
- PACKAGECONFIG[fuse] = " --enable-fuse, --disable-fuse, fuse3"
-+PACKAGECONFIG[test] = " --enable-tests, , libcheck cmocka"
- 
- USERADD_PACKAGES = "${PN}"
- GROUPADD_PARAM:${PN} = "--system xrdp"
-@@ -77,6 +79,37 @@ do_install:append() {
- 	chown xrdp:xrdp ${D}${sysconfdir}/xrdp
- }
- 
-+do_compile_ptest() {
-+	for testdir in $(find ./tests -type d -mindepth 1); do
-+		cd $testdir
-+		echo 'buildtest-TESTS: $(check_PROGRAMS)' >> Makefile
-+		# change the test-data folder to ./data instead of ${S}
-+		sed -i 's|-D TOP_SRCDIR=[^ ]*|-D TOP_SRCDIR=\\"./data\\"|' Makefile
-+		# another test data folder redirection
-+		sed -i 's|-D IMAGEDIR=[^ ]*|-D IMAGEDIR=\\"./data\\"|' Makefile
-+		# and another
-+		sed -i 's|-DXRDP_TOP_SRCDIR=[^ ]*|-DXRDP_TOP_SRCDIR=\\"..\\"|' Makefile
-+		oe_runmake buildtest-TESTS
-+		cd -
-+	done
-+}
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/tests/xrdp/gfx
-+	install -d ${D}${PTEST_PATH}/tests/data/xrdp
-+	for testbin in $(find ./tests -type f -executable -mindepth 3); do
-+		install $testbin ${D}${PTEST_PATH}/tests/
-+	done
-+	install -m 666 ${S}/xrdp/xrdp256.bmp ${D}${PTEST_PATH}/tests/data/xrdp/
-+	install -m 666 ${S}/xrdp/ad256.bmp ${D}${PTEST_PATH}/tests/data/xrdp/
-+	install -m 666 ${S}/tests/xrdp/*.bmp ${D}${PTEST_PATH}/tests/data/
-+	install -m 666 ${S}/tests/xrdp/test1.jpg ${D}${PTEST_PATH}/tests/data/
-+	install -m 666 ${S}/tests/xrdp/test_alpha_blend.png ${D}${PTEST_PATH}/tests/data/
-+	install -m 666 ${S}/tests/xrdp/gfx/* ${D}${PTEST_PATH}/tests/xrdp/gfx/
-+}
-+
-+RDEPENDS:${PN}-ptest += "imlib2-loaders"
-+
- SYSTEMD_SERVICE:${PN} = "xrdp.service xrdp-sesman.service"
- 
- pkg_postinst:${PN}() {
 
