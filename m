@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30A12D116F9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10EA7D116E2
 	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 20:19:01 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3263.1764361134560408716
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3260.1764361133233036397
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Nov 2025 12:18:54 -0800
+ Fri, 28 Nov 2025 12:18:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Kx3SScQN;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-42b39d51dcfso1453494f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 12:18:54 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=G10PCt4A;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-477ba2c1ca2so24702445e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 12:18:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764361133; x=1764965933; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1764361131; x=1764965931; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=bALTHpv3kBp8MeFQInSS5WUNfM+aFDcTIgL0tFUCNzc=;
-        b=Kx3SScQNk/nlg4n5BWkmbz3A5MLPCdbduRwJd97iZqIgJHo72bew4fyWqPm3Rl5Vwe
-         iZzjUQiTkvpyl3R/dIx+UxqtGN3lFCx5AISFgAMzsGm5o839I+m0LCPlRbU8et4jj3zI
-         LqCMEqAZYRzu9u0fkBXHo3isLdomujUCriTR1srAca8h30Z2npEN+XsPkKahafMGeXX/
-         8JlFdok3Xq5doRBDqizAbCW8xrI2X7Hbu1ijnEJabxYXtScwe9ZlS2sMpfbM38mf1vFe
-         3aYZyloWQUNEVRL1fBGaxwL+xN8xMMqpm12UEfRWG4UPsC3jQslpbF1lYgjpOychWpMt
-         IBCg==
+        bh=ldfJNaW1+PjFj4wYgqXLxIi8RkALTMjExhYM11NIAOg=;
+        b=G10PCt4AjLS0+K4gpXig35PZSS9Je2nCANgA/8mQfflVpEm3VhYg5vflEP3I7Q4dzW
+         360dDl2wefKfOJ+d4siG4ww7DfFZ+wH3B+Qd1f1jERVKHqIe2pM0GciIraYc38XOGk2Y
+         /j1sZ8grup+NdQL+506jkdo2YASFZgtUKx/7WZVeg+WvJHpXdjP/zfgmF2vWhsrmQGiS
+         YoBimEsDuS/SfTlWEihW/+s7BoqmS5BIEMtLBGp90ZqcoeQIdj0CmsBk7wgUQfpDNm1L
+         g8gGv7ZpzdjzRD/euklUoj115Iqx28umedzTU41XGSRqd7WGh1S/J5ksIh4Xyz7/4LUb
+         GISA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764361133; x=1764965933;
+        d=1e100.net; s=20230601; t=1764361131; x=1764965931;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=bALTHpv3kBp8MeFQInSS5WUNfM+aFDcTIgL0tFUCNzc=;
-        b=Gz4tHMJz2Mx9ZSzSUiIz25FwUiHAUBwSmIVEgizfnCL9AhOCQ6fopS5EnbV30lOUvO
-         48Tt9YnmXcVwA545FjW7OIEikgwvzQLZvm+lMql06hAhEPLUFjALgRMTIbrnFGAW9Lqn
-         q0owYT98/eBbJEq084SqpgDqGWgwuq5Un+nia631VGYOygLpKmaPLvmUjRczg8GhMWvZ
-         kVjF/vdCuvrqO/HaD/wAEzsE5DAYQsRl583HwuNdq4lx0oIlAhoAgAOZ4b2uFNnh5x6o
-         bElr0ZnTj8ME3I2yu8ak6znOqHVmNrHyshcAWVcDA4YyHmflo7LgfGX35tsHpaUdKlV5
-         LDHQ==
-X-Gm-Message-State: AOJu0YzLl9fP6f2CbDF+xmlZAuN54sF5x7shLdV8AizvcziPxnyS+/pK
-	9Z8utkwLHii75AxYzQQMvsUu4Q39SAYYIg7mn8VaWQ/VxdyQ5On7b8JiCkw8fA==
-X-Gm-Gg: ASbGnctX9DpVGOfmqQfqbNN8mY1hB8Wh+iArTdp2NIzUTg0ARkKefdLhPFGmvdRu2Sd
-	JcBX2FWt6OM9vFWwvHmcEQVqjjta0ogibwUk18u1MeENkLUjYN7SjbrgO2XhzZBX1w4iqp8SZ0d
-	ACeEj/gnO/8aDhoOnEXNLntzA0iNwj3+Gd9mFPlPrqTGA8GVjDEWGdya46zLxv+98KU9o+CcQzA
-	WG23hk8EB0wg5GOh8Jo8L9r3hk5m2kz46jYgvYVtoLL3tsaRKqkQraiX0Y0p80tcQhzFxpV1bp6
-	tA1ghQ+472XwzpqO8Y3+OkOLOVFpbSB5TKcys6QzZXEkmVMNyZolXQRFCONFJey3M/dpBGJyX/w
-	UvwfRIXAFZ06pxZTI8rCoyU8hTAlOzBGf7vAknMLY6mL49X5VYGoBT4nLCP8N0itEkxUpiKmh1w
-	StIJ5jBsa0AMSqAxompy8=
-X-Google-Smtp-Source: AGHT+IGMDXcdKvkD5TRCZYgrDEJcJBDEKzcAHAH2Z/HzEQFa32g8UaE3XDZJwwu9N7nbFk0A4UK3uA==
-X-Received: by 2002:a05:6000:2484:b0:42b:41d3:dafa with SMTP id ffacd0b85a97d-42cc1d0cfcemr30070470f8f.46.1764361132811;
-        Fri, 28 Nov 2025 12:18:52 -0800 (PST)
+        bh=ldfJNaW1+PjFj4wYgqXLxIi8RkALTMjExhYM11NIAOg=;
+        b=RxzsOGhkHlkIZe9/cFYmHCNds3xamzlnNP7eMlmdCkVSWm3bbncz4V3oRJrRgGTuN7
+         4ZP34NHZGzaw5mhmCJXUyFxZ7MzhOH5V125xOggtbb+kJxXnsN4xwaLPjO+CiPPqQqps
+         7cQEziB5l9ifCy4bC9zlpqtzrH9XbJxqKIfAfkz6KUwqx3wa9YR+/LW8fBLm/Qci8XKa
+         POlEmhvbJBI4+LfzlJX3PoKIPFJHZpTYc7+gcJ3o6mSNhtbf/NWIX6nL5yJJDN0XCsfF
+         8UNNNbHuTn3vg/HY2ylXB9hge5XYhTx+itUAXKMv9aCBLedatdj1L2HVbRfplxeIUou8
+         +KFw==
+X-Gm-Message-State: AOJu0YyGLtHt7A6w87wzXG+yRn/LWrJ7NG0ofxsP2AbBJSLamm63BFQT
+	jRuC0PVhE37QlRb1u3KoTx6VNRcG3xn7jMQapO4lRyJW0Y6WegaFVVmVAcaFFw==
+X-Gm-Gg: ASbGncvTeR9Vp7B64MBZxvxziXhgIuCBSdE8tn8OJgQqXX/nSIMEUcz+fuphnU0xMmr
+	tIBOo4wPAuAmKkHAaY6W/GYcQGuAzlhOP7V7bPpqN7cqW4+5FLti2vbRQ7x3jTyMW2xSr539rG8
+	H5M478rNR1aFvqxrgf5VyNArVd716/U9TYYE5ipDHwpdjnhDcVSRV2LxHHaDIoauyPYi6UznlEj
+	RU2UHYm7C6RE6ZfFi4wJ4svXpZUs7LzELo+E+bXY3lJX1y/npXjN6TWarIBNK2hoSlsqA9pAn4y
+	D1AyW8XO5Q8eofmBgK5zRTun+sExWpFcmHrACP70taB9JTh/60ZJU18YB1DukUtMfdT8xOkYwmS
+	WjD0T1Z+PUwZGldReq4HLQEA3CjFWs9/DKLJgdspz6mlje9Ze7bFB+OFPOhssQ4iMOjZfwsGaZx
+	TKgKzbY7pZ
+X-Google-Smtp-Source: AGHT+IG7Nk7x4oqkFCYjjNX5yl5RXzaj6A7zDISq18OzOUJE4pomyEZnMPSH/+olOYEr2X8GwzxOsQ==
+X-Received: by 2002:a05:600c:3b11:b0:477:9814:6882 with SMTP id 5b1f17b1804b1-47904aceef6mr152956515e9.5.1764361131489;
+        Fri, 28 Nov 2025 12:18:51 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42e1c5d6064sm11674324f8f.13.2025.11.28.12.18.52
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42e1c5d6064sm11674324f8f.13.2025.11.28.12.18.50
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 28 Nov 2025 12:18:52 -0800 (PST)
+        Fri, 28 Nov 2025 12:18:51 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 11/14] libraw: patch CVE-2023-1729
-Date: Fri, 28 Nov 2025 21:18:42 +0100
-Message-ID: <20251128201845.2578315-11-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 09/14] libraw: ignore CVE-2020-35534
+Date: Fri, 28 Nov 2025 21:18:40 +0100
+Message-ID: <20251128201845.2578315-9-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251128201845.2578315-1-skandigraun@gmail.com>
 References: <20251128201845.2578315-1-skandigraun@gmail.com>
@@ -68,64 +68,25 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 20:19:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122143
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122141
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2023-1729
+Details: https://nvd.nist.gov/vuln/detail/CVE-2020-35534
 
-Pick the patch that is mentioned to solve the issue in the issue
-linked from the nvd report.
+The fix is already included in the currently used revision.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../libraw/libraw/CVE-2023-1729.patch         | 25 +++++++++++++++++++
- .../recipes-support/libraw/libraw_0.20.2.bb   |  4 ++-
- 2 files changed, 28 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/libraw/libraw/CVE-2023-1729.patch
+ meta-oe/recipes-support/libraw/libraw_0.20.2.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/libraw/libraw/CVE-2023-1729.patch b/meta-oe/recipes-support/libraw/libraw/CVE-2023-1729.patch
-new file mode 100644
-index 0000000000..db6f2a2d9a
---- /dev/null
-+++ b/meta-oe/recipes-support/libraw/libraw/CVE-2023-1729.patch
-@@ -0,0 +1,25 @@
-+From f7a1082a65b444d606d82ae71e1279789601f78d Mon Sep 17 00:00:00 2001
-+From: Alex Tutubalin <lexa@lexa.ru>
-+Date: Sat, 14 Jan 2023 18:32:59 +0300
-+Subject: [PATCH] do not set shrink flag for 3/4 component images
-+
-+CVE: CVE-2023-1729
-+Upstream-Status: Backport [https://github.com/LibRaw/LibRaw/commit/9ab70f6dca19229cb5caad7cc31af4e7501bac93]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/preprocessing/raw2image.cpp | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/preprocessing/raw2image.cpp b/src/preprocessing/raw2image.cpp
-+index 18f897eb..64722efd 100644
-+--- a/src/preprocessing/raw2image.cpp
-++++ b/src/preprocessing/raw2image.cpp
-+@@ -43,6 +43,8 @@ void LibRaw::raw2image_start()
-+ 
-+   // adjust for half mode!
-+   IO.shrink =
-++	  !imgdata.rawdata.color4_image && !imgdata.rawdata.color3_image &&
-++	  !imgdata.rawdata.float4_image && !imgdata.rawdata.float3_image &&
-+       P1.filters &&
-+       (O.half_size || ((O.threshold || O.aber[0] != 1 || O.aber[2] != 1)));
-+ 
 diff --git a/meta-oe/recipes-support/libraw/libraw_0.20.2.bb b/meta-oe/recipes-support/libraw/libraw_0.20.2.bb
-index 51057f97b7..b331d77e8d 100644
+index 41aac581f1..c7e83c05f5 100644
 --- a/meta-oe/recipes-support/libraw/libraw_0.20.2.bb
 +++ b/meta-oe/recipes-support/libraw/libraw_0.20.2.bb
-@@ -2,7 +2,9 @@ SUMMARY = "raw image decoder"
- LICENSE = "LGPL-2.1-only | CDDL-1.0"
- LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=74c9dffdc42805f9c0de2f97df6031fc"
- 
--SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=master;protocol=https \
-+           file://CVE-2023-1729.patch \
-+           "
- SRCREV = "0209b6a2caec189e6d1a9b21c10e9e49f46e5a92"
- S = "${WORKDIR}/git"
- 
+@@ -16,4 +16,5 @@ CVE_CHECK_IGNORE += " \
+     CVE-2020-35531 \
+     CVE-2020-35532 \
+     CVE-2020-35533 \
++    CVE-2020-35534 \
+     "
 
