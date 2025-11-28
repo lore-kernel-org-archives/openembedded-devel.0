@@ -1,159 +1,171 @@
-Return-Path: <jan.claussen10@web.de>
+Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B81C7D116F3
-	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 11:58:09 +0000 (UTC)
-Received: from mout.web.de (mout.web.de [212.227.15.4])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14470.1764331085896500381
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 409C7D116F1
+	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 13:55:30 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.16369.1764338129437604151
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Nov 2025 03:58:06 -0800
+ Fri, 28 Nov 2025 05:55:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: signature did not verify: crypto/rsa: verification error" header.i=jan.claussen10@web.de header.s=s29768273 header.b=nOSOCBJ/;
- spf=pass (domain: web.de, ip: 212.227.15.4, mailfrom: jan.claussen10@web.de)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
-	s=s29768273; t=1764331082; x=1764935882; i=jan.claussen10@web.de;
-	bh=ac6NLVgNYCFsWuZdd5q+ZKgyhwdf1KHI5qH9qRThAoY=;
-	h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-ID:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
-	 content-transfer-encoding:content-type:date:from:message-id:
-	 mime-version:reply-to:subject:to;
-	b=nOSOCBJ/zDTl/ZyXUFb85PwJtVBJjwW2Nf15GHzR3dDYV/5fcmaoLoPf4TvV2e8I
-	 VR7yTbM8qVfvwU+d3goczA5mdkCggxx1jCJM+j7Ut8AToFtYev32SczGwB4XNHEFE
-	 HjLndA3y0TrNxqTjdYfIVxqvEjdHxmGPoETdd5jS04oOy8mvZNwVMT0bqWhUJOajx
-	 5x7Ub1dt6ZKxOIw9jQwMr404NnYcVcIceECWIU1s2Ej7N+jFfG2Tk0t6rkS7v4yfl
-	 XFCYaOeWzKHU98jm0FsN8ArVpwrxIHzj6y1MOXmre1yzgfGDYXpmXdfjTWTRCh0fr
-	 3y7NGdUeVwFw8kCQJg==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from precision5810.fritz.box ([192.196.196.197]) by smtp.web.de
- (mrweb005 [213.165.67.108]) with ESMTPSA (Nemesis) id
- 1MzCEB-1wKN5d2NMp-00sAyq; Fri, 28 Nov 2025 12:58:02 +0100
-From: =?UTF-8?q?Jan=20Clau=C3=9Fen?= <jan.claussen10@web.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Jan=20Clau=C3=9Fen?= <jan.claussen10@web.de>
-Subject: [meta-python][master][PATCH] python3-soundcard: Add recipe
-Date: Fri, 28 Nov 2025 12:58:00 +0100
-Message-ID: <20251128115800.2757259-1-jan.claussen10@web.de>
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=apCN7T+p;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=eGBTZKa3;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AS8ONsv3967509
+	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 13:55:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=WRT0jFY/iyTvosJUoiZJ67ueJXC6kJCiBN3
+	dAjedXh8=; b=apCN7T+pG6Agch4++bPzMzR0uUhkd0z6fR8vvKEr3Nr+MsCr4oB
+	233NQ1k582g8fJXVQSoxGMlDjNMNlaBUuVKy6rDgjEiJEn9mS105wq9yuKz86afl
+	TjrAwZENAuYYmM/Qk6DehkLqCaDSkxRHAGYEe9tkpAktqbDv1e3MIdAhdH174rZR
+	f/3jdnEHOK6XpkAmcl71gGEBPB2t1MP1uIyaPAoCAN6aPtrSWoiPfoulpzaeVsrf
+	coLWPB5e0F3m1IeQTQO+CDQGv2rQ3rbnErUMK0cK0Rnzo/2FjPwPLghsJ8d1S5Xt
+	s+EY5SbU84n+acEYVvUm/NACXrArxDRSsgg==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4apkv5kqs1-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 13:55:28 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-297fbfb4e53so29856765ad.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 05:55:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1764338127; x=1764942927; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WRT0jFY/iyTvosJUoiZJ67ueJXC6kJCiBN3dAjedXh8=;
+        b=eGBTZKa3+XdnJcM2wyKydgoakwJsYYlTwJvuGvm/Dy7srJCsR3ierkiI9+abuzYKLo
+         3PlNOn1HskgC0bGoo4NunmfPtn3J+nwhxLaTzhI3hJfHQTJsSKBEfYV49ds51pAFKZOg
+         1WN5fN50syg/oeGSXzk1uMdgD8HYBBOqTfJB3JWWVZE7T4HUZrZ2wvfGj0YIoWYZmeCG
+         K4+YmBTGDrOfA8MSTYu1hKkf1gz6eymWxBOQTSFLuYd/2go5PSRvcs0ZlyZT3uGmSgoG
+         WM+fpnIohEJVTEqYbKOKzqyOwGfL3HkZ9Jcs2KndA67i3KUmh1jp78QYVoZc8BXz4GmI
+         hQXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764338127; x=1764942927;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WRT0jFY/iyTvosJUoiZJ67ueJXC6kJCiBN3dAjedXh8=;
+        b=sy9QNeleyAcOwWowqOM8r7n/93Q1WaIy/+h6hJMRkfYzI3LoOalKq9SRDtD2Q7c1zl
+         rxU//3jjVj76nZH7KwaIin8Zrf2SDHtlVQQng2xLsCiGOPY750SN0bZ7N722IKPkhjYS
+         OLBxre04janZcW71kLIgbiqJQjkcadNHkf5id6Cv1KNQnvfvDezjeGcp+mvQ2FeGH9yx
+         DBhDi7rZzapUVuNyMaMsHLQ5un4fBE59WpMEpYhWcxnH011EG4E6a/nDD/NXwb+w02gI
+         aLlKfI7Xx3Glc/7f+Dq/y4p+cHKPj6Un5XqIHXvbKvfZ+KQVA4jzdjzaVkeozF63jrwL
+         Ex5Q==
+X-Forwarded-Encrypted: i=1; AJvYcCX8ChpMCDihvUGoVrP3dbfMi4MEj86RI6UzF+6zcxwiCrJx0kMTKyqOEmm97jKxhotdRtLUtPya8vGL7ifqGO+p9gs=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxEOSbv8HwzOJlKbDonO0I7ZqOpFYmH+4zQ8K6C/E7gtDL7vGnI
+	Of4MxcmHne/PfYMdFkUFzfXjFNFWzjkB9BZjwGYpZTkSmwZ9cy38QBU2CWix6Aajcv46pa+ai3w
+	MZuEKFq4/ujhWmr+lO87H5X0x9TmYHePwJcWBh25W7UtPq1JuDLHT2yR+tdaDr5F2It4OROD/F3
+	7jJV+Set2B0IF+BxVYngc=
+X-Gm-Gg: ASbGnctXWsH/piZ+Z33uczCIj5Nulom33cdJKQgCuezTPo2I8bBhrcbm69HHKt0EH5n
+	4Z3IWFMHpUn6oJ6smkFDiV9oZpcFSRz8/jTyuSQYEEYQDuQwnrYt56Rb5BwJ+//gcfoBZVBsU82
+	8XViPLvhSlHDcCpY+yXHRhx/dPsdKdoKAAaZJki8TBXO/ptBsEQXr8YqWvGbsaDlxErD+5nRJCK
+	Ti/bhelmSWJEktTExJvu03pCaKaNk18FighWxl8Cfewx8HBF1hrbKEammI0tLSWLlWa8TTRp2OW
+	VIm5ZHBj96vvdRV9qE4mah/Kd2LsEAwHx0nBAERS2IaYJ4PyUMQYFzLWpX7C9uxzLWYap8p06ES
+	9F1ppAuiubeY9YpzrGtHEF9DaUxdWJgg+Z585WIFA
+X-Received: by 2002:a17:902:fc4f:b0:29b:ab3c:83a3 with SMTP id d9443c01a7336-29bab3c8498mr156849705ad.5.1764338127133;
+        Fri, 28 Nov 2025 05:55:27 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHfxBdyci/rtGucK7XDRORxFA8+9kcMHBvuL6/P99GDqFHp+zvA1Fm43yIegvngBy9evzr/+Q==
+X-Received: by 2002:a17:902:fc4f:b0:29b:ab3c:83a3 with SMTP id d9443c01a7336-29bab3c8498mr156849385ad.5.1764338126633;
+        Fri, 28 Nov 2025 05:55:26 -0800 (PST)
+Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29bceb27653sm47904645ad.50.2025.11.28.05.55.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 28 Nov 2025 05:55:26 -0800 (PST)
+From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+To: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org
+Subject: [PATCH 0/9] Scarthgap pull request
+Date: Fri, 28 Nov 2025 19:24:51 +0530
+Message-ID: <cover.1764335008.git.anuj.mittal@oss.qualcomm.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:SmywsEg0tWRIiteX5h8MfHSbNYnjnQqBqTcTogFjUjJyKw4P7e8
- CuP1t6HDiOln9O5e1ZHOMWct8c/DdkrSIRQ4iT3DeE9/rRUgZSdCn+WmZvWQ7FJ78OSIHec
- d4eXWTD57NNWgkO4gmeg/tBH63lCL/glj+dD4l6SCymlkg2vVc3YbLvDjDEI1eOHz5psw0F
- Abi87QeJgo5+Xu1NLWf4g==
-UI-OutboundReport: notjunk:1;M01:P0:aoOXgjrbjWM=;Ek8FvUV2YTbDM5k+6xc6rhVvlk4
- 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
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: ADNXb2pzJY-fmy4QS-YWkSFwRnOfXVdz
+X-Authority-Analysis: v=2.4 cv=O8k0fR9W c=1 sm=1 tr=0 ts=6929a9d0 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=6UeiqGixMTsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=iGHA9ds3AAAA:8 a=NEAV23lmAAAA:8 a=Q4-j1AaZAAAA:8 a=OLWh0nUl10lSuYdzPQAA:9
+ a=uG9DUKGECoFWVXl0Dc02:22 a=nM-MV4yxpKKO9kiQg6Ot:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI4MDEwMSBTYWx0ZWRfX4Oa0pXqWb09L
+ BRSJlq+LqTAH19CXJ+9EfIPzRoGlkQTo4SmX0ZHae6aY7RmfcFBxM0f8VXZCX84hahEMbXWbDe4
+ hnWsPFbJXbi/yHqynPmWV1Z9GWhXaTZE3FuKVCw5J5LGJ0YPSs9LljPilsGmjcy6zsENSyxjpYm
+ 1kNa83EIfcFoJxIi7PRDpGqGGOLeQl8pecFqFK3qGLiSNTICZdKkOB+hf59He9RGQ7W7tIXGyAK
+ boe3Txr9KIGmieN1fF6Ws74FwuZHcNAzYCQSlU+ExbkG1FKuw+gpuBUc5PAx33P4IjY/gUhl+jD
+ vKsy8sLgb/jKmRckmze/NkCEFRq4wcjU2ktaavmzjC9cHOz+u9G/hn7qoj3iZDMGd5NLUzz3hZ4
+ /Q6JZ8lGL3R96mUquVXLW5CpKwvV2g==
+X-Proofpoint-GUID: ADNXb2pzJY-fmy4QS-YWkSFwRnOfXVdz
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-28_03,2025-11-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 suspectscore=0 adultscore=0 clxscore=1015 impostorscore=0
+ spamscore=0 bulkscore=0 priorityscore=1501 lowpriorityscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511280101
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 11:58:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122121
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 13:55:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122122
 
-Signed-off-by: Jan Clau=C3=9Fen <jan.claussen10@web.de>
-=2D--
- .../python/python3-soundcard_0.4.5.bb                | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-soundcard_=
-0.4.5.bb
+Please merge these changes for scarthgap. Tested on AB and locally.
 
-diff --git a/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.b=
-b b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
-new file mode 100644
-index 0000000000..632b54eaef
-=2D-- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
-@@ -0,0 +1,12 @@
-+SUMMARY =3D "Python library for accessing soundcards"
-+LICENSE =3D "BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De39df1540c06c17ca310ce87c36b04=
-2c"
-+
-+SRC_URI[sha256sum] =3D "07272ba927e32cafdf634e4a1ca53b9a3218321a60c7d2e08=
-f54b832a56946aa"
-+
-+inherit pypi setuptools3
-+
-+REQUIRED_DISTRO_FEATURES =3D "pulseaudio"
-+
-+RDEPENDS:${PN} +=3D " \
-+    libpulse \
-+    pulseaudio-server \
-+    python3-cffi \
-+    python3-numpy \
-+"
-=2D-=20
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1130
+
+The following changes since commit b79cf94b4d53d75ddc4b4f468c1b1ad42a3fffe2:
+
+  grilo: fix buildpaths QA error (2025-11-19 16:56:37 +0530)
+
+are available in the Git repository at:
+
+  https://github.com/anujm1/meta-openembedded anujm/scarthgap
+  https://github.com/anujm1/meta-openembedded/tree/anujm/scarthgap
+
+Gyorgy Sarvari (1):
+  cockpit: set correct CVE_PRODUCT
+
+Gyorgy Sarvari via lists.openembedded.org (1):
+  links: set CVE_PRODUCT
+
+Hugo SIMELIERE (2):
+  libwebsockets: fix CVE-2025-11677
+  libwebsockets: fix CVE-2025-11678
+
+Khem Raj (1):
+  ot-br-posix: Define config files explicitly
+
+Pavel Zhukov (1):
+  fbida: Require opengl feature for pdf only
+
+Peter Marko (1):
+  uw-imap: patch CVE-2018-19518
+
+Yoann Congal (1):
+  zfs: fix host-related reproducibility
+
+Zhang Peng (1):
+  frr: fix CVE-2024-55553
+
+ .../recipes-filesystems/zfs/zfs_2.2.2.bb      |   6 +
+ .../openthread/ot-br-posix_git.bb             |   2 +
+ .../frr/frr/CVE-2024-55553.patch              | 253 ++++++++++++++++++
+ .../recipes-protocols/frr/frr_9.1.3.bb        |   1 +
+ .../libwebsockets/CVE-2025-11677.patch        | 161 +++++++++++
+ .../libwebsockets/CVE-2025-11678.patch        | 128 +++++++++
+ .../libwebsockets/libwebsockets_4.3.3.bb      |   5 +-
+ .../uw-imap/uw-imap/CVE-2018-19518.patch      |  24 ++
+ .../recipes-devtools/uw-imap/uw-imap_2007f.bb |   1 +
+ meta-oe/recipes-graphics/fbida/fbida_git.bb   |   2 +-
+ meta-oe/recipes-support/links/links.inc       |   2 +
+ .../recipes-webadmin/cockpit/cockpit_304.bb   |   2 +
+ 12 files changed, 585 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2024-55553.patch
+ create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2025-11677.patch
+ create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebsockets/CVE-2025-11678.patch
+ create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/CVE-2018-19518.patch
+
+-- 
 2.52.0
 
 
