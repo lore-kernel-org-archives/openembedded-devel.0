@@ -1,110 +1,105 @@
-Return-Path: <danismostlikely@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B417CFD2F6
-	for <webhook@archiver.kernel.org>; Thu, 27 Nov 2025 22:21:45 +0000 (UTC)
-Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com [209.85.222.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4597.1764282104032030129
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A686CD116EA
+	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 08:37:08 +0000 (UTC)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11683.1764319024214088519
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 27 Nov 2025 14:21:44 -0800
+ Fri, 28 Nov 2025 00:37:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ddcdnE/I;
- spf=pass (domain: gmail.com, ip: 209.85.222.180, mailfrom: danismostlikely@gmail.com)
-Received: by mail-qk1-f180.google.com with SMTP id af79cd13be357-8b21fc25ae1so116277285a.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 27 Nov 2025 14:21:43 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=Vpk1tdQG;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.52, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-42bb288c219so1448604f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 00:37:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764282103; x=1764886903; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=m1h6IRnNO4lIUVq59JiYFE3W0j3bCnRi7n9pBGTpYbU=;
-        b=ddcdnE/ItMsBVjQlOkquiYRYVFa4hE/zLw0zU6I/LyTXvaoQzevK11nMqKKg3uEnAu
-         uWbvH+dt+ypq9bUqGQmyNnut74+p2mJO+WYwYHXlQe7f3lo12raiZ75NDEwh+NzXxakz
-         Op+tRDeN8LLHlbkz8nCllxCk6cN+g8Esjbo7D458cSpUHIoprCXqBOoq/7kMtvtRZ/0x
-         03aq5H0/qMhYipcVi3sJtgT2VP7NjESX0opslNaY4VonTC/kpeRsvD+NKv+i5VWvloJ7
-         lMtU1trcSBMrBC1P2OoUGorwaGD9U+bvBshLfqRxTAnlaNcpcAUjcUZhTLxp1Ie8KifN
-         ueLg==
+        d=konsulko.com; s=google; t=1764319022; x=1764923822; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=zVdtYqcIL+5oLQ3JUeN8nRT/VBNwMufv+eYWxSxsN3c=;
+        b=Vpk1tdQGcSGiF9++yXSV5WU4AqDG7Mu3Uainzc+2Nsi7+V9pwDMz0u3SKE7g+AQFJh
+         J+WnMynzgxmVSs0rJsNZ3yjs90psKvzkdcZExZJMrMN6cGStQQXAhRrGTuPmBBGw7hyu
+         iz+zJnSBFlpcH67nBxKfKRjRCmO/x4+bNd4lY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764282103; x=1764886903;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=m1h6IRnNO4lIUVq59JiYFE3W0j3bCnRi7n9pBGTpYbU=;
-        b=pMOlsQVkCK7/tclsLOGdexcFHxEOowq4K1mOO6v8/zC8IfxGrp2WW+9Fn81d4vu+lw
-         yBtO7It2irXZU5Fc2AN1Krkd5FYeCx5+x8MpxAnAGdDRPWEjCzgEnl7qd+Gcx0aMqhX9
-         0tkOveFgm3GHpwYYoZ+f5136BpMgxiKGpUXAYAH33qE5ZQrooG1Dk4qCuQjeaL16hwh6
-         9oJmTPqPpdmvBCIdnINbUf3oJ3EaTFHISiesbsgOuot468VG+Sw3ez2EtvZgIVZWaRf2
-         FcbBHXGtxcdmNEnzZhjsA3licgNbQjSuQwi7eyTm0McQmgzMaBky6J+OoRwgE8jMtr5W
-         R0FQ==
-X-Gm-Message-State: AOJu0Yz7vYMgHFRdrRyfTLgyAyKkD7PgJh11ceumkF4FkrUzDZjYmRQc
-	BoiRgfVnTyUSFfoXLCqsC6YDu7ESEDLUABdgfA8jutc/+Is9eEj5EpLM7HeXFA==
-X-Gm-Gg: ASbGncuXwc1WgWkouhXbtYkrZ0yQGpgBQAp1niAWw8tj+diEUVqlRGmuS2ZlTTtfhQg
-	ayhsFaW0AskV4VrNz2X5DFflXTeALCAAWUD64lM3IKdP/01Cafjd+WHiEgCTovKhaeNECqr13G5
-	DdbtwHMxop1OmfV110YVJpyAeK2JuPvA2MGjutRx8R0AqvyokBZZbcUiai/6GEB/XN+7AyAR7S3
-	0OHcn6CbvzcfRkaPqOJs/Pd8+km/FsBzlJtj+Py3f5UCFGyyGNhqA6CnxjznjE2ZE3szU22dFWd
-	bNITaZ6cEsaMpjx5pO69bbNYrG7JtT+TIWci+KeXyXHQJox7hXx1HSAiegi7sav2Cq06hYG1G3a
-	oWl3zlSX7muvJ08Zc6+69ZU15eoadWW97b15Oua43X86DRvaYpfh+3Zp7TeQJ7m/cj8EQLkt8cH
-	tPiEVqD0S0M5sMofPRfiXMcj/Cpwty0Ae0fe8xc0UVQcR/0TQ92HZh
-X-Google-Smtp-Source: AGHT+IFR4JTfOfhIl18KAbp3i2lgIQZrjP+3YR6NwdrGRo7LqKlh0PO3saEM9/6burVsxjlyGzYRTw==
-X-Received: by 2002:a05:620a:1990:b0:883:b565:1acf with SMTP id af79cd13be357-8b4ebdc0c08mr1591943185a.60.1764282102751;
-        Thu, 27 Nov 2025 14:21:42 -0800 (PST)
-Received: from nebuchadnezzar.home.dankm.pro ([204.83.204.143])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8b529c90ccbsm187164485a.23.2025.11.27.14.21.41
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1764319022; x=1764923822;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zVdtYqcIL+5oLQ3JUeN8nRT/VBNwMufv+eYWxSxsN3c=;
+        b=hKdpg1WldLFllGpxpQ6QXqYvmzNqqJJy7nXfBsm5cGsrNawIgh8mnA5aR9K+n+CB61
+         EBSGnq95NeMaDtXjI3JPeHwv526C0Z02cIlH6ywF+VGCMfr0kyPj6fNyHyMZUyiCk4Pt
+         IUmpeUlopG/HZz0Lu/Erh9dXM09aeabjH41cKIaryMMtat/c4lstNJgpvwzlFUbCYWwX
+         a4IznvQfzePKZeU99BzUHo2mhxXGElyNOo9cGFXdv/HGciBDEFTGKK5s3j1DS1H6zPqo
+         EL9pyEAWJfz7kL8yxxHRA0w0E1wQw7tzHkRt+v7e60lMtgSra6epLRxoQ2gQfdISxYr8
+         Nwwg==
+X-Gm-Message-State: AOJu0YwHurmMZJ/5dTP7CdOqidDSX6v0Iui7BCvlGWi6cvmimcjAceu/
+	cVH61Nhf4s/gElgrUsj3fvOwytu8//2myAZkyOP9Qsx3IfWZ6gEo5dnaO2PX/P6nZGv4Cbqk0aP
+	ktpH8
+X-Gm-Gg: ASbGncs+AfoVUr4cHV7iFE8Su5lQJrUo53C6QSJivOEdZU65X7suh/DKwwZGfjbYbnk
+	wwHi56cB/TvtguMSoclzN7k18kaLEBxEvLXsjbXp+Pbo7lnvSsSK4Cz6/Wbn6XRpS4yB1q60dY2
+	lgSA/3sTuvIaBtBuoyNaddTmFTnlIE1x04NkFa3MWk48+X22j3q0Qdjg5yCDlgyz5sAk5+3U1tx
+	uGqsCDXDHqJojjBA4NMLRuXL+QjktAQAvzBOcGnwKGne6Iylx/pJbwGehP/eu3+RGh27bSZbb+F
+	6AhpbKG/B48+KSYziIuAV3Q7LYq85P6cpR5OkQ1mvb78kb81wvaAsol3A1RNPH+nUJKpk/yemS/
+	sSF0MxcAJV4pVPO5cRHK8CBIWbDONZOws7DMqBDeKG3HVypl0G+yzyfz9p5/GX/ucejZo+vsM2Z
+	CCaqWkNxi6OwbO3Z5VrN1y53/7
+X-Google-Smtp-Source: AGHT+IE11gcMLfFuUlM58HF5krDEKzLPGBPYij++jDfFXrG6twopuK+rioSFILF0XZ+DakpBmpaXVg==
+X-Received: by 2002:a5d:5e01:0:b0:42b:3131:5435 with SMTP id ffacd0b85a97d-42cc1ac9de0mr27772244f8f.2.1764319021879;
+        Fri, 28 Nov 2025 00:37:01 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42e1cab9af3sm8332395f8f.41.2025.11.28.00.37.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Nov 2025 14:21:42 -0800 (PST)
-From: Dan McGregor <danismostlikely@gmail.com>
+        Fri, 28 Nov 2025 00:37:01 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH v2] python3-requests-unixsocket: Update to 0.4.1
-Date: Thu, 27 Nov 2025 16:21:41 -0600
-Message-ID: <20251127222141.2161520-1-danismostlikely@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <187BF47DBA4F18BC.286755@lists.openembedded.org>
-References: <187BF47DBA4F18BC.286755@lists.openembedded.org>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH] colortail: Add recipe
+Date: Fri, 28 Nov 2025 10:36:58 +0200
+Message-ID: <20251128083658.1285605-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 27 Nov 2025 22:21:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122117
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 08:37:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122118
 
-From: Anthony Del Frari <anthony.delfrari@vecima.com>
+Colortails is like the tail command line utility but with colors.
+Add recipe for the latest release 0.3.5:
 
-python3-requests broke the http+unix url scheme with version 2.32.
-Their position is that it's the responsibility of consuming libraries
-to adopt their new interface. requests-unixsocket 0.4 adapts to the
-new interface.
+- Print error messages to stderr
+- Fix memory leaks and Valgrind warnings
+- Improve detection of file truncation due to log rotation
+- Fix ./autogen.sh on macOS
+- Avoid emitting excessive color sequences
+- Output ansi reset code when the program is interrupted
 
-Signed-off-by: Dan McGregor <dan.mcgregor@vecima.com>
+This work was sponsored by GOVCERT.LU.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ket_0.3.0.bb => python3-requests-unixsocket_0.4.1.bb} | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-requests-unixsocket_0.3.0.bb => python3-requests-unixsocket_0.4.1.bb} (54%)
+ meta-oe/recipes-extended/colortail/colortail_0.3.5.bb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/colortail/colortail_0.3.5.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb b/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.4.1.bb
-similarity index 54%
-rename from meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-requests-unixsocket_0.4.1.bb
-index 94497b609bd..4485b89de7d 100644
---- a/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-requests-unixsocket_0.4.1.bb
-@@ -3,12 +3,11 @@ HOMEPAGE = "https://pypi.org/project/requests-unixsocket/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
- 
--SRC_URI[sha256sum] = "28304283ea9357d45fff58ad5b11e47708cfbf5806817aa59b2a363228ee971e"
-+SRC_URI[sha256sum] = "b2596158c356ecee68d27ba469a52211230ac6fb0cde8b66afb19f0ed47a1995"
- 
--PYPI_PACKAGE = "requests-unixsocket"
-+PYPI_PACKAGE = "requests_unixsocket"
- 
--inherit pypi
--inherit setuptools3
-+inherit pypi python_setuptools_build_meta
- 
--DEPENDS += "python3-pbr-native"
-+DEPENDS += "python3-pbr-native python3-setuptools-scm-native"
- RDEPENDS:${PN} = "python3-requests python3-urllib3"
+diff --git a/meta-oe/recipes-extended/colortail/colortail_0.3.5.bb b/meta-oe/recipes-extended/colortail/colortail_0.3.5.bb
+new file mode 100644
+index 0000000000..bf31ee9882
+--- /dev/null
++++ b/meta-oe/recipes-extended/colortail/colortail_0.3.5.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "Like the tail command line utility but with colors"
++DESCRIPTION = "Colortail - like tail but with color highlighting configured via patterns"
++HOMEPAGE = "https://github.com/joakim666/colortail"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++
++SRC_URI = "git://github.com/joakim666/colortail.git;branch=master;protocol=https"
++SRCREV = "653bbbe3292759f5fb5ae9f769f131c1a320965d"
++
++inherit autotools pkgconfig
+-- 
+2.47.3
+
 
