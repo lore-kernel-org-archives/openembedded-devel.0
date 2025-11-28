@@ -1,222 +1,159 @@
-Return-Path: <kai.kang@windriver.com>
+Return-Path: <jan.claussen10@web.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4540D116EA
-	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 09:28:58 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.12366.1764322128942219129
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B81C7D116F3
+	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 11:58:09 +0000 (UTC)
+Received: from mout.web.de (mout.web.de [212.227.15.4])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14470.1764331085896500381
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Nov 2025 01:28:49 -0800
+ Fri, 28 Nov 2025 03:58:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=CHV8NY0j;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3427e3dda8=kai.kang@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AS4Vqv62535550
-	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 01:28:48 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=H/oXlGtLGoCZh+6SRpa+
-	2vyIvAZkjOL4sMgQA3k1n+0=; b=CHV8NY0jh4qZgmaukYLEaBKjf5Z/S7ZjcRmu
-	0dQluX8GyKhrrF98nkLTpTSOblKB6rcIXxx7TwxEUONv90sDzwFxynUbSDuWpwLL
-	Jcl2sWeXW37KYYmjdEZ6DfKBQ71+XsIJUPGuCKvD+Fft0aT0m8EbIeD2rAGsyUYN
-	EIcuYcIXUp3ECEqLAWPfJTEEViusUa1qki0XjViaURlAWI2nLr2hodihLHhmqZdM
-	WSTgly2ujCT0mFzr0cl9U31v4iX4NRzZAGeURG9kuy1yXZ8xzMssfNuKEUEMSkex
-	LhToG+ek0fHMbQz64rwIOM17EGpDkbNh2F0KrwY9RPGfOZTFGA==
-Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4ak9b5eka9-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 01:28:48 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Fri, 28 Nov 2025 01:28:47 -0800
-Received: from pek-lpg-core4.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Fri, 28 Nov 2025 01:28:47 -0800
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [scarthgap][PATCH] libtracefs: avoid run bison
-Date: Fri, 28 Nov 2025 17:28:44 +0800
-Message-ID: <20251128092844.3184391-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=fail reason="dkim: signature did not verify: crypto/rsa: verification error" header.i=jan.claussen10@web.de header.s=s29768273 header.b=nOSOCBJ/;
+ spf=pass (domain: web.de, ip: 212.227.15.4, mailfrom: jan.claussen10@web.de)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+	s=s29768273; t=1764331082; x=1764935882; i=jan.claussen10@web.de;
+	bh=ac6NLVgNYCFsWuZdd5q+ZKgyhwdf1KHI5qH9qRThAoY=;
+	h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-ID:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+	 content-transfer-encoding:content-type:date:from:message-id:
+	 mime-version:reply-to:subject:to;
+	b=nOSOCBJ/zDTl/ZyXUFb85PwJtVBJjwW2Nf15GHzR3dDYV/5fcmaoLoPf4TvV2e8I
+	 VR7yTbM8qVfvwU+d3goczA5mdkCggxx1jCJM+j7Ut8AToFtYev32SczGwB4XNHEFE
+	 HjLndA3y0TrNxqTjdYfIVxqvEjdHxmGPoETdd5jS04oOy8mvZNwVMT0bqWhUJOajx
+	 5x7Ub1dt6ZKxOIw9jQwMr404NnYcVcIceECWIU1s2Ej7N+jFfG2Tk0t6rkS7v4yfl
+	 XFCYaOeWzKHU98jm0FsN8ArVpwrxIHzj6y1MOXmre1yzgfGDYXpmXdfjTWTRCh0fr
+	 3y7NGdUeVwFw8kCQJg==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from precision5810.fritz.box ([192.196.196.197]) by smtp.web.de
+ (mrweb005 [213.165.67.108]) with ESMTPSA (Nemesis) id
+ 1MzCEB-1wKN5d2NMp-00sAyq; Fri, 28 Nov 2025 12:58:02 +0100
+From: =?UTF-8?q?Jan=20Clau=C3=9Fen?= <jan.claussen10@web.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?UTF-8?q?Jan=20Clau=C3=9Fen?= <jan.claussen10@web.de>
+Subject: [meta-python][master][PATCH] python3-soundcard: Add recipe
+Date: Fri, 28 Nov 2025 12:58:00 +0100
+Message-ID: <20251128115800.2757259-1-jan.claussen10@web.de>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Authority-Analysis: v=2.4 cv=fozRpV4f c=1 sm=1 tr=0 ts=69296b50 cx=c_pps
- a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
- a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=VwQbUJbxAAAA:8 a=meVymXHHAAAA:8
- a=t7CeM3EgAAAA:8 a=AUd_NHdVAAAA:8 a=YzPBJ3fVbFq6chHA2b4A:9
- a=2JgSa4NbpEOStq-L5dxp:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI4MDA2OSBTYWx0ZWRfX+h4GDcgZz0MD
- vGWqfijmh+PMplMRoc6QhSvwOTib9wRgi4d2dMSHxprQb8irNtIYQIE6FyxBgtkGguK/cvCMZW5
- +BDxIxwQ37M5m7iDhRdxFH5TaWACDvRDhEHdmCSxStH2nEbyRwlyPeHPjPVc9fy24xdHVUDFm7O
- dViLYPMhxVnom4GTgx2bQPY6iGev2/wa/jm021MDL7Hg1nUyLA7F9VlOv5ZntrSPApSNdRcbyWT
- 2E0UJ3qV5zKBwijtJYIafju+gGx/LlZ8Sn1ji7tICIU8x8EjitfK0t1MURvQwVi8hS1Eywj5H6P
- 30Ws7bJFbocULuwlvoRY/djBynaHoLLl03TQlDDjitA8Nb4vi+gDlhXnhLprRD7hAkaAmaEh2yh
- vL9Mr2FUA/CZ5G3khacTf1yQdvlctw==
-X-Proofpoint-GUID: f_LEs5AildzOnlHinCBfMVa9VThMgzfK
-X-Proofpoint-ORIG-GUID: f_LEs5AildzOnlHinCBfMVa9VThMgzfK
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-28_03,2025-11-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 clxscore=1011
- spamscore=0 impostorscore=0 malwarescore=0 suspectscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511280069
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:SmywsEg0tWRIiteX5h8MfHSbNYnjnQqBqTcTogFjUjJyKw4P7e8
+ CuP1t6HDiOln9O5e1ZHOMWct8c/DdkrSIRQ4iT3DeE9/rRUgZSdCn+WmZvWQ7FJ78OSIHec
+ d4eXWTD57NNWgkO4gmeg/tBH63lCL/glj+dD4l6SCymlkg2vVc3YbLvDjDEI1eOHz5psw0F
+ Abi87QeJgo5+Xu1NLWf4g==
+UI-OutboundReport: notjunk:1;M01:P0:aoOXgjrbjWM=;Ek8FvUV2YTbDM5k+6xc6rhVvlk4
+ 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
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 09:28:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122120
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 11:58:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122121
 
-From: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Jan Clau=C3=9Fen <jan.claussen10@web.de>
+=2D--
+ .../python/python3-soundcard_0.4.5.bb                | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-soundcard_=
+0.4.5.bb
 
-There is a rare compile failure
-
-| In file included from sqlhist-parse.h:25,
-|                  from tracefs-sqlhist.c:17:
-| sqlhist.tab.h:120:8: error: unterminated comment
-|   120 | #endif /* !YY_TRACEFS_SQLHIST_TAB_H_INCLUDED  */
-|       |        ^
-
-Backport patch to avoid run bison that not re-gerate sqlhist.tab.h.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- ...ake-sqlhist_remake-to-run-bison-and-.patch | 108 ++++++++++++++++++
- .../libtracefs/libtracefs_1.7.0.bb            |   1 +
- 2 files changed, 109 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/libtracefs/libtracefs/0001-libtracefs-Add-make-sqlhist_remake-to-run-bison-and-.patch
-
-diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-libtracefs-Add-make-sqlhist_remake-to-run-bison-and-.patch b/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-libtracefs-Add-make-sqlhist_remake-to-run-bison-and-.patch
+diff --git a/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.b=
+b b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
 new file mode 100644
-index 0000000000..c876afe2ca
---- /dev/null
-+++ b/meta-oe/recipes-kernel/libtracefs/libtracefs/0001-libtracefs-Add-make-sqlhist_remake-to-run-bison-and-.patch
-@@ -0,0 +1,108 @@
-+From 15145304ea3f2abff2418adc220c1459190246eb Mon Sep 17 00:00:00 2001
-+From: "Steven Rostedt (Google)" <rostedt@goodmis.org>
-+Date: Fri, 4 Apr 2025 12:12:10 -0400
-+Subject: [PATCH] libtracefs: Add make sqlhist_remake to run bison and flex
+index 0000000000..632b54eaef
+=2D-- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
+@@ -0,0 +1,12 @@
++SUMMARY =3D "Python library for accessing soundcards"
++LICENSE =3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De39df1540c06c17ca310ce87c36b04=
+2c"
 +
-+Because git tends to not maintain timestamps of files, the sqlhist.y and
-+sqlhist.l can end up having an later timestamp than the files they
-+produce. This triggers bison and flex to be run and recreate the files
-+sqlhist.tab.h, sqlhist.tab.c and sqlhist-lex.c.
++SRC_URI[sha256sum] =3D "07272ba927e32cafdf634e4a1ca53b9a3218321a60c7d2e08=
+f54b832a56946aa"
 +
-+At best, this causes git to see the differences, at worse, the system may
-+not even have bison or flex and the build fails.
++inherit pypi setuptools3
 +
-+Add a new make target: make sqlhist_remake
++REQUIRED_DISTRO_FEATURES =3D "pulseaudio"
 +
-+This new target will run the bison and flex portions of the build.
-+It only needs to be run if the files sqlhist.y or sqlhist.l are modified.
-+
-+Cc: Oleh Matiusha <omatiush@cisco.com>
-+Link: https://lore.kernel.org/20250404161504.1671790-2-rostedt@goodmis.org
-+Signed-off-by: Steven Rostedt (Google) <rostedt@goodmis.org>
-+
-+Upstream-Status: Backport [https://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git/commit/?id=1514530]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ Makefile      |  3 +++
-+ src/Makefile  | 14 ++++++++------
-+ src/sqlhist.l |  2 ++
-+ src/sqlhist.y |  1 +
-+ 4 files changed, 14 insertions(+), 6 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 9f377e9..0fe252b 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -393,6 +393,9 @@ sqlhist: samples/sqlhist
-+ samples: libtracefs.a force
-+ 	$(Q)$(call descend,$(src)/samples,all)
-+ 
-++sqlhist_remake:
-++	$(Q)$(call descend,$(src)/src,sqlhist_remake)
-++
-+ clean:
-+ 	$(Q)$(call descend_clean,utest)
-+ 	$(Q)$(call descend_clean,src)
-+diff --git a/src/Makefile b/src/Makefile
-+index 90bd88d..eb5a2e7 100644
-+--- a/src/Makefile
-++++ b/src/Makefile
-+@@ -44,18 +44,20 @@ $(LIBTRACEFS_SHARED_SO): $(LIBTRACEFS_SHARED_VERSION)
-+ libtracefs.so: $(LIBTRACEFS_SHARED_SO)
-+ 
-+ # bison will create both sqlhist.tab.c and sqlhist.tab.h
-+-sqlhist.tab.h:
-+-sqlhist.tab.c: sqlhist.y sqlhist.tab.h
-+-	bison --debug -v --report-file=bison.report -d -o $@ $<
-++sqlhist.tab_gen.h:
-++sqlhist.tab_gen.c: sqlhist.y sqlhist.tab.h
-++	bison --debug -v --report-file=bison.report -d -o $(subst _gen,,$@) $<
-+ 
-+-sqlhist-lex.c: sqlhist.l sqlhist.tab.c
-+-	flex -o $@ $<
-++sqlhist-lex_gen.c: sqlhist.l sqlhist.tab.c
-++	flex -o $(subst _gen,,$@) $<
-+ 
-+ $(bdir)/%.o: %.c
-+ 	$(Q)$(call do_fpic_compile)
-+ 
-+ tracefs-sqlhist.o: sqlhist.tab.h
-+ 
-++sqlhist_remake: sqlhist.tab_gen.c sqlhist-lex_gen.c
-++
-+ $(OBJS): | $(bdir)
-+ 
-+ clean:
-+@@ -65,4 +67,4 @@ clean:
-+ 
-+ $(bdir)/tracefs-sqlhist.o tracefs-sqlhist.o: sqlhist.tab.h
-+ 
-+-.PHONY: $(LIBTRACEFS_SHARED_SO) $(LIBTRACEFS_STATIC)
-++.PHONY: $(LIBTRACEFS_SHARED_SO) $(LIBTRACEFS_STATIC) sqlhist.tab_gen.c sqlhist-lex_gen.c
-+diff --git a/src/sqlhist.l b/src/sqlhist.l
-+index 4df475a..2a3ca61 100644
-+--- a/src/sqlhist.l
-++++ b/src/sqlhist.l
-+@@ -1,6 +1,8 @@
-+ %{
-+ /* code here */
-+ 
-++/* If you change this file, run: make sqlhist_remake */
-++
-+ #include <stdarg.h>
-+ #include "sqlhist-parse.h"
-+ 
-+diff --git a/src/sqlhist.y b/src/sqlhist.y
-+index fade9a4..90039a7 100644
-+--- a/src/sqlhist.y
-++++ b/src/sqlhist.y
-+@@ -1,4 +1,5 @@
-+ %{
-++/* If you change this file, run: make sqlhist_remake */
-+ #include <stdio.h>
-+ #include <stdlib.h>
-+ #include <string.h>
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.7.0.bb b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.7.0.bb
-index 9a408ba13c..d50352f81e 100644
---- a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.7.0.bb
-+++ b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.7.0.bb
-@@ -13,6 +13,7 @@ SRCREV = "aebab37379d0fbadc702d64aca0fe5cf18676404"
- SRC_URI = "git://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=${BPN};protocol=https \
-            file://0001-makefile-Do-not-preserve-ownership-in-cp-command.patch \
-            file://0001-tracefs-perf-Add-missing-headers-for-syscall-and-SYS.patch \
-+           file://0001-libtracefs-Add-make-sqlhist_remake-to-run-bison-and-.patch \
-            "
- S = "${WORKDIR}/git"
- 
--- 
-2.34.1
++RDEPENDS:${PN} +=3D " \
++    libpulse \
++    pulseaudio-server \
++    python3-cffi \
++    python3-numpy \
++"
+=2D-=20
+2.52.0
 
 
