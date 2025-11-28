@@ -1,328 +1,295 @@
-Return-Path: <patrick.wicki@subset.ch>
+Return-Path: <jan.claussen10@web.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A62DBD116F6
-	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 20:50:51 +0000 (UTC)
-Received: from outbound.ms.icloud.com (outbound.ms.icloud.com [57.103.72.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3701.1764363043870130094
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3985BD116E2
+	for <webhook@archiver.kernel.org>; Fri, 28 Nov 2025 22:27:52 +0000 (UTC)
+Received: from mout.web.de (mout.web.de [212.227.17.11])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5126.1764368866222201210
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 28 Nov 2025 12:50:44 -0800
+ Fri, 28 Nov 2025 14:27:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@subset.ch header.s=sig1 header.b=gqde2UVJ;
- spf=pass (domain: subset.ch, ip: 57.103.72.53, mailfrom: patrick@subset.ch)
-Received: from outbound.ms.icloud.com (unknown [127.0.0.2])
-	by p00-icloudmta-asmtp-us-west-3a-60-percent-10 (Postfix) with ESMTPS id 88A6B1800C10;
-	Fri, 28 Nov 2025 20:50:41 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=subset.ch; s=sig1; bh=sesklxJwC+Fg2Iyc8J+i+B93TPNfLyP3uK6MIa/j19k=; h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme; b=gqde2UVJmr6JR5B13HByZnWyXMI3NTf8V7rjSHBUlFqQmZ2psYl+Wle9/VUIX1ikkrDuADQAbiPhKRgKJwchuTza8Jlv0LyE6wAoizfDCrVzS0eWovaaomOep4QjfanEGTO9ayHDuQ7NMMw3zpweR8Hm89Zz52rybsadRagyn4qDWLDXZU+x420Nk5tbKqt0UDZbH6jgbx10ue81lDCOVxU3fZDmeyklwk547J005F3/RrAgwnptrIhjKNDb+o5xnzA+G7FtNvQyX3KhIq0R5Kazz8IveVdvakqiHUEIILr882kCKGEzofd7twN22B49ocrJfUmfVFU0VcjdYf1gFA==
-mail-alias-created-date: 1663698038540
-Received: from desk (unknown [17.57.154.37])
-	by p00-icloudmta-asmtp-us-west-3a-60-percent-10 (Postfix) with ESMTPSA id 51ECF180073F;
-	Fri, 28 Nov 2025 20:50:40 +0000 (UTC)
-From: patrick@subset.ch
-To: openembedded-devel@lists.openembedded.org
-Cc: Patrick Wicki <patrick.wicki@siemens.com>
-Subject: [meta-oe][PATCH 1/2] fluentbit: upgrade 4.0.1 -> 4.2.0
-Date: Fri, 28 Nov 2025 21:48:25 +0100
-Message-ID: <20251128204827.3553598-1-patrick@subset.ch>
-X-Mailer: git-send-email 2.52.0
+ dkim=fail reason="dkim: signature did not verify: crypto/rsa: verification error" header.i=jan.claussen10@web.de header.s=s29768273 header.b=UCR3W5uS;
+ spf=pass (domain: web.de, ip: 212.227.17.11, mailfrom: jan.claussen10@web.de)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+	s=s29768273; t=1764368864; x=1764973664; i=jan.claussen10@web.de;
+	bh=9NY66WsCzJ/KOWLQNDuhH2ENQIn10GHyHN0n4C9h+Pw=;
+	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:From:To:Subject:
+	 References:In-Reply-To:Content-Type:Content-Transfer-Encoding:cc:
+	 content-transfer-encoding:content-type:date:from:message-id:
+	 mime-version:reply-to:subject:to;
+	b=UCR3W5uSU2sFQToL3sAms/cUT1gurnwdoZF+QJAQgVX3g1L4prTj+Dls7HutyWMz
+	 elK86D7so1giI+TjIr1yqC3pNtttTxfpmx7JfLvk8lSx+8WSuZwMPZTtHUFHrMbpY
+	 oI6tUpuzBbJR6Hx6ueNslkbgEvWhRV7bVyPxmYSzdjEo9g7iEUlx2/2Wcw4OEDkPI
+	 NqYpAO3oCnOqY79mJ19B+t+XUFlMfRdMcG4pC7uAoeue+MEkeSaI5oyZQJ+/TToa2
+	 Q7bzkOWoqAQ9grpF8TBkKqq/rPzq8gjpoUjWBXEo0UJme6UgFdUuCg2sy7FulT9gb
+	 tONHJWUA2tBZEDqahg==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [192.168.184.20] ([192.196.196.197]) by smtp.web.de (mrweb106
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 1MP3CA-1vk6m40rEa-00QZKN; Fri, 28
+ Nov 2025 23:27:44 +0100
+Message-ID: <c7ac67c0-8a3b-4feb-8bd0-b3a77ae4d279@web.de>
+Date: Fri, 28 Nov 2025 23:27:43 +0100
 MIME-Version: 1.0
-X-Proofpoint-GUID: cXgT5_Zks9DeSIzIju40HPqVxNOXrLyM
-X-Authority-Info: v=2.4 cv=ZfgQ98VA c=1 sm=1 tr=0 ts=692a0b21 cx=c_apl:c_pps
- a=qkKslKyYc0ctBTeLUVfTFg==:117 a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=0Koq7nDUAAAA:8 a=NEAV23lmAAAA:8 a=a_U1oVfrAAAA:8 a=eWRtdWc1AAAA:8
- a=pGLkceISAAAA:8 a=sDQfg1BAaZ_RV_yEpr4A:9 a=QdywUjFo55fTaeivifS-:22
- a=fQEa9puXOWAy-YWvlEz7:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTI4MDE1NCBTYWx0ZWRfX35YjFBAGW4mM
- 6CT8ijU6et0PgJBXpUTcvJYOyVGQ11om5/OPMi9X00KVBUVwIZqhBl2k0rca7ppT9+JNlAQaKpt
- uWrANyz6xARKPb8Kq1zbYINrSy1a0Y7uRB1mVSn6DWsxfJRBRjjyxkP+7b8dmbb4yPHq88NlICX
- J8k9/o2xRK280s90qdZheia2tFIE6Bi6/rcCZWXESJjBUTJWxKgPHMz8b1AO7gdio8iSm55Qbu0
- 56yjPb+y1I7lck6xfu8BT4DhL6UNdkiq8SV3cQJzvQAzF0RyMVRztWJHyE8wrAIOsex2Ffx7N/J
- 49oETGswFwzEsHpnhVQ
-X-Proofpoint-ORIG-GUID: cXgT5_Zks9DeSIzIju40HPqVxNOXrLyM
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-11-28_08,2025-11-27_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- clxscore=1030 bulkscore=0 adultscore=0 phishscore=0 malwarescore=0
- suspectscore=0 mlxlogscore=999 mlxscore=0 classifier=spam authscore=0
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2510240001
- definitions=main-2511280154
-X-JNJ: AAAAAAAB4mNDUsGxhphP3lOCZMbAtDIBCvKLygzNFGyX9OptD2ai4+U2vl6A28oKwj+US9xA6qMsbsicIhKT0dthYTeYlhTkaWYhpxsVoC7ZgASHUwtDf4ynMw00NrKxKvZ5UscJKGmJriyiWoOauVGbuMvLQpq6Ekyf5a9npuHiP6yR/uHa2J0cgmxHQ0nNSd7pkEv6QkbY22HJM4zi0tUaiDNdzulR2QYj8ikJG9ZHiY2RBX+quG13g4rmxoaHtVs4FyFA7RvqWwCgFwa9V7GQwQ2m/IDYezzFr1xWtlcW9T3sww+jnmsZ8DY4FjcL85XWzNBzlSi0LVVGqzfHK7UUPf1JVDJemxEMVSKATiq6OwVPWKTYQ34NxATzuyEpKLuvFq+M/7tdAV0HsfvloTAJW/fPhkVSJZgTMw5YYVSyNLn3v4fi6spcHIPfmiLdFmC6ISJM08w4C+htv2/vvRlZbOJRZeZILYnzmCTxD4/Wd1m4fle2GYV+gbjZq/mWNYJIw9ItRM9Iqjb59CpP7dXj67QlCtqK/OQOcYhd3Wc2cQ/RPVuj8lj0XDNiVAG6hShwSO6Q2P0P0cPFb6sNEmt/cs12BAsvrNVojhpZWtc7SEoe/vjjctM=
+User-Agent: Mozilla Thunderbird
+From: jan.claussen10@web.de
+To: =?UTF-8?Q?Jan_Clau=C3=9Fen?= <jan.claussen10@web.de>,
+ Martin Jansa <martin.jansa@gmail.com>, raj.khem@gmail.com,
+ openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-python][master][PATCH] python3-soundcard: Add recipe
+References: <20251128115800.2757259-1-jan.claussen10@web.de>
+ <CAMKF1soRo6=R=mCu=tah=SvEECFxrwONKxPA3OzXCi9MQXcYsA@mail.gmail.com>
+ <CA+chaQcTCvLQjvfCVJGYgYPUMDK8rQGM_QOZQ+t=pv+jzkbW8w@mail.gmail.com>
+ <35b21d06-11cb-4327-a80b-4ebeffdbad0d@web.de>
+In-Reply-To: <35b21d06-11cb-4327-a80b-4ebeffdbad0d@web.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:AMU+2Xiriy/KXJmcmHRrNW/QdJOQTabVBiUBHVabapLZN2H8Ecp
+ rp1OGHGi/+lBHQU3J/9Nv3JdFNa6JZcpJkKq8bCesdKaMiMzdMn1bVj2qXfzO5y3inkSkH1
+ SxQ1p+bkkmJ7mFRkb6MrIA2jGbbjQ8eyJYnPzvVSQYEfQaRNRSlI65lVItJDBrTbqlYMt5u
+ JweYPgox6B696CTHHGtdw==
+UI-OutboundReport: notjunk:1;M01:P0:8Fo9rQeFsmA=;kAAiTrIRtZmu2QrW+bIfIQmiWAP
+ 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
+ OdjZn9no=
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 20:50:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122152
+ <openembedded-devel@lists.openembedded.org>; Fri, 28 Nov 2025 22:27:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122154
 
-From: Patrick Wicki <patrick.wicki@siemens.com>
+I added a longer DESCRIPTION, HOMEPAGE and added SECTION =3D "devel/python=
+".=20
 
-Refresh patches and drop one for musl which is no longer required.
+=2D--
 
-Release notes:
-- https://fluentbit.io/announcements/v4.1.0/
-- https://fluentbit.io/announcements/v4.2.0/
+SoundCard is a library for playing and recording audio without resorting t=
+o a CPython extension.
 
-This addresses CVE-2025-12977.
+Signed-off-by: Jan Clau=C3=9Fen <jan.claussen10@web.de>
+=2D--
+ .../python/python3-soundcard_0.4.5.bb         | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-soundcard_=
+0.4.5.bb
 
-Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
----
- ...rivate-makefile-targets-in-CMakelist.patch | 14 +++++++--
- ...-not-hardcode-compilation-directorie.patch |  8 +++--
- ...ts.txt-Revise-init-manager-deduction.patch |  8 +++--
- ...nkio-Link-with-fts-library-with-musl.patch |  7 +++--
- .../0005-Use-posix-strerror_r-with-musl.patch | 31 -------------------
- ...{fluentbit_4.0.1.bb =3D> fluentbit_4.2.0.bb} |  3 +-
- 6 files changed, 26 insertions(+), 45 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0005-Use=
--posix-strerror_r-with-musl.patch
- rename meta-oe/recipes-extended/fluentbit/{fluentbit_4.0.1.bb =3D> fluen=
-tbit_4.2.0.bb} (98%)
-
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-lib-Do-not=
--use-private-makefile-targets-in-CMakelist.patch b/meta-oe/recipes-extend=
-ed/fluentbit/fluentbit/0001-lib-Do-not-use-private-makefile-targets-in-CM=
-akelist.patch
-index 32f4fdec51..1756d74560 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-lib-Do-not-use-pr=
-ivate-makefile-targets-in-CMakelist.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-lib-Do-not-use-pr=
-ivate-makefile-targets-in-CMakelist.patch
-@@ -1,4 +1,4 @@
--From 7e6295f14ea057562a235fbf6762d867e739a181 Mon Sep 17 00:00:00 2001
-+From 4b47a8f0e3d1d429356cdda8efa7682ab88d344a Mon Sep 17 00:00:00 2001
- From: Niko Mauno <niko.mauno@vaisala.com>
- Date: Sun, 29 Sep 2024 12:00:00 +0000
- Subject: [PATCH] lib: Do not use private makefile targets in CMakelists.=
-txt
-@@ -28,6 +28,8 @@ Upstream-Status: Submitted [https://github.com/fluent/f=
-luent-bit/pull/9450]
-  lib/monkey/CMakeLists.txt   | 4 +---
-  4 files changed, 7 insertions(+), 21 deletions(-)
-=20
-+diff --git a/lib/cfl/CMakeLists.txt b/lib/cfl/CMakeLists.txt
-+index 489570026..06d99cbbe 100644
- --- a/lib/cfl/CMakeLists.txt
- +++ b/lib/cfl/CMakeLists.txt
- @@ -40,12 +40,8 @@ if(NOT MSVC)
-@@ -45,6 +47,8 @@ Upstream-Status: Submitted [https://github.com/fluent/f=
-luent-bit/pull/9450]
- =20
- =20
- =20
-+diff --git a/lib/cmetrics/CMakeLists.txt b/lib/cmetrics/CMakeLists.txt
-+index 5421f8c80..0dcf7645c 100644
- --- a/lib/cmetrics/CMakeLists.txt
- +++ b/lib/cmetrics/CMakeLists.txt
- @@ -60,12 +60,8 @@ if(NOT MSVC)
-@@ -61,11 +65,13 @@ Upstream-Status: Submitted [https://github.com/fluent=
-/fluent-bit/pull/9450]
- +set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__CMT_FILENAME__=3D__FILE__")
- =20
-  # Configuration options
-- option(CMT_DEV                       "Enable development mode"         =
-          No)
-+ option(CMT_DEV                       "Enable development mode"         =
-           No)
-+diff --git a/lib/ctraces/CMakeLists.txt b/lib/ctraces/CMakeLists.txt
-+index 73723433d..9f60699d5 100644
- --- a/lib/ctraces/CMakeLists.txt
- +++ b/lib/ctraces/CMakeLists.txt
- @@ -30,12 +30,8 @@ set(CTR_VERSION_MINOR  6)
-- set(CTR_VERSION_PATCH  4)
-+ set(CTR_VERSION_PATCH  6)
-  set(CTR_VERSION_STR "${CTR_VERSION_MAJOR}.${CTR_VERSION_MINOR}.${CTR_VE=
-RSION_PATCH}")
- =20
- -# Define __FILENAME__ consistently across Operating Systems
-@@ -79,6 +85,8 @@ Upstream-Status: Submitted [https://github.com/fluent/f=
-luent-bit/pull/9450]
- =20
-  # Configuration options
-  option(CTR_DEV             "Enable development mode"                   =
-No)
-+diff --git a/lib/monkey/CMakeLists.txt b/lib/monkey/CMakeLists.txt
-+index 3fbace595..1c6ad031c 100644
- --- a/lib/monkey/CMakeLists.txt
- +++ b/lib/monkey/CMakeLists.txt
- @@ -15,10 +15,8 @@ include(GNUInstallDirs)
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h=
-.in-Do-not-hardcode-compilation-directorie.patch b/meta-oe/recipes-extend=
-ed/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-dir=
-ectorie.patch
-index 025f8729ea..4c6cac0cbd 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-=
-not-hardcode-compilation-directorie.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-=
-not-hardcode-compilation-directorie.patch
-@@ -1,4 +1,4 @@
--From c8c9dd3aeb49ab2ec94c3ab081e2368736a5da20 Mon Sep 17 00:00:00 2001
-+From 596a53c35166e6cc5c20fb1d28bb5c92a248f695 Mon Sep 17 00:00:00 2001
- From: Paulo Neves <ptsneves@gmail.com>
- Date: Thu, 28 Jul 2022 11:42:31 +0200
- Subject: [PATCH] flb_info.h.in: Do not hardcode compilation directories
-@@ -7,12 +7,14 @@ Including the source dir in the header makes the header=
- not
- reproducible and contaminates it with host builder paths. Instead
- make it take CMAKE_DEBUG_SRCDIR that can be set to a known
- reproducible value
-----
--Upstream-Status: Pending
-=20
-+Upstream-Status: Pending
-+---
-  include/fluent-bit/flb_info.h.in | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
-=20
-+diff --git a/include/fluent-bit/flb_info.h.in b/include/fluent-bit/flb_i=
-nfo.h.in
-+index 3a08f8051..aa6a48f29 100644
- --- a/include/fluent-bit/flb_info.h.in
- +++ b/include/fluent-bit/flb_info.h.in
- @@ -23,7 +23,7 @@
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0003-CMakeLists=
-.txt-Revise-init-manager-deduction.patch b/meta-oe/recipes-extended/fluen=
-tbit/fluentbit/0003-CMakeLists.txt-Revise-init-manager-deduction.patch
-index 909d1be28d..6bd4c6bbb6 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0003-CMakeLists.txt-Re=
-vise-init-manager-deduction.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0003-CMakeLists.txt-Re=
-vise-init-manager-deduction.patch
-@@ -1,4 +1,4 @@
--From bf4e832544e8aa5866ef57859f95b71bd8811154 Mon Sep 17 00:00:00 2001
-+From 5cc79bdede89e75d713e23cf0fde26634320bc3e Mon Sep 17 00:00:00 2001
- From: Niko Mauno <niko.mauno@vaisala.com>
- Date: Mon, 21 Oct 2024 16:02:46 +0000
- Subject: [PATCH] CMakeLists.txt: Revise init manager deduction
-@@ -14,9 +14,11 @@ Upstream-Status: Inappropriate [configuration]
-  src/CMakeLists.txt | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
-=20
-+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-+index ac5fe5ef8..f47a01b82 100644
- --- a/src/CMakeLists.txt
- +++ b/src/CMakeLists.txt
--@@ -569,7 +569,7 @@ if(FLB_BINARY)
-+@@ -600,7 +600,7 @@ if(FLB_BINARY)
-      set(SYSTEMD_UNITDIR  /lib/systemd/system)
-    endif()
- =20
-@@ -25,7 +27,7 @@ Upstream-Status: Inappropriate [configuration]
-      if (FLB_AMAZON_LINUX2)
-        set(FLB_SYSTEMD_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME=
-}.service")
-        configure_file(
--@@ -594,7 +594,7 @@ if(FLB_BINARY)
-+@@ -625,7 +625,7 @@ if(FLB_BINARY)
-        install(FILES ${FLB_SYSTEMD_SCRIPT} COMPONENT binary DESTINATION =
-${SYSTEMD_UNITDIR})
-        install(DIRECTORY DESTINATION ${FLB_INSTALL_CONFDIR} COMPONENT bi=
-nary)
-      endif()
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0004-chunkio-Li=
-nk-with-fts-library-with-musl.patch b/meta-oe/recipes-extended/fluentbit/=
-fluentbit/0004-chunkio-Link-with-fts-library-with-musl.patch
-index c34a0ba71d..6df53613c3 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0004-chunkio-Link-with=
--fts-library-with-musl.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0004-chunkio-Link-with=
--fts-library-with-musl.patch
-@@ -1,4 +1,4 @@
--From a07df56092e529627db0946c025cb4964567280c Mon Sep 17 00:00:00 2001
-+From cc688b91c02df9a45ca8816a1d09649fadb9dc4a Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Wed, 10 Aug 2022 01:27:16 -0700
- Subject: [PATCH] chunkio: Link with fts library with musl
-@@ -7,14 +7,15 @@ Fixes
- cio_utils.c:(.text+0x64): undefined reference to `fts_read'
-=20
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
+diff --git a/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.b=
+b b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
+new file mode 100644
+index 0000000000..5116892dad
+=2D-- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
+@@ -0,0 +1,20 @@
++SUMMARY =3D "Python library for accessing soundcards"
++DESCRIPTION =3D "SoundCard is a library for playing and recording audio w=
+ithout resorting to a CPython extension"
++HOMEPAGE =3D "https://github.com/bastibe/SoundCard"
++SECTION =3D "devel/python"
 +
- Upstream-Status: Pending
-+---
-=20
-  lib/chunkio/src/CMakeLists.txt | 1 +
-  1 file changed, 1 insertion(+)
-=20
- diff --git a/lib/chunkio/src/CMakeLists.txt b/lib/chunkio/src/CMakeLists=
-.txt
--index bb52273d4..524500919 100644
-+index 3590143fd..b43f08928 100644
- --- a/lib/chunkio/src/CMakeLists.txt
- +++ b/lib/chunkio/src/CMakeLists.txt
- @@ -14,6 +14,7 @@ set(src
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0005-Use-posix-=
-strerror_r-with-musl.patch b/meta-oe/recipes-extended/fluentbit/fluentbit=
-/0005-Use-posix-strerror_r-with-musl.patch
-deleted file mode 100644
-index 281bf66fb9..0000000000
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0005-Use-posix-strerro=
-r_r-with-musl.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From 0c4310483875509f464883fa345f54e0d3ae25a5 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 10 Aug 2022 01:23:48 -0700
--Subject: [PATCH] Use posix strerror_r with musl
--
--Default with glibc is GNU extention of strerror_r
--where as musl uses posix variant, call that out
--
--Upstream-Status: Inappropriate [Need wider porting beyond linux/musl/gli=
-bc]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--Resolved conflicts while upgrading recipe from v1.9.9 to v3.1.9.
--
--Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
-----
-- src/flb_network.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/flb_network.c b/src/flb_network.c
--index 8f8ca33f6..dd098a2ea 100644
----- a/src/flb_network.c
--+++ b/src/flb_network.c
--@@ -605,7 +605,7 @@ static int net_connect_async(int fd,
--             /* Connection is broken, not much to do here */
-- #if ((defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >=3D 200112L) ||    \
--      (defined(_XOPEN_SOURCE) || _XOPEN_SOURCE - 0L >=3D 600L)) &&     \
---  (!defined(_GNU_SOURCE))
--+  (!defined(_GNU_SOURCE)) || (!defined(__GLIBC__))
--             ret =3D strerror_r(error, so_error_buf, sizeof(so_error_buf=
-));
--             if (ret =3D=3D 0) {
--                 str =3D so_error_buf;
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_4.0.1.bb b/meta=
--oe/recipes-extended/fluentbit/fluentbit_4.2.0.bb
-similarity index 98%
-rename from meta-oe/recipes-extended/fluentbit/fluentbit_4.0.1.bb
-rename to meta-oe/recipes-extended/fluentbit/fluentbit_4.2.0.bb
-index 05e4fd937f..279486eee3 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_4.0.1.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.0.bb
-@@ -17,7 +17,7 @@ DEPENDS =3D "\
- "
- DEPENDS:append:libc-musl =3D " fts"
-=20
--SRCREV =3D "b12e507090273576d1156342780c7c6d358fa579"
-+SRCREV =3D "6bc014390c5485b96521c56b98369b44b9faa08b"
- SRC_URI =3D "\
-     git://github.com/fluent/fluent-bit.git;branch=3Dmaster;protocol=3Dht=
-tps \
-     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.pat=
-ch \
-@@ -26,7 +26,6 @@ SRC_URI =3D "\
- "
- SRC_URI:append:libc-musl =3D "\
-     file://0004-chunkio-Link-with-fts-library-with-musl.patch \
--    file://0005-Use-posix-strerror_r-with-musl.patch \
- "
-=20
- # prefix tag with "v" to avoid upgrade to random tags like "20220215"
---=20
++LICENSE =3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De39df1540c06c17ca310ce87c36b04=
+2c"
++
++SRC_URI[sha256sum] =3D "07272ba927e32cafdf634e4a1ca53b9a3218321a60c7d2e08=
+f54b832a56946aa"
++
++inherit pypi setuptools3 features_check
++
++REQUIRED_DISTRO_FEATURES =3D "pulseaudio"
++
++RDEPENDS:${PN} +=3D " \
++    libpulse \
++    pulseaudio-server \
++    python3-cffi \
++    python3-numpy \
++"
+=2D-=20
 2.52.0
 
+On 28.11.25 21:27, Jan Clau=C3=9Fen <jan.claussen10@web.de> wrote:
+> @Martin: Thanks, for pointing that out
+>=20
+> I fixed the recipe added inherit features_check. Should maybe also add a=
+=20
+> meaningful commit message, but I didn't know what to add.
+>=20
+>=20
+> Signed-off-by: Jan Clau=C3=9Fen <jan.claussen10@web.de>
+> ---
+>  =C2=A0.../python/python3-soundcard_0.4.5.bb=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 | 16 ++++++++++++++++
+>  =C2=A01 file changed, 16 insertions(+)
+>  =C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-=
+=20
+> soundcard_0.4.5.bb
+>=20
+> diff --git a/meta-python/recipes-devtools/python/python3-=20
+> soundcard_0.4.5.bb b/meta-python/recipes-devtools/python/python3-=20
+> soundcard_0.4.5.bb
+> new file mode 100644
+> index 0000000000..e25f13a116
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
+> @@ -0,0 +1,16 @@
+> +SUMMARY =3D "Python library for accessing soundcards"
+> +LICENSE =3D "BSD-3-Clause"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De39df1540c06c17ca310ce87c36b=
+042c"
+> +
+> +SRC_URI[sha256sum] =3D=20
+> "07272ba927e32cafdf634e4a1ca53b9a3218321a60c7d2e08f54b832a56946aa"
+> +
+> +inherit pypi setuptools3 features_check
+> +
+> +REQUIRED_DISTRO_FEATURES =3D "pulseaudio"
+> +
+> +RDEPENDS:${PN} +=3D " \
+> +=C2=A0 =C2=A0 libpulse \
+> +=C2=A0 =C2=A0 pulseaudio-server \
+> +=C2=A0 =C2=A0 python3-cffi \
+> +=C2=A0 =C2=A0 python3-numpy \
+> +"
+> --=20
+> 2.52.0
+>=20
+> Am 28.11.25 um 21:18 schrieb Martin Jansa:
+> > And REQUIRED_DISTRO_FEATURES =3D "pulseaudio" probably doesn't do
+> > anything without features_check inherit
+> >
+> > On Fri, Nov 28, 2025 at 9:01=E2=80=AFPM Khem Raj via lists.openembedde=
+d.org
+> > <raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
+> >> results in
+> >>
+> >> ERROR: ParseError at /mnt/b/yoe/master/sources/meta-openembedded/meta=
+-python/recipes-devtools/python/python3-soundcard_0.4.5.bb:13: Unparsed li=
+nes /mnt/b/yoe/master/sources/meta-openembedded/meta-python/recipes-devtoo=
+ls/python/python3-soundcard_0.4.5.bb: ['RDEPENDS:${PN} +=3D " ', '    libp=
+ulse ']
+> >> ERROR: Parsing halted due to errors, see error messages above
+> >>
+> >>
+> >> On Fri, Nov 28, 2025 at 3:58=E2=80=AFAM Jan Clau=C3=9Fen via lists.op=
+enembedded.org<jan.claussen10=3Dweb.de@lists.openembedded.org> wrote:
+> >>> Signed-off-by: Jan Clau=C3=9Fen<jan.claussen10@web.de>
+> >>> ---
+> >>>   .../python/python3-soundcard_0.4.5.bb                | 12 ++++++++=
+++++
+> >>>   1 file changed, 12 insertions(+)
+> >>>   create mode 100644 meta-python/recipes-devtools/python/python3-sou=
+ndcard_0.4.5.bb
+> >>>
+> >>> diff --git a/meta-python/recipes-devtools/python/python3-soundcard_0=
+.4.5.bb b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
+> >>> new file mode 100644
+> >>> index 0000000000..632b54eaef
+> >>> --- /dev/null
+> >>> +++ b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
+> >>> @@ -0,0 +1,12 @@
+> >>> +SUMMARY =3D "Python library for accessing soundcards"
+> >>> +LICENSE =3D "BSD-3-Clause"
+> >>> +LIC_FILES_CHKSUM =3D"file://LICENSE;md5=3De39df1540c06c17ca310ce87c=
+36b042c"
+> >>> +
+> >>> +SRC_URI[sha256sum] =3D "07272ba927e32cafdf634e4a1ca53b9a3218321a60c=
+7d2e08f54b832a56946aa"
+> >>> +
+> >>> +inherit pypi setuptools3
+> >>> +
+> >>> +REQUIRED_DISTRO_FEATURES =3D "pulseaudio"
+> >>> +
+> >>> +RDEPENDS:${PN} +=3D " \
+> >>> +    libpulse \
+> >>> +    pulseaudio-server \
+> >>> +    python3-cffi \
+> >>> +    python3-numpy \
+> >>> +"
+> >>
+> >>> --
+> >>> 2.52.0
+> >>>
+> >>>
+> >>>
+> >>>
+> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >> Links: You receive all messages sent to this group.
+> >> View/Reply Online (#122127):https://lists.openembedded.org/g/openembe=
+dded-devel/message/122127
+> >> Mute This Topic:https://lists.openembedded.org/mt/116512050/3617156
+> >> Group Owner:openembedded-devel+owner@lists.openembedded.org
+> >> Unsubscribe:https://lists.openembedded.org/g/openembedded-devel/unsub=
+ [martin.jansa@gmail.com]
+> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >>
+>=20
 
